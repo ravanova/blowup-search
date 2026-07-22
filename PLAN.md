@@ -158,6 +158,20 @@ which nets to zero when resolved), not raw conservation.
 
 ## Stage 1.5 — Fitness-signal viability check (de-risk before building the GA)
 
+> **DONE (2026-07-22) — verdict: `ν_crit` is the Stage 2 fitness axis.**
+> Full numbers in [STAGE_1_5_RESULTS.md](STAGE_1_5_RESULTS.md). Summary:
+> `ν_crit` (at a=0) passed all five acceptance properties — nonzero for
+> 18/19 uncensored shapes, finite, monotone (0 probe violations),
+> resolution-*exact* (every N=256 vs N=512 value identical), spread
+> 0.006–0.053 with physically sensible structure. `a_crit` (at ν=0) failed
+> resolution stability — tail(p=1)'s value halves from N=256 to N=512, and
+> the a≈0.85–1.0 cluster wobbles by up to 13× the bisection tolerance —
+> so it is rejected despite passing the other four. The sweep also forced
+> two amendments to the bisection predicate that now bind Stage 2's oracle:
+> an amplification stop is a blow-up regardless of tail-fit quality, and
+> fit-based blow-up requires T* ≤ 1.5·t_max (uncapped forward extrapolation
+> was the source of v1's censored-high/resolution-flip anomalies).
+
 **Goal:** cheaply verify that the Stage 2 fitness function (`ν_crit`) is a
 non-degenerate, searchable quantity *before* investing in the full GA and
 logging apparatus. This is the highest-leverage checkpoint in the plan: if
@@ -278,9 +292,14 @@ mutation/crossover**, so fitness differences reflect *shape*, not scale.
 
 **Fitness function — search for resistance to regularization, not just
 speed:** "blows up fastest at `ν=0`, `a=0`" is not informative about the real
-question. Instead, fitness is the **critical-resistance parameter chosen by
-Stage 1.5** — `a_crit` (preferred) or `ν_crit` — located per genome by
-bisection:
+question. Instead, fitness is the critical-resistance parameter chosen by
+Stage 1.5 — **decided: `ν_crit` at fixed `a=0`** (`a_crit` failed Stage 1.5's
+resolution-stability gate; see [STAGE_1_5_RESULTS.md](STAGE_1_5_RESULTS.md)).
+Stage 2 config accordingly: `fitness_axis="nu_crit"`, `gclm_a=0.0`, bisection
+range [0, 0.1] with tolerance ≤ 1e-3 (or log-ν bisection — the measured band
+is 0–0.053 under the frozen stop criteria: t_max=12, amplification 100×,
+tail fraction 0.15, held-out R² floor 0.9, T* cap 1.5·t_max). The generic
+definition, for reference:
 - `ν_crit(genome)`: critical viscosity above which the Tier 1 signal
   disappears.
 - `a_crit(genome)`: at `ν=0`, critical advection coefficient above which it
