@@ -3,6 +3,45 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## stage2_6-seed1/2/3 (a10d6b2) — 2026-07-22 — INTERIM (seed 1 done, 2 running, 3 pending)
+
+Why configured this way: the Stage 2 acceptance protocol rerun on the
+axis Stage 2.6's gate verified — nu_crit under the v3 amplification-only
+oracle at a=0.7, t_max=24, bisection [0, 0.3] tol 1e-3 (config-only
+changes at commit a10d6b2). 3 seeds, pop 24 × 25 gens, budget-matched
+interleaved baseline_random, literature control re-sampled at run start.
+
+**Seed 1 interim analysis (written mid-protocol so a crash cannot lose
+it; final 3-seed verdict pends in STAGE_2_6_RESULTS.md):**
+
+- Shakedown clean: literature control best 0.15849 vs sweep's structured
+  best 0.15820 (within 1 tol). ~170s/generation at 10 workers.
+- **First-ever GA-vs-random separation in this project.** Random init
+  ceiling (gen 0, 24 draws): 0.14736. Final GA best: 0.16236 at gen 21.
+  Interleaved random baseline plateaued at 0.15908 (~600 draws). GA
+  finished ~+3.3 tol above random and above the best literature profile
+  (0.15849) — margin modest but structurally meaningful: the GA climbed
+  where random stalled.
+- **Operator attribution (the "do we need better breeding?" question,
+  answered from the event stream):** after gen 0, ALL eleven best-so-far
+  improvements came from variation — 6 mutation, 5 crossover, 0 from
+  later random draws — a monotone climb 0.147 → 0.150 → 0.153 → 0.155 →
+  0.158 → 0.160 (gens 1–9) then 0.161 → 0.162 (gens 12–21). Archive
+  insertions: 96 mutation / 86 crossover / 21 init. Both operators
+  productive for both peak fitness and map-building. Verdict: breeding is
+  effective; no operator changes warranted, and none permitted mid-protocol
+  (frozen acceptance config; changes would restart all 3 seeds).
+- **Post-verdict tuning leads, if wanted (from this seed's data, to be
+  re-checked against all 3):** (1) improvements still arriving at gen 21
+  while mutation scale has decayed 0.3 → ~0.05 — a scale floor or longer
+  run plausibly buys more; 25 gens may truncate the climb. (2) Archive
+  coverage plateaus at 0.500 from gen ~17 (QD still creeping) —
+  exploration pressure (novelty bonus / empty-cell-directed emission) is
+  the standard lever if the map deliverable needs more coverage.
+  (3) No evidence the genotype (sine coeffs + envelope p) is the
+  bottleneck — the winning shapes are low-k mixtures it represents
+  directly.
+
 ## stage2_5_sweep A + B (A: f3dc522, B: a005ef8) — 2026-07-22
 
 Why configured this way: PLAN.md Stage 2.5's answer to the Stage 2
