@@ -69,4 +69,7 @@ with a numerical artifact.
   sweep: NO VIABLE AXIS (ν_crit at a ∈ {0.4, 0.7, 1.0} and
   bandwidth-constrained ν_crit at a=0 all fail the six-property gate);
   ν_crit on gCLM is dominated by the νk² dissipation scaling in every
-  variant. Stopped for review before any GA rerun.
+  variant. Stopped for review before any GA rerun. **Review decision:
+  proceed with PLAN.md Stage 2.6** (oracle v3 amplification-only
+  boundaries + reformulated quantities C/D), with "accept the negative
+  result" as the documented fallback.

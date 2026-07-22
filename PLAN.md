@@ -484,8 +484,12 @@ regularization than random search finds with identical compute.
 > executed (per this stage's own gate). Full data and the three
 > redesign-level paths forward (oracle v3 + a=0.7, rate-based fitness,
 > scaling-normalized ν_crit, or accept the negative result):
-> [STAGE_2_5_RESULTS.md](STAGE_2_5_RESULTS.md). **Next step: human review
-> of which path, if any, to take — not another unilateral redesign.**
+> [STAGE_2_5_RESULTS.md](STAGE_2_5_RESULTS.md). **Review outcome
+> (2026-07-22): proceed with paths 1+2 combined — harden the oracle AND
+> reformulate the fitness quantity, gate everything through the
+> six-property check before any GA compute. Spec: Stage 2.6 below.
+> Path 3 (accept the negative result, re-scope to Stage 4) remains the
+> documented fallback if Stage 2.6 also produces no viable axis.**
 
 **Goal:** find a fitness axis whose optimum *requires evolved structure* —
 per STAGE_2_RESULTS.md, `ν_crit` at a=0 is maximized by trivially piling
@@ -546,6 +550,88 @@ about GA-vs-random on this problem class and goes to review either way.
 `ga/fitness.py`'s bisection), `STAGE_2_5_RESULTS.md` with the six-property
 table per candidate axis, the acceptance rerun logs, a verdict banner
 here, and JOURNAL entries per experiment.
+
+---
+
+## Stage 2.6 — Oracle v3 + reformulated fitness quantities (approved review outcome of Stage 2.5)
+
+**Decision record.** Stage 2.5 ended with no viable axis and three
+redesign-level paths. On review (2026-07-22) the decision is to run paths
+1 and 2 **together as one design iteration**, because they attack the two
+independent failure mechanisms Stage 2.5 isolated: (1) soft, fit-decided
+boundary semantics at a > 0 (measurement quality), and (2) fitness being a
+thin proxy for the νk² dissipation scaling (quantity choice). Path 3 —
+accept the negative result and re-scope — is the explicit fallback, taken
+only if everything below fails its gate.
+
+**Oracle v3 (path 1) — amplification-only boundary decisions.** The v2
+oracle's fit-based blow-up rule (held-out R² floor + T* cap) is what made
+every a>0 boundary soft: classification flickered with fit quality across
+marginal slow-growth bands (STAGE_2_5_RESULTS.md). v3 removes the fit
+from the *bisection decision entirely*: a run counts as blow-up iff it
+hits the amplification stop (100×, unchanged) or diverges — the crisp,
+physical criterion that decided 100% of a=0 boundaries in Stage 1.5.
+Because slow growers need room to amplify, the horizon extends to
+**t_max = 24** (2× Stage 2; v2's extrapolated boundary T* at a=0.7 was
+17–18, so genuine blow-ups have ≥1.3× headroom to demonstrate
+themselves). Early-decay exit unchanged. The tail fit is still computed
+and logged (T*, R², α feed Tier 1 candidacy exactly as before) — it just
+no longer decides the oracle. This redefines the fitness as
+ν_crit(t_max=24, N, amp=100×); v3 values are never comparable to v2
+values. The fit-flicker non-monotonicity mechanism is structurally
+impossible under v3; the monotonicity probes stay on and now test physics
+only.
+
+**Candidate axes, all measured over the same 40-shape roster (20
+Stage 1.5 ICs + 20 init-prior draws), N ∈ {256, 512}, gated on all six
+properties before any GA time:**
+
+- **A′ — ν_crit under v3 at a ∈ {0.4, 0.7, 1.0}** (path 1 proper): does
+  a=0.7's structured top (the 21·tol gap, mixtures-beat-pure-modes
+  landscape) survive being measured crisply? a=1.0 is re-checked because
+  its "dead axis" verdict was horizon-relative and the horizon doubled.
+- **B′ — ν_crit under v3 at a=0** (control + substrate for C): re-baseline
+  of the known-crisp axis at the new horizon.
+- **C — scaling-normalized resistance at a=0** (path 2): fitness =
+  ν_crit(v3, a=0) · k_eff², with k_eff² = Σk²b_k²/Σb_k² the energy-
+  weighted mean-square wavenumber. Rationale: Stage 1.5 measured
+  ν_crit(sin kx) ∝ 1/k² almost exactly, so the pure-mode subfamily —
+  every trivial optimum found so far — is *flat* under C by construction;
+  whatever remains measures resistance beyond the dissipation scaling.
+  Pure post-processing of B′ (zero extra solver cost). Known risk: the
+  mirrored cheat — if ν_crit falls slower than 1/k² in some high-k
+  family, C is trivially maximized by high-k concentration; property 6
+  gates on monotonicity in k_eff (both directions) as well as k1
+  dominance.
+- **D — time-to-amplification at fixed handicap ν, a=0** (path 2,
+  the Stage 1.5 fallback "blow-up rate" made crisp): fitness =
+  t_max − t_amp(ν_fixed), single solver run per evaluation (no
+  bisection, ~10× cheaper), amplification-decided by construction.
+  Measured at ν_fixed ∈ {0.01, 0.03} (inside Stage 1.5's 0.006–0.053
+  band; each gated separately). A shape that never amplifies within
+  t_max is censored, not zero-fitness. Rationale: speed under a viscous
+  handicap forces a genuine trade-off — sharp gradients accelerate
+  blow-up but feed dissipation — so the optimum plausibly requires
+  structure. Property adaptations (documented in the analyzer): no
+  bisection ⇒ the monotonicity property is replaced by well-definedness
+  (amplifies at both resolutions or neither), and the noise floor for
+  the gap/band tests is the cross-resolution |Δt_amp| distribution.
+
+**Gate and sequel:** each candidate faces the six-property checklist
+(non-trivial optimum measured against the same real init prior). If one
+or more pass, choose by precedence **A′ (largest passing a) > C > D**
+(most transferable physics first), then rerun the Stage 2 acceptance
+protocol verbatim — 3 seeds, budget-matched interleaved baselines,
+analyze_stage2.py including QD replay — with config-only changes
+(fitness axis, oracle mode, t_max, and for D a no-bisection fitness
+path). If nothing passes, path 3 activates: STAGE_2_6_RESULTS.md records
+the axis-family negative result as final for the 1D stage, and design
+attention moves to Stage 4.
+
+**Deliverables:** oracle-v3 mode in `ga/fitness.py` (config-selected,
+v2 remains default for reproducibility of old runs), `stage2_6_sweep.py`,
+`analyze_stage2_6.py`, `STAGE_2_6_RESULTS.md`, JOURNAL entries, and — if
+a gate passes — the acceptance-rerun logs and verdict here.
 
 ---
 

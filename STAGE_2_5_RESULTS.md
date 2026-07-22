@@ -161,6 +161,12 @@ the Stage 2 methodology lesson that is now measurable for ~40 bisections
 per candidate *before* any GA compute is spent — the six-property gate did
 its job.
 
+**Review decision (2026-07-22): paths 1 and 2 below are approved and
+combined into one design iteration — specified as PLAN.md Stage 2.6
+(oracle v3 with amplification-only boundaries at t_max=24; candidate axes
+A′ = ν_crit(v3) at a ∈ {0.4, 0.7, 1.0}, C = ν_crit·k_eff² at a=0,
+D = time-to-amplification at fixed ν). Path 3 is the documented fallback.**
+
 **Paths forward (all redesign-level, deliberately not taken unilaterally;
 for review):**
 
