@@ -22,10 +22,21 @@ best must exceed the final baseline best by more than the bisection
 tolerance, and the GA curve must be >= the baseline curve over the final
 half of the budget. Overall PASS requires every seed to pass.
 
+Secondary (reported, not part of the frozen acceptance criterion): a
+QD-score comparison at matched budget — the map-building analog of the
+best-so-far comparison. Both event streams are replayed through identical
+MAP-Elites insertion rules (uncensored + monotone-clean + beats incumbent),
+so the question "does the GA build a better shape->resistance MAP than
+random sampling at the same budget" is answered with the same honesty rules
+as the fitness comparison. Also reported: cross-seed map convergence (cell
+overlap and per-cell fitness agreement between independent seeds' final
+archives).
+
 Usage:
     .venv/bin/python analyze_stage2.py [experiment_id ...]
 """
 
+import itertools
 import json
 import sys
 from pathlib import Path
@@ -53,6 +64,44 @@ def best_so_far_curve(rows):
                 best = v
         curve.append((n, best))
     return curve
+
+
+def replay_archive(rows, map_cfg):
+    """Replay genome_eval rows through the real Archive insertion rules
+    (ga/evolve.py — uncensored, monotone-clean, beats incumbent), returning
+    the final archive and a [(n, coverage, qd_score)] curve. Cache hits are
+    skipped exactly as the live loop skips them."""
+    import numpy as np
+
+    from ga.evolve import Archive
+    from ga.genome import Genome
+
+    arch = Archive(map_cfg)
+    curve = []
+    for row in rows:
+        if not row.get("cache_hit"):
+            genome = Genome(np.array(row["genome_coeffs"]),
+                            row["genome_envelope_p"])
+            arch.maybe_insert(row, genome)
+        curve.append((len(curve) + 1, arch.coverage(), arch.qd_score()))
+    return arch, curve
+
+
+def map_convergence(arch_a, arch_b):
+    """Cross-seed map agreement: Jaccard overlap of filled cells, and mean
+    absolute fitness difference over shared cells."""
+    cells_a, cells_b = set(arch_a.cells), set(arch_b.cells)
+    shared = cells_a & cells_b
+    union = cells_a | cells_b
+    jaccard = len(shared) / len(union) if union else 0.0
+    diffs = [abs(arch_a.cells[c]["fitness"] - arch_b.cells[c]["fitness"])
+             for c in shared]
+    return {
+        "jaccard": jaccard,
+        "n_shared": len(shared),
+        "n_union": len(union),
+        "mean_abs_fitness_diff": (sum(diffs) / len(diffs)) if diffs else None,
+    }
 
 
 def analyze(experiment_id):
@@ -86,6 +135,13 @@ def analyze(experiment_id):
     )
     passed = (margin is not None and margin > tol and dominated)
 
+    # Secondary: map-building at matched budget, identical insertion rules.
+    map_cfg = config["ga_operators"]["map_elites"]
+    ga_arch, ga_qd_curve = replay_archive(ga[:budget], map_cfg)
+    rand_arch, rand_qd_curve = replay_archive(rand[:budget], map_cfg)
+    qd_dominated = all(g[2] >= r[2] for g, r in
+                       zip(ga_qd_curve[half:], rand_qd_curve[half:]))
+
     n_censored = sum(1 for e in ga + rand if e["bracket_censored"] is not None)
     n_nonmono = sum(1 for e in ga + rand
                     if e.get("critical_value_monotone") is False)
@@ -108,6 +164,11 @@ def analyze(experiment_id):
         "passed": passed,
         "ga_curve": ga_curve,
         "rand_curve": rand_curve,
+        "ga_archive": ga_arch,
+        "rand_archive": rand_arch,
+        "ga_qd_final": ga_qd_curve[-1] if ga_qd_curve else None,
+        "rand_qd_final": rand_qd_curve[-1] if rand_qd_curve else None,
+        "qd_dominated_final_half": qd_dominated,
     }
 
 
@@ -135,7 +196,7 @@ def sparkline(curve, width=48):
         if v is None:
             out.append(" ")
         else:
-            frac = 0.0 if hi == lo else (v - lo) / (hi - lo)
+            frac = 1.0 if hi == lo else (v - lo) / (hi - lo)
             out.append(chars[min(int(frac * (len(chars) - 1)), len(chars) - 1)])
     return "".join(out)
 
@@ -160,6 +221,27 @@ def main():
         print(f"  rand {sparkline(r['rand_curve'])}")
         print(f"  censored={r['n_censored']} non-monotone={r['n_nonmonotone']} "
               f"cache_hits={r['n_cache_hits']}")
+
+    print("\n--- secondary: map-building (QD) at matched budget ---")
+    print(f"{'experiment':34s} {'GA cov':>7s} {'GA QD':>8s} "
+          f"{'rand cov':>8s} {'rand QD':>8s} {'QD dom.':>8s}")
+    for r in results:
+        _, gcov, gqd = r["ga_qd_final"]
+        _, rcov, rqd = r["rand_qd_final"]
+        print(f"{r['experiment_id']:34s} {gcov:7.1%} {gqd:8.3f} "
+              f"{rcov:8.1%} {rqd:8.3f} "
+              f"{str(r['qd_dominated_final_half']):>8s}")
+
+    if len(results) >= 2:
+        print("\n--- cross-seed map convergence (final GA archives) ---")
+        for a, b in itertools.combinations(results, 2):
+            m = map_convergence(a["ga_archive"], b["ga_archive"])
+            diff = (f"{m['mean_abs_fitness_diff']:.4f}"
+                    if m["mean_abs_fitness_diff"] is not None else "-")
+            print(f"{a['experiment_id']} vs {b['experiment_id']}: "
+                  f"jaccard {m['jaccard']:.2f} "
+                  f"({m['n_shared']}/{m['n_union']} cells), "
+                  f"mean |dfitness| on shared cells {diff}")
 
     n_pass = sum(r["passed"] for r in results)
     overall = n_pass == len(results) and len(results) >= 3

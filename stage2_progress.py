@@ -49,7 +49,7 @@ def _sparkline(curve, width=44):
         if v is None:
             out.append(" ")
         else:
-            frac = 0.0 if hi == lo else (v - lo) / (hi - lo)
+            frac = 1.0 if hi == lo else (v - lo) / (hi - lo)
             out.append(BARS[min(int(frac * (len(BARS) - 1)), len(BARS) - 1)])
         i += stride
     return "".join(out)

@@ -237,6 +237,29 @@ proceed to the full GA on an unverified fitness signal.
 
 ## Stage 2 — GA harness wired to `win_condition.py`
 
+> **BUILT AND RUN (2026-07-22, commit d47b579) — acceptance criterion NOT
+> MET, for a reason that is itself the finding.** Across 3 seeds
+> (stage2-seed1/2/3: 600 GA + 612 baseline evals each, ~12,200 solver runs
+> per seed), the GA's best-so-far `ν_crit` NEVER separated from the
+> budget-matched random baseline (margins 0, 0, 0.2× tolerance): the
+> `ν_crit` landscape at a=0 has a **trivially-located global optimum** —
+> ≥99.5% of energy in k=1 — which both searches reach within ~12
+> evaluations. This is the νk² scaling argument as global optimum; the
+> "frequency-space cheating" risk below turned out to be the axis's honest
+> answer, not a cheat. Sharper still: random sampling *beats* the GA at
+> map-building too (74–79% archive coverage vs 46–58% at matched budget) —
+> on a saturated landscape, fitness-driven selection is pure cost. The
+> harness itself passed every operational check (censoring, monotonicity
+> probes, warm starts, budget matching, single-writer logging) and is
+> reusable as-is for any scalar fitness. Verdict and redesign options in
+> experiments/JOURNAL.md; analysis in analyze_stage2.py. **Next milestone:
+> redesign the fitness axis** — leading options: (1) bandwidth-constrained
+> `ν_crit` (cap top-k energy fraction so resistance must come from
+> structure), (2) an a>0 axis with a resolution-convergent oracle, (3)
+> direct QD/map-quality objectives. Lesson folded back into Stage 1.5
+> methodology: viability checks must also verify the optimum is NOT
+> reachable by trivial sampling of the init prior.
+
 **Goal:** evolve De Gregorio initial conditions toward the fastest, most
 convergent blow-up signal, using the Tier 1 diagnostic already built.
 

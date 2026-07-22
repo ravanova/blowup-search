@@ -3,6 +3,62 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## stage2-seed1 / seed2 / seed3 (d47b579) — 2026-07-22
+
+Why configured this way: the Stage 2 acceptance runs — 3 independent seeds,
+pop 24 × 25 generations = 600 GA evals each, budget-matched interleaved
+baseline_random (612 with the literature control), frozen fitness config
+(nu_crit at a=0, N=256, t_max=12, bisection [0, 0.1] tol 1e-3, v2 oracle).
+~12,200 solver runs / ~64 min per seed at 10 workers.
+
+**Verdict: acceptance NOT MET, decisively and in triplicate — and the
+reason is a finding, not a bug.** The nu_crit landscape at a=0 has a
+trivially-located global optimum: pile energy into k=1. Numbers:
+
+- Best-so-far: GA 0.0543 / 0.0543 / 0.0545 vs random 0.0543 / 0.0543 /
+  0.0543. Margin 0, 0, and 0.2× tolerance. Both sides hit the ceiling
+  within ~12 evaluations (order-statistics of the init prior, not search).
+- All three seeds' best genomes are >= 99.5% k=1 energy with a few % of
+  one low harmonic (k=2..4). Two of three were raw init draws; seed 3's
+  crossover polish bought +0.0002 (~0.2 tol). This is the nu*k^2 scaling
+  argument, rediscovered empirically: lowest mode survives viscosity best.
+  PLAN.md's "frequency-space cheating" guardrail worry turns out to be the
+  honest global optimum of this axis, not a cheat.
+- Sharper: random *dominates the GA on map-building too* — replaying both
+  event streams through identical archive-insertion rules, random reaches
+  74–79% coverage / QD 2.6–2.7 vs the GA's 46–58% / 2.0–2.2 at the same
+  budget. Fitness-driven tournament selection concentrates parents on a
+  flat plateau; exploration is all cost, no signal. On a saturated
+  landscape MAP-Elites' selection pressure is strictly worse than prior
+  sampling for the map deliverable.
+- The pipeline itself behaved to spec: 0/1800 GA+random evals censored
+  (bump(κ=5) control aside), 6 non-monotone flags in 3,672 evals, ~6%
+  bracket-expansion rate, warm starts saving ~2 runs/eval, zero cache
+  hits (expected: MAP-Elites never re-evaluates elites).
+- The map interior is real but partially confounded: median nu_crit falls
+  smoothly with oscillation count (0.054 at 2 sign changes → 0.028 at 20)
+  and with tail roughness — but per-bin maxima sit at ~0.054 nearly
+  everywhere because the two archive descriptors don't pin k=1 dominance
+  (a 99%-k=1 genome can carry any tail slope in its negligible tail).
+  Cross-seed final archives: Jaccard 0.61–0.69, mean |Δfitness| on shared
+  cells ≈ 0.0064 (~6 tol) — moderate convergence, consistent with sparse
+  per-cell sampling.
+
+Lesson recorded for any future fitness axis: Stage 1.5's viability
+properties (nonzero, finite, monotone, resolution-stable, wide band) are
+necessary but NOT sufficient — they never asked *where the optimum lives*.
+Add a sixth check: the optimum must not be reachable by trivial sampling
+of the init prior (e.g. require the best of ~20 random draws to sit well
+below the best hand-constructed shape).
+
+Redesign options for a non-degenerate axis (review decision, in rough
+order of preference): (1) bandwidth-constrained nu_crit — cap the k=1 (or
+top-k) energy fraction, or pin the spectral centroid, so resistance must
+come from structure; (2) move to a > 0 (De Gregorio side) where advection
+fights growth and low-k concentration stops being free — requires the
+resolution-convergent oracle Stage 1.5 says the a-axis needs; (3) score
+QD/map metrics directly rather than scalar best-so-far.
+
 ## stage2-shakedown (d47b579) — 2026-07-22
 
 Why configured this way: first end-to-end run of the Stage 2 GA harness —
