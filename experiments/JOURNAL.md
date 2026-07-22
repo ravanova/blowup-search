@@ -3,6 +3,31 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## stage2-shakedown (d47b579) — 2026-07-22
+
+Why configured this way: first end-to-end run of the Stage 2 GA harness —
+deliberately tiny (pop 6, 3 generations, seed 999) to shake out the
+pipeline before the real 3-seed acceptance runs, per PLAN.md. Full frozen
+fitness config (N=256, t_max=12, bisection [0, 0.1] tol 1e-3, v2 oracle).
+
+What a human noticed skimming the results:
+
+- The literature positive control lands where Stage 1.5 put it: sin(x)
+  0.0535 (vs 0.0527 at the coarser Stage 1.5 tolerance), sin(2x) 0.0137
+  exactly, and bump(κ=5) censored "low" — the beyond-horizon control
+  behaves inside the GA harness too.
+- Warm-started child evaluations took a median 9 solver runs vs 11 cold,
+  with 0 bracket expansions in 12 — the ±0.01 margin is, if anything,
+  generous; leaving it.
+- Median 15.3s per evaluation, ~2× the Stage 1.5 per-bisection cost:
+  the [0, 0.1] range concentrates bisection samples near the critical
+  value, where no-blow-up runs burn the whole t_max. Real-run sizing
+  (~25 min/seed at 10 workers) accounts for it.
+- A random init genome (0.0543) edged out sin(x) immediately — the
+  landscape above 0.053 is reachable, but the random baseline found it
+  too. Whether the GA can *separate* from the baseline is exactly what
+  the 3-seed acceptance runs measure.
+
 ## stage1_5_sweep (v1: 5c6dfc2, v2: b05b9bf) — 2026-07-22
 
 Why configured this way: t_max=12 chosen after computing analytic CLM T*
