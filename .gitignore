@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Experiment outputs (see LOGGING.md) — logs/series/checkpoints are regenerated,
+# not source. Tracked candidates get promoted explicitly, not via git.
+experiments/run_logs/
+experiments/*.jsonl
+
+# OS / editor
+.DS_Store
+*.swp
