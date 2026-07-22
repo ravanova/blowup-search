@@ -41,12 +41,20 @@ _SERIES_MAX_POINTS = 1500
 
 
 def classify_run(result, oracle):
-    """Apply the frozen v2 blow-up predicate to one solver run.
+    """Apply the configured blow-up predicate to one solver run.
 
     `oracle` needs: t_max, tail_fraction, predicate_r2_floor,
-    t_star_cap_factor. Returns (is_blowup, summary) where summary carries
-    the solver_run event fields plus `via` (which rule decided) and
-    `fit_below_floor` (amplification-stopped run whose fit failed anyway)."""
+    t_star_cap_factor, and optionally blowup_predicate ("v2" default, or
+    "v3_amplification_only"). Returns (is_blowup, summary) where summary
+    carries the solver_run event fields plus `via` (which rule decided) and
+    `fit_below_floor` (amplification-stopped run whose fit failed anyway).
+
+    v3 (Stage 2.6, PLAN.md): the bisection decision is amplification-only —
+    a run is a blow-up iff it hit the amplification stop or diverged. The
+    tail fit is still computed and logged (it feeds Tier 1 candidacy and
+    T*/alpha analysis) but never decides the oracle, which structurally
+    removes the fit-quality-flicker non-monotonicity Stage 2.5 diagnosed
+    at a > 0."""
     summary = {
         "outcome": result.outcome,
         "early_exit_reason": result.early_exit_reason,
@@ -58,6 +66,7 @@ def classify_run(result, oracle):
         "estimate": None,
         "fit_below_floor": False,
     }
+    v3 = oracle.get("blowup_predicate", "v2") == "v3_amplification_only"
     if result.outcome == "diverged":
         summary["via"] = "diverged_nan"
         return True, summary
@@ -83,6 +92,11 @@ def classify_run(result, oracle):
         summary["via"] = "amplification"
         summary["fit_below_floor"] = not fit_ok
         return True, summary
+    if v3:
+        # Amplification-only: no amplification stop means no blow-up,
+        # whatever the (still logged) tail fit extrapolates.
+        summary["via"] = "no_amplification_v3"
+        return False, summary
     within_horizon = (
         est is not None
         and est.t_star <= oracle["t_star_cap_factor"] * oracle["t_max"]
@@ -220,6 +234,7 @@ def evaluate_genome(task):
         "tail_fraction": cfg["bisection"]["tail_fraction"],
         "predicate_r2_floor": cfg["bisection"]["predicate_r2_floor"],
         "t_star_cap_factor": cfg["bisection"]["t_star_cap_factor"],
+        "blowup_predicate": cfg["bisection"].get("blowup_predicate", "v2"),
     }
     omega0 = realize(genome, n_res, cfg["energy_budget"],
                      cfg.get("bandwidth_cap"))

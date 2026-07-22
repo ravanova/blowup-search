@@ -184,6 +184,50 @@ def _oracle(critical, pocket=None):
     return run_at
 
 
+def test_oracle_v3_is_amplification_only():
+    # Stage 2.6: under v3, a clean slow-growth power law whose extrapolated
+    # T* sits inside the cap — a v2 "fit" blow-up — is NOT a blow-up,
+    # because the run never amplified. Amplification-stopped runs classify
+    # identically under both predicates. The fit must still be computed and
+    # logged under v3 (it feeds Tier 1, just not the oracle).
+    from ga.fitness import classify_run
+
+    class _R:
+        early_exit_reason = None
+        n_timesteps = 1000
+        dt_min = 1e-3
+        conservation_drift = 0.0
+        wall_clock_seconds = 0.1
+
+    t_star_true = 17.0
+    times = np.linspace(0.0, 12.0, 400)
+    slow = _R()
+    slow.outcome = "no_blowup"
+    slow.t_final = 12.0
+    slow.times = times
+    slow.max_omega = (t_star_true - times) ** -0.3
+
+    amp = _R()
+    amp.outcome = "blowup_candidate"
+    amp.t_final = 5.0
+    amp.times = times[times <= 5.0]
+    amp.max_omega = 1.0 / (5.05 - amp.times)
+
+    v2 = {"t_max": 12.0, "tail_fraction": 0.15, "predicate_r2_floor": 0.9,
+          "t_star_cap_factor": 1.5}
+    v3 = dict(v2, blowup_predicate="v3_amplification_only")
+
+    blow_v2, s_v2 = classify_run(slow, v2)
+    assert blow_v2 and s_v2["via"] == "fit", "v2 accepts the marginal fit"
+    blow_v3, s_v3 = classify_run(slow, v3)
+    assert not blow_v3 and s_v3["via"] == "no_amplification_v3"
+    assert s_v3["estimate"] is not None, "fit still computed and logged"
+
+    for oracle in (v2, v3):
+        blow, s = classify_run(amp, oracle)
+        assert blow and s["via"] == "amplification"
+
+
 def test_bisection_recovers_critical_value():
     out = bisect_critical(_oracle(0.0333), _BISECT_CFG)
     assert out["bracket_censored"] is None
