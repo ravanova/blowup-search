@@ -38,17 +38,48 @@ Two models, in order:
    our `dy/dt = y²` toy test, but now a real PDE with spatial structure.
    Use it purely to validate the solver: does the simulated `max|ω(t)|`
    match the analytic blow-up time?
-2. **De Gregorio equation**: `ω_t + u·ω_x = ω·u_x`, `u_x = H(ω)`. Adding the
-   advection term `u·ω_x` changes the picture — whether a given initial
-   condition blows up or stays globally smooth is genuinely subtle and
-   actively studied (Jia–Stewart–Šverák and others have found regularity for
-   some data classes; blow-up is not settled in general). **This is the real
+2. **Generalized CLM (gCLM) family**: `ω_t + a·u·ω_x = ω·u_x`, `u_x = H(ω)`,
+   with the **advection coefficient `a` a solver parameter**, not hardcoded.
+   `a=0` recovers CLM (validation model above); `a=1` is the De Gregorio
+   equation. The advection term `a·u·ω_x` fights the growth, and whether a
+   given initial condition blows up or stays globally smooth is genuinely
+   subtle and actively studied (Okamoto–Sakajo–Wunsch mapped this numerically;
+   Jia–Stewart–Šverák and others have found regularity for some data classes;
+   Elgindi–Jeong and Chen–Hou–Huang established blow-up for limited-regularity
+   data — see the regularity caveat below). **The gCLM family is the real
    search target for the GA**, not just a validation exercise.
+
+   Making `a` a first-class parameter is deliberate and high-value: it gives a
+   *continuous bridge* from the regime where smooth-data blow-up is **proven**
+   (`a=0`, CLM) into the subtle regime near `a=1`. That directly de-risks the
+   central worry that smooth genomes may not blow up at all at `a=1` (see the
+   regularity caveat), and it hands the GA a second, better-behaved fitness
+   axis — `a_crit` — discussed under Stage 2.
+
+**Regularity caveat — the genome is smooth, but the blow-up may not be.**
+The established De Gregorio blow-up results are for *limited-regularity*
+(Hölder, e.g. `C^{1,α}`) data, and smooth data on the circle is widely
+believed to possibly stay regular. This is the same subtlety flagged for the
+Elgindi 3D Euler precedent in the scope caveat: that landmark blow-up needed
+`C^{1,α}` velocity, not smooth. A bandlimited truncated-Fourier genome is
+`C^∞` by construction, so it may be searching an empty set, with growing `N`
+just chasing a singularity that forms at ever-smaller scales — a resolution
+artifact, not a discovery. **Mitigation is built into the genome
+representation** (see Stage 2): the genome parameterizes a coefficient-decay
+envelope so limited-regularity profiles are representable, rather than
+assuming smoothness away.
 
 **Method:** pseudo-spectral (FFT via `numpy.fft`) — the Hilbert transform is
 a simple multiplication by `-i·sign(k)` in Fourier space. RK4 time-stepping.
-2/3-rule dealiasing on the nonlinear product term. Adaptive `dt` tied to
-`1/max|ω|` since the timestep must shrink as a candidate approaches blow-up.
+2/3-rule dealiasing on the nonlinear product terms (both `a·u·ω_x` and
+`ω·u_x` are quadratic, so 2/3 suffices). Adaptive `dt` must satisfy **two**
+constraints, not one: `dt = min(c₁/max|ω|, c₂·dx/max|u|)`. The first shrinks
+the step as a candidate approaches blow-up (as before); the second is the
+**advective CFL** condition, which the earlier `1/max|ω|`-only policy omitted —
+without it the `a·u·ω_x` transport term is under-resolved exactly when `a` is
+large, silently corrupting the regime the search cares about. Log the realized
+`dt` sequence (see LOGGING.md) so an adaptive run remains reproducible to
+tolerance across machines.
 
 **Viscosity is a solver parameter from the start, not deferred to Stage 4.**
 Add a diffusion term `ν·ω_xx` to both models — trivial in Fourier space
@@ -79,19 +110,49 @@ results — e.g. Jia–Stewart–Šverák-type regularity classes — when Stage
 actually implemented, rather than guessing at them now.)
 
 **Deliverables:**
-- `solver/spectral_utils.py` — FFT helpers, Hilbert transform, dealiasing.
-- `solver/clm.py`, `solver/de_gregorio.py` — the two solvers, sharing the
-  spectral utilities.
-- `test_solver_clm.py` — validates CLM's simulated blow-up time against its
-  known closed-form solution (same spirit as the existing ODE self-test).
+- `solver/spectral_utils.py` — FFT helpers, Hilbert transform, dealiasing,
+  and the conserved-quantity evaluations used as an artifact guard (below).
+- `solver/gclm.py` — a single gCLM solver parameterized by `(a, ν)`; `a=0`
+  is CLM, `a=1` is De Gregorio, so there is one code path to validate, not
+  two divergent ones.
+- `test_solver_clm.py` — validates the solver against known results at three
+  levels (below).
 
-**Acceptance criterion:** CLM solver **at `ν=0`**, via
-`win_condition.estimate_blowup_time` on the simulated `max|ω(t)|` series,
-matches the analytic blow-up time to within numerical tolerance across at
-least 3 different initial conditions. Separately, confirm the `ν>0` diffusion
-step is correct by checking pure-diffusion decay (`ω_t = ν·ω_xx` alone, no
-nonlinear term) against its known Gaussian-decay solution. Only then move to
-Stage 1.5.
+**Acceptance criterion — three checks, because CLM alone does not exercise
+the hard part.** CLM (`a=0`) has *no advection term*, and pure diffusion has
+*no nonlinearity*, so a solver can pass both while its `a·u·ω_x` transport
+operator is completely wrong — and that operator is the entire difficulty of
+De Gregorio. All three must pass before Stage 1.5:
+1. **Growth/Hilbert term (`a=0`, `ν=0`):** via
+   `win_condition.estimate_blowup_time` on the simulated `max|ω(t)|`, match
+   CLM's analytic blow-up time to within numerical tolerance across ≥3
+   initial conditions.
+2. **Diffusion term (`ν>0`, nonlinearity off):** pure-diffusion decay
+   (`ω_t = ν·ω_xx` alone) against its known Gaussian-decay solution.
+3. **Advection term (`a>0`) — the check the old plan was missing:** exercise
+   transport directly, by at least one of — a frozen-`u` pure-transport test
+   against a known translated solution; conservation of the gCLM invariants
+   (tracked continuously, see below); and reproducing a published
+   Okamoto–Sakajo–Wunsch critical-`a` value for a known profile. Do not let
+   Stage 1 go green with advection untested.
+
+**Conserved quantities as a cheap, always-on artifact guard.** The gCLM
+family has invariants (energy-type / Hamiltonian quantities). Their numerical
+drift is a direct, per-run signal that a simulation is under-resolved —
+available on *every* evaluation, long before Stage 3's expensive resolution
+study. `spectral_utils.py` exposes these; every solver run logs their drift
+(see LOGGING.md), and a "blow-up" whose invariants drifted is treated as an
+artifact regardless of how clean its `1/M` fit looks. **Two caveats the
+implementation must respect.** First, an invariant can be *trivially* zero
+under the active symmetry class — `∫ω dx` is conserved across the whole gCLM
+family (both `∫ω·H(ω)` and `∫u·ω_x` vanish by the Hilbert transform's
+antisymmetry), but it is identically zero for odd data, so under the odd
+restriction its drift measures nothing; verify the tracked invariants are
+informative under the configured symmetry, and normalize drift by a solution
+scale (e.g. `‖ω‖₁`), never by the invariant's own possibly-zero value.
+Second, for `ν>0` nothing is conserved at all — the viscous guard is the
+**energy-balance residual** (nonlinear production minus `ν`-dissipation,
+which nets to zero when resolved), not raw conservation.
 
 ---
 
@@ -123,20 +184,40 @@ models — and each is plausibly false:
 
 **Method:** hand-pick ~20 initial conditions (include literature
 blow-up-prone De Gregorio profiles and a spread of random shapes at fixed
-energy), and for each, sweep `ν` directly — no GA — measuring `ν_crit` and
-whether the blow-up/no-blow-up response is monotone. Also measure `ν_crit`
-at two solver resolutions (e.g. N=256 and N=512): **if `ν_crit` drifts with
+energy), and for each, sweep **both** control parameters directly — no GA:
+- **`ν` sweep (viscosity-resistance):** measure `ν_crit` and whether the
+  blow-up/no-blow-up response is monotone in `ν`.
+- **`a` sweep (advection-resistance):** at `ν=0`, measure `a_crit` — the
+  largest advection coefficient at which the shape still blows up — and its
+  monotonicity in `a`.
+Measure both at two solver resolutions (e.g. N=256 and N=512), holding one
+fixed simulation horizon `t_max` across every sweep run — critical values
+are horizon-relative (see Stage 2's fitness definition), so a sweep with
+varying horizons measures nothing. **If `ν_crit` or `a_crit` drifts with
 resolution, it is a numerical artifact, not a property of the shape** — the
-viscous analog of the Tier-1-vs-artifact problem, one level up, and a
-showstopper for using it as fitness.
+analog of the Tier-1-vs-artifact problem one level up, and a showstopper for
+using either as fitness.
 
-**Acceptance criterion:** `ν_crit` is nonzero for at least some shapes,
-finite, monotone in `ν`, resolution-stable, and spans a wide enough band
-across the sample that shape differences are resolvable above numerical
-noise. **If any of these fail, stop and redesign the fitness function
-before Stage 2** — candidate fallbacks: fitness on blow-up *rate* at a
-single fixed small `ν`, or a multi-objective (speed × viscosity-resistance)
-score. Do not proceed to the full GA on an unverified fitness signal.
+**Why sweep `a` too — `ν_crit` is at real risk of being degenerate, `a_crit`
+much less so.** In 1D, parabolic smoothing is strong, so there is a genuine
+chance *any* `ν>0` regularizes every shape (`ν_crit ≡ 0`, dead-flat
+landscape — risk #1 in Open Risks). `a_crit` is far more likely to be
+well-behaved: "for which `a` does a given smooth shape blow up" is *precisely*
+the actively-studied, positive, finite, shape-dependent question (Okamoto–
+Sakajo–Wunsch, Elgindi–Jeong). It is also cheaper — inviscid runs, no viscous
+stiffness. So this stage measures both up front and lets the data pick the
+fitness, rather than committing Stage 2 to `ν_crit` and discovering it is flat
+after `ga/` is built.
+
+**Acceptance criterion:** *at least one* of `ν_crit` or `a_crit` is, across
+the sample, nonzero for some shapes, finite, monotone in its parameter,
+resolution-stable, and spans a wide enough band that shape differences are
+resolvable above numerical noise. **Whichever passes becomes the Stage 2
+fitness** (preferring `a_crit` if both pass, since it is cheaper and its
+landscape is better-understood). **If neither passes, stop and redesign the
+fitness before Stage 2** — further fallbacks: blow-up *rate* at a fixed small
+`ν` or fixed `a`, or a multi-objective (speed × resistance) score. Do not
+proceed to the full GA on an unverified fitness signal.
 
 ---
 
@@ -146,7 +227,17 @@ score. Do not proceed to the full GA on an unverified fitness signal.
 convergent blow-up signal, using the Tier 1 diagnostic already built.
 
 **Genome:** first `N` Fourier sine coefficients of `ω(x, 0)` (real vector,
-`N` ≈ 32–64 to start).
+`N` ≈ 32–64 to start), **plus an evolvable spectral-decay exponent `p`**
+controlling the coefficient envelope. Rather than a hard truncation (which
+forces a `C^∞`, bandlimited — hence possibly non-blow-up — profile; see the
+Stage 1 regularity caveat), the genome multiplies its raw coefficients by a
+`k^{-p}` envelope, so the GA can evolve toward limited-regularity (rough,
+slowly-decaying-tail) shapes when those are what sustain blow-up. Small `p` =
+rough/Hölder-like; large `p` = smooth. This makes the very regularity axis the
+literature says matters (Hölder vs. smooth) a searchable genome dimension
+instead of a hidden constant, and `p` doubles as a natural shape descriptor
+(below). `N` is still the numerical truncation; `p` shapes how energy is
+distributed *within* it.
 
 **Critical design constraint — fixed energy budget:** CLM-type equations are
 scale-covariant (`ω → λω` blows up `λ`× faster). Without a constraint, the GA
@@ -169,10 +260,14 @@ mutation/crossover**, so fitness differences reflect *shape*, not scale.
   payoff here is a *map* of **which shapes resist viscosity** — that is
   natively a quality-diversity problem, not a single-objective one.
   **Reframe the search as MAP-Elites keyed on the shape descriptors we are
-  already logging** (`n_sign_changes`, `spectral_centroid`,
+  already logging** (`n_sign_changes`, `spectral_tail_slope`,
   `energy_top_k_frac`; see [LOGGING.md](LOGGING.md) schema #3): discretize
-  that descriptor space into cells and keep the highest-`ν_crit` genome per
-  cell. This structurally guarantees diversity (one elite per shape niche
+  that descriptor space into cells and keep the highest-fitness genome per
+  cell. Prefer **`spectral_tail_slope`** (how fast the coefficient tail
+  decays — directly the smooth-vs-Hölder regularity axis the physics cares
+  about, and the same quantity the evolvable envelope exponent `p` controls)
+  over `spectral_centroid`, which is strongly correlated with
+  `energy_top_k_frac` and would waste an archive dimension. This structurally guarantees diversity (one elite per shape niche
   instead of a converged population) *and* its output archive — best shape
   per niche — is exactly the "shape → viscosity-resistance map" the project
   wants, produced directly rather than reconstructed after the fact. Tournament
@@ -181,64 +276,152 @@ mutation/crossover**, so fitness differences reflect *shape*, not scale.
   poorly covered or the map is trivial, fall back to an island-model GA — but
   MAP-Elites is the default because it matches the deliverable.)
 
-**Fitness function — search for viscosity resistance, not just speed:**
-"blows up fastest at `ν=0`" is not informative about the real (viscous)
-question. Instead, for each genome, run the solver across a small set of
-`ν` values (bisection) to find `ν_crit(genome)` — the critical viscosity
-above which the Tier 1 blow-up signal disappears for that shape. **Fitness
-= `ν_crit`.** The GA evolves initial-condition shapes toward the most
-viscosity-resistant blow-up, which is exactly the property that would
-matter for the real Navier–Stokes equation. Within each bisection step,
-`max|ω(t)|` is still fed into `estimate_blowup_time` exactly as before;
-`None` at a given `ν` means "no blow-up at this viscosity," `BlowupEstimate`
-means "blow-up survives" — bisect on that boolean outcome to locate
-`ν_crit`.
+**Fitness function — search for resistance to regularization, not just
+speed:** "blows up fastest at `ν=0`, `a=0`" is not informative about the real
+question. Instead, fitness is the **critical-resistance parameter chosen by
+Stage 1.5** — `a_crit` (preferred) or `ν_crit` — located per genome by
+bisection:
+- `ν_crit(genome)`: critical viscosity above which the Tier 1 signal
+  disappears.
+- `a_crit(genome)`: at `ν=0`, critical advection coefficient above which it
+  disappears — the largest `a` at which the shape still blows up.
+The GA evolves shapes toward the most regularization-resistant blow-up, which
+is the property that would matter for the real Navier–Stokes equation. Within
+each bisection step, `max|ω(t)|` is fed into `estimate_blowup_time` exactly as
+before. Everything downstream (MAP-Elites, logging, resolution study) is
+written against a generic scalar fitness so switching `a_crit`↔`ν_crit`
+touches only the bisection axis, not the rest of the pipeline.
+
+**Pin down what the bisection oracle actually is — three decisions that
+change the measured fitness:**
+
+1. **The critical value is horizon-relative: fitness is `ν_crit(t_max, N)`,
+   not `ν_crit`.** "No blow-up at this `ν`" can only ever mean "no blow-up
+   within simulated time `t_max`" — a shape that blows up at `t=50` when the
+   run stops at `t=10` gets classified regular. So the stopping criteria
+   (`t_max`, max steps, the `max|ω|` amplification factor that declares
+   blow-up) are frozen in each experiment's config exactly like
+   `fitness_resolution_N` (see LOGGING.md schema #1), and critical values
+   from runs with different horizons are never comparable.
+2. **The blow-up predicate is "estimate exists AND held-out `R² ≥` a floor
+   (~0.9)", recorded in config as `bisection.predicate_r2_floor`.** The two
+   obvious choices are both wrong: bare "`estimate is not None`" lets any
+   noisy negative-slope wobble count as blow-up, and Tier 1's 0.98 gate is
+   too brittle for an oracle that gets queried precisely where fits are
+   marginal (near the critical value). A middle floor makes the bisection
+   robust while the 0.98 gate still decides what counts as a *candidate*.
+   Edge semantics: a run cut short by the amplification threshold with too
+   few samples to fit (`win_condition.InsufficientDataError`) **is a
+   blow-up** — it hit the blow-up stop condition; treating the exception as
+   "no signal" would flip the bisection against the fastest-blowing-up
+   genomes. Any other short-run cause is an `error` event, not evidence.
+3. **Bracket-edge outcomes are censored data, not measurements.** A genome
+   regular at the easiest end of the range, or still blowing up at the
+   hardest end, gets `critical_value` = the range edge with
+   `bracket_censored` set ("low"/"high" in LOGGING.md schema #3) — and
+   censored values never enter the MAP-Elites archive or any analysis as if
+   they were true critical values. Both cases will happen constantly.
+
+Relatedly, bisection *assumes* the response is monotone in the parameter and
+cannot falsify that from its own samples — so `critical_value_monotone` is
+measured explicitly by probing 1–2 parameter values beyond the located
+critical value on the "regular" side after bisection converges (any blow-up
+out there flags a broken fitness signal for that shape; Stage 1.5 checks
+this globally, the probe keeps checking it per-genome forever).
 
 **Detect blow-up with the exponent-fitting diagnostic, not the plain linear
 fit.** The default `estimate_blowup_time` fits `1/max|ω|` as a straight line,
-which is exact only for CLM-style generic blow-up (`M ~ (T*-t)^{-1}`). De
-Gregorio blow-up is generally *non-generic* (`M ~ (T*-t)^{-α}`, `α ≠ 1`),
-which makes the reciprocal curved — a linear fit then depresses `R²` and can
-reject genuine blow-ups at the `R² ≥ 0.98` gate, i.e. throw away exactly what
-we're hunting. Call `estimate_blowup_time(..., fit_exponent=True)` in the GA
-fitness path so the exponent `α` is fit and logged (`win_condition.py`
-already supports this and self-tests it against a synthetic `α=2` blow-up).
+exact only for CLM-style generic blow-up (`M ~ (T*-t)^{-1}`). De Gregorio
+blow-up is generally *non-generic* (`M ~ (T*-t)^{-α}`, `α ≠ 1`), making the
+reciprocal curved — a linear fit then depresses `R²` and can reject genuine
+blow-ups at the `R² ≥ 0.98` gate, i.e. throw away exactly what we're hunting.
+Call `estimate_blowup_time(..., fit_exponent=True)` in the GA fitness path so
+the exponent `α` is fit and logged. **The exponent is selected by held-out
+(out-of-sample) validation, not by maximizing `R²` over the exponent grid** —
+argmax-`R²` over ~55 candidate exponents is a garden-of-forking-paths trap
+that inflates `R²` and manufactures false candidates; `win_condition.py` fits
+`α` on the first half of the tail and gates on its `R²` over the held-out
+second half (self-tested against a synthetic `α=2` blow-up), so the reported
+`R²` is honest and the logged value is the one the Tier 1 gate judges.
 
-**Fix and log the fitness solver resolution; guard `ν_crit` against
-resolution artifacts.** Blow-up drives energy to high wavenumbers, where the
-viscous term `ν·k²` dominates — so measured `ν_crit` depends on solver
-resolution. Evaluate all fitness at one fixed resolution and record it in
-every `genome_eval` entry (not just in `solver_run`), so a `ν_crit` reported
-at low resolution can never be silently compared against one at high
-resolution. Periodically re-measure the current elites' `ν_crit` at a higher
-resolution (this is cheaper than, and complementary to, the full Stage 3
-resolution study); if `ν_crit` drifts, the fitness signal for that region is
-artifact-driven, not physical.
+**Fix and log the fitness solver resolution; guard the critical parameter
+against resolution artifacts.** Blow-up drives energy to high wavenumbers,
+where both the viscous term `ν·k²` and the sharpest transport gradients live —
+so measured `ν_crit`/`a_crit` depends on solver resolution. Evaluate all
+fitness at one fixed resolution and record it in every `genome_eval` entry
+(not just in `solver_run`), so a critical value reported at low resolution can
+never be silently compared against one at high resolution. Periodically
+re-measure the current elites' fitness at a higher resolution (cheaper than,
+and complementary to, the full Stage 3 resolution study); if it drifts, the
+fitness signal for that region is artifact-driven, not physical.
 
 **Guard against a frequency-space analog of amplitude-cheating.** Fixing L²
-energy kills the obvious `ω → λω` cheat, but `ν·k²` means energy at *low*
-wavenumbers survives viscosity almost for free. So `ν_crit` fitness can be
-gamed by piling energy into low-`k` modes (large, smooth, viscosity-immune
-structures) — a scaling trick, not genuine blow-up structure. Monitor
-`spectral_centroid` (already logged) as a guardrail: if evolved high-`ν_crit`
-genomes are drifting toward ever-lower centroid rather than developing sharp
-localized structure, the fitness is being gamed and needs a bandwidth
-constraint or a centroid-normalization alongside the energy budget.
+energy kills the obvious `ω → λω` cheat, but a low-frequency escape hatch
+remains: for `ν_crit`, energy at low `k` survives `ν·k²` almost for free; for
+`a_crit`, large smooth structures resist advective breakup. Either way, the
+fitness can be gamed by piling energy into low-`k` modes — a scaling trick,
+not genuine blow-up structure. Monitor `spectral_tail_slope`/`spectral_centroid`
+(already logged) as a guardrail: if evolved high-fitness genomes drift toward
+ever-smoother, lower-frequency shapes rather than sharp localized structure,
+the fitness is being gamed and needs a bandwidth constraint or a
+centroid-normalization alongside the energy budget. (This is the *opposite*
+failure from the regularity caveat's over-smoothing worry, and the same
+descriptor catches both — watch it in both directions.)
+
+**Compute plan — four cheap mitigations for the bisection-cost risk.**
+Bisection cost is this plan's top flagged compute risk; these four standard
+mitigations plausibly buy a 5–20× effective speedup and cost little to
+design in now (each is miserable to retrofit):
+
+1. **Parallel fitness evaluation.** Evaluations are embarrassingly parallel;
+   run them in a `multiprocessing` pool (`n_workers` in config).
+   `blas_threads=1` is already pinned for determinism, which is exactly the
+   right setting for process-level parallelism; per-evaluation RNG seeds
+   (LOGGING.md's RNG principle) make results order-independent so
+   parallelism cannot change outcomes. Logging consequence: workers never
+   write files — all events go over a queue to the single writer process
+   (see LOGGING.md).
+2. **Warm-start the bisection bracket** from the parent's critical value ± a
+   margin — children resemble parents, so most bisections start from a
+   bracket far narrower than the full config range. If the bracket fails
+   (both ends on the same side), widen toward the full range and count it
+   (`n_bracket_expansions` in schema #3); a high expansion rate means the
+   margin is mistuned.
+3. **Early exit for clearly-decaying runs.** The expensive solver runs are
+   the *no-blow-up* ones — they burn the whole `t_max`. An explicit
+   early-decay rule (e.g. `max|ω|` below a fraction of its initial value and
+   monotonically shrinking over a window; frozen in config's
+   `stop_criteria`) cuts the dominant cost, logged as `early_exit_reason` so
+   it is auditable.
+4. **Fitness cache keyed on genome hash.** The solver is deterministic and
+   elitism re-inserts identical genomes every generation — cache fitness by
+   `genome_hash` so elites cost nothing to carry. Cache hits are still
+   logged (`cache_hit: true`) so evaluation counts stay honest for the
+   budget-matched baseline comparison below.
 
 **Deliverables:**
-- `ga/genome.py` — genome representation, energy-renormalization.
-- `ga/operators.py` — selection/crossover/mutation.
+- `ga/genome.py` — genome representation (coefficients + spectral-decay
+  exponent `p`), energy-renormalization applied after the envelope.
+- `ga/operators.py` — selection/crossover/mutation (including mutation of `p`).
 - `ga/evolve.py` — main GA loop, logs best genome + tier per generation.
 - `ga/logbook.py` — structured run/generation/genome logging; see
   [LOGGING.md](LOGGING.md) for the schema and rationale.
 - `experiments/` — run logs and saved best-genome coefficient vectors
   (layout specified in LOGGING.md).
 
-**Acceptance criterion:** across multiple independent GA runs (different
-random seeds), the population reliably evolves genomes whose `ν_crit`
-clears a random-initial-condition-shape baseline by a clear margin — i.e.
-evolved shapes sustain blow-up at meaningfully higher viscosity than
-unoptimized shapes of the same energy.
+**Acceptance criterion — budget-matched, not just "beats baseline":** across
+multiple independent GA runs (different random seeds), the GA's best-so-far
+critical-fitness curve (`a_crit` or `ν_crit`, per Stage 1.5), plotted against
+**cumulative fitness evaluations**, clearly dominates a random-search
+baseline given the **same total evaluation budget** at the same energy
+budget. The budget matching is the point: comparing the GA's best over
+`population × generations` evaluations against a baseline's best over one
+population's worth of draws manufactures a "clear margin" by order
+statistics alone — the max of 5,000 draws beats the max of 100 from the same
+distribution every time. The logs support the honest comparison for free
+(`genome_eval` events are ordered and tagged by `operator`; see LOGGING.md).
+Passing means evolved shapes sustain blow-up under meaningfully more
+regularization than random search finds with identical compute.
 
 ---
 
@@ -305,10 +488,9 @@ Unsolved/
 ├── win_condition.py            (done)
 ├── test_win_condition.py       (done)
 ├── solver/
-│   ├── spectral_utils.py
-│   ├── clm.py
-│   └── de_gregorio.py
-├── test_solver_clm.py
+│   ├── spectral_utils.py       (FFT/Hilbert/dealiasing + conserved-quantity evals)
+│   └── gclm.py                 (one gCLM solver, parameterized by (a, ν))
+├── test_solver_clm.py          (CLM + diffusion + advection validation)
 ├── ga/
 │   ├── genome.py
 │   ├── operators.py
@@ -320,12 +502,13 @@ Unsolved/
 
 ## Honest scope caveat
 
-Stages 1–3 use **CLM and De Gregorio, which are 1D toy models** — not the
-real 3D Navier–Stokes equations. As of the latest revision, viscosity is
-built into the solver from Stage 1 and Stage 2's fitness function explicitly
-searches for blow-up that survives viscosity (`ν_crit`), which addresses the
-most serious version of the earlier gap: we are no longer optimizing purely
-inviscid behavior and hoping it transfers.
+Stages 1–3 use the **gCLM family (CLM through De Gregorio), which are 1D toy
+models** — not the real 3D Navier–Stokes equations. As of the latest revision,
+viscosity is built into the solver from Stage 1 and Stage 2's fitness function
+explicitly searches for blow-up that survives regularization — surviving
+viscosity (`ν_crit`) and/or advection (`a_crit`) — which addresses the most
+serious version of the earlier gap: we are no longer optimizing purely
+inviscid, purely non-advective behavior and hoping it transfers.
 
 What remains genuinely open, and is **not** resolved by this revision:
 - These are still 1D scalar models, not the actual 3D vector Navier–Stokes
@@ -363,44 +546,65 @@ beyond it, not the near-term deliverable.
 
 ## Open risks
 
-- **`ν_crit` degeneracy** — the deepest risk to the whole Stage 2 design: if
-  any positive viscosity regularizes these 1D models, `ν_crit ≡ 0` and the
-  fitness landscape is flat. This is why Stage 1.5 exists — it must be ruled
-  out with a cheap direct sweep *before* the GA is built, not discovered
-  after.
+- **Smooth-genome / limited-regularity mismatch** — arguably the deepest
+  *scientific* risk: the established De Gregorio blow-up is for Hölder data,
+  and a bandlimited genome is `C^∞`, so the search could be targeting an empty
+  set with growing `N` chasing a resolution artifact. Mitigated by the
+  evolvable spectral-decay exponent `p` in the genome (representable
+  limited-regularity profiles) and by the tunable advection `a` (start where
+  smooth blow-up is proven, at `a=0`, and push up). Not fully eliminated —
+  this is the real 3D Elgindi caveat in miniature.
+- **`ν_crit` degeneracy** — deepest risk to the *`ν_crit` version* of Stage 2:
+  if any positive viscosity regularizes these 1D models, `ν_crit ≡ 0` and that
+  landscape is flat. Mitigated two ways: Stage 1.5 rules it out with a cheap
+  direct sweep *before* the GA is built, and `a_crit` is carried as a
+  co-primary fitness precisely because its landscape is known to be non-trivial
+  even if the `ν` landscape turns out flat.
 - **Scale-covariance cheating** (amplitude) — mitigated by the
   fixed-energy-budget rule above; needs a unit test confirming
-  renormalization is actually applied after every genetic operator.
+  renormalization is actually applied after every genetic operator (and after
+  the `k^{-p}` envelope is applied, not before).
 - **Frequency-space cheating** (the subtler sibling) — energy piled into
-  low-`k` modes resists viscosity trivially, so `ν_crit` fitness can be gamed
-  without genuine blow-up structure; monitored via `spectral_centroid`, may
-  need a bandwidth constraint (see Stage 2 fitness section).
-- **`ν_crit` resolution-dependence** — `ν_crit` measured at fitness
-  resolution can be a numerical artifact; mitigated by fixing/logging the
-  fitness resolution and re-checking elites at higher resolution (Stage 1.5
-  and Stage 2).
+  low-`k`, smooth modes resists both viscosity and advection trivially, so the
+  critical-fitness value can be gamed without genuine blow-up structure;
+  monitored via `spectral_tail_slope`/`spectral_centroid`, may need a
+  bandwidth constraint (see Stage 2 fitness section).
+- **Critical-value resolution-dependence** — `a_crit`/`ν_crit` measured at
+  fitness resolution can be a numerical artifact; mitigated by fixing/logging
+  the fitness resolution, tracking conserved-quantity drift per run, and
+  re-checking elites at higher resolution (Stage 1.5 and Stage 2).
+- **Advection operator untested by CLM** — CLM (`a=0`) and pure diffusion
+  never exercise the `a·u·ω_x` term, which is the whole difficulty; mitigated
+  by Stage 1's third acceptance check (transport / invariants / OSW critical-`a`).
 - **Numerical blow-up vs. resolution artifact** — this is exactly why Stage
   3 exists; a Tier 1 hit is never reported as more than a candidate.
 - **Compute cost at Stage 4** — likely the biggest real bottleneck; sizing
   it accurately isn't possible until Stage 3 tells us how large a genome/
   resolution we actually need for a convincing candidate in 1D.
-- **Bisection cost for `ν_crit`** — locating the critical viscosity per
+- **Bisection cost for the critical value** — locating `a_crit`/`ν_crit` per
   genome means multiple solver runs per fitness evaluation (roughly
-  `log2(range/tolerance)`), multiplying Stage 2's compute cost. Worth
-  watching once Stage 1/2 are actually running; not worth redesigning
-  around before we have real timing data.
+  `log2(range/tolerance)`), multiplying Stage 2's compute cost. (`a_crit`
+  bisection is cheaper per step — inviscid, no viscous stiffness — a further
+  reason to prefer it if Stage 1.5 clears it.) Now partially designed
+  against, rather than just watched: Stage 2's compute plan (parallel
+  evaluation pool, parent-warm-started brackets, early-decay exit, fitness
+  cache) attacks it from four sides, and the logged `n_bisection_steps` /
+  `n_bracket_expansions` / `early_exit_reason` fields turn tuning it into a
+  data question once real runs exist.
 
 ## Stopping point for design-only iteration
 
-This plan has now been through three rounds of refinement without a line of
-solver code written. Each was worth doing — the viscosity reframe, and now
-the Stage 1.5 fitness-viability de-risk plus the MAP-Elites reframe, would
-all have been expensive to retrofit later — but further paper-only iteration
-has clearly hit diminishing returns. The remaining open items (bisection
-cost, exact MAP-Elites cell resolution, which published De Gregorio results
-to check against) are all better resolved by writing **Stage 1, then the
-Stage 1.5 viability sweep**, and reacting to real numbers than by further
-speculation. Stage 1.5 in particular is deliberately cheap and comes *before*
+This plan has now been through several rounds of refinement without a line of
+solver code written. Each was worth doing — the viscosity reframe, the
+Stage 1.5 fitness-viability de-risk, the MAP-Elites reframe, and now the gCLM
+`a`-parameter / `a_crit` fitness, the regularity-envelope genome, and the
+advection-validation gate — all change parameterization or acceptance gates
+and would have been expensive to retrofit once solver code existed. But
+further paper-only iteration has clearly hit diminishing returns. The
+remaining open items (bisection cost, exact MAP-Elites cell resolution,
+which published Okamoto–Sakajo–Wunsch / De Gregorio results to check against)
+are all better resolved by writing **Stage 1, then the Stage 1.5 viability
+sweep**, and reacting to real numbers than by further speculation. Stage 1.5 in particular is deliberately cheap and comes *before*
 the GA precisely so the biggest design risk (`ν_crit` degeneracy) is settled
 empirically, not on paper. Next step is implementation, not another planning
 pass — concretely: **Stage 1 → Stage 1.5 → decide fitness → Stage 2.**

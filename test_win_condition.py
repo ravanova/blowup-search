@@ -16,6 +16,7 @@ from win_condition import (
     classify_candidate,
     resolution_converged,
     classify,
+    InsufficientDataError,
     WinTier,
 )
 
@@ -54,6 +55,39 @@ def test_detects_known_analytic_blowup():
 
     tier = classify_candidate(estimate)
     assert tier is WinTier.CANDIDATE, f"expected CANDIDATE, got {tier}"
+
+
+def test_detects_nongeneric_blowup_with_exponent_fit():
+    # Synthetic non-generic blow-up M ~ (T*-t)^-alpha with alpha=2, T*=1.0.
+    # The plain linear fit of 1/M is curved here (1/M ~ (T*-t)^2), so
+    # fit_exponent=True must recover alpha ~= 2 and a good held-out fit, while
+    # the default linear fit would under-fit it.
+    alpha_true, t_star_true = 2.0, 1.0
+    times = [0.5 + 0.005 * i for i in range(80)]  # tail approaching T*=1.0
+    vorticity = [(t_star_true - t) ** (-alpha_true) for t in times]
+
+    est = estimate_blowup_time(times, vorticity, tail_fraction=1.0, fit_exponent=True)
+    assert est is not None, "expected a forward blow-up signal"
+    assert abs(est.exponent - alpha_true) < 0.15, f"expected alpha ~= 2, got {est.exponent}"
+    assert abs(est.t_star - t_star_true) < 0.02, f"expected T* ~= 1.0, got {est.t_star}"
+    assert est.r_squared > 0.98, f"correct exponent should clear the gate, got {est.r_squared}"
+    assert classify_candidate(est) is WinTier.CANDIDATE
+
+
+def test_exponent_fit_requires_enough_tail_to_cross_validate():
+    # Too few tail points to honestly hold out a validation window. Must raise
+    # the dedicated InsufficientDataError (still a ValueError, so older callers
+    # keep working) rather than returning None -- a None here would let a
+    # bisection caller misread "run too short to fit" as "no blow-up".
+    times = [0.1 * i for i in range(5)]
+    vorticity = [1.0 / (1.0 - t) for t in times]
+    try:
+        estimate_blowup_time(times, vorticity, tail_fraction=1.0, fit_exponent=True)
+    except InsufficientDataError:
+        pass
+    else:
+        raise AssertionError("expected InsufficientDataError when the tail is too short to cross-validate")
+    assert issubclass(InsufficientDataError, ValueError)
 
 
 def test_rejects_decaying_series():

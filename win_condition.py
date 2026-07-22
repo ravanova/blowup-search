@@ -18,6 +18,23 @@ class WinTier(Enum):
     NUMERICALLY_CONFIRMED = "numerically_confirmed"
 
 
+class InsufficientDataError(ValueError):
+    """The max|omega(t)| series is too short to fit (or cross-validate).
+
+    This is a *data* outcome, not a programmer error: near the critical
+    parameter, a solver run can legitimately terminate early -- e.g. by
+    hitting the omega-amplification stop threshold moments after it starts --
+    leaving too few samples for a trend fit. Callers in the bisection/fitness
+    path must catch this and classify from the run's termination reason
+    instead: a run stopped by the amplification threshold IS a blow-up even
+    though the fit couldn't run, and a run cut short for any other reason is
+    an error event, not evidence either way. Treating this exception as "no
+    blow-up" would flip the bisection in exactly the wrong direction for the
+    fastest-blowing-up genomes. Subclasses ValueError so pre-existing callers
+    that caught ValueError keep working.
+    """
+
+
 @dataclass
 class BlowupEstimate:
     t_star: float
@@ -61,16 +78,30 @@ def estimate_blowup_time(times, vorticity_max, tail_fraction=0.5,
 
     With ``fit_exponent=True`` we search ``alpha``: for each candidate,
     ``(1/M)^(1/alpha)`` is linear in ``t`` (with the same zero crossing ``T*``)
-    iff that ``alpha`` is correct, so we pick the ``alpha`` whose linearized
-    fit maximizes ``R^2`` and report it on the estimate. ``slope`` is then the
-    slope in that linearized coordinate, not of ``1/M`` directly.
+    iff that ``alpha`` is correct. Naively picking the ``alpha`` that maximizes
+    ``R^2`` over the whole grid is an overfitting trap: on a short monotone
+    tail, taking the argmax over ~55 candidate exponents inflates ``R^2`` by
+    pure garden-of-forking-paths selection, which would manufacture false Tier 1
+    candidates -- the exact self-fooling WIN_CONDITION.md exists to prevent. So
+    instead we select ``alpha`` **out of sample**: fit the linearized line on
+    the first half of the tail and score its ``R^2`` on the held-out second
+    half, choosing the ``alpha`` with the best held-out fit. A wrong ``alpha``
+    leaves the linearized reciprocal curved, so the first-half line extrapolates
+    badly onto the second half and its held-out ``R^2`` collapses; only an
+    ``alpha`` that is genuinely linear across the *whole* tail scores well.
+    The reported ``r_squared`` is that honest held-out value (so the Tier 1
+    gate judges out-of-sample fit, not in-sample), while ``t_star`` and
+    ``slope`` come from a final fit over the full tail. ``slope`` is in the
+    linearized coordinate, not of ``1/M`` directly.
 
     Returns None if there's no forward-pointing blow-up signal, otherwise a
-    BlowupEstimate.
+    BlowupEstimate. Raises InsufficientDataError (a ValueError subclass) when
+    the series is too short to fit at all -- see that class's docstring for
+    why bisection callers must NOT treat that case as "no blow-up".
     """
     n = len(times)
     if n < 4:
-        raise ValueError("need at least 4 samples to fit a trend")
+        raise InsufficientDataError("need at least 4 samples to fit a trend")
 
     tail_start = max(0, int(n * (1 - tail_fraction)))
     xs = times[tail_start:]
@@ -82,33 +113,62 @@ def estimate_blowup_time(times, vorticity_max, tail_fraction=0.5,
         return None
     inv = [1.0 / m for m in ms]
 
-    def _fit_for_exponent(alpha):
-        zs = [v ** (1.0 / alpha) for v in inv]
-        slope, intercept, r_squared = _linear_regression(xs, zs)
+    if not fit_exponent:
+        # CLM-style generic blow-up: 1/M is fit directly as a straight line
+        # (alpha == 1). No exponent search, so no overfitting to guard against.
+        slope, intercept, r_squared = _linear_regression(xs, inv)
         if slope >= 0:
-            return None  # linearized reciprocal isn't shrinking -> no blow-up
+            return None  # reciprocal isn't shrinking -> no blow-up
         t_star = -intercept / slope
         if t_star <= xs[-1]:
             return None  # extrapolated crossing is in the past -> not forward
-        return slope, r_squared, t_star
+        return BlowupEstimate(
+            t_star=t_star,
+            r_squared=r_squared,
+            slope=slope,
+            last_time=xs[-1],
+            n_points=len(xs),
+            exponent=1.0,
+        )
 
-    grid = [1.0] if not fit_exponent else (exponent_grid or _DEFAULT_EXPONENT_GRID)
-    best = None  # (r_squared, alpha, slope, t_star)
+    # fit_exponent=True: choose alpha by held-out (out-of-sample) validation.
+    m = len(xs)
+    if m < 8:
+        raise InsufficientDataError(
+            "need at least 8 tail samples to cross-validate the blow-up "
+            "exponent; increase tail_fraction or run the solver longer"
+        )
+    mid = m // 2
+    grid = exponent_grid or _DEFAULT_EXPONENT_GRID
+
+    best = None  # (r2_holdout, alpha, slope_full, t_star_full)
     for alpha in grid:
-        res = _fit_for_exponent(alpha)
-        if res is None:
+        zs = [v ** (1.0 / alpha) for v in inv]
+        # Train on the first half, score on the held-out second half.
+        s_tr, b_tr, _ = _linear_regression(xs[:mid], zs[:mid])
+        if s_tr >= 0:
+            continue  # linearized reciprocal not shrinking on the train window
+        r2_holdout = _r_squared_out_of_sample(xs[mid:], zs[mid:], s_tr, b_tr)
+        if r2_holdout is None:
+            continue  # held-out window is degenerate (no variance to explain)
+        # Final estimate uses a fit over the full tail (all the data), but the
+        # reported R^2 stays the honest held-out one that the gate judges.
+        s_full, b_full, _ = _linear_regression(xs, zs)
+        if s_full >= 0:
             continue
-        slope, r_squared, t_star = res
-        if best is None or r_squared > best[0]:
-            best = (r_squared, alpha, slope, t_star)
+        t_star = -b_full / s_full
+        if t_star <= xs[-1]:
+            continue
+        if best is None or r2_holdout > best[0]:
+            best = (r2_holdout, alpha, s_full, t_star)
 
     if best is None:
         return None
 
-    r_squared, alpha, slope, t_star = best
+    r2_holdout, alpha, slope, t_star = best
     return BlowupEstimate(
         t_star=t_star,
-        r_squared=r_squared,
+        r_squared=r2_holdout,
         slope=slope,
         last_time=xs[-1],
         n_points=len(xs),
@@ -116,8 +176,36 @@ def estimate_blowup_time(times, vorticity_max, tail_fraction=0.5,
     )
 
 
+def _r_squared_out_of_sample(xs, ys, slope, intercept):
+    """R^2 of a line (fit elsewhere) evaluated on a held-out window.
+
+    Unlike the in-sample R^2 from _linear_regression, this can go negative when
+    the line -- fit on other data -- predicts this window worse than its own
+    mean would. That is the point: a wrong blow-up exponent produces a curved
+    linearization whose train-window line extrapolates badly here, and this
+    number is what exposes it. Returns None if the window has no variance to
+    explain (R^2 undefined).
+    """
+    k = len(ys)
+    mean_y = sum(ys) / k
+    ss_tot = sum((y - mean_y) ** 2 for y in ys)
+    if ss_tot <= 0:
+        return None
+    ss_res = sum((y - (intercept + slope * x)) ** 2 for x, y in zip(xs, ys))
+    return 1 - ss_res / ss_tot
+
+
 def classify_candidate(estimate, r_squared_threshold=0.98):
-    """Tier 1 check: is this a credible single-run blow-up candidate?"""
+    """Tier 1 check: is this a credible single-run blow-up candidate?
+
+    Threshold caveat: the meaning of ``estimate.r_squared`` depends on how the
+    estimate was produced. The plain linear path reports an *in-sample* R^2;
+    the ``fit_exponent=True`` path reports a *held-out* R^2, which runs
+    systematically lower on the same data. One number (0.98) currently gates
+    both, which is conservative for the exponent path. Once real solver data
+    exists, calibrate the two thresholds separately (e.g. on the Stage 1
+    validation runs) rather than assuming one value fits both distributions.
+    """
     if estimate is None:
         return WinTier.NONE
     if estimate.r_squared >= r_squared_threshold:
