@@ -466,6 +466,27 @@ regularization than random search finds with identical compute.
 
 ## Stage 2.5 — Fitness-axis redesign (response to Stage 2's verdict)
 
+> **RUN (2026-07-22, commits f3dc522 + a005ef8) — verdict: NO VIABLE AXIS;
+> stopped for review without running the GA.** Candidate A fails the
+> six-property gate at every a: a=1.0 is a dead axis (35/40 shapes
+> censored low — smooth-data blow-up essentially vanishes at De Gregorio
+> within the horizon); a=0.7 fails monotonicity, symptomatic of a systemic
+> softness (100% of a>0 boundary decisions are fit-decided on slow α≈0.3
+> growth with T* near the horizon cap, vs 100% amplification-decided at
+> a=0); a=0.4 fails the non-trivial optimum (prior reaches within 7·tol of
+> the top; ρ(ν_crit, k1frac)=0.79). Candidate B fails exactly by its
+> pre-stated risk: the optimum pins to the k≤2=50% cap boundary (7-way tie
+> at ν_crit=0.0379, all at exactly 0.5; best prior EQUALS best structured,
+> gap 0.0·tol; ρ(k1)=0.91). Conclusion: ν_crit on gCLM at fixed horizon is
+> dominated by the νk² dissipation scaling in every variant — a spectral-
+> concentration quantity the init prior samples directly; no search method
+> can beat prior sampling on it. The acceptance rerun was therefore NOT
+> executed (per this stage's own gate). Full data and the three
+> redesign-level paths forward (oracle v3 + a=0.7, rate-based fitness,
+> scaling-normalized ν_crit, or accept the negative result):
+> [STAGE_2_5_RESULTS.md](STAGE_2_5_RESULTS.md). **Next step: human review
+> of which path, if any, to take — not another unilateral redesign.**
+
 **Goal:** find a fitness axis whose optimum *requires evolved structure* —
 per STAGE_2_RESULTS.md, `ν_crit` at a=0 is maximized by trivially piling
 energy into k=1, so no search method can beat prior sampling on it — then

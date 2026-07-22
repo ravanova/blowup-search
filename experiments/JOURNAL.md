@@ -3,6 +3,52 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## stage2_5_sweep A + B (A: f3dc522, B: a005ef8) — 2026-07-22
+
+Why configured this way: PLAN.md Stage 2.5's answer to the Stage 2
+verdict — before any GA rerun, gate a redesigned fitness axis on the
+six-property checklist, with the non-trivial-optimum property measured
+against the GA's ACTUAL init prior (20 draws with the Stage 2 config's
+N=32, p ∈ [0, 3.5]) alongside the 20 Stage 1.5 shapes. Candidate A:
+ν_crit at a ∈ {0.4, 0.7, 1.0} (largest passing a wins). Candidate B
+(fallback): ν_crit at a=0 under a k≤2 ≤ 50% energy cap enforced at
+normalization. Same frozen v2 oracle and tol 1e-3 as Stage 2; a range
+ladder [0,0.1]→[0,0.4]→[0,1.0] because moderate advection turned out to
+RAISE ν_crit ~3× (unexpected and interesting on its own).
+
+**Verdict: no viable axis — every candidate fails, each differently, and
+the pattern is the finding** (full numbers: STAGE_2_5_RESULTS.md):
+
+- a=1.0 (De Gregorio): dead axis. 35/40 censored low at ν=0. The k=1
+  refuge dies at the equilibrium, but so does essentially all smooth-data
+  blow-up within the horizon — only rough low-k1 prior draws survive, at
+  ν_crit ≈ tol/2. The literature's smooth-data regularity expectation,
+  watched in real data.
+- a=0.7: the only landscape with a genuinely structured top (prior-vs-
+  structured gap 21·tol) — but it fails monotonicity, and the audit shows
+  why: 100% of its boundary decisions are fit-decided (slow α≈0.3 growth,
+  T* extrapolated just inside the 1.5·t_max cap), vs 19/19
+  amplification-decided at a=0. One shape's classification flickers
+  non-monotonically as fit quality dips and recovers across a marginal
+  band (island at ν ∈ [0.026, 0.031], R² up to 0.997). The critical value
+  at a>0 measures "where a marginal extrapolation crosses the horizon
+  cap" — resolution-exact but semantically soft.
+- a=0.4: Stage 2's disease softened but present — gap 7·tol,
+  ρ(ν_crit, k1frac) = 0.79; prior sampling reaches the top region.
+- Candidate B: PLAN.md's own stated risk realized verbatim. Seven-way tie
+  at the top, every one at EXACTLY the 0.5 cap boundary; best prior draw
+  EQUALS best structured (gap 0.0); ρ(k1) = 0.91. The cap relocates the
+  trivial optimum; it does not remove it.
+
+What a human should take away: ν_crit on gCLM at fixed horizon is, in
+every variant tried, a thin wrapper around the νk² dissipation scaling —
+a spectral-concentration quantity the init prior samples directly. No GA
+can beat random on it, and the six-property gate now proves that for ~40
+bisections (~10 min) instead of ~3 GA-seed-days. Stage 2 acceptance rerun
+deliberately NOT executed. Paths forward (oracle v3 + a=0.7; rate-based
+fitness; ν_crit normalized by the shape's own k²; or accept the negative
+result and re-scope) are redesign-level and go to review.
+
 ## stage2-seed1 / seed2 / seed3 (d47b579) — 2026-07-22
 
 Why configured this way: the Stage 2 acceptance runs — 3 independent seeds,

@@ -65,3 +65,8 @@ with a numerical artifact.
   because `ν_crit` at a=0 has a trivially-located optimum (k=1
   concentration); harness validated, fitness-axis redesign planned in
   PLAN.md Stage 2.5.
+- [STAGE_2_5_RESULTS.md](STAGE_2_5_RESULTS.md) — fitness-axis redesign
+  sweep: NO VIABLE AXIS (ν_crit at a ∈ {0.4, 0.7, 1.0} and
+  bandwidth-constrained ν_crit at a=0 all fail the six-property gate);
+  ν_crit on gCLM is dominated by the νk² dissipation scaling in every
+  variant. Stopped for review before any GA rerun.
