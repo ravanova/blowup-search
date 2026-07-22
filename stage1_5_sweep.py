@@ -24,9 +24,17 @@ Bisection-oracle rules (PLAN.md Stage 2, applied here ahead of the GA):
      runs carry fit_below_floor=true for auditability.
   2. Otherwise (ran to t_max / decayed): blow-up iff
      estimate_blowup_time(fit_exponent=True) returns an estimate AND its
-     held-out R^2 >= R2_FLOOR (0.9) — the forward Tier-1-style
-     extrapolation, with a floor loose enough to be robust exactly where
-     fits are marginal (the Tier 1 gate 0.98 still decides *candidates*).
+     held-out R^2 >= R2_FLOOR (0.9) AND the extrapolated T* is within
+     T_STAR_CAP_FACTOR * t_max — the forward Tier-1-style extrapolation,
+     with a floor loose enough to be robust exactly where fits are marginal
+     (the Tier 1 gate 0.98 still decides *candidates*). The T* cap was
+     added after the v1 sweep: without it, runs that sat quietly to t_max
+     and then fit a zero crossing at T* = 6-11x the horizon (e.g. T*=136
+     from a run ending at t=12) were accepted as blow-ups, and whether such
+     marginal fits clear the R^2 floor flips with resolution — the entire
+     a-axis resolution instability in v1 traced to this. A critical value
+     is horizon-relative (PLAN.md); a prediction far beyond the horizon is
+     unfalsifiable within the run and cannot count as a measurement.
 - "diverged" (NaN) is counted as blow-up but flagged: in this solver NaN
   only arises from explosive growth outrunning the adaptive dt.
 - Bracket-edge outcomes are censored data, not measurements
@@ -77,6 +85,7 @@ NU_RANGE = (0.0, 1.0)   # nu_crit bisection bracket, at a = 0
 A_RANGE = (0.0, 2.0)    # a_crit bisection bracket, at nu = 0
 N_BISECT_ITERS = 8      # final bracket width: range / 2^8
 R2_FLOOR = 0.9          # held-out R^2 the blow-up predicate requires
+T_STAR_CAP_FACTOR = 1.5  # fit-based blow-up requires t* <= this factor * t_max
 TAIL_FRACTION = 0.15    # matches the CLM window calibration in test_solver_clm.py
 AMPLIFICATION = 100.0   # matches the calibrated tail/amplification pairing
 ENERGY_TARGET = float(np.pi) / 2.0  # L2 energy of sin(x): all shapes, one scale
@@ -219,8 +228,14 @@ def classify_run(result):
         summary["via"] = "amplification"
         summary["fit_below_floor"] = not fit_ok
         return True, summary
-    summary["via"] = "fit" if fit_ok else "fit_below_floor_or_none"
-    return fit_ok, summary
+    within_horizon = (est is not None
+                      and est.t_star <= T_STAR_CAP_FACTOR * T_MAX)
+    if fit_ok and within_horizon:
+        summary["via"] = "fit"
+        return True, summary
+    summary["via"] = ("fit_beyond_horizon_cap" if fit_ok
+                      else "fit_below_floor_or_none")
+    return False, summary
 
 
 # --- bisection with censoring + monotonicity probes ------------------------
@@ -317,6 +332,7 @@ def sweep_one(ic, axis, n_res, out_file, code_ver, code_dirty):
         "t_max": T_MAX,
         "tail_fraction": TAIL_FRACTION,
         "predicate_r2_floor": R2_FLOOR,
+        "t_star_cap_factor": T_STAR_CAP_FACTOR,
         "range": [lo, hi],
         "n_bisect_iters": N_BISECT_ITERS,
         "solver_params": SOLVER_PARAMS,
