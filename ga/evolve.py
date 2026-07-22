@@ -54,9 +54,15 @@ from ga.genome import (
 from ga.logbook import ExperimentWriter, genome_hash
 from ga.operators import blend_crossover, mutate, mutation_scale, tournament_select
 
+# Stage 2.6 acceptance config (PLAN.md Stage 2.6): fitness axis A' —
+# nu_crit under the v3 amplification-only oracle at a=0.7, the only
+# candidate passing all six viability properties (STAGE_2_6_RESULTS.md).
+# Changes from the Stage 2 config are config-only: gclm_a 0->0.7,
+# t_max 12->24 (max_steps doubled with it), bisection range [0,0.1]->[0,0.3]
+# (measured v3 band at a=0.7 is 0.006-0.158), blowup_predicate v2->v3.
 DEFAULT_CONFIG = {
     "symmetry": "odd",
-    "gclm_a": 0.0,
+    "gclm_a": 0.7,
     "fitness_axis": "nu_crit",
     "genome_length_N": 32,
     "genome_envelope_p_range": [0.0, 3.5],
@@ -91,18 +97,19 @@ DEFAULT_CONFIG = {
     # Frozen stop criteria from STAGE_1_5_RESULTS.md — part of the fitness
     # definition (nu_crit is horizon-relative), never per-run tunables.
     "stop_criteria": {
-        "t_max": 12.0,
-        "max_steps": 200_000,
+        "t_max": 24.0,
+        "max_steps": 400_000,
         "omega_amplification_factor": 100.0,
         "early_decay_exit": {"fraction": 0.1, "window": 2.0},
     },
     "bisection": {
         "axis": "nu",
-        "range": [0.0, 0.1],  # measured Stage 1.5 band is 0.006-0.053
+        "range": [0.0, 0.3],  # measured Stage 2.6 v3 band at a=0.7: 0.006-0.158
         "tolerance": 1e-3,
         "tail_fraction": 0.15,
-        "predicate_r2_floor": 0.9,
-        "t_star_cap_factor": 1.5,
+        "predicate_r2_floor": 0.9,   # still gates Tier 1 candidacy
+        "t_star_cap_factor": 1.5,    # idem; neither decides the v3 oracle
+        "blowup_predicate": "v3_amplification_only",
         "warm_start": {"margin": 0.01, "fallback": "full_range"},
         "probe_fractions": [0.05, 0.15],
         "max_iters": 30,

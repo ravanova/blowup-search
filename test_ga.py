@@ -292,7 +292,21 @@ def _stage2_config(**overrides):
 
 
 def test_evaluate_genome_reproduces_stage1_5_sin_nu_crit():
-    cfg = _stage2_config()
+    # Regression pin against Stage 1.5's measured nu_crit(sin) = 0.0527:
+    # that number belongs to the LEGACY oracle/config (a=0, t_max=12, v2
+    # predicate, range [0, 0.1]), pinned explicitly here so the pin survives
+    # DEFAULT_CONFIG moving to the Stage 2.6 axis (a=0.7, t_max=24, v3).
+    cfg = _stage2_config(
+        gclm_a=0.0,
+        stop_criteria={"t_max": 12.0, "max_steps": 200_000,
+                       "omega_amplification_factor": 100.0,
+                       "early_decay_exit": {"fraction": 0.1, "window": 2.0}},
+        bisection={"axis": "nu", "range": [0.0, 0.1], "tolerance": 1e-3,
+                   "tail_fraction": 0.15, "predicate_r2_floor": 0.9,
+                   "t_star_cap_factor": 1.5, "blowup_predicate": "v2",
+                   "warm_start": {"margin": 0.01, "fallback": "full_range"},
+                   "probe_fractions": [0.05, 0.15], "max_iters": 30},
+    )
     g = from_sine_pairs([(1, 1.0)], cfg["genome_length_N"])
     task = {"coeffs": g.coeffs, "envelope_p": g.envelope_p,
             "genome_id": "t-sin", "operator": "init", "parent_ids": [],
@@ -455,7 +469,8 @@ def test_end_to_end_tiny_run():
         assert gen_last["cumulative_evals_baseline"] == 18  # 12 lit + 6 rand
         assert len(by_type["solver_run"]) > 0
         for r in by_type["solver_run"]:
-            assert r["a"] == 0.0 and "nu" in r and "conservation_drift" in r
+            assert r["a"] == cfg["gclm_a"] and "nu" in r \
+                and "conservation_drift" in r
 
         ckpts = list((tmp / "experiments" / "run_logs" / eid /
                       "checkpoints").glob("*.json"))
