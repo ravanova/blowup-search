@@ -251,14 +251,11 @@ proceed to the full GA on an unverified fitness signal.
 > on a saturated landscape, fitness-driven selection is pure cost. The
 > harness itself passed every operational check (censoring, monotonicity
 > probes, warm starts, budget matching, single-writer logging) and is
-> reusable as-is for any scalar fitness. Verdict and redesign options in
-> experiments/JOURNAL.md; analysis in analyze_stage2.py. **Next milestone:
-> redesign the fitness axis** — leading options: (1) bandwidth-constrained
-> `ν_crit` (cap top-k energy fraction so resistance must come from
-> structure), (2) an a>0 axis with a resolution-convergent oracle, (3)
-> direct QD/map-quality objectives. Lesson folded back into Stage 1.5
-> methodology: viability checks must also verify the optimum is NOT
-> reachable by trivial sampling of the init prior.
+> reusable as-is for any scalar fitness. Full numbers in
+> [STAGE_2_RESULTS.md](STAGE_2_RESULTS.md); analysis in analyze_stage2.py.
+> **Next milestone: Stage 2.5 below** — redesign the fitness axis, gate it
+> on the extended six-property viability checklist, then rerun the 3-seed
+> acceptance unchanged.
 
 **Goal:** evolve De Gregorio initial conditions toward the fastest, most
 convergent blow-up signal, using the Tier 1 diagnostic already built.
@@ -464,6 +461,70 @@ distribution every time. The logs support the honest comparison for free
 (`genome_eval` events are ordered and tagged by `operator`; see LOGGING.md).
 Passing means evolved shapes sustain blow-up under meaningfully more
 regularization than random search finds with identical compute.
+
+---
+
+## Stage 2.5 — Fitness-axis redesign (response to Stage 2's verdict)
+
+**Goal:** find a fitness axis whose optimum *requires evolved structure* —
+per STAGE_2_RESULTS.md, `ν_crit` at a=0 is maximized by trivially piling
+energy into k=1, so no search method can beat prior sampling on it — then
+rerun the Stage 2 acceptance unchanged (the harness is generic over the
+axis; the rerun is a config change).
+
+**The extended viability checklist (six properties, all gating).** The five
+Stage 1.5 properties — nonzero for some shapes, finite, monotone in the
+parameter, resolution-stable, wide band — plus the property Stage 2 proved
+necessary:
+
+6. **Non-trivial optimum:** the best of ~20 init-prior random draws sits
+   clearly below the best achievable value (hand-built or literature
+   shapes), and the top of the landscape is not monotone in a trivially
+   controllable quantity (for gCLM: `energy_top_k_frac` / k=1 dominance).
+   An axis whose optimum is reachable by prior sampling gives selection
+   nothing to do — this check costs ~20 bisections and must run before
+   any GA time is spent.
+
+**Candidate axis A (preferred): `ν_crit(t_max, N)` at fixed `a > 0`.**
+Sweep the Stage 1.5 IC set *plus* ~20 init-prior random genomes (the same
+prior `ga/evolve.py` draws from, so property 6 is measured against the
+real prior) at a ∈ {0.4, 0.7, 1.0}, N ∈ {256, 512}, one frozen horizon
+t_max=12, v2 oracle unchanged. Rationale: at a=1 (De Gregorio) `sin(x)` is
+an *equilibrium* — the k=1 refuge stops being free precisely because
+advection opposes it, so viscosity-resistance must come from structure;
+intermediate a interpolates. The ν-bisection was the resolution-exact part
+of Stage 1.5 (every N=256/512 decision identical), so `ν_crit` at fixed
+a>0 has the best chance of passing resolution stability where `a_crit`
+failed — but this must be re-verified per a, since the a-axis instability
+lived in near-critical advection collapse scales. Known risks: near a=1
+smooth data may not blow up within the horizon at any ν ≥ 0 (censored-low
+everywhere → dead axis — exactly what the sweep measures before anything
+is built); and Stage 1.5's a_crit values cluster at 0.85–1.0, so a=0.4/0.7
+keep most shapes alive while a=1.0 probes the interesting edge.
+**Selection rule: the largest a that passes all six properties** (largest =
+closest to De Gregorio, most scientifically meaningful and most
+transferable framing).
+
+**Candidate axis B (fallback): bandwidth-constrained `ν_crit` at a=0.**
+Cap the energy fraction in k ≤ 2 (e.g. ≤ 50%) as a genome constraint
+enforced at normalization (project down the excess, then renormalize —
+unit-test that both the cap and the energy budget hold after every
+operator). Re-run the six-property check under the constraint. Risk: the
+optimum pins to the arbitrary cap boundary and the landscape inherits its
+value; use only if no a passes.
+
+**Then: rerun the Stage 2 acceptance protocol verbatim** — 3 seeds,
+budget-matched interleaved baseline, same frozen stop criteria, same
+analysis — with the chosen axis, and *also* report the QD-replay
+comparison (analyze_stage2.py), which Stage 2 showed catches failure modes
+the scalar criterion shares. Passing means what Stage 2's criterion always
+meant; failing again with a structured optimum would be a deeper finding
+about GA-vs-random on this problem class and goes to review either way.
+
+**Deliverables:** `stage2_5_sweep.py` (reuse stage1_5_sweep.py machinery +
+`ga/fitness.py`'s bisection), `STAGE_2_5_RESULTS.md` with the six-property
+table per candidate axis, the acceptance rerun logs, a verdict banner
+here, and JOURNAL entries per experiment.
 
 ---
 

@@ -58,3 +58,10 @@ with a numerical artifact.
   genetic algorithm (next milestone).
 - [LOGGING.md](LOGGING.md) — design for run/generation/genome logging, so
   each GA run informs future runs instead of being a one-off black box.
+- [STAGE_1_5_RESULTS.md](STAGE_1_5_RESULTS.md) — fitness-signal viability
+  sweep results: `ν_crit` chosen as the Stage 2 fitness axis, `a_crit`
+  rejected (resolution-unstable).
+- [STAGE_2_RESULTS.md](STAGE_2_RESULTS.md) — GA acceptance runs: NOT MET
+  because `ν_crit` at a=0 has a trivially-located optimum (k=1
+  concentration); harness validated, fitness-axis redesign planned in
+  PLAN.md Stage 2.5.
