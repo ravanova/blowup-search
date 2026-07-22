@@ -53,7 +53,14 @@ from datetime import datetime, timezone
 import numpy as np
 
 from ga.fitness import bisect_critical, classify_run
-from ga.genome import ENERGY_BUDGET, random_genome, realize, shape_descriptors
+from ga.genome import (
+    ENERGY_BUDGET,
+    from_sine_pairs,
+    project_to_sines,
+    random_genome,
+    realize,
+    shape_descriptors,
+)
 from ga.logbook import SCHEMA_VERSION, code_version, working_tree_dirty
 from solver.gclm import solve_gclm
 from solver.spectral_utils import energy, grid
@@ -77,6 +84,13 @@ ENVELOPE_P_RANGE = (0.0, 3.5)
 # Range ladder: start at Stage 2's bisection range; extend only on
 # censored-high (unexpected at a>0 — advection weakens blow-up).
 NU_RANGE_LADDER = ((0.0, 0.1), (0.0, 0.4), (0.0, 1.0))
+
+# Candidate B (PLAN.md Stage 2.5 fallback): nu_crit at a=0 with the k<=2
+# energy fraction capped at normalization. Every shape is represented as a
+# length-32 genome (the GA's actual search space) with the cap applied;
+# structured profiles with no energy above k=2 are infeasible by
+# construction and skipped.
+BANDWIDTH_CAP = {"k_max": 2, "max_frac": 0.5}
 
 BISECTION_BASE = {
     "tolerance": 1e-3,
@@ -111,44 +125,74 @@ N_REFERENCE = 2048  # grid for identity hashes + spectral energy fractions
 
 
 def _spectral_fractions(w_ref):
-    """k=1 and top-4 energy fractions from the reference-grid spectrum —
-    the trivially controllable quantity property 6 gates on."""
+    """k=1, k<=2, and top-4 energy fractions from the reference-grid
+    spectrum — the trivially controllable quantities property 6 gates on
+    (k=1 dominance for candidate A; pinning at the k<=2 cap boundary for
+    candidate B)."""
     w_hat = np.fft.rfft(w_ref)
     e_k = np.abs(w_hat[1:]) ** 2  # k = 1, 2, ...
     total = float(np.sum(e_k))
     e_sorted = np.sort(e_k)[::-1]
     return {
         "energy_k1_frac": float(e_k[0] / total),
+        "energy_low2_frac": float((e_k[0] + e_k[1]) / total),
         "energy_top4_frac": float(np.sum(e_sorted[:4]) / total),
     }
 
 
-def build_shapes():
+def build_shapes(bandwidth_cap=None):
     """Returns a list of shape dicts, each with everything a worker needs
     except the solver grid realization (done per-resolution in the parent,
-    since analytic ICs close over lambdas that do not pickle)."""
+    since analytic ICs close over lambdas that do not pickle).
+
+    Candidate A (bandwidth_cap None): structured ICs stay analytic.
+    Candidate B: EVERY shape becomes a length-GENOME_N genome with the cap
+    applied at normalization — the search space the GA would actually run
+    in — and cap-infeasible structured profiles are skipped."""
     shapes = []
     x_ref = grid(N_REFERENCE)
 
     for ic in build_initial_conditions():
-        w_ref = ic["fn"](x_ref)
-        shapes.append({
+        entry = {
             "label": ic["label"],
             "family": ic["family"],
             "source": "stage1_5",
             "spec": ic["spec"],
-            "energy": float(ic["energy"]),
-            "ic_hash": ic["ic_hash"],
-            "spectral": _spectral_fractions(w_ref),
-            "descriptors": None,
-            "_fn": ic["fn"],
-        })
+        }
+        if bandwidth_cap is None:
+            entry.update(energy=float(ic["energy"]), ic_hash=ic["ic_hash"],
+                         spectral=_spectral_fractions(ic["fn"](x_ref)),
+                         descriptors=None, _fn=ic["fn"])
+        else:
+            try:
+                if ic["spec"]["type"] == "sine":
+                    g = from_sine_pairs(ic["spec"]["pairs"], GENOME_N,
+                                        ENERGY_BUDGET, bandwidth_cap)
+                else:  # bump
+                    g = project_to_sines(ic["fn"], GENOME_N, ENERGY_BUDGET,
+                                         bandwidth_cap)
+            except ValueError:
+                print(f"skipping {ic['label']}: infeasible under bandwidth "
+                      "cap (no energy above k=2)", flush=True)
+                continue
+            w_ref = realize(g, N_REFERENCE, ENERGY_BUDGET, bandwidth_cap)
+            entry.update(
+                spec=dict(ic["spec"], capped_genome={
+                    "coeffs": [float(c) for c in g.coeffs],
+                    "envelope_p": float(g.envelope_p)}),
+                energy=float(energy(w_ref)),
+                ic_hash=hashlib.sha256(w_ref.tobytes()).hexdigest(),
+                spectral=_spectral_fractions(w_ref),
+                descriptors=shape_descriptors(g, ENERGY_BUDGET, bandwidth_cap),
+                _genome=g)
+        shapes.append(entry)
 
     for i in range(N_PRIOR_DRAWS):
         rng = np.random.default_rng(
             np.random.SeedSequence([ROOT_SEED, PRIOR_SPAWN_KEY, i]))
-        g = random_genome(rng, GENOME_N, ENVELOPE_P_RANGE, ENERGY_BUDGET)
-        w_ref = realize(g, N_REFERENCE, ENERGY_BUDGET)
+        g = random_genome(rng, GENOME_N, ENVELOPE_P_RANGE, ENERGY_BUDGET,
+                          bandwidth_cap)
+        w_ref = realize(g, N_REFERENCE, ENERGY_BUDGET, bandwidth_cap)
         shapes.append({
             "label": f"prior(seed={i})",
             "family": "init_prior",
@@ -162,15 +206,15 @@ def build_shapes():
             "energy": float(energy(w_ref)),
             "ic_hash": hashlib.sha256(w_ref.tobytes()).hexdigest(),
             "spectral": _spectral_fractions(w_ref),
-            "descriptors": shape_descriptors(g, ENERGY_BUDGET),
+            "descriptors": shape_descriptors(g, ENERGY_BUDGET, bandwidth_cap),
             "_genome": g,
         })
     return shapes
 
 
-def realize_shape(shape, n_res):
-    if shape["source"] == "init_prior":
-        return realize(shape["_genome"], n_res, ENERGY_BUDGET)
+def realize_shape(shape, n_res, bandwidth_cap=None):
+    if "_genome" in shape:
+        return realize(shape["_genome"], n_res, ENERGY_BUDGET, bandwidth_cap)
     return shape["_fn"](grid(n_res))
 
 
@@ -205,6 +249,8 @@ def run_task(task):
     row = {
         "schema_version": SCHEMA_VERSION,
         "sweep": "stage2_5",
+        "candidate": task["candidate"],
+        "bandwidth_cap": task["bandwidth_cap"],
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "code_version": task["code_version"],
         "code_dirty": task["code_dirty"],
@@ -241,10 +287,13 @@ def run_task(task):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="experiments/stage2_5_sweep.jsonl")
+    ap.add_argument("--out", default=None)
     ap.add_argument("--workers", type=int, default=10)
+    ap.add_argument("--candidate-b", action="store_true",
+                    help="fallback axis: nu_crit at a=0 with the k<=2 "
+                         "bandwidth cap applied to every shape")
     ap.add_argument("--smoke", action="store_true",
-                    help="2 shapes, a=0.7 only, N=128, coarse tol — shakedown")
+                    help="2 shapes, one a, N=128, coarse tol — shakedown")
     ap.add_argument("--allow-dirty", action="store_true")
     args = ap.parse_args()
 
@@ -254,11 +303,17 @@ def main():
                  "to mark rows non-reproducible)")
     code_ver = code_version()
 
-    shapes = build_shapes()
-    a_values, resolutions = A_VALUES, RESOLUTIONS
+    if args.candidate_b:
+        candidate, cap, a_values = "B", BANDWIDTH_CAP, (0.0,)
+        out_path = args.out or "experiments/stage2_5_sweep_b.jsonl"
+    else:
+        candidate, cap, a_values = "A", None, A_VALUES
+        out_path = args.out or "experiments/stage2_5_sweep.jsonl"
+    shapes = build_shapes(cap)
+    resolutions = RESOLUTIONS
     if args.smoke:
-        shapes = [shapes[0], shapes[-1]]  # sin(x) + one prior draw
-        a_values, resolutions = (0.7,), (128,)
+        shapes = [shapes[0], shapes[-1]]
+        a_values, resolutions = (a_values[-1],), (128,)
         BISECTION_BASE["tolerance"] = 0.0125
 
     tasks = []
@@ -267,11 +322,12 @@ def main():
                                       "energy", "ic_hash", "spectral",
                                       "descriptors")}
         for n_res in resolutions:
-            omega0 = realize_shape(shape, n_res)
+            omega0 = realize_shape(shape, n_res, cap)
             for a in a_values:
                 tasks.append({"omega0": omega0, "a": a, "n_res": n_res,
                               "meta": meta, "code_version": code_ver,
-                              "code_dirty": dirty})
+                              "code_dirty": dirty, "candidate": candidate,
+                              "bandwidth_cap": cap})
 
     # Interleave so slow clusters (one shape at one N across a-values) don't
     # serialize at the tail of the pool.
@@ -279,10 +335,10 @@ def main():
           f"{len(resolutions)} resolutions = {len(tasks)} bisections "
           f"on {args.workers} workers", flush=True)
 
-    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     t0 = time.perf_counter()
     done = 0
-    with open(args.out, "a") as out_file:
+    with open(out_path, "a") as out_file:
         if args.workers > 0:
             pool = multiprocessing.get_context().Pool(args.workers)
             it = pool.imap_unordered(run_task, tasks, chunksize=1)
@@ -309,7 +365,7 @@ def main():
                 pool.close()
                 pool.join()
     print(f"\nSweep complete: {done} bisections in "
-          f"{time.perf_counter() - t0:.0f}s -> {args.out}", flush=True)
+          f"{time.perf_counter() - t0:.0f}s -> {out_path}", flush=True)
 
 
 if __name__ == "__main__":

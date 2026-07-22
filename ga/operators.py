@@ -25,7 +25,8 @@ def tournament_select(archive_entries, rng, k=3):
     return max((archive_entries[i] for i in picks), key=lambda e: e["fitness"])
 
 
-def blend_crossover(parent_a, parent_b, rng, energy_budget=ENERGY_BUDGET):
+def blend_crossover(parent_a, parent_b, rng, energy_budget=ENERGY_BUDGET,
+                    bandwidth_cap=None):
     """Arithmetic blend with one random weight for the coefficients and an
     independent one for the envelope exponent p."""
     w = float(rng.uniform(0.0, 1.0))
@@ -34,10 +35,11 @@ def blend_crossover(parent_a, parent_b, rng, energy_budget=ENERGY_BUDGET):
         coeffs=w * np.asarray(parent_a.coeffs) + (1 - w) * np.asarray(parent_b.coeffs),
         envelope_p=wp * parent_a.envelope_p + (1 - wp) * parent_b.envelope_p,
     )
-    return normalize(child, energy_budget)
+    return normalize(child, energy_budget, bandwidth_cap)
 
 
-def mutate(genome, rng, scale, p_scale, p_range, energy_budget=ENERGY_BUDGET):
+def mutate(genome, rng, scale, p_scale, p_range, energy_budget=ENERGY_BUDGET,
+           bandwidth_cap=None):
     """Per-gene Gaussian perturbation, sized relative to the RMS coefficient
     so the pressure is scale-free; p gets its own Gaussian step, clipped to
     the evolvable range. `scale` follows the decaying schedule in config."""
@@ -48,7 +50,7 @@ def mutate(genome, rng, scale, p_scale, p_range, energy_budget=ENERGY_BUDGET):
         envelope_p=float(np.clip(genome.envelope_p + rng.normal(0.0, p_scale),
                                  p_range[0], p_range[1])),
     )
-    return normalize(child, energy_budget)
+    return normalize(child, energy_budget, bandwidth_cap)
 
 
 def mutation_scale(schedule, generation_index):

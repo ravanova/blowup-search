@@ -64,6 +64,9 @@ DEFAULT_CONFIG = {
     "n_generations": 25,
     "fitness_resolution_N": 256,  # Stage 1.5: exact vs N=512 on every nu bisection
     "energy_budget": ENERGY_BUDGET,
+    # Stage 2.5 candidate B: cap on the energy fraction in modes k <= k_max,
+    # enforced at normalization after every operator (None = no constraint).
+    "bandwidth_cap": None,
     "tier1_r2_threshold": 0.98,
     "checkpoint_every_k": 5,
     "ga_operators": {
@@ -171,9 +174,11 @@ class Archive:
 # --- literature baseline (re-sampled at run start, per LOGGING.md) ---------
 
 
-def literature_genomes(n_genome, energy_budget):
+def literature_genomes(n_genome, energy_budget, bandwidth_cap=None):
     """Stage 1.5's structured profiles as genomes on the CURRENT genome
-    length — recomputed here every run start, never stored as arrays."""
+    length — recomputed here every run start, never stored as arrays.
+    Under a bandwidth cap, profiles with no energy above the capped band
+    (e.g. pure sin(x)) are infeasible by construction and skipped."""
     sine_sets = [
         ("sin(x)", [(1, 1.0)]),
         ("sin(2x)", [(2, 1.0)]),
@@ -188,12 +193,18 @@ def literature_genomes(n_genome, energy_budget):
     sine_sets.append(("tail(p=1.5,alt)",
                       [(k, ((-1.0) ** (k + 1)) * k ** (-1.5))
                        for k in range(1, 21)]))
-    out = [(label, from_sine_pairs(pairs, n_genome, energy_budget))
-           for label, pairs in sine_sets]
+    out = []
+    for label, pairs in sine_sets:
+        try:
+            out.append((label, from_sine_pairs(pairs, n_genome, energy_budget,
+                                               bandwidth_cap)))
+        except ValueError:
+            print(f"[lit] skipping {label}: infeasible under bandwidth cap",
+                  flush=True)
     for kappa in (2.0, 5.0):
         out.append((f"bump(kappa={kappa:g})", project_to_sines(
             lambda x, k=kappa: np.sin(x) * np.exp(k * (np.cos(x) - 1.0)),
-            n_genome, energy_budget)))
+            n_genome, energy_budget, bandwidth_cap)))
     return out
 
 
@@ -305,7 +316,8 @@ class Evolver:
         return {
             "genome": random_genome(rng, self.cfg["genome_length_N"],
                                     self.cfg["genome_envelope_p_range"],
-                                    self.cfg["energy_budget"]),
+                                    self.cfg["energy_budget"],
+                                    self.cfg.get("bandwidth_cap")),
             "genome_id": self.next_id("rb" if operator == "baseline_random"
                                       else "g"),
             "operator": operator, "parent_ids": [], "warm_center": None,
@@ -315,6 +327,7 @@ class Evolver:
         ops = self.cfg["ga_operators"]
         scale = mutation_scale(ops["mutation_scale_schedule"], generation_index)
         p_range = self.cfg["genome_envelope_p_range"]
+        cap = self.cfg.get("bandwidth_cap")
         children = []
         for _ in range(self.cfg["population_size"]):
             entries = self.archive.entries
@@ -329,9 +342,9 @@ class Evolver:
                 child = blend_crossover(
                     Genome(np.array(pa["coeffs"]), pa["envelope_p"]),
                     Genome(np.array(pb["coeffs"]), pb["envelope_p"]),
-                    rng, self.cfg["energy_budget"])
+                    rng, self.cfg["energy_budget"], cap)
                 child = mutate(child, rng, scale, ops["p_mutation_scale"],
-                               p_range, self.cfg["energy_budget"])
+                               p_range, self.cfg["energy_budget"], cap)
                 fitter = pa if pa["fitness"] >= pb["fitness"] else pb
                 children.append({
                     "genome": child, "genome_id": self.next_id("g"),
@@ -342,7 +355,7 @@ class Evolver:
             else:
                 child = mutate(Genome(np.array(pa["coeffs"]), pa["envelope_p"]),
                                rng, scale, ops["p_mutation_scale"],
-                               p_range, self.cfg["energy_budget"])
+                               p_range, self.cfg["energy_budget"], cap)
                 children.append({
                     "genome": child, "genome_id": self.next_id("g"),
                     "operator": "mutation", "parent_ids": [pa["genome_id"]],
@@ -367,7 +380,8 @@ def run(config, writer, seed, n_workers):
                       "operator": "baseline_literature", "parent_ids": [],
                       "warm_center": None, "label": label}
                      for label, g in literature_genomes(
-                         config["genome_length_N"], config["energy_budget"])]
+                         config["genome_length_N"], config["energy_budget"],
+                         config.get("bandwidth_cap"))]
         lit_rows = ev.evaluate_and_log(lit_batch, generation_index=None,
                                        is_baseline=True)
         lit_best = max((r["critical_value"] for r in lit_rows

@@ -67,6 +67,57 @@ def test_energy_renormalized_after_every_operator_and_envelope():
     assert not np.allclose(realize(reshaped, 256), realize(g, 256))
 
 
+def test_bandwidth_cap_enforced_after_every_operator():
+    # Stage 2.5 candidate B: energy fraction in k <= k_max capped at
+    # normalization; both the cap AND the energy budget must hold after
+    # every operator (PLAN.md Stage 2.5's mandated unit test).
+    cap = {"k_max": 2, "max_frac": 0.5}
+    p_range = [0.0, 3.5]
+
+    def low_frac(g):
+        b = effective_coeffs(g, ENERGY_BUDGET, cap)
+        return float(np.sum(b[:cap["k_max"]] ** 2) / np.sum(b * b))
+
+    def check(g, label):
+        assert abs(energy(realize(g, 256, ENERGY_BUDGET, cap))
+                   - ENERGY_BUDGET) < 1e-10, f"energy after {label}"
+        assert low_frac(g) <= cap["max_frac"] + 1e-9, f"cap after {label}"
+
+    # A deliberately low-k-heavy genome: sin(x) + a whisper of sin(5x).
+    heavy = normalize(Genome(coeffs=np.array([1.0, 0, 0, 0, 0.05] + [0.0] * 27),
+                             envelope_p=0.0), ENERGY_BUDGET, cap)
+    check(heavy, "normalize")
+    assert abs(low_frac(heavy) - cap["max_frac"]) < 1e-9, \
+        "over-cap genome projects exactly onto the cap boundary"
+    # Idempotent: re-normalizing a capped genome is the identity.
+    again = normalize(heavy, ENERGY_BUDGET, cap)
+    assert np.allclose(again.coeffs, heavy.coeffs, rtol=1e-10)
+
+    g = random_genome(RNG, 32, p_range, ENERGY_BUDGET, cap)
+    check(g, "init")
+    check(mutate(g, RNG, 0.5, 0.3, p_range, ENERGY_BUDGET, cap), "mutation")
+    check(blend_crossover(g, heavy, RNG, ENERGY_BUDGET, cap), "crossover")
+
+    # An under-cap genome passes through the cap unchanged.
+    rough = normalize(Genome(coeffs=np.ones(32), envelope_p=0.0),
+                      ENERGY_BUDGET)
+    assert np.allclose(normalize(rough, ENERGY_BUDGET, cap).coeffs,
+                       rough.coeffs, rtol=1e-10)
+
+    # Pure low-band data cannot satisfy the cap: infeasible, not zeroed.
+    try:
+        normalize(Genome(coeffs=np.array([1.0] + [0.0] * 31), envelope_p=0.0),
+                  ENERGY_BUDGET, cap)
+        raise AssertionError("pure-sin(x) genome must be infeasible under cap")
+    except ValueError:
+        pass
+
+    # literature_genomes skips infeasible profiles instead of crashing.
+    labels = [label for label, _ in literature_genomes(32, ENERGY_BUDGET, cap)]
+    assert "sin(x)" not in labels and "sin(2x)" not in labels
+    assert any(label.startswith("tail") for label in labels)
+
+
 def test_normalize_and_hash_identity():
     # Amplitude-rescaled copies of a shape normalize back to the same
     # coefficients (up to float rounding): amplitude carries no identity.

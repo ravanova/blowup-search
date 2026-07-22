@@ -221,7 +221,8 @@ def evaluate_genome(task):
         "predicate_r2_floor": cfg["bisection"]["predicate_r2_floor"],
         "t_star_cap_factor": cfg["bisection"]["t_star_cap_factor"],
     }
-    omega0 = realize(genome, n_res, cfg["energy_budget"])
+    omega0 = realize(genome, n_res, cfg["energy_budget"],
+                     cfg.get("bandwidth_cap"))
 
     t0 = time.perf_counter()
     best = {"r2": -np.inf, "estimate": None, "series": None}
@@ -299,7 +300,8 @@ def evaluate_genome(task):
         "wall_clock_seconds": time.perf_counter() - t0,
         "win_tier": win_tier.value,
         "best_estimate": best["estimate"],
-        "shape_descriptors": shape_descriptors(genome, cfg["energy_budget"]),
+        "shape_descriptors": shape_descriptors(genome, cfg["energy_budget"],
+                                               cfg.get("bandwidth_cap")),
     }
     if "label" in task:  # baseline_literature profile name
         payload["label"] = task["label"]

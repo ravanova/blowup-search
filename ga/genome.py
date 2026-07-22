@@ -54,33 +54,59 @@ def _envelope(n, p):
     return np.arange(1, n + 1, dtype=float) ** (-float(p))
 
 
-def effective_coeffs(genome, energy_budget=ENERGY_BUDGET):
-    """b_k after the envelope AND the energy renormalization — the
-    coefficients of the field the solver actually integrates."""
+def _apply_bandwidth_cap(b, bandwidth_cap):
+    """Project post-envelope coefficients onto the bandwidth constraint
+    (PLAN.md Stage 2.5 candidate B): the energy fraction in modes
+    k <= cap["k_max"] may not exceed cap["max_frac"]. Excess low-band energy
+    is scaled down (one scalar on the low block); the caller renormalizes
+    total energy afterward. A genome with NO energy above k_max cannot
+    satisfy the cap except as the zero field, so it is infeasible."""
+    if bandwidth_cap is None:
+        return b
+    k_max = int(bandwidth_cap["k_max"])
+    max_frac = float(bandwidth_cap["max_frac"])
+    e_low = float(np.sum(b[:k_max] ** 2))
+    e_high = float(np.sum(b[k_max:] ** 2))
+    if e_low <= max_frac * (e_low + e_high):
+        return b
+    if e_high <= 0.0:
+        raise ValueError(
+            f"genome has no energy above k={k_max}; infeasible under the "
+            f"bandwidth cap (max_frac={max_frac})")
+    b = b.copy()
+    b[:k_max] *= np.sqrt(max_frac / (1.0 - max_frac) * e_high / e_low)
+    return b
+
+
+def effective_coeffs(genome, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
+    """b_k after the envelope, the bandwidth cap (if configured), AND the
+    energy renormalization — the coefficients of the field the solver
+    actually integrates."""
     b = np.asarray(genome.coeffs, dtype=float) * _envelope(genome.n, genome.envelope_p)
-    sum_sq = float(np.sum(b * b))
-    if sum_sq <= 0.0:
+    if float(np.sum(b * b)) <= 0.0:
         raise ValueError("genome encodes the zero field; cannot normalize")
+    b = _apply_bandwidth_cap(b, bandwidth_cap)
+    sum_sq = float(np.sum(b * b))
     return b * np.sqrt(energy_budget / ((np.pi / 2.0) * sum_sq))
 
 
-def normalize(genome, energy_budget=ENERGY_BUDGET):
-    """Scale the raw coeffs (one scalar multiply) so the POST-envelope energy
-    equals the budget. Applied after EVERY operator (PLAN.md's fixed-energy-
-    budget constraint); after it, effective_coeffs is coeffs * k^{-p} up to
-    float rounding."""
-    coeffs = np.asarray(genome.coeffs, dtype=float)
-    b = coeffs * _envelope(genome.n, genome.envelope_p)
-    sum_sq = float(np.sum(b * b))
-    if sum_sq <= 0.0:
-        raise ValueError("genome encodes the zero field; cannot normalize")
-    scale = np.sqrt(energy_budget / ((np.pi / 2.0) * sum_sq))
-    return Genome(coeffs=coeffs * scale, envelope_p=float(genome.envelope_p))
+def normalize(genome, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
+    """Rescale the raw coeffs so the POST-envelope field satisfies the
+    bandwidth cap (if configured) and the energy budget. Applied after EVERY
+    operator (PLAN.md's fixed-energy-budget constraint, extended by the
+    Stage 2.5 candidate-B cap). Without a cap this is one scalar multiply;
+    with a cap the low block gets its own scalar, folded back into the raw
+    coeffs so the result is idempotent: effective_coeffs of the returned
+    genome is its coeffs * k^{-p} up to float rounding."""
+    b = effective_coeffs(genome, energy_budget, bandwidth_cap)
+    return Genome(coeffs=b * np.arange(1, genome.n + 1, dtype=float)
+                  ** float(genome.envelope_p),
+                  envelope_p=float(genome.envelope_p))
 
 
-def realize(genome, n_grid, energy_budget=ENERGY_BUDGET):
+def realize(genome, n_grid, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
     """Evaluate the genome's field on the solver grid(n_grid)."""
-    b = effective_coeffs(genome, energy_budget)
+    b = effective_coeffs(genome, energy_budget, bandwidth_cap)
     if genome.n > n_grid // 3:
         raise ValueError(
             f"genome has modes up to k={genome.n} but the 2/3-dealiased band "
@@ -90,16 +116,17 @@ def realize(genome, n_grid, energy_budget=ENERGY_BUDGET):
     return np.sin(np.outer(x, np.arange(1, genome.n + 1))) @ b
 
 
-def random_genome(rng, n, p_range, energy_budget=ENERGY_BUDGET):
+def random_genome(rng, n, p_range, energy_budget=ENERGY_BUDGET,
+                  bandwidth_cap=None):
     """Init/baseline draw: c_k ~ N(0,1), p ~ U(p_range), normalized."""
     return normalize(
         Genome(coeffs=rng.standard_normal(n),
                envelope_p=float(rng.uniform(*p_range))),
-        energy_budget,
+        energy_budget, bandwidth_cap,
     )
 
 
-def from_sine_pairs(pairs, n, energy_budget=ENERGY_BUDGET):
+def from_sine_pairs(pairs, n, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
     """Genome from explicit (k, c_k) sine pairs — how baseline_literature
     profiles are re-sampled onto the current genome length at run start
     (LOGGING.md schema #3). Modes above n are truncated; p=0 so the raw
@@ -108,10 +135,11 @@ def from_sine_pairs(pairs, n, energy_budget=ENERGY_BUDGET):
     for k, c in pairs:
         if 1 <= k <= n:
             coeffs[k - 1] += c
-    return normalize(Genome(coeffs=coeffs, envelope_p=0.0), energy_budget)
+    return normalize(Genome(coeffs=coeffs, envelope_p=0.0), energy_budget,
+                     bandwidth_cap)
 
 
-def project_to_sines(fn, n, energy_budget=ENERGY_BUDGET):
+def project_to_sines(fn, n, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
     """Project an odd analytic profile onto the first n sine modes (exact
     sine transform on a fine grid) — re-sampling for non-bandlimited
     literature profiles like the localized bump pair."""
@@ -121,15 +149,16 @@ def project_to_sines(fn, n, energy_budget=ENERGY_BUDGET):
     w_hat = np.fft.rfft(w)
     # For real odd data, w_hat[k] = -i * (n_fine/2) * b_k.
     coeffs = -2.0 * np.imag(w_hat[1:n + 1]) / n_fine
-    return normalize(Genome(coeffs=coeffs, envelope_p=0.0), energy_budget)
+    return normalize(Genome(coeffs=coeffs, envelope_p=0.0), energy_budget,
+                     bandwidth_cap)
 
 
-def shape_descriptors(genome, energy_budget=ENERGY_BUDGET):
+def shape_descriptors(genome, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
     """The three logged descriptors (LOGGING.md schema #3), computed from the
     effective coefficients: n_sign_changes, spectral_tail_slope (the MAP-
     Elites regularity axis and the frequency-cheating guardrail),
     energy_top_k_frac."""
-    b = effective_coeffs(genome, energy_budget)
+    b = effective_coeffs(genome, energy_budget, bandwidth_cap)
     n = len(b)
 
     x = grid(_DESCRIPTOR_GRID_N)
