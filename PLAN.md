@@ -716,6 +716,49 @@ symmetry class, or move to Stage 4).
 > [NONGENERICITY_RESULTS.md](NONGENERICITY_RESULTS.md). Scope decision pending
 > review; recommendation is not to spend GA compute on this axis regardless.
 
+## Stage 3.6 — Route A, Phase 0: rough-data spike (NEXT — decided 2026-07-23)
+
+> **Status: the next action.** Decided on review after Stage 3.5: the pursuit
+> continues via [CLAY_ROADMAP.md](CLAY_ROADMAP.md) **Route A** (switch to a
+> model where non-generic blow-up is provable — 2D Boussinesq / C^{1,α} De
+> Gregorio), and its **Phase 0** is executed here on the existing 1D gCLM
+> solver first. Rationale: never debug a new solver and a new
+> non-generic-exponent measurement at once — build and validate the
+> *measurement* on the substrate with known answers, then port a trusted method
+> to the expensive 2D solver in Phase 1.
+
+**Goal:** produce two *transferable* things and one honest verdict, cheaply, on
+the validated 1D solver.
+
+**Deliverables:**
+1. A genuine **C^{1,α} rough-data genome mode.** The current `k^{-p}` envelope
+   (ga/genome.py) is the seed but only reaches smooth/spectrally-decaying
+   shapes; add a construction that represents limited-regularity (Hölder)
+   profiles directly (e.g. a parameterized `C^{1,α}` profile family, or a
+   coefficient law giving a prescribed Hölder exponent), unit-tested for the
+   intended regularity.
+2. A **fine-N non-generic-exponent measurement:** extend `nongenericity_sweep.py`
+   (or a sibling) to run rough-data shapes near `a=1` at **N ∈ {1024, 2048,
+   4096}** and report whether the fitted exponent α (or a self-similar-profile
+   quality score) is *resolution-convergent* or *rails at grid scale*
+   (the Stage 3.5 failure mode). Reuse `win_condition` + the drift guard.
+
+**Pre-committed gate (do not soften mid-run):**
+- **α converges** at N=2048/4096 → surprise: gCLM is *not* exhausted; a novel
+  1D candidate may be directly reachable. **Re-plan before building any 2D
+  solver** (this would reopen the cheap route).
+- **α still rails** (expected, per Stage 3.5) → gCLM confirmed exhausted for
+  smooth-*and*-rough data at reachable N. **Stop 1D work**; carry the
+  *methodology and the rough-data representation principle* (not the 1D code)
+  into Phase 1 (2D Boussinesq). A Phase-0 negative is **informative, not a
+  kill-signal for Phase 1** — Boussinesq blow-up is a different mechanism.
+- **Guardrail:** hard ~2-day time-box; no "try a few more shapes" third branch.
+
+**Acceptance for the phase itself:** the rough-data genome passes its regularity
+unit tests, the fine-N probe runs clean (drift-guarded), and the gate returns a
+clear converges/rails verdict written up in a short `STAGE_3_6_RESULTS.md` +
+JOURNAL entry. Then proceed per the gate.
+
 ## Stage 4 — Scale-up to axisymmetric 3D Euler (stretch goal, unscheduled)
 
 Once the 1D pipeline reliably produces Tier 2 candidates, repeat the same

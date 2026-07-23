@@ -3,6 +3,27 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## DECISION RECORD (not an experiment) — 2026-07-23 — Route A, Phase 0 is next
+
+Post-Stage-3.5 review with the user settled the forward path. Decision: pursue
+Clay via [CLAY_ROADMAP.md](../CLAY_ROADMAP.md) **Route A** (switch to a model
+where non-generic blow-up is provable — 2D Boussinesq / C^{1,α} De Gregorio),
+and fold the former "Route C" (cheap rough-data + fine-N gCLM probe) into it as
+**Phase 0** rather than running it as a parallel detour.
+
+Why Phase 0 first, not a leap to the 2D solver: two unknowns (a new solver AND a
+new non-generic-exponent measurement) must not be debugged simultaneously — on a
+weird rough-data blow-up you couldn't tell solver bug from measurement bug.
+Build/validate the *measurement* on the 1D substrate where the answers are known
+(CLM analytic T*, De Gregorio literature), then port a trusted method to 2D.
+Phase 0's real value is the transferable method + rough-data genome + an honest
+"is gCLM exhausted?" check — NOT a gCLM science result (Stage 3.5 makes a
+converged non-generic exponent unlikely). What transfers to Phase 1 is the
+method and the representation *principle*, not the 1D genome code; a Phase-0
+negative is informative, not a kill-signal (Boussinesq is a different
+mechanism). Hard 2-day time-box + pre-committed converge/rail gate so it can't
+become open-ended 1D tinkering. Concrete spec: PLAN.md Stage 3.6.
+
 ## nongenericity_sweep (7b… post-Stage-3) — 2026-07-23 — NO VIABLE AXIS
 
 Why configured this way: review question after Stage 3 — the GA edge is at
