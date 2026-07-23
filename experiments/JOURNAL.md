@@ -3,6 +3,39 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## DECISION RECORD + boussinesq Gate 1a — 2026-07-23 — Route A Phase 1 begins
+
+Post-Stage-3.6 review settled the scope: **commit to Route A Phase 1** (the
+multi-week 2D-solver build), and — within Boussinesq — build around the
+**Hou–Luo symmetry-wall geometry** (both decisions confirmed with the user). Why
+Hou–Luo over the Elgindi-type C^{1,α} no-boundary variant: it is the setting of
+the *computer-assisted proof* (Chen–Hou 2022) → best Tier-3/Route-D handoff; it
+has a gold-standard numerical benchmark (Luo–Hou 2014) to validate against; and
+its smooth-data singularity is robust, so the fitness is far less likely to rail
+the viability gate than gCLM's non-generic axis did. The rough-data genome still
+enters later as a C^{1,α} boundary-data variant. Full plan: PHASE1_PLAN.md.
+
+**Gate 1a (doubly-periodic solver core) — PASS.** `solver/boussinesq.py`: full
+fft2 pseudo-spectral 2D Boussinesq (w_t + u·∇w = th_x + νΔw; th transported;
+Biot–Savart Δψ=w), RK4 + exact integrating-factor viscosity, 2/3 dealiasing,
+advective CFL — the gCLM method lifted to 2D verbatim, same `SolverResult`
+contract plus theta_final. Viscosity/thermal-diffusivity and the artifact guards
+(∫w, ∫th conservation; kinetic-energy balance d/dt½∫|u|² = ∫vθ − ν∫w²) are
+first-class from line one.
+
+Validated by an exact analytic ladder (`test_solver_boussinesq.py`, 6/6), each
+isolating one unknown: biot_savart 3.9e-16, rhs_terms (advection assembly +
+buoyancy th_x vs hand-computed analytic RHS) 9.3e-15, scalar_transport (frozen-u
+exact translate) 5.4e-11, viscous_decay 3.0e-15, taylor_green (w=e^{−2νt}sinx
+siny exact solution — advection self-cancels) 5.3e-15, conservation 1.2e-16.
+Everything at or near machine precision; the RK4-time-integration checks
+(transport 5e-11, Taylor–Green 5e-15) confirm the coupled dynamics too. What a
+human noticed: the Taylor–Green check is the strong one — it forces the
+advection term and the Biot–Savart velocity to cancel exactly at machine scale,
+which a sign error or a mis-indexed kx/ky mesh would not survive. Next (STOP
+for review first): Gate 1b — add the symmetry-wall and reproduce the Luo–Hou
+growth signature.
+
 ## DECISION RECORD (not an experiment) — 2026-07-23 — Route A, Phase 0 is next
 
 Post-Stage-3.5 review with the user settled the forward path. Decision: pursue
