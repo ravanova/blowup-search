@@ -9,6 +9,7 @@ venv/
 # not source. Tracked candidates get promoted explicitly, not via git.
 experiments/run_logs/
 experiments/*.jsonl
+experiments/*.out
 
 # OS / editor
 .DS_Store

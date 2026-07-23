@@ -80,11 +80,30 @@ rejects it (the anti-self-deception property, in 2D).
 principle; reuse MAP-Elites, budget-matched acceptance, win-condition tiers,
 resolution study, single-writer logging conceptually.
 
+**Resolution de-risk spike [DONE, inserted before Gate 3].** Before building the
+genome, a cheap fine-N probe tested the dominant risk — that the Hou–Luo
+singularity is unresolvable on a uniform grid. Verdict **STABLE**
+(`PHASE1_SPIKE_RESULTS.md`): a fixed-window growth-rate fitness converges across
+N=128→1024 for smooth growers (search is viable), but (i) the blow-up exponent/T\*
+rails → uniform-grid Tier-2 confirmation of the true singularity is out of reach
+(needs AMR / Route D), and (ii) rough C^{0,α} data is under-resolved from t≈0 →
+the rough-data axis is resolution-starved on uniform grids. Recalibrated plan:
+proceed on **smooth data** with a **resolution-stable growth-based fitness**;
+near-term deliverable is a shape→growth QD map with **Tier-1** candidates, not
+Tier-2-confirmed singularities.
+
+**Gate 3 — 2D genome.** A 2D genome over smooth Hou–Luo-subspace fields (parities
+enforced), reusing MAP-Elites, budget-matched acceptance, single-writer logging.
+The rough-data mode exists (`ga/genome2d.py`) but is deprioritised per the spike.
+
 **Gate 4 — NON-NEGOTIABLE viability gate.** Re-run the six-property viability
-gate on the new Boussinesq fitness BEFORE any GA compute. Commit to a full GA
-campaign only if all six pass. If it rails like gCLM's non-genericity axis did,
-STOP — that is a finding, not a push-harder signal. (Stages 2.5 / 3.5 / 3.6 are
-why this gate is non-negotiable.)
+gate on the new Boussinesq fitness BEFORE any GA compute. The spike already
+cleared the dominant (resolution-stability) property for the growth-rate proxy;
+Gate 4 must still confirm the other five — especially that the chosen axis tracks
+blow-up PROPENSITY (a ν_crit-analog is the prime candidate; the early-window
+growth rate alone is resolution-stable but not automatically blow-up-predictive —
+smooth_mild has higher early g yet saturates). Commit to a full GA campaign only
+if all six pass. If it rails, STOP — a finding, not a push-harder signal.
 
 **Gate 5 — Route D.** On a Tier-2 novel candidate in this provable model, open
 validated-numerics / a domain-expert collaboration — the actual proof leg, out

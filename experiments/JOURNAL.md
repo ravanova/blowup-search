@@ -3,6 +3,50 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## phase1_resolution_spike (4741cda) — 2026-07-23 — de-risk: STABLE
+
+Why run BEFORE the Gate 3 genome (a reorder, confirmed with the user): the
+dominant risk to a Tier-2 result in 2D Boussinesq is not physics but RESOLUTION.
+Unlike 1D gCLM (fully resolved at N≤4096), the Hou–Luo singularity is a corner
+collapse Luo–Hou needed AMR (~1e12 effective) to track; on a uniform grid the
+vorticity sharpens below grid scale before T*. So a cheap probe (hours) answers
+"is there a resolution-stable fitness signal at feasible N?" before weeks of
+genome/GA — exactly the Stages 2.5/3.5/3.6 de-risk-before-compute discipline.
+
+Instrument added first (`solver` tail_guard): stop "under_resolved" when
+enstrophy piles near the 2/3 dealias cut. A human noticed the key trap in
+calibration: conservation drift stays ~1e-6 even when small scales are garbage
+(∫w and energy-balance are robust to under-resolution), so drift is the WRONG
+trust signal; the spectral tail is the right one. The solver now refuses to
+report dynamics past that point.
+
+Verdict STABLE (pre-committed gate in analyze_phase1_spike.py; full write-up
+PHASE1_SPIKE_RESULTS.md). The fixed-window log-growth-rate g CONVERGES across
+N=128→1024: smooth_sharp g→0.609 (finest-two 0.01%), smooth_mild g→1.239
+(0.000%). Four findings: (1) resolution-stable growth fitness exists → search
+viable; (2) the resolved window EXTENDS with N (amp_res 29→101×), so amp_res is
+NOT a stable fitness but g is; (3) the blow-up EXPONENT/T* rails (a 2.45→1.20)
+— uniform-grid Tier-2 confirmation of the true singularity is out of reach, the
+resolution wall quantified; (4) rough C^{0,h} data is under-resolved from t≈0
+(t_res 0.03–0.07 at all N) — the rough-data axis is resolution-starved on
+uniform grids.
+
+A gate-logic bug worth recording (fixed transparently, not post-hoc softening):
+the first cut used STRICT per-step monotonicity for "converging", which gave a
+false RAILS on g-sequences agreeing to <0.01% because of rounding-level (1e-4)
+wobble. Replaced with "every successive relative change ≤ the pre-committed 10%
+tolerance" — the honest reading of "settles across resolution", stronger than a
+finest-two check and immune to rounding noise. The 10% threshold itself was
+never moved (it passes by ~1000×).
+
+Consequence (recalibrated, honest): PROCEED to Gate 3/4 on SMOOTH data with a
+resolution-stable growth-based fitness (a ν_crit-analog is the prime candidate,
+NOT amp_res); the near-term deliverable is a shape→growth QD map with Tier-1
+candidates, NOT Tier-2-confirmed singularities (those need AMR / Route D). Gate 4
+must still resolve which resolution-stable axis actually tracks blow-up
+PROPENSITY — note smooth_mild has higher early g yet saturates, smooth_sharp
+lower g yet blows up. Drop (or explicitly scope out) the rough-data axis.
+
 ## DECISION RECORD + boussinesq Gate 1a — 2026-07-23 — Route A Phase 1 begins
 
 Post-Stage-3.6 review settled the scope: **commit to Route A Phase 1** (the
