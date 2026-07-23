@@ -3,6 +3,38 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## nongenericity_sweep (7b… post-Stage-3) — 2026-07-23 — NO VIABLE AXIS
+
+Why configured this way: review question after Stage 3 — the GA edge is at
+a=0.7 but every confirmed blow-up there is generic (α=1.000), whereas the novel
+Tier-3-provable target is non-generic (α≠1) near a=1 with rough data. Sweep
+measured |α−1| inviscid across a∈{0.7,0.9,1.0} to see if the edge regime and
+the novel regime overlap, before spending any GA compute. Amp raised 100→1e3
+so α is fittable (100× gave R²=−1.7 garbage in the marginal regime in the
+pre-build probe); max_steps capped at 300k so no-blow-up/near-critical runs
+bail instead of burning t_max. p-regime question folded into the analysis via
+the 20 init-prior draws' native envelope_p (they already span [0.02, 3.30]).
+
+What a human noticed skimming the results:
+
+- The answer is a clean "disjoint," and sharper than expected. At a=0.7 α is
+  pinned at 1.00 for ALL 37 blow-ups including the p=0.02 (nearly white) draw —
+  Spearman(|α−1|, p) = −0.07, i.e. roughness does nothing to the exponent
+  there. Whatever the GA evolves at a=0.7, it's generic CLM. Independently
+  re-confirms Stage 3's α=1.000 across the whole roster, not just the elites.
+- a=0.9 is the tell: non-genericity DOES appear (α up to 3.0) but it's pure
+  grid artifact — 15/40 well-def flips, and the biggest |α−1| shapes rail to
+  α=3.0 at N=256 then collapse to 0.30–0.60 at N=512 (max Δα=2.7). This is
+  literally the Stage 1.5 a_crit "near-critical advection collapse scale"
+  instability, now on the exponent. Wrote it up as such.
+- a=1.0: 0/40 blow up (34–35 clean no_blowup, rest stiff step-cap). Dead axis,
+  as Stage 2.6 already found for smooth data — restated with the WIN_CONDITION
+  non-goal caveat (absence of signal ≠ regularity).
+- Net: the gate earned its keep — 240 runs / ~2 min killed a GA campaign that
+  would have been optimizing resolution noise. The three forward options
+  (rough+fine-N; switch to 2D Boussinesq; bank the 1D pipeline) go to review;
+  NONGENERICITY_RESULTS.md records them.
+
 ## stage3-resolution-20260723T082807 (57b4a88) — 2026-07-23 — TIER 2: 18/18 CONFIRMED
 
 Why configured this way: studied the top-3 elites per acceptance seed (9

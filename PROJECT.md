@@ -89,3 +89,11 @@ with a numerical artifact.
   validation + a Tier-2-backed shape→resistance map), **not** a novel
   De Gregorio blow-up. The near-term Stages 1–3 milestone is complete;
   Stage 4 (3D Euler) is unscheduled.
+- [NONGENERICITY_RESULTS.md](NONGENERICITY_RESULTS.md) — **pivot de-risking:
+  NO viable non-genericity axis.** A 240-run gate ([nongenericity_sweep.py](nongenericity_sweep.py))
+  shows the GA edge (a=0.7, generic α≡1, resolution-exact) and the novel
+  α≠1 target are DISJOINT: non-genericity appears only at a=0.9 and only as a
+  grid artifact (15/40 resolution flips, α railing 3.0↔0.3), a=1.0 is a dead
+  axis. Evolving for non-genericity on gCLM is not viable at N∈{256,512}.
+  Forward options (rough+fine-N; switch to 2D Boussinesq; bank the 1D
+  pipeline) are a scope decision for review.

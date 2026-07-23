@@ -695,6 +695,27 @@ symmetry class, or move to Stage 4).
 
 ---
 
+## Stage 3.5 — Non-genericity axis de-risking (exploratory, post-Stage-3 review)
+
+> **RUN (2026-07-23) — NO VIABLE AXIS.** Review after Stage 3 asked whether
+> the GA edge (a=0.7, but every confirmed blow-up there is *generic*, α=1.000)
+> overlaps the scientifically novel target (a *non-generic*, α≠1, De
+> Gregorio-type singularity — the only kind whose Tier-3 proof would be a
+> contribution rather than a reproduction). A 240-run gate
+> ([nongenericity_sweep.py](nongenericity_sweep.py) +
+> [analyze_nongenericity.py](analyze_nongenericity.py)) measured the |α−1|
+> axis inviscid across a ∈ {0.7, 0.9, 1.0} × N ∈ {256, 512} over the 40-shape
+> roster. Result: **disjoint.** a=0.7 is α≡1 for all regularity classes
+> (dead-flat axis, resolution-exact); a=0.9 shows non-genericity only as a
+> resolution artifact (15/40 well-def flips, α railing 3.0↔0.3, max Δα=2.7 —
+> the Stage 1.5 a_crit instability on the exponent); a=1.0 is a dead axis
+> (0/40 blow up). **A gCLM non-genericity fitness is not searchable at these
+> resolutions** — a GA would optimize grid noise. Full analysis + the three
+> forward options (rough data + finer N; switch to 2D Boussinesq where
+> provable non-generic blow-ups live; or bank the validated 1D pipeline):
+> [NONGENERICITY_RESULTS.md](NONGENERICITY_RESULTS.md). Scope decision pending
+> review; recommendation is not to spend GA compute on this axis regardless.
+
 ## Stage 4 — Scale-up to axisymmetric 3D Euler (stretch goal, unscheduled)
 
 Once the 1D pipeline reliably produces Tier 2 candidates, repeat the same
