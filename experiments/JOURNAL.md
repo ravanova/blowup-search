@@ -3,6 +3,50 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## phase1_axis_screen (9033e6f) — 2026-07-23 — route fitness on ν_crit-analog
+
+Why run BEFORE picking a fitness axis: the spike proved a resolution-stable
+growth signal exists but flagged the confound — the windowed rate g is stable yet
+NOT blow-up-predictive (smooth_mild has higher g yet saturates; smooth_sharp
+lower g yet blows up). Rather than pick the axis on priors, a human asked the
+right question: use the spike's two LABELED ground-truth ICs as a cheap
+discriminator. Sharp BLOWS UP, mild SATURATES — so the routing question is simply
+which candidate axis orders sharp>mild>control (propensity) AND is
+resolution-stable. Necessary-not-sufficient screen (~an hour), not the gate.
+
+Three axes at N=256,512 on {smooth_sharp, smooth_mild, euler_control}: (1)
+ν_crit-analog = viscosity at which net resolved amplification crosses 2× (κ=0,
+confirmed with the user; amplification is the blow-up currency, same predicate as
+ga.fitness v3); (2) persistence = growth acceleration over the resolved window
+(free from the ν=0 run); (3) g_baseline as the known-wrong-direction sanity axis.
+
+The smoke (N=128) earned its keep BEFORE the committed run: the first ν_crit used
+a windowed-slope zero-crossing, and smoke exposed it as contaminated — a
+net-DECAYING mild run (amp=0.5) still showed a positive in-window slope, censoring
+it in the wrong direction. Switched to the amplification boundary (monotone in ν,
+cannot be fooled). A human-style discipline point: the screen caught its own
+design bug because the labeled truth made the wrong answer visible.
+
+Verdict (pre-committed gate): ν_crit is the SOLE survivor. Direction sharp
+0.6519 ≫ mild 0.0483 > control 0.0000, and — the headline — ν_crit is IDENTICAL
+to four decimals at N=128/256/512 (the amp-crossing ν is set by the dynamics, not
+the grid). persistence FAILS on direction (the hard-saturating mild, persist
+−2.69, sits BELOW the flat control ≈0 — it cannot rank a strong decelerator
+against a non-grower; NOT a stability failure, correcting an earlier eyeball).
+g_baseline reproduces the spike's mild>sharp (the built-in sanity check that the
+discriminator is trustworthy). N=512 growers were ~32 min each (a single N=512
+solve to t_max=4 is ~4 min × ~12 bisection runs); euler_control censored low in 1
+run.
+
+Honest scope: this settles ROUTING only. It clears the direction +
+resolution-stability legs on 3 ICs; it does NOT clear the full six-property Gate
+4. The big remaining risk is property 6 (non-trivial optimum) — the exact
+property that killed gCLM's ν_crit (trivial k=1 collapse, STAGE_2_5). The Hou–Luo
+singularity being robust smooth-data (not non-generic) is the REASON to expect
+property 6 to fare better, but that's a hypothesis Gate 4 tests, not a result.
+Next: Gate 3 genome wiring ν_crit(amp≥2×, κ=0, tail_guard window), then the
+non-negotiable Gate 4. Full write-up: PHASE1_AXIS_SCREEN_RESULTS.md.
+
 ## phase1_resolution_spike (4741cda) — 2026-07-23 — de-risk: STABLE
 
 Why run BEFORE the Gate 3 genome (a reorder, confirmed with the user): the
