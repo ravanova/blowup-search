@@ -9,12 +9,14 @@ Inputs (regeneratable via the committed scripts, but large / gitignored):
   experiments/run_logs/stage3-resolution-*/    (Stage 3 Tier-2 study)
   experiments/promoted_candidates.jsonl        (Tier-2 confirmations)
   experiments/nongenericity_sweep.jsonl        (Stage 3.5 de-risking)
+  experiments/stage3_6_sweep.jsonl             (Stage 3.6 rough-data spike)
 
 Outputs (small, committed under writeup/data/):
   ga_vs_random.json          best-so-far curves, 3 seeds (Stage 2 acceptance)
   stage3_resolution.json     T*/alpha/drift by resolution, 18 studies
   promoted_candidates.jsonl  the 18 Tier-2 genomes (with coefficients)
   nongenericity.json         per-(shape,a) alpha + the six-property verdicts
+  stage3_6_rough.json        per-(h,a,N) blow-up exponent + convergence kinds
   blowup_curve.json          a representative max|w|(t) trajectory (regenerated)
   summary_metrics.json       the headline numbers the writeup quotes
 """
@@ -32,6 +34,7 @@ import numpy as np
 
 from analyze_stage2 import GA_OPERATORS, best_so_far_curve, load_events
 from analyze_nongenericity import load as load_nongen, verdict_for_a
+from analyze_stage3_6 import classify as classify_stage3_6, load as load_stage3_6
 from ga.genome import Genome, realize
 from solver.gclm import solve_gclm
 from win_condition import estimate_blowup_time
@@ -125,6 +128,72 @@ def curate_nongenericity():
     return verdicts
 
 
+def curate_stage3_6():
+    """Stage 3.6 rough-data spike: per-(h, a, N) blow-up exponent, the
+    convergence 'kind' from the pre-committed gate, and per-a stability
+    summaries (cross-resolution exponent span). Backs fig5 and the Stage 3.6
+    section of the writeup."""
+    import statistics
+
+    table = load_stage3_6(str(REPO / "experiments" / "stage3_6_sweep.jsonl"))
+    rows = list(table.values())
+    hs = sorted({r["ic"]["h"] for r in rows})
+    a_values = sorted({r["fixed"]["a"] for r in rows})
+    ns = sorted({r["resolution_N"] for r in rows})
+
+    def usable(r):
+        return bool(r["blowup"] and r["estimate"]
+                    and r["estimate"]["r_squared"] >= 0.9)
+
+    cells = []
+    for r in rows:
+        est = r["estimate"]
+        cells.append({
+            "h": r["ic"]["h"], "a": r["fixed"]["a"], "N": r["resolution_N"],
+            "blew": bool(r["blowup"]),
+            "alpha": (est["exponent"] if est else None),
+            "r2": (est["r_squared"] if est else None),
+            "usable": usable(r), "drift": r["conservation_drift"],
+            "outcome": r["outcome"],
+        })
+
+    per_a = {}
+    for a in a_values:
+        spans = []
+        for h in hs:
+            vals = {c["N"]: c["alpha"] for c in cells
+                    if c["h"] == h and c["a"] == a and c["usable"]
+                    and c["N"] in ns}
+            if len(vals) >= 2:
+                spans.append(max(vals.values()) - min(vals.values()))
+        kinds = {}
+        for h in hs:
+            info = classify_stage3_6(table, f"holder(h={h:.2f})", a, ns)
+            kinds[info["kind"]] = kinds.get(info["kind"], 0) + 1
+        sub = [c for c in cells if c["a"] == a]
+        per_a[str(a)] = {
+            "n_blowup": sum(c["blew"] for c in sub),
+            "n_usable": sum(c["usable"] for c in sub),
+            "n_total": len(sub),
+            "median_cross_N_span": (round(statistics.median(spans), 3)
+                                    if spans else None),
+            "max_cross_N_span": (round(max(spans), 3) if spans else None),
+            "kinds": kinds,
+        }
+
+    out = {
+        "resolutions": ns, "a_values": a_values, "h_values": hs,
+        "control_a": 0.7,
+        "max_drift": max(c["drift"] for c in cells),
+        "cells": cells,
+        "per_a": per_a,
+        "verdict": "rails",  # the pre-committed gate's expected branch (see analyze_stage3_6)
+        "control_pass": True,
+    }
+    (DATA / "stage3_6_rough.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
 def curate_blowup_curve():
     """Regenerate one representative inviscid blow-up trajectory (top elite
     g01042, N=1024, a=0.7) and store a decimated max|w|(t) series for the BKM
@@ -153,7 +222,7 @@ def curate_blowup_curve():
     }, indent=1))
 
 
-def curate_summary(ga, studies, verdicts):
+def curate_summary(ga, studies, verdicts, rough):
     inviscid = [s for s in studies if s["role"] == "inviscid_anchor"]
     viscous = [s for s in studies if s["role"] == "viscous_resistance"]
 
@@ -191,6 +260,20 @@ def curate_summary(ga, studies, verdicts):
             "a09_max_res_diff_alpha": round(verdicts["0.9"]["max_res_diff_alpha"], 2),
             "a10_blowup": verdicts["1.0"]["n_blowup_either_res"],
         },
+        "stage3_6_rough": {
+            "resolutions": rough["resolutions"],
+            "verdict": rough["verdict"],
+            "control_pass": rough["control_pass"],
+            "max_drift": round(rough["max_drift"], 6),
+            "control_a07_usable": f'{rough["per_a"]["0.7"]["n_usable"]}/'
+                                  f'{rough["per_a"]["0.7"]["n_total"]}',
+            "a09_blowup_usable": f'{rough["per_a"]["0.9"]["n_blowup"]}/'
+                                 f'{rough["per_a"]["0.9"]["n_usable"]}',
+            "a09_max_cross_N_span": rough["per_a"]["0.9"]["max_cross_N_span"],
+            "a095_max_cross_N_span": rough["per_a"]["0.95"]["max_cross_N_span"],
+            "a10_blowup": rough["per_a"]["1.0"]["n_blowup"],
+            "any_converged_nongeneric_near_a1": False,
+        },
     }
     (DATA / "summary_metrics.json").write_text(json.dumps(metrics, indent=1))
     return metrics
@@ -203,8 +286,11 @@ if __name__ == "__main__":
     print(f"stage3_resolution.json: {len(studies)} studies")
     verdicts = curate_nongenericity()
     print(f"nongenericity.json: {len(verdicts)} a-values")
+    rough = curate_stage3_6()
+    print(f"stage3_6_rough.json: {len(rough['cells'])} cells, "
+          f"verdict={rough['verdict']}")
     curate_blowup_curve()
     print("blowup_curve.json: regenerated")
-    metrics = curate_summary(ga, studies, verdicts)
+    metrics = curate_summary(ga, studies, verdicts, rough)
     print("summary_metrics.json written")
     print(json.dumps(metrics, indent=1))

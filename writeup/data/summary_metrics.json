@@ -43,5 +43,21 @@
   "a09_welldef_flips": 15,
   "a09_max_res_diff_alpha": 2.7,
   "a10_blowup": 0
+ },
+ "stage3_6_rough": {
+  "resolutions": [
+   1024,
+   2048,
+   4096
+  ],
+  "verdict": "rails",
+  "control_pass": true,
+  "max_drift": 0.000194,
+  "control_a07_usable": "18/18",
+  "a09_blowup_usable": "18/18",
+  "a09_max_cross_N_span": 1.95,
+  "a095_max_cross_N_span": 2.7,
+  "a10_blowup": 0,
+  "any_converged_nongeneric_near_a1": false
  }
 }

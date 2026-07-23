@@ -30,6 +30,7 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig2_resolution_convergence.png` | Stage 3 — T\* converges with resolution for all 9 elites |
 | `fig3_nongenericity.png` | Stage 3.5 — the GA edge and the novel α≠1 target are disjoint |
 | `fig4_blowup_curve.png` | a confirmed blow-up: max\|ω\| → ∞ and the BKM 1/M→0 diagnostic |
+| `fig5_rough_rails.png` | Stage 3.6 — genuine `C^{0,h}` rough data still rails the exponent near a=1 (control validates the measurement) |
 
 ## Evidence map ([`data/`](data/))
 
@@ -42,6 +43,7 @@ Every claim in the writeup traces to one of these committed files:
 | `stage3_resolution.json` | T\*, α, R², drift by resolution — 18 studies | Stage 3 Tier-2 |
 | `promoted_candidates.jsonl` | the 18 Tier-2 genomes **with coefficients** | Stage 3 Tier-2 |
 | `nongenericity.json` | per-(shape, a) α + the six-property verdicts | Stage 3.5 |
+| `stage3_6_rough.json` | per-(h, a, N) rough-data blow-up exponent + convergence kinds | Stage 3.6 / fig5 |
 | `blowup_curve.json` | a representative max\|ω\|(t) trajectory | fig4 |
 
 The raw, full logs these were distilled from live under `experiments/`
@@ -68,10 +70,11 @@ The pipeline code and per-stage records live in the repo root:
   [`../win_condition.py`](../win_condition.py)
 - GA + resolution study: [`../ga/`](../ga)
 - Sweeps: `../stage1_5_sweep.py`, `../stage2_6_sweep.py`,
-  `../nongenericity_sweep.py` (+ their `analyze_*.py`)
+  `../nongenericity_sweep.py`, `../stage3_6_sweep.py` (+ their `analyze_*.py`;
+  `../stage3_6_progress.py` is a live viewer)
 - Per-stage results & rationale: `../STAGE_1_5_RESULTS.md`,
   `../STAGE_2_6_RESULTS.md`, `../STAGE_3_RESULTS.md`,
-  `../NONGENERICITY_RESULTS.md`; design contracts:
+  `../NONGENERICITY_RESULTS.md`, `../STAGE_3_6_RESULTS.md`; design contracts:
   `../PROJECT.md`, `../WIN_CONDITION.md`, `../PLAN.md`, `../LOGGING.md`.
 - Every logged run is pinned to a git commit and (for GA runs) a frozen
   `config.json`; tests: `../test_*.py`.

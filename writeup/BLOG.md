@@ -140,6 +140,50 @@ regime where a novel result lives are **disjoint**.
 That's a real finding, and it's the kind you only get if you build the honesty
 in from the start.
 
+## One more cheap experiment: what if the data is genuinely rough?
+
+There was still a loophole. Everything above used *smooth* initial data. But the
+theorems that actually *prove* non-generic blow-up for these models (Elgindi,
+Chen–Hou, and others) don't use smooth data — they use **rough** data:
+velocities that are continuous but have a sharp corner, only "Hölder"
+differentiable. Our earlier shapes couldn't represent that. Maybe the novel
+singularity was hiding behind the wrong kind of input.
+
+So we built the right kind. A vorticity profile `sign(sin x)·|sin x|^h` has a
+genuine, localized cusp whose sharpness is set by a knob `h`: at `h=1` it's the
+smooth sine wave, and as `h` drops toward 0 it becomes rougher and rougher —
+continuous, but with a derivative that blows up right at the cusp. We unit-tested
+that it really has the intended roughness (the cusp's exponent comes out equal
+to `h` to three decimals; the derivative genuinely diverges as you refine the
+grid). Then we ran it near `a=1` at resolutions up to **4096 grid points** — the
+finest in the whole project — and watched the blow-up exponent.
+
+Here's the discipline that makes the answer trustworthy: we included `a=0.7` as a
+**control**, because we already know the answer there (generic, α=1, rock
+stable). If our fine-grid measurement couldn't reproduce a known answer, we'd
+have no business trusting it on the unknown one.
+
+![Rough data still rails](figures/fig5_rough_rails.png)
+
+It reproduces the control perfectly — the green lines sit flat on α=1 across a
+fourfold change in resolution. And near `a=1`, with genuinely rough data, the
+exponent still **rails**: it scatters between runs, one shape shoots to the grid
+edge at 3.0, and at `a=1` (De Gregorio proper) nothing blows up at all — not even
+the roughest data we can build. The tell that this is real and not just an
+under-resolved mess: the conservation-drift artifact guard stays five times
+*below* its threshold the whole time, and every individual fit is clean. The runs
+are fine; the exponent simply has no stable value to converge to. Going to the
+finest grids in the project didn't help — which is about as strong as
+"this route is exhausted" gets on a 1D model.
+
+Rough data *did* make more shapes blow up — so the new representation is doing
+something. It just doesn't produce the one thing we were hunting: a *stable*
+non-generic exponent. That closes the cheap route for smooth **and** rough data.
+But the two tools it produced — a real rough-data profile, and a fine-grid
+exponent measurement validated against a known answer — are exactly what the next
+model (2D, where these blow-ups are actually provable) will need. A negative
+result that hands you your next instrument is a good trade.
+
 ## What this is
 
 A validated 1D solver; an evolutionary search that provably beats budget-matched

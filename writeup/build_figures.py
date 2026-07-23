@@ -156,9 +156,79 @@ def fig_blowup_curve():
     plt.close(fig)
 
 
+def fig_rough_rails():
+    """Stage 3.6: genuine rough (C^{0,h}) data still rails the blow-up exponent
+    near a=1, while the a=0.7 control stays flat at the generic alpha=1 — the
+    reason the fine-N negative is trustworthy."""
+    import matplotlib.ticker
+    d = load("stage3_6_rough.json")
+    ns = d["resolutions"]
+    cells = d["cells"]
+    col = {0.7: "#059669", 0.9: "#d97706", 0.95: "#dc2626"}
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.3),
+                                   gridspec_kw={"width_ratios": [1.15, 1]})
+
+    # left: fitted blow-up exponent alpha vs resolution N, one line per (h,a)
+    seen = set()
+    for a in (0.7, 0.9, 0.95):
+        for h in d["h_values"]:
+            pts = [(c["N"], c["alpha"]) for c in cells
+                   if c["a"] == a and c["h"] == h and c["usable"]]
+            pts.sort()
+            if len(pts) >= 2:
+                lbl = {0.7: "a=0.7 (control)", 0.9: "a=0.9",
+                       0.95: "a=0.95"}[a] if a not in seen else None
+                seen.add(a)
+                ax1.plot([p[0] for p in pts], [p[1] for p in pts], "o-",
+                         color=col[a], lw=1.3, ms=4, alpha=0.7, label=lbl)
+    for edge in (0.30, 3.00):
+        ax1.axhline(edge, color="#bbb", lw=0.9, ls=":", zorder=0)
+    ax1.axhline(1.0, color="#888", lw=1.0, ls="--", zorder=0)
+    ax1.text(ns[0], 1.04, "generic α=1", fontsize=8, color="#666")
+    ax1.text(ns[-1], 3.03, "fit-grid edge (rail)", fontsize=8, color="#999",
+             ha="right", va="bottom")
+    ax1.set_xscale("log", base=2)
+    ax1.set_xticks(ns)
+    ax1.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+    ax1.set_xlabel("spectral resolution N")
+    ax1.set_ylabel(r"fitted blow-up exponent $\alpha$")
+    ax1.set_title("Rough data: α vs resolution", fontsize=10)
+    ax1.legend(loc="upper left", fontsize=8.5)
+    ax1.annotate("control stays flat\nat α≈1 (generic)", (ns[-1], 1.0),
+                 xytext=(ns[0] * 1.15, 1.9), fontsize=8.5, color=col[0.7],
+                 arrowprops=dict(arrowstyle="->", color=col[0.7], lw=1))
+
+    # right: cross-resolution exponent span per a (instability) + dead a=1.0
+    a_list = [0.7, 0.9, 0.95, 1.0]
+    med = [d["per_a"][str(a)]["median_cross_N_span"] or 0 for a in a_list]
+    mx = [d["per_a"][str(a)]["max_cross_N_span"] or 0 for a in a_list]
+    x = range(len(a_list))
+    ax2.bar([i - 0.19 for i in x], med, 0.38, color="#94a3b8",
+            label="median cross-N |Δα|")
+    ax2.bar([i + 0.19 for i in x], mx, 0.38, color=col[0.95],
+            label="max cross-N |Δα|")
+    ax2.axhline(0.05, color="#888", lw=0.9, ls=":")
+    ax2.text(2.6, 0.09, "grid step 0.05", fontsize=8, color="#666")
+    ax2.text(3, 0.15, "a=1.0:\ndead axis\n(0/18)", ha="center", fontsize=8.5,
+             color="#444")
+    ax2.set_xticks(list(x))
+    ax2.set_xticklabels([f"a={a:g}" for a in a_list])
+    ax2.set_ylabel(r"cross-resolution exponent span $|\Delta\alpha|$")
+    ax2.set_title("Exponent instability near a=1", fontsize=10)
+    ax2.legend(fontsize=8.5, loc="upper left")
+
+    fig.suptitle("Stage 3.6: genuine C^{0,h} rough data still rails the exponent "
+                 "near a=1 (control validates the measurement)",
+                 fontweight="bold", y=1.01)
+    fig.tight_layout()
+    fig.savefig(FIGS / "fig5_rough_rails.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     import matplotlib.ticker  # noqa: needed for ScalarFormatter above
     fig_ga_vs_random(); print("fig1_ga_vs_random.png")
     fig_resolution_convergence(); print("fig2_resolution_convergence.png")
     fig_nongenericity(); print("fig3_nongenericity.png")
     fig_blowup_curve(); print("fig4_blowup_curve.png")
+    fig_rough_rails(); print("fig5_rough_rails.png")

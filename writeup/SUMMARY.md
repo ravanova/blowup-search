@@ -54,6 +54,19 @@ edge and the novel target are **disjoint** — figure
 [`fig3`](figures/fig3_nongenericity.png). This closed the cheap route before any
 GA compute was spent, exactly as the anti-self-deception protocol intends.
 
+**And the loophole closed too (Stage 3.6).** The literature's *provable*
+non-generic blow-ups need genuine limited-regularity (`C^{1,α}`) data, so a
+final cheap probe built a real rough-data genome mode — `sign(sin x)|sin x|^h`,
+an odd `C^{0,h}` vorticity with a localized Hölder cusp, unit-tested for the
+intended regularity — and measured the blow-up exponent near `a=1` at N up to
+**4096**. It still rails: an `a=0.7` control validates the fine-N fit (generic
+α≈1, stable), then `a=0.9` scatters, `a=0.95` rails 0.30↔3.00 across resolution,
+and `a=1.0` is a dead axis (0/18, even for the roughest data) — with drift far
+under the artifact guard, so the rail is genuine, not under-resolution — figure
+[`fig5`](figures/fig5_rough_rails.png). The cheap 1D route to novelty is closed
+for smooth *and* rough data; the rough-data representation and the validated
+fine-N exponent method are the transferable deliverables for the next model.
+
 **Bottom line.** The reachable near-term goal — a validated solver + a
 non-degenerate evolutionary search + resolution-confirmed candidates + a
 shape→resistance map — is **complete and reproducible**. The Millennium problem

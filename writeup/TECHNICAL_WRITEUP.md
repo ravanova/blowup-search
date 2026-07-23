@@ -218,7 +218,61 @@ A GA on a gCLM non-genericity axis would be optimizing grid noise. The gate
 caught this for ~2 minutes of compute, before any GA campaign — the
 anti-self-deception protocol doing exactly its job.
 
-## 8. What is, and is not, a contribution
+## 8. Result 4 — genuine rough (Hölder) data doesn't rescue it either (Stage 3.6)
+
+Stage 3.5 left one loophole: it used smooth and random-phase data, but the
+literature's *provable* non-generic blow-ups (Elgindi–Jeong, Chen–Hou,
+Buckmaster–Gómez-Serrano) need genuine **limited-regularity** velocity
+(`C^{1,α}`, i.e. vorticity `ω ∈ C^{0,α}`). So the last cheap 1D probe — Route A,
+Phase 0 of [`../CLAY_ROADMAP.md`](../CLAY_ROADMAP.md) — built that and pushed to
+finer grids.
+
+**A real rough-data genome mode** ([`../ga/genome.py`](../ga/genome.py)):
+`f_h(x) = sign(sin x)·|sin x|^h`, an odd `C^{0,h}` vorticity with a *localized*
+Hölder-h cusp at `x=0, π` (`h=1` is exactly `sin x`) — unlike the delocalized
+random-phase field the `k^{-p}` envelope produces.
+[`../test_genome_rough.py`](../test_genome_rough.py) certifies the intended
+regularity directly: the real-space local Hölder exponent equals `h`, and the
+profile is genuinely *not* `C^1` for `h<1` (`max|f′| ∼ N^{1-h}` diverges under
+refinement). This is the "rough-data representation principle" that transfers to
+Phase 1; only the solver changes.
+
+**A fine-N exponent measurement** ([`../stage3_6_sweep.py`](../stage3_6_sweep.py)):
+72 inviscid blow-ups over `h ∈ {0.2…1.0} × a ∈ {0.7, 0.9, 0.95, 1.0} × N ∈
+{1024, 2048, 4096}`, fitting the blow-up-rate exponent `α`. `a=0.7` is a
+**methodological control** — Stage 3.5 says it must read generic `α≈1` and
+stable, so if the fine-N fit doesn't recover that, the probe is inconclusive
+rather than a verdict (validate the measurement where the answer is known).
+
+| a | blow-up (of 18) | max cross-N span \|Δα\| | verdict |
+|---|---|---|---|
+| **0.7** (control) | 18/18 usable | ~0 (α≈1, stable) | PASS — measurement validated |
+| **0.9** | 18/18 usable | 1.95 (scatters, non-monotone) | unconverged |
+| **0.95** | 14/18 (4 flip) | 2.70 (rails 0.30↔3.00) | rails / flips |
+| **1.0** (De Gregorio) | **0/18** | — | dead axis |
+
+**The control passes; near `a=1`, nothing converges to a non-generic exponent.**
+The fitted `α` scatters non-monotonically with resolution (a=0.9), rails to the
+fit-grid edge and flips well-definedness (a=0.95), or never blows up at all
+(a=1.0, even for `C^{0,0.2}` data — *not* evidence of regularity, per
+[`../WIN_CONDITION.md`](../WIN_CONDITION.md), only no searchable signal).
+Crucially, max `conservation_drift` over all 72 runs is `1.9×10⁻⁴` — well under
+the `10⁻³` guard — and every counted fit clears `R²≥0.9`: the runs are
+well-resolved and individually clean, yet the exponent has **no
+resolution-stable limit**. Refining from Stage 3.5's `N∈{256,512}` to `4096` did
+not shrink the scatter. Figure [`fig5`](figures/fig5_rough_rails.png), data
+[`data/stage3_6_rough.json`](data/stage3_6_rough.json). Full account:
+[`../STAGE_3_6_RESULTS.md`](../STAGE_3_6_RESULTS.md).
+
+Rough data changed blow-up *occurrence* (a=0.9 went from 20/40 usable in Stage
+3.5 to 18/18 here) but not exponent *convergence*. The cheap 1D route to a novel
+result is now closed for smooth **and** rough data — but the two deliverables
+(the rough-data representation and a fine-N exponent method validated against a
+known answer) are exactly what Route A, Phase 1 (2D Boussinesq, where provable
+non-generic blow-up lives) needs. A Phase-0 negative is informative, not a
+kill-signal for a different mechanism.
+
+## 9. What is, and is not, a contribution
 
 - **Is:** a validated end-to-end pipeline (solver → viability gate → QD search →
   resolution study), a demonstration that evolutionary search beats
@@ -239,13 +293,14 @@ walls, not effort, set that ceiling: a search can only ever argue *for* blow-up
 are 1D/2D models, not 3D NS. The reachable, defensible win is the pipeline and
 the map — which is complete.
 
-## 9. Reproducibility
+## 10. Reproducibility
 
 Every logged run pins a git commit; GA runs also freeze a `config.json`; the
 logbook refuses to launch on a dirty tree. Per-evaluation RNG seeds make any
-single genome evaluation reproducible standalone. Four test suites gate the
+single genome evaluation reproducible standalone. Six test suites gate the
 code (`../test_win_condition.py`, `../test_solver_clm.py`, `../test_logbook.py`,
-`../test_ga.py`, plus `../test_resolution_study.py`). This folder's figures and
+`../test_ga.py`, `../test_resolution_study.py`, and `../test_genome_rough.py`
+for the rough-data regularity). This folder's figures and
 numbers rebuild from committed data via `writeup/build_figures.py`; the raw logs
 (gitignored, large) regenerate from the committed sweep/GA scripts per the stage
 docs. Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md).
