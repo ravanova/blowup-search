@@ -3,7 +3,22 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
-## stage2_6-seed1/2/3 (a10d6b2) — 2026-07-22 — INTERIM (seed 1 done, 2 running, 3 pending)
+## stage2_6-seed1/2/3 (a10d6b2) — 2026-07-22/23 — FINAL: ACCEPTANCE PASS 3/3
+
+**Final verdict (analyze_stage2.py): STAGE 2 ACCEPTANCE MET.** GA vs
+random at matched budget: 0.1624/0.1591 (+3.3 tol), 0.1631/0.1585
+(+4.6 tol), 0.1629/0.1597 (+3.2 tol); domination over the final half of
+the budget on all seeds; GA above the literature best (0.1585) on all
+seeds, random on none. QD replay (secondary): random still covers more
+cells (74–79% vs 50–56%); GA wins QD-score on seed 3 only — peak search
+and map-building remain different objectives (tuning lever: exploration
+pressure). Cross-seed archives: Jaccard 0.62–0.72, |Δfitness| 0.005–0.011
+on shared cells. Health: censoring 5/3/8, non-monotone 0/5/2 (excluded
+from archives by rule), lit control reproduced the sweep within 1 tol on
+every seed. Full write-up: STAGE_2_6_RESULTS.md. Next: Stage 3 resolution
+study on the elites (pending review).
+
+The interim seed-1 analysis below is preserved as written mid-protocol:
 
 Why configured this way: the Stage 2 acceptance protocol rerun on the
 axis Stage 2.6's gate verified — nu_crit under the v3 amplification-only

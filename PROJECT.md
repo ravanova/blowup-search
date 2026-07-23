@@ -73,3 +73,9 @@ with a numerical artifact.
   proceed with PLAN.md Stage 2.6** (oracle v3 amplification-only
   boundaries + reformulated quantities C/D), with "accept the negative
   result" as the documented fallback.
+- [STAGE_2_6_RESULTS.md](STAGE_2_6_RESULTS.md) — **Stage 2 milestone
+  closed: ACCEPTANCE MET.** The v3 amplification-only oracle at a=0.7
+  passes all six viability properties, and the GA beats budget-matched
+  random search on 3/3 seeds (+3.3/+4.6/+3.2 tol, above the literature
+  best on every seed), with evolved shapes more viscosity-resistant than
+  any hand-built profile measured. Next: Stage 3 resolution study.

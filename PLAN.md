@@ -555,6 +555,20 @@ here, and JOURNAL entries per experiment.
 
 ## Stage 2.6 — Oracle v3 + reformulated fitness quantities (approved review outcome of Stage 2.5)
 
+> **RUN AND PASSED (2026-07-22/23, commits 82dc7de + a10d6b2) — verdict:
+> axis A′ (ν_crit under the v3 amplification-only oracle at a=0.7,
+> t_max=24) passes all six viability properties (gap 20.3·tol, 0
+> non-monotone flags, resolution-exact), every other candidate fails its
+> gate (B′/a=0.4/C/D on the non-trivial optimum — C's mirrored high-k
+> cheat realized exactly as flagged below; a=1.0 still a dead axis), and
+> the **Stage 2 acceptance criterion is MET on the rerun: 3/3 seeds, GA
+> margins +3.3/+4.6/+3.2 tol over budget-matched random with final-half
+> domination, GA above the literature best on every seed.** Secondary QD
+> replay: random still wins raw coverage 2/3 (tuning lever: exploration
+> pressure), archives converge across seeds (Jaccard 0.62–0.72). Full
+> numbers: [STAGE_2_6_RESULTS.md](STAGE_2_6_RESULTS.md). **Next: Stage 3
+> resolution study on the evolved elites — pending review.**
+
 **Decision record.** Stage 2.5 ended with no viable axis and three
 redesign-level paths. On review (2026-07-22) the decision is to run paths
 1 and 2 **together as one design iteration**, because they attack the two
