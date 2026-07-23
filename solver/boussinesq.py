@@ -126,7 +126,7 @@ def parity_residual(f, kind):
 class BoussinesqResult:
     """Summary of one run — mirrors solver.gclm.SolverResult, plus theta_final."""
 
-    outcome: str  # "no_blowup" | "blowup_candidate" | "diverged" | "max_steps_hit"
+    outcome: str  # no_blowup|blowup_candidate|diverged|max_steps_hit|under_resolved
     early_exit_reason: str | None
     times: np.ndarray
     max_omega: np.ndarray  # max|w| at each sample time
@@ -139,6 +139,7 @@ class BoussinesqResult:
     mean_drift: float  # max(|∫w drift|, |∫th drift|) / L1 scale
     energy_balance_residual: float
     conservation_drift: float  # max of the two above; the logged guard value
+    max_tail_fraction: float = 0.0  # peak enstrophy fraction near the dealias cut
     params: dict = field(default_factory=dict)
 
 
@@ -187,6 +188,8 @@ def solve_boussinesq(
     buoyancy=True,
     frozen_u=None,
     symmetry=None,
+    drift_guard=None,
+    tail_guard=None,
 ):
     """Integrate 2D Boussinesq from (omega0, theta0) on an n x n grid.
 
@@ -197,6 +200,17 @@ def solve_boussinesq(
     odd-x/odd-y and th onto even-x/odd-y each step so the no-flow wall is held
     exactly against roundoff drift (Gate 1b). The dynamics preserve the subspace
     on their own; this only removes float-level leakage on long runs.
+    drift_guard: None, or a float — stop with outcome "under_resolved" when the
+    running artifact-guard drift (conservation) exceeds it.
+    tail_guard: None, or a float — stop with outcome "under_resolved" when the
+    fraction of enstrophy in the top band of retained modes (near the 2/3 dealias
+    cut) exceeds it. This is the RIGHT under-resolution signal for a spectral
+    method: conservation (drift) can stay tiny while small scales become garbage,
+    but a sharpening singularity piles enstrophy at the grid scale, and that shows
+    here first. On a uniform grid a genuine 2D-Boussinesq singularity sharpens
+    below grid scale before T*; t_final / max_omega then bound the *trustworthy*
+    growth window (Phase-1 resolution de-risk). `max_tail_fraction` is always
+    reported.
     """
     if symmetry not in (None, "houluo"):
         raise ValueError(f"unknown symmetry {symmetry!r}")
@@ -245,6 +259,19 @@ def solve_boussinesq(
     e_prev, p_prev = kinetic_energy_and_prod(w_hat)
     e_accum_err = 0.0
     max_e = max(abs(e_prev), 1e-300)
+
+    # Spectral under-resolution signal: enstrophy fraction in the top band of
+    # retained modes (radius > 0.75 of the 2/3 dealias cut). Rises sharply when
+    # the vorticity sharpens below grid scale.
+    k_cut = n / 3.0
+    tail_mask = (KX * KX + KY * KY) > (0.75 * k_cut) ** 2
+
+    def tail_fraction(wh):
+        p = np.abs(wh) ** 2
+        tot = float(p.sum())
+        return float(p[tail_mask].sum() / tot) if tot > 0.0 else 0.0
+
+    max_tail_fraction = tail_fraction(w_hat)
 
     outcome = None
     early_exit_reason = None
@@ -313,6 +340,21 @@ def solve_boussinesq(
         e_prev, p_prev = e_now, p_now
         max_e = max(max_e, abs(e_now))
 
+        tail = tail_fraction(w_hat)
+        max_tail_fraction = max(max_tail_fraction, tail)
+        if drift_guard is not None:
+            running_drift = max(
+                max_w_int_dev / max(max_l1_w, 1e-300),
+                max_th_int_dev / max(max_l1_th, 1e-300),
+                e_accum_err / max(max_e, 1e-300),
+            )
+            if running_drift > drift_guard:
+                outcome = "under_resolved"
+                break
+        if tail_guard is not None and tail > tail_guard:
+            outcome = "under_resolved"
+            break
+
         if m >= amplification_factor * m0:
             outcome = "blowup_candidate"
             break
@@ -351,6 +393,7 @@ def solve_boussinesq(
         mean_drift=mean_drift,
         energy_balance_residual=energy_residual,
         conservation_drift=max(mean_drift, energy_residual),
+        max_tail_fraction=float(max_tail_fraction),
         params={
             "nu": nu,
             "kappa": kappa,
