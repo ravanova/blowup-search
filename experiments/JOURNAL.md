@@ -3,6 +3,46 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Gate 3 — 2026-07-24 — smooth 2D genome + ν_crit-analog fitness (built, no logged run yet)
+
+Built the Gate-3 machinery: a smooth Hou–Luo-subspace genome
+(`ga/genome2d_smooth.py`), the ν_crit-analog fitness wired through
+`solve_boussinesq` (`ga/fitness2d.py`), and `test_genome_2d.py` (12/12; full
+11-suite gate green). No logged experiment — Gate 3 is infrastructure; the first
+logged 2D-genome run is Gate 4.
+
+Genome design: ω = Σ a_jk sin(jx)sin(ky) (odd-x/odd-y, K=4), θ = Σ b_jk
+cos(jx)sin(ky) (even-x/odd-y, j=0..K incl. the x-constant Luo–Hou modes). One
+JOINT energy normalization pins total field energy at 2·ENERGY_BUDGET_2D, so the
+overall-amplitude cheat (scale both fields up → needs more ν to kill; the 2D
+analog of the 1D w→λw cheat) is removed, while the ω/θ energy RATIO (buoyancy
+strength) stays free and is read off as the `split` descriptor. Confirmed
+physically: because ν_crit is the fitness, a free overall amplitude WOULD be a
+cheat (bigger fields need more viscosity) — fixing the budget is necessary, not
+cosmetic.
+
+MAP-Elites descriptor decision (raised with the user, then de-risked with a cheap
+check before deciding). Candidates: anisotropy, spectral centroid, ω–θ alignment,
+ω/θ split. A pure-genome probe (4000 random parity genomes, NO solver, seconds)
+found: all four are mutually orthogonal (max |Pearson r| = 0.012 — none redundant,
+unlike the 1D centroid/energy_top_k pair) and every pairing fills a 12×8 archive
+at ≥0.83 coverage. So the cheaply-checkable failure modes are ABSENT for all
+candidates — no empirical winner. The real differentiator (fitness-correlation →
+archive collapse) is NOT cheaply measurable but comes free from Gate 4, so the
+insurance move is: **bin on anisotropy × centroid, LOG all four raw** → binning
+becomes a post-hoc, zero-re-run choice Gate 4's ν_crit data can overrule.
+Rationale for the pair: both pure-geometry (unlikely to BE the fitness, keeping
+cells populated), and the property-6 low-mode-collapse trap lands legibly on the
+centroid axis. User approved.
+
+Discipline notes: (1) the fitness reuses `ga.fitness.bisect_critical` with the v3
+amplification-only predicate (amp≥2×, monotone in ν; an in-window slope is not —
+the axis-screen smoke proved it), and its monotone-probes are exactly the Gate-4
+property-6 instrument. (2) tail_guard makes the fitness read only the resolved
+window. (3) The test suite's anti-self-deception anchor: a non-buoyant (2D Euler)
+control conserves max|ω| → amp≈1 < 2× → ν_crit censored low (=0), confirming the
+axis responds to the buoyancy mechanism, not merely to carrying a vortex.
+
 ## phase1_axis_screen (9033e6f) — 2026-07-23 — route fitness on ν_crit-analog
 
 Why run BEFORE picking a fitness axis: the spike proved a resolution-stable

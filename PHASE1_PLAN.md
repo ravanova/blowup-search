@@ -92,9 +92,27 @@ proceed on **smooth data** with a **resolution-stable growth-based fitness**;
 near-term deliverable is a shape→growth QD map with **Tier-1** candidates, not
 Tier-2-confirmed singularities.
 
-**Gate 3 — 2D genome.** A 2D genome over smooth Hou–Luo-subspace fields (parities
-enforced), reusing MAP-Elites, budget-matched acceptance, single-writer logging.
-The rough-data mode exists (`ga/genome2d.py`) but is deprioritised per the spike.
+**Gate 3 — 2D genome. [DONE]** Smooth Hou–Luo-subspace genome
+(`ga/genome2d_smooth.py`): ω = Σ a_jk sin(jx)sin(ky) (odd-x/odd-y), θ = Σ b_jk
+cos(jx)sin(ky) (even-x/odd-y), bandwidth K=4 inside the resolved band. A single
+JOINT energy normalization pins total field energy (removing the overall-amplitude
+cheat — necessary because ν_crit is the fitness), leaving the ω/θ energy ratio
+free as the `split` descriptor. The ν_crit-analog fitness (amp≥2×, κ=0,
+tail_guard-trusted window) is wired through `solve_boussinesq` in `ga/fitness2d.py`,
+reusing `ga.fitness.bisect_critical` + the v3 amplification-only predicate (its
+monotone-probes are the Gate-4 property-6 instrument). `test_genome_2d.py` (12/12):
+parity, energy budget, scale-invariant normalization, determinism, descriptor
+ranges/known-shapes, bandwidth guard, and a non-buoyant control censoring low.
+**MAP-Elites descriptor decision (user-approved):** bin on **anisotropy × spectral
+centroid**, LOG all four (anisotropy, centroid, ω–θ alignment, ω/θ split) so
+binning is a post-hoc, zero-re-run choice Gate 4 can overrule. A cheap pure-genome
+probe (4000 draws, no solver) cleared the two decidable failure modes for every
+candidate — all four axes mutually orthogonal (|r|<0.02) with ≥0.83 archive
+coverage — so the pair was chosen on qualitative grounds (both pure-geometry, and
+the property-6 low-mode-collapse trap is legible on the centroid axis), with the
+log-all-four insurance covering the one undecidable leg (fitness-correlation) that
+Gate 4 measures for free. The rough-data mode (`ga/genome2d.py`) stays
+deprioritised per the spike. STOPPED for review before Gate 4.
 
 **Gate 4 — NON-NEGOTIABLE viability gate.** Re-run the six-property viability
 gate on the new Boussinesq fitness BEFORE any GA compute. The spike already
