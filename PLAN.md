@@ -716,16 +716,42 @@ symmetry class, or move to Stage 4).
 > [NONGENERICITY_RESULTS.md](NONGENERICITY_RESULTS.md). Scope decision pending
 > review; recommendation is not to spend GA compute on this axis regardless.
 
-## Stage 3.6 — Route A, Phase 0: rough-data spike (NEXT — decided 2026-07-23)
+## Stage 3.6 — Route A, Phase 0: rough-data spike (RUN 2026-07-23 — RAILS, as expected)
 
-> **Status: the next action.** Decided on review after Stage 3.5: the pursuit
-> continues via [CLAY_ROADMAP.md](CLAY_ROADMAP.md) **Route A** (switch to a
-> model where non-generic blow-up is provable — 2D Boussinesq / C^{1,α} De
-> Gregorio), and its **Phase 0** is executed here on the existing 1D gCLM
-> solver first. Rationale: never debug a new solver and a new
-> non-generic-exponent measurement at once — build and validate the
-> *measurement* on the substrate with known answers, then port a trusted method
-> to the expensive 2D solver in Phase 1.
+> **RUN AND CLOSED (2026-07-23, commit 95ef09f) — verdict: RAILS (the
+> expected branch).** Genuine limited-regularity C^{0,α} Hölder vorticity
+> (`holder_profile` in ga/genome.py: `sign(sin x)|sin x|^h`, unit-tested for
+> the intended regularity in test_genome_rough.py, 7/7) does NOT yield a
+> resolution-stable non-generic blow-up exponent near a=1 on gCLM, even at
+> N∈{1024,2048,4096}. The fine-N measurement is validated at the a=0.7 control
+> (recovers generic α≈1, stable — 18/18 usable), so the negative is trustworthy,
+> not a measurement failure. Near a=1: a=0.9 blows up 18/18 but the exponent
+> scatters (median cross-N span 0.65, max 1.95); a=0.95 rails (h=0.20:
+> 0.30→0.85→3.00 across N) and flips well-definedness (4/18); a=1.0 is a dead
+> axis (0/18 blow up even for C^{0,0.2} data — not evidence of regularity, per
+> WIN_CONDITION.md). Max conservation_drift 1.9e-4 « the 1e-3 guard, so the rail
+> is a genuine grid-scale property of the exponent, not crude under-resolution;
+> refinement from Stage 3.5's N=256/512 did not shrink the scatter. Per the
+> pre-committed gate: gCLM confirmed exhausted for smooth AND rough data; carry
+> the rough-data representation principle + the validated fine-N method into
+> Phase 1 (2D Boussinesq) — a Phase-0 negative is informative, NOT a kill-signal
+> for Phase 1. Full analysis, tables, and the forward recommendation:
+> [STAGE_3_6_RESULTS.md](STAGE_3_6_RESULTS.md). Sweep
+> [stage3_6_sweep.py](stage3_6_sweep.py), gate
+> [analyze_stage3_6.py](analyze_stage3_6.py), live viewer
+> [stage3_6_progress.py](stage3_6_progress.py), data
+> `experiments/stage3_6_sweep.jsonl` (72 rows). **Next: Route A, Phase 1 (2D
+> Boussinesq / rough De Gregorio) — pending review; re-run the six-property
+> viability gate on the new fitness before any GA compute.**
+
+> **Original spec (decided 2026-07-23, pre-run):** the pursuit continues via
+> [CLAY_ROADMAP.md](CLAY_ROADMAP.md) **Route A** (switch to a model where
+> non-generic blow-up is provable — 2D Boussinesq / C^{1,α} De Gregorio),
+> and its **Phase 0** is executed here on the existing 1D gCLM solver first.
+> Rationale: never debug a new solver and a new non-generic-exponent
+> measurement at once — build and validate the *measurement* on the substrate
+> with known answers, then port a trusted method to the expensive 2D solver in
+> Phase 1.
 
 **Goal:** produce two *transferable* things and one honest verdict, cheaply, on
 the validated 1D solver.

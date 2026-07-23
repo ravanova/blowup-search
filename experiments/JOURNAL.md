@@ -24,6 +24,57 @@ negative is informative, not a kill-signal (Boussinesq is a different
 mechanism). Hard 2-day time-box + pre-committed converge/rail gate so it can't
 become open-ended 1D tinkering. Concrete spec: PLAN.md Stage 3.6.
 
+## stage3_6_sweep (95ef09f) — 2026-07-23 — Route A Phase 0: RAILS (expected)
+
+Why configured this way: the execution of the decision record above. Two
+deliverables + one gated verdict, on the validated 1D solver. (1) A genuine
+C^{1,α} rough-data genome mode — `holder_profile(h) = sign(sin x)|sin x|^h`,
+an odd C^{0,h} vorticity with a *localized* Hölder cusp, unlike the delocalized
+random-phase field the k^{-p} envelope reaches. Chose the real-space local
+Hölder exponent as the regularity certificate (test_genome_rough.py) because
+the spectral-decay rate is contaminated by the second cusp at x=π and
+finite-k roundoff, whereas |f(x)|∼x^h near 0 is exact and definitional; also
+pinned the C^{0,h}-not-C^1 signature (max|f′|∼N^{1-h} diverges). (2) A fine-N
+exponent probe at N∈{1024,2048,4096} over h∈{0.2..1.0} × a∈{0.7,0.9,0.95,1.0}.
+Added a=0.7 as a **methodological control** (not in the original spec's a-list
+but demanded by "validate the measurement where the answer is known"): Stage
+3.5 says a=0.7 must read generic α≈1 stably, so if the fine-N fit doesn't
+recover that, the probe is inconclusive rather than a verdict. Frozen at the
+Stage 3.5 config (t_max=24, amp=1e3, tail 0.15) except resolutions; max_steps
+200k so De Gregorio non-blow-up runs bail (~700s each at N=4096) instead of
+hanging. Pre-committed gate in analyze_stage3_6.py, not softened after seeing
+data.
+
+What a human noticed skimming the results (experiments/stage3_6_sweep.jsonl,
+72 rows; full write-up STAGE_3_6_RESULTS.md):
+
+- The control worked *perfectly*: a=0.7 is α∈{1.00–1.10} across a 4× grid
+  range for every h, 18/18 usable. That's what lets the near-a=1 negative be
+  believed. Mild honest wrinkle: the roughest shapes (h=0.20/0.35) tick from
+  1.00 to 1.05–1.10 only at N=4096 — a small finite-N wobble, but still
+  generic, never railing.
+- Rough data DID revive blow-up *occurrence* — a=0.9 went 18/18 usable fits
+  (vs Stage 3.5's 20/40 usable + 15 flips at N∈{256,512}). For a moment that
+  looked like progress. But the exponent still scatters non-monotonically
+  across resolution (median cross-N span 0.65, max 1.95; e.g. h=0.50:
+  2.60→0.65→1.20). Occurrence improved; convergence did not.
+- a=0.95 rails outright — h=0.20 goes 0.30→0.85→3.00, spanning the whole fit
+  grid across resolution, and 4/18 flip well-definedness. a=1.0 (De Gregorio
+  proper) is stone dead: 0/18 blow up even for C^{0,0.2} data (slow runs hit
+  the 200k step cap). Not evidence of regularity (WIN_CONDITION.md) — just no
+  searchable signal.
+- Key reassurance the rail is real, not slop: max conservation_drift over all
+  72 runs is 1.9e-4, well under the 1e-3 guard, and every counted fit clears
+  R²≥0.9. The runs are well-resolved and individually clean; the exponent
+  simply has no resolution-stable limit. Going N=256/512 → 1024/2048/4096 did
+  not shrink the scatter (max span 2.70 vs Stage 3.5's 2.7). Refinement
+  doesn't help — the strongest cheap evidence that gCLM's non-generic exponent
+  is a grid-scale feature, not physics.
+- Net: the cheap 1D route to a novel non-generic result is closed for smooth
+  AND rough data. But the two deliverables (rough-data representation +
+  validated fine-N method) transfer to Phase 1 exactly as scoped. STOP for
+  review per the gate before any 2D solver work.
+
 ## nongenericity_sweep (7b… post-Stage-3) — 2026-07-23 — NO VIABLE AXIS
 
 Why configured this way: review question after Stage 3 — the GA edge is at

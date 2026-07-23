@@ -103,3 +103,19 @@ with a numerical artifact.
   axis. Evolving for non-genericity on gCLM is not viable at N∈{256,512}.
   Forward options (rough+fine-N; switch to 2D Boussinesq; bank the 1D
   pipeline) are a scope decision for review.
+- [STAGE_3_6_RESULTS.md](STAGE_3_6_RESULTS.md) — **Route A, Phase 0
+  (rough-data spike): RAILS, as expected.** Built a genuine C^{1,α}
+  rough-data genome mode ([ga/genome.py](ga/genome.py) `holder_profile` =
+  `sign(sin x)|sin x|^h`, a localized C^{0,h} Hölder cusp; regularity
+  unit-tested in [test_genome_rough.py](test_genome_rough.py), 7/7) and a
+  fine-N exponent measurement ([stage3_6_sweep.py](stage3_6_sweep.py) at
+  N∈{1024,2048,4096}, pre-committed gate
+  [analyze_stage3_6.py](analyze_stage3_6.py), live viewer
+  [stage3_6_progress.py](stage3_6_progress.py)). Even genuine rough data does
+  NOT give a resolution-stable non-generic blow-up exponent near a=1: the
+  a=0.7 control validates the measurement (generic α≈1, stable), then a=0.9
+  scatters, a=0.95 rails (α 0.30↔3.00 across N), a=1.0 is dead (0/18). Drift
+  1.9e-4 « guard, so the rail is genuine, not under-resolution. The cheap 1D
+  route to a *novel* result is closed; the two deliverables (rough-data
+  representation + validated fine-N method) transfer to **Route A, Phase 1
+  (2D Boussinesq)** — a Phase-0 negative is informative, not a kill-signal.
