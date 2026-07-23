@@ -75,5 +75,62 @@ provable non-generic blow-ups live; or the 3D-Euler scale-up) are laid out in
 [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Overall probability of solving Clay via
 this program stays very low (~0.05%); the honest win is the pipeline and the map.
 
+---
+
+## Route A Phase 1 — in progress (2D Boussinesq, Hou–Luo geometry)
+
+The forward move from the 1D pipeline is a genuine 2D model where a finite-time
+singularity is **proven** (Chen–Hou 2022) and numerically gold-standard
+(Luo–Hou 2014): 2D Boussinesq in the Hou–Luo symmetry-wall geometry. This is
+still a toy model, not 3D Navier–Stokes, and Tier 2 is still not a proof — but
+it is a strictly stronger setting for the search. **Banked so far** (Gates 1–2 +
+two de-risking spikes; the GA campaign itself is *not* yet run):
+
+1. **A validated 2D pseudo-spectral solver** (`solver/boussinesq.py`): fft2 +
+   RK4 + integrating-factor viscosity + 2/3 dealiasing, with `ν`/`κ` and the
+   conservation/energy artifact guards first-class. Validated by an exact
+   analytic ladder (6/6 at machine precision), and the Hou–Luo no-flow wall
+   imposed by parity is a *genuine* invariant of the discrete dynamics (held to
+   9×10⁻¹⁵ unenforced; wall BC 8×10⁻¹⁷).
+
+2. **A resolution de-risk spike — verdict STABLE, but recalibrating.** Before
+   building the search, a cheap fine-N probe (N=128→1024) tested the dominant
+   risk: is the Hou–Luo singularity even resolvable on a uniform grid? The
+   answer is a measured *two-part* one — figure
+   [`fig6`](figures/fig6_phase1_spike.png):
+   - **Yes for the search.** A fixed-window growth-rate `g` **converges** across
+     N (smooth growers, finest-two ≲ 10⁻⁴) — a resolution-stable fitness signal
+     exists.
+   - **No for confirming the true singularity.** The fitted blow-up exponent
+     **rails** (α: 2.45→0.70→0.90→1.20) and `T*` never stabilizes — a uniform
+     grid never reaches `T*` (Luo–Hou needed AMR to ~10¹²). So **uniform-grid
+     Tier-2 confirmation of the real Hou–Luo singularity is out of reach**;
+     rough `C^{0,α}` data is under-resolved from `t≈0` and is dropped. The
+     honest near-term deliverable is therefore a resolution-stable **shape→growth
+     QD map with Tier-1 candidates**, with Tier-2/Tier-3 gated behind AMR or a
+     validated-numerics collaborator (Route D).
+
+3. **A fitness-axis screen chose the fitness on labeled ground truth, not
+   priors.** The spike left two labeled ICs — one that blows up, one that
+   saturates. A pre-committed screen asked which candidate axis orders *blow-up
+   propensity* (`sharp > mild > control`) **and** is resolution-stable — figure
+   [`fig7`](figures/fig7_phase1_axis_screen.png). The raw growth rate `g` gets it
+   **backwards** (the saturating shape has the higher early rate); a persistence
+   proxy mis-ranks the non-grower. The **ν_crit-analog** — the viscosity at which
+   net amplification crosses 2× — is the sole survivor: right direction and
+   **identical to four decimals across N=256/512**. This is the fitness the Gate
+   3 genome will carry.
+
+**Honest scope of Phase 1 so far.** No 2D blow-up candidate has been produced —
+this is validated infrastructure plus two *de-risking* findings that shaped the
+deliverable before any GA compute. The screen is **necessary, not sufficient**:
+it clears only the direction + resolution-stability legs on 3 ICs. The
+non-negotiable next step (Gate 4) re-runs the full six-property viability gate on
+ν_crit over 40 shapes — **especially property 6 (non-trivial optimum)**, the
+exact property that killed the 1D ν_crit axis. If it rails, that is a finding,
+not a push-harder signal. Forward plan: [../PHASE1_PLAN.md](../PHASE1_PLAN.md),
+[../PHASE1_SPIKE_RESULTS.md](../PHASE1_SPIKE_RESULTS.md),
+[../PHASE1_AXIS_SCREEN_RESULTS.md](../PHASE1_AXIS_SCREEN_RESULTS.md).
+
 *All numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*

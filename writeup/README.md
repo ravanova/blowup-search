@@ -1,10 +1,16 @@
-# Writeup — Evolutionary Search for Navier–Stokes-type Blow-up (1D gCLM pipeline)
+# Writeup — Evolutionary Search for Navier–Stokes-type Blow-up
 
-This folder is the **self-contained, banked writeup** of the project's first
-completed arc: a validated 1D pseudo-spectral solver, a quality-diversity
-evolutionary search, and an automated resolution study that promotes candidates
-to numerically-confirmed (Tier-2) blow-up — plus the honest negative result
-that closed the cheap route to a *novel* singularity.
+This folder is the **self-contained, banked writeup** of the project. Two arcs:
+
+- **The completed 1D gCLM pipeline** — a validated 1D pseudo-spectral solver, a
+  quality-diversity evolutionary search, and an automated resolution study that
+  promotes candidates to numerically-confirmed (Tier-2) blow-up — plus the
+  honest negative result that closed the cheap route to a *novel* singularity.
+- **Route A Phase 1 (in progress)** — the move to 2D Boussinesq in the Hou–Luo
+  geometry (a *proven*-singularity model): a validated 2D solver and two
+  de-risking spikes (resolution wall + fitness-axis choice) that recalibrated the
+  reachable deliverable before any GA compute. No 2D candidate yet; see the
+  Phase-1 rows below and [SUMMARY.md](SUMMARY.md).
 
 It is designed so the work can be written up again in future **without digging
 through raw logs or re-running any sweep or GA campaign**: every number quoted
@@ -17,9 +23,11 @@ and every figure is built from the small committed files in [`data/`](data/).
 2. **[TECHNICAL_WRITEUP.md](TECHNICAL_WRITEUP.md)** — the full account: model,
    methods, the anti-self-deception protocol, results with evidence, and the
    honest scope.
-3. **[BLOG.md](BLOG.md)** — a narrative technical blog post for a broader
-   (still technical) audience.
-4. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+3. **[BLOG.md](BLOG.md)** — a narrative technical blog post (the 1D arc) for a
+   broader (still technical) audience.
+4. **[BLOG_PHASE1.md](BLOG_PHASE1.md)** — a shorter companion post on the two
+   de-risking experiments that opened Route A Phase 1 (2D Boussinesq).
+5. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem.
 
 ## Figures ([`figures/`](figures/))
@@ -31,6 +39,8 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig3_nongenericity.png` | Stage 3.5 — the GA edge and the novel α≠1 target are disjoint |
 | `fig4_blowup_curve.png` | a confirmed blow-up: max\|ω\| → ∞ and the BKM 1/M→0 diagnostic |
 | `fig5_rough_rails.png` | Stage 3.6 — genuine `C^{0,h}` rough data still rails the exponent near a=1 (control validates the measurement) |
+| `fig6_phase1_spike.png` | Phase 1 — the resolution wall: growth rate `g` converges (search-viable) while the blow-up exponent rails (true singularity out of uniform-grid reach) |
+| `fig7_phase1_axis_screen.png` | Phase 1 — the fitness-axis screen: only ν_crit orders blow-up propensity (sharp>mild>control) and is N-stable |
 
 ## Evidence map ([`data/`](data/))
 
@@ -45,6 +55,8 @@ Every claim in the writeup traces to one of these committed files:
 | `nongenericity.json` | per-(shape, a) α + the six-property verdicts | Stage 3.5 |
 | `stage3_6_rough.json` | per-(h, a, N) rough-data blow-up exponent + convergence kinds | Stage 3.6 / fig5 |
 | `blowup_curve.json` | a representative max\|ω\|(t) trajectory | fig4 |
+| `phase1_spike.json` | per-(IC, N) g / amp / exponent / T\* for the 2D resolution spike | Phase 1 / fig6 |
+| `phase1_axis_screen.json` | per-(axis, IC, N) values + the pre-committed screen verdict | Phase 1 / fig7 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,
@@ -76,5 +88,10 @@ The pipeline code and per-stage records live in the repo root:
   `../STAGE_2_6_RESULTS.md`, `../STAGE_3_RESULTS.md`,
   `../NONGENERICITY_RESULTS.md`, `../STAGE_3_6_RESULTS.md`; design contracts:
   `../PROJECT.md`, `../WIN_CONDITION.md`, `../PLAN.md`, `../LOGGING.md`.
+- Route A Phase 1 (2D Boussinesq): solver `../solver/boussinesq.py`; spikes
+  `../phase1_resolution_spike.py`, `../phase1_axis_screen.py` (+ their
+  `analyze_*.py` and `../phase1_axis_progress.py` live viewer); results
+  `../PHASE1_PLAN.md`, `../PHASE1_SPIKE_RESULTS.md`,
+  `../PHASE1_AXIS_SCREEN_RESULTS.md`.
 - Every logged run is pinned to a git commit and (for GA runs) a frozen
   `config.json`; tests: `../test_*.py`.

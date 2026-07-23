@@ -1,0 +1,95 @@
+{
+ "resolutions": [
+  256,
+  512
+ ],
+ "axes": [
+  "nu_crit",
+  "persistence",
+  "g_baseline"
+ ],
+ "ics": [
+  "smooth_sharp",
+  "smooth_mild",
+  "euler_control"
+ ],
+ "a_crit": 2.0,
+ "values": {
+  "nu_crit": {
+   "smooth_sharp": {
+    "256": 0.65185546875,
+    "512": 0.65185546875
+   },
+   "smooth_mild": {
+    "256": 0.04833984375,
+    "512": 0.04833984375
+   },
+   "euler_control": {
+    "256": 0.0,
+    "512": 0.0
+   }
+  },
+  "persistence": {
+   "smooth_sharp": {
+    "256": 0.2913242352268939,
+    "512": 0.5508710936435728
+   },
+   "smooth_mild": {
+    "256": -2.693098824406512,
+    "512": -2.691167346245686
+   },
+   "euler_control": {
+    "256": -1.6283271027835629e-15,
+    "512": -3.700743415417188e-15
+   }
+  },
+  "g_baseline": {
+   "smooth_sharp": {
+    "256": 0.6087581785915404,
+    "512": 0.6087118896388959
+   },
+   "smooth_mild": {
+    "256": 1.238858615922796,
+    "512": 1.2388580915555436
+   },
+   "euler_control": {
+    "256": 0.0,
+    "512": 1.4710455076283327e-14
+   }
+  }
+ },
+ "nu_crit_censored": {
+  "smooth_sharp": {
+   "256": null,
+   "512": null
+  },
+  "smooth_mild": {
+   "256": null,
+   "512": null
+  },
+  "euler_control": {
+   "256": "low",
+   "512": "low"
+  }
+ },
+ "verdict": {
+  "nu_crit": {
+   "pass": true,
+   "direction_ok": true,
+   "stable": true
+  },
+  "persistence": {
+   "pass": false,
+   "direction_ok": false,
+   "stable": true
+  },
+  "g_baseline": {
+   "pass": false,
+   "direction_ok": false,
+   "stable": true
+  }
+ },
+ "survivors": [
+  "nu_crit"
+ ]
+}

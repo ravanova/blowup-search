@@ -225,6 +225,74 @@ def fig_rough_rails():
     plt.close(fig)
 
 
+def fig_phase1_spike():
+    """Route A Phase 1 resolution wall: the fixed-window growth rate g CONVERGES
+    across N (a resolution-stable search signal exists) while the fitted blow-up
+    exponent RAILS (the true singularity is out of uniform-grid reach)."""
+    d = load("phase1_spike.json")
+    growers = ["smooth_sharp", "smooth_mild"]
+    col = {"smooth_sharp": "#2563eb", "smooth_mild": "#059669"}
+    fig, (axg, axe) = plt.subplots(1, 2, figsize=(11, 3.8))
+    for ic in growers:
+        g = d["ics"][ic]["g_by_N"]
+        Ns = sorted((int(n) for n in g), key=int)
+        axg.plot(Ns, [g[str(n)] for n in Ns], "o-", color=col[ic], lw=2, label=ic)
+        e = d["ics"][ic]["exponent_by_N"]
+        ev = [(n, e[str(n)]) for n in Ns if e[str(n)] is not None]
+        axe.plot([n for n, _ in ev], [v for _, v in ev], "o-", color=col[ic],
+                 lw=2, label=ic)
+    axg.set_xscale("log", base=2); axe.set_xscale("log", base=2)
+    axg.set_xticks(Ns); axg.set_xticklabels(Ns)
+    axe.set_xticks(Ns); axe.set_xticklabels(Ns)
+    axg.set_xlabel("grid resolution N"); axe.set_xlabel("grid resolution N")
+    axg.set_ylabel("fixed-window growth rate  g"); axg.set_ylim(0, 1.6)
+    axg.set_title("g CONVERGES  →  resolution-stable search signal", fontsize=10)
+    axe.set_ylabel(r"fitted blow-up exponent  $\alpha$")
+    axe.set_title(r"$\alpha$ RAILS  →  true singularity out of uniform-grid reach",
+                  fontsize=10)
+    axg.legend(loc="center right", fontsize=9); axe.legend(loc="best", fontsize=9)
+    fig.suptitle("Phase 1 resolution de-risk spike (2D Boussinesq, Hou–Luo): "
+                 "search-viable, Tier-2-of-the-true-singularity out of reach",
+                 fontweight="bold", y=1.02)
+    fig.tight_layout()
+    fig.savefig(FIGS / "fig6_phase1_spike.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def fig_phase1_axis_screen():
+    """Route A Phase 1 fitness-axis screen: on the labeled ground-truth pair
+    (sharp blows up, mild saturates, control flat), only nu_crit orders
+    sharp>mild>control (propensity) AND is resolution-stable. Raw g gets it
+    backwards; persistence puts the saturating grower below the non-grower."""
+    d = load("phase1_axis_screen.json")
+    ics = d["ics"]; Nhi = str(max(d["resolutions"]))
+    labels = {"smooth_sharp": "sharp\n(blows up)", "smooth_mild": "mild\n(saturates)",
+              "euler_control": "control\n(flat)"}
+    axmeta = [("nu_crit", r"$\nu_{crit}$  (amp$\geq2\times$)", "#2563eb", "PASS"),
+              ("persistence", "persistence", "#d97706", "FAIL"),
+              ("g_baseline", "raw growth rate  g", "#dc2626", "FAIL")]
+    fig, axes = plt.subplots(1, 3, figsize=(12.5, 3.8))
+    x = range(len(ics))
+    for ax, (axis, title, c, tag) in zip(axes, axmeta):
+        vals = [d["values"][axis][ic][Nhi] or 0.0 for ic in ics]
+        bars = ax.bar(x, vals, color=c, alpha=0.85)
+        ok = d["verdict"][axis]["direction_ok"]
+        ax.set_xticks(list(x)); ax.set_xticklabels([labels[ic] for ic in ics], fontsize=8.5)
+        ax.axhline(0, color="#333", lw=0.8)
+        ax.set_title(f"{title}\n[{tag}: direction {'OK' if ok else 'WRONG'}]",
+                     fontsize=9.5)
+        for b, v in zip(bars, vals):
+            ax.text(b.get_x() + b.get_width() / 2, v, f"{v:.2f}",
+                    ha="center", va="bottom" if v >= 0 else "top", fontsize=8)
+    axes[0].set_ylabel(f"axis value at N={Nhi}")
+    fig.suptitle("Phase 1 fitness-axis screen: only ν_crit tracks blow-up "
+                 "PROPENSITY (sharp>mild>control) — and it is N-identical to 4 dp",
+                 fontweight="bold", y=1.03)
+    fig.tight_layout()
+    fig.savefig(FIGS / "fig7_phase1_axis_screen.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     import matplotlib.ticker  # noqa: needed for ScalarFormatter above
     fig_ga_vs_random(); print("fig1_ga_vs_random.png")
@@ -232,3 +300,5 @@ if __name__ == "__main__":
     fig_nongenericity(); print("fig3_nongenericity.png")
     fig_blowup_curve(); print("fig4_blowup_curve.png")
     fig_rough_rails(); print("fig5_rough_rails.png")
+    fig_phase1_spike(); print("fig6_phase1_spike.png")
+    fig_phase1_axis_screen(); print("fig7_phase1_axis_screen.png")

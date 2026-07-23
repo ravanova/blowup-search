@@ -59,5 +59,51 @@
   "a095_max_cross_N_span": 2.7,
   "a10_blowup": 0,
   "any_converged_nongeneric_near_a1": false
+ },
+ "route_a_phase1": {
+  "status": "in_progress (Gates 1-2 + resolution spike + axis screen done; Gate 3 genome + Gate 4 viability gate pending)",
+  "spike_verdict": "STABLE (a resolution-stable growth signal exists; the true singularity's exponent is out of uniform-grid reach)",
+  "smooth_sharp_g_finest_two_rel_diff": 9.921785319312743e-05,
+  "smooth_mild_g_finest_two_rel_diff": 3.446952023787572e-07,
+  "smooth_sharp_exponent_span_over_N": [
+   0.7,
+   2.45
+  ],
+  "smooth_sharp_tstar_span_over_N": [
+   3.128733885856995,
+   5.8753234443357485
+  ],
+  "rough_axis_resolution_starved": true,
+  "axis_screen_a_crit": 2.0,
+  "axis_screen_survivors": [
+   "nu_crit"
+  ],
+  "axis_screen_verdict": {
+   "nu_crit": {
+    "pass": true,
+    "direction_ok": true,
+    "stable": true
+   },
+   "persistence": {
+    "pass": false,
+    "direction_ok": false,
+    "stable": true
+   },
+   "g_baseline": {
+    "pass": false,
+    "direction_ok": false,
+    "stable": true
+   }
+  },
+  "nu_crit_smooth_sharp_by_N": {
+   "256": 0.65185546875,
+   "512": 0.65185546875
+  },
+  "nu_crit_smooth_mild_by_N": {
+   "256": 0.04833984375,
+   "512": 0.04833984375
+  },
+  "nu_crit_resolution_stable": true,
+  "g_baseline_wrong_direction": true
  }
 }

@@ -222,7 +222,73 @@ def curate_blowup_curve():
     }, indent=1))
 
 
-def curate_summary(ga, studies, verdicts, rough):
+def curate_phase1_spike():
+    """Route A Phase 1 resolution de-risk spike: the g-converges / exponent-rails
+    resolution wall, from experiments/phase1_resolution_spike.jsonl."""
+    src = REPO / "experiments" / "phase1_resolution_spike.jsonl"
+    rows = [json.loads(l) for l in src.read_text().splitlines() if l.strip()]
+    by = {}
+    for r in rows:
+        by.setdefault(r["ic_label"], {})[r["resolution_N"]] = r
+    out = {"resolutions": sorted({r["resolution_N"] for r in rows}), "ics": {}}
+    for ic, per_n in by.items():
+        Ns = sorted(per_n)
+        est = lambda n, k: (per_n[n]["estimate"] or {}).get(k)
+        out["ics"][ic] = {
+            "kind": per_n[Ns[0]]["ic_kind"],
+            "N": Ns,
+            "g_by_N": {str(n): per_n[n]["growth_rate_fixed_window"] for n in Ns},
+            "amp_resolved_by_N": {str(n): per_n[n]["amp_resolved"] for n in Ns},
+            "t_resolved_by_N": {str(n): per_n[n]["t_resolved"] for n in Ns},
+            "outcome_by_N": {str(n): per_n[n]["outcome"] for n in Ns},
+            "exponent_by_N": {str(n): est(n, "exponent") for n in Ns},
+            "tstar_by_N": {str(n): est(n, "t_star") for n in Ns},
+        }
+    (DATA / "phase1_spike.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
+def curate_phase1_axis_screen():
+    """Route A Phase 1 fitness-axis discrimination screen, from
+    experiments/phase1_axis_screen.jsonl; verdict via the pre-committed analyzer
+    (necessary-not-sufficient routing screen, not the six-property Gate 4)."""
+    from analyze_phase1_axis_screen import AXES, NEEDED, evaluate_axis
+    from analyze_phase1_axis_screen import load as load_screen
+    src = REPO / "experiments" / "phase1_axis_screen.jsonl"
+    by = load_screen(str(src))
+    Ns = sorted({n for ic in by for n in by[ic]})
+    values, censored = {}, {}
+    for axis in AXES:
+        values[axis] = {ic: {str(n): by.get(ic, {}).get(n, {}).get(axis)
+                             for n in Ns} for ic in NEEDED}
+    for ic in NEEDED:
+        censored[ic] = {str(n): by.get(ic, {}).get(n, {}).get("nu_crit_censored")
+                        for n in Ns}
+    verdict, survivors = {}, []
+    for axis in AXES:
+        passed, detail = evaluate_axis(by, axis)
+        verdict[axis] = {"pass": bool(passed),
+                         "direction_ok": detail["direction_ok"],
+                         "stable": detail["stable"]}
+        if passed:
+            survivors.append(axis)
+    out = {"resolutions": Ns, "axes": list(AXES), "ics": list(NEEDED),
+           "a_crit": 2.0, "values": values, "nu_crit_censored": censored,
+           "verdict": verdict, "survivors": survivors}
+    (DATA / "phase1_axis_screen.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
+def _finest_two_rel(by_n):
+    """Max relative change between the two finest N in a {str(N): value} dict."""
+    ns = sorted(by_n, key=int)
+    a, b = by_n[ns[-2]], by_n[ns[-1]]
+    if a is None or b is None or not b:
+        return None
+    return abs(b - a) / abs(b)
+
+
+def curate_summary(ga, studies, verdicts, rough, spike=None, screen=None):
     inviscid = [s for s in studies if s["role"] == "inviscid_anchor"]
     viscous = [s for s in studies if s["role"] == "viscous_resistance"]
 
@@ -275,6 +341,33 @@ def curate_summary(ga, studies, verdicts, rough):
             "any_converged_nongeneric_near_a1": False,
         },
     }
+    if spike is not None and screen is not None:
+        sharp = spike["ics"]["smooth_sharp"]
+        mild = spike["ics"]["smooth_mild"]
+        sharp_exp = [v for v in sharp["exponent_by_N"].values() if v is not None]
+        metrics["route_a_phase1"] = {
+            "status": "in_progress (Gates 1-2 + resolution spike + axis screen done; "
+                      "Gate 3 genome + Gate 4 viability gate pending)",
+            "spike_verdict": "STABLE (a resolution-stable growth signal exists; the "
+                             "true singularity's exponent is out of uniform-grid reach)",
+            "smooth_sharp_g_finest_two_rel_diff": _finest_two_rel(sharp["g_by_N"]),
+            "smooth_mild_g_finest_two_rel_diff": _finest_two_rel(mild["g_by_N"]),
+            "smooth_sharp_exponent_span_over_N": [min(sharp_exp), max(sharp_exp)],
+            "smooth_sharp_tstar_span_over_N": [
+                min(v for v in sharp["tstar_by_N"].values() if v is not None),
+                max(v for v in sharp["tstar_by_N"].values() if v is not None)],
+            "rough_axis_resolution_starved": all(
+                spike["ics"][ic]["outcome_by_N"][str(min(spike["ics"][ic]["N"]))]
+                == "under_resolved"
+                for ic in spike["ics"] if spike["ics"][ic]["kind"] == "rough"),
+            "axis_screen_a_crit": screen["a_crit"],
+            "axis_screen_survivors": screen["survivors"],
+            "axis_screen_verdict": screen["verdict"],
+            "nu_crit_smooth_sharp_by_N": screen["values"]["nu_crit"]["smooth_sharp"],
+            "nu_crit_smooth_mild_by_N": screen["values"]["nu_crit"]["smooth_mild"],
+            "nu_crit_resolution_stable": screen["verdict"]["nu_crit"]["stable"],
+            "g_baseline_wrong_direction": not screen["verdict"]["g_baseline"]["direction_ok"],
+        }
     (DATA / "summary_metrics.json").write_text(json.dumps(metrics, indent=1))
     return metrics
 
@@ -291,6 +384,10 @@ if __name__ == "__main__":
           f"verdict={rough['verdict']}")
     curate_blowup_curve()
     print("blowup_curve.json: regenerated")
-    metrics = curate_summary(ga, studies, verdicts, rough)
+    spike = curate_phase1_spike()
+    print(f"phase1_spike.json: {len(spike['ics'])} ICs x {len(spike['resolutions'])} N")
+    screen = curate_phase1_axis_screen()
+    print(f"phase1_axis_screen.json: survivors={screen['survivors']}")
+    metrics = curate_summary(ga, studies, verdicts, rough, spike, screen)
     print("summary_metrics.json written")
     print(json.dumps(metrics, indent=1))
