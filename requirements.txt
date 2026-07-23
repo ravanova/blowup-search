@@ -1,0 +1,5 @@
+# Runtime dependencies for the blow-up search pipeline.
+# Install into a venv:  python -m venv .venv && .venv/bin/pip install -r requirements.txt
+numpy>=2.0          # solver, GA, all sweeps (FFT-based pseudo-spectral method)
+matplotlib>=3.8     # writeup/build_figures.py only (figures); not needed to run the pipeline
+# scipy is intentionally NOT required (no adaptive ODE integrators are used).

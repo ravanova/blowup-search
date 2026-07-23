@@ -45,6 +45,12 @@ with a numerical artifact.
 
 ## Documents in this project
 
+- **[writeup/](writeup/) — the banked, self-contained writeup of the completed
+  1D pipeline** (executive summary, full technical writeup, technical blog post,
+  figures, and curated evidence data that rebuilds without any re-runs). Start
+  at [writeup/SUMMARY.md](writeup/SUMMARY.md).
+- [CLAY_ROADMAP.md](CLAY_ROADMAP.md) — forward strategic plan for continuing the
+  Clay pursuit (the two structural walls, ranked routes A–D, go/no-go criteria).
 - [millennium_prize_problems.md](millennium_prize_problems.md) — survey of
   all 6 open Millennium Prize Problems and why Navier–Stokes was chosen.
 - [WIN_CONDITION.md](WIN_CONDITION.md) — the precise, tiered criteria for

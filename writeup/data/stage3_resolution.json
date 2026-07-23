@@ -1,0 +1,776 @@
+[
+ {
+  "genome_id": "g01042",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "9,0",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16236328124999988,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.1717604707783136,
+   2.1732097490526385,
+   2.1732046135978913
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998614521978567,
+   0.9998864128238302,
+   0.9998977681130593
+  ],
+  "drift_by_resolution": [
+   6.688059594978343e-05,
+   1.6343877457181895e-05,
+   4.086401221912363e-06
+  ],
+  "max_blowup_drift": 6.688059594978343e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5786492149277442,
+  "shape_descriptors": {
+   "n_sign_changes": 4,
+   "spectral_tail_slope": -0.05370765027047226,
+   "energy_top_k_frac": 0.9930225023463857
+  }
+ },
+ {
+  "genome_id": "g01042",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "9,0",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081182,
+  "nu_crit": 0.16236328124999988,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6650240540161576,
+   3.667968615611313,
+   3.6694725454868085
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993826885959375,
+   0.9994740111802137,
+   0.9994915038649044
+  ],
+  "drift_by_resolution": [
+   5.579861722242815e-05,
+   1.3614566378433254e-05,
+   3.2626534946144887e-06
+  ],
+  "max_blowup_drift": 5.579861722242815e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5786492149277442,
+  "shape_descriptors": {
+   "n_sign_changes": 4,
+   "spectral_tail_slope": -0.05370765027047226,
+   "energy_top_k_frac": 0.9930225023463857
+  }
+ },
+ {
+  "genome_id": "g01086",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "11,1",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.1620507812499999,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.187739249597091,
+   2.1893859300365235,
+   2.1893787834354534
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998691059450423,
+   0.999889879431644,
+   0.9998960358659216
+  ],
+  "drift_by_resolution": [
+   6.677137554009623e-05,
+   1.6310181400158584e-05,
+   4.079556212473256e-06
+  ],
+  "max_blowup_drift": 6.677137554009623e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5571413963851926,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": 0.6502290352706868,
+   "energy_top_k_frac": 0.9934877937792698
+  }
+ },
+ {
+  "genome_id": "g01086",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "11,1",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081025,
+  "nu_crit": 0.1620507812499999,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6976118155534237,
+   3.7005102930267992,
+   3.7019878423927683
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993672837445597,
+   0.9994694018215077,
+   0.9994830891977675
+  ],
+  "drift_by_resolution": [
+   5.5698359739322845e-05,
+   1.3592730430053493e-05,
+   3.25746811824704e-06
+  ],
+  "max_blowup_drift": 5.5698359739322845e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5571413963851926,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": 0.6502290352706868,
+   "energy_top_k_frac": 0.9934877937792698
+  }
+ },
+ {
+  "genome_id": "g00925",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "10,1",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.1620507812499999,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.1845173612211033,
+   2.1861750898057113,
+   2.186167396679167
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998784780349034,
+   0.9998952164562759,
+   0.9998929888444266
+  ],
+  "drift_by_resolution": [
+   6.662541981934436e-05,
+   1.6279376732408034e-05,
+   4.072015310363706e-06
+  ],
+  "max_blowup_drift": 6.662541981934436e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5781472192111992,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": 0.023580362612880865,
+   "energy_top_k_frac": 0.9934405045138134
+  }
+ },
+ {
+  "genome_id": "g00925",
+  "source_experiment_id": "stage2_6-seed1",
+  "map_cell": "10,1",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081025,
+  "nu_crit": 0.1620507812499999,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6711006689928722,
+   3.6740076879553354,
+   3.675492070959292
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993835691982517,
+   0.9994744406048364,
+   0.9994896267239752
+  ],
+  "drift_by_resolution": [
+   5.5808005300147004e-05,
+   1.3617759301063209e-05,
+   3.263823005106318e-06
+  ],
+  "max_blowup_drift": 5.5808005300147004e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.5781472192111992,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": 0.023580362612880865,
+   "energy_top_k_frac": 0.9934405045138134
+  }
+ },
+ {
+  "genome_id": "g01070",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "4,1",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16310665130615232,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.193789021984383,
+   2.1941092518598575,
+   2.1941084497359187
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9999146457017611,
+   0.9999034156851676,
+   0.9998833945399038
+  ],
+  "drift_by_resolution": [
+   6.554654512188822e-05,
+   1.6179089254650307e-05,
+   4.040151261199899e-06
+  ],
+  "max_blowup_drift": 6.554654512188822e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.7772731924307696,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": -2.817169606665224,
+   "energy_top_k_frac": 0.9983346844268559
+  }
+ },
+ {
+  "genome_id": "g01070",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "4,1",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081553,
+  "nu_crit": 0.16310665130615232,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.60785942551969,
+   3.610731941412597,
+   3.61220246388717
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993965737552005,
+   0.9994855706181737,
+   0.9994997611365656
+  ],
+  "drift_by_resolution": [
+   5.57732176151894e-05,
+   1.3607101945293507e-05,
+   3.2583190557454e-06
+  ],
+  "max_blowup_drift": 5.57732176151894e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.7772731924307696,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": -2.817169606665224,
+   "energy_top_k_frac": 0.9983346844268559
+  }
+ },
+ {
+  "genome_id": "g00834",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "5,1",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16310546874999993,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.1891038005237324,
+   2.189319187088643,
+   2.1893188925673184
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9999097617396466,
+   0.9999004832150694,
+   0.9998859240736424
+  ],
+  "drift_by_resolution": [
+   6.569823939488654e-05,
+   1.623149013542963e-05,
+   4.0517943197146656e-06
+  ],
+  "max_blowup_drift": 6.569823939488654e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.85611579763993,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": -2.22415259593762,
+   "energy_top_k_frac": 0.9979006428656753
+  }
+ },
+ {
+  "genome_id": "g00834",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "5,1",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081553,
+  "nu_crit": 0.16310546874999993,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.5890622944027277,
+   3.591963935660968,
+   3.593448801902187
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993983502792423,
+   0.9994897882159415,
+   0.9995030455821887
+  ],
+  "drift_by_resolution": [
+   5.578700880020687e-05,
+   1.3603009893187864e-05,
+   3.2586174034457737e-06
+  ],
+  "max_blowup_drift": 5.578700880020687e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.85611579763993,
+  "shape_descriptors": {
+   "n_sign_changes": 6,
+   "spectral_tail_slope": -2.22415259593762,
+   "energy_top_k_frac": 0.9979006428656753
+  }
+ },
+ {
+  "genome_id": "g00944",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "7,0",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16279415130615232,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.2451154401196662,
+   2.245500413723781,
+   2.245499166918859
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9999054114451741,
+   0.9998998140669574,
+   0.9998872225519978
+  ],
+  "drift_by_resolution": [
+   6.582857956460618e-05,
+   1.6252935291908523e-05,
+   4.058254983515042e-06
+  ],
+  "max_blowup_drift": 6.582857956460618e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.958707087670721,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": -1.3803806549724869,
+   "energy_top_k_frac": 0.9988002828662844
+  }
+ },
+ {
+  "genome_id": "g00944",
+  "source_experiment_id": "stage2_6-seed2",
+  "map_cell": "7,0",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081397,
+  "nu_crit": 0.16279415130615232,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6819527084962265,
+   3.684618839248221,
+   3.685972880736231
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993604048360197,
+   0.9994653755271539,
+   0.9994808294773659
+  ],
+  "drift_by_resolution": [
+   5.557115437095342e-05,
+   1.354876560784907e-05,
+   3.242490475915017e-06
+  ],
+  "max_blowup_drift": 5.557115437095342e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.958707087670721,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": -1.3803806549724869,
+   "energy_top_k_frac": 0.9988002828662844
+  }
+ },
+ {
+  "genome_id": "g01090",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "9,0",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16286823272705075,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.2109688653690007,
+   2.2107902296649606,
+   2.2107910423770747
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998398161840181,
+   0.9999213394657217,
+   0.9999070288165384
+  ],
+  "drift_by_resolution": [
+   6.701333384377542e-05,
+   1.6749748122131937e-05,
+   4.1776045714892625e-06
+  ],
+  "max_blowup_drift": 6.701333384377542e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.996886983559531,
+  "shape_descriptors": {
+   "n_sign_changes": 4,
+   "spectral_tail_slope": -0.29323621707422554,
+   "energy_top_k_frac": 0.9942816737858144
+  }
+ },
+ {
+  "genome_id": "g01090",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "9,0",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081434,
+  "nu_crit": 0.16286823272705075,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.607533020300223,
+   3.6101519847489314,
+   3.611489508361148
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9994260440208689,
+   0.9994934250894792,
+   0.9995053053226496
+  ],
+  "drift_by_resolution": [
+   5.608075548977935e-05,
+   1.3691131842961885e-05,
+   3.2860663278865078e-06
+  ],
+  "max_blowup_drift": 5.608075548977935e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 1.996886983559531,
+  "shape_descriptors": {
+   "n_sign_changes": 4,
+   "spectral_tail_slope": -0.29323621707422554,
+   "energy_top_k_frac": 0.9942816737858144
+  }
+ },
+ {
+  "genome_id": "g01178",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "6,0",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16255573272705076,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.238129253038995,
+   2.2380569539894557,
+   2.2380572894534927
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998172677843395,
+   0.9999191296839494,
+   0.9999102125990951
+  ],
+  "drift_by_resolution": [
+   6.735752931173771e-05,
+   1.6787564953553832e-05,
+   4.187538426472739e-06
+  ],
+  "max_blowup_drift": 6.735752931173771e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 2.192735293125776,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": -1.7185209231119314,
+   "energy_top_k_frac": 0.9956916246681901
+  }
+ },
+ {
+  "genome_id": "g01178",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "6,0",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081278,
+  "nu_crit": 0.16255573272705076,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6725309608656,
+   3.675026137452639,
+   3.6762936314882273
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9993812848375515,
+   0.9994753226388348,
+   0.9994883930640123
+  ],
+  "drift_by_resolution": [
+   5.583744302547745e-05,
+   1.3633494270945443e-05,
+   3.2681322351554977e-06
+  ],
+  "max_blowup_drift": 5.583744302547745e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 2.192735293125776,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": -1.7185209231119314,
+   "energy_top_k_frac": 0.9956916246681901
+  }
+ },
+ {
+  "genome_id": "g00451",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "10,0",
+  "role": "inviscid_anchor",
+  "a": 0.7,
+  "nu": 0.0,
+  "nu_crit": 0.16224323272705077,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   2.258445158960736,
+   2.2583491270894864,
+   2.2583495859352465
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9998658535440748,
+   0.9998942217873368,
+   0.9998977968635713
+  ],
+  "drift_by_resolution": [
+   6.654560958599116e-05,
+   1.6597152730739538e-05,
+   4.140395340835874e-06
+  ],
+  "max_blowup_drift": 6.654560958599116e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 2.28788338638347,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": 0.3815920397593861,
+   "energy_top_k_frac": 0.9972804047507214
+  }
+ },
+ {
+  "genome_id": "g00451",
+  "source_experiment_id": "stage2_6-seed3",
+  "map_cell": "10,0",
+  "role": "viscous_resistance",
+  "a": 0.7,
+  "nu": 0.081122,
+  "nu_crit": 0.16224323272705077,
+  "resolutions_tested": [
+   256,
+   512,
+   1024
+  ],
+  "t_star_by_resolution": [
+   3.6490763203803005,
+   3.6515539634431495,
+   3.6528124311983947
+  ],
+  "alpha_by_resolution": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "r2_by_resolution": [
+   0.9994023223659458,
+   0.9994881231603497,
+   0.9994987568753926
+  ],
+  "drift_by_resolution": [
+   5.5974583626210494e-05,
+   1.3671514810597855e-05,
+   3.279377016564855e-06
+  ],
+  "max_blowup_drift": 5.5974583626210494e-05,
+  "converged": true,
+  "win_tier": "numerically_confirmed",
+  "envelope_p": 2.28788338638347,
+  "shape_descriptors": {
+   "n_sign_changes": 2,
+   "spectral_tail_slope": 0.3815920397593861,
+   "energy_top_k_frac": 0.9972804047507214
+  }
+ }
+]

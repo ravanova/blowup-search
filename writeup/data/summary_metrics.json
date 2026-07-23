@@ -1,0 +1,47 @@
+{
+ "stage2_acceptance": {
+  "seeds": {
+   "1": {
+    "ga_final": 0.16236328124999988,
+    "rand_final": 0.15908203124999998,
+    "margin_over_tol": 3.28,
+    "lit_best": 0.15849609375
+   },
+   "2": {
+    "ga_final": 0.16310665130615232,
+    "rand_final": 0.15849609375,
+    "margin_over_tol": 4.61,
+    "lit_best": 0.15849609375
+   },
+   "3": {
+    "ga_final": 0.16286823272705075,
+    "rand_final": 0.15966796875,
+    "margin_over_tol": 3.2,
+    "lit_best": 0.15849609375
+   }
+  },
+  "all_seeds_beat_random": true,
+  "all_seeds_beat_literature": true
+ },
+ "stage3_tier2": {
+  "n_studies": 18,
+  "n_confirmed": 18,
+  "n_elites": 9,
+  "inviscid_max_finest_two_rel_diff": 3.5190015896936245e-06,
+  "viscous_max_finest_two_rel_diff": 0.0004132148036818514,
+  "max_drift": 6.735752931173771e-05,
+  "all_alpha_generic": true
+ },
+ "stage3_5_nongenericity": {
+  "a_values": [
+   0.7,
+   0.9,
+   1.0
+  ],
+  "any_pass": false,
+  "a07_alpha_flat": true,
+  "a09_welldef_flips": 15,
+  "a09_max_res_diff_alpha": 2.7,
+  "a10_blowup": 0
+ }
+}
