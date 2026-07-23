@@ -153,6 +153,79 @@ def project_to_sines(fn, n, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
                      bandwidth_cap)
 
 
+# --- C^{1,alpha} rough-data genome mode (PLAN.md Stage 3.6 / Route A Phase 0) --
+#
+# The k^{-p} envelope above reaches *spectrally-decaying* shapes, but with
+# random phases c_k it produces a delocalized random Fourier field, not a
+# profile with a genuine, localized limited-regularity singularity — the kind
+# the De Gregorio / 2D-Boussinesq blow-up literature (Elgindi-Jeong, Chen-Hou,
+# Buckmaster-Gomez-Serrano) actually uses. Those results need Holder velocity
+# u in C^{1,alpha}, i.e. vorticity omega in C^{0,alpha} (continuous, alpha-
+# Holder, but NOT C^1). This mode constructs exactly that, as an odd periodic
+# vorticity profile with a prescribed Holder exponent.
+#
+# Canonical family (odd, 2pi-periodic, smooth away from x=0 and x=pi):
+#
+#     f_h(x) = sign(sin x) * |sin x|^h,     h in (0, 1].
+#
+# Near x=0 it is sign(x)|x|^h -> Holder-h vorticity with a cusp whose slope
+# |f'| ~ |x|^{h-1} blows up for h<1; h=1 is exactly sin(x) (the smooth
+# endpoint). This is the "rough-data representation principle" CLAY_ROADMAP.md
+# carries into Phase 1 — the profile is model-agnostic, only the solver changes.
+
+
+def holder_profile(h):
+    """Return the odd C^{0,h} rough-vorticity callable f_h(x) = sign(sin x)
+    |sin x|^h. h in (0, 1]: small h = rough (Holder-h cusp at 0 and pi),
+    h=1 = smooth (sin x exactly). The intended regularity is unit-tested in
+    test_genome_rough.py via the real-space local Holder exponent."""
+    h = float(h)
+    if not (0.0 < h <= 1.0):
+        raise ValueError(f"Holder exponent h must be in (0, 1], got {h}")
+
+    def fn(x):
+        s = np.sin(x)
+        return np.sign(s) * np.abs(s) ** h
+
+    return fn
+
+
+def measure_holder_exponent(fn, x_lo=1e-6, x_hi=1e-2, n=60):
+    """Fit the local real-space Holder exponent of an odd profile at its
+    singularity x=0: |fn(x)| ~ C x^h as x->0+, so the slope of log|fn| vs
+    log x over a small window IS h. This is the *definitional* regularity
+    certificate (the spectral-decay rate is contaminated by the second cusp
+    at x=pi and finite-k roundoff, so it is not used as the gate). Only valid
+    for the analytic profile — a bandlimited genome smooths the cusp below
+    grid scale."""
+    xs = np.logspace(np.log10(x_lo), np.log10(x_hi), n)
+    ys = np.abs(np.asarray(fn(xs), dtype=float))
+    good = ys > 0.0
+    return float(np.polyfit(np.log(xs[good]), np.log(ys[good]), 1)[0])
+
+
+def realize_holder(h, n_grid, energy_budget=ENERGY_BUDGET):
+    """The rough profile f_h evaluated on grid(n_grid) and rescaled to the L2
+    energy budget — the honest 'rough data at resolution N'. Unlike a fixed-
+    length genome this keeps every grid mode (the solver then dealiases to
+    N/3), so refining N resolves more of the Holder tail: exactly the knob the
+    Stage 3.6 fine-N convergence probe turns. Used by stage3_6_sweep.py."""
+    from solver.spectral_utils import energy
+
+    w = holder_profile(h)(grid(n_grid))
+    return w * np.sqrt(energy_budget / energy(w))
+
+
+def rough_genome(h, n, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
+    """The rough profile f_h as a length-n GA genome (its first n sine
+    coefficients, energy-normalized) — the rough-data mode in the genome
+    representation proper, so MAP-Elites / operators can carry and mutate
+    Holder-profile shapes. Note a length-n genome is C^infinity (bandlimited);
+    it inherits the *coefficient structure* of a C^{0,h} profile, which is what
+    transfers, not sub-grid regularity."""
+    return project_to_sines(holder_profile(h), n, energy_budget, bandwidth_cap)
+
+
 def shape_descriptors(genome, energy_budget=ENERGY_BUDGET, bandwidth_cap=None):
     """The three logged descriptors (LOGGING.md schema #3), computed from the
     effective coefficients: n_sign_changes, spectral_tail_slope (the MAP-
