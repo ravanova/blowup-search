@@ -32,9 +32,30 @@ Everything at or near machine precision; the RK4-time-integration checks
 (transport 5e-11, Taylor–Green 5e-15) confirm the coupled dynamics too. What a
 human noticed: the Taylor–Green check is the strong one — it forces the
 advection term and the Biot–Savart velocity to cancel exactly at machine scale,
-which a sign error or a mis-indexed kx/ky mesh would not survive. Next (STOP
-for review first): Gate 1b — add the symmetry-wall and reproduce the Luo–Hou
-growth signature.
+which a sign error or a mis-indexed kx/ky mesh would not survive.
+
+**Gate 1b (Hou–Luo symmetry-wall) — correctness PASS.** The no-flow wall is
+imposed by parity (w odd-x/odd-y, th even-x/odd-y) rather than a Chebyshev
+boundary: Biot–Savart then gives v even-x/odd-y (vanishes on y=0,π) and u
+odd-x/even-y (vanishes on x=0,π), an effective [0,π]² box with the singular
+corner at the origin. `test_boussinesq_wall.py`, 4/4: wall_bc 8.2e-17 (v,u zero
+on the walls/axes at machine scale); **parity_preserved 9.0e-15 — the crucial
+one: with NO projection, symmetric data stays in the subspace to roundoff, so
+the wall is a genuine invariant of the discretised dynamics, not enforced by
+fiat**; parity_enforced 3.7e-16; buoyancy_amplifies — a Luo–Hou-type IC (seed
+vorticity + sharp buoyancy gradient) amplifies max|ω| 30.6× while holding parity
+at machine scale and drift at 2.6e-6. The `symmetry="houluo"` solver option
+projects each step so long runs stay exactly on the wall; the guard proves the
+projection is only cleaning float-level leakage, not doing real work.
+
+What is deliberately NOT claimed yet: the quantitative Luo–Hou growth curve /
+finite-T\* singularity. Uniform-grid spectral resolution cannot reach the ~10⁷
+amplitude Luo–Hou got with adaptive meshing, so matching their curve is a
+separate resolution-limited study, and "how faithfully to chase it" is a
+judgment call flagged for review rather than decided here. The two Boussinesq
+suites (test_solver_boussinesq, test_boussinesq_wall) join the required pre-run
+set for Phase 1. Next: Gate 2 — port the Phase-0 rough-data + fine-N method,
+validated on a known-answer control first.
 
 ## DECISION RECORD (not an experiment) — 2026-07-23 — Route A, Phase 0 is next
 

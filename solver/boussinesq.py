@@ -78,6 +78,50 @@ def velocity_from_vorticity(w_hat, KX, KY, inv_Ksq):
     return u, v
 
 
+# --- Hou-Luo symmetry-wall (PHASE1_PLAN.md, Gate 1b) ---
+#
+# A no-penetration wall is imposed by parity symmetry rather than a Chebyshev
+# boundary: on the doubly-periodic square, restrict to the subspace
+#
+#     w  odd in x AND odd in y      (w  = sum sin(jx) sin(ky))
+#     th even in x AND odd in y     (th = sum cos(jx) sin(ky))
+#
+# Then Biot-Savart gives u = -psi_y odd-x/even-y and v = psi_x even-x/odd-y, so
+# the normal velocity v vanishes on y=0 and y=pi (walls), and u vanishes on x=0
+# and x=pi (symmetry axes) -- an effective [0,pi]^2 box with the singular corner
+# at the origin, the Luo-Hou geometry. The buoyancy th_x is odd-x/odd-y = w's
+# parity, and one checks directly that u.grad w, u.grad th, and the viscous term
+# all preserve these parities, so the subspace is invariant: initialising in it
+# and evolving keeps the wall exactly (validated to machine precision in
+# test_boussinesq_wall.py by measuring the parity-violating residual over time).
+
+
+def _reflect(f, axis):
+    """f evaluated at x -> -x (mod 2pi) along `axis`: index i -> (n-i) % n."""
+    r = np.concatenate([f[:1], f[:0:-1]], axis=0)
+    return r if axis == 0 else np.concatenate([f[:, :1], f[:, :0:-1]], axis=1)
+
+
+def project_odd_odd(f):
+    """Project a real field onto odd-in-x AND odd-in-y (the w subspace)."""
+    return 0.25 * (f - _reflect(f, 0) - _reflect(f, 1) + _reflect(_reflect(f, 0), 1))
+
+
+def project_even_odd(f):
+    """Project a real field onto even-in-x AND odd-in-y (the th subspace)."""
+    return 0.25 * (f + _reflect(f, 0) - _reflect(f, 1) - _reflect(_reflect(f, 0), 1))
+
+
+def parity_residual(f, kind):
+    """Relative size of the parity-violating component of f (0 == exactly in the
+    subspace). `kind` is "odd_odd" (w) or "even_odd" (th)."""
+    proj = project_odd_odd(f) if kind == "odd_odd" else project_even_odd(f)
+    scale = float(np.max(np.abs(f)))
+    if scale == 0.0:
+        return 0.0
+    return float(np.max(np.abs(f - proj))) / scale
+
+
 @dataclass
 class BoussinesqResult:
     """Summary of one run — mirrors solver.gclm.SolverResult, plus theta_final."""
@@ -142,13 +186,20 @@ def solve_boussinesq(
     nonlinear=True,
     buoyancy=True,
     frozen_u=None,
+    symmetry=None,
 ):
     """Integrate 2D Boussinesq from (omega0, theta0) on an n x n grid.
 
     frozen_u: None, or a constant (cu, cv) divergence-free velocity replacing the
     self-consistent field (the transport-only acceptance check).
     early_decay_exit: as in solve_gclm — {"fraction": f, "window": T}.
+    symmetry: None (doubly-periodic, Gate 1a) or "houluo" — project w onto
+    odd-x/odd-y and th onto even-x/odd-y each step so the no-flow wall is held
+    exactly against roundoff drift (Gate 1b). The dynamics preserve the subspace
+    on their own; this only removes float-level leakage on long runs.
     """
+    if symmetry not in (None, "houluo"):
+        raise ValueError(f"unknown symmetry {symmetry!r}")
     t_start_wall = time.perf_counter()
     omega0 = np.asarray(omega0, dtype=float)
     theta0 = np.asarray(theta0, dtype=float)
@@ -159,6 +210,9 @@ def solve_boussinesq(
     mask = dealias_mask2d(n)
     dx = TWO_PI / n
 
+    if symmetry == "houluo":
+        omega0 = project_odd_odd(omega0)
+        theta0 = project_even_odd(theta0)
     w_hat = np.fft.fft2(omega0) * mask
     th_hat = np.fft.fft2(theta0) * mask
     w = np.fft.ifft2(w_hat).real
@@ -237,6 +291,9 @@ def solve_boussinesq(
 
         t += dt
         n_steps += 1
+        if symmetry == "houluo":
+            w_hat = np.fft.fft2(project_odd_odd(np.fft.ifft2(w_hat).real)) * mask
+            th_hat = np.fft.fft2(project_even_odd(np.fft.ifft2(th_hat).real)) * mask
         w = np.fft.ifft2(w_hat).real
         th = np.fft.ifft2(th_hat).real
         m = float(np.max(np.abs(w)))

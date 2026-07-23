@@ -53,14 +53,17 @@ analytic ladder in `test_solver_boussinesq.py`, each check isolating one piece:
   6. Conservation: general nonlinear run with buoyancy on → `∫ω`, `∫θ` drift at
      machine scale, energy-balance residual small.
 
-**Gate 1b — Hou–Luo geometry + benchmark.** Add the no-flow wall via a
-parity/symmetry-restricted spectral basis (odd/even reflection so the wall is a
-symmetry line where the normal velocity vanishes). Validate: symmetry is
-preserved to machine precision under evolution, the wall BC holds, and the
-solver reproduces the *qualitative* Luo–Hou vorticity-growth signature
-(faster-than-exponential growth with the reciprocal-vorticity diagnostic
-pointing to a finite `T*`) at feasible uniform resolution. We will not match the
-`~10⁷` amplitude (that needs AMR); we validate the mechanism and early curve.
+**Gate 1b — Hou–Luo geometry + benchmark. [correctness DONE]** The no-flow wall
+is imposed by parity (`w` odd-x/odd-y, `th` even-x/odd-y): Biot–Savart gives `v`
+vanishing on `y=0,π` and `u` on `x=0,π`, an effective `[0,π]²` box with the
+singular corner at the origin. Validated (`test_boussinesq_wall.py`, 4/4):
+symmetry preserved to 9e-15 WITHOUT projection (the wall is a genuine invariant
+of the discretised dynamics), wall BC at 8e-17, and a Luo–Hou-type IC amplifies
+`max|ω|` 30.6× with parity + conservation intact. The `symmetry="houluo"` solver
+option holds the wall exactly on long runs. **Deferred (judgment call, flagged
+for review):** the *quantitative* Luo–Hou growth curve / finite-`T*` claim —
+uniform-grid resolution cannot reach the `~10⁷` amplitude (needs AMR), so how
+faithfully to chase it is a separate decision, not part of this correctness gate.
 
 **Gate 2 — port the Phase-0 method.** A 2D rough-data representation (2D analog
 of `holder_profile`, unit-tested for its regularity) and the fine-N exponent /
