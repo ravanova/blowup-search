@@ -65,10 +65,16 @@ for review):** the *quantitative* Luo–Hou growth curve / finite-`T*` claim —
 uniform-grid resolution cannot reach the `~10⁷` amplitude (needs AMR), so how
 faithfully to chase it is a separate decision, not part of this correctness gate.
 
-**Gate 2 — port the Phase-0 method.** A 2D rough-data representation (2D analog
-of `holder_profile`, unit-tested for its regularity) and the fine-N exponent /
-self-similar-quality measurement, each validated on a known-answer control
-FIRST (the analog of the a=0.7 control in Stage 3.6).
+**Gate 2 — port the Phase-0 method. [DONE]** (a) 2D rough-data representation
+`ga/genome2d.py`: the separable Holder product `w_h = P_h(x)P_h(y)` (odd-x/odd-y)
++ density partner `th_h = |sin x|^h P_h(y)` (even-x/odd-y); regularity certified
+by `test_genome_rough_2d.py` (7/7) — its y=π/2 slice is exactly the 1D `P_h`, so
+the Phase-0 certificate transfers verbatim. (b) Fine-N measurement = the same
+`estimate_blowup_time`; validated on controls (`test_phase1_measurement.py`,
+3/3): synthetic `(T*-t)^-a` inverted to `(a,T*)` exactly, and 2D Euler
+(provably-regular, `||w||_inf` conserved) correctly refused Tier-2 — the
+per-resolution exponents rail to opposite grid edges, so the convergence gate
+rejects it (the anti-self-deception property, in 2D).
 
 **Gate 3 — 2D genome.** A 2D genome data structure applying the rough-data
 principle; reuse MAP-Elites, budget-matched acceptance, win-condition tiers,

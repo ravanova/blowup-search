@@ -54,8 +54,36 @@ amplitude Luo–Hou got with adaptive meshing, so matching their curve is a
 separate resolution-limited study, and "how faithfully to chase it" is a
 judgment call flagged for review rather than decided here. The two Boussinesq
 suites (test_solver_boussinesq, test_boussinesq_wall) join the required pre-run
-set for Phase 1. Next: Gate 2 — port the Phase-0 rough-data + fine-N method,
-validated on a known-answer control first.
+set for Phase 1.
+
+**Gate 2 (port the Phase-0 method) — PASS.** Two pieces, each validated before
+trust. (a) The 2D rough-data representation (`ga/genome2d.py`): the separable
+Holder product w_h = P_h(x)P_h(y) with P_h = sign(sin)|sin|^h — automatically
+odd-x/odd-y (the vorticity parity), plus the even-x/odd-y density partner
+th_h = |sin x|^h P_h(y). Its slice at y=π/2 is exactly the 1D P_h, so the
+Phase-0 regularity certificate transfers verbatim: `test_genome_rough_2d.py` 7/7
+— corner Holder exponent recovers h, h=1 is exactly sin x sin y, the cusp x-slope
+diverges at the N^{1-h} rate (C^{0,h}-not-C^1), tail energy monotone in h, and
+the realized fields sit in the right parity subspace, energy-normalized. (b) The
+fine-N exponent measurement is the SAME model-agnostic estimate_blowup_time; only
+its wiring to the 2D solver is new, so it is validated on known-answer controls
+(`test_phase1_measurement.py` 3/3): a synthetic (T*-t)^-a series is inverted back
+to (a, T*) exactly (a=1.0/1.5/2.5, R²=1.0), and — the important one — 2D Euler
+(buoyancy off, globally regular, ||w||_inf conserved) is fed through the whole
+pipeline and must NOT reach Tier-2. It doesn't: ||w||_inf growth is 1.4%→0.4% as
+N goes 128→192 (shrinking, as the theorem says), and the per-resolution T*/alpha
+rail to OPPOSITE grid edges (T*=58,a=0.30 vs T*=12103,a=3.00, the finer with
+negative held-out R²), so the convergence gate rejects it decisively. A single
+coarse run's held-out R²=0.984 would have flagged a spurious candidate — exactly
+why resolution-convergence, not single-run candidacy, is the real gate. What a
+human noticed: the negative control is the sharp one — it proves the pipeline
+cannot manufacture a Tier-2 blow-up from a flow we KNOW is regular, which is the
+whole anti-self-deception contract, now demonstrated in 2D.
+
+The four Phase-1 suites are solver-heavy (~30–60s each); the full 10-suite gate
+needs a longer timeout than the 1D-only set. Next (STOP for review first): Gate
+3 — the 2D genome data structure + MAP-Elites reuse, then the NON-NEGOTIABLE
+Gate 4 viability gate before any GA compute.
 
 ## DECISION RECORD (not an experiment) — 2026-07-23 — Route A, Phase 0 is next
 
