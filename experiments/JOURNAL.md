@@ -3,6 +3,44 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## stage3-resolution-20260723T082807 (57b4a88) — 2026-07-23 — TIER 2: 18/18 CONFIRMED
+
+Why configured this way: studied the top-3 elites per acceptance seed (9
+genomes, spread across 9 MAP-Elites cells, all 3 seeds) rather than only the
+single best, so a promotion means the evolved *shape family* confirms, not one
+lineage. Two operating points per elite because fitness is a ν_crit bisection
+but a resolution study is one trajectory: ν=0 (cleanest, gates promotion — the
+sharpest test of the C^∞-may-not-blow-up regularity caveat) and ν=0.5·ν_crit
+(inside the band; confirms the viscosity-resistant blow-up itself refines). Ran
+each elite's *own* frozen config.json, not a shared default — the study must
+mirror the exact fitness config each elite was produced under. Amplification
+raised 100×→10⁴×: at a fixed 100× stop every resolution halts at the same
+physical state, making T\* agreement almost tautological; 4 decades of growth
+actually stresses the extrapolation.
+
+What a human noticed skimming the results:
+
+- The convergence is almost too clean. Inviscid 512→1024 relative T\* diff
+  maxes at 3.5e-6 against a 2e-2 gate (~5000× margin); the top elite gives
+  *bit-identical* T\*=2.17320 at N=1024 and N=2048. That is the signature of a
+  singularity already fully resolved at N=256, i.e. NOT forming at
+  ever-smaller scales — the direct refutation of the resolution-artifact worry
+  for these shapes.
+- Every single confirmed blow-up fits α=1.000 exactly. This is the *generic
+  CLM* exponent, not a De Gregorio non-generic one — so honestly these are the
+  CLM singularity surviving a=0.7 advection, consistent with (not beyond) the
+  literature. Wrote this into STAGE_3_RESULTS.md so the pipeline-validation win
+  isn't mis-sold as a new singularity. The novelty stays the QD map.
+- Conservation drift *shrinks* monotonically with N (6.7e-5 → 1.0e-6 as
+  256→2048), the opposite of an under-resolved run. The artifact guard (1e-3)
+  never engaged; it is there for the axes we haven't confirmed yet.
+- Cost was trivial (~4s/run at N=1024, 18 studies × 3 N in well under a
+  minute at 10 workers) — the expensive part of this project was always the
+  bisection-heavy GA, not the confirmation.
+- Literal PLAN wording says "De Gregorio genome"; our axis is a=0.7, and a=1 is
+  a dead axis for smooth odd data. Flagged the gap explicitly rather than
+  quietly reinterpreting the criterion.
+
 ## stage2_6-seed1/2/3 (a10d6b2) — 2026-07-22/23 — FINAL: ACCEPTANCE PASS 3/3
 
 **Final verdict (analyze_stage2.py): STAGE 2 ACCEPTANCE MET.** GA vs

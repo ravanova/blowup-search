@@ -79,3 +79,13 @@ with a numerical artifact.
   random search on 3/3 seeds (+3.3/+4.6/+3.2 tol, above the literature
   best on every seed), with evolved shapes more viscosity-resistant than
   any hand-built profile measured. Next: Stage 3 resolution study.
+- [STAGE_3_RESULTS.md](STAGE_3_RESULTS.md) — **Stage 3 PASSED: Tier-2
+  numerically-confirmed.** The automated resolution study
+  ([ga/resolution_study.py](ga/resolution_study.py)) reran the top-3 elites
+  per seed at N ∈ {256, 512, 1024}; all 9 (18/18 studies, inviscid + viscous)
+  converge far inside the 2% T\* gate with shrinking conservation drift, and
+  are promoted to `NUMERICALLY_CONFIRMED`. Honest read: α=1.000 throughout, so
+  these are the CLM singularity surviving a=0.7 advection (pipeline
+  validation + a Tier-2-backed shape→resistance map), **not** a novel
+  De Gregorio blow-up. The near-term Stages 1–3 milestone is complete;
+  Stage 4 (3D Euler) is unscheduled.

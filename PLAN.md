@@ -651,6 +651,28 @@ a gate passes — the acceptance-rerun logs and verdict here.
 
 ## Stage 3 — Automated resolution-study loop (Tier 2 promotion)
 
+> **BUILT AND RUN (2026-07-23, commit `57b4a88`) — PASSED: 18/18 studies reach
+> `NUMERICALLY_CONFIRMED`.** [ga/resolution_study.py](ga/resolution_study.py)
+> reran the top-3 elites of each Stage 2.6 acceptance seed (9 genomes) at
+> N ∈ {256, 512, 1024} under their frozen fitness config, at two operating
+> points each — an inviscid anchor (ν=0, gates promotion) and a
+> viscosity-resistance point (ν≈0.081) — with amplification raised to 10⁴× so
+> the T\* extrapolation is stressed over four decades. Every elite's T\*
+> converges far inside the 2% gate (finest-two agreement 3.5e-6 inviscid /
+> 4.1e-4 viscous; the top elite is T\*-identical at N=2048), conservation drift
+> ~6e-5 *shrinks* with N (15× under the 1e-3 artifact guard), and all fit
+> α=1.000 — the *generic CLM* exponent, i.e. the CLM singularity surviving
+> a=0.7 advection, **not** a novel De Gregorio blow-up. Events (schema #6) in
+> `run_logs/stage3-resolution-20260723T082807/`; 18 promotions mirrored to
+> `experiments/promoted_candidates.jsonl`. Honest caveat: the literal criterion
+> below names *De Gregorio* (a=1), which is a dead axis for smooth odd data;
+> these are Tier-2 gCLM(a=0.7) confirmations on the frozen search axis, not
+> De Gregorio proper. Full analysis, exponent read, and follow-ups (push toward
+> a=1 with rough data; self-similar profile check):
+> [STAGE_3_RESULTS.md](STAGE_3_RESULTS.md). **The reachable near-term milestone
+> (validated Stages 1–3 pipeline with resolution-converged candidates) is now
+> complete; Stage 4 is the next real, unscheduled step.**
+
 **Goal:** automatically promote promising genomes from Tier 1 to Tier 2.
 
 Periodically (e.g. every 10 generations, or whenever a new best genome
