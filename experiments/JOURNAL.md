@@ -3,6 +3,59 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 1 Step A — 2D Boussinesq velocity operator on a stretched grid, VALIDATED — 2026-07-24
+
+Full record: PHASE2_SPIKE1_NOTES.md; technical writeup/TECHNICAL_SPIKE1_VELOCITY.md; blog
+writeup/BLOG_SPIKE1_STEPA.md. Code: `solver/boussinesq_velocity.py`,
+`test_boussinesq_velocity.py` (5/5 pass). NOT a logged gate run — solver development
+validated against a manufactured known answer. Evidence figure fig9 + committed data
+rebuild: `python writeup/spike1_stepA_evidence.py`.
+
+User chose Spike 1 (2D Boussinesq port), **de-risked variant**: build + validate the
+highest-risk new piece (the 2D velocity operator `u = ∇^⊥(−Δ)⁻¹ω`) standalone before
+wiring the full rescaled solver. Step A is that piece — the 2D analogue of Spike-0's
+non-FFT line Hilbert (on the uniform grid it's a trivial FFT; the real profile's slow
+`r^{−1/3}` tail forces a stretched grid where FFT can't go).
+
+What a human would want to know:
+
+- **Grounded first, not reinvented.** Pulled Chen–Hou Part I (arXiv:2210.07191) + the MMS
+  rigorous-numerics paper (2305.05660) into `Papers/` (gitignored) and transcribed the
+  formulation exactly: physical (2.3)–(2.5), one-scale dynamic rescaling (2.10), modulation
+  (2.11), half-plane Poisson velocity with `φ=0` on the wall, far-field `ω~r^α`,
+  `α=c_ω/c_l≈−1/3`, gate target `c_l/c_ω≈−2.92`. WebFetch couldn't ingest the papers (size
+  limit) — the user downloaded the PDFs; `Read` handles them page-by-page.
+
+- **Correction banked:** the "two-scale rescaling" worry in the planning notes was from
+  Chen–Hou's *earlier C^{1,α}-boundary* paper, NOT this smooth-data profile, which is
+  **one-scale**. So Spike-0's one-scale-is-attracting headline is the relevant precedent.
+
+- **The elegant win.** On a **log-radial** grid (`r=e^ρ`) with the Dirichlet **angular
+  sine** basis `sin(2nβ)`, the polar Laplacian's `1/r`, `1/r²` terms cancel and `−Δφ=ω`
+  decouples per mode into a constant-coefficient tridiagonal ODE
+  `φ_n''(ρ) − (2n)²φ_n = −r²ω_n` — one Thomas solve per mode, no scipy sparse. The
+  `r^{±2n}` homogeneous tails carry origin-regularity + far-field decay (the `r^{−1/3}`
+  lever at POC level).
+
+- **Validation (manufactured known answer, the house rule).** `φ*=r²e^{−r}sin2β +
+  r⁴e^{−r}sin4β` → recover `u,v` to rel L∞ **~6e-5**, radial convergence order **2.00**
+  (clean log-log line, not a lucky grid), and the modulation origin read **`u_x(0)=−2.0008`**
+  vs −2 (that steering signal was a noise-amplifier in 1D recon; the angular-mode structure
+  makes it clean here).
+
+- **Honest POC scope (stated explicitly, flagged to user).** Chen–Hou's full apparatus
+  (6th–8th-order B-spline FEM Poisson, adaptive mesh to `10¹⁵`, semi-analytic far-field
+  split, `10⁻⁷` residual, INTLAB interval bounds) is months-scale and mostly built for the
+  *proof*. The plan pre-committed Spike 1 to qualitative fidelity, so Step A uses a
+  tractable **validated** Poisson solve (legitimate: an elliptic solve is textbook, unlike
+  the exotic 1D line Hilbert) with the same mathematics. Reproduces a proven result across
+  Wall C — validates machinery, NOT novel, NOT a proof.
+
+- **Next:** Step B (rescaled RHS `(c_l x+u)·∇` + buoyancy `θ_x` + modulation, SSPRK in τ,
+  with the `ζ=θ/x` substitution), then Step C (relax to the Chen–Hou profile — the gate).
+  The stable-vs-singular target fork the user raised stays deferred to the post-Spike-1
+  gate, when the working machine can probe both.
+
 ## Spike 0 COMPLETE — dynamic rescaling POC recovers the CLM profile + rate against the known answer — 2026-07-24
 
 Full record: PHASE2_SPIKE0_NOTES.md ("SPIKE 0 COMPLETE" section). Code:

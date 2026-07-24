@@ -17,3 +17,6 @@ Papers/
 # OS / editor
 .DS_Store
 *.swp
+
+# Transient local settings temp files
+.claude/*.tmp.*
