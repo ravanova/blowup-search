@@ -121,16 +121,32 @@ two de-risking spikes; the GA campaign itself is *not* yet run):
    **identical to four decimals across N=256/512**. This is the fitness the Gate
    3 genome will carry.
 
+4. **Gate 3 built the smooth 2D genome** (`ga/genome2d_smooth.py`) — truncated
+   Fourier modes in the Hou–Luo parity subspace, one joint energy normalization
+   (killing the overall-amplitude cheat), MAP-Elites on anisotropy × centroid —
+   and wired the ν_crit-analog through the solver (`ga/fitness2d.py`), tested
+   12/12.
+
+5. **Gate 4 ran the six-property gate on ν_crit — and it FAILED property 6, the
+   same wall as 1D.** The pre-committed predicate printed 6/6 PASS, but that was a
+   **false pass**: interrogating the winner showed ν_crit is ~75% explained by the
+   initial vorticity amplitude (ρ(ν_crit, log|ω₀|) = **−0.90**; two shapes at
+   equal absolute vorticity get a **197×** ν_crit gap), a trivial small-denominator
+   cheat the free ω/θ split enables. Fixing the split and a normalized-resistance
+   transform both fail to rescue it → the νk²-dissipation wall, reconfirmed and
+   fundamental for viscosity-resistance fitness. Per the pre-committed directive
+   this is a **finding, not a push-harder signal**. A follow-up probe shows an
+   **inviscid growth-rate currency** escapes both cheats (direction ✓; ρ(g, log|ω₀|)
+   = +0.24; ρ(g, centroid) flips to +0.38) — promising but necessary-not-sufficient,
+   and the open forward decision.
+
 **Honest scope of Phase 1 so far.** No 2D blow-up candidate has been produced —
-this is validated infrastructure plus two *de-risking* findings that shaped the
-deliverable before any GA compute. The screen is **necessary, not sufficient**:
-it clears only the direction + resolution-stability legs on 3 ICs. The
-non-negotiable next step (Gate 4) re-runs the full six-property viability gate on
-ν_crit over 40 shapes — **especially property 6 (non-trivial optimum)**, the
-exact property that killed the 1D ν_crit axis. If it rails, that is a finding,
-not a push-harder signal. Forward plan: [../PHASE1_PLAN.md](../PHASE1_PLAN.md),
-[../PHASE1_SPIKE_RESULTS.md](../PHASE1_SPIKE_RESULTS.md),
-[../PHASE1_AXIS_SCREEN_RESULTS.md](../PHASE1_AXIS_SCREEN_RESULTS.md).
+this is validated infrastructure plus the Gate-4 finding that viscosity-resistance
+is not a viable fitness here (and a methodology data point: a frozen predicate is a
+floor, not a ceiling). Forward plan and full record:
+[../PHASE1_PLAN.md](../PHASE1_PLAN.md),
+[../PHASE1_GATE4_RESULTS.md](../PHASE1_GATE4_RESULTS.md),
+[BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md).
 
 *All numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*

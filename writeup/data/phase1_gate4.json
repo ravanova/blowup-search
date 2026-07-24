@@ -1,0 +1,130 @@
+{
+ "gate4_nu_crit": {
+  "n_shapes": 40,
+  "n_growers": 36,
+  "n_censored_low": 4,
+  "n_censored_high": 0,
+  "frozen_predicate": "6/6 PASS (a FALSE pass -- see rho below)",
+  "rho_nu_log_w0": -0.904,
+  "loglog_slope": -2.11,
+  "loglog_R2": 0.755,
+  "rho_nu_centroid": -0.153,
+  "resolution_max_dnu": 0.0025,
+  "n_resolution_pairs": 32,
+  "band_over_tol": 287.0,
+  "top5_by_nu_crit": [
+   {
+    "label": "rand_15",
+    "class": "random",
+    "nu_crit": 1.437,
+    "centroid": 2.66,
+    "max_w0": 0.122,
+    "abs_peak_omega": 8.4
+   },
+   {
+    "label": "rand_18",
+    "class": "random",
+    "nu_crit": 1.3257,
+    "centroid": 1.56,
+    "max_w0": 0.186,
+    "abs_peak_omega": 13.5
+   },
+   {
+    "label": "rand_06",
+    "class": "random",
+    "nu_crit": 0.813,
+    "centroid": 2.84,
+    "max_w0": 0.227,
+    "abs_peak_omega": 13.7
+   },
+   {
+    "label": "rand_13",
+    "class": "random",
+    "nu_crit": 0.7017,
+    "centroid": 2.35,
+    "max_w0": 0.354,
+    "abs_peak_omega": 10.8
+   },
+   {
+    "label": "ctrl_sharp",
+    "class": "control",
+    "nu_crit": 0.6431,
+    "centroid": 1.41,
+    "max_w0": 0.162,
+    "abs_peak_omega": 7.6
+   }
+  ],
+  "example_shapes": {
+   "rand_15": {
+    "label": "rand_15",
+    "class": "random",
+    "nu_crit": 1.437,
+    "centroid": 2.66,
+    "max_w0": 0.122,
+    "abs_peak_omega": 8.4
+   },
+   "rand_05": {
+    "label": "rand_05",
+    "class": "random",
+    "nu_crit": 0.0073,
+    "centroid": 3.97,
+    "max_w0": 2.066,
+    "abs_peak_omega": 7.7
+   },
+   "rand_18": {
+    "label": "rand_18",
+    "class": "random",
+    "nu_crit": 1.3257,
+    "centroid": 1.56,
+    "max_w0": 0.186,
+    "abs_peak_omega": 13.5
+   },
+   "rand_24": {
+    "label": "rand_24",
+    "class": "random",
+    "nu_crit": 0.0425,
+    "centroid": 1.94,
+    "max_w0": 1.345,
+    "abs_peak_omega": 14.5
+   }
+  }
+ },
+ "fixed_split_probe": {
+  "split": 0.5,
+  "n_growers": 20,
+  "rho_nu_log_w0": -0.437,
+  "rho_nu_centroid": -0.211,
+  "winner": {
+   "label": "triv_sharpth",
+   "class": "trivial",
+   "centroid": 1.41,
+   "nu_crit": 0.1362
+  }
+ },
+ "currency_probe": {
+  "currency": "inviscid sustained growth rate g_sustained",
+  "labeled_g_sustained_by_N": {
+   "smooth_sharp": {
+    "128": 0.663,
+    "256": 0.793
+   },
+   "euler_control": {
+    "128": -0.0,
+    "256": -0.0
+   },
+   "smooth_mild": {
+    "128": 0.421,
+    "256": 0.421
+   }
+  },
+  "direction_ok": true,
+  "rho_g_log_w0": 0.244,
+  "rho_g_centroid": 0.384,
+  "winner": {
+   "label": "rand_01",
+   "class": "random",
+   "centroid": 1.59,
+   "g_sustained": 1.047
+  }
+ }
+}

@@ -27,6 +27,9 @@ and every figure is built from the small committed files in [`data/`](data/).
    broader (still technical) audience.
 4. **[BLOG_PHASE1.md](BLOG_PHASE1.md)** — a shorter companion post on the two
    de-risking experiments that opened Route A Phase 1 (2D Boussinesq).
+5. **[BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md)** — the Gate-4 sequel: the
+   ν_crit fitness passed the pre-committed gate but failed on substance (a false
+   pass), and the inviscid growth-rate currency that escapes the wall.
 5. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem.
 
@@ -57,6 +60,7 @@ Every claim in the writeup traces to one of these committed files:
 | `blowup_curve.json` | a representative max\|ω\|(t) trajectory | fig4 |
 | `phase1_spike.json` | per-(IC, N) g / amp / exponent / T\* for the 2D resolution spike | Phase 1 / fig6 |
 | `phase1_axis_screen.json` | per-(axis, IC, N) values + the pre-committed screen verdict | Phase 1 / fig7 |
+| `phase1_gate4.json` | Gate-4 six-property gate on ν_crit (the false pass + ω₀ diagnostic), the fixed-split & currency probes | Phase 1 / BLOG_PHASE1_GATE4 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,

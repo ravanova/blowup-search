@@ -372,6 +372,112 @@ def curate_summary(ga, studies, verdicts, rough, spike=None, screen=None):
     return metrics
 
 
+def curate_phase1_gate4():
+    """Route A Phase 1 Gate 4: the six-property viability gate on nu_crit
+    (fails property 6 via the omega0/split amp-denominator cheat), the fixed-split
+    and normalized-resistance probes, and the inviscid growth-rate currency probe.
+    Reads experiments/phase1_gate4{,_probe}.jsonl + phase1_currency_probe.jsonl."""
+    from phase1_gate4 import build_roster
+    from ga.genome2d_smooth import realize
+
+    def load(name):
+        p = REPO / "experiments" / name
+        return ([json.loads(l) for l in p.read_text().splitlines() if l.strip()]
+                if p.exists() else [])
+
+    def rho(x, y):
+        x, y = np.asarray(x, float), np.asarray(y, float)
+        if len(x) < 3 or np.std(x) == 0 or np.std(y) == 0:
+            return None
+        return round(float(np.corrcoef(x, y)[0, 1]), 3)
+
+    gate, probe, curr = (load("phase1_gate4.jsonl"),
+                         load("phase1_gate4_probe.jsonl"),
+                         load("phase1_currency_probe.jsonl"))
+
+    # Gate 4 nu_crit: re-realize roster genomes for the omega0 diagnostic
+    # (phase1_gate4 rows did not store max|w0|).
+    roster = {s["label"]: s["genome"] for s in build_roster()}
+    w0 = {l: float(np.max(np.abs(realize(g, 128)[0]))) for l, g in roster.items()}
+    n256 = {r["label"]: r for r in gate if r["resolution_N"] == 256}
+    n512 = {r["label"]: r for r in gate if r["resolution_N"] == 512}
+    grow = {l: r for l, r in n256.items() if r["bracket_censored"] is None}
+    labs = list(grow)
+    nu = [grow[l]["nu_crit"] for l in labs]
+    lw0 = [np.log(w0[l]) for l in labs]
+    b = np.polyfit(lw0, np.log(nu), 1)
+    R2 = 1.0 - np.var(np.log(nu) - np.polyval(b, lw0)) / np.var(np.log(nu))
+    dnu = {l: abs(n256[l]["nu_crit"] - n512[l]["nu_crit"]) for l in labs
+           if l in n512 and n512[l]["bracket_censored"] is None}
+    ranked = sorted(labs, key=lambda l: -grow[l]["nu_crit"])
+
+    def shape_row(l):
+        r = grow[l]
+        return {"label": l, "class": r["shape_class"],
+                "nu_crit": round(r["nu_crit"], 4),
+                "centroid": round(r["descriptors"]["centroid"], 2),
+                "max_w0": round(w0[l], 3),
+                "abs_peak_omega": round(r["amp_at_nu_lo"] * w0[l], 1)}
+
+    gate4 = {
+        "n_shapes": 40, "n_growers": len(grow),
+        "n_censored_low": sum(r["bracket_censored"] == "low" for r in n256.values()),
+        "n_censored_high": sum(r["bracket_censored"] == "high" for r in n256.values()),
+        "frozen_predicate": "6/6 PASS (a FALSE pass -- see rho below)",
+        "rho_nu_log_w0": rho(nu, lw0),
+        "loglog_slope": round(float(b[0]), 2),
+        "loglog_R2": round(float(R2), 3),
+        "rho_nu_centroid": rho(nu, [grow[l]["descriptors"]["centroid"] for l in labs]),
+        "resolution_max_dnu": round(max(dnu.values()), 4) if dnu else None,
+        "n_resolution_pairs": len(dnu),
+        "band_over_tol": round((max(nu) - min(nu)) / 5e-3, 0),
+        "top5_by_nu_crit": [shape_row(l) for l in ranked[:5]],
+        # the smoking-gun pairs: same absolute vorticity / inverted ranking
+        "example_shapes": {l: shape_row(l) for l in
+                           ("rand_15", "rand_05", "rand_18", "rand_24") if l in grow},
+    }
+
+    # fixed-split probe
+    gp = [r for r in probe if r["bracket_censored"] is None]
+    wp = max(gp, key=lambda r: r["nu_crit"])
+    fixed_split = {
+        "split": 0.5, "n_growers": len(gp),
+        "rho_nu_log_w0": rho([r["nu_crit"] for r in gp], np.log([r["max_w0"] for r in gp])),
+        "rho_nu_centroid": rho([r["nu_crit"] for r in gp],
+                               [r["descriptors"]["centroid"] for r in gp]),
+        "winner": {"label": wp["label"], "class": wp["shape_class"],
+                   "centroid": round(wp["descriptors"]["centroid"], 2),
+                   "nu_crit": round(wp["nu_crit"], 4)},
+    }
+
+    # currency probe: labeled direction + resolution + roster optimum
+    lab = {}
+    for r in (x for x in curr if x["leg"] == "direction"):
+        lab.setdefault(r["label"], {})[r["resolution_N"]] = round(r["g_sustained"], 3)
+    gc = [r for r in curr if r["leg"] == "optimum" and r["g_sustained"] is not None
+          and np.isfinite(r["g_sustained"])]
+    wc = max(gc, key=lambda r: r["g_sustained"])
+    nfine = max(n for r in lab.values() for n in r)
+    currency = {
+        "currency": "inviscid sustained growth rate g_sustained",
+        "labeled_g_sustained_by_N": lab,
+        "direction_ok": (lab["smooth_sharp"][nfine] > lab["smooth_mild"][nfine]
+                         > lab["euler_control"][nfine]),
+        "rho_g_log_w0": rho([r["g_sustained"] for r in gc],
+                            np.log([r["max_w0"] for r in gc])),
+        "rho_g_centroid": rho([r["g_sustained"] for r in gc],
+                              [r["descriptors"]["centroid"] for r in gc]),
+        "winner": {"label": wc["label"], "class": wc["shape_class"],
+                   "centroid": round(wc["descriptors"]["centroid"], 2),
+                   "g_sustained": round(wc["g_sustained"], 3)},
+    }
+
+    out = {"gate4_nu_crit": gate4, "fixed_split_probe": fixed_split,
+           "currency_probe": currency}
+    (DATA / "phase1_gate4.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
 if __name__ == "__main__":
     ga = curate_ga_vs_random()
     print(f"ga_vs_random.json: {len(ga)} seeds")
@@ -388,6 +494,10 @@ if __name__ == "__main__":
     print(f"phase1_spike.json: {len(spike['ics'])} ICs x {len(spike['resolutions'])} N")
     screen = curate_phase1_axis_screen()
     print(f"phase1_axis_screen.json: survivors={screen['survivors']}")
+    gate4 = curate_phase1_gate4()
+    print(f"phase1_gate4.json: nu_crit rho(nu,log|w0|)="
+          f"{gate4['gate4_nu_crit']['rho_nu_log_w0']}, "
+          f"currency direction_ok={gate4['currency_probe']['direction_ok']}")
     metrics = curate_summary(ga, studies, verdicts, rough, spike, screen)
     print("summary_metrics.json written")
     print(json.dumps(metrics, indent=1))
