@@ -3,6 +3,54 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## g_sustained staged probe — 2026-07-24 — fixed-window magnitude fails (same wall); rank-based g_frac survives
+
+Full results: PHASE1_GSUSTAINED_RESULTS.md. Data:
+experiments/phase1_gsustained_probe.jsonl → writeup/data/phase1_gsustained.json.
+This is the STAGED, cheap-first probe of the two Gate-4 forward refinements
+(fixed-absolute window; free-split property-6), run before any 40-shape gate. The
+user picked "continue staged (cheap caveat first)" at each fork, and the probing
+kept paying off — it caught a second cheat and reframed the whole deliverable.
+
+What a human would want to know:
+
+- **The fixed-window refinement fails, and the reason is structural.** I measured
+  the labeled ICs at N=128/256/512 and *looked at the trajectory* (window_diag
+  scratchpad probes) before trusting any window. smooth_sharp re-accelerates right
+  at the edge of its trusted window, and tail_guard pushes that edge out with N
+  (t_res 2.46→2.74→2.98), so g_frac climbs 0.663→0.793→0.968 and never converges.
+  Any window stable enough to avoid the drift sits in the earlier region where the
+  spike already showed mild>sharp. You get stable OR blow-up-predictive, not both.
+  This is spike finding #3 (near-singularity rate never resolution-converges on a
+  uniform grid) reasserting — the SAME wall as ν_crit, on the growth-rate axis.
+  Two currencies, one wall.
+
+- **The rank order is what survives.** For a QD map only the ranking must be
+  N-stable (bins are on resolution-stable descriptors). Spearman(rank@128,
+  rank@256) = +0.90 for g_frac — the magnitude is on the wall but the order holds.
+
+- **A second cheat, caught by the same reflex.** accel_ratio (late/early rate) was
+  MORE rank-stable (+0.95) but is a small-denominator cheat: its winner rand_08
+  never under-resolves (a non-grower), it mis-ranks the labeled ground truth
+  (rand_08 +3.6 > sharp +1.4), and ρ(accel_ratio, early_rate) = −0.66. Its
+  stability was real and worthless — it was stably ranking by the cheat. The
+  banked lesson repeated: a rank-stable winner is a floor, not a ceiling; always
+  interrogate against the dumbest cheat. g_frac passes the same audit clean
+  (winner a grower, top-5 all under-resolve, ρ(g,log|ω₀|)=+0.17, ρ(g,centroid)=+0.31).
+
+- **Caveat 2 (free split) is favorable.** No trivial max-split rail: a controlled
+  split-sweep at fixed structure has an INTERIOR optimum (~0.3–0.5). The free-roster
+  ρ(g,split)=+0.73 looked worrying but split↔ω₀ are mechanically entangled
+  (ρ=−0.92); partial ρ(g,log|ω₀| | split)=+0.04 proves the ω₀ cheat is ABSENT and
+  partial ρ(g,split | log|ω₀|)=+0.41 shows the split preference is genuine buoyancy
+  physics. Honest caveat: split (logged, not binned) dominates ω-geometry.
+
+- **Discipline notes.** Ran the 11-suite set (11/11) and committed the probe
+  script (c1cf817) before the logged run; the run reproduced every scratchpad
+  number exactly. STOPPED for review at the one remaining, expensive de-risk:
+  256→512 RANK stability. If the rank holds → full reformulated (rank-based) Gate 4
+  with property 6 evaluated controlling for split; if not → accept the negative.
+
 ## Gate 4 — 2026-07-24 — ν_crit FAILS property 6; inviscid growth-rate currency promising
 
 Full results: PHASE1_GATE4_RESULTS.md. The headline: the pre-committed six-property

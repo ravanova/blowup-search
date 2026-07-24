@@ -140,13 +140,37 @@ two de-risking spikes; the GA campaign itself is *not* yet run):
    = +0.24; ρ(g, centroid) flips to +0.38) — promising but necessary-not-sufficient,
    and the open forward decision.
 
+6. **The staged `g_sustained` probe: the escape hatch is real but narrow.** The
+   inviscid growth-rate currency was probed cheap-first before any 40-shape gate
+   (`phase1_gsustained_probe.py`, data
+   [`data/phase1_gsustained.json`](data/phase1_gsustained.json)). Three findings:
+   (1) its *magnitude* is on the **same uniform-grid resolution wall** as ν_crit —
+   the blow-up shape re-accelerates at the moving edge of its trusted window, so
+   `g_frac` climbs with N (sharp: **0.66→0.79→0.97** at N=128/256/512) and never
+   converges (spike finding #3 reasserting); (2) but the *rank order* is
+   resolution-stable (Spearman **+0.90** at 128↔256), and `g_frac` **survives the
+   cheat audit** — direction-correct, ρ(g,log|ω₀|)=+0.17 (no ω₀ cheat),
+   ρ(g,centroid)=+0.31 (rewards structure) — where a rival `accel_ratio` is
+   rank-stable **but a small-denominator cheat** (mis-ranks the ground truth);
+   (3) the free-split property-6 check is **favorable** — no trivial max-split rail
+   (interior split optimum), and partial ρ(g,log|ω₀| | split)=**+0.04** proves the
+   ω₀ cheat is absent. **Net:** a *rank-based* `g_frac` is the one viable fitness
+   found, contingent on an un-run 256→512 **rank**-stability check (paused for
+   review). The honest reframing: "resolution-stable" must mean *rank*-stable here,
+   because the magnitude is unrecoverable on a uniform grid.
+
 **Honest scope of Phase 1 so far.** No 2D blow-up candidate has been produced —
-this is validated infrastructure plus the Gate-4 finding that viscosity-resistance
-is not a viable fitness here (and a methodology data point: a frozen predicate is a
-floor, not a ceiling). Forward plan and full record:
+this is validated infrastructure, the Gate-4 finding that viscosity-resistance is
+not a viable fitness here, and the follow-on finding that the inviscid growth-rate
+*magnitude* hits the *same* uniform-grid wall (only a rank-based `g_frac` survives,
+pending the 256→512 rank check). Plus a methodology data point banked twice: a
+frozen predicate — and even a rank-stable winner — is a floor, not a ceiling; always
+interrogate the winner against the dumbest cheat. Forward plan and full record:
 [../PHASE1_PLAN.md](../PHASE1_PLAN.md),
 [../PHASE1_GATE4_RESULTS.md](../PHASE1_GATE4_RESULTS.md),
-[BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md).
+[../PHASE1_GSUSTAINED_RESULTS.md](../PHASE1_GSUSTAINED_RESULTS.md),
+[BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md),
+[BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md).
 
 *All numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*

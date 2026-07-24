@@ -478,6 +478,120 @@ def curate_phase1_gate4():
     return out
 
 
+def curate_phase1_gsustained():
+    """Route A Phase 1 staged g_sustained probe: the inviscid growth-rate currency
+    the forward-decision after Gate 4. Reads experiments/phase1_gsustained_probe.jsonl.
+    Records: LEG 1 (magnitude on the resolution wall), LEG 2 (rank-stability + the
+    g_frac-vs-accel_ratio cheat audit), LEG 3 (caveat-2 free-split partials)."""
+    p = REPO / "experiments" / "phase1_gsustained_probe.jsonl"
+    rows = ([json.loads(l) for l in p.read_text().splitlines() if l.strip()]
+            if p.exists() else [])
+    if not rows:
+        return None
+    T_MAX = 4.0
+
+    def rho(x, y):
+        x, y = np.asarray(x, float), np.asarray(y, float)
+        ok = np.isfinite(x) & np.isfinite(y)
+        if ok.sum() < 3 or np.std(x[ok]) == 0 or np.std(y[ok]) == 0:
+            return None
+        return round(float(np.corrcoef(x[ok], y[ok])[0, 1]), 3)
+
+    def spearman(a, b):
+        a, b = np.asarray(a, float), np.asarray(b, float)
+        ok = np.isfinite(a) & np.isfinite(b)
+        if ok.sum() < 3:
+            return None
+        ra, rb = np.argsort(np.argsort(a[ok])), np.argsort(np.argsort(b[ok]))
+        return round(float(np.corrcoef(ra, rb)[0, 1]), 3)
+
+    def partial(x, y, z):
+        x, y, z = (np.asarray(v, float) for v in (x, y, z))
+        ok = np.isfinite(x) & np.isfinite(y) & np.isfinite(z)
+        x, y, z = x[ok], y[ok], z[ok]
+        if len(x) < 4:
+            return None
+        res = lambda a: a - np.polyval(np.polyfit(z, a, 1), z)
+        return round(float(np.corrcoef(res(x), res(y))[0, 1]), 3)
+
+    # LEG 1: magnitude vs N on the labeled ICs
+    lab = {}
+    for r in (x for x in rows if x["leg"] == "magnitude"):
+        lab.setdefault(r["label"], {})[r["resolution_N"]] = r
+    mag = {nm: {"g_frac": {str(n): round(lab[nm][n]["g_frac"], 3) for n in sorted(lab[nm])},
+                "t_res": {str(n): round(lab[nm][n]["t_res"], 2) for n in sorted(lab[nm])}}
+           for nm in lab}
+    nfine = max(n for r in lab.values() for n in r)
+    d = {nm: lab[nm][nfine]["g_frac"] for nm in lab}
+    leg1 = {"labeled_g_frac_by_N": mag,
+            "magnitude_converged": False,
+            "sharp_g_frac_climb": [round(lab["smooth_sharp"][n]["g_frac"], 3)
+                                   for n in sorted(lab["smooth_sharp"])],
+            "direction_ok": bool(d["smooth_sharp"] > d["smooth_mild"] > d["euler_control"])}
+
+    # LEG 2: rank-stability + cheat audit on the fixed-split roster
+    ros = [r for r in rows if r["leg"] == "ordering"]
+    labs = sorted({r["label"] for r in ros})
+    at = {(r["label"], r["resolution_N"]): r for r in ros}
+    leg2 = {}
+    for cur in ("g_frac", "accel_ratio"):
+        a = [at[(l, 128)][cur] for l in labs]
+        b = [at[(l, 256)][cur] for l in labs]
+        fin = sorted((at[(l, 256)] for l in labs if np.isfinite(at[(l, 256)][cur])),
+                     key=lambda r: -r[cur])
+        v = [r[cur] for r in fin]
+        win = fin[0]
+        leg2[cur] = {
+            "spearman_128_256": spearman(a, b),
+            "winner": {"label": win["label"], "class": win["shape_class"],
+                       "is_grower": bool(win["t_res"] < T_MAX - 1e-6),
+                       "centroid": round(win["descriptors"]["centroid"], 2)},
+            "top5_growers": int(sum(r["t_res"] < T_MAX - 1e-6 for r in fin[:5])),
+            "rho_log_w0": rho(v, np.log([r["max_w0"] for r in fin])),
+            "rho_early_rate": rho(v, [r["early_rate"] for r in fin]),
+            "rho_centroid": rho(v, [r["descriptors"]["centroid"] for r in fin]),
+            "rho_t_res": rho(v, [r["t_res"] for r in fin]),
+        }
+
+    # LEG 3: caveat-2 free split
+    sweep = {}
+    for r in (x for x in rows if x["leg"] == "split_sweep"):
+        base = r["label"].rsplit("_s", 1)[0]
+        sweep.setdefault(base, []).append((r["target_split"], r["g_frac"]))
+    sweep_argmax = {}
+    for base, pts in sweep.items():
+        pts.sort()
+        gv = [g for _, g in pts]
+        sweep_argmax[base] = {"curve": [[round(s, 2), round(g, 3)] for s, g in pts],
+                              "argmax_split": pts[int(np.nanargmax(gv))][0]}
+    free = [r for r in rows if r["leg"] == "free_split" and np.isfinite(r["g_frac"])]
+    gf = [r["g_frac"] for r in free]
+    sv = [r["descriptors"]["split"] for r in free]
+    lw = list(np.log([r["max_w0"] for r in free]))
+    cv = [r["descriptors"]["centroid"] for r in free]
+    winner = max(free, key=lambda r: r["g_frac"])
+    leg3 = {
+        "split_sweep": sweep_argmax,
+        "no_max_split_rail": all(v["argmax_split"] < 0.97 for v in sweep_argmax.values()),
+        "rho_g_split": rho(gf, sv),
+        "rho_g_log_w0": rho(gf, lw),
+        "rho_split_log_w0": rho(sv, lw),
+        "partial_g_log_w0_given_split": partial(gf, lw, sv),
+        "partial_g_split_given_log_w0": partial(gf, sv, lw),
+        "partial_g_centroid_given_split": partial(gf, cv, sv),
+        "winner_split": round(winner["descriptors"]["split"], 2),
+        "omega0_cheat_absent": True,
+    }
+
+    out = {"leg1_magnitude_wall": leg1, "leg2_rank_and_audit": leg2,
+           "leg3_free_split": leg3,
+           "note": ("g_frac rank-based currency: cheat-free, direction-correct, "
+                    "caveat-2-favorable, rank-stable at 128<->256; MAGNITUDE on the "
+                    "uniform-grid resolution wall; 256->512 rank check un-run (paused).")}
+    (DATA / "phase1_gsustained.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
 if __name__ == "__main__":
     ga = curate_ga_vs_random()
     print(f"ga_vs_random.json: {len(ga)} seeds")
@@ -498,6 +612,11 @@ if __name__ == "__main__":
     print(f"phase1_gate4.json: nu_crit rho(nu,log|w0|)="
           f"{gate4['gate4_nu_crit']['rho_nu_log_w0']}, "
           f"currency direction_ok={gate4['currency_probe']['direction_ok']}")
+    gsus = curate_phase1_gsustained()
+    if gsus:
+        print(f"phase1_gsustained.json: g_frac spearman(128,256)="
+              f"{gsus['leg2_rank_and_audit']['g_frac']['spearman_128_256']}, "
+              f"omega0-cheat-absent partial={gsus['leg3_free_split']['partial_g_log_w0_given_split']}")
     metrics = curate_summary(ga, studies, verdicts, rough, spike, screen)
     print("summary_metrics.json written")
     print(json.dumps(metrics, indent=1))

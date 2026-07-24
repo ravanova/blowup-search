@@ -1,0 +1,180 @@
+{
+ "leg1_magnitude_wall": {
+  "labeled_g_frac_by_N": {
+   "smooth_sharp": {
+    "g_frac": {
+     "128": 0.663,
+     "256": 0.793,
+     "512": 0.968
+    },
+    "t_res": {
+     "128": 2.46,
+     "256": 2.74,
+     "512": 2.98
+    }
+   },
+   "euler_control": {
+    "g_frac": {
+     "128": -0.0,
+     "256": -0.0,
+     "512": 0.0
+    },
+    "t_res": {
+     "128": 4.0,
+     "256": 4.0,
+     "512": 4.0
+    }
+   },
+   "smooth_mild": {
+    "g_frac": {
+     "128": 0.421,
+     "256": 0.421,
+     "512": 0.421
+    },
+    "t_res": {
+     "128": 4.0,
+     "256": 4.0,
+     "512": 4.0
+    }
+   }
+  },
+  "magnitude_converged": false,
+  "sharp_g_frac_climb": [
+   0.663,
+   0.793,
+   0.968
+  ],
+  "direction_ok": true
+ },
+ "leg2_rank_and_audit": {
+  "g_frac": {
+   "spearman_128_256": 0.901,
+   "winner": {
+    "label": "rand_01",
+    "class": "random",
+    "is_grower": true,
+    "centroid": 1.59
+   },
+   "top5_growers": 5,
+   "rho_log_w0": 0.173,
+   "rho_early_rate": 0.273,
+   "rho_centroid": 0.311,
+   "rho_t_res": -0.697
+  },
+  "accel_ratio": {
+   "spearman_128_256": 0.949,
+   "winner": {
+    "label": "rand_08",
+    "class": "random",
+    "is_grower": false,
+    "centroid": 1.83
+   },
+   "top5_growers": 3,
+   "rho_log_w0": 0.099,
+   "rho_early_rate": -0.655,
+   "rho_centroid": -0.056,
+   "rho_t_res": 0.034
+  }
+ },
+ "leg3_free_split": {
+  "split_sweep": {
+   "b_diag": {
+    "curve": [
+     [
+      0.1,
+      0.394
+     ],
+     [
+      0.3,
+      0.528
+     ],
+     [
+      0.5,
+      0.674
+     ],
+     [
+      0.7,
+      0.662
+     ],
+     [
+      0.9,
+      0.527
+     ],
+     [
+      0.97,
+      0.58
+     ]
+    ],
+    "argmax_split": 0.5
+   },
+   "b_low": {
+    "curve": [
+     [
+      0.1,
+      -0.177
+     ],
+     [
+      0.3,
+      0.931
+     ],
+     [
+      0.5,
+      0.421
+     ],
+     [
+      0.7,
+      0.235
+     ],
+     [
+      0.9,
+      0.278
+     ],
+     [
+      0.97,
+      0.348
+     ]
+    ],
+    "argmax_split": 0.3
+   },
+   "b_high": {
+    "curve": [
+     [
+      0.1,
+      0.536
+     ],
+     [
+      0.3,
+      0.906
+     ],
+     [
+      0.5,
+      0.96
+     ],
+     [
+      0.7,
+      0.954
+     ],
+     [
+      0.9,
+      0.846
+     ],
+     [
+      0.97,
+      0.773
+     ]
+    ],
+    "argmax_split": 0.5
+   }
+  },
+  "no_max_split_rail": true,
+  "rho_g_split": 0.727,
+  "rho_g_log_w0": -0.66,
+  "rho_split_log_w0": -0.921,
+  "partial_g_log_w0_given_split": 0.036,
+  "partial_g_split_given_log_w0": 0.408,
+  "partial_g_centroid_given_split": 0.093,
+  "winner_split": 0.94,
+  "omega0_cheat_absent": true
+ },
+ "note": "g_frac rank-based currency: cheat-free, direction-correct, caveat-2-favorable, rank-stable at 128<->256; MAGNITUDE on the uniform-grid resolution wall; 256->512 rank check un-run (paused)."
+}
