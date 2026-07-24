@@ -1,8 +1,16 @@
-# Phase 2 — Spike 0 reconnaissance notes (dynamic rescaling on 1D gCLM)
+# Phase 2 — Spike 0 notes (dynamic rescaling on 1D gCLM)
 
-**Status:** in progress. Cheap probes run (scratch), formulation derived, three
-findings banked. NOT yet a validated solver. This doc records what the probes
-established so the stable formulation can be built without re-deriving.
+**Status: SPIKE 0 COMPLETE (2026-07-24) — validated against the known answer.**
+The dynamic self-similar rescaling POC works: on a sinh-stretched whole-line grid,
+CLM (a=0) dynamic rescaling recovers the exact profile Ω̄₀=−4X/(1+4X²) to shape
+error ~2e-6 with the exact rate c_ω→−1, resolution-stable. Code: `solver/line_hilbert.py`,
+`solver/gclm_rescaled.py`; tests `test_line_hilbert.py` (6/6), `test_gclm_rescaled.py`
+(5/5). See the "SPIKE 0 COMPLETE" section at the bottom. The reconnaissance record
+below is preserved for the derivation trail.
+
+**Reconnaissance status (historical):** cheap probes run (scratch), formulation
+derived, three findings banked. This doc records what the probes established so the
+stable formulation could be built without re-deriving.
 
 **Goal of Spike 0:** implement one-scale dynamic (self-similar) rescaling on the
 existing 1D gCLM solver and validate it recovers a *known* self-similar blow-up,
@@ -223,6 +231,58 @@ SSPRK(10,4) or a CFL-safe RK) + `test_gclm_rescaled.py` (steady-profile residual
 at Ω̄₀, then convergence from perturbed odd data with c_ω→−1, T*→2, resolution-
 stable). The velocity `U` (log-kernel) via the C.1 `C,D` integral elements is only
 needed for a≠0 advection — **CLM (a=0) does not use U**, so it can be deferred.
+
+## SPIKE 0 COMPLETE (2026-07-24) — the whole POC is validated
+
+`solver/gclm_rescaled.py` + `test_gclm_rescaled.py` (5/5 pass) close Spike 0. The
+scheme, reduced for CLM (a=0), and its validation:
+
+**Reduced scheme.** Evolving `f=Ω/X` (k=1) in the computational coordinate ρ
+(`X=c·sinh ρ`, uniform ρ), c_l≡1, the rescaled CLM equation is
+```
+f_τ = −tanh(ρ)·f_ρ + (HΩ − HΩ(0))·f ,     Ω = X·f ,   c_ω = 1 − HΩ(0).
+```
+The dilation `X Ω_X` becomes `tanh(ρ)·f_ρ` — advection speed ≤ 1, so the CFL is
+`dτ ≲ Δρ` independent of the reach M (the uniform-grid CFL death, cured). Method:
+3rd-order upwind-biased advection (the profile is smooth → the paper's nonlinear
+WENO limiter is unnecessary at POC level; flow is outward at both ends so the
+upwind stencil always reaches inward — no ghost points), SSPRK3 in time, line
+Hilbert transform as the fixed-grid dense operator.
+
+**Analytic facts used (all verified):** (i) Ω̄₀=−4X/(1+4X²) is an exact steady
+state; (ii) the origin slope `f(0)=Ω_X(0)=−4` is frozen *exactly* by the scheme
+(both tanh(0) and the source HΩ(0)−HΩ(0) vanish at ρ=0) — this realizes the slope
+normalization; (iii) at the fixed point HΩ(0)=2 ⟹ c_ω=−1, self-consistently.
+
+**Validation (pre-committed predicates, all met):**
+- STEADY: initialized at Ω̄₀, `‖f_τ‖=4e-6`, c_ω=−0.999, HΩ(0)=1.999.
+- FROZEN ORIGIN: f(0)=−4 held to machine precision (0 drift / 300 steps).
+- DYNAMIC CONVERGENCE: two *different* perturbed odd ICs (a Gaussian and a narrower
+  Lorentzian, both with slope −4) each relax to Ω̄₀ — shape err ~2e-6, c_ω→−0.999.
+- RESOLUTION-STABLE: c_ω = −0.9986 (n=901) → −0.9995 (n=1801) trending to −1;
+  shape err 4.0e-6 → 7.7e-7 under refinement.
+
+**Headline finding (overturns finding-3's pessimism).** One-scale rescaling is
+**dynamically stable and attracting** for CLM — the earlier "one-scale is unstable,
+need two-scale" read was an artifact of the *wrong (periodic) Hilbert transform +
+integral modulation*, NOT a fundamental scaling instability. With the correct LINE
+Hilbert transform and value-based normalization (c_ω=1−HΩ(0), c_l=1), Ω̄₀ is a clean
+attractor. (Chen–Hou's two-scale need was for Boussinesq/De Gregorio, a different
+mechanism — Spike 1 will reveal whether it recurs there; it does NOT for CLM.)
+
+**Honest scope (do not oversell).** This reproduces a *proven, closed-form* toy
+result across Wall C — it validates the machinery, it is not novel and not a proof.
+The physical `T*=2` is deliberately NOT claimed here: it is a property of the global
+periodic solve (validated by `test_solver_clm.py`), not of a whole-line local
+rescaling whose initial amplitude is a free gauge; the correct local analogue is the
+rate c_ω→−1 (⟺ ω~(T−t)⁻¹), which is recovered. The velocity U (log-kernel, C.1
+`C,D` elements) was correctly deferred — CLM does not use it; it is the first thing
+Spike 1 / the a≠0 path will need.
+
+**Spike 0 gate (per PHASE2_NUMERICS_PLAN.md — each spike STOPS for review):** the
+technique is de-risked in 1D against a known answer. The forward decision (port to
+2D Boussinesq for Spike 1, i.e. the real lift, vs. exercise a≠0/De-Gregorio targets
+in 1D first) is a scope decision for the user.
 
 ## Sources
 - Zheng, Hou, et al., *Self-similar finite-time blowups with singular profiles of the

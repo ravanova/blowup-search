@@ -3,6 +3,47 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 0 COMPLETE — dynamic rescaling POC recovers the CLM profile + rate against the known answer — 2026-07-24
+
+Full record: PHASE2_SPIKE0_NOTES.md ("SPIKE 0 COMPLETE" section). Code:
+`solver/gclm_rescaled.py`, `test_gclm_rescaled.py` (5/5 pass, ~48s). NOT a logged gate
+run — solver development validated against a closed-form known answer.
+
+The dynamic self-similar rescaling technique is validated end-to-end in 1D. On a
+sinh-stretched whole-line grid, CLM (a=0) dynamic rescaling recovers the exact profile
+Ω̄₀=−4X/(1+4X²) to shape error ~2e-6 with the exact self-similar rate c_ω→−1, and it is
+resolution-stable. This de-risks the whole method before the 2D port (Spike 1).
+
+What a human would want to know:
+
+- **The headline finding overturns recon finding-3.** The recon feared one-scale
+  rescaling was unstable (the profile overshot and blew up in the rescaled frame → the
+  Chen–Hou two-scale motivation). That instability was an **artifact of the wrong
+  (periodic) Hilbert transform + integral modulation**, NOT fundamental. With the correct
+  LINE Hilbert transform and value-based normalization (c_ω=1−HΩ(0), c_l≡1), Ω̄₀ is a
+  clean **attractor**: two different perturbed odd ICs (Gaussian, narrower Lorentzian)
+  both relax to it. One-scale suffices for CLM. (Whether Boussinesq/De Gregorio re-needs
+  two-scale is a Spike-1 question — different mechanism.)
+
+- **The scheme, reduced for CLM:** evolve f=Ω/X in the computational coordinate ρ
+  (X=c·sinh ρ); the dilation becomes tanh(ρ)·f_ρ (speed ≤1 → CFL ~ Δρ independent of the
+  reach M — the uniform-grid CFL death is cured). 3rd-order upwind (smooth profile → the
+  paper's nonlinear WENO limiter is overkill at POC; outflow at both ends means upwind
+  stencils reach inward, no ghosts) + SSPRK3. The origin slope f(0)=−4 is frozen to
+  machine precision by the scheme itself (advection speed and source both vanish at ρ=0).
+
+- **Honest scope, stated plainly:** this reproduces a *proven closed-form* toy result
+  across Wall C — it validates machinery, it is NOT novel and NOT a proof. I deliberately
+  did NOT claim the physical T*=2 from the whole-line run: T* belongs to the global
+  periodic solve (already covered by test_solver_clm.py); a whole-line rescaling's initial
+  amplitude is a free gauge, so its correct analogue is the *rate* c_ω→−1 (⟺ ω~(T−t)⁻¹),
+  which it nails. The log-kernel velocity U was correctly deferred (CLM doesn't use it).
+
+- **Gate reached (each spike STOPS for review, per PHASE2_NUMERICS_PLAN.md).** Technique
+  de-risked in 1D. Forward decision = Spike 1 (2D Boussinesq port, the real multi-week
+  lift) vs. first exercising a≠0 / De-Gregorio singular-profile targets in 1D (which need
+  the deferred velocity U + AMR). Raised to the user as a scope decision.
+
 ## Spike 0 — the crux is BUILT: line Hilbert transform on a stretched grid PASSES against the known answer — 2026-07-24
 
 Full record: PHASE2_SPIKE0_NOTES.md ("BUILT" section). Code: `solver/line_hilbert.py`,
