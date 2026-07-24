@@ -3,6 +3,50 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Reformulated Gate 4 (g_frac) — 2026-07-24 — FAIL 4/6: free-split rails to ω₀→0, split-dominated + t_res proxy
+
+Full results: PHASE1_GATE4_REFORM_RESULTS.md. Frozen predicate:
+PHASE1_GATE4_REFORMULATED_PREDICATE.md. Scripts: phase1_gate4_reform.py +
+analyze_phase1_gate4_reform.py (commit 13d888f, pre-run). Data:
+experiments/phase1_gate4_reform.jsonl → writeup/data/phase1_gate4_reform.json.
+The user reviewed + signed off the frozen predicate (3 improvements folded in:
+rank-stability across 128→256→512, split-dominance promoted to gate condition 6g,
+t_res-proxy check 6h; plus winner-not-at-split-rail 6b′ from designing the
+adversarial roster). 138 solves (40 shapes × {128,256,512} + 18-shape split-sweep).
+
+What a human would want to know:
+
+- **The gate did its job and returned a decisive negative.** g_frac passes 1,2,3,5
+  (discriminating, direction-correct, well-posed/window-robust +0.989, wide band)
+  and its RANK is resolution-stable (+0.889, +0.926 — the de-risk result holds).
+  But property 6 fails hard on FREE split.
+
+- **The ω₀ cheat returns exactly as it killed ν_crit.** The de-risk fixed split=0.5
+  (pinning ω₀). Free split lets the optimum drive ω→0 for max buoyancy forcing: the
+  TOP-5 shapes at N=512 are all split 0.93–0.99, winner rand_18 split=0.99
+  centroid=1.56. ρ(g,log|ω₀|)=−0.66. The controlled split-sweep STILL showed
+  interior optima (property 6f passed) — but the free-roster WINNER rails anyway,
+  because at free structure a high-split shape beats the interior-optimum structured
+  ones. The sweep couldn't see it; the winner interrogation did. (Banked lesson
+  reasserted: a controlled sub-test passing ≠ the winner being honest.)
+
+- **6g confirmed the split-dominance finding as a gate condition:** partial
+  ρ(g,centroid|split)=+0.11 < 0.15 — once split is controlled, g_frac barely ranks
+  ω-geometry. And 6h: partial ρ(g,centroid|t_res)=−0.39 — g_frac is largely a
+  formation-time proxy. Binning on split alone would NOT rescue it (it's also a
+  t_res proxy).
+
+- **Property 4's second axis (new here) also failed:** grower/non-grower
+  CLASSIFICATION is not resolution-stable — 7/37 shapes are coarse-grid
+  false-growers (t_res climbs to 4.0 as N grows; e.g. advlo_s20 2.91→3.56→4.00),
+  textbook under-resolution false-positives. Rank-stable ≠ classification-stable.
+
+- **Strategic read (the user's Clay-lottery focus):** TWO currencies now hit the
+  same uniform-grid wall (ω₀→0 degeneracy); g_frac adds a t_res-proxy problem. A
+  THIRD uniform-grid scalar currency is the weeds. Genuine structure lives below
+  grid scale → the honest path to a structure-tracking fitness AND to Tier-2 is
+  Route D (AMR / self-similar rescaling). Teed up as the next-session decision.
+
 ## g_sustained 256→512 rank check — 2026-07-24 — the rank SURVIVES the wall (Spearman +0.905), cheat audit clean at N=512
 
 Full results: PHASE1_GSUSTAINED_RESULTS.md (Consequence section — the de-risk this

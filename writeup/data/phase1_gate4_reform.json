@@ -1,0 +1,155 @@
+{
+ "verdict": "FAIL 4/6",
+ "scorecard": {
+  "1. nonzero/discriminating": {
+   "pass": true,
+   "detail": "28/28 growers > 0.1 (100%, need 80%); spread 1.308"
+  },
+  "2. direction+control": {
+   "pass": true,
+   "detail": "N=128:+0.66>+0.42>-0.00=ok,ctrl<0.1=ok; N=256:+0.79>+0.42>-0.00=ok,ctrl<0.1=ok; N=512:+0.97>+0.42>+0.00=ok,ctrl<0.1=ok"
+  },
+  "3. well-posed measurement": {
+   "pass": true,
+   "detail": "finite growers=True; window-robust spearman(g05,g06)=+0.989 (need >= 0.9)"
+  },
+  "4. rank-resolution-stable": {
+   "pass": false,
+   "detail": "spearman(128,256)=+0.889 spearman(256,512)=+0.926 (need both >= 0.85, not degrading); grower->nongrower flips: ['advlo_s10', 'advlo_s20', 'rand_00', 'rand_08', 'rand_09', 'rand_12', 'rand_16']"
+  },
+  "5. wide band": {
+   "pass": true,
+   "detail": "grower g_frac spread 1.308 (need >= 0.3)"
+  },
+  "6. non-trivial optimum (split-controlled)": {
+   "pass": false,
+   "detail": "winner=rand_18[rand] g=+1.635 cen=1.56 split=0.99 | a_grow=True b_struct=False b_notrail=False c_top5=True | rho(w0)=-0.66 part(w0|split)=-0.10 d=False | rho(cen)=-0.51 e=True | part(cen|split)=+0.11 g=False | rho(tres)=-0.78 part(cen|tres)=-0.39 h=False | sweep[b_diag:argmax@0.7, b_high:argmax@0.5, b_low:argmax@0.3] part(split|w0)=+0.33 f=True"
+  }
+ },
+ "property6_subconditions": {
+  "a_winner_grower": true,
+  "b_winner_structured": false,
+  "b_winner_not_split_rail": false,
+  "c_top5_growers": true,
+  "d_no_omega0_cheat": false,
+  "e_structure_not_penalized": true,
+  "g_gradient_beyond_split": false,
+  "h_more_than_tres_proxy": false,
+  "f_split_interior": true
+ },
+ "top6_at_512": [
+  {
+   "label": "rand_18",
+   "class": "random",
+   "g_frac": 1.635,
+   "centroid": 1.56,
+   "split": 0.99,
+   "t_res": 2.01,
+   "grower": true
+  },
+  {
+   "label": "rand_06",
+   "class": "random",
+   "g_frac": 1.631,
+   "centroid": 2.84,
+   "split": 0.99,
+   "t_res": 2.26,
+   "grower": true
+  },
+  {
+   "label": "rand_01",
+   "class": "random",
+   "g_frac": 1.561,
+   "centroid": 1.59,
+   "split": 0.95,
+   "t_res": 2.53,
+   "grower": true
+  },
+  {
+   "label": "rand_17",
+   "class": "random",
+   "g_frac": 1.521,
+   "centroid": 2.19,
+   "split": 0.93,
+   "t_res": 2.26,
+   "grower": true
+  },
+  {
+   "label": "rand_07",
+   "class": "random",
+   "g_frac": 1.291,
+   "centroid": 1.62,
+   "split": 0.99,
+   "t_res": 2.15,
+   "grower": true
+  },
+  {
+   "label": "struct_high",
+   "class": "structured",
+   "g_frac": 1.269,
+   "centroid": 3.07,
+   "split": 0.69,
+   "t_res": 3.17,
+   "grower": true
+  }
+ ],
+ "classification_flips": [
+  {
+   "label": "advlo_s10",
+   "t_res_by_N": {
+    "128": 3.13,
+    "256": 3.92,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "advlo_s20",
+   "t_res_by_N": {
+    "128": 2.91,
+    "256": 3.56,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "rand_00",
+   "t_res_by_N": {
+    "128": 3.39,
+    "256": 4.0,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "rand_08",
+   "t_res_by_N": {
+    "128": 3.66,
+    "256": 4.0,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "rand_09",
+   "t_res_by_N": {
+    "128": 3.11,
+    "256": 3.93,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "rand_12",
+   "t_res_by_N": {
+    "128": 3.0,
+    "256": 3.91,
+    "512": 4.0
+   }
+  },
+  {
+   "label": "rand_16",
+   "t_res_by_N": {
+    "128": 3.63,
+    "256": 4.0,
+    "512": 4.0
+   }
+  }
+ ],
+ "note": "g_frac RANK is resolution-stable (+0.889, +0.926) but on a FREE split roster the optimum rails to split->1 (omega0->0, the nu_crit degeneracy); split-dominated (partial rho(g,centroid|split)=+0.11) and largely a formation-time proxy (partial rho(g,centroid|t_res)=-0.39). 7/37 shapes are coarse-grid false-growers. Two currencies, one uniform-grid wall -> Route D."
+}

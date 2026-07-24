@@ -592,6 +592,59 @@ def curate_phase1_gsustained():
     return out
 
 
+def curate_phase1_gate4_reform():
+    """Route A Phase 1 reformulated Gate 4 on the g_frac currency (the FAIL that
+    concluded the uniform-grid fitness search). Reads
+    experiments/phase1_gate4_reform.jsonl. Records the six-property scorecard, the
+    top shapes (free-split rail to omega0->0), the property-6 sub-conditions, and
+    the property-4 grower->non-grower classification flips."""
+    p = REPO / "experiments" / "phase1_gate4_reform.jsonl"
+    rows = ([json.loads(l) for l in p.read_text().splitlines() if l.strip()]
+            if p.exists() else [])
+    if not rows:
+        return None
+    from analyze_phase1_gate4_reform import evaluate
+    T_MAX = 4.0
+    res = evaluate(rows)
+    scorecard = {k: {"pass": (None if v[0] is None else bool(v[0])), "detail": v[1]}
+                 for k, v in res.items() if not k.startswith("_")}
+
+    roster = [r for r in rows if r.get("block") == "roster"]
+    at = {(r["label"], r["resolution_N"]): r for r in roster}
+    f512 = {l: at[(l, 512)] for (l, n) in at if n == 512}
+    grow = lambda r: r["t_res"] < T_MAX - 1e-6
+    ranked = sorted((r for r in f512.values() if np.isfinite(r["g_frac"])),
+                    key=lambda r: -r["g_frac"])
+    top = [{"label": r["label"], "class": r["shape_class"],
+            "g_frac": round(r["g_frac"], 3),
+            "centroid": round(r["descriptors"]["centroid"], 2),
+            "split": round(r["descriptors"]["split"], 2),
+            "t_res": round(r["t_res"], 2), "grower": bool(grow(r))} for r in ranked[:6]]
+    flips = []
+    for l in sorted({r["label"] for r in roster}):
+        trs = {n: at[(l, n)]["t_res"] for n in (128, 256, 512) if (l, n) in at}
+        if 128 in trs and 512 in trs and trs[128] < T_MAX - 1e-6 and trs[512] >= T_MAX - 1e-6:
+            flips.append({"label": l, "t_res_by_N": {str(n): round(trs[n], 2) for n in trs}})
+
+    out = {
+        "verdict": "FAIL 4/6",
+        "scorecard": scorecard,
+        "property6_subconditions": res.get("_6sub", {}),
+        "top6_at_512": top,
+        "classification_flips": flips,
+        "note": ("g_frac RANK is resolution-stable (+0.889, +0.926) but on a FREE "
+                 "split roster the optimum rails to split->1 (omega0->0, the nu_crit "
+                 "degeneracy); split-dominated (partial rho(g,centroid|split)=+0.11) "
+                 "and largely a formation-time proxy (partial rho(g,centroid|t_res)="
+                 "-0.39). 7/37 shapes are coarse-grid false-growers. Two currencies, "
+                 "one uniform-grid wall -> Route D."),
+    }
+    # numpy bools in _6sub -> plain bool for JSON
+    out["property6_subconditions"] = {k: bool(v) for k, v in out["property6_subconditions"].items()}
+    (DATA / "phase1_gate4_reform.json").write_text(json.dumps(out, indent=1))
+    return out
+
+
 if __name__ == "__main__":
     ga = curate_ga_vs_random()
     print(f"ga_vs_random.json: {len(ga)} seeds")
@@ -617,6 +670,11 @@ if __name__ == "__main__":
         print(f"phase1_gsustained.json: g_frac spearman(128,256)="
               f"{gsus['leg2_rank_and_audit']['g_frac']['spearman_128_256']}, "
               f"omega0-cheat-absent partial={gsus['leg3_free_split']['partial_g_log_w0_given_split']}")
+    reform = curate_phase1_gate4_reform()
+    if reform:
+        print(f"phase1_gate4_reform.json: {reform['verdict']}, "
+              f"top winner split={reform['top6_at_512'][0]['split']}, "
+              f"{len(reform['classification_flips'])} classification flips")
     metrics = curate_summary(ga, studies, verdicts, rough, spike, screen)
     print("summary_metrics.json written")
     print(json.dumps(metrics, indent=1))

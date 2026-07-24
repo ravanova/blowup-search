@@ -33,7 +33,12 @@ and every figure is built from the small committed files in [`data/`](data/).
 6. **[BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md)** — the follow-on: the
    inviscid growth-rate *magnitude* hits the same uniform-grid wall, a second
    near-cheat (`accel_ratio`) is caught, and only a *rank-based* `g_frac` survives.
-7. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+7. **[BLOG_PHASE1_GATE4_REFORM.md](BLOG_PHASE1_GATE4_REFORM.md)** — the conclusion:
+   the rank check passes but the reformulated, cheat-audited Gate 4 **fails 4/6** —
+   on free split `g_frac` rails to the ω₀→0 corner just as ν_crit did. Two
+   currencies, one uniform-grid wall; the fitness search is concluded, pointing to
+   Route D.
+8. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem.
 
 ## Figures ([`figures/`](figures/))
@@ -65,6 +70,7 @@ Every claim in the writeup traces to one of these committed files:
 | `phase1_axis_screen.json` | per-(axis, IC, N) values + the pre-committed screen verdict | Phase 1 / fig7 |
 | `phase1_gate4.json` | Gate-4 six-property gate on ν_crit (the false pass + ω₀ diagnostic), the fixed-split & currency probes | Phase 1 / BLOG_PHASE1_GATE4 |
 | `phase1_gsustained.json` | staged inviscid growth-rate probe: magnitude on the resolution wall (LEG 1), rank-stability + `g_frac`-vs-`accel_ratio` cheat audit (LEG 2), free-split partials (LEG 3) | Phase 1 / BLOG_PHASE1_GSUSTAINED |
+| `phase1_gate4_reform.json` | reformulated Gate 4 on `g_frac`: the 4/6 FAIL scorecard, the free-split rail to ω₀→0 (top-6 shapes), the property-6 sub-conditions, and the 7 grower→non-grower classification flips | Phase 1 / BLOG_PHASE1_GATE4_REFORM |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,

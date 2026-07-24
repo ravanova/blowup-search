@@ -159,18 +159,43 @@ two de-risking spikes; the GA campaign itself is *not* yet run):
    review). The honest reframing: "resolution-stable" must mean *rank*-stable here,
    because the magnitude is unrecoverable on a uniform grid.
 
+7. **The 256→512 rank check passed — then the reformulated Gate 4 FAILED (4/6).**
+   The un-run de-risk was run: `g_frac`'s **rank** survives 256→512 (Spearman
+   **+0.905**), cheat audit clean at N=512. That green-lit a full reformulated Gate
+   4 (`phase1_gate4_reform.py` + frozen `analyze_phase1_gate4_reform.py`, data
+   [`data/phase1_gate4_reform.json`](data/phase1_gate4_reform.json)) with the
+   anti-cheat audits promoted to first-class gate conditions. It **fails 4/6**: on a
+   **free-split** roster the optimum rails to split→1 (**ω₀→0, the ν_crit
+   degeneracy returning**) — top-5 all split 0.93–0.99, ρ(g,log|ω₀|)=−0.66 — while
+   `g_frac` carries almost no ω-geometry signal beyond split (partial
+   ρ(g,centroid|split)=**+0.11**) and is largely a **formation-time proxy** (partial
+   ρ(g,centroid|t_res)=**−0.39**). Property 4 also fails on a second axis: the
+   grower/non-grower *classification* is not resolution-stable (7/37 coarse-grid
+   false-growers). The controlled split-sweep *passed* (interior optima) — only the
+   free-search **winner interrogation** exposed the rail. **Net:** two independent
+   currencies now fail the honest gate through the same ω₀→0 degeneracy; a third
+   uniform-grid scalar currency is not indicated.
+
 **Honest scope of Phase 1 so far.** No 2D blow-up candidate has been produced —
-this is validated infrastructure, the Gate-4 finding that viscosity-resistance is
-not a viable fitness here, and the follow-on finding that the inviscid growth-rate
-*magnitude* hits the *same* uniform-grid wall (only a rank-based `g_frac` survives,
-pending the 256→512 rank check). Plus a methodology data point banked twice: a
-frozen predicate — and even a rank-stable winner — is a floor, not a ceiling; always
-interrogate the winner against the dumbest cheat. Forward plan and full record:
+this is validated infrastructure plus a **concluded fitness search with a decisive
+negative result**: neither viscosity-resistance (`ν_crit`) nor inviscid growth-rate
+(`g_frac`) survives a pre-committed, cheat-audited viability gate, both defeated by
+the same free-split ω₀→0 degeneracy. The deeper finding is about the *grid*: on a
+uniform mesh the genuine singular structure forms below grid scale, so no scalar
+fitness read off the trusted window can isolate it — it re-expresses through the
+next resolvable proxy (amplitude, split, formation time). The honest path to a
+structure-tracking fitness (and to Tier-2 of the true singularity) is **Route D**
+(AMR / self-similar rescaling). Methodology banked repeatedly: a frozen predicate,
+a rank-stable winner, *and* a passing controlled sub-test are each a floor, not a
+ceiling — interrogate the actual free-search winner against the dumbest cheats.
+Forward plan and full record:
 [../PHASE1_PLAN.md](../PHASE1_PLAN.md),
 [../PHASE1_GATE4_RESULTS.md](../PHASE1_GATE4_RESULTS.md),
 [../PHASE1_GSUSTAINED_RESULTS.md](../PHASE1_GSUSTAINED_RESULTS.md),
+[../PHASE1_GATE4_REFORM_RESULTS.md](../PHASE1_GATE4_REFORM_RESULTS.md),
 [BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md),
-[BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md).
+[BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md),
+[BLOG_PHASE1_GATE4_REFORM.md](BLOG_PHASE1_GATE4_REFORM.md).
 
 *All numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*
