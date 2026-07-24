@@ -149,6 +149,44 @@ transform method; (2) implement `solver/gclm_rescaled.py` on that grid with
 perturbed odd data with `c_ω→−1` — all resolution-stable. Scratch build (uniform,
 dilation-unstable — negative example): session scratchpad `build_rescaled.py`.
 
+### Appendix C method (arXiv:2603.25104, Huang–Tong–Wang) — the build recipe
+
+**C.1 line Hilbert transform (NON-FFT, works on a non-uniform grid).** Approximate
+`f` on `[−M,M]` with `C¹₀` cubic-spline / Hermite-type basis functions `P_i`, `Q_i`
+(chosen so their Hilbert transforms are *bounded*); node slopes `f'_i` from the
+standard cubic spline with `f''(x_0)=f''(x_N)=0`. Each basis element's Hilbert
+transform is **known analytically**: `H(P_i)=A(l)−A(r)`, `H(Q_i)=(x_{i-1}−x_i)B(l)−
+(x_{i+1}−x_i)B(r)` with `l=(x_{i-1}−x_i)/(x−x_i)`, `r=(x_{i+1}−x_i)/(x−x_i)` and
+closed-form `A(s), B(s)` (rational + `ln|1−s|`; use the paper's Mathematica minimax
+series for `|s|<0.5` to avoid `s→0` cancellation). Diagonal terms:
+`H(P_i)(x_i)=(1/π)ln|(x_{i-1}−x_i)/(x_{i+1}−x_i)|`,
+`H(Q_i)(x_i)=(x_{i-1}−x_{i+1})/(3π)`. The velocity integral `U` (i.e.
+`−(−Δ)^{−1/2}`) is the analytic integral of the same elements → closed forms
+`C(d,s), D(d,s)` (again with a minimax series). *Transcribe the exact `A,B,C,D`
+series from the PDF at build time — pdftotext mangles the fractions.*
+
+**Grid (stretched, whole-line).** `X(ρ)=X_m(1−cosh ρ)+√(c+X_m²) sinh ρ`, `ρ` uniform
+on `[0,ρmax]`, `Δρ=0.01`, truncated at `M=10¹⁰`; `X_m`=argmax|Ω|, `c` set so
+`N_bulk=600` points fall in the half-max peak `[X_1,X_2]`. **Why it matters:**
+`X~sinh ρ ⇒ dX~X·Δρ`, so the dilation CFL is `dt<dX/X~Δρ≈const`, independent of `M`
+— this is what cures the uniform-grid CFL death. (For `a<0` singular profiles they
+add AMR regeneration; for a smooth POC a fixed stretched mesh suffices.)
+
+**C.2 time-stepping.** Evolve `f=Ω/Xᵏ` (`k≥3` odd, or `k=1` for the non-degenerate
+CLM whose profile vanishes to order 1) to protect the origin vanishing:
+`f_τ+(c_l X+aU)f_X=(c_ω+U_X−k(c_l+aU/X))f`. Advection via **WENO5**; time via
+**SSPRK(10,4)**. Converge at `‖f_τ‖_∞<1e-8` (exclude the `X≈1` singularity
+neighborhood for `a<0`).
+
+**POC simplification (Spike 0, ~1% not machine precision):** fixed stretched mesh
+(no AMR), `M~10²–10³` (not 10¹⁰), the C.1 spline-H (essential — the crux), an
+upwind/WENO advection + SSPRK or CFL-safe RK. Target: recover `Ω̄₀=−4X/(1+4X²)`,
+`c_ω→−1`, reconstructed `T*→2`, resolution-stable.
+
+**Scope:** confirmed a genuine multi-day solver build; all literature gaps now
+closed. Paper text cached this session: scratchpad `gclm_paper.txt` (Appendix C at
+line ~7169); PDF via `arxiv.org/pdf/2603.25104`.
+
 ## Sources
 - Zheng, Hou, et al., *Self-similar finite-time blowups with singular profiles of the
   generalized Constantin–Lax–Majda model*, arXiv:2603.25104 (exact scheme + CLM profile).
