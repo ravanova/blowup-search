@@ -37,9 +37,16 @@ and every figure is built from the small committed files in [`data/`](data/).
    the rank check passes but the reformulated, cheat-audited Gate 4 **fails 4/6** —
    on free split `g_frac` rails to the ω₀→0 corner just as ν_crit did. Two
    currencies, one uniform-grid wall; the fitness search is concluded, pointing to
-   Route D.
-8. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
-   to pursue the Clay problem.
+   an AMR / self-similar numerics upgrade.
+8. **[NEGATIVE_RESULT_TWO_CURRENCIES.md](NEGATIVE_RESULT_TWO_CURRENCIES.md)** — the
+   **standalone** methods / negative-result note: the anti-self-deception gate
+   protocol and the "two currencies, one wall" finding, self-contained and
+   data-attached (readable without the chronological series above). The
+   citable packaging of the concluded fitness search.
+9. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+   to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
+   upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
+   which is the later Tier-3 computer-assisted-proof leg.)
 
 ## Figures ([`figures/`](figures/))
 

@@ -184,8 +184,13 @@ the same free-split ω₀→0 degeneracy. The deeper finding is about the *grid*
 uniform mesh the genuine singular structure forms below grid scale, so no scalar
 fitness read off the trusted window can isolate it — it re-expresses through the
 next resolvable proxy (amplitude, split, formation time). The honest path to a
-structure-tracking fitness (and to Tier-2 of the true singularity) is **Route D**
-(AMR / self-similar rescaling). Methodology banked repeatedly: a frozen predicate,
+structure-tracking fitness (and to Tier-2 of the true singularity) is an
+**AMR / self-similar-rescaling solver upgrade to Route A** — better *numerics* that
+measure fitness on resolved structure. (This is a Route-A numerics upgrade, **not**
+roadmap "Route D," which is the later Tier-3 computer-assisted-proof leg.) A
+standalone methods note packages this negative result on its own:
+[NEGATIVE_RESULT_TWO_CURRENCIES.md](NEGATIVE_RESULT_TWO_CURRENCIES.md).
+Methodology banked repeatedly: a frozen predicate,
 a rank-stable winner, *and* a passing controlled sub-test are each a floor, not a
 ceiling — interrogate the actual free-search winner against the dumbest cheats.
 Forward plan and full record:
