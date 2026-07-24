@@ -66,11 +66,19 @@ we start one-scale. (If a scaling instability appears, revisit — cf. Spike-0 d
 ```
 
 i.e. the profile decays only like `r^{−1/3}` on a huge domain. **Known-answer target**
-(the Spike-1 gate values): `c̄_l/c̄_ω ≈ −2.92`  ⟺  `α = c̄_ω/c̄_l ≈ −0.34 ≈ −1/3`, with
-`c̄_ω < 0`, `c̄_l > 0`. `α`, the angular profiles `g₁,g₂`, and the profile shape are what we
-match. The slow `r^{−1/3}` decay is the analogue of Spike-0's `1/X` whole-line tail: it is
-exactly why a uniform/periodic grid fails and a stretched grid + far-field handling is
-mandatory.
+(the Spike-1 gate values). Part I (2.23) reports these to high precision — use them, not the
+round `−2.92`/`−1/3` shorthand:
+
+```
+c̄_l ≈ 3.00649898,   c̄_ω ≈ −1.02942516,   ū_x(0) ≈ −2.532674,   v̄_x(0) = 0
+c̄_l/c̄_ω ≈ −2.9205600,   α = c̄_ω/c̄_l ≈ −0.342407
+```
+
+`α`, the angular profiles `g₁,g₂`, and the profile shape are what we match (POC tol ~1–5%,
+resolution-stable). The slow `r^{−1/3}` decay is the analogue of Spike-0's `1/X` whole-line
+tail: exactly why a uniform/periodic grid fails and a stretched grid + far-field handling is
+mandatory. Advection is **outward & anisotropic** (2.23/2.24): near the origin
+`c̄_l x + ū ≈ 0.47 x`, `c̄_l y + v̄ ≈ 5.54 y`, and `|ω_y| < 0.23|ω_x|`, `|θ_y| < 0.16|θ_x|`.
 
 ---
 
@@ -146,6 +154,56 @@ to Step B until this passes and is resolution-stable.
 **Step B — the rescaled RHS + modulation.** Assemble (2.10): transport `(c_l x + u)·∇`
 (upwind/WENO-lite, per Spike 0), buoyancy `θ_x`, reaction `c_ω ω`/`c_θ θ`; modulation
 (2.11) from the origin slopes; SSPRK time stepping in `τ`. Validate pieces incrementally.
+
+**Step B PIECE 1 DONE + VALIDATED (2026-07-24):** the 2D upwind transport operator
+`(c_l x+u)·∇f` on the log-polar grid. Decomposes as `s_ρ f_ρ + s_β f_β` with
+`s_ρ = c_l + (u cosβ + v sinβ)/r`, `s_β = (v cosβ − u sinβ)/r`, upwinded independently in ρ,β
+by the Spike-0 3rd-order Shu stencil (generalized to 2D). `solver/boussinesq_rescaled.py`,
+`test_boussinesq_transport.py` (5/5): manufactured advection rel err ~9.5e-6, convergence
+order ~2.98, structural checks exact (rigid-rotation→0, dilation→f_ρ), far-field CFL cure
+carries to 2D (`s_ρ→c_l`, `s_β→0`).
+
+**Step B FORMULATION DECIDED (2026-07-24): evolve the 3-field system `(ω, η=θ_x, ξ=θ_y)`**
+— the paper's own numerics variables (Part I (2.27)–(2.28)), NOT primitive `(ω,θ)`.
+*Why (decision experiment `experiments/spike1_stepB_decide_formulation.py`, user-requested):* the crux is
+the modulation origin reads. `θ_xx(0)` read off primitive `θ` is an `r²`-curvature of two
+even modes, contaminated by `θ_yy` (the `cos2β` mode carries only `θ_xx−θ_yy`) — measured
+**~2× worse and ~2× more noise-sensitive** than reading `θ_xx(0)=η_x(0)` as a clean *linear*
+`r`-slope of `η`'s single odd `cosβ` mode (same read class as ω_x(0), Step-A `u_x(0)`). The
+user chose the **full 3-field** variant (keep `ξ`, don't drop the `v_x ξ` coupling) so the
+steady state is *exactly* the Chen–Hou profile — a faithful, honest gate.
+
+*Angular structure (settles the bases — the sine basis was only for `φ`):* `ω, η` are **odd
+in x** → live in `{cosβ, cos3β,…}` (zero at axis `β=π/2`, free at wall `β=0`); `θ, ξ=θ_y` are
+**even in x** → `{1, cos2β, cos4β,…}` (Neumann at axis, free at wall). Transport uses β
+finite differences (basis-agnostic — already built). Origin reads project onto the leading
+mode and extrapolate in `r`.
+
+*The derived rescaled RHS (one-scale, nonlinear; `u_x+v_y=0` used for the ξ reaction):*
+```
+ω_τ = −(c_l x+u)·∇ω + η + c_ω ω
+η_τ = −(c_l x+u)·∇η + (2c_ω − u_x) η − v_x ξ
+ξ_τ = −(c_l x+u)·∇ξ + (2c_ω + u_x) ξ − u_y η
+c_l = 2 η_x(0)/ω_x(0),   c_ω = ½ c_l + u_x(0),   c_θ = c_l + 2 c_ω
+```
+Needs velocity-gradient FIELDS `u_x, v_x, u_y` (from differentiating the Step-A velocity) in
+the reaction terms — build+validate those next (piece 2), then origin reads (piece 3), then
+assemble RHS + SSPRK3 (piece 4). `v_x(0)=0` (2.23) is a free sanity check on the reads.
+
+**STEP B COMPLETE + VALIDATED (2026-07-24).** `solver/boussinesq_rescaled.py`; suites
+`test_boussinesq_transport.py` (5/5) + `test_boussinesq_rescaled.py` (7/7). All sub-operators
+validated vs manufactured answers, all convergent:
+- piece 2 `grad_xy` (velocity-gradient fields): rel err ~3.9e-4, order ~1.97.
+- piece 3 `odd_field_x_slope` (origin slopes ω_x(0), η_x(0)): recovers −2.1 to ~2e-5; and
+  `c_l = 2η_x(0)/ω_x(0)` recovered to ~3e-16 — the projection quadrature bias **cancels in the
+  ratio** (the design win); `modulation` (2.11) assembles correctly with `u_x(0)`.
+- piece 4 `RescaledBoussinesq.rhs/step/run`: SSPRK3 coupled integrator; RHS wiring locked by a
+  term-by-term re-assembly test; end-to-end **runs stably** (60 steps, finite c_l,c_ω, res↓).
+
+Angular parities (recorded, used in seeds/tests): `φ` odd-x ⇒ `u=−φ_y` **odd-x**, `v=φ_x`
+**even-x**; hence `u_x` even, `u_y` odd, `v_x` odd — every RHS term is parity-consistent
+(ω,η odd; ξ even). Honest status: the machine is BUILT and stable; whether its steady state IS
+the Chen–Hou profile is **Step C** (unproven until run).
 
 **Step C — reproduce the Chen–Hou profile (the gate).** Relax perturbed data to the steady
 profile; check shape + `α ≈ −1/3` / `c_l/c_ω ≈ −2.92`, resolution-stable. Pre-committed

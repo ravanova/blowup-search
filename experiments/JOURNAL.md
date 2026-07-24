@@ -3,6 +3,54 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 1 Step B — rescaled 2D Boussinesq RHS + modulation + SSPRK3, ASSEMBLED & VALIDATED — 2026-07-24
+
+Full record: PHASE2_SPIKE1_NOTES.md §3 ("STEP B COMPLETE"). Code: `solver/boussinesq_rescaled.py`.
+Suites: `test_boussinesq_transport.py` (5/5) + `test_boussinesq_rescaled.py` (7/7). NOT a logged
+gate run — solver development validated piece-by-piece against manufactured known answers. The
+scientific gate (does the steady state = the Chen–Hou profile?) is Step C, still to run.
+
+What a human would want to know:
+
+- **Grounded, then a fork the user made me EARN with data.** Transcribed the exact rescaled
+  system (2.10)/(2.28), normalization (2.11)/(2.12), and — the payoff of re-reading Part I —
+  the *precise* gate constants (2.23): c̄_l≈3.006499, c̄_ω≈−1.029425, ū_x(0)≈−2.532674, ratio
+  ≈−2.92056, α≈−0.3424 (sharper than the round −2.92/−1/3 I'd been carrying). Also learned the
+  paper evolves the *derivatives* (ω, η=θ_x, ξ=θ_y), not primitive (ω,θ).
+
+- **The formulation decision, settled empirically (user asked "are there tests?").**
+  `experiments/spike1_stepB_decide_formulation.py`: reading θ_xx(0) off primitive θ is an r²-curvature of two
+  even modes, and the cos2β mode carries only (θ_xx−θ_yy) — contaminated by θ_yy. Measured **~2×
+  worse and ~2× more noise-sensitive** than reading θ_xx(0)=η_x(0) as a clean *linear r-slope* of
+  η's single odd cosβ mode. Ruled out primitive-θ. User chose the **full 3-field (ω,η,ξ)** (keep
+  the v_x·ξ coupling) so the fixed point is *exactly* the Chen–Hou profile — a faithful gate.
+
+- **The angular bases finally pinned down.** The sine basis was ONLY for φ (zero on both walls).
+  The transported fields: ω,η odd-in-x → {cosβ,cos3β,…} (zero at axis, free at wall); θ,ξ
+  even-in-x → {1,cos2β,…}. Transport uses β finite differences (basis-agnostic), so it didn't
+  care; the origin reads and parities do.
+
+- **The elegant confirmation.** c_l = 2η_x(0)/ω_x(0) is a RATIO of two same-basis slope reads, so
+  the projection's quadrature bias **cancels**: c_l recovered to ~3e-16 in the test even though
+  each slope alone carries ~2e-5. The thing the whole scheme's stability hinges on is the
+  best-conditioned quantity in it.
+
+- **Built de-risked, crux-first (Step-A discipline).** Piece 1 transport kernel (2D upwind on the
+  curved log grid, the Spike-0 3rd-order Shu stencil generalized): manufactured rel err ~9.5e-6,
+  order ~2.98, rigid-rotation→0 exact, far-field CFL cure carries to 2D. Pieces 2–4: grad_xy
+  (order ~1.97), origin reads, modulation, then the coupled SSPRK3 integrator — RHS wiring locked
+  by a term-by-term re-assembly test, and the whole machine steps stably (finite c_l,c_ω).
+
+- **Honest status.** This is the MACHINE, validated to run. It is NOT yet shown to reproduce the
+  profile — the smoke-test c_l≈1.06 is an arbitrary-blob transient, not a relaxation. And per the
+  standing steer, even a flawless Step C reproduces a PROVEN result across Wall C: validates
+  machinery, not novel, not a proof. Clay odds ~0.05%; the lottery ticket is post-Spike-1.
+
+- **Next: Step C (the gate, a LOGGED run).** Needs (i) an initial guess in the profile's basin
+  and (ii) a pre-committed pass/fail predicate (c_l,c_ω,ratio,α + shape, resolution-stable) fixed
+  BEFORE the run. Both are genuine decisions — check in with the user first. Watch the r_min
+  inflow inner-BC for domain/resolution sensitivity (flagged, not yet stressed).
+
 ## Spike 1 Step A — 2D Boussinesq velocity operator on a stretched grid, VALIDATED — 2026-07-24
 
 Full record: PHASE2_SPIKE1_NOTES.md; technical writeup/TECHNICAL_SPIKE1_VELOCITY.md; blog
