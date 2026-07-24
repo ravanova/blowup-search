@@ -43,7 +43,15 @@ and every figure is built from the small committed files in [`data/`](data/).
    protocol and the "two currencies, one wall" finding, self-contained and
    data-attached (readable without the chronological series above). The
    citable packaging of the concluded fitness search.
-9. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+9. **[TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md)** — Phase 2
+   (in progress): the numerics-upgrade decision (dynamic rescaling over AMR), the
+   rescaled-equation derivation confirmed against the literature, the Spike-0
+   reconnaissance (three false starts, each a finding), and the build recipe from
+   the published scheme. Fully cited. The solver is **scoped + de-risked, not yet
+   built**.
+10. **[BLOG_PHASE2_RESCALING.md](BLOG_PHASE2_RESCALING.md)** — the narrative
+    companion: "The wall has a far side, and it's made of other people's numerics."
+11. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
    upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
    which is the later Tier-3 computer-assisted-proof leg.)

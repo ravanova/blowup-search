@@ -3,6 +3,79 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 0 reconnaissance (dynamic rescaling on 1D gCLM) — 2026-07-24 — scheme grounded on exact known answer; uniform-grid CFL dead-end; Appendix C recipe in hand; solver NOT yet built
+
+Full record: PHASE2_SPIKE0_NOTES.md. Scratch code: phase2_spike0_probe.py (periodic,
+kept as a negative example). Commits d39a504, 3242158, 9ed940f. This is NOT a logged
+gate run — it is solver-development reconnaissance (cheap probes before the real build),
+in the project's "learn before you build" spirit.
+
+Goal: implement dynamic (self-similar) rescaling on the 1D gCLM solver and validate it
+recovers a *known* self-similar blow-up before porting to 2D Boussinesq (Spike 1).
+
+What a human would want to know:
+
+- **The known-answer target is CLM (a=0):** data w0=−sin x → blow-up at x=0, T*=2,
+  exact self-similar profile Ω̄₀(X)=−4X/(1+4X²), H(Ω̄₀)=2/(1+4X²), c_ω→−1. I first
+  derived the rescaled equation + this profile by hand; later confirmed *identical* to
+  Huang–Tong–Wang arXiv:2603.25104 (the exact gCLM dynamic-rescaling paper).
+
+- **Three false starts, each a finding** (probes v1→v4, phase2_spike0_probe.py):
+  (1) pointwise high-derivative normalization (pin Ω_yyy(0)) is a NOISE amplifier —
+  the (ik)³ multiplier makes Ω_yyy(0) read ~1000 vs the analytic 1; use integral
+  modulation. (2) A periodic pseudo-spectral run is *stable but converges to the WRONG
+  profile* (fitted B≈−1, not the CLM value 4) — because the true profile is a whole-line
+  ~1/X function needing the LINE Hilbert transform, and periodic H ≠ line H for slow
+  tails. My earlier "periodicity is fine" read was an artifact of the wrong (periodic) H.
+  (3) On a large *uniform* whole-line grid the line-H works (~1/M truncation err) but the
+  −c_l X Ω_X dilation NaNs — diagnosed as a **CFL limit** (advection speed is X up to M,
+  so dt < dX/M ≈ 1e-4; a spectral filter did not help). Uniform grid = wrong tool.
+
+- **Grounding closed all gaps (the session's repeated lesson: read the paper, don't
+  trial-and-error).** arXiv:2603.25104 gives: rescaled eqn Ω_τ=(c_ω+HΩ)Ω−c_l X Ω_X;
+  a=0 normalization c_l=1, c_ω=1−HΩ(0) (value-based, robust). Appendix C gives the
+  discretization: **C.1** line Hilbert transform via C¹₀ cubic-spline basis with analytic
+  H(P_i),H(Q_i) (closed-form A,B,C,D + minimax series) — works on a NON-uniform grid where
+  FFT cannot; **stretched cosh/sinh grid** X(ρ) with dX~X·Δρ so the dilation CFL ~ Δρ is
+  independent of M (this cures the uniform-grid death); **C.2** WENO5 advection +
+  SSPRK(10,4), evolve f=Ω/Xᵏ, converge ‖f_τ‖<1e-8. Full recipe banked in the notes.
+
+- **Honest status:** Spike 0 is de-risked and fully specified but the solver is NOT built.
+  Next increment: solver/line_hilbert.py + test vs the −4X/(1+4X²)↔2/(1+4X²) pair
+  (the crux, self-contained, hard pass/fail). Confirmed a genuine multi-day build.
+
+## Phase 2 route decision — 2026-07-24 — Phase 1 fitness search concluded; numerics upgrade (dynamic rescaling) chosen over AMR; NOT roadmap "Route D"
+
+Full record: PHASE2_NUMERICS_PLAN.md. Commit e7e0e3b. Decision made WITH the user via a
+reviewed options menu (per the standing "raise genuine scope decisions" steer).
+
+Context: the uniform-grid fitness search concluded with a decisive negative (two
+currencies — ν_crit, g_frac — both fail the honest gate via the same free-split ω₀→0
+wall; root cause: on a uniform grid the singular structure forms below grid scale).
+Standalone packaging of that negative: writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md
+(commit 9cd2b21) — the Option-C deliverable this session.
+
+What a human would want to know:
+
+- **The forward move is a numerics upgrade, not another fitness.** Researched the field
+  (Chen–Hou; Wang–Lai–Gómez-Serrano–Buckmaster; the 2025–26 unstable-profile frontier).
+  Three paradigms: (P1) dynamic self-similar rescaling — time-integrate in a rescaled frame
+  so the blow-up is a steady profile on a fixed grid; (P2) direct profile construction
+  (Newton/PINN) — the current novelty frontier; (P3) AMR. **Chose P1**, reject P3: P1
+  reuses the validated solver, dissolves the below-grid-scale wall (fitness on RESOLVED
+  structure), and its late-time state IS a self-similar profile (the on-ramp to P2).
+
+- **Terminology guard banked:** the AMR / self-similar-rescaling upgrade is a Route-A
+  *numerics* upgrade, NOT roadmap "Route D" (the later Tier-3 computer-assisted-proof leg).
+  Fixed this mislabel in writeup SUMMARY.md + README.md.
+
+- **Honest catch surfaced (matters for the lottery ticket):** the literature's real novelty
+  frontier is P2 profile construction of UNSTABLE profiles, not evolve-ICs search. P1 mainly
+  finds the *stable* CLM/Boussinesq blow-up (which Chen–Hou already proved). So P1 is framed
+  as the shared substrate + on-ramp; A-vs-B (evolve-ICs vs profile-hunting) is a gate to
+  re-decide AFTER Spike 1, with a working rescaling solver in hand. User approved: do Option-C
+  writeup first (done), then build Spike 0.
+
 ## Reformulated Gate 4 (g_frac) — 2026-07-24 — FAIL 4/6: free-split rails to ω₀→0, split-dominated + t_res proxy
 
 Full results: PHASE1_GATE4_REFORM_RESULTS.md. Frozen predicate:

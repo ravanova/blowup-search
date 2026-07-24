@@ -202,5 +202,36 @@ Forward plan and full record:
 [BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md),
 [BLOG_PHASE1_GATE4_REFORM.md](BLOG_PHASE1_GATE4_REFORM.md).
 
-*All numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
+---
+
+## Phase 2 — the numerics upgrade (in progress: scoped + de-risked, not built)
+
+The forward move from the concluded fitness search is the solver upgrade that
+resolves the singular region so a fitness measures *real* structure. Decision (made
+with the user via a reviewed options menu): build **dynamic self-similar rescaling**
+— integrate in a rescaled frame so the blow-up is a steady profile on a fixed grid —
+rejecting AMR (heavier, discards the validated solver). It reuses our spectral
+solver, dissolves the below-grid-scale wall, and its late-time state *is* a
+self-similar profile — the on-ramp to direct profile construction (the field's actual
+novelty frontier; the "evolve-ICs vs hunt-profiles" question is re-decided at a gate
+*after* the solver works). Spike-first, on a known answer: **Spike 0** implements it
+in 1D on gCLM against the exact CLM self-similar blow-up (`Ω̄₀=−4X/(1+4X²)`, `T*=2`)
+before **Spike 1** ports to 2D Boussinesq.
+
+**Banked so far (reconnaissance, no solver yet):** the rescaled equation derived and
+confirmed against the published gCLM scheme (Huang–Tong–Wang, arXiv:2603.25104); three
+instructive false starts (pointwise-derivative normalization is a noise amplifier; a
+periodic grid converges to the *wrong* profile because periodic H ≠ line H for the
+`~1/X` tail; a uniform whole-line grid is CFL-strangled by the self-similar dilation);
+and the full build recipe from the paper's Appendix C (spline-analytic **line** Hilbert
+transform + stretched cosh/sinh grid + WENO5/SSPRK). Confirmed a genuine multi-day
+solver build with all literature gaps closed. Full record:
+[TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md),
+[BLOG_PHASE2_RESCALING.md](BLOG_PHASE2_RESCALING.md),
+[../PHASE2_NUMERICS_PLAN.md](../PHASE2_NUMERICS_PLAN.md),
+[../PHASE2_SPIKE0_NOTES.md](../PHASE2_SPIKE0_NOTES.md). Honest scope unchanged: even a
+flawless solver reproduces a *proven* toy-model result (Chen–Hou 2022); the value is
+the structure-resolving enabler, and any novelty is downstream in profile construction.
+
+*All Phase-1 numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*
