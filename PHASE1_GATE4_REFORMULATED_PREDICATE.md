@@ -1,14 +1,17 @@
 # Reformulated Gate 4 predicate — inviscid rank-based growth-rate currency
 
-**STATUS: DRAFT — for review, NOT yet frozen.** This is the pre-run contract for a
-reformulated Gate 4 on the `g_frac` currency, drafted after the 256→512 rank check
-passed (Spearman +0.905; PHASE1_GSUSTAINED_RESULTS.md "RESOLVED"). It is committed
-as a draft so it can be reviewed *before* it is frozen and run — per the banked
-lesson that a pre-committed predicate is necessary but not sufficient, and that a
-*reformulated* anti-self-deception predicate must not be rewritten and run in one
-unreviewed motion (Gate 4 already produced one false 6/6 pass, PHASE1_GATE4_RESULTS.md).
-Nothing runs until this is signed off. Once frozen, the constants below are
-committed BEFORE the 40-shape gate so any rail is a finding, not a nudge.
+**STATUS: FROZEN — 2026-07-24, reviewed and signed off (3 improvements folded in:
+rank-stability across all three resolutions, split-dominance promoted to a gate
+condition (6g), and a t_res-proxy interrogation (6h); winner-not-at-split-rail
+(6b′) added while designing the adversarial roster).** Pre-run contract for the
+reformulated Gate 4 on the `g_frac` currency, after the 256→512 rank check passed
+(Spearman +0.905; PHASE1_GSUSTAINED_RESULTS.md "RESOLVED"). Implemented by
+`analyze_phase1_gate4_reform.py` (the frozen predicate) over
+`phase1_gate4_reform.py`'s measurements; both committed BEFORE the run so any rail
+is a finding, not a nudge — the same produce/judge discipline as the ν_crit Gate 4.
+Per the banked lesson (a pre-committed predicate is necessary but not sufficient;
+Gate 4 already produced one false 6/6 pass), the substantive anti-cheat audits are
+gate conditions here, not post-hoc diagnostics.
 
 ## The fitness under test
 
@@ -35,8 +38,8 @@ The Gate-4 principle is a roster designed to *test* property 6, not dodge it. Th
 differ, so the roster must additionally seed the currency's *own* known failure
 modes: **explicit high-split shapes** (test the split→1 rail) and **explicit
 low-ω₀ shapes** (test the ω₀ cheat, mechanically entangled with high split at
-fixed energy). Measured at **N ∈ {256, 512}** (the de-risked rank pair; property 6
-evaluated at N=512).
+fixed energy). Measured at **N ∈ {128, 256, 512}** (property 4 needs both refinement
+steps; 128 solves are cheap; property 6 evaluated at N=512).
 
 ## The six reformulated properties
 
@@ -67,9 +70,15 @@ is carried by the currency's one free knob, the window fraction:
   arbitrary window fraction. (Free — reuses the same trajectories, no new solves.)
 
 ### 4. RANK-resolution-stable  *(REFORMULATED — was |Δν_crit| ≤ 2·tol)*
-The magnitude is on the wall, so the **ranking** is tested, not the value:
-- (a) `Spearman(rank g_frac @256, rank g_frac @512) ≥ RANK_MIN` over the growers;
-- (b) rail analog: **0** growers may flip grower→non-grower under refinement (a
+The magnitude is on the wall, so the **ranking** is tested, not the value, and
+across **both** refinement steps (128→256→512) so a slow rank-erosion a single
+pair would miss is caught:
+- (a) `Spearman(rank g_frac @128, @256) ≥ RANK_MIN` **and**
+  `Spearman(rank g_frac @256, @512) ≥ RANK_MIN` over the growers;
+- (b) **not degrading:** the 256→512 Spearman is not materially below the 128→256
+  one (`sp(256,512) ≥ sp(128,256) − RANK_EROSION`) — the ranking is converging or
+  flat with N, not drifting onto the wall;
+- (c) rail analog: **0** growers may flip grower→non-grower under refinement (a
   shape heading to blow-up must not stop under-resolving at finer N; finer N
   resolves *more*, so this is a hard, one-sided bar).
 
@@ -85,6 +94,11 @@ implementing "pre-committing a predicate is necessary but not sufficient"). ALL 
   non-grower).
 - (b) **Winner structured, not trivial low-mode:** winner class ≠ trivial AND
   winner centroid ≥ `WINNER_CENTROID_MIN` (the gCLM low-(1,1) trap).
+- (b′) **Winner not at a split rail:** `SPLIT_RAIL_LO < winner split <
+  SPLIT_RAIL_HI` — a max-split (ω₀→0) shape must not top the landscape. The roster
+  deliberately seeds high-split adversarial shapes; if one wins, this fails. (Closes
+  the hole where a split-cheat shape passes (a) and (b) because its *base* geometry
+  is structured.)
 - (c) **Top-5 are growers:** ≥ 4/5 of the top-5 under-resolve.
 - (d) **No ω₀ cheat:** `|ρ(g_frac, log max|ω₀|)| ≤ RHO_W0` **and** partial
   `ρ(g_frac, log|ω₀| | split) ≤ PARTIAL_W0` (the ν_crit killer must be absent even
@@ -96,6 +110,19 @@ implementing "pre-committing a predicate is necessary but not sufficient"). ALL 
   argmax (∉ sweep endpoints — no rail to split=1/0) **and** partial
   `ρ(g_frac, split | log|ω₀|) > 0` (split acts through buoyancy, not by driving
   ω₀→0). Reuses the LEG-3 split-sweep + free-roster instruments.
+- (g) **Structured gradient BEYOND split** *(the key strengthening — split
+  dominance is a gate condition, not a caveat):* `g_frac` must discriminate
+  ω-geometry after split is controlled, so a split-binned MAP-Elites archive has a
+  real within-bin gradient to select on. Decisive condition: partial
+  `ρ(g_frac, centroid | split) ≥ RESIDUAL_MIN` (on the random growers). *De-risk
+  hint: this partial was only +0.09 — this condition is expected to be stringent
+  and may FAIL. A fail is the constructive finding "g_frac is split-dominated →
+  usable only with split as a **binned** descriptor axis" (a Gate-3 descriptor
+  revisit), not a dead end.*
+- (h) **More than a formation-time proxy:** `ρ(g_frac, t_res)` is strong (−0.70),
+  so the currency must carry ω-geometry signal beyond "when tail_guard trips":
+  partial `ρ(g_frac, centroid | t_res) ≥ RESIDUAL_MIN` (structure survives the
+  t_res control). Guards against `g_frac` collapsing to a trivial `−t_res` proxy.
 
 ## Frozen thresholds (proposed — set by principle, with observed de-risk values shown)
 
@@ -108,9 +135,12 @@ only to confirm each bar has margin.
 | `G_MIN` | 0.10 | clearly-positive log-rate, above the flat control (0.0) | control 0.0; mild 0.42 |
 | `NONZERO_FRAC` | 0.80 | inherited from ν_crit gate | — |
 | `WINDOW_ROBUST` | 0.90 | ranking insensitive to the window knob | (to measure) |
-| `RANK_MIN` | 0.85 | de-risk bar; clearly above chance/half-preserved | +0.905 |
+| `RANK_MIN` | 0.85 | de-risk bar; clearly above chance/half-preserved | +0.905 (256→512), +0.90 (128→256) |
+| `RANK_EROSION` | 0.10 | 256→512 rank not materially worse than 128→256 | +0.005 (improved) |
+| `RESIDUAL_MIN` | 0.15 | g_frac adds real structure signal beyond split | +0.09 (⚠ may FAIL) |
 | `WIDEBAND` | 0.30 | top grower ≳1.3×/window faster than slowest | ~1.0 span |
 | `WINNER_CENTROID_MIN` | 1.3·√2 | inherited; clearly above the (1,1) floor | winner 1.59 |
+| `SPLIT_RAIL_LO/HI` | 0.15 / 0.85 | winner not at a split extreme (ω₀→0 cheat) | winner ~0.5 |
 | `RHO_W0` | 0.40 | ω₀ explains < ~16% of variance (0.4²) | +0.21 |
 | `PARTIAL_W0` | 0.25 | residual ω₀ effect negligible after split | +0.04 |
 | `RHO_MAX` | 0.70 | inherited; structure not strongly anti-correlated | +0.31 |
