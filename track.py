@@ -98,7 +98,16 @@ def _pids(needle):
         return []
     raw = [int(x) for x in out.stdout.split()]
     py = [p for p in raw if _comm(p).startswith("python")]
-    return py or raw  # fall back to raw if the producer isn't a python process
+    if py:
+        return py
+    # No python matched. Do NOT fall back to raw blindly: `pgrep -f` also matches
+    # shell wrappers / monitors / this tracker whose command line merely mentions
+    # the script name (a waiter `while pgrep -f 'script.py'` even matches itself),
+    # which would falsely report the producer as alive after it exited. Exclude
+    # shells/utilities and self so a non-python producer still resolves.
+    _SHELL = {"bash", "sh", "dash", "zsh", "fish", "pgrep", "grep", "ps", "sed",
+              "awk", "cat", "tail", "nohup", "timeout", "env"}
+    return [p for p in raw if _comm(p) not in _SHELL and p != os.getpid()]
 
 
 def _stat_fields(pid):
