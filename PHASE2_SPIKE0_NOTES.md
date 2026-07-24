@@ -125,14 +125,18 @@ kept as a negative example): `phase2_spike0_probe.py`.
 Verified components on a large **uniform** line grid `[-Xmax,Xmax]` (FFT-based):
 - **line Hilbert transform works** but converges slowly — `~1/Xmax` truncation error
   from the `~1/X` tail (`≈6e-3` at Xmax=200, `≈3e-3` at Xmax=400), N-independent.
-- **the `−c_l X Ω_X` dilation term is UNSTABLE**: even initialized *exactly at*
-  `Ω̄₀`, the run NaNs immediately. The advection coefficient `X` is unbounded (±Xmax),
-  amplifying spectral/periodic-wrap error catastrophically. Not a bug — a uniform
-  periodic grid cannot carry this dilation.
+- **the `−c_l X Ω_X` dilation term is CFL-strangled**: even initialized *exactly at*
+  `Ω̄₀`, an explicit RK4 step NaNs. Diagnosis (confirmed by the numbers, not a fixable
+  instability — a spectral filter did not help): the advection *speed* is `X` itself,
+  up to `Xmax`, so explicit stability needs `dτ < dX/Xmax ≈ 0.024/200 ≈ 1×10⁻⁴`,
+  whereas `2×10⁻³` was used (20× over). A CFL-safe `dτ` makes the uniform grid ~20×
+  more expensive AND still carries the slow `~1/Xmax` tail error. Uniform grid = wrong
+  tool.
 
 This is exactly why the paper discretizes on a **mapped grid**. Under e.g.
 `X = L·tan θ`, `θ∈(−π/2,π/2)`: `∂_X = (cos²θ/L)∂_θ`, so the dilation becomes the
-**bounded** coefficient `X Ω_X = sin θ cos θ · Ω_θ`. The remaining non-trivial piece
+**bounded** coefficient `X Ω_X = sin θ cos θ · Ω_θ` (|coeff| ≤ ½) — restoring a sane
+CFL *and* resolving the tail (points cluster correctly on the line). The non-trivial piece
 is the **line Hilbert transform in the mapped coordinate** (no longer a plain FFT
 multiplier) — this is what Appendix C of arXiv:2603.25104 specifies and what should
 be extracted rather than reinvented (the session's repeated lesson: ground the
