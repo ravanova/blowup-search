@@ -11,6 +11,9 @@ experiments/run_logs/
 experiments/*.jsonl
 experiments/*.out
 
+# Reference papers (copyrighted PDFs; grounding material, not source)
+Papers/
+
 # OS / editor
 .DS_Store
 *.swp
