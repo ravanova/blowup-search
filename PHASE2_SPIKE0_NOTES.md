@@ -187,6 +187,43 @@ upwind/WENO advection + SSPRK or CFL-safe RK. Target: recover `Ω̄₀=−4X/(1+
 closed. Paper text cached this session: scratchpad `gclm_paper.txt` (Appendix C at
 line ~7169); PDF via `arxiv.org/pdf/2603.25104`.
 
+### BUILT (2026-07-24): the crux — `solver/line_hilbert.py` + `test_line_hilbert.py` PASS
+
+The hardest component is done and validated against the known answer. The line
+Hilbert transform on a non-uniform (sinh-stretched) whole-line grid recovers the
+CLM pair `H(−4X/(1+4X²)) = 2/(1+4X²)` to **relative error 1.6e-4** (POC target was
+1%), with clean monotone convergence under whole-line refinement
+(2.35e-3 → 5.22e-4 → 1.16e-4 as core resolution + reach M grow together).
+
+Implementation notes worth keeping:
+- **A,B derived, not transcribed.** pdftotext mangled the paper's 23-term minimax
+  coefficient lists, so instead of copying them I substituted
+  `ln|1−s| = L(s) − s − s²/2 − s³/3` with `L(s) = −Σ_{n≥4} sⁿ/n` into the exact
+  `A(s), B(s)` closed forms; the leading polynomial terms cancel *analytically*,
+  giving stable small-|s| forms `A = (s³−3s+2)L/(πs³) − (3s²+2s³)/6π`,
+  `B = (s−1)²L/(πs³) + (s−2s²)/6π`. This matched the paper's minimax structure
+  exactly for B and (with the OCR's detached leading `−`) for A. Verified two ways:
+  branch continuity across |s|=0.5, and against the raw closed form at moderate |s|.
+  So the minimax coefficient transcription warned about in the recipe is UNNEEDED.
+- **Diagonal (x=xᵢ) limits and the s→1 neighbor singularity** both handled:
+  `H(Pᵢ)(xᵢ)=(1/π)ln|(xᵢ₋₁−xᵢ)/(xᵢ₊₁−xᵢ)|`, `H(Qᵢ)(xᵢ)=(xᵢ₋₁−xᵢ₊₁)/3π`; the
+  `s=1` case (evaluation at an immediate neighbor) is the finite limit
+  `A(1)=−5/6π, B(1)=−1/6π` via the `(s−1)²ln|1−s|→0` guard.
+- **Node slopes fᵢ′** from a hand-rolled natural cubic spline (Thomas algorithm,
+  `f''=0` at both ends) — no scipy in the venv.
+- **`line_hilbert_matrix(x)`** returns a dense N×N operator (folds in the linear
+  slope map) so the transform is a single matmul reused every RHS eval on the
+  fixed grid — ready for the time-stepper.
+- **Dominant error is the ~1/M tail truncation, not core resolution** — expected
+  for this `~1/X` profile; both knobs must grow to converge. Fine at POC level.
+
+**Next increment:** the stretched-grid time-stepper `solver/gclm_rescaled.py`
+(evolve `f=Ω/X`, k=1 for non-degenerate CLM; `c_ω=1−HΩ(0)`, `c_l=1`; WENO5 +
+SSPRK(10,4) or a CFL-safe RK) + `test_gclm_rescaled.py` (steady-profile residual
+at Ω̄₀, then convergence from perturbed odd data with c_ω→−1, T*→2, resolution-
+stable). The velocity `U` (log-kernel) via the C.1 `C,D` integral elements is only
+needed for a≠0 advection — **CLM (a=0) does not use U**, so it can be deferred.
+
 ## Sources
 - Zheng, Hou, et al., *Self-similar finite-time blowups with singular profiles of the
   generalized Constantin–Lax–Majda model*, arXiv:2603.25104 (exact scheme + CLM profile).

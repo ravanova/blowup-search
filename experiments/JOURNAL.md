@@ -3,6 +3,43 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 0 — the crux is BUILT: line Hilbert transform on a stretched grid PASSES against the known answer — 2026-07-24
+
+Full record: PHASE2_SPIKE0_NOTES.md ("BUILT" section). Code: `solver/line_hilbert.py`,
+`test_line_hilbert.py` (run `python test_line_hilbert.py`; 6/6 pass). NOT a logged gate
+run — solver development against a closed-form known answer.
+
+The hardest, most-de-risking component of Spike 0 now works. The whole-line Hilbert
+transform on a non-uniform sinh-stretched grid maps `−4X/(1+4X²) → 2/(1+4X²)` (the exact
+CLM self-similar pair) to **relative error 1.6e-4**, POC target was 1%, with clean
+monotone convergence (2.35e-3 → 5.22e-4 → 1.16e-4) under whole-line refinement.
+
+What a human would want to know:
+
+- **This was THE crux** (per the recon notes and the standing steer): the stretched grid
+  forces a NON-FFT Hilbert transform, and that spline-analytic transform was the one piece
+  the periodic solver couldn't provide. It's now validated in isolation with a hard
+  pass/fail against an answer we know exactly. The rest of Spike 0 (the time-stepper) is
+  comparatively standard.
+
+- **I derived the A,B basis-Hilbert formulas instead of transcribing the paper's minimax.**
+  The recipe warned pdftotext mangles Appendix C's 23-term coefficient lists. Rather than
+  hand-copy them, I substituted the Taylor split `ln|1−s| = L(s) − s − s²/2 − s³/3`
+  (`L = −Σ_{n≥4}sⁿ/n`) into the exact closed forms; the cancellation cancels *analytically*.
+  This reproduced the paper's minimax structure (exactly for B; the OCR's orphaned leading
+  `−` confirmed the A sign) and is verified by branch-continuity at |s|=0.5 and against the
+  raw closed form. **The minimax transcription the recipe flagged as risky is unneeded.**
+
+- **Honest scope:** this validates machinery against a *proven* toy result, not novelty.
+  The dominant error is ~1/M tail truncation (the profile's 1/X decay), expected and fine
+  at POC level. No scipy in the venv, so the natural cubic spline slopes are hand-rolled
+  (Thomas). `line_hilbert_matrix(x)` gives a reusable dense operator for the time-stepper.
+
+- **Next increment:** `solver/gclm_rescaled.py` — the stretched-grid time-stepper (evolve
+  f=Ω/X, k=1; c_ω=1−HΩ(0), c_l=1) + `test_gclm_rescaled.py` (steady residual at Ω̄₀, then
+  convergence from perturbed odd data → c_ω→−1, T*→2, resolution-stable). The log-kernel
+  velocity U (C.1 C,D elements) is a≠0-only, so deferrable for the CLM POC.
+
 ## Spike 0 reconnaissance (dynamic rescaling on 1D gCLM) — 2026-07-24 — scheme grounded on exact known answer; uniform-grid CFL dead-end; Appendix C recipe in hand; solver NOT yet built
 
 Full record: PHASE2_SPIKE0_NOTES.md. Scratch code: phase2_spike0_probe.py (periodic,
