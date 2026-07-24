@@ -20,3 +20,5 @@ Papers/
 
 # Transient local settings temp files
 .claude/*.tmp.*
+experiments/*.log
+experiments/*.npz
