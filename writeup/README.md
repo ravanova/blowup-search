@@ -43,15 +43,24 @@ and every figure is built from the small committed files in [`data/`](data/).
    protocol and the "two currencies, one wall" finding, self-contained and
    data-attached (readable without the chronological series above). The
    citable packaging of the concluded fitness search.
-9. **[TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md)** — Phase 2
-   (in progress): the numerics-upgrade decision (dynamic rescaling over AMR), the
-   rescaled-equation derivation confirmed against the literature, the Spike-0
-   reconnaissance (three false starts, each a finding), and the build recipe from
-   the published scheme. Fully cited. The solver is **scoped + de-risked, not yet
-   built**.
+9. **[TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md)** — Phase 2:
+   the numerics-upgrade decision (dynamic rescaling over AMR), the rescaled-equation
+   derivation confirmed against the literature, the Spike-0 reconnaissance (three
+   false starts, each a finding), and the build recipe from the published scheme.
+   Fully cited. (The decision + derivation record; the solver was built next.)
 10. **[BLOG_PHASE2_RESCALING.md](BLOG_PHASE2_RESCALING.md)** — the narrative
     companion: "The wall has a far side, and it's made of other people's numerics."
-11. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+11. **[TECHNICAL_SPIKE0_RESCALING.md](TECHNICAL_SPIKE0_RESCALING.md)** — Spike 0
+    **built + validated**: the dynamic-rescaling solver, run on CLM against its
+    closed-form answer, recovers the exact self-similar profile `-4X/(1+4X²)` and
+    rate `c_ω→-1` from perturbed data, resolution-stable — including the crux
+    (a line Hilbert transform on a non-uniform grid, derived stable, not
+    transcribed) and the finding that one-scale rescaling is stable for CLM. Figure
+    [`fig8`](figures/fig8_spike0_rescaling.png). Honest scope: reproduces a *proven*
+    toy result; validates machinery, not novelty, not a proof.
+12. **[BLOG_SPIKE0_RESCALING.md](BLOG_SPIKE0_RESCALING.md)** — the narrative
+    companion: "We built the far side of the wall, and it held."
+13. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
    upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
    which is the later Tier-3 computer-assisted-proof leg.)
@@ -67,6 +76,7 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig5_rough_rails.png` | Stage 3.6 — genuine `C^{0,h}` rough data still rails the exponent near a=1 (control validates the measurement) |
 | `fig6_phase1_spike.png` | Phase 1 — the resolution wall: growth rate `g` converges (search-viable) while the blow-up exponent rails (true singularity out of uniform-grid reach) |
 | `fig7_phase1_axis_screen.png` | Phase 1 — the fitness-axis screen: only ν_crit orders blow-up propensity (sharp>mild>control) and is N-stable |
+| `fig8_spike0_rescaling.png` | Spike 0 — CLM dynamic rescaling: perturbed data relaxes onto the exact profile `-4X/(1+4X²)`, rate `c_ω→-1`, residual decays (known-answer validation) |
 
 ## Evidence map ([`data/`](data/))
 
@@ -86,6 +96,7 @@ Every claim in the writeup traces to one of these committed files:
 | `phase1_gate4.json` | Gate-4 six-property gate on ν_crit (the false pass + ω₀ diagnostic), the fixed-split & currency probes | Phase 1 / BLOG_PHASE1_GATE4 |
 | `phase1_gsustained.json` | staged inviscid growth-rate probe: magnitude on the resolution wall (LEG 1), rank-stability + `g_frac`-vs-`accel_ratio` cheat audit (LEG 2), free-split partials (LEG 3) | Phase 1 / BLOG_PHASE1_GSUSTAINED |
 | `phase1_gate4_reform.json` | reformulated Gate 4 on `g_frac`: the 4/6 FAIL scorecard, the free-split rail to ω₀→0 (top-6 shapes), the property-6 sub-conditions, and the 7 grower→non-grower classification flips | Phase 1 / BLOG_PHASE1_GATE4_REFORM |
+| `spike0_rescaling.json` | Spike 0 — line-H known-answer convergence, the perturbed-IC run (profile + `c_ω(τ)` + residual histories), and the two-resolution stability check | Spike 0 / fig8 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,
@@ -97,6 +108,9 @@ depends on them.
 ```bash
 # figures from the committed data (no solver runs needed):
 .venv/bin/python writeup/build_figures.py
+
+# Spike-0 figure from its committed data (add --generate to re-run the solver, ~1 min):
+.venv/bin/python writeup/spike0_rescaling_evidence.py
 
 # re-curate data from raw logs (only if you still have experiments/*, or after
 # re-running the sweeps/GA per the stage docs):

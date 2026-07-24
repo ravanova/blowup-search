@@ -5,9 +5,11 @@
 *Technical companion to [NEGATIVE_RESULT_TWO_CURRENCIES.md](NEGATIVE_RESULT_TWO_CURRENCIES.md)
 (which concluded the uniform-grid fitness search) and the planning records
 [../PHASE2_NUMERICS_PLAN.md](../PHASE2_NUMERICS_PLAN.md),
-[../PHASE2_SPIKE0_NOTES.md](../PHASE2_SPIKE0_NOTES.md). Status: the dynamic-rescaling
-solver is **scoped, derived, and de-risked but not yet built** — this records the
-methodology and findings so far, honestly bounded. References in [§6](#6-references).*
+[../PHASE2_SPIKE0_NOTES.md](../PHASE2_SPIKE0_NOTES.md). Status: this records the
+**decision, derivation, and reconnaissance**. The solver has since been **built and
+validated** — see the results companion
+[TECHNICAL_SPIKE0_RESCALING.md](TECHNICAL_SPIKE0_RESCALING.md). References in
+[§6](#6-references).*
 
 ---
 

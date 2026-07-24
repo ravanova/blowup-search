@@ -204,7 +204,7 @@ Forward plan and full record:
 
 ---
 
-## Phase 2 — the numerics upgrade (in progress: scoped + de-risked, not built)
+## Phase 2 — the numerics upgrade (Spike 0 built + validated against a known answer)
 
 The forward move from the concluded fitness search is the solver upgrade that
 resolves the singular region so a fitness measures *real* structure. Decision (made
@@ -218,20 +218,31 @@ novelty frontier; the "evolve-ICs vs hunt-profiles" question is re-decided at a 
 in 1D on gCLM against the exact CLM self-similar blow-up (`Ω̄₀=−4X/(1+4X²)`, `T*=2`)
 before **Spike 1** ports to 2D Boussinesq.
 
-**Banked so far (reconnaissance, no solver yet):** the rescaled equation derived and
-confirmed against the published gCLM scheme (Huang–Tong–Wang, arXiv:2603.25104); three
-instructive false starts (pointwise-derivative normalization is a noise amplifier; a
-periodic grid converges to the *wrong* profile because periodic H ≠ line H for the
-`~1/X` tail; a uniform whole-line grid is CFL-strangled by the self-similar dilation);
-and the full build recipe from the paper's Appendix C (spline-analytic **line** Hilbert
-transform + stretched cosh/sinh grid + WENO5/SSPRK). Confirmed a genuine multi-day
-solver build with all literature gaps closed. Full record:
+**Spike 0 — DONE and validated (2026-07-24).** The dynamic-rescaling solver is built and
+recovers the CLM known answer. On a sinh-stretched whole-line grid, CLM (`a=0`) dynamic
+rescaling holds `Ω̄₀=−4X/(1+4X²)` steady and — the real test — relaxes **perturbed** odd
+data (two different bumps) onto it: shape error **~2×10⁻⁶**, self-similar rate
+**`c_ω → −0.999`** (target `−1`), resolution-stable (`c_ω`: −0.9986 → −0.9995 refining;
+shape err 4.0×10⁻⁶ → 7.7×10⁻⁷). The crux — a **line** Hilbert transform on a non-uniform
+grid — recovers the known pair `−4X/(1+4X²) → 2/(1+4X²)` to rel err 1.6×10⁻⁴; its
+stability-critical coefficients were **derived** (an analytic cancellation) rather than
+transcribed from the paper's mangled minimax. **Headline finding:** one-scale rescaling is
+*stable and attracting* for CLM — the reconnaissance's apparent one-scale instability was an
+artifact of the *wrong (periodic) Hilbert transform + integral modulation*, not fundamental.
+Code [`../solver/line_hilbert.py`](../solver/line_hilbert.py),
+[`../solver/gclm_rescaled.py`](../solver/gclm_rescaled.py); tests 11/11; figure
+[`fig8`](figures/fig8_spike0_rescaling.png). Full record:
+[TECHNICAL_SPIKE0_RESCALING.md](TECHNICAL_SPIKE0_RESCALING.md),
+[BLOG_SPIKE0_RESCALING.md](BLOG_SPIKE0_RESCALING.md); decision + reconnaissance in
 [TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md),
-[BLOG_PHASE2_RESCALING.md](BLOG_PHASE2_RESCALING.md),
-[../PHASE2_NUMERICS_PLAN.md](../PHASE2_NUMERICS_PLAN.md),
-[../PHASE2_SPIKE0_NOTES.md](../PHASE2_SPIKE0_NOTES.md). Honest scope unchanged: even a
-flawless solver reproduces a *proven* toy-model result (Chen–Hou 2022); the value is
-the structure-resolving enabler, and any novelty is downstream in profile construction.
+[../PHASE2_SPIKE0_NOTES.md](../PHASE2_SPIKE0_NOTES.md).
+
+**Honest scope unchanged.** This reproduces a *proven, closed-form* toy result across Wall C
+— it validates machinery, not novelty, and is not a proof. The physical `T*=2` is
+deliberately not claimed from a whole-line run (its amplitude is a free gauge; the local
+analogue is the rate `c_ω→−1`). Any novelty remains downstream in profile construction. Next
+lift is **Spike 1** (2D Boussinesq port) — where the two-scale question may recur (a different
+mechanism) and which again reproduces a *proven* profile.
 
 *All Phase-1 numbers above are drawn from [`data/summary_metrics.json`](data/summary_metrics.json)
 and the files it references; see [README.md](README.md) for the evidence map.*
