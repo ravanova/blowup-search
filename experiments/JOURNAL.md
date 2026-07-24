@@ -3,6 +3,49 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## g_sustained 256→512 rank check — 2026-07-24 — the rank SURVIVES the wall (Spearman +0.905), cheat audit clean at N=512
+
+Full results: PHASE1_GSUSTAINED_RESULTS.md (Consequence section — the de-risk this
+resolves). Script: phase1_gsustained_rankcheck.py (commit 19d51c0). Data:
+experiments/phase1_gsustained_rankcheck.jsonl. This is the ONE expensive leg the
+staged probe paused on: does g_frac's *ranking* hold at higher N, or is even the
+rank on the uniform-grid wall? The user green-lit running it (over accepting the
+negative now / pivoting to Route D).
+
+What a human would want to know:
+
+- **The rank holds across a doubling.** Spearman(rank@256, rank@512) = **+0.905**
+  (precommitted bar > 0.85; 20/20 shapes finite). Essentially identical to the
+  +0.90 at 128↔256 — the ordering did NOT degrade with resolution. The rank is not
+  on the wall even though the magnitude is (g_frac@512 > g_frac@256 for every
+  grower, e.g. struct_diag 0.33→0.74; the wall is real, only the order is stable).
+
+- **Cheat audit re-run AT N=512 is clean** (not carried over from 256 — the banked
+  lesson is that a rank can be stable AND cheat-organized): winner rand_01 is a
+  genuine grower (t_res 2.95), top-5 all growers (5/5), ρ(g,log|ω₀|)=+0.21 (no ω₀
+  cheat), ρ(g,centroid)=+0.31 (structure), ρ(g,t_res)=−0.70. Consistent with the
+  256 audit.
+
+- **The known-cheat control did its job.** accel_ratio was also rank-stable
+  (+0.853) but winner rand_08 is a non-grower and ρ(accel_ratio,early_rate)=−0.58 —
+  the small-denominator cheat, correctly separated from g_frac. The audit
+  discriminates honest-vs-cheat even when both are rank-stable.
+
+- **Ops note (a mistake, banked as a lesson, not a science problem):** the run
+  finished cleanly but my monitoring hid it for ~10 min. A `while pgrep -f
+  'script.py'` waiter matched *itself* (its own argv contains the string) so it
+  never exited/notified; track.py's `py or raw` fallback then counted the leftover
+  bash wrappers as a live producer and kept printing RUNNING. Fixed both
+  (track.py commits aa402da, 81d592f): never wait on a pgrep pattern that matches
+  the waiter, and never fall back to non-python matches when checking a python
+  producer's liveness. The science/data were unaffected — all 40 solves present.
+
+- **Verdict → forward.** Outcome (1): the g_frac rank-based currency survives the
+  de-risk. Next is the reformulated 40-shape Gate 4 (property-4 ⇒ RANK-stable,
+  property-6 ⇒ evaluated controlling for split). Paused at a checkpoint to review
+  the reformulated predicate wording before spending the gate — reformulating an
+  anti-self-deception predicate is exactly the step not to do unilaterally.
+
 ## g_sustained staged probe — 2026-07-24 — fixed-window magnitude fails (same wall); rank-based g_frac survives
 
 Full results: PHASE1_GSUSTAINED_RESULTS.md. Data:

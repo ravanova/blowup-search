@@ -122,6 +122,34 @@ The remaining, un-run de-risk is the **256→512 rank-stability check** — does
 leg (~20–40 min of N=512 solves) and is **paused for review** before either
 running it (→ full reformulated Gate 4 if it holds) or accepting the negative.
 
+## RESOLVED (2026-07-24): the 256→512 rank check — g_frac survives
+
+*Script `phase1_gsustained_rankcheck.py` (commit 19d51c0); data
+`experiments/phase1_gsustained_rankcheck.jsonl`. The user green-lit running the
+de-risk over accepting the negative / pivoting to Route D.*
+
+The same 20-shape fixed-split roster, run at N=256 and N=512:
+
+- **Decision statistic: Spearman(rank@256, rank@512) = +0.905** (precommitted bar
+  > 0.85; 20/20 shapes finite). The ranking did **not** degrade across the doubling
+  — essentially identical to the +0.90 at 128↔256. The rank is not on the wall.
+- **Magnitude still climbs** (g_frac@512 > g_frac@256 for every grower, e.g.
+  struct_diag 0.33→0.74) — confirming the wall is real and only the *order* is
+  stable, exactly as LEG 1 predicted.
+- **Cheat audit re-run AT N=512 is clean:** winner rand_01 a genuine grower
+  (t_res 2.95), top-5 all growers (5/5), ρ(g,log|ω₀|)=+0.21 (no ω₀ cheat),
+  ρ(g,centroid)=+0.31 (structure), ρ(g,t_res)=−0.70.
+- **Known-cheat control confirms the audit discriminates:** accel_ratio was also
+  rank-stable (+0.853) but its winner rand_08 is a non-grower and
+  ρ(accel_ratio,early_rate)=−0.58 — correctly separated from g_frac.
+
+**Consequence:** the g_frac rank-based currency clears the last de-risk. The
+forward path is the **reformulated 40-shape Gate 4** — property 4 ("resolution-
+stable") ⇒ **RANK-stable**, property 6 ("non-trivial optimum") ⇒ evaluated
+**controlling for split**. Honest framing unchanged: a rank-based fitness whose
+magnitude is on the resolution wall, buying at best a resolution-stable shape→growth
+QD map with Tier-1 candidates; Tier-2 of the true singularity remains Route D.
+
 ## Honest framing (unchanged)
 
 2D Boussinesq is a toy model, not 3D Navier–Stokes; a viable fitness axis is
