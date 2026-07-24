@@ -131,6 +131,12 @@ def run_labeled(task):
             **currencies(t, m, tr), **_windows(t, m, tr), **_meta(base)}
 
 
+def dispatch(job):
+    """Top-level (picklable) dispatcher: job = ("L"|"G", task)."""
+    kind, task = job
+    return run_labeled(task) if kind == "L" else run_genome(task)
+
+
 def run_genome(task):
     g, n, base = task["genome"], task["n"], task["base"]
     w0, th0 = realize(g, n)
@@ -172,10 +178,6 @@ def main():
     print(f"reformulated Gate 4: {len(labeled_tasks)} labeled + {len(genome_tasks)} "
           f"genome (37x{len(MAIN_RES)}) + {len(sweep_tasks)} sweep = {total} solves "
           f"on {args.workers} workers (43 N=512 solves are the expensive leg)", flush=True)
-
-    def dispatch(kt):
-        kind, t = kt
-        return run_labeled(t) if kind == "L" else run_genome(t)
 
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     rows = []
