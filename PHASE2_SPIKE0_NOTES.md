@@ -66,27 +66,87 @@ amplitude/length gauge. Robust integral form — conserve `I2 = ∫W²` and
    **two-scale dynamic rescaling** formulation ([arXiv:2305.05660], and the Hou MMS
    2025 numerics paper). It is a formulation issue, not a coding bug.
 
-## What Spike 0 still needs (the real work)
+## CORRECTION + the exact published scheme (from arXiv:2603.25104)
 
-The remaining substance is a **stable, convergent** formulation. Candidate fixes,
-to ground in the published scheme rather than re-derive by trial and error:
-- **Explicit renormalization each step** (rescale amplitude *and* the y-grid to pin
-  the normalization exactly, accumulating `c_ω`, `c_l`) instead of relying on the
-  `−βW + δyW_y` modulation terms alone — discretely far more stable, and forces the
-  length zoom the δ-term failed to produce.
-- **Two-scale dynamic rescaling** (Chen–Hou) if the one-scale instability persists —
-  a second scaling degree of freedom eliminates it.
-- Correct **success predicate** (pre-committed): rescaled solution reaches a steady
-  profile; recovered `β → 1`, `δ → -1` within tolerance; profile matches
-  `Φ = -4y/(1+4y²)` (shape error < tol); reconstructed `T*` matches
-  `clm_analytic_blowup_time` (2.0).
+The grounding pass overturned finding-1 and finding-3's proposed fixes. The naive
+periodic run was *stable but converging to the WRONG profile* (`B_fit ≈ -1`, not the
+CLM value 4) — because **the true CLM self-similar profile is a whole-line,
+`~1/X`-decaying function and requires the *line* Hilbert transform**, which differs
+from the periodic one for such slow tails. So a whole-line discretization IS needed
+after all; the periodic probe's apparent localization was an artifact of the wrong
+(periodic) `H`.
 
-**Recommended next step:** pull the exact one-scale/two-scale formulation +
-normalization from the Hou MMS-2025 numerics paper before more coding, then
-implement `solver/gclm_rescaled.py` + `test_gclm_rescaled.py` against the predicate
-above. Probe code: `phase2_spike0_probe.py` (repo root).
+The exact scheme for gCLM (Zheng–Hou et al., *Self-similar finite-time blowups …
+of the gCLM model*, arXiv:2603.25104), convention `ω(x,t) = C_ω(τ)^{-1} Ω(X,τ)`,
+`X = C_l x`, `dτ/dt = C_ω^{-1}`, `C_ω = exp∫c_ω`, `C_l = exp∫c_l`:
+
+**Rescaled equation:**
+```
+Ω_τ + (c_l X + a U) Ω_X = (c_ω + U_X) Ω,     U_X = H(Ω)
+U(X,τ) = (1/π) ∫_ℝ ln|(X-Y)/Y| Ω(Y,τ) dY      (line velocity, U(0)=0)
+```
+For a=0:  `Ω_τ = (c_ω + HΩ) Ω − c_l X Ω_X`.
+
+**Normalization (non-degenerate, value/first-derivative based — robust):**
+```
+Condition 1 (fix slope Ω_X(0,τ)=Ω_X(0,0)):   c_l = c_ω + (1-a) U_X(0,τ)
+Condition 2 (a=0):                            c_ω = 1 − U_X(0,τ) = 1 − HΩ(0,τ)
+  ⟹ for a=0:  c_l ≡ 1  (constant),   c_ω = 1 − HΩ(0).
+```
+
+**Exact CLM (a=0) target (non-degenerate):**
+```
+Ω̄₀(X) = −4X/(1+4X²),   H(Ω̄₀)(X) = 2/(1+4X²),   c_ω → −1,  c_l = 1,  γ = 1.
+```
+(Sign/convention map to my derivation: their `c_ω=−1, c_l=1` ⇔ amplitude
+`~1/(T-t)`, length `~(T-t)` — same physical blow-up.)
+
+The `HΩ̄₀ = 2/(1+4X²)` pair is a ready-made **unit test for the line Hilbert
+transform** (the hardest component): any discretization must map `−4X/(1+4X²)` to
+`2/(1+4X²)`.
+
+## What Spike 0 still needs (the real work, now de-risked)
+
+1. **Whole-line discretization** — mapped/stretched grid or large-domain FFT — with
+   a validated **line** Hilbert transform (unit-tested on the pair above) and the
+   log-kernel velocity `U`. This is the crux; the paper's Appendix C has their
+   method (mapped grid; not in the fetched excerpt).
+2. Time-step the a=0 rescaled equation with `c_ω = 1 − HΩ(0)`, `c_l = 1`, from
+   odd data; **success predicate (pre-commit):** `Ω → Ω̄₀ = −4X/(1+4X²)` (shape
+   err < tol), `c_ω → −1`, and reconstructed `T*` matches `clm_analytic_blowup_time`
+   (2.0), all resolution-stable.
+
+**Next step:** build `solver/gclm_rescaled.py` + `test_gclm_rescaled.py` on a
+whole-line grid, testing the line Hilbert transform first. Probe (periodic, WRONG-H —
+kept as a negative example): `phase2_spike0_probe.py`.
+
+### Build finding: uniform whole-line grid is a dead end; a MAPPED grid is required
+
+Verified components on a large **uniform** line grid `[-Xmax,Xmax]` (FFT-based):
+- **line Hilbert transform works** but converges slowly — `~1/Xmax` truncation error
+  from the `~1/X` tail (`≈6e-3` at Xmax=200, `≈3e-3` at Xmax=400), N-independent.
+- **the `−c_l X Ω_X` dilation term is UNSTABLE**: even initialized *exactly at*
+  `Ω̄₀`, the run NaNs immediately. The advection coefficient `X` is unbounded (±Xmax),
+  amplifying spectral/periodic-wrap error catastrophically. Not a bug — a uniform
+  periodic grid cannot carry this dilation.
+
+This is exactly why the paper discretizes on a **mapped grid**. Under e.g.
+`X = L·tan θ`, `θ∈(−π/2,π/2)`: `∂_X = (cos²θ/L)∂_θ`, so the dilation becomes the
+**bounded** coefficient `X Ω_X = sin θ cos θ · Ω_θ`. The remaining non-trivial piece
+is the **line Hilbert transform in the mapped coordinate** (no longer a plain FFT
+multiplier) — this is what Appendix C of arXiv:2603.25104 specifies and what should
+be extracted rather than reinvented (the session's repeated lesson: ground the
+scheme in the paper, don't trial-and-error).
+
+**Concrete remaining build:** (1) get Appendix C's mapped-grid + mapped Hilbert
+transform method; (2) implement `solver/gclm_rescaled.py` on that grid with
+`c_ω=1−HΩ(0)`, `c_l=1`; (3) `test_gclm_rescaled.py`: line-H unit test on the
+`Ω̄₀ ↔ 2/(1+4X²)` pair, steady-profile residual test at `Ω̄₀`, and convergence from
+perturbed odd data with `c_ω→−1` — all resolution-stable. Scratch build (uniform,
+dilation-unstable — negative example): session scratchpad `build_rescaled.py`.
 
 ## Sources
+- Zheng, Hou, et al., *Self-similar finite-time blowups with singular profiles of the
+  generalized Constantin–Lax–Majda model*, arXiv:2603.25104 (exact scheme + CLM profile).
 - Chen & Hou, *Stable nearly self-similar blowup … II: Rigorous Numerics*, arXiv:2305.05660.
-- Hou, *Stable Nearly Self-Similar Blowup of the 2D Boussinesq …* (MMS numerics, 2025),
-  users.cms.caltech.edu/~hou/papers/MMS-Numerics-2025.pdf.
+- Hou, *Stable Nearly Self-Similar Blowup of the 2D Boussinesq …* (MMS numerics, 2025).
