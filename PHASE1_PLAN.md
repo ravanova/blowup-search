@@ -114,14 +114,25 @@ log-all-four insurance covering the one undecidable leg (fitness-correlation) th
 Gate 4 measures for free. The rough-data mode (`ga/genome2d.py`) stays
 deprioritised per the spike. STOPPED for review before Gate 4.
 
-**Gate 4 — NON-NEGOTIABLE viability gate.** Re-run the six-property viability
-gate on the new Boussinesq fitness BEFORE any GA compute. The spike already
-cleared the dominant (resolution-stability) property for the growth-rate proxy;
-Gate 4 must still confirm the other five — especially that the chosen axis tracks
-blow-up PROPENSITY (a ν_crit-analog is the prime candidate; the early-window
-growth rate alone is resolution-stable but not automatically blow-up-predictive —
-smooth_mild has higher early g yet saturates). Commit to a full GA campaign only
-if all six pass. If it rails, STOP — a finding, not a push-harder signal.
+**Gate 4 — NON-NEGOTIABLE viability gate. [ν_crit FAILED property 6; currency
+pivot in progress]** Full results: `PHASE1_GATE4_RESULTS.md`. The `ν_crit`-analog
+railed property 6 exactly as the 1D gCLM axis did — but via a *different*
+degeneracy than the frozen predicate anticipated: the genome's free ω/θ split
+drives `max|ω₀|`→0, trivially inflating `amp=max|ω|/max|ω₀|` (ρ(ν_crit,log|ω₀|) =
+−0.90; two shapes at equal absolute vorticity get a 197× ν_crit gap). The frozen
+6/6 PASS was a **false pass** — the substantive ω₀-diagnostic caught it (lesson:
+pre-committing a predicate is necessary but not sufficient). Fixing the split and
+the STAGE_2_5 normalized-resistance transform both fail to rescue it (the νk²
+dissipation wall, fundamental). Per the STOP directive this is a **finding**, not
+a push-harder signal. A follow-up probe (user-chosen) shows an **inviscid
+sustained growth-rate currency** `g_sustained` escapes both the ω₀ cheat and the
+dissipation wall (direction sharp>mild>control ✓; ρ(g,log|ω₀|)=+0.24;
+ρ(g,centroid)=+0.38, flipped positive) — promising but necessary-not-sufficient
+(resolution-stability only modest, free-split untested). **OPEN forward decision
+(documented, paused for review):** promote `g_sustained` to a full Gate 4 with two
+refinements — a fixed-absolute growth window (tighten resolution-stability) and
+the free-split property-6 check. Commit to a full GA campaign only if a fitness
+passes all six.
 
 **Gate 5 — Route D.** On a Tier-2 novel candidate in this provable model, open
 validated-numerics / a domain-expert collaboration — the actual proof leg, out

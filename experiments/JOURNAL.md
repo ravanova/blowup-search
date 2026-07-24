@@ -3,6 +3,50 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Gate 4 — 2026-07-24 — ν_crit FAILS property 6; inviscid growth-rate currency promising
+
+Full results: PHASE1_GATE4_RESULTS.md. The headline: the pre-committed six-property
+predicate printed 6/6 PASS, but that was a **false pass** — and catching it is the
+whole point of the substantive re-analysis.
+
+The frozen predicate (committed `5957155` before the run) anticipated the *1D*
+property-6 failure mode (optimum → low-mode concentration) and tested spectral
+centroid, which came back innocent (ρ=−0.15). But the real 2D degeneracy is
+different: the smooth genome's free ω/θ split lets the "optimum" drive max|ω₀|→0,
+trivially inflating amp=max|ω|/max|ω₀| (with κ=0 the undamped θ re-forces ω past
+any viscosity). Diagnostic that caught it: **ρ(ν_crit, log|ω₀|) = −0.90**, slope
+−2.11, R²=0.755 — ν_crit is 75% just the initial amplitude. Smoking gun: two
+shapes reaching the SAME absolute vorticity get a 197× ν_crit gap from ω₀ alone,
+and rand_24 grows MORE absolutely than rand_18 yet ranks 31× lower (the metric is
+inverted vs propensity). A human asked exactly the right question — "be sure it's
+actually a failure" — which forced the confirming analysis rather than trusting
+the predicate's letter.
+
+Then the disciplined ladder (each cheap, each decided on data): (1) fix the split
+→ doesn't rescue (ρ(ν,log|ω₀|) −0.90→−0.44 persists; winner still trivial;
+ρ(ν,centroid)=−0.21, the νk² dissipation wall reasserting). (2) normalized
+resistance ν_crit·centroid² → only TAUTOLOGICALLY relocates the trivial optimum
+(the centroid² multiplier dominates; struct_high has higher raw ν_crit but ranks
+below struct_33 on centroid² alone) — exactly STAGE_2_5's "moves the trivial
+optimum, doesn't remove it." So the ν_crit failure is the gCLM dissipation wall
+reconfirmed, fundamental not fixable.
+
+(3) One more currency (user decision): inviscid **sustained growth rate**
+g_sustained escapes both cheats — inviscid (no νk² wall) + a rate not a ratio (no
+ω₀ denominator). Probe clears the exact bars ν_crit failed: direction sharp
++0.79>mild +0.42>control 0.0; ρ(g,log|ω₀|)=+0.24 (cheat gone); ρ(g,centroid)=+0.38
+(FLIPPED from ν_crit's −0.21 — structure rewarded). Necessary-not-sufficient
+caveats: resolution-stability only modest (sharp 0.66→0.79, fractional window
+drifts with t_res — fix with a fixed-absolute window); free-split untested (g
+likely tracks split — real physics but a possible max-split triviality). A human
+chose to DOCUMENT + pause before any further compute — banking the whole arc
+before deciding the g_sustained Gate-4 path.
+
+Compute note: the N=512 warm-start + 8 workers worked, but N=512 solves were
+memory-bandwidth-bound (~12 min each under 8 concurrent FFT workers, ~3× a lone
+solve). Stopped at 36/40 N=512 — property 6 is decided by N=256, and property 4
+(the only thing the last 4 add) already passed on 36 shapes (all |Δν|≤½·tol).
+
 ## Gate 3 — 2026-07-24 — smooth 2D genome + ν_crit-analog fitness (built, no logged run yet)
 
 Built the Gate-3 machinery: a smooth Hou–Luo-subspace genome
