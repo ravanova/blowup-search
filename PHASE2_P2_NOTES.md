@@ -6,8 +6,12 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 
 ## TOP STATUS — anchor DONE (§2); HH23 scout DONE (§5, NO-GO on the literal link); dynamic-
 ## relaxation leg DONE (§6, Conjecture-2.4 LOCAL attractor confirmed at POC, global basin not —
-## PARTIAL/Tier-2, not novel, not a proof). NEXT = reassess: heavier numerics for the two-scale
-## probe, or bank + pivot. (Older context below is preserved; read §5 then §6 first.)
+## PARTIAL/Tier-2). REGULAR-PROFILE REFRAME DONE (§7, 2026-07-25 scout): the §6 "generic → a
+## DIFFERENT state" that we filed as an honest NEGATIVE is actually a REGULAR, strictly-positive
+## profile = CHL's Stage-1 / Scenario-2 object (qualitatively) — NOT a POC artifact. The scout also
+## SCOPED the fork: B1 (implement CHL's modified (4.1)/(4.2) to pin the regular profile; cheap,
+## clean known-answer) is the recommended next brick; B2 (the Stage-1→Stage-2 transition) is NOT
+## reachable on a fixed grid and mostly re-confirms CHL. Read §5 → §6 → §7. Not novel, not a proof.
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -167,3 +171,49 @@ Tier-2-style, NOT novel, NOT a proof. 1D HL is a toy (boundary behaviour of Hou�
 (Liu conjecture vs CHL finding), which needs exactly the global-basin numerics above. Options:
 invest in the heavier numerics (WENO/adaptive/tail patch) to reach generic-data convergence + the
 two-scale probe, OR bank P2 as a shareable data-backed Tier-2 writeup and pivot.
+
+## §7 — REGULAR-PROFILE REFRAME + B1/B2 SCOUT (2026-07-25). EXPLORATORY (non-logged scout), but
+it upgrades §6's most important caveat and scopes the fork. Evidence: writeup/
+p2_regular_profile_evidence.py → fig14 from committed writeup/data/p2_regular_profile.json (two
+fixed-point fields) + p2_regular_profile_traj.json (8000-step generic trajectory). No new solver
+code; used RescaledHLDynamic as-is. NOT a logged gate run (no pre-committed predicate).
+
+**The reframe (grounded in CHL §2.5 + §4).** CHL's rescaled HL system has TWO fixed points, not one:
+- the SINGULAR anchor (§2 / §6): Ω̄=(X−1)^{−1/2}1_{X>1}, (c_l,c_ω)=(2,−1) — CHL's Stage-2 attractor;
+- a REGULAR, strictly-positive profile (their Scenario 2, §4) — CHL's Stage-1 attractor: "a
+  non-symmetric regular profile that remains strictly positive throughout," peaked off the singular pt.
+The §6 logged run's "generic far degenerate IC → (0.680,−0.487), a DIFFERENT self-similar state
+(honest predicted NEGATIVE)" is NOT a POC artifact: characterizing that final field shows it is
+**smooth (max|Ω_X|/peak≈0.3 vs 1061 for the singular anchor), strictly positive (single-signed),
+peaked at X≈0.35 (away from X=1), finite** — i.e. qualitatively CHL's Stage-1 regular profile. So our
+machinery reaches BOTH CHL fixed points; the "negative" is really the first half of CHL's two-STAGE
+structure, captured independently. (fig14 panels A vs B.)
+
+**HONESTY GUARDS.** (1) Reached with the STANDARD (2.4)+degenerate-gauge, NOT CHL's modified
+Scenario-2 formulation (2.9)/(4.1) — so this is a QUALITATIVE match (regular, +ve, peak off X=1),
+NOT a proven identity to their profile. (2) The raw constants differ as expected under a different
+normalization (ours c_l≈0.5, c_ω≈−0.45; theirs (c_l,c_ω,c_r)=(1.0636,−0.4235,0.0765), ratio
+−2.5114). (3) It does NOT converge under our gauge — see the trajectory below. Not novel, not a proof.
+
+**THE B1/B2 SCOUT (8000-step generic trajectory, fig14 panel C).** Under the degenerate gauge the
+trajectory TRANSITS the CHL-S2 neighborhood (c_l≈1.06, c_ω≈−0.45 near step 1200 — the constants
+nearly coincide) but CANNOT hold it, then WANDERS in the low-c_l regular regime (c_l oscillates
+0.38–0.49, res floor ~0.12), and **NEVER approaches the singular anchor c_l=2.** Diagnosis: our gauge
+pins c_l=−U(1) (stagnation at X=1) — a MISMATCH for a regular profile peaked at X≈0.35. CHL's (4.2)
+normalization instead pins behavior at the ORIGIN (∂_τΩ(0)=∂_τΩ_X(0)=∂_τV(0)=0), exactly the right
+stabilizer for the regular profile. Two decisive reads for the fork:
+- **B1 (implement CHL's modified formulation) is the recommended next brick and is CHEAP + clean.**
+  Formulation (4.1) = our (2.4) with ONE extra constant c_r in the transport speed (U+c_l X+c_r) +
+  the V:=Θ_X change of variable; normalization (4.2) = a 3×3 linear solve for (c_l,c_ω,c_r) each step.
+  KNOWN-ANSWER target: (c_l,c_ω,c_r,c_l/c_ω)=(1.0636,−0.4235,0.0765,−2.5114) (their Fig 4.2). We
+  already fly within ~0.005 of c_l=1.0636 at the transit, so pinning there is very plausible. Outcome
+  = "both CHL scenarios reproduced" + a shape overlay confirming the Stage-1 identification. Tier-2.
+- **B2 (the Stage-1→Stage-2 transition / two-scale-vs-two-stage probe) is NOT reachable on this fixed
+  grid** (the trajectory heads AWAY from c_l=2) and needs the adaptive-mesh rebuild; even a clean B2
+  mostly RE-CONFIRMS CHL's already-published two-stage finding (low novel upside). Wrong brick now.
+
+**Honest ceiling (unchanged).** B1 reproduces a CHL object → Tier-2, not the lottery ticket. The
+genuinely-new math is elsewhere: (i) the gCLM-family two-scale-vs-two-stage transition — where in the
+parameter 'a' does CLM's PROVEN two-scale (HQW25) give way to HL's two-stage (CHL)? Nobody has mapped
+this, and we already have solver/gclm_rescaled.py; or (ii) a rigor step on Conjecture 2.4. Both are
+harder + longer odds. B1 is the grounded consolidation brick that de-risks either.

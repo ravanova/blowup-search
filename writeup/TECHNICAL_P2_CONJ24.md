@@ -131,3 +131,30 @@ blowup for the CLM model and Liu conjectured it for HL, but CHL found HL is two-
 that discrepancy — track the peak *location* for a moving bulk on a coarse scale — would be a
 genuinely new 1D result rather than a reproduction. Reaching it first needs the global-basin
 numerics above (so that generic data, not a near-anchor start, drives the dynamics).
+
+## 7. Addendum (2026-07-25 scout): the "generic" state is CHL's *regular* Stage-1 profile
+
+A follow-up characterization (exploratory, non-logged; `writeup/p2_regular_profile_evidence.py`,
+`fig14`) **reframes §4's generic-basin "negative."** CHL's rescaled HL system has **two** fixed
+points, and our machinery reaches both:
+
+- the **singular** anchor of §2–§5 (Stage 2): a spike at `X=1`, `(c_l,c_ω)=(2,-1)`;
+- a **regular**, strictly-positive profile (CHL's **Scenario 2 / Stage 1**, their §4): the generic
+  degenerate IC relaxes to a *smooth* bump (max `|Ω_X|`/peak ≈ 0.3 vs ≈ 1061 for the singular
+  anchor), single-signed, peaked at `X≈0.35` **away from the singular point** — matching CHL's
+  description "a non-symmetric regular profile that remains strictly positive throughout."
+
+So the §4 datum we filed as a POC-limited **negative** is really the **first half of CHL's
+two-stage structure**, captured independently (`fig14` A vs B).
+
+**Guards.** This is a **qualitative** match, not a proven identity: it was reached with the standard
+`(2.4)` + degenerate gauge, *not* CHL's modified Scenario-2 formulation `(2.9)/(4.1)` (which adds a
+translation constant `c_r` and pins normalization at the **origin**). Raw constants differ under the
+different normalization (ours `c_l≈0.5, c_ω≈−0.45`; theirs `(c_l,c_ω,c_r)=(1.0636,−0.4235,0.0765)`,
+ratio `−2.5114`). Under our gauge the trajectory **does not converge**: over 8000 steps it *transits*
+the CHL-Scenario-2 neighborhood (`c_l≈1.06` near step 1200) but cannot hold it, then wanders in the
+regular regime and **never approaches** `c_l=2` (`fig14` C). The diagnosis — our gauge pins
+`c_l=−U(1)` (stagnation at `X=1`), a mismatch for a profile peaked at `X≈0.35` — points directly at
+the clean next brick: implement CHL's `(4.1)/(4.2)` (a small delta: `+c_r` in the transport, a 3×3
+gauge solve) and hit the **known-answer** `(1.0636,−0.4235,0.0765)`, confirming the Stage-1
+identification via a shape overlay. Still Tier-2 (reproduces a CHL object); still not a proof.

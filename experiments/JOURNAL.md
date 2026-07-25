@@ -3,6 +3,38 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — SCOUT (non-logged): the "generic" state is CHL's regular Stage-1 profile; B1/B2 scoped — 2026-07-25
+
+**NOT a logged gate run** — an exploratory characterization + literature scout, no pre-committed
+predicate, no new solver code (used `RescaledHLDynamic` as-is). Recorded here because it upgrades the
+prior entry's main caveat and decided the fork direction. Evidence:
+`writeup/p2_regular_profile_evidence.py` → `fig14` from committed `writeup/data/p2_regular_profile.json`
+(+ `..._traj.json`). Full write-up: `PHASE2_P2_NOTES.md` §7, `TECHNICAL_P2_CONJ24.md` §7.
+
+What a human would want to know:
+
+- **The reframe.** CHL's rescaled HL system has TWO fixed points: the singular Stage-2 anchor
+  `(2,-1)` AND a regular, strictly-positive Stage-1 profile (their Scenario 2, §4). The prior logged
+  run's "generic degenerate IC → a DIFFERENT state (0.680,-0.487), honest predicted NEGATIVE" is
+  **not** a POC artifact — characterizing that final field shows it is smooth (`max|Ω_X|/peak≈0.3`
+  vs `≈1061` for the singular anchor), single-signed, peaked at `X≈0.35` away from `X=1`. That is
+  qualitatively CHL's Stage-1 regular profile. Our machinery reaches BOTH CHL attractors.
+
+- **Why it matters / the honest guards.** This is a QUALITATIVE match (regular, +ve, peak off `X=1`),
+  reached with the STANDARD `(2.4)`+degenerate gauge — NOT CHL's modified Scenario-2 formulation
+  `(2.9)/(4.1)`. So NOT a proven identity; constants differ under the different normalization (ours
+  `c_l≈0.5, c_ω≈−0.45`; theirs `(c_l,c_ω,c_r)=(1.0636,−0.4235,0.0765)`). Not novel, not a proof.
+
+- **The B1/B2 scout (8000-step trajectory).** Under our gauge the generic trajectory TRANSITS the
+  CHL-S2 neighborhood (`c_l≈1.06` near step 1200 — nearly the published value) but CANNOT hold it,
+  then wanders in the low-`c_l` regular regime and NEVER approaches `c_l=2`. Diagnosis: our gauge
+  pins `c_l=−U(1)` (stagnation at `X=1`), a mismatch for a profile peaked at `X≈0.35`; CHL's `(4.2)`
+  pins at the ORIGIN. Decision: **B1 (implement `(4.1)/(4.2)`) is the recommended next brick** —
+  cheap (`+c_r` in transport, a 3×3 gauge solve), with a clean KNOWN-ANSWER `(1.0636,−0.4235,0.0765)`
+  we already fly within `~0.005` of. **B2 (the Stage-1→Stage-2 transition) is NOT reachable on a
+  fixed grid** and mostly re-confirms CHL — wrong brick now. Lottery ticket still lives elsewhere
+  (gCLM-family two-scale↔two-stage transition; or a rigor step).
+
 ## Phase-2 P2 — dynamic relaxation: Conjecture 2.4 (CHL) at POC, LOCAL attractor confirmed — 2026-07-25
 
 Full record: writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md; evidence fig13 from committed

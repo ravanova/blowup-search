@@ -64,3 +64,21 @@ that rebuilds the figure — and explicitly **not** a new theorem, not new mathe
 Clay problem. The genuinely-new math would start one rung up: the "two-scale vs two-stage" question
 a scout of the Hou–Huang link turned up, which needs exactly the global-basin numerics we don't yet
 have. Knowing precisely which rung you're on is the point.
+
+### Postscript: that "somewhere else" wasn't a dead end
+
+A follow-up look at *where* the generic data actually went changed the reading of the one negative
+above. That "different self-similar state" isn't numerical junk — it's a **smooth, strictly-positive
+profile peaked away from the singular point**. Chen–Huang–Li describe exactly such an object: it's
+the **first stage** of their two-stage blow-up (their "Scenario 2"), the regular profile that forms
+*before* the singular one. So our solver, from generic data, lands on CHL's Stage-1 profile on its
+own — and from near-singular data it holds the Stage-2 singular profile. Two attractors, both CHL,
+both reproduced.
+
+The honest asterisks stay firmly attached. We reached the regular profile with our *original* gauge,
+not CHL's purpose-built one — so this is a family-resemblance match (regular, positive, peaked off
+the singular point), not a proof that it's the *same* profile down to the constants. In fact, watched
+long enough, our solver drifts *through* the neighborhood of CHL's published numbers and can't quite
+stand still there — a tell that we're using the wrong normalization for this profile, and a clean
+pointer to the next small, well-posed piece of work: adopt CHL's Stage-1 normalization and check we
+land exactly on their numbers. Still a reproduction, not new mathematics. But the map got sharper.
