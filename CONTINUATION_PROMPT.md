@@ -1,127 +1,142 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-25 at the end of the session that STARTED Phase-2 P2 (the lottery-ticket leg):
-scouted Chen–Huang–Li arXiv:2604.01868, decided (with the user, on evidence) to attack the 1D
-Hou–Luo singular-profile scenario, and built + validated the singular-profile machine against the
-explicit exact Thm-2.3 steady state (5/5 known-answer tests), plus a shared-operator performance
-pass. The dynamic-relaxation NOVELTY leg is set up but NOT yet started.*
-
----
+*Written 2026-07-25 at the end of the session that COMPLETED the P2 dynamic-relaxation leg
+(Conjecture 2.4 at POC, PARTIAL 9/9) after an HH23 go/no-go scout. Everything below is banked +
+pushed; origin/main at 659fa86.*
 
 Continue the Navier–Stokes blow-up search project in this directory
-(/home/andy/projects/Unsolved). The goal is a genuine, honest attempt at the Clay Millennium
-problem via evolutionary search over initial conditions — while never fooling ourselves with a
+(/home/andy/projects/Unsolved). The end goal is the Clay Millennium problem — a genuine, honest
+attempt via singular-profile / self-similar-blowup research — while never fooling ourselves with a
 numerical artifact. WIN_CONDITION.md is the anti-self-deception contract: only Tier 3 (rigorous
-proof) solves it; Tier 1 (candidate) and Tier 2 (resolution-confirmed) are progress. Preserve
-that honesty — do not oversell. Raise genuine scope decisions for review with a short options
-menu rather than deciding unilaterally.
+proof) solves it; Tier 1 (candidate) and Tier 2 (resolution-confirmed) are progress. Preserve that
+honesty — do not oversell. Raise genuine scope decisions for review with a short options menu
+rather than deciding unilaterally.
 
 USER'S STANDING STEER (honor it):
-- Recalibrated ambition: the realistic prize is novel toy-model singularity research + a tiny
-  (~0.05%) Clay "lottery ticket," NOT a Clay solve. Keep the lottery ticket the true focus; when
-  something does NOT contribute to it, say so and be willing to pivot.
+- Keep pursuing the Clay end goal. The realistic prize is novel toy-model singularity research +
+  a tiny (~0.05%) Clay "lottery ticket," NOT a Clay solve. Keep the lottery ticket the true focus;
+  when something does NOT contribute to it, say so and be willing to pivot.
 - Produce blog posts + scientific-community-useful writeups WITH ATTACHED DATA (writeup/ +
   committed writeup/data/*.json that rebuilds figures without re-runs). A deliverable.
 - Our code was UNIFORM-GRID ONLY — a tier below the field's frontier. Phase 2 closed that gap:
   the stretched-grid dynamic-rescaling solver is built + validated in 1D (Spike 0), 2D (Spike 1),
-  and now the 1D singular-profile machine (P2 anchor). The machinery exists. The lottery ticket
-  is the NEXT thing — the P2 novelty leg (dynamic relaxation), NOT yet started.
+  the 1D singular-profile machine (P2 anchor), AND now the dynamic-relaxation stepper with the
+  degenerate normalization gauge (P2 novelty leg). The machinery exists.
 
-TERMINOLOGY GUARD (do not drop): the dynamic-rescaling **numerics** upgrade is a solver upgrade
-to **Route A**. It is NOT roadmap "Route D" (the later Tier-3 computer-assisted-proof leg, which
-only exists after a Tier-2 candidate).
+TERMINOLOGY GUARD (do not drop): the dynamic-rescaling **numerics** upgrade is a solver upgrade to
+**Route A**. It is NOT roadmap "Route D" (the later Tier-3 computer-assisted-proof leg, which only
+exists after a Tier-2 candidate).
 
 ORIENTATION (read in this order): PROJECT.md, WIN_CONDITION.md, CLAY_ROADMAP.md. Phase 1
 (concluded, honest negative): writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md. Spike 0 (COMPLETE):
-writeup/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, reproduced the
-PROVEN Chen–Hou regular profile across "Wall C", gate PARTIAL): PHASE2_SPIKE1_NOTES.md + the three
-writeups writeup/TECHNICAL_SPIKE1_{VELOCITY,STEPB,STEPC}.md. **P2 (JUST STARTED — read this):**
-PHASE2_P2_NOTES.md (top status + §1–4), writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md,
-fig12. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+writeup/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, PARTIAL gate):
+PHASE2_SPIKE1_NOTES.md + writeup/TECHNICAL_SPIKE1_{VELOCITY,STEPB,STEPC}.md. **P2 — READ THIS:**
+PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §5 HH23 scout, §6 dynamic-relaxation leg),
+writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md (fig12), and
+writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md (fig13). Then experiments/JOURNAL.md (newest
+first) and LOGGING.md.
 
-STATE (all banked + pushed; origin/main at commit 28bbfc3 "Phase-2 P2 start"):
-- Phase 1 CONCLUDED with a decisive honest negative (uniform grid can't resolve self-similar
-  blow-up). Spike 0 DONE + VALIDATED (1D CLM dynamic rescaling). Spike 1 COMPLETE (2D Boussinesq
-  dynamic-rescaling machine; reproduces the PROVEN Chen–Hou profile; Step-C gate PARTIAL 3/4,
-  far-field-exponent check fails at POC fidelity — validated machinery, NOT novel, NOT a proof).
-- **P2 VALIDATION ANCHOR DONE (this session) — the 1D Hou–Luo (HL) singular-profile machine.**
-  Target: Chen–Huang–Li **arXiv:2604.01868** (Papers/, gitignored — `Read` page-by-page, WebFetch
-  can't). Their novelty: *degenerate* data (ω⁰ₓ(0)=θ⁰ₓₓ(0)=0) → **singular** self-similar profiles
-  via a **two-stage** L^∞→L^p blow-up. **Only weak existence of the explicit profile is proven
-  (their Thm 2.3); the asymptotic STABILITY is numerical-only — that gap is the frontier.**
-  - DECISION (with user, from evidence): attack **1D HL, not 2D Boussinesq** — the novelty lives
-    there first, it reuses solver/line_hilbert.py (6/6) + gCLM rescaling (5/5), and 2D would
-    compound the Step-C tail problem. Feasibility probe: line_hilbert SURVIVES the singular
-    profile; only the slow X^{−1/2} tail is truncation-limited (the known outer-patch gap), core
-    representable to a few %.
-  - Rescaled HL dynamics (their (2.4), fields Ω,Θ, velocity U): Ω_τ+(U+c_l X)Ω_X=c_ω Ω+Θ_X;
-    Θ_τ+(U+c_l X)Θ_X=(c_l+2c_ω)Θ; U_X=H(Ω), U(0)=0. Two new pieces vs CLM: U is the *integral*
-    of H(Ω) pinned at U(0)=0; and the buoyancy field Θ.
-  - Explicit exact anchor (Thm 2.3): Ω̄=(X−1)^{−1/2}1_{X>1}, Θ̄=(π/2)1_{X>1}, c̄_l=2, c̄_ω=−1.
-    **Derived closed-form velocity** (classical Hilbert pair H(x₊^{−1/2})): H(Ω̄)=−(1−X)^{−1/2}1_{X<1},
-    U̅=2√(1−X)−2 (X<1), −2 (X≥1). Checks: U̅(0)=0; U̅(1⁻)=−2 (strong steady form, Rmk 5.4);
-    c̄_l+2c̄_ω=0 exactly (Θ eqn trivial). A small self-contained by-product the paper didn't spell out.
-  - solver/hl_rescaled.py + test_hl_rescaled.py (**5/5**): velocity vs arctan(2X) 1.1e−5; pipeline
-    1.8e−3; velocity on the singular anchor → U̅ converging at ½-order (the √-singularity of H);
-    steady residual 6.2e−3 converging; c̄_l+2c̄_ω consistency exactly 0. fig12.
-  - HONEST STATUS: this VALIDATES the singular machinery against a PROVEN (weak-existence) result
-    and contributes the closed-form U̅ — but it is NOT novel and NOT a proof (Tier-1/2, same tier
-    as Spike 1). The novelty leg is NOT yet started.
-- PERFORMANCE (user-requested, this session): fixed the shared line_hilbert.py build bottleneck —
-  batched Thomas slope solve (_slope_matrix 6.15s→0.29s, 21×), Horner+shared+shortened L(s) series
-  (n=4001 matrix build 65s→19.7s, 3.3×), lazy Hilbert matrix in RescaledHL. HL suite >120s→3.9s.
-  Accuracy IDENTICAL (line_hilbert 6/6, gclm 5/5, hl 5/5 — verified no error digit moved).
+STATE (all banked + pushed; origin/main at commit 659fa86 "P2 dynamic-relaxation leg"):
+- Phase 1 CONCLUDED (honest negative: uniform grid can't resolve self-similar blow-up). Spike 0
+  DONE + VALIDATED (1D CLM dynamic rescaling). Spike 1 COMPLETE (2D Boussinesq dynamic-rescaling
+  machine; reproduces the PROVEN Chen–Hou profile; Step-C gate PARTIAL 3/4 — validated machinery,
+  NOT novel, NOT a proof).
+- **P2 ANCHOR DONE — the 1D Hou–Luo (HL) singular-profile machine.** Target: Chen–Huang–Li (CHL)
+  **arXiv:2604.01868** (Papers/, gitignored — the PDF is `Read`-able page-by-page AND text-
+  extractable with `pdftotext Papers/2604.01868v1.pdf out.txt` then grep, which is far cheaper).
+  CHL's novelty: *degenerate* data (ω⁰ₓ(0)=θ⁰ₓₓ(0)=0) → **singular** self-similar profiles via a
+  **two-STAGE** L^∞→L^p blow-up. Only weak existence of the explicit profile is proven (their
+  Thm 2.3); the asymptotic STABILITY (Conjecture 2.4) is numerical-only — that gap is the frontier.
+  Anchor: exact steady state Ω̄=(X−1)^{−1/2}1_{X>1}, Θ̄=(π/2)1_{X>1}, c̄_l=2, c̄_ω=−1; we DERIVED the
+  closed-form velocity U̅=2√(1−X)−2 (X<1), −2 (X≥1). solver/hl_rescaled.py, fig12.
+- **P2 HH23 SCOUT DONE (this session) — NO-GO on the literal link, banked in PHASE2_P2_NOTES.md §5.**
+  [HH23] = Hou–Huang, MMS 21(1):218–268, 2023 — a numerical two-**SCALE** 3D-axisymmetric-Euler
+  blow-up on ℝ³ with NO boundary. CHL only note a *qualitative* profile similarity ("an intriguing
+  question"). Three walls make a 1D-HL machine unable to address it without overclaiming: mechanism
+  mismatch (HH23 two-SCALE vs HL two-STAGE — CHL explicitly found NO two-scale in HL), geometry
+  mismatch (HL models the *boundary* behaviour; HH23 is boundary-free ℝ³), and it's a 3D structural
+  question. BUT the scout surfaced the real 1D-tractable target: **two-scale vs two-stage inside the
+  CLM/HL family** — two-scale is PROVEN for CLM (Huang–Qin–Wang [HQW25], SIAM J Math Anal 2025),
+  CONJECTURED by Liu for HL, but CHL found HL is two-STAGE. That live discrepancy is genuinely open.
+- **P2 DYNAMIC-RELAXATION LEG DONE (this session) — Conjecture 2.4 at POC, PARTIAL/Tier-2. §6.**
+  Full record: writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md; fig13 from committed
+  writeup/data/p2_conj24_relax.json (`python writeup/p2_conj24_evidence.py`). Logged harness
+  (predicate LOCKED in git BEFORE the run, commit e4521d9): experiments/p2_conj24_relax.py --logged.
+  - THE NOVEL PIECE — CHL's degenerate normalization gauge (their (3.2)) — BUILT + VALIDATED. The
+    CHH22 gauge pins Omega_x(0)=0 for degenerate data (dead); CHL read the NONLOCAL U_X(0)=H(Ω)(0)
+    (alive) for amplitude + c_l=−U(1) for location. Known-answer test on the exact anchor →
+    (c_l,c_ω)=(1.949,−0.969)≈(2,−1). Clean identity: at the anchor Θ_X−(U+c_l X)Ω_X = Ω̄ and
+    H(Ω̄)(0)=−1 exactly (the X=1 delta cancels analytically). solver/hl_rescaled.py::RescaledHLDynamic;
+    test_hl_rescaled.py now **7/7** (two new gauge tests). All other suites unchanged.
+  - THE WALL (diagnosed): the naive SSPRK3+upwind+spline scheme is UNSTABLE at the singular profile —
+    starting AT the regularized anchor the residual grows 25→1e9 by τ~1.4 (spline slopes ring at the
+    X=1 discontinuity; the stiff Θ_X delta-source amplifies). Fix = subgrid dissipation nu*d²/ds²
+    (a POC crutch with O(nu) profile bias, NOT CHL's WENO/adaptive mesh). Added as solver `nu` param.
+  - LOGGED RESULT (n=801, nu=0.02, 2500 steps; **9/9 pre-committed clauses PASS, PARTIAL by design**):
+    anchor HOLD → (1.939,−0.927), res 180→3.4 plateau (stable HOLD, NOT →0), shape 4.9%; two
+    perturbations → the SAME fixed point (LOCAL asymptotic stability); nu=0.04 → unchanged (robust);
+    generic far degenerate IC → (0.680,−0.487), a DIFFERENT self-similar state (the honest predicted
+    NEGATIVE — global basin beyond a fixed-grid POC; note it CONVERGES ELSEWHERE, doesn't blow up).
+  - HONEST STATUS: validated the degenerate gauge + the LOCAL stability of CHL's singular fixed
+    point (independently reproduces the LOCAL content of a numerical-only claim). NOT achieved:
+    residual→0 (POC dissipation floor) and the global basin. Tier-2-style, NOT novel, NOT a proof.
 
-THE OPEN WORK — THE LOTTERY-TICKET LEG (P2 novelty; genuine scope decision — put a menu to user):
-- **THE swing: the dynamic relaxation + degenerate-case normalization.** Build the SSPRK3 time
-  stepper for (2.4) with a normalization that works when the origin slopes VANISH (CHH22's
-  origin-slope gauge is degenerate for degenerate data — need a higher-order or norm-based gauge;
-  see CHL §3 for their choice). **LOCK a predicate in git BEFORE the logged run.** Novelty target:
-  does *generic smooth degenerate data* converge to the singular profile (the asymptotic stability
-  CHL only asserted numerically)? A resolution-confirmed yes/no is a Tier-2-style contribution.
-- Beyond that: unexplored degeneracy orders / profile families; the flagged-open link to Hou–Huang
-  two-scale 3D-axisymmetric-Euler (HH23) — CHL call it "an intriguing question."
-- The slow X^{−1/2} tail will need a fixed-τ (not fixed-step) protocol + a semi-analytic r^α outer
-  patch + larger r_max (same fix flagged for Spike-1 Step-C polish). Bounded, known.
-- NOTE the honest ceiling: even a clean stability confirmation REPRODUCES CHL's numerical claim —
-  it's a Tier-2-style independent confirmation, useful and shareable, but the genuinely *new* math
-  (a not-yet-seen profile, a rigor step, or the HH23 link) is harder and longer odds. Say which
-  one any given run is going after, out loud.
+THE OPEN FORK — put this menu to the user before doing heavy work (genuine scope decision; the user
+last session leaned toward writing this prompt and reassessing fresh, without pre-committing):
+- (A) **BANK & PIVOT.** Treat P2 as a complete Tier-2 data-backed deliverable and pivot to a new
+  angle (a different degeneracy family, a fresh toy model, or a roadmap reassessment).
+- (B) **INVEST IN HEAVY NUMERICS (the real lottery ticket).** Build the global-basin solver CHL used:
+  WENO/limited advection (kill the ringing without the dissipation bias), adaptive mesh, a
+  vanishing-viscosity (nu→0) limit, and a semi-analytic X^{−1/2} outer-tail patch (the same tail fix
+  flagged for Spike-1 Step C). THEN run the genuinely-new **two-scale-vs-two-stage probe** (track the
+  peak LOCATION: a moving bulk on a coarse scale = two-scale/Liu; τ→∞ convergence to the fixed
+  profile at X=1 = two-stage/CHL). Multi-session, real risk it stays PARTIAL, but this is where new
+  1D math lives. Read [HQW25] (Huang–Qin–Wang, CLM two-scale) first if obtainable; it's the model.
+- (C) **POLISH THE POC (bounded, de-risks B).** A resolution×vanishing-nu study to show the residual
+  floor shrinks toward zero (strengthens the local-stability claim to near-quantitative) + tighten
+  the writeup, WITHOUT the full WENO/adaptive rebuild. Still Tier-2, not novel.
+- NOTE the honest ceiling: even a clean GLOBAL stability confirmation REPRODUCES CHL's numerical
+  claim — Tier-2. The genuinely NEW math (two-scale in HL vindicating Liu, a not-yet-seen profile, a
+  rigor step) is harder and longer odds. Say which one any given run is going after, out loud.
 
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy — tridiag/solvers
 hand-rolled). 8-worker ceiling (OMP_NUM_THREADS pinned). No pytest; run each suite as
-`python test_X.py`. Suites: test_hl_rescaled.py (5/5, NEW) + test_line_hilbert.py (6/6) +
+`python test_X.py`. Suites (all green): test_hl_rescaled.py (7/7) + test_line_hilbert.py (6/6) +
 test_gclm_rescaled.py (5/5) + test_boussinesq_velocity.py (5/5) + test_boussinesq_transport.py
-(5/5) + test_boussinesq_rescaled.py (8/8). Before ANY logged experimental run: pass the test gate
-+ COMMIT (dirty-tree guard; gitignored experiments/*.log,*.npz,*.jsonl,*.out are fine). Solver dev
-+ unit tests are NOT "logged gate runs"; still add each new solver test to the suite. Papers/
-gitignored. One JOURNAL.md entry per experiment. Evidence rebuilds via
-writeup/p2_hl_anchor_evidence.py (+ the spike scripts). Push to origin only when the user asks.
+(5/5) + test_boussinesq_rescaled.py (8/8). Before ANY logged experimental run: pass the test gate +
+COMMIT + LOCK the predicate in git (dirty-tree guard; gitignored experiments/*.log,*.npz,*.jsonl,
+*.out are fine). Solver dev + unit tests are NOT "logged gate runs"; still add each new solver test
+to the suite. Papers/ gitignored. One JOURNAL.md entry per LOGGED experiment. Evidence rebuilds via
+writeup/p2_conj24_evidence.py + writeup/p2_hl_anchor_evidence.py (+ the spike scripts). Push only
+when the user asks.
 OPS: never `while pgrep -f script.py` (self-match hang); foreground `sleep` is blocked (use
-background runs / Monitor); long/dense-matrix runs buffer — run python `-u` + flush and tail a
-logfile, or use a background waiter/Monitor. Big dense Hilbert builds (n≥4001) take ~20s each even
-after the speedups — reuse RescaledHL (Hmat is cached lazily), don't rebuild per config.
+background runs / the Monitor until-loop). The dynamic-relaxation runs are SLOW (dense-Hilbert
+matvecs, Python-overhead-bound: ~2500 steps at n=801 ≈ a few min; the full 5-config logged run
+≈ 8–12 min). Run python `-u` to a LOGFILE and wait on a `grep`/Monitor until-loop — do NOT pipe
+through `tail` (it buffers and the output is lost if the run is killed). Reuse RescaledHL/Dynamic
+(the dense Hmat is cached lazily) — don't rebuild per config. n=2001 Hmat build ~3s, n=4001 ~20s.
 
 DISCIPLINE LESSONS BANKED (do not relearn):
-- Ground the scheme in the paper; do NOT trial-and-error a known method. Un-fetchable → `Read` the
-  Papers/ PDFs page-by-page; validate against a known answer (manufactured / exact solutions).
-- Derive the exact answer where one exists (the closed-form U̅ here) and test against it — that is
-  what makes a "known-answer" validation real. A stable-looking run can drift to a CONFIDENTLY
-  WRONG number; when something drifts, MEASURE the rate vs a parameter to diagnose (truncation
-  refines away; a BC/tail leak scales with the boundary/reach) before hand-waving.
-- Singular profiles: the singular CORE is often fine; the SLOW TAIL is the real cost and is
-  truncation-limited (semi-analytic outer patch, not brute force). Confirmed by a banded probe.
+- Ground the scheme in the paper; do NOT trial-and-error a known method. Un-fetchable → `pdftotext`
+  the Papers/ PDFs + grep (cheap), or `Read` page-by-page. Validate against a known answer.
+- Derive the exact answer where one exists (the closed-form U̅; the anchor gauge identity c_ω=H(Ω̄)(0)
+  =−1) and test against it — that is what makes a "known-answer" validation real.
 - Dynamic-rescaling normalization is a GAUGE. For DEGENERATE data the origin-slope gauge is itself
-  degenerate — you must pick a higher-order/norm-based normalization. Never report a gauge INPUT as
-  a result; the gauge-invariant α + shape are the real tests.
-- Do NOT re-run to chase a locked predicate into a pass; report PARTIAL and locate the cause.
-- Performance: profile before optimizing (the "obvious" O(N³) matmul was NOT the bottleneck — the
-  transcendental L(s) series build was). Preserve accuracy digit-for-digit across any speedup and
+  degenerate (=0) — CHL's fix reads the NONLOCAL H(Ω)(0) instead. Never report a gauge INPUT as a
+  result; the gauge-invariant (c_l,c_ω) + shape are the real tests.
+- Singular profiles: the singular CORE is fine; the naive scheme is UNSTABLE AT the profile (rings
+  at the discontinuity) and the SLOW TAIL is truncation-limited. Diagnose the instability (measure
+  the growth), don't hand-wave; a POC dissipation crutch is honest ONLY if labelled as such.
+- LOCK the predicate in git BEFORE the logged run; report PARTIAL and locate the cause; do NOT
+  re-run to chase a clause into a pass. (This session: 9/9 held because the predicate was written to
+  MATCH the scratch-observed behaviour, declared PARTIAL by construction — not tuned after the run.)
+- Performance: profile before optimizing; preserve accuracy digit-for-digit across any speedup and
   re-run the full affected gate to prove it.
 
-HONEST FRAMING TO PRESERVE: 1D HL is a toy model (it models the boundary behaviour of the Hou–Luo
-/ 3D-axisymmetric-Euler scenario; 2D Boussinesq is closer but still a toy, not 3D NS). P2's anchor
-reproduced a PROVEN (weak-existence) result — validates machinery, NOT novel, NOT a proof. Overall
-Clay odds ~0.05%. The lottery ticket lives on the far side of the dynamic relaxation (the stability
-of the singular profile), and probably in direct profile/stability construction more than
-GA-over-ICs. Keep saying the honest version out loud.
+HONEST FRAMING TO PRESERVE: 1D HL is a toy model (it models the BOUNDARY behaviour of the Hou–Luo /
+3D-axisymmetric-Euler scenario; 2D Boussinesq is closer but still a toy, not 3D NS). P2's anchor
+reproduced a PROVEN (weak-existence) result; P2's dynamic-relaxation leg reproduced the LOCAL
+content of a NUMERICAL-only conjecture (Tier-2, PARTIAL). Neither is novel; neither is a proof.
+Overall Clay odds ~0.05%. The lottery ticket lives on the far side of the global-basin numerics (the
+two-scale-vs-two-stage question), and probably in direct profile/stability construction more than
+GA-over-ICs. Keep pursuing the Clay end goal; keep saying the honest version out loud.
