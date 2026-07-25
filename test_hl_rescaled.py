@@ -21,8 +21,8 @@ Run: python test_hl_rescaled.py
 import numpy as np
 
 from solver.hl_rescaled import (
-    RescaledHL, sinh_grid_at, velocity,
-    omega_bar, H_omega_bar_exact, U_bar_exact,
+    RescaledHL, RescaledHLDynamic, sinh_grid_at, velocity,
+    omega_bar, H_omega_bar_exact, U_bar_exact, degenerate_ic,
 )
 
 PI = np.pi
@@ -120,10 +120,47 @@ def test_constant_consistency_theta_equation():
     print("[ok] c_l+2c_omega=0 makes the Theta equation exactly consistent")
 
 
+def test_degenerate_gauge_known_answer():
+    """CHL degenerate-case gauge (their (3.2)) is a KNOWN-ANSWER test on the exact
+    Thm-2.3 anchor: c_l = -U(1) -> 2, and c_omega = H(Theta_X-(U+c_l X)Omega_X)(0)
+    -> -1 (because at the anchor Theta_X-(U+c_l X)Omega_X = Omega_bar and
+    H(Omega_bar)(0) = -1). The fully-consistent discrete pipeline recovers both to
+    POC fidelity (a few %). This validates the genuinely new piece -- the degenerate
+    normalization -- against the proven profile, independent of any time evolution."""
+    d = RescaledHLDynamic(n=2001, delta=0.006, M=500.0)
+    Om = omega_bar(d.X)
+    Th = np.where(d.X > 1.0, PI / 2.0, 0.0)
+    c_l, c_omega, *_ = d.gauge(Om, Th)   # fully-consistent (discrete H) pipeline
+    print(f"    anchor gauge: c_l={c_l:+.4f} (want 2)  c_omega={c_omega:+.4f} (want -1)")
+    assert abs(c_l - 2.0) < 0.1, f"c_l off anchor value 2: {c_l:.4f}"
+    assert abs(c_omega + 1.0) < 0.1, f"c_omega off anchor value -1: {c_omega:.4f}"
+    print("[ok] CHL degenerate gauge returns (c_l,c_omega)=(2,-1) on the Thm-2.3 anchor")
+
+
+def test_gauge_sidesteps_degeneracy():
+    """The point of the CHL gauge: for DEGENERATE data the local slope Omega_x(0)
+    used by the non-degenerate (CHH22) gauge VANISHES, but the nonlocal amplitude
+    gauge U_X(0)=H(Omega)(0) that CHL use stays well away from zero -- so it can
+    still fix the amplitude. Checked here on the smooth degenerate initial data."""
+    d = RescaledHLDynamic(n=1201, delta=0.02, M=200.0)
+    Om0, _ = degenerate_ic(d.X, kind="A")
+    # local slope at the origin (what the old gauge would use) -- ~0 for degen data
+    slope0 = abs(float(np.interp(0.0, d.X, d.dX(Om0))))
+    # nonlocal amplitude gauge H(Omega)(0) -- the one CHL use
+    amp0 = abs(d.amp_gauge(Om0))
+    print(f"    |Omega_x(0)|={slope0:.2e} (old gauge, degenerate)  "
+          f"|H(Omega)(0)|={amp0:.3e} (CHL gauge, usable)")
+    assert slope0 < 1e-3, f"IC not degenerate at origin: slope {slope0:.2e}"
+    assert amp0 > 1e-2, f"nonlocal amplitude gauge also degenerate: {amp0:.2e}"
+    print("[ok] nonlocal H(Omega)(0) gauge is non-degenerate where the slope gauge fails")
+
+
 if __name__ == "__main__":
     test_velocity_smooth_known_pair()
     test_velocity_full_pipeline()
     test_velocity_on_singular_anchor_converges()
     test_steady_residual_explicit_profile()
     test_constant_consistency_theta_equation()
+    test_degenerate_gauge_known_answer()
+    test_gauge_sidesteps_degeneracy()
     print("\nALL HL-RESCALED TESTS PASSED")
