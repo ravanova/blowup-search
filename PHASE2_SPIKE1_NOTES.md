@@ -209,6 +209,19 @@ the Chen–Hou profile is **Step C** (unproven until run).
 profile; check shape + `α ≈ −1/3` / `c_l/c_ω ≈ −2.92`, resolution-stable. Pre-committed
 predicate written before the logged run.
 
+**STEP C DONE — PARTIAL (2026-07-25).** Full record: writeup/TECHNICAL_SPIKE1_STEPC.md,
+JOURNAL. **3 of 4 pre-committed checks pass; the far-field-exponent check FAILS → does NOT pass
+the gate (goalposts not moved).** Diagnosed the initial relaxation *drift* as a near-origin
+truncation artifact (`experiments/diagnose_stepC_drift.py`: halves under `n_r`, worsens with
+smaller `r_min`) and fixed it with **gauge renormalization** (`run(renorm=True)`, discrete
+enforcement of (2.12); `test_renorm_pins_gauge`). Result (renorm on): `c_ω` matches Chen–Hou to
+**<0.5%** (−1.026…−1.031 vs −1.0294), `α ≈ −0.335` (~2%, resolution-stable), anisotropy
+`≈0.026 ≪ 0.23` (2.24) — the profile's *invariants + anisotropic core* are reproduced. The
+directly-fitted far-field exponent (`≈ −0.31`, ~7–13% off) fails, partly a protocol confound
+(fixed steps → higher-`n_r` under-relaxed) and partly the honest POC limit (domain 1e5–1e6 vs
+paper 1e15, no semi-analytic `r^α` split, 2nd–3rd order vs 6th–8th B-splines). Tier-1/2: machine
+captures the profile's core, POC limits located. Spike 1 machinery now validated end-to-end.
+
 **Then (post-Spike-1 gated decision):** stable-vs-singular target, and evolve-ICs vs
 hunt-profiles (P2) — decided with the working machine, per the standing plan. The
 stable-vs-singular fork the user raised is deferred to here (both share Steps A–B).

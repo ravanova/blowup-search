@@ -3,6 +3,52 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Spike 1 Step C — relax to the Chen–Hou profile (the gate): PARTIAL, honestly reported — 2026-07-25
+
+Full record: writeup/TECHNICAL_SPIKE1_STEPC.md + BLOG_SPIKE1_STEPC.md; evidence fig11 from
+committed writeup/data/spike1_stepC_gate.json (`python writeup/spike1_stepC_evidence.py`).
+Harness experiments/spike1_stepC_gate.py (predicate LOGGED to git before the run, commit
+eabb418). This IS the logged gate run.
+
+**Verdict: PARTIAL — 3 of 4 pre-committed checks pass, the far-field exponent check FAILS. Does
+NOT pass the gate. Goalposts NOT moved.**
+
+What a human would want to know:
+
+- **The pre-committed predicate did its job.** We locked the pass/fail bar (alpha within 5%,
+  far-field exponent within 10%, anisotropy <0.23, resolution-stable) in git *before* the run.
+  It came back PARTIAL and we report PARTIAL — the whole point of WIN_CONDITION.
+
+- **Found a bug, diagnosed it properly, fixed it.** First runs drifted: gauge-invariant alpha
+  settled right (~-0.35) but c_l,c_om drifted individually and the run destabilized (~step 8000).
+  Rather than hand-wave, we MEASURED the drift rate vs grid (experiments/diagnose_stepC_drift.py):
+  it ~halves under n_r refinement and worsens as r_min shrinks -> a NEAR-ORIGIN TRUNCATION
+  artifact, not a broken method. Fix: renorm=True re-pins omega_x(0),eta_x(0) each step (discrete
+  enforcement of the paper's (2.12)); drift arrested, run stable. Standard dynamic-rescaling move,
+  rediscovered by watching what breaks without it. test_renorm_pins_gauge added.
+
+- **The good half (checks 1,3,4 PASS).** c_omega matches Chen–Hou to <0.5% across all configs
+  (-1.026..-1.031 vs -1.0294) — and c_omega is the REAL result (it evolves via u_x(0) to the
+  profile value while c_l is pinned to the gauge). alpha ~ -0.335 (2%), resolution-stable.
+  Anisotropy ~0.026 << 0.23 — the profile's strong x/y anisotropy (2.24) reproduced.
+
+- **The failing half (check 2 FAIL), stated straight.** The directly-fitted far-field exponent
+  is ~-0.31 (7-13% off -0.342) and moves the WRONG way with n_r. Honest causes: (i) a PROTOCOL
+  confound — fixed 2500 steps means higher-n_r runs reach smaller tau (under-relaxed; the slow
+  r^{-1/3} tail forms last); (ii) POC limits — domain 1e5-1e6 vs the paper's 1e15, outer BC
+  steepens the tail, no semi-analytic r^alpha split, 2nd-3rd order vs 6th-8th B-splines. A clean
+  tail match needs the paper's apparatus. Did NOT re-run longer to chase a pass (that would be
+  goalpost-moving); flagged fixed-tau protocol as future work.
+
+- **Honest framing.** Even a clean pass reproduces a PROVEN result (Chen–Hou 2022) on a toy model
+  across Wall C — validates machinery, NOT novel, NOT a proof. Clay ~0.05%. This is Tier-1/2: the
+  machine captures the profile's core (invariants + anisotropy) with its POC limits located.
+
+- **Next (the actual lottery ticket, P2).** Spike 1 has validated the stretched-grid dynamic-
+  rescaling machinery end-to-end. The interesting move is to point it at a profile NOT already in
+  a theorem (stable-vs-singular target: Chen–Huang–Li arXiv:2604.01868 in Papers/; or 3D-axisym).
+  Deferred post-Spike-1 forks now actionable with the working machine.
+
 ## Spike 1 Step B — rescaled 2D Boussinesq RHS + modulation + SSPRK3, ASSEMBLED & VALIDATED — 2026-07-24
 
 Full record: PHASE2_SPIKE1_NOTES.md §3 ("STEP B COMPLETE"). Code: `solver/boussinesq_rescaled.py`.

@@ -77,6 +77,9 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig6_phase1_spike.png` | Phase 1 — the resolution wall: growth rate `g` converges (search-viable) while the blow-up exponent rails (true singularity out of uniform-grid reach) |
 | `fig7_phase1_axis_screen.png` | Phase 1 — the fitness-axis screen: only ν_crit orders blow-up propensity (sharp>mild>control) and is N-stable |
 | `fig8_spike0_rescaling.png` | Spike 0 — CLM dynamic rescaling: perturbed data relaxes onto the exact profile `-4X/(1+4X²)`, rate `c_ω→-1`, residual decays (known-answer validation) |
+| `fig9_spike1_stepA_velocity.png` | Spike 1 Step A — 2D Boussinesq velocity operator `u=∇^⊥(-Δ)⁻¹ω` on the stretched grid recovers a manufactured `(ω,u,v)` to ~1e-5, 2nd-order convergence, `u_x(0)` origin read (known-answer validation) |
+| `fig10_spike1_stepB_rescaled.png` | Spike 1 Step B — rescaled solver `(ω,η,ξ)`: formulation chosen by data (η-slope read ~2× better), operator convergence (transport ~3rd, gradient ~2nd), and the `c_l` ratio-cancellation (~3e-16) |
+| `fig11_spike1_stepC_gate.png` | Spike 1 Step C — relax to the Chen–Hou profile (the gate, **PARTIAL**): `c_ω` matches to <0.5% and anisotropy to (2.24), far-field-exponent check fails; pre-committed predicate 3/4 |
 
 ## Evidence map ([`data/`](data/))
 
@@ -97,6 +100,9 @@ Every claim in the writeup traces to one of these committed files:
 | `phase1_gsustained.json` | staged inviscid growth-rate probe: magnitude on the resolution wall (LEG 1), rank-stability + `g_frac`-vs-`accel_ratio` cheat audit (LEG 2), free-split partials (LEG 3) | Phase 1 / BLOG_PHASE1_GSUSTAINED |
 | `phase1_gate4_reform.json` | reformulated Gate 4 on `g_frac`: the 4/6 FAIL scorecard, the free-split rail to ω₀→0 (top-6 shapes), the property-6 sub-conditions, and the 7 grower→non-grower classification flips | Phase 1 / BLOG_PHASE1_GATE4_REFORM |
 | `spike0_rescaling.json` | Spike 0 — line-H known-answer convergence, the perturbed-IC run (profile + `c_ω(τ)` + residual histories), and the two-resolution stability check | Spike 0 / fig8 |
+| `spike1_stepA_velocity.json` | Spike 1 Step A — velocity-operator known-answer convergence, velocity errors, `u_x(0)` origin read, radial cut, error field | Spike 1 A / fig9 |
+| `spike1_stepB_rescaled.json` | Spike 1 Step B — formulation decision (η-slope vs primitive-θ read error), transport/gradient convergence, `c_l` ratio-cancellation | Spike 1 B / fig10 |
+| `spike1_stepC_gate.json` | Spike 1 Step C — the logged gate resolution study (`c_l,c_ω,α,`far-field,anisotropy per config) + the pre-committed predicate checks/verdict | Spike 1 C / fig11 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,
