@@ -3,6 +3,43 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — B1 LOGGED: CHL Scenario 2 reproduced via the modified rescaling (4.1)/(4.2) — 2026-07-26
+
+**LOGGED gate run** (predicate LOCKED in git before the run, commit b5294ff). Data:
+committed `writeup/data/p2_scenario2_relax.json`; harness `experiments/p2_scenario2_relax.py --logged`;
+full write-up `PHASE2_P2_NOTES.md` §8. Verdict **5/5 PARTIAL by construction** — Tier-2, NOT novel,
+NOT a proof.
+
+What a human would want to know:
+
+- **What we built.** `RescaledHLScenario2` (solver/hl_rescaled.py) = CHL's modified formulation
+  (4.1) (spatial-shift DOF `c_r`, evolve `V:=Θ_X`) with the origin-pinned 3-constant normalization
+  (4.2): a hand-rolled 3×3 solve each step (`_solve_3x3`, no scipy) for `(c_l,c_ω,c_r)` that pins
+  `∂_τΩ(0)=∂_τΩ_X(0)=∂_τV(0)=0`. Origin-clustered grid with X=0 a node. Tests 9/9 — the new gauge
+  nulls those three origin time-derivatives to 4.4e-16 (known-answer).
+
+- **Why B1 was the right brick (the user's steer: only if it helps the real direction).** The §6/§7
+  degenerate gauge pins stagnation at X=1 and (measured, §7) can't HOLD a profile peaked away from
+  X=1. CHL's origin-pinned (4.2) gauge can — and it's exactly the machinery a future gCLM
+  two-scale↔two-stage sweep needs to hold regular profiles. B1 = "the gCLM-ready gauge, VALIDATED",
+  not a trophy. Said out loud in §8 + to the user.
+
+- **Result.** Two distinct non-symmetric positive ICs both relax to the amplitude-INVARIANT
+  contraction exponent `c_l/c_ω = −2.533 / −2.535` (CHL Fig 4.2: −2.5114, ~0.9%) — a genuine
+  IC-independent attractor to a regular strictly-positive profile (min Ω>0, smoothness 0.73 vs ≈1061
+  for the singular anchor). Residual falls 15→2.2e-2 (≈680×).
+
+- **The honest ceiling (S5, a PASS because it's the predicted boundary).** The residual FLOORS at
+  ~2e-2 (does NOT reach CHL's 1e-6 — fixed grid vs their adaptive mesh) and the ABSOLUTE triple
+  drifts to (1.59,−0.63,0.21), off CHL's raw (1.0636,−0.4235,0.0765) — the absolute constants are
+  IC-normalization-dependent; only the ratio + shape are gauge-invariant. Adaptive dt (recompute CFL
+  as the initial c_l=13 transient decays) was needed to reach τ≈42 in 14k steps.
+
+- **Where this leaves us.** BOTH CHL scenarios now reproduced (§2 singular Stage-2 anchor + §8
+  regular Scenario-2 exponent). Tier-2 consolidation. The lottery ticket still lives elsewhere: the
+  gCLM two-scale↔two-stage transition (now has the validated origin-pinned gauge to build on) or a
+  rigor step on Conjecture 2.4.
+
 ## Phase-2 P2 — SCOUT (non-logged): the "generic" state is CHL's regular Stage-1 profile; B1/B2 scoped — 2026-07-25
 
 **NOT a logged gate run** — an exploratory characterization + literature scout, no pre-committed

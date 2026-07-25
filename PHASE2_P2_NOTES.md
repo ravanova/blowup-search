@@ -11,7 +11,10 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 ## profile = CHL's Stage-1 / Scenario-2 object (qualitatively) — NOT a POC artifact. The scout also
 ## SCOPED the fork: B1 (implement CHL's modified (4.1)/(4.2) to pin the regular profile; cheap,
 ## clean known-answer) is the recommended next brick; B2 (the Stage-1→Stage-2 transition) is NOT
-## reachable on a fixed grid and mostly re-confirms CHL. Read §5 → §6 → §7. Not novel, not a proof.
+## reachable on a fixed grid and mostly re-confirms CHL. **B1 DONE (§8, 2026-07-26): implemented
+## CHL's (4.1)/(4.2), logged run 5/5 PARTIAL — the invariant exponent c_l/c_ω → −2.533 (CHL
+## −2.5114) as a genuine IC-independent attractor to a regular positive profile; res floors ~2e-2,
+## absolute triple normalization-dependent.** Read §5 → §6 → §7 → §8. Not novel, not a proof.
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -217,3 +220,44 @@ genuinely-new math is elsewhere: (i) the gCLM-family two-scale-vs-two-stage tran
 parameter 'a' does CLM's PROVEN two-scale (HQW25) give way to HL's two-stage (CHL)? Nobody has mapped
 this, and we already have solver/gclm_rescaled.py; or (ii) a rigor step on Conjecture 2.4. Both are
 harder + longer odds. B1 is the grounded consolidation brick that de-risks either.
+
+## §8 — B1 DONE (2026-07-26). CHL Scenario 2 reproduced: the modified rescaling (4.1)/(4.2).
+LOGGED run, predicate LOCKED in git before the run (commit b5294ff). PARTIAL/Tier-2 by design —
+NOT novel, NOT a proof. Full data: committed `writeup/data/p2_scenario2_relax.json`; harness
+`experiments/p2_scenario2_relax.py --logged`.
+
+**What was built (the transferable deliverable).** `solver/hl_rescaled.py::RescaledHLScenario2` —
+CHL's modified formulation (4.1): transport `(U+c_l X)→(U+c_l X+c_r)` with a spatial-shift DOF
+`c_r`, evolving `V:=Θ_X`. Normalization (4.2): pin `∂_τΩ(0)=∂_τΩ_X(0)=∂_τV(0)=0` at the shifted
+ORIGIN via a hand-rolled 3×3 solve (`_solve_3x3`, no scipy) each step for `(c_l,c_ω,c_r)`. Grid is
+origin-clustered with **X=0 a node** (so the gauge reads Ω(0),Ω_X(0),Ω_XX(0),V(0),V_X(0),U_X(0)=
+H(Ω)(0) at a node — the accuracy this brick buys over §6's X=1 grid). `scenario2_ic` = generic
+non-symmetric positive **origin-NONdegenerate** data (Scenario 2 lives at a non-symmetry origin:
+Ω_X(0)≠0 is the coefficient of c_l — degenerate_ic would make the gauge singular). Unit tests
+`test_hl_rescaled.py` **9/9**: `_solve_3x3` matches numpy (7e-14) + flags singular systems, and the
+KNOWN-ANSWER gauge test — the (4.2) solve nulls `∂_τ{Ω(0),Ω_X(0),V(0)}` to **4.4e-16**.
+
+**WHY this is the right brick (honoring the user's steer):** the §6/§7 degenerate gauge pins
+`c_l=−U(1)` (stagnation at X=1) — the reframe scout MEASURED that it cannot HOLD a profile peaked
+away from X=1. CHL's (4.2) origin-pinned gauge CAN. That origin-pinned gauge is exactly what a gCLM
+two-scale↔two-stage sweep (the actual lottery-ticket angle) needs to hold regular profiles across
+the parameter `a`. B1 = "the gCLM-ready gauge, VALIDATED against a known answer", not a trophy.
+
+**LOGGED RESULT (n=801, nu=0.02, 2 ICs × 14000 steps, adaptive dt → τ≈42; 5/5 PARTIAL):**
+- **S1 ratio known-answer PASS:** generic IC (x0=0.30) → `c_l/c_ω = −2.5334` (CHL −2.5114, ~0.9%).
+- **S2 attractor PASS:** 2nd IC (x0=0.45, different width) → −2.5352, same ratio ⇒ genuine
+  IC-independent attractor (not a tuned initial condition).
+- **S3 regular positive PASS:** min Ω=5.6e-2>0, min V>0, smoothness max|Ω_X|/peak=0.73 (vs ≈1061
+  for the singular anchor), peaked at X*=0.82 (non-symmetric). = CHL's Scenario-2 object.
+- **S4 residual bounded+falling PASS:** res 15→2.2e-2 (≈680×), no blowup.
+- **S5 HONEST CEILING PASS (predicted):** res FLOORS at 2.2e-2 (does NOT reach CHL's 1e-6) AND the
+  absolute triple stays off CHL's raw `(1.0636,−0.4235,0.0765)` — ours drift to `(1.59,−0.63,0.21)`.
+
+**THE HONEST READ.** The amplitude-INVARIANT contraction exponent `γ=c_l/c_ω` — the physical
+Scenario-2 prediction — is reproduced to ~1% as a real attractor to a regular positive profile.
+The ABSOLUTE `(c_l,c_ω,c_r)` are IC-normalization-dependent (the (4.2) gauge holds Ω(0),Ω_X(0),V(0)
+at their initial values; matching CHL's raw triple needs matching their IC normalization) AND the
+fixed grid floors the residual at ~2e-2 (CHL reach 1e-6 with an adaptive mesh). So: **both CHL
+scenarios now reproduced** (§2 singular Stage-2 anchor + §8 regular Stage-2/Scenario-2 exponent).
+Tier-2 consolidation. The lottery ticket still lives elsewhere — the gCLM two-scale↔two-stage
+transition (uses the now-validated origin-pinned gauge machinery) or a rigor step on Conj 2.4.
