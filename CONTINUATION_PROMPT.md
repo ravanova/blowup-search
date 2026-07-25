@@ -1,8 +1,11 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-25 at the end of the session that COMPLETED the P2 dynamic-relaxation leg
-(Conjecture 2.4 at POC, PARTIAL 9/9) after an HH23 go/no-go scout. Everything below is banked +
-pushed; origin/main at 659fa86.*
+*Written 2026-07-25 at the end of the session that BANKED the P2 regular-profile reframe (the
+"generic" state is CHL's regular Stage-1 profile, NOT an artifact) and SCOPED the fork toward B1.
+Everything below is banked + pushed; origin/main at 7ff371e. The user chose to keep pursuing the
+lottery ticket (path B), banked this finding (B3), and asked to scope B1-vs-B2 — done. The
+RECOMMENDED next brick is **B1** (implement CHL's modified Scenario-2 formulation (4.1)/(4.2);
+cheap, clean known-answer). Put B1 to the user (with the honest ceiling) before building.*
 
 Continue the Navier–Stokes blow-up search project in this directory
 (/home/andy/projects/Unsolved). The end goal is the Clay Millennium problem — a genuine, honest
@@ -31,12 +34,12 @@ ORIENTATION (read in this order): PROJECT.md, WIN_CONDITION.md, CLAY_ROADMAP.md.
 (concluded, honest negative): writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md. Spike 0 (COMPLETE):
 writeup/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, PARTIAL gate):
 PHASE2_SPIKE1_NOTES.md + writeup/TECHNICAL_SPIKE1_{VELOCITY,STEPB,STEPC}.md. **P2 — READ THIS:**
-PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §5 HH23 scout, §6 dynamic-relaxation leg),
-writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md (fig12), and
-writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md (fig13). Then experiments/JOURNAL.md (newest
-first) and LOGGING.md.
+PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §5 HH23 scout, §6 dynamic-relaxation leg, **§7 the
+regular-profile reframe + B1/B2 scout — read this**), writeup/TECHNICAL_P2_HL_ANCHOR.md +
+BLOG_P2_HL_ANCHOR.md (fig12), writeup/TECHNICAL_P2_CONJ24.md (§7 addendum) + BLOG_P2_CONJ24.md
+(postscript) (fig13, fig14). Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
-STATE (all banked + pushed; origin/main at commit 659fa86 "P2 dynamic-relaxation leg"):
+STATE (all banked + pushed; origin/main at commit 7ff371e "P2 regular-profile reframe (scout)"):
 - Phase 1 CONCLUDED (honest negative: uniform grid can't resolve self-similar blow-up). Spike 0
   DONE + VALIDATED (1D CLM dynamic rescaling). Spike 1 COMPLETE (2D Boussinesq dynamic-rescaling
   machine; reproduces the PROVEN Chen–Hou profile; Step-C gate PARTIAL 3/4 — validated machinery,
@@ -80,24 +83,52 @@ STATE (all banked + pushed; origin/main at commit 659fa86 "P2 dynamic-relaxation
   - HONEST STATUS: validated the degenerate gauge + the LOCAL stability of CHL's singular fixed
     point (independently reproduces the LOCAL content of a numerical-only claim). NOT achieved:
     residual→0 (POC dissipation floor) and the global basin. Tier-2-style, NOT novel, NOT a proof.
+- **P2 REGULAR-PROFILE REFRAME + B1/B2 SCOUT DONE (this session) — §7. EXPLORATORY (non-logged), no
+  new solver code.** Evidence: writeup/p2_regular_profile_evidence.py → fig14 from committed
+  writeup/data/p2_regular_profile.json (+ _traj.json). CHL's rescaled HL system has TWO fixed points;
+  our degenerate-gauge machinery reaches both. The §6 logged run's "generic → (0.680,−0.487),
+  DIFFERENT state, honest NEGATIVE" is NOT a POC artifact — that final field is a REGULAR,
+  strictly-positive profile (smooth: max|Ω_X|/peak≈0.3 vs ≈1061 for the singular anchor; peaked at
+  X≈0.35 away from X=1), = CHL's Stage-1 / Scenario-2 object (their §4) QUALITATIVELY. So we reach
+  the FIRST HALF of CHL's two-stage structure independently. GUARDS: qualitative match only (standard
+  (2.4)+degenerate gauge, NOT CHL's modified (4.1)); constants differ under different normalization
+  (ours c_l≈0.5,c_ω≈−0.45; theirs (c_l,c_ω,c_r)=(1.0636,−0.4235,0.0765), ratio −2.5114); NOT novel,
+  NOT a proof. B1/B2 SCOUT (8000-step generic trajectory, fig14 C): under our gauge the trajectory
+  TRANSITS the CHL-S2 neighborhood (c_l≈1.06 near step 1200 — nearly the published value) but CANNOT
+  hold it → wanders in the low-c_l regular regime (res floor ~0.12) and NEVER approaches c_l=2.
+  Diagnosis: our gauge pins c_l=−U(1) (stagnation at X=1), a mismatch for a profile peaked at X≈0.35;
+  CHL's (4.2) pins at the ORIGIN. ⇒ B1 is cheap + well-motivated; B2's transition is unreachable on a
+  fixed grid.
 
-THE OPEN FORK — put this menu to the user before doing heavy work (genuine scope decision; the user
-last session leaned toward writing this prompt and reassessing fresh, without pre-committing):
-- (A) **BANK & PIVOT.** Treat P2 as a complete Tier-2 data-backed deliverable and pivot to a new
-  angle (a different degeneracy family, a fresh toy model, or a roadmap reassessment).
-- (B) **INVEST IN HEAVY NUMERICS (the real lottery ticket).** Build the global-basin solver CHL used:
-  WENO/limited advection (kill the ringing without the dissipation bias), adaptive mesh, a
-  vanishing-viscosity (nu→0) limit, and a semi-analytic X^{−1/2} outer-tail patch (the same tail fix
-  flagged for Spike-1 Step C). THEN run the genuinely-new **two-scale-vs-two-stage probe** (track the
-  peak LOCATION: a moving bulk on a coarse scale = two-scale/Liu; τ→∞ convergence to the fixed
-  profile at X=1 = two-stage/CHL). Multi-session, real risk it stays PARTIAL, but this is where new
-  1D math lives. Read [HQW25] (Huang–Qin–Wang, CLM two-scale) first if obtainable; it's the model.
-- (C) **POLISH THE POC (bounded, de-risks B).** A resolution×vanishing-nu study to show the residual
-  floor shrinks toward zero (strengthens the local-stability claim to near-quantitative) + tighten
-  the writeup, WITHOUT the full WENO/adaptive rebuild. Still Tier-2, not novel.
-- NOTE the honest ceiling: even a clean GLOBAL stability confirmation REPRODUCES CHL's numerical
-  claim — Tier-2. The genuinely NEW math (two-scale in HL vindicating Liu, a not-yet-seen profile, a
-  rigor step) is harder and longer odds. Say which one any given run is going after, out loud.
+THE DECIDED PATH — pursuing the lottery ticket (path B). B3 (bank the reframe) DONE this session.
+Put the B1 recommendation to the user (with the honest ceiling) before building:
+- (B1) **RECOMMENDED NEXT BRICK — implement CHL's modified Scenario-2 formulation (4.1)/(4.2) and pin
+  the regular profile.** SMALL delta on solver/hl_rescaled.py::RescaledHLDynamic, fully grounded in
+  CHL §2.5+§4 (already pdftotext-extracted; re-extract: `pdftotext Papers/2604.01868v1.pdf out.txt`,
+  grep "(4.1)","(4.2)","Scenario 2"). SPEC:
+    * Formulation (4.1): our (2.4) transport (U+c_l X) → **(U+c_l X+c_r)** (one extra constant c_r);
+      use V:=Θ_X (better far-field decay): Ω_τ+(U+c_l X+c_r)Ω_X=c_ω Ω+V; V_τ+(U+c_l X+c_r)V_X=
+      (2c_ω−U_X)V; U_X=H(Ω), U(0)=0.
+    * Normalization (4.2): enforce ∂_τΩ(0)=∂_τΩ_X(0)=∂_τV(0)=0 → a 3×3 LINEAR solve each step for
+      (c_l,c_ω,c_r): [Ω_X(0)c_r−Ω(0)c_ω=V(0)]; [V_X(0)c_r−2V(0)c_ω=−U_X(0)V(0)];
+      [Ω_XX(0)c_r−Ω_X(0)c_ω+Ω_X(0)c_l=V_X(0)−U_X(0)Ω_X(0)]. (Hand-roll the 3×3; NO scipy.)
+    * KNOWN-ANSWER target (their Fig 4.2): (c_l,c_ω,c_r,c_l/c_ω)=(1.0636,−0.4235,0.0765,−2.5114). We
+      already fly within ~0.005 of c_l=1.0636 at the transit, so pinning there is very plausible.
+    * SUCCESS = converge to a regular strictly-positive profile at those constants + a SHAPE OVERLAY
+      confirming our generic-run profile IS this one (CHL Fig 4.3 shows Scenario-1-inner = Scenario-2).
+    * Add a new solver class/method + unit tests to test_hl_rescaled.py; then a LOGGED run (lock the
+      predicate first). Outcome = "both CHL scenarios reproduced" — clean Tier-2 consolidation.
+- (B2) **NOT the right brick now — the Stage-1→Stage-2 transition / two-scale-vs-two-stage probe.**
+  The scout showed it is UNREACHABLE on a fixed grid (the generic trajectory heads AWAY from c_l=2);
+  it needs the adaptive-mesh rebuild AND even a clean result mostly RE-CONFIRMS CHL's published
+  two-stage finding (low novel upside). Defer until after B1.
+- HONEST CEILING (say it out loud): B1 REPRODUCES a CHL object → Tier-2, NOT the lottery ticket. The
+  genuinely-new math lives elsewhere and is longer odds: (i) the **gCLM-family two-scale↔two-stage
+  transition** — where in the parameter 'a' does CLM's PROVEN two-scale (HQW25) give way to HL's
+  two-stage (CHL)? Nobody has mapped it; we already have solver/gclm_rescaled.py — this is the most
+  promising NEW angle; or (ii) a rigor step on Conjecture 2.4. B1 is the grounded brick that de-risks
+  both. Read [HQW25] (Huang–Qin–Wang, CLM two-scale, SIAM J Math Anal 2025) first if obtainable —
+  it's the model for the gCLM probe. (Papers/ also holds 2210.07191, 2305.05660, MMS-Numerics-2025.)
 
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy — tridiag/solvers
 hand-rolled). 8-worker ceiling (OMP_NUM_THREADS pinned). No pytest; run each suite as
@@ -106,9 +137,11 @@ test_gclm_rescaled.py (5/5) + test_boussinesq_velocity.py (5/5) + test_boussines
 (5/5) + test_boussinesq_rescaled.py (8/8). Before ANY logged experimental run: pass the test gate +
 COMMIT + LOCK the predicate in git (dirty-tree guard; gitignored experiments/*.log,*.npz,*.jsonl,
 *.out are fine). Solver dev + unit tests are NOT "logged gate runs"; still add each new solver test
-to the suite. Papers/ gitignored. One JOURNAL.md entry per LOGGED experiment. Evidence rebuilds via
-writeup/p2_conj24_evidence.py + writeup/p2_hl_anchor_evidence.py (+ the spike scripts). Push only
-when the user asks.
+to the suite. Papers/ gitignored. One JOURNAL.md entry per LOGGED experiment (scouts may get a
+clearly-labelled entry too). Evidence rebuilds via writeup/p2_conj24_evidence.py +
+writeup/p2_regular_profile_evidence.py (fig14; --generate re-runs fields, --generate-traj re-runs the
+8000-step trajectory) + writeup/p2_hl_anchor_evidence.py (+ the spike scripts). Push only when asked
+(the user asked this session).
 OPS: never `while pgrep -f script.py` (self-match hang); foreground `sleep` is blocked (use
 background runs / the Monitor until-loop). The dynamic-relaxation runs are SLOW (dense-Hilbert
 matvecs, Python-overhead-bound: ~2500 steps at n=801 ≈ a few min; the full 5-config logged run
@@ -136,7 +169,10 @@ DISCIPLINE LESSONS BANKED (do not relearn):
 HONEST FRAMING TO PRESERVE: 1D HL is a toy model (it models the BOUNDARY behaviour of the Hou–Luo /
 3D-axisymmetric-Euler scenario; 2D Boussinesq is closer but still a toy, not 3D NS). P2's anchor
 reproduced a PROVEN (weak-existence) result; P2's dynamic-relaxation leg reproduced the LOCAL
-content of a NUMERICAL-only conjecture (Tier-2, PARTIAL). Neither is novel; neither is a proof.
-Overall Clay odds ~0.05%. The lottery ticket lives on the far side of the global-basin numerics (the
-two-scale-vs-two-stage question), and probably in direct profile/stability construction more than
-GA-over-ICs. Keep pursuing the Clay end goal; keep saying the honest version out loud.
+content of a NUMERICAL-only conjecture (Tier-2, PARTIAL); the regular-profile reframe reproduced
+CHL's Stage-1 object QUALITATIVELY (Tier-2, not even a proven identity yet — B1 would tighten it).
+None is novel; none is a proof. Overall Clay odds ~0.05%. The lottery ticket does NOT live in
+reproducing more of CHL (B1/B2 are both Tier-2) — it lives in genuinely-new math: most promisingly
+the gCLM-family two-scale↔two-stage transition (uses solver/gclm_rescaled.py), or a rigor step. B1
+is the grounded consolidation brick, not the ticket — say so out loud. Keep pursuing the Clay end
+goal; keep saying the honest version out loud.
