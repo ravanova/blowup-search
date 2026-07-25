@@ -60,7 +60,19 @@ and every figure is built from the small committed files in [`data/`](data/).
     toy result; validates machinery, not novelty, not a proof.
 12. **[BLOG_SPIKE0_RESCALING.md](BLOG_SPIKE0_RESCALING.md)** — the narrative
     companion: "We built the far side of the wall, and it held."
-13. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+13. **[TECHNICAL_P2_HL_ANCHOR.md](TECHNICAL_P2_HL_ANCHOR.md)** — Phase-2 **P2**, the
+    lottery-ticket leg begins: a 1D Hou–Luo *singular*-profile machine, validated
+    against the **explicit exact steady state** of Chen–Huang–Li (arXiv:2604.01868,
+    Thm 2.3) — including a closed-form velocity for their profile that we derived.
+    Five known-answer checks pass; the operator survives the singularity (the only
+    residual is the slow tail, truncation-limited). Figure
+    [`fig12`](figures/fig12_p2_hl_anchor.png). Honest scope: reproduces a *proven*
+    (weak-existence) result — validation, not novelty, not a proof. Working notes
+    [`../PHASE2_P2_NOTES.md`](../PHASE2_P2_NOTES.md).
+14. **[BLOG_P2_HL_ANCHOR.md](BLOG_P2_HL_ANCHOR.md)** — the narrative companion: "We
+    built a machine for singular blow-ups, and checked it against a shape we could
+    solve by hand."
+15. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
    upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
    which is the later Tier-3 computer-assisted-proof leg.)
@@ -80,6 +92,7 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig9_spike1_stepA_velocity.png` | Spike 1 Step A — 2D Boussinesq velocity operator `u=∇^⊥(-Δ)⁻¹ω` on the stretched grid recovers a manufactured `(ω,u,v)` to ~1e-5, 2nd-order convergence, `u_x(0)` origin read (known-answer validation) |
 | `fig10_spike1_stepB_rescaled.png` | Spike 1 Step B — rescaled solver `(ω,η,ξ)`: formulation chosen by data (η-slope read ~2× better), operator convergence (transport ~3rd, gradient ~2nd), and the `c_l` ratio-cancellation (~3e-16) |
 | `fig11_spike1_stepC_gate.png` | Spike 1 Step C — relax to the Chen–Hou profile (the gate, **PARTIAL**): `c_ω` matches to <0.5% and anisotropy to (2.24), far-field-exponent check fails; pre-committed predicate 3/4 |
+| `fig12_p2_hl_anchor.png` | Phase-2 P2 — 1D Hou–Luo singular-profile machine validated against the exact Chen–Huang–Li Thm 2.3 steady state `(X-1)^{-1/2}`: recovered velocity matches the derived exact `U̅` through the singularity, ½-order convergence, and the operator survives the singular core (tail truncation-limited). Validation, not novelty |
 
 ## Evidence map ([`data/`](data/))
 
@@ -103,6 +116,7 @@ Every claim in the writeup traces to one of these committed files:
 | `spike1_stepA_velocity.json` | Spike 1 Step A — velocity-operator known-answer convergence, velocity errors, `u_x(0)` origin read, radial cut, error field | Spike 1 A / fig9 |
 | `spike1_stepB_rescaled.json` | Spike 1 Step B — formulation decision (η-slope vs primitive-θ read error), transport/gradient convergence, `c_l` ratio-cancellation | Spike 1 B / fig10 |
 | `spike1_stepC_gate.json` | Spike 1 Step C — the logged gate resolution study (`c_l,c_ω,α,`far-field,anisotropy per config) + the pre-committed predicate checks/verdict | Spike 1 C / fig11 |
+| `p2_hl_anchor.json` | Phase-2 P2 — the singular anchor: profile + exact/recovered velocity cut, δ-refinement convergence (velocity + steady residual), dense-operator error by `\|X-1\|` band vs reach `M`, and the 5 unit-test numbers | P2 / fig12 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,

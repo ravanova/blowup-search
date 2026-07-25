@@ -3,6 +3,53 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — the 1D Hou–Luo singular-profile machine, validated against an exact solution — 2026-07-25
+
+Full record: writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md; evidence fig12 from
+committed writeup/data/p2_hl_anchor.json (`python writeup/p2_hl_anchor_evidence.py`). Working
+doc PHASE2_P2_NOTES.md. Code solver/hl_rescaled.py + test_hl_rescaled.py (5/5). This is solver
+dev + unit validation, NOT a logged gate run.
+
+**What this is: VALIDATION of a proven result — machinery, not novelty, not a proof.** After
+Spike 1 we scoped P2 = the actual novelty frontier, and decided (with the user, from evidence)
+to attack the **1D Hou–Luo model** singular-profile scenario of Chen–Huang–Li (arXiv:2604.01868),
+NOT 2D Boussinesq.
+
+What a human would want to know:
+
+- **Scouted before committing.** Read CHL page-by-page: the novel thing is *degenerate* data
+  → *singular* self-similar profiles (two-stage L^∞→L^p), and only *weak existence* of one
+  explicit profile is proven — the asymptotic *stability* is numerical-only. That gap is the
+  frontier. Chose 1D over 2D because the novelty lives there first, it reuses line_hilbert +
+  gCLM rescaling, and 2D would compound the Step-C tail problem.
+
+- **A feasibility probe made the decision on evidence, not vibes.** Fed the singular profile
+  Ω̄=(X−1)^{−1/2} to our line-Hilbert operator and compared to the exact H I derived. The
+  operator SURVIVES: the singular core is representable to a few % and improving; the only real
+  error is the slow X^{−1/2} tail, and it is TRUNCATION-limited (falls with domain reach M,
+  immune to node clustering — measured, not asserted). Not a wall; the known outer-patch gap.
+
+- **Derived a closed-form velocity for their profile.** From the classical Hilbert pair
+  H(x₊^{−1/2})=−(−x)₊^{−1/2}: H(Ω̄)=−(1−X)^{−1/2}1_{X<1}, U̅=2√(1−X)−2 (X<1), −2 (X≥1). Three
+  independent checks line up (U̅(0)=0; U̅(1⁻)=−2 = strong steady form; c̄_l+2c̄_ω=0 exactly). A
+  small self-contained by-product the paper didn't spell out — and the known answer that makes
+  the validation a real known-answer test (the Spike-0 discipline).
+
+- **Five known-answer checks pass** (test_hl_rescaled.py): velocity operator vs arctan(2X)
+  1.1e−5; full pipeline 1.8e−3; velocity on the singular anchor → U̅ converging at the ½-order
+  the √-singularity predicts; steady residual of the exact profile 6.2e−3 converging; Θ
+  consistency exactly 0.
+
+- **Performance (the user asked).** Bottleneck was the shared line_hilbert.py build, not P2 code:
+  batched Thomas slope solve (_slope_matrix 6.15s→0.29s, 21×), Horner+shared+shortened L(s)
+  series (n=4001 build 65s→19.7s, 3.3×), lazy Hilbert matrix. HL suite >120s→3.9s. Accuracy
+  IDENTICAL — line_hilbert 6/6, gclm 5/5, hl 5/5 all green (verified the operator change didn't
+  move a single error digit).
+
+- **NOT done (on purpose):** the dynamic relaxation + degenerate normalization — the actual
+  novelty swing (does generic degenerate data converge to the singular profile?). That is a
+  logged run with a pre-locked predicate; paused here at the user's request to bank the anchor.
+
 ## Spike 1 Step C — relax to the Chen–Hou profile (the gate): PARTIAL, honestly reported — 2026-07-25
 
 Full record: writeup/TECHNICAL_SPIKE1_STEPC.md + BLOG_SPIKE1_STEPC.md; evidence fig11 from
