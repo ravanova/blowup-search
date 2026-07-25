@@ -236,10 +236,20 @@ class RescaledBoussinesq:
         res = max(np.abs(R0o).max(), np.abs(R0e).max(), np.abs(R0x).max())
         return on, en, xn, info, res
 
-    def run(self, omega0, eta0, xi0, dt_frac=0.3, tol=1e-6, max_steps=50000, verbose=False):
+    def run(self, omega0, eta0, xi0, dt_frac=0.3, tol=1e-6, max_steps=50000, verbose=False,
+            renorm=False):
         """Evolve (omega, eta, xi) toward a steady state (||RHS||_inf < tol) with a per-step
-        advective-CFL dt. Returns a result dict with histories of c_l, c_omega, residual."""
+        advective-CFL dt. Returns a result dict with histories of c_l, c_omega, residual.
+
+        renorm=True discretely ENFORCES the normalization (2.12): after each step it rescales
+        omega, eta (and xi with eta's factor) to re-pin omega_x(0), eta_x(0) at their INITIAL
+        values -- so c_l = 2 eta_x(0)/omega_x(0) is held fixed regardless of the near-origin
+        truncation slip that otherwise makes it drift (diagnosed in experiments/). A weak
+        restoring correction (factors ~1); the paper's continuous (2.12) is the exact analogue.
+        """
         om, et, xi = (np.array(a, float) for a in (omega0, eta0, xi0))
+        wx0_target = odd_field_x_slope(om, self.grid)
+        ex0_target = odd_field_x_slope(et, self.grid)
         cl_h, cw_h, res_h, tau_h = [], [], [], []
         tau, res = 0.0, np.inf
         info = {}
@@ -247,6 +257,12 @@ class RescaledBoussinesq:
             _, _, _, info0 = self.rhs(om, et, xi)
             dt = dt_frac / info0["cfl_speed"]
             om, et, xi, info, res = self.step(om, et, xi, dt)
+            if renorm:
+                fw = wx0_target / odd_field_x_slope(om, self.grid)
+                fe = ex0_target / odd_field_x_slope(et, self.grid)
+                om *= fw
+                et *= fe
+                xi *= fe
             tau += dt
             cl_h.append(info["c_l"]); cw_h.append(info["c_omega"])
             res_h.append(res); tau_h.append(tau)

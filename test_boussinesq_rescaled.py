@@ -155,6 +155,23 @@ def test_integrator_runs_stably():
           f"c_omega={res['c_omega']:+.4f}, res={res['residual']:.2e}")
 
 
+def test_renorm_pins_gauge():
+    """renorm=True discretely enforces (2.12): it holds c_l = 2 eta_x(0)/omega_x(0) near its
+    initial value, where without it the near-origin truncation slip makes c_l drift (diagnosed
+    in experiments/diagnose_stepC_drift.py). Assert the drift is materially smaller with renorm."""
+    grid = PolarGrid(n_r=200, n_beta=40, r_min=1e-3, r_max=1e4)
+    om0, et0, xi0 = _seed_fields(grid, a=1.0, b=1.5, c=0.0)  # c_l ~ 2*1.5/1.0 = 3
+    solver = RescaledBoussinesq(grid)
+    cl0 = odd_field_x_slope(et0, grid) / odd_field_x_slope(om0, grid) * 2.0
+    r_off = solver.run(om0, et0, xi0, dt_frac=0.25, max_steps=250, renorm=False)
+    r_on = solver.run(om0, et0, xi0, dt_frac=0.25, max_steps=250, renorm=True)
+    drift_off = abs(r_off["c_l"] - cl0)
+    drift_on = abs(r_on["c_l"] - cl0)
+    assert drift_on < 0.5 * drift_off, f"renorm did not curb drift: on {drift_on:.3f} off {drift_off:.3f}"
+    assert drift_on < 0.05 * abs(cl0), f"renorm c_l drift too large: {drift_on:.3f}"
+    print(f"[ok] renorm pins c_l: drift {drift_on:.4f} (renorm) vs {drift_off:.4f} (off), c_l0={cl0:.3f}")
+
+
 if __name__ == "__main__":
     test_grad_xy_known_answer()
     test_grad_xy_convergence()
@@ -163,4 +180,5 @@ if __name__ == "__main__":
     test_modulation_assembly()
     test_rhs_wiring()
     test_integrator_runs_stably()
-    print("\nALL BOUSSINESQ-RESCALED (STEP B, PIECES 2-4) TESTS PASSED")
+    test_renorm_pins_gauge()
+    print("\nALL BOUSSINESQ-RESCALED (STEP B, PIECES 2-4 + RENORM) TESTS PASSED")
