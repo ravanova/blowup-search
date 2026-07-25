@@ -80,6 +80,54 @@ def _report(res, label):
           f"alpha_radial(fit)={res['alpha_radial']:+.5f}")
 
 
+def shape_metrics(omega, grid):
+    """Anisotropy |omega_y|/|omega_x| in the near field (Chen-Hou (2.24): < 0.23) and the sign
+    structure of omega in the first quadrant."""
+    from solver.boussinesq_rescaled import grad_xy
+    ox, oy = grad_xy(omega, grid)
+    near = (grid.R > 0.05) & (grid.R < 1.0)
+    ratio = np.abs(oy[near]) / (np.abs(ox[near]) + 1e-30)
+    pos = float((omega[near] > 0).mean())
+    return {"anisotropy_median": float(np.median(ratio)),
+            "anisotropy_p90": float(np.percentile(ratio, 90)),
+            "omega_frac_positive_nearfield": pos,
+            "omega_min": float(omega.min()), "omega_max": float(omega.max())}
+
+
+def run_gate(n_r, n_beta, r_min, r_max, steps, dt_frac=0.3):
+    """A single logged gate relaxation with renorm=True (the drift fix). Returns metrics."""
+    grid = PolarGrid(n_r=n_r, n_beta=n_beta, r_min=r_min, r_max=r_max)
+    om0, et0, xi0 = profile_ansatz(grid)
+    solver = RescaledBoussinesq(grid)
+    res = solver.run(om0, et0, xi0, dt_frac=dt_frac, tol=1e-9, max_steps=steps, renorm=True)
+    a_far = radial_exponent(res["omega"], grid, r_lo=r_max ** 0.35, r_hi=r_max ** 0.75)
+    out = {"n_r": n_r, "n_beta": n_beta, "r_min": r_min, "r_max": r_max,
+           "steps": res["steps"], "residual": float(res["residual"]),
+           "c_l": float(res["c_l"]), "c_omega": float(res["c_omega"]),
+           "alpha": float(res["c_omega"] / res["c_l"]), "alpha_far": float(a_far)}
+    out.update(shape_metrics(res["omega"], grid))
+    # a radial cut of omega at beta ~ pi/4 for the figure (downsampled)
+    jc = int(np.argmin(np.abs(grid.beta - np.pi / 4)))
+    idx = np.unique(np.linspace(0, grid.n_r - 1, 120).astype(int))
+    out["cut_r"] = grid.r[idx].tolist()
+    out["cut_omega"] = res["omega"][idx, jc].tolist()
+    return out
+
+
+def evaluate_predicate(runs):
+    """The PRE-COMMITTED gauge-honest predicate (locked 2026-07-25). Returns (verdict, checks).
+    Uses the finest-resolution run + resolution stability across runs."""
+    fine = max(runs, key=lambda r: r["n_r"])
+    alphas = [r["alpha"] for r in runs]
+    checks = {
+        "1_alpha_within_5pct": abs(fine["alpha"] - ALPHA_STAR) / abs(ALPHA_STAR) < 0.05,
+        "2_alpha_far_within_10pct": abs(fine["alpha_far"] - ALPHA_STAR) / abs(ALPHA_STAR) < 0.10,
+        "3_anisotropy_below_0p23": fine["anisotropy_median"] < 0.23,
+        "4_resolution_stable_alpha": (max(alphas) - min(alphas)) < 0.05 * abs(ALPHA_STAR) * 2,
+    }
+    return all(checks.values()), checks
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--logged", action="store_true")
@@ -90,8 +138,34 @@ if __name__ == "__main__":
     ap.add_argument("--tol", type=float, default=1e-5)
     args = ap.parse_args()
 
-    print(f"EXPLORATORY shakeout: n_r={args.n_r} n_beta={args.n_beta} "
-          f"r_max={args.r_max:.0e} steps={args.steps}")
-    res = run_case(args.n_r, args.n_beta, 1e-4, args.r_max, args.steps, args.tol,
-                   verbose=True)
-    _report(res, "explore")
+    if args.logged:
+        import json
+        from pathlib import Path
+        DATA = Path(__file__).resolve().parent.parent / "writeup" / "data"
+        DATA.mkdir(parents=True, exist_ok=True)
+        print(f"LOGGED gate: resolution study (renorm=True), targets "
+              f"c_l={CL_STAR:.4f} c_om={COMEGA_STAR:.4f} alpha={ALPHA_STAR:.4f}", flush=True)
+        runs = []
+        # resolution study (r_min=1e-3 -- diagnosed as the low-drift inner cutoff) + a domain check
+        configs = [(300, 48, 1e-3, 1e5), (450, 48, 1e-3, 1e5),
+                   (600, 48, 1e-3, 1e5), (450, 48, 1e-3, 1e6)]
+        for (n_r, n_b, r_min, r_max) in configs:
+            r = run_gate(n_r, n_b, r_min, r_max, steps=args.steps)
+            runs.append(r)
+            print(f"  n_r={n_r} r_max={r_max:.0e}: c_l={r['c_l']:.4f} c_om={r['c_omega']:+.4f} "
+                  f"alpha={r['alpha']:+.4f} a_far={r['alpha_far']:+.4f} "
+                  f"aniso={r['anisotropy_median']:.3f} res={r['residual']:.2e}", flush=True)
+        verdict, checks = evaluate_predicate(runs)
+        payload = {"targets": {"c_l": CL_STAR, "c_omega": COMEGA_STAR, "alpha": ALPHA_STAR},
+                   "runs": runs, "predicate_checks": checks, "predicate_pass": verdict}
+        (DATA / "spike1_stepC_gate.json").write_text(json.dumps(payload))
+        print(f"\nPREDICATE: {'PASS' if verdict else 'PARTIAL/FAIL'}")
+        for k, v in checks.items():
+            print(f"    {'PASS' if v else 'FAIL'}  {k}")
+        print(f"wrote {DATA/'spike1_stepC_gate.json'}")
+    else:
+        print(f"EXPLORATORY shakeout: n_r={args.n_r} n_beta={args.n_beta} "
+              f"r_max={args.r_max:.0e} steps={args.steps}")
+        res = run_case(args.n_r, args.n_beta, 1e-4, args.r_max, args.steps, args.tol,
+                       verbose=True)
+        _report(res, "explore")
