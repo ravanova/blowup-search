@@ -207,6 +207,214 @@ def degenerate_ic(X, kind="A"):
     return Omega0, Theta0
 
 
+def _solve_3x3(A, b):
+    """Solve a 3x3 linear system by Gaussian elimination with partial pivoting.
+
+    Hand-rolled (no scipy). Raises on a singular system (a genuine failure of the
+    Scenario-2 gauge, e.g. Omega_x(0)=0, which would mean the origin is not a valid
+    'source of stability' point)."""
+    M = np.array(A, dtype=float).reshape(3, 3).copy()
+    v = np.array(b, dtype=float).reshape(3).copy()
+    for k in range(3):
+        p = k + int(np.argmax(np.abs(M[k:, k])))
+        if abs(M[p, k]) < 1e-14:
+            raise ValueError("singular Scenario-2 gauge system (pivot ~ 0)")
+        if p != k:
+            M[[k, p]] = M[[p, k]]
+            v[k], v[p] = v[p], v[k]
+        for i in range(k + 1, 3):
+            f = M[i, k] / M[k, k]
+            M[i, k:] -= f * M[k, k:]
+            v[i] -= f * v[k]
+    x = np.zeros(3)
+    for i in (2, 1, 0):
+        x[i] = (v[i] - M[i, i + 1:] @ x[i + 1:]) / M[i, i]
+    return x
+
+
+def scenario2_ic(X, x0=0.3, w=0.9):
+    """Generic positive, non-symmetric, origin-NONdegenerate initial data for the
+    Scenario-2 modified-rescaling run: (Omega0, V0=Theta_X0).
+
+    Unlike degenerate_ic (which pins Omega_x(0)=0, killing the c_l coefficient of the
+    (4.2) gauge), Scenario 2 lives at a NON-symmetry origin: the profiles are strictly
+    positive regular and non-symmetric, so Omega(0)>0 and Omega_X(0)!=0. Smooth
+    positive bumps peaked near x0>0 (=> positive slope at the origin) that decay at
+    both +-infinity (needed for the whole-line Hilbert transform)."""
+    X = np.asarray(X, dtype=float)
+    Omega0 = np.exp(-((X - x0) ** 2) / (2.0 * w ** 2))
+    V0 = 0.8 * np.exp(-((X - 1.3 * x0) ** 2) / (2.0 * (1.1 * w) ** 2))
+    return Omega0, V0
+
+
+class RescaledHLScenario2(RescaledHL):
+    """Scenario-2 integrator: CHL's *modified* dynamic rescaling (4.1) with the
+    origin-pinned 3-constant normalization (4.2), for the POSITIVE REGULAR profile.
+
+    Why this exists (the transfer to the gCLM probe, not a trophy): our degenerate
+    gauge (RescaledHLDynamic) pins the transport stagnation at X=1 -- a mismatch for
+    a profile peaked *away* from X=1, which is why the reframe scout could transit the
+    Scenario-2 neighbourhood but never hold it. CHL add a spatial-shift DOF c_r and
+    pin all three conditions at the (shifted) ORIGIN X=0, which dynamically becomes the
+    'source of stability'. That origin-pinned gauge is exactly what a future gCLM
+    two-scale<->two-stage sweep needs to hold regular profiles across the parameter a.
+
+    Formulation (4.1), evolving V := Theta_X (better far-field decay):
+        Omega_tau + (U + c_l X + c_r) Omega_X = c_omega Omega + V,
+        V_tau     + (U + c_l X + c_r) V_X     = (2 c_omega - U_X) V,
+        U_X = H(Omega),   U(0) = 0.
+    Normalization (4.2): choose (c_l, c_omega, c_r) so d_tau Omega(0) = d_tau Omega_X(0)
+    = d_tau V(0) = 0. Correspondingly (derived + checked against the paper):
+        Omega_X(0)  c_r -  Omega(0) c_omega                    = V(0),
+        V_X(0)      c_r - 2 V(0)    c_omega                    = -U_X(0) V(0),
+        Omega_XX(0) c_r -  Omega_X(0) c_omega + Omega_X(0) c_l = V_X(0) - U_X(0) Omega_X(0).
+    KNOWN-ANSWER target (their Fig 4.2): (c_l, c_omega, c_r, c_l/c_omega) ~=
+    (1.0636, -0.4235, 0.0765, -2.5114); stop at max(|Omega_tau|, |V_tau|) < 1e-6.
+
+    Grid: origin-clustered symmetric sinh grid with X=0 a node (n forced odd), so the
+    origin values Omega(0), Omega_X(0), Omega_XX(0), V(0), V_X(0), U_X(0)=H(Omega)(0)
+    that the gauge reads are all evaluated AT a node -- no interpolation of 2nd
+    derivatives off a far cluster (the accuracy this brick buys over the X=1 grid).
+    """
+
+    def __init__(self, n=2001, c=0.5, rho_max=8.0, nu=0.0):
+        rho, X = sinh_grid_origin(n, c=c, rho_max=rho_max)
+        super().__init__(X, X_ref=0.0)
+        self.rho = rho
+        self.drho = rho[1] - rho[0]
+        self.c = c
+        self.dXdrho = c * np.cosh(rho)          # dX/drho > 0
+        self.i0 = X.size // 2                    # index of the X=0 node (n odd)
+        assert abs(self.X[self.i0]) < 1e-12, "origin is not a node"
+        self.nu = nu
+
+    # -- gauge ------------------------------------------------------------
+    def gauge(self, Omega, V, U=None, Omega_X=None, V_X=None, Omega_XX=None,
+              Hom=None):
+        """(c_l, c_omega, c_r) from CHL (4.2), read at the X=0 node.
+
+        Returns (c_l, c_omega, c_r, U, Omega_X, V_X) so the RHS can reuse the slopes.
+        Uses spline slopes for Omega_X, V_X and the slope-of-slope for Omega_XX, all
+        consistent with the differentiation used elsewhere."""
+        i0 = self.i0
+        if Hom is None:
+            Hom = self.hilbert(Omega)
+        if U is None:
+            U = self.velocity(Omega, Homega=Hom)
+        if Omega_X is None:
+            Omega_X = self.dX(Omega)
+        if V_X is None:
+            V_X = self.dX(V)
+        if Omega_XX is None:
+            Omega_XX = self.dX(Omega_X)
+        Om0, OmX0, OmXX0 = Omega[i0], Omega_X[i0], Omega_XX[i0]
+        V0, VX0 = V[i0], V_X[i0]
+        UX0 = Hom[i0]                            # U_X(0) = H(Omega)(0), node value
+        # rows in unknown order (c_l, c_omega, c_r):
+        A = [[0.0,   -Om0,   OmX0],
+             [0.0,   -2.0 * V0, VX0],
+             [OmX0,  -OmX0,  OmXX0]]
+        b = [V0, -UX0 * V0, VX0 - UX0 * OmX0]
+        c_l, c_omega, c_r = _solve_3x3(A, b)
+        return float(c_l), float(c_omega), float(c_r), U, Omega_X, V_X
+
+    def origin_gauges(self, Omega, V):
+        """Monitored invariants that (4.2) is meant to hold constant in tau:
+        (Omega(0), V(0), U_X(0)=H(Omega)(0)). Drift => gauge losing its grip."""
+        Hom = self.hilbert(Omega)
+        return float(Omega[self.i0]), float(V[self.i0]), float(Hom[self.i0])
+
+    # -- dynamics ---------------------------------------------------------
+    def rhs(self, Omega, V):
+        """(L_Omega, L_V, c_l, c_omega, c_r) for the modified system (4.1)."""
+        Hom = self.hilbert(Omega)
+        U = self.velocity(Omega, Homega=Hom)
+        Omega_X = self.dX(Omega)
+        V_X = self.dX(V)
+        Omega_XX = self.dX(Omega_X)
+        c_l, c_omega, c_r, U, Omega_X, V_X = self.gauge(
+            Omega, V, U=U, Omega_X=Omega_X, V_X=V_X, Omega_XX=Omega_XX, Hom=Hom)
+        U_X = Hom
+        speed = U + c_l * self.X + c_r
+        a_r = speed / self.dXdrho                     # bounded dilation speed in rho
+        transport_Om = a_r * _upwind_deriv(Omega, self.drho, a_r)
+        transport_V = a_r * _upwind_deriv(V, self.drho, a_r)
+        L_Om = c_omega * Omega + V - transport_Om
+        L_V = (2.0 * c_omega - U_X) * V - transport_V
+        if self.nu != 0.0:
+            L_Om = L_Om + self.nu * self._diff_rr(Omega)
+            L_V = L_V + self.nu * self._diff_rr(V)
+        return L_Om, L_V, c_l, c_omega, c_r
+
+    def _diff_rr(self, f):
+        """Second difference in the uniform rho coordinate (subgrid dissipation)."""
+        d = np.zeros_like(f)
+        d[1:-1] = (f[2:] - 2.0 * f[1:-1] + f[:-2]) / self.drho ** 2
+        return d
+
+    def step(self, Omega, V, dt):
+        """One SSPRK3 (Shu-Osher) step; returns (Om, V, c_l, c_omega, c_r, res)."""
+        L0o, L0v, c_l, c_omega, c_r = self.rhs(Omega, V)
+        o1, v1 = Omega + dt * L0o, V + dt * L0v
+        L1o, L1v, _, _, _ = self.rhs(o1, v1)
+        o2 = 0.75 * Omega + 0.25 * (o1 + dt * L1o)
+        v2 = 0.75 * V + 0.25 * (v1 + dt * L1v)
+        L2o, L2v, _, _, _ = self.rhs(o2, v2)
+        on = (1.0 / 3.0) * Omega + (2.0 / 3.0) * (o2 + dt * L2o)
+        vn = (1.0 / 3.0) * V + (2.0 / 3.0) * (v2 + dt * L2v)
+        res = float(max(np.abs(L0o).max(), np.abs(L0v).max()))
+        return on, vn, c_l, c_omega, c_r, res
+
+    def max_speed_rho(self, Omega, V):
+        """max |a(rho)| for the CFL, using the current gauge constants."""
+        c_l, c_omega, c_r, U, _, _ = self.gauge(Omega, V)
+        return float(np.abs((U + c_l * self.X + c_r) / self.dXdrho).max())
+
+    def run(self, Omega0, V0, dt_frac=0.3, tol=1e-6, max_steps=200000,
+            verbose=False, record_every=200):
+        """Relax (4.1) from (Omega0, V0) toward the regular Scenario-2 steady state.
+
+        Returns a result dict with (c_l, c_omega, c_r) histories -- the gauge-invariant
+        constants CHL report converging to (1.0636, -0.4235, 0.0765) -- the origin-gauge
+        monitors, and the final fields. No amplitude renormalization: (4.2) pins the
+        origin values, so the amplitude is fixed by the initial datum."""
+        Omega = np.array(Omega0, dtype=float)
+        V = np.array(V0, dtype=float)
+        a_max = self.max_speed_rho(Omega, V)
+        dt = dt_frac * self.drho / max(a_max, 1e-6)
+        tau = 0.0
+        cl_h, cw_h, cr_h, res_h, tau_h = [], [], [], [], []
+        om0_h, v0_h, ux0_h = [], [], []
+        res, c_l, c_omega, c_r = np.inf, np.nan, np.nan, np.nan
+        step = 0
+        for step in range(max_steps):
+            Omega, V, c_l, c_omega, c_r, res = self.step(Omega, V, dt)
+            tau += dt
+            if step % record_every == 0 or res < tol:
+                om0, v0, ux0 = self.origin_gauges(Omega, V)
+                cl_h.append(c_l); cw_h.append(c_omega); cr_h.append(c_r)
+                res_h.append(res); tau_h.append(tau)
+                om0_h.append(om0); v0_h.append(v0); ux0_h.append(ux0)
+                if verbose:
+                    print(f"    step {step:6d} tau={tau:8.3f} c_l={c_l:+.5f} "
+                          f"c_omega={c_omega:+.5f} c_r={c_r:+.5f} res={res:.2e}",
+                          flush=True)
+            if res < tol:
+                break
+            if not np.isfinite(res) or res > 1e8:
+                break
+        return {
+            "Omega": Omega, "V": V, "X": self.X, "rho": self.rho,
+            "c_l": c_l, "c_omega": c_omega, "c_r": c_r,
+            "residual": res, "tau": tau, "steps": step + 1,
+            "converged": bool(res < tol),
+            "c_l_hist": np.array(cl_h), "c_omega_hist": np.array(cw_h),
+            "c_r_hist": np.array(cr_h), "res_hist": np.array(res_h),
+            "tau_hist": np.array(tau_h), "Omega0_hist": np.array(om0_h),
+            "V0_hist": np.array(v0_h), "UX0_hist": np.array(ux0_h),
+        }
+
+
 class RescaledHLDynamic(RescaledHL):
     """Dynamic-relaxation integrator for the rescaled HL system (2.4), with the
     Chen-Huang-Li *degenerate-case* normalization gauge (their (3.2)).

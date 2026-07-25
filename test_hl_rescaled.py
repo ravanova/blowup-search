@@ -21,8 +21,9 @@ Run: python test_hl_rescaled.py
 import numpy as np
 
 from solver.hl_rescaled import (
-    RescaledHL, RescaledHLDynamic, sinh_grid_at, velocity,
-    omega_bar, H_omega_bar_exact, U_bar_exact, degenerate_ic,
+    RescaledHL, RescaledHLDynamic, RescaledHLScenario2, sinh_grid_at, velocity,
+    omega_bar, H_omega_bar_exact, U_bar_exact, degenerate_ic, scenario2_ic,
+    _solve_3x3,
 )
 
 PI = np.pi
@@ -155,6 +156,57 @@ def test_gauge_sidesteps_degeneracy():
     print("[ok] nonlocal H(Omega)(0) gauge is non-degenerate where the slope gauge fails")
 
 
+def test_solve_3x3_matches_reference():
+    """The hand-rolled Gaussian-elimination 3x3 solve (no scipy) matches numpy on
+    random well-conditioned systems, and raises on a singular one."""
+    rng = np.random.default_rng(0)
+    worst = 0.0
+    for _ in range(200):
+        A = rng.standard_normal((3, 3))
+        if abs(np.linalg.det(A)) < 1e-3:
+            continue
+        b = rng.standard_normal(3)
+        x = _solve_3x3(A, b)
+        worst = max(worst, float(np.abs(A @ x - b).max()),
+                    float(np.abs(x - np.linalg.solve(A, b)).max()))
+    print(f"    worst |A x - b| and |x - numpy| over random systems = {worst:.2e}")
+    assert worst < 1e-9, f"3x3 solve inaccurate: {worst:.2e}"
+    try:
+        _solve_3x3([[1, 2, 3], [2, 4, 6], [0, 1, 1]], [1, 2, 3])  # rows 1,2 dependent
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("singular 3x3 system did not raise")
+    print("[ok] hand-rolled 3x3 solve matches numpy and flags singular systems")
+
+
+def test_scenario2_gauge_nulls_origin_derivatives():
+    """KNOWN-ANSWER test of the Scenario-2 gauge (CHL (4.2)): by construction the
+    (c_l, c_omega, c_r) it returns must NULL d_tau Omega(0), d_tau Omega_X(0) and
+    d_tau V(0) of the modified system (4.1). Since that is exact linear algebra on the
+    discrete origin values, the three continuous time-derivatives at X=0 (with U(0)=0)
+    must vanish to machine precision -- the defining property of the origin-pinned
+    gauge, checked on generic non-symmetric positive data."""
+    s2 = RescaledHLScenario2(n=1201, c=0.5, rho_max=8.0)
+    Om, V = scenario2_ic(s2.X)
+    c_l, c_omega, c_r, U, Om_X, V_X = s2.gauge(Om, V)
+    i0 = s2.i0
+    Om_XX = s2.dX(Om_X)
+    UX0 = s2.hilbert(Om)[i0]                       # U_X(0) = H(Omega)(0), node value
+    Om0, OmX0, OmXX0 = Om[i0], Om_X[i0], Om_XX[i0]
+    V0, VX0 = V[i0], V_X[i0]
+    assert abs(OmX0) > 1e-3, "IC is origin-degenerate; Scenario-2 gauge needs Om_X(0)!=0"
+    # continuous d_tau of the three pinned quantities at X=0 (U(0)=0 exactly):
+    r1 = c_omega * Om0 + V0 - c_r * OmX0                          # d_tau Omega(0)
+    r2 = (2.0 * c_omega - UX0) * V0 - c_r * VX0                   # d_tau V(0)
+    r3 = c_omega * OmX0 + VX0 - (UX0 + c_l) * OmX0 - c_r * OmXX0  # d_tau Omega_X(0)
+    worst = max(abs(r1), abs(r2), abs(r3))
+    print(f"    (c_l,c_omega,c_r)=({c_l:+.4f},{c_omega:+.4f},{c_r:+.4f})  "
+          f"d_tau{{Om(0),Om_X(0),V(0)}} = ({r1:+.1e},{r3:+.1e},{r2:+.1e})")
+    assert worst < 1e-9, f"gauge fails to null origin time-derivatives: {worst:.2e}"
+    print("[ok] Scenario-2 gauge (4.2) nulls d_tau{Omega(0),Omega_X(0),V(0)} exactly")
+
+
 if __name__ == "__main__":
     test_velocity_smooth_known_pair()
     test_velocity_full_pipeline()
@@ -163,4 +215,6 @@ if __name__ == "__main__":
     test_constant_consistency_theta_equation()
     test_degenerate_gauge_known_answer()
     test_gauge_sidesteps_degeneracy()
+    test_solve_3x3_matches_reference()
+    test_scenario2_gauge_nulls_origin_derivatives()
     print("\nALL HL-RESCALED TESTS PASSED")
