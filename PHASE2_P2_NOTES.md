@@ -4,7 +4,10 @@ Status as of 2026-07-25. Newest context on top. This is the working doc; the ban
 record is writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md + fig12 (rebuilds from
 committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_evidence.py`).
 
-## TOP STATUS — validation anchor DONE; novelty leg NOT yet started
+## TOP STATUS — anchor DONE (§2); HH23 scout DONE (§5, NO-GO on the literal link); dynamic-
+## relaxation leg DONE (§6, Conjecture-2.4 LOCAL attractor confirmed at POC, global basin not —
+## PARTIAL/Tier-2, not novel, not a proof). NEXT = reassess: heavier numerics for the two-scale
+## probe, or bank + pivot. (Older context below is preserved; read §5 then §6 first.)
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -81,3 +84,86 @@ relaxation + degenerate-case normalization**:
 
 Honest odds unchanged: overall Clay ~0.05%. The realistic prize is novel toy-model singularity
 research + a shareable, data-backed writeup. This leg is the first genuine swing at it.
+
+## §5 — HH23 SCOUT (2026-07-25). Go/no-go on the flagged-open Hou–Huang link. Verdict: NO-GO on
+the literal link; the scout surfaced a SHARPER, 1D-tractable adjacent question. No logged run.
+
+Grounded in CHL (2604.01868) itself (pdftotext → grep, not vibes). Key passages: intro p.6
+(the "intriguing question"); §2.3 (two-scale mechanism); §3 conclusion (their two-STAGE finding).
+
+**What [HH23] actually is** — the CHL bibliography (not the paper; HH23 is not in Papers/):
+T. Y. Hou & D. Huang, *Potential singularity formation of incompressible axisymmetric Euler
+equations with degenerate viscosity coefficients*, MMS 21(1):218–268, 2023. A **numerical
+two-SCALE self-similar blowup of 3D axisymmetric Euler on ℝ³, with NO boundary**, smooth data.
+
+**What CHL actually claim about the link** (verbatim, intro): their singular profiles "share
+qualitative similarities with those observed in ... Hou–Huang [HH23], which suggested a potential
+two-scale self-similar blowup of 3D axisymmetric Euler ... in the absence of a boundary. Whether
+these phenomena are fundamentally linked remains an intriguing question." An *aspirational intro
+remark about profile appearance* — not a worked reduction.
+
+**The decisive structural mismatch (why NO-GO):**
+1. HH23 = two-**SCALE** (spatial multi-scale: a bulk traveling at r(t) in a coarse scale (T−t)^γ
+   + a fine inner scale (T−t)^γ̂; connected to traveling waves; the CHL eq-(2.8)/[HQW25] structure).
+2. CHL's HL result = two-**STAGE** (temporal: local L^∞ blowup at T̃ off-origin, then weak
+   continuation to an L^p blowup at the origin at T). And CHL **explicitly report NO numerical
+   evidence of a two-scale mechanism in HL** (§3: "we find no numerical evidence supporting a
+   two-scale blowup mechanism for the HL model analogous to that described in [HQW25]"). The very
+   feature that DEFINES HH23 (two-scale) is the one CHL looked for in HL and did NOT find.
+3. Geometry: 1D HL models the *boundary* behaviour of the Hou–Luo scenario. HH23 is *boundary-free*
+   ℝ³. The 1D HL model is not a reduction of the no-boundary 3D scenario.
+⇒ A 1D-HL machine cannot address "are they fundamentally linked" without overclaiming — that is a
+3D structural question, wrong geometry, and CHL's own data points AWAY from a shared mechanism.
+Chasing it as a "link to 3D Euler" would be exactly the self-deception WIN_CONDITION guards against.
+
+**The scout's payoff — the genuinely-open, 1D-tractable question hiding behind the remark:**
+the **two-scale-vs-two-stage question inside the 1D CLM/HL family.** The two-scale mechanism (the
+thing that *resembles* HH23) is PROVEN for the CLM model (Huang–Qin–Wang [HQW25], SIAM J Math Anal
+57(4):4068–4096, 2025) and was **conjectured by Liu [Liu17] for HL** — but CHL found HL is
+two-STAGE, not two-scale. That is a LIVE discrepancy (Liu's conjecture vs CHL's numerics), entirely
+in 1D, and CHL themselves pose it: "If singular profiles are observed, is their formation related
+to a two-scale blowup mechanism?" Our exact machinery (line_hilbert + rescaled HL + the
+dynamic-relaxation stepper we're about to build) is precisely the tool to settle it — track the
+peak LOCATION and test for a moving bulk at a coarse scale (two-scale signature) vs a τ→∞
+convergence to the fixed singular profile at X=1 (two-stage signature), across degeneracy classes.
+
+**Honesty ceiling on that too:** confirming CHL's "no two-scale in HL" = Tier-2 independent
+confirmation. Finding two-scale in some HL degeneracy class CHL missed (vindicating Liu) would be a
+genuinely new *1D* result — the better lottery ticket — but odds are it's absent (CHL looked), and
+even a positive is a 1D analogue, still NOT a proven link to 3D Euler.
+
+## §6 — DYNAMIC-RELAXATION LEG DONE (2026-07-25). Conjecture 2.4 at POC: LOCAL attractor
+confirmed, global basin not. PARTIAL / Tier-2-style. Full record: writeup/TECHNICAL_P2_CONJ24.md
++ BLOG_P2_CONJ24.md; fig13 from committed writeup/data/p2_conj24_relax.json
+(`python writeup/p2_conj24_evidence.py`). Logged harness (predicate locked in git first):
+experiments/p2_conj24_relax.py --logged. Machinery: solver/hl_rescaled.py::RescaledHLDynamic,
+test_hl_rescaled.py now 7/7.
+
+**The novel piece BUILT + VALIDATED: CHL's degenerate normalization gauge (their (3.2)).** The
+CHH22 gauge pins the origin slope Omega_x(0) = 0 for degenerate data (dead). CHL read the NONLOCAL
+U_X(0)=H(Omega)(0) (alive) for amplitude + c_l=-U(1) for location. Known-answer test on the exact
+Thm-2.3 anchor → (c_l,c_omega)=(1.949,-0.969)≈(2,-1); degeneracy sidestep: |Omega_x(0)|~1e-4 vs
+|H(Omega)(0)|~1.24. Two new unit tests.
+
+**The wall (diagnosed):** non-dissipative SSPRK3+upwind+spline is UNSTABLE at the singular profile
+— starting AT the regularized anchor, residual grows 25→1e9 by τ~1.4 (spline slopes ring at the
+X=1 discontinuity; the stiff Theta_X delta-source amplifies). Fix = subgrid dissipation nu*d²/ds²
+(a POC crutch, O(nu) profile bias, NOT CHL's WENO/adaptive mesh). Added as solver `nu` param.
+
+**Logged result (n=801, nu=0.02, 2500 steps; 9/9 pre-committed clauses PASS, PARTIAL by design):**
+- anchor hold → (c_l,c_omega)=(1.939,-0.927), res 180→3.4 plateau (stable HOLD, NOT →0), shape 4.9%.
+- 2 perturbations → same fixed point (within 0.06), res drops >5× → LOCAL asymptotic stability.
+- nu=0.04 → (1.936,-0.925), unchanged → fixed point robust to the stabilizer (not a nu artifact).
+- generic far degenerate IC → (0.680,-0.487), a DIFFERENT self-similar state (low res, wrong
+  constants, 29% shape) → GLOBAL basin beyond a fixed-grid POC (the honest predicted negative).
+
+**Honest status:** validated the degenerate gauge + the LOCAL stability of CHL's singular fixed
+point (independently reproduces the local content of a numerical-only claim). NOT achieved:
+residual→0 (POC dissipation floor) and the global basin. Both need WENO/adaptive mesh +
+vanishing-viscosity + semi-analytic X^{-1/2} outer patch (same tail fix as Spike-1 Step C).
+Tier-2-style, NOT novel, NOT a proof. 1D HL is a toy (boundary behaviour of Hou–Luo). Clay ~0.05%.
+
+**Next (reassess with user):** the genuinely-new leg is the §5 two-scale-vs-two-stage question
+(Liu conjecture vs CHL finding), which needs exactly the global-basin numerics above. Options:
+invest in the heavier numerics (WENO/adaptive/tail patch) to reach generic-data convergence + the
+two-scale probe, OR bank P2 as a shareable data-backed Tier-2 writeup and pivot.

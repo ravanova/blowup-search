@@ -3,6 +3,55 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — dynamic relaxation: Conjecture 2.4 (CHL) at POC, LOCAL attractor confirmed — 2026-07-25
+
+Full record: writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md; evidence fig13 from committed
+writeup/data/p2_conj24_relax.json (`python writeup/p2_conj24_evidence.py`). Logged harness
+experiments/p2_conj24_relax.py --logged (predicate LOGGED to git before the run). Machinery
+solver/hl_rescaled.py::RescaledHLDynamic + test_hl_rescaled.py (7/7). This IS a logged gate run.
+
+**Verdict: PARTIAL (by construction) — 9/9 pre-committed clauses hold.** The first genuine swing
+of the lottery-ticket leg. It reproduces the LOCAL content of a numerical-only conjecture — Tier-2
+independent confirmation, NOT novel, NOT a proof.
+
+The chosen path this session (with the user): *scout HH23 first, then build+validate the stepper,
+then reassess.* The HH23 scout (JOURNAL not needed — it's a read, banked in PHASE2_P2_NOTES.md §5)
+returned NO-GO on the literal 3D link (mechanism + geometry mismatch; would overclaim) but surfaced
+the real 1D-tractable question (two-scale vs two-stage). Then this run.
+
+What a human would want to know:
+
+- **The novel piece is the degenerate GAUGE, and it works.** CHH22 pins the origin slope
+  Omega_x(0), which is exactly 0 for degenerate data. CHL (their (3.2)) instead read the NONLOCAL
+  U_X(0)=H(Omega)(0) (nonzero even when the slope vanishes) + pin c_l=-U(1). Implemented and
+  validated as a KNOWN-ANSWER test on the proven Thm-2.3 anchor: (c_l,c_omega)=(1.949,-0.969)≈(2,-1).
+  A clean identity makes it a real test: at the anchor Theta_X-(U+c_l X)Omega_X = Omega_bar and
+  H(Omega_bar)(0)=-1 exactly (the delta at X=1 cancels analytically).
+
+- **Hit a real numerical wall and diagnosed it (didn't hand-wave).** The naive SSPRK3+upwind+spline
+  scheme is UNSTABLE at the singular profile: starting AT the regularized anchor the residual grows
+  25→3e3→1e9 and blows up by tau~1.4. Cause: non-dissipative spline slopes ring at the X=1
+  discontinuity; the stiff Theta_X delta-source amplifies it. Same class of difficulty that drove
+  CHL to adaptive mesh + WENO. Fix = subgrid dissipation nu*d²/ds² — a POC crutch (O(nu) bias), NOT
+  their industrial solution, but enough to ask the question.
+
+- **Locked the predicate BEFORE the logged run; 9/9 held; did NOT tune to pass.** Gauge-invariant
+  only, declared PARTIAL by construction. Result (n=801, nu=0.02, 2500 steps):
+  - anchor HOLD → (1.939,-0.927), residual 180→3.4 plateau (a stable hold, explicitly NOT →0),
+    shape rel-L2 4.9%.
+  - two perturbations → the SAME fixed point (within 0.06 in both constants), residual drop >5×:
+    the LOCAL asymptotic stability CHL only asserted.
+  - nu=0.04 → (1.936,-0.925), unchanged: the fixed point is robust to the stabilizer, not a
+    nu-artifact; the residual floor scales with nu (controllable, not a wall).
+  - generic far degenerate IC → (0.680,-0.487): it relaxes to a DIFFERENT self-similar state (low
+    residual, wrong constants, 29% shape). The honest predicted NEGATIVE — the GLOBAL basin is
+    beyond a fixed-grid POC. (Note the nuance: generic data doesn't blow up, it converges ELSEWHERE.)
+
+- **NOT achieved (on purpose, stated out loud):** residual→0 (POC dissipation floor) and the global
+  basin. Both need WENO/adaptive mesh + vanishing-viscosity + a semi-analytic X^{-1/2} outer patch
+  (the same tail fix flagged for Spike-1 Step C). The genuinely-new leg (two-scale vs two-stage,
+  §5) needs exactly those global-basin numerics — hence the reassessment point.
+
 ## Phase-2 P2 — the 1D Hou–Luo singular-profile machine, validated against an exact solution — 2026-07-25
 
 Full record: writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md; evidence fig12 from

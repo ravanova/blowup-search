@@ -72,7 +72,20 @@ and every figure is built from the small committed files in [`data/`](data/).
 14. **[BLOG_P2_HL_ANCHOR.md](BLOG_P2_HL_ANCHOR.md)** — the narrative companion: "We
     built a machine for singular blow-ups, and checked it against a shape we could
     solve by hand."
-15. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
+15. **[TECHNICAL_P2_CONJ24.md](TECHNICAL_P2_CONJ24.md)** — Phase-2 **P2**, the
+    dynamic-relaxation leg: the first genuine swing at CHL's **Conjecture 2.4**
+    (asymptotic stability of the singular profile — a claim they make *numerically
+    only*). Builds + validates CHL's **degenerate normalization gauge** (reads the
+    nonlocal `H(Ω)(0)` where the origin-slope gauge is dead), diagnoses the
+    singular-profile numerical wall, and — under a **git-locked, gauge-invariant
+    predicate (9/9)** — confirms the **local** attractor (perturbations relax back to
+    `(2,−1)`) while showing the **global basin** is beyond a fixed-grid POC. Figure
+    [`fig13`](figures/fig13_p2_conj24_relax.png). Honest scope: Tier-2-style partial
+    reproduction of a numerical claim — not novel, not a proof.
+16. **[BLOG_P2_CONJ24.md](BLOG_P2_CONJ24.md)** — the narrative companion: "Chasing a
+    singular attractor: what a laptop-scale solver can (and can't) say about a
+    conjecture."
+17. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
    to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
    upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
    which is the later Tier-3 computer-assisted-proof leg.)
@@ -93,6 +106,7 @@ and every figure is built from the small committed files in [`data/`](data/).
 | `fig10_spike1_stepB_rescaled.png` | Spike 1 Step B — rescaled solver `(ω,η,ξ)`: formulation chosen by data (η-slope read ~2× better), operator convergence (transport ~3rd, gradient ~2nd), and the `c_l` ratio-cancellation (~3e-16) |
 | `fig11_spike1_stepC_gate.png` | Spike 1 Step C — relax to the Chen–Hou profile (the gate, **PARTIAL**): `c_ω` matches to <0.5% and anisotropy to (2.24), far-field-exponent check fails; pre-committed predicate 3/4 |
 | `fig12_p2_hl_anchor.png` | Phase-2 P2 — 1D Hou–Luo singular-profile machine validated against the exact Chen–Huang–Li Thm 2.3 steady state `(X-1)^{-1/2}`: recovered velocity matches the derived exact `U̅` through the singularity, ½-order convergence, and the operator survives the singular core (tail truncation-limited). Validation, not novelty |
+| `fig13_p2_conj24_relax.png` | Phase-2 P2 — CHL **Conjecture 2.4** at POC: (A) gauge trajectories `(c_l,c_ω)→(2,−1)` for the anchor hold + two perturbations; (B) residual drop-and-plateau (hold/perturb) vs no-relaxation (generic IC); (C) endpoints — hold+perturbations cluster on the fixed point, generic sits off. LOCAL attractor confirmed (9/9 git-locked clauses); global basin beyond a fixed-grid POC. Tier-2 partial, not a proof |
 
 ## Evidence map ([`data/`](data/))
 
@@ -117,6 +131,7 @@ Every claim in the writeup traces to one of these committed files:
 | `spike1_stepB_rescaled.json` | Spike 1 Step B — formulation decision (η-slope vs primitive-θ read error), transport/gradient convergence, `c_l` ratio-cancellation | Spike 1 B / fig10 |
 | `spike1_stepC_gate.json` | Spike 1 Step C — the logged gate resolution study (`c_l,c_ω,α,`far-field,anisotropy per config) + the pre-committed predicate checks/verdict | Spike 1 C / fig11 |
 | `p2_hl_anchor.json` | Phase-2 P2 — the singular anchor: profile + exact/recovered velocity cut, δ-refinement convergence (velocity + steady residual), dense-operator error by `\|X-1\|` band vs reach `M`, and the 5 unit-test numbers | P2 / fig12 |
+| `p2_conj24_relax.json` | Phase-2 P2 — Conjecture-2.4 relaxation: `(c_l,c_ω)` + residual histories for the anchor hold, two perturbations, an `ν=0.04` robustness hold, and a generic-IC negative control; per-run summaries + the 9 git-locked predicate checks | P2 / fig13 |
 
 The raw, full logs these were distilled from live under `experiments/`
 (`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,
