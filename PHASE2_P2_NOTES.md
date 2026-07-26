@@ -18,9 +18,16 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 ## the GLOBAL-search infrastructure for the gCLM two-scale↔two-stage probe — the gCLM `a`-family
 ## rescaled residual (solver/gclm_family.py) + a generic GA engine (solver/ga_search.py); a=0
 ## one-scale known-answer gate PASSES (residual 2.2e-7; GA recovers the exact steady DILATION FAMILY,
-## invariant A²/B=4); diagnostic LOCKED. Validated tooling, NOT a science result — the two-scale
-## residual (moving frame + c_s) and the logged a-sweep are the next bricks.** Read §5→§6→§7→§8→§9.
-## Not novel, not a proof.
+## invariant A²/B=4); diagnostic LOCKED. Validated tooling, NOT a science result.** **TWO-SCALE
+## a-SWEEP DONE + LOGGED (§9, 2026-07-26): derived the two-scale residual R₂=ΩHΩ−c_tw Ω_X−a U Ω_X
+## (HQW25's moving-frame ansatz → leading order = a PURE TRAVELING WAVE; a=0 anchor Ω₂=−1/(1+X²)
+## nulls to 1.5e-9, c_tw=1/2), locked predicate T1–T6, logged GA sweep 5/6 PARTIAL. Result: HQW25's
+## exact a=0 two-scale traveling wave DEFORMS SMOOTHLY under advection — persists (relres<1e-2) to
+## a_p≈0.40, floor rises to 0.18 at a=1 (De Gregorio), STAYS EVEN, no sharp collapse. T4 FAIL (honest):
+## mid-range floor is partly GENOME-LIMITED (K=3 cuts a=0.5 floor 4×) → genome-relative upper bound,
+## survival boundary not sharply pinned; BUT a=1 degradation robust to K=3. NOVEL toy-model result
+## (Tier-1/2), NOT a proof, NOT a Clay solve.** Read §5→§6→§7→§8→§9.
+## Not novel-enough-to-be-a-proof; a genuine map.
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -318,9 +325,47 @@ lesson appearing in the optimization landscape itself.
 - **Resolution guard (mandatory):** D1 valid only while L_wid spans ≳8 grid pts; below → INCONCLUSIVE
   / "needs adaptive mesh", NEVER "scales merged" (same floor that capped B1/§6).
 
-**HONEST SCOPE / NEXT BRICK.** The residual encodes the ONE-scale ansatz; HQW25's two-scale object has
-a moving frame r(t)(T−t)^{1/2} + the extra exponent c_s — a richer ansatz **NOT yet built**, so Ω₂ is
-not yet a residual-null here (only the one-scale anchor is). Build the two-scale residual + anchor it on
-Ω₂ at a=0 → THEN lock a predicate for the logged a-sweep (map D1/D2 vs `a`). This session earned the
-validated tooling + locked diagnostic, honestly short of the probe's first scientific result. Clay odds
-unchanged ~0.05%.
+**DIAGNOSTIC REFINED AT DERIVATION TIME (honest correction to the pre-derivation D1/D2 above).** Once
+the two-scale residual was actually derived (below), "two-scale" turned out to mean an EVEN, TRAVELING
+(c_tw≠0) localized profile — a pure traveling wave, NOT a dilation scale-separation object. So the
+logged sweep measures the scale-invariant residual FLOOR + the traveling speed c_tw + the profile
+symmetry/width, not the L_wid/L_loc slope. The resolution guard (≳8 grid pts, else INCONCLUSIVE) was
+kept verbatim and PASSED (min 49 pts). D1/D2's exponent framing belongs to the *blowup*, not the
+traveling-wave *profile* the GA maps; noting the swap here so the record is honest.
+
+### §9 (cont.) — TWO-SCALE RESIDUAL DERIVED + a-SWEEP LOGGED (2026-07-26). 5/6 PARTIAL. Novel, Tier-1/2.
+
+**THE DERIVATION (the hard part, now done).** HQW25 §2.4: the two-scale blowup profile is an EXACT
+TRAVELING WAVE. Carry ω=(T−t)^{c_ω}Ω(z), z=(x−r(t)(T−t)^{c_s})/(T−t)^{c_l} (c_ω=−3/2,c_l=1,c_s=1/2)
+through gCLM ω_t+a u ω_x=ωHω. Leading (T−t)^{−3} balance: the dilation −c_l XΩ_X and amplitude c_ω Ω
+terms are SUBLEADING ((T−t)^{−5/2}) and DROP; the moving-frame term survives as a pure TRANSLATION.
+Advection enters at the SAME order as stretching. Result:
+  **R₂(Ω) = Ω H(Ω) − c_tw Ω_X − a U Ω_X**,  U=∫₀ˣHΩ,  c_tw=c_s·r  (traveling-wave speed = gauge).
+STRUCTURALLY a translation (const×Ω_X), NOT the one-scale dilation (X×Ω_X). a=0 anchor (a=b=c=1 norm):
+**Ω₂=−1/(1+X²), H(Ω₂)=−X/(1+X²), c_tw=1/2**; nulls R₂ to **1.5e-9**. EVERY even_lorentz A/(1+BX²) is an
+exact a=0 TW with c_tw=−A/(2√B) → a=0 set is a **2-parameter scaling valley** (deeper form of "report
+invariants"). Code: solver/gclm_family.py::{residual_two_scale, gauge_c_tw, residual_two_scale_relnorm,
+clm_two_scale, rational_mixed}; tests test_gclm_family.py 11/11 (full suite 7 files green).
+
+**THE FITNESS BUG (caught pre-lock).** Plain RMS ‖R₂‖ is NOT scale-invariant — GA drives amplitude→0
+(c_tw→0), trivial null (scratch showed it). Use **relres=‖R₂‖/‖ΩHΩ‖** (scale-invariant; one-scale Ω₀
+scores >0.1, not gamed). Pre-lock scout: floor INVARIANT across n=601/801/1201 & rho_max=8/10 (physical,
+not tail artifact) + GA-converged. Config locked n=801, 6 seeds; predicate T1–T6 in the harness docstring,
+committed 6fc1ff0 before the run.
+
+**RESULT (5/6, commit-after-run).** T1 known-answer PASS (a=0 relres 5.8e-8). T2 persistence PASS
+(a_p=0.40, relres<1e-2). T3 monotone-degradation PASS (floor→0.18 at a=1). T5 symmetry PASS (odd-frac
+<0.013; mixed genome free to skew STAYS EVEN). T6 resolution-guard PASS (min 49 pts). **T4 FAIL =
+GENOME-LIMITED (the honest headline):** at a=0.5 even-K3 cuts floor 4× (2.45e-2→5.6e-3) → K=2 map is a
+genome-relative UPPER BOUND, survival boundary NOT sharply pinned (pre-committed INCONCLUSIVE branch,
+reported). BUT a=1 K=3 does NOT rescue (1.83e-1→1.43e-1) → De Gregorio-end degradation robust.
+**Picture:** HQW25's exact a=0 two-scale traveling wave DEFORMS SMOOTHLY under advection — no sharp
+collapse, persists small-a, degrades to De Gregorio, stays even, advection SELECTS a scale (lifts the
+valley). Fig17 (writeup/p2_two_scale_sweep_evidence.py, rebuilds from writeup/data/p2_two_scale_sweep.json).
+TECHNICAL/BLOG_P2_TWO_SCALE.md.
+
+**HONEST CEILING + NEXT.** A GA proves nothing (Tier-1/2); this is a genuine NEW MAP (HQW25 anchor + §9
+machinery), the lottery ticket's first scientific brick — but NOT a proof, NOT a Clay solve. Did NOT
+re-run to chase T4 (the fail is the machine catching its own limit). NEXT candidates: (a) richer/spectral
+genome or a Route-D interval-Newton on these guesses to sharpen a_p; (b) the SEPARATE coupled-system leg
+(HL two-stage — HL is not a scalar gCLM member). Clay odds unchanged ~0.05%.

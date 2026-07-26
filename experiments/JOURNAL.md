@@ -3,6 +3,57 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — TWO-SCALE-under-advection a-sweep — LOGGED (5/6, PARTIAL) — 2026-07-26
+
+**LOGGED gate run** (predicate T1–T6 LOCKED in git before the run, commit 6fc1ff0).
+Data: committed `writeup/data/p2_two_scale_sweep.json`; harness
+`experiments/p2_two_scale_sweep.py --logged`; writeups TECHNICAL/BLOG_P2_TWO_SCALE
++ fig17 (rebuilds from JSON via `writeup/p2_two_scale_sweep_evidence.py`);
+PHASE2_P2_NOTES.md §9. Verdict **5/6 clauses, PARTIAL by construction** — a NOVEL
+toy-model result (Tier-1/2), NOT a proof, NOT a Clay solve.
+
+What a human would want to know:
+
+- **The question.** HQW25 (arXiv:2401.14615) proves CLM (a=0) has an EXACT two-scale
+  self-similar blowup whose profile is a TRAVELING WAVE Ω₂=−1/(1+X²). Does that
+  mechanism survive gCLM advection as `a` grows (a=0 CLM → a=1 De Gregorio)? Nobody
+  had mapped it. This is the novelty swing the user chose.
+
+- **What we built + derived.** The two-scale residual R₂=ΩHΩ − c_tw Ω_X − a U Ω_X:
+  carried HQW25's moving-frame ansatz to its leading (T−t)^{−3} order → a PURE
+  TRAVELING WAVE (the dilation −c_l XΩ_X and amplitude c_ω Ω terms are subleading and
+  DROP). Structurally a TRANSLATION, not a dilation. a=0 known-answer gate: Ω₂ nulls
+  R₂ to 1.5e-9, gauge speed c_tw=0.5000000; EVERY even_lorentz A/(1+BX²) is an exact
+  a=0 TW with c_tw=−A/(2√B) → the a=0 set is a 2-parameter scaling valley.
+
+- **The GA-cheats bug we caught pre-lock.** Plain RMS ‖R₂‖ is NOT scale-invariant —
+  a GA drives amplitude→0 (c_tw→0), a trivial null. Switched to the scale-invariant
+  relres=‖R₂‖/‖ΩHΩ‖ (fraction of stretching unaccounted). The scratch literally
+  showed the pathology first; fixing it is why the result is trustworthy.
+
+- **Pre-lock robustness scout (grounds the thresholds).** The floor curve is INVARIANT
+  across n=601/801/1201 and rho_max=8/10 (physical, not a tail artifact) and
+  GA-converged (2.5× budget barely moves it). Config locked n=801, 6 seeds.
+
+- **Result (5/6).** T1 known-answer PASS (5.8e-8). T2 persistence PASS: relres<1e-2
+  out to a_p=0.40 (deformed-but-present traveling profile). T3 monotone-degradation
+  PASS: floor rises to 1.8e-1 at a=1. T5 symmetry PASS: odd-fraction<0.013 throughout
+  (mixed genome free to skew, STAYS EVEN). T6 resolution-guard PASS (min 49 pts).
+  **T4 FAIL (the honest headline):** at a=0.5 a richer even K=3 ansatz cuts the floor
+  4× (2.45e-2→5.6e-3), so the mid-range floor is partly GENOME-LIMITED — the K=2 map
+  is a genome-relative UPPER BOUND, the survival boundary is NOT sharply pinned. This
+  is exactly the pre-committed INCONCLUSIVE branch, reported not hidden. BUT at a=1
+  K=3 does NOT rescue (1.83e-1→1.43e-1) → the De Gregorio-end degradation is robust.
+
+- **Honest picture.** No sharp collapse: the two-scale traveling wave DEFORMS SMOOTHLY,
+  persists well for small a, degrades toward De Gregorio, stays even, and advection
+  SELECTS a scale (lifts the a=0 valley). Endpoints robust; middle genome-relative.
+
+- **Discipline held.** Did NOT re-run to chase T4 into a pass. The T4 fail is the
+  machine catching its own limitation — the right outcome. Next: richer/spectral
+  genome to sharpen a_p (or a Route-D interval-Newton on these guesses); separately,
+  the coupled-system HL two-stage leg. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — GA GLOBAL-SEARCH FRAMEWORK (BUILD/scout, NOT a logged gate run) — 2026-07-26
 
 **Infrastructure build + a=0 known-answer validation. No logged experimental run; no science claim.**
