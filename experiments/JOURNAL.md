@@ -3,6 +3,46 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — GA GLOBAL-SEARCH FRAMEWORK (BUILD/scout, NOT a logged gate run) — 2026-07-26
+
+**Infrastructure build + a=0 known-answer validation. No logged experimental run; no science claim.**
+Banked record: PHASE2_P2_NOTES.md §9 + writeup/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md
++ fig16 (rebuilds from committed writeup/data/p2_ga_framework.json). Code: solver/gclm_family.py,
+solver/ga_search.py; tests test_gclm_family.py (6/6; full suite 7/7).
+
+What a human would want to know:
+
+- **What the user asked for.** Pursue the gCLM two-scale↔two-stage transition (the novelty swing),
+  and do it VIA a genetic algorithm (their idea), built to also serve Route D. Then: gCLM axis first,
+  bridge to HL later.
+
+- **What we built.** A GLOBAL search for self-similar profiles: the gCLM `a`-family rescaled residual
+  R = (c_ω+HΩ)Ω − c_l XΩ_X − a U Ω_X (solver/gclm_family.py, velocity U=∫₀ˣHΩ cached) + a generic,
+  problem-agnostic real-coded GA (solver/ga_search.py). Deliberately separate from the relaxation
+  solvers so the SAME residual object is reusable by a future Route-D interval-Newton certification.
+
+- **Why a GA (honest, said to the user).** Relaxation is LOCAL — it finds the attractor you seed near.
+  A family can have MULTIPLE fixed points (different blowup mechanisms); a GLOBAL search maps the set +
+  bifurcations = the open two-scale↔two-stage question. A GA proves nothing (Tier-1/2); its roles are
+  the global mapper + the "guess" stage for Route D.
+
+- **Fetched the missing anchor.** [HQW25] = arXiv:2401.14615 (Huang–Qin–Wang) downloaded to Papers/.
+  Gives the EXACT a=0 two-scale profile Ω₂ (an even Lorentzian bump, c_ω=−3/2). Also corrected the
+  framing: HQW25 two-scale = CLM (a=0, scalar gCLM); CHL two-stage = HL coupled system (different
+  axis). Well-posed gCLM question: does the a=0 two-scale survive advection as `a` grows?
+
+- **a=0 gate PASSES.** Exact Ω₀ nulls the residual to 2.2e-7; the GA recovers the exact steady set — as
+  a 1-parameter DILATION family (gauge is dilation-invariant), so only the invariant A²/B=4.000 is a
+  "match". The banked "report gauge-invariants only" lesson literally showed up as a valley (not a
+  basin) in the GA landscape (Fig16A). Nice confirmation the discipline is right.
+
+- **Diagnostic LOCKED (pre-run):** D1 scale-separation L_wid/L_loc→0 (slope c_l/c_s=2) ⟺ two-scale;
+  D2 invariant c_l/c_ω=−2/3 vs −1; resolution guard → INCONCLUSIVE below ~8 grid pts, never "merged".
+
+- **Honest stop.** The residual is ONE-scale; HQW25's two-scale ansatz (moving frame + c_s) is NOT yet
+  built, so Ω₂ isn't a residual-null here yet. That two-scale residual + its Ω₂ gate is the next brick,
+  THEN a locked predicate + the logged a-sweep. Validated tooling, not the ticket. Clay odds ~0.05%.
+
 ## Phase-2 P2 — B1 LOGGED: CHL Scenario 2 reproduced via the modified rescaling (4.1)/(4.2) — 2026-07-26
 
 **LOGGED gate run** (predicate LOCKED in git before the run, commit b5294ff). Data:

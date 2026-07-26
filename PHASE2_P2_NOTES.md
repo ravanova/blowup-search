@@ -14,7 +14,13 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 ## reachable on a fixed grid and mostly re-confirms CHL. **B1 DONE (§8, 2026-07-26): implemented
 ## CHL's (4.1)/(4.2), logged run 5/5 PARTIAL — the invariant exponent c_l/c_ω → −2.533 (CHL
 ## −2.5114) as a genuine IC-independent attractor to a regular positive profile; res floors ~2e-2,
-## absolute triple normalization-dependent.** Read §5 → §6 → §7 → §8. Not novel, not a proof.
+## absolute triple normalization-dependent.** **GA FRAMEWORK DONE (§9, 2026-07-26): built + validated
+## the GLOBAL-search infrastructure for the gCLM two-scale↔two-stage probe — the gCLM `a`-family
+## rescaled residual (solver/gclm_family.py) + a generic GA engine (solver/ga_search.py); a=0
+## one-scale known-answer gate PASSES (residual 2.2e-7; GA recovers the exact steady DILATION FAMILY,
+## invariant A²/B=4); diagnostic LOCKED. Validated tooling, NOT a science result — the two-scale
+## residual (moving frame + c_s) and the logged a-sweep are the next bricks.** Read §5→§6→§7→§8→§9.
+## Not novel, not a proof.
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -261,3 +267,60 @@ fixed grid floors the residual at ~2e-2 (CHL reach 1e-6 with an adaptive mesh). 
 scenarios now reproduced** (§2 singular Stage-2 anchor + §8 regular Stage-2/Scenario-2 exponent).
 Tier-2 consolidation. The lottery ticket still lives elsewhere — the gCLM two-scale↔two-stage
 transition (uses the now-validated origin-pinned gauge machinery) or a rigor step on Conj 2.4.
+
+## §9 — GA GLOBAL-SEARCH FRAMEWORK DONE (2026-07-26). Validated INFRASTRUCTURE for the gCLM two-scale↔two-stage probe. NOT a science result.
+
+Banked record: writeup/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md + fig16 (rebuilds from
+committed writeup/data/p2_ga_framework.json via `python writeup/p2_ga_framework_evidence.py`).
+Code: solver/gclm_family.py, solver/ga_search.py; tests test_gclm_family.py (6/6; full suite **7/7**).
+
+**The user's steer this session:** pursue the gCLM two-scale↔two-stage transition as the novelty
+swing, and do it VIA a genetic algorithm (their idea) — build the GA so it also serves Route D. Target
+chosen (with the user): **gCLM axis first (anchored, tractable), then bridge to HL.**
+
+**Why a GA (honest).** The self-similar profile is a fixed point of a rescaled flow; a family can have
+MULTIPLE fixed points (different mechanisms). Relaxation (§6, §8) is LOCAL — slides into the attractor
+you seed near, blind to the rest. A GLOBAL search over (shape + exponents) can map the fixed-point set
+and its bifurcations = the open two-scale↔two-stage question. A GA proves nothing (Tier-1/2 only); its
+two honest roles are (i) this global mapper and (ii) the "guess" stage for a Route-D interval-Newton
+certification. Framework built to serve both (the residual object is reusable).
+
+**Key upstream fact banked.** The two-scale ANCHOR paper is **[HQW25] = arXiv:2401.14615** (Huang–Qin–
+Wang, SIAM J Math Anal 57(4) 2025) — downloaded to Papers/2401.14615v_HQW25.pdf (gitignored). It gives
+the EXACT a=0 two-scale profile Ω₂(z) = −a³b^{3/2}c/(a⁴c²+b⁴z²) (an EVEN Lorentzian bump, c_ω=−3/2,
+c_l=1, c_s=1/2) — a clean known answer for the two-scale end. NOTE the original "bisect in `a` between
+CLM and HL" framing was corrected: HQW25 two-scale is CLM=a=0 (scalar gCLM family); CHL two-stage is
+the HL COUPLED (ω,θ) system — NOT the same `a`-axis. So the well-posed gCLM-axis question is: **does
+HQW25's a=0 two-scale mechanism survive advection as `a` grows?** (bridge to HL is a separate later leg).
+
+**What was BUILT + VALIDATED:**
+- `solver/gclm_family.py::GCLMResidual` — the gCLM `a`-family rescaled steady residual
+  R = (c_ω+HΩ)Ω − c_l XΩ_X − a U Ω_X, with velocity U=∫₀ˣHΩ (cached cumulative-trapezoid `Vmat`,
+  U(0)=0), on the sinh grid, reusing the dense line-Hilbert operator. SEPARATE from the relaxation
+  solvers (this evaluates a candidate's residual; they time-step). `a` is a sweep parameter.
+- `solver/ga_search.py::ga_minimize` — generic real-coded GA (tournament + BLX-α + annealed Gaussian
+  mutation + elitism; no scipy; deterministic per seed). Problem-agnostic (Route-D reusable).
+- Parametric genomes: `odd_rational` (one-scale/De-Gregorio; K=1 @ (−4,4) = exact Ω₀), `even_lorentz`
+  (two-scale bump symmetry).
+
+**a=0 KNOWN-ANSWER GATE (passes):** exact Ω₀=−4X/(1+4X²) nulls R to RMS **2.2e-7** (c_ω=−0.99914);
+velocity integrates to arctan(2X) (bulk err 8.5e-3; tail error where Ω_X→0, harmless); odd parity
+1e-13; a≠0 breaks the a=0 profile (R climbs ~linearly in a — the map's target). The GA recovers the
+exact steady set — but as a **1-parameter DILATION FAMILY** {A=−4β,B=4β²}: the rescaling gauge is
+dilation-invariant, so only the invariant **A²/B=4.000** (and the shape) is a "match" (Fig16A = a
+valley, not a basin). Pinning B=4 → A=−3.9999. This is the banked "report gauge-invariants only"
+lesson appearing in the optimization landscape itself.
+
+**DIAGNOSTIC LOCKED (the crux, pre-any-logged-run):**
+- **D1 scale separation (primary):** L_wid/L_loc → 0 with log-log slope c_l/c_s=2 ⟺ two-scale;
+  O(1) ⟺ one-scale.
+- **D2 blowup power (confirm):** invariant c_l/c_ω = −2/3 (two-scale, c_ω=−3/2) vs −1 (one-scale).
+- **Resolution guard (mandatory):** D1 valid only while L_wid spans ≳8 grid pts; below → INCONCLUSIVE
+  / "needs adaptive mesh", NEVER "scales merged" (same floor that capped B1/§6).
+
+**HONEST SCOPE / NEXT BRICK.** The residual encodes the ONE-scale ansatz; HQW25's two-scale object has
+a moving frame r(t)(T−t)^{1/2} + the extra exponent c_s — a richer ansatz **NOT yet built**, so Ω₂ is
+not yet a residual-null here (only the one-scale anchor is). Build the two-scale residual + anchor it on
+Ω₂ at a=0 → THEN lock a predicate for the logged a-sweep (map D1/D2 vs `a`). This session earned the
+validated tooling + locked diagnostic, honestly short of the probe's first scientific result. Clay odds
+unchanged ~0.05%.
