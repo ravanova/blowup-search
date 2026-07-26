@@ -7,7 +7,7 @@ closed. This is the "where next / don't lose track" document; the concrete
 build-out stages live in [PLAN.md](PLAN.md), the banked results in
 [writeup/](writeup/).
 
-Read [writeup/SUMMARY.md](writeup/SUMMARY.md) first for what is already done.
+Read [writeup/1_gclm_1d/SUMMARY.md](writeup/1_gclm_1d/SUMMARY.md) first for what is already done.
 
 ---
 

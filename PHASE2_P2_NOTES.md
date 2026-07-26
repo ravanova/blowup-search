@@ -1,8 +1,8 @@
 # Phase-2 P2 working notes — the lottery-ticket leg (1D Hou–Luo singular profiles)
 
 Status as of 2026-07-25. Newest context on top. This is the working doc; the banked
-record is writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md + fig12 (rebuilds from
-committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_evidence.py`).
+record is writeup/4_p2_lottery/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md + fig12 (rebuilds from
+committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_anchor_evidence.py`).
 
 ## TOP STATUS — anchor DONE (§2); HH23 scout DONE (§5, NO-GO on the literal link); dynamic-
 ## relaxation leg DONE (§6, Conjecture-2.4 LOCAL attractor confirmed at POC, global basin not —
@@ -174,9 +174,9 @@ genuinely new *1D* result — the better lottery ticket — but odds are it's ab
 even a positive is a 1D analogue, still NOT a proven link to 3D Euler.
 
 ## §6 — DYNAMIC-RELAXATION LEG DONE (2026-07-25). Conjecture 2.4 at POC: LOCAL attractor
-confirmed, global basin not. PARTIAL / Tier-2-style. Full record: writeup/TECHNICAL_P2_CONJ24.md
+confirmed, global basin not. PARTIAL / Tier-2-style. Full record: writeup/4_p2_lottery/TECHNICAL_P2_CONJ24.md
 + BLOG_P2_CONJ24.md; fig13 from committed writeup/data/p2_conj24_relax.json
-(`python writeup/p2_conj24_evidence.py`). Logged harness (predicate locked in git first):
+(`python writeup/4_p2_lottery/p2_conj24_evidence.py`). Logged harness (predicate locked in git first):
 experiments/p2_conj24_relax.py --logged. Machinery: solver/hl_rescaled.py::RescaledHLDynamic,
 test_hl_rescaled.py now 7/7.
 
@@ -298,8 +298,8 @@ transition (uses the now-validated origin-pinned gauge machinery) or a rigor ste
 
 ## §9 — GA GLOBAL-SEARCH FRAMEWORK DONE (2026-07-26). Validated INFRASTRUCTURE for the gCLM two-scale↔two-stage probe. NOT a science result.
 
-Banked record: writeup/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md + fig16 (rebuilds from
-committed writeup/data/p2_ga_framework.json via `python writeup/p2_ga_framework_evidence.py`).
+Banked record: writeup/4_p2_lottery/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md + fig16 (rebuilds from
+committed writeup/data/p2_ga_framework.json via `python writeup/4_p2_lottery/p2_ga_framework_evidence.py`).
 Code: solver/gclm_family.py, solver/ga_search.py; tests test_gclm_family.py (6/6; full suite **7/7**).
 
 **The user's steer this session:** pursue the gCLM two-scale↔two-stage transition as the novelty
@@ -382,7 +382,7 @@ genome-relative UPPER BOUND, survival boundary NOT sharply pinned (pre-committed
 reported). BUT a=1 K=3 does NOT rescue (1.83e-1→1.43e-1) → De Gregorio-end degradation robust.
 **Picture:** HQW25's exact a=0 two-scale traveling wave DEFORMS SMOOTHLY under advection — no sharp
 collapse, persists small-a, degrades to De Gregorio, stays even, advection SELECTS a scale (lifts the
-valley). Fig17 (writeup/p2_two_scale_sweep_evidence.py, rebuilds from writeup/data/p2_two_scale_sweep.json).
+valley). Fig17 (writeup/4_p2_lottery/p2_two_scale_sweep_evidence.py, rebuilds from writeup/data/p2_two_scale_sweep.json).
 TECHNICAL/BLOG_P2_TWO_SCALE.md.
 
 **HONEST CEILING + NEXT.** A GA proves nothing (Tier-1/2); this is a genuine NEW MAP (HQW25 anchor + §9
@@ -397,7 +397,7 @@ The first brick on the RIGOR LADDER (Level-1→Level-2). Delivered: (a) a hand-r
 interval-arithmetic core solver/interval.py (no scipy/mpmath; outward-rounded +−×÷, reciprocal,
 isum/dot/matvec with the γ_m accumulation bound) + test_interval.py 5/5 gated with `fractions` as the
 exact oracle (full suite now 8 files green); (b) the deterministic a=0 probe experiments/p2_route_d_probe.py
-→ writeup/data/p2_route_d_probe.json → fig19 (writeup/p2_route_d_evidence.py). NOT a logged Tier run (no GA,
+→ writeup/data/p2_route_d_probe.json → fig19 (writeup/4_p2_lottery/p2_route_d_evidence.py). NOT a logged Tier run (no GA,
 no seeds, no predicate lock — every number is a deterministic property of the anchor + fixed operators).
 BLOG/TECHNICAL_P2_ROUTED.md.
 
@@ -419,7 +419,7 @@ FOUR evidence pieces (all banked, do not relearn):
      θ=±π Cayley endpoint correction = flagged sub-task R). Banded ⇒ finite-section NK bounds Z₀+Z₁<1 are
      PLAUSIBLE (tail dominated by c·(ik), O(1/(cN)) inverse bound).
 
-THE FRAMING (writeup/TECHNICAL_P2_ROUTED.md §7; full paper draft was scratch/ROUTE_D_FRAMING.md). Standard
+THE FRAMING (writeup/4_p2_lottery/TECHNICAL_P2_ROUTED.md §7; full paper draft was scratch/ROUTE_D_FRAMING.md). Standard
 radii-polynomial NK: Y₀≥‖A F(x̄)‖, Z₀≥‖I−AA†‖, Z₁≥‖A(A†−DF)‖, Z₂≥‖A·D²F‖; p(r)=Z₂r²−(1−Z₀−Z₁)r+Y₀;
 CLOSES iff Z₀+Z₁<1 and (1−Z₀−Z₁)²≥4Y₀Z₂. Two real simplifications: F QUADRATIC ⇒ Z₂ constant (no 3rd-order
 term); anchor a finite trig poly ⇒ zero convolution tail. Space: weighted ℓ¹_ν cosine coeffs ⊕ ℝ.

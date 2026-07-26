@@ -209,7 +209,7 @@ the Chen–Hou profile is **Step C** (unproven until run).
 profile; check shape + `α ≈ −1/3` / `c_l/c_ω ≈ −2.92`, resolution-stable. Pre-committed
 predicate written before the logged run.
 
-**STEP C DONE — PARTIAL (2026-07-25).** Full record: writeup/TECHNICAL_SPIKE1_STEPC.md,
+**STEP C DONE — PARTIAL (2026-07-25).** Full record: writeup/3_spikes/TECHNICAL_SPIKE1_STEPC.md,
 JOURNAL. **3 of 4 pre-committed checks pass; the far-field-exponent check FAILS → does NOT pass
 the gate (goalposts not moved).** Diagnosed the initial relaxation *drift* as a near-origin
 truncation artifact (`experiments/diagnose_stepC_drift.py`: halves under `n_r`, worsens with

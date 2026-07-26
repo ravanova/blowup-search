@@ -9,7 +9,7 @@ answer "what happened"; this records *why* and what a human noticed).
 seeds, no predicate lock; every number is a property of the fixed anchor +
 operators). Recorded here because it produces committed data + a figure. Data
 `writeup/data/p2_route_d_probe.json` (regen `python experiments/p2_route_d_probe.py`);
-figure fig19 (`writeup/p2_route_d_evidence.py`); writeups TECHNICAL/BLOG_P2_ROUTED;
+figure fig19 (`writeup/4_p2_lottery/p2_route_d_evidence.py`); writeups TECHNICAL/BLOG_P2_ROUTED;
 PHASE2_P2_NOTES.md §10. Code: `solver/interval.py` + `test_interval.py` (5/5, suite
 now 8 files green). This is the FIRST brick on the rigor ladder (Level-1→Level-2);
 it is validated tooling + a framing result, **NOT a certificate**.
@@ -50,7 +50,7 @@ What a human would want to know:
 **LOGGED gate run** (predicate T1–T7 LOCKED in git before the run, commit 44a507c).
 Data: committed `writeup/data/p2_two_scale_kladder.json`; harness
 `experiments/p2_two_scale_kladder.py --logged`; writeups TECHNICAL/BLOG_P2_KLADDER
-+ fig18 (rebuilds from JSON via `writeup/p2_two_scale_kladder_evidence.py`);
++ fig18 (rebuilds from JSON via `writeup/4_p2_lottery/p2_two_scale_kladder_evidence.py`);
 PHASE2_P2_NOTES.md §9-cont2. Verdict **7/7 clauses hold** — a NOVEL toy-model
 characterization (Tier-1/2), NOT a proof, NOT a Clay solve. This SHARPENS the prior
 leg's T4 FAIL (the honest one): it turns the "genome-relative soft boundary" caveat
@@ -112,7 +112,7 @@ What a human would want to know:
 **LOGGED gate run** (predicate T1–T6 LOCKED in git before the run, commit 6fc1ff0).
 Data: committed `writeup/data/p2_two_scale_sweep.json`; harness
 `experiments/p2_two_scale_sweep.py --logged`; writeups TECHNICAL/BLOG_P2_TWO_SCALE
-+ fig17 (rebuilds from JSON via `writeup/p2_two_scale_sweep_evidence.py`);
++ fig17 (rebuilds from JSON via `writeup/4_p2_lottery/p2_two_scale_sweep_evidence.py`);
 PHASE2_P2_NOTES.md §9. Verdict **5/6 clauses, PARTIAL by construction** — a NOVEL
 toy-model result (Tier-1/2), NOT a proof, NOT a Clay solve.
 
@@ -161,7 +161,7 @@ What a human would want to know:
 ## Phase-2 P2 — GA GLOBAL-SEARCH FRAMEWORK (BUILD/scout, NOT a logged gate run) — 2026-07-26
 
 **Infrastructure build + a=0 known-answer validation. No logged experimental run; no science claim.**
-Banked record: PHASE2_P2_NOTES.md §9 + writeup/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md
+Banked record: PHASE2_P2_NOTES.md §9 + writeup/4_p2_lottery/TECHNICAL_P2_GA_FRAMEWORK.md + BLOG_P2_GA_FRAMEWORK.md
 + fig16 (rebuilds from committed writeup/data/p2_ga_framework.json). Code: solver/gclm_family.py,
 solver/ga_search.py; tests test_gclm_family.py (6/6; full suite 7/7).
 
@@ -240,7 +240,7 @@ What a human would want to know:
 **NOT a logged gate run** — an exploratory characterization + literature scout, no pre-committed
 predicate, no new solver code (used `RescaledHLDynamic` as-is). Recorded here because it upgrades the
 prior entry's main caveat and decided the fork direction. Evidence:
-`writeup/p2_regular_profile_evidence.py` → `fig14` from committed `writeup/data/p2_regular_profile.json`
+`writeup/4_p2_lottery/p2_regular_profile_evidence.py` → `fig14` from committed `writeup/data/p2_regular_profile.json`
 (+ `..._traj.json`). Full write-up: `PHASE2_P2_NOTES.md` §7, `TECHNICAL_P2_CONJ24.md` §7.
 
 What a human would want to know:
@@ -269,8 +269,8 @@ What a human would want to know:
 
 ## Phase-2 P2 — dynamic relaxation: Conjecture 2.4 (CHL) at POC, LOCAL attractor confirmed — 2026-07-25
 
-Full record: writeup/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md; evidence fig13 from committed
-writeup/data/p2_conj24_relax.json (`python writeup/p2_conj24_evidence.py`). Logged harness
+Full record: writeup/4_p2_lottery/TECHNICAL_P2_CONJ24.md + BLOG_P2_CONJ24.md; evidence fig13 from committed
+writeup/data/p2_conj24_relax.json (`python writeup/4_p2_lottery/p2_conj24_evidence.py`). Logged harness
 experiments/p2_conj24_relax.py --logged (predicate LOGGED to git before the run). Machinery
 solver/hl_rescaled.py::RescaledHLDynamic + test_hl_rescaled.py (7/7). This IS a logged gate run.
 
@@ -318,8 +318,8 @@ What a human would want to know:
 
 ## Phase-2 P2 — the 1D Hou–Luo singular-profile machine, validated against an exact solution — 2026-07-25
 
-Full record: writeup/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md; evidence fig12 from
-committed writeup/data/p2_hl_anchor.json (`python writeup/p2_hl_anchor_evidence.py`). Working
+Full record: writeup/4_p2_lottery/TECHNICAL_P2_HL_ANCHOR.md + BLOG_P2_HL_ANCHOR.md; evidence fig12 from
+committed writeup/data/p2_hl_anchor.json (`python writeup/4_p2_lottery/p2_hl_anchor_evidence.py`). Working
 doc PHASE2_P2_NOTES.md. Code solver/hl_rescaled.py + test_hl_rescaled.py (5/5). This is solver
 dev + unit validation, NOT a logged gate run.
 
@@ -365,8 +365,8 @@ What a human would want to know:
 
 ## Spike 1 Step C — relax to the Chen–Hou profile (the gate): PARTIAL, honestly reported — 2026-07-25
 
-Full record: writeup/TECHNICAL_SPIKE1_STEPC.md + BLOG_SPIKE1_STEPC.md; evidence fig11 from
-committed writeup/data/spike1_stepC_gate.json (`python writeup/spike1_stepC_evidence.py`).
+Full record: writeup/3_spikes/TECHNICAL_SPIKE1_STEPC.md + BLOG_SPIKE1_STEPC.md; evidence fig11 from
+committed writeup/data/spike1_stepC_gate.json (`python writeup/3_spikes/spike1_stepC_evidence.py`).
 Harness experiments/spike1_stepC_gate.py (predicate LOGGED to git before the run, commit
 eabb418). This IS the logged gate run.
 
@@ -459,11 +459,11 @@ What a human would want to know:
 
 ## Spike 1 Step A — 2D Boussinesq velocity operator on a stretched grid, VALIDATED — 2026-07-24
 
-Full record: PHASE2_SPIKE1_NOTES.md; technical writeup/TECHNICAL_SPIKE1_VELOCITY.md; blog
-writeup/BLOG_SPIKE1_STEPA.md. Code: `solver/boussinesq_velocity.py`,
+Full record: PHASE2_SPIKE1_NOTES.md; technical writeup/3_spikes/TECHNICAL_SPIKE1_VELOCITY.md; blog
+writeup/3_spikes/BLOG_SPIKE1_STEPA.md. Code: `solver/boussinesq_velocity.py`,
 `test_boussinesq_velocity.py` (5/5 pass). NOT a logged gate run — solver development
 validated against a manufactured known answer. Evidence figure fig9 + committed data
-rebuild: `python writeup/spike1_stepA_evidence.py`.
+rebuild: `python writeup/3_spikes/spike1_stepA_evidence.py`.
 
 User chose Spike 1 (2D Boussinesq port), **de-risked variant**: build + validate the
 highest-risk new piece (the 2D velocity operator `u = ∇^⊥(−Δ)⁻¹ω`) standalone before
@@ -637,7 +637,7 @@ reviewed options menu (per the standing "raise genuine scope decisions" steer).
 Context: the uniform-grid fitness search concluded with a decisive negative (two
 currencies — ν_crit, g_frac — both fail the honest gate via the same free-split ω₀→0
 wall; root cause: on a uniform grid the singular structure forms below grid scale).
-Standalone packaging of that negative: writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md
+Standalone packaging of that negative: writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md
 (commit 9cd2b21) — the Option-C deliverable this session.
 
 What a human would want to know:

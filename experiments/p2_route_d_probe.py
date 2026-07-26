@@ -12,9 +12,9 @@ the a=0 anchor and the fixed operators (no GA, no seeds, no predicate lock). It 
 committed so the writeup rebuilds without re-derivation. Run:
     .venv/bin/python experiments/p2_route_d_probe.py
     -> writes writeup/data/p2_route_d_probe.json ; figure via
-       .venv/bin/python writeup/p2_route_d_evidence.py   (fig19)
+       .venv/bin/python writeup/4_p2_lottery/p2_route_d_evidence.py   (fig19)
 
-Three measurements (see writeup/TECHNICAL_P2_ROUTED.md for the framing):
+Three measurements (see writeup/4_p2_lottery/TECHNICAL_P2_ROUTED.md for the framing):
 
   Q1  ARITHMETIC PRECISION. Rigorously enclose the two-scale residual
       R2(Omega) = Omega H(Omega) - c_tw Omega_X at the exact a=0 anchor

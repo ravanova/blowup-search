@@ -1,175 +1,171 @@
-# Writeup — Evolutionary Search for Navier–Stokes-type Blow-up
+# Writeup — Evolutionary & rigorous search for Navier–Stokes-type blow-up
 
-This folder is the **self-contained, banked writeup** of the project. Two arcs:
+The **self-contained, banked writeup** of the project: an honest, long-shot attempt
+at the Navier–Stokes blow-up problem via singular-profile / self-similar research.
+Every number quoted and every figure is rebuilt from the small committed files in
+[`data/`](data/) — **no raw logs, no re-run of any sweep, GA, or solver needed.**
 
-- **The completed 1D gCLM pipeline** — a validated 1D pseudo-spectral solver, a
-  quality-diversity evolutionary search, and an automated resolution study that
-  promotes candidates to numerically-confirmed (Tier-2) blow-up — plus the
-  honest negative result that closed the cheap route to a *novel* singularity.
-- **Route A Phase 1 (in progress)** — the move to 2D Boussinesq in the Hou–Luo
-  geometry (a *proven*-singularity model): a validated 2D solver and two
-  de-risking spikes (resolution wall + fitness-axis choice) that recalibrated the
-  reachable deliverable before any GA compute. No 2D candidate yet; see the
-  Phase-1 rows below and [SUMMARY.md](SUMMARY.md).
+Only a *rigorous proof* (Tier 3 / Level 3) would resolve the Clay problem; nothing
+here does. The realistic prize is **novel toy-model singularity research** plus a
+tiny Clay "lottery ticket." Each note states its own honest ceiling.
 
-It is designed so the work can be written up again in future **without digging
-through raw logs or re-running any sweep or GA campaign**: every number quoted
-and every figure is built from the small committed files in [`data/`](data/).
+## How this folder is organized
+
+Documents are grouped into four **numbered arc folders** (chronological). The
+shared **build layer stays central**: [`data/`](data/) (committed inputs),
+[`figures/`](figures/) (rebuilt outputs), and the two cross-arc builders
+[`build_figures.py`](build_figures.py) / [`curate_evidence.py`](curate_evidence.py).
+Each arc folder holds its own `TECHNICAL_*` / `BLOG_*` notes **and** the
+`*_evidence.py` scripts that rebuild that arc's figures from `../data/`.
+
+```
+writeup/
+  README.md                     <- you are here (the index)
+  data/  figures/               <- shared, central (never moved)
+  build_figures.py              <- figs 1–7 from data/
+  curate_evidence.py            <- (re)curate data/ from raw logs (needs experiments/)
+  1_gclm_1d/       the completed 1D gCLM pipeline (Level-0/1)        figs 1–5
+  2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
+  3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
+  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–19
+```
+
+## The rigor ladder (the project's framing)
+
+- **Level 0** — reproduce a known result.
+- **Level 1** — a *novel numerical map* (GA finds an approximate profile, measures a
+  residual). **All of Arcs 1–4 through fig18 live here.** A GA proves nothing.
+- **Level 2** — a *rigorous, computer-assisted statement* (interval / Newton–
+  Kantorovich certification). **Arc 4's Route-D leg (fig19) is the first brick here**
+  — validated tooling + a framing result, *not yet a certificate*.
+- **Level 3** — the Clay problem.
+
+---
 
 ## Read in this order
 
-1. **[SUMMARY.md](SUMMARY.md)** — one-page executive summary: what was built,
-   what was proven, what it does and does not mean.
-2. **[TECHNICAL_WRITEUP.md](TECHNICAL_WRITEUP.md)** — the full account: model,
-   methods, the anti-self-deception protocol, results with evidence, and the
-   honest scope.
-3. **[BLOG.md](BLOG.md)** — a narrative technical blog post (the 1D arc) for a
-   broader (still technical) audience.
-4. **[BLOG_PHASE1.md](BLOG_PHASE1.md)** — a shorter companion post on the two
-   de-risking experiments that opened Route A Phase 1 (2D Boussinesq).
-5. **[BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md)** — the Gate-4 sequel: the
-   ν_crit fitness passed the pre-committed gate but failed on substance (a false
-   pass), and the inviscid growth-rate currency that escapes the wall.
-6. **[BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md)** — the follow-on: the
-   inviscid growth-rate *magnitude* hits the same uniform-grid wall, a second
-   near-cheat (`accel_ratio`) is caught, and only a *rank-based* `g_frac` survives.
-7. **[BLOG_PHASE1_GATE4_REFORM.md](BLOG_PHASE1_GATE4_REFORM.md)** — the conclusion:
-   the rank check passes but the reformulated, cheat-audited Gate 4 **fails 4/6** —
-   on free split `g_frac` rails to the ω₀→0 corner just as ν_crit did. Two
-   currencies, one uniform-grid wall; the fitness search is concluded, pointing to
-   an AMR / self-similar numerics upgrade.
-8. **[NEGATIVE_RESULT_TWO_CURRENCIES.md](NEGATIVE_RESULT_TWO_CURRENCIES.md)** — the
-   **standalone** methods / negative-result note: the anti-self-deception gate
-   protocol and the "two currencies, one wall" finding, self-contained and
-   data-attached (readable without the chronological series above). The
-   citable packaging of the concluded fitness search.
-9. **[TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md)** — Phase 2:
-   the numerics-upgrade decision (dynamic rescaling over AMR), the rescaled-equation
-   derivation confirmed against the literature, the Spike-0 reconnaissance (three
-   false starts, each a finding), and the build recipe from the published scheme.
-   Fully cited. (The decision + derivation record; the solver was built next.)
-10. **[BLOG_PHASE2_RESCALING.md](BLOG_PHASE2_RESCALING.md)** — the narrative
-    companion: "The wall has a far side, and it's made of other people's numerics."
-11. **[TECHNICAL_SPIKE0_RESCALING.md](TECHNICAL_SPIKE0_RESCALING.md)** — Spike 0
-    **built + validated**: the dynamic-rescaling solver, run on CLM against its
-    closed-form answer, recovers the exact self-similar profile `-4X/(1+4X²)` and
-    rate `c_ω→-1` from perturbed data, resolution-stable — including the crux
-    (a line Hilbert transform on a non-uniform grid, derived stable, not
-    transcribed) and the finding that one-scale rescaling is stable for CLM. Figure
-    [`fig8`](figures/fig8_spike0_rescaling.png). Honest scope: reproduces a *proven*
-    toy result; validates machinery, not novelty, not a proof.
-12. **[BLOG_SPIKE0_RESCALING.md](BLOG_SPIKE0_RESCALING.md)** — the narrative
-    companion: "We built the far side of the wall, and it held."
-13. **[TECHNICAL_P2_HL_ANCHOR.md](TECHNICAL_P2_HL_ANCHOR.md)** — Phase-2 **P2**, the
-    lottery-ticket leg begins: a 1D Hou–Luo *singular*-profile machine, validated
-    against the **explicit exact steady state** of Chen–Huang–Li (arXiv:2604.01868,
-    Thm 2.3) — including a closed-form velocity for their profile that we derived.
-    Five known-answer checks pass; the operator survives the singularity (the only
-    residual is the slow tail, truncation-limited). Figure
-    [`fig12`](figures/fig12_p2_hl_anchor.png). Honest scope: reproduces a *proven*
-    (weak-existence) result — validation, not novelty, not a proof. Working notes
-    [`../PHASE2_P2_NOTES.md`](../PHASE2_P2_NOTES.md).
-14. **[BLOG_P2_HL_ANCHOR.md](BLOG_P2_HL_ANCHOR.md)** — the narrative companion: "We
-    built a machine for singular blow-ups, and checked it against a shape we could
-    solve by hand."
-15. **[TECHNICAL_P2_CONJ24.md](TECHNICAL_P2_CONJ24.md)** — Phase-2 **P2**, the
-    dynamic-relaxation leg: the first genuine swing at CHL's **Conjecture 2.4**
-    (asymptotic stability of the singular profile — a claim they make *numerically
-    only*). Builds + validates CHL's **degenerate normalization gauge** (reads the
-    nonlocal `H(Ω)(0)` where the origin-slope gauge is dead), diagnoses the
-    singular-profile numerical wall, and — under a **git-locked, gauge-invariant
-    predicate (9/9)** — confirms the **local** attractor (perturbations relax back to
-    `(2,−1)`) while showing the **global basin** is beyond a fixed-grid POC. Figure
-    [`fig13`](figures/fig13_p2_conj24_relax.png). Honest scope: Tier-2-style partial
-    reproduction of a numerical claim — not novel, not a proof.
-16. **[BLOG_P2_CONJ24.md](BLOG_P2_CONJ24.md)** — the narrative companion: "Chasing a
-    singular attractor: what a laptop-scale solver can (and can't) say about a
-    conjecture."
-17. **[../CLAY_ROADMAP.md](../CLAY_ROADMAP.md)** — the forward plan for continuing
-   to pursue the Clay problem. (Note: the AMR / self-similar-rescaling *numerics*
-   upgrade is a solver upgrade to **Route A**, distinct from roadmap **Route D**,
-   which is the later Tier-3 computer-assisted-proof leg.)
+### Arc 1 — the completed 1D gCLM pipeline ([`1_gclm_1d/`](1_gclm_1d/))
+1. [SUMMARY.md](1_gclm_1d/SUMMARY.md) — one-page executive summary.
+2. [TECHNICAL_WRITEUP.md](1_gclm_1d/TECHNICAL_WRITEUP.md) — full account: model,
+   quality-diversity GA, resolution study, the anti-self-deception protocol.
+3. [BLOG.md](1_gclm_1d/BLOG.md) — narrative companion (the 1D arc). *(figs 1–5)*
+
+### Arc 2 — Route-A Phase 1: 2D Boussinesq fitness search ([`2_phase1_2d/`](2_phase1_2d/))
+4. [BLOG_PHASE1.md](2_phase1_2d/BLOG_PHASE1.md) — the two de-risking experiments that
+   opened Phase 1.
+5. [BLOG_PHASE1_GATE4.md](2_phase1_2d/BLOG_PHASE1_GATE4.md) — the ν_crit false pass.
+6. [BLOG_PHASE1_GSUSTAINED.md](2_phase1_2d/BLOG_PHASE1_GSUSTAINED.md) — the inviscid
+   growth-rate currency hits the same wall; a second cheat caught.
+7. [BLOG_PHASE1_GATE4_REFORM.md](2_phase1_2d/BLOG_PHASE1_GATE4_REFORM.md) — the
+   reformulated Gate 4 fails 4/6; the fitness search is concluded. *(figs 6–7)*
+8. [NEGATIVE_RESULT_TWO_CURRENCIES.md](2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md)
+   — the **standalone** citable negative-result / methods note.
+
+### Arc 3 — numerics upgrade + Spikes 0/1 ([`3_spikes/`](3_spikes/))
+9. [TECHNICAL_PHASE2_RESCALING.md](3_spikes/TECHNICAL_PHASE2_RESCALING.md) ·
+   [BLOG_PHASE2_RESCALING.md](3_spikes/BLOG_PHASE2_RESCALING.md) — the
+   dynamic-rescaling decision + derivation.
+10. [TECHNICAL_SPIKE0_RESCALING.md](3_spikes/TECHNICAL_SPIKE0_RESCALING.md) ·
+    [BLOG_SPIKE0_RESCALING.md](3_spikes/BLOG_SPIKE0_RESCALING.md) — the CLM
+    dynamic-rescaling solver, validated against its closed form. *(fig 8)*
+11. [TECHNICAL_SPIKE1_VELOCITY.md](3_spikes/TECHNICAL_SPIKE1_VELOCITY.md) ·
+    [BLOG_SPIKE1_STEPA.md](3_spikes/BLOG_SPIKE1_STEPA.md) — 2D velocity operator. *(fig 9)*
+12. [TECHNICAL_SPIKE1_STEPB.md](3_spikes/TECHNICAL_SPIKE1_STEPB.md) ·
+    [BLOG_SPIKE1_STEPB.md](3_spikes/BLOG_SPIKE1_STEPB.md) — rescaled 2D formulation. *(fig 10)*
+13. [TECHNICAL_SPIKE1_STEPC.md](3_spikes/TECHNICAL_SPIKE1_STEPC.md) ·
+    [BLOG_SPIKE1_STEPC.md](3_spikes/BLOG_SPIKE1_STEPC.md) — relax to the Chen–Hou
+    profile (the gate, PARTIAL 3/4). *(fig 11)*
+
+### Arc 4 — P2: the 1D Hou–Luo lottery-ticket legs ([`4_p2_lottery/`](4_p2_lottery/))
+14. [TECHNICAL_P2_HL_ANCHOR.md](4_p2_lottery/TECHNICAL_P2_HL_ANCHOR.md) ·
+    [BLOG_P2_HL_ANCHOR.md](4_p2_lottery/BLOG_P2_HL_ANCHOR.md) — the singular-profile
+    machine vs the exact Chen–Huang–Li Thm 2.3 state. *(fig 12)*
+15. [TECHNICAL_P2_CONJ24.md](4_p2_lottery/TECHNICAL_P2_CONJ24.md) ·
+    [BLOG_P2_CONJ24.md](4_p2_lottery/BLOG_P2_CONJ24.md) — Conjecture 2.4: local
+    attractor confirmed (9/9), global basin beyond a fixed-grid POC. *(fig 13)*
+16. [TECHNICAL_P2_SCENARIO2.md](4_p2_lottery/TECHNICAL_P2_SCENARIO2.md) ·
+    [BLOG_P2_SCENARIO2.md](4_p2_lottery/BLOG_P2_SCENARIO2.md) — the regular Stage-1
+    profile / CHL's modified (4.1)/(4.2). *(figs 14–15)*
+17. [TECHNICAL_P2_GA_FRAMEWORK.md](4_p2_lottery/TECHNICAL_P2_GA_FRAMEWORK.md) ·
+    [BLOG_P2_GA_FRAMEWORK.md](4_p2_lottery/BLOG_P2_GA_FRAMEWORK.md) — the global GA
+    fixed-point search infrastructure (validated tooling). *(fig 16)*
+18. [TECHNICAL_P2_TWO_SCALE.md](4_p2_lottery/TECHNICAL_P2_TWO_SCALE.md) ·
+    [BLOG_P2_TWO_SCALE.md](4_p2_lottery/BLOG_P2_TWO_SCALE.md) — the two-scale
+    traveling-wave a-sweep (5/6 PARTIAL). *(fig 17)*
+19. [TECHNICAL_P2_KLADDER.md](4_p2_lottery/TECHNICAL_P2_KLADDER.md) ·
+    [BLOG_P2_KLADDER.md](4_p2_lottery/BLOG_P2_KLADDER.md) — the a_p(K) convergence
+    map: the survival boundary is genuine, not genome-limited (7/7). *(fig 18)*
+20. [TECHNICAL_P2_ROUTED.md](4_p2_lottery/TECHNICAL_P2_ROUTED.md) ·
+    [BLOG_P2_ROUTED.md](4_p2_lottery/BLOG_P2_ROUTED.md) — **Route-D v1**: the rigorous
+    interval-arithmetic core + the a=0 Newton–Kantorovich framing (the first Level-2
+    brick; tooling + scoping, NOT a certificate). *(fig 19)*
+
+Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
+[../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
+
+---
 
 ## Figures ([`figures/`](figures/))
 
-| file | what it shows |
-|---|---|
-| `fig1_ga_vs_random.png` | Stage 2 acceptance — GA beats budget-matched random on 3/3 seeds |
-| `fig2_resolution_convergence.png` | Stage 3 — T\* converges with resolution for all 9 elites |
-| `fig3_nongenericity.png` | Stage 3.5 — the GA edge and the novel α≠1 target are disjoint |
-| `fig4_blowup_curve.png` | a confirmed blow-up: max\|ω\| → ∞ and the BKM 1/M→0 diagnostic |
-| `fig5_rough_rails.png` | Stage 3.6 — genuine `C^{0,h}` rough data still rails the exponent near a=1 (control validates the measurement) |
-| `fig6_phase1_spike.png` | Phase 1 — the resolution wall: growth rate `g` converges (search-viable) while the blow-up exponent rails (true singularity out of uniform-grid reach) |
-| `fig7_phase1_axis_screen.png` | Phase 1 — the fitness-axis screen: only ν_crit orders blow-up propensity (sharp>mild>control) and is N-stable |
-| `fig8_spike0_rescaling.png` | Spike 0 — CLM dynamic rescaling: perturbed data relaxes onto the exact profile `-4X/(1+4X²)`, rate `c_ω→-1`, residual decays (known-answer validation) |
-| `fig9_spike1_stepA_velocity.png` | Spike 1 Step A — 2D Boussinesq velocity operator `u=∇^⊥(-Δ)⁻¹ω` on the stretched grid recovers a manufactured `(ω,u,v)` to ~1e-5, 2nd-order convergence, `u_x(0)` origin read (known-answer validation) |
-| `fig10_spike1_stepB_rescaled.png` | Spike 1 Step B — rescaled solver `(ω,η,ξ)`: formulation chosen by data (η-slope read ~2× better), operator convergence (transport ~3rd, gradient ~2nd), and the `c_l` ratio-cancellation (~3e-16) |
-| `fig11_spike1_stepC_gate.png` | Spike 1 Step C — relax to the Chen–Hou profile (the gate, **PARTIAL**): `c_ω` matches to <0.5% and anisotropy to (2.24), far-field-exponent check fails; pre-committed predicate 3/4 |
-| `fig12_p2_hl_anchor.png` | Phase-2 P2 — 1D Hou–Luo singular-profile machine validated against the exact Chen–Huang–Li Thm 2.3 steady state `(X-1)^{-1/2}`: recovered velocity matches the derived exact `U̅` through the singularity, ½-order convergence, and the operator survives the singular core (tail truncation-limited). Validation, not novelty |
-| `fig13_p2_conj24_relax.png` | Phase-2 P2 — CHL **Conjecture 2.4** at POC: (A) gauge trajectories `(c_l,c_ω)→(2,−1)` for the anchor hold + two perturbations; (B) residual drop-and-plateau (hold/perturb) vs no-relaxation (generic IC); (C) endpoints — hold+perturbations cluster on the fixed point, generic sits off. LOCAL attractor confirmed (9/9 git-locked clauses); global basin beyond a fixed-grid POC. Tier-2 partial, not a proof |
+| file | arc | what it shows |
+|---|---|---|
+| `fig1_ga_vs_random.png` | 1 | Stage 2 — GA beats budget-matched random on 3/3 seeds |
+| `fig2_resolution_convergence.png` | 1 | Stage 3 — T\* converges with resolution for 9 elites |
+| `fig3_nongenericity.png` | 1 | Stage 3.5 — GA edge and the novel α≠1 target are disjoint |
+| `fig4_blowup_curve.png` | 1 | a confirmed blow-up: max\|ω\|→∞, BKM 1/M→0 |
+| `fig5_rough_rails.png` | 1 | Stage 3.6 — rough `C^{0,h}` data still rails the exponent near a=1 |
+| `fig6_phase1_spike.png` | 2 | Phase 1 — the resolution wall: `g` converges, exponent rails |
+| `fig7_phase1_axis_screen.png` | 2 | Phase 1 — only ν_crit orders blow-up propensity + is N-stable |
+| `fig8_spike0_rescaling.png` | 3 | Spike 0 — CLM rescaling relaxes onto `-4X/(1+4X²)`, `c_ω→-1` |
+| `fig9_spike1_stepA_velocity.png` | 3 | Spike 1A — 2D velocity operator, 2nd-order, `u_x(0)` read |
+| `fig10_spike1_stepB_rescaled.png` | 3 | Spike 1B — rescaled `(ω,η,ξ)` formulation chosen by data |
+| `fig11_spike1_stepC_gate.png` | 3 | Spike 1C — relax to Chen–Hou (gate PARTIAL 3/4) |
+| `fig12_p2_hl_anchor.png` | 4 | P2 — singular machine vs exact CHL Thm 2.3 `(X-1)^{-1/2}` |
+| `fig13_p2_conj24_relax.png` | 4 | P2 — Conjecture 2.4: local attractor (9/9), global basin not |
+| `fig14_p2_regular_profile.png` | 4 | P2 — the regular Stage-1 positive profile (CHL Scenario 2) |
+| `fig15_p2_scenario2.png` | 4 | P2 — CHL modified (4.1)/(4.2): invariant `c_l/c_ω→-2.533` |
+| `fig16_p2_ga_framework.png` | 4 | P2 — GA global fixed-point map; a=0 known-answer gate |
+| `fig17_two_scale_sweep.png` | 4 | P2 — two-scale traveling wave deforms under advection to `a_p≈0.4` |
+| `fig18_two_scale_kladder.png` | 4 | P2 — a_p(K) saturates: boundary `a*≈0.5–0.55` genuine |
+| `fig19_p2_route_d.png` | 4 | P2 — Route-D v1: interval enclosure, the 2-D valley, the line→circle diagonalization, and the banded+rank-1 linearized operator |
 
 ## Evidence map ([`data/`](data/))
 
-Every claim in the writeup traces to one of these committed files:
+Every claim traces to one committed file. Key P2 / Route-D rows:
 
-| file | contents | backs |
-|---|---|---|
-| `summary_metrics.json` | all headline numbers | SUMMARY / everything |
-| `ga_vs_random.json` | best-so-far curves (GA vs random), 3 seeds | Stage 2 acceptance |
-| `stage3_resolution.json` | T\*, α, R², drift by resolution — 18 studies | Stage 3 Tier-2 |
-| `promoted_candidates.jsonl` | the 18 Tier-2 genomes **with coefficients** | Stage 3 Tier-2 |
-| `nongenericity.json` | per-(shape, a) α + the six-property verdicts | Stage 3.5 |
-| `stage3_6_rough.json` | per-(h, a, N) rough-data blow-up exponent + convergence kinds | Stage 3.6 / fig5 |
-| `blowup_curve.json` | a representative max\|ω\|(t) trajectory | fig4 |
-| `phase1_spike.json` | per-(IC, N) g / amp / exponent / T\* for the 2D resolution spike | Phase 1 / fig6 |
-| `phase1_axis_screen.json` | per-(axis, IC, N) values + the pre-committed screen verdict | Phase 1 / fig7 |
-| `phase1_gate4.json` | Gate-4 six-property gate on ν_crit (the false pass + ω₀ diagnostic), the fixed-split & currency probes | Phase 1 / BLOG_PHASE1_GATE4 |
-| `phase1_gsustained.json` | staged inviscid growth-rate probe: magnitude on the resolution wall (LEG 1), rank-stability + `g_frac`-vs-`accel_ratio` cheat audit (LEG 2), free-split partials (LEG 3) | Phase 1 / BLOG_PHASE1_GSUSTAINED |
-| `phase1_gate4_reform.json` | reformulated Gate 4 on `g_frac`: the 4/6 FAIL scorecard, the free-split rail to ω₀→0 (top-6 shapes), the property-6 sub-conditions, and the 7 grower→non-grower classification flips | Phase 1 / BLOG_PHASE1_GATE4_REFORM |
-| `spike0_rescaling.json` | Spike 0 — line-H known-answer convergence, the perturbed-IC run (profile + `c_ω(τ)` + residual histories), and the two-resolution stability check | Spike 0 / fig8 |
-| `spike1_stepA_velocity.json` | Spike 1 Step A — velocity-operator known-answer convergence, velocity errors, `u_x(0)` origin read, radial cut, error field | Spike 1 A / fig9 |
-| `spike1_stepB_rescaled.json` | Spike 1 Step B — formulation decision (η-slope vs primitive-θ read error), transport/gradient convergence, `c_l` ratio-cancellation | Spike 1 B / fig10 |
-| `spike1_stepC_gate.json` | Spike 1 Step C — the logged gate resolution study (`c_l,c_ω,α,`far-field,anisotropy per config) + the pre-committed predicate checks/verdict | Spike 1 C / fig11 |
-| `p2_hl_anchor.json` | Phase-2 P2 — the singular anchor: profile + exact/recovered velocity cut, δ-refinement convergence (velocity + steady residual), dense-operator error by `\|X-1\|` band vs reach `M`, and the 5 unit-test numbers | P2 / fig12 |
-| `p2_conj24_relax.json` | Phase-2 P2 — Conjecture-2.4 relaxation: `(c_l,c_ω)` + residual histories for the anchor hold, two perturbations, an `ν=0.04` robustness hold, and a generic-IC negative control; per-run summaries + the 9 git-locked predicate checks | P2 / fig13 |
-
-The raw, full logs these were distilled from live under `experiments/`
-(`run_logs/`, `*_sweep.jsonl`) in the repo root; they are gitignored (large,
-regeneratable) — see [../LOGGING.md](../LOGGING.md). Nothing in this folder
-depends on them.
+| file | backs |
+|---|---|
+| `summary_metrics.json` | SUMMARY / headline numbers |
+| `ga_vs_random.json`, `stage3_resolution.json`, `promoted_candidates.jsonl`, `nongenericity.json`, `stage3_6_rough.json`, `blowup_curve.json` | Arc 1 (figs 1–5) |
+| `phase1_spike.json`, `phase1_axis_screen.json`, `phase1_gate4.json`, `phase1_gsustained.json`, `phase1_gate4_reform.json` | Arc 2 (figs 6–7) |
+| `spike0_rescaling.json`, `spike1_stepA_velocity.json`, `spike1_stepB_rescaled.json`, `spike1_stepC_gate.json` | Arc 3 (figs 8–11) |
+| `p2_hl_anchor.json`, `p2_conj24_relax.json`, `p2_regular_profile*.json`, `p2_scenario2_relax.json`, `p2_ga_framework.json`, `p2_two_scale_sweep.json`, `p2_two_scale_kladder.json` | Arc 4 (figs 12–18) |
+| `p2_route_d_probe.json` | Arc 4 / fig19 — Q1 enclosure precision, Q2 degeneracy singular values, Q3 line→circle covariance, Q4 the banded operator |
 
 ## Rebuilding
 
 ```bash
-# figures from the committed data (no solver runs needed):
+# Arc-1/2 figures from committed data (no solver runs):
 .venv/bin/python writeup/build_figures.py
 
-# Spike-0 figure from its committed data (add --generate to re-run the solver, ~1 min):
-.venv/bin/python writeup/spike0_rescaling_evidence.py
+# any single leg's figure from its committed data (examples):
+.venv/bin/python writeup/3_spikes/spike0_rescaling_evidence.py          # fig8
+.venv/bin/python writeup/4_p2_lottery/p2_two_scale_kladder_evidence.py  # fig18
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_evidence.py            # fig19
 
-# re-curate data from raw logs (only if you still have experiments/*, or after
-# re-running the sweeps/GA per the stage docs):
+# regenerate the Route-D probe data itself (deterministic, ~10 s):
+.venv/bin/python experiments/p2_route_d_probe.py
+
+# re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py
 ```
 
-## Provenance / reproducing the underlying runs
+## Provenance
 
-The pipeline code and per-stage records live in the repo root:
-
-- Solver: [`../solver/`](../solver) · win-condition diagnostics:
-  [`../win_condition.py`](../win_condition.py)
-- GA + resolution study: [`../ga/`](../ga)
-- Sweeps: `../stage1_5_sweep.py`, `../stage2_6_sweep.py`,
-  `../nongenericity_sweep.py`, `../stage3_6_sweep.py` (+ their `analyze_*.py`;
-  `../stage3_6_progress.py` is a live viewer)
-- Per-stage results & rationale: `../STAGE_1_5_RESULTS.md`,
-  `../STAGE_2_6_RESULTS.md`, `../STAGE_3_RESULTS.md`,
-  `../NONGENERICITY_RESULTS.md`, `../STAGE_3_6_RESULTS.md`; design contracts:
-  `../PROJECT.md`, `../WIN_CONDITION.md`, `../PLAN.md`, `../LOGGING.md`.
-- Route A Phase 1 (2D Boussinesq): solver `../solver/boussinesq.py`; spikes
-  `../phase1_resolution_spike.py`, `../phase1_axis_screen.py` (+ their
-  `analyze_*.py` and `../phase1_axis_progress.py` live viewer); results
-  `../PHASE1_PLAN.md`, `../PHASE1_SPIKE_RESULTS.md`,
-  `../PHASE1_AXIS_SCREEN_RESULTS.md`.
-- Every logged run is pinned to a git commit and (for GA runs) a frozen
-  `config.json`; tests: `../test_*.py`.
+Solver: [`../solver/`](../solver) (incl. `interval.py`, `gclm_family.py`,
+`line_hilbert.py`); GA + resolution study: [`../ga/`](../ga); per-stage records and
+design contracts in the repo root (`../PROJECT.md`, `../WIN_CONDITION.md`,
+`../CLAY_ROADMAP.md`, `../LOGGING.md`, `../PHASE2_P2_NOTES.md`); one
+`../experiments/JOURNAL.md` entry per logged run; tests `../test_*.py` (8 suites
+green). Every logged run is pinned to a git commit (and, for GA runs, a frozen
+config). The raw logs under `../experiments/` are gitignored (large, regeneratable).

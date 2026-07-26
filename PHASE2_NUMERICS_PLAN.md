@@ -4,7 +4,7 @@
 **Date:** 2026-07-24.
 **Context:** Phase 1 (the uniform-grid fitness search) concluded with a decisive,
 honestly-documented negative — see
-[writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md](writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md).
+[writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md](writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md).
 Root cause: on a uniform grid the genuine singular structure forms **below grid
 scale**, so no scalar fitness read off the trusted window can isolate it. The agreed
 next move is the numerics upgrade that resolves the singular region. This doc is the

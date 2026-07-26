@@ -33,12 +33,12 @@ TERMINOLOGY GUARD (do not drop): the dynamic-rescaling **numerics** upgrade is a
 exists after a Tier-2 candidate).
 
 ORIENTATION (read in this order): PROJECT.md, WIN_CONDITION.md, CLAY_ROADMAP.md. Phase 1
-(concluded, honest negative): writeup/NEGATIVE_RESULT_TWO_CURRENCIES.md. Spike 0 (COMPLETE):
-writeup/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, PARTIAL gate):
+(concluded, honest negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. Spike 0 (COMPLETE):
+writeup/3_spikes/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, PARTIAL gate):
 PHASE2_SPIKE1_NOTES.md + writeup/TECHNICAL_SPIKE1_{VELOCITY,STEPB,STEPC}.md. **P2 — READ THIS:**
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §4 the open work, §5 HH23 scout, §6 dynamic-relaxation,
 §7 regular-profile reframe, **§8 B1 = Scenario-2 DONE**). Per-leg writeups + figs:
-writeup/TECHNICAL_P2_HL_ANCHOR.md (fig12), TECHNICAL_P2_CONJ24.md (fig13), the §7 reframe (fig14),
+writeup/4_p2_lottery/TECHNICAL_P2_HL_ANCHOR.md (fig12), TECHNICAL_P2_CONJ24.md (fig13), the §7 reframe (fig14),
 **TECHNICAL_P2_SCENARIO2.md + BLOG_P2_SCENARIO2.md (fig15)**. Then experiments/JOURNAL.md (newest
 first) and LOGGING.md.
 
@@ -70,7 +70,7 @@ STATE (all banked + pushed; origin/main at commit 2cb751c "P2 B1 writeup"):
     strictly-positive profile (minΩ>0, smoothness 0.73 vs ≈1061 for the singular anchor, X*=0.82);
     res falls 15→2.2e-2 (~680×) then FLOORS; absolute triple → (1.59,−0.63,0.21), off CHL raw
     (1.0636,−0.4235,0.0765). Harness experiments/p2_scenario2_relax.py; fig15 rebuilds from committed
-    writeup/data/p2_scenario2_relax.json via `python writeup/p2_scenario2_evidence.py`.
+    writeup/data/p2_scenario2_relax.json via `python writeup/4_p2_lottery/p2_scenario2_evidence.py`.
   * HONEST READ: the amplitude-INVARIANT ratio (physical exponent) + profile SHAPE are reproduced;
     the ABSOLUTE constants are IC-normalization-dependent (the gauge holds origin values at our IC's
     normalization); the residual floors (fixed grid vs CHL's adaptive mesh). BOTH CHL scenarios now
@@ -114,7 +114,7 @@ test_boussinesq_rescaled.py (8/8). Before ANY logged experimental run: pass the 
 LOCK the predicate in git (dirty-tree guard; gitignored experiments/*.log,*.npz,*.jsonl,*.out are
 fine). Solver dev + unit tests are NOT "logged gate runs"; still add each new solver test to the
 suite. Papers/ gitignored. One JOURNAL.md entry per LOGGED experiment (scouts may get a
-clearly-labelled entry too). Evidence rebuilds: writeup/p2_scenario2_evidence.py (fig15),
+clearly-labelled entry too). Evidence rebuilds: writeup/4_p2_lottery/p2_scenario2_evidence.py (fig15),
 p2_conj24_evidence.py (fig13), p2_regular_profile_evidence.py (fig14), p2_hl_anchor_evidence.py (fig12)
 (+ spike scripts). Push only when asked.
 OPS: never `while pgrep -f script.py` (self-match hang); foreground `sleep` is blocked (use background

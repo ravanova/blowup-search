@@ -48,7 +48,7 @@ with a numerical artifact.
 - **[writeup/](writeup/) — the banked, self-contained writeup of the completed
   1D pipeline** (executive summary, full technical writeup, technical blog post,
   figures, and curated evidence data that rebuilds without any re-runs). Start
-  at [writeup/SUMMARY.md](writeup/SUMMARY.md).
+  at [writeup/1_gclm_1d/SUMMARY.md](writeup/1_gclm_1d/SUMMARY.md).
 - [CLAY_ROADMAP.md](CLAY_ROADMAP.md) — forward strategic plan for continuing the
   Clay pursuit (the two structural walls, ranked routes A–D, go/no-go criteria).
 - [millennium_prize_problems.md](millennium_prize_problems.md) — survey of
