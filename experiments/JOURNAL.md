@@ -3,6 +3,48 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v1: interval core + a=0 NK framing — TOOLING/SCOPING (non-logged) — 2026-07-26
+
+**NOT a logged gate run** (deterministic tooling + a scoping probe — no GA, no
+seeds, no predicate lock; every number is a property of the fixed anchor +
+operators). Recorded here because it produces committed data + a figure. Data
+`writeup/data/p2_route_d_probe.json` (regen `python experiments/p2_route_d_probe.py`);
+figure fig19 (`writeup/p2_route_d_evidence.py`); writeups TECHNICAL/BLOG_P2_ROUTED;
+PHASE2_P2_NOTES.md §10. Code: `solver/interval.py` + `test_interval.py` (5/5, suite
+now 8 files green). This is the FIRST brick on the rigor ladder (Level-1→Level-2);
+it is validated tooling + a framing result, **NOT a certificate**.
+
+What a human would want to know:
+
+- **The question the user chose.** Not "certify the GA two-scale profile" but the
+  honest prerequisite: *can a Newton–Kantorovich certification even be SET UP* for
+  `residual_two_scale`, gated against the a=0 exact anchor? Answer the arithmetic +
+  structural prerequisites first, frame the attempt, don't skip to the claim.
+
+- **Evidence-first path (the user's steer: "interval-arith core first, then decide";
+  "degeneracy — whichever is best based on testing").** Built the interval core,
+  then measured. Q1: the rigorous enclosure width (8.5e-11) is ~10% of the anchor
+  defect (8.9e-10) → the defect bound Y₀ is carryable. Q2: singular values COUNT the
+  a=0 scaling valley — 2 kernel dims (gauge-slaved) → 1 (fixed speed) → **two** gauge
+  conditions isolate a nondegenerate zero; the naive un-gauged inverse is ∞ (so the
+  "gauge-fix vs document non-closure" fork was decided by the numbers: gauge-fix, and
+  the non-closure is already demonstrated by the rank-deficient Jacobians).
+
+- **The lucky structural break (Q3/Q4).** Spotted from the anchor's Fourier form and
+  CHECKED: under X=tan(θ/2) the line Hilbert transform IS the circular conjugate
+  (cos kθ↦sin kθ, verified ~1e-7, k=1..6). So the anchor is 2-term, and DF is
+  **tridiagonal + rank-1** (cos→sin) — the reason Z₀+Z₁<1 is plausible, not hoped.
+  The closed-form band matches the grid operator to 3.9e-2; that residual is the
+  θ=±π (Cayley) endpoint correction, flagged as open sub-task R (not buried).
+
+- **Honest ceiling + next.** Framing = radii-polynomial NK; F quadratic ⇒ Z₂
+  constant. Open: G (exact gauge/Fredholm-index square system — the crux), R
+  (endpoint correction), T (rigorous tail-inverse bound), a≠0 (no exact anchor off
+  a=0 → Y₀ jumps ~1e-9→1e-2, boundary certificate likely won't close). NEXT = the
+  FLOAT dress rehearsal (compute Y₀/Z₀/Z₁/Z₂ + radii polynomial in plain float to
+  see if the ball closes at the anchor) BEFORE any interval hardening. Even full
+  success = toy-model computer-assisted certification, NOT a Clay solve. Odds ~0.05%.
+
 ## Phase-2 P2 — TWO-SCALE a_p(K) CONVERGENCE map — LOGGED (7/7) — 2026-07-26
 
 **LOGGED gate run** (predicate T1–T7 LOCKED in git before the run, commit 44a507c).

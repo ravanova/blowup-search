@@ -38,11 +38,17 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 ## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
 ## §5→§6→§7→§8→§9→§9-cont2.
 ## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
-## **NEXT (user-confirmed 2026-07-26): ROUTE D** — interval-Newton / Newton–Kantorovich certification
-## on the a=0 exact + near-boundary GA profiles (the FIRST rung that is genuinely "novel maths",
-## Level-2). Scope HONESTLY as "can a certifiable fixed-point statement even be set up for
-## residual_two_scale" (bound the inverse/defect/Lipschitz), gated vs the a=0 anchor — NOT a promised
-## certificate. Hard part = the analytical framing, not the hand-rolled interval arithmetic.
+## **ROUTE-D v1 DONE (§10, 2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a
+## certificate.** Built solver/interval.py (hand-rolled rigorous interval arithmetic, +test 5/5, suite now
+## 8 files green) + the deterministic a=0 probe (experiments/p2_route_d_probe.py → fig19). FOUR results:
+## Q1 the interval enclosure carries the NK defect Y₀ (overhead ~10%); Q2 the a=0 zero set is a 2-param
+## scaling valley → EXACTLY 2 gauge conditions isolate a nondegenerate zero (naive ‖DF⁻¹‖=∞); Q3 under
+## X=tan(θ/2) the line Hilbert = circular conjugate (cos kθ↦sin kθ, ~1e-7), anchor = 2-term Fourier;
+## Q4 ⇒ DF is TRIDIAGONAL + rank-1 (cos→sin), so finite-section Z₀+Z₁<1 is PLAUSIBLE. Framing =
+## radii-polynomial NK; F quadratic ⇒ Z₂ constant. Open risks G(gauge/index)/R(θ=±π endpoint)/T(tail)/
+## a≠0(no exact anchor off 0). BLOG/TECHNICAL_P2_ROUTED.md. **NEXT: the FLOAT DRESS REHEARSAL** — compute
+## Y₀/Z₀/Z₁/Z₂ + radii polynomial in plain float across an N-ladder to see if the ball CLOSES at the
+## anchor, BEFORE interval hardening (green-lights the verified build or a legit publishable negative).
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -384,3 +390,48 @@ machinery), the lottery ticket's first scientific brick — but NOT a proof, NOT
 re-run to chase T4 (the fail is the machine catching its own limit). NEXT candidates: (a) richer/spectral
 genome or a Route-D interval-Newton on these guesses to sharpen a_p; (b) the SEPARATE coupled-system leg
 (HL two-stage — HL is not a scalar gCLM member). Clay odds unchanged ~0.05%.
+
+## §10 — ROUTE-D v1 DONE (2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a certificate.
+
+The first brick on the RIGOR LADDER (Level-1→Level-2). Delivered: (a) a hand-rolled rigorous
+interval-arithmetic core solver/interval.py (no scipy/mpmath; outward-rounded +−×÷, reciprocal,
+isum/dot/matvec with the γ_m accumulation bound) + test_interval.py 5/5 gated with `fractions` as the
+exact oracle (full suite now 8 files green); (b) the deterministic a=0 probe experiments/p2_route_d_probe.py
+→ writeup/data/p2_route_d_probe.json → fig19 (writeup/p2_route_d_evidence.py). NOT a logged Tier run (no GA,
+no seeds, no predicate lock — every number is a deterministic property of the anchor + fixed operators).
+BLOG/TECHNICAL_P2_ROUTED.md.
+
+FOUR evidence pieces (all banked, do not relearn):
+  Q1 ARITHMETIC PRECISION. Rigorous interval enclosure of R₂ at the exact anchor Ω₂=−1/(1+X²), c_tw=1/2:
+     defect 8.9e-10, enclosure WIDTH 8.5e-11 → overhead ~10% (n=2001). The interval core is precise enough
+     to carry the NK defect bound Y₀. Genome-box sup|R₂| grows slope-1 (Lipschitz ~190), not wrapping.
+  Q2 DEGENERACY COUNTED. a=0 zero set = 2-parameter scaling valley (amplitude (Ω,c)↦(λΩ,λc) + dilation
+     (Ω,c)↦(Ω(·/μ),μc)). Jacobian SVs: gauge-slaved c → [2.0e-7,1.3e-7] (BOTH tiny = 2-dim kernel); fixed
+     c=1/2 → [5.90,9.3e-7] (1-dim kernel). ⇒ EXACTLY TWO gauge conditions (speed + one normalization)
+     isolate a nondegenerate zero. Concrete: fix c=1/2 + Ω(0)=−1 forces μ=1 (the c-preserving fiber is
+     λμ=1, Ω(0)↦(1/μ)Ω(0)). The naive un-gauged interval-Newton has ‖DF⁻¹‖=∞ — gauge quotient NOT optional.
+  Q3 DIAGONALIZATION (the structural gift). Under X=tan(θ/2) the LINE Hilbert transform = the CIRCULAR
+     conjugate (cos kθ↦sin kθ), verified ~1e-7 for k=1..6 on the DECAYING (endpoint-vanishing at θ=±π)
+     subspace. Anchor is then a 2-term Fourier object: Ω₂=−(1+cosθ)/2 (a₀=a₁=−1/2), H(Ω₂)=−½sinθ.
+  Q4 BANDED OPERATOR. R₂ is ODD (Ω even ⇒ ΩHΩ,Ω_X odd) ⇒ DF maps cosine→sine coeffs. With Ω₂ degree-1,
+     DF is TRIDIAGONAL (bandwidth 1) + a rank-1 c_tw column (−Ω₂,ₓ=−½sinθ−¼sin2θ). Closed-form band built
+     in the probe (q4_operator_structure), cross-checks the grid operator to 3.9e-2 (the residual = the
+     θ=±π Cayley endpoint correction = flagged sub-task R). Banded ⇒ finite-section NK bounds Z₀+Z₁<1 are
+     PLAUSIBLE (tail dominated by c·(ik), O(1/(cN)) inverse bound).
+
+THE FRAMING (writeup/TECHNICAL_P2_ROUTED.md §7; full paper draft was scratch/ROUTE_D_FRAMING.md). Standard
+radii-polynomial NK: Y₀≥‖A F(x̄)‖, Z₀≥‖I−AA†‖, Z₁≥‖A(A†−DF)‖, Z₂≥‖A·D²F‖; p(r)=Z₂r²−(1−Z₀−Z₁)r+Y₀;
+CLOSES iff Z₀+Z₁<1 and (1−Z₀−Z₁)²≥4Y₀Z₂. Two real simplifications: F QUADRATIC ⇒ Z₂ constant (no 3rd-order
+term); anchor a finite trig poly ⇒ zero convolution tail. Space: weighted ℓ¹_ν cosine coeffs ⊕ ℝ.
+OPEN RISKS (honest, do not drop): G = the exact gauge/Fredholm-index square system (fixed-c+1-norm vs
+c-floating-bordered) — THE CRUX; R = the θ=±π endpoint rank-1 correction (the 3.9e-2); T = rigorous
+O(1/(cN)) tail-inverse bound; a≠0 = no exact anchor off a=0 (Y₀ jumps ~1e-9→~1e-2) so a boundary certificate
+likely will NOT close — probable honest "certifies at a=0, not yet at a≈0.5".
+
+NEXT BRICK (user-confirmed direction): the FLOAT DRESS REHEARSAL — build DF as a finite (N+1)-mode matrix in
+plain float, invert the finite section, compute Y₀/Z₀/Z₁/Z₂ + the radii polynomial across an N-ladder with
+the §Q2 gauge. Answers the ONLY gating question — does Z₀+Z₁<1 and does the ball close at the anchor? — at
+near-zero cost BEFORE any interval hardening. Green-lights the verified build or surfaces which sub-task
+(G/R/T) blocks it (a legit publishable negative either way). Only after it closes in float do we harden with
+solver/interval.py. HONEST CEILING unchanged: even full success = computer-assisted TOY-MODEL certification
+(Chen–Hou / Gómez-Serrano genre), NOT a Clay solve. Clay odds ~0.05%.
