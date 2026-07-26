@@ -278,6 +278,26 @@ def even_lorentz(X, params):
     return out
 
 
+def even_lorentz_sq(X, params):
+    """Even bump with SQUARED Lorentzian poles: Omega = sum_k A_k / (1 + B_k X^2)^2.
+
+    Sharper peak and X^-4 tails (vs even_lorentz's X^-2). A qualitatively
+    DIFFERENT even basis, used only as a basis-INDEPENDENCE cross-check on the
+    a_p(K) two-scale persistence map: if the even_lorentz K-ladder and a mixed
+    Lorentzian+squared basis (of matched DOF) give the same residual floor, the
+    floor is a property of the equation, not of the Lorentzian family. Note a
+    single squared pole is NOT an exact a=0 traveling wave (only single
+    Lorentzians are), so the cross-check basis is used as even_lorentz + this."""
+    p = np.asarray(params, dtype=float)
+    K = p.size // 2
+    A = p[0::2][:K]
+    B = np.abs(p[1::2][:K]) + 1e-9
+    out = np.zeros_like(X)
+    for k in range(K):
+        out = out + A[k] / (1.0 + B[k] * X ** 2) ** 2
+    return out
+
+
 # exact anchors (for tests / GA gate targets) -------------------------------
 
 def rational_mixed(X, params):

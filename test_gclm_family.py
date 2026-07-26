@@ -30,7 +30,7 @@ import numpy as np
 
 from solver.gclm_family import (
     GCLMResidual, clm_one_scale, clm_two_scale, odd_rational, even_lorentz,
-    rational_mixed,
+    even_lorentz_sq, rational_mixed,
 )
 from solver.ga_search import ga_minimize, GAConfig
 
@@ -260,6 +260,39 @@ def test_mixed_genome_decomposition():
     print("[ok] rational_mixed decomposes into even (two-scale) + odd (skew) parts")
 
 
+def test_even_lorentz_sq_crosscheck_basis():
+    """(11) Squared-pole even basis: even, X^-4 tails; NOT an a=0 TW alone, but the
+    Lorentzian+squared MIX still contains the exact anchor (basis-independence gate).
+
+    The a_p(K) persistence map is re-run on this DIFFERENT even basis to check the
+    residual floor is a property of the equation, not of the Lorentzian family. For
+    that cross-check to be honest the mixed basis must (a) be genuinely different
+    (a single squared pole is NOT an a=0 traveling-wave null -- only single
+    Lorentzians are), yet (b) still CONTAIN the exact a=0 anchor as a special case,
+    so T1 (a=0 known answer) still passes on the cross-check genome."""
+    R = GCLMResidual(a=0.0, n=1201)
+    # evenness
+    s = even_lorentz_sq(R.X, [-1.0, 1.0])
+    assert abs(s[R.i0] - s[::-1][R.i0]) < 1e-12, "even_lorentz_sq not even"
+    # X^-4 tail: squared pole decays faster than the X^-2 Lorentzian far out
+    far = np.abs(R.X) > 5.0
+    lor = even_lorentz(R.X, [-1.0, 1.0])
+    ratio = np.abs(s[far]).max() / np.abs(lor[far]).max()
+    print(f"    tail ratio |sq|/|lorentz| (|X|>5) = {ratio:.3e} (squared pole decays faster)")
+    assert ratio < 0.1, "squared pole should have a much smaller far tail"
+    # a single squared pole is NOT an a=0 traveling-wave null (genuinely new shape)
+    res_sq, _ = R.residual_two_scale(s)
+    rel_sq = R.residual_two_scale_relnorm(s)
+    print(f"    single squared pole: two-scale relres={rel_sq:.3e} (NOT a null -> new basis)")
+    assert rel_sq > 1e-2, "a single squared pole should NOT null R2 (else not a new basis)"
+    # but the MIX (Lorentzian + squared) still contains the exact anchor -> T1 holds
+    mix = even_lorentz(R.X, [-1.0, 1.0]) + even_lorentz_sq(R.X, [0.0, 1.0])
+    rel_mix = R.residual_two_scale_relnorm(mix)
+    print(f"    Lorentzian+zero-squared mix: relres={rel_mix:.3e} (~anchor, T1 preserved)")
+    assert rel_mix < 1e-6, "mixed basis must still contain the exact a=0 anchor"
+    print("[ok] squared-pole basis is genuinely different yet contains the a=0 anchor")
+
+
 if __name__ == "__main__":
     test_a0_residual_gate()
     test_velocity_operator()
@@ -272,4 +305,5 @@ if __name__ == "__main__":
     test_ga_two_scale_traveling_member()
     test_two_scale_relnorm_scale_invariant()
     test_mixed_genome_decomposition()
+    test_even_lorentz_sq_crosscheck_basis()
     print("\nALL GCLM-FAMILY TESTS PASSED")
