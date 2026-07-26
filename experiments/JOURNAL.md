@@ -3,6 +3,68 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — TWO-SCALE a_p(K) CONVERGENCE map — LOGGED (7/7) — 2026-07-26
+
+**LOGGED gate run** (predicate T1–T7 LOCKED in git before the run, commit 44a507c).
+Data: committed `writeup/data/p2_two_scale_kladder.json`; harness
+`experiments/p2_two_scale_kladder.py --logged`; writeups TECHNICAL/BLOG_P2_KLADDER
++ fig18 (rebuilds from JSON via `writeup/p2_two_scale_kladder_evidence.py`);
+PHASE2_P2_NOTES.md §9-cont2. Verdict **7/7 clauses hold** — a NOVEL toy-model
+characterization (Tier-1/2), NOT a proof, NOT a Clay solve. This SHARPENS the prior
+leg's T4 FAIL (the honest one): it turns the "genome-relative soft boundary" caveat
+into a converged, resolvable answer.
+
+What a human would want to know:
+
+- **The question (from the prior leg's T4 fail).** The two-scale a-sweep found the
+  exact a=0 traveling wave persists (relres<1e-2) only to a_p≈0.40 for a FIXED even
+  K=2 genome — but T4 FAILED: a richer K=3 genome cut the a=0.5 floor 4×, below the
+  1e-2 line. The GA gives only an UPPER BOUND, so a_p(K) can only rise with K. Open
+  question the user chose to sharpen: does a_p(K) **saturate** (→ a genuine survival
+  boundary a\*) or **keep marching out** with K (→ INCONCLUSIVE, genome-limited)?
+
+- **The confounder the scout caught (this is the whole ballgame).** At the base
+  budget the higher-K floors are **search-limited, not converged**: a GA-convergence
+  probe showed the a=0.6 K=4 floor drop **45%** when the budget was doubled. A naive
+  a_p(K) map at the old budget would have reflected GA effort, not genome richness.
+  A scratch plateau probe (a=0.55/0.60, K=4/6, budgets 1×→8×) settled it: the floor
+  **PLATEAUS** — a=0.55→~1.0e-2 and a=0.60→~1.8e-2, stable under ~8× budget AND not
+  improved at K=6. That fixed the logged budget at pop150/gen250/8-seeds (converged)
+  and put an IN-JSON budget spot-check (~1.7×) + a K=6 genome spot-check in the run
+  so the plateau is reproducible from committed data, not just scratch.
+
+- **Result (7/7).** a_p(K) = **0.40 → 0.50 → 0.50** — it rises off the K=2 value
+  then **SATURATES**. Boundary a\* ≈ 0.55 (smallest a where the converged K=4 floor
+  first exceeds 1e-2: K4(0.55)=1.08e-2). At the boundary the floor is **GA-converged**
+  (K4 1.7×-budget 1.03e-2 vs 1.08e-2, <5%) and **genome-converged** (K6 1.23e-2 does
+  NOT beat K4 1.08e-2), and **basis-independent** (a different even basis, Lorentzian
+  + squared-pole `even_lorentz_sq`, gives 8.3e-3, within 3× of even K3). Resolution
+  fine (min verdict width 35 grid pts ≫ 8). Far-end (De Gregorio) robust: K4 floor
+  rises to 1.28e-1 at a=1.0 — survives richer genome + budget (this was the prior
+  leg's ONE robust T4 sub-claim, now confirmed across the whole K-ladder).
+
+- **The honest nuance I did NOT bury.** a\* is not a razor edge. Right at a=0.55 the
+  converged floors straddle the 1e-2 line: even K3/K4 sit just above (≈1.1e-2) while
+  the mixed basis dips just under (8.3e-3). That is exactly what a threshold crossing
+  looks like — the boundary is a\* ≈ 0.5–0.55 with a soft ~1e-2 floor, not a sharp
+  wall. Reported as such; the SCIENCE claim is "saturates near 0.5–0.55, genuine, not
+  genome-limited," not "dies exactly at 0.55."
+
+- **Bug/discipline notes.** New solver basis `even_lorentz_sq` (X^-4 poles) added +
+  unit-tested as the basis-independence cross-check: gated to be genuinely DIFFERENT
+  (a single squared pole is NOT an a=0 traveling-wave null, relres=0.11) yet to still
+  CONTAIN the exact anchor (Lorentzian+zero-squared mix → 1.3e-8), so T1 holds on it.
+  test_gclm_family 12/12; full suite 7 files green. Observed the plateau in scratch
+  BEFORE locking the predicate (grounded the budget + thresholds). Did NOT re-run to
+  move any clause.
+
+- **Where this sits + next.** This is a Level-1 result (a novel *numerical* map), now
+  clean and convergence-guarded — it does NOT move up the rigor ladder, it makes the
+  Route-D **guess** sharper and better-justified (a\*≈0.5–0.55 boundary + the a=0
+  exact + near-boundary profiles). **User confirmed Route D is the next brick**: an
+  interval-Newton / Newton–Kantorovich certification on those profiles — the first
+  rung that is genuinely "novel maths" (Level-2). Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — TWO-SCALE-under-advection a-sweep — LOGGED (5/6, PARTIAL) — 2026-07-26
 
 **LOGGED gate run** (predicate T1–T6 LOCKED in git before the run, commit 6fc1ff0).

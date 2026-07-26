@@ -26,8 +26,23 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/p2_hl_anchor_eviden
 ## a_p≈0.40, floor rises to 0.18 at a=1 (De Gregorio), STAYS EVEN, no sharp collapse. T4 FAIL (honest):
 ## mid-range floor is partly GENOME-LIMITED (K=3 cuts a=0.5 floor 4×) → genome-relative upper bound,
 ## survival boundary not sharply pinned; BUT a=1 degradation robust to K=3. NOVEL toy-model result
-## (Tier-1/2), NOT a proof, NOT a Clay solve.** Read §5→§6→§7→§8→§9.
-## Not novel-enough-to-be-a-proof; a genuine map.
+## (Tier-1/2), NOT a proof, NOT a Clay solve.** **a_p(K) CONVERGENCE MAP DONE + LOGGED (§9-cont2,
+## 2026-07-26): SHARPENS that T4 FAIL. Added even_lorentz_sq cross-check basis (+test, 12/12); a
+## pre-run plateau scout caught that near-transition floors are SEARCH-limited at the old budget
+## (a=0.6 K4 drops 45% at 2× budget) → fixed budget pop150/gen250/8seeds (converged) + in-JSON
+## budget/K6 spot-checks. Locked T1–T7 (commit 44a507c), logged 7/7. RESULT: a_p(K)=0.40→0.50→0.50
+## SATURATES; boundary a*≈0.5–0.55 is GA-converged (K4 1.7×-budget within 5%), genome-converged (K6
+## does NOT beat K4), and BASIS-independent (mixed Lorentzian+squared within 3× of K3); far-end
+## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
+## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
+## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
+## §5→§6→§7→§8→§9→§9-cont2.
+## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
+## **NEXT (user-confirmed 2026-07-26): ROUTE D** — interval-Newton / Newton–Kantorovich certification
+## on the a=0 exact + near-boundary GA profiles (the FIRST rung that is genuinely "novel maths",
+## Level-2). Scope HONESTLY as "can a certifiable fixed-point statement even be set up for
+## residual_two_scale" (bound the inverse/defect/Lipschitz), gated vs the a=0 anchor — NOT a promised
+## certificate. Hard part = the analytical framing, not the hand-rolled interval arithmetic.
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
