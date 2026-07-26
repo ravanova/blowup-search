@@ -1,156 +1,172 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-26 at the end of the session that COMPLETED B1 (CHL Scenario 2 reproduced via the
-modified rescaling (4.1)/(4.2)) and banked + pushed the full writeup. Everything below is banked +
-pushed; origin/main at 2cb751c. The user chose to keep pursuing the lottery ticket (path B). B1 was
-green-lit ON THE CONDITION that it help the real direction — it does (it delivered the origin-pinned
-gauge the gCLM probe needs). The RECOMMENDED next thing is the **gCLM two-scale↔two-stage transition
-probe** — the actual novelty swing. Put the plan (and its honest odds) to the user before a logged run.*
+*Written 2026-07-26 at the end of the session that built **Route-D v1** — the
+rigorous interval-arithmetic core + the a=0 Newton–Kantorovich framing (the FIRST
+brick on the Level-1→Level-2 rigor ladder) — and banked + pushed the full writeup
+AND reorganized writeup/ into arc subfolders. Everything below is banked + pushed;
+origin/main at commit **c91bfd3**. The RECOMMENDED next thing is the **float dress
+rehearsal** of the Newton–Kantorovich bounds (does the certification ball close at
+the a=0 anchor, in plain float, BEFORE any interval hardening?). Surface a short
+options menu before committing to a heavy build.*
 
-Continue the Navier–Stokes blow-up search project in this directory
-(/home/andy/projects/Unsolved). The end goal is the Clay Millennium problem — a genuine, honest
-attempt via singular-profile / self-similar-blowup research — while never fooling ourselves with a
-numerical artifact. WIN_CONDITION.md is the anti-self-deception contract: only Tier 3 (rigorous
-proof) solves it; Tier 1 (candidate) and Tier 2 (resolution-confirmed) are progress. Preserve that
-honesty — do not oversell. Raise genuine scope decisions for review with a short options menu
-rather than deciding unilaterally.
+Continue the Navier–Stokes blow-up search project in /home/andy/projects/Unsolved.
+End goal: the Clay Millennium problem — a genuine, honest attempt via
+singular-profile / self-similar-blowup research — while never fooling ourselves with
+a numerical artifact. WIN_CONDITION.md is the anti-self-deception contract: only
+Tier 3 / Level 3 (rigorous proof) solves it; Tier 1 (candidate) and Tier 2
+(resolution-confirmed) are progress. Preserve that honesty — do not oversell. Raise
+genuine scope decisions for review with a short options menu rather than deciding
+unilaterally.
 
-USER'S STANDING STEER (honor it):
-- Keep pursuing the Clay end goal. The realistic prize is novel toy-model singularity research +
-  a tiny (~0.05%) Clay "lottery ticket," NOT a Clay solve. Keep the lottery ticket the true focus;
-  when something does NOT contribute to it, say so and be willing to pivot. (The user explicitly
-  gate-checks new bricks against "does this help the real direction with more assertiveness or
-  accuracy down the line" — answer that honestly BEFORE building.)
-- Produce blog posts + scientific-community-useful writeups WITH ATTACHED DATA (writeup/ +
-  committed writeup/data/*.json that rebuilds figures without re-runs). A deliverable.
-- Our code was UNIFORM-GRID ONLY — a tier below the field's frontier. Phase 2 closed that gap: the
-  stretched-grid dynamic-rescaling solver is built + validated in 1D (Spike 0), 2D (Spike 1), the 1D
-  singular-profile machine (P2 anchor), the dynamic-relaxation stepper with the degenerate gauge (P2
-  §6), AND now the origin-pinned 3-constant gauge for regular profiles (P2 §8 / B1). The machinery exists.
+USER'S STANDING STEER (honor it): Keep pursuing the Clay end goal. The realistic
+prize is novel toy-model singularity research + a tiny (~0.05%) Clay "lottery
+ticket," NOT a Clay solve. Keep the lottery ticket the true focus; when something
+does NOT contribute to it, say so and be willing to pivot. Gate-check every new
+brick against "does this help the real direction" BEFORE building. The chosen
+vehicle is a GENETIC ALGORITHM as the global fixed-point mapper for gCLM
+self-similar profiles, built to ALSO feed Route D (the GA-found approximate profile
+is the "guess" a rigorous interval-Newton certifies). Produce blog + community
+writeups WITH ATTACHED DATA (writeup/ + committed writeup/data/*.json that rebuilds
+figures without re-runs).
 
-TERMINOLOGY GUARD (do not drop): the dynamic-rescaling **numerics** upgrade is a solver upgrade to
-**Route A**. It is NOT roadmap "Route D" (the later Tier-3 computer-assisted-proof leg, which only
-exists after a Tier-2 candidate).
+THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce known
+results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
+Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
+certification) = the FIRST rung that is genuinely "novel maths" — **Route-D v1
+(fig19) is the first brick here, but it is validated TOOLING + a framing/scoping
+result, NOT yet a certificate.** Level-3 = Clay.
 
-ORIENTATION (read in this order): PROJECT.md, WIN_CONDITION.md, CLAY_ROADMAP.md. Phase 1
-(concluded, honest negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. Spike 0 (COMPLETE):
-writeup/3_spikes/TECHNICAL_SPIKE0_RESCALING.md. Spike 1 (COMPLETE — 2D Boussinesq machine, PARTIAL gate):
-PHASE2_SPIKE1_NOTES.md + writeup/TECHNICAL_SPIKE1_{VELOCITY,STEPB,STEPC}.md. **P2 — READ THIS:**
-PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §4 the open work, §5 HH23 scout, §6 dynamic-relaxation,
-§7 regular-profile reframe, **§8 B1 = Scenario-2 DONE**). Per-leg writeups + figs:
-writeup/4_p2_lottery/TECHNICAL_P2_HL_ANCHOR.md (fig12), TECHNICAL_P2_CONJ24.md (fig13), the §7 reframe (fig14),
-**TECHNICAL_P2_SCENARIO2.md + BLOG_P2_SCENARIO2.md (fig15)**. Then experiments/JOURNAL.md (newest
-first) and LOGGING.md.
+TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework
+are Route-A TOOLING (built to FEED Route D). "Route D" proper is the Tier-3
+computer-assisted-proof leg; a successful interval-Newton certification is its first
+concrete step. A GA proves nothing (Tier-1/2 only).
 
-STATE (all banked + pushed; origin/main at commit 2cb751c "P2 B1 writeup"):
-- Phase 1 CONCLUDED (honest negative). Spike 0 DONE + VALIDATED. Spike 1 COMPLETE (2D Boussinesq
-  dynamic-rescaling machine; reproduces the PROVEN Chen–Hou profile; Step-C PARTIAL 3/4).
-- Target paper: Chen–Huang–Li (CHL) **arXiv:2604.01868** (Papers/, gitignored; `Read` page-by-page OR
-  `pdftotext Papers/2604.01868v1.pdf out.txt` then grep — far cheaper). CHL's novelty: *degenerate*
-  data (ω⁰ₓ(0)=θ⁰ₓₓ(0)=0) → **singular** self-similar profiles via a **two-STAGE** L^∞→L^p blowup;
-  only weak existence (their Thm 2.3) is proven, the asymptotic stability (Conjecture 2.4) is
-  numerical-only.
-- **P2 ANCHOR DONE (§2)** — the 1D HL singular-profile machine reproduces CHL's PROVEN Thm-2.3 steady
-  state; we DERIVED the closed-form velocity U̅. solver/hl_rescaled.py::RescaledHL, fig12.
-- **P2 §6 DYNAMIC-RELAXATION DONE** — Conjecture 2.4 at POC (LOCAL attractor, PARTIAL 9/9). Built +
-  validated CHL's DEGENERATE normalization gauge (their (3.2)): reads the nonlocal H(Ω)(0), pins
-  c_l=−U(1) at X=1. solver/hl_rescaled.py::RescaledHLDynamic, fig13.
-- **P2 §7 REGULAR-PROFILE REFRAME DONE (scout)** — the §6 "generic → different state" is a REGULAR,
-  strictly-positive profile = CHL's Scenario-2 object (qualitatively). fig14.
-- **P2 §8 / B1 DONE THIS SESSION — CHL Scenario 2 reproduced. Tier-2, PARTIAL, NOT novel, NOT a proof.**
-  * BUILT + VALIDATED the **origin-pinned 3-constant gauge** (CHL's modified (4.1)/(4.2)):
-    solver/hl_rescaled.py::RescaledHLScenario2 (spatial-shift DOF c_r, evolve V:=Θ_X, origin-clustered
-    grid with X=0 a node) + hand-rolled `_solve_3x3` (no scipy) + `scenario2_ic` (non-symmetric
-    positive, origin-NONdegenerate — Ω_X(0)≠0 is required, it's the c_l coefficient).
-    test_hl_rescaled.py now **9/9**: the (4.2) solve nulls ∂_τ{Ω(0),Ω_X(0),V(0)} to 4.4e-16
-    (known-answer), `_solve_3x3` matches numpy to 7e-14.
-  * LOGGED run (predicate LOCKED pre-run, commit b5294ff; n=801, nu=0.02, 2 ICs × 14000 steps,
-    ADAPTIVE dt → τ≈42; **5/5 PARTIAL by design**): both ICs → invariant exponent c_l/c_ω =
-    −2.533/−2.535 (CHL −2.5114, ~0.9%) as a genuine IC-INDEPENDENT ATTRACTOR to a regular
-    strictly-positive profile (minΩ>0, smoothness 0.73 vs ≈1061 for the singular anchor, X*=0.82);
-    res falls 15→2.2e-2 (~680×) then FLOORS; absolute triple → (1.59,−0.63,0.21), off CHL raw
-    (1.0636,−0.4235,0.0765). Harness experiments/p2_scenario2_relax.py; fig15 rebuilds from committed
-    writeup/data/p2_scenario2_relax.json via `python writeup/4_p2_lottery/p2_scenario2_evidence.py`.
-  * HONEST READ: the amplitude-INVARIANT ratio (physical exponent) + profile SHAPE are reproduced;
-    the ABSOLUTE constants are IC-normalization-dependent (the gauge holds origin values at our IC's
-    normalization); the residual floors (fixed grid vs CHL's adaptive mesh). BOTH CHL scenarios now
-    reproduced (singular Stage-2 anchor + regular Scenario-2 exponent) — a Tier-2 consolidation, not
-    the ticket.
+ORIENTATION (read in this order): PROJECT.md, WIN_CONDITION.md, CLAY_ROADMAP.md.
+**NOTE the writeup/ folder was reorganized into arc subfolders this session**
+(1_gclm_1d, 2_phase1_2d, 3_spikes, 4_p2_lottery; data/ + figures/ stay central; see
+writeup/README.md for the full ordered index). Phase 1 (concluded negative):
+writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ: PHASE2_P2_NOTES.md
+(TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1, §9 GA framework,
+§9-cont TWO-SCALE, §9-cont2 a_p(K) map, **§10 ROUTE-D v1 = newest**). Per-leg
+writeups + figs all under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
+CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
+ROUTED(fig19)}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
-THE NEXT THING — the actual novelty swing (put to the user before a logged run):
-- **(NEXT) The gCLM-family two-scale↔two-stage TRANSITION probe.** THE most promising NEW angle, and
-  the one B1 just de-risked. The generalized CLM (gCLM) model has a parameter `a` interpolating a
-  family of 1D Euler surrogates. Two DIFFERENT blowup mechanisms are known at different members:
-    * **two-SCALE** (spatial multi-scale; a bulk + a fine inner scale) is **PROVEN** for CLM by
-      Huang–Qin–Wang **[HQW25]** (SIAM J Math Anal 2025);
-    * **two-STAGE** (temporal; local L^∞ blowup off-origin, then weak continuation to an L^p blowup at
-      the origin) is what CHL found for HL.
-  NOBODY has mapped where in `a` the transition between these happens. That is genuinely open and
-  1D-tractable. We already have solver/gclm_rescaled.py (test_gclm_rescaled.py 5/5) AND, from B1, the
-  validated origin-pinned gauge needed to hold the regular profiles a sweep will encounter.
-  FIRST STEPS (scope, don't logged-run yet): (1) obtain/READ [HQW25] if possible — it's the model for
-  what "two-scale" looks like numerically and gives a known-answer anchor (Papers/ also holds
-  2210.07191, 2305.05660, MMS-Numerics-2025 — grep them). (2) Decide the diagnostic that DISTINGUISHES
-  two-scale from two-stage on a rescaled trajectory (e.g. presence/absence of a second inner scale;
-  the L^∞-vs-L^p timing) — this is the crux and must be defined BEFORE any logged run. (3) Pick the
-  `a`-values to sweep (CLM = the proven two-scale end; HL's `a` = the two-stage end; bisect between).
-  (4) THEN lock a predicate and run. Expect this to be harder than B1 (no clean closed-form anchor; may
-  need the adaptive-mesh rebuild for the fine inner scale) — surface a short options menu first.
-- HONEST CEILING (say it out loud): even a clean two-scale↔two-stage map is novel *toy-model* research,
-  not a Clay solve; overall Clay odds remain ~0.05%. But UNLIKE B1 (which reproduced a CHL object),
-  this would be NEW math — the genuine lottery ticket. The alternative swing is a rigor step on
-  Conjecture 2.4 (harder, less tractable on a laptop). Recommend the gCLM probe.
-- KNOWN LIMITATION to respect: our dynamic-relaxation runs FLOOR the residual on a fixed grid (~1e-2),
-  and the slow X^{−1/2}-type tail is truncation-limited. A two-scale profile has a FINE inner scale
-  that a fixed grid may not resolve — be ready to conclude "needs adaptive mesh" honestly rather than
-  overclaim, exactly as B1/§6 did. The adaptive-mesh rebuild is the known heavy-numerics next step if
-  the fixed grid can't separate the scales.
+STATE (all banked + pushed; origin/main at c91bfd3):
+- Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
+  §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
+  a_p(K) convergence map (7/7) — all DONE + banked.
+- The gCLM two-scale survival boundary is GENUINE (a*≈0.5–0.55, a SOFT crossing),
+  not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
-ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy — tridiag/solvers/3x3
-hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all green): test_hl_rescaled.py (**9/9**) + test_line_hilbert.py (6/6) +
-test_gclm_rescaled.py (5/5) + test_boussinesq_velocity.py (5/5) + test_boussinesq_transport.py (5/5) +
-test_boussinesq_rescaled.py (8/8). Before ANY logged experimental run: pass the test gate + COMMIT +
-LOCK the predicate in git (dirty-tree guard; gitignored experiments/*.log,*.npz,*.jsonl,*.out are
-fine). Solver dev + unit tests are NOT "logged gate runs"; still add each new solver test to the
-suite. Papers/ gitignored. One JOURNAL.md entry per LOGGED experiment (scouts may get a
-clearly-labelled entry too). Evidence rebuilds: writeup/4_p2_lottery/p2_scenario2_evidence.py (fig15),
-p2_conj24_evidence.py (fig13), p2_regular_profile_evidence.py (fig14), p2_hl_anchor_evidence.py (fig12)
-(+ spike scripts). Push only when asked.
-OPS: never `while pgrep -f script.py` (self-match hang); foreground `sleep` is blocked (use background
-runs / the Monitor until-loop). The dynamic-relaxation runs are SLOW (dense-Hilbert matvecs,
-Python-overhead-bound: ~10 steps/s at n=1601, ~35 steps/s at n=801). USE ADAPTIVE dt (recompute the
-CFL every ~200 steps as the initial transient decays — this was the key to reaching large τ in B1;
-a fixed dt is throttled by the c_l≈13 startup transient). Run python `-u` to a LOGFILE and wait on a
-`grep`/Monitor until-loop — do NOT pipe through `tail`. For a long run the user may want a CLI progress
-bar: emit throttled `PROGRESS [bar] pct k/N ... ETA` lines and Monitor them. Reuse the solver instance
-(the dense Hmat is cached lazily) — don't rebuild per config.
+**P2 §10 — ROUTE-D v1 DONE + BANKED (this session). Level-1 tooling + a Level-2
+scoping/framing result, NOT a certificate.** The first brick on the rigor ladder.
+Delivered:
+- **solver/interval.py** — hand-rolled RIGOROUS interval arithmetic (no scipy/mpmath;
+  outward-rounded +−×÷ via np.nextafter one-ulp push, reciprocal with zero-guard,
+  and isum/dot/matvec with the γ_m = m·u/(1−m·u) accumulation bound). **test_interval.py
+  5/5**, gated with `fractions` as the exact oracle. Full suite now **8 files green**.
+- **experiments/p2_route_d_probe.py** (deterministic, NON-logged — no GA/seeds/predicate)
+  → writeup/data/p2_route_d_probe.json → fig19
+  (writeup/4_p2_lottery/p2_route_d_evidence.py). Four results:
+  * **Q1 (arithmetic precision):** at the exact a=0 anchor Ω₂=−1/(1+X²), c_tw=1/2, the
+    rigorous enclosure width (8.5e-11) is ~10% of the defect (8.9e-10) → the interval
+    core comfortably carries the NK defect bound Y₀.
+  * **Q2 (degeneracy COUNTED):** the a=0 zero set is a 2-parameter scaling valley
+    (amplitude (Ω,c)↦(λΩ,λc) + dilation (Ω,c)↦(Ω(·/μ),μc)). Jacobian singular values:
+    gauge-slaved c → 2-dim kernel; fixed c=1/2 → 1-dim kernel. ⇒ EXACTLY TWO gauge
+    conditions (speed + one normalization, e.g. c=1/2 & Ω(0)=−1 forcing μ=1) isolate a
+    nondegenerate zero. The naive un-gauged interval-Newton has ‖DF⁻¹‖=∞.
+  * **Q3 (diagonalization — the structural gift):** under X=tan(θ/2) the LINE Hilbert
+    transform = the CIRCULAR conjugate (cos kθ↦sin kθ), verified ~1e-7 for k=1..6 on the
+    decaying subspace. The anchor is then a 2-term Fourier object Ω₂=−(1+cosθ)/2,
+    H(Ω₂)=−½sinθ.
+  * **Q4 (banded operator):** R₂ is ODD (Ω even ⇒ ΩHΩ, Ω_X odd) ⇒ DF maps cosine→sine
+    coeffs and is TRIDIAGONAL (bandwidth 1) + a rank-1 c_tw column. Closed-form band
+    (built in the probe) cross-checks the grid operator to 3.9e-2 (= the flagged θ=±π
+    Cayley endpoint correction). Banded ⇒ finite-section Z₀+Z₁<1 is PLAUSIBLE.
+- **THE FRAMING** (writeup/4_p2_lottery/TECHNICAL_P2_ROUTED.md §7): standard
+  radii-polynomial NK — Y₀≥‖A F(x̄)‖, Z₀≥‖I−AA†‖, Z₁≥‖A(A†−DF)‖, Z₂≥‖A·D²F‖;
+  p(r)=Z₂r²−(1−Z₀−Z₁)r+Y₀; CLOSES iff Z₀+Z₁<1 and (1−Z₀−Z₁)²≥4Y₀Z₂. F QUADRATIC ⇒ Z₂
+  CONSTANT (no 3rd-order term); anchor a finite trig poly ⇒ zero convolution tail. Space:
+  weighted ℓ¹_ν cosine coeffs ⊕ ℝ. OPEN RISKS (do not drop): **G** = the exact
+  gauge/Fredholm-index square system (fixed-c+1-norm vs c-floating-bordered for the 1-D
+  cokernel) = THE CRUX; **R** = the θ=±π endpoint rank-1 correction; **T** = a rigorous
+  O(1/(cN)) tridiagonal tail-inverse bound; **a≠0** = no exact anchor off a=0 (Y₀ jumps
+  ~1e-9→~1e-2) so a boundary certificate likely will NOT close → probable honest
+  "certifies at a=0, not yet at a≈0.5".
 
-DISCIPLINE LESSONS BANKED (do not relearn):
-- Ground the scheme in the paper; do NOT trial-and-error a known method. Un-fetchable → `pdftotext`
-  the Papers/ PDFs + grep, or `Read` page-by-page. Validate against a known answer; DERIVE the exact
-  answer where one exists and test against it (the anchor U̅; the (4.2) gauge nulling ∂_τ to 1e-15).
-- Dynamic-rescaling normalization is a GAUGE, and it is amplitude/normalization-DEPENDENT. Report only
-  the GAUGE-INVARIANTS as results: the ratio c_l/c_ω (the physical self-similar exponent) and the
-  profile SHAPE. NEVER report a normalization-dependent absolute constant as a "match" — B1's absolute
-  triple was off CHL's raw by design; the ratio was the real result.
-- For DEGENERATE (origin-symmetric) data use the §6 gauge (nonlocal H(Ω)(0), pin at X=1); for REGULAR
-  NON-SYMMETRIC profiles use the §8 origin-pinned 3-constant gauge (needs Ω_X(0)≠0). Pick the gauge to
-  match the profile's symmetry — a mismatch cannot HOLD the profile (§7 measured this).
-- Singular/multi-scale profiles: the naive scheme rings at discontinuities and the slow tail is
-  truncation-limited; a fixed grid FLOORS the residual. Diagnose the floor (measure it), label any
-  dissipation crutch as POC, and CONCLUDE "needs adaptive mesh" honestly rather than overclaim.
-- LOCK the predicate in git BEFORE the logged run; write it to MATCH scratch-observed behaviour and
-  declare PARTIAL by construction; report PARTIAL and locate the cause; do NOT re-run to chase a clause
-  into a pass. (B1: 5/5 held because the predicate was matched to a pre-run scratch that reached τ≈71.)
-- Do an exploratory SCRATCH run to find the landing point BEFORE writing the predicate — never lock a
-  predicate blind.
+THE NEXT BRICK — THE FLOAT DRESS REHEARSAL (recommended; surface a menu first).
+Build DF as a finite (N+1)-mode matrix in PLAIN FLOATING POINT (using the closed-form
+cos→sin band from probe q4_operator_structure, validated there), invert the finite
+section, and compute Y₀, Z₀, Z₁, Z₂ and the radii polynomial across a small N-ladder
+with the §Q2 gauge (fix c=1/2, Ω(0)=−1). This answers the ONE question that gates
+everything — **does Z₀+Z₁<1 and does the ball close at the anchor?** — at near-zero
+cost, BEFORE spending effort on the verified interval enclosure (solver/interval.py).
+If it closes in float with margin → green-light the interval build (harden Y₀/Z₀ with
+matvec/verified-inverse enclosures). If it does NOT close → inspect which sub-task
+(G/R/T) blocks it and report the honest, publishable negative ("why the naive NK
+doesn't close here yet"). Either outcome is a legitimate result. Do NOT skip to
+claiming a certificate. Overall Clay odds unchanged (~0.05%).
 
-HONEST FRAMING TO PRESERVE: 1D HL is a toy model (models the BOUNDARY behaviour of the Hou–Luo /
-3D-axisymmetric-Euler scenario; 2D Boussinesq is closer but still a toy, not 3D NS). P2's anchor
-reproduced a PROVEN result; the §6 leg reproduced the LOCAL content of a NUMERICAL-only conjecture;
-B1/§8 reproduced CHL's Scenario-2 exponent as a genuine attractor (all Tier-2, PARTIAL, none novel,
-none a proof). Both CHL scenarios are now reproduced — a clean consolidation, NOT the ticket. The
-lottery ticket lives in genuinely-NEW math: the gCLM two-scale↔two-stage transition (uses
-solver/gclm_rescaled.py + the B1 origin-pinned gauge) or a rigor step on Conjecture 2.4. Overall Clay
-odds ~0.05%. Keep pursuing the Clay end goal; keep saying the honest version out loud.
+Alternative bricks (put a short menu to the user if the dress rehearsal stalls or
+they want a different lane): (a) nail sub-task **G** (the gauge/index bordered
+operator) on paper first if the float rehearsal is ambiguous; (b) the separate
+coupled-system HL two-stage leg (whether an HL-type two-stage appears at any scalar
+gCLM member or genuinely needs the coupled (ω,θ) system); (c) extend the a_p(K) map
+to the odd/one-scale channel (lower value — refines a Level-1 map, does not advance
+Route D).
+
+ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
+tridiag/solvers/3×3/GA/Hilbert/interval-arith all hand-rolled). 8-worker ceiling
+(OMP_NUM_THREADS=8 pinned). No pytest; run each suite as `python test_X.py`. Suites
+(all 8 green): **test_interval.py (5/5, NEW)** + test_gclm_family.py (12/12) +
+test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
+test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Before ANY logged
+experimental run: pass the test gate + COMMIT + LOCK the predicate in git (dirty-tree
+guard; gitignored experiments/*.{log,npz,jsonl,out} fine). Solver dev + unit tests +
+DETERMINISTIC scoping probes are NOT "logged gate runs" (the Route-D probe is
+deterministic — no predicate lock needed); still add each new solver test to the
+suite. Papers/ gitignored ([HQW25]=arXiv:2401.14615 → Papers/hqw25.txt). One
+JOURNAL.md entry per logged experiment (deterministic tooling probes may get a
+clearly-labelled non-logged entry too, as §10 did). Push only when asked.
+
+**WRITEUP STRUCTURE (reorganized this session — use the new paths):** writeup/ now
+has arc subfolders. Evidence rebuilds (each reads committed writeup/data/*.json):
+writeup/4_p2_lottery/{p2_route_d_evidence.py(fig19), p2_two_scale_kladder_evidence.py
+(fig18), p2_two_scale_sweep_evidence.py(fig17), p2_ga_framework_evidence.py(fig16),
+p2_scenario2_evidence.py(fig15), p2_regular_profile_evidence.py(fig14),
+p2_conj24_evidence.py(fig13), p2_hl_anchor_evidence.py(fig12)};
+writeup/3_spikes/{spike0,spike1_stepA/B/C}_evidence.py; central
+writeup/build_figures.py (figs 1–7). writeup/README.md is the ordered index.
+
+OPS: DISK WATCH — root fs has hit 100% mid-session before (scratch + project share
+/dev/nvme0n1p3); `df -h /` if writes fail with ENOSPC. Never `pgrep -f script.py`
+while it self-matches (hang). Foreground `sleep` blocked (use background runs /
+Monitor until-loop). The GA at the converged budget (pop150/gen250/8seeds) ≈ 30–45
+s/best_of at n=801; base-budget GA ≈ 1 s. The Route-D probe is ~10 s. Run `python -u`
+to a LOGFILE, wait on a Monitor until-loop — do NOT pipe through tail. Reuse solver
+instances (dense Hmat/Vmat cached lazily).
+
+DISCIPLINE LESSONS BANKED (do not relearn): Ground the scheme in the paper; DERIVE
+the exact answer where one exists and gate against it (Ω₀→2.2e-7, Ω₂→1.5e-9; for
+Route D, gate the interval arithmetic + the NK bounds against the a=0 anchor). Make
+the fitness/observable scale-/gauge-invariant or the optimizer games it (the c_tw→0
+amplitude-collapse bug). Report gauge/genome/budget/basis invariants and upper-bound
+caveats, never a sharp claim a fixed genome/budget can't support (the T4 lesson).
+Near-transition GA floors are SEARCH-limited at low budget — use a converged budget +
+a budget spot-check for any floor/boundary claim. Fixed-grid dynamic-relaxation FLOORS
+the residual (~1e-2) and can't resolve a collapsing FINE inner scale — the GA static
+map sidesteps the time-stepping floor. For Route D specifically: a Level-2 claim is
+only as honest as its arithmetic — the bounds MUST be interval-enclosed (float is for
+the dress rehearsal only), and the gauge quotient is NOT optional (Q2). Do a FLOAT
+dress rehearsal before hardening. Do NOT re-run/tune to chase a bound into closing —
+report honestly if it does not.
+
+HONEST CEILING (say it out loud): Route-D v1 is validated tooling + a scoping/framing
+result; it does NOT itself climb the rigor ladder — it makes the certification attempt
+concrete and grounded (the central operator is banded, said with evidence). Even the
+eventual success it aims at is a computer-assisted TOY-MODEL certification (Chen–Hou /
+Gómez-Serrano genre), NOT a Clay solve. 1D HL is a toy model (boundary behaviour of
+Hou–Luo / 3D-axisymmetric-Euler). Overall Clay odds ~0.05%. Keep pursuing the Clay end
+goal; keep saying the honest version out loud.
