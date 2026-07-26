@@ -30,6 +30,7 @@ import numpy as np
 
 from solver.gclm_family import (
     GCLMResidual, clm_one_scale, clm_two_scale, odd_rational, even_lorentz,
+    rational_mixed,
 )
 from solver.ga_search import ga_minimize, GAConfig
 
@@ -225,6 +226,40 @@ def test_ga_two_scale_traveling_member():
     print(f"[ok] GA recovers a=0 two-scale traveling members ({got}/3), speed self-consistent")
 
 
+def test_two_scale_relnorm_scale_invariant():
+    """(10) The relative two-scale fitness is scale-invariant and nulls the anchor.
+
+    Guards the a-sweep against the trivial minimizer: the absolute RMS residual
+    can be driven to 0 by amplitude->0 (c_tw->0 too), so the sweep uses the
+    scale-invariant ||R2||/||Omega H Omega|| instead."""
+    R = GCLMResidual(a=0.0, n=801)
+    Om = clm_two_scale(R.X)
+    rel = R.residual_two_scale_relnorm(Om)
+    print(f"    relnorm(Omega_2)={rel:.2e}  relnorm(1e-3*Omega_2)={R.residual_two_scale_relnorm(1e-3*Om):.2e}")
+    assert rel < 1e-6, f"anchor relnorm not ~0: {rel:.2e}"
+    # scale-invariance: eps*Omega has the SAME relative residual (the whole point)
+    for eps in (1e-3, 1e2):
+        assert abs(R.residual_two_scale_relnorm(eps * Om) - rel) < 1e-8, "relnorm not scale-invariant"
+    # a mismatched (odd one-scale) profile has O(1) relative residual (not gamed to 0)
+    bad = R.residual_two_scale_relnorm(clm_one_scale(R.X))
+    assert bad > 0.1, f"one-scale profile should NOT null the two-scale residual: {bad:.2e}"
+    print("[ok] relative two-scale fitness is scale-invariant; anchor ~0, mismatch O(1)")
+
+
+def test_mixed_genome_decomposition():
+    """(10) rational_mixed = even part + odd part; even-only reproduces Omega_2."""
+    X = GCLMResidual(a=0.0, n=401).X
+    # pure-even genome (odd coeffs zero) == even_lorentz anchor
+    g_even = [-1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+    assert np.abs(rational_mixed(X, g_even) - clm_two_scale(X)).max() < 1e-8
+    # a genome with an odd component is genuinely non-even (skew detectable)
+    g_mix = [-1.0, 1.0, 0.0, 1.0, -0.5, 2.0, 0.0, 1.0]
+    prof = rational_mixed(X, g_mix)
+    odd_part = 0.5 * (prof - prof[::-1])
+    assert np.linalg.norm(odd_part) > 1e-3, "odd component should be present"
+    print("[ok] rational_mixed decomposes into even (two-scale) + odd (skew) parts")
+
+
 if __name__ == "__main__":
     test_a0_residual_gate()
     test_velocity_operator()
@@ -235,4 +270,6 @@ if __name__ == "__main__":
     test_a0_two_scale_gate()
     test_two_scale_family_and_a_break()
     test_ga_two_scale_traveling_member()
+    test_two_scale_relnorm_scale_invariant()
+    test_mixed_genome_decomposition()
     print("\nALL GCLM-FAMILY TESTS PASSED")

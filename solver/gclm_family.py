@@ -206,11 +206,34 @@ class GCLMResidual:
         return R, c_tw
 
     def residual_two_scale_norm(self, Omega, c_tw=None, weight=None):
-        """Scalar ||R2||: RMS over the grid. The GA fitness for the a-sweep."""
+        """Scalar ||R2||: RMS over the grid. Absolute (NOT scale-invariant)."""
         R, _ = self.residual_two_scale(Omega, c_tw=c_tw)
         if weight is not None:
             R = R * weight
         return float(np.sqrt(np.mean(R ** 2)))
+
+    def residual_two_scale_relnorm(self, Omega):
+        """Scale-INVARIANT two-scale fitness: ||R2|| / ||Omega H Omega||.
+
+        The correct GA fitness for the a-sweep. The absolute RMS is NOT
+        scale-invariant -- scaling Omega -> eps*Omega sends R2 ~ eps^2 and the
+        gauge speed c_tw ~ eps -> 0, so a plain-RMS GA CHEATS by shrinking the
+        amplitude to zero (trivial null). Normalizing by the stretching term
+        ||Omega H Omega|| (which also ~ eps^2) makes the fitness invariant under
+        the family's scaling symmetry and interpretable as the FRACTION of the
+        stretching term left unaccounted by translation + advection. ~0 for the
+        exact a=0 traveling wave; rises as advection deforms it."""
+        HOmega = self.Hmat @ Omega
+        Omega_X = _drho_centered4(Omega, self.drho) / self.X_rho
+        stretch = Omega * HOmega
+        src = stretch.copy()
+        if self.a != 0.0:
+            src = src - self.a * (self.Vmat @ HOmega) * Omega_X
+        denom = float(np.dot(Omega_X, Omega_X))
+        c_tw = float(np.dot(src, Omega_X) / denom) if denom > 0 else 0.0
+        R = src - c_tw * Omega_X
+        scale = np.sqrt(np.mean(stretch ** 2))
+        return float(np.sqrt(np.mean(R ** 2)) / max(scale, 1e-30))
 
 
 # --------------------------------------------------------------------------
@@ -256,6 +279,17 @@ def even_lorentz(X, params):
 
 
 # exact anchors (for tests / GA gate targets) -------------------------------
+
+def rational_mixed(X, params):
+    """General localized profile: even_lorentz(K=2) + odd_rational(K=2).
+
+    genome = [A1,B1,A2,B2 (even Lorentzians), C1,D1,C2,D2 (odd rationals)], 8
+    params. Lets the a-sweep GA discover whether the traveling two-scale profile
+    stays EVEN (odd part -> 0) or SKEWS under advection (odd part grows), rather
+    than assuming evenness. The even part alone reproduces HQW25's Omega_2."""
+    p = np.asarray(params, dtype=float)
+    return even_lorentz(X, p[:4]) + odd_rational(X, p[4:8])
+
 
 def clm_one_scale(X):
     """Exact a=0 CLM one-scale steady profile on the c=0.5 grid: -4X/(1+4X^2)."""
