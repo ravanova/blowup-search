@@ -149,6 +149,69 @@ class GCLMResidual:
             R = R * weight
         return float(np.sqrt(np.mean(R ** 2)))
 
+    # -- two-scale (traveling-wave) residual --------------------------------
+    #
+    # HQW25 (Thm 2.2, and esp. sec 2.4) proves the two-scale self-similar
+    # blowup profile is an EXACT TRAVELING WAVE. Carry the two-scale ansatz
+    #     omega(x,t) = (T-t)^{c_omega} Omega(z),
+    #     z = (x - r(t)(T-t)^{c_s}) / (T-t)^{c_l},   c_omega=-3/2, c_l=1, c_s=1/2
+    # through the gCLM equation; as t->T- the leading (order (T-t)^{-3}) balance
+    # is a pure traveling-wave equation -- the DILATION term (-c_l X Omega_X) and
+    # the amplitude term (c_omega Omega) are subleading (order (T-t)^{-5/2}) and
+    # DROP. The surviving moving-frame term is a pure TRANSLATION c_tw Omega_X
+    # with c_tw = c_s * r (the traveling-wave speed), giving the steady residual
+    #
+    #     R2(Omega) = Omega H(Omega) - c_tw Omega_X - a U Omega_X.
+    #
+    # This is STRUCTURALLY DIFFERENT from residual() above: translation
+    # (constant * Omega_X) not dilation (X * Omega_X), and no c_omega amplitude
+    # gauge. At a=0 the exact anchor Omega_2 = -1/(1+X^2) (HQW25's a=b=c=1
+    # normalization, H(Omega_2) = -X/(1+X^2)) nulls it to ~1e-9 with c_tw=1/2;
+    # in fact EVERY single even_lorentz A/(1+B X^2) is an exact a=0 traveling
+    # wave with speed c_tw = -A/(2 sqrt(B)), so the a=0 two-scale steady set is a
+    # 2-parameter scaling valley (report invariants, not the gauge values). The
+    # a-sweep instantiates this residual across a to ask whether the traveling
+    # (even) two-scale profile survives advection or its residual floor blows up.
+
+    def gauge_c_tw(self, Omega, a=None):
+        """Least-squares traveling-wave speed: the c_tw minimizing ||R2||.
+
+        R2 is linear in c_tw, so the optimal (gauge) speed is the projection
+        c_tw = <Omega H Omega - a U Omega_X, Omega_X> / <Omega_X, Omega_X>.
+        Robust where a single-node derivative ratio would be noisy; recovers the
+        exact -A/(2 sqrt(B)) for a single Lorentzian at a=0."""
+        HOmega = self.Hmat @ Omega
+        Omega_X = _drho_centered4(Omega, self.drho) / self.X_rho
+        src = Omega * HOmega
+        a = self.a if a is None else a
+        if a != 0.0:
+            src = src - a * (self.Vmat @ HOmega) * Omega_X
+        denom = float(np.dot(Omega_X, Omega_X))
+        return float(np.dot(src, Omega_X) / denom) if denom > 0 else 0.0
+
+    def residual_two_scale(self, Omega, c_tw=None):
+        """Two-scale traveling-wave residual R2(Omega) on the grid.
+
+        R2 = Omega H(Omega) - c_tw Omega_X - a U Omega_X. If c_tw is None, use
+        the least-squares gauge speed (gauge_c_tw). Returns (R2, c_tw)."""
+        HOmega = self.Hmat @ Omega
+        Omega_X = _drho_centered4(Omega, self.drho) / self.X_rho
+        R = Omega * HOmega
+        if self.a != 0.0:
+            R = R - self.a * (self.Vmat @ HOmega) * Omega_X
+        if c_tw is None:
+            denom = float(np.dot(Omega_X, Omega_X))
+            c_tw = float(np.dot(R, Omega_X) / denom) if denom > 0 else 0.0
+        R = R - c_tw * Omega_X
+        return R, c_tw
+
+    def residual_two_scale_norm(self, Omega, c_tw=None, weight=None):
+        """Scalar ||R2||: RMS over the grid. The GA fitness for the a-sweep."""
+        R, _ = self.residual_two_scale(Omega, c_tw=c_tw)
+        if weight is not None:
+            R = R * weight
+        return float(np.sqrt(np.mean(R ** 2)))
+
 
 # --------------------------------------------------------------------------
 # low-dimensional parametric profile families (the GA genome -> Omega map)
@@ -197,3 +260,12 @@ def even_lorentz(X, params):
 def clm_one_scale(X):
     """Exact a=0 CLM one-scale steady profile on the c=0.5 grid: -4X/(1+4X^2)."""
     return -4.0 * X / (1.0 + 4.0 * X ** 2)
+
+
+def clm_two_scale(X):
+    """Exact a=0 two-scale traveling-wave profile (HQW25 a=b=c=1): -1/(1+X^2).
+
+    The even Lorentzian bump Omega_2 = -a^3 b^{3/2} c / (a^4 c^2 + b^4 X^2) in the
+    a=b=c=1 normalization; H(Omega_2) = -X/(1+X^2), and it nulls the two-scale
+    residual with traveling-wave speed c_tw = 1/2 (= c_s r = (1/2)(a/b^{1/2}))."""
+    return -1.0 / (1.0 + X ** 2)

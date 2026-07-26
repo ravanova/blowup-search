@@ -29,7 +29,7 @@ Run: python test_gclm_family.py     (no scipy; ~a few seconds)
 import numpy as np
 
 from solver.gclm_family import (
-    GCLMResidual, clm_one_scale, odd_rational, even_lorentz,
+    GCLMResidual, clm_one_scale, clm_two_scale, odd_rational, even_lorentz,
 )
 from solver.ga_search import ga_minimize, GAConfig
 
@@ -138,6 +138,93 @@ def test_ga_generic_engine():
     print("[ok] generic GA engine finds the known optimum and is deterministic")
 
 
+### two-scale (traveling-wave) residual gate #################################
+#
+# HQW25 Thm 2.2 / sec 2.4: the two-scale blowup profile is an EXACT traveling
+# wave. The two-scale residual R2 = Omega H Omega - c_tw Omega_X - a U Omega_X
+# (translation, not dilation; derived by carrying the moving-frame ansatz to its
+# leading order) must null the exact anchor Omega_2 = -1/(1+X^2) at a=0. These
+# mirror the a=0 one-scale gate above -- the KNOWN-ANSWER GATE for the a-sweep.
+
+
+def test_a0_two_scale_gate():
+    """(7) Exact two-scale anchor Omega_2 nulls R2; least-squares speed c_tw=1/2."""
+    R = GCLMResidual(a=0.0, n=1201)
+    Om = clm_two_scale(R.X)
+    # H(Omega_2) matches the closed form -X/(1+X^2) in the bulk
+    H = R.Hmat @ Om
+    Hx = -R.X / (1.0 + R.X ** 2)
+    herr = np.abs((H - Hx)[np.abs(R.X) < 20.0]).max()
+    res, c_tw = R.residual_two_scale(Om)
+    rms = np.sqrt(np.mean(res ** 2))
+    print(f"    H err(bulk)={herr:.2e}  R2 RMS={rms:.3e}  c_tw={c_tw:+.7f}")
+    assert herr < 1e-6, f"H(Omega_2) off closed form: {herr:.2e}"
+    assert rms < 1e-6, f"exact two-scale anchor not steady: RMS={rms:.2e}"
+    assert abs(c_tw - 0.5) < 1e-4, f"gauge speed off 1/2: {c_tw}"
+    # even_lorentz [-1,1] reproduces the anchor (genome gate target; the family's
+    # 1e-9 B-regularizer sets the ~1e-9 floor)
+    assert np.abs(even_lorentz(R.X, [-1.0, 1.0]) - Om).max() < 1e-8
+    print("[ok] exact two-scale anchor is a numerical traveling-wave null of R2")
+
+
+def test_two_scale_family_and_a_break():
+    """(8) EVERY even_lorentz is an a=0 exact TW (c_tw=-A/(2 sqrt B)); a!=0 breaks it."""
+    R = GCLMResidual(a=0.0, n=1201)
+    for A, B in [(-1.0, 1.0), (-2.0, 1.0), (-1.0, 4.0), (-3.0, 0.5)]:
+        Om = even_lorentz(R.X, [A, B])
+        res, c_tw = R.residual_two_scale(Om)
+        pred = -A / (2.0 * np.sqrt(B))
+        rms = np.sqrt(np.mean(res ** 2))
+        print(f"    A={A:+.1f} B={B:.1f}  c_tw={c_tw:+.4f} (pred {pred:+.4f})  R2rms={rms:.2e}")
+        assert rms < 1e-6, f"even_lorentz not an a=0 TW null: {rms:.2e}"
+        assert abs(c_tw - pred) < 1e-3, f"speed off -A/(2 sqrt B): {c_tw} vs {pred}"
+    # a!=0 advection breaks the exact traveling wave (residual floor lifts)
+    Om0 = clm_two_scale(GCLMResidual(a=0.0, n=801).X)
+    prev = None
+    for a in (0.0, 0.5, 1.0):
+        Ra = GCLMResidual(a=a, n=801)
+        Om = clm_two_scale(Ra.X)
+        # even profile -> odd residual (parity of the two-scale ansatz)
+        res, c_tw = Ra.residual_two_scale(Om)
+        odd_asym = np.abs(res + res[::-1]).max()
+        rms = np.sqrt(np.mean(res ** 2))
+        print(f"    a={a:+.1f}  R2rms={rms:.3e}  odd-asymmetry={odd_asym:.2e}")
+        assert np.all(np.isfinite(res)), "residual not finite"
+        assert odd_asym < 1e-9, f"even ansatz should give odd residual: {odd_asym:.2e}"
+        if a == 0.0:
+            assert rms < 1e-6
+        else:
+            assert rms > 1e-2, "advection should break the a=0 traveling wave"
+        prev = rms
+    print("[ok] even_lorentz = a=0 TW valley; a!=0 breaks it (the sweep signal)")
+
+
+def test_ga_two_scale_traveling_member():
+    """(9) Global search over even_lorentz finds a low-residual a=0 traveling member."""
+    R = GCLMResidual(a=0.0, n=601)
+
+    def fit(g):
+        return R.residual_two_scale_norm(even_lorentz(R.X, g))
+
+    # the a=0 steady set is a 2-parameter scaling valley: ANY (A<0, B>0) is a
+    # null, so assert the FOUND member is genuinely steady + self-consistent
+    # speed (report the invariant relation, not a single gauge value).
+    got = 0
+    for seed in range(3):
+        cfg = GAConfig(pop_size=40, n_generations=70, seed=seed, target_fitness=1e-5)
+        r = ga_minimize(fit, [-6.0, 0.3], [-0.3, 8.0], config=cfg)
+        A, B = r.best_genome
+        Om = even_lorentz(R.X, [A, B])
+        _, c_tw = R.residual_two_scale(Om)
+        pred = -A / (2.0 * np.sqrt(B))
+        print(f"    seed {seed}: (A,B)=({A:+.3f},{B:.3f})  c_tw={c_tw:+.4f} (pred {pred:+.4f})  res={r.best_fitness:.2e}")
+        assert r.best_fitness < 1e-3, f"GA found no traveling member: {r.best_fitness:.2e}"
+        assert A < 0 and B > 0, "found member outside the even-bump valley"
+        assert abs(c_tw - pred) < 5e-3, f"speed not self-consistent: {c_tw} vs {pred}"
+        got += 1
+    print(f"[ok] GA recovers a=0 two-scale traveling members ({got}/3), speed self-consistent")
+
+
 if __name__ == "__main__":
     test_a0_residual_gate()
     test_velocity_operator()
@@ -145,4 +232,7 @@ if __name__ == "__main__":
     test_ga_recovers_dilation_family()
     test_ga_pinned_anchor()
     test_ga_generic_engine()
+    test_a0_two_scale_gate()
+    test_two_scale_family_and_a_break()
+    test_ga_two_scale_traveling_member()
     print("\nALL GCLM-FAMILY TESTS PASSED")
