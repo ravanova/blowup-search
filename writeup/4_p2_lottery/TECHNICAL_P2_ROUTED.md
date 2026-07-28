@@ -23,6 +23,18 @@ with `fractions` as an exact oracle); the probe `experiments/p2_route_d_probe.py
 reuses the banked residual `solver/gclm_family.py::GCLMResidual.residual_two_scale`
 and Hilbert operator `solver/line_hilbert.py`. Full test suite (8 files) green.
 
+> **Update (Route-D v2, 2026-07-28).** The dress rehearsal proposed in §8 has been
+> run: see [TECHNICAL_P2_ROUTED_DRESS.md](TECHNICAL_P2_ROUTED_DRESS.md) / fig20.
+> **The ball does not close, at any truncation, gauge or weight.** Three claims
+> below are superseded and should be read with that in mind: (i) §6's "`Z₀ + Z₁ < 1`
+> is *plausible*" — it is not; `Z₁ ≥ N+1` from the truncation coupling alone;
+> (ii) §7's ordering of the open risks — **G** (gauge) is exonerated by a
+> three-gauge ladder, and **R** (the `θ = ±π` far field) is the blocker, confirmed
+> by ablation; (iii) §5's "on the *decaying* subspace" caveat on `H(cos kθ) =
+> sin kθ` — the identity is in fact unconditional (a Hardy-space argument, v2 §1).
+> A `k = 0` coefficient error in this leg's closed-form band was also found and
+> fixed (v2 §1). Everything else here stands.
+
 ---
 
 ## 0. Why this brick, and what "Level-2" means here

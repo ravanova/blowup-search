@@ -3,6 +3,67 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v2: the FLOAT DRESS REHEARSAL — NEGATIVE (non-logged) — 2026-07-28
+
+**NOT a logged gate run** (deterministic tooling + a scoping ladder — no GA, no seeds,
+no predicate lock). Data `writeup/data/p2_route_d_dress.json` (regen
+`python experiments/p2_route_d_dress.py`, seconds); figure fig20
+(`writeup/4_p2_lottery/p2_route_d_dress_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_DRESS; PHASE2_P2_NOTES.md §11. Code: `solver/nk_fourier.py`
++ `test_nk_fourier.py` (6/6; suite now 9 files green).
+
+What a human would want to know:
+
+- **The question was gating, and the answer was no.** §10 ended with one thing that
+  decided whether to spend weeks on interval hardening: does the radii polynomial
+  close at the a=0 anchor? Computed in plain float across N=4..256: **0/13**. Not
+  marginal — the certification budget Y₀^max = (1−Z₀−Z₁)²/(4Z₂) is *identically
+  zero* at every N. Running the cheap rehearsal first is exactly what it was for.
+
+- **The pessimism in §10 was aimed at the wrong thing.** We had worried that a≠0
+  would fail because its residual floor ~1e-2 makes Y₀ too big. But the anchor has
+  defect *exactly* zero (it's an exact traveling wave and a degree-1 trig
+  polynomial, so even the convolution tail vanishes) and it still doesn't close.
+  The failure is not about accuracy. It is about the space.
+
+- **The ablation is the part I'd defend hardest.** Growth in ‖A_N‖ alone would only
+  be a suspicion. Rebuilding the identical ladder with the transport factor
+  (1+cosθ) replaced by 1 — one feature removed, nothing else touched — makes
+  ‖A_N‖ go *flat at exactly 4.0* where the true operator reaches 198.7 (N^0.97 →
+  N^0.00). That converts "we think it's the far field" into "it is the far field."
+  Meanwhile all three gauge normalizations sit on top of each other, so the crux we
+  had flagged (sub-task G) is cleared and the footnote (sub-task R) is the blocker.
+  The open-risk list from §10 is now reordered by evidence rather than by hunch.
+
+- **Two things closed the argument off from "try harder".** (i) Z₁ ≥ N+1 exactly,
+  from the truncation coupling alone — the finite section couples *more* strongly to
+  what it discards as N grows, so bigger is strictly worse, not asymptotically
+  better. (ii) The far-field column weight tends to 1 from *below* under one tail
+  model and from *above* under the other, both at O(1/k) — so the marginality is not
+  a modelling artifact — and no positive weight can fix it (the required recursion
+  has characteristic roots on the unit circle, so any positive solution oscillates
+  into negativity). That is a proof, not a scan.
+
+- **The constructive half is what makes this worth writing up.** The far-field ODE
+  −c h_X − h/X = g integrates in closed form and predicts the inverse loses exactly
+  one power of X-decay; since mode m resolves X ~ m, it predicts ‖A e_m‖ ∝ m.
+  Measured 1.97·m. Then grading the codomain by that one power gives ‖A‖ = 3.000,
+  flat from N=8 to N=384. Prediction, confirmation, and a specification for the next
+  brick — the asymmetric decay-graded space pair — rather than just a dead end.
+
+- **Built the operator twice, found a bug.** `solver/nk_fourier.py` is exact closed
+  form (no grid, no quadrature: the anchor nulls to 0.0, versus the grid's 1e-9),
+  gated against three oracles — the anchor, finite differences, and the banked grid
+  residual. Comparing it with §10's independently-written band exposed an unfolded
+  sin(−θ) in the k=0 column there (−1/4 instead of −1/2); v1's cross-check only ran
+  k≥1, so it never touched the folding case. Fixed, cross-check extended to k=0, and
+  the two closed forms now agree to 0.0. No conclusion of §10 changes, but it is a
+  standing argument for building the same object twice.
+
+- **Honest ceiling.** All float64. Nothing here is interval-enclosed and nothing is
+  rigorous. This does not climb the rigor ladder — it closes one route with a reason
+  and gives its replacement an address. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v1: interval core + a=0 NK framing — TOOLING/SCOPING (non-logged) — 2026-07-26
 
 **NOT a logged gate run** (deterministic tooling + a scoping probe — no GA, no

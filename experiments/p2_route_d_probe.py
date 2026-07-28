@@ -39,11 +39,15 @@ Three measurements (see writeup/4_p2_lottery/TECHNICAL_P2_ROUTED.md for the fram
 """
 
 import json
+import os
+import sys
 from pathlib import Path
 
 import numpy as np
 
-from solver.gclm_family import (
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from solver.gclm_family import (  # noqa: E402
     GCLMResidual, clm_two_scale, even_lorentz, _drho_centered4,
 )
 from solver.interval import Interval, matvec
@@ -187,6 +191,14 @@ def q4_operator_structure(R, D, N=12, c_tw=0.5):
     B = np.zeros((N, N + 1))                    # rows m=1..N, cols k=0..N
 
     def add(m, k, val):                         # accumulate coeff of sin(m) from cos(k)
+        # FOLD sin(-m) = -sin(m) and drop sin(0) = 0. This matters only for the
+        # k = 0 column (where term 1 generates m = k-1 = -1): without the fold the
+        # k=0 entry came out -1/4 instead of -1/2. Caught when the dress rehearsal
+        # (solver/nk_fourier.py, gated by test_nk_fourier.py against BOTH finite
+        # differences and the grid operator) disagreed here; the v1 cross-check
+        # below only ran k >= 1, so it never exercised the folding case.
+        if m < 0:
+            m, val = -m, -val
         if 1 <= m <= N and 0 <= k <= N:
             B[m - 1, k] += val
 
@@ -219,7 +231,7 @@ def q4_operator_structure(R, D, N=12, c_tw=0.5):
     msk = np.abs(X) < 15.0
     w = np.gradient(theta)                       # d theta measure for projection
     max_mismatch = 0.0
-    for k in range(1, min(N, 6) + 1):            # check a few interior cosine modes
+    for k in range(0, min(N, 6) + 1):            # k=0 included (the folding case)
         h = np.cos(k * theta)
         Lh = L @ h
         # project Lh onto sin(m theta): b_m = <Lh, sin m> / <sin m, sin m>

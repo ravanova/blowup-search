@@ -27,7 +27,7 @@ writeup/
   1_gclm_1d/       the completed 1D gCLM pipeline (Level-0/1)        figs 1–5
   2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
   3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
-  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–19
+  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–20
 ```
 
 ## The rigor ladder (the project's framing)
@@ -36,8 +36,9 @@ writeup/
 - **Level 1** — a *novel numerical map* (GA finds an approximate profile, measures a
   residual). **All of Arcs 1–4 through fig18 live here.** A GA proves nothing.
 - **Level 2** — a *rigorous, computer-assisted statement* (interval / Newton–
-  Kantorovich certification). **Arc 4's Route-D leg (fig19) is the first brick here**
-  — validated tooling + a framing result, *not yet a certificate*.
+  Kantorovich certification). **Arc 4's Route-D legs (figs 19–20) are the first
+  bricks here** — validated tooling, a framing result, and then an honest structural
+  *negative* (the naive certification does not close, and why). *Not a certificate.*
 - **Level 3** — the Clay problem.
 
 ---
@@ -99,6 +100,12 @@ writeup/
     [BLOG_P2_ROUTED.md](4_p2_lottery/BLOG_P2_ROUTED.md) — **Route-D v1**: the rigorous
     interval-arithmetic core + the a=0 Newton–Kantorovich framing (the first Level-2
     brick; tooling + scoping, NOT a certificate). *(fig 19)*
+21. [TECHNICAL_P2_ROUTED_DRESS.md](4_p2_lottery/TECHNICAL_P2_ROUTED_DRESS.md) ·
+    [BLOG_P2_ROUTED_DRESS.md](4_p2_lottery/BLOG_P2_ROUTED_DRESS.md) — **Route-D v2**:
+    the float dress rehearsal. The Newton–Kantorovich ball does **not** close at any
+    truncation, gauge or weight; the cause is isolated by ablation (the transport term
+    degenerates at `X = ∞`), and the repair — an asymmetric decay-graded space pair, in
+    which `‖A‖ = 3.000` uniformly — is identified and measured. *(fig 20)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -128,6 +135,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig17_two_scale_sweep.png` | 4 | P2 — two-scale traveling wave deforms under advection to `a_p≈0.4` |
 | `fig18_two_scale_kladder.png` | 4 | P2 — a_p(K) saturates: boundary `a*≈0.5–0.55` genuine |
 | `fig19_p2_route_d.png` | 4 | P2 — Route-D v1: interval enclosure, the 2-D valley, the line→circle diagonalization, and the banded+rank-1 linearized operator |
+| `fig20_p2_route_d_dress.png` | 4 | P2 — Route-D v2: the NK ball never closes (‖A_N‖ ~ N), the ablation that pins it on the far field, and the decay-graded repair (‖A‖ = 3.000 flat) |
 
 ## Evidence map ([`data/`](data/))
 
@@ -141,6 +149,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `spike0_rescaling.json`, `spike1_stepA_velocity.json`, `spike1_stepB_rescaled.json`, `spike1_stepC_gate.json` | Arc 3 (figs 8–11) |
 | `p2_hl_anchor.json`, `p2_conj24_relax.json`, `p2_regular_profile*.json`, `p2_scenario2_relax.json`, `p2_ga_framework.json`, `p2_two_scale_sweep.json`, `p2_two_scale_kladder.json` | Arc 4 (figs 12–18) |
 | `p2_route_d_probe.json` | Arc 4 / fig19 — Q1 enclosure precision, Q2 degeneracy singular values, Q3 line→circle covariance, Q4 the banded operator |
+| `p2_route_d_dress.json` | Arc 4 / fig20 — D1 the N-ladder (`‖A_N‖ ~ N^0.97`), D2 the radii-polynomial bounds, D3 gauge insensitivity, D4 the `(1+cosθ)→1` ablation, D5 the far-field marginality + weight-repair impossibility, D6 the decay-graded pairings |
 
 ## Rebuilding
 
@@ -152,9 +161,11 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/3_spikes/spike0_rescaling_evidence.py          # fig8
 .venv/bin/python writeup/4_p2_lottery/p2_two_scale_kladder_evidence.py  # fig18
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_evidence.py            # fig19
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_dress_evidence.py      # fig20
 
-# regenerate the Route-D probe data itself (deterministic, ~10 s):
+# regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
 .venv/bin/python experiments/p2_route_d_probe.py
+.venv/bin/python experiments/p2_route_d_dress.py
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

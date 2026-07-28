@@ -8,6 +8,9 @@ step of a different kind: turning a guess into something a computer could one da
 that tells us whether the certification is even set up right. Still a toy model.
 Still not a breakthrough.*
 
+> **Update:** we ran the test this post ends on. It failed — informatively.
+> [The proof didn't close. Here's exactly what stopped it.](BLOG_P2_ROUTED_DRESS.md)
+
 ## The ladder we're climbing
 
 It helps to name the rungs.

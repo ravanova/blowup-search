@@ -36,7 +36,7 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
 ## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
 ## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
-## §5→§6→§7→§8→§9→§9-cont2.
+## §5→§6→§7→§8→§9→§9-cont2→§10→§11.
 ## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
 ## **ROUTE-D v1 DONE (§10, 2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a
 ## certificate.** Built solver/interval.py (hand-rolled rigorous interval arithmetic, +test 5/5, suite now
@@ -46,9 +46,16 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## X=tan(θ/2) the line Hilbert = circular conjugate (cos kθ↦sin kθ, ~1e-7), anchor = 2-term Fourier;
 ## Q4 ⇒ DF is TRIDIAGONAL + rank-1 (cos→sin), so finite-section Z₀+Z₁<1 is PLAUSIBLE. Framing =
 ## radii-polynomial NK; F quadratic ⇒ Z₂ constant. Open risks G(gauge/index)/R(θ=±π endpoint)/T(tail)/
-## a≠0(no exact anchor off 0). BLOG/TECHNICAL_P2_ROUTED.md. **NEXT: the FLOAT DRESS REHEARSAL** — compute
-## Y₀/Z₀/Z₁/Z₂ + radii polynomial in plain float across an N-ladder to see if the ball CLOSES at the
-## anchor, BEFORE interval hardening (green-lights the verified build or a legit publishable negative).
+## a≠0(no exact anchor off 0). BLOG/TECHNICAL_P2_ROUTED.md.
+## **ROUTE-D v2 DONE (§11, 2026-07-28): the FLOAT DRESS REHEARSAL — the NK ball does NOT close, and CANNOT
+## (0/13 on N=4..256; at any N, any gauge, any weight). Cause ISOLATED BY ABLATION: the transport term
+## c(1+cosθ)∂_θ degenerates at θ=±π (X=∞) — replace (1+cosθ)→1 and ‖A_N‖ goes flat at 4.0 vs N^0.97.
+## Sub-task G (gauge) EXONERATED, sub-task R (far field) promoted to blocker. Certification budget
+## Y₀^max ≡ 0 at every N. CONSTRUCTIVE HALF: the inverse loses EXACTLY one power of decay (‖A e_m‖≈1.97m,
+## predicted by the far-field ODE), so grading the codomain by one mode power gives ‖A‖=3.000 FLAT in N —
+## the asymmetric space pair a working certificate must use. New solver/nk_fourier.py + test_nk_fourier.py
+## (6/6; suite 9 files green); fig20; BLOG/TECHNICAL_P2_ROUTED_DRESS.md. Level-1 tooling + a structural
+## negative, NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -435,3 +442,68 @@ near-zero cost BEFORE any interval hardening. Green-lights the verified build or
 (G/R/T) blocks it (a legit publishable negative either way). Only after it closes in float do we harden with
 solver/interval.py. HONEST CEILING unchanged: even full success = computer-assisted TOY-MODEL certification
 (Chen–Hou / Gómez-Serrano genre), NOT a Clay solve. Clay odds ~0.05%.
+
+## §11 — ROUTE-D v2 DONE (2026-07-28): the FLOAT DRESS REHEARSAL. **The NK ball does NOT close** — a
+## structural NEGATIVE with a constructive repair. Level-1 tooling + scoping, NOT a certificate.
+
+The §10 "next brick", executed. Built solver/nk_fourier.py (the EXACT closed-form Fourier operator — no
+grid, no quadrature) + test_nk_fourier.py 6/6 (suite now **9 files green**); ran the deterministic ladder
+experiments/p2_route_d_dress.py → writeup/data/p2_route_d_dress.json → fig20
+(writeup/4_p2_lottery/p2_route_d_dress_evidence.py). NOT a logged Tier run (deterministic; no GA/seeds/
+predicate lock). BLOG/TECHNICAL_P2_ROUTED_DRESS.md.
+
+**HEADLINE: the radii polynomial closes at NO truncation (0/13 on N=4..256), and the measurements show it
+CANNOT — at any N, under any gauge, with any positive weight. Cause located and confirmed by ablation:
+the transport term c(1+cosθ)∂_θ DEGENERATES at θ=±π (X=∞).** Certification budget
+Y₀^max=(1−Z₀−Z₁)²/(4Z₂) is IDENTICALLY ZERO at every N. (So the §10 worry that a≠0's Y₀~1e-2 would be too
+big was beside the point: the apparatus cannot certify defect ZERO either.)
+
+Exact operator (banked; supersedes the grid version for Route D):
+  H(cos kθ)=sin kθ for EVERY k≥0, H(1)=0 — UNCONDITIONAL (Hardy/Cayley: e^{iθ}=(1+iX)/(1−iX) holomorphic in
+  the UHP, G_k=e^{ikθ}−(−1)^k decays, H(Re G)=Im G). §10 Q3's "on the decaying subspace" caveat is
+  unnecessary. f_X=(1+cosθ)f_θ. Anchor a=(−1/2,−1/2,0,…), c=1/2 nulls the residual EXACTLY (both terms are
+  sinθ/4+sin2θ/8) — a sharper gate than the grid's 1e-9. Kernel directions in closed form: amplitude
+  (½,½,0,…;δc=−½), dilation (⅛,0,−⅛,0,…;δc=−¼); fixed-c kernel w=−¼cosθ(1+cosθ)=(−⅛,−¼,−⅛,0,…).
+
+SIX evidence pieces (do not relearn):
+  D1 LADDER. ‖A_N‖_{ℓ¹} ~ N^0.97 (5.0→198.7 over N=4→256), σ_min ~ N^−0.98, cond ~ N^2.03. The gauged
+     finite-section inverse is UNBOUNDED ⇒ not boundedly invertible in unweighted ℓ¹ ⇒ no truncation can
+     certify. Y₀=0.0 exactly (anchor is an exact zero AND a degree-1 trig poly ⇒ zero convolution tail).
+  D2 BOUNDS. Z₀~1e-11 (rounding only). Z₁ ≥ N+1 EXACTLY from the truncation coupling alone (5,17,65,257 at
+     N=4,16,64,256) — the finite section couples MORE strongly to what it discards as N grows; bigger is
+     strictly WORSE. Z₂=2‖A‖ diverges. Even the fiction "ignore the far field" does not close at any N.
+  D3 GAUGE EXONERATED. origin / a0 / a1 normalizations ALL give N^0.97, curves on top of each other.
+     **Sub-task G is NOT the blocker** (it still must be right for a real certificate, but it is cleared here).
+  D4 CAUSAL ISOLATION (the decisive test). Replace the transport factor (1+cosθ)→1, change nothing else:
+     ‖A_N‖ goes FLAT at exactly 4.0 (N^0.00) vs 198.7 (N^0.97). **Sub-task R (the θ=±π far field) is the
+     CAUSE, not a suspect** — promoted from footnote to blocker.
+  D5 FAR-FIELD MARGINALITY. Far-field DF columns are exactly tridiagonal (sub,diag,sup)=(ck/2, ck−½, ck/2−½).
+     The Z₁ column weight → 1 from BELOW under the transport-diagonal tail model and from ABOVE under the true
+     diagonal, both at O(1/k), c-independently ⇒ sup_{k>N} = 1 for every N; NOT a tail-model artifact. Root
+     cause: multiplication by the symbol 1+cosφ has ℓ¹ norm 2 = exactly 2× its mean, because it VANISHES at
+     φ=π. **No positive weight repairs it** (proof: z_w(k)≈(u_{k−1}+u_{k+1})/(2u_k), u_k=w_k/k; z_w≤1−δ forces
+     u_{k+1}≤2(1−δ)u_k−u_{k−1} whose characteristic roots lie ON the unit circle ⇒ oscillation ⇒ any positive
+     solution goes negative). Best possible = u affine (w_k=k(α+βk)) giving z_w≡1. Numerics agree.
+  D6 THE REPAIR (the constructive half). Far-field ODE −c h_X − h/X = g with c=1/2 ⇒ (X²h)′=−2X²g ⇒
+     h=2X^{−2}∫_X^∞ s²g ⇒ the inverse LOSES EXACTLY ONE POWER OF DECAY. Mode m resolves X~m, so predict
+     ‖A e_m‖_{ℓ¹} ∝ m; MEASURED 1.97·m (fit on m≤N/8; the roll-over at m→N is the finite-section edge, where
+     ‖A e_N‖=4 exactly at every N). Grade the CODOMAIN by one mode power (v_m=m, gauge row 1):
+     **‖A‖ = 3.000, FLAT from N=8 to N=384 (N^0.00).** Other pairings diverge (ℓ¹→graded: N^1.94;
+     graded→graded: N^0.95). ⇒ the certificate needs an ASYMMETRIC space pair one decay power apart.
+
+BUG FIXED in the §10 probe: the closed-form band's k=0 column had an unfolded sin(−θ) (−1/4 instead of
+−1/2); v1's grid cross-check only ran k≥1 so it never exercised the fold. experiments/p2_route_d_probe.py
+fixed + cross-check extended to k=0; the two independently-written closed forms now agree to 0.0. Grid
+cross-check unchanged at 3.9e-2 (that residual is the θ=±π endpoint correction, a different thing). Also
+added the missing sys.path bootstrap to that probe.
+
+NEXT BRICK (specification, NOT a promise): rebuild the bounds in the GRADED pair — domain ℓ¹ cosine coeffs,
+codomain graded by one mode power, far-field block handled by the EXACT ODE inverse above instead of a
+diagonal model (the standard "compact core + explicit far field" two-region structure of the Chen–Hou /
+Gómez-Serrano genre). TWO things must be re-derived and neither is free: (i) the quadratic D²F[h,h]=2hH(h)
+must land in the GRADED codomain — the Wiener-algebra bound only gives ℓ¹, so the DOMAIN norm likely has to
+move too; (ii) the far-field inverse must be interval-enclosed, not asymptotic. Alternative lanes if that
+stalls: the separate coupled-system HL two-stage leg, or extending the a_p(K) map to the odd/one-scale
+channel (lower value). HONEST CEILING unchanged: everything in §11 is plain float64, nothing is
+interval-enclosed, nothing is rigorous — running the rehearsal FIRST is exactly what saved hardening a set
+of bounds that could never have closed. Clay odds ~0.05%.
