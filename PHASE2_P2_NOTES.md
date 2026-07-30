@@ -36,7 +36,7 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
 ## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
 ## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
-## §5→§6→§7→§8→§9→§9-cont2→§10→§11→§12→§13.
+## §5→§6→§7→§8→§9→§9-cont2→§10→§11→§12→§13→§14.
 ## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
 ## **ROUTE-D v1 DONE (§10, 2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a
 ## certificate.** Built solver/interval.py (hand-rolled rigorous interval arithmetic, +test 5/5, suite now
@@ -79,6 +79,19 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## certificate space must carry BOTH gradings; no one-parameter family does. New solver/decay_collocation.py
 ## + test_decay_collocation.py (6/6; suite 11 files green); fig22; BLOG/TECHNICAL_P2_ROUTED_V4.md. Level-1
 ## tooling + scoping, NOT a certificate.**
+## **ROUTE-D v5 DONE (§14, 2026-07-30): the TWO-GRADING SPACE (decay x smoothness). v4's obstruction is
+## REMOVED: the square-wave adversary that broke the sup pair is DEFUSED for gamma >= 0.35 (Holder ratio
+## x0.83 at gamma=0.5 vs sup x2.26), the quadratic constant drops to <1 and its adversary growth falls below
+## 1, and C_H(gamma) BOWLS (min 1.12 at gamma~0.35) so SMOOTHNESS has its own interior optimum -- the same
+## shape decay has (v4: ||A|| bowls at alpha~1.4). Z2 = 3.29 vs v4's 13.4; budget ceiling 7.6e-2 vs 1.9e-2.
+## ONE MARGINAL DIRECTION LEFT: at the codomain's CRITICAL decay rate the inverse creeps logarithmically
+## (J^+0.14), while every delta>0 saturates to 4 s.f. across 16x in J -- v3's resonance one level down, same
+## fix (keep the residual class OPEN), and this time the detuning is nearly FREE (costs go DOWN with delta,
+## because it tightens the codomain rather than loosening the domain). The seminorm weight is alpha-gamma NOT
+## alpha (forced by the exact Jacobian dX/dth=(1+X^2)/2; with alpha the profile f_alpha itself has infinite
+## seminorm -- the numerical conformal check caught this). New solver/holder_norms.py + test_holder_norms.py
+## (6/6; suite 12 files green); fig23; BLOG/TECHNICAL_P2_ROUTED_V5.md. Level-1 tooling + scoping, NOT a
+## certificate; operator norms are FAMILY-RESTRICTED lower bounds and Z1 is still unbounded.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -656,5 +669,67 @@ grading, the Hilbert transform forces a smoothness scale, and the certificate's 
 once. Natural candidates: weighted Holder C^{0,gamma} with a decay weight (Holder is where H IS bounded), or
 a decay-adapted basis carrying a smoothness-graded ell^1. That is the §14 question and — following the rule
 that has now paid off twice — it should be settled ON PAPER before any solver is written.
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, no rung climbed. Clay odds ~0.05%.
+
+## §14 — ROUTE-D v5 DONE (2026-07-30): THE TWO-GRADING SPACE (decay x smoothness). v4's obstruction REMOVED;
+## one marginal direction left, with a nearly-free fix. Level-1 tooling + scoping, NOT a certificate.
+
+The §13 "next brick", done on paper first as the rule requires. v3 and v4 each found half of one requirement
+(v3: weights measure smoothness, we needed decay; v4: sup norms measure decay, we also need smoothness), so
+the space must carry BOTH. Built solver/holder_norms.py + test_holder_norms.py 6/6 (suite now **12 files
+green**); ran experiments/p2_route_d_v5_holder.py -> writeup/data/p2_route_d_v5_holder.json -> fig23
+(writeup/4_p2_lottery/p2_route_d_v5_evidence.py). NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V5.md.
+
+THE SPACE: ||h||_{a,g} = sup w^(a)|h| + sup_{j!=k} min(w^(a-g)) |dh| / |dth|^g, w^(b) = (1+X^2)^{b/2}.
+**The seminorm weight is a-g, NOT a, and it is FORCED**: the exact Jacobian dX/dth = (1+X^2)/2 turns the
+conformal far-field seminorm (1+X^2)^{(a+g)/2}|dh|/|dX|^g into 2^g (1+X^2)^{(a-g)/2}|dh|/|dth|^g -- the g in
+the exponent is eaten by the Jacobian. The first draft used weight a, under which **f_alpha itself has
+infinite seminorm** (the space would not contain the object the certificate is about); the numerical
+conformal check caught it. Second time in three legs a cheap check has caught an algebra slip. PAYOFF: after
+the identity, the whole weighted-conformal seminorm is a PLAIN theta-Holder seminorm with a diagonal weight
+-- no local windows, no scale-dependent pair selection, one O(J^2) broadcast. That is the only reason this
+leg was cheap. Checked pointwise (alpha-independent: the ratio is the Jacobian identity to the g) to 0.04%
+out to X~121.
+
+FIVE evidence pieces (do not relearn):
+  U1 THE DEFUSAL. v4's adversary p_m (degree-m partial sums of sign(cos th), bounded ~1.18 with conjugate
+     ~ (2/pi)log m): sup ratio x2.26 over m=8..512 AT EVERY gamma (it does not care about the decay weight
+     -- v4's point); Holder ratio x1.41 (g=0.15), **x0.96 (g=0.35), x0.83 (g=0.5), x0.76 (g=0.85)**. Defused
+     for g >~ 0.35. Mechanism: in a Holder norm the adversary pays for its own oscillation ([p_m]_g ~ m^g in
+     the denominator). Failure at small g is expected -- g->0 IS the sup norm.
+  U2 SMOOTHNESS HAS ITS OWN INTERIOR OPTIMUM. C_H(g) = 1.60, 1.21, **1.12**, 1.13, 1.18, 1.20, 1.29 for
+     g = 0.15..0.85 -- a BOWL, min at g~0.35-0.5, rising at both ends for different reasons (g->0 is the sup
+     norm where H is unbounded; g->1 is Lipschitz where H fails again). **Same shape as decay** (v4: ||A||
+     bowls at alpha~1.4 from far-field vs core). Two gradings, two interior optima, four unrelated
+     mechanisms. Caveat: C_H is a max over a finite family = a lower bound; the g->1 rise is under-resolved.
+  U3c THE ONE MARGINAL DIRECTION. The coarse (a,g) sweep and a focused ladder disagreed about J-saturation;
+     the cause is which test direction dominates. Residuals g = f_{a+1+delta} at a=1.5, g=0.5:
+     **delta=0 (the codomain's CRITICAL rate) creeps 1.956->2.879 over J=125..2000 (J^+0.14, a LOG), while
+     delta=0.1/0.25/0.5/1.0 are FLAT TO 4 S.F. across a 16x range in J** (1.777, 1.763, 1.711, 1.597).
+     This is v3's resonance one level down: the far-field inverse gives a log exactly at the critical
+     exponent, a clean power otherwise. SAME FIX: keep the residual class OPEN (decay strictly faster than
+     X^-(a+1)). **This detuning is nearly FREE and the constants go DOWN with delta** -- unlike v3's 2/eps --
+     because it TIGHTENS the codomain rather than LOOSENING the domain off its own kernel.
+  U4 THE QUADRATIC. At a=1.5, adversary growth over m=8..512: x1.63 (g=0.15), x1.13 (0.25), **x0.77 (0.35),
+     x0.42 (0.5), x0.11 (0.85)**; C_Q (smooth family dominates) 0.86..1.14. v4's sup-pair value was 2.73 at
+     m=512 AND STILL CLIMBING. Transition at g~0.3, consistent with U1.
+  U5 THE JOINT OPTIMUM (defused region g>=0.35): (a,g) = (1.8, 0.35), ||A||=2.45, C_Q=0.67, **Z2 = 3.29**
+     (v4: 13.4), budget ceiling **7.6e-2** (v4: 1.9e-2) -- about 4x better. FOUR reasons not to celebrate:
+     (i) ||A|| is FAMILY-RESTRICTED, a lower bound (the exact induced norm between two polyhedral norms is an
+     LP and this project has no scipy), so Z2 is a lower bound and the ceiling an upper bound on an upper
+     bound; (ii) C_Q likewise; (iii) Z1 is STILL not bounded anywhere in Route D; (iv) the argmax sits at
+     a=1.8, the edge of the swept grid, in a row with an unconverged-J artifact near the a=2 resonance --
+     the optimum's LOCATION is not firm, its EXISTENCE is.
+
+WHAT CHANGES FOR ROUTE D. RESOLVED: v4's quadratic obstruction; the two-grading space exists, is cheap to
+compute in, and its constants are single digits rather than tens. NEWLY IDENTIFIED AND FIXED: the
+critical-rate marginality, at almost no cost. STILL OPEN (the whole list): Z1 (quantified in v4 at
+J^-2.1..-2.6, never bounded -- now the LARGEST gap and no longer a scoping question); exact (not
+family-restricted) operator norms, which need an LP or an analytic Holder-to-Holder estimate (the analytic
+route is more likely: closed-form far field + finite-dimensional core); interval arithmetic
+(solver/interval.py has existed since v1 and has still never been pointed at any of this -- correctly, since
+nothing has closed in float); and a != 0 (no exact anchor, floor ~1e-2 against a 7.6e-2 ceiling that has not
+paid its debts).
 
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, no rung climbed. Clay odds ~0.05%.

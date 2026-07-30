@@ -3,6 +3,74 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v5: THE TWO-GRADING SPACE (non-logged) — 2026-07-30
+
+**NOT a logged gate run** (deterministic — no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v5_holder.json` (regen `python experiments/p2_route_d_v5_holder.py`,
+~10 min); figure fig23 (`writeup/4_p2_lottery/p2_route_d_v5_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V5; PHASE2_P2_NOTES.md §14. Code: `solver/holder_norms.py` +
+`test_holder_norms.py` (6/6; suite now 12 files green).
+
+What a human would want to know:
+
+- **The question was well posed for once.** v3 and v4 between them stated the requirement
+  completely: the space needs a decay grading (far-field transport) AND a smoothness scale
+  (Hilbert transform). This leg just had to build it and check the two halves don't
+  fight. They don't.
+
+- **The algebra slip, caught by a check I nearly didn't write.** The conformal translation
+  of the far-field Hölder seminorm through X = tan(th/2) eats a factor of gamma — the
+  weight is alpha MINUS gamma, not alpha. With the wrong weight the model profile f_alpha
+  has INFINITE seminorm, i.e. the space would not have contained the object the whole
+  certificate is about. The numerical check failed by a whole exponent, not a rounding
+  error. Second time in three legs. The habit pays.
+
+- **The payoff from getting it right.** After the identity, the elaborate weighted
+  conformal seminorm collapses to a PLAIN theta-Hölder seminorm with a diagonal weight.
+  The compactification does the far-field bookkeeping for free — no local windows, no
+  scale-dependent pair selection, one O(J^2) broadcast. That is the only reason the leg
+  was cheap enough to run at all.
+
+- **The adversary is genuinely defused.** Same square wave that killed v4: sup ratio grows
+  x2.26 at EVERY gamma (it does not care about the decay weight — exactly v4's diagnosis),
+  Hölder ratio x0.83 at gamma=0.5 and falling. The mechanism is not subtle: in a Hölder
+  norm the adversary pays for its own oscillation.
+
+- **The thing I did not expect: smoothness has an interior optimum too.** C_H(gamma) bowls
+  — 1.60 at 0.15, 1.12 at 0.35, 1.29 at 0.85 — rising at both ends for DIFFERENT reasons
+  (gamma->0 is the sup norm where H is unbounded; gamma->1 is Lipschitz where it fails
+  again). v4 found the same shape in alpha from far-field-vs-core. Two knobs, two interior
+  optima, four unrelated mechanisms. That the space has a finite non-degenerate best
+  configuration in both parameters is the most encouraging structural fact five legs have
+  turned up, and I would not have predicted it.
+
+- **Chasing a disagreement paid, again.** The coarse (alpha,gamma) sweep said the inverse
+  norm grows like J^0.14; a focused ladder said it settles. Both were right about their own
+  test directions. Isolating it: at the codomain's CRITICAL decay rate the ratio creeps
+  (a log), and at ANY delta>0 it is flat to four significant figures across a 16x range in
+  J. That is v3's resonance one level down, and the same fix works. The difference is the
+  price: v3's detuning cost 2/eps, this one is FREE and the constants improve with delta —
+  because it tightens the CODOMAIN instead of loosening the DOMAIN off its own kernel.
+  Worth remembering as a rule: detuning a requirement on the residual is cheap; detuning
+  the class of solutions is expensive.
+
+- **The number, with its four asterisks.** Z2 = 3.29 vs v4's 13.4; ceiling 7.6e-2 vs
+  1.9e-2. But: ||A|| and C_Q are FAMILY-RESTRICTED lower bounds (the exact induced norm
+  between polyhedral norms is an LP and we have no scipy), so the ceiling is an upper bound
+  on an upper bound; Z1 has never been bounded in five legs and is now the biggest gap;
+  and the argmax sits at alpha=1.8, the EDGE of the swept grid, in a row with an
+  unconverged-J artifact. The optimum's existence is solid; its location is not.
+
+- **What I would tell the next session.** The scoping phase of Route D is essentially done
+  — we know the space. The remaining work is estimates, not exploration: bound Z1, and turn
+  the family-restricted norms into real upper bounds (analytically, not by LP — the far
+  field has a closed-form inverse and the core is finite-dimensional). solver/interval.py
+  has existed since v1 and has still never been used, which is correct, because nothing has
+  closed in float.
+
+- Everything is plain float64. Nothing interval-enclosed, no rung climbed. Clay odds
+  unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v4: THE FULL OPERATOR IN THE DECAY-GRADED PAIR (non-logged) — 2026-07-30
 
 **NOT a logged gate run** (deterministic — no GA, no seeds, no predicate lock). Data
