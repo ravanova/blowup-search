@@ -36,7 +36,7 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
 ## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
 ## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
-## §5→§6→§7→§8→§9→§9-cont2→§10→§11.
+## §5→§6→§7→§8→§9→§9-cont2→§10→§11→§12.
 ## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
 ## **ROUTE-D v1 DONE (§10, 2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a
 ## certificate.** Built solver/interval.py (hand-rolled rigorous interval arithmetic, +test 5/5, suite now
@@ -56,6 +56,17 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## the asymmetric space pair a working certificate must use. New solver/nk_fourier.py + test_nk_fourier.py
 ## (6/6; suite 9 files green); fig20; BLOG/TECHNICAL_P2_ROUTED_DRESS.md. Level-1 tooling + a structural
 ## negative, NOT a certificate.**
+## **ROUTE-D v3 DONE (§12, 2026-07-30): the SPACE-PAIR NO-GO. v2's own repair is RETIRED, and with it the
+## WHOLE weighted-ell^1 category: the two NK requirements are separated by exactly one grading power and the
+## separation is CONSERVED (||A_N|| ~ N^(1-g), S_K ~ K^g with g=t-s; min exponent sum over the entire family
+## = 0.98, must be 0). Control (1+cos->1): min sum 0.00, boundary falls by TWO powers = the order 1+cos
+## vanishes to. Root cause reframed: a diagonal weight measures SMOOTHNESS, not DECAY (cos k(pi) = +-1 never
+## decays). POSITIVE HALF: DECAY-graded spaces satisfy BOTH (H(h) ~ (int h)/(pi X) => hH(h) gains one power),
+## the far field is RESONANT at alpha=2 = the anchor's own decay = the homogeneous solution
+## (||L^-1|| = 2/|alpha-2| to 0.008%), and detuning has an INTERIOR OPTIMUM alpha* ~ 1.44 => certify
+## X^-3/2 profiles with X^-5/2 residuals, Z2 ~ 13, budget ~1e-2 (thin). New solver/decay_grading.py +
+## test_decay_grading.py (7/7; suite 10 files green); fig21; BLOG/TECHNICAL_P2_ROUTED_SPACES.md. Level-1
+## tooling + a no-go theorem, NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -507,3 +518,72 @@ stalls: the separate coupled-system HL two-stage leg, or extending the a_p(K) ma
 channel (lower value). HONEST CEILING unchanged: everything in §11 is plain float64, nothing is
 interval-enclosed, nothing is rigorous — running the rehearsal FIRST is exactly what saved hardening a set
 of bounds that could never have closed. Clay odds ~0.05%.
+
+## §12 — ROUTE-D v3 DONE (2026-07-30): the SPACE-PAIR SCOPING LEG. **A NO-GO THEOREM for the whole
+## weighted-ell^1 category** (which retires v2's own repair), plus the decay-graded pair that replaces it.
+## Level-1 tooling + scoping, NOT a certificate.
+
+The §11 "next brick", with its own gating condition discharged FIRST as §11 instructed: before rebuilding in
+the graded pair, check on paper that the quadratic D^2F[h,h] = 2hH(h) lands in the graded codomain. It does
+not — and neither does any other diagonal-weight choice. Built solver/decay_grading.py + test_decay_grading.py
+7/7 (suite now **10 files green**); ran the deterministic probe experiments/p2_route_d_v3_spaces.py ->
+writeup/data/p2_route_d_v3_spaces.json -> fig21 (writeup/4_p2_lottery/p2_route_d_v3_evidence.py). NOT a
+logged Tier run. BLOG/TECHNICAL_P2_ROUTED_SPACES.md.
+
+**HEADLINE: over the entire two-parameter family of diagonal weights u_k=(1+k)^s, v_m=(1+m)^t, both NK
+requirements depend only on the GAP g = t-s, and their growth exponents are EXACT COMPLEMENTS:
+||A_N||_{Y->X} ~ N^(1-g) and the sharp quadratic constant S_K ~ K^g. A certificate needs BOTH to be 0; the
+SUM is >=1 everywhere (=1 on 0<=g<=1). Measured minimum over the whole family: 0.98. The one power the far
+field loses must be paid by one bound or the other; the weights only choose WHICH.**
+
+SIX evidence pieces (do not relearn):
+  S1 THE PURE-CONVOLUTION IDENTITY. Q(h) = hH(h) = (1/2) sum_m (sum_{j+k=m} h_j h_k) sin(m th) — NO
+     difference frequencies (h+iH(h) is a Hardy boundary value, 2hH(h) = Im of its square, squaring a
+     holomorphic function only adds frequencies). Independent second build vs nk_fourier.residual agrees to
+     3.2e-17 (0.0 at the anchor). Sharp weighted constant: ||Q(h)||_Y <= M||h||_X^2 for all h  <=>
+     S := sup_{j,k} v_{j+k}/(u_j u_k) < oo, with S/4 <= M <= S/2 (necessity via h = xi e_j + eta e_k
+     optimized). Unweighted S=1 => M=1/2, **2x sharper than the Wiener constant v2 used** (changes no v2
+     conclusion; its budget was identically zero).
+  S2 WHAT THE INVERSE COSTS. Minimal admissible codomain weight v_m^min(u) = ||A e_m||_{ell^1_u}; the ratio
+     v_m^min/(m u_m) is O(1) (1.3–3.2) across s in [0,2] and m in [2,32]. The price really is exactly one
+     mode power, for weighted domains as well as flat (s=0 reproduces v2's 1.97m).
+  S3 THE NO-GO, PROVED AND MEASURED. Proof: S<oo with k=0 gives v_m <= S u_0 u_m, i.e. v_m/u_m BOUNDED; a
+     bounded inverse needs v_m/u_m >~ 2m. Incompatible, with a margin growing linearly in m. (If a_0 is
+     gauged out, take k=1 and any non-decreasing weight: same conclusion.) Mechanism in words: the constant
+     mode multiplies at FULL strength, e_0 H(h) = H(h), no decay gained. Measured: region I (A bounded)
+     t >= s+1, region II (quadratic bounded) t <= s, strip between them EMPTY; boundaries pinned
+     grid-independently ON the candidate lines (t=s-1: 1.96, t=s: 0.98, t=s+1: 0.00–0.06; algebra t=s: 0.00,
+     t=s+0.25: 0.25 — all flat in s).
+  S4 THE CONTROL. (1+cos th) -> 1, nothing else changed: the inverse boundary falls from t >= s+1 to
+     t >= s-1 — **TWO powers**, exactly the order to which 1+cos th vanishes at th=+-pi (a non-degenerate
+     first-order transport GAINS one power on inversion; this one LOSES one). Min exponent sum 0.98 -> 0.00;
+     overlap 0/9 -> 9/9 values of s. The obstruction is this operator's far field, not the method.
+  S5 THE RESONANCE (both sides). Far-field model L h = -c h_X - h/X between DECAY-graded sup norms
+     (sup X^a|h| ; sup X^(a+1)|g|): **||L^-1|| = 2/|alpha-2|**, measured to <=0.008% vs the exact
+     finite-domain value over 15 alphas (2nd-order trapezoid in tau=log X on [1,1e12]; M-matrix so the
+     induced norm is ONE pass). Operator side, no ODE model and no quadrature:
+     lim X^(a+1) DF[f_a] = c*alpha - 1 = (alpha-2)/2, measured to <=0.3%. The pole at alpha=2 is structural:
+     X^-2 is BOTH the homogeneous far-field solution at c=1/2 AND the decay of the anchor Omega_2. **v2's
+     "loses exactly one power" IS this resonance seen at integer grading** (generic alpha loses nothing;
+     alpha=2 loses a log; integer weights round that to a full power). Admissible window 1<alpha<2
+     (alpha>1 for integrability; alpha<2 because Omega_2 H(h) ~ X^-3 would otherwise dominate).
+  S6 THE PAIR THAT WORKS + ITS PRICE. In X={|h| <~ X^-a}, Y={|g| <~ X^-a-1} EVERY term lands in Y: transport
+     and hH(Omega_2) exactly, Omega_2 H(h) faster, and **the quadratic exactly** — because
+     H(h)(X) -> (int h)/(pi X) for integrable h, so hH(h) decays ONE POWER FASTER than h. Verified against
+     the closed form int f_a = sqrt(pi) Gamma((a-1)/2)/Gamma(a/2) (<0.1% after fitting the known O(X^(1-a))
+     second term). Price: far-field 2/(2-a) vs quadratic constant (int f_a)/pi -> **INTERIOR OPTIMUM
+     alpha* ~ 1.44** (3/2 within 1%; broad — within 1% over [1.35,1.55]), Z2 ~ 13.3, budget ~1/(4Z2) ~ 1.9e-2.
+     => certify profiles decaying like X^-3/2 with residuals measured in X^-5/2, deliberately NOT the
+     anchor's own X^-2. SCOPING ESTIMATE ONLY: leading-order far-field constants, no compact core, float64.
+
+WHAT CHANGES FOR ROUTE D. RETIRED: v2 D6's literal recipe ("grade the codomain by one mode power; that is the
+pair"). The measurement was right, the inference was not — in that pair Z2 diverges exactly as fast as ||A||
+converges. ESTABLISHED: the whole diagonal-weight category is closed, with a proof, a 2-parameter sweep, a
+grid-independent boundary check, and a causal control. SPECIFIED: the replacement is a decay-graded
+(two-region) pair with alpha ~ 3/2 and Z2 ~ 13. STILL OPEN (unchanged): the compact-core block; a rigorous
+ENCLOSURE of the far-field inverse rather than an asymptotic one; core/far-field matching; and a != 0.
+
+HONEST CEILING unchanged: plain float64 throughout, nothing interval-enclosed, no rung climbed. Z2 ~ 13
+implies a budget ~1e-2 BEFORE the compact core, Z1 and interval overhead are paid, against an a != 0 residual
+floor of ~1e-2 — the margin, if any, is thin, and it is better to know that from an afternoon of algebra than
+after building a two-region solver. Clay odds ~0.05%.

@@ -3,6 +3,81 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v3: the SPACE-PAIR NO-GO (non-logged) — 2026-07-30
+
+**NOT a logged gate run** (deterministic scoping — no GA, no seeds, no predicate lock).
+Data `writeup/data/p2_route_d_v3_spaces.json` (regen
+`python experiments/p2_route_d_v3_spaces.py`, ~1 min); figure fig21
+(`writeup/4_p2_lottery/p2_route_d_v3_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_SPACES; PHASE2_P2_NOTES.md §12. Code:
+`solver/decay_grading.py` + `test_decay_grading.py` (7/7; suite now 10 files green).
+
+What a human would want to know:
+
+- **This leg exists because §11 attached a condition to its own repair, and the
+  condition was the whole ballgame.** v2 measured that grading the codomain by one
+  mode power makes ‖A‖ flat at 3.000 and called that the pair to use. It also said:
+  check that the quadratic lands in that codomain first, on paper, because if no
+  consistent pair exists the leg stops cheaply. It doesn't exist. The check cost an
+  afternoon of algebra and a minute of compute, and it saved building a two-region
+  solver in a space pair that could never have been consistent.
+
+- **The identity that does all the work.** Q(h) = hH(h) is a PURE CONVOLUTION —
+  q_m = ½Σ_{j+k=m}h_jh_k, no difference frequencies. (h+iH(h) is a Hardy boundary
+  value; 2hH(h) is Im of its square; squaring a holomorphic function can only add
+  frequencies.) From it the sharp weighted constant is S = sup v_{j+k}/(u_ju_k),
+  two-sided (S/4 ≤ M ≤ S/2), and the no-go is one line: k=0 gives v_m/u_m ≤ S·u_0
+  bounded, while a bounded inverse needs v_m/u_m ≳ 2m. The constant mode multiplies
+  everything at full strength — e_0·H(h) = H(h) — so no codomain strictly stronger
+  than the domain can receive the quadratic.
+
+- **The conservation law is the result I'd lead with.** Sweeping the whole family
+  u_k=(1+k)^s, v_m=(1+m)^t, both requirements collapse onto the gap g = t−s, and the
+  two growth exponents are exact complements: ‖A_N‖ ~ N^(1−g), S_K ~ K^g. A
+  certificate needs both zero; the SUM is ≥1 everywhere and exactly 1 on 0≤g≤1.
+  Measured minimum over the entire family: **0.98**. That is a stronger and cleaner
+  statement than "the proposed repair fails" — it is "every repair in this category
+  fails, and here is the invariant."
+
+- **The control is what makes it an attribution.** (1+cosθ)→1, nothing else changed:
+  the inverse boundary moves from t ≥ s+1 to t ≥ s−1. TWO powers — and that is
+  exactly right, because a healthy first-order transport gains one power on
+  inversion, this one loses one, and 1+cosθ vanishes to order 2 at θ=±π. Min
+  exponent sum drops 0.98 → 0.00, overlap 0/9 → 9/9. I did not predict the 2 in
+  advance; noticing it after the fact is what convinced me the picture is right.
+  (First version of the figure claimed the control drops the boundary to t=s — wrong,
+  caught by widening the t-grid to negative values.)
+
+- **The reframe: it was a category error.** A diagonal weight measures SMOOTHNESS,
+  not DECAY. cos(kθ) = (−1)^k at θ=π — a single mode does not decay at X=∞ at all,
+  for any k, so no weight can see decay. Decay lives in the alternating structure of
+  the coefficient sequence. Asking a weighted-ℓ¹ pair to express "loses one power of
+  decay" was asking a ruler to weigh something.
+
+- **The positive half, which I did not expect to get.** In DECAY-graded spaces
+  (|h| ≲ X^−α, |g| ≲ X^−α−1) both requirements hold at once: the far-field inverse
+  because of the ODE, and the quadratic because H(h) ~ (∫h)/(πX) means hH(h) decays
+  ONE POWER FASTER than h. Products don't gain smoothness but they do gain decay —
+  which is exactly why the coefficient picture couldn't see it.
+
+- **A resonance nobody had named, and a design parameter nobody knew was there.**
+  ‖L^{-1}‖ = 2/|α−2| exactly (measured to 0.008% against a 2nd-order discretization,
+  and independently from the operator side: lim X^{α+1}DF[f_α] = cα−1, to 0.3%). The
+  pole sits at α=2 — which is BOTH the homogeneous far-field solution at c=1/2 AND
+  the decay of the anchor. The natural choice is the forbidden one. Detuning costs
+  2/ε, but pushing α→1 blows up the quadratic constant (∫f_α)/π instead, so there is
+  an INTERIOR OPTIMUM at α* ≈ 1.44 (3/2 is within 1%). Recommendation for any v3
+  build: certify profiles decaying like X^−3/2 with residuals in X^−5/2, explicitly
+  NOT the anchor's own X^−2.
+
+- **Honest read of the number.** The optimum gives Z₂ ≈ 13, so a budget ~1e-2 BEFORE
+  paying for anything this leg didn't estimate (compact core, Z₁, interval overhead).
+  The a≠0 residual floor is also ~1e-2. The margin, if any, is thin. Better to know
+  that now than after the build.
+
+- Everything is plain float64. Nothing interval-enclosed, nothing rigorous, no rung
+  climbed on the ladder. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v2: the FLOAT DRESS REHEARSAL — NEGATIVE (non-logged) — 2026-07-28
 
 **NOT a logged gate run** (deterministic tooling + a scoping ladder — no GA, no seeds,
