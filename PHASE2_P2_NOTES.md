@@ -92,6 +92,18 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## seminorm -- the numerical conformal check caught this). New solver/holder_norms.py + test_holder_norms.py
 ## (6/6; suite 12 files green); fig23; BLOG/TECHNICAL_P2_ROUTED_V5.md. Level-1 tooling + scoping, NOT a
 ## certificate; operator norms are FAMILY-RESTRICTED lower bounds and Z1 is still unbounded.**
+## **ROUTE-D v6 DONE (§15, 2026-07-30): the FIRST GENUINE UPPER BOUNDS + the DISCRETE-BALL TRAP. THREE of
+## eight NK constants move MEASURED -> BOUNDED (Z1 far-field modelling error; ||A|| domain sup part,
+## 5.536->5.631 over J=125..1600 = SATURATES; C_Q sup part). METHODOLOGICAL HEADLINE: computing an induced
+## norm by DUALITY over the DISCRETE unit ball is UNSOUND -- the extremizer it picks is a grid-scale sign
+## pattern inflated ~J^2 (3e3 at J=125 -> 5e4 at J=500) in the CONTINUUM norm, so the ||A|| ~ J^0.5 it
+## reported under three routes and every gauge choice is FICTION. Sound route: use only inequalities the
+## continuum norm implies (two_point_dual). EXACT identity (DF-L)h = h/(X(1+X^2)) - H(h)/(1+X^2) (1.5e-16)
+## + a Holder-paid |H(h)| bound on the EVEN kernel gives the far-field Z1 bound (decays X0^{alpha-2},
+## validated 1.1-3.0x headroom). CONSEQUENCE: **v5's joint optimum alpha=1.8 is DEAD** (Z1 = 2.3-4.3, no
+## closure at any X0); optimum moves to alpha~1.2, conditional budget 1.18e-2. STILL OPEN: ||A|| domain
+## seminorm part, core<->far coupling, core discretization. New solver/nk_bounds.py + test_nk_bounds.py
+## (6/6; suite 13 files green); fig24; BLOG/TECHNICAL_P2_ROUTED_V6.md. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -733,3 +745,69 @@ nothing has closed in float); and a != 0 (no exact anchor, floor ~1e-2 against a
 paid its debts).
 
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, no rung climbed. Clay odds ~0.05%.
+
+## §15 — ROUTE-D v6 DONE (2026-07-30): the FIRST GENUINE UPPER BOUNDS + the DISCRETE-BALL TRAP.
+## Three of eight NK constants move from MEASURED to BOUNDED. Still NOT a certificate.
+
+The §14 "next brick" (bound Z₁; turn family-restricted norms into real upper bounds). Built
+solver/nk_bounds.py + test_nk_bounds.py 6/6 (suite now **13 files green**); deterministic ladder
+experiments/p2_route_d_v6_bounds.py → writeup/data/p2_route_d_v6_bounds.json → fig24
+(writeup/4_p2_lottery/p2_route_d_v6_evidence.py). NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V6.md.
+
+**THE FRAMING PROBLEM v1–v5 ALL SHARED (say it plainly): every constant reported through v5 was a
+family-restricted maximum = a LOWER bound, and Z₁ was never bounded at all. A budget assembled from
+lower bounds is not a quantity a certificate can use.** v6 fixes part of that and disqualifies the
+obvious method for the rest.
+
+SIX evidence pieces (do not relearn):
+  B1 **THE DISCRETE-BALL TRAP (the methodological headline).** Computing an induced norm by DUALITY
+     over the DISCRETE unit ball is UNSOUND. A discrete Hölder seminorm only inspects pairs of GRID
+     NODES, so duality's extremizer is a grid-scale sign pattern whose interpolant thrashes between
+     nodes. Measured over the same θ-range, its continuum/discrete norm ratio is **3.0e3 (J=125) →
+     5.0e4 (J=500), ~J^2.03**, while a smooth element of the same class stays faithful to 3%. The
+     "worst direction" is not within 4 orders of magnitude of the unit ball. It reported ‖A‖ ~ J^0.5
+     (unbounded) under THREE independent routes and EVERY gauge-row choice — all fiction.
+  B2 **WHAT SURVIVES.** Use only inequalities the CONTINUUM norm implies: |g_m| ≤ ‖g‖/v_m and
+     |g_m−g_{m₀}| ≤ ‖g‖/q_{m,m₀}. Then ‖c‖_{Y*} ≤ min_{m₀}[|Σc_m|/v_{m₀} + Σ|c_m|/q_{m,m₀}]
+     (two_point_dual; minimising over a SUBSET of m₀ stays valid). Domain **SUP part SATURATES:
+     5.536→5.631 over J=125..1600 (J^+0.006)** = the project's FIRST uniform upper bound on any part
+     of ‖A‖, bracketing v5's family lower bound (~2.2–2.9) by ~2×. Domain SEMINORM part is valid but
+     LOSSY (J^+0.496 = J^γ) — B1 says exactly why (it is still pricing the fake direction).
+     Continuum expectation: it IS finite (the inverse gains a whole derivative, h_X=−(g+H(h)+Xh)/c ⇒
+     g∈C^{0,γ} puts h∈C^{1,γ}). **Closing this is now the sharpest open question in Route D.**
+  B3 **THE MODELLING IDENTITY (exact).** (DF−L)h = h/(X(1+X²)) − H(h)/(1+X²), where L is v3's
+     far-field model −c h_X − h/X. Verified vs the collocation operator to **1.5e-16 relative**.
+  B4 **THE FAR-FIELD Z₁ BOUND = the first bounded piece of Z₁ in six legs.** Split the p.v. at
+     half-scale on the **EVEN kernel K(X,y)=2X/(X²−y²)**: singular half charged to the Hölder
+     seminorm, rest to the decay envelope. X-side Hölder envelope is
+     2^γ(1+X_min²)^{−(α+γ)/2} — **weight α+γ, NOT α−γ** (v5's θ-weight pushed through
+     |dθ|≤2|dX|/(1+X_min²)). Using the EVEN kernel is NOT cosmetic: the two-sided 1/(X−y) split
+     DIVERGES logarithmically as X→0 (where the truth is 0 by parity) and loses a factor 2 far out;
+     the even form is finite at 0 and recovers the SHARP constant (X·bound→1.681 vs M_α/π=1.669).
+     Validated on RESOLVED nodes (|X|dθ≤1): X₀=20/50/100 → headroom 3.0×/1.7×/1.1×. Decays at the
+     predicted X₀^{α−2} for every α (measured −0.874…−0.240 vs predicted −0.9…−0.2).
+     Same bound ⇒ **C_Q ≤ sup_X (1+X²)^{1/2}·B(X) = 3.13** at (1.5,0.5) (v5 family LB 0.86–1.14).
+  B5 **PRICING Z₁ MOVES THE OPTIMUM — v5's (α,γ)=(1.8,0.35) IS DEAD.** At α=1.8, Z₁^far = 4.32/3.13/
+     2.34 at X₀=200/800/3200 — all ≫ 1, no closure at any X₀. Structural: the modelling error decays
+     like X₀^{α−2}, so α=1.8 needs the far field 10⁵× further out for the same margin, while
+     ‖A‖=2/(2−α) runs away toward the α=2 resonance. **New optimum α≈1.2, conditional budget
+     Y₀^max = 1.18e-2** (at X₀=3200). CAREFUL: the a≈0.5 GA residual floor is ALSO ~1e-2 — that
+     coincidence is NOT a claim the boundary profile could be certified. The budget is CONDITIONAL and
+     OPTIMISTIC (far-field Z₁ only; far-field ‖A‖, which v4 validated to 6% only on α∈[1.4,1.7], NOT
+     where the optimum now sits; three constants omitted). Honest reading: the target is no longer out
+     of reach by ORDERS OF MAGNITUDE. That is all.
+  B6 **THE LEDGER.** EXACT: Y₀ (anchor). BOUNDED: Z₀; **Z₁ far-field modelling error (NEW)**;
+     **‖A‖ domain sup part (NEW)**; **C_Q sup part (NEW)**. OPEN: Z₁ core↔far coupling (sharp split
+     has a 1/(X−X₀) seam — H is nonlocal — so it needs a smooth cutoff + a commutator estimate);
+     ‖A‖ domain seminorm part (three routes, all lossy); Z₁ core discretization (v4 W6 J^−2.1..−2.6,
+     measured only). **Three of eight moved; three remain, now named precisely enough to attack one
+     at a time rather than scoped.**
+
+NEXT: the three open ledger items, in order of sharpness — (1) the domain-seminorm part of ‖A‖ (the
+continuum argument says finite; find a computation that shows it, e.g. restrict to a band-limited
+subspace with a quantified faithfulness factor, or bound via the C^{1,γ} gain); (2) the core↔far
+smooth-cutoff commutator; (3) the core discretization. Only when ALL of Y₀/Z₀/Z₁/Z₂ are real upper
+bounds should the float radii polynomial be assembled, and the same stopping rule applies: if it does
+not close in float with margin, STOP, do not harden. solver/interval.py has existed since v1 and has
+still never been pointed at any of this — correctly, because nothing has closed in float.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.

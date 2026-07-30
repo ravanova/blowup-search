@@ -1,0 +1,859 @@
+{
+  "meta": {
+    "leg": "P2 Route-D v6 (first genuine upper bounds; the discrete-ball trap)",
+    "tier": "Level-1 tooling + partial upper bounds (NOT a certificate)",
+    "alpha_gamma_reference": [
+      1.5,
+      0.5
+    ],
+    "reproduce": "python experiments/p2_route_d_v6_bounds.py",
+    "arithmetic": "plain float64 -- analytic bounds with numerically evaluated constants, gated against measurements; nothing here is interval-enclosed or rigorous"
+  },
+  "b1_b2_norms": {
+    "ladder": [
+      {
+        "J": 125,
+        "sup_part_upper": 5.535987692930973,
+        "seminorm_part_upper": 17.21601439613867,
+        "family_lower": 2.247995938391172
+      },
+      {
+        "J": 250,
+        "sup_part_upper": 5.531313493991545,
+        "seminorm_part_upper": 24.223992073115458,
+        "family_lower": 1.3528394205580163
+      },
+      {
+        "J": 500,
+        "sup_part_upper": 5.5282126032797905,
+        "seminorm_part_upper": 34.16729474467597,
+        "family_lower": 2.5220592232734758
+      },
+      {
+        "J": 1000,
+        "sup_part_upper": 5.5804269011543255,
+        "seminorm_part_upper": 48.25426495387324,
+        "family_lower": 2.7268695517942914
+      },
+      {
+        "J": 1600,
+        "sup_part_upper": 5.631078475495976,
+        "seminorm_part_upper": NaN,
+        "family_lower": 2.8503750905781327
+      }
+    ],
+    "sup_part_growth_exponent": 0.006378495575621061,
+    "seminorm_part_growth_exponent": 0.49568951997633726,
+    "inflation": [
+      {
+        "J": 125,
+        "extremizer": {
+          "discrete": 13.609562819539732,
+          "continuum": 40749.20439582504,
+          "inflation": 2994.1596902231104
+        },
+        "smooth_control": {
+          "discrete": 1.8235211607994941,
+          "continuum": 1.8736919363831934,
+          "inflation": 1.0275131304545446
+        }
+      },
+      {
+        "J": 250,
+        "extremizer": {
+          "discrete": 18.839084221066848,
+          "continuum": 230464.39067769528,
+          "inflation": 12233.311766820276
+        },
+        "smooth_control": {
+          "discrete": 1.8239425723296407,
+          "continuum": 1.8736999863277557,
+          "inflation": 1.0272801428909915
+        }
+      },
+      {
+        "J": 500,
+        "extremizer": {
+          "discrete": 26.230562596639416,
+          "continuum": 1303630.7759978697,
+          "inflation": 49698.92548796826
+        },
+        "smooth_control": {
+          "discrete": 1.8241351799862726,
+          "continuum": 1.8737019858954596,
+          "inflation": 1.0271727701175961
+        }
+      }
+    ],
+    "inflation_growth_exponent": 2.026495793661072
+  },
+  "b3_identity": {
+    "checks": [
+      {
+        "J": 300,
+        "scale": 381.33176318228885,
+        "relative_error": 1.490655233816309e-16
+      },
+      {
+        "J": 900,
+        "scale": 1145.2778080681037,
+        "relative_error": 7.241357455392828e-17
+      }
+    ],
+    "identity": "(DF - L) h = h/(X(1+X^2)) - H(h)/(1+X^2)"
+  },
+  "b4_far_field": {
+    "map": [
+      {
+        "alpha": 1.1,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.15042366030345258,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.15002374027946058
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.08236502911580493,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.08226503411542996
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.04502869987071104,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.04500370018320518
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.024580600745341807,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.024574350764872965
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.013399104749180987,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.013397542250401689
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.007294159368199196,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.00729376874327549
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.0039658290782249245,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.003965731421979693
+          }
+        ],
+        "decay_exponent": -0.8742478712167379,
+        "predicted_exponent": -0.8999999999999999
+      },
+      {
+        "alpha": 1.2,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.17609250225287493,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.17569258222888293
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.09971071946936008,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.09961072446898511
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.05656777675233615,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.05654277706483029
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.03214474669174079,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.03213849671127195
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.018291554305243537,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.018289991806464238
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.010420826139822169,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.010420435514898463
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.005942857542462637,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.005942759886217405
+          }
+        ],
+        "decay_exponent": -0.8147306904333592,
+        "predicted_exponent": -0.8
+      },
+      {
+        "alpha": 1.3,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.2094410370816836,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.2090411170576916
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.12361385820747878,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.12351386320710381
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.07344953657610981,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.07342453688860395
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.043897616452715414,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.04389136647224657
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.02636608394888406,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.02636452145010476
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.015902710318824825,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.01590231969390112
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.009625642843621782,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.009625545187376551
+          }
+        ],
+        "decay_exponent": -0.7402005087378238,
+        "predicted_exponent": -0.7
+      },
+      {
+        "alpha": 1.4,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.25333932806260356,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.25293940803861154
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.15711458103577353,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.15701458603539856
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.09865448211142441,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.09862948242391856
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.0625927249314624,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.06258647495099355
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.04005034814674226,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.04004878564796296
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.025801218805034182,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.025800828180110476
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.016711527833627414,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.01671143017738218
+          }
+        ],
+        "decay_exponent": -0.6528445809388586,
+        "predicted_exponent": -0.6000000000000001
+      },
+      {
+        "alpha": 1.5,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.3118351832945511,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.3114352632705591
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.20477791598063036,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.2046779209802554
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.13694701801265963,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.13692201832515377
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.09291618058930784,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.092909930608839
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.06374383982894902,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.06374227733016972
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.04409540816609357,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.044095017541169866
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.030691180057334587,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.030691082401089354
+          }
+        ],
+        "decay_exponent": -0.5560229532886797,
+        "predicted_exponent": -0.5
+      },
+      {
+        "alpha": 1.6,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.39065519059285686,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.39025527056886483
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.2734855481971884,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.27338555319681346
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.1959800935120163,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.19595509382451046
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.14288989254732715,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.14288364256685832
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.10547493894783702,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.10547337644905773
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.07852804161771477,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.07852765099279106
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.0588097973803402,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.05880969972409497
+          }
+        ],
+        "decay_exponent": -0.4531956604734293,
+        "predicted_exponent": -0.3999999999999999
+      },
+      {
+        "alpha": 1.7,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.49792381680599407,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.49752389678200204
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.3736478120176687,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.3735478170172938
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.2880990153141268,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.28807401562662094
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.22631636675130298,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.22631011677083415
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.17998194018464972,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.1799803776858704
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.14426941487566916,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.14426902425074545
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.1162226922030039,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.11622259454675866
+          }
+        ],
+        "decay_exponent": -0.34720141079428324,
+        "predicted_exponent": -0.30000000000000004
+      },
+      {
+        "alpha": 1.8,
+        "row": [
+          {
+            "X0": 50.0,
+            "bound": 0.6451968522457974,
+            "pointwise_term": 0.0003999200239920028,
+            "hilbert_term": 0.6447969322218053
+          },
+          {
+            "X0": 100.0,
+            "bound": 0.5210622868123478,
+            "pointwise_term": 9.999500037496875e-05,
+            "hilbert_term": 0.5209622918119728
+          },
+          {
+            "X0": 200.0,
+            "bound": 0.43329374956799294,
+            "pointwise_term": 2.4999687505859252e-05,
+            "hilbert_term": 0.4332687498804871
+          },
+          {
+            "X0": 400.0,
+            "bound": 0.3670503411497012,
+            "pointwise_term": 6.249980468841552e-06,
+            "hilbert_term": 0.36704409116923237
+          },
+          {
+            "X0": 800.0,
+            "bound": 0.3144611970526555,
+            "pointwise_term": 1.5624987792983055e-06,
+            "hilbert_term": 0.3144596345538762
+          },
+          {
+            "X0": 1600.0,
+            "bound": 0.2712177153448792,
+            "pointwise_term": 3.90624923706077e-07,
+            "hilbert_term": 0.2712173247199555
+          },
+          {
+            "X0": 3200.0,
+            "bound": 0.23484059693577522,
+            "pointwise_term": 9.765624523162877e-08,
+            "hilbert_term": 0.23484049927953
+          }
+        ],
+        "decay_exponent": -0.24002303503451364,
+        "predicted_exponent": -0.19999999999999996
+      }
+    ],
+    "validation": [
+      {
+        "X0": 20.0,
+        "measured": 0.18544145423711228,
+        "bound": 0.5620556814552337,
+        "headroom": 3.0309063513736714,
+        "n_nodes": 49
+      },
+      {
+        "X0": 50.0,
+        "measured": 0.180720013412705,
+        "bound": 0.3118351832945511,
+        "headroom": 1.7255154944152327,
+        "n_nodes": 18
+      },
+      {
+        "X0": 100.0,
+        "measured": 0.180720013412705,
+        "bound": 0.20477791598063036,
+        "headroom": 1.1331225142894663,
+        "n_nodes": 8
+      }
+    ],
+    "validation_J": 1600,
+    "resolution_rule": "|X| dtheta <= 1 (project convention)"
+  },
+  "b5_tension": {
+    "rows": [
+      {
+        "alpha": 1.1,
+        "A_farfield": 2.2222189551472806,
+        "A_farfield_law": 2.2222222222222223,
+        "C_Q_sup_upper": 6.158156218854199,
+        "Z2": 27.36954295659181,
+        "mass": 21.353449332480004,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.04502869987071104,
+            "Z1_farfield": 0.10006363037833199,
+            "one_minus_Z": 0.899936369621668,
+            "Y0_max": 0.00739768901742631,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.013399104749180987,
+            "Z1_farfield": 0.029775744555633938,
+            "one_minus_Z": 0.9702242554443661,
+            "Y0_max": 0.008598381669594696,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.0039658290782249245,
+            "Z1_farfield": 0.008812940550505695,
+            "one_minus_Z": 0.9911870594494943,
+            "Y0_max": 0.008973951340531217,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.2,
+        "A_farfield": 2.499994631221082,
+        "A_farfield_law": 2.5,
+        "C_Q_sup_upper": 4.111293522615652,
+        "Z2": 20.55642346782628,
+        "mass": 11.323086975215752,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.05656777675233615,
+            "Z1_farfield": 0.1414191381809531,
+            "one_minus_Z": 0.8585808618190469,
+            "Y0_max": 0.008965094261602694,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.018291554305243537,
+            "Z1_farfield": 0.045728787559797715,
+            "one_minus_Z": 0.9542712124402023,
+            "Y0_max": 0.011074805258771844,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.005942857542462637,
+            "Z1_farfield": 0.014857111950268306,
+            "one_minus_Z": 0.9851428880497317,
+            "Y0_max": 0.011802959199030252,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.3,
+        "A_farfield": 2.8571339313242343,
+        "A_farfield_law": 2.857142857142857,
+        "C_Q_sup_upper": 3.6672229807457537,
+        "Z2": 20.955494424041383,
+        "mass": 7.961572504956598,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.07344953657610981,
+            "Z1_farfield": 0.20985516319164377,
+            "one_minus_Z": 0.7901448368083562,
+            "Y0_max": 0.007448271685952646,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.02636608394888406,
+            "Z1_farfield": 0.07533143308649991,
+            "one_minus_Z": 0.9246685669135001,
+            "Y0_max": 0.01020033148987582,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.009625642843621782,
+            "Z1_farfield": 0.027501750779320083,
+            "one_minus_Z": 0.97249824922068,
+            "Y0_max": 0.011282874381291908,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.4,
+        "A_farfield": 3.33331796857362,
+        "A_farfield_law": 3.333333333333333,
+        "C_Q_sup_upper": 3.363580671729998,
+        "Z2": 22.42376778364906,
+        "mass": 6.268653124086033,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.09865448211142441,
+            "Z1_farfield": 0.32884675790233575,
+            "one_minus_Z": 0.6711532420976642,
+            "Y0_max": 0.005021978004814407,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.04005034814674226,
+            "Z1_farfield": 0.13350054512516515,
+            "one_minus_Z": 0.8664994548748348,
+            "Y0_max": 0.008370820110858768,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.016711527833627414,
+            "Z1_farfield": 0.05570483601014844,
+            "one_minus_Z": 0.9442951639898516,
+            "Y0_max": 0.009941386359976765,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.5,
+        "A_farfield": 3.9999691602986944,
+        "A_farfield_law": 4.0,
+        "C_Q_sup_upper": 3.1330320465939345,
+        "Z2": 25.06406312920648,
+        "mass": 5.24411510858424,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.13694701801265963,
+            "Z1_farfield": 0.5477838486455083,
+            "one_minus_Z": 0.45221615135449167,
+            "Y0_max": 0.0020397675198516674,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.06374383982894902,
+            "Z1_farfield": 0.2549733934748157,
+            "one_minus_Z": 0.7450266065251843,
+            "Y0_max": 0.005536459128444639,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.030691180057334587,
+            "Z1_farfield": 0.12276377372251267,
+            "one_minus_Z": 0.8772362262774873,
+            "Y0_max": 0.007675764626893621,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.6,
+        "A_farfield": 4.99986987601043,
+        "A_farfield_law": 5.000000000000001,
+        "C_Q_sup_upper": 2.947591214928663,
+        "Z2": 29.475145044629613,
+        "mass": 4.554443087962174,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.1959800935120163,
+            "Z1_farfield": 0.9798749658484375,
+            "one_minus_Z": 0.020125034151562526,
+            "Y0_max": 3.4352417858190686e-06,
+            "closes": true
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.10547493894783702,
+            "Z1_farfield": 0.5273609699193296,
+            "one_minus_Z": 0.47263903008067043,
+            "Y0_max": 0.0018947120736586352,
+            "closes": true
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.0588097973803402,
+            "Z1_farfield": 0.2940413343362401,
+            "one_minus_Z": 0.70595866566376,
+            "Y0_max": 0.004227100807062535,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.7,
+        "A_farfield": 6.664883938782592,
+        "A_farfield_law": 6.666666666666666,
+        "C_Q_sup_upper": 2.7927127928729227,
+        "Z2": 37.22621327770283,
+        "mass": 4.056623809270494,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.2880990153141268,
+            "Z1_farfield": 1.9201464999462037,
+            "one_minus_Z": -0.9201464999462037,
+            "Y0_max": 0.0,
+            "closes": false
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.17998194018464972,
+            "Z1_farfield": 1.199558742407601,
+            "one_minus_Z": -0.19955874240760108,
+            "Y0_max": 0.0,
+            "closes": false
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.1162226922030039,
+            "Z1_farfield": 0.7746107545858734,
+            "one_minus_Z": 0.22538924541412664,
+            "Y0_max": 0.0003411595450857808,
+            "closes": true
+          }
+        ]
+      },
+      {
+        "alpha": 1.8,
+        "A_farfield": 9.959909312254366,
+        "A_farfield_law": 10.000000000000002,
+        "C_Q_sup_upper": 2.6625344058292963,
+        "Z2": 53.03720244563371,
+        "mass": 3.6790939804058804,
+        "by_X0": [
+          {
+            "X0": 200.0,
+            "modelling_error": 0.43329374956799294,
+            "Z1_farfield": 4.315566451263864,
+            "one_minus_Z": -3.315566451263864,
+            "Y0_max": 0.0,
+            "closes": false
+          },
+          {
+            "X0": 800.0,
+            "modelling_error": 0.3144611970526555,
+            "Z1_farfield": 3.132005004867399,
+            "one_minus_Z": -2.132005004867399,
+            "Y0_max": 0.0,
+            "closes": false
+          },
+          {
+            "X0": 3200.0,
+            "modelling_error": 0.23484059693577522,
+            "Z1_farfield": 2.338991048316002,
+            "one_minus_Z": -1.338991048316002,
+            "Y0_max": 0.0,
+            "closes": false
+          }
+        ]
+      }
+    ],
+    "argmax_alpha_by_X0": {
+      "200.0": {
+        "alpha": 1.2,
+        "Y0_max": 0.008965094261602694
+      },
+      "800.0": {
+        "alpha": 1.2,
+        "Y0_max": 0.011074805258771844
+      },
+      "3200.0": {
+        "alpha": 1.2,
+        "Y0_max": 0.011802959199030252
+      }
+    },
+    "caveat": "CONDITIONAL: uses the far-field ||A|| (v4 confirmed it predicts the full gauged ||A|| to 6% on alpha in [1.4,1.7]) and prices only the FAR-FIELD part of Z1; the core discretization, the core<->far coupling and the domain seminorm part of ||A|| are all still unbounded."
+  },
+  "b6_ledger": [
+    {
+      "constant": "Y0 (at the a=0 anchor)",
+      "status": "EXACT",
+      "note": "the anchor is an exact zero; Y0 = 0"
+    },
+    {
+      "constant": "Z0",
+      "status": "BOUNDED",
+      "note": "finite-block rounding only (~1e-11)"
+    },
+    {
+      "constant": "Z1 far-field modelling error",
+      "status": "BOUNDED (NEW)",
+      "note": "closed form, decays like X0^{alpha-2}; validated to ~3x headroom"
+    },
+    {
+      "constant": "Z1 core<->far-field coupling",
+      "status": "OPEN",
+      "note": "sharp split has a 1/(X-X0) seam: needs a smooth cutoff + a commutator estimate for H"
+    },
+    {
+      "constant": "Z1 core discretization",
+      "status": "MEASURED ONLY",
+      "note": "v4 W6: J^-2.1..-2.6, never bounded"
+    },
+    {
+      "constant": "||A|| domain SUP part",
+      "status": "BOUNDED (NEW)",
+      "note": "two-point dual, uniform in J"
+    },
+    {
+      "constant": "||A|| domain SEMINORM part",
+      "status": "OPEN",
+      "note": "three routes tried; all valid but lossy, growing like J^gamma. Continuum argument says it is finite (the inverse gains a derivative) but no computation yet shows it"
+    },
+    {
+      "constant": "C_Q sup part",
+      "status": "BOUNDED (NEW)",
+      "note": "from the same |H(h)| bound; the codomain seminorm of hH(h) is not bounded"
+    }
+  ]
+}

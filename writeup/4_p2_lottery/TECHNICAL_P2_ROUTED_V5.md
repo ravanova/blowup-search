@@ -32,6 +32,17 @@ with `python experiments/p2_route_d_v5_holder.py`).
 Code: `solver/holder_norms.py` + `test_holder_norms.py` (6/6). Full suite now
 **12 files green**.
 
+
+> **Update (Route-D v6, 2026-07-30).** Two claims below are superseded; see
+> [TECHNICAL_P2_ROUTED_V6.md](TECHNICAL_P2_ROUTED_V6.md) / fig24. (i) The **joint
+> optimum `(α,γ) = (1.8, 0.35)` is dead**: once the far-field part of `Z₁` is
+> bounded it comes out 2.3–4.3 there, against a requirement of `< 1`, at every
+> far-field cut tested; the optimum moves to `α ≈ 1.2`. (ii) Every operator norm
+> below is a **family-restricted lower bound**, as this note says — v6 supplies
+> the first genuine upper bounds for three of the eight constants, and shows that
+> the obvious way to compute the rest (duality over a *discrete* Hölder ball) is
+> unsound. Everything else here stands.
+
 ---
 
 ## 1. The space, and the exponent that is not a free choice

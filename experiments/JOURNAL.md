@@ -3,6 +3,76 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v6: first genuine UPPER bounds + the discrete-ball trap (non-logged) — 2026-07-30
+
+**NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v6_bounds.json` (regen `python experiments/p2_route_d_v6_bounds.py`,
+~10 min); figure fig24 (`writeup/4_p2_lottery/p2_route_d_v6_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V6; PHASE2_P2_NOTES.md §15. Code: `solver/nk_bounds.py` +
+`test_nk_bounds.py` (6/6; suite now 13 files green).
+
+What a human would want to know:
+
+- **The thing five legs got structurally wrong.** Every constant reported through v5
+  was a maximum over a test family — a LOWER bound — and Z₁ was never bounded at
+  all. The certificate needs UPPER bounds on all of them. So the budget we had been
+  quoting was an upper bound assembled out of lower bounds, which is not a number
+  that means anything. Worth saying plainly rather than quietly fixing.
+
+- **The trap, which is the real result.** The obvious fix is duality: instead of
+  maximising over functions you thought of, maximise over the whole unit ball,
+  which for these norms is a closed-form computation. It ran fine and said the
+  operator was unbounded, ‖A‖ ~ J^0.5, under three independent bounding routes and
+  every gauge-row choice. All fiction. A discrete Hölder seminorm only looks at
+  pairs of GRID NODES, so duality's extremizer is a grid-scale sign pattern whose
+  interpolant thrashes in the gaps. Evaluated on a 6× finer grid over the same
+  θ-range, its true norm is 3e3× bigger at J=125 and 5e4× at J=500 — growing like
+  J² — while a smooth element of the same class stays faithful to 3%. The worst
+  direction was not within four orders of magnitude of the unit ball.
+
+- **Why that lesson is worth more than the bound.** We already had banked lesson (9)
+  — BUILD THE ADVERSARY — from v4, where random sampling MISSED the adversary and
+  reported a boundedness that was false. This is the mirror: a ball that is too BIG
+  invents an adversary and reports an unboundedness that is false. Sampling
+  under-reports, a sloppy ball over-reports, and neither is telling you about the
+  operator. The general form: before trusting a number about an operator, check
+  that the set you optimised over is the set you meant.
+
+- **What survived.** Use only inequalities the CONTINUUM norm implies (a pointwise
+  bound and a two-point increment bound) and the resulting estimate is honest
+  whatever the grid does. On the domain sup part it SATURATES — 5.536 → 5.631 over
+  a 13× range in J — the project's first uniform upper bound on any part of ‖A‖,
+  and it brackets v5's family lower bound by about 2×. The seminorm part is still
+  lossy (J^γ), and §B1 says exactly why: it is still paying for the fake direction.
+  The equation says that part must be finite (the inverse gains a whole derivative),
+  so this is now the sharpest open question in Route D.
+
+- **The Z₁ half went cleanly, and one detail earned its keep.** The difference
+  between the real operator and v3's far-field model is a two-term identity,
+  h/(X(1+X²)) − H(h)/(1+X²), exact to 1.5e-16 against the collocation operator.
+  Bounding |H(h)| for an arbitrary unit-ball h is exactly what the Hölder grading
+  was introduced to pay for, and it works. The detail: doing the principal-value
+  split with the textbook one-sided kernel gives a bound that diverges
+  logarithmically as X→0, where the true value is exactly 0 by parity. Rewriting
+  the kernel in its EVEN form — every function here is even — fixes that AND
+  recovers the sharp far-field constant (1.681 vs 1.669). Symmetry you already know
+  about is free accuracy; it is just easy to leave on the table.
+
+- **And it moved the answer.** Z₁ had never entered the optimization, because nobody
+  could compute it. At v5's joint optimum α=1.8 it comes out 2.3–4.3 against a
+  requirement of <1 — dead at every X₀ tested, and dead structurally (the modelling
+  error decays like X₀^{α−2}, so α=1.8 would need the far field 10⁵× further out,
+  while ‖A‖=2/(2−α) runs toward the α=2 resonance). The optimum moves to α≈1.2 with
+  a conditional budget 1.18e-2. The a≈0.5 GA floor is also ~1e-2, and I want that
+  comparison read carefully: the budget prices ONE piece of Z₁, uses a far-field
+  ‖A‖ validated only on α∈[1.4,1.7] (not where the optimum now sits), and omits
+  three constants — every omission flatters it. The honest claim is only that the
+  target is no longer out of reach by orders of magnitude.
+
+- **Honest ceiling.** Plain float64 throughout; nothing interval-enclosed, nothing
+  rigorous. Three of eight constants moved from measured to bounded; three remain,
+  now named precisely enough to attack one at a time. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v5: THE TWO-GRADING SPACE (non-logged) — 2026-07-30
 
 **NOT a logged gate run** (deterministic — no GA, no seeds, no predicate lock). Data

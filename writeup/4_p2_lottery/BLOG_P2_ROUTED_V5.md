@@ -6,6 +6,10 @@ couldn't satisfy it: one kind of measurement sees decay but not smoothness, the
 other sees smoothness but not decay. This post builds the thing that sees both. It
 works. Still a toy model. Still not a breakthrough.*
 
+> **Update:** the best setting this post lands on does not survive the next leg —
+> once the missing constant is bounded, it fails outright.
+> [The measurement that was measuring itself](BLOG_P2_ROUTED_V6.md)
+
 ## The shape of the problem, restated
 
 We're trying to turn a very good numerical guess into a computer-checkable proof.
