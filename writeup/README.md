@@ -114,6 +114,14 @@ writeup/
     which retires v2's literal repair; plus the decay-graded pair that does satisfy
     both, its resonance at the anchor's own decay rate, and its interior optimum
     `α* ≈ 1.44`. *(fig 21)*
+23. [TECHNICAL_P2_ROUTED_V4.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V4.md) ·
+    [BLOG_P2_ROUTED_V4.md](4_p2_lottery/BLOG_P2_ROUTED_V4.md) — **Route-D v4**: the full
+    gauged operator in the decay-graded pair, in a third independent discretization.
+    v3's far-field pricing **survives** (model law within 6% of the full `‖A‖`;
+    `Z₂ = 13.4` vs 13.3 predicted; a second interior optimum at `α ≈ 1.40`), but the
+    decay-graded sup pair does **not** control the quadratic — `H` is unbounded on
+    `L^∞`. The certificate's space must carry a decay grading **and** a smoothness
+    scale. *(fig 22)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -144,6 +152,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig18_two_scale_kladder.png` | 4 | P2 — a_p(K) saturates: boundary `a*≈0.5–0.55` genuine |
 | `fig19_p2_route_d.png` | 4 | P2 — Route-D v1: interval enclosure, the 2-D valley, the line→circle diagonalization, and the banded+rank-1 linearized operator |
 | `fig20_p2_route_d_dress.png` | 4 | P2 — Route-D v2: the NK ball never closes (‖A_N‖ ~ N), the ablation that pins it on the far field, and the decay-graded repair (‖A‖ = 3.000 flat) |
+| `fig22_p2_route_d_v4_graded.png` | 4 | P2 — Route-D v4: the third build reproduces the negative and the repair, the compact core costs ~nothing (far-field law within 6%), the conjugate-extremal family showing the quadratic is unbounded in sup norms (and random sampling missing it), and the confirmed price |
 | `fig21_p2_route_d_v3_spaces.png` | 4 | P2 — Route-D v3: the conservation law (the two NK exponents sum to ≥1 over every diagonal weight pair), the empty strip in the (s,t) plane with its ablation control, the far-field resonance at α=2, and the decay-graded optimum α*≈1.44 |
 
 ## Evidence map ([`data/`](data/))
@@ -158,6 +167,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `spike0_rescaling.json`, `spike1_stepA_velocity.json`, `spike1_stepB_rescaled.json`, `spike1_stepC_gate.json` | Arc 3 (figs 8–11) |
 | `p2_hl_anchor.json`, `p2_conj24_relax.json`, `p2_regular_profile*.json`, `p2_scenario2_relax.json`, `p2_ga_framework.json`, `p2_two_scale_sweep.json`, `p2_two_scale_kladder.json` | Arc 4 (figs 12–18) |
 | `p2_route_d_probe.json` | Arc 4 / fig19 — Q1 enclosure precision, Q2 degeneracy singular values, Q3 line→circle covariance, Q4 the banded operator |
+| `p2_route_d_v4_graded.json` | Arc 4 / fig22 — W1 the third-build reproduction, W2 the core's contribution vs the far-field law, W3 the conjugate-extremal quadratic divergence + the random control, W4 the confirmed `Z₂`/budget ceiling, W5 the gauge/drop-row operational finding, W6 the quantified (not bounded) `Z₁`-analogue |
 | `p2_route_d_v3_spaces.json` | Arc 4 / fig21 — S1 the pure-convolution identity + sharp constant, S2 the inverse's price in weighted norms, S3 the (s,t) map + gap collapse + conservation law, S4 the ablation control, S5 the far-field resonance (both sides), S6 the decay-graded pair and its optimum |
 | `p2_route_d_dress.json` | Arc 4 / fig20 — D1 the N-ladder (`‖A_N‖ ~ N^0.97`), D2 the radii-polynomial bounds, D3 gauge insensitivity, D4 the `(1+cosθ)→1` ablation, D5 the far-field marginality + weight-repair impossibility, D6 the decay-graded pairings |
 
@@ -173,11 +183,13 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_evidence.py            # fig19
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_dress_evidence.py      # fig20
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v3_evidence.py         # fig21
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_v4_evidence.py         # fig22
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
 .venv/bin/python experiments/p2_route_d_probe.py
 .venv/bin/python experiments/p2_route_d_dress.py
 .venv/bin/python experiments/p2_route_d_v3_spaces.py
+.venv/bin/python experiments/p2_route_d_v4_graded.py
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

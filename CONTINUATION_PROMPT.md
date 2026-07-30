@@ -1,15 +1,20 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-30 at the end of the session that ran **Route-D v3, the space-pair
-scoping leg** — the gating check §11 attached to its own repair — and got a
+*Written 2026-07-30 (updated after Route-D v4) at the end of the session that ran
+**Route-D v3, the space-pair scoping leg** — the gating check §11 attached to its own repair — and got a
 **NO-GO THEOREM for the entire weighted-ℓ¹ category** together with a **constructive
 positive half**: the two Newton–Kantorovich requirements are separated by exactly one
 grading power and the separation is CONSERVED (measured minimum exponent sum 0.98 over
 the whole family; control 0.00); the replacement is a DECAY-graded pair, which
 satisfies both, is resonant at the anchor's own decay rate, and has an interior
-optimum α\* ≈ 1.44. Everything below is banked + pushed on `main`. The recommended
-next thing is **the compact-core block (Route-D v4)** — but read the "IS THIS STILL
-THE RIGHT LANE?" box first.*
+optimum α\* ≈ 1.44 — and then **Route-D v4**, which carried those measurements to the
+FULL gauged operator in a third independent discretization and got **one confirmation
+and one new structural gap**: v3's far-field pricing survives (within 6%; Z₂ = 13.4 vs
+13.3 predicted; a second interior optimum at α ≈ 1.40), but the decay-graded SUP pair
+does NOT control the quadratic because H is unbounded on L^∞. Everything below is
+banked + pushed on `main`. The recommended next thing is **the two-grading space
+question (Route-D v5), settled ON PAPER first** — but read the "IS THIS STILL THE
+RIGHT LANE?" box.*
 
 Continue the Navier–Stokes blow-up search project. End goal: the Clay Millennium
 problem — a genuine, honest attempt via singular-profile / self-similar-blowup
@@ -32,8 +37,8 @@ THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce kno
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D v1
-(fig19), v2 (fig20) and v3 (fig21) are tooling + scoping/negative results on the way
-there, NOT certificates.** Level-3 = Clay.
+(fig19), v2 (fig20), v3 (fig21) and v4 (fig22) are tooling + scoping/negative results
+on the way there, NOT certificates.** Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
 Route-A TOOLING (built to FEED Route D). "Route D" proper is the Tier-3
@@ -46,16 +51,16 @@ figures/ stay central; writeup/README.md is the ordered index). Phase 1 (conclud
 negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
-v2, **§12 ROUTE-D v3 = newest**). Per-leg writeups + figs under writeup/4_p2_lottery/:
-TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),CONJ24(fig13),SCENARIO2(fig14/15),
-GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),ROUTED(fig19),ROUTED_DRESS(fig20),
-**ROUTED_SPACES(fig21)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+v2, §12 ROUTE-D v3, **§13 ROUTE-D v4 = newest**). Per-leg writeups + figs under
+writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),CONJ24(fig13),
+SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),ROUTED(fig19),
+ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),**ROUTED_V4(fig22)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
   §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
-  a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3 —
-  all DONE + banked.
+  a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
+  §13 Route-D v4 — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
@@ -99,22 +104,69 @@ STATE (all banked + pushed to main):
   structure of the coefficient sequence. v2's repair was a category error, and the
   conservation law is what that error looks like when measured.
 
-**IS THIS STILL THE RIGHT LANE? (raise with the user if the odds matter to a decision.)**
-v3 is a legitimate publishable brick and it genuinely sharpened the target, but the
-number it produced is sobering: Z₂≈13 ⇒ budget ~1e-2 BEFORE the compact core, Z₁ and
-interval overhead are paid, against an a≠0 residual floor of ~1e-2. The honest best case
-for the whole Route-D leg remains "certifies the a=0 traveling wave", which is already
-known in closed form. Do not assume the lane; put a menu if a big build is next.
 
-THE RECOMMENDED NEXT BRICK — **Route-D v4: the compact-core block in the decay pair.**
-v3 priced the FAR FIELD; nothing yet prices the core. Concretely: (i) fix α=3/2, build
-the finite-mode core operator with the decay-graded norms (the core is where the
-coefficient picture is still fine — the grading only matters in the tail), and measure
-the core's contribution to ‖A‖, Z₀, Z₁; (ii) the matching condition between core and
-far field (v3's far-field solve already uses h(X₀)=0, the natural core match) and what
-it costs; (iii) only then a full float radii polynomial in the decay pair — the v3
-analogue of v2's dress rehearsal, and the same rule applies: if it does not close in
-float with margin, STOP, do not harden. Do NOT skip to claiming a certificate.
+**P2 §13 — ROUTE-D v4 DONE + BANKED (this session, after v3).** Delivered:
+- **solver/decay_collocation.py** — nodal spectral collocation on the midpoint θ-grid
+  (X = tan(θ/2), far field reaches ~4J/π) with WEIGHTED SUP norms: the THIRD independent
+  construction of this operator (v1/v2/v3 were all coefficient-space). H(cos kθ)=sin kθ,
+  d/dθ and f_X=(1+cosθ)f_θ are all exact on the band-limited space, so DF is a dense J×J
+  matrix with no quadrature. **test_decay_collocation.py 6/6**, gated against
+  solver/nk_fourier (agreement 2.6e-13), the exact anchor and both kernel directions.
+  Suite now **11 files green**.
+- **experiments/p2_route_d_v4_graded.py** (deterministic, NON-logged) →
+  writeup/data/p2_route_d_v4_graded.json → fig22. Six results:
+  * **W1** the third build reproduces v2's negative + v3's repair: ungraded ‖A‖
+    11.9→17.4 over J=125..2000 (+1.37/doubling, ~J^0.13, no sign of stopping), graded
+    (α=3/2) 3.79→4.07 (~J^0.017, settling). NOTE: the sup-norm divergence is only
+    LOGARITHMIC vs LINEAR (N^0.97) in v2's ℓ¹ — same verdict, gentler slope.
+  * **W2 the core is cheap:** on α∈[1.4,1.7] the far-field law 2/|α−2| predicts the FULL
+    gauged ‖A‖ to **6%** (2% on [1.5,1.7]). And the full ‖A‖ has its **own interior
+    minimum at α≈1.40** — a second, independent argument landing where v3's budget
+    optimum did. CAVEAT: the negative "core excess" at α≥1.8 is incomplete J-convergence,
+    not a core effect.
+  * **W3 THE MISSING HALF:** the decay-graded SUP pair does NOT control the quadratic —
+    **H is unbounded on L^∞**. Shown with the conjugate-extremal family (degree-m Fourier
+    partial sums of sign(cos θ): bounded ~1.18, ‖H p_m‖ ≥ (2/π)log m at the jump θ=π/2
+    where both weights are O(1)): C_Q = 0.74→2.73 over m=4..512, **+0.41 per e-fold**.
+  * **W4 the price, confirmed:** Z₂ = 2‖A‖C_Q = 13.6(α=1.4)/**13.4(1.5)** vs v3's
+    far-field-only 13.3/13.4; C_Q matches (∫f_α)/π to <2% for α≥1.3. Budget **CEILING**
+    1/(4Z₂) ≤ 1.9e-2 — assumes Z₁=0 and prices no smoothness component.
+  * **W5 operational:** the gauge must replace a **CORE** collocation equation. Dropping
+    rows at X=0.001/0.4/1.0 gives ‖A‖=4.03/4.41/5.70; dropping the OUTERMOST (X=1273)
+    gives **1.06e5**. Gauge spread 1.7×, core-row spread 1.4× (modest, as v2 D3 found).
+  * **W6 the Z₁-analogue, QUANTIFIED not bounded:** collocation truncation error
+    6.6e-3→9.3e-5 (J^−2.08) at α=1.2, →2.6e-5 (J^−2.36) at 1.5, →4.3e-6 (J^−2.64) at 1.8.
+
+**THE UNIFIED STATEMENT (v3 + v4 — carry this forward).** v3: a diagonal weight on
+Fourier coefficients measures **smoothness**; we needed **decay**. v4: a weighted sup
+norm measures **decay**; we also need **smoothness**. Two legs, two one-parameter
+families, each missing exactly what the other has. The far-field transport forces a
+decay grading; the Hilbert transform forces a smoothness scale; **the certificate's
+space must carry BOTH at once and no one-parameter family does.** Four legs in, this is
+the first time the requirement has been stated completely.
+
+**IS THIS STILL THE RIGHT LANE? (raise with the user if the odds matter to a decision.)**
+v3+v4 are legitimate publishable bricks and they genuinely sharpened the target, but the
+number is sobering and v4 made it worse, not better: the budget CEILING is 1.9e-2, and it
+is a ceiling (Z₁=0 assumed, smoothness component unpriced), against an a≠0 residual floor
+of ~1e-2. The honest best case for the whole Route-D leg remains "certifies the a=0
+traveling wave", which is already known in closed form. Do not assume the lane; put a menu
+if a big build is next.
+
+THE RECOMMENDED NEXT BRICK — **Route-D v5: the TWO-GRADING space, ON PAPER FIRST.**
+v4 showed the space needs a decay grading AND a smoothness scale. Settle whether a
+consistent pair exists BEFORE writing any solver — that rule has now paid for itself
+twice (§12 saved a two-region build, §13 would have been avoidable had the L^∞
+unboundedness of H been checked first). Concretely: (i) the natural candidate is a
+weighted-Hölder pair, |h|·(1+X²)^{α/2} in C^{0,γ} with codomain (1+X²)^{(α+1)/2} in
+C^{0,γ} — H IS bounded on C^{0,γ} (constant ~1/(γ(1−γ)), so γ has its own interior
+optimum, exactly like α), and Hölder is an algebra so the quadratic is fine; the thing to
+check is whether the far-field ODE inverse still gains what it must in the Hölder scale,
+and how the two optima (α, γ) interact. (ii) Do the v3-style conservation-law analysis in
+the (α, γ) plane: is there a non-empty admissible region, and what is the best Z₂ in it?
+(iii) ONLY if that closes on paper, extend solver/decay_collocation.py to Hölder norms
+(discrete Hölder seminorms over node pairs are computable) and re-run W1–W4. The same
+stopping rule applies: if the float rehearsal does not close with margin, STOP.
 
 Alternative lanes (put these in the menu): (a) the separate coupled-system HL two-stage
 leg (whether an HL-type two-stage appears at any scalar gCLM member or genuinely needs
@@ -124,10 +176,11 @@ up the whole P2 arc as a single coherent community piece (the 1D gCLM two-scale 
 the three-part Route-D negative) rather than building further.
 
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
-tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading all
-hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 10 green): test_interval.py (5/5) + test_nk_fourier.py
-(6/6) + **test_decay_grading.py (7/7, NEW)** + test_gclm_family.py (12/12) +
+tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
+all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
+`python test_X.py`. Suites (all 11 green): test_interval.py (5/5) + test_nk_fourier.py
+(6/6) + test_decay_grading.py (7/7) + **test_decay_collocation.py (6/6, NEW)** +
+test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
 experiments/ need the `sys.path.insert(0, dirname(dirname(abspath(__file__))))`
@@ -137,10 +190,11 @@ Solver dev + unit tests + DETERMINISTIC scoping probes are NOT "logged gate runs
 three Route-D probes are deterministic — no predicate lock needed); still add each new
 solver test to the suite. Papers/ gitignored ([HQW25]=arXiv:2401.14615 →
 Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic tooling
-probes get a clearly-labelled non-logged entry too, as §10, §11 and §12 did).
+probes get a clearly-labelled non-logged entry too, as §10–§13 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{p2_route_d_v3_evidence.py(fig21), p2_route_d_dress_evidence.py
+writeup/4_p2_lottery/{p2_route_d_v4_evidence.py(fig22), p2_route_d_v3_evidence.py(fig21),
+p2_route_d_dress_evidence.py
 (fig20), p2_route_d_evidence.py(fig19), p2_two_scale_kladder_evidence.py(fig18),
 p2_two_scale_sweep_evidence.py(fig17), p2_ga_framework_evidence.py(fig16),
 p2_scenario2_evidence.py(fig15), p2_regular_profile_evidence.py(fig14),
@@ -152,7 +206,9 @@ OPS: DISK WATCH — root fs has hit 100% mid-session before; `df -h /` if writes
 ENOSPC. Never `pgrep -f script.py` while it self-matches (hang). Foreground `sleep`
 blocked (use background runs / Monitor until-loop). The GA at the converged budget
 (pop150/gen250/8seeds) ≈ 30–45 s/best_of at n=801; base-budget GA ≈ 1 s. Route-D v1
-probe ~10 s; v2 dress ladder a few seconds; v3 space sweep ~1 min. Run `python -u` to a
+probe ~10 s; v2 dress ladder a few seconds; v3 space sweep ~1 min; **v4 collocation sweep
+~10 min (dense J×J inverses at J up to 2000 — do NOT build a Collocation at J≳5000, the
+matrices are J² and 40000 would be 12 GB).** Run `python -u` to a
 LOGFILE, wait on a Monitor until-loop — do NOT pipe through tail. Reuse solver instances.
 
 DISCIPLINE LESSONS BANKED (do not relearn): Ground the scheme in the paper; DERIVE the
@@ -176,10 +232,21 @@ asking about decay. Whole categories of failure are category errors wearing a nu
 costume. (8) **Widen the sweep past where you expect the answer.** The control's
 boundary was first reported as t=s because the t-grid started at 0; extending it to
 negative t revealed t=s−1, i.e. TWO powers — which is the order the symbol vanishes to
-and the check that confirmed the whole picture.
+and the check that confirmed the whole picture. **NEW from §13:** (9) **Sampling cannot
+establish boundedness, and it cannot reveal unboundedness — BUILD THE ADVERSARY.** The
+first version of v4's quadratic test used random perturbations of increasing degree;
+they FELL (1.40→0.84) and reported the quadratic as comfortably bounded. The truth
+needed the textbook extremal construction (square-wave partial sums), which gives
++0.41 per e-fold. The bad direction is a measure-zero cusp in the ball; you never
+stumble onto it, and random search will happily confirm what you want to be true.
+(10) **When a cheap model survives contact with the full object, that is a licence —
+use it.** v3's far-field law predicted the full operator's inverse norm to 6%. That
+makes the far-field analysis a trustworthy instrument for the next leg, and it is worth
+saying so explicitly rather than re-deriving everything from scratch each time.
 
-HONEST CEILING (say it out loud): Route-D v3 is validated tooling + a no-go theorem with
-a constructive replacement; it does NOT climb the rigor ladder. Everything in it is plain
+HONEST CEILING (say it out loud): Route-D v3+v4 are validated tooling + a no-go theorem,
+a confirmed price, and a second structural requirement; they do NOT climb the rigor
+ladder. Everything in it is plain
 float64: nothing is interval-enclosed, nothing is rigorous. Even the eventual success it
 scouts is a computer-assisted TOY-MODEL certification (Chen–Hou / Gómez-Serrano genre),
 NOT a Clay solve. 1D HL is a toy model (boundary behaviour of Hou–Luo /

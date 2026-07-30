@@ -36,7 +36,7 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
 ## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
 ## converged, genuine feature — NOT genome-limited. Still Tier-1/2, NOT a Clay solve.** Read
-## §5→§6→§7→§8→§9→§9-cont2→§10→§11→§12.
+## §5→§6→§7→§8→§9→§9-cont2→§10→§11→§12→§13.
 ## Not novel-enough-to-be-a-proof; a genuine (now convergence-guarded) map.
 ## **ROUTE-D v1 DONE (§10, 2026-07-26): interval core + a=0 NK framing. Level-1 tooling + scoping, NOT a
 ## certificate.** Built solver/interval.py (hand-rolled rigorous interval arithmetic, +test 5/5, suite now
@@ -67,6 +67,18 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## X^-3/2 profiles with X^-5/2 residuals, Z2 ~ 13, budget ~1e-2 (thin). New solver/decay_grading.py +
 ## test_decay_grading.py (7/7; suite 10 files green); fig21; BLOG/TECHNICAL_P2_ROUTED_SPACES.md. Level-1
 ## tooling + a no-go theorem, NOT a certificate.**
+## **ROUTE-D v4 DONE (§13, 2026-07-30): the FULL operator in the decay-graded pair, in a THIRD independent
+## discretization (nodal spectral collocation + weighted sup norms). TWO results. (a) v3's far-field pricing
+## SURVIVES contact with the full gauged operator: the model law 2/|a-2| predicts ||A|| to 6% on a in
+## [1.4,1.7] (2% on [1.5,1.7]), Z2_min = 13.4 at a~1.5 vs v3's predicted 13.3 at 1.44 — the compact core
+## costs almost nothing — and the full ||A|| has its OWN interior minimum at a~1.40 (far-field price rises
+## toward a=2, core price toward a=1). (b) BUT the decay-graded SUP pair does NOT control the quadratic: H is
+## unbounded on L^inf, shown with the conjugate-extremal square-wave family (C_Q grows +0.41/e-fold), while
+## RANDOM sampling FALLS and would have reported it bounded. UNIFIED STATEMENT: v3 = a diagonal weight
+## measures smoothness, we needed decay; v4 = a sup norm measures decay, we also need smoothness. The
+## certificate space must carry BOTH gradings; no one-parameter family does. New solver/decay_collocation.py
+## + test_decay_collocation.py (6/6; suite 11 files green); fig22; BLOG/TECHNICAL_P2_ROUTED_V4.md. Level-1
+## tooling + scoping, NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -587,3 +599,62 @@ HONEST CEILING unchanged: plain float64 throughout, nothing interval-enclosed, n
 implies a budget ~1e-2 BEFORE the compact core, Z1 and interval overhead are paid, against an a != 0 residual
 floor of ~1e-2 — the margin, if any, is thin, and it is better to know that from an afternoon of algebra than
 after building a two-region solver. Clay odds ~0.05%.
+
+## §13 — ROUTE-D v4 DONE (2026-07-30): THE FULL OPERATOR IN THE DECAY-GRADED PAIR. v3's far-field pricing
+## CONFIRMED; a SECOND structural requirement on the space found. Level-1 tooling + scoping, NOT a certificate.
+
+The §12 "next brick" (the compact-core block), executed. Every number v3 produced came from the far-field
+MODEL operator L h = -c h_X - h/X — no Hilbert coupling, no core, no gauge — so the obvious failure mode was
+that the core contributes something the model cannot see. Built solver/decay_collocation.py (nodal spectral
+collocation on the midpoint theta-grid with weighted sup norms; the THIRD independent construction of this
+operator — v1/v2/v3 were all coefficient-space) + test_decay_collocation.py 6/6 (suite now **11 files
+green**); ran experiments/p2_route_d_v4_graded.py -> writeup/data/p2_route_d_v4_graded.json -> fig22
+(writeup/4_p2_lottery/p2_route_d_v4_evidence.py). NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V4.md.
+
+**HEADLINE (a): v3's far-field estimate STANDS.** On a in [1.4,1.7] the model law 2/|a-2| predicts the FULL
+gauged inverse norm to 6% (2% on [1.5,1.7]); Z2_min = 13.4 at a~1.5 against v3's 13.3 at 1.44; C_Q on smooth
+data matches v3's closed form (int f_a)/pi to <2% for a>=1.3. The compact core costs almost nothing.
+**HEADLINE (b): the decay-graded SUP pair does NOT control the quadratic.** H is unbounded on L^inf, so no
+purely-sup norm can bound Q(h) = hH(h). The space needs a SMOOTHNESS component as well as the decay grading.
+
+SIX evidence pieces (do not relearn):
+  W1 THE THIRD BUILD reproduces v2's negative + v3's repair: ungraded ||A|| 11.9->17.4 over J=125..2000
+     (+1.37/doubling, ~J^0.13, no sign of stopping), graded (a=3/2) 3.79->4.07 (~J^0.017, increments
+     halving, settling ~4.07). NOTE the divergence is LOGARITHMIC in sup norms vs LINEAR (N^0.97) in v2's
+     ell^1 — different norm, milder slope, same verdict. Gates: collocated residual/jacobian/dc-column agree
+     with nk_fourier to 2.6e-13; anchor an exact zero (6.5e-13); both kernel directions annihilated.
+  W2 THE CORE IS CHEAP. ||A||: 4.07(a=1.05), 3.81(1.2), **3.54(1.4)**, 4.07(1.5), 5.06(1.6), 6.58(1.7),
+     9.29(1.8), 14.39(1.9) vs 2/|a-2| = 2.11, 2.50, 3.33, 4.00, 5.00, 6.67, 10.0, 20.0. Core excess +1.97 at
+     1.05 falling to +0.07 at 1.5. **The full ||A|| has its OWN interior minimum at a~1.40** (far-field price
+     rises toward the a=2 resonance, core price toward a=1) — a second, independent argument landing on the
+     same a. CAVEAT: at a>=1.8 the negative "core excess" is NOT a core effect, it is incomplete J-convergence
+     (J-exponent 0.108 at a=1.9; finite-domain correction (X0/Xmax)^(2-a) = 43% there).
+  W3 THE MISSING HALF. ||Q(h)||_Y <= ||h||_X sup (1+X^2)^{1/2}|H(h)|, so the quadratic reduces to: is H
+     bounded X_a -> X_1? NO — classical. Demonstrated with the CONJUGATE-EXTREMAL family p_m = the degree-m
+     Fourier partial sum of sign(cos th) (bounded ~1.18 by Gibbs, ||H p_m||_inf >= (2/pi) log m at the jump
+     th=pi/2, i.e. X=1, where BOTH weights are O(1)): C_Q = 0.74,1.26,1.81,2.40,2.73 over m=4..512, +0.41 per
+     e-fold. **METHODOLOGICAL: the first version of this test used RANDOM perturbations of the same degree —
+     they FALL (1.40->0.84) and reported the quadratic as comfortably bounded.** Sampling can refute a
+     proposed bound and can give a lower bound; it can NEVER establish boundedness and cannot reveal
+     unboundedness. You must BUILD the adversary.
+  W4 THE PRICE. Z2 = 2||A||C_Q with C_Q on the smooth family: 22.2(1.2), 17.0(1.3), 13.6(1.4), **13.4(1.5)**,
+     14.6(1.6), 21.7(1.8); budget CEILING 1/(4Z2) <= 1.9e-2 at a~1.5. A CEILING: assumes Z1=0 and prices no
+     smoothness component. Against an a!=0 residual floor ~1e-2 the margin is thin — thinner than v3's number,
+     which was itself a ceiling.
+  W5 OPERATIONAL. The gauge must replace a CORE collocation equation: dropping rows at X=0.001/0.4/1.0 gives
+     ||A|| = 4.03/4.41/5.70, but dropping the OUTERMOST (X=1273) gives **1.06e5** — the far field goes
+     unconstrained. Gauge spread (origin vs a0) 1.7x, core-row spread 1.4x: modest, consistent with v2 D3.
+  W6 THE Z1-ANALOGUE, QUANTIFIED NOT BOUNDED. Decay-class elements are not band-limited (f_a is only C^a at
+     th=pi), so collocation truncates them: graded-codomain error vs the exact operator 6.6e-3->9.3e-5
+     (J^-2.08) at a=1.2, 3.3e-3->2.6e-5 (J^-2.36) at 1.5, 9.7e-4->4.3e-6 (J^-2.64) at 1.8. Clean algebraic
+     convergence, NOT a bound. Nothing closes without it.
+
+**THE UNIFIED STATEMENT (carry this forward).** v3: a diagonal weight on Fourier coefficients measures
+SMOOTHNESS; we needed DECAY. v4: a weighted sup norm measures DECAY; we also need SMOOTHNESS. Two legs, two
+one-parameter families, each missing exactly what the other has — the far-field transport forces a decay
+grading, the Hilbert transform forces a smoothness scale, and the certificate's space must carry BOTH at
+once. Natural candidates: weighted Holder C^{0,gamma} with a decay weight (Holder is where H IS bounded), or
+a decay-adapted basis carrying a smoothness-graded ell^1. That is the §14 question and — following the rule
+that has now paid off twice — it should be settled ON PAPER before any solver is written.
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, no rung climbed. Clay odds ~0.05%.

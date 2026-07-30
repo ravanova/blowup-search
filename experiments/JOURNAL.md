@@ -3,6 +3,65 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v4: THE FULL OPERATOR IN THE DECAY-GRADED PAIR (non-logged) — 2026-07-30
+
+**NOT a logged gate run** (deterministic — no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v4_graded.json` (regen `python experiments/p2_route_d_v4_graded.py`,
+~10 min); figure fig22 (`writeup/4_p2_lottery/p2_route_d_v4_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V4; PHASE2_P2_NOTES.md §13. Code:
+`solver/decay_collocation.py` + `test_decay_collocation.py` (6/6; suite now 11 files green).
+
+What a human would want to know:
+
+- **The question: was v3's price real, or an artifact of the model?** Every number v3
+  produced came from a one-line far-field ODE with the Hilbert coupling, the compact
+  core and the gauge all thrown away. It is exactly the sort of estimate that looks
+  authoritative and turns out to be missing the dominant term. So: rebuild without the
+  simplifications and check.
+
+- **It was real, and by a wider margin than I expected.** On alpha in [1.4,1.7] the model
+  law 2/|a-2| predicts the FULL gauged inverse norm to 6% (2% on [1.5,1.7]). Z2 lands at
+  13.4 vs the predicted 13.3. Everything we threw away was worth almost nothing. That is
+  the good kind of surprise, and it is also a licence: the cheap far-field analysis is a
+  trustworthy instrument for the next leg too.
+
+- **The bonus nobody asked for.** The full ||A|| has its own interior minimum at a~1.40.
+  v3 found an interior optimum in the BUDGET from two constants pulling opposite ways;
+  this is a different quantity driven by a different pair of mechanisms (far-field cost
+  rising toward the a=2 resonance, core cost rising toward a=1) and it lands in the same
+  place. Two independent arguments agreeing on 1.4-1.5 is worth more than either.
+
+- **The bad news, which is structural.** The decay-graded SUP pair does not control the
+  quadratic term, and cannot: H is unbounded on L^infinity. No decay weighting escapes
+  it, because the log blow-up happens at an ordinary interior point (the jump of a
+  bounded function) where the weights are O(1).
+
+- **The mistake I made, and would make again without a rule against it.** The first
+  version of the quadratic test sampled RANDOM trig perturbations of increasing degree.
+  Those constants go DOWN (1.40 -> 0.84 over m=4..512) and cheerfully reported the
+  quadratic as bounded and converging. It agreed with what I wanted to be true. The real
+  answer needed the textbook adversary — partial sums of a square wave, bounded with a
+  logarithmically divergent conjugate — which gives +0.41 per e-fold, unbounded. The bad
+  direction is a measure-zero cusp in the ball; you do not stumble onto it. **Sampling
+  can refute a proposed bound and can give a lower bound. It can never establish
+  boundedness, and it cannot reveal unboundedness. Build the adversary.**
+
+- **The unified statement is the real output of the last two legs.** v3: a diagonal
+  weight measures smoothness, we needed decay. v4: a sup norm measures decay, we also
+  need smoothness. Each single-parameter family is missing exactly what the other has.
+  The far-field transport forces a decay grading; the Hilbert transform forces a
+  smoothness scale; the space has to carry both. Four legs in, this is the first time
+  the requirement has been stated COMPLETELY.
+
+- **Operational finding worth remembering:** the gauge must replace a CORE collocation
+  equation. Dropping the outermost (far-field) row instead sends ||A|| from ~4 to 1.06e5.
+  Obvious in hindsight; not obvious at 2am.
+
+- **Honest read.** Budget ceiling 1.9e-2, and it IS a ceiling (Z1=0 assumed, smoothness
+  component unpriced) against an a!=0 floor of ~1e-2. Thin, and thinner than v3's number
+  because v3's was also a ceiling. Everything is plain float64; nothing interval-enclosed;
+  no rung climbed. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v3: the SPACE-PAIR NO-GO (non-logged) — 2026-07-30
 
 **NOT a logged gate run** (deterministic scoping — no GA, no seeds, no predicate lock).
