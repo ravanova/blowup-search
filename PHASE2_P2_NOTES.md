@@ -104,6 +104,25 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## closure at any X0); optimum moves to alpha~1.2, conditional budget 1.18e-2. STILL OPEN: ||A|| domain
 ## seminorm part, core<->far coupling, core discretization. New solver/nk_bounds.py + test_nk_bounds.py
 ## (6/6; suite 13 files green); fig24; BLOG/TECHNICAL_P2_ROUTED_V6.md. NOT a certificate.**
+## **ROUTE-D v7 DONE (§16, 2026-07-31): the DOMAIN SEMINORM PART OF ||A||, CLOSED. v6 recommended the
+## band-limited-subspace route; a ten-minute diagnostic disqualified it STRUCTURALLY (the J^gamma sits
+## entirely on NEAR-DIAGONAL pairs — a faithfulness defect of the ball cannot know whether two domain
+## indices are adjacent, and the J^gamma does), so this leg did the analytic route instead. Solve the
+## equation for the derivative (exact rearrangement, 1.9e-16), split every pair at a fixed multiple of
+## the LOCAL X-scale — the weights then cancel identically at every scale — and get
+## T <= C(gamma)(P/2)^gamma(2S)^{1-gamma} with **NO J and NO GRID**. The feedback is LINEAR in T while
+## the gain is SUBLINEAR (T^gamma), so the closure holds for ANY constants: **no smallness condition**,
+## and gamma=1 is excluded for a THIRD independent reason. RESULT: **the first uniform upper bound on
+## the WHOLE of ||A|| in seven legs** (69.1 -> 70.3 over J=125..1600, J^+0.006, drift inherited entirely
+## from v6's C_sup) and the **first (alpha,gamma) interior optimum made of upper bounds**
+## ((1.4,0.15), Z2 <= 242). Honest: the bracket is 0.85 <= (seminorm part) <= 63.6, a factor ~75 wide,
+## and pricing the honest ||A|| costs the conditional budget another order of magnitude (2.8e-3 ->
+## 2.0e-4) — the SECOND CONSECUTIVE leg where an upper bound cost an order, i.e. **the constants must
+## be roughly SHARP, not merely bounded.** Also surfaced an older defect: the interpolant's
+## decay-graded norm is INFINITE at every J (trig polys do not vanish at theta=pi where sec^alpha
+## diverges); soft (h(pi) ~ J^-3.01) but it is a change of ANSATZ, h=(1+X^2)^{-alpha/2}p(theta). Six of
+## ten constants bounded. New solver/nk_seminorm.py + test_nk_seminorm.py (6/6; suite 14 files green);
+## fig25; BLOG/TECHNICAL_P2_ROUTED_V7.md. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -810,4 +829,100 @@ smooth-cutoff commutator; (3) the core discretization. Only when ALL of Y₀/Z�
 bounds should the float radii polynomial be assembled, and the same stopping rule applies: if it does
 not close in float with margin, STOP, do not harden. solver/interval.py has existed since v1 and has
 still never been pointed at any of this — correctly, because nothing has closed in float.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
+
+## §16 — ROUTE-D v7 DONE (2026-07-31): the DOMAIN SEMINORM PART OF ‖A‖, CLOSED BY A DERIVATIVE GAIN.
+## The FIRST uniform upper bound on the WHOLE of ‖A‖ — and the first (α,γ) optimum made of upper
+## bounds. Still NOT a certificate.
+
+The §15 "next brick", item (1) — the sharpest of the three open ledger items. Built
+solver/nk_seminorm.py + test_nk_seminorm.py 6/6 (suite now **14 files green**); deterministic ladder
+experiments/p2_route_d_v7_seminorm.py → writeup/data/p2_route_d_v7_seminorm.json → fig25
+(writeup/4_p2_lottery/p2_route_d_v7_evidence.py). NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V7.md.
+
+**v6 recommended route (a) (restrict to a band-limited subspace with a measured faithfulness factor)
+and kept route (b) (the analytic C^{1,γ} derivative gain) in reserve. This leg did (b), because a
+ten-minute diagnostic showed (a) was aimed at the wrong mechanism** — v6 had reasoned by analogy to
+its OWN headline finding (the discrete-ball trap) and the analogy was false.
+
+SIX evidence pieces (do not relearn):
+  V1 **WHERE THE J^γ ACTUALLY LIVES.** v6's dual bound on the seminorm part, restricted to pairs with
+     |Δθ| ≥ Δ for FIXED Δ (so it covers more grid points as J grows): all 17.2→24.2→34.2 (J^+0.494);
+     Δ=0.05 9.09→9.78 (J^+0.053); **Δ=0.1 6.95→7.12 (J^+0.018)**. **All of the growth sits on the
+     NEAR DIAGONAL.** That disqualifies route (a) STRUCTURALLY, not numerically: a faithfulness defect
+     of the ball is a statement about which directions are admissible and does not know whether the two
+     domain indices being compared are adjacent; the J^γ does. What it actually is: ‖A_j· − A_k·‖_{Y*}
+     was priced ROW BY ROW, discarding the near-cancellation of neighbouring rows of an inverse and
+     then dividing by |Δθ|^γ ~ (π/J)^γ. **No refinement of the dual recovers a cancellation the dual
+     cannot see, because the cancellation is a property of the EQUATION, not of the rows.**
+  V2 **THE SPLIT HILBERT BOUND (free sharpening).** v6's |H(h)| bound charges the TOTAL norm; its own
+     derivation already separates the payers (p.v. band increment ← seminorm, rest of the line ←
+     decay envelope). Keeping them apart: |H(h)(X)| ≤ a_sup(X)·S + a_semi(X)·T, sum = v6's bound to
+     2.1e-16. Weighted sups at (α,γ)=(1.5,0.5): 1.031 and 1.277 vs v6's combined 1.928 — **~30% on the
+     final closure (T ≤ 93.5 unsplit vs 63.6 split), up to 4.3× sharper pointwise.**
+  V3 **THE CLOSURE = the estimate itself.** (P) Solve the equation for the derivative:
+     c h_X = −g − hX/(1+X²) − H(h)/(1+X²) (exact rearrangement, gate 1.9e-16) ⇒
+     P := sup (1+X²)^{(α+1)/2}|h_X| ≤ (1/c)[‖g‖_Y + S + sup (1+X²)^{(α−1)/2}(a_sup S + a_semi T)] (D).
+     (I) Split each pair at δ(θ₁)=κ(1+X₁²)^{−1/2} (a fixed multiple of the LOCAL X-scale): separated
+     pairs pay 2Sκ^{−γ}, near pairs pay (1/2)Pκ^{1−γ}, and **the weights cancel identically at every
+     scale** (the compactification again doing the far-field bookkeeping for free) ⇒
+     **T ≤ C(γ)(P/2)^γ(2S)^{1−γ}, C(γ)=(1−γ)^{γ−1}γ^{−γ}, C(1/2)=2. NO J, NO GRID.** Hypothesis α≥1
+     (used once; `seminorm_closure` REFUSES α<1 rather than silently extending). Gate: (I) verified on
+     32 profiles × 4 (α,γ) incl. α=1, worst ratio T/bound = 0.461.
+     **WHY IT NEVER FAILS:** (D)+(I) read T ≤ F(T) with F concave, increasing, F(0)>0, so F(T)−T
+     changes sign exactly once ⇒ a UNIQUE fixed point T*, and {T : T ≤ F(T)} = [0,T*]. The feedback is
+     LINEAR in T (through |H(h)|) while the gain is SUBLINEAR (F ~ T^γ) — **so for every γ<1 the
+     closure holds regardless of the size of the constants: no smallness condition, no contraction to
+     lose.** Only γ=1 turns it into a genuine contraction condition — a **THIRD independent reason**
+     γ=1 is excluded (alongside v5 U2's blow-up at both ends and the classical unboundedness of H on
+     Lipschitz functions). Gate 5: T=F(T) to 1e-9, slope 0.445<1, closes for C_sup up to 5e3,
+     F(2T)/F(T)=1.414=2^γ.
+     **THE NUMBER (α,γ)=(1.5,0.5):** T ≤ 63.61/63.56/63.53/63.82/64.70 over J=125..1600, ‖A‖ ≤ 69.15
+     →70.33 (**J^+0.0059**, drift inherited ENTIRELY from v6's C_sup; the closure contains no J).
+     **First uniform upper bound on the WHOLE of ‖A‖ in seven legs.** Bracket, said honestly:
+     **0.85 ≤ (seminorm part) ≤ 63.6 — a factor ~75 wide.** v6's dual on the same quantity grew J^+0.49.
+  V4 **THE (α,γ) MAP MADE OF UPPER BOUNDS.** J=800, α∈[1.1,1.8], γ∈[0.05,0.8] (past where the answer
+     was expected — lesson 8). **‖A‖ alone falls monotonically as γ→0** (a weaker domain norm is easier
+     to bound) so optimizing it alone runs off the grid edge (argmin at γ=0.05). **Z₂=2‖A‖C_Q BOWLS in
+     BOTH knobs: interior optimum (α,γ)=(1.4,0.15), Z₂ ≤ 242.4** — the quadratic pays for exactly the
+     weakness that makes ‖A‖ cheap. **First interior optimum in this project computed entirely from
+     upper bounds** (v5's was family-restricted maxima and v6 killed it). CAVEAT that must travel with
+     it: Z₂ here still OMITS the codomain seminorm part of C_Q, which is unbounded, and that omission
+     is worst exactly where γ is smallest — so the LOCATION is provisional, again.
+  V5 **WHAT THE HONEST ‖A‖ COSTS.** v6's conditional budget substituted the far-field inverse norm
+     2/(2−α)≈2.5 for ‖A‖ (justified by v4 W2 — but that was validated in SUP norms). In the Hölder
+     norm the real bound is **10–20× larger**. At γ=0.35, requiring Z₁ ≤ 0.5: α=1.2 needs X₀~2e3
+     (J~1e3), α=1.4 X₀~6e3 (J~4e3), α=1.5 X₀~3e4 (J~2e4, dense J×J = 3.2e9 entries — out of reach).
+     **SURVIVABLE** for α ≤ 1.4: inside what the existing dense collocation reaches. **EXPENSIVE:**
+     the conditional budget drops from 2.8e-3 to **2.0e-4** — from the same order as the GA residual
+     floor (~1e-2) to a factor ~50 below it. **SECOND CONSECUTIVE LEG in which replacing a lower bound
+     by an upper bound cost the budget an order of magnitude** (v6 B5 did it to v5's optimum). That
+     pattern is the leg's most important negative: **the approach does not merely need the constants
+     bounded, it needs them roughly SHARP** — three of four bounded ones are lossy by ≥1 order, and
+     the losses MULTIPLY inside Z₁ and Z₂.
+  V6 **THE INTERPOLANT IS NOT IN THE SPACE (a defect older than this leg).** A nodal vector on the
+     midpoint grid stands for an even TRIGONOMETRIC POLYNOMIAL in θ, which does not vanish at θ=π,
+     where w_α=sec^α(θ/2) diverges ⇒ **sup w_α|h| is INFINITE for the interpolant at every J.** Every
+     discrete norm in v1…v7 is finite only because the midpoint grid stops half a step short of π.
+     Measured on h=Ae_{J/2}: w|h| at the last node 8.4e-3→6.0e-4 over J=200..1600, but at θ=π−1e-6 it
+     is 1.09e3→2.08e0; h(π) ~ **J^{−3.01}** — the failure is SOFT (the discretization converges to
+     something that does live in the space) but it is a change of REPRESENTATION, not a small
+     correction. **Repair (explicit): write h = (1+X²)^{−α/2} p(θ) with p a trigonometric polynomial**,
+     so the weighted sup norm becomes the plain sup norm of p and the weighted seminorm a mildly
+     weighted θ-seminorm of p. NOTE the §V3 closure is IMMUNE — it is a continuum statement about the
+     true solution of DF h = g, which does decay; the defect is in the HYPOTHESIS S ≤ C_sup, which is
+     currently supported by grid measurements.
+  V7 **THE LEDGER.** EXACT: Y₀. BOUNDED: Z₀; Z₁ far-field modelling error (v6); ‖A‖ domain SUP part
+     (v6); **‖A‖ domain SEMINORM part (NEW)**; C_Q sup part (v6). OPEN: Z₁ core↔far coupling; Z₁ core
+     discretization (measured only); C_Q codomain SEMINORM part; **discrete↔continuum transfer (NEW,
+     V6 above)**. **Six of ten bounded** — and two of the four open items are new NAMES for things that
+     were previously invisible rather than new problems.
+
+NEXT (in order of sharpness): (1) **the C_Q codomain seminorm part** — weighted Hölder boundedness of
+H with an explicit constant; v5 U2 MEASURED it (~1.12) and never bounded it, and it is the one term
+that would make the V4 map's optimum LOCATION trustworthy; (2) **the change of ansatz**
+h=(1+X²)^{−α/2}p(θ) that fixes V6's interpolant defect and would let every discrete measurement in
+v5–v7 be re-read as a statement about a space the objects actually live in; (3) the core↔far cutoff
+commutator; (4) the core discretization. Same stopping rule: **if the radii polynomial does not close
+in float with margin, STOP, do not harden.** solver/interval.py still correctly unused.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.

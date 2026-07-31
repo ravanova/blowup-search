@@ -3,6 +3,67 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v7: the domain seminorm part of ‖A‖, closed by a derivative gain (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v7_seminorm.json` (regen `python experiments/p2_route_d_v7_seminorm.py`,
+~15 min); figure fig25 (`writeup/4_p2_lottery/p2_route_d_v7_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V7; PHASE2_P2_NOTES.md §16. Code: `solver/nk_seminorm.py` +
+`test_nk_seminorm.py` (6/6; suite now 14 files green).
+
+What a human would want to know:
+
+- **The leg did not do what the previous leg told it to.** v6 named two routes to this
+  bound and said "do (a) first" — restrict to a band-limited subspace where the discrete
+  norm is faithful. A ten-minute diagnostic killed that plan: the J^γ growth sits
+  *entirely* on pairs the grid barely separates, and a faithfulness defect of the ball is
+  a statement about which directions are admissible — it cannot know or care whether the
+  two domain indices being compared are adjacent. The J^γ does. So (a) was aimed at the
+  wrong mechanism, and it was aimed there because v6 reasoned by analogy to v6's own
+  headline finding. Worth remembering: the freshest lesson is the most tempting analogy,
+  and an analogy is not a diagnosis.
+
+- **What actually removes it.** The dual was pricing each row of the inverse separately
+  and then dividing by |Δθ|^γ. That discards the near-cancellation of neighbouring rows,
+  which is a property of the *equation*, not of the rows — so no refinement of a dual
+  functional can recover it. Using the equation instead: solve `DF h = g` for `h_X`
+  (an exact rearrangement), then split every pair of points at a fixed multiple of the
+  local X-scale. The weights cancel identically at every scale, and what comes out has no
+  J and no grid in it.
+
+- **The closure never fails, and that is structural.** The bound feeds back on itself
+  through `|H(h)|` linearly, while the interpolation gain is sublinear (`T^γ`). Concave,
+  increasing, positive at zero ⇒ exactly one fixed point, no smallness condition, nothing
+  to lose. Only γ = 1 turns it into a real contraction condition — which is a third
+  independent reason the Lipschitz endpoint is excluded, after v5's measured blow-up and
+  the classical unboundedness of H there. Three unrelated arguments landing on the same
+  exclusion is the kind of agreement worth noticing.
+
+- **The number, and the honest bracket.** ‖A‖ ≤ 69.1, essentially flat in J (the residual
+  J^+0.006 is inherited entirely from v6's sup-part dual; the closure contributes none).
+  First uniform upper bound on the whole operator in seven legs. But the best lower bound
+  is 0.85, so the bracket is a factor ~75 wide, and that width is not cosmetic — see the
+  next point.
+
+- **The negative that matters more than the bound.** Substituting the honest ‖A‖ for the
+  far-field proxy v6 used drops the conditional budget from 2.8e-3 to 2.0e-4. That is the
+  *second consecutive leg* in which replacing a lower bound by an upper bound cost an
+  order of magnitude. The losses multiply inside Z₁ and Z₂, so the approach does not just
+  need the constants bounded — it needs them roughly sharp. Three of the four bounded so
+  far are lossy by an order or more. If that pattern repeats twice more, the budget is
+  gone, and it would be honest to say so early rather than after building the tooling.
+
+- **A defect older than this leg, found by checking the chain.** A nodal vector on the
+  midpoint grid is a trigonometric polynomial in θ; a trigonometric polynomial does not
+  vanish at θ = π; the decay weight `sec^α(θ/2)` diverges there. So the interpolant's
+  decay-graded norm is infinite at every J, and every discrete norm from v1 to v7 is
+  finite only because the midpoint grid stops half a step short of π. It is soft
+  (`h(π) ~ J^-3.01`, so the discretization is converging to something that does live in
+  the space) and the derivative-gain closure is immune because it is a continuum
+  statement — but it is a change of ansatz, not a small correction: write
+  `h = (1+X²)^{-α/2} p(θ)` with `p` a trig polynomial and the weighted sup norm becomes a
+  plain sup norm.
+
 ## Phase-2 P2 — ROUTE-D v6: first genuine UPPER bounds + the discrete-ball trap (non-logged) — 2026-07-30
 
 **NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
