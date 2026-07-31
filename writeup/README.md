@@ -143,6 +143,13 @@ writeup/
     the first `(α,γ)` optimum built entirely from upper bounds. Also: the honest
     `‖A‖` costs the budget another order of magnitude (the second leg running), and
     the interpolant turns out not to lie in the space it is measured in. *(fig 25)*
+27. [TECHNICAL_P2_ROUTED_V8.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V8.md) ·
+    [BLOG_P2_ROUTED_V8.md](4_p2_lottery/BLOG_P2_ROUTED_V8.md) — **Route-D v8**: the
+    codomain **seminorm** part of `C_Q` — the last unpriced constant — bounded with
+    the weight `1−γ` that `H`'s failure to inherit decay forces, giving the first
+    `Z₂` in the project with **nothing omitted**. v7's optimum survives unmoved,
+    v7's reason for doubting it was backwards, and the three-legs-running
+    order-of-magnitude budget loss stops at 7%. *(fig 26)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -175,6 +182,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig20_p2_route_d_dress.png` | 4 | P2 — Route-D v2: the NK ball never closes (‖A_N‖ ~ N), the ablation that pins it on the far field, and the decay-graded repair (‖A‖ = 3.000 flat) |
 | `fig24_p2_route_d_v6.png` | 4 | P2 — Route-D v6: the discrete-ball trap (extremizer inflated ~J²), the two-point dual that saturates, the closed-form far-field `Z₁` bound, and the optimum moving once `Z₁` is priced |
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
+| `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig23_p2_route_d_v5_holder.png` | 4 | P2 — Route-D v5: the square-wave adversary defused in the Hölder norm, the two interior optima (one per grading), the surviving marginal direction at the critical decay rate, and the quadratic constant before/after |
 | `fig22_p2_route_d_v4_graded.png` | 4 | P2 — Route-D v4: the third build reproduces the negative and the repair, the compact core costs ~nothing (far-field law within 6%), the conjugate-extremal family showing the quadratic is unbounded in sup norms (and random sampling missing it), and the confirmed price |
 | `fig21_p2_route_d_v3_spaces.png` | 4 | P2 — Route-D v3: the conservation law (the two NK exponents sum to ≥1 over every diagonal weight pair), the empty strip in the (s,t) plane with its ablation control, the far-field resonance at α=2, and the decay-graded optimum α*≈1.44 |
@@ -193,6 +201,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_probe.json` | Arc 4 / fig19 — Q1 enclosure precision, Q2 degeneracy singular values, Q3 line→circle covariance, Q4 the banded operator |
 | `p2_route_d_v6_bounds.json` | Arc 4 / fig24 — B1 the discrete-ball inflation, B2 the two-point dual ladder, B3 the exact modelling identity, B4 the far-field `Z₁` bound + validation, B5 the `α` tension and conditional budget, B6 the ledger |
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
+| `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v5_holder.json` | Arc 4 / fig23 — U1 the defusal of the v4 adversary, U2 the Hölder constant of `H` vs `γ`, U3/U3b/U3c the inverse over `(α,γ)` and the critical-direction isolation, U4 the quadratic in the two-graded pair, U5 the joint optimum |
 | `p2_route_d_v4_graded.json` | Arc 4 / fig22 — W1 the third-build reproduction, W2 the core's contribution vs the far-field law, W3 the conjugate-extremal quadratic divergence + the random control, W4 the confirmed `Z₂`/budget ceiling, W5 the gauge/drop-row operational finding, W6 the quantified (not bounded) `Z₁`-analogue |
 | `p2_route_d_v3_spaces.json` | Arc 4 / fig21 — S1 the pure-convolution identity + sharp constant, S2 the inverse's price in weighted norms, S3 the (s,t) map + gap collapse + conservation law, S4 the ablation control, S5 the far-field resonance (both sides), S6 the decay-graded pair and its optimum |
@@ -214,6 +223,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v6_evidence.py         # fig24
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v5_evidence.py         # fig23
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v7_evidence.py         # fig25
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_v8_evidence.py         # fig26
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
 .venv/bin/python experiments/p2_route_d_probe.py
@@ -223,6 +233,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python experiments/p2_route_d_v5_holder.py
 .venv/bin/python experiments/p2_route_d_v6_bounds.py
 .venv/bin/python experiments/p2_route_d_v7_seminorm.py
+.venv/bin/python experiments/p2_route_d_v8_quadratic.py
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

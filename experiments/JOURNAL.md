@@ -3,6 +3,62 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v8: the codomain seminorm part of C_Q, and the first complete Z₂ (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v8_quadratic.json` (regen `python experiments/p2_route_d_v8_quadratic.py`,
+~12 min); figure fig26 (`writeup/4_p2_lottery/p2_route_d_v8_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V8; PHASE2_P2_NOTES.md §17. Code: `solver/hilbert_holder.py` +
+`test_nk_hilbert_holder.py` (6/6; suite now 15 files green).
+
+What a human would want to know:
+
+- **The weight was the first thing to get right, and it is not the obvious one.** The
+  natural guess is that H(h) should be measured with the same decay weight as h. It
+  cannot be: H does not inherit decay. However fast h falls off, H(h) falls off like
+  1/X, because the far field only sees h's total mass. So the seminorm weight for
+  H(h) is 1−γ regardless of α, and asking for α−γ would have produced an infinite
+  constant with nothing to point at. Third time in this series that a weight exponent
+  was the entire difficulty, and the third time the right one was forced rather than
+  chosen.
+
+- **A bug worth publishing.** The scaling argument that shows the estimate is finite
+  needs the two points close together relative to their distance from the far-field
+  endpoint. The estimate itself needs no such thing — only that the near region fits
+  on the circle once. The first version imposed the argument's condition on the code,
+  which forced a much cruder fallback for the pairs just outside it, and the reported
+  constant came out twelve times too large. Every one of those pairs was the fallback,
+  not the estimate. General form: do not let the regime of an argument become the
+  regime of the code.
+
+- **The gate that earned its keep, again.** This estimate is a majorant of a
+  three-piece decomposition, and a majorant of a *wrong* decomposition is still a
+  valid inequality — about something else. No "is the bound bigger than the measured
+  value" test can see that. So the decomposition was built a second time with the true
+  integrand and checked against the answer known in closed form (cos kθ → sin kθ):
+  agreement to 6 decimals, after it caught two sign errors, one of which was also
+  wrong in the module's own docstring where it had been sitting looking correct.
+
+- **v7's prediction was backwards, and the reason is mundane.** v7 called its optimum
+  provisional because the omitted term "is worst exactly where γ is smallest". It is
+  worst at the *other* end: 0.1% at γ = 0.05, 28% at γ = 0.9. v6's already-bounded sup
+  part carried the same 1/γ near-region divergence, so nothing new blows up down
+  there. The optimum does not move — (1.4, 0.15) in both maps.
+
+- **The number that matters is the trend.** Budget history across four legs: 7.6e-2 →
+  1.18e-2 → 2.58e-4 → 2.39e-4. Three order-of-magnitude losses, then one of 7%. After
+  v7 the honest reading was that every remaining honesty step would cost an order and
+  the approach would die of a thousand cuts. That reading rested on three data points
+  with a common cause. This one had the same cause and cost almost nothing. That is
+  not evidence the remaining three items are cheap — it is evidence that "each step
+  costs an order" was a pattern, not a law, which is worth about one more leg.
+
+- **What is now the bigger lever.** Z₂ is complete, so the open items are all Z₁-side
+  or representational. But ‖A‖'s bracket is ~75× wide and C_Q's is ~4×, and the budget
+  scales inversely with their product. Sharpening what we already have may now be
+  worth more than bounding one more thing — which is a different kind of leg than the
+  last three.
+
 ## Phase-2 P2 — ROUTE-D v7: the domain seminorm part of ‖A‖, closed by a derivative gain (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
