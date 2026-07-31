@@ -212,6 +212,53 @@ with Clay as a distal ~0.05% horizon. That is the user's standing steer and it h
 Say the honest version out loud in every writeup; never let a good leg drift into implying that
 L1 success is Clay progress in any load-bearing sense.
 
+**WHAT WOULD ACTUALLY BE WORTHWHILE TOWARD A CLAY-RELEVANT CANDIDATE (the user asked this
+directly; keep it here and revisit it, do not let it rot).**
+
+Two hard theorems decide the strategy, and neither is negotiable:
+  * **Nečas–Růžička–Šverák (1996), extended by Tsai** — EXACTLY self-similar blow-up for 3D
+    NS in the natural scaling class is RULED OUT. The whole "find a self-similar profile and
+    certify it" template that Route D has been building for twelve legs therefore **cannot be
+    pointed at NS as-is**; it works for Euler-type models where the scaling is admissible.
+  * **Tao's supercriticality barrier** — at the blow-up scale NS's controlled quantities are
+    supercritical, and averaged-NS achieves blow-up within reach of energy-method-only
+    arguments. Any real proof must exploit structure that survives averaging.
+Together: a Clay-relevant candidate must be **non-self-similar** (discretely self-similar, or
+an unstable/non-generic scenario) and must beat viscosity at small scales.
+
+RANKED, with the reasoning, not just the list:
+  1. **Discretely self-similar (DSS) profile search.** The live candidate class precisely
+     BECAUSE exact self-similarity is excluded. A DSS blow-up is periodic in log-time rather
+     than stationary — i.e. a periodic orbit of the rescaled flow — and a GA for global search
+     plus Newton for refinement is unusually well suited to finding one. This is the most
+     Clay-relevant thing available with the tooling that exists, and it looks uncrowded.
+  2. **Map the critical viscosity scaling for the Hou–Luo scenario.** The Clay question in
+     miniature: take the Euler blow-up Chen–Hou proved, add viscosity, determine numerically
+     the scaling at which ν kills it. Well-posed, directly probes "can a blow-up beat
+     viscosity", and produces a publishable answer either way.
+  3. **Port to 2D Boussinesq / axisymmetric Euler with boundary.** The current toy is a 1D
+     model of the BOUNDARY behaviour of that system; Spike 1 already reproduced the Chen–Hou
+     regular profile, so the solver exists. This is the L1→L2 step, where certification
+     results actually count.
+  4. **Finish ONE certificate end-to-end, on anything — even a=0 where the answer is known.**
+     Twelve legs have produced constants and never a closed budget. Every route above needs a
+     pipeline that demonstrably closes; this is worth doing for the capability, not the result.
+  5. **The literature search.** Hours of work, and it currently BLOCKS every novelty claim the
+     project might make — including the three methodological candidates (the discrete-ball
+     trap; the weighted-ℓ¹ conservation law / no-go; the elasticity discipline), which may
+     well be folklore among people who do computer-assisted proofs professionally.
+
+RECOMMENDED SEQUENCING: (5) first because it is cheap and tells us what is already known;
+then (4) to prove the pipeline closes; then (1) as the genuinely Clay-relevant swing with (2)
+as the well-posed fallback. **NOT more Route-D estimate legs** — they refine a certificate for
+a toy model whose ansatz v12/v13 have now shown has structural problems (finite support, a
+far-field range obstruction) exactly at the parameter values of interest.
+
+HONEST FRAMING THAT SURVIVES ALL OF THIS: even (1) succeeding yields a CANDIDATE requiring
+proof, not a proof — and the proof technology for 3D NS does not currently exist. That is the
+~0.05%, and none of the above changes it. What they change is whether the effort is aimed at
+the actual obstruction or at polishing a model that was never going to reach it.
+
 **GATE-CHECK BEFORE EACH NEW BRICK (answer it in the leg's writeup, don't just re-paste it):**
   (a) which link of the chain does this move, and how far?
   (b) if the answer is "none — it makes L1 more rigorous or cheaper", is another L1 leg still
