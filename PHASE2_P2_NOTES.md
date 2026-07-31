@@ -164,6 +164,21 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## input left, ~2x available), and BEFORE that a REAL lower bound on ||A|| — without one, no bracket
 ## in this project can be attributed. New solver/hilbert_pointwise.py + test_nk_hilbert_pointwise.py
 ## (6/6; suite 16 files green); fig27; BLOG/TECHNICAL_P2_ROUTED_V9.md. NOT a certificate.**
+## **ROUTE-D v10 DONE (§19, 2026-07-31): A LOWER BOUND ON ||A|| WORTH READING. Every bracket this
+## project has quoted had a lower end that was a maximum over SIGN PATTERNS, and the tell nobody
+## checked is that it gets WORSE with J (0.973 -> 0.921) — it was never converging to anything
+## about the operator, only measuring how badly a jagged vector is punished by a Holder seminorm.
+## Replaced by an adversary family the Y-ball actually contains (1/v times a slowly varying shape:
+## powers, low cosines, swept bumps, smoothed steps, boxes); validity is free since any g gives
+## ||A|| >= ||Ag||/||g||. Reference bracket **50x -> 16x**; and at the OPERATING point (1.4,0.15),
+## where the budget has been evaluated for three legs, **2.74 <= ||A|| <= 20.94 — a factor 7.7, not
+## 50.** The extremizer is a WIDE FAR-FIELD BUMP (theta=3.12, X~93), the same place v2's far-field
+## degeneracy, v3's resonance and v6's X0 all point. **THE VERDICT (the first MEASURED ceiling on
+## sharpening in ten legs): a PERFECT upper bound on ||A|| would move the budget 2.45e-4 -> 1.88e-3
+## and no further, i.e. ~5x short of the GA floor rather than 40x — better than it looked, and NOT
+## enough on its own** (it would also need C_Q's ~4x, and the two together only just reach the floor
+## with nothing spare for the three open Z1 items). New solver/op_lower.py + test_op_lower.py (6/6;
+## suite 17 files green); fig28; BLOG/TECHNICAL_P2_ROUTED_V10.md. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -1125,4 +1140,56 @@ attributed, and we cannot tell a lossy bound from a large truth. Arguably (2) BE
 is what tells us whether (1) is worth doing. (3) the core↔far cutoff commutator; (4) the change of
 ansatz h=(1+X²)^{−α/2}p(θ); (5) the core discretization. Same stopping rule: **if the radii
 polynomial does not close in float with margin, STOP, do not harden.**
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
+
+## §19 — ROUTE-D v10 DONE (2026-07-31): A LOWER BOUND ON ‖A‖ WORTH READING. The bracket falls
+## 50× → 8×, and for the first time the project can quote a MEASURED CEILING on what sharpening
+## can buy. Still NOT a certificate.
+
+The §18 "next brick", item (1) — done BEFORE touching C_sup, because it is what tells us whether
+touching C_sup is worth it. Built solver/op_lower.py + test_op_lower.py 6/6 (suite now
+**17 files green**); deterministic sweep experiments/p2_route_d_v10_lower.py →
+writeup/data/p2_route_d_v10_lower.json → fig28. NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V10.md.
+
+SIX evidence pieces (do not relearn):
+  W0 **WHY SIGN PATTERNS FAIL, AND THE TELL NOBODY CHECKED.** g = sign(A_i·)/v is the exact
+     extremizer of the SUP-TO-SUP problem; here it is terrible for exactly v6's discrete-ball
+     reason in reverse — **a sign pattern's Hölder seminorm is enormous**, so dividing by the full
+     codomain norm discards everything the numerator gained. **THE TELL: the baseline gets WORSE
+     with J (0.973 → 0.921 over J=200..800). It was never converging to anything about the
+     operator.** Nobody had looked, through six legs of quoting it.
+  W1 **THE CONSTRUCTION.** The Y-ball says what to look for: finite codomain norm ⇒ decay at least
+     like 1/v = cos^{α+1}(θ/2) AND no oscillation. So the family is **1/v × a slowly varying
+     shape** (powers, low-order cosines, bumps swept over centre and width, smoothed steps, boxes).
+     Validity is FREE (any g gives ‖A‖ ≥ ‖Ag‖_X/‖g‖_Y), so the whole problem is construction.
+     Reference (1.5,0.5), J=400: **0.942 → 2.884**; bracket **50× → 16×**. A random ascent in a
+     smooth cosine basis from the family's best adds **1.000×** — reported, because a flat maximum
+     is information.
+  W2 **THE BRACKET THAT ACTUALLY MATTERS.** At the OPERATING point (1.4, 0.15) — where the budget
+     has been evaluated for three legs — **2.74 ≤ ‖A‖ ≤ 20.94, a factor of 7.7.** Quoting the
+     bracket at the REFERENCE point was itself part of the confusion: a second, quieter version of
+     the same mistake.
+  W3 **WHAT THE EXTREMIZER IS.** A **wide, far-field-supported, slowly varying** shape — a bump at
+     θ=3.12 (X≈93) of width 0.5, with its neighbours next. Nothing oscillatory is close. Same place
+     every other Route-D finding points at (v2's far-field degeneracy, v3's α=2 resonance, v6's X₀):
+     a small independent check that the number means something.
+  W4 **ACROSS THE MAP:** 10.7× (1.2,0.15) / **8.2× (1.4,0.15)** / 14.2× (1.4,0.35) / 16.2×
+     (1.5,0.50) / 10.8× (1.6,0.25) / 10.4× (1.8,0.15) — 8–16× everywhere and **tightest at the
+     optimum**; the upper bound is worst exactly where the closure leans hardest on the
+     interpolation inequality (large γ).
+  W5 **THE VERDICT — the first MEASURED CEILING on sharpening in ten legs.** A PERFECT upper bound
+     on ‖A‖ multiplies the conditional budget by the bracket and no more: **2.45e-4 → 1.88e-3**
+     (×7.7) against the GA residual floor 1e-2. BOTH readings matter: (i) **better than it looked**
+     — the recoverable part lands ~5× short of the floor, not 40×; (ii) **not enough alone** —
+     closing the gap also needs C_Q's ~4× slack (v8 X2), and the two together only just reach the
+     floor with nothing spare for the three open Z₁ items. Caveats: the true norm is somewhere
+     INSIDE the bracket, not at its bottom, so 7.7× over-estimates the achievable gain; the lower
+     bound is still a finite family; the budget is still CONDITIONAL.
+  W6 **LEDGER:** coverage unchanged (seven of ten; Z₂ complete). What changed is that the bracket
+     on the DOMINANT constant is now interpretable, so the next leg can be chosen on evidence.
+
+NEXT: (1) **C_sup, the two-point dual** — elasticity ≈1 (v9 Y5), untouched since v6, and now with a
+measured ceiling on the payoff; (2) the core↔far cutoff commutator [H,φ]; (3) the change of ansatz
+h=(1+X²)^{−α/2}p(θ); (4) the core discretization. **AND A STANDING RULE EARNED HERE: a bracket is
+two numbers and BOTH have to be earned before any decision is made from it.**
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.

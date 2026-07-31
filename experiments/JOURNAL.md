@@ -3,6 +3,49 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v10: a lower bound worth reading, and the first measured ceiling (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v10_lower.json`
+(regen `python experiments/p2_route_d_v10_lower.py`, ~20 min); figure fig28; writeups
+TECHNICAL/BLOG_P2_ROUTED_V10; PHASE2_P2_NOTES.md §19. Code: `solver/op_lower.py` +
+`test_op_lower.py` (6/6; suite now 17 files green).
+
+What a human would want to know:
+
+- **We had been quoting half a bracket for six legs.** Every lower bound on ‖A‖ in
+  this project came from sign-pattern directions — exactly right if the space only
+  measured size, and terrible here, because a sign pattern's Hölder seminorm is
+  enormous and dividing by it discards what the numerator gained. The tell nobody
+  had looked at: the baseline gets *worse* as the grid refines (0.973 → 0.921). It
+  was never converging to anything about the operator.
+
+- **What the ball actually contains.** Finite codomain norm forces a decay rate and
+  forbids oscillation, so the family is that decay times a slowly varying shape.
+  Validity is free — any g gives a lower bound — so the whole problem is
+  construction, which is banked lesson 9 (build the adversary) pointed at the
+  operator instead of the quadratic.
+
+- **The winner is a wide bump in the far field** (X ≈ 90, half the domain wide),
+  and nothing oscillatory is close. That is where v2's far-field degeneracy, v3's
+  resonance and v6's matching radius all point, which is a small independent check
+  that the number is about the problem rather than about the discretization.
+
+- **The bracket that matters was never 50×.** At the reference point it falls
+  50× → 16×. At the operating point — where the budget is actually evaluated, and
+  has been for three legs — it is **2.74 ≤ ‖A‖ ≤ 20.94, a factor of 7.7**. Quoting
+  the reference point's bracket was a second, quieter version of the same mistake.
+
+- **The first measured ceiling on sharpening.** A perfect upper bound would move
+  the budget 2.45e-4 → 1.88e-3 and no further: about 5× short of the residual floor
+  rather than 40×. Better than it looked, and not enough alone — closing the gap
+  also needs the quadratic constant's ~4×, and the two together only just reach the
+  floor with nothing spare for the three open Z₁ items.
+
+- **The rule this earns.** A bracket is two numbers and both have to be earned
+  before any decision comes out of it. The cost of not doing that was a leg spent
+  sharpening the wrong input and a phantom "19× available gain" that survived until
+  someone checked the lower number.
+
 ## Phase-2 P2 — ROUTE-D v9: the sharpness leg, and the elasticity table that should have come first (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
