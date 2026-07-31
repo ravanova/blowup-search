@@ -1,52 +1,77 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-31 (updated after Route-D v12). **NEWEST LEG FIRST — Route-D v12 carried the
-profile into the basis the bounds are written in, measured Y0 there, and found that the object
-the certificate is about is NOT the object the space was designed for.** v11's instruction was
-exactly this: its Newton solve lived on the Route-A sinh-rho grid, while every Route-D bound
-lives in the compactified midpoint theta-collocation basis (X = tan(theta/2)), so carry it
-across. Doing that needed a build — the a-transport term in that basis, whose only non-local
-piece, the velocity U = INT_0^X H(Omega)dX', has a closed form there (U = SUM_k A_k I_k(theta),
-I_k = INT_0^theta sin kt/(1+cos t)dt, exact three-term recursion, assembled in longdouble
-because float64 drifts 1.7e-11 by k=800). Two framings came free and both matter: **A IS THE
-NEWTON MATRIX** (the certificate's gauged system is what Newton iterates, so Y0 = ||A F|| is the
-size of the Newton step), and **zero at the nodes is not zero as a function** (Omega*H(Omega)
-has degree <2J against J collocation conditions; the rows Newton enforces sit at 1.5e-13 while
-the row the gauge displaced carries 9.1e-3 at a=0.5). **THE FINDING: the true transport
-coefficient is E(X) = c + aU(X), and U inherits the Hilbert transform's logarithm
-(U ~ (INT Omega/pi) log X -> -infinity), so E CROSSES ZERO at a finite radius X_c ~ e^{c/a};
-approaching it the balance forces Omega ~ (X_c - X)^{1/a} — an algebraic zero whose order is
-1/a with NO free constant — and beyond it Omega = 0 solves the equation exactly. The a>0
-profile ENDS. The a=0 anchor, on which eleven legs of decay-graded far-field analysis were
-built, is the degenerate X_c = infinity limit** (and the same balance at a=0 gives Omega ~
-X^{m/(pi c)} = X^-2, i.e. the anchor's tail and v3's alpha=2 resonance are the a->0 corner of
-this picture). Two independent discretizations agree on the dilation invariant X_c/c to
-**0.06-0.11%** and on the zero order to 7-9% of 1/a. **THE CONSEQUENCE THAT DECIDES THINGS:
-||A|| at the REAL profile DIVERGES with J (J^+2.86 at a=0.2, J^+2.75 at 0.3) while at the
-anchor it is FLAT (J^-0.003, 3.551->3.537 over J=200..800), because linearizing about a zero of
-order p has a homogeneous mode ~ s^-p that lies in no sup norm. The approximate inverse the
-whole programme is built on does not exist in the limit at a>0, and the seven "bounded"
-constants in the ledger are all constants for the ANCHOR's linearization.** The one number that
-looked like good news — a=0.2, J=1600, Y0 <= 3.17e-5 against the 2.45e-4 budget, 7.7x UNDER and
-the first time this side of the inequality has come in under target at a != 0 — was priced with
-the anchor's ||A||; correcting it (budget ~ 1/||A||) turns 7.7x under into ~3 orders over.
-**Both sides move the wrong way, by one mechanism.** The survival boundary gets a candidate
-mechanism (X_c falls 10.6 -> 3.1 -> 2.1 over a = 0.25..0.7 while the core half-width stays ~1)
-but the **a = 1/3 control kills the sharp arithmetic version** (p = 1/a hits the integer 2 at
-a = 1/2, tantalisingly at a*, but a = 1/3 with p = 3 shows no anomaly at all), so **v12 does
-NOT predict a\***. New solver/collocation_newton.py + test_collocation_newton.py (6/6; suite 19
-files green); fig30; BLOG/TECHNICAL_P2_ROUTED_V12.md. Everything below is banked + pushed on
-`main`. **NEXT — THE REPAIR, WHICH IS CHEAPER THAN WHAT IT REPLACES: beyond X_c the profile is
-exactly zero, so build the certificate on the FINITE INTERVAL [0, X_c] with X_c as an UNKNOWN.
-The far field — eleven legs of decay grading, resonances and tail bounds — disappears, because
-there is nothing out there. The price is the interior singularity at X_c, and the standard
-reason to expect it refundable is that the singular mode s^{-1/a} is precisely d/dX_c of the
-solution family: adding the free boundary as an unknown is the usual way an apparent
-singularity of a linearization stops being one. UNTESTED. KILL SWITCH, run it first: build the
-free-boundary system at ONE a and measure ||A|| against J. If the singular direction is not
-absorbed, ||A|| still diverges and the framing needs REPLACING, not repairing — at which point
-read the "IS THIS STILL THE RIGHT LANE?" box, which v12 has changed.** Read BOTH the "WHERE
-THIS SITS RELATIVE TO CLAY" section and that box before committing to another estimate leg.*
+*Written 2026-07-31 (updated after Route-D v13). **NEWEST LEG FIRST — Route-D v13 CORRECTED
+v12's mechanism, found the real obstruction, and disqualified the repair v12 recommended.**
+v12's measurements stand (the a>0 profile ENDS at X_c ~ e^{c/a} with a zero of order 1/a;
+||A|| diverges with J at that profile and is flat at the a=0 anchor). Its EXPLANATION did not.
+v12 attributed the divergence to a homogeneous mode ~ (X_c-X)^{-1/a}; **that is a dropped sign
+in d/dX -> d/ds. With s = X_c-X the homogeneous equation h_c h - a h_c s h_s = 0 gives
+h ~ s^{+1/a}, which VANISHES at X_c, and the inhomogeneous solve is bounded there too. Nothing
+is singular at the turning point.** Measured inner exponents +5.28/+4.21/+3.51/+3.01/+2.65/
++2.14 vs +1/a = 5/4/3.33/2.86/2.5/2 — right sign, 5-7% high (the usual finite-window fit bias).
+**THE REAL OBSTRUCTION IS IN THE FAR FIELD, and it is worse: outside X_c the same equation has
+the same exponent but now GROWS — h ~ (log(X/X_c))^{1/a} — against a domain space that is a
+DECAY class, with the amplitude fixed by matching rather than free. That is a codimension-1
+RANGE obstruction of the continuum operator, which NO refinement touches** (a local singularity
+would at least have been a resolution problem). Measured with an instrument independent of the
+matrix (integrate h_X = (H(Omega)/E)h outward on the profile's exact H(Omega), E, out to 1e8):
+q = **4.9988 / 3.9980 / 3.3307 / 2.8536 / 2.4855** vs 1/a = 5 / 4 / 3.3333 / 2.8571 / 2.5 —
+**0.02-0.6%, no fitted constant**; quadrature converged to 1.6e-4 over a 16x refinement. The
+a=0.5 outlier (q=0.054) refines 0.054 -> 1.84 -> 1.70 over J=400/800/1600 while the a=0.4
+control sits at 2.4855 -> 2.5035 -> 2.5014, so **the outlier is the instrument**, exactly as
+v12's own rate table predicted. **So 1/a now appears THREE times in three roles: the order of
+the profile's zero at X_c, the exponent of the vanishing INNER mode, and the power of the log
+by which the OUTER mode grows** — all from one leading balance. **THE DIVERGENCE IS NOW
+ATTRIBUTED, not argued:** restrict the DOMAIN sup to a FIXED outer radius (the grid's own
+radius ~4J/pi grows with J) and the J-slopes fall +2.86 -> +1.06 -> +0.54 -> +0.31 across
+cutoffs inf/200/50/20 at a=0.2, while **the a=0 control is FLAT at every cutoff**; and 69-97%
+of the extremal row's mass comes from codomain slots within 10% of X_c — **sourced at the
+turning point, damage done in the far field**, which is what a growing mode excited at X_c
+does. **NOT attributed (say it): a residual J^+0.3..0.5 at fixed radius.** **THE CHEAP REPAIR
+IS DEAD:** v12 recommended bordering with the speed c; dilation Omega(X)->Omega(X/mu), c->mu c
+is a SYMMETRY of the zero set at every a, so restoring c adds KERNEL, not range — the square
+bordered system at a=0 has **cond 4.4e18, smin 4.4e-17**, and the overdetermined version's norm
+grows J^+1.40 **even at the anchor** where the plain system is flat. New solver/turning_point.py
++ test_turning_point.py (6/6; suite **20 files green**); fig31; BLOG/TECHNICAL_P2_ROUTED_V13.md;
+**v12's writeups corrected IN PLACE with the change MARKED (banner + struck passages), not
+quietly edited.** Everything below is banked + pushed on `main`. **NEXT — the repair, sharpened
+by the diagnosis: it is NOT a bordering trick, it is REMOVE THE FAR FIELD FROM THE DOMAIN. Pose
+the problem on [0, X_c] with X_c an UNKNOWN and perturbations supported there, so the growing
+mode has nowhere to live. Consistent, because the residual Omega H(Omega) - E Omega_X vanishes
+identically outside the support (every term carries Omega or Omega_X) even though H(Omega) does
+not. KILL SWITCH, run it FIRST: build it at ONE a (0.3 is well resolved), refine, measure ||A||
+vs J. Flat => the framing is repaired and eleven legs of far-field machinery are simply not
+needed. Still divergent => the framing needs REPLACING, and the alternative lanes become
+primary.** Read BOTH the "WHERE THIS SITS RELATIVE TO CLAY" section and the "IS THIS STILL THE
+RIGHT LANE?" box before committing to another estimate leg.*
+
+*Before v13, in the same session: **Route-D v12 carried the profile into the basis the bounds
+are written in and found that the object the certificate is about is not the object the space
+was designed for.** The build was the a-transport term in the compactified theta-basis, whose
+only non-local piece, U = INT_0^X H(Omega)dX', has a closed form there (U = SUM_k A_k I_k,
+I_k = INT_0^theta sin kt/(1+cos t)dt, exact three-term recursion, longdouble because float64
+drifts 1.7e-11 by k=800) — which makes the residual of the INTERPOLANT evaluable anywhere. Two
+framings came free: **A IS THE NEWTON MATRIX** (the certificate's gauged system is what Newton
+iterates, so Y0 = ||A F|| is the size of the Newton step) and **zero at the nodes is not zero as
+a function** (Omega*H(Omega) has degree <2J against J collocation conditions; rows Newton
+enforces 1.5e-13 vs 9.1e-3 in the row the gauge displaced, at a=0.5). **THE FINDING: E(X) =
+c + aU(X) is the true transport coefficient, U inherits the Hilbert transform's logarithm and
+runs to -infinity, so E crosses zero at a finite X_c ~ e^{c/a}; approaching it Omega ~
+(X_c-X)^{1/a} with no free constant, and beyond it Omega = 0 solves the equation exactly. The
+a=0 anchor — on which eleven legs of decay-graded far-field analysis were built — is the
+degenerate X_c = infinity limit** (and the same balance at a=0 gives Omega ~ X^{m/(pi c)} =
+X^-2, so the anchor's tail and v3's alpha=2 resonance are the a->0 corner of this picture).
+Two independent discretizations agree on the dilation invariant X_c/c to **0.06-0.11%**.
+CONSEQUENCE: **||A|| at the real profile DIVERGES with J (J^+2.86 at a=0.2, J^+2.75 at 0.3)
+while at the anchor it is FLAT (J^-0.003)**, so the seven "bounded" ledger constants are all
+constants for the ANCHOR's linearization; the one number that came in **7.7x UNDER budget**
+(a=0.2, J=1600, Y0 <= 3.17e-5 vs 2.45e-4) was priced with the anchor's ||A|| and corrects to
+~3 orders OVER. **Both sides move the wrong way, by one mechanism.** The survival boundary got
+a candidate mechanism (X_c falls 10.6 -> 3.1 -> 2.1 over a=0.25..0.7 while the core half-width
+stays ~1) but **the a=1/3 control killed the sharp arithmetic version** (p=1/a hits the integer
+2 at a=1/2, tantalisingly at a*, but a=1/3 with p=3 shows no anomaly), so **v12 does NOT
+predict a\***. v12's stated MECHANISM for the divergence was wrong and v13 (above) corrects it;
+its MEASUREMENTS all stand.*
 
 *Before v12, in the same session: **Route-D v11 attacked the OTHER SIDE OF THE INEQUALITY** and
 retired a number the project had carried as physics for five legs. Every a != 0 profile had come
@@ -192,13 +217,15 @@ L1 success is Clay progress in any load-bearing sense.
   (b) if the answer is "none — it makes L1 more rigorous or cheaper", is another L1 leg still
       the best use of the chunk, or is the marginal leg now worth less than switching lanes?
   (c) is there a cheaper experiment that would tell us the whole L1 route is dead?
-Route D has now had TWELVE legs, which is a lot of L1. **v12 changed the question again, and not
-gently**: the a>0 profile ends at a finite radius, so the decay-graded space and every constant
-priced in it belong to the a=0 anchor, and ‖A‖ at the real profile DIVERGES with J. L1 is not
-"nearly closed with bad constants"; it is **mis-specified**, with a concrete and cheaper repair
-(finite interval + free boundary) that has not been tried. Concrete trigger to reassess: **run
-v13's kill switch FIRST (‖A‖ vs J in the free-boundary formulation). If the singular direction
-is not absorbed, promote the alternative lanes** (the coupled-system HL two-stage leg; writing
+Route D has now had THIRTEEN legs, which is a lot of L1. **v12 changed the question and v13
+sharpened it**: the a>0 profile ends at a finite radius, so the decay-graded space and every
+constant priced in it belong to the a=0 anchor; ‖A‖ at the real profile DIVERGES with J; and
+the obstruction is a codimension-1 RANGE condition from a mode that GROWS in the far field, not
+a local singularity — so no refinement and no bordering-with-a-symmetry fixes it. L1 is not
+"nearly closed with bad constants"; it is **mis-specified**, with one concrete repair left
+(finite interval, far field removed from the domain) that has not been tried. Concrete trigger
+to reassess: **run the kill switch FIRST (‖A‖ vs J on [0, X_c] with X_c an unknown). If it
+still diverges, promote the alternative lanes** (the coupled-system HL two-stage leg; writing
 the whole P2 arc up as a community piece) from fallback to primary — do not spend another leg
 re-pricing constants inside a framing that a three-minute ladder has already shown diverges.
 
@@ -206,7 +233,7 @@ THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce kno
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
-v1–v12 (fig19–fig30) are tooling + scoping/negative results + partial bounds on the way
+v1–v13 (fig19–fig31) are tooling + scoping/negative results + partial bounds on the way
 there, NOT certificates.**
 Level-3 = Clay.
 
@@ -221,18 +248,20 @@ figures/ stay central; writeup/README.md is the ordered index). Phase 1 (conclud
 negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
-v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, **§21 ROUTE-D v12 = newest**).
+v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-D v12,
+**§22 ROUTE-D v13 = newest**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
-ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),**ROUTED_V12(fig30)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),ROUTED_V12(fig30),**ROUTED_V13(fig31)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
   §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
-  §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12 — all DONE + banked.
+  §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13 —
+  all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
@@ -632,11 +661,19 @@ carry over in any form.
 (b)+(c) if it does not.** Do not price another constant until the ladder says the operator
 exists.
 
-THE RECOMMENDED NEXT BRICKS, in the order v12 implies:
-  (1) **THE KILL SWITCH.** Free-boundary system on [0, X_c] at ONE a (0.3 is well resolved):
-      unknowns (Ω on a fixed reference interval, c, X_c), with Ω(X_c)=0 and the leading-order
-      behaviour s^{1/a} built in or resolved. Measure ‖A‖ against J. Flat ⇒ the framing is
-      repaired and the far field is gone; still divergent ⇒ report it and switch lanes.
+THE RECOMMENDED NEXT BRICKS, in the order v13 implies:
+  (1) **THE KILL SWITCH — unchanged, and now with a sharper reason.** Finite-interval system on
+      [0, X_c] at ONE a (0.3 is well resolved): unknowns (Ω on a fixed reference interval, c,
+      X_c), Ω(X_c)=0, perturbations SUPPORTED IN [0,X_c] — that last clause is the whole point,
+      because v13 showed the obstruction is a mode that grows in the far field, so removing the
+      far field from the DOMAIN is what has to happen. Build notes: represent
+      Ω = (1−y²)^{1/a} q(y) with y = X/X_c and q an even polynomial (the zero order is known
+      exactly, so put it in the ansatz rather than resolving it); H(Ω) on the finite support
+      uses the EVEN kernel K(X,y) = 2X/(X²−y²) (v6 B4 — finite at X=0 and sharp, unlike the
+      one-sided form); U = ∫₀^X H(Ω) then needs no compactification. Measure ‖A‖ against J.
+      Flat ⇒ the framing is repaired and eleven legs of far-field machinery are not needed;
+      still divergent ⇒ report it and switch lanes. **Do NOT re-try bordering with c — v13
+      disqualified it (dilation is a symmetry; cond 4.4e18 at a=0).**
   (2) **Y₀ IN THE REPAIRED SPACE.** With no far field, the codomain norm loses the weight that
       was amplifying the ringing; re-measure the defect and see whether the a=0.2 result
       survives contact with an honest ‖A‖.
@@ -651,6 +688,17 @@ ONLY when Y₀, Z₀, Z₁, Z₂ are ALL real upper bounds AT THE PROFILE BEING 
 float radii polynomial be assembled, and the same stopping rule applies: **if it does not close
 in float with margin, STOP, do not harden.** solver/interval.py has existed since v1 and has
 still never been pointed at any of this — correctly, because nothing has closed in float.
+
+SUPERSEDED (kept for the record) — the v13 spec, which this session executed: **"the kill
+switch: build the free-boundary system and measure ‖A‖ vs J; the singular mode s^{−1/a} is
+precisely ∂/∂X_c of the solution family, so the free boundary should absorb it."** Outcome: the
+spec's REASON was wrong twice over — there is no s^{−1/a} mode (dropped sign), and the cheap
+version of the repair (border with c) is disqualified because dilation is a symmetry. v13
+therefore spent itself on diagnosis instead of the build, and the build is still the next
+brick — with a better justification (the obstruction is a growing FAR-FIELD mode, so what
+matters is that [0,X_c] has no far field, not that X_c is an unknown). **Lesson for writing
+the next spec: a spec that carries a MECHANISM should carry the mechanism's own gate. v12's
+measurements were gated six ways and its explanatory sentence was gated not at all.**
 
 SUPERSEDED (kept for the record) — the v12 spec, which this session executed: **"carry the
 Newton profile into the θ-collocation basis the bounds live in and measure Y₀ THERE (the v11
@@ -718,12 +766,13 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 19 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (all 20 green): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
 test_nk_hilbert_holder.py (6/6) + test_nk_hilbert_pointwise.py (6/6) +
 test_op_lower.py (6/6) + test_profile_newton.py (6/6) +
-**test_collocation_newton.py (6/6, NEW — ~3 s)** +
+test_collocation_newton.py (6/6, ~3 s) +
+**test_turning_point.py (6/6, NEW — ~13 s)** +
 test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
@@ -737,7 +786,8 @@ Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic too
 probes get a clearly-labelled non-logged entry too, as §10–§20 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{**p2_route_d_v12_evidence.py(fig30)**, p2_route_d_v11_evidence.py(fig29),
+writeup/4_p2_lottery/{**p2_route_d_v13_evidence.py(fig31)**, p2_route_d_v12_evidence.py(fig30),
+p2_route_d_v11_evidence.py(fig29),
 p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
 p2_route_d_v8_evidence.py(fig26),
 p2_route_d_v7_evidence.py(fig25),
@@ -909,6 +959,20 @@ misbehaves in TWO ways at once, stop measuring and ask what object you are looki
 weighted defect was non-monotone in a AND its arg-max was pinned to the domain edge at every a.
 Either alone is a shrug; together they were one fact (the profile ends, and a global spectral
 basis rings where it should be flat). The temptation was to fix the measurement.
+ **NEW from §22:** (32) **A mechanism is a
+claim and needs its own gate.** v12's measurements were gated six ways; the SENTENCE explaining
+them ("the mode blows up like s^{−1/a}") was gated not at all, and it was wrong by a sign.
+Fitting the exponent a mechanism predicts costs ten minutes and is now a unit test. **If a
+writeup asserts an exponent, fit it.** (33) **Attribute a divergence by making the suspected
+cause stop moving.** "It is the far field" became a measurement the moment the domain sup was
+restricted to a fixed radius — and the same ladder surfaced the part the story does NOT explain
+(a residual J^+0.3 at fixed radius), which is in the writeup as unattributed rather than rounded
+to zero. (34) **The cheapest disqualification is a symmetry count.** Bordering with c to fix a
+RANGE obstruction was dead on paper from a fact recorded twice already in these notes (dilation
+is a symmetry ⇒ it supplies KERNEL); measuring it took three minutes and made the paper argument
+checkable. (35) **Correct in place, and mark the correction.** v12's writeups keep their wrong
+sentences struck through with a banner pointing at v13, because a silently edited record is
+worth less than a corrected one.
 
 HONEST CEILING (say it out loud): Route-D v3–v12 are validated tooling + a no-go theorem, a
 confirmed price, a second structural requirement, a space that met every requirement identified

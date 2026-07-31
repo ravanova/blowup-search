@@ -3,6 +3,50 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v13: I had the sign wrong (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v13_turning.json`
+(regen `python -u experiments/p2_route_d_v13_turning.py`, ~6 min); figure fig31
+(`writeup/4_p2_lottery/p2_route_d_v13_evidence.py`); writeups TECHNICAL/BLOG_P2_ROUTED_V13;
+PHASE2_P2_NOTES.md §22. Code: `solver/turning_point.py` + `test_turning_point.py` (6/6;
+suite now 20 files green).
+
+What a human would want to know:
+
+- **This leg exists because the previous one explained its own result wrongly.** v12's
+  measurements were gated six ways. The sentence explaining them — "linearizing about a
+  zero of order p gives a mode blowing up like s^{−p}" — was not gated at all, and it is
+  wrong: I dropped a sign converting d/dX into d/ds. The mode at the critical radius
+  *vanishes*. Fitting the exponent it predicts takes ten minutes and is now a test.
+
+- **The real obstruction is worse than the one I claimed.** Outside the critical radius the
+  same equation gives a mode growing like (log X)^{1/a}, against a domain space that is a
+  decay class. A local singularity would have been a resolution problem; this is a range
+  obstruction, and no grid touches it.
+
+- **The prediction is unusually clean.** 4.9988 / 3.9980 / 3.3307 / 2.8536 / 2.4855 against
+  1/a = 5 / 4 / 3.3333 / 2.8571 / 2.5, from an instrument that never touches the matrix
+  whose norm was diverging. That is the third role 1/a plays in this problem.
+
+- **The outlier.** a = 0.5 came back at 0.054 instead of 2 — exactly the kind of point one
+  is tempted to drop with a footnote. Refining: 0.054 → 1.84 → 1.70, while a = 0.4 sits at
+  2.4855 → 2.5035 → 2.5014. v12 had already reported the profile stops converging there.
+  The outlier is the instrument, and it is in the figure with that label on it.
+
+- **Attribution beat argument again.** "The divergence is the far field" was a story until
+  the domain sup was restricted to a fixed radius, at which point the slope fell from
+  J^+2.86 to J^+0.31 while the a = 0 control stayed flat at every cutoff. The same ladder
+  produced the part the story does *not* explain — a residual J^+0.3 at fixed radius — which
+  is in the writeup as unattributed rather than rounded to zero.
+
+- **The repair I recommended last time is dead, and cheaply.** Bordering with the speed
+  cannot supply a range direction because the speed is tied to a symmetry — a fact already
+  recorded twice in these notes. The square bordered system at the anchor has condition
+  number 4e18. Three minutes to check.
+
+- **Next.** Not a bordering trick: take the far field out of the domain. [0, X_c] with X_c
+  an unknown. Kill switch unchanged — build it at one a, refine, watch the norm.
+
 ## Phase-2 P2 — ROUTE-D v12: the profile ends (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic Newton + deterministic sweeps; no GA, no seeds,

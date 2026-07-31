@@ -3,6 +3,15 @@
 **Status: Level-1 tooling + a structural finding that re-specifies the target.
 NOT a certificate, NOT rigorous, NOT a Clay result.** Plain float64.
 
+> **CORRECTION (Route-D v13).** §6 below attributed the `‖A‖` divergence to a
+> homogeneous mode `~ (X_c − X)^{−1/a}`. That is **wrong** — a sign dropped in
+> converting `d/dX` to `d/ds`; the mode at `X_c` *vanishes* like
+> `(X_c − X)^{+1/a}` and nothing is singular there. The measurements in this
+> document stand; the mechanism is corrected in
+> [TECHNICAL_P2_ROUTED_V13.md](TECHNICAL_P2_ROUTED_V13.md), where the obstruction
+> turns out to be a **growing far-field mode** `~ (log(X/X_c))^{1/a}` against a
+> domain space that is a decay class. The offending passages below are marked.
+
 **Figure:** `fig30` · **Data:** `writeup/data/p2_route_d_v12_defect.json`
 **Code:** `solver/collocation_newton.py` (+ `test_collocation_newton.py`, 6/6),
 `experiments/p2_route_d_v12_defect.py`, `p2_route_d_v12_evidence.py`
@@ -214,8 +223,11 @@ at the real profile it diverges like a power of `J`, measured with the same
 code.** The approximate inverse the whole Route-D programme is built on does not
 exist in the limit at `a > 0`.
 
-It has a mechanism. Linearizing about a solution with a
-zero of order `p` at `X_c` gives a homogeneous solution `~ (X_c − X)^{−p}`:
+It has a mechanism. ~~Linearizing about a solution with a
+zero of order `p` at `X_c` gives a homogeneous solution `~ (X_c − X)^{−p}`:~~
+**[CORRECTED by v13 — the sign is wrong; see the banner. The derivation below
+drops a sign in `h_X = −h_s`, and the correct local mode is `s^{+1/a}`, which
+vanishes. The real obstruction is the growing far-field mode.]**
 
 ```
    h_X / h  =  H(Ω)/E  ≈  h_c / (−a h_c s)  =  −1/(a s)     ⇒   h ~ s^{−1/a}
@@ -295,12 +307,14 @@ it is *cheaper* than what it replaces:
 > Beyond `X_c` the profile is exactly zero. A certificate could work on the
 > **finite interval** `[0, X_c]` with `X_c` as an unknown, and the far field —
 > eleven legs of decay grading, resonances, and tail bounds — is handled in
-> closed form because there is nothing there. The price is the interior
+> closed form because there is nothing there. ~~The price is the interior
 > singularity at `X_c`, and the standard reason to expect that price to be
 > refundable is that the singular mode `s^{−1/a}` is precisely `∂/∂X_c` of the
-> solution family: **adding the free boundary as an unknown is what usually
-> removes an apparent singularity of the linearization.** Untested, and it is the
-> obvious v13.
+> solution family.~~ **[CORRECTED by v13: there is no interior singularity, and
+> bordering with the speed is disqualified because dilation is a symmetry. The
+> reason the finite interval is the right repair is simpler — the obstruction is a
+> growing mode in the far field, and on `[0, X_c]` the far field is not in the
+> domain at all.]** Untested, and it is the obvious v13.
 
 **(c) a cheaper experiment that kills the route?** Yes, and it is now specific:
 solve the free-boundary formulation at one `a` and measure `‖A‖` against `J`. If

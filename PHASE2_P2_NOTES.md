@@ -216,6 +216,25 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## test_collocation_newton.py (6/6; suite 19 files green); fig30; BLOG/TECHNICAL_P2_ROUTED_V12.md.
 ## REPAIR (v13): finite interval [0, X_c] with X_c a free-boundary UNKNOWN — the far field
 ## disappears; kill switch is ||A|| vs J in that formulation. NOT a certificate.**
+## **ROUTE-D v13 DONE (§22, 2026-07-31): THE TURNING POINT — §21's MECHANISM WAS WRONG.
+## The mode AT X_c vanishes like (X_c-X)^{+1/a} (§21 said -1/a: a dropped sign in
+## d/dX -> d/ds), and nothing is singular there. **The obstruction is in the FAR FIELD:
+## outside X_c the same equation gives h ~ (log(X/X_c))^{1/a}, which GROWS, against a
+## domain space that is a DECAY class — a codimension-1 RANGE obstruction no refinement
+## touches.** Measured with an instrument independent of the matrix: q = 4.9988/3.9980/
+## 3.3307/2.8536/2.4855 vs 1/a = 5/4/3.3333/2.8571/2.5 (0.02-0.6%, no fitted constant);
+## the a=0.5 outlier (q=0.054) refines to 1.84/1.70 and is the instrument, as §21 T4
+## predicted. So **1/a appears THREE times: the profile's zero order, the vanishing inner
+## mode, the growing outer mode.** The divergence is now ATTRIBUTED: with the domain sup
+## restricted to a fixed outer radius the J-slopes fall +2.86 -> +1.06 -> +0.54 -> +0.31
+## (a=0.2) while the a=0 control is flat at EVERY cutoff, and 87-97% of the extremal row's
+## mass comes from within 10% of X_c (sourced at the turning point, damage in the far
+## field). The residual J^+0.3 at fixed radius is NOT attributed. **The cheap repair is
+## DISQUALIFIED: restoring the speed c adds KERNEL, not range (dilation is a symmetry) —
+## the square bordered system at a=0 has cond 4.4e18.** New solver/turning_point.py +
+## test_turning_point.py (6/6; suite 20 files green); fig31; BLOG/TECHNICAL_P2_ROUTED_V13.md;
+## §21's writeups corrected IN PLACE with the change MARKED. REPAIR (v14): remove the far
+## field from the DOMAIN — [0, X_c] with X_c an unknown. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -1379,5 +1398,74 @@ budget was computed for the same object.** T4's 7.7×-under looked like the leg'
 half an hour. (31) **When a measurement misbehaves in TWO ways at once (non-monotone in the
 parameter, arg-max pinned to the domain edge), stop measuring and ask what object you are
 looking at.** Both anomalies were one fact.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
+Clay odds ~0.05%.
+
+
+## §22 — ROUTE-D v13 DONE (2026-07-31): THE TURNING POINT — §21's MECHANISM WAS WRONG
+## (dropped sign); the obstruction is a GROWING FAR-FIELD MODE (log(X/X_c))^{1/a}, the
+## divergence is now ATTRIBUTED by measurement, and the cheap repair is DISQUALIFIED.
+
+Built solver/turning_point.py + test_turning_point.py 6/6 (suite now **20 files green**);
+experiments/p2_route_d_v13_turning.py → writeup/data/p2_route_d_v13_turning.json → fig31.
+NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V13.md. §21's writeups are corrected IN PLACE
+with the change MARKED (banner + struck passages), not quietly edited.
+
+  S1 **THE CORRECTION.** §21 attributed the ‖A‖ divergence to a homogeneous mode
+     ~ (X_c−X)^{−1/a}. **Wrong: a sign dropped converting d/dX to d/ds.** With s = X_c−X,
+     h_X = −h_s and E = −a h_c s, the homogeneous equation h_c h − a h_c s h_s = 0 gives
+     h_s/h = 1/(as) ⇒ **h ~ s^{+1/a}, which VANISHES at X_c**; and the inhomogeneous solve is
+     bounded there too (integrating factor s^{−1/a} ⇒ h → g(X_c)/h_c as s→0). **Nothing is
+     singular at the turning point.** Measured: +5.28/+4.21/+3.51/+3.01/+2.65/+2.14 over
+     a=0.2…0.5 vs +1/a = 5/4/3.33/2.86/2.5/2 — right sign, 5–7% high (the same finite-window
+     fit bias as everywhere in this series).
+  S2 **WHERE THE WALL IS: THE FAR FIELD.** Outside X_c the same equation has the same exponent
+     and it GROWS. H(Ω)~m/(πX), E ~ (am/π)log(X/X_c) ⇒ h_X/h ~ 1/(aX log(X/X_c)) ⇒
+     **h ~ (log(X/X_c))^{1/a}**. The domain space is a DECAY class, the amplitude is fixed by
+     matching to the inner solve rather than free ⇒ the image generically LEAVES the space:
+     **a codimension-1 RANGE obstruction of the continuum operator, which no refinement
+     touches** — strictly worse than the local singularity §21 named, which would at least
+     have been a resolution problem. Measured with an instrument independent of the matrix
+     (integrate h_X = (H(Ω)/E)h outward on the profile's exact H(Ω), E, to X=1e8):
+     q = **4.9988 / 3.9980 / 3.3307 / 2.8536 / 2.4855** vs 1/a = 5 / 4 / 3.3333 / 2.8571 / 2.5
+     — **0.02–0.6%, no fitted constant**. Quadrature converged (1.6e-4 over a 16× refinement).
+  S2b **THE ROW THAT DID NOT FIT, REFINED NOT DROPPED.** a=0.5 returns q=0.054 vs 2. J-ladder:
+     a=0.5 → 0.054 / 1.838 / 1.696 over J=400/800/1600 while the a=0.4 control is
+     2.4855 / 2.5035 / 2.5014 (four digits). **The outlier is the instrument** — §21 T4 had
+     already reported the collocation profile stops converging there.
+  S3 **1/a APPEARS THREE TIMES, IN THREE ROLES:** the order of the profile's zero at X_c; the
+     exponent of the vanishing INNER mode; the power of the log by which the OUTER mode grows.
+     All three from one leading balance, none with a fitted constant.
+  S4 **THE DIVERGENCE, ATTRIBUTED RATHER THAN ARGUED.** Recompute ‖A‖ with the DOMAIN sup
+     restricted to a FIXED outer radius (the grid's own radius ~4J/π grows with J):
+     J-slopes at X≤20 / 50 / 200 / all = **J^−0.00 ×4 (a=0, control)**, **+0.31/+0.54/+1.06/
+     +2.86 (a=0.2)**, **+0.53/+1.15/+1.42/+2.75 (a=0.3)**. Monotone in the cutoff, nearly gone
+     without the far field, and the a=0 control is flat at EVERY cutoff. Complementary: the
+     fraction of the extremal row's mass from codomain slots within 10% of X_c is
+     69→86→92% (a=0.2) and 87→93→97% (a=0.4) over J=200/400/800 ⇒ **sourced at the turning
+     point, damage done in the far field** — exactly a growing mode excited at X_c.
+     **NOT ATTRIBUTED (say it): the residual J^+0.3…0.5 at X≤20.** Small, real, unexplained.
+  S5 **THE CHEAP REPAIR IS DISQUALIFIED, FOR A REASON ALREADY IN THESE NOTES.** §21 recommended
+     bordering with the speed c. **Dilation Ω(X)→Ω(X/μ), c→μc is a SYMMETRY of the zero set at
+     every a, so restoring c supplies KERNEL, not range** — which is why v1 Q2 and v11 V0 both
+     found the one-gauge system singular. Measured anyway: the SQUARE bordered system at a=0
+     has **cond 4.4e18, smin 4.4e-17** (singular to machine precision), and the overdetermined
+     version's norm GROWS with J **even at the anchor** (J^+1.40, where the plain system is
+     flat), and J^+1.57 / J^+1.86 at a=0.2/0.3.
+  S6 **WHAT THE REPAIR HAS TO DO NOW.** Not "border the operator" — **remove the far field
+     from the DOMAIN**: pose the problem on [0, X_c] with X_c an unknown and perturbations
+     supported there, so the growing mode has nowhere to live. Consistent, because the residual
+     Ω H(Ω) − E Ω_X vanishes identically outside the support (every term carries Ω or Ω_X)
+     even though H(Ω) does not. Kill switch unchanged: build it at ONE a, measure ‖A‖ vs J.
+
+**LESSONS.** (32) **A mechanism is a claim and needs its own gate.** §21's measurements were
+gated six ways; the SENTENCE explaining them was not gated at all, and it was wrong. Fitting
+the exponent it predicts costs ten minutes and is now test_turning_point gate 1. **If a writeup
+asserts an exponent, fit it.** (33) **Attribute a divergence by making the suspected cause stop
+moving.** "It is the far field" became a measurement the moment the domain sup was restricted
+to a fixed radius — and the same ladder produced the honest residual (J^+0.3 at fixed radius)
+that the story does not explain. (34) **The cheapest disqualification is a symmetry count.**
+Restoring c to fix a range obstruction was disqualified on paper by a fact recorded twice
+already in these notes; measuring it took three minutes and made the paper argument checkable.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
 Clay odds ~0.05%.

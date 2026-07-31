@@ -114,12 +114,14 @@ so I refined:
 power of the grid size.** The approximate inverse that the entire argument is
 built around does not exist in the limit.
 
-There is a mechanism, and in hindsight it is forced: linearizing about a solution
-with a zero of order `p` produces a mode that blows up like `(X_c − X)^{−p}`,
-which belongs to no sup norm at all. The operator at the real profile has a
-genuine singular direction at the critical radius, and the numbers above are
-measuring how much of it each grid can resolve. The "good" value at `a = 0.1` is
-the grid failing to see the problem.
+There is a mechanism. *(Corrected in the next leg: I first wrote that linearizing
+about a profile with a zero of order `p` produces a mode blowing up like
+`(X_c − X)^{−p}`. It doesn't — that mode **vanishes** at the critical radius; I
+dropped a sign. The real obstruction is a mode that **grows** like
+`(log X)^{1/a}` out past the critical radius, against a space that requires decay.
+See [BLOG_P2_ROUTED_V13.md](BLOG_P2_ROUTED_V13.md).)* The numbers above are real
+and the `a = 0.1` value is small because that grid cannot see the problem at
+all.
 
 Correct the budget for the real operator norm and the near-miss becomes a miss by
 three orders of magnitude. Both sides of the inequality move the wrong way, by
@@ -154,11 +156,9 @@ The upside is that the repair is *cheaper* than what it replaces. If the profile
 is exactly zero beyond a finite radius, a certificate can work on a **finite
 interval**, with the radius itself as an unknown — and the far field, which has
 absorbed eleven legs of tail bounds, resonances and graded norms, disappears,
-because there is nothing out there. The price is the singularity at the boundary,
-and the standard reason to think that price is refundable is that the singular
-mode is precisely the derivative of the solution family with respect to the
-boundary position: adding a free boundary as an unknown is the usual way an
-apparent singularity of a linearization stops being one.
+because there is nothing out there. *(The reason I gave here for expecting the
+boundary singularity to be harmless was wrong; the next leg found there is no
+interior singularity to begin with, and a better reason for the same repair.)*
 
 That is untested. It is the next leg, and it comes with its own kill switch: do
 the free-boundary version at one parameter value and watch the operator norm as
