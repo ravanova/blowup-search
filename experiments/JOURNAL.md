@@ -3,6 +3,61 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v9: the sharpness leg, and the elasticity table that should have come first (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data
+`writeup/data/p2_route_d_v9_sharpen.json` (regen `python experiments/p2_route_d_v9_sharpen.py`,
+~35 min); figure fig27 (`writeup/4_p2_lottery/p2_route_d_v9_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V9; PHASE2_P2_NOTES.md §18. Code: `solver/hilbert_pointwise.py` +
+`test_nk_hilbert_pointwise.py` (6/6; suite now 16 files green).
+
+What a human would want to know:
+
+- **The leg did what it set out to do and it did not matter.** The bound on |H(h)|
+  is the input the operator-norm closure feeds back through, and it was two legs
+  old and built from textbook majorants. Rebuilding it on the exact folded kernel
+  made it sharper at every point sampled — a factor of eleven near the origin, a
+  third through the middle — and dropped ‖A‖ from 69.2 to 47.1, the largest single
+  improvement since the closure was built. The certification budget went from
+  2.39e-4 to 2.40e-4.
+
+- **Why, in one line.** The closure raises the |H| input to the power γ, and the
+  operating point sits at γ = 0.15. Gain by point: 32% at (1.5,0.5), 11% at
+  (1.4,0.35), 3% at (1.4,0.25), 0% at (1.4,0.15). The rightmost is where the map's
+  optimum has been for three legs. And it is there *because* small γ is where ‖A‖
+  is cheap — which is the same thing as where ‖A‖ stops depending on this input.
+  The optimiser had already walked to the corner where my improvement cannot
+  matter.
+
+- **The table that costs a minute.** Scale each input, fit the slope:
+  d log‖A‖/d log C_sup = +1.00 at the operating point, d log‖A‖/d log|H| = +0.11.
+  The last two legs both worked on inputs with elasticity ≤ 0.5 and both moved the
+  budget by ≤ 7%. That is not luck. Nobody computed the table first, twice.
+
+- **Something worth keeping anyway.** At each point of the integral the increment
+  can be charged to smoothness or to decay, and any fixed rule gives a valid bound.
+  The natural rule — take the smaller — is wrong here, and the general form is:
+  tune the rule to the ratio of the two quantities *in the answer*, not to 1. In
+  this closure the seminorm ends up ten times the sup part, so the neutral rule
+  charges the expensive account; it comes out worse than the crude bound it was
+  meant to replace. With the knob there is an interior optimum, and the two
+  consumers of the bound want different values of it.
+
+- **Banked lesson 15, missed again, in the place it warns about.** Asking how much
+  is available from C_sup by substituting a measured value gave a 19× "available
+  gain" that was an artifact — the measured value was a lower bound computed by
+  dividing one part of a quantity by the full norm of a sign pattern. Having the
+  lesson written down is not the same as applying it. What survives is smaller:
+  ~2× is plausibly available from C_sup, and the wider bracket cannot be
+  attributed at all until someone builds a decent lower bound.
+
+- **What the next leg should be, decided by numbers.** C_sup is the only input
+  left with elasticity ≈ 1 and has not been touched since v6 bounded it. But
+  before that: a real lower bound on ‖A‖ (an LP over the polyhedral ball, or an
+  actual adversary rather than sign patterns), because without one we cannot tell
+  a lossy bound from a large truth, and every bracket in this project is currently
+  uninterpretable in the same way.
+
 ## Phase-2 P2 — ROUTE-D v8: the codomain seminorm part of C_Q, and the first complete Z₂ (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic; no GA, no seeds, no predicate lock). Data

@@ -1,31 +1,37 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-31 (updated after Route-D v8). **NEWEST LEG FIRST — Route-D v8** priced
-the LAST unbounded constant in Z₂, the **codomain seminorm part of C_Q** (weighted Hölder
-boundedness of H). Three things came out of it and the third is the one that matters:
-**(i)** the weight is **1−γ, NOT α−γ** — H does not inherit h's decay (H(h) → (∫h)/(πX)
-however fast h falls), so ψ's decay grading is 1; asking for α−γ would have produced an
-infinite constant with nothing to point at. The estimate: change variables so NOTHING
-WRAPS (in absolute θ the pair (θ≈π, φ≈−π) are NEIGHBOURS on the circle), split near/far,
-charge near to smoothness and far to decay, keep every constant ⇒ **T_ψ ≤ 1.1936 S +
-4.9410 T** at (1.5,0.5), grid-flat to 4e-6; the only route v6/v7 had (pointwise) is **237×
-worse**. **(ii)** the resulting **first COMPLETE Z₂ map** (every constant an upper bound,
-NOTHING omitted) has its optimum at **(α,γ)=(1.4,0.15), Z₂ ≤ 261** — the SAME place v7's
-incomplete map said (242) — so **v7's provisional optimum HOLDS**, and v7's stated reason
-for doubting it was **backwards** (the correction is 0.1% at γ=0.05 and 28% at γ=0.9,
-because v6's sup-only C_Q already carried the same 1/γ near-region divergence).
-**(iii) THE BUDGET HISTORY: 7.6e-2 (v5) → 1.18e-2 (v6) → 2.58e-4 (v7) → 2.39e-4 (v8).
-Three order-of-magnitude losses, then one of 7% — v7's headline negative ("every honesty
-step costs an order") DOES NOT CONTINUE.** Honest: 2.4e-4 is still ~40× below the GA
-residual floor, the new bound is itself ~4× lossy, and this is NOT evidence the remaining
-three ledger items are cheap. **Seven of ten constants bounded; Z₂ is COMPLETE; all three
-open items are Z₁-side or representational.** Everything below is banked + pushed on
-`main`. The recommended next thing is **the core↔far cutoff commutator (Route-D v9)** —
-but read the "IS THIS STILL THE RIGHT LANE?" box, which v8 changed in the GOOD direction
-for the first time in three legs, and note the new argument there that **SHARPENING what
-we have may now be worth more than bounding one more thing**.*
+*Written 2026-07-31 (updated after Route-D v9). **NEWEST LEG FIRST — Route-D v9, the
+SHARPNESS leg — is a NEGATIVE WITH A MECHANISM, and the mechanism is the most useful thing
+in it.** v8 left Z₂ complete and seven of ten constants bounded, so the question changed
+from COVERAGE to SHARPNESS (budget ~ 1/(‖A‖C_Q); ‖A‖'s bracket ~70× wide). The target was
+obvious: v7's closure is dominated by its own feedback and the feedback is v6's crude
+|H(h)| bound. **Rebuilt it on the exact folded kernel K = 2sinθ/(cosφ−cosθ)**, whose p.v.
+over (0,π) is EXACTLY ZERO (it is the conjugate of the constant function) so the
+singularity needs **one global subtraction** instead of v6's band + matching scale +
+remainder — sharper at every X (ratio 0.09–0.99) and **nearly ATTAINED** (0.97 on the
+anchor). Also found that the **PAYER RULE** (which part of the norm pays at each point) is
+a FREE PARAMETER with an interior optimum, and that the neutral choice — compare at S=T=1,
+v8's default — is **WORSE than the crude bound it replaces**: *tune the rule to the T/S
+ratio of the ANSWER, not to 1.* Result: **‖A‖ 69.15 → 47.05 (−32%)**, the largest single
+gain since the closure was built. **AND THE BUDGET DID NOT MOVE: 2.39e-4 → 2.40e-4.** Why:
+the closure is T ≤ C(γ)(P/2)^γ(2S)^{1−γ} and the |H| bound enters **only through P**, so at
+the map's optimum (γ=0.15) a 30% better P moves T by 4% — gain by point 32%/11%/3%/**0%**.
+Worse, the optimum sits at small γ **because** that is where ‖A‖ barely depends on this
+input; the optimiser had already walked to the corner where the improvement cannot matter.
+**THE ELASTICITY TABLE (one minute, and it should have come first): d log‖A‖/d log C_sup =
++1.00 at the operating point vs d log‖A‖/d log|H| = +0.11. The last TWO legs both worked on
+inputs with elasticity ≤ 0.5 and both moved the budget by ≤ 7% — that is the table read
+backwards, and neither leg computed it beforehand.** Everything below is banked + pushed on
+`main`. **The next brick is decided by that table, not by intuition — and there is an
+argument for doing (2) before (1): (1) C_sup, the two-point dual, the only elasticity-1
+input left (~2× available); (2) a REAL LOWER BOUND on ‖A‖, because without one no bracket
+in this project can be attributed at all.** Read the "IS THIS STILL THE RIGHT LANE?" box.*
 
-*Before that, in the same session: **Route-D v7** went after the sharpest of v6's three
+*Before v9, in the same session: **Route-D v8** priced the LAST unbounded constant in
+Z₂, the codomain seminorm part of C_Q (weight **1−γ, NOT α−γ** — H does not inherit h's
+decay), giving the first COMPLETE Z₂ map; its optimum stayed at (1.4, 0.15) and the budget
+moved only 7% (2.58e-4 → 2.39e-4), ending v7's three-legs-running order-of-magnitude loss.
+And before that, **Route-D v7** went after the sharpest of v6's three
 open ledger items, the **domain SEMINORM part of ‖A‖**, and **closed it** — not by v6's
 recommended route (band-limited subspace + faithfulness factor), which a ten-minute
 diagnostic disqualified STRUCTURALLY, but by using the EQUATION: solve `DF h = g` for
@@ -84,10 +90,9 @@ continuation prompt, and push to `main`; then pick up the next chunk and repeat.
 THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce known
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
-certification) = the FIRST rung that is genuinely "novel maths" — **Route-D v1
-(fig19), v2 (fig20), v3 (fig21), v4 (fig22), v5 (fig23), v6 (fig24), v7 (fig25) and v8
-(fig26) are tooling + scoping/negative results + partial upper bounds on the way there,
-NOT certificates.**
+certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
+v1–v9 (fig19–fig27) are tooling + scoping/negative results + partial upper bounds on the
+way there, NOT certificates.**
 Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
@@ -101,19 +106,18 @@ figures/ stay central; writeup/README.md is the ordered index). Phase 1 (conclud
 negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
-v2, §12 ROUTE-D v3, §13 ROUTE-D v4, §14 ROUTE-D v5, §15 ROUTE-D v6, §16 ROUTE-D v7,
-**§17 ROUTE-D v8 = newest**).
+v2, §12–§17 ROUTE-D v3–v8, **§18 ROUTE-D v9 = newest**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
-ROUTED_V6(fig24),ROUTED_V7(fig25),**ROUTED_V8(fig26)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),**ROUTED_V9(fig27)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
   §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
-  §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8 —
-  all DONE + banked.
+  §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
+  §18 Route-D v9 — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
@@ -407,48 +411,97 @@ the first time the requirement has been stated completely.
     Z₁ core↔far coupling; Z₁ core discretization (measured only); discrete↔continuum
     transfer (v7). **Seven of ten; Z₂ COMPLETE.**
 
-**IS THIS STILL THE RIGHT LANE? (v8 moved this in the GOOD direction for the first time in
-three legs — but read the new argument at the end.)** After v7 the honest reading was:
-every step that replaces a lower bound with the honest upper bound costs the budget an
-order of magnitude (7.6e-2 → 1.18e-2 → 2.58e-4), three constants are still unpriced, so
-the approach dies of a thousand cuts. **v8 priced one of those three and it cost 7%.** That
-reading rested on three data points with a common cause, and the fourth point with the same
-cause behaved completely differently — so "each step costs an order" was a PATTERN, not a
-LAW about the method. GOOD, additionally: Z₂ is now COMPLETE (nothing omitted, every
-constant an upper bound), seven of ten are bounded, and all three remaining are Z₁-side or
-representational rather than structural. BAD, unchanged: 2.4e-4 is still ~40× below the GA
-residual floor; every bound is float64 and nothing is interval-enclosed; the honest best
-case for the whole Route-D leg is still "certifies the a=0 traveling wave", already known
-in closed form, and a≠0 stays a hope, not a plan.
+**P2 §18 — ROUTE-D v9 DONE + BANKED (this session, after v8).** Delivered:
+- **solver/hilbert_pointwise.py** — the pointwise |H(h)| layer on the exact folded kernel:
+  `pointwise_bound` (offset-parameterised so sin((φ−θ)/2)=sin(±s/2) is exact — the naive
+  cos-difference form NaNs at X≳1e4), `pointwise_curves` (drop-in for v7's `curves=`),
+  `weighted_sups`, `sweep_rho` (the payer rule), `measured_pointwise` (the other side of the
+  bracket). **test_nk_hilbert_pointwise.py 6/6**; suite now **16 files green**.
+- **experiments/p2_route_d_v9_sharpen.py** (deterministic, NON-logged) →
+  writeup/data/p2_route_d_v9_sharpen.json → fig27
+  (writeup/4_p2_lottery/p2_route_d_v9_evidence.py). Six results:
+  * **Y1 THE BOUND.** K_θ(φ) = 2sinθ/(cosφ−cosθ): (i) the far-field decay is IN the kernel
+    (sinθ→0); (ii) **p.v.∫_0^π K dφ = 0 exactly** (the conjugate of the constant function;
+    antiderivative −2log|sin((φ−θ)/2)/sin((φ+θ)/2)| vanishes at BOTH ends) ⇒ one GLOBAL
+    subtraction replaces v6's band + matching scale + remainder, each of which cost a
+    constant. Ratio to v6 over 8 decades of X: **0.09/0.26/0.66/0.87/0.65/0.67/0.85/0.95/0.99**.
+    Second build vs the exact conjugate: **1.5e-7**. Nearly ATTAINED: 0.97 on the anchor.
+  * **Y2 THE PAYER RULE (the transferable lesson).** Any FIXED rule is valid; v8's default
+    compared the two routes at S=T=1. **Tune the rule to the T/S ratio of the ANSWER.** With
+    ρ: ‖A‖ = 74.7(1)/63.4(2)/53.1(3)/48.4(4.5)/**47.2(6–9)**/50.6(25)/54.0(50) — an INTERIOR
+    optimum, and **the neutral ρ=1 (74.7) is WORSE than the crude bound it replaces (69.4)**.
+    C_Q wants ρ≈2 instead (it maximises over the simplex, ratio O(1)). Both valid.
+  * **Y3 THE NEW ‖A‖:** 69.15 → **47.05** at (1.5,0.5), J-flat (J^+0.0059).
+  * **Y4 THE GAIN DOES NOT TRANSFER — the leg's actual result.** Reduction by point:
+    **32% (1.5,0.50) / 11% (1.4,0.35) / 3% (1.4,0.25) / 0% (1.4,0.15) / −1% (1.2,0.15)**, and
+    **(1.4,0.15) is the map's optimum**, unchanged for three legs. MECHANISM: the |H| bound
+    enters the closure T ≤ C(γ)(P/2)^γ(2S)^{1−γ} **only through P**, so at γ=0.15 a 30% better
+    P moves T by 4%. And the optimum sits at small γ **because** that is where ‖A‖ barely
+    depends on this input — the optimiser had already walked to the corner where the
+    improvement cannot matter.
+  * **Y5 THE ELASTICITY TABLE.** d log‖A‖/d log C_sup = **+0.98** (reference) / **+1.00**
+    (operating); d log‖A‖/d log|H| = +0.46 / **+0.11**. ‖A‖ is PROPORTIONAL to C_sup and at
+    the operating point blind to the |H| bound. **The last TWO legs both worked on inputs with
+    elasticity ≤ 0.5 and both moved the budget ≤ 7%.**
+  * **Y6 THE TRAP (banked lesson 15, missed AGAIN).** Substituting a "measured" C_sup reported
+    a **19× available gain — an artifact**: that number was a family lower bound computed by
+    dividing the SUP PART of an image by the FULL codomain norm of a sign pattern. Survives:
+    ~2× is plausibly available from C_sup (v6 B2's own bracket); the wider bracket (47× vs a
+    family LB ~1.0) **cannot be attributed at all** without a decent LOWER bound.
+  * **Y7 MAP + BUDGET.** Complete Z₂ map with ρ chosen per cell: optimum **(1.4,0.15),
+    Z₂ ≤ 260.7** (v8: 261.1). Budget **7.6e-2 → 1.18e-2 → 2.58e-4 → 2.39e-4 → 2.40e-4**:
+    three order-of-magnitude losses, then three legs of nothing in either direction.
 
-**THE NEW ARGUMENT, which changes what the next brick should be: SHARPNESS is now worth
-more than COVERAGE.** ‖A‖'s bracket is **~75× wide** (0.85 ≤ seminorm part ≤ 63.6) and
-C_Q's is **~4×**, and the budget scales like 1/(‖A‖·C_Q). Closing the three open items
-cannot buy more than a constant factor each; **halving the slack in ‖A‖ would buy more than
-all three of them together.** The last three legs were coverage legs. The next one probably
-should not be.
+**IS THIS STILL THE RIGHT LANE? (v9 gives the sharpest read yet, and it is mixed.)** The
+budget has now been flat for three legs — 2.58e-4 → 2.39e-4 → 2.40e-4 — through one leg that
+completed the coverage (v8) and one that sharpened the estimate everyone assumed was the
+bottleneck (v9). Neither moved it. GOOD: nothing has gone WRONG either; the three
+order-of-magnitude losses stopped at v7 and the structure is stable (same optimum, same
+ledger, seven of ten bounded, Z₂ complete). BAD: 2.4e-4 is still ~40× below the GA residual
+floor, and v9 shows the obvious sharpening targets have small elasticity — the budget is
+governed by **C_sup**, which nobody has touched since v6, and by the interpolation
+inequality's structure. **THE MOST IMPORTANT THING v9 SAYS: we cannot currently tell a lossy
+bound from a large truth.** Every bracket quoted in this project has a LOWER end that is a
+maximum over a handful of sign patterns, which is nearly meaningless, and v9 got a 19×
+phantom gain out of exactly that confusion. Until there is a real lower bound, "the bound is
+47× too big" and "the operator really is that large" are indistinguishable — and they imply
+opposite decisions about the lane. Two respectable calls: (i) do the lower-bound leg, THEN
+decide with information; (ii) stop the estimate grind here, write the whole P2 arc up as one
+coherent community piece (the strongest artifact this project has), and spend the remaining
+swing on the coupled-system HL two-stage question. **(i) is cheap and makes (ii) better
+informed; that is the recommendation.**
 
-THE RECOMMENDED NEXT BRICKS IF CONTINUING, in the order the above implies:
-  (1) **SHARPEN ‖A‖ (the highest-value leg available).** v7 routes the WHOLE seminorm part
-      through one interpolation inequality with a single global κ; the measured ratio says
-      that is ~75× lossy. Two obvious handles: (a) let κ depend on the pair's location
-      (the split scale is local, so the optimum κ is too — v7 fixed it globally only for
-      simplicity); (b) bound the seminorm part directly on the far field, where the inverse
-      is nearly explicit (v3's 2/|α−2| law predicted the full ‖A‖ to 6% in sup norms — v4
-      W2 — so the far-field model is a licensed instrument, banked lesson 10), and use the
-      closure only on the compact core.
-  (2) **The core↔far cutoff commutator [H, φ]** — the last structural piece of Z₁. φ′~1/X₀
-      ⇒ terms are O(1/X₀); the scale is right, the estimate is the work. Standard "compact
-      core + explicit far field" machinery.
-  (3) **The change of ansatz h=(1+X²)^{−α/2} p(θ)** (v7 V6) — cheap, and it retro-fits
-      every discrete measurement in v5–v8 into a space the objects actually live in.
-  (4) The core discretization error (v4 W6, measured J^−2.1..−2.6, never bounded).
+THE RECOMMENDED NEXT BRICKS IF CONTINUING, in the order v9's elasticity table implies:
+  (1) **A REAL LOWER BOUND on ‖A‖ — do this FIRST.** The induced norm between polyhedral
+      norms is an LP; there is no scipy, but the ball's structure is simple enough for a
+      hand-rolled simplex or a projected-gradient ascent over the codomain ball, and even a
+      good ADVERSARY construction (v4's square-wave family did this for the quadratic) would
+      beat sign patterns by a lot. Deliverable: a bracket whose WIDTH means something. This
+      is what tells you whether (2) is worth doing, and whether the whole lane is.
+  (2) **C_sup, the two-point dual on the sup part** — the only input left with elasticity ≈ 1,
+      untouched since v6, ~2× plausibly available. Handles: the dual currently minimises over
+      a SUBSET of reference indices m₀ (valid but lossy); and it inherits v6's crude |H|
+      bound nowhere — it is pure duality, so the slack is in the two-point inequality itself.
+  (3) The core↔far cutoff commutator [H, φ] — the last structural piece of Z₁.
+  (4) The change of ansatz h=(1+X²)^{−α/2}p(θ) (v7 V6).
+  (5) The core discretization error (v4 W6).
 ONLY when Y₀, Z₀, Z₁, Z₂ are ALL real upper bounds should the float radii polynomial be
 assembled, and the same stopping rule applies: **if it does not close in float with margin,
 STOP, do not harden.** solver/interval.py has existed since v1 and has still never been
 pointed at any of this — correctly, because nothing has closed in float.
 
-SUPERSEDED (kept for the record) — the v8 spec, which this session executed: **"the C_Q
+SUPERSEDED (kept for the record) — the v9 spec, which this session executed: **"SHARPEN ‖A‖
+(the highest-value leg available): v7 routes the whole seminorm through one interpolation
+inequality with a single global κ, and the measured ratio says that is ~75× lossy."**
+Outcome: the sharpening worked (−32% at the reference point) and bought **nothing** at the
+operating point, for a reason the spec could have found in one minute with an elasticity
+table. The spec's premise — "the ~75× bracket means ~75× is available" — was also wrong, and
+wrong in the specific way v9 then re-derived the hard way: **a bracket whose lower end is a
+family maximum bounds the available gain from above and says nothing else.** Two lessons for
+writing the next spec: price the ELASTICITY before choosing the target, and never read an
+available gain off a bracket whose lower end you have not earned.
+
+SUPERSEDED (kept for the record) — the v8 spec: **"the C_Q
 codomain seminorm part — weighted Hölder boundedness of H with an explicit constant; it is
 the one term that would make the V4 map's optimum LOCATION trustworthy."** Outcome: the
 bound worked and the location IS now trustworthy — but the reason the spec gave for
@@ -485,10 +538,11 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 15 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (all 16 green): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
-**test_nk_hilbert_holder.py (6/6, NEW)** + test_gclm_family.py (12/12) +
+test_nk_hilbert_holder.py (6/6) + **test_nk_hilbert_pointwise.py (6/6, NEW)** +
+test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
 experiments/ need the `sys.path.insert(0, dirname(dirname(abspath(__file__))))`
@@ -498,10 +552,11 @@ Solver dev + unit tests + DETERMINISTIC scoping probes are NOT "logged gate runs
 three Route-D probes are deterministic — no predicate lock needed); still add each new
 solver test to the suite. Papers/ gitignored ([HQW25]=arXiv:2401.14615 →
 Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic tooling
-probes get a clearly-labelled non-logged entry too, as §10–§17 did).
+probes get a clearly-labelled non-logged entry too, as §10–§18 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{p2_route_d_v8_evidence.py(fig26), p2_route_d_v7_evidence.py(fig25),
+writeup/4_p2_lottery/{p2_route_d_v9_evidence.py(fig27), p2_route_d_v8_evidence.py(fig26),
+p2_route_d_v7_evidence.py(fig25),
 p2_route_d_v6_evidence.py(fig24),
 p2_route_d_v5_evidence.py(fig23),
 p2_route_d_v4_evidence.py(fig22),
@@ -526,7 +581,9 @@ O(J³) and is capped at J≤1000 for that reason — the sup-part dual is only O
 cheap); v7 seminorm ladder ~15 min — the closure itself is O(1); the cost is v6's C_sup
 dual at each J plus the (α,γ) map; **v8 quadratic sweep ~12 min — one pair bound is ~1 ms
 (three log-graded quadratures), a full (α,γ) point ~2 s, and the map re-uses a cache;
-test_nk_hilbert_holder ~4 min**).** Run `python -u` to a
+test_nk_hilbert_holder ~4 min; **v9 sharpen sweep ~35 min — one pointwise bound is ~1 ms,
+a (α,γ) cell costs 4 ρ-values, and the map is 64 cells; test_nk_hilbert_pointwise ~6 min**).**
+Run `python -u` to a
 LOGFILE, wait on a Monitor until-loop — do NOT pipe through tail. Reuse solver instances.
 
 DISCIPLINE LESSONS BANKED (do not relearn): Ground the scheme in the paper; DERIVE the
@@ -607,7 +664,20 @@ history (v8 fig26 panel F), but do not retire a lane on three points with a shar
 (23) **Once the coverage is nearly complete, SHARPNESS becomes the bigger lever — compute
 which.** Bounding the last open constants can buy at most a constant factor each; halving
 the ~75× slack in ‖A‖ buys more than all of them together. That comparison is a two-minute
-calculation and it should be redone at the end of every leg. **NEW from §16:**
+calculation and it should be redone at the end of every leg. **NEW from §18 — the two that
+would have saved this leg:** (24) **Price the ELASTICITY before choosing the target.** Scaling
+each input of a composite bound by a factor and fitting d log(output)/d log(input) costs one
+minute. v9 spent a leg sharpening an input whose elasticity at the operating point is +0.11,
+and v8 spent one on an input at ≤0.5 — both moved the budget ≤7%, which is the table read
+backwards. The input that governs everything (C_sup, elasticity +1.00) has not been touched
+since it was first bounded. (25) **Never read an "available gain" off a bracket whose LOWER
+end you have not earned.** ‖A‖'s 47–75× bracket has a lower end that is a maximum over a few
+sign-pattern directions; it bounds the available gain from ABOVE and says nothing else. v9
+tried to convert it into a number by substituting that lower end as an oracle and got a 19×
+phantom. Worse, the ambiguity is decision-relevant: "the bound is 47× too big" and "the
+operator really is that large" imply opposite conclusions about the whole lane, and we
+currently cannot tell them apart. **Build the lower bound; a bracket you cannot interpret is
+not a measurement.** **NEW from §16:**
 (17) **The freshest lesson is the most tempting analogy — and an analogy is not a
 diagnosis.** v6 recommended its own successor's method by reasoning from v6's own headline
 (the discrete-ball trap): "the seminorm dual is lossy, and we just learned that discrete
@@ -629,11 +699,12 @@ is the result, and it says the approach needs constants that are roughly SHARP, 
 bounded. **Plot your own budget history across legs — the trend is a cheaper decision
 procedure than any single leg's number.**
 
-HONEST CEILING (say it out loud): Route-D v3+v4+v5+v6+v7+v8 are validated tooling + a no-go
-theorem, a confirmed price, a second structural requirement, a space that meets every
-requirement identified so far, upper bounds for seven of ten constants (a COMPLETE Z₂ and the
-whole of ‖A‖), one disqualified method, and a budget that lost two orders of magnitude to
-honesty and then stopped losing; they do NOT climb the rigor ladder. Everything in it is plain
+HONEST CEILING (say it out loud): Route-D v3–v9 are validated tooling + a no-go theorem, a
+confirmed price, a second structural requirement, a space that meets every requirement
+identified so far, upper bounds for seven of ten constants (a COMPLETE Z₂ and the whole of
+‖A‖), one disqualified method, a budget that lost two orders of magnitude to honesty and has
+been flat for three legs, and — as of v9 — an explicit admission that we cannot yet tell a
+lossy bound from a large truth; they do NOT climb the rigor ladder. Everything in it is plain
 float64: nothing is interval-enclosed, nothing is rigorous. Even the eventual success it
 scouts is a computer-assisted TOY-MODEL certification (Chen–Hou / Gómez-Serrano genre),
 NOT a Clay solve. 1D HL is a toy model (boundary behaviour of Hou–Luo /

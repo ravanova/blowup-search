@@ -144,6 +144,26 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## three ledger items are cheap. **Seven of ten constants bounded; Z2 COMPLETE.** New
 ## solver/hilbert_holder.py + test_nk_hilbert_holder.py (6/6; suite 15 files green); fig26;
 ## BLOG/TECHNICAL_P2_ROUTED_V8.md. NOT a certificate.**
+## **ROUTE-D v9 DONE (§18, 2026-07-31): THE SHARPNESS LEG — and a NEGATIVE WITH A MECHANISM.
+## Rebuilt the |H(h)| bound on the exact folded kernel K = 2 sin(th)/(cos phi - cos th), whose p.v.
+## over (0,pi) is EXACTLY ZERO (it is the conjugate of the constant function), so the singularity
+## needs ONE GLOBAL SUBTRACTION instead of v6's band + matching scale + remainder. Sharper at every
+## X (ratio 0.09-0.99) and nearly ATTAINED (0.97 on the anchor). Also found that the PAYER RULE —
+## which part of the norm pays at each point — is a free parameter with an INTERIOR optimum, and
+## that the neutral choice (compare at S=T=1, v8's default) is WORSE than the crude bound it
+## replaces: **tune the rule to the T/S ratio of the ANSWER, not to 1.** ||A||: 69.15 -> 47.05
+## (-32%), the largest single gain since the closure was built. **AND THE BUDGET DID NOT MOVE
+## (2.39e-4 -> 2.40e-4).** Why: the closure is T <= C(g)(P/2)^g(2S)^{1-g} and the |H| bound enters
+## ONLY through P, so at the map's optimum (gamma=0.15) a 30% better P moves T by 4% — gain by
+## point 32%/11%/3%/0%. Worse, the optimum sits at small gamma BECAUSE that is where ||A|| barely
+## depends on this input. **THE ELASTICITY TABLE (one minute, should have come first):
+## d log||A||/d log C_sup = +1.00 at the operating point; d log||A||/d log|H| = +0.11.** The last
+## TWO legs both worked on inputs with elasticity <= 0.5 and both moved the budget by <= 7%. Also
+## re-caught banked lesson 15: an "oracle C_sup" substitution reported a 19x available gain that was
+## an artifact of a bad lower bound. NEXT is decided by the table: C_sup (the only elasticity-1
+## input left, ~2x available), and BEFORE that a REAL lower bound on ||A|| — without one, no bracket
+## in this project can be attributed. New solver/hilbert_pointwise.py + test_nk_hilbert_pointwise.py
+## (6/6; suite 16 files green); fig27; BLOG/TECHNICAL_P2_ROUTED_V9.md. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -1028,4 +1048,81 @@ budget scales inversely with their product. A leg that SHARPENS ‖A‖ (e.g. by
 seminorm through the interpolation inequality) may now be worth more than a leg that bounds one more
 open item. Same stopping rule: **if the radii polynomial does not close in float with margin, STOP,
 do not harden.** solver/interval.py still correctly unused.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
+
+## §18 — ROUTE-D v9 DONE (2026-07-31): THE SHARPNESS LEG. A 32% sharper |H(h)| bound that buys
+## ~NOTHING at the operating point — plus the ELASTICITY TABLE that explains why and redirects
+## the next leg. A negative with a mechanism. Still NOT a certificate.
+
+The §17 "next brick", item (1) (sharpen ‖A‖). Built solver/hilbert_pointwise.py +
+test_nk_hilbert_pointwise.py 6/6 (suite now **16 files green**); deterministic sweep
+experiments/p2_route_d_v9_sharpen.py → writeup/data/p2_route_d_v9_sharpen.json → fig27
+(writeup/4_p2_lottery/p2_route_d_v9_evidence.py). NOT a logged Tier run. BLOG/TECHNICAL_P2_ROUTED_V9.md.
+
+**WHY THIS LEG:** v8 left Z₂ complete and seven of ten bounded, so the question changed from
+COVERAGE to SHARPNESS — budget ~ 1/(‖A‖C_Q), ‖A‖'s bracket ~70× wide. Target picked itself: v7's
+closure is dominated by its own feedback (the |H(h)| term supplies **81 of the 93 units** in the
+derivative bound at the reference point) and that feedback is v6's crude-majorant bound.
+
+SIX evidence pieces (do not relearn):
+  Y1 **THE BOUND.** Fold onto (0,π): ψ(θ) = (1/2π)p.v.∫_0^π h(φ)K_θ(φ)dφ,
+     **K_θ(φ) = 2sinθ/(cosφ−cosθ) = −sinθ/(sin((φ+θ)/2)sin((φ−θ)/2))**. Three properties, each
+     removing something v6 needed: (i) **the decay is IN the kernel** (sinθ→0 at π — v6's
+     even-kernel point in θ coordinates); (ii) **p.v.∫_0^π K dφ = 0 EXACTLY** (it is the conjugate
+     of the constant function; the antiderivative −2log|sin((φ−θ)/2)/sin((φ+θ)/2)| vanishes at BOTH
+     ends) ⇒ the p.v. is handled by ONE GLOBAL SUBTRACTION — **no band, no matching scale, no
+     remainder term**, all three of which v6 needed and each of which cost a constant; (iii) the
+     second form is the one to EVALUATE — near θ=π both cosines → −1 and the difference has no
+     significant digits (the first draft NaN'd at X≳1e4); parameterising by the offset s=|φ−θ|
+     makes sin((φ−θ)/2)=sin(±s/2) exact. **Ratio to v6 across 8 decades: 0.09 / 0.26 / 0.66 / 0.87
+     / 0.65 / 0.67 / 0.85 / 0.95 / 0.99.** Gated by an exact second build (1.5e-7) and nearly
+     ATTAINED (0.97 on the anchor).
+  Y2 **THE PAYER RULE (the transferable part).** Any FIXED rule for choosing which norm part pays
+     at each φ gives a valid linear bound; v8's default compared them at S=T=1. **Wrong default:
+     tune the rule to the T/S ratio of the ANSWER, not to 1.** With ρ (seminorm pays iff ρc_T≤c_S):
+     ‖A‖ = 74.7(ρ=1) / 63.4 / 53.1 / 48.4 / **47.2(ρ=6–9)** / 50.6 / 54.0, an INTERIOR optimum —
+     and **the neutral ρ=1 gives 74.7, WORSE than the 69.4 of the crude bound it replaces** (in the
+     closure T ~ 10S, so minimising the S=T=1 sum charges the expensive account). C_Q, maximising
+     over the unit simplex where the ratio is O(1), wants ρ≈2 instead. Both valid; each caller picks.
+  Y3 **THE NEW ‖A‖:** 69.15 → **47.05** at (1.5,0.5), still J-flat (J^+0.0059, inherited from
+     C_sup). Largest single improvement to ‖A‖ since the closure was built.
+  Y4 **THE GAIN DOES NOT TRANSFER (the leg's actual result).** Reduction in ‖A‖ by point:
+     **32% (1.5,0.50) / 11% (1.4,0.35) / 3% (1.4,0.25) / −0% (1.4,0.15) / −1% (1.2,0.15)** — and
+     **(1.4,0.15) is the map's optimum**, where the budget is evaluated and has been for three legs.
+     MECHANISM: the closure is T ≤ C(γ)(P/2)^γ(2S)^{1−γ} and the |H| bound enters **ONLY through P**,
+     so at γ=0.15 a 30% improvement in P moves T by 4%. Worse: the operating point sits at small γ
+     precisely BECAUSE that is where ‖A‖ is cheap — i.e. where it barely depends on the input this
+     leg improved. **The optimiser had already walked to the corner where the improvement cannot
+     matter.**
+  Y5 **THE ELASTICITY TABLE (what should have come first, and costs a minute).** Scale each input
+     and fit the log-log slope: **d log‖A‖/d log C_sup = +0.98 (reference), +1.00 (operating);
+     d log‖A‖/d log|H| = +0.46 (reference), +0.11 (operating).** ‖A‖ is PROPORTIONAL to C_sup —
+     v6's two-point dual on the sup part — and at the operating point essentially blind to the |H|
+     bound. **The last TWO legs (v8's codomain seminorm, v9's pointwise bound) both worked on inputs
+     with elasticity ≤ 0.5 and both moved the budget by ≤ 7%. That is the table read backwards, and
+     neither leg computed it beforehand.**
+  Y6 **THE TRAP ON THE WAY OUT (banked lesson 15, missed again).** The tempting next step is to
+     substitute a MEASURED C_sup and read off the available gain. An earlier draft of this leg did
+     exactly that and reported a **19× available gain — an artifact**: the "measured C_sup" was a
+     family lower bound computed by dividing the SUP PART of an image by the FULL codomain norm of a
+     sign pattern (whose Hölder seminorm is enormous), an order of magnitude below any plausible
+     sharp value. What survives: elasticity says C_sup is the input worth attacking; v6 B2's own
+     bracket says C_sup is ~2× lossy, so **~2× is on the table there, not an order of magnitude**;
+     and the wider bracket (47× vs a family LB of ~1.0) **cannot be attributed at all** until there
+     is a decent LOWER bound — a maximum over a few sign patterns says almost nothing about how
+     lossy an upper bound is.
+  Y7 **MAP + BUDGET + LEDGER.** Complete Z₂ map (ρ chosen per cell from {1,3,6,12}): optimum
+     **(1.4, 0.15), Z₂ ≤ 260.7** — third leg running at the same place (v8: 261.1). Budget history
+     **7.6e-2 → 1.18e-2 → 2.58e-4 → 2.39e-4 → 2.40e-4**: three order-of-magnitude losses, then three
+     legs of nothing in either direction. Ledger coverage UNCHANGED (seven of ten; Z₂ complete);
+     the status note on C_sup is rewritten to record that it is now the DOMINANT input.
+
+NEXT — decided by Y5, not by intuition: (1) **C_sup, the two-point dual on the sup part.** It is the
+only input left with elasticity ≈ 1, it has not been touched since v6 first bounded it, and ~2× is
+plausibly available. (2) **A REAL LOWER BOUND on ‖A‖** (an LP over the polyhedral ball, or a proper
+adversary construction rather than sign patterns) — without it, no bracket in this project can be
+attributed, and we cannot tell a lossy bound from a large truth. Arguably (2) BEFORE (1), since (2)
+is what tells us whether (1) is worth doing. (3) the core↔far cutoff commutator; (4) the change of
+ansatz h=(1+X²)^{−α/2}p(θ); (5) the core discretization. Same stopping rule: **if the radii
+polynomial does not close in float with margin, STOP, do not harden.**
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
