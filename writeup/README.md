@@ -175,6 +175,18 @@ writeup/
     `n` only up to `a ≈ 0.5`, so the survival boundary **survives a fourth, genome-free
     confirmation**. `Y₀`'s binding constraint moves from *search* to *discretization*.
     *(fig 29)*
+31. [TECHNICAL_P2_ROUTED_V12.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V12.md) ·
+    [BLOG_P2_ROUTED_V12.md](4_p2_lottery/BLOG_P2_ROUTED_V12.md) — **Route-D v12**:
+    `Y₀` measured in the basis the bounds are written in — which required the
+    `a`-transport term in the compactified basis, and which found that **the `a > 0`
+    profile is not a decaying tail at all: the true transport coefficient
+    `E = c + aU` carries the velocity's logarithm, crosses zero at a finite radius
+    `X_c ≈ e^{c/a}`, and the profile ends there with an algebraic zero of order
+    `1/a`** (two independent discretizations agree on `X_c/c` to 0.1%). The `a = 0`
+    anchor everything was built on is the degenerate `X_c = ∞` limit. Consequence:
+    `‖A‖` is **flat at the anchor (`J^−0.003`) and divergent at the real profile
+    (`J^+2.86`)**, so the seven bounded constants are the anchor's and do not
+    transfer. *(fig 30)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -209,6 +221,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig30_p2_route_d_v12_defect.png` | 4 | P2 — Route-D v12: the profile ending at `X_c`, the effective speed `E = c + aU` crossing zero, the zero's order against the parameter-free prediction `1/a` in two discretizations, the defect in the certificate's own norm against the budget, its convergence rate in `J`, and the operator norm flat at the anchor but divergent at the real profile |
 | `fig29_route_d_v11_anchor.png` | 4 | P2 — Route-D v11: Newton's residual 12 orders below the GA floor, the grid-refinement table that pins the survival boundary at `a ≈ 0.5` without a genome, and the weighted sup defect against the budget |
 | `fig28_route_d_v10_lower.png` | 4 | P2 — Route-D v10: the sign-pattern baseline degrading with `J`, the bracket collapsing 50×→16× and 7.7× at the operating point, the far-field extremizer, brackets across the map, and the measured ceiling on sharpening |
 | `fig23_p2_route_d_v5_holder.png` | 4 | P2 — Route-D v5: the square-wave adversary defused in the Hölder norm, the two interior optima (one per grading), the surviving marginal direction at the critical decay rate, and the quadratic constant before/after |
@@ -231,6 +244,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_d_v12_defect.json` | Arc 4 / fig30 — T0 the profiles and their critical radii, T1 the rows Newton enforces vs the row the gauge displaced, T2 `Y₀` in the codomain norm vs the budget, T3 `X_c` and the zero order in two discretizations, T4 the convergence rate in `J`, T5 the operator norm at the real profile + its `J`-ladder, T6 the boundary sweep with the `a = 1/3` control |
 | `p2_route_d_v11_anchor.json` | Arc 4 / fig29 — V0 the two-gauge requirement, V1 the known-answer gate read correctly, V2 the residual 12 orders below the GA floor, V3/V4 the grid-refinement table and the surviving boundary, V5 the weighted sup defect vs the budget |
 | `p2_route_d_v10_lower.json` | Arc 4 / fig28 — W1 the lower-bound ladder vs the baseline, W2 the operating-point bracket, W3 the extremizer's shape, W4 brackets across the map, W5 the measured ceiling on sharpening, W6 the ledger |
 | `p2_route_d_v5_holder.json` | Arc 4 / fig23 — U1 the defusal of the v4 adversary, U2 the Hölder constant of `H` vs `γ`, U3/U3b/U3c the inverse over `(α,γ)` and the critical-direction isolation, U4 the quadratic in the two-graded pair, U5 the joint optimum |
@@ -257,6 +271,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v8_evidence.py         # fig26
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v9_evidence.py         # fig27
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v11_evidence.py        # fig29
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_v12_evidence.py        # fig30
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
@@ -271,6 +286,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python experiments/p2_route_d_v9_sharpen.py
 .venv/bin/python experiments/p2_route_d_v10_lower.py
 .venv/bin/python experiments/p2_route_d_v11_anchor.py
+.venv/bin/python -u experiments/p2_route_d_v12_defect.py   # ~13 min
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

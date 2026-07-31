@@ -3,6 +3,58 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v12: the profile ends (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic Newton + deterministic sweeps; no GA, no seeds,
+no predicate lock). Data `writeup/data/p2_route_d_v12_defect.json` (regen
+`python -u experiments/p2_route_d_v12_defect.py`, ~13 min); figure fig30
+(`writeup/4_p2_lottery/p2_route_d_v12_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V12; PHASE2_P2_NOTES.md §21. Code:
+`solver/collocation_newton.py` + `test_collocation_newton.py` (6/6; suite now 19 files green).
+
+What a human would want to know:
+
+- **The leg I meant to run.** v11 measured the profile's defect on the sinh-ρ grid; every
+  Route-D bound lives in the compactified θ-collocation basis. Carry it across, measure Y₀
+  there. That is a two-hour job and it was done by lunchtime.
+
+- **The measurement misbehaved in two ways at once**, which is what actually produced the
+  leg. The weighted defect was NOT monotone in a (4.4e-4, then 8.4e-6, then 4.4e-5), and its
+  arg-max was the outermost point of the domain — at every single value of a. Either one
+  alone is a shrug. Together they say you are not looking at what you think you are.
+
+- **What it was.** The transport coefficient in this equation is not c, it is E = c + aU,
+  and U is an integral of a Hilbert transform, so it carries a logarithm and decreases
+  without bound. E hits zero at a finite radius. Past that radius the profile does not decay,
+  it ENDS: Ω ~ (X_c − X)^{1/a} approaching it, and Ω ≡ 0 solves the equation beyond it. The
+  a = 0 anchor — where all eleven legs of far-field analysis were done — is the one case
+  where this cannot happen, because there E ≡ c is constant.
+
+- **The half hour where it looked like the best news in months.** At a = 0.2, J = 1600, the
+  defect came in 7.7× UNDER budget — the first time this side of the inequality has been
+  under target at a ≠ 0. Then: the budget's constants were all computed at the anchor. I
+  measured ‖A‖ at the actual profiles and it is 2.1e3 rather than 20.94 — and the J-ladder
+  says it DIVERGES (J^+2.86) while the anchor's is flat (J^−0.003). Correcting the budget
+  turns 7.7× under into three orders over. Both sides of the inequality move the wrong way,
+  by one mechanism.
+
+- **What stopped the over-claim, twice.** (i) The a = 0 control: the exact anchor's defect in
+  the same norm is 3.7e-11, nine orders below anything reported, so the numbers are the
+  object and not the instrument. (ii) The J-ladder on ‖A‖: a single grid size cannot tell a
+  large operator from a bad grid, and this project has now been burnt by that twice (v6's
+  discrete-ball trap, v10's sign-pattern baseline). One extra loop, three minutes.
+
+- **The one I wanted to be true and wasn't.** The zero's order is 1/a, which hits the integer
+  2 exactly at a = 1/2 — the four-times-confirmed survival boundary — and the Hilbert
+  transform of (X_c−X)^p_+ grows a log at integer p. That is a sharp mechanism landing exactly
+  on the observed boundary. It also predicts trouble at a = 1/3, and there is none: that
+  point is smooth in every column. So it is a coincidence, and v12 does not predict a*.
+
+- **Next.** Beyond X_c the profile is exactly zero, so the certificate can move to the finite
+  interval [0, X_c] with X_c as an unknown, and the whole far field disappears. The
+  singularity at X_c should be absorbed by the free boundary (the singular mode is ∂/∂X_c of
+  the solution family). Untested; the kill switch is ‖A‖ vs J in that formulation.
+
 ## Phase-2 P2 — ROUTE-D v11: Newton on the profile, and the number we carried for five legs (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic Newton; no GA, no seeds, no predicate lock).

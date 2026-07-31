@@ -195,6 +195,27 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## DISCRETIZATION-limited** — already a ledger item, and a much better problem to have. New
 ## solver/profile_newton.py + test_profile_newton.py (6/6; suite 18 files green); fig29;
 ## BLOG/TECHNICAL_P2_ROUTED_V11.md. NOT a certificate.**
+## **ROUTE-D v12 DONE (§21, 2026-07-31): Y0 MEASURED IN THE BOUNDS' OWN BASIS — and the
+## a>0 profile ENDS. Built the a-transport term in the compactified theta-basis (velocity
+## U = sum_k A_k I_k, exact recursion, longdouble), so the residual of the INTERPOLANT is
+## evaluable anywhere: A is the Newton matrix and Y0 is the Newton step. Newton zeroes the
+## rows it enforces (1.5e-13) while the row the gauge displaced carries 9.1e-3 at a=0.5 —
+## zero at the nodes is not zero as a function. **THE MECHANISM: the true transport
+## coefficient is E = c + aU, and U ~ (int Omega/pi) log X -> -infinity, so E crosses zero at
+## a FINITE X_c ~ e^{c/a}; near it Omega ~ (X_c - X)^{1/a} (no free constant) and beyond it
+## Omega = 0 solves the equation exactly.** Two independent discretizations agree on X_c/c to
+## 0.06-0.11%; the fitted zero order tracks 1/a to 7-9%. The a=0 anchor — the object the whole
+## decay-graded programme was built on — is the degenerate X_c = infinity limit. CONSEQUENCE:
+## **||A|| at the REAL profile DIVERGES with J (J^+2.86 at a=0.2, J^+2.75 at 0.3) while it is
+## FLAT at the anchor (J^-0.003)**, because linearizing about a zero of order p has a
+## homogeneous mode ~ s^{-p} that is in no sup norm. So the seven bounded ledger constants are
+## constants for the ANCHOR and do not transfer, and the one number that came in 7.7x UNDER
+## budget (a=0.2, J=1600) was priced with the wrong operator. The boundary a*~0.5 gets a
+## candidate mechanism (X_c descending into the core) but the a=1/3 control kills the sharp
+## version, so v12 does NOT predict a*. New solver/collocation_newton.py +
+## test_collocation_newton.py (6/6; suite 19 files green); fig30; BLOG/TECHNICAL_P2_ROUTED_V12.md.
+## REPAIR (v13): finite interval [0, X_c] with X_c a free-boundary UNKNOWN — the far field
+## disappears; kill switch is ||A|| vs J in that formulation. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -1262,3 +1283,101 @@ measurement is the hardest instrument artifact to see — we carried 1e-2 for fi
 when both tools producing it shared the same weakness. And the thing that stopped the correction
 becoming an over-claim was one table: refine the grid, see whether the answer moves.**
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
+
+
+## §21 — ROUTE-D v12 DONE (2026-07-31): Y₀ MEASURED IN THE BOUNDS' OWN BASIS — and the
+## a>0 profile turns out to END at a finite radius, which invalidates the space eleven
+## legs were built on and makes ‖A‖ DIVERGE at the object the certificate is about.
+
+The §20 "next brick", item (1). Built solver/collocation_newton.py + test_collocation_newton.py
+6/6 (suite now **19 files green**); experiments/p2_route_d_v12_defect.py →
+writeup/data/p2_route_d_v12_defect.json → fig30. NOT a logged Tier run (deterministic Newton +
+deterministic sweeps). BLOG/TECHNICAL_P2_ROUTED_V12.md.
+
+**THE BUILD.** The a-transport term in the compactified θ-basis. The one non-local object,
+U = ∫₀^X H(Ω)dX', has a closed form there: U = Σ_k A_k I_k(θ) with I_k = ∫₀^θ sin kt/(1+cos t)dt,
+I_0=0, I_1=log(1+X²), **I_{k+1} = 2(1−cos kθ)/k − 2I_k − I_{k−1}** (from 2 sin kt cos t =
+sin(k+1)t + sin(k−1)t with cos t = (1+cos t) − 1). Homogeneous solutions (A+Bk)(−1)^k, and I_k
+itself grows at the same rate near θ=π, so relative error is fine and absolute error tracks εk²
+(**1.7e-11 at k=800 in float64** ⇒ assembled in longdouble). Because I_k is a formula, the
+residual of the INTERPOLANT is evaluable at ANY θ — which is the whole point.
+
+SEVEN evidence pieces (do not relearn):
+  T0/T1 **A IS THE NEWTON MATRIX.** `gauged_jacobian` = [gauge row; DF rows except one] with c
+     FIXED, and A = M⁻¹; the Newton iteration for that same square system is x ← x − A F(x), so
+     **Y₀ = ‖A F‖ is the size of the Newton step.** Newton drives the rows it enforces to
+     1.5e-13…2.4e-13 at every a. The row the gauge DISPLACED goes 7.1e-13 (a=0, the control —
+     the anchor is an exact solution) → 4.8e-7 (0.1) → 9.3e-5 (0.3) → 9.1e-3 (0.5). **Zero at
+     the nodes is not zero as a function**, and the gap is 6–10 orders. Structural, not sloppy:
+     ΩH(Ω) has degree <2J and collocation imposes J conditions on it.
+  T2 **Y₀ IN THE CODOMAIN NORM at (1.4,0.15), J=400.** ‖F‖_Y = 3.7e-11 (a=0 control) / 4.4e-4
+     (0.05) / 8.4e-6 (0.1) / 4.4e-5 (0.2) / 1.5e-2 (0.3) / 7.9e-1 (0.4) / 1.7e0 (0.5) ⇒
+     Y₀ ≤ 20.94‖F‖ = 0.7× budget only at a=0.1; 1256× at 0.3; 1.4e5× at 0.5. **NOT MONOTONE in
+     a, and the arg-max is the OUTERMOST evaluation point at every single a.** Both are the tell.
+  T3 **THE MECHANISM — THE PROFILE ENDS.** E(X) = c + aU(X) is the true transport coefficient.
+     H(Ω)→m/(πX) with m=∫Ω<0 ⇒ **U = U₀ + (m/π)log X → −∞**, so **E crosses zero at a finite
+     X_c ≈ e^{c/a}** (using the anchor's m=−π, U₀=0). Near it E ≈ −a h_c s (s = X_c−X,
+     h_c = H(Ω)(X_c)) and Ω = A s^p gives A s^p h_c = a h_c p A s^p ⇒ **p = 1/a, no free
+     constant** (A and h_c cancel). Beyond X_c, Ω ≡ 0 solves the equation exactly. **The a=0
+     anchor is the degenerate X_c = ∞ limit**, and the SAME balance at a=0 gives Ω ~ X^{m/(πc)}
+     = X^{−2} — i.e. the anchor's tail and v3's α=2 resonance are the a→0 corner of this
+     picture. MEASURED in two independent discretizations, compared through the dilation
+     invariant X_c/c: gap **0.06% / 0.11% / 0.00% / 0.01%** at a=0.2…0.5 (3.0% at a=0.1, where
+     the θ-grid stops resolving X_c≈290 — the instrument, not the object). Fitted zero order
+     5.40 / 3.59 / 2.73 / 2.20 vs 1/a = 5 / 3.33 / 2.50 / 2.00 — **7–9% high uniformly**, which
+     is what a leading-order fit over a finite window does.
+  T4 **THE RATE, AND THE ONE NUMBER THAT GOES THE RIGHT WAY.** ‖F‖_Y vs J: J^−2.31 (a=0.2),
+     J^−1.02 (0.3), **J^−0.04 (0.4 — flat over a 16× refinement)**, against the naive
+     C^{1/a}-aliasing prediction J^−(1/a+1) = −6/−4.33/−3.5. Slower than the profile's own
+     regularity because **the error measured is not the aliasing of the zero, it is the Gibbs
+     ringing left by representing a COMPACTLY SUPPORTED function in a GLOBAL spectral basis,
+     amplified by a codomain weight that grows like X^{α+1}**. At a=0.2, J=1600:
+     **Y₀ ≤ 3.17e-5 vs budget 2.45e-4 — 7.7× UNDER, the first time this side of the inequality
+     has come in under target at a≠0.** See T5 for why that is not the result it looks like.
+  T5 **THE OPERATOR DOES NOT TRANSFER — AND DOES NOT EXIST.** Every constant in the budget was
+     computed at the a=0 anchor; the certificate linearizes at the profile it certifies. Graded
+     sup-to-sup ‖A‖ (exact induced norm between discrete sup norms — v6's B1 discrete-ball trap
+     does NOT apply) at α=1.4: 3.54 (a=0) / 3.88 (0.1) / **2.1e3 (0.2) / 7.6e4 (0.3) / 5.0e5
+     (0.4) / 1.6e7 (0.5)**, while cond(M) stays 1.4e6…1.8e7 — so it is the WEIGHTED norm, not
+     the matrix. **THE LADDER IS THE MEASUREMENT THAT DECIDES: a=0 gives J^−0.003 (3.551 →
+     3.542 → 3.537 over J=200/400/800) and a=0.2 gives J^+2.86, a=0.3 J^+2.75.** Flat at the
+     anchor, DIVERGENT at the real profile, same code. MECHANISM: linearizing about a solution
+     with a zero of order p has a homogeneous solution ~ s^{−p}, in no sup norm at all. So the
+     a=0.2 near-miss in T4 priced a new object with an old object's constants; correcting for
+     the real ‖A‖ (budget ∝ 1/‖A‖) turns 7.7× under into ~3 orders over. **Both sides move the
+     wrong way, by one mechanism.**
+  T6 **THE BOUNDARY: A CANDIDATE MECHANISM, AND THE CONTROL THAT REFUSES TO CONFIRM IT.**
+     X_c falls 10.63 (a=0.25) → 3.08 (0.50) → 2.12 (0.70), and the core half-width stays ~1, so
+     X_c/half-width tracks X_c. Two readings: GEOMETRIC (no room for two scales once X_c reaches
+     the core) and ARITHMETIC (p = 1/a hits the integer 2 exactly at a=1/2, where H of
+     (X_c−X)^p_+ grows a log — landing exactly on the four-times-confirmed a*≈0.5). They differ
+     at **a = 1/3 (p = 3, also integer, X_c ≈ 5.8 still far outside the core)** and the control
+     says the arithmetic reading is WRONG: a=1/3 sits smoothly between its neighbours in every
+     column. What survives is a smooth monotone trend with **nothing special at 0.5** —
+     consistent with §9-cont2's "soft crossing", and **v12 does NOT predict a\***.
+  T7 **LEDGER.** Nothing moved OPEN→BOUNDED. What changed is the SPECIFICATION: Y₀ is now
+     measured in the right basis, and a new item joins the open list — **every bounded constant
+     in the ledger is a constant for the ANCHOR's linearization, and T5 shows they do not
+     transfer to the object the certificate is about.**
+
+**THE REPAIR (v13's spec, with its own kill switch).** Beyond X_c the profile is exactly zero,
+so a certificate can work on the **FINITE INTERVAL [0, X_c] with X_c as an UNKNOWN**, and the
+far field — eleven legs of decay grading, resonances and tail bounds — is handled in closed form
+because there is nothing out there. The price is the interior singularity at X_c, and the
+standard reason to expect it refundable is that the singular mode s^{−1/a} is precisely
+∂/∂X_c of the solution family: **adding the free boundary as an unknown is the usual way an
+apparent singularity of a linearization stops being one.** UNTESTED. Kill switch: build the
+free-boundary system at ONE a and measure ‖A‖ against J. If the singular direction is not
+absorbed, ‖A‖ still diverges and the framing needs REPLACING, not repairing.
+
+**LESSONS.** (29) **A constant is attached to a POINT, not to a problem.** Seven of ten ledger
+constants were bounded — all at the a=0 anchor, because that is where the exact solution is, and
+nobody wrote down that the certificate needs them at the a≠0 profile instead. One ladder at the
+real profile turned "bounded" into "divergent". Before pricing anything, write down the point at
+which the price is quoted. (30) **A number that is under budget is not a result until the
+budget was computed for the same object.** T4's 7.7×-under looked like the leg's headline for
+half an hour. (31) **When a measurement misbehaves in TWO ways at once (non-monotone in the
+parameter, arg-max pinned to the domain edge), stop measuring and ask what object you are
+looking at.** Both anomalies were one fact.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
+Clay odds ~0.05%.

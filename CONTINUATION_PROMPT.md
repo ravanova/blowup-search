@@ -1,33 +1,65 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-31 (updated after Route-D v11). **NEWEST LEG FIRST — Route-D v11 stopped
-polishing the constants and attacked the OTHER side of the inequality, and it retired a number
-this project had carried as physics for five legs.** v10 had measured the ceiling on sharpening
-(a perfect ‖A‖ buys 7.7×, C_Q's slack ~4×, together only just reaching the 1e-2 residual floor
-with nothing spare) — which is exactly the point at which you stop polishing the left-hand side.
-Y₀ enters the radii polynomial LINEARLY and had never been attacked in eleven legs: every a≠0
-profile came from a GA over a small genome or from fixed-grid relaxation, and BOTH floor at
-~1e-2. **A Newton solve on the full grid reaches relres ~1e-14 at every a up to 0.5 — twelve
-orders. The floor was the SEARCH, not the equation**, and §9 had read the banked discipline
-lesson about it as a fact about the problem. Newton also converged at a=0.8 and 1.0, which for
-an hour looked like "the survival boundary was a genome artifact all along"; **it is not** —
-machine precision on a DISCRETE system proves nothing by itself, and the grid-refinement table
-(spread in c over n=401/801/1601: 8e-4 / 3e-4 / 3e-5 at a=0/0.2/0.5 but 3.7e-3 / 1.3e-2 at
-a=0.8/1.0, grids reaching machine precision 3/3/2/1/1) shows the solutions are continuum objects
-only up to a≈0.5. **So the GA's a*≈0.5–0.55 is confirmed a FOURTH time, now by a method with no
-genome, no search budget and no stochasticity — and sharpened: below a*, an exact discrete
-traveling wave EXISTS.** What it does to Y₀ is a change of BINDING CONSTRAINT, not a solved
-problem: the certificate sees the WEIGHTED SUP defect, 6+ orders larger than the RMS and NOT
-uniformly under budget (**1.5e-2 at a=0.45 against a 2.45e-4 budget**), so **Y₀ is now
-DISCRETIZATION-limited rather than SEARCH-limited** — which is already a ledger item (Z₁ core
-discretization, v4 W6 measured J^−2.1..−2.6 and never bounded it). New solver/profile_newton.py
-+ test_profile_newton.py (6/6; suite 18 files green); fig29; BLOG/TECHNICAL_P2_ROUTED_V11.md.
-Everything below is banked + pushed on `main`. **Next: (1) carry the Newton profile into the
-θ-collocation basis the bounds live in and measure Y₀ THERE (the v11 number is in the Route-A
-ρ-discretization; they are different objects); (2) price the core discretization error, now the
-binding item for Y₀; (3) C_sup (elasticity ≈1, ~2× available); (4) the core↔far commutator. Read
-BOTH the "WHERE THIS SITS RELATIVE TO CLAY" section and the "IS THIS STILL THE RIGHT LANE?" box
-before committing to another estimate leg.***
+*Written 2026-07-31 (updated after Route-D v12). **NEWEST LEG FIRST — Route-D v12 carried the
+profile into the basis the bounds are written in, measured Y0 there, and found that the object
+the certificate is about is NOT the object the space was designed for.** v11's instruction was
+exactly this: its Newton solve lived on the Route-A sinh-rho grid, while every Route-D bound
+lives in the compactified midpoint theta-collocation basis (X = tan(theta/2)), so carry it
+across. Doing that needed a build — the a-transport term in that basis, whose only non-local
+piece, the velocity U = INT_0^X H(Omega)dX', has a closed form there (U = SUM_k A_k I_k(theta),
+I_k = INT_0^theta sin kt/(1+cos t)dt, exact three-term recursion, assembled in longdouble
+because float64 drifts 1.7e-11 by k=800). Two framings came free and both matter: **A IS THE
+NEWTON MATRIX** (the certificate's gauged system is what Newton iterates, so Y0 = ||A F|| is the
+size of the Newton step), and **zero at the nodes is not zero as a function** (Omega*H(Omega)
+has degree <2J against J collocation conditions; the rows Newton enforces sit at 1.5e-13 while
+the row the gauge displaced carries 9.1e-3 at a=0.5). **THE FINDING: the true transport
+coefficient is E(X) = c + aU(X), and U inherits the Hilbert transform's logarithm
+(U ~ (INT Omega/pi) log X -> -infinity), so E CROSSES ZERO at a finite radius X_c ~ e^{c/a};
+approaching it the balance forces Omega ~ (X_c - X)^{1/a} — an algebraic zero whose order is
+1/a with NO free constant — and beyond it Omega = 0 solves the equation exactly. The a>0
+profile ENDS. The a=0 anchor, on which eleven legs of decay-graded far-field analysis were
+built, is the degenerate X_c = infinity limit** (and the same balance at a=0 gives Omega ~
+X^{m/(pi c)} = X^-2, i.e. the anchor's tail and v3's alpha=2 resonance are the a->0 corner of
+this picture). Two independent discretizations agree on the dilation invariant X_c/c to
+**0.06-0.11%** and on the zero order to 7-9% of 1/a. **THE CONSEQUENCE THAT DECIDES THINGS:
+||A|| at the REAL profile DIVERGES with J (J^+2.86 at a=0.2, J^+2.75 at 0.3) while at the
+anchor it is FLAT (J^-0.003, 3.551->3.537 over J=200..800), because linearizing about a zero of
+order p has a homogeneous mode ~ s^-p that lies in no sup norm. The approximate inverse the
+whole programme is built on does not exist in the limit at a>0, and the seven "bounded"
+constants in the ledger are all constants for the ANCHOR's linearization.** The one number that
+looked like good news — a=0.2, J=1600, Y0 <= 3.17e-5 against the 2.45e-4 budget, 7.7x UNDER and
+the first time this side of the inequality has come in under target at a != 0 — was priced with
+the anchor's ||A||; correcting it (budget ~ 1/||A||) turns 7.7x under into ~3 orders over.
+**Both sides move the wrong way, by one mechanism.** The survival boundary gets a candidate
+mechanism (X_c falls 10.6 -> 3.1 -> 2.1 over a = 0.25..0.7 while the core half-width stays ~1)
+but the **a = 1/3 control kills the sharp arithmetic version** (p = 1/a hits the integer 2 at
+a = 1/2, tantalisingly at a*, but a = 1/3 with p = 3 shows no anomaly at all), so **v12 does
+NOT predict a\***. New solver/collocation_newton.py + test_collocation_newton.py (6/6; suite 19
+files green); fig30; BLOG/TECHNICAL_P2_ROUTED_V12.md. Everything below is banked + pushed on
+`main`. **NEXT — THE REPAIR, WHICH IS CHEAPER THAN WHAT IT REPLACES: beyond X_c the profile is
+exactly zero, so build the certificate on the FINITE INTERVAL [0, X_c] with X_c as an UNKNOWN.
+The far field — eleven legs of decay grading, resonances and tail bounds — disappears, because
+there is nothing out there. The price is the interior singularity at X_c, and the standard
+reason to expect it refundable is that the singular mode s^{-1/a} is precisely d/dX_c of the
+solution family: adding the free boundary as an unknown is the usual way an apparent
+singularity of a linearization stops being one. UNTESTED. KILL SWITCH, run it first: build the
+free-boundary system at ONE a and measure ||A|| against J. If the singular direction is not
+absorbed, ||A|| still diverges and the framing needs REPLACING, not repairing — at which point
+read the "IS THIS STILL THE RIGHT LANE?" box, which v12 has changed.** Read BOTH the "WHERE
+THIS SITS RELATIVE TO CLAY" section and that box before committing to another estimate leg.*
+
+*Before v12, in the same session: **Route-D v11 attacked the OTHER SIDE OF THE INEQUALITY** and
+retired a number the project had carried as physics for five legs. Every a != 0 profile had come
+from a GA over a small genome or from fixed-grid relaxation, and BOTH floor at ~1e-2; a Newton
+solve on the full grid reaches relres ~1e-14 at every a up to 0.5 — twelve orders. **The floor
+was the SEARCH, not the equation.** Newton also converged at a=0.8 and 1.0, which for an hour
+looked like "the survival boundary was a genome artifact all along"; it is not — machine
+precision on a DISCRETE system proves nothing by itself, and the grid-refinement table (spread
+in c over n=401/801/1601: 8e-4/3e-4/3e-5 at a=0/0.2/0.5 but 3.7e-3/1.3e-2 at a=0.8/1.0) shows
+the solutions are continuum objects only up to a ~ 0.5. **So the GA's a*~0.5-0.55 is confirmed a
+FOURTH time by a method with no genome, no search budget and no stochasticity** — and sharpened:
+below a*, an exact discrete traveling wave EXISTS. v11 read Y0's new binding constraint as
+"discretization-limited"; v12 found the discretization was not the problem either.*
 
 *Before v11, in the same session: **Route-D v10 earned the
 OTHER END OF THE BRACKET, and it changes what we know about the lane.** v9 ended by
@@ -160,18 +192,21 @@ L1 success is Clay progress in any load-bearing sense.
   (b) if the answer is "none — it makes L1 more rigorous or cheaper", is another L1 leg still
       the best use of the chunk, or is the marginal leg now worth less than switching lanes?
   (c) is there a cheaper experiment that would tell us the whole L1 route is dead?
-Route D has now had ELEVEN legs, which is a lot of L1. **v11 changed the shape of the question**
-— the 1e-2 floor was an artifact and exact discrete traveling waves exist for a < a*≈0.5, so L1
-is closer than it looked, but the binding constraint MOVED (to far-field discretization) rather
-than disappearing. Concrete trigger to reassess: **if two or three more legs do not produce a
-closed float budget at some a > 0, promote the alternative lanes** (the coupled-system HL
-two-stage leg; writing the whole P2 arc up as a community piece) from fallback to primary.
+Route D has now had TWELVE legs, which is a lot of L1. **v12 changed the question again, and not
+gently**: the a>0 profile ends at a finite radius, so the decay-graded space and every constant
+priced in it belong to the a=0 anchor, and ‖A‖ at the real profile DIVERGES with J. L1 is not
+"nearly closed with bad constants"; it is **mis-specified**, with a concrete and cheaper repair
+(finite interval + free boundary) that has not been tried. Concrete trigger to reassess: **run
+v13's kill switch FIRST (‖A‖ vs J in the free-boundary formulation). If the singular direction
+is not absorbed, promote the alternative lanes** (the coupled-system HL two-stage leg; writing
+the whole P2 arc up as a community piece) from fallback to primary — do not spend another leg
+re-pricing constants inside a framing that a three-minute ladder has already shown diverges.
 
 THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce known
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
-v1–v10 (fig19–fig28) are tooling + scoping/negative results + partial bounds on the way
+v1–v12 (fig19–fig30) are tooling + scoping/negative results + partial bounds on the way
 there, NOT certificates.**
 Level-3 = Clay.
 
@@ -186,18 +221,18 @@ figures/ stay central; writeup/README.md is the ordered index). Phase 1 (conclud
 negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
-v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, **§20 ROUTE-D v11 = newest**).
+v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, **§21 ROUTE-D v12 = newest**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
-ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),**ROUTED_V11(fig29)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),**ROUTED_V12(fig30)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
   §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
-  §18 Route-D v9, §19 Route-D v10, §20 Route-D v11 — all DONE + banked.
+  §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12 — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
@@ -564,52 +599,69 @@ the first time the requirement has been stated completely.
     the true norm is somewhere INSIDE the bracket, so 7.7× over-estimates the achievable gain;
     the lower bound is still a finite family; the budget is still CONDITIONAL.
 
-**IS THIS STILL THE RIGHT LANE? (v10 makes this QUANTITATIVE for the first time — read this
-box before choosing anything.)** The state, in numbers rather than impressions: budget
-**2.45e-4**; GA residual floor **~1e-2**; a perfect ‖A‖ bound buys **≤7.7×**; C_Q's own slack
-is **~4×** (v8 X2); three Z₁ items remain unpriced and each can only take budget AWAY. So the
-optimistic arithmetic is 2.45e-4 × 7.7 × 4 ≈ **7.5e-3 — just reaching the floor, with nothing
-spare, and only if BOTH remaining sharpenings are driven to perfection and the three open Z₁
-items cost nothing.** That is the honest ceiling of the whole approach as currently framed,
-and it is now measured rather than guessed. GOOD: it is not hopeless by orders of magnitude,
-which is what it looked like after v7; the structure has been stable for four legs; seven of
-ten constants are bounded and Z₂ is complete. BAD: there is no headroom. Any one of the three
-open items costing a factor of two closes the door.
+**IS THIS STILL THE RIGHT LANE? (v12 REPLACED THE QUESTION — read this box before choosing
+anything.)** Through v10 the box was an arithmetic problem: budget 2.45e-4, GA floor ~1e-2, a
+perfect ‖A‖ worth ≤7.7×, C_Q's slack ~4×, three unpriced Z₁ items — i.e. even perfect
+sharpening only just reached the floor with no headroom. v11 removed the floor (Newton, twelve
+orders). **v12 removed the arithmetic**: the a>0 profile ends at X_c ≈ e^{c/a}, so
+  * every constant in that arithmetic was priced at the a=0 ANCHOR, where the object has an
+    X^−2 tail and the decay grading makes sense;
+  * at the profile the certificate is actually about, **‖A‖ DIVERGES with J (J^+2.86) while the
+    anchor's is flat (J^−0.003)** — the approximate inverse does not exist in the limit;
+  * the codomain norm's far-field weight amplifies exactly the Gibbs ringing that a global
+    spectral basis leaves where a compactly supported profile is zero, so Y₀ measured there is
+    large and, at a=0.4, does not converge at all over a 16× refinement.
+So the honest state is NOT "close but short of headroom". It is **mis-specified, with a
+concrete repair**. GOOD: the repair is CHEAPER than what it replaces — on [0, X_c] with X_c a
+free-boundary unknown, the entire far-field programme (v3's resonance, v6's tail bound, v7–v9's
+estimates, v10's bracket) is replaced by "there is nothing out there", and the tooling to try
+it is a day's work on top of what exists. BAD: nobody has shown the interior singularity is
+absorbed by the free boundary, and if it is not, twelve legs of estimate machinery do not
+carry over in any form.
 **Three respectable calls, and they are genuinely different bets:**
-  (a) **Keep going on the constants** — C_sup first (elasticity ≈1, ~2× available per v6 B2's
-      bracket, and now with a measured ceiling on the payoff). Cheap, and the next 2× is the
-      one that decides whether the arithmetic above ever closes.
-  (b) **Attack the ARITHMETIC instead of the constants** — the floor is 1e-2 because a
-      FIXED-GRID dynamic relaxation floors the residual there (banked discipline lesson). A
-      better anchor profile (Newton on the profile equation rather than relaxation, or a
-      higher-order/adaptive discretization) could lower Y₀ itself by orders of magnitude, and
-      Y₀ is the OTHER side of the inequality. **Nobody has attacked this side in ten legs**, and
-      the elasticity of the closure decision with respect to Y₀ is exactly 1. This may now be
-      the highest-value brick in the project.
-  (c) **Stop the estimate grind, write the P2 arc up as one coherent community piece** (the
-      strongest artifact this project has) and spend the remaining swing on the coupled-system
-      HL two-stage question — the biggest genuinely-novel result left.
-**Recommendation: (b) then (a).** v10's arithmetic says the constants alone cannot close the
-gap; the anchor's residual is the only untouched factor of the four, and it is the one whose
-improvement is not bounded by a bracket we have already measured.
+  (a) **Do the repair** — the free-boundary formulation on [0, X_c], kill switch first.
+      Highest information per hour available anywhere in the project right now.
+  (b) **Stop the estimate lane and write the P2 arc up as one coherent community piece** (the
+      strongest artifact this project has: the 1D gCLM two-scale story, the three-part Route-D
+      negative, and now the profile-ends structure), then spend the remaining swing on the
+      coupled-system HL two-stage question — the biggest genuinely-novel result left.
+  (c) **Chase the structure itself as the result** — X_c ≈ e^{c/a}, the zero of order 1/a, and
+      what they say about the a-family, independently of any certificate. This is Level-1, but
+      it is the most novel thing v12 turned up and it may be publishable on its own.
+**Recommendation: (a)'s kill switch FIRST (three minutes of compute), then (a) if it passes and
+(b)+(c) if it does not.** Do not price another constant until the ladder says the operator
+exists.
 
-THE RECOMMENDED NEXT BRICKS, in the order v10's arithmetic implies:
-  (1) **LOWER Y₀ — the untouched side.** The 1e-2 floor is a property of fixed-grid dynamic
-      relaxation, not of the profile. A Newton solve on the profile equation in the SAME
-      collocation basis the bounds use, or an adaptive/higher-order grid, plausibly buys orders
-      of magnitude — and Y₀ enters the radii polynomial linearly. Gate it the usual way: the
-      a=0 anchor has an EXACT closed form (Ω = −1/(1+X²), c = ½), so a Newton solver can be
-      validated against a known answer before it is trusted anywhere near a≠0.
-  (2) **C_sup, the two-point dual** — elasticity ≈1, untouched since v6, ~2× available. The
-      dual currently minimises over a SUBSET of reference indices m₀ (valid but lossy), and the
-      slack is in the two-point inequality itself.
-  (3) The core↔far cutoff commutator [H, φ] — the last structural piece of Z₁.
-  (4) The change of ansatz h=(1+X²)^{−α/2}p(θ) (v7 V6).
-  (5) The core discretization error (v4 W6).
-ONLY when Y₀, Z₀, Z₁, Z₂ are ALL real upper bounds should the float radii polynomial be
-assembled, and the same stopping rule applies: **if it does not close in float with margin,
-STOP, do not harden.** solver/interval.py has existed since v1 and has still never been
-pointed at any of this — correctly, because nothing has closed in float.
+THE RECOMMENDED NEXT BRICKS, in the order v12 implies:
+  (1) **THE KILL SWITCH.** Free-boundary system on [0, X_c] at ONE a (0.3 is well resolved):
+      unknowns (Ω on a fixed reference interval, c, X_c), with Ω(X_c)=0 and the leading-order
+      behaviour s^{1/a} built in or resolved. Measure ‖A‖ against J. Flat ⇒ the framing is
+      repaired and the far field is gone; still divergent ⇒ report it and switch lanes.
+  (2) **Y₀ IN THE REPAIRED SPACE.** With no far field, the codomain norm loses the weight that
+      was amplifying the ringing; re-measure the defect and see whether the a=0.2 result
+      survives contact with an honest ‖A‖.
+  (3) **THE STRUCTURE AS A RESULT.** X_c(a) with the constant in e^{c/a} measured rather than
+      assumed (use the profile's own m = ∫Ω and U₀, not the anchor's); whether the a→a*
+      collapse of X_c has an accumulation point; whether the same mechanism appears in the HL
+      model. Cheap, Level-1, and the most novel thing on the table.
+  (4) Still open and now clearly secondary: C_sup's two-point dual; the core↔far commutator;
+      the ansatz change h=(1+X²)^{−α/2}p(θ) — all three are ANCHOR-side items, and v12 says
+      anchor-side items are not the binding constraint.
+ONLY when Y₀, Z₀, Z₁, Z₂ are ALL real upper bounds AT THE PROFILE BEING CERTIFIED should the
+float radii polynomial be assembled, and the same stopping rule applies: **if it does not close
+in float with margin, STOP, do not harden.** solver/interval.py has existed since v1 and has
+still never been pointed at any of this — correctly, because nothing has closed in float.
+
+SUPERSEDED (kept for the record) — the v12 spec, which this session executed: **"carry the
+Newton profile into the θ-collocation basis the bounds live in and measure Y₀ THERE (the v11
+number is in the Route-A ρ-discretization; they are different objects)."** Outcome: the task was
+right and the MOTIVE was too small. The spec expected a number; what the carry-over produced was
+a change of subject, because measuring in the right basis is also the first time anyone had
+looked at the a>0 profile's far field with an instrument that could see it. Worth remembering:
+**"measure X in the right place" specs are cheap and they are how mis-specifications surface —
+the reason to run one is not the number it returns.** Also banked: the spec's own framing
+("Y₀ is DISCRETIZATION-limited") was wrong in an instructive way — the discretization was fine;
+the SPACE was wrong.
 
 SUPERSEDED (kept for the record) — the v10 spec, which this session executed: **"a REAL LOWER
 BOUND on ‖A‖ — do this FIRST; without one, no bracket in this project can be attributed."**
@@ -666,11 +718,12 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 18 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (all 19 green): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
 test_nk_hilbert_holder.py (6/6) + test_nk_hilbert_pointwise.py (6/6) +
-test_op_lower.py (6/6) + **test_profile_newton.py (6/6, NEW)** +
+test_op_lower.py (6/6) + test_profile_newton.py (6/6) +
+**test_collocation_newton.py (6/6, NEW — ~3 s)** +
 test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
@@ -684,7 +737,8 @@ Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic too
 probes get a clearly-labelled non-logged entry too, as §10–§20 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{p2_route_d_v11_evidence.py(fig29), p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
+writeup/4_p2_lottery/{**p2_route_d_v12_evidence.py(fig30)**, p2_route_d_v11_evidence.py(fig29),
+p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
 p2_route_d_v8_evidence.py(fig26),
 p2_route_d_v7_evidence.py(fig25),
 p2_route_d_v6_evidence.py(fig24),
@@ -842,14 +896,29 @@ upper bound, with three constants still open. The individual numbers are fine; t
 is the result, and it says the approach needs constants that are roughly SHARP, not merely
 bounded. **Plot your own budget history across legs — the trend is a cheaper decision
 procedure than any single leg's number.**
+ **NEW from §21 — the three that
+this leg cost:** (29) **A constant is attached to a POINT, not to a problem.** Seven of ten
+ledger constants were bounded — all at the a=0 anchor, because that is where the exact solution
+is, and nobody ever wrote down that the certificate needs them at the a≠0 PROFILE instead. One
+J-ladder at the real profile turned "bounded" into "divergent" (J^+2.86 vs the anchor's
+J^−0.003). Before pricing anything, write down the point at which the price is quoted, and
+re-run the ladder there. (30) **A number that is under budget is not a result until the budget
+was computed for the same object.** v12's a=0.2 defect came in 7.7× under and looked like the
+leg's headline for half an hour; the budget it beat was the anchor's. (31) **When a measurement
+misbehaves in TWO ways at once, stop measuring and ask what object you are looking at.** The
+weighted defect was non-monotone in a AND its arg-max was pinned to the domain edge at every a.
+Either alone is a shrug; together they were one fact (the profile ends, and a global spectral
+basis rings where it should be flat). The temptation was to fix the measurement.
 
-HONEST CEILING (say it out loud): Route-D v3–v10 are validated tooling + a no-go theorem, a
-confirmed price, a second structural requirement, a space that meets every requirement
-identified so far, upper bounds for seven of ten constants (a COMPLETE Z₂ and the whole of
-‖A‖), one disqualified method, a budget that lost two orders of magnitude to honesty and has
-been flat for three legs, and — as of v10 — a MEASURED bracket (7.7× at the operating point)
-plus the arithmetic it implies: even perfect sharpening of both remaining constants only just
-reaches the residual floor, with no headroom. They do NOT climb the rigor ladder. Everything in it is plain
+HONEST CEILING (say it out loud): Route-D v3–v12 are validated tooling + a no-go theorem, a
+confirmed price, a second structural requirement, a space that met every requirement identified
+up to v11, upper bounds for seven of ten constants (a COMPLETE Z₂ and the whole of ‖A‖) — **all
+of them at the a=0 ANCHOR** — one disqualified method, a budget that lost two orders of
+magnitude to honesty, a measured bracket, and, as of v12, the finding that the object those
+constants were meant to certify **is not in the space they were computed in**: the a>0 profile
+ends at a finite radius, and the approximate inverse at that profile diverges with J while the
+anchor's is flat. The programme has a concrete, cheaper repair (finite interval + free
+boundary) and no evidence yet that it works. They do NOT climb the rigor ladder. Everything in it is plain
 float64: nothing is interval-enclosed, nothing is rigorous. Even the eventual success it
 scouts is a computer-assisted TOY-MODEL certification (Chen–Hou / Gómez-Serrano genre),
 NOT a Clay solve. 1D HL is a toy model (boundary behaviour of Hou–Luo /
