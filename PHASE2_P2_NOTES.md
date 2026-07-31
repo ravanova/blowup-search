@@ -179,6 +179,22 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## enough on its own** (it would also need C_Q's ~4x, and the two together only just reach the floor
 ## with nothing spare for the three open Z1 items). New solver/op_lower.py + test_op_lower.py (6/6;
 ## suite 17 files green); fig28; BLOG/TECHNICAL_P2_ROUTED_V10.md. NOT a certificate.**
+## **ROUTE-D v11 DONE (§20, 2026-07-31): NEWTON ON THE PROFILE. Unknowns (Omega,c), TWO gauges
+## (the a=0 zero set is the 2-parameter family A/(1+BX^2), so one gauge leaves the Jacobian
+## singular and a direct solve crawls to 1.8e-6 in 40 iterations; two in least squares reach
+## 2e-15 in 5). **The ~1e-2 residual floor that section 9 read as a property of the problem is a
+## property of the SEARCH: Newton reaches machine precision, TWELVE orders below it**, for every a
+## below the boundary. Newton also converged at large a — which for an hour looked like "the
+## boundary is a genome artifact" — but **the grid test overturns that**: spread in c across
+## n=401/801/1601 is 3e-5 at a=0.5 and 1.3e-2 at a=1.0, with only 1 of 3 grids converging there,
+## so the large-a successes are solver artifacts and **the GA's a*~0.5-0.55 stands, confirmed a
+## FOURTH time by a genome-free method**. What it does to Y0 is a change of BINDING CONSTRAINT,
+## not a solved problem: the certificate sees the WEIGHTED sup defect, which is 6+ orders larger
+## (1e-8..1e-7 typically, 1.5e-2 at a=0.45, ABOVE the 2.45e-4 budget) because the codomain weight
+## amplifies the far field where the truncation lives. **Y0 is no longer SEARCH-limited, it is
+## DISCRETIZATION-limited** — already a ledger item, and a much better problem to have. New
+## solver/profile_newton.py + test_profile_newton.py (6/6; suite 18 files green); fig29;
+## BLOG/TECHNICAL_P2_ROUTED_V11.md. NOT a certificate.**
 
 After Spike 1 (the 2D Boussinesq dynamic-rescaling machine, which reproduced the *proven*
 Chen–Hou regular profile), we scoped P2 = the actual novelty frontier. Decision (with the
@@ -1192,4 +1208,57 @@ NEXT: (1) **C_sup, the two-point dual** — elasticity ≈1 (v9 Y5), untouched s
 measured ceiling on the payoff; (2) the core↔far cutoff commutator [H,φ]; (3) the change of ansatz
 h=(1+X²)^{−α/2}p(θ); (4) the core discretization. **AND A STANDING RULE EARNED HERE: a bracket is
 two numbers and BOTH have to be earned before any decision is made from it.**
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
+
+## §20 — ROUTE-D v11 DONE (2026-07-31): NEWTON ON THE PROFILE — the 1e-2 residual floor was the
+## SEARCH, not the equation (12 orders); the survival boundary a*≈0.5 SURVIVES a fourth,
+## genome-free confirmation; and Y₀'s binding constraint moves from SEARCH to DISCRETIZATION.
+
+The §19 "next brick", item (1) — the other side of the inequality. Built solver/profile_newton.py
++ test_profile_newton.py 6/6 (suite now **18 files green**); experiments/p2_route_d_v11_anchor.py →
+writeup/data/p2_route_d_v11_anchor.json → fig29. NOT a logged Tier run (deterministic Newton, no
+GA, no seeds). BLOG/TECHNICAL_P2_ROUTED_V11.md.
+
+**WHY:** v10 measured that the constants alone cannot close the gap (7.7× × 4× only just reaches
+the 1e-2 floor, nothing spare). Y₀ enters the radii polynomial LINEARLY and had never been
+attacked — every a≠0 profile came from a GA over a small genome or fixed-grid relaxation, both of
+which floor at ~1e-2.
+
+SIX evidence pieces (do not relearn):
+  V0 **TWO GAUGES, NOT ONE.** The a=0 zero set is the two-parameter family A/(1+BX²) (§9), which
+     v1 Q2 already found: one gauge leaves the Jacobian SINGULAR and a direct solve crawls to
+     **1.8e-6 in 40 iterations**; two gauges in least squares reach **2e-15 in 5**. Analytic
+     Jacobian gated against finite differences to 6.6e-11.
+  V1 **THE KNOWN-ANSWER GATE, read correctly.** At a=0 Newton finds a zero of the DISCRETE system
+     (1.1e-15) while the **exact continuum anchor scores 7.7e-9 on the same equations** — its own
+     discretization error. **A solver that reproduced the continuum profile exactly would be
+     reporting something impossible.**
+  V2 **THE FLOOR WAS THE SEARCH: 12 ORDERS.** relres 9.7e-15 (a=0) … 2.0e-14 (a=0.5) vs the GA /
+     relaxation ~1e-2 at every a. The banked discipline lesson ("fixed-grid dynamic relaxation
+     FLOORS the residual ~1e-2") is about the METHOD, and §9 read it as being about the problem.
+  V3/V4 **THE CHECK THAT DECIDES, AND THE BOUNDARY THAT SURVIVES.** Newton also converged at large
+     a — for an hour that looked like "the boundary is a genome artifact". **It is not.** Machine
+     precision on a DISCRETE system proves nothing alone; the test is whether the SOLUTION stops
+     moving with n. Spread in c over n=401/801/1601: **8e-4 (a=0) / 3e-4 (0.2) / 3e-5 (0.5) /
+     3.7e-3 (0.8) / 1.3e-2 (1.0)**, and grids reaching machine precision 3/3/2/**1**/**1**. So
+     solutions are continuum objects up to **a ≈ 0.5** and not beyond: **the GA's a*≈0.5–0.55
+     confirmed a FOURTH time, now by a method with no genome, no search budget and no
+     stochasticity** — and sharpened: below a*, an exact discrete traveling wave EXISTS.
+  V5 **WHAT IT DOES TO Y₀ — a change of BINDING CONSTRAINT, not a solved problem.** The
+     certificate does not see the RMS; it sees the **weighted sup defect** sup(1+X²)^{(α+1)/2}|R₂|,
+     which is **6+ orders larger** (the codomain weight amplifies exactly the far field where the
+     truncation lives) and **not uniformly under the budget**: 2.3e-14 (a=0.1) / 1.1e-8 (0.2) /
+     2.2e-7 (0.3) / **1.5e-2 (0.45, ABOVE the 2.45e-4 budget)** / 7.5e-7 (0.5). **Y₀ is no longer
+     SEARCH-limited; it is DISCRETIZATION-limited** — which is already a ledger item (Z₁ core
+     discretization, v4 W6 measured J^−2.1..−2.6 and never bounded it). "Find a better profile"
+     was the wrong problem; "control the far-field discretization of a profile we can now compute
+     exactly" is the right one, and it is a statement about a KNOWN OBJECT rather than a search.
+
+NEXT: (1) **carry the Newton profile into the θ-collocation basis the bounds live in and measure
+Y₀ there** (the number above is in the Route-A ρ-discretization; the two are different);
+(2) **price the core discretization error** — now the binding item for Y₀; (3) C_sup (elasticity
+≈1, ~2× available); (4) the core↔far commutator. **LESSON: a number that appears in every
+measurement is the hardest instrument artifact to see — we carried 1e-2 for five legs as physics
+when both tools producing it shared the same weakness. And the thing that stopped the correction
+becoming an over-claim was one table: refine the grid, see whether the answer moves.**
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.

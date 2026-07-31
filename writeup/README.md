@@ -27,7 +27,7 @@ writeup/
   1_gclm_1d/       the completed 1D gCLM pipeline (Level-0/1)        figs 1–5
   2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
   3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
-  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–24
+  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–29
 ```
 
 ## The rigor ladder (the project's framing)
@@ -166,6 +166,15 @@ writeup/
     to **7.7× at the operating point**, and yields the project's first **measured
     ceiling** on what sharpening can buy: budget `2.45e-4 → 1.88e-3`, ~5× short of
     the residual floor rather than 40×. *(fig 28)*
+30. [TECHNICAL_P2_ROUTED_V11.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V11.md) ·
+    [BLOG_P2_ROUTED_V11.md](4_p2_lottery/BLOG_P2_ROUTED_V11.md) — **Route-D v11**:
+    the *other side of the inequality*. A Newton solve on the profile equation
+    reaches `relres ~1e-14` where the GA and the relaxation both floored at `1e-2`
+    — **twelve orders; that floor was the search, not the equation**. A grid-refinement
+    table keeps the correction from becoming an over-claim: solutions stop moving with
+    `n` only up to `a ≈ 0.5`, so the survival boundary **survives a fourth, genome-free
+    confirmation**. `Y₀`'s binding constraint moves from *search* to *discretization*.
+    *(fig 29)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -200,6 +209,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig29_route_d_v11_anchor.png` | 4 | P2 — Route-D v11: Newton's residual 12 orders below the GA floor, the grid-refinement table that pins the survival boundary at `a ≈ 0.5` without a genome, and the weighted sup defect against the budget |
 | `fig28_route_d_v10_lower.png` | 4 | P2 — Route-D v10: the sign-pattern baseline degrading with `J`, the bracket collapsing 50×→16× and 7.7× at the operating point, the far-field extremizer, brackets across the map, and the measured ceiling on sharpening |
 | `fig23_p2_route_d_v5_holder.png` | 4 | P2 — Route-D v5: the square-wave adversary defused in the Hölder norm, the two interior optima (one per grading), the surviving marginal direction at the critical decay rate, and the quadratic constant before/after |
 | `fig22_p2_route_d_v4_graded.png` | 4 | P2 — Route-D v4: the third build reproduces the negative and the repair, the compact core costs ~nothing (far-field law within 6%), the conjugate-extremal family showing the quadratic is unbounded in sup norms (and random sampling missing it), and the confirmed price |
@@ -221,6 +231,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_d_v11_anchor.json` | Arc 4 / fig29 — V0 the two-gauge requirement, V1 the known-answer gate read correctly, V2 the residual 12 orders below the GA floor, V3/V4 the grid-refinement table and the surviving boundary, V5 the weighted sup defect vs the budget |
 | `p2_route_d_v10_lower.json` | Arc 4 / fig28 — W1 the lower-bound ladder vs the baseline, W2 the operating-point bracket, W3 the extremizer's shape, W4 brackets across the map, W5 the measured ceiling on sharpening, W6 the ledger |
 | `p2_route_d_v5_holder.json` | Arc 4 / fig23 — U1 the defusal of the v4 adversary, U2 the Hölder constant of `H` vs `γ`, U3/U3b/U3c the inverse over `(α,γ)` and the critical-direction isolation, U4 the quadratic in the two-graded pair, U5 the joint optimum |
 | `p2_route_d_v4_graded.json` | Arc 4 / fig22 — W1 the third-build reproduction, W2 the core's contribution vs the far-field law, W3 the conjugate-extremal quadratic divergence + the random control, W4 the confirmed `Z₂`/budget ceiling, W5 the gauge/drop-row operational finding, W6 the quantified (not bounded) `Z₁`-analogue |
@@ -245,6 +256,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v7_evidence.py         # fig25
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v8_evidence.py         # fig26
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v9_evidence.py         # fig27
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_v11_evidence.py        # fig29
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
@@ -258,6 +270,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python experiments/p2_route_d_v8_quadratic.py
 .venv/bin/python experiments/p2_route_d_v9_sharpen.py
 .venv/bin/python experiments/p2_route_d_v10_lower.py
+.venv/bin/python experiments/p2_route_d_v11_anchor.py
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

@@ -1,6 +1,35 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-07-31 (updated after Route-D v10). **NEWEST LEG FIRST — Route-D v10 earned the
+*Written 2026-07-31 (updated after Route-D v11). **NEWEST LEG FIRST — Route-D v11 stopped
+polishing the constants and attacked the OTHER side of the inequality, and it retired a number
+this project had carried as physics for five legs.** v10 had measured the ceiling on sharpening
+(a perfect ‖A‖ buys 7.7×, C_Q's slack ~4×, together only just reaching the 1e-2 residual floor
+with nothing spare) — which is exactly the point at which you stop polishing the left-hand side.
+Y₀ enters the radii polynomial LINEARLY and had never been attacked in eleven legs: every a≠0
+profile came from a GA over a small genome or from fixed-grid relaxation, and BOTH floor at
+~1e-2. **A Newton solve on the full grid reaches relres ~1e-14 at every a up to 0.5 — twelve
+orders. The floor was the SEARCH, not the equation**, and §9 had read the banked discipline
+lesson about it as a fact about the problem. Newton also converged at a=0.8 and 1.0, which for
+an hour looked like "the survival boundary was a genome artifact all along"; **it is not** —
+machine precision on a DISCRETE system proves nothing by itself, and the grid-refinement table
+(spread in c over n=401/801/1601: 8e-4 / 3e-4 / 3e-5 at a=0/0.2/0.5 but 3.7e-3 / 1.3e-2 at
+a=0.8/1.0, grids reaching machine precision 3/3/2/1/1) shows the solutions are continuum objects
+only up to a≈0.5. **So the GA's a*≈0.5–0.55 is confirmed a FOURTH time, now by a method with no
+genome, no search budget and no stochasticity — and sharpened: below a*, an exact discrete
+traveling wave EXISTS.** What it does to Y₀ is a change of BINDING CONSTRAINT, not a solved
+problem: the certificate sees the WEIGHTED SUP defect, 6+ orders larger than the RMS and NOT
+uniformly under budget (**1.5e-2 at a=0.45 against a 2.45e-4 budget**), so **Y₀ is now
+DISCRETIZATION-limited rather than SEARCH-limited** — which is already a ledger item (Z₁ core
+discretization, v4 W6 measured J^−2.1..−2.6 and never bounded it). New solver/profile_newton.py
++ test_profile_newton.py (6/6; suite 18 files green); fig29; BLOG/TECHNICAL_P2_ROUTED_V11.md.
+Everything below is banked + pushed on `main`. **Next: (1) carry the Newton profile into the
+θ-collocation basis the bounds live in and measure Y₀ THERE (the v11 number is in the Route-A
+ρ-discretization; they are different objects); (2) price the core discretization error, now the
+binding item for Y₀; (3) C_sup (elasticity ≈1, ~2× available); (4) the core↔far commutator. Read
+BOTH the "WHERE THIS SITS RELATIVE TO CLAY" section and the "IS THIS STILL THE RIGHT LANE?" box
+before committing to another estimate leg.***
+
+*Before v11, in the same session: **Route-D v10 earned the
 OTHER END OF THE BRACKET, and it changes what we know about the lane.** v9 ended by
 admitting that every bracket this project quotes has a lower end that is a maximum over SIGN
 PATTERNS — nearly meaningless — so "the bound is 50× too big" and "the operator really is
@@ -94,6 +123,50 @@ re-runs). **WORKFLOW (current session mode): work autonomously in chunks; at the
 each chunk write a BLOG + TECHNICAL writeup with data + figure, update this
 continuation prompt, and push to `main`; then pick up the next chunk and repeat.**
 
+**WHERE THIS SITS RELATIVE TO CLAY (standing section — the user asked for this to be carried
+forward explicitly, and for it to be RE-ANSWERED, not just re-pasted, at the end of every leg).**
+
+YES, the Clay problem is still the end goal, and NO, nothing in Route D is a step whose success
+would resolve it. Both halves are true at once and must be stated together. The honest way to
+hold them is a CHAIN — write down every link that would have to be forged between here and
+Clay, and after each leg say which link it moved:
+
+  L1  a certified (Level-2, computer-assisted) self-similar blow-up profile for the 1D gCLM/HL
+      toy model at some a > 0.                     <- WHERE THE WORK IS NOW; NOT YET DONE
+  L2  the same for a model with a genuine 2D/3D mechanism (2D Boussinesq / axisymmetric Euler
+      with boundary) — Chen–Hou territory.         <- already done by others for specific data;
+      our contribution there would be a new profile or a new method, not the first result
+  L3  a certified blow-up for 3D EULER without boundary or symmetry crutches.   <- open frontier
+  L4  the same for 3D NAVIER–STOKES, where viscosity must be beaten at small scales. <- Clay
+  These arrows are not increments. L2→L3 and L3→L4 are each widely regarded as harder than
+  everything below them combined. **We are inside L1 and have not finished it.**
+
+TWO STRUCTURAL WALLS (CLAY_ROADMAP.md §2 — about the problem, not our effort; no amount of good
+work removes them):
+  * A search/certification programme can only ever argue FOR blow-up. If 3D NS is globally
+    smooth — which many experts lean toward — this direction is empty by construction.
+  * The only rigorous-proof technology that exists (validated/interval numerics) works on models
+    simple enough for interval arithmetic. 3D NS is far outside its reach. A Tier-3 result is
+    attainable ONLY on toy models, and toy models are not Clay.
+
+SO WHAT THIS PROGRAMME IS REALISTICALLY FOR: a novel Tier-3 (Level-2 certified) result on a toy
+model where blow-up is provable — a genuine, publishable contribution and a stepping stone —
+with Clay as a distal ~0.05% horizon. That is the user's standing steer and it has not changed.
+Say the honest version out loud in every writeup; never let a good leg drift into implying that
+L1 success is Clay progress in any load-bearing sense.
+
+**GATE-CHECK BEFORE EACH NEW BRICK (answer it in the leg's writeup, don't just re-paste it):**
+  (a) which link of the chain does this move, and how far?
+  (b) if the answer is "none — it makes L1 more rigorous or cheaper", is another L1 leg still
+      the best use of the chunk, or is the marginal leg now worth less than switching lanes?
+  (c) is there a cheaper experiment that would tell us the whole L1 route is dead?
+Route D has now had ELEVEN legs, which is a lot of L1. **v11 changed the shape of the question**
+— the 1e-2 floor was an artifact and exact discrete traveling waves exist for a < a*≈0.5, so L1
+is closer than it looked, but the binding constraint MOVED (to far-field discretization) rather
+than disappearing. Concrete trigger to reassess: **if two or three more legs do not produce a
+closed float budget at some a > 0, promote the alternative lanes** (the coupled-system HL
+two-stage leg; writing the whole P2 arc up as a community piece) from fallback to primary.
+
 THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce known
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
@@ -113,18 +186,18 @@ figures/ stay central; writeup/README.md is the ordered index). Phase 1 (conclud
 negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
-v2, §12–§18 ROUTE-D v3–v9, **§19 ROUTE-D v10 = newest**).
+v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, **§20 ROUTE-D v11 = newest**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
-ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),**ROUTED_V10(fig28)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),**ROUTED_V11(fig29)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
   §8 B1 (Scenario-2), §9 GA framework, §9-cont two-scale a-sweep (5/6), §9-cont2
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
-  §18 Route-D v9, §19 Route-D v10 — all DONE + banked.
+  §18 Route-D v9, §19 Route-D v10, §20 Route-D v11 — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited (§9-cont2 earned this via GA-/genome-/basis-convergence).
 
@@ -593,11 +666,12 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 17 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (all 18 green): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
 test_nk_hilbert_holder.py (6/6) + test_nk_hilbert_pointwise.py (6/6) +
-**test_op_lower.py (6/6, NEW)** + test_gclm_family.py (12/12) +
+test_op_lower.py (6/6) + **test_profile_newton.py (6/6, NEW)** +
+test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
 experiments/ need the `sys.path.insert(0, dirname(dirname(abspath(__file__))))`
@@ -607,10 +681,10 @@ Solver dev + unit tests + DETERMINISTIC scoping probes are NOT "logged gate runs
 three Route-D probes are deterministic — no predicate lock needed); still add each new
 solver test to the suite. Papers/ gitignored ([HQW25]=arXiv:2401.14615 →
 Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic tooling
-probes get a clearly-labelled non-logged entry too, as §10–§19 did).
+probes get a clearly-labelled non-logged entry too, as §10–§20 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
+writeup/4_p2_lottery/{p2_route_d_v11_evidence.py(fig29), p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
 p2_route_d_v8_evidence.py(fig26),
 p2_route_d_v7_evidence.py(fig25),
 p2_route_d_v6_evidence.py(fig24),

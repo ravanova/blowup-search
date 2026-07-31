@@ -3,6 +3,65 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v11: Newton on the profile, and the number we carried for five legs (non-logged) — 2026-07-31
+
+**NOT a logged gate run** (deterministic Newton; no GA, no seeds, no predicate lock).
+Data `writeup/data/p2_route_d_v11_anchor.json` (regen
+`python experiments/p2_route_d_v11_anchor.py`); figure fig29
+(`writeup/4_p2_lottery/p2_route_d_v11_evidence.py`); writeups
+TECHNICAL/BLOG_P2_ROUTED_V11; PHASE2_P2_NOTES.md §20. Code:
+`solver/profile_newton.py` + `test_profile_newton.py` (6/6; suite now 18 files green).
+
+What a human would want to know:
+
+- **Why this leg instead of another constant.** v10 measured the ceiling on sharpening:
+  a perfect ‖A‖ buys 7.7×, C_Q's slack is ~4×, and the two together only just reach the
+  1e-2 residual floor with nothing spare for the three open Z₁ items. That is the point
+  at which you stop polishing the left-hand side and look at the right. Y₀ enters the
+  radii polynomial LINEARLY and had never been attacked in eleven legs.
+
+- **The number we had been carrying as physics.** Every a≠0 profile in this project came
+  from a GA over a small parametric genome or from fixed-grid dynamic relaxation, and both
+  floor at ~1e-2. We had a banked discipline lesson saying exactly that — and §9 read it
+  as a fact about the PROBLEM. Newton has no genome and no relaxation dynamics: it reaches
+  **relres ~1e-14 at every a up to 0.5**. Twelve orders. The floor was the search.
+
+- **The hour where it looked like a bigger result than it is.** Newton also converged at
+  a = 0.8 and a = 1.0, which briefly read as "the survival boundary was a genome artifact
+  all along" — a much louder claim, and wrong. Machine precision on a DISCRETE system
+  proves nothing by itself; the test is whether the SOLUTION stops moving when you refine.
+  Spread in c over n = 401/801/1601 is 8e-4 / 3e-4 / 3e-5 at a = 0 / 0.2 / 0.5 but
+  3.7e-3 / 1.3e-2 at a = 0.8 / 1.0, with grids reaching machine precision 3/3/2/1/1. So
+  the solutions are continuum objects up to a ≈ 0.5 and not beyond. **The GA's a*≈0.5–0.55
+  is confirmed a fourth time, now by a method with no genome, no search budget and no
+  stochasticity** — and sharpened, because below a* an exact discrete traveling wave
+  demonstrably exists. One table stopped a correction from becoming an over-claim.
+
+- **The known-answer gate has to be read the right way round.** At a = 0 Newton finds a
+  zero of the DISCRETE system (1.1e-15) while the exact continuum anchor scores 7.7e-9 on
+  those same equations — its own discretization error. A solver that reproduced the
+  continuum profile exactly would be reporting something impossible.
+
+- **What it actually does to Y₀: it changes the binding constraint, it does not solve it.**
+  The certificate does not see the RMS; it sees the weighted sup defect
+  sup(1+X²)^{(α+1)/2}|R₂|, and the codomain weight amplifies exactly the far field where
+  the truncation error lives. That number is 6+ orders larger and NOT uniformly under
+  budget: 2.3e-14 at a=0.1, but **1.5e-2 at a=0.45, against a 2.45e-4 budget**. So Y₀ is
+  no longer SEARCH-limited, it is DISCRETIZATION-limited — which is already a ledger item
+  (Z₁ core discretization, measured J^−2.1..−2.6 in v4 and never bounded). "Find a better
+  profile" was the wrong problem; "control the far-field discretization of a profile we can
+  now compute exactly" is the right one, and it is a question about a KNOWN object rather
+  than about a search.
+
+- **The lesson worth keeping.** A number that shows up in every measurement is the hardest
+  instrument artifact to see. We had two independent tools agreeing on 1e-2 for five legs —
+  and they agreed because they shared a weakness, not because they were right. Two tools
+  are only a check if they fail differently.
+
+- **Honest ceiling.** Plain float64; nothing interval-enclosed, nothing rigorous. This does
+  not climb the rigor ladder — it moves one constraint from a place we could not attack to
+  a place we already have a ledger item for. Clay odds unchanged (~0.05%).
+
 ## Phase-2 P2 — ROUTE-D v10: a lower bound worth reading, and the first measured ceiling (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v10_lower.json`

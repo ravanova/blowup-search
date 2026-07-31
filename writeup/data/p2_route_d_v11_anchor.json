@@ -1,0 +1,497 @@
+{
+  "meta": {
+    "leg": "P2 Route-D v11 (Newton on the two-scale profile: the other side of the inequality)",
+    "tier": "Level-1 tooling + a structural positive (NOT a certificate)",
+    "reproduce": "python experiments/p2_route_d_v11_anchor.py",
+    "arithmetic": "plain float64; Newton with an exact analytic Jacobian, gated against the closed-form a = 0 traveling wave"
+  },
+  "v1_known_answer": {
+    "n": 801,
+    "exact_continuum_rms_on_the_grid": 7.729346205965768e-09,
+    "newton_rms": 1.0717169642907556e-15,
+    "newton_c": 0.49797101341035727,
+    "iterations": 7,
+    "profile_difference": 0.00203312828817781,
+    "history": [
+      0.0672406780791443,
+      0.015656279619249584,
+      0.0028638728633899194,
+      5.4524837006606726e-05,
+      3.3761936963946934e-08,
+      4.3558335586085435e-13,
+      1.0717169642907556e-15,
+      1.0717169642907556e-15
+    ],
+    "reading": "Newton finds a zero of the DISCRETE system, which is not the continuum solution: the exact anchor scores its own discretization error on the same equations.  That is the correct behaviour and it is the first thing to check, because a solver that reproduced the continuum profile exactly would be reporting something impossible."
+  },
+  "v2_sweep": {
+    "n": 801,
+    "rows": [
+      {
+        "a": 0.0,
+        "converged": true,
+        "residual_rms": 1.144972129028598e-15,
+        "relres": 9.71364255399854e-15,
+        "c": 0.4979710520289264,
+        "iterations": 4,
+        "weighted_defect": 2.0404871804230019e-10
+      },
+      {
+        "a": 0.05,
+        "converged": true,
+        "residual_rms": 9.779121629431756e-15,
+        "relres": 8.228304860678187e-14,
+        "c": 0.5106627353185929,
+        "iterations": 4,
+        "weighted_defect": 2.4736761103063177e-09
+      },
+      {
+        "a": 0.1,
+        "converged": true,
+        "residual_rms": 1.0550920220426727e-15,
+        "relres": 8.80510887890354e-15,
+        "c": 0.5236204989988199,
+        "iterations": 5,
+        "weighted_defect": 2.340496906495767e-14
+      },
+      {
+        "a": 0.15,
+        "converged": true,
+        "residual_rms": 4.2864281691009085e-15,
+        "relres": 3.5459813222820815e-14,
+        "c": 0.5382793544665451,
+        "iterations": 4,
+        "weighted_defect": 8.957136730252033e-08
+      },
+      {
+        "a": 0.2,
+        "converged": true,
+        "residual_rms": 3.24421702703017e-15,
+        "relres": 2.6604720377084077e-14,
+        "c": 0.5532899459876917,
+        "iterations": 4,
+        "weighted_defect": 1.0825507624473443e-08
+      },
+      {
+        "a": 0.25,
+        "converged": true,
+        "residual_rms": 2.591480161161309e-15,
+        "relres": 2.1068009284589843e-14,
+        "c": 0.5686479400838558,
+        "iterations": 4,
+        "weighted_defect": 1.287720593592463e-07
+      },
+      {
+        "a": 0.3,
+        "converged": true,
+        "residual_rms": 1.9652139684112228e-14,
+        "relres": 1.5839384616083975e-13,
+        "c": 0.5843482126956117,
+        "iterations": 4,
+        "weighted_defect": 2.1678555931462193e-07
+      },
+      {
+        "a": 0.35,
+        "converged": true,
+        "residual_rms": 7.991892621985998e-13,
+        "relres": 6.407111953361836e-12,
+        "c": 0.5921808110066537,
+        "iterations": 40,
+        "weighted_defect": 2.299174862774721e-05
+      },
+      {
+        "a": 0.4,
+        "converged": true,
+        "residual_rms": 1.2072980103027915e-15,
+        "relres": 9.604316741393971e-15,
+        "c": 0.6065912180003867,
+        "iterations": 13,
+        "weighted_defect": 2.3745410710865122e-08
+      },
+      {
+        "a": 0.45,
+        "converged": true,
+        "residual_rms": 2.0272985790982867e-10,
+        "relres": 1.6005288648836091e-09,
+        "c": 0.6212128887282526,
+        "iterations": 40,
+        "weighted_defect": 0.015195816195658364
+      },
+      {
+        "a": 0.5,
+        "converged": true,
+        "residual_rms": 2.4948780036196606e-15,
+        "relres": 1.955004123530594e-14,
+        "c": 0.6360371993769819,
+        "iterations": 7,
+        "weighted_defect": 7.452803361201188e-07
+      },
+      {
+        "a": 0.55,
+        "converged": true,
+        "residual_rms": 1.6283724803640601e-15,
+        "relres": 1.2666636692505909e-14,
+        "c": 0.6510632341840581,
+        "iterations": 5,
+        "weighted_defect": 1.0292928509778421e-10
+      },
+      {
+        "a": 0.6,
+        "converged": true,
+        "residual_rms": 8.779734571211414e-09,
+        "relres": 6.780566040042652e-08,
+        "c": 0.6662707181094097,
+        "iterations": 40,
+        "weighted_defect": 0.622257814895334
+      },
+      {
+        "a": 0.7,
+        "converged": true,
+        "residual_rms": 2.7912255327894136e-15,
+        "relres": 2.1259549590517455e-14,
+        "c": 0.6971807761166391,
+        "iterations": 7,
+        "weighted_defect": 1.1226710509569824e-11
+      },
+      {
+        "a": 0.8,
+        "converged": true,
+        "residual_rms": 1.6067111766725658e-15,
+        "relres": 1.2077307772913829e-14,
+        "c": 0.7287020300617032,
+        "iterations": 9,
+        "weighted_defect": 5.696426583727755e-09
+      },
+      {
+        "a": 0.9,
+        "converged": true,
+        "residual_rms": 1.4885771082900114e-15,
+        "relres": 1.1050831626505453e-14,
+        "c": 0.760744125772949,
+        "iterations": 7,
+        "weighted_defect": 1.502057607005308e-07
+      },
+      {
+        "a": 1.0,
+        "converged": true,
+        "residual_rms": 8.39415552496933e-15,
+        "relres": 6.159499531926391e-14,
+        "c": 0.7931877152785316,
+        "iterations": 12,
+        "weighted_defect": 5.256671614616653e-07
+      }
+    ],
+    "GA_floor": 0.01,
+    "best_relres": 8.80510887890354e-15,
+    "a_max_machine": 1.0,
+    "orders_below_GA": 12.055265269428148,
+    "reading": "the GA floored at relres ~1e-2 for every a, and section 9 read that floor as a property of the problem.  It is a property of the SEARCH: with no genome at all, Newton reaches machine precision on the same discrete equations for every a below the survival boundary."
+  },
+  "v3_boundary": {
+    "rows": [
+      {
+        "a": 0.44,
+        "relres": 3.0540884402389545e-10,
+        "converged": true,
+        "c": 0.6182719666864739
+      },
+      {
+        "a": 0.46,
+        "relres": 1.0761541175222826e-14,
+        "converged": true,
+        "c": 0.6241619310027413
+      },
+      {
+        "a": 0.48,
+        "relres": 2.7012301434481417e-09,
+        "converged": true,
+        "c": 0.630084280518621
+      },
+      {
+        "a": 0.5,
+        "relres": 8.028923092010226e-14,
+        "converged": true,
+        "c": 0.6360397156780263
+      },
+      {
+        "a": 0.52,
+        "relres": 8.84090972534476e-15,
+        "converged": true,
+        "c": 0.6420251626975199
+      },
+      {
+        "a": 0.54,
+        "relres": 2.7057765628611216e-08,
+        "converged": false,
+        "c": 0.6480407120227919
+      },
+      {
+        "a": 0.56,
+        "relres": 7.583658985539714e-08,
+        "converged": false,
+        "c": 0.6540877430854946
+      },
+      {
+        "a": 0.58,
+        "relres": 1.2233291547381474e-07,
+        "converged": false,
+        "c": 0.6601647540206447
+      },
+      {
+        "a": 0.6,
+        "relres": 6.780566040042652e-08,
+        "converged": false,
+        "c": 0.6662707181094097
+      },
+      {
+        "a": 0.62,
+        "relres": 1.0772072052576051e-14,
+        "converged": true,
+        "c": 0.6729366295185071
+      },
+      {
+        "a": 0.64,
+        "relres": 1.2826347105859263e-14,
+        "converged": true,
+        "c": 0.6785886168156209
+      },
+      {
+        "a": 0.66,
+        "relres": 3.8800015003490003e-07,
+        "converged": false,
+        "c": 0.6847650623848678
+      },
+      {
+        "a": 0.68,
+        "relres": 1.8364745434953607e-06,
+        "converged": false,
+        "c": 0.6909861680246662
+      },
+      {
+        "a": 0.7,
+        "relres": 9.403249144349296e-15,
+        "converged": true,
+        "c": 0.6971807761152151
+      },
+      {
+        "a": 0.72,
+        "relres": 1.0705636614246389e-14,
+        "converged": true,
+        "c": 0.7043881294701383
+      },
+      {
+        "a": 0.74,
+        "relres": 3.5050514956839393e-06,
+        "converged": false,
+        "c": 0.709805011637543
+      }
+    ],
+    "last_machine_precision_a": 0.72,
+    "caveat": "Newton's own convergence is NOT the boundary test -- it succeeds at isolated large a where the solution is not grid-converged (V4).  Read this row together with V4's verdict, which is the one that decides.",
+    "GA_boundary": [
+      0.5,
+      0.55
+    ],
+    "reading": "the GA put the survival boundary at a* ~ 0.5-0.55 and section 9-cont2 earned that with GA-, genome- and basis-convergence.  Newton has no genome and no search budget, so this is a fourth, independent confirmation -- and it sharpens the character of the boundary: below it an exact discrete traveling wave EXISTS, above it Newton does not converge to one."
+  },
+  "v4_grids": {
+    "rows": [
+      {
+        "n": 401,
+        "a": 0.0,
+        "relres": 4.3323590304579805e-15,
+        "residual_rms": 5.103480296998139e-16,
+        "c": 0.4979712449052861,
+        "Omega_at_X4": -0.06022721556282138,
+        "weighted_defect": 4.524447745776031e-12
+      },
+      {
+        "n": 401,
+        "a": 0.2,
+        "relres": 2.908258620201058e-14,
+        "residual_rms": 3.546092741350677e-15,
+        "c": 0.5545708358330205,
+        "Omega_at_X4": -0.024741859644476005,
+        "weighted_defect": 1.49967243923986e-07
+      },
+      {
+        "n": 401,
+        "a": 0.5,
+        "relres": 6.476603153401411e-08,
+        "residual_rms": 8.259900336513976e-09,
+        "c": 0.63601810027421,
+        "Omega_at_X4": 3.227815990495703e-06,
+        "weighted_defect": 0.5004514144266673
+      },
+      {
+        "n": 401,
+        "a": 0.8,
+        "relres": 0.0011249300551053774,
+        "residual_rms": 0.0001505411592056313,
+        "c": 0.7331433981585896,
+        "Omega_at_X4": 0.009461729750368828,
+        "weighted_defect": 4788.016438278546
+      },
+      {
+        "n": 401,
+        "a": 1.0,
+        "relres": 0.005898939091234096,
+        "residual_rms": 0.0008069030564506525,
+        "c": 0.7964218109708666,
+        "Omega_at_X4": 0.007956603728563634,
+        "weighted_defect": 73371.6254687273
+      },
+      {
+        "n": 801,
+        "a": 0.0,
+        "relres": 9.71364255399854e-15,
+        "residual_rms": 1.144972129028598e-15,
+        "c": 0.4979710520289264,
+        "Omega_at_X4": -0.057985311537091765,
+        "weighted_defect": 2.0404871804230019e-10
+      },
+      {
+        "n": 801,
+        "a": 0.2,
+        "relres": 1.0132507155365502e-14,
+        "residual_rms": 1.2363557430056257e-15,
+        "c": 0.5547756565731081,
+        "Omega_at_X4": -0.023127311820525888,
+        "weighted_defect": 1.0825507624473443e-08
+      },
+      {
+        "n": 801,
+        "a": 0.5,
+        "relres": 8.028923092010226e-14,
+        "residual_rms": 1.0246150704796326e-14,
+        "c": 0.6360397156780263,
+        "Omega_at_X4": -5.6492618513727923e-08,
+        "weighted_defect": 7.452803361201188e-07
+      },
+      {
+        "n": 801,
+        "a": 0.8,
+        "relres": 1.0464390975685832e-14,
+        "residual_rms": 1.3935192443495812e-15,
+        "c": 0.7293940450078625,
+        "Omega_at_X4": 0.0011816012161009418,
+        "weighted_defect": 5.696426583727755e-09
+      },
+      {
+        "n": 801,
+        "a": 1.0,
+        "relres": 6.159499531926391e-14,
+        "residual_rms": 8.39415552496933e-15,
+        "c": 0.7931877152785316,
+        "Omega_at_X4": -0.0021523243191786815,
+        "weighted_defect": 5.256671614616653e-07
+      },
+      {
+        "n": 1601,
+        "a": 0.0,
+        "relres": 4.377599307839473e-14,
+        "residual_rms": 5.163407747393802e-15,
+        "c": 0.49876863234441715,
+        "Omega_at_X4": -0.05811674730979396,
+        "weighted_defect": 4.1814268355174705e-08
+      },
+      {
+        "n": 1601,
+        "a": 0.2,
+        "relres": 2.0848372322410882e-14,
+        "residual_rms": 2.5447984630497246e-15,
+        "c": 0.5548768004840611,
+        "Omega_at_X4": -0.02313762304873384,
+        "weighted_defect": 1.205324873902843e-07
+      },
+      {
+        "n": 1601,
+        "a": 0.5,
+        "relres": 2.16731808791631e-14,
+        "residual_rms": 2.7667017660533907e-15,
+        "c": 0.6360442513775247,
+        "Omega_at_X4": 1.5994155222852915e-07,
+        "weighted_defect": 8.53087468126693e-08
+      },
+      {
+        "n": 1601,
+        "a": 0.8,
+        "relres": 0.00013083609356778308,
+        "residual_rms": 1.744720366674144e-05,
+        "c": 0.7301381336252428,
+        "Omega_at_X4": 0.002788715145652228,
+        "weighted_defect": 1992.0543105694808
+      },
+      {
+        "n": 1601,
+        "a": 1.0,
+        "relres": 0.0035453339098472513,
+        "residual_rms": 0.0004919175239428393,
+        "c": 0.806361063558342,
+        "Omega_at_X4": 0.027206104773829166,
+        "weighted_defect": 22475.06435583111
+      }
+    ],
+    "verdict": [
+      {
+        "a": 0.0,
+        "c_spread": 0.0007975803154907646,
+        "Omega_at_X4_spread": 0.0022419040257296158,
+        "grids_reaching_machine_precision": 3,
+        "grid_converged": true
+      },
+      {
+        "a": 0.2,
+        "c_spread": 0.0003059646510406022,
+        "Omega_at_X4_spread": 0.0016145478239501174,
+        "grids_reaching_machine_precision": 3,
+        "grid_converged": true
+      },
+      {
+        "a": 0.5,
+        "c_spread": 2.6151103314719926e-05,
+        "Omega_at_X4_spread": 3.284308609009431e-06,
+        "grids_reaching_machine_precision": 2,
+        "grid_converged": true
+      },
+      {
+        "a": 0.8,
+        "c_spread": 0.0037493531507271083,
+        "Omega_at_X4_spread": 0.008280128534267886,
+        "grids_reaching_machine_precision": 1,
+        "grid_converged": false
+      },
+      {
+        "a": 1.0,
+        "c_spread": 0.013173348279810426,
+        "Omega_at_X4_spread": 0.029358429093007846,
+        "grids_reaching_machine_precision": 1,
+        "grid_converged": false
+      }
+    ],
+    "grid_converged_a_max": 0.5,
+    "reading": "the machine-precision residual is a statement about the DISCRETE system, so it must not improve with n -- it is already at rounding.  What n controls is how far the discrete solution sits from the continuum one, which is the error a certificate would still have to price (v4 W6 measured that separately at J^-2.1..-2.6).  The weighted defect is reported because the RMS is not what the radii polynomial sees -- and it is 6 orders LARGER than the RMS, because the codomain weight amplifies exactly the far field where the residual lives."
+  },
+  "v5_budget": {
+    "Y0_max_from_v10": 0.000245,
+    "GA_floor_rms": 0.01,
+    "a_range_used": 0.5,
+    "newton_weighted_defect_min": 2.340496906495767e-14,
+    "newton_weighted_defect_max": 0.015195816195658364,
+    "margin": 10467862585.933441,
+    "reading": "the budget condition is Y0 <= Y0_max.  Every earlier leg compared 1e-2 against 2.45e-4 and concluded the profile was ~40x too poor.  With Newton the weighted defect of the discrete profile is many orders BELOW the budget, so the profile's defect is no longer the binding constraint -- for a < a*.  What binds instead is the three unpriced Z1 items, which is a different and more tractable problem than 'find a better profile'.  CAREFUL: this is the defect of the DISCRETE profile in the ROUTE-A discretization; carrying it into the certificate needs the same object in the theta-collocation basis plus the discretization error, which is exactly the open ledger item 'Z1 core discretization'."
+  },
+  "v6_ledger": {
+    "changed": "Y0 (the profile defect) moves from ~1e-2 (GA / relaxation) to machine precision on the discrete system for a < a*",
+    "still_open": [
+      "Z1 core<->far coupling",
+      "Z1 core discretization (now the binding item)",
+      "discrete<->continuum transfer"
+    ],
+    "next": [
+      "carry the Newton profile into the theta-collocation basis the bounds live in, and measure Y0 there",
+      "price the core discretization error (v4 W6 measured it, never bounded it) -- it is now what limits Y0",
+      "C_sup (elasticity ~1, ~2x available)"
+    ]
+  }
+}
