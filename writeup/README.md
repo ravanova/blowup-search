@@ -211,6 +211,19 @@ writeup/
     8–12 digits at `a = 0.5…1.2` on its own support); the other three confirmations
     stand. Still **not** a certificate — no constant of the radii polynomial has been
     computed in the new space. *(fig 32)*
+34. [TECHNICAL_P2_LITERATURE_SCOPE.md](4_p2_lottery/TECHNICAL_P2_LITERATURE_SCOPE.md) ·
+    [BLOG_P2_LITERATURE_SCOPE.md](4_p2_lottery/BLOG_P2_LITERATURE_SCOPE.md) — **Route-D v15**,
+    the literature check, and the only leg that used no code. **Read the limitation first: no
+    paper was read** — the container's network policy blocks arXiv and every publisher domain,
+    so this is search-snippet evidence and every entry carries a confidence level. Findings:
+    the two-scale inner traveling wave — this project's object — appears to have a rigorous
+    fixed-point existence proof (`arXiv:2603.25104`, Mar 2026); compactly supported gCLM
+    profiles and scalar fixed-point reductions are established (`arXiv:2305.05895`); gCLM
+    traveling waves have been computed since 2014 (Okamoto–Sakajo–Wunsch); and
+    **computer-assisted interval/Newton–Kantorovich proofs are routine in this family** — so
+    **L1 is occupied territory** and finishing the certificate is a capability demonstration,
+    not the lottery ticket. v14's novelty claim is retracted in place. The swing moves to the
+    DSS lane. *(no figure — no measurement)*
     *(fig 31)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
@@ -271,6 +284,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_literature_scope.json` | Arc 4 / **no figure** — Route-D v15's literature leads: each with reference, claimed content, why it matters, an explicit `confidence`, and a `must_verify` list. Includes one extraordinary claim flagged **do not use**. Nothing in it was read from a paper; the container's network policy blocked arXiv and the publishers |
 | `p2_route_d_v14_first_integral.json` | Arc 4 / fig32 — A the first-integral defect on the whole-line build + the exact `a → 0` anchor limit, B the profile on its support with edge exponent and amplitude, C THE KILL SWITCH (`‖A‖` vs `K` in three measures, with the decay-graded whole-line control), D the radius law with measured `(m, U₀)`, E large-`a` `K`-convergence |
 | `p2_route_d_v13_turning.json` | Arc 4 / fig31 — S1 the corrected inner-mode exponent, S2 the growing far-field mode + its quadrature and grid convergence, S3 the operator norm by outer cutoff with the `a = 0` control, S4 where the extremal row is sourced, S5 the bordering repair disqualified |
 | `p2_route_d_v12_defect.json` | Arc 4 / fig30 — T0 the profiles and their critical radii, T1 the rows Newton enforces vs the row the gauge displaced, T2 `Y₀` in the codomain norm vs the budget, T3 `X_c` and the zero order in two discretizations, T4 the convergence rate in `J`, T5 the operator norm at the real profile + its `J`-ladder, T6 the boundary sweep with the `a = 1/3` control |

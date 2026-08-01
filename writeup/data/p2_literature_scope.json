@@ -1,0 +1,99 @@
+{
+ "note": "Route-D v15 -- the literature scope. EVERY entry below is SEARCH-SNIPPET EVIDENCE ONLY. This container's network policy blocks arxiv.org and every publisher domain reached (403 at the proxy CONNECT), so NOT ONE of these papers was read. Titles, authors and identifiers are reliable; the technical statements are paraphrases of search-result summaries and MUST be verified by someone who can open a PDF before any of them is quoted as fact. Recorded this way on purpose: an unverified lead that is labelled is useful, an unverified lead that is not is a liability.",
+ "date": "2026-08-01",
+ "method": "WebSearch only. WebFetch and curl both returned 403 from the agent proxy for arxiv.org, aimsciences.org, semanticscholar.org, sites.google.com and www-cc.gakushuin.ac.jp. Seven queries, listed in `queries`.",
+ "queries": [
+  "De Gregorio model traveling wave explicit solution compactly supported first integral gCLM",
+  "Okamoto Sakajo Wunsch generalized Constantin-Lax-Majda steady state traveling wave explicit solution",
+  "gCLM traveling wave omega proportional to power of (c + a u) exact integration log derivative",
+  "arXiv 2603.25104 self-similar finite-time blowups singular profiles gCLM abstract",
+  "Huang Tong Wang gCLM self-similar smooth profiles fixed-point nonlinear map compactly supported",
+  "computer-assisted proof interval arithmetic CLM / De Gregorio self-similar profile Newton-Kantorovich",
+  "discretely self-similar blowup Navier-Stokes numerical search periodic orbit rescaled flow 2025 2026"
+ ],
+ "leads": [
+  {
+   "id": "HTW26",
+   "ref": "arXiv:2603.25104",
+   "title": "Self-similar finite-time blowups with singular profiles of the generalized Constantin-Lax-Majda model: theoretical and numerical investigations",
+   "authors": "De Huang, Jiajun Tong, Xiuyuan Wang",
+   "date": "2026-03-26",
+   "claimed_content": "Self-similar blowups of gCLM under a derivative-degeneracy condition on the data. For a > 0, ONE-scale self-similar blowups with regular profiles not previously found. For a <= 0, a two-scale scenario whose OUTER profile converges to a singular function while the inner profile stays regular on a smaller scale. The inner profile is governed by A TRAVELING WAVE on the smaller scale, and THE EXISTENCE OF THOSE TRAVELING WAVE SOLUTIONS IS ESTABLISHED RIGOROUSLY VIA A FIXED-POINT METHOD. 55 pages, 19 figures.",
+   "why_it_matters": "This is THE object Route-D has been building a certificate for. If the reading is right, existence of the two-scale inner traveling wave is already a theorem, and by an analytic fixed-point argument rather than a computer-assisted one. It would also place the two-scale scenario at a <= 0, while this project has been working it at a > 0.",
+   "must_verify": [
+    "Is their inner traveling wave the same equation as this project's R = Omega H(Omega) - c Omega_X - a U Omega_X?",
+    "Does their fixed-point map use the first integral Omega = -(E/c)^{1/a}, or an inequivalent reduction?",
+    "Is their two-scale scenario really a <= 0 only? If so, what is this project's a > 0 two-scale object?",
+    "Do they state compact support and the order-1/a zero?"
+   ],
+   "confidence": "identifiers high; technical content medium; the a-sign statement is the single most decision-relevant item and is LEAST verified"
+  },
+  {
+   "id": "HTW23",
+   "ref": "arXiv:2305.05895",
+   "title": "Self-similar finite-time blowups with smooth profiles of the generalized Constantin-Lax-Majda model",
+   "authors": "De Huang, Jiajun Tong, Xiuyuan Wang",
+   "claimed_content": "gCLM admits exact self-similar finite-time blowups with interiorly smooth profiles for all a <= 1. The profiles are either smooth on the whole real line OR COMPACTLY SUPPORTED and smooth in the interior of their closed supports. Existence via the fixed point of an a-dependent nonlinear map R_a: if f is a fixed point then Omega(x) = -x f(x) is an exact self-similar profile, with c_l and c_omega given explicitly as integrals of f. Regularity, monotonicity and far-field decay characterized. The a = 0 and a = 1/2 profiles are strictly negative on (0, inf); the a = 1 profile is COMPACTLY SUPPORTED.",
+   "why_it_matters": "Compactly supported profiles in this family are established literature, not a discovery. Reducing the profile equation to a scalar fixed point with an explicit algebraic relation is the established technique here. v12's 'the profile ends' and v14's reduction are both inside known territory.",
+   "must_verify": [
+    "Their R_a and its relation to the first integral",
+    "Whether compact support in their (self-similar) problem appears only at a = 1, and why that pattern differs from this project's two-scale problem where it appears at every a > 0"
+   ],
+   "confidence": "identifiers high; technical content medium-high (the R_a description was quoted with unusual specificity)"
+  },
+  {
+   "id": "OSW14",
+   "ref": "Discrete Contin. Dyn. Syst. 34 (2014) 3155-3170, doi:10.3934/dcds.2014.34.3155",
+   "title": "Steady-states and traveling-wave solutions of the generalized Constantin-Lax-Majda equation",
+   "authors": "Hisashi Okamoto, Takashi Sakajo, Marcus Wunsch",
+   "claimed_content": "Computes steady states and traveling waves of gCLM and describes their asymptotic behaviour; numerical evidence for non-trivial steady and traveling-wave solutions for every a > 0; relation to blow-up and to Benjamin-Ono discussed.",
+   "why_it_matters": "gCLM traveling waves have been computed since 2014. Any claim about their existence, shape or asymptotics needs to be positioned against this paper first.",
+   "must_verify": ["Whether the asymptotics they describe include the finite support radius X_c and the order-1/a zero"],
+   "confidence": "identifiers high; technical content LOW (abstract-level only)"
+  },
+  {
+   "id": "DG-CS",
+   "ref": "arXiv:2209.08232",
+   "title": "On self-similar finite-time blowups of the De Gregorio model on the real line",
+   "claimed_content": "Infinitely many compactly supported self-similar solutions, distinct under rescaling, blowing up in finite time; omega in H^1(R), odd, supported on [-1, 1].",
+   "why_it_matters": "Further confirmation that compactly supported profiles in this family are standard. Note theirs are ODD and self-similar; this project's are EVEN traveling waves.",
+   "must_verify": ["parity and scaling class, to be sure it is a different object"],
+   "confidence": "identifiers high; technical content medium"
+  },
+  {
+   "id": "CAP-family",
+   "ref": "multiple; incl. Chen-Hou 'Stable Nearly Self-Similar Blowup of the 2D Boussinesq and 3D Euler Equations with Smooth Data II: Rigorous Numerics', and CLM-family computer-assisted work",
+   "claimed_content": "Computer-assisted proofs using interval arithmetic (INTLAB) and Newton-Kantorovich are ESTABLISHED PRACTICE in exactly this family; asymptotically self-similar finite-time blowups of the one-scale form have been established for the CLM model by computer-assisted proof. Newton-Kantorovich plus a global bifurcation framework is used to prove exact solution branches.",
+   "why_it_matters": "THE SINGLE MOST DECISION-RELEVANT ITEM. This project's L1 -- 'a certified Level-2 computer-assisted blow-up profile for the 1D gCLM/HL toy model' -- is the thing these groups already do routinely. Finishing L1 would be a CAPABILITY demonstration and a reproduction, not a novel result. That is what standing brick (4) always said it was; the literature makes it explicit.",
+   "must_verify": [
+    "exactly which a values and which scaling class have been certified for gCLM specifically",
+    "whether any published computer-assisted proof covers the TWO-SCALE traveling wave"
+   ],
+   "confidence": "the general practice claim is high; the specific 'one-scale CLM already certified' claim is medium and matters most"
+  },
+  {
+   "id": "EXTRAORDINARY-UNVERIFIED",
+   "ref": "arXiv:2604.09949",
+   "title": "Stable Finite-Time Singularity Formation for 3D Navier-Stokes via 5D-Lifted Axisymmetric Reductions",
+   "authors": "Rishad Shahmurov (single author)",
+   "date": "2026-04-10",
+   "claimed_content": "Claims finite-time singularity formation for 3D incompressible Navier-Stokes on the periodic torus: a stationary rescaled profile solving a nonlinear elliptic fixed-point equation in an analytically weighted Hilbert space, with computer-assisted Newton-Kantorovich validation by interval arithmetic, reconstructed into a nearly self-similar singular evolution and transferred to the torus.",
+   "status": "DO NOT USE, DO NOT REPEAT AS A RESULT. A solo preprint claiming a Clay Millennium Problem. Recorded ONLY so that a later session does not rediscover it and get excited. Extraordinary claims of this kind are overwhelmingly likely to contain an error, and nothing in this project should be re-planned around it unless and until it is accepted by the community.",
+   "must_verify": ["community reaction, published status, expert commentary -- NOT the mathematics, which is far outside what can be checked here"],
+   "confidence": "the preprint exists and says this; its correctness is entirely unassessed and presumed doubtful"
+  },
+  {
+   "id": "DSS-lane",
+   "ref": "n/a -- absence of evidence",
+   "claimed_content": "Searches for discretely-self-similar (DSS) blowup PROFILE SEARCH for Navier-Stokes -- a periodic orbit of the rescaled flow, found by global search -- returned nearby but not on-target work: nearly-self-similar blowup of generalized axisymmetric NSE with solution-dependent dimension/viscosity (Hou et al.), forward self-similar solutions in 2D, a computer-assisted nonuniqueness proof in the self-similar setting, and machine-learning methods for finding periodic orbits in NSE (a DIFFERENT sense of periodic orbit -- turbulence, not rescaled-flow DSS).",
+   "why_it_matters": "Weak support for the standing list's item (1): the DSS search still looks uncrowded relative to the profile-certification lane. ABSENCE OF SEARCH HITS IS NOT ABSENCE OF LITERATURE, and this is the weakest inference in this file.",
+   "confidence": "LOW. Treat as 'not contradicted', never as 'nobody has done it'."
+  }
+ ],
+ "consequences_for_this_project": [
+  "L1 as defined is very likely occupied territory. Finishing it is a capability demonstration, not a novel result.",
+  "v14's first integral must be presumed known until HTW23/HTW26 are read; the leg's mathematics is unaffected, its novelty framing is.",
+  "The a-sign question (is the two-scale scenario a <= 0 territory?) is the highest-value single thing to verify, because it bears on whether this project's a > 0 two-scale object is the right object at all.",
+  "Nothing here changes the two structural walls or the ~0.05% Clay odds."
+ ]
+}

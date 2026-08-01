@@ -1,6 +1,50 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-08-01 (updated after Route-D v14). **NEWEST LEG FIRST — Route-D v14 FOUND AN
+*Written 2026-08-01 (updated after Route-D v15). **NEWEST LEG FIRST — Route-D v15 IS THE
+LITERATURE CHECK, and it re-prices fifteen legs. READ THE LIMITATION FIRST: NOT ONE PAPER WAS
+READ** — this container's network policy blocks arxiv.org and every publisher domain reached
+(WebFetch and curl both 403 at the proxy's CONNECT). Web SEARCH works. So identifiers (titles,
+authors, arXiv numbers, DOIs) are reliable and **every technical statement below is a
+search-summary paraphrase = a LEAD, not a fact.** Data writeup/data/p2_literature_scope.json
+carries an explicit `confidence` and `must_verify` per entry. **WHAT IT FOUND:**
+**arXiv:2603.25104 (Huang, Tong, Wang, 2026-03-26)** — abstract-level, the two-scale blowup's
+inner profile is governed by a TRAVELING WAVE on the smaller scale and **its existence is
+established rigorously via a FIXED-POINT METHOD. That is THIS PROJECT'S OBJECT.** Same
+abstract, and this is the **highest-value unverified item in the leg**: the two-scale scenario
+is described as the **a <= 0** case with **a > 0 giving ONE-scale** self-similar blowups — and
+this project has worked the two-scale object at **a > 0** throughout, so **the question may not
+be whether our object is novel but whether it is the RIGHT OBJECT**. **arXiv:2305.05895 (same
+group, 2023)** — gCLM self-similar profiles exist for all a <= 1, "either smooth on the whole
+real line or **COMPACTLY SUPPORTED** and smooth in the interior of their closed supports", via
+the fixed point of an a-dependent nonlinear map R_a with Omega(x) = -x f(x); a=1 compactly
+supported. So **v12's "the profile ends" is a known phenomenon and v14's reduction is a known
+technique. Okamoto-Sakajo-Wunsch, DCDS 34 (2014) 3155-3170** computed gCLM traveling waves and
+their asymptotics for every a>0 — since 2014. **arXiv:2209.08232** — infinitely many compactly
+supported self-similar De Gregorio solutions on the line. **AND THE DECISION-RELEVANT ONE:
+computer-assisted proofs by interval arithmetic (INTLAB) + Newton-Kantorovich are ROUTINE IN
+THIS EXACT FAMILY** (Chen-Hou rigorous numerics; per search summary, one-scale asymptotically
+self-similar CLM blowups already certified). **CONSEQUENCE — SAY IT PLAINLY: L1 IS OCCUPIED
+TERRITORY.** Finishing the certificate is a **CAPABILITY DEMONSTRATION and a REPRODUCTION**,
+which is exactly what standing brick (4) always said it was in a bullet the project had been
+ignoring for five legs. **The marginal value of the next Route-D leg dropped, for a reason
+external to the work.** WHAT IT DOES NOT DO: does not touch the two structural walls, does not
+change the ~0.05% odds, **does not invalidate one measurement in v3-v14 — being second is not
+being wrong.** **v14's novelty claim is RETRACTED to "presume the first integral is KNOWN",
+corrected IN PLACE in both v14 writeups with the change MARKED.** Also logged deliberately,
+flagged **DO NOT USE / DO NOT REPEAT AS A RESULT**: arXiv:2604.09949 (2026-04-10, single
+author) claims stable finite-time singularity for 3D NS with a computer-assisted validation —
+recorded ONLY so a later session does not rediscover it and lose a day. **NEXT, and the
+recommendation CHANGED:** (1) **VERIFY THE TWO LOAD-BEARING READINGS** (the a-sign in
+2603.25104; whether its fixed point IS this first integral) — both need a PDF, so **the binding
+constraint on the next decision is ACCESS, not compute and not cleverness**; until then treat
+the a>0 two-scale object as POSSIBLY THE WRONG OBJECT. (2) **THE DSS LANE BECOMES THE SWING**
+(standing item (1); Necas-Ruzicka-Sverak/Tsai force non-self-similarity for NS relevance, a DSS
+blowup is a PERIODIC ORBIT of the rescaled flow, and global search is what this project's
+tooling is actually good at) — **but the "uncrowded" reading is the WEAKEST inference in the
+leg: absence of search hits is not absence of literature, never let it harden.** (3) Finish the
+certificate anyway, cheaply, **and stop calling it the result.** No code, no figure, Level-0.*
+
+*Before v15, in the same session: **Route-D v14 FOUND AN
 EXACT FIRST INTEGRAL OF THE PROFILE EQUATION, and the kill switch v13 specified PASSES.**
 E := c + aU satisfies E_X = a H(Omega) BY DEFINITION — which is the equation's own
 nonlinearity — so R = Omega H(Omega) - E Omega_X = 0 is (log|Omega|)_X = (1/a)(log E)_X, and
@@ -54,11 +98,12 @@ says the approximate inverse EXISTS in the limit, nothing about the budget closi
 NOT "better than 47" — different operator, different space, and the comparable quantity is the
 SLOPE (quoting the value would be lesson 28 in a new costume). Novelty UNCHECKED: a first
 integral of a scalar traveling-wave equation is exactly what is folklore to people who work on
-gCLM/De Gregorio.** **NEXT — brick (4) of the standing list, FINISH ONE CERTIFICATE END-TO-END,
-now cheap: assemble Y0, Z0, Z1, Z2 in the reduced space at ONE a and see whether the budget
-closes in FLOAT with margin. Eleven legs of far-field machinery (v3 resonance, v6 tail bound,
-v7-v9 estimates, v10 bracket) are simply not needed on a bounded interval. STOPPING RULE
-UNCHANGED: if it does not close in float with margin, STOP, do not harden.** Read BOTH the
+gCLM/De Gregorio.** ~~NEXT — brick (4), FINISH ONE CERTIFICATE END-TO-END, now cheap.~~ **[v15 RE-PRICED THIS:
+the certificate is still cheap and still the right capability, but it is a REPRODUCTION, not
+the result. See the v15 paragraph above and the lane box.]** Eleven legs of far-field machinery
+(v3 resonance, v6 tail bound, v7-v9 estimates, v10 bracket) are genuinely not needed on a
+bounded interval, and the **STOPPING RULE is UNCHANGED: if it does not close in float with
+margin, STOP, do not harden.** Read BOTH the
 "WHERE THIS SITS RELATIVE TO CLAY" section and the "IS THIS STILL THE RIGHT LANE?" box before
 committing to another leg.*
 
@@ -351,7 +396,8 @@ results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
 v1–v14 (fig19–fig32) are tooling + scoping/negative results + partial bounds + one exact
-algebraic identity on the way there, NOT certificates.**
+algebraic identity on the way there, NOT certificates; v15 is Level-0 scoping and found that
+Level-2 in this family is ROUTINE FOR OTHERS.**
 Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
@@ -366,7 +412,8 @@ negative): writeup/2_phase1_2d/NEGATIVE_RESULT_TWO_CURRENCIES.md. P2 — READ:
 PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, §8 B1,
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
 v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-D v12,
-§22 ROUTE-D v13, **§23 ROUTE-D v14 = newest**).
+§22 ROUTE-D v13, §23 ROUTE-D v14,
+**§24 ROUTE-D v15 = newest (the literature check — READ IT BEFORE CHOOSING A LANE)**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
@@ -378,7 +425,7 @@ STATE (all banked + pushed to main):
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
   §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13,
-  §23 Route-D v14 — all DONE + banked.
+  §23 Route-D v14, §24 Route-D v15 (literature scope) — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited — earned by §9-cont2's GA-/genome-/basis-convergence, i.e. **THREE
   confirmations, not four: v14 RETIRED v11's grid-refinement argument** (on its own support
@@ -775,21 +822,38 @@ J^+2.80 measured with the same code. So:
   * **the arithmetic is GONE, not fixed.** Do not quote the old budget history (7.6e-2 → …
     → 2.40e-4) as if it applied: every number in it is the anchor's, in a space the project no
     longer uses. There is currently NO budget in the reduced space — not a bad one, none.
-**The three calls, re-answered:**
+**v15 THEN RE-PRICED THE ANSWER — and this is the current state of the box.** The literature
+check (done, one hour, §24) says the technique is routine in this family and the object's
+existence appears already proved. So the question is no longer "does the lane work" — v14
+showed it does — but **"is the lane worth walking when someone else has already walked it".**
+**The three calls, re-answered AGAIN:**
   (a) **Finish one certificate end-to-end in the reduced space** (Y₀, Z₀, Z₁, Z₂ at one a, then
-      the radii polynomial in float). Was "the repair"; is now the obvious next brick, and it is
-      the capability every other lane on the worthwhile list needs. **RECOMMENDED.**
-  (b) **The literature search.** Was item (5) and cheap; is now also the only thing standing
-      between v14's headline and a claim anyone should believe. **Do it alongside (a), not
-      after** — it is hours, and if the first integral is folklore that is worth knowing before
-      writing it up as new.
-  (c) **Write the P2 arc up as one community piece / the coupled-system HL two-stage swing.**
-      Unchanged in value, and the arc is a better story now that it has a resolution rather than
-      three legs of diagnosis. Still the fallback if (a) does not close.
-**Recommendation: (a) with (b) in parallel. The stopping rule is what it always was — if the
-float budget does not close with margin, say so and switch to (c). Do not harden.**
+      the radii polynomial in float). **Still worth doing, DEMOTED to what it always was: a
+      CAPABILITY, not a result.** Cheap now. Do it in a chunk, not a campaign.
+  (b) **VERIFY THE TWO LOAD-BEARING READINGS** — the a-sign in arXiv:2603.25104 (is the
+      two-scale scenario a ≤ 0 territory?) and whether its fixed point is v14's first integral.
+      **Needs a PDF. The binding constraint here is ACCESS, not compute** — flag it to the user
+      rather than routing around it. **HIGHEST VALUE PER HOUR IF IT CAN BE DONE AT ALL**,
+      because it bears on whether the a>0 two-scale object is the right object.
+  (c) **THE DSS LANE — the swing.** Promoted from standing item (1). Discretely self-similar =
+      a periodic orbit of the rescaled flow = a global search problem = the one thing this
+      project's tooling (GA + Newton) is genuinely good at, and the one class
+      Nečas–Růžička–Šverák/Tsai leaves open for NS relevance. **Caveat that must travel with
+      it: "uncrowded" rests on not finding search hits, which is the weakest inference in §24.**
+**Recommendation: (b) if access allows, then (c) as the swing, with (a) as a one-chunk
+capability build whenever it is convenient. Do NOT run another whole-line estimate leg. The
+stopping rule is unchanged — if the float budget does not close with margin, say so; never
+harden.**
 
-THE RECOMMENDED NEXT BRICKS, in the order v14 implies:
+**THE RECOMMENDED NEXT BRICKS — v15 REORDERED THEM. Read this list first:**
+  (0a) **VERIFY arXiv:2603.25104 AND arXiv:2305.05895.** The a-sign question (is the two-scale
+       scenario a ≤ 0?) and whether their fixed point is v14's first integral. Blocked on PDF
+       access in this container — **tell the user it is blocked rather than quietly skipping
+       it**; a human or a session with arXiv reachable can settle both in twenty minutes.
+  (0b) **THE DSS LANE** (standing worthwhile-item (1)) — the swing, now that L1 is occupied.
+  (0c) The certificate below, demoted to a **one-chunk capability build**.
+Everything after this line is the v14 ordering, kept because the technical build notes in (1)
+are still exactly right for whoever does the capability build:
   (1) **THE WHOLE CERTIFICATE, IN THE REDUCED SPACE, AT ONE a — and stop at the float
       rehearsal.** This is standing item (4) ("finish one certificate end-to-end"), promoted
       because v14 made it cheap. Work at a=0.3 (K=64 is converged to 3.7e-13; a=0.2 needs
@@ -940,6 +1004,8 @@ probes get a clearly-labelled non-logged entry too, as §10–§20 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
 writeup/4_p2_lottery/{**p2_route_d_v14_evidence.py(fig32)**, p2_route_d_v13_evidence.py(fig31),
+(v15 has NO evidence script and NO figure — no measurement; its data is
+writeup/data/p2_literature_scope.json, read directly),
 p2_route_d_v12_evidence.py(fig30),
 p2_route_d_v11_evidence.py(fig29),
 p2_route_d_v10_evidence.py(fig28), p2_route_d_v9_evidence.py(fig27),
@@ -1147,7 +1213,20 @@ J. That would have manufactured a result out of a grid parameter. (39) **A repai
 also RE-OPENS what the broken version banked.** Fixing the formulation retired a banked
 confirmation of a* — because the evidence for it was a symptom of the same instrument defect the
 repair removed. Re-run the OLD conclusions through the NEW formulation, not only the new
-question.
+question. **NEW from §24 — the three the literature check cost:**
+(40) **CHECK THE LITERATURE BEFORE THE FOURTEENTH LEG, NOT AFTER.** One hour of search
+re-priced fifteen legs. Every piece of this project's discipline — gate the mechanism, build
+the adversary, price the elasticity, quote the bracket at the operating point — is aimed at not
+fooling yourself with your OWN instruments, and **not one of those instruments can tell you
+that somebody else finished first.** A project that only ever measures itself against its own
+previous leg will walk a long way in a direction that is already occupied. (41) **Record a
+negative or dangerous lead WITH its confidence, or it will be re-found and re-believed.** The
+extraordinary 3D-NS-singularity preprint is in writeup/data/p2_literature_scope.json flagged
+"do not use", precisely so the next session does not independently rediscover it and lose a
+day to it. (42) **When the binding constraint is ACCESS rather than compute, say so and name
+what would unblock it.** The cheapest decisive act available to this project is now "read one
+paper", and it is blocked by a network policy. Surface that to the user; do not silently route
+around it and do not substitute more computation for the missing fact.
 
 HONEST CEILING (say it out loud): Route-D v3–v14 are validated tooling + a no-go theorem, a
 confirmed price, a second structural requirement, a space that met every requirement identified
@@ -1166,4 +1245,11 @@ Gómez-Serrano genre), NOT a Clay solve. 1D HL is a toy model (boundary behaviou
 3D-axisymmetric-Euler). And v14's headline is **novelty-unchecked** — a first integral of a
 scalar traveling-wave equation is exactly what may be folklore to people who work on this
 family, and the literature search blocks the claim. Overall Clay odds ~0.05%, unchanged by this
-leg. Keep pursuing the Clay end goal; keep saying the honest version out loud.
+leg. **AND, from v15: L1 — the milestone fifteen legs aimed at — is very probably OCCUPIED
+TERRITORY. Computer-assisted interval/Newton-Kantorovich certification is routine for the
+groups working this family, and the two-scale traveling wave's existence appears to have been
+proved analytically in March 2026. Finishing the certificate is a capability demonstration and
+a reproduction. That is not a reason to stop; it is a reason to stop calling it the lottery
+ticket, and to move the swing to the DSS lane. Every measurement in v3-v14 still stands —
+being second is not being wrong.** Keep pursuing the Clay end goal; keep saying the honest
+version out loud.

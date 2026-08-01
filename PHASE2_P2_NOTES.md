@@ -1594,3 +1594,90 @@ for it was a symptom of the same instrument defect. Re-run the OLD conclusions t
 formulation, not only the new question.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
 Clay odds ~0.05%.
+
+
+## §24 — ROUTE-D v15 DONE (2026-08-01): THE LITERATURE CHECK. L1 IS OCCUPIED TERRITORY;
+## v14's first integral must be PRESUMED KNOWN; the swing moves to the DSS lane.
+
+No code, no figure, no measurement — this is scoping, Level-0. Data
+writeup/data/p2_literature_scope.json (every lead with an explicit confidence and a
+must_verify list). Writeups TECHNICAL/BLOG_P2_LITERATURE_SCOPE.md.
+
+**THE LIMITATION, FIRST: NOT ONE PAPER WAS READ.** This container's network policy blocks
+arxiv.org and every publisher domain reached — WebFetch and curl both 403 at the proxy's
+CONNECT step. The only instrument was web SEARCH. Identifiers (titles, authors, arXiv
+numbers, DOIs) are reliable; every technical statement below is a paraphrase of a search
+summary and is a LEAD, not a fact. Recorded anyway because a labelled unverified lead is
+useful and an unlabelled one is a liability.
+
+**WHAT IT FOUND.**
+- **arXiv:2603.25104 (Huang, Tong, Wang, 2026-03-26)** — gCLM self-similar blowups with
+  singular profiles. Abstract-level: the two-scale blowup's INNER PROFILE IS GOVERNED BY A
+  TRAVELING WAVE on the smaller scale and **THE EXISTENCE OF THOSE TRAVELING WAVES IS
+  ESTABLISHED RIGOROUSLY VIA A FIXED-POINT METHOD**. That is THIS PROJECT'S OBJECT. Also, and
+  this is the highest-value unverified item in the whole leg: the two-scale scenario is
+  described as the **a <= 0** case, with **a > 0 giving ONE-scale self-similar blowups**. This
+  project has worked the two-scale object at a > 0 throughout. **If that sign is right the
+  question is not whether our object is novel but whether it is the RIGHT OBJECT.**
+- **arXiv:2305.05895 (same group, 2023)** — exact self-similar gCLM profiles for all a <= 1,
+  "either smooth on the whole real line or **COMPACTLY SUPPORTED** and smooth in the interior
+  of their closed supports"; existence via the fixed point of an a-dependent nonlinear map
+  R_a with Omega(x) = -x f(x) and the scaling constants explicit integrals of f; a=0 and
+  a=1/2 strictly negative on (0,inf), **a=1 compactly supported**. So §21's "the profile ends"
+  is a known phenomenon and §23's reduction is a known technique.
+- **Okamoto-Sakajo-Wunsch, DCDS 34 (2014) 3155-3170** — gCLM steady states AND TRAVELING WAVES
+  computed, asymptotics described, existence for every a > 0 argued numerically. Since 2014.
+- **arXiv:2209.08232** — infinitely many compactly supported self-similar De Gregorio
+  solutions on the line (omega odd, supported on [-1,1]).
+- **THE DECISION-RELEVANT ONE:** computer-assisted proofs by interval arithmetic (INTLAB) +
+  Newton-Kantorovich are **ROUTINE in this exact family** (Chen-Hou rigorous numerics; and per
+  search summary, one-scale asymptotically self-similar CLM blowups already certified).
+- **arXiv:2604.09949 (2026-04-10, single author)** claims stable finite-time singularity for
+  3D Navier-Stokes with a computer-assisted Newton-Kantorovich validation. **DO NOT USE, DO
+  NOT REPEAT AS A RESULT, DO NOT RE-PLAN AROUND IT.** Recorded only so a later session does
+  not rediscover it and get excited.
+
+**WHAT IT DOES TO L1.** L1 = "a certified (Level-2, computer-assisted) blow-up profile for the
+1D gCLM/HL toy model at some a > 0". **On this evidence it is OCCUPIED TERRITORY**: the
+technique is routine for the groups in this area and the specific object's existence appears
+to have been settled analytically five months ago. Finishing the certificate is therefore a
+**CAPABILITY DEMONSTRATION and a REPRODUCTION** — which is exactly what standing brick (4)
+always said it was, in a bullet the project had been quietly ignoring. **The marginal value of
+the next Route-D leg just dropped, for a reason external to the work.**
+WHAT IT DOES NOT DO: does not touch the two structural walls; does not change the ~0.05% Clay
+odds; does not invalidate one measurement in v3-v14. **Being second is not being wrong.**
+
+**v14's NOVELTY CLAIM, RETRACTED TO THE RIGHT LEVEL.** §23 hedged ("novelty unchecked");
+the hedge was right and is now stronger — **presume the first integral is KNOWN**. §23's
+writeups are corrected IN PLACE with the change MARKED (banner + struck passage), not quietly
+edited (lesson 35). The mathematics is unaffected.
+
+**RECOMMENDATION CHANGE (this is the output of the leg).**
+  (1) **VERIFY THE TWO LOAD-BEARING READINGS** — the a-sign in arXiv:2603.25104, and whether
+      its fixed point IS this first integral. Both need a PDF, i.e. a session with arXiv
+      access or a human. **The binding constraint on the next decision is ACCESS, not compute
+      and not cleverness.** Until then treat the a > 0 two-scale object as POSSIBLY WRONG.
+  (2) **THE DSS LANE (standing item (1)) BECOMES THE SWING.** It was already ranked first on
+      theory — Necas-Ruzicka-Sverak/Tsai rule out exactly self-similar NS blowup, so a
+      Clay-relevant candidate must be discretely self-similar; a DSS blowup is a PERIODIC ORBIT
+      of the rescaled flow, which is a global search problem, which is what this project's
+      tooling is actually good at. The search did not turn up anyone doing that particular
+      profile search — **and that is the WEAKEST inference in the leg. Absence of search hits
+      is not absence of literature. Never let it harden into "nobody has done it".**
+  (3) **Finish the certificate anyway, cheaply, and stop calling it the result.** Every other
+      lane needs a pipeline that demonstrably closes.
+
+NEW LESSONS BANKED. (40) **Check the literature BEFORE the fourteenth leg, not after.** The
+search cost under an hour and it re-priced fifteen legs of work. Everything about the project's
+own discipline — gate the mechanism, build the adversary, price the elasticity — is aimed at
+not fooling yourself with your own instruments, and none of it can tell you that someone else
+finished first. **A project that only measures itself against its own previous leg will walk a
+long way in a direction that is already occupied.** (41) **Record the negative lead with its
+confidence, or it will be re-found and re-believed.** The extraordinary NS-singularity preprint
+is in the data file explicitly flagged "do not use", precisely so the next session does not
+spend a day on it. (42) **When the binding constraint is ACCESS rather than compute, say so
+and name what would unblock it.** The cheapest decisive act available to this project is now
+"read one paper", and it is blocked by a network policy — that is a fact about the situation
+worth writing down rather than routing around.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
+Clay odds ~0.05%.

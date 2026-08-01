@@ -303,10 +303,24 @@ a leg, and it is decisive in the same way.
   monotonicity that forces `E` to decrease is observed on every solution, not proved.
 - **Plain float64.** Nothing is interval-enclosed. `solver/interval.py` still has never
   been pointed at any of this, correctly, because nothing has closed in float.
-- **Novelty is unchecked.** A first integral of a scalar traveling-wave equation is
+- ~~**Novelty is unchecked.** A first integral of a scalar traveling-wave equation is
   exactly the sort of thing that is folklore to people who work on gCLM/De Gregorio. The
   literature search is item (5) on the standing list and it blocks any novelty claim here
-  as much as anywhere else. What is *not* in doubt is that this project has spent thirteen
+  as much as anywhere else.~~
+  **[CORRECTED BY v15, 2026-08-01 — see `TECHNICAL_P2_LITERATURE_SCOPE.md`.** The hedge above
+  was right, and it should now be stronger than a hedge: **presume the first integral is
+  KNOWN.** The search turned up `arXiv:2603.25104` (Huang–Tong–Wang, March 2026), whose
+  abstract states that the two-scale blowup's inner traveling wave — this object — has its
+  **existence established rigorously via a fixed-point method**; and `arXiv:2305.05895` (same
+  group, 2023), proving existence of gCLM self-similar profiles "either smooth on the whole
+  real line or **compactly supported** and smooth in the interior of their closed supports",
+  via the fixed point of an `a`-dependent nonlinear map with `Ω(x) = −x f(x)`. The natural way
+  to build such a fixed point for `Ω H(Ω) = E Ω_X` is precisely this reduction. Caveat on the
+  caveat: **no paper was read** — the container's network policy blocks arXiv and every
+  publisher domain — so this is a strong lead, not a verified fact. **None of the measurements
+  in this document change.** What does change is §6(b): finishing the certificate is a
+  capability demonstration and a reproduction, not the lottery ticket.]**
+  What is *not* in doubt is that this project has spent thirteen
   legs discretizing an equation that has a closed-form reduction, which is a lesson
   regardless of who knew it first.
 

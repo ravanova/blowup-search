@@ -4,6 +4,17 @@
 not a Clay result — but the wall the last two legs found is gone, and it went for a
 reason worth writing down.*
 
+> **UPDATE, one leg later (v15, 2026-08-01).** I did the literature search this post says I
+> hadn't done. **Presume the first integral below is known.** A March 2026 preprint by Huang,
+> Tong and Wang appears to establish existence of exactly this traveling wave via a fixed-point
+> method, and a 2023 paper by the same group proves existence of compactly supported profiles
+> in this family — so both the phenomenon and the technique are prior art. None of the
+> measurements in this post change; the novelty framing does, and so does the value of
+> finishing the certificate. Caveat: I could not actually read the papers (network policy),
+> so this is a strong lead rather than a verified fact. Full account in
+> `BLOG_P2_LITERATURE_SCOPE.md`. The original text is left standing below rather than edited,
+> because a corrected record is worth more than a tidy one.
+
 ---
 
 The previous two legs were about a wall. Leg 12 found that the candidate profile, for

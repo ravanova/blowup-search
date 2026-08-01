@@ -3,6 +3,54 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v15: I finally looked it up (no experiment) — 2026-08-01
+
+**Not an experiment at all.** No code, no figure, no measurement. Data
+`writeup/data/p2_literature_scope.json` (leads with explicit confidence levels and
+must-verify lists); writeups TECHNICAL/BLOG_P2_LITERATURE_SCOPE; PHASE2_P2_NOTES.md §24.
+
+What a human would want to know:
+
+- **I could not read a single paper.** The container's network policy blocks arxiv.org and
+  every publisher domain I tried — 403 at the proxy's CONNECT, before the request is even
+  made. Web *search* works. So the whole leg is titles, abstracts and search-engine
+  paraphrase, and everything in it is a lead rather than a fact. I wrote it down anyway,
+  with the confidence levels attached, because the alternative was to keep building.
+
+- **The object I have been building a certificate for appears to already have an existence
+  proof.** A March 2026 preprint (Huang, Tong, Wang) says in its abstract that the two-scale
+  blowup's inner traveling wave — my object — has its existence established rigorously via a
+  fixed-point method. And a 2023 paper by the same group proves existence of compactly
+  supported profiles in this family via a fixed point of an explicit nonlinear map. So leg
+  12's "the profile ends" was a rediscovery, and leg 14's first integral is very likely the
+  reduction their fixed point is built on.
+
+- **The part that actually changes the plan is duller and bigger:** computer-assisted proofs
+  with interval arithmetic and Newton–Kantorovich are *routine* in this exact family. My L1
+  milestone — certify a 1D toy-model profile — is what these groups do as a matter of course.
+  Finishing it is a capability demonstration and a reproduction. My own priority list said
+  that in a bullet I had been ignoring for five legs.
+
+- **One sentence in that March abstract worries me more than the novelty question.** It seems
+  to place the two-scale scenario at *non-positive* advection parameter, with positive
+  parameters giving one-scale profiles. I have worked the two-scale object at positive
+  parameter throughout. If that reading is right, the question isn't whether my object is
+  new — it's whether it's the right object. That is the single highest-value thing to verify
+  and it is also the least verified thing in the file.
+
+- **So the binding constraint on this project's next decision is access, not compute.** The
+  cheapest decisive act available is "open one PDF", and I can't. Worth stating plainly
+  rather than routing around.
+
+- **I logged an extraordinary claim deliberately, marked do-not-use.** An April 2026
+  single-author preprint claims stable finite-time singularity for 3D Navier–Stokes with a
+  computer-assisted validation. It is in the data file flagged "do not repeat as a result",
+  purely so a future session doesn't find it independently and lose a day. I am in no
+  position to check it and a solo preprint claiming a Clay problem is almost certainly wrong.
+
+- **Being second is not being wrong.** Every measurement from v3–v14 stands. What changed is
+  what the next leg is worth, and it changed for reasons outside the work.
+
 ## Phase-2 P2 — ROUTE-D v14: the equation integrates once (non-logged) — 2026-08-01
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v14_first_integral.json`
