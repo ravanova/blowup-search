@@ -1,4 +1,25 @@
-"""STATUS: WORK IN PROGRESS -- DOES NOT CONVERGE YET. NO TEST FILE. DO NOT USE.
+"""STATUS: SUPERSEDED by solver/first_integral.py (Route-D v14).  DO NOT USE.
+
+This is the DIRECT build of the finite-support system -- collocate the residual R
+itself and append a free-boundary condition -- and it never converged.  v14 found
+why, and the reason is structural rather than a bug:
+
+  * R is IDENTICALLY ZERO at X_c, because every term carries Omega or Omega_X and
+    both vanish there.  A collocation row at the edge therefore carries no
+    information, which is exactly why this module had to append `edge_condition`
+    by hand.  In the first-integral form the edge row is non-degenerate and the
+    free boundary is priced by the equation itself.
+  * this module puts the zero order p = 1/a into the ansatz.  (FI) makes it an
+    OUTPUT, so nothing has to be known in advance.
+
+solver/first_integral.py converges from a cold start in 5-10 Newton steps to
+~1e-14 at every a in 0.2..1.2, is gated by test_first_integral.py (11/11), and
+reproduces the whole-line build's X_c/c to 4e-6.  Kept here only as the record of
+what the direct route does, and because the contrast is the point of v14 section 3.
+
+Original WIP banner follows.
+--------------------------------------------------------------------------
+STATUS: WORK IN PROGRESS -- DOES NOT CONVERGE YET. NO TEST FILE. DO NOT USE.
 
 Committed only so it is not lost with the container.  A smoke run
 (FiniteSupportProfile(a=0.3, K=16, N=800).solve()) reports converged=False with

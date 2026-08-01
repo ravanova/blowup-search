@@ -3,6 +3,56 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v14: the equation integrates once (non-logged) — 2026-08-01
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v14_first_integral.json`
+(regen `python -u experiments/p2_route_d_v14_first_integral.py`, ~6 min); figure fig32
+(`writeup/4_p2_lottery/p2_route_d_v14_evidence.py`); writeups TECHNICAL/BLOG_P2_ROUTED_V14;
+PHASE2_P2_NOTES.md §23. Code: `solver/first_integral.py` + `test_first_integral.py` (11/11;
+suite now 21 files green).
+
+What a human would want to know:
+
+- **The leg was supposed to be a build, and the build turned out to be two lines of algebra.**
+  The instruction from v13 was "pose the problem on the profile's own support and measure the
+  operator norm". Setting that up meant writing down the equation carefully, and written
+  carefully it integrates: `E = c + aU` has `E' = aH(Ω)` *by definition*, which is the
+  equation's own nonlinearity, so the whole thing is `(log|Ω|)' = (1/a)(log E)'`. Thirteen
+  legs of space design, adversary construction and constant-pricing were spent on an equation
+  with a closed-form first integral. The ingredient had been sitting in the notes since v12.
+
+- **The check that made me believe it took one minute.** Let `a → 0` and the formula
+  degenerates to `Ω = −exp(U/c)`, which on the anchor is `−1/(1+X²)` — the exact solution the
+  project has been anchored on since the start. Agreement `1.1e−16`. If a claimed identity
+  contains your known-answer gate as a limit, you are probably not wrong.
+
+- **The kill switch passes, and I nearly measured the control wrong.** First pass I compared
+  the reduced system's flat norm against an *unweighted* whole-line ladder — which diverges
+  like `J^+0.99` even at the anchor, purely because the grid's outer radius grows with `J`.
+  That would have been a manufactured contrast. Re-ran the control through v13's own
+  `graded_norm_by_radius` at the same grading: `J^−0.004` at the anchor, `J^+2.800` at
+  `a=0.2`, reproducing v12. Then re-ran the *reduced* ladder under that same grading too, in
+  case "flat" was an artifact of a convenient norm. It isn't, and it can't be — on a bounded
+  interval those weights are equivalent, which is the whole reason the old measurement had to
+  be weighted.
+
+- **The repair cost a banked result.** v11's grid-refinement argument that the solutions stop
+  being continuum objects past `a ≈ 0.5` was banked as a fourth confirmation of the survival
+  boundary. On its own support the same object is converged to 8–12 digits at `a` up to 1.2.
+  The spread v11 saw was the global basis failing on a compactly supported profile whose edge
+  regularity *degrades* as `a` grows. That retires the argument, not the boundary — the other
+  three confirmations are about a different question — but the count is three now, not four.
+
+- **Still not a certificate, and I want that said plainly.** None of `Y₀, Z₀, Z₁, Z₂` exist in
+  the new space. `‖A‖` converging means the approximate inverse exists in the limit; it says
+  nothing about the budget closing. And `4.52` is not "better than" v7–v9's `47` — different
+  operator, different space; the comparable thing is the slope.
+
+- **Novelty unchecked, and it should bother the reader as much as it bothers me.** A first
+  integral of a scalar traveling-wave equation is exactly the kind of thing that is folklore
+  to people who do gCLM/De Gregorio professionally. The literature search is the standing
+  cheap item and it blocks this claim like it blocks the others.
+
 ## Phase-2 P2 — ROUTE-D v13: I had the sign wrong (non-logged) — 2026-07-31
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v13_turning.json`

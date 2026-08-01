@@ -1469,3 +1469,128 @@ Restoring c to fix a range obstruction was disqualified on paper by a fact recor
 already in these notes; measuring it took three minutes and made the paper argument checkable.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
 Clay odds ~0.05%.
+
+
+## §23 — ROUTE-D v14 DONE (2026-08-01): THE EQUATION HAS A FIRST INTEGRAL, and on its own
+## support THE KILL SWITCH PASSES — ||A|| FLAT in K against the whole line's J^+2.80.
+
+Built solver/first_integral.py + test_first_integral.py 11/11 (suite now **21 files green**);
+experiments/p2_route_d_v14_first_integral.py → writeup/data/p2_route_d_v14_first_integral.json
+→ fig32. NOT a logged Tier run (deterministic). BLOG/TECHNICAL_P2_ROUTED_V14.md.
+
+**THE IDENTITY.** E := c + aU has E_X = a H(Omega) by definition, so on {Omega != 0}
+
+    R = Omega H(Omega) - E Omega_X = 0  <=>  (log|Omega|)_X = (1/a)(log E)_X
+    =>  |Omega| = C E^{1/a},  and the gauge Omega(0) = -1 gives C = c^{-1/a}:
+
+        **Omega(X) = -( E(X)/c )^{1/a},   E = c + aU,   U_X = H(Omega).**      (FI)
+
+Thirteen legs discretized an equation that integrates once in closed form.
+
+**GATES (three, all against something that is not this module).**
+- **a -> 0 IS the anchor.** (1+aU/c)^{1/a} -> exp(U/c); on the anchor U = -(1/2)log(1+X^2),
+  c = 1/2, so Omega = -1/(1+X^2) **exactly** — measured **1.11e-16**, and the finite-a form
+  approaches it at the predicted O(a) (fitted a^1.011).
+- **On the whole-line collocation build, which knows nothing about it.** Spread of
+  |Omega|/E^{1/a} over the core: a=0.2 **5.9e-8 -> 1.0e-11** over J=200..1600 (profile relres
+  1.8e-6 -> 8.7e-10); a=0.3 **2.3e-6 -> 5.1e-9** (relres 6.2e-5 -> 4.5e-7). The defect is an
+  order BELOW the profile's own residual at every J and falls FASTER (x251 vs x126; x20 vs x9)
+  — the signature of an exact identity on an approximate object. Gate written as a RATE, not
+  a threshold, because a threshold would only have measured the profile.
+- **The reconstruction solves the ORIGINAL R.** Off-node, independent quadrature:
+  max|R| = 6.8e-7 -> 4.3e-8 -> 2.7e-9 -> **1.9e-10** as the U-quadrature refines (n^-1.98).
+
+**WHAT (FI) GIVES FOR FREE (three §21 measurements become one-liners).**
+- **The profile ENDS, forced not discovered.** E decreases (E_X = aH(Omega) < 0 for X>0),
+  hits 0 at finite X_c, beyond which E^{1/a} is not real => Omega == 0, self-consistently.
+  CAVEAT SAID OUT LOUD: needs H(Omega)<0 for X>0 — true on every solution found, not proved.
+- **Zero of order 1/a WITH the amplitude.** E vanishes linearly at X_c, so
+  Omega ~ -A (X_c-X)^{1/a}, A = (2 s(1)/X_c)^{1/a}. Fitted exponents 4.000019/3.333350/
+  2.500014/2.000013/1.250017 vs 1/a at a=0.25/0.3/0.4/0.5/0.8 (rel err <= 1.4e-5).
+- **Only finitely smooth.** Omega in C^{1/a} at the edge; classical (C^1) exactly while a<1.
+  **At a=1 (De Gregorio) the edge is a CORNER**; a>1 is a cusp. Flagged as an OBSERVATION,
+  not a claim — needs the literature check, not another leg.
+
+**THE REDUCED SYSTEM (RS).** v=X/X_c, e(v)=E(X_c v)/c; the finite Hilbert transform is scale
+invariant so X_c leaves H:  c e' + a X_c Hpv[e^{1/a}] = 0, e(0)=1, e(1)=0, c a pure scale
+(report the dilation invariant X_c/c). TWO structural reasons it converges where the direct
+build did not, both worth carrying:
+  1. **e(1)=0 goes in the ANSATZ** (e = (1-v^2)s, s even Chebyshev), so the order-1/a zero is
+     an OUTPUT, not something a grid resolves and not something put in by hand.
+  2. **The edge row is NON-DEGENERATE.** R itself is identically 0 at X_c (every term carries
+     Omega or Omega_X), so a collocation row there carries no information and a direct build
+     must append an ad-hoc free-boundary condition; (RS) has c e'(1) = -a X_c Hpv[w](1) with
+     both sides nonzero. **The free boundary is priced by the equation.**
+solver/finite_support.py (the direct build) never converged — residual 1.4 after 59 iterations
+at a=0.3. (RS) converges from a **COLD START** (s==1, X_c0=10 at every a) in **5-10 Newton
+steps to ~1e-14**, for every a in 0.2..1.2. Numerics: one p.v. subtraction against the exact
+log((1+v)/(1-v)), composite Gauss-Legendre on geometrically graded panels; gated against the
+exact airfoil family (1/pi)p.v.INT sqrt(1-u^2)U_{n-1}/(v-u) = T_n to **5.3e-14** (deliberately
+harsher than anything the module meets: sqrt is endpoint order 1/2, the profiles are 1/a>=2).
+CROSS-BUILD: X_c/c vs the whole-line profile's own E-crossing **3.9e-6 / 4.3e-6 / 7.3e-5** at
+a=0.3/0.4/0.5 (§21's two builds agreed to 0.06-0.11%); K-converged to **3.7e-13** over K=64..192.
+
+**THE KILL SWITCH — IT PASSES.**
+  a=0.2:  6.274 7.426 7.528 7.320 7.301 7.299 7.304 7.306  (K=16..192)  **K^-0.0009** (K>=48)
+  a=0.3:  4.528 4.505 4.508 4.513 4.518 4.518 4.519 4.520               **K^+0.0009**
+  a=0.4:  3.063 3.060 3.062 3.068 3.070 3.072 3.071 3.073               **K^+0.0010**
+  a=0.5:  2.207 2.206 2.208 2.213 2.214 2.215 2.215 2.216               **K^+0.0011**
+CONTROL, same code and same decay grading that produced §21's number (turning_point.
+graded_norm_by_radius, alpha=1.4): a=0 **J^-0.004** (§21: -0.003), a=0.2 **J^+2.800**
+(§21: +2.86), a=0.3 **J^+2.785**. Same object, reproduced.
+TWO HONESTY ITEMS: (i) the a=0.2 FULL-ladder slope is K^+0.0308 — the K=16 point is
+under-resolved, because X_c/c=34.3 while the core stays O(1), so v carries a layer of width
+~1/X_c and needs K >~ X_c; both slopes are reported. (ii) **The flatness is not an artifact of
+an unweighted norm**: repeating with the decay grading at alpha=1.4 gives K^-0.0030/+0.0008/
++0.0011/+0.0013. It HAS to — on a COMPACT interval every such weight is bounded above and
+below. Worth saying because the UNWEIGHTED whole-line norm grows J^+0.99 **even at the anchor**,
+purely from the grid's outer radius ~4J/pi growing with J.
+
+**THE RADIUS LAW, CONSTANTS MEASURED (recommended brick (3), delivered).**
+log(X_c/c) = -pi(c/a + U_0)/m with the profile's OWN m = INT Omega and U_0 (measured OUTSIDE
+the support, where Omega==0 and there is no p.v.). §21's e^{c/a} is this law with the ANCHOR's
+m = -pi; the real m runs -4.55 -> -2.43 over a=0.2..1.0, so the coefficient of 1/a is
+-pi c/m ~ 0.69 at a=0.2, NOT 1. Law/measured: **0.997 / 0.986 / 0.971 / 0.954 / 0.938 / 0.909
+/ 0.887** at a=0.2/0.3/0.4/0.5/0.6/0.8/1.0 — improving monotonically as a->0, which ATTRIBUTES
+the error (a far-field expansion evaluated at X_c, and X_c grows as a falls).
+
+**§20's FOURTH CONFIRMATION OF a* DOES NOT SURVIVE (the other three do).** §20 read a
+whole-line grid spread (3.7e-3 at a=0.8, 1.3e-2 at a=1.0 vs 3e-5 at 0.5) as "continuum objects
+only up to a~0.5". On (RS) the same object is K-converged to **6.3e-13 / 4.9e-12 / 2.2e-10 /
+2.3e-9 / 7.6e-9** at a=0.5/0.6/0.8/1.0/1.2, cold start at every one. The spread was the global
+basis failing on a compactly supported profile whose edge regularity is C^{1/a} and therefore
+gets WORSE as a grows — the same artifact family as §21's ringing (lesson 31). **What is
+retired is §20's ARGUMENT, not a\*:** the other three confirmations (§9-cont2 GA-/genome-/basis-
+convergence) are about the two-scale GA problem, a different question this leg does not touch.
+So a* is confirmed THREE times, and separately the compactly supported traveling wave exists
+as a grid-converged continuum object well past it.
+
+**NOT CLAIMED.** Not a certificate — Y0, Z0, Z1, Z2 have not been computed in the reduced
+space; ||A|| converging says the approximate inverse EXISTS in the limit, nothing about the
+radii polynomial closing. **4.52 is NOT "better than 47"**: v7-v9's bounds are a DIFFERENT
+operator in a DIFFERENT space, and the comparable quantity is the SLOPE, not the value
+(quoting the value as a gain would be lesson 28 in a new costume). ||A|| here is an exact
+measured induced norm of the discrete matrix, not a continuum upper bound. The reduced <->
+original equivalence is for even, negative, unimodal profiles. **Novelty UNCHECKED** — a first
+integral of a scalar traveling-wave equation is exactly the sort of thing that is folklore to
+people who work on gCLM/De Gregorio, and the literature search (standing item (5)) blocks any
+novelty claim. What is not in doubt is that this project spent thirteen legs discretizing an
+equation that reduces in one line.
+
+NEW LESSONS BANKED. (36) **Before discretizing, try to integrate.** Thirteen legs of space
+design, norm design, adversary construction and constant-pricing were spent on an equation with
+a closed-form first integral, and the integration is two lines. The tell was in the notes the
+whole time: E was DEFINED in §21 and its derivative is the equation's own nonlinearity.
+(37) **A degenerate row is a formulation smell, not a bookkeeping nuisance.** The direct build
+needed an ad-hoc free-boundary condition precisely because the residual carries no information
+at the edge; the formulation in which the edge row is nonzero is the one that converges from a
+cold start. When a build needs a condition "appended", ask what the equation forgot.
+(38) **When you change formulations, re-measure the CONTROL with the new code.** The contrast
+"flat vs J^+2.8" is only a contrast if both sides are the same norm; an unweighted whole-line
+ladder diverges J^+0.99 at the ANCHOR, and quoting that as the control would have manufactured
+a result out of a grid radius. (39) **A repair that works also re-opens what the broken version
+had banked.** Fixing the formulation retired a banked confirmation of a\* — because the evidence
+for it was a symptom of the same instrument defect. Re-run the OLD conclusions through the NEW
+formulation, not only the new question.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
+Clay odds ~0.05%.
