@@ -224,6 +224,18 @@ writeup/
     **L1 is occupied territory** and finishing the certificate is a capability demonstration,
     not the lottery ticket. v14's novelty claim is retracted in place. The swing moves to the
     DSS lane. *(no figure — no measurement)*
+35. [TECHNICAL_P2_ROUTED_V16.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V16.md) ·
+    [BLOG_P2_ROUTED_V16.md](4_p2_lottery/BLOG_P2_ROUTED_V16.md) — **Route-D v16**, the float
+    rehearsal, framed by v15 as a **capability build, not a result**. `Y₀` reaches machine
+    precision (`1.5e−12` at K=96, against the GA's `1e−2` floor and v12's anchor-priced
+    `2.4e−4`), `Z₀` is roundoff — and **`Z₂` does not exist in the sup setting, for two reasons
+    and neither is the far field**: the finite Hilbert transform is unbounded on sup on a
+    *bounded* interval (adversary grows `+0.499` per e-fold in `log K`, stable under a 4×
+    quadrature refinement — while the naive probe's apparent divergence collapses to `0.999`),
+    and `sup|N''|` is finite exactly for `a ≤ 1/2`, where `Ω` loses `C²`. `Z₁` is not computed
+    and the code refuses to assemble a budget. The repair is measured: a Hölder domain norm at
+    **`γ ≳ 0.35`** — the same threshold v5 found on the whole line, now separated from the decay
+    grading. *(fig 33)*
     *(fig 31)*
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
@@ -259,6 +271,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig33_route_d_v16_rehearsal.png` | 4 | P2 — Route-D v16: `Y₀` falling to machine precision against its nodal control, which apparent divergence survives refining the instrument, the log-`K` unboundedness of `H` on a bounded interval, the Hölder repair and its `γ ≳ 0.35` threshold, the exact `a ≤ 1/2` threshold for `sup|N''|`, and the ledger with `Z₁` open |
 | `fig32_route_d_v14_first_integral.png` | 4 | P2 — Route-D v14: the first integral's defect vanishing with `J` on an independent build (and its `a → 0` limit reproducing the exact anchor), the profile on its own support with the edge exponent, THE KILL SWITCH (`‖A‖` flat in `K` against `J^+2.80` on the whole line), the radius law with the profile's own `(m, U₀)`, and the large-`a` grid convergence that retires v11's fourth confirmation of `a*` |
 | `fig31_p2_route_d_v13_turning.png` | 4 | P2 — Route-D v13: the far-field mode growing like `(log X)^{1/a}`, its exponent against the parameter-free prediction (with the `a = 0.5` row refined rather than dropped), the inner mode that *vanishes* (v12's sign error), the divergence attributed by outer radius against an `a = 0` control, where the extremal row is sourced, and the disqualified bordering repair |
 | `fig30_p2_route_d_v12_defect.png` | 4 | P2 — Route-D v12: the profile ending at `X_c`, the effective speed `E = c + aU` crossing zero, the zero's order against the parameter-free prediction `1/a` in two discretizations, the defect in the certificate's own norm against the budget, its convergence rate in `J`, and the operator norm flat at the anchor but divergent at the real profile |
@@ -284,6 +297,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_d_v16_rehearsal.json` | Arc 4 / fig33 — A the interpolant defect vs `K` with its nodal control, B the adversary vs the naive probe under quadrature refinement, C the sup divergence in `log K`, D the Hölder repair swept in `γ`, E `sup|N''|` by edge cutoff across `a` (the `a ≤ 1/2` threshold), plus the assembled rehearsal with `Z₁` reported as `None` |
 | `p2_literature_scope.json` | Arc 4 / **no figure** — Route-D v15's literature leads: each with reference, claimed content, why it matters, an explicit `confidence`, and a `must_verify` list. Includes one extraordinary claim flagged **do not use**. Nothing in it was read from a paper; the container's network policy blocked arXiv and the publishers |
 | `p2_route_d_v14_first_integral.json` | Arc 4 / fig32 — A the first-integral defect on the whole-line build + the exact `a → 0` anchor limit, B the profile on its support with edge exponent and amplitude, C THE KILL SWITCH (`‖A‖` vs `K` in three measures, with the decay-graded whole-line control), D the radius law with measured `(m, U₀)`, E large-`a` `K`-convergence |
 | `p2_route_d_v13_turning.json` | Arc 4 / fig31 — S1 the corrected inner-mode exponent, S2 the growing far-field mode + its quadrature and grid convergence, S3 the operator norm by outer cutoff with the `a = 0` control, S4 where the extremal row is sourced, S5 the bordering repair disqualified |
@@ -317,6 +331,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v12_evidence.py        # fig30
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v13_evidence.py        # fig31
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v14_evidence.py        # fig32
+.venv/bin/python writeup/4_p2_lottery/p2_route_d_v16_evidence.py        # fig33
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
@@ -334,6 +349,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python -u experiments/p2_route_d_v12_defect.py   # ~13 min
 .venv/bin/python -u experiments/p2_route_d_v13_turning.py   # ~6 min
 .venv/bin/python -u experiments/p2_route_d_v14_first_integral.py  # ~6 min
+.venv/bin/python -u experiments/p2_route_d_v16_rehearsal.py       # ~5 min
 
 # re-curate data/ from raw logs (only if you still have experiments/*):
 .venv/bin/python writeup/curate_evidence.py

@@ -1681,3 +1681,87 @@ and name what would unblock it.** The cheapest decisive act available to this pr
 worth writing down rather than routing around.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
 Clay odds ~0.05%.
+
+
+## §25 — ROUTE-D v16 DONE (2026-08-01): THE FLOAT REHEARSAL. Y_0 IS FINALLY MACHINE-LEVEL;
+## Z_2 DOES NOT EXIST IN THE SUP SETTING, AND THE FAR FIELD IS NOT WHY.
+
+Built solver/reduced_certificate.py + test_reduced_certificate.py 16/16 (suite **22 files
+green**); experiments/p2_route_d_v16_rehearsal.py → writeup/data/p2_route_d_v16_rehearsal.json
+→ fig33. NOT a logged Tier run (deterministic). BLOG/TECHNICAL_P2_ROUTED_V16.md.
+Framing set by §24: the certificate is a **one-chunk CAPABILITY build**, not the result.
+
+**Y_0 REACHES MACHINE PRECISION — the first genuinely good number in the ledger.** The defect
+that matters is the residual of the INTERPOLANT as a function (§21's distinction, and it
+survives the change of formulation): off-node sup|F| at a=0.3 runs **1.5e-2 → 4.0e-5 → 2.0e-10
+→ 1.5e-12** over K=16..96, against a NODAL control flat at 1e-14 by construction. Fitted
+K^-13.0 (a=0.3) / K^-16.3 (a=0.4) above the 1e-11 float floor vs the K^-(2/a+1) the (1-v)^{1/a}
+branch predicts (-7.7/-6.0) — **the fits are floor-contaminated, so the honest claim is
+"faster than algebraic and it reaches machine precision", NOT a rate.** For scale: GA floor
+~1e-2 for five legs; §22's anchor-priced budget 2.4e-4. **Z_0 = ||I - A DF|| = 1.6e-11**
+(roundoff, as it must be; reported for ledger completeness only).
+
+**Z_2 IS INFINITE IN THE SUP SETTING. TWO INDEPENDENT REASONS, NEITHER THE FAR FIELD.**
+- **(a) H IS UNBOUNDED ON SUP — ON A BOUNDED INTERVAL.** §13's W3 is a LOCAL fact (it is about
+  a jump, not about infinity) and a bounded domain does not repair it. **Removing the far field
+  killed the DECAY grading and left the SMOOTHNESS one completely untouched.** Adversary built
+  inside the actual perturbation space de=(1-v^2)ds (Chebyshev partial sums of a step):
+  **1.350/1.601/2.061/2.351/2.727/3.040 over K=8..256, LINEAR IN log K at +0.499 per e-fold**
+  (classical 2/pi=0.637; the deficit is the (1-v^2) damping the jump region).
+  **THE INSTRUMENT CHECK THAT MAKES IT TRUSTWORTHY:** the NAIVE probe (one high Chebyshev mode)
+  ALSO reports a divergence — 0.998/2.935/6.436 at K=64/128/256 — **and it is entirely the
+  quadrature**: under a 4x refinement (levels/order 20/20 → 30/80) the naive row at K=256
+  collapses **6.436 → 3.007 → 2.985 → 0.999** while the adversary row is **2.991 → 3.038 →
+  3.040 → 3.041**. One row moves, one does not. Lessons 9 and 14 in one table; BOTH rows are
+  kept in the module and the figure, not just the one that supports the conclusion.
+- **(b) sup|N''| IS FINITE EXACTLY FOR a <= 1/2.** N(e)=e^{1/a}, N''=p(p-1)e^{p-2}, p=1/a, and
+  e vanishes LINEARLY at the edge ⇒ finite iff p>=2 iff **a <= 1/2** — **exactly where
+  Omega = -e^{1/a} loses C^2**. Displayed as GROWTH under an edge cutoff tightened over eight
+  decades (1e-2 → 1e-10), because quoting whatever a grid reached would hide the divergence:
+  growth factor **1.00 for a=0.2/0.25/0.3/0.4/0.45/0.5** and **28.5 / 466 / 3.8e4 / 1.0e6 for
+  a=0.55/0.6/0.7/0.8**. At a=1/2 the value is p(p-1)=2 EXACTLY (code returns 2.000000000000,
+  hand-checkable).
+  **THREE THINGS THIS IS NOT.** (i) NOT a statement about the equation — §23 solves the profile
+  grid-converged to a=1.2; **the traveling wave exists, it is the CERTIFICATE'S NORM that
+  fails**. (ii) **NORM-DEPENDENT** — a domain weight vanishing like (1-v)^{(2-1/a)/2} restores
+  finiteness at the price of requiring perturbations to vanish at the edge (lesson 13's trade,
+  in a new place). (iii) **NOT an explanation of a\***. The coincidence with the independently
+  measured a*~0.5-0.55 is recorded BECAUSE it is striking and because recording it is how the
+  next person disproves it. §22's a=1/3 control is the precedent — a tantalising coincidence at
+  a* that a control killed. **No control has been run here, so it stays an observation.**
+
+**Z_1 IS NOT COMPUTED AT ALL** — the infinite-dimensional tail is the entire content of a real
+CAP. `rehearsal()` returns it as **None, not zero**, and **deliberately REFUSES to return a
+radii polynomial**: assembling one from a ledger with a hole or an infinity in it is exactly
+lesson 15's failure mode.
+
+**VERDICT: THE SUP-TO-SUP REHEARSAL DOES NOT CLOSE**, and not for the reason §21/§22 found.
+**THE REPAIR IS §14's AND IT IS MEASURED, NOT ASSUMED:** the same adversary against
+||de||_gamma = sup|de| + [de]_gamma gives slopes **+0.066 (0.15) / +0.014 (0.25) / -0.021
+(0.35) / -0.049 (0.5) / -0.057 (0.65) / -0.050 (0.85)** — the divergence stops at
+**gamma >~ 0.35**, and gamma=0.15 STILL CREEPS, which is what shows the threshold is real
+rather than an artefact of dividing by any seminorm at all. **§14 U1 found the SAME 0.35 on the
+whole line — a genuine INDEPENDENT check, because §14's norm ALSO carried a decay grading and
+this one has none, so the threshold belongs to the SMOOTHNESS half.** So §14/§17's Holder
+machinery is the next brick and NOT wasted: its compact-interval version has **no decay
+grading, no resonance, no matching radius X_0 and no tail bound** — roughly §16-§18 with the
+expensive half deleted.
+
+**CORRECTION TO §23:** "the cold start converges at every a" is slightly overstated. At
+**a=0.7 the cold start (X_c0=10) misses the basin** and continuation from the neighbouring a is
+needed; every other value in 0.2..1.2 converges cold. Small, but it was a claim.
+
+NEW LESSONS BANKED. (43) **When a repair removes an obstruction, enumerate the OTHER
+obstructions before assuming they went with it.** §23 removed the far field and I carried an
+unstated assumption that the smoothness requirement went too. It did not, and it never could
+have: H's unboundedness on sup is about a jump, not about infinity. **Ask which of the old
+requirements were actually ABOUT the thing you removed.** (44) **Two independent-looking signs
+of the same conclusion can be one real fact and one instrument artifact — and they will not
+feel different.** The naive single-mode probe and the step adversary both said "divergent";
+refining the quadrature killed one and left the other untouched. Reaching the right conclusion
+for a wrong reason is how a wrong reason survives several legs. **Refine the instrument on
+EVERY row, including the ones you agree with.** (45) **A ledger entry that is unknown must be
+None, never zero, and the assembly must refuse to run.** Returning a budget with Z_1 silently
+absent would have produced a closed-looking result off a ledger with a hole in it.
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
+Clay odds ~0.05%.

@@ -1,6 +1,52 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-08-01 (updated after Route-D v15). **NEWEST LEG FIRST — Route-D v15 IS THE
+*Written 2026-08-01 (updated after Route-D v16). **NEWEST LEG FIRST — Route-D v16 IS THE FLOAT
+REHEARSAL, framed by v15 as a CAPABILITY BUILD not a result. IT DOES NOT CLOSE, and the reason
+is not the far field.** **THE GOOD NUMBER: Y_0 REACHES MACHINE PRECISION** — the defect of the
+INTERPOLANT as a function (v12's distinction, which survives the reformulation) runs
+**1.5e-2 → 4.0e-5 → 2.0e-10 → 1.5e-12** over K=16..96 at a=0.3, against a NODAL control flat at
+1e-14 by construction. (Fits K^-13.0/K^-16.3 are FLOOR-CONTAMINATED — the honest claim is
+"faster than the algebraic K^-(2/a+1) and it reaches machine precision", NOT a rate.) For scale:
+GA floor ~1e-2 for five legs; v12's anchor-priced budget 2.4e-4. **Z_0 = 1.6e-11** (roundoff, as
+it must be). **Z_2 IS INFINITE IN THE SUP SETTING, TWO INDEPENDENT REASONS, NEITHER THE FAR
+FIELD:** **(a) H is unbounded on sup ON A BOUNDED INTERVAL** — v4's W3 is a LOCAL fact (about a
+jump, not about infinity), so **removing the far field killed the DECAY grading and left the
+SMOOTHNESS one completely untouched**; adversary (Chebyshev partial sums of a step, built inside
+the real perturbation space de=(1-v^2)ds) grows **1.350→3.040 over K=8..256, linear in log K at
++0.499/e-fold**. **THE INSTRUMENT CHECK THAT MAKES IT TRUSTWORTHY: the NAIVE probe (one high
+mode) ALSO "diverges" (0.998/2.935/6.436) and it is ENTIRELY THE QUADRATURE** — under a 4x
+refinement the naive row at K=256 collapses 6.436→0.999 while the adversary row is
+2.991→3.041. One row moves, one does not; **both are kept in the module and the figure.**
+**(b) sup|N''| is finite EXACTLY for a <= 1/2** (N=e^{1/a}, N''=p(p-1)e^{p-2}, e vanishes
+LINEARLY at the edge ⇒ need p>=2) — **exactly where Omega loses C^2**. Growth factor over an
+8-decade edge-cutoff tightening: **1.00 at a=0.2..0.5; 28.5/466/3.8e4/1.0e6 at
+a=0.55/0.6/0.7/0.8**; at a=1/2 the value is p(p-1)=2 EXACTLY. **THREE THINGS (b) IS NOT: not a
+statement about the EQUATION (v14 solves the profile grid-converged to a=1.2 — the wave exists,
+the NORM fails); NORM-DEPENDENT (a weight (1-v)^{(2-1/a)/2} restores it, at the price of
+perturbations vanishing at the edge — lesson 13's trade); and NOT an explanation of a\***. The
+coincidence with a*~0.5-0.55 is RECORDED because recording it is how the next person disproves
+it — v12's a=1/3 control is the precedent, and **no control has been run here.** **Z_1 IS NOT
+COMPUTED AT ALL** (the infinite-dimensional tail = the whole content of a real CAP);
+`rehearsal()` returns it as **None, not zero, and REFUSES to return a radii polynomial**.
+**THE REPAIR IS MEASURED, NOT ASSUMED:** the same adversary against
+||de||_gamma = sup|de| + [de]_gamma gives slopes **+0.066/+0.014/-0.021/-0.049/-0.057/-0.050**
+at gamma=0.15/0.25/0.35/0.5/0.65/0.85 — **divergence stops at gamma >~ 0.35, and gamma=0.15
+STILL CREEPS**, which is what shows the threshold is real and not an artefact of dividing by any
+seminorm. **v5 U1 found the SAME 0.35 on the whole line — a genuine independent check, because
+v5's norm ALSO carried a decay grading and this one has none, so the threshold belongs to the
+SMOOTHNESS half.** So v5/v7/v8's Holder machinery is the next brick and is NOT wasted: the
+compact-interval version has **no decay grading, no resonance, no matching radius X_0, no tail
+bound** — v7-v9 with the expensive half deleted. **CORRECTION TO v14: "the cold start converges
+at every a" is overstated — at a=0.7 it misses the basin and needs continuation; every other
+value in 0.2..1.2 converges cold.** New solver/reduced_certificate.py +
+test_reduced_certificate.py (16/16; suite **22 files green**); fig33;
+BLOG/TECHNICAL_P2_ROUTED_V16.md. Everything banked + pushed on `main`. **NEXT — UNCHANGED FROM
+v15's ranking, and v16 does not disturb it: (1) verify the two load-bearing literature readings
+(BLOCKED ON PDF ACCESS — tell the user); (2) the DSS lane as the swing; (3) the Holder version
+of the reduced space ONLY as a capability finish, clearly labelled as such.** Do NOT run another
+whole-line estimate leg.*
+
+*Before v16, in the same session: **Route-D v15 IS THE
 LITERATURE CHECK, and it re-prices fifteen legs. READ THE LIMITATION FIRST: NOT ONE PAPER WAS
 READ** — this container's network policy blocks arxiv.org and every publisher domain reached
 (WebFetch and curl both 403 at the proxy's CONNECT). Web SEARCH works. So identifiers (titles,
@@ -395,7 +441,7 @@ THE LEVEL / RIGOR LADDER (the user's framing, honor it): Level-0 = reproduce kno
 results. Level-1 = a novel numerical map (where ALL gCLM work through fig18 sits).
 Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovich
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
-v1–v14 (fig19–fig32) are tooling + scoping/negative results + partial bounds + one exact
+v1–v14 + v16 (fig19–fig33) are tooling + scoping/negative results + partial bounds + one exact
 algebraic identity on the way there, NOT certificates; v15 is Level-0 scoping and found that
 Level-2 in this family is ROUTINE FOR OTHERS.**
 Level-3 = Clay.
@@ -413,7 +459,8 @@ PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, 
 §9 GA framework, §9-cont TWO-SCALE, §9-cont2 a_p(K) map, §10 ROUTE-D v1, §11 ROUTE-D
 v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-D v12,
 §22 ROUTE-D v13, §23 ROUTE-D v14,
-**§24 ROUTE-D v15 = newest (the literature check — READ IT BEFORE CHOOSING A LANE)**).
+§24 ROUTE-D v15 (the literature check — READ IT BEFORE CHOOSING A LANE),
+**§25 ROUTE-D v16 = newest**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
@@ -425,7 +472,7 @@ STATE (all banked + pushed to main):
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
   §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13,
-  §23 Route-D v14, §24 Route-D v15 (literature scope) — all DONE + banked.
+  §23 Route-D v14, §24 Route-D v15 (literature scope), §25 Route-D v16 — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited — earned by §9-cont2's GA-/genome-/basis-convergence, i.e. **THREE
   confirmations, not four: v14 RETIRED v11's grid-refinement argument** (on its own support
@@ -982,14 +1029,15 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 21 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (all 22 green): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
 test_nk_hilbert_holder.py (6/6) + test_nk_hilbert_pointwise.py (6/6) +
 test_op_lower.py (6/6) + test_profile_newton.py (6/6) +
 test_collocation_newton.py (6/6, ~3 s) +
 test_turning_point.py (6/6, ~13 s) +
-**test_first_integral.py (11/11, NEW — ~90 s)** +
+test_first_integral.py (11/11, ~90 s) +
+**test_reduced_certificate.py (16/16, NEW — ~3 min)** +
 test_gclm_family.py (12/12) +
 test_hl_rescaled.py (9/9) + test_line_hilbert.py (6/6) + test_gclm_rescaled.py (5/5) +
 test_boussinesq_{velocity,transport,rescaled}.py (5/5,5/5,8/8). Scripts under
@@ -1003,7 +1051,8 @@ Papers/hqw25.txt). One JOURNAL.md entry per logged experiment (deterministic too
 probes get a clearly-labelled non-logged entry too, as §10–§20 did).
 
 **WRITEUP STRUCTURE:** evidence rebuilds (each reads committed writeup/data/\*.json):
-writeup/4_p2_lottery/{**p2_route_d_v14_evidence.py(fig32)**, p2_route_d_v13_evidence.py(fig31),
+writeup/4_p2_lottery/{**p2_route_d_v16_evidence.py(fig33)**, p2_route_d_v14_evidence.py(fig32),
+p2_route_d_v13_evidence.py(fig31),
 (v15 has NO evidence script and NO figure — no measurement; its data is
 writeup/data/p2_literature_scope.json, read directly),
 p2_route_d_v12_evidence.py(fig30),
@@ -1226,7 +1275,19 @@ extraordinary 3D-NS-singularity preprint is in writeup/data/p2_literature_scope.
 day to it. (42) **When the binding constraint is ACCESS rather than compute, say so and name
 what would unblock it.** The cheapest decisive act available to this project is now "read one
 paper", and it is blocked by a network policy. Surface that to the user; do not silently route
-around it and do not substitute more computation for the missing fact.
+around it and do not substitute more computation for the missing fact. **NEW from §25 — the three v16 paid for:**
+(43) **When a repair removes an obstruction, ENUMERATE THE OTHER OBSTRUCTIONS before assuming
+they went with it.** v14 removed the far field and an unstated assumption came along for the
+ride: that the smoothness requirement went too. It did not and it never could have — H's
+unboundedness on sup is about a JUMP, not about infinity. **Ask which of the old requirements
+were actually ABOUT the thing you removed.** (44) **Two independent-looking signs of the same
+conclusion can be one real fact and one instrument artifact, and they will not feel different.**
+The naive single-mode probe and the step adversary both said "divergent"; a 4x quadrature
+refinement killed one and left the other untouched. Reaching the right conclusion for a wrong
+reason is how a wrong reason survives several legs. **Refine the instrument on EVERY row,
+including the ones you agree with.** (45) **A ledger entry that is unknown must be None, never
+zero, and the assembly must REFUSE TO RUN.** Returning a budget with Z_1 silently absent would
+have produced a closed-looking result off a ledger with a hole in it.
 
 HONEST CEILING (say it out loud): Route-D v3–v14 are validated tooling + a no-go theorem, a
 confirmed price, a second structural requirement, a space that met every requirement identified
@@ -1252,4 +1313,9 @@ proved analytically in March 2026. Finishing the certificate is a capability dem
 a reproduction. That is not a reason to stop; it is a reason to stop calling it the lottery
 ticket, and to move the swing to the DSS lane. Every measurement in v3-v14 still stands —
 being second is not being wrong.** Keep pursuing the Clay end goal; keep saying the honest
-version out loud.
+version out loud. **AND from v16: the reduced-space float rehearsal DOES NOT CLOSE.** Y_0 is
+finally machine-level (1.5e-12) and Z_0 is roundoff, but Z_2 is infinite in the sup setting for
+two reasons that have nothing to do with the far field, and Z_1 — the whole content of a real
+computer-assisted proof — has not been computed at all. **There is still no budget in the
+reduced space, closed or otherwise, and the code refuses to assemble one.** The repair (a Holder
+domain norm, gamma >~ 0.35) is named and measured but not built.

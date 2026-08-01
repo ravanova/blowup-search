@@ -3,6 +3,48 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-D v16: the wall I removed was not the only wall (non-logged) — 2026-08-01
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v16_rehearsal.json`
+(regen `python -u experiments/p2_route_d_v16_rehearsal.py`, ~5 min); figure fig33; writeups
+TECHNICAL/BLOG_P2_ROUTED_V16; PHASE2_P2_NOTES.md §25. Code `solver/reduced_certificate.py` +
+`test_reduced_certificate.py` (16/16; suite 22 files green).
+
+What a human would want to know:
+
+- **Framing first: this is a capability build, not a result.** v15's literature check said the
+  lane is occupied, so the certificate got demoted to "do the float rehearsal, find out whether
+  the pipeline closes, stop". It doesn't close, and the reason is worth more than a yes.
+
+- **Y₀ is finally the number a certificate needs.** 1.5e−12 at K=96, against a GA floor of 1e−2
+  that this project carried for five legs and an anchor-priced 2.4e−4 that was wrong anyway.
+  The nodal residual sits in the table as the control — flat at 1e−14 by construction — because
+  without it the top row could be measuring the grid.
+
+- **I nearly got the main result right for the wrong reason.** The quick probe (one high
+  Chebyshev mode through the Hilbert transform) showed a divergence. The adversary (step partial
+  sums) showed a divergence. Two independent-looking confirmations. Refine the quadrature
+  fourfold and the quick probe collapses to 0.999 flat while the adversary doesn't move at all.
+  One was the operator, one was my integrator, and they pointed the same way. Both rows are in
+  the figure.
+
+- **The thing I had quietly assumed was wrong.** Leg 14 removed the far field and I carried an
+  unexamined belief that this dealt with the smoothness requirement too. It didn't and couldn't:
+  the Hilbert transform's unboundedness on sup is about a *jump*, not about infinity. What the
+  far-field removal killed was the decay grading. So legs 5–9's Hölder apparatus isn't wasted —
+  its bounded-interval version is the next brick, and it's the cheap half.
+
+- **There is a coincidence at a = 1/2 and I am leaving it as a coincidence.** The quadratic
+  constant is finite exactly for a ≤ 1/2, which is exactly where the profile loses C², and the
+  project's independently measured survival boundary is a* ≈ 0.5–0.55. Leg 14 solves the
+  profile cleanly to a = 1.2, so this is my *norm* failing, not the equation — and a weight
+  fixes it. Leg 12 had a similar coincidence at the same boundary, wrote it down, ran a control,
+  and the control killed it. I haven't run a control, so it stays written down.
+
+- **Z₁ I didn't compute at all**, and the code returns it as `None` rather than zero and refuses
+  to assemble a budget. That's the whole content of a real computer-assisted proof and it isn't
+  a chunk of work.
+
 ## Phase-2 P2 — ROUTE-D v15: I finally looked it up (no experiment) — 2026-08-01
 
 **Not an experiment at all.** No code, no figure, no measurement. Data
