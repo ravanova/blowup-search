@@ -45,9 +45,25 @@ pushed on `main`. **NEXT: the two remaining ranked items are (3) the L1→L2 por
 Boussinesq / axisymmetric Euler with boundary — where certification results actually count and
 Spike 1 already reproduced the Chen-Hou regular profile — and (1) the DSS lane's EXPENSIVE
 entrance (a genuine periodic-orbit search with nothing nearby to seed it). (3) is the better
-value. Also still open and now FOUR legs old: the LITERATURE CHECK is BLOCKED ON PDF ACCESS
-(arxiv + publishers 403 at the proxy CONNECT) — tell the user; it is the cheapest unblocking act
-available and it gates every novelty claim including alpha(1/2)=3 and this leg's s_c(a) map.***
+value. Also: the LITERATURE CHECK is now **PARTIALLY UNBLOCKED — see LITERATURE_CHECK.md, and READ IT
+BEFORE CLAIMING NOVELTY FOR ANYTHING.** The blocker is an egress ALLOWLIST, not a broken proxy
+(`export.arxiv.org` says so verbatim; WebFetch on arxiv.org/abs, arxiv.org/html and alphaxiv all
+403) — but **WebSearch works and its backend CAN read those pages**, so a first pass was possible.
+**IT CHANGED THE PICTURE: of four checkable claims, TWO look PRE-EMPTED and one is at serious
+risk.** (i) the FINITE SUPPORT of v12/v13 — "self-similar profiles of the De Gregorio model must
+be compactly supported" (arXiv:2209.08232); (ii) Route-E v1's eigenvalues-are-only-symmetry-modes
+— arXiv:2607.19762 (22 Jul 2026, 41 pp) reports the full point spectrum of the CLM profile is
+exactly {0,1}, the symmetry modes, IN OUR OWN NORMALIZATION Omega=-y/(y^2+1/4), rigorously (so
+Route-E is CONFIRMED but not novel); (iii) **Route-F v1's s_c = alpha/2 may already exist as
+"s*(a) = 1/c_l(a)"** — if c_l = 2*beta the two are the SAME statement, and this is THE most
+important thing to verify against a primary source; (iv) "Okamoto et al provided numerical
+evidence for travelling-wave solutions for ANY a>0", which does not refute a*≈0.5-0.55 (ours is
+HQW25's TWO-SCALE inner object, plausibly different) but does mean the claim must say WHICH object
+stops existing. ALL OF THAT IS SEARCH-LEVEL AND UNVERIFIED — summarisers blend sources. **THE ASK
+FOR THE USER: add `arxiv.org`, `export.arxiv.org`, `api.semanticscholar.org`, `link.springer.com`,
+`aimsciences.org` to the environment's egress allowlist.** The three METHODOLOGICAL candidates
+(discrete-ball trap; weighted-l1 conservation law; elasticity discipline) are still UNCHECKED and
+are the likeliest to be genuinely new, because they are about the METHOD rather than about gCLM.***
 
 *Before Route-F v1: **Route-E v1 opened the DSS lane and shut its cheapest entrance.** **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS
 LANE AND SHUTS ITS CHEAPEST ENTRANCE.** v15/v16 named DSS as the swing. Necas-Ruzicka-Sverak
