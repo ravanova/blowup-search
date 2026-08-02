@@ -97,6 +97,9 @@ def build_figure():
     Kk = np.array(E3["a=0.30"]["K"], float)
     a1.loglog(Kk, E3["a=0.30"]["residual"][0] * (Kk / Kk[0]) ** -2.0, ":",
               color=C["grey"], label="$K^{-2}$ reference")
+    a1.set_xticks([16, 32, 64, 128, 256, 384])
+    a1.set_xticklabels(["16", "32", "64", "128", "256", "384"])
+    a1.minorticks_off()
     a1.set_xlabel("K (sine modes)")
     a1.set_ylabel("fixed-point residual $\\sup|R|$")
     a1.set_title("B  the profile's own regularity sets the rate\n"
@@ -140,7 +143,7 @@ def build_figure():
         a3.plot([0.0, 0.0], [r["max_abs_im"], -r["max_abs_im"]], "|", color=C["grey"],
                 ms=9, alpha=0.7)
     a3.plot([0.0], [0.0], "o", color=C["grey"], ms=4,
-            label="discretized continuum: 99%% on $c_\\omega+1=0$")
+            label="discretized continuum: 99% on $c_\\omega+1=0$")
     E5 = d["E5_sweep"]
     kept0 = cx([r for r in E5 if abs(r["a"]) < 1e-9][0]["kept_ref"])
     a3.plot(kept0.real, kept0.imag, "*", color=C["good"], ms=17, zorder=6,
@@ -170,8 +173,9 @@ def build_figure():
         a4.semilogx(Ks, v, "o-", color=C["bad"], lw=1.8,
                     label="'third eigenvalue' at $a=1/2$")
     a4.axhline(-2.0, color=C["anchor"], ls="--", lw=1.4)
-    a4.text(100, -1.9985, "$c_\\omega + 1 = -2$  —  the LEFT EDGE of the\n"
-                          "essential spectrum, not a mode", fontsize=8, color=C["anchor"])
+    a4.text(0.30, 0.93, "$c_\\omega + 1 = -2$  —  the LEFT EDGE of the essential\n"
+                        "spectrum in this space, not a mode",
+            transform=a4.transAxes, fontsize=8, color=C["anchor"], va="top")
     a4.set_xlabel("K")
     a4.set_ylabel("converged value")
     a4.set_title("E  the eigenvalue that wasn't\n"
@@ -219,9 +223,9 @@ def build_figure():
             bbox=dict(fc="white", ec=C["good"], alpha=0.95))
 
     fig.suptitle("Route-E v1 — no eigenvalue is available for a Hopf bifurcation: the only isolated "
-                 "grid-converged spectrum is the two exact symmetry modes, and the log-periodic (DSS) "
-                 "directions are CONTINUOUS spectrum", fontsize=12)
-    fig.tight_layout(rect=(0, 0, 1, 0.965))
+                 "grid-converged\nspectrum is the two exact symmetry modes, and the log-periodic "
+                 "(DSS) directions are CONTINUOUS spectrum", fontsize=11.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.935))
     FIGS.mkdir(parents=True, exist_ok=True)
     out = FIGS / "fig34_p2_route_e_v1_spectrum.png"
     fig.savefig(out, dpi=145)

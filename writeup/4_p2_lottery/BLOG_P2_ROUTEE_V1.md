@@ -134,16 +134,47 @@ at `0.65` where `α ≈ 11.5`). The tail becomes infinitely steep and the branch
 whole line, ends.
 
 That has an annoying consequence — a non-integer `α` is a branch point at infinity, so the
-spectral method degrades to second order — and one much more interesting one. Where `α` is an
-**odd integer**, the profile is smooth again and the method is spectral again. There are two on
-the branch: `a = 0` with `α = 1`, and
+spectral method degrades to second order — and one much more interesting one. There is exactly
+one place on the branch, besides the anchor, where the profile goes analytic and the method
+goes spectral again:
 
 > **`a = 1/2`, where `α = 3` — to twelve digits.**
 
 I did not go looking for it. A scan of the fixed-point residual across `a` at fixed resolution
-shows a single dip, ten orders deep, sitting exactly at `a = 1/2`. Whether it is *known* I
-cannot say, and I want to be careful: an exact-looking exponent at `a = 1/2` in a model family
-this well studied is precisely the sort of thing that is folklore to the people who work on it.
+shows a single dip, ten orders deep, sitting exactly at `a = 1/2`.
+
+The obvious explanation is that `Ω ~ (π−θ)^α` near infinity, so an **odd integer** `α` makes the
+profile smooth there — and that fits both special points, `α = 1` and `α = 3`. It is also a rule
+inferred from a two-point set with one degree of freedom, which is to say it is not a rule at
+all until you find the third point. So I found it: `α = 5` sits at `a = 0.5821792673`.
+
+And then I got the answer wrong, twice, on the same ladder.
+
+```
+K       96      128      192      256      320      384
+|R|   3.2e-2   1.1e-2   7.9e-4   2.9e-5   9.2e-7   2.5e-8
+order    —       3.6      6.5     11.5     15.4     19.7
+```
+
+On the first two rungs the implied order is `3.6` — algebraic, nothing like the ten-order
+collapse at `a = 1/2` — and I wrote in this post that the rule was false and `a = 1/2` was
+special for some unidentified reason. Four more rungs and the "order" is climbing steadily
+through `19.7`, which is not an order at all: it is exponential convergence that had not settled
+yet. **`α = 5` is an analytic resonance too. The rule holds.** The `α = 5` profile is just
+steeper, so it enters its asymptotic regime later — which is precisely when a short ladder lies
+to you.
+
+I am leaving the wrong version described rather than deleted, because the shape of the mistake
+is the useful part: I had just written a lesson about not fitting a rule to two points, and then
+fitted a convergence *rate* to two rungs.
+
+What survives as genuinely unexplained is narrower and better: the rule says why those `a` are
+analytic, but not why **`α = 3` lands on exactly `a = 1/2`** while `α = 5` lands on
+`0.5821792673`, which is not an evidently special number.
+
+Whether the `α = 3` value is *known* I cannot say, and I want to be careful: an exact-looking
+exponent at `a = 1/2` in a model family this well studied is precisely the sort of thing that is
+folklore to the people who work on it.
 The literature check that would settle it is still blocked — this container's network policy
 refuses arxiv.org and every publisher domain, so I can search but not read. That is now three
 legs old and it is the cheapest unblocking act available to this project.
@@ -257,7 +288,10 @@ search with nothing nearby to seed it — a real commitment, to be weighed again
 alternatives rather than taken by default.
 
 Three legs ago the lesson was *check the literature before the fourteenth leg, not after*. This
-one adds two. **Enumerate the symmetries before computing the spectrum** — they are the null
+one adds three. **Two points define a line through anything — and two rungs define a
+convergence rate through anything.** I made both versions of that mistake in one afternoon: a
+rule fitted to two special points, and then a rate fitted to two rungs of the ladder that was
+supposed to test it. **Enumerate the symmetries before computing the spectrum** — they are the null
 result's baseline, and one of them turned out to be a free error bar on everything else. And:
 **before believing an isolated eigenvalue, find out where the continuum's edges are, then go
 and look at the same object somewhere you already understand it.** Six digits of convergence

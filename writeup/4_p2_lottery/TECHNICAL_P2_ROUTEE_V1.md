@@ -205,25 +205,59 @@ agreement is a check rather than a repetition.
 
 **One consequence governs everything numerical here.** A branch point of order `alpha` at
 `X = infinity` means the sine coefficients decay *algebraically* — measured residual `K^-2`ish
-at `a = 0.3` (`7.8e-2 -> 6.7e-4` over `K = 16..256`). The exceptions are the `a` where `alpha`
-is an odd integer, where `Omega ~ (pi-theta)^alpha` is smooth and the method is spectral again:
+at `a = 0.3` (`7.8e-2 -> 6.7e-4` over `K = 16..256`). There is exactly one exception on the
+branch besides the anchor:
 
 * `a = 0`, `alpha = 1` — exact, one mode;
 * **`a = 1/2`, `alpha = 3` — `c_omega = -3.000000000000`, residual `1.4e-14` at `K = 192`**
   (`2.7e-1 -> 4.4e-2 -> 7.0e-5 -> 1.4e-11 -> 1.4e-14` over `K = 16..192`; geometric coefficient
-  decay).
+  decay, i.e. analytic).
 
 The `a = 1/2` point was *found*, not assumed: a scan of the fixed-point residual in `a` at fixed
-`K` shows a single dip, ten orders deep, exactly there. **Novelty unchecked** — an exact
-exponent at `a = 1/2` in this family is precisely what may be folklore to people who work on
-gCLM/De Gregorio, and the literature check is still blocked on PDF access (v15's finding).
+`K` shows a single dip, ten orders deep, exactly there.
+
+### 5.1 The odd-`alpha` rule: hypothesised from two points, tested at a third, and
+### nearly discarded on two rungs of a ladder
+
+`Omega ~ (pi - theta)^alpha` near `X = infinity`, so "`alpha` an odd integer makes the profile
+smooth there" is the natural reading — and it fits both special points (`alpha = 1` and `3`).
+That is a rule inferred from a two-point set with one degree of freedom, so E8b/E8c went and
+found the third point: `alpha = 5` occurs at **`a = 0.5821792673`** (secant-solved to `5e-11`).
+
+The `K`-ladder there is the interesting part, because **its first two rungs say the opposite of
+its last four**:
+
+| `K` | 96 | 128 | 192 | 256 | 320 | 384 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `sup|R|` | 3.19e-2 | 1.12e-2 | 7.92e-4 | 2.87e-5 | 9.24e-7 | 2.55e-8 |
+| implied order | — | 3.6 | 6.5 | 11.5 | 15.4 | 19.7 |
+
+An order that **rises monotonically** is not an order at all — it is exponential convergence
+seen before it has settled. **`alpha = 5` is an analytic resonance too, and the odd-`alpha` rule
+holds at all three points.** The `alpha = 5` profile is simply steeper (`Omega ~ X^-5` against
+`X^-3`), so it enters its asymptotic regime later; at the `K = 256` of the E8b scan its dip is
+only `13x` deep, and by `K = 384` it is four orders.
+
+*This paragraph replaced an earlier version of itself.* On the first two rungs (`3.19e-2 ->
+1.12e-2`, order `3.6`) this note said the rule was **false** and that `a = 1/2` was special for
+an unidentified reason. Two rungs of a ladder are not a rate — banked lesson (22) applied one
+level down — and the correction is marked rather than quietly edited (banked lesson (35)).
+
+What survives as genuinely unexplained is narrower and more specific: **`alpha = 3` lands at
+exactly `a = 1/2`**, while `alpha = 5` lands at `0.5821792673`, which is not an evidently
+special number. So the rule explains *why* those `a` are analytic; it does not explain why one
+of them is a round rational.
+
+**Novelty unchecked** — an exact exponent at `a = 1/2` in this family is precisely what may be
+folklore to people who work on gCLM/De Gregorio, and the literature check is still blocked on
+PDF access (v15's finding).
 A two-parameter rational ansatz `Omega = -c X/(X^2+gamma)^2` reproduces the profile to
 **7e-5** relative — the right *shape*, right down to the location and depth of the minimum —
 but the profile itself is computed to `2e-14`, so the ansatz is a near miss and **the closed
 form was not identified.**
 
 Because of all this, **every quantitative spectral statement below is quoted at `a = 0` or
-`a = 1/2`.** At generic `a` the instrument cannot resolve even the eigenvalues it is known to
+`a = 1/2`** — the only two points on the branch where the fixed point is analytic. At generic `a` the instrument cannot resolve even the eigenvalues it is known to
 have (§3), and no conclusion is drawn there.
 
 ---
@@ -325,8 +359,10 @@ forced. Bought:
 2. **The self-similar branch of gCLM in the compactified variable** — exact one-mode anchor,
    exact velocity operator, Newton continuation.
 3. **`alpha(a)`**, the far-field decay exponent map, as an output, with the branch's end.
-4. **The analytic resonance at `a = 1/2` (`alpha = 3` to 12 digits)** — novelty unchecked, closed
-   form not identified.
+4. **The odd-`alpha` resonance family** — `alpha = 1` (exact), `alpha = 3` at `a = 1/2` (12
+   digits), `alpha = 5` at `a = 0.5821792673` (exponential ladder to `2.5e-8`) — and the
+   narrower open question it leaves: why `alpha = 3` lands on a round rational. Novelty
+   unchecked; closed form not identified.
 5. **Two exact statements about the `a = 0` linearization**: the closed-form continuum
    `(w-1)^{1-lambda}(w+1)^{1+lambda}` on the strip `-1 < Re lambda < 1`, and the
    log-periodic identification of its imaginary members.
@@ -382,6 +418,15 @@ is `0` by symmetry, so its computed value *is* the spectrum's error at that para
 at `a = 0.2`, `8.9e-5` at `a = 1/2`. That number decided which rows of the sweep were allowed
 to carry a conclusion, and it cost nothing to read. **If a symmetry pins one eigenvalue, plot
 its deviation next to every claim you make about the others.**
+
+**(52) Two points define a line through anything — and two RUNGS define a convergence rate
+through anything.** "`alpha` odd integer => analytic" fitted the only two special points I had,
+so the third was located by secant and laddered. Its first two rungs implied order `3.6` and I
+wrote the rule off as false; four more rungs showed the order climbing `6.5 -> 11.5 -> 15.4 ->
+19.7`, i.e. exponential convergence that had not settled, and the rule was right after all. The
+mistake and its repair are the same lesson at two scales: **before a fitted exponent becomes a
+claim, add rungs until the exponent stops moving.** A steeper object reaches its asymptotic
+regime later, which is exactly when a short ladder is most misleading.
 
 **(51) A convergence filter can be fooled by the EDGE of a continuum, and the fix is a control
 point, not a tighter tolerance.** The `-2` at `a = 1/2` converged to six digits under
