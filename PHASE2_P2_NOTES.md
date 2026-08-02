@@ -1893,3 +1893,111 @@ reaches its asymptotic regime later, which is when a short ladder is most mislea
 
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link of
 the chain moved. Clay odds ~0.05%.
+
+
+## §27 — ROUTE-F v1 DONE (2026-08-02): THE CRITICAL DISSIPATION EXPONENT IS HALF THE FAR-FIELD
+## DECAY EXPONENT, s_c = alpha/2 — AND NAVIER-STOKES IS THE MARGINAL MEMBER (alpha = 2).
+
+Built solver/fractional_gclm.py + test_fractional_gclm.py 6/6 (suite **24 files green**);
+experiments/p2_route_f_v1_viscosity.py → writeup/data/p2_route_f_v1_viscosity.json → fig35.
+NOT a logged Tier run (deterministic, ~6 min). BLOG/TECHNICAL_P2_ROUTEF_V1.md.
+
+**WHY THIS LEG.** §26 shut the DSS lane's cheap entrance, which promoted ranked item (2) —
+**the only item on the list that probes the ACTUAL obstruction between a toy certificate and
+NS rather than polishing the toy**: take a blow-up that exists, add dissipation, find the
+scaling at which dissipation kills it. **It moves NO link of the chain.**
+
+**THE PREDICTION, AND IT REUSES §26's BY-PRODUCT.** For omega_t + a u omega_x = omega u_x -
+nu(-Delta)^s omega: a self-similar blowup has omega ~ (T-t)^-1 and L ~ (T-t)^beta, and §26's
+rescaling ODEs integrate to L ~ (T-t)^{c_l/alpha}, i.e. **beta = 1/alpha** with alpha the
+profile's FAR-FIELD DECAY EXPONENT. Comparing nu omega/L^{2s} with omega^2:
+
+    D/N ~ nu (T-t)^{1 - 2s/alpha}     =>     **s_c(a) = alpha(a)/2**.
+
+**AND THAT IS THE NS SENTENCE.** NS's natural scaling is L ~ (T-t)^{1/2} ⇒ beta = 1/2 ⇒
+**alpha = 2 ⇒ s_c = 1 EXACTLY — the ordinary Laplacian.** NS is critical; every scaling
+argument returns zero information because the two sides balance identically. **In gCLM alpha
+is a measured function of a dial**, so the family WALKS THROUGH the point where NS is stuck.
+That is the toy's value here: not that it blows up, but that it is off-critical in a
+controlled way.
+
+**MEASURE AN EXPONENT, NOT A THRESHOLD.** A binary blowup sweep near a critical exponent is
+biased, resolution-dependent, and biased IN THE DIRECTION YOU EXPECT — three ways to fool
+yourself in one measurement. Instead fit **D/N ~ (T-t)^p against p = 1 - 2s/alpha**, which
+predicts a whole LINE whose slope, intercept and zero are separately checkable.
+
+**F1 KNOWN ANSWER.** a=0, nu=0 is exactly solvable ON THE CIRCLE TOO: z = z_0/(1 - t z_0/2),
+z = H(omega)+i omega. Checked against an independent RK4 to **2.3e-14**; the solver reproduces
+it to **1.9e-9** at t=2.5. T = 2/max{H(omega_0): omega_0=0}. And alpha(0)=1 EXACTLY, so
+s_c(0) = 1/2 — the classical dissipative-CLM value, i.e. **a genuine known-answer gate**.
+
+**F2 THE LINE, WITH NOTHING FITTED** (a=0, n=8192, nu=1e-3, window 0.40-0.94):
+p = **+0.733/+0.523/+0.318/+0.109/-0.100/-0.309/-0.503** at s = 0.15..0.75 against predicted
++0.700/+0.500/+0.300/+0.100/-0.100/-0.300/-0.500. Slope **-2.068** vs -2; zero at **s=0.5033**
+vs 0.5000.
+
+**F3 THE CROSS-CHECK — THE PART WORTH KEEPING.** alpha comes from §26's STEADY COMPACTIFIED
+SOLVE ON THE LINE; dp/ds comes from TIME-DEPENDENT PERIODIC simulation. **No shared grid,
+basis, formulation or fitted constant.**
+
+    a          0.0      0.2      0.3      0.4
+    alpha    1.0000   1.3345   1.6172   2.0795     (Route-E, steady, line)
+    -dp/ds   2.0838   1.5193   1.2560   0.9780     (Route-F, time-dependent, periodic)
+    2/alpha  2.0000   1.4987   1.2367   0.9618
+    ratio    1.0419   1.0137   1.0157   1.0169
+
+**Ratio 1.022 +- 0.014 while alpha itself DOUBLES** — a uniform ~2% bias, NOT an a-dependent
+failure. The SHAPE of the relation is confirmed to sub-percent by an instrument that knows
+nothing about the one that produced alpha.
+
+**F4 THE nu CONTROL — PASSES, BUT WEAKLY, and say so.** The prediction contains s and alpha and
+NOT nu. Slopes **-1.866/-2.051/-2.110** at nu=1e-2/1e-3/1e-4, spread **0.245**. -2 is inside
+the range and the middle decade is within 2.6%, but the spread is not small; the two ends are
+where the asymptotic argument is stressed from opposite sides (nu=1e-2 perturbs the blowup,
+nu=1e-4 makes D/N noise-limited). **The measurement most worth tightening if revisited.**
+
+**F5 RESOLUTION.** p = +0.395/+0.347/+0.330/+0.318 over n=1024..8192 at s=0.35 (pred +0.300);
+whole ladder spans 7.6e-2, **the two finest differ by 1.2e-2**, monotone toward the prediction.
+So resolution contributes ~0.01 — an order BELOW the window systematic.
+
+**F7 THE WINDOW, SWEPT NOT CHOSEN (the dominant systematic).** slope
+-1.896/-2.043/-2.068/-2.074/-2.001 and zero 0.568/0.518/0.503/0.498/0.478 over windows
+0.20-0.80 … 0.60-0.98 ⇒ **slope -2.02 +- 0.09 (pred -2); s_c 0.51 +- 0.05 (pred 0.500)**.
+Individual exponents move +-0.07 and approach the prediction MONOTONICALLY FROM ABOVE — an
+asymptotic regime being entered. **The slope is far steadier because every s shares the window
+and the bias cancels in the difference**, which is why the claims are about slope and zero.
+
+**F6 THE MAP.** s_c = 0.500/0.571/0.667/0.809/**1.040**/**1.500** at a = 0/0.1/0.2/0.3/0.4/0.5;
+**s_c crosses the ordinary Laplacian s=1 at a ~ 0.383**, i.e. exactly where alpha = 2.
+
+**THE SENTENCE TO BE CAREFUL WITH.** Above a ~ 0.383 the SCALING says the blowup beats ordinary
+viscosity. That is arithmetic about **gCLM's own scaling** and **NOT a statement about NS**. It
+does **not** say a viscous gCLM blowup EXISTS there — the scaling says which term dominates
+GIVEN the self-similar form; showing a solution reaches it is the whole difficulty. NS's alpha
+is pinned at 2 by dimensional analysis and is not a dial. **What the map is good for is
+ORIENTATION: it exhibits a family that walks through the point where NS is stuck.**
+
+**THE RESOLUTION GUARD TOOK THREE TRIES** and the failures are instructive. (i) Energy above
+2/3 k_max reads **exactly 0.0** at some n and a real number at others, because the 2/3 rule has
+ALREADY zeroed that band and whether it lands inside the cutoff depends on rounding in n — a
+guard that is zero by construction reads as "perfectly resolved". (ii) Energy above n/6 reads
+**~0.37 for every run**, resolved or not: a near-singular spectrum is genuinely fat, so a broad
+band measures physics, not discretization. (iii) What discriminates is the amplitude **AT THE
+CUTOFF** relative to the peak: 1.0/1.0/1.0/1.0/1.7e-1/1.4e-2/2.0e-4 over n=128..8192. The run
+now **REFUSES** ("under_resolved") rather than returning a number off an unresolved state.
+
+**NEW LESSONS.** (53) **When two legs measure the same constant through unrelated machinery,
+that cross-check is worth more than either leg's internal error bar.** Refining one computation
+cannot test the other; agreement across two tests both. **Look for a second, structurally
+different route to a number you already have** — alpha sat in §26's data file as a by-product,
+and using it twice turned a curiosity into a check. (54) **A systematic that is UNIFORM across a
+sweep is pointing at a shared input, not at the mechanism.** Every p sat above its prediction
+with a shallower slope: that is what a wrong singular time does, not what a wrong exponent does.
+**Read the PATTERN of the residuals before adjusting the model.** (55) **A guard that can return
+"perfect" by construction is worse than no guard.** Two of the three definitions here were
+silently degenerate — one identically zero at half the grid sizes, one identically fat at all of
+them. **Before trusting a diagnostic, check it on a case you KNOW is bad and one you know is
+good, and confirm it separates them.**
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link of
+the chain moved, and this is orientation rather than evidence about NS. Clay odds ~0.05%.

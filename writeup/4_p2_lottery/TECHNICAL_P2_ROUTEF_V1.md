@@ -122,15 +122,16 @@ is a genuine known-answer gate, not a self-consistency check.
 
 ### F2 — the relevance line at `a = 0`, with nothing fitted
 
-`alpha = 1` exactly here, so the prediction `p = 1 - 2s` contains no fitted input at all:
+`alpha = 1` exactly here (Route-E v1's anchor is one Fourier mode), so the prediction
+`p = 1 - 2s` contains no fitted input at all. At `n = 8192`, `nu = 1e-3`, fit window 0.40–0.94:
 
 | `s` | 0.15 | 0.25 | 0.35 | 0.45 | 0.55 | 0.65 | 0.75 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `p` measured | +0.735 | +0.533 | +0.327 | +0.121 | −0.086 | −0.292 | −0.494 |
+| `p` measured | +0.733 | +0.523 | +0.318 | +0.109 | −0.100 | −0.309 | −0.503 |
 | `p` predicted | +0.700 | +0.500 | +0.300 | +0.100 | −0.100 | −0.300 | −0.500 |
 
-Fitted slope **−2.054** against the predicted **−2.000** (2.7%), and `p = 0` at
-**`s = 0.5087`** against the predicted `s_c = 0.5000` (1.7%). Every spectral tail is `~1e-32`.
+Fitted slope **−2.068** against the predicted **−2.000**, and `p = 0` at **`s = 0.5033`**
+against the predicted `s_c = 0.5000`. Per-point fit RMS 0.016–0.065.
 
 ### F3 — the cross-check, which is the headline
 
@@ -140,18 +141,55 @@ pseudo-spectral simulation on a periodic domain** with dissipation. The two comp
 no grid, no basis, no equation as posed, and no fitted constant. (SC) says the second is
 `-2/alpha` of the first.
 
-*(numbers filled from the run; see the figure and the data file)*
+| `a` | 0.0 | 0.2 | 0.3 | 0.4 |
+| --- | --- | --- | --- | --- |
+| `alpha` (Route-E, steady, on the line) | 1.000000 | 1.334497 | 1.617244 | 2.079464 |
+| `-dp/ds` measured (periodic, time-dependent) | 2.0838 | 1.5193 | 1.2560 | 0.9780 |
+| predicted `2/alpha` | 2.0000 | 1.4987 | 1.2367 | 0.9618 |
+| ratio | 1.0419 | 1.0137 | 1.0157 | 1.0169 |
+
+**The ratio is 1.022 ± 0.014 while `alpha` itself doubles.** That is a uniform bias of about
+2%, not an `a`-dependent failure: the *shape* of the relation — that the slope is `-2/alpha`
+with `alpha` supplied by an unrelated computation — is confirmed to sub-percent, and the
+normalisation carries a systematic quantified in F7.
 
 ### F4 — the `nu`-independence control
 
 (SC) contains `s` and `alpha` and does **not** contain `nu`. A slope that moved with `nu` would
-mean the measurement is about the viscosity rather than about the scaling. Measured across three
-decades of `nu`, the slope spread is reported with the run.
+mean the measurement is about the viscosity rather than the scaling. Over three decades:
+slope **−1.866 / −2.051 / −2.110** at `nu = 1e-2 / 1e-3 / 1e-4`, a spread of **0.245**.
+
+Honest reading: the prediction `−2` sits inside that range and the middle decade is within
+2.6%, but the spread is not small, and the two ends are exactly the regimes where the asymptotic
+argument is stressed from opposite sides — `nu = 1e-2` perturbs the blow-up itself, `nu = 1e-4`
+makes `D/N` small enough that the fit is noise-limited. **This control passes, but weakly**, and
+it is the measurement most worth tightening if the leg is ever revisited.
 
 ### F5 — resolution
 
-A ladder at fixed `(a, nu, s)`; the exponent's spread over an 8× refinement is the leg's own
-numerical error bar and is quoted with every claim.
+At `s = 0.35` (prediction `+0.300`): `p = +0.395 / +0.347 / +0.330 / +0.318` over
+`n = 1024 / 2048 / 4096 / 8192`. The whole ladder spans `7.6e-2`; **the two finest differ by
+`1.2e-2`**, and the sequence is monotone toward the prediction. So resolution contributes about
+`0.01` — an order less than the window systematic below, which is why the leg is quoted with the
+latter.
+
+### F7 — the fit window, swept rather than chosen
+
+`p = 1 - 2s/alpha` is an **asymptotic** statement, so an early window has not reached it and a
+very late one is noise-dominated. Sweeping it is the honest error bar:
+
+| window | 0.20–0.80 | 0.30–0.92 | 0.40–0.94 | 0.50–0.95 | 0.60–0.98 |
+| --- | --- | --- | --- | --- | --- |
+| slope | −1.896 | −2.043 | −2.068 | −2.074 | −2.001 |
+| zero | 0.5684 | 0.5180 | 0.5033 | 0.4977 | 0.4779 |
+
+> **slope = −2.02 ± 0.09  (predicted −2)   ·   `s_c` = 0.51 ± 0.05  (predicted 0.500)**
+
+Two things this makes visible. The single exponent at a given `s` moves by ±0.07 across windows
+and approaches the prediction **monotonically from above** — the signature of an asymptotic
+regime being entered, not of a wrong exponent. And the **slope is far more robust than any
+single exponent**, because every `s` shares the window and the bias cancels in the difference.
+That is why the leg's claims are about the slope and the zero crossing.
 
 ### F6 — the map, and the sentence to be careful with
 

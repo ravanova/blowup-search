@@ -1,6 +1,55 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-08-02 (updated after Route-E v1). **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS
+*Written 2026-08-02 (updated after Route-F v1). **NEWEST LEG FIRST — ROUTE-F v1 GIVES THE
+"BEAT VISCOSITY" SENTENCE A MEASURED RIGHT-HAND SIDE: s_c = alpha/2, THE CRITICAL DISSIPATION
+EXPONENT IS HALF THE FAR-FIELD DECAY EXPONENT — AND NAVIER-STOKES IS THE MARGINAL MEMBER.**
+Ranked item (2), promoted when §26 shut the DSS lane's cheap entrance; **it is the only item on
+the list that probes the ACTUAL obstruction between a toy certificate and NS rather than
+polishing the toy, and it moves NO link of the chain.** For omega_t + a u omega_x = omega u_x -
+nu(-Delta)^s omega: a self-similar blowup has omega ~ (T-t)^-1, L ~ (T-t)^beta, and **§26's
+rescaling ODEs give beta = 1/alpha** with alpha the profile's far-field decay exponent, so
+D/N ~ nu (T-t)^{1-2s/alpha} and **s_c(a) = alpha(a)/2**. **THE NS READING IS THE POINT: NS's
+natural scaling is beta = 1/2 ⇒ alpha = 2 ⇒ s_c = 1 EXACTLY, the ordinary Laplacian. NS is
+critical — every scaling argument returns zero information because the two sides balance
+identically — while in gCLM alpha is a MEASURED DIAL, so the family WALKS THROUGH the point
+where NS is stuck. That is the toy's value: not that it blows up, but that it is off-critical
+in a controlled way.** **METHOD: measure an EXPONENT, not a threshold** — a binary blowup sweep
+near a critical exponent is biased, resolution-dependent AND biased in the expected direction,
+so instead fit **D/N ~ (T-t)^p against p = 1 - 2s/alpha**, a whole LINE whose slope, intercept
+and zero are separately checkable. **F2 (a=0, alpha=1 EXACTLY, nothing fitted):** p =
++0.733/+0.523/+0.318/+0.109/-0.100/-0.309/-0.503 at s=0.15..0.75 vs predicted
++0.700/…/-0.500; slope **-2.068** vs -2, zero at **0.5033** vs 0.5000. **F3 THE CROSS-CHECK,
+the part worth keeping: alpha from §26's STEADY COMPACTIFIED SOLVE ON THE LINE vs dp/ds from
+TIME-DEPENDENT PERIODIC simulation — no shared grid, basis, formulation or fitted constant —
+ratio 1.0419/1.0137/1.0157/1.0169 at a=0/0.2/0.3/0.4, i.e. 1.022 +- 0.014 WHILE ALPHA DOUBLES**
+(a uniform ~2% bias, not an a-dependent failure). **ERROR BAR = THE FIT WINDOW, SWEPT NOT
+CHOSEN: slope -2.02 +- 0.09, s_c 0.51 +- 0.05**; single exponents move +-0.07 and approach the
+prediction MONOTONICALLY FROM ABOVE (an asymptotic regime being entered), and the slope is
+steadier because every s shares the window so the bias cancels. **THE nu CONTROL PASSES ONLY
+WEAKLY AND SAYS SO** (slopes -1.866/-2.051/-2.110 over nu=1e-2..1e-4, spread 0.245) — the
+measurement most worth tightening. Resolution contributes ~0.01 (two finest grids differ by
+1.2e-2). **F6 THE MAP: s_c = 0.500/0.571/0.667/0.809/1.040/1.500 at a=0…0.5, crossing the
+ordinary Laplacian s=1 at a ~ 0.383.** **THE SENTENCE TO BE CAREFUL WITH: above that the SCALING
+says the blowup beats ordinary viscosity — arithmetic about GCLM's OWN SCALING, NOT a statement
+about NS, and NOT a claim that a viscous gCLM blowup EXISTS there (the scaling says which term
+dominates GIVEN the self-similar form; showing a solution reaches it is the whole difficulty).
+NS's alpha is pinned at 2 by dimensional analysis and is not a dial. The map is ORIENTATION,
+not evidence about NS.** **THE RESOLUTION GUARD TOOK THREE TRIES and two were silently
+degenerate** — energy above 2/3 k_max reads EXACTLY 0.0 at some n (the dealiasing already zeroed
+that band; a guard that is zero by construction reads as "perfectly resolved"), energy above n/6
+reads ~0.37 for EVERY run (a near-singular spectrum is genuinely fat); what works is the
+amplitude AT THE CUTOFF vs the peak, and the run now **REFUSES** ("under_resolved") rather than
+returning a number. New solver/fractional_gclm.py + test_fractional_gclm.py (6/6; suite **24
+files green**); fig35; BLOG/TECHNICAL_P2_ROUTEF_V1.md; PHASE2_P2_NOTES §27. Everything banked +
+pushed on `main`. **NEXT: the two remaining ranked items are (3) the L1→L2 port to 2D
+Boussinesq / axisymmetric Euler with boundary — where certification results actually count and
+Spike 1 already reproduced the Chen-Hou regular profile — and (1) the DSS lane's EXPENSIVE
+entrance (a genuine periodic-orbit search with nothing nearby to seed it). (3) is the better
+value. Also still open and now FOUR legs old: the LITERATURE CHECK is BLOCKED ON PDF ACCESS
+(arxiv + publishers 403 at the proxy CONNECT) — tell the user; it is the cheapest unblocking act
+available and it gates every novelty claim including alpha(1/2)=3 and this leg's s_c(a) map.***
+
+*Before Route-F v1: **Route-E v1 opened the DSS lane and shut its cheapest entrance.** **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS
 LANE AND SHUTS ITS CHEAPEST ENTRANCE.** v15/v16 named DSS as the swing. Necas-Ruzicka-Sverak
 (ext. Tsai) rules out EXACTLY self-similar NS blowup, and in dynamic-rescaling variables
 **self-similar = FIXED POINT, DSS = PERIODIC ORBIT**, so the cheapest way a periodic orbit could
@@ -444,6 +493,11 @@ RANKED, with the reasoning, not just the list:
      miniature: take the Euler blow-up Chen–Hou proved, add viscosity, determine numerically
      the scaling at which ν kills it. Well-posed, directly probes "can a blow-up beat
      viscosity", and produces a publishable answer either way.
+     **ROUTE-F v1 (§27) DID THIS IN 1D: s_c = alpha/2, measured with nothing fitted at a=0 and
+     cross-checked against an unrelated computation of alpha; NS is the marginal member
+     (alpha = 2 ⇒ s_c = 1). The 1D version is DONE. What remains of this item is the 2D/3D
+     version, which is the same question on the object of item (3) — so items (2) and (3) have
+     merged into one next brick.**
   3. **Port to 2D Boussinesq / axisymmetric Euler with boundary.** The current toy is a 1D
      model of the BOUNDARY behaviour of that system; Spike 1 already reproduced the Chen–Hou
      regular profile, so the solver exists. This is the L1→L2 step, where certification
@@ -462,11 +516,13 @@ RANKED, with the reasoning, not just the list:
      methodological candidates (the discrete-ball trap; the weighted-ℓ¹ conservation law /
      no-go; the elasticity discipline).
 
-RECOMMENDED SEQUENCING **(REVISED BY §26)**: the DSS lane's cheap entrance is shut, so lane (1)
-is now an expensive build rather than a cheap swing. **The best-value next chunk is (2), the
-Hou-Luo CRITICAL-VISCOSITY MAP** — well-posed, publishable either way, and the only item on the
-list that probes the actual Clay obstruction ("can a blow-up beat viscosity") rather than
-polishing a toy profile. (3) the L1→L2 Boussinesq port is the fallback. **Previously, and now
+RECOMMENDED SEQUENCING **(REVISED BY §27)**: the DSS lane's cheap entrance is shut (§26) and
+the 1D critical-viscosity map is DONE (§27). **The best-value next chunk is (3), the L1→L2 port
+to 2D Boussinesq / axisymmetric Euler with boundary** — it is where certification results
+actually count, Spike 1 already reproduced the Chen-Hou regular profile so the solver exists,
+and it now carries item (2) with it: the same s_c = alpha/2 arithmetic applied to a 2D object is
+the version of the viscosity question that is about a REAL mechanism rather than a 1D caricature.
+The DSS lane's expensive entrance is the alternative. **Previously, and now
 superseded:** **(4) FIRST now that it is cheap and the framing is repaired** — it is
 decisive in the same way the kill switch was, and it is the capability every other route needs;
 (5) alongside it, because it is cheap and it is the only thing standing between this work and a
@@ -505,7 +561,8 @@ v1–v14 + v16 (fig19–fig33) are tooling + scoping/negative results + partial 
 algebraic identity on the way there, NOT certificates; v15 is Level-0 scoping and found that
 Level-2 in this family is ROUTINE FOR OTHERS; **Route-E v1 (fig34) is Level-1 numerics plus two
 small EXACT computations (the closed-form a=0 continuum, and the two symmetry eigenvalues) — a
-lane-scoping NEGATIVE, not a certificate**.**
+lane-scoping NEGATIVE, not a certificate; **Route-F v1 (fig35) is Level-1 numerics plus one
+elementary scaling derivation — a measured map, not a certificate***.**
 Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
@@ -523,12 +580,13 @@ v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-
 §22 ROUTE-D v13, §23 ROUTE-D v14,
 §24 ROUTE-D v15 (the literature check — READ IT BEFORE CHOOSING A LANE),
 §25 ROUTE-D v16,
-**§26 ROUTE-E v1 = newest (the DSS lane opens; read it before choosing a lane)**).
+§26 ROUTE-E v1 (the DSS lane opens),
+**§27 ROUTE-F v1 = newest (s_c = alpha/2; read it before choosing a lane)**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
 ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),ROUTED_V12(fig30),ROUTED_V13(fig31),ROUTED_V14(fig32),
-ROUTED_V16(fig33),**ROUTEE_V1(fig34)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V16(fig33),ROUTEE_V1(fig34),**ROUTEF_V1(fig35)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
@@ -537,7 +595,8 @@ STATE (all banked + pushed to main):
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
   §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13,
   §23 Route-D v14, §24 Route-D v15 (literature scope), §25 Route-D v16,
-  §26 ROUTE-E v1 (the DSS lane's Hopf question, answered NO) — all DONE + banked.
+  §26 ROUTE-E v1 (the DSS lane's Hopf question, answered NO),
+  §27 ROUTE-F v1 (the critical dissipation exponent, s_c = alpha/2) — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited — earned by §9-cont2's GA-/genome-/basis-convergence, i.e. **THREE
   confirmations, not four: v14 RETIRED v11's grid-refinement argument** (on its own support
@@ -1385,8 +1444,27 @@ algebraic, wrote the rule off as false AND COMMITTED THAT; four more rungs gave 
 3.6→6.5→11.5→15.4→19.7 (exponential) and the rule held. **Add rungs until the exponent stops
 moving** — a steeper object reaches its asymptotic regime later, which is when a short ladder is
 most misleading.
+ **NEW from §27 — the three Route-F v1 paid for:**
+(53) **When two legs measure the same constant through unrelated machinery, that cross-check is
+worth more than either leg's internal error bar.** alpha from a steady compactified solve on the
+LINE and dp/ds from time-dependent PERIODIC simulation share no grid, basis, formulation or
+fitted constant; refining one cannot test the other, and agreement tests both. **Look for a
+second, structurally different route to a number you already have** — alpha sat in §26's data
+file as a by-product, and using it twice turned a curiosity into a check. (54) **A systematic
+that is UNIFORM across a sweep is pointing at a shared input, not at the mechanism.** Every
+measured p sat above its prediction with a shallower slope: that is what a wrong SINGULAR TIME
+does, not what a wrong exponent does. **Read the pattern of the residuals before adjusting the
+model.** (55) **A guard that can return "perfect" by construction is worse than no guard.** Two
+of this leg's three resolution-guard definitions were silently degenerate — one identically zero
+at half the grid sizes (the dealiasing had already zeroed the band it measured), one identically
+fat at all of them (a near-singular spectrum genuinely is broad). **Before trusting a diagnostic,
+run it on a case you KNOW is bad and one you know is good, and confirm it separates them.**
 
-HONEST CEILING — **AND FROM ROUTE-E v1: the DSS lane's cheapest entrance is SHUT. There is no
+HONEST CEILING — **AND FROM ROUTE-F v1: the "beat viscosity" sentence now has a measured
+right-hand side in 1D, s_c = alpha/2, confirmed with nothing fitted at a=0 and cross-checked
+against an unrelated computation of alpha. It is ORIENTATION, not evidence about NS: NS's alpha
+is pinned at 2 by dimensional analysis, gCLM's is a dial, and nothing here says a viscous gCLM
+blowup EXISTS above the crossing. It moves no link of the chain.** **AND FROM ROUTE-E v1: the DSS lane's cheapest entrance is SHUT. There is no
 eigenvalue of the gCLM self-similar fixed point available for a Hopf bifurcation; the only
 isolated grid-converged spectrum is the two exact SYMMETRY modes, and the log-periodic (DSS)
 directions are CONTINUOUS spectrum. That is a genuine negative with a mechanism and a planted

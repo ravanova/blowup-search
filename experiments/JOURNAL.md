@@ -3,6 +3,67 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-F v1: the number that says why NS is hard (non-logged) — 2026-08-02
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_f_v1_viscosity.json`
+(regen `python -u experiments/p2_route_f_v1_viscosity.py`, ~6 min); figure fig35; writeups
+TECHNICAL/BLOG_P2_ROUTEF_V1; PHASE2_P2_NOTES.md §27. Code `solver/fractional_gclm.py` +
+`test_fractional_gclm.py` (6/6; suite 24 files green).
+
+What a human would want to know:
+
+- **Everyone writes "any real proof has to beat viscosity at small scales" and nobody makes it
+  quantitative.** This leg does, in a model where the arithmetic is checkable. Three lines of
+  scaling give `s_c = α/2`: the critical dissipation exponent is HALF the profile's far-field
+  decay exponent. The rate at which the profile decays in *space* decides whether the blow-up
+  beats dissipation in *time*.
+
+- **And it reuses the previous leg's by-product.** `α` was measured in Route-E v1 while asking
+  a completely different question. I did not build it for this.
+
+- **The NS reading is the point.** NS's natural scaling is `β = 1/2`, i.e. `α = 2`, i.e.
+  `s_c = 1` — exactly the ordinary Laplacian. NS sits precisely on the line where neither term
+  wins, which is what "critical" means and why every scaling argument about NS returns zero
+  information. In gCLM `α` is a dial, so the family *walks through* the point where NS is stuck.
+  That is the toy's value here — not that it blows up, but that it is off-critical in a
+  controlled way.
+
+- **I refused to run the obvious experiment.** Sweeping `s` and looking for where blow-up stops
+  is biased, resolution-dependent, and biased in the direction I expect: three ways to fool
+  myself in one measurement. Fitting `D/N ~ (T−t)^p` against `p = 1 − 2s/α` predicts a whole
+  LINE instead, whose slope, intercept and zero are separately checkable.
+
+- **The cross-check is the part I'd keep if I could keep one thing.** `α` comes from a steady
+  compactified spectral solve on the LINE; `dp/ds` comes from time-dependent pseudo-spectral
+  simulation on a PERIODIC domain with dissipation. No shared grid, basis, formulation or fitted
+  constant. Ratio to the prediction: 1.042 / 1.014 / 1.016 / 1.017 at a = 0/0.2/0.3/0.4 —
+  **1.022 ± 0.014 while α itself doubles.** A uniform 2% bias, not an a-dependent failure.
+  Refining one computation can't test the other; agreement across two tests both.
+
+- **The error bar is the fit window, and I swept it rather than picking one.** `p` is asymptotic,
+  so early windows haven't got there and late ones are noise. Slope −2.02 ± 0.09 (predicted −2),
+  `s_c` 0.51 ± 0.05 (predicted 0.5). Single exponents move ±0.07 and approach the prediction
+  monotonically from above — which is what entering an asymptotic regime looks like, and is why
+  the claims are about the slope and the zero rather than any one number.
+
+- **One control passes only weakly and I said so.** The prediction has no `ν` in it, but the
+  slope moves −1.866 / −2.051 / −2.110 over three decades of `ν`. −2 is inside the range and the
+  middle decade is within 2.6%, but that is not a tight control; the two ends stress the
+  asymptotic argument from opposite sides. It is the thing to tighten if this is ever revisited.
+
+- **Three attempts at the resolution guard, and the first two were silently degenerate.** Energy
+  above ⅔ of `k_max` reads exactly 0.0 at some grid sizes because the dealiasing already zeroed
+  that band — a guard that is zero by construction reads as "perfectly resolved". Energy above
+  `n/6` reads ~0.37 for every run because a near-singular spectrum genuinely is fat. What works
+  is the amplitude AT the cutoff relative to the peak. The run now refuses rather than returning
+  a number off an unresolved state.
+
+- **The sentence I was careful with.** `s_c` crosses 1 at `a ≈ 0.383`, so above that the scaling
+  says the blow-up beats ordinary viscosity. That is arithmetic about gCLM's own scaling. It is
+  NOT a statement about NS, and it does NOT say a viscous gCLM blow-up exists there — the scaling
+  says which term dominates *given* the self-similar form, and showing a solution reaches it is
+  the entire difficulty. What the map is good for is orientation.
+
 ## Phase-2 P2 — ROUTE-E v1: looking for the door that isn't there (non-logged) — 2026-08-02
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_e_v1_spectrum.json`

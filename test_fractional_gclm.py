@@ -16,9 +16,12 @@
       consistent (p(s_c) = 0), including the Navier-Stokes reading alpha = 2 <=> s = 1.
   (5) THE RELEVANCE EXPONENT is recovered at a = 0, where alpha = 1 exactly, so the
       prediction p = 1 - 2s has no fitted input at all.
-  (6) UNDER-RESOLUTION IS REPORTED.  A deliberately starved run must show a spectral
-      tail orders larger than a resolved one, so the guard can be used to reject
-      results rather than decorate them.
+  (6) UNDER-RESOLUTION IS REPORTED, in both directions: a starved grid's spectral
+      tail must be orders larger than a resolved one's AT THE SAME STATE, and with
+      the guard armed the starved run must REFUSE ("under_resolved") rather than
+      return a number.  The tails are compared at a fixed time with the guard off --
+      comparing two runs that each stop when the guard trips compares two copies of
+      the threshold, which is how this gate failed the first time it was written.
 
 Run: .venv/bin/python test_fractional_gclm.py
 """
@@ -132,16 +135,30 @@ def test_5_relevance_recovered():
 
 
 def test_6_underresolution_reported():
-    w_hi = FractionalGCLM(n=4096, a=0.0, nu=0.0, s=1.0).run(
-        _w0(4096), amp_factor=400.0, sample_every=5)
-    w_lo = FractionalGCLM(n=64, a=0.0, nu=0.0, s=1.0).run(
+    """Two halves: the guard SEPARATES starved from resolved, and it REFUSES.
+
+    The tails have to be compared at the same state, so the first half runs both
+    grids to a fixed time with the guard disabled.  (Comparing runs that each stop
+    when the guard trips is meaningless -- they both stop AT the threshold, which is
+    how this gate first failed.)
+    """
+    kw = dict(t_end=3.20, amp_factor=1e12, sample_every=5, tail_max=1e9)
+    lo = FractionalGCLM(n=64, a=0.0, nu=0.0, s=1.0).run(_w0(64), **kw)
+    hi = FractionalGCLM(n=4096, a=0.0, nu=0.0, s=1.0).run(_w0(4096), **kw)
+    assert abs(lo["amp"][-1] - hi["amp"][-1]) / hi["amp"][-1] > 0.01, "same answer?"
+    assert lo["max_tail"] > 1e6 * hi["max_tail"], (lo["max_tail"], hi["max_tail"])
+    # and with the guard ON the starved run REFUSES instead of returning a number
+    lo2 = FractionalGCLM(n=64, a=0.0, nu=0.0, s=1.0).run(
         _w0(64), amp_factor=400.0, sample_every=5)
-    assert w_lo["max_tail"] > 1e4 * max(w_hi["max_tail"], 1e-30), (w_lo["max_tail"],
-                                                                   w_hi["max_tail"])
-    print("[ok] (6) the spectral-tail guard separates a starved run from a resolved "
-          "one by %.0e (n=64: %.1e, n=4096: %.1e), so it can reject a result"
-          % (w_lo["max_tail"] / max(w_hi["max_tail"], 1e-30), w_lo["max_tail"],
-             w_hi["max_tail"]))
+    hi2 = FractionalGCLM(n=8192, a=0.0, nu=0.0, s=1.0).run(
+        _w0(8192), amp_factor=100.0, sample_every=5)
+    assert lo2["outcome"] == "under_resolved", lo2["outcome"]
+    assert hi2["outcome"] == "blowup_candidate", (hi2["outcome"], hi2["max_tail"])
+    print("[ok] (6) at a fixed time the starved grid's spectral tail is %.1e against "
+          "%.1e resolved (%.0e x), its amplitude is already wrong by %.1f%%, and with "
+          "the guard on it reports 'under_resolved' rather than a number"
+          % (lo["max_tail"], hi["max_tail"], lo["max_tail"] / hi["max_tail"],
+             100 * abs(lo["amp"][-1] - hi["amp"][-1]) / hi["amp"][-1]))
 
 
 if __name__ == "__main__":

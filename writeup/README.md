@@ -27,7 +27,7 @@ writeup/
   1_gclm_1d/       the completed 1D gCLM pipeline (Level-0/1)        figs 1–5
   2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
   3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
-  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–34
+  4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–35
 ```
 
 ## The rigor ladder (the project's framing)
@@ -252,6 +252,24 @@ writeup/
     far-field exponent map `α(a) = −c_ω(a)` (an output, running away at finite `a`) and an
     **analytic resonance at `a = 1/2` with `α = 3` to 11 digits** (novelty unchecked). *(fig 34)*
 
+37. [TECHNICAL_P2_ROUTEF_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEF_V1.md) ·
+    [BLOG_P2_ROUTEF_V1.md](4_p2_lottery/BLOG_P2_ROUTEF_V1.md) — **Route-F v1**, the **viscosity
+    lane**: the Clay question in miniature — *can a blow-up beat viscosity?* Three lines of
+    scaling, using Route-E v1's by-product `α`, give **`s_c(a) = α(a)/2`**: the critical
+    dissipation exponent of `ν(−Δ)^s` is **half the profile's far-field decay exponent**. **NS is
+    the marginal member** — its natural scaling `β = 1/2` means `α = 2` and hence `s_c = 1`,
+    exactly the ordinary Laplacian, which is why every scaling argument about NS returns zero
+    information. Tested by fitting a whole LINE (`D/N ~ (T−t)^p`, `p = 1 − 2s/α`) rather than
+    locating a threshold: at `a = 0`, where `α = 1` exactly and **nothing is fitted**, measured
+    `p` = +0.733/+0.523/+0.318/+0.109/−0.100/−0.309/−0.503 against +0.700/…/−0.500, slope
+    **−2.068** vs −2 and zero at **0.5033** vs 0.5. **The headline is a cross-check**: `α` from a
+    *steady compactified solve on the line* against `dp/ds` from *time-dependent periodic
+    simulation* — no shared grid, basis, formulation or fitted constant — ratio **1.022 ± 0.014
+    while `α` doubles**. Error bar = the fit window, swept not chosen (slope −2.02 ± 0.09,
+    `s_c` 0.51 ± 0.05); the `ν`-independence control passes only weakly and says so. Map:
+    `s_c` crosses the Laplacian at `a ≈ 0.383` — **arithmetic about gCLM's own scaling, not a
+    claim about NS, and not a claim that a viscous blow-up exists there.** *(fig 35)*
+
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
 
@@ -285,6 +303,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
 | `fig34_p2_route_e_v1_spectrum.png` | 4 | P2 — Route-E v1 (the DSS lane): the self-similar branch's far-field exponent `α(a)` with its Richardson ladder, spectral-vs-algebraic convergence set by the profile's own regularity, the residual scan that locates the analytic resonance at `a = 1/2`, the whole `a = 0` spectrum against the analytically known continuum strip `−1 < Re λ < 1`, the converged spectrum vs `a` (only the two symmetry modes — no Hopf), and the planted-eigenvalue positive control |
 | `fig33_route_d_v16_rehearsal.png` | 4 | P2 — Route-D v16: `Y₀` falling to machine precision against its nodal control, which apparent divergence survives refining the instrument, the log-`K` unboundedness of `H` on a bounded interval, the Hölder repair and its `γ ≳ 0.35` threshold, the exact `a ≤ 1/2` threshold for `sup|N''|`, and the ledger with `Z₁` open |
 | `fig32_route_d_v14_first_integral.png` | 4 | P2 — Route-D v14: the first integral's defect vanishing with `J` on an independent build (and its `a → 0` limit reproducing the exact anchor), the profile on its own support with the edge exponent, THE KILL SWITCH (`‖A‖` flat in `K` against `J^+2.80` on the whole line), the radius law with the profile's own `(m, U₀)`, and the large-`a` grid convergence that retires v11's fourth confirmation of `a*` |
@@ -312,6 +331,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
 | `p2_route_e_v1_spectrum.json` | Arc 4 / fig34 — E1 the exact `a = 0` anchor and its two analytically predicted eigenvalues, E2 the branch `α(a)` with a `K = 64/128/256` ladder and Richardson, E3 spectral (`a = 1/2`) vs algebraic (`a = 0.3`) convergence plus the fine residual scan that finds the resonance, E4 the two structural identities gated, E5 the converged spectrum vs `a` with a tolerance ladder, E6 the planted-eigenvalue positive control, E7 the end of the branch |
 | `p2_route_d_v16_rehearsal.json` | Arc 4 / fig33 — A the interpolant defect vs `K` with its nodal control, B the adversary vs the naive probe under quadrature refinement, C the sup divergence in `log K`, D the Hölder repair swept in `γ`, E `sup|N''|` by edge cutoff across `a` (the `a ≤ 1/2` threshold), plus the assembled rehearsal with `Z₁` reported as `None` |
 | `p2_literature_scope.json` | Arc 4 / **no figure** — Route-D v15's literature leads: each with reference, claimed content, why it matters, an explicit `confidence`, and a `must_verify` list. Includes one extraordinary claim flagged **do not use**. Nothing in it was read from a paper; the container's network policy blocked arXiv and the publishers |
@@ -349,6 +369,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v14_evidence.py        # fig32
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v16_evidence.py        # fig33
 .venv/bin/python writeup/4_p2_lottery/p2_route_e_v1_evidence.py         # fig34
+.venv/bin/python writeup/4_p2_lottery/p2_route_f_v1_evidence.py         # fig35
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
