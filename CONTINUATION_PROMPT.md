@@ -514,10 +514,24 @@ RANKED, with the reasoning, not just the list:
      (alpha = 2 ⇒ s_c = 1). The 1D version is DONE. What remains of this item is the 2D/3D
      version, which is the same question on the object of item (3) — so items (2) and (3) have
      merged into one next brick.**
+     **ROUTE-G v1 (§28) CLOSED THE SCALING HALF OF THIS ITEM ON THE 2D OBJECT: s_c = 1/(2 beta)
+     (the invariant form; alpha/2 was a gauge choice), and the Chen–Hou 2D Boussinesq blow-up
+     sits at beta = 2.92 ⇒ s_c = 0.171, SIX TIMES the NS collapse rate and on the LOSING side.
+     What remains of item (2) is no longer a scaling question — it is the DYNAMICAL one: does a
+     VISCOUS solution actually reach the self-similar form? The scaling says which term
+     dominates GIVEN the form; producing a solution that gets there is the whole difficulty and
+     is untouched.**
   3. **Port to 2D Boussinesq / axisymmetric Euler with boundary.** The current toy is a 1D
      model of the BOUNDARY behaviour of that system; Spike 1 already reproduced the Chen–Hou
      regular profile, so the solver exists. This is the L1→L2 step, where certification
      results actually count.
+     **ROUTE-G v1 (§28) TOOK THE MEASUREMENT HALF AND LEFT THE CERTIFICATION HALF UNTOUCHED.**
+     It re-measured beta on the 2D object with our own rescaled machine and priced the direct
+     time-dependent route out of reach (one extra decade of (T-t) costs 10^beta in LINEAR
+     resolution — 832x per direction at Chen–Hou's beta). **The remaining content of item (3)
+     is a CERTIFICATE in 2D, which is Route-D's machinery pointed at the Spike-1 object — and
+     that is a large build, not a leg.** Before starting it, note v15: computer-assisted
+     certification in this family is ROUTINE for the groups working it.
   4. **Finish ONE certificate end-to-end, on anything — even a=0 where the answer is known.**
      Thirteen legs produced constants and never a closed budget. Every route above needs a
      pipeline that demonstrably closes; this is worth doing for the capability, not the result.
@@ -578,7 +592,12 @@ algebraic identity on the way there, NOT certificates; v15 is Level-0 scoping an
 Level-2 in this family is ROUTINE FOR OTHERS; **Route-E v1 (fig34) is Level-1 numerics plus two
 small EXACT computations (the closed-form a=0 continuum, and the two symmetry eigenvalues) — a
 lane-scoping NEGATIVE, not a certificate; **Route-F v1 (fig35) is Level-1 numerics plus one
-elementary scaling derivation — a measured map, not a certificate***.**
+elementary scaling derivation — a measured map, not a certificate***; **Route-G v1 (fig36) is
+that map PORTED to 2D: one exact derivation (the invariant law + the far-field/collapse
+identity), one re-measurement of a PUBLISHED constant with our own machine (so its measured
+half is Level-0 BY CONSTRUCTION — reproducing Chen–Hou, not extending them), and one honest
+negative with its repair priced. NOT a certificate; the certification half of the 2D port is
+untouched.**
 Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
@@ -597,12 +616,14 @@ v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-
 §24 ROUTE-D v15 (the literature check — READ IT BEFORE CHOOSING A LANE),
 §25 ROUTE-D v16,
 §26 ROUTE-E v1 (the DSS lane opens),
-**§27 ROUTE-F v1 = newest (s_c = alpha/2; read it before choosing a lane)**).
+§27 ROUTE-F v1 (s_c = alpha/2 in 1D),
+**§28 ROUTE-G v1 = newest (the PORT: s_c = 1/(2 beta), and where the 2D object sits;
+read it before choosing a lane, and note that it RETIRES alpha/2 as a gauge choice)**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
 ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),ROUTED_V12(fig30),ROUTED_V13(fig31),ROUTED_V14(fig32),
-ROUTED_V16(fig33),ROUTEE_V1(fig34),**ROUTEF_V1(fig35)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V16(fig33),ROUTEE_V1(fig34),ROUTEF_V1(fig35),**ROUTEG_V1(fig36)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
@@ -612,7 +633,9 @@ STATE (all banked + pushed to main):
   §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13,
   §23 Route-D v14, §24 Route-D v15 (literature scope), §25 Route-D v16,
   §26 ROUTE-E v1 (the DSS lane's Hopf question, answered NO),
-  §27 ROUTE-F v1 (the critical dissipation exponent, s_c = alpha/2) — all DONE + banked.
+  §27 ROUTE-F v1 (the critical dissipation exponent, s_c = alpha/2 in 1D),
+  §28 ROUTE-G v1 (the PORT to 2D Boussinesq: s_c = 1/(2 beta), beta the COLLAPSE exponent;
+    NS is beta=1/2 exactly; Chen-Hou 2D sits at beta=2.92 on the LOSING side) — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited — earned by §9-cont2's GA-/genome-/basis-convergence, i.e. **THREE
   confirmations, not four: v14 RETIRED v11's grid-refinement argument** (on its own support
@@ -1476,7 +1499,40 @@ at half the grid sizes (the dealiasing had already zeroed the band it measured),
 fat at all of them (a near-singular spectrum genuinely is broad). **Before trusting a diagnostic,
 run it on a case you KNOW is bad and one you know is good, and confirm it separates them.**
 
-HONEST CEILING — **AND FROM ROUTE-F v1: the "beat viscosity" sentence now has a measured
+ **NEW from §28 — the four Route-G v1 paid for:**
+(56) **A FORMULA THAT IS RIGHT IN ONE MODEL CAN BE A GAUGE CHOICE RATHER THAN A LAW — PORT IT
+BEFORE YOU HEADLINE IT.** s_c = alpha/2 was correct, gated, and cross-validated against an
+unrelated computation, and it was still a coordinate expression, true only because gCLM's
+rescaling pins c_l = 1. **Nothing internal to the 1D leg could have revealed that** — not a
+finer grid, not a wider window, not a better control, not another decade of (T-t). Changing
+the MODEL is a test that no amount of refinement WITHIN the model substitutes for. Every
+banked lesson up to here is about not fooling yourself with your own instrument; this one is
+about not fooling yourself with your own COORDINATES. (57) **When the instrument that worked
+does not port, ask whether an instrument you ALREADY OWN does.** The direct time-dependent fit
+fails in 2D for a resolution reason that will not go away — but the project already had a
+dynamic-rescaling machine in which the same quantity is a MODULATION CONSTANT, with no fit, no
+window and no singular-time estimate anywhere in it. **The repair for a measurement that is too
+noisy is sometimes a different DEFINITION of the same number, not more grid.** (58) **Check the
+MONOTONICITY of your own headline, in words.** "Faster collapse loses to viscosity" is the
+opposite of the natural intuition ("a violent singularity should overwhelm viscosity"), and the
+natural intuition is what gets written into a summary sentence by reflex. It is now a unit test.
+(59) **A CALIBRATION between the toy and its target is worth a leg on its own.** Fifteen legs of
+gCLM work and nobody had asked where the 2D object sits on gCLM's own dial. It took an afternoon
+and it changes what the family map is evidence FOR.
+
+HONEST CEILING — **AND FROM ROUTE-G v1: the "beat viscosity" sentence is now on the 2D object,
+and its content changed on the way. The law is s_c = 1/(2 beta), NOT alpha/2 — the 1D form was
+a GAUGE CHOICE (true only where c_l = 1) and only the port could have caught it. NS is
+beta = 1/2 ⇒ s_c = 1 exactly. s_c DECREASES with beta, so beating ordinary viscosity requires
+an anomalously SLOW collapse (beta < 1/2), which is the opposite of the natural intuition. The
+proven Chen–Hou 2D Boussinesq blow-up is at beta = 2.92, s_c = 0.171 — SIX TIMES the NS
+collapse rate, on the losing side by a wide margin. That is ORIENTATION about the distance
+between the toy and the target, NOT evidence about NS and NOT a claim that a viscous 2D
+blow-up exists. Its measured half REPRODUCES Chen–Hou rather than extending them (Level-0 by
+construction), the 1D method does NOT port (under one decade of (T-t) against 1D's four, and
+one more decade costs 10^beta in LINEAR resolution), and it moves NO link of the chain. What it
+does do that no previous leg did: it CALIBRATES the toy against its target, and the answer is
+that gCLM's dial and the 2D object sit on opposite sides of the NS line.** **AND FROM ROUTE-F v1: the "beat viscosity" sentence has a measured
 right-hand side in 1D, s_c = alpha/2, confirmed with nothing fitted at a=0 and cross-checked
 against an unrelated computation of alpha. It is ORIENTATION, not evidence about NS: NS's alpha
 is pinned at 2 by dimensional analysis, gCLM's is a dial, and nothing here says a viscous gCLM
