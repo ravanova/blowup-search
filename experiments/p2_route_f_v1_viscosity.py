@@ -21,6 +21,9 @@ SIX MEASUREMENTS:
       nothing in common;
   F4  the nu-INDEPENDENCE control (the prediction involves s and alpha, not nu);
   F5  a resolution ladder;
+  F7  the FIT-WINDOW systematic, swept rather than chosen -- the dominant error, and
+      the reason this leg's claims are about the SLOPE and the ZERO, not about any
+      single exponent;
   F6  the s_c(a) map, and where it crosses the ordinary Laplacian s = 1.
 
 Deterministic, NOT logged.  Writes writeup/data/p2_route_f_v1_viscosity.json.
@@ -45,7 +48,7 @@ from solver.fractional_gclm import (  # noqa: E402
 
 OUT = ROOT / "writeup" / "data" / "p2_route_f_v1_viscosity.json"
 ROUTE_E = ROOT / "writeup" / "data" / "p2_route_e_v1_spectrum.json"
-N_DEFAULT = 4096
+N_DEFAULT = 8192
 AMP = 1000.0
 
 
@@ -166,6 +169,42 @@ def f5_resolution(a=0.0, nu=1e-3, s=0.35, ns=(1024, 2048, 4096, 8192)):
             "finest_pair_diff": float(fine)}
 
 
+def f7_window_systematic(a=0.0, nu=1e-3,
+                         s_values=(0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75),
+                         windows=((0.2, 0.8), (0.3, 0.92), (0.4, 0.94), (0.5, 0.95),
+                                  (0.6, 0.98))):
+    """F7: the fit window is the dominant systematic, so sweep it instead of picking.
+
+    p = 1 - 2s/alpha is asymptotic, so an early window has not got there and a very
+    late one is noise.  Sweeping gives the error bar honestly -- and shows the SLOPE
+    is far more robust than any single exponent, because the bias is shared across s
+    and cancels in the difference.
+    """
+    print("\n[F7] the fit-window systematic")
+    n = N_DEFAULT
+    runs = []
+    for s in s_values:
+        g = FractionalGCLM(n=n, a=a, nu=nu, s=s)
+        r = g.run(initial(n), amp_factor=1e6, sample_every=5, max_steps=600000)
+        runs.append((r, estimate_T(r)))
+    rows = []
+    for lo, hi in windows:
+        ps = [fit_relevance(r, T, lo=lo, hi=hi)["p"] for r, T in runs]
+        c = np.polyfit(np.array(s_values, float), np.array(ps), 1)
+        rows.append({"window": [lo, hi], "p": ps, "slope": float(c[0]),
+                     "zero": float(-c[1] / c[0])})
+        print("   window %.2f-%.2f  slope %+.4f  zero %.4f  (predicted -2.0000, 0.5000)"
+              % (lo, hi, c[0], -c[1] / c[0]))
+    sl = [r["slope"] for r in rows]
+    zr = [r["zero"] for r in rows]
+    print("   => slope %.3f +- %.3f ; zero %.3f +- %.3f  (predicted -2, 0.5)"
+          % (np.mean(sl), (max(sl) - min(sl)) / 2, np.mean(zr), (max(zr) - min(zr)) / 2))
+    return {"rows": rows, "slope_mean": float(np.mean(sl)),
+            "slope_halfspread": float((max(sl) - min(sl)) / 2),
+            "zero_mean": float(np.mean(zr)),
+            "zero_halfspread": float((max(zr) - min(zr)) / 2)}
+
+
 def f6_sc_map():
     print("\n[F6] the s_c(a) map")
     am = alpha_map()
@@ -193,6 +232,7 @@ def main():
     d["F3_cross_check"] = f3_cross_check()
     d["F4_nu_control"] = f4_nu_control()
     d["F5_resolution"] = f5_resolution()
+    d["F7_window_systematic"] = f7_window_systematic()
     d["F6_sc_map"] = f6_sc_map()
     d["wall_clock_seconds"] = time.time() - t0
     OUT.parent.mkdir(parents=True, exist_ok=True)

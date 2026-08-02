@@ -200,7 +200,7 @@ class FractionalGCLM:
 
     # -- the run -----------------------------------------------------------
     def run(self, w0, t_end=np.inf, amp_factor=1e4, max_steps=2000000,
-            sample_every=25, tail_frac=None):
+            sample_every=5, tail_max=1e-2):
         """Integrate until max|omega| grows by `amp_factor`, or t_end, or max_steps.
 
         Records max|omega|, the two term sizes at the peak, and the spectral tail
@@ -214,14 +214,21 @@ class FractionalGCLM:
         t = 0.0
         ts, amps, ratios, tails = [], [], [], []
         outcome, steps = "max_steps", 0
-        # Under-resolution guard: the fraction of energy in the top HALF of the
-        # RESOLVED band, i.e. |k| > n/6, since the 2/3 rule has already zeroed
-        # everything above n/3.  Measuring above 2/3 of k_max instead -- the obvious
-        # choice -- reports exactly 0.0 at some n and a real number at others,
-        # because whether that band lands inside or outside the dealiasing cutoff
-        # depends on rounding in n.  A guard that is identically zero by
-        # construction is worse than no guard.
-        hi = int(np.searchsorted(self.k, self.n / 6.0))
+        # UNDER-RESOLUTION GUARD, and it took two tries to define honestly.
+        #  * Energy above 2/3 of k_max reads exactly 0.0 at some n and not others,
+        #    because the 2/3 dealiasing rule has already zeroed that band and
+        #    whether it lands inside the cutoff depends on rounding in n.  A guard
+        #    that is zero by construction reads as "perfectly resolved".
+        #  * Energy above n/6 reads ~0.37 for every run, resolved or not: a
+        #    near-singular solution genuinely has a fat spectrum, so a broad band
+        #    measures the physics rather than the discretization.
+        # What actually discriminates is the amplitude AT THE CUTOFF relative to the
+        # peak: the top 10% of the KEPT band against the largest mode.  The
+        # resolution ladder (F5) remains the real check; this is the cheap proxy
+        # that can reject a run in flight.
+        k_cut = self.n / 3.0
+        hi = int(np.searchsorted(self.k, 0.9 * k_cut))
+        keep = self.k <= k_cut
         for steps in range(1, int(max_steps) + 1):
             dt = self.dt_stable(w)
             if t + dt > t_end:
@@ -249,8 +256,16 @@ class FractionalGCLM:
                 ts.append(t)
                 amps.append(amp)
                 ratios.append(abs(dis[i]) / (abs(nl[i]) + 1e-300))
-                p = np.abs(w_hat) ** 2
-                tails.append(float(p[hi:].sum() / (p.sum() + 1e-300)))
+                pk = np.abs(w_hat) ** 2
+                band = pk[hi:][keep[hi:]]
+                tails.append(float(band.max() / (pk.max() + 1e-300))
+                             if band.size else 0.0)
+                if tails[-1] > tail_max:
+                    # REFUSE rather than return a number off an unresolved state
+                    # (banked lesson 45).  The recorded history up to here is
+                    # resolved and usable; the run simply stops being trustworthy.
+                    outcome = "under_resolved"
+                    break
                 if amp > amp_factor * amp0:
                     outcome = "blowup_candidate"
                     break
@@ -289,13 +304,24 @@ def estimate_T(res, lo=0.55, hi=1.0):
     return float(-c[1] / c[0]) if c[0] < 0 else float("nan")
 
 
-def fit_relevance(res, T, lo=0.30, hi=0.92):
+def fit_relevance(res, T, lo=0.40, hi=0.94):
     """Fit  D/N ~ (T-t)^p  over an interior window of the run.
 
-    The window matters and is reported: too early and the asymptotic scaling has
-    not started, too late and the run is under-resolved.  `lo`/`hi` are fractions
-    of the recorded amplitude range, not of time, so the window follows the
-    blow-up rather than the clock.
+    THE WINDOW IS THE DOMINANT SYSTEMATIC AND IS SWEPT, NOT CHOSEN.  p = 1 - 2s/alpha
+    is an ASYMPTOTIC statement, so an early window has not reached it and a very late
+    one is noise-dominated.  Measured at a = 0, s = 0.35 (prediction +0.300) the
+    single-exponent value runs +0.414 / +0.343 / +0.318 / +0.305 / +0.270 over windows
+    0.20-0.80 ... 0.60-0.98 -- a +-0.07 spread that approaches the prediction
+    monotonically from above, which is what an asymptotic approach looks like.
+
+    THE SLOPE IS MUCH MORE ROBUST THAN ANY SINGLE EXPONENT, because every s uses the
+    same window and the bias largely cancels in the difference: -1.896 / -2.043 /
+    -2.068 / -2.074 / -2.001 over the same five windows, i.e. -2.03 +- 0.09 against a
+    prediction of exactly -2.  That is why this leg's claims are made about the SLOPE
+    and the ZERO CROSSING, with the window sweep quoted as the error bar.
+
+    `lo`/`hi` are fractions of the recorded amplitude range, not of time, so the
+    window follows the blow-up rather than the clock.
     """
     amp, t, r = res["amp"], res["t"], res["ratio"]
     if amp.size < 8:
