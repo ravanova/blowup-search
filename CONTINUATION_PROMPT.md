@@ -1,6 +1,54 @@
 # Continuation prompt (copy into a fresh session)
 
-*Written 2026-08-01 (updated after Route-D v16). **NEWEST LEG FIRST — Route-D v16 IS THE FLOAT
+*Written 2026-08-02 (updated after Route-E v1). **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS
+LANE AND SHUTS ITS CHEAPEST ENTRANCE.** v15/v16 named DSS as the swing. Necas-Ruzicka-Sverak
+(ext. Tsai) rules out EXACTLY self-similar NS blowup, and in dynamic-rescaling variables
+**self-similar = FIXED POINT, DSS = PERIODIC ORBIT**, so the cheapest way a periodic orbit could
+exist near this project's objects is a **HOPF bifurcation off the fixed point** — one dense
+eigenvalue solve. **VERDICT: at both points where the instrument can see, the only grid-converged
+ISOLATED eigenvalues are 0 and -1, THE TWO EXACT SYMMETRY MODES (dilation; amplitude, from
+L(Omega) = -Omega + X Omega_X). No complex pair, nothing near the axis, NO HOPF.** Backed by a
+**PLANTED POSITIVE CONTROL** (same filter, same operator + a smooth bump ⇒ isolated **+1.083**
+at V=6, **+4.578** at V=12), so "only symmetry survives" is a measurement, not a blind spot.
+**THE MECHANISM IS BETTER THAN THE VERDICT: at a=0 the linearization is exactly solvable and its
+continuum is (w-1)^{1-lambda}(w+1)^{1+lambda} on the strip -1 < Re lambda < 1; the purely
+imaginary members are X^{1-iy} e^{iy tau} = exp(iy(tau - log X)), a wave travelling OUTWARD IN
+log X, exactly tau-periodic. The log-periodic structure a DSS solution is MADE OF is present —
+as CONTINUOUS spectrum. A continuum has no eigenvalue to move.** **SAID ALONGSIDE, NOT BURIED:
+the flow is NOT spectrally stable — its ESSENTIAL spectrum fills [c_omega+1, c_omega+H Omega(0)]
+= [0,+1] at a=0 and [-2,+5] at a=1/2 (measured [-2.0005,+4.564]), complex members included; those
+directions carry a CORNER AT THE ORIGIN, are norm-dependent, and still cannot bifurcate.**
+**THE BUILD (worth reusing): compactify X = tan(theta/2), odd sines ⇒ H(sin k th) = -cos k th +
+(-1)^k, X d/dX = sin(th) d/dth, d/dX = (1+cos th) d/dth ALL EXACT — the dilation term is bounded
+and exact — and the velocity is exact via N_{k+1} = -2N_k - N_{k-1} - 2cos kt (every N_k a trig
+polynomial; NO QUADRATURE ANYWHERE). The a=0 self-similar anchor is ONE MODE, Omega = -sin theta,
+residual 1.1e-16.** **A GAUGE THE PROJECT HAD BEEN CARRYING IS WRONG FOR a != 0:
+c_omega = 1 - H(Omega)(0) admits NO fixed point at all for a != 0 (R_X(0) = -a H(Omega)(0)
+Omega_X(0)); the forced repair is c_omega = 1 + (a-1) H(Omega)(0).** BY-PRODUCTS: **alpha(a) =
+-c_omega(a)** is an OUTPUT (1.0000/1.1414/1.3345/1.6172/2.0795/3.0000 at a=0..0.5, Richardson),
+the branch is lost at a=0.65 with 1/alpha → 0 at **a_c ~ 0.694**; odd-integer alpha ⇒ analytic ⇒
+spectral, confirmed at **alpha=1 (a=0), alpha=3 (a=1/2, twelve digits) and alpha=5
+(a=0.5821792673)**; **what stays UNEXPLAINED is why alpha=3 lands on a round rational while
+alpha=5 does not.** NOVELTY UNCHECKED — **PDF ACCESS IS STILL BLOCKED (arxiv + publishers 403 at
+the proxy CONNECT); that is now THREE legs and it is still the cheapest unblocking act.**
+**TWO ERRORS CAUGHT INSIDE THE LEG, both banked: (i) the filter kept a "third eigenvalue" at
+a=1/2 whose K-ladder converged to -2 in SIX DIGITS — it is the essential spectrum's LEFT EDGE
+c_omega+1, exposed by the free control at a=0 where the identical edge carries 99% of the
+spectrum (tightening the filter would have made it MORE convincing); (ii) I hypothesised the
+odd-alpha rule from two points, found the third, read TWO RUNGS of its ladder as algebraic, wrote
+the rule off as false AND COMMITTED THAT — four more rungs gave order 3.6→6.5→11.5→15.4→19.7,
+i.e. exponential, and the rule holds. Both corrections are in place and MARKED.** New
+solver/rescaled_spectrum.py + test_rescaled_spectrum.py (8/8; suite **23 files green**); fig34;
+BLOG/TECHNICAL_P2_ROUTEE_V1.md; PHASE2_P2_NOTES §26. Everything banked + pushed on `main`.
+**IT MOVES NO LINK OF THE CHAIN AND IS NOT CLAY PROGRESS — it is lane scoping, and it stops the
+project building a DSS search around a mechanism that does not exist here. NEXT: the DSS lane is
+NOT closed, its CHEAP entrance is. Entering costs a real periodic-orbit build with nothing nearby
+to seed it. WEIGH THAT AGAINST (2) the Hou-Luo CRITICAL-VISCOSITY MAP (well-posed, publishable
+either way, directly probes "can a blowup beat viscosity") and (3) the L1→L2 port to 2D
+Boussinesq. DO NOT default into the expensive DSS build.***
+
+*Before Route-E v1: **Route-D v16 was the float rehearsal**, framed by v15 as a CAPABILITY BUILD
+not a result. **NEWEST LEG FIRST — Route-D v16 IS THE FLOAT
 REHEARSAL, framed by v15 as a CAPABILITY BUILD not a result. IT DOES NOT CLOSE, and the reason
 is not the far field.** **THE GOOD NUMBER: Y_0 REACHES MACHINE PRECISION** — the defect of the
 INTERPOLANT as a function (v12's distinction, which survives the reformulation) runs
@@ -385,6 +433,13 @@ RANKED, with the reasoning, not just the list:
      than stationary — i.e. a periodic orbit of the rescaled flow — and a GA for global search
      plus Newton for refinement is unusually well suited to finding one. This is the most
      Clay-relevant thing available with the tooling that exists, and it looks uncrowded.
+     **ROUTE-E v1 (§26) TOOK THE CHEAP ENTRANCE AND FOUND IT SHUT: no eigenvalue of the
+     self-similar fixed point is available for a Hopf bifurcation, so a periodic orbit is not
+     going to be handed to us by a bifurcation off the branch we already have. The lane is NOT
+     closed — the cheap way in is. Entering now means a genuine periodic-orbit search with
+     nothing nearby to seed it, and v1 says where such an orbit would have to live (the
+     log-periodic directions, which are CONTINUOUS spectrum and of limited regularity at the
+     origin). Price that build honestly before starting it.**
   2. **Map the critical viscosity scaling for the Hou–Luo scenario.** The Clay question in
      miniature: take the Euler blow-up Chen–Hou proved, add viscosity, determine numerically
      the scaling at which ν kills it. Well-posed, directly probes "can a blow-up beat
@@ -407,7 +462,12 @@ RANKED, with the reasoning, not just the list:
      methodological candidates (the discrete-ball trap; the weighted-ℓ¹ conservation law /
      no-go; the elasticity discipline).
 
-RECOMMENDED SEQUENCING: **(4) FIRST now that it is cheap and the framing is repaired** — it is
+RECOMMENDED SEQUENCING **(REVISED BY §26)**: the DSS lane's cheap entrance is shut, so lane (1)
+is now an expensive build rather than a cheap swing. **The best-value next chunk is (2), the
+Hou-Luo CRITICAL-VISCOSITY MAP** — well-posed, publishable either way, and the only item on the
+list that probes the actual Clay obstruction ("can a blow-up beat viscosity") rather than
+polishing a toy profile. (3) the L1→L2 Boussinesq port is the fallback. **Previously, and now
+superseded:** **(4) FIRST now that it is cheap and the framing is repaired** — it is
 decisive in the same way the kill switch was, and it is the capability every other route needs;
 (5) alongside it, because it is cheap and it is the only thing standing between this work and a
 novelty claim; then (1) as the genuinely Clay-relevant swing with (2) as the well-posed
@@ -443,7 +503,9 @@ Level-2 = a rigorous computer-assisted statement (interval / Newton–Kantorovic
 certification) = the FIRST rung that is genuinely "novel maths" — **Route-D
 v1–v14 + v16 (fig19–fig33) are tooling + scoping/negative results + partial bounds + one exact
 algebraic identity on the way there, NOT certificates; v15 is Level-0 scoping and found that
-Level-2 in this family is ROUTINE FOR OTHERS.**
+Level-2 in this family is ROUTINE FOR OTHERS; **Route-E v1 (fig34) is Level-1 numerics plus two
+small EXACT computations (the closed-form a=0 continuum, and the two symmetry eigenvalues) — a
+lane-scoping NEGATIVE, not a certificate**.**
 Level-3 = Clay.
 
 TERMINOLOGY GUARD (do not drop): the dynamic-rescaling numerics + the GA framework are
@@ -460,11 +522,13 @@ PHASE2_P2_NOTES.md (TOP STATUS + §2 anchor, §6 degenerate gauge, §7 reframe, 
 v2, §12–§18 ROUTE-D v3–v9, §19 ROUTE-D v10, §20 ROUTE-D v11, §21 ROUTE-D v12,
 §22 ROUTE-D v13, §23 ROUTE-D v14,
 §24 ROUTE-D v15 (the literature check — READ IT BEFORE CHOOSING A LANE),
-**§25 ROUTE-D v16 = newest**).
+§25 ROUTE-D v16,
+**§26 ROUTE-E v1 = newest (the DSS lane opens; read it before choosing a lane)**).
 Per-leg writeups + figs under writeup/4_p2_lottery/: TECHNICAL/BLOG_P2_{HL_ANCHOR(fig12),
 CONJ24(fig13),SCENARIO2(fig14/15),GA_FRAMEWORK(fig16),TWO_SCALE(fig17),KLADDER(fig18),
 ROUTED(fig19),ROUTED_DRESS(fig20),ROUTED_SPACES(fig21),ROUTED_V4(fig22),ROUTED_V5(fig23),
-ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),ROUTED_V12(fig30),ROUTED_V13(fig31),**ROUTED_V14(fig32)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
+ROUTED_V6(fig24),ROUTED_V7(fig25),ROUTED_V8(fig26),ROUTED_V9(fig27),ROUTED_V10(fig28),ROUTED_V11(fig29),ROUTED_V12(fig30),ROUTED_V13(fig31),ROUTED_V14(fig32),
+ROUTED_V16(fig33),**ROUTEE_V1(fig34)**}.md. Then experiments/JOURNAL.md (newest first) and LOGGING.md.
 
 STATE (all banked + pushed to main):
 - Phase 1 CONCLUDED. Spike 0/1 DONE. P2 anchor (§2), §6 degenerate-gauge, §7 reframe,
@@ -472,7 +536,8 @@ STATE (all banked + pushed to main):
   a_p(K) convergence map (7/7), §10 Route-D v1, §11 Route-D v2, §12 Route-D v3,
   §13 Route-D v4, §14 Route-D v5, §15 Route-D v6, §16 Route-D v7, §17 Route-D v8,
   §18 Route-D v9, §19 Route-D v10, §20 Route-D v11, §21 Route-D v12, §22 Route-D v13,
-  §23 Route-D v14, §24 Route-D v15 (literature scope), §25 Route-D v16 — all DONE + banked.
+  §23 Route-D v14, §24 Route-D v15 (literature scope), §25 Route-D v16,
+  §26 ROUTE-E v1 (the DSS lane's Hopf question, answered NO) — all DONE + banked.
 - The gCLM two-scale survival boundary is GENUINE (a\*≈0.5–0.55, a SOFT crossing),
   not genome-limited — earned by §9-cont2's GA-/genome-/basis-convergence, i.e. **THREE
   confirmations, not four: v14 RETIRED v11's grid-refinement argument** (on its own support
@@ -1288,8 +1353,47 @@ reason is how a wrong reason survives several legs. **Refine the instrument on E
 including the ones you agree with.** (45) **A ledger entry that is unknown must be None, never
 zero, and the assembly must REFUSE TO RUN.** Returning a budget with Z_1 silently absent would
 have produced a closed-looking result off a ledger with a hole in it.
+ **NEW from §26 — the seven Route-E v1 paid for:**
+(46) **A symmetry audit is cheaper than an eigenvalue solve, and it predicts part of the
+answer.** Two of this leg's eigenvalues were derivable in five lines from the flow's symmetries.
+Doing that FIRST meant "exactly two survived" read immediately as "nothing but symmetry" instead
+of looking like a result. **Enumerate the symmetry modes before computing a spectrum; they are
+the null result's baseline.** (47) **A null result needs a PLANTED POSITIVE, not just a
+control.** Lesson (2) says ablate to attribute and (9) says build the adversary; this is the
+third member. When the finding is ABSENCE, show the instrument detecting a PRESENCE of the same
+kind — here, planting a bump and recovering +1.083 and +4.578. (48) **When you generalize a
+gauge, RE-DERIVE it — do not extend it.** c_omega = 1 - H(Omega)(0) is correct at a=0 and was
+being carried at every a; for a != 0 that flow admits NO fixed point at all, and one line of
+algebra at the origin catches it. This is (29) wearing the gauge's clothes. (49) **The
+regularity of the object sets the convergence rate of everything built on it, and it can vary
+with the PARAMETER.** alpha(a) is an output and is an odd integer at isolated points, where the
+method is spectral and everywhere else second-order — a ten-order accuracy swing driven by
+nothing but a. **Find where your object is smooth and quote your sharp numbers there.**
+(50) **An exactly known eigenvalue is a free error bar on every other one.** The dilation mode is
+0 by symmetry, so its COMPUTED value is the spectrum's error at that parameter (0.35 at a=0.2,
+8.9e-5 at a=1/2) — and that decided which rows of the sweep could carry a conclusion. **If a
+symmetry pins one eigenvalue, plot its deviation next to every claim about the others.**
+(51) **A convergence filter can be fooled by the EDGE of a continuum, and the fix is a CONTROL
+POINT, not a tighter tolerance.** The "-2" at a=1/2 converged to six digits and was the essential
+spectrum's left edge; tightening the filter would have made it look BETTER. What exposed it was
+evaluating the same quantity at a=0, where that identical edge carries 99% of the spectrum.
+**Before believing an isolated eigenvalue, ask where the continuum's edges are — then go look at
+the same object somewhere you already understand it.** (52) **Two points define a line through
+anything — and two RUNGS define a convergence rate through anything.** I hypothesised a rule from
+the only two special points I had, went and found the third, read two rungs of its ladder as
+algebraic, wrote the rule off as false AND COMMITTED THAT; four more rungs gave order
+3.6→6.5→11.5→15.4→19.7 (exponential) and the rule held. **Add rungs until the exponent stops
+moving** — a steeper object reaches its asymptotic regime later, which is when a short ladder is
+most misleading.
 
-HONEST CEILING (say it out loud): Route-D v3–v14 are validated tooling + a no-go theorem, a
+HONEST CEILING — **AND FROM ROUTE-E v1: the DSS lane's cheapest entrance is SHUT. There is no
+eigenvalue of the gCLM self-similar fixed point available for a Hopf bifurcation; the only
+isolated grid-converged spectrum is the two exact SYMMETRY modes, and the log-periodic (DSS)
+directions are CONTINUOUS spectrum. That is a genuine negative with a mechanism and a planted
+positive control behind it — and it moves NO link of the chain. It is not Clay progress; it is
+lane scoping that prevents several legs of misdirected build. The flow is also not spectrally
+stable (essential spectrum reaching +1 at a=0 and +5 at a=1/2), which is norm-dependent and
+still cannot bifurcate.** Route-D v3–v14 are validated tooling + a no-go theorem, a
 confirmed price, a second structural requirement, a space that met every requirement identified
 up to v11, upper bounds for seven of ten constants (a COMPLETE Z₂ and the whole of ‖A‖) — **all
 at the a=0 ANCHOR, and all about a formulation v14 replaced** — one disqualified method, a

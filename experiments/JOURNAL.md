@@ -3,6 +3,78 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-E v1: looking for the door that isn't there (non-logged) — 2026-08-02
+
+**NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_e_v1_spectrum.json`
+(regen `python -u experiments/p2_route_e_v1_spectrum.py`, ~35 min); figure fig34; writeups
+TECHNICAL/BLOG_P2_ROUTEE_V1; PHASE2_P2_NOTES.md §26. Code `solver/rescaled_spectrum.py` +
+`test_rescaled_spectrum.py` (8/8; suite 23 files green).
+
+What a human would want to know:
+
+- **First leg of a new lane, and a negative.** §24 said L1 is occupied and moved the swing to
+  DSS. A DSS blow-up is a periodic orbit of the rescaled flow, so the cheapest way one could
+  exist near what we already have is a Hopf bifurcation off the self-similar fixed point. There
+  is no eigenvalue that could do it.
+
+- **I wrote down two of the eigenvalues before computing anything, and that paid twice.** They
+  follow in five lines from the flow's symmetries (dilation → 0, amplitude → −1, at every `a`).
+  Once because the filter's "exactly two" then read immediately as "nothing but symmetry"
+  instead of looking like a result. And once for a reason I did not anticipate: `λ = 0` is
+  *exactly* right, so its computed value is a **free error bar on the whole spectrum** — 0.35 at
+  `a = 0.2`, 8.9e−5 at `a = 1/2`. That number is what decided which rows of the sweep were
+  allowed to carry a conclusion, and without it I would have reported the dilation mode
+  "moving" with `a` when it was pure discretization error.
+
+- **The compactification is startlingly good for this object.** `X = tan(θ/2)`, odd sines: `H`,
+  `d/dX` and — the one that matters — the dilation term `X d/dX = sin θ ∂_θ` are all exact, and
+  the velocity is exact too through a recursion whose `1 + cos t` denominator cancels
+  identically. The CLM self-similar profile is then literally `Ω = −sin θ`, residual 1.1e−16.
+  Sixteen Route-D legs used this variable for the *traveling-wave* object; nobody had put the
+  *dilation* anchor in it.
+
+- **A gauge the project had been carrying is wrong for `a ≠ 0`.** `c_ω = 1 − HΩ(0)` is right at
+  `a = 0` and was used at every `a`. Differentiate the residual at the origin: for `a ≠ 0` it is
+  nonzero, so that flow has *no fixed point at all*. Repair forced, not chosen.
+
+- **The mechanism is nicer than the verdict.** At `a = 0` the linearization is exactly solvable
+  and its continuum is `(w−1)^{1−λ}(w+1)^{1+λ}` on `−1 < Re λ < 1`. The purely imaginary members
+  are `X^{1−iy} e^{iyτ}` — a wave travelling outward in log X, exactly τ-periodic. **The
+  log-periodic structure a DSS solution is made of IS in this operator.** It is continuous
+  spectrum, not a bound state, and a continuum has no eigenvalue to move. That is *why* there is
+  no Hopf.
+
+- **I got two things wrong in this leg and caught both. They are the useful part.**
+  (i) The filter kept a third eigenvalue at `a = 1/2` near −2, and a K-ladder made it look
+  *better* (−2.0073 → −2.0017 → −2.0005 → −1.999999). Six digits of grid-convergence. It is the
+  **left edge of the essential spectrum**, `c_ω + 1` — and the control that settles it was free:
+  at `a = 0` that identical edge sits at 0 and carries 99% of the discretized spectrum. Nobody
+  would call that an eigenvalue. Tightening the filter would have made the artefact *more*
+  convincing.
+  (ii) I hypothesised "α odd integer ⇒ analytic" from the only two special points I had, went
+  and found the third (α = 5 at a = 0.5821792673), read the first two rungs of its ladder as
+  algebraic, **wrote the rule off as false and committed that**. Four more rungs: the implied
+  order climbs 3.6 → 6.5 → 11.5 → 15.4 → 19.7, which is exponential convergence that had not
+  settled. The rule holds. I had literally just written a lesson about not fitting a rule to two
+  points, and then fitted a rate to two rungs.
+
+- **Two by-products.** `α(a)` is an output that runs away (branch lost at `a = 0.65`, `1/α → 0`
+  at `a ≈ 0.694`). And `α = 3` lands at exactly `a = 1/2` — twelve digits — while `α = 5` lands
+  at 0.5821792673, which is not a special number. So the odd-α rule explains why those `a` are
+  analytic but not why one of them is a round rational. Novelty unchecked; PDF access still
+  blocked, three legs running.
+
+- **The third a = 1/2 sighting, and I am not building on it.** v16 found `sup|N''|` finite
+  exactly for `a ≤ 1/2`; the GA's survival boundary is `a* ≈ 0.5–0.55`; now `α(1/2) = 3`. All
+  different objects. v12 had a similar coincidence, ran the `a = 1/3` control, and the control
+  killed it. No control run here, so it stays a written-down coincidence.
+
+- **Said alongside the verdict, not buried:** the flow is *not* spectrally stable. Its essential
+  spectrum reaches `+1` at `a = 0` and `+5` at `a = 1/2`, complex members included. Those are
+  the directions with a corner at the origin. It is norm-dependent, it is the familiar
+  low-regularity essential instability of self-similar linearizations, and it is still not
+  something that can Hopf-bifurcate.
+
 ## Phase-2 P2 — ROUTE-D v16: the wall I removed was not the only wall (non-logged) — 2026-08-01
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_d_v16_rehearsal.json`

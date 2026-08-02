@@ -1765,3 +1765,131 @@ None, never zero, and the assembly must refuse to run.** Returning a budget with
 absent would have produced a closed-looking result off a ledger with a hole in it.
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous.
 Clay odds ~0.05%.
+
+
+## §26 — ROUTE-E v1 DONE (2026-08-02): THE DSS LANE OPENS AND ITS CHEAPEST ENTRANCE IS SHUT.
+## NO EIGENVALUE IS AVAILABLE FOR A HOPF BIFURCATION; THE LOG-PERIODIC DIRECTIONS ARE
+## CONTINUOUS SPECTRUM. Two self-caught errors, both banked.
+
+Built solver/rescaled_spectrum.py + test_rescaled_spectrum.py 8/8 (suite **23 files green**);
+experiments/p2_route_e_v1_spectrum.py → writeup/data/p2_route_e_v1_spectrum.json → fig34. NOT
+a logged Tier run (deterministic). BLOG/TECHNICAL_P2_ROUTEE_V1.md.
+
+**WHY THIS LEG.** §24 said L1 is occupied territory and moved the swing to DSS. Necas-Ruzicka-
+Sverak (ext. Tsai) rules out EXACTLY self-similar NS blowup, so the surviving candidate class is
+DISCRETELY self-similar — and in dynamic-rescaling variables **self-similar = FIXED POINT, DSS =
+PERIODIC ORBIT**. The cheapest way a periodic orbit could exist near this project's objects is a
+**HOPF bifurcation off the fixed point**, which is one dense eigenvalue solve. That is the
+gate-check's "cheapest experiment that would tell us the route is dead", run before any DSS
+search machinery was built. **It moves NO link of the chain (L1-L4) and is not Clay progress.**
+
+**THE BUILD.** Compactify X = tan(theta/2), odd sines. Then **H(sin k theta) = -cos k theta +
+(-1)^k**, **X d/dX = sin(theta) d/d theta** and **d/dX = (1+cos theta) d/d theta** are all EXACT
+— the dilation term, which is what makes the far field expensive everywhere else, is a bounded
+exact operator on the circle. The velocity is exact too: N_k := ((-1)^k - cos kt)/(1+cos t)
+satisfies **N_{k+1} = -2N_k - N_{k-1} - 2 cos kt** (N_0=0, N_1=-1), so every N_k is a TRIG
+POLYNOMIAL (the 1+cos t always cancels) and U = sum_k b_k int_0^theta N_k is elementary. **No
+quadrature anywhere.** The a=0 self-similar anchor is then ONE MODE, **Omega_0 = -sin theta =
+-2X/(1+X^2)**, H(Omega_0) = 1+cos theta, c_omega = -1, residual **1.1e-16**.
+
+**A GAUGE THE PROJECT HAD BEEN CARRYING IS WRONG FOR a != 0.** solver/gclm_family.residual uses
+c_omega = 1 - H(Omega)(0) at every a. Differentiate the residual at the origin: R_X(0) =
+-a H(Omega)(0) Omega_X(0), so for a != 0 **that flow has NO fixed point at all**. The forced
+repair is **c_omega = 1 + (a-1) H(Omega)(0)**, which reduces to the old one at a=0.
+
+**TWO EIGENVALUES ARE EXACT AT EVERY a AND ARE PURE SYMMETRY.** L(X Omega_X) = 0 (dilation) and
+**L(Omega) = -Omega + X Omega_X** (amplitude, five lines from the profile equation + the gauge)
+⇒ span{Omega, X Omega_X} invariant with matrix [[-1,0],[1,0]] ⇒ **lambda = 0 and -1, always.**
+Gated, not trusted: defects **3.0e-15 / 3.3e-16** at a=0 and **1.3e-10 / 9.1e-15** at a=1/2, the
+2x2 block exact to 6.1e-16. **AND THEY DOUBLE AS A FREE ERROR BAR** — lambda=0 is exact, so its
+COMPUTED value is the spectrum's error at that a: **0.35 at a=0.2, 8.9e-5 at a=1/2.** That
+number decided which rows of the sweep were allowed to carry a conclusion.
+
+**AT a=0 THE REST IS CLOSED FORM.** With w = e^{-i theta}, Z = H Omega + i Omega (anchor
+Z_0 = 1+w), the linearization in s = delta Z is L s = w s - ((w^2-1)/2) s_w - s(1)(1+w), and
+**s_lambda = (w-1)^{1-lambda}(w+1)^{1+lambda}** solves L s = lambda s (one line:
+((w^2-1)/2)s_w = s(w-lambda)). Admissible for **-1 < Re lambda < 1** — a CONTINUUM, every member
+carrying a fractional power at X=0. Analyticity forces 1-lambda in Z_{>=0} ⇒ exactly {0,-1}.
+**THE MEMBER THAT MATTERS: lambda = iy gives s ~ X^{1-iy} against e^{iy tau} = exp(iy(tau -
+log X)) — a wave travelling OUTWARD IN log X at unit speed, exactly tau-periodic.** The
+log-periodic structure a DSS solution is made of IS in this operator — as CONTINUOUS spectrum,
+i.e. dilation transport carrying a scale-invariant wave to infinity, not a bound state.
+**Nothing there can cross an axis: that is the MECHANISM behind the negative.**
+
+**THE BRANCH.** alpha(a) = -c_omega(a) is an OUTPUT (far-field balance c_omega Omega =
+(X + a U_inf) Omega_X). Richardson over K=64/128/256: **1.000000 / 1.141397 / 1.334497 /
+1.617244 / 2.079464 / 3.000000** at a = 0 … 0.5. Followed finely it is lost at **a = 0.65**
+(alpha = 11.5 at the last good point) with 1/alpha extrapolating to zero at **a_c ~ 0.694**.
+Non-integer alpha = a branch point at X=infinity ⇒ algebraic convergence (K^-2ish at a=0.3).
+
+**THE RESONANCES (and the rule, hypothesised, tested, wrongly retracted, restored).** Odd-integer
+alpha ⇒ Omega ~ (pi-theta)^alpha smooth ⇒ spectral. **a=0 (alpha=1, exact); a=1/2 (alpha=3,
+c_omega = -3.000000000000, residual 1.4e-14 at K=192, geometric coefficients)** — the a=1/2 point
+was FOUND by a residual scan showing a single ten-order dip exactly there. The rule then rested
+on two points, so E8c located the third by secant: **alpha=5 at a = 0.5821792673**. Its ladder:
+3.19e-2 / 1.12e-2 / 7.92e-4 / 2.87e-5 / 9.24e-7 / 2.55e-8 over K=96..384, implied order **3.6 →
+6.5 → 11.5 → 15.4 → 19.7**. **ON THE FIRST TWO RUNGS I WROTE THE RULE OFF AS FALSE AND COMMITTED
+IT; the full ladder is exponential and the rule HOLDS at all three points** (the alpha=5 profile
+is steeper, so it reaches its asymptotic regime later — exactly when a short ladder misleads).
+Corrected in place and MARKED in both writeups. **What stays unexplained is narrower: alpha=3
+lands on exactly a=1/2 while alpha=5 lands on 0.5821792673, which is not a special number.**
+NOVELTY UNCHECKED (PDF access still blocked — three legs now). A rational ansatz
+Omega = -cX/(X^2+gamma)^2 fits the a=1/2 profile to **7e-5** while the profile itself is computed
+to 2e-14: a near miss, **the closed form was NOT identified**.
+
+**THE EIGENVALUE THAT WASN'T (the leg's other self-caught error).** The filter kept a THIRD value
+at a=1/2 near -2, and its K-ladder made it look BETTER: **-2.007293 / -2.001677 / -2.000467 /
+-1.999999** over K=96..256. Six digits of grid-convergence, and it is not a mode. **E9: the two
+singular endpoints fix the essential spectrum.** Near X=infinity the local operator is
+c_omega + xi d/dxi; near X=0 it is (c_omega + H Omega(0)) - theta d/dtheta; and in THIS space the
+minimum far-field exponent is 1 because every sin(k theta) vanishes linearly at theta=pi. So
+
+    **[ c_omega + 1 , c_omega + H(Omega)(0) ]**  =  [0, 1] at a=0  and  [-2, +5] at a=1/2,
+
+measured **[-1.0000, +0.0000] at a=0** (with **99% of the spectrum sitting exactly on the left
+edge**) and **[-2.0005, +4.5641] at a=1/2**. The "third eigenvalue" IS the left edge. **The
+control was free and decisive: at a=0 the identical edge sits at 0 and carries 99% of the
+discretized spectrum — nobody would call that an isolated eigenvalue.** Tightening the filter
+would have made the artefact MORE convincing.
+
+**THE VERDICT.** At the two points where the instrument can see (a=0 exactly, a=1/2 spectrally),
+**the only grid-converged ISOLATED eigenvalues are 0 and -1 — the two exact symmetry modes. No
+complex pair, nothing near the imaginary axis, NO HOPF.** POSITIVE CONTROL: the same filter on
+the same operator with a planted smooth bump returns **+1.083 (V=6)** and **+4.578 (V=12)**,
+isolated and in the right half plane — so "only symmetry survives" is a measurement, not a blind
+spot. **SAID ALONGSIDE, NOT BURIED: the flow is NOT spectrally stable — its ESSENTIAL spectrum
+reaches c_omega + H(Omega)(0) = +1 (a=0) and +5 (a=1/2), complex members included (|Im| ~ 150).
+Those are the directions with a fractional power at X=0 — a CORNER AT THE ORIGIN grows relative
+to the profile. It is norm-dependent, it is the familiar low-regularity essential instability of
+self-similar linearizations, and A CONTINUUM HAS NO EIGENVALUE TO MOVE.**
+
+**NOT CLAIMED:** not that gCLM has no DSS solution (only that one is not BORN from a Hopf off the
+branch continuing from CLM); nothing about NS (gCLM's scaling is not NS's); nothing at generic a
+(the instrument cannot resolve even the modes it is known to have there, and the symmetry error
+bar is how that is known rather than guessed); one gauge only.
+
+**NEXT.** The DSS lane is **not closed — its cheap entrance is.** Entering costs a real build (a
+periodic-orbit search with no fixed point nearby to seed it), and §4.1 says where such an orbit
+would have to live: the log-periodic directions, which are continuum and of limited regularity at
+the origin. Weigh that against **(2) the Hou-Luo critical-viscosity map** (well-posed, publishable
+either way, directly probes "can a blowup beat viscosity") and **(3) the L1→L2 port to 2D
+Boussinesq**. Do NOT default into the expensive DSS build.
+
+**NEW LESSONS.** (46) **A symmetry audit is cheaper than an eigenvalue solve and predicts part of
+the answer** — enumerate the symmetry modes first; they are the null result's baseline.
+(47) **A null result needs a PLANTED POSITIVE, not just a control** — when the finding is
+absence, show the instrument detecting a presence of the same kind. (48) **When you generalize a
+gauge, RE-DERIVE it, do not extend it** — lesson (29) in the gauge's clothes. (49) **The
+regularity of the object sets the convergence rate of everything built on it, and it can vary
+with the parameter** — find where your object is smooth and quote your sharp numbers there.
+(50) **An exactly known eigenvalue is a free error bar on every other one** — plot the symmetry
+mode's deviation next to every claim about the rest. (51) **A convergence filter can be fooled by
+the EDGE of a continuum, and the fix is a CONTROL POINT, not a tighter tolerance** — before
+believing an isolated eigenvalue, ask where the continuum's edges are and go look at the same
+object where you already understand it. (52) **Two points define a line through anything — and
+two RUNGS define a convergence rate through anything.** I wrote the first half of this lesson and
+then committed the second half. **Add rungs until the exponent stops moving**; a steeper object
+reaches its asymptotic regime later, which is when a short ladder is most misleading.
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link of
+the chain moved. Clay odds ~0.05%.
