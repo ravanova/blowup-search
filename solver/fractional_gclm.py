@@ -214,7 +214,14 @@ class FractionalGCLM:
         t = 0.0
         ts, amps, ratios, tails = [], [], [], []
         outcome, steps = "max_steps", 0
-        hi = self.k.size // 3 * 2
+        # Under-resolution guard: the fraction of energy in the top HALF of the
+        # RESOLVED band, i.e. |k| > n/6, since the 2/3 rule has already zeroed
+        # everything above n/3.  Measuring above 2/3 of k_max instead -- the obvious
+        # choice -- reports exactly 0.0 at some n and a real number at others,
+        # because whether that band lands inside or outside the dealiasing cutoff
+        # depends on rounding in n.  A guard that is identically zero by
+        # construction is worse than no guard.
+        hi = int(np.searchsorted(self.k, self.n / 6.0))
         for steps in range(1, int(max_steps) + 1):
             dt = self.dt_stable(w)
             if t + dt > t_end:
