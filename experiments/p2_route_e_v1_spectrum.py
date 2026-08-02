@@ -19,7 +19,9 @@ SEVEN MEASUREMENTS (each written down before it was run):
       a robust statement rather than a choice of cut;
   E6  the POSITIVE CONTROL: plant a bound state and check the filter finds it,
       including in the right half plane;
-  E7  where the branch ends.
+  E7  where the branch ends;
+  E8  the THIRD eigenvalue E5 found at a = 1/2 that nothing predicted, on a K-ladder;
+  E8b whether a = 1/2 is the only analytic resonance or alpha = 5 gives another.
 
 Deterministic, NOT logged (no GA, no stochasticity).  Writes
 writeup/data/p2_route_e_v1_spectrum.json.
@@ -236,6 +238,71 @@ def e7_end_of_branch(K=192, da=0.005, a_max=0.80):
     return {"rows": rows, "a_c_linear_extrapolation": a_c, "K": K, "da": da}
 
 
+def e8_third_mode(Ks=(96, 144, 192, 256, 320), a=0.5):
+    """E8a: the THIRD eigenvalue at a = 1/2, which E5 found and nobody predicted.
+
+    E5's filter kept 0, -1 AND a third real eigenvalue near -2 at the analytic
+    resonance -- at a looser distance (5.6e-3) than the two structural ones (1e-5),
+    which is exactly the situation where a K-ladder is the difference between a mode
+    and an artefact.  It is NOT symmetry: the two symmetry identities account for 0
+    and -1 and nothing else.  If it converges, the fixed point has a genuine
+    non-symmetry discrete eigenvalue, and the honest verdict changes from "only
+    symmetry survives" to "one real, stable, non-symmetry mode exists and is nowhere
+    near the axis".
+    """
+    print("\n[E8a] the third eigenvalue at a = 1/2")
+    rows = []
+    for K in Ks:
+        flow, out = continuation(a, K=K, da=0.02)
+        ev = np.linalg.eigvals(flow.generator(out["b"]))
+        near = {}
+        for target in (0.0, -1.0, -2.0):
+            j = int(np.argmin(np.abs(ev - target)))
+            near["%.0f" % target] = [float(ev[j].real), float(ev[j].imag)]
+        rows.append({"K": K, "residual": out["residual"], "c_omega": out["c_omega"],
+                     "near": near})
+        print("   K=%4d |R|=%.2e   nearest to 0: %+.9f   to -1: %+.9f   to -2: %+.9f"
+              % (K, out["residual"], near["0"][0], near["-1"][0], near["-2"][0]))
+    seq = [r["near"]["-2"][0] for r in rows]
+    print("   third-mode drift over the ladder: %.2e" % (max(seq) - min(seq)))
+    return {"a": a, "rows": rows, "drift": float(max(seq) - min(seq))}
+
+
+def e8b_second_resonance(K=256, a_lo=0.560, a_hi=0.600, n=17):
+    """E8b: is a = 1/2 the only analytic resonance, or is there one at alpha = 5?
+
+    alpha(a) is monotone and passes through 5 somewhere near a ~ 0.58.  If odd-integer
+    alpha is what makes the profile analytic, the residual must dip there the way it
+    does at a = 1/2 -- and a second spectrally-clean point would give the Hopf question
+    a second place where it can actually be asked.  A flat scan says the a = 1/2
+    resonance is NOT simply "alpha hit an odd integer", which is worth knowing before
+    anyone builds a theory on it.
+    """
+    print("\n[E8b] scanning for a second analytic resonance (alpha = 5)")
+    flow, out = continuation(a_lo, K=K, da=0.02)
+    b = out["b"]
+    rows = []
+    for a in np.linspace(a_lo, a_hi, int(n)):
+        flow = RescaledFlow(float(a), K=K)
+        o = flow.newton(b0=b)
+        b = o["b"]
+        rows.append({"a": float(a), "alpha": -o["c_omega"], "residual": o["residual"]})
+        print("   a=%.4f  alpha=%.6f  |R|=%.3e" % (a, -o["c_omega"], o["residual"]))
+    al = np.array([r["alpha"] for r in rows])
+    rs = np.array([r["residual"] for r in rows])
+    i5 = int(np.argmin(np.abs(al - 5.0)))
+    out_d = {"rows": rows, "K": K,
+             "a_at_alpha5": rows[i5]["a"], "residual_at_alpha5": rows[i5]["residual"],
+             "min_residual": float(rs.min()),
+             "a_at_min_residual": rows[int(np.argmin(rs))]["a"],
+             "dip_factor_vs_neighbours": float(np.median(rs) / rs.min())}
+    print("   alpha = 5 at a ~ %.4f, residual there %.2e; scan min %.2e at a=%.4f; "
+          "median/min = %.1f  (at a=1/2 that ratio is ~1e10)"
+          % (out_d["a_at_alpha5"], out_d["residual_at_alpha5"], out_d["min_residual"],
+             out_d["a_at_min_residual"], out_d["dip_factor_vs_neighbours"]))
+    return out_d
+
+
 def main():
     t0 = time.time()
     data = {"leg": "route_e_v1",
@@ -248,6 +315,8 @@ def main():
     data["E5_sweep"] = e5_sweep([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.55])
     data["E6_control"] = e6_control()
     data["E7_end"] = e7_end_of_branch()
+    data["E8_third_mode"] = e8_third_mode()
+    data["E8b_second_resonance"] = e8b_second_resonance()
     data["wall_clock_seconds"] = time.time() - t0
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, indent=1))
