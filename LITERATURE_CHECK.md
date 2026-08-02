@@ -163,6 +163,48 @@ looked. Search terms to try: "radii polynomial" + "discrete norm"; "validated
 numerics" + "Hölder seminorm" + "duality"; "finite section" + "weighted ell^1" +
 "unbounded domain".
 
+## Third pass — Route-G v1's claims (searched 2026-08-02, still `WebSearch`-only)
+
+`WebFetch` is **still 403 on arxiv.org/abs** (re-tested at the start of this leg), so
+this pass is the same search-level quality as the ones above: it tells us where to
+look, not what is true.
+
+**Searched: the invariant law `s_c = 1/(2β)`.** No hit, in several phrasings. That is
+weak evidence at best — the statement is three lines of scaling and is exactly the sort
+of thing that lives in a remark rather than a title. My prior is that it is **folklore**:
+anyone who has written down a dynamic rescaling has the ingredients. What is worth
+claiming is not the formula but the *use* — putting the proven 2D object, the 1D family
+and NS on one axis and reading off which side of `β = 1/2` each lands on.
+
+**Nearby literature that did surface, and it matters:** the search returned
+*"in hypo-diffusive systems the critical dissipation degree is predicted to be
+γ = 1/3"* and a log-lattice paper ([Tracking complex singularities of fluids on
+log-lattices](https://arxiv.org/pdf/2312.01702)). The log-lattice programme
+(Campolina–Mailybaev and successors) studies exactly this question — where fractional
+dissipation kills an Euler-type singularity — on a reduced model. **If the discipline of
+"measure the exponent, not the threshold" is written down anywhere, it is most likely
+there.** Nobody here has read it.
+
+**TWO PAPERS TO READ FIRST when access is restored — both could move Route-G's number:**
+
+1. [arXiv:2308.01528](https://arxiv.org/pdf/2308.01528), *Exact self-similar finite-time
+   blowup of the Hou–Luo model with smooth profiles*. If a related model has an **exact**
+   self-similar profile, it has an **exact `β`** — which would turn `s_c = 1/(2β)` from a
+   measured number into a closed-form one for that model, and give this leg a
+   known-answer gate it currently does not have in 2D.
+2. [arXiv:2604.01868](https://arxiv.org/pdf/2604.01868), *Novel Self-similar Finite-time
+   Blowups with Singular Profiles of the 1D Hou–Luo Model and the 2D Boussinesq
+   Equations* (2026). **NEW self-similar solutions with different profiles means
+   different `c_l`, `c_ω`, hence different `β`.** Route-G quotes `β = 2.92` as if the 2D
+   scenario has one collapse rate. If this paper exhibits others, the honest statement
+   becomes "the Chen–Hou branch sits at `β = 2.92`" and the map needs more than one point
+   on it.
+
+Also relevant to the *scope* sentence rather than the number: the Chen–Hou result is
+reported to control the density in `C^γ` with **γ ≈ 1/3** up to the singular time. That is
+a regularity exponent, not a dissipation exponent — **do not conflate it with `s_c`**, and
+note that `0.171` and `1/3` are close enough to invite exactly that error.
+
 ## The honest summary
 
 Of four project claims checkable today, **two look pre-empted (finite support,

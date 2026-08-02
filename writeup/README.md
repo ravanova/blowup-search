@@ -270,6 +270,26 @@ writeup/
     `s_c` crosses the Laplacian at `a ≈ 0.383` — **arithmetic about gCLM's own scaling, not a
     claim about NS, and not a claim that a viscous blow-up exists there.** *(fig 35)*
 
+38. [TECHNICAL_P2_ROUTEG_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEG_V1.md) ·
+    [BLOG_P2_ROUTEG_V1.md](4_p2_lottery/BLOG_P2_ROUTEG_V1.md) — **Route-G v1**, the **port**:
+    the same viscosity question asked of **2D Boussinesq in the Hou–Luo geometry**, the system
+    the 1D toy is a model *of*. **The port broke the previous leg's formula and that is the
+    result**: `s_c = α/2` is true in gCLM only because that rescaling pins `c_l = 1`, and the
+    invariant law is **`s_c = 1/(2β)`** with `β` the collapse exponent of `L ~ (T−t)^β` (1D is
+    the `β = 1/α` case; **NS is `β = 1/2`, giving `s_c = 1` exactly**). Two consequences that
+    were not visible in 1D: **`s_c` DECREASES with `β`**, so a *faster* collapse loses to
+    viscosity more easily and beating ordinary viscosity needs an anomalously **slow** collapse
+    `β < 1/2`; and the far-field decay exponent and the collapse rate are **one fact**
+    (`α = −1/β`, the statement that the blow-up does not disturb the outer solution) — which is
+    why `α/2` looked like a law. The proven **Chen–Hou 2D Boussinesq** blow-up sits at
+    **`β = 2.92`, `s_c = 0.171`** — nearly six times the NS collapse rate, on the losing side by
+    a wide margin — re-measured by *our own* dynamically-rescaled machine (Spike 1) as a
+    **modulation constant**, no fit and no singular-time estimate. The 1D method itself does
+    **not** port: a uniform-grid periodic run gives under one decade of `(T−t)` where 1D gave
+    ~4, so the collapse fit **refuses**. Also: the condition is the same whether `ω` or `θ`
+    carries the dissipation, and the cross-model calibration shows the toy's dial and its
+    target sit on **opposite sides** of the NS line. *(fig 36)*
+
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
 
@@ -303,6 +323,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig36_route_g_v1_collapse.png` | 4 | P2 — Route-G v1: the law `s_c = 1/(2β)` with every object on it (gCLM's dial, Chen–Hou 2D Boussinesq, and NS at `β = 1/2` exactly), `β` re-measured by our own dynamically-rescaled 2D machine as a modulation constant, the direct time-dependent route refused with its reason, the underpowered `p(s)` line kept for its sign structure, the cross-model calibration on gCLM's dial, and who beats the ordinary Laplacian as a signed bar |
 | `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
 | `fig34_p2_route_e_v1_spectrum.png` | 4 | P2 — Route-E v1 (the DSS lane): the self-similar branch's far-field exponent `α(a)` with its Richardson ladder, spectral-vs-algebraic convergence set by the profile's own regularity, the residual scan that locates the analytic resonance at `a = 1/2`, the whole `a = 0` spectrum against the analytically known continuum strip `−1 < Re λ < 1`, the converged spectrum vs `a` (only the two symmetry modes — no Hopf), and the planted-eigenvalue positive control |
 | `fig33_route_d_v16_rehearsal.png` | 4 | P2 — Route-D v16: `Y₀` falling to machine precision against its nodal control, which apparent divergence survives refining the instrument, the log-`K` unboundedness of `H` on a bounded interval, the Hölder repair and its `γ ≳ 0.35` threshold, the exact `a ≤ 1/2` threshold for `sup|N''|`, and the ledger with `Z₁` open |
@@ -331,6 +352,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
 | `p2_route_e_v1_spectrum.json` | Arc 4 / fig34 — E1 the exact `a = 0` anchor and its two analytically predicted eigenvalues, E2 the branch `α(a)` with a `K = 64/128/256` ladder and Richardson, E3 spectral (`a = 1/2`) vs algebraic (`a = 0.3`) convergence plus the fine residual scan that finds the resonance, E4 the two structural identities gated, E5 the converged spectrum vs `a` with a tolerance ladder, E6 the planted-eigenvalue positive control, E7 the end of the branch |
 | `p2_route_d_v16_rehearsal.json` | Arc 4 / fig33 — A the interpolant defect vs `K` with its nodal control, B the adversary vs the naive probe under quadrature refinement, C the sup divergence in `log K`, D the Hölder repair swept in `γ`, E `sup|N''|` by edge cutoff across `a` (the `a ≤ 1/2` threshold), plus the assembled rehearsal with `Z₁` reported as `None` |
@@ -370,6 +392,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v16_evidence.py        # fig33
 .venv/bin/python writeup/4_p2_lottery/p2_route_e_v1_evidence.py         # fig34
 .venv/bin/python writeup/4_p2_lottery/p2_route_f_v1_evidence.py         # fig35
+.venv/bin/python writeup/4_p2_lottery/p2_route_g_v1_evidence.py         # fig36
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
