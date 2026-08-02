@@ -21,7 +21,10 @@ SEVEN MEASUREMENTS (each written down before it was run):
       including in the right half plane;
   E7  where the branch ends;
   E8  the THIRD eigenvalue E5 found at a = 1/2 that nothing predicted, on a K-ladder;
-  E8b whether a = 1/2 is the only analytic resonance or alpha = 5 gives another.
+  E8b whether a = 1/2 is the only analytic resonance or alpha = 5 gives another;
+  E8c the alpha = 5 point located by secant and put on a K-ladder;
+  E9  WHERE THE CONTINUUM LIVES -- the edge formula that turned E8's "third mode"
+      into an artefact, with a = 0 as the control point that makes it unarguable.
 
 Deterministic, NOT logged (no GA, no stochasticity).  Writes
 writeup/data/p2_route_e_v1_spectrum.json.
@@ -303,6 +306,84 @@ def e8b_second_resonance(K=256, a_lo=0.560, a_hi=0.600, n=17):
     return out_d
 
 
+def e9_essential_edges(a_values=(0.0, 0.5), Ks=(96, 144, 192)):
+    """E9: WHERE THE CONTINUUM LIVES -- the measurement that killed E8's third mode.
+
+    The two singular endpoints fix the essential spectrum's extent.  Near X = infinity
+    the local operator is c_omega + xi d/dxi (xi = pi - theta), and near X = 0 it is
+    (c_omega + H Omega(0)) - theta d/dtheta, so with s the local exponent
+
+        c_omega + s_min  <=  Re lambda  <=  c_omega + H(Omega)(0) ,
+
+    and in THIS space s_min = 1 because every sin(k theta) vanishes linearly at
+    theta = pi.  Predicted strip: [c_omega + 1, c_omega + H(Omega)(0)] -- [0, 1] at
+    a = 0 and [-2, +5] at a = 1/2.
+
+    THIS IS THE CONTROL THAT EXPOSES E8.  The "third eigenvalue" converging to -2 at
+    a = 1/2 is exactly c_omega + 1, the LEFT EDGE, not a mode -- and at a = 0 the same
+    edge sits at 0 and carries ~99% of the discretized spectrum, where nobody would
+    call it an eigenvalue.  Tightening the convergence filter would have made the
+    artefact look better, not worse; only a control point at a known parameter finds it.
+    """
+    print("\n[E9] the essential spectrum's edges")
+    rows = []
+    for a in a_values:
+        for K in Ks:
+            flow, out = continuation(a, K=K, da=0.02)
+            ev = np.linalg.eigvals(flow.generator(out["b"]))
+            cw = out["c_omega"]
+            H0 = 2.0 if a == 0.0 else (cw - 1.0) / (a - 1.0)
+            left, right = cw + 1.0, cw + H0
+            re = ev.real
+            rows.append({"a": float(a), "K": K, "c_omega": cw, "H0": float(H0),
+                         "left_pred": float(left), "right_pred": float(right),
+                         "re_min": float(re.min()), "re_max": float(re.max()),
+                         "residual": out["residual"],
+                         "frac_at_left_edge": float(np.mean(np.abs(re - left) < 0.05))})
+            print("   a=%.2f K=%3d  predicted strip [%+.4f, %+.4f]  measured Re "
+                  "[%+.6f, %+.6f]  fraction sitting on the left edge %.2f"
+                  % (a, K, left, right, re.min(), re.max(),
+                     rows[-1]["frac_at_left_edge"]))
+    return rows
+
+
+def e8c_alpha5_resonance(K0=256, Ks=(96, 128, 192, 256, 320, 384)):
+    """E8c: is "alpha = odd integer => analytic" the rule, or is a = 1/2 special?
+
+    E8b found a residual dip exactly where alpha = 5, but only 13x deep against ~1e10
+    at a = 1/2.  Either the scan simply missed the resonance's centre, or a = 1/2 is
+    special for a reason beyond alpha being an odd integer.  Secant-solve alpha(a) = 5
+    and run a K-ladder there: spectral fall means the rule, algebraic fall means the
+    a = 1/2 point is not just "alpha hit 3".
+    """
+    print("\n[E8c] the alpha = 5 point, located and refined")
+    _, out = continuation(0.575, K=K0, da=0.02)
+    b = out["b"]
+
+    def am5(a, b0):
+        f = RescaledFlow(float(a), K=K0)
+        o = f.newton(b0=b0)
+        return -o["c_omega"] - 5.0, o["b"], o["residual"]
+
+    a0, a1 = 0.5800, 0.5825
+    f0, b, _ = am5(a0, b)
+    f1, b, _ = am5(a1, b)
+    for _ in range(8):
+        a2 = a1 - f1 * (a1 - a0) / (f1 - f0)
+        f2, b, r = am5(a2, b)
+        a0, f0, a1, f1 = a1, f1, a2, f2
+        if abs(f2) < 1e-9:
+            break
+    a_star = float(a1)
+    rows = []
+    for K in Ks:
+        _, o = continuation(a_star, K=K, da=0.02)
+        rows.append({"K": K, "residual": o["residual"], "c_omega": o["c_omega"]})
+        print("   a*=%.8f  K=%4d  |R|=%.3e  alpha=%.10f"
+              % (a_star, K, o["residual"], -o["c_omega"]))
+    return {"a_star": a_star, "K_ladder": rows}
+
+
 def main():
     t0 = time.time()
     data = {"leg": "route_e_v1",
@@ -317,6 +398,8 @@ def main():
     data["E7_end"] = e7_end_of_branch()
     data["E8_third_mode"] = e8_third_mode()
     data["E8b_second_resonance"] = e8b_second_resonance()
+    data["E8c_alpha5_resonance"] = e8c_alpha5_resonance()
+    data["E9_essential_edges"] = e9_essential_edges()
     data["wall_clock_seconds"] = time.time() - t0
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, indent=1))

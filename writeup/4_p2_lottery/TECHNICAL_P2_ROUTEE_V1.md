@@ -2,9 +2,9 @@
 
 *Phase-2 P2, Route E (the DSS lane), leg 1. Figure: `writeup/figures/fig34_p2_route_e_v1_spectrum.png`.
 Data: `writeup/data/p2_route_e_v1_spectrum.json`. Module: `solver/rescaled_spectrum.py`
-(gates: `test_rescaled_spectrum.py`, 7/7).*
+(gates: `test_rescaled_spectrum.py`, 8/8).*
 
-**Level-1 numerics plus one small exact computation. Not a certificate, not a proof, not
+**Level-1 numerics plus two small exact computations. Not a certificate, not a proof, not
 Clay progress. Plain float64 throughout; nothing here is interval-enclosed.**
 
 ---
@@ -22,31 +22,27 @@ re-price the lane, and it promoted a different item to "the swing":
 > "find a self-similar profile and certify it" template cannot be pointed at NS as posed.
 > The candidate class that survives is **discretely self-similar (DSS)**.
 
-In dynamic-rescaling variables the translation is exact and it is the reason this leg is
-cheap:
+In dynamic-rescaling variables the translation is exact, and it is why this leg is cheap:
 
 | object | in rescaled variables |
 | --- | --- |
 | self-similar blow-up | a **fixed point** of the rescaled flow |
 | DSS blow-up | a **periodic orbit** of the rescaled flow |
 
-A global search for a periodic orbit is expensive and needs somewhere to start. But there is
-one mechanism that would both *produce* a periodic orbit and *tell you where it is*: a **Hopf
-bifurcation** off the self-similar branch — a complex-conjugate pair of eigenvalues of the
-linearized rescaled flow crossing the imaginary axis as the model parameter `a` moves. If
-such a pair exists, the DSS lane opens with a concrete starting point. If there is no
-eigenvalue capable of crossing, that particular route is closed and the lane has to be
-entered some other way.
+A global search for a periodic orbit is expensive and needs somewhere to start. But one
+mechanism would both *produce* a periodic orbit and *tell you where it is*: a **Hopf
+bifurcation** off the self-similar branch — a complex-conjugate pair of eigenvalues crossing
+the imaginary axis as `a` moves. If such a pair exists the DSS lane opens with a concrete
+starting point; if there is no eigenvalue capable of crossing, that route is closed and the
+lane has to be entered some other way.
 
-That is a question about a spectrum, and a spectrum is one dense eigenvalue solve. This leg
-is the answer.
+That is a question about a spectrum, and a spectrum is one dense eigenvalue solve.
 
 **Gate-check, answered rather than re-pasted.**
-*(a) Which link does this move?* **None.** It does not advance L1→L4. It is lane scoping:
-it decides whether the cheapest entrance to the DSS lane is open.
+*(a) Which link does this move?* **None.** It does not advance L1→L4. It is lane scoping.
 *(b) Is another L1 leg better?* No — v15 re-priced L1 downward and named this as the swing.
-*(c) Is there a cheaper experiment that would tell us the route is dead?* **This was it**, and
-it is the reason the leg was worth doing before any DSS search machinery was built.
+*(c) Is there a cheaper experiment that would tell us the route is dead?* **This was it**, which
+is why it was worth doing before any DSS search machinery was built.
 
 ---
 
@@ -70,14 +66,13 @@ c_omega[Omega] = 1 + (a - 1) H(Omega)(0) .                                      
 
 At `a = 0` this **is** the value-based normalization the project has used since Spike 0
 (`solver/gclm_rescaled.py`), so this is the same flow continued in `a` rather than a new
-convention. Worth saying out loud: the project's existing residual used `c_omega = 1 - H(Omega)(0)`
-at every `a`, and that version has **no fixed point at all** for `a != 0` — differentiating the
+convention. Worth saying out loud: the project's existing residual used `c_omega = 1 − H(Omega)(0)`
+at *every* `a`, and that version has **no fixed point at all** for `a != 0` — differentiating the
 residual at the origin gives `R_X(0) = -a H(Omega)(0) Omega_X(0) != 0`. (N) is the repair, and
 it is forced, not chosen.
 
 With `c_l` fixed, **dilation survives as a symmetry**: `Omega(X) -> Omega(X/mu)` is again a
-fixed point, and `H(Omega)(0)` is dilation-invariant so (N) is untouched. That is where the
-exact zero eigenvalue below comes from.
+fixed point, and `H(Omega)(0)` is dilation-invariant so (N) is untouched.
 
 ---
 
@@ -92,11 +87,11 @@ X d/dX         = sin(theta) d/d theta          <- the DILATION term is bounded a
 d/dX           = (1 + cos theta) d/d theta
 ```
 
-The `(-1)^k` is not decoration: `H^2 = -1` only modulo constants on the line, and that
-constant is exactly what makes `H(Omega)` vanish at `X = infinity`.
+The `(-1)^k` is not decoration: `H^2 = -1` only modulo constants on the line, and that constant
+is exactly what makes `H(Omega)` vanish at `X = infinity`.
 
-The velocity is exact too. Writing `N_k(t) := ((-1)^k - cos k t)/(1 + cos t)`, the three-term
-identity `2 cos t cos kt = cos(k+1)t + cos(k-1)t` gives
+The velocity is exact too. Writing `N_k(t) := ((-1)^k - cos k t)/(1 + cos t)`, the identity
+`2 cos t cos kt = cos(k+1)t + cos(k-1)t` gives
 
 ```
 N_{k+1} = -2 N_k - N_{k-1} - 2 cos k t ,      N_0 = 0,  N_1 = -1,
@@ -104,14 +99,13 @@ N_{k+1} = -2 N_k - N_{k-1} - 2 cos k t ,      N_0 = 0,  N_1 = -1,
 
 so **every `N_k` is a trig polynomial** — the `1 + cos t` in the denominator always cancels —
 and `U = sum_k b_k int_0^theta N_k` is elementary. There is no quadrature anywhere in the
-build. (Gate 2 checks this as a polynomial identity out to `k = 30`, not merely at the anchor,
-because a three-term recursion is exactly the kind of thing that drifts silently.)
+build. (Gate 2 checks this as a polynomial identity out to `k = 30`, not merely at the anchor.)
 
 **The `a = 0` fixed point is a single mode.** `Omega_0 = -sin theta = -2X/(1+X^2)`, with
 `H(Omega_0) = 1 + cos theta = 2/(1+X^2)` and `c_omega = -1`. It nulls the residual to
-**1.1e-16**, which is the module's first gate. Sixteen Route-D legs worked in this same
-compactified variable; this is the first time the *self-similar* (dilation) anchor has been
-written in it, and it is one Fourier mode.
+**1.1e-16** at every `K` tested. Sixteen Route-D legs worked in this same compactified
+variable; this is the first time the *self-similar* (dilation) anchor has been written in it,
+and it is one Fourier mode.
 
 ---
 
@@ -127,22 +121,20 @@ L (Omega)     = -Omega + X Omega_X             (amplitude)
 
 The first is the dilation symmetry: the orbit is a curve of fixed points, so its generator is
 in the kernel. The second follows by substituting the profile equation into `L(Omega)` and
-using (N):
-
-```
-L Omega = (H Omega) Omega + (a-1) H(Omega)(0) Omega - a U Omega_X + [profile equation]
-        = -c_omega Omega + X Omega_X + (c_omega - 1) Omega   =  -Omega + X Omega_X .
-```
-
-So `span{Omega, X Omega_X}` is invariant with matrix `[[-1,0],[1,0]]`, giving
+using (N). So `span{Omega, X Omega_X}` is invariant with matrix `[[-1,0],[1,0]]`:
 
 > **lambda = 0 (dilation) and lambda = -1 (amplitude), for every `a`.**
 
-These are a Jordan-like pair, they are present at every parameter value, and **they carry no
-dynamical information**. Any DSS-relevant eigenvalue has to be something else. Rather than
-trust the derivation, `structural_pair_defect` measures both identities; gate 4 reports
-**1.2e-15 / 8.9e-17** at `a = 0` and **2.0e-13 / 4.6e-15** at `a = 1/2`, and the `2x2` block
-itself is exact to **6.1e-16**.
+A Jordan-like pair, present at every parameter value, **carrying no dynamical information**.
+Any DSS-relevant eigenvalue has to be something else. `structural_pair_defect` measures both
+identities rather than trusting them: **3.0e-15 / 3.3e-16** at `a = 0` and **1.3e-10 / 9.1e-15**
+at `a = 1/2`, with the `2x2` block itself exact to **6.1e-16**.
+
+**And the same two identities double as a free error bar.** Because `lambda = 0` is exact, its
+*computed* deviation measures the error of the whole spectrum at that parameter. At `a = 0.2`
+the dilation defect is `8.0e-2` and the filter duly reports the dilation mode at `-0.352`;
+at `a = 1/2` the defect is `1.3e-10` and it reports `+8.9e-5`. That single number is what
+licenses (and forbids) every quantitative claim below.
 
 ---
 
@@ -161,169 +153,241 @@ For `s(1) = 0` the homogeneous problem `L s = lambda s` is a first-order ODE and
 s_lambda(w) = (w - 1)^{1 - lambda} (w + 1)^{1 + lambda} .
 ```
 
-The verification is one line — `((w^2-1)/2) s_w = s (w - lambda)`, hence `L s = w s - s(w-lambda)
-= lambda s` — and admissibility does the rest:
-
-* `s -> 0` at `w = -1` (i.e. decay at `X = infinity`) needs `Re lambda > -1`;
-* `s` bounded and vanishing at `w = 1` (i.e. at `X = 0`) needs `Re lambda < 1`.
+The verification is one line — `((w^2-1)/2) s_w = s (w - lambda)`, hence `L s = lambda s` —
+and admissibility does the rest: `s -> 0` at `w = -1` (decay at `X = infinity`) needs
+`Re lambda > -1`; `s` bounded and vanishing at `w = 1` (i.e. at `X = 0`) needs `Re lambda < 1`.
 
 So the `a = 0` linearization carries a **continuum of eigenvalues filling the strip
-`-1 < Re lambda < 1`**, and every one of its eigenfunctions carries a **fractional power**
-`(w-1)^{1-lambda}` at the origin. Demanding analyticity at `X = 0` forces `1 - lambda` to be a
-non-negative integer, and combined with `Re lambda > -1` that leaves exactly `lambda = 0` and
-`lambda = -1` — **the two structural modes and nothing else.**
+`-1 < Re lambda < 1`**, whose eigenfunctions carry a **fractional power** `(w-1)^{1-lambda}`
+at the origin. Demanding analyticity there forces `1 - lambda` to be a non-negative integer,
+and with `Re lambda > -1` that leaves exactly `lambda = 0` and `lambda = -1` — the two
+structural modes and nothing else.
 
-Two things follow, and they are the reason the rest of this leg is trustworthy:
+### 4.1 The member worth looking at is `lambda = i y`
 
-1. **The `a = 0` answer is known independently of any discretization.** That is the anchor
-   the numerics is gated against.
-2. **A convergence filter is mandatory, not decoration.** The discrete eigenvalues are the
-   ones that stop moving under refinement; the continuum is the part that never does.
+Near the origin `w - 1 ~ -2iX`, so
 
-The numerics reproduces it exactly: of `K = 96` eigenvalues, **exactly one sits off the
-imaginary axis (`lambda = -1`, isolated to 1e-14)** and the other 95 are pinned to the axis to
-1e-9 and move with `K`. Under the `K = 96 -> 144` filter at tolerance `1e-3`, **exactly two
-survive: `0` (distance 8e-16) and `-1` (distance 6e-15).**
+```
+s ~ X^{1 - i y}          against the time factor   e^{i y tau}
+  =>  exp( i y ( tau - log X ) )
+```
+
+— a wave travelling **outward in `log X` at unit speed**, exactly `tau`-periodic with period
+`2 pi / y`. **That is the log-periodic structure a DSS solution is made of, and it is present
+in this operator, exactly.** It is *continuous* spectrum, not a bound state: it is the dilation
+transport carrying a scale-invariant wave to infinity. Nothing there can cross an axis. That
+is the mechanism behind this leg's negative rather than a restatement of it, and gate (5b)
+checks the identity with a numerical derivative and confirms the period.
 
 ---
 
 ## 5. The branch: `alpha(a)` is an output, and it runs away
 
-Following the fixed point from the exact anchor by continuation in `a`, the far-field decay
-exponent is not a parameter but a result. The far-field balance is
-`c_omega Omega = (X + a U_inf) Omega_X`, so
+Following the fixed point from the exact anchor by continuation, the far-field decay exponent
+is a result, not a parameter: `c_omega Omega = (X + a U_inf) Omega_X` gives
 
 ```
-Omega ~ X^{-alpha},   alpha(a) = -c_omega(a).
+Omega ~ X^{-alpha} ,   alpha(a) = -c_omega(a) .
 ```
 
-`alpha` starts at 1 (CLM) and **increases with `a`**, and `1/alpha` extrapolates linearly to
-zero at a finite `a` — the profile's tail becomes infinitely steep and the branch, as posed on
-the whole line, ends. This is the self-similar analogue of what Route-D v12/v14 found for the
-*traveling-wave* object (where the profile ends at a finite radius `X_c`), and it is a
-different object, so the agreement of the two pictures is a check rather than a repetition.
+Richardson-extrapolated over `K = 64/128/256`:
 
-**One consequence matters for everything numerical here.** A branch point of order `alpha` at
-`X = infinity` means the sine coefficients decay *algebraically*, and so does everything built
-from them (measured: residual `~ K^-2` at `a = 0.3`). The exceptions are the values of `a`
-where `alpha` is an **odd integer**, where `Omega ~ (pi - theta)^alpha` is smooth and the method
-is spectral again. Two of them are visible:
+| `a` | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `alpha` | 1.000000 | 1.141397 | 1.334497 | 1.617244 | 2.079464 | **3.000000** |
+
+`alpha` increases with `a`; following it finely (`K = 192`, `da = 0.005`) the branch is lost at
+`a = 0.65` with `alpha = 11.5` at the last good point, and `1/alpha` extrapolates linearly to
+zero at **`a_c ~ 0.694`** — the tail becomes infinitely steep and the branch, as posed on the
+whole line, ends. This is the self-similar analogue of what Route-D v12/v14 found for the
+*traveling-wave* object (which ends at a finite radius `X_c`); different object, so the
+agreement is a check rather than a repetition.
+
+**One consequence governs everything numerical here.** A branch point of order `alpha` at
+`X = infinity` means the sine coefficients decay *algebraically* — measured residual `K^-2`ish
+at `a = 0.3` (`7.8e-2 -> 6.7e-4` over `K = 16..256`). The exceptions are the `a` where `alpha`
+is an odd integer, where `Omega ~ (pi-theta)^alpha` is smooth and the method is spectral again:
 
 * `a = 0`, `alpha = 1` — exact, one mode;
-* **`a = 1/2`, `alpha = 3` — exact to 11 digits** (`c_omega = -3.0000000000098` at `K = 128`,
-  residual `1.4e-14` at `K = 192`, geometric coefficient decay).
+* **`a = 1/2`, `alpha = 3` — `c_omega = -3.000000000000`, residual `1.4e-14` at `K = 192`**
+  (`2.7e-1 -> 4.4e-2 -> 7.0e-5 -> 1.4e-11 -> 1.4e-14` over `K = 16..192`; geometric coefficient
+  decay).
 
-The `a = 1/2` point is *found*, not assumed: a fine scan of the fixed-point residual in `a` at
-fixed `K` shows a single sharp dip, ten orders deep, exactly there. **Novelty unchecked** — an
-exact-looking exponent at `a = 1/2` in this family is precisely the sort of thing that is
-folklore to people who work on gCLM/De Gregorio, and the literature check is still blocked on
-PDF access (v15's finding, unchanged).
+The `a = 1/2` point was *found*, not assumed: a scan of the fixed-point residual in `a` at fixed
+`K` shows a single dip, ten orders deep, exactly there. **Novelty unchecked** — an exact
+exponent at `a = 1/2` in this family is precisely what may be folklore to people who work on
+gCLM/De Gregorio, and the literature check is still blocked on PDF access (v15's finding).
+A two-parameter rational ansatz `Omega = -c X/(X^2+gamma)^2` reproduces the profile to
+**7e-5** relative — the right *shape*, right down to the location and depth of the minimum —
+but the profile itself is computed to `2e-14`, so the ansatz is a near miss and **the closed
+form was not identified.**
 
-Because of this, **every quantitative spectral statement in this note is quoted at `a = 0` or
-`a = 1/2`**, where the fixed point is analytic and the method is spectral. The generic-`a`
-sweep is reported with its (algebraic) accuracy attached, and the verdict is checked against a
-tolerance ladder rather than a single cut.
+Because of all this, **every quantitative spectral statement below is quoted at `a = 0` or
+`a = 1/2`.** At generic `a` the instrument cannot resolve even the eigenvalues it is known to
+have (§3), and no conclusion is drawn there.
 
 ---
 
-## 6. The verdict
+## 6. The spectrum
 
-Sweeping `a` and applying the `K = 96 -> 144` filter:
+### 6.1 What the filter said, and why the first reading of it was wrong
 
-> **At every `a` on the branch, the only grid-converged eigenvalues are `0` and `-1` — the two
-> exact symmetry modes. There are no others, at any tolerance from `1e-4` to `1e-1`. Nothing
-> is available to cross the imaginary axis, so there is no Hopf bifurcation off the gCLM
-> self-similar branch.**
+Refining `K = 96 -> 144` and keeping the eigenvalues that move less than `1e-2`:
 
-The count is stable across the tolerance ladder, which is what makes "exactly two" a
-measurement rather than a choice of cut: loosening the cut by three orders of magnitude does
-not admit a third eigenvalue, and tightening it does not remove either of the two.
+| `a` | kept |
+| --- | --- |
+| 0 | `0` (dist 8e-16), `-1` (dist 6e-15) |
+| 1/2 | `+8.9e-5` (dist 9e-5), `-1.000005` (dist 5e-6), **`-2.0073` (dist 5.6e-3)** |
+| 0.1, 0.2 | two values, but the *dilation* one is reported at `-0.120` / `-0.352` — see §3 |
+| 0.3, 0.4, 0.55 | nothing (the fixed point is not resolved well enough) |
 
-### 6.1 The positive control — the part that makes the negative mean something
+The third entry at `a = 1/2` is not symmetry, and the honest first reaction was that the
+fixed point has a genuine non-symmetry mode. A `K`-ladder makes it look even better —
+`-2.007293 / -2.001677 / -2.000467 / -1.999999` over `K = 96..256`, converging on `-2` exactly.
 
-"Only two survived the filter" is evidence only if the filter would have reported more. So the
-same filter is run on the same operator with a smooth localized potential added — a bump that
-binds states in a transport operator. It returns a converged eigenvalue at **`+1.083`**:
-in the **right half plane**, and **1.08 away** from anything the plain operator has.
+**It is not a mode. It is the left edge of the essential spectrum.** The two singular endpoints
+of the operator fix that spectrum's extent: near `X = infinity` the local operator is
+`c_omega + xi d/d xi` with `xi = pi - theta`, and near `X = 0` it is
+`(c_omega + H Omega(0)) - theta d/d theta`, so
 
-**The instrument can see an unstable eigenvalue. There is not one.**
+```
+        c_omega + s_min  <=  Re lambda  <=  c_omega + H(Omega)(0) ,
+```
 
-### 6.2 What this does *not* say
+and in *this* space `s_min = 1`, because every `sin k theta` vanishes linearly at `theta = pi`.
+So the accessible strip is `[c_omega + 1, c_omega + H(Omega)(0)]` — which is `[0, 1]` at
+`a = 0` and `[-2, +5]` at `a = 1/2`. Both edges land where predicted: the measured spectrum
+spans `[-2.007, +4.55]` at `a = 1/2`, and `c_omega + 1 = -2` **is** the value the "third
+eigenvalue" converges to.
 
-* It does not say gCLM has no DSS solution. It says a DSS solution in this family is **not
-  born from a Hopf bifurcation off the self-similar branch that continues from CLM**. A
-  periodic orbit can exist without a nearby fixed point that spawned it.
-* It does not say anything about NS. gCLM's scaling structure is not NS's, and the whole
-  reason DSS is interesting for NS is a theorem about NS.
-* The essential spectrum's **location is norm-dependent**, and what is measured here is the
-  spectrum of a *discretization*, filtered for grid-independence. A discrete eigenvalue
-  embedded in the continuum can be missed by any such method. The `a = 0` closed form is the
-  only place where the answer is known independently — and there, it agrees.
-* One more honest caveat: the verdict is computed in **one gauge** (`c_l = 1` plus (N)).
-  Changing the normalization changes the flow by multiples of the symmetry generators, which
-  moves the symmetry eigenvalues but not the transverse spectrum — the argument is standard,
-  but it is an *argument* here, not a measurement.
+The control that settles it costs nothing, because the project already had it: **at `a = 0`
+the same edge sits at `0`, and 99% of the discretized spectrum sits on it.** Nobody would call
+that an isolated eigenvalue. It is the same object at `a = 1/2`, moved to `-2` because
+`c_omega` moved.
+
+### 6.2 The verdict
+
+> **The only grid-converged ISOLATED eigenvalues, at both points where the method can see, are
+> `0` and `-1` — the two exact symmetry modes. There is no complex pair anywhere, nothing
+> approaching the imaginary axis, and therefore no Hopf bifurcation off the gCLM self-similar
+> branch.**
+
+Two things must be said alongside it, and neither weakens it:
+
+* **The flow is not spectrally stable.** Its ESSENTIAL spectrum reaches `c_omega + H(Omega)(0)`,
+  which is `+1` at `a = 0` and `+5` at `a = 1/2` — well into the right half plane, complex
+  members included (the measured cloud runs to `Im ~ ±150`). Those directions are exactly the
+  ones with a fractional power at `X = 0`: a *corner at the origin* grows relative to the
+  profile. That is the familiar low-regularity essential instability of self-similar
+  linearizations, it is norm-dependent, and — this is the point — **a continuum has no
+  eigenvalue to move, so it cannot Hopf-bifurcate.**
+* At `a` between the two resonances the instrument is too blunt to say anything, and §3's free
+  error bar is how that is known rather than guessed.
+
+### 6.3 The positive control — the part that makes the negative mean something
+
+"Only two survived the filter" is evidence only if the filter would have reported more. The
+same filter, on the same operator with a smooth localized potential added:
+
+| potential | converged eigenvalues | max shift from the plain operator |
+| --- | --- | --- |
+| `V = 3` | `-0.864` | 0.14 |
+| `V = 6` | **`+1.083`**, `-0.833` | 1.08 |
+| `V = 12` | **`+4.578`**, `-0.814` | 4.58 |
+
+**The instrument can see an isolated unstable eigenvalue, twice over. There is not one.**
+
+### 6.4 What this does *not* say
+
+* Not that gCLM has no DSS solution — only that one is **not born from a Hopf bifurcation off
+  the self-similar branch that continues from CLM**. Periodic orbits can exist without a fixed
+  point nearby that spawned them, and §4.1 shows the log-periodic directions themselves are
+  present (in the continuum).
+* Nothing about NS. gCLM's scaling structure is not NS's; the only reason DSS is interesting
+  for NS is a theorem about NS.
+* The essential spectrum's location is **norm-dependent**, and what is measured is the spectrum
+  of a *discretization*, filtered for grid-independence. An eigenvalue embedded in the continuum
+  can be missed by any such method. `a = 0`, where the closed form settles it independently, is
+  the only place that risk is retired.
+* One gauge only (`c_l = 1` plus (N)). Changing the normalization moves the symmetry
+  eigenvalues but not the transverse spectrum — standard, but an *argument* here, not a
+  measurement.
 
 ---
 
 ## 7. What this cost, and what it bought
 
-Cost: one module, one experiment, seven gates. Bought:
+Cost: one module, one experiment, eight gates, and two follow-up measurements the first sweep
+forced. Bought:
 
 1. **The cheapest DSS mechanism is closed** for the 1D family, with a positive control behind
-   the negative. That is exactly the "is there a cheaper experiment that would tell us the
-   route is dead" item from the gate-check, executed before any search machinery was built.
-2. **The self-similar branch of gCLM in the compactified variable**, with an exact one-mode
-   anchor, an exact velocity operator, and a Newton solve that follows the branch.
-3. **`alpha(a)`**, the far-field decay exponent map, as an output.
-4. **The analytic resonance at `a = 1/2` (`alpha = 3` to 11 digits)** — novelty unchecked.
-5. **The closed-form `a = 0` continuum**, which is a small exact result about the CLM
-   self-similar linearization and the anchor every later spectral claim can be gated against.
+   the negative and a *mechanism* (§4.1, §6.1) rather than an absence.
+2. **The self-similar branch of gCLM in the compactified variable** — exact one-mode anchor,
+   exact velocity operator, Newton continuation.
+3. **`alpha(a)`**, the far-field decay exponent map, as an output, with the branch's end.
+4. **The analytic resonance at `a = 1/2` (`alpha = 3` to 12 digits)** — novelty unchecked, closed
+   form not identified.
+5. **Two exact statements about the `a = 0` linearization**: the closed-form continuum
+   `(w-1)^{1-lambda}(w+1)^{1+lambda}` on the strip `-1 < Re lambda < 1`, and the
+   log-periodic identification of its imaginary members.
+6. **The essential-spectrum edge formula** `[c_omega + 1, c_omega + H(Omega)(0)]`, confirmed at
+   both exactly-resolved points — which is what turned a spurious "third mode" into a
+   measurement.
 
 ### Where this sits relative to Clay (re-answered, not re-pasted)
 
-Unchanged and stated plainly: **nothing here is a step whose success would resolve the Clay
-problem.** This leg does not move L1, L2, L3 or L4. What it does is stop the project from
-spending several legs building a DSS search around a mechanism that does not exist in the
-family where its tooling lives. The two structural walls (a search programme can only ever
-argue *for* blow-up; rigorous certification technology only reaches toy models) are untouched.
-Overall odds ~0.05%, unchanged.
+Unchanged, and stated plainly: **nothing here is a step whose success would resolve the Clay
+problem.** This leg moves no link of the chain. What it does is stop the project spending
+several legs building a DSS search around a mechanism that does not exist in the family where
+its tooling lives. The two structural walls are untouched. Odds ~0.05%, unchanged.
 
 The honest summary of the DSS lane after one leg: **the lane is not closed, but the cheap
 entrance is.** Entering it now costs a real build — a periodic-orbit search in the rescaled
-flow, with no fixed point nearby to seed it — and that is a much bigger commitment than this
-leg was. Whether it is the right one is the next decision, and it should be taken against the
-alternatives (the Hou–Luo critical-viscosity map; the L1→L2 port to 2D Boussinesq), not by
-default.
+flow with no fixed point nearby to seed it — and §4.1 says where such an orbit would have to
+live (the log-periodic directions, which are continuous spectrum and of limited regularity at
+the origin). That is a much bigger commitment than this leg was, and it should be weighed
+against the alternatives (the Hou–Luo critical-viscosity map; the L1→L2 port to 2D Boussinesq)
+rather than taken by default.
 
 ---
 
 ## Appendix — new lessons this leg paid for
 
-**(46) A symmetry audit is cheaper than an eigenvalue solve, and it can predict the whole
-answer.** Two of the eigenvalues found here were derivable in five lines from the two
-symmetries of the flow. Doing that *first* meant the numerical spectrum arrived with its two
-expected members already named — so "exactly two survived" read immediately as "nothing but
-symmetry", instead of looking like a result. **Enumerate the symmetry modes before computing a
-spectrum; they are the null result's baseline.**
+**(46) A symmetry audit is cheaper than an eigenvalue solve, and it predicts part of the
+answer.** Two eigenvalues here were derivable in five lines from the flow's two symmetries.
+Doing that *first* meant the numerical spectrum arrived with its expected members already
+named, so "only two survived" read immediately as "nothing but symmetry" instead of looking
+like a result. **Enumerate the symmetry modes before computing a spectrum; they are the null
+result's baseline.**
 
-**(47) A null result needs a planted positive, not just a control.** Banked lesson (2) says
-"ablate to attribute" and (9) says "build the adversary". This is the third member of the
-family: when the finding is *absence*, the instrument must be shown to detect a *presence* of
-the same kind. Planting a bound state and recovering it at `+1.083` costs three lines and is
-the difference between "there is no unstable eigenvalue" and "we did not find one".
+**(47) A null result needs a planted positive, not just a control.** Banked (2) says ablate to
+attribute and (9) says build the adversary; this is the third member. When the finding is
+*absence*, show the instrument detecting a *presence* of the same kind. Planting a bound state
+and recovering it at `+1.083` and `+4.578` costs three lines, and is the difference between
+"there is no unstable eigenvalue" and "we did not find one".
 
-**(48) When you generalize a gauge, re-derive it — do not extend it.** The project's existing
-normalization `c_omega = 1 - H(Omega)(0)` is correct at `a = 0` and had been carried at every
-`a` in the same function. With `a != 0` it admits **no fixed point at all**: the residual's own
-derivative at the origin is nonzero. One line of algebra at the origin catches it. **A gauge is
-a condition, and a condition derived at one parameter value is not a condition at another** —
-which is banked lesson (29) ("a constant is attached to a point, not to a problem") wearing
-the gauge's clothes.
+**(48) When you generalize a gauge, re-derive it — do not extend it.** `c_omega = 1 - H(Omega)(0)`
+is correct at `a = 0` and was being carried at every `a`. For `a != 0` that flow admits **no
+fixed point at all**; one line of algebra at the origin catches it. This is banked (29) —
+*a constant is attached to a point, not to a problem* — wearing the gauge's clothes.
 
-**(49) The regularity of the object sets the convergence rate of everything built on it, and
-it can vary with the parameter.** Here the far-field exponent `alpha(a)` is an output, and it
-is an odd integer at exactly two points on the branch. At those two points the method is
-spectral and at every other point it is second-order — a 10-order accuracy swing driven by
-nothing but the parameter. **Find where your object is smooth and quote your sharp numbers
-there, rather than quoting one accuracy for a whole sweep.**
+**(49) The regularity of the object sets the convergence rate of everything built on it, and it
+can vary with the parameter.** Here `alpha(a)` is an output and is an odd integer at exactly
+two points on the branch; there the method is spectral and everywhere else second-order, a
+ten-order accuracy swing driven by nothing but the parameter. **Find where your object is
+smooth and quote your sharp numbers there**, instead of quoting one accuracy for a whole sweep.
+
+**(50) An exactly known eigenvalue is a free error bar on every other one.** The dilation mode
+is `0` by symmetry, so its computed value *is* the spectrum's error at that parameter — `0.35`
+at `a = 0.2`, `8.9e-5` at `a = 1/2`. That number decided which rows of the sweep were allowed
+to carry a conclusion, and it cost nothing to read. **If a symmetry pins one eigenvalue, plot
+its deviation next to every claim you make about the others.**
+
+**(51) A convergence filter can be fooled by the EDGE of a continuum, and the fix is a control
+point, not a tighter tolerance.** The `-2` at `a = 1/2` converged to six digits under
+refinement and was not a mode: it was `c_omega + 1`, the accumulation edge of the essential
+spectrum in this space. Tightening the filter would have made it look *better*. What exposed
+it was evaluating the same quantity at `a = 0`, where the identical edge carries 99% of the
+discretized spectrum and is obviously not an eigenvalue. **Before believing an isolated
+eigenvalue, ask where the continuum's edges are — and go and look at the same object somewhere
+you already understand it.**
