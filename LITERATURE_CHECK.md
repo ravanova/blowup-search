@@ -100,7 +100,44 @@ claim needs restating to say precisely *which* object stops existing.
   [arXiv:2305.05895](https://arxiv.org/pdf/2305.05895).
 - Our own anchor paper HQW25 = [arXiv:2401.14615](https://arxiv.org/pdf/2401.14615).
 
-## The methodological candidates — NOT yet checked
+## Second pass — the methodological candidates (searched 2026-08-02)
+
+Searched; **no direct hit for any of the three**. That is weak evidence of
+novelty, not strong: a search that fails to find something is mostly evidence
+about the search terms. But the *shape* of what came back is informative.
+
+**What the standard literature does.** The radii-polynomial method
+(van den Berg–Lessard and successors) is well established, and the recurring
+setting is a **weighted ℓ¹ Banach space of Fourier coefficients with GEOMETRIC
+decay** — weight `ν > 1`, which forces **analytic** regularity, typically on a
+periodic or bounded domain. Representative:
+[Rigorous numerics for ill-posed PDEs: periodic orbits in the Boussinesq
+equation](https://arxiv.org/abs/1509.08648);
+[Automatic differentiation for Fourier series and the radii polynomial
+approach](https://www.sciencedirect.com/science/article/abs/pii/S0167278916000294).
+
+**Why our obstruction may genuinely be off their path.** Our problem has
+**algebraic decay on an UNBOUNDED domain**, so the natural weights are
+polynomial, not geometric — and geometric weights sidestep the far-field
+degeneracy that v2/v3 ran into entirely. If the v3 conservation law is new, this
+is the likely reason: the standard setting assumes away the regime where it bites.
+That is a defensible claim to make in a writeup, and a cheap one to check.
+
+**The single nearest paper to read** — nobody has yet:
+[Rigorous computation of solutions of semi-linear PDEs on unbounded domains via
+spectral methods](https://arxiv.org/pdf/2302.12877). Same setting as ours
+(unbounded domain, spectral, validated). If the v3 no-go or anything like the
+discrete-ball trap is known, it is most likely to be here or in its references.
+
+**Status of each candidate after this pass:**
+
+| candidate | search result | read next |
+|---|---|---|
+| discrete-ball trap (v6) | no hit | arXiv:2302.12877; then radii-polynomial papers that discretise a *non-analytic* norm |
+| weighted-ℓ¹ conservation law / no-go (v3) | no hit; standard work uses `ν>1` geometric weights, which avoids the regime | arXiv:2302.12877 |
+| elasticity discipline (v9/v10) | no hit | likely folklore rather than published; low priority |
+
+## The methodological candidates — original notes
 
 These were the strongest novelty candidates and none has been searched:
 
