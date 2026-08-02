@@ -4,13 +4,18 @@
 "arxiv + publishers 403 at the proxy". The precise diagnosis is now known and is
 narrower than that:
 
-- The environment's egress is an **allowlist**, not a broken proxy.
-  `export.arxiv.org` returns *"Host not in allowlist ... Add this host to your
-  network egress settings"*; `api.semanticscholar.org` fails CONNECT with 403.
-- `WebFetch` on `arxiv.org/abs/...`, `arxiv.org/html/...` and `alphaxiv.org`
-  all return **403**.
-- **`WebSearch` works**, and its backend *can* read those pages. So a first-pass
-  check is possible today; full-text verification is not.
+- **`WebFetch` is blocked for EVERY host, not just academic ones.** It returns
+  403 on `arxiv.org/abs`, `arxiv.org/html`, `alphaxiv.org`, a plain
+  `kurims.kyoto-u.ac.jp` PDF — **and on `en.wikipedia.org`**. That last one is the
+  tell: this is not a publisher/paywall problem and not an arXiv problem, so
+  "allowlist arxiv.org" would NOT have fixed it. Do not spend time re-diagnosing
+  it as one.
+- Direct `curl` egress is a separate, narrower allowlist: `export.arxiv.org`
+  returns *"Host not in allowlist ... Add this host to your network egress
+  settings"*, and `api.semanticscholar.org` fails CONNECT with 403.
+- **`WebSearch` works**, and its backend *can* read those pages. It is currently
+  **the only literature channel available**. So a first-pass check is possible
+  today; full-text verification is not, by any route tried.
 
 **Therefore every finding below is SEARCH-LEVEL and unverified against a primary
 source.** Search summarisers paraphrase, blend sources, and occasionally echo the
@@ -18,10 +23,12 @@ query back. Nothing here should be quoted as established until someone reads the
 actual paper. What it is good for is telling us *where to look* and *which of our
 claims are now at risk* — which is exactly what a novelty check is for.
 
-**To finish the job, add to the environment's egress allowlist:** `arxiv.org`,
+**To finish the job, TWO things are needed and they are different:** (i) restore
+`WebFetch` (it is 403 on all hosts including Wikipedia — an environment/tool-level
+block, not a domain question); and (ii) for direct `curl`, add `arxiv.org`,
 `export.arxiv.org`, `api.semanticscholar.org`, `link.springer.com`,
-`aimsciences.org`. That is the cheapest unblocking act available and it gates
-every novelty claim this project might make.
+`aimsciences.org` to the egress allowlist. Either one alone would unblock
+full-text verification, which gates every novelty claim this project might make.
 
 ---
 
