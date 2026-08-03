@@ -31,7 +31,30 @@ WHAT THIS PRODUCES, in the order the leg discovered it:
       a ~ 0.383.  The 2D Boussinesq object it is supposed to model sits at beta = 2.92,
       which is OUTSIDE that range entirely -- and reaching it needs a < 0.
 
+COST, and how it was cut (a killed container orphaned a 55-minute G2 once):
+
+  G2 was ~41 min serial.  Two changes take it to ~16 min (2.6x), neither of which
+  moves a number -- verified against the committed artifact at 89 numeric fields,
+  worst relative difference 3.1e-12, and that only in two `residual` values, from
+  floating-point accumulation order in the chained run.  beta_mean is identical to
+  12 digits.
+
+    * the STEPS ladder is a PREFIX ladder, so it is now ONE trajectory read at each
+      rung: 400+1200+2500+4000 = 8100 steps became 4000.  867s -> 398s.
+    * the RESOLUTION ladder is embarrassingly parallel and each relaxation is
+      SINGLE-threaded (measured 101% CPU), so the four rungs now cost the longest
+      one instead of their sum.  1619s -> 543s on 4 cores.
+
+  Both are gated in test_route_g_perf.py, because a speedup that changes an answer
+  is not a speedup.
+
 Usage:  .venv/bin/python -u experiments/p2_route_g_v1_collapse.py [--quick]
+        # stages are independent and each is banked as it finishes:
+        .venv/bin/python -u experiments/p2_route_g_v1_collapse.py --only g2
+        # ... and if a stage was run to its own file, FOLD IT BACK or it is invisible
+        # to the evidence script (this is exactly how 55 minutes went missing):
+        .venv/bin/python experiments/p2_route_g_v1_collapse.py --merge p2_route_g_v1_g2.json
+        ROUTE_G_SERIAL=1 ...   # force the serial path (one core, or debugging)
 """
 
 import argparse
@@ -51,7 +74,11 @@ from solver.fractional_boussinesq import (  # noqa: E402
     fit_collapse, fit_relevance, houluo_sharp_ic, relevance_exponent,
 )
 
-DATA = Path(__file__).resolve().parent.parent / "writeup" / "data"
+# ROUTE_G_DATA lets the merge gate in test_route_g_perf.py run against a throwaway
+# directory instead of the real artifact -- a test that can clobber writeup/data is a
+# test nobody dares run.
+DATA = (Path(os.environ["ROUTE_G_DATA"]) if os.environ.get("ROUTE_G_DATA")
+        else Path(__file__).resolve().parent.parent / "writeup" / "data")
 
 # Route-E v1's measured alpha(a) for gCLM (writeup/data, §26).  beta = 1/alpha.
 ROUTE_E_ALPHA = {0.0: 1.0000, 0.1: 1.1414, 0.2: 1.3345, 0.3: 1.6172,
@@ -87,6 +114,80 @@ def g1_chen_hou():
 
 
 # --------------------------------------------------------------------------
+def _chained_steps_ladder(n_r, n_b, r_min, r_max, checkpoints, dt_frac=0.3):
+    """One relaxation trajectory, read at each checkpoint (the prefix-ladder saving).
+
+    Equivalent to restarting at every rung because (i) `renorm=True` re-pins the
+    normalization to the SAME frozen origin slopes when the run resumes -- the state
+    already carries them -- and (ii) `dt` is recomputed from the current state each
+    step, so there is no history the restart would have thrown away.  Verified to 12
+    significant figures rather than assumed (test_route_g_perf.py gate 1).
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from spike1_stepC_gate import profile_ansatz, radial_exponent
+    from solver.boussinesq_velocity import PolarGrid
+    from solver.boussinesq_rescaled import RescaledBoussinesq
+
+    grid = PolarGrid(n_r=n_r, n_beta=n_b, r_min=r_min, r_max=r_max)
+    om, et, xi = profile_ansatz(grid)
+    solver = RescaledBoussinesq(grid)
+    rungs, done, t0 = [], 0, time.time()
+    for cp in sorted(checkpoints):
+        res = solver.run(om, et, xi, dt_frac=dt_frac, tol=1e-9,
+                         max_steps=cp - done, renorm=True)
+        om, et, xi = res["omega"], res["eta"], res["xi"]
+        done += res["steps"]
+        rungs.append({"steps": done, "residual": float(res["residual"]),
+                      "c_l": float(res["c_l"]), "c_omega": float(res["c_omega"]),
+                      "alpha": float(res["c_omega"] / res["c_l"]),
+                      "seconds": time.time() - t0})
+        if res["converged"]:
+            # Early convergence makes later rungs meaningless AND breaks equivalence
+            # with the restarted ladder, so stop and say so rather than pad the table.
+            print(f"  [G2 steps] converged at {done} steps; higher rungs skipped",
+                  flush=True)
+            break
+    return rungs
+
+
+def _res_rung(job):
+    """One resolution-ladder rung, in its own process (see `_map_maybe_parallel`)."""
+    n_r, n_b, r_max, steps = job
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from spike1_stepC_gate import run_gate
+    t0 = time.time()
+    r = run_gate(n_r, n_b, 1e-3, r_max, steps=steps)
+    beta = -r["c_l"] / r["c_omega"]
+    return {"n_r": n_r, "n_beta": n_b, "r_max": r_max, "steps": steps,
+            "residual": r["residual"], "c_l": r["c_l"], "c_omega": r["c_omega"],
+            "alpha": r["alpha"], "alpha_far": r["alpha_far"], "beta": beta,
+            "s_c": float(critical_s(beta)),
+            "anisotropy_median": r["anisotropy_median"],
+            "seconds": time.time() - t0}
+
+
+def _map_maybe_parallel(fn, jobs):
+    """Map over independent jobs, in processes when that helps, in order either way.
+
+    Each relaxation is single-threaded (measured 101% CPU), so process parallelism
+    scales nearly linearly to the core count.  Falls back to a serial map when there
+    is one job, one core, or ROUTE_G_SERIAL=1 -- the fallback exists so a debugging
+    run has readable tracebacks, and so the artifact is reproducible on one core.
+    """
+    if len(jobs) == 1 or os.cpu_count() == 1 or os.environ.get("ROUTE_G_SERIAL") == "1":
+        return [fn(j) for j in jobs]
+    import multiprocessing as mp
+    # Longest job first: the makespan of a greedy schedule is set by the biggest rung
+    # (cost is ~linear in n_r), so starting it last would leave cores idle at the end.
+    order = sorted(range(len(jobs)), key=lambda i: -jobs[i][0])
+    with mp.get_context("fork").Pool(min(len(jobs), os.cpu_count())) as pool:
+        done = pool.map(fn, [jobs[i] for i in order])
+    out = [None] * len(jobs)
+    for slot, rec in zip(order, done):
+        out[slot] = rec
+    return out                       # ladder order, NOT completion order
+
+
 def g2_our_own_beta(quick=False):
     """beta from the dynamically-rescaled 2D Boussinesq machine (Spike 1, Step C).
 
@@ -101,7 +202,6 @@ def g2_our_own_beta(quick=False):
     and beta is therefore a measurement of c_omega at a pinned c_l.
     """
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from spike1_stepC_gate import run_gate
 
     # steps=2500 is Spike-1 Step C's own protocol, kept deliberately so that the
     # resolution ladder here can be compared against the committed
@@ -114,31 +214,42 @@ def g2_our_own_beta(quick=False):
 
     out = {"steps_ladder": [], "resolution_ladder": [], "gauge_note":
            "c_l is PINNED by the frozen normalization; c_omega is the measured output."}
-    for st in steps_ladder:
-        t0 = time.time()
-        r = run_gate(300, 48, 1e-3, 1e5, steps=st)
-        beta = -r["c_l"] / r["c_omega"]
-        out["steps_ladder"].append(
-            {"steps": st, "residual": r["residual"], "c_l": r["c_l"],
-             "c_omega": r["c_omega"], "alpha": r["alpha"], "beta": beta,
-             "s_c": float(critical_s(beta)), "seconds": time.time() - t0})
-        print(f"  [G2 steps] {st:5d}: res={r['residual']:.2e} c_om={r['c_omega']:+.5f} "
-              f"alpha={r['alpha']:+.6f} beta={beta:.5f} s_c={critical_s(beta):.5f} "
-              f"({time.time() - t0:.0f}s)", flush=True)
 
-    for (n_r, n_b, r_max) in res_ladder:
-        t0 = time.time()
-        r = run_gate(n_r, n_b, 1e-3, r_max, steps=final_steps)
-        beta = -r["c_l"] / r["c_omega"]
-        out["resolution_ladder"].append(
-            {"n_r": n_r, "n_beta": n_b, "r_max": r_max, "steps": final_steps,
-             "residual": r["residual"], "c_l": r["c_l"], "c_omega": r["c_omega"],
-             "alpha": r["alpha"], "alpha_far": r["alpha_far"], "beta": beta,
-             "s_c": float(critical_s(beta)),
-             "anisotropy_median": r["anisotropy_median"], "seconds": time.time() - t0})
-        print(f"  [G2 res] n_r={n_r} n_b={n_b} r_max={r_max:.0e}: "
-              f"c_om={r['c_omega']:+.5f} alpha={r['alpha']:+.6f} beta={beta:.5f} "
-              f"s_c={critical_s(beta):.5f} ({time.time() - t0:.0f}s)", flush=True)
+    # THE STEPS LADDER IS A PREFIX LADDER, so run ONE trajectory and read it at each
+    # rung instead of restarting from the ansatz four times.  400+1200+2500+4000 =
+    # 8100 steps becomes 4000.  Gated in test_route_g_perf.py: chained and restarted
+    # agree to 12 significant figures, because renorm=True re-pins c_l to the same
+    # frozen slopes on resumption and dt is recomputed from the state each step.
+    t0 = time.time()
+    for rung in _chained_steps_ladder(300, 48, 1e-3, 1e5, steps_ladder):
+        beta = -rung["c_l"] / rung["c_omega"]
+        out["steps_ladder"].append(
+            {"steps": rung["steps"], "residual": rung["residual"], "c_l": rung["c_l"],
+             "c_omega": rung["c_omega"], "alpha": rung["alpha"], "beta": beta,
+             "s_c": float(critical_s(beta)), "seconds": rung["seconds"]})
+        print(f"  [G2 steps] {rung['steps']:5d}: res={rung['residual']:.2e} "
+              f"c_om={rung['c_omega']:+.5f} alpha={rung['alpha']:+.6f} beta={beta:.5f} "
+              f"s_c={critical_s(beta):.5f} ({rung['seconds']:.0f}s cumulative)",
+              flush=True)
+    print(f"  [G2 steps] one chained trajectory, {max(steps_ladder)} steps total "
+          f"(vs {sum(steps_ladder)} restarted) in {time.time() - t0:.0f}s", flush=True)
+
+    # THE RESOLUTION LADDER IS EMBARRASSINGLY PARALLEL and each run is SINGLE-THREADED
+    # (measured: 101% CPU), so on a 4-core box the four rungs cost the longest one
+    # rather than their sum.  Deterministic: each worker rebuilds its own grid and
+    # solver from scratch, and results are reassembled in ladder order, not completion
+    # order, so the artifact does not depend on scheduling.
+    jobs = [(n_r, n_b, r_max, final_steps) for (n_r, n_b, r_max) in res_ladder]
+    t0 = time.time()
+    results = _map_maybe_parallel(_res_rung, jobs)
+    for rec in results:
+        out["resolution_ladder"].append(rec)
+        print(f"  [G2 res] n_r={rec['n_r']} n_b={rec['n_beta']} "
+              f"r_max={rec['r_max']:.0e}: c_om={rec['c_omega']:+.5f} "
+              f"alpha={rec['alpha']:+.6f} beta={rec['beta']:.5f} "
+              f"s_c={rec['s_c']:.5f} ({rec['seconds']:.0f}s)", flush=True)
+    print(f"  [G2 res] {len(jobs)} rungs, wall {time.time() - t0:.0f}s "
+          f"(serial would be {sum(r['seconds'] for r in results):.0f}s)", flush=True)
 
     betas = [x["beta"] for x in out["resolution_ladder"]]
     scs = [x["s_c"] for x in out["resolution_ladder"]]
@@ -308,8 +419,36 @@ if __name__ == "__main__":
                          "stage run in parallel with G3/G4 and be merged afterwards, "
                          "since the merge-on-load happens once at startup and two "
                          "concurrent writers to one file would clobber each other")
+    ap.add_argument("--merge", default="",
+                    help="comma-separated sibling filenames under writeup/data/ to fold "
+                         "into --out before doing anything else, then exit. THIS EXISTS "
+                         "BECAUSE --out ALONE LOSES WORK: running G2 to its own file is "
+                         "what --out is for, but nothing ever merged it back, so a "
+                         "55-minute stage sat in a file the evidence script does not "
+                         "read and the figure silently skipped its panel. Refuses to "
+                         "overwrite a stage that already differs, so a merge cannot "
+                         "quietly replace a good run with a --quick one.")
     args = ap.parse_args()
     DATA.mkdir(parents=True, exist_ok=True)
+
+    if args.merge:
+        dst = DATA / args.out
+        payload = json.loads(dst.read_text()) if dst.exists() else {}
+        for name in args.merge.split(","):
+            src = json.loads((DATA / name.strip()).read_text())
+            for k, v in src.items():
+                if not k.startswith("g"):
+                    continue                      # leg/quick metadata, not a stage
+                if k in payload and payload[k] != v:
+                    raise SystemExit(
+                        f"refusing to merge: {name.strip()} and {args.out} both have "
+                        f"'{k}' and they DIFFER. Delete the stale one deliberately.")
+                payload[k] = v
+                print(f"  merged {k} from {name.strip()}")
+        dst.write_text(json.dumps(payload, indent=1))
+        print(f"wrote {dst} with stages "
+              f"{sorted(k for k in payload if k.startswith('g'))}")
+        sys.exit(0)          # module-level driver: not inside a function
 
     # MERGE, do not clobber: the stages have very different costs (G2 is ~55 min, G3/G4
     # a fraction of that), so they must be runnable separately and accumulate into one

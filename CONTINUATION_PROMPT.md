@@ -1246,11 +1246,18 @@ p2_conj24_evidence.py(fig13), p2_hl_anchor_evidence.py(fig12)};
 writeup/3_spikes/{spike0,spike1_stepA/B/C}\_evidence.py; central
 writeup/build_figures.py (figs 1–7). writeup/README.md is the ordered index.
 
+OPS: **ROUTE-G G2 IS NOW ~16 MIN, NOT ~41** — the steps ladder is ONE chained
+trajectory (8100→4000 steps) and the resolution ladder runs in processes (each relaxation
+is single-threaded, 101% CPU, 4 cores). Verified not to move a number: 89 numeric fields,
+worst 3.1e-12. **AND IF YOU RUN A STAGE TO ITS OWN `--out` FILE, FOLD IT BACK WITH
+`--merge` OR IT IS INVISIBLE** — the evidence script reads only the main artifact, which is
+how a 55-minute G2 sat orphaned in a sibling file with the figure silently skipping its
+panel. `ROUTE_G_SERIAL=1` forces the serial path.
+
 OPS: DISK WATCH — root fs has hit 100% mid-session before; `df -h /` if writes fail with
 ENOSPC. Never `pgrep -f script.py` while it self-matches (hang). Foreground `sleep`
 blocked (use background runs / Monitor until-loop). The GA at the converged budget
-(pop150/gen250/8seeds) ≈ 30–45 s/best_of at n=801; base-budget GA ≈ 1 s. Route-D v1
-probe ~10 s; v2 dress ladder a few seconds; v3 space sweep ~1 min; **v4 collocation sweep
+(pop150/gen250/8seeds) ≈ 30–45 s/best_of at n=801; base-budget GA ≈ 1 s. Route-D v1 probe ~10 s; v2 dress ladder a few seconds; v3 space sweep ~1 min; **v4 collocation sweep
 ~10 min (dense J×J inverses at J up to 2000 — do NOT build a Collocation at J≳5000, the
 matrices are J² and 40000 would be 12 GB); v5 Hölder sweep ~10 min (HolderNorm caches a
 J×J pair matrix — same J² ceiling); v6 bounds ladder ~10 min (the SEMINORM-part dual is
