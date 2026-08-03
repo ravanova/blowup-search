@@ -304,6 +304,14 @@ writeup/
     this note's "stagnation point" is better read as v12/v13's **edge of support**.
     *(no figure — the numbers reproduce by running `test_advection_scope.py`)*
 
+**Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
+record of what has been checked against the literature and what has not — three passes,
+per-claim risk levels, and the reading order. It goes further than entry 34 above (which
+predates its third pass, the one that found the paper most likely to pre-empt Route-F).
+**Read it before making any novelty claim.** Everything in it is search-level: no paper
+has been read, because `WebFetch` returns 403 on every host — including Wikipedia — so
+this is a tool-level block, not an arXiv or publisher one.
+
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
 

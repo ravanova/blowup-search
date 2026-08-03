@@ -2043,3 +2043,27 @@ member of the family where the term it must carry does not exist.
 CLAY: moves NO link of the chain. It narrows an L1 sub-programme and names the repair — a COST
 finding, whose value is that it landed before three more bound-sharpening legs were built on the
 assumption that the space works.
+
+
+## §B — ROUTE-G OPS: the orphaned G2, and G2 at 2.6x (no science content, but do not relearn it)
+
+**THE LOSS AND THE RECOVERY.** G2 had been run to its own `--out` file so it could go in
+parallel with G3/G4 — that worked — but **nothing ever merged it back**, and
+p2_route_g_v1_evidence.py reads only the main artifact. A 55-minute stage sat in a sibling
+file while fig36 silently skipped its panel B. Shared stages were byte-identical, so the
+merge was safe and **no re-run was needed**. Fixed: `--merge` folds siblings in and REFUSES
+when a stage exists in both and differs, so a `--quick` run cannot overwrite a real one.
+**GENERAL FORM: a mechanism that SPLITS work needs the one that PUTS IT BACK, or the split
+silently becomes a loss.**
+
+**G2 IS NOW ~16 MIN, NOT ~41, AND MOVES NO NUMBER.** (i) the steps ladder is a PREFIX
+ladder → one chained trajectory read at each rung, 8100 steps → 4000 (867s → 398s); valid
+because renorm=True re-pins the same frozen origin slopes on resumption and dt is
+state-derived each step — **verified at 1.3e-14, not assumed**. (ii) the resolution ladder
+is embarrassingly parallel and each relaxation is SINGLE-threaded (measured 101% CPU), so
+four rungs cost the longest not the sum (1619s → 543s); results reassemble in LADDER order,
+not completion order. Verified vs the committed artifact: **89 numeric fields, worst
+3.1e-12**, that only in two residuals from accumulation order; beta_mean identical to 12
+digits. `test_route_g_perf.py` 4/4. `ROUTE_G_SERIAL=1` forces serial; `ROUTE_G_DATA`
+redirects the merge gate at a temp dir so the test cannot clobber writeup/data.
+**THIS BOX HAS 4 CORES, NOT 8 — `OMP_NUM_THREADS=8` is pinned project-wide and misleads.**
