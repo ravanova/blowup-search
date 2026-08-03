@@ -326,6 +326,41 @@ writeup/
     (the pair first flagged as complex was split by `|Im| = 1.8e−5`; the driver now reports a
     magnitude, not a boolean). Positive control: `6 → 9` with one at `Re = +1.58`. *(fig 37)*
 
+41. [TECHNICAL_P2_ROUTEI_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEI_V1.md) ·
+    [BLOG_P2_ROUTEI_V1.md](4_p2_lottery/BLOG_P2_ROUTEI_V1.md) — **Route-I v1**, the marginal
+    flow **driven**. Route-H wrote the augmented system and read it *statically* (Newton at
+    frozen `μ`, `α(μ)` off the branch, the dynamics inferred); this integrates it as an
+    initial-value problem, which turns two inferred numbers into measured ones and answers the
+    dynamical half of ranked item (2) — *does a viscous solution actually reach the self-similar
+    form?* **THE HEADLINE IS THE THING FOUND ON THE WAY: a stability inversion.** The **inviscid**
+    rescaled fixed point at `a = 1/2` has **141 of 144 unstable directions** (max `Re = +4.56` —
+    §26's essential spectrum, seen as a count), so nothing generic reaches it; **any `μ > 0` has
+    none**, the spectrum collapsing to a discrete negative ladder whose gap is flat in `μ` across
+    four decades. **The artifact test is the crossover's `K`-scaling**: dissipation beats a growth
+    rate `g` once `μK^p ≳ g`, so `μ*(K) ~ g/K^p` should *fall* under refinement — measured
+    `[1e−5,1e−4] → [1e−6,1e−5]` over `K = 48 → 144`, i.e. **the two limits do not commute**, which
+    an artifact cannot show. And **where the instability lives is the interesting part**: the
+    leading inviscid eigenvalue is `+4.55 + 430i` and `max|Im|` grows with `K`, so `Re` rises with
+    log-frequency — **the fastest-growing directions are Route-E's log-periodic continuum, i.e.
+    exactly what a DSS solution is built out of, and `μ` deletes them rather than damping them.**
+    Third independent reason the cheap DSS entrances do not work. The two cross-checks pass:
+    **`λ_μ = 2s − α₀` measured as a growth rate** (predicted `−2/−1/0/+1` vs measured
+    `−2.0014/−1.0004/−0.0003/+1.0003`; the line has slope `+2.0011` and zero at `s = 1.50009`),
+    and **`α₁` off a trajectory vs off the static branch at matched `K`** (`0.31% → 0.13% →
+    0.10%` apart as `K` climbs — converging *toward* each other). Adiabaticity measured, not
+    assumed (`1e−4 → 1.6e−6`). **Refusals carry this leg**: `p = 5` on `Λ^p` truncation — the
+    *closest*-agreeing rung in the table, discarded on the operator rather than the answer;
+    **all three `a = 0.3` rungs** on an unresolved profile, so there is **no off-resonance
+    control** and the law is confirmed at one `a` only; a rate fit that returned `+11.8`
+    against `+4.6` until it was bounded by the *variable* rather than the *time*; and, in the
+    nonlinear control, the `μ = 0` and `μ = 1e−3` rows quoted as **not asymptotic** (fit
+    residual 1.5–2.3 against 0.007–0.012 for the clean rows). Two failures found while
+    finishing the leg are written up rather than patched away: every off-branch run **NaN'd
+    into a published figure legend**, and the cause was that a perturbation "small" in
+    coefficients was **3.6e8** too large in the seminorm the gauge divides by — corrected, it
+    is a `5e−11` change in the profile, so it tests the gauge direction and **not** the basin.
+    *(fig 38)*
+
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
 record of what has been checked against the literature and what has not — three passes,
@@ -368,6 +403,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig38_route_i_v1_driven.png` | 4 | P2 — Route-I v1: `λ_μ = 2s − α₀` measured as a growth rate along a trajectory (with the refused rungs marked), the tar pit driven against its closed law with the dynamic and static `α₁` ladders side by side, adiabaticity and off-branch starts, THE STABILITY INVERSION (unstable directions vs `μ` at three `K`, with the crossover that shows the limits do not commute), where the instability lives (`Re` against the log-frequency cutoff — the DSS band), and the nonlinear twin-trajectory control against the spectral gap |
 | `fig37_route_h_v1_critical.png` | 4 | P2 — Route-H v1: `s_c` read as the stability eigenvalue `2s − α₀` with the marginal point marked, the `a = 0` neutral line against its closed form, the `a = 1/2` secant extrapolation that gives `α₁` with its `K`-ladder, the DSS re-ask (dissipation discretizes the continuum onto the negative integers and nothing crosses), the time-dependent cross-check at `s = 1/2` exactly, and `μ(τ)` decaying algebraically rather than exponentially |
 | `fig36_route_g_v1_collapse.png` | 4 | P2 — Route-G v1: the law `s_c = 1/(2β)` with every object on it (gCLM's dial, Chen–Hou 2D Boussinesq, and NS at `β = 1/2` exactly), `β` re-measured by our own dynamically-rescaled 2D machine as a modulation constant, the direct time-dependent route refused with its reason, the underpowered `p(s)` line kept for its sign structure, the cross-model calibration on gCLM's dial, and who beats the ordinary Laplacian as a signed bar |
 | `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
@@ -398,6 +434,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_i_v1_driven.json` | Arc 4 / fig38 — I1 the integrator against the `a = 0` line of fixed points plus the BDF2 order and the gauge (projected vs raw), I2 `λ_μ` as a growth rate with every rung's seed residual and `Λ^p` truncation and three refusals, I3 the tar pit driven with the dynamic/static `K`-ladder and the fit-window sweep, I4 adiabaticity, the off-branch starts and their norm qualification (with any refusal recorded, never a NaN), I5 the stability inversion at `K = 48/96/144` with the crossover brackets against `g/K^p`, I6 the frequency profile (`Re` vs `|Im|` cutoff, inviscid and viscous), I7 the twin-trajectory control, I8 the verdict with its `τ` scales |
 | `p2_route_h_v1_critical.json` | Arc 4 / fig37 — H1 the closed-form viscous blow-up and its PDE residual in closed form, H2 the `a = 0` marginal branch (`α ≡ 1`, `α₁ = 0`), H3 the `a = 1/2` branch with the `K = 96..240` ladder and both the secant extrapolant and the chord it corrects, H4 the third point REFUSED with its signal-to-residual ratio and the verdict it would have quoted, H5 the dissipative spectrum vs `μ` with the integer ladder and the planted control, H6 the verdict with its `τ` scales, H7 the time-dependent cross-check with its `under_resolved` caveat |
 | `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
@@ -441,6 +478,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_f_v1_evidence.py         # fig35
 .venv/bin/python writeup/4_p2_lottery/p2_route_g_v1_evidence.py         # fig36
 .venv/bin/python writeup/4_p2_lottery/p2_route_h_v1_evidence.py         # fig37
+.venv/bin/python writeup/4_p2_lottery/p2_route_i_v1_evidence.py         # fig38
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):

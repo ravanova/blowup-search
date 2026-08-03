@@ -3,6 +3,68 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-I v1: the marginal flow driven, and the NaN in the figure (non-logged) — 2026-08-03
+
+**NOT a logged gate run** (deterministic; ~5 min). Code `solver/marginal_flow.py` +
+`test_marginal_flow.py` (11/11); `experiments/p2_route_i_v1_driven.py` →
+`writeup/data/p2_route_i_v1_driven.json` → fig38. Writeups
+TECHNICAL/BLOG_P2_ROUTEI_V1.md; PHASE2_P2_NOTES §30.
+
+What a human would want to know:
+
+- **The leg was written before it was checked, and checking it is most of this entry.**
+  The code, driver, data, figure script and both writeups already existed when I picked
+  it up. The gate suite passed 10/10, which is why the headline survives intact. What did
+  not survive was a sub-measurement and several writeup numbers — and finding those was
+  worth more than the leg's arithmetic.
+
+- **The headline, which is real.** The INVISCID rescaled fixed point at a = 1/2 has
+  141 of 144 unstable directions (max Re +4.56) — §26's essential spectrum as a count, so
+  nothing generic reaches it. Any μ > 0 has NONE. And the unstable directions are the
+  log-periodic ones (leading eigenvalue +4.55 + 430i, Re rising with |Im|, max|Im| growing
+  with K) — i.e. exactly the DSS-shaped modes, which μ deletes rather than damps. Third
+  independent reason the cheap DSS entrances do not work.
+
+- **THE FIGURE SAID `α₁ = nan`, THREE TIMES, AND I HAD ALREADY LOOKED AT IT.** Every
+  off-branch run overflowed. The integrator's Newton has a stagnation stop that returns
+  the unconverged iterate; nothing checked; the driver stored it; the legend rendered it.
+  I read past it once. The lesson I want to keep is not "add a check" — it is that a
+  rendered artifact is not a verification, and I treated looking at the picture as if it
+  were.
+
+- **Finiteness was not the right predicate either, which cost a second attempt.** After a
+  partial fix the same run stayed finite and ended at μ = −1.6e24. The discriminator that
+  actually separates healthy from broken is the implicit solve's own residual over its
+  floor: ~6e2 versus 1e13. Four orders of clean separation, and it was already being
+  recorded — just never read.
+
+- **The cause was "small in the wrong norm", and it is the most transferable thing here.**
+  The perturbation was normalized to max|v_k| = 1. But the gauge divides by
+  (Λ^p Ω)_X(0), which weights mode k by ~k⁴, so that "1e−3" was 3.6e8 too large in the
+  functional that binds: α came back 11713 instead of 3.037 at τ = 0, before a step. Same
+  k^p amplification Route-H found killing Λ⁵. One mechanism, two legs, two symptoms.
+
+- **And the fix made the result weaker, which is the honest part.** Normalized correctly,
+  the largest "5%" perturbation is a 5e−11 change in the profile. So the off-branch test
+  probes the gauge-sensitive direction and is a WEAK test of profile robustness — not the
+  basin measurement it reads like. I wrote that into the technical note, the blog and the
+  figure legend rather than letting "off-branch starts join the same law" stand.
+
+- **Three writeup claims did not match the regenerated data.** §2 quoted the p = 5 rung
+  (+2.007) as a measurement when the driver REFUSES it on operator truncation 1.77 — and
+  it is the closest-agreeing rung in the table, which is precisely why the gate is on the
+  operator and not the answer. §2 also quoted all three a = 0.3 rungs as a passing
+  off-resonance control; every one is refused on an unresolved profile, so the leg has NO
+  off-resonance control. §5 reported μ = 1e−3 as "≈ −1.0, <1%" when it is −1.81 against a
+  gap of −1.00, 81% out. That number was never in the data — it was written from what the
+  eigenvalue said it should be. All three are corrected.
+
+- **What I trimmed from the claim.** The crossover μ*(K) falls ×10 from K = 48→96 (against
+  a predicted ×8) but ×1.0 from 96→144, where the prediction is only ×3 — below the
+  decade-spaced ladder's resolution. The first step carries the claim; the second is
+  consistent and NOT independent evidence. The writeup said "μ* falls like K^-p" flatly.
+
+
 ## Phase-2 P2 — ROUTE-H v1: the marginal case, where scaling says nothing (non-logged) — 2026-08-03
 
 **NOT a logged gate run** (deterministic; no GA, no seeds; ~10 min). Code

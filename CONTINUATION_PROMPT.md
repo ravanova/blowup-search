@@ -1,5 +1,83 @@
 # Continuation prompt (copy into a fresh session)
 
+*Updated 2026-08-03 (session close, third update). **THIS SESSION SHIPPED ROUTE-H v1 AND THEN
+ROUTE-I v1.** Route-I existed as untracked code + writeups when the session picked it up; its
+gate suite passed, its headline survived, and **checking it is where the value was** — one
+sub-measurement was entirely NaN, three writeup claims did not match the data, and one claim
+was resolution-limited. Read (I-0a)-(I-0e), then the Route-H block below it.*
+
+**(I-0a) ROUTE-I v1 IS DONE AND PUSHED: THE MARGINAL FLOW DRIVEN, AND A STABILITY INVERSION.**
+§29 read the augmented flow STATICALLY (Newton at frozen mu, dynamics INFERRED); this
+integrates (F_mu)+(M) as an initial-value problem. **THE HEADLINE WAS FOUND ON THE WAY:** at
+a=1/2 the INVISCID rescaled fixed point has **141 of 144 unstable directions (max Re +4.56)** —
+§26's essential spectrum as a COUNT, so nothing generic reaches it — and **ANY mu>0 has NONE**,
+the spectrum collapsing to a discrete negative ladder whose gap is flat in mu over four
+decades. **AND WHERE THE INSTABILITY LIVES IS THE PART TO CARRY:** the leading inviscid
+eigenvalue is **+4.55 + 430i**, Re RISES with |Im|, and max|Im| grows with K — those are
+Route-E's log-periodic modes, i.e. **exactly what a DSS solution is built out of, and mu
+DELETES them rather than damping them.** Third independent reason the cheap DSS entrances do
+not work. Cross-checks: lambda_mu as a growth rate (slope **+2.0011** vs +2, zero at
+**1.50009** vs 1.5) and alpha_1 dynamic-vs-static at matched K (**0.31%→0.13%→0.10%**,
+converging). solver/marginal_flow.py + test_marginal_flow.py **11/11**; fig38;
+TECHNICAL/BLOG_P2_ROUTEI_V1.md; PHASE2_P2_NOTES **§30**.
+
+**(I-0b) A NaN REACHED A PUBLISHED FIGURE LEGEND AND I HAD ALREADY LOOKED AT THE PICTURE.**
+Every off-branch run in I4 overflowed; `_implicit_step` has a stagnation stop that RETURNS the
+unconverged iterate; nothing checked; the legend rendered **`alpha_1 = nan` three times**.
+**The lesson is not "add a check" — it is that LOOKING AT A RENDERED ARTIFACT IS NOT
+VERIFICATION**, and I had treated it as one. **Finiteness is also not the predicate**: after a
+partial fix the same run stayed finite and ended at **mu = -1.6e24**. The working discriminator
+is the implicit solve's residual over its floor (**~6e2 healthy, 1e13 failed**) and it was
+already being recorded, just never read. `integrate` now reports `converged`; gate 11 enforces it.
+
+**(I-0c) THE CAUSE WAS "SMALL" IN THE WRONG NORM — THE MOST TRANSFERABLE THING THIS SESSION.**
+The perturbation was scaled to max|v_k| = 1, small in COEFFICIENTS. The gauge (N') divides by
+(Lambda^p Om)_X(0), which weights mode k by ~k^p with one more power from d/dX at the origin,
+so **|lam.v|/|lam.b| = 3.6e8** and eps=1e-3 was a **3.6e5 RELATIVE** perturbation of the
+quantity the flow divides by: **alpha = 11713 instead of 3.037 AT tau=0**, before a step. Same
+k^p amplification as Route-H's H4 — **one mechanism, two legs, two symptoms.** **AND THE FIX
+MADE THE RESULT WEAKER, WHICH IS THE HONEST PART:** normalized correctly, eps=0.05 is a
+**5e-11** change in the profile, so the off-branch test probes the GAUGE direction and is a
+**WEAK test of profile robustness — NOT a basin measurement, do not cite it as one.** I7's twin
+trajectories are the profile-scale test.
+
+**(I-0d) THREE WRITEUP CLAIMS DID NOT MATCH THE DATA. CHECK EVERY NUMBER AGAINST THE
+REGENERATED JSON — WRITEUPS DRIFT.** (i) §2 quoted the **p=5** rung (+2.00699) as a
+measurement; the driver **REFUSES** it on Lambda^p truncation **1.77** — and it is the
+**closest-agreeing rung in the table**, which is exactly why the gate is on the OPERATOR and
+not on the answer. (ii) §2 quoted all three **a=0.3** rungs as a passing off-resonance control;
+**every one is refused** on an unresolved profile (seed residual 6e-4..4e-3), so **THE LEG HAS
+NO OFF-RESONANCE CONTROL** and the law is confirmed at ONE a. (iii) §5 reported mu=1e-3 as
+"≈ -1.0, <1%"; it is **-1.81 against a gap of -1.00, 81% out** — that number was never in the
+data, it was written from what the eigenvalue said it SHOULD be. All corrected; the nonlinear
+control now quotes fit residual (**1.49/2.32 contaminated vs 0.007/0.012 clean**) as the
+discriminator.
+
+**(I-0e) ONE CLAIM TRIMMED FOR RESOLUTION.** The crossover mu*(K) ~ g/K^p falls **x10** from
+K=48→96 (predicted x8) but **x1.0** from 96→144, where the prediction is only **x3 — BELOW the
+decade-spaced mu-ladder's resolution**. The first step carries the claim; the second is
+consistent and **NOT independent evidence**. A finer mu ladder is the obvious spend if this
+ever has to carry weight. Also fixed on the way: the Jacobian did not differentiate the gauge
+projection ("analytically the zero map" — true ON the branch, false off it), which is why
+Newton stagnated for any perturbed start. Changes no on-branch number; verified against all 10
+pre-existing gates.
+
+**NEW BANKED LESSONS (65)-(66)** (Route-I's own (61)-(64) are in §30): (65) **a refused
+computation must be refused in the DATA STRUCTURE, not just the prose** — and finiteness is not
+the predicate. (66) **"small" is meaningless until you say IN WHICH NORM, and the binding norm
+is set by the OPERATOR, not the coefficient vector** — then report BOTH numbers, because the
+corrected perturbation may mean far less than the original appeared to.
+
+**NOVELTY: see LITERATURE_CHECK.md fifth pass.** Route-I inherits Route-F/H's risk in full —
+**arXiv:2207.07548 now gates FOUR claims across THREE legs and is still the first paper to
+read.** "Dissipation regularizes the linearization of a self-similar rescaling" is my best
+guess at *standard* (the whole modulation-analysis programme lives there). The only candidate
+worth a specialist's time is that **the unstable inviscid directions ARE the log-periodic band,
+so mu deletes exactly the DSS-shaped modes**.
+
+---
+
+
 *Updated 2026-08-03 (session close, second update). **THIS SESSION SHIPPED ROUTE-H v1 — a real
 science leg that had been written but never run, plus the two documentation holes that hid it.**
 Read items (0a)-(0e) first; the previous session's four items follow and are still current.*

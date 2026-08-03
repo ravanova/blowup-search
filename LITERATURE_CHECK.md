@@ -297,6 +297,35 @@ paper to read, and it now gates three claims (Route-F's `s_c`, Route-H's `λ_μ`
 extension the eigenvalue framing) instead of one.
 
 
+## Fifth pass — Route-I v1's claims (NOT searched; recorded as unchecked, 2026-08-03)
+
+**Nothing here has been searched.** `WebFetch` is still 403 on every host. Same status as
+the fourth pass: a to-do list, not a finding.
+
+**INHERITED RISK, unchanged.** Route-I re-measures Route-H's `λ_μ = 2s − α₀` and `α₁`
+along a trajectory instead of off a static branch. Different computation, *same claim* —
+so it inherits Route-F/H's risk in full, and **arXiv:2207.07548 still gates it.** Reading
+that one paper now settles four claims across three legs.
+
+**THE ONE CLAIM THAT IS NEW IN KIND — and the one most likely to be standard.**
+"Dissipation regularizes the linearization of a self-similar rescaling": the inviscid
+rescaled fixed point has `~K` unstable directions and any `μ > 0` has none, with the
+crossover `μ*(K) ~ g/K^p`. My honest prior is that this is **well known in the
+parabolic-blowup literature** — the whole modulation-analysis programme (Merle–Raphaël and
+successors) works with viscous rescaled operators whose spectrum is discrete, and the
+inviscid/essential-spectrum contrast is the reason that programme exists. What may be less
+standard is the *specific* observation below.
+
+| candidate | why it might be new | why it might not | where to look |
+|---|---|---|---|
+| **The unstable inviscid directions ARE the log-periodic band** — `Re` rises with `|Im|`, `max|Im|` grows with `K`, leading eigenvalue `+4.55 + 430i` — **so `μ` deletes exactly the DSS-shaped modes** | it makes "the DSS lane is shut" a statement with a mechanism *and* an obstruction that is the same object in both the inviscid and viscous problems, rather than two separate null results | continuum spectrum of a rescaled hyperbolic operator being log-periodic is Route-E's own (already-at-risk) observation; that dissipation damps high-frequency modes hardest is elementary. The *combination* is the only candidate part | the log-lattice programme (arXiv:2312.01702 and successors); DSS literature for Euler/NS; Route-E's existing leads |
+| `μ*(K) ~ g/K^p` **as a non-commuting-limits diagnostic** | it is a cheap, general test for "is my stabilization an artifact of truncation" | almost certainly folklore in spectral-methods practice, just rarely written down | numerical-analysis texts on spectral discretization of stiff operators |
+
+**Do not claim novelty for any of it on the strength of this file.** The methodological
+items from passes two and four remain the only plausible candidates, and all remain
+unchecked.
+
+
 ## The honest summary
 
 Of four project claims checkable today, **two look pre-empted (finite support,

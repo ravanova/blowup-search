@@ -2157,6 +2157,99 @@ the toy analogue of the class that ESCAPES Necas-Ruzicka-Sverak, not a counterex
 Clay odds ~0.05%.
 
 
+## §30 — ROUTE-I v1 DONE (2026-08-03): THE MARGINAL FLOW DRIVEN. THE STABILITY INVERSION —
+## the INVISCID self-similar point has ~K unstable directions and ANY mu>0 has NONE; and the
+## unstable directions ARE Route-E's log-periodic band, i.e. mu DELETES the DSS-shaped modes.
+
+solver/marginal_flow.py + test_marginal_flow.py **11/11**; experiments/p2_route_i_v1_driven.py
+→ writeup/data/p2_route_i_v1_driven.json → **fig38**. BLOG/TECHNICAL_P2_ROUTEI_V1.md.
+Deterministic, NOT a logged Tier run (~5 min). **It moves NO link of the chain.**
+
+**WHY THIS LEG.** §29 wrote the augmented flow and read it STATICALLY (Newton at frozen mu,
+alpha off the branch, dynamics INFERRED). Two numbers came out that way and NEITHER was ever
+integrated. This integrates (F_mu)+(M) as an initial-value problem, which also answers the
+piece of ranked item (2) §27/§28 left open: **the scaling says which term dominates GIVEN the
+self-similar form — does a viscous solution actually REACH it?**
+
+**THE HEADLINE, AND IT WAS FOUND ON THE WAY.** At a=1/2 the INVISCID rescaled fixed point has
+**45/48, 93/96, 141/144 unstable directions (max Re +4.52/+4.55/+4.56)** — §26's essential
+spectrum seen as a COUNT. Nothing generic reaches a fixed point with a 141-dimensional
+unstable manifold. **Any mu>0 removes ALL of it**: the spectrum collapses to a discrete
+negative ladder (0, ~-1, ~-4.7) whose gap is flat in mu across four decades.
+
+**THE ARTIFACT TEST IS THE CROSSOVER'S K-SCALING.** Dissipation beats growth rate g once
+mu K^p >~ g, so mu*(K) ~ g/K^p should FALL under refinement — an artifact would have mu* flat
+or rising. Measured [1e-5,1e-4] at K=48, [1e-6,1e-5] at K=96 and K=144. **HONESTY ABOUT WHAT
+THAT RESOLVES:** the mu-ladder is DECADE-SPACED. 48→96 moves a full decade (x10 vs (C)'s x8)
+and carries the claim; 96→144 predicts only **x3, BELOW the ladder's resolution**, and duly
+does not move (x1.0) — consistent with (C) but **NOT independent evidence for it**. A finer
+mu ladder is the obvious next spend if this ever has to carry weight.
+
+**WHERE THE INSTABILITY LIVES — the part worth keeping.** The leading inviscid eigenvalue is
+**+4.5455 + 430.35i**, and max Re RISES with |Im| (+0.31/+0.72/+1.00/+2.25/+3.37/+4.55 at
+|Im|<=2/5/10/30/100/all, K=96), with max|Im| growing with K (430 at 96, 661 at 144). Those are
+Route-E's log-periodic continuum modes — **exactly what a DSS solution is built out of. So the
+fastest-growing inviscid directions ARE the DSS-shaped ones, and mu DELETES them rather than
+damping them** (at mu=0.05 the whole band is gone, max Re +2.6e-6). **Third independent reason
+the cheap DSS entrances do not work**, and sharper than §26's ("a continuum has no eigenvalue
+to move") or §29's ("dissipation discretizes it, and nothing crosses").
+
+**THE TWO CROSS-CHECKS PASS.** (i) **lambda_mu = 2s - alpha_0 as a GROWTH RATE**: predicted
+-2/-1/0/+1 measured **-2.00141/-1.00042/-0.00026/+1.00030**; line slope **+2.0011** (pred +2),
+zero at **s=1.50009** (pred 1.5), worst kept |err| 1.4e-3. Different grid, basis, formulation
+and fitted quantity from §27's. (ii) **alpha_1 dynamic vs static at MATCHED K**: 0.13236/0.13277
+(0.31%), 0.13330/0.13347 (0.13%), 0.13349/0.13363 (0.10%) at K=96/144/192 — **converging TOWARD
+each other**. Adiabaticity measured not assumed: distance to the frozen-mu branch **1.2e-4 →
+1.6e-6** over tau=0..600.
+
+**REFUSALS CARRY THIS LEG — FOUR OF THEM.** (1) **p=5 refused on the OPERATOR** (Lambda^p
+truncation **1.77**) even though its number, +2.00699, is the CLOSEST agreement in the table.
+**Gate the operator, not the agreement** — Route-H's H4 recurring. (2) **ALL THREE a=0.3 rungs
+refused on the PROFILE** (seed residual 6e-4..4e-3 vs 1e-9..1e-8 at the resonance), so **THIS
+LEG HAS NO OFF-RESONANCE CONTROL** and the law is confirmed at ONE a; p=3 there returns -3.39
+against a predicted +1.38. (3) a rate fit returning **+11.79 vs +4.62** because mu left the
+linear regime by tau=1.2 — bound the fit by the VARIABLE, not the TIME. (4) in the nonlinear
+control, **mu=0 and mu=1e-3 quoted as NOT ASYMPTOTIC** (fit residual **1.49/2.32** against
+**0.007/0.012** for the clean rows) rather than averaged in; the clean rows reproduce the
+spectral gap to **0.3% and 0.0%**.
+
+**TWO FAILURES FOUND WHILE FINISHING THE LEG, WRITTEN UP RATHER THAN PATCHED AWAY.**
+(a) **EVERY off-branch run NaN'd, and the NaN reached a PUBLISHED FIGURE LEGEND** reading
+`alpha_1 = nan`, three times, in a panel that had already been looked at. `_implicit_step` has
+a stagnation stop that RETURNS the unconverged iterate; nothing checked. Finiteness alone is
+NOT the fix either — with a partial repair the same run stayed finite and ended at
+**mu = -1.6e24**. The working discriminator is the implicit solve's own residual over its
+floor (**~6e2 healthy, 1e13 failed**), and `integrate` now reports `converged` from it.
+(b) **THE CAUSE: "small" in the wrong norm.** The perturbation was scaled to max|v_k| = 1 —
+small in COEFFICIENTS. But the gauge (N') carries b -> (Lambda^p Om)_X(0), and Lambda^p weights
+mode k by ~k^p with one more power from d/dX at the origin, so **|lam.v|/|lam.b| = 3.6e8**:
+eps=1e-3 was a **3.6e5 RELATIVE** perturbation of the quantity the flow DIVIDES BY. alpha came
+back **11713 instead of 3.037 AT tau=0**, before a single step. Same k^p amplification as
+Route-H's H4 — one mechanism, two legs, two symptoms.
+**AND THE FIX PRODUCED AN AWKWARD SENTENCE THAT IS KEPT:** normalized in the binding
+functional, eps=0.05 is a **5e-11 relative change in the PROFILE**. So the off-branch test is a
+strong test of the GAUGE-SENSITIVE direction and a **WEAK test of profile-scale robustness —
+it is NOT a basin measurement** and must not be cited as one. I7's twin trajectories are the
+profile-scale test. A separate Jacobian bug was fixed on the way (the gauge projection was not
+differentiated, on the true-on-branch/false-off-branch grounds that it "is analytically the
+zero map"); it changes no on-branch number, verified against all 10 pre-existing gates.
+
+**LESSONS BANKED (61)-(66).** (61) a number read off a trajectory needs a REGIME bound, not
+just a fit window. (62) difference against a TWIN trajectory to measure a perturbation off an
+inexact fixed point. (63) when a truncated operator becomes stable under a perturbation, the
+crossover's K-SCALING is the artifact test. (64) the dominant systematic CHANGES between legs
+— here the window contributes 2e-5 and K contributes 1e-3, the reverse of §27. (65) **a refused
+computation must be refused in the DATA STRUCTURE, not just the prose** — and finiteness is not
+the predicate. (66) **"small" is meaningless until you say IN WHICH NORM, and the binding norm
+is set by the OPERATOR, not the coefficient vector** — then report BOTH, because the corrected
+perturbation may mean less than the original appeared to.
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link
+of the chain moved, s=3/2 is HYPERviscosity. **"Linearly attracting in this norm at this
+truncation" is NOT "an attractor"** — the continuum operator's essential spectrum for mu>0 is
+not computed here. Clay odds ~0.05%.
+
+
 ## §A — ADVECTION SCOPE (scoping note, no figure): the eleven-leg bound programme is a=0-ONLY.
 
 Not a numbered Route-D leg — a scoping check that belongs with them. solver/advection_scope.py
