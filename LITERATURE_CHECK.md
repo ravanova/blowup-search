@@ -107,6 +107,57 @@ claim needs restating to say precisely *which* object stops existing.
   [arXiv:2305.05895](https://arxiv.org/pdf/2305.05895).
 - Our own anchor paper HQW25 = [arXiv:2401.14615](https://arxiv.org/pdf/2401.14615).
 
+## Third pass — the dissipation results, and one contamination check (2026-08-02)
+
+### A contamination hypothesis, tested and RULED OUT
+
+The quoted sentence *"`s*(a) = 1/c_l(a)`"* uses `c_l` — **this project's own
+notation** — which raised the possibility that the search backend had indexed
+**our repo** and was feeding our own claims back as "literature". Tested by
+searching for distinctive repo strings (`blowup-search`, `ravanova`, `Route-D`
++ `radii polynomial`): **no hits, the repo is not indexed.** The coincidence is
+innocent — `c_l` is the field's own notation for the focusing exponent
+(Lushnikov–Silantyev–Siegel), which this project adopted. Hypothesis closed, but
+worth re-running if we ever make the repo public.
+
+### The paper that most likely pre-empts Route-F — read this one FIRST
+
+[arXiv:2207.07548](https://arxiv.org/abs/2207.07548) / [Nonlinearity
+(IOP)](https://iopscience.iop.org/article/10.1088/1361-6544/ad140c), *Global
+existence and singularity formation for the generalized Constantin–Lax–Majda
+equation with dissipation: the real line vs. periodic domains*.
+
+Search reports it studies gCLM with dissipation `−Λ^σ` and:
+
+- proves **global existence for `σ ≥ 1`, all real `a`, small data** (periodic);
+- **derives new analytical solutions on the REAL LINE at `a = 1/2`** for various
+  `σ`, exhibiting self-similar finite-time singularity formation, **with the
+  similarity exponents and the conditions for singularity formation FULLY
+  CHARACTERIZED**;
+- reinterprets Schochet's `a = 0, σ = 2` solution as self-similar collapse.
+
+**This raises the risk on TWO of our claims at once:**
+
+1. **Route-F v1's `s_c(a) = α/2`** — a paper that "fully characterizes the
+   conditions for singularity formation" in terms of `σ` for this exact model is
+   the natural home for a dissipation-relevance threshold. **Risk: HIGH.**
+2. **`α(1/2) = 3`** — flagged in the continuation prompt as a novelty claim.
+   `a = 1/2` on the real line is *precisely* where this paper reports exact
+   analytical solutions with fully characterized exponents. **Risk: HIGH**, and
+   this one may be checkable by direct comparison of exponents once readable.
+
+Also relevant and unread: [arXiv:1908.09385](https://arxiv.org/abs/1908.09385),
+*Singularity formation and global well-posedness for the gCLM equation with
+dissipation*.
+
+### Revised reading order once full text is available
+
+1. arXiv:2207.07548 — gates Route-F v1 **and** `α(1/2)=3`. Highest value.
+2. arXiv:2607.19762 — gates Route-E v1 (already looks pre-empted).
+3. arXiv:2209.08232 — gates the finite-support finding of v12/v13.
+4. arXiv:2302.12877 — gates the methodological candidates (v3 no-go, v6 trap).
+5. Okamoto–Sakajo–Wunsch — restates rather than refutes `a*`.
+
 ## Second pass — the methodological candidates (searched 2026-08-02)
 
 Searched; **no direct hit for any of the three**. That is weak evidence of
