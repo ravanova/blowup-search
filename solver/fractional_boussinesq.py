@@ -420,7 +420,11 @@ def fit_collapse(res, T, lo=0.40, hi=0.94, keys=("Lx", "Ly", "Lgrad", "Lspec")):
     for k in keys:
         out[k] = float(np.polyfit(x, np.log(res[k][m]), 1)[0])
     out["amp_exponent"] = float(np.polyfit(x, np.log(amp[m]), 1)[0])
-    out["beta_max"] = max(out["Lx"], out["Ly"])
+    # beta_max is the FASTEST-collapsing direction and only exists when both directional
+    # diagnostics were asked for -- callers that want a single length scale (e.g.
+    # collapse_window_report, which sweeps windows on Lgrad alone) pass one key.
+    if "Lx" in out and "Ly" in out:
+        out["beta_max"] = max(out["Lx"], out["Ly"])
     return out
 
 

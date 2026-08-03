@@ -50,10 +50,18 @@ The invariant statement is about the **collapse exponent**. Let a blow-up have
 ω ~ (T−t)^{−1},        L ~ (T−t)^β.
 ```
 
-The amplitude exponent is not a modelling choice: `ω_t ~ ω²` forces it for any quadratically
-nonlinear transport, and the Boussinesq route reaches the same place (`ω_t ~ θ_x` with
-`θ ~ (T−t)^{β−2}`). Then, comparing the dissipation `ν (−Δ)^s ω ~ ν ω L^{−2s}` against the
-driving term `~ ω²`:
+The amplitude exponent is not a modelling choice, and the reason is the same in both models
+even though the *driving* terms differ. The velocity is recovered from the vorticity by an
+order-`−1` operator, so `u ~ ωL`, and hence the transport term is
+
+```
+u·∇ω  ~  (ωL)(ω/L)  =  ω²,
+```
+
+independent of `L`. Balancing that against `ω_t` gives `ω ~ (T−t)^{−1}`. In gCLM the same `ω²`
+appears directly as the stretching term `ω u_x`; in Boussinesq it arrives through transport,
+with the buoyancy `θ_x` sitting at the same order (`θ ~ (T−t)^{β−2}`, §6). Then, comparing the
+dissipation `ν (−Δ)^s ω ~ ν ω L^{−2s}` against that common `ω²` scale:
 
 ```
 D/N ~ ν (T−t)^{1 − 2sβ}      ⟹      s_c = 1/(2β).                (SC)
@@ -154,19 +162,31 @@ relaxed?
 | 400 | 1.14e+00 | −1.16222 | −0.379356 | 2.63604 | 0.18968 |
 | 1200 | 5.17e−01 | −1.08494 | −0.354131 | 2.82381 | 0.17707 |
 | 2500 | 1.67e−02 | −1.02656 | −0.335076 | 2.98439 | 0.16754 |
-| 4000 | PLACEHOLDER_4000 |
+| 4000 | 1.78e−02 | −1.04388 | −0.340728 | 2.93489 | 0.17036 |
 
-Monotone and settling by 2500, which is Spike-1 Step C's own protocol — kept deliberately, so
-that the 2500-step row is a **free reproducibility check** against
-`writeup/data/spike1_stepC_gate.json`, committed three legs ago. It reproduces `c_ω` to every
-printed digit (`−1.0265648734746011`).
+The approach is monotone until 2500 and then **stops being monotone**: the residual bottoms
+out around `1.7e−2` and `c_ω` moves back out to `−1.0439`. That is the relaxation settling into
+a residual floor, not converging further, and it is worth saying plainly — the last rung is not
+"more converged", it is a different point in the same basin. Spike 1's Step C used 2500 steps
+and that protocol is kept here deliberately, so the 2500-step row is a **free reproducibility
+check** against `writeup/data/spike1_stepC_gate.json`, committed three legs ago. It reproduces
+`c_ω` to every printed digit (`−1.0265648734746011`).
 
 **Resolution / domain ladder** (steps = 2500):
 
-PLACEHOLDER_RESLADDER
+| `n_r` | `n_β` | `r_max` | `c_ω` | `β = −c_l/c_ω` | `s_c` |
+|---|---|---|---|---|---|
+| 300 | 48 | 1e5 | −1.02656 | 2.98439 | 0.16754 |
+| 450 | 48 | 1e5 | −1.02331 | 2.99437 | 0.16698 |
+| 600 | 48 | 1e5 | −1.03120 | 2.96951 | 0.16838 |
+| 450 | 48 | 1e6 | −1.02933 | 2.97449 | 0.16810 |
 
-**And the disagreement is the result.** As read, `β = PLACEHOLDER_BETA_RAW`, which is
-**PLACEHOLDER_ERR_RAW%** from the published `2.92056` — noticeably worse than the accuracy of
+Spread `0.025` in `β` across a doubling of radial resolution and a tenfold extension of the
+domain — resolution-stable at the 0.8% level. Every row reproduces the committed Spike-1 value
+for the same configuration.
+
+**And the disagreement is the result.** As read, `β = 2.9807`, which is
+**2.1%** from the published `2.92056` — noticeably worse than the accuracy of
 its own ingredients. `c_ω`, the quantity the machine actually *computes*, comes out at
 `−1.0266` against `−1.02943`, i.e. **0.3%**. The discrepancy is entirely in the other factor:
 `c_l` is **pinned** by the frozen normalization and is supposed to be `3.00650`, but its
@@ -177,8 +197,8 @@ That is a gauge artifact, not a physical error, and it is correctable in the onl
 way: hold `c_l` to the value the normalization *sets* it to. Doing so gives
 
 ```
-β = PLACEHOLDER_BETA_GAUGE        (published 2.92056,  PLACEHOLDER_ERR_GAUGE% )
-s_c = PLACEHOLDER_SC_GAUGE        (published 0.171200)
+β = 2.9258 ± 0.011        (published 2.92056,  0.18% )
+s_c = 0.17090 ± 0.0007        (published 0.171200)
 ```
 
 Both numbers are reported — the raw reading and the gauge-corrected one — because the

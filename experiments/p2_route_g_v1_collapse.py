@@ -146,6 +146,21 @@ def g2_our_own_beta(quick=False):
     out["beta_spread"] = float(max(betas) - min(betas))
     out["s_c_mean"] = float(np.mean(scs))
     out["s_c_spread"] = float(max(scs) - min(scs))
+    # THE GAUGE-CORRECTED READING.  c_l is PINNED by the normalization and is supposed to
+    # BE the Chen-Hou gauge value; its discrete readout carries a ~1.9% quadrature bias
+    # from the origin-slope operator, and beta = -c_l/c_omega inherits it in full.  c_omega
+    # -- the quantity the machine actually computes -- is an order more accurate.  BOTH are
+    # reported: the correction is a choice about the gauge, and burying a named systematic
+    # behind a better-looking number is the move this project's discipline exists to stop.
+    bc = [-CHEN_HOU_C_L / x["c_omega"] for x in out["resolution_ladder"]]
+    out["beta_gauge_corrected_mean"] = float(np.mean(bc))
+    out["beta_gauge_corrected_spread"] = float(max(bc) - min(bc))
+    out["s_c_gauge_corrected_mean"] = float(np.mean([0.5 / b for b in bc]))
+    out["c_l_readout_mean"] = float(np.mean([x["c_l"] for x in out["resolution_ladder"]]))
+    out["c_l_pin_bias"] = float(out["c_l_readout_mean"] / CHEN_HOU_C_L - 1.0)
+    out["c_omega_mean"] = float(np.mean([x["c_omega"] for x in out["resolution_ladder"]]))
+    out["c_omega_rel_error"] = float(
+        abs(out["c_omega_mean"] - CHEN_HOU_C_OMEGA) / abs(CHEN_HOU_C_OMEGA))
     out["published_beta"] = chen_hou_beta()
     out["relative_error_vs_published"] = float(
         abs(out["beta_mean"] - chen_hou_beta()) / chen_hou_beta())
@@ -169,7 +184,7 @@ def g3_direct_route(quick=False):
     t0 = time.time()
     ref = FractionalBoussinesq(n=n, nu=0.0, s=1.0)
     r0 = ref.run(w0, th0, amp_factor=1e4, sample_every=10, max_steps=200000,
-                 wall_max=600.0)
+                 wall_max=300.0)
     T0 = estimate_T(r0)
     fc = fit_collapse(r0, T0)
     rep = collapse_window_report(r0, T0)
@@ -189,7 +204,7 @@ def g3_direct_route(quick=False):
         t0 = time.time()
         sv = FractionalBoussinesq(n=n, nu=1e-3, s=s)
         r = sv.run(w0, th0, amp_factor=1e4, sample_every=10, max_steps=200000,
-                   wall_max=600.0)
+                   wall_max=300.0)
         T = estimate_T(r)
         fr = fit_relevance(r, T)
         fcs = fit_collapse(r, T)
@@ -288,10 +303,20 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--only", default="")
+    ap.add_argument("--out", default="p2_route_g_v1_collapse.json",
+                    help="output filename under writeup/data/ -- lets the expensive G2 "
+                         "stage run in parallel with G3/G4 and be merged afterwards, "
+                         "since the merge-on-load happens once at startup and two "
+                         "concurrent writers to one file would clobber each other")
     args = ap.parse_args()
     DATA.mkdir(parents=True, exist_ok=True)
 
-    payload = {"leg": "Route-G v1", "quick": args.quick}
+    # MERGE, do not clobber: the stages have very different costs (G2 is ~55 min, G3/G4
+    # a fraction of that), so they must be runnable separately and accumulate into one
+    # artifact.  Re-running a stage overwrites only that stage.
+    _path = DATA / args.out
+    payload = json.loads(_path.read_text()) if _path.exists() else {}
+    payload.update({"leg": "Route-G v1", "quick": args.quick})
     print("G0/G1  the law and the published constants", flush=True)
     payload["g0_law"] = g0_the_law()
     payload["g1_chen_hou"] = g1_chen_hou()
@@ -299,18 +324,28 @@ if __name__ == "__main__":
         print(f"  {r['object']:42s} beta={r['beta']:8.5f} s_c={r['s_c']:8.5f} "
               f"p(s=1)={r['p_at_s1']:+8.4f}")
 
+    path = _path
+
+    def save():
+        """Write after EVERY stage.  The first version of this script wrote once at the
+        end, and a KeyError in the third stage discarded 55 minutes of the second one.
+        A long run must bank each stage as it completes."""
+        path.write_text(json.dumps(payload, indent=1))
+
+    save()
     want = set(args.only.split(",")) if args.only else {"g2", "g3", "g4"}
     if "g2" in want:
         print("G2  beta from our own dynamically-rescaled 2D machine", flush=True)
         payload["g2_our_beta"] = g2_our_own_beta(args.quick)
+        save()
     if "g3" in want:
         print("G3  the direct time-dependent route (expected: refused)", flush=True)
         payload["g3_direct"] = g3_direct_route(args.quick)
+        save()
     if "g4" in want:
         print("G4  cross-model calibration (where is the 2D object on gCLM's dial?)",
               flush=True)
         payload["g4_cross_model"] = g4_cross_model(args.quick)
+        save()
 
-    path = DATA / "p2_route_g_v1_collapse.json"
-    path.write_text(json.dumps(payload, indent=1))
     print(f"\nwrote {path}")

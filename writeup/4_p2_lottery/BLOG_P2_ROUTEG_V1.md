@@ -97,7 +97,24 @@ distance on the 2D object rather than by analogy.
 
 I did not want to take it on the paper's word, so I re-measured it with the machine Spike 1
 built a month ago: relax the dynamically-rescaled 2D Boussinesq system to its steady profile and
-read `β = −c_l/c_ω` off the modulation constants. **PLACEHOLDER-B**
+read `β = −c_l/c_ω` off the modulation constants.
+
+It came out at **2.981**, against the published 2.921. Two percent off — and that is worse than
+it should be, so I went and found out why.
+
+The machine computes `c_ω`. It does *not* compute `c_l`: the normalization **pins** `c_l`, and
+you set it. It is supposed to be `3.00650`. Its discrete readout is `3.0637` — a 1.9% quadrature
+bias in the origin-slope operator. And `β = −c_l/c_ω` inherits that in full. Meanwhile `c_ω`,
+the number the machine actually produces, lands at `−1.0276` against `−1.02943`: **0.18%**.
+
+So the honest version has two numbers in it. As read, `β = 2.981` (2.1% off). Holding `c_l` to
+the value the gauge is *set* to, `β = 2.926 ± 0.011` and `s_c = 0.1709` — 0.18% from published.
+Both go in the writeup, because the correction is a choice about the gauge, and hiding a named
+1.9% systematic behind a better-looking number is precisely what this project's discipline
+exists to stop.
+
+Resolution-stable, too: doubling the radial resolution and extending the domain tenfold moves
+`β` by 0.025.
 
 ---
 

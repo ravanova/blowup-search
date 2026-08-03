@@ -1,0 +1,48 @@
+{
+ "leg": "Route-G v1",
+ "quick": false,
+ "g0_law": {
+  "rows": [
+   {
+    "object": "gCLM a=0 (alpha=1)",
+    "beta": 1.0,
+    "s_c": 0.5,
+    "p_at_s1": -1.0
+   },
+   {
+    "object": "gCLM a~0.383 (alpha=2) = NS-critical",
+    "beta": 0.5,
+    "s_c": 1.0,
+    "p_at_s1": 0.0
+   },
+   {
+    "object": "NAVIER-STOKES (dimensional analysis)",
+    "beta": 0.5,
+    "s_c": 1.0,
+    "p_at_s1": 0.0
+   },
+   {
+    "object": "gCLM a=0.5 (alpha=3)",
+    "beta": 0.3333333333333333,
+    "s_c": 1.5,
+    "p_at_s1": 0.33333333333333337
+   },
+   {
+    "object": "Chen-Hou 2D Boussinesq",
+    "beta": 2.9205610051341666,
+    "s_c": 0.17119998490736224,
+    "p_at_s1": -4.841122010268333
+   }
+  ],
+  "note": "s_c = 1/(2 beta).  p(s) = 1 - 2 beta s is the relevance exponent of D/N ~ (T-t)^p; p > 0 means dissipation loses.  p_at_s1 is the value at the ORDINARY Laplacian, so its sign says directly whether the object beats ordinary viscosity."
+ },
+ "g1_chen_hou": {
+  "c_l": 3.00649898,
+  "c_omega": -1.02942516,
+  "alpha_2D": -0.3423999698147245,
+  "beta": 2.9205610051341666,
+  "s_c": 0.17119998490736224,
+  "ratio_to_NS": 5.841122010268333,
+  "p_at_ordinary_laplacian": -4.841122010268333
+ }
+}
