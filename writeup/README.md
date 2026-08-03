@@ -290,7 +290,7 @@ writeup/
     carries the dissipation, and the cross-model calibration shows the toy's dial and its
     target sit on **opposite sides** of the NS line. *(fig 36)*
 
-35. [TECHNICAL_P2_ADVECTION_SCOPE.md](4_p2_lottery/TECHNICAL_P2_ADVECTION_SCOPE.md) ·
+39. [TECHNICAL_P2_ADVECTION_SCOPE.md](4_p2_lottery/TECHNICAL_P2_ADVECTION_SCOPE.md) ·
     [BLOG_P2_ADVECTION_SCOPE.md](4_p2_lottery/BLOG_P2_ADVECTION_SCOPE.md) — **the advection
     scope of the bound programme**, a scoping note with no figure. Every Route-D leg gated
     against the `a = 0` anchor — which is exactly where the advection term is **absent**. So
@@ -303,6 +303,29 @@ writeup/
     **reproducibility rather than magnitude** (grid-spread 0.4%/2.6% vs 5%/**99%**), and that
     this note's "stagnation point" is better read as v12/v13's **edge of support**.
     *(no figure — the numbers reproduce by running `test_advection_scope.py`)*
+
+40. [TECHNICAL_P2_ROUTEH_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEH_V1.md) ·
+    [BLOG_P2_ROUTEH_V1.md](4_p2_lottery/BLOG_P2_ROUTEH_V1.md) — **Route-H v1**, the
+    **marginal case**: what happens *at* `s = s_c`, where the scaling comparison the two
+    previous legs rest on returns `0 = 0`. **That point is where NS sits** (`β = 1/2 ⇒ s_c = 1`,
+    the ordinary Laplacian), so it is the case rather than a corner of it. Carrying the
+    dissipation through the dynamic rescaling makes its coefficient `μ = ν/(AL^{2s})` an
+    **autonomous dynamical variable**, `μ_τ = (2s − α)μ` — which turns Route-F's `s_c` into the
+    **eigenvalue** `λ_μ = 2s − α₀`, and at criticality that eigenvalue is exactly zero, leaving
+    `μ_τ = −α₁μ²` and **one number**, `α₁ = dα/dμ`. Measured at the two resonances where `Λ^{2s}`
+    is exact: **`α₁ = 0` at `a = 0`** (a *line* of viscous self-similar blow-ups, gated against a
+    closed-form viscous blow-up that Newton rediscovers from a cold start to `1e−15`), and
+    **`α₁ = +0.1337` at `a = 1/2`** (`K`-spread `9.1e−4`) — so `μ` decays, but **algebraically**:
+    each decade costs nine times the last. Two refusals are the load-bearing part. The third
+    resonance is **NOT REACHED**, and would have shipped the *opposite* sign off an `α` excursion
+    two orders below its own residual — the gate is now "is there signal above the solve error",
+    not "did it converge". And the **DSS re-ask**: dissipation genuinely *does* discretize
+    Route-E's continuum (converged eigenvalues `2 → 8`, condensing onto the negative integers),
+    removing the mechanism that shut that lane — **and the lane stays shut on better evidence**,
+    since everything lands on the negative real axis with max `Re = +3e−13` and nothing complex
+    (the pair first flagged as complex was split by `|Im| = 1.8e−5`; the driver now reports a
+    magnitude, not a boolean). Positive control: `6 → 9` with one at `Re = +1.58`. *(fig 37)*
+
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
 record of what has been checked against the literature and what has not — three passes,
@@ -345,6 +368,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig25_route_d_v7_seminorm.png` | 4 | P2 — Route-D v7: the `J^γ` localized to the near diagonal, the split Hilbert bound, the `J`-free derivative-gain closure bracketing `‖A‖`, the `(α,γ)` map made of upper bounds, and the price the honest `‖A‖` puts on the matching radius |
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
+| `fig37_route_h_v1_critical.png` | 4 | P2 — Route-H v1: `s_c` read as the stability eigenvalue `2s − α₀` with the marginal point marked, the `a = 0` neutral line against its closed form, the `a = 1/2` secant extrapolation that gives `α₁` with its `K`-ladder, the DSS re-ask (dissipation discretizes the continuum onto the negative integers and nothing crosses), the time-dependent cross-check at `s = 1/2` exactly, and `μ(τ)` decaying algebraically rather than exponentially |
 | `fig36_route_g_v1_collapse.png` | 4 | P2 — Route-G v1: the law `s_c = 1/(2β)` with every object on it (gCLM's dial, Chen–Hou 2D Boussinesq, and NS at `β = 1/2` exactly), `β` re-measured by our own dynamically-rescaled 2D machine as a modulation constant, the direct time-dependent route refused with its reason, the underpowered `p(s)` line kept for its sign structure, the cross-model calibration on gCLM's dial, and who beats the ordinary Laplacian as a signed bar |
 | `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
 | `fig34_p2_route_e_v1_spectrum.png` | 4 | P2 — Route-E v1 (the DSS lane): the self-similar branch's far-field exponent `α(a)` with its Richardson ladder, spectral-vs-algebraic convergence set by the profile's own regularity, the residual scan that locates the analytic resonance at `a = 1/2`, the whole `a = 0` spectrum against the analytically known continuum strip `−1 < Re λ < 1`, the converged spectrum vs `a` (only the two symmetry modes — no Hopf), and the planted-eigenvalue positive control |
@@ -374,6 +398,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v7_seminorm.json` | Arc 4 / fig25 — V1 the near-diagonal localization of the `J^γ`, V2 the split `|H(h)|` bound, V3 the derivative-gain closure ladder, V4 the `(α,γ)` upper-bound map, V5 the matching radius the honest `‖A‖` forces, V6 the interpolant defect + the ledger |
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
+| `p2_route_h_v1_critical.json` | Arc 4 / fig37 — H1 the closed-form viscous blow-up and its PDE residual in closed form, H2 the `a = 0` marginal branch (`α ≡ 1`, `α₁ = 0`), H3 the `a = 1/2` branch with the `K = 96..240` ladder and both the secant extrapolant and the chord it corrects, H4 the third point REFUSED with its signal-to-residual ratio and the verdict it would have quoted, H5 the dissipative spectrum vs `μ` with the integer ladder and the planted control, H6 the verdict with its `τ` scales, H7 the time-dependent cross-check with its `under_resolved` caveat |
 | `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
 | `p2_route_e_v1_spectrum.json` | Arc 4 / fig34 — E1 the exact `a = 0` anchor and its two analytically predicted eigenvalues, E2 the branch `α(a)` with a `K = 64/128/256` ladder and Richardson, E3 spectral (`a = 1/2`) vs algebraic (`a = 0.3`) convergence plus the fine residual scan that finds the resonance, E4 the two structural identities gated, E5 the converged spectrum vs `a` with a tolerance ladder, E6 the planted-eigenvalue positive control, E7 the end of the branch |
@@ -415,6 +440,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_e_v1_evidence.py         # fig34
 .venv/bin/python writeup/4_p2_lottery/p2_route_f_v1_evidence.py         # fig35
 .venv/bin/python writeup/4_p2_lottery/p2_route_g_v1_evidence.py         # fig36
+.venv/bin/python writeup/4_p2_lottery/p2_route_h_v1_evidence.py         # fig37
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):

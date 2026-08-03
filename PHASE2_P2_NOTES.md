@@ -2003,6 +2003,160 @@ HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigo
 the chain moved, and this is orientation rather than evidence about NS. Clay odds ~0.05%.
 
 
+## §28 — ROUTE-G v1 DONE (2026-08-02): THE PORT BROKE THE PREVIOUS LEG'S FORMULA, AND THAT
+## IS THE RESULT. The invariant law is s_c = 1/(2 beta), NS is beta = 1/2, and the proven 2D
+## blow-up is on the LOSING side of the ordinary Laplacian by a factor of six.
+
+solver/fractional_boussinesq.py + test_fractional_boussinesq.py; experiments/
+p2_route_g_v1_collapse.py → writeup/data/p2_route_g_v1_collapse.json (+ _g2.json, merged)
+→ fig36. BLOG/TECHNICAL_P2_ROUTEG_V1.md. Deterministic, NOT a logged Tier run.
+**This section was MISSING from these notes until 2026-08-03** — the leg was written up in
+writeup/ and indexed in the README, but never landed here; §B recorded only its ops. Fixed.
+
+**WHY THIS LEG.** §27 merged ranked items (2) and (3): the same s_c arithmetic applied to a 2D
+object is the version of the viscosity question that is about a real mechanism rather than a 1D
+caricature. **It moves NO link of the chain.**
+
+**THE PORT BREAKS THE FORMULA, WHICH IS THE POINT.** Route-F's s_c = alpha/2 is true in gCLM
+ONLY because that rescaling pins c_l = 1. The invariant statement is
+
+    s_c = 1/(2 beta),   L ~ (T-t)^beta,
+
+with 1D the beta = 1/alpha case. **NS is beta = 1/2 ⇒ s_c = 1 exactly.** Two things invisible in
+1D: (i) **s_c DECREASES with beta**, so a FASTER collapse loses to viscosity more easily and
+beating ordinary viscosity needs an anomalously SLOW collapse (beta < 1/2); (ii) the far-field
+decay exponent and the collapse rate are ONE fact (alpha = -1/beta — the statement that the
+blow-up does not disturb the outer solution), which is why alpha/2 looked like a law.
+
+**WHERE THE PROVEN OBJECT SITS.** Chen–Hou 2D Boussinesq: **beta = 2.92, s_c = 0.171** — nearly
+six times the NS collapse rate, and nowhere near beating the ordinary Laplacian.
+
+**G2, OUR OWN beta.** Measured by this project's own dynamically-rescaled 2D machine as a
+modulation constant rather than taken from the paper, on a steps ladder and a resolution/domain
+ladder. See §B for how that stage was orphaned by a killed container, recovered without a
+re-run, and then cut from ~41 min to ~16.
+
+**G3 THE DIRECT ROUTE, PRICED AND REFUSED**, with the window report and the underpowered p(s)
+line kept for its SIGN STRUCTURE rather than its magnitudes. G4 cross-model calibration on
+gCLM's dial, including a continuation to a < 0.
+
+HONEST CEILING: plain float64, nothing interval-enclosed, nothing rigorous, no link of the chain
+moved. This is arithmetic about collapse rates, NOT a claim about NS and NOT a claim that a
+viscous blow-up exists anywhere on the map.
+
+
+## §29 — ROUTE-H v1 DONE (2026-08-03): THE MARGINAL CASE. mu BECOMES A DYNAMICAL VARIABLE, so
+## Route-F's s_c is an EIGENVALUE and criticality reduces to the SIGN OF ONE NUMBER, alpha_1.
+## Dissipation DOES discretize Route-E's continuum — and the DSS lane stays shut anyway.
+
+solver/critical_dissipation.py + test_critical_dissipation.py **10/10**; experiments/
+p2_route_h_v1_critical.py → writeup/data/p2_route_h_v1_critical.json → **fig37**.
+BLOG/TECHNICAL_P2_ROUTEH_V1.md. Deterministic, NOT a logged Tier run (~10 min).
+
+**WHY THIS LEG.** §27 and §28 both stopped at the same wall: AT s = s_c the two terms balance
+identically and scaling returns ZERO INFORMATION. **That is exactly where NS sits** (beta = 1/2
+⇒ s_c = 1, the ordinary Laplacian), so the marginal case is not a corner of the map — it is the
+case. **It moves NO link of the chain.**
+
+**THE REFRAME.** Keep the dissipative term through the dynamic rescaling and its coefficient
+mu = nu/(A L^{2s}) becomes an autonomous DYNAMICAL VARIABLE:
+
+    Omega_tau = (c_omega + H Omega) Omega - X Omega_X - a U Omega_X - mu Lambda^{2s} Omega
+    mu_tau    = (2s - alpha[Omega, mu]) mu ,        alpha = -c_omega .
+
+**(i) Route-F's s_c is the EIGENVALUE lambda_mu = 2s - alpha_0** of the inviscid fixed point in
+the mu-direction — a scaling exponent becomes a stability exponent. **(ii) AT criticality that
+eigenvalue is exactly zero**, so the quadratic term decides: mu_tau = -alpha_1 mu^2 with
+alpha_1 = d alpha/d mu. **ONE NUMBER, and only its sign.**
+
+**THE GAUGE HAD TO BE RE-DERIVED** (banked lesson 48 applied to the previous leg's own gauge):
+Lambda^{2s} Omega is odd, so its X-derivative at 0 is NOT zero and
+c_omega = 1 + (a-1)H(Omega)(0) + mu (Lambda^{2s}Omega)_X(0)/Omega_X(0). Gate 3 finite-differences
+the resulting Jacobian to **4.0e-11** because (N') contributes a quotient.
+
+**H1 THE KNOWN ANSWER.** At a = 0, s = 1/2 complexification (z = H(omega)+i omega, Lambda z =
+i z_x) turns the viscous CLM equation into z_t + i nu z_x = z^2/2, whose characteristics are a
+CONSTANT complex shift. Out drops an exact viscous blow-up
+omega = -2(1+mu_0) kappa x/(kappa^2(T-t)^2 + x^2) with ||omega||_inf = (1+mu_0)/(T-t), for EVERY
+nu and every mu_0. PDE residual in closed form (no quadrature, no differencing): **6.3e-16**.
+
+**H2 a = 0 CARRIES A LINE.** In rescaled variables that family is Omega = -(1+mu_0) sin theta
+with **alpha == 1 IDENTICALLY**, so alpha_1 = 0 and the marginal direction is neutral to ALL
+orders. Newton from a cold start rediscovers it: alpha = 1.00000000000000 and |num-exact| <=
+8.4e-15 at mu = 0 ... 4, i.e. where the dissipative term is FOUR TIMES everything else.
+
+**H3 a = 1/2, s = 3/2: alpha_1 = 0.133683 > 0, so mu DECAYS** — verdict relaxes_to_inviscid.
+K = 96/144/192/240 gives 0.132770/0.133470/0.133628/0.133683, **spread 9.1e-4**, while the
+Lambda^3 truncation falls 0.084 -> 0.010. **THE CHORD IS NOT THE DERIVATIVE**: a straight fit of
+alpha vs mu over mu <= 0.2 returns 0.1264 against the extrapolated 0.1337, **5.5% wrong in the
+one number the verdict is quoted from**, so the SECANTS are fitted and extrapolated to mu = 0.
+
+**H4 THE THIRD POINT IS NOT REACHED, AND THE REFUSAL PREDICATE IS THE LESSON.** At a =
+0.5821792673, s = 5/2 the K = 288 rung converges to a respectable-looking 1e-4 and
+alpha_slope returns **alpha_1 = -0.0017, the OPPOSITE verdict to a = 1/2**. It is not a
+measurement: the whole excursion of alpha across the mu-window is **2.0e-5, a factor of 19 BELOW
+the residual**. Refusing on the residual alone would NOT have caught it. The gate is now
+`drift > 10 x worst residual` — "is there signal above the solve error", a stricter question
+than "did it converge" — and it is unit-tested (gate 10) against those exact numbers.
+**Second finding: §2's "lucky alignment" was overstated and is corrected in place.** Landing on
+an odd-integer alpha makes Lambda^{2s} a FINITE matrix; it does not make the COMPOSITE accurate.
+Lambda^p weights mode k by k^p and so amplifies precisely the coefficients the single final
+truncation discards — measured worst truncation ratio **1.7e4 at K = 192 and 1.5e3 at K = 288** (p = 5). It DOES
+fall (~K^-4) but from so far above 1 that trustworthy Lambda^5 needs K ~ 3000.
+The alignment buys p = 1 and p = 3 and does not buy p = 5. **alpha_1 at the third resonance is
+UNMEASURED and the two-point trend has no third point holding it up.**
+
+**H5 THE DSS RE-ASK — THE LEG'S MOST INTERESTING NEGATIVE.** §26 shut the DSS lane with a
+MECHANISM: the non-symmetry spectrum is CONTINUOUS, and a continuum has no eigenvalue to move.
+**Dissipation removes that mechanism.** Converged eigenvalues go **2 -> 8** as mu runs 0 -> 4 and
+condense onto a ladder of NEGATIVE INTEGERS ([-1,0] at mu=0; [-7,...,-2,0] at mu=4).
+**And the lane stays shut anyway, on better evidence:** everything that condenses lands on the
+negative real axis, max Re = **+3.3e-13** (i.e. zero), and nothing is complex — the pair flagged
+at mu = 2 sits at Re = -3 split by **|Im| = 1.8e-5**, a degenerate real pair resolved to noise.
+**The boolean "any complex?" read TRUE for that pair**, so the driver now reports the largest
+|Im| instead. The one mode that moves is the amplitude mode, at **-sqrt(1+4mu) to 2.1e-9** —
+EMPIRICAL, not derived — and it moves LEFT: more stable, not less. Positive control (lesson 47):
+planting a localized potential takes the same filter 6 -> 9 converged with one at **Re = +1.58**.
+
+**H7 CROSS-CHECK THROUGH UNRELATED MACHINERY** (periodic pseudo-spectral, RK4, fitted T — nothing
+about the compactified steady solve enters it): at s = 1/2 exactly the prediction is p = 0 and
+the measurement (n = 8192) is **p = +0.006, spread 0.007 across nu**, with a within-nu window
+spread of ~0.04 that is LARGER than the deviation from zero — so the window is the honest error bar.
+**Caveat stated, not buried: every run ends `under_resolved`**; the solver refuses to integrate
+past its tail criterion (lesson 45), so each trajectory stops short of T. What softens it is the `reached`
+column, recorded for exactly this reason: **each run gets to 99.97% of the fitted singular
+time** before refusing.
+
+**H6 THE VERDICT, WITH THE TIME SCALE.** alpha_1 > 0 means mu decays **ALGEBRAICALLY**,
+mu ~ 1/(alpha_1 tau), because the linear term is gone. At alpha_1 = 0.1337, mu: 0.2 -> 0.02 costs
+tau = 337 and -> 0.002 costs tau = 3703 — **nine times per decade, forever**, and tau is itself
+logarithmic in (T-t). Criticality is not a barrier, it is a tar pit.
+
+**NOVELTY: UNCHECKED, AND PROBABLY THIN.** (E) is at HIGH risk — explicit viscous CLM solutions
+by complexification go back to Schochet (CPAM 1986), and the dissipative-gCLM relevance exponent
+is reported in arXiv:1908.09385 / arXiv:2207.07548, which already puts Route-F at risk;
+lambda_mu = 2s - alpha_0 is the same statement in spectral clothing and inherits that risk in
+full. The three METHODOLOGICAL candidates — mu as an autonomous coordinate, alpha_1 as the
+marginal invariant, and H5's discretization-without-crossing — remain unchecked. See
+LITERATURE_CHECK.md.
+
+**LESSONS BANKED.** (56) **A fitted chord is not a derivative** — extrapolate the secants, and
+say by how much the chord was wrong. (57) **"Did it converge?" is the wrong refusal predicate for
+a derivative; "is the signal above the solve error?" is the right one** — and the wrong one
+would have shipped a sign flip. (58) **Report a magnitude, not a boolean, for anything you are
+claiming the absence of** — "any complex eigenvalues?" answered TRUE for a pair split by 1.8e-5.
+(59) **A structural coincidence that makes an operator FINITE does not make it ACCURATE**;
+price the composite, not the ingredient. (60) **Check the monotonicity of your own headline IN
+WORDS, as a test.** "alpha_1 > 0 ⇒ mu DECAYS" is the opposite of the reflex reading ("more
+dissipation, more dissipation"); `marginal_verdict` returns a sentence and gate 6 asserts which
+sentence, so a dropped sign fails a test instead of shipping.
+
+HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link of
+the chain moved, s = 3/2 is HYPERviscosity, and (E) decays like 1/x so it is NOT finite energy —
+the toy analogue of the class that ESCAPES Necas-Ruzicka-Sverak, not a counterexample to it.
+Clay odds ~0.05%.
+
+
 ## §A — ADVECTION SCOPE (scoping note, no figure): the eleven-leg bound programme is a=0-ONLY.
 
 Not a numbered Route-D leg — a scoping check that belongs with them. solver/advection_scope.py

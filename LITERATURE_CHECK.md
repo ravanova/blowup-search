@@ -256,6 +256,47 @@ reported to control the density in `C^γ` with **γ ≈ 1/3** up to the singular
 a regularity exponent, not a dissipation exponent — **do not conflate it with `s_c`**, and
 note that `0.171` and `1/3` are close enough to invite exactly that error.
 
+## Fourth pass — Route-H v1's claims (NOT searched; recorded as unchecked, 2026-08-03)
+
+**Nothing here has been searched.** `WebFetch` remains 403 on every host and this pass
+was written from what the leg's own construction implies about its risk, not from a
+query. It is a to-do list, not a finding, and it is filed so the next session does not
+have to reconstruct it.
+
+**AT HIGH RISK — presume known.**
+
+1. **The closed-form viscous CLM blow-up (E).** Explicit solutions of the *viscous* CLM
+   equation by complexification (`z = H(ω) + iω`, `Λz = i z_x`, reducing to a complex
+   Burgers equation with constant complex characteristics) go back to **Schochet, CPAM
+   1986**. The leg does not claim it and uses it only as a known-answer gate — which is
+   the right use for something at this risk level, and the writeups say so.
+2. **`λ_μ = 2s − α₀`.** This is Route-F's `s_c = α/2` in spectral clothing: the same
+   number, re-derived as a stability exponent instead of fitted from a trajectory.
+   Route-F's claim is already the one at "serious risk" in the summary below —
+   arXiv:2207.07548 is flagged as the paper most likely to pre-empt it — so **Route-H
+   inherits that risk in full**. Reading 2207.07548 settles both at once, which raises
+   its priority rather than adding a new item.
+
+**METHODOLOGICAL CANDIDATES — unchecked, and the only place novelty plausibly sits.**
+These join the three from the second pass (discrete-ball trap, weighted-ℓ¹ no-go,
+elasticity discipline) with the same status: no hit is not evidence, because nobody has
+searched.
+
+| candidate | why it might be new | why it might not | where to look |
+|---|---|---|---|
+| **`μ` as an autonomous coordinate of the rescaled flow**, so a scaling threshold becomes a stability eigenvalue | it converts a dimensional-analysis statement into a spectral one, and makes the *marginal* case a normal-form question rather than an empty one | anyone who writes a dynamic rescaling with a dissipative term has `μ_τ = (2s − α)μ` two lines away; this is exactly the kind of thing that is standard and unwritten | the log-lattice programme (Campolina–Mailybaev, arXiv:2312.01702 and successors) — the same "measure the exponent, not the threshold" discipline; and the modulation-equation literature around Merle–Raphaël |
+| **`α₁ = dα/dμ` as the marginal invariant**, with its sign the whole verdict | it is a specific, cheap, checkable number attached to a case usually reported as "no information" | it is the leading coefficient of an obvious expansion once the previous row is granted | same |
+| **Critical dissipation discretizes the inviscid continuum onto the negative integers without producing anything that could cross** | it is a concrete spectral statement about what a dissipative perturbation does to a continuous spectrum in this class, with a positive control behind it | continuum-to-discrete under a dissipative perturbation is a classical phenomenon; the *content* is the "and nothing crosses", which is a null result about one model | Route-E's own leads on the gCLM spectral picture (already flagged as likely pre-empted), plus standard fractional-dissipation spectral theory |
+
+**The honest ranking:** item 3 is the one worth a specialist's five minutes. Items 1 and
+2 should be presumed known until someone checks. **No claim of novelty should be made for
+any of them on the strength of this file.**
+
+**Reading order impact:** unchanged at the top — arXiv:2207.07548 is still the first
+paper to read, and it now gates three claims (Route-F's `s_c`, Route-H's `λ_μ`, and by
+extension the eigenvalue framing) instead of one.
+
+
 ## The honest summary
 
 Of four project claims checkable today, **two look pre-empted (finite support,

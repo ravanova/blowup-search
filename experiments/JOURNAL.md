@@ -3,6 +3,73 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-H v1: the marginal case, where scaling says nothing (non-logged) — 2026-08-03
+
+**NOT a logged gate run** (deterministic; no GA, no seeds; ~10 min). Code
+`solver/critical_dissipation.py` + `test_critical_dissipation.py` (10/10);
+`experiments/p2_route_h_v1_critical.py` → `writeup/data/p2_route_h_v1_critical.json` →
+fig37. Writeups TECHNICAL/BLOG_P2_ROUTEH_V1.md; PHASE2_P2_NOTES §29 (and §28, the
+Route-G section that had been missing from the notes, added at the same time).
+
+What a human would want to know:
+
+- **Why bother with the case where the argument gives nothing.** Routes F and G both
+  ended on "at s = s_c the two terms balance identically, so this returns zero
+  information", and both filed it as a caveat. It isn't a caveat — β = 1/2 for NS makes
+  s_c = 1 exactly, so the marginal point IS Navier–Stokes. The whole leg is the
+  observation that a caveat repeated twice was the subject.
+
+- **The one idea: μ is a coordinate, not a nuisance parameter.** Keeping the dissipative
+  term through the dynamic rescaling gives μ_τ = (2s − α)μ. That single extra equation
+  turns Route-F's fitted threshold into an eigenvalue, and makes the marginal case a
+  normal-form question with one coefficient, α₁ = dα/dμ. Only the SIGN matters.
+
+- **The a = 0 gate is unusually strong and I want to say why.** Complexification gives an
+  exact viscous blow-up in elementary functions. The numerics do not know it: they solve
+  the rescaled system with a re-derived gauge at μ = 4, where the dissipative term is four
+  times everything else, and land on the closed form to 1e−15 with α = 1.00000000000000
+  at every μ. "Build the same object twice" with a genuinely independent second build.
+
+- **Two refusals, and they are the load-bearing part of the leg.**
+  (a) THE CHORD IS NOT THE DERIVATIVE. Fitting α against μ over any finite window
+  returns the chord — 0.1264 against the true 0.1337, 5.5% wrong in the one number the
+  verdict is quoted from. Fixed by extrapolating the secants.
+  (b) THE THIRD POINT WOULD HAVE SHIPPED A SIGN FLIP. At K = 288 it converges to a
+  respectable 1e−4 and returns α₁ = −0.0017 — the opposite verdict to a = 1/2, and a
+  headline. It is not a measurement: the whole excursion of α across the μ-window is
+  2.0e−5, a factor of 19 BELOW the residual. Refusing on the residual alone would not have
+  caught it. The predicate is now "is there signal above the solve error", it is unit
+  tested against those exact numbers, and this is the thing I would most want a reader
+  of this leg to take away.
+
+- **I overstated the "lucky alignment" in my own module docstring and H4 caught it.**
+  Landing on an odd-integer α makes Λ^{2s} a FINITE matrix; I wrote that as if it made the
+  composite ACCURATE. Λ^p weights mode k by k^p, so it amplifies precisely the coefficients
+  the single final truncation throws away — worst truncation ratio 1.7e4 at K = 192, 1.5e3 at
+  K = 288. It does fall (~K^−4) but starts so high that trustworthy Λ^5 needs K ~ 3000.
+  Corrected in place rather than quietly dropped.
+
+- **The most interesting result is a negative that got BETTER.** Route-E shut the DSS lane
+  with a mechanism: the spectrum is a continuum, and a continuum has no eigenvalue to move.
+  Dissipation removes that mechanism — converged eigenvalues go 2 → 8 and condense onto the
+  negative integers. And the lane stays shut anyway, because everything that condenses lands
+  on the negative real axis (max Re = 3e−13) and nothing goes complex. That is a strictly
+  better position than before: the negative now rests on a measurement with a working
+  positive control (6 → 9 converged, one at Re = +1.58) rather than on there being nothing
+  to measure.
+
+- **A boolean lied to me and I changed the instrument.** "Any complex converged
+  eigenvalues?" returned True — for a degenerate real pair at Re = −3 split by |Im| =
+  1.8e−5. The driver now reports the largest |Im| instead. General form: for anything you
+  are claiming the ABSENCE of, report a magnitude, never a boolean.
+
+- **What it costs to be right at criticality.** α₁ > 0 means μ decays, so the critical
+  viscous solution does relax onto the inviscid profile — but algebraically, 1/(α₁τ).
+  μ: 0.2 → 0.02 costs τ = 337; one more decade costs τ = 3703; and τ is itself logarithmic
+  in (T−t). Criticality is not a wall, it is a tar pit. That texture is the part I would
+  actually carry over to thinking about NS, and it is not a theorem about anything.
+
+
 ## Phase-2 P2 — ADVECTION SCOPE: the space was tuned where the hard term vanishes (non-logged) — 2026-08-03
 
 **NOT a logged gate run** (deterministic; no GA, no seeds). Code
