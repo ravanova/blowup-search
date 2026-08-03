@@ -3,6 +3,51 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ADVECTION SCOPE: the space was tuned where the hard term vanishes (non-logged) — 2026-08-03
+
+**NOT a logged gate run** (deterministic; no GA, no seeds). Code
+`solver/advection_scope.py` + `test_advection_scope.py` (6/6). Writeups
+TECHNICAL/BLOG_P2_ADVECTION_SCOPE.md; PHASE2_P2_NOTES §A. No figure and no JSON —
+the numbers are reproduced by running the gates, and a plot of two log-slopes would
+add nothing to a table.
+
+What a human would want to know:
+
+- **The shape of the mistake, because it is the transferable part.** Eleven legs
+  gated everything against the a=0 known answer, which is correct practice and a
+  banked lesson. But a=0 is exactly where the advection term is ABSENT. So the space
+  was chosen, tuned, priced and optimised on the one member of the family where the
+  term it would have to carry does not exist. The general form: a known answer is a
+  SPECIAL case, and what makes it tractable is often what makes it unrepresentative.
+
+- **The finding.** U = ∫H(Ω) inherits v3's far-field law and grows like (M/π)log X,
+  with no cancellation available since M ≠ 0 for everything in the family. So the
+  transport piece of DF comes back multiplied by a logarithm and leaves the
+  decay-graded codomain for every a ≠ 0. Measured +0.317 against a predicted +0.318.
+  Eleven legs of bounds are a=0-only, and nobody had said so.
+
+- **Half my own measurement was noise.** I nearly reported both advection pieces.
+  The stretch piece carries Ω_X, whose far field for a≠0 sits at the discretization
+  noise floor — a log-rate fit there measures amplified dust. Magnitude cannot
+  separate them; REPRODUCIBILITY can. Grid-spread 0.4%/2.6% for transport against
+  5%/99% for stretch. The gate now tests that discriminator rather than trusting me.
+
+- **The fix was already in the building.** The one-scale (self-similar) residual
+  balances against c_l X Ω_X instead of c Ω_X, so its codomain grading is one power
+  weaker — exactly what absorbs a log. Same profile, same h, same grid: +0.317 →
+  −0.010. So the leg's output is a redirect, not a dead end.
+
+- **I was wrong about the crossing, in a way worth recording.** c+aU changes sign at
+  a grid-stable radius and I wrote it up as a stagnation point. A parallel line had
+  already read it better: it is the EDGE OF SUPPORT. Their reading explains what mine
+  did not — the profile is ~1e-9 by X~10 while the crossing is at 7.16, so there is
+  no tail out there to have a sign. My gates survived only because they were written
+  to depend on the reproducible half; that was habit paying off rather than foresight.
+
+- **Honest ceiling.** Plain float64. Moves no link of the Clay chain; it is a cost
+  finding that narrows an L1 sub-programme and names the repair. Its value is timing:
+  three more bound-sharpening legs were queued on the assumption the space works.
+
 ## Phase-2 P2 — ROUTE-F v1: the number that says why NS is hard (non-logged) — 2026-08-02
 
 **NOT a logged gate run** (deterministic). Data `writeup/data/p2_route_f_v1_viscosity.json`

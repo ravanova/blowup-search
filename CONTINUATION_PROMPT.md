@@ -1,5 +1,57 @@
 # Continuation prompt (copy into a fresh session)
 
+*Updated 2026-08-03 (session close). **THIS SESSION DID NO NEW SCIENCE LEG — it recovered a lost
+one, closed the hole that lost it, made it 2.6x cheaper, and did the literature check that had
+been blocked for four legs. Read all four items before starting anything.***
+
+**(1) THE ORPHANED G2 WAS RECOVERED, NOT LOST.** Route-G's G2 had been run to its own `--out`
+file so it could go in parallel with G3/G4 — that part worked — but **nothing ever merged it
+back**, and the evidence script reads only the main artifact. A 55-minute stage sat in a sibling
+file while fig36 silently skipped its panel. Shared stages were byte-identical, so the merge was
+safe; **panel B now renders with no re-run.** Fixed properly: `--merge` folds siblings in and
+REFUSES when a stage is present in both and differs, so a `--quick` run cannot quietly overwrite
+a real one. **THE LESSON: a mechanism that SPLITS work needs the one that PUTS IT BACK, or the
+split silently becomes a loss.**
+
+**(2) ROUTE-G G2 IS NOW ~16 MIN, NOT ~41 (2.6x), AND IT MOVES NO NUMBER.** The steps ladder is a
+PREFIX ladder, so it is one chained trajectory read at each rung (8100 steps → 4000; 867s →
+398s), valid because renorm=True re-pins the same frozen origin slopes on resumption and dt is
+state-derived each step — **verified at 1.3e-14, not assumed**. The resolution ladder is
+embarrassingly parallel and each relaxation is SINGLE-threaded (measured 101% CPU), so four rungs
+cost the longest rather than the sum (1619s → 543s). Results reassemble in LADDER order, not
+completion order. Checked against the committed artifact: **89 numeric fields, worst 3.1e-12**,
+that only in two residuals from accumulation order; beta_mean identical to 12 digits.
+`test_route_g_perf.py` (4/4) gates all of it; `ROUTE_G_SERIAL=1` forces the serial path.
+**NOTE THIS BOX HAS 4 CORES, NOT 8 — `OMP_NUM_THREADS=8` is pinned project-wide and is
+misleading.**
+
+**(3) THE ADVECTION SCOPE FINDING — the eleven-leg bound programme is `a = 0`-ONLY.** Every
+Route-D leg gated at the a=0 anchor, which is EXACTLY where the advection term −a U Ω_X is
+ABSENT: the space was tuned on the one member of the family where the term it must carry does
+not exist. `U = ∫H(Ω)` inherits v3's far-field law and grows like `(M/π)log X` (measured vs
+independently integrated windowed mass to 4 s.f.), so the transport piece of DF returns
+multiplied by a log and **leaves the decay-graded codomain for every a ≠ 0** (+0.317 measured vs
++0.318 predicted; identically zero at a=0). **THE REPAIR IS ONE THE PROJECT ALREADY OWNS: the
+ONE-SCALE grading is one power weaker, exactly enough to absorb the log** (+0.317 → −0.010; at
+X=1e4, 3.11 → 3.1e-4). Two process notes worth keeping: half the measurement was NOISE, separated
+by **reproducibility not magnitude** (grid-spread 0.4%/2.6% vs 5%/**99%**), and this note's
+"stagnation point" is better read as v12/v13's **EDGE OF SUPPORT**. solver/advection_scope.py +
+test_advection_scope.py (6/6); TECHNICAL/BLOG_P2_ADVECTION_SCOPE.md; PHASE2_P2_NOTES §A.
+
+**(4) THE LITERATURE CHECK RAN — see LITERATURE_CHECK.md, and READ IT BEFORE CLAIMING NOVELTY.**
+It complements Route-D v15's writeup (which predates its third pass). **THE BLOCKER IS NOT WHAT
+IT WAS RECORDED AS: WebFetch 403s on EVERY host INCLUDING WIKIPEDIA** — a tool-level block, not
+an arXiv/publisher/allowlist question, so do not re-diagnose it as one. WebSearch is the only
+working channel. Of six claims examined, **four are at high risk of being known** (finite
+support; the spectral picture; s_c=α/2; α(1/2)=3) and one needs restating (a*). **Read
+arXiv:2207.07548 FIRST — it gates two of them at once.** The three METHODOLOGICAL candidates
+(discrete-ball trap; weighted-ℓ¹ conservation law; elasticity discipline) came back with NO hit,
+which is weak evidence, but with a structural reason to hope: standard radii-polynomial work uses
+GEOMETRIC weights on bounded domains while ours is ALGEBRAIC decay on an UNBOUNDED one, so the
+standard setting assumes away the regime where our obstruction bites. **Everything there is
+SEARCH-LEVEL and unverified against a primary source.** Also ruled out: the search backend is not
+indexing our repo.
+
 *Written 2026-08-02 (updated after Route-F v1). **NEWEST LEG FIRST — ROUTE-F v1 GIVES THE
 "BEAT VISCOSITY" SENTENCE A MEASURED RIGHT-HAND SIDE: s_c = alpha/2, THE CRITICAL DISSIPATION
 EXPONENT IS HALF THE FAR-FIELD DECAY EXPONENT — AND NAVIER-STOKES IS THE MARGINAL MEMBER.**
@@ -1203,7 +1255,8 @@ the three-part Route-D negative) rather than building further.
 ENVIRONMENT & WORKFLOW: .venv/bin/python (numpy + matplotlib; NO scipy —
 tridiag/solvers/3×3/GA/Hilbert/interval-arith/Fourier-operator/decay-grading/collocation
 all hand-rolled). 8-worker ceiling (OMP_NUM_THREADS=8 pinned). No pytest; run each suite as
-`python test_X.py`. Suites (all 22 green): test_interval.py (5/5) + test_nk_fourier.py
+`python test_X.py`. Suites (**38 test files**; the ones this session touched are
+test_advection_scope.py (6/6) and test_route_g_perf.py (4/4)): test_interval.py (5/5) + test_nk_fourier.py
 (6/6) + test_decay_grading.py (7/7) + test_decay_collocation.py (6/6) +
 test_holder_norms.py (6/6) + test_nk_bounds.py (6/6) + test_nk_seminorm.py (6/6) +
 test_nk_hilbert_holder.py (6/6) + test_nk_hilbert_pointwise.py (6/6) +

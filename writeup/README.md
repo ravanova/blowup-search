@@ -290,6 +290,20 @@ writeup/
     carries the dissipation, and the cross-model calibration shows the toy's dial and its
     target sit on **opposite sides** of the NS line. *(fig 36)*
 
+35. [TECHNICAL_P2_ADVECTION_SCOPE.md](4_p2_lottery/TECHNICAL_P2_ADVECTION_SCOPE.md) ·
+    [BLOG_P2_ADVECTION_SCOPE.md](4_p2_lottery/BLOG_P2_ADVECTION_SCOPE.md) — **the advection
+    scope of the bound programme**, a scoping note with no figure. Every Route-D leg gated
+    against the `a = 0` anchor — which is exactly where the advection term is **absent**. So
+    the space was tuned on the one member of the family where the term it must carry does not
+    exist. It cannot carry it: `U = ∫H(Ω)` grows like `(M/π)log X` (measured against mass to 4
+    s.f.), so `DF` leaves the decay-graded codomain for **every** `a ≠ 0` and the eleven-leg
+    bound programme is `a = 0`-only. The repair is one the project already owns — the
+    **one-scale** grading is one power weaker, exactly enough to absorb the log (rate `+0.317
+    → −0.010`). Also records that half the measurement was noise, separated by
+    **reproducibility rather than magnitude** (grid-spread 0.4%/2.6% vs 5%/**99%**), and that
+    this note's "stagnation point" is better read as v12/v13's **edge of support**.
+    *(no figure — the numbers reproduce by running `test_advection_scope.py`)*
+
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
 

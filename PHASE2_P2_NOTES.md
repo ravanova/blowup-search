@@ -2001,3 +2001,45 @@ good, and confirm it separates them.**
 
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous, no link of
 the chain moved, and this is orientation rather than evidence about NS. Clay odds ~0.05%.
+
+
+## §A — ADVECTION SCOPE (scoping note, no figure): the eleven-leg bound programme is a=0-ONLY.
+
+Not a numbered Route-D leg — a scoping check that belongs with them. solver/advection_scope.py
++ test_advection_scope.py 6/6. TECHNICAL/BLOG_P2_ADVECTION_SCOPE.md. Plain float64.
+
+**THE QUESTION NOBODY ASKED FOR ELEVEN LEGS.** Every Route-D leg worked at the a=0 anchor,
+because that is where the known-answer gate lives — and a=0 is EXACTLY the value at which the
+advection term −a U Ω_X is ABSENT. The space was chosen, tuned, priced and optimised on the one
+member of the family where the term it must carry does not exist.
+
+  A1 **U IS LOG-DIVERGENT.** v3 §S6's far-field law H(Ω)→(∫Ω)/(πX) integrates to
+     U(X)→(M/π)log X, M=∫Ω. No cancellation available: M≠0 for every profile in the family (the
+     anchor itself has ∫−1/(1+X²)=−π). Measured vs independently integrated windowed mass:
+     −0.9970/−0.9969, −0.7544/−0.7540, −0.6862/−0.6870 at a=0/0.3/0.5. **SUBTLETY: dU/dlogX =
+     X·H(Ω) is an IDENTITY; the content is that it tends to M/π, so the predictor is the mass over
+     the FIT WINDOW, not the truncated domain — the coarse outermost decade moves the full-domain
+     mass 15% at a=0.5 while the windowed one agrees to 0.3%.**
+  A2 **THE OPERATOR LEAVES THE SPACE.** In the two-scale codomain (grading α+1): the stretch piece
+     (VHh)Ω_X ~ X^{α−2}log X DECAYS for α<2 (harmless); the transport piece U h_X ~
+     (a|M|α/π)log X DIVERGES for every a≠0. Measured +0.317 vs predicted +0.318 at a=0.3.
+     **⇒ DF does not map domain→codomain for any a≠0, and Y₀ is infinite there too.**
+  A3 **WHICH HALF IS REAL — reproducibility, NOT magnitude.** The stretch piece carries Ω_X, whose
+     far field for a≠0 is at the noise floor. Grid-spread: transport 0.4%/2.6% vs stretch
+     **5%/99%**. Only the reproducible half is quoted, and the gate enforces it.
+  A4 **THE FIX IS A GRADING THE PROJECT ALREADY HAS.** The ONE-scale residual balances against
+     c_l X Ω_X ~ X^{−α}, so its codomain grading is α — one power WEAKER, exactly what the log
+     needs (X^α·(log X)X^{−α−1}=(log X)/X→0). Same profile/h/grid: rate +0.317→−0.010 and
+     +0.480→−0.016; at X=1e4, 3.11→3.1e-4 and 4.79→4.8e-4. **So: not "a≠0 is out of reach" but
+     "a≠0 needs the ONE-SCALE formulation".**
+  A5 **THE CROSSING, AND BEING WRONG ABOUT IT USEFULLY.** c+aU changes sign at X*=7.16 (a=0.3) /
+     3.10 (a=0.5), ~1% stable over three grids, none at a=0. Written here first as a STAGNATION
+     POINT; v12/v13's solver/finite_support.py reads it better as the **EDGE OF SUPPORT X_c**
+     (profile identically zero beyond, algebraic zero of order 1/a) — and that reading explains
+     what mine did not: the profile collapses to ~1e-9 by X~10 while X*=7.16, i.e. there is no
+     tail out there, only dust past the end. Gates depend only on the reproducible half, so they
+     survive the reinterpretation.
+
+CLAY: moves NO link of the chain. It narrows an L1 sub-programme and names the repair — a COST
+finding, whose value is that it landed before three more bound-sharpening legs were built on the
+assumption that the space works.
