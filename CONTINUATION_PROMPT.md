@@ -61,9 +61,20 @@ evidence for travelling-wave solutions for ANY a>0", which does not refute a*≈
 HQW25's TWO-SCALE inner object, plausibly different) but does mean the claim must say WHICH object
 stops existing. ALL OF THAT IS SEARCH-LEVEL AND UNVERIFIED — summarisers blend sources. **THE ASK
 FOR THE USER: add `arxiv.org`, `export.arxiv.org`, `api.semanticscholar.org`, `link.springer.com`,
-`aimsciences.org` to the environment's egress allowlist.** The three METHODOLOGICAL candidates
-(discrete-ball trap; weighted-l1 conservation law; elasticity discipline) are still UNCHECKED and
-are the likeliest to be genuinely new, because they are about the METHOD rather than about gCLM.***
+`aimsciences.org` to the environment's egress allowlist.** **THIRD PASS FOUND THE PAPER MOST LIKELY TO PRE-EMPT ROUTE-F: arXiv:2207.07548 (Nonlinearity),
+gCLM with dissipation -Lambda^sigma, which DERIVES ANALYTICAL SOLUTIONS ON THE REAL LINE AT
+a = 1/2 with the similarity exponents and conditions for singularity formation FULLY
+CHARACTERIZED. That is HIGH risk for BOTH s_c(a)=alpha/2 AND alpha(1/2)=3 — read it FIRST.**
+The three METHODOLOGICAL candidates (discrete-ball trap; weighted-l1 conservation law;
+elasticity discipline) were searched with NO hit — weak evidence only, but the shape is
+informative: standard radii-polynomial work uses GEOMETRIC weights (nu>1, analytic, bounded/
+periodic domains) while ours is ALGEBRAIC decay on an UNBOUNDED domain, so the standard setting
+assumes away the regime where our obstruction bites. Nearest unread paper: arXiv:2302.12877.
+**Also ruled out: the search backend is NOT indexing our repo** (the "c_l" in the quoted
+s*(a)=1/c_l(a) is the field's own notation, which we adopted) — re-run that check if the repo
+ever goes public. **NOTE THE BLOCKER IS NOT WHAT IT WAS RECORDED AS: WebFetch 403s on EVERY host
+INCLUDING WIKIPEDIA, so it is a tool-level block, not an arxiv/publisher/allowlist question —
+do not spend time re-diagnosing it as one. WebSearch is the ONLY working literature channel.***
 
 *Before Route-F v1: **Route-E v1 opened the DSS lane and shut its cheapest entrance.** **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS
 LANE AND SHUTS ITS CHEAPEST ENTRANCE.** v15/v16 named DSS as the swing. Necas-Ruzicka-Sverak
