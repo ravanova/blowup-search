@@ -1,79 +1,115 @@
 # Continuation prompt (copy into a fresh session)
 
-> ## ⛔ ONE DIRECTIVE, AND IT IS NOW A SMALL SPECIFIC COMPUTATION.
-> **FIND THE NEAR-NULL DIRECTION OF THE PRECONDITIONED 2D JACOBIAN, THEN BORDER THE SYSTEM
-> WITH IT.** Leg 44 unblocked step (iii) of the certification chain — the first blocked link
-> to open in 44 legs — and left exactly one thing between here and a real 2D profile. It is
-> cheap **because the preconditioner now exists**. Do not open a measurement leg, do not read
-> Tier 2 first, and **do not re-try the scaling gauge — it was tested and refuted (L-7).**
+> ## ⛔ DIRECTIVE ORDER CHANGED BY THE USER (2026-08-04). TARGET SELECTION FIRST.
+> **The port is NOT the next leg. Answer "certify WHAT, that isn't already done?" first.**
+> Leg 44 unblocked step (iii) of the certification chain, and the natural next move is to
+> finish the port. **The user has redirected, and the reasoning is sound: the port's entire
+> value is contingent on there being an uncertified target at the end of it, and nobody has
+> checked.** Do Route-M, then return to the port with its directive unchanged below.
 
 ---
 
-# DIRECTIVE — IDENTIFY THE NEAR-NULL DIRECTION, THEN BORDER THE SYSTEM
+# DIRECTIVE 1 — ROUTE-M: TARGET SELECTION. "CERTIFY WHAT?"
+
+**WHY THIS COMES FIRST, STATED PLAINLY.** The 2D Boussinesq profile the port is aimed at is
+**the one Chen–Hou certified in 145 pages (arXiv:2210.07191)**. Closing a radii polynomial
+there would prove *we can certify*; it would **not be a new result**. Leg 42 (Route-J) made
+this gap visible by deleting seven of twelve standing novelty claims — the phenomenology this
+project treated as candidate-novel is largely in print. `CLAY_ROADMAP.md` §2 is explicit that
+the realistic prize is *"a novel Tier-3 result on a model where blow-up is provable"*, and
+**nobody has checked which such models are still uncertified.**
+
+**WHAT THE LEG MUST DELIVER — a ranked, sourced, executable answer to three questions per
+candidate object:**
+
+1. **Is it already certified?** Not "is blow-up known" — *is there a computer-assisted proof
+   of this specific profile*. Chen–Hou (2D Boussinesq / 3D Euler with boundary), Chen–Hou–Huang
+   (De Gregorio), Elgindi (C^{1,α} axisymmetric without swirl), Buckmaster–Gómez-Serrano, and
+   the dissipative-gCLM results of J. Chen (`1908.09385`) are the ones to check first.
+2. **Is it within interval-arithmetic reach?** The honest discriminator is dimension and the
+   nonlocal operator's cost, not elegance. Record the state dimension, the Biot–Savart form,
+   and whether anyone has done validated numerics on a comparable object.
+3. **What would certifying it contribute?** A sentence a specialist would accept. If the
+   answer is "it reproduces X", say so and rank it last.
+
+**USE THE PIPELINE LEG 42 BUILT.** `bash Papers/fetch.sh` (~30 s, PDFs gitignored) —
+**Tier 2 and Tier 3 of `Papers/MANIFEST.md` are already fetched and text-extracted and have
+never been read.** `2302.12877` (radii-polynomial methodology) is the one that answers
+question (2) for a whole class at once, and it also gates the only three claims this project
+has left with a real chance of being new (Route-D's discrete-ball trap, the weighted-`ℓ¹`
+no-go, the elasticity discipline). `2308.01528` and `2604.01868` bear directly on (1).
+**Extend `solver/literature_gates.py`'s ledger rather than writing prose** — leg 42's lesson
+(68): a literature check that is not executable decays at the rate of memory.
+
+**THE GATE, PRE-COMMITTED, AND IT CUTS BOTH WAYS.**
+* **If an uncertified, reachable target exists** → name it, and the port's directive
+  (Directive 2 below) becomes aimed at *that* object rather than at Chen–Hou's. That is a
+  re-plan, and it is the good outcome.
+* **If none exists** → **say so, and stop.** That is a decisive negative about the whole
+  programme, worth more than any further leg, and it must be reported to the user rather
+  than worked around. Do not soften it into "more search needed".
+
+**DO NOT** turn this into a general literature survey. Three questions, per object, ranked,
+with the ledger updated. Time-box it to one leg.
+
+---
+
+# DIRECTIVE 2 — THEN: THE NEAR-NULL DIRECTION, AND THE BORDERED SYSTEM
+
+*(unchanged from leg 44's close; resume here once Route-M has reported, and re-aim it at
+Route-M's chosen object if one was found)*
 
 **WHERE LEG 44 LEFT IT** (read `PHASE2_P2_NOTES.md` §33 and
-`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md` before writing code):
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md`):
 
 * **Step (iii) is UNBLOCKED.** `line_sweep_solve` in `solver/port_certification.py` is an
   **exact `O(N)` inverse** of the full transport operator — one outward Thomas sweep,
   licensed by the measured fact that radial upwinding is outward everywhere
-  (`s_ρ ∈ [0.390, 5.732]`). It takes the Krylov stall **0.6623 (flat) → 0.0188 at `m`=160
-  → 3.3e−6 at `m`=320.** Gated to 9.5e−16 against the operator it inverts.
-* **Steps (i) and (ii) are still blocked, and the reason CHANGED.** The linear solves inside
-  Newton now succeed (**GMRES 2.5e−3**, against 1.00 before) and Newton still creeps —
-  `‖F‖₂` 0.8069 → 0.7378 over eleven steps, line search capped at **λ = 1/32 then 1/64**.
-  A full step rejected while the linear algebra is accurate is a **near-null direction in
+  (`s_ρ ∈ [0.390, 5.732]`). Stall **0.6623 (flat) → 0.0188 at `m`=160 → 3.3e−6 at `m`=320.**
+  Gated to 9.5e−16 against the operator it inverts.
+* **Steps (i) and (ii) are still blocked and the reason CHANGED.** Linear solves now succeed
+  (**GMRES 2.5e−3**, was 1.00); Newton still creeps, `‖F‖₂` 0.8069 → 0.7378 over eleven
+  steps, line search capped at **λ = 1/32 then 1/64**. That is a **near-null direction in
   `DF`**, not a spectral problem.
-* **The obvious explanation is REFUTED. Do not spend a second leg on it.** The scaling gauge
-  (`renorm=True` pins `ω_x(0)`, `η_x(0)`; `F` carries no such constraint) was the candidate.
-  Projecting onto it inside Newton makes things **strictly worse** — at iteration 0 the line
-  search accepts **no step at all**, λ down to 1/1024, and `‖F‖₂` does not move.
+* **The obvious explanation is REFUTED — do not spend a leg on it.** Projecting onto the
+  scaling gauge inside Newton accepts **no step at all** (λ to 1/1024) and does not move
+  `‖F‖₂`.
 
-**WHAT THE LEG MUST DELIVER.**
+**WHAT THAT LEG MUST DELIVER.** (1) **Identify** the direction — inverse iteration or Lanczos
+through `M⁻¹DF`, cheap now that `M⁻¹` exists; report it as a **field on the grid**, because
+where it lives is what names it. (2) Live candidates: the **`c_l`/`c_ω` modulation's implicit
+dependence** (`modulation()` reads the state at the origin and feeds the constants back into
+`F`, making it an implicitly-defined map) and **translation along the profile branch** — both
+testable with leg 44's ablation technique by freezing `c_l, c_ω`. (3) **Border** the system,
+do not project — projecting after the fact is exactly what failed. (4) Then the profile, the
+space, `Y₀`, and `Z₁` — now *measurable* rather than hypothetical, because `A` exists.
 
-1. **IDENTIFY the direction.** Cheap now: inverse iteration or Lanczos through `M⁻¹DF`,
-   which is a handful of sweeps. Report the direction as a **field on the grid**, not just a
-   singular value — where it lives is what names it.
-2. **The live candidates, in order.** (a) the **`c_l`/`c_ω` modulation's implicit
-   dependence** — `modulation()` reads the state at the origin and feeds `c_l, c_ω` back into
-   `F`, which makes `F` an implicitly-defined map rather than an explicit one, and is exactly
-   the kind of structure that produces a soft direction; (b) **translation along the profile
-   branch**. Both are testable by the same ablation technique leg 44 used — build `F` with
-   `c_l, c_ω` **frozen** and see whether the line search recovers.
-3. **BORDER the system, do not project.** Once the direction is named, append the constraint
-   that pins it as extra rows and solve the bordered system. **Projecting after the fact is
-   what failed in (L-7)** and the distinction is the point.
-4. **Then, and only then**: the converged profile, the function space (chosen with Route-D's
-   `a = 0`-only disaster in mind), `Y₀` in it, and `Z₁` — which is now *measurable* rather
-   than hypothetical, because `A` exists.
+---
 
-**KEEP THE DISCIPLINE — three legs running, it is what has produced every real finding.**
+# STANDING DISCIPLINE (applies to every leg)
+
 Gate the **operator**, not the agreement. Report a **magnitude**, never a boolean. **"Small"
 in which norm?** **Name the realization** (70). **Gate the quantity the measurement divides
 by** (67). **Report the SHAPE of a ladder, not its endpoint** (72). **When a quantity has no
-referent, say so instead of bounding it** (73). And leg 44's three: **(74) test all the
-suspects at once — a battery costs about what the guesses cost, and both of leg 43's guesses
-were wrong; (75) two defects in the same problem are not the same defect; (76) keep the
-NEGATIVE construction in the artifact — ADI at 0.996 is what ruled out the whole splitting
-family, and a writeup that reports only what worked cannot stop the next session re-trying
-what did not.**
+referent, say so instead of bounding it** (73). **Test all the suspects at once — a battery
+costs about what the guesses cost** (74). **Two defects in the same problem are not the same
+defect** (75). **Keep the negative construction in the artifact** (76).
 
-**EXPLICITLY BANNED until the near-null direction has been identified and reported on:**
-another gCLM measurement leg, another Route-D leg, another DSS re-ask, another literature
-leg (Tier 2 is real, cheap, and **still not the hard thing**), re-measuring `β` on the 2D
-object, and **re-testing the scaling gauge.**
+**EXPLICITLY BANNED until Route-M has reported:** the port itself, another gCLM measurement
+leg, another Route-D leg, another DSS re-ask, re-measuring `β` on the 2D object, and
+re-testing the scaling gauge.
 
-**CLAY.** Odds remain **~0.05%**. **No link of the L1→L4 chain has moved in 44 legs** — leg
-44 opened a rung of the *scaffolding*, which is not the same thing, and the writeups say so.
-The realistic prize is still a novel result on a model where blow-up is provable, and leg 42
-showed that bar is much higher than it looked. Pursuing Clay harder does not mean claiming
-more.
+**CLAY — AND READ `CLAY_ROADMAP.md` §7 BEFORE PROPOSING A NEW DIRECTION.** Odds remain
+**~0.05%** behind Walls 1 and 2, and **no link of the L1→L4 chain has moved in 44 legs**; leg
+44 opened a rung of the *scaffolding*, which is not the same thing. §7 (added 2026-08-04)
+records a strategic re-framing worth reading before any new GA campaign is proposed: **the
+search machinery has been pointed at finding the OBJECT, while the actual bottleneck for the
+last twenty legs has been closing a CERTIFICATE around an object we already have.**
 
-**PROCESS RULES THAT KEEP EARNING THEIR PLACE.** Before pushing: regenerate the data,
-rebuild the figure, **check every number in the prose against the JSON**. When you commit a
-convergence ladder, **read the residual column's direction** — leg 43's decisive evidence sat
-in `writeup/data/` for two legs. And **run the ablation battery before naming a suspect**,
-not after.
+**PROCESS RULES THAT KEEP EARNING THEIR PLACE.** Before pushing: regenerate the data, rebuild
+the figure, **check every number in the prose against the JSON**. When you commit a
+convergence ladder, **read the residual column's direction**. And **run the ablation battery
+before naming a suspect**, not after.
 
 ---
 

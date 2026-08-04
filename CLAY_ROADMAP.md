@@ -188,3 +188,96 @@ Route C probe, with a Tier-3 collaboration (Route D) as the eventual proof leg.
 Clay itself stays a ~0.05% horizon behind Walls 1 and 2; the tractable next win
 is a *novel* Tier-2 (and, with a collaborator, Tier-3) candidate in a model
 where that means something.
+
+
+---
+
+## 7. Addendum (2026-08-04) — what the search machinery should actually be searching
+
+**Status: OPTION ANALYSIS, NOT A COMMITTED PLAN.** Written in response to a direct question
+from the user ("could we use GAs to dig into actually solving Clay, and if so what has the
+best chance?"). Nothing here supersedes §4's sequencing; it is recorded so the reasoning
+survives the session that produced it.
+
+### 7.1 The re-framing
+
+For 44 legs the GA has been pointed at **finding the object** — MAP-Elites over initial
+conditions, fitness = a blow-up predicate (`ga/evolve.py`, `ga/fitness.py`,
+`win_condition.py`). That was the right target for Stages 1–3.
+
+**It has not been the bottleneck since Route-D.** Every leg from Route-D v1 onward has been
+blocked not by *"we cannot find a blow-up candidate"* but by *"we cannot close a certificate
+around the candidate we already have."* Route-D spent **eleven legs hand-tuning a decay-graded
+function space** and then discovered (the advection-scope finding, §A) that it was
+`a = 0`-only — tuned on the one member of the family where the hard term vanishes. Route-K
+hand-picked a preconditioner; Route-L hand-picked a better one by reading the operator's
+structure off the page.
+
+**Those are search problems being done by hand, and unlike blow-up hunting they have a
+rigorous scalar fitness.** "Does the radii polynomial close, and with what margin?" is a
+theorem, not a plot. It cannot be faked by an under-resolved run, which is the failure mode
+`WIN_CONDITION.md` exists to guard against.
+
+### 7.2 The options, ranked
+
+**Option B — evolve the CERTIFICATE, not the solution.  ★ best expected value**
+Search space: the choices a computer-assisted proof currently makes by human taste — the
+weight exponents and norm of the function space; the split of the linearized operator into
+"leading order + finite rank" (Chen–Hou's own phrase); the truncation dimension; the domain
+decomposition; the preconditioner's free constants. Fitness: the radii polynomial's margin,
+or `Z_1` itself.
+*Why it fits a GA:* low-dimensional, no gradient, wildly non-convex, expensive-but-bounded
+evaluation, and a **rigorous, unambiguous objective**.
+*Why now:* Route-L made the inner linear solve `O(N)` and exact, which is what makes an
+evaluation cheap enough to run thousands of times. Before leg 44 this was not affordable.
+*What it does NOT do:* create novelty. It makes certification attempts cheaper, which widens
+the set of objects worth attempting — it does not tell you which object to attempt (that is
+Route-M).
+*Honest odds:* good chance of materially outperforming hand-tuning on a target we choose;
+**zero** direct contribution to Clay.
+
+**Option C — evolve the Lyapunov weight / coercivity functional.**
+Much of Elgindi's and Chen–Hou's work is finding a weight under which the linearized operator
+is dissipative — a pointwise inequality. Search over weights, fitness = the worst-case
+coercivity constant. Same family as B, narrower, and a natural first bite because the fitness
+is one number and the constraint is checkable. Rank: second, and possibly the right *pilot*
+for B.
+
+**Option E — genetic programming for conserved / monotone quantities.**
+Expression trees over the state, fitness = "is `d/dt` of this sign-definite along
+trajectories?" The project has already found one first integral by hand (Route-D v14), so the
+machinery is not fanciful. *Honest assessment:* low probability — many strong people have
+looked for coercive conserved quantities for NS — but cheap, and a negative is publishable-ish
+as an exhaustion result. Rank: third, opportunistic.
+
+**Option A — evolve initial conditions for blow-up (the current use).**
+Dead for Clay by Walls 1 and 2, and leg 42 showed the toy-model phenomenology is largely
+already in print. Keep it only as a *candidate generator feeding B*, never as the headline.
+
+**Option D — evolve the coordinate transformation / compactification** so the fixed-point
+problem is better conditioned. A special case of B; fold in rather than run separately.
+
+**Option F — evolve counterexample-shaped objects in reduced models chosen to be
+uncertified.** This is Route A + Route-M. Sequenced, not parallel.
+
+### 7.3 The honest ceiling, restated
+
+**None of these defeats Wall 2.** A GA that makes certification cheaper does not make 3D
+Navier–Stokes reachable by interval arithmetic — that is a dimensional and complexity wall,
+not a tuning wall. Nor does anything here touch Wall 1: if NS is globally smooth, the entire
+programme is empty by construction.
+
+So the honest statement of what Option B buys is: **it attacks the bottleneck this project
+actually has, using machinery it already owns, with a fitness that cannot lie.** That is a
+real improvement in expected value toward the *stated* prize — a novel Tier-3 result on a
+model where blow-up is provable — and it is not a route to Clay. Clay stays where §6 left it.
+
+### 7.4 Sequencing, if this is adopted
+
+1. **Route-M first** (target selection — Directive 1 in `CONTINUATION_PROMPT.md`). Option B
+   is worthless without an object worth certifying, and B's search space depends on which.
+2. **Pilot Option C** on an object with a *known* answer, so the fitness can be validated
+   where the result is checkable — the same "build it where you know the answer, then port
+   the method" discipline Route A/Phase 0 uses, and the discipline Route-J's gates embody.
+3. **Then Option B proper**, and re-run the six-property viability gate on the new fitness
+   *before* any GA compute. Stage 3.5 is why that is non-negotiable.
