@@ -339,3 +339,106 @@ def radii_polynomial_status(Y0, Z1, Z2=None):
     disc = (1.0 - Z1) ** 2 - 4.0 * Z2 * Y0
     return {"status": "EVALUATED", "closes": bool(disc >= 0.0), "Y0": Y0, "Z1": Z1,
             "Z2": Z2, "discriminant": float(disc)}
+
+
+# --------------------------------------------------------------------------
+# ROUTE L v1 -- the attribution, and the preconditioner it names
+# --------------------------------------------------------------------------
+# Route-K left the port with the stall attributed only in part: the leading-order RADIAL
+# dilation split took the Krylov stall 0.6623 -> 0.3596 and the curve stayed FLAT, so a
+# second obstruction of comparable size was present and unidentified.  Route-K named two
+# candidates -- the nonlocal Biot-Savart velocity, and the wall.
+#
+# **BOTH GUESSES WERE WRONG, AND THE ABLATION SAYS SO CLEANLY.**  Freezing the velocity
+# feedback makes the stall WORSE (0.6623 -> 0.7582): the nonlocal term is mildly helping the
+# Krylov solve, not obstructing it.  And the stalled Krylov residual is not concentrated at
+# the wall for omega or eta (6.8% and 7.9% of the energy in the first three of forty-eight
+# angular nodes, i.e. about proportional).
+#
+# **IT IS THE ANGULAR TRANSPORT.**  Switch off s_beta d_beta and the ladder BENDS
+# (0.7857 -> 0.3712, gain 2.12 against the full problem's 1.05); switch it off AND apply the
+# radial preconditioner and the solve runs to MACHINE ZERO (0.0401 -> 0.0 by m = 80).  So the
+# transport operator carries the entire obstruction, in two pieces -- one radial, one angular
+# -- and nothing else in the equation contributes.
+#
+# **AND THE FIX FOLLOWS FROM THE STRUCTURE.**  ADI-style composition of two exact 1D solves
+# is NOT the answer and measurably makes things worse (0.996): the operator does not split.
+# But the radial upwinding is OUTWARD everywhere on this profile (measured s_rho in
+# [0.390, 5.732], strictly positive), which makes the full transport operator **block lower
+# bidiagonal in the radial index with TRIDIAGONAL diagonal blocks** -- so ONE outward sweep of
+# Thomas inverts it exactly, in O(N), with no splitting error at all.  That is
+# `line_sweep_solve`, and with it the stall goes
+#
+#     0.6623 (flat, gain 1.05)  ->  0.0188 at m = 160, 2.0e-4 at m = 240, 3.3e-6 at m = 320
+#
+# i.e. the curve stops being flat.  **A is constructible.**  The certification chain's step
+# (iii) is no longer blocked.
+
+def line_sweep_solve(rhs, s_rho, s_beta, drho, dbeta, c_diag, thomas):
+    """EXACT O(N) inverse of (-s_rho d_rho - s_beta d_beta + c_diag), first-order upwind.
+
+    Requires s_rho > 0 (outward radial upwinding), which is what makes the operator block
+    lower-bidiagonal in the radial index:
+
+        [(c_diag - s_rho/drho) I - s_beta d_beta] f_i  =  rhs_i - (s_rho/drho) f_{i-1}
+
+    Each diagonal block is TRIDIAGONAL (the angular upwind picks the sub- or super-diagonal
+    pointwise by the sign of s_beta), so one outward sweep of Thomas is an exact solve.
+
+    **This is not ADI and the difference is the whole point.**  Composing an exact radial
+    solve with an exact angular solve carries a splitting error, and measured on this problem
+    that error is catastrophic -- the preconditioned stall goes to 0.996, WORSE than doing
+    nothing.  Sweeping the coupled operator has no splitting error because there is no split.
+
+    `thomas` is injected rather than imported so this module keeps no dependency on the
+    Boussinesq solver package.
+    """
+    rhs = np.asarray(rhs, float)
+    nr, nb = rhs.shape
+    out = np.empty_like(rhs)
+    prev = np.zeros(nb)
+    for i in range(nr):
+        sr = s_rho[i] / drho
+        sb = s_beta[i]
+        a = np.zeros(nb)
+        b = np.full(nb, float(c_diag)) - sr
+        c = np.zeros(nb)
+        pos = sb > 0
+        a[pos] = sb[pos] / dbeta
+        b[pos] -= sb[pos] / dbeta
+        b[~pos] += sb[~pos] / dbeta
+        c[~pos] = -sb[~pos] / dbeta
+        a[0] = 0.0
+        c[-1] = 0.0
+        prev = thomas(a, b, c, rhs[i] - sr * prev)
+        out[i] = prev
+    return out
+
+
+def outward_upwinding_holds(s_rho):
+    """The line sweep's one precondition, reported as a MAGNITUDE, not a boolean.
+
+    If any s_rho <= 0 the radial ordering is not a valid sweep direction there and the solve
+    stops being exact.  Return the minimum so a marginal case is visible rather than binary.
+    """
+    m = float(np.min(s_rho))
+    return {"min_s_rho": m, "max_s_rho": float(np.max(s_rho)), "holds": bool(m > 0.0)}
+
+
+def attribution_summary(ladders):
+    """Rank the ablations by how much each one un-flattens the ladder.
+
+    `ladders` maps a label to a krylov_ladder result.  The discriminant is the GAIN across
+    the ladder (lesson 72: the shape, not the endpoint) -- an ablation that removes the
+    obstruction makes the curve bend, which shows up as a gain well above the full problem's.
+    """
+    out = []
+    base = stall_verdict(ladders["full"])["residual_gain"]
+    for label, rows in ladders.items():
+        v = stall_verdict(rows)
+        out.append({"ablation": label, "rel_at_max_dim": v["rel_at_max_dim"],
+                    "gain": v["residual_gain"], "flat": v["flat"],
+                    "gain_vs_full": v["residual_gain"] / base,
+                    "worse_than_full": v["rel_at_max_dim"] > ladders["full"][-1]["rel_residual"]})
+    out.sort(key=lambda q: -q["gain"])
+    return out
