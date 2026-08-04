@@ -1,112 +1,81 @@
 # Continuation prompt (copy into a fresh session)
 
-> ## 📉 THIS FILE WAS 2196 LINES AND IS NOW UNDER 400, BY DESIGN (leg 45).
-> It had become append-only: a session-close block per leg back to ~38, each duplicating a
-> `PHASE2_P2_NOTES.md` section verbatim. **The history did not move — it was always in the
-> notes.** `test_plan_of_record.py::test_8` now fails if this file exceeds 400 lines or
-> carries more than **two** session-close blocks. A briefing nobody can read is a briefing
-> nobody reads, and the cost lands where context is scarcest: the first ten minutes.
-
-**FIRST THREE COMMANDS OF EVERY SESSION.**
-
-```
-.venv/bin/python plan_of_record.py        # which stage is NEXT, its gate, the live bans
-.venv/bin/python test_plan_of_record.py   # FAILS if the plan and the docs have drifted
-.venv/bin/python capabilities.py <object> # WHAT IS ALREADY BUILT -- grep before you build
-```
-
-The third one is new and it is not optional. Leg 45 came within about ten minutes of
-rebuilding a solver that had been sitting in `solver/hl_rescaled.py`, gated to 4.4e-16,
-since 2026-07-26. **Before building anything, search `capabilities.py` for the object.**
+> ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
+> It prints the committed sequence, the current stage, its pre-committed gate and the live
+> bans. **`test_plan_of_record.py` fails if this file and the plan disagree**, so the plan is
+> the source of truth and this file is its briefing. Stages `M` and `PORT` are **DONE**;
+> **`C-PILOT` is NEXT.**
 
 ---
 
-# DIRECTIVE 1 — ROUTE-PORT: THE BORDERED SYSTEM, RE-AIMED AT THE 1D NON-SYMMETRIC PROFILE
+# DIRECTIVE 1 — ROUTE-C-PILOT: EVOLVE THE LYAPUNOV WEIGHT, ON A KNOWN-ANSWER OBJECT
 
-**WHAT CHANGED, AND IT IS THE WHOLE POINT.** Leg 45 (Route-M) asked "certify WHAT, that
-isn't already done?" and the answer for the port's target was: **Chen–Hou certified it
-themselves in 2022** (arXiv:2210.07191 + Part II). Twenty legs of certification machinery
-were aimed at a solved problem. **The target has changed. The machinery has not.**
+**WHY THIS IS NOW THE LEG, AND THE EVIDENCE ARRIVED BY ACCIDENT.** Leg 46 built the
+certificate on the uncertified 1D Hou–Luo profile and found that **closure is a property of
+the SPACE, not of the object**. The tuned and naive weights differ in **one constant** — the
+weight's length scale `w_l`, `0.01·X_max` against `X_max` — and that constant decides whether
+the radii polynomial closes at all:
 
-**THE NAMED TARGET.** `HL_S2_nonsymmetric` — the **non-symmetric positive regular
-self-similar profile of the 1D Hou–Luo model**, Chen–Huang–Li arXiv:2604.01868 §2.5 and §4.
-Reported April 2026 as "a previously unreported blowup phenomenon". Numerical only. No
-proof, computer-assisted or otherwise, and it is **not** covered by Chen–Hou–Huang (odd,
-non-degenerate) or by Huang–Qin–Wang–Wei's analytic construction — both use the symmetry.
+| `n` | tuned `Y₀/budget` | naive | gain |
+|---|---|---|---|
+| 201 | **1.95e−04** ✓ | 1.0125 ✗ | 5186.6 |
+| 401 | **6.36e−04** ✓ | 3.3193 ✗ | 5221.5 |
+| 801 | **2.40e−04** ✓ | 1.2578 ✗ | 5235.6 |
 
-**WHY IT IS THE RIGHT ONE, IN ONE SENTENCE A SPECIALIST WOULD ACCEPT.** In every existing
-proof of this kind, in Chen–Huang–Li's own words, *"the origin always acts as the source of
-stability"*. This profile has **no symmetry point**, so the translation degree of freedom
-has to be carried by the certificate itself — their formulation (2.9)/(4.1) adds a third
-modulation constant `c_r` for exactly that. **A first certificate for a profile with no
-symmetry to anchor it is a methodological result, not another profile.**
+That was not gone looking for — it fell out of a table built for another purpose — and it is
+the empirical case for this stage.
+
+**THE SEARCH SPACE HAS ONE WALL ALREADY BUILT BY THE EQUATION.** `p* = 0.39` is not tuned:
+the profile's own tail is `Ω ~ |X|^(c_ω/c_l) ~ |X|^−0.394`, so a weight `(1+X²)^(p/2)` with
+`p > 0.394` makes the **true** profile's norm infinite. Search inside that box; do not
+rediscover its wall.
 
 **WHAT THE LEG MUST DELIVER.**
-1. **The bordered residual for CHL (4.1) with all THREE constants `(c_l, c_ω, c_r)` as
-   unknowns.** Bordered from the start. **Do NOT project after the fact** — leg 44 (L-7)
-   tried that on the 2D object and Newton accepted no step at all, `λ` down to 1/1024.
-2. **A converged profile**, checked against the *normalization-independent* constant:
-   `c_l/c_ω` vs CHL's **−2.5114**. The absolute triple `(1.0636, −0.4235, 0.0765)` depends
-   on their initial normalization and ours will not match it — that is not an error, and
-   §8 of the notes already documented it.
-3. **Then `Y₀`, `Z₁`, `Z₂`** — now *measurable* against a budget, because
-   `solver/target_selection.py::y0_budget` computes `(1−Z₁)²/(2Z₂)`, the largest residual a
-   certificate can tolerate, and it is gated against Cadiot–Lessard–Nave's completed
-   Kawahara certificate (their published `r₀` reproduced exactly).
+1. A **searched weight** beating the hand-picked one, on an object where the answer is
+   **known** — Chen–Hou's 2D profile is the substrate for exactly this and it is the reason
+   the 2D work is not wasted. Validate the fitness where the result is checkable before
+   trusting it anywhere else.
+2. The fitness is **one number** (the worst-case coercivity constant, or `Y₀/budget`) and it
+   **cannot be faked by an under-resolved run** — that is the whole reason this target beats
+   blow-up hunting. Say so, and gate it anyway.
+3. **The six-property viability gate, re-run ON THE NEW FITNESS, before any GA compute.**
 
-**WHAT YOU ALREADY HAVE — DO NOT REBUILD IT.**
-* `solver/hl_rescaled.py::RescaledHLScenario2` — CHL's (4.1)/(4.2), three-constant
-  origin-pinned gauge, hand-rolled 3×3 solve. Gauge nulls `∂_τ{Ω(0), Ω_X(0), V(0)}` to
-  **4.4e-16**. `test_hl_rescaled.py` 9/9.
-* `line_hilbert.slope_matrix` — leg 45 made the Scenario-2 step **10× faster** (43 ms →
-  4.2 ms at n=801) by caching the spline slope operator. Gated at 2.7e-13.
-* `solver/interval.py`, `solver/nk_bounds.py`, `solver/op_lower.py` — the certificate side.
-* `solver/target_selection.py` — the ledger, the budget algebra, the certification record.
+**GATE (pre-committed, in `plan_of_record.py`):** does the new fitness pass the six-property
+viability gate? **YES** → proceed to stage `B`. **NO** → **STOP. Do not run the GA.** Stage
+3.5 is the precedent and it is non-negotiable: a fitness that fails the gate produces
+confident garbage at scale.
 
-**GATE, PRE-COMMITTED.** *Does the radii polynomial close in float, with margin?*
-**Yes** → report it; stage C-PILOT can use it as a validated fitness.
-**No** → **STOP AND REPORT — do not harden.** A negative here is worth more than a positive
-anywhere else, because it is about the object certification results actually count on.
+**BEFORE WRITING A SOLVER, GREP `capabilities.py` FOR THE OBJECT.** Leg 45 nearly rebuilt
+`RescaledHLScenario2` from scratch. That ban is permanent.
 
 ---
 
-# DIRECTIVE 2 — C-PILOT: EVOLVE THE LYAPUNOV WEIGHT, ON A KNOWN-ANSWER OBJECT
+# DIRECTIVE 2 — ROUTE-B: EVOLVE THE CERTIFICATE  *(after C-PILOT's gate says yes)*
 
-*(queued behind PORT; see `CLAY_ROADMAP.md` §7 and `plan_of_record.py`)*
-
-For 44 legs the search machinery was pointed at finding the **object**; the bottleneck since
-Route-D has been closing a **certificate** around an object we already have. Route-D
-hand-tuned a function space for **eleven legs** and it turned out `a = 0`-only; Routes K and
-L hand-picked preconditioners. Those are search problems with a fitness that **cannot lie**.
-
-The weight is the narrowest member of the family: fitness = the **worst-case coercivity
-constant** of the linearized operator under that weight. One number, checkable pointwise.
-**Run it on a KNOWN-ANSWER object.** Chen–Hou's 2D profile is still exactly right for this
-— that role never needed the certificate to close, only the answer to be known, which is
-why the 2D work is not wasted.
-
-**GATE.** *Does the new fitness pass the six-property viability gate?* **Yes** → Directive 3.
-**No** → **STOP. Do not run the GA.** Stage 3.5 is the precedent and it is non-negotiable.
+The function space, the operator split, the constants — with fitness the radii polynomial's
+margin, which is a theorem rather than a plot. **Gate: does the searched certificate beat the
+hand-tuned one?** Either answer is reportable; a negative bounds how much of the difficulty
+was tuning versus structure.
 
 ---
 
-# DIRECTIVE 3 — B: EVOLVE THE CERTIFICATE
+# THE TWO THINGS BETWEEN HERE AND A REAL RESULT — NAMED AND QUANTIFIED BY LEG 46
 
-*(queued behind C-PILOT)*
+Do not let these slide out of the writeups. They are the ceiling and they are now numbers.
 
-Search space: the choices a computer-assisted proof currently makes by human taste — the
-weight exponents and norm of the function space, the split of the linearized operator into
-"leading order + finite rank", the truncation dimension, the domain decomposition, the
-preconditioner's free constants. **Fitness: the radii polynomial's margin** — a theorem, not
-a plot, and an under-resolved run cannot fake it.
+1. **INTERVAL ARITHMETIC.** Everything so far is float64 with `A = DF⁻¹`, so `Z₁` measures
+   the *conditioning* of the discretized problem rather than bounding an operator norm on a
+   function space. **It is a rehearsal, not a proof** — the boundary Route-D v16 drew.
+2. **THE TRUNCATION BUDGET, AND IT IS 1.55e+08× OUT.** Leg 46's pre-committed clause P6b:
+   `‖z(X_max=745) − z(X_max=2026)‖ = 1.831e−01` against a ball of `r_max = 1.18e−09`. **The
+   certificate closes around the TRUNCATED object; the true one is eight orders of magnitude
+   outside the ball.** "The polynomial closes" and "the ball does not contain the thing we
+   care about" are both true at once. **Never report the first without the second.**
 
-**GATE.** *Does the searched certificate beat the hand-tuned one?* **Yes** → report the
-margin, and say plainly that the search found it, not us. **No** → report that too; a
-negative bounds how much of the difficulty was tuning versus structure.
-
-**WHAT NEITHER OF THESE DOES.** Create novelty, or touch Clay. They make certification
-attempts cheaper, which widens the set of objects worth attempting. **Wall 2 is a
-dimensional wall, not a tuning wall.** `CLAY_ROADMAP.md` §7.3.
+**CLAY.** Odds remain **~0.05%** behind Walls 1 and 2, and **no link of the L1→L4 chain has
+moved in 46 legs.** Leg 44 opened a rung of the scaffolding and leg 46 ran the machine end to
+end; neither is a chain link, and the writeups say so. Read `CLAY_ROADMAP.md` §7 (ADOPTED)
+before proposing any new direction.
 
 ---
 
@@ -193,39 +162,3 @@ literature in `Papers/MANIFEST.md`. No `Y₀`, `Z₁` or `Z₂` was computed for
 
 ---
 
-*Updated 2026-08-04 (session close, third update). **THAT SESSION SHIPPED THREE LEGS: ROUTE-J
-v1 (the primary-source pass), ROUTE-K v1 (the certification port's first step), and ROUTE-L
-v1 (the preconditioner).** Condensed at leg 45; full detail in `PHASE2_P2_NOTES` §31–§33.*
-
-**(L-0a) STEP (iii) OF THE CERTIFICATION CHAIN IS UNBLOCKED — FIRST TIME IN 44 LEGS.**
-`line_sweep_solve` in `solver/port_certification.py` is an **exact `O(N)` inverse** of the
-full 2D transport operator — one outward Thomas sweep, licensed by radial upwinding being
-outward everywhere (`s_ρ ∈ [0.390, 5.732]`). Stall **0.6623 (flat) → 3.3e−6 at `m`=320**.
-Gated to 9.5e−16. **Scaffolding, not chain.**
-
-**(L-0b/c) BOTH OF §32's NAMED SUSPECTS WERE CLEARED BY A SIX-WAY ABLATION BATTERY; IT IS
-THE ANGULAR TRANSPORT.** Freezing the nonlocal Biot–Savart velocity makes the stall *worse*
-(0.6623 → 0.7582); the wall is not it either, measured by angular band. The boring term
-carries the entire obstruction. **ADI does not work (0.9960, worse than nothing)** — the
-operator does not split, which is what forced the coupled sweep. Keep that negative (76).
-
-**(L-0e) NEWTON STILL FAILED ON THE 2D OBJECT, AND THE OBVIOUS EXPLANATION WAS REFUTED.**
-A **near-null direction**, not a spectrum; the scaling gauge was tested and makes it
-strictly worse. **Left UNIDENTIFIED.** Leg 45 raises the odds it was the translation mode —
-Chen–Huang–Li needed a third constant for exactly this family — but **the 2D object is no
-longer the target and chasing this is banned.**
-
-**(K-0b/d) THE 2D RELAXATION HAS NO FIXED POINT, TWO INDEPENDENT WAYS.** In time it
-**limit-cycles** (`‖F‖_∞` 0.9757 → 0.0257 → 0.2290 at 500/3000/5000 steps); under
-refinement it **diverges** — `1.671e−2 → 7.708e−2 → 2.667e−1` at `n_r = 300/450/600`, **2×
-finer, 16× worse.** `c_ω` holds to **0.77%** across that same ladder because the modulation
-is a *local* read at the origin while the residual grows *at the wall*: **"resolution-stable"
-is not "converged" (71).**
-
-**(J-0b/c/d) SEVEN OF TWELVE STANDING CLAIMS WERE PRE-EMPTED**, `s_c = α/2` by Xu
-arXiv:2607.19762 §6.1 eleven days before our leg. **Xu's Prop 2 (the realization dichotomy)
-is the live correction:** our discretization has **no origin condition**, so §26's
-"continuous spectrum" and §30's "141 of 144 unstable directions" are statements about the
-**maximal `L²` realization** and must say so (70). One result arrived *from* the
-literature: **above `s_c` the balance is dissipation-vs-stretching, `β = σ c_l`, with `ω_t`
-SUBDOMINANT**, carried by a double pole with residue `∝ ν` — **absent inviscidly.**

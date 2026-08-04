@@ -104,7 +104,22 @@ STAGES = [
         "id": "PORT",
         "name": ("Finish the certification port -- RE-AIMED BY M at the 1D non-symmetric "
                  "Hou-Luo profile, as a BORDERED system"),
-        "status": "NEXT",
+        "status": "DONE",
+        "done": (
+            "leg 46, 2026-08-04. GATE: YES, WITH A CEILING. solver/bordered_hl.py + "
+            "test_bordered_hl.py 10/10; experiments/p2_route_port_v1_bordered.py -> "
+            "writeup/data/p2_route_port_v1_bordered.json; PHASE2_P2_NOTES section 35; 7/7 "
+            "pre-committed clauses. Newton converges to 5.7e-15 in 16 steps (4 on "
+            "continuation) where the relaxation floors at ~1e-2; the contraction ratio "
+            "extrapolates to -2.511926 against CHL's -2.5114 (2.09e-04), the 1.17% gap "
+            "attributed to REACH not resolution. **The radii polynomial CLOSES IN FLOAT at "
+            "every rung** (Y0/budget 1.95e-04 / 6.36e-04 / 2.40e-04 at n=201/401/801). "
+            "**AND CLAUSE P6b -- pre-committed before the certificate was computed -- SAYS "
+            "THE BALL IS 1.55e+08x TOO SMALL TO CONTAIN THE OBJECT**: the truncation "
+            "distance is 1.831e-01 against r_max 1.18e-09. It closes around the TRUNCATED "
+            "object. It is a float rehearsal (A = DF^-1 in float64), not a proof. Carried to "
+            "stage B: one weight constant is worth ~5200x, and p* = 0.39 is a wall the "
+            "EQUATION built (the tail is |X|^-0.394)."),
         "why_here": (
             "M re-aimed this stage, which is what M's YES branch said it would do. The "
             "target is HL_S2_nonsymmetric, not Chen-Hou's 2D profile: same certification "
@@ -145,7 +160,7 @@ STAGES = [
     {
         "id": "C-PILOT",
         "name": "Pilot: evolve the Lyapunov weight, on an object with a KNOWN answer",
-        "status": "QUEUED",
+        "status": "NEXT",
         "why_here": (
             "The narrowest member of the re-framing, and the right first bite: the fitness is "
             "ONE NUMBER (the worst-case coercivity constant of the linearized operator under "

@@ -2785,3 +2785,98 @@ it — §8 documented that already); (3) then `Y₀`, `Z₁`, `Z₂` against the
 **NOVELTY: nothing claimed.** Naming an object as uncertified is a statement about the
 literature in `Papers/MANIFEST.md`, read for this leg. No `Y₀`, `Z₁` or `Z₂` was computed
 for any candidate. No link of the L1→L4 chain moved; Clay stays ~0.05%.
+
+
+## §35 — ROUTE-PORT v1 DONE (2026-08-04): THE BORDERED SYSTEM ON THE UNCERTIFIED OBJECT.
+## THE RADII POLYNOMIAL CLOSES IN FLOAT AT EVERY RUNG -- AND THE BALL IS 1.55e+08x TOO
+## SMALL TO CONTAIN THE OBJECT. THE SECOND CLAUSE WAS PRE-COMMITTED.
+
+solver/bordered_hl.py + test_bordered_hl.py **10/10**;
+experiments/p2_route_port_v1_bordered.py -> writeup/data/p2_route_port_v1_bordered.json.
+BLOG/TECHNICAL_P2_ROUTEPORT_V1.md. Deterministic (**16.7 s**). Plan stage PORT -> DONE.
+**No link of the L1->L4 chain moved.**
+
+**TARGET (Route-M's, sec 34): `HL_S2_nonsymmetric`** -- the strictly positive, regular,
+NON-SYMMETRIC self-similar profile of the 1D Hou-Luo model, CHL arXiv:2604.01868 sec 2.5 /
+sec 4, reported April 2026 as a "previously unreported blowup phenomenon", **NUMERICAL ONLY,
+no proof of any kind.**
+
+**(P-1) BORDERED FROM THE START, AND THE BORDERS ARE LOAD-BEARING.** The steady form of CHL
+(4.1) carries THREE continuous gauge freedoms -- amplitude, dilation, **translation** (the
+last is why three and not two: a non-symmetric profile has no symmetry point to pin it) -- so
+the system is 2n equations against 2n+3 unknowns. CHL's (4.2) supplies exactly three BORDER
+ROWS pinning Omega(0), Omega_X(0), V(0). **This shape is a direct consequence of sec 33's
+(L-7)**: on the 2D object we solved then projected, and Newton accepted no step at all.
+**Ablation: drop the borders and it does NOT converge -- residual 1.42e-2 after 60 iterations
+against 1e-14 in 4 with them.**
+
+**(P-2) NEWTON CONVERGES WHERE THE RELAXATION FLOORS, AND THE FAR FIELD IS WHY.**
+n = 201/301/501/801/1201 -> residual **5.66e-15 / 7.61e-15 / 1.25e-14 / 3.12e-14 / 3.52e-14**,
+16 iterations cold then 4 on continuation. `RescaledHLScenario2` time-steps the SAME equations
+with the SAME origin gauge and **floors at ~1e-2** (its own leg said so in advance). The
+steady equation forces an ALGEBRAIC tail **Omega ~ |X|^(c_om/c_l) ~ |X|^-0.394**, and a
+relaxation from compactly-decaying data must TRANSPORT that tail out to |X| ~ 745. **Newton
+does not transport; it solves.** That is the whole reason a defect Y_0 exists here and did
+not in sec 32.
+
+**(P-3) THE 1.17% RATIO GAP IS REACH, NOT RESOLUTION -- AND IT EXTRAPOLATES.** The ratio is
+resolution-converged to the 4th decimal (-2.541222 -> -2.540746 over n=201..1201) and still
+1.17% from CHL's -2.5114. Reach/stretch/datum were ablated TOGETHER before naming a suspect
+(lesson 74) and reach is the mover: rho_max = 6/7/8/9 -> X_max = 100.9/274.2/745.2/2025.8 ->
+ratio **-2.583087 / -2.557642 / -2.541222 / -2.530473**. Power law in X_max with slope
+**-0.437** (consistent with the tail exponent -0.394), extrapolating to **-2.511926 vs CHL's
+-2.5114, rel err 2.09e-04**; two independent windows agree to **0.93%**.
+
+**(P-4) THE CERTIFICATE CLOSES -- AND THE SPACE IS WHAT CLOSES IT.** Weighted sup norm,
+A = DF^-1 in float64. Y_0/budget, tuned vs naive, at n = 201/401/801:
+**1.95e-04 / 6.36e-04 / 2.40e-04 (all feasible)** against **1.0125 / 3.3193 / 1.2578 (none
+feasible)**. The two differ in ONE CONSTANT -- the weight's length scale w_l, 0.01*X_max
+against X_max -- and it is worth **5186 / 5222 / 5236x**. **Closure is a property of the
+SPACE, not of the object.** Found before stage B was scheduled; it is the empirical case for
+stage B and it was not gone looking for.
+
+**(P-5) AND THE WEIGHT HAS A WALL THE EQUATION BUILT.** p* = 0.39 is NOT tuned: the profile's
+own tail is |X|^-0.394, so a weight (1+X^2)^(p/2) with **p > 0.394 makes the TRUE profile's
+norm infinite**. Any stage-B search over this space is searching a box with one wall already
+set by the object.
+
+**(P-6) THE CEILING, PRE-COMMITTED AS CLAUSE P6b BEFORE THE CERTIFICATE WAS COMPUTED.**
+*How far is the truncated object from the less-truncated one, in the certificate's OWN norm?*
+
+    ||z(X_max=745) - z(X_max=2026)|| = 1.831e-01   (worst block: Omega)
+    the float ball                   : r in [2.97e-12, 1.18e-09]
+    ratio                            : 1.548e+08
+
+**THE CERTIFICATE CLOSES AROUND THE TRUNCATED OBJECT. THE TRUE OBJECT IS EIGHT ORDERS OF
+MAGNITUDE OUTSIDE THE BALL.** "The polynomial closes" and "the ball does not contain the
+thing we care about" are both true at once, and **reporting only the first is the exact
+failure mode WIN_CONDITION.md exists to prevent.**
+
+**WHAT THIS IS NOT.** A float REHEARSAL, not a proof -- A is DF^-1 in float64, so Z_1
+measures the CONDITIONING of the discretized problem rather than bounding an operator norm on
+a function space; nothing is interval-enclosed (the boundary Route-D v16 drew). Not a
+certification of CHL's object: it is a certification-shaped computation about a
+finite-dimensional TRUNCATION of it, with the distance to the real thing measured and
+reported as too large. **Not a link of the chain.**
+
+**WHAT IT DOES ESTABLISH:** the machinery runs END TO END on an uncertified object for the
+first time -- Newton converges, the defect exists, the bounds assemble, the polynomial closes
+-- and the two things between here and a real result are now **named and quantified**:
+interval arithmetic, and the truncation budget (1.55e+08x).
+
+**NEW BANKED LESSONS (77)-(79).**
+**(77) PRE-COMMIT A CLAUSE THAT ASKS WHETHER YOU CERTIFIED THE RIGHT OBJECT, not just whether
+the certificate closed.** P6b was written before the certificate was computed and it is the
+whole result. Without it this leg ships a headline that is true clause by clause and
+misleading overall.
+**(78) A GAUGE FREEDOM IS AN UNKNOWN, NOT A POST-PROCESSING STEP.** sec 33 solved then
+projected and Newton took no step; here the same three freedoms are unknowns of the same
+Newton system and it converges in 4. **Count the continuous symmetries FIRST and border the
+system by that count** -- a non-symmetric object has one more than a symmetric one.
+**(79) WHEN A METHOD FLOORS, ASK WHAT IT HAS TO TRANSPORT.** The relaxation floors at 1e-2
+because an algebraic far-field tail must be carried out to |X| ~ 745; Newton solves for it
+instead. The floor was a property of the METHOD's information flow, not of the problem.
+
+**NEXT (plan_of_record.py): stage C-PILOT** -- evolve the Lyapunov weight on a known-answer
+object, with the six-property viability gate re-run ON THE NEW FITNESS before any GA compute.
+(P-4)'s 5236x and (P-5)'s wall are the search space's motivation and its one hard boundary.

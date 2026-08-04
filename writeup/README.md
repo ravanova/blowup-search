@@ -443,6 +443,31 @@ writeup/
     `renorm=True` pins and `F` omits — was **tested and refuted** (projecting onto it
     accepts *no* step at all). Recorded as unidentified. *(fig 41)*
 
+46. [TECHNICAL_P2_ROUTEPORT_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md) ·
+    [BLOG_P2_ROUTEPORT_V1.md](4_p2_lottery/BLOG_P2_ROUTEPORT_V1.md) — **Route-PORT v1**, the
+    bordered system on **an object nobody has certified**: `HL_S2_nonsymmetric`, the
+    non-symmetric self-similar profile of the 1D Hou–Luo model (Chen–Huang–Li
+    arXiv:2604.01868 §2.5/§4), reported April 2026 as numerical-only. **Bordered from the
+    start** — the steady system carries three gauge freedoms (amplitude, dilation, and
+    **translation**, the last because a non-symmetric profile has no symmetry point), so
+    it is three equations short and CHL's (4.2) supplies three border rows. That shape is a
+    direct consequence of leg 44, where solve-then-project made Newton accept **no step at
+    all**; the ablation confirms the borders are load-bearing (drop them → residual
+    **1.42e−2 after 60 iterations** against 1e−14 in 4). **Newton converges where the
+    relaxation floors**, 5.66e−15 at `n`=201 against the relaxation's ~1e−2 — the far field
+    is why, since the steady equation forces an algebraic tail `|X|^−0.394` a relaxation must
+    *transport* to `|X|~745` and Newton merely solves for. The 1.17% ratio gap is **reach,
+    not resolution**, ablated before a suspect was named: `X_max` = 100.9/274.2/745.2/2025.8
+    → −2.5831/−2.5576/−2.5412/−2.5305, a power law of slope **−0.437**, extrapolating to
+    **−2.511926 vs CHL's −2.5114 (2.09e−04)**. **The radii polynomial closes in float at
+    every rung** (`Y₀/budget` 1.95e−04 / 6.36e−04 / 2.40e−04) — and **closure is a property
+    of the space**: the naive weight fails everywhere (1.0125 / 3.3193 / 1.2578) and the two
+    differ in **one constant worth ~5200×**, with `p* = 0.39` a wall the *equation* built.
+    **AND THE CEILING, PRE-COMMITTED AS CLAUSE P6b BEFORE THE CERTIFICATE WAS COMPUTED:** the
+    truncation distance is **1.831e−01** against a ball of `r_max` = **1.18e−09**, so the
+    certificate closes around the **truncated** object and the true one is **1.55e+08×**
+    outside it. A float rehearsal, not a proof. 7/7 clauses; **no chain link moved**.
+
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
 record. **As of 2026-08-04 it has a SIXTH PASS and it is the first one against primary
@@ -528,6 +553,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_j_v1_literature.json` | Arc 4 / fig39 — provenance for each primary source (what was read, what it gates); J1 the Schochet constant, both candidates x 3 configurations with every residual; J2 the (E) ↔ ALS (57)-(58) parameter map, pointwise differences at four times, a second parameter set, and the `t_c` check; J3 the `c_l` ladder with the `dτ` floor, the resolved and REFUSED rungs both recorded (including what the refused ones would have read); J4 the collapse spread at four `β` plus the deepening sub-ladder that makes `β = 2` a measurement rather than a fit; J5 our branch against Xu Table 1 row by row, with `a_c` from all three sources; J6 the twelve-claim ledger, each entry naming its source, verdict and what survives |
 | `p2_route_k_v1_port.json` | Arc 4 / fig40 — K1 the steps ladder with the sup residual, `c_l`, `c_ω`, the ratio and its distance from Chen–Hou at each rung, plus Route-G's committed resolution ladder re-read and its growth factor; K2 the argmax of every field's residual in `(r, β)` with wall/outer-edge flags; K3 the instrument controls (both GMRES systems, and `‖Jv‖` at six step sizes with the inter-rung drift); K4 the Krylov ladders at BOTH seeds, unpreconditioned and preconditioned, each with its flat-or-bending verdict and the seed-dependence block; K5 the radii-polynomial status, carrying no fabricated bounds |
 | `p2_route_l_v1_precond.json` | Arc 4 / fig41 — the seed state and the measured `s_ρ` range that licenses the sweep; L1 six ablation ladders plus the ranking by ladder gain and a `worse_than_full` flag, with the un-ablated variant's agreement with `solver.rhs`; L2 the stalled Krylov residual's energy by angular band for each field against the proportional share; L3 four preconditioner ladders (none, radial-only, ADI, line sweep) with their flat-or-bending verdicts and the sweep's deeper rungs; L4 the Newton iterations with each step's GMRES residual, Krylov dimension, accepted λ and line-search flag; L5 the gauge-projection test and the hypothesis it refutes |
+| `p2_route_port_v1_bordered.json` | Arc 4 — Route-PORT v1: A the Newton ladder (residual, iterations, the three modulation constants, the ratio and its error vs CHL, plus profile shape and measured-vs-predicted tail exponents at every rung); B the reach/stretch/datum ablation run together before a suspect was named, including the un-bordered solve that fails; C the reach ladder, its power law and two independent extrapolation windows; D the certificate at three resolutions in tuned and naive weights with every constituent norm, plus the p-sweep and `p*`; E the ceiling — the truncation distance in the certificate's own norm against the ball; and the 7 pre-committed predicate clauses |
 | `p2_route_h_v1_critical.json` | Arc 4 / fig37 — H1 the closed-form viscous blow-up and its PDE residual in closed form, H2 the `a = 0` marginal branch (`α ≡ 1`, `α₁ = 0`), H3 the `a = 1/2` branch with the `K = 96..240` ladder and both the secant extrapolant and the chord it corrects, H4 the third point REFUSED with its signal-to-residual ratio and the verdict it would have quoted, H5 the dissipative spectrum vs `μ` with the integer ladder and the planted control, H6 the verdict with its `τ` scales, H7 the time-dependent cross-check with its `under_resolved` caveat |
 | `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
