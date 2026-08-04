@@ -2880,3 +2880,68 @@ instead. The floor was a property of the METHOD's information flow, not of the p
 **NEXT (plan_of_record.py): stage C-PILOT** -- evolve the Lyapunov weight on a known-answer
 object, with the six-property viability gate re-run ON THE NEW FITNESS before any GA compute.
 (P-4)'s 5236x and (P-5)'s wall are the search space's motivation and its one hard boundary.
+
+
+## §36 — ROUTE-PORT v2 DONE (2026-08-04): REACH MAKES THE TRUNCATION GAP **WORSE**, +0.47
+## DECADES PER UNIT rho. BRUTE FORCE CANNOT CLOSE IT AT ANY SIZE. A TAIL LEMMA IS FORCED.
+
+experiments/p2_route_port_v2_reach.py -> writeup/data/p2_route_port_v2_reach.json.
+TECHNICAL_P2_ROUTEPORT_V2.md. Deterministic (**4.4 s**), 3/3 pre-committed clauses.
+**No link of the chain moved.**
+
+**WHY THE LEG EXISTS.** sec 35 closed the certificate around the TRUNCATED object at 1.55e+08x
+the ball radius, and I first called that "not close to affordable", then CORRECTED myself: the
+grid is LOG-radial, so reach costs logarithmically, and if the distance kept falling like sec
+35's X_max^-0.437 law the gap might be a handful of grid points. **That correction applied a
+power law fitted to the CONTRACTION RATIO to the WEIGHTED DISTANCE, a quantity it was never
+fitted to.** Both readings were guesses. This measures the thing itself.
+
+**THE LADDER (dρ = 0.02 held fixed, so reach varies and nothing else):**
+
+    rho_max   X_max     n     distance    r_max       ratio
+      6       100.9    301    3.678e-01   5.296e-09   6.94e+07
+      7       274.2    351    2.598e-01   4.626e-09   5.62e+07
+      8       745.2    401    1.836e-01   1.182e-09   1.55e+08
+      9      2025.8    451    2.049e-01   2.866e-10   7.15e+08
+     10      5506.6    501    3.306e-01   7.558e-11   4.37e+09
+
+    d log10(distance)/d rho = -0.0196
+    d log10(r_max)   /d rho = -0.4899
+    d log10(ratio)   /d rho = +0.4703     (pre-committed gate: -0.05)
+
+**BOTH GUESSES WERE WRONG, IN OPPOSITE DIRECTIONS.** The distance does NOT fall -- slope
+-0.02, and over the last three rungs it RISES (0.184 -> 0.205 -> 0.331). That is what an
+ALGEBRAIC far field does: every unit of reach exposes more un-resolved tail, so the two
+truncations keep differing by about the same weighted amount. And the ball SHRINKS fast
+(-0.49, a factor of ~70 across the ladder), which is not mysterious -- the tuned weight is
+**w_l = 0.01*X_max BY CONSTRUCTION**, so the norm the ball is measured in grows with the
+domain, and Z_2 grows with it.
+
+**VERDICT: TAIL LEMMA FORCED.** Not "expensive" -- **the trend has the WRONG SIGN**, so there
+is no X_max, however large, at which the float ball contains the true object. rho=10 is **28x
+worse** than rho=6. Certifying on the whole line requires an **ANALYTIC FAR-FIELD ENCLOSURE**:
+a rigorous bound for |X| > X_max from the asymptotic expansion, error folded into the budget,
+so the finite-dimensional certificate plus the tail estimate covers R. Standard apparatus in
+validated numerics on unbounded domains; **real mathematics rather than more compute.**
+
+**IT RE-PRICES L1, WHICH IS THE ACTIONABLE OUTPUT.** Before: interval arithmetic
+(engineering) + truncation (unknown). Now: **interval arithmetic (engineering -- and
+solver/interval.py is an arithmetic layer that has NEVER been wired to a certificate) + a TAIL
+LEMMA (mathematics, forced, and nobody here has written one).** "Just refine" is now a
+permanent ban in plan_of_record.py.
+
+**NEW BANKED LESSON (80). A POWER LAW BELONGS TO THE QUANTITY IT WAS FITTED TO.** sec 35's
+X_max^-0.437 was fitted to the contraction ratio; I extrapolated it to the weighted distance
+and got an answer that was wrong by an order of magnitude AND by sign. The correction I made
+in conversation was more confident than the previous error and no better founded. **Before
+extrapolating a fitted law, name the quantity it was fitted to** -- and if it is not the one
+in hand, the honest move is to measure rather than to transfer.
+
+**PLAN CHANGE (user direction, same day): stage V is NEXT.** The user asked how to move a
+chain link toward Clay; checked against sec 24's definition, **the chain cannot be climbed** --
+L2 and L3 are occupied by Chen-Hou, L4 is out of reach by Wall 2, and only L1 is movable.
+The one Clay-ADJACENT route matched to this project's holdings is **whether a CERTIFIED
+inviscid blow-up survives dissipation AS A CERTIFICATE** (the Euler->NS gap is exactly
+viscosity). **Its novelty check is a pre-committed BAN, not a suggestion** -- leg 42 deleted
+seven of twelve novelty claims and this route was flagged as a speculation of the same kind
+when it was proposed.

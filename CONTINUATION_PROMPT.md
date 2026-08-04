@@ -2,80 +2,88 @@
 
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
-> bans. **`test_plan_of_record.py` fails if this file and the plan disagree**, so the plan is
-> the source of truth and this file is its briefing. Stages `M` and `PORT` are **DONE**;
-> **`C-PILOT` is NEXT.**
+> bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M` and
+> `PORT` are **DONE**; **`ROUTE-V` is NEXT**, by user direction on 2026-08-04.
 
 ---
 
-# DIRECTIVE 1 — ROUTE-C-PILOT: EVOLVE THE LYAPUNOV WEIGHT, ON A KNOWN-ANSWER OBJECT
+# WHY THE PLAN CHANGED — THE CHAIN CANNOT BE CLIMBED
 
-**WHY THIS IS NOW THE LEG, AND THE EVIDENCE ARRIVED BY ACCIDENT.** Leg 46 built the
-certificate on the uncertified 1D Hou–Luo profile and found that **closure is a property of
-the SPACE, not of the object**. The tuned and naive weights differ in **one constant** — the
-weight's length scale `w_l`, `0.01·X_max` against `X_max` — and that constant decides whether
-the radii polynomial closes at all:
+The user asked how to move a link of the L1→L4 chain toward Clay. Checked against the chain's
+own definition (`PHASE2_P2_NOTES.md` §24), the answer is that **it cannot be climbed as
+written**:
 
-| `n` | tuned `Y₀/budget` | naive | gain |
-|---|---|---|---|
-| 201 | **1.95e−04** ✓ | 1.0125 ✗ | 5186.6 |
-| 401 | **6.36e−04** ✓ | 3.3193 ✗ | 5221.5 |
-| 801 | **2.40e−04** ✓ | 1.2578 ✗ | 5235.6 |
+* **`L1`** — a certified 1D toy profile. Movable, and leg 45 found an *uncertified* target for
+  it. **This is the only movable link.**
+* **`L2`** — 2D Boussinesq. **Chen–Hou proved it**, 145 pages.
+* **`L3`** — axisymmetric 3D Euler with boundary. **Chen–Hou proved that too.**
+* **`L4`** — 3D Navier–Stokes. Clay, and out of reach of interval arithmetic by Wall 2.
 
-That was not gone looking for — it fell out of a table built for another purpose — and it is
-the empirical case for this stage.
-
-**THE SEARCH SPACE HAS ONE WALL ALREADY BUILT BY THE EQUATION.** `p* = 0.39` is not tuned:
-the profile's own tail is `Ω ~ |X|^(c_ω/c_l) ~ |X|^−0.394`, so a weight `(1+X²)^(p/2)` with
-`p > 0.394` makes the **true** profile's norm infinite. Search inside that box; do not
-rediscover its wall.
-
-**WHAT THE LEG MUST DELIVER.**
-1. A **searched weight** beating the hand-picked one, on an object where the answer is
-   **known** — Chen–Hou's 2D profile is the substrate for exactly this and it is the reason
-   the 2D work is not wasted. Validate the fitness where the result is checkable before
-   trusting it anywhere else.
-2. The fitness is **one number** (the worst-case coercivity constant, or `Y₀/budget`) and it
-   **cannot be faked by an under-resolved run** — that is the whole reason this target beats
-   blow-up hunting. Say so, and gate it anyway.
-3. **The six-property viability gate, re-run ON THE NEW FITNESS, before any GA compute.**
-
-**GATE (pre-committed, in `plan_of_record.py`):** does the new fitness pass the six-property
-viability gate? **YES** → proceed to stage `B`. **NO** → **STOP. Do not run the GA.** Stage
-3.5 is the precedent and it is non-negotiable: a fitness that fails the gate produces
-confident garbage at scale.
-
-**BEFORE WRITING A SOLVER, GREP `capabilities.py` FOR THE OBJECT.** Leg 45 nearly rebuilt
-`RescaledHLScenario2` from scratch. That ban is permanent.
+The rungs above `L1` are occupied or unreachable. It reads like a ladder but climbing rung 1
+does not bring rung 4 nearer. **Stop using "toward Clay" as though the ladder carried you
+there** — and note that `L1` itself was re-priced by leg 47 (below).
 
 ---
 
-# DIRECTIVE 2 — ROUTE-B: EVOLVE THE CERTIFICATE  *(after C-PILOT's gate says yes)*
+# DIRECTIVE 1 — ROUTE-V: DOES A CERTIFIED INVISCID BLOW-UP SURVIVE DISSIPATION?
 
-The function space, the operator split, the constants — with fitness the radii polynomial's
-margin, which is a theorem rather than a plot. **Gate: does the searched certificate beat the
-hand-tuned one?** Either answer is reportable; a negative bounds how much of the difficulty
-was tuning versus structure.
+**This is the one route identified that is both Clay-ADJACENT and matched to what this
+project already owns.** The Euler→NS gap **is** viscosity: 3D Euler blow-up with boundary is
+proved, NS is not, and the entire difference is the dissipative term.
+
+**What this project already has, and probably nobody holds together:**
+* **the certification machinery** — leg 46: bordered Newton to 5.7e−15, `Y₀`/`Z₁`/`Z₂`
+  assembling, the radii polynomial closing in float;
+* **the dissipative machinery** — Routes F/H/I: `s_c = α/2`, `μ` as an autonomous coordinate,
+  `α₁` as the marginal invariant;
+* **the criticality result** — NS sits **exactly** at the exponent where every scaling
+  argument returns zero information, and criticality is a *tar pit*: `μ` decays
+  algebraically, nine times per decade forever.
+
+**THE QUESTION IS NOT THE SCALING ONE.** "Does the scaling say the blow-up survives" was
+Route-F, and **Xu pre-empted it** (`arXiv:2607.19762` §6.1, eleven days before us). The new
+question is: **switch dissipation on and ask whether the RADII POLYNOMIAL STILL CLOSES**, then
+walk `μ` up toward criticality watching the margin. Deliver the certificate as a function of
+`μ`, the margin's trajectory, and whether it degrades smoothly or falls off a cliff — and at
+which `μ`.
+
+**⛔ THE NOVELTY CHECK COMES FIRST, AND IT IS A BAN, NOT A SUGGESTION.** *Has anyone already
+done certification-under-dissipation for a self-similar profile?* Use Route-M's ledger
+machinery (`solver/target_selection.py`, `solver/literature_gates.py`) and the Tier 2/3 PDFs
+already fetched. **YES → report it, fall back to `C-PILOT`, do not spend the leg. NO →
+proceed.** Leg 42 deleted seven of twelve novelty claims; **this route is a speculation about
+novelty of exactly that kind, and it was flagged as such when it was proposed.** Check it
+before building it.
+
+**AND SAY THE CEILING IN EVERY WRITEUP.** Even complete success here is **not Clay and not a
+chain link** — it is a statement about a toy model's certificate under dissipation. What
+makes it Clay-*adjacent* is that it probes the one structural difference between the proved
+case and the open one. A certificate that **dies** at small `μ` is as informative as one that
+survives, and is the more likely outcome.
 
 ---
 
-# THE TWO THINGS BETWEEN HERE AND A REAL RESULT — NAMED AND QUANTIFIED BY LEG 46
+# WHAT LEG 47 SETTLED, AND IT RE-PRICES `L1`
 
-Do not let these slide out of the writeups. They are the ceiling and they are now numbers.
+Leg 46 left one number unmeasured. Leg 47 measured it, on a pre-committed predicate with both
+branches actionable. Holding `dρ` fixed and varying reach only:
 
-1. **INTERVAL ARITHMETIC.** Everything so far is float64 with `A = DF⁻¹`, so `Z₁` measures
-   the *conditioning* of the discretized problem rather than bounding an operator norm on a
-   function space. **It is a rehearsal, not a proof** — the boundary Route-D v16 drew.
-2. **THE TRUNCATION BUDGET, AND IT IS 1.55e+08× OUT.** Leg 46's pre-committed clause P6b:
-   `‖z(X_max=745) − z(X_max=2026)‖ = 1.831e−01` against a ball of `r_max = 1.18e−09`. **The
-   certificate closes around the TRUNCATED object; the true one is eight orders of magnitude
-   outside the ball.** "The polynomial closes" and "the ball does not contain the thing we
-   care about" are both true at once. **Never report the first without the second.**
+```
+d log10(distance) / dρ  =  −0.0196      the gap does NOT shrink
+d log10(r_max)    / dρ  =  −0.4899      the ball shrinks fast
+d log10(ratio)    / dρ  =  +0.4703      so reach makes it WORSE
+```
 
-**CLAY.** Odds remain **~0.05%** behind Walls 1 and 2, and **no link of the L1→L4 chain has
-moved in 46 legs.** Leg 44 opened a rung of the scaffolding and leg 46 ran the machine end to
-end; neither is a chain link, and the writeups say so. Read `CLAY_ROADMAP.md` §7 (ADOPTED)
-before proposing any new direction.
+**Extending the domain cannot close the truncation gap at any size — the trend has the wrong
+sign.** `ρ = 10` is **28× worse** than `ρ = 6`. Both of the earlier guesses were wrong, in
+opposite directions: the distance is flat (an algebraic far field keeps exposing more
+un-resolved tail), and the ball shrinks because the tuned weight `w_l = 0.01·X_max` grows *by
+construction*.
+
+**So `L1` now costs: interval arithmetic** (engineering — `solver/interval.py` is an
+arithmetic layer that has never been wired to a certificate) **plus an analytic far-field
+enclosure** (mathematics, forced, and nobody here has written one). **"Just refine" is banned
+in `plan_of_record.py` and this is why.**
 
 ---
 
@@ -161,4 +169,5 @@ that last gate rejected **fourteen** of our own entries on first run.
 literature in `Papers/MANIFEST.md`. No `Y₀`, `Z₁` or `Z₂` was computed for any candidate.
 
 ---
+
 

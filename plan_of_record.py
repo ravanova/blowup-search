@@ -119,7 +119,12 @@ STAGES = [
             "distance is 1.831e-01 against r_max 1.18e-09. It closes around the TRUNCATED "
             "object. It is a float rehearsal (A = DF^-1 in float64), not a proof. Carried to "
             "stage B: one weight constant is worth ~5200x, and p* = 0.39 is a wall the "
-            "EQUATION built (the tail is |X|^-0.394)."),
+            "EQUATION built (the tail is |X|^-0.394). **LEG 47 (Route-PORT v2) then priced "
+            "the ceiling: extending the domain makes the gap WORSE, +0.47 decades per unit "
+            "rho -- the distance is flat (-0.02) while the ball shrinks (-0.49) -- so reach "
+            "cannot close it AT ANY SIZE and an analytic far-field enclosure (a tail lemma) "
+            "is FORCED. The L1 road is now priced: interval arithmetic (engineering) plus a "
+            "tail lemma (mathematics, and nobody here has written one).**"),
         "why_here": (
             "M re-aimed this stage, which is what M's YES branch said it would do. The "
             "target is HL_S2_nonsymmetric, not Chen-Hou's 2D profile: same certification "
@@ -158,9 +163,51 @@ STAGES = [
         "time_box": "two legs (identify, then border+solve)",
     },
     {
+        "id": "V",
+        "name": ("Viscous survival: does a CERTIFIED inviscid blow-up survive dissipation, "
+                 "as a CERTIFICATE?"),
+        "status": "NEXT",
+        "why_here": (
+            "USER DIRECTION, 2026-08-04, after being shown that the L1->L4 chain cannot be "
+            "climbed: L2 and L3 are occupied by Chen-Hou and L4 is out of reach of interval "
+            "arithmetic, so 'move a link' has no Clay-relevant reading. This is the ONE route "
+            "identified that is both Clay-ADJACENT and matched to what this project already "
+            "owns. The Euler->NS gap IS viscosity: 3D Euler blow-up with boundary is proved, "
+            "NS is not, and the entire difference is the dissipative term. Routes F/H/I "
+            "measured in 1D that NS sits EXACTLY at the critical exponent where every scaling "
+            "argument returns zero information, and that criticality is a tar pit (mu decays "
+            "algebraically, nine times per decade). Leg 46 built certification machinery. "
+            "Nobody appears to have combined them."),
+        "deliverable": (
+            "The question is NOT 'does the scaling say the blow-up survives' -- Xu did that "
+            "and pre-empted Route-F. It is: **switch dissipation on and ask whether the RADII "
+            "POLYNOMIAL STILL CLOSES**, and walk mu up toward criticality watching the margin. "
+            "Deliver: (1) the certificate as a function of mu on an object where the inviscid "
+            "certificate is in hand; (2) the margin's trajectory as mu -> mu_crit; (3) whether "
+            "it degrades smoothly or falls off a cliff, and at which mu."),
+        "gate": {
+            "question": ("FIRST: has anyone already done certification-under-dissipation for "
+                         "a self-similar blow-up profile?"),
+            "if_yes": ("Report it, fall back to stage C-PILOT, and do NOT spend the leg. "
+                       "Leg 42 deleted seven of twelve novelty claims; this one is a "
+                       "SPECULATION about novelty of exactly that kind and it gets checked "
+                       "before it gets built, using Route-M's ledger machinery."),
+            "if_no": ("Proceed to the deliverable. Report the margin trajectory whichever way "
+                      "it goes -- a certificate that DIES at small mu is as informative as one "
+                      "that survives, and is the more likely outcome."),
+        },
+        "time_box": ("one leg for the novelty check, then one for the measurement -- and the "
+                     "novelty check comes first, always"),
+        "honesty": (
+            "Even a complete success here is NOT Clay and is NOT a chain link. It is a "
+            "statement about a toy model's certificate under dissipation. What makes it "
+            "Clay-ADJACENT is that it probes the one structural difference between the "
+            "proved case (Euler) and the open one (NS). Say that in every writeup."),
+    },
+    {
         "id": "C-PILOT",
         "name": "Pilot: evolve the Lyapunov weight, on an object with a KNOWN answer",
-        "status": "NEXT",
+        "status": "QUEUED",
         "why_here": (
             "The narrowest member of the re-framing, and the right first bite: the fitness is "
             "ONE NUMBER (the worst-case coercivity constant of the linearized operator under "
@@ -218,6 +265,8 @@ BANNED = [
     ("the PORT itself", "M"),
     ("any GA compute on an unvalidated fitness", "C-PILOT"),
     ("another literature leg beyond M's three questions", "M"),
+    ("building stage V's measurement before its novelty check has reported", "V"),
+    ("closing the truncation gap by extending the domain", "never -- leg 47 measured the trend and it has the WRONG SIGN, +0.47 decades per unit rho"),
     ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
      "(arXiv:2210.07191 + Part II); it stays only as C-PILOT's known-answer substrate",
      "never -- leg 45 M1"),
