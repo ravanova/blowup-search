@@ -7,6 +7,26 @@ directory no longer exists. The manifest and `fetch.sh` are committed so the PDF
 re-pulled in one command instead of re-derived from memory. **If you download papers, do
 not commit them; commit any change to this manifest instead.**
 
+**STATUS 2026-08-04 (leg 45, Route-M): TIER 2 AND TIER 3 ARE NOW READ FOR WHAT THEY GATE.**
+The target ledger they produced is `solver/target_selection.py` (`test_target_selection.py`
+9/9), and `LITERATURE_CHECK.md`'s **seventh pass** is the summary. What changed:
+
+* **2302.12877 (CLN)** — the completed unbounded-domain certificate. Their Kawahara `r₀` is
+  now a gate on our own radii-polynomial algebra (reproduced exactly). **They work in
+  Hilbert/Fourier `H^l`, not weighted `ℓ¹`**, so Route-D's weighted-`ℓ¹` no-go and
+  discrete-ball trap are **narrowed, not closed** — still unsearched at primary source.
+* **2604.01868 (CHL)** — carries the **top two uncertified targets**, and its §4 Scenario-2
+  formulation is the three-constant bordered system the port is now aimed at.
+* **2603.25104 (HTW26)** — the third: gCLM one-scale profiles from degenerate data, `a>0`,
+  numerical only, with `c_l` changing sign at `a ≈ 0.2329`.
+* **2308.01528 / 2305.05895 (HQWW)** — the **exclusion list grew**: the Hou–Luo odd
+  non-degenerate profile is proved analytically as well as by CAP, and the **entire smooth
+  gCLM branch for all `a ≤ 1`** is analytic. Certifying either contributes nothing.
+* **1908.09385 (J. Chen)** — checked and it is **analytic**, no computer assistance. Not a
+  CAP precedent; it is an exclusion.
+* **2604.09949** — a 3D Navier–Stokes singularity claim. Audited; see LITERATURE_CHECK §7th
+  pass. Recorded as `CLAIMED_UNUSABLE`, not as certified and not as open.
+
 **STATUS 2026-08-04: EGRESS WORKS. ALL 14 FETCHED ON THE FIRST ATTEMPT. TIER 1 IS READ.**
 See `LITERATURE_CHECK.md` **sixth pass** (the first primary-source pass) and Route-J v1
 (`solver/literature_gates.py`, `test_literature_gates.py` 9/9, fig39). Verdict: seven

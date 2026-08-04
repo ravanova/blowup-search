@@ -36,7 +36,9 @@ Remark 5.4: strong solution for X != singular point, weak at the singularity).
 
 import numpy as np
 
-from solver.line_hilbert import line_hilbert_matrix, natural_spline_slopes
+from solver.line_hilbert import (
+    line_hilbert_matrix, natural_spline_slopes, slope_matrix,
+)
 from solver.gclm_rescaled import _drho_upwind as _upwind_deriv
 
 PI = np.pi
@@ -152,8 +154,14 @@ class RescaledHL:
         return velocity(self.X, Homega, self.X_ref)
 
     def dX(self, f):
-        """d f / dX via the natural cubic spline node slopes (matches line_hilbert)."""
-        return natural_spline_slopes(self.X, f)
+        """d f / dX via the natural cubic spline node slopes (matches line_hilbert).
+
+        Applied as the cached dense slope OPERATOR rather than by re-running the Thomas
+        sweeps: the sweep coefficients depend only on the grid, and this method is
+        called nine times per time step.  Same formula, one gemv (see
+        `line_hilbert.slope_matrix`, and the equivalence gate in test_line_hilbert.py).
+        """
+        return slope_matrix(self.X) @ f
 
     def steady_residual(self, Omega, Theta, c_l, c_omega, U=None,
                         Omega_X=None, Theta_X=None):

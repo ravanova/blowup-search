@@ -2635,3 +2635,153 @@ an explicit one) and translation along the profile branch. (2) a **BORDERED syst
 (1) names it -- append the constraint that pins the direction, rather than projecting after
 the fact, which is exactly what failed in (L-7). (3) only then the profile, the function
 space, Y_0 and Z_1.
+
+## §34 — ROUTE-M v1 DONE (2026-08-04): TARGET SELECTION. THE PORT WAS AIMED AT A CERTIFIED
+## OBJECT FOR TWENTY LEGS, AND THE UNCERTIFIED ONE'S SOLVER WAS ALREADY IN THE REPOSITORY.
+
+Banked record: `writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM_V1.md` + `BLOG_P2_ROUTEM_V1.md` +
+**fig42** (rebuilds from committed `writeup/data/p2_route_m_v1_targets.json` via
+`.venv/bin/python writeup/4_p2_lottery/p2_route_m_v1_evidence.py`).
+Code: `solver/target_selection.py`, `test_target_selection.py` **9/9**; `capabilities.py`,
+`test_capabilities.py` **5/5**; `line_hilbert.slope_matrix` + its gate in
+`test_line_hilbert.py`. Harness: `experiments/p2_route_m_v1_targets.py`.
+
+**THE QUESTION, AND WHY NOBODY HAD ASKED IT.** `CLAY_ROADMAP.md` §2 has said since
+2026-07-23 that the realistic prize is *a novel Tier-3 result on a model where blow-up is
+provable*. The port has been aimed at Chen–Hou's 2D Boussinesq profile since Spike 1.
+**Chen–Hou certified that profile themselves** (arXiv:2210.07191 Part I + Part II, rigorous
+numerics). Every session had a concrete blocked step in front of it — the relaxation
+cycles, the Krylov ladder is flat, Newton creeps — and "should this be the target" was never
+in front of anything, so it never got picked up. Route-J (§31) is the same lesson from the
+other side: reading the literature to check your ANSWERS is half of it; reading it to check
+your QUESTION is the other half.
+
+**(M-1) THE LEDGER. SIX OBJECTS, THREE QUESTIONS EACH, RANKED BY CONTRIBUTION.** Q1 is *is
+there a proof of THIS profile* — not "is blow-up known" — and **an analytic proof counts
+harder than a computer-assisted one**, because an object proved by hand does not become more
+true when a computer re-proves it. Q2 is the unknown count `fields × n^dim + modulation`,
+exact arithmetic, ratioed against **the one object where a proof of this kind is known to
+have been completed**. Q3 is one sentence a specialist would accept. Ranking is Q3 first, Q2
+last, and `test_target_selection.py` **fails if the uncertified ranking is ever in cost
+order** — the cheapest object (602 unknowns) is deliberately rank 2.
+
+**(M-2) GATE: YES. THE NAMED TARGET IS `HL_S2_nonsymmetric`.** Chen–Huang–Li
+arXiv:2604.01868 §2.5/§4: the **non-symmetric positive regular self-similar profile of the
+1D Hou–Luo model**, reported April 2026 as "a previously unreported blowup phenomenon",
+numerical only, **1.11e−3 of the certified object's unknown count**. Their limiting
+constants `(c_l, c_ω, c_r, c_l/c_ω) ≈ (1.0636, −0.4235, 0.0765, −2.5114)`; Chen–Hou–Huang's
+symmetric branch sits at −2.9987, so this is a **different contraction rate, not a
+re-parametrization**. Behind it: gCLM one-scale from degenerate data `a>0` (arXiv:2603.25104
+§4, with `c_l` changing sign at `a ≈ 0.2329`); the same phenomenon in 2D (§6.2); and the
+stability of the singular steady state (their Conjecture 2.4 — blocked on a **function
+space**, because the profile is unbounded and only in `L^p` for `p<2`).
+
+**WHY IT IS RANK 1 AND NOT THE CHEAPEST ONE.** In Chen–Huang–Li's own words, in every
+existing proof of this kind *"the origin always acts as the source of stability"*. This
+profile has **no symmetry point**, so the translation degree of freedom must be carried by
+the certificate itself — their (2.9)/(4.1) adds a third modulation constant `c_r` for
+exactly that. A first certificate for a profile with nothing anchoring it is a
+**methodological** first. It is also the shape leg 44 concluded the port needs: *border the
+system, do not project*.
+
+**(M-3) THE EXCLUSION LIST IS THE LOAD-BEARING HALF, AND IT GREW.** Seven objects proved,
+**four of them analytically**:
+* arXiv:2305.05895 (Huang–Qin–Wang–Wei) proves **the entire smooth gCLM branch for all
+  `a ≤ 1`** by hand, with regularity, monotonicity and decay rates — **the branch Routes D,
+  E and F spent a dozen legs measuring.**
+* arXiv:2308.01528 proves the Hou–Luo odd non-degenerate profile analytically, **after** the
+  Chen–Hou–Huang CAP of the same object.
+* arXiv:1908.09385 (J. Chen) — checked for computer assistance and there is **none**; it is
+  a perturbative analytic argument around the exact `a = 1/2` solution. An exclusion, not a
+  CAP precedent.
+
+**(M-4) "WITHIN REACH" IS NOW A NUMBER: the `Y₀` BUDGET.** The radii polynomial
+`½Z₂r² − (1−Z₁)r + Y₀ < 0` has a root iff **`Y₀ ≤ (1−Z₁)²/(2Z₂)`**. `Z₁, Z₂` are properties
+of the operator and the space; `Y₀` is a property of how well the profile is resolved. Reach
+= can the truncation be pushed until `Y₀` falls under that budget. Gated against a
+**completed** certificate: Cadiot–Lessard–Nave arXiv:2302.12877 Thm 6.6 publish
+`Y₀ ≤ 2.26e−14, r₀ = 2.27e−14`; our algebra returns their `r₀` at **relative error 0.0**,
+implied `Z₁ = 4.41e−3`. The boundary is checked by **bracketing** (feasible at `0.999999999×`
+budget, infeasible at `1.000000001×`) on four `(Z₁,Z₂)` pairs, because a strict inequality
+tested at its own boundary is a coin flip in floating point.
+
+**AND WHAT CLN DOES NOT CLOSE:** they work in **Hilbert/Fourier `H^l` spaces**, not weighted
+`ℓ¹`. Route-D's weighted-`ℓ¹` no-go and discrete-ball trap are **narrowed, not closed** —
+still UNSEARCHED at primary source, and still the only claims with a real chance of being
+new.
+
+**(M-5) THE 3D NAVIER–STOKES CLAIM, AUDITED RATHER THAN ASSUMED (lesson 76).**
+arXiv:2604.09949 claims finite-time singularity for 3D NS on `T³` by computer-assisted
+Newton–Kantorovich. That is Q1 for the most consequential object on the list, so it was
+checked. Its constants `δ = 8.421739e−12, M = 482.6, K = 1.1e4` close `2δMK = 8.9e−5` as
+printed; Kantorovich's hypothesis with `β = M, η ≤ Mδ` is `M²Kδ ≤ ½`, i.e. **one factor of
+`M` larger**, and `2M²Kδ = 4.3e−2` **also closes**, with 23× margin. Its `K` reproduces from
+its own stated factor product to 2.2e−4. **THE ARITHMETIC IS NOT WHERE IT FAILS, and the
+audit says so** — a check that reported "fails" here would be reporting the wrong thing.
+The two reasons it cannot be used stand on their own and are on the face of the document:
+**(i)** no verification package is released (its appendix F: the package "is intended to
+contain" its contents; appendix E: source files "expired during the session"); **(ii)** its
+Thm 12.1 reconstructs the exactly-**backward** self-similar solution excluded by
+Nečas–Růžička–Šverák and Tsai under the decay its own analytic weight implies — and its
+reference list cites Jia–Šverák on **forward** self-similar solutions, which exist, and
+neither non-existence result. Recorded as `CLAIMED_UNUSABLE`: not certified, not open.
+
+**(M-6) THE MEASUREMENT: IS THE NAMED TARGET REACHABLE ON OUR OWN CODE?**
+
+**⏳ PENDING — THE MEASUREMENT IS STILL RUNNING AS OF THIS COMMIT.**
+The refinement ladder for the named target (`experiments/p2_route_m_v1_targets.py`, M3)
+is deterministic and in flight; `writeup/data/p2_route_m_v1_targets.json` and **fig42**
+land with it, and this section is filled from that JSON and not from memory. **Nothing
+above depends on it:** M1 (the ledger), M2 (the budget algebra and the 3D-NS audit) and
+the gate verdict are complete and gated by `test_target_selection.py` 9/9. What M3 adds
+is the *measured* half of question (2) — whether the object our code converges to holds
+up as the grid is refined with the dissipation taken to zero, read as the ladder's
+DIRECTION (lesson 72) and paired with the same reading of Route-K's committed 2D ladder,
+where it went the other way (`1.671e−2 → 7.708e−2 → 2.667e−1` at `n_r = 300/450/600`:
+**2× finer, 16× worse**).
+
+**(M-7) THE SECOND FINDING IS ABOUT US, AND IT IS THE SAME SHAPE AS THE FIRST.**
+`solver/hl_rescaled.py::RescaledHLScenario2` — Chen–Huang–Li's three-constant bordered
+formulation, gauge gated to **4.4e-16**, contraction ratio reproduced to ~1% — was built on
+**2026-07-26** (§8), described in these notes as "the validated brick", and then left. Nine
+legs later the port was aimed at a certified object while the solver for an uncertified one
+sat unused in the same folder. It was found this leg **by grepping for an arXiv number**.
+
+`plan_of_record.py` answers *what is next*; these notes answer *what happened*; **nothing
+answered *what do we have*.** So this leg shipped `capabilities.py`: 35 solver modules, each
+with the object it holds, what it computes, **the strongest known-answer gate it passes with
+the magnitude**, and its test file — plus `test_capabilities.py`, which fails if a solver
+module has no entry, an entry points at a file that does not exist, or a `validated` field
+is too thin to say what was checked. **That last gate rejected fourteen of our own entries
+on its first run** ("against dense norms" — a sentence that sounds like validation and
+contains no claim); each is now a magnitude or an explicit *no independent published known
+answer*.
+
+**(M-8) A 10× SPEEDUP, FOUND BY PROFILING RATHER THAN BY GUESSING.** 81% of a Scenario-2
+step (3.4 s of 4.2 s over forty steps at n=801) was inside `natural_spline_slopes` — two
+Thomas sweeps as **Python loops**, re-executed nine times per step with coefficients that
+depend only on the grid. `line_hilbert.slope_matrix` assembles the operator once per grid
+and applies it as a gemv: **43 ms → 4.2 ms per step at n=801**, gated to 2.7e-13 against the
+sweeps it replaces. This is what made the M6 refinement ladder affordable in one leg.
+
+**NEW BANKED LESSONS (77)-(78).**
+**(77) CHECK THE LITERATURE AGAINST YOUR QUESTION, NOT ONLY AGAINST YOUR ANSWERS.** Route-J
+read the papers to see who had pre-empted our results and deleted seven claims. Nobody read
+them to ask whether the thing we were building was wanted. Twenty legs of certification
+machinery were aimed at a theorem published in 2022. **The target of a programme is a
+literature question, and it expires like any other.**
+**(78) AN INVENTORY IS A CHECK, SO IT DECAYS AT THE RATE OF MEMORY TOO (68, one level
+down).** Thirty-five solver modules is past what fits in a session's head, and the failure
+mode is not confusion — it is silently rebuilding, or silently not using, something already
+validated. The fix is the same as for the plan and for the literature: **make it code, and
+make it fail.**
+
+**WHAT MUST BE BUILT NEXT, IN ORDER:** (1) the **bordered** residual for CHL (4.1) with all
+three constants as unknowns — bordered from the start, NOT projected, which is what failed
+in leg 44 (L-7); (2) a converged profile checked against the normalization-INDEPENDENT
+`c_l/c_ω = −2.5114` (the absolute triple is normalization-dependent and ours will not match
+it — §8 documented that already); (3) then `Y₀`, `Z₁`, `Z₂` against the budget.
+
+**NOVELTY: nothing claimed.** Naming an object as uncertified is a statement about the
+literature in `Papers/MANIFEST.md`, read for this leg. No `Y₀`, `Z₁` or `Z₂` was computed
+for any candidate. No link of the L1→L4 chain moved; Clay stays ~0.05%.

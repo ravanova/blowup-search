@@ -1,5 +1,43 @@
 # Literature check — SIXTH PASS (2026-08-04): the papers are read
 
+> ## 🧭 SEVENTH PASS (leg 45, Route-M): the check turned OUTWARD — what is already PROVED
+>
+> The sixth pass below asks *"has anyone pre-empted our answers?"* Route-M asks the
+> complementary question — *"has anyone already proved the thing we are trying to
+> certify?"* — and the answer for the port's target was **yes, by its own authors, in
+> 2022.** That ledger lives in `solver/target_selection.py::CERTIFICATION_RECORD` and
+> `TARGET_LEDGER`, gated by `test_target_selection.py` (9/9). Summary:
+>
+> | object | proved? | how |
+> |---|---|---|
+> | 2D Boussinesq / 3D Euler w/ boundary (Chen–Hou) — **the port's old target** | **YES** | CAP, arXiv:2210.07191 + Part II |
+> | 1D Hou–Luo, odd non-degenerate profile | **YES, TWICE** | CAP (CHH, Ann. PDE 2022) **and analytically** (arXiv:2308.01528) |
+> | De Gregorio (gCLM `a=1`) | **YES** | CAP, CHH, CPAM 2021 |
+> | **gCLM smooth self-similar profiles, ALL `a ≤ 1`** | **YES** | **analytic**, arXiv:2305.05895 — closes the whole smooth branch Routes D/E/F measured |
+> | dissipative gCLM near `a = 1/2` | **YES** | analytic, arXiv:1908.09385 Thm 1.1 — no computer assistance |
+> | 3D axisym. Euler, `C^{1,α}` | **YES** | analytic, Elgindi, Ann. of Math. 2021 |
+> | 1D Hou–Luo singular steady state — *existence* | **YES** (weak sense) | arXiv:2604.01868 Thm 2.3; **its STABILITY is Conj 2.4, open** |
+> | **1D Hou–Luo NON-SYMMETRIC regular profile** | **NO** | arXiv:2604.01868 §4, numerical, Apr 2026 — **Route-M's named target** |
+> | **gCLM one-scale from degenerate data, `a>0`** | **NO** | arXiv:2603.25104 §4, numerical, Mar 2026 |
+> | **2D Boussinesq non-symmetric profile** | **NO** | arXiv:2604.01868 §6.2, numerical |
+> | 3D Navier–Stokes, backward self-similar profile | **claimed, unusable** | arXiv:2604.09949 — see below |
+>
+> **Tier 2 is now read for what it gates.** `2302.12877` (Cadiot–Lessard–Nave) is the
+> completed unbounded-domain certificate this project's algebra is now checked against
+> (their Kawahara `r₀` reproduced exactly); they work in **Hilbert/Fourier `H^l` spaces**,
+> not weighted `ℓ¹`, so Route-D's weighted-`ℓ¹` no-go and discrete-ball trap are **still
+> unsearched at primary source** — narrowed, not closed.
+>
+> **On arXiv:2604.09949 (3D Navier–Stokes).** Its scalar Newton–Kantorovich closure was
+> recomputed both as printed (`2δMK = 8.9e−5`) and in the form the theorem requires
+> (`2M²Kδ = 4.3e−2`); **both close**, and its `K` reproduces from its own stated factors
+> to 2.2e−4. The arithmetic is not where it fails. It is recorded as unusable because no
+> verification package is released — its appendix F says the reproducibility package "is
+> intended to contain" its contents — and because the exactly-self-similar backward ansatz
+> its Thm 12.1 reconstructs is the one excluded by Nečas–Růžička–Šverák and Tsai under the
+> decay its own analytic weight implies. Its reference list cites Jia–Šverák on **forward**
+> self-similar solutions and neither non-existence result.
+
 > ## ✅ UNBLOCKED, AND DONE. THE FIVE PASSES BELOW ARE SUPERSEDED WHERE THEY CONFLICT.
 >
 > Egress to `arxiv.org`, `export.arxiv.org` and `api.semanticscholar.org` **works as of

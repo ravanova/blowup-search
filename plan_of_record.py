@@ -61,7 +61,19 @@ STAGES = [
     {
         "id": "M",
         "name": "Target selection -- certify WHAT, that isn't already done?",
-        "status": "NEXT",
+        "status": "DONE",
+        "done": (
+            "leg 45, 2026-08-04. GATE: YES. solver/target_selection.py + "
+            "test_target_selection.py 9/9; experiments/p2_route_m_v1_targets.py -> fig42; "
+            "PHASE2_P2_NOTES section 34. **Named target: HL_S2_nonsymmetric** -- the "
+            "non-symmetric positive regular self-similar profile of the 1D Hou-Luo model "
+            "(Chen-Huang-Li arXiv:2604.01868 sections 2.5/4), uncertified, at 1.11e-3 of "
+            "the certified object's unknown count, needing THREE modulation constants "
+            "because it has no symmetry point to pin the translation. Four uncertified "
+            "candidates found in total; seven objects moved onto the exclusion list, four "
+            "of them proved ANALYTICALLY. The 3D-NS preprint arXiv:2604.09949 is recorded "
+            "as CLAIMED_UNUSABLE with its scalar closure audited in both forms (both "
+            "close -- the arithmetic is not where it fails)."),
         "why_first": (
             "The port's entire value is contingent on there being an uncertified target at "
             "the end of it, and nobody has checked. The 2D Boussinesq profile the port aims "
@@ -90,26 +102,36 @@ STAGES = [
     },
     {
         "id": "PORT",
-        "name": "Finish the certification port -- the near-null direction, then a bordered system",
-        "status": "QUEUED",
+        "name": ("Finish the certification port -- RE-AIMED BY M at the 1D non-symmetric "
+                 "Hou-Luo profile, as a BORDERED system"),
+        "status": "NEXT",
         "why_here": (
-            "Not skipped and not wasted whichever way M goes. It is the only way to get a "
-            "converged profile and a computable Y_0/Z_1, and Chen-Hou's object is the "
-            "KNOWN-ANSWER substrate the later GA fitness has to be validated on before it is "
-            "trusted anywhere else -- the same 'build it where you know the answer, then port "
-            "the method' discipline as Route A/Phase 0."),
+            "M re-aimed this stage, which is what M's YES branch said it would do. The "
+            "target is HL_S2_nonsymmetric, not Chen-Hou's 2D profile: same certification "
+            "chain, an object nobody has proved, and 1.11e-3 of the unknowns. Chen-Hou's "
+            "object remains available as the KNOWN-ANSWER substrate for validating stage "
+            "C-PILOT's fitness -- that role never needed the certificate to close, only the "
+            "answer to be known, and it is the reason the 2D work is not wasted."),
         "deliverable": (
-            "(1) Identify the near-null direction of M^-1 DF by inverse iteration or Lanczos "
-            "-- cheap now that M^-1 exists -- and report it as a FIELD ON THE GRID, because "
-            "where it lives is what names it. (2) Border the system with the constraint that "
-            "pins it; do NOT project after the fact, which is exactly what failed. (3) A "
-            "converged profile, then the function space, Y_0 and Z_1."),
-        "known": ["Step (iii) is UNBLOCKED: line_sweep_solve is an exact O(N) inverse, "
-                  "stall 0.6623 flat -> 3.3e-6, gated to 9.5e-16.",
-                  "The scaling gauge is REFUTED as the near-null direction (leg 44 L-7). "
-                  "Do not re-test it.",
-                  "Live candidates: the c_l/c_omega modulation's implicit dependence, and "
-                  "translation along the profile branch."],
+            "(1) The bordered residual for CHL (4.1) with all THREE modulation constants "
+            "(c_l, c_omega, c_r) as unknowns -- built as a bordered system from the start, "
+            "NOT projected after the fact, which is what failed in 2D. (2) A converged "
+            "profile with the contraction ratio against CHL's -2.5114. (3) Then the "
+            "function space, Y_0 and Z_1 -- now measurable, against the budget "
+            "(1-Z_1)^2/(2 Z_2) that solver/target_selection.py computes."),
+        "known": ["The solver EXISTS: solver/hl_rescaled.py::RescaledHLScenario2, gauge "
+                  "gated to 4.4e-16, ratio reproduced to ~1% (PHASE2_P2_NOTES section 8). "
+                  "It was built 2026-07-26 and then left unused for nine legs.",
+                  "Route-M made the Scenario-2 step 10x faster (line_hilbert.slope_matrix, "
+                  "gated at 2.7e-13) -- the refinement ladder is affordable now.",
+                  "CHL's own normalization (4.2) pins d_tau{Omega(0),Omega_X(0),V(0)}=0; "
+                  "the absolute triple is normalization-dependent, the RATIO c_l/c_omega "
+                  "is not. Compare against the ratio (leg 45 M3, and section 8 before it).",
+                  "The 2D near-null direction from leg 44 is STILL UNIDENTIFIED, and leg "
+                  "45 raises the odds it was the translation mode: CHL needed a third "
+                  "constant for exactly this family. That is now a question about the 2D "
+                  "object, which is no longer the target -- do not spend the leg on it.",
+                  "The scaling gauge is REFUTED as the 2D near-null direction (leg 44 L-7)."],
         "gate": {
             "question": "Does the radii polynomial close in float, with margin?",
             "if_yes": ("Report it. The certification capability exists and stage C-PILOT can "
@@ -181,6 +203,13 @@ BANNED = [
     ("the PORT itself", "M"),
     ("any GA compute on an unvalidated fitness", "C-PILOT"),
     ("another literature leg beyond M's three questions", "M"),
+    ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
+     "(arXiv:2210.07191 + Part II); it stays only as C-PILOT's known-answer substrate",
+     "never -- leg 45 M1"),
+    ("chasing the 2D near-null direction of leg 44", "never -- the 2D object is no longer "
+     "the target; if it is ever wanted again, the live hypothesis is the translation mode"),
+    ("building a solver without grepping capabilities.py for the object first",
+     "never -- leg 45 nearly rebuilt RescaledHLScenario2 from scratch"),
 ]
 
 # --------------------------------------------------------------------------

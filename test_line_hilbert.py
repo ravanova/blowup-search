@@ -122,8 +122,37 @@ def test_matrix_reuse_matches():
     print("[ok] precomputed matrix matches on-the-fly transform")
 
 
+def test_slope_matrix_matches_sweeps():
+    """The cached dense slope OPERATOR reproduces the Thomas sweeps it replaces.
+
+    Route-M swapped `natural_spline_slopes(X, f)` for `slope_matrix(X) @ f` inside the
+    relaxation integrators, because profiling put 81% of a Scenario-2 step inside the
+    Python sweep loop.  That is a change of association, not of formula, and this is the
+    gate that says so -- reported as a MAGNITUDE relative to the slope's own scale, and
+    checked on the non-uniform sinh grid the integrators actually use (a uniform grid
+    would hide a spacing bug).  Also checks the cache returns the SAME object, since a
+    silently rebuilt matrix would cost the speedup without failing anything.
+    """
+    from solver.line_hilbert import slope_matrix
+    worst = 0.0
+    for n, c in ((201, 0.35), (401, 0.5), (801, 0.35)):
+        X = _sinh_grid(n, c=c, rho_max=7.0)
+        S = slope_matrix(X)
+        assert slope_matrix(X) is S, "slope_matrix rebuilt instead of hitting the cache"
+        for f in (-4.0 * X / (1.0 + 4.0 * X ** 2),
+                  np.exp(-0.5 * X ** 2),
+                  1.0 / (1.0 + X ** 2) ** 0.75):
+            ref = natural_spline_slopes(X, f)
+            rel = np.abs(S @ f - ref).max() / max(np.abs(ref).max(), 1e-300)
+            worst = max(worst, rel)
+    print(f"    worst |S f - sweeps| / |slopes|_inf over 3 grids x 3 fields = {worst:.2e}")
+    assert worst < 1e-12, f"slope operator disagrees with the sweeps: {worst:.2e}"
+    print("[ok] cached slope operator == the Thomas sweeps it replaces, at rounding")
+
+
 if __name__ == "__main__":
     test_spline_slopes_nonuniform()
+    test_slope_matrix_matches_sweeps()
     test_AB_special_values()
     test_AB_against_direct_definition()
     test_matrix_reuse_matches()

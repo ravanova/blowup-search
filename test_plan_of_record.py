@@ -69,9 +69,19 @@ def test_3_every_ban_names_what_lifts_it():
         assert what.strip() and lifts.strip(), what
         head = lifts.split(" --")[0].strip()
         assert head in ids, f"'{what}' is lifted by unknown stage '{head}'"
-    now = banned_now()
-    assert len(now) == len(BANNED), "nothing is DONE yet, so no ban should be lifted"
-    print(f"  {len(BANNED)} bans, each naming its lifting stage; {len(now)} in force  OK")
+    # A ban is lifted EXACTLY when its lifting stage is DONE. This is the mechanism that
+    # makes the plan self-maintaining rather than a list someone has to remember to prune,
+    # so it is checked in both directions.
+    done = {st["id"] for st in STAGES if st["status"] == "DONE"}
+    now = {what for what, _ in banned_now()}
+    expected = {what for what, lifts in BANNED if lifts.split(" --")[0].strip() not in done}
+    assert now == expected, (
+        f"bans in force disagree with the DONE stages {sorted(done) or '(none)'}: "
+        f"unexpectedly lifted {sorted(expected - now)}, "
+        f"unexpectedly held {sorted(now - expected)}")
+    lifted = len(BANNED) - len(now)
+    print(f"  {len(BANNED)} bans, each naming its lifting stage; {len(now)} in force, "
+          f"{lifted} lifted by {sorted(done) or '(no DONE stage)'}  OK")
 
 
 def test_4_continuation_prompt_agrees():
@@ -121,6 +131,33 @@ def test_6_honesty_invariants_survive():
           f"{len(DISCIPLINE)} discipline items retained  OK")
 
 
+def test_8_continuation_prompt_has_not_become_an_archive():
+    """The prompt is a briefing, not a log. Bound its length and its block count.
+
+    It reached **2196 lines / 177 KB** by leg 45, append-only, carrying a session-close
+    block for every leg back to ~38 -- each one duplicating a PHASE2_P2_NOTES section
+    verbatim. A briefing nobody can read is a briefing nobody reads, and the cost lands
+    on exactly the moment when context is scarcest: the first ten minutes of a session.
+
+    Two session-close blocks is the budget: the current one, and the one before it for
+    the things a leg carries forward. Everything older is in PHASE2_P2_NOTES.md, which is
+    where it was already.
+    """
+    t = (ROOT / "CONTINUATION_PROMPT.md").read_text()
+    lines = t.splitlines()
+    blocks = [ln for ln in lines if ln.startswith("*Updated ")]
+    assert len(blocks) <= 2, (
+        f"{len(blocks)} session-close blocks in the continuation prompt (budget 2). "
+        f"Older ones belong in PHASE2_P2_NOTES.md -- see leg 45.")
+    assert len(lines) <= 400, (
+        f"continuation prompt is {len(lines)} lines (budget 400). It is a briefing, "
+        f"not an archive.")
+    # and it must still point at where the history went, or the truncation loses it
+    assert "PHASE2_P2_NOTES" in t, "the prompt no longer points at the working notes"
+    print(f"  continuation prompt: {len(lines)} lines, {len(blocks)} session-close "
+          f"block(s), history pointer intact  OK")
+
+
 def test_7_status_report_renders():
     r = status_report()
     assert current()["id"] in r and "BANNED RIGHT NOW" in r and "Clay" in r
@@ -137,7 +174,8 @@ if __name__ == "__main__":
                test_4_continuation_prompt_agrees,
                test_5_roadmap_is_marked_adopted,
                test_6_honesty_invariants_survive,
-               test_7_status_report_renders):
+               test_7_status_report_renders,
+               test_8_continuation_prompt_has_not_become_an_archive):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.1f}s)")

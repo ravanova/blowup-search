@@ -283,16 +283,22 @@ model where blow-up is provable — and it is not a route to Clay. Clay stays wh
 Four stages. Each carries a pre-committed gate naming **both** outcomes; the machine-readable
 form is `plan_of_record.py` and the drift detector is `test_plan_of_record.py`.
 
-1. **`M` — target selection.** *Certify what, that isn't already done?* Option B is worthless
-   without an object worth certifying, and B's search space depends on which one. **Gate:
-   if no uncertified, interval-reachable target exists, say so and STOP** — that is a
-   decisive negative about the whole programme, not a prompt to search harder.
-2. **`PORT` — finish the certification port.** The near-null direction of `M⁻¹DF`, then a
-   **bordered** system (not a projection — that is what failed in leg 44). *This is not
-   wasted whichever way `M` goes:* it is the only route to a converged profile and a
-   computable `Y₀`/`Z₁`, and Chen–Hou's object is precisely the **known-answer substrate**
-   the later GA fitness must be validated on before it is trusted anywhere else — the same
-   "build it where you know the answer, then port the method" discipline as Route A/Phase 0.
+1. **`M` — target selection. ✅ DONE, leg 45. GATE: YES.** *Certify what, that isn't already
+   done?* Six candidates, three questions each, in `solver/target_selection.py`.
+   **Named target: the NON-SYMMETRIC positive regular self-similar profile of the 1D
+   Hou–Luo model** (Chen–Huang–Li arXiv:2604.01868 §4) — uncertified, reported April 2026
+   as "a previously unreported blowup phenomenon", at **1.11e−3 of the certified object's
+   unknown count**, and requiring **three** modulation constants because it has no symmetry
+   point to pin the translation. Three further uncertified objects rank behind it. Seven
+   objects moved onto the exclusion list — including the port's old target and, in
+   arXiv:2305.05895, the **entire smooth gCLM branch, proved analytically for all `a ≤ 1`**.
+2. **`PORT` — finish the certification port, RE-AIMED at the object `M` named.** Build it as
+   a **bordered** system from the start — all three modulation constants as unknowns — not
+   as a projection, which is what failed in leg 44. *The 2D work is not wasted:* Chen–Hou's
+   object remains the **known-answer substrate** the later GA fitness must be validated on
+   before it is trusted anywhere else — the same "build it where you know the answer, then
+   port the method" discipline as Route A/Phase 0. That role never required the certificate
+   to close, only the answer to be known.
 3. **`C-PILOT` — evolve the Lyapunov weight**, on that known-answer object. The narrowest
    member of the re-framing and the right first bite: the fitness is **one number** and the
    constraint is checkable pointwise. **Gate: re-run the six-property viability gate on the
