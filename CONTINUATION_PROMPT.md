@@ -1,5 +1,138 @@
 # Continuation prompt (copy into a fresh session)
 
+> ## ⛔ TWO STANDING DIRECTIVES FROM THE USER (2026-08-03). READ BEFORE ANYTHING ELSE.
+> **These override the ranked-item habit below. Do not open a new measurement leg until
+> both are addressed. If you find yourself writing "the cheaper leg first", stop — that
+> reasoning is exactly what produced the situation these directives exist to end.**
+
+---
+
+# DIRECTIVE 1 — RESTORE NETWORK ACCESS AND PULL THE PAPERS. DO THIS FIRST.
+
+**This is the single highest-value action available to the project, it is cheap, and it has
+been blocked for six legs.** Five literature passes have been written. **Zero papers have
+been read.** Every novelty claim this project has ever made is search-level and unverified
+against a primary source. Each new leg adds *inherited* risk instead of resolving it.
+
+**THE DIAGNOSIS IS VERIFIED — DO NOT RE-DERIVE IT, AND NOTE THAT THE PREVIOUS VERSION OF
+THIS PROMPT HAD IT WRONG.** It is **not** a tool-level `WebFetch` bug (the prompt used to
+say that, and told you not to re-diagnose it — that was incorrect). Measured this session:
+
+```
+curl -v https://arxiv.org/abs/2207.07548
+  → CONNECT tunnel failed, response 403        (the AGENT PROXY refuses the CONNECT)
+curl https://github.com                → HTTP 400   (a real response: github IS allowlisted)
+curl https://en.wikipedia.org/...      → 000        (tunnel refused)
+curl https://api.semanticscholar.org/… → 000        (tunnel refused)
+WebFetch https://arxiv.org/abs/…       → 403        (same root cause, not a separate bug)
+```
+
+So: **the environment's network policy has an egress allowlist. `github.com` is on it;
+`arxiv.org` is not.** `$HTTPS_PROXY/__agentproxy/status` reports `"selective": false`,
+`"enabled": true`, no relay failures — the proxy is healthy and is doing what it was
+configured to do.
+
+**WHAT TO DO, IN ORDER:**
+
+1. **Run `bash Papers/fetch.sh`.** It probes egress, and if blocked prints the exact
+   request to make. It is committed for this purpose.
+2. **If blocked, ASK THE USER — explicitly, at the top of your first reply, not buried —**
+   to add these hosts to the environment's egress allowlist:
+   `arxiv.org`, `export.arxiv.org`, `api.semanticscholar.org`, `www.semanticscholar.org`,
+   `link.springer.com`, `onlinelibrary.wiley.com`, `aimsciences.org`, `en.wikipedia.org`.
+   Network policy is chosen when the environment is created —
+   https://code.claude.com/docs/en/claude-code-on-the-web . **The user has said they want
+   this fixed; treat it as authorized work, and ask concretely rather than noting it as a
+   limitation.**
+3. **NEVER work around it** by disabling TLS verification, unsetting `HTTPS_PROXY`, or
+   hunting for mirrors. If it stays blocked, say so plainly and proceed to Directive 2.
+4. **Once it works, read `arXiv:2207.07548` before writing any new code.** It alone gates
+   **four claims across three legs** (Route-F's `s_c = α/2`, Route-H's `λ_μ = 2s − α₀`,
+   Route-I's growth-rate remeasurement, and `α(1/2) = 3`). Then Tier 1 of
+   `Papers/MANIFEST.md`. **Update `LITERATURE_CHECK.md` with what the papers actually say
+   and correct every writeup whose claim they pre-empt — including retractions.**
+
+**A STRUCTURAL LOSS TO FIX WHILE YOU ARE THERE.** `Papers/` is gitignored, so the PDFs a
+previous session downloaded (Spike 1's notes say "Source PDFs live in `Papers/`") were
+**destroyed when the container was rebuilt**, and nobody noticed for months. `Papers/
+MANIFEST.md` + `fetch.sh` are now committed so this is a one-command inconvenience.
+**Keep the PDFs themselves gitignored — commit manifest changes, never the papers.** Same
+lesson as the orphaned G2: *a mechanism that splits or discards work needs the one that
+puts it back, or the loss is silent.*
+
+---
+
+# DIRECTIVE 2 — WE ARE HERE TO SOLVE CLAY. STOP DEFERRING THE L1→L2 PORT. BUILD IT NOW.
+
+**The user's words: "we're here to pursue a Clay solve! let's stop deferring and close that
+biggest gap now, deferring for 5 legs is enough already."**
+
+**THE SITUATION, STATED WITHOUT SOFTENING.** Across **41 legs**, **no link of the L1→L4
+chain has moved — not one.** The only genuine certification programme (Route-D, sixteen
+legs) ended in three negatives: the Newton–Kantorovich ball does not close, `Z₂` does not
+exist in the sup setting, and the whole eleven-leg bound programme turned out to be
+`a = 0`-only — tuned on the one member of the family *where the hard term vanishes*.
+Routes E→I are well-built and each one says, in its own writeup, that it moves nothing.
+
+**Ranked item (3) — the L1→L2 port to 2D Boussinesq / axisymmetric Euler with boundary —
+is the ONLY item on the list that moves a chain link, and it has now been deferred FIVE
+CONSECUTIVE TIMES in favour of cheaper measurement work.** Route-G took the *measurement*
+half of that port and **left the certification half untouched**. That deferral is the
+single biggest gap between what this project says it is for and what it does. **Close it.**
+
+**IT IS NOT A COLD START — MOST OF THE MACHINERY EXISTS.** Do not re-scope it as a
+research question; it is a build:
+
+* `solver/boussinesq.py`, `boussinesq_rescaled.py`, `boussinesq_velocity.py`,
+  `fractional_boussinesq.py`, `hl_rescaled.py`
+* **seven** green gate suites: `test_boussinesq_{rescaled,transport,velocity,wall}.py`,
+  `test_fractional_boussinesq.py`, `test_hl_rescaled.py`, `test_solver_boussinesq.py`
+* Spike 1 already **reproduced the published Chen–Hou self-similar profile** in the
+  Hou–Luo geometry, with the formulation transcribed from `arXiv:2210.07191` §2/§7 —
+  see `PHASE2_SPIKE1_NOTES.md`, which locks the equations and the symmetry class.
+* Route-G re-measured `β` on the 2D object with our own dynamically-rescaled machine.
+
+**WHAT THE LEG MUST DELIVER — the CERTIFICATION half, not another measurement.** The
+question is *what would a computer-assisted proof of the 2D Boussinesq profile need, and
+which piece of it can we actually build?* Concretely:
+
+1. the **Newton–Kantorovich setup on the 2D profile**: pick the function space, and pick
+   it with **Route-D's `a = 0`-only disaster in mind** — check on day one that the space
+   can carry the terms the *2D* problem actually has, not the ones the gate case has;
+2. an honest **`Y₀`** (defect of the numerical profile) in that space;
+3. a **first bound on `Z₁`/`‖A‖`**, with the same kill-switch discipline: **if the radii
+   polynomial does not close in float with margin, STOP and report — do not harden**;
+4. the same refusal gates the last two legs paid for: gate the **operator**, not the
+   agreement; bound fits by the **variable**, not the time; report a **magnitude**, never
+   a boolean; and **"small" in which norm?**
+
+**A NEGATIVE HERE IS WORTH MORE THAN A POSITIVE ANYWHERE ELSE**, because it is a negative
+about the object certification results actually count on. Even "`Y₀` is machine-level but
+`Z₁` diverges, and here is the mechanism" moves the project further than any 1D leg has.
+
+**EXPLICITLY BANNED until Directive 2 has been attempted and reported on:** another gCLM
+measurement leg, another Route-D bound-sharpening leg, another DSS re-ask, and the DSS
+lane's *expensive* entrance (a periodic-orbit search with nothing to seed it — three legs
+have now given independent reasons the cheap entrances do not work; that is a reason to
+leave the lane alone, not to spend big on it).
+
+**AND KEEP THE HONESTY THAT IS WORKING.** The refusal discipline is the best thing this
+project has: Route-H refused a rung that would have shipped a sign flip; Route-I refuses
+its own closest-agreeing data point on operator grounds and states that it therefore has
+no off-resonance control. **Pursuing Clay harder does not mean claiming more.** Only Tier 3
+— a rigorous proof — counts. Clay odds remain **~0.05%**, and the realistic prize is still
+a novel result on a model where blow-up is provable. Say that plainly in every writeup.
+
+**ONE PROCESS RULE, EARNED THE HARD WAY THIS SESSION.** Both legs checked this session had
+writeups whose numbers did not match their own committed data (a refused rung quoted as a
+measurement, a refused control quoted as passing, an 81%-off row reported as "<1%", and
+`α₁ = nan` rendered three times in a figure legend that had already been looked at).
+**Before pushing any leg: regenerate the data, rebuild the figure, and check every number
+in the prose against the JSON. A rendered artifact is not a verification.**
+
+---
+
+
 *Updated 2026-08-03 (session close, third update). **THIS SESSION SHIPPED ROUTE-H v1 AND THEN
 ROUTE-I v1.** Route-I existed as untracked code + writeups when the session picked it up; its
 gate suite passed, its headline survived, and **checking it is where the value was** — one
@@ -206,8 +339,10 @@ test_advection_scope.py (6/6); TECHNICAL/BLOG_P2_ADVECTION_SCOPE.md; PHASE2_P2_N
 
 **(4) THE LITERATURE CHECK RAN — see LITERATURE_CHECK.md, and READ IT BEFORE CLAIMING NOVELTY.**
 It complements Route-D v15's writeup (which predates its third pass). **THE BLOCKER IS NOT WHAT
-IT WAS RECORDED AS: WebFetch 403s on EVERY host INCLUDING WIKIPEDIA** — a tool-level block, not
-an arXiv/publisher/allowlist question, so do not re-diagnose it as one. WebSearch is the only
+IT WAS RECORDED AS** — but **THAT CORRECTION WAS ITSELF WRONG AND IS SUPERSEDED BY DIRECTIVE 1
+AT THE TOP OF THIS FILE.** It is NOT a tool-level block: measured 2026-08-03, the agent proxy
+403s the CONNECT for non-allowlisted hosts, `github.com` IS allowlisted and `arxiv.org` is not,
+so it IS an environment egress-allowlist question and it is fixable by the user. WebSearch is the only
 working channel. Of six claims examined, **four are at high risk of being known** (finite
 support; the spectral picture; s_c=α/2; α(1/2)=3) and one needs restating (a*). **Read
 arXiv:2207.07548 FIRST — it gates two of them at once.** The three METHODOLOGICAL candidates
@@ -290,8 +425,8 @@ periodic domains) while ours is ALGEBRAIC decay on an UNBOUNDED domain, so the s
 assumes away the regime where our obstruction bites. Nearest unread paper: arXiv:2302.12877.
 **Also ruled out: the search backend is NOT indexing our repo** (the "c_l" in the quoted
 s*(a)=1/c_l(a) is the field's own notation, which we adopted) — re-run that check if the repo
-ever goes public. **NOTE THE BLOCKER IS NOT WHAT IT WAS RECORDED AS: WebFetch 403s on EVERY host
-INCLUDING WIKIPEDIA, so it is a tool-level block, not an arxiv/publisher/allowlist question —
+ever goes public. **NOTE: the blocker description here is SUPERSEDED BY DIRECTIVE 1 at the top
+of this file — it is an environment egress allowlist, not a tool-level block —
 do not spend time re-diagnosing it as one. WebSearch is the ONLY working literature channel.***
 
 *Before Route-F v1: **Route-E v1 opened the DSS lane and shut its cheapest entrance.** **NEWEST LEG FIRST — ROUTE-E v1 OPENS THE DSS

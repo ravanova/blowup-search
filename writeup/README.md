@@ -366,9 +366,12 @@ writeup/
 record of what has been checked against the literature and what has not — three passes,
 per-claim risk levels, and the reading order. It goes further than entry 34 above (which
 predates its third pass, the one that found the paper most likely to pre-empt Route-F).
-**Read it before making any novelty claim.** Everything in it is search-level: no paper
-has been read, because `WebFetch` returns 403 on every host — including Wikipedia — so
-this is a tool-level block, not an arXiv or publisher one.
+**Read it before making any novelty claim.** Everything in it is search-level: **no paper
+has been read.** The blocker is the environment's egress allowlist — the agent proxy 403s
+the CONNECT for non-allowlisted hosts (`github.com` is on the list, `arxiv.org` is not),
+and `WebFetch` 403s for the same reason. **It is fixable by the user**, and doing so is
+Directive 1 in [`../CONTINUATION_PROMPT.md`](../CONTINUATION_PROMPT.md); what to read
+first, and what each paper gates, is in [`../Papers/MANIFEST.md`](../Papers/MANIFEST.md).
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).

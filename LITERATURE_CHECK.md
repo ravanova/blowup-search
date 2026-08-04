@@ -1,5 +1,17 @@
 # Literature check — first pass (2026-08-02)
 
+> **⛔ NETWORK DIAGNOSIS CORRECTED 2026-08-03 — AND IT IS FIXABLE.** Earlier passes recorded
+> the blocker as "a tool-level `WebFetch` block, not an allowlist question". **That was
+> wrong.** Measured: the agent proxy returns **403 to the CONNECT** for non-allowlisted
+> hosts. `github.com` is allowlisted and returns a real HTTP response; `arxiv.org`,
+> `en.wikipedia.org` and `api.semanticscholar.org` are refused. `WebFetch` 403s for the
+> same reason — it is not a separate bug. **This is the environment's egress policy and
+> the user can change it.** Run `bash Papers/fetch.sh`; if it reports BLOCKED, ask the user
+> to allowlist the hosts it names. See DIRECTIVE 1 in `CONTINUATION_PROMPT.md` and
+> `Papers/MANIFEST.md` for what to read first and what each paper gates.
+>
+> **Everything below this line is still search-level. Zero papers have been read.**
+
 **Status: PARTIALLY UNBLOCKED.** This had been open four legs and blocked on
 "arxiv + publishers 403 at the proxy". The precise diagnosis is now known and is
 narrower than that:

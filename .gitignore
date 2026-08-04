@@ -12,7 +12,11 @@ experiments/*.jsonl
 experiments/*.out
 
 # Reference papers (copyrighted PDFs; grounding material, not source)
-Papers/
+# Third-party PDFs are NOT committed -- but the manifest and fetch script ARE, so a
+# rebuilt container can re-pull them in one command instead of losing them silently.
+Papers/*
+!Papers/MANIFEST.md
+!Papers/fetch.sh
 
 # OS / editor
 .DS_Store
