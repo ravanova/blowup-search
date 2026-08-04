@@ -3,6 +3,43 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-J v1: the primary-source pass (non-logged) — 2026-08-04
+
+**NOT a logged gate run** (deterministic; ~5 s). Code `solver/literature_gates.py` +
+`test_literature_gates.py` (9/9); `experiments/p2_route_j_v1_literature.py` →
+`writeup/data/p2_route_j_v1_literature.json` → fig39. Writeups
+TECHNICAL/BLOG_P2_ROUTEJ_V1.md; PHASE2_P2_NOTES §31; LITERATURE_CHECK.md sixth pass.
+
+**Why it exists.** Egress to arXiv opened after six legs. `bash Papers/fetch.sh` pulled
+14/14 on the first attempt (the PDFs stay gitignored — re-run it, it takes ~30 s). Five
+prose literature passes had produced zero durable facts, so the deliverable here is
+deliberately code: nine gates that each re-derive a published number from the published
+equations and compare it to ours.
+
+**What a human should notice.** Three things.
+
+(1) **The leg's job was to check one claim and the valuable thing came from elsewhere.**
+I read arXiv:2207.07548 to see whether it pre-empts `s_c = α/2`. It does not — its §8
+leaves the question open, and the actual pre-emption is arXiv:2607.19762 §6.1, which the
+manifest had filed as a *spectral* paper. But §5.1 of the first paper turned out to
+contain the thing no leg of this project had: what the self-similar exponents are ABOVE
+criticality. Banked as lesson (69).
+
+(2) **The first refusal predicate in J3 was wrong and passed.** I gated `τ` and the
+deepest "resolved" rung read `c_l = 0.222` against an exact `1/3`, while the middle of the
+ladder read `0.33333`. The local exponent is a difference quotient, so the thing that must
+stay resolvable is `dτ`; `τ` at the bad rungs was `1e-11`, nowhere near underflow, so no
+threshold on `τ` could have caught it. Panel C now draws the refused branch instead of
+truncating the axis. Lesson (67).
+
+(3) **Four numbers in the drafted prose did not match the regenerated JSON** and were
+caught by re-reading the artifact rather than the draft — two residuals, the refused-rung
+count, and `dlogΩ/dlogv_c` (`-2.00012` from a test run vs `-2.000144` in the committed
+artifact). The process rule keeps paying.
+
+**What it cost.** Seven of twelve standing claims. Nothing was found to be *wrong* —
+what changed is who found it first.
+
 ## Phase-2 P2 — ROUTE-I v1: the marginal flow driven, and the NaN in the figure (non-logged) — 2026-08-03
 
 **NOT a logged gate run** (deterministic; ~5 min). Code `solver/marginal_flow.py` +

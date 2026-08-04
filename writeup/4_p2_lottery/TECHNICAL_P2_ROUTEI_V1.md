@@ -10,6 +10,32 @@ interval-enclosed, no link of the L1→L4 chain moved. Clay odds unchanged at ~0
 
 ---
 
+> ## ⚠️ THE `μ = 0` STABILITY COUNT NEEDS ITS REALIZATION NAMED
+> *(added 2026-08-04, Route-J v1 primary-source pass — **this is a live correction, not a
+> retraction**)*
+>
+> This leg's headline is that the **inviscid** rescaled fixed point at `a = 1/2` has
+> **141 of 144 unstable directions**, read as "§26's essential spectrum as a count".
+> **arXiv:2607.19762 Proposition 2** (Xu, realization dichotomy) shows that what that
+> count is counting is realization-dependent: the essential-spectrum smear which grids
+> **without an origin condition** place inside the strip is the faithful spectrum of the
+> **maximal `L²` realization**, and the **origin-`H²`** realization has none of it.
+> **Our discretization has no origin condition — the loose realization is the one we
+> measured.**
+>
+> This does **not** make the measurement wrong, and it does **not** by itself touch the
+> `μ > 0` half of the inversion (dissipation collapsing the spectrum onto a *discrete*
+> negative ladder is not realization-smear). It does mean the `μ = 0` count is quoted in a
+> realization nobody would choose deliberately. **The count must be stated with the
+> realization named, and the honest next step is to re-run I5 with an origin condition and
+> report what the count is there.** That is the top-ranked correction item for the next leg.
+>
+> Route-I also inherits Route-F's pre-emption in full: `λ_μ = 2s - α₀` is Route-F's `s_c`
+> in spectral clothing, and `s_c = α/2` is **Xu §6.1 eq (6.3)**, posted eleven days before
+> Route-F. See `TECHNICAL_P2_ROUTEJ_V1.md` and `LITERATURE_CHECK.md` sixth pass.
+
+---
+
 ## 0. What this leg is, in one paragraph
 
 Route-H v1 (§29) wrote down the augmented flow — the rescaled gCLM equation with the

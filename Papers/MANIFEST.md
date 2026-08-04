@@ -7,10 +7,25 @@ directory no longer exists. The manifest and `fetch.sh` are committed so the PDF
 re-pulled in one command instead of re-derived from memory. **If you download papers, do
 not commit them; commit any change to this manifest instead.**
 
-**Nothing in this list has been read.** Five literature passes in `LITERATURE_CHECK.md`
-are all search-level. Every novelty claim in this project is unverified against a primary
-source. See the network directive at the top of `CONTINUATION_PROMPT.md` — this is
-blocked on egress, not on effort.
+**STATUS 2026-08-04: EGRESS WORKS. ALL 14 FETCHED ON THE FIRST ATTEMPT. TIER 1 IS READ.**
+See `LITERATURE_CHECK.md` **sixth pass** (the first primary-source pass) and Route-J v1
+(`solver/literature_gates.py`, `test_literature_gates.py` 9/9, fig39). Verdict: seven
+standing claims pre-empted, one partial, two still unsearched, one result inbound.
+
+**READ:** 2207.07548 (full; §1, §5, §7.3, §8 closely), 2607.19762 (full; abstract, §2, §3,
+§6, §7 closely), 2210.07191 (abstract, §1, the `c_l/c_omega` profile section),
+2209.08232 (§1, §2 closely).
+**FETCHED AND TEXT-EXTRACTED BUT NOT READ:** everything in Tier 2 and Tier 3. **Tier 2 is
+the next literature spend and it is now cheap** — it gates the Route-D methodological
+claims, the only ones with a real chance of being new.
+
+**TWO CORRECTIONS TO THIS MANIFEST'S OWN PRIORITIES, from having read Tier 1:**
+* **2207.07548 does NOT gate `s_c = α/2`.** Its §8 explicitly leaves the critical-σ
+  question open. **2607.19762 §6.1 eq (6.3) is the pre-emption** — it was filed here as a
+  spectral paper, and its §6 is the one that matters.
+* **2207.07548 turned out to matter for something nobody asked it about:** §5.1 (Schochet,
+  corrected) is the only primary source in this list on the **supercritical** balance,
+  which no leg of this project had. Lesson (69).
 
 Fetch everything: `bash Papers/fetch.sh` (needs the hosts below allowlisted).
 Fetch one: `bash Papers/fetch.sh 2207.07548`

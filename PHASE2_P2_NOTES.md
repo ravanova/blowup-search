@@ -2314,3 +2314,132 @@ not completion order. Verified vs the committed artifact: **89 numeric fields, w
 digits. `test_route_g_perf.py` 4/4. `ROUTE_G_SERIAL=1` forces serial; `ROUTE_G_DATA`
 redirects the merge gate at a temp dir so the test cannot clobber writeup/data.
 **THIS BOX HAS 4 CORES, NOT 8 — `OMP_NUM_THREADS=8` is pinned project-wide and misleads.**
+
+
+## §31 — ROUTE-J v1 DONE (2026-08-04): THE PRIMARY-SOURCE PASS. EGRESS OPENED AFTER SIX
+## LEGS; ALL 14 PAPERS PULLED; TIER 1 READ. SEVEN STANDING CLAIMS PRE-EMPTED, ONE PARTIAL,
+## TWO STILL UNSEARCHED — AND ONE RESULT ARRIVES *FROM* THE LITERATURE.
+
+solver/literature_gates.py + test_literature_gates.py **9/9**;
+experiments/p2_route_j_v1_literature.py → writeup/data/p2_route_j_v1_literature.json →
+**fig39**. BLOG/TECHNICAL_P2_ROUTEJ_V1.md. LITERATURE_CHECK.md **sixth pass**.
+Deterministic (~5 s). **It moves NO link of the chain. NO new science.**
+
+**WHY THIS LEG, AND WHY IT IS CODE AND NOT PROSE.** Five literature passes were written
+while `Papers/` stayed empty. This session `curl https://arxiv.org/abs/2207.07548` returned
+**200** for the first time and `bash Papers/fetch.sh` pulled **14/14 on the first attempt**.
+The deliverable is deliberately NOT a paragraph saying "we checked" — that decays exactly
+the way five search-level passes decayed. It is a module of **executable gates**: each one
+re-derives a published number from the published equations and compares it to ours.
+
+**THE EXPONENT DICTIONARY GOES FIRST, and it is gate 1 for a reason.** ALS/XU write
+`omega ~ tau^{-beta} f(x/tau^{c_l})`, so **their c_l is our beta** and **our alpha = 1/c_l**;
+their `Lambda^sigma` is our `(-Delta)^s` with **sigma = 2s**. Hence `s_c(ours) = s*(XU)/2`.
+**Get this wrong and every verdict in the leg inverts while still passing its own test.**
+
+**(J-1) ROUTE-F's HEADLINE IS PRE-EMPTED, AND NOT BY THE PAPER THE FIFTH PASS NAMED.** The
+fifth pass called arXiv:2207.07548 "the paper most likely to pre-empt Route-F" and said to
+read it first. **Wrong.** ALS §8 explicitly leaves the critical-sigma question OPEN
+("whether sigma = 1 is the optimal lower bound ... left for future work"). The relation is
+**arXiv:2607.19762 §6.1 eq (6.3), s*(a) = 1/c_l(a)** (Xu), from the same rescaling argument,
+**posted 22 Jul 2026 — ELEVEN DAYS before Route-F v1**. Our F6 map vs their Table 1: worst
+row **3.1e-3**, mean **1.2e-3**, exact at a=0 and a=1/2. What survives is narrow and should
+be said narrowly: **F3's cross-check** (steady compactified solve vs time-dependent periodic
+simulation, no shared grid/basis/constant) is an independent dynamical validation of THEIR
+formula — Xu state their branch's only quantitative validation is the a_c endpoint. **A
+service, not a result.**
+
+**(J-2) ROUTE-H's (E) IS ALS §5.3 eqs (57)-(58), VERIFIED.** Parameter map
+`omega_{-1}(0) = -(1+mu_0) kappa`, `v_c(0) = kappa T`, `kappa = nu/mu_0`. Worst relative
+difference **6.5e-15** over 3 parameter sets x 4 times; ALS's blow-up-time formula (59)
+returns our T with absolute error **0.0**; their evolution law `dv_c/dt = omega_{-1}(0)+nu`
+reduces to `-kappa`, which is (E)'s own. Route-H declined to claim it — right call, now
+settled. **alpha_1 = 0 at a=0 is likewise confirmed-and-known**: ALS's form (61) carries nu
+INSIDE the profile at fixed exponents, i.e. the line of viscous self-similar blow-ups we
+measured. **alpha_1 = +0.133683 at a=1/2 is NOT in Tier 1** (criticality there is sigma=3,
+in neither paper) — but it is UNSEARCHED, not novel.
+
+**(J-3) alpha(1/2) = 3 IS EXACT AND KNOWN — AND IT CLOSES §26's OWN OPEN QUESTION.**
+Integrating ALS (49)-(50) cold (no shared grid, basis or code): **c_l = 0.3333076 vs 1/3,
+rel 7.7e-5**, with **Omega ~ v_c^{-2.000144}** vs the exact -2. §26 recorded that "what stays
+UNEXPLAINED is why alpha=3 lands on a round rational while alpha=5 does not". **ALS §1
+answers it: exact pole-dynamics solutions exist at a=0 and a=1/2 and, per Lushnikov et al.,
+NOWHERE ELSE.** The alpha=5 point at a=0.5821792673 is a property of **our instrument**
+(Lambda^5 is a finite matrix there), not of the problem.
+
+**(J-4) THE RE-CLASSIFICATION WITH THE LARGEST FORWARD CONSEQUENCE — XU PROPOSITION 2, THE
+REALIZATION DICHOTOMY. READ THIS ONE BEFORE TOUCHING ROUTE-I.** The essential-spectrum
+continuum §26 measured is the faithful spectrum of the **maximal L^2 realization**; on the
+**origin-H^2** realization the open strip is empty apart from {0,1}, the whole non-symmetry
+family being `u_lambda(y) = y^{1-lambda}/(y+i/2)^2` — L^2 but with `u'' not in L^2` at the
+origin. Xu say in as many words that the smear grids **WITHOUT AN ORIGIN CONDITION** place
+inside the strip is that realization's spectrum. **OUR DISCRETIZATION HAS NO ORIGIN
+CONDITION.** So "the non-symmetry spectrum is CONTINUOUS" is a statement about which
+operator we discretized, not about the operator. The DSS verdict survives (nothing to
+bifurcate in either realization, so the lane stays shut on better evidence) — **but §30's
+"141 of 144 unstable directions at mu=0" is counted in the loose realization and MUST SAY
+SO. Re-running I5 with an origin condition is the top-ranked correction item.** Note what
+it does NOT touch: the mu>0 half of the inversion is about a DISCRETE negative ladder, and
+a discrete ladder is not realization-smear.
+
+**(J-5) THE ONE RESULT ARRIVING FROM THE LITERATURE: WHAT LIES ABOVE s_c.** §27/§29/§30 all
+stop at criticality; Route-F's sentence "the scaling says which term dominates" had no
+second half. ALS §5.1 (Schochet, corrected) has it. Term by term with
+`omega ~ tau^{-beta} f(x/tau^{c_l})`: `omega_t ~ tau^{-beta-1}`, `omega H omega ~
+tau^{-2beta}`, `nu Lambda^sigma omega ~ tau^{-beta - sigma c_l}`. **SUBcritically omega_t
+balances stretching, forcing beta=1. SUPERcritically DISSIPATION balances stretching,
+beta = sigma c_l, and omega_t is SUBDOMINANT.** Schochet is the witness (sigma=2, c_l=1 =>
+beta=2, matching ALS (45)). **MEASURED, not quoted:** spread of `tau^beta omega` across a
+tau-ladder is **0.0202 at beta=2 vs 0.990 at beta=1 (49x)**, and — the check that makes it a
+measurement rather than a four-way fit — the beta=2 residual **FALLS 0.0202 -> 0.0060 ->
+0.00187** on deeper sub-ladders, which is ALS's stated O(tau^{-1}) correction behaving as
+stated. **THE MECHANISM IS THE PART TO CARRY: the tau^{-2} is carried by a DOUBLE POLE with
+residue B = -12 i nu — proportional to nu, hence ABSENT inviscidly. Above criticality the
+blow-up is not the inviscid one surviving viscosity; it is a DIFFERENT singularity that
+viscosity itself creates.** No leg of this project could have seen that: all three are built
+on beta=1.
+
+**(J-6) A 38-YEAR-OLD TYPO, SETTLED FROM OUR SIDE.** ALS §5.1 correct Schochet (CPAM 1986)'s
+constant to `K± = 24(3±sqrt6)` from the printed `12(6±sqrt6)`. Substituting both into the
+complex Burgers equation with ANALYTIC derivatives (no differencing): corrected **5.24e-16 /
+2.85e-16**, printed **2.40e-2 / 8.36e-2** — **13.66 decades**. ALS are right. Schochet CPAM
+1986 is still unobtainable (publisher PDF) but its content is now pinned through ALS, **and
+the constant one would have copied from it is the wrong one.**
+
+**(J-7) FINITE SUPPORT IS PARTIAL, NOT PRE-EMPTED.** HTW (arXiv:2209.08232) Prop 2.3 proves
+compact support for the **De Gregorio model, a=1**, where non-degeneracy forces c_l = c_omega
+— same mechanism as ours (profile locally proportional to u + c_omega x; support ends where
+that vanishes). **NOT in HTW:** the a-dependence across a in (0,1/2), the algebraic order 1/a
+of the zero, and the certification-space consequence we actually used it for.
+
+**(J-8) ON a_c WE ARE THE WORST OF THREE SOURCES.** Published (LSS) **0.6890665**; Xu's
+recompute **0.6888 (0.04%)**; ours **0.693493 (0.64%)**. Quote theirs. There is a gate
+asserting exactly this, which FAILS if we ever become the better source — at which point the
+right response is to say so, not delete the gate.
+
+**NEW BANKED LESSONS (67)-(70).**
+**(67) GATE THE QUANTITY THE MEASUREMENT DIVIDES BY, not the quantity it is about.** J3's
+first refusal predicate was `tau > 1e3 eps max|S|`. It passed and read **c_l = 0.222** at its
+deepest "resolved" rung while reading 0.33333 in the middle. The local exponent is a
+DIFFERENCE QUOTIENT, so what must survive is **d tau**, not tau — and tau at the bad rungs is
+1e-11, enormous against underflow, so **no threshold on tau could ever have caught it**. This
+is lesson (57) one level down.
+**(68) A LITERATURE CHECK THAT IS NOT EXECUTABLE DECAYS AT THE RATE OF MEMORY.** Five prose
+passes produced zero durable facts; nine gates produced twelve durable verdicts in 5 s of
+runtime. If a claim is worth checking against a paper it is worth checking IN CODE.
+**(69) WHEN A PAPER PRE-EMPTS YOU, THE VALUABLE PART IS USUALLY THE PART YOU DID NOT ASK
+ABOUT.** Reading ALS to check s_c returned nothing about s_c and everything about what lies
+above it — the one inbound result of the pass. The claim under audit was the least
+informative thing in the paper.
+**(70) A SPECTRUM IS NOT A PROPERTY OF AN OPERATOR UNTIL YOU NAME THE REALIZATION.** §26 and
+§30 both measured "the" spectrum of a discretization with no origin condition and reported it
+as the operator's. Xu's Prop 2 shows that choice moves a whole continuum in and out. **Before
+reporting any spectrum, state the domain condition at the singular point.**
+
+**WHAT THIS DOES NOT CHANGE:** any number in any committed artifact. Nothing was found to be
+WRONG. What changed is who found it first.
+
+**STILL UNSEARCHED AT PRIMARY SOURCE, and it is the part that matters:** Tier 2
+(2302.12877, 2312.01702, 1908.09385) is fetched and text-extracted but NOT read closely.
+Those gate the **Route-D methodological claims — still the only claims in this project with a
+real chance of being new.** After this pass "unchecked" means unchecked, not "probably fine".

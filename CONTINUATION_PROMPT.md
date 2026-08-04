@@ -1,137 +1,173 @@
 # Continuation prompt (copy into a fresh session)
 
-> ## ⛔ TWO STANDING DIRECTIVES FROM THE USER (2026-08-03). READ BEFORE ANYTHING ELSE.
-> **These override the ranked-item habit below. Do not open a new measurement leg until
-> both are addressed. If you find yourself writing "the cheaper leg first", stop — that
-> reasoning is exactly what produced the situation these directives exist to end.**
+> ## ⛔ ONE STANDING DIRECTIVE. IT HAS NOW BEEN DEFERRED **SIX** TIMES. IT IS THE WHOLE JOB.
+> **Directive 1 (restore network, read the papers) is DONE — see (J-0a) below, and do not
+> re-open it.** What is left is the directive that has been on this list since leg 36 and
+> has lost to a cheaper leg every single time. **Read the next block, then go build it.
+> If you find yourself writing "the cheaper leg first", or "one quick check before", stop.
+> That sentence is the entire reason this directive still exists.**
 
 ---
 
-# DIRECTIVE 1 — RESTORE NETWORK ACCESS AND PULL THE PAPERS. DO THIS FIRST.
+# DIRECTIVE — WE ARE HERE TO SOLVE CLAY. BUILD THE L1→L2 CERTIFICATION PORT. NOW.
 
-**This is the single highest-value action available to the project, it is cheap, and it has
-been blocked for six legs.** Five literature passes have been written. **Zero papers have
-been read.** Every novelty claim this project has ever made is search-level and unverified
-against a primary source. Each new leg adds *inherited* risk instead of resolving it.
+**The user's words, still standing: "we're here to pursue a Clay solve! let's stop
+deferring and close that biggest gap now, deferring for 5 legs is enough already."**
+That was said before legs 41 and 42. It is now **six**.
 
-**THE DIAGNOSIS IS VERIFIED — DO NOT RE-DERIVE IT, AND NOTE THAT THE PREVIOUS VERSION OF
-THIS PROMPT HAD IT WRONG.** It is **not** a tool-level `WebFetch` bug (the prompt used to
-say that, and told you not to re-diagnose it — that was incorrect). Measured this session:
+**THE SITUATION, STATED WITHOUT SOFTENING.** Across **42 legs, no link of the L1→L4 chain
+has moved — not one.** The only genuine certification programme (Route-D, sixteen legs)
+ended in three negatives: the Newton–Kantorovich ball does not close, `Z₂` does not exist
+in the sup setting, and the eleven-leg bound programme was `a = 0`-only — tuned on the one
+member of the family where the hard term vanishes. Routes E→I are well-built and each one
+says, in its own writeup, that it moves nothing. **And leg 42 has now established that most
+of what E→I found was already in print.** The measurement lane is not just failing to move
+the chain; it is producing results that other people have already produced.
 
-```
-curl -v https://arxiv.org/abs/2207.07548
-  → CONNECT tunnel failed, response 403        (the AGENT PROXY refuses the CONNECT)
-curl https://github.com                → HTTP 400   (a real response: github IS allowlisted)
-curl https://en.wikipedia.org/...      → 000        (tunnel refused)
-curl https://api.semanticscholar.org/… → 000        (tunnel refused)
-WebFetch https://arxiv.org/abs/…       → 403        (same root cause, not a separate bug)
-```
-
-So: **the environment's network policy has an egress allowlist. `github.com` is on it;
-`arxiv.org` is not.** `$HTTPS_PROXY/__agentproxy/status` reports `"selective": false`,
-`"enabled": true`, no relay failures — the proxy is healthy and is doing what it was
-configured to do.
-
-**WHAT TO DO, IN ORDER:**
-
-1. **Run `bash Papers/fetch.sh`.** It probes egress, and if blocked prints the exact
-   request to make. It is committed for this purpose.
-2. **If blocked, ASK THE USER — explicitly, at the top of your first reply, not buried —**
-   to add these hosts to the environment's egress allowlist:
-   `arxiv.org`, `export.arxiv.org`, `api.semanticscholar.org`, `www.semanticscholar.org`,
-   `link.springer.com`, `onlinelibrary.wiley.com`, `aimsciences.org`, `en.wikipedia.org`.
-   Network policy is chosen when the environment is created —
-   https://code.claude.com/docs/en/claude-code-on-the-web . **The user has said they want
-   this fixed; treat it as authorized work, and ask concretely rather than noting it as a
-   limitation.**
-3. **NEVER work around it** by disabling TLS verification, unsetting `HTTPS_PROXY`, or
-   hunting for mirrors. If it stays blocked, say so plainly and proceed to Directive 2.
-4. **Once it works, read `arXiv:2207.07548` before writing any new code.** It alone gates
-   **four claims across three legs** (Route-F's `s_c = α/2`, Route-H's `λ_μ = 2s − α₀`,
-   Route-I's growth-rate remeasurement, and `α(1/2) = 3`). Then Tier 1 of
-   `Papers/MANIFEST.md`. **Update `LITERATURE_CHECK.md` with what the papers actually say
-   and correct every writeup whose claim they pre-empt — including retractions.**
-
-**A STRUCTURAL LOSS TO FIX WHILE YOU ARE THERE.** `Papers/` is gitignored, so the PDFs a
-previous session downloaded (Spike 1's notes say "Source PDFs live in `Papers/`") were
-**destroyed when the container was rebuilt**, and nobody noticed for months. `Papers/
-MANIFEST.md` + `fetch.sh` are now committed so this is a one-command inconvenience.
-**Keep the PDFs themselves gitignored — commit manifest changes, never the papers.** Same
-lesson as the orphaned G2: *a mechanism that splits or discards work needs the one that
-puts it back, or the loss is silent.*
-
----
-
-# DIRECTIVE 2 — WE ARE HERE TO SOLVE CLAY. STOP DEFERRING THE L1→L2 PORT. BUILD IT NOW.
-
-**The user's words: "we're here to pursue a Clay solve! let's stop deferring and close that
-biggest gap now, deferring for 5 legs is enough already."**
-
-**THE SITUATION, STATED WITHOUT SOFTENING.** Across **41 legs**, **no link of the L1→L4
-chain has moved — not one.** The only genuine certification programme (Route-D, sixteen
-legs) ended in three negatives: the Newton–Kantorovich ball does not close, `Z₂` does not
-exist in the sup setting, and the whole eleven-leg bound programme turned out to be
-`a = 0`-only — tuned on the one member of the family *where the hard term vanishes*.
-Routes E→I are well-built and each one says, in its own writeup, that it moves nothing.
-
-**Ranked item (3) — the L1→L2 port to 2D Boussinesq / axisymmetric Euler with boundary —
-is the ONLY item on the list that moves a chain link, and it has now been deferred FIVE
-CONSECUTIVE TIMES in favour of cheaper measurement work.** Route-G took the *measurement*
-half of that port and **left the certification half untouched**. That deferral is the
-single biggest gap between what this project says it is for and what it does. **Close it.**
-
-**IT IS NOT A COLD START — MOST OF THE MACHINERY EXISTS.** Do not re-scope it as a
-research question; it is a build:
+**IT IS NOT A COLD START — MOST OF THE MACHINERY EXISTS.** Do not re-scope it as a research
+question; it is a build:
 
 * `solver/boussinesq.py`, `boussinesq_rescaled.py`, `boussinesq_velocity.py`,
   `fractional_boussinesq.py`, `hl_rescaled.py`
 * **seven** green gate suites: `test_boussinesq_{rescaled,transport,velocity,wall}.py`,
   `test_fractional_boussinesq.py`, `test_hl_rescaled.py`, `test_solver_boussinesq.py`
 * Spike 1 already **reproduced the published Chen–Hou self-similar profile** in the
-  Hou–Luo geometry, with the formulation transcribed from `arXiv:2210.07191` §2/§7 —
-  see `PHASE2_SPIKE1_NOTES.md`, which locks the equations and the symmetry class.
-* Route-G re-measured `β` on the 2D object with our own dynamically-rescaled machine.
+  Hou–Luo geometry, formulation transcribed from `arXiv:2210.07191` §2/§7 — see
+  `PHASE2_SPIKE1_NOTES.md`, which locks the equations and the symmetry class.
+* Route-G re-measured `β` on the 2D object with our own dynamically-rescaled machine —
+  **and leg 42 verified that anchor against the primary source: Chen–Hou's
+  `c_l/c_ω ≈ −2.9205600`. `Papers/2210.07191.pdf` is one `bash Papers/fetch.sh` away and
+  §2/§7 are the sections you need.**
 
-**WHAT THE LEG MUST DELIVER — the CERTIFICATION half, not another measurement.** The
-question is *what would a computer-assisted proof of the 2D Boussinesq profile need, and
-which piece of it can we actually build?* Concretely:
+**WHAT THE LEG MUST DELIVER — the CERTIFICATION half, not another measurement.**
 
 1. the **Newton–Kantorovich setup on the 2D profile**: pick the function space, and pick
    it with **Route-D's `a = 0`-only disaster in mind** — check on day one that the space
    can carry the terms the *2D* problem actually has, not the ones the gate case has;
 2. an honest **`Y₀`** (defect of the numerical profile) in that space;
-3. a **first bound on `Z₁`/`‖A‖`**, with the same kill-switch discipline: **if the radii
+3. a **first bound on `Z₁`/`‖A‖`**, with the kill-switch discipline: **if the radii
    polynomial does not close in float with margin, STOP and report — do not harden**;
-4. the same refusal gates the last two legs paid for: gate the **operator**, not the
+4. the refusal gates the last three legs paid for: gate the **operator**, not the
    agreement; bound fits by the **variable**, not the time; report a **magnitude**, never
-   a boolean; and **"small" in which norm?**
+   a boolean; **"small" in which norm?**; and now **(70) name the realization** and
+   **(67) gate the quantity the measurement divides by, not the quantity it is about.**
 
 **A NEGATIVE HERE IS WORTH MORE THAN A POSITIVE ANYWHERE ELSE**, because it is a negative
 about the object certification results actually count on. Even "`Y₀` is machine-level but
 `Z₁` diverges, and here is the mechanism" moves the project further than any 1D leg has.
 
-**EXPLICITLY BANNED until Directive 2 has been attempted and reported on:** another gCLM
-measurement leg, another Route-D bound-sharpening leg, another DSS re-ask, and the DSS
-lane's *expensive* entrance (a periodic-orbit search with nothing to seed it — three legs
-have now given independent reasons the cheap entrances do not work; that is a reason to
-leave the lane alone, not to spend big on it).
+**EXPLICITLY BANNED until this has been attempted and reported on:** another gCLM
+measurement leg, another Route-D bound-sharpening leg, another DSS re-ask, the DSS lane's
+expensive entrance, **and another literature leg** (Tier 2 is real and cheap and it is
+still not the hard thing — see (J-0f)).
 
-**AND KEEP THE HONESTY THAT IS WORKING.** The refusal discipline is the best thing this
-project has: Route-H refused a rung that would have shipped a sign flip; Route-I refuses
-its own closest-agreeing data point on operator grounds and states that it therefore has
-no off-resonance control. **Pursuing Clay harder does not mean claiming more.** Only Tier 3
-— a rigorous proof — counts. Clay odds remain **~0.05%**, and the realistic prize is still
-a novel result on a model where blow-up is provable. Say that plainly in every writeup.
+**AND KEEP THE HONESTY THAT IS WORKING.** It is the best thing this project has, and leg 42
+is the strongest evidence yet that it is worth the cost: Route-H labelled its closed form
+"probably known" and was right; Route-I refused its own closest-agreeing data point on
+operator grounds. **Pursuing Clay harder does not mean claiming more.** Only Tier 3 — a
+rigorous proof — counts. Clay odds remain **~0.05%**, and the realistic prize is still a
+novel result on a model where blow-up is provable. **After leg 42, "novel" is a much
+higher bar than it looked.** Say that plainly in every writeup.
 
-**ONE PROCESS RULE, EARNED THE HARD WAY THIS SESSION.** Both legs checked this session had
-writeups whose numbers did not match their own committed data (a refused rung quoted as a
-measurement, a refused control quoted as passing, an 81%-off row reported as "<1%", and
-`α₁ = nan` rendered three times in a figure legend that had already been looked at).
-**Before pushing any leg: regenerate the data, rebuild the figure, and check every number
-in the prose against the JSON. A rendered artifact is not a verification.**
+**ONE PROCESS RULE, AND IT KEEPS EARNING ITS PLACE.** Before pushing any leg: regenerate
+the data, rebuild the figure, and check **every number in the prose against the JSON**. A
+rendered artifact is not a verification. Leg 42 caught four of its own transcription slips
+this way after the writeup was drafted.
 
 ---
 
+
+*Updated 2026-08-04 (session close). **THIS SESSION SHIPPED ROUTE-J v1 — the primary-source
+pass. Directive 1 is DONE and CLOSED. It cost this project seven claims.** Read (J-0a)
+through (J-0f), then the Route-I block below.*
+
+**(J-0a) DIRECTIVE 1 IS DONE. EGRESS WORKS — DO NOT RE-DIAGNOSE IT.** `curl
+https://arxiv.org/abs/2207.07548` returned **200**; `bash Papers/fetch.sh` pulled **14/14
+on the first attempt**, no failures. `Papers/` is still gitignored and the PDFs are still
+not committed — **re-run `fetch.sh` at the start of any session that needs them, it takes
+about thirty seconds.** Tier 1 is READ. `LITERATURE_CHECK.md` now has a **sixth pass** with
+a verdict table at the top; the five passes below it are search-level and are **superseded
+wherever they conflict** — including the third pass, which named the wrong paper as
+Route-F's likely pre-emption. The check is now **executable**:
+`solver/literature_gates.py` + `test_literature_gates.py` **9/9**;
+`experiments/p2_route_j_v1_literature.py` → `writeup/data/p2_route_j_v1_literature.json`
+→ **fig39**; `TECHNICAL/BLOG_P2_ROUTEJ_V1.md`; `PHASE2_P2_NOTES` **§31**.
+
+**(J-0b) THE LEDGER: SEVEN OF TWELVE STANDING CLAIMS ARE PRE-EMPTED.** In priority order.
+**(i) Route-F v1's `s_c = α/2` is `s*(a) = 1/c_l(a)`, arXiv:2607.19762 §6.1 eq (6.3) (Xu),
+posted 22 Jul 2026 — ELEVEN DAYS before the leg.** Our F6 map vs their Table 1: worst row
+**3.1e-3**, mean 1.2e-3, exact at `a=0` and `a=1/2`. What survives is narrow and must be
+said narrowly: F3's cross-check is an independent dynamical validation of **their** formula
+(Xu's only quantitative branch validation is the `a_c` endpoint) — **a service, not a
+result.** **(ii) Route-H's closed form (E) IS arXiv:2207.07548 §5.3 eqs (57)-(58)**, worst
+relative difference **6.5e-15**, their `t_c` formula returning our `T` with error **0.0**.
+**(iii) `α(1/2) = 3` is EXACT and known** (`c_l(1/2) = 1/3`), reproduced to **7.7e-5** by
+integrating their `a=1/2` pole system cold. **(iv) Route-E's point spectrum `{0,1}`** is
+Xu Theorem 2, proved, in our own normalization. **(v) the `α(a)` branch and `a_c`** are
+LSS's; ours is **0.64%** off the published 0.6890665 where Xu's recompute is **0.04%** —
+**we are the worst of three sources and should quote theirs.** **(vi) `α₁ = 0` at `a = 0`**
+is ALS's form (61), which carries `ν` inside the profile at fixed exponents. **(vii)
+finite support is PARTIAL** — HTW Prop 2.3 proves it for **De Gregorio, `a=1`** only; the
+`a`-dependence and the order-`1/a` zero are not there.
+
+**(J-0c) THE ONE ITEM THAT IS A LIVE CORRECTION, NOT A RETRACTION — DO THIS BEFORE ANY
+NEW SPECTRAL CLAIM.** Xu's **Proposition 2, the realization dichotomy**: the
+essential-spectrum smear that grids **WITHOUT AN ORIGIN CONDITION** place inside the strip
+is the faithful spectrum of the **maximal `L²` realization**; the **origin-`H²`**
+realization has none of it (the whole non-symmetry family is
+`u_λ = y^{1-λ}/(y+i/2)²`, `L²` but with `u'' ∉ L²` at the origin). **OUR DISCRETIZATION HAS
+NO ORIGIN CONDITION.** So §26's "the non-symmetry spectrum is CONTINUOUS" is a statement
+about which operator we discretized. The DSS verdict SURVIVES (nothing to bifurcate in
+either realization) — **but §30's "141 of 144 unstable directions at μ=0" is counted in the
+loose realization and MUST SAY SO. Re-running I5 with an origin condition is the top-ranked
+correction item, and it is small.** Note what it does NOT touch: the `μ > 0` half is about
+a DISCRETE negative ladder, and a discrete ladder is not realization-smear.
+
+**(J-0d) ONE RESULT ARRIVED *FROM* THE LITERATURE, AND IT IS THE BEST THING IN THE LEG.**
+§27/§29/§30 all stop at criticality; Route-F's "the scaling says which term dominates" had
+no second half. ALS §5.1 has it. **SUBcritically `ω_t` balances stretching, forcing β=1.
+SUPERcritically DISSIPATION balances stretching, `β = σ c_l`, and `ω_t` is SUBDOMINANT.**
+Schochet is the witness (σ=2, `c_l`=1 ⇒ β=2). **Measured, not quoted:** spread of
+`τ^β ω` across a τ-ladder is **0.0202 at β=2 vs 0.990 at β=1 (49×)**, and the β=2 residual
+**falls 0.0202 → 0.0060 → 0.00187** on deeper sub-ladders — ALS's stated `O(τ^{-1})`
+correction behaving as stated, which is what makes it a measurement and not a four-way fit.
+**THE MECHANISM IS THE PART TO CARRY: the `τ^{-2}` is carried by a DOUBLE POLE with residue
+`B = -12iν` — proportional to ν, hence ABSENT inviscidly. Above criticality the blow-up is
+not the inviscid one surviving viscosity; it is a DIFFERENT singularity that viscosity
+itself creates.** No leg of this project could have seen that: all three assume β=1.
+
+**(J-0e) TWO OPEN QUESTIONS CLOSED, ONE 38-YEAR-OLD TYPO SETTLED.** §26 asked why `α=3` is
+a round rational while `α=5` is not. **ALS §1: exact pole-dynamics solutions exist at `a=0`
+and `a=1/2` and, per Lushnikov et al., NOWHERE ELSE.** So `α=5` at `a=0.5821792673` is a
+property of **our instrument** (`Λ⁵` is a finite matrix there), not of the problem — stop
+treating it as structure. And ALS §5.1 correct Schochet (CPAM 1986)'s constant to
+`K± = 24(3±√6)` from the printed `12(6±√6)`; substituting both into the complex Burgers
+equation with analytic derivatives gives **5.24e-16 vs 2.40e-2 — 13.66 decades.** ALS are
+right, and the constant one would have copied from the 1986 paper is the wrong one.
+
+**(J-0f) WHAT IS STILL UNCHECKED, AND WHY IT IS *NOT* THE NEXT LEG.** **Tier 2**
+(`2302.12877`, `2312.01702`, `1908.09385`) is fetched and text-extracted but NOT read. It
+gates the **Route-D methodological claims — the discrete-ball trap, the weighted-`ℓ¹`
+no-go, the elasticity discipline — still the only claims in this project with a real chance
+of being new.** After this pass, "unchecked" means unchecked, not "probably fine". It is
+also **cheap, and therefore exactly the kind of thing that has beaten the directive six
+times.** Do the port first. Read Tier 2 when the port has been attempted and reported on.
+
+**NEW BANKED LESSONS (67)-(70)**, all in `PHASE2_P2_NOTES` §31: **(67) gate the quantity
+the measurement DIVIDES BY, not the quantity it is about** — J3's first refusal predicate
+gated `τ` and passed a rung reading `c_l = 0.222`, because the local exponent is a
+difference quotient and what must survive is `dτ`; `τ` there was `1e-11`, so no threshold
+on `τ` could have caught it (lesson 57, one level down). **(68) a literature check that is
+not EXECUTABLE decays at the rate of memory** — five prose passes produced zero durable
+facts; nine gates produced twelve durable verdicts in 5 s. **(69) when a paper pre-empts
+you, the valuable part is usually the part you did not ask about** — reading ALS to check
+`s_c` returned nothing about `s_c` and everything about what lies above it. **(70) a
+spectrum is not a property of an operator until you NAME THE REALIZATION.**
+
+**NOVELTY: `LITERATURE_CHECK.md` sixth pass is now the standing record and it is
+primary-source. Read the table at the top of it before claiming anything.**
+
+---
 
 *Updated 2026-08-03 (session close, third update). **THIS SESSION SHIPPED ROUTE-H v1 AND THEN
 ROUTE-I v1.** Route-I existed as untracked code + writeups when the session picked it up; its

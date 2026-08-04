@@ -9,6 +9,41 @@ Clay progress. Plain float64 throughout; nothing here is interval-enclosed.**
 
 ---
 
+> ## ⛔ NOVELTY RETRACTED, ONE OPEN QUESTION CLOSED, ONE RESULT RE-CLASSIFIED
+> *(added 2026-08-04, Route-J v1 primary-source pass)*
+>
+> **1. The point-spectrum negative is pre-empted.** **arXiv:2607.19762 Theorem 2** (Xu)
+> proves the full point spectrum of the CLM linearization on the odd origin-`H²`
+> realization is exactly `{0, 1}` — the symmetry modes, no embedded eigenvalues — in our
+> own normalization `Ω = -y/(y² + 1/4)`. This leg is **confirmed but not novel**.
+>
+> **2. THE ESSENTIAL-SPECTRUM CONTINUUM IS RE-CLASSIFIED, and this is the important one.**
+> Xu's **Proposition 2 (realization dichotomy)**: the essential-spectrum *smear* that grids
+> **without an origin condition** place inside the strip is the faithful spectrum of the
+> **maximal `L²` realization**; imposing the single second-derivative condition at the
+> origin removes the entire non-symmetry family (explicitly, `u_λ(y) = y^{1-λ}/(y+i/2)²`,
+> `L²` but with `u'' ∉ L²` at the origin). **Our discretization has no origin condition, so
+> we were rendering the loose realization and did not know there was a choice.** The DSS
+> conclusion survives — in the tight realization there is no continuum *and* no complex
+> pair, so there is still nothing to bifurcate — but "the non-symmetry spectrum is
+> continuous" must be stated as a property of the realization, not of the operator.
+>
+> **3. `α(1/2) = 3` is exact and known, AND THIS LEG'S OPEN QUESTION IS ANSWERED.** This
+> writeup recorded that *"what stays unexplained is why `α = 3` lands on a round rational
+> while `α = 5` does not"*. **arXiv:2207.07548 §1** answers it: exact pole-dynamics
+> solutions exist at `a = 0` and `a = 1/2` and, per Lushnikov et al., **nowhere else**.
+> `c_l(1/2) = 1/3` is exact; verified here to 7.7e-5 by integrating their `a = 1/2` system
+> cold. The `α = 5` point at `a = 0.5821792673` is a property of **our instrument** (`Λ⁵`
+> is a finite matrix there), not of the problem.
+>
+> **4. The `α(a)` branch and `a_c` are published.** `a_c` (Lushnikov–Silantyev–Siegel) is
+> **0.6890665**; Xu's recompute is 0.6888 (**0.04%**); ours is 0.693493 (**0.64%**). We are
+> the least accurate of the three and should quote theirs.
+>
+> See `TECHNICAL_P2_ROUTEJ_V1.md` and `LITERATURE_CHECK.md` sixth pass.
+
+---
+
 ## 0. Why this leg exists, and what it was allowed to conclude
 
 Route D spent sixteen legs on link **L1** of the chain — a certified self-similar blow-up

@@ -361,17 +361,47 @@ writeup/
     is a `5e−11` change in the profile, so it tests the gauge direction and **not** the basin.
     *(fig 38)*
 
+42. [TECHNICAL_P2_ROUTEJ_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEJ_V1.md) ·
+    [BLOG_P2_ROUTEJ_V1.md](4_p2_lottery/BLOG_P2_ROUTEJ_V1.md) — **Route-J v1**, the
+    **primary-source pass**. Egress to arXiv opened after six legs of being blocked;
+    `bash Papers/fetch.sh` pulled **14/14** on the first attempt; Tier 1 is read. **No new
+    science — this leg retracts.** The deliverable is deliberately *code*, not prose: nine
+    gates that each re-derive a published number from the published equations and compare it
+    to ours, because five prose passes produced zero durable facts. **The headline is a
+    subtraction: Route-F v1's `s_c = α/2` is `s*(a) = 1/c_l(a)` in arXiv:2607.19762 §6.1
+    eq (6.3), posted 22 Jul 2026 — eleven days before that leg** (our `F6` map vs their
+    Table 1: worst row `3.1e−3`, mean `1.2e−3`, exact at `a = 0` and `a = 1/2`). **Route-H's
+    closed form (E) *is* arXiv:2207.07548 §5.3 eqs (57)–(58)** — worst relative difference
+    `6.5e−15`, their `t_c` formula returning our `T` with error `0.0`. **`α(1/2) = 3` is
+    exact and known**, reproduced to `7.7e−5` by integrating their `a = 1/2` pole system
+    cold — **and that closes Route-E's own open question**: exact pole solutions exist at
+    `a = 0` and `a = 1/2` and nowhere else, so `α = 5` was never a property of the problem,
+    only of our instrument. **The re-classification with the largest forward consequence is
+    Xu's Proposition 2 (realization dichotomy)**: the essential-spectrum continuum Route-E
+    measured is the *maximal `L²` realization's*, which is what grids **without an origin
+    condition** render — ours has none — so **Route-I's "141 of 144 unstable directions"
+    must name its realization**, and re-running I5 with one is the top correction item.
+    **One result arrives going the other way**: above `s_c` the balance is
+    dissipation-against-stretching, `β = σ c_l` with `ω_t` subdominant, carried by a double
+    pole with residue `−12iν` that is *absent inviscidly* — measured here, spread `0.0202`
+    at `β = 2` vs `0.990` at `β = 1`, and the `β = 2` residual falling `0.0202 → 0.00187` on
+    deeper ladders. Also settled from our side: ALS's correction to Schochet (CPAM 1986)'s
+    constant, `24(3±√6)` at `5.2e−16` against the printed `12(6±√6)` at `2.4e−2` — **13.66
+    decades**. Ledger: **7 pre-empted, 1 partial, 2 still unsearched, 1 inbound.** *(fig 39)*
+
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
-record of what has been checked against the literature and what has not — three passes,
-per-claim risk levels, and the reading order. It goes further than entry 34 above (which
-predates its third pass, the one that found the paper most likely to pre-empt Route-F).
-**Read it before making any novelty claim.** Everything in it is search-level: **no paper
-has been read.** The blocker is the environment's egress allowlist — the agent proxy 403s
-the CONNECT for non-allowlisted hosts (`github.com` is on the list, `arxiv.org` is not),
-and `WebFetch` 403s for the same reason. **It is fixable by the user**, and doing so is
-Directive 1 in [`../CONTINUATION_PROMPT.md`](../CONTINUATION_PROMPT.md); what to read
-first, and what each paper gates, is in [`../Papers/MANIFEST.md`](../Papers/MANIFEST.md).
+record. **As of 2026-08-04 it has a SIXTH PASS and it is the first one against primary
+sources** — egress opened, all fourteen papers in
+[`../Papers/MANIFEST.md`](../Papers/MANIFEST.md) were fetched, and Tier 1 was read. The
+verdict table is at the top of that file: **seven standing claims pre-empted, one partial,
+two still unsearched, one inbound from the literature.** The five passes below it are
+search-level and are superseded wherever they conflict — in particular the third pass named
+the wrong paper as Route-F's most likely pre-emption. **Read the sixth pass before making
+any novelty claim**, and note that the check is now executable
+(`test_literature_gates.py`, 9/9) rather than narrative. **Still genuinely unchecked:**
+Tier 2, which gates the Route-D methodological claims — the only ones with a real chance of
+being new.
 
 Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
@@ -407,6 +437,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig26_route_d_v8_quadratic.png` | 4 | P2 — Route-D v8: the weighted Hölder bound on `H` and its two convergences, the 237× route ablation, the bracket against the adversary family, the γ-structure of the new term against the old, the first complete `Z₂` map, and the budget history across four legs |
 | `fig27_route_d_v9_sharpen.png` | 4 | P2 — Route-D v9: the exact folded kernel's sharpening across eight decades, the payer rule's interior optimum, the gain that does not transfer to the operating point, the re-sharpened `Z₂` map, five legs of budget, and the elasticity of `‖A‖` to each input |
 | `fig38_route_i_v1_driven.png` | 4 | P2 — Route-I v1: `λ_μ = 2s − α₀` measured as a growth rate along a trajectory (with the refused rungs marked), the tar pit driven against its closed law with the dynamic and static `α₁` ladders side by side, adiabaticity and off-branch starts, THE STABILITY INVERSION (unstable directions vs `μ` at three `K`, with the crossover that shows the limits do not commute), where the instability lives (`Re` against the log-frequency cutoff — the DSS band), and the nonlinear twin-trajectory control against the spectral gap |
+| `fig39_route_j_v1_literature.png` | 4 | P2 — Route-J v1, the primary-source pass: the constant ALS corrected in Schochet (1986), settled from our side by the PDE residual (13.66 decades); Route-H's closed form (E) against ALS eqs (57)-(58) pointwise; `α(1/2) = 3` by integrating ALS (49)-(50) cold, with the rungs the `dτ` gate refuses drawn in red rather than truncated away; what lies ABOVE `s_c` (the Schochet family collapsing at `β = 2` and fanning at `β = 1`); our `α(a)` branch against Xu's `s*(a) = 1/c_l(a)`; and the twelve-claim ledger by verdict |
 | `fig37_route_h_v1_critical.png` | 4 | P2 — Route-H v1: `s_c` read as the stability eigenvalue `2s − α₀` with the marginal point marked, the `a = 0` neutral line against its closed form, the `a = 1/2` secant extrapolation that gives `α₁` with its `K`-ladder, the DSS re-ask (dissipation discretizes the continuum onto the negative integers and nothing crosses), the time-dependent cross-check at `s = 1/2` exactly, and `μ(τ)` decaying algebraically rather than exponentially |
 | `fig36_route_g_v1_collapse.png` | 4 | P2 — Route-G v1: the law `s_c = 1/(2β)` with every object on it (gCLM's dial, Chen–Hou 2D Boussinesq, and NS at `β = 1/2` exactly), `β` re-measured by our own dynamically-rescaled 2D machine as a modulation constant, the direct time-dependent route refused with its reason, the underpowered `p(s)` line kept for its sign structure, the cross-model calibration on gCLM's dial, and who beats the ordinary Laplacian as a signed bar |
 | `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
@@ -438,6 +469,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_d_v8_quadratic.json` | Arc 4 / fig26 — X1 the estimate + grid/quadrature ladders + the route ablation, X2 the bracket over ten profiles, X3 the γ-structure vs v6's sup-only term, X4 the complete `Z₂` map, X5 the re-priced budget + its four-leg history, X6 the ledger |
 | `p2_route_d_v9_sharpen.json` | Arc 4 / fig27 — Y1 the sharper pointwise bound + both ladders, Y2 the payer rule and the gain-by-point table, Y3 the new `‖A‖` J-ladder, Y4 the re-sharpened `Z₂` map, Y5 the five-leg budget, Y6 the input elasticities |
 | `p2_route_i_v1_driven.json` | Arc 4 / fig38 — I1 the integrator against the `a = 0` line of fixed points plus the BDF2 order and the gauge (projected vs raw), I2 `λ_μ` as a growth rate with every rung's seed residual and `Λ^p` truncation and three refusals, I3 the tar pit driven with the dynamic/static `K`-ladder and the fit-window sweep, I4 adiabaticity, the off-branch starts and their norm qualification (with any refusal recorded, never a NaN), I5 the stability inversion at `K = 48/96/144` with the crossover brackets against `g/K^p`, I6 the frequency profile (`Re` vs `|Im|` cutoff, inviscid and viscous), I7 the twin-trajectory control, I8 the verdict with its `τ` scales |
+| `p2_route_j_v1_literature.json` | Arc 4 / fig39 — provenance for each primary source (what was read, what it gates); J1 the Schochet constant, both candidates x 3 configurations with every residual; J2 the (E) ↔ ALS (57)-(58) parameter map, pointwise differences at four times, a second parameter set, and the `t_c` check; J3 the `c_l` ladder with the `dτ` floor, the resolved and REFUSED rungs both recorded (including what the refused ones would have read); J4 the collapse spread at four `β` plus the deepening sub-ladder that makes `β = 2` a measurement rather than a fit; J5 our branch against Xu Table 1 row by row, with `a_c` from all three sources; J6 the twelve-claim ledger, each entry naming its source, verdict and what survives |
 | `p2_route_h_v1_critical.json` | Arc 4 / fig37 — H1 the closed-form viscous blow-up and its PDE residual in closed form, H2 the `a = 0` marginal branch (`α ≡ 1`, `α₁ = 0`), H3 the `a = 1/2` branch with the `K = 96..240` ladder and both the secant extrapolant and the chord it corrects, H4 the third point REFUSED with its signal-to-residual ratio and the verdict it would have quoted, H5 the dissipative spectrum vs `μ` with the integer ladder and the planted control, H6 the verdict with its `τ` scales, H7 the time-dependent cross-check with its `under_resolved` caveat |
 | `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
@@ -482,6 +514,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_g_v1_evidence.py         # fig36
 .venv/bin/python writeup/4_p2_lottery/p2_route_h_v1_evidence.py         # fig37
 .venv/bin/python writeup/4_p2_lottery/p2_route_i_v1_evidence.py         # fig38
+.venv/bin/python writeup/4_p2_lottery/p2_route_j_v1_evidence.py         # fig39
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):

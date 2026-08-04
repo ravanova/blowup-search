@@ -1,0 +1,544 @@
+{
+ "leg": "Route-J v1",
+ "title": "The primary-source pass: published results as executable gates",
+ "generated": "2026-08-04T09:35:09Z",
+ "sources": {
+  "2207.07548": {
+   "tag": "ALS",
+   "authors": "Ambrose, Lushnikov, Siegel, Silantyev",
+   "title": "Global existence and singularity formation for the generalized Constantin-Lax-Majda equation with dissipation: the real line vs. periodic domains",
+   "venue": "Nonlinearity (arXiv v1, 15 Jul 2022)",
+   "read": "full text; sections 1, 5, 7.3, 8 closely",
+   "gates": [
+    "Route-H closed form (E)",
+    "alpha(1/2) = 3",
+    "the supercritical balance",
+    "Route-F s_c (NEGATIVE: not here)"
+   ]
+  },
+  "2607.19762": {
+   "tag": "XU",
+   "authors": "Xu",
+   "title": "The spectral picture of self-similar collapse in the Constantin-Lax-Majda equation",
+   "venue": "arXiv, 22 Jul 2026",
+   "read": "full text; abstract, sections 2, 3, 6, 7 closely",
+   "gates": [
+    "Route-F s_c = alpha/2 (PRE-EMPTS)",
+    "Route-E point spectrum",
+    "Route-E/I essential spectrum (RE-CLASSIFIES)",
+    "alpha(a) branch, a_c"
+   ]
+  },
+  "2210.07191": {
+   "tag": "CH",
+   "authors": "Chen, Hou",
+   "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data I: Analysis",
+   "venue": "arXiv v3, 9 May 2023",
+   "read": "abstract, section 1, the profile section around eq. for c_l/c_omega",
+   "gates": [
+    "Route-G beta anchor",
+    "the L1->L2 port's formulation"
+   ]
+  },
+  "2209.08232": {
+   "tag": "HTW",
+   "authors": "Huang, Tong, Wei",
+   "title": "On self-similar finite-time blowups of the De Gregorio model on the real line",
+   "venue": "arXiv, 17 Sep 2022",
+   "read": "sections 1, 2 closely",
+   "gates": [
+    "Route-D v12/v13 finite support (PARTIAL, scope differs)"
+   ]
+  }
+ },
+ "J1_schochet_constant": {
+  "rows": [
+   {
+    "family": "ALS 24(3+-sqrt6), corrected",
+    "which": "K+",
+    "K": 130.78775382679626,
+    "residuals": [
+     4.578221912822139e-16,
+     5.240272158108144e-16,
+     1.1717116537867148e-16
+    ],
+    "worst_residual": 5.240272158108144e-16
+   },
+   {
+    "family": "ALS 24(3+-sqrt6), corrected",
+    "which": "K-",
+    "K": 13.21224617320373,
+    "residuals": [
+     1.6750445518620758e-16,
+     1.2886589429079552e-16,
+     2.847654430063963e-16
+    ],
+    "worst_residual": 2.847654430063963e-16
+   },
+   {
+    "family": "Schochet 1986 12(6+-sqrt6), as printed",
+    "which": "K+",
+    "K": 101.39387691339815,
+    "residuals": [
+     0.023987468241965067,
+     0.021620695913050797,
+     0.017758809335623432
+    ],
+    "worst_residual": 0.023987468241965067
+   },
+   {
+    "family": "Schochet 1986 12(6+-sqrt6), as printed",
+    "which": "K-",
+    "K": 42.60612308660187,
+    "residuals": [
+     0.08357383594992591,
+     0.07799437369610716,
+     0.06413269767721744
+    ],
+    "worst_residual": 0.08357383594992591
+   }
+  ],
+  "corrected_worst": 5.240272158108144e-16,
+  "printed_best": 0.023987468241965067,
+  "printed_worst": 0.08357383594992591,
+  "separation_decades": 13.660630569730445,
+  "verdict": "ALS's correction is confirmed independently: the corrected constant satisfies the equation to rounding, the printed one does not, and the two are separated by 13.7 decades."
+ },
+ "J2_route_h_E_is_als": {
+  "map": {
+   "w_m1_0": -3.1571428571428575,
+   "vc0": 3.714285714285715,
+   "kappa": 1.8571428571428574,
+   "dvc_dt_from_als": -1.8571428571428574,
+   "dvc_dt_from_E": -1.8571428571428574
+  },
+  "rows": [
+   {
+    "t": 0.0,
+    "frac_of_T": 0.0,
+    "max_abs_diff": 0.0,
+    "profile_scale": 0.8499999095092301,
+    "rel_diff": 0.0
+   },
+   {
+    "t": 0.9,
+    "frac_of_T": 0.45,
+    "max_abs_diff": 0.0,
+    "profile_scale": 1.5454543037464603,
+    "rel_diff": 0.0
+   },
+   {
+    "t": 1.7,
+    "frac_of_T": 0.85,
+    "max_abs_diff": 2.6645352591003757e-15,
+    "profile_scale": 5.666654720205086,
+    "rel_diff": 4.702130958499517e-16
+   },
+   {
+    "t": 1.98,
+    "frac_of_T": 0.99,
+    "max_abs_diff": 5.542233338928781e-13,
+    "profile_scale": 84.9585062240663,
+    "rel_diff": 6.523459021645117e-15
+   }
+  ],
+  "worst_rel_diff": 6.523459021645117e-15,
+  "second_parameter_set": {
+   "mu0": 3.1,
+   "nu": 0.25,
+   "T": 5.0,
+   "t": 4.5,
+   "rel_diff": 2.707948386027102e-15
+  },
+  "als_tc_eq59": 2.0,
+  "route_h_T": 2.0,
+  "tc_abs_err": 0.0,
+  "dvc_dt_consistency": 0.0,
+  "verdict": "Route-H's (E) IS ALS (57)-(58).  Pre-empted, with the parameter map explicit and both directions of the evolution law agreeing."
+ },
+ "J3_alpha_half_from_als": {
+  "verdict_row": {
+   "refused": false,
+   "c_l": 0.3333075712353093,
+   "c_l_exact": 0.3333333333333333,
+   "c_l_rel_err": 7.728629407205423e-05,
+   "alpha_ours": 3.0002318768031153,
+   "alpha_exact": 3.0,
+   "v_c_at_read": 0.0014239081065465487,
+   "tau_at_read": 3.079270172179349e-10,
+   "dtau_at_read": 3.141098492420724e-13,
+   "dlogOmega_dlogvc": -2.000143878043304,
+   "dlogOmega_dlogvc_exact": -2.0,
+   "n_resolved": 42840,
+   "n_total": 200001
+  },
+  "ladder": [
+   {
+    "frac": 0.3,
+    "v_c": 0.11251485743150401,
+    "Omega": 985.3894338674378,
+    "tau": 0.00015249181690266123,
+    "dtau": 1.5592200969249959e-07,
+    "c_l_local": 0.3325202139121757
+   },
+   {
+    "frac": 0.5,
+    "v_c": 0.026220073433110513,
+    "Omega": 18180.022900681026,
+    "tau": 1.9231645011219545e-06,
+    "dtau": 1.9618869029347508e-09,
+    "c_l_local": 0.3332893235415213
+   },
+   {
+    "frac": 0.7,
+    "v_c": 0.0061102352749834304,
+    "Omega": 334804.7049979691,
+    "tau": 2.4333628667605467e-08,
+    "dtau": 2.4820479005427387e-11,
+    "c_l_local": 0.33333096044043486
+   },
+   {
+    "frac": 0.9,
+    "v_c": 0.0014239081065465487,
+    "Omega": 6165182.6428355025,
+    "tau": 3.079270172179349e-10,
+    "dtau": 3.141098492420724e-13,
+    "c_l_local": 0.3333075712353093
+   },
+   {
+    "frac": 0.98,
+    "v_c": 0.0007951816331822754,
+    "Omega": 19768662.56502732,
+    "tau": 5.361355803756851e-11,
+    "dtau": 5.470623953840459e-14,
+    "c_l_local": 0.3332090698131651
+   }
+  ],
+  "refused_ladder": [
+   {
+    "tau": 3.460609576677598e-11,
+    "dtau": 3.530509218307998e-14,
+    "c_l_would_have_read": 0.33326844212569995
+   },
+   {
+    "tau": 5.779376976988715e-12,
+    "dtau": 5.9396931817445875e-15,
+    "c_l_would_have_read": 0.33082319213008304
+   },
+   {
+    "tau": 9.522105326453811e-13,
+    "dtau": 9.992007221626409e-16,
+    "c_l_would_have_read": 0.3240105704217058
+   },
+   {
+    "tau": 1.444677710793485e-13,
+    "dtau": 1.6653345369377348e-16,
+    "c_l_would_have_read": 0.29495001633131324
+   }
+  ],
+  "dtau_floor": 3.533152048751304e-14,
+  "n_refused_rungs": 157161,
+  "n_resolved_rungs": 42840,
+  "note": "Om0 = 10 > 4 puts the trajectory on the branch where v_c is decreasing; ALS's blow-up condition is Omega(0) > 2 and v_c turns around at Omega = 4.  Reparametrising by u = log v_c is what makes the deep rungs reachable -- integrating in t underflows dt against an O(1) elapsed time and returns NaN.",
+  "verdict": "c_l(1/2) = 1/3 reproduced to 7.7e-05 relative from a system sharing nothing with our solver.  So alpha(1/2) = 3 is right AND exact AND known."
+ },
+ "J4_supercritical": {
+  "tc": 0.03670068381445479,
+  "taus": [
+   0.001,
+   0.0003,
+   0.0001,
+   3e-05,
+   1e-05
+  ],
+  "collapse_spread_by_beta": {
+   "1.0": 0.98979386500537,
+   "1.5": 0.8979386500537004,
+   "2.0": 0.020197165208810066,
+   "2.5": 0.9020197165208811
+  },
+  "best_beta": 2.0,
+  "deepening": [
+   {
+    "tau_max": 0.001,
+    "n_rungs": 5,
+    "spread_beta2": 0.020197165208810066,
+    "spread_beta1": 0.98979386500537
+   },
+   {
+    "tau_max": 0.0003,
+    "n_rungs": 4,
+    "spread_beta2": 0.005999691750261033,
+    "spread_beta1": 0.9664654698226125
+   },
+   {
+    "tau_max": 0.0001,
+    "n_rungs": 3,
+    "spread_beta2": 0.0018694982845768263,
+    "spread_beta1": 0.8998127000145408
+   }
+  ],
+  "beta_1_over_beta_2": 49.006573683598866,
+  "cases": [
+   {
+    "case": "Schochet a=0",
+    "sigma": 2.0,
+    "alpha_ALS": 1.0,
+    "beta_pred": 2.0,
+    "beta_ALS_says": 2.0,
+    "s_over_s_c": 2.0
+   },
+   {
+    "case": "ALS a=0 sigma=1 (MARGINAL)",
+    "sigma": 1.0,
+    "alpha_ALS": 1.0,
+    "beta_pred": 1.0,
+    "beta_ALS_says": 1.0,
+    "s_over_s_c": 1.0
+   },
+   {
+    "case": "ALS a=1/2 sigma=1 (subcritical)",
+    "sigma": 1.0,
+    "alpha_ALS": 0.3333333333333333,
+    "beta_pred": null,
+    "beta_ALS_says": 1.0,
+    "s_over_s_c": 0.3333333333333333
+   }
+  ],
+  "balance": "omega ~ tau^-beta f(x tau^-alpha_ALS) in omega_t + ... = omega H omega - nu Lambda^sigma omega:\n    omega_t              ~ tau^{-beta - 1}\n    omega H omega        ~ tau^{-2 beta}\n    nu Lambda^sigma omega ~ tau^{-beta - sigma alpha_ALS}\nSUBcritical (sigma < 1/alpha_ALS): omega_t balances stretching  =>  beta = 1, dissipation\n    is a lower-order correction.  This is the regime Routes E/F/G/H/I all live in.\nSUPERcritical (sigma > 1/alpha_ALS): DISSIPATION balances stretching  =>  beta = sigma\n    alpha_ALS, and **omega_t is subdominant** (tau^{-beta-1} vs tau^{-2 beta}, beta > 1).\nSchochet is the witness: sigma = 2, alpha_ALS = 1  =>  beta = 2, matching ALS (45).\nThe mechanism is the DOUBLE POLE with residue B = -12 i nu: it is proportional to nu, so\nit is absent inviscidly, and it is what carries the tau^{-2}.",
+  "double_pole_residue": {
+   "B": "-12 i nu",
+   "vanishes_inviscidly": true,
+   "carries": "the tau^{-2}"
+  },
+  "verdict": "The Schochet family collapses at beta = 2 and does not at beta = 1 (spreads differ by 49x). Above criticality the balance is dissipation-against-stretching, beta = sigma alpha_ALS, and omega_t is subdominant."
+ },
+ "J5_branch_vs_xu": {
+  "rows": [
+   {
+    "a": 0.0,
+    "alpha_ours": 1.0,
+    "s_star_xu": 1.0,
+    "c_l_xu": 1.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "s_c_ours": 0.5,
+    "s_c_from_xu": 0.5
+   },
+   {
+    "a": 0.1,
+    "alpha_ours": 1.1413973505007986,
+    "s_star_xu": 1.145,
+    "c_l_xu": 0.873,
+    "abs_diff": 0.0036026494992014158,
+    "rel_diff": 0.003146418776595123,
+    "s_c_ours": 0.5706986752503993,
+    "s_c_from_xu": 0.5725
+   },
+   {
+    "a": 0.2,
+    "alpha_ours": 1.3344967436685506,
+    "s_star_xu": 1.338,
+    "c_l_xu": 0.7474,
+    "abs_diff": 0.0035032563314494336,
+    "rel_diff": 0.0026182782746258845,
+    "s_c_ours": 0.6672483718342753,
+    "s_c_from_xu": 0.669
+   },
+   {
+    "a": 0.3,
+    "alpha_ours": 1.6172441940845503,
+    "s_star_xu": 1.619,
+    "c_l_xu": 0.6178,
+    "abs_diff": 0.0017558059154496597,
+    "rel_diff": 0.0010845002566088077,
+    "s_c_ours": 0.8086220970422752,
+    "s_c_from_xu": 0.8095
+   },
+   {
+    "a": 0.4,
+    "alpha_ours": 2.079463800336568,
+    "s_star_xu": 2.079,
+    "c_l_xu": 0.4809,
+    "abs_diff": 0.0004638003365680099,
+    "rel_diff": 0.00022308818497739771,
+    "s_c_ours": 1.039731900168284,
+    "s_c_from_xu": 1.0395
+   },
+   {
+    "a": 0.5,
+    "alpha_ours": 2.999999999999999,
+    "s_star_xu": 3.0,
+    "c_l_xu": 0.3333,
+    "abs_diff": 8.881784197001252e-16,
+    "rel_diff": 2.9605947323337506e-16,
+    "s_c_ours": 1.4999999999999996,
+    "s_c_from_xu": 1.5
+   }
+  ],
+  "worst_rel_diff": 0.003146418776595123,
+  "mean_rel_diff": 0.0011787142488012515,
+  "a_c_ours": 0.6934927291222032,
+  "a_c_published_LSS": 0.6890665,
+  "a_c_xu_recomputed": 0.6888,
+  "a_c_ours_rel_err": 0.006423515179163608,
+  "a_c_xu_rel_err": 0.0003867551245054844,
+  "s2_boundary_xu": 0.39,
+  "s2_boundary_ours": 0.38280821512940283,
+  "xu_table1": [
+   {
+    "a": 0.0,
+    "c_l": 1.0,
+    "s_star": 1.0
+   },
+   {
+    "a": 0.1,
+    "c_l": 0.873,
+    "s_star": 1.145
+   },
+   {
+    "a": 0.2,
+    "c_l": 0.7474,
+    "s_star": 1.338
+   },
+   {
+    "a": 0.3,
+    "c_l": 0.6178,
+    "s_star": 1.619
+   },
+   {
+    "a": 0.4,
+    "c_l": 0.4809,
+    "s_star": 2.079
+   },
+   {
+    "a": 0.5,
+    "c_l": 0.3333,
+    "s_star": 3.0
+   },
+   {
+    "a": 0.6,
+    "c_l": 0.1691,
+    "s_star": 5.914
+   },
+   {
+    "a": 0.65,
+    "c_l": 0.0775,
+    "s_star": 12.9
+   }
+  ],
+  "chen_hou_beta": 2.92056,
+  "verdict": "Our alpha(a) is XU's s*(a) = 1/c_l(a), row for row.  The formula is theirs and precedes us; our numbers agree with it at the accuracy either side claims.  On a_c we are the least accurate of the three sources and should quote the published value."
+ },
+ "J6_ledger": {
+  "entries": [
+   {
+    "claim": "s_c = alpha/2, the critical dissipation exponent is half the far-field decay exponent",
+    "leg": "Route-F v1 (\u00a727)",
+    "source": "2607.19762 \u00a76.1 eq (6.3)",
+    "verdict": "PRE-EMPTED",
+    "note": "XU records s*(a) = 1/c_l(a) from the same rescaling argument, with the same caveat that it is a formal relevance threshold and not a blow-up/regularity threshold.  Posted 22 Jul 2026, eleven days before Route-F v1.  Our F6 map agrees with their Table 1 row by row.",
+    "survives": "F3's cross-check -- alpha from a steady compactified solve against dp/ds from time-dependent periodic simulation, no shared grid, basis or fitted constant.  XU state the only quantitative validation of their branch is the a_c endpoint, so an independent dynamical check of the FORMULA is a thing they do not have.  That is a validation, not a new result."
+   },
+   {
+    "claim": "the CLM linearization's isolated eigenvalues are only the symmetry modes",
+    "leg": "Route-E v1 (\u00a726)",
+    "source": "2607.19762 Theorem 2",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "note": "Point spectrum exactly {0,1} on the odd origin-H^2 realization, proved, no embedded eigenvalues, in our own normalization Omega = -y/(y^2+1/4). Our dense solve found the same thing at two points.",
+    "survives": "nothing of the claim; the negative stands and is not ours."
+   },
+   {
+    "claim": "the non-symmetry spectrum is a CONTINUUM, so there is no eigenvalue to move (no Hopf)",
+    "leg": "Route-E v1 (\u00a726), inherited by Route-I (\u00a730)",
+    "source": "2607.19762 Proposition 2 (realization dichotomy)",
+    "verdict": "PRE-EMPTED_AND_RE-CLASSIFIED",
+    "note": "The continuum we measured is the faithful spectrum of the MAXIMAL L^2 realization; the origin-H^2 realization has none of it.  So 'continuous spectrum' is not a property of the operator, it is a property of the realization our discretization implements -- one WITHOUT an origin condition, which is the loose one.  **This is the item with the largest forward consequence: Route-I's 141-of-144 unstable directions are counted in that same loose realization.**",
+    "survives": "the DSS conclusion, for a different and better reason: in the tight realization there is no continuum AND no complex pair, so there is still nothing to bifurcate.  The lane stays shut either way."
+   },
+   {
+    "claim": "alpha(1/2) = 3 (twelve digits), and the odd-integer-alpha resonances",
+    "leg": "Route-E v1 (\u00a726)",
+    "source": "2207.07548 \u00a75.2 + XU Table 1",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "note": "c_l(1/2) = 1/3 is EXACT, from the a = 1/2 pole-dynamics solution.  Verified here by integrating ALS (49)-(50).  **And this answers Route-E's own open question** -- why alpha = 3 is a round rational and alpha = 5 is not: exact pole-dynamics solutions exist at a = 0 and a = 1/2 AND NOWHERE ELSE (ALS \u00a71, citing Lushnikov et al).  a = 0.5821792673 has no exact solution behind it, so there is no reason for alpha = 5 to be special beyond Lambda^5 being a finite matrix -- which is OUR instrument, not the problem's structure.",
+    "survives": "the resonance framing as an instrument note; nothing as a result."
+   },
+   {
+    "claim": "the alpha(a) branch and its endpoint a_c ~ 0.694",
+    "leg": "Route-E v1 (\u00a726)",
+    "source": "XU Table 1; LSS a_c = 0.6890665",
+    "verdict": "PRE-EMPTED",
+    "note": "The branch is LSS's, published.  Our a_c is 0.7% off the published value; XU's recompute is 0.04% off.  We are the least accurate of the three and should quote theirs.",
+    "survives": "nothing."
+   },
+   {
+    "claim": "the closed-form viscous CLM blow-up (E) at a = 0, s = 1/2",
+    "leg": "Route-H v1 (\u00a729)",
+    "source": "2207.07548 \u00a75.3 eqs (57)-(58)",
+    "verdict": "PRE-EMPTED",
+    "note": "Identical, pointwise, under an explicit parameter map -- verified here to machine precision, including that ALS's t_c formula returns our T.  Route-H already declined to claim it; that was the right call and it is now settled rather than suspected.",
+    "survives": "its USE as a known-answer gate, which is what Route-H built it for, and which is strictly better now that it has a citation."
+   },
+   {
+    "claim": "alpha_1 = 0 at a = 0: a LINE of viscous self-similar blow-ups",
+    "leg": "Route-H v1 (\u00a729)",
+    "source": "2207.07548 \u00a75.3 eq (61)",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "note": "ALS's self-similar form (61) carries nu INSIDE the profile with the exponents fixed at alpha_ALS = beta = 1, which is a one-parameter family of viscous self-similar blow-ups -- our alpha_1 = 0, exactly.",
+    "survives": "nothing at a = 0.  alpha_1 = +0.133683 at a = 1/2 is a different point."
+   },
+   {
+    "claim": "alpha_1 = +0.133683 at a = 1/2 (the marginal invariant at s = s_c = 3/2)",
+    "leg": "Route-H v1 (\u00a729)",
+    "source": "not found in Tier 1",
+    "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
+    "note": "ALS do a = 1/2 at sigma = 0 and 1; criticality at a = 1/2 is sigma = 3, which is not in ALS and not in XU (who stop at recording s* itself).  So the MARGINAL case at a = 1/2 is not pre-empted by either.  It is also not searched beyond Tier 1, and the honest label is unsearched, not novel.",
+    "survives": "provisionally, pending Tier 2/3."
+   },
+   {
+    "claim": "finite support of the a > 0 profiles, X_c the zero of c + aU, order 1/a",
+    "leg": "Route-D v12/v13",
+    "source": "2209.08232 Proposition 2.3",
+    "verdict": "PARTIAL",
+    "note": "HTW prove compact support for the DE GREGORIO model (a = 1), where non-degeneracy forces c_l = c_omega, via the same mechanism (the profile is proportional to u + c_omega x, and the support ends where that vanishes).  The phenomenon and the mechanism are published.  What is not there is the a-dependence: X_c as the zero of c + aU across a in (0, 1/2), and the algebraic order 1/a of that zero.",
+    "survives": "the a-dependence, and the consequence we actually used it for -- that a compactly supported profile in a GLOBAL spectral basis puts its worst error where the codomain weight is largest.  That is a certification-space statement, not a PDE one."
+   },
+   {
+    "claim": "beta = 2.92 as the 2D Boussinesq / Hou-Luo self-similar anchor",
+    "leg": "Route-G v1 (\u00a728)",
+    "source": "2210.07191",
+    "verdict": "CONFIRMED (never claimed as ours)",
+    "note": "c_l/c_omega ~= -2.9205600, matching our anchor to the digits we quote.",
+    "survives": "n/a -- this was always cited."
+   },
+   {
+    "claim": "the SUPERCRITICAL exponents: what happens for s > s_c",
+    "leg": "none -- Routes F/H/I all stop at criticality",
+    "source": "2207.07548 \u00a75.1 (Schochet, corrected)",
+    "verdict": "OPEN_QUESTION_ANSWERED_BY_THE_LITERATURE",
+    "note": "This is the one place reading the papers ADDED something instead of removing it.  Above s_c the self-similar balance is dissipation against stretching, beta = sigma alpha_ALS with omega_t SUBDOMINANT, and the mechanism is a double pole whose residue is proportional to nu.  Route-F's 'the scaling says which term dominates' had no second half; this is the second half, in the one case where it is exactly solvable.",
+    "survives": "n/a -- an inbound result, not a claim of ours."
+   },
+   {
+    "claim": "the discrete-ball trap, the weighted-l1 no-go, the elasticity discipline",
+    "leg": "Route-D v3/v6",
+    "source": "2302.12877 (Tier 2, fetched, NOT read closely)",
+    "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
+    "note": "Still the only claims with a real chance of being new, and still checked only by search.  Tier 2 is fetched and extracted; reading it is the next literature spend, and it is now cheap.",
+    "survives": "provisionally."
+   }
+  ],
+  "counts": {
+   "PRE-EMPTED": 3,
+   "CONFIRMED_AND_PRE-EMPTED": 3,
+   "PRE-EMPTED_AND_RE-CLASSIFIED": 1,
+   "UNSEARCHED_AT_PRIMARY_SOURCE": 2,
+   "PARTIAL": 1,
+   "CONFIRMED (never claimed as ours)": 1,
+   "OPEN_QUESTION_ANSWERED_BY_THE_LITERATURE": 1
+  },
+  "n_claims": 12
+ },
+ "wall_clock_seconds": 4.26
+}

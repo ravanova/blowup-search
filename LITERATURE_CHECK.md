@@ -1,3 +1,129 @@
+# Literature check — SIXTH PASS (2026-08-04): the papers are read
+
+> ## ✅ UNBLOCKED, AND DONE. THE FIVE PASSES BELOW ARE SUPERSEDED WHERE THEY CONFLICT.
+>
+> Egress to `arxiv.org`, `export.arxiv.org` and `api.semanticscholar.org` **works as of
+> 2026-08-04**. `bash Papers/fetch.sh` pulled **all fourteen** manifest entries on the
+> first attempt, no failures. Tier 1 is **read**. Everything below the sixth-pass section
+> was written without opening a paper; where it disagrees with this section, **this
+> section wins**.
+>
+> **The check is now CODE, not prose:** `solver/literature_gates.py` +
+> `test_literature_gates.py` (9/9) re-derive each published number from the published
+> equations and compare it to ours. See `writeup/4_p2_lottery/TECHNICAL_P2_ROUTEJ_V1.md`
+> and `writeup/data/p2_route_j_v1_literature.json` (fig39).
+
+## The verdict, in one table
+
+Twelve standing claims. **Seven pre-empted, one partial, two still unsearched, one
+confirmed-and-always-cited, and one result arriving FROM the literature.**
+
+| claim | leg | source | verdict |
+|---|---|---|---|
+| `s_c = α/2` | Route-F v1 | **XU §6.1 eq (6.3)** | **PRE-EMPTED** |
+| isolated eigenvalues are only symmetry modes | Route-E v1 | XU Thm 2 | confirmed & pre-empted |
+| the non-symmetry spectrum is a continuum | Route-E v1, inherited by Route-I | **XU Prop 2** | **pre-empted AND re-classified** |
+| `α(1/2) = 3` and the odd-integer resonances | Route-E v1 | ALS §5.2 + §1 | confirmed & pre-empted |
+| the `α(a)` branch and `a_c ≈ 0.694` | Route-E v1 | XU Table 1; LSS `a_c = 0.6890665` | **PRE-EMPTED** |
+| the closed form (E) | Route-H v1 | **ALS §5.3 eqs (57)-(58)** | **PRE-EMPTED** |
+| `α₁ = 0` at `a = 0` (a line of viscous blow-ups) | Route-H v1 | ALS §5.3 eq (61) | confirmed & pre-empted |
+| `α₁ = +0.133683` at `a = 1/2` | Route-H v1 | not in Tier 1 | unsearched |
+| finite support, `X_c` = zero of `c + aU`, order `1/a` | Route-D v12/v13 | HTW Prop 2.3 | **PARTIAL** (they do `a = 1` only) |
+| `β = 2.92` (2D Boussinesq anchor) | Route-G v1 | CH | confirmed; always cited |
+| discrete-ball trap, weighted-`ℓ¹` no-go, elasticity | Route-D v3/v6 | 2302.12877 — **fetched, NOT read** | unsearched |
+| **what happens ABOVE `s_c`** | none | ALS §5.1 | **inbound: they answer US** |
+
+## The four sources
+
+**ALS = arXiv:2207.07548** — Ambrose, Lushnikov, Siegel, Silantyev, Nonlinearity (2022).
+**XU = arXiv:2607.19762** — Xu, 22 Jul 2026. **CH = arXiv:2210.07191** — Chen & Hou.
+**HTW = arXiv:2209.08232** — Huang, Tong, Wei.
+
+**The exponent dictionary, which every comparison depends on.** ALS/XU write
+`ω ~ τ^{-β} f(x/τ^{c_l})`, so **their `c_l` is our `β`** and **our `α = 1/c_l`**; their
+`Λ^σ` is our `(-Δ)^s` with **`σ = 2s`**. Hence `s_c(ours) = α/2 = s*(XU)/2`. Get this
+wrong and every verdict here inverts while still looking consistent.
+
+## What the sixth pass established, with the numbers
+
+**1. `s_c = α/2` IS in the literature, and NOT where the fifth pass guessed.** The fifth
+pass named `arXiv:2207.07548` as "the paper most likely to pre-empt Route-F" and said to
+read it first. **That was wrong.** ALS §8 explicitly leaves the critical-σ question OPEN
+("whether σ = 1 is the optimal lower bound ... left for future work"). The relation is
+**XU §6.1 eq (6.3): `s*(a) = 1/c_l(a)`**, derived from exactly our rescaling argument
+(dissipation enters with coefficient `e^{-γτ}`, `γ = 1 - s c_l`), **posted 22 Jul 2026 —
+eleven days before Route-F v1**. Our `F6` map against XU Table 1: worst row **3.1e-3**,
+mean **1.2e-3**, exact at `a = 0` and `a = 1/2`. XU state the same caveat we did — `s*` is
+a formal relevance threshold, **not** the sharp blow-up/regularity curve, "which for this
+family remains unknown".
+
+**2. Route-H's (E) is ALS (57)-(58), verified pointwise.** Parameter map
+`ω₋₁(0) = -(1+μ₀)κ`, `v_c(0) = κT` with `κ = ν/μ₀`. Three parameter sets × four times:
+worst relative difference **6.5e-15**. ALS's blow-up-time formula (59) returns our `T`
+with absolute error **0.0**. Their evolution law `dv_c/dt = ω₋₁(0)+ν` reduces to `-κ`,
+which is (E)'s own. Route-H declined to claim it; that was right.
+
+**3. `α(1/2) = 3` is EXACT and known — and this CLOSES Route-E's open question.**
+Integrating ALS (49)-(50) cold (no shared grid, basis or code with our Newton solve):
+`c_l = 0.3333076` vs `1/3`, **rel 7.7e-5**, with `Ω ~ v_c^{-2.000144}` vs the exact `-2`.
+Route-E asked why `α = 3` is a round rational while `α = 5` is not. **ALS §1 answers it:
+exact pole-dynamics solutions exist at `a = 0` and `a = 1/2` and, per Lushnikov et al.,
+NOWHERE ELSE.** The `α = 5` "resonance" at `a = 0.5821792673` is a property of our
+instrument (`Λ⁵` is a finite matrix there), not of the problem.
+
+**4. THE RE-CLASSIFICATION WITH THE LARGEST FORWARD CONSEQUENCE — XU Proposition 2, the
+realization dichotomy.** The essential-spectrum continuum Route-E measured is the faithful
+spectrum of the **maximal `L²` realization**; on the **origin-`H²`** realization the open
+strip is empty apart from `{0,1}`. XU say in as many words that the smear which grids
+**without an origin condition** place inside the strip is that maximal realization's
+spectrum. **Our discretization has no origin condition.** So "the non-symmetry spectrum is
+continuous" is a statement about which operator we discretized, not about the operator.
+The DSS conclusion survives (nothing to bifurcate in either realization) — but
+**Route-I's "141 of 144 unstable directions at `μ = 0`" is counted in the loose
+realization and must say so.** Top-ranked correction item.
+
+**5. The one result arriving FROM the literature: what lies ABOVE `s_c`.** Routes F/H/I
+all stop at criticality. ALS §5.1 (Schochet, corrected) supplies the other side:
+supercritically the balance is **dissipation against stretching**, `β = σ c_l`, with
+**`ω_t` subdominant**, and the mechanism is a **double pole with residue `B = -12iν`** —
+proportional to `ν`, absent inviscidly. Measured here, not quoted: rescaling on a
+τ-ladder, spread `0.0202` at `β = 2` vs `0.990` at `β = 1` (**49×**), and the `β = 2`
+residual **falls** `0.0202 → 0.0060 → 0.00187` on deeper sub-ladders, which is ALS's stated
+`O(τ^{-1})` correction behaving as stated.
+
+**6. A 38-year-old typo, settled from our side.** ALS §5.1 correct Schochet (CPAM 1986)'s
+constant to `K± = 24(3±√6)` from the printed `12(6±√6)`. Substituting both into the
+complex Burgers equation with analytic derivatives: corrected **5.24e-16 / 2.85e-16**,
+printed **2.40e-2 / 8.36e-2**. **13.66 decades.** ALS are right. Schochet CPAM 1986 is
+still not obtainable (publisher PDF), but its content is now pinned through ALS — and the
+constant one would have copied from it is the wrong one.
+
+**7. Finite support is PARTIAL, not pre-empted.** HTW Prop 2.3 proves compact support for
+the **De Gregorio model, `a = 1`**, where non-degeneracy forces `c_l = c_ω`. Same
+mechanism as ours (the profile is locally `∝ u + c_ω x`; support ends where that
+vanishes). **Not** in HTW: the `a`-dependence across `a ∈ (0, 1/2)` and the algebraic order
+`1/a` of the zero — nor the certification-space consequence we actually used it for.
+
+**8. On `a_c` we are the worst of three sources.** Published (LSS) **0.6890665**; XU's
+recompute **0.6888** (0.04% off); ours **0.693493** (**0.64%** off). Quote theirs. There is
+a gate asserting this, which will fail if we ever become the better source.
+
+## What is still NOT checked, and it is the part that matters
+
+**Tier 2 is fetched and text-extracted but NOT read closely** — `2302.12877`
+(radii-polynomial methodology), `2312.01702` (log-lattice singularity tracking),
+`1908.09385` (J. Chen, dissipative gCLM). Those gate the **Route-D methodological claims
+(the discrete-ball trap, the weighted-`ℓ¹` conservation no-go, the elasticity discipline)
+— still the only claims in this project with a real chance of being new.** After this
+pass, "unchecked" means unchecked; it does not mean "probably fine". Reading Tier 2 is now
+cheap and is the obvious next literature action.
+
+Also still unobtainable and still only context: **Schochet CPAM 1986** (publisher PDF),
+**Nečas–Růžička–Šverák**, **Jia–Šverák**.
+
+---
+---
+
 # Literature check — first pass (2026-08-02)
 
 > **⛔ NETWORK DIAGNOSIS CORRECTED 2026-08-03 — AND IT IS FIXABLE.** Earlier passes recorded

@@ -12,6 +12,41 @@ where NS sits.
 
 ---
 
+> ## ⛔ THE CLOSED FORM (E) IS PRE-EMPTED — settled, not suspected
+> *(added 2026-08-04, Route-J v1 primary-source pass)*
+>
+> This leg recorded (E) as "at high risk of being known" and declined to claim it. **That
+> was the right call, and it is now confirmed.** (E) **is** **arXiv:2207.07548 §5.3
+> equations (57)-(58)** (Ambrose–Lushnikov–Siegel–Silantyev), under the parameter map
+> `ω₋₁(0) = -(1+μ₀)κ`, `v_c(0) = κT` with `κ = ν/μ₀`. Verified: worst relative difference
+> **6.5e-15** over three parameter sets × four times; their blow-up-time formula (59)
+> returns our `T` with absolute error **0.0**; and their evolution law
+> `dv_c/dt = ω₋₁(0)+ν` reduces to `-κ`, which is (E)'s own. **What survives is (E)'s use as
+> a known-answer gate — which is what it was built for, and which is strictly better now
+> that it carries a citation.**
+>
+> **`α₁ = 0` at `a = 0` is likewise confirmed-and-known**: ALS's self-similar form (61)
+> carries `ν` inside the profile with the exponents fixed at `c_l = β = 1`, i.e. a
+> one-parameter family of viscous self-similar blow-ups. We measured, numerically, the
+> existence of an exactly-known family.
+>
+> **`α₁ = +0.133683` at `a = 1/2` is NOT pre-empted by Tier 1** — criticality at `a = 1/2`
+> is `σ = 3`, which is in neither ALS nor Xu — but it is also **not searched** beyond
+> Tier 1, and the honest label is *unsearched*, not *novel*.
+>
+> **A correction to this leg's framing, and it goes the useful way.** §29 says at
+> criticality "the scaling argument returns zero information" and stops there. ALS §5.1
+> supplies what lies **above** criticality, which this leg never had: the balance switches
+> to dissipation-against-stretching, **`β = σ c_l` with `ω_t` subdominant**, and the
+> mechanism is a **double pole whose residue `B = -12iν` is proportional to `ν`** and is
+> therefore absent inviscidly. See `TECHNICAL_P2_ROUTEJ_V1.md` §5.
+>
+> Also settled: ALS §5.1 **correct** Schochet (CPAM 1986)'s constant to `K± = 24(3±√6)`
+> from the printed `12(6±√6)`. We checked from our own side — residuals **5.24e-16** vs
+> **2.40e-2**, **13.66 decades apart**. ALS are right.
+
+---
+
 ## 0. The wall both previous legs stopped at
 
 Route-F v1 (§27) measured the critical dissipation exponent for gCLM and Route-G v1

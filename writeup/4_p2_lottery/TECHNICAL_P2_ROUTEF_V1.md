@@ -10,6 +10,31 @@ Clay progress. Plain float64; nothing here is interval-enclosed.**
 
 ---
 
+> ## ⛔ RETRACTION OF NOVELTY (added 2026-08-04, Route-J v1 primary-source pass)
+> **This leg's headline is in the literature.** `s_c = α/2` is recorded as
+> **`s*(a) = 1/c_l(a)`** in **arXiv:2607.19762 §6.1 eq (6.3)** (Xu, *The spectral picture
+> of self-similar collapse in the CLM equation*), from the same rescaling argument, and
+> **posted 22 Jul 2026 — eleven days before this leg**. Our `F6` map agrees with their
+> Table 1 row by row (worst 3.1e-3, mean 1.2e-3; exact at `a = 0` and `a = 1/2`).
+> Note the exponent dictionary: their `c_l` is our `β`, our `α = 1/c_l`, and their `Λ^σ`
+> is our `(-Δ)^s` with `σ = 2s`, so `s_c = s*/2`.
+>
+> **The measurements below are unaffected and none of them was found to be wrong.** What
+> survives as a contribution is narrow: **F3's cross-check** — `α` from a steady
+> compactified solve against `dp/ds` from time-dependent periodic simulation, no shared
+> grid, basis or fitted constant — is an independent dynamical validation of a formula
+> that is theirs. Xu state the only quantitative validation of their branch is the `a_c`
+> endpoint, so the cross-check is a genuine service; it is not a new result.
+>
+> Two further corrections from the same pass: (i) `s*` is **not** the sharp
+> blow-up/regularity threshold — Xu say so explicitly, "which for this family remains
+> unknown", and cite Sakajo that at `a = 0` blow-up persists at small viscosity
+> *regardless of the dissipation order*; (ii) **what lies ABOVE `s_c`** is now known and
+> this leg never had it: the balance switches to dissipation-against-stretching,
+> `β = σ c_l`, with `ω_t` subdominant. See `TECHNICAL_P2_ROUTEJ_V1.md` §5.
+
+---
+
 ## 0. Why this leg, and what it is allowed to conclude
 
 The standing list of "what would actually be worthwhile toward a Clay-relevant candidate" has
