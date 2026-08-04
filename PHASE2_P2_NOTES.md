@@ -2443,3 +2443,97 @@ WRONG. What changed is who found it first.
 (2302.12877, 2312.01702, 1908.09385) is fetched and text-extracted but NOT read closely.
 Those gate the **Route-D methodological claims — still the only claims in this project with a
 real chance of being new.** After this pass "unchecked" means unchecked, not "probably fine".
+
+
+## §32 — ROUTE-K v1 DONE (2026-08-04): THE L1->L2 CERTIFICATION PORT, STEP ONE. THE
+## KILL-SWITCH FIRES AT Y_0: THERE IS NO FIXED PROFILE TO TAKE A DEFECT OF, AND NO
+## APPROXIMATE INVERSE TO BOUND. RANKED ITEM (3), DEFERRED SIX TIMES, ATTEMPTED.
+
+solver/port_certification.py + test_port_certification.py **6/6**;
+experiments/p2_route_k_v1_port.py → writeup/data/p2_route_k_v1_port.json → **fig40**.
+BLOG/TECHNICAL_P2_ROUTEK_V1.md. Deterministic (~9 min). **It moves NO link of the chain --
+and a BLOCKED link is not a moved link.**
+
+**THE CHAIN AND WHERE IT BREAKS.** A radii-polynomial argument needs (i) a fixed profile x*
+with F(x*)=0; (ii) Y_0 >= ||A F(x*)||; (iii) A ~ DF^{-1} with Z_1 = ||I - A DF|| < 1;
+(iv) the quadratic having a root. **(i) BLOCKED, (ii) UNDEFINED, (iii) NO A, (iv) not
+reached.** `radii_polynomial_status(None, None)` returns BLOCKED_AT_STEP_ONE and is GATED to
+carry **no fabricated Y_0 or Z_1** -- substituting a plausible bound would turn "there is
+nothing to bound" into "the bound is too big", which is weaker and false.
+
+**(K-1) THE RELAXATION HAS NO FIXED POINT. IT LIMIT-CYCLES.** n_r=200, n_b=48, r_max=1e5:
+||F||_inf = **0.9757 -> 0.2060 -> 0.0257 -> 0.2290** at 500/1500/3000/5000 steps, i.e. down
+38x then UP 9x, with c_omega swinging **-1.0145 to -1.2444** and c_l/c_omega swinging
+**-3.017 to -2.459**, STRADDLING the published -2.9206 without settling on it. 3000 steps is
+where every previous run stopped, and it is the bottom of a cycle, not a fixed point.
+
+**(K-2) AND IT DIVERGES UNDER REFINEMENT -- IN OUR OWN COMMITTED DATA, TWO LEGS OLD.**
+Route-G's resolution ladder (writeup/data/p2_route_g_v1_g2.json, r_max=1e5): steady residual
+**1.671e-2 -> 7.708e-2 -> 2.667e-1** at n_r = 300/450/600. **Refining 2x makes the residual
+16x WORSE.** That column has been in the repository for two legs and nobody asked which way
+it was going.
+
+**(K-3) THE UNCOMFORTABLE PAIRING, AND THE LESSON IN IT: c_omega DOES NOT NOTICE.** Across
+that same ladder c_omega holds to **0.77%**. The modulation (2.11) is a LOCAL read at the
+origin and the residual that grows lives elsewhere, so the read stays stable while the object
+falls apart. **"Resolution-stable" is not "converged".** Consequence Route-G must carry:
+its **beta = 2.98 +- 0.02 against the published 2.9206 is 2.1% out -- 2.5 spread-widths --
+and that gap now has a cause.** Correction banner added to TECHNICAL_P2_ROUTEG_V1.md.
+
+**(K-4) WHERE THE DEFECT LIVES: THE WALL.** Argmax of each field's residual tracked in
+(r, beta) across the ladder. Early transients sit mid-domain (r~1e2) and at the outer Robin
+edge (r~7e4); once they clear, **all three fields put their max at beta = 0.032, the first
+interior angular node -- the WALL** -- at moderate r (2-14). Not the corner, not the far
+field. That is where Chen-Hou needed a weighted L^inf + C^{1/2} pairing.
+
+**(K-5) DF HAS NO COMPUTABLE APPROXIMATE INVERSE, AND THE LADDER IS FLAT.** Matrix-free
+Krylov on DF x = -F, reported as a LADDER in the Krylov dimension because the SHAPE is the
+measurement. At the best point of the cycle: **0.6946 / 0.6927 / 0.6908 / 0.6853 / 0.6623**
+at m = 10/20/40/80/160. **16x the work buys 5%.** A merely ill-conditioned operator BENDS
+DOWN once GMRES captures the extreme eigenvalues -- the planted cond~1e8 control reaches
+**0.086**. Flat in the Krylov dimension is the signature of a **CONTINUUM in the spectrum**,
+which is Route-E's essential spectrum again and is exactly what §31's lesson (70) says to
+name the realization of: **our log-polar grid imposes no condition at the singular corner.**
+
+**(K-6) THE INSTRUMENT IS GATED FIRST, because "the solve stalled" is what a broken solver
+says.** Our GMRES: **7.6e-11 in 19 iterations** on a well-conditioned dense system, reported
+residual agreeing with the true one; **0.086 after 200** on a planted cond~1e8 system (the
+yardstick). The finite-difference Jv: **||Jv|| = 65.140, spread 3.5e-6 across h/||z|| =
+1e-4..1e-9**, best inter-rung drift **6.3e-8**. Neither is the noise floor.
+
+**(K-7) THE ONE PRINCIPLED REPAIR, TRIED: IT HALVES THE STALL AND DOES NOT REMOVE IT.** At
+large r the transport speed s_rho -> c_l, so the leading operator is -c_l d_rho + (diagonal
+damping); upwinded outward it is **LOWER BIDIAGONAL per angular line, exactly invertible in
+O(N)** (gated: apply it to its own solve, recover the rhs to **3.9e-16**). Same split
+Chen-Hou describe in their own abstract. **0.6623 -> 0.3596 (1.84x) at the best seed, and
+the curve stays FLAT.** So the dilation continuum is a real, IDENTIFIED, removable part of
+the obstruction -- and a SECOND obstruction of comparable size remains. Candidates: the
+nonlocal Biot-Savart velocity, and the wall (where K-4 puts the defect).
+
+**(K-8) THE SEED-DEPENDENCE IS THE SHARPEST FORM OF THE FINDING.** Everything above is "at
+the best point of the cycle" and had to be. At the WORST point (||F||_2 = 11.11 vs 0.807) the
+unpreconditioned stall reads **0.2450 not 0.6623 (a 2.7x spread)** and the preconditioner
+buys **1.03x not 1.84x**. Neither is THE answer. **Z_1 here is not large and is not small;
+it is not about anything.** Quoting one stall level was the natural way to write the section
+and would have hidden exactly the fact that makes it decisive.
+
+**NEW BANKED LESSONS (71)-(73).**
+**(71) "RESOLUTION-STABLE" IS NOT "CONVERGED", AND A LOCAL READ CAN BE STABLE ON AN OBJECT
+THAT IS DIVERGING.** Route-G's c_omega holds to 0.77% across a ladder whose residual grows
+16x. **Check the residual column's DIRECTION, not just its size** -- and check it on the
+ladder you already committed, which is where this one was hiding for two legs.
+**(72) REPORT THE SHAPE OF A CONVERGENCE LADDER, NOT ITS ENDPOINT.** "GMRES got to 0.66" is
+compatible with both "hard but tractable" and "impossible"; **0.6946 at m=10 and 0.6623 at
+m=160** distinguishes them, because flat means continuum and bending means conditioning.
+Pair it with a PLANTED ill-conditioned control so "flat" has a yardstick.
+**(73) WHEN A QUANTITY HAS NO REFERENT, SAY SO INSTEAD OF BOUNDING IT.** Y_0 here is not
+large, it is undefined; Z_1 is not large, it is seed-dependent by 2.7x. The code path that
+would have produced a number was deliberately not written, and the kill-switch is gated to
+refuse it.
+
+**WHAT MUST BE BUILT NEXT, IN ORDER, AND EACH IS A LEG:** (1) a preconditioner that also
+covers the nonlocal Biot-Savart velocity and the wall -- Chen-Hou's finite-rank correction is
+the model and Papers/2210.07191.pdf sec.7 is the section; (2) a profile from a CONVERGED
+Newton solve, which is DOWNSTREAM of (1) (a prototype JFNK reduced ||F||_2 from 0.807 to
+0.549 in fifteen Newton steps and then flatlined, with the linear solve returning relative
+residual 1.00); (3) only then the function space, Y_0 in it, and Z_1.

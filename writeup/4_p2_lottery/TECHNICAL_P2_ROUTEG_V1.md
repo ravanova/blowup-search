@@ -11,6 +11,35 @@ interval-enclosed.**
 
 ---
 
+> ## ⚠️ THE OBJECT THIS LEG MEASURED DOES NOT CONVERGE — `β` NEEDS A WIDER BAR
+> *(added 2026-08-04, Route-K v1)*
+>
+> Route-K went to use this leg's relaxation as the seed for a certification attempt and found
+> that **it has no fixed point.** Two independent ways:
+>
+> * **In time it limit-cycles.** `‖F‖_∞` = 0.9757 → 0.2060 → **0.0257** → 0.2290 at
+>   500/1500/3000/5000 steps — down 38×, then back up 9× — with `c_l/c_ω` swinging between
+>   −3.017 and −2.459, straddling the published −2.9206 without settling on it. 3000 steps,
+>   where this leg's runs stop, is the bottom of a cycle.
+> * **Under refinement it diverges, and the evidence is in THIS LEG'S OWN COMMITTED DATA.**
+>   `writeup/data/p2_route_g_v1_g2.json`, resolution ladder at `r_max = 10⁵`: steady residual
+>   **1.671e−2 → 7.708e−2 → 2.667e−1** at `n_r = 300/450/600`. Refining 2× makes the residual
+>   **16× worse**. That column has been committed since this leg shipped.
+>
+> **`c_ω` does not notice** — it holds to **0.77%** across that same ladder, because the
+> modulation (2.11) is a *local* read at the origin while the growing residual lives at the
+> wall. So this leg's resolution-stability claim is true and does not mean what it was taken
+> to mean. **"Resolution-stable" is not "converged"** (banked lesson 71).
+>
+> **The concrete consequence:** `β = 2.98 ± 0.02` against the published **2.9206** is
+> **2.1% out — two and a half times the quoted spread.** That gap was noted here and left
+> unexplained; it now has a cause, and **the quoted uncertainty should not be read as
+> covering it.** `s_c = 1/(2β)` inherits the same widening.
+>
+> See `TECHNICAL_P2_ROUTEK_V1.md` §2 and `PHASE2_P2_NOTES.md` §32.
+
+---
+
 ## 0. Why this leg, and what it is allowed to conclude
 
 The ranked list had two live items. Item **(3)** was "port to 2D Boussinesq / axisymmetric

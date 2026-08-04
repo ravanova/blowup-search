@@ -1,0 +1,438 @@
+{
+ "leg": "Route-K v1",
+ "title": "The L1->L2 certification port, step one: no fixed profile to define Y_0, and no approximate inverse to start Z_1",
+ "generated": "2026-08-04T10:56:39Z",
+ "seed_states": {
+  "cycle_best": {
+   "steps": 3000,
+   "c_l": 3.060593660871532,
+   "c_omega": -1.0145182795046102,
+   "F_l2": 0.8068552446684524,
+   "F_inf": 0.025712593273875203
+  },
+  "cycle_worst": {
+   "steps": 5000,
+   "c_l": 3.0605936608715307,
+   "c_omega": -1.2395650719326587,
+   "F_l2": 11.109864630678322,
+   "F_inf": 0.22912812497866825
+  }
+ },
+ "n_unknowns": 28800,
+ "K1_K2_no_fixed_point": {
+  "grid": {
+   "n_r": 200,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 100000.0
+  },
+  "steps_ladder": [
+   {
+    "steps": 500,
+    "residual_sup": 0.9756616279679157,
+    "c_l": 3.060593660871533,
+    "c_omega": -1.2444044784129324,
+    "ratio": -2.4594846080712447,
+    "ratio_vs_chen_hou": 0.157872254611703,
+    "argmax": {
+     "omega": {
+      "max": 0.974947621793789,
+      "r": 116.23224686798554,
+      "beta": 1.442568055219803,
+      "at_wall": false,
+      "at_outer_edge": false
+     },
+     "eta": {
+      "max": 0.4621000185744837,
+      "r": 88.04883581643485,
+      "beta": 1.4746251231135763,
+      "at_wall": false,
+      "at_outer_edge": false
+     },
+     "xi": {
+      "max": 0.1269448351160316,
+      "r": 4.150404757850484,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     }
+    },
+    "seconds": 46.3
+   },
+   {
+    "steps": 1500,
+    "residual_sup": 0.20595951747291602,
+    "c_l": 3.060593660871533,
+    "c_omega": -1.019573320288232,
+    "ratio": -3.001837729537987,
+    "ratio_vs_chen_hou": 0.027829501718159174,
+    "argmax": {
+     "omega": {
+      "max": 0.20547127960893863,
+      "r": 69055.1352016235,
+      "beta": 1.5066821910073498,
+      "at_wall": false,
+      "at_outer_edge": false
+     },
+     "eta": {
+      "max": 0.022142371786600907,
+      "r": 0.594113398496504,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     },
+     "xi": {
+      "max": 0.0027216412378207044,
+      "r": 0.7842822061337688,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     }
+    },
+    "seconds": 138.8
+   },
+   {
+    "steps": 3000,
+    "residual_sup": 0.025704151881573923,
+    "c_l": 3.060593660871532,
+    "c_omega": -1.0145055559524565,
+    "ratio": -3.0168328235503155,
+    "ratio_vs_chen_hou": 0.03296382322236674,
+    "argmax": {
+     "omega": {
+      "max": 0.011961430378952587,
+      "r": 13.826221737646588,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     },
+     "eta": {
+      "max": 0.025712593273875203,
+      "r": 1.135733358343107,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     },
+     "xi": {
+      "max": 0.006571633203935501,
+      "r": 1.6446761779946655,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     }
+    },
+    "seconds": 276.1
+   },
+   {
+    "steps": 5000,
+    "residual_sup": 0.22904761089861914,
+    "c_l": 3.060593660871532,
+    "c_omega": -1.239439165226815,
+    "ratio": -2.4693375413156717,
+    "ratio_vs_chen_hou": 0.15449860940515803,
+    "argmax": {
+     "omega": {
+      "max": 0.2124235292710226,
+      "r": 3.4489622604057613,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     },
+     "eta": {
+      "max": 0.22912812497866825,
+      "r": 1.9791668678535594,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     },
+     "xi": {
+      "max": 0.04160051033751516,
+      "r": 3.4489622604057613,
+      "beta": 0.0320570678937734,
+      "at_wall": true,
+      "at_outer_edge": false
+     }
+    },
+    "seconds": 460.0
+   }
+  ],
+  "residual_monotone_in_steps": false,
+  "residual_sup_range": [
+   0.025704151881573923,
+   0.9756616279679157
+  ],
+  "c_omega_swing": [
+   -1.2444044784129324,
+   -1.0145055559524565
+  ],
+  "ratio_range": [
+   -3.0168328235503155,
+   -2.4594846080712447
+  ],
+  "chen_hou_ratio": -2.92056,
+  "route_g_resolution_ladder": [
+   {
+    "n_r": 300,
+    "r_max": 100000.0,
+    "residual": 0.016714825166163183,
+    "c_omega": -1.0265648734746045
+   },
+   {
+    "n_r": 450,
+    "r_max": 100000.0,
+    "residual": 0.0770754427211248,
+    "c_omega": -1.0233124110839273
+   },
+   {
+    "n_r": 600,
+    "r_max": 100000.0,
+    "residual": 0.26665869800199077,
+    "c_omega": -1.0312023842802784
+   },
+   {
+    "n_r": 450,
+    "r_max": 1000000.0,
+    "residual": 0.11607349306073189,
+    "c_omega": -1.0293287425623086
+   }
+  ],
+  "route_g_residual_grows_under_refinement": true,
+  "route_g_residual_growth_factor": 15.953424301547818,
+  "route_g_c_omega_spread_over_that_ladder": 0.007678043062063152,
+  "verdict": "The relaxation does not converge: the sup residual is NOT monotone in steps and Route-G's committed resolution ladder GROWS under refinement. There is no fixed profile, so Y_0 is UNDEFINED -- a stronger statement than 'large'."
+ },
+ "K3_instrument_controls": {
+  "gmres": {
+   "well_conditioned": {
+    "rel_reported": 7.626805630441106e-11,
+    "rel_true": 7.626804005096229e-11,
+    "k": 19
+   },
+   "cond_1e8": {
+    "rel": 0.08640395897978276,
+    "k": 200,
+    "cond_target": 100000000.0
+   },
+   "note": "the well-conditioned solve gates correctness; the cond~1e8 solve calibrates what ill-conditioning ALONE costs, so a worse stall on the real Jacobian cannot be explained by conditioning"
+  },
+  "jv_step_study": [
+   {
+    "h_rel": 0.0001,
+    "h_abs": 0.0038457233154955313,
+    "norm_Jv": 65.14015715130529
+   },
+   {
+    "h_rel": 1e-05,
+    "h_abs": 0.00038457233154955313,
+    "norm_Jv": 65.13994950549205,
+    "rel_change_vs_previous_h": 5.294960648032312e-06
+   },
+   {
+    "h_rel": 1e-06,
+    "h_abs": 3.845723315495531e-05,
+    "norm_Jv": 65.13992874012071,
+    "rel_change_vs_previous_h": 5.295167151895742e-07
+   },
+   {
+    "h_rel": 1e-07,
+    "h_abs": 3.845723315495531e-06,
+    "norm_Jv": 65.13992666412244,
+    "rel_change_vs_previous_h": 6.276487941193218e-08
+   },
+   {
+    "h_rel": 1e-08,
+    "h_abs": 3.845723315495531e-07,
+    "norm_Jv": 65.13992666051985,
+    "rel_change_vs_previous_h": 3.2674778586467325e-07
+   },
+   {
+    "h_rel": 1e-09,
+    "h_abs": 3.845723315495531e-08,
+    "norm_Jv": 65.13992728143928,
+    "rel_change_vs_previous_h": 3.092127004188594e-06
+   }
+  ],
+  "jv_norm_spread": 3.5383925997826845e-06,
+  "jv_best_drift": 6.276487941193218e-08,
+  "verdict": "GMRES is correct (7e-11 in 19 iterations on a well-conditioned dense system) and its ill-conditioning failure mode is calibrated (cond~1e8 stalls at 0.09). The finite-difference matvec is stable across five decades of h. Neither is the source of what follows."
+ },
+ "K4_krylov_stall": {
+  "cycle_best": {
+   "unpreconditioned": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.694583013484338
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.6927226322296587
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.6908352837706051
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.6853270782305466
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.6623005982413639
+    }
+   ],
+   "unpreconditioned_stall": {
+    "rel_at_min_dim": 0.694583013484338,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.6623005982413639,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.048742844757645,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "preconditioned": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.4463315263888903
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.43883231198381567
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.42131044831433084
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.39596775798557965
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.35958040820824155
+    }
+   ],
+   "preconditioned_stall": {
+    "rel_at_min_dim": 0.4463315263888903,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.35958040820824155,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.2412565206567348,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "preconditioner": "exact inverse of the leading-order operator (-c_l d_rho + diagonal damping), lower bidiagonal per angular line, O(N); the same split Chen-Hou describe in arXiv:2210.07191",
+   "improvement_factor": 1.8418706445702957,
+   "verdict": "Unpreconditioned the solve stalls at 0.6623 and is FLAT in Krylov dimension (0.6946 at m=10), which reads as a continuum in the spectrum rather than conditioning. The leading-order preconditioner nearly halves it (0.3596) and the curve stays flat -- so the dilation continuum is a real and identified PART of the obstruction, and a second one of comparable size remains."
+  },
+  "cycle_worst": {
+   "unpreconditioned": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.26949193204093636
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.26526835183713765
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.26099061467753315
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.2588528102176404
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.2449864619537267
+    }
+   ],
+   "unpreconditioned_stall": {
+    "rel_at_min_dim": 0.26949193204093636,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.2449864619537267,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.1000278541588893,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "preconditioned": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.23884224470330392
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.23836950964181683
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.23772245897236796
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.2373409752204259
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.23669591879207222
+    }
+   ],
+   "preconditioned_stall": {
+    "rel_at_min_dim": 0.23884224470330392,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.23669591879207222,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.0090678619309748,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "preconditioner": "exact inverse of the leading-order operator (-c_l d_rho + diagonal damping), lower bidiagonal per angular line, O(N); the same split Chen-Hou describe in arXiv:2210.07191",
+   "improvement_factor": 1.035026134814506,
+   "verdict": "Unpreconditioned the solve stalls at 0.2450 and is FLAT in Krylov dimension (0.2695 at m=10), which reads as a continuum in the spectrum rather than conditioning. The leading-order preconditioner nearly halves it (0.2367) and the curve stays flat -- so the dilation continuum is a real and identified PART of the obstruction, and a second one of comparable size remains."
+  },
+  "seed_dependence": {
+   "unpreconditioned_stall_best": 0.6623005982413639,
+   "unpreconditioned_stall_worst": 0.2449864619537267,
+   "F_l2_best": 0.8068552446684524,
+   "F_l2_worst": 11.109864630678322,
+   "reading": "the stalled residual and the preconditioner's benefit BOTH depend on which point of the limit cycle is linearized at, which is the sharpest form of the finding: there is no object for a Z_1 to be about."
+  }
+ },
+ "K5_radii_polynomial": {
+  "status": "BLOCKED_AT_STEP_ONE",
+  "closes": false,
+  "why": "no fixed profile (the relaxation limit-cycles and its residual grows under refinement), so Y_0 is undefined; and no approximate inverse A (the Krylov solve stalls), so Z_1 cannot be bounded. There is no radii polynomial to evaluate."
+ },
+ "what_must_be_built_next": [
+  "a preconditioner that also covers the nonlocal Biot-Savart velocity and the wall -- the leading-order dilation split accounts for only about half the stalled residual, so the remainder is where the next leg goes",
+  "a profile from a CONVERGED Newton solve rather than a relaxation; this is downstream of the preconditioner, since Newton stalls for the same reason",
+  "only then: the function space, Y_0 in it, and Z_1"
+ ],
+ "clay": "No link of the L1->L4 chain moved. A blocked link is not a moved link. Clay odds unchanged at ~0.05%.",
+ "wall_clock_seconds": 506.5
+}

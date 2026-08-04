@@ -1,78 +1,137 @@
 # Continuation prompt (copy into a fresh session)
 
-> ## ⛔ ONE STANDING DIRECTIVE. IT HAS NOW BEEN DEFERRED **SIX** TIMES. IT IS THE WHOLE JOB.
-> **Directive 1 (restore network, read the papers) is DONE — see (J-0a) below, and do not
-> re-open it.** What is left is the directive that has been on this list since leg 36 and
-> has lost to a cheaper leg every single time. **Read the next block, then go build it.
-> If you find yourself writing "the cheaper leg first", or "one quick check before", stop.
-> That sentence is the entire reason this directive still exists.**
+> ## ⛔ ONE DIRECTIVE. IT IS NAMED, IT IS SIZED, AND IT IS A BUILD.
+> **BUILD THE PRECONDITIONER FOR THE 2D LINEARIZED OPERATOR.** Not "consider". Not "scope".
+> Build it. The L1→L2 port was finally attempted (leg 43, Route-K) after six deferrals, and
+> it did not fail vaguely — **it failed at a specific operator, with about half the
+> obstruction already identified and removed.** The next rung is now a concrete numerical
+> object with a known model in the literature and a file to read. **If you find yourself
+> opening a gCLM measurement, or "just checking Tier 2 first", stop — those are the moves
+> that cost this project six legs.**
 
 ---
 
-# DIRECTIVE — WE ARE HERE TO SOLVE CLAY. BUILD THE L1→L2 CERTIFICATION PORT. NOW.
+# DIRECTIVE — THE 2D PRECONDITIONER, THEN THE NEWTON PROFILE. IN THAT ORDER.
 
-**The user's words, still standing: "we're here to pursue a Clay solve! let's stop
-deferring and close that biggest gap now, deferring for 5 legs is enough already."**
-That was said before legs 41 and 42. It is now **six**.
+**WHERE ROUTE-K LEFT IT (read `PHASE2_P2_NOTES.md` §32 and
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEK_V1.md` before writing code).** A radii-polynomial
+argument needs (i) a fixed profile, (ii) its defect `Y₀`, (iii) an approximate inverse `A`
+with `Z₁ = ‖I − A·DF‖ < 1`, (iv) the quadratic closing. **Route-K reached (ii) and stopped.**
 
-**THE SITUATION, STATED WITHOUT SOFTENING.** Across **42 legs, no link of the L1→L4 chain
-has moved — not one.** The only genuine certification programme (Route-D, sixteen legs)
-ended in three negatives: the Newton–Kantorovich ball does not close, `Z₂` does not exist
-in the sup setting, and the eleven-leg bound programme was `a = 0`-only — tuned on the one
-member of the family where the hard term vanishes. Routes E→I are well-built and each one
-says, in its own writeup, that it moves nothing. **And leg 42 has now established that most
-of what E→I found was already in print.** The measurement lane is not just failing to move
-the chain; it is producing results that other people have already produced.
+* **(i) is BLOCKED.** The SSPRK3 relaxation has no fixed point: it **limit-cycles** in time
+  (`‖F‖_∞` = 0.976 → 0.206 → 0.026 → 0.229 at 500/1500/3000/5000 steps) and **diverges under
+  refinement** (Route-G's own committed ladder: residual **1.7e−2 → 7.7e−2 → 2.7e−1** at
+  `n_r = 300/450/600`). `Y₀` is not large — **it is undefined.**
+* **(iii) has no `A`.** A matrix-free Krylov solve of `DF x = −F` stalls at **0.6623** and
+  the ladder is **FLAT** (0.6946 at `m = 10`) — a continuum in the spectrum, not
+  conditioning, measured against a planted `cond ≈ 10⁸` control that reaches 0.086.
+* **The instrument is gated and is not the problem** (GMRES: 7.6e−11 in 19 iterations clean;
+  finite-difference `Jv` flat to 3.5e−6 over five decades of `h`). Do not re-derive this.
 
-**IT IS NOT A COLD START — MOST OF THE MACHINERY EXISTS.** Do not re-scope it as a research
-question; it is a build:
+**WHAT THE LEG MUST DELIVER.**
 
-* `solver/boussinesq.py`, `boussinesq_rescaled.py`, `boussinesq_velocity.py`,
-  `fractional_boussinesq.py`, `hl_rescaled.py`
-* **seven** green gate suites: `test_boussinesq_{rescaled,transport,velocity,wall}.py`,
-  `test_fractional_boussinesq.py`, `test_hl_rescaled.py`, `test_solver_boussinesq.py`
-* Spike 1 already **reproduced the published Chen–Hou self-similar profile** in the
-  Hou–Luo geometry, formulation transcribed from `arXiv:2210.07191` §2/§7 — see
-  `PHASE2_SPIKE1_NOTES.md`, which locks the equations and the symmetry class.
-* Route-G re-measured `β` on the 2D object with our own dynamically-rescaled machine —
-  **and leg 42 verified that anchor against the primary source: Chen–Hou's
-  `c_l/c_ω ≈ −2.9205600`. `Papers/2210.07191.pdf` is one `bash Papers/fetch.sh` away and
-  §2/§7 are the sections you need.**
+1. **A preconditioner that covers what the leading-order one does not.** The exactly
+   invertible dilation split (`−c_l ∂_ρ + diagonal damping`, lower bidiagonal per angular
+   line, verified to 3.9e−16) is already in `solver/port_certification.py` and it takes the
+   stall **0.6623 → 0.3596 (1.84×) with the curve still flat**. So a second obstruction of
+   comparable size remains, and there are exactly two candidates: **the nonlocal Biot–Savart
+   velocity**, and **the wall — which is where Route-K's K2 found the surviving defect
+   (`β = 0.032`, the first interior angular node, at `r ≈ 2–14`, all three fields).**
+   **SEPARATE THEM.** Precondition each candidate alone and report the stall ladder for
+   each; that is a clean two-way experiment and it is the leg's spine.
+2. **The model is published and fetched.** Chen–Hou's abstract says it in as many words:
+   *"we decompose the linearized operator into a leading order operator plus a finite rank
+   operator. The leading order operator is designed in such a way that we can obtain sharp
+   stability estimates."* Read **`Papers/2210.07191.pdf` §7** — run `bash Papers/fetch.sh`
+   first, it takes about thirty seconds and the PDFs are gitignored on purpose.
+3. **Then, and only then, the Newton profile.** A prototype JFNK reduced `‖F‖₂` from 0.807
+   to 0.549 in fifteen steps and flatlined with the linear solve returning 1.00 — Newton
+   stalls for the same reason the Krylov solve does, so it is **downstream**, not parallel.
+4. **Only after a converged profile exists**: the function space (chosen with Route-D's
+   `a = 0`-only disaster in mind — check on day one that it carries the terms the *2D*
+   problem has), `Y₀` in it, and `Z₁`.
 
-**WHAT THE LEG MUST DELIVER — the CERTIFICATION half, not another measurement.**
+**KEEP THE REFUSAL DISCIPLINE — Route-K is the best advertisement it has yet had.** Gate the
+**operator**, not the agreement. Report a **magnitude**, never a boolean. **"Small" in which
+norm?** **Name the realization** (70). **Gate the quantity the measurement divides by** (67).
+And the two Route-K earned: **report the SHAPE of a convergence ladder, not its endpoint**
+(72) — "GMRES got to 0.66" is compatible with tractable, "0.6946 at m=10 and 0.6623 at m=160"
+is not — and **when a quantity has no referent, say so instead of bounding it** (73).
 
-1. the **Newton–Kantorovich setup on the 2D profile**: pick the function space, and pick
-   it with **Route-D's `a = 0`-only disaster in mind** — check on day one that the space
-   can carry the terms the *2D* problem actually has, not the ones the gate case has;
-2. an honest **`Y₀`** (defect of the numerical profile) in that space;
-3. a **first bound on `Z₁`/`‖A‖`**, with the kill-switch discipline: **if the radii
-   polynomial does not close in float with margin, STOP and report — do not harden**;
-4. the refusal gates the last three legs paid for: gate the **operator**, not the
-   agreement; bound fits by the **variable**, not the time; report a **magnitude**, never
-   a boolean; **"small" in which norm?**; and now **(70) name the realization** and
-   **(67) gate the quantity the measurement divides by, not the quantity it is about.**
+**EXPLICITLY BANNED until the preconditioner has been attempted and reported on:** another
+gCLM measurement leg, another Route-D bound-sharpening leg, another DSS re-ask, the DSS
+lane's expensive entrance, another literature leg (Tier 2 is real, cheap, and **still not
+the hard thing**), and re-measuring `β` on the 2D object (Route-K just showed the object
+does not converge; measuring it again is not the fix).
 
-**A NEGATIVE HERE IS WORTH MORE THAN A POSITIVE ANYWHERE ELSE**, because it is a negative
-about the object certification results actually count on. Even "`Y₀` is machine-level but
-`Z₁` diverges, and here is the mechanism" moves the project further than any 1D leg has.
+**CLAY.** Odds remain **~0.05%**, and the realistic prize is still a novel result on a model
+where blow-up is provable — a bar leg 42 showed is much higher than it looked. **No link of
+the L1→L4 chain has moved in 43 legs**, and a *blocked* link is not a moved one. Say that
+plainly in every writeup. Pursuing Clay harder does not mean claiming more.
 
-**EXPLICITLY BANNED until this has been attempted and reported on:** another gCLM
-measurement leg, another Route-D bound-sharpening leg, another DSS re-ask, the DSS lane's
-expensive entrance, **and another literature leg** (Tier 2 is real and cheap and it is
-still not the hard thing — see (J-0f)).
+**ONE PROCESS RULE, AND LEG 43 IS WHY IT KEEPS ITS PLACE.** Before pushing any leg:
+regenerate the data, rebuild the figure, and check **every number in the prose against the
+JSON**. Leg 43 caught four of its own transcription slips that way. **And a second rule, new
+and earned: when you commit a convergence ladder, READ THE RESIDUAL COLUMN'S DIRECTION.**
+Route-K's decisive evidence had been sitting in `writeup/data/` for two legs.
 
-**AND KEEP THE HONESTY THAT IS WORKING.** It is the best thing this project has, and leg 42
-is the strongest evidence yet that it is worth the cost: Route-H labelled its closed form
-"probably known" and was right; Route-I refused its own closest-agreeing data point on
-operator grounds. **Pursuing Clay harder does not mean claiming more.** Only Tier 3 — a
-rigorous proof — counts. Clay odds remain **~0.05%**, and the realistic prize is still a
-novel result on a model where blow-up is provable. **After leg 42, "novel" is a much
-higher bar than it looked.** Say that plainly in every writeup.
+---
 
-**ONE PROCESS RULE, AND IT KEEPS EARNING ITS PLACE.** Before pushing any leg: regenerate
-the data, rebuild the figure, and check **every number in the prose against the JSON**. A
-rendered artifact is not a verification. Leg 42 caught four of its own transcription slips
-this way after the writeup was drafted.
+
+*Updated 2026-08-04 (session close, second update). **THIS SESSION SHIPPED ROUTE-J v1 (the
+primary-source pass) AND THEN ROUTE-K v1 (the certification port's first step).** Read
+(K-0a)-(K-0e) first; the Route-J block below is still current and closes Directive 1.*
+
+**(K-0a) RANKED ITEM (3) WAS ATTEMPTED AFTER SIX DEFERRALS, AND THE KILL-SWITCH FIRED AT
+`Y₀`.** `solver/port_certification.py` + `test_port_certification.py` **6/6**;
+`experiments/p2_route_k_v1_port.py` → `writeup/data/p2_route_k_v1_port.json` → **fig40**;
+`TECHNICAL/BLOG_P2_ROUTEK_V1.md`; `PHASE2_P2_NOTES` **§32**. `radii_polynomial_status`
+returns **BLOCKED_AT_STEP_ONE** and is gated to carry **no fabricated `Y₀` or `Z₁`** —
+substituting a plausible bound would turn "there is nothing to bound" into "the bound is too
+big", which is weaker and false.
+
+**(K-0b) THE 2D RELAXATION HAS NO FIXED POINT, TWO INDEPENDENT WAYS.** In time it
+**limit-cycles**: `‖F‖_∞` = 0.9757 → 0.2060 → **0.0257** → 0.2290 at 500/1500/3000/5000
+steps (down 38×, then up 9×), with `c_ω` swinging **−1.0145 to −1.2444** and `c_l/c_ω`
+swinging **−3.017 to −2.459**, straddling the published −2.9206 without settling. **3000
+steps, where every previous run stopped, is the bottom of a cycle.** And under refinement it
+**diverges** — Route-G's own committed ladder, `1.671e−2 → 7.708e−2 → 2.667e−1` at
+`n_r = 300/450/600`: **2× finer, 16× worse.**
+
+**(K-0c) THE UNCOMFORTABLE PAIRING, AND THE LESSON: `c_ω` DOES NOT NOTICE.** It holds to
+**0.77%** across that same ladder, because the modulation (2.11) is a **local** read at the
+origin while the growing residual lives **at the wall** (K2: all three fields put their
+argmax at `β = 0.032`, `r ≈ 2–14`, once transients clear). **"Resolution-stable" is not
+"converged" (71).** Concrete cost: Route-G's **`β = 2.98 ± 0.02` is 2.1% from the published
+2.9206 — 2.5 spread-widths** — a gap noted at the time and left unexplained. Correction
+banner added to `TECHNICAL_P2_ROUTEG_V1.md`.
+
+**(K-0d) `DF` HAS NO COMPUTABLE APPROXIMATE INVERSE, AND THE LADDER'S SHAPE IS THE
+DIAGNOSIS.** Krylov on `DF x = −F` at the best point of the cycle: **0.6946 / 0.6927 /
+0.6908 / 0.6853 / 0.6623** at `m = 10/20/40/80/160`. **16× the work buys 5%.** Ill
+conditioning alone BENDS DOWN (planted `cond ≈ 10⁸` control reaches **0.086**); flat means a
+**continuum in the spectrum** — Route-E's essential spectrum again, and precisely what (70)
+says to name the realization of: **our log-polar grid imposes no condition at the singular
+corner.** The leading-order dilation preconditioner (exact, `O(N)`, verified 3.9e−16) takes
+it to **0.3596 (1.84×) and the curve stays flat** — so that continuum is real, identified and
+removable, **and a second obstruction of comparable size is not.**
+
+**(K-0e) THE STALL IS SEED-DEPENDENT BY 2.7×, WHICH IS THE SHARPEST FORM OF THE FINDING.**
+At the worst point of the cycle (`‖F‖₂ = 11.11` vs 0.807) the same ladder reads **0.2450 not
+0.6623**, and the preconditioner buys **1.03× not 1.84×**. Neither is *the* answer:
+**"linearize at the profile" has no referent when there is no profile. `Z₁` is not large and
+is not small; it is not about anything (73).**
+
+**NEW BANKED LESSONS (71)-(73)**, all in `PHASE2_P2_NOTES` §32: **(71)** "resolution-stable"
+is not "converged", and a LOCAL read can stay stable on a DIVERGING object — **check the
+residual column's direction, on the ladder you already committed**; **(72)** report the
+SHAPE of a convergence ladder, not its endpoint, and pair it with a planted control so
+"flat" has a yardstick; **(73)** when a quantity has no referent, say so instead of bounding
+it.
+
+**NOVELTY: nothing claimed. Route-K is a negative about our own discretization, not about
+the object — Chen–Hou certified this object in 145 pages. Read `LITERATURE_CHECK.md` sixth
+pass before claiming anything anywhere.**
 
 ---
 

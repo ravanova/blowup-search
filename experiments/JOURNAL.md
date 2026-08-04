@@ -3,6 +3,41 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-K v1: the certification port, and the ladder nobody read (non-logged) — 2026-08-04
+
+**NOT a logged gate run** (deterministic; ~9 min). Code `solver/port_certification.py` +
+`test_port_certification.py` (6/6); `experiments/p2_route_k_v1_port.py` →
+`writeup/data/p2_route_k_v1_port.json` → fig40. Writeups
+TECHNICAL/BLOG_P2_ROUTEK_V1.md; PHASE2_P2_NOTES §32; correction banner on Route-G.
+
+**Why it exists.** Ranked item (3) — the L1→L2 certification port — had been deferred six
+times. This is the leg that stops deferring it. It gets two rungs down the radii-polynomial
+chain and the kill-switch fires.
+
+**What a human should notice.** Three things.
+
+(1) **The decisive evidence was already committed, two legs old, and nobody read the
+column.** Route-G's resolution ladder has the steady residual going 1.7e−2 → 7.7e−2 →
+2.7e−1 as `n_r` goes 300 → 450 → 600. Refining makes it sixteen times worse. I ran that
+ladder, quoted a number from it, and never asked which direction the residual column went.
+The new measurements in this leg confirm it and give the mechanism, but the finding was
+sitting in `writeup/data/` the whole time. Lesson (71).
+
+(2) **A local read stayed stable on a diverging object.** `c_ω` holds to 0.77% across that
+same ladder, because the modulation is evaluated at the origin while the growing residual
+lives at the wall. That is why "resolution-stable" felt like "converged" for two legs. The
+concrete cost: Route-G's `β = 2.98 ± 0.02` sits 2.1% from the published 2.9206 — two and a
+half times its own bar — and that gap was noted at the time and left alone.
+
+(3) **The Krylov stall would have been a much weaker finding as a single number.** "GMRES
+got to 0.66" is compatible with "hard but tractable". The ladder — 0.6946 at m=10, 0.6623 at
+m=160 — is not, and the planted `cond ≈ 10⁸` control (which reaches 0.086) is what makes
+"flat" mean something. Reporting the endpoint was the natural way to write it. Lesson (72).
+
+**What it cost, and what it bought.** No link moved. But the blockage now has a location
+(the wall), an identified removable component (the dilation continuum, worth 1.84× when
+preconditioned away), and a named order of operations for the next two legs.
+
 ## Phase-2 P2 — ROUTE-J v1: the primary-source pass (non-logged) — 2026-08-04
 
 **NOT a logged gate run** (deterministic; ~5 s). Code `solver/literature_gates.py` +
