@@ -25,41 +25,79 @@ there** — and note that `L1` itself was re-priced by leg 47 (below).
 
 ---
 
-# DIRECTIVE 1 — ROUTE-V: DOES A CERTIFIED INVISCID BLOW-UP SURVIVE DISSIPATION?
+# DIRECTIVE 1 — ROUTE-V (IN FLOAT): DOES THE CERTIFICATE'S MARGIN SURVIVE DISSIPATION?
 
 **This is the one route identified that is both Clay-ADJACENT and matched to what this
 project already owns.** The Euler→NS gap **is** viscosity: 3D Euler blow-up with boundary is
 proved, NS is not, and the entire difference is the dissipative term.
 
-**What this project already has, and probably nobody holds together:**
-* **the certification machinery** — leg 46: bordered Newton to 5.7e−15, `Y₀`/`Z₁`/`Z₂`
-  assembling, the radii polynomial closing in float;
-* **the dissipative machinery** — Routes F/H/I: `s_c = α/2`, `μ` as an autonomous coordinate,
-  `α₁` as the marginal invariant;
-* **the criticality result** — NS sits **exactly** at the exponent where every scaling
-  argument returns zero information, and criticality is a *tar pit*: `μ` decays
-  algebraically, nine times per decade forever.
+**What this project has, and probably nobody holds together:** the certification machinery
+(leg 46 — bordered Newton to 5.7e−15, `Y₀`/`Z₁`/`Z₂` assembling, the polynomial closing in
+float); the dissipative machinery (Routes F/H/I — `s_c = α/2`, `μ` as an autonomous
+coordinate, `α₁` as the marginal invariant); and the criticality result — **NS sits exactly
+at the exponent where every scaling argument returns zero information**, and criticality is a
+tar pit where `μ` decays algebraically, nine times per decade.
 
 **THE QUESTION IS NOT THE SCALING ONE.** "Does the scaling say the blow-up survives" was
-Route-F, and **Xu pre-empted it** (`arXiv:2607.19762` §6.1, eleven days before us). The new
-question is: **switch dissipation on and ask whether the RADII POLYNOMIAL STILL CLOSES**, then
-walk `μ` up toward criticality watching the margin. Deliver the certificate as a function of
-`μ`, the margin's trajectory, and whether it degrades smoothly or falls off a cliff — and at
+Route-F and **Xu pre-empted it** (`arXiv:2607.19762` §6.1, eleven days before us). The new
+question is: **switch dissipation on and ask whether the RADII POLYNOMIAL STILL CLOSES**,
+walking `μ` up toward criticality and watching the margin.
+
+## ⚠️ RUN IT IN FLOAT, AND KNOW WHY
+
+An earlier draft of this directive said *"on an object where the inviscid certificate is in
+hand."* **We do not have one** — leg 47 established that the inviscid certificate needs a
+tail lemma nobody here has written. That premise was wrong when written and is removed.
+
+**The float form needs no prerequisite.** Leg 46's machinery already produces `Y₀`, `Z₁`,
+`Z₂` in float64. Deliver: the certificate constants as a function of `μ`; the margin's
+trajectory as `μ → μ_crit`; and whether it degrades smoothly or falls off a cliff, and at
 which `μ`.
 
-**⛔ THE NOVELTY CHECK COMES FIRST, AND IT IS A BAN, NOT A SUGGESTION.** *Has anyone already
-done certification-under-dissipation for a self-similar profile?* Use Route-M's ledger
-machinery (`solver/target_selection.py`, `solver/literature_gates.py`) and the Tier 2/3 PDFs
-already fetched. **YES → report it, fall back to `C-PILOT`, do not spend the leg. NO →
-proceed.** Leg 42 deleted seven of twelve novelty claims; **this route is a speculation about
-novelty of exactly that kind, and it was flagged as such when it was proposed.** Check it
-before building it.
+**It is decisive either way, which is the point of doing it first.** If the margin collapses
+the moment `μ > 0`, the Euler→NS question is answered in this toy **for one leg of work** —
+and it saves building interval arithmetic and a tail lemma for a target that was never going
+to survive them. If it degrades smoothly, that is the signal that stage `L1` is worth the
+investment.
 
-**AND SAY THE CEILING IN EVERY WRITEUP.** Even complete success here is **not Clay and not a
+**`V`-RIGOROUS IS DOWNSTREAM OF `L1`, NOT A COMPETITOR TO IT.** "Does the *certificate*
+survive" needs a certificate to perturb. `L1` is the first step of `V`-rigorous **and** a
+novel result in its own right, so the two are not in tension. **A float study cannot be
+upgraded into a certificate after the fact** — that is a standing ban.
+
+## ⛔ THE NOVELTY CHECK COMES FIRST, AND IT IS A BAN
+
+*Has anyone already done certification-under-dissipation for a self-similar profile?* Use
+Route-M's ledger machinery (`solver/target_selection.py`, `solver/literature_gates.py`) and
+the Tier 2/3 PDFs already fetched. **YES → report it, fall back to `C-PILOT`, do not spend the
+leg. NO → proceed.** Leg 42 deleted seven of twelve novelty claims; **this route is a
+speculation about novelty of exactly that kind and was flagged as such when proposed.**
+
+**SAY THE CEILING IN EVERY WRITEUP.** Even complete success here is **not Clay and not a
 chain link** — it is a statement about a toy model's certificate under dissipation. What
 makes it Clay-*adjacent* is that it probes the one structural difference between the proved
 case and the open one. A certificate that **dies** at small `μ` is as informative as one that
 survives, and is the more likely outcome.
+
+---
+
+# DIRECTIVE 2 — L1: THE ONLY MOVABLE LINK, AND `V`-RIGOROUS'S PREREQUISITE
+
+Leg 46 closed the polynomial in float on `HL_S2_nonsymmetric` — an object with **no proof of
+any kind**. Two things stand between that and a real result, and leg 47 priced both:
+
+1. **INTERVAL ARITHMETIC.** `solver/interval.py` exists as an arithmetic layer and **has
+   never been wired to a certificate**. Until it is, `Z₁` measures float *conditioning*
+   rather than bounding an operator norm.
+2. **A TAIL LEMMA — forced, not optional.** A rigorous bound for `|X| > X_max` from the
+   asymptotic expansion, folded into the budget. **Leg 47 measured that reach makes the gap
+   WORSE (+0.47 decades per unit `ρ`)**, so there is no domain size at which brute force
+   closes it.
+
+**Gate:** does the polynomial close in *interval* arithmetic, tail included? **Yes** → a novel
+Tier-3 result on an uncertified object; report it as that and only that. **No** → stop and
+report *which* term ran out of margin, the interval widening or the tail. Either answer
+prices the road.
 
 ---
 

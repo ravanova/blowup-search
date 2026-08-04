@@ -164,8 +164,8 @@ STAGES = [
     },
     {
         "id": "V",
-        "name": ("Viscous survival: does a CERTIFIED inviscid blow-up survive dissipation, "
-                 "as a CERTIFICATE?"),
+        "name": ("Viscous survival, IN FLOAT: does the certificate's margin survive "
+                 "dissipation as mu -> criticality?"),
         "status": "NEXT",
         "why_here": (
             "USER DIRECTION, 2026-08-04, after being shown that the L1->L4 chain cannot be "
@@ -182,9 +182,20 @@ STAGES = [
             "The question is NOT 'does the scaling say the blow-up survives' -- Xu did that "
             "and pre-empted Route-F. It is: **switch dissipation on and ask whether the RADII "
             "POLYNOMIAL STILL CLOSES**, and walk mu up toward criticality watching the margin. "
-            "Deliver: (1) the certificate as a function of mu on an object where the inviscid "
-            "certificate is in hand; (2) the margin's trajectory as mu -> mu_crit; (3) whether "
-            "it degrades smoothly or falls off a cliff, and at which mu."),
+            "**RUN IT IN FLOAT. That needs NO prerequisite** -- leg 46's machinery already "
+            "produces Y_0, Z_1, Z_2 in float64 -- and it is decisive either way: (1) the "
+            "certificate constants as a function of mu; (2) the margin's trajectory as "
+            "mu -> mu_crit; (3) whether it degrades smoothly or falls off a cliff, and at "
+            "which mu. **If the margin collapses the moment mu > 0, the Euler->NS question is "
+            "answered in this toy for ONE leg of work, and it saves building interval "
+            "arithmetic and a tail lemma for a target that was never going to survive them.**"),
+        "premise_correction": (
+            "An earlier version of this stage said 'on an object where the inviscid "
+            "certificate is in hand'. **WE DO NOT HAVE ONE** -- leg 47 established that the "
+            "inviscid certificate needs a tail lemma nobody here has written. That premise "
+            "was wrong when written and is removed. The RIGOROUS form of V (does the "
+            "CERTIFICATE survive) has L1 as an unstated prerequisite; the FLOAT form does "
+            "not, which is why the float form is what this stage delivers."),
         "gate": {
             "question": ("FIRST: has anyone already done certification-under-dissipation for "
                          "a self-similar blow-up profile?"),
@@ -196,13 +207,49 @@ STAGES = [
                       "it goes -- a certificate that DIES at small mu is as informative as one "
                       "that survives, and is the more likely outcome."),
         },
-        "time_box": ("one leg for the novelty check, then one for the measurement -- and the "
-                     "novelty check comes first, always"),
+        "time_box": ("one leg for the novelty check, then one for the FLOAT measurement -- "
+                     "and the novelty check comes first, always"),
+        "sequel": (
+            "V-RIGOROUS -- 'does the CERTIFICATE survive' rather than 'do the float constants "
+            "survive' -- is downstream of L1 (interval arithmetic + a tail lemma), NOT a "
+            "competitor to it. L1 is the first step of V-rigorous and a novel result in its "
+            "own right, so the two are not in tension. Do not read the prerequisite as "
+            "optional: without an inviscid certificate there is nothing for dissipation to "
+            "perturb, and a float study cannot be upgraded into one after the fact."),
         "honesty": (
             "Even a complete success here is NOT Clay and is NOT a chain link. It is a "
             "statement about a toy model's certificate under dissipation. What makes it "
             "Clay-ADJACENT is that it probes the one structural difference between the "
             "proved case (Euler) and the open one (NS). Say that in every writeup."),
+    },
+    {
+        "id": "L1",
+        "name": ("Certify HL_S2_nonsymmetric FOR REAL: interval arithmetic + an analytic "
+                 "far-field enclosure"),
+        "status": "QUEUED",
+        "why_here": (
+            "The ONLY movable link of the chain (L2 and L3 are occupied by Chen-Hou, L4 is "
+            "out of reach by Wall 2), a novel result in its own right, AND the prerequisite "
+            "for V-rigorous. Leg 46 got the polynomial to close in float on an uncertified "
+            "object; leg 47 priced what stands between that and a proof."),
+        "deliverable": (
+            "(1) INTERVAL ARITHMETIC: wire solver/interval.py -- which exists as an "
+            "arithmetic layer and has NEVER been connected to a certificate -- through the "
+            "bordered residual, so Z_1 BOUNDS an operator norm instead of measuring float "
+            "conditioning. (2) A TAIL LEMMA: a rigorous bound for |X| > X_max from the "
+            "asymptotic expansion, error folded into the budget, so the finite-dimensional "
+            "certificate plus the tail covers R. Leg 47 proved this is FORCED -- reach makes "
+            "the gap worse at +0.47 decades per unit rho."),
+        "gate": {
+            "question": "Does the polynomial close in INTERVAL arithmetic, tail included?",
+            "if_yes": ("That is a novel Tier-3 result on an object with no proof of any kind. "
+                       "Report it as such, and only as such -- it is not Clay and not a step "
+                       "toward it."),
+            "if_no": ("STOP AND REPORT which term ran out of margin -- the interval widening, "
+                      "or the tail. Do not harden. Either answer prices the road for whoever "
+                      "comes next."),
+        },
+        "time_box": "two legs minimum; the tail lemma is mathematics, not compute",
     },
     {
         "id": "C-PILOT",
@@ -266,6 +313,7 @@ BANNED = [
     ("any GA compute on an unvalidated fitness", "C-PILOT"),
     ("another literature leg beyond M's three questions", "M"),
     ("building stage V's measurement before its novelty check has reported", "V"),
+    ("reading V-rigorous's L1 prerequisite as optional -- a float study cannot be upgraded into a certificate after the fact", "L1"),
     ("closing the truncation gap by extending the domain", "never -- leg 47 measured the trend and it has the WRONG SIGN, +0.47 decades per unit rho"),
     ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
      "(arXiv:2210.07191 + Part II); it stays only as C-PILOT's known-answer substrate",

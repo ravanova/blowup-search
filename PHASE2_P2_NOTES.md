@@ -2945,3 +2945,30 @@ inviscid blow-up survives dissipation AS A CERTIFICATE** (the Euler->NS gap is e
 viscosity). **Its novelty check is a pre-committed BAN, not a suggestion** -- leg 42 deleted
 seven of twelve novelty claims and this route was flagged as a speculation of the same kind
 when it was proposed.
+
+**§36 ADDENDUM (same day, after review): A FALSE PREMISE IN STAGE V, CAUGHT AND REMOVED.**
+The stage-V directive as first written said the certificate would be measured "on an object
+where the inviscid certificate is in hand". **THERE IS NO SUCH OBJECT** -- §36 had just
+established that the inviscid certificate needs a tail lemma nobody here has written, so the
+premise contradicted the leg it was written alongside. Removed.
+
+**THE CORRECTION IMPROVES THE SEQUENCING RATHER THAN THREATENING IT, and the reason is worth
+keeping.** V splits in two:
+* **V-FLOAT** needs NO prerequisite -- leg 46's machinery already produces Y_0, Z_1, Z_2 in
+  float64 -- and it is DECISIVE EITHER WAY. If the margin collapses the moment mu > 0, the
+  Euler->NS question is answered in this toy for ONE leg, **and it saves building interval
+  arithmetic and a tail lemma for a target that was never going to survive them.**
+* **V-RIGOROUS** ("does the CERTIFICATE survive", not "do the float constants survive") has
+  **L1 as an unstated prerequisite** -- there is nothing for dissipation to perturb without
+  an inviscid certificate. So L1 is the FIRST STEP of V-rigorous and a novel result in its
+  own right; the two are **not in tension**, and L1 is now an explicit QUEUED stage rather
+  than an implied one.
+
+**NEW BANKED LESSON (81). A DIRECTIVE CAN CARRY A PREMISE THE SAME SESSION HAS JUST
+REFUTED.** §36 proved the inviscid certificate is not in hand, and the stage written minutes
+later assumed it was. Neither the drift detector nor the test suite caught it -- they check
+that documents AGREE, not that a directive's premises are AVAILABLE. **When writing a stage,
+list its preconditions explicitly and check each against the most recent leg**, because the
+most recent leg is exactly what a freshly-written directive is least likely to have absorbed.
+New standing ban: reading V-rigorous's L1 prerequisite as optional -- **a float study cannot
+be upgraded into a certificate after the fact.**
