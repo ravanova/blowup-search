@@ -86,6 +86,54 @@ space, `Y₀`, and `Z₁` — now *measurable* rather than hypothetical, because
 
 ---
 
+# DIRECTIVE 3 — C-PILOT: EVOLVE THE LYAPUNOV WEIGHT, ON A KNOWN-ANSWER OBJECT
+
+*(queued behind PORT; adopted 2026-08-04 — see `CLAY_ROADMAP.md` §7 and `plan_of_record.py`)*
+
+**THE RE-FRAMING THIS BELONGS TO, IN ONE SENTENCE.** For 44 legs the search machinery has
+been pointed at finding the **object**; the bottleneck since Route-D has been closing a
+**certificate** around an object we already have. Route-D hand-tuned a function space for
+**eleven legs** and it turned out `a = 0`-only; Routes K and L hand-picked preconditioners.
+Those are search problems, and unlike blow-up hunting they have a fitness that **cannot lie**.
+
+**WHY THE WEIGHT FIRST, AND NOT THE WHOLE CERTIFICATE.** It is the narrowest member of the
+family: search over weights, fitness = the **worst-case coercivity constant** of the
+linearized operator under that weight. One number, checkable pointwise. Run it on the
+**known-answer object** the PORT stage leaves behind, so the fitness itself is validated
+where the result is checkable before it is trusted anywhere else.
+
+**GATE, PRE-COMMITTED.** *Does the new fitness pass the six-property viability gate?*
+**Yes** → proceed to Directive 4 with the validated fitness. **No** → **STOP. Do not run the
+GA.** Stage 3.5 is the precedent and it is non-negotiable: a fitness that fails the gate
+produces confident garbage at scale.
+
+---
+
+# DIRECTIVE 4 — B: EVOLVE THE CERTIFICATE
+
+*(queued behind C-PILOT)*
+
+Search space: the choices a computer-assisted proof currently makes by human taste — the
+weight exponents and norm of the function space, the split of the linearized operator into
+"leading order + finite rank" (Chen–Hou's own phrase), the truncation dimension, the domain
+decomposition, the preconditioner's free constants. **Fitness: the radii polynomial's
+margin** — a theorem, not a plot, and an under-resolved run cannot fake it.
+
+**Newly affordable, and only just.** Leg 44 made the inner linear solve `O(N)` and exact,
+which is what makes thousands of evaluations possible. Before leg 44 this was not.
+
+**GATE.** *Does the searched certificate beat the hand-tuned one?* **Yes** → report the
+margin, and say plainly that the search found it, not us. **No** → report that too; a
+negative bounds how much of the difficulty was tuning versus structure, which is worth
+knowing either way.
+
+**WHAT NEITHER OF THESE DOES.** Create novelty, or touch Clay. They make certification
+attempts cheaper, which widens the set of objects worth attempting. **Wall 2 is a dimensional
+wall, not a tuning wall** — a cheaper certificate does not make 3D Navier–Stokes reachable by
+interval arithmetic. `CLAY_ROADMAP.md` §7.3.
+
+---
+
 # STANDING DISCIPLINE (applies to every leg)
 
 Gate the **operator**, not the agreement. Report a **magnitude**, never a boolean. **"Small"
@@ -105,6 +153,21 @@ re-testing the scaling gauge.
 records a strategic re-framing worth reading before any new GA campaign is proposed: **the
 search machinery has been pointed at finding the OBJECT, while the actual bottleneck for the
 last twenty legs has been closing a CERTIFICATE around an object we already have.**
+
+**FIRST COMMAND OF EVERY SESSION — the plan is machine-readable and it is enforced.**
+
+```
+.venv/bin/python plan_of_record.py        # which stage is NEXT, its gate, the live bans
+.venv/bin/python test_plan_of_record.py   # FAILS if this file and the plan have drifted
+```
+
+`plan_of_record.py` is the committed sequence (M → PORT → C-PILOT → B), every stage's
+pre-committed gate with **both** branches, and every ban with **what lifts it**.
+`test_plan_of_record.py` asserts that this prompt, `CLAY_ROADMAP.md` §7 and that sequence
+still agree — because this project's characteristic failure is **drift, not error**, and
+prose at the top of a file did not stop ranked item (3) losing to a cheaper leg six times.
+Banked lesson (68) applied to the plan itself. **If the drift detector fails, fix the
+disagreement before doing any science.**
 
 **PROCESS RULES THAT KEEP EARNING THEIR PLACE.** Before pushing: regenerate the data, rebuild
 the figure, **check every number in the prose against the JSON**. When you commit a

@@ -457,7 +457,7 @@ any novelty claim**, and note that the check is now executable
 Tier 2, which gates the Route-D methodological claims — the only ones with a real chance of
 being new.
 
-Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
+Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md) — **§7 is the plan of record as of 2026-08-04**, and its machine-readable form is `../plan_of_record.py`, enforced by `../test_plan_of_record.py` (run it first in any session; it fails if the roadmap, the continuation prompt and the committed sequence have drifted apart). Working notes:
 [../PHASE2_P2_NOTES.md](../PHASE2_P2_NOTES.md).
 
 ---

@@ -194,10 +194,16 @@ where that means something.
 
 ## 7. Addendum (2026-08-04) — what the search machinery should actually be searching
 
-**Status: OPTION ANALYSIS, NOT A COMMITTED PLAN.** Written in response to a direct question
-from the user ("could we use GAs to dig into actually solving Clay, and if so what has the
-best chance?"). Nothing here supersedes §4's sequencing; it is recorded so the reasoning
-survives the session that produced it.
+**Status: ADOPTED 2026-08-04 by user decision. This is the plan of record and it supersedes
+§4's sequencing.** The machine-readable form is [`../plan_of_record.py`](plan_of_record.py)
+and it is enforced by `test_plan_of_record.py`, which fails if this file, the continuation
+prompt and the committed sequence stop agreeing with each other. Run
+`.venv/bin/python plan_of_record.py` for the current stage, its gate and the live bans.
+
+**Adopted:** the re-framing in §7.1 and the sequence in §7.4 — target selection, then the
+port, then the Lyapunov-weight pilot, then the certificate search.
+**NOT adopted and not claimed:** any route to Clay. §7.3 stands unchanged; Walls 1 and 2 are
+untouched by all of this.
 
 ### 7.1 The re-framing
 
@@ -272,12 +278,25 @@ actually has, using machinery it already owns, with a fitness that cannot lie.**
 real improvement in expected value toward the *stated* prize — a novel Tier-3 result on a
 model where blow-up is provable — and it is not a route to Clay. Clay stays where §6 left it.
 
-### 7.4 Sequencing, if this is adopted
+### 7.4 The committed sequence
 
-1. **Route-M first** (target selection — Directive 1 in `CONTINUATION_PROMPT.md`). Option B
-   is worthless without an object worth certifying, and B's search space depends on which.
-2. **Pilot Option C** on an object with a *known* answer, so the fitness can be validated
-   where the result is checkable — the same "build it where you know the answer, then port
-   the method" discipline Route A/Phase 0 uses, and the discipline Route-J's gates embody.
-3. **Then Option B proper**, and re-run the six-property viability gate on the new fitness
-   *before* any GA compute. Stage 3.5 is why that is non-negotiable.
+Four stages. Each carries a pre-committed gate naming **both** outcomes; the machine-readable
+form is `plan_of_record.py` and the drift detector is `test_plan_of_record.py`.
+
+1. **`M` — target selection.** *Certify what, that isn't already done?* Option B is worthless
+   without an object worth certifying, and B's search space depends on which one. **Gate:
+   if no uncertified, interval-reachable target exists, say so and STOP** — that is a
+   decisive negative about the whole programme, not a prompt to search harder.
+2. **`PORT` — finish the certification port.** The near-null direction of `M⁻¹DF`, then a
+   **bordered** system (not a projection — that is what failed in leg 44). *This is not
+   wasted whichever way `M` goes:* it is the only route to a converged profile and a
+   computable `Y₀`/`Z₁`, and Chen–Hou's object is precisely the **known-answer substrate**
+   the later GA fitness must be validated on before it is trusted anywhere else — the same
+   "build it where you know the answer, then port the method" discipline as Route A/Phase 0.
+3. **`C-PILOT` — evolve the Lyapunov weight**, on that known-answer object. The narrowest
+   member of the re-framing and the right first bite: the fitness is **one number** and the
+   constraint is checkable pointwise. **Gate: re-run the six-property viability gate on the
+   new fitness before any GA compute.** Stage 3.5 is why that is non-negotiable.
+4. **`B` — evolve the certificate.** The function space, the operator split, the constants.
+   Fitness = the radii polynomial's margin, which is a theorem and cannot be faked by an
+   under-resolved run.
