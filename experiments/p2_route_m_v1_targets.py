@@ -21,7 +21,8 @@ are within interval-arithmetic reach -- and answers it in code rather than in pr
   M4  THE CONTRAST, read out of committed JSON rather than recomputed: Route-G's 2D
       resolution ladder, 2x finer and 16x worse, on the object the port is aimed at.
 
-Deterministic.  M1/M2/M4 are seconds; M3 is the cost (~1 h at the default ladder).
+Deterministic.  M1/M2/M4 are seconds; M3 is the cost (~1 h at the default ladder,
+run SEQUENTIALLY -- see the note at the M3 call site, it matters by 12x).
 Writes writeup/data/p2_route_m_v1_targets.json.
 
 Run: .venv/bin/python -u experiments/p2_route_m_v1_targets.py
@@ -30,7 +31,6 @@ Run: .venv/bin/python -u experiments/p2_route_m_v1_targets.py
 
 import argparse
 import json
-import multiprocessing as mp
 import sys
 import time
 from pathlib import Path
@@ -286,10 +286,20 @@ if __name__ == "__main__":
     print(f"\n[M3] reachability of {m1['gate']['named_target']}: refinement ladder to "
           f"tau={tau_end}, nu -> 0 with the grid", flush=True)
     jobs = [(n, NU_REF * ((N_REF - 1) / (n - 1)), tau_end) for n in ns]   # nu ~ drho
+    # RUN THE RUNGS SEQUENTIALLY, AND THIS IS NOT A STYLE CHOICE.  The step is two dense
+    # n x n matvecs (the Hilbert operator and the cached slope operator), so the working
+    # set is 2 n^2 float64 = 10 MB at n = 801 and 41 MB at n = 1601 -- past shared L3.
+    # The kernel is memory-BANDWIDTH bound, not compute bound, so running rungs
+    # concurrently makes them contend for the one resource that is scarce.  Measured, on
+    # this machine: n = 801 takes **7.1 min alone** and had not finished in **87 min**
+    # with three rungs in flight -- a 12x penalty for parallelising.  The first version of
+    # this script used mp.Pool and the ladder was projected at 22 CPU-hours.
     print(f"    rungs {[j[0] for j in jobs]}, nu {[round(j[1], 4) for j in jobs]}, "
-          f"run in parallel", flush=True)
-    with mp.Pool(len(jobs)) as pool:
-        rungs = pool.map(_rung, jobs)
+          f"SEQUENTIAL (memory-bandwidth bound -- see the note in the source)", flush=True)
+    rungs = []
+    for job in jobs:
+        print(f"    n={job[0]} ...", flush=True)
+        rungs.append(_rung(job))
     for r in rungs:
         td = r["tau_direction"]
         print(f"    n={r['n']:5d} steps={r['steps']:6d} tau={r['tau']:.2f} "
