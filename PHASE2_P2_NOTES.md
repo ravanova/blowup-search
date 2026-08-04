@@ -2537,3 +2537,101 @@ the model and Papers/2210.07191.pdf sec.7 is the section; (2) a profile from a C
 Newton solve, which is DOWNSTREAM of (1) (a prototype JFNK reduced ||F||_2 from 0.807 to
 0.549 in fifteen Newton steps and then flatlined, with the linear solve returning relative
 residual 1.00); (3) only then the function space, Y_0 in it, and Z_1.
+
+
+## §33 — ROUTE-L v1 DONE (2026-08-04): THE 2D PRECONDITIONER. BOTH OF §32's NAMED SUSPECTS
+## ARE CLEARED BY ABLATION, THE REAL TERM IS THE ANGULAR TRANSPORT, AND AN O(N) EXACT SWEEP
+## TAKES THE KRYLOV STALL 0.6623 (FLAT) -> 3.3e-6. STEP (iii) IS UNBLOCKED.
+
+solver/port_certification.py (Route-L additions) + test_port_certification.py **10/10**;
+experiments/p2_route_l_v1_precond.py → writeup/data/p2_route_l_v1_precond.json → **fig41**.
+BLOG/TECHNICAL_P2_ROUTEL_V1.md. Deterministic (~13 min). **No link of the L1->L4 chain
+moved** -- one rung of the SCAFFOLDING opened, which is not the same thing.
+
+**(L-1) BOTH OF §32's CANDIDATES ARE WRONG, AND THE ABLATION SAYS SO CLEANLY.** Six
+ablations, each with its own Krylov ladder, ranked by GAIN not endpoint (lesson 72). Gate:
+the un-ablated variant reproduces solver.rhs to **0.0**.
+
+    pure dilation, no angular   0.7518 -> 0.1608   gain 4.68   BENDS
+    angular transport OFF       0.7857 -> 0.3712   gain 2.12   BENDS
+    velocity in s_rho OFF       0.6111 -> 0.3599   gain 1.70   flat
+    reaction terms OFF          0.7552 -> 0.5817   gain 1.30   flat
+    velocity feedback OFF       0.8456 -> 0.7582   gain 1.11   flat, WORSE THAN FULL
+    full                        0.6946 -> 0.6623   gain 1.05   flat
+
+**THE NONLOCAL BIOT-SAVART TERM IS NOT THE OBSTRUCTION -- REMOVING IT MAKES THE STALL
+WORSE** (0.6623 -> 0.7582). It is mildly HELPING the Krylov solve. It was the first
+candidate §32 named.
+
+**(L-2) THE WALL IS NOT IT EITHER, AND THIS ONE IS A DIRECT MEASUREMENT.** Energy of the
+STALLED Krylov residual in the first 3 of 48 angular nodes (proportional share **0.0625**):
+**omega 0.0685 (1.10x), eta 0.0794 (1.27x), xi 0.2745 (4.39x)**. omega and eta are FLAT
+across the domain -- distributed, which is what a continuum looks like and is not what a
+boundary layer looks like. **§32 conflated two different defects: the RELAXATION's, which
+IS at the wall (§32 K-4, correct), and the LINEAR SOLVE's, which is not.**
+
+**(L-3) IT IS THE ANGULAR TRANSPORT, and the clincher is a combination.** Angular transport
+OFF **plus** §32's radial preconditioner runs to **MACHINE ZERO** (0.0401 -> 0.0171 ->
+0.0006 -> 0.0 -> 0.0). So the TRANSPORT operator carries the ENTIRE obstruction, in two
+pieces, and nothing else in the equation contributes -- not the nonlinearity, not the
+nonlocal term, not the reactions, not the wall.
+
+**(L-4) THE WRONG FIX, KEPT BECAUSE IT IS LOAD-BEARING: ADI IS CATASTROPHIC.** Composing an
+exact radial solve with an exact angular solve gives **0.9960**, far WORSE than doing
+nothing (0.6623). **The operator does not split**, and the splitting error exceeds the thing
+being fixed. This is what forces the correct construction rather than merely permitting it.
+
+**(L-5) THE RIGHT FIX FOLLOWS FROM A MEASURED STRUCTURAL FACT.** The radial upwinding is
+**OUTWARD EVERYWHERE on this profile -- measured s_rho in [0.390, 5.732]**, strictly
+positive, reported as a magnitude so a marginal case would be visible. That makes the
+COUPLED transport operator **block lower bidiagonal in the radial index with TRIDIAGONAL
+diagonal blocks**:
+
+    [(c - s_rho/drho) I - s_beta d_beta] f_i = rhs_i - (s_rho/drho) f_{i-1}
+
+so **ONE outward Thomas sweep inverts it EXACTLY, O(N), with NO splitting error -- because
+there is no split.** Gated: apply the full transport operator to its own sweep, recover the
+rhs to **9.5e-16**.
+
+    none                        0.6946 / 0.6908 / 0.6623            flat, gain 1.05
+    radial only (§32)           0.4463 / 0.4215 / 0.3593            flat
+    ADI composition             0.99999 / 0.99852 / 0.99604         flat, worse than none
+    FULL TRANSPORT LINE SWEEP   0.1830 / 0.1313 / 0.0188 ; 2.0e-4 at m=240, 3.3e-6 at m=320
+
+**The same stall classifier, on the same data structure, returns BENDING (gain 9.72).
+A IS CONSTRUCTIBLE. STEP (iii) IS UNBLOCKED** -- first time in 44 legs a blocked link opened.
+
+**(L-6) NEWTON STILL FAILS, AND FAILS DIFFERENTLY -- WHICH IS THE FINDING.** The linear
+solves now SUCCEED (**GMRES rel 2.5e-3 in 200 iterations, against 1.00 before**) and Newton
+still creeps: ||F||_2 **0.8069 -> 0.7378 over eleven steps (factor 1.09)** with the line
+search accepting only **lambda = 1/32 then 1/64**. A full step rejected while the linear
+algebra is accurate is NOT a spectral problem -- it is a **NEAR-NULL DIRECTION in DF**.
+
+**(L-7) THE OBVIOUS EXPLANATION WAS TESTED AND IS REFUTED. DO NOT RE-TRY IT.** `renorm=True`
+re-pins omega_x(0) and eta_x(0) after every relaxation step and F carries no such
+constraint, so the SCALING GAUGE was the candidate. Projecting onto it inside Newton makes
+things **strictly worse**: at iteration 0 the line search accepts **NO step at all** (lambda
+down to 1/1024, still rejected) and ||F||_2 does not move. **The near-null direction is not
+the scaling gauge, and it is recorded as UNIDENTIFIED.**
+
+**NEW BANKED LESSONS (74)-(76).**
+**(74) TEST ALL THE SUSPECTS AT ONCE; A BATTERY COSTS ABOUT WHAT THE GUESSES COST.** §32
+named two candidates and both were wrong -- and they were named because they are the
+INTERESTING parts of the equation (nonlocality, the boundary). The culprit was the boring
+term that moves material sideways. Building the six-way battery took about as long as
+writing the two guesses down.
+**(75) TWO DEFECTS IN THE SAME PROBLEM ARE NOT THE SAME DEFECT.** §32 measured the
+RELAXATION's residual at the wall and inferred the LINEAR SOLVE's would be there too. It is
+not (1.10x proportional vs 4.39x for xi alone). Localize each one separately.
+**(76) A NEGATIVE CONSTRUCTION IS WORTH KEEPING IN THE ARTIFACT.** ADI at 0.996 -- worse
+than doing nothing -- is what ruled out the whole splitting family and forced the sweep. A
+writeup that only reports what worked cannot be used to avoid re-trying what did not.
+
+**WHAT MUST BE BUILT NEXT, IN ORDER:** (1) **IDENTIFY the near-null direction of the
+PRECONDITIONED Jacobian** -- cheap now, because M^-1 exists: a few inverse-iteration or
+Lanczos steps through M^-1 DF. The gauge is RULED OUT; the live candidates are the
+c_l/c_omega modulation's implicit dependence (which makes F an implicitly-defined map, not
+an explicit one) and translation along the profile branch. (2) a **BORDERED system** once
+(1) names it -- append the constraint that pins the direction, rather than projecting after
+the fact, which is exactly what failed in (L-7). (3) only then the profile, the function
+space, Y_0 and Z_1.

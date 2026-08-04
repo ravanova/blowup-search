@@ -45,9 +45,10 @@ def build_figure():
     # ---- A: the attribution battery --------------------------------------
     a0 = ax[0, 0]
     for label, rows in lad.items():
-        col = C["good"] if "angular" in label else (
-            C["bad"] if label == "full" else C["grey"])
-        lw = 2.2 if (label == "full" or "angular" in label) else 1.2
+        col = {"full": C["bad"], "angular transport OFF": C["good"],
+               "pure dilation, no angular": C["ns"]}.get(label, C["grey"])
+        lw = 2.2 if label in ("full", "angular transport OFF",
+                              "pure dilation, no angular") else 1.2
         a0.plot([q["m"] for q in rows], [q["rel_residual"] for q in rows], "o-",
                 color=col, lw=lw, ms=5, label=label, alpha=0.95 if lw > 2 else 0.7)
     a0.set_xscale("log")
@@ -55,8 +56,9 @@ def build_figure():
     a0.set_ylabel("relative residual of $DF\\,x = -F$")
     a0.legend(fontsize=6.2, loc="lower left")
     a0.set_title("A  the attribution battery: which term makes the ladder FLAT?\n"
-                 f"top ablation by ladder gain: **{ranked[0]['ablation']}** "
-                 f"(gain {ranked[0]['gain']:.2f} vs full {ranked[-1]['gain']:.2f})",
+                 f"ranked by gain: {ranked[0]['ablation']} ({ranked[0]['gain']:.2f}), "
+                 f"{ranked[1]['ablation']} ({ranked[1]['gain']:.2f}), "
+                 f"full ({ranked[-1]['gain']:.2f})",
                  fontsize=9)
 
     # ---- B: Route-K's two candidates, both eliminated --------------------
@@ -79,7 +81,8 @@ def build_figure():
     a2b.axhline(share, color=C["good"], ls="--", lw=1.4)
     a2b.text(3.6, share * 1.08, "proportional share\n(3 of 48 nodes)", fontsize=6.5,
              color=C["good"], va="bottom")
-    a2b.set_ylabel("wall share of the stalled residual", color=C["anchor"])
+    a1.axvspan(1.85, 4.6, color=C["anchor"], alpha=0.06)
+    a2b.set_ylabel("wall share of the stalled residual (RIGHT axis)", color=C["anchor"])
     a2b.tick_params(axis="y", labelcolor=C["anchor"])
     a1.set_xlim(-0.6, 4.6)
     for x, f in zip(xs, ("$\\omega$", "$\\eta$", "$\\xi$")):
@@ -166,8 +169,12 @@ def build_figure():
             "solves succeed and Newton still creeps, with the line search\n"
             "capped. That is a near-null direction, not a spectrum — the\n"
             "scaling gauge that the relaxation pins and $F$ does not carry.\n"
-            + ("\nThe gauge projection " + ("CONVERGES it." if conv else
-               "does not fix it either — so the\nnext move is a bordered system, not a projection.")),
+            + ("\nThe obvious candidate was the scaling gauge that the relaxation\n"
+               "pins and $F$ does not carry. It was tested and REFUTED: projecting\n"
+               "onto the gauge makes it worse, and the line search accepts no step\n"
+               "at all. The near-null direction is something else."
+               if not conv else
+               "\nThe scaling gauge was the cause: projecting onto it CONVERGES."),
             fontsize=8.4, transform=a5.transAxes, va="top")
     a5.set_title("F  one link unblocked, and the next obstruction is a different kind",
                  fontsize=9)

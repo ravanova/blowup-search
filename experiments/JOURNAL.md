@@ -3,6 +3,40 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-L v1: the boring term did it (non-logged) — 2026-08-04
+
+**NOT a logged gate run** (deterministic; ~13 min). Code `solver/port_certification.py`
+(Route-L additions) + `test_port_certification.py` (10/10);
+`experiments/p2_route_l_v1_precond.py` → `writeup/data/p2_route_l_v1_precond.json` → fig41.
+Writeups TECHNICAL/BLOG_P2_ROUTEL_V1.md; PHASE2_P2_NOTES §33.
+
+**Why it exists.** Route-K found the 2D linearized operator had no computable inverse and
+named two suspects. This leg tests them.
+
+**What a human should notice.** Three things.
+
+(1) **Both suspects were innocent, and I had named them because they are the *interesting*
+parts of the equation** — nonlocality and the boundary. Freezing the nonlocal velocity makes
+the stall *worse*; the wall carries its proportional share of the stalled residual and no
+more. The culprit was the angular transport: the term that just moves material sideways.
+Building a six-way ablation battery cost about what writing the two guesses cost. Lesson (74).
+
+(2) **I had conflated two different defects.** Route-K measured the *relaxation's* leftover
+residual at the wall — correctly — and inferred the *linear solve's* would be there too. It
+is not. Two failures in the same problem are not the same failure. Lesson (75).
+
+(3) **The wrong construction is in the artifact on purpose.** ADI — composing an exact radial
+solve with an exact angular one — gives 0.996, worse than doing nothing. That negative is
+what ruled out the whole splitting family and forced me to notice the operator is triangular
+in the radial index. A writeup that reports only what worked cannot stop the next session
+re-trying what did not. Lesson (76).
+
+**What it bought, and what it did not.** Step (iii) of the certification chain is unblocked —
+first time in 44 legs. Newton still does not converge, but the failure changed kind: the
+linear solves now succeed and a near-null direction caps the line search. I tested the
+obvious explanation (the scaling gauge) and it is **refuted** — projecting onto it accepts no
+step at all. Recorded as unidentified rather than replaced with a second guess.
+
 ## Phase-2 P2 — ROUTE-K v1: the certification port, and the ladder nobody read (non-logged) — 2026-08-04
 
 **NOT a logged gate run** (deterministic; ~9 min). Code `solver/port_certification.py` +

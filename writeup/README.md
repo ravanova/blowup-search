@@ -416,6 +416,33 @@ writeup/
     second obstruction of comparable size remains. And the stall is **seed-dependent by
     2.7×** across the limit cycle: `Z₁` is not large, **it is not about anything**. *(fig 40)*
 
+44. [TECHNICAL_P2_ROUTEL_V1.md](4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md) ·
+    [BLOG_P2_ROUTEL_V1.md](4_p2_lottery/BLOG_P2_ROUTEL_V1.md) — **Route-L v1**, the **2D
+    preconditioner**. Route-K left step (iii) blocked with the obstruction half identified
+    and two candidates named — the nonlocal Biot–Savart velocity, and the wall. **Both are
+    wrong, and a six-way ablation battery says so cleanly.** Freezing the velocity feedback
+    makes the stall **worse** (0.6623 → **0.7582**, the only row above the full problem);
+    and the stalled Krylov residual carries only its **proportional share** at the wall
+    (0.0685 and 0.0794 against 0.0625 for three of forty-eight angular nodes) — so
+    Route-K conflated two different defects, the *relaxation's*, which is at the wall, and
+    the *linear solve's*, which is not. **The culprit is the angular transport**: switch it
+    off and the ladder bends (gain 2.12 vs the full problem's 1.05); switch it off *and*
+    apply Route-K's radial preconditioner and the solve runs to **machine zero**. So the
+    transport operator carries the entire obstruction and nothing else contributes. **The
+    fix follows from a measured structural fact**: radial upwinding is outward everywhere
+    (`s_ρ ∈ [0.390, 5.732]`), so the coupled operator is block lower-bidiagonal with
+    tridiagonal blocks and **one Thomas sweep inverts it exactly in `O(N)`** (gated: the
+    operator applied to its own sweep returns the rhs to **9.5e−16**). Result:
+    **0.6623 (flat) → 0.0188 at `m`=160 → 3.3e−6 at `m`=320** — the same classifier now
+    reads *bending*. **`A` is constructible; step (iii) is unblocked, the first time in 44
+    legs a blocked link has opened.** Kept as a load-bearing negative: the ADI composition
+    of two exact 1D solves gives **0.9960**, worse than doing nothing — the operator does
+    not split. **And Newton still fails, differently**: the linear solves now succeed
+    (GMRES **2.5e−3**, was 1.00) while the line search caps at **λ = 1/32**, which is a
+    near-null direction rather than a spectrum. The obvious candidate — the scaling gauge
+    `renorm=True` pins and `F` omits — was **tested and refuted** (projecting onto it
+    accepts *no* step at all). Recorded as unidentified. *(fig 41)*
+
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
 record. **As of 2026-08-04 it has a SIXTH PASS and it is the first one against primary
@@ -466,6 +493,7 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md). Working notes:
 | `fig38_route_i_v1_driven.png` | 4 | P2 — Route-I v1: `λ_μ = 2s − α₀` measured as a growth rate along a trajectory (with the refused rungs marked), the tar pit driven against its closed law with the dynamic and static `α₁` ladders side by side, adiabaticity and off-branch starts, THE STABILITY INVERSION (unstable directions vs `μ` at three `K`, with the crossover that shows the limits do not commute), where the instability lives (`Re` against the log-frequency cutoff — the DSS band), and the nonlinear twin-trajectory control against the spectral gap |
 | `fig39_route_j_v1_literature.png` | 4 | P2 — Route-J v1, the primary-source pass: the constant ALS corrected in Schochet (1986), settled from our side by the PDE residual (13.66 decades); Route-H's closed form (E) against ALS eqs (57)-(58) pointwise; `α(1/2) = 3` by integrating ALS (49)-(50) cold, with the rungs the `dτ` gate refuses drawn in red rather than truncated away; what lies ABOVE `s_c` (the Schochet family collapsing at `β = 2` and fanning at `β = 1`); our `α(a)` branch against Xu's `s*(a) = 1/c_l(a)`; and the twelve-claim ledger by verdict |
 | `fig40_route_k_v1_port.png` | 4 | P2 — Route-K v1, the certification port's first step: the relaxation limit-cycling in time (residual against steps, with `c_l/c_ω` straddling the published value); Route-G's committed resolution ladder diverging while `c_ω` holds to 0.77%; the defect's argmax migrating to the wall; the instrument's own controls (GMRES on clean and on planted-`cond 10⁸` systems, and the finite-difference `Jv` across five decades of `h`); THE STALL as a ladder in the Krylov dimension at both seeds, with and without the leading-order preconditioner; and the radii-polynomial chain with the step each link reached |
+| `fig41_route_l_v1_precond.png` | 4 | P2 — Route-L v1: the six-way ablation battery with every ladder drawn (the culprit is the one that BENDS, not the one that ends lowest); Route-K's two candidates both eliminated — the velocity ablation above the full problem, and the wall's share of the stalled residual against its proportional share; THE PRECONDITIONER, the ladder going from flat to 3.3e−6; the ADI composition that is worse than doing nothing, kept because the negative is load-bearing; Newton with a working linear solve and a capped line search, with the refuted gauge projection alongside; and the certification chain with one link now open |
 | `fig37_route_h_v1_critical.png` | 4 | P2 — Route-H v1: `s_c` read as the stability eigenvalue `2s − α₀` with the marginal point marked, the `a = 0` neutral line against its closed form, the `a = 1/2` secant extrapolation that gives `α₁` with its `K`-ladder, the DSS re-ask (dissipation discretizes the continuum onto the negative integers and nothing crosses), the time-dependent cross-check at `s = 1/2` exactly, and `μ(τ)` decaying algebraically rather than exponentially |
 | `fig36_route_g_v1_collapse.png` | 4 | P2 — Route-G v1: the law `s_c = 1/(2β)` with every object on it (gCLM's dial, Chen–Hou 2D Boussinesq, and NS at `β = 1/2` exactly), `β` re-measured by our own dynamically-rescaled 2D machine as a modulation constant, the direct time-dependent route refused with its reason, the underpowered `p(s)` line kept for its sign structure, the cross-model calibration on gCLM's dial, and who beats the ordinary Laplacian as a signed bar |
 | `fig35_p2_route_f_v1_viscosity.png` | 4 | P2 — Route-F v1: the relevance line `p(s)` at `a = 0` with nothing fitted, THE CROSS-CHECK (`α` from a steady solve on the line against `dp/ds` from time-dependent periodic simulation), the fit-window systematic swept rather than chosen, the `ν`-independence control, a resolution ladder, and the `s_c(a) = α(a)/2` map crossing the ordinary Laplacian at `a ≈ 0.383` where `α = 2` — the NS-critical scaling |
@@ -499,6 +527,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | `p2_route_i_v1_driven.json` | Arc 4 / fig38 — I1 the integrator against the `a = 0` line of fixed points plus the BDF2 order and the gauge (projected vs raw), I2 `λ_μ` as a growth rate with every rung's seed residual and `Λ^p` truncation and three refusals, I3 the tar pit driven with the dynamic/static `K`-ladder and the fit-window sweep, I4 adiabaticity, the off-branch starts and their norm qualification (with any refusal recorded, never a NaN), I5 the stability inversion at `K = 48/96/144` with the crossover brackets against `g/K^p`, I6 the frequency profile (`Re` vs `|Im|` cutoff, inviscid and viscous), I7 the twin-trajectory control, I8 the verdict with its `τ` scales |
 | `p2_route_j_v1_literature.json` | Arc 4 / fig39 — provenance for each primary source (what was read, what it gates); J1 the Schochet constant, both candidates x 3 configurations with every residual; J2 the (E) ↔ ALS (57)-(58) parameter map, pointwise differences at four times, a second parameter set, and the `t_c` check; J3 the `c_l` ladder with the `dτ` floor, the resolved and REFUSED rungs both recorded (including what the refused ones would have read); J4 the collapse spread at four `β` plus the deepening sub-ladder that makes `β = 2` a measurement rather than a fit; J5 our branch against Xu Table 1 row by row, with `a_c` from all three sources; J6 the twelve-claim ledger, each entry naming its source, verdict and what survives |
 | `p2_route_k_v1_port.json` | Arc 4 / fig40 — K1 the steps ladder with the sup residual, `c_l`, `c_ω`, the ratio and its distance from Chen–Hou at each rung, plus Route-G's committed resolution ladder re-read and its growth factor; K2 the argmax of every field's residual in `(r, β)` with wall/outer-edge flags; K3 the instrument controls (both GMRES systems, and `‖Jv‖` at six step sizes with the inter-rung drift); K4 the Krylov ladders at BOTH seeds, unpreconditioned and preconditioned, each with its flat-or-bending verdict and the seed-dependence block; K5 the radii-polynomial status, carrying no fabricated bounds |
+| `p2_route_l_v1_precond.json` | Arc 4 / fig41 — the seed state and the measured `s_ρ` range that licenses the sweep; L1 six ablation ladders plus the ranking by ladder gain and a `worse_than_full` flag, with the un-ablated variant's agreement with `solver.rhs`; L2 the stalled Krylov residual's energy by angular band for each field against the proportional share; L3 four preconditioner ladders (none, radial-only, ADI, line sweep) with their flat-or-bending verdicts and the sweep's deeper rungs; L4 the Newton iterations with each step's GMRES residual, Krylov dimension, accepted λ and line-search flag; L5 the gauge-projection test and the hypothesis it refutes |
 | `p2_route_h_v1_critical.json` | Arc 4 / fig37 — H1 the closed-form viscous blow-up and its PDE residual in closed form, H2 the `a = 0` marginal branch (`α ≡ 1`, `α₁ = 0`), H3 the `a = 1/2` branch with the `K = 96..240` ladder and both the secant extrapolant and the chord it corrects, H4 the third point REFUSED with its signal-to-residual ratio and the verdict it would have quoted, H5 the dissipative spectrum vs `μ` with the integer ladder and the planted control, H6 the verdict with its `τ` scales, H7 the time-dependent cross-check with its `under_resolved` caveat |
 | `p2_route_g_v1_collapse.json` | Arc 4 / fig36 — G0 the law and its anchors, G1 the Chen–Hou published constants, G2 `β` from our own rescaled 2D machine (steps + resolution/domain ladders), G3 the direct route measured and refused (window report + the `p(s)` exponents), G4 the cross-model calibration including a continuation to `a < 0` |
 | `p2_route_f_v1_viscosity.json` | Arc 4 / fig35 — F1 the exact CLM solution and the run's own singular time, F2 the relevance line at `a = 0` (nothing fitted), F3 the cross-check against Route-E's `α`, F4 the `ν`-independence control, F5 a resolution ladder, F7 the fit-window systematic swept, F6 the `s_c(a)` map and its crossing of `s = 1` |
@@ -545,6 +574,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_i_v1_evidence.py         # fig38
 .venv/bin/python writeup/4_p2_lottery/p2_route_j_v1_evidence.py         # fig39
 .venv/bin/python writeup/4_p2_lottery/p2_route_k_v1_evidence.py         # fig40
+.venv/bin/python writeup/4_p2_lottery/p2_route_l_v1_evidence.py         # fig41
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):

@@ -1,0 +1,566 @@
+{
+ "leg": "Route-L v1",
+ "title": "The 2D preconditioner: the stall attributed, and removed",
+ "generated": "2026-08-04T11:57:55Z",
+ "grid": {
+  "n_r": 200,
+  "n_beta": 48,
+  "r_min": 0.001,
+  "r_max": 100000.0,
+  "seed_steps": 3000
+ },
+ "seed": {
+  "c_l": 3.060593660871532,
+  "c_omega": -1.0145055559524538,
+  "F_l2": 0.8068552446684656,
+  "F_inf": 0.025712593273872156
+ },
+ "outward_upwinding": {
+  "min_s_rho": 0.38963488051119644,
+  "max_s_rho": 5.731643960887419,
+  "holds": true
+ },
+ "consistency_checks": {
+  "full_matches_solver_rhs": 0.0
+ },
+ "L1_attribution": {
+  "ladders": {
+   "full": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.6945865983167375
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.6927262294438122
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.6908397872886123
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.6853275227453107
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.6623346212886269
+    }
+   ],
+   "velocity feedback OFF": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.8456083384061222
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.8331731108298719
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.8178500662084514
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.7930824618433788
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.7582321556862206
+    }
+   ],
+   "angular transport OFF": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.7856959098378352
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.7305580924426148
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.6337302793803151
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.4982499895994707
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.37115031179755426
+    }
+   ],
+   "velocity in s_rho OFF": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.6111466806681854
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.5958476509875364
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.5667481304070492
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.4937431700945177
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.3599311255686818
+    }
+   ],
+   "reaction terms OFF": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.7551912078500023
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.746249600032309
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.7239728236592371
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.6609954575766798
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.5817093016393788
+    }
+   ],
+   "pure dilation, no angular": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.7518345121748663
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.6630599244003331
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.5121082506746483
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.3323926464412814
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.16078281601159894
+    }
+   ]
+  },
+  "ranked": [
+   {
+    "ablation": "pure dilation, no angular",
+    "rel_at_max_dim": 0.16078281601159894,
+    "gain": 4.676087475172898,
+    "flat": false,
+    "gain_vs_full": 4.458961106486556,
+    "worse_than_full": false
+   },
+   {
+    "ablation": "angular transport OFF",
+    "rel_at_max_dim": 0.37115031179755426,
+    "gain": 2.1169210556029303,
+    "flat": false,
+    "gain_vs_full": 2.018625336363476,
+    "worse_than_full": false
+   },
+   {
+    "ablation": "velocity in s_rho OFF",
+    "rel_at_max_dim": 0.3599311255686818,
+    "gain": 1.6979545175555175,
+    "flat": true,
+    "gain_vs_full": 1.6191128148395586,
+    "worse_than_full": false
+   },
+   {
+    "ablation": "reaction terms OFF",
+    "rel_at_max_dim": 0.5817093016393788,
+    "gain": 1.2982278360028197,
+    "flat": true,
+    "gain_vs_full": 1.2379467789748182,
+    "worse_than_full": false
+   },
+   {
+    "ablation": "velocity feedback OFF",
+    "rel_at_max_dim": 0.7582321556862206,
+    "gain": 1.115236714856578,
+    "flat": true,
+    "gain_vs_full": 1.0634525471291465,
+    "worse_than_full": true
+   },
+   {
+    "ablation": "full",
+    "rel_at_max_dim": 0.6623346212886269,
+    "gain": 1.048694384970186,
+    "flat": true,
+    "gain_vs_full": 1.0,
+    "worse_than_full": false
+   }
+  ]
+ },
+ "L2_stalled_residual_bands": {
+  "omega": {
+   "wall_first3_frac": 0.06845589021489176,
+   "axis_last3_frac": 0.05846728976028975,
+   "outer_last5_frac": 0.00715198660242895
+  },
+  "eta": {
+   "wall_first3_frac": 0.07942347336784254,
+   "axis_last3_frac": 0.04964324241888001,
+   "outer_last5_frac": 3.2575646209211066e-05
+  },
+  "xi": {
+   "wall_first3_frac": 0.27446418008072826,
+   "axis_last3_frac": 0.005354086471459069,
+   "outer_last5_frac": 0.00023832439133009126
+  },
+  "proportional_share_3_of_48": 0.0625
+ },
+ "L3_preconditioners": {
+  "ladders": {
+   "none": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.6945865983167375
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.6927262294438122
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.6908397872886123
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.6853275227453107
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.6623346212886269
+    }
+   ],
+   "radial only (Route-K)": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.44620037556631326
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.43888966520325834
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.42154603709136157
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.3958085381053699
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.3592665215436665
+    }
+   ],
+   "ADI composition": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.9999933235914348
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.9994489538811941
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.9985212652701024
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.9977066662195696
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.9960371566889724
+    }
+   ],
+   "full transport line sweep": [
+    {
+     "m": 10,
+     "k": 10,
+     "rel_residual": 0.18298327763783567
+    },
+    {
+     "m": 20,
+     "k": 20,
+     "rel_residual": 0.15440307208850243
+    },
+    {
+     "m": 40,
+     "k": 40,
+     "rel_residual": 0.13133215954072971
+    },
+    {
+     "m": 80,
+     "k": 80,
+     "rel_residual": 0.09273193857088093
+    },
+    {
+     "m": 160,
+     "k": 160,
+     "rel_residual": 0.01881681857185689
+    }
+   ]
+  },
+  "line_sweep_deeper": [
+   {
+    "m": 240,
+    "k": 240,
+    "rel_residual": 0.0002011529525450162
+   },
+   {
+    "m": 320,
+    "k": 320,
+    "rel_residual": 3.2651730424486987e-06
+   }
+  ],
+  "stalls": {
+   "none": {
+    "rel_at_min_dim": 0.6945865983167375,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.6623346212886269,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.048694384970186,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "radial only (Route-K)": {
+    "rel_at_min_dim": 0.44620037556631326,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.3592665215436665,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.2419759393363918,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "ADI composition": {
+    "rel_at_min_dim": 0.9999933235914348,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.9960371566889724,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 1.0039719069473407,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   },
+   "full transport line sweep": {
+    "rel_at_min_dim": 0.18298327763783567,
+    "min_dim": 10,
+    "rel_at_max_dim": 0.01881681857185689,
+    "max_dim": 160,
+    "work_ratio": 16.0,
+    "residual_gain": 9.724453522207629,
+    "flat": false,
+    "reading": "bending => finite ill-conditioning, and more Krylov work would help"
+   }
+  }
+ },
+ "L5_gauge_projected_newton": {
+  "iterations": [
+   {
+    "iter": 0,
+    "F_l2": 0.8068552446684656,
+    "F_inf": 0.025712593273872156,
+    "gmres_rel": 0.0024760577782071895,
+    "step_lambda": 0.0009765625,
+    "line_search_ok": false
+   }
+  ],
+  "F_l2_end": 0.8068552446684656,
+  "F_inf_end": 0.025712593273872156,
+  "reduction_factor": 1.0,
+  "converged": false,
+  "hypothesis": "L4's linear solves succeed while Newton creeps with the line search capped at 1/64 -- the signature of a near-null direction in DF, not of a spectral failure. The scaling symmetry is the candidate: run(renorm=True) pins omega_x(0) and eta_x(0) after every relaxation step and F does not contain that constraint."
+ },
+ "L4_newton": {
+  "iterations": [
+   {
+    "iter": 0,
+    "F_l2": 0.8068552446684656,
+    "F_inf": 0.025712593273872156,
+    "gmres_rel": 0.0024760577782071895,
+    "gmres_k": 200,
+    "step_lambda": 0.03125,
+    "line_search_ok": true
+   },
+   {
+    "iter": 1,
+    "F_l2": 0.7630403741753039,
+    "F_inf": 0.021621549721604707,
+    "gmres_rel": 0.002181472792107318,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 2,
+    "F_l2": 0.7566036791779174,
+    "F_inf": 0.020964722686358954,
+    "gmres_rel": 0.0021493659152042707,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 3,
+    "F_l2": 0.751912306205307,
+    "F_inf": 0.02039224433588349,
+    "gmres_rel": 0.0021332548249387508,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 4,
+    "F_l2": 0.7484296660382105,
+    "F_inf": 0.019883700568344227,
+    "gmres_rel": 0.0021291769509789193,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 5,
+    "F_l2": 0.7458012750857005,
+    "F_inf": 0.019455185270614836,
+    "gmres_rel": 0.0020815714145498666,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 6,
+    "F_l2": 0.7438168428518368,
+    "F_inf": 0.019070714150713226,
+    "gmres_rel": 0.002070311209545207,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 7,
+    "F_l2": 0.7422743706176492,
+    "F_inf": 0.018711804382530547,
+    "gmres_rel": 0.002056259238066662,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 8,
+    "F_l2": 0.7410714551318397,
+    "F_inf": 0.01837366479372176,
+    "gmres_rel": 0.002046493512795093,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 9,
+    "F_l2": 0.7401026609697183,
+    "F_inf": 0.01805292046366146,
+    "gmres_rel": 0.0020330436989272017,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 10,
+    "F_l2": 0.7392763809309791,
+    "F_inf": 0.017747013080206684,
+    "gmres_rel": 0.0020196457399510167,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   },
+   {
+    "iter": 11,
+    "F_l2": 0.7385277963000687,
+    "F_inf": 0.017453791976785232,
+    "gmres_rel": 0.0020181393655021363,
+    "gmres_k": 200,
+    "step_lambda": 0.015625,
+    "line_search_ok": true
+   }
+  ],
+  "F_l2_start": 0.8068552446684656,
+  "F_l2_end": 0.737804720351146,
+  "F_inf_end": 0.017171557455579908,
+  "reduction_factor": 1.0935891604006764,
+  "converged": false
+ },
+ "K5_radii_polynomial": {
+  "status": "BLOCKED_AT_STEP_ONE",
+  "closes": false,
+  "why": "no fixed profile (the relaxation limit-cycles and its residual grows under refinement), so Y_0 is undefined; and no approximate inverse A (the Krylov solve stalls), so Z_1 cannot be bounded. There is no radii polynomial to evaluate."
+ },
+ "wall_clock_seconds": 755.6
+}
