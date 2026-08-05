@@ -339,7 +339,7 @@ def fit_exponent(k, hk, k_lo, k_hi):
     #     a symmetry-annihilated sub-sequence (1/(1+|X|) kills every even mode), whose
     #     value is ~1e-18; its log is -41 against a trend of -12 and it captures the
     #     entire least squares.  That returned p = -0.25 for a spectrum whose
-    #     k^2 |h_k| is flat to three digits over eight octaves.
+    #     k^2 |h_k| is flat to 2.3% over k = 9..129 and to three digits from k = 33 on.
     min_count = 8
     lk = np.log(kk)
     nb0 = min(64, max(4, int(kk.size // min_count)))
