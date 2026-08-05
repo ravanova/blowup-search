@@ -2787,3 +2787,45 @@ Four parallel legs closed this cycle (see `experiments/journal/leg_54.md` throug
   (`solver/certificate_shapes.py`, 15/15 gates, 4 papers).
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
+
+## Legs 60-70 (2026-08-06) — the eight gates that answered after MM/NB/TN/XS
+
+Freshness audit (leg 72, Route-JR). Eight legs have answered their gate since the
+`Legs 54-57` entry above and none had a pointer here. Pointers only; every headline
+below is copied from that leg's own `experiments/journal/leg_N.md`, not re-derived.
+Full detail and the audit's own counts: `writeup/novelty/leg_72.md`,
+`experiments/journal/leg_72.md`.
+
+- **Leg 60 (Route-PQ) — NO, parked and escalated (§8 escalation #4):** Route-PORT v1/v2's
+  reproduction ledger re-derives 111 of 114 quoted numbers from stored curated data; 3 do
+  not. The two numbers the standing bans actually rest on re-derive exactly. Branch
+  `leg/pq-v1` pushed, **not merged** — so its journal and novelty files exist on that
+  branch and not on `main`.
+- **Leg 64 (Route-A12) — SPLIT:** YES on the `sigma = 3` half (Xu Tier 1, `s*(1/2) = 3`
+  exact), NO on `alpha_1 = +0.133683`, which is searched-and-not-found across the arXiv
+  CLM corpus. Three corrections reported, none applied.
+- **Leg 65 (Route-L1G) — NO:** the weighted-`ell^1` no-go and the discrete-ball trap are
+  not published; the last two unread Tier-2 papers are now read in full text and the
+  nearest cousin is located and quoted.
+- **Leg 66 (Route-QF) — YES:** dedicated unit tests for `spectral_utils`, `gclm`,
+  `boussinesq` (41 checks) found a real odd-`n` `derivative_hat` defect, visible only
+  because the module was tested directly. Zero current blast radius (every live call site
+  uses even `n`); pinned, and repaired outside the leg system.
+- **Leg 67 (Route-FD) — NO** for the quantity this repository holds: the published 2D
+  Boussinesq criticality is `alpha + beta = 1`, a different object from `s_c`; no
+  blow-up-arrest exponent is published. `s_c` stays internally-consistent-only.
+- **Leg 68 (Route-IX) — YES:** 25 of 25 quartet pieces present for legs 53-57, so
+  `writeup/INDEX.md` was caught up — five Arc 4 rows added (TC/MM/NB/TN/XS), stale
+  in-progress text deleted.
+- **Leg 69 (Route-IA) — NO, stop-the-line:** `solver/interval.py` is sound over the normal
+  range (0 of 12356 failures) and unsound in the subnormal band (62 of 1680), with silent
+  NaN above `2^997`. Live operators (0.5-128) sit ~140-298 decades clear of the failure
+  band; repair dispatched outside the leg system.
+- **Leg 70 (Route-RC) — NO:** `solver/rescaled_spectrum.py` imposes no origin condition;
+  the 141/144 count is `K-3`, i.e. the maximal `L^2` realization's continuum, not a Morse
+  index.
+
+No link of the L1->L4 chain moved in any of the eight. Clay unchanged at ~0.05%.
+
+Legs 58, 59, 61, 62, 63 and 71 have branch progress but no answered gate, so they are
+deliberately absent from this block.
