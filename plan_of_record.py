@@ -289,42 +289,47 @@ STAGES = [
         "name": ("Certify HL_S2_nonsymmetric FOR REAL: interval arithmetic + an analytic "
                  "far-field enclosure"),
         "status": "NEXT",
+        "progress": (
+            "STEP ONE DONE (leg 50): solver/interval_certificate.py wires solver/interval.py "
+            "through the bordered residual. The radii polynomial CLOSES IN INTERVAL "
+            "ARITHMETIC at all three rungs -- rigorous Z_1 = 8.59e-09 / 5.71e-08 / 1.54e-07 "
+            "at n = 201/401/801, all below 1; Y_0/budget = 2.282e-03 at n=201 where the naive "
+            "evaluation path gives 1.479 and fails. **But the claim is only about the "
+            "FINITE-DIMENSIONAL polynomial system with H, D, Uop taken as EXACT STORED DATA.** "
+            "Two gaps remain between that and a theorem about the continuum profile, and "
+            "BOTH are artifacts of the representation -- see deliverable."),
         "why_here": (
             "The ONLY movable link of the chain (L2 and L3 are occupied by Chen-Hou, L4 is "
-            "out of reach by Wall 2), a novel result in its own right, AND the prerequisite "
-            "for V-rigorous. Leg 46 got the polynomial to close in float on an uncertified "
-            "object; leg 47 priced what stands between that and a proof."),
+            "out of reach by Wall 2), a novel result in its own right, and the object is "
+            "uncertified (CHL April 2026, numerical only, no proof of any kind)."),
         "deliverable": (
-            "(1) INTERVAL ARITHMETIC: wire solver/interval.py -- which exists as an "
-            "arithmetic layer and has NEVER been connected to a certificate -- through the "
-            "bordered residual, so Z_1 BOUNDS an operator norm instead of measuring float "
-            "conditioning. (2) A TAIL LEMMA: a rigorous bound for |X| > X_max from the "
-            "asymptotic expansion, error folded into the budget, so the finite-dimensional "
-            "certificate plus the tail covers R. Leg 47 proved this is FORCED -- reach makes "
-            "the gap worse at +0.47 decades per unit rho."),
-        "progress": (
-            "**STEP ONE IS DONE, leg 50 (Route-L1 v1).** solver/interval_certificate.py + "
-            "solver/interval.dot2_matvec + test_interval_certificate.py 7/7. The radii "
-            "polynomial CLOSES IN INTERVAL ARITHMETIC on HL_S2_nonsymmetric at n = "
-            "201/401/801 (Y_0/budget 2.28e-03, 2.20e-02, 2.07e-02; Z_1 < 1 rigorously at "
-            "every rung) -- FOR THE TRUNCATED DISCRETE SYSTEM built from the stored "
-            "operators as exact data. The first answer was NO by 1.48x and the term that "
-            "ran out was ARITHMETIC, not mathematics: at a converged iterate ||F|| = "
-            "5.7e-15 assembled from terms of size 3e-02, and the naive interval matvec "
-            "enclosed it 2.3e-12 wide. Compensated (Ogita-Rump-Oishi) evaluation tightened "
-            "the slope operator by 10664x and the certificate closed. Enclosures gated "
-            "against EXACT RATIONAL arithmetic, not against float. STEP TWO -- THE TAIL "
-            "LEMMA -- IS UNTOUCHED, and the gate below is not answered until it is."),
+            "**CHANGE THE REPRESENTATION; DO NOT PUSH THE CURRENT ONE.** The two remaining "
+            "gaps -- (a) the truncation tail |X| > X_max, and (b) H/D/Uop being finite-"
+            "difference approximations treated as exact data -- are BOTH consequences of "
+            "certifying on a truncated finite-difference grid. Route-E's compactified basis "
+            "(X = tan(theta/2), odd sines, solver/rescaled_spectrum.py) removes both by "
+            "construction: its own docstring says three operators are exact on the WHOLE LINE "
+            "with NO TRUNCATION AND NO QUADRATURE, and the velocity is exact too. Rebuild the "
+            "bordered certificate there. (a) becomes a SPECTRAL TAIL BOUND on neglected "
+            "Fourier coefficients -- the standard radii-polynomial move -- and (b) vanishes. "
+            "**Expect the algebraic tail to bite:** Omega ~ |X|^-0.394 is non-smooth at "
+            "theta = pi, so coefficients decay ALGEBRAICALLY (~k^-1.4) and geometric ell^1 "
+            "weights fail. Two responses, in order: factor the tail out (Omega = "
+            "(1+X^2)^(-p/2) Psi, so Psi is smooth and its coefficients decay geometrically), "
+            "and if that is not enough, ALGEBRAIC weights -- which is exactly the one "
+            "methodological claim Route-J's literature pass found NO hit for."),
         "gate": {
             "question": "Does the polynomial close in INTERVAL arithmetic, tail included?",
             "if_yes": ("That is a novel Tier-3 result on an object with no proof of any kind. "
                        "Report it as such, and only as such -- it is not Clay and not a step "
                        "toward it."),
             "if_no": ("STOP AND REPORT which term ran out of margin -- the interval widening, "
-                      "or the tail. Do not harden. Either answer prices the road for whoever "
-                      "comes next."),
+                      "the spectral tail, or the weight class. Do not harden. If it is the "
+                      "WEIGHT CLASS, that is the methodological finding and it should be "
+                      "written up as one rather than treated as a failure."),
         },
-        "time_box": "two legs minimum; the tail lemma is mathematics, not compute",
+        "time_box": ("two legs: the basis rebuild, then the tail bound. The tail is "
+                     "mathematics, not compute."),
     },
     {
         "id": "B",

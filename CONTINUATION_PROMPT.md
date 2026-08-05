@@ -8,45 +8,65 @@
 
 ---
 
-# DIRECTIVE 1 — ROUTE-L1: THE ONLY MOVABLE LINK, AND THE LEG THAT JUST PRICED IT
+# DIRECTIVE 1 — ROUTE-L1: CHANGE THE REPRESENTATION. DO NOT PUSH THE CURRENT ONE.
 
-`L1` = certify `HL_S2_nonsymmetric` **for real**. Two costs, both named, neither optional:
+`L1` = certify `HL_S2_nonsymmetric` **for real** — the non-symmetric self-similar Hou–Luo
+profile, reported by Chen–Huang–Li in April 2026 as *numerical only, no proof of any kind*.
+**It is the only movable link of the chain** and it is a genuine, citable result if it lands.
 
-1. **INTERVAL ARITHMETIC.** `solver/interval.py` exists as an arithmetic layer and **has
-   never been wired to a certificate**. Until it is, `Z₁` measures float *conditioning*
-   rather than bounding an operator norm.
-2. **A TAIL LEMMA — forced, not optional.** A rigorous bound for `|X| > X_max` from the
-   asymptotic expansion, folded into the budget. **Leg 47 measured that reach makes the
-   gap WORSE (+0.47 decades per unit `ρ`)**, so there is no domain size at which brute
-   force closes it.
+## What leg 50 already did — step one is DONE
 
-**LEG 49 TURNED (1) FROM A PRINCIPLE INTO A NUMBER, AND IT IS THE REASON L1 IS NEXT.** On
-a known-answer object (a=0 CLM, closed form since 1985), with the profile getting *better*
-under refinement, the certificate **stops closing** as the grid refines — and the cause is
-not the object:
+`solver/interval_certificate.py` wires `solver/interval.py` through the bordered residual.
+**The radii polynomial closes in INTERVAL arithmetic at all three rungs**: rigorous
+`Z₁ = 8.59e−09 / 5.71e−08 / 1.54e−07` at `n = 201/401/801`, all below 1, with
+`Y₀/budget = 2.282e−03` at `n = 201` where the naive evaluation path gives 1.479 and fails.
+The float expiry date leg 49 measured is no longer the binding constraint.
 
-| `n` | lower wall `p₋` (`Z₁ = 1`) | `Z₁` at `p = 0` | `Y₀/budget` | closes? |
-|---|---|---|---|---|
-| 201 | −3.684 | 9.92e−09 | 3.31e−03 | **✓** |
-| 401 | −2.854 | 1.25e−06 | 3.09e+01 | ✗ |
-| 801 | −1.640 | 4.13e−04 | 2.40e+05 | ✗ |
-| 1601 | −1.003 | 7.55e−02 | 8.57e+07 | ✗ |
-| 3201 | ≥ +3 (band EMPTY) | **1.64e+01** | `+∞` | ✗ |
+**But read the claim as leg 50 states it, and do not widen it.** It is a theorem about the
+**finite-dimensional polynomial system with `H`, `D`, `Uop` taken as EXACT STORED DATA** —
+not about the continuum profile.
 
-`Z₁` here is `κ(DF)·ε_mach`, and it eats the admissible weight band from below until, at
-**n ≈ 3.2e+03**, no weight closes anything. **The float rehearsal has a measured expiry
-date.** Treat that as L1's motivation and as its first gate: the interval version must
-beat the float one *at a resolution where the float one has already failed*, or it has
-demonstrated nothing.
+## The two remaining gaps are the SAME gap, and it is the representation
 
-**Gate:** does the polynomial close in *interval* arithmetic, tail included? **Yes** → a
-novel Tier-3 result on an uncertified object; report it as that and only that. **No** →
-stop and report *which* term ran out of margin, the interval widening or the tail. Either
-answer prices the road.
+1. **the truncation tail**, `|X| > X_max` — and leg 47 measured that reach makes it **worse**
+   (+0.47 decades per unit `ρ`), so no domain size closes it;
+2. **the operators** — `H`, `D`, `Uop` are finite-difference approximations being treated as
+   exact.
 
-**BEFORE WRITING A SOLVER, GREP `capabilities.py` FOR THE OBJECT.** 38 modules are indexed
-with what each holds and the strongest known-answer gate on it. Leg 45 nearly rebuilt
-`RescaledHLScenario2` from scratch. That ban is permanent.
+**Both exist only because the certificate is built on a truncated finite-difference grid.**
+
+## The move: rebuild the certificate in Route-E's compactified basis
+
+`solver/rescaled_spectrum.py`, `X = tan(θ/2)` with odd sines. Its own docstring:
+
+> *three operators are then exact on the whole line with **no truncation and no
+> quadrature*** — `H(sin kθ) = −cos kθ + (−1)^k`, the dilation `X d/dX = sin θ d/dθ`, and
+> `d/dX = (1+cos θ) d/dθ` — **and the velocity is exact too**, via
+> `N_{k+1} = −2N_k − N_{k−1} − 2cos kt`.
+
+Rebuild there and **gap (2) vanishes outright**, while **gap (1) becomes a spectral tail
+bound on neglected Fourier coefficients** — which is the standard radii-polynomial move, not
+a bespoke asymptotic enclosure. Two open-ended obstacles collapse into one well-understood
+one.
+
+## Expect the algebraic tail to bite — and that is the interesting part
+
+`Ω ~ |X|^{−0.394}` is **non-smooth at `θ = π`**, so the sine coefficients decay
+*algebraically* (`~k^{−1.4}`), not geometrically. `ℓ¹` still converges; **geometric `ℓ¹`
+weights do not.** Two responses, in order:
+
+1. **Factor the tail out** — `Ω = (1+X²)^{−p/2} Ψ`, so `Ψ` is smooth and its coefficients
+   decay geometrically. Standard singularity-subtraction; try this first.
+2. If that is not enough, **algebraic weights** — and note what that is: *"standard
+   radii-polynomial work uses GEOMETRIC weights on bounded domains while ours is ALGEBRAIC
+   decay on an UNBOUNDED one"* is **the one methodological claim Route-J's literature pass
+   found NO hit for.** If the weight class is what blocks, **that is the contribution**, and
+   it should be written up as a result rather than filed as a failure.
+
+**Gate:** does the polynomial close in interval arithmetic, tail included? **Yes** → a novel
+Tier-3 result on an uncertified object; report it as that and only that. **No** → stop and
+report *which* term ran out of margin — the interval widening, the spectral tail, or the
+weight class. **If it is the weight class, write it up.**
 
 ---
 
