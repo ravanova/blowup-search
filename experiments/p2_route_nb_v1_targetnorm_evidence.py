@@ -12,7 +12,7 @@ actually used.  It is DIVERGENT at `s = 1`, which is where leg 51 measured the o
 be least bad.  Both halves matter, and they are the two sides of an empty window.
 
 Rebuild fig50 from committed data (no recomputation):
-    .venv/bin/python writeup/4_p2_lottery/p2_route_nb_v1_targetnorm_evidence.py
+    .venv/bin/python experiments/p2_route_nb_v1_targetnorm_evidence.py
 Regenerate the data (deterministic, ~9 min):
     .venv/bin/python -u experiments/p2_route_nb_v1_targetnorm.py
 
@@ -32,10 +32,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-DATA = Path(__file__).resolve().parents[1] / "data"
-FIGS = Path(__file__).resolve().parents[1] / "figures"
+DATA = ROOT / "writeup" / "data"
+FIGS = ROOT / "writeup" / "figures"
 JSON = DATA / "p2_route_nb_v1_targetnorm.json"
 C = {"bad": "#c1440e", "good": "#2e7d32", "anchor": "#1f4e79",
      "warn": "#e08a1e", "grey": "#888888", "ours": "#7b1fa2"}

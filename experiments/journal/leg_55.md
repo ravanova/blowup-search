@@ -116,7 +116,7 @@ exponent**, explicitly not an attempt to close the certificate's truncation gap 
 
 Territory: `solver/target_norm.py`, `test_target_norm.py`,
 `experiments/p2_route_nb_v1_targetnorm.py`,
-`writeup/4_p2_lottery/p2_route_nb_v1_targetnorm_evidence.py`,
+`experiments/p2_route_nb_v1_targetnorm_evidence.py`,
 `writeup/4_p2_lottery/BLOG_P2_ROUTENB_V1.md`, `.../TECHNICAL_P2_ROUTENB_V1.md`,
 `writeup/data/p2_route_nb_v1_targetnorm.json`,
 `writeup/figures/fig50_route_nb_v1_targetnorm.png`, `writeup/novelty/leg_55.md`,

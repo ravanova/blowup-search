@@ -187,6 +187,6 @@ predicted `1.795`, roughly twice as fast as `Ω`, so `Ω` alone sets the window.
 
 *Everything reproducible: `.venv/bin/python experiments/p2_route_nb_v1_targetnorm.py`
 regenerates the data in about four minutes;
-`.venv/bin/python writeup/4_p2_lottery/p2_route_nb_v1_targetnorm_evidence.py` rebuilds the
+`.venv/bin/python experiments/p2_route_nb_v1_targetnorm_evidence.py` rebuilds the
 figure from the committed JSON without recomputing anything;
 `.venv/bin/python test_target_norm.py` runs 23 gates.*
