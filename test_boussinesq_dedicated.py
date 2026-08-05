@@ -16,8 +16,10 @@ Test convention (repo-wide): self-running script, no pytest.
 
 CONTRAST WITH THE 1D MODULE (leg 66's finding): this module's spectral
 derivative is correct on ODD grids as well as even ones -- see
-check_derivative_odd_n_is_correct_here. The defect leg 66 found is specific
-to solver/spectral_utils.derivative_hat.
+check_derivative_odd_n_is_correct_here. The defect leg 66 found was specific
+to solver/spectral_utils.derivative_hat, and has since been fixed (Leg 0,
+bench/fix-derivative-hat-odd-n); this contrast check is what localized it to
+the 1D helper and is kept as the regression guard for the 2D path.
 """
 
 import numpy as np
@@ -127,12 +129,12 @@ def check_dealias_mask2d():
 def check_derivative_odd_n_is_correct_here():
     """The 2D spectral derivative is exact at ODD n too.
 
-    Recorded deliberately: solver/spectral_utils.derivative_hat is NOT (leg
-    66's finding -- it unconditionally zeroes the last rfft coefficient,
-    which is the Nyquist mode only when n is even). This module builds i*KX
-    from a full fft2 and has no such special case, so it is clean. Measured
-    relative sup error at n = 17, 33 on the top mode: ~6e-15 and ~7e-15,
-    against 1.000 for the 1D helper.
+    Recorded deliberately: solver/spectral_utils.derivative_hat was NOT (leg
+    66's finding -- it unconditionally zeroed the last rfft coefficient,
+    which is the Nyquist mode only when n is even; fixed by Leg 0). This
+    module builds i*KX from a full fft2 and has no such special case, so it
+    was clean throughout. Measured relative sup error at n = 17, 33 on the
+    top mode: ~6e-15 and ~7e-15, against 1.000 for the unfixed 1D helper.
     """
     out = {}
     for n in (16, 17, 32, 33):

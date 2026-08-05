@@ -71,7 +71,7 @@ def _nonlinear_rhs_hat(w_hat, k, mask, a, frozen_u):
     """Dealiased spectral RHS of the nonlinear terms: -a*u*w_x + w*u_x."""
     n = 2 * (len(w_hat) - 1)
     w = np.fft.irfft(w_hat, n)
-    w_x = np.fft.irfft(derivative_hat(w_hat, k), n)
+    w_x = np.fft.irfft(derivative_hat(w_hat, k, n), n)
     if frozen_u is not None:
         u = np.full(n, frozen_u)
         u_x = np.zeros(n)
@@ -242,7 +242,7 @@ def energy_from_gradient(w):
     """(1/2)∫w_x² — dissipation integrand for the linear-only energy balance."""
     n = len(w)
     k = wavenumbers(n)
-    w_x = np.fft.irfft(derivative_hat(np.fft.rfft(w), k), n)
+    w_x = np.fft.irfft(derivative_hat(np.fft.rfft(w), k, n), n)
     return np.pi * float(np.mean(w_x * w_x))
 
 

@@ -49,11 +49,31 @@ def velocity_hat(w_hat, k):
     return u_hat
 
 
-def derivative_hat(w_hat, k):
-    """Spectral d/dx: multiply by i*k (Nyquist mode zeroed, standard for odd
-    derivatives of real fields)."""
+def derivative_hat(w_hat, k, n):
+    """Spectral d/dx on an n-point real grid: multiply by i*k.
+
+    The last rfft coefficient is zeroed ONLY when n is even, where it is the
+    Nyquist mode -- an odd derivative of a real field has no well-defined
+    value there, and dropping it is the standard treatment. When n is ODD
+    there is no Nyquist mode: rfftfreq runs 0..(n-1)/2 and the last entry is
+    an ordinary, fully resolved wavenumber, differentiated like any other.
+
+    `n` is REQUIRED and cannot be inferred: rfft of an n-point real signal
+    has n//2 + 1 coefficients, which is the same count for n = 2m and
+    n = 2m - 1 (n = 8 and n = 9 both give 5), and `wavenumbers` returns the
+    identical integers for both. The parity therefore has to come from the
+    caller. Before Leg 0's fix this function took (w_hat, k) and zeroed the
+    last coefficient unconditionally, which destroyed the k = (n-1)/2 mode at
+    odd n -- relative sup error 1.000 on data supported there (leg 66). The
+    defect was latent: every call site passed an even n.
+    """
+    if len(w_hat) != n // 2 + 1:
+        raise ValueError(
+            f"derivative_hat: {len(w_hat)} rfft coefficients is not the "
+            f"{n // 2 + 1} expected for an n={n} grid"
+        )
     d = 1j * k * w_hat
-    if len(w_hat) > 1:
+    if n % 2 == 0 and len(w_hat) > 1:
         d[-1] = 0.0
     return d
 
@@ -89,7 +109,7 @@ def energy_production(w, a, nu):
     k = wavenumbers(n)
     w_hat = np.fft.rfft(w)
     h_w = np.fft.irfft(hilbert_hat(w_hat, k), n)
-    w_x = np.fft.irfft(derivative_hat(w_hat, k), n)
+    w_x = np.fft.irfft(derivative_hat(w_hat, k, n), n)
     prod = (a / 2.0 + 1.0) * TWO_PI * float(np.mean(w * w * h_w))
     diss = nu * TWO_PI * float(np.mean(w_x * w_x))
     return prod - diss

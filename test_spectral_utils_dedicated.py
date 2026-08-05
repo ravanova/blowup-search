@@ -15,10 +15,13 @@ WITHOUT the module's own machinery.
 Test convention (repo-wide): self-running script, no pytest.
     .venv/bin/python test_spectral_utils_dedicated.py
 
-FINDING (leg 66, gate answered YES): `derivative_hat` is wrong on ODD-length
-grids -- see check_derivative_odd_n_known_defect below. Pinned, not patched:
-under this leg's territory rules a bug in solver/ is reported, not silently
-fixed.
+FINDING (leg 66, gate answered YES): `derivative_hat` was wrong on ODD-length
+grids -- relative sup error 1.000 on data supported at k = (n-1)/2. Leg 66
+pinned the defect rather than patching it (its territory rules report bugs in
+solver/ rather than fixing them silently) and recorded the corrected reference
+beside the pin. FIXED by Leg 0 on bench/fix-derivative-hat-odd-n; the pin is
+now `check_derivative_odd_n` below, asserting that corrected reference. Even-n
+behaviour is unchanged bit-for-bit.
 """
 
 import numpy as np
@@ -42,7 +45,7 @@ TOL = 1e-12
 
 def _d(w, n):
     """Physical-space spectral derivative of w on an n-point grid."""
-    return np.fft.irfft(derivative_hat(np.fft.rfft(w), wavenumbers(n)), n)
+    return np.fft.irfft(derivative_hat(np.fft.rfft(w), wavenumbers(n), n), n)
 
 
 def _h(w, n):
@@ -243,10 +246,10 @@ def check_derivative_even_n():
     return out
 
 
-def check_derivative_odd_n_known_defect():
-    """KNOWN DEFECT, leg 66 -- PINNED, NOT FIXED.
+def check_derivative_odd_n():
+    """Spectral d/dx is exact on ODD-length grids too (leg 66 defect, FIXED).
 
-    `derivative_hat` ends with
+    HISTORY. `derivative_hat` used to end with an unconditional
 
         d = 1j * k * w_hat
         if len(w_hat) > 1:
@@ -254,26 +257,28 @@ def check_derivative_odd_n_known_defect():
 
     zeroing the LAST rfft coefficient. For EVEN n that entry is the Nyquist
     mode and zeroing it is the standard, correct treatment of odd derivatives
-    of real fields (checked above). For ODD n there IS no Nyquist mode: the
-    last entry is k = (n-1)/2, an ordinary, fully resolved wavenumber, and
-    zeroing it DESTROYS it. The returned derivative of sin(((n-1)/2) x) is
-    identically zero.
+    of real fields (checked in check_derivative_even_n above, and still done).
+    For ODD n there IS no Nyquist mode: the last entry is k = (n-1)/2, an
+    ordinary, fully resolved wavenumber, and zeroing it DESTROYED it -- leg 66
+    measured relative sup error 1.000 on sin(((n-1)/2) x) at n = 17, 65, 129,
+    and 7.62e-01 at n = 65 on sin(x) + 0.1*sin(32x). On smooth analytic data
+    the top mode is negligible and the error stayed at round-off (7.3e-15 for
+    exp(sin x) at n = 65), which is why every indirect test missed it -- and
+    why it was dangerous: invisible until the field develops grid-scale
+    content, which is exactly the regime a blow-up study runs in. The defect
+    was LATENT: every call site passed an even n, so no recorded measurement
+    was ever affected.
 
-    Magnitude: relative sup error 1.000 (the whole mode is lost) on data
-    supported at k = (n-1)/2; 7.62e-01 at n = 65 on sin(x) + 0.1*sin(32x).
-    On smooth analytic data the top mode is negligible and the error stays at
-    round-off (7.3e-15 for exp(sin x) at n = 65), which is why every indirect
-    test misses it -- and why it is dangerous: it is invisible until the field
-    develops grid-scale content, which is exactly the regime a blow-up study
-    runs in.
+    THE FIX (Leg 0, bench/fix-derivative-hat-odd-n). `d[-1] = 0.0` is now
+    conditional on n being even. `n` had to become a REQUIRED argument: an
+    rfft coefficient array cannot reveal the parity of the grid it came from
+    (n = 2m and n = 2m-1 both give m coefficients, and `rfftfreq` returns the
+    same integers 0..m-1 for both), so the old two-argument signature could
+    not compute `n % 2`. A stale two-argument call now raises TypeError
+    rather than silently returning a wrong derivative.
 
-    Every call site in this repository currently passes an even n, so the
-    defect is LATENT, not active. No recorded measurement is affected.
-
-    This test pins the CURRENT (wrong) behaviour and simultaneously records
-    the reference the corrected operator must reproduce. When `d[-1] = 0.0`
-    is made conditional on n being even, THIS TEST WILL FAIL -- that failure
-    is the intended signal to delete the pin and keep `corrected_err`.
+    This check asserts the CORRECTED behaviour, at the reference values leg 66
+    recorded beside its pin.
     """
     out = {}
     for n in (17, 65, 129):
@@ -281,21 +286,17 @@ def check_derivative_odd_n_known_defect():
         kt = (n - 1) // 2  # the highest resolved mode; NOT Nyquist
         w = np.sin(kt * x)
         dw_exact = kt * np.cos(kt * x)
-        got = _d(w, n)
 
-        rel = float(np.max(np.abs(got - dw_exact))) / float(np.max(np.abs(dw_exact)))
-        out[f"n{n}_current_rel_err"] = rel
-        assert rel > 0.99, (n, rel)  # PINNED DEFECT: the mode is destroyed
-        out[f"n{n}_returned_max_abs"] = float(np.max(np.abs(got)))
-        assert out[f"n{n}_returned_max_abs"] < 1e-9, (n, out)
+        rel = float(np.max(np.abs(_d(w, n) - dw_exact))) / float(np.max(np.abs(dw_exact)))
+        out[f"n{n}_top_mode_rel_err"] = rel
+        assert rel < 1e-12, (n, rel)  # was 1.000 before the fix
 
-        # what the operator would give without the unconditional d[-1] = 0
-        corrected = np.fft.irfft(1j * wavenumbers(n) * np.fft.rfft(w), n)
-        cerr = float(np.max(np.abs(corrected - dw_exact))) / float(np.max(np.abs(dw_exact)))
-        out[f"n{n}_corrected_rel_err"] = cerr
-        assert cerr < 1e-12, (n, cerr)
+        # the corrected operator is exactly "multiply by i*k", no special case
+        ref = np.fft.irfft(1j * wavenumbers(n) * np.fft.rfft(w), n)
+        out[f"n{n}_matches_ik_reference"] = float(np.max(np.abs(_d(w, n) - ref)))
+        assert out[f"n{n}_matches_ik_reference"] == 0.0, (n, out)
 
-    # the mixed-content magnitude quoted in the docstring
+    # the mixed-content case: 7.62e-01 before the fix
     n = 65
     x = grid(n)
     kt = (n - 1) // 2
@@ -304,17 +305,39 @@ def check_derivative_odd_n_known_defect():
     out["n65_mixed_rel_err"] = float(
         np.max(np.abs(_d(w, n) - dw_exact))
     ) / float(np.max(np.abs(dw_exact)))
-    assert out["n65_mixed_rel_err"] > 0.5, out
+    assert out["n65_mixed_rel_err"] < 1e-12, out
 
-    # smooth data is unaffected -- this is the reason no indirect test caught it
+    # smooth data was unaffected then and must stay unaffected now
     w = np.exp(np.sin(x))
     dw_exact = np.cos(x) * w
     out["n65_smooth_rel_err"] = float(
         np.max(np.abs(_d(w, n) - dw_exact))
     ) / float(np.max(np.abs(dw_exact)))
     assert out["n65_smooth_rel_err"] < 1e-12, out
-    return out
 
+    # EVEN n keeps the Nyquist zeroing, exactly: the last returned coefficient
+    # is identically 0, whatever the data. (Asserted on the coefficient rather
+    # than in physical space: irfft of a round-off-level spectrum scaled by
+    # k = n/2 leaves ~1e-12 of noise, which says nothing either way.)
+    rng = np.random.default_rng(660)
+    for n in (16, 64, 128):
+        for w in (np.sin((n // 2) * grid(n)), rng.standard_normal(n)):
+            d = derivative_hat(np.fft.rfft(w), wavenumbers(n), n)
+            out[f"n{n}_nyquist_coeff"] = complex(d[-1])
+            assert d[-1] == 0.0, (n, d[-1])
+
+    # the parity cannot be inferred from the coefficient array -- which is why
+    # n is required. Same rfft length, same wavenumbers, different answers.
+    out["n8_len"] = len(wavenumbers(8))
+    out["n9_len"] = len(wavenumbers(9))
+    assert out["n8_len"] == out["n9_len"], out
+    assert np.array_equal(wavenumbers(8), wavenumbers(9)), out
+    try:
+        derivative_hat(np.zeros(5, dtype=complex), wavenumbers(8))
+        raise AssertionError("two-argument derivative_hat must not be callable")
+    except TypeError:
+        out["two_arg_call_raises"] = True
+    return out
 
 # --- integral / l1_norm / energy: hand-computable values -----------------
 
@@ -435,7 +458,7 @@ CHECKS = [
     check_hilbert_algebra,
     check_velocity_hat,
     check_derivative_even_n,
-    check_derivative_odd_n_known_defect,
+    check_derivative_odd_n,
     check_integral_quantities,
     check_energy_production,
 ]
@@ -469,8 +492,8 @@ def test_derivative_even_n():
     check_derivative_even_n()
 
 
-def test_derivative_odd_n_known_defect():
-    check_derivative_odd_n_known_defect()
+def test_derivative_odd_n():
+    check_derivative_odd_n()
 
 
 def test_integral_quantities():

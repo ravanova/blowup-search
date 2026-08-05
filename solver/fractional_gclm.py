@@ -171,7 +171,7 @@ class FractionalGCLM:
         out = w * u_x
         if self.a != 0.0:
             u = np.fft.irfft(velocity_hat(w_hat, self.k), self.n)
-            w_x = np.fft.irfft(derivative_hat(w_hat, self.k), self.n)
+            w_x = np.fft.irfft(derivative_hat(w_hat, self.k, self.n), self.n)
             out = out - self.a * u * w_x
         return np.fft.rfft(out) * self.mask
 
@@ -182,7 +182,7 @@ class FractionalGCLM:
         nl = w * u_x
         if self.a != 0.0:
             u = np.fft.irfft(velocity_hat(w_hat, self.k), self.n)
-            w_x = np.fft.irfft(derivative_hat(w_hat, self.k), self.n)
+            w_x = np.fft.irfft(derivative_hat(w_hat, self.k, self.n), self.n)
             nl = nl - self.a * u * w_x
         dis = -self.nu * np.fft.irfft(self.visc * w_hat, self.n)
         return nl, dis

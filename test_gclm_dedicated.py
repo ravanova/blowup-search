@@ -199,21 +199,24 @@ def check_energy_from_gradient():
     return out
 
 
-def check_energy_from_gradient_odd_n_known_defect():
-    """KNOWN DEFECT INHERITED from spectral_utils.derivative_hat -- PINNED.
+def check_energy_from_gradient_odd_n():
+    """Correct on ODD-length grids too (leg 66 defect, FIXED by Leg 0).
 
-    `energy_from_gradient` calls `derivative_hat`, which on ODD-length grids
-    destroys the k = (n-1)/2 mode (see
-    test_spectral_utils_dedicated.check_derivative_odd_n_known_defect).
-    Consequence, measured: for w = sin(32 x) on n = 65 the function returns
+    `energy_from_gradient` calls `spectral_utils.derivative_hat`, which used
+    to destroy the k = (n-1)/2 mode on ODD-length grids (see
+    test_spectral_utils_dedicated.check_derivative_odd_n). Consequence, as
+    leg 66 measured it: for w = sin(32 x) on n = 65 the function returned
     2.56e-26 where the exact value is 1.6085e+03 -- relative error 1.000, a
     total loss. n = 129, k = 64: 5.50e-25 against 6.4340e+03, same.
 
-    Latent, not active: no call site in this repository passes an odd n.
-    Recorded here so the blast radius of the spectral_utils defect is on
-    file at the point where it would corrupt a logged artifact-guard number
-    rather than a mere derivative. Fixing derivative_hat fixes this too, and
-    WILL make this test fail -- that is the intended signal.
+    The defect was latent, not active: no call site in this repository passed
+    an odd n, so no recorded measurement was affected. It mattered because
+    this quantity feeds `energy_balance_residual`, one of the two
+    artifact-guard numbers every run logs -- the guard would have been
+    reporting on a quantity it had itself corrupted.
+
+    This check now asserts the CORRECTED values, and keeps leg 66's even-n
+    contrast case so the fix is shown not to have disturbed it.
     """
     out = {}
     for n in (65, 129):
@@ -224,8 +227,8 @@ def check_energy_from_gradient_odd_n_known_defect():
         out[f"n{n}_got"] = got
         out[f"n{n}_exact"] = want
         out[f"n{n}_rel_err"] = abs(got - want) / want
-        assert out[f"n{n}_rel_err"] > 0.99, (n, out)
-        # even n of the same size class is correct, for contrast
+        assert out[f"n{n}_rel_err"] < 1e-11, (n, out)  # was 1.000 before the fix
+        # even n of the same size class, unchanged by the fix
         m = n - 1
         xm = grid(m)
         km = m // 2 - 1
@@ -234,7 +237,6 @@ def check_energy_from_gradient_odd_n_known_defect():
         out[f"n{m}_rel_err"] = abs(gm - wm) / wm
         assert out[f"n{m}_rel_err"] < 1e-11, (m, out)
     return out
-
 
 # --- clm_analytic_blowup_time -------------------------------------------
 
@@ -485,7 +487,7 @@ CHECKS = [
     check_rhs_frozen_u,
     check_rhs_dealiasing,
     check_energy_from_gradient,
-    check_energy_from_gradient_odd_n_known_defect,
+    check_energy_from_gradient_odd_n,
     check_clm_blowup_time_closed_form,
     check_clm_blowup_time_no_blowup,
     check_solve_gclm_rejects_zero_data,
@@ -517,8 +519,8 @@ def test_energy_from_gradient():
     check_energy_from_gradient()
 
 
-def test_energy_from_gradient_odd_n_known_defect():
-    check_energy_from_gradient_odd_n_known_defect()
+def test_energy_from_gradient_odd_n():
+    check_energy_from_gradient_odd_n()
 
 
 def test_clm_blowup_time_closed_form():
