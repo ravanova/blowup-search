@@ -48,7 +48,11 @@ CAPABILITIES = [
                "THREE-constant origin-pinned gauge with the translation DOF c_r)"),
      "validated": ("the (4.2) gauge nulls d_tau{Omega(0),Omega_X(0),V(0)} to 4.4e-16; "
                    "the exact Thm-2.3 singular anchor is a steady state on its support; "
-                   "the Scenario-2 contraction ratio reproduces CHL's -2.5114 to ~1%"),
+                   "the Scenario-2 contraction ratio reproduces CHL's -2.5114 to 2.09e-04 "
+                   "(bordered line) / 8.78e-03 (relaxation line) -- NOT '~1%', which "
+                   "understated the agreement by up to 42x (leg 78). CHL's own print "
+                   "granularity is 3.98e-05 relative, 251x tighter than the stale figure; "
+                   "no primary source publishes it any tighter (leg 78, 5 channels, 0 hits)"),
      "test": "test_hl_rescaled.py"},
     {"module": "solver/line_hilbert.py", "object": "Hilbert transform on the whole line",
      "holds": ("spline-analytic H on a NON-uniform grid, dense operator, and the cached "
