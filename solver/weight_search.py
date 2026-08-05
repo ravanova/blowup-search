@@ -306,11 +306,48 @@ class BorderedCLM:
         return np.concatenate([(a_om + self.H @ om) * om - a_l * (self.XD @ om),
                                np.zeros(2)])
 
-    def newton(self, z0=None, tol=1e-14, max_iter=20):
+    def _F_longdouble(self, z):
+        """F evaluated in np.longdouble -- used ONLY to measure how much of a float64
+        residual is arithmetic noise.  Not part of any bound."""
+        zl = np.asarray(z, dtype=np.longdouble)
+        Om, c_l, c_om = zl[:self.n], zl[self.n], zl[self.n + 1]
+        R = ((c_om + self.H.astype(np.longdouble) @ Om) * Om
+             - c_l * (self.XD.astype(np.longdouble) @ Om))
+        return np.concatenate([R, [self.Drow0.astype(np.longdouble) @ Om
+                                   - np.longdouble(self.slope0),
+                                   Om[self.jstar] - np.longdouble(self.v_pin)]])
+
+    def residual_floor(self, z, safety=8.0):
+        """The float64 EVALUATION noise of F at z -- the level below which |F| stops
+        being a statement about the equation and becomes a statement about the
+        arithmetic (banked lesson 86).
+
+        Measured, not guessed: F is re-evaluated in longdouble at the same point and
+        the difference taken.  `H @ Omega` is a dense n-term sum with cancellation, so
+        this GROWS with n -- 2.4e-15 at n = 201, 5.9e-15 at 401, 1.0e-14 at 801,
+        2.2e-14 at 1201.  A fixed 1e-14 tolerance is therefore below the floor from
+        n ~ 800 upward, which is why `newton` used to spin its full iteration budget
+        at n = 801 while the residual random-walked around 1.1e-14.
+        """
+        return float(safety * np.abs(np.asarray(self.F(z))
+                                     - self._F_longdouble(z).astype(float)).max())
+
+    def newton(self, z0=None, tol=None, max_iter=20, stall_factor=0.5):
         """Damped Newton. Returns (z, info) with the residual ladder in full -- the
-        SHAPE of a ladder is the evidence (standing discipline 72)."""
+        SHAPE of a ladder is the evidence (standing discipline 72).
+
+        `tol=None` (the default) means "the measured float64 residual floor for this
+        grid" rather than a hard-coded constant; pass a number to demand a specific
+        one.  Iteration also stops when the ladder STALLS -- two consecutive steps
+        that fail to improve the residual by `stall_factor` -- because a Newton that
+        has reached its arithmetic floor is converged, and continuing only spends
+        O(N^3) solves to random-walk in the last two digits.
+        """
         z = self.exact_state() if z0 is None else np.array(z0, dtype=float)
+        auto = tol is None
+        tol = self.residual_floor(z) if auto else float(tol)
         ladder = [float(np.abs(self.F(z)).max())]
+        stalled = False
         for _ in range(max_iter):
             Fz = self.F(z)
             dz = np.linalg.solve(self.jacobian(z), -Fz)
@@ -319,9 +356,19 @@ class BorderedCLM:
                 lam *= 0.5
             z = z + lam * dz
             ladder.append(float(np.abs(self.F(z)).max()))
+            if auto:
+                tol = max(tol, self.residual_floor(z))
             if ladder[-1] < tol:
                 break
+            if len(ladder) >= 4 and all(ladder[-i] > stall_factor * ladder[-i - 1]
+                                        for i in (1, 2)):
+                stalled = True
+                break
+        floor = self.residual_floor(z)
         return z, {"residual_ladder": np.array(ladder),
+                   "tolerance": float(tol),
+                   "residual_floor": floor,
+                   "stalled_at_floor": bool(stalled and ladder[-1] < floor),
                    "converged": bool(ladder[-1] < tol)}
 
     # -- the weighted-sup certificate --------------------------------------
