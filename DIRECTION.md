@@ -625,12 +625,14 @@ known-answer gate). IA sits at LEG-G, right after KA, because it is the highest-
 candidate — a defect here has the largest blast radius of anything in the new batch, reaching
 both the critical path and its known-answer control.
 
-**65 (L1G) is next among the new candidates** because PHASE2_P2_NOTES says outright, in its own
-words, that the weighted-ℓ¹ no-go and discrete-ball trap are "the only claims [in Route-D] with
-a real chance of being new" — and that sentence has sat unactioned since the M-pass. It is the
-same shape of risk as leg 62 (a flagged-but-unread literature gap on a claim this repository
-would like to call novel), just for a different paper and a different claim, so it ranks
-immediately after the infrastructure audit and before the two cheapest hygiene legs.
+**65 (L1G) was next among the new candidates, and it has since landed: gate NO.** PHASE2_P2_NOTES
+said outright, in its own words, that the weighted-ℓ¹ no-go and discrete-ball trap were "the only
+claims [in Route-D] with a real chance of being new" — and leg 65 settled it at full-text depth
+(4 papers, 39 forward citations): both are genuinely unpublished. That upgrades "unflagged
+novelty risk" to "confirmed novel, narrowly scoped negative result on infrastructure this
+repository is not actively building on" (`B` is dead on all three DOF regardless, so this closes
+a bookkeeping question, not a live research direction). `capabilities.py`'s annotation was
+corrected accordingly (`ab07316`).
 
 **68 (IX) and 66 (QF) were ranked to close out the ten**, and 68 has since landed: gate YES,
 mechanical, in territory — INDEX.md's stale "Route-TC has no writeup yet" paragraph is fixed and
@@ -642,16 +644,17 @@ the queue entirely.
 
 **64 (A12) has been promoted out of reserve into LEG-I**, per this file's own refill
 instruction, on the orchestrator's correct read that leg 68's YES/mechanical outcome does not
-change the ranking picture. **67 (FD), 70 (RC) and 71 (CAP) are the remaining reserve — ranked
-12 through 14 (A12 vacates rank 11), not assigned a live slot this cycle.** All three are real,
-well-specified, and independent of everything above, but each is lower-stakes than what is
-already live: FD is a literature check on one number flagged in capabilities.py but not tied to
-any live leg's claim strength the way 65 is to Route-D's novelty; RC is a docs-only correction
-whose underlying finding (J-4's realization caveat) is already stated, just not yet propagated;
-CAP is a self-audit of the ledger everything else in this queue already trusts, valuable but the
-least urgent of the three since nothing has yet flagged capabilities.py itself as drifted. If
-another slot frees up, promote from this list in the order given (FD, then RC, then CAP),
-without re-ranking, unless a gate answer changes the picture.
+change the ranking picture. **67 (FD) has, in turn, been promoted out of reserve into LEG-H**,
+on the same correct read that leg 65's NO does not change the ranking picture either — a
+confirmed-novel-but-narrow negative on dead-lane infrastructure doesn't reorder anything below
+it. **70 (RC) and 71 (CAP) are the remaining reserve — ranked 13 and 14, not assigned a live
+slot this cycle.** Both are real, well-specified, and independent of everything above, but each
+is lower-stakes than what is already live: RC is a docs-only correction whose underlying finding
+(J-4's realization caveat) is already stated, just not yet propagated; CAP is a self-audit of
+the ledger everything else in this queue already trusts, valuable but the least urgent of the
+two since nothing has yet flagged capabilities.py itself as drifted. If another slot frees up,
+promote from this list in the order given (RC, then CAP), without re-ranking, unless a gate
+answer changes the picture.
 
 **Ordering the queue by proximity to the Clay chain is a choice of what to try. It is never a
 claim that anything moved.** In 57 landed legs, no link has moved; Clay stays at ~0.05% behind
