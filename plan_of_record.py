@@ -429,7 +429,80 @@ STAGES = [
         "id": "TC",
         "name": ("ASSEMBLE the bordered certificate: give the far-field amplitude its own "
                  "column, its own Y_0, and a matching condition"),
-        "status": "NEXT",
+        "status": "DONE",
+        "outcome": (
+            "GATE ANSWERED **NO** AT LEG 53. With the far-field amplitude carried as a real "
+            "unknown through all four terms, the radii polynomial does NOT close on the a = 0 "
+            "CLM object in any admissible class. "
+            "THE TERM THAT RAN OUT IS Z_1, AND SPECIFICALLY ITS TWO BLOCK-COUPLING "
+            "SUB-BLOCKS -- quantities that did not exist before this leg, because the finite "
+            "block and the bordered tail had never been in the same object. With the "
+            "block-diagonal approximate inverse the method requires, A = Gamma^-1 (+) A_tail: "
+            "Z_1[tail<-Gamma] = 0.996 (flat) / 1.387 (s = 0.3) and Z_1[Gamma<-tail] = 59.0 / "
+            "43.15 at K = 4, the BEST split in the whole sweep, growing like K/2 and K^2/2 "
+            "respectively across K = 4..64, both admissible classes, both gauges. Smallest "
+            "Z_1 lower bound anywhere: 43.15. The assembled Z_1 is 44.54 at its minimum. "
+            "NOT THE TAIL TERM: leg 52's bordered tail constant appears as ||A_tail|| = "
+            "2.19..10.32 and behaves. NOT Y_0: it is EXACTLY zero including the new matching "
+            "row, and for the banned degenerate reason -- the anchor IS one basis mode, so it "
+            "has no far field and the matching condition has nothing to fail. The polynomial "
+            "therefore has the root r = 0 and NO POSITIVE INTERVAL (r_max = 0 in all ten "
+            "rows); the counterfactual with leg 51's finite-block Z_1 alone does have one "
+            "(r_max 2.14e-02 down to 4.64e-04), and the difference between those two columns "
+            "IS the content of the leg. "
+            "SCOPE, STATED EXACTLY: what is established is that the BLOCK-DIAGONAL "
+            "approximate inverse the standard method requires cannot close this certificate "
+            "-- Z_1[Gamma<-tail] equals 2||Gamma^-1|| to four digits in every row, so it is a "
+            "statement about the finite block THIS leg built. What is NOT established is that "
+            "no finite block can: the genuinely finite-block-independent sub-block is "
+            "Z_1[tail<-Gamma], whose minimum over the whole sweep is 0.9961, BELOW 1. That is "
+            "why stage MM is a real question and not a formality. "
+            "THE MECHANISM, CORRECTED AFTER VERIFIER's REVIEW: ||Gamma^-1|| for the augmented "
+            "block is EXACTLY 2(K^2 - 1) -- K^2, not K -- and dropping the amplitude column "
+            "restores EXACTLY 4(K - 1). The K^2 is CREATED by the augmentation's weight "
+            "pairing (amplitude column ~ ||hhat||_w ~ K/2 against a matching row of weight "
+            "w_{K+1}, so the matching equation carries coefficient ~2/K). The coupling then "
+            "contributes a factor 2, NOT K/2, and its dominant column is the RANK-ONE row-1 "
+            "term rather than the (K+1)/2 sub-diagonal. TC-8 ablates five normalisations of "
+            "the augmented block plus the un-augmented one; the smallest Z_1 lower bound over "
+            "ALL of them is still one to two orders above 1, so the NO survives the "
+            "renormalisation that the corrected mechanism invites. The underlying structural "
+            "fact stands and is unchanged: the standard tail estimate needs the unbounded "
+            "part to be a MULTIPLIER (cut of size Lambda_M against a tail inverse "
+            "1/Lambda_M), and here it is OFF-DIAGONAL while the bordered tail inverse is a "
+            "CONSTANT rather than a decaying multiplier -- which is why Z_1[tail<-Gamma] "
+            "grows exactly x2 per doubling of K and reaches 38.2 by K = 64. Tuning s cannot "
+            "touch it. "
+            "TC-3, THE BORDER'S OWN DEFECT: the matching row's residual at the anchor is "
+            "EXACTLY 0.0 (same degeneracy); the asymptotic expansion's truncation defect is "
+            "6.15e-02 (flat) / 1.10e-01 (s = 0.3) falling like M^-1.00 / M^-0.78; and the "
+            "GAUGE ROW's entry on the far-field column, sum_m m h_m, is LOG-DIVERGENT "
+            "(3347 -> 7222 over M-K = 256..2048, +1865 per e-fold) because the dilation gauge "
+            "sum_k k b_k has dual norm max_k k/w_k, infinite for every s < 1. The far-field "
+            "column has an entry that does not exist. Repair (not a tuning of s): pin the "
+            "exact dilation zero mode instead, which is EXACTLY e_2 (||L e_2||_inf = 0.0, "
+            "checked) -- worth 1.5x to 8.7x, and the gate still answers NO. "
+            "CONTROLS: the positive control (Lambda^1 dissipation, unbordered tail, no "
+            "far-field unknown -- a dissipative tail has no kernel) drives the coupling like "
+            "1/mu and brings the ASSEMBLED Z_1 to 0.9156 at mu = 2, so the instrument can "
+            "report the other answer. Four border directions were tried; the analytic "
+            "far-field mode is the best (9.441 against 13.37 second-pair and 19.65 random) "
+            "and Z_1[Gamma<-tail] is 546.57 for ALL FOUR -- that block never sees the border, "
+            "which is the sharpest form of the result: the coupling is not a property of the "
+            "border. "
+            "TC-0 NOVELTY: PROCEED_NARROW, six queries. THIS LEG FIRST REPORTED LEG 52's "
+            "SEARCH-INDEX FLAG AS CLEARED; THAT CLEARANCE IS WITHDRAWN AND THE FLAG STANDS -- "
+            "the query used prepended the literal arXiv ID, which tests retrieval by ID and "
+            "not the topical recall the flag was raised against, and LIT's ninth pass re-ran "
+            "leg 52's query VERBATIM and reproduced the null result. This leg's search log "
+            "recorded counts, not links, so its claim could not be audited against its own "
+            "record; a later pass should enumerate links. BDL arXiv:1503.06315: this leg read "
+            "the abstract page only and left the question open; LIT's ninth pass settled it "
+            "from the full PDF -- their assumptions (4)-(5) require a diagonal bounded away "
+            "from zero, so the zero-diagonal Fredholm case is outside their construction. "
+            "CEILING (pre-committed as clause TC7): nothing is claimed about "
+            "HL_S2_nonsymmetric -- on the gate's own terms that run happens only if the "
+            "polynomial closes here, and it did not. No link of the chain moved."),
         "why_here": (
             "This stage is written by T's own yes-branch, and it is the ONLY thing that "
             "converts leg 52 from a bounded term into a theorem. Leg 52 measured ONE term of "
@@ -477,6 +550,65 @@ STAGES = [
         "time_box": ("one leg for the assembly, one for the four terms. If TC-1 needs a new "
                      "basis, stop -- leg 51 already chose the basis and leg 52 already "
                      "measured the tail in it."),
+    },
+    {
+        "id": "MM",
+        "name": ("THE MISMATCH: is a NON-block-diagonal approximate inverse a real lane, or "
+                 "is this the lane's end?"),
+        "status": "NEXT",
+        "why_here": (
+            "This stage is written by T's OWN no-branch, promoted one level deeper by TC's "
+            "measurement. T said: if the certificate does not close, 'STOP building "
+            "certificates in ell^1-Fourier for this operator and say so in the plan -- the "
+            "finding is then that the method and the object are mismatched, which is worth "
+            "more written down than worked around.' TC then located the mismatch precisely, "
+            "and it is NOT where L1 or T thought. It is not the weight class (leg 51), it is "
+            "not the tail's invertibility (leg 52 fixed that), and it is not Y_0 or Z_2. It "
+            "is the COUPLING between the two blocks of the approximate inverse -- and the "
+            "method's block-diagonal A is exactly what makes that coupling a term at all. "
+            "So there is exactly ONE remaining degree of freedom that is not a tuning, and "
+            "the plan should either spend it or close the lane. Everything else -- s, the "
+            "weight family, the split K -- is measured and banned: the coupling entry is K/2 "
+            "for every s and every split."),
+        "deliverable": (
+            "MM-1 THE MISMATCH AS AN INEQUALITY, NOT A MOOD. State and check the lower bound "
+            "Z_1 >= |1 - K/2| (w_{K+1}/w_K) ||A_tail e_{K+1}||_w / w_{K+1}, which holds for "
+            "EVERY choice of finite block because that sub-block does not contain Gamma^-1; "
+            "with leg 53's measured second factor (0.94..1.33 across the sweep) this is a "
+            "statement that no block-diagonal A can work for this operator, and it should be "
+            "written as one. "
+            "MM-2 THE ONE MOVE THAT IS NOT A TUNING: an approximate inverse whose off-diagonal "
+            "blocks are NOT zero -- one step of block Gauss-Seidel across the split, or the "
+            "Schur complement of the coupling -- measured on the SAME assembled object of "
+            "leg 53 (experiments/p2_route_tc_v1_assemble.py), with the same controls. Either "
+            "it brings the assembled Z_1 below 1 or it does not, and both are reportable. "
+            "MM-3 THE NOVELTY PASS FIRST. Leg 53 recorded as UNCHECKED whether the literature "
+            "treats a radii-polynomial tail whose unbounded part is off-diagonal; six queries "
+            "returned nothing addressing it. That is not evidence of a gap. Search it before "
+            "constructing, and record the log."),
+        "gate": {
+            "question": ("Does an approximate inverse that is NOT block diagonal bring the "
+                         "ASSEMBLED Z_1 below 1, on the a = 0 CLM object, in a class with "
+                         "s < 0.394?"),
+            "if_yes": ("Then the method and the object are not mismatched after all, only the "
+                       "standard SHAPE of A was -- report the assembled Y_0, Z_1, Z_2 and the "
+                       "positive interval, then re-run on HL_S2_nonsymmetric, whose profile "
+                       "is not one basis mode and decays algebraically. Claim nothing about "
+                       "the target before that run, and re-state the ceiling: on the a = 0 "
+                       "object Y_0 is exactly zero for a degenerate reason."),
+            "if_no": ("STOP building ell^1-Fourier radii-polynomial certificates for inviscid "
+                      "self-similar transport, and say so in the plan rather than working "
+                      "around it. REPORT the mismatch as the result: the unbounded part of "
+                      "this operator is a shift, the method's tail estimate needs a "
+                      "multiplier, and the gap survives bordering, every admissible weight "
+                      "class, every split and both gauges. DO NOT re-enter the lane by tuning "
+                      "s, the weight family, the split, or the border direction -- all four "
+                      "are measured and banned."),
+        },
+        "time_box": ("one leg. MM-3 is a literature pass; MM-1 is arithmetic on numbers that "
+                     "already exist; MM-2 reuses leg 53's assembled object. If MM-2 needs a "
+                     "new basis, a new object or a new solver, the plan was wrong -- the "
+                     "whole point is that only the SHAPE of A is still free."),
     },
     {
         "id": "B",
@@ -539,6 +671,21 @@ BANNED = [
      "HL_S2_nonsymmetric -- it is ONE of four terms, measured in isolation on the a=0 CLM "
      "object, and the border it adds is an unknown with no column, no Y_0 and no matching "
      "condition yet", "TC"),
+    ("reading leg 53's assembled result as a statement about HL_S2_nonsymmetric, or as a "
+     "statement that the TAIL term failed -- the object is still the a=0 CLM linearisation, "
+     "Y_0 is exactly zero there for the banned degenerate reason, and the tail constant "
+     "(2.19..10.32) is one of the terms that BEHAVED. What ran out is Z_1's block coupling",
+     "never -- the ceiling was pre-committed as clause TC7, and the gate's yes-branch is the "
+     "only route to the target"),
+    ("repairing Z_1's block coupling by tuning s, the weight family, the split K, or the "
+     "border direction -- all four are measured: the coupling entry is K/2 for EVERY s, the "
+     "sweep K = 4..64 has its minimum at the smallest K and still gives 43.15, and "
+     "Z_1[Gamma<-tail] is 546.57 for all four border directions because that sub-block never "
+     "sees the border",
+     "never -- lesson 88 again, and the mechanism is measured, not argued"),
+    ("building any further ell^1-Fourier radii-polynomial machinery for this operator before "
+     "MM's gate answers -- the one remaining free choice is the SHAPE of A, and MM spends it",
+     "MM"),
     ("tuning the weight exponent s toward the minimum of leg 51's divergence curve -- that "
      "minimum (s = 1) is where the kernel leaves the space at the same moment the cokernel "
      "functional enters the dual, i.e. the ONE exponent at which bordering cannot help; "
@@ -547,7 +694,8 @@ BANNED = [
     ("re-claiming leg 51's methodological finding at full strength -- T-0 found "
      "Breden-Desvillettes-Lessard arXiv:1503.06315 stating the same problem for TRIDIAGONAL "
      "DOMINANT operators, so the general observation is a re-derivation; only the zero-"
-     "diagonal Fredholm case is possibly open, and THAT was not resolved",
+     "diagonal Fredholm case is possibly open, and leg 53's pass read the DOMINANCE "
+     "hypothesis off the publisher's ABSTRACT page only -- evidence, not the full text",
      "never -- unless a pass resolves whether BDL's construction covers a zero diagonal"),
     ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
      "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "

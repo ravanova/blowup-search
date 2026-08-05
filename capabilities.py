@@ -151,7 +151,20 @@ CAPABILITIES = [
                    "|X|^-1 far field, so the tail term diverges in EVERY weight class tried "
                    "(flat M^1.28, algebraic best M^0.64, geometric x nu per mode) -- the "
                    "positive control with Lambda^1 dissipation saturates, so that is a "
-                   "measurement and not a broken instrument"),
+                   "measurement and not a broken instrument. LEG 52 bordered that tail with "
+                   "the far field and BOUNDED it (7.46 -> 9.44 at s=0, 8.09 -> 11.37 at "
+                   "s=0.3); LEG 53 (experiments/p2_route_tc_v1_assemble.py) ASSEMBLED the "
+                   "four terms and the certificate still does not close -- with the "
+                   "BLOCK-DIAGONAL approximate inverse the method requires, the COUPLING "
+                   "sub-blocks of I - A L are 1.39 and 43.15 at the best split in the whole "
+                   "sweep (K = 4..64, s = 0 and 0.3, both gauges), 20.47 over every "
+                   "normalisation ablated, and they grow x2 and x4 per doubling of K because "
+                   "the unbounded part is OFF-DIAGONAL and the bordered tail inverse is a "
+                   "constant rather than a decaying multiplier. SCOPE (VERIFIER, leg 53 "
+                   "review): the term that exceeds 1 CONTAINS Gamma^-1, so this is a "
+                   "statement about the block-diagonal A and NOT that no finite block can "
+                   "close it -- the finite-block-independent sub-block bottoms out at 0.9961. "
+                   "Do not read the bounded tail as a certificate"),
      "test": "test_spectral_certificate.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",

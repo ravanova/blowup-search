@@ -3,6 +3,87 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-TC v1: the seam, not the tail (non-logged) — 2026-08-05
+
+**NOT a logged gate run** (deterministic; 318 s). Runner
+`experiments/p2_route_tc_v1_assemble.py` → `writeup/data/p2_route_tc_v1_assemble.json` →
+**fig48** via `writeup/4_p2_lottery/p2_route_tc_v1_evidence.py` (registered in
+`writeup/build_figures.py`). Writeups TECHNICAL/BLOG_P2_ROUTETC_V1.md; PHASE2_P2_NOTES §42.
+Stage `TC` of `plan_of_record.py`, 8 pre-committed clauses. No new solver module — the tail
+side is leg 52's `solver/spectral_certificate.py`, imported and extended, not rebuilt.
+
+**Why it exists.** Leg 52 bounded one term of four in isolation and the plan named the ban
+in the same breath: a bounded bordered tail is not a certificate, because the border it adds
+is an unknown with no column, no `Y₀` and no matching condition. This leg writes those three
+down and puts all four terms in the same polynomial.
+
+**REVISED after VERIFIER's line review.** The gate answer and every number were independently
+confirmed; three attributions were not, and are corrected in the write-ups and in the runner:
+the *scope* of the failure, the *mechanism* behind the sizes, and a control that could not fail.
+A normalisation ablation (TC-8) was added. The resurfacing clearance is withdrawn (see (5)).
+
+**What a human should notice.** Six things.
+
+(1) **The binding term is one that did not exist before the assembly.** Three of the four
+terms are fine — `Y₀` exactly 0, the finite-block `Z₁` at `10⁻¹⁵`, `Z₂` finite from the basis
+algebra — and leg 52's tail constant behaves (2.19–10.32 at the splits used here). What kills
+it is the *coupling* between the finite block and the tail, which is only a quantity once
+both are in the same object: **43.15** at the best split in the entire sweep, against the 1 it
+has to be under. This is the second time in three legs that the answer was in a place the
+previous leg's framing could not see, and it is banked as lesson 89.
+
+(2) **The first positive control was wrong, and it was wrong in an instructive way.** Adding
+`μk` to the diagonal and keeping everything else identical made the answer *worse* (`Z₁` in
+the thousands). The reason is not the mathematics: with `μ > 0` the tail has no kernel, so
+bordering it with its near-null pair — and carrying a far-field amplitude it does not have —
+manufactures a singularity. The control had to drop the border and the amplitude to be the
+dissipative problem's *own* certificate. It then does exactly what the mechanism predicts,
+`1/μ`, and reaches `Z₁ = 0.9156` at `μ = 2`. **A control that contradicts the mechanism is a
+statement about the control's realization first (70), and I nearly wrote up a void negative.**
+
+(3) **The gauge row has an entry that does not exist, and nobody could have seen it before.**
+`Σ_k k b_k` is the obvious way to pin the dilation symmetry and it is what leg 51 used. Once
+the far-field amplitude has a column, that column has an entry in the gauge row equal to
+`Σ_m m h_m` — a harmonic sum, +1865 per e-fold. The dilation gauge is not a bounded functional
+on any space where the target profile lives. The repair (pin `e₂`, which is *exactly* the zero
+mode) is worth 1.5×–8.7× and changes no verdict, which is why it is written up as a defect of
+the assembly and not as the cause of the failure.
+
+(4) **The negative control I was proudest of was a bug, and the tell was that it was too
+clean.** I reported `Z₁[Γ←tail] = 546.57` for all four border directions — analytic, SVD, wrong
+singular pair, random — and called four identical numbers "the sharpest available form of 'this
+is not about the border'." They were identical because the quantity was computed from two
+objects neither of which references the border argument. It could not have come out otherwise.
+Wired through properly (the border now sets the amplitude column's direction), the control
+discriminates hard: analytic ties the SVD optimum at 1.0004, random is 13× worse, and the second
+singular pair is 3.8e+13× worse because it makes the augmented block singular. **Four identical
+numbers should read as a bug, not as a finding** — lesson 90.
+
+(5) **I explained my own matrix using someone else's matrix.** I wrote that `‖Γ⁻¹‖` grows like
+`K`, citing leg 51's `165 → 359 → 769 → 1633`. That is leg 51's *unaugmented* block; mine is
+23× bigger at `K = 64` and grows like `K²` — exactly `2(K²−1)`, against exactly `4(K−1)` with
+the amplitude column switched off. The `K²` is something *my augmentation* created, through a
+weight pairing that leaves the matching equation carrying coefficient `≈ 2/K`. I also blamed a
+factor `K/2` on the coupling entry when the measured factor is `2`. The conclusion survived a
+six-way normalisation ablation (best case 20.47, still one to two orders too big) — but on a leg
+whose entire methodological point is naming mechanisms, getting the mechanism wrong is the
+expensive error, not the cheap one. **A suspiciously tidy closed form is a signal to check what
+produced it.**
+
+(6) **And I overstated what the result proves, in prose, while getting it right in the plan.**
+`Z₁[Γ←tail]` contains `Γ⁻¹`, so the failure is scoped to the block-diagonal approximate inverse
+the method requires. The sub-block that would have made it structural, `Z₁[tail←Γ]`, bottoms out
+at **0.9961 — just under 1**. `plan_of_record.py` said "with the block-diagonal approximate
+inverse the method requires" and stage `MM` asks exactly the right follow-up; the TECHNICAL
+write-up and the curated JSON asserted the stronger claim. **The machine-readable artifact was
+more honest than the prose, which is the wrong way round.**
+
+*(Also withdrawn on review: this leg's clearance of leg 52's search-index flag. The query used
+prepended the literal arXiv ID, which tests retrieval by ID rather than the topical recall the
+flag was about; LIT re-ran leg 52's query verbatim and reproduced the null result. The leg
+logged result counts, not links, so the claim could not be audited against its own record — a
+novelty pass has to log the links.)*
+
 ## Phase-2 P2 — ROUTE-L1 v2: the representation change worked, and the tail did not (non-logged) — 2026-08-05
 
 **NOT a logged gate run** (deterministic; 53 s). Code `solver/spectral_certificate.py` +
