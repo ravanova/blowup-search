@@ -1,13 +1,13 @@
-# Orchestration playbook — continuous four-leg operation
+# Orchestration playbook — continuous ten-leg operation
 
 ## How to start a run
 
 **Paste the full text of [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) — and nothing else —
 into a fresh Claude Code session set to Sonnet 5, in this repository.** That session becomes
-the **orchestrator**: it dispatches the agents defined here, keeps four legs running in
-parallel, merges their work to `main` unattended, writes a live progress file the user can
-read at any time, and hands off to a fresh orchestrator session before its own context runs
-out.
+the **orchestrator**: it dispatches the agents defined here, keeps ten legs running in
+parallel, audits the legs' own pushes to `main` and merges the support work unattended,
+writes a live progress file the user can read at any time, and hands off to a fresh
+orchestrator session before its own context runs out.
 
 Three things make that paste work, and breaking any of them brings back the failure where the
 session answers "I don't see a request yet":
@@ -57,7 +57,7 @@ user stops it (§9) or the direction genuinely runs out.
    by the lift condition it names, never by an agent's judgement, never by the Decision Maker.
 3. **Exactly one stage is `NEXT`, and that invariant is load-bearing.** Parallel legs do
    **not** each claim a stage. One leg is the critical path (the stage marked `NEXT`); the
-   other three are exploration legs from the Decision Maker's queue in `DIRECTION.md`. Only
+   other nine are exploration legs from the Decision Maker's queue in `DIRECTION.md`. Only
    promoting a route into `plan_of_record.py`'s committed sequence touches the plan, and that
    is an escalation (§8).
 4. **The standing discipline in CONTINUATION_PROMPT.md** (gate the operator, magnitudes not
@@ -70,11 +70,13 @@ user stops it (§9) or the direction genuinely runs out.
 
 ## 2. Shape of the run
 
-Four legs live at all times. Each leg is **one agent, end to end** — its own novelty pass,
-its own construction, its own measurement, its own gate answer, its own quartet (§6). One
-verifier is paired to each leg. Everything else is repo-wide support that serves all four.
+Ten legs live at all times. Each leg is **one Opus 5 agent, end to end** — its own novelty
+pass, its own construction, its own measurement, its own gate answer, its own quartet (§6),
+and **its own push to `main`** (§7b). When its push lands the agent is terminated and a
+fresh agent spawns into the slot on the next brief, so ten legs are always in progress.
+One verifier is paired to each leg. Everything else is repo-wide support that serves all ten.
 
-The four legs must pursue **different ideas or different directions**, chosen so they do not
+The ten legs must pursue **different ideas or different directions**, chosen so they do not
 depend on each other's results and do not touch each other's files. That independence is the
 Decision Maker's responsibility to design and the orchestrator's to enforce (§5).
 
@@ -84,22 +86,25 @@ default; the one deliberate exception is the sharding control arm in §10.
 
 ## 3. The Decision Maker (DM)
 
-**One extra agent, Opus 5, outside the 24-slot pool.** The DM decides *what to work on*; the
-orchestrator decides *how it lands*. The orchestrator never invents a leg.
+**One extra agent, Fable 5, outside the 32-slot pool.** The DM decides *what to work on*; the
+orchestrator decides *how it lands*. The orchestrator never invents a leg — and when the plan
+and the queue leave the next leg genuinely unclear, **the DM chooses the work**. That mandate
+is the DM's alone; an empty leg slot is never the answer.
 
 The DM owns [DIRECTION.md](DIRECTION.md) and nothing else. That file is its durable state, so
 a bloated DM can be discarded and recreated cheaply from it. DIRECTION.md carries:
 
 - **the leg queue** — ranked candidate legs, each with a route name, a one-paragraph thesis,
   a **pre-committed gate naming both branches**, and its **file territory** (§5);
-- **live assignments** — which leg number and route each of the four leg slots holds;
+- **live assignments** — which leg number and route each of the ten leg slots holds;
 - **the ranking rationale** — why this order, refreshed whenever a gate answers;
-- **open direction questions** — things the DM wants the user to decide (these also surface
-  in the progress file, §7).
+- **open direction questions** — resolved by the DM itself under the standing directive
+  (§8) wherever possible; only a question the directive genuinely cannot answer surfaces
+  for the user (via the progress file, §9a), with the DM's note on why it could not decide.
 
 **Queue ranking.** Prefer, in this order: (a) a leg that could actually move a link of the
 L1→L4 chain; (b) a leg whose gate can answer either way within a leg's work; (c) a leg
-independent of the other three. A leg with no pre-committed failure branch is not a leg.
+independent of the other nine. A leg with no pre-committed failure branch is not a leg.
 
 **Steering.** When the user gives the orchestrator input — a change of direction, a review of
 goals, a new priority — the orchestrator forwards it **verbatim** to the DM via `SendMessage`
@@ -107,27 +112,28 @@ and asks for a revised queue. The orchestrator does not interpret the steer itse
 
 The DM may reason mathematically about direction. It may not build, measure, or write up.
 
-## 4. The 24-slot roster
+## 4. The 32-slot roster
 
 | Band | Slots | Model | Lane | Branch prefix | Role |
 |---|---|---|---|---|---|
-| **LEG-A…D** | 4 | Opus, high effort | local worktree | `leg/<N>-<slug>` | One whole leg each, end to end: novelty pass → construction → measurement → gate answer → full quartet. Owns only its own files (§5). |
-| **VER-A…D** | 4 | Opus, high effort | local worktree | `verify/<N>-<slug>` | Paired 1:1 to a leg. Re-measure any prior headline that leg *consumes* (lesson 85) **before** it builds on it; then line-by-line review of the leg's PR. **Reports gaps, does not repair.** Spawned when its leg has something to verify, not idle-running. |
+| **LEG-A…J** | 10 | Opus, high effort | local worktree | `leg/<N>-<slug>` | One whole leg each, end to end: novelty pass → construction → measurement → gate answer → full quartet → **its own rebase, gate, and push to `main`** (§7b). Owns only its own files (§5). Terminated once its push lands; the slot refills with a fresh agent. |
+| **VER-A…J** | 10 | Opus, high effort | local worktree | `verify/<N>-<slug>` | Paired 1:1 to a leg. Re-measure any prior headline that leg *consumes* (lesson 85) **before** it builds on it; then line-by-line review of the leg's landing on `main`, after the fact. **Reports gaps, does not repair.** Spawned when its leg has something to verify, not idle-running. |
 | **LIT-1,2** | 2 | Sonnet | cloud or local | `lit/<N>-<slug>` | Standing literature flags, and deep dives a leg requests. A leg's *own* novelty pass stays with the leg — LIT does not replace it. |
 | **REPRO-1,2** | 2 | Sonnet | cloud or local | `repro/<N>-<slug>` | Mechanical reproducibility: every root `test_*.py` **with `.venv/bin/python`**, raw per-file pass/fail counts (never a rolled-up summary); figures via `writeup/build_figures.py`; `*_evidence.py` scripts rebuild without re-runs. Fixes *scripts*; a prose/JSON discrepancy is reported, never repaired. |
 | **DOCS-1,2** | 2 | Sonnet | cloud or local | `docs/<N>-<slug>` | `writeup/INDEX.md`, quartet-completeness audit, dead links, `README.md`, `writeup/README.md` index. Checks each leg's BLOG/TECHNICAL against the docs contract before merge. |
 | **PREP-1,2** | 2 | Sonnet | cloud or local | `prep/<N>-<slug>` | Plan-consistent bricks that are not on any leg's critical path. |
-| **BENCH** | 8 | assigned | assigned | assigned | Unassigned capacity. |
+| **BENCH** | 4 | assigned | assigned | assigned | Unassigned capacity. |
 
 **Bench priority, in this order:**
-1. **Refill a leg slot the moment one closes** — four legs live is the target, not a ceiling
-   reached once.
+1. **Refill a leg slot the moment one closes** — ten legs live is the target, not a ceiling
+   reached once. Refill is per-slot and immediate: terminate the finished agent, get the
+   next brief from the DM, spawn fresh.
 2. **Repair work integration found.** A failing gate, a broken test on `main`, a bug an agent
    tripped over: spawn a bench agent to fix it. Issues get *worked*, not queued.
-3. **A fifth+ parallel route** from the DM's queue, if every other slot is saturated and the
-   queue has a ready, independent item.
+3. **An eleventh+ parallel route** from the DM's queue, if every other slot is saturated and
+   the queue has a ready, independent item.
 
-Never exceed 24 concurrent workers plus the DM. Steady state is ~12–16; the headroom is what
+Never exceed 32 concurrent workers plus the DM. Steady state is ~16–24; the headroom is what
 makes "assign an idle agent to a new leg" possible without starving verification.
 
 **Context hygiene.** Agents are cheap to recreate and expensive to keep talking to.
@@ -138,7 +144,7 @@ makes "assign an idle agent to a new leg" possible without starving verification
 - **Support agents are recreated per cycle**, not continued; their tasks are independent.
 - Subagents cannot be `/clear`ed. Recreating *is* the clear.
 
-## 5. Collision avoidance under four parallel legs
+## 5. Collision avoidance under ten parallel legs
 
 Parallel agents never edit the same file. Two mechanisms:
 
@@ -155,8 +161,8 @@ cycle. No leg, no verifier, no support agent touches them:
 | `PHASE2_P2_NOTES.md` | Frozen for agents. Orchestrator appends one pointer block per merged leg. |
 | `LITERATURE_CHECK.md` | Each leg/LIT writes `writeup/novelty/leg_<N>.md`; the orchestrator adds a one-line pointer. |
 
-This is what makes four-way parallelism possible at all: the four files that every leg used
-to want to append to are now written once, by one writer, after the merges.
+This is what makes ten-way parallelism possible at all: the shared files that every leg used
+to want to append to are now written once, by one writer, after the landings.
 
 `capabilities.py` is the exception agents may touch: **append** an entry at the end of your
 own object's section, never reorder. `test_capabilities.py` runs on every merge.
@@ -175,8 +181,10 @@ unless the territory says otherwise.
 queued routes want the same `solver/` module, they are not parallel — send one back to the DM
 to re-cut or re-order.
 
-Territories are checked again at merge: a diff outside the declared territory is a gate
-failure, sent back to the owning agent.
+Territories are checked again at landing time: a leg checks its own diff before it pushes
+(§7b), and the orchestrator audits every landing. For support branches, which the
+orchestrator merges itself, a diff outside the declared territory is a gate failure sent
+back to the owning agent.
 
 ## 6. The documentation contract
 
@@ -213,28 +221,48 @@ Examples: `Leg 54: LEG — non-block-diagonal A, gate answers NO`,
 
 Branches follow the same numbering: `leg/54-mm-v1`, `verify/54-mm-review`, `docs/0-index`.
 
-### 7b. Merge policy (hands-off by default)
+### 7b. Landing policy (hands-off by default)
 
-The orchestrator merges to `main` without human approval when:
+**Leg branches: the leg agent pushes to `main` itself.** No human approval, no orchestrator
+merge. A leg's finish protocol, in order, none skippable:
 
-1. `scripts/merge_gate.sh origin/main` prints `MERGE GATE: PASS` on the branch, **and**
-2. the diff stays inside the branch's declared territory (§5b), **and**
-3. for **claim-bearing** PRs only: the paired verifier has reviewed it and found no
-   unresolved gap (DOCS additionally confirms the quartet is complete).
+1. quartet complete (§6), gate answered in its pre-committed wording;
+2. `git diff --name-only` against the merge base confirms every path is inside the declared
+   territory (§5b);
+3. `git fetch origin main && git rebase origin/main`;
+4. `scripts/merge_gate.sh origin/main` prints `MERGE GATE: PASS` on the rebased branch — a
+   FAIL is fixed in the worktree and never pushed;
+5. push to `main`; on a non-fast-forward rejection (another leg landed first), re-fetch,
+   re-rebase, re-gate, and push again until it lands;
+6. report the one-line finding and stop. The agent is terminated once its push lands and the
+   slot refills with a fresh agent on a fresh brief — ten legs stay live.
 
-Every PR description states up front: **claim-bearing** (touches a mathematical claim, a gate
-answer, or any number in prose) or **mechanical** (scripts, figures, links, index,
-infrastructure).
+An outcome that falls under an escalation (§8) is the one exception: the agent pushes its
+*branch* only, never `main`, and reports it as parked.
 
-**Merge order under parallelism:** first ready, first merged. There is no "leg merges last"
-any more — with disjoint territories there is nothing to be last for. Every branch still open
-after a merge **rebases on the new `main` and re-gates** before its own turn.
+**Claim-bearing legs land without pre-push review; the compensating control is post-landing
+verification.** Every landing that touches a mathematical claim, a gate answer, or any number
+in prose gets its paired verifier's line-by-line review on `main`, after the fact, plus a
+DOCS quartet check. A confirmed gap becomes a **rework leg, not a user question**: the
+orchestrator hands the verifier's finding to the DM, which cuts a correction leg at the top
+of the queue — same territory as the flawed landing, gate pre-committed to the corrected
+measurement — and it lands forward on `main` like any other leg (landed history is never
+rewritten). The gap and its correction are recorded in the report. The one exception: a
+correction that would delete or rewrite a banked result is escalation #4 and waits for the
+user.
 
-**FAIL** → send the gate output back to the owning agent; it fixes, you re-gate. If the
-owning agent is gone, spawn a bench agent with the branch and the gate output.
+**Support branches (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`): the orchestrator merges
+them** when the gate prints PASS and the diff stays in territory. FAIL → gate output back to
+the owning agent (or a bench agent if it is gone); it fixes, the orchestrator re-gates.
+First ready, first merged; a support branch still open after a landing rebases on the new
+`main` and re-gates before its own turn.
+
+Every leg brief and support branch states up front: **claim-bearing** (touches a mathematical
+claim, a gate answer, or any number in prose) or **mechanical** (scripts, figures, links,
+index, infrastructure).
 
 Conflicting claims between two legs → the verifiers adjudicate on the evidence; the
-orchestrator merges the survivor and records the dispute in the progress file and the report.
+orchestrator records the dispute and its resolution in the progress file and the report.
 
 ## 8. The four escalations (unchanged, and still the only ones)
 
@@ -246,12 +274,25 @@ orchestrator merges the survivor and records the dispute in the progress file an
 - any prose claiming movement on the Clay chain, or odds better than the recorded ~0.05%;
 - deleting or rewriting banked results in `writeup/`.
 
-These are parked as open PRs, listed at the **top** of `PROGRESS.md` under `⚠ NEEDS YOU`, and
-left for the user. **Work does not stop for them** — the orchestrator parks the item and keeps
-every other leg moving. Everything else merges as it turns green.
+These are parked as pushed *branches* (never `main`), listed at the **top** of `PROGRESS.md`
+under `⚠ NEEDS YOU`, and left for the user. **Work does not stop for them** — the orchestrator
+parks the item, refills the slot, and keeps every other leg moving. Everything else lands as
+it turns green.
 
-Anything else that genuinely needs a human decision goes in the same `⚠ NEEDS YOU` section
-with the exact question and the options, and the run continues around it.
+**Everything short of these four is decided, not asked.** The user's standing answer is on
+record:
+
+> *Pursue the option that is best for the overall goal of pursuing a Clay solve, and the
+> secondary goal of producing useful novel findings.*
+
+Direction questions go to the DM, which decides under that directive; operational questions
+the orchestrator decides the same way, and either records the decision and its reasoning in
+the report. The directive governs **what to try, never what to claim** — the walls in §1
+stand, and it lifts no ban and promotes no route into the plan (those remain escalations
+above). Verification rework is a leg (§7b), not a question. `⚠ NEEDS YOU` is reserved for
+the four escalations plus the rare question the standing directive genuinely cannot answer —
+and such an entry states why the directive could not decide it, with the decider's
+recommended option first.
 
 ## 9. The progress file, the report, and stopping
 
@@ -261,8 +302,10 @@ Rewritten **every integration cycle, and at minimum every ~10 minutes**, so the 
 it at any time without asking. Sections, in this order:
 
 1. `## ⚠ NEEDS YOU` — numbered, exact question, options, what is blocked and what is not.
-   Say "nothing" when there is nothing; never omit the heading.
-2. `## Now` — timestamp, cycle number, `main` SHA, stop-file status, agents live / 24.
+   Say "nothing" when there is nothing; never omit the heading. With the standing directive
+   (§8) in force this section normally holds the four escalations or "nothing" — a question
+   here means the directive could not decide it, and the entry says why.
+2. `## Now` — timestamp, cycle number, `main` SHA, stop-file status, agents live / 32.
 3. `## Legs` — one row per live leg: number, route, agent, branch, phase
    (`novelty` → `build` → `measure` → `writeup` → `verify` → `gating` → `merged`), started,
    last event.
@@ -271,9 +314,10 @@ it at any time without asking. Sections, in this order:
 6. `## Queue` — the next legs from `DIRECTION.md`.
 7. `## Stop` — the three stop files, restated every time.
 
-Because it is git-ignored it never churns `main`. Whenever the orchestrator merges anything it
-also refreshes `reports/STATUS.md` — a committed snapshot of sections 1–3 — so the same view is
-readable from a cloud or mobile session.
+Because it is git-ignored it never churns `main`. Whenever anything lands on `main` — a leg's
+own push or an orchestrator merge — the orchestrator also refreshes `reports/STATUS.md` — a
+committed snapshot of sections 1–3 — so the same view is readable from a cloud or mobile
+session.
 
 ### 9b. `reports/REPORT_<YYYY-MM-DD>.md` — the durable record (committed)
 
@@ -331,6 +375,29 @@ on the first four parallel legs rather than arguing about it:
 - **Write it up** in `reports/EXPERIMENT_SHARDING.md`, and state plainly that this is n=3 vs
   n=1 on legs of unequal difficulty — suggestive, not a measurement. If the unsharded arm
   wins, drop the control and never shard again; record that in this file.
+
+## 11. The maintenance sweep (periodic tech debt)
+
+**User directive (2026-08-05):** the ten leg slots stay Opus and stay research. Tech debt is
+handled by **Sonnet support agents, at most five live at once**, and the sweep is **kicked
+off by the orchestrator periodically** — it is not a standing lane and it never displaces a
+leg slot.
+
+- **Cadence:** at run start (before the first dispatch cycle settles), and again at each
+  date boundary alongside the report (§9b). Off-cadence only if integration trips over debt
+  that blocks it (a broken index, a dead reference in a handoff file).
+- **Seed:** the newest `reports/TECH_DEBT_REVIEW_*.md`. The sweep *refreshes* it rather than
+  starting blind: re-audit docs/code/structure for drift, mark items closed with the fixing
+  commit, append new ones. Every item carries evidence (file:line), a size, and a
+  **claim-bearing vs mechanical** flag.
+- **Mechanical items** (links, indexes, stale state files, script and registration fixes)
+  are worked directly by sweep agents under declared territories (§5b) and land through the
+  normal support-branch merge path (§7).
+- **Claim-bearing items are never worked by the sweep.** Anything touching a numeric claim,
+  gate wording, banked prose, the merge criterion, or the ledgers goes to the DM as a queue
+  candidate and gets a leg + verifier like any other claim-bearing change.
+- Sweep agents obey all of §1 and §5a: no ledger edits, no `DIRECTION.md`, no banked-result
+  rewrites. A sweep finding that *requires* one of those is a report line, not an edit.
 
 ---
 
