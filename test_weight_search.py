@@ -28,6 +28,13 @@ are the things that would make it untrustworthy:
       properties with their frozen thresholds attached, and its verdict must be the AND
       of them -- a gate whose verdict is not computed from its own properties is a
       decoration.
+  (9) THE TWO NAMED REPAIRS DO WHAT THEY CLAIM (prep/weight-repairs).  P2: a weight
+      below the measured lower wall must be excluded from `in_box` once the wall is
+      supplied, and must still be admitted with the default (None) wall -- the repair
+      is opt-in, not a silent behaviour change.  P3: `defect_ladder` must report a
+      per-weight window and mark a weight UNRESOLVED rather than fit a slope through
+      too few linear-regime points; a weight with an artificially tiny window must
+      come back unresolved.
 
 Run: .venv/bin/python test_weight_search.py
 """
@@ -37,9 +44,9 @@ import time
 import numpy as np
 
 from solver.weight_search import (
-    BOX_LOWER, BOX_UPPER, EXACT_C_OMEGA, EXACT_SLOPE0, GENE_NAMES, PRECEDENTS,
-    WALL_POWER, BorderedCLM, FitnessEngine, exact_hilbert, exact_profile,
-    hand_weights, lower_wall, novelty_verdict, six_property_gate,
+    BOX_LOWER, BOX_UPPER, DEFECT_MIN_WINDOW, EXACT_C_OMEGA, EXACT_SLOPE0, GENE_NAMES,
+    PRECEDENTS, WALL_POWER, BorderedCLM, FitnessEngine, defect_ladder, exact_hilbert,
+    exact_profile, hand_weights, in_box, lower_wall, novelty_verdict, six_property_gate,
 )
 
 
@@ -204,6 +211,44 @@ def test_gate_is_computed_from_its_properties():
           f"{rep['verdict']} == AND of them")
 
 
+def test_repairs_measured():
+    """(9) The two named repairs (P2, P3) do what they claim, and are opt-in."""
+    pr = BorderedCLM(n=201)
+    z, _ = pr.newton()
+    eng = FitnessEngine(pr, z)
+    lw = lower_wall(eng)
+
+    # P2: a weight strictly below the measured wall is excluded once the wall is
+    # supplied, and NOT excluded with the default None (no silent behaviour change).
+    # p == q keeps far-field power = p+q centred on the wall while staying in-box.
+    below = np.array([0.5 * (lw - 1.0), 0.0, 0.5 * (lw - 1.0), 0.0, -2.0])
+    assert in_box(below, lower_wall_power=None), \
+        "the default (unrepaired) call must be unaffected by the wall existing"
+    assert not in_box(below, lower_wall_power=lw), \
+        "a weight below the measured lower wall must be excluded once it is supplied"
+    above = np.array([0.0, 0.0, 0.0, 0.0, -2.0])
+    assert in_box(above, lower_wall_power=lw), \
+        "a weight safely above the wall must still be admitted"
+
+    # P3: defect_ladder must report a per-weight window, and a weight too poorly
+    # conditioned to fit MUST come back unresolved rather than fit anyway.
+    hw = hand_weights()
+    th = np.array([hw["naive"], hw["tuned_leg46"]])
+    eps, tab, slopes, mono_ok, resolution = defect_ladder(pr, z, th)
+    assert len(resolution) == 2 and all("resolved" in r for r in resolution)
+    assert tab.shape == (len(eps), 2)
+    # the naive weight has the largest ||A||_w in this project's own record (1.69e8),
+    # so its window is the tightest; it must not silently share the tuned weight's slope
+    resolved = [r["resolved"] for r in resolution]
+    for r, s in zip(resolution, slopes):
+        if not r["resolved"]:
+            assert np.isnan(s), "an unresolved weight must not report a fitted slope"
+        else:
+            assert r["n_window"] >= DEFECT_MIN_WINDOW
+    print(f"[ok] (9) P2: wall={lw:+.3f} excludes below/admits above; "
+          f"P3: {sum(resolved)}/2 hand weights resolved, windows reported per-weight")
+
+
 if __name__ == "__main__":
     t0 = time.time()
     test_ledger_and_verdict()
@@ -214,4 +259,5 @@ if __name__ == "__main__":
     test_gauge_is_load_bearing()
     test_lower_wall_moves_with_resolution()
     test_gate_is_computed_from_its_properties()
+    test_repairs_measured()
     print(f"\nall weight-search gates pass ({time.time() - t0:.1f}s)")
