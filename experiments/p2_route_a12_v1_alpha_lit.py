@@ -22,7 +22,8 @@ WHAT CAME BACK -- the disjunction splits:
 
   * alpha_1 = dalpha/dmu at that point:  NO.  Not in Xu, not in ALS, not in J. Chen,
     not in LSS, not in the periodic exact-solution paper, not in Sakajo, and not
-    anywhere in a 100-result arXiv enumeration of the Constantin-Lax-Majda corpus.
+    anywhere in a complete 25-result arXiv enumeration (max_results=100 requested,
+    totalResults=25 returned) of the Constantin-Lax-Majda corpus.
     Xu, in the same subsection that publishes the threshold, says the marginal case
     s = s* is open and that his machinery lives at a = 0.
 
@@ -35,13 +36,18 @@ THE REASON THE GAP IS STRUCTURAL, not an accident of searching:
     which anyone could have read it off.
 
 TWO TRAPS, either of which produces a wrong verdict (both recorded in the JSON):
-  T1  "critical dissipation" means two different things at a = 1/2.  J. Chen's is
-      NORM criticality, gamma = |a|^{-1} = 2.  The scaling-relevance criticality of
-      the self-similar profile is sigma = 3.  Chen's s = 2 theorem is, in Xu's own
-      classification, SUBcritical -- it does not touch the point in question.
-  T2  ALS call sigma = 0 "'marginal' dissipation" (a 1D Oldroyd-B stress model).
-      That is the BOTTOM of the sigma range, not the point sigma = sigma_c.  It is
-      the only "marginal" hit in the dissipative corpus and it is a false friend.
+  T1  "critical dissipation" means two different things at a = 1/2.  J. Chen's own
+      NORM criticality, from L^1 conservation in his a > -1 regime, is gamma = 1
+      (his formula gamma = |a|^{-1}, in the L^{|a|} norm, is stated only for
+      a <= -1 and does not apply here).  The scaling-relevance criticality of the
+      self-similar profile is sigma = 3, two units above.  Chen's Theorem 1.1
+      blow-up result separately uses the full Laplacian, gamma = 2 (his chosen
+      instrument, "for simplicity" -- one unit below sigma = 3, matching Xu's
+      "s = 2 < 3, subcritical").  Either reading, Chen's theorem does not touch the
+      point in question.
+  T2  ALS call sigma = 0 "'marginal' dissipation".  That is the BOTTOM of the sigma
+      range, not the point sigma = sigma_c.  It is the only "marginal" hit in the
+      dissipative corpus and it is a false friend.
 
 METHOD, so the pass is reproducible:
     bash Papers/fetch.sh 2607.19762 2207.07548 2010.01201 1908.09385   (4/4 first try)
@@ -252,7 +258,7 @@ SOURCES = [
         "arxiv": "1908.09385",
         "cite": "J. Chen 2020, Nonlinearity 33 2502-2532",
         "tier": 2,
-        "role": "blow-up at gamma=2 for a near 1/2; his 'critical' is NORM criticality -- trap T1",
+        "role": "blow-up via full Laplacian (gamma=2) for a near 1/2; his NORM criticality (L^1 conservation) is gamma=1 -- trap T1",
         "locations": {
             "sec_1.2_scaling_and_critical_dissipation": "lines 84-96",
             "a_half_self_similar_ansatz_inviscid": "lines 195-222",
@@ -447,18 +453,29 @@ def build() -> dict:
                 "id": "T1",
                 "statement": (
                     "'critical dissipation' means two different things at a = 1/2 and "
-                    "they differ by a whole unit of sigma"
+                    "they differ by two units of sigma"
                 ),
-                "chen_norm_criticality_gamma": 2.0,
+                "chen_norm_criticality_gamma": 1.0,
+                "chen_norm_criticality_note": (
+                    "from L^1 conservation, Chen's a > -1 regime; his gamma = |a|^-1 "
+                    "formula (norm L^|a|) is stated only for a <= -1 and does not apply "
+                    "at a = 1/2"
+                ),
+                "chen_theorem_1.1_dissipation_gamma": 2.0,
+                "chen_theorem_1.1_note": (
+                    "full Laplacian, his chosen instrument 'for simplicity' -- not a "
+                    "criticality claim"
+                ),
                 "scaling_relevance_criticality_sigma": 3.0,
                 "consequence": (
-                    "Chen's s = 2 theorem is SUBcritical in Xu's classification and does "
-                    "not touch the point in question"
+                    "Chen's theorem is SUBcritical in Xu's classification (gamma=2 or "
+                    "gamma=1, either way below sigma=3) and does not touch the point in "
+                    "question"
                 ),
             },
             {
                 "id": "T2",
-                "statement": "ALS call sigma = 0 \"'marginal' dissipation\" (1D Oldroyd-B stress model)",
+                "statement": "ALS call sigma = 0 \"'marginal' dissipation\"",
                 "consequence": "the bottom of the sigma range, not sigma = sigma_c; a false friend",
             },
         ],

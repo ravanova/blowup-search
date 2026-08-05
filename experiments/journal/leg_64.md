@@ -69,24 +69,29 @@ Xu, in the same subsection that publishes the threshold, says the case `s = s*` 
 **marginal** and that persistence there "is the program of Section 8, not established
 here"; his Appendix A machinery is at `a = 0` only.
 
-Breadth actually covered, so "not found" means something: a 100-result arXiv API
-enumeration of the whole `Constantin-Lax-Majda` corpus (the dissipative subset is exactly
-four papers), full-text greps of all four, seven web searches including one on the digits
-`0.133683`, and Sakajo's two 2003 papers (Xu's refs [18]/[19] — `a = 0`, and thresholds
-**in** `ν` rather than a derivative **of the exponent with respect to** `ν`).
+Breadth actually covered, so "not found" means something: a complete 25-result arXiv API
+enumeration of the whole `Constantin-Lax-Majda` corpus (`max_results=100` requested,
+`totalResults=25` returned; the dissipative subset is exactly four papers), full-text greps
+of all four, seven web searches including one on the digits `0.133683`, and Sakajo's two
+2003 papers (Xu's refs [18]/[19] — `a = 0`, and thresholds **in** `ν` rather than a
+derivative **of the exponent with respect to** `ν`).
 
 ## Two traps, either of which would have closed the gate wrongly
 
-**T1 — "critical dissipation" means two different things at `a = 1/2`, differing by a whole
-unit of `σ`.** J. Chen (`1908.09385` §1.2) defines criticality by **norm scaling**:
-`Λ^γ` with `γ = |a|^{-1}`, which at `a = 1/2` is **`γ = 2`**. The scaling-relevance
-criticality of the self-similar profile is **`σ = 3`**. Chen's theorem is, in Xu's own
-classification, **subcritical**. Reading "global well-posedness with critical dissipation"
-as covering our point would have produced a false YES.
+**T1 — "critical dissipation" means two different things at `a = 1/2`, differing by two
+units of `σ`.** J. Chen (`1908.09385` §1.2) defines criticality by **norm scaling**. His
+`Λ^γ` with `γ = |a|^{-1}` formula (norm `L^{|a|}`) is stated only for `a ≤ −1`; at
+`a = 1/2` — his `a > −1` regime — his own text gives `γ = 1`, from `L^1` conservation
+("`L = Λ` corresponds to the critical dissipation"). The scaling-relevance criticality of
+the self-similar profile is **`σ = 3`**, two units above. (His Theorem 1.1 blow-up result
+separately uses the full Laplacian, `γ = 2` — his chosen instrument, not a criticality
+claim; that is the number behind Xu's "`s = 2 < 3`, subcritical.") Either way, Chen's
+result is, in Xu's own classification, **subcritical**. Reading "global well-posedness with
+critical dissipation" as covering our point would have produced a false YES.
 
-**T2 — ALS's "'marginal' dissipation" is `σ = 0`**, from a 1D Oldroyd-B stress model. It is
-the bottom of the `σ` range, not `σ = σ_c`. It is the only "marginal" hit in the
-dissipative corpus, and it is a false friend.
+**T2 — ALS's "'marginal' dissipation" is `σ = 0`**. It is the bottom of the `σ` range, not
+`σ = σ_c`. It is the only "marginal" hit in the dissipative corpus, and it is a false
+friend.
 
 ## The magnitudes
 

@@ -191,7 +191,7 @@
       "arxiv": "1908.09385",
       "cite": "J. Chen 2020, Nonlinearity 33 2502-2532",
       "tier": 2,
-      "role": "blow-up at gamma=2 for a near 1/2; his 'critical' is NORM criticality -- trap T1",
+      "role": "blow-up via full Laplacian (gamma=2) for a near 1/2; his NORM criticality (L^1 conservation) is gamma=1 -- trap T1",
       "locations": {
         "sec_1.2_scaling_and_critical_dissipation": "lines 84-96",
         "a_half_self_similar_ansatz_inviscid": "lines 195-222"
@@ -294,14 +294,17 @@
   "traps": [
     {
       "id": "T1",
-      "statement": "'critical dissipation' means two different things at a = 1/2 and they differ by a whole unit of sigma",
-      "chen_norm_criticality_gamma": 2.0,
+      "statement": "'critical dissipation' means two different things at a = 1/2 and they differ by two units of sigma",
+      "chen_norm_criticality_gamma": 1.0,
+      "chen_norm_criticality_note": "from L^1 conservation, Chen's a > -1 regime; his gamma = |a|^-1 formula (norm L^|a|) is stated only for a <= -1 and does not apply at a = 1/2",
+      "chen_theorem_1.1_dissipation_gamma": 2.0,
+      "chen_theorem_1.1_note": "full Laplacian, his chosen instrument 'for simplicity' -- not a criticality claim",
       "scaling_relevance_criticality_sigma": 3.0,
-      "consequence": "Chen's s = 2 theorem is SUBcritical in Xu's classification and does not touch the point in question"
+      "consequence": "Chen's theorem is SUBcritical in Xu's classification (gamma=2 or gamma=1, either way below sigma=3) and does not touch the point in question"
     },
     {
       "id": "T2",
-      "statement": "ALS call sigma = 0 \"'marginal' dissipation\" (1D Oldroyd-B stress model)",
+      "statement": "ALS call sigma = 0 \"'marginal' dissipation\"",
       "consequence": "the bottom of the sigma range, not sigma = sigma_c; a false friend"
     }
   ],
