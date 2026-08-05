@@ -3,121 +3,94 @@
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
 > bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
-> `PORT`, `V` and `C-PILOT` are **DONE**; **`L1` is NEXT.** Stage `B` is **blocked** —
-> C-PILOT's gate answered **NO**, so the GA ban did not lift.
+> `PORT`, `V`, `C-PILOT` and **`L1`** are **DONE**; **`T` is NEXT.** Stage `B` is still
+> **blocked** — C-PILOT's gate answered **NO**, so the GA ban did not lift.
 
 ---
 
-# DIRECTIVE 1 — ROUTE-L1: CHANGE THE REPRESENTATION. DO NOT PUSH THE CURRENT ONE.
+# DIRECTIVE 1 — ROUTE-T: THE TAIL LEMMA. MEASURE THE REPAIR BEFORE BUILDING ANYTHING ON IT.
 
-`L1` = certify `HL_S2_nonsymmetric` **for real** — the non-symmetric self-similar Hou–Luo
-profile, reported by Chen–Huang–Li in April 2026 as *numerical only, no proof of any kind*.
-**It is the only movable link of the chain** and it is a genuine, citable result if it lands.
+`L1` closed at leg 51 with its gate answered **NO** and the term named: **the weight class
+of the tail.** That is the branch `L1`'s own gate said to write up as the finding, and it is
+written up (`TECHNICAL/BLOG_P2_ROUTEL1_V2.md`, `PHASE2_P2_NOTES` **§40**, fig46). `T` is
+what leg 51 made possible, not a retry of it.
 
-## What leg 50 already did — step one is DONE
+## What leg 51 settled, and do not re-derive it
 
-`solver/interval_certificate.py` wires `solver/interval.py` through the bordered residual.
-**The radii polynomial closes in INTERVAL arithmetic at all three rungs**: rigorous
-`Z₁ = 8.59e−09 / 5.71e−08 / 1.54e−07` at `n = 201/401/801`, all below 1, with
-`Y₀/budget = 2.282e−03` at `n = 201` where the naive evaluation path gives 1.479 and fails.
-The float expiry date leg 49 measured is no longer the binding constraint.
+The representation change **worked exactly as the plan predicted**. In Route-E's
+compactified basis (`X = tan(θ/2)`, odd sines, now `solver/spectral_certificate.py`):
 
-**But read the claim as leg 50 states it, and do not widen it.** It is a theorem about the
-**finite-dimensional polynomial system with `H`, `D`, `Uop` taken as EXACT STORED DATA** —
-not about the continuum profile.
+* **the operator gap is gone** — `H`, the dilation and the velocity are exact on the whole
+  line, checked in exact rational arithmetic (defect 3.5e−15) and cross-checked against
+  `solver/line_hilbert.py` with a `n^−1.00` refinement ladder;
+* **`Y₀` is EXACTLY ZERO** — `Fraction(0)`, all 18 modes of the anchor's residual. Not
+  small. Absent;
+* **`Z₁` on the finite block is rigorous and tiny** (1.44e−10 at `K = 256`, `s = 1`) and
+  **`Z₂` is finite from the basis algebra** (79.5). Three terms of four.
 
-## The two remaining gaps are the SAME gap, and it is the representation
+**And the fourth has no bound.** The tail operator's **diagonal is exactly zero** — the
+unbounded part of the linearisation is the dilation **shift**, not a multiplier — and it is
+**not injective**: its kernel is `h_m ~ m^{−2.007}`, i.e. the **`|X|^{−1}` far field**.
+`‖T_tail⁻¹‖_w` diverges in every class tried: flat `M^{+1.28}`, algebraic best `M^{+0.64}`
+at `s = 1`, geometric **×`ν` per neglected mode**. The window is **empty by 0.606 in
+exponent units** (object needs `s < α = 0.394`, operator wants `s ≈ 1`) and no point of the
+curve touches zero.
 
-1. **the truncation tail**, `|X| > X_max` — and leg 47 measured that reach makes it **worse**
-   (+0.47 decades per unit `ρ`), so no domain size closes it;
-2. **the operators** — `H`, `D`, `Uop` are finite-difference approximations being treated as
-   exact.
+**The positive control is what makes that a measurement:** the same code path with `Λ¹`
+dissipation saturates to exponent `+0.000` in every class. The machinery works the moment
+the operator has a diagonal.
 
-**Both exist only because the certificate is built on a truncated finite-difference grid.**
+## T-0 FIRST: the novelty pass, before any construction
 
-## The move: rebuild the certificate in Route-E's compactified basis
+Leg 51 produced one methodological claim — *`ℓ¹`-Fourier radii-polynomial certification
+needs the unbounded part of the operator to be a **multiplier**; inviscid self-similar
+transport makes it a **shift** with zero diagonal* — and one **checkable prediction about
+the shape of the field**: the certified self-similar blow-ups using this machinery
+(Dahne–Figueras, CGL, `arXiv:2410.05480`) are **dissipative**, while the certified
+**inviscid** ones (Chen–Hou) used weighted energy estimates over 145 pages instead.
+**Check it.** If it is known, say so and drop the claim to a re-derivation. The novelty gate
+has closed one stage (48) and narrowed two others (49, 51); do not skip it.
 
-`solver/rescaled_spectrum.py`, `X = tan(θ/2)` with odd sines. Its own docstring:
+## T-1 THEN: border the tail with its own kernel, and measure
 
-> *three operators are then exact on the whole line with **no truncation and no
-> quadrature*** — `H(sin kθ) = −cos kθ + (−1)^k`, the dilation `X d/dX = sin θ d/dθ`, and
-> `d/dX = (1+cos θ) d/dθ` — **and the velocity is exact too**, via
-> `N_{k+1} = −2N_k − N_{k−1} − 2cos kt`.
+An operator that fails to be invertible by a **finite-dimensional kernel** is the classic
+case for **bordering** — the same move that made the finite block work in Route-PORT (three
+gauge freedoms → three border rows). Add the far-field mode(s) as explicit unknowns and the
+transport's solvability functionals as border rows, **one per parity chain**, and measure
+`‖T_tail⁻¹‖_w` on the **bordered** tail as a ladder in `M`, in the same three weight classes,
+through the same code path. `solver/spectral_certificate.py` already carries the tail block
+(`tail_block`), the homogeneous mode (`homogeneous_tail_mode`) and the dissipative control
+(`dissipative_control`) — **if T-1 needs a new solver, the plan was wrong.**
 
-Rebuild there and **gap (2) vanishes outright**, while **gap (1) becomes a spectral tail
-bound on neglected Fourier coefficients** — which is the standard radii-polynomial move, not
-a bespoke asymptotic enclosure. Two open-ended obstacles collapse into one well-understood
-one.
-
-## Expect the algebraic tail to bite — and that is the interesting part
-
-`Ω ~ |X|^{−0.394}` is **non-smooth at `θ = π`**, so the sine coefficients decay
-*algebraically* (`~k^{−1.4}`), not geometrically. `ℓ¹` still converges; **geometric `ℓ¹`
-weights do not.** Two responses, in order:
-
-1. **Factor the tail out** — `Ω = (1+X²)^{−p/2} Ψ`, so `Ψ` is smooth and its coefficients
-   decay geometrically. Standard singularity-subtraction; try this first.
-2. If that is not enough, **algebraic weights** — and note what that is: *"standard
-   radii-polynomial work uses GEOMETRIC weights on bounded domains while ours is ALGEBRAIC
-   decay on an UNBOUNDED one"* is **the one methodological claim Route-J's literature pass
-   found NO hit for.** If the weight class is what blocks, **that is the contribution**, and
-   it should be written up as a result rather than filed as a failure.
-
-**Gate:** does the polynomial close in interval arithmetic, tail included? **Yes** → a novel
-Tier-3 result on an uncertified object; report it as that and only that. **No** → stop and
-report *which* term ran out of margin — the interval widening, the spectral tail, or the
-weight class. **If it is the weight class, write it up.**
-
----
-
-# DIRECTIVE 2 — WHAT LEG 49 SETTLED ABOUT STAGE `B`, AND WHY IT IS NOT NEXT
-
-Stage `B` ("evolve the certificate") rested on one table from leg 46: one weight constant
-worth **5186×**, therefore *"closure is a property of the SPACE."* Leg 49 tested that
-claim on the known-answer object rather than assuming it.
-
-* **The effect reproduces: 5604×.** It is not a one-object accident.
-* **The explanation does not.** Pin `c_l` with a border row instead of letting it come out
-  implicitly — a change of bookkeeping, not of mathematics — and the same weight change is
-  worth **0.56×**. `‖A‖_w` goes 1.69e+08 → 1.69e+06 with the tuned weight *only when `c_l`
-  is implicit*; pin it and that row of `A` is a unit vector the norm never sees.
-  **The weight is preconditioning the BORDER ROWS, not choosing a function space.**
-* **The fitness FAILED its viability gate, 4/6, and the GA was not run.** P2 finite 0.775
-  < 0.90 (nine of forty weights have `Z₁ ≥ 1`); P3 `max|slope−1|` 0.092 > 0.05 against the
-  known answer that `Y₀` is linear in an injected defect.
-* **The analytic wall never binds.** `p* = 1` from the `1/X` tail was the one constraint
-  the plan told the stage to respect; removing it entirely moves the optimum by
-  **1.5e−04 decades**. The wall that binds had to be measured (see Directive 1).
-* **A deterministic grid still beat the hand: 48,270× over naive, 8.61× over leg 46's
-  constant** — and the win is almost entirely `Y₀`, from `w_l ≈ 0.99`, a factor **750**
-  below `X_max` where the hand stopped at 100. **The hand had the right direction and
-  stopped early.**
-
-**If `B` is ever revived**, two repairs are named and both are engineering: carry the
-*measured* lower wall in the box as the analytic one already is, and state the fitness's
-defect-tracking accuracy as a resolution (0.2% typical, 9% worst) rather than assuming it
-exact. `solver/weight_search.py` + `test_weight_search.py` **8/8** hold all of it.
+**Gate:** does the bordered tail inverse stay bounded in `M`, in a class where the target
+also has finite norm (`s < 0.394`)? **Yes** → `L1`'s no was about the standard construction
+and not about the object; rebuild end to end on `HL_S2_nonsymmetric`, and re-run the ceiling
+because the borders are new unknowns with their own `Y₀`. **No** → report which side failed
+(bordered inverse still diverging = the kernel was not the whole obstruction; window still
+empty = it was, but the class is), then **stop building `ℓ¹`-Fourier certificates for this
+operator and say so in the plan.**
 
 ---
 
-# WHERE THE CLAY QUESTION LANDED — READ THIS BEFORE PROPOSING A NEW DIRECTION
+# DIRECTIVE 2 — THE TWO THINGS FROM EARLIER LEGS THAT ARE STILL LIVE
 
-The chain **cannot be climbed as written** (`PHASE2_P2_NOTES.md` §24):
+**STAGE `B` IS NOT NEXT, AND WHY.** It rested on one weight constant worth 5186×, therefore
+*"closure is a property of the SPACE."* Leg 49 reproduced the effect (5604×) and **refuted
+the explanation**: pin `c_l` with a border row instead of letting it come out implicitly and
+the same weight change is worth **0.56×**. The weight was preconditioning the **border
+rows**. The fitness also **failed its own viability gate 4/6**, and **no GA compute has
+touched it** — `plan_of_record.py`'s GA ban is worded so it does not lift merely because the
+stage closed. Two named repairs, both engineering: carry the *measured* lower wall in the
+box, and state the fitness's defect tracking as a resolution (0.2% typical, 9% worst).
+`solver/weight_search.py` + `test_weight_search.py` **8/8** hold all of it.
 
-* **`L1`** — a certified 1D toy profile. **The only movable link.**
-* **`L2`** — 2D Boussinesq. **Chen–Hou proved it**, 145 pages.
-* **`L3`** — axisymmetric 3D Euler with boundary. **Chen–Hou proved that too.**
-* **`L4`** — 3D Navier–Stokes. Clay, and out of reach of interval arithmetic by Wall 2.
-
-**AND THE ONE CLAY-ADJACENT ROUTE WAS TRIED AND IS CLOSED.** Stage `V` — *does a certified
-inviscid blow-up survive dissipation, as a certificate?* — was closed by its own novelty
-gate at leg 48: Dahne–Figueras (`arXiv:2410.05480`) verify whole branches of self-similar
-singular CGL solutions in **interval arithmetic**, continued in the dissipation parameter.
-Leg 48 re-derived their zeros to **1.8e−07**, their branch to **3.0e−06**, and their fold
-to **3.8e−07**. **Do not weaken the novelty check, and do not skip it on whatever comes
-next** — it has now closed one stage (48) and narrowed another (49, where SOS/neural
-Lyapunov synthesis turned out to be an `ADJACENT` field and Chen–Hou §5.3.3 turned out to
-be the hand procedure we were automating).
+**THE CLAY CHAIN CANNOT BE CLIMBED AS WRITTEN** (`PHASE2_P2_NOTES.md` §24): `L1` a certified
+1D toy profile — the only movable link, and leg 51 measured what stands in its way; `L2` 2D
+Boussinesq — **Chen–Hou proved it**; `L3` axisymmetric 3D Euler with boundary — **Chen–Hou
+proved that too**; `L4` 3D Navier–Stokes — Clay, out of reach by Wall 2. **The one
+Clay-adjacent route was tried and is closed:** stage `V` was closed by its own novelty gate
+at leg 48 (Dahne–Figueras verify CGL branches in interval arithmetic; leg 48 re-derived
+their zeros to 1.8e−07, their branch to 3.0e−06, their fold to 3.8e−07).
 
 ---
 
@@ -128,55 +101,49 @@ in which norm?** **Name the realization** (70). **Gate the quantity the measurem
 by** (67). **Report the SHAPE of a ladder, not its endpoint** (72). **When a quantity has no
 referent, say so instead of bounding it** (73). **Test all the suspects at once** (74).
 **Two defects in the same problem are not the same defect** (75). **Keep the negative
-construction in the artifact** (76). **A check that is not executable decays at the rate
-of memory** (68). **A known-answer probe has a WINDOW, and the window is part of the probe**
+construction in the artifact** (76). **A check that is not executable decays at the rate of
+memory** (68). **A known-answer probe has a WINDOW, and the window is part of the probe**
 (84). **Re-measure your own headline before building a stage on it, and ablate the
-MECHANISM and not just the effect** (85).
+MECHANISM and not just the effect** (85). **A rigorous bound dominated by its own EVALUATION
+error is a statement about the code** (86). **A certification method has a SHAPE, and the
+shape is a property of the OPERATOR: multiplier or shift?** (87).
 
 **PROCESS RULES THAT KEEP EARNING THEIR PLACE.** Before pushing: regenerate the data,
 rebuild the figure, **check every number in the prose against the JSON**. When you commit a
 convergence ladder, **read the residual column's direction**. **Run the ablation battery
-before naming a suspect**, not after. And **grep `capabilities.py` before building
-anything**.
+before naming a suspect**, not after. **A negative result needs a positive control that can
+report the other answer** — leg 51's dissipative dial is the template. And **grep
+`capabilities.py` before building anything**.
 
 **BANS ARE MACHINE-READABLE.** `plan_of_record.py` carries every ban with what lifts it;
-`.venv/bin/python plan_of_record.py` prints the ones in force. Do not re-derive them here.
+`.venv/bin/python plan_of_record.py` prints the ones in force. Two are new: **do not sweep
+another weight family before bordering the tail** (leg 51 swept nine algebraic exponents,
+two geometric and flat — the curve has no zero), and **do not read leg 51's exactly-zero
+`Y₀` as progress toward the target** (it is zero because the a=0 CLM profile *is* one basis
+mode; the Hou–Luo profile is not).
 
-**CLAY.** Odds remain **~0.05%** behind Walls 1 and 2. In 49 legs, **no link of the L1→L4
+**CLAY.** Odds remain **~0.05%** behind Walls 1 and 2. In 51 legs, **no link of the L1→L4
 chain has moved.**
 
 ---
 
-*Updated 2026-08-05 (session close). **THIS SESSION SHIPPED ROUTE-C-PILOT v0 — a pilot
-that failed its own gate, and was worth more for failing it.***
+*Updated 2026-08-05 (session close). **THIS SESSION SHIPPED ROUTE-L1 v2 — the certificate
+rebuilt where the operators are exact, and the wall that was left.***
 
-**(C-0) THE GATE ANSWERED NO AND THE BAN HELD.** 4/6 on the frozen predicate; **no GA
-compute has touched this fitness**, and `plan_of_record.py`'s GA ban is re-worded so it
-does *not* lift merely because the stage closed. The deterministic grid that property 6
-needed anyway supplied the search result, so the ban cost the leg nothing but the right to
-call it a GA result. `solver/weight_search.py`, `test_weight_search.py` **8/8**,
-`experiments/p2_route_c_pilot_v0.py` → `writeup/data/p2_route_c_pilot_v0.json` → **fig44**;
-`TECHNICAL/BLOG_P2_ROUTEC_PILOT_V0.md`; `PHASE2_P2_NOTES` **§38**.
+**(L1v2-A) THE REPRESENTATION CHANGE DELIVERED WHAT IT PROMISED.** Two open-ended gaps
+became one well-understood term: the operator gap vanished outright and `Y₀` went from
+5.17e−12 to **exactly zero in rational arithmetic**. That is the first residual in this
+project that is not a discretisation of anything.
 
-**(C-1) THE PLAN'S NAMED SUBSTRATE COULD NOT SUPPLY THE FITNESS.** Chen–Hou's certified 2D
-profile has no defect to take (§32: the relaxation limit-cycles, the residual grows under
-refinement, `radii_polynomial_status` is `BLOCKED_AT_STEP_ONE`). Substituted the **a = 0
-CLM profile** and got four known answers instead of one: the exact pair `(Ω₀, HΩ₀)`; two
-ladders on two knobs (**spacing** converges the profile 4.13e−05 → 4.24e−07, **reach**
-converges `c_ω` to −1 as `1/X_max`); the analytic wall gated against its own predicted
-growth rate (×7.39 vs ×7.39); and an exact gauge invariance of the fitness, to 4.4e−16.
+**(L1v2-B) AND THE SURVIVING TERM IS UNBOUNDED IN EVERY STANDARD SPACE.** Tail diagonal
+exactly `0.0`; kernel `= |X|^{−1}` far field at `m^{−2.007}` against a predicted `m^{−2}`;
+geometric weights lose a factor `ν` **per neglected mode**. Leg 46's truncation gap and leg
+47's wrong-sign reach trend were **this one mode seen through a grid** — two facts, one
+object.
 
-**(C-2) THE PROBE HAD A WINDOW AND THE FIRST VERSION WAS OUTSIDE IT.** P3's known answer
-(slope exactly 1) holds only for `ε ≲ 1/‖A‖ = 5.9e−07`; applied at `ε = 10⁻²` it reported
-0.63 and looked like a property of the fitness. **The threshold was not moved and P3 is
-reported FAIL** — what the diagnosis bought is a *resolution*, not a pass: the fitness
-tracks a defect to 0.2% typically, 9% at worst.
+**(L1v2-C) THE CONTROL IS WHAT LICENSES THE NEGATIVE.** `Λ¹` dissipation saturates the same
+code path in every class, and the geometric class needs **5× more of it** than the others.
+The method is adapted to operators with a diagonal; inviscid transport has none.
 
-**(C-3) THE FLOAT REHEARSAL HAS AN EXPIRY DATE: n ≈ 3.2e+03.** See Directive 1's table.
-This is the strongest quantitative case this project has produced for interval arithmetic,
-and it arrived out of a property-2 diagnosis rather than from anyone looking for it.
-
-**NOVELTY: nothing claimed.** `novelty_verdict()` returns `PROCEED_NARROW` off fourteen
-queries — nothing searches the norm of a radii-polynomial certificate, but automatic search
-for a *certificate* is mature (SOS / neural Lyapunov, barrier synthesis), so the idea is
-not new, only its object. **No link of the chain moved.**
+**NOVELTY: nothing claimed, one prediction filed.** T-0 carries it. **No link of the chain
+moved.**

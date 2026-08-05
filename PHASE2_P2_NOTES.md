@@ -3262,3 +3262,95 @@ operators is NOT bounded, and neither is the far field. **Leg 46's 1.55e+08-ball
 truncation gap and leg 47's wrong-sign reach trend both stand untouched.** `L1`'s gate --
 "does it close in interval arithmetic, TAIL INCLUDED" -- is still open, and the tail is
 mathematics nobody here has written. Step one of L1, not L1.
+
+---
+
+## §40 — ROUTE-L1 v2 DONE (2026-08-05): THE REPRESENTATION CHANGE **WORKED** -- THE
+## OPERATOR GAP VANISHES AND `Y₀` IS **EXACTLY ZERO** -- AND THE ONE SURVIVING TERM HAS NO
+## BOUND IN ANY WEIGHT CLASS. `L1`'s GATE IS ANSWERED **NO**, AND THE TERM IS THE **WEIGHT
+## CLASS**, WHICH IS THE BRANCH THE GATE ITSELF SAID TO WRITE UP.
+
+*Leg 51. `solver/spectral_certificate.py`, `test_spectral_certificate.py` **14/14**,
+`experiments/p2_route_l1_v2_spectral.py` → `writeup/data/p2_route_l1_v2_spectral.json` →
+**fig46**; `TECHNICAL/BLOG_P2_ROUTEL1_V2.md`. 53 s, deterministic.*
+
+**(L1v2-0) WHAT THE COMPACTIFIED BASIS BOUGHT, MEASURED.** `X = tan(θ/2)`, odd sines
+(Route E's basis, `solver/rescaled_spectrum.py`). Against leg 50's grid certificate on the
+same kind of object:
+
+| | grid certificate (leg 50) | compactified (leg 51) |
+|---|---|---|
+| far field | truncated at `X_max = 745`, gap **1.55e+08 ball radii** | exact -- `θ = π` **is** `X = ∞` |
+| `H`, `X d/dX`, velocity | finite-difference / quadrature, treated as exact data | exact identities, checked in rational arithmetic |
+| `Y₀` at the anchor | 5.17e−12 | **`Fraction(0)`**, all 18 modes |
+| terms left unbounded | **2** | **1** |
+
+**(L1v2-1) THE EXACTNESS CLAIMS ARE NOW EXECUTABLE (68).** `w = (1+iX)/(1−iX)` computed as
+an exact **Gaussian rational** matches `cos kθ + i sin kθ` to **3.5e−15** for
+`k = 1,2,3,5,9`; the pole of `w^k` is at `X = −i` (lower half plane), which is where the
+`H` identity comes from. The velocity recursion's constant terms are `c_k = (−1)^k k`
+**exactly** (defect `0.0`). Independent cross-check: `solver/line_hilbert.py` reproduces
+the identity with a defect falling like `n^−1.00` -- a rate, not one agreement number.
+
+**(L1v2-2) THE STRUCTURAL FACT: THE TAIL OPERATOR'S DIAGONAL IS EXACTLY ZERO.** Not 1e−16;
+`0.0`. Every radii-polynomial certificate splits `A = A_K ⊕ A_tail` with `A_tail`
+**diagonal**, because the unbounded part of the operator is a **multiplier** (`Λ_k → ∞`,
+inverse `1/Λ_k`). Here it is the dilation **transport** `sin θ ∂_θ` -- bidiagonal, entries
+`±k/2`, nothing on the diagonal. The standard tail estimate does not fail here; it does not
+typecheck. And the operator is **not injective**: `v_{m+1} = v_{m−1} + 2g_m`, `h_m = v_m/m`
+gives a measured `h_m ~ m^{−2.007}` (predicted `m^{−2}`), i.e. the kernel is the **`|X|^{−1}`
+far field**, in `ℓ¹_w` for every `s < 1`. **Leg 46's truncation gap and leg 47's wrong-sign
+reach trend were this one mode seen through a grid.**
+
+**(L1v2-3) THE TAIL TERM, PER CLASS.** `‖T_tail⁻¹‖_w` on modes `65 … M`:
+
+| class | `M=128` | `M=1088` | divergence | per mode |
+|---|---|---|---|---|
+| flat `w=1` | 1.02 | 16.3 | `M^{+1.28}` | ×1.0029 |
+| algebraic `s=0.394` | 0.876 | 7.66 | `M^{+1.00}` | ×1.0023 |
+| algebraic `s=1` | 0.706 | 2.87 | `M^{+0.64}` | ×1.0015 |
+| geometric `ν=1.05` | 2.51 | 5.75e+18 | — | **×1.045** |
+| geometric `ν=1.20` | 2.74e+03 | 3.60e+77 | — | **×1.195** |
+
+The geometric growth factor **is `ν`**, to three digits, in both cases: every neglected mode
+costs the full weight of the mode. The literature's default class is the worst one here.
+
+**(L1v2-4) THE WINDOW IS EMPTY BY 0.606 IN EXPONENT UNITS.** Object side: `Ω ~ |X|^{−α}` ⇒
+coefficients `k^{−1−α}` ⇒ finite norm in `(1+k)^s` **iff `s < α`**, and `α = 0.394` for
+`HL_S2_nonsymmetric`. Operator side, measured: the divergence exponent is a U-curve,
+minimum **`+0.639` at `s = 1.00`**, `+1.28` at `s = 0`, `+1.27` at `s = 2`, `+1.00` at the
+object's own boundary. **No point of the curve touches zero.**
+
+**(L1v2-5) THE POSITIVE CONTROL SAYS THE INSTRUMENT WORKS.** Same code path, `−μk` on the
+diagonal (`Λ¹` dissipation, the only change): every class saturates to exponent `+0.000`.
+`μ = 0.1` suffices for flat and algebraic; the **geometric class needs `μ = 0.5`**, five
+times more -- it is the fragile class on both sides of the experiment. So "diverges" is a
+measurement, not a broken filter.
+
+**(L1v2-6) THE VELOCITY DOES NOT ESCAPE IT EITHER.** `c_k = (−1)^k k` means each mode's
+velocity carries a term **linear in `θ`**, whose odd Fourier series is the sawtooth,
+coefficients exactly `1/m`. For any model *with advection* -- and the target has it -- the
+EXACT velocity operator injects an algebraic `1/m` tail however analytic the profile is.
+**The far field does not leave when the grid does.**
+
+**(L1v2-7) FLOAT vs EXACT (86 applied to this leg's own headline).** The deciding quantity,
+the weighted inverse norm, recomputed in exact rational Gauss–Jordan at
+`K = 16,32,64,96,128`, `ν = 1.1`: max relative gap **8.8e−15** (exact `62.0005` at `K = 96`,
+`609.17` at `K = 128`). The divergence is mathematics.
+
+**NEW BANKED LESSON (87). A CERTIFICATION METHOD HAS A SHAPE, AND THE SHAPE IS A PROPERTY
+OF THE OPERATOR, NOT OF THE OBJECT.** Before choosing a framework, ask whether the
+unbounded part of the linearisation is a **multiplier** or a **shift**. Every `ℓ¹`-Fourier
+tail estimate assumes a diagonal. This leg measured that inviscid self-similar transport
+has none -- on the friendliest object available, a one-mode analytic profile in every class
+-- and that dissipation restores it instantly. There is a **checkable prediction** in that,
+and stage `T` carries it as T-0: the certified self-similar blow-ups that used this
+machinery (Dahne–Figueras, CGL) are **dissipative**; the certified **inviscid** ones
+(Chen–Hou) used weighted energy estimates over 145 pages instead. **It has not been checked
+here and is not claimed.**
+
+**CEILING (pre-committed, clause S7).** Measured on the **a = 0 CLM** object: one mode,
+analytic, in every class considered. A wall there bounds the difficulty for
+`HL_S2_nonsymmetric` **from below, not above** -- that profile does not even have finite
+norm in the class where the operator side is least bad. Nothing is claimed about it beyond
+that implication, and **no link of the L1→L4 chain moved.**

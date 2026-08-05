@@ -3,6 +3,37 @@
 Hand-written context per experiment (see LOGGING.md — the structured logs
 answer "what happened"; this records *why* and what a human noticed).
 
+## Phase-2 P2 — ROUTE-L1 v2: the representation change worked, and the tail did not (non-logged) — 2026-08-05
+
+**NOT a logged gate run** (deterministic; 53 s). Code `solver/spectral_certificate.py` +
+`test_spectral_certificate.py` (14/14); `experiments/p2_route_l1_v2_spectral.py` →
+`writeup/data/p2_route_l1_v2_spectral.json` → fig46. Writeups
+TECHNICAL/BLOG_P2_ROUTEL1_V2.md; PHASE2_P2_NOTES §40.
+
+**Why it exists.** Leg 50's certificate closed in interval arithmetic around a truncated
+grid object with two unbounded gaps. The plan of record said those are one gap and it is
+the representation, and named the replacement: Route-E's compactified basis. This leg
+builds the certificate there.
+
+**What a human should notice.** Three things.
+
+(1) **The prediction in the plan was right about the mechanism and wrong about which
+response would be needed.** It expected the algebraic decay of the *profile* to bite and
+proposed factoring the tail out. The profile used here is a single mode — as analytic as
+anything can be — and the tail still fails, because the obstruction is in the *operator*:
+the dilation transport is a shift with zero diagonal. Singularity subtraction would not have
+touched it.
+
+(2) **The positive control is doing the whole job of licensing the negative.** Adding `−μk`
+to the diagonal — one line, no other change — makes every weight class saturate to exponent
+`+0.000`. Without that dial the result would read as "my code diverges", which is not a
+finding. With it, "inviscid transport has no diagonal and dissipation gives it one" is.
+
+(3) **The exactly-zero `Y₀` is the least important number here and the most tempting one.**
+It is zero because the anchor *is* one basis mode. It is banked in `plan_of_record.py` as a
+ban rather than a headline, because the object that matters is not one mode and does not
+even live in the space where the operator behaves best.
+
 ## Phase-2 P2 — ROUTE-L v1: the boring term did it (non-logged) — 2026-08-04
 
 **NOT a logged gate run** (deterministic; ~13 min). Code `solver/port_certification.py`

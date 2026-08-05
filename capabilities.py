@@ -133,6 +133,26 @@ CAPABILITIES = [
                    "operators as exact data -- the far-field tail and the consistency of "
                    "(H, D) are NOT bounded, so it is step one of L1 and not L1"),
      "test": "test_interval_certificate.py"},
+    {"module": "solver/spectral_certificate.py",
+     "object": ("the certificate in the COMPACTIFIED basis, where the operators are exact "
+                "(Route-L1 step two, leg 51)"),
+     "holds": ("the exact coefficient-space residual (clm_residual, finite and rational -- a "
+               "K-mode profile has a 2K-mode residual with NO truncation error), the bordered "
+               "linearisation with a dissipation dial, weighted l^1 norms in three classes "
+               "(flat / algebraic (1+k)^s / geometric nu^k), the Banach algebra constant, "
+               "rigorous finite-block constants, the TAIL BLOCK and its inverse norm, the "
+               "homogeneous tail mode, exact rational inverse norms, and the executable "
+               "exactness audit of the three operator identities (moebius_power)"),
+     "validated": ("the a=0 CLM anchor's residual is EXACTLY Fraction(0) on all 18 modes; the "
+                   "basis identities hold to 3.5e-15 through exact Gaussian rationals; the "
+                   "velocity constants are (-1)^k k exactly; float weighted inverse norms "
+                   "match exact rational Gauss-Jordan to 8.8e-15. THE CEILING IS PART OF THE "
+                   "ENTRY: the tail operator's diagonal is exactly zero and its kernel is the "
+                   "|X|^-1 far field, so the tail term diverges in EVERY weight class tried "
+                   "(flat M^1.28, algebraic best M^0.64, geometric x nu per mode) -- the "
+                   "positive control with Lambda^1 dissipation saturates, so that is a "
+                   "measurement and not a broken instrument"),
+     "test": "test_spectral_certificate.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",
      "validated": ("agrees with hand-computed cases; Route-D v6 found the discrete-ball\n                   TRAP here -- the bound was true and useless"),

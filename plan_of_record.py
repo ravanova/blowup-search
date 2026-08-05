@@ -288,7 +288,22 @@ STAGES = [
         "id": "L1",
         "name": ("Certify HL_S2_nonsymmetric FOR REAL: interval arithmetic + an analytic "
                  "far-field enclosure"),
-        "status": "NEXT",
+        "status": "DONE",
+        "outcome": (
+            "GATE ANSWERED **NO** AT LEG 51, AND THE TERM THAT RAN OUT IS THE WEIGHT CLASS "
+            "OF THE TAIL -- which is the branch the gate itself said to write up as the "
+            "finding. The representation change worked: rebuilt in the compactified basis "
+            "(solver/spectral_certificate.py) the operator gap VANISHES (H, dilation and "
+            "velocity exact, checked in exact rational arithmetic) and Y_0 is EXACTLY ZERO "
+            "in Fraction arithmetic, so the two open-ended gaps did collapse into one. That "
+            "one has no bound: the tail operator's DIAGONAL IS EXACTLY ZERO (the unbounded "
+            "part of the linearisation is the dilation SHIFT, not a multiplier), its kernel "
+            "is the |X|^-1 far field (measured m^-2.007 vs predicted m^-2), and the tail "
+            "inverse diverges in every class tried -- flat M^1.28, algebraic best M^0.64 at "
+            "s=1, geometric x nu PER MODE. The window is EMPTY by 0.606 in exponent units: "
+            "the object needs s < alpha = 0.394, the operator wants s ~ 1. Positive control: "
+            "the same code with Lambda^1 dissipation saturates in every class, so the "
+            "instrument can report 'bounded'. Next stage T carries the repair."),
         "progress": (
             "STEP ONE DONE (leg 50): solver/interval_certificate.py wires solver/interval.py "
             "through the bordered residual. The radii polynomial CLOSES IN INTERVAL "
@@ -330,6 +345,55 @@ STAGES = [
         },
         "time_box": ("two legs: the basis rebuild, then the tail bound. The tail is "
                      "mathematics, not compute."),
+    },
+    {
+        "id": "T",
+        "name": ("The TAIL LEMMA: border the certificate with the far field the transport "
+                 "operator cannot invert"),
+        "status": "NEXT",
+        "why_here": (
+            "L1 answered its gate with a NO whose term is named, and the gate's own no-branch "
+            "says the weight class IS the finding. But leg 51 also identified the obstruction "
+            "precisely enough to attack it, which a 'the space is wrong' verdict on its own "
+            "would not: the tail operator is not merely awkward, it is NOT INJECTIVE, and its "
+            "kernel is one explicit mode per parity -- the |X|^-1 far field, h_m ~ m^-2. An "
+            "operator that fails to be invertible by a finite-dimensional kernel is the "
+            "classic case for BORDERING, which is the same move that made the finite block "
+            "work in Route-PORT (three gauge freedoms -> three border rows). The repair is "
+            "therefore named and cheap to test before anything is built on it."),
+        "deliverable": (
+            "T-0 FIRST, BEFORE ANY CONSTRUCTION: the novelty pass on the methodological claim "
+            "leg 51 produced -- 'radii-polynomial / ell^1-Fourier certification needs the "
+            "unbounded part of the operator to be a MULTIPLIER; inviscid self-similar "
+            "transport makes it a SHIFT with zero diagonal'. Leg 51 states a checkable "
+            "prediction about the shape of the field (the certified self-similar blow-ups "
+            "using this machinery are DISSIPATIVE -- Dahne-Figueras CGL; the certified "
+            "INVISCID ones -- Chen-Hou -- use weighted energy estimates instead). Check it. "
+            "If it is known, say so and drop the claim to a re-derivation. "
+            "T-1 THEN THE REPAIR, MEASURED BEFORE IT IS BUILT: add the far-field mode(s) as "
+            "explicit unknowns and the transport's solvability functionals as border rows -- "
+            "one per parity chain -- and measure ||T_tail^-1||_w on the BORDERED tail as a "
+            "ladder in M, in the same three weight classes and through the same code path. "
+            "solver/spectral_certificate.py already carries the tail block, the homogeneous "
+            "mode and the dissipative positive control, so this is a one-function change and "
+            "its answer is a magnitude."),
+        "gate": {
+            "question": ("Does bordering the tail with its own kernel give a tail inverse "
+                         "that is BOUNDED uniformly in M, in a class where the target profile "
+                         "also has finite norm (s < 0.394)?"),
+            "if_yes": ("Then L1's no was a statement about the standard construction and not "
+                       "about the object, and the certificate is worth rebuilding end to end "
+                       "on HL_S2_nonsymmetric. Report the constant, and re-run the ceiling: "
+                       "the borders are new unknowns and they need their own Y_0."),
+            "if_no": ("Report which of the two sides failed -- the bordered inverse still "
+                      "diverging (the kernel was not the whole obstruction) or the window "
+                      "still empty (it was, but the class is). Then STOP building certificates "
+                      "in ell^1-Fourier for this operator and say so in the plan: the finding "
+                      "is then that the method and the object are mismatched, which is worth "
+                      "more written down than worked around."),
+        },
+        "time_box": ("one leg. T-0 is a literature pass, T-1 is a measurement on machinery "
+                     "that already exists. If T-1 needs a new solver, the plan was wrong."),
     },
     {
         "id": "B",
@@ -385,6 +449,13 @@ BANNED = [
      "never -- unless the question is re-posed for a FLUID transport model, which needs L1 first"),
     ("reading V-rigorous's L1 prerequisite as optional -- a float study cannot be upgraded into a certificate after the fact", "L1"),
     ("closing the truncation gap by extending the domain", "never -- leg 47 measured the trend and it has the WRONG SIGN, +0.47 decades per unit rho"),
+    ("sweeping another weight FAMILY without first bordering the tail -- leg 51 measured "
+     "flat, algebraic (nine exponents) and geometric, and the divergence curve has no zero; "
+     "the obstruction is the tail operator's kernel, not the shape of the weight", "T"),
+    ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
+     "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "
+     "not, and does not have finite norm in the class where the operator is least bad",
+     "never -- the ceiling was pre-committed as clause S7"),
     ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
      "(arXiv:2210.07191 + Part II); it stays only as C-PILOT's known-answer substrate",
      "never -- leg 45 M1"),
@@ -416,6 +487,14 @@ DISCIPLINE = [
     (85, "Re-measure your own headline before building a stage on it, and ablate the "
          "MECHANISM and not just the effect -- leg 46's 5186x replicated at 5604x and still "
          "had the wrong explanation attached to it for three legs."),
+    (86, "A rigorous bound that is dominated by its own EVALUATION error is a statement "
+         "about the code, not about the mathematics -- leg 50's near-miss at 1.48x was an "
+         "enclosure 400x wider than the residual it enclosed."),
+    (87, "A certification METHOD has a shape, and the shape is a property of the OPERATOR "
+         "rather than of the object: before choosing one, ask whether the unbounded part of "
+         "the linearisation is a MULTIPLIER or a SHIFT. Every ell^1-Fourier tail estimate "
+         "assumes a diagonal; leg 51 measured that inviscid self-similar transport has none, "
+         "on the friendliest object available, and that dissipation restores it instantly."),
 ]
 
 
