@@ -175,7 +175,20 @@ SHAPE_LEDGER = [
         "tail_inverse_decays": True,
         "located": [
             {"where": "assumption (4), section 2",
-             "quote": ("for all k >= k_0, C_1 <= |mu_k| / omega_k^{s_L}"),
+             "quote": ("[RECONSTRUCTED, see transcription note] for all k >= 0, "
+                       "|lambda_k|/omega_k^{s_L}, |mu_k|/omega_k^{s_L}, "
+                       "|beta_k|/omega_k^{s_L} <= C_2, and for all k >= k_0, "
+                       "C_1 <= |mu_k|/omega_k^{s_L}"),
+             "transcription": ("This assumption's fractions come through pdftotext STACKED "
+                               "and out of order ('mu_k beta_k mu_k lambda_k , sL , sL <= "
+                               "C2 and ... C1 <= sL'), so the line above is a "
+                               "RECONSTRUCTION of the display, not a verbatim copy.  The "
+                               "load-bearing clause -- a LOWER bound C_1 on the diagonal "
+                               "mu_k at the growth rate s_L -- is unambiguous in the "
+                               "extraction and is what the classification rests on.  "
+                               "Flagged rather than smoothed over: this leg's whole point "
+                               "is that a located statement can be checked, and a "
+                               "reconstruction that is presented as a quotation cannot."),
              "supports": ("the DIAGONAL is bounded BELOW, at the same growth rate s_L that "
                           "makes the operator unbounded.  This is LIT's ninth-pass finding, "
                           "confirmed here at full text rather than from the abstract.")},

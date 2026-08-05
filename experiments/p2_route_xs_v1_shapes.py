@@ -198,6 +198,16 @@ def main():
         "K_exponent": de_b["exponent"],
         "first": de_b["first"], "last": de_b["last"],
         "ratio_last_over_first": de_b["ratio_last_over_first"],
+        "prior_claim_being_sharpened": {
+            "source": "legs 52-53 (CONTINUATION_PROMPT.md, capabilities.py)",
+            "wording": ("the bordered tail inverse is a CONSTANT (2.19 ... 10.32 here, "
+                        "9.44 in leg 52's ladder), not 1/K"),
+            "constant_low": 2.19, "constant_high": 10.32, "leg52_ladder_value": 9.44,
+            "correction": ("It is not a constant.  Over K = 4 ... 128 it runs 2.191 -> "
+                           "11.528, exponent +0.437.  The 2.19 is the SMALLEST RUNG OF A "
+                           "RISING LADDER, not a bound (lesson 72).  The conclusion those "
+                           "legs drew is unaffected and in fact strengthened."),
+        },
         "reading": ("THE SHARP FORM OF 'A CONSTANT, NOT 1/K'.  It is not even a constant: "
                     "it GROWS, at +0.44 in log-log, from 2.191 at K = 4 to 11.53 at "
                     "K = 128.  A tail estimate needs this to fall like 1/Lambda_K.  The "
