@@ -1,0 +1,252 @@
+{
+  "leg": 67,
+  "route": "FD",
+  "kind": "literature",
+  "date": "2026-08-05",
+  "new_solve_runs": 0,
+  "gate": "Does a primary source publish an independent critical fractional-dissipation exponent for 2D Boussinesq (or its vorticity-stream equivalent)?",
+  "gate_answer": "NO",
+  "gate_answer_detail": "NO for the quantity solver/fractional_boussinesq.py holds. Stated at full precision because a bare 'no' would be wrong in the other direction: (1) a published exponent named 'critical fractional dissipation' for 2D Boussinesq EXISTS and is alpha+beta = 1, with a ladder of sufficient conditions descending to alpha > 2/3 on that line, and its vorticity-stream equivalent is stated too (at alpha+beta = 1 the problem 'boils down to' critical gSQG); (2) it is NOT COMPARABLE to our s_c -- it is the exponent at which the EQUATION'S SCALING stops preserving the controlling norm, while s_c = 1/(2 beta) is the exponent at which dissipation overtakes ONE SPECIFIC COLLAPSE, and every published value is a one-sided sufficient condition for global regularity, never an equality; (3) NO primary source anywhere publishes an arrest exponent for the Chen-Hou blowup -- the blowup corpus is inviscid without exception and the dissipation corpus never touches a blowup profile. The exponent remains INTERNALLY-CONSISTENT-ONLY; no claim upgrade, no computation attempted.",
+  "queries": [
+    {
+      "id": "Q1",
+      "query": "2D Boussinesq fractional dissipation critical exponent blow-up Hou-Luo boundary",
+      "links": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S0022039621004447",
+        "https://arxiv.org/html/2605.16322",
+        "https://arxiv.org/pdf/2010.00648",
+        "https://www.tandfonline.com/doi/full/10.1080/00036811.2026.2685067",
+        "https://link.springer.com/article/10.1007/s11854-018-0073-4",
+        "https://link.springer.com/content/pdf/10.1007/s00220-021-04067-1.pdf"
+      ],
+      "on_topic": "none -- every 'critical' returned is either a well-posedness threshold or an INVISCID blowup theorem; the two categories never meet in one paper"
+    },
+    {
+      "id": "Q2",
+      "query": "finite time blowup 2D Boussinesq with fractional dissipation (-Delta)^s self-similar profile persists supercritical",
+      "links": [
+        "https://arxiv.org/pdf/2604.01868",
+        "https://arxiv.org/abs/2305.05660",
+        "https://arxiv.org/pdf/2210.07191",
+        "https://arxiv.org/pdf/1910.00173",
+        "https://arxiv.org/pdf/2308.01528",
+        "https://epubs.siam.org/doi/10.1137/23M1580395"
+      ],
+      "on_topic": "none -- all six are inviscid; the abstracts of 2604.01868 and 2210.07191 were fetched and neither mentions dissipation at all"
+    },
+    {
+      "id": "Q3",
+      "query": "Chen Hou 2D Boussinesq blowup stability under fractional Laplacian dissipation critical alpha threshold",
+      "links": [
+        "https://arxiv.org/abs/2606.03680",
+        "https://arxiv.org/pdf/1506.00470",
+        "https://link.springer.com/article/10.1007/s00021-015-0245-2",
+        "https://arxiv.org/pdf/2408.15154",
+        "https://jiajiechen94.github.io/research",
+        "https://arxiv.org/pdf/2207.06581"
+      ],
+      "on_topic": "2606.03680 only, and as a survey of the OTHER quantity -- read at full text"
+    },
+    {
+      "id": "Q4",
+      "query": "Hou-Luo model 1D fractional dissipation Lambda^s blowup threshold critical exponent scaling",
+      "links": [
+        "https://arxiv.org/pdf/2601.02464",
+        "https://arxiv.org/html/2308.01528",
+        "https://arxiv.org/pdf/2604.01868",
+        "https://users.cms.caltech.edu/~hou/papers/HL-Annals-PDE-202.pdf",
+        "https://arxiv.org/pdf/2312.01702"
+      ],
+      "on_topic": "A RETRACTED LEAD, logged because it nearly became a false positive: the search engine's summary asserted 'the critical dissipation exponent is gamma = 1/3'. It is in NONE of the returned papers -- 2601.02464's and 2604.01868's abstracts were fetched in full and neither mentions fractional dissipation or 1/3. The follow-up query silently re-attached 1/3 to a DIFFERENT object, a C^gamma Holder norm of the density theta. Search-summary artefact; discarded"
+    },
+    {
+      "id": "Q5",
+      "query": "2D Boussinesq global regularity fractional dissipation alpha threshold (sqrt(1777)-23)/24 supercritical",
+      "links": [
+        "https://arxiv.org/abs/2606.03680",
+        "https://arxiv.org/pdf/1411.1362",
+        "https://arxiv.org/pdf/1510.03237",
+        "https://www.researchgate.net/publication/309206998"
+      ],
+      "on_topic": "on topic for the OTHER quantity; this is the query that located the published exponent ladder. NB the ladder is (sqrt(1777)-23)/12 ~ 0.7981, not /24 as the query guessed"
+    },
+    {
+      "id": "Q6",
+      "query": "axisymmetric Euler Hou-Luo blowup with fractional viscosity Lambda^{2s} scaling argument dissipation negligible self-similar",
+      "links": [
+        "https://users.cms.caltech.edu/~hou/papers/mms_luo_hou_2014.pdf",
+        "https://arxiv.org/abs/2106.05422",
+        "https://arxiv.org/pdf/2405.10916",
+        "https://arxiv.org/pdf/2212.11912",
+        "https://arxiv.org/pdf/2102.06663",
+        "https://arxiv.org/pdf/1708.09648"
+      ],
+      "on_topic": "none -- 2405.10916 and 2102.06663 are the closest (viscous, self-similar, Hou-authored) but both use DEGENERATE / solution-dependent viscosity, not a fractional exponent dial; 2405.10916's abstract gives an effective dimension ~3.188, not a dissipation exponent"
+    },
+    {
+      "id": "Q7",
+      "query": "blowup 2D Boussinesq supercritical hypodissipation proved singularity persists small fractional dissipation exponent",
+      "links": [
+        "https://link.springer.com/article/10.1007/s00332-014-9220-y",
+        "https://www.sciencedirect.com/science/article/abs/pii/S0022247X24003299",
+        "https://arxiv.org/pdf/1608.01285",
+        "https://arxiv.org/html/2510.10090",
+        "https://arxiv.org/html/2209.08713",
+        "https://math.okstate.edu/people/jiahong/CMS_14_07_A10.pdf"
+      ],
+      "on_topic": "none -- the supercritical Boussinesq literature produces REGULARITY CRITERIA and EVENTUAL REGULARITY, conditional statements, never a threshold exponent at which a known blowup is arrested; 1608.01285 is a 2D MODEL, not the system"
+    },
+    {
+      "id": "Q8",
+      "query": "\"2D Boussinesq\" blowup \"how much dissipation\" critical fractional exponent self-similar collapse rate (T-t)^beta viscosity defeats singularity",
+      "links": [
+        "https://arxiv.org/abs/2305.05660",
+        "https://arxiv.org/pdf/2604.01868",
+        "https://arxiv.org/pdf/1910.00173",
+        "https://www.tandfonline.com/doi/full/10.1080/00036811.2026.2685067"
+      ],
+      "on_topic": "nothing new -- this is the query phrased most directly AS the gate, and it produced no object the gate could consume"
+    },
+    {
+      "id": "Q9",
+      "query": "Chen Hou 2210.07191 Boussinesq self-similar profile c_l c_omega values 3.0065 1.0294 scaling parameters",
+      "links": [
+        "https://link.springer.com/article/10.1007/s00205-026-02195-3",
+        "https://arxiv.org/abs/2210.07191",
+        "https://arxiv.org/abs/2305.05660",
+        "https://users.cms.caltech.edu/~hou/papers/MMS-Numerics-2025.pdf"
+      ],
+      "on_topic": "no source outside this repository re-quotes (c_l, c_omega) in a DISSIPATION context; they are published RESCALING constants, and the conversion to a dissipation exponent is this repository's"
+    },
+    {
+      "id": "Q10",
+      "query": "[targeted publication-list sweep, not a search engine] https://jiajiechen94.github.io/research -- every title mentioning Boussinesq, dissipation, viscosity or fractional Laplacian",
+      "links": [
+        "https://arxiv.org/abs/2305.05660",
+        "https://arxiv.org/abs/2210.07191",
+        "https://arxiv.org/abs/2206.01296",
+        "https://arxiv.org/abs/1908.09385"
+      ],
+      "on_topic": "DECISIVE: the author who proved the 2D Boussinesq blowup has exactly ONE paper combining blowup with dissipation, and it is the 1D gCLM (1908.09385). Read at full text"
+    }
+  ],
+  "papers_read_at_full_text": [
+    {
+      "arxiv": "2606.03680",
+      "cite": "Stefanov, Wu, Xu, Ye, Global regularity of the 2D fractional Boussinesq equations with subcritical dissipation",
+      "read": "abstract, sec 1 introduction IN FULL (the complete survey of published exponents), reference list",
+      "locator": "sec 1",
+      "quote_question": "This naturally leads to the fundamental question: how much dissipation is required to ensure global regularity?",
+      "quote_definition": "Jiu, Miao, Wu, and Zhang [20] discovered that the global regularity problem for (1.1) depends crucially on the value of alpha + beta. In the special case alpha + beta = 1, the Boussinesq regularity problem boils down to the corresponding problem on the generalized surface quasi-geostrophic equation with critical dissipation. This insight led to the classification of alpha+beta into three regimes: the subcritical regime (alpha+beta > 1), the critical regime (alpha+beta = 1) and the supercritical regime (alpha + beta < 1). ... In particular, the global regularity problem for the supercritical regime remains largely out of reach",
+      "published_ladder": [
+        {
+          "condition": "alpha + beta = 1, alpha > (23 - sqrt(145))/12",
+          "value": 0.9132,
+          "who": "Jiu-Miao-Wu-Zhang [20]"
+        },
+        {
+          "condition": "alpha + beta = 1, alpha > (sqrt(1777) - 23)/12",
+          "value": 0.7981,
+          "who": "Stefanov-Wu [24]"
+        },
+        {
+          "condition": "alpha + beta = 1, alpha > 10/13",
+          "value": 0.7692,
+          "who": "Wu-Xu-Xue-Ye [26]"
+        },
+        {
+          "condition": "alpha + beta = 1, alpha > 2/3",
+          "value": 0.6667,
+          "who": "the authors [25], under small ||theta_0||_inf"
+        },
+        {
+          "condition": "alpha + beta > 1, (6 - sqrt(6))/4 < alpha < 1",
+          "value": 0.8876,
+          "who": "Miao-Xue [22]"
+        },
+        {
+          "condition": "alpha + beta > 1, (10 - 2 sqrt(10))/5 < alpha < 1",
+          "value": 0.7351,
+          "who": "[28]"
+        },
+        {
+          "condition": "alpha = 1, beta = 0 (and alpha = 0, beta = 1)",
+          "value": 1.0,
+          "who": "Hmidi-Keraani-Rousset [16,17]"
+        }
+      ],
+      "verdict": "PUBLISHES a critical exponent RELATION for 2D Boussinesq under fractional dissipation -- alpha+beta = 1 -- and it is NOT the quantity we hold. Its criticality is a well-posedness/scaling threshold inherited by reduction to critical gSQG; ours is the exponent at which dissipation overtakes a PARTICULAR collapse rate and depends on the Chen-Hou profile's constants, which enter nowhere in this ladder. Every published number is a one-sided SUFFICIENT condition for regularity -- an upper bound on any arrest threshold -- so none can be equated to s_c even in principle"
+    },
+    {
+      "arxiv": "1908.09385",
+      "cite": "J. Chen, Singularity formation and global well-posedness for the generalized Constantin-Lax-Majda equation with dissipation",
+      "read": "abstract, sec 1.1 (prior results with dissipation), sec 1.2 'Scaling and the critical dissipation' IN FULL, sec 1.3, sec 1.4 Theorems 1.1-1.5 and Remarks 1.2-1.7. Leg 65 read this paper for the weighted-ell^1 claims and leg 45 for computer assistance; this is the first pass to read it FOR THE DISSIPATION EXPONENT",
+      "locator": "sec 1.2, Theorem 1.1, Remark 1.2",
+      "quote_definition": "Suppose that L = Lambda^gamma in (1.1) for some gamma in [0, 2]. Then the solution of (1.1) enjoys the following scaling property: ... We will show that for several classes of initial data, ||omega||_{L^1} is conserved. In these cases, a simple scaling analysis shows that L = Lambda corresponds to the critical dissipation. For (1.1) with a <= -1, we will show that the equation possesses a-priori L^{|a|} estimate, ... which makes Lambda^gamma with gamma = |a|^{-1} the critical dissipation with respect to the natural scaling of the equation.",
+      "quote_blowup": "(Finite time blow-up for a close to 1/2). Consider (1.1) with L omega = -omega_xx. There exists delta > 0 such that for a in (1/2 - delta, 1/2 + delta), 0 <= nu <= 1, (2.1) develops a self-similar singularity in finite time for some C_c^infty initial data.",
+      "published_exponents": {
+        "gamma_c_a_gt_minus1": 1.0,
+        "gamma_c_a_le_minus1": "|a|^{-1}"
+      },
+      "verdict": "The ONE paper found anywhere publishing a critical dissipation exponent for a Hou-Luo-family object -- and it is 1D, and it is AGAIN the scaling quantity, derived from which Lebesgue norm the equation's scaling preserves rather than from any blowup profile's collapse rate. Decisively, Chen proves blowup WITH THE FULL LAPLACIAN (gamma = 2, i.e. s = 1 in our convention) for a ~ 1/2, ABOVE his own critical line gamma_c = 1: he does not treat gamma_c as an arrest threshold at all. Reading his gamma_c as comparable to our s_c would manufacture a contradiction out of two correct statements about different quantities"
+    }
+  ],
+  "abstracts_checked": [
+    {
+      "arxiv": "2210.07191",
+      "what": "Chen-Hou Part I",
+      "finding": "no mention of dissipation, viscosity or fractional Laplacian; does not state c_l, c_omega"
+    },
+    {
+      "arxiv": "2604.01868",
+      "what": "Novel Self-similar Finite-time Blowups, 1D HL + 2D Boussinesq",
+      "finding": "no fractional dissipation, no critical exponent, no scaling constants; purely inviscid"
+    },
+    {
+      "arxiv": "2601.02464",
+      "what": "Rampf-Kolluru, complex-time singular structure of the 1D HL model",
+      "finding": "no dissipation of any kind"
+    },
+    {
+      "arxiv": "2405.10916",
+      "what": "Nearly self-similar blowup of generalized axisymmetric NS",
+      "finding": "solution-dependent viscosity, effective dimension ~3.188, no fractional exponent"
+    }
+  ],
+  "arithmetic": {
+    "c_l": 3.00649898,
+    "c_omega": -1.02942516,
+    "beta_collapse": 2.9205610051341666,
+    "s_c_stored": 0.17119998490736224,
+    "alpha_equiv": 0.3423999698147245,
+    "chen_hou_far_field_exponent": -0.3423999698147245,
+    "literature_critical_line_alpha_at_zero_thermal": 1.0,
+    "alpha_equiv_as_fraction_of_line": 0.3423999698147245,
+    "factor_below_line": 2.9205610051341666,
+    "gap_in_alpha": 0.6576000301852756,
+    "hkr_published_datum_alpha": 1.0,
+    "hkr_margin_factor_above_our_threshold": 2.9205610051341666
+  },
+  "arithmetic_reading": {
+    "ratio_is_vacuous": "alpha_equiv / 1 = 1/beta identically, by the definition s_c = 1/(2 beta). Comparing our number to the alpha+beta=1 line recovers beta and nothing else. That is the precise sense in which a check against a published value is unavailable: the only published line is the one our formula reproduces trivially",
+    "far_field_coincidence_is_internal": "alpha_equiv = 0.34240 coincides with |c_omega/c_l| to all digits, as collapse_exponent_from_rescaling's docstring predicts (alpha = -1/beta). Internal, not a check",
+    "one_weak_external_consistency_statement": "Hmidi-Keraani-Rousset prove global regularity at alpha = 1, beta = 0. Our law predicts arrest for alpha > 0.34240, hence regularity at alpha = 1: CONSISTENT, with the published datum sitting a factor 2.9206 above our threshold. One-sided and weak -- it would pass for any s_c < 0.5 -- but it is the only contact between our number and a published one, and it is not a contradiction. A margin, not a validation",
+    "where_a_real_check_would_come_from": "a published statement of the form 'the Chen-Hou / Hou-Luo self-similar blowup persists for (-Delta)^s with s < s*', for the SAME profile. None exists at the date of this pass. Our alpha_equiv = 0.34240 sits inside the supercritical regime alpha+beta < 1 that 2606.03680 sec 1 calls 'largely out of reach', so the absence is STRUCTURAL, not an oversight"
+  },
+  "capabilities_correction": {
+    "status": "REPORTED, NOT APPLIED -- capabilities.py is outside leg 67's file territory",
+    "file": "capabilities.py",
+    "entry": "solver/fractional_boussinesq.py",
+    "field": "validated",
+    "from": "consistency with the 1D critical exponent; no independent known answer",
+    "to": "consistency with the 1D critical exponent; leg 67 searched at primary source and found no comparable published value -- the literature's critical exponent for 2D Boussinesq under fractional dissipation is alpha+beta=1 (Jiu-Miao-Wu-Zhang; gSQG reduction, arXiv:2606.03680 sec 1), a well-posedness scaling threshold and NOT a blow-up-arrest exponent; s_c=0.17120 is alpha_equiv=0.34240, a factor 2.9206 below that line, inside the supercritical regime the survey calls largely out of reach",
+    "gate_note": "test_capabilities.py requires only len(validated) > 20 and a non-empty field, so the replacement is drop-in. The change is from 'no independent known answer' (an absence never looked for) to 'searched at primary source and found none, and here is why none exists' -- a strictly stronger statement of the same negative. No claim is upgraded by it",
+    "precedent": "commit ab07316, 'Leg 0: ORCH -- correct capabilities.py's holder_norms.py annotation from UNSEARCHED to searched-and-not-found, per leg 65's full-text literature pass'"
+  },
+  "bans_checked": {
+    "re-measuring beta on the 2D object (leg 43)": "NOT TOUCHED -- beta here is the COLLAPSE exponent -c_l/c_omega in closed form from published constants, not leg 43's measured growth rate; no solve, no fit, no grid",
+    "chasing the 2D near-null direction of leg 44": "NOT TOUCHED -- no eigenproblem here",
+    "building a solver without grepping capabilities.py": "capabilities.py was grepped; nothing was built"
+  },
+  "residual_risk": "absence at this depth is not proof. Three directions classified but not read at full text: (i) the paywalled Taylor & Francis anisotropic-critical paper (10.1080/00036811.2026.2685067), whose title promises 'blow-up criteria' -- but CRITERIA are conditional statements, not threshold exponents; (ii) arXiv:2605.16322, a 2026 Hou-Luo-type boundary-JET system, a different system from 2D Boussinesq; (iii) the non-arXiv Boussinesq regularity literature, which 2606.03680's reference list surveys and which contains no blowup-arrest statement by that survey's own account. None of the three could supply a value for the Chen-Hou profile, which is what the gate needs"
+}
