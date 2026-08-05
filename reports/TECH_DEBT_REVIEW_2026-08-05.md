@@ -16,8 +16,8 @@ prose, or the merge criterion) — **the sweep never works these**; they go to t
 queue candidates and get a leg + verifier. Sizes are S/M/L.
 
 > **Status note:** the code-audit lane (dead code, duplication, full 52-test sweep,
-> capabilities spot-check) had not reported when this file was committed. Its findings are
-> appended as §D when available; treat §D's absence as "not yet audited", not "clean".
+> capabilities spot-check) was stopped before it reported. §D below is therefore the sweep's
+> **first standing task**, not a finding list. Not audited ≠ clean.
 
 ---
 
@@ -70,4 +70,10 @@ every cycle. Size: M. Kind: M (the detector); the fixtures it checks stay CB.
 
 ## D. Code-audit lane (dead code, duplication, test sweep, capabilities spot-check)
 
-*Pending at commit time — appended when the audit lands. Until then: not audited ≠ clean.*
+*Unaudited — the audit agent was stopped before reporting (2026-08-05). First pass of the
+maintenance sweep should run this lane: (i) the full `test_*.py` sweep with
+`.venv/bin/python`, per-file pass/fail, never a rolled-up summary; (ii) superseded/orphaned
+module detection against `capabilities.py`; (iii) near-duplicate implementations across
+`solver/` (the Hilbert and certificate families in particular); (iv) a 5-entry
+`capabilities.py` spot-check (module + test exist, test passes). Findings get appended here
+with the same evidence/size/CB-M fields as §A–C.*
