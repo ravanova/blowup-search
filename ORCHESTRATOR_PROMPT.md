@@ -144,6 +144,14 @@ and never a user question unless the correction would rewrite a banked result (e
 in `ORCHESTRATION.md` §4. Use `isolation: "remote"` for cloud if available; fall back to
 `isolation: "worktree"`. Recreate these fresh each cycle rather than continuing them.
 
+**The maintenance sweep** (`ORCHESTRATION.md` §11): at run start, and again at each date
+boundary, dispatch up to **five** Sonnet support agents seeded from the newest
+`reports/TECH_DEBT_REVIEW_*.md`. They refresh that review (close fixed items with the fixing
+commit, append new findings with evidence and a claim-bearing/mechanical flag), work its
+**mechanical** items under declared territories, and hand every **claim-bearing** item to the
+DM as a queue candidate — the sweep never touches those itself. Never more than five live;
+they occupy support bands, never leg slots.
+
 Sequencing you must enforce:
 
 - A verifier's re-measurement completes **before** its leg consumes that number. If it finds a

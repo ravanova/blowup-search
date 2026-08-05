@@ -376,6 +376,29 @@ on the first four parallel legs rather than arguing about it:
   n=1 on legs of unequal difficulty — suggestive, not a measurement. If the unsharded arm
   wins, drop the control and never shard again; record that in this file.
 
+## 11. The maintenance sweep (periodic tech debt)
+
+**User directive (2026-08-05):** the ten leg slots stay Opus and stay research. Tech debt is
+handled by **Sonnet support agents, at most five live at once**, and the sweep is **kicked
+off by the orchestrator periodically** — it is not a standing lane and it never displaces a
+leg slot.
+
+- **Cadence:** at run start (before the first dispatch cycle settles), and again at each
+  date boundary alongside the report (§9b). Off-cadence only if integration trips over debt
+  that blocks it (a broken index, a dead reference in a handoff file).
+- **Seed:** the newest `reports/TECH_DEBT_REVIEW_*.md`. The sweep *refreshes* it rather than
+  starting blind: re-audit docs/code/structure for drift, mark items closed with the fixing
+  commit, append new ones. Every item carries evidence (file:line), a size, and a
+  **claim-bearing vs mechanical** flag.
+- **Mechanical items** (links, indexes, stale state files, script and registration fixes)
+  are worked directly by sweep agents under declared territories (§5b) and land through the
+  normal support-branch merge path (§7).
+- **Claim-bearing items are never worked by the sweep.** Anything touching a numeric claim,
+  gate wording, banked prose, the merge criterion, or the ledgers goes to the DM as a queue
+  candidate and gets a leg + verifier like any other claim-bearing change.
+- Sweep agents obey all of §1 and §5a: no ledger edits, no `DIRECTION.md`, no banked-result
+  rewrites. A sweep finding that *requires* one of those is a report line, not an edit.
+
 ---
 
 *Maintained in-repo so cloud agents read the same contract. Update this file and
