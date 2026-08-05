@@ -87,6 +87,43 @@ movement in `p`, so a real null is distinguishable from a dead knob.
 first computed across both `ρ_max` values and read `0.0245` — which is the *domain ladder*,
 not interpolation sensitivity. Now taken within a domain (`3.5e-05`).
 
+**(d) THE ONE VER-B CAUGHT, AND IT IS THE WORST OF THE FOUR, BECAUSE IT ERRED UNSAFE.**
+I calibrated the instrument at `M = 65536` and quoted that systematic (`+0.0022`) against a
+headline measured at `M_PRIMARY = 16384`. **The systematic is a property of the `(M, band)`
+pair, not of the fitter**, and at the headline's own `M` it is `+0.0039` — `1.8×` larger.
+Consequence: `s = 0.39`'s margin `+0.00374` is `0.96×` the systematic, not `1.7×`. **It does
+not clear the error bar, and since the bias is positive the corrected margin is `−0.00015`,
+negative.** I had reported that row as finite. Now `admissible_classes_with_finite_norm` is
+`[0.0, 0.3]` and `0.39` sits in `admissible_classes_not_resolved`; the gate is unaffected
+(`s = 0` and `s = 0.3` clear by `101×` and `24×`).
+
+The mistake had a *reason*, which is why it is worth writing down rather than just fixing: at
+`M = 65536` the finest `θ` cell reaches `|X| = 4.17e+04`, **past the headline domain's own
+`X_max`** — so that grid could never have been used on the target without extrapolating. The
+calibration family is analytic and has no such limit, so calibrating it there **flatters the
+instrument**. The whole control battery now runs at `M_PRIMARY`, and `systematic_vs_M` is
+stored so the dependence is visible rather than rediscovered. **A calibration measured at a
+resolution the subject cannot reach is not a calibration of the subject.**
+
+**And my own number-checker was hiding two of these.** VER-B's F3 found three doc numbers
+that were not JSON fields despite my script reporting "0 unmatched". The script computed its
+rounding slack as `10**-len(str(x).split('.')[-1])`, which for `'7.4e-15'` read the decimals
+as `'4e-15'` (length 5) and produced a slack of `5.1e-06` — astronomically larger than the
+values themselves, so **every ~1e-14 number matched anything**. Fixed to compute slack from
+the mantissa and exponent. The repaired checker immediately found four more genuine gaps
+(the `2M/π` reach at `M = 65536`, the two round-trip precision figures, and the `0.96×`
+ratio); all four are now curated JSON fields rather than prose-only arithmetic.
+**A verification script that cannot fail is worth exactly as much as a control that cannot
+fail — lesson 90 applies to my own tooling.**
+
+**F3's residual column was a threading artifact.** The committed JSON's Newton residuals
+(`4.80e-15 / 1.24e-14 / 2.09e-14`) disagreed with the document (`7.4e-15 / 1.5e-14 /
+2.3e-14`); VER-B's re-run matched the *document*. Cause: the final regeneration ran under
+`OMP_NUM_THREADS=2` (I had capped threads because a loaded box made the run take 15 min
+instead of 18 s), and BLAS summation order moves a ~1e-14 residual. Regenerated under default
+threading; the JSON now matches the document and VER-B's reproduction. Nothing claim-bearing
+depended on it, but *"the JSON is the source of truth"* has to survive being checked.
+
 ## Environment notes for whoever runs next
 
 * **There is no `pytest` in this environment** (`.venv` has numpy/matplotlib only, and
@@ -98,7 +135,20 @@ not interpolation sensitivity. Now taken within a domain (`3.5e-05`).
   `n`-convergence check at `ρ_max = 12` (`p = 1.3937 → 1.3938` over `n = 401 → 3201`) was run
   separately and is quoted in the TECHNICAL as a separate confirmation.
 
-## Scope discipline — the bit I most want reviewed
+## Scope discipline — the bit I most wanted reviewed, and VER-B strengthened it
+
+**VER-B found better evidence for my self-correction than I had.** I argued the gate's
+yes-branch overstates things because the clause is about `s = 1`, where the norm genuinely
+diverges. VER-B pointed at leg 51's own `TECHNICAL_P2_ROUTEL1_V2.md` §9, which already says
+it outright: *"The class where the operator is least bad is the class where the target has
+infinite norm, and vice versa."* So the clause was never a claim that the target is outside
+*every* class — it is a claim about the two classes **coinciding**, and this leg **confirms**
+it. Now cited in TECHNICAL §7 and the BLOG. Same section also already published *"the window
+is empty by 0.606 in exponent units"*, so my `+0.603` is a confirmation, not a new quantity —
+also now cited (VER-B F4). The genuine delta is unchanged and small: leg 51's object side was
+derived from an assumed `α`; mine is measured.
+
+
 
 The gate's yes-branch says the ban clause is *"factually wrong"*. **I do not think that is
 the right reading and I did not write it that way.** The clause says "in the class where

@@ -46,10 +46,15 @@ Prediction. Not measurement. The difference is this leg.
 
 ## The answer
 
-**`p = 1.394`**, and the target's norm is **finite** for every `s < 0.394` — including
-`s = 0` and `s = 0.3`, which are the two classes legs 52 and 53 actually did their work in.
+**`p = 1.394`**, and the target's norm is **finite** at `s = 0` (margin `+0.394`) and
+`s = 0.3` (`+0.094`) — the two classes legs 52 and 53 actually did their work in. Those clear
+the instrument's own error bar by `101×` and `24×`.
 
 It is **divergent** at `s = 1`.
+
+The boundary class `s = 0.39` is **not resolved**: its margin is `+0.0037` against a
+systematic of `+0.0039`, so the measurement cannot tell it from the divergent side. The gate
+does not need it.
 
 Both halves are the result, and the second one is why the original clause is not simply
 wrong.
@@ -100,12 +105,20 @@ class `s = 1`. Measured: **1.989**.
 **Negative control 2.** `Ω = 2 arctan(X)/π` is the sawtooth: it does not decay at all
 (`α = 0`), and its coefficients are exactly `2/(πk)`. So its exponent is exactly 1 — the
 divergence threshold of the flat class. Measured: **1.001**, with the coefficient *values*
-matching the closed form to `1.0e-04`.
+matching the closed form to `1.6e-03`.
 
 **And a calibration curve.** `(1+X²)^{-α/2}` has far field exactly `|X|^{-α}` for any `α` you
 like. Sweeping `α = 0.1 … 1.5` and asking the fitter to recover `1 + α` — an exponent it
-was never told — gives a worst-case error of **0.006**. That is the instrument's error bar,
-and the target's exponent is quoted against it.
+was never told — gives a worst-case error of **0.0075**, and **0.0039** at the target's own
+`α`. That is the instrument's error bar, and the target's exponent is quoted against it.
+
+**And that error bar has to be measured at the resolution you actually used.** The first
+version of this leg calibrated on a transform four times finer than the one the target runs
+on, and quoted the finer grid's systematic — `0.0022`, `1.8×` too small. The mistake had a
+reason: the calibration family is analytic, so it happily lives on a grid fine enough to reach
+past the target's own domain, which the target cannot. Calibrating there **flatters the
+instrument**. Caught in review; the whole control battery now runs at the headline's own
+transform size.
 
 ### The instrument was wrong twice, and a control caught it both times
 
@@ -156,12 +169,18 @@ is where leg 51 measured the operator to be least bad, and at `s = 1` the target
 **diverges**, margin `−0.606`. The clause said "does not have finite norm *in the class
 where the operator is least bad*". That is true.
 
+Leg 51 said as much in its own technical writeup (§9): *"The class where the operator is
+least bad is the class where the target has infinite norm, and vice versa."* The clause was
+never a claim that the target is outside *every* class — it is a claim about the two classes
+coinciding, and this measurement **confirms** it.
+
 So what is actually established is narrower and, I think, more useful than "the ban is
 wrong". It is that **the window is empty, and now both sides of it are measured**:
 
 - the **object** needs `s < 0.397`,
 - the **operator** wants `s = 1`,
-- the gap is **`+0.603` in exponent units**, and there is no `s` that satisfies both.
+- the gap is **`+0.603` in exponent units**, and there is no `s` that satisfies both —
+  which confirms the **`0.606`** leg 51 already published, rather than adding anything new.
 
 Before this leg, one side of that window was a measurement and the other was a docstring.
 Now both are measurements. **Correcting the clause's text is not mine to do** — it is the

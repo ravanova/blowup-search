@@ -142,10 +142,16 @@ def build_figure():
     f.axhline(0.0, color="k", lw=1.0)
     f.fill_between(ss, 0, marg, where=marg > 0, color=C["good"], alpha=0.18)
     f.fill_between(ss, marg, 0, where=marg < 0, color=C["bad"], alpha=0.18)
+    unresolved = set(ev.get("admissible_classes_not_resolved", []))
+    sysm = ev["systematic"]
+    f.fill_between(ss, -sysm, sysm, color=C["warn"], alpha=0.30, zorder=1,
+                   label="within the instrument's systematic")
+    f.legend(fontsize=7.0, loc="lower left")
     for cl in d["NB5_norms"]["classes"]:
         sv = cl["s"]
-        f.plot([sv], [p - 1.0 - sv], "o",
-               color=(C["good"] if cl["verdict"]["finite"] else C["bad"]), ms=8, zorder=5)
+        col = (C["warn"] if sv in unresolved
+               else (C["good"] if cl["verdict"]["finite"] else C["bad"]))
+        f.plot([sv], [p - 1.0 - sv], "o", color=col, ms=8, zorder=5)
         f.annotate("s=%.2f\n%+.3f" % (sv, p - 1.0 - sv), xy=(sv, p - 1.0 - sv),
                    xytext=(0, 12 if sv < 0.9 else -28), textcoords="offset points",
                    ha="center", fontsize=7.6)
@@ -171,15 +177,19 @@ def build_figure():
         "the resolution ladder?\n\n"
         f"  ANSWER: {ev['GATE'].upper()}\n\n"
         f"  p = {d['NB5_norms']['p']:.4f} at X_max = 4.1e+04\n"
-        f"  p = {ev['p_best']:.4f} at X_max = 3.0e+05  (systematic {ev['systematic']:.4f})\n"
+        f"  p = {ev['p_best']:.4f} at X_max = 3.0e+05\n"
+        f"  systematic {ev['systematic']:.4f} (at the headline's own M = {ev['systematic_measured_at_M']})\n"
         f"  finite at s = {', '.join(str(x) for x in ev['admissible_classes_with_finite_norm'])}\n"
+        f"  NOT resolved at s = {', '.join(str(x) for x in ev['admissible_classes_not_resolved'])}"
+        "  (margin 0.96x the systematic)\n"
         f"  resolution drift {d['NB2_resolution_ladder']['p_drift_over_ladder']:.1e}\n\n"
         "SCOPE -- BOTH HALVES ARE THE RESULT\n"
         f"  object side   s_max = {ww['s_max_object']:.3f}\n"
         f"  operator side s     = {ww['s_operator']:.3f}  (leg 51)\n"
         f"  window        gap   = {ww['gap']:+.3f}  EMPTY\n\n"
-        "The ban clause is WRONG for admissible s < alpha and RIGHT\n"
-        "for s = 1.  Escalated, not edited.\n\n"
+        "The clause is RIGHT for s = 1 -- leg 51 TECHNICAL v2 sec 9\n"
+        "already said the operator's best class is the target's\n"
+        "infinite-norm class.  This CONFIRMS it.  Escalated, not edited.\n\n"
         "AND ONE HONEST NEGATIVE\n"
         f"  at the shipped domain X_max = 745 the far-field closure\n"
         f"  MOVES p by {ff['spread_where_it_fires']:.3f}.  The headline is measured\n"
@@ -187,7 +197,7 @@ def build_figure():
         "NOTHING HERE SAYS A CERTIFICATE CLOSES.  MM owns that.\n"
         "NO LINK OF THE L1->L4 CHAIN MOVED.  Clay ~0.05%."
     )
-    g.text(0.02, 1.0, txt, va="top", ha="left", fontsize=8.4, family="monospace")
+    g.text(0.02, 1.0, txt, va="top", ha="left", fontsize=7.5, family="monospace")
     g.set_title("F. the gate, and what it does not say", fontsize=10)
 
     fig.suptitle("Route-NB v1 — the target IS in the space, for every $s$ below "

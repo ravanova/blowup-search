@@ -4,7 +4,9 @@
 `solver/target_norm.py`; gates `test_target_norm.py` (23/23); curated data
 `writeup/data/p2_route_nb_v1_targetnorm.json`; figure
 `writeup/figures/fig50_route_nb_v1_targetnorm.png`; novelty log `writeup/novelty/leg_55.md`.
-**Every number in this document is a field of the JSON.**
+**Every number in this document is a field of the JSON, with one declared exception: the
+`n = 3201` convergence confirmation in §4.1 (and the `6.3e-14` residual it reports) is a
+separate run, not part of the curated payload, and is labelled as such at both mentions.**
 
 ---
 
@@ -26,8 +28,9 @@ the ban clause's literal text are not about the same `s`.
 
 `HL_S2_nonsymmetric` is `solver/bordered_hl.py`'s bordered steady system for the 1D Hou–Luo
 model (Chen–Huang–Li arXiv:2604.01868 §2.5/§4), solved by damped Newton on the
-origin-clustered grid `X = c sinh ρ`, `c = 0.5`. Every solve used here converges to
-`≤ 6.3e-14`. The unknowns are `Ω`, `V = Θ_X` and three gauge constants `(c_l, c_ω, c_r)`.
+origin-clustered grid `X = c sinh ρ`, `c = 0.5`. Every solve in the curated JSON converges to
+`≤ 2.3e-14` (the separate `n = 3201` confirmation of §4.1, which is not a JSON field, reaches
+`6.3e-14`). The unknowns are `Ω`, `V = Θ_X` and three gauge constants `(c_l, c_ω, c_r)`.
 
 `solver/spectral_certificate.py` compactifies with the tangent half-angle map
 `X = tan(θ/2)`, in which the three operators of the `a = 0` CLM problem are exact. Its own
@@ -118,23 +121,47 @@ and none at all on the slope. The linear mean is also the physically right objec
 under study **sums** coefficients, so what decides finiteness is the mass in a bin, not its
 geometric mean.
 
-### 2.3 Calibration — the instrument's error bar
+### 2.3 Calibration — the instrument's error bar, at the transform size actually used
 
 `calibration_family(X, α) = (1+X²)^{−α/2}` has far field exactly `|X|^{−α}` and equals
 `|cos(θ/2)|^α` exactly, so `p = 1 + α` for every `α`. Sweeping `α` and asking the fitter to
-recover an exponent it was never told:
+recover an exponent it was never told, **at `M = M_PRIMARY = 16384`, the transform size every
+target measurement in this leg uses**:
 
 | `α` | `p` measured | `p − (1+α)` |
 |---|---|---|
-| 0.1000 | 1.10253 | +0.00253 |
-| 0.2000 | 1.20219 | +0.00219 |
-| **0.3935** | **1.39565** | **+0.00215** |
-| 0.6000 | 1.60256 | +0.00256 |
-| 1.0000 | 2.00388 | +0.00388 |
-| 1.5000 | 2.50610 | +0.00610 |
+| 0.1000 | 1.10752 | +0.00752 |
+| 0.2000 | 1.20571 | +0.00571 |
+| **0.3935** | **1.39739** | **+0.00389** |
+| 0.6000 | 1.60335 | +0.00335 |
+| 1.0000 | 2.00405 | +0.00405 |
+| 1.5000 | 2.50612 | +0.00612 |
 
-**Systematic at the target's own `α`: `+0.0022`. Worst over the sweep: `0.0061`.** All
-exponents below are quoted against this.
+**Systematic at the target's own `α`: `+0.0039`. Worst over the sweep: `0.0075`.** The bias is
+**positive** — the fitter over-estimates `p` — so a bias-corrected exponent is *lower*:
+`1.3937 − 0.0039 = 1.3898`. All exponents below are quoted against this.
+
+#### 2.3.1 And the systematic is a property of `(M, band)`, not of the fitter alone
+
+**This was wrong in the first version of this document and was caught by VER-B's review.** The
+calibration was originally run at `M = 65536` while every target measurement runs at
+`M = 16384`, and the finer grid's systematic (`+0.0022`) was quoted against the coarser grid's
+answer. It is `1.8×` too small:
+
+| `M` | systematic at target `α` | worst over sweep |
+|---|---|---|
+| 4 096 | +0.01613 | 0.03132 |
+| 8 192 | +0.00722 | 0.01492 |
+| **16 384 (headline)** | **+0.00389** | **0.00752** |
+| 32 768 | +0.00263 | 0.00611 |
+| 65 536 | +0.00215 | 0.00610 |
+
+The mistake was not arbitrary and that is what makes it worth recording: at `M = 65536` the
+finest `θ` cell reaches `|X| = 2M/π = 4.17e+04`, **past the headline domain's `X_max`**, so
+that grid could not have been used on the target without extrapolating. The calibration family
+is analytic and has no such limit — which is exactly why calibrating it on a finer grid than
+the target was measured on **flatters the instrument**. The control battery (§3) is now run at
+`M_PRIMARY` throughout for the same reason.
 
 ---
 
@@ -143,8 +170,8 @@ exponents below are quoted against this.
 | control | what it is | expected | measured |
 |---|---|---|---|
 | **positive** | `a = 0` CLM anchor `Ω₀ = −sin θ = −2X/(1+X²)`, exactly one mode | `\|ĥ₁\| = 1`, `p = ∞` | `\|ĥ₁\|−1 = 3.4e-15`, `max_{k≥2} = 1.7e-12` |
-| **negative 1** | `1/(1+\|X\|)`: far field `\|X\|^{−1}`, kink at `θ = π` | `p = 2` (the `s = 1` threshold) | **1.9886** |
-| **negative 2** | `2 arctan(X)/π = θ/π`: sawtooth, `α = 0`, jump | `p = 1` (the flat threshold) | **1.0009** |
+| **negative 1** | `1/(1+\|X\|)`: far field `\|X\|^{−1}`, kink at `θ = π` | `p = 2` (the `s = 1` threshold) | **1.9888** |
+| **negative 2** | `2 arctan(X)/π = θ/π`: sawtooth, `α = 0`, jump | `p = 1` (the flat threshold) | **1.0008** |
 
 **Positive-control window, pre-registered (lesson 84):** `| |ĥ₁| − 1 | < 1e-10` **and**
 `max_{k≥2} |ĥ_k| < 1e-08`. Passed at `n = 201, 401, 801` (`4.4e-11 → 1.8e-13 → 3.4e-15`).
@@ -172,9 +199,9 @@ At the shipped domain `ρ_max = 8` (`X_max = 745.2`), `M = 16384`, band `k ∈ [
 | 401 | 1.5e-14 | 1.36912 | 0.999996 | 2.50e-06 | 0.39356 |
 | 801 | 2.3e-14 | 1.36925 | 0.999996 | 2.49e-06 | 0.39358 |
 
-**Drift `3.77e-04`**, well under the fitter's own systematic. Separately confirmed at
-`ρ_max = 12`: `p = 1.3937 → 1.3938` across `n = 401 → 3201`. The measurement is **not**
-resolution-limited.
+**Drift `3.77e-04`**, an order of magnitude under the fitter's own systematic (`+0.0039`,
+§2.3). Separately confirmed at `ρ_max = 12`: `p = 1.3937 → 1.3938` across `n = 401 → 3201`
+(*a separate run, not a JSON field*). The measurement is **not** resolution-limited.
 
 ### 4.2 Domain — the ladder that moves, and then stops
 
@@ -274,7 +301,7 @@ At `n = 801`, `ρ_max = 12`, `p = 1.39374`, `C = 0.48560`, `α = 0.39735`. Parti
 |---|---|---|---|---|---|
 | **0.00** | yes | **+0.39374** | 1.5122 | 0.0466 | **1.5588** |
 | **0.30** | yes | **+0.09374** | 3.3290 | 2.9241 | **6.2531** |
-| 0.39 | yes | +0.00374 | 4.5764 | 164.72 | 169.30 |
+| 0.39 | yes | +0.00374 | 4.5764 | 164.72 | **NOT RESOLVED** (see below) |
 | **1.00** | **no** | **−0.60626** | 123.12 | — | **DIVERGENT** |
 
 At `s = 1` the entry is **not** a large number. `analytic_tail` returns
@@ -282,11 +309,21 @@ At `s = 1` the entry is **not** a large number. `analytic_tail` returns
 value"` — when a quantity has no referent, say so instead of bounding it (lesson 73; gate 21).
 Where it is finite the bound is verified to dominate the true summed remainder (gate 22).
 
-**`s = 0.39` is reported but not relied on.** Its margin `+0.0037` is only `1.7×` the
-calibration systematic `0.0022`, and the domain ladder had not converged (`(p−1) − α` is
-still `−0.0036` at this domain). Against the largest-domain `α = 0.39782` the margin would be
-`+0.0078`. It is positive at every rung measured, and it is **thin**; the gate does not need
-it, since `s = 0` and `s = 0.3` carry it with margins two orders of magnitude larger.
+**`s = 0.39` is NOT RESOLVED, and the first version of this document got that wrong.** Its
+margin is `+0.00374` against a systematic of `+0.00389` at the headline's own `M` — a ratio of
+**`0.96×`, i.e. the margin does not clear the instrument's own error bar.** The bias is
+*positive*, so the bias-corrected margin is `+0.00374 − 0.00389 = −0.00015`: **negative**.
+
+The first version quoted this row as finite on the strength of a `1.7×` ratio against the
+`M = 65536` systematic `+0.0022` (§2.3.1) — erring **unsafe**, in the one direction that
+matters. It is now reported as **not resolved**: the measurement cannot distinguish this class
+from the divergent side, and `admissible_classes_with_finite_norm` in the JSON contains only
+`[0.0, 0.3]`, with `0.39` listed separately under `admissible_classes_not_resolved`.
+
+Two things do point the right way and neither is sufficient: the domain ladder had not
+converged at this domain (`(p−1) − α` is still `−0.0036`), and against the largest-domain
+`α = 0.39782` the margin would be `+0.0078`. **The gate does not need this row** — `s = 0` and
+`s = 0.3` carry it with margins `100×` and `24×` the systematic.
 
 ### 6.1 The second unknown
 
@@ -321,12 +358,26 @@ The class where the operator is least bad is `s = 1` (leg 51's divergence-curve 
 **At `s = 1` the norm does diverge**, margin `−0.606`. So the clause, read literally, is
 **correct**.
 
+**Leg 51 said so itself, and it is the strongest support for this reading.**
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEL1_V2.md` §9 already states, in the same breath as its
+window measurement:
+
+> *"The class where the operator is least bad is the class where the target has infinite norm,
+> and vice versa."*
+
+That is precisely the clause's content, written by the leg that raised it. The clause was never
+a claim that the target is outside *every* class — it is a claim about the *coincidence* of the
+two classes, and this leg's measurement **confirms** it rather than refuting it.
+
 What this leg establishes is therefore narrower and more useful than "the ban is wrong":
 
-1. The **object side** of the window is now a measurement (`s_max = 0.397 ± 0.006`) where it
+1. The **object side** of the window is now a measurement (`s_max = 0.397 ± 0.008`) where it
    was previously a docstring derivation applied to an assumed `α`.
 2. The `k^{−1−α}` correspondence is **confirmed**, to `1.5e-03`, on the real target.
-3. The window is **empty by `+0.603` in exponent units**, with both sides measured.
+3. The window is **empty by `+0.603` in exponent units**, with both sides measured — which
+   **confirms leg 51's published `0.606`** (`TECHNICAL_P2_ROUTEL1_V2.md` §9: *"The window is
+   empty by 0.606 in exponent units"*) rather than adding a new quantity. The delta is that
+   leg 51's object side was derived from an assumed `α` and this one is measured.
 4. **The target is comfortably inside the space at `s = 0` and `s = 0.3`** — the classes legs
    52 and 53 actually used. So "the target was never in the space" is **not** an available
    explanation for those legs' failures. Leg 53's block coupling (`Z₁ = 43.15` at its best

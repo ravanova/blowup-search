@@ -104,6 +104,23 @@ def _measure(X, f, tail_exp, M=M_PRIMARY, band=BAND, far_field="power", order=8)
 def nb1_controls():
     out = {}
 
+    # INSTRUMENT LIMIT: the float precision of the compactification itself, which is what
+    # bounds how far the domain ladder (NB-3) can usefully be pushed.  At large |X| the
+    # image theta sits within ~2/|X| of pi and float64 tan/arctan lose digits there.
+    rt = []
+    for Xv in (4.1e4, 3.0e5, 1.0e6):
+        Xa = np.array([-Xv, -745.0, -1.0, 0.0, 1.0, 745.0, Xv])
+        rt.append({"X_max_probed": float(Xv),
+                   "rel_roundtrip_defect": float(np.max(
+                       np.abs(X_of_theta(theta_of_X(Xa)) - Xa)
+                       / np.maximum(np.abs(Xa), 1.0))),
+                   "theta_distance_from_pi": float(np.pi - theta_of_X(Xv))})
+    out["instrument_limit_roundtrip"] = {
+        "what": "X -> theta -> X relative defect, the bound on the domain ladder's reach",
+        "rows": rt,
+        "note": ("this is why NB-3 stops at X_max = 3.0e+05: the map itself, not the "
+                 "physics, is what runs out of digits")}
+
     # POSITIVE CONTROL: the a = 0 CLM anchor is exactly ONE basis mode.
     pc = []
     for n in (201, 401, 801):
@@ -124,7 +141,9 @@ def nb1_controls():
                      "off-by-one in the FFT phase all smear this across every k")}
 
     # NEGATIVE CONTROL 1: far field |X|^-1 with a KINK -> p = 2, the s = 1 threshold.
-    th = midpoint_theta_grid(65536)
+    # At M_PRIMARY, the same transform size the target is measured at (VER-B F1: a control
+    # evaluated on a finer grid than the thing it certifies is not calibrating that thing).
+    th = midpoint_theta_grid(M_PRIMARY)
     Xt = X_of_theta(th)
     k, hk, _ = coefficient_magnitudes(inverse_X_profile(Xt))
     f1 = fit_exponent(k, hk, *BAND)
@@ -169,21 +188,53 @@ def nb1_controls():
                  "here it holds for any 0 < alpha < 1")}
 
     # THE CALIBRATION CURVE: does the fitter recover an exponent nobody told it?
-    cal = []
-    for a in (0.1, 0.2, 0.3935, 0.6, 1.0, 1.5):
-        kc, hc, _ = coefficient_magnitudes(calibration_family(Xt, a))
-        fc = fit_exponent(kc, hc, *BAND)
-        cal.append({"alpha": float(a), "p_expected": 1.0 + a, "p_measured": fc["p"],
-                    "err": fc["p"] - 1.0 - a, "r2": fc["r2"]})
+    #
+    # IT MUST BE RUN AT THE TRANSFORM SIZE THE HEADLINE ACTUALLY USES.  The first version
+    # of this block calibrated at M = 65536 while every target measurement runs at
+    # M_PRIMARY = 16384, and quoted the finer grid's systematic (+0.0022) against the
+    # coarser grid's answer.  The systematic is a property of the (M, band) pair, not of
+    # the fitter alone, and at M = 16384 it is +0.0039 -- 1.8x larger.  Caught by VER-B's
+    # review.  The sweep below is kept so the M-dependence is visible rather than
+    # rediscovered, and `systematic_bias_at_target_alpha` is now taken at M_PRIMARY.
+    ALPHAS = (0.1, 0.2, 0.3935, 0.6, 1.0, 1.5)
+    by_M = {}
+    for M in (4096, 8192, M_PRIMARY, 32768, 65536):
+        thM = midpoint_theta_grid(M)
+        XtM = X_of_theta(thM)
+        rows = []
+        for a in ALPHAS:
+            kc, hc, _ = coefficient_magnitudes(calibration_family(XtM, a))
+            fc = fit_exponent(kc, hc, *BAND)
+            rows.append({"alpha": float(a), "p_expected": 1.0 + a,
+                         "p_measured": fc["p"], "err": fc["p"] - 1.0 - a,
+                         "r2": fc["r2"]})
+        by_M[M] = rows
+    cal = by_M[M_PRIMARY]
+    at_target = float([r["err"] for r in cal if abs(r["alpha"] - 0.3935) < 1e-9][0])
     out["calibration_family"] = {
         "what": ("Omega_alpha = (1+X^2)^{-alpha/2}: far field exactly |X|^-alpha, "
                  "h = |cos(theta/2)|^alpha, so p = 1 + alpha for every alpha"),
-        "band": list(BAND), "rows": cal,
+        "band": list(BAND), "M": M_PRIMARY, "rows": cal,
         "max_abs_err": float(max(abs(r["err"]) for r in cal)),
-        "systematic_bias_at_target_alpha": float(
-            [r["err"] for r in cal if abs(r["alpha"] - 0.3935) < 1e-9][0]),
-        "role": ("this is the instrument's systematic error bar, and it is what the "
-                 "target's exponent must be quoted against")}
+        "systematic_bias_at_target_alpha": at_target,
+        "systematic_vs_M": {
+            str(M): {"at_target_alpha": float(
+                         [r["err"] for r in rr if abs(r["alpha"] - 0.3935) < 1e-9][0]),
+                     "max_abs_err": float(max(abs(r["err"]) for r in rr)),
+                     # how far out this transform size can see -- the reason a finer M
+                     # flatters the instrument (it reaches past the target's own X_max)
+                     "finest_theta_cell_reaches_X": float(2.0 * M / np.pi)}
+            for M, rr in by_M.items()},
+        "role": ("this is the instrument's systematic error bar AT THE HEADLINE'S OWN "
+                 "TRANSFORM SIZE, and it is what the target's exponent must be quoted "
+                 "against.  The bias is POSITIVE -- the fitter over-estimates p -- so a "
+                 "bias-corrected exponent is LOWER than the quoted one"),
+        "why_M_matters": ("at M = 65536 the finest theta cell reaches |X| = 2M/pi = "
+                          "4.17e+04, past the headline domain's X_max, so that grid could "
+                          "not have been used for the target without extrapolating.  The "
+                          "calibration family is analytic and has no such limit, which is "
+                          "exactly why calibrating it on a finer grid than the target was "
+                          "measured on flatters the instrument")}
     return out
 
 
@@ -354,7 +405,7 @@ def nb4_ablations(n=801, rho_max=12.0):
 # --------------------------------------------------------------------------
 # NB-5 -- the norms
 # --------------------------------------------------------------------------
-def nb5_norms(n=801, rho_max=12.0):
+def nb5_norms(n=801, rho_max=12.0, systematic=None):
     s = solve_target(n, rho_max=rho_max)
     sp, fit = _measure(s["b"].X, s["Omega"], s["c_omega"] / s["c_l"])
     k, hk = sp["k"], sp["hk"]
@@ -373,6 +424,11 @@ def nb5_norms(n=801, rho_max=12.0):
         v = norm_verdict(p, sv, alpha=s["alpha"])
         classes.append({"s": sv, "admissible_s_lt_alpha": bool(sv < s["alpha"]),
                         "partial_sums": ps, "analytic_tail": tail, "verdict": v,
+                        # the ratio the not-resolved determination is made on, stored so
+                        # it is auditable without recomputing it from two other fields
+                        "margin_over_systematic": (
+                            float(v["margin_in_exponent_units"] / systematic)
+                            if systematic else None),
                         "norm_upper_bound": (None if not tail["finite"]
                                              else float(ps[-1]["S_N"] + tail["bound"]))})
     return {"n": n, "rho_max": rho_max, "alpha": s["alpha"], "p": p, "C": C,
@@ -459,9 +515,16 @@ def evaluate(pay):
     best = dom["rows"][-1]
     p = best["p"]
     sysm = abs(c["calibration_family"]["systematic_bias_at_target_alpha"])
+    # A class counts only if its margin CLEARS the systematic at the headline's own M.
+    # s = 0.39's margin is +0.0037 against a systematic of +0.0039 (0.96x), so it does
+    # NOT clear and is reported as not resolved rather than as finite.  The systematic is
+    # positive, so erring the other way would be erring unsafe.
     finite = [x for x in norms["classes"]
               if x["admissible_s_lt_alpha"] and x["verdict"]["finite"]
               and x["verdict"]["margin_in_exponent_units"] > sysm]
+    not_resolved = [x["s"] for x in norms["classes"]
+                    if x["admissible_s_lt_alpha"] and x["verdict"]["finite"]
+                    and x["verdict"]["margin_in_exponent_units"] <= sysm]
     return {
         "P1_positive_control_in_window": c["positive_control_clm_anchor"]["passes"],
         "P2_negative_controls_on_threshold": bool(
@@ -483,7 +546,9 @@ def evaluate(pay):
         "P6_at_least_one_admissible_class_finite": bool(len(finite) > 0),
         "p_best": p,
         "systematic": sysm,
+        "systematic_measured_at_M": pay["M_primary"],
         "admissible_classes_with_finite_norm": [x["s"] for x in finite],
+        "admissible_classes_not_resolved": not_resolved,
         "GATE": ("yes" if len(finite) > 0 else "no"),
     }
 
@@ -514,7 +579,9 @@ def main():
     print("NB-4 ablations ...", flush=True)
     pay["NB4_ablations"] = nb4_ablations()
     print("NB-5 norms ...", flush=True)
-    pay["NB5_norms"] = nb5_norms()
+    pay["NB5_norms"] = nb5_norms(
+        systematic=abs(pay["NB1_controls"]["calibration_family"]
+                       ["systematic_bias_at_target_alpha"]))
     print("NB-6 second unknown ...", flush=True)
     pay["NB6_second_unknown"] = nb6_second_unknown()
     print("NB-7 curves ...", flush=True)
