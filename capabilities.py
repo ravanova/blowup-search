@@ -106,7 +106,7 @@ CAPABILITIES = [
      "test": "test_port_certification.py"},
     {"module": "solver/fractional_boussinesq.py", "object": "2D Boussinesq, fractional dissipation",
      "holds": "the critical-dissipation exponent for the 2D object",
-     "validated": "consistency with the 1D critical exponent; no independent known answer",
+     "validated": ("consistency with the 1D critical exponent; SEARCHED for an independent\n                   answer (leg 67) and none exists -- the literature's alpha+beta=1\n                   threshold (Stefanov-Wu-Xu-Ye arXiv:2606.03680) is a well-posedness\n                   scaling bound, not comparable to this arrest exponent; stored\n                   s_c=0.1711999849 remains internally-consistent-only"),
      "test": "test_fractional_boussinesq.py"},
 
     # -- the certificate: spaces, bounds, Newton-Kantorovich ------------------------

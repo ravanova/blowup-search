@@ -38,8 +38,8 @@ suspected.
 
 Last leg number actually landed/merged on main: **57**. Legs **58–63** are reserved,
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
-This session adds **64–71**, and this refill adds **72–75**. **Next fresh leg number for any
-future candidate is 76.**
+This session adds **64–71**, a first refill adds **72–75**, and this second refill adds
+**76–78**. **Next fresh leg number for any future candidate is 79.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -101,6 +101,29 @@ re-ranking triggered. Reserve is now **70 (RC), 71 (CAP)**.
   to refill the queue and specifically to backfill LEG-G (vacated by 69) and LEG-J (vacated by
   66); **72 (JR)** and **73 (BV)** are selected for immediate promotion — see Live assignments
   and the ranking rationale.
+
+**Leg 70 (Route-RC) landed at `c2ce973`. Gate answered NO** (confirms J-4's reading: no origin
+condition is imposed) — **but the leg found a larger, load-bearing problem than its own gate
+anticipated.** The banked "141 of 144 unstable directions at `mu=0`" claim, quoted across
+`PHASE2_P2_NOTES.md` and multiple writeup files, is not merely under-labelled by realization —
+the unstable count is **exactly `K-3`** at `K = 48/96/144` (a constant deficit, growing 1:1 with
+the discretization dimension, while max `Re` barely moves), which is the textbook signature of a
+**discretized continuum**, not a converged eigenvalue count. Ten quote sites need the correction
+propagated; two (`PHASE2_P2_NOTES.md:2176`, `TECHNICAL_P2_ROUTEI_V1.md:77`) say "a
+141-dimensional unstable manifold," which is **flatly false in any realization**, not just
+under-labelled. A verifier is confirming before this lands as a correction.
+
+**DM's read on the §7b vs. §8 classification, as requested:** this is a **rework leg (§7b), not
+escalation #4.** The `K-3` counts themselves are not deleted, reinterpreted-away, or in dispute
+— leg 70 confirms them; they stay banked exactly as measured. What needs correcting is the
+**interpretive claim built on top of the numbers** ("141-dimensional unstable manifold," an
+implied converged Morse index), which the `K-3` pattern shows was never a valid reading of that
+data. §7b's own language fits this exactly: "a confirmed gap becomes a rework leg... same
+territory as the flawed landing, gate pre-committed to the corrected measurement." Escalation #4
+is for deleting or reversing a landed *conclusion* (a gate answer, a claimed inequality, a
+banked finding's substance) — that is not what is happening here. **Recommend: once the
+verifier confirms, dispatch as a rework leg** (drafted below as leg 76, ROUTE-MI), not as an
+escalation-#4 parked branch.
 
 ---
 
@@ -183,47 +206,43 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-I | 75 | **LM** — benchmark the claimed 10x cached-slope speedup | no | light | `leg/lm-v1` | Does the cached slope_matrix path still reproduce >=8x speedup on the Scenario-2 step? |
 | LEG-J | 72 | **JR** — `experiments/JOURNAL.md` / `experiments/journal/` freshness audit | no | light | `leg/jr-v1` | Does the journal narrative and the per-leg `journal/leg_N.md` file exist for every landed leg? |
 
-**Orchestrator reconciliation note (2026-08-06):** the DM's table above was one landing behind
-at write time — legs 67 (FD) and 70 (RC) had already landed and freed LEG-H/LEG-I before this
-table was committed. Corrected directly: LEG-F holds 71 (CAP, already dispatched earlier),
-LEG-H and LEG-I now hold the two remaining reserve items 74 (EXT) and 75 (LM). Reserve is again
-fully exhausted — the DM will need to generate more candidates for the next refill.
-
-**LEG-I promoted 2026-08-05 mid-cycle:** leg 68 (IX) landed YES and vacated the slot; leg 64
-(A12) was promoted in per the reserve order, without re-ranking. **LEG-H promoted 2026-08-05
-mid-cycle:** leg 65 (L1G) landed NO and vacated the slot; leg 67 (FD) was promoted in per the
-reserve order, without re-ranking. **LEG-F, LEG-G, LEG-J refilled 2026-08-05 mid-cycle:** leg 60
-(PQ) landed NO/escalated (F), leg 69 (IA) landed NO/scoped (G), leg 66 (QF) landed YES/bug-found
-(J) — all three per Status above. The reserve's last two items promoted in: **70 (RC) into
-LEG-F** (consistent with the coordinator's stated current live territories). **71 (CAP)'s slot
-is reported live by the coordinator but not identified in this file** — B/C/D/E/H/I are carried
-forward unchanged below because no landing was reported for any of them; this cell will be
-reconciled against the orchestrator's tracking on the next status update, not guessed at here.
-With the reserve now empty, **two of the four newly-added candidates (72 JR, 73 BV) fill
-LEG-J and LEG-G**; **74 (EXT) and 75 (LM) become the new reserve.**
+**History of the churn above (68→65→67/64→60/69/66→70, in that order) is preserved in the
+earlier paragraphs of this Status section; this line is the current authoritative state,
+superseding the table's prior intermediate corrections.** As of this update: LEG-A through
+LEG-F are unchanged (58, 62, 63, 59, 61, 71). Legs 73 (BV, was G), 75 (LM, was I) and 72 (JR,
+was J) have themselves since landed or been superseded per the coordinator's newest report,
+opening **LEG-G, LEG-I and LEG-J** again; LEG-H (74, EXT) is unaffected and stays live. Three
+fresh candidates fill the three open slots: **77 (EXT2) → LEG-G, 78 (HLB) → LEG-I, 79 (PC) →
+LEG-J.** **76 (Route-MI, the rework leg for leg 70's Morse-index correction) is drafted below,
+ranked first overall, and held for dispatch the moment the verifier confirms** — per §7b, a
+confirmed rework leg is cut at the top of the queue, and it should preempt the next slot to
+open rather than wait in ordinary reserve rotation. Reserve after this update: empty except for
+76, which is not ordinary reserve — it is a pending top-priority dispatch.
 
 Figure numbers pre-allocated: leg 58 → `fig55`, 62 → `fig56`, 63 → `fig57`, 59 → `fig58`,
-60 → `fig59`/`fig60`. Legs 73, 67, 64, 70, 72 (and the now-landed 68, 65, 69, 66, 60) are
-audit/literature/hygiene legs and register **no figure**, by the same convention already
-established for Route-D scope (advection) and Route-D v15 (literature scope) — "no measurement,
-no figure." `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**
-across all ten.
+60 → `fig59`/`fig60`. Legs 71, 74, 77, 78, 79 (and the now-landed/superseded 68, 65, 67, 64, 60,
+69, 66, 70, 73, 75, 72) are audit/literature/hygiene legs and register **no figure**, by the
+same convention already established for Route-D scope (advection) and Route-D v15 (literature
+scope) — "no measurement, no figure." Leg 76 (a prose-correction rework leg) also registers no
+figure. `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only** across
+all ten.
 
-**Territory-overlap check (explicit, as required).** Solver modules touched by the ten:
-`spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
-`target_selection.py`(63), `weight_search.py`(59), `interval_certificate.py`(61),
-none-owned/read-only(70 reads `rescaled_spectrum.py`, edits nothing — docs-only leg),
-none-owned/read-only(73 reads `boussinesq_velocity.py`, edits nothing), none-owned/read-only(67
-reads `fractional_boussinesq.py`, edits nothing), none-owned/read-only(64, reads
-`critical_dissipation.py`, edits nothing), none(72, touches only `experiments/JOURNAL.md` and
-reads `experiments/journal/`). All ten distinct — **no collision.** Note: neither `70` nor `73`
-edits `solver/interval.py` or `solver/spectral_utils.py`, both currently under bench-repair and
-off-limits for editing by any live or new candidate. `writeup/data` JSON files are likewise ten
-distinct names (`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`,
-`p2_route_m2_v1_targets.json`, `p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`,
-`p2_route_bv_v1_velocity_benchmark.json`, `p2_route_fd_v1_lit.json`,
-`p2_route_a12_v1_alpha_lit.json`, none(70, docs-only), none(72)) — **no collision.** (Legs 68,
-65, 69, 66, 60's territories have landed and are no longer live.)
+**Territory-overlap check (explicit, as required).** Solver modules touched by the current ten
+(58, 62, 63, 59, 61, 71, 77, 74, 78, 79): `spectral_certificate.py`(58),
+`certificate_shapes.py`+`literature_gates.py`(62), `target_selection.py`(63),
+`weight_search.py`(59), `interval_certificate.py`(61), `capabilities.py`(71, factual
+"test"-field only, pre-committed narrow), none-owned/read-only(77, target-ledger literature
+watch, no code edits), none-owned/read-only(74, reads target-ledger citation only, no code
+edits), none-owned/read-only(78 reads `hl_rescaled.py`, edits nothing),
+none-owned/read-only(79 reads/tests `port_certification.py` via a new regression test file, no
+edits to the module itself). All ten distinct — **no collision.** None of the ten edits
+`solver/interval.py` or `solver/spectral_utils.py`, both still under bench-repair and
+off-limits for editing. `writeup/data` JSON files are likewise ten distinct names
+(`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`, `p2_route_m2_v1_targets.json`,
+`p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`, none(71, its own audit JSON is
+`p2_route_cap_v1_audit.json`) — `p2_route_cap_v1_audit.json`, `p2_route_ext2_v1_target_watch2.json`,
+`p2_route_ext_v1_target_watch.json`, `p2_route_hlb_v1_contraction_lit.json`,
+`p2_route_pc_v1_regression.json`) — **no collision.**
 
 ## Queue
 
