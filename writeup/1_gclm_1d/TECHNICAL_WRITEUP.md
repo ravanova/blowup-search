@@ -77,8 +77,8 @@ term. Conserved-quantity drift (mean-invariant; viscous energy-balance
 residual) is tracked every run as an always-on artifact guard. Validated at
 three levels — CLM analytic blow-up time, pure-diffusion Gaussian decay, and
 advection/invariant conservation — tracked across commits in
-`experiments/solver_validation.jsonl`. Code: [`../solver/`](../../solver),
-[`../win_condition.py`](../../win_condition.py).
+`experiments/solver_validation.jsonl`. Code: [`../../solver/`](../../solver),
+[`../../win_condition.py`](../../win_condition.py).
 
 **Fitness viability first (Stage 1.5).** Before building the GA, we swept ~20
 hand-picked ICs to check the intended fitness is non-degenerate. Result: **ν_crit
@@ -94,8 +94,8 @@ fixed L² energy** after every operator — CLM-type equations are scale-covaria
 cranking amplitude. Search is **MAP-Elites** keyed on shape descriptors
 (spectral tail slope × sign-changes): the deliverable is a *map* of which shapes
 resist viscosity, which is natively a quality-diversity problem. Code:
-[`../ga/genome.py`](../../ga/genome.py), [`../ga/operators.py`](../../ga/operators.py),
-[`../ga/evolve.py`](../../ga/evolve.py).
+[`../../ga/genome.py`](../../ga/genome.py), [`../../ga/operators.py`](../../ga/operators.py),
+[`../../ga/evolve.py`](../../ga/evolve.py).
 
 **The bisection oracle.** One fitness evaluation = one warm-started bisection
 locating ν_crit, with carefully pinned semantics (horizon-relative fitness;
@@ -152,7 +152,7 @@ blow-up fitness.
 
 ## 6. Result 2 — the blow-ups are real, not grid artifacts (Stage 3, Tier 2)
 
-The automated resolution study ([`../ga/resolution_study.py`](../../ga/resolution_study.py))
+The automated resolution study ([`../../ga/resolution_study.py`](../../ga/resolution_study.py))
 reran the top-3 elites of each seed (9 genomes, 9 distinct archive cells) at
 N ∈ {256, 512, 1024} under each elite's own frozen config, at two operating
 points: an **inviscid anchor** (ν=0, gates promotion) and a
@@ -191,7 +191,7 @@ the map; it is **not** a novel singularity.
 
 If the confirmed blow-ups are known-type, the scientifically *novel*,
 Tier-3-worthy target is a **non-generic (α≠1)** De Gregorio-type singularity.
-A 240-run gate ([`../nongenericity_sweep.py`](../../nongenericity_sweep.py)) asked
+A 240-run gate ([`../../nongenericity_sweep.py`](../../nongenericity_sweep.py)) asked
 whether the GA's edge overlaps that target: measure the candidate fitness
 **|α−1|** inviscid across `a ∈ {0.7, 0.9, 1.0} × N ∈ {256, 512}` over the
 40-shape roster, gate on the six properties (single-run adaptations).
@@ -224,20 +224,20 @@ Stage 3.5 left one loophole: it used smooth and random-phase data, but the
 literature's *provable* non-generic blow-ups (Elgindi–Jeong, Chen–Hou,
 Buckmaster–Gómez-Serrano) need genuine **limited-regularity** velocity
 (`C^{1,α}`, i.e. vorticity `ω ∈ C^{0,α}`). So the last cheap 1D probe — Route A,
-Phase 0 of [`../CLAY_ROADMAP.md`](../../CLAY_ROADMAP.md) — built that and pushed to
+Phase 0 of [`../../CLAY_ROADMAP.md`](../../CLAY_ROADMAP.md) — built that and pushed to
 finer grids.
 
-**A real rough-data genome mode** ([`../ga/genome.py`](../../ga/genome.py)):
+**A real rough-data genome mode** ([`../../ga/genome.py`](../../ga/genome.py)):
 `f_h(x) = sign(sin x)·|sin x|^h`, an odd `C^{0,h}` vorticity with a *localized*
 Hölder-h cusp at `x=0, π` (`h=1` is exactly `sin x`) — unlike the delocalized
 random-phase field the `k^{-p}` envelope produces.
-[`../test_genome_rough.py`](../../test_genome_rough.py) certifies the intended
+[`../../test_genome_rough.py`](../../test_genome_rough.py) certifies the intended
 regularity directly: the real-space local Hölder exponent equals `h`, and the
 profile is genuinely *not* `C^1` for `h<1` (`max|f′| ∼ N^{1-h}` diverges under
 refinement). This is the "rough-data representation principle" that transfers to
 Phase 1; only the solver changes.
 
-**A fine-N exponent measurement** ([`../stage3_6_sweep.py`](../../stage3_6_sweep.py)):
+**A fine-N exponent measurement** ([`../../stage3_6_sweep.py`](../../stage3_6_sweep.py)):
 72 inviscid blow-ups over `h ∈ {0.2…1.0} × a ∈ {0.7, 0.9, 0.95, 1.0} × N ∈
 {1024, 2048, 4096}`, fitting the blow-up-rate exponent `α`. `a=0.7` is a
 **methodological control** — Stage 3.5 says it must read generic `α≈1` and
@@ -255,14 +255,14 @@ rather than a verdict (validate the measurement where the answer is known).
 The fitted `α` scatters non-monotonically with resolution (a=0.9), rails to the
 fit-grid edge and flips well-definedness (a=0.95), or never blows up at all
 (a=1.0, even for `C^{0,0.2}` data — *not* evidence of regularity, per
-[`../WIN_CONDITION.md`](../../WIN_CONDITION.md), only no searchable signal).
+[`../../WIN_CONDITION.md`](../../WIN_CONDITION.md), only no searchable signal).
 Crucially, max `conservation_drift` over all 72 runs is `1.9×10⁻⁴` — well under
 the `10⁻³` guard — and every counted fit clears `R²≥0.9`: the runs are
 well-resolved and individually clean, yet the exponent has **no
 resolution-stable limit**. Refining from Stage 3.5's `N∈{256,512}` to `4096` did
 not shrink the scatter. Figure [`fig5`](../figures/fig5_rough_rails.png), data
 [`data/stage3_6_rough.json`](../data/stage3_6_rough.json). Full account:
-[`../STAGE_3_6_RESULTS.md`](../../STAGE_3_6_RESULTS.md).
+[`../../STAGE_3_6_RESULTS.md`](../../STAGE_3_6_RESULTS.md).
 
 Rough data changed blow-up *occurrence* (a=0.9 went from 20/40 usable in Stage
 3.5 to 18/18 here) but not exponent *convergence*. The cheap 1D route to a novel
@@ -298,8 +298,8 @@ the map — which is complete.
 Every logged run pins a git commit; GA runs also freeze a `config.json`; the
 logbook refuses to launch on a dirty tree. Per-evaluation RNG seeds make any
 single genome evaluation reproducible standalone. Six test suites gate the
-code (`../test_win_condition.py`, `../test_solver_clm.py`, `../test_logbook.py`,
-`../test_ga.py`, `../test_resolution_study.py`, and `../test_genome_rough.py`
+code (`../../test_win_condition.py`, `../../test_solver_clm.py`, `../../test_logbook.py`,
+`../../test_ga.py`, `../../test_resolution_study.py`, and `../../test_genome_rough.py`
 for the rough-data regularity). This folder's figures and
 numbers rebuild from committed data via `writeup/build_figures.py`; the raw logs
 (gitignored, large) regenerate from the committed sweep/GA scripts per the stage

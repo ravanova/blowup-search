@@ -300,11 +300,11 @@ raw log or solver re-run is required to check any number.
 | all headline numbers | [`data/summary_metrics.json`](../data/summary_metrics.json) |
 
 The frozen predicate contract and full per-experiment records live in the repo
-root: [`../PHASE1_GATE4_REFORMULATED_PREDICATE.md`](../../PHASE1_GATE4_REFORMULATED_PREDICATE.md)
+root: [`../../PHASE1_GATE4_REFORMULATED_PREDICATE.md`](../../PHASE1_GATE4_REFORMULATED_PREDICATE.md)
 (the gate, committed pre-run),
-[`../PHASE1_GATE4_REFORM_RESULTS.md`](../../PHASE1_GATE4_REFORM_RESULTS.md),
-[`../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md),
-[`../PHASE1_GSUSTAINED_RESULTS.md`](../../PHASE1_GSUSTAINED_RESULTS.md). The
+[`../../PHASE1_GATE4_REFORM_RESULTS.md`](../../PHASE1_GATE4_REFORM_RESULTS.md),
+[`../../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md),
+[`../../PHASE1_GSUSTAINED_RESULTS.md`](../../PHASE1_GSUSTAINED_RESULTS.md). The
 runner/analyzer split that produced the evidence (`phase1_gate4_reform.py` writes
 the log; the frozen `analyze_phase1_gate4_reform.py` applies the predicate) is
 described there. For the surrounding project and the chronological narrative, start

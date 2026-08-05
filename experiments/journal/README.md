@@ -1,7 +1,8 @@
 # Per-leg journal entries
 
-`experiments/JOURNAL.md` is append-only and was written by one leg per day. With four legs
-running in parallel it became the single worst merge-conflict point in the repo.
+`experiments/JOURNAL.md` is append-only and was written by one leg per day. With ten legs
+running in parallel (see `ORCHESTRATION.md` §2) it became the single worst merge-conflict
+point in the repo.
 
 **Each leg now writes `leg_<N>.md` here instead** — same content, same care, one file per leg.
 The orchestrator adds a one-line pointer to `JOURNAL.md` at integration, so the ledger still

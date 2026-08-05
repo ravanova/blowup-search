@@ -4,7 +4,7 @@
 [BLOG_PHASE1_GSUSTAINED.md](BLOG_PHASE1_GSUSTAINED.md); all numbers below are built
 from committed evidence in
 [`data/phase1_gate4_reform.json`](../data/phase1_gate4_reform.json), full record in
-[`../PHASE1_GATE4_REFORM_RESULTS.md`](../../PHASE1_GATE4_REFORM_RESULTS.md).*
+[`../../PHASE1_GATE4_REFORM_RESULTS.md`](../../PHASE1_GATE4_REFORM_RESULTS.md).*
 
 The last post ended on a cautious win. We had a fitness function for ranking
 candidate blow-up shapes — `g_frac`, an inviscid growth **rate** — and although its

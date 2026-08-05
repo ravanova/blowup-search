@@ -167,6 +167,6 @@ are what that discipline looks like in practice.
 *Numbers and figures here are built from the committed evidence in
 [`data/`](../data/) via [`build_figures.py`](../build_figures.py); see
 [README.md](../README.md) for the full evidence map, and
-[`../PHASE1_AXIS_SCREEN_RESULTS.md`](../../PHASE1_AXIS_SCREEN_RESULTS.md) /
-[`../PHASE1_SPIKE_RESULTS.md`](../../PHASE1_SPIKE_RESULTS.md) for the pre-committed
+[`../../PHASE1_AXIS_SCREEN_RESULTS.md`](../../PHASE1_AXIS_SCREEN_RESULTS.md) /
+[`../../PHASE1_SPIKE_RESULTS.md`](../../PHASE1_SPIKE_RESULTS.md) for the pre-committed
 gates.*

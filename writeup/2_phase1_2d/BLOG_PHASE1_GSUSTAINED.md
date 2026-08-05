@@ -4,7 +4,7 @@
 last one. Sequel to [BLOG_PHASE1_GATE4.md](BLOG_PHASE1_GATE4.md); all numbers below
 are built from committed evidence in
 [`data/phase1_gsustained.json`](../data/phase1_gsustained.json), with the full record
-in [`../PHASE1_GSUSTAINED_RESULTS.md`](../../PHASE1_GSUSTAINED_RESULTS.md).*
+in [`../../PHASE1_GSUSTAINED_RESULTS.md`](../../PHASE1_GSUSTAINED_RESULTS.md).*
 
 The last post ended with a fitness function dead on the table and a promise. We had
 been ranking candidate blow-up shapes by `ν_crit` — the critical viscosity a

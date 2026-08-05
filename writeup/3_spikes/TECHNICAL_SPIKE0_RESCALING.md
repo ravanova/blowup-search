@@ -5,10 +5,10 @@
 *Results companion to [TECHNICAL_PHASE2_RESCALING.md](TECHNICAL_PHASE2_RESCALING.md)
 (the decision + derivation) and the working notes
 [../PHASE2_SPIKE0_NOTES.md](../../PHASE2_SPIKE0_NOTES.md). Code:
-[`../solver/line_hilbert.py`](../../solver/line_hilbert.py),
-[`../solver/gclm_rescaled.py`](../../solver/gclm_rescaled.py); tests
-[`../test_line_hilbert.py`](../../test_line_hilbert.py) (6/6),
-[`../test_gclm_rescaled.py`](../../test_gclm_rescaled.py) (5/5). Figure + committed
+[`../../solver/line_hilbert.py`](../../solver/line_hilbert.py),
+[`../../solver/gclm_rescaled.py`](../../solver/gclm_rescaled.py); tests
+[`../../test_line_hilbert.py`](../../test_line_hilbert.py) (6/6),
+[`../../test_gclm_rescaled.py`](../../test_gclm_rescaled.py) (5/5). Figure + committed
 evidence: [`figures/fig8_spike0_rescaling.png`](../figures/fig8_spike0_rescaling.png),
 [`data/spike0_rescaling.json`](../data/spike0_rescaling.json), rebuilt by
 [`spike0_rescaling_evidence.py`](spike0_rescaling_evidence.py). References in [§7](#7-references).*
