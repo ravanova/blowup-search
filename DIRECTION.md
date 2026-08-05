@@ -145,6 +145,50 @@ one doesn't need a branch, a quartet, or a slot. Scope for the bench-repair: cor
 value and the inverted norm index in leg 64's "Trap 1" paragraph (wherever cited from), remove
 the stray Oldroyd-B gloss, fix the two mislabels — no other content changes.
 
+**Two more landings; a third slot vacated for leg 76; reserve exhausted again.**
+
+- **Leg 77 (EXT2) landed: gate NO.** The rank-2 target object (gCLM_degenerate_one_scale,
+  arXiv:2603.25104) remains uncertified 133 days on. Confirmed still-uncertified, banked as a
+  dated watch entry, exactly its own pre-committed no-branch. Slot vacated.
+- **Leg 79 (PC) answered NO — a real finding.** `radii_polynomial_status` in
+  `solver/port_certification.py` does no domain validation: 11/25 adversarial hypothesis-
+  violating inputs (negative/NaN `Y_0`, `Z_1`, `Z_2`) incorrectly return `closes=True`,
+  including a bare sign-flip case. Severity is latent — both in-repo callers pass `(None,
+  None)`, so no banked result is affected — but it is a real gap, exactly the shape leg 69 (IA)
+  and leg 66 (QF) also found. Correctly handled outside the leg system: a bench-repair agent is
+  adding the missing validation (not a rework leg — a straightforward infra fix with no banked
+  claim to correct). `solver/port_certification.py` is now **off-limits for editing** by any new
+  candidate until that repair lands; reading is fine. Slot vacated.
+- **`solver/interval.py` and `solver/spectral_utils.py`'s bench-repairs have both landed** (legs
+  69 and 66's findings) — **no longer off-limits.** New candidates may read or, if warranted,
+  touch either module now.
+- **A third slot (LEG-D) is being held open for leg 76**, per the coordinator's own plan and
+  consistent with this file's recommendation that a confirmed rework leg preempts the next slot
+  to open rather than queue behind ordinary reserve. **Leg 76 is not yet dispatchable — its
+  scope may be sharpening.** The verifier reviewing leg 70 (for leg 76's benefit) reports the
+  core finding solid so far, but has also found: (a) **leg 70 itself never recomputed
+  anything** — it hardcoded its `K`-counts from the doc — and the verifier is independently
+  re-deriving at `K = 144/192` now; (b) **one wording defect**: leg 70 said three origin
+  quantities "contract to a scalar," but one is actually a rank-one matrix; (c) **a sharper
+  continuum signature leg 70 didn't use**: `max|Im|` grows `~4.3K`. None of this changes the
+  DM's §7b classification above — it is still a rework leg, not an escalation — but leg 76's
+  eventual gate and territory may need to absorb the verifier's independent re-derivation and
+  the rank-one-matrix correction once it lands, rather than leg 76 simply transcribing leg 70's
+  numbers. Leg 76's spec below is left as drafted; whoever dispatches it should read the
+  verifier's final report first and patch the gate wording if the re-derivation changes the
+  `K`-values or the wording defect needs its own line.
+- **Note, unconfirmed:** the coordinator's slot letters for 77/79 (LEG-J, LEG-H) don't match
+  this file's LEG-G/LEG-J assignments from the previous update, and LEG-D opening for 76 implies
+  leg 59 (WV) has also landed — none of which was individually reported. This file tracks leg
+  *numbers* and territory, not letter-for-letter slot identity, since the orchestrator dispatches
+  and letters can shift; no discrepancy here changes any territory or ranking conclusion, so it
+  is noted and not chased further. If leg 59's outcome matters to a future gate (KA and WV don't
+  interact), it will surface in a future status message.
+- **Reserve exhausted again. Four new candidates (80–83) are added below.** Two are selected for
+  immediate promotion into the two slots that need filling now (LEG-H and LEG-J, using the
+  coordinator's letters): **80 (BHN)** and **83 (MFG)** — see Live assignments and the ranking
+  rationale. **81 (BRS)** and **82 (EXT3)** are the new reserve.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -222,61 +266,54 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-E | 61 | **KA** — a known-answer window for the interval pipeline | no | standard | `leg/ka-v1` | Does `interval_certificate.py` reproduce CLN's published Kawahara radius? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 73 | **BV** — external known-answer check for the 2D velocity solver | no | standard | `leg/bv-v1` | Does a published, independent benchmark exist for the polar-grid Biot-Savart solve, and does the solver reproduce it? |
-| LEG-H | 79 | **PC** — adversarial fabrication-rejection audit of the L1->L2 port | no | light | `leg/pc-v1` | Does `radii_polynomial_status` still correctly reject a battery of fabricated/poisoned Y_0/Z_1 inputs? |
-| LEG-I | 75 | **LM** — benchmark the claimed 10x cached-slope speedup | no | light | `leg/lm-v1` | Does the cached slope_matrix path still reproduce >=8x speedup on the Scenario-2 step? |
-| LEG-J | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
+| LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
+| LEG-I | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
+| LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
 
-**Orchestrator note (2026-08-06, third pass):** legs 59 (WV) and 74 (EXT) landed (freed D, H);
-72 (JR) also landed earlier (freed J). Dispatched 78→LEG-J, 79→LEG-H immediately. LEG-D held
-open deliberately for leg 76, per the DM's instruction that a confirmed rework leg preempts the
-next opening rather than waiting behind ordinary reserve rotation. Reserve is now empty except
-76 (blocked on its verifier).
-
-**Orchestrator reconciliation note (2026-08-06, second pass):** the DM's proposal to put 77/78/79
-into LEG-G/I/J was based on state from before the orchestrator's dispatch of 72/73/74/75 landed
-in this file — **all ten slots are currently live and already running as dispatched agents**
-(73=BV in LEG-G, 75=LM in LEG-I, 72=JR in LEG-J, alongside 71=CAP in LEG-F and 74=EXT in LEG-H).
-Restored the table to the true dispatched state. **76 (MI, top priority — preempts the next
-opening per §7b), 77 (EXT2), 78 (HLB) and 79 (PC) are now the reserve**, in that order, for the
-next four slots to open. No agent has been spawned for 77/78/79 yet.
-
-**History of the churn above (68→65→67/64→60/69/66→70, in that order) is preserved in the
-earlier paragraphs of this Status section; this line is the current authoritative state,
-superseding the table's prior intermediate corrections.** As of this update: LEG-A through
-LEG-F are unchanged (58, 62, 63, 59, 61, 71). Legs 73 (BV, was G), 75 (LM, was I) and 72 (JR,
-was J) have themselves since landed or been superseded per the coordinator's newest report,
-opening **LEG-G, LEG-I and LEG-J** again; LEG-H (74, EXT) is unaffected and stays live. Three
-fresh candidates fill the three open slots: **77 (EXT2) → LEG-G, 78 (HLB) → LEG-I, 79 (PC) →
-LEG-J.** **76 (Route-MI, the rework leg for leg 70's Morse-index correction) is drafted below,
-ranked first overall, and held for dispatch the moment the verifier confirms** — per §7b, a
-confirmed rework leg is cut at the top of the queue, and it should preempt the next slot to
-open rather than wait in ordinary reserve rotation. Reserve after this update: empty except for
-76, which is not ordinary reserve — it is a pending top-priority dispatch.
+**Several internal notes above (the "third pass" and "second pass" reconciliations, and the
+unlabeled paragraph before them) drifted out of sync with each other from genuine message-
+ordering races and are superseded by this paragraph — the single current, authoritative
+account, reconstructed to match the coordinator's latest report exactly.** Reading the trail
+forward: 72 (JR) and 74 (EXT) each landed and were backfilled from reserve (72's slot took 77
+(EXT2), 74's slot took 79 (PC)); those two backfills have now *also* landed — 77 gate NO (rank-2
+target still uncertified), 79 gate NO with a real finding (see below) — reopening both slots
+again. Separately, leg 59 (WV) landed (outcome not individually reported to the DM) and its
+slot is being held open, not backfilled, for leg 76. **Currently live (7 of 10):** A=58 (NG,
+critical path), B=62 (CP), C=63 (M2), E=61 (KA), F=71 (CAP), G=73 (BV), I=78 (HLB). **Open (3 of
+10):** D (deliberately held for leg 76, not to be filled with anything else), and two slots the
+coordinator calls LEG-H and LEG-J, both needing a fresh candidate now. Reserve is empty.
+**80 (BHN) → LEG-H, 83 (MFG) → LEG-J** are selected below; **81 (BRS) and 82 (EXT3) are the new
+reserve.** If a future status message's slot letters again don't match this file's, treat this
+paragraph's pattern as the template: track leg *numbers* and territory as ground truth, letters
+as the orchestrator's bookkeeping, and don't chase a letter-for-letter reconciliation once the
+leg-number set and territory are confirmed consistent.
 
 Figure numbers pre-allocated: leg 58 → `fig55`, 62 → `fig56`, 63 → `fig57`, 59 → `fig58`,
-60 → `fig59`/`fig60`. Legs 71, 74, 77, 78, 79 (and the now-landed/superseded 68, 65, 67, 64, 60,
-69, 66, 70, 73, 75, 72) are audit/literature/hygiene legs and register **no figure**, by the
-same convention already established for Route-D scope (advection) and Route-D v15 (literature
-scope) — "no measurement, no figure." Leg 76 (a prose-correction rework leg) also registers no
-figure. `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only** across
-all ten.
+60 → `fig59`/`fig60`. Legs 71, 73, 78, 80, 83 (and every landed/superseded audit-family leg:
+60, 64, 65, 66, 67, 68, 69, 70, 72, 74, 75, 76's eventual prose-only correction, 77, 79) are
+audit/literature/hygiene legs and register **no figure**, by the same convention already
+established for Route-D scope (advection) and Route-D v15 (literature scope) — "no measurement,
+no figure." `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**
+across all ten.
 
-**Territory-overlap check (explicit, as required).** Solver modules touched by the current ten
-(58, 62, 63, 59, 61, 71, 77, 74, 78, 79): `spectral_certificate.py`(58),
+**Territory-overlap check (explicit, as required).** Solver modules touched by the current seven
+live plus two new promotions (58, 62, 63, 61, 71, 73, 78, 80, 83): `spectral_certificate.py`(58),
 `certificate_shapes.py`+`literature_gates.py`(62), `target_selection.py`(63),
-`weight_search.py`(59), `interval_certificate.py`(61), `capabilities.py`(71, factual
-"test"-field only, pre-committed narrow), none-owned/read-only(77, target-ledger literature
-watch, no code edits), none-owned/read-only(74, reads target-ledger citation only, no code
-edits), none-owned/read-only(78 reads `hl_rescaled.py`, edits nothing),
-none-owned/read-only(79 reads/tests `port_certification.py` via a new regression test file, no
-edits to the module itself). All ten distinct — **no collision.** None of the ten edits
-`solver/interval.py` or `solver/spectral_utils.py`, both still under bench-repair and
-off-limits for editing. `writeup/data` JSON files are likewise ten distinct names
-(`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`, `p2_route_m2_v1_targets.json`,
-`p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`, none(71, its own audit JSON is
-`p2_route_cap_v1_audit.json`) — `p2_route_cap_v1_audit.json`, `p2_route_ext2_v1_target_watch2.json`,
-`p2_route_ext_v1_target_watch.json`, `p2_route_hlb_v1_contraction_lit.json`,
-`p2_route_pc_v1_regression.json`) — **no collision.**
+`interval_certificate.py`(61), `capabilities.py`(71, factual "test"-field only, pre-committed
+narrow), none-owned/read-only(73 reads `boussinesq_velocity.py`, edits nothing),
+none-owned/read-only(78 reads `hl_rescaled.py`, edits nothing), none-owned/read-only(80 reads
+`bordered_hl.py`, edits nothing under a bug-found outcome), none-owned/read-only(83 reads
+`marginal_flow.py`, edits nothing under a bug-found outcome). Nine distinct so far — **no
+collision** — and LEG-D stays empty pending leg 76, which will need its own check once its final
+territory (possibly expanded per the verifier's findings) is confirmed. `solver/interval.py` and
+`solver/spectral_utils.py` are **no longer off-limits** (both bench-repairs landed).
+`solver/port_certification.py` is **newly off-limits** (leg 79's bench-repair is in flight) —
+neither 80 nor 83 touches it. `writeup/data` JSON files for the current live set are likewise
+distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+`p2_route_m2_v1_targets.json`(63), `p2_route_ka_v1_kawahara.json`(61),
+`p2_route_cap_v1_audit.json`(71), `p2_route_bv_v1_velocity_benchmark.json`(73),
+`p2_route_hlb_v1_contraction_lit.json`(78), `p2_route_bhn_v1_adversarial.json`(80),
+`p2_route_mfg_v1_adversarial.json`(83)) — **no collision.**
 
 ## Queue
 
@@ -901,7 +938,12 @@ this specific claim.
 ```
 
 ```
-### 79 — ROUTE-PC: ADVERSARIAL FABRICATION-REJECTION AUDIT OF THE L1->L2 PORT
+### 79 — ROUTE-PC: ADVERSARIAL FABRICATION-REJECTION AUDIT OF THE L1->L2 PORT (LANDED: gate NO)
+**Landed finding:** `radii_polynomial_status` does no domain validation -- 11/25 adversarial
+hypothesis-violating inputs (negative/NaN Y_0, Z_1, Z_2) incorrectly returned `closes=True`,
+including a bare sign-flip case. Severity latent (both in-repo callers pass `(None, None)`, no
+banked result affected). Bench-repair dispatched to add validation; `solver/port_certification.py`
+is off-limits for editing by any new candidate until it lands.
 **Thesis.** solver/port_certification.py's validated line claims `radii_polynomial_status`
 "returns BLOCKED_AT_STEP_ONE and is gated to carry NO fabricated Y_0 or Z_1" -- a logic property,
 distinct from leg 69 (IA)'s arithmetic-precision stress test of solver/interval.py. IA found real
@@ -926,6 +968,112 @@ BLOCKED_AT_STEP_ONE where appropriate?
 nobody else. Complementary to, not dependent on, leg 69's interval.py stress test -- this leg's
 gate is a logic property, not an arithmetic-precision one, so it is valid regardless of the
 interval.py bench-repair's timing.
+```
+
+```
+### 80 — ROUTE-BHN: ADVERSARIAL AUDIT OF THE BORDERED HL NEWTON SOLVE
+**Thesis.** Legs 69 (IA) and 79 (PC) each found a real soundness or logic gap by running an
+adversarial battery against infrastructure that had only ever been validated on well-behaved
+inputs. solver/bordered_hl.py's damped Newton solve has the same shape of exposure:
+capabilities.py validates it against Newton convergence "to 5.66e-15 at n=201" and a contraction
+ratio extrapolation, both on WELL-POSED starting data. Nobody has checked whether its
+convergence-reporting can be fooled -- a near-singular Jacobian, a NaN/Inf-poisoned initial
+iterate, or a residual oscillating just above/below tolerance that the damping accepts anyway.
+This is the third leg in the productive adversarial-audit family (after IA and PC), applied to
+the one Newton solver in the certificate stack that hasn't been stress-tested this way yet.
+**Gate.** Under an adversarial battery (near-singular Jacobian at the starting iterate,
+NaN/Inf-poisoned initial guess, a residual sequence oscillating just above and below tolerance),
+does solver/bordered_hl.py's damped Newton solve ever incorrectly report convergence?
+  yes -> A real false-convergence gap in certificate-adjacent infrastructure. Report the exact
+         failing case precisely; escalate, do not patch under this leg's own authority (same
+         discipline as legs 69, 66, 79).
+  no  -> Confirmed robust under the battery. Bank it as a permanent regression test.
+**Territory.** test_bordered_hl_adversarial.py, experiments/p2_route_bhn_v1_adversarial.py,
+               writeup/data/p2_route_bhn_v1_adversarial.json,
+               writeup/novelty/leg_80.md, experiments/journal/leg_80.md
+**Difficulty.** standard
+**Independence.** Reads solver/bordered_hl.py; edits nothing under any outcome. New test file
+claimed by nobody else. Does not touch solver/port_certification.py (currently under
+bench-repair) or solver/interval.py / solver/spectral_utils.py (repairs landed, but this leg
+doesn't need them regardless).
+```
+
+```
+### 81 — ROUTE-BRS: DOES boussinesq_rescaled.py EVER CONFLATE "RESOLUTION-STABLE" WITH "CONVERGED"?
+**Thesis.** capabilities.py's own validated line for solver/boussinesq_rescaled.py records a
+known trap: "Route-K showed the relaxation LIMIT-CYCLES and its residual GROWS under refinement,
+so 'resolution-stable' here is NOT 'converged'." That caveat describes a property of the
+PHYSICS (the relaxation doesn't actually converge), but it says nothing about whether the
+module's own status/exit-reporting logic could still be fooled into flagging a limit-cycling run
+as stable or converged -- a labeling bug distinct from the physics itself, and exactly the kind
+of thing leg 66 found in a neighboring module (a correctness bug hiding behind physics nobody
+had re-examined at the code level). This does not re-measure beta (banned, leg 43) and does not
+run any new physics -- it audits the STATUS-REPORTING code path against the refinement ladder
+already on record from Route-K.
+**Gate.** At the grid refinement levels where Route-K already measured the residual GROWING
+(limit-cycling), does solver/boussinesq_rescaled.py's own relaxation loop ever report a
+converged/stable status?
+  yes -> A false-positive convergence report at exactly the refinement levels already known to
+         limit-cycle. Report precisely; escalate, do not patch under this leg's own authority.
+  no  -> Confirmed the module never claims convergence it hasn't earned. Bank as a regression
+         check tied to the refinement ladder already on record.
+**Territory.** test_boussinesq_rescaled_status.py, experiments/p2_route_brs_v1_status_audit.py,
+               writeup/data/p2_route_brs_v1_status_audit.json,
+               writeup/novelty/leg_81.md, experiments/journal/leg_81.md
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq_rescaled.py; edits nothing under any outcome. Distinct
+quantity and distinct question from leg 43's banned beta re-measurement (status-reporting logic,
+not a physics number) and from leg 73 (BV)'s external check of boussinesq_velocity.py (a
+different module).
+```
+
+```
+### 82 — ROUTE-EXT3: HAS THE RANK-3 TARGET OBJECT BEEN CERTIFIED BY ANYONE ELSE SINCE?
+**Thesis.** The same dated literature watch legs 74 (EXT, rank 1) and 77 (EXT2, rank 2) ran --
+both landed NO, still uncertified -- applies to target_selection.py's rank-3 candidate:
+Boussinesq_S2_nonsymmetric (Chen-Huang-Li, arXiv:2604.01868 section 6.2, the 2D analogue of the
+rank-1 1D object). A different object, a different section of a paper already partially read by
+this repository (section 2.5/4 for rank 1), independent of legs 74 and 77's own dated findings.
+**Gate.** Has a certificate (computer-assisted or analytic) for arXiv:2604.01868 section 6.2's
+Boussinesq_S2_nonsymmetric profile been published since the paper's own date?
+  yes -> The target_selection.py ledger's entry for this candidate is stale. Report the citation
+         precisely for leg 63 (M2) or a future leg to act on -- no self-edit of
+         target_selection.py, which is exclusively owned elsewhere.
+  no  -> Confirmed still uncertified as of this leg's search date. Bank the dated literature-
+         watch entry.
+**Territory.** experiments/p2_route_ext3_v1_target_watch3.py,
+               writeup/data/p2_route_ext3_v1_target_watch3.json,
+               writeup/novelty/leg_82.md, experiments/journal/leg_82.md
+**Difficulty.** light
+**Independence.** Does not touch solver/target_selection.py. Distinct object (2D, not 1D) from
+legs 74 and 77, same paper as leg 74 but a different section; no overlap.
+```
+
+```
+### 83 — ROUTE-MFG: ADVERSARIAL AUDIT OF marginal_flow.py's GATE 11
+**Thesis.** solver/marginal_flow.py's validated line records that "gate 11 enforces convergence
+(the NaN of leg 41)" -- a gate purpose-built to catch one specific failure mode (a NaN in the
+integrated trajectory). It has never been checked against non-NaN divergence: slow unbounded
+polynomial growth, or sustained oscillation that never decays but also never produces a NaN.
+A gate built to catch one named failure mode passing silently on a DIFFERENT failure mode it was
+never tested against is exactly the shape of gap legs 69, 66 and 79 each found elsewhere in this
+repository's infrastructure. This is a robustness audit of existing convergence-checking code,
+not a new gCLM physics measurement -- no new parameter sweep, no new profile, just adversarial
+inputs against an existing gate's catch coverage.
+**Gate.** Under an adversarial battery of non-NaN divergent trajectories (slow polynomial
+blowup, sustained non-decaying oscillation), does gate 11 correctly flag non-convergence, or does
+it only catch the NaN case it was built for?
+  yes (catches all) -> Confirmed gate 11's coverage is broader than its original design case.
+         Bank the battery as a permanent regression test.
+  no (misses some) -> Gate 11 has a narrower catch than assumed. Report the exact failing
+         trajectory precisely; escalate, do not patch under this leg's own authority.
+**Territory.** test_marginal_flow_adversarial.py, experiments/p2_route_mfg_v1_adversarial.py,
+               writeup/data/p2_route_mfg_v1_adversarial.json,
+               writeup/novelty/leg_83.md, experiments/journal/leg_83.md
+**Difficulty.** standard
+**Independence.** Reads solver/marginal_flow.py; edits nothing under any outcome. New test file
+claimed by nobody else. A robustness audit of the gate's catch coverage, not a new physics
+measurement, so it does not fall under the gCLM-measurement ban (leg 42).
 ```
 
 ## Ranking rationale
