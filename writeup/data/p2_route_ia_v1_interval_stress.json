@@ -1,0 +1,216 @@
+{
+  "dekker_overflow_probe": {
+    "e_crit": 997,
+    "enclosure_at_crit_hi": "nan",
+    "enclosure_at_crit_lo": "nan",
+    "magnitude_crit": 1.3393857589828342e+300,
+    "note": "_two_product's Dekker splitting multiplies by 2^27+1 before splitting, so it overflows for |a| >= 2^e_crit and returns a NaN error term; dot2_matvec then returns a NaN enclosure and RAISES NOTHING, because the Interval constructor's lo <= hi guard is vacuous on NaN",
+    "probe": "dekker_split_overflow",
+    "silent": true
+  },
+  "eta": 5e-324,
+  "families": [
+    {
+      "cases": 6772,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 416,
+      "false_negatives": 0,
+      "family": "elementary_ops",
+      "note": "+, -, *, / and reciprocal on adversarial endpoint pairs spanning 1e-320 to 1e300, including the subnormal boundary; exact-rational check on both endpoints",
+      "reproducer": null,
+      "worst_absolute_escape_eta": 0.0,
+      "worst_relative_slack": 5.0591067023618705e-20
+    },
+    {
+      "cases": 240,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 0,
+      "family": "isum_cancellation",
+      "note": "rigorous sum at accumulation lengths 32..258 (the certificate's own K range, bordered), with the terms driven to ~1e-32 relative cancellation",
+      "reproducer": null,
+      "worst_absolute_escape_eta": 0.0,
+      "worst_relative_slack": 0.4930564171798272
+    },
+    {
+      "cases": 720,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 0,
+      "family": "matvec_point_and_box",
+      "note": "uncompensated matvec at n x m up to 8 x 260, catastrophically cancelled rows; plus the interval-vector (box) path checked at every box CORNER pair",
+      "reproducer": null,
+      "worst_absolute_escape_eta": 0.0,
+      "worst_relative_slack": 1.7403580402497008e-12
+    },
+    {
+      "cases": 720,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 0,
+      "family": "dot2_normal_range",
+      "note": "the COMPENSATED matvec both live legs use, at m = 32..260 and input scales 1e-100..1e100, every row driven to ~1e-32 relative cancellation -- this is the regime the certificate stack actually occupies",
+      "reproducer": null,
+      "worst_absolute_escape_eta": 0.0,
+      "worst_relative_slack": 0.4991042453068184
+    },
+    {
+      "cases": 3904,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 0,
+      "family": "tail_block_conditioning",
+      "note": "the LIVE bordered linearization (spectral_certificate.bordered_linearization) at K = 16, 32, 64, 128, whose tail diagonal is EXACTLY zero, against vectors chosen to cancel its rows",
+      "reproducer": null,
+      "worst_absolute_escape_eta": 0.0,
+      "worst_relative_slack": 0.4763772490895882
+    },
+    {
+      "cases": 840,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 43,
+      "family": "dot2_subnormal_range",
+      "note": "the compensated matvec at input scales 1e-120..1e-185, i.e. products straddling the normal/subnormal boundary (min normal 2.2e-308, eta = 4.9e-324); the ORO bound u|x.y| + gamma^2 |x||y| is purely RELATIVE and carries no absolute eta term",
+      "reproducer": {
+        "escape_eta": 6.5786122625061205,
+        "exact_float": "0.0",
+        "hi": "7.4e-323",
+        "lo": "3.5e-323",
+        "tag": "scale=1e-155"
+      },
+      "scale_scan": {
+        "1e-120": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-125": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-130": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-135": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-140": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-145": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-150": {
+          "cases": 60,
+          "false_negatives": 15
+        },
+        "1e-155": {
+          "cases": 60,
+          "false_negatives": 21
+        },
+        "1e-160": {
+          "cases": 60,
+          "false_negatives": 7
+        },
+        "1e-165": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-170": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-175": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-180": {
+          "cases": 60,
+          "false_negatives": 0
+        },
+        "1e-185": {
+          "cases": 60,
+          "false_negatives": 0
+        }
+      },
+      "worst_absolute_escape_eta": 6.5786122625061205,
+      "worst_relative_slack": -0.8223265328132651
+    },
+    {
+      "cases": 840,
+      "cases_touching_an_endpoint": 0,
+      "cases_with_unbounded_endpoint": 0,
+      "false_negatives": 19,
+      "family": "matvec_subnormal_range",
+      "note": "the UNCOMPENSATED matvec over the same subnormal band, to separate which of the two reductions carries the defect",
+      "reproducer": {
+        "escape_eta": 3.9024398676072254,
+        "exact_float": "0.0",
+        "hi": "4e-323",
+        "lo": "2e-323",
+        "tag": "scale=1e-160"
+      },
+      "worst_absolute_escape_eta": 3.9024398676072254,
+      "worst_relative_slack": -0.9756099669018063
+    }
+  ],
+  "ground_truth": "exact rational (fractions.Fraction) on exact float64 inputs",
+  "leg": 69,
+  "live_operator_dynamic_range": {
+    "bordered_linearization_K128": {
+      "exact_zero_entries": 16133,
+      "max_abs": 128.0,
+      "min_nonzero_abs": 0.5,
+      "shape": [
+        129,
+        129
+      ]
+    },
+    "bordered_linearization_K16": {
+      "exact_zero_entries": 229,
+      "max_abs": 16.0,
+      "min_nonzero_abs": 0.5,
+      "shape": [
+        17,
+        17
+      ]
+    },
+    "bordered_linearization_K32": {
+      "exact_zero_entries": 965,
+      "max_abs": 32.0,
+      "min_nonzero_abs": 0.5,
+      "shape": [
+        33,
+        33
+      ]
+    },
+    "bordered_linearization_K64": {
+      "exact_zero_entries": 3973,
+      "max_abs": 64.0,
+      "min_nonzero_abs": 0.5,
+      "shape": [
+        65,
+        65
+      ]
+    }
+  },
+  "module_under_test": "solver/interval.py",
+  "route": "IA",
+  "totals": {
+    "cases": 14036,
+    "false_negatives": 62,
+    "normal_range_cases": 12356,
+    "normal_range_cases_touching_an_endpoint": 0,
+    "normal_range_cases_with_unbounded_endpoint": 416,
+    "normal_range_false_negatives": 0,
+    "normal_range_worst_relative_slack": 5.0591067023618705e-20,
+    "subnormal_range_cases": 1680,
+    "subnormal_range_false_negatives": 62,
+    "subnormal_range_worst_escape_eta": 6.5786122625061205
+  },
+  "unit_roundoff": 1.1102230246251565e-16
+}
