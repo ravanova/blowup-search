@@ -284,7 +284,7 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
 | LEG-C | 63 | **M2** — target reselection, screened by the measured predicate | no | standard | `leg/m2-v1` | Is there an uncertified target whose linearization has a **multiplier** unbounded part? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
-| LEG-E | 81 | **BRS** — does boussinesq_rescaled.py conflate resolution-stable with converged? | no | standard | `leg/brs-v1` | At refinement levels Route-K already measured limit-cycling, does the relaxation loop ever report converged/stable? |
+| LEG-E | 84 | **TNA** — does target_norm.py silently extrapolate beyond its validated domain? | no | standard | `leg/tna-v1` | Under adversarial inputs past X_max=745, does target_norm.py silently return an untrustworthy result or flag the violation? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 82 | **EXT3** — has the rank-3 target object been certified since? | no | light | `leg/ext3-v1` | Has a certificate for Boussinesq_S2_nonsymmetric (arXiv:2604.01868 sec 6.2) been published since? |
 | LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
