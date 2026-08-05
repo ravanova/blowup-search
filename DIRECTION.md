@@ -39,7 +39,8 @@ suspected.
 Last leg number actually landed/merged on main: **57**. Legs **58–63** are reserved,
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
 This session adds **64–71**, a first refill adds **72–75**, and this second refill adds
-**76–78**. **Next fresh leg number for any future candidate is 79.**
+**76–78**, a fourth refill adds **80–83**, and this fifth refill adds **84–87**. **Next fresh
+leg number for any future candidate is 88.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -189,6 +190,26 @@ the stray Oldroyd-B gloss, fix the two mislabels — no other content changes.
   coordinator's letters): **80 (BHN)** and **83 (MFG)** — see Live assignments and the ranking
   rationale. **81 (BRS)** and **82 (EXT3)** are the new reserve.
 
+**Two landings and a promotion, both good news.**
+
+- **Leg 73 (BV) landed with an excellent result: `boussinesq_velocity.py` now has its first
+  EXTERNAL known-answer gate** — reproduces the classical Lamb corner-image closed form to
+  1.76e-4 relative, a 57x margin. This is the strongest positive validation any infrastructure
+  leg has produced this cycle; bank it as the module's permanent external check. Slot vacated.
+- **Leg 79's bench-repair landed, bundled with leg 79's own finding: `port_certification.py`'s
+  fabrication-rejection gap is fixed** — 11/25 false `closes=True` results is now 0/25.
+  `solver/interval.py`, `solver/spectral_utils.py` and `solver/port_certification.py` have **all
+  three had their repairs land** and are no longer off-limits for any purpose.
+- **82 (EXT3) promoted into the slot leg 73 vacated (the coordinator's LEG-G).** The live table
+  also shows **81 (BRS) already dispatched into LEG-E**, which means leg 61 (KA) must have
+  landed too, unreported in detail — consistent with the coordinator's newest "avoid" list no
+  longer naming `interval_certificate.py`. That fully accounts for "reserve is fully empty":
+  both remaining reserve items (81, 82) got dispatched, not just one. **Current live count:
+  nine, LEG-D still held open for 76:** 58 (NG, critical), 62 (CP), 63 (M2), 81 (BRS), 71 (CAP),
+  82 (EXT3), 80 (BHN), 78 (HLB), 83 (MFG). **Four fresh candidates (84–87) are added below for
+  the next refill; no immediate promotion requested this time ("no rush") — all four are
+  reserve.**
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -270,50 +291,51 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-I | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
 
-**Several internal notes above (the "third pass" and "second pass" reconciliations, and the
-unlabeled paragraph before them) drifted out of sync with each other from genuine message-
-ordering races and are superseded by this paragraph — the single current, authoritative
-account, reconstructed to match the coordinator's latest report exactly.** Reading the trail
-forward: 72 (JR) and 74 (EXT) each landed and were backfilled from reserve (72's slot took 77
-(EXT2), 74's slot took 79 (PC)); those two backfills have now *also* landed — 77 gate NO (rank-2
-target still uncertified), 79 gate NO with a real finding (see below) — reopening both slots
-again. Separately, leg 59 (WV) landed (outcome not individually reported to the DM) and its
-slot is being held open, not backfilled, for leg 76. **Currently live (7 of 10):** A=58 (NG,
-critical path), B=62 (CP), C=63 (M2), E=61 (KA), F=71 (CAP), G=73 (BV), I=78 (HLB). **Open (3 of
-10):** D (deliberately held for leg 76, not to be filled with anything else), and two slots the
-coordinator calls LEG-H and LEG-J, both needing a fresh candidate now. Reserve is empty.
-**80 (BHN) → LEG-H, 83 (MFG) → LEG-J** are selected below; **81 (BRS) and 82 (EXT3) are the new
-reserve.** If a future status message's slot letters again don't match this file's, treat this
-paragraph's pattern as the template: track leg *numbers* and territory as ground truth, letters
-as the orchestrator's bookkeeping, and don't chase a letter-for-letter reconciliation once the
-leg-number set and territory are confirmed consistent.
+**Several earlier paragraphs above ("third pass," "second pass," and their predecessors)
+recorded intermediate states that have since been overtaken by further landings; this paragraph
+is the single current, authoritative account and supersedes all of them.** Current live nine
+(LEG-D held open for leg 76, not filled by anything else): **58** (NG, critical path, LEG-A),
+**62** (CP, LEG-B), **63** (M2, LEG-C), **81** (BRS, LEG-E — landed in after leg 61/KA landed,
+unreported in detail), **71** (CAP, LEG-F, narrow field only), **82** (EXT3, LEG-G — landed in
+after leg 73/BV's excellent result), **80** (BHN, LEG-H), **78** (HLB, LEG-I), **83** (MFG,
+LEG-J). Reserve is empty; **84–87 below are the new reserve, no immediate promotion requested
+("no rush").** Slot letters are the orchestrator's bookkeeping and have drifted from this file's
+labels more than once — leg numbers and territory are the ground truth this file tracks;
+letter-for-letter reconciliation is not chased once the leg-number set and territory check out.
 
 Figure numbers pre-allocated: leg 58 → `fig55`, 62 → `fig56`, 63 → `fig57`, 59 → `fig58`,
-60 → `fig59`/`fig60`. Legs 71, 73, 78, 80, 83 (and every landed/superseded audit-family leg:
-60, 64, 65, 66, 67, 68, 69, 70, 72, 74, 75, 76's eventual prose-only correction, 77, 79) are
-audit/literature/hygiene legs and register **no figure**, by the same convention already
-established for Route-D scope (advection) and Route-D v15 (literature scope) — "no measurement,
-no figure." `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**
-across all ten.
+60 → `fig59`/`fig60`, **73 → a new figure for the Lamb corner-image comparison** (first external
+positive-validation figure since 68; number to be assigned by the leg that writes it up, since
+this cycle's audit/literature legs have not needed sequential figures). Every other live and
+reserve leg (61, 71, 78, 80, 81, 82, 83, 84–87, and every landed/superseded audit-family leg) is
+audit/literature/hygiene and registers **no figure**, by the convention established for Route-D
+scope (advection) and Route-D v15 (literature scope) — "no measurement, no figure."
+`writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**.
 
-**Territory-overlap check (explicit, as required).** Solver modules touched by the current seven
-live plus two new promotions (58, 62, 63, 61, 71, 73, 78, 80, 83): `spectral_certificate.py`(58),
-`certificate_shapes.py`+`literature_gates.py`(62), `target_selection.py`(63),
-`interval_certificate.py`(61), `capabilities.py`(71, factual "test"-field only, pre-committed
-narrow), none-owned/read-only(73 reads `boussinesq_velocity.py`, edits nothing),
-none-owned/read-only(78 reads `hl_rescaled.py`, edits nothing), none-owned/read-only(80 reads
-`bordered_hl.py`, edits nothing under a bug-found outcome), none-owned/read-only(83 reads
-`marginal_flow.py`, edits nothing under a bug-found outcome). Nine distinct so far — **no
-collision** — and LEG-D stays empty pending leg 76, which will need its own check once its final
-territory (possibly expanded per the verifier's findings) is confirmed. `solver/interval.py` and
-`solver/spectral_utils.py` are **no longer off-limits** (both bench-repairs landed).
-`solver/port_certification.py` is **newly off-limits** (leg 79's bench-repair is in flight) —
-neither 80 nor 83 touches it. `writeup/data` JSON files for the current live set are likewise
-distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
-`p2_route_m2_v1_targets.json`(63), `p2_route_ka_v1_kawahara.json`(61),
-`p2_route_cap_v1_audit.json`(71), `p2_route_bv_v1_velocity_benchmark.json`(73),
-`p2_route_hlb_v1_contraction_lit.json`(78), `p2_route_bhn_v1_adversarial.json`(80),
-`p2_route_mfg_v1_adversarial.json`(83)) — **no collision.**
+**Territory-overlap check (explicit, as required).** Solver modules touched by the current live
+nine plus the four new reserve candidates (58, 62, 63, 81, 71, 82, 80, 78, 83, 84, 85, 86, 87):
+`spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
+`target_selection.py`(63), `boussinesq_rescaled.py`(81), `capabilities.py`(71, factual
+"test"-field only, pre-committed narrow), none(82, literature watch, no code edits),
+`bordered_hl.py`(80), `hl_rescaled.py`(78), `marginal_flow.py`(83), none-owned/read-only(84
+reads `target_norm.py`, edits nothing under a bug-found outcome), none-owned/read-only(85 reads
+`gclm_rescaled.py`, edits nothing), none-owned/read-only(86 reads `port_certification.py`, now
+fully repaired and unclaimed, edits nothing), none-owned/read-only(87 reads `interval.py`, now
+fully repaired and unclaimed, edits nothing). All thirteen distinct — **no collision.** LEG-D
+stays empty pending leg 76, which needs its own territory check once its final scope (possibly
+expanded per the verifier's findings) is confirmed against `PHASE2_P2_NOTES.md` and
+`TECHNICAL_P2_ROUTEI_V1.md`, which no other live or reserve leg touches. `solver/interval.py`,
+`solver/spectral_utils.py` and `solver/port_certification.py` are **all three now fully
+repaired and unclaimed** — 86 and 87 read the latter two specifically to close the loop on their
+repairs, but neither edits them. `writeup/data` JSON files are likewise distinct names
+(`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+`p2_route_m2_v1_targets.json`(63), `p2_route_cap_v1_audit.json`(71),
+`p2_route_bv_v1_velocity_benchmark.json`(73, landed), `p2_route_hlb_v1_contraction_lit.json`(78),
+`p2_route_bhn_v1_adversarial.json`(80), `p2_route_brs_v1_status_audit.json`(81),
+`p2_route_ext3_v1_target_watch3.json`(82), `p2_route_mfg_v1_adversarial.json`(83),
+`p2_route_tna_v1_domain_audit.json`(84), `p2_route_gra_v1_adversarial.json`(85),
+`p2_route_pcb_v1_postrepair.json`(86), `p2_route_ivb_v1_postrepair.json`(87)) — **no
+collision.**
 
 ## Queue
 
@@ -459,7 +481,9 @@ certificate term, no literature ledger and no target ledger.
 ```
 
 ```
-### 61 — ROUTE-KA: A KNOWN-ANSWER WINDOW FOR THE WHOLE INTERVAL PIPELINE
+### 61 — ROUTE-KA: A KNOWN-ANSWER WINDOW FOR THE WHOLE INTERVAL PIPELINE (LANDED; gate outcome
+not individually reported to the DM — inferred landed because LEG-E now runs leg 81 and
+`interval_certificate.py` no longer appears in the coordinator's live-territory list)
 **Thesis.** Read the `validated` column of capabilities.py for the certificate stack: nearly
 every entry is validated INTERNALLY -- enclosures contain exact rationals, rigorous bounds
 dominate float readings, a poisoned iterate is rejected. What the stack has never done is
@@ -766,7 +790,11 @@ territory. Reads, never edits, individual `experiments/journal/leg_N.md` files.
 ```
 
 ```
-### 73 — ROUTE-BV: EXTERNAL KNOWN-ANSWER CHECK FOR THE 2D VELOCITY SOLVER
+### 73 — ROUTE-BV: EXTERNAL KNOWN-ANSWER CHECK FOR THE 2D VELOCITY SOLVER (LANDED: gate YES)
+**Landed finding:** `boussinesq_velocity.py` now has its first external known-answer gate —
+reproduces the classical Lamb corner-image closed form to 1.76e-4 relative, a 57x margin. The
+strongest positive validation result of this cycle; banked as the module's permanent external
+check.
 **Thesis.** solver/boussinesq_velocity.py's validated line covers manufactured stream-function
 solutions and a self-consistency gate (the Route-L line sweep, checked against the operator it
 inverts -- an internal check, not an external one). It has never been checked against a
@@ -1074,6 +1102,108 @@ it only catch the NaN case it was built for?
 **Independence.** Reads solver/marginal_flow.py; edits nothing under any outcome. New test file
 claimed by nobody else. A robustness audit of the gate's catch coverage, not a new physics
 measurement, so it does not fall under the gCLM-measurement ban (leg 42).
+```
+
+```
+### 84 — ROUTE-TNA: DOES target_norm.py SILENTLY EXTRAPOLATE BEYOND ITS VALIDATED DOMAIN?
+**Thesis.** solver/target_norm.py's own validated line already documents a known limitation:
+"DOMAIN-limited, not resolution-limited: at the shipped X_max = 745 the far-field closure moves
+the exponent by 0.190 and the measurement is not trustworthy there." That is a property of the
+PHYSICS/numerics leg 55 (NB) already characterized. What has never been checked is whether the
+CODE itself detects and flags that domain violation, or silently returns a number with no signal
+that the caller has left the validated window -- exactly the shape of gap the adversarial-audit
+family (69, 66, 79) keeps finding: a documented limitation with no corresponding guard in code.
+**Gate.** Under adversarial inputs that push sample points beyond the validated X_max = 745
+window (or otherwise into the region capabilities.py already flags as untrustworthy), does
+target_norm.py silently return a result with no warning or flag, or does it correctly signal the
+domain violation?
+  yes (silent) -> A real gap: a caller could unknowingly rely on an untrustworthy exponent
+         outside the validated window. Report precisely; escalate, do not patch under this leg's
+         own authority.
+  no (flags correctly) -> Confirmed robust. Bank the battery as a permanent regression test
+         locking in the domain guard.
+**Territory.** test_target_norm_adversarial.py, experiments/p2_route_tna_v1_domain_audit.py,
+               writeup/data/p2_route_tna_v1_domain_audit.json,
+               writeup/novelty/leg_84.md, experiments/journal/leg_84.md
+**Difficulty.** standard
+**Independence.** Reads solver/target_norm.py; edits nothing under any outcome. New test file
+claimed by nobody else. Distinct from leg 55 (NB, landed), which measured the physics; this leg
+audits whether the code surfaces the already-known limitation.
+```
+
+```
+### 85 — ROUTE-GRA: ADVERSARIAL AUDIT OF gclm_rescaled.py's FIXED-POINT REPORTING
+**Thesis.** solver/gclm_rescaled.py's validated line confirms it "relaxes to the exact CLM
+self-similar fixed point" -- on well-behaved data. Its relaxation loop's own convergence
+reporting has never been checked against adversarial non-convergent trajectories: oscillation
+around the fixed point without decaying into it, or slow drift past a saddle. Same pattern as
+leg 83 (MFG), applied to the sibling 1D CLM module instead of the augmented flow. This is a
+STATUS-REPORTING robustness audit of existing code, not a new gCLM physics measurement or
+parameter sweep -- it does not touch the gCLM-measurement ban (leg 42) for the same reason leg
+83 does not.
+**Gate.** Under an adversarial battery of non-convergent upwind-transport trajectories
+(sustained oscillation, slow drift near a saddle rather than the fixed point), does
+solver/gclm_rescaled.py's relaxation loop ever report having reached the fixed point when it
+has not?
+  yes -> A false-positive convergence report. Report the exact failing trajectory precisely;
+         escalate, do not patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_gclm_rescaled_adversarial.py, experiments/p2_route_gra_v1_adversarial.py,
+               writeup/data/p2_route_gra_v1_adversarial.json,
+               writeup/novelty/leg_85.md, experiments/journal/leg_85.md
+**Difficulty.** standard
+**Independence.** Reads solver/gclm_rescaled.py; edits nothing under any outcome. New test file
+claimed by nobody else. A robustness audit of convergence-reporting, not a new physics
+measurement -- the same distinction that clears leg 83.
+```
+
+```
+### 86 — ROUTE-PCB: POST-REPAIR REGRESSION CHECK, port_certification.py
+**Thesis.** Leg 79's bench-repair just added domain validation to `radii_polynomial_status`
+(11/25 false `closes=True` results -> 0/25) inside a module whose OTHER claim -- the line-sweep
+preconditioner gated to 9.5e-16 against the operator it inverts -- has not been independently
+re-checked since the repair landed. New validation branches in a hot path are a classic place
+for an accidental precision or performance regression to hide. This closes the loop on leg 79's
+finding the same way leg 87 (below) closes the loop on leg 69's.
+**Gate.** After the bench-repair, does solver/port_certification.py's line-sweep preconditioner
+still (a) hit the 9.5e-16 precision gate it was originally validated to, and (b) run within
+normal benchmark variance of its pre-repair timing?
+  yes -> Confirmed the repair was surgical -- no precision or performance regression. Bank as a
+         permanent post-repair regression test.
+  no  -> Report the exact discrepancy (precision or timing) precisely; escalate as a priority
+         finding, do not patch under this leg's own authority.
+**Territory.** test_port_certification_postrepair.py,
+               experiments/p2_route_pcb_v1_postrepair.py,
+               writeup/data/p2_route_pcb_v1_postrepair.json,
+               writeup/novelty/leg_86.md, experiments/journal/leg_86.md
+**Difficulty.** light
+**Independence.** Reads solver/port_certification.py, now fully repaired and unclaimed; edits
+nothing. New test file claimed by nobody else. Distinct question from leg 79 (precision/
+performance regression, not fabrication-rejection).
+```
+
+```
+### 87 — ROUTE-IVB: POST-REPAIR REGRESSION CHECK, interval.py
+**Thesis.** Leg 69's bench-repair fixed two real soundness gaps in the shared interval core
+(subnormal-range false negatives, a silent NaN above 2^997). Nobody has independently re-run
+leg 69's original adversarial corpus against the repaired module, nor confirmed that the fix did
+not regress the previously-validated exact-rational containment checks at the live operator
+range (K = 0.5-128) that legs 58 and 61 actually depend on. Closes the loop the same way leg 86
+closes it for leg 79's repair.
+**Gate.** Does solver/interval.py, post-repair, (a) correctly handle leg 69's original failing
+cases (the subnormal range, 2^997), and (b) show zero regression in the previously-validated
+exact-rational containment checks at the live K-range?
+  yes -> Confirmed the repair is solid and non-regressive. Bank leg 69's adversarial corpus plus
+         this leg's fresh battery as a permanent regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate as a
+         priority finding, do not patch under this leg's own authority.
+**Territory.** test_interval_postrepair.py, experiments/p2_route_ivb_v1_postrepair.py,
+               writeup/data/p2_route_ivb_v1_postrepair.json,
+               writeup/novelty/leg_87.md, experiments/journal/leg_87.md
+**Difficulty.** standard
+**Independence.** Reads solver/interval.py, now fully repaired and unclaimed; edits nothing. New
+test file claimed by nobody else. Closes the loop on leg 69's finding, the highest-consequence
+repair of this cycle (shared by legs 58 and 61).
 ```
 
 ## Ranking rationale
