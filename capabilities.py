@@ -225,6 +225,35 @@ CAPABILITIES = [
     {"module": "solver/advection_scope.py", "object": "where the advection term lives in a",
      "holds": "scope of the Route-D bound programme", "validated": ("agrees with the analytic small-a and large-a limits of the advection\n                   coefficient"),
      "test": "test_advection_scope.py"},
+    {"module": "solver/target_norm.py",
+     "object": ("whether the TARGET is in the certificate's space at all -- the "
+                "compactified-basis coefficient decay of HL_S2_nonsymmetric "
+                "(Route-NB, leg 55)"),
+     "holds": ("the tangent half-angle projection X = tan(theta/2) onto the FULL circle "
+               "(the target is NON-symmetric, so cosines too), high-order Lagrange "
+               "interpolation on the uniform rho grid with an explicit far-field closure, "
+               "the coefficient magnitudes in both the complex and real conventions, a "
+               "power-law exponent fitter robust to symmetry-annihilated modes, weighted "
+               "l^1 partial sums with an analytic tail, and the controls: the CLM anchor, "
+               "1/(1+|X|), the sawtooth, and the calibration family (1+X^2)^(-alpha/2)"),
+     "validated": ("the map agrees with spectral_certificate.moebius_power to 1.3e-15, so "
+                   "the projection lands in the certificate's OWN basis; the positive "
+                   "control (a=0 CLM anchor, exactly one mode) returns ||h_1|-1| = 3.4e-15 "
+                   "with every other mode under 1.7e-12, inside its pre-registered window; "
+                   "the sawtooth matches its closed form 2/(pi k) to 1.0e-04 and sits at "
+                   "p = 1.001 (the flat class's divergence threshold); 1/(1+|X|) sits at "
+                   "p = 1.989 (the s = 1 threshold); the calibration family recovers "
+                   "1 + alpha to 6.1e-03 over alpha = 0.1..1.5. RESULT: the target decays "
+                   "as k^-1.3937 (X_max = 4.1e+04) / k^-1.3963 (3.0e+05), resolution drift "
+                   "3.8e-04, so ||.||_(l^1_w) is FINITE at s = 0 (margin +0.394) and "
+                   "s = 0.3 (+0.094) and DIVERGENT at s = 1 (-0.606). THE CEILING IS PART "
+                   "OF THE ENTRY: this measures the OBJECT, not any certificate -- a "
+                   "finite norm says the target is IN the space and says NOTHING about "
+                   "whether a radii polynomial closes. It is also DOMAIN-limited, not "
+                   "resolution-limited: at the shipped X_max = 745 the far-field closure "
+                   "moves the exponent by 0.190 and the measurement is not trustworthy "
+                   "there; the headline is taken where no sample point leaves the grid"),
+     "test": "test_target_norm.py"},
 
     # -- literature, targets, search, plumbing --------------------------------------
     {"module": "solver/literature_gates.py", "object": "published results as executable gates",
