@@ -228,6 +228,61 @@ gate("analytic border achieves the SVD optimum", a_n / a_s < 1.02,
      f"analytic / SVD = {a_n / a_s:.4f} (a proof cannot border with a singular vector)")
 
 
+# -------------------------------------------------------------------------
+# LEG 54 (Route-MM): the two structural facts the shape argument rests on.
+# Both are properties of the OPERATOR, so they belong here and not in the runner.
+# -------------------------------------------------------------------------
+
+# 24 -- the tail operator annihilates the far field, and the ONLY obstruction is the
+# truncation edge.  This is what makes MM-4's floor shape-independent:
+# (I - A L)_{Gamma,tail} applied to the kernel direction is -A11 B hhat, in which the
+# off-diagonal block A12 has dropped out.  The identity is EXACT for the infinite operator;
+# on the computed one it holds up to a defect supported on the LAST mode alone and falling
+# like M^-1, which is what this gate pins -- reporting the SHAPE of the ladder (72) rather
+# than asserting an exact zero that the truncation does not deliver.
+_K = 16
+_lad = []
+for _Mx in (256, 512, 1024, 2048):
+    _T = tail_block(_K, _K + _Mx)
+    _h = tail_right_null(_K, _K + _Mx)
+    _r = _T @ _h
+    _nz = np.nonzero(np.abs(_r) > 1e-14)[0]
+    _lad.append((_Mx, float(np.sum(np.abs(_r)) / np.sum(np.abs(_h))),
+                 list(_nz) == [len(_r) - 1]))
+_edge_only = all(t[2] for t in _lad)
+_halves = all(abs(_lad[i][1] / _lad[i + 1][1] - 2.0) < 0.05 for i in range(len(_lad) - 1))
+gate("the far field is annihilated except at the truncation edge, and that falls like 1/M",
+     _edge_only and _halves,
+     "relative l1 defect " + " -> ".join(f"{t[1]:.2e}" for t in _lad) +
+     f" over M-K = 256..2048 (halves per doubling); supported on the LAST mode only: "
+     f"{_edge_only} -- so ker T is the far field for the infinite operator, and A12 cannot "
+     f"reach that direction up to O(1/M) (leg 54 MM-4)")
+
+# 25 -- EVERY ODD SPLIT has a singular finite block, so the split must be EVEN.  This is
+# what shrinks the corner MM-1's |1 - K/2| prefactor leaves open from {2,3,4} to {2}.
+_odd_sv, _even_sv = [], []
+for _k in (3, 5, 7, 9, 11):
+    _F = bordered_linearization(_k)
+    _odd_sv.append(float(np.linalg.svd(_F, compute_uv=False)[-1]))
+for _k in (2, 4, 6, 8, 10, 12):
+    _F = bordered_linearization(_k)
+    _even_sv.append(float(np.linalg.svd(_F, compute_uv=False)[-1]))
+gate("every ODD split has a singular finite block; every even one does not",
+     max(_odd_sv) < 1e-14 and min(_even_sv) > 1e-4,
+     f"odd K=3..11: smallest singular value <= {max(_odd_sv):.1e}; "
+     f"even K=2..12: >= {min(_even_sv):.1e} -- the split must be EVEN (leg 54 MM-1b)")
+
+# 26 -- the dilation zero mode is EXACTLY e_2, which is what the "null" gauge pins.  Leg
+# 53 asserted this in its runner; it is checked here so it decays at the rate of code.
+_F = bordered_linearization(32)
+_e2 = np.zeros(33)
+_e2[1] = 1.0
+gate("the dilation zero mode is exactly e_2",
+     float(np.max(np.abs((_F @ _e2)[:32]))) == 0.0,
+     f"||L e_2||_inf over the unbordered rows = "
+     f"{float(np.max(np.abs((_F @ _e2)[:32]))):.1e} (exactly zero)")
+
+
 n_fail = sum(1 for s, _, _ in results if s == FAIL)
 print(f"\n{len(results) - n_fail}/{len(results)} gates pass")
 sys.exit(1 if n_fail else 0)

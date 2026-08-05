@@ -554,8 +554,8 @@ STAGES = [
     {
         "id": "MM",
         "name": ("THE MISMATCH: is a NON-block-diagonal approximate inverse a real lane, or "
-                 "is this the lane's end?"),
-        "status": "NEXT",
+                 "is this the lane's end? -- GATE ANSWERED NO, leg 54"),
+        "status": "DONE",
         "why_here": (
             "This stage is written by T's OWN no-branch, promoted one level deeper by TC's "
             "measurement. T said: if the certificate does not close, 'STOP building "
@@ -585,7 +585,25 @@ STAGES = [
             "MM-3 THE NOVELTY PASS FIRST. Leg 53 recorded as UNCHECKED whether the literature "
             "treats a radii-polynomial tail whose unbounded part is off-diagonal; six queries "
             "returned nothing addressing it. That is not evidence of a gap. Search it before "
-            "constructing, and record the log."),
+            "constructing, and record the log. "
+            "GATE ANSWERED NO, leg 54, VERIFIED TWICE. Best admissible Z_1 over EVERY shape "
+            "(block Gauss-Seidel, Schur complement) x class x gauge x split, including K=2 and "
+            "K=6 which the first draft's battery omitted (a verifier caught this): 8.9591 "
+            "(ff_lift shape, algebraic s=0.3, K=2), against a block-diagonal baseline of "
+            "10.4584 -- a 1.167x improvement where more than 8x was needed. MM-1's inequality "
+            "verifies as an EXACT equality (max |ratio-1| = 1.89e-15), restricted to K>=6 flat "
+            "/ K>=4 algebraic (its |1-K/2| prefactor vanishes at K=2, a gap a verifier caught "
+            "before construction); every ODD split gives an exactly singular finite block in "
+            "both classes and both gauges, closing the remaining small-K corner. A candidate "
+            "shape-independent floor (MM-4, the tail operator's singularity on the bordered "
+            "direction making A_12 drop out algebraically) was PROPOSED, then REFUTED by an "
+            "explicit counter-construction (a rank-one A_11 choice drives the floor to ~1e-16, "
+            "surviving only because the resulting total Z_1 is 5.7e+05) -- it is a floor for "
+            "the shapes actually tested, not a universal one. Two self-flagged weaknesses "
+            "(the border-direction control does not discriminate for the Schur shape; MM-4's "
+            "identity holds only to an O(1/M)=1.46e-2 truncation defect) were independently "
+            "confirmed to NOT change the gate's robustness. THIS FIRES THE GATE'S OWN NO-"
+            "BRANCH below."),
         "gate": {
             "question": ("Does an approximate inverse that is NOT block diagonal bring the "
                          "ASSEMBLED Z_1 below 1, on the a = 0 CLM object, in a class with "
@@ -609,6 +627,57 @@ STAGES = [
                      "already exist; MM-2 reuses leg 53's assembled object. If MM-2 needs a "
                      "new basis, a new object or a new solver, the plan was wrong -- the "
                      "whole point is that only the SHAPE of A is still free."),
+    },
+    {
+        "id": "NG",
+        "name": "THE NO-GO, STATED AS A THEOREM AND CHECKED AGAINST THE LITERATURE",
+        "status": "NEXT",
+        "why_here": (
+            "Seven legs (51-57) produced a coherent negative with every part a real result "
+            "needs, and all of it is currently scattered across four PR bodies and a notes "
+            "file: a named mechanism (the unbounded part is off-diagonal and the bordered "
+            "tail inverse is a constant, not a decaying multiplier); an inequality that "
+            "proves the block-diagonal case (MM-1); a battery over shapes, classes, gauges "
+            "and splits bottoming at 8.9591; a POSITIVE CONTROL that reports the other answer "
+            "(Z_1 = 0.9156 at mu = 2), which makes the hypothesis NECESSARY rather than "
+            "merely sufficient; and a literature classification saying the case is "
+            "unpublished. Escalation #1 (a route entering the committed sequence), entered "
+            "under the user's pre-delegation ('whichever pursues our goals best') on "
+            "2026-08-05 after MM's gate answered NO and stage B was found pre-refuted (leg "
+            "52 measured the space, leg 53 measured the split at K/2 for every choice, leg 54 "
+            "measured the shape of A -- all three of B's degrees of freedom are dead for this "
+            "operator before its still-banned GA would ever run). A fresh target round was "
+            "considered and rejected as premature: leg 55 already showed the object was never "
+            "the problem, so what needs writing down first is the SCREEN (multiplier vs "
+            "off-diagonal shift) that a target round should run through, not a new target "
+            "picked blind."),
+        "deliverable": (
+            "NG-0 THE NOVELTY PASS FIRST, and it must resolve Cadiot arXiv:2505.03091's scope "
+            "against THIS no-go specifically, not just against leg 51's earlier claim -- "
+            "links, not counts. "
+            "NG-1 THE PROPOSITION: hypotheses (operator class, weight classes, admissible A), "
+            "conclusion, and a scope line separating measured from proved. "
+            "NG-2 THE GAP: extend MM-1 beyond block-diagonal A, or state the restriction "
+            "honestly -- leg 54 measured a battery, MM-1 proves only the block-diagonal case, "
+            "and 'no A we tried' is not 'no A'. "
+            "NG-3 SHARPNESS: the mu = 2 control as the statement that the hypothesis cannot "
+            "be dropped."),
+        "gate": {
+            "question": ("Does the no-go admit a PROOF for a named class of approximate "
+                         "inverses strictly larger than block-diagonal, with hypotheses that "
+                         "provably contain the a = 0 CLM linearization?"),
+            "if_yes": ("The repository has a Tier-3-shaped negative theorem; write it as a "
+                       "standalone claim with its sharpness control, and escalate publication "
+                       "scoping to the user."),
+            "if_no": ("REPORT the result as a MEASUREMENT OVER A BATTERY, not a theorem. Cap "
+                      "the claim at 'measured, not proved' everywhere it appears, and DO NOT "
+                      "claim more; the next stage is the target round (leg 63, Route-M2) with "
+                      "the multiplier/shift screen as its selection predicate."),
+        },
+        "time_box": ("one leg. NG-0 is a literature pass on one paper; NG-1 is writing down "
+                     "what seven legs already measured; NG-3 reuses leg 54's control. NG-2 is "
+                     "the only open mathematics, and if it needs a new object, a new solver, "
+                     "or new machinery, the honest answer is the no-branch, not a new stage."),
     },
     {
         "id": "B",
@@ -691,15 +760,25 @@ BANNED = [
      "functional enters the dual, i.e. the ONE exponent at which bordering cannot help; "
      "leg 52 measured the repair working at s = 0 and 0.3 and failing at s = 1 and 1.5",
      "never -- lesson 88, and the mechanism is measured, not argued"),
-    ("re-claiming leg 51's methodological finding at full strength -- T-0 found "
-     "Breden-Desvillettes-Lessard arXiv:1503.06315 stating the same problem for TRIDIAGONAL "
-     "DOMINANT operators, so the general observation is a re-derivation; only the zero-"
-     "diagonal Fredholm case is possibly open, and leg 53's pass read the DOMINANCE "
-     "hypothesis off the publisher's ABSTRACT page only -- evidence, not the full text",
-     "never -- unless a pass resolves whether BDL's construction covers a zero diagonal"),
+    ("re-claiming leg 51's methodological finding at full strength -- RESOLVED at leg 57: "
+     "Breden-Desvillettes-Lessard arXiv:1503.06315's assumptions (4)-(5) require a diagonal "
+     "bounded away from zero (read from the full PDF, not the abstract), so BDL does NOT "
+     "cover the zero-diagonal Fredholm case -- that BDL-shaped reason to keep this ban is "
+     "discharged. A DIFFERENT, STRONGER reason replaces it: Cadiot arXiv:2505.03091 sec 2/3 "
+     "independently states the same dominance-hypothesis observation, in full text, located "
+     "and verified by a second independent pass (VER-D)",
+     "never -- unless a pass resolves whether Cadiot's construction covers a zero diagonal, "
+     "which is now the live open question, not BDL's"),
     ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
      "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "
-     "not, and does not have finite norm in the class where the operator is least bad",
+     "not. NARROWED at leg 55 (measured, not asserted): the target DOES have finite ell^1_w "
+     "norm at s=0 (margin +0.394) and s=0.3 (margin +0.094) -- the classes legs 51-53 "
+     "actually used -- and diverges only at s=1, which is exactly the class the operator is "
+     "least bad in (leg 51's own TECHNICAL sec 9: 'the class where the operator is least bad "
+     "is the class where the target has infinite norm'). So the clause was never false, but "
+     "its practical reading -- 'the target was never in the space' -- is NOT available as an "
+     "explanation for legs 52-53's failures; leg 53's block-coupling finding (leg 54/MM: no "
+     "shape of A closes it, best 1.167x where >8x was needed) stands as the operative reason",
      "never -- the ceiling was pre-committed as clause S7"),
     ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
      "(arXiv:2210.07191 + Part II); it stays only as C-PILOT's known-answer substrate",

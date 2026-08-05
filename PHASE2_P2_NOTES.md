@@ -3731,3 +3731,46 @@ block-diagonal `A`**, not to every finite block — the finite-block-independent
 out at 0.9961, below 1. A wall measured on the easiest available
 object bounds the real target's difficulty **from below, not from above**. **No link of the
 L1→L4 chain moved. Clay unchanged at ~0.05%.**
+
+## Route-MM v1 (leg 54) -- THE GATE ANSWERS NO, VERIFIED TWICE
+
+`plan_of_record.py`'s stage `MM` closes. Best admissible Z_1 over every shape (block
+Gauss-Seidel, Schur complement) x class x gauge x split: **8.9591** (ff_lift, algebraic
+s=0.3, K=2), against block-diagonal baseline **10.4584** -- a 1.167x improvement where
+more than 8x was needed. MM-1's inequality verifies as an exact equality, restricted to
+K>=6 flat / K>=4 algebraic (a verifier caught the unrestricted form was vacuous at K=2,3,4
+before construction). Every odd split gives an exactly singular finite block, closing that
+corner. A candidate shape-independent floor was proposed and then refuted by an explicit
+counter-construction -- it holds only for the shapes actually tested, not universally.
+
+**Two rounds of independent verification, both real.** VER-A re-measured leg 53's headline
+before leg 54 built on it and caught the MM-1 vacuity gap pre-construction. VER-A2 reviewed
+leg 54's own PR and caught that its battery omitted K=2/K=6, understating the true best
+number (32.75 wrongly reported vs the corrected 8.9591) and over-claiming MM-4's floor as
+shape-independent. Both gaps were fixed before merge. **This closes the ell^1-Fourier
+radii-polynomial lane for inviscid self-similar transport, per T's own pre-committed
+no-branch.** No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
+
+## Route-NB v1 (leg 55) -- the target's norm, measured directly for the first time
+
+`HL_S2_nonsymmetric`'s compactified-basis coefficients decay as `|h_k| ~ k^-1.396`,
+confirmed by an independent verifier's re-derivation from n=401/801/1601/3201. Finite
+ell^1_w norm at s=0 (margin +0.394) and s=0.3 (margin +0.094); divergent at s=1 (margin
+-0.606). This narrows, not falsifies, the ban-list clause about the target's norm --
+see `plan_of_record.py`'s BANNED list for the corrected text.
+
+## Route-TN v1 (leg 56) -- the other named gap in L1 step one
+
+The (H,D) consistency defect at n=801 exceeds leg 46's Y_0 budget by 1.85e7x (derivative,
+converging at spline order 4.01) and 2.04e11x (Hilbert). A verifier caught that the leg's
+first-draft mechanism claim (H and D share one interpolant) was false -- H_disc actually
+sees an endpoint-zeroed interpolant -- corrected in place; the gate answer NO is unaffected
+and, honestly attributed, stronger (genuine Hilbert interpolation error needs n~4.4e6).
+
+## Route-XS v1 (leg 57) -- the shape dichotomy, banked as an executable ledger
+
+No published radii-polynomial certificate has an off-diagonal unbounded part with a
+non-decaying tail inverse, across 4 papers and 15/15 executable gates
+(`solver/certificate_shapes.py`). Corrects legs 52-53's "constant 2.19...10.32" claim: the
+bordered tail inverse actually grows 2.191 -> 11.528 over K=4..128 (5.26x range) -- it is
+the smallest rung of a rising ladder, independently re-derived bit-for-bit by a verifier.

@@ -2767,3 +2767,23 @@ What a human noticed skimming the results:
 - Energy-balance residuals up to 0.5 on ν-axis blow-up runs looked alarming
   but are endgame dt-integration error: halving dt halves them and moves
   ν_crit by exactly zero (3-shape spot-check at N=512).
+
+## Legs 54-57 (2026-08-05) — MM answers NO, NB answers YES, TN answers NO, XS answers NO
+
+Four parallel legs closed this cycle (see `experiments/journal/leg_54.md` through
+`leg_57.md` for full detail; pointers only here):
+
+- **Leg 54 (Route-MM):** the last free choice (shape of the approximate inverse) does not
+  close the certificate. Best admissible Z_1 = 8.9591 vs block-diagonal baseline 10.4584
+  (1.167x, needed <1). Fires plan_of_record.py's pre-committed no-branch for stage MM.
+- **Leg 55 (Route-NB):** HL_S2_nonsymmetric's compactified-basis coefficients decay as
+  k^-1.396 -- finite ell^1_w norm at s=0/0.3, divergent at s=1. Narrows (not deletes) a
+  ban-list clause; "the target was never in the space" is not an available explanation
+  for legs 52-53's failures.
+- **Leg 56 (Route-TN):** the (H,D) consistency defect exceeds L1 step one's admissible tau
+  by 1.85e7x (derivative) / 2.04e11x (Hilbert, corrected mechanism after verifier review).
+- **Leg 57 (Route-XS):** no published radii-polynomial certificate has an off-diagonal
+  unbounded part with a non-decaying tail inverse -- banked as an executable ledger
+  (`solver/certificate_shapes.py`, 15/15 gates, 4 papers).
+
+No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.

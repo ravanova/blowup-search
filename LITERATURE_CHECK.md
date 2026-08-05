@@ -714,3 +714,20 @@ acquires a block-coupling term: with the block-diagonal approximate inverse the 
 requires, `Z_1[Gamma<-tail] >= 43.15` at the best split in the whole sweep. Whether *that*
 observation is in the literature was **not** settled by these six queries - no result addressed
 an unbounded off-diagonal part - and it is recorded as **unchecked**, not as new.
+
+## Legs 54-57 novelty passes (2026-08-05)
+
+Links, not counts -- see `writeup/novelty/leg_54.md` through `leg_57.md` for the full logs.
+
+**Leg 57 (Route-XS) closes the BDL question this file's previous entry left open.**
+BDL's construction does NOT cover MM's zero-diagonal case (confirmed independently by a
+second pass, tracing assumptions (4)-(5) to the source PDF). But leg 57 recommends NOT
+lifting the "re-claiming leg 51's finding at full strength" ban anyway: Cadiot
+arXiv:2505.03091 sec 2/3 independently states the same dominance-hypothesis observation,
+so a different and stronger reason to keep the ban replaces the BDL-shaped one that just
+closed. Leg 57 also classified BDL's approximate inverse as the published precedent for
+MM's non-block-diagonal move (an LU of the tridiagonal tail), needing a diagonal bounded
+below -- precedent, not proof that MM's construction would work.
+
+Leg 54 (MM) ran its own novelty pass first (PROCEED_NARROW); leg 55 (NB) and leg 56 (TN)
+likewise (PROCEED / PROCEED_NARROW). Nothing else banked as novel this cycle.
