@@ -148,3 +148,97 @@ hazard present in our code — never as a discovery.**
 Nothing found in this pass gives grounds to skip the audit: the literature establishes what the
 hypotheses *are*, and says nothing whatever about whether this repository's implementation
 enforces them. That is measurable only by running it, which is what follows.
+
+---
+
+# Findings (written AFTER construction; the pass above is unedited since its commit)
+
+**GATE ANSWER: NO.** Verbatim gate: *"Under an adversarial battery of fabricated/poisoned Y_0
+and Z_1 inputs, does `radii_polynomial_status` still correctly reject every one and continue
+returning BLOCKED_AT_STEP_ONE where appropriate?"* — **No. 11 of the 25 hypothesis-violating
+inputs in a 39-case battery come back with `closes=True`** (44.0%).
+
+## The two halves of the claim, separated
+
+`capabilities.py` line 104 records: *"radii_polynomial_status returns BLOCKED_AT_STEP_ONE and is
+gated to carry NO fabricated Y_0 or Z_1."* The battery splits that sentence, and the halves have
+opposite verdicts.
+
+**The first half HOLDS, and is now gated.** Every one of the 3 calls in the battery that reach
+`BLOCKED_AT_STEP_ONE` return a dict carrying **no `Y0` key and no `Z1` key** — 0 of 3 carry a
+bound. Offering a `Z_2` alongside two missing bounds (`(None, None, 1.0)`, `(None, None, -1.0)`,
+`(None, None, nan)`) does **not** unblock it. The kill-switch does not invent numbers it does not
+have, exactly as documented. All 7 honest-path branches classify correctly.
+
+**The second half FAILS as a rejection property.** The function performs **no domain validation
+whatsoever** on numbers a caller supplies. It has exactly three guards — `Y0 is None and Z1 is
+None`, `Z1 is None`, `Z1 >= 1.0`, `Z2 is None` — and then evaluates
+`disc = (1 - Z1)^2 - 4 Z2 Y0` and returns `closes = bool(disc >= 0.0)`. Nothing checks the
+hypothesis Q1/Q2 established: **Y_0, Z_1, Z_2 are upper bounds on norms, hence nonnegative and
+finite by hypothesis.**
+
+## The 11 accepted fabrications, by mechanism
+
+| mechanism | witness (exact call) | returns |
+|---|---|---|
+| negative defect norm | `radii_polynomial_status(-1e-12, 0.1, 1.0)` | `EVALUATED`, `closes=True` |
+| grossly negative `Y_0` | `(-1e6, 0.1, 1.0)` | `closes=True` |
+| negative `Y_0` overturns a genuine failure | `(-1.0, 0.9, 1e4)` — the same `(Z_1, Z_2)` that honestly fails at `Y_0=+1.0` | `closes=True` |
+| negative quadratic bound | `(1.0, 0.1, -1.0)` | `closes=True` |
+| one negative `Z_2` rescues an enormous honest defect | `(1e12, 0.5, -1e-6)` | `closes=True` |
+| negative `Z_1` slips past the `Z1 >= 1.0` guard and **inflates** `(1-Z_1)^2` | `(1.0, -3.0, 1.0)` | `closes=True` |
+| huge negative `Z_1` closes any `Y_0` | `(1e6, -1e4, 1.0)` | `closes=True` |
+| `-inf` in each of the three slots | `(-inf, 0.1, 1.0)`, `(1e-3, 0.1, -inf)`, `(1.0, -inf, 1.0)` | `closes=True` |
+| numpy negative scalar — the shape a real caller's data actually has | `(np.float64(-1.0), 0.1, 1.0)` | `closes=True` |
+
+The sharpest single witness is the third row: **a sign flip on `Y_0` converts a genuine,
+correctly-reported non-closure into `closes=True`**, with every other input untouched.
+
+## What the battery also found, short of a false close
+
+* **The NaN guard bypass (a named hazard, Q4, not a discovery).** `nan >= 1.0` is `False`, so a
+  NaN `Z_1` **skips the contraction guard entirely** and reaches `EVALUATED` rather than
+  `Z1_EXCEEDS_ONE`. It escapes being a false close only by accident — `nan >= 0.0` is also
+  `False`, so `closes` lands on `False` for the wrong reason. On the `NO_Z2` branch the same NaN
+  is **reported back in the dict as `"Z1": nan`, i.e. as though it were a measured bound.** By
+  contrast `+inf` *is* caught by the guard. This is precisely the pattern Stainless
+  (arXiv:2601.14059) names: a false comparison assumed to imply a valid in-range input.
+* **5 cases raise loudly** (`TypeError`/`ValueError`: string, complex, numpy array, and the
+  half-blocked `(None, 0.5, 1.0)`). Loud is acceptable; these are not soundness failures.
+* **A mis-classification worth recording.** `(None, 0.5)` — `Y_0` unmeasured, `Z_1` supplied —
+  returns `NO_Z2` carrying `"Y0": None`, a status whose name asserts that only the quadratic term
+  is missing. The honest answer for a missing `Y_0` is a blocked status. Not a false close, but
+  the function's own vocabulary does not cover a half-measured state.
+* **One accidental rejection, not a guard.** `(-1.0, 0.1, -1.0)` returns `closes=False` because
+  two hypothesis violations happen to cancel in the discriminant (`0.81 - 4 < 0`). It must not be
+  read as the code catching anything.
+* **Type confusion is silently accepted.** `Z_1 = False` is taken as `0.0` — a *perfect
+  contraction* conjured from a boolean flag — and `Y_0 = True` as `1.0`. Both evaluate without
+  complaint.
+
+## Severity: the gap is LATENT, not ACTIVE — and that is a measurement, not a reassurance
+
+**No stored result in this repository is affected.** Every call site of
+`radii_polynomial_status` in the repo — `experiments/p2_route_k_v1_port.py:203` and
+`experiments/p2_route_l_v1_precond.py:289` — passes `(None, None)` and lands on the blocked
+branch, which is the half of the claim that holds. Nothing has ever been evaluated through the
+unvalidated path. The exposure is **prospective**: the function is the last gate before a
+`closes=True` in the certificate chain, and the moment step (iii) is unblocked and real numbers
+start flowing (leg L's `line_sweep_solve` made `A` constructible, so that moment is *closer than
+it was*), a sign error anywhere upstream is converted into an asserted contraction with no
+complaint. Framed as `QED at Large`'s trusted-computing-base idiom (Q3): this is a TCB component
+that does not behave as expected under adversarial input.
+
+## What this leg did NOT do, deliberately
+
+**It did not patch `solver/port_certification.py`.** The gate's `no` branch forbids it, and the
+territory forbids it. The obvious repair — reject non-finite and negative `Y_0`/`Z_1`/`Z_2` with
+their own status, ahead of the discriminant — is a two-line change, but it changes what the
+`EVALUATED` branch means and it must be made by whoever owns the module, alongside an update to
+`capabilities.py`'s validated line.
+
+**No novelty is claimed, per the three constraints pre-committed above.** The nonnegativity of
+the constants is a hypothesis of a 2015 textbook theorem (Q1, Q2); the NaN bypass is a documented
+floating-point hazard (Q4); adversarial input batteries against trusted components are routine
+software engineering (Q3). The only thing new here is the *measurement of this repository's
+implementation against them*: **11/25**.
