@@ -349,16 +349,20 @@ CAPABILITIES = [
      "test": "test_ga.py"},
     {"module": "solver/boussinesq.py", "object": "2D Boussinesq, physical space",
      "holds": "pseudo-spectral solver (Phase 1, Gate 1a)",
-     "validated": "no dedicated test file -- exercised through test_solver_boussinesq.py",
-     "test": "test_solver_boussinesq.py"},
+     "validated": ("dedicated: test_boussinesq_dedicated.py (17 checks) + "
+                   "test_solver_boussinesq.py; odd-n derivative path checked correct"),
+     "test": "test_boussinesq_dedicated.py"},
     {"module": "solver/gclm.py", "object": "gCLM, physical space",
      "holds": "pseudo-spectral solver (Stage 1)",
-     "validated": "no dedicated test file -- exercised through test_solver_clm.py",
-     "test": "test_solver_clm.py"},
+     "validated": ("dedicated: test_gclm_dedicated.py (14 checks) + test_solver_clm.py; "
+                   "sin x exact stationary point of De Gregorio (a=1) to 2.1e-15"),
+     "test": "test_gclm_dedicated.py"},
     {"module": "solver/spectral_utils.py", "object": "spectral helpers",
      "holds": "FFT plumbing for the pseudo-spectral solvers",
-     "validated": "no dedicated test file -- exercised through the solvers above",
-     "test": "test_solver_clm.py"},
+     "validated": ("dedicated: test_spectral_utils_dedicated.py (10 checks); odd-n "
+                   "derivative_hat defect found by leg 66, FIXED (n is now a required "
+                   "argument -- rfft length cannot reveal its parity)"),
+     "test": "test_spectral_utils_dedicated.py"},
     {"module": "solver/finite_support.py", "object": "SUPERSEDED -- do not use",
      "holds": "replaced by solver/first_integral.py (Route-D v14)",
      "validated": ("nothing -- SUPERSEDED, kept only so the name resolves to a warning "
