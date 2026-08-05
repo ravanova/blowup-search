@@ -1,0 +1,626 @@
+{
+ "leg": "Leg 81 -- Route-BRS v1",
+ "title": "Status-reporting audit of solver/boussinesq_rescaled.py against the refinement ladder already on record",
+ "generated": "2026-08-06",
+ "gate_verbatim": "At the grid refinement levels where Route-K already measured the residual GROWING (limit-cycling), does solver/boussinesq_rescaled.py's own relaxation loop ever report a converged/stable status?",
+ "gate_answer": "NO",
+ "verdict": "NO. Across the 12 rungs on record -- Route-G's grid-refinement ladder (n_r=300/450/600, residual GROWING 16.0x) and Route-G's and Route-K's steps ladders (the limit cycle: falls 38x, climbs 8.9x back) -- the module's exit predicate `res < tol` fires at ZERO rungs at every tolerance any caller passes. The closest approach is 1.671e-02, which is 7.2 decades above the tol=1e-9 those runs used and 4.2 decades above the signature default 1e-6. Because run() returns the residual it broke on, that covers every one of the 19000 step evaluations in those runs, not just their endpoints. Replaying the recorded residual shapes through the real run() loop reports converged=False on 12/12 cases, while a monotone decade-decay control fires correctly -- so the negative is the module's, not the instrument's.",
+ "physics_run_by_this_leg": "none -- rungs are read from writeup/data/, the loop is driven by a scripted residual sequence",
+ "module_edited": false,
+ "A1_predicate_vs_recorded_ladder": {
+  "tolerances_in_use": [
+   {
+    "tol": 1e-06,
+    "call_site": "solver/boussinesq_rescaled.py:239 (signature default)"
+   },
+   {
+    "tol": 1e-07,
+    "call_site": "writeup/3_spikes/spike0_rescaling_evidence.py:66"
+   },
+   {
+    "tol": 1e-09,
+    "call_site": "experiments/p2_route_g_v1_collapse.py:136 and experiments/spike1_stepC_gate.py:102 (the ladder ON RECORD)"
+   },
+   {
+    "tol": 1e-12,
+    "call_site": "experiments/p2_route_k_v1_port.py:63 and experiments/p2_route_l_v1_precond.py:56"
+   }
+  ],
+  "rungs": [
+   {
+    "source": "Route-G g2 resolution_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "grid refinement",
+    "n_r": 300,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 2500,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.016714825166163183,
+    "margin_decades": {
+     "1e-06": 4.2231018383161025,
+     "1e-07": 5.2231018383161025,
+     "1e-09": 7.2231018383161025,
+     "1e-12": 10.223101838316103
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 resolution_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "grid refinement",
+    "n_r": 450,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 2500,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.0770754427211248,
+    "margin_decades": {
+     "1e-06": 4.886916027991985,
+     "1e-07": 5.886916027991985,
+     "1e-09": 7.886916027991985,
+     "1e-12": 10.886916027991985
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 resolution_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "grid refinement",
+    "n_r": 600,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 2500,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.26665869800199077,
+    "margin_decades": {
+     "1e-06": 5.425955754276759,
+     "1e-07": 6.425955754276759,
+     "1e-09": 8.42595575427676,
+     "1e-12": 11.42595575427676
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 resolution_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "grid refinement",
+    "n_r": 450,
+    "n_beta": 48,
+    "r_max": 1000000.0,
+    "steps": 2500,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.11607349306073189,
+    "margin_decades": {
+     "1e-06": 5.064733054090036,
+     "1e-07": 6.064733054090036,
+     "1e-09": 8.064733054090036,
+     "1e-12": 11.064733054090036
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 steps_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "steps at n_r=300",
+    "n_r": 300,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 400,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 1.135892843740331,
+    "margin_decades": {
+     "1e-06": 6.055337363446043,
+     "1e-07": 7.055337363446043,
+     "1e-09": 9.055337363446043,
+     "1e-12": 12.055337363446043
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 steps_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "steps at n_r=300",
+    "n_r": 300,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 1200,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.5166710850512185,
+    "margin_decades": {
+     "1e-06": 5.713214157396097,
+     "1e-07": 6.713214157396097,
+     "1e-09": 8.713214157396097,
+     "1e-12": 11.713214157396097
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 steps_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "steps at n_r=300",
+    "n_r": 300,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 2500,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.016714825166163183,
+    "margin_decades": {
+     "1e-06": 4.2231018383161025,
+     "1e-07": 5.2231018383161025,
+     "1e-09": 7.2231018383161025,
+     "1e-12": 10.223101838316103
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-G g2 steps_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "kind": "steps at n_r=300",
+    "n_r": 300,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 4000,
+    "tol_used_by_that_run": 1e-09,
+    "residual": 0.017821144584510847,
+    "margin_decades": {
+     "1e-06": 4.250935593683673,
+     "1e-07": 5.250935593683673,
+     "1e-09": 7.250935593683673,
+     "1e-12": 10.250935593683673
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-K K1 steps_ladder (writeup/data/p2_route_k_v1_port.json)",
+    "kind": "steps at n_r=200",
+    "n_r": 200,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 500,
+    "tol_used_by_that_run": 1e-12,
+    "residual": 0.9756616279679157,
+    "margin_decades": {
+     "1e-06": 5.989299224853131,
+     "1e-07": 6.989299224853131,
+     "1e-09": 8.98929922485313,
+     "1e-12": 11.98929922485313
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-K K1 steps_ladder (writeup/data/p2_route_k_v1_port.json)",
+    "kind": "steps at n_r=200",
+    "n_r": 200,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 1500,
+    "tol_used_by_that_run": 1e-12,
+    "residual": 0.20595951747291602,
+    "margin_decades": {
+     "1e-06": 5.3137818656804665,
+     "1e-07": 6.3137818656804665,
+     "1e-09": 8.313781865680467,
+     "1e-12": 11.313781865680467
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-K K1 steps_ladder (writeup/data/p2_route_k_v1_port.json)",
+    "kind": "steps at n_r=200",
+    "n_r": 200,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 3000,
+    "tol_used_by_that_run": 1e-12,
+    "residual": 0.025704151881573923,
+    "margin_decades": {
+     "1e-06": 4.410003278725168,
+     "1e-07": 5.410003278725168,
+     "1e-09": 7.410003278725168,
+     "1e-12": 10.410003278725169
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   },
+   {
+    "source": "Route-K K1 steps_ladder (writeup/data/p2_route_k_v1_port.json)",
+    "kind": "steps at n_r=200",
+    "n_r": 200,
+    "n_beta": 48,
+    "r_max": 100000.0,
+    "steps": 5000,
+    "tol_used_by_that_run": 1e-12,
+    "residual": 0.22904761089861914,
+    "margin_decades": {
+     "1e-06": 5.35992576618869,
+     "1e-07": 6.35992576618869,
+     "1e-09": 8.35992576618869,
+     "1e-12": 11.35992576618869
+    },
+    "predicate_fires": {
+     "1e-06": false,
+     "1e-07": false,
+     "1e-09": false,
+     "1e-12": false
+    }
+   }
+  ],
+  "premise_restated_from_record": {
+   "n_r": [
+    300,
+    450,
+    600
+   ],
+   "residual": [
+    0.016714825166163183,
+    0.0770754427211248,
+    0.26665869800199077
+   ],
+   "growth_factor_coarsest_to_finest": 15.953424301547818,
+   "route_k_limit_cycle_fall_then_climb": {
+    "steps": [
+     500,
+     1500,
+     3000,
+     5000
+    ],
+    "residual": [
+     0.9756616279679157,
+     0.20595951747291602,
+     0.025704151881573923,
+     0.22904761089861914
+    ],
+    "fall_factor": 37.95735539001856,
+    "climb_factor_after_minimum": 8.910918825639698
+   }
+  },
+  "summary": {
+   "n_rungs": 12,
+   "n_rungs_where_predicate_fires": {
+    "1e-06": 0,
+    "1e-07": 0,
+    "1e-09": 0,
+    "1e-12": 0
+   },
+   "smallest_residual_ever_recorded": 0.016714825166163183,
+   "closest_approach_decades": {
+    "1e-06": 4.2231018383161025,
+    "1e-07": 5.2231018383161025,
+    "1e-09": 7.2231018383161025,
+    "1e-12": 10.223101838316103
+   },
+   "closest_rung": {
+    "source": "Route-G g2 resolution_ladder (writeup/data/p2_route_g_v1_g2.json)",
+    "n_r": 300,
+    "steps": 2500,
+    "residual": 0.016714825166163183
+   },
+   "step_evaluations_covered_by_that_argument": 19000,
+   "step_count_note": "distinct step evaluations, not a sum over overlapping checkpoints: 4 refinement rungs x 2500, plus the deepest checkpoint of each of the two cumulative steps ladders"
+  }
+ },
+ "A2_loop_replay": {
+  "recorded_shapes": [
+   {
+    "case": "route_k_limit_cycle_checkpoints",
+    "tol": 1e-06,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.22904761089861914,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.025704151881573923,
+    "margin_decades_at_minimum": 4.410003278725168
+   },
+   {
+    "case": "route_k_limit_cycle_checkpoints",
+    "tol": 1e-07,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.22904761089861914,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.025704151881573923,
+    "margin_decades_at_minimum": 5.410003278725168
+   },
+   {
+    "case": "route_k_limit_cycle_checkpoints",
+    "tol": 1e-09,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.22904761089861914,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.025704151881573923,
+    "margin_decades_at_minimum": 7.410003278725168
+   },
+   {
+    "case": "route_k_limit_cycle_checkpoints",
+    "tol": 1e-12,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.22904761089861914,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.025704151881573923,
+    "margin_decades_at_minimum": 10.410003278725169
+   },
+   {
+    "case": "route_g_refinement_residuals",
+    "tol": 1e-06,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.11607349306073189,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 4.2231018383161025
+   },
+   {
+    "case": "route_g_refinement_residuals",
+    "tol": 1e-07,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.11607349306073189,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 5.2231018383161025
+   },
+   {
+    "case": "route_g_refinement_residuals",
+    "tol": 1e-09,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.11607349306073189,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 7.2231018383161025
+   },
+   {
+    "case": "route_g_refinement_residuals",
+    "tol": 1e-12,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.11607349306073189,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 10.223101838316103
+   },
+   {
+    "case": "route_g_steps_residuals",
+    "tol": 1e-06,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.017821144584510847,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 4.2231018383161025
+   },
+   {
+    "case": "route_g_steps_residuals",
+    "tol": 1e-07,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.017821144584510847,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 5.2231018383161025
+   },
+   {
+    "case": "route_g_steps_residuals",
+    "tol": 1e-09,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.017821144584510847,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 7.2231018383161025
+   },
+   {
+    "case": "route_g_steps_residuals",
+    "tol": 1e-12,
+    "sequence_len": 32,
+    "steps_taken": 32,
+    "exhausted_max_steps": true,
+    "reported_residual": 0.017821144584510847,
+    "reported_converged": false,
+    "min_residual_in_sequence": 0.016714825166163183,
+    "margin_decades_at_minimum": 10.223101838316103
+   }
+  ],
+  "adversarial_dip": [
+   {
+    "case": "single_step_dip_below_tol",
+    "tol": 1e-06,
+    "dip": 1e-07,
+    "steps_taken": 3,
+    "reported_converged": true,
+    "reported_residual": 1e-07,
+    "residual_of_the_state_actually_returned": 0.23,
+    "lag_mismatch_decades": 6.361727836017593,
+    "decades_below_smallest_recorded_residual": 5.2231018383161025
+   },
+   {
+    "case": "single_step_dip_below_tol",
+    "tol": 1e-07,
+    "dip": 1e-08,
+    "steps_taken": 3,
+    "reported_converged": true,
+    "reported_residual": 1e-08,
+    "residual_of_the_state_actually_returned": 0.23,
+    "lag_mismatch_decades": 7.361727836017593,
+    "decades_below_smallest_recorded_residual": 6.2231018383161025
+   },
+   {
+    "case": "single_step_dip_below_tol",
+    "tol": 1e-09,
+    "dip": 1.0000000000000002e-10,
+    "steps_taken": 3,
+    "reported_converged": true,
+    "reported_residual": 1.0000000000000002e-10,
+    "residual_of_the_state_actually_returned": 0.23,
+    "lag_mismatch_decades": 9.361727836017593,
+    "decades_below_smallest_recorded_residual": 8.223101838316103
+   },
+   {
+    "case": "single_step_dip_below_tol",
+    "tol": 1e-12,
+    "dip": 1e-13,
+    "steps_taken": 3,
+    "reported_converged": true,
+    "reported_residual": 1e-13,
+    "residual_of_the_state_actually_returned": 0.23,
+    "lag_mismatch_decades": 12.361727836017593,
+    "decades_below_smallest_recorded_residual": 11.223101838316103
+   }
+  ],
+  "positive_control": [
+   {
+    "case": "monotone_decade_decay",
+    "tol": 1e-06,
+    "steps_taken": 8,
+    "reported_converged": true,
+    "reported_residual": 1e-07,
+    "predicate_consistent": true
+   },
+   {
+    "case": "monotone_decade_decay",
+    "tol": 1e-07,
+    "steps_taken": 9,
+    "reported_converged": true,
+    "reported_residual": 1e-08,
+    "predicate_consistent": true
+   },
+   {
+    "case": "monotone_decade_decay",
+    "tol": 1e-09,
+    "steps_taken": 11,
+    "reported_converged": true,
+    "reported_residual": 1e-10,
+    "predicate_consistent": true
+   },
+   {
+    "case": "monotone_decade_decay",
+    "tol": 1e-12,
+    "steps_taken": 14,
+    "reported_converged": true,
+    "reported_residual": 1e-13,
+    "predicate_consistent": true
+   }
+  ]
+ },
+ "A3_reporting_lag": {
+  "what": "step() computes res from the state it was GIVEN and returns the state one SSPRK3 update later; run() stores that res beside the LATER state.",
+  "scripted_sequence": [
+   1.0,
+   0.1,
+   0.01,
+   0.001,
+   0.0001,
+   1e-05,
+   1e-06,
+   1e-07
+  ],
+  "steps_requested": 6,
+  "field_marker_steps_applied": 6.0,
+  "reported_residual": 1e-05,
+  "residual_of_the_state_returned_beside_it": 1e-06,
+  "lag_decades_on_a_one_decade_per_step_sequence": 1.0,
+  "lag_steps": 1,
+  "renorm_true_also_rescales_after_measurement": true,
+  "renorm_reported_residual": 1e-05,
+  "history_lengths_equal_steps": true,
+  "consequence": "`converged=True` certifies the residual of the PREDECESSOR of the returned iterate, not of the returned iterate.  It is a labelling lag of exactly one step, it never manufactures a sub-tolerance number, and at the recorded rungs it is unreachable -- see A1."
+ },
+ "A4_edge_cases": [
+  {
+   "case": "non_finite_residual",
+   "steps_taken": 2,
+   "reported_converged": false,
+   "reported_residual_is_finite": false,
+   "note": "NaN < tol is False in IEEE, and the 1e8 branch breaks first"
+  },
+  {
+   "case": "divergence_cut_1e8",
+   "steps_taken": 2,
+   "reported_converged": false,
+   "reported_residual": 1000000000.0
+  },
+  {
+   "case": "max_steps_zero",
+   "raises": "UnboundLocalError: cannot access local variable 'step' where it is not associated with a value",
+   "note": "`step` is the loop variable; with max_steps=0 the loop body never runs and `step + 1` is unbound.  A robustness wart on a path no caller in this repository takes -- reported, not patched."
+  },
+  {
+   "case": "predicate_identity",
+   "break_line": "if res < tol:",
+   "report_line": "steps=step + 1, converged=res < tol,",
+   "note": "one expression, `res < tol`, used for both the break and the label -- there is no second, looser 'stable' predicate anywhere in the module: the strings 'stable', 'resolution-stable' and 'plateau' do not occur in it.",
+   "status_words_in_module": {
+    "converged": 1,
+    "stable": 0,
+    "plateau": 0,
+    "success": 0
+   }
+  }
+ ],
+ "secondary_observations": [
+  "A3: `residual` in the result dict lags the returned state by exactly one step (and, with renorm=True, is measured before the rescaling). Not reachable at any recorded rung; reported, not patched.",
+  "A4: run(max_steps=0) raises UnboundLocalError on `step + 1`. No caller in this repository passes 0.",
+  "A2(d): a single-step dip below tol WOULD be reported converged -- but the residual would have to fall 5.2 decades below anything ever recorded on this object at the LOOSEST tolerance in use (1e-6), and 8.2 decades below it at the 1e-9 the recorded runs actually used, for that path to be reachable."
+ ],
+ "wall_clock_seconds": 0.20611214637756348
+}

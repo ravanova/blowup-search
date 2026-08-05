@@ -129,3 +129,107 @@ folklore in numerical software and is not claimed as novel here.
   this is how the loop is audited without running the object.
 - Report **magnitudes** — decades of margin between the recorded residuals and each tolerance
   actually used — never a bare boolean.
+
+---
+
+# Part II — the findings (written after the audit ran)
+
+**The gate, verbatim:**
+
+> At the grid refinement levels where Route-K already measured the residual GROWING
+> (limit-cycling), does `solver/boussinesq_rescaled.py`'s own relaxation loop ever report a
+> converged/stable status?
+
+**Answer: NO.** The predicate fires at **0 of 12** recorded rungs × **4** tolerances in use.
+The closest any recorded residual has ever come to a tolerance is **4.2 decades** (the smallest
+residual on record, `1.671e-02`, against the loosest tolerance, the `1e-6` signature default);
+against the `1e-9` those runs actually passed it is **7.2 decades**, and against Route-K's
+`1e-12` it is **10.2 decades**. `solver/boussinesq_rescaled.py` was **not edited**, and this
+lands on the `no` branch: banked as a regression check tied to the ladder already on record.
+
+## 7. The magnitudes
+
+**The premise, restated from the record** (`writeup/data/p2_route_g_v1_g2.json`,
+`p2_route_k_v1_port.json` — read, not re-run):
+
+| ladder | rungs | residual | shape |
+|---|---|---|---|
+| Route-G grid refinement, `r_max=1e5`, 2500 steps | `n_r` = 300 / 450 / 600 | 1.671e-02 → 7.708e-02 → 2.667e-01 | **GROWS 16.0×** under refinement |
+| Route-K steps, `n_r=200`, `tol=1e-12` | 500 / 1500 / 3000 / 5000 | 9.757e-01 → 2.060e-01 → 2.570e-02 → 2.290e-01 | falls **38×**, then **climbs 8.9× back** — the limit cycle |
+| Route-G steps, `n_r=300`, `tol=1e-9` | 400 / 1200 / 2500 / 4000 | 1.136 → 5.167e-01 → 1.671e-02 → 1.782e-02 | flattens, does not descend |
+
+**The predicate against them.** The module's exit test is the single expression `res < tol`,
+used both for the loop `break` (line 272) and for the reported label (line 278) — one
+expression, so the label cannot disagree with the stop. Margins, in decades, of the closest
+rung:
+
+| tolerance | call site | margin at the closest rung | rungs where the predicate fires |
+|---|---|---|---|
+| 1e-6 | signature default | **+4.2** | 0 / 12 |
+| 1e-7 | `spike0_rescaling_evidence.py:66` | **+5.2** | 0 / 12 |
+| 1e-9 | `p2_route_g_v1_collapse.py:136` (the ladder on record) | **+7.2** | 0 / 12 |
+| 1e-12 | `p2_route_k_v1_port.py:63` | **+10.2** | 0 / 12 |
+
+**The endpoints are not the whole claim.** `run()` breaks the instant `res < tol` and returns
+*that same* `res`. So a recorded **final** residual of 1.671e-02 from a run with `tol=1e-9`
+proves no *intermediate* step of that run was sub-tolerance either — otherwise the run would
+have stopped there and reported the smaller number. That argument covers **19 000 distinct step
+evaluations** (4 refinement rungs × 2500, plus the deepest checkpoint of each of the two
+cumulative steps ladders), not 12 endpoints.
+
+**And the loop agrees when actually driven.** The recorded residual sequences were replayed
+through the *real* `run()` control flow with the PDE removed (`ScriptedRelaxation` overrides
+only `rhs`/`step`): `converged=False` and `max_steps` exhausted on **12/12** case × tolerance
+combinations. The positive control — a monotone one-decade-per-step decay — fires correctly at
+all 4 tolerances, so the negative is the module's behaviour and not a dead instrument.
+
+## 8. Three secondary observations, reported and NOT patched
+
+The module was not edited under any outcome, as the territory requires. Each of these is
+recorded for whoever owns the module next.
+
+**(a) The reported residual lags the returned state by exactly one step.** `step()` computes
+`res` from the state it is *given* (`R0`, the first SSPRK3 stage) and returns the state one
+full update later; `run()` then stores that `res` beside the *later* state. Measured on a
+one-decade-per-step sequence, the reported residual is **1.0 decade** away from the residual of
+the iterate handed back with it. With `renorm=True` there is a second half-step of the same
+kind: the fields are rescaled *after* `res` was measured. Consequence, stated precisely:
+`converged=True` certifies the **predecessor** of the returned iterate. It never manufactures a
+sub-tolerance number, and at every recorded rung it is **7.2+ decades** from being reachable.
+Pinned by test (7) so a future repair is noticed rather than silently changing the contract.
+
+**(b) A single-step dip below tolerance would be reported converged.** This is the shape that
+*could* produce a false positive, so it was built deliberately: a scripted cycle
+`[2.5e-1, 2.6e-2, dip, 2.3e-1, 1.9e-1]` with one sub-tolerance step. `run()` stops there and
+reports `converged=True`, with the returned state's true residual **6.4 decades** (at `tol=1e-6`)
+to **12.4 decades** (at `1e-12`) larger than the number reported beside it — (a) and (b)
+compounding. **This does not flip the gate**, and the magnitude is why: the residual would have
+to fall **5.2 decades** below anything ever recorded on this object at the loosest tolerance in
+use, and **8.2 decades** below it at the `1e-9` the recorded runs used, for that path to be
+reachable at all. It is a latent trap at a depth this object has never been within four orders
+of magnitude of.
+
+**(c) `run(max_steps=0)` raises `UnboundLocalError`.** `step` is the `for` variable and
+`step + 1` is evaluated unconditionally in the result dict. No caller in this repository passes
+0. A robustness wart, one line, not this leg's to fix.
+
+## 9. Why the `no` is worth banking rather than shrugging at
+
+A caller already branches on the flag: `experiments/p2_route_g_v1_collapse.py` lines 137–147
+does `if res["converged"]: break` and **skips the remaining checkpoint rungs**, printing
+*"converged at N steps; higher rungs skipped"*. A false `True` would therefore have silently
+truncated the very ladder Route-K then read as evidence that the object has no fixed point.
+That path is now covered by `test_boussinesq_rescaled_status.py` — 8 tests, seconds, no PDE
+solve — where before this leg the string `converged` appeared **0 times** in the two test files
+that import the module, against **5 sites** in `test_gclm_rescaled.py` for its sibling.
+
+## 10. What this leg does NOT claim
+
+- It does **not** say the relaxation converges. It says the opposite, and re-confirms from the
+  record that the residual **grows 16.0×** under refinement.
+- It does **not** re-measure `beta`, `c_l`, `c_omega`, `alpha` or any profile quantity. The
+  audit never solves the velocity field: the only numbers it produces are decades of margin,
+  step counts, and booleans read back out of a scripted loop.
+- It does **not** validate `capabilities.py`'s physics caveat, which stands untouched and
+  unchanged. It closes the *other* half: the caveat is true of the object **and** the code says
+  so, at every refinement level the repository has on record.
