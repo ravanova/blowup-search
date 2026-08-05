@@ -38,7 +38,8 @@ suspected.
 
 Last leg number actually landed/merged on main: **57**. Legs **58–63** are reserved,
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
-This session adds **64–71**. **Next fresh leg number for any future candidate is 72.**
+This session adds **64–71**, and this refill adds **72–75**. **Next fresh leg number for any
+future candidate is 76.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -62,6 +63,44 @@ changed from "unsearched" to "searched"); no DM disagreement. A verifier is doin
 post-landing review. Per the reserve-list instruction, the orchestrator promoted **leg 67
 (Route-FD, next in reserve order)** into the now-open LEG-H slot. Confirmed correct; no
 re-ranking triggered. Reserve is now **70 (RC), 71 (CAP)**.
+
+**Three landings and a reserve-exhaustion refill, mid-cycle.**
+
+- **Leg 69 (Route-IA) landed. Gate answered NO**, and correctly, on its own pre-committed
+  no-branch discipline: `solver/interval.py` has real soundness gaps — subnormal-range false
+  negatives and a silent NaN above `2^997` — but the finding is scoped, not a blanket
+  invalidation: every live operator's actual working range (0.5–128) sits ~140–298 decades clear
+  of both failure bands, so neither leg 58's nor leg 61's numbers are shown to be affected. Per
+  the leg's own no-branch text ("do NOT patch `solver/interval.py` under this leg's own
+  authority... escalate immediately"), the coordinator dispatched a **bench-repair agent, not a
+  leg,** to fix both defects directly — correct, since no live leg owns `interval.py` for
+  editing and the fix is mechanical once located. `solver/interval.py` is **off-limits for
+  editing** by any new candidate until that repair lands; reading it is fine.
+- **Leg 66 (Route-QF) landed. Gate answered YES**: a real but latent bug in
+  `solver/spectral_utils.py`'s `derivative_hat` — odd-`n` Nyquist-zeroing destroys the last
+  resolved mode — with zero current blast radius, since every live call site uses even `n`.
+  Also correctly handled outside the leg system: a bench-repair agent was dispatched, and
+  `solver/spectral_utils.py` is likewise **off-limits for editing** (reading fine) until that
+  lands.
+- **Leg 60 (Route-PQ) answered NO — escalation #4.** 111/114 of Route-PORT v1/v2's quoted
+  numbers reproduce from stored data; two do not (v2's "28x worse" claim is 63x in its own
+  ladder; v1's `rho=8` reach-table row quotes a different resolution's value). This is exactly
+  the leg's own pre-committed no-branch: "park it, do NOT edit the prose to match, and escalate
+  — a ban resting on an unreproducible number is the user's call." Branch `leg/pq-v1` is pushed
+  and parked, not merged; it is in `PROGRESS.md`'s escalations for the user. **Note for the
+  record: `experiments/journal/leg_60.md` does not exist on disk despite the leg having landed
+  and escalated** — this is itself a small territory gap, folded into leg 72 below rather than
+  fixed ad hoc here.
+- **Reserve exhausted.** By the time this update lands, all six prior reserve items (64, 65, 67,
+  68, 70, 71) have been dispatched or promoted — the last two, 70 (RC) and 71 (CAP), are now
+  live in other slots per the coordinator's report. `solver/rescaled_spectrum.py` is confirmed
+  live (70/RC), consistent with the coordinator's stated current-territories list. The exact
+  slot holding 71 (CAP) was not stated in the refill request and is not independently
+  re-derived here; this file defers to the orchestrator's live tracking for that one cell and
+  will reconcile it on the next status message. **Four new candidates (72–75) are added below**
+  to refill the queue and specifically to backfill LEG-G (vacated by 69) and LEG-J (vacated by
+  66); **72 (JR)** and **73 (BV)** are selected for immediate promotion — see Live assignments
+  and the ranking rationale.
 
 ---
 
@@ -138,37 +177,53 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-C | 63 | **M2** — target reselection, screened by the measured predicate | no | standard | `leg/m2-v1` | Is there an uncertified target whose linearization has a **multiplier** unbounded part? |
 | LEG-D | 59 | **WV** — the weight fitness's wall is 2-D | no | standard | `leg/wv-v1` | Does the frozen six-property gate pass 6/6 under a 2-D wall model? |
 | LEG-E | 61 | **KA** — a known-answer window for the interval pipeline | no | standard | `leg/ka-v1` | Does `interval_certificate.py` reproduce CLN's published Kawahara radius? |
-| LEG-F | 60 | **PQ** — the two negative findings that have no quartet | no | light | `leg/pq-v1` | Do Route-PORT v1/v2's evidence scripts re-derive their quoted numbers? |
-| LEG-G | 69 | **IA** — adversarial stress audit of the shared interval core | no | standard | `leg/ia-v1` | Does `solver/interval.py`'s compensated matvec bound still dominate under harder adversarial cases? |
-| LEG-H | 67 | **FD** — literature search for 2D Boussinesq's fractional critical exponent | no | light | `leg/fd-v1` | Does a primary source publish an independent critical fractional-dissipation exponent for 2D Boussinesq? |
-| LEG-I | 64 | **A12** — literature search for alpha_1 at a=1/2 | no | light | `leg/a12-v1` | Does any primary source publish alpha_1 at a=1/2 (or its sigma=3 criticality) for this model? |
-| LEG-J | 66 | **QF** — dedicated tests for the three modules with none | no | light | `leg/qf-v1` | Do direct tests of `gclm.py` / `boussinesq.py` / `spectral_utils.py` find any discrepancy? |
+| LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
+| LEG-G | 73 | **BV** — external known-answer check for the 2D velocity solver | no | standard | `leg/bv-v1` | Does a published, independent benchmark exist for the polar-grid Biot-Savart solve, and does the solver reproduce it? |
+| LEG-H | 74 | **EXT** — has the target object been certified by anyone else since? | no | standard | `leg/ext-v1` | Has a certificate for HL_S2_nonsymmetric been published by anyone since April 2026? |
+| LEG-I | 75 | **LM** — benchmark the claimed 10x cached-slope speedup | no | light | `leg/lm-v1` | Does the cached slope_matrix path still reproduce >=8x speedup on the Scenario-2 step? |
+| LEG-J | 72 | **JR** — `experiments/JOURNAL.md` / `experiments/journal/` freshness audit | no | light | `leg/jr-v1` | Does the journal narrative and the per-leg `journal/leg_N.md` file exist for every landed leg? |
+
+**Orchestrator reconciliation note (2026-08-06):** the DM's table above was one landing behind
+at write time — legs 67 (FD) and 70 (RC) had already landed and freed LEG-H/LEG-I before this
+table was committed. Corrected directly: LEG-F holds 71 (CAP, already dispatched earlier),
+LEG-H and LEG-I now hold the two remaining reserve items 74 (EXT) and 75 (LM). Reserve is again
+fully exhausted — the DM will need to generate more candidates for the next refill.
 
 **LEG-I promoted 2026-08-05 mid-cycle:** leg 68 (IX) landed YES and vacated the slot; leg 64
 (A12) was promoted in per the reserve order, without re-ranking. **LEG-H promoted 2026-08-05
 mid-cycle:** leg 65 (L1G) landed NO and vacated the slot; leg 67 (FD) was promoted in per the
-reserve order, without re-ranking. See Status above for both landing details.
+reserve order, without re-ranking. **LEG-F, LEG-G, LEG-J refilled 2026-08-05 mid-cycle:** leg 60
+(PQ) landed NO/escalated (F), leg 69 (IA) landed NO/scoped (G), leg 66 (QF) landed YES/bug-found
+(J) — all three per Status above. The reserve's last two items promoted in: **70 (RC) into
+LEG-F** (consistent with the coordinator's stated current live territories). **71 (CAP)'s slot
+is reported live by the coordinator but not identified in this file** — B/C/D/E/H/I are carried
+forward unchanged below because no landing was reported for any of them; this cell will be
+reconciled against the orchestrator's tracking on the next status update, not guessed at here.
+With the reserve now empty, **two of the four newly-added candidates (72 JR, 73 BV) fill
+LEG-J and LEG-G**; **74 (EXT) and 75 (LM) become the new reserve.**
 
 Figure numbers pre-allocated: leg 58 → `fig55`, 62 → `fig56`, 63 → `fig57`, 59 → `fig58`,
-60 → `fig59`/`fig60`. Legs 69, 67, 64, 66 (and the now-landed 68, 65) are audit/literature/
-hygiene legs and register **no figure**, by the same convention already established for Route-D
-scope (advection) and Route-D v15 (literature scope) — "no measurement, no figure."
-`writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only** across all ten.
+60 → `fig59`/`fig60`. Legs 73, 67, 64, 70, 72 (and the now-landed 68, 65, 69, 66, 60) are
+audit/literature/hygiene legs and register **no figure**, by the same convention already
+established for Route-D scope (advection) and Route-D v15 (literature scope) — "no measurement,
+no figure." `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**
+across all ten.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the ten:
 `spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
-`target_selection.py`(63), `weight_search.py`(59), `interval_certificate.py`(61), none(60),
-none-owned/read-only(69 reads `interval.py`, edits nothing), none-owned/read-only(67 reads
-`fractional_boussinesq.py`, edits nothing), none-owned/read-only(64, reads
-`critical_dissipation.py`, edits nothing), new test files only(66, touches no existing solver
-module). All ten distinct — **no collision.** `writeup/data` JSON files are likewise ten
+`target_selection.py`(63), `weight_search.py`(59), `interval_certificate.py`(61),
+none-owned/read-only(70 reads `rescaled_spectrum.py`, edits nothing — docs-only leg),
+none-owned/read-only(73 reads `boussinesq_velocity.py`, edits nothing), none-owned/read-only(67
+reads `fractional_boussinesq.py`, edits nothing), none-owned/read-only(64, reads
+`critical_dissipation.py`, edits nothing), none(72, touches only `experiments/JOURNAL.md` and
+reads `experiments/journal/`). All ten distinct — **no collision.** Note: neither `70` nor `73`
+edits `solver/interval.py` or `solver/spectral_utils.py`, both currently under bench-repair and
+off-limits for editing by any live or new candidate. `writeup/data` JSON files are likewise ten
 distinct names (`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`,
-`p2_route_m2_v1_targets.json`, `p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`, two
-Route-PORT evidence JSONs already on disk (leg 60 reads, does not create),
-`p2_route_ia_v1_interval_stress.json`, `p2_route_fd_v1_lit.json`,
-`p2_route_a12_v1_alpha_lit.json`, none(66)) — **no collision.** (Leg 68's territory,
-`writeup/INDEX.md` only, and leg 65's, its own literature-lit JSON, have landed and are no
-longer live.)
+`p2_route_m2_v1_targets.json`, `p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`,
+`p2_route_bv_v1_velocity_benchmark.json`, `p2_route_fd_v1_lit.json`,
+`p2_route_a12_v1_alpha_lit.json`, none(70, docs-only), none(72)) — **no collision.** (Legs 68,
+65, 69, 66, 60's territories have landed and are no longer live.)
 
 ## Queue
 
@@ -592,6 +647,120 @@ pytest, and passes at current HEAD?
 in this queue; this leg's edits are pre-committed to a narrow, non-overlapping field.
 ```
 
+```
+### 72 — ROUTE-JR: `experiments/JOURNAL.md` / `experiments/journal/` FRESHNESS AUDIT
+**Thesis.** The same staleness failure mode leg 68 (IX) found and fixed in `writeup/INDEX.md`
+exists one level down, in the narrative journal. `experiments/JOURNAL.md`'s most recent entry
+is "Legs 54-57 (2026-08-05)" -- every leg landed since (58's branch, 60, 64, 65, 66, 68, 69, and
+whatever lands between now and this leg's dispatch) has no narrative pointer in the journal, even
+though the per-leg detail files it should point to (`experiments/journal/leg_N.md`) mostly exist.
+Checked directly while drafting this leg: `experiments/journal/leg_60.md` is **missing entirely**
+despite leg 60 (PQ) having landed and escalated -- a leg whose gate answered NO and which is
+sitting in `PROGRESS.md`'s escalations right now is exactly the kind of result a future DM or
+agent most needs to be able to find fast, and today it cannot be found by leg number at all. This
+leg is a straight extension of leg 68's audit pattern to the journal.
+**Gate.** Does `experiments/JOURNAL.md`'s narrative and `experiments/journal/`'s per-leg file
+exist for every leg that has landed (gate has answered) since the "Legs 54-57" entry?
+  yes -> Confirmed current; report and close as a clean audit, no edits needed.
+  no  -> Append terse, pointer-only narrative entries to `experiments/JOURNAL.md` (mirroring the
+         existing "Legs 54-57" block's style -- one line per leg, sourced from each leg's own PR
+         body / `experiments/journal/leg_N.md`, never re-deriving a number), and separately list
+         which `experiments/journal/leg_N.md` files are missing as a report item -- this leg does
+         NOT create a missing leg's own journal file on that leg's behalf, since that file is
+         part of the original leg's own territory, not this audit's.
+**Territory.** experiments/JOURNAL.md (append-only edit), writeup/novelty/leg_72.md,
+               experiments/journal/leg_72.md
+**Difficulty.** light
+**Independence.** Touches one file (plus its own two report files) outside any other leg's
+territory. Reads, never edits, individual `experiments/journal/leg_N.md` files.
+```
+
+```
+### 73 — ROUTE-BV: EXTERNAL KNOWN-ANSWER CHECK FOR THE 2D VELOCITY SOLVER
+**Thesis.** solver/boussinesq_velocity.py's validated line covers manufactured stream-function
+solutions and a self-consistency gate (the Route-L line sweep, checked against the operator it
+inverts -- an internal check, not an external one). It has never been checked against a
+PUBLISHED, independent benchmark for the polar-grid Biot-Savart / stream-function solve, which
+is exactly the shape of gap leg 61 (KA) closed for the interval pipeline against CLN's Kawahara
+radius. This module sits underneath every live 2D Boussinesq route (boussinesq_rescaled.py,
+fractional_boussinesq.py, and historically the whole Route-A/Phase-1/Spike arcs), so a first
+external validation strengthens the same shared-infrastructure case leg 69 (IA) made for
+solver/interval.py, just for the velocity solve. Search the literature (Chen-Hou-Huang's own
+validation tables are the first place to look, since this repository's boussinesq_rescaled.py
+already reproduces their beta) for a suitable closed-form or independently-published benchmark
+solution, then run the existing solver against it.
+**Gate.** Does a published, independent benchmark exist for the 2D polar-grid Biot-Savart /
+stream-function solve, and does solver/boussinesq_velocity.py reproduce it to a pre-committed
+tolerance?
+  yes, and it reproduces -> Bank the module's first external known-answer gate; cite it from
+         every route that imports this module.
+  yes, but it disagrees -> A priority bug report: the shared velocity solve disagrees with a
+         published answer. Escalate immediately, do not patch under this leg's own authority.
+  no benchmark found -> Report the literature search as negative and leave the module's
+         validation explicitly flagged as manufactured-solutions-only; no code change.
+**Territory.** experiments/p2_route_bv_v1_velocity_benchmark.py,
+               writeup/data/p2_route_bv_v1_velocity_benchmark.json,
+               writeup/novelty/leg_73.md, experiments/journal/leg_73.md
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq_velocity.py; edits nothing under any gate outcome
+(a disagreement escalates rather than patches, by the same discipline as legs 69 and 66). Owns
+no solver module. No other live or new leg touches this module.
+```
+
+```
+### 74 — ROUTE-EXT: HAS THE TARGET OBJECT BEEN CERTIFIED BY ANYONE ELSE SINCE?
+**Thesis.** target_selection.py's TARGET_LEDGER records HL_S2_nonsymmetric (arXiv:2604.01868,
+Chen-Huang-Li) as "certified: NO" and this repository's own attempt (Route-PORT, legs 44-47) got
+stuck 1.55e8 ball radii outside the truncated object, with reach making it worse. That was as of
+the original April 2026 report. Nobody in this project has since checked whether Chen-Huang-Li or
+anyone else has published a certificate for this specific profile in the months since -- if
+someone has, the port this repository spent four legs on is externally mooted, which is exactly
+the kind of fact a target ledger should not be stale about. This is a pure literature watch: it
+does not touch target_selection.py (leg 63/M2 owns that file and any ledger update it implies),
+just reports what a search finds, dated, so a future leg or the user can act on it.
+**Gate.** Has a certificate (computer-assisted or analytic) for arXiv:2604.01868's
+HL_S2_nonsymmetric profile been published, by Chen-Huang-Li or anyone else, since April 2026?
+  yes -> The `certified: NO` field in target_selection.py's TARGET_LEDGER is stale. Report the
+         citation precisely (paper, date, method) for leg 63 or a future leg to act on -- this
+         leg does not self-edit target_selection.py, which is exclusively owned elsewhere.
+  no  -> Confirmed still uncertified as of this leg's search date. Bank the dated literature-
+         watch entry; no ledger change needed.
+**Territory.** experiments/p2_route_ext_v1_target_watch.py,
+               writeup/data/p2_route_ext_v1_target_watch.json,
+               writeup/novelty/leg_74.md, experiments/journal/leg_74.md
+**Difficulty.** standard
+**Independence.** Does not touch solver/target_selection.py (read-only reference to its published
+TARGET_LEDGER entry via the PDF citation already recorded there, not the code). No other leg
+does this specific dated literature check.
+```
+
+```
+### 75 — ROUTE-LM: BENCHMARK THE CLAIMED 10x CACHED-SLOPE SPEEDUP
+**Thesis.** capabilities.py's line_hilbert.py entry holds "the cached slope operator
+`slope_matrix` (Route-M: 10x on the Scenario-2 step)" as a holds-field claim, not a validated
+one -- it is a performance number, never independently re-benchmarked since it was first
+measured, and performance claims are exactly the kind of thing that silently drifts under
+refactors (the same failure class leg 66 just found in spectral_utils.py, just for speed instead
+of correctness). This is an engineering-audit leg in the same family as leg 69 (IA): does the
+claimed speedup still hold on current code, on the same step it was originally measured on.
+**Gate.** Does the cached `slope_matrix` path reproduce a speedup at or above 8x (near the
+claimed 10x, allowing for machine variance) over the uncached path on the Scenario-2 step it was
+originally measured on?
+  yes -> Confirmed still true. Bank a regression-guarding benchmark test so a future refactor
+         that silently kills the cache gets caught.
+  no  -> The claimed speedup has drifted -- either a regression or the original number was
+         measurement noise. Report the current multiplier precisely and flag capabilities.py's
+         line for correction (report only; correcting the prose is a follow-up, not this leg's
+         own edit, to keep this leg's territory narrow).
+**Territory.** test_line_hilbert_benchmark.py, experiments/p2_route_lm_v1_speedup_bench.py,
+               writeup/data/p2_route_lm_v1_speedup_bench.json,
+               writeup/novelty/leg_75.md, experiments/journal/leg_75.md
+**Difficulty.** light
+**Independence.** Reads solver/line_hilbert.py; edits nothing in solver/. New test file claimed
+by nobody else. Distinct from leg 61 (KA), which checks correctness of a different module
+(interval_certificate.py) against a published radius, not speed.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
@@ -634,27 +803,49 @@ repository is not actively building on" (`B` is dead on all three DOF regardless
 a bookkeeping question, not a live research direction). `capabilities.py`'s annotation was
 corrected accordingly (`ab07316`).
 
-**68 (IX) and 66 (QF) were ranked to close out the ten**, and 68 has since landed: gate YES,
-mechanical, in territory — INDEX.md's stale "Route-TC has no writeup yet" paragraph is fixed and
-the five missing rows (53/54/55/56/57) are in. QF (66) is still live at LEG-J, closing a
-coverage gap capabilities.py names outright ("no dedicated test file") for three modules that
-sit underneath several live legs' imports; its no-branch (no bug found) is the likely one, which
-is exactly the profile of a leg that belongs at the bottom of a ten-slot queue rather than off
-the queue entirely.
+**68 (IX) and 66 (QF) were ranked to close out the ten, and both have since landed** — 68 gate
+YES (mechanical, INDEX.md fixed), 66 gate **YES** with a real finding: a latent odd-`n`
+Nyquist-zeroing bug in `spectral_utils.py`'s `derivative_hat`, zero blast radius today but a
+real defect, correctly handed to a bench-repair agent rather than fixed inside the leg. Both
+outcomes are exactly what "closing out the ten" was for — cheap slots that turned out to still
+find real things.
 
-**64 (A12) has been promoted out of reserve into LEG-I**, per this file's own refill
-instruction, on the orchestrator's correct read that leg 68's YES/mechanical outcome does not
-change the ranking picture. **67 (FD) has, in turn, been promoted out of reserve into LEG-H**,
-on the same correct read that leg 65's NO does not change the ranking picture either — a
-confirmed-novel-but-narrow negative on dead-lane infrastructure doesn't reorder anything below
-it. **70 (RC) and 71 (CAP) are the remaining reserve — ranked 13 and 14, not assigned a live
-slot this cycle.** Both are real, well-specified, and independent of everything above, but each
-is lower-stakes than what is already live: RC is a docs-only correction whose underlying finding
-(J-4's realization caveat) is already stated, just not yet propagated; CAP is a self-audit of
-the ledger everything else in this queue already trusts, valuable but the least urgent of the
-two since nothing has yet flagged capabilities.py itself as drifted. If another slot frees up,
-promote from this list in the order given (RC, then CAP), without re-ranking, unless a gate
-answer changes the picture.
+**64 (A12) was promoted out of reserve into LEG-I** on 68's landing, and **67 (FD) was promoted
+into LEG-H** on 65's landing, both per this file's refill instruction and both confirmed correct
+by the DM at the time (neither gate outcome changed the ranking picture below it).
+
+**69 (IA) then landed: gate NO, and it is the most consequential landing in this batch.** It
+found real soundness gaps in `solver/interval.py` — subnormal-range false negatives, a silent
+NaN above `2^997` — the shared primitive both NG (58) and KA (61) depend on. The scoping is what
+keeps this from being a stop-the-line event: every live operator's actual range (0.5–128) sits
+140–298 decades clear of both failure bands, so neither live leg's numbers are shown to be
+affected. Correctly handed to a bench-repair agent (no live leg owns `interval.py` for editing),
+and `interval.py` plus `spectral_utils.py` (from 66's finding) are now off-limits for editing by
+any new candidate until those repairs land.
+
+**60 (PQ) landed: gate NO, escalation #4.** 111/114 numbers reproduce; two do not, parked on
+`leg/pq-v1` and escalated per its own pre-committed no-branch — correctly not self-corrected.
+Its landing also surfaced a small territory gap of its own (`experiments/journal/leg_60.md`
+missing), which is why leg 72 (JR) below extends leg 68's audit pattern one level down rather
+than being invented from nothing.
+
+**With the reserve (70, 71) now exhausted and three slots (F, G, J) needing to be refilled from
+new candidates, the promotion choice is 72 (JR) and 73 (BV), in that order of urgency, not 74 or
+75.** 72 is the cheapest possible win and already has a concrete finding in hand (the missing
+`leg_60.md`) before it even formally dispatches — the same shape of "audit that turns out to be
+non-trivial" that 68 and 66 both were, and PQ's own escalation makes fixing the ledger's
+discoverability more urgent right now, not less. 73 is ranked next because it is the direct
+sibling of 69 (IA) and 61 (KA) — a shared-infrastructure module (`boussinesq_velocity.py`, used
+by every 2D Boussinesq route) that has never had an external known-answer check, and 69 just
+demonstrated that this repository's infrastructure-audit legs have a real hit rate, not a
+theoretical one. **74 (EXT) and 75 (LM) are the new reserve, ranked 3rd and 4th of the new
+batch.** EXT is a literature watch on the target object itself — valuable (it would moot four
+legs' worth of port-building if a certificate has since appeared) but lower-urgency than an
+infrastructure check, since nothing suggests the literature has moved since April 2026. LM is a
+performance (not correctness) benchmark — real, cheap, but the stakes of a stale speed claim are
+categorically lower than the stakes of a stale correctness or discoverability claim. If another
+slot frees up, promote from this list in the order given (EXT, then LM), without re-ranking,
+unless a gate answer changes the picture.
 
 **Ordering the queue by proximity to the Clay chain is a choice of what to try. It is never a
 claim that anything moved.** In 57 landed legs, no link has moved; Clay stays at ~0.05% behind
