@@ -1,0 +1,973 @@
+{
+  "leg": 79,
+  "route": "PC",
+  "target": "solver/port_certification.py::radii_polynomial_status",
+  "standard": "Y_0, Z_1, Z_2 are upper bounds on norms in the radii polynomial theorem (van den Berg-Lessard, AMS Notices 62(9):1057, 2015), hence nonnegative and finite BY HYPOTHESIS; see writeup/novelty/leg_79.md",
+  "cases": [
+    {
+      "label": "blocked_both_none",
+      "family": "PC1_honest",
+      "note": "the documented kill-switch: no profile, no A",
+      "Y0": null,
+      "Z1": null,
+      "Z2": "<omitted>",
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "BLOCKED_AT_STEP_ONE",
+      "closes": false,
+      "keys": [
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "blocked_both_none_with_Z2",
+      "family": "PC1_honest",
+      "note": "a Z_2 offered alongside two missing bounds must not unblock it",
+      "Y0": null,
+      "Z1": null,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "BLOCKED_AT_STEP_ONE",
+      "closes": false,
+      "keys": [
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "no_Z1",
+      "family": "PC1_honest",
+      "note": "A not constructible",
+      "Y0": 0.001,
+      "Z1": null,
+      "Z2": "<omitted>",
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "NO_Z1",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z1_exceeds_one",
+      "family": "PC1_honest",
+      "note": "not a contraction",
+      "Y0": 0.001,
+      "Z1": 1.2,
+      "Z2": "<omitted>",
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "Z1_EXCEEDS_ONE",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "no_Z2",
+      "family": "PC1_honest",
+      "note": "quadratic term unmeasured",
+      "Y0": 0.001,
+      "Z1": 0.1,
+      "Z2": "<omitted>",
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "NO_Z2",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "legit_close",
+      "family": "PC1_honest",
+      "note": "a genuine closing triple",
+      "Y0": 1e-06,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "CLOSES_LEGITIMATELY"
+    },
+    {
+      "label": "legit_fail",
+      "family": "PC1_honest",
+      "note": "a genuine non-closing triple",
+      "Y0": 1.0,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_negative_small",
+      "family": "PC2_sign",
+      "note": "a defect norm cannot be negative; sign-flip typo in a caller",
+      "Y0": -1e-12,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Y0_negative_large",
+      "family": "PC2_sign",
+      "note": "a grossly fabricated negative defect",
+      "Y0": -1000000.0,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Y0_negative_kills_a_real_failure",
+      "family": "PC2_sign",
+      "note": "the same (Z1,Z2) that fails honestly at Y0=+1.0",
+      "Y0": -1.0,
+      "Z1": 0.9,
+      "Z2": 10000.0,
+      "violates": [
+        "Y0:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z2_negative",
+      "family": "PC2_sign",
+      "note": "a negative quadratic bound flips the discriminant open",
+      "Y0": 1.0,
+      "Z1": 0.1,
+      "Z2": -1.0,
+      "violates": [
+        "Z2:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z2_negative_huge_Y0",
+      "family": "PC2_sign",
+      "note": "an enormous honest defect rescued by one negative Z_2",
+      "Y0": 1000000000000.0,
+      "Z1": 0.5,
+      "Z2": -1e-06,
+      "violates": [
+        "Z2:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z1_negative",
+      "family": "PC2_sign",
+      "note": "Z_1 < 0 slips past the `Z1 >= 1.0` guard and inflates (1-Z1)^2",
+      "Y0": 1.0,
+      "Z1": -3.0,
+      "Z2": 1.0,
+      "violates": [
+        "Z1:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z1_very_negative",
+      "family": "PC2_sign",
+      "note": "a huge negative Z_1 makes any Y_0 close",
+      "Y0": 1000000.0,
+      "Z1": -10000.0,
+      "Z2": 1.0,
+      "violates": [
+        "Z1:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Y0_and_Z2_negative",
+      "family": "PC2_sign",
+      "note": "two violations at once",
+      "Y0": -1.0,
+      "Z1": 0.1,
+      "Z2": -1.0,
+      "violates": [
+        "Y0:negative",
+        "Z2:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_negative_zero",
+      "family": "PC2_sign",
+      "note": "negative zero -- signed but numerically 0.0; expected to behave as 0.0",
+      "Y0": -0.0,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "CLOSES_LEGITIMATELY"
+    },
+    {
+      "label": "Z1_negative_no_Z2",
+      "family": "PC2_sign",
+      "note": "negative Z_1 on the NO_Z2 path",
+      "Y0": 0.001,
+      "Z1": -0.5,
+      "Z2": "<omitted>",
+      "violates": [
+        "Z1:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "NO_Z2",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z1_nan",
+      "family": "PC3_nonfinite",
+      "note": "NaN >= 1.0 is False, so the contraction guard is bypassed",
+      "Y0": 0.001,
+      "Z1": "nan",
+      "Z2": 1.0,
+      "violates": [
+        "Z1:NaN"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z1_nan_no_Z2",
+      "family": "PC3_nonfinite",
+      "note": "does a NaN Z_1 reach the NO_Z2 branch and get reported as a bound?",
+      "Y0": 0.001,
+      "Z1": "nan",
+      "Z2": "<omitted>",
+      "violates": [
+        "Z1:NaN"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "NO_Z2",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_nan",
+      "family": "PC3_nonfinite",
+      "note": "an unmeasured defect as NaN",
+      "Y0": "nan",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:NaN"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z2_nan",
+      "family": "PC3_nonfinite",
+      "note": "NaN quadratic term",
+      "Y0": 0.001,
+      "Z1": 0.1,
+      "Z2": "nan",
+      "violates": [
+        "Z2:NaN"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "all_nan",
+      "family": "PC3_nonfinite",
+      "note": "every slot poisoned",
+      "Y0": "nan",
+      "Z1": "nan",
+      "Z2": "nan",
+      "violates": [
+        "Y0:NaN",
+        "Z1:NaN",
+        "Z2:NaN"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_inf",
+      "family": "PC3_nonfinite",
+      "note": "infinite defect",
+      "Y0": "inf",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_neg_inf",
+      "family": "PC3_nonfinite",
+      "note": "minus infinity: the most extreme fabricated defect",
+      "Y0": "-inf",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z2_inf",
+      "family": "PC3_nonfinite",
+      "note": "infinite quadratic bound",
+      "Y0": 0.001,
+      "Z1": 0.1,
+      "Z2": "inf",
+      "violates": [
+        "Z2:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z2_neg_inf",
+      "family": "PC3_nonfinite",
+      "note": "minus-infinite Z_2",
+      "Y0": 0.001,
+      "Z1": 0.1,
+      "Z2": "-inf",
+      "violates": [
+        "Z2:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z1_neg_inf",
+      "family": "PC3_nonfinite",
+      "note": "minus-infinite contraction factor passes the >= 1.0 guard",
+      "Y0": 1.0,
+      "Z1": "-inf",
+      "Z2": 1.0,
+      "violates": [
+        "Z1:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Z1_inf",
+      "family": "PC3_nonfinite",
+      "note": "plus infinity SHOULD be caught by the >= 1.0 guard",
+      "Y0": 1.0,
+      "Z1": "inf",
+      "Z2": 1.0,
+      "violates": [
+        "Z1:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "Z1_EXCEEDS_ONE",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_inf_Z2_zero",
+      "family": "PC3_nonfinite",
+      "note": "inf * 0 in the discriminant -> NaN",
+      "Y0": "inf",
+      "Z1": 0.1,
+      "Z2": 0.0,
+      "violates": [
+        "Y0:infinite"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_bool_true",
+      "family": "PC4_type",
+      "note": "a boolean flag mistaken for a bound; True == 1.0",
+      "Y0": true,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Z1_bool_false",
+      "family": "PC4_type",
+      "note": "False == 0.0, i.e. a perfect contraction from a flag",
+      "Y0": 0.001,
+      "Z1": false,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "CLOSES_LEGITIMATELY"
+    },
+    {
+      "label": "Y0_numpy_scalar",
+      "family": "PC4_type",
+      "note": "numpy negative scalar -- the common shape of a real caller's data",
+      "Y0": -1.0,
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "EVALUATED",
+      "closes": true,
+      "keys": [
+        "Y0",
+        "Z1",
+        "Z2",
+        "closes",
+        "discriminant",
+        "status"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "FALSE_CLOSE"
+    },
+    {
+      "label": "Y0_numpy_array",
+      "family": "PC4_type",
+      "note": "an array where a scalar was expected",
+      "Y0": "ndarray(array([1.e-06, 1.e+00]))",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:not-a-real-number"
+      ],
+      "outside_theorem": true,
+      "outcome": "RAISED",
+      "exception": "ValueError",
+      "detail": "The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()",
+      "status": null,
+      "closes": null,
+      "verdict": "RAISED_LOUDLY"
+    },
+    {
+      "label": "Y0_string",
+      "family": "PC4_type",
+      "note": "a JSON round-trip that kept the number as text",
+      "Y0": "1e-6",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RAISED",
+      "exception": "TypeError",
+      "detail": "can't multiply sequence by non-int of type 'float'",
+      "status": null,
+      "closes": null,
+      "verdict": "RAISED_LOUDLY"
+    },
+    {
+      "label": "Z1_string",
+      "family": "PC4_type",
+      "note": "text Z_1",
+      "Y0": 1e-06,
+      "Z1": "0.1",
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RAISED",
+      "exception": "TypeError",
+      "detail": "'>=' not supported between instances of 'str' and 'float'",
+      "status": null,
+      "closes": null,
+      "verdict": "RAISED_LOUDLY"
+    },
+    {
+      "label": "Y0_complex",
+      "family": "PC4_type",
+      "note": "a complex defect norm",
+      "Y0": "complex((1e-06+1j))",
+      "Z1": 0.1,
+      "Z2": 1.0,
+      "violates": [
+        "Y0:not-a-real-number"
+      ],
+      "outside_theorem": true,
+      "outcome": "RAISED",
+      "exception": "TypeError",
+      "detail": "'>=' not supported between instances of 'complex' and 'float'",
+      "status": null,
+      "closes": null,
+      "verdict": "RAISED_LOUDLY"
+    },
+    {
+      "label": "Y0_none_Z1_number",
+      "family": "PC4_type",
+      "note": "HALF-BLOCKED: Y_0 unmeasured but Z_1 supplied -- is this classified?",
+      "Y0": null,
+      "Z1": 0.5,
+      "Z2": 1.0,
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RAISED",
+      "exception": "TypeError",
+      "detail": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+      "status": null,
+      "closes": null,
+      "verdict": "RAISED_LOUDLY"
+    },
+    {
+      "label": "Y0_none_Z1_number_no_Z2",
+      "family": "PC4_type",
+      "note": "the same half-blocked state on the NO_Z2 path",
+      "Y0": null,
+      "Z1": 0.5,
+      "Z2": "<omitted>",
+      "violates": [],
+      "outside_theorem": false,
+      "outcome": "RETURNED",
+      "status": "NO_Z2",
+      "closes": false,
+      "keys": [
+        "Y0",
+        "Z1",
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": true,
+      "carries_Z1": true,
+      "verdict": "REJECTED"
+    },
+    {
+      "label": "Y0_none_Z2_only",
+      "family": "PC4_type",
+      "note": "blocked, with a poisoned Z_2 alongside",
+      "Y0": null,
+      "Z1": null,
+      "Z2": -1.0,
+      "violates": [
+        "Z2:negative"
+      ],
+      "outside_theorem": true,
+      "outcome": "RETURNED",
+      "status": "BLOCKED_AT_STEP_ONE",
+      "closes": false,
+      "keys": [
+        "closes",
+        "status",
+        "why"
+      ],
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
+    }
+  ],
+  "verdict": {
+    "cases_total": 39,
+    "cases_outside_theorem": 25,
+    "false_closes": 11,
+    "false_close_rate_over_outside": 0.44,
+    "false_close_labels": [
+      "Y0_negative_small",
+      "Y0_negative_large",
+      "Y0_negative_kills_a_real_failure",
+      "Z2_negative",
+      "Z2_negative_huge_Y0",
+      "Z1_negative",
+      "Z1_very_negative",
+      "Y0_neg_inf",
+      "Z2_neg_inf",
+      "Z1_neg_inf",
+      "Y0_numpy_scalar"
+    ],
+    "raised_loudly": 5,
+    "raised_labels": [
+      "Y0_numpy_array",
+      "Y0_string",
+      "Z1_string",
+      "Y0_complex",
+      "Y0_none_Z1_number"
+    ],
+    "returned_silently_on_bad_input": 23,
+    "blocked_at_step_one_calls": 3,
+    "blocked_calls_carrying_a_bound": 0,
+    "honest_paths_still_correct": true,
+    "gate_answer": "no",
+    "gate_question": "Under an adversarial battery of fabricated/poisoned Y_0 and Z_1 inputs, does radii_polynomial_status still correctly reject every one and continue returning BLOCKED_AT_STEP_ONE where appropriate?"
+  }
+}
