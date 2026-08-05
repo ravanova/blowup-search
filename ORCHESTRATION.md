@@ -399,6 +399,37 @@ leg slot.
 - Sweep agents obey all of §1 and §5a: no ledger edits, no `DIRECTION.md`, no banked-result
   rewrites. A sweep finding that *requires* one of those is a report line, not an edit.
 
+## 12. The performance review (periodic, one agent)
+
+**User directive (2026-08-05):** alongside the maintenance sweep, a periodic **performance
+review agent** tightens the test scripts and the scripts/code paths that are run often or
+reused across legs. One Sonnet agent, dispatched by the orchestrator on the same cadence as
+§11 (run start and date boundaries), counting **inside** the sweep's five-agent cap.
+
+**Targets, in priority order** — time spent where runs actually repeat:
+
+1. the merge gate's always-on tests (`test_plan_of_record.py`, `test_capabilities.py`) —
+   these run on *every* landing, so a second saved here is saved dozens of times a day;
+2. the root `test_*.py` scripts the gate maps to frequently-edited modules;
+3. `scripts/merge_gate.sh` itself and the rebuild path (`writeup/build_figures.py`, the
+   `*_evidence.py` scripts REPRO re-runs);
+4. `solver/` modules with many importers (e.g. `gclm.py`, `boussinesq.py`) — hot by reuse.
+
+**Discipline (this is the part that keeps it safe):**
+
+- **Measure first, magnitudes always.** Keep a timing ledger in `reports/PERF_REVIEW.md`:
+  wall-clock per target before and after, dated. No before/after pair, no change. "Faster"
+  is not a number. (Route-M M3 is the banked warning: parallelising the refinement ladder
+  *cost* 12× — assume nothing.)
+- **Behaviour-preserving only.** Every touched module's known-answer test must pass with its
+  `capabilities.py` `validated` magnitudes unchanged. A speedup that loosens a tolerance,
+  lowers a resolution, skips a case, or changes any recorded magnitude is **not a speedup,
+  it is a claim change** — claim-bearing, to the DM, leg + verifier.
+- Test scripts may be tightened (shared setup, cheaper fixtures, dead branches removed) but
+  never weakened: the set of properties asserted must not shrink, and negative controls
+  stay able to fail.
+- Same law as everyone: §1, §5a, declared territory (§5b), support-branch merge path (§7).
+
 ---
 
 *Maintained in-repo so cloud agents read the same contract. Update this file and
