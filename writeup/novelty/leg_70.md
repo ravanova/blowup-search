@@ -80,3 +80,37 @@ Xu's Proposition 2 gives the dichotomy and states the origin-`H²` strip is empt
 `K − 3` count could be checked against. So the corrected label is "the maximal `L²`
 realization's essential spectrum, as a count, at `K = 144`" — and there is no external number
 to compare it to in either realization. That is the honest ceiling on the corrected statement.
+
+---
+
+# Findings (written after the audit; the pass above was committed first)
+
+Full depth is in `experiments/journal/leg_70.md`. The record-level summary:
+
+**Gate answered NO.** `solver/rescaled_spectrum.py` imposes no origin condition. Confirmed from
+the code four ways: (A) **0 collocation rows at X=0** at K = 48/96/144, nearest row at
+`X = 1.636e-2 / 8.181e-3 / 5.454e-3`; (B) `generator()` and `jacobian()` append **no** row —
+the only append in the module is `newton()`'s dilation-gauge row, which the eigenproblem never
+sees; (C) all **3** origin-evaluated quantities (`h0`, `kk`, `lam_dx0`) contract to gauge
+scalars and none restricts the admissible set; (D) the trial space *is* odd-analytic at the
+origin (deviation from `2kX` is `1.4e-8` at `X=1e-6`), which is the one contrary signal, and it
+is not an imposed condition — collocation constrains no behaviour at the origin.
+
+**The decisive corroboration, arithmetic only, on banked numbers:** the unstable count is
+exactly `K - 3` at K = 48, 96, 144 (45, 93, 141), the deficit constant at **3**, the fraction
+rising **0.9375 -> 0.9688 -> 0.9792** with no saturation, the count growing **96 as the
+dimension grew 96** while `max Re` moved only **0.034**. A dimension-proportional count is a
+discretized continuum, not a Morse index. So "141" is a property of the grid as much as of the
+operator; at `K = 288` it would read 285.
+
+**Disclosure inventory:** **19** quote sites in **10** files — **8** name the realization at the
+site, **1** discloses it in substance without the word, **10** are gaps (6 of them in files that
+disclose elsewhere but not within ±12 lines of the number). All 10 are outside this leg's
+territory and are listed with their exact corrections in the journal for the orchestrator.
+
+**J-4 stands** — no correction to it is reported. Its open item ("re-run I5 with an origin
+condition") now has a single located intervention point: `OddCompactBasis`, shared unchanged by
+`rescaled_spectrum.py`, `critical_dissipation.py` and `marginal_flow.py`.
+
+**Claim ceiling, restated:** this leg adds no number to the record, upgrades no claim, and moves
+no link of the L1→L4 chain. It corrects labels on numbers already banked.
