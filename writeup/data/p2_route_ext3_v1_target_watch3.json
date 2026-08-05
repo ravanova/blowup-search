@@ -1,0 +1,298 @@
+{
+ "leg": 82,
+ "route": "EXT3 v1",
+ "pass_date": "2026-08-06",
+ "kind": "literature watch -- no computation, no gCLM measurement, no solver touched, no figure",
+ "gate": "Has a certificate (computer-assisted or analytic) for arXiv:2604.01868 section 6.2's Boussinesq_S2_nonsymmetric profile been published since the paper's own date?",
+ "gate_answer": {
+  "verdict": "NO",
+  "statement": "no certificate, computer-assisted or analytic, has appeared for the non-symmetric strictly-positive regular self-similar profile of the 2D Boussinesq equations (arXiv:2604.01868 section 6.2) as of 2026-08-06, 126 days after the paper's v1",
+  "channels_run": 7,
+  "channels_returning_a_candidate": 0,
+  "channels_sufficient_alone": 5,
+  "days_open": 126,
+  "source_versions_existing": 1,
+  "author_entries_enumerated": 28,
+  "author_entries_after_source": 0,
+  "indexed_citations": 0,
+  "false_friends_opened_and_excluded": 3,
+  "known_weakness": "every channel is an ABSENCE argument.  Unlike leg 77's rank-2 watch, whose decisive evidence was a POSITIVE act (the authors revised at 82 days and left the watched branch as numerics), this leg has no positive act to point at -- only 126 days of silence, the title's 'A Numerical Investigation', and line 2069's statement of intent.  That is weaker evidence than leg 77 had, and this watch should be re-asked on a SHORTER interval than the rank-2 one",
+  "ledger_consequence": "target_selection.py's 'certified': 'NO' for Boussinesq_S2_nonsymmetric is CURRENT as of 2026-08-06, not stale -- bank the dated watch entry.  No edit required; the file was not touched (leg 63 owns it)",
+  "ledger_precision_suggestion": "the entry's 'source' field cites the paper WITHOUT a version.  Only v1 exists as of this pass, so pinning it to '2604.01868v1' costs nothing and makes a future revision detectable by diff rather than by re-reading.  A bookkeeping nicety, not a correction"
+ },
+ "object": {
+  "ledger_id": "Boussinesq_S2_nonsymmetric",
+  "ledger_module": "solver/target_selection.py",
+  "ledger_rank": 3,
+  "arxiv": "2604.01868",
+  "version_at_pass": "v1 (only)",
+  "v1_date": "2026-04-02",
+  "section": "6.2",
+  "title": "Novel Self-similar Finite-time Blowups with Singular Profiles of the 1D Hou-Luo Model and the 2D Boussinesq Equations: A Numerical Investigation",
+  "authors": [
+   "Bojin Chen",
+   "De Huang",
+   "Xiangyuan Li"
+  ],
+  "object_in_question": "the 2D Boussinesq Scenario-2 profile: a NON-SYMMETRIC regular self-similar profile, strictly positive throughout the computational domain, with three modulation constants (c_l, c_omega, c_r) and c_theta = c_l + 2 c_omega"
+ },
+ "channels": [
+  {
+   "id": "C1",
+   "name": "the source paper itself",
+   "kind": "primary source, arXiv abs page",
+   "url": "https://arxiv.org/abs/2604.01868",
+   "enumerated": "the full arXiv submission history block",
+   "result": "v1 ONLY -- [v1] Thu, 2 Apr 2026 10:25:28 UTC (21,211 KB).  No v2.",
+   "candidates": 0,
+   "note": "the single strongest channel and the one that would have moved first: for the rank-2 object (leg 77) it was a v2 at 82 days that settled the question.  Here there is no v2 at 126 days",
+   "sufficient_alone": true
+  },
+  {
+   "id": "C2",
+   "name": "all three authors",
+   "kind": "arXiv API author enumeration",
+   "url": [
+    "http://export.arxiv.org/api/query?search_query=au:\"De_Huang\"&sortBy=submittedDate&sortOrder=descending&max_results=25",
+    "http://export.arxiv.org/api/query?search_query=au:\"Xiangyuan_Li\"+OR+au:\"Bojin_Chen\"&sortBy=submittedDate&sortOrder=descending&max_results=30"
+   ],
+   "enumerated": "28 entries across the two queries, date-descending",
+   "result": "De Huang's newest entry IS 2604.01868v1 itself; the next is 2603.25104v2 (the rank-2 object).  Xiangyuan Li and Bojin Chen have nothing after it either. The discoverers have filed NOTHING, in any field, since the announcement.",
+   "candidates": 0,
+   "sufficient_alone": true
+  },
+  {
+   "id": "C3",
+   "name": "the whole \"Hou-Luo\" corpus",
+   "kind": "arXiv API full-text-field enumeration",
+   "url": "http://export.arxiv.org/api/query?search_query=all:\"Hou-Luo\"&sortBy=submittedDate&sortOrder=descending&max_results=30",
+   "enumerated": "7 entries total, 3 of them from 2026",
+   "result": "2604.01868v1 (the source paper); 2605.16322v1 Shi (= FF2, excluded on 4 counts); 2601.02464v1 Rampf-Kolluru (1D AND predates the source paper -- out of scope)",
+   "candidates": 0,
+   "sufficient_alone": true
+  },
+  {
+   "id": "C4",
+   "name": "the computer-assisted-proof corpus",
+   "kind": "arXiv API abstract-field enumeration",
+   "url": "http://export.arxiv.org/api/query?search_query=abs:\"Boussinesq\"+AND+abs:\"computer-assisted\"&sortBy=submittedDate&sortOrder=descending&max_results=40",
+   "enumerated": "7 entries total, 1 of them from 2026",
+   "result": "the only 2026 entry is 2607.15256v1 Chen-Hou (= FF1, excluded on 4 counts).  The rest of the corpus is the known pre-2026 CAP machinery: 2305.05660 Chen-Hou II, 2310.19781 Elgindi-Pasqualotto, 1509.08648 Castelli-Gameiro-Lessard, and the neural-network profile papers",
+   "candidates": 0,
+   "sufficient_alone": true
+  },
+  {
+   "id": "C5",
+   "name": "the citation graph",
+   "kind": "Semantic Scholar graph API",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/arXiv:2604.01868/citations?fields=title,year,externalIds,abstract&limit=100",
+   "enumerated": "every indexed citation of the source paper",
+   "result": "{\"offset\": 0, \"data\": []} -- an EMPTY array, 0 indexed citations",
+   "candidates": 0,
+   "note": "CORROBORATING ONLY, and explicitly NOT treated as decisive: this index lags arXiv by weeks, so an empty array is as consistent with indexing lag as with genuine absence.  Reported because it AGREES, not because it PROVES",
+   "sufficient_alone": false
+  },
+  {
+   "id": "C6",
+   "name": "the 2D self-similar corpus",
+   "kind": "arXiv API abstract-field enumeration",
+   "url": "http://export.arxiv.org/api/query?search_query=abs:\"2D+Boussinesq\"+AND+abs:\"self-similar\"&sortBy=submittedDate&sortOrder=descending&max_results=40",
+   "enumerated": "2 entries from 2026",
+   "result": "2607.15256v1 Chen-Hou (= FF1) and 2604.01868v1 (the source paper itself)",
+   "candidates": 0,
+   "sufficient_alone": true
+  },
+  {
+   "id": "F1",
+   "name": "the open web",
+   "kind": "web search",
+   "query_string": "computer-assisted proof non-symmetric self-similar profile 2D Boussinesq 2026 Chen Huang Li 2604.01868",
+   "relevant_returns": [
+    "https://arxiv.org/pdf/2604.01868",
+    "https://sites.google.com/view/de-huang/research",
+    "https://arxiv.org/abs/2305.05660",
+    "https://arxiv.org/pdf/2308.01528",
+    "https://arxiv.org/pdf/2605.15130",
+    "https://epubs.siam.org/doi/10.1137/23M1580395"
+   ],
+   "result": "returns only the pre-existing corpus -- the source paper, Chen-Hou's certified SYMMETRIC object, and the earlier Hou-Luo/gCLM papers.  No new object",
+   "candidates": 0,
+   "note": "De Huang's own page is stale for 2026 math.AP work -- leg 77 already measured that -- so it is NOT usable as a negative and is not counted as one",
+   "sufficient_alone": false
+  }
+ ],
+ "false_friends": [
+  {
+   "id": "FF1",
+   "arxiv": "2607.15256v1",
+   "date": "2026-07-16",
+   "authors": [
+    "Jiajie Chen",
+    "Thomas Y. Hou"
+   ],
+   "title": "Analytic finite-rank corrections for singularly weighted estimates in a computer-assisted proof of 3D Euler singularity",
+   "why_tempting": "the ONLY 2026 entry on the CAP channel and one of only two on the 2D channel; by the authors likeliest to certify anything in this area; 'computer-assisted proof' in the title and '2D Boussinesq' in the abstract",
+   "exclusions": [
+    {
+     "id": "FF1a",
+     "ground": "wrong kind of statement -- it is a REVIEW",
+     "quote": "In this paper, we review an analytic low-rank correction method first developed in [ChenHou2023a,ChenHou2023b]"
+    },
+    {
+     "id": "FF1b",
+     "ground": "wrong object -- the 2D Boussinesq / 3D Euler stability argument it reviews is Chen-Hou's own SMOOTH, SYMMETRIC profile, already certified (arXiv:2210.07191 + Part II) and BANNED as a target by the plan of record",
+     "quote": null
+    },
+    {
+     "id": "FF1c",
+     "ground": "the words are absent -- 'non-symmetric'/'nonsymmetric' and 'singular profile' each return 0 hits",
+     "quote": null
+    },
+    {
+     "id": "FF1d",
+     "ground": "no contact -- 2604.01868 is not cited and no Chen-Huang-Li author appears in its references",
+     "quote": null
+    }
+   ]
+  },
+  {
+   "id": "FF2",
+   "arxiv": "2605.16322v1",
+   "date": "2026-05-05",
+   "authors": [
+    "Yaoming Shi"
+   ],
+   "title": "A unified Boussinesq--Euler formulation and finite-time blow-up for a Hou--Luo type boundary-jet system",
+   "why_tempting": "postdates the source paper, is about the 2D Boussinesq equations, and carries a genuine PROVED finite-time blow-up theorem",
+   "exclusions": [
+    {
+     "id": "FF2a",
+     "ground": "wrong object -- a closed (1+1)D BOUNDARY-JET reduction (system Q0), the first-order truncation phi_qq(x,1,t)=0",
+     "quote": "The theorem is therefore a blow-up result for the closed boundary-jet model, not for the unrestricted Boussinesq or Euler systems."
+    },
+    {
+     "id": "FF2b",
+     "ground": "wrong kind of result -- finite-time blow-up by a Riccati argument; it certifies no self-similar PROFILE at all: no profile, no modulation constants, no enclosure",
+     "quote": null
+    },
+    {
+     "id": "FF2c",
+     "ground": "no computer assistance -- no interval arithmetic, no CAP",
+     "quote": null
+    },
+    {
+     "id": "FF2d",
+     "ground": "no contact -- 2604.01868 is not cited",
+     "quote": null
+    }
+   ]
+  },
+  {
+   "id": "FF3",
+   "arxiv": "2601.02464v1",
+   "date": "2026-01-05",
+   "authors": [
+    "Cornelius Rampf",
+    "Sai Swetha Venkata Kolluru"
+   ],
+   "title": "Complex-time singular structure of the 1D Hou-Luo model",
+   "why_tempting": "a 2026 Hou-Luo paper about singular structure",
+   "exclusions": [
+    {
+     "id": "FF3a",
+     "ground": "wrong dimension -- 1D, not the 2D Boussinesq object",
+     "quote": null
+    },
+    {
+     "id": "FF3b",
+     "ground": "out of scope -- PREDATES the source paper by three months (2026-01-05 vs 2026-04-02), so it cannot answer a gate scoped to 'since the paper's own date'",
+     "quote": null
+    }
+   ]
+  }
+ ],
+ "primary_source_verification": {
+  "file": "Papers/2604.01868v1.pdf",
+  "extraction": "pdftotext -layout",
+  "checks": [
+   {
+    "ledger_field": "\"source\": \"arXiv:2604.01868 section 6.2\"",
+    "line": 2309,
+    "quote": "6.2. Scenario 2: novel self-similar finite-time blowups with positive regular profiles.",
+    "verdict": "EXACT",
+    "note": "section 6 is the 2D Boussinesq half; sections 2.5 and 4 -- which leg 74 watched -- are the 1D Hou-Luo analogues, headed 'Scenario 2: novel self-similar finite-time blowups with positive regular profiles' at line 658 and 'Numerical Results of the HL Model: Scenario 2' at line 1210"
+   },
+   {
+    "ledger_field": "\"object\": \"... the NON-SYMMETRIC regular profile ...\"",
+    "line": 2556,
+    "quote": "Omega converge to a non-symmetric regular profile that remains strictly positive throughout the computational domain.",
+    "verdict": "EXACT in substance, word for word"
+   },
+   {
+    "ledger_field": "\"published\": {\"ratio_cl_over_comega\": -2.4489}",
+    "line": 2560,
+    "quote": "The computed limiting value of c_l/c_omega is -2.4489, which is remarkably close to the 1D case.",
+    "verdict": "EXACT to all four recorded digits",
+    "note": "the 1D case it is close to is -2.5114 (line 1477), which is the RANK-1 object's number -- the two entries are mutually consistent"
+   },
+   {
+    "ledger_field": "\"q2\": {\"n_modulation\": 3}",
+    "line": "2320-2340 (the change of variables and system (6.6))",
+    "quote": "c_theta = c_l + 2 c_omega -- with a time-dependent spatial shift r(tau) governed by c_r",
+    "verdict": "EXACT",
+    "note": "free constants are (c_l, c_omega, c_r); c_theta is DETERMINED, not free. Three, against the rank-1 1D object's two -- this is the concrete sense in which the 2D object is strictly harder"
+   },
+   {
+    "ledger_field": "\"q1\": \"Numerical only, April 2026.\"",
+    "line": 2069,
+    "quote": "stability of (6.2) around some steady state using a powerful computer-assisted approach",
+    "verdict": "CONFIRMED",
+    "note": "this is the discoverers themselves describing the certificate this watch looks for as the thing one would WANT to do -- i.e. not yet done.  The paper's title ends in 'A Numerical Investigation'; section 6.2's evidence is residual decay (Fig 6.12) and profile convergence (Figs 6.13-6.14)"
+   }
+  ]
+ },
+ "related_watches": [
+  {
+   "leg": 74,
+   "route": "EXT",
+   "rank": 1,
+   "object": "HL_S2_nonsymmetric",
+   "dim": 1,
+   "source": "arXiv:2604.01868 sections 2.5/4",
+   "verdict": "NO"
+  },
+  {
+   "leg": 77,
+   "route": "EXT2",
+   "rank": 2,
+   "object": "gCLM_degenerate_one_scale",
+   "dim": 1,
+   "source": "arXiv:2603.25104 section 4",
+   "verdict": "NO"
+  },
+  {
+   "leg": 82,
+   "route": "EXT3",
+   "rank": 3,
+   "object": "Boussinesq_S2_nonsymmetric",
+   "dim": 2,
+   "source": "arXiv:2604.01868 section 6.2",
+   "verdict": "NO"
+  }
+ ],
+ "independence": "shares a PAPER with leg 74 but not a section, not an object, not an equation and not a dimension: leg 74 watched the 1D Hou-Luo non-symmetric profile (sections 2.5/4), this leg the 2D Boussinesq analogue (section 6.2).  They would be certified by different machinery -- section 6.2 carries a 2D Biot-Savart law with NO symmetry reduction available and THREE modulation constants against the 1D object's two -- so a certificate for one is not a certificate for the other.  Leg 77 shares neither paper nor object.  solver/target_selection.py was READ and never written: leg 63 (M2) owns it.",
+ "capabilities_grep": "capabilities.py was grepped before anything else, per the plan of record's permanent ban on building without it.  Boussinesq_S2_nonsymmetric appears NOWHERE in it -- the registered 2D Boussinesq object at line 88 is annotated 'the CERTIFIED object', i.e. Chen-Hou's SYMMETRIC profile, a different object and one the plan of record bans as a target.  solver/target_selection.py is registered at line 353.  Nothing was built, so nothing was rebuilt.",
+ "next_reask": {
+  "object": "Boussinesq_S2_nonsymmetric",
+  "source": "arXiv:2604.01868v1 section 6.2",
+  "last_pass": "2026-08-06",
+  "last_verdict": "NO",
+  "cheapest_sufficient_channels_in_order_of_value": [
+   "https://arxiv.org/abs/2604.01868 -- a v2 is the single strongest signal, exactly as it was for the rank-2 object",
+   "http://export.arxiv.org/api/query?search_query=au:\"De_Huang\"&sortBy=submittedDate&sortOrder=descending",
+   "http://export.arxiv.org/api/query?search_query=all:\"Hou-Luo\"&sortBy=submittedDate&sortOrder=descending"
+  ],
+  "interval_advice": "SHORTER than the rank-2 watch's, because this verdict rests on absence alone -- see GATE_ANSWER['known_weakness']"
+ },
+ "writeup": "writeup/novelty/leg_82.md"
+}
