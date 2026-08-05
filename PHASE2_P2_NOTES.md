@@ -3354,3 +3354,144 @@ analytic, in every class considered. A wall there bounds the difficulty for
 `HL_S2_nonsymmetric` **from below, not above** -- that profile does not even have finite
 norm in the class where the operator side is least bad. Nothing is claimed about it beyond
 that implication, and **no link of the L1→L4 chain moved.**
+
+---
+
+## §41 — ROUTE-T v1 DONE (2026-08-05): **BORDERING RESTORES A BOUNDED TAIL** — AND IT WORKS
+## EXACTLY WHERE LEG 51's CURVE WAS **WORST**, NOT WHERE IT WAS BEST. THE WINDOW THAT WAS
+## EMPTY BY 0.606 EXPONENT UNITS IS **NO LONGER EMPTY**. STILL NOT A CERTIFICATE.
+
+*Leg 52. `solver/spectral_certificate.py` (+5 functions), `test_spectral_certificate.py`,
+`experiments/p2_route_t_v1_border.py` → `writeup/data/p2_route_t_v1_border.json` →
+**fig47**; `TECHNICAL/BLOG_P2_ROUTET_V1.md`. 154 s, deterministic. Stage `T`
+(`plan_of_record.py`), 6/6 pre-committed clauses.*
+
+**(T-0) THE NOVELTY PASS, RUN BEFORE ANY CONSTRUCTION — VERDICT `PROCEED_NARROW`.** Five
+queries, three ledger entries, all committed in the driver so the search is auditable
+(leg 42's failure mode was an *unrecorded* search).
+
+| ref | verdict |
+|---|---|
+| **arXiv:1503.06315** Breden–Desvillettes–Lessard (2015), *rigorous numerics for nonlinear operators with **tridiagonal dominant** linear part* | **ADJACENT, AND IT NARROWS THE CLAIM** |
+| the standard `ℓ¹_ν` radii-polynomial framework | **CONFIRMS THE ASSUMPTION IS STANDARD** |
+| arXiv:2210.07191 + arXiv:2305.05660 Chen–Hou (certified **inviscid**, weighted energy) | **CONFIRMS LEG 51's PREDICTION** |
+
+BDL state leg 51's problem in nearly leg 51's words — the derivative "does not have an
+asymptotically diagonal dominant structure", so the approximate inverse is not
+straightforward — and supply a construction for `A` in that setting. **So the general
+observation is not new.** What is not covered by it: our tail is tridiagonal and **not
+dominant** — its diagonal is *exactly zero* — and it is **Fredholm with a kernel**. Whether
+their construction reaches that case **was not resolved in this pass** (the PDF did not
+extract) and is recorded as the open question it is, not as a gap in the literature.
+
+Leg 51's *prediction about the shape of the field* survives: the certified self-similar
+blow-ups using this machinery are dissipative; the certified inviscid ones (Chen–Hou) used
+weighted energy over 145 pages instead. **That is a consistency check, not evidence for the
+claim.**
+
+*Search-index observation, flagged for a later leg:* the query naming the April 2026
+Chen–Huang–Li reference this project's target rests on (`arXiv:2604.01868`) **did not
+resurface it** — only the 2021–2023 Hou–Luo work returned. That is a statement about the
+index, not about the paper; the repo's seventh-pass record stands.
+
+**(T-5) WHICH SIDE OF `s = 1` THE OBSTRUCTION IS ON — STATED BEFORE THE LADDERS, BECAUSE IT
+PREDICTS THEM.** In `w_k = (1+k)^s`:
+
+```
+kernel     h_m ~ m^(-2.0024)   ->  IN the space          iff  s < 1
+cokernel   u_m ~ m^(+1.0012)   ->  functional BOUNDED    iff  s >= 1
+```
+
+**The two failure modes swap at `s = 1`.** Bordering adds a missing range direction and
+kills a kernel; it cannot repair a cokernel functional that is not in the dual. So bordering
+**must** work below `s = 1` and **must not** work at or above it. This was written down
+before the ladders ran.
+
+**And it explains leg 51's U-curve.** That curve's minimum sat at `s = 1.00` — which is not
+a near-miss to push on, it is **exactly the point where the operator is marginally *both*
+failure modes at once.** The least-bad point of the failure curve was the one place the
+repair could not work.
+
+**(T-1) THE LADDERS.** `K = 64` retained modes, tail on modes `65 … M`, `M ∈ {320, 576,
+1088, 2112, 3136}`. `‖·‖` is the weighted `ℓ¹` operator norm of the inverse of the bordered
+block.
+
+| class | admissible? | unbordered | **bordered (analytic)** | shape |
+|---|---|---|---|---|
+| flat `s = 0` | **yes** | 4.06 → 48.76 (`M^{+1.085}`) | **7.46 → 9.44** (`M^{+0.100}`) | **SATURATES** |
+| algebraic `s = 0.3` | **yes** | 3.03 → 20.67 (`M^{+0.837}`) | **8.09 → 11.37** (`M^{+0.147}`) | **SATURATES** |
+| algebraic `s = 0.394` | boundary | 2.77 → 16.04 (`M^{+0.765}`) | **8.30 → 12.16** (`M^{+0.165}`) | **SATURATES** |
+| algebraic `s = 1.0` | no | 1.64 → 3.94 (`M^{+0.379}`) | 9.89 → 20.51 (`M^{+0.319}`) | still growing |
+| algebraic `s = 1.5` | no | 2.41 → 11.54 (`M^{+0.681}`) | 11.44 → 31.81 (`M^{+0.448}`) | still growing |
+
+"Admissible" = the **target** profile `Ω ~ |X|^{−α}`, `α = 0.394`, has finite norm in the
+class (`s < α`; `s = 0.394` is the excluded boundary and is reported because it saturates
+anyway).
+
+**THE ORDERING INVERTS.** Unbordered, `s = 1` was the best class and `s = 0` the worst.
+Bordered, `s = 0` and `s = 0.3` are bounded and `s = 1` is not. **The repair works precisely
+where leg 51's curve looked most hopeless.**
+
+**Saturation is reported as a shape, not an endpoint (72).** Flat-class increments
+`0.864 → 0.616 → 0.369 → 0.133`; `s = 0.3`, `1.212 → 1.019 → 0.738 → 0.314`. Falling, and
+the exponent drops by an order of magnitude (`1.085 → 0.100`). At `s = 1` the increments
+*rise* (`2.44 → 2.92 → 3.25`) before the last rung.
+
+**(T-1b) THE WINDOW IS NO LONGER EMPTY.** Leg 51: object needs `s < 0.394`, operator wanted
+`s ≈ 1`, **gap 0.606 in exponent units, no point of the curve touching zero.** Leg 52: the
+bordered operator is bounded at `s = 0` and `s = 0.3`, **inside** the object's admissible
+band. The two sides now overlap. *That is the result of this leg.*
+
+**(T-2) THE BORDER A PROOF CAN WRITE DOWN IS AS GOOD AS THE BEST ONE THAT EXISTS.**
+`analytic / SVD` at the top rung — the SVD pair being the most favourable one-dimensional
+bordering that exists at all:
+
+```
+flat 1.000   s=0.3 1.007   s=0.394 1.012   |   s=1 1.130   s=1.5 1.383
+```
+
+In the admissible classes the explicit far-field mode and its adjoint **achieve the optimum
+to three digits.** This is the clause that makes the repair usable rather than an SVD
+artifact: a certificate cannot border with a singular vector it computed, it has to border
+with a mode it can write down.
+
+**(T-4) THE ALIGNMENT IS THE PHYSICS, AND IT DEGRADES WITH THE REPAIR.** `|cos|` between the
+optimal border direction and the analytic far-field mode, top rung: **1.00000** (flat),
+**0.99996** (`s = 0.3`), 0.99991 (`0.394`), 0.99300 (`s = 1`), **0.90209** (`s = 1.5`) — and
+at `s = 1.5` it is flat in `M`, i.e. not converging to the far field at all. **Alignment and
+usefulness fail together**, which is what the story predicts and what a coincidence would
+not.
+
+So the repair is not "border by something"; it is **"add the far-field amplitude as an
+unknown."**
+
+**(T-3) TWO NEGATIVE CONTROLS, BOTH DIVERGE.** *Second* singular pair (the wrong direction):
+13.04 → 48.76 flat — **exactly the unbordered value at the top rung**, so bordering in the
+wrong direction is asymptotically worth nothing at all. *Random* pair, flat class:
+`1584, 324, 379, 537, 668` — the first rung is an outlier of the draw, and from the second
+onward it **rises**, ending 70× the analytic border's 9.44. Neither control saturates in any
+of the five classes. "Bordering fixes it" is a measurement because bordering can also fail.
+
+**(T-1c) THE KERNEL IS ONE-DIMENSIONAL, MEASURED.** `σ_min` falls `2.71e−01 → 8.54e−03`
+(flat) while `σ_2` stays bounded away, `2.092 → 1.652`. One singular value goes to zero and
+the next does not — independent confirmation of the analytic claim that the block's first
+row kills one of the two parity chains.
+
+**NEW BANKED LESSON (88). THE MINIMUM OF A FAILURE CURVE IS NOT WHERE TO REPAIR IT.**
+Leg 51 swept a weight exponent, found a U-curve, and read its minimum as "closest to
+working". It was the opposite: `s = 1` is where the kernel leaves the space at the same
+moment the cokernel functional enters the dual, so it is the one exponent at which the
+failure is *irreparable by bordering*. **Decompose a failure by mechanism before optimising
+along its parameter** — and when two mechanisms trade off, the optimum of their sum is the
+worst place to stand, not the best.
+
+**CEILING (pre-committed, clause T-6, written before any number existed).** **A bounded
+bordered tail is not a certificate.** What is measured is the weighted `ℓ¹` operator norm of
+the inverse of *the tail block plus one border row and one border column*, as the number of
+retained modes grows. In a certificate the border is a **new unknown** — the far-field
+amplitude — and it needs its own column in the finite block, its own contribution to `Y₀`,
+and a **matching condition** between the spectral tail and the asymptotic expansion.
+**None of that is written here.** The object is still the `a = 0` CLM linearisation — one
+mode, analytic — so a *success* there bounds the difficulty for `HL_S2_nonsymmetric` **from
+below, not above**, exactly as leg 51's failure did. **Nothing is claimed about
+`HL_S2_nonsymmetric`. No link of the L1→L4 chain moved. Clay unchanged at ~0.05%.**

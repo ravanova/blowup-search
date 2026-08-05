@@ -1,0 +1,744 @@
+{
+ "leg": 52,
+ "route": "T",
+ "version": "v1",
+ "K_tail": 64,
+ "target_alpha": 0.394,
+ "T0_novelty": {
+  "precedents": [
+   {
+    "id": "arXiv:1503.06315",
+    "who": "Breden, Desvillettes, Lessard (2015)",
+    "what": "'Rigorous numerics for nonlinear operators with TRIDIAGONAL DOMINANT linear part'. States the problem this leg ran into in almost these words -- the derivative 'does not have an asymptotically diagonal dominant structure', so the approximate inverse is not straightforward -- and supplies a construction for A in that setting.",
+    "verdict": "ADJACENT_AND_NARROWS_THE_CLAIM",
+    "why": "The general observation is NOT new: the field knows the standard tail estimate assumes an eventually-diagonal operator, and has already extended it to tridiagonal DOMINANT ones. Our tail is tridiagonal and NOT dominant -- its diagonal is exactly zero and it is Fredholm with a kernel. Whether their construction covers that case was NOT resolved in this pass (the PDF did not extract); it is recorded as the open question it is."
+   },
+   {
+    "id": "standard ell^1_nu framework",
+    "who": "the radii-polynomial literature (Lessard, Mireles James, van den Berg, ...)",
+    "what": "The spectrum of an EVENTUALLY DIAGONAL operator on ell^1_nu is read off the tail's diagonal entries; tail estimates are built on exactly that.",
+    "verdict": "CONFIRMS_THE_ASSUMPTION_IS_STANDARD",
+    "why": "So 'the method assumes a multiplier' is a correct reading of the framework and not a discovery. What leg 51 measured that this does not cover is the specific structure of inviscid self-similar transport: zero diagonal, and a kernel that IS the far field."
+   },
+   {
+    "id": "arXiv:2210.07191 + arXiv:2305.05660",
+    "who": "Chen, Hou",
+    "what": "Certified INVISCID self-similar blowup (2D Boussinesq / 3D Euler with boundary) using weighted L^inf and C^{1/2} norms and WEIGHTED ENERGY ESTIMATES -- not a radii polynomial in a sequence space.",
+    "verdict": "CONFIRMS_LEG_51_PREDICTION",
+    "why": "Leg 51 predicted the shape of the field: certified self-similar blowups using ell^1-Fourier machinery are dissipative (Dahne-Figueras, CGL), while the certified inviscid ones use weighted energy instead. The prediction survives this pass. It is a consistency check, not evidence for our claim."
+   }
+  ],
+  "search_log": [
+   [
+    "radii polynomial validated numerics self-similar blowup transport equation tail estimate unbounded operator shift",
+    8
+   ],
+   [
+    "computer-assisted proof self-similar blowup weighted energy versus radii polynomial inviscid Euler Boussinesq",
+    10
+   ],
+   [
+    "radii polynomial OR Fourier-Taylor validated numerics ell^1 nu weights tail estimate requires dominant diagonal unbounded domain algebraic decay",
+    8
+   ],
+   [
+    "validated numerics rigorous computer-assisted 'not diagonally dominant' tail estimate sequence space transport operator shift no diagonal fails",
+    10
+   ],
+   [
+    "Chen Huang Li 2026 Hou-Luo model non-symmetric self-similar profile blowup proof",
+    5
+   ]
+  ],
+  "verdict": "PROCEED_NARROW",
+  "target_reference_not_resurfaced": true
+ },
+ "T5_fredholm": {
+  "kernel_exponent": -2.0023629289626506,
+  "cokernel_exponent": 1.001176619083868,
+  "kernel_in_space_iff": "s < 1",
+  "cokernel_bounded_iff": "s >= 1",
+  "crossing": 1.0
+ },
+ "T1_ladders": [
+  {
+   "class": "flat",
+   "param": 0.0,
+   "M": [
+    320,
+    576,
+    1088,
+    2112,
+    3136
+   ],
+   "analytic": [
+    7.45591542006977,
+    8.319619552760459,
+    8.936104776983512,
+    9.305394339031547,
+    9.438643302621854
+   ],
+   "analytic_shape": {
+    "increments": [
+     0.8637041326906889,
+     0.6164852242230534,
+     0.369289562048035,
+     0.13324896359030625
+    ],
+    "increment_ratio": 0.1542761676677372,
+    "exponent": 0.1004703162957285,
+    "last": 9.438643302621854,
+    "saturating": true
+   },
+   "svd": [
+    7.461622920853337,
+    8.324245666951938,
+    8.937430005137958,
+    9.305649844241236,
+    9.43873148638943
+   ],
+   "svd_shape": {
+    "increments": [
+     0.8626227460986016,
+     0.61318433818602,
+     0.3682198391032774,
+     0.13308164214819485
+    ],
+    "increment_ratio": 0.15427560048710218,
+    "exponent": 0.10011750287375114,
+    "last": 9.43873148638943,
+    "saturating": true
+   },
+   "second": [
+    13.042248141906406,
+    17.159504736653133,
+    22.779944999422057,
+    32.50793650793645,
+    48.761904761904674
+   ],
+   "second_shape": {
+    "increments": [
+     4.117256594746728,
+     5.620440262768923,
+     9.727991508514393,
+     16.253968253968225
+    ],
+    "increment_ratio": 3.9477666450779187,
+    "exponent": 0.5527225146800826,
+    "last": 48.761904761904674,
+    "saturating": false
+   },
+   "random": [
+    1583.6558340153051,
+    324.02500740460835,
+    378.6228547878739,
+    536.9609502548084,
+    668.3602432862976
+   ],
+   "random_shape": {
+    "increments": [
+     -1259.6308266106967,
+     54.59784738326556,
+     158.33809546693448,
+     131.39929303148926
+    ],
+    "increment_ratio": -0.10431571715742054,
+    "exponent": -0.21923783648385292,
+    "last": 668.3602432862976,
+    "saturating": false
+   },
+   "unbordered": [
+    4.063492063492059,
+    8.126984126984137,
+    16.25396825396824,
+    32.50793650793645,
+    48.76190476190467
+   ],
+   "unbordered_shape": {
+    "increments": [
+     4.063492063492078,
+     8.126984126984102,
+     16.25396825396821,
+     16.253968253968218
+    ],
+    "increment_ratio": 3.9999999999999765,
+    "exponent": 1.0847835611400405,
+    "last": 48.76190476190467,
+    "saturating": false
+   },
+   "sigma_min": [
+    0.27054435927982595,
+    0.10934523820114067,
+    0.0418669268889666,
+    0.015461264397919651,
+    0.008543769642063541
+   ],
+   "sigma_2": [
+    2.0920168599674276,
+    1.8768741476785153,
+    1.7549993901424932,
+    1.6818978737025405,
+    1.6524124868677408
+   ],
+   "alignment": [
+    0.9969021388594266,
+    0.9993924177263516,
+    0.9999049732500042,
+    0.9999868009426627,
+    0.9999959559686408
+   ],
+   "object_has_finite_norm": true
+  },
+  {
+   "class": "algebraic",
+   "param": 0.3,
+   "M": [
+    320,
+    576,
+    1088,
+    2112,
+    3136
+   ],
+   "analytic": [
+    8.087034072079199,
+    9.29885322501794,
+    10.317915369286418,
+    11.055945930100606,
+    11.369619811899355
+   ],
+   "analytic_shape": {
+    "increments": [
+     1.211819152938741,
+     1.019062144268478,
+     0.7380305608141882,
+     0.3136738817987492
+    ],
+    "increment_ratio": 0.2588454564677159,
+    "exponent": 0.14682230136215776,
+    "last": 11.369619811899355,
+    "saturating": true
+   },
+   "svd": [
+    7.944985317806833,
+    9.148894745943743,
+    10.185219981183675,
+    10.956750092284688,
+    11.290152115508274
+   ],
+   "svd_shape": {
+    "increments": [
+     1.2039094281369094,
+     1.0363252352399321,
+     0.7715301111010131,
+     0.33340202322358614
+    ],
+    "increment_ratio": 0.27693281191388047,
+    "exponent": 0.1517046772275541,
+    "last": 11.290152115508274,
+    "saturating": true
+   },
+   "second": [
+    12.834097102995576,
+    17.01839546234626,
+    22.768870383477598,
+    30.453749948456508,
+    36.05370871035907
+   ],
+   "second_shape": {
+    "increments": [
+     4.184298359350683,
+     5.750474921131339,
+     7.68487956497891,
+     5.59995876190256
+    ],
+    "increment_ratio": 1.3383268306831635,
+    "exponent": 0.4518812101144622,
+    "last": 36.05370871035907,
+    "saturating": false
+   },
+   "random": [
+    3454.15286854734,
+    384.80476300321203,
+    432.03035192295954,
+    635.1382135486232,
+    792.3587620382484
+   ],
+   "random_shape": {
+    "increments": [
+     -3069.348105544128,
+     47.22558891974751,
+     203.10786162566365,
+     157.22054848962523
+    ],
+    "increment_ratio": -0.051222781868775186,
+    "exponent": -0.4311378305355777,
+    "last": 792.3587620382484,
+    "saturating": false
+   },
+   "unbordered": [
+    3.0285100389533617,
+    5.3078559269792045,
+    9.095855309689856,
+    15.324048211529236,
+    20.66899793139135
+   ],
+   "unbordered_shape": {
+    "increments": [
+     2.279345888025843,
+     3.7879993827106517,
+     6.22819290183938,
+     5.344949719862113
+    ],
+    "increment_ratio": 2.3449489381760356,
+    "exponent": 0.8370100561763463,
+    "last": 20.66899793139135,
+    "saturating": false
+   },
+   "sigma_min": [
+    0.36409363467523453,
+    0.1715506386344922,
+    0.07865418380534603,
+    0.035304026957120344,
+    0.021945411076604637
+   ],
+   "sigma_2": [
+    1.8489518425430147,
+    1.6219967761916998,
+    1.4907008294399853,
+    1.4103902791727012,
+    1.377533348169334
+   ],
+   "alignment": [
+    0.9928785651647855,
+    0.9979197391799657,
+    0.9995026880496928,
+    0.9998945579963662,
+    0.9999587392454428
+   ],
+   "object_has_finite_norm": true
+  },
+  {
+   "class": "algebraic",
+   "param": 0.394,
+   "M": [
+    320,
+    576,
+    1088,
+    2112,
+    3136
+   ],
+   "analytic": [
+    8.30209111511902,
+    9.644721602609312,
+    10.83293374726694,
+    11.74676754778686,
+    12.15571534967583
+   ],
+   "analytic_shape": {
+    "increments": [
+     1.3426304874902915,
+     1.1882121446576281,
+     0.9138338005199191,
+     0.40894780188897073
+    ],
+    "increment_ratio": 0.304587007146989,
+    "exponent": 0.16481014175532985,
+    "last": 12.15571534967583,
+    "saturating": true
+   },
+   "svd": [
+    8.096516881553017,
+    9.416688399194223,
+    10.618333226049545,
+    11.574286176902767,
+    12.01140825652353
+   ],
+   "svd_shape": {
+    "increments": [
+     1.3201715176412065,
+     1.201644826855322,
+     0.9559529508532219,
+     0.43712207962076377
+    ],
+    "increment_ratio": 0.33111006697204315,
+    "exponent": 0.17082584952147328,
+    "last": 12.01140825652353,
+    "saturating": true
+   },
+   "second": [
+    12.769317235975226,
+    16.97599714325781,
+    22.77183762787202,
+    30.532608760350648,
+    36.194711816914335
+   ],
+   "second_shape": {
+    "increments": [
+     4.2066799072825845,
+     5.79584048461421,
+     7.760771132478627,
+     5.662103056563687
+    ],
+    "increment_ratio": 1.3459790574418276,
+    "exponent": 0.45581327630044477,
+    "last": 36.194711816914335,
+    "saturating": false
+   },
+   "random": [
+    1806.3703855869912,
+    408.551526795845,
+    452.30952390483026,
+    679.4020680930244,
+    846.1370006566575
+   ],
+   "random_shape": {
+    "increments": [
+     -1397.8188587911463,
+     43.75799710898525,
+     227.0925441881941,
+     166.73493256363315
+    ],
+    "increment_ratio": -0.11928221708771901,
+    "exponent": -0.1830399104933491,
+    "last": 846.1370006566575,
+    "saturating": false
+   },
+   "unbordered": [
+    2.7720843384110685,
+    4.674368437268984,
+    7.6575431888625785,
+    12.270413536767764,
+    16.042149795248605
+   ],
+   "unbordered_shape": {
+    "increments": [
+     1.9022840988579155,
+     2.9831747515935945,
+     4.612870347905186,
+     3.771736258480841
+    ],
+    "increment_ratio": 1.982740780278455,
+    "exponent": 0.764623784001748,
+    "last": 16.042149795248605,
+    "saturating": false
+   },
+   "sigma_min": [
+    0.3977962960110466,
+    0.19612892675861462,
+    0.09494147446114051,
+    0.04524534696952728,
+    0.029170687581630807
+   ],
+   "sigma_2": [
+    1.7744690244761039,
+    1.543862212132927,
+    1.409543771655532,
+    1.3268420172247628,
+    1.2928401405153764
+   ],
+   "alignment": [
+    0.9908656075680936,
+    0.9969824447701386,
+    0.9991739037279309,
+    0.9997991148049695,
+    0.999914930580697
+   ],
+   "object_has_finite_norm": false
+  },
+  {
+   "class": "algebraic",
+   "param": 1.0,
+   "M": [
+    320,
+    576,
+    1088,
+    2112,
+    3136
+   ],
+   "analytic": [
+    9.892873114229637,
+    12.336960383335757,
+    15.253096128381241,
+    18.49927307871324,
+    20.505737964110544
+   ],
+   "analytic_shape": {
+    "increments": [
+     2.44408726910612,
+     2.9161357450454837,
+     3.246176950332,
+     2.0064648853973033
+    ],
+    "increment_ratio": 0.8209464984166178,
+    "exponent": 0.3185217613105546,
+    "last": 20.505737964110544,
+    "saturating": false
+   },
+   "svd": [
+    9.041063057377185,
+    11.111305763775048,
+    13.586269022572505,
+    16.38435709439712,
+    18.145783911475174
+   ],
+   "svd_shape": {
+    "increments": [
+     2.0702427063978632,
+     2.474963258797457,
+     2.7980880718246155,
+     1.7614268170780534
+    ],
+    "increment_ratio": 0.8508310700163573,
+    "exponent": 0.30449934600006456,
+    "last": 18.145783911475174,
+    "saturating": false
+   },
+   "second": [
+    12.350379908388952,
+    16.708648260084566,
+    22.848515209839828,
+    31.238650263971607,
+    37.446495851033816
+   ],
+   "second_shape": {
+    "increments": [
+     4.358268351695614,
+     6.1398669497552625,
+     8.390135054131779,
+     6.207845587062209
+    ],
+    "increment_ratio": 1.4243835133848528,
+    "exponent": 0.4854116044200884,
+    "last": 37.446495851033816,
+    "saturating": false
+   },
+   "random": [
+    516.8117174015332,
+    668.9280700305976,
+    629.8949943575923,
+    1243.1695593638487,
+    1530.6744021009902
+   ],
+   "random_shape": {
+    "increments": [
+     152.1163526290644,
+     -39.03307567300533,
+     613.2745650062565,
+     287.5048427371414
+    ],
+    "increment_ratio": 1.8900324506085266,
+    "exponent": 0.47247346985166694,
+    "last": 1530.6744021009902,
+    "saturating": false
+   },
+   "unbordered": [
+    1.637348011006387,
+    2.2318231895748726,
+    2.8727463179138204,
+    3.5393116273159166,
+    3.9359307810980315
+   ],
+   "unbordered_shape": {
+    "increments": [
+     0.5944751785684856,
+     0.6409231283389478,
+     0.6665653094020962,
+     0.3966191537821149
+    ],
+    "increment_ratio": 0.6671752969353336,
+    "exponent": 0.3793855846239474,
+    "last": 3.9359307810980315,
+    "saturating": false
+   },
+   "sigma_min": [
+    0.6667588042605233,
+    0.42255010044522956,
+    0.27730778847208143,
+    0.18672899647974436,
+    0.14945571229870572
+   ],
+   "sigma_2": [
+    1.3179682584307477,
+    1.0664958507683218,
+    0.9136411646090793,
+    0.8151950580829442,
+    0.7732304665805363
+   ],
+   "alignment": [
+    0.9616932678061,
+    0.9741550083940889,
+    0.9837293575757794,
+    0.9903116026097448,
+    0.9929961769291795
+   ],
+   "object_has_finite_norm": false
+  },
+  {
+   "class": "algebraic",
+   "param": 1.5,
+   "M": [
+    320,
+    576,
+    1088,
+    2112,
+    3136
+   ],
+   "analytic": [
+    11.44016405309688,
+    15.01320977119469,
+    19.99297137621834,
+    26.777955697049784,
+    31.81061246266558
+   ],
+   "analytic_shape": {
+    "increments": [
+     3.573045718097811,
+     4.979761605023649,
+     6.784984320831445,
+     5.032656765615798
+    ],
+    "increment_ratio": 1.4085061212972787,
+    "exponent": 0.44764748247495,
+    "last": 31.81061246266558,
+    "saturating": false
+   },
+   "svd": [
+    9.747979753880154,
+    12.297768343238175,
+    15.657820706891917,
+    19.96468331226898,
+    23.009334152562907
+   ],
+   "svd_shape": {
+    "increments": [
+     2.5497885893580214,
+     3.3600523636537414,
+     4.306862605377065,
+     3.044650840293926
+    ],
+    "increment_ratio": 1.194079718217148,
+    "exponent": 0.3757932655575828,
+    "last": 23.009334152562907,
+    "saturating": false
+   },
+   "second": [
+    11.986950055025408,
+    16.444331449933347,
+    22.876948276161507,
+    31.913886819979314,
+    38.75609650186191
+   ],
+   "second_shape": {
+    "increments": [
+     4.457381394907939,
+     6.432616826228159,
+     9.036938543817808,
+     6.842209681882597
+    ],
+    "increment_ratio": 1.5350289947589089,
+    "exponent": 0.5136216049686732,
+    "last": 38.75609650186191,
+    "saturating": false
+   },
+   "random": [
+    379.5578558635639,
+    1431.6930844653675,
+    814.7244236870843,
+    1840.5581828374352,
+    2545.2470770565433
+   ],
+   "random_shape": {
+    "increments": [
+     1052.1352286018036,
+     -616.9686607782833,
+     1025.833759150351,
+     704.6888942191081
+    ],
+    "increment_ratio": 0.6697702681770085,
+    "exponent": 0.6854896433811062,
+    "last": 2545.2470770565433,
+    "saturating": false
+   },
+   "unbordered": [
+    2.410444800524048,
+    3.8796033326788644,
+    6.032628230012823,
+    9.13539125033657,
+    11.535800097489647
+   ],
+   "unbordered_shape": {
+    "increments": [
+     1.4691585321548164,
+     2.1530248973339585,
+     3.1027630203237466,
+     2.400408847153077
+    ],
+    "increment_ratio": 1.6338664579869369,
+    "exponent": 0.6813637704133441,
+    "last": 11.535800097489647,
+    "saturating": false
+   },
+   "sigma_min": [
+    0.9523976997211095,
+    0.6986996084771431,
+    0.5426403048967327,
+    0.440345057706545,
+    0.39595417798191146
+   ],
+   "sigma_2": [
+    0.9806202946860397,
+    0.7209065801946956,
+    0.5600516962942597,
+    0.4540877908818402,
+    0.407984040770917
+   ],
+   "alignment": [
+    0.9037757329340864,
+    0.9031749874506729,
+    0.9027071477160415,
+    0.9023001603968834,
+    0.9020870579982572
+   ],
+   "object_has_finite_norm": false
+  }
+ ],
+ "T2_analytic_vs_svd": [
+  {
+   "class": "flat",
+   "param": 0.0,
+   "ratio_last": 0.999990657243751
+  },
+  {
+   "class": "algebraic",
+   "param": 0.3,
+   "ratio_last": 1.0070386736669317
+  },
+  {
+   "class": "algebraic",
+   "param": 0.394,
+   "ratio_last": 1.0120141693688518
+  },
+  {
+   "class": "algebraic",
+   "param": 1.0,
+   "ratio_last": 1.130055227382211
+  },
+  {
+   "class": "algebraic",
+   "param": 1.5,
+   "ratio_last": 1.3825090396682487
+  }
+ ],
+ "T3_controls_diverge": true,
+ "T4_alignment_top": {
+  "flat_0.0": 0.9999959559686408,
+  "algebraic_0.3": 0.9999587392454428,
+  "algebraic_0.394": 0.999914930580697,
+  "algebraic_1.0": 0.9929961769291795,
+  "algebraic_1.5": 0.9020870579982572
+ },
+ "T6_ceiling": "A bounded bordered TAIL is not a certificate. What is measured here is the weighted l^1 operator norm of the inverse of the tail block plus one border row and one border column, as the number of retained modes grows. In a certificate the border is a NEW UNKNOWN -- the far-field amplitude -- which needs its own column in the finite block, its own contribution to Y_0, and a matching condition between the spectral tail and the asymptotic expansion. None of that is written here. The object is still the a = 0 CLM linearisation, and nothing is claimed about HL_S2_nonsymmetric.",
+ "gate_admissible_classes_saturate": true,
+ "verdict": "BORDERING_RESTORES_A_BOUNDED_TAIL_IN_THE_ADMISSIBLE_CLASSES",
+ "elapsed_s": 153.85838794708252
+}

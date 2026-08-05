@@ -409,6 +409,134 @@ def homogeneous_tail_mode(m_max, h1=1.0, h2=1.0):
 
 
 # --------------------------------------------------------------------------
+# ROUTE T -- bordering the tail with the far field it cannot invert
+# --------------------------------------------------------------------------
+def tail_right_null(K, M):
+    """The tail operator's KERNEL direction on modes K+1..M (h_K = 0 imposed).
+
+    Solves T h = 0 by the two-term recursion.  The block's first row involves the mode
+    K that lies outside it, which kills one of the two parity chains -- so the kernel is
+    ONE-dimensional, not two, and `tail_singular_pair` confirms that independently
+    (one singular value going to zero, the next bounded away)."""
+    n = int(M) - int(K)
+    h = np.zeros(n)
+    h[0] = 1.0
+    for j in range(1, n - 1):
+        k = K + 1 + j
+        h[j + 1] = -(1.0 - (k - 1) / 2.0) * h[j - 1] / ((k + 1) / 2.0)
+    return h
+
+
+def tail_left_null(K, M):
+    """The tail operator's COKERNEL functional, u with u^T T = 0.
+
+    Column k has entries (1 - k/2) at row j+1 and (k/2) at row j-1, so
+    (1 - k/2) u_{j+1} + (k/2) u_{j-1} = 0.  T maps one parity to the other, so u lives
+    on the OPPOSITE parity chain from the kernel -- getting that wrong makes the
+    bordered matrix singular, which is how the parity was found."""
+    n = int(M) - int(K)
+    u = np.zeros(n)
+    u[1] = 1.0
+    for j in range(2, n - 1):
+        k = K + 1 + j
+        u[j + 1] = -(k / 2.0) * u[j - 1] / (1.0 - k / 2.0)
+    return u
+
+
+def _scaled_tail(K, M, kind, param, mu=0.0):
+    T = tail_block(K, M, mu=mu)
+    k = np.arange(int(K) + 1, int(M) + 1, dtype=float)
+    if kind == "flat":
+        lw = np.zeros_like(k)
+    elif kind == "algebraic":
+        lw = float(param) * np.log1p(k)
+    elif kind == "geometric":
+        lw = k * np.log(float(param))
+    else:
+        raise ValueError(kind)
+    return T * np.exp(lw[:, None] - lw[None, :]), np.exp(lw)
+
+
+def tail_singular_pair(K, M, kind="flat", param=0.0):
+    """(sigma_min, sigma_2, alignment) for the weighted tail block.
+
+    `alignment` is |cos| between the smallest right singular vector and the ANALYTIC
+    kernel direction, in the same weighted coordinates.  It answers the question that
+    decides whether the repair is meaningful: is the direction a certificate would have
+    to border the FAR FIELD, or just whatever the SVD happens to find?"""
+    Ts, w = _scaled_tail(K, M, kind, param)
+    U, S, Vt = np.linalg.svd(Ts)
+    h = tail_right_null(K, M) * w
+    nh = np.linalg.norm(h)
+    align = float(abs(h @ Vt[-1, :]) / nh) if nh > 0 else 0.0
+    return float(S[-1]), float(S[-2]), align
+
+
+def bordered_tail_inverse_norm(K, M, kind="flat", param=0.0, border="analytic",
+                               mu=0.0, seed=0):
+    """||B^{-1}||_w for the tail block bordered by ONE row and ONE column.
+
+        B = [[T, u], [v^T, 0]]
+
+    with `v` pinning the kernel (an extra equation) and `u` supplying the missing range
+    direction (an extra unknown).  In a certificate those are not bookkeeping: the extra
+    unknown is the FAR-FIELD AMPLITUDE and the extra equation is its matching condition.
+
+    `border` selects where the pair comes from, and the choices are the experiment:
+      "analytic"  the explicit far-field mode and its adjoint (what a certificate can
+                  actually write down);
+      "svd"       the smallest singular pair -- the most favourable 1-dimensional
+                  bordering that exists, so if THIS diverges nothing works;
+      "second"    the SECOND singular pair -- the wrong direction, as a negative control;
+      "random"    a random pair, the other negative control.
+    Both vectors are normalised, so the number is not an artifact of their scale."""
+    Ts, w = _scaled_tail(K, M, kind, param, mu=mu)
+    if border == "analytic":
+        v = tail_right_null(K, M) * w
+        u = tail_left_null(K, M) * w
+    elif border in ("svd", "second"):
+        U, S, Vt = np.linalg.svd(Ts)
+        i = -1 if border == "svd" else -2
+        v, u = Vt[i, :], U[:, i]
+    elif border == "random":
+        rng = np.random.default_rng(seed)
+        n = int(M) - int(K)
+        v, u = rng.standard_normal(n), rng.standard_normal(n)
+    else:
+        raise ValueError(border)
+    v = v / np.linalg.norm(v)
+    u = u / np.linalg.norm(u)
+    n = Ts.shape[0]
+    B = np.empty((n + 1, n + 1))
+    B[:n, :n] = Ts
+    B[:n, n] = u
+    B[n, :n] = v
+    B[n, n] = 0.0
+    return float(np.max(np.abs(np.linalg.inv(B)).sum(0)))
+
+
+def fredholm_sides(K=64, M=3136):
+    """WHICH SIDE OF s = 1 THE OBSTRUCTION IS ON, measured rather than argued.
+
+    The kernel decays like m^-2 and the cokernel functional GROWS like m, so in
+    w_k = (1+k)^s:  the kernel is in the space iff s < 1, and the cokernel functional is
+    bounded on it iff s >= 1.  The two failure modes swap at s = 1, which is exactly
+    where leg 51's unbordered divergence curve had its minimum -- the operator is least
+    bad precisely where it is marginally BOTH."""
+    m = np.arange(K + 1, M + 1, dtype=float)
+    r, l = tail_right_null(K, M), tail_left_null(K, M)
+    out = {}
+    for lab, vec in (("kernel", r), ("cokernel", l)):
+        sel = (np.abs(vec) > 0) & (m > 200)
+        out[lab + "_exponent"] = float(
+            np.polyfit(np.log(m[sel]), np.log(np.abs(vec[sel])), 1)[0])
+    out["kernel_in_space_iff"] = "s < 1"
+    out["cokernel_bounded_iff"] = "s >= 1"
+    out["crossing"] = 1.0
+    return out
+
+
+# --------------------------------------------------------------------------
 # the positive control
 # --------------------------------------------------------------------------
 def dissipative_control(Ks=(32, 64, 128, 256), mus=(0.0, 0.1, 0.5, 1.0),

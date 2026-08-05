@@ -350,7 +350,37 @@ STAGES = [
         "id": "T",
         "name": ("The TAIL LEMMA: border the certificate with the far field the transport "
                  "operator cannot invert"),
-        "status": "NEXT",
+        "status": "DONE",
+        "outcome": (
+            "GATE ANSWERED **YES** AT LEG 52. One border row and one border column bound the "
+            "tail uniformly in M, in the classes where the target profile ALSO has finite "
+            "norm: flat 7.46 -> 9.44 (M^0.100 against M^1.085 unbordered) and s = 0.3, "
+            "8.09 -> 11.37 (M^0.147 against M^0.837). **The window leg 51 measured EMPTY by "
+            "0.606 in exponent units is no longer empty**, so L1's NO was a statement about "
+            "the STANDARD CONSTRUCTION and not about the object. "
+            "WHAT MAKES IT A MEASUREMENT AND NOT A FIT: (i) the failing side was PREDICTED "
+            "before the ladders ran, from the Fredholm structure alone -- kernel h_m ~ "
+            "m^-2.0024 is in the space iff s < 1, cokernel u_m ~ m^+1.0012 is a bounded "
+            "functional iff s >= 1, so bordering must help below s = 1 and not at or above "
+            "it; measured, it saturates at s = 0 and 0.3 and keeps growing at s = 1 and 1.5. "
+            "(ii) The ANALYTIC far-field mode -- the one a proof can write down -- achieves "
+            "the SVD optimum to three digits in the admissible classes (1.000 / 1.007), and "
+            "the alignment |cos| -> 1.00000; where the repair fails the alignment flatlines "
+            "at 0.902 and the ratio degrades to 1.383, i.e. the two fail TOGETHER. (iii) Two "
+            "negative controls diverge -- the second singular pair lands on 48.76, EXACTLY "
+            "the unbordered value, so a wrong direction is asymptotically worth nothing. "
+            "T-0 NOVELTY: PROCEED_NARROW. Breden-Desvillettes-Lessard arXiv:1503.06315 state "
+            "the 'not asymptotically diagonally dominant' problem in nearly leg 51's words "
+            "and give a construction for TRIDIAGONAL DOMINANT operators, so the general "
+            "observation is NOT new and leg 51's methodological claim drops to a "
+            "re-derivation. Whether their construction reaches a tridiagonal operator with "
+            "ZERO diagonal and a kernel was NOT resolved (the PDF did not extract) and is "
+            "recorded as an open question, not as a gap. "
+            "CEILING (pre-committed as clause T6 before any number existed): a bounded "
+            "bordered tail IS NOT A CERTIFICATE, and the object is still the a = 0 CLM "
+            "linearisation -- one mode, analytic -- so this bounds the difficulty for "
+            "HL_S2_nonsymmetric FROM BELOW, exactly as leg 51's failure did. Nothing is "
+            "claimed about the target. No link of the chain moved."),
         "why_here": (
             "L1 answered its gate with a NO whose term is named, and the gate's own no-branch "
             "says the weight class IS the finding. But leg 51 also identified the obstruction "
@@ -394,6 +424,59 @@ STAGES = [
         },
         "time_box": ("one leg. T-0 is a literature pass, T-1 is a measurement on machinery "
                      "that already exists. If T-1 needs a new solver, the plan was wrong."),
+    },
+    {
+        "id": "TC",
+        "name": ("ASSEMBLE the bordered certificate: give the far-field amplitude its own "
+                 "column, its own Y_0, and a matching condition"),
+        "status": "NEXT",
+        "why_here": (
+            "This stage is written by T's own yes-branch, and it is the ONLY thing that "
+            "converts leg 52 from a bounded term into a theorem. Leg 52 measured ONE term of "
+            "four in isolation: the weighted l^1 norm of the inverse of the tail block PLUS "
+            "one border row and one border column. In a certificate that border is not "
+            "bookkeeping -- it is a NEW UNKNOWN, the far-field amplitude -- and an unknown "
+            "that appears in the tail must also appear in the finite block, in the defect, "
+            "and in a condition matching the spectral series to the asymptotic expansion. "
+            "Until those three exist there is no radii polynomial, only three of its terms "
+            "and a fourth measured under an assumption about the fourth. The stage is named "
+            "now, before the assembly, so that 'the tail is bounded' cannot be quietly read "
+            "as 'the certificate closes' in the interval between."),
+        "deliverable": (
+            "TC-1 THE AUGMENTED SYSTEM. Extend the bordered linearisation so the far-field "
+            "amplitude is a genuine unknown: one extra column in the finite block (how the "
+            "amplitude feeds back into modes 1..K), one extra row (the matching condition), "
+            "and the tail block bordered as leg 52 measured it. solver/spectral_certificate.py "
+            "carries the tail side (bordered_tail_inverse_norm, tail_right_null, "
+            "tail_left_null); what is missing is the COUPLING, and that is where the work is. "
+            "TC-2 THE FOUR TERMS AGAINST EACH OTHER, WHICH IS THE POINT. Leg 51 gave Y_0 = 0 "
+            "exactly, Z_1 = 1.44e-10, Z_2 = 79.5 on the FINITE block alone; leg 52 gives a "
+            "tail constant of 9.44 (flat) / 11.37 (s = 0.3). Those numbers have never been "
+            "put in the same polynomial, and the tail constant is NOT small next to Z_2. "
+            "Assemble them and report whether Z_2 r^2 - (1 - Z_1) r + Y_0 <= 0 has a root. "
+            "TC-3 THE BORDER'S OWN DEFECT. The matching condition has a residual of its own; "
+            "it enters Y_0 and it has never been computed. Report it as a magnitude, and if "
+            "it dominates, say which term it dominates."),
+        "gate": {
+            "question": ("With the far-field amplitude carried as a real unknown through all "
+                         "four terms, does the radii polynomial close -- on the a = 0 CLM "
+                         "object, in a class with s < 0.394?"),
+            "if_yes": ("Then the tail lemma exists as an assembled object rather than as a "
+                       "measured term, and the next question is the ONLY one that matters: "
+                       "re-run it on HL_S2_nonsymmetric, whose profile is not one basis mode "
+                       "and whose coefficients decay ALGEBRAICALLY. Do not claim anything "
+                       "about the target before that run. Report the margin, and report which "
+                       "of the four terms is closest to spending it."),
+            "if_no": ("Report WHICH TERM ran out, and do not repair it by tuning s -- lesson "
+                      "88 is precisely that the parameter's optimum is not where the mechanism "
+                      "lives. If it is the TAIL CONSTANT being too large next to Z_2, that is "
+                      "a statement that bordering fixed the boundedness and not the size, and "
+                      "it should be written up as one. If it is the MATCHING CONDITION's own "
+                      "defect, the coupling is wrong and the stage was mis-specified."),
+        },
+        "time_box": ("one leg for the assembly, one for the four terms. If TC-1 needs a new "
+                     "basis, stop -- leg 51 already chose the basis and leg 52 already "
+                     "measured the tail in it."),
     },
     {
         "id": "B",
@@ -452,6 +535,20 @@ BANNED = [
     ("sweeping another weight FAMILY without first bordering the tail -- leg 51 measured "
      "flat, algebraic (nine exponents) and geometric, and the divergence curve has no zero; "
      "the obstruction is the tail operator's kernel, not the shape of the weight", "T"),
+    ("reading leg 52's BOUNDED bordered tail as a certificate, or as a statement about "
+     "HL_S2_nonsymmetric -- it is ONE of four terms, measured in isolation on the a=0 CLM "
+     "object, and the border it adds is an unknown with no column, no Y_0 and no matching "
+     "condition yet", "TC"),
+    ("tuning the weight exponent s toward the minimum of leg 51's divergence curve -- that "
+     "minimum (s = 1) is where the kernel leaves the space at the same moment the cokernel "
+     "functional enters the dual, i.e. the ONE exponent at which bordering cannot help; "
+     "leg 52 measured the repair working at s = 0 and 0.3 and failing at s = 1 and 1.5",
+     "never -- lesson 88, and the mechanism is measured, not argued"),
+    ("re-claiming leg 51's methodological finding at full strength -- T-0 found "
+     "Breden-Desvillettes-Lessard arXiv:1503.06315 stating the same problem for TRIDIAGONAL "
+     "DOMINANT operators, so the general observation is a re-derivation; only the zero-"
+     "diagonal Fredholm case is possibly open, and THAT was not resolved",
+     "never -- unless a pass resolves whether BDL's construction covers a zero diagonal"),
     ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
      "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "
      "not, and does not have finite norm in the class where the operator is least bad",

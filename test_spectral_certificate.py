@@ -17,8 +17,11 @@ from solver.spectral_certificate import (
     algebra_constant, bordered_linearization, clm_anchor, clm_residual,
     clm_residual_exact, dissipative_control, exact_inverse_norm,
     finite_section_inverse_norm, hilbert_identity_defect, homogeneous_tail_mode,
-    quadratic_bound, rigorous_finite_block, tail_diagonal, tail_inverse_norm,
+    quadratic_bound, rigorous_finite_block, tail_block, tail_diagonal,
+    tail_inverse_norm,
     velocity_constant_terms, weight_window, weighted_l1_opnorm, weight_vector,
+    bordered_tail_inverse_norm, fredholm_sides, tail_left_null, tail_right_null,
+    tail_singular_pair,
 )
 
 PASS, FAIL = "PASS", "FAIL"
@@ -147,6 +150,83 @@ wv = np.array([1.0, 2.0])
 explicit = max((1 * 1 + 2 * 3) / 1, (1 * 2 + 2 * 4) / 2)
 gate("weighted l^1 operator norm", abs(weighted_l1_opnorm(A, wv, wv) - explicit) < 1e-15,
      f"{weighted_l1_opnorm(A, wv, wv):.6f} == {explicit:.6f} (column sums, not rows)")
+
+# ---------------------------------------------------------------------------
+# ROUTE T -- the bordered tail (leg 52)
+# ---------------------------------------------------------------------------
+
+# 15 -- the analytic kernel really is annihilated by the tail block
+K, M = 64, 576
+T = tail_block(K, M)
+h = tail_right_null(K, M)
+# the recursion is built for the interior rows; the last row closes the truncation
+resid = np.abs(T[:-1] @ h).max() / np.abs(h).max()
+gate("analytic right null vector is a kernel", resid < 1e-12,
+     f"||T h|| / ||h|| = {resid:.2e} on the interior rows")
+
+# 16 -- and the cokernel lives on the OPPOSITE parity chain.  Column 0 is excluded on
+# the same grounds the kernel's last row is: it is the one column that reaches the mode
+# K lying OUTSIDE the block, which is exactly what makes each null space 1-dimensional.
+u = tail_left_null(K, M)
+lresid = np.abs(u @ T[:, 1:]).max() / np.abs(u).max()
+outside = np.abs(u @ T[:, 0]) / np.abs(u).max()
+overlap = float(np.abs(np.sign(np.abs(h)) @ np.sign(np.abs(u))))
+gate("analytic left null vector is a cokernel, opposite parity",
+     lresid < 1e-12 and overlap == 0.0 and outside > 1e-3,
+     f"||u^T T|| / ||u|| = {lresid:.2e} on the interior columns, support overlap = "
+     f"{overlap:.0f}; the one column reaching outside the block gives {outside:.2e}, "
+     f"which is why the null space is 1-dimensional")
+
+# 17 -- the kernel is ONE-dimensional: sigma_min -> 0, sigma_2 stays away
+smin, s2, align = zip(*[tail_singular_pair(64, M, "flat", 0.0)
+                        for M in (320, 1088, 3136)])
+gate("kernel is one-dimensional", smin[-1] < 0.05 * smin[0] and min(s2) > 1.0,
+     f"sigma_min {smin[0]:.2e} -> {smin[-1]:.2e}, sigma_2 stays > {min(s2):.3f}")
+
+# 18 -- and the optimal direction IS the analytic far field
+gate("optimal border direction is the far field", align[-1] > 0.999,
+     f"|cos| -> {align[-1]:.5f} at M = 3136")
+
+# 19 -- THE GATE: bordering bounds the tail in the ADMISSIBLE classes
+lad = {(k, p): [bordered_tail_inverse_norm(64, M, k, p, border="analytic")
+                for M in (320, 1088, 3136)]
+       for k, p in (("flat", 0.0), ("algebraic", 0.3))}
+unb = {(k, p): [tail_inverse_norm(64, M, k, p) for M in (320, 1088, 3136)]
+       for k, p in (("flat", 0.0), ("algebraic", 0.3))}
+ok = all(v[-1] < 1.6 * v[0] for v in lad.values()) and \
+     all(unb[key][-1] > 3.0 * unb[key][0] for key in unb)
+gate("bordering bounds the tail where the object has finite norm", ok,
+     "; ".join(f"{k}{p}: bordered {v[0]:.2f}->{v[-1]:.2f} vs unbordered "
+               f"{unb[(k, p)][0]:.2f}->{unb[(k, p)][-1]:.2f}"
+               for (k, p), v in lad.items()))
+
+# 20 -- and it does NOT at s >= 1, which is the prediction, not a fit
+hi = [bordered_tail_inverse_norm(64, M, "algebraic", 1.0) for M in (320, 1088, 3136)]
+gate("bordering fails at s = 1, as the Fredholm sides predict", hi[-1] > 1.9 * hi[0],
+     f"s=1: {hi[0]:.2f} -> {hi[-1]:.2f} (still growing)")
+
+# 21 -- the two failure modes swap at s = 1
+fs = fredholm_sides(64, 3136)
+gate("kernel decays like m^-2, cokernel grows like m",
+     abs(fs["kernel_exponent"] + 2.0) < 0.02 and abs(fs["cokernel_exponent"] - 1.0) < 0.02,
+     f"kernel m^{fs['kernel_exponent']:.4f} (in space iff s<1), "
+     f"cokernel m^{fs['cokernel_exponent']:+.4f} (bounded iff s>=1)")
+
+# 22 -- NEGATIVE CONTROLS: the wrong border direction is worth nothing
+second = [bordered_tail_inverse_norm(64, M, "flat", 0.0, border="second")
+          for M in (320, 1088, 3136)]
+rand = [bordered_tail_inverse_norm(64, M, "flat", 0.0, border="random")
+        for M in (320, 1088, 3136)]
+gate("negative controls keep diverging",
+     second[-1] > 2.0 * second[0] and rand[-1] > 1.5 * rand[1],
+     f"second {second[0]:.2f}->{second[-1]:.2f}, random {rand[0]:.0f}->{rand[-1]:.0f}")
+
+# 23 -- the analytic border matches the optimal one where it matters
+a_n = bordered_tail_inverse_norm(64, 3136, "algebraic", 0.3, border="analytic")
+a_s = bordered_tail_inverse_norm(64, 3136, "algebraic", 0.3, border="svd")
+gate("analytic border achieves the SVD optimum", a_n / a_s < 1.02,
+     f"analytic / SVD = {a_n / a_s:.4f} (a proof cannot border with a singular vector)")
+
 
 n_fail = sum(1 for s, _, _ in results if s == FAIL)
 print(f"\n{len(results) - n_fail}/{len(results)} gates pass")
