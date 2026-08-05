@@ -233,6 +233,32 @@ CAPABILITIES = [
      "validated": ("Schochet residual 5.2e-16 corrected vs 2.4e-2 as printed (13.7 "
                    "decades); Route-H's (E) == ALS (57)-(58) pointwise"),
      "test": "test_literature_gates.py"},
+    {"module": "solver/certificate_shapes.py",
+     "object": "the SHAPE dichotomy (Route-XS, leg 57): published CAP certificates classified",
+     "holds": ("SHAPE_LEDGER: four published computer-assisted certificates x three "
+               "questions -- is the unbounded part a MULTIPLIER or a SHIFT, is the "
+               "approximate inverse block diagonal, does the tail inverse decay -- each "
+               "row traced to a LOCATED FULL-TEXT statement (never an abstract); "
+               "gate_answer() as an executable predicate; and the dichotomy as a MEASURED "
+               "continuous dial via mu on solver/spectral_certificate.py's tail block"),
+     "validated": ("gate answers NO over 4 published rows and flips to YES on a fictitious "
+                   "control row, so the negative is a fact about the literature and not "
+                   "about the code (lesson 90); mu = 0 alone fails -- M-exponent +1.021 "
+                   "unbordered (the inverse does not exist, which is why leg 52 bordered) "
+                   "and K-exponent +0.437 once bordered, vs -0.849..-0.946 for every "
+                   "mu > 0. CORRECTS legs 52-53: the bordered tail inverse is NOT a "
+                   "constant, it GROWS 2.191 -> 11.528 over K = 4..128 (5.26x), so the "
+                   "2.19 those legs quote is the smallest rung of a rising ladder, not a "
+                   "bound. SCOPE: the dichotomy is FOLKLORE IN PRINT (Cadiot "
+                   "arXiv:2505.03091 sections 2 and 3 state both halves) -- this module "
+                   "is BOOKKEEPING that makes it executable, NOT a finding of ours. BDL "
+                   "arXiv:1503.06315 publish the NON-BLOCK-DIAGONAL approximate inverse "
+                   "that MM's remaining free choice proposes, and their Prop 2.3 gets the "
+                   "full multiplier-case decay gain s_L, but only under assumption (4), a "
+                   "diagonal bounded below -- so the precedent does NOT extend to a zero "
+                   "diagonal. Chen-Hou certify a genuine SHIFT and form no tail estimate "
+                   "at all. Float64, no intervals; four papers is a corpus, not a theorem"),
+     "test": "test_certificate_shapes.py"},
     {"module": "solver/bordered_hl.py",
      "object": "HL_S2_nonsymmetric -- the BORDERED steady system (Route-PORT, legs 46/47)",
      "holds": ("the 2n+3 bordered residual for CHL (4.1)/(4.2) with the three gauge "
