@@ -74,10 +74,11 @@ Out of this leg's territory, recorded because the same staleness pattern touches
 
 - `verify/58-ng-headline` — merged; `experiments/journal/leg_58_verify.md` present.
 - `verify/65-l1g-review` — merged; `experiments/journal/leg_65_verify.md` present.
-- `origin/verify/64-a12-review` — **unmerged**, 2 files ahead of `main`
-  (`experiments/journal/leg_64_verify.md`, `writeup/novelty/leg_64_verify.md`). Leg 64's
-  post-landing review CONFIRMED both halves of the gate and reports three defects; none of
-  that is reachable from `main`. **1 unmerged verify pass**, flagged for the orchestrator.
+- `verify/64-a12-review` — unmerged at merge base `08be572`, 2 files ahead
+  (`experiments/journal/leg_64_verify.md`, `writeup/novelty/leg_64_verify.md`); **it landed
+  on `main` at `ac92516` while this leg was running**, so the gap closed itself and this
+  audit reports **0 unmerged verify passes** as of `ac92516`. Leg 64's post-landing review
+  CONFIRMED both halves of the gate and reports three defects in the "two traps" prose.
 - `verify/70-rc-review` — 0 commits ahead of `main`; no verify artifact exists for leg 70.
 
 ## Sourcing rule honoured

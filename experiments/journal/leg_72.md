@@ -65,11 +65,14 @@ append-only discipline that makes a leg touching an integration-owned ledger saf
 
 - **`experiments/journal/leg_60.md` is absent from `main`.** Recoverable from
   `origin/leg/pq-v1`; belongs to leg 60's territory and to escalation #4, not to this audit.
-- **`origin/verify/64-a12-review` is unmerged**, 2 files ahead of `main`
-  (`experiments/journal/leg_64_verify.md`, `writeup/novelty/leg_64_verify.md`). Leg 64's
-  post-landing review confirmed both halves of its gate and reports three defects in the
-  "two traps" section; none of that is reachable from `main`. **1 unmerged verify pass**,
-  flagged for the orchestrator.
+- **`verify/64-a12-review` was unmerged at merge base**, 2 files ahead
+  (`experiments/journal/leg_64_verify.md`, `writeup/novelty/leg_64_verify.md`) — and **landed
+  at `ac92516` during this leg's run**, closing that gap without this leg's help. Leg 64's
+  review confirmed both halves of its gate and reports three defects in the "two traps"
+  section (chief: J. Chen's `a=1/2` criticality misattributed as `gamma=2`). Recorded here
+  because the audit's counts are stated as-of a commit: **0 unmerged verify passes at
+  `ac92516`, 1 at `08be572`.** No new leg gate answered in that window, so the 8-leg count
+  in the appended block is unchanged.
 - **`verify/70-rc-review` is 0 commits ahead of `main`** — no verify artifact exists for leg
   70, in contrast to legs 58 and 65, which both have landed `*_verify.md` journals.
 - The same staleness one level up was leg 68's (`writeup/INDEX.md`, caught up to leg 57).
