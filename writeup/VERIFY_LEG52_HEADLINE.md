@@ -139,8 +139,6 @@ but the two appear four lines apart with no note that they are different fits.
 
 ### A.4 MECHANISM ABLATIONS (lesson 85) — the constant's convention-dependence
 
-See `experiments/verify_leg52_headline.py`. Results are appended in A.5 below.
-
 The mechanism claim under test is *"the repair is: add the far-field amplitude as an
 unknown"*. `bordered_tail_inverse_norm` implements it as
 
@@ -164,7 +162,121 @@ Two conventions are baked in, and **`‖B^{-1}‖` is not invariant under either
   distinction only bites for `s > 0`, i.e. exactly at `s = 0.3`, where the ratio is 1.007.
   The write-ups call `u` "the adjoint"; strictly it is not.
 
-Neither of these is a claim that the saturation is wrong — the flat class, where `w ≡ 1`, is
-convention-free and it saturates there. They are a claim that **the constant is not yet a
-well-defined quantity**, which matters precisely because TC-2's job is to put it in a
-polynomial with `Z₂`.
+Neither of these is a claim that the saturation is wrong. They are a claim that **the constant
+is not yet a well-defined quantity**, which matters precisely because TC-2's job is to put it
+in a polynomial with `Z₂`.
+
+### A.5 ABLATION RESULTS — the MECHANISM survives everything; the CONSTANT survives nothing
+
+`.venv/bin/python experiments/verify_leg52_headline.py` (2223 s under load).
+**20/20 numeric checks pass, 0 gaps.**
+
+**(V1) Exact reproduction.** Recomputing all five ladders — `unbordered`, `analytic`, `svd`,
+`second`, `random`, `sigma_min`, `alignment` — directly from `solver/spectral_certificate.py`
+matches the committed JSON to a **maximum relative deviation of `2.2e−13`**. A full re-run of
+`experiments/p2_route_t_v1_border.py` (to a scratch path; the committed JSON was not touched)
+is byte-comparable: the only differing entries are three floats at `~2e−12` (LAPACK SVD
+threading), and `verdict` / `gate_admissible_classes_saturate` are identical.
+**Leg 52 is reproducible.**
+
+**(V3) Normalisation ablation — the saturation is convention-independent, the constant is
+not.** Flat class / `s = 0.3`, top rung `M = 3136`:
+
+| normalisation of `u`, `v` | flat `s = 0` | fitted `M`-exponent | `s = 0.3` | exponent |
+|---|---|---|---|---|
+| Euclidean (**as shipped**) | **9.44** | +0.101 | **11.37** | +0.147 |
+| `ℓ¹` | 92.63 | +0.069 | 139.96 | +0.155 |
+| `ℓ^∞` | 2.82 | +0.112 | 3.06 | +0.158 |
+| `u` in `ℓ¹`, `v` in `ℓ^∞` (the pairing weighted-`ℓ¹` actually induces) | **2.91** | **−0.015** | **3.26** | +0.020 |
+
+**Every convention saturates.** The gate answer is robust. But the constant spans
+**2.8 → 92.6, a factor of 33**, and the shipped 9.44 is an arbitrary point in that range.
+The convention a weighted-`ℓ¹` certificate would actually induce — the unknown measured in
+the space, the equation measured in the dual — gives **2.91, three times smaller than the
+headline and essentially perfectly flat in `M` (exponent −0.015)**. That is *better* news
+for TC than the headline, not worse; it is still a number TC has to derive rather than
+inherit.
+
+**(V4) Adjoint convention — the shipped number is CONSERVATIVE.** Using the true left null
+vector in scaled coordinates (`u_left/w`) instead of the shipped `u_left·w` gives, at
+`s = 0.3`, **11.2892** against the SVD optimum **11.2902** — i.e. `analytic/SVD = 1.0001`,
+not the 1.007 the write-up reports. In the flat class the two coincide identically. So
+**T-2's "the analytic border achieves the optimum" is if anything understated**; the shipped
+convention is the only reason the ratio is not 1.000 in all admissible classes.
+
+**(V5) Ladder extension to `M = 6208` — saturation CONFIRMED and strengthened.**
+
+```
+flat s=0    M  320    576   1088   2112   3136   4160   6208
+  bordered  7.456  8.320  8.936  9.305  9.439  9.507  9.577   exp +0.080 (was +0.100 on 5 rungs)
+  inc/dlogM 1.469  0.969  0.557  0.337  0.243  0.175           ~ M^{-0.96}
+  unbordered 4.06  8.13  16.25  32.51  48.76  65.02  97.52     exp +1.066
+s=0.3
+  bordered  8.087  9.299 10.318 11.056 11.370 11.549 11.751   exp +0.123
+  inc/dlogM 2.062  1.602  1.113  0.794  0.634  0.505           ~ M^{-0.67}
+```
+
+The log-derivative falls like `M^{-0.96}` (flat) and `M^{-0.67}` (`s = 0.3`) — both summable,
+so the sequence converges rather than creeping. The fitted exponent *falls* when the ladder
+is extended (`0.100 → 0.080`), which is what a saturation does and a power law does not.
+This also disposes of the concern in A.3(1): the ladder's non-geometric last step was not
+what produced the falling increments.
+
+**(V6) `K`-DEPENDENCE — NOT REPORTED BY LEG 52, AND IT IS LOAD-BEARING FOR TC.** The whole
+leg is at `K = 64`. Extending (analytic border, at `M = 6208` for `K ≥ 64`):
+
+| `K` | flat `s = 0` | `s = 0.3` | `M`-exponent, flat |
+|---|---|---|---|
+| 32 | 6.72 (at `M`=3136) | 8.23 | +0.051 |
+| 64 | **9.58** | **11.75** | +0.080 |
+| 128 | 13.39 | 16.13 | +0.148 |
+| 256 | 18.39 | 21.58 | +0.171 |
+
+Each `K` still saturates (`inc/dlogM` falls monotonically at 128 and 256 as well), so the
+gate answer is unchanged. But **the tail constant grows like `K^{0.46}`, i.e. roughly
+`√K`, and it does not saturate in `K`.** Neither `BLOG`, `TECHNICAL` nor `§41` mentions any
+`K`-dependence; all three quote 9.44 / 11.37 flat.
+
+Combined with the urgent section's finding that `‖A‖_w` on the finite block grows like `K^{0.8–1.0}` in the
+same admissible classes, **both sides of the certificate degrade with `K` in the classes
+where the tail works.** TC must pick one `K`, and at `K = 256` the tail constant is 18.4,
+not 9.44.
+
+**(V7) THE BORDER'S OWN DEFECT — MEASURED, AND IT IS EXACTLY THE TRUNCATION BOUNDARY.**
+This is TC-3's quantity, and it turns out already to have a clean answer. `T h` is
+**exactly zero on every interior row** (`2.8e−15`, flat, all `M`); the entire residual sits
+in the **last row**, the artificial truncation at `M`. Likewise `u^T T` is exactly zero on
+every interior column and the entire residual sits in **column 0**, the one column reaching
+the mode `K` outside the block. Both decay exactly like `1/M`:
+
+| `M` | 576 | 1088 | 2112 | 3136 | 6208 |
+|---|---|---|---|---|---|
+| `‖T h‖₂/‖h‖₂` (all in the last row) | 1.066 | 0.5635 | 0.2902 | 0.1954 | 0.0987 |
+| `M ×` that | 614 | 613 | 613 | 613 | 613 |
+| `‖T h‖₁/‖h‖₁` | 1.23e−1 | 6.15e−2 | 3.08e−2 | 2.05e−2 | 1.03e−2 |
+| `‖u^T T‖_∞/‖u‖_∞` (all in column 0) | 3.561 | 1.884 | 0.970 | 0.653 | 0.330 |
+| `M ×` that | 2051 | 2049 | 2048 | 2048 | 2048 |
+
+So the analytic far-field mode is an **exact** kernel of the tail recursion, and its two
+defects are precisely the two boundary equations, each `≈ 613/M` and `2048/M`. For
+comparison `σ_min` decays like `M^{-1.5}` (`2.71e−1 → 8.54e−3`), so the **defect/`σ_min`
+ratio grows like `M^{+0.5}`** — the border is a better and better kernel in absolute terms
+and a worse and worse one relative to the operator's smallest scale. TC-3 should quote
+`613/M` and `2048/M` rather than treat the border defect as uncomputed; whether the
+*matching-condition* residual (a different object — series against asymptotic expansion) has
+the same magnitude is TC-3's actual job.
+
+### A.6 PART A VERDICT
+
+**Leg 52's headline is CONFIRMED.** Every number in `BLOG_P2_ROUTET_V1.md`,
+`TECHNICAL_P2_ROUTET_V1.md` and `PHASE2_P2_NOTES.md` §41 matches the curated JSON; the
+runner reproduces to `2e−12`; all four negative controls behave as claimed; the saturation
+survives a 2× ladder extension, four different normalisation conventions, both adjoint
+conventions and `K ∈ {32, 64, 128, 256}`. The `T-5` mechanism (kernel/cokernel swapping at
+`s = 1`) is reproduced exactly. **The gate answer stands.**
+
+**Three things a stage must not inherit uncritically:** (i) the reported constant 9.44/11.37
+is convention-dependent by a factor of 33 and is *not* the number the natural weighted-`ℓ¹`
+pairing gives (that is 2.91/3.26); (ii) it grows like `√K` and leg 52 reports one `K`;
+(iii) TC-2's `Z₂ = 79.5` comes from the one weight class where the tail is unbounded — the
+urgent item at the top of this file.

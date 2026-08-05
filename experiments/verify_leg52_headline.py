@@ -214,6 +214,30 @@ def main():
         print(f"  K={K:4d} fredholm {fredholm_sides(K, 3136)['kernel_exponent']:+.4f} / "
               f"{fredholm_sides(K, 3136)['cokernel_exponent']:+.4f}")
 
+    # ---------------- V6b does the larger-K ladder still saturate ----------
+    print("\n=== V6b  DOES THE LARGER-K LADDER STILL SATURATE (out to M = 6208)")
+    for K in (128, 256):
+        for kind, p in (("flat", 0.0), ("algebraic", 0.3)):
+            v = np.array([bordered_tail_inverse_norm(K, M, kind, p) for M in LONG])
+            dd = np.diff(v) / np.diff(np.log(LONG))
+            print(f"  K={K:4d} {kind:9s} s={p}  {np.round(v, 4).tolist()}")
+            print(f"        inc/dlogM {np.round(dd, 4).tolist()}  exp "
+                  f"{np.polyfit(np.log(LONG), np.log(v), 1)[0]:+.4f}")
+
+    # ---------------- V7b where the border defect lives --------------------
+    print("\n=== V7b  WHERE THE ANALYTIC BORDER'S DEFECT LIVES (flat, K = 64) -- TC-3")
+    from solver.spectral_certificate import tail_block                     # noqa: E402
+    for M in (576, 1088, 2112, 3136, 6208):
+        T, h, u = tail_block(64, M), tail_right_null(64, M), tail_left_null(64, M)
+        r, ru = T @ h, u @ T
+        n2 = np.linalg.norm(r) / np.linalg.norm(h)
+        li = np.abs(ru).max() / np.abs(u).max()
+        print(f"  M={M:5d} ||T h||2/||h||2 = {n2:.4e} (interior rows "
+              f"{np.linalg.norm(r[:-1]) / np.linalg.norm(h):.1e}, M x it = {M * n2:.0f})"
+              f" | l1 {np.abs(r).sum() / np.abs(h).sum():.4e}"
+              f" | ||u^T T||inf/||u||inf = {li:.4e} (interior cols "
+              f"{np.abs(ru[1:]).max() / np.abs(u).max():.1e}, M x it = {M * li:.0f})")
+
     print(f"\n=== SUMMARY  {len(ok)} checks passed, {len(gaps)} gaps "
           f"({time.time() - t0:.0f}s)")
     for g in gaps:
