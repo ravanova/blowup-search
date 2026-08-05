@@ -298,6 +298,9 @@ def fig_phase1_axis_screen():
 # `build_figures.py` rebuilds the whole figure set rather than only the Phase-1 half.
 P2_EVIDENCE = [
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
+    # Route-TN's evidence script lives under experiments/ rather than beside its
+    # writeup, because that is the file territory leg 56 was dispatched with.
+    "../experiments/p2_route_tn_v1_consistency_evidence.py",   # fig51 -- Route-TN v1 (leg 56)
 ]
 
 

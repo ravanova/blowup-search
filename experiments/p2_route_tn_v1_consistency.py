@@ -103,6 +103,65 @@ def rate(seq):
     return out
 
 
+def validation_block():
+    """Every validation number the prose quotes, curated into the JSON.
+
+    The rule is that prose may not quote a number that is not in the data file, and
+    these three are load-bearing: the two transcendental widths say the rigorous
+    evaluation is sharp enough to be irrelevant to the answer, and the quadrature
+    disagreement says the closed-form reference is right at all."""
+    import decimal
+
+    from solver.interval import iatan_small, ilog
+
+    decimal.getcontext().prec = 50
+    xs = np.array([1e-12, 1e-3, 0.25, 0.5, 1.0, 2.0, 17.0, 745.2394128947751, 1e6])
+    lg = ilog(xs)
+    log_ok = all(lg.lo[i] <= float(decimal.Decimal(repr(float(x))).ln()) <= lg.hi[i]
+                 for i, x in enumerate(xs))
+    ts = np.array([-0.5, -0.1, 0.0, 1e-6, 0.125, 0.4999])
+    at = iatan_small(ts)
+    atan_ok = bool(np.all(at.lo <= np.arctan(ts)) and np.all(np.arctan(ts) <= at.hi))
+
+    # the closed-form truncated transform against independent PV quadrature
+    b = BorderedHL(n=201)
+    sc = SplineConsistency(b)
+    M = sc.M
+
+    def fn(u, a, fam):
+        return (-u / (u * u + a * a)) if fam == "odd" else (a / (u * u + a * a))
+
+    def pv(x, a, fam, N=2_000_001):
+        y = np.linspace(-M, M, N)
+        dd = x - y
+        sing = np.abs(dd) < 1e-13
+        g = np.where(sing, 0.0, (fn(y, a, fam) - fn(x, a, fam)) / np.where(sing, 1.0, dd))
+        h = 1e-6
+        g[sing] = -(fn(x + h, a, fam) - fn(x - h, a, fam)) / (2 * h)
+        return (np.trapezoid(g, y) + fn(x, a, fam) * np.log(abs((x + M) / (x - M)))) / np.pi
+
+    worst = 0.0
+    cases = 0
+    for fam in FAMILIES:
+        for a in (0.5, 2.0):
+            He, tr = sc.H_exact(a, 0.0, fam), sc.H_truncation(a, 0.0, fam)
+            for j in (60, 100, 140):
+                worst = max(worst, abs(float(He.mid[j] - tr.mid[j])
+                                       - pv(float(b.X[j]), a, fam)))
+                cases += 1
+    return {
+        "ilog_max_width": float(np.max(lg.hi - lg.lo)),
+        "ilog_encloses_50_digit_reference": bool(log_ok),
+        "iatan_max_width": float(np.max(at.hi - at.lo)),
+        "iatan_encloses_reference": atan_ok,
+        "quadrature_worst_abs_disagreement": float(worst),
+        "quadrature_cases": cases,
+        "quadrature_note": ("mixed abs/rel: the even family's truncated transform "
+                            "vanishes identically at X = 0 by symmetry, so a pure "
+                            "relative comparison there divides by a true zero"),
+    }
+
+
 def certificate_rung(n):
     """TN-4: re-derive leg 46/50's constants rather than quoting them (lesson 85)."""
     b, z, hist, cs = solve(n=n)
@@ -136,6 +195,11 @@ def main():
         "fixed_reach": True,
         "rungs": [], "scale_curve": [], "mechanism_ablation": [],
     }
+
+    out["validation"] = validation_block()
+    print("validation: ilog width %.2e, iatan width %.2e, quadrature worst %.2e"
+          % (out["validation"]["ilog_max_width"], out["validation"]["iatan_max_width"],
+             out["validation"]["quadrature_worst_abs_disagreement"]), flush=True)
 
     # -- the pre-committed reference, as stored ------------------------------
     ref = json.loads(L1_REF.read_text())

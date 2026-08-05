@@ -74,7 +74,7 @@
     "defect_H_over_tau": 20552509931.688805,
     "truncation_over_tau": 82763351202.14091
    },
-   "wall_s": 24.01213312149048
+   "wall_s": 40.88874363899231
   },
   {
    "certificate": {
@@ -137,7 +137,7 @@
     "defect_H_over_tau": 148548299182.52884,
     "truncation_over_tau": 711739331447.8754
    },
-   "wall_s": 32.38261866569519
+   "wall_s": 64.90392470359802
   },
   {
    "certificate": {
@@ -200,7 +200,7 @@
     "defect_H_over_tau": 204033440973.58594,
     "truncation_over_tau": 1138985282515.7275
    },
-   "wall_s": 49.75952506065369
+   "wall_s": 149.5816900730133
   }
  ],
  "scale_curve": [
@@ -384,6 +384,15 @@
    "defect_D_collapse": 1.1056170399799818
   }
  ],
+ "validation": {
+  "ilog_max_width": 3.552713678800501e-14,
+  "ilog_encloses_50_digit_reference": true,
+  "iatan_max_width": 1.4765966227514582e-14,
+  "iatan_encloses_reference": true,
+  "quadrature_worst_abs_disagreement": 4.440892098500626e-15,
+  "quadrature_cases": 12,
+  "quadrature_note": "mixed abs/rel: the even family's truncated transform vanishes identically at X = 0 by symmetry, so a pure relative comparison there divides by a true zero"
+ },
  "leg46_reference_as_stored": {
   "source": "writeup/data/p2_route_l1_v1_interval.json :: L1_2_ladder[n=801]",
   "budget": 3.5546559590282916e-10,
@@ -510,5 +519,5 @@
    }
   ]
  },
- "elapsed_s": 147.18933176994324
+ "elapsed_s": 430.79701828956604
 }
