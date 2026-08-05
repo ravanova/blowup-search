@@ -131,7 +131,12 @@ CAPABILITIES = [
                    "(Y_0/budget 2.28e-03, 2.20e-02, 2.07e-02). THE CEILING IS PART OF THE "
                    "ENTRY: this is the TRUNCATED DISCRETE system on |X|<=745 with the stored "
                    "operators as exact data -- the far-field tail and the consistency of "
-                   "(H, D) are NOT bounded, so it is step one of L1 and not L1"),
+                   "(H, D) are NOT bounded, so it is step one of L1 and not L1. FIRST "
+                   "END-TO-END PUBLISHED KNOWN-ANSWER GATE (leg 61): run on CLN's Kawahara "
+                   "problem at their own truncation, the certified interval [6.77e-15, "
+                   "2.62e-02] contains CLN's published [2.27e-14, 1.5e-02] entirely -- "
+                   "resolution ~0.5 decades, not a digit. This clears leg 56's 1.85e7x and "
+                   "2.04e11x consistency defects by 6.5 and 10.5 decades respectively"),
      "test": "test_interval_certificate.py"},
     {"module": "solver/spectral_certificate.py",
      "object": ("the certificate in the COMPACTIFIED basis, where the operators are exact "
