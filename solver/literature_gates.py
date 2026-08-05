@@ -613,3 +613,158 @@ def ledger_counts():
     for c in CLAIM_LEDGER:
         out[c["verdict"]] = out.get(c["verdict"], 0) + 1
     return out
+
+
+# ==========================================================================
+# ROUTE-CP v1 (leg 62): CADIOT'S HYPOTHESES, RE-DERIVED RATHER THAN TRANSCRIBED
+# ==========================================================================
+# `solver/certificate_shapes.py`'s `CP_LEDGER` TRANSCRIBES Cadiot's Assumption 1 and the
+# symbols of his three applications.  Transcription is where errors hide, and this
+# module's whole discipline is that a literature claim we cannot re-run is exactly as
+# durable as a figure we looked at once.  So this block RE-DERIVES, from the published
+# symbols, the quantities the transcription depends on:
+#
+#   CP1  Assumption 1 HOLDS at Cadiot's own published parameters -- `l_min > 0` computed,
+#        for all three applications.  If this returned zero the transcription would be
+#        wrong and the gate's reasoning would collapse; it is checked, not assumed.
+#   CP2  the GROWTH EXPONENT of each symbol, fitted numerically.  These are the
+#        `diag_growth` numbers in `CP_LEDGER`, and they are recovered from the formulas
+#        rather than read off the powers by eye.
+#   CP3  the Gray-Scott CROSSOVER FREQUENCY: the one place in the Cadiot corpus where the
+#        linear part has a nonzero off-diagonal entry, and the frequency beyond which the
+#        diagonal beats it.  This is the sharpest quantitative statement of "the
+#        off-diagonal is present and bounded, the unbounded part is diagonal".
+#
+# NOT RIGOROUS.  Float64 on a grid, no intervals.  A minimum over a grid is a minimum
+# over a grid; it says the published hypothesis is consistent with its own parameters,
+# not that it is proved.  Stated here because the distinction is this module's contract.
+
+#: Cadiot's published parameter choices, arXiv:2505.03091 sections 5.1, 5.2, 5.3.
+CADIOT_PARAMS = {
+    "swift_hohenberg": {"mu": 0.32, "nu1": -1.6,
+                        "where": "section 5.1.2 (the stable hexagonal pattern)"},
+    "whitham": {"T": 0.5, "c": 0.8, "where": "section 5.2"},
+    "gray_scott": {"lambda1": 19.0, "lambda2": 10.0, "where": "section 5.3, eq. (44)"},
+}
+
+
+def cadiot_symbol_sh(xi, mu=0.32):
+    """Swift-Hohenberg, arXiv:2505.03091 section 5.1: `l(xi) = -(1 - |2 pi xi|^2)^2 - mu`."""
+    k2 = (2.0 * np.pi * np.asarray(xi, float)) ** 2
+    return -((1.0 - k2) ** 2) - float(mu)
+
+
+def cadiot_symbol_whitham(xi, T=0.5, c=0.8):
+    """Capillary-gravity Whitham, section 5.2: `l(xi) = m_T(2 pi xi) - c` with
+
+        m_T(k) = sqrt( tanh(k) (1 + T k^2) / k ).
+
+    The `k -> 0` limit is 1 and is taken analytically, because `tanh(k)/k -> 1`.
+    """
+    k = 2.0 * np.pi * np.asarray(xi, float)
+    k = np.where(np.abs(k) < 1e-12, 1e-12, np.abs(k))
+    m = np.sqrt(np.tanh(k) * (1.0 + float(T) * k ** 2) / k)
+    return m - float(c)
+
+
+def cadiot_symbol_gs(xi, lambda1=19.0, lambda2=10.0):
+    """Gray-Scott matrix symbol, section 5.3 eq. (44), as (d11, d22, offdiag) at `|xi|`.
+
+    l(xi) = [[-lambda1 |2 pi xi|^2 - 1,        0                    ],
+             [ lambda1 lambda2 - 1,      -|2 pi xi|^2 - lambda2     ]]
+    """
+    k2 = (2.0 * np.pi * np.asarray(xi, float)) ** 2
+    d11 = -float(lambda1) * k2 - 1.0
+    d22 = -k2 - float(lambda2)
+    off = float(lambda1) * float(lambda2) - 1.0
+    return d11, d22, off
+
+
+def _fit_growth_exponent(f, xis):
+    """d log|f| / d log|xi| over the largest decades -- the growth exponent, measured."""
+    xis = np.asarray(xis, float)
+    vals = np.abs(np.asarray(f(xis), float))
+    slope, _ = np.polyfit(np.log(xis), np.log(vals), 1)
+    return float(slope)
+
+
+def cadiot_assumption1_check(n_grid=200001, xi_max=50.0):
+    """CP1 + CP2: does Assumption 1 hold at Cadiot's own parameters, and how fast does
+    each symbol grow?
+
+    Returns, per application, the measured `l_min` (`inf |l|` over a grid covering the
+    minimum) and the fitted growth exponent.  Assumption 1 needs `l_min > 0` and
+    `|l| -> infinity`; both are reported as MAGNITUDES so the check can be read rather
+    than trusted.
+    """
+    xi = np.linspace(0.0, float(xi_max), int(n_grid))
+    xi_tail = np.logspace(3.0, 6.0, 400)          # three decades, well past the minimum
+
+    sh = CADIOT_PARAMS["swift_hohenberg"]
+    wh = CADIOT_PARAMS["whitham"]
+    gs = CADIOT_PARAMS["gray_scott"]
+
+    l_sh = np.abs(cadiot_symbol_sh(xi, sh["mu"]))
+    l_wh = np.abs(cadiot_symbol_whitham(xi, wh["T"], wh["c"]))
+    d11, d22, off = cadiot_symbol_gs(xi, gs["lambda1"], gs["lambda2"])
+    det_gs = np.abs(d11 * d22)                     # lower-triangular: det is the product
+
+    return {
+        "swift_hohenberg": {
+            "params": sh,
+            "l_min_measured": float(l_sh.min()),
+            "l_min_expected_analytic": float(sh["mu"]),   # |l| is minimised where k^2 = 1
+            "growth_exponent": _fit_growth_exponent(
+                lambda x: cadiot_symbol_sh(x, sh["mu"]), xi_tail),
+            "assumption1_l_min_positive": bool(l_sh.min() > 0.0),
+        },
+        "whitham": {
+            "params": wh,
+            "l_min_measured": float(l_wh.min()),
+            "growth_exponent": _fit_growth_exponent(
+                lambda x: cadiot_symbol_whitham(x, wh["T"], wh["c"]), xi_tail),
+            "assumption1_l_min_positive": bool(l_wh.min() > 0.0),
+            "note": ("T = 0.5 is ABOVE the critical Bond number 1/3, so m_T is increasing "
+                     "from m_T(0) = 1 and the minimum of |l| sits at xi = 0, at 1 - c."),
+        },
+        "gray_scott": {
+            "params": gs,
+            "sigma0_measured": float(det_gs.min()),
+            "sigma0_expected_analytic": float(1.0 * gs["lambda2"]),  # d11 d22 at xi = 0
+            "growth_exponent_det": _fit_growth_exponent(
+                lambda x: (lambda t: t[0] * t[1])(
+                    cadiot_symbol_gs(x, gs["lambda1"], gs["lambda2"])), xi_tail),
+            "offdiagonal_entry": float(off),
+            "cb_assumption1_det_bounded_away_from_zero": bool(det_gs.min() > 0.0),
+        },
+    }
+
+
+def cadiot_gray_scott_crossover(lambda1=19.0, lambda2=10.0):
+    """CP3: where the Gray-Scott diagonal overtakes its constant off-diagonal entry.
+
+    This is the quantitative form of the CP ledger's sharpest row.  The off-diagonal
+    entry is `lambda1 lambda2 - 1`, a CONSTANT; the smaller diagonal entry is
+    `|2 pi xi|^2 + lambda2`, which grows.  The dominance ratio
+    `rho(xi) = |off| / min(|d11|, |d22|)` therefore decays like `|xi|^-2`, and the
+    frequency at which it passes 1 is where Gershgorin dominance sets in.
+
+    Returned as magnitudes.  The point is not that a crossover exists; it is that the
+    ratio DECAYS AT ALL -- ours is `+infinity` at every index.
+    """
+    off = float(lambda1) * float(lambda2) - 1.0
+    # solve |2 pi xi|^2 + lambda2 = off  ->  the smaller diagonal entry equals the off-diagonal
+    k2_star = off - float(lambda2)
+    xi_star = float(np.sqrt(max(k2_star, 0.0)) / (2.0 * np.pi))
+    probe = np.array([xi_star, 2.0 * xi_star, 10.0 * xi_star, 100.0 * xi_star])
+    d11, d22, _ = cadiot_symbol_gs(probe, lambda1, lambda2)
+    rho = off / np.minimum(np.abs(d11), np.abs(d22))
+    return {
+        "lambda1": float(lambda1), "lambda2": float(lambda2),
+        "offdiagonal_entry": off,
+        "crossover_xi": xi_star,
+        "probe_xi": [float(x) for x in probe],
+        "rho_at_probe": [float(r) for r in rho],
+        "rho_decay_exponent": float(
+            np.polyfit(np.log(probe[1:]), np.log(rho[1:]), 1)[0]),
+    }

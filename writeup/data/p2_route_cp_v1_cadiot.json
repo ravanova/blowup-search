@@ -1,0 +1,564 @@
+{
+ "leg": 62,
+ "route": "CP",
+ "branch": "leg/cp-v1",
+ "gates": {
+  "test_certificate_shapes.py": "22/22",
+  "test_literature_gates.py": "11/11"
+ },
+ "novelty_pass": {
+  "file": "writeup/novelty/leg_62.md",
+  "verdict": "PROCEED_AS_LEDGER_EXTENSION",
+  "committed_before_construction": true,
+  "binds": "This leg classifies literature and claims no mathematical finding.  The observation being classified was already settled as folklore in print by leg 57; what is new here is the DEPTH of the reading and the quantitative axis, both of which are bookkeeping."
+ },
+ "CP3_gate": {
+  "gate": "Does Cadiot arXiv:2505.03091's construction cover an operator whose unbounded part is off-diagonal with a non-decaying tail inverse -- i.e. does it already contain leg 58's no-go, or a positive result that contradicts it?",
+  "answer": "no",
+  "covering_rows": [],
+  "contradicting_rows": [],
+  "n_full_text": 3,
+  "refused_not_full_text": [
+   "FL91"
+  ],
+  "rows": [
+   {
+    "tag": "CADIOT-STAB",
+    "arxiv": "2505.03091",
+    "url": "https://arxiv.org/abs/2505.03091",
+    "read_at": "FULL_TEXT",
+    "rho": 0.0,
+    "rho_admits_tail_estimate": true,
+    "offdiag_growth": 0.0,
+    "diag_growth": {
+     "swift_hohenberg": 4.0,
+     "whitham": 0.5,
+     "gray_scott": 2.0
+    },
+    "n_located": 7,
+    "located_where": [
+     "Assumption 1 (section 2.1)",
+     "section 1.2 (construction of the periodic counterpart)",
+     "section 3 (opening paragraph, 'Spectrum of DF(U_0) using Gershgorin disks')",
+     "proof of Lemma 3.3 (section 3)",
+     "Lemma 2.2 (section 2.3), proof",
+     "Remark 4.1 (section 4)",
+     "section 5.2 (the capillary-gravity Whitham equation)"
+    ]
+   },
+   {
+    "tag": "BRT",
+    "arxiv": "2504.05066",
+    "url": "https://arxiv.org/abs/2504.05066",
+    "read_at": "FULL_TEXT",
+    "rho": 0.0,
+    "rho_admits_tail_estimate": true,
+    "offdiag_growth": "p - q_1",
+    "diag_growth": {
+     "weyl_law_in_index": "2/n"
+    },
+    "n_located": 6,
+    "located_where": [
+     "section 2.1, the paragraph introducing Theorem 2.6",
+     "Definition 2.5 (section 2.1)",
+     "Theorem 2.6 (section 2.1)",
+     "section 2.2, immediately after Theorem 2.6",
+     "Definition 2.8 (section 2.2)",
+     "Lemma 2.10 (section 2.2), with hypothesis (H:B) from section 1.1"
+    ]
+   },
+   {
+    "tag": "CB",
+    "arxiv": "2404.08529",
+    "url": "https://arxiv.org/abs/2404.08529",
+    "read_at": "FULL_TEXT",
+    "rho": 0.0,
+    "rho_admits_tail_estimate": true,
+    "offdiag_growth": 0.0,
+    "diag_growth": {
+     "gray_scott": 2.0
+    },
+    "n_located": 3,
+    "located_where": [
+     "Assumption 1 (section 2.1)",
+     "Remark 2.1 (section 2.1)",
+     "Cadiot arXiv:2505.03091 section 5.3, eq. (44) -- the instance, read at full text"
+    ]
+   },
+   {
+    "tag": "FL91",
+    "arxiv": null,
+    "url": "https://www.sciencedirect.com/science/article/pii/002437959190004H",
+    "read_at": "SECOND_HAND",
+    "rho": null,
+    "rho_admits_tail_estimate": null,
+    "offdiag_growth": null,
+    "diag_growth": null,
+    "n_located": 2,
+    "located_where": [
+     "Theorem 2.1, as quoted and criticised in Breden-Payan-Reisch-Tang arXiv:2504.05066 section 2.1 -- read there, not here",
+     "Cadiot arXiv:2505.03091, proof of Lemma 3.2 -- the hypotheses AS APPLIED, read at full text"
+    ]
+   }
+  ],
+  "ours": {
+   "tag": "OURS-a0-CLM-BORDERED",
+   "rho": "inf",
+   "rho_admits_tail_estimate": false,
+   "diag_growth": {
+    "a0_clm": 0.0
+   },
+   "offdiag_growth": 1.0
+  }
+ },
+ "CP1_unlocated_rows": [],
+ "CP1_ledger_size": {
+  "rows_total": 5,
+  "rows_literature": 4,
+  "rows_full_text": 3,
+  "rows_refused_second_hand": [
+   "FL91"
+  ],
+  "located_statements": 19
+ },
+ "CP1_papers_read_in_full": [
+  {
+   "arxiv": "2505.03091",
+   "url": "https://arxiv.org/abs/2505.03091",
+   "fetch": "Papers/fetch.sh 2505.03091",
+   "role": "the paper under test"
+  },
+  {
+   "arxiv": "2504.05066",
+   "url": "https://arxiv.org/abs/2504.05066",
+   "fetch": "Papers/fetch.sh 2504.05066",
+   "role": "Cadiot's [15] -- the most general Gershgorin statement located"
+  },
+  {
+   "arxiv": "2404.08529",
+   "url": "https://arxiv.org/abs/2404.08529",
+   "fetch": "Papers/fetch.sh 2404.08529",
+   "role": "Cadiot's [20] -- the systems extension, the only matrix-valued symbol"
+  },
+  {
+   "arxiv": "2302.12877",
+   "url": "https://arxiv.org/abs/2302.12877",
+   "fetch": "Papers/fetch.sh 2302.12877",
+   "role": "Cadiot's [21] -- the underlying framework, Assumption 2.1 re-read"
+  }
+ ],
+ "CP2_reading_depth": {
+  "second_hand": [
+   "FL91 (Linear Algebra Appl. 143:7-17, 1991) -- paywalled, no arXiv copy; hypotheses recorded from arXiv:2504.05066 sec 2.1 and from Cadiot's own Lemma 3.2, both read in full"
+  ],
+  "refused_by_the_gate": [
+   "FL91"
+  ],
+  "why": "Leg 53 lost a claim by reading a hypothesis at the wrong depth.  The correction is not to hide the depth but to label it and to refuse it."
+ },
+ "CP4_dominance_axis": {
+  "definition": "rho = limsup_k (off-diagonal row sum at k) / |diagonal entry at k|.  Every located construction requires rho < 1.",
+  "why_not_the_exponent_difference": "BDL separates them: BDL has EQUAL growth exponents (gamma_D - gamma_R = 0) and is still admissible, because its assumption (5) buys rho <= 2*delta < 1 by a constant factor.  rho is the coordinate that classifies all rows; the exponent difference is not.",
+  "sources": [
+   {
+    "tag": "CADIOT-STAB",
+    "rho": 0.0,
+    "admits": true
+   },
+   {
+    "tag": "BRT",
+    "rho": 0.0,
+    "admits": true
+   },
+   {
+    "tag": "CB",
+    "rho": 0.0,
+    "admits": true
+   },
+   {
+    "tag": "FL91",
+    "rho": null,
+    "admits": null
+   }
+  ],
+  "ours": {
+   "tag": "OURS-a0-CLM-BORDERED",
+   "rho": "inf",
+   "admits": false,
+   "gamma_D": 0.0,
+   "gamma_R": 1.0,
+   "gamma_R_minus_gamma_D": 1.0
+  },
+  "exponent_plane": [
+   {
+    "tag": "CADIOT-STAB (Swift-Hohenberg, sec 5.1)",
+    "gamma_R": 0.0,
+    "gamma_D": 4.0,
+    "arxiv": "2505.03091",
+    "ours": false,
+    "label_offset": [
+     10,
+     -3
+    ]
+   },
+   {
+    "tag": "CADIOT-STAB (Gray-Scott, sec 5.3) = CB (Assumption 1)",
+    "gamma_R": 0.0,
+    "gamma_D": 2.0,
+    "arxiv": "2505.03091 + 2404.08529",
+    "ours": false,
+    "label_offset": [
+     10,
+     6
+    ]
+   },
+   {
+    "tag": "CADIOT-STAB (Whitham, sec 5.2)",
+    "gamma_R": 0.0,
+    "gamma_D": 0.5,
+    "arxiv": "2505.03091",
+    "ours": false,
+    "label_offset": [
+     10,
+     5
+    ]
+   },
+   {
+    "tag": "BRT (Lemma 2.10, p=1.7, q1=1, n=1)",
+    "gamma_R": 0.7,
+    "gamma_D": 2.0,
+    "arxiv": "2504.05066",
+    "ours": false,
+    "label_offset": [
+     10,
+     -12
+    ]
+   },
+   {
+    "tag": "BDL (assumptions (4)+(5), s_L=1)",
+    "gamma_R": 1.0,
+    "gamma_D": 1.0,
+    "arxiv": "1503.06315",
+    "ours": false,
+    "label_offset": [
+     12,
+     4
+    ],
+    "on_boundary": true,
+    "boundary_note": "EQUAL exponents; saved by the constant rho <= 2*delta < 1"
+   },
+   {
+    "tag": "OURS: a=0 CLM bordered tail",
+    "gamma_R": 1.0,
+    "gamma_D": 0.0,
+    "arxiv": null,
+    "ours": true,
+    "label_offset": [
+     16,
+     -4
+    ]
+   }
+  ]
+ },
+ "CP5_assumption1_rederived": {
+  "what": "Cadiot Assumption 1 requires l_min > 0 and |l| -> infinity.  Both are recomputed from his published symbols at his published parameters, so the CP_LEDGER's transcription is checked rather than trusted.",
+  "params": {
+   "swift_hohenberg": {
+    "mu": 0.32,
+    "nu1": -1.6,
+    "where": "section 5.1.2 (the stable hexagonal pattern)"
+   },
+   "whitham": {
+    "T": 0.5,
+    "c": 0.8,
+    "where": "section 5.2"
+   },
+   "gray_scott": {
+    "lambda1": 19.0,
+    "lambda2": 10.0,
+    "where": "section 5.3, eq. (44)"
+   }
+  },
+  "checks": {
+   "swift_hohenberg": {
+    "params": {
+     "mu": 0.32,
+     "nu1": -1.6,
+     "where": "section 5.1.2 (the stable hexagonal pattern)"
+    },
+    "l_min_measured": 0.32000142773117995,
+    "l_min_expected_analytic": 0.32,
+    "growth_exponent": 4.000000002758708,
+    "assumption1_l_min_positive": true
+   },
+   "whitham": {
+    "params": {
+     "T": 0.5,
+     "c": 0.8,
+     "where": "section 5.2"
+    },
+    "l_min_measured": 0.19999999999999996,
+    "growth_exponent": 0.5017017174406407,
+    "assumption1_l_min_positive": true,
+    "note": "T = 0.5 is ABOVE the critical Bond number 1/3, so m_T is increasing from m_T(0) = 1 and the minimum of |l| sits at xi = 0, at 1 - c."
+   },
+   "gray_scott": {
+    "params": {
+     "lambda1": 19.0,
+     "lambda2": 10.0,
+     "where": "section 5.3, eq. (44)"
+    },
+    "sigma0_measured": 10.0,
+    "sigma0_expected_analytic": 10.0,
+    "growth_exponent_det": 3.999999986133862,
+    "offdiagonal_entry": 189.0,
+    "cb_assumption1_det_bounded_away_from_zero": true
+   }
+  },
+  "gray_scott_crossover": {
+   "lambda1": 19.0,
+   "lambda2": 10.0,
+   "offdiagonal_entry": 189.0,
+   "crossover_xi": 2.129348014767576,
+   "probe_xi": [
+    2.129348014767576,
+    4.258696029535152,
+    21.29348014767576,
+    212.93480147675757
+   ],
+   "rho_at_probe": [
+    0.9999999999999997,
+    0.2603305785123966,
+    0.010552763819095475,
+    0.00010558600231283623
+   ],
+   "rho_decay_exponent": -1.996683313659875
+  }
+ },
+ "CP5_headline": {
+  "swift_hohenberg_l_min": 0.32000142773117995,
+  "swift_hohenberg_growth_exponent": 4.000000002758708,
+  "whitham_l_min": 0.19999999999999996,
+  "whitham_growth_exponent": 0.5017017174406407,
+  "gray_scott_sigma0": 10.0,
+  "gray_scott_offdiagonal_entry": 189.0,
+  "gray_scott_crossover_xi": 2.129348014767576,
+  "gray_scott_rho_decay_exponent": -1.996683313659875
+ },
+ "CP6_shift_damping": [
+  {
+   "p": 0.0,
+   "offset": 1,
+   "indices": [
+    8,
+    32,
+    128,
+    512,
+    2048,
+    8192
+   ],
+   "ratio": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ratio_at_largest_index": 1.0,
+   "distance_from_one_at_largest_index": 0.0
+  },
+  {
+   "p": 0.5,
+   "offset": 1,
+   "indices": [
+    8,
+    32,
+    128,
+    512,
+    2048,
+    8192
+   ],
+   "ratio": [
+    0.9428090415820635,
+    0.9847319278346619,
+    0.9961164901835046,
+    0.9990248656871403,
+    0.9997559487456029,
+    0.9999389704311172
+   ],
+   "ratio_at_largest_index": 0.9999389704311172,
+   "distance_from_one_at_largest_index": 6.102956888276445e-05
+  },
+  {
+   "p": 1.0,
+   "offset": 1,
+   "indices": [
+    8,
+    32,
+    128,
+    512,
+    2048,
+    8192
+   ],
+   "ratio": [
+    0.8888888888888888,
+    0.9696969696969697,
+    0.9922480620155039,
+    0.9980506822612085,
+    0.9995119570522206,
+    0.9998779445868424
+   ],
+   "ratio_at_largest_index": 0.9998779445868424,
+   "distance_from_one_at_largest_index": 0.00012205541315757351
+  },
+  {
+   "p": 2.0,
+   "offset": 1,
+   "indices": [
+    8,
+    32,
+    128,
+    512,
+    2048,
+    8192
+   ],
+   "ratio": [
+    0.7901234567901234,
+    0.9403122130394858,
+    0.9845562165735232,
+    0.9961051643620639,
+    0.9990241522903601,
+    0.9997559040712087
+   ],
+   "ratio_at_largest_index": 0.9997559040712087,
+   "distance_from_one_at_largest_index": 0.00024409592879126585
+  },
+  {
+   "p": 4.0,
+   "offset": 1,
+   "indices": [
+    8,
+    32,
+    128,
+    512,
+    2048,
+    8192
+   ],
+   "ratio": [
+    0.6242950769699741,
+    0.8841870579912152,
+    0.9693509435935703,
+    0.9922254984687744,
+    0.9980492568594725,
+    0.9995118677252399
+   ],
+   "ratio_at_largest_index": 0.9995118677252399,
+   "distance_from_one_at_largest_index": 0.00048813227476007803
+  }
+ ],
+ "CP6_spread_damping": [
+  {
+   "p": 1.2,
+   "q1": 1.0,
+   "q2": 1.0,
+   "rows": [
+    {
+     "i": 8,
+     "weighted_row_sum": 3.774948959573897
+    },
+    {
+     "i": 32,
+     "weighted_row_sum": 4.98107501492166
+    },
+    {
+     "i": 128,
+     "weighted_row_sum": 6.57256788634236
+    },
+    {
+     "i": 512,
+     "weighted_row_sum": 8.672555320120695
+    }
+   ],
+   "measured_growth_exponent_in_i": 0.20000000000000234,
+   "brt_predicted_exponent_p_minus_q1": 0.19999999999999996,
+   "abs_error_vs_BRT": 2.3869795029440866e-15
+  },
+  {
+   "p": 1.7,
+   "q1": 1.0,
+   "q2": 1.0,
+   "rows": [
+    {
+     "i": 8,
+     "weighted_row_sum": 9.749985847775571
+    },
+    {
+     "i": 32,
+     "weighted_row_sum": 25.730366912127106
+    },
+    {
+     "i": 128,
+     "weighted_row_sum": 67.90284537528227
+    },
+    {
+     "i": 512,
+     "weighted_row_sum": 179.19668327334566
+    }
+   ],
+   "measured_growth_exponent_in_i": 0.6999999999999991,
+   "brt_predicted_exponent_p_minus_q1": 0.7,
+   "abs_error_vs_BRT": 8.881784197001252e-16
+  },
+  {
+   "p": 2.5,
+   "q1": 1.0,
+   "q2": 1.0,
+   "rows": [
+    {
+     "i": 8,
+     "weighted_row_sum": 48.122494059327146
+    },
+    {
+     "i": 32,
+     "weighted_row_sum": 384.97995247461716
+    },
+    {
+     "i": 128,
+     "weighted_row_sum": 3079.8396197969373
+    },
+    {
+     "i": 512,
+     "weighted_row_sum": 24638.7169583755
+    }
+   ],
+   "measured_growth_exponent_in_i": 1.5,
+   "brt_predicted_exponent_p_minus_q1": 1.5,
+   "abs_error_vs_BRT": 0.0
+  }
+ ],
+ "CP6_worst_shift_damping_at_i_8192": 0.00048813227476007803,
+ "CP6_reading": "BRT Definition 2.8 repairs infinite Gershgorin radii by conjugating with a DIAGONAL weight f(i) = max(1, i^p) -- the same one-parameter family legs 51-53 swept as the exponent s.  Against a NEAREST-NEIGHBOUR shift the conjugation factor is f(i)/f(i+1) = (i/(i+1))^p -> 1 for EVERY p, so the weight cannot damp it: at index 8192 the largest damping over p in {0, 0.5, 1, 2, 4} is 4.88e-04.  Against BRT's OWN bounded, spread off-diagonal the same weight reproduces their published exponent p - q1 to better than 5e-3.  **This is why legs 51-53 measured 'the coupling entry is K/2 for EVERY s'** -- a diagonal weight is asymptotically flat a bounded distance from the diagonal, which is exactly where a shift lives.",
+ "ANSWER": {
+  "gate": "Does Cadiot arXiv:2505.03091's construction cover an operator whose unbounded part is off-diagonal with a non-decaying tail inverse -- i.e. does it already contain leg 58's no-go, or a positive result that contradicts it?",
+  "answer": "no",
+  "branch_taken": "no -> The gap leg 57's ledger measured is CONFIRMED at full-text depth for the one paper most likely to close it.  The located hypotheses are banked as an executable ledger entry (solver/certificate_shapes.py CP_LEDGER).  NG may claim novelty against this paper AND NO FURTHER.",
+  "three_independent_exclusions": [
+   "Assumption 1 (sec 2.1): L is a Fourier multiplier with |l| >= l_min > 0 -- the unbounded part is exactly diagonal AND bounded below.  Our unbounded part is a variable-coefficient transport term, outside the class by definition.",
+   "Proof of Lemma 3.3 (sec 3): 'since L is diagonal, L pi_N = pi_N L pi_N' is the step that removes the unbounded part from the off-diagonal Gershgorin radii.  It is load-bearing in a proof, not ambient convenience.",
+   "Lemma 2.2 (sec 2.3): DG(u~) is relatively compact with respect to L.  A transport term of the same order as the unbounded part is not."
+  ],
+  "the_near_miss": "Section 5.2's capillary-gravity Whitham equation is the ONE equation in the paper carrying a transport term u d_x u.  It never becomes an unbounded off-diagonal operator: the traveling-wave reduction divides out d_x and the transport collapses to G(u) = u^2, whose derivative 2 u~ is a BOUNDED multiplication operator.  The gCLM/CLM linearisation admits no such reduction."
+ },
+ "CAP_ON_LEG_58_NG": {
+  "claim_strength": "NG MAY claim novelty against arXiv:2505.03091, arXiv:2504.05066, arXiv:2404.08529 and arXiv:2302.12877 -- four papers read in full, none of which covers an off-diagonal unbounded part.  NG may NOT claim more than that: this is a bounded statement about a corpus, not a theorem.",
+  "wording_constraint_MUST_ACT_ON": "**NG may NOT phrase its no-go as 'the published machinery requires a nonzero diagonal'.**  That sentence is FALSE against BRT arXiv:2504.05066 section 2.1, which removes precisely that hypothesis from the classical infinite-matrix Gershgorin theorem: 'some of the assumptions of [FL91, Theorem 2.1] are needlessly restrictive (for instance, all the diagonal elements of L have to be nonzero)'.  Their Theorem 2.6 needs only a Schauder basis, a sup-attaining property, and a compact resolvent.",
+  "why_this_costs_NG_nothing_in_substance": "The generalised theorem APPLIES to a zero diagonal and returns disks of infinite radius -- it is VACUOUS, not violated (their Definition 2.5: 'We note that its radius r_i(L) can be infinite').",
+  "recommended_wording": "Phrase the no-go QUANTITATIVELY, as an ordering of growth rates: no located construction covers an operator whose off-diagonal ROW-SUM growth exceeds its DIAGONAL growth.  That is exactly BRT Lemma 2.10's own requirement p - q1 < 2/n, it is true, and it is defensible.",
+  "bonus_for_NG": "The one published repair for infinite Gershgorin radii is a DIAGONAL WEIGHT, and it provably cannot reach a shift: f(i)/f(i+1) -> 1 for every exponent.  This is the mechanism behind legs 51-53's measured 'the coupling entry is K/2 for EVERY s' and NG may use it as such."
+ },
+ "what_this_does_NOT_establish": "That no such construction exists -- four papers read in full is a corpus, not a theorem, and a NO here is 'no located source covers this'.  That this leg found anything mathematical -- it did not; the observation is folklore in print (leg 57, CP0) and what is new is the reading depth and the axis.  That FL91's exact hypotheses are known first-hand -- they are not, and the ledger refuses that row.  Nothing here moves any link of the L1->L4 chain; Clay stays at ~0.05% behind Walls 1 and 2.",
+ "not_rigorous": "Float64 on grids, no intervals.  The re-derived l_min values are minima over grids and the growth exponents are least-squares fits over three decades.  They say the published hypotheses are consistent with the published parameters; they prove nothing.",
+ "figure": "writeup/figures/fig56_route_cp_v1_cadiot.png",
+ "elapsed_s": 25.70193600654602
+}

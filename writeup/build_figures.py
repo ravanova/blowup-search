@@ -305,6 +305,10 @@ P2_EVIDENCE = [
     "../experiments/p2_route_nb_v1_targetnorm_evidence.py",     # fig50 -- Route-NB v1 (leg 55)
     "../experiments/p2_route_tn_v1_consistency_evidence.py",    # fig51 -- Route-TN v1 (leg 56)
     "../experiments/p2_route_xs_v1_shapes_evidence.py",         # fig52 -- Route-XS v1 (leg 57)
+    # Leg 62 is a pure literature leg: its figure is a table/diagram built from the same
+    # curated JSON the runner writes, so the runner IS the evidence script and there is
+    # no separate *_evidence.py.  Re-running it is cheap (~20s, no operator solves).
+    "../experiments/p2_route_cp_v1_cadiot.py",                  # fig56 -- Route-CP v1 (leg 62)
 ]
 
 

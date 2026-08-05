@@ -256,6 +256,116 @@ def test_15_decay_exponent_refuses_rather_than_returning_a_number():
     print("  refuses on: too few rungs, a zero rung, an inf rung, a negative rung")
 
 
+# ==========================================================================
+# ROUTE-CP v1 (leg 62): the Cadiot pre-emption, settled from the full text
+# ==========================================================================
+# Gates 16-22 guard the CP ledger.  Same two groups as above: 16-20 guard the
+# bookkeeping (located statements, disclosed reading depth, a gate that refuses what it
+# has not read), 21-22 guard the measurement (the diagonal weight that repairs BRT's
+# radii, measured against a shift and against BRT's own operator).
+def test_16_cp_rows_are_traced_and_disclose_their_reading_depth():
+    from solver.certificate_shapes import CP_LEDGER, cp_unlocated_rows
+    bad = cp_unlocated_rows()
+    assert bad == [], f"CP rows not traced, or hiding a second-hand reading: {bad}"
+    for row in CP_LEDGER:
+        assert row["located"], row["tag"]
+        for d in row["located"]:
+            assert d["where"] and "abstract" not in d["where"].lower(), (row["tag"], d)
+            assert d["quote"] and d["supports"], row["tag"]
+    n_loc = sum(len(r["located"]) for r in CP_LEDGER)
+    print(f"  {len(CP_LEDGER)} rows, {n_loc} located statements, none from an abstract")
+
+
+def test_17_the_gate_answers_no_and_names_what_it_refused():
+    from solver.certificate_shapes import cp_gate_answer
+    g = cp_gate_answer()
+    assert g["answer"] == "no", g
+    assert g["covering_rows"] == [] and g["contradicting_rows"] == []
+    # FL91 is paywalled and read only second-hand.  It must be REFUSED, not counted.
+    assert g["refused_not_full_text"] == ["FL91"], g["refused_not_full_text"]
+    assert g["n_full_text"] == 3, g["n_full_text"]
+    print(f"  gate=no over {g['n_full_text']} full-text rows; "
+          f"refused (not full text): {g['refused_not_full_text']}")
+
+
+def test_18_the_gate_can_answer_yes_lesson_90():
+    """A gate that cannot come out the other way is not a gate."""
+    from solver.certificate_shapes import FULL_TEXT, cp_gate_answer, cp_literature_rows
+    synthetic = dict(cp_literature_rows()[0])
+    synthetic["tag"] = "SYNTHETIC_CP_CONTROL"
+    synthetic["read_at"] = FULL_TEXT
+    synthetic["covers_offdiag_unbounded"] = True
+    synthetic["rho"] = 3.0
+    g = cp_gate_answer(cp_literature_rows() + [synthetic])
+    assert g["answer"] == "yes", g
+    assert g["covering_rows"] == ["SYNTHETIC_CP_CONTROL"], g["covering_rows"]
+    print("  admitting a fictitious covering row flips the answer to yes")
+
+
+def test_19_the_dominance_ratio_separates_every_source_from_our_object():
+    from solver.certificate_shapes import (cp_gate_answer, dominance_ratio_admits,
+                                           our_cp_row)
+    g = cp_gate_answer()
+    for r in g["rows"]:
+        if r["rho"] is None:
+            assert dominance_ratio_admits(r["rho"]) is None, r["tag"]
+            continue
+        assert r["rho"] < 1.0, (r["tag"], r["rho"])
+        assert r["rho_admits_tail_estimate"] is True, r["tag"]
+    ours = our_cp_row()
+    assert ours["rho"] == float("inf")
+    assert dominance_ratio_admits(ours["rho"]) is False
+    # magnitudes, never a bare boolean: the gap is not marginal
+    assert ours["offdiag_growth"] - ours["diag_growth"]["a0_clm"] == 1.0
+    print(f"  every located source rho < 1; ours rho = {ours['rho']}, "
+          f"gamma_R - gamma_D = "
+          f"{ours['offdiag_growth'] - ours['diag_growth']['a0_clm']:+.1f}")
+
+
+def test_20_an_unread_source_can_never_silently_answer_a_gate():
+    from solver.certificate_shapes import SECOND_HAND, cp_literature_rows
+    fl = [r for r in cp_literature_rows() if r["tag"] == "FL91"][0]
+    assert fl["read_at"] == SECOND_HAND
+    assert fl["rho"] is None, "an unread source must not carry a numeric rho"
+    assert fl["arxiv"] is None and "paywalled" in fl["fetch"]
+    print("  FL91 carries rho=None and is flagged SECOND_HAND with its reason")
+
+
+def test_21_a_diagonal_weight_cannot_damp_a_nearest_neighbour_shift():
+    """BRT's repair (Definition 2.8), applied to a shift, measured -- not asserted.
+
+    This is WHY legs 51-53 measured "the coupling entry is K/2 for EVERY s".
+    """
+    from solver.certificate_shapes import shift_damping_ladder
+    lad = shift_damping_ladder()
+    for r in lad:
+        # a repair would need the ratio -> 0.  It goes to 1, from below, for every p.
+        assert r["ratio_at_largest_index"] > 0.999, (r["p"], r["ratio_at_largest_index"])
+        assert r["distance_from_one_at_largest_index"] < 1e-3, r["p"]
+        # and it is MONOTONE toward 1 in the index -- the damping gets worse, not better
+        assert r["ratio"][-1] > r["ratio"][0] or r["p"] == 0.0, r["p"]
+    worst = max(x["distance_from_one_at_largest_index"] for x in lad)
+    print(f"  p in {[x['p'] for x in lad]}: at index 8192 the weight damps a "
+          f"nearest-neighbour coupling by at most {worst:.2e}")
+
+
+def test_22_the_same_weight_reproduces_BRTs_published_exponent_on_THEIR_operator():
+    """The contrast that makes gate 21 a finding rather than an isolated fact.
+
+    BRT eq. (2.8): the weighted row sum of their bounded, spread off-diagonal grows like
+    `i^{p-q1}`.  Measured here and compared to their prediction.
+    """
+    from solver.certificate_shapes import spread_damping_ladder
+    for p, q1 in ((1.7, 1.0), (1.2, 1.0), (2.5, 1.0)):
+        d = spread_damping_ladder(p, q1)
+        err = abs(d["measured_growth_exponent_in_i"]
+                  - d["brt_predicted_exponent_p_minus_q1"])
+        assert err < 5e-3, (p, q1, d["measured_growth_exponent_in_i"], err)
+        print(f"  p={p}, q1={q1}: measured exponent "
+              f"{d['measured_growth_exponent_in_i']:+.4f} vs BRT's p-q1 = "
+              f"{d['brt_predicted_exponent_p_minus_q1']:+.4f}  (|err| {err:.1e})")
+
+
 if __name__ == "__main__":
     import time
     t0 = time.time()
@@ -273,7 +383,14 @@ if __name__ == "__main__":
                test_12_a_nonzero_diagonal_restores_decay,
                test_13_the_shift_is_the_only_case_that_fails,
                test_14_bdl_threshold_is_NOT_where_the_behaviour_changes,
-               test_15_decay_exponent_refuses_rather_than_returning_a_number):
+               test_15_decay_exponent_refuses_rather_than_returning_a_number,
+               test_16_cp_rows_are_traced_and_disclose_their_reading_depth,
+               test_17_the_gate_answers_no_and_names_what_it_refused,
+               test_18_the_gate_can_answer_yes_lesson_90,
+               test_19_the_dominance_ratio_separates_every_source_from_our_object,
+               test_20_an_unread_source_can_never_silently_answer_a_gate,
+               test_21_a_diagonal_weight_cannot_damp_a_nearest_neighbour_shift,
+               test_22_the_same_weight_reproduces_BRTs_published_exponent_on_THEIR_operator):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.0f}s)")

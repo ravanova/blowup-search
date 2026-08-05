@@ -194,6 +194,66 @@ def test_9_artifact_matches_the_module():
     print("  committed JSON agrees with a fresh call on all six headline numbers  OK")
 
 
+# ==========================================================================
+# ROUTE-CP v1 (leg 62): Cadiot's own hypotheses, re-derived rather than trusted
+# ==========================================================================
+def test_10_cadiot_assumption1_holds_at_his_own_published_parameters():
+    """CP5.  If this failed, leg 62's whole reading of the paper would be wrong.
+
+    Assumption 1 requires `l_min > 0` AND `|l| -> infinity`.  Both are recomputed from
+    the published symbols at the published parameters, and both are asserted with their
+    MAGNITUDE.
+    """
+    from solver.literature_gates import cadiot_assumption1_check
+    c = cadiot_assumption1_check()
+
+    sh = c["swift_hohenberg"]
+    # |l(xi)| = |(1-|2 pi xi|^2)^2 + mu| is minimised where |2 pi xi|^2 = 1, giving mu
+    assert abs(sh["l_min_measured"] - sh["l_min_expected_analytic"]) < 1e-4, sh
+    assert sh["l_min_measured"] > 0.0 and sh["assumption1_l_min_positive"]
+    assert abs(sh["growth_exponent"] - 4.0) < 1e-3, sh["growth_exponent"]
+
+    wh = c["whitham"]
+    # T = 0.5 > 1/3, so m_T increases from m_T(0) = 1 and inf|l| = 1 - c = 0.2
+    assert abs(wh["l_min_measured"] - 0.2) < 1e-6, wh["l_min_measured"]
+    assert abs(wh["growth_exponent"] - 0.5) < 5e-3, wh["growth_exponent"]
+
+    gs = c["gray_scott"]
+    # lower-triangular symbol: det = d11 * d22, minimised at xi = 0 at 1 * lambda2 = 10
+    assert abs(gs["sigma0_measured"] - gs["sigma0_expected_analytic"]) < 1e-6, gs
+    assert gs["cb_assumption1_det_bounded_away_from_zero"]
+    assert gs["offdiagonal_entry"] == 189.0, gs["offdiagonal_entry"]
+
+    print(f"  SH: l_min={sh['l_min_measured']:.4f} (=mu), growth "
+          f"{sh['growth_exponent']:.4f}")
+    print(f"  Whitham: l_min={wh['l_min_measured']:.4f} (=1-c), growth "
+          f"{wh['growth_exponent']:.4f}")
+    print(f"  Gray-Scott: sigma0={gs['sigma0_measured']:.3f} (=lambda2), "
+          f"off-diagonal entry {gs['offdiagonal_entry']:.0f} CONSTANT")
+
+
+def test_11_the_one_offdiagonal_entry_in_the_corpus_is_dominated():
+    """CP3.  Gray-Scott is the only place Cadiot's LINEAR part has an off-diagonal entry.
+
+    It is a constant while the diagonal grows quadratically, so the dominance ratio
+    DECAYS.  The point is not that a crossover exists -- it is that rho decays at all;
+    ours is +infinity at every index.
+    """
+    from solver.literature_gates import cadiot_gray_scott_crossover
+    d = cadiot_gray_scott_crossover()
+    assert d["offdiagonal_entry"] == 189.0
+    # at the crossover the ratio is exactly 1, and it falls away like |xi|^-2 after it
+    assert abs(d["rho_at_probe"][0] - 1.0) < 1e-9, d["rho_at_probe"][0]
+    assert abs(d["rho_decay_exponent"] + 2.0) < 1e-2, d["rho_decay_exponent"]
+    assert d["rho_at_probe"][-1] < 1e-3, d["rho_at_probe"][-1]
+    assert 2.0 < d["crossover_xi"] < 2.2, d["crossover_xi"]
+    print(f"  off-diagonal 189 constant vs diagonal ~|2 pi xi|^2: crossover at "
+          f"xi={d['crossover_xi']:.4f}, rho decays with exponent "
+          f"{d['rho_decay_exponent']:+.4f}")
+    print(f"  rho at 100x the crossover: {d['rho_at_probe'][-1]:.2e}  "
+          f"(ours: +inf at every index)")
+
+
 if __name__ == "__main__":
     import time
     t0 = time.time()
@@ -205,7 +265,9 @@ if __name__ == "__main__":
                test_6_supercritical_balance,
                test_7_branch_against_xu,
                test_8_ledger_does_not_rot,
-               test_9_artifact_matches_the_module):
+               test_9_artifact_matches_the_module,
+               test_10_cadiot_assumption1_holds_at_his_own_published_parameters,
+               test_11_the_one_offdiagonal_entry_in_the_corpus_is_dominated):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.0f}s)")
