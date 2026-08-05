@@ -51,11 +51,17 @@ with a numerical artifact.
   at [writeup/1_gclm_1d/SUMMARY.md](writeup/1_gclm_1d/SUMMARY.md).
 - [CLAY_ROADMAP.md](CLAY_ROADMAP.md) — forward strategic plan for continuing the
   Clay pursuit (the two structural walls, ranked routes A–D, go/no-go criteria).
-- [ORCHESTRATION.md](ORCHESTRATION.md) — the multi-agent day contract: the
-  six-agent split, file ownership, the documentation quartet, and the hands-off
-  merge policy enforced by [scripts/merge_gate.sh](scripts/merge_gate.sh).
-  [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) is the paste-able prompt
-  that drives it.
+- [ORCHESTRATION.md](ORCHESTRATION.md) — the multi-agent contract for continuous
+  four-leg-parallel operation: the 24-slot roster, the Decision Maker, file
+  ownership and leg territories, the documentation quartet, the hands-off merge
+  policy enforced by [scripts/merge_gate.sh](scripts/merge_gate.sh), the live
+  progress file, and how to stop a run.
+  To start a run, paste the full text of
+  [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) into a fresh Sonnet 5 session
+  — that file is pure instruction and nothing else, which is what makes the
+  session begin work instead of asking what to do.
+  [DIRECTION.md](DIRECTION.md) is the Decision Maker's leg queue and
+  [reports/ORCH_STATE.md](reports/ORCH_STATE.md) is the orchestrator's handoff.
 - [millennium_prize_problems.md](millennium_prize_problems.md) — survey of
   all 6 open Millennium Prize Problems and why Navier–Stokes was chosen.
 - [WIN_CONDITION.md](WIN_CONDITION.md) — the precise, tiered criteria for

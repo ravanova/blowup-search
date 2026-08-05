@@ -1,10 +1,34 @@
-# Continuation prompt (copy into a fresh session)
+# The standing directive for leg work
+
+> **If this file was handed to you as your assignment, it is a request, not a document — read
+> the directive below and start on it, without asking what to do.** If you are reading it as
+> reference (the orchestrator and every leg agent do), it carries the critical-path leg's
+> directive and the standing discipline that binds all four legs.
+>
+> **To start an orchestrated four-leg run, this is not the file to paste** — paste
+> [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) instead.
 
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
 > bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
 > `PORT`, `V`, `C-PILOT`, `L1`, `T` and **`TC`** are **DONE**; **`MM` is NEXT.** Stage `B` is
 > still **blocked** — C-PILOT's gate answered **NO**, so the GA ban did not lift.
+
+> ## 🔀 FOUR LEGS RUN AT ONCE NOW. If you are a leg agent, read this first.
+> **DIRECTIVE 1 below is the critical-path leg only.** Three exploration legs run beside it,
+> each with its own route, gate and file territory in [DIRECTION.md](DIRECTION.md) — that is
+> your directive if you are not on the critical path. Either way:
+> **you are one agent doing one whole leg**, novelty pass to quartet. Legs are not sharded.
+> - **Commit messages start `Leg <N>: <ROLE> — `** (`Leg 0:` for repo-wide work).
+> - **Stay inside your declared file territory.** A diff outside it fails the merge gate.
+> - **The five shared ledgers are integration-owned — do not edit them.** Write
+>   `experiments/journal/leg_<N>.md` and `writeup/novelty/leg_<N>.md` instead of
+>   `experiments/JOURNAL.md` and `LITERATURE_CHECK.md`; never touch `plan_of_record.py`,
+>   `CONTINUATION_PROMPT.md` or `PHASE2_P2_NOTES.md`. The orchestrator folds them in.
+> - **Your gate answer goes in your PR body in its pre-committed wording.** You do not update
+>   the plan yourself — the orchestrator applies the branch the gate already prescribed.
+>
+> Full contract: [ORCHESTRATION.md](ORCHESTRATION.md). Everything below applies to every leg.
 
 ---
 
@@ -136,6 +160,35 @@ and fetching by ID has always worked. The BDL flag is **CLOSED** by LIT's ninth 
 assumptions (4)–(5) require a diagonal bounded away from zero, their LU construction divides by
 it, and a vanishing diagonal is not on their own future-work list — **BDL does not cover the
 zero-diagonal Fredholm case.**
+
+---
+
+# DIRECTIVE 3 — WHAT AN EXPLORATION LEG OWES (it is the same debt)
+
+Three of the four live legs are **not** on the critical path. Nothing about that is a
+discount. An exploration leg owes exactly what a critical-path leg owes:
+
+**A gate with both branches written down before it starts.** Not "see whether this works" — a
+question ending in a question mark, a yes-branch that says what happens next, and a no-branch
+that says what *stops*. It is in `DIRECTION.md` before the agent is spawned, and it is answered
+in its pre-committed wording. A leg that discovers its gate along the way has no gate.
+
+**The novelty pass first, and the log committed** — `writeup/novelty/leg_<N>.md`, **links, not
+counts** (leg 53 logged counts, could not be audited, and was withdrawn).
+
+**The full quartet, negative results included** (`ORCHESTRATION.md` §6). Runner, curated JSON
+with every number the prose quotes, BLOG **and** TECHNICAL, registered figure. Three of the
+last four legs answered NO and all four shipped the same artifact. That is the point.
+
+**The bans, all of them.** `.venv/bin/python plan_of_record.py` prints the ones in force.
+Being on a different route does not exempt you from a ban raised on another one — the bans are
+about this repository's failure modes, not about a particular stage.
+
+**And the honest ceiling.** The queue is ordered by which legs *could* touch a link of the
+L1→L4 chain. **That ordering is a choice of what to try. It is never a claim that anything
+moved.** If your leg's result reads like movement on the chain, that is escalation #3 in
+`ORCHESTRATION.md` §8: say so in your PR body, park it, and let the user decide. Do not write
+it into prose.
 
 ---
 
