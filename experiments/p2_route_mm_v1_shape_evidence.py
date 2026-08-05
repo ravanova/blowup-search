@@ -1,5 +1,5 @@
 """Phase-2 Route-MM v1 (fig49): the last free choice was the SHAPE of the approximate
-inverse, and spending it is worth 1.4x where 45x was needed.
+inverse, and spending it is worth 1.17x where 9x was needed.
 
 Leg 53 assembled the bordered certificate with the block-diagonal approximate inverse the
 method requires and the polynomial did not close: the coupling sub-block `Z1[Gamma<-tail]`
@@ -19,7 +19,8 @@ Regenerate the data (deterministic):
 Six panels: A the shape battery at the best split, against the line Z_1 = 1; B Z_1 against
 the split K for every shape and both admissible classes; C MM-1, which is measured to be an
 EQUALITY, with the small-K region where its RHS drops below 1 marked and the odd splits
-marked singular; D MM-4, the shape-independent floor; E MM-3, the admissibility audit that
+marked singular; D MM-4, the floor for A11 near Gamma^-1 -- NOT shape-independent, see MM4c;
+E MM-3, the admissibility audit that
 disqualifies the exact inverse; F MM-5, the positive control that CAN report the other
 answer.
 """
@@ -78,7 +79,7 @@ def build_figure():
            color=C["good"], fontsize=9, ha="right", fontweight="bold")
     a.axhline(d["MM4_min_floor"], color=C["floor"], lw=1.6, ls=":")
     a.text(-0.4, d["MM4_min_floor"] * 1.25,
-           f"shape-independent floor {d['MM4_min_floor']:.2f}",
+           f"floor for $A_{{11}}\\approx\\Gamma^{{-1}}$: {d['MM4_min_floor']:.2f}",
            color=C["floor"], fontsize=8.5)
     a.set_yscale("log")
     a.set_xticks(range(len(shapes)))
@@ -141,7 +142,7 @@ def build_figure():
                 "(the small-K corner is closed by MM-4, panel D)",
                 fontsize=10, fontweight="bold")
 
-    # ---- D: MM-4, the shape-independent floor ----------------------------
+    # ---- D: MM-4, the floor for A11 near Gamma^-1 (MM4c: NOT universal) ---
     e = ax[1, 1]
     for kind, mk in (("flat", "s"), ("algebraic", "o")):
         rows = sorted([r for r in d["MM4_floor"] if r["class"] == kind],
@@ -158,8 +159,8 @@ def build_figure():
     e.set_xlabel("split K")
     e.set_ylabel(r"$\|\Gamma^{-1} L\hat h\|_w/\|\hat h\|_w$")
     e.legend(fontsize=7.5, loc="upper left")
-    e.set_title("D  MM-4: the floor no shape of A can cross\n"
-                r"($\hat h$ spans $\ker T$, so $A_{12}$ drops out algebraically)",
+    e.set_title(r"D  MM-4: the floor for $A_{11}\approx\Gamma^{-1}$" + "\n"
+                r"($\hat h$ spans $\ker T$ so $A_{12}$ drops out — but $A_{11}$ is free: MM4c)",
                 fontsize=10, fontweight="bold")
 
     # ---- E: MM-3, the admissibility audit --------------------------------
@@ -228,7 +229,11 @@ def build_figure():
           f"{d['MM2_block_diagonal_baseline']['Z1']:.4f}")
     print(f"  improvement from spending the shape            : "
           f"{d['MM2_improvement_over_block_diagonal']:.3f}x")
-    print(f"  shape-independent floor (MM-4), smallest       : {d['MM4_min_floor']:.4f}")
+    print(f"  floor for A11 near Gamma^-1 (MM-4), smallest   : {d['MM4_min_floor']:.4f}")
+    print(f"  ...NOT shape-independent (MM4c counter-constr) : beatable to "
+          f"{min(r['floor_with_VERA2_A11'] for r in d['MM4c_counter_construction']):.1e}, "
+          f"but total Z_1 then "
+          f"{d['MM4c_min_total_Z1_of_counter_construction']:.3g}")
     print(f"  MM-1 is an equality to                         : "
           f"{d['MM1_max_ratio_deviation_from_one']:.2e}")
     print(f"  MM-1's RHS first exceeds 1 at K                : "

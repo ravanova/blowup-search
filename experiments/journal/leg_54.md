@@ -64,10 +64,13 @@ space rather than as leg 53's sum of sub-block norms. Ordered by what they estab
   explicit operator available — and it becomes `1e4`, *worse than the baseline by two
   orders*, growing with `M_A` while being independent of `M_L` to five digits. The cost is
   at the **seam**, which is the same mismatch one level up.
-* **MM-4 is the part that generalises.** `(I − AL)_{Γ,tail} = −(A11 B + A12 T)`, and `T` is
-  **singular** on exactly the far-field direction the certificate borders, so applied to
-  `ĥ` it collapses to `−A11 B ĥ` and **`A12` drops out of the algebra**. That floor is
-  shape-independent. Dually `(I − AL)_{tail,tail} ĥ = ĥ − A21 B ĥ`, which is *why* the shape
+* **MM-4 is the part that generalises furthest — but not as far as I first wrote.**
+  `(I − AL)_{Γ,tail} = −(A11 B + A12 T)`, and `T` is **singular** on exactly the far-field
+  direction the certificate borders, so applied to `ĥ` it collapses to `−A11 B ĥ` and
+  **`A12` drops out of the algebra**. I called that floor *shape-independent*; **it is not**
+  — `A11` is also part of the shape and is not pinned (VER-A2's GAP 2, below). The floor
+  holds for `A11 ≈ Γ⁻¹`, which is every shape in the battery. Dually
+  `(I − AL)_{tail,tail} ĥ = ĥ − A21 B ĥ`, which is *why* the shape
   must be non-block-diagonal — and `ff_lift` builds exactly that rank-one lift, fixes the
   tail-tail block, and is swamped because it cannot touch `(Γ,tail)`.
 
@@ -101,6 +104,46 @@ border, which is **banned**.
   reached only if the polynomial closes here.
 * Did not edit `plan_of_record.py`, `CONTINUATION_PROMPT.md`, `PHASE2_P2_NOTES.md`,
   `experiments/JOURNAL.md` or `LITERATURE_CHECK.md`.
+
+## VER-A2's review of my own PR, and the four things it corrected
+
+VER-A2 reviewed `b9fb069` independently, reproduced the JSON bit-for-bit (only `elapsed_s`
+differs), hand-built `L` and the Schur `A` from scratch and re-derived every headline to ten
+digits. **The gate answer NO was confirmed and is more robust than my own writeup showed.**
+Four corrections, all adopted:
+
+* **GAP 1 (material — my headline number was wrong).** MM-2's battery and MM-6's polynomial
+  swept `K_SWEEP` (4…64) while MM-1 and MM-4 swept `K_SWEEP_SMALL`. So `K = 2` and `K = 6`
+  — which I had *added specifically to close VER-A's small-`K` hole* — never entered the
+  battery that computes the gate answer. The true best admissible `Z₁` is **8.9591**
+  (`ff_lift`, algebraic, null, `K = 2`), not 32.7489; the baseline is **10.46**, not 45.36;
+  the improvement is **1.17×**, not 1.385×. `K = 2` is the *best-conditioned* split there is.
+* **GAP 2 (over-claim).** MM-4's floor is **not shape-independent**. `A₁₁` is part of the
+  shape and is not pinned: `A₁₁ = (I − A₁₂C)Γ⁻¹`, so a rank-one `A₁₂` annihilates the floor
+  vector and drives the floor to `~1e−16` with the `(Γ,Γ)` block satisfied exactly.
+* **GAP 3 (unsound argument).** MM-4b compared a *relative* defect to an *absolute* floor.
+  The term that must be bounded is `‖A₁₂‖·‖Tĥ‖`, and `‖A₁₂‖` was nowhere bounded.
+* **GAP 4 (mechanism).** MM-1b's stated reason for the odd-`K` singularity is not what the
+  matrix does — rows with no mass off the amplitude column exist at even `K` too.
+
+## THE PATTERN, NAMED, BECAUSE IT IS NOW THREE FOR THREE
+
+**I minimised over the wrong set, in a clause I had already fixed elsewhere.** VER-A caught
+exactly this on leg 53 (a sweep starting at `K = 4` hiding the small-`K` corner). I fixed it
+in MM-1 and MM-4 — and left the identical bug in the battery, which is *the clause that
+produces the gate answer*. Adding a case to one sweep constant and not to the loop that
+consumes the result is not a typo; it is **fixing the example instead of the class**.
+
+The general form, and it is the same shape as lessons 85 and 89: **when a review corrects a
+range, re-derive every quantity that depends on that range, not the one the reviewer
+pointed at.** The concrete rule I would bank: *a headline that says "over every X" must be
+computed by a loop that provably ranges over every X — grep for the sweep constant and check
+every consumer.*
+
+GAP 2 is the same failure one level up, and it is **lesson 90 again**: my `A₁₁` ablation
+compared `Γ⁻¹` against the Schur complement's inverse, which agree to `3.3e−03`. *A control
+whose two arms are the same thing is not a control.* I wrote that lesson into this leg's own
+preamble and then violated it four sections later.
 
 ## Lessons this leg would add
 

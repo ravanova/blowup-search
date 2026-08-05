@@ -1,4 +1,4 @@
-# I spent the last thing I had left to change, and it was worth 1.4x
+# I spent the last thing I had left to change, and it was worth 1.17x
 
 *Part of an honest, long-shot attempt at the Navier–Stokes blow-up problem. Last session I
 put the pieces together and the break moved to the seam between them. This session I tried
@@ -65,13 +65,17 @@ anything.
 
 I built seven versions of `A` and measured all of them on exactly the same object.
 
-The block-diagonal baseline, the one from last session: **45.4**.
+The block-diagonal baseline, the one from last session: **10.46**.
 
-The best that any legitimate alternative achieved: **32.7**.
+The best that any legitimate alternative achieved: **8.96**.
 
-That's an improvement of about **1.4×**. I needed about **45×**.
+That's an improvement of about **1.17×**. I needed about **9×**.
 
-So: real, measurable, reproducible, and roughly forty times too small. The gate answers **no**.
+So: real, measurable, reproducible, and roughly nine times too small. The gate answers **no**.
+
+*(Those two numbers are corrections. I first reported 45.4 and 32.7 — and a reviewer caught
+that my headline was minimised over the wrong set. More on that below, because the mistake is
+more instructive than the result.)*
 
 ## Three things that made this more than "I tried stuff and it didn't work"
 
@@ -96,28 +100,42 @@ beat. And it got worse as I made the computed chunk bigger, while barely caring 
 tested. Both of those point at the same thing: **the cost lives at the seam** between the
 computed part and the explicit part. Which is the same failure as before, one level up.
 
-**And underneath everything there's a floor that doesn't depend on which `A` you pick.**
-This is the part I'd defend hardest. The tail operator is *singular* — it genuinely
+**And underneath everything there's a floor.** The tail operator is *singular* — it genuinely
 annihilates one particular direction, the "far field" that's been the villain of this whole
-sub-project. Write out the error term for a completely arbitrary `A` and apply it to that one
-direction, and the off-diagonal block of `A` — the thing this entire session was about —
-**cancels out of the equation algebraically.**
+sub-project. Write out the error term and apply it to that one direction, and the off-diagonal
+block of `A` — the thing this entire session was about — **cancels out of the equation
+algebraically.** The smallest value anywhere is about **5.0**, at the single most favourable
+configuration that exists. Still five times too big.
 
-Which means no shape of `A` can get below that floor. Not the seven I tried; any of them. I
-measured it at every setting: the smallest value anywhere is about **5.0**, and that's at the
-single most favourable configuration that exists. Still five times too big.
+I originally wrote that as *"no shape of `A` can get below that floor — not the seven I tried;
+any of them."* **That was an over-claim and a reviewer broke it.** The error term also involves
+the *other* block of `A`, the one that inverts the finite chunk, and I'd assumed that block was
+effectively pinned. It isn't. The reviewer wrote down an explicit alternative that drives the
+floor from 5.0 to `1e-16` — fifteen orders of magnitude — while satisfying every constraint I'd
+imposed, exactly.
 
-That's what turns "I tried seven things" into "the thing I was trying can't work."
+The reason my check missed it is embarrassing and worth stating plainly: I "ablated" that block
+by comparing two choices that agree with each other to three decimal places. **A control whose
+two arms are the same thing is not a control.** That's a lesson this very project wrote down
+after the *last* session, and I quoted it in my own preamble before violating it four sections
+later.
 
-One honest footnote on that argument, because I nearly overstated it. The cancellation is
-exact for the *infinite* problem. On the finite chunk I actually compute, the "annihilated"
-direction isn't annihilated perfectly — and I found that out because I wrote a test asserting
-it was, and **the test failed**. So I measured it instead: the leftover sits entirely on the
-very last coefficient (it's an edge effect from chopping the problem off), and it halves every
-time I double the length. At the sizes I use it's a couple of percent, against a floor of 5
-that would have to come down by a factor of five. So the argument survives comfortably — but
-it's a statement about the infinite problem that the finite one *tracks*, not an exact zero,
-and those are different things.
+The conclusion survives, but for a different reason than I gave: the reviewer's construction
+needs enormous coefficients, and those wreck every other part of the estimate — the *total*
+error goes to about `5.7e+05`, five orders of magnitude the wrong way. So the floor's
+*conclusion* is safe while its *proof* wasn't. The honest version: **for approximate inverses
+whose finite block is anything like the natural one — which is all seven I tried — that floor
+holds and nothing you do to the off-diagonal blocks can move it.**
+
+One more footnote, same flavour. The cancellation is exact for the *infinite* problem; on the
+finite chunk the "annihilated" direction isn't annihilated perfectly. I found that out because
+I wrote a test asserting it was, and **the test failed**. The leftover sits entirely on the very
+last coefficient and halves every time I double the length. But my first way of arguing it was
+negligible compared the wrong two quantities, and the same reviewer caught that too — the size
+that matters is the leftover *multiplied by* the size of the off-diagonal block, and for two of
+my seven shapes that product exactly equals the floor. Both of those shapes are ones I'd already
+disqualified for other reasons, so nothing moves; but "negligible" needed to be demonstrated,
+not asserted.
 
 ## Two things I got told, and one I found by crashing
 
@@ -129,12 +147,44 @@ started at 4 and never noticed. I've stated it with the restriction attached.
 
 Then, checking the small splits it flagged, my code **crashed** on a singular matrix. Chasing
 the crash instead of coding around it: **every odd split point produces a singular matrix**,
-in every configuration I tried. There's a clean reason — the far field lives on every *other*
-coefficient, and the operator only connects neighbours, so at odd splits one row of the
-problem ends up with nothing in it.
+in every configuration I tried. The far field lives on every *other* coefficient and the
+operator only connects neighbours, so odd splits break. (I first wrote down a specific reason
+— "one row ends up empty" — and a later reviewer checked it against the actual matrix and
+found it wasn't true: rows like that exist at even splits too, where nothing goes wrong. The
+real mechanism is slightly subtler and one linear-algebra call away. Right conclusion, wrong
+story, and this project has a standing rule about exactly that.)
 
 That was luck, but it was useful luck: it means the gap I'd been warned about was smaller than
 advertised, since half the splits in it don't exist as valid problems at all.
+
+## And then the review found the thing I'd actually got wrong
+
+Everything above was written, committed, and — I thought — done. Then a second reviewer went
+through the whole leg and found the real error, which was none of the things I'd been worrying
+about.
+
+**I'd been told once already that my sweeps started too high.** The first reviewer caught that
+my key inequality only bites for splits of 6 or more, so I added the small splits — 2 and 6 —
+to the sweep. To *a* sweep. The code has several places that loop over split points, and I
+added the new cases to the constant used by two of them and **not** to the one that computes
+the actual headline number.
+
+So the number I published as "the smallest value over every setting" was minimised over a set
+that excluded the best setting. Split 2 — which is the *best-conditioned* case there is, and
+which I myself had argued was admissible — was never in the battery. The corrected numbers are
+the ones at the top of this post: **10.46 and 8.96**, not 45.36 and 32.75.
+
+It doesn't change the answer. Nine is still enormously bigger than one, and no configuration
+anywhere produces a valid certificate. But it's the kind of mistake worth naming precisely,
+because it's not a typo — **I fixed the example instead of the class.** Told that a range was
+too narrow, I widened it where the reviewer pointed and left the identical bug in the one place
+that mattered most. The rule I'd bank from it: *if you claim "the smallest over every X," go
+find every loop that consumes X and check them all — the review that corrects a range has told
+you about a class of bug, not an instance.*
+
+Three separate over-claims in one leg, all caught by review, none of them changing the answer.
+That's roughly what review is for, and it's a better outcome than the alternative, but I'd
+rather have caught the sweep one myself.
 
 ## The control that didn't do its job
 

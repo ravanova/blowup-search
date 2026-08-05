@@ -65,7 +65,10 @@ PRE-COMMITTED CLAUSES, written before the numbers existed (both branches reporta
       carried by the bordered tail inverse of THAT sub-tail.  If the number degrades with
       `M_A`, the exact inverse is not a shape, it is the truncation.
 
-  MM4 THE SHAPE-INDEPENDENT FLOOR.  `(I - A L)_{Gamma,tail} = -(A11 B + A12 T)`.  The tail
+  MM4 THE FLOOR FOR `A11` NEAR `Gamma^-1`.  (v1 of this leg called this the SHAPE-INDEPENDENT
+      floor.  It is not, and VER-A2 refuted that with an explicit counter-construction --
+      see MM4c.  The corrected scope is in this clause's title and is carried everywhere.)
+      `(I - A L)_{Gamma,tail} = -(A11 B + A12 T)`.  The tail
       operator `T` is SINGULAR -- its kernel is the far field `hhat` -- so on that one
       direction the term collapses to `-A11 B hhat` and NO CHOICE OF A12 CAN TOUCH IT.
       Report `||Gamma^-1 (L hhat)||_w / ||hhat||_w` for every K including K = 2, and ablate
@@ -396,13 +399,26 @@ def main():
                     G, w_row, w_col, _, _, _ = augmented_finite_block(
                         K, M, kind, p, gauge, 0.0, far_field, "shipped", h=hdir)
                     Gs = G * (w_row[:, None] / w_col[None, :])
-                    sv = np.linalg.svd(Gs, compute_uv=False)
+                    U, sv, Vt = np.linalg.svd(Gs)
+                    # VER-A2 GAP 4: the MECHANISM is the LEFT NULL VECTOR's support, not
+                    # "one row has no entry off the amplitude column" -- that criterion does
+                    # not discriminate (such rows exist at even K too).  Measure what the
+                    # matrix actually does (the standing rule: cite a mechanism measured on
+                    # the matrix you built).
+                    lnull = U[:, -1]
+                    supp = [int(i) for i in np.nonzero(np.abs(lnull) > 1e-8)[0]]
+                    amp_col = Gs.shape[1] - 1
+                    off_amp = np.abs(np.delete(Gs, amp_col, axis=1)).sum(1)
+                    zero_rows = [int(i) for i in np.nonzero(off_amp < 1e-12)[0]]
                     odd.append({"class": kind, "param": float(p), "gauge": gauge,
                                 "far_field": bool(far_field), "K": int(K),
                                 "K_is_odd": bool(K % 2 == 1),
                                 "smallest_singular_value": float(sv[-1]),
                                 "condition_number": float(sv[0] / sv[-1])
-                                if sv[-1] > 0 else None})
+                                if sv[-1] > 0 else None,
+                                "left_null_support": supp,
+                                "left_null_support_size": len(supp),
+                                "rows_with_no_mass_off_amplitude_column": zero_rows})
     res["MM1b_odd_K_scan"] = odd
     odd_sv = [r["smallest_singular_value"] for r in odd if r["K_is_odd"]]
     even_sv = [r["smallest_singular_value"] for r in odd if not r["K_is_odd"]]
@@ -416,11 +432,19 @@ def main():
         f"singular value is at most {max(odd_sv):.1e} at EVERY odd split and at least "
         f"{min(even_sv):.1e} at every even one.  Odd K is not badly conditioned, it is "
         "SINGULAR -- without the far-field column at K = 3 the smallest singular value is "
-        "exactly 0.0.  The structural reason is visible in the matrix: the far-field kernel "
-        "hhat is supported on one parity chain (modes K+1, K+3, ...) and the linearisation "
-        "couples mode k only to k +/- 1, so at odd K the mode-K residual row acquires no "
-        "entry on any of b_1..b_K or delta c_omega and is carried entirely by the amplitude "
-        "column.  CONSEQUENCE FOR VER-A's GAP 1: the split must be EVEN, so the corner MM-1 "
+        "exactly 0.0.  *** MECHANISM, CORRECTED PER VER-A2's GAP 4.  v1 of this leg said "
+        "'at odd K the mode-K residual row acquires no entry on any of b_1..b_K or delta "
+        "c_omega and is carried entirely by the amplitude column'.  THAT IS NOT WHAT THE "
+        "MATRIX DOES, and it does not discriminate: rows with no mass off the amplitude "
+        "column exist at EVEN K too, where the block is nonsingular, and at K = 5 there is "
+        "only one such row while the block is still singular.  The actual mechanism is the "
+        "LEFT NULL VECTOR's support, recorded per row in `left_null_support`: at K = 3 it "
+        "is supported on TWO such rows (which are proportional, hence the singularity), and "
+        "at K = 5 on a PARITY CHAIN of three rows, not on one.  The parity intuition was "
+        "directionally right and the one-row statement was wrong -- the same failure mode "
+        "the standing discipline flags from leg 53, a mechanism cited rather than measured "
+        "on the matrix actually built. *** CONSEQUENCE FOR VER-A's GAP 1: the split must "
+        "be EVEN, so the corner MM-1 "
         "leaves open is not {2, 3, 4} but {2} (both classes) plus {4} in the flat class "
         "alone -- and both are covered by MM4's floor (7.01 and 5.04 at K = 2, 23.07 at "
         "K = 4 flat).  This is NOT a repair by tuning the split: it removes candidate "
@@ -489,27 +513,141 @@ def main():
         f"doubling of M ({res['MM4b_defect_halves_per_doubling']}), i.e. it is O(M^-1) -> 0. "
         f"At the M used throughout this leg it is at most "
         f"{res['MM4b_max_relative_defect_at_M_extra_1024']:.2e} relative, against a floor "
-        "of 5.04 and above -- i.e. a couple of percent, against a quantity that would have "
-        "to fall by a factor of five.  So the floor is a statement about the infinite "
-        "operator which the computed one tracks to a few percent, NOT an exact algebraic "
-        "zero being read off a float, which is the failure lesson 86 warns about.")
+        "of 5.04 and above.  *** BUT THAT COMPARISON IS NOT THE RIGHT ONE, and VER-A2's "
+        "GAP 3 is adopted: the quantity that actually has to be bounded is not the "
+        "RELATIVE defect against an ABSOLUTE floor, it is the term A12 (T hhat) that the "
+        "identity drops, whose size is ||A12|| * ||T hhat||.  ||A12|| is nowhere bounded a "
+        "priori, so it is MEASURED per shape in MM4d.  For every ADMISSIBLE shape it is "
+        "O(10) and the defect term is ~7e-04 against floors of 5..23 -- negligible by "
+        "three to four orders.  For the two INADMISSIBLE shapes it is not: oracle_pinv's "
+        "defect term equals the floor to the last digit and exact_inv's is exactly half "
+        "of it, which is why exact_inv's measured coupling along hhat is ~1e-14 rather "
+        "than >= 13.74.  Those two are independently killed by MM3's audit. ***")
     print(f"            edge-only: {res['MM4b_defect_is_edge_only']}, halves per doubling: "
           f"{res['MM4b_defect_halves_per_doubling']}, max relative defect at M-K=1024: "
           f"{res['MM4b_max_relative_defect_at_M_extra_1024']:.2e}")
+
+    # MM4d -- VER-A2 GAP 3: the term the identity drops is A12 (T hhat), so its size is
+    # ||A12|| * ||T hhat||.  Measure it PER SHAPE against that shape's floor.
+    print("      MM4d: the dropped term is A12 (T hhat) -- ||A12|| measured per shape")
+    dd = []
+    for kind, p in CLASSES:
+        for K in (2, 4):
+            ob = assemble(K, K + M_EXTRA, kind, p, gauge="null")
+            nG, n = ob["nG"], ob["n"]
+            Th = ob["T"] @ ob["hhat"]
+            floor = float(np.sum(np.abs(ob["Gi"] @ (ob["B"] @ ob["hhat"]))))
+            for sh in SHAPES:
+                A = build_A(ob, sh)
+                if A is None:
+                    continue
+                A12 = A[:nG, nG:]
+                term = float(np.sum(np.abs(A12 @ Th)))
+                dd.append({"class": kind, "param": float(p), "K": int(K), "shape": sh,
+                           "admissible": ADMISSIBLE[sh], "A12_norm": colmax(A12),
+                           "dropped_term": term, "floor": floor,
+                           "term_over_floor": term / floor if floor else None})
+                print(f"            {kind:9s} s={p:.1f} K={K} {sh:12s} "
+                      f"{'adm' if ADMISSIBLE[sh] else 'INADM':5s}: ||A12||="
+                      f"{colmax(A12):10.4g}  ||A12 T hhat||={term:10.4g}  "
+                      f"= {term / floor if floor else float('nan'):.3f}x the floor")
+    res["MM4d_dropped_term_by_shape"] = dd
+    adm_dd = [r for r in dd if r["admissible"]]
+    res["MM4d_max_term_over_floor_admissible"] = float(
+        max(r["term_over_floor"] for r in adm_dd))
+    res["MM4d_max_term_over_floor_inadmissible"] = float(
+        max(r["term_over_floor"] for r in dd if not r["admissible"]))
+    res["MM4d_statement"] = (
+        "VER-A2 GAP 3, adopted.  MM4b's original comparison -- a RELATIVE defect of "
+        "1.46e-02 against an ABSOLUTE floor of 5.04 -- was not a sound comparison.  The "
+        "term the identity actually drops is A12 (T hhat), of size ||A12|| * ||T hhat||, "
+        "and ||A12|| is nowhere bounded a priori.  Measured per shape: for every "
+        "ADMISSIBLE shape the dropped term is at most "
+        f"{res['MM4d_max_term_over_floor_admissible']:.3g} times the floor, i.e. negligible "
+        "by three to four orders.  For the INADMISSIBLE shapes it reaches "
+        f"{res['MM4d_max_term_over_floor_inadmissible']:.3g} times the floor -- oracle_pinv "
+        "cancels it exactly, which is precisely why exact_inv's measured coupling along "
+        "hhat is ~1e-14 rather than at or above the floor.  Both are independently killed "
+        "by MM3's admissibility audit, so the conclusion is unaffected; the ARGUMENT "
+        "needed the ||A12|| factor made visible, and now it is.")
     res["MM4_min_floor"] = float(min(f["floor_with_Gamma_inv_A11"] for f in floors))
     res["MM4_min_floor_at"] = min(floors, key=lambda f: f["floor_with_Gamma_inv_A11"])
     res["MM4_max_A11_freedom_effect"] = float(
         max(f["A11_freedom_changes_it_by"] for f in floors))
+    # MM4c -- VER-A2 GAP 2: the floor is NOT shape-independent, and here is the
+    # counter-construction that shows it, reproduced rather than taken on trust.
+    # Solving the (Gamma,Gamma) constraint gives A11 = (I - A12 C) Gamma^-1, so
+    # A11 B hhat = (I - A12 C) v with v = Gamma^-1 B hhat the floor vector.  A12 is free,
+    # so a rank-one A12 = v w^T / (w . C v) annihilates v outright.
+    print("      MM4c: VER-A2's counter-construction -- A11 is NOT pinned, so the floor is")
+    print("            NOT shape-independent.  It survives only because Z1 blows up elsewhere.")
+    cc = []
+    for kind, p in CLASSES:
+        for K in (2, 4):
+            ob = assemble(K, K + M_EXTRA, kind, p, gauge="null")
+            G, B, C, T, A_t, Gi = (ob["G"], ob["B"], ob["C"], ob["T"], ob["A_t"], ob["Gi"])
+            nG, n = ob["nG"], ob["n"]
+            v = Gi @ (B @ ob["hhat"])
+            Cv = C @ v
+            w = Cv.copy()
+            den = float(np.dot(w, Cv))
+            if abs(den) < 1e-300:
+                continue
+            A12 = np.outer(v, w / den)                       # kills v: (I - A12 C) v = 0
+            A11 = (np.eye(nG) - A12 @ C) @ Gi                # satisfies A11 G + A12 C = I
+            A = np.block([[A11, A12], [np.zeros((n, nG)), A_t]])
+            R = np.eye(nG + n) - A @ full_L(ob)
+            cc.append({"class": kind, "param": float(p), "K": int(K),
+                       "leg_floor": float(np.sum(np.abs(v))),
+                       "floor_with_VERA2_A11": float(np.sum(np.abs(A11 @ (B @ ob["hhat"])))),
+                       "Gamma_Gamma_block": colmax(R[:nG, :nG]),
+                       "A12_norm": colmax(A12),
+                       "total_Z1": colmax(R)})
+            print(f"            {kind:9s} s={p:.1f} K={K}: leg floor {cc[-1]['leg_floor']:8.4f} "
+                  f"-> {cc[-1]['floor_with_VERA2_A11']:.1e}  "
+                  f"(Gamma-Gamma block {cc[-1]['Gamma_Gamma_block']:.1e}, "
+                  f"||A12||={cc[-1]['A12_norm']:.3g}, TOTAL Z1={cc[-1]['total_Z1']:.3g})")
+    res["MM4c_counter_construction"] = cc
+    res["MM4c_floor_is_beatable"] = bool(cc and all(
+        r["floor_with_VERA2_A11"] < 1e-10 for r in cc))
+    res["MM4c_but_total_Z1_diverges"] = bool(cc and all(
+        r["total_Z1"] > 1e4 for r in cc))
+    res["MM4c_min_total_Z1_of_counter_construction"] = (
+        float(min(r["total_Z1"] for r in cc)) if cc else None)
+    res["MM4c_correction"] = (
+        "VER-A2's GAP 2, adopted.  THE FLOOR IS NOT SHAPE-INDEPENDENT and the shipped v1 "
+        "of this leg said it was.  A11 is part of the shape of A and is not pinned by the "
+        "(Gamma,Gamma) constraint: solving A11 G + A12 C = I gives A11 = (I - A12 C) "
+        "Gamma^-1, so A11 B hhat = (I - A12 C) v, and a rank-one A12 = v w^T/(w . C v) "
+        "annihilates the floor vector v outright.  Reproduced here: the floor drops from "
+        "5.04..23.07 to ~1e-16 with the (Gamma,Gamma) block satisfied to ~1e-16 or exactly "
+        "0.  This leg's original two-point ablation could not see it because BOTH its A11 "
+        "choices are approximately Gamma^-1 and therefore varied nothing -- exactly the "
+        "'a control that cannot come out differently' failure (lesson 90), one level up "
+        "from where leg 53 hit it.  WHAT SURVIVES: the counter-construction wrecks every "
+        "other tail column, driving the TOTAL Z1 to "
+        f"{min(r['total_Z1'] for r in cc):.3g} and above, so the floor's CONCLUSION holds "
+        "empirically while its PROOF does not.  The correct statement is therefore: FOR "
+        "A11 IN THE NEIGHBOURHOOD OF Gamma^-1, the coupling along hhat is at least 5.04 "
+        "and no choice of A12, A21 or A22 can touch it.  That is a real result and it is "
+        "not the universal one v1 claimed.")
+
     res["MM4_statement"] = (
         "Write I - A L in blocks for a completely general A = [[A11,A12],[A21,A22]].  Its "
         "(Gamma,tail) block is -(A11 B + A12 T).  The tail operator T is singular -- its "
         "kernel is exactly the far-field direction hhat that leg 52 bordered -- so applying "
         "that block to hhat gives -A11 B hhat, in which A12 has DROPPED OUT.  The size of "
         "the coupling along the one direction that matters is therefore a property of A11 "
-        "alone.  A11 is not completely free (the (Gamma,Gamma) block needs A11 G + A12 C "
-        "= I), but the two natural realisations -- A11 = Gamma^-1 and A11 = the Schur "
-        f"complement's inverse -- agree to {res['MM4_max_A11_freedom_effect']:.1e} relative, "
-        "so the freedom is measured and it is not where the answer lives.  DUALLY, the "
+        "alone.  *** SCOPE, CORRECTED PER VER-A2's GAP 2 -- READ MM4c BEFORE QUOTING THIS. "
+        "A11 IS PART OF THE SHAPE OF A AND IS NOT PINNED.  The (Gamma,Gamma) constraint "
+        "A11 G + A12 C = I gives A11 = (I - A12 C) Gamma^-1, and a rank-one A12 drives the "
+        "floor to ~1e-16 (MM4c).  So this is NOT a shape-independent floor.  It is a floor "
+        "FOR A11 IN THE NEIGHBOURHOOD OF Gamma^-1, which covers every shape in this "
+        "leg's battery but is not a statement about every A that could ever be written. "
+        "The two realisations ablated here -- A11 = Gamma^-1 and the Schur complement's "
+        f"inverse -- agree to {res['MM4_max_A11_freedom_effect']:.1e} relative, which is "
+        "NOT evidence that the freedom is harmless: it is evidence that this ablation "
+        "varied nothing, because both choices are approximately Gamma^-1. *** DUALLY, the "
         "(tail,tail) block applied to hhat is hhat - A21 B hhat: the ONLY way to control "
         "the tail on its own kernel is a NON-ZERO A21, which is precisely why the "
         "block-diagonal shape is wrong and precisely what ff_lift builds.")
@@ -517,11 +655,18 @@ def main():
           f"{res['MM4_min_floor']:.4f} -- against the 1 it must be under")
 
     # -- MM2 the shape battery ----------------------------------------------
+    # VER-A2 GAP 1: this loop ran K_SWEEP (4..64) while MM-1 and MM-4 ran K_SWEEP_SMALL,
+    # so the splits K = 2 and K = 6 were swept for the inequality and the floor but NOT for
+    # the battery that computes the gate answer.  K = 2 is the best-conditioned split there
+    # is and it gives the smallest Z1 anywhere, so the shipped headline was minimised over
+    # the wrong set.  Same error class VER-A caught on leg 53's sweep, reproduced in a
+    # different clause after being fixed in two others.  The battery now sweeps every
+    # admissible (even) split.
     print("\n[MM2] the shape battery: TRUE column-max of I - A L over the whole space")
     battery = []
     for kind, p in CLASSES:
         for gauge in ("dilation", "null"):
-            for K in K_SWEEP:
+            for K in K_SWEEP_SMALL:
                 ob = assemble(K, K + M_EXTRA, kind, p, gauge=gauge)
                 row = {"class": kind, "param": float(p), "gauge": gauge, "K": int(K),
                        "M": int(K + M_EXTRA),
@@ -724,7 +869,7 @@ def main():
     print("\n[MM6] the radii polynomial with the best ADMISSIBLE shape at each split")
     polys = []
     for kind, p in CLASSES:
-        for K in K_SWEEP:
+        for K in K_SWEEP_SMALL:                       # VER-A2 GAP 1, as in MM2 above
             ob = assemble(K, K + M_EXTRA, kind, p, gauge="null")
             ms = {sh: measure(ob, sh) for sh in SHAPES}
             bs = min((sh for sh in SHAPES if ADMISSIBLE[sh]), key=lambda s: ms[s]["Z1"])
@@ -762,7 +907,7 @@ def main():
     res["gate_smallest_Z1_admissible"] = float(m_adm["Z1"])
     res["gate_smallest_Z1_any_shape_including_inadmissible"] = float(m_any["Z1"])
     res["verdict"] = ("SHAPE_CLOSES_IT" if closes else
-                      "NO_SHAPE_CLOSES_IT__FLOOR_IS_GAMMA_INV_ON_THE_FAR_FIELD_COLUMN")
+                      "NO_ADMISSIBLE_SHAPE_CLOSES_IT__SMALLEST_Z1_IS_ORDERS_ABOVE_ONE")
 
     res["MM6_ceiling"] = (
         "Measured on the a = 0 CLM fixed point.  Y_0 is exactly zero there because the "
@@ -779,28 +924,37 @@ def main():
                         "gauge": r_adm["gauge"], "K": r_adm["K"]},
         "block_diagonal_baseline": float(res["MM2_block_diagonal_baseline"]["Z1"]),
         "improvement_factor": float(res["MM2_improvement_over_block_diagonal"]),
-        "shape_independent_floor": float(res["MM4_min_floor"]),
+        "floor_for_A11_near_Gamma_inv": float(res["MM4_min_floor"]),
+        "floor_is_NOT_shape_independent": True,
         "required": 1.0,
         "statement": (
             "Spending the last free choice -- the SHAPE of A -- is worth a factor of "
             f"{res['MM2_improvement_over_block_diagonal']:.2f} at the best split and leaves "
             f"the assembled Z_1 at {m_adm['Z1']:.4f}, against the 1 it must be under.  The "
-            "improvement is real and it is measured, and it is roughly forty times too "
-            "small.  The floor is not an artefact of the three shapes tried: because the "
-            "tail operator is singular on exactly the far-field direction the certificate "
-            "borders, the coupling along that direction reduces to Gamma^-1 applied to the "
-            "far-field column, in which the off-diagonal block of A has dropped out "
+            "improvement is real and it is measured, and it is about an order of magnitude "
+            "too small.  Underneath it, FOR EVERY A11 IN THE NEIGHBOURHOOD OF Gamma^-1 -- "
+            "which is every shape in this battery -- there is a floor no A12, A21 or A22 "
+            "can touch: the tail operator is singular on exactly the far-field direction "
+            "the certificate borders, so the coupling along that direction reduces to "
+            "Gamma^-1 applied to the far-field column and the off-diagonal block drops out "
             f"algebraically.  That floor is {res['MM4_min_floor']:.4f} at its smallest over "
-            "every class and every split from K = 2 to 64.")}
+            "every class and every even split from K = 2 to 64.  IT IS NOT A "
+            "SHAPE-INDEPENDENT FLOOR -- v1 of this leg claimed that and VER-A2 refuted it "
+            "with an explicit rank-one A12 that drives it to ~1e-16 (MM4c); that "
+            "construction survives only by driving the TOTAL Z1 to 1e+05 and above, so the "
+            "conclusion holds where the original proof did not.")}
 
     res["elapsed_s"] = time.time() - t0
     OUT.write_text(json.dumps(res, indent=1))
     print(f"\nwrote {OUT}  ({res['elapsed_s']:.0f}s)")
     print(f"GATE: {res['gate_answer'].upper()} -- {res['gate_branch']}")
     print(f"VERDICT: {res['verdict']}")
-    print(f"smallest Z1 over every admissible shape: {m_adm['Z1']:.4f} "
-          f"(block-diagonal baseline {res['MM2_block_diagonal_baseline']['Z1']:.4f}, "
-          f"shape-independent floor {res['MM4_min_floor']:.4f}, required < 1)")
+    print(f"smallest Z1 over every admissible shape, class, gauge and EVEN split: "
+          f"{m_adm['Z1']:.4f} at {sh_adm} ({r_adm['class']} s={r_adm['param']} "
+          f"gauge={r_adm['gauge']} K={r_adm['K']})")
+    print(f"  block-diagonal baseline {res['MM2_block_diagonal_baseline']['Z1']:.4f} "
+          f"({res['MM2_improvement_over_block_diagonal']:.3f}x), floor for A11 near "
+          f"Gamma^-1 {res['MM4_min_floor']:.4f}, required < 1")
 
 
 if __name__ == "__main__":

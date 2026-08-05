@@ -85,10 +85,18 @@ at most `MM1b_max_smallest_sv_at_odd_K` at every odd `K ∈ {3,5,7,9,11}` and at
 `MM1b_min_smallest_sv_at_even_K` at every even `K ∈ {2,4,6,8}` — and without the far-field
 column at `K = 3` it is **exactly `0.0`**, not merely small.
 
-The reason is structural rather than numerical. The far-field kernel `ĥ` is supported on
-**one parity chain** (modes `K+1, K+3, …`), and the linearisation couples mode `k` only to
-`k ± 1`. At odd `K` the mode-`K` residual row therefore acquires **no entry on any of
-`b_1…b_K` or `δc_ω`** and is carried entirely by the amplitude column.
+**The mechanism, corrected per VER-A2's GAP 4.** v1 of this leg said: *"at odd `K` the
+mode-`K` residual row acquires no entry on any of `b_1…b_K` or `δc_ω` and is carried entirely
+by the amplitude column."* **That is not what the matrix does, and it does not discriminate** —
+rows with no mass off the amplitude column exist at **even** `K` too, where the block is
+nonsingular, and at `K = 5` there is only *one* such row while the block is still singular.
+
+The actual mechanism is the **left null vector's support**, now recorded per row in
+`MM1b_odd_K_scan.left_null_support`: at `K = 3` it is supported on **two** such rows, which
+are proportional — that is the singularity; at `K = 5` it is supported on a **parity chain of
+three** rows, not one. The parity intuition was directionally right and the one-row statement
+was wrong. That is the same failure the standing discipline flags from leg 53 — *a mechanism
+cited rather than measured on the matrix actually built* — and it is one `svd` call to fix.
 
 **Consequence.** The split must be **even**, so the corner MM-1 leaves open is not
 `{2, 3, 4}` but `{2}` in both classes plus `{4}` in the flat class alone — and §4's floor
@@ -123,11 +131,29 @@ I - Λ⁻¹L  =  [[0, -G⁻¹B], [0, T⁻¹CG⁻¹B]]
 whose `(Γ,tail)` block is `−Γ⁻¹B` — **identical to the block-diagonal one**. Measured:
 identical to five digits. That was a prediction that could have come out otherwise.
 
-**`gs_upper` and `schur` do help, and the help is real but far too small.** The best
-admissible shape anywhere in the sweep is recorded in `MM2_best_admissible`; the
+**`gs_upper`, `schur` and `ff_lift` do help, and the help is real but far too small.** The
+best admissible shape anywhere in the sweep is recorded in `MM2_best_admissible`; the
 block-diagonal baseline at its own best in `MM2_block_diagonal_baseline`; the ratio in
-`MM2_improvement_over_block_diagonal`. Spending the last free choice buys a factor of
-**~1.4** where a factor of **~45** was needed.
+`MM2_improvement_over_block_diagonal`.
+
+> **CORRECTION, VER-A2's GAP 1 — the first version of this leg reported the wrong headline.**
+> MM-2's battery and MM-6's polynomial swept `K_SWEEP` (4…64) while MM-1 and MM-4 swept
+> `K_SWEEP_SMALL`. So `K = 2` and `K = 6` — added *specifically* to close VER-A's small-`K`
+> hole — never entered the clause that computes the gate answer. `K = 2` is the
+> **best-conditioned split there is**, and it gives the smallest `Z₁` anywhere. The battery
+> now sweeps every admissible (even) split. Corrected numbers:
+>
+> | | v1 (wrong: `K ≥ 4` only) | corrected (every even `K`) |
+> |---|---|---|
+> | best admissible `Z₁` | 32.7489 (`schur`, `K = 4`) | **8.9591** (`ff_lift`, `K = 2`) |
+> | block-diagonal baseline | 45.3628 | **10.4584** |
+> | improvement from the shape | 1.385× | **1.167×** |
+>
+> Both at algebraic `s = 0.3`, null gauge. **The gate answer does not change** — `8.96 ≫ 1`,
+> and no row has a positive interval.
+
+So spending the last free choice buys a factor of **~1.17** where a factor of **~9** was
+needed. The improvement is real, measured, and about an order of magnitude too small.
 
 **Instrument check (lesson 85).** `block_diag` reproduces leg 53's sub-blocks exactly —
 `Z₁[Γ←tail] = 43.151291`, `Z₁[tail←Γ] = 1.387315` — recorded in
@@ -146,10 +172,17 @@ before that move made sense.
 
 ---
 
-## 4. MM-4 — the floor no shape can cross
+## 4. MM-4 — the floor for `A₁₁` near `Γ⁻¹`
 
-This is the part that generalises beyond the seven shapes tried. For a **completely general**
-`A = [[A₁₁,A₁₂],[A₂₁,A₂₂]]`,
+> **SCOPE CORRECTION, VER-A2's GAP 2.** The first version of this leg called this a
+> **shape-independent** floor. **It is not**, and the claim is withdrawn — see §4.2 for the
+> explicit counter-construction that refutes it. What survives is a floor for every `A₁₁` in
+> the neighbourhood of `Γ⁻¹`, which covers every shape in this battery but is *not* a
+> statement about every `A` that could ever be written. The `verdict` string, the JSON
+> headline key (now `floor_for_A11_near_Gamma_inv`) and the blog all carry the corrected
+> scope, so the over-claim cannot propagate into the plan.
+
+For a **completely general** `A = [[A₁₁,A₁₂],[A₂₁,A₂₂]]`,
 
 ```
 (I - A L)_{Γ,tail}  =  -(A₁₁ B + A₁₂ T)
@@ -183,19 +216,58 @@ What the defect actually is (`MM4b_kernel_truncation_defect`):
 * its relative `ℓ¹` size **halves per doubling of `M`** (`MM4b_defect_halves_per_doubling`),
   i.e. it is `O(M⁻¹) → 0`;
 * at the `M` used throughout this leg it is at most
-  `MM4b_max_relative_defect_at_M_extra_1024` in relative terms, against a floor of `5.04`
-  and above.
+  `MM4b_max_relative_defect_at_M_extra_1024` in relative terms.
 
-So the floor is a statement about the **infinite** operator which the computed one tracks to
-a few percent — **not an exact algebraic zero being read off a float**, which is the failure
-mode lesson 86 warns about. A couple of percent of slack, against a quantity that would have
-to fall by a factor of five, does not move the conclusion. The gate now pins the *shape of the ladder* (edge-only,
-`M⁻¹`) rather than an exact zero the truncation does not deliver.
+The gate now pins the *shape of the ladder* (edge-only, `M⁻¹`) rather than an exact zero the
+truncation does not deliver.
 
-`A₁₁` is not entirely free (`A₁₁G + A₁₂C = I`), so the freedom is **ablated rather than
-assumed away**: recomputing the floor with the Schur complement's `A₁₁` changes it by at
-most `MM4_max_A11_freedom_effect` in relative terms. The freedom is measured, and it is not
-where the answer lives.
+> **CORRECTION, VER-A2's GAP 3 — the comparison above was not the right one.** The first
+> version argued the defect was negligible by setting a *relative* defect against an
+> *absolute* floor. That is unsound. The term the identity actually drops is `A₁₂(Tĥ)`, of
+> size `‖A₁₂‖·‖Tĥ‖`, and **`‖A₁₂‖` is nowhere bounded a priori** — so it is now measured per
+> shape in `MM4d_dropped_term_by_shape`:
+>
+> | shape | `‖A₁₂‖` | `‖A₁₂(Tĥ)‖` | vs floor |
+> |---|---|---|---|
+> | `schur`, `gs_upper` (admissible) | ~2–10 | ~5e−04 | **0.000×** |
+> | `block_diag`, `gs_lower`, `ff_lift` (admissible) | 0 | 0 | **0.000×** |
+> | `oracle_pinv` (**inadmissible**) | 7176 | 7.008 | **1.000×** |
+> | `exact_inv` (**inadmissible**) | 3588 | 3.504 | **0.500×** |
+>
+> **Two rows of this leg's own battery are shapes where the truncation defect cancels the
+> floor** — `oracle_pinv` to the last digit — which is exactly why `exact_inv`'s measured
+> coupling along `ĥ` is `~1e−14` rather than at or above the floor. Both are inadmissible and
+> independently killed by §5's audit at `1.03e+04`, so **the conclusion is unaffected**; but
+> the argument needed the `‖A₁₂‖` factor visible, and now it is. For every *admissible* shape
+> the dropped term is `0.000×` the floor — negligible by three to four orders.
+
+### 4.2 The counter-construction: why this floor is not shape-independent
+
+`A₁₁` is **not** pinned by the `(Γ,Γ)` constraint. Solving `A₁₁G + A₁₂C = I` gives
+`A₁₁ = (I − A₁₂C)Γ⁻¹`, hence `A₁₁Bĥ = (I − A₁₂C)v` with `v = Γ⁻¹Bĥ` the floor vector — and
+since `A₁₂` is free, the rank-one choice `A₁₂ = v wᵀ/(w·Cv)` annihilates `v` outright.
+Reproduced in `MM4c_counter_construction`:
+
+| | flat `K=2` | flat `K=4` | alg. `K=2` | alg. `K=4` |
+|---|---|---|---|---|
+| floor as claimed in v1 | 7.0078 | 23.0703 | 5.0444 | 13.7426 |
+| floor with VER-A2's `A₁₁` | 2.2e−16 | 3.7e−15 | 7.8e−16 | 7.8e−16 |
+| `(Γ,Γ)` block of `I − AL` | 0.0 | 0.0 | 1.2e−16 | 1.3e−15 |
+
+The constraint is satisfied **exactly** and the floor is beaten by fifteen orders of magnitude.
+
+**Why v1's ablation could not see this.** It compared `A₁₁ = Γ⁻¹` against the Schur
+complement's `A₁₁` — which agree to `MM4_max_A11_freedom_effect`. *Both arms of that control
+are approximately `Γ⁻¹`, so it varied nothing.* That is **lesson 90 exactly**, the lesson this
+leg quotes in its own preamble and then violated four sections later.
+
+**What survives, and why the conclusion holds anyway.** The counter-construction needs
+`‖A₁₂‖ ≈ 1.1e+03…7.9e+03`, which wrecks every other tail column and drives the **total** `Z₁`
+to `MM4c_min_total_Z1_of_counter_construction` and above — five to six orders above the bar.
+So the floor's **conclusion** is empirically safe while its **proof** is not. The honest
+statement is: *for `A₁₁` in the neighbourhood of `Γ⁻¹`, the coupling along `ĥ` is at least
+`5.0444`, and no choice of `A₁₂`, `A₂₁` or `A₂₂` can touch it.* That is a real result. It is
+not the universal one v1 claimed.
 
 **Dually — and this is why the shape had to be non-block-diagonal at all —**
 
@@ -287,16 +359,24 @@ out independently in exact rational arithmetic.
 ## 8. What this establishes, and what it does not
 
 **Establishes.** On the `a = 0` CLM object, in both admissible classes, under both gauges, at
-every admissible (even) split from `K = 2` to `64`: **no shape of the approximate inverse
-brings the assembled `Z₁` below 1.** The three natural non-block-diagonal shapes buy ~1.4×
-where ~45× is needed; the unrestricted optimum is inadmissible and, made admissible, is
-orders of magnitude worse; and underneath all of them sits a floor that is **independent of
-the off-diagonal block of `A` by an algebraic identity**, not by exhaustion of cases.
+every admissible (even) split from `K = 2` to `64`: **no admissible shape of the approximate
+inverse brings the assembled `Z₁` below 1** — the smallest value anywhere is `8.9591`. The
+non-block-diagonal shapes buy ~1.17× where ~9× is needed; the unrestricted optimum is
+inadmissible and, made admissible, is orders of magnitude worse; and for every `A₁₁` in the
+neighbourhood of `Γ⁻¹` there is a floor of `5.0444` that no `A₁₂`, `A₂₁` or `A₂₂` can touch,
+by an algebraic identity rather than by exhaustion of cases.
 
-**Does not establish.** That no *finite block* of any kind can close this. §4's floor is
-shape-independent but **not** finite-block-independent — it contains `A₁₁`. MM-1 is
-finite-block-independent but only bites for `K ≥ 6` / `K ≥ 4`. Neither argument alone is
-universal, and this leg does not combine them into a claim that they do not support.
+**Does not establish.** Three things, and each was claimed too strongly in v1:
+
+1. **That no finite block of any kind can close this.** §4's floor contains `A₁₁`; MM-1 is
+   finite-block-independent but only bites for `K ≥ 6` / `K ≥ 4`. Neither argument alone is
+   universal and they are not combined into one.
+2. **That the floor is shape-independent.** It is not — §4.2 gives an explicit `A₁₂` that
+   beats it by fifteen orders of magnitude. The floor holds for `A₁₁ ≈ Γ⁻¹`, which is every
+   shape here, and the counter-construction is defeated by its *total* `Z₁`, not by the floor.
+3. **That the identity is exact on the computed operator.** It is exact on the infinite one;
+   the dropped term is `‖A₁₂‖·‖Tĥ‖`, negligible for every admissible shape and *exactly equal
+   to the floor* for one inadmissible one.
 
 **And the honest ceiling.** No link of the `L1→L4` chain moved. Clay odds unchanged at
 ~0.05%. What closed here is a **method**, on a **toy object**: the `ℓ¹`-Fourier
