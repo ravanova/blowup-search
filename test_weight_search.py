@@ -65,17 +65,30 @@ def test_known_answer_substrate():
         "the discrete Hilbert transform does not reproduce its own closed form"
     R = pr.F(pr.exact_state())[:pr.n]
     assert np.sqrt(np.mean(R ** 2)) < 1e-3, "the exact profile is not near-steady"
-    dists = []
+    dists, floors = [], []
     for n in (201, 401, 801):
         p = BorderedCLM(n=n)
         z, info = p.newton()
         assert info["converged"], f"Newton did not converge at n={n}"
+        # and the residual it reaches is at the ARITHMETIC floor, not merely under a
+        # hard-coded constant: the float64 evaluation noise of F GROWS with n and
+        # passes 1e-14 around n = 800, so a fixed tolerance there tests the arithmetic
+        # rather than the solve (banked lesson 86).
+        assert len(info["residual_ladder"]) - 1 <= 4, \
+            f"Newton took {len(info['residual_ladder']) - 1} iterations at n={n}"
+        assert info["residual_ladder"][-1] <= info["residual_floor"], \
+            f"n={n}: residual {info['residual_ladder'][-1]:.2e} is above the measured " \
+            f"evaluation floor {info['residual_floor']:.2e} -- a real solve failure"
+        floors.append(info["residual_floor"])
         dists.append(float(np.abs(z[:p.n] - exact_profile(p.X)).max()))
         assert abs(z[p.n] - 1.0) < 1e-2, "c_l is not recovered near its exact value"
         assert abs(z[p.n + 1] - EXACT_C_OMEGA) < 1e-2, "c_omega is not recovered"
     assert dists[0] > dists[1] > dists[2], f"no convergence to the exact profile: {dists}"
+    assert floors[0] < floors[1] < floors[2], \
+        f"the evaluation floor is supposed to grow with n: {floors}"
     print(f"[ok] (2) |Omega - Omega_0|_sup falls "
-          + " -> ".join(f"{d:.2e}" for d in dists) + " over n = 201, 401, 801")
+          + " -> ".join(f"{d:.2e}" for d in dists) + " over n = 201, 401, 801; "
+          "residual floor " + " -> ".join(f"{f:.1e}" for f in floors))
 
 
 def test_exactly_quadratic():
