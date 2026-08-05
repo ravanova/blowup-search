@@ -71,8 +71,14 @@ it owns `DIRECTION.md` and no other file; and this task —
 > could it move a link of the L1→L4 chain; can its gate answer either way within one leg; is it
 > independent of the other nine. A leg with no pre-committed failure branch is not a leg.
 > When the plan and the queue leave the next leg genuinely unclear, **you choose the work** —
-> that mandate is yours alone, and an empty slot is never the answer.
-> You may reason mathematically about direction. You may not build, measure, or write up.
+> that mandate is yours alone, and an empty slot is never the answer. The user's standing
+> answer to direction questions is on record: "Pursue the option that is best for the overall
+> goal of pursuing a Clay solve, and the secondary goal of producing useful novel findings."
+> Decide under it — it governs what to try, never what to claim, and it lifts no ban — and
+> surface to the user only a question it genuinely cannot answer, with why. When a verifier
+> confirms a gap in a landed claim, cut a **rework leg** at the top of the queue — same
+> territory, gate pre-committed to the corrected measurement — rather than raising it to the
+> user. You may reason mathematically about direction. You may not build, measure, or write up.
 
 Keep the DM alive for the whole run and reach it with `SendMessage`. When the user hands you a
 steer, forward it **verbatim** and ask for a revised queue — do not interpret it yourself.
@@ -129,8 +135,10 @@ Every agent brief must contain, verbatim:
 something to verify** — not idle-running. Two triggers: (a) the leg is about to consume a prior
 leg's headline number, which the verifier re-measures *first* (lesson 85); (b) a claim-bearing
 leg has **landed on `main`**, which the verifier reviews line by line after the fact — every
-claim-bearing landing gets this review, and a confirmed gap becomes repair work plus a
-`⚠ NEEDS YOU` entry, never a quiet fix. Verifiers **report gaps, never repair**.
+claim-bearing landing gets this review, and a confirmed gap goes to the DM to be cut as a
+**rework leg** (correction forward on `main`, recorded in the report) — never a quiet fix,
+and never a user question unless the correction would rewrite a banked result (escalation
+#4). Verifiers **report gaps, never repair**.
 
 **Support agents** (`model: "sonnet"`): LIT-1/2, REPRO-1/2, DOCS-1/2, PREP-1/2, from the roster
 in `ORCHESTRATION.md` §4. Use `isolation: "remote"` for cloud if available; fall back to
@@ -156,7 +164,8 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
      commit follows the convention. A violation → spawn a bench agent to repair **forward on
      `main`** (never rewrite landed history), and record it in the report.
    - claim-bearing landing → dispatch the paired verifier's post-landing review (trigger (b))
-     and a DOCS quartet check. An unresolved gap goes to `⚠ NEEDS YOU`, not into silence.
+     and a DOCS quartet check. A confirmed gap goes to the DM as a rework leg and into the
+     report, not into silence — and not to the user.
 4. **Gate and merge support branches** (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`), in
    the order they became ready:
    - `git checkout <branch>` then `scripts/merge_gate.sh origin/main`; check the diff stays
@@ -187,9 +196,17 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
 Update `PROGRESS.md` at least every ~10 minutes even if a cycle is slow — that file is how the
 user watches without asking. Use `Monitor` to wait on a condition rather than idling.
 
-**Escalations never stop the run.** The four in `ORCHESTRATION.md` §8 get parked as open PRs,
-written into `⚠ NEEDS YOU` with the exact question and the options, and **every other leg keeps
-moving**. When the user answers, apply it and carry on.
+**Escalations never stop the run.** The four in `ORCHESTRATION.md` §8 get parked as pushed
+branches, written into `⚠ NEEDS YOU` with the exact question and the options, and **every
+other leg keeps moving**. When the user answers, apply it and carry on.
+
+**Nothing else is a user question.** The user's standing answer is on record — "Pursue the
+option that is best for the overall goal of pursuing a Clay solve, and the secondary goal of
+producing useful novel findings." Direction questions go to the DM to decide under it;
+operational questions you decide under it yourself; either way the decision and its reasoning
+go in the report, not in `⚠ NEEDS YOU`. It governs what to try, never what to claim. Only a
+question the directive genuinely cannot answer joins the escalations in `⚠ NEEDS YOU`, and
+the entry says why, recommended option first.
 
 ## Step 4 — stopping
 

@@ -98,8 +98,9 @@ a bloated DM can be discarded and recreated cheaply from it. DIRECTION.md carrie
   a **pre-committed gate naming both branches**, and its **file territory** (§5);
 - **live assignments** — which leg number and route each of the ten leg slots holds;
 - **the ranking rationale** — why this order, refreshed whenever a gate answers;
-- **open direction questions** — things the DM wants the user to decide (these also surface
-  in the progress file, §7).
+- **open direction questions** — resolved by the DM itself under the standing directive
+  (§8) wherever possible; only a question the directive genuinely cannot answer surfaces
+  for the user (via the progress file, §9a), with the DM's note on why it could not decide.
 
 **Queue ranking.** Prefer, in this order: (a) a leg that could actually move a link of the
 L1→L4 chain; (b) a leg whose gate can answer either way within a leg's work; (c) a leg
@@ -242,9 +243,13 @@ An outcome that falls under an escalation (§8) is the one exception: the agent 
 **Claim-bearing legs land without pre-push review; the compensating control is post-landing
 verification.** Every landing that touches a mathematical claim, a gate answer, or any number
 in prose gets its paired verifier's line-by-line review on `main`, after the fact, plus a
-DOCS quartet check. A confirmed gap becomes repair work (forward on `main` — landed history
-is never rewritten) and a `⚠ NEEDS YOU` entry; a correction that would delete or rewrite a
-banked result is escalation #4 and waits for the user.
+DOCS quartet check. A confirmed gap becomes a **rework leg, not a user question**: the
+orchestrator hands the verifier's finding to the DM, which cuts a correction leg at the top
+of the queue — same territory as the flawed landing, gate pre-committed to the corrected
+measurement — and it lands forward on `main` like any other leg (landed history is never
+rewritten). The gap and its correction are recorded in the report. The one exception: a
+correction that would delete or rewrite a banked result is escalation #4 and waits for the
+user.
 
 **Support branches (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`): the orchestrator merges
 them** when the gate prints PASS and the diff stays in territory. FAIL → gate output back to
@@ -274,8 +279,20 @@ under `⚠ NEEDS YOU`, and left for the user. **Work does not stop for them** �
 parks the item, refills the slot, and keeps every other leg moving. Everything else lands as
 it turns green.
 
-Anything else that genuinely needs a human decision goes in the same `⚠ NEEDS YOU` section
-with the exact question and the options, and the run continues around it.
+**Everything short of these four is decided, not asked.** The user's standing answer is on
+record:
+
+> *Pursue the option that is best for the overall goal of pursuing a Clay solve, and the
+> secondary goal of producing useful novel findings.*
+
+Direction questions go to the DM, which decides under that directive; operational questions
+the orchestrator decides the same way, and either records the decision and its reasoning in
+the report. The directive governs **what to try, never what to claim** — the walls in §1
+stand, and it lifts no ban and promotes no route into the plan (those remain escalations
+above). Verification rework is a leg (§7b), not a question. `⚠ NEEDS YOU` is reserved for
+the four escalations plus the rare question the standing directive genuinely cannot answer —
+and such an entry states why the directive could not decide it, with the decider's
+recommended option first.
 
 ## 9. The progress file, the report, and stopping
 
@@ -285,7 +302,9 @@ Rewritten **every integration cycle, and at minimum every ~10 minutes**, so the 
 it at any time without asking. Sections, in this order:
 
 1. `## ⚠ NEEDS YOU` — numbered, exact question, options, what is blocked and what is not.
-   Say "nothing" when there is nothing; never omit the heading.
+   Say "nothing" when there is nothing; never omit the heading. With the standing directive
+   (§8) in force this section normally holds the four escalations or "nothing" — a question
+   here means the directive could not decide it, and the entry says why.
 2. `## Now` — timestamp, cycle number, `main` SHA, stop-file status, agents live / 32.
 3. `## Legs` — one row per live leg: number, route, agent, branch, phase
    (`novelty` → `build` → `measure` → `writeup` → `verify` → `gating` → `merged`), started,
