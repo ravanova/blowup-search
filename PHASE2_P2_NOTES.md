@@ -3185,3 +3185,80 @@ still not be the thing you named it.**
 **CEILING (pre-committed, C0-7).** No link of the `L1→L4` chain moved. CLM has been in
 closed form since 1985; nothing here is certified, and a fitness validated on CLM is not a
 certificate of anything.
+
+## §39 — ROUTE-L1 v1 DONE (2026-08-05): THE RADII POLYNOMIAL **CLOSES IN INTERVAL
+## ARITHMETIC** ON HL_S2_nonsymmetric AT n = 201/401/801 -- FOR THE TRUNCATED DISCRETE
+## SYSTEM. AND THE FIRST ANSWER WAS "NO BY 1.48x", FOR A REASON THAT WAS PURE ARITHMETIC.
+
+*Leg 50. `solver/interval_certificate.py`, `solver/interval.dot2_matvec`,
+`test_interval_certificate.py` **7/7**, `experiments/p2_route_l1_v1_interval.py` →
+`writeup/data/p2_route_l1_v1_interval.json` → **fig45**;
+`TECHNICAL/BLOG_P2_ROUTEL1_V1.md`. 11 s, deterministic.*
+
+**(L1-0) WHAT CLOSES, STATED BEFORE THE NUMBERS AND NOT WIDENED AFTER.** With `H`, `D`,
+`Uop` the STORED float matrices treated as exact data, `F` is a polynomial map with
+representable coefficients, and there is a **true zero of that system** within `r` of the
+stored iterate in the weighted sup norm:
+
+| `n` | `Y₀` | `Z₁` | `Z₂` | budget | `Y₀/budget` | `r` interval |
+|---|---|---|---|---|---|---|
+| 201 | 5.17e−12 | 8.59e−09 | 2.21e+08 | 2.27e−09 | **2.28e−03** ✓ | [5.18e−12, 4.53e−09] |
+| 401 | 1.30e−11 | 5.71e−08 | 8.46e+08 | 5.91e−10 | **2.20e−02** ✓ | [1.30e−11, 1.18e−09] |
+| 801 | 7.35e−12 | 1.54e−07 | 1.41e+09 | 3.55e−10 | **2.07e−02** ✓ | [7.39e−12, 7.11e−10] |
+
+`Z₁ < 1` rigorously at every rung. Rigour costs 11.7×/4.4×/21.2× on `Y₀` and 63×/79×/31×
+on `Z₁`; `Z₂` is unchanged because it was already assembled from operator-norm bounds.
+
+**(L1-1) THE FIRST ANSWER WAS NO, BY 1.48x, AND THE TERM THAT RAN OUT WAS THE ARITHMETIC.**
+At a Newton-converged iterate `‖F‖_∞ = 5.7e−15`, assembled from terms of size 3e−02 --
+thirteen decades of cancellation. The naive interval matvec bounds an m-term accumulation
+by `γ_m Σ|M_ij v_j|`, which is sharp without cancellation and useless with it, so the
+enclosure of `F` came out **2.3e−12 wide around a residual of 5.7e−15**: a factor of 400 of
+pure evaluation error. Measured per operator at n = 201 (naive → compensated width): `H`
+2.46e−13 → 8.88e−16 (278×), `Uop` 7.28e−12 → 1.14e−13 (64×), **`D` 2.37e−12 → 2.22e−16
+(10664×)** -- the slope operator's rows cancel to ~1/270 of their absolute mass and it is
+the one that multiplies `S ~ 7` in the residual.
+
+**Dot2 (Ogita–Rump–Oishi 2005) is the fix and it is exact, not an approximation:** the
+product and the sum each return their own rounding error through error-free transformations,
+so the bound becomes `u|x·y| + γ_m² Σ|x_j y_j|` -- cancellation squared away at `γ_m² ~
+5e−28`, the rest relative to the answer. **Both paths are reported at every rung**, because
+the difference IS the finding: naive fails 1.48× / 38.6× / 175×, compensated closes at all
+three. Same object, same weight, same mathematics.
+
+**(L1-2) THE ENCLOSURES ARE CHECKED AGAINST EXACT RATIONAL ARITHMETIC.** Selected rows
+recomputed with `fractions.Fraction` -- no floating point in the reference -- and both
+enclosures contain the exact value for `H`, `Uop`, `D`. The two rigorous paths overlap
+everywhere and the compensated one is never wider except on rows whose exact answer is 0,
+where both are denormal-scale and both contain it. **"My interval code agrees with my float
+code" is not a check; this is.**
+
+**(L1-3) IT REJECTS A WRONG POINT, AND AT THE RIGHT PLACE.** Perturbing the iterate:
+1e−10 → 2.77e−01 (closes, CORRECTLY -- that is inside the certified ball `r_max` = 4.53e−09);
+1e−08 → 4.50e+01 rejected; 1e−06 → 5.65e+03 rejected.
+
+**(L1-4) THE KNOWN-ANSWER OBJECT AGREES WITH LEG 49 ABOUT WHERE THE WALL IS.** The a=0 CLM
+system through the identical code path closes at n = 201 (5.33e−02, certified ball 2.06e−08
+around an iterate 4.13e−05 from the exact continuum profile) and fails at n = 401
+(1.53e+02) -- the same rung at which leg 49's FLOAT certificate failed on the same object,
+for `Z₁ = κ·ε_mach` reasons. Two independent pipelines, one wall.
+
+**(L1-5) LEG 49's SEARCHED WEIGHT TRANSFERS TO THE RIGOROUS CONSTANTS.** 8.63× at n = 201
+and 7.27× at n = 401 against leg 46's hand constant -- where leg 49 measured **8.61×** for
+the same pair in float, i.e. agreement to 0.2%. **The number the search optimises is the
+number that matters.** That is an argument for repairing the fitness, not for lifting its
+gate (which stays FAILED).
+
+**NEW BANKED LESSON (86). A RIGOROUS BOUND THAT IS DOMINATED BY ITS OWN EVALUATION ERROR IS
+A STATEMENT ABOUT THE CODE, NOT THE MATHEMATICS.** The near-miss at 1.48× was the most
+dangerous outcome available: it invites tuning the weight, refining the grid, extending the
+domain -- three things this project has spent legs on -- and none of them was the
+limitation. **Before treating a near-miss as a mathematical margin, measure the width of the
+evaluation against the quantity being evaluated.** Here the ratio was 400.
+
+**CEILING (pre-committed, L1-6).** This certifies a zero of a FINITE-DIMENSIONAL system on
+`|X| ≤ 745` built from stored operators. The consistency of `(H, D)` with the continuum
+operators is NOT bounded, and neither is the far field. **Leg 46's 1.55e+08-ball-radii
+truncation gap and leg 47's wrong-sign reach trend both stand untouched.** `L1`'s gate --
+"does it close in interval arithmetic, TAIL INCLUDED" -- is still open, and the tail is
+mathematics nobody here has written. Step one of L1, not L1.

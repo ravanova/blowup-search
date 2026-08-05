@@ -223,3 +223,77 @@ def matvec(M, v):
 def dot(u, v):
     """Rigorous enclosure of the inner product sum_j u_j v_j (Interval . Interval)."""
     return isum(u * v)
+
+
+# --------------------------------------------------------------------------
+# COMPENSATED matvec -- the enclosure that survives cancellation (Route-L1)
+# --------------------------------------------------------------------------
+# WHY THIS EXISTS.  `matvec` above bounds an m-term accumulation by
+# gamma_m * sum_j |M_ij v_j|, which is sharp when the terms do not cancel and
+# useless when they do.  Leg 50 measured exactly that: at a Newton-converged
+# iterate the residual is 5.7e-15 while its interval enclosure is 2.3e-12 wide,
+# because the slope operator's rows cancel to ~1/270 of their absolute mass.  The
+# rigorous Y_0 was then set by the WIDTH OF THE EVALUATION rather than by the
+# residual, and the certificate missed closing by 1.48x for a reason that had
+# nothing to do with the mathematics.
+#
+# Dot2 (Ogita-Rump-Oishi 2005) fixes it with error-free transformations: the
+# product and the sum each return their own rounding error exactly, and those
+# errors are accumulated alongside.  The result carries the error bound
+#
+#     |dot2(x, y) - x.y|  <=  u |x.y|  +  gamma_m^2 sum_j |x_j y_j|
+#
+# so the cancellation-sensitive term is squared away (gamma_m^2 ~ 5e-28) and what
+# is left is RELATIVE to the answer.  Vectorised over rows: the loop is over the
+# m columns, each step a handful of length-n numpy operations.
+
+_SPLIT = 134217729.0          # 2^27 + 1, Dekker's splitting constant
+
+
+def _two_sum(a, b):
+    """Knuth: s = fl(a+b) and err with a + b == s + err EXACTLY."""
+    s = a + b
+    bb = s - a
+    return s, (a - (s - bb)) + (b - bb)
+
+
+def _two_product(a, b):
+    """Dekker: p = fl(a*b) and err with a*b == p + err EXACTLY (no FMA needed)."""
+    p = a * b
+    ca = _SPLIT * a
+    ah = ca - (ca - a)
+    al = a - ah
+    cb = _SPLIT * b
+    bh = cb - (cb - b)
+    bl = b - bh
+    return p, (((ah * bh - p) + ah * bl) + al * bh) + al * bl
+
+
+def dot2_matvec(M, v):
+    """Rigorous enclosure of (M @ v) for exact float M, v, robust to cancellation.
+
+    Returns an Interval. Same signature as `matvec` but with v a plain float array
+    (both operands must be exact data -- this is the residual-evaluation path, not
+    the ball-evaluation path). The radius is
+        u |result| / (1 - u)  +  gamma_m^2 * sum_j |M_ij v_j|
+    pushed outward by one ulp, which is the Ogita-Rump-Oishi bound made outward."""
+    M = np.asarray(M, dtype=float)
+    v = np.asarray(v, dtype=float)
+    n, m = M.shape
+    if v.shape != (m,):
+        raise ValueError(f"dot2_matvec: M is {M.shape}, v has shape {v.shape}")
+    p, e = _two_product(M[:, 0], v[0])
+    s = e.copy()
+    for j in range(1, m):
+        h, r = _two_product(M[:, j], v[j])
+        p, q = _two_sum(p, h)
+        s = s + (q + r)
+    res = p + s
+    absmass = _up(np.abs(M) @ np.abs(v))
+    absmass = _up(absmass * (1.0 + _gamma(m)))      # the mass sum is itself rounded
+    g2 = _up(_gamma(m) ** 2)
+    t = _up(g2 * absmass)
+    # |x.y| <= (|res| + t) / (1 - u) follows from the ORO bound itself, so the
+    # relative term is bounded without assuming |res| >= |x.y|
+    rad = _up(_up(_U * _up((np.abs(res) + t) / (1.0 - _U))) + t)
+    return Interval(_down(res - rad), _up(res + rad))

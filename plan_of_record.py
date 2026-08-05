@@ -302,6 +302,19 @@ STAGES = [
             "asymptotic expansion, error folded into the budget, so the finite-dimensional "
             "certificate plus the tail covers R. Leg 47 proved this is FORCED -- reach makes "
             "the gap worse at +0.47 decades per unit rho."),
+        "progress": (
+            "**STEP ONE IS DONE, leg 50 (Route-L1 v1).** solver/interval_certificate.py + "
+            "solver/interval.dot2_matvec + test_interval_certificate.py 7/7. The radii "
+            "polynomial CLOSES IN INTERVAL ARITHMETIC on HL_S2_nonsymmetric at n = "
+            "201/401/801 (Y_0/budget 2.28e-03, 2.20e-02, 2.07e-02; Z_1 < 1 rigorously at "
+            "every rung) -- FOR THE TRUNCATED DISCRETE SYSTEM built from the stored "
+            "operators as exact data. The first answer was NO by 1.48x and the term that "
+            "ran out was ARITHMETIC, not mathematics: at a converged iterate ||F|| = "
+            "5.7e-15 assembled from terms of size 3e-02, and the naive interval matvec "
+            "enclosed it 2.3e-12 wide. Compensated (Ogita-Rump-Oishi) evaluation tightened "
+            "the slope operator by 10664x and the certificate closed. Enclosures gated "
+            "against EXACT RATIONAL arithmetic, not against float. STEP TWO -- THE TAIL "
+            "LEMMA -- IS UNTOUCHED, and the gate below is not answered until it is."),
         "gate": {
             "question": "Does the polynomial close in INTERVAL arithmetic, tail included?",
             "if_yes": ("That is a novel Tier-3 result on an object with no proof of any kind. "

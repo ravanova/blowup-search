@@ -111,9 +111,28 @@ CAPABILITIES = [
 
     # -- the certificate: spaces, bounds, Newton-Kantorovich ------------------------
     {"module": "solver/interval.py", "object": "rigorous interval arithmetic",
-     "holds": "hand-rolled outward-rounded intervals; no scipy, no mpmath",
+     "holds": ("hand-rolled outward-rounded intervals; no scipy, no mpmath; plus "
+               "dot2_matvec -- the COMPENSATED (Ogita-Rump-Oishi error-free-transformation) "
+               "matvec whose bound is u|x.y| + gamma_m^2 sum|x_j y_j|, i.e. relative to the "
+               "ANSWER rather than to the terms"),
      "validated": ("containment holds on adversarial cases, including the directed-rounding\n                   edge cases where naive intervals lose the answer"),
      "test": "test_interval.py"},
+    {"module": "solver/interval_certificate.py",
+     "object": "the certificate constants as RIGOROUS BOUNDS (Route-L1 step one, leg 50)",
+     "holds": ("interval enclosures of F and DF for BOTH bordered systems (HL and CLM), the "
+               "monotone-split point-matrix x interval-matrix product (four BLAS matmuls, no "
+               "O(N^3) Python), weighted_rowsum_bound with every step rounded up, "
+               "interval_constants and a conservative radii_verdict"),
+     "validated": ("enclosures contain the EXACT RATIONAL value (fractions.Fraction) on "
+                   "sampled rows of H, Uop and D; the rigorous Z_1/Z_2/||A|| dominate their "
+                   "float readings; a 1e-06 poisoned iterate is rejected at 5.6e+03 while "
+                   "1e-10 -- inside the certified ball -- is accepted. RESULT: the radii "
+                   "polynomial CLOSES on HL_S2_nonsymmetric at n=201/401/801 "
+                   "(Y_0/budget 2.28e-03, 2.20e-02, 2.07e-02). THE CEILING IS PART OF THE "
+                   "ENTRY: this is the TRUNCATED DISCRETE system on |X|<=745 with the stored "
+                   "operators as exact data -- the far-field tail and the consistency of "
+                   "(H, D) are NOT bounded, so it is step one of L1 and not L1"),
+     "test": "test_interval_certificate.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",
      "validated": ("agrees with hand-computed cases; Route-D v6 found the discrete-ball\n                   TRAP here -- the bound was true and useless"),

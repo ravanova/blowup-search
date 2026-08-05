@@ -1,0 +1,362 @@
+{
+ "route": "L1",
+ "version": "v1",
+ "question": "Do the certificate constants close in INTERVAL arithmetic on HL_S2_nonsymmetric, and if not, which term runs out?",
+ "L1_1_exact_reference": {
+  "method": "fractions.Fraction on selected rows -- exact rational dot products",
+  "checks": [
+   {
+    "operator": "H",
+    "rows": [
+     8,
+     53,
+     61,
+     101,
+     125,
+     166
+    ],
+    "naive_contains": true,
+    "tight_contains": true,
+    "naive_width_max": 2.4646951146678475e-13,
+    "tight_width_max": 8.881784197001252e-16,
+    "worst_naive_rel": 5.43926781756651e-12,
+    "worst_tight_rel": 8.6615297161809e-16,
+    "tightening": 277.5
+   },
+   {
+    "operator": "Uop",
+    "rows": [
+     8,
+     53,
+     61,
+     101,
+     125,
+     166
+    ],
+    "naive_contains": true,
+    "tight_contains": true,
+    "naive_width_max": 7.275957614183426e-12,
+    "tight_width_max": 1.1368683772161603e-13,
+    "worst_naive_rel": 3.4812162327040453e-13,
+    "worst_tight_rel": 7.314502083554056e-16,
+    "tightening": 64.0
+   },
+   {
+    "operator": "D",
+    "rows": [
+     8,
+     53,
+     61,
+     101,
+     125,
+     166
+    ],
+    "naive_contains": true,
+    "tight_contains": true,
+    "naive_width_max": 2.367883666920534e-12,
+    "tight_width_max": 2.220446049250313e-16,
+    "worst_naive_rel": 1.0981789077983542e-11,
+    "worst_tight_rel": 8.410856353147306e-16,
+    "tightening": 10664.0
+   },
+   {
+    "operator": "D(V)",
+    "rows": [
+     8,
+     53,
+     61,
+     101,
+     125,
+     166
+    ],
+    "naive_contains": true,
+    "tight_contains": true,
+    "naive_width_max": 1.8814949598322528e-12,
+    "tight_width_max": 2.220446049250313e-16,
+    "worst_naive_rel": 5.0654228782678934e-12,
+    "worst_tight_rel": 8.762615508969121e-16,
+    "tightening": 8473.5
+   }
+  ],
+  "all_contain": true
+ },
+ "L1_2_ladder": [
+  {
+   "n": 201,
+   "N": 405,
+   "X_max": 745.2394128947751,
+   "newton_residual": 5.662137425588298e-15,
+   "ratio_c_l_over_c_omega": -2.5412218987965725,
+   "interval": {
+    "Y0": 5.173321651314986e-12,
+    "Z1": 8.589798086295604e-09,
+    "Z2": 220571129.62230352,
+    "A_norm": 9852.352563757846,
+    "B": 11193.830518899644
+   },
+   "verdict": {
+    "closes": true,
+    "reason": "ok",
+    "Y0_over_budget": 0.002282170840266908,
+    "budget": 2.2668424116355584e-09,
+    "r_min": 5.176276669573573e-12,
+    "r_max": 4.533684862214554e-09
+   },
+   "float": {
+    "Y0": 4.4251248635284485e-13,
+    "Z1": 1.3597959353546526e-10,
+    "Z2": 220571129.62229457,
+    "Y0_over_budget": 0.0001952109580267238
+   },
+   "widening_Y0": 11.690792488033772,
+   "widening_Z1": 63.16975851273796,
+   "wall_s": 0.16916656494140625
+  },
+  {
+   "n": 401,
+   "N": 805,
+   "X_max": 745.2394128947751,
+   "newton_residual": 8.215650382226158e-15,
+   "ratio_c_l_over_c_omega": -2.540929139960695,
+   "interval": {
+    "Y0": 1.2972536532240599e-11,
+    "Z1": 5.712461811998375e-08,
+    "Z2": 845853410.5006864,
+    "A_norm": 18630.869156425793,
+    "B": 22700.32072574969
+   },
+   "verdict": {
+    "closes": true,
+    "reason": "ok",
+    "Y0_over_budget": 0.02194573104456387,
+    "budget": 5.911189062646423e-10,
+    "r_min": 1.3044502077208055e-11,
+    "r_max": 1.1822378800641724e-09
+   },
+   "float": {
+    "Y0": 2.961874932803198e-12,
+    "Z1": 7.219282300026727e-10,
+    "Z2": 845853410.5002627,
+    "Y0_over_budget": 0.005010624034008264
+   },
+   "widening_Y0": 4.379839401241376,
+   "widening_Z1": 79.12783535251457,
+   "wall_s": 0.60109543800354
+  },
+  {
+   "n": 801,
+   "N": 1605,
+   "X_max": 745.2394128947751,
+   "newton_residual": 2.868538739875248e-14,
+   "ratio_c_l_over_c_omega": -2.5407907193591717,
+   "interval": {
+    "Y0": 7.351345250491628e-12,
+    "Z1": 1.5373059481643954e-07,
+    "Z2": 1406605455.0215821,
+    "A_norm": 15417.670648061347,
+    "B": 45616.665679599646
+   },
+   "verdict": {
+    "closes": true,
+    "reason": "ok",
+    "Y0_over_budget": 0.020680891020747924,
+    "budget": 3.5546559590282916e-10,
+    "r_min": 7.389752654338583e-12,
+    "r_max": 7.109313010975502e-10
+   },
+   "float": {
+    "Y0": 3.4699401458163203e-13,
+    "Z1": 4.986436324015902e-09,
+    "Z2": 1406605455.0193985,
+    "Y0_over_budget": 0.0009761673572744015
+   },
+   "widening_Y0": 21.185798433310406,
+   "widening_Z1": 30.8297519164208,
+   "wall_s": 4.499377727508545
+  }
+ ],
+ "L1_3_naive_path": [
+  {
+   "n": 201,
+   "N": 405,
+   "X_max": 745.2394128947751,
+   "newton_residual": 5.662137425588298e-15,
+   "ratio_c_l_over_c_omega": -2.5412218987965725,
+   "interval": {
+    "Y0": 3.3521524036490413e-09,
+    "Z1": 8.589798086295604e-09,
+    "Z2": 220571129.62230352,
+    "A_norm": 9852.352563757846,
+    "B": 11193.830518899644
+   },
+   "verdict": {
+    "closes": false,
+    "reason": "Y0 exceeds the budget",
+    "Y0_over_budget": 1.4787761100827548,
+    "budget": 2.2668424116355584e-09,
+    "r_min": null,
+    "r_max": null
+   },
+   "float": {
+    "Y0": 4.4251248635284485e-13,
+    "Z1": 1.3597959353546526e-10,
+    "Z2": 220571129.62229457,
+    "Y0_over_budget": 0.0001952109580267238
+   },
+   "widening_Y0": 7575.2719008614495,
+   "widening_Z1": 63.16975851273796,
+   "wall_s": 0.13628792762756348
+  },
+  {
+   "n": 401,
+   "N": 805,
+   "X_max": 745.2394128947751,
+   "newton_residual": 8.215650382226158e-15,
+   "ratio_c_l_over_c_omega": -2.540929139960695,
+   "interval": {
+    "Y0": 2.2826932932771437e-08,
+    "Z1": 5.712461811998375e-08,
+    "Z2": 845853410.5006864,
+    "A_norm": 18630.869156425793,
+    "B": 22700.32072574969
+   },
+   "verdict": {
+    "closes": false,
+    "reason": "Y0 exceeds the budget",
+    "Y0_over_budget": 38.61648255681385,
+    "budget": 5.911189062646423e-10,
+    "r_min": null,
+    "r_max": null
+   },
+   "float": {
+    "Y0": 2.961874932803198e-12,
+    "Z1": 7.219282300026727e-10,
+    "Z2": 845853410.5002627,
+    "Y0_over_budget": 0.005010624034008264
+   },
+   "widening_Y0": 7706.919924254673,
+   "widening_Z1": 79.12783535251457,
+   "wall_s": 0.5360856056213379
+  },
+  {
+   "n": 801,
+   "N": 1605,
+   "X_max": 745.2394128947751,
+   "newton_residual": 2.868538739875248e-14,
+   "ratio_c_l_over_c_omega": -2.5407907193591717,
+   "interval": {
+    "Y0": 6.217017662490528e-08,
+    "Z1": 1.5373059481643954e-07,
+    "Z2": 1406605455.0215821,
+    "A_norm": 15417.670648061347,
+    "B": 45616.665679599646
+   },
+   "verdict": {
+    "closes": false,
+    "reason": "Y0 exceeds the budget",
+    "Y0_over_budget": 174.89787293479804,
+    "budget": 3.5546559590282916e-10,
+    "r_min": null,
+    "r_max": null
+   },
+   "float": {
+    "Y0": 3.4699401458163203e-13,
+    "Z1": 4.986436324015902e-09,
+    "Z2": 1406605455.0193985,
+    "Y0_over_budget": 0.0009761673572744015
+   },
+   "widening_Y0": 179167.86460960537,
+   "widening_Z1": 30.8297519164208,
+   "wall_s": 4.259539604187012
+  }
+ ],
+ "L1_4_poison": [
+  {
+   "eps": 1e-10,
+   "Y0": 6.289244944338717e-10,
+   "Y0_over_budget": 0.277445146895557,
+   "closes": true
+  },
+  {
+   "eps": 1e-08,
+   "Y0": 1.0205917783938107e-07,
+   "Y0_over_budget": 45.0218021310717,
+   "closes": false
+  },
+  {
+   "eps": 1e-06,
+   "Y0": 1.2783565238895345e-05,
+   "Y0_over_budget": 5645.800620381357,
+   "closes": false
+  }
+ ],
+ "L1_5_known_answer": [
+  {
+   "n": 201,
+   "interval": {
+    "Y0": 5.481108739297859e-10,
+    "Z1": 3.7565583544545415e-07,
+    "Z2": 48622231.67039755,
+    "A_norm": 1688501.050521008,
+    "B": 14.39804602294874
+   },
+   "Y0_over_budget": 0.0533007878320527,
+   "closes": true,
+   "r_min": 5.556161503609808e-10,
+   "r_max": 2.0566715882623495e-08,
+   "float_Y0_over_budget": 0.0033104851990248974,
+   "sup_distance_to_exact_profile": 4.130695171478127e-05,
+   "newton_residual": 6.161737786669619e-15
+  },
+  {
+   "n": 401,
+   "interval": {
+    "Y0": 2.6846220422611358e-08,
+    "Z1": 5.0583948484456727e-05,
+    "Z2": 2857348358.6293635,
+    "A_norm": 69227264.02009365,
+    "B": 20.63744970334231
+   },
+   "Y0_over_budget": 153.43352987484747,
+   "closes": false,
+   "r_min": null,
+   "r_max": null,
+   "float_Y0_over_budget": 30.931584294269257,
+   "sup_distance_to_exact_profile": 2.585876244687313e-06,
+   "newton_residual": 6.827871601444713e-15
+  }
+ ],
+ "L1_5b_weight_transfer": [
+  {
+   "n": 201,
+   "hand_leg46": {
+    "Y0_over_budget": 0.0533007878320527,
+    "closes": true,
+    "Z1": 3.7565583544545415e-07
+   },
+   "searched_leg49": {
+    "Y0_over_budget": 0.006176275366667966,
+    "closes": true,
+    "Z1": 9.24607175649798e-08
+   },
+   "gain": 8.629924131897619
+  },
+  {
+   "n": 401,
+   "hand_leg46": {
+    "Y0_over_budget": 153.43352987484747,
+    "closes": false,
+    "Z1": 5.0583948484456727e-05
+   },
+   "searched_leg49": {
+    "Y0_over_budget": 21.0937914021285,
+    "closes": false,
+    "Z1": 1.3897765086961774e-05
+   },
+   "gain": 7.273871583814232
+  }
+ ],
+ "L1_6_ceiling": "What closes is a statement about a zero of the FINITE-DIMENSIONAL polynomial system built from the STORED operators H, D, Uop on a truncated domain. The consistency of those operators with the continuum ones is NOT bounded here, and neither is the far field beyond X_max. Leg 46 measured the truncation gap at 1.55e+08 ball radii and leg 47 measured that reach makes it WORSE; both stand. This is step one of L1, not L1.",
+ "verdict": "CLOSES_IN_INTERVAL_ARITHMETIC_ON_THE_TRUNCATED_DISCRETE_SYSTEM",
+ "elapsed_s": 11.256541013717651
+}
