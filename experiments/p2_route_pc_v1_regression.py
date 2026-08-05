@@ -33,6 +33,14 @@ a contraction on data that cannot have come from a real run.
   PC5  THE VERDICT. Per-case classification into REJECTED / FALSE_CLOSE / RAISED, and the
        headline magnitudes: how many hypothesis-violating inputs are accepted as closing.
 
+**THE GAP THIS BATTERY FOUND HAS SINCE BEEN CLOSED.** As first run (2026-08-06, leg 79),
+11 of the 25 hypothesis-violating cases came back `closes=True`. `radii_polynomial_status`
+now validates its constants against the hypotheses above and returns `INVALID_INPUT` instead,
+so all 11 are REJECTED and the battery's gate answer is `yes`. The battery itself is
+UNCHANGED -- same 39 cases, same judgement predicate -- because its value is that it is the
+instrument that measured the defect and now measures its absence. The pre-fix numbers are
+kept verbatim in `PRE_FIX_MEASUREMENT` below and written into the artifact under `history`.
+
 Deterministic, pure logic, runs in well under a second -- no solver state is built.
 Writes writeup/data/p2_route_pc_v1_regression.json.
 
@@ -54,6 +62,32 @@ from solver.port_certification import radii_polynomial_status      # noqa: E402
 OUT = ROOT / "writeup" / "data" / "p2_route_pc_v1_regression.json"
 
 _MISSING = object()
+
+# The battery as first run, on the UNGUARDED function, before the fix landed. Kept verbatim
+# so regenerating this artifact against the repaired code cannot quietly erase the finding
+# that motivated the repair; the full account is writeup/novelty/leg_79.md and
+# experiments/journal/leg_79.md.
+PRE_FIX_MEASUREMENT = {
+    "measured": "2026-08-06",
+    "code_state": ("solver/port_certification.radii_polynomial_status BEFORE domain "
+                   "validation was added (leg 79 measured, did not patch)"),
+    "cases_total": 39,
+    "cases_outside_theorem": 25,
+    "false_closes": 11,
+    "false_close_rate_over_outside": 0.44,
+    "false_close_labels": [
+        "Y0_negative_small", "Y0_negative_large", "Y0_negative_kills_a_real_failure",
+        "Z2_negative", "Z2_negative_huge_Y0", "Z1_negative", "Z1_very_negative",
+        "Y0_neg_inf", "Z2_neg_inf", "Z1_neg_inf", "Y0_numpy_scalar"],
+    "sharpest_witness": ("radii_polynomial_status(-1.0, 0.9, 1e4) returned closes=True while "
+                         "the sign-corrected (+1.0, 0.9, 1e4) correctly returned closes=False"),
+    "nan_bypass": ("a NaN Z_1 skipped the `Z1 >= 1.0` guard entirely (NaN >= 1.0 is False) "
+                   "and was echoed back as a measured bound on the NO_Z2 branch"),
+    "gate_answer": "no",
+    "fixed_by": ("Leg 0: ORCH -- _hypothesis_violations() rejects negative and non-finite "
+                 "Y_0/Z_1/Z_2 with status INVALID_INPUT ahead of the discriminant; all 11 "
+                 "false closes became REJECTED, with the blocked and honest paths unchanged"),
+}
 
 
 # --------------------------------------------------------------------------
@@ -291,7 +325,8 @@ def main():
          "standard": ("Y_0, Z_1, Z_2 are upper bounds on norms in the radii polynomial theorem "
                       "(van den Berg-Lessard, AMS Notices 62(9):1057, 2015), hence nonnegative "
                       "and finite BY HYPOTHESIS; see writeup/novelty/leg_79.md"),
-         "cases": rows, "verdict": verdict}, indent=2, default=str) + "\n")
+         "cases": rows, "verdict": verdict,
+         "history": PRE_FIX_MEASUREMENT}, indent=2, default=str) + "\n")
     print(f"\nwrote {OUT.relative_to(ROOT)}")
 
 

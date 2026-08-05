@@ -174,19 +174,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Y0_negative_large",
@@ -200,19 +198,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Y0_negative_kills_a_real_failure",
@@ -226,19 +222,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z2_negative",
@@ -252,19 +246,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z2_negative_huge_Y0",
@@ -278,19 +270,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z1_negative",
@@ -304,19 +294,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z1_very_negative",
@@ -330,19 +318,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Y0_and_Z2_negative",
@@ -357,18 +343,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -407,17 +391,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "NO_Z2",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
         "closes",
         "status",
+        "violations",
         "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -432,18 +415,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -458,17 +439,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "NO_Z2",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
         "closes",
         "status",
+        "violations",
         "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -483,18 +463,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -509,18 +487,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -537,18 +513,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -563,18 +537,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -589,19 +561,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z2_inf",
@@ -615,18 +585,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -641,19 +609,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z1_neg_inf",
@@ -667,19 +633,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Z1_inf",
@@ -693,17 +657,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "Z1_EXCEEDS_ONE",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
         "closes",
         "status",
+        "violations",
         "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -718,18 +681,16 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
+      "status": "INVALID_INPUT",
       "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
+      "carries_Y0": false,
+      "carries_Z1": false,
       "verdict": "REJECTED"
     },
     {
@@ -792,19 +753,17 @@
       ],
       "outside_theorem": true,
       "outcome": "RETURNED",
-      "status": "EVALUATED",
-      "closes": true,
+      "status": "INVALID_INPUT",
+      "closes": false,
       "keys": [
-        "Y0",
-        "Z1",
-        "Z2",
         "closes",
-        "discriminant",
-        "status"
+        "status",
+        "violations",
+        "why"
       ],
-      "carries_Y0": true,
-      "carries_Z1": true,
-      "verdict": "FALSE_CLOSE"
+      "carries_Y0": false,
+      "carries_Z1": false,
+      "verdict": "REJECTED"
     },
     {
       "label": "Y0_numpy_array",
@@ -818,8 +777,8 @@
       ],
       "outside_theorem": true,
       "outcome": "RAISED",
-      "exception": "ValueError",
-      "detail": "The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()",
+      "exception": "TypeError",
+      "detail": "Y_0 must be a real number or None, got ndarray; the radii polynomial's constants are norms.",
       "status": null,
       "closes": null,
       "verdict": "RAISED_LOUDLY"
@@ -835,7 +794,7 @@
       "outside_theorem": false,
       "outcome": "RAISED",
       "exception": "TypeError",
-      "detail": "can't multiply sequence by non-int of type 'float'",
+      "detail": "Y_0 must be a real number or None, got str; the radii polynomial's constants are norms.",
       "status": null,
       "closes": null,
       "verdict": "RAISED_LOUDLY"
@@ -851,7 +810,7 @@
       "outside_theorem": false,
       "outcome": "RAISED",
       "exception": "TypeError",
-      "detail": "'>=' not supported between instances of 'str' and 'float'",
+      "detail": "Z_1 must be a real number or None, got str; the radii polynomial's constants are norms.",
       "status": null,
       "closes": null,
       "verdict": "RAISED_LOUDLY"
@@ -869,7 +828,7 @@
       "outside_theorem": true,
       "outcome": "RAISED",
       "exception": "TypeError",
-      "detail": "'>=' not supported between instances of 'complex' and 'float'",
+      "detail": "Y_0 must be a real number or None, got complex; the radii polynomial's constants are norms.",
       "status": null,
       "closes": null,
       "verdict": "RAISED_LOUDLY"
@@ -940,6 +899,29 @@
   "verdict": {
     "cases_total": 39,
     "cases_outside_theorem": 25,
+    "false_closes": 0,
+    "false_close_rate_over_outside": 0.0,
+    "false_close_labels": [],
+    "raised_loudly": 5,
+    "raised_labels": [
+      "Y0_numpy_array",
+      "Y0_string",
+      "Z1_string",
+      "Y0_complex",
+      "Y0_none_Z1_number"
+    ],
+    "returned_silently_on_bad_input": 23,
+    "blocked_at_step_one_calls": 3,
+    "blocked_calls_carrying_a_bound": 0,
+    "honest_paths_still_correct": true,
+    "gate_answer": "yes",
+    "gate_question": "Under an adversarial battery of fabricated/poisoned Y_0 and Z_1 inputs, does radii_polynomial_status still correctly reject every one and continue returning BLOCKED_AT_STEP_ONE where appropriate?"
+  },
+  "history": {
+    "measured": "2026-08-06",
+    "code_state": "solver/port_certification.radii_polynomial_status BEFORE domain validation was added (leg 79 measured, did not patch)",
+    "cases_total": 39,
+    "cases_outside_theorem": 25,
     "false_closes": 11,
     "false_close_rate_over_outside": 0.44,
     "false_close_labels": [
@@ -955,19 +937,9 @@
       "Z1_neg_inf",
       "Y0_numpy_scalar"
     ],
-    "raised_loudly": 5,
-    "raised_labels": [
-      "Y0_numpy_array",
-      "Y0_string",
-      "Z1_string",
-      "Y0_complex",
-      "Y0_none_Z1_number"
-    ],
-    "returned_silently_on_bad_input": 23,
-    "blocked_at_step_one_calls": 3,
-    "blocked_calls_carrying_a_bound": 0,
-    "honest_paths_still_correct": true,
+    "sharpest_witness": "radii_polynomial_status(-1.0, 0.9, 1e4) returned closes=True while the sign-corrected (+1.0, 0.9, 1e4) correctly returned closes=False",
+    "nan_bypass": "a NaN Z_1 skipped the `Z1 >= 1.0` guard entirely (NaN >= 1.0 is False) and was echoed back as a measured bound on the NO_Z2 branch",
     "gate_answer": "no",
-    "gate_question": "Under an adversarial battery of fabricated/poisoned Y_0 and Z_1 inputs, does radii_polynomial_status still correctly reject every one and continue returning BLOCKED_AT_STEP_ONE where appropriate?"
+    "fixed_by": "Leg 0: ORCH -- _hypothesis_violations() rejects negative and non-finite Y_0/Z_1/Z_2 with status INVALID_INPUT ahead of the discriminant; all 11 false closes became REJECTED, with the blocked and honest paths unchanged"
   }
 }
