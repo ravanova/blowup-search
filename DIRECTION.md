@@ -265,7 +265,7 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 81 | **BRS** — does boussinesq_rescaled.py conflate resolution-stable with converged? | no | standard | `leg/brs-v1` | At refinement levels Route-K already measured limit-cycling, does the relaxation loop ever report converged/stable? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | 73 | **BV** — external known-answer check for the 2D velocity solver | no | standard | `leg/bv-v1` | Does a published, independent benchmark exist for the polar-grid Biot-Savart solve, and does the solver reproduce it? |
+| LEG-G | 82 | **EXT3** — has the rank-3 target object been certified since? | no | light | `leg/ext3-v1` | Has a certificate for Boussinesq_S2_nonsymmetric (arXiv:2604.01868 sec 6.2) been published since? |
 | LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
 | LEG-I | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
