@@ -125,6 +125,26 @@ banked finding's substance) — that is not what is happening here. **Recommend:
 verifier confirms, dispatch as a rework leg** (drafted below as leg 76, ROUTE-MI), not as an
 escalation-#4 parked branch.
 
+**VER-I's post-landing review of leg 64 (Route-A12) found a smaller, separate defect.** The
+core gate answer is fully verified (Xu's `s*(1/2)=3` citation checked to the line number,
+exponent-dictionary translation independently pinned two ways, `alpha_1` searched-not-found
+across a complete 25/25 arXiv corpus) — **unaffected.** But leg 64's supporting "Trap 1"
+explanation misstated J. Chen's (1908.09385) critical dissipation at `a=1/2`: leg 64 wrote
+`gamma = |a|^-1 = 2`; Chen's `gamma = |a|^-1` only holds for `a <= -1`, and at `a=1/2` his own
+text gives `gamma = 1` (from `L^1` conservation), plus the norm index was written inverted
+(`L^{|a|^-1}` instead of Chen's `L^{|a|}`). Corrected, the gap is *wider*, not narrower (two
+units below `sigma=3`, not one) — no banked number or gate answer changes, only a wrong
+supporting explanation in the prose. Two further trivial defects (an Oldroyd-B gloss appearing
+nowhere in ALS; two mislabels) round it out. **DM's read: fold this into a bench-repair, not a
+dedicated rework leg.** It is the same shape of thing that correctly went to bench-repair for
+leg 69's `interval.py` fix and leg 66's `spectral_utils.py` fix — mechanical, single-paragraph,
+no banked-number or gate-answer change, no live-territory contention
+(`writeup/novelty/leg_64.md` belongs to an already-landed leg). Reserve the leg-76 rework-leg
+mechanism for genuinely multi-file, multi-site corrections like the Morse-index finding; this
+one doesn't need a branch, a quartet, or a slot. Scope for the bench-repair: correct the `gamma`
+value and the inverted norm index in leg 64's "Trap 1" paragraph (wherever cited from), remove
+the stray Oldroyd-B gloss, fix the two mislabels — no other content changes.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -205,6 +225,14 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-H | 74 | **EXT** — has the target object been certified by anyone else since? | no | standard | `leg/ext-v1` | Has a certificate for HL_S2_nonsymmetric been published by anyone since April 2026? |
 | LEG-I | 75 | **LM** — benchmark the claimed 10x cached-slope speedup | no | light | `leg/lm-v1` | Does the cached slope_matrix path still reproduce >=8x speedup on the Scenario-2 step? |
 | LEG-J | 72 | **JR** — `experiments/JOURNAL.md` / `experiments/journal/` freshness audit | no | light | `leg/jr-v1` | Does the journal narrative and the per-leg `journal/leg_N.md` file exist for every landed leg? |
+
+**Orchestrator reconciliation note (2026-08-06, second pass):** the DM's proposal to put 77/78/79
+into LEG-G/I/J was based on state from before the orchestrator's dispatch of 72/73/74/75 landed
+in this file — **all ten slots are currently live and already running as dispatched agents**
+(73=BV in LEG-G, 75=LM in LEG-I, 72=JR in LEG-J, alongside 71=CAP in LEG-F and 74=EXT in LEG-H).
+Restored the table to the true dispatched state. **76 (MI, top priority — preempts the next
+opening per §7b), 77 (EXT2), 78 (HLB) and 79 (PC) are now the reserve**, in that order, for the
+next four slots to open. No agent has been spawned for 77/78/79 yet.
 
 **History of the churn above (68→65→67/64→60/69/66→70, in that order) is preserved in the
 earlier paragraphs of this Status section; this line is the current authoritative state,
@@ -778,6 +806,120 @@ originally measured on?
 **Independence.** Reads solver/line_hilbert.py; edits nothing in solver/. New test file claimed
 by nobody else. Distinct from leg 61 (KA), which checks correctness of a different module
 (interval_certificate.py) against a published radius, not speed.
+```
+
+```
+### 76 — ROUTE-MI: THE MORSE-INDEX CORRECTION (rework leg for leg 70's finding; §7b, not §8)
+**Thesis.** Leg 70 (RC) confirmed J-4's "no origin condition" reading (gate NO) but found a
+larger problem: the banked "141 of 144 unstable directions at mu=0" claim, quoted across
+PHASE2_P2_NOTES.md and multiple writeup files, is not merely under-labelled by realization -- it
+is misleading AS A MORSE INDEX. The unstable count is exactly K-3 at K = 48/96/144: a constant
+deficit that grows 1:1 with the discretization dimension while max Re barely moves, which is the
+textbook signature of a discretized CONTINUUM (an artifact of truncation), not a converged
+eigenvalue count. Ten quote sites carry the claim; two (PHASE2_P2_NOTES.md:2176,
+TECHNICAL_P2_ROUTEI_V1.md:77 -- "a 141-dimensional unstable manifold") are flatly false in any
+realization, not just under-labelled. This is a REWORK leg, not an escalation: the K-3 counts
+themselves are not deleted, reinterpreted-away, or contested -- they stay banked exactly as
+measured. What gets corrected is the interpretive claim built on top of them. Same territory as
+the flawed landing (leg 70's own domain plus the ten quote sites), gate pre-committed to the
+corrected measurement, per §7b's own wording for this exact situation.
+**Gate.** At all identified quote sites (the ten leg 70 located, plus any further site a grep for
+"141" / "unstable direction" / "Morse index" in this context turns up), does the prose now state
+the K-3 discretized-continuum reading instead of "a 141-dimensional unstable manifold" or any
+other implied-converged-Morse-index framing?
+  yes -> All sites corrected; the two flatly-false sites (PHASE2_P2_NOTES.md:2176,
+         TECHNICAL_P2_ROUTEI_V1.md:77) rewritten outright, not merely annotated. Banked K-3
+         counts themselves untouched -- only their interpretation changes. Lands forward on
+         `main` like any other leg; landed history is not rewritten.
+  no  -> If any site resists a clean fix (the false framing is load-bearing to a further claim
+         this leg cannot itself resolve), escalate that specific site as a scoped question rather
+         than leaving it half-corrected or silently reworded around.
+**Territory.** PHASE2_P2_NOTES.md (targeted prose edits at the identified sites only, not a
+               rewrite of the surrounding sections), writeup/4_p2_lottery/TECHNICAL_P2_ROUTEI_V1.md
+               and any other writeup file among leg 70's ten located sites,
+               writeup/novelty/leg_76.md, experiments/journal/leg_76.md
+**Difficulty.** standard
+**Independence.** No live leg claims PHASE2_P2_NOTES.md or TECHNICAL_P2_ROUTEI_V1.md as exclusive
+territory. Distinct from leg 70 itself (already landed and closed) -- this is the correction leg
+its finding requires, drafted per §7b and held for dispatch until the verifier confirms.
+**NOT dispatchable until the verifier confirms leg 70's finding** -- drafted now so it is ready
+the moment confirmation lands, per the coordinator's request.
+```
+
+```
+### 77 — ROUTE-EXT2: HAS THE RANK-2 TARGET OBJECT BEEN CERTIFIED BY ANYONE ELSE SINCE?
+**Thesis.** The same gap leg 74 (EXT) checks for the rank-1 target (HL_S2_nonsymmetric) exists
+for target_selection.py's rank-2 candidate: gCLM_degenerate_one_scale, the a>0 regular branch
+from degenerate data (Huang-Tong-Wang, arXiv:2603.25104, reported numerically in March 2026,
+"not been found in previous studies"). Nobody has checked whether a certificate -- computer-
+assisted or analytic -- has appeared for this branch since. A different object, a different
+paper, independent of leg 74's search and its own dated finding.
+**Gate.** Has a certificate (computer-assisted or analytic) for arXiv:2603.25104's
+gCLM_degenerate_one_scale branch been published since March 2026?
+  yes -> The target_selection.py ledger's entry for this candidate is stale. Report the citation
+         precisely for leg 63 (M2) or a future leg to act on -- no self-edit of
+         target_selection.py, which is exclusively owned elsewhere.
+  no  -> Confirmed still uncertified as of this leg's search date. Bank the dated literature-
+         watch entry.
+**Territory.** experiments/p2_route_ext2_v1_target_watch2.py,
+               writeup/data/p2_route_ext2_v1_target_watch2.json,
+               writeup/novelty/leg_77.md, experiments/journal/leg_77.md
+**Difficulty.** light
+**Independence.** Does not touch solver/target_selection.py. Distinct object and distinct paper
+from leg 74; no overlap.
+```
+
+```
+### 78 — ROUTE-HLB: TIGHTER KNOWN-ANSWER CHECK FOR HL's SCENARIO-2 CONTRACTION RATIO
+**Thesis.** solver/hl_rescaled.py's validated line reproduces CHL's Scenario-2 contraction ratio
+"to ~1%" -- a loose tolerance that has sat unrevisited since it was first measured. Search for
+whether CHL published a higher-precision value, or whether a follow-up paper independently
+replicated it to more decimals, the same shape of gap leg 61 (KA) closed for the interval
+pipeline against CLN's Kawahara radius, just applied to a looser existing check instead of a
+missing one.
+**Gate.** Does a primary source publish the Scenario-2 contraction ratio to tighter precision
+than the ~1% figure this repository currently checks against, and if so does our number still
+agree at that tighter tolerance?
+  yes, and it agrees -> Report the tighter figure; flag capabilities.py's tolerance annotation
+         for a follow-up correction (report only, not this leg's own edit).
+  yes, but it disagrees -> Priority bug report; escalate, do not patch under this leg's own
+         authority.
+  no tighter value found -> Confirmed ~1% is the best available precision on record. Bank as a
+         dated literature-search negative; no change.
+**Territory.** experiments/p2_route_hlb_v1_contraction_lit.py,
+               writeup/data/p2_route_hlb_v1_contraction_lit.json,
+               writeup/novelty/leg_78.md, experiments/journal/leg_78.md
+**Difficulty.** light
+**Independence.** Reads solver/hl_rescaled.py; edits nothing. No other leg touches this module or
+this specific claim.
+```
+
+```
+### 79 — ROUTE-PC: ADVERSARIAL FABRICATION-REJECTION AUDIT OF THE L1->L2 PORT
+**Thesis.** solver/port_certification.py's validated line claims `radii_polynomial_status`
+"returns BLOCKED_AT_STEP_ONE and is gated to carry NO fabricated Y_0 or Z_1" -- a logic property,
+distinct from leg 69 (IA)'s arithmetic-precision stress test of solver/interval.py. IA found real
+soundness gaps in the shared interval core; this leg checks whether a DOWNSTREAM consumer's
+fabrication-rejection guard is equally robust, under a fresh adversarial battery of poisoned
+Y_0/Z_1 inputs (values that look plausible but were never actually derived from a certificate
+run) -- complementary coverage of the same certificate-infrastructure family IA and KA already
+established has real value.
+**Gate.** Under an adversarial battery of fabricated/poisoned Y_0 and Z_1 inputs, does
+`radii_polynomial_status` still correctly reject every one and continue returning
+BLOCKED_AT_STEP_ONE where appropriate?
+  yes -> Confirmed robust. Bank the battery as a permanent regression test.
+  no  -> A fabrication-rejection gap in certificate-adjacent infrastructure. Report the exact
+         failing case precisely and escalate as a priority finding -- do not patch under this
+         leg's own authority.
+**Territory.** test_port_certification_regression.py,
+               experiments/p2_route_pc_v1_regression.py,
+               writeup/data/p2_route_pc_v1_regression.json,
+               writeup/novelty/leg_79.md, experiments/journal/leg_79.md
+**Difficulty.** light
+**Independence.** Reads solver/port_certification.py; edits nothing. New test file claimed by
+nobody else. Complementary to, not dependent on, leg 69's interval.py stress test -- this leg's
+gate is a logic property, not an arithmetic-precision one, so it is valid regardless of the
+interval.py bench-repair's timing.
 ```
 
 ## Ranking rationale
