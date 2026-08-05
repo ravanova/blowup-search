@@ -548,3 +548,96 @@ a first literature pass on a well-studied model, and it is much cheaper to learn
 now than after writing anything up. It also sharpens where the remaining value
 plausibly sits: **the methodological findings, and the certification machinery** —
 not the gCLM phenomenology.
+
+
+## 🧭 NINTH PASS (LIT, 2026-08-05): the resurfacing flag re-checked, and BDL's
+## zero-diagonal question resolved (network + PDF extraction both worked this time)
+
+This pass answers the two open items CONTINUATION_PROMPT.md flagged for a later leg:
+Directive 2's search-index flag, and stage T-0's unresolved "does BDL cover a
+zero-diagonal Fredholm operator" question. Both are answered plainly below. Network
+egress to `arxiv.org` and the `WebSearch`/`WebFetch` tools both worked in this session
+(no retries needed); `pdftotext` on `arXiv:1503.06315` also worked this time, unlike
+leg 52's attempt.
+
+### Item 1 — does `arXiv:2604.01868` resurface in the search index now?
+
+**No. It still does not resurface under a topical query.** Re-ran leg 52's own logged
+query verbatim:
+
+```
+"Chen Huang Li 2026 Hou-Luo model non-symmetric self-similar profile blowup proof"
+```
+
+(`SEARCH_LOG` entry 5 in `experiments/p2_route_t_v1_border.py:116`, weight 5). Result:
+five links returned, all 2021–2023 Hou–Luo/Chen–Hou/Chen–Hou–Huang work
+(`arXiv:2308.01528`, `arXiv:2106.05422` ×2, the Caltech mirror of the Annals of PDE
+paper, and the Springer landing page). `arXiv:2604.01868` did **not** appear in the
+returned links — reproducing leg 52's finding exactly.
+
+A second query naming the exact title and authors (*"arXiv:2604.01868 Chen Huang Li
+Novel Self-similar Finite-time Blowups Hou-Luo Boussinesq"*) also did not return
+`arXiv:2604.01868` among its **links** — the eight returned links are all other
+papers (`2605.15130`, `2403.11471`, `2401.14615`, a ResearchGate De Gregorio page,
+`2305.05660`, the CLM Springer page, and one arXiv listing page). The prose summary
+that followed *did* correctly name the paper's title and authors — but that is the
+underlying model answering from its own knowledge, not from a link the search actually
+surfaced, and the same distinction matters for `2604.01868` itself: **direct retrieval
+by ID works fine** (`WebFetch` on `arxiv.org/abs/2604.01868` returned the correct
+title/abstract instantly, and `scripts/fetch_papers.sh 2604.01868` pulled the 28 MB PDF
+without a hitch). The gap is specifically in the **search index's** *topical* recall,
+not in the paper's availability or in this project's ability to fetch it once named.
+
+**Plain answer: the flag stands. Re-querying today, by topic, still does not
+resurface `arXiv:2604.01868`; fetching it by ID still works perfectly.** This is a
+second independent confirmation of leg 52's search-index observation, not a new
+finding about the paper.
+
+### Item 2 — does Breden–Desvillettes–Lessard (`arXiv:1503.06315`) cover the
+### zero-diagonal Fredholm case?
+
+**No — their construction requires a diagonal bounded away from zero, and a
+zero-diagonal operator is outside its stated hypotheses.** The PDF extracted cleanly
+this time (`pdftotext`, 3679 lines); the relevant passages:
+
+BDL's tridiagonal operator (their eq. (3)) is `L_k(x) = λ_k x_{k−1} + μ_k x_k + β_k
+x_{k+1}`, and their **assumption (4)** (p.3) requires
+
+> "there exist real numbers `s_L > 0`, `0 < C1 ≤ C2` and an integer `k0` such that
+> `C1 ≤ μ_k / ω_k^{s_L} ≤ C2` for all `k ≥ k0`"
+
+— i.e. the diagonal `μ_k` must be **bounded below** by `C1 ω_k^{s_L} > 0`; it can
+never vanish past `k0`. Their **assumption (5)** then requires the off-diagonal-to-
+diagonal ratios `λ_k/μ_k, β_k/μ_k ≤ δ < 1/2` — a ratio that is undefined at `μ_k = 0`.
+Both hypotheses presuppose a **nonzero, dominant** diagonal; "tridiagonal dominant" in
+their title is not decoration, it is the operating assumption their whole pseudo-
+inverse construction (an LU-decomposition, their eq. (6)–(8), citing Ciarlet Thm
+4.3-2) is built on — the algorithm literally divides by `μ_k` (`b_1 = μ_m, b_2 =
+μ_{m+1}, ...` feeding the LU recursion).
+
+Two further checks that this isn't just an unstated gap: (i) their own §5
+"Conclusion and Perspectives" (p.25) lists three explicit future directions —
+relaxing assumption (5)'s *symmetric ratio* restriction, adapting to `ℓ¹_ν`, and
+generalizing to block-tridiagonal structures — and **none of the three is "extend to
+a zero or vanishing diagonal."** A zero diagonal is not on their own list of
+acknowledged limitations to lift. (ii) The words "Fredholm" and "kernel" do not occur
+anywhere in the paper (`grep -i "fredholm\|kernel" ` on the extracted text returns
+nothing) — the possibility of a non-injective / non-surjective linear part with a
+genuine kernel/cokernel is not part of their framework at all, consistent with a
+construction that assumes the diagonal already dominates and never needs a null-space
+correction.
+
+**Plain answer: BDL's method does not extend to, and does not cover, a zero-diagonal
+Fredholm operator.** It is a different regime from what they built: their pseudo-
+inverse is a perturbation of a dominant diagonal, and leg 51/T-0's problem has no
+diagonal to perturb. This narrows T-0's `PROCEED_NARROW` verdict further, in the
+direction it already pointed — leg 51/T-0's zero-diagonal Fredholm case is not
+resolved by BDL and, on this reading of their construction, cannot be reached by it
+without new work (their own listed future directions don't include it). It does not
+by itself establish that the zero-diagonal case is *novel* in the wider literature —
+only that this one adjacent paper, read in full, doesn't cover it.
+
+**Sources used this pass:** `scripts/fetch_papers.sh` (arxiv.org egress, worked
+first try), direct `curl` of `arxiv.org/pdf/1503.06315` (HTTP 200), `pdftotext` on
+both PDFs, `WebSearch` (two queries, logged above), `WebFetch` on
+`arxiv.org/abs/2604.01868`.
