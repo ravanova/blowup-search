@@ -6,26 +6,29 @@ uses K up to 128 -- accumulations of 129 to 258 terms -- against an operator who
 diagonal is EXACTLY zero, so the rows cancel catastrophically.  This file gates that regime.
 
 READ THIS BEFORE TRUSTING `dot2_matvec`.  Leg 69 measured, against exact rational ground truth,
-that the compensated matvec is SOUND in the normal range and UNSOUND in the subnormal range.
-Both facts are pinned here, the second one deliberately as a passing "characterization" test
-rather than a failing one, so that the boundary cannot move without this file noticing:
+that the compensated matvec was SOUND in the normal range and UNSOUND in the subnormal range,
+and that Dekker's splitting produced a silent NaN enclosure above |entry| = 2^997.  Both defects
+were repaired in `solver/interval.py` under `bench/fix-interval-subnormal-nan` (Rump's absolute
+eta term added to `isum`/`matvec`/`dot2_matvec`; an OverflowError raised from `_two_product`; the
+`Interval` constructor's containment guard made to fail closed on NaN).  As leg 69's technical
+note instructed, the two characterization tests below have been FLIPPED into the soundness
+assertions they were placeholders for:
 
   * `test_normal_range_soundness` -- the certificate's own regime.  Enclosures STRICTLY contain
     the exact rational value; no case merely touches an endpoint.
-  * `test_subnormal_range_is_KNOWN_UNSOUND` -- below ~1e-140 input scale, `dot2_matvec` and
-    `matvec` both return enclosures that EXCLUDE the exact value.  The test asserts the defect's
-    two containing properties: the escape is ABSOLUTE (a few units of eta = 2^-1074), never
-    relative, and the failure band lies far below anything the live operators reach.
-  * `test_dekker_split_overflow_is_KNOWN_SILENT` -- above |entry| = 2^997, Dekker's splitting
-    overflows and `dot2_matvec` returns a NaN enclosure WITHOUT RAISING, because the `Interval`
-    constructor's `lo <= hi` guard is vacuous on NaN.
-  * `test_live_operators_are_far_from_both_bands` -- the quantitative reason the two defects do
-    not reach leg 58's or leg 61's numbers.
+  * `test_subnormal_range_is_SOUND` -- was `test_subnormal_range_is_KNOWN_UNSOUND`.  Across the
+    whole band leg 69 measured failing (input scales 1e-150 to 1e-160, where the products straddle
+    the normal/subnormal boundary), `dot2_matvec` and `matvec` must now CONTAIN the exact rational
+    value in every case: zero false negatives, where leg 69 measured 62 in 1680 with a worst
+    escape of 6.58 eta = 3.25e-323.
+  * `test_dekker_split_overflow_raises` -- was `test_dekker_split_overflow_is_KNOWN_SILENT`.
+    Above |entry| = 2^997 the splitting must RAISE OverflowError, and a NaN endpoint must be
+    rejected by the `Interval` constructor rather than passing its guard vacuously.
+  * `test_live_operators_are_far_from_both_bands` -- the quantitative reason neither defect ever
+    reached leg 58's or leg 61's numbers (the repair is a soundness widening at the extremes,
+    bit-for-bit inert in the live operating range of entries 0.5 to 128).
 
-If a future leg repairs `solver/interval.py` (adding Rump's eta term to the reductions and an
-overflow guard to the splitting), the two KNOWN_ defects here are expected to start failing.
-That is the intended signal: flip them to soundness assertions at that point.  Do not weaken
-them to make a repair look unnecessary.
+Do not weaken these to make a future change look harmless.
 """
 
 import warnings
@@ -134,65 +137,95 @@ def test_tail_block_conditioning():
     print("[ok] tail-block conditioning: no enclosure loses the answer")
 
 
-def test_subnormal_range_is_KNOWN_UNSOUND():
-    """(3) CHARACTERIZATION OF A KNOWN DEFECT -- see this file's docstring.
+def test_subnormal_range_is_SOUND():
+    """(3) SOUNDNESS IN THE SUBNORMAL BAND -- the repaired form of leg 69's defect 1.
 
     The Ogita-Rump-Oishi bound `u|x.y| + gamma_m^2 |x||y|` that `dot2_matvec` implements is
-    purely RELATIVE and carries no absolute term, and the classic `gamma_m` bound behind
-    `matvec` is stated for the normal range only.  Rump's underflow-aware restatement (BIT 2012)
-    adds an eta term precisely for this.  Neither is present here, so once the accumulation lands
-    in the subnormal range both reductions can return an enclosure that EXCLUDES the answer.
+    purely RELATIVE, and the classic `gamma_m` bound behind `matvec` is stated for the normal
+    range only.  Once the products land in the subnormal range those terms underflow to zero
+    while the true rounding error stays ABSOLUTE, at a few eta -- leg 69 measured 62 false
+    negatives in 1680 cases at scales 1e-150...1e-160, worst escape 6.58 eta.  Rump's
+    underflow-aware restatement (BIT Numer. Math. 2012) closes it with an explicit eta term, and
+    `solver/interval.py` now carries that term (2 eta per product for the plain reductions, 8 eta
+    per product for the compensated one).
 
-    This test asserts the defect is exactly as characterized -- and, critically, that its escape
-    is ABSOLUTE (bounded in units of eta) rather than relative, which is what confines it."""
+    This test sweeps the whole measured failure band, WIDER than the band that failed, through
+    BOTH reductions, and requires containment of the exact rational value in every case."""
     rng = np.random.default_rng(1074)
-    fails = 0
+    fails = []
     total = 0
     worst_escape_eta = 0.0
-    for e in (-150, -155, -160):
-        for _ in range(25):
+    for e in (-145, -150, -155, -160, -165):
+        for _ in range(20):
             M, v = _cancelled(rng, 1, 32, 1.0)
             M = M * (10.0 ** e)
             v = v * (10.0 ** e)
             ex = _exact(M, v)
-            r = dot2_matvec(M, v)
-            for i in range(M.shape[0]):
-                L, H = Fr(float(r.lo[i])), Fr(float(r.hi[i]))
-                s = min(ex[i] - L, H - ex[i])
-                total += 1
-                if s < 0:
-                    fails += 1
-                    worst_escape_eta = max(worst_escape_eta, float(-s / Fr(ETA)))
-    assert fails > 0, ("the subnormal defect did NOT reproduce -- if solver/interval.py was "
-                       "repaired, flip this test into a soundness assertion")
-    assert worst_escape_eta < 1e3, (
-        f"the subnormal escape grew to {worst_escape_eta:.3g} eta; it was characterized at a few "
-        "eta and being ABSOLUTE is the whole reason it cannot reach the certificate's regime")
-    print(f"    {fails}/{total} false negatives in the subnormal band (input scale 1e-150 to "
-          f"1e-160); worst escape {worst_escape_eta:.3g} eta = "
-          f"{worst_escape_eta * ETA:.3g} absolute")
-    print("[KNOWN DEFECT] dot2_matvec/matvec are UNSOUND below ~1e-140 input scale")
+            for name, r in (("dot2_matvec", dot2_matvec(M, v)),
+                            ("matvec", matvec(M, Interval.point(v)))):
+                for i in range(M.shape[0]):
+                    L, H = Fr(float(r.lo[i])), Fr(float(r.hi[i]))
+                    s = min(ex[i] - L, H - ex[i])
+                    total += 1
+                    if s < 0:
+                        fails.append((name, e, float(-s / Fr(ETA))))
+                        worst_escape_eta = max(worst_escape_eta, float(-s / Fr(ETA)))
+    assert not fails, (
+        f"{len(fails)}/{total} subnormal-band false negatives, worst escape "
+        f"{worst_escape_eta:.3g} eta -- the absolute (eta) term in solver/interval.py no longer "
+        f"dominates the underflow rounding.  First few: {fails[:5]}")
+    print(f"    0/{total} false negatives across input scales 1e-145 to 1e-165, both reductions "
+          f"(leg 69 measured 62/1680 here, worst escape 6.58 eta = 3.25e-323)")
+    print("[ok] subnormal band: the absolute eta term restores containment")
 
 
-def test_dekker_split_overflow_is_KNOWN_SILENT():
-    """(4) CHARACTERIZATION OF A KNOWN DEFECT.  Dekker's splitting multiplies by 2^27+1 before
-    splitting, so it overflows for large operands and returns a NaN error term.  `dot2_matvec`
-    then produces a NaN enclosure and RAISES NOTHING: `Interval.__init__`'s `np.any(lo > hi)`
-    guard is vacuously satisfied by NaN."""
+def test_dekker_split_overflow_raises():
+    """(4) LOUD FAILURE AT THE DEKKER WALL -- the repaired form of leg 69's defect 2.
+
+    Dekker's splitting multiplies by 2^27+1 before splitting, so it overflows for |operand| >=
+    2^997 = 1.34e300 and its error term goes NaN.  That NaN is MANUFACTURED by the module's own
+    arithmetic with no rigorous error term behind it, so it must now RAISE.  A NaN that arrives
+    in CALLER data instead (interval_certificate.full_interpolant_hilbert_matrix deliberately
+    leaves its two endpoint rows NaN and masks them off) must widen to the trivial enclosure
+    [-inf, +inf].  Either way a NaN endpoint is never STORED, because both `lo > hi` and
+    `lo <= hi` are False on NaN and the old `np.any(lo > hi)` guard was therefore vacuous."""
     e_crit = None
     for e in range(900, 1024):
-        _, err = _two_product(np.array([2.0 ** e]), np.array([1.0]))
-        if not np.isfinite(err[0]):
+        try:
+            _, err = _two_product(np.array([2.0 ** e]), np.array([1.0]))
+        except OverflowError:
             e_crit = e
             break
-    assert e_crit is not None, "Dekker splitting no longer overflows -- was it guarded?"
-    r = dot2_matvec(np.array([[2.0 ** e_crit]]), np.array([1.0]))
-    silent = bool(np.isnan(r.lo[0]) and np.isnan(r.hi[0]))
-    assert silent, ("dot2_matvec no longer returns a silent NaN -- if an overflow guard was "
-                    "added, flip this test into a raises-assertion")
-    print(f"    Dekker split loses its error term at |a| >= 2^{e_crit} = {2.0 ** e_crit:.3g}; "
-          f"dot2_matvec returns [nan, nan] with no exception")
-    print("[KNOWN DEFECT] dot2_matvec NaNs silently above |entry| = 2^997")
+        assert np.isfinite(err[0]), (f"_two_product returned a non-finite error term at 2^{e} "
+                                     "instead of raising")
+    assert e_crit is not None, "the Dekker splitting overflow guard never fired below 2^1024"
+    assert e_crit == 997, f"the Dekker wall moved to 2^{e_crit}; leg 69 measured it at 2^997"
+    try:
+        dot2_matvec(np.array([[2.0 ** e_crit]]), np.array([1.0]))
+        raise AssertionError("dot2_matvec returned an enclosure at the Dekker wall instead of "
+                             "raising -- a silent NaN enclosure passes every containment check")
+    except OverflowError:
+        pass
+    # one decade below the wall the compensated path still works normally
+    r = dot2_matvec(np.array([[2.0 ** (e_crit - 1)]]), np.array([1.0]))
+    assert np.isfinite(r.lo[0]) and np.isfinite(r.hi[0]) and r.lo[0] <= 2.0 ** 996 <= r.hi[0]
+    # and the constructor never STORES a NaN endpoint: it widens to the trivial
+    # enclosure, which is useless but valid and cannot be mistaken for a tight bound
+    for bad in ((np.nan, np.nan), (np.nan, 1.0), (0.0, np.nan)):
+        w = Interval(np.array([bad[0]]), np.array([bad[1]]))
+        assert not np.isnan(w.lo[0]) and not np.isnan(w.hi[0]), f"NaN endpoint stored: {bad}"
+        assert w.lo[0] == -np.inf and w.hi[0] == np.inf, f"NaN endpoint not widened: {bad}"
+        assert bool(w.contains(0.0)) and bool(w.contains(1e300)), "trivial enclosure must contain"
+    # a NaN reaching dot2_matvec through CALLER data (interval_certificate's
+    # full_interpolant_hilbert_matrix leaves its two endpoint rows NaN on purpose)
+    # must widen, not raise -- only a MANUFACTURED overflow raises
+    rn = dot2_matvec(np.array([[np.nan, 1.0], [2.0, 3.0]]), np.array([1.0, 1.0]))
+    assert rn.lo[0] == -np.inf and rn.hi[0] == np.inf, "NaN input row did not widen"
+    assert np.isfinite(rn.lo[1]) and rn.lo[1] <= 5.0 <= rn.hi[1], "clean row was damaged"
+    print(f"    |entry| >= 2^{e_crit} = {2.0 ** e_crit:.3g} raises OverflowError from the Dekker "
+          f"split; 2^{e_crit - 1} still encloses; NaN endpoints widen to [-inf, +inf], "
+          f"never stored, and a NaN input row does not damage its neighbours")
+    print("[ok] the Dekker overflow wall fails loudly, not silently")
 
 
 def test_live_operators_are_far_from_both_bands():
@@ -220,11 +253,11 @@ def test_live_operators_are_far_from_both_bands():
 def _main():
     test_normal_range_soundness()
     test_tail_block_conditioning()
-    test_subnormal_range_is_KNOWN_UNSOUND()
-    test_dekker_split_overflow_is_KNOWN_SILENT()
+    test_subnormal_range_is_SOUND()
+    test_dekker_split_overflow_raises()
     test_live_operators_are_far_from_both_bands()
     print("\nALL INTERVAL STRESS GATES PASSED "
-          "(two KNOWN DEFECTS characterized, not repaired -- see the module docstring)")
+          "(leg 69's two defects repaired and now gated as soundness assertions)")
 
 
 if __name__ == "__main__":

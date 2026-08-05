@@ -22,7 +22,10 @@ the rounding mode). For the sum/dot/matvec reductions, which accumulate m terms,
 the classic running-error bound |fl(sum) - sum| <= gamma_m * sum|terms|, with
 gamma_m = m*u/(1 - m*u) and u = 2^-53, is added before the outward push -- giving
 a rigorous, fully-vectorized enclosure of a length-m accumulation without a
-Python-level sequential loop.
+Python-level sequential loop. That relative bound is accompanied by an ABSOLUTE
+term proportional to the underflow unit eta = 2^-1074 (Rump, BIT 2012), which is
+what keeps the enclosure valid when the individual products go subnormal and the
+relative terms themselves underflow to zero; see the constants below.
 
 Backed by numpy arrays, so an `Interval` may hold a scalar (0-d) or a whole
 profile vector; all ops broadcast. Point (degenerate) intervals model exact
@@ -32,6 +35,50 @@ float inputs; `from_mid_rad` models a genome box.
 import numpy as np
 
 _U = 2.0 ** -53          # unit roundoff (double precision)
+_ETA = 2.0 ** -1074      # underflow unit: the smallest positive subnormal double
+
+# ABSOLUTE (underflow) ERROR TERMS -- leg 69's defect 1, repaired here.
+#
+# The classic gamma_m bound and the Ogita-Rump-Oishi Dot2 bound are both purely
+# RELATIVE: they are proportional to sum_j |x_j y_j|.  Both are stated for the
+# normal range.  Once the individual PRODUCTS x_j y_j reach the subnormal range
+# (|x_j y_j| ~ eta = 2^-1074), the relative terms themselves underflow to zero
+# while the actual rounding of the accumulation is ABSOLUTE -- a few eta.  Leg 69
+# measured exactly that: 62 false negatives in 1680 sampled cases at input scales
+# 1e-150...1e-160, worst escape 6.58 eta = 3.25e-323 (writeup/data/
+# p2_route_ia_v1_interval_stress.json).  Rump's underflow-aware restatement of the
+# same bounds (Error estimation of floating-point summation and dot product, BIT
+# Numer. Math. 52:201-220, 2012, https://www.tuhh.de/ti3/paper/rump/Ru11.pdf)
+# closes the gap by carrying an explicit eta term alongside the relative ones.
+# That term is what the two constants below supply.
+#
+# Sizing, per accumulated term:
+#   * PLAIN (isum / matvec, no error-free transformation).  Each float product is
+#     fl(ab) = ab(1 + delta) + zeta with |delta| <= u and |zeta| <= eta/2 (the
+#     underflow term); float ADDITION is exact whenever its result is subnormal,
+#     so it contributes no absolute term.  Amplifying the m per-product zetas by
+#     the (1 + u)^m <= 1 + gamma_m accumulation factor gives m * eta / 2 * (1 +
+#     gamma_m) < m * eta.  The implemented constant is 2 per term.
+#   * DOT2 (the compensated path).  Dekker's TwoProduct is error-free only in the
+#     normal range; under underflow ORO 2005 records a * b = p + e + 5 eta * theta
+#     with |theta| <= 1, i.e. up to 5 eta per product, and the compensation
+#     accumulation and the |M| @ |v| mass sum add further sub-eta slop.  The
+#     implemented constant is 8 per term.
+# Both constants are deliberately generous.  m * eta is at most ~1e-321 for the
+# accumulation lengths this repository uses (m <= 260), which is BELOW HALF AN ULP
+# of any normal double, so adding it changes no radius in the certificate's own
+# operating range bit-for-bit; it only lifts the radius floor where the relative
+# terms have vanished.
+_ETA_TERMS_PLAIN = 2.0
+_ETA_TERMS_DOT2 = 8.0
+
+
+def _eta_floor(m, per_term):
+    """The absolute (underflow) error term for an m-term accumulation.
+
+    Exact in floating point: eta * k is exactly representable for every integer
+    k <= 2^52, and per_term * m stays far below that here."""
+    return (per_term * float(m)) * _ETA
 
 
 def _down(x):
@@ -70,6 +117,21 @@ class Interval:
         hi = np.asarray(hi, dtype=float)
         if lo.shape != hi.shape:
             lo, hi = np.broadcast_arrays(lo, hi)
+        # NaN ENDPOINTS ARE WIDENED TO [-inf, +inf], NEVER STORED (leg 69, defect 2).
+        # `np.any(lo > hi)` is VACUOUSLY satisfied by NaN -- every comparison against
+        # NaN is False -- so a [nan, nan] "enclosure" used to pass this guard and then
+        # pass every downstream `lo <= x <= hi` check as well, silently.  A NaN
+        # endpoint encloses nothing, so it is replaced by the trivial enclosure
+        # [-inf, +inf]: valid, useless, and impossible to mistake for a tight bound.
+        # (Widening rather than raising because a NaN can legitimately arrive in
+        # CALLER data -- e.g. interval_certificate.full_interpolant_hilbert_matrix
+        # deliberately leaves its two endpoint rows NaN and masks them off.  Where a
+        # NaN would instead be MANUFACTURED by this module's own arithmetic, it is
+        # raised at the source: see the overflow guard in `_two_product`.)
+        bad = np.isnan(lo) | np.isnan(hi)
+        if np.any(bad):
+            lo = np.where(bad, -np.inf, lo)
+            hi = np.where(bad, np.inf, hi)
         if np.any(lo > hi):
             raise ValueError("Interval requires lo <= hi")
         self.lo = lo
@@ -193,8 +255,9 @@ def isum(iv, axis=None):
     g = _gamma(m)
     s_lo = np.sum(lo, axis=axis)
     s_hi = np.sum(hi, axis=axis)
-    err_lo = _up(g * np.sum(np.abs(lo), axis=axis))
-    err_hi = _up(g * np.sum(np.abs(hi), axis=axis))
+    eta_term = _eta_floor(m, _ETA_TERMS_PLAIN)      # Rump's absolute underflow term
+    err_lo = _up(_up(g * np.sum(np.abs(lo), axis=axis)) + eta_term)
+    err_hi = _up(_up(g * np.sum(np.abs(hi), axis=axis)) + eta_term)
     return Interval(_down(s_lo - err_lo), _up(s_hi + err_hi))
 
 
@@ -217,7 +280,10 @@ def matvec(M, v):
     # sum_j |M_ij| * |v_j|-endpoint bounds the per-row accumulation error
     a_lo = Mp @ np.abs(v.lo) + (-Mn) @ np.abs(v.hi)
     a_hi = Mp @ np.abs(v.hi) + (-Mn) @ np.abs(v.lo)
-    return Interval(_down(lo - _up(g * a_lo)), _up(hi + _up(g * a_hi)))
+    eta_term = _eta_floor(m, _ETA_TERMS_PLAIN)      # Rump's absolute underflow term
+    e_lo = _up(_up(g * a_lo) + eta_term)
+    e_hi = _up(_up(g * a_hi) + eta_term)
+    return Interval(_down(lo - e_lo), _up(hi + e_hi))
 
 
 def dot(u, v):
@@ -258,7 +324,15 @@ def _two_sum(a, b):
 
 
 def _two_product(a, b):
-    """Dekker: p = fl(a*b) and err with a*b == p + err EXACTLY (no FMA needed)."""
+    """Dekker: p = fl(a*b) and err with a*b == p + err EXACTLY (no FMA needed).
+
+    RAISES on overflow (leg 69, defect 2).  The splitting multiplies by 2^27 + 1
+    BEFORE splitting, so it overflows -- and returns a NaN error term -- once any
+    operand reaches |a| >= 2^997 = 1.34e300, well below the double's own overflow
+    threshold.  Silently returning that NaN is the dangerous outcome: it
+    propagates into an enclosure that satisfies every comparison-based containment
+    check vacuously.  The non-finite result is therefore detected and raised here,
+    loudly, naming the offending magnitude."""
     p = a * b
     ca = _SPLIT * a
     ah = ca - (ca - a)
@@ -266,7 +340,31 @@ def _two_product(a, b):
     cb = _SPLIT * b
     bh = cb - (cb - b)
     bl = b - bh
-    return p, (((ah * bh - p) + ah * bl) + al * bh) + al * bl
+    err = (((ah * bh - p) + ah * bl) + al * bh) + al * bl
+    bad = ~(np.isfinite(p) & np.isfinite(err))
+    if np.any(bad):
+        # Only MANUFACTURED non-finiteness is an error.  A non-finite operand is the
+        # caller's own data (some callers deliberately carry NaN rows they mask off
+        # later); it propagates as before, and the Interval constructor turns it into
+        # the trivial enclosure rather than a NaN.  A non-finite RESULT from finite
+        # operands is the splitting overflow, and there is no rigorous error term for
+        # it, so it is raised.
+        aa = np.abs(np.asarray(a, dtype=float))
+        bb = np.abs(np.asarray(b, dtype=float))
+        src = np.broadcast_to(~(np.isfinite(aa) & np.isfinite(bb)), bad.shape)
+        bad = bad & ~src
+        if not np.any(bad):
+            return p, err
+        amax = float(np.max(aa[np.isfinite(aa)], initial=0.0))
+        bmax = float(np.max(bb[np.isfinite(bb)], initial=0.0))
+        raise OverflowError(
+            "_two_product: Dekker's error-free splitting overflowed (max |a| = "
+            f"{amax:.6g}, max |b| = {bmax:.6g}).  The splitting constant 2^27 + 1 "
+            f"overflows for |operand| >= 2^997 = {2.0 ** 997:.6g}; the product itself "
+            "may also have overflowed.  No rigorous error term exists there, so the "
+            "compensated path refuses to return an enclosure rather than emitting "
+            "[nan, nan]")
+    return p, err
 
 
 def dot2_matvec(M, v):
@@ -275,8 +373,13 @@ def dot2_matvec(M, v):
     Returns an Interval. Same signature as `matvec` but with v a plain float array
     (both operands must be exact data -- this is the residual-evaluation path, not
     the ball-evaluation path). The radius is
-        u |result| / (1 - u)  +  gamma_m^2 * sum_j |M_ij v_j|
-    pushed outward by one ulp, which is the Ogita-Rump-Oishi bound made outward."""
+        u |result| / (1 - u)  +  gamma_m^2 * sum_j |M_ij v_j|  +  8 m eta
+    pushed outward by one ulp: the Ogita-Rump-Oishi bound made outward, plus the
+    absolute underflow term of Rump's BIT 2012 restatement (see `_ETA_TERMS_DOT2`),
+    without which containment is lost once the products go subnormal.
+
+    Raises OverflowError (from `_two_product`) if any entry reaches 2^997, where
+    Dekker's splitting overflows and no rigorous error term exists."""
     M = np.asarray(M, dtype=float)
     v = np.asarray(v, dtype=float)
     n, m = M.shape
@@ -296,6 +399,10 @@ def dot2_matvec(M, v):
     # |x.y| <= (|res| + t) / (1 - u) follows from the ORO bound itself, so the
     # relative term is bounded without assuming |res| >= |x.y|
     rad = _up(_up(_U * _up((np.abs(res) + t) / (1.0 - _U))) + t)
+    # ...plus Rump's ABSOLUTE underflow term.  Both terms above are proportional to
+    # the data, so they vanish exactly when the products enter the subnormal range
+    # and the true rounding error stops being relative (leg 69, defect 1).
+    rad = _up(rad + _eta_floor(m, _ETA_TERMS_DOT2))
     return Interval(_down(res - rad), _up(res + rad))
 
 
