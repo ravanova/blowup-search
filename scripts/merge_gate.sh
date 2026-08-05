@@ -68,8 +68,11 @@ done
 
 # Claim-bearing diffs must carry their evidence: a new BLOG_*.md in the
 # writeup tree without a TECHNICAL_*.md sibling (or vice versa) is a docs
-# contract violation, not a merge candidate.
-for f in $changed; do
+# contract violation, not a merge candidate. Only newly-ADDED BLOG files are
+# checked -- a branch that merely edits an existing legacy BLOG (path fixes,
+# typos) must not be blocked by a pre-existing gap it did not introduce.
+added=$(git diff --name-status "$BASE"...HEAD 2>/dev/null | awk '$1=="A"{print $2}')
+for f in $added; do
   case "$f" in
     writeup/*/BLOG_*.md)
       sib="$(dirname "$f")/TECHNICAL_${f##*/BLOG_}"
