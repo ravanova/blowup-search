@@ -56,10 +56,24 @@ claims, the only ones with a real chance of being new.
   corrected) is the only primary source in this list on the **supercritical** balance,
   which no leg of this project had. Lesson (69).
 
+**STATUS 2026-08-05 (maintenance sweep, mechanical index-only pass):** three papers that
+are currently gating **live leg bans** were missing entries below (they were cited
+extensively in leg journals/`DIRECTION.md`/`LITERATURE_CHECK.md` but never indexed here —
+this manifest was 9 legs stale). Added as **Tier 0**. No new claims made; this is an
+indexing fix only — see `LITERATURE_CHECK.md` and `DIRECTION.md` for the actual verdicts.
+
 Fetch everything: `bash Papers/fetch.sh` (needs the hosts below allowlisted).
 Fetch one: `bash Papers/fetch.sh 2207.07548`
 
 ---
+
+## Tier 0 — currently gating live leg bans (added 2026-08-05, see STATUS above)
+
+| arXiv | what it is | what it gates |
+|---|---|---|
+| **2505.03091** | Cadiot, *Stability analysis for localized solutions in PDEs and nonlocal equations on ℝ^m* | Independently states the off-diagonal/zero-diagonal dominance-hypothesis dichotomy (§2, §3) that leg 51's methodological claim rests on; leg 57 flagged it as a pre-emption, leg 62 (`LEG-B`, `leg/cp-v1` in `DIRECTION.md`) is the standing gate to settle its scope against the zero-diagonal case. |
+| **1503.06315** | Breden–Desvillettes–Lessard, *Rigorous numerics for nonlinear operators with tridiagonal dominant linear part* (DCDS-A 35(10) 4765–4789) | Publishes the non-block-diagonal approximate inverse but requires a diagonal bounded away from zero, so it **narrows but does not cover** the zero-diagonal case leg 57's novelty claim needs — closed by `LITERATURE_CHECK.md`'s ninth pass reading the full text. |
+| **2604.01868** | (CHL) novel self-similar blow-ups, 1D Hou–Luo and 2D Boussinesq — already listed in Tier 3 below; cross-referenced here because it is a live resurfacing-check gate | `reports/REPORT_2026-08-05.md` records a standing resurfacing check ("confirmed absent — search-index gap, not a fetch problem, second independent confirmation of leg 52") that keeps this paper in active rotation rather than closed. |
 
 ## Tier 1 — read these first; each one settles standing claims
 

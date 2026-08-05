@@ -108,7 +108,7 @@ pair `Ω̄₀ ↔ 2/(1+4X²)` is a ready-made **unit test for the line Hilbert t
 
 ## 4. Reconnaissance: three false starts, each a finding
 
-Cheap probes (`../phase2_spike0_probe.py`, and a scratch whole-line build) established,
+Cheap probes (`../../phase2_spike0_probe.py`, and a scratch whole-line build) established,
 before committing to the real solver:
 
 | # | attempt | outcome | lesson |

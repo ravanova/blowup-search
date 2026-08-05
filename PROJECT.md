@@ -27,7 +27,15 @@ Euler equations (Navier–Stokes' inviscid cousin, and a common stepping stone),
 and Buckmaster/Gómez-Serrano have converted similar numerical candidates into
 rigorous computer-assisted proofs for related equations.
 
-## Approach (planned, not yet built)
+## Approach (as originally planned — historical)
+
+> **Superseded status note (2026-08-05):** this section describes the plan
+> **as it stood before the solver and GA were built.** Both now exist and
+> have run through multiple staged milestones — see the "Documents in this
+> project" section below (`STAGE_1_5_RESULTS.md` through `STAGE_3_6_RESULTS.md`
+> and onward) for what was actually built and where the project stands now.
+> Left in place as the original framing/rationale, not as a current-status
+> claim.
 
 1. Represent candidate initial velocity fields as a genome (e.g. coefficients
    of a truncated spectral/Fourier expansion, or a parameterized vortex
@@ -38,10 +46,10 @@ rigorous computer-assisted proofs for related equations.
 4. Select, crossbreed, and mutate genomes across generations, evolving toward
    the fastest / most convergent blow-up behavior.
 
-The PDE solver and the GA itself are **future milestones** — not yet built.
-This first pass establishes the aim and, more importantly, a rigorous
-definition of *how we'll know if we've won*, so we don't fool ourselves later
-with a numerical artifact.
+This first pass established the aim and, more importantly, a rigorous
+definition of *how we'll know if we've won*, so the project wouldn't fool
+itself later with a numerical artifact. (At the time of writing, the PDE
+solver and the GA itself were future milestones — not yet built.)
 
 ## Documents in this project
 

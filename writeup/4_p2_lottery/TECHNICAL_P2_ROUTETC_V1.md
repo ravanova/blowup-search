@@ -15,7 +15,7 @@ clauses.*
 
 **NO.**
 
-> **CORRECTED AFTER VERIFIER'S REVIEW (PR #5, `writeup/VERIFY_LEG52_HEADLINE.md` Part B).**
+> **CORRECTED AFTER VERIFIER'S REVIEW (PR #5, `writeup/4_p2_lottery/VERIFY_LEG52_HEADLINE.md` Part B).**
 > The gate answer and every measured number below stand and were independently confirmed.
 > Three things in the first version of this document did not: the **scope** of the failure
 > (§0 and §2), the **stated mechanism** (§2), and the status of TC-5b's headline control

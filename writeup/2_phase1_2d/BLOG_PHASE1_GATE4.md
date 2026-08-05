@@ -3,7 +3,7 @@
 *A technical blog post on a search that caught itself almost cheating. Sequel to
 [BLOG_PHASE1.md](BLOG_PHASE1.md); all numbers below are built from committed
 evidence in [`data/phase1_gate4.json`](../data/phase1_gate4.json), with the full
-record in [`../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md).*
+record in [`../../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md).*
 
 The previous post ended on a promise. We had a fitness function for a 2D
 Boussinesq blow-up search — `ν_crit`, the critical viscosity that just barely
@@ -190,10 +190,10 @@ models, not in 3D Navier–Stokes. What this episode shows is the machinery of n
 lying to yourself — running the cheap diagnostic that turns a satisfying PASS into
 an honest FAIL, and writing it down either way.
 
-*Reproducibility: the gate is [`../phase1_gate4.py`](../../phase1_gate4.py) with the
-frozen predicate in [`../analyze_phase1_gate4.py`](../../analyze_phase1_gate4.py);
-the two probes are [`../phase1_gate4_probe.py`](../../phase1_gate4_probe.py) and
-[`../phase1_currency_probe.py`](../../phase1_currency_probe.py). Every number here is
+*Reproducibility: the gate is [`../../phase1_gate4.py`](../../phase1_gate4.py) with the
+frozen predicate in [`../../analyze_phase1_gate4.py`](../../analyze_phase1_gate4.py);
+the two probes are [`../../phase1_gate4_probe.py`](../../phase1_gate4_probe.py) and
+[`../../phase1_currency_probe.py`](../../phase1_currency_probe.py). Every number here is
 in the committed [`data/phase1_gate4.json`](../data/phase1_gate4.json) (rebuilt by
 [`curate_evidence.py`](../curate_evidence.py)), with narrative in
-[`../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md).*
+[`../../PHASE1_GATE4_RESULTS.md`](../../PHASE1_GATE4_RESULTS.md).*

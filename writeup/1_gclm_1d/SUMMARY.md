@@ -229,8 +229,8 @@ stability-critical coefficients were **derived** (an analytic cancellation) rath
 transcribed from the paper's mangled minimax. **Headline finding:** one-scale rescaling is
 *stable and attracting* for CLM — the reconnaissance's apparent one-scale instability was an
 artifact of the *wrong (periodic) Hilbert transform + integral modulation*, not fundamental.
-Code [`../solver/line_hilbert.py`](../../solver/line_hilbert.py),
-[`../solver/gclm_rescaled.py`](../../solver/gclm_rescaled.py); tests 11/11; figure
+Code [`../../solver/line_hilbert.py`](../../solver/line_hilbert.py),
+[`../../solver/gclm_rescaled.py`](../../solver/gclm_rescaled.py); tests 11/11; figure
 [`fig8`](../figures/fig8_spike0_rescaling.png). Full record:
 [TECHNICAL_SPIKE0_RESCALING.md](../3_spikes/TECHNICAL_SPIKE0_RESCALING.md),
 [BLOG_SPIKE0_RESCALING.md](../3_spikes/BLOG_SPIKE0_RESCALING.md); decision + reconnaissance in
