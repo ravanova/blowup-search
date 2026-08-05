@@ -48,8 +48,20 @@ territory, no issues — does not change the ranking picture. Per this file's ow
 ("promote from this list in order if a slot frees up, without re-ranking, unless a gate answer
 changes the picture"), the orchestrator promoted **leg 64 (Route-A12, reserve rank 11)** into
 the now-open LEG-I slot. Confirmed correct; no DM disagreement. LEG-I is now leg 64, not leg
-68, in the table below. Reserve is now **67 (FD), 70 (RC), 71 (CAP)** — three items, in that
-order — since 64 has been promoted out of it.
+68, in the table below. Reserve was **67 (FD), 70 (RC), 71 (CAP)** at that point.
+
+**Refill, mid-cycle: leg 65 (Route-L1G) landed.** Gate answered **NO** — both the weighted-ℓ¹
+no-go and the discrete-ball trap confirmed unpublished after full-text depth on 4 papers and 39
+forward citations. Route-D's last claim with "a real chance of being new" (per PHASE2's own
+words) is now confirmed genuinely novel, not merely unflagged. The coordinator corrected
+`capabilities.py`'s `holder_norms.py` annotation directly, from "UNSEARCHED at primary source"
+to "searched and not found" (commit `ab07316`) — a small factual fix matching leg 65's own
+pre-committed no-branch instruction ("record this precisely... correct the ban-list annotation
+accordingly" applies in spirit to the NO outcome too, since the annotation's factual content
+changed from "unsearched" to "searched"); no DM disagreement. A verifier is doing the
+post-landing review. Per the reserve-list instruction, the orchestrator promoted **leg 67
+(Route-FD, next in reserve order)** into the now-open LEG-H slot. Confirmed correct; no
+re-ranking triggered. Reserve is now **70 (RC), 71 (CAP)**.
 
 ---
 
@@ -128,32 +140,35 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-E | 61 | **KA** — a known-answer window for the interval pipeline | no | standard | `leg/ka-v1` | Does `interval_certificate.py` reproduce CLN's published Kawahara radius? |
 | LEG-F | 60 | **PQ** — the two negative findings that have no quartet | no | light | `leg/pq-v1` | Do Route-PORT v1/v2's evidence scripts re-derive their quoted numbers? |
 | LEG-G | 69 | **IA** — adversarial stress audit of the shared interval core | no | standard | `leg/ia-v1` | Does `solver/interval.py`'s compensated matvec bound still dominate under harder adversarial cases? |
-| LEG-H | 65 | **L1G** — literature search for the weighted-ℓ¹ no-go / discrete-ball trap | no | standard | `leg/l1g-v1` | Does any primary source already publish the weighted-ℓ¹ no-go or the discrete-ball trap? |
+| LEG-H | 67 | **FD** — literature search for 2D Boussinesq's fractional critical exponent | no | light | `leg/fd-v1` | Does a primary source publish an independent critical fractional-dissipation exponent for 2D Boussinesq? |
 | LEG-I | 64 | **A12** — literature search for alpha_1 at a=1/2 | no | light | `leg/a12-v1` | Does any primary source publish alpha_1 at a=1/2 (or its sigma=3 criticality) for this model? |
 | LEG-J | 66 | **QF** — dedicated tests for the three modules with none | no | light | `leg/qf-v1` | Do direct tests of `gclm.py` / `boussinesq.py` / `spectral_utils.py` find any discrepancy? |
 
 **LEG-I promoted 2026-08-05 mid-cycle:** leg 68 (IX) landed YES and vacated the slot; leg 64
-(A12) was promoted in per the reserve order, without re-ranking. See Status above for the
-landing detail.
+(A12) was promoted in per the reserve order, without re-ranking. **LEG-H promoted 2026-08-05
+mid-cycle:** leg 65 (L1G) landed NO and vacated the slot; leg 67 (FD) was promoted in per the
+reserve order, without re-ranking. See Status above for both landing details.
 
 Figure numbers pre-allocated: leg 58 → `fig55`, 62 → `fig56`, 63 → `fig57`, 59 → `fig58`,
-60 → `fig59`/`fig60`. Legs 69, 65, 64, 66 (and the now-landed 68) are audit/literature/hygiene
-legs and register **no figure**, by the same convention already established for Route-D scope
-(advection) and Route-D v15 (literature scope) — "no measurement, no figure."
+60 → `fig59`/`fig60`. Legs 69, 67, 64, 66 (and the now-landed 68, 65) are audit/literature/
+hygiene legs and register **no figure**, by the same convention already established for Route-D
+scope (advection) and Route-D v15 (literature scope) — "no measurement, no figure."
 `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only** across all ten.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the ten:
 `spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
 `target_selection.py`(63), `weight_search.py`(59), `interval_certificate.py`(61), none(60),
-none-owned/read-only(69 reads `interval.py`, edits nothing), none-owned/read-only(65 reads
-`holder_norms.py`, edits nothing), none-owned/read-only(64, reads `critical_dissipation.py`,
-edits nothing), new test files only(66, touches no existing solver module). All ten distinct —
-**no collision.** `writeup/data` JSON files are likewise ten distinct names
-(`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`, `p2_route_m2_v1_targets.json`,
-`p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`, two Route-PORT evidence JSONs
-already on disk (leg 60 reads, does not create), `p2_route_ia_v1_interval_stress.json`,
-`p2_route_l1g_v1_lit.json`, `p2_route_a12_v1_alpha_lit.json`, none(66)) — **no collision.**
-(Leg 68's territory, `writeup/INDEX.md` only, has landed and is no longer live.)
+none-owned/read-only(69 reads `interval.py`, edits nothing), none-owned/read-only(67 reads
+`fractional_boussinesq.py`, edits nothing), none-owned/read-only(64, reads
+`critical_dissipation.py`, edits nothing), new test files only(66, touches no existing solver
+module). All ten distinct — **no collision.** `writeup/data` JSON files are likewise ten
+distinct names (`p2_route_ng_v1_nogo.json`, `p2_route_cp_v1_cadiot.json`,
+`p2_route_m2_v1_targets.json`, `p2_weight_repairs_v2.json`, `p2_route_ka_v1_kawahara.json`, two
+Route-PORT evidence JSONs already on disk (leg 60 reads, does not create),
+`p2_route_ia_v1_interval_stress.json`, `p2_route_fd_v1_lit.json`,
+`p2_route_a12_v1_alpha_lit.json`, none(66)) — **no collision.** (Leg 68's territory,
+`writeup/INDEX.md` only, and leg 65's, its own literature-lit JSON, have landed and are no
+longer live.)
 
 ## Queue
 
