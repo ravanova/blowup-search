@@ -151,7 +151,20 @@ CAPABILITIES = [
                    "|X|^-1 far field, so the tail term diverges in EVERY weight class tried "
                    "(flat M^1.28, algebraic best M^0.64, geometric x nu per mode) -- the "
                    "positive control with Lambda^1 dissipation saturates, so that is a "
-                   "measurement and not a broken instrument"),
+                   "measurement and not a broken instrument. LEG 52 bordered that tail with "
+                   "the far field and BOUNDED it (7.46 -> 9.44 at s=0, 8.09 -> 11.37 at "
+                   "s=0.3); LEG 53 (experiments/p2_route_tc_v1_assemble.py) ASSEMBLED the "
+                   "four terms and the certificate still does not close -- with the "
+                   "BLOCK-DIAGONAL approximate inverse the method requires, the COUPLING "
+                   "sub-blocks of I - A L are 1.39 and 43.15 at the best split in the whole "
+                   "sweep (K = 4..64, s = 0 and 0.3, both gauges), 20.47 over every "
+                   "normalisation ablated, and they grow x2 and x4 per doubling of K because "
+                   "the unbounded part is OFF-DIAGONAL and the bordered tail inverse is a "
+                   "constant rather than a decaying multiplier. SCOPE (VERIFIER, leg 53 "
+                   "review): the term that exceeds 1 CONTAINS Gamma^-1, so this is a "
+                   "statement about the block-diagonal A and NOT that no finite block can "
+                   "close it -- the finite-block-independent sub-block bottoms out at 0.9961. "
+                   "Do not read the bounded tail as a certificate"),
      "test": "test_spectral_certificate.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",
@@ -212,6 +225,40 @@ CAPABILITIES = [
     {"module": "solver/advection_scope.py", "object": "where the advection term lives in a",
      "holds": "scope of the Route-D bound programme", "validated": ("agrees with the analytic small-a and large-a limits of the advection\n                   coefficient"),
      "test": "test_advection_scope.py"},
+    {"module": "solver/target_norm.py",
+     "object": ("whether the TARGET is in the certificate's space at all -- the "
+                "compactified-basis coefficient decay of HL_S2_nonsymmetric "
+                "(Route-NB, leg 55)"),
+     "holds": ("the tangent half-angle projection X = tan(theta/2) onto the FULL circle "
+               "(the target is NON-symmetric, so cosines too), high-order Lagrange "
+               "interpolation on the uniform rho grid with an explicit far-field closure, "
+               "the coefficient magnitudes in both the complex and real conventions, a "
+               "power-law exponent fitter robust to symmetry-annihilated modes, weighted "
+               "l^1 partial sums with an analytic tail, and the controls: the CLM anchor, "
+               "1/(1+|X|), the sawtooth, and the calibration family (1+X^2)^(-alpha/2)"),
+     "validated": ("the map agrees with spectral_certificate.moebius_power to 1.3e-15, so "
+                   "the projection lands in the certificate's OWN basis; the positive "
+                   "control (a=0 CLM anchor, exactly one mode) returns ||h_1|-1| = 3.4e-15 "
+                   "with every other mode under 1.7e-12, inside its pre-registered window; "
+                   "the sawtooth matches its closed form 2/(pi k) to 1.6e-03 and sits at "
+                   "p = 1.001 (the flat class's divergence threshold); 1/(1+|X|) sits at "
+                   "p = 1.989 (the s = 1 threshold); the calibration family recovers "
+                   "1 + alpha to 7.5e-03 over alpha = 0.1..1.5, and 3.9e-03 at the "
+                   "target's own alpha -- ALL OF IT AT THE HEADLINE'S OWN TRANSFORM SIZE "
+                   "M = 16384, because the systematic is a property of the (M, band) pair "
+                   "and calibrating on a finer grid than the target can reach flatters "
+                   "the instrument (VER-B review of leg 55). RESULT: the target decays "
+                   "as k^-1.3937 (X_max = 4.1e+04) / k^-1.3963 (3.0e+05), resolution drift "
+                   "3.8e-04, so ||.||_(l^1_w) is FINITE at s = 0 (margin +0.394, 101x the "
+                   "systematic) and s = 0.3 (+0.094, 24x) and DIVERGENT at s = 1 (-0.606); "
+                   "s = 0.39 is NOT RESOLVED (margin 0.96x the systematic). THE CEILING IS PART "
+                   "OF THE ENTRY: this measures the OBJECT, not any certificate -- a "
+                   "finite norm says the target is IN the space and says NOTHING about "
+                   "whether a radii polynomial closes. It is also DOMAIN-limited, not "
+                   "resolution-limited: at the shipped X_max = 745 the far-field closure "
+                   "moves the exponent by 0.190 and the measurement is not trustworthy "
+                   "there; the headline is taken where no sample point leaves the grid"),
+     "test": "test_target_norm.py"},
 
     # -- literature, targets, search, plumbing --------------------------------------
     {"module": "solver/literature_gates.py", "object": "published results as executable gates",
@@ -220,6 +267,32 @@ CAPABILITIES = [
      "validated": ("Schochet residual 5.2e-16 corrected vs 2.4e-2 as printed (13.7 "
                    "decades); Route-H's (E) == ALS (57)-(58) pointwise"),
      "test": "test_literature_gates.py"},
+    {"module": "solver/certificate_shapes.py",
+     "object": "the SHAPE dichotomy (Route-XS, leg 57): published CAP certificates classified",
+     "holds": ("SHAPE_LEDGER: four published computer-assisted certificates x three "
+               "questions -- is the unbounded part a MULTIPLIER or a SHIFT, is the "
+               "approximate inverse block diagonal, does the tail inverse decay -- each "
+               "row traced to a LOCATED FULL-TEXT statement (never an abstract); "
+               "gate_answer() as an executable predicate; and the dichotomy as a MEASURED "
+               "continuous dial via mu on solver/spectral_certificate.py's tail block"),
+     "validated": ("gate answers NO over 4 published rows and flips to YES on a fictitious "
+                   "control row, so the negative is a fact about the literature and not "
+                   "about the code (lesson 90); mu = 0 alone fails -- M-exponent +1.021 "
+                   "unbordered (the inverse does not exist, which is why leg 52 bordered) "
+                   "and K-exponent +0.437 once bordered, vs -0.849..-0.946 for every "
+                   "mu > 0. CORRECTS legs 52-53: the bordered tail inverse is NOT a "
+                   "constant, it GROWS 2.191 -> 11.528 over K = 4..128 (5.26x), so the "
+                   "2.19 those legs quote is the smallest rung of a rising ladder, not a "
+                   "bound. SCOPE: the dichotomy is FOLKLORE IN PRINT (Cadiot "
+                   "arXiv:2505.03091 sections 2 and 3 state both halves) -- this module "
+                   "is BOOKKEEPING that makes it executable, NOT a finding of ours. BDL "
+                   "arXiv:1503.06315 publish the NON-BLOCK-DIAGONAL approximate inverse "
+                   "that MM's remaining free choice proposes, and their Prop 2.3 gets the "
+                   "full multiplier-case decay gain s_L, but only under assumption (4), a "
+                   "diagonal bounded below -- so the precedent does NOT extend to a zero "
+                   "diagonal. Chen-Hou certify a genuine SHIFT and form no tail estimate "
+                   "at all. Float64, no intervals; four papers is a corpus, not a theorem"),
+     "test": "test_certificate_shapes.py"},
     {"module": "solver/bordered_hl.py",
      "object": "HL_S2_nonsymmetric -- the BORDERED steady system (Route-PORT, legs 46/47)",
      "holds": ("the 2n+3 bordered residual for CHL (4.1)/(4.2) with the three gauge "

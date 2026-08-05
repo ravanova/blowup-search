@@ -306,11 +306,48 @@ class BorderedCLM:
         return np.concatenate([(a_om + self.H @ om) * om - a_l * (self.XD @ om),
                                np.zeros(2)])
 
-    def newton(self, z0=None, tol=1e-14, max_iter=20):
+    def _F_longdouble(self, z):
+        """F evaluated in np.longdouble -- used ONLY to measure how much of a float64
+        residual is arithmetic noise.  Not part of any bound."""
+        zl = np.asarray(z, dtype=np.longdouble)
+        Om, c_l, c_om = zl[:self.n], zl[self.n], zl[self.n + 1]
+        R = ((c_om + self.H.astype(np.longdouble) @ Om) * Om
+             - c_l * (self.XD.astype(np.longdouble) @ Om))
+        return np.concatenate([R, [self.Drow0.astype(np.longdouble) @ Om
+                                   - np.longdouble(self.slope0),
+                                   Om[self.jstar] - np.longdouble(self.v_pin)]])
+
+    def residual_floor(self, z, safety=8.0):
+        """The float64 EVALUATION noise of F at z -- the level below which |F| stops
+        being a statement about the equation and becomes a statement about the
+        arithmetic (banked lesson 86).
+
+        Measured, not guessed: F is re-evaluated in longdouble at the same point and
+        the difference taken.  `H @ Omega` is a dense n-term sum with cancellation, so
+        this GROWS with n -- 2.4e-15 at n = 201, 5.9e-15 at 401, 1.0e-14 at 801,
+        2.2e-14 at 1201.  A fixed 1e-14 tolerance is therefore below the floor from
+        n ~ 800 upward, which is why `newton` used to spin its full iteration budget
+        at n = 801 while the residual random-walked around 1.1e-14.
+        """
+        return float(safety * np.abs(np.asarray(self.F(z))
+                                     - self._F_longdouble(z).astype(float)).max())
+
+    def newton(self, z0=None, tol=None, max_iter=20, stall_factor=0.5):
         """Damped Newton. Returns (z, info) with the residual ladder in full -- the
-        SHAPE of a ladder is the evidence (standing discipline 72)."""
+        SHAPE of a ladder is the evidence (standing discipline 72).
+
+        `tol=None` (the default) means "the measured float64 residual floor for this
+        grid" rather than a hard-coded constant; pass a number to demand a specific
+        one.  Iteration also stops when the ladder STALLS -- two consecutive steps
+        that fail to improve the residual by `stall_factor` -- because a Newton that
+        has reached its arithmetic floor is converged, and continuing only spends
+        O(N^3) solves to random-walk in the last two digits.
+        """
         z = self.exact_state() if z0 is None else np.array(z0, dtype=float)
+        auto = tol is None
+        tol = self.residual_floor(z) if auto else float(tol)
         ladder = [float(np.abs(self.F(z)).max())]
+        stalled = False
         for _ in range(max_iter):
             Fz = self.F(z)
             dz = np.linalg.solve(self.jacobian(z), -Fz)
@@ -319,9 +356,19 @@ class BorderedCLM:
                 lam *= 0.5
             z = z + lam * dz
             ladder.append(float(np.abs(self.F(z)).max()))
+            if auto:
+                tol = max(tol, self.residual_floor(z))
             if ladder[-1] < tol:
                 break
+            if len(ladder) >= 4 and all(ladder[-i] > stall_factor * ladder[-i - 1]
+                                        for i in (1, 2)):
+                stalled = True
+                break
+        floor = self.residual_floor(z)
         return z, {"residual_ladder": np.array(ladder),
+                   "tolerance": float(tol),
+                   "residual_floor": floor,
+                   "stalled_at_floor": bool(stalled and ladder[-1] < floor),
                    "converged": bool(ladder[-1] < tol)}
 
     # -- the weighted-sup certificate --------------------------------------
@@ -380,6 +427,16 @@ LOG_NU_CLIP = 500.0              # exp() guard; see weight_vector
 WALL_POWER = EXACT_TAIL_POWER    # p+q > 1 => the TRUE profile has infinite norm
 WALL_DELTA = 0.05                # the box stops short of the wall by this much
 
+# --- P2 REPAIR (leg 50, prep/weight-repairs) ---------------------------------------
+# Leg 49's P2 measured 0.775 finite against a 0.90 threshold: 9/40 roster weights
+# returned no fitness because Z_1 >= 1 there, and every one of them had far-field power
+# p+q <= -2.41 -- i.e. they sat below a SECOND wall (`lower_wall()`, already in this
+# module) that the box never carried. The upper wall K3 is analytic and was already a
+# hard constraint on `in_box`; this repair carries the MEASURED lower wall the same
+# way, so the roster and the grid search stop being handed points the equation's own
+# float conditioning has already ruled out. Named in TECHNICAL_P2_ROUTEC_PILOT_V0 S4b.
+WALL_LOWER_DELTA = 0.05          # the box stops short of the measured lower wall too
+
 # --- FROZEN six-property thresholds (pre-committed, before any run) ---
 P1_SPREAD_MIN = 1.0        # decades of fitness spread over the roster: not dead flat
 P2_FINITE_FRAC = 0.90      # fraction of roster weights returning a finite fitness
@@ -395,13 +452,24 @@ def far_field_power(theta):
     return float(theta[0]) + float(theta[2])
 
 
-def in_box(theta):
-    """The analytic wall K3, as a hard constraint. Derived from the profile's tail
-    BEFORE any run -- it is the equation's wall, not a fitted one."""
+def in_box(theta, lower_wall_power=None):
+    """The analytic wall K3 (upper), as a hard constraint -- derived from the profile's
+    tail BEFORE any run, so it is the equation's wall, not a fitted one -- AND, the P2
+    repair, the MEASURED lower wall (`lower_wall()`), carried the same way.
+
+    `lower_wall_power` is None by default, which reproduces the pre-repair behaviour
+    exactly (only the upper wall applies) -- callers that have measured a lower wall
+    for their resolution (the six-property gate; anything built off a `FitnessEngine`
+    with `lower_wall_power` set) pass it through."""
     t = np.asarray(theta, dtype=float)
     if np.any(t < BOX_LOWER) or np.any(t > BOX_UPPER):
         return False
-    return far_field_power(t) <= WALL_POWER - WALL_DELTA
+    ffp = far_field_power(t)
+    if ffp > WALL_POWER - WALL_DELTA:
+        return False
+    if lower_wall_power is not None and ffp < lower_wall_power + WALL_LOWER_DELTA:
+        return False
+    return True
 
 
 class FitnessEngine:
@@ -413,9 +481,13 @@ class FitnessEngine:
     (which `plan_of_record.py` bans until the gate reports).
     """
 
-    def __init__(self, problem, z):
+    def __init__(self, problem, z, lower_wall_power=None):
         self.pr = problem
         self.z = np.array(z, dtype=float)
+        # P2 repair: the measured lower wall for THIS problem/resolution, carried in
+        # the box the same way the analytic upper wall already is. None reproduces the
+        # pre-repair behaviour (upper wall only).
+        self.lower_wall_power = lower_wall_power
         self.J = problem.jacobian(self.z)
         self.A = np.linalg.inv(self.J)
         self.absA = np.abs(self.A)
@@ -451,7 +523,7 @@ class FitnessEngine:
         out = np.where((bud > 0) & (Y0 > 0), np.log10(np.abs(Y0) / np.abs(bud)), np.inf)
         out = np.where(np.isfinite(out), out, np.inf)
         if box:
-            bad = np.array([not in_box(th) for th in thetas])
+            bad = np.array([not in_box(th, self.lower_wall_power) for th in thetas])
             out = np.where(bad, np.inf, out)
         return out
 
@@ -476,12 +548,17 @@ def hand_weights(problem=None):
     }
 
 
-def roster(problem, n_random=32, seed=0):
+def roster(problem, n_random=32, seed=0, lower_wall_power=None):
     """The fixed weight roster the six-property gate is measured on.
 
     Structured like Gate 4's shape roster: controls (the two hand weights), trivial
     /degenerate candidates that TEST property 6 (weights that turn a component of the
-    norm off, or push the far-field power at the wall), and a random spanning set."""
+    norm off, or push the far-field power at the wall), and a random spanning set.
+
+    P2 REPAIR: `lower_wall_power`, when given, is carried into the random draw's
+    `in_box` check exactly like the analytic upper wall already is -- so the roster
+    stops being handed weights the measured wall has already ruled out. None (the
+    default) reproduces the pre-repair roster exactly."""
     rng = np.random.default_rng(seed)
     hw = hand_weights()
     items = [("ctrl_naive", hw["naive"]), ("ctrl_tuned_leg46", hw["tuned_leg46"])]
@@ -501,7 +578,7 @@ def roster(problem, n_random=32, seed=0):
     for i in range(n_random):
         while True:
             th = BOX_LOWER + rng.random(5) * (BOX_UPPER - BOX_LOWER)
-            if in_box(th):
+            if in_box(th, lower_wall_power):
                 break
         items.append((f"rand_{i:02d}", th))
     return items
@@ -591,29 +668,87 @@ def _r2(x, y):
     return float(1.0 - (r @ r) / ((y - y.mean()) @ (y - y.mean())))
 
 
-def defect_ladder(problem, z_star, engine_thetas, direction=None,
-                  eps=(1e-2, 1e-3, 1e-4, 1e-5, 1e-6)):
-    """Property 3 with a KNOWN ANSWER, not merely a known direction.
+# --- P3 REPAIR (leg 50, prep/weight-repairs) ---------------------------------------
+# Leg 49's raw P3 pushed every weight through the SAME global eps grid and asked for
+# slope-1 everywhere on it. That conflates two different things: F(z*+eps d) is only
+# LINEAR in eps once eps is small enough relative to ||A||_w -- and ||A||_w spans three
+# orders of magnitude across the roster (naive 1.69e8 down to the searched optimum
+# 3.37e5). A grid that is safely linear for the searched weight is already nonlinear
+# for the naive one, so probing all weights on one grid measures the PROBE's own
+# breakdown at some weights, not the fitness's defect-tracking. Diagnosed in
+# TECHNICAL_P2_ROUTEC_PILOT_V0 S4a: the corrected window (eps <~ 1/||A||_w) recovers
+# the known answer (slope 1) at the median, 0.2% typically.
+#
+# THE REPAIR: give every weight its OWN eps window, set from its OWN ||A||_w at the
+# converged state, fixed before any slope is fit -- and report what that window BUYS
+# (how many decades, how many weights it resolves) as a RESOLUTION, rather than
+# silently assuming the whole grid was in the linear regime for every weight.
+DEFECT_WINDOW_C = 0.1        # eps <= C / ||A||_w defines "linear enough"; a factor of
+                              # 10 inside the empirically-found onset (eps ~ 1/||A||_w),
+                              # fixed once, before this repair's numbers were measured
+DEFECT_EPS_DEFAULT = (1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9, 1e-10, 1e-11)
+DEFECT_MIN_WINDOW = 3         # fewer usable eps than this -> UNRESOLVED, not "passes"
+
+
+def defect_ladder(problem, z_star, engine_thetas, direction=None, eps=None):
+    """Property 3 with a KNOWN ANSWER, not merely a known direction -- WITH the P3
+    repair: each weight gets its own linear window instead of one grid for all.
 
     Push the converged state off the solution by eps in a fixed direction. For small
     eps, F(z*+eps d) = eps DF d + O(eps^2), so Y_0 is LINEAR in eps and the fitness
-    must fall with slope exactly 1 per decade -- at every weight, since the weight
-    multiplies a vector whose direction is frozen. Returns (eps, fitness table,
-    slopes)."""
+    must fall with slope exactly 1 per decade -- but only INSIDE the window where the
+    linearisation actually holds for that weight's own ||A||_w. Returns
+    (eps, fitness table, slopes, mono_ok, resolution):
+
+      eps         the full probed grid (unchanged shape, for backward compatibility)
+      table       fitness at every (eps, weight) pair, box=False
+      slopes      per-weight fitted slope, using ONLY that weight's window; NaN where
+                  the window held fewer than DEFECT_MIN_WINDOW usable points
+      mono_ok     per-weight bool, monotone decrease WITHIN the window
+      resolution  per-weight dict {eps_max, n_window, resolved} -- the accuracy
+                  statement this repair asks for instead of assumed exactness
+    """
     z_star = np.asarray(z_star, float)
     if direction is None:
         rng = np.random.default_rng(7)
         direction = rng.standard_normal(problem.N)
         direction /= np.abs(direction).max()
+    if eps is None:
+        eps = DEFECT_EPS_DEFAULT
+    eps = np.asarray(eps, float)
+    thetas = np.atleast_2d(np.asarray(engine_thetas, dtype=float))
+
     rows = []
     for e in eps:
-        eng = FitnessEngine(problem, z_star + e * direction)
-        rows.append(eng.fitness_many(engine_thetas, box=False))
-    tab = np.array(rows)                       # (len(eps), n_weights)
-    le = np.log10(np.asarray(eps, float))
-    slopes = np.array([np.polyfit(le, tab[:, j], 1)[0] if np.all(np.isfinite(tab[:, j]))
-                       else np.nan for j in range(tab.shape[1])])
-    return np.asarray(eps, float), tab, slopes
+        engp = FitnessEngine(problem, z_star + e * direction)
+        rows.append(engp.fitness_many(thetas, box=False))
+    tab = np.array(rows)                        # (len(eps), n_weights)
+    le = np.log10(eps)
+
+    # each weight's own window, from ITS OWN ||A||_w at the converged (unperturbed)
+    # state -- the probe direction is fixed and small, so the base-state conditioning
+    # is what decides where the linear regime starts
+    eng0 = FitnessEngine(problem, z_star)
+    a_norms = np.array([
+        problem.certificate_constants(z_star, th, A=eng0.A, J=eng0.J)["A_norm"]
+        for th in thetas])
+    eps_max = DEFECT_WINDOW_C / np.maximum(a_norms, 1.0)
+
+    n_theta = thetas.shape[0]
+    slopes = np.full(n_theta, np.nan)
+    mono_ok = np.zeros(n_theta, dtype=bool)
+    resolution = []
+    for j in range(n_theta):
+        mask = eps <= eps_max[j]
+        col = tab[mask, j]
+        n_pts = int(mask.sum())
+        resolved = bool(n_pts >= DEFECT_MIN_WINDOW and np.all(np.isfinite(col)))
+        resolution.append({"eps_max": float(eps_max[j]), "n_window": n_pts,
+                           "resolved": resolved})
+        if resolved:
+            slopes[j] = float(np.polyfit(le[mask], col, 1)[0])
+            mono_ok[j] = bool(np.all(np.diff(col) < 0))
+    return eps, tab, slopes, mono_ok, resolution
 
 
 def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
@@ -627,7 +762,13 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
     zf, _ = problem_fine.newton()
     eng_c, eng_f = FitnessEngine(problem_coarse, zc), FitnessEngine(problem_fine, zf)
 
-    rost_c = roster(problem_coarse, n_random=n_random, seed=seed)
+    # P2 REPAIR: measure this resolution's lower wall and carry it in the box the
+    # same way the analytic upper wall already is -- both the roster draw and the
+    # grid search (via the engines' `lower_wall_power`) now respect it.
+    lw_c, lw_f = lower_wall(eng_c), lower_wall(eng_f)
+    eng_c.lower_wall_power, eng_f.lower_wall_power = lw_c, lw_f
+
+    rost_c = roster(problem_coarse, n_random=n_random, seed=seed, lower_wall_power=lw_c)
     labels = [lab for lab, _ in rost_c]
     th = np.array([t for _, t in rost_c])
     vc = eng_c.fitness_many(th, box=False)
@@ -636,12 +777,16 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
     fin = np.isfinite(vc)
     spread = float(np.max(vc[fin]) - np.min(vc[fin])) if fin.any() else 0.0
 
-    # P3 -- the defect ladder, slope 1 per decade is the known answer
-    eps, tab, slopes = defect_ladder(problem_coarse, zc, th)
-    mono_viol = int(np.sum([not np.all(np.diff(tab[:, j]) < 0)
-                            for j in range(tab.shape[1]) if np.all(np.isfinite(tab[:, j]))]))
-    good_slopes = slopes[np.isfinite(slopes)]
+    # P3 REPAIR -- the defect ladder, each weight in its OWN linear window; report
+    # the accuracy as a resolution (how many weights resolved, and how well the
+    # resolved ones track slope 1) instead of assuming one global eps grid is valid
+    # everywhere.
+    eps, tab, slopes, mono_ok, resolution = defect_ladder(problem_coarse, zc, th)
+    resolved = np.array([r["resolved"] for r in resolution])
+    mono_viol = int(np.sum(resolved & ~mono_ok))
+    good_slopes = slopes[resolved & np.isfinite(slopes)]
     slope_err = float(np.max(np.abs(good_slopes - 1.0))) if good_slopes.size else np.inf
+    n_unresolved = int(np.sum(~resolved))
 
     # P4 -- ranking survives refinement
     rho = _spearman(vc, vf)
@@ -659,8 +804,10 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
         "P1_nonzero": {"spread_decades": spread, "threshold": P1_SPREAD_MIN,
                        "pass": bool(spread >= P1_SPREAD_MIN)},
         "P2_finite": {"finite_fraction": float(fin.mean()), "threshold": P2_FINITE_FRAC,
+                      "lower_wall_power_coarse": lw_c, "lower_wall_power_fine": lw_f,
                       "pass": bool(fin.mean() >= P2_FINITE_FRAC)},
         "P3_monotone": {"violations": mono_viol, "max_slope_error": slope_err,
+                        "n_resolved": int(resolved.sum()), "n_unresolved": n_unresolved,
                         "threshold_violations": P3_MONO_VIOLATIONS,
                         "threshold_slope_error": 0.05,
                         "pass": bool(mono_viol <= P3_MONO_VIOLATIONS and slope_err <= 0.05)},
@@ -690,7 +837,9 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
         "labels": labels, "theta": th.tolist(),
         "fitness_coarse": vc.tolist(), "fitness_fine": vf.tolist(),
         "newton_ladder_coarse": info_c["residual_ladder"].tolist(),
-        "defect_ladder": {"eps": eps.tolist(), "slopes": slopes.tolist()},
+        "defect_ladder": {"eps": eps.tolist(), "slopes": slopes.tolist(),
+                          "resolution": resolution},
+        "lower_wall": {"coarse": lw_c, "fine": lw_f},
         "optimum_box": {"theta": g_box["theta"].tolist(), "fitness": g_box["fitness"],
                         "evaluations": g_box["evaluations"]},
         "optimum_free": {"theta": g_free["theta"].tolist(), "fitness": g_free["fitness"]},

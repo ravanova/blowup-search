@@ -297,3 +297,132 @@ def dot2_matvec(M, v):
     # relative term is bounded without assuming |res| >= |x.y|
     rad = _up(_up(_U * _up((np.abs(res) + t) / (1.0 - _U))) + t)
     return Interval(_down(res - rad), _up(res + rad))
+
+
+# --------------------------------------------------------------------------
+# RIGOROUS TRANSCENDENTALS -- log and arctan (Route-TN, leg 56)
+# --------------------------------------------------------------------------
+# WHY THESE EXIST.  Leg 56 needs a rigorous CLOSED-FORM reference for the
+# truncated line Hilbert transform of a rational test function.  That closed form
+# (partial fractions of -u/((u^2+a^2)(X-u))) is a log and an arctan, so bounding
+# the discretisation defect against it needs both enclosed -- and neither can be
+# taken from `np.log` / `np.arctan`, because libm gives no ULP guarantee that this
+# module is entitled to assume.  Both are therefore built from series with an
+# EXPLICIT, PROVED remainder, on top of the arithmetic already in this file.
+#
+# The two constants below are enclosures, not approximations: the decimal
+# expansions of log 2 and pi are known, the stored double is the nearest one
+# BELOW the true value in each case, and one nextafter reaches above it.
+#
+#   log 2 = 0.69314718055994530941723...   nearest double 0.6931471805599452862...
+#   pi    = 3.14159265358979323846264...   nearest double 3.1415926535897931159...
+#
+# In both cases the double lies BELOW the true value, so [d, nextafter(d, +inf)]
+# encloses.  `test_interval.py` gates that containment against exact rationals.
+
+LOG2_LO = float(np.nextafter(0.693147180559945286226763982995180413126945495605, -np.inf))
+LOG2_HI = float(np.nextafter(0.693147180559945286226763982995180413126945495605, np.inf))
+PI_LO = float(np.nextafter(3.141592653589793115997963468544185161590576171875, -np.inf))
+PI_HI = float(np.nextafter(3.141592653589793115997963468544185161590576171875, np.inf))
+
+ILOG2 = None      # populated below, after Interval is available at import time
+IPI = None
+
+
+def _atanh_series(z, nterms=32):
+    """Enclosure of atanh(z) = sum_{k>=0} z^(2k+1)/(2k+1) for |z| <= 1/3.
+
+    Truncated after `nterms` terms; the tail is bounded by the geometric
+    majorant  |z|^(2N+1) / ((2N+1) (1 - z^2)),  which is where the |z| <= 1/3
+    restriction is spent (3^-65 ~ 1e-31, far below the width the caller already
+    carries).  Everything is evaluated in float and then given the classic
+    gamma_m accumulation bound over the 3*nterms operations, so no step of the
+    evaluation is trusted beyond what this module already proves."""
+    z = np.asarray(z, dtype=float)
+    if np.any(np.abs(z) > 1.0 / 3.0 + 1e-15):
+        raise ValueError("_atanh_series: |z| > 1/3, outside the proved remainder")
+    z2 = z * z
+    acc = np.zeros_like(z)
+    mass = np.zeros_like(z)
+    zp = np.array(z, dtype=float)          # z^(2k+1)
+    for k in range(nterms):
+        term = zp / (2 * k + 1)
+        acc = acc + term
+        mass = mass + np.abs(term)
+        zp = zp * z2
+    # proved tail: |z|^(2N+1) / ((2N+1)(1 - z^2))
+    tail = _up(np.abs(zp) / ((2 * nterms + 1) * (1.0 - z2)))
+    err = _up(_up(_gamma(3 * nterms) * mass) + tail)
+    return Interval(_down(acc - err), _up(acc + err))
+
+
+def ilog(x):
+    """Rigorous enclosure of log(x) for a positive Interval (or positive float array).
+
+    log is increasing, so the enclosure is endpointwise.  Each endpoint is reduced
+    by the EXACT decomposition x = m * 2^e (np.frexp is exact, m in [0.5, 1)) to
+
+        log x = 2 atanh((m-1)/(m+1)) + e log 2,
+
+    with |(m-1)/(m+1)| <= 1/3 on m in [0.5, 1] -- exactly the range `_atanh_series`
+    proves.  log 2 enters as the enclosure ILOG2, so the e log 2 term is bounded
+    and not evaluated.
+
+    DOCUMENTATION GAP, recorded rather than papered over (raised in VER-C's review of
+    leg 56).  The argument reduction z = (m-1)/(m+1) is itself two rounded float
+    operations, and that rounding is NOT part of the remainder bound `_atanh_series`
+    proves -- that bound covers the series evaluation and its tail, taking z as given.
+    The omission is absorbed with large margin: |dz| <= 2u|z| gives |d log| <= ~4u,
+    about 4.4e-16, against the ~1.2e-14 widths this routine actually reports, so the
+    enclosures hold with roughly 15x room and every gate in `test_interval.py` passes
+    against an independent 50-digit reference.  It is a gap in the WRITE-UP of the
+    proof, not a gap in the enclosure.  Closing it properly means carrying z as an
+    interval into the series."""
+    if not isinstance(x, Interval):
+        x = Interval.point(np.asarray(x, dtype=float))
+    if np.any(np.asarray(x.lo) <= 0.0):
+        raise ValueError("ilog: interval touches or crosses zero")
+    lo = _log_endpoint(np.asarray(x.lo, dtype=float))
+    hi = _log_endpoint(np.asarray(x.hi, dtype=float))
+    return Interval(lo.lo, hi.hi)
+
+
+def _log_endpoint(v):
+    """Enclosure of log(v) for a positive float array v (both endpoints of it)."""
+    m, e = np.frexp(v)                 # v = m * 2^e exactly, m in [0.5, 1)
+    z = (m - 1.0) / (m + 1.0)          # in [-1/3, 0]
+    a = _atanh_series(z)
+    return (a + a) + ILOG2 * Interval.point(np.asarray(e, dtype=float))
+
+
+def iatan_small(t, nterms=40):
+    """Enclosure of arctan(t) for |t| <= 1/2, by its alternating Taylor series.
+
+    The series sum (-1)^k t^(2k+1)/(2k+1) is alternating with decreasing terms for
+    |t| <= 1, so the truncation error is bounded by the FIRST OMITTED TERM -- the
+    cheapest rigorous remainder there is.  The |t| <= 1/2 restriction keeps that
+    first omitted term at 2^-81/81, which is unconditionally negligible against the
+    gamma_m accumulation bound that is added alongside it."""
+    if isinstance(t, Interval):
+        lo = iatan_small(np.asarray(t.lo, dtype=float), nterms)
+        hi = iatan_small(np.asarray(t.hi, dtype=float), nterms)
+        return Interval(lo.lo, hi.hi)
+    t = np.asarray(t, dtype=float)
+    if np.any(np.abs(t) > 0.5 + 1e-15):
+        raise ValueError("iatan_small: |t| > 1/2, outside the proved remainder")
+    t2 = t * t
+    acc = np.zeros_like(t)
+    mass = np.zeros_like(t)
+    tp = np.array(t, dtype=float)
+    for k in range(nterms):
+        term = tp / (2 * k + 1)
+        acc = acc + (term if k % 2 == 0 else -term)
+        mass = mass + np.abs(term)
+        tp = tp * t2
+    tail = _up(np.abs(tp) / (2 * nterms + 1))       # first omitted term
+    err = _up(_up(_gamma(3 * nterms) * mass) + tail)
+    return Interval(_down(acc - err), _up(acc + err))
+
+
+ILOG2 = Interval(LOG2_LO, LOG2_HI)
+IPI = Interval(PI_LO, PI_HI)

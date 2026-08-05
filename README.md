@@ -148,6 +148,15 @@ Route-M came ten minutes from rebuilding a validated Scenario-2 integrator that
 had been in `solver/` for a week; the index exists so that cannot recur, and
 `test_capabilities.py` fails if it drifts from the tree.
 
+### Starting an orchestrated run
+
+Paste the **full text** of [`ORCHESTRATOR_PROMPT.md`](ORCHESTRATOR_PROMPT.md) — and nothing
+else, no accompanying question — into a fresh Claude Code session on Sonnet 5 in this
+repository. It is written as a direct instruction, so the session starts dispatching
+immediately. Watch progress in the git-ignored `PROGRESS.md`; stop it with `touch STOP`
+(graceful) or `touch STOP-NOW` (hard). Full contract in
+[`ORCHESTRATION.md`](ORCHESTRATION.md).
+
 Tests are **self-running scripts, not pytest** — 50 of them at the repo root:
 
 ```bash
@@ -180,8 +189,10 @@ re-run**:
 | [`capabilities.py`](capabilities.py) | What already exists, and the strongest known-answer gate each module passes. |
 | [`win_condition.py`](win_condition.py) | Tier-1/2 blow-up diagnostics. |
 | [`CLAY_ROADMAP.md`](CLAY_ROADMAP.md) | Strategy: the two walls, routes A–D, go/no-go criteria. |
-| [`ORCHESTRATION.md`](ORCHESTRATION.md) · [`ORCHESTRATOR_PROMPT.md`](ORCHESTRATOR_PROMPT.md) | The multi-agent day contract and the paste-able prompt that drives it. |
-| [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) | Session hand-off: what the last leg settled and what not to re-derive. |
+| [`ORCHESTRATION.md`](ORCHESTRATION.md) | The multi-agent contract: roster, leg territories, merge policy, how to start a run. |
+| [`ORCHESTRATOR_PROMPT.md`](ORCHESTRATOR_PROMPT.md) | **The paste-able prompt** that turns a fresh session into the orchestrator. Pure instruction — no notes about itself. |
+| [`DIRECTION.md`](DIRECTION.md) | The Decision Maker's ranked leg queue and live slot assignments. |
+| [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) | The critical-path leg's directive: what the last leg settled and what not to re-derive. |
 | [`LITERATURE_CHECK.md`](LITERATURE_CHECK.md) | Append-only novelty passes, with the queries run. |
 | [`PHASE2_P2_NOTES.md`](PHASE2_P2_NOTES.md) | The long working notes, including ~90 numbered banked lessons. |
 | [`scripts/`](scripts/) | `merge_gate.sh` (executable merge criterion), `fetch_papers.sh`, `cloud_setup.sh`. |
@@ -255,10 +266,9 @@ Most of this is model-agnostic and outlives whatever happens to the Clay attempt
   Boussinesq Biot–Savart, fractional dissipation, interval arithmetic and
   Newton–Kantorovich certificate machinery.
 - **A multi-agent operating contract** ([`ORCHESTRATION.md`](ORCHESTRATION.md)):
-  a rolling pool of ten leg agents with disjoint per-brief file ownership, a
-  planner that writes every brief, rolling verification briefs that re-measure
-  landed headlines, an executable merge gate every push must pass, and a short
-  list of things that are *never* pushed without a human.
+  six lanes with disjoint file ownership, a verifier that re-measures the
+  previous leg's headline before anyone builds on it, an executable merge gate,
+  and a short list of things that are *never* merged without a human.
 
 ## Working rules (if you contribute)
 

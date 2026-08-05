@@ -3495,3 +3495,239 @@ and a **matching condition** between the spectral tail and the asymptotic expans
 mode, analytic — so a *success* there bounds the difficulty for `HL_S2_nonsymmetric` **from
 below, not above**, exactly as leg 51's failure did. **Nothing is claimed about
 `HL_S2_nonsymmetric`. No link of the L1→L4 chain moved. Clay unchanged at ~0.05%.**
+
+
+---
+
+## §42 — ROUTE-TC v1 DONE (2026-08-05): THE FOUR TERMS ARE IN ONE POLYNOMIAL AND IT **DOES
+## NOT CLOSE**. THE TERM THAT RAN OUT IS `Z₁`'s **BLOCK COUPLING** — A QUANTITY THAT DID NOT
+## EXIST UNTIL THE PIECES WERE ASSEMBLED. NOT THE TAIL, NOT `Y₀`, NOT `Z₂`.
+
+**REVISED after VERIFIER's line review (`writeup/VERIFY_LEG52_HEADLINE.md` Part B/C). The
+gate answer and every measured number were independently confirmed and did not move. Three
+things did: the SCOPE of the failure, the stated MECHANISM, and TC-5b's control — all corrected
+below, with a normalisation ablation (TC-8) added that the first version should have run. The
+resurfacing clearance is WITHDRAWN per Part C.**
+
+*Leg 53. `experiments/p2_route_tc_v1_assemble.py` → `writeup/data/p2_route_tc_v1_assemble.json`
+→ **fig48**; `TECHNICAL/BLOG_P2_ROUTETC_V1.md`; `writeup/4_p2_lottery/p2_route_tc_v1_evidence.py`
+(registered in `writeup/build_figures.py`). 318 s, deterministic. Stage `TC`
+(`plan_of_record.py`), 8 pre-committed clauses. No new solver module: leg 52's
+`solver/spectral_certificate.py` is imported and extended, per the stage's own instruction.*
+
+**(TC-0) THE NOVELTY PASS, BEFORE ANY CONSTRUCTION — `PROCEED_NARROW`.** Six queries, four
+ledger entries, committed in the runner and in `LITERATURE_CHECK.md`.
+
+| ref | verdict |
+|---|---|
+| **arXiv:2604.01868** Bojin Chen, De Huang, Xiangyuan Li (April 2026) | ~~FLAG CLEARED~~ → **CLEARANCE WITHDRAWN, FLAG STANDS** |
+| **arXiv:1503.06315** Breden–Desvillettes–Lessard | NARROWS — **and SUPERSEDED by LIT's ninth pass** |
+| arXiv:2406.16597 / CPA (2026), self-similar cubic NLS | CONFIRMS BORDERING IS STANDARD |
+| SIADS doi:10.1137/23M1607507 (semilinear, unbounded domains, spectral) | ADJACENT ONLY |
+
+**THE RESURFACING CLEARANCE IS WITHDRAWN; THE FLAG STANDS.** This leg first reported leg 52's
+search-index flag cleared, on the ground that query 4 returned a summary naming the paper's
+title and authors correctly. VERIFIER adjudicated that against LIT's ninth pass and **LIT
+wins**, for three reasons, each sufficient: (i) the flag was raised against leg 52's *logged*
+query, which carries **no arXiv identifier**, while query 4 prepends the literal ID — so it
+tests retrieval *by ID*, never in dispute, not topical recall; **this leg never ran leg 52's
+query**, and LIT did, verbatim, reproducing the null result; (ii) the evidence relied on — the
+prose summary naming the paper — is precisely the signal LIT showed is *not* probative, having
+enumerated the eight **links** an ID-bearing query returns (all other papers) and identified
+the correct prose as the model answering from its own knowledge; (iii) this leg's `SEARCH_LOG`
+records **counts, not links**, so its clearance could not be audited against its own record.
+**Accurate statement: fetching by ID has always worked; topical recall without the identifier
+still fails; the flag stands.** *Process consequence: a novelty pass must log the returned
+links, not a count.*
+
+BDL: this leg read the publisher's **abstract page only** and recorded the dominance hypothesis
+as evidence-not-proof with the flag left up. **LIT's ninth pass then settled it from the full
+PDF** — assumption (4) requires `C1 ≤ μ_k/ω_k^{s_L} ≤ C2` with `C1 > 0`, assumption (5)'s
+ratios are undefined at `μ_k = 0`, the LU construction divides by `μ_k`, and a vanishing
+diagonal is not on their own future-work list. **BDL does not cover the zero-diagonal Fredholm
+case.** Read LIT's item 2, not this entry. Whether the literature treats a radii-polynomial
+tail whose unbounded part is **off-diagonal** returned nothing in six queries and is recorded
+as **unchecked**, not as a gap.
+
+**(TC-1) THE COUPLING, WRITTEN DOWN.** The far-field direction is leg 52's `tail_right_null`
+(`h_{K+1} = 1`, one parity chain, `m^{−2.00}`). Extending it by zero onto modes `1…K` and
+applying the exact linearisation gives its column in the finite block:
+
+| `K` | row `K` = `(K+1)/2` | row 1 = `Σ_{m>K} −(−1)^m h_m` | gauge row = `Σ_{m>K} m h_m` | `‖ĥ‖₁` |
+|---|---|---|---|---|
+| 4 | +2.500 | +2.493 | +46.53 | 2.493 |
+| 8 | +4.500 | +4.469 | +161.94 | 4.469 |
+| 16 | +8.500 | +8.377 | +548.91 | 8.377 |
+| 32 | +16.500 | +16.015 | +1820.41 | 16.015 |
+| 64 | +32.500 | +30.616 | +5862.15 | 30.616 |
+
+**The amplitude is not a weakly coupled bookkeeping variable.** Both entries grow linearly in
+the split. And the matching row's content *as an equation* turned out to be a coupling to the
+tail, not an equation on the finite block — **the far-field amplitude is fixed by the tail, not
+by the finite block** — which is itself part of why the coupling is where the failure landed.
+
+**(TC-4) `Z₁` BY SUB-BLOCK, `A = Γ⁻¹ ⊕ A_tail`, `M = K + 1024`, `null` gauge.**
+
+| class | `K` | `‖Γ⁻¹‖` | `‖A_tail‖` | `Z₁[ΓΓ]` | `Z₁[tail←Γ]` | `Z₁[Γ←tail]` | `Z₁[tt]` |
+|---|---|---|---|---|---|---|---|
+| flat | 4 | 30.0 | 2.191 | 3.5e−16 | **0.996** | **59.0** | 1.2e−12 |
+| flat | 16 | 510 | 4.654 | 6.2e−14 | **6.892** | **1019** | 4.9e−12 |
+| flat | 64 | 8190 | 8.936 | 1.8e−12 | **29.176** | **16379** | 2.5e−13 |
+| `s=0.3` | **4** | 22.7 | 2.604 | 7.7e−16 | **1.387** | **43.15** | 6.0e−13 |
+| `s=0.3` | 16 | 277 | 5.619 | 2.5e−14 | **9.441** | **546.6** | 1.7e−12 |
+| `s=0.3` | 64 | 3016 | 10.318 | 6.4e−13 | **38.182** | **6000** | 1.7e−13 |
+
+Dilation gauge is worse by **1.52× to 8.73×** on `Z₁[Γ←tail]`. **Smallest `Z₁` lower bound
+anywhere in the sweep (`K = 4…64`, both admissible classes, both gauges): 43.15**, and
+**20.47** over every normalisation ablated in TC-8 below.
+
+**SCOPE — CORRECTED, AND THIS IS THE CORRECTION THAT MATTERS.** `Z₁[tail←Γ] =
+‖A_tail L_{tail,Γ}‖` is the sub-block that **does not contain `Γ⁻¹`**, so it alone would be a
+lower bound on `Z₁` for *every* finite block. **Its minimum over the whole sweep is 0.9961 —
+BELOW 1.** The term that actually exceeds 1 everywhere is `Z₁[Γ←tail]`, and that one **does**
+contain `Γ⁻¹`: measured, `Z₁[Γ←tail]/‖Γ⁻¹‖ = 1.9667, 1.9921, 1.9980, 1.9995, 1.9999` (flat) and
+`1.9028 … 1.9896` (`s = 0.3`), i.e. **exactly `2‖Γ⁻¹‖` under the shipped convention.** So what
+this leg establishes is that **the block-diagonal `A` the standard method requires cannot close
+this certificate** — not that no finite block can. That distinction is why stage `MM` is a real
+question, and the first version of this entry asserted the stronger claim while attaching to it
+an argument that is only true of the *other* sub-block.
+
+**THE MECHANISM, CORRECTED.** The first version said `‖Γ⁻¹‖` grows like `K`, citing leg 51's
+`165 → 359 → 769 → 1633` — **a different matrix** (leg 51's *unaugmented* block; the two differ
+by 23× at `K = 64`) — and attributed a factor `K/2` to the coupling entry. Both are wrong:
+
+```
+||Gamma^-1||, flat, null gauge:   K = 4     8     16     32     64    128
+  with the amplitude column      30    126    510   2046   8190  32766    x4.00  = 2(K^2 - 1)
+  without it (far_field=False)   12     28     60    124    252    508    x2.02  = 4(K - 1)
+```
+
+**`‖Γ⁻¹‖` grows like `K²`, and the `K²` is created by this leg's own augmentation** — the weight
+pairing puts `W_a = ‖ĥ‖_w ≈ K/2` on the amplitude column against `ρ = w_{K+1}` on the matching
+row, so in weighted coordinates the matching equation carries coefficient `≈ 2/K`, and inverting
+a deliberately weak equation costs a factor `K`. The **coupling contributes a factor 2**, not
+`K/2`, and its dominant column is the **rank-one row-1 term** (weight 1 from *every* tail mode),
+not the `(K+1)/2` sub-diagonal.
+
+**THE STRUCTURAL FACT SURVIVES ALL OF THAT.** The standard tail estimate works because the
+unbounded part is a **multiplier**: the split cuts an entry of size `Λ_M` and the tail inverse
+is `1/Λ_M`. Here it is **off-diagonal**, and bordering fixed the tail's *invertibility* without
+touching its *size* — a **constant**, not `1/K`. That is exactly the `×2` per doubling measured
+in `Z₁[tail←Γ]` (0.996 → 29.176 flat), reaching 38.2 by `K = 64`. Lesson 75 in the flesh: leg
+51's defect and leg 53's defect are two defects in the same problem, and fixing the first does
+not touch the second. What the argument does **not** deliver on its own is failure at the
+*smallest* split — and TC-8 is why that gap does not rescue it.
+
+**(TC-2) THE POLYNOMIAL.** `Y₀ = 0` exactly, everywhere, **including the new matching row** —
+same degeneracy as leg 51 (the anchor *is* one basis mode, so it has no far field and the
+matching condition has nothing to fail). So `Z₂r² − (1−Z₁)r + Y₀ ≤ 0` always has the root
+`r = 0`, which certifies nothing. **The reportable quantity is a POSITIVE interval, and there
+is none: `r_max = 0` in all ten rows.**
+
+| class | `K` | `Y₀` | `Z₁` | `Z₂` | tail const | positive interval |
+|---|---|---|---|---|---|---|
+| flat | 4 | 0 | 59.996 | 180 | 2.191 | **no** |
+| `s=0.3` | **4** | 0 | **44.539** | **119.02** | 2.604 | **no** |
+| `s=0.3` | 64 | 0 | 6038.2 | 15829 | 10.318 | **no** |
+
+**And the counterfactual is in the same rows.** `poly_leg51_only` — the polynomial with leg
+51's finite-block `Z₁` and `‖A‖` alone — **closes in every row**, `r_max` 2.14e−02 down to
+4.64e−04. *The difference between those two columns is the content of this leg.*
+
+**(TC-3) THE BORDER'S OWN DEFECT, three magnitudes and what each dominates.**
+
+* the **matching row's residual at the anchor: exactly `0.0`** — dominates nothing, and it is
+  zero for the banned degenerate reason;
+* the **expansion's truncation defect** `‖(Lĥ)|_tail‖_w/‖ĥ‖_w`: **6.15e−02** (flat),
+  **1.10e−01** (`s=0.3`), falling like `M^{−1.00}` / `M^{−0.78}` — dominates `Y₀` and nothing
+  else, two to three orders under the couplings;
+* the **gauge row's entry on the far-field column: LOG-DIVERGENT.** `Σ_{m>K} m h_m` runs
+  3347 → 4557 → 5862 → 7222 over `M−K = 256…2048`, **+1865 per e-fold**. The underlying
+  statement is not numerical: `Σ_k k b_k` has dual norm `max_k k/w_k` on `ℓ¹_w`, **infinite for
+  every `s < 1`** — i.e. for every class where the target has finite norm. **The far-field
+  column has an entry that does not exist.** It dominates `‖Γ‖`, hence `‖A‖`, hence `Z₂`.
+  Repair (not a tuning of `s`): the dilation zero mode is **exactly `e₂`** (`‖Le₂‖_∞ = 0.0`,
+  checked), so pin that instead — worth 1.5×–8.7×, and **the gate still answers NO.**
+
+**(TC-5) THE POSITIVE CONTROL, AND THE VERSION OF IT THAT WAS WRONG.** First attempt: add
+`−μk` and change nothing else. It made the answer *worse*. Diagnosis: with `μ > 0` the tail has
+**no kernel**, so bordering it with its near-null pair and carrying a far-field amplitude it
+does not have manufactures a singularity. The control must be the dissipative problem's own
+certificate — unbordered tail, no amplitude unknown. It then behaves exactly as the mechanism
+predicts:
+
+```
+mu      0      0.1     0.5     1.0     2.0      4.0
+Z1    556.0   98.72   3.616   1.636  0.9156   0.6348      (s = 0.3, K = 16)
+```
+
+**Below 1 at `μ = 2`.** The instrument can report the other answer; the negative is a
+measurement. *And the near-miss is banked:* **a control that contradicts the mechanism is a
+statement about the control's REALIZATION first (70)** — the first version would have voided
+a correct negative.
+
+**(TC-5b) NEGATIVE CONTROLS — REWIRED, BECAUSE THE FIRST VERSION COULD NOT FAIL.** The first
+version computed `Z₁[Γ←tail]` from `Γ⁻¹` and `L_{Γ,tail}`, **neither of which references the
+border**, then reported the resulting identical 546.57 across four borders as "the sharpest form
+of the result available". It was a **tautology of the code, not a measurement** — four identical
+numbers should have read as a bug. The border direction is now wired through the **amplitude
+column** as well, so a wrong direction changes `Γ` itself. `K = 16`, `s = 0.3`:
+
+| border | `‖A_tail‖` | `‖Γ⁻¹‖` | `Z₁[tail←Γ]` | `Z₁[Γ←tail]` |
+|---|---|---|---|---|
+| **analytic** | **5.619** | **277.28** | **9.441** | **546.57** |
+| svd (the best 1-d choice that exists) | 5.588 | 277.08 | 9.441 | 546.37 |
+| second pair | 26.76 | **2.099e+16** | 13.37 | **2.099e+16** |
+| random | 338.9 | 6638.5 | 19.65 | 6907.8 |
+
+**`analytic/SVD = 1.0004`** — the border a proof can write down ties the best that exists, leg
+52's T-2 reproduced one level up. Random is **13×** worse; the second singular pair is
+**3.8e+13×** worse, because it is not the kernel and using it as the amplitude direction makes
+the augmented block essentially singular. **The controls discriminate.** The claim they were
+reaching for survives in its true, weaker form: `L_{Γ,tail}` and `L_{tail,Γ}` are pieces of the
+**operator**, so the border decides how badly the coupling is conditioned, not whether it exists.
+
+**(TC-8) NORMALISATION ABLATION — added on review, because `‖Γ⁻¹‖`'s `K²` is a CHOICE.**
+Five conventions for `(W_a, ρ)` plus the un-augmented block as the lower envelope, `null` gauge:
+
+| convention | `(W_a, ρ)` | flat `K=4` | `s=0.3` `K=4` | `s=0.3` `K=16` |
+|---|---|---|---|---|
+| **shipped** | `(‖ĥ‖_w, w_{K+1})` | 59.00 | **43.15** | 546.6 |
+| unit_column | `(1, w_{K+1})` | 57.51 | 40.66 | 535.9 |
+| unit_row | `(‖ĥ‖_w, 1)` | 59.00 | 43.15 | 546.6 |
+| unit_both | `(1, 1)` | 57.51 | 40.66 | 535.9 |
+| row_like_col | `(‖ĥ‖_w, ‖ĥ‖_w)` | 59.00 | 43.15 | 546.6 |
+| **no_amplitude** | — | 29.00 | **20.47** | 269.3 |
+
+**Smallest `Z₁` lower bound over every normalisation tried: 20.47** — one to two orders above 1
+and still growing in `K`. Note `row_like_col` drops `‖Γ⁻¹‖` from 22.68 to 8.90 while leaving
+`Z₁[Γ←tail]` at 43.15: **`Z₁[Γ←tail] = 2‖Γ⁻¹‖` is a fact about the shipped convention, not an
+identity.** The gate answer survives the renormalisation the corrected mechanism invites.
+
+**NEW BANKED LESSON (90). A CONTROL THAT CANNOT COME OUT DIFFERENTLY IS NOT A CONTROL, AND
+THE TELL IS THAT ITS NUMBERS ARE *IDENTICAL*.** TC-5b's headline was four identical 546.57s
+computed from two objects neither of which saw the varied parameter. **Before quoting a
+control, ask what would have to change in the code for it to report the other answer**; if the
+answer is "nothing", wire the varied quantity through until there is one. Corollary, earned in
+the same review: **a growth rate you cite must be measured on the matrix you actually built** —
+leg 53 explained its own `‖Γ⁻¹‖` with leg 51's numbers for a different matrix, and got both the
+exponent and the responsible factor wrong. When a quantity has a suspiciously tidy closed form
+(`2(K²−1)`, `4(K−1)`), that is the signal to check what produced it.
+
+**NEW BANKED LESSON (89). A TERM THAT DOES NOT EXIST UNTIL YOU ASSEMBLE CANNOT BE BOUNDED BY
+FIXING THE TERMS THAT DO.** Legs 51–52 measured four terms one at a time; three were exact or
+tiny and the fourth was repaired. Assembling them produced a *fifth* quantity — the coupling
+between the blocks of the approximate inverse — at 43 where it must be under 1, untouchable by
+any further work on the original four. **Assemble early, even with placeholder constants.** The
+corollary is positive: the assembly cost one leg and corrected the reading of two.
+
+**CEILING (pre-committed, clause TC7, before any number existed).** Measured on the `a = 0`
+CLM fixed point: one mode, analytic, in every weight class considered. `Y₀` is exactly zero
+there — including the new matching row — because the anchor *is* one basis mode, so the
+polynomial's root `r = 0` is available for a degenerate reason and certifies nothing.
+**Nothing is claimed about `HL_S2_nonsymmetric`:** on the gate's own terms that run happens
+only if the polynomial closes here, and it did not. **And the failure is scoped to the
+block-diagonal `A`**, not to every finite block — the finite-block-independent sub-block bottoms
+out at 0.9961, below 1. A wall measured on the easiest available
+object bounds the real target's difficulty **from below, not from above**. **No link of the
+L1→L4 chain moved. Clay unchanged at ~0.05%.**

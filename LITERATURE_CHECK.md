@@ -641,3 +641,76 @@ only that this one adjacent paper, read in full, doesn't cover it.
 first try), direct `curl` of `arxiv.org/pdf/1503.06315` (HTTP 200), `pdftotext` on
 both PDFs, `WebSearch` (two queries, logged above), `WebFetch` on
 `arxiv.org/abs/2604.01868`.
+
+---
+
+## Route-TC pass (leg 53, 2026-08-05) — run BEFORE the construction, verdict `PROCEED_NARROW`
+
+> **CORRECTED AFTER REVIEW.** This section originally reported leg 52's search-index flag as
+> **CLEARED**. **That clearance is WITHDRAWN.** VERIFIER adjudicated the conflict with LIT's
+> ninth pass (above) in LIT's favour and the flag **stands** — see "the flag, withdrawn"
+> below. Nothing else in this section changed.
+
+**Query log (WebSearch/WebFetch, in session, six queries).** Committed verbatim in
+`experiments/p2_route_tc_v1_assemble.py::SEARCH_LOG` and in `T0_novelty` of
+`writeup/data/p2_route_tc_v1_assemble.json`, so the search is auditable rather than
+remembered (leg 42's failure mode was an *unrecorded* search). **The log records query
+strings and result COUNTS only, not the returned links** — which is the reason the
+adjudication below went against this pass, and a later pass should enumerate links the way
+LIT's ninth pass does.
+
+1. `radii polynomial validated numerics coupling between finite block and tail unbounded off-diagonal operator approximate inverse block splitting` — 10 results
+2. `computer-assisted proof self-similar profile far-field amplitude as unknown matching condition asymptotic expansion spectral series bordered system` — 9
+3. `validated numerics sequence space tail estimate first-order transport operator no diagonal decay coupling term grows with truncation mode certificate fails` — 7
+4. `arXiv 2604.01868 Chen Huang Li non-symmetric self-similar blowup Hou-Luo model 2026` — 9
+5. `Breden Desvillettes Lessard tridiagonal dominant linear part approximate inverse construction requires diagonal dominance zero diagonal Fredholm kernel` — 10
+6. WebFetch `aimsciences.org/article/doi/10.3934/dcds.2015.35.4765` — the hypothesis on the linear part
+
+**Ledger.**
+
+| ref | verdict |
+|---|---|
+| **arXiv:1503.06315** (Breden-Desvillettes-Lessard, DCDS-A 35(10) 4765-4789) | NARROWS, DOES NOT PRE-EMPT - **and SUPERSEDED by LIT's ninth pass, which read the full text** |
+| **arXiv:2604.01868** (Bojin Chen, De Huang, Xiangyuan Li, April 2026) | ~~FLAG CLEARED~~ -> **CLEARANCE WITHDRAWN; the flag STANDS** |
+| arXiv:2406.16597 / CPA (2026), self-similar blowup for cubic NLS | CONFIRMS BORDERING IS STANDARD |
+| SIADS doi:10.1137/23M1607507, semilinear PDEs on unbounded domains, spectral | ADJACENT (SEMILINEAR ONLY) |
+
+**THE FLAG, WITHDRAWN.** This pass reported the flag cleared because query 4 returned a
+summary naming the paper's title and author list correctly. **That is not a test of the flag
+as posed, and it is not probative.**
+
+* The flag was raised against leg 52's *logged* query, which names authors and topic and
+  **contains no arXiv identifier**. Query 4 above prepends the literal string
+  `arXiv 2604.01868`. A query carrying the ID tests retrieval by ID, which was never in
+  dispute - LIT confirms `WebFetch` on `arxiv.org/abs/2604.01868` and
+  `scripts/fetch_papers.sh 2604.01868` both work first try. **This pass never ran leg 52's
+  query.** LIT did, verbatim, and reproduced the null result.
+* The evidence relied on - the prose summary naming the title and authors - is exactly the
+  signal LIT demonstrated is **not** probative: LIT ran an essentially identical ID-bearing
+  query, enumerated the eight returned **links** (all other papers), and identified the
+  correct prose as the model answering from its own knowledge rather than from a surfaced
+  link.
+* This pass logged counts, not links, so its clearance could not be checked against the
+  record it left. LIT's could.
+
+**Plain statement, replacing the clearance:** *a query naming the arXiv identifier returns a
+summary that correctly names the paper; the flag was about topical recall **without** the
+identifier; LIT re-ran that query verbatim and it still does not resurface; and fetching by
+ID has always worked.* **The flag stands as LIT reported it.**
+
+**BDL: this pass is superseded, in the direction it pointed.** It read the *publisher's
+abstract page* only and recorded that the stated hypothesis is a tridiagonal **dominant**
+linear part, that our zero diagonal does not satisfy it, and that this was **evidence, not
+proof**, with the flag left up. LIT's ninth pass then extracted the full PDF and settled it:
+assumption (4) requires `C1 <= mu_k/omega_k^{s_L} <= C2` with `C1 > 0`, assumption (5)'s
+ratios are undefined at `mu_k = 0`, the LU construction divides by `mu_k`, and their own
+future-work list does not include a vanishing diagonal. **Read LIT's item 2, not this entry.**
+
+**Novelty claimed by leg 53: none, beyond the negative measurement itself.** Bordering a
+certificate to kill a symmetry-induced kernel is standard practice (the NLS entry above does
+exactly that) and **no novelty is claimed for the move.** What leg 53 measured is what happens
+when the kernel is the far field of an unbounded *off-diagonal* operator, so that the border
+acquires a block-coupling term: with the block-diagonal approximate inverse the method
+requires, `Z_1[Gamma<-tail] >= 43.15` at the best split in the whole sweep. Whether *that*
+observation is in the literature was **not** settled by these six queries - no result addressed
+an unbounded off-diagonal part - and it is recorded as **unchecked**, not as new.

@@ -26,3 +26,14 @@ Papers/*
 .claude/*.tmp.*
 experiments/*.log
 experiments/*.npz
+
+# Orchestration: the live dashboard and the stop controls are LOCAL, never committed.
+# PROGRESS.md is rewritten every cycle (the committed snapshot is reports/STATUS.md);
+# the three stop files are how the user halts a continuous run (ORCHESTRATION.md §9).
+PROGRESS.md
+STOP
+STOP-NOW
+PAUSE
+
+# Agent worktrees created by subagent isolation
+.claude/worktrees/

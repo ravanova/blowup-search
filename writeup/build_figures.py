@@ -293,6 +293,32 @@ def fig_phase1_axis_screen():
     plt.close(fig)
 
 
+# Phase-2 per-leg figures live in their own *_evidence.py next to their writeups, so that
+# each one rebuilds from its own curated JSON with no re-run. Registered here so that
+# `build_figures.py` rebuilds the whole figure set rather than only the Phase-1 half.
+P2_EVIDENCE = [
+    "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
+    # Legs 55-57 keep their evidence scripts in experiments/ (their declared territory in
+    # DIRECTION.md) rather than beside their writeups like leg 53's -- these paths are
+    # relative to writeup/, so they step up one level.
+    "../experiments/p2_route_nb_v1_targetnorm_evidence.py",     # fig50 -- Route-NB v1 (leg 55)
+    "../experiments/p2_route_tn_v1_consistency_evidence.py",    # fig51 -- Route-TN v1 (leg 56)
+    "../experiments/p2_route_xs_v1_shapes_evidence.py",         # fig52 -- Route-XS v1 (leg 57)
+]
+
+
+def build_p2_evidence_figures():
+    import subprocess
+    import sys
+    here = Path(__file__).resolve().parent
+    for rel in P2_EVIDENCE:
+        script = here / rel
+        if not script.exists():
+            print(f"  SKIP {rel} (not present)")
+            continue
+        subprocess.run([sys.executable, str(script)], check=True)
+
+
 if __name__ == "__main__":
     import matplotlib.ticker  # noqa: needed for ScalarFormatter above
     fig_ga_vs_random(); print("fig1_ga_vs_random.png")
@@ -302,3 +328,4 @@ if __name__ == "__main__":
     fig_rough_rails(); print("fig5_rough_rails.png")
     fig_phase1_spike(); print("fig6_phase1_spike.png")
     fig_phase1_axis_screen(); print("fig7_phase1_axis_screen.png")
+    build_p2_evidence_figures()

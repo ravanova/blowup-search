@@ -1,6 +1,12 @@
 {
   "permissions": {
     "allow": [
+      "Bash(scripts/merge_gate.sh:*)",
+      "Bash(./scripts/merge_gate.sh:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git worktree:*)",
+      "Bash(claude:*)",
       "Bash(.venv/bin/python:*)",
       "Bash(python:*)",
       "Bash(python3:*)",
