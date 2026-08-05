@@ -2,82 +2,84 @@
 
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
-> bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M` and
-> `PORT` are **DONE**; **`ROUTE-V` is NEXT**, by user direction on 2026-08-04.
+> bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
+> `PORT` and `V` are **DONE**; **`ROUTE-C-PILOT` is NEXT.**
 
 ---
 
-# WHY THE PLAN CHANGED — THE CHAIN CANNOT BE CLIMBED
+# WHERE THE CLAY QUESTION LANDED — READ THIS BEFORE PROPOSING A NEW DIRECTION
 
 The user asked how to move a link of the L1→L4 chain toward Clay. Checked against the chain's
-own definition (`PHASE2_P2_NOTES.md` §24), the answer is that **it cannot be climbed as
-written**:
+own definition (`PHASE2_P2_NOTES.md` §24): **it cannot be climbed as written.**
 
-* **`L1`** — a certified 1D toy profile. Movable, and leg 45 found an *uncertified* target for
-  it. **This is the only movable link.**
+* **`L1`** — a certified 1D toy profile. Movable, and leg 45 found an *uncertified* target.
+  **The only movable link.**
 * **`L2`** — 2D Boussinesq. **Chen–Hou proved it**, 145 pages.
 * **`L3`** — axisymmetric 3D Euler with boundary. **Chen–Hou proved that too.**
 * **`L4`** — 3D Navier–Stokes. Clay, and out of reach of interval arithmetic by Wall 2.
 
-The rungs above `L1` are occupied or unreachable. It reads like a ladder but climbing rung 1
-does not bring rung 4 nearer. **Stop using "toward Clay" as though the ladder carried you
-there** — and note that `L1` itself was re-priced by leg 47 (below).
+The rungs above `L1` are occupied or unreachable. **Stop using "toward Clay" as though the
+ladder carried you there.**
+
+**AND THE ONE CLAY-ADJACENT ROUTE WAS TRIED AND IS CLOSED.** Stage `V` — *does a certified
+inviscid blow-up survive dissipation, as a certificate?* — was proposed as the only route both
+Clay-adjacent and matched to this project's holdings, and adopted by user direction. **Its
+novelty gate closed it at leg 48.** Dahne–Figueras (`arXiv:2410.05480`) verify whole branches
+of self-similar singular solutions of complex Ginzburg–Landau in **interval arithmetic**,
+continued in the dissipation parameter from the conservative limit. Leg 48 re-derived their
+published zeros to **1.8e−07**, reproduced their branch to **3.0e−06** across its length, and
+located their fold at `ε* = 0.0606364` against their figure's `0.0606361`.
+
+**That gate is the single most valuable thing in the plan machinery.** It cost one leg and it
+prevented building a measurement on a question already answered rigorously by other people —
+the exact failure leg 42 found seven times over. **Do not weaken it, and do not skip the
+novelty check on whatever comes next.**
 
 ---
 
-# DIRECTIVE 1 — ROUTE-V (IN FLOAT): DOES THE CERTIFICATE'S MARGIN SURVIVE DISSIPATION?
+# DIRECTIVE 1 — ROUTE-C-PILOT: EVOLVE THE LYAPUNOV WEIGHT, ON A KNOWN-ANSWER OBJECT
 
-**This is the one route identified that is both Clay-ADJACENT and matched to what this
-project already owns.** The Euler→NS gap **is** viscosity: 3D Euler blow-up with boundary is
-proved, NS is not, and the entire difference is the dissipative term.
+**THE EVIDENCE FOR THIS STAGE ARRIVED BY ACCIDENT, WHICH IS WHY IT IS WORTH TRUSTING.** Leg
+46 built the certificate on the uncertified 1D profile and found that **closure is a property
+of the SPACE, not of the object**. The tuned and naive weights differ in **one constant** —
+the length scale `w_l`, `0.01·X_max` against `X_max` — and it decides whether the radii
+polynomial closes at all:
 
-**What this project has, and probably nobody holds together:** the certification machinery
-(leg 46 — bordered Newton to 5.7e−15, `Y₀`/`Z₁`/`Z₂` assembling, the polynomial closing in
-float); the dissipative machinery (Routes F/H/I — `s_c = α/2`, `μ` as an autonomous
-coordinate, `α₁` as the marginal invariant); and the criticality result — **NS sits exactly
-at the exponent where every scaling argument returns zero information**, and criticality is a
-tar pit where `μ` decays algebraically, nine times per decade.
+| `n` | tuned `Y₀/budget` | naive | gain |
+|---|---|---|---|
+| 201 | **1.95e−04** ✓ | 1.0125 ✗ | 5186.6 |
+| 401 | **6.36e−04** ✓ | 3.3193 ✗ | 5221.5 |
+| 801 | **2.40e−04** ✓ | 1.2578 ✗ | 5235.6 |
 
-**THE QUESTION IS NOT THE SCALING ONE.** "Does the scaling say the blow-up survives" was
-Route-F and **Xu pre-empted it** (`arXiv:2607.19762` §6.1, eleven days before us). The new
-question is: **switch dissipation on and ask whether the RADII POLYNOMIAL STILL CLOSES**,
-walking `μ` up toward criticality and watching the margin.
+That fell out of a table built for another purpose. **Route-D hand-tuned a function space for
+eleven legs and it turned out `a = 0`-only; Routes K and L hand-picked preconditioners.** Those
+are search problems being done by hand, and unlike blow-up hunting they have a fitness that
+**cannot be faked by an under-resolved run** — "does the polynomial close, and by how much" is
+a theorem, not a plot.
 
-## ⚠️ RUN IT IN FLOAT, AND KNOW WHY
+**THE SEARCH SPACE HAS ONE WALL ALREADY BUILT BY THE EQUATION.** `p* = 0.39` is not tuned: the
+profile's tail is `Ω ~ |X|^−0.394`, so any weight `(1+X²)^(p/2)` with `p > 0.394` gives the
+**true** profile infinite norm. Search inside that box; do not rediscover its wall.
 
-An earlier draft of this directive said *"on an object where the inviscid certificate is in
-hand."* **We do not have one** — leg 47 established that the inviscid certificate needs a
-tail lemma nobody here has written. That premise was wrong when written and is removed.
+**WHAT THE LEG MUST DELIVER.**
+1. A **searched weight** beating the hand-picked one **on an object where the answer is
+   known** — Chen–Hou's 2D profile is that substrate, and it is the reason the 2D work of legs
+   43/44 is not wasted. Validate the fitness where the result is checkable before trusting it
+   anywhere else.
+2. The fitness is **one number** and it cannot be faked. Say so, and gate it anyway.
+3. **The six-property viability gate, re-run ON THE NEW FITNESS, before any GA compute.**
 
-**The float form needs no prerequisite.** Leg 46's machinery already produces `Y₀`, `Z₁`,
-`Z₂` in float64. Deliver: the certificate constants as a function of `μ`; the margin's
-trajectory as `μ → μ_crit`; and whether it degrades smoothly or falls off a cliff, and at
-which `μ`.
+**GATE (pre-committed in `plan_of_record.py`):** does the new fitness pass the six-property
+viability gate? **YES** → proceed to stage `B`. **NO** → **STOP. Do not run the GA.** Stage
+3.5 is the precedent and it is non-negotiable: a fitness that fails the gate produces
+confident garbage at scale.
 
-**It is decisive either way, which is the point of doing it first.** If the margin collapses
-the moment `μ > 0`, the Euler→NS question is answered in this toy **for one leg of work** —
-and it saves building interval arithmetic and a tail lemma for a target that was never going
-to survive them. If it degrades smoothly, that is the signal that stage `L1` is worth the
-investment.
+**AND THE NOVELTY CHECK IS NOT OPTIONAL HERE EITHER.** Leg 48 is what that habit is worth —
+one leg spent, an entire stage correctly closed. Before building, ask whether searching
+certificate function spaces has been done; use Route-M's ledger machinery.
 
-**`V`-RIGOROUS IS DOWNSTREAM OF `L1`, NOT A COMPETITOR TO IT.** "Does the *certificate*
-survive" needs a certificate to perturb. `L1` is the first step of `V`-rigorous **and** a
-novel result in its own right, so the two are not in tension. **A float study cannot be
-upgraded into a certificate after the fact** — that is a standing ban.
-
-## ⛔ THE NOVELTY CHECK COMES FIRST, AND IT IS A BAN
-
-*Has anyone already done certification-under-dissipation for a self-similar profile?* Use
-Route-M's ledger machinery (`solver/target_selection.py`, `solver/literature_gates.py`) and
-the Tier 2/3 PDFs already fetched. **YES → report it, fall back to `C-PILOT`, do not spend the
-leg. NO → proceed.** Leg 42 deleted seven of twelve novelty claims; **this route is a
-speculation about novelty of exactly that kind and was flagged as such when proposed.**
-
-**SAY THE CEILING IN EVERY WRITEUP.** Even complete success here is **not Clay and not a
-chain link** — it is a statement about a toy model's certificate under dissipation. What
-makes it Clay-*adjacent* is that it probes the one structural difference between the proved
-case and the open one. A certificate that **dies** at small `μ` is as informative as one that
-survives, and is the more likely outcome.
+**BEFORE WRITING A SOLVER, GREP `capabilities.py` FOR THE OBJECT.** Leg 45 nearly rebuilt
+`RescaledHLScenario2` from scratch. That ban is permanent.
 
 ---
 
@@ -207,5 +209,6 @@ that last gate rejected **fourteen** of our own entries on first run.
 literature in `Papers/MANIFEST.md`. No `Y₀`, `Z₁` or `Z₂` was computed for any candidate.
 
 ---
+
 
 

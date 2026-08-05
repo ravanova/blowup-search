@@ -7,6 +7,15 @@ directory no longer exists. The manifest and `fetch.sh` are committed so the PDF
 re-pulled in one command instead of re-derived from memory. **If you download papers, do
 not commit them; commit any change to this manifest instead.**
 
+**STATUS 2026-08-04 (leg 48, Route-V v0): TWO PAPERS ADDED, AND ONE OF THEM CLOSED A STAGE.**
+`bash Papers/fetch.sh 2410.05480 2404.04054` — neither was in this manifest, and the first
+of them **pre-empts stage V outright**: Dahne–Figueras verify branches of self-similar
+singular CGL solutions *in the dissipation parameter*, in interval arithmetic. It is now
+`solver/viscous_novelty.py`'s primary source, re-derived rather than cited (Tables 1/2 to
+1.8e−07, their Fig. 1a branch to 3.0e−06, their fold to 3.8e−07). **Its figures are pgf
+vector graphics**, so `read_df_figure` reads the published curve back as data — worth
+knowing before settling for a qualitative comparison with anyone's figure.
+
 **STATUS 2026-08-04 (leg 45, Route-M): TIER 2 AND TIER 3 ARE NOW READ FOR WHAT THEY GATE.**
 The target ledger they produced is `solver/target_selection.py` (`test_target_selection.py`
 9/9), and `LITERATURE_CHECK.md`'s **seventh pass** is the summary. What changed:

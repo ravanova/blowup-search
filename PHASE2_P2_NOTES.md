@@ -2972,3 +2972,115 @@ list its preconditions explicitly and check each against the most recent leg**, 
 most recent leg is exactly what a freshly-written directive is least likely to have absorbed.
 New standing ban: reading V-rigorous's L1 prerequisite as optional -- **a float study cannot
 be upgraded into a certificate after the fact.**
+
+
+## §37 — ROUTE-V v0 DONE (2026-08-04): THE NOVELTY GATE FIRED. CERTIFICATION UNDER
+## DISSIPATION IS A 2024 RESULT (DAHNE-FIGUERAS, CGL BRANCHES IN INTERVAL ARITHMETIC),
+## AND THIS LEG RE-DERIVED THEIR ZEROS, THEIR BRANCH AND THEIR FOLD TO BE SURE OF IT.
+
+solver/viscous_novelty.py + test_viscous_novelty.py **8/8**;
+experiments/p2_route_v_v0_novelty.py -> writeup/data/p2_route_v_v0_novelty.json -> **fig43**;
+BLOG/TECHNICAL_P2_ROUTEV_V0.md. Deterministic (**84 s**), 6/6 pre-committed clauses.
+Plan stage **V -> DONE (closed by its own gate)**; **C-PILOT is NEXT**.
+**No link of the L1->L4 chain moved. Clay ~0.05%.**
+
+**(V0-1) THE GATE ANSWERED YES, AND IT WAS ASKED FIRST BECAUSE IT WAS A BAN.**
+`plan_of_record.py` carried stage V behind "has anyone already done
+certification-under-dissipation for a self-similar blow-up profile? YES -> report it, fall
+back to C-PILOT, do NOT spend the leg", plus a standing ban on building the measurement
+before the check reported. **arXiv:2410.05480 (Dahne-Figueras, Oct 2024)** answers it: for
+CGL, `i u_t + (1 - i eps) Delta u + (1 + i delta)|u|^{2 sigma} u = 0`, **eps IS a
+dissipation dial** (eps=0 is NLS, conservative), and their Thm 4.1 proves EIGHT continuous
+branches of self-similar singular solutions born at the NLS solutions and followed as eps
+grows, **verified along the whole branch in interval arithmetic**; Thm 4.4 does Case II and
+verifies only PARTS. Second, weaker precedent **arXiv:2404.04054** (certified self-similar
+profiles of parabolic PDEs incl. viscous Burgers, Newton-Kantorovich, no dial).
+
+**(V0-2) THE PRE-EMPTION IS RE-DERIVED, NOT CITED.** Independent RK4 from the origin with a
+phase-resolving step, matched at `xi_1` to a **three-term far-field expansion derived in
+the module** (`a_1`, `a_2` in the docstring -- and `a_2` carries `conj(a_1)`, because
+`|u|^{2 sigma} u` is not holomorphic). Their Tables 1 and 2:
+
+    row              d(mu)      d(kappa)    Newton   defect
+    Case I  j=1     -2.3e-08    -1.8e-07      4      3.7e-13
+    Case I  j=2     -1.5e-06    -8.0e-07      5      1.8e-15
+    Case I  j=3     -1.7e-06    -9.5e-07      5      1.2e-15
+    Case I  j=4     -1.1e-05    -3.1e-06      5      1.0e-14
+    Case II j=1     +2.3e-08    +2.5e-08      6      6.5e-14
+
+Pre-committed gate 1e-06 on the j=1 rows: **1.8e-07, VERIFIED**. j=4 is the worst and the
+reason is stated (they match at `xi_1=25`, we clip to 20). **`gamma` is deliberately NOT
+gated** -- they parameterise the manifold at infinity in their sec 7 and ours is the
+coefficient in OUR expansion; two quantities with one name is where a transcription error
+hides.
+
+**(V0-4) THEIR PUBLISHED FIGURE READ AS DATA, AND THE FOLD REPRODUCED TO 3.8e-07.**
+Continuing in `eps` cannot pass a turning point, so the continuation runs **in `kappa`,
+solving for `(mu, eps)`** -- the fold becomes an ordinary interior point instead of a Newton
+failure. 129 converged records, `dkappa = 0.005`:
+
+    ours       eps* = 0.06063648   kappa* = 0.554682
+    published  eps* = 0.06063610   kappa* = 0.554644
+    diff             +3.8e-07            +3.8e-05
+
+Their Figs. 1/2 are **pgf VECTOR graphics**, so the branch polylines and the axis ticks are
+literally in the PDF content stream; `read_df_figure` calibrates on the ticks and returns
+`(eps, kappa)` pairs. **The calibration checks itself**: the eight extracted curves' `eps=0`
+endpoints land on the eight `kappa` of their Table 1 -- printed on a different page -- to
+**1.0e-05**, the width of a plotted line. Against that curve our branch agrees to **max
+3.0e-06, rms 1.9e-06** over 13 samples spanning both sides of the fold.
+
+**(V0-5) THE SHAPE OF THEIR ANSWER, WHICH IS WHAT STAGE V WANTED. THE MARGIN DOES NOT DIE
+WHEN DISSIPATION IS SWITCHED ON -- IT IMPROVES 26x -- AND THEN DIES AT A FOLD.**
+
+    eps = 0 (NLS end)        ||J^-1|| = 7.15e-01   cond = 8.4e+00
+    mid-branch (eps=0.0486)  ||J^-1|| = 2.71e-02   cond = 2.1e+01
+    nearest sample to fold   ||J^-1|| = 1.53e+00   cond = 2.4e+03
+
+`||J^-1||` is named as the **float analogue** of the radii polynomial's `||A||`, not as a
+certificate constant. The divergence is measured as an EXPONENT rather than announced:
+`||J^-1|| ~ |kappa - kappa*|^s` with **s = -1.061** on ten points at offsets 0.08..0.005
+either side, against **-1 for an ordinary quadratic fold**. The scale the proxy divides by
+(`|Q'(xi_1)|`) moves only 1.09e-02 -> 8.7e-03 across the top of the branch, so the 26x is
+not a units artefact (discipline 67).
+
+**(V0-3) THE GUARDS.** Step halving (200/400/800 per oscillation) moves the defect by
+**7.9e-12** at level 4.9e-10 -- the floor is far-field truncation, not the integrator.
+`xi_1 = 10/15/20/30` moves `kappa` by **1.2e-06** total, 3.6e-08 over the last three. The
+defect **discriminates**: 351x under a 1e-04 perturbation of `kappa` (lesson 55).
+
+**THE HOLE THAT IS LEFT, AND THE MOVE NOT MADE.** Twelve arXiv queries are logged in
+`SEARCH_LOG`; the four asking for the FLUID version -- an inviscid Euler/Boussinesq/CLM
+blow-up certified under a viscosity dial -- return nothing. **That hole is real and it is
+NOT what stage V asked for.** Rewriting "has anyone done certification under dissipation"
+into "has anyone done it for OUR model" after seeing the answer is exactly the manoeuvre
+that gave leg 42 twelve novelty claims of which five survived. Recorded as a hole, not as a
+claim.
+
+**WHAT IT HANDS THE NEXT STAGE.** C-PILOT needs an object with a KNOWN answer.
+`branch_in_kappa` is now one **with a dissipation dial**: published, certified by its
+authors, and reproduced here to 4e-07 at the fold.
+
+**NEW BANKED LESSON (82). A GATE WHOSE 'YES' COSTS ONE LEG AND WHOSE 'NO' COSTS FIVE IS
+WORTH ASKING EVEN WHEN YOU ARE SURE OF THE ANSWER -- and the reason this one got asked is
+that it was written down BEFORE the answer was knowable.** 84 seconds of compute against
+building interval arithmetic and a tail lemma for a question already answered. The
+corollary is the part to keep: **the check must be a re-derivation, not a citation.**
+Reading an abstract would have given the same verdict with none of the confidence, and
+would not have produced (V0-5)'s reading of what the published answer actually SAYS.
+
+**AND THE INVENTORY'S OWN GATE CAUGHT US.** `test_capabilities.py` was RED on entry to
+this leg: `solver/bordered_hl.py` -- leg 46's whole deliverable -- had **no capability
+entry**, so legs 46 and 47 shipped with a failing test nobody ran. Fixed here, with the
+ceiling written INTO the entry (the polynomial closes around the truncated object, 1.55e+08
+ball radii from the real one) so the index cannot be read as an advertisement. **The gate
+built in leg 45 to catch exactly this took three legs to fire because nothing ran it** --
+which is lesson 68 arriving from the inside: an executable check that is not executed is a
+comment.
+
+**NEW BANKED LESSON (83). A PUBLISHED VECTOR FIGURE IS DATA.** The fold comparison went
+from "consistent with their plotted range" to "agrees to 3.8e-07" because their PDF stores
+the curve as coordinates and the axes as tick segments. **Before settling for a qualitative
+comparison with a published figure, check whether the figure is vector** -- and calibrate
+on something the figure does not know (here, a table on another page), so the extraction
+has a known-answer gate of its own.

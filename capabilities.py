@@ -181,6 +181,33 @@ CAPABILITIES = [
      "validated": ("Schochet residual 5.2e-16 corrected vs 2.4e-2 as printed (13.7 "
                    "decades); Route-H's (E) == ALS (57)-(58) pointwise"),
      "test": "test_literature_gates.py"},
+    {"module": "solver/bordered_hl.py",
+     "object": "HL_S2_nonsymmetric -- the BORDERED steady system (Route-PORT, legs 46/47)",
+     "holds": ("the 2n+3 bordered residual for CHL (4.1)/(4.2) with the three gauge "
+               "constants as UNKNOWNS, its exact analytic Jacobian, the exact quadratic "
+               "remainder (F is degree 2, so Z_2 is exact), damped Newton, and the float "
+               "certificate constants Y_0/Z_1/Z_2 in a weighted sup norm"),
+     "validated": ("Newton to 5.66e-15 at n=201 (the relaxation of the same equations "
+                   "FLOORS at ~1e-2); F(z+v) = F(z)+DF v+Q(v,v) gated to machine precision; "
+                   "contraction ratio -2.5407 extrapolating to CHL's -2.5114 at 2.1e-04. "
+                   "THE CEILING IS PART OF THE ENTRY: the polynomial closes around the "
+                   "TRUNCATED object and the true object is 1.55e+08 ball radii outside it "
+                   "(leg 46 P6b), and reach makes that WORSE (leg 47)"),
+     "test": "test_bordered_hl.py"},
+    {"module": "solver/viscous_novelty.py",
+     "object": "certification UNDER DISSIPATION -- stage V's novelty gate (Route-V v0)",
+     "holds": ("PRECEDENTS + novelty_verdict() (the gate, computed off the ledger); the "
+               "Dahne-Figueras CGL/NLS profile ODE, an independent RK4 shooting solve, a "
+               "three-term far field derived here, branch continuation THROUGH the fold "
+               "(solve for (mu, eps) at fixed kappa), the ||J^-1|| margin proxy and its "
+               "divergence exponent, and read_df_figure -- a published VECTOR figure read "
+               "back as (eps, kappa) data"),
+     "validated": ("their Tables 1/2 reproduced to 1.8e-07 on the j=1 rows (four rows in "
+                   "all, worst 1.1e-05 at our xi_1=20 vs their 25); their Fig. 1a branch to "
+                   "max 3.0e-06 / rms 1.9e-06 over 13 samples; their fold to 3.8e-07 in "
+                   "eps*; the figure calibration self-checks against Table 1 to 1.0e-05; "
+                   "the defect discriminates 351x under a 1e-04 kappa perturbation"),
+     "test": "test_viscous_novelty.py"},
     {"module": "solver/target_selection.py", "object": "which object to certify (Route-M)",
      "holds": ("TARGET_LEDGER: six candidates x three questions; CERTIFICATION_RECORD; "
                "the radii-polynomial Y_0 BUDGET; the 3D-NS preprint closure audit"),

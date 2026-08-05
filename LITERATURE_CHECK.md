@@ -1,5 +1,42 @@
 # Literature check — SIXTH PASS (2026-08-04): the papers are read
 
+> ## 🧭 EIGHTH PASS (leg 48, Route-V v0): the check turned to the DISSIPATION DIAL — and
+> ## the question stage V was built around is a 2024 theorem
+>
+> The seventh pass asked *"has anyone already proved the object?"*. Stage V asked a
+> different question — *"can a blow-up certificate be followed as dissipation is switched
+> on, and what does its margin do?"* — and it too was already answered. The ledger lives in
+> `solver/viscous_novelty.py::PRECEDENTS`, gated by `test_viscous_novelty.py` (8/8), and
+> unlike a table of citations it **re-derives** what it cites.
+>
+> | source | what it does | verdict for stage V |
+> |---|---|---|
+> | **arXiv:2410.05480** (Dahne–Figueras, Oct 2024) | 8 branches of self-similar singular CGL profiles, continued in the dissipation parameter `ε` from the NLS limit, **verified in interval arithmetic** (whole-branch, Case I) | **PRE-EMPTS** |
+> | arXiv:2404.04054 | computer-assisted (Newton–Kantorovich, weighted Sobolev) self-similar profiles of parabolic PDEs incl. **viscous** Burgers; no dial followed | ADJACENT |
+> | arXiv:2207.07548 (ALS) | dissipative gCLM, analysis + numerics, no certificate | EXCLUSION |
+> | arXiv:1908.09385 (J. Chen) | dissipative gCLM, analytic (checked leg 45: no computer assistance) | EXCLUSION |
+> | arXiv:2210.07191 + 2305.05660 (Chen–Hou) | certified blow-up, **inviscid** — no dissipation dial | EXCLUSION |
+> | arXiv:2509.14185 | unstable singularities at CAP-ready precision, inviscid, no certificate claimed | EXCLUSION |
+>
+> **Re-derived, not asserted:** their published `(μ, κ)` reproduce to **1.8e−07** (j=1 rows,
+> two cases, four rows in all), their Fig. 1a branch to **max 3.0e−06 / rms 1.9e−06**, and
+> their fold to **3.8e−07** in `ε*`. Their figure is a *vector* graphic, so the curve was
+> read out of the PDF as coordinates and calibrated on the axis ticks; the calibration
+> self-checks against Table 1 (a different page) to **1.0e−05**.
+>
+> **What their answer says, which is what stage V wanted to find out:** the margin does
+> **not** die when dissipation is switched on — the conditioning *improves* 26× — and then
+> diverges at a **fold** in the dissipation parameter, with exponent **−1.061** against −1
+> for an ordinary quadratic fold. Rigorous branch verification must stop at or before the
+> fold, which is why their Case II verifies only parts of its branches.
+>
+> **The hole, recorded as a hole:** twelve arXiv queries are logged in `SEARCH_LOG`; the
+> four asking for the FLUID version — an inviscid Euler/Boussinesq/CLM blow-up certified
+> under a viscosity dial — return nothing. That is a smaller question than the one stage V
+> posed, and re-labelling one as the other after seeing the answer is the move that cost
+> leg 42 seven claims.
+
+
 > ## 🧭 SEVENTH PASS (leg 45, Route-M): the check turned OUTWARD — what is already PROVED
 >
 > The sixth pass below asks *"has anyone pre-empted our answers?"* Route-M asks the

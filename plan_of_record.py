@@ -165,8 +165,8 @@ STAGES = [
     {
         "id": "V",
         "name": ("Viscous survival, IN FLOAT: does the certificate's margin survive "
-                 "dissipation as mu -> criticality?"),
-        "status": "NEXT",
+                 "dissipation as mu -> criticality?  -- CLOSED BY ITS OWN GATE, leg 48"),
+        "status": "DONE",
         "why_here": (
             "USER DIRECTION, 2026-08-04, after being shown that the L1->L4 chain cannot be "
             "climbed: L2 and L3 are occupied by Chen-Hou and L4 is out of reach of interval "
@@ -206,6 +206,18 @@ STAGES = [
             "if_no": ("Proceed to the deliverable. Report the margin trajectory whichever way "
                       "it goes -- a certificate that DIES at small mu is as informative as one "
                       "that survives, and is the more likely outcome."),
+            "answer": (
+                "**YES, leg 48 (Route-V v0).** Dahne-Figueras arXiv:2410.05480 verify whole "
+                "BRANCHES of self-similar singular solutions of the complex Ginzburg-Landau "
+                "equation, continued in the dissipation parameter eps from the conservative "
+                "NLS limit, in interval arithmetic (their Thm 4.1 whole-branch in Case I, "
+                "Thm 4.4 partial in Case II). arXiv:2404.04054 is a second, weaker precedent "
+                "(certified self-similar profiles of parabolic PDEs incl. viscous Burgers, no "
+                "dial). The gate's YES branch was taken: stage V is CLOSED and C-PILOT is "
+                "next. solver/viscous_novelty.py re-derives their published zeros to 1.8e-07, "
+                "their branch to 3.0e-06, and their fold to 3.8e-07 -- the pre-emption is "
+                "verified, not cited. The margin does NOT die when dissipation is switched on "
+                "(it improves 26x); it dies at a FOLD, with divergence exponent -1.061."),
         },
         "time_box": ("one leg for the novelty check, then one for the FLOAT measurement -- "
                      "and the novelty check comes first, always"),
@@ -254,7 +266,7 @@ STAGES = [
     {
         "id": "C-PILOT",
         "name": "Pilot: evolve the Lyapunov weight, on an object with a KNOWN answer",
-        "status": "QUEUED",
+        "status": "NEXT",
         "why_here": (
             "The narrowest member of the re-framing, and the right first bite: the fitness is "
             "ONE NUMBER (the worst-case coercivity constant of the linearized operator under "
@@ -312,7 +324,10 @@ BANNED = [
     ("the PORT itself", "M"),
     ("any GA compute on an unvalidated fitness", "C-PILOT"),
     ("another literature leg beyond M's three questions", "M"),
-    ("building stage V's measurement before its novelty check has reported", "V"),
+    ("re-opening stage V as posed -- the novelty gate answered YES on 2026-08-04 "
+     "(arXiv:2410.05480 verifies CGL branches in the dissipation parameter, in interval "
+     "arithmetic), and leg 48 re-derived their zeros, branch and fold to confirm it",
+     "never -- unless the question is re-posed for a FLUID transport model, which needs L1 first"),
     ("reading V-rigorous's L1 prerequisite as optional -- a float study cannot be upgraded into a certificate after the fact", "L1"),
     ("closing the truncation gap by extending the domain", "never -- leg 47 measured the trend and it has the WRONG SIGN, +0.47 decades per unit rho"),
     ("aiming the port at Chen-Hou's 2D profile as a TARGET -- it is certified "
