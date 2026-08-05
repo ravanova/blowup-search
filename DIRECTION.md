@@ -218,13 +218,19 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`, proposed `NEXT`) | heavy | `leg/ng-v1` | Does the no-go admit a proof for a class of `A` strictly larger than block-diagonal? |
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
 | LEG-C | 63 | **M2** — target reselection, screened by the measured predicate | no | standard | `leg/m2-v1` | Is there an uncertified target whose linearization has a **multiplier** unbounded part? |
-| LEG-D | 59 | **WV** — the weight fitness's wall is 2-D | no | standard | `leg/wv-v1` | Does the frozen six-property gate pass 6/6 under a 2-D wall model? |
+| LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 61 | **KA** — a known-answer window for the interval pipeline | no | standard | `leg/ka-v1` | Does `interval_certificate.py` reproduce CLN's published Kawahara radius? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 73 | **BV** — external known-answer check for the 2D velocity solver | no | standard | `leg/bv-v1` | Does a published, independent benchmark exist for the polar-grid Biot-Savart solve, and does the solver reproduce it? |
-| LEG-H | 74 | **EXT** — has the target object been certified by anyone else since? | no | standard | `leg/ext-v1` | Has a certificate for HL_S2_nonsymmetric been published by anyone since April 2026? |
+| LEG-H | 79 | **PC** — adversarial fabrication-rejection audit of the L1->L2 port | no | light | `leg/pc-v1` | Does `radii_polynomial_status` still correctly reject a battery of fabricated/poisoned Y_0/Z_1 inputs? |
 | LEG-I | 75 | **LM** — benchmark the claimed 10x cached-slope speedup | no | light | `leg/lm-v1` | Does the cached slope_matrix path still reproduce >=8x speedup on the Scenario-2 step? |
-| LEG-J | 72 | **JR** — `experiments/JOURNAL.md` / `experiments/journal/` freshness audit | no | light | `leg/jr-v1` | Does the journal narrative and the per-leg `journal/leg_N.md` file exist for every landed leg? |
+| LEG-J | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
+
+**Orchestrator note (2026-08-06, third pass):** legs 59 (WV) and 74 (EXT) landed (freed D, H);
+72 (JR) also landed earlier (freed J). Dispatched 78→LEG-J, 79→LEG-H immediately. LEG-D held
+open deliberately for leg 76, per the DM's instruction that a confirmed rework leg preempts the
+next opening rather than waiting behind ordinary reserve rotation. Reserve is now empty except
+76 (blocked on its verifier).
 
 **Orchestrator reconciliation note (2026-08-06, second pass):** the DM's proposal to put 77/78/79
 into LEG-G/I/J was based on state from before the orchestrator's dispatch of 72/73/74/75 landed
