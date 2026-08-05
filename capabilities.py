@@ -77,7 +77,7 @@ CAPABILITIES = [
      "test": "test_fractional_gclm.py"},
     {"module": "solver/critical_dissipation.py", "object": "gCLM at exactly critical dissipation",
      "holds": "the marginal case and the invariant alpha_1",
-     "validated": "alpha_1 = 0 at a=0 == ALS eq (61); a=1/2 is UNSEARCHED at primary source",
+     "validated": ("alpha_1 = 0 at a=0 == ALS eq (61); criticality sigma=3 at a=1/2 IS\n                   published (Xu arXiv:2607.19762 sec 6.1 + Table 1 row a=0.5 + Fig 3,\n                   's*(1/2)=3 exactly'); alpha_1 = +0.133683 there is SEARCHED-NOT-FOUND\n                   (leg 64, whole dissipative CLM corpus), i.e. measured, not\n                   independently validated"),
      "test": "test_critical_dissipation.py"},
     {"module": "solver/marginal_flow.py", "object": "the augmented (Omega, mu) flow, driven",
      "holds": "time integration of (F_mu)+(M) as an initial-value problem",
