@@ -3084,3 +3084,104 @@ the curve as coordinates and the axes as tick segments. **Before settling for a 
 comparison with a published figure, check whether the figure is vector** -- and calibrate
 on something the figure does not know (here, a table on another page), so the extraction
 has a known-answer gate of its own.
+
+## §38 — ROUTE-C-PILOT v0 DONE (2026-08-05): THE WEIGHT FITNESS **FAILS** ITS OWN
+## VIABILITY GATE, 4/6, AND THE GA WAS NOT RUN. THE STAGE'S PREMISE REPRODUCES BUT IS
+## NOT WHAT IT LOOKED LIKE, AND THE FLOAT REHEARSAL'S ADMISSIBLE BAND SHUTS AT n ~ 3.2e3.
+
+*Leg 49. `solver/weight_search.py`, `test_weight_search.py` **8/8**,
+`experiments/p2_route_c_pilot_v0.py` → `writeup/data/p2_route_c_pilot_v0.json` →
+**fig44**; `TECHNICAL_P2_ROUTEC_PILOT_V0.md`, `BLOG_P2_ROUTEC_PILOT_V0.md`. 70 s,
+deterministic.*
+
+**(C-0) THE GATE ANSWERED NO, AND THE BAN HELD.** `plan_of_record.py` pre-committed both
+branches and a standing ban on *any* GA compute until the gate reported. Frozen
+thresholds, written before the run:
+
+| | property | measured | threshold | |
+|---|---|---|---|---|
+| P1 | nonzero | 15.02 decades | ≥ 1.0 | PASS |
+| P2 | finite | 0.775 | ≥ 0.90 | **FAIL** |
+| P3 | monotone | 0 violations; max \|slope−1\| = 0.366 | 0; ≤ 0.05 | **FAIL** |
+| P4 | resolution-stable | Spearman 0.995, top-3 2/3 | ≥ 0.90; ≥ 2 | PASS |
+| P5 | wide band | 15.02 decades | ≥ 2.0 | PASS |
+| P6 | non-trivial optimum | interior margin 0.161; wall costs 1.5e−04 dec | ≥ 0.05; ≤ 0.05 | PASS |
+
+**The GA did not run.** The search reported below is a DETERMINISTIC grid (295,245
+evaluations), which property 6 needed anyway — so the ban cost the leg nothing except the
+right to call the result a GA result.
+
+**(C-1) THE PLAN'S NAMED SUBSTRATE COULD NOT SUPPLY THE FITNESS, and our own record said
+so.** Chen–Hou's certified 2D profile has no defect to take: the relaxation limit-cycles
+and its residual grows under refinement (§32), and `port_certification.
+radii_polynomial_status` returns `BLOCKED_AT_STEP_ONE` by design. Substituted the **a = 0
+CLM profile**, closed form since 1985, which carries four known answers instead of one:
+the exact pair `(Ω₀, HΩ₀)`; two convergence ladders on two different knobs (spacing
+converges the profile, 4.13e−05 → 4.24e−07 over n = 201…801; **reach** converges the
+recovered constant, `|c_ω+1|` = 6.41e−03 → 1.18e−04 as `1/X_max`); the analytic wall
+`p* = 1` from the `1/X` tail, gated against its own predicted growth rate (×7.39 measured
+vs ×7.39 predicted); and an exact gauge invariance of the fitness, verified to 4.4e−16.
+
+**(C-2) THE PREMISE REPRODUCES — 5604× HERE AGAINST LEG 46'S 5186× — AND THE ABLATION
+SAYS IT IS NOT ABOUT FUNCTION SPACES.** Pin `c_l` with a border row instead of letting it
+come out implicitly, change nothing else, and the same one-constant weight change is worth
+**0.56×**: the "tuned" weight becomes slightly worse than the naive one. Mechanism, in the
+constants: an implicit `c_l` puts `‖A‖_w = 1.69e+08` at the naive weight against 1.69e+06
+at the tuned one; a pinned `c_l` makes that row of `A` a unit vector and the norm never
+sees it. **The weight is preconditioning the border rows, not choosing a space.** Leg 46's
+sentence "closure is a property of the space, not of the object" survives as an
+observation and dies as an explanation.
+
+**(C-3) TWO WALLS, AND ONLY THE ONE NOBODY LOOKED FOR MATTERS.** The analytic wall
+(`p+q ≤ 1`, from the true profile's norm) **never binds**: removing it moves the optimum
+by 1.5e−04 decades and the free optimum sits at 0.901. The wall that binds is measured —
+bisect the far-field power until `Z₁` crosses 1, past which `A` is not an approximate
+inverse at any residual:
+
+| `n` | `p₋` | `Z₁(p=0)` | fitness at leg 46's weight | closes? |
+|---|---|---|---|---|
+| 201 | −3.684 | 9.92e−09 | −2.480 | **✓** |
+| 401 | −2.854 | 1.25e−06 | +1.490 | ✗ |
+| 801 | −1.640 | 4.13e−04 | +5.381 | ✗ |
+| 1601 | −1.003 | 7.55e−02 | +7.933 | ✗ |
+| 3201 | ≥ +3 | **1.64e+01** | +∞ | ✗ |
+
+**The band `(p₋, 1]` shuts at n ≈ 3.2e+03, and the certificate on this object closes only
+at the coarsest grid.** The lower wall is `κ(DF)·ε_mach`, not mathematics — which is a
+number for how long the float rehearsal can be pretended to be a certificate. **This is
+the strongest quantitative argument the project has produced for `L1`'s interval
+arithmetic**, and it arrived out of a property-2 diagnosis.
+
+**(C-4) THE SEARCH BEAT THE HAND BY 8.61×, AND NOT WHERE IT LOOKED.**
+`θ* = (−1.788, −0.750, 2.711, −0.274, −2.878)` → `Y₀/budget = 3.84e−04` against the
+hand-tuned 3.31e−03 and the naive 18.6 (48,270×). The searched `budget` is barely better
+(1.19e−08 vs 1.03e−08) and its `B` is 4.3× **worse**; the entire win is `Y₀`, 7.45×
+smaller, from `w_l ≈ 0.99` — a factor **750** below `X_max` where the hand stopped at 100.
+**The hand was going the right way and stopped early.**
+
+**(C-5) THE NOVELTY LEDGER, AND WHY THE CLAIM IS NARROW.** Fourteen queries. Nothing
+searches the norm of a radii-polynomial certificate — but automatic search for a
+*certificate* is a mature field (SOS / neural Lyapunov, barrier synthesis), so the idea is
+`ADJACENT` and no originality is claimed for it. **Chen–Hou §5.3.3, "Order of choosing the
+parameters", is `PREMISE_CONFIRMED`**: an explicit ordered hand procedure for exactly this
+tuning, by the people who do it best. `novelty_verdict()` returns `PROCEED_NARROW`.
+
+**NEW BANKED LESSON (84). A KNOWN-ANSWER PROBE HAS A WINDOW, AND THE WINDOW IS PART OF THE
+PROBE.** P3's known answer — perturb by `ε`, the fitness must fall with slope exactly 1 —
+is only true for `ε ≲ 1/‖A‖`, and `‖A‖` here is 1.7e+06. Applied at `ε = 10⁻²` it reported
+slope 0.63 and looked like a property of the fitness; it was a property of the probe
+(`‖AF(z+εd) − εd‖/ε` = 16.3 at `ε = 10⁻²`, 0.0085 at `10⁻⁸`). Inside the corrected window
+the known answer returns: **median |slope−1| = 0.0018, worst 0.092.** The threshold was
+NOT moved and P3 is reported FAIL — what the diagnosis buys is not a pass but a
+**resolution**: the fitness tracks a defect to 0.2% typically and 9% at worst, which is
+how finely two weights can honestly be compared.
+
+**NEW BANKED LESSON (85). RE-MEASURE YOUR OWN HEADLINE BEFORE BUILDING A STAGE ON IT, AND
+ABLATE THE MECHANISM AND NOT JUST THE EFFECT.** The 5186× was real, reproduced at 5604×,
+and had the wrong explanation attached to it for three legs. The ablation that found this
+was twenty lines and one changed border row. **An effect that survives replication can
+still not be the thing you named it.**
+
+**CEILING (pre-committed, C0-7).** No link of the `L1→L4` chain moved. CLM has been in
+closed form since 1985; nothing here is certified, and a fitness validated on CLM is not a
+certificate of anything.

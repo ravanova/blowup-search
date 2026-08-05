@@ -1,0 +1,934 @@
+{
+ "route": "C-PILOT",
+ "version": "v0",
+ "question": "Does the certificate-weight fitness pass the six-property viability gate, on an object whose answer is known?",
+ "C0_1_novelty": {
+  "verdict": "PROCEED_NARROW",
+  "note": "nothing searches the norm of a radii-polynomial certificate; but automatic search for a stability certificate is a mature field (2 adjacent entries), so the idea is not new -- only its object is",
+  "n_queries": 14,
+  "search_log": [
+   {
+    "query": "all:\"radii polynomial\" AND all:\"weight\"",
+    "hits": 1,
+    "note": "one hit, an ill-posed-PDE application; no weight search"
+   },
+   {
+    "query": "abs:\"computer-assisted proof\" AND abs:\"genetic algorithm\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"validated numerics\" AND abs:\"optimal weight\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "all:\"weighted\" AND all:\"Newton-Kantorovich\" AND all:\"optimize\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"rigorous numerics\" AND abs:\"weighted\" AND abs:\"sequence space\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "all:\"ell^1_nu\" AND all:\"computer-assisted\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"contraction mapping\" AND abs:\"choice of norm\" AND abs:\"optimal\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"computer-assisted\" AND abs:\"function space\" AND abs:\"search\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"Bayesian optimization\" AND abs:\"formal verification\"",
+    "hits": 0,
+    "note": ""
+   },
+   {
+    "query": "abs:\"machine learning\" AND abs:\"computer-assisted proof\"",
+    "hits": 4,
+    "note": "no weight/space search"
+   },
+   {
+    "query": "abs:\"neural network\" AND abs:\"Lyapunov function\" AND abs:\"verification\"",
+    "hits": 12,
+    "note": "the ADJACENT field -- certificate FUNCTION search, not norm search"
+   },
+   {
+    "query": "abs:\"sum of squares\" AND abs:\"Lyapunov function\" AND abs:\"search\"",
+    "hits": 24,
+    "note": "ditto"
+   },
+   {
+    "query": "abs:\"barrier certificate\" AND abs:\"search\"",
+    "hits": 18,
+    "note": "ditto"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:\"computer-assisted proof\" AND abs:\"blow-up\"",
+    "hits": 2,
+    "note": "profile discovery by PINNs; the certificate space is still hand-chosen"
+   }
+  ],
+  "precedents": [
+   {
+    "id": "SOS / neural Lyapunov + barrier synthesis (a field, not a paper)",
+    "who": "e.g. arXiv:1101.1043 (SOS for fluid stability), arXiv:2312.09131 (PINN Lyapunov functions + verification), arXiv:2105.14311 (barrier certificates via difference-of-convex programming)",
+    "what": "Automatic search for the free function of a stability certificate -- Lyapunov functions, barrier certificates -- by convex optimization or by learning, with a verification step afterwards.",
+    "object_searched": "the certificate FUNCTION for a dynamical system's stability",
+    "verdict": "ADJACENT",
+    "why_not_preempting": "Different object. They search V(x) for a flow; the search here is over the NORM of the Banach space in which a Newton-Kantorovich contraction is measured -- the weight decides whether Y_0, Z_1, Z_2 close, not whether a candidate function satisfies a pointwise inequality. The overlap is real enough that NO originality is claimed for the idea of searching a certificate."
+   },
+   {
+    "id": "arXiv:2210.07191 sec 5.3.3",
+    "who": "J. Chen, T. Hou",
+    "what": "'Order of choosing the parameters': an explicit, ordered, HAND procedure for picking the weights phi_1, phi_2, phi_3 of their weighted L^inf energy estimate -- powers chosen for the vanishing order at 0 and the far-field decay, parameters adjusted for a good damping factor, then the next weight chosen given the previous ones.",
+    "object_searched": "the weights of the certificate's norm -- by hand",
+    "verdict": "PREMISE_CONFIRMED",
+    "why_not_preempting": "This is the human search this stage proposes to automate, written down by the people who did it best. It confirms the premise and pre-empts nothing: no optimizer, no fitness, no reported landscape."
+   },
+   {
+    "id": "arXiv:2302.12877",
+    "who": "Cadiot, Lessard, Nave",
+    "what": "A completed unbounded-domain radii-polynomial certificate. The space (Hilbert/Fourier H^l) and its parameter l are FIXED by hand at the start and the constants are then bounded in it.",
+    "object_searched": "none -- the space is a modelling choice, stated not searched",
+    "verdict": "EXCLUSION",
+    "why_not_preempting": "No search of any kind over the space: l is a modelling decision stated in their section 2 and held fixed for the whole paper. Read for Route-M as the one completed unbounded-domain certificate in this project's library, and it is where the Y_0 budget algebra was gated."
+   },
+   {
+    "id": "arXiv:2509.14185",
+    "who": "Wang, Lai, Gomez-Serrano, Buckmaster et al.",
+    "what": "Machine learning (PINNs) used to DISCOVER unstable self-similar blow-up profiles to near-machine precision, as input to computer-assisted proofs.",
+    "object_searched": "the PROFILE (the object), not the certificate around it",
+    "verdict": "ADJACENT",
+    "why_not_preempting": "The learned thing is the solution; the certificate's function space is still chosen by hand afterwards. Opposite half of the same pipeline."
+   }
+  ]
+ },
+ "C0_2_known_answers": {
+  "profile_distance": [
+   {
+    "n": 201,
+    "newton_residual": 6.161737786669619e-15,
+    "sup_distance_to_exact": 4.130695171478127e-05,
+    "hilbert_error": 0.0018595284583432725,
+    "c_l": 1.0000302380109576,
+    "c_omega": -0.9991170695474417,
+    "newton_ladder": [
+     0.0008935908556716166,
+     3.769142152120625e-08,
+     6.161737786669619e-15
+    ]
+   },
+   {
+    "n": 401,
+    "newton_residual": 6.827871601444713e-15,
+    "sup_distance_to_exact": 2.585876244687313e-06,
+    "hilbert_error": 0.0021021556767121547,
+    "c_l": 1.0000018755773923,
+    "c_omega": -0.9991288836532516,
+    "newton_ladder": [
+     0.0008716472495109496,
+     2.253496458881621e-09,
+     6.827871601444713e-15
+    ]
+   },
+   {
+    "n": 801,
+    "newton_residual": 9.880984919163893e-15,
+    "sup_distance_to_exact": 4.2418874145752974e-07,
+    "hilbert_error": 0.0023662076179426375,
+    "c_l": 1.0000001743514564,
+    "c_omega": -0.9991371489628221,
+    "newton_ladder": [
+     0.0008628050747956739,
+     3.65535847033846e-10,
+     1.4432899320127035e-14,
+     1.1657341758564144e-14,
+     1.0658141036401503e-14,
+     1.0547118733938987e-14,
+     1.5210055437364645e-14,
+     1.454392162258955e-14,
+     1.426636586643326e-14,
+     1.3877787807814457e-14,
+     1.2378986724570495e-14,
+     1.0602629885170245e-14,
+     1.3156142841808105e-14,
+     1.2545520178264269e-14,
+     1.2156942119645464e-14,
+     1.0436096431476471e-14,
+     1.2378986724570495e-14,
+     1.049160758270773e-14,
+     1.0103029524088925e-14,
+     9.880984919163893e-15
+    ]
+   }
+  ],
+  "c_omega_vs_reach": [
+   {
+    "rho_max": 6.0,
+    "X_max": 100.85657868513961,
+    "c_omega": -0.9935856058571758,
+    "error_vs_exact": 0.006414394142824187
+   },
+   {
+    "rho_max": 8.0,
+    "X_max": 745.2394128947751,
+    "c_omega": -0.9991288836532516,
+    "error_vs_exact": 0.0008711163467484129
+   },
+   {
+    "rho_max": 10.0,
+    "X_max": 5506.616437351697,
+    "c_omega": -0.9998822697166131,
+    "error_vs_exact": 0.00011773028338690761
+   }
+  ]
+ },
+ "C0_3_premise": {
+  "leg46_reported_gain_HL": 5186.6,
+  "fitness_naive": 1.2684230895601718,
+  "fitness_tuned_leg46": -2.48010834948216,
+  "gain_implicit_gauge": 5604.429869633475,
+  "gain_stiff_gauge": 0.5604417521590944,
+  "stiff_gauge_naive": -4.623577965213676,
+  "stiff_gauge_tuned": -4.37210844738925,
+  "reproduces": true
+ },
+ "C0_4_gate": {
+  "verdict": "FAIL",
+  "properties": {
+   "P1_nonzero": {
+    "spread_decades": 15.015528642723773,
+    "threshold": 1.0,
+    "pass": true
+   },
+   "P2_finite": {
+    "finite_fraction": 0.775,
+    "threshold": 0.9,
+    "pass": false
+   },
+   "P3_monotone": {
+    "violations": 0,
+    "max_slope_error": 0.3656058258949979,
+    "threshold_violations": 0,
+    "threshold_slope_error": 0.05,
+    "pass": false
+   },
+   "P4_resolution_stable": {
+    "spearman": 0.9950738916256158,
+    "top3_overlap": 2,
+    "threshold_spearman": 0.9,
+    "threshold_overlap": 2,
+    "pass": true
+   },
+   "P5_wide_band": {
+    "band_decades": 15.015528642723773,
+    "threshold": 2.0,
+    "pass": true
+   },
+   "P6_nontrivial_optimum": {
+    "interior_margin": 0.16110625,
+    "threshold_margin": 0.05,
+    "far_field_power_free": 0.9011250000000002,
+    "wall_power": 1.0,
+    "wall_cost_decades": 0.0001539367398293301,
+    "threshold_wall_cost": 0.05,
+    "pass": true
+   }
+  },
+  "labels": [
+   "ctrl_naive",
+   "ctrl_tuned_leg46",
+   "triv_wl_tiny",
+   "triv_wl_huge",
+   "triv_at_wall",
+   "triv_cancel",
+   "triv_L_tiny",
+   "triv_L_huge",
+   "rand_00",
+   "rand_01",
+   "rand_02",
+   "rand_03",
+   "rand_04",
+   "rand_05",
+   "rand_06",
+   "rand_07",
+   "rand_08",
+   "rand_09",
+   "rand_10",
+   "rand_11",
+   "rand_12",
+   "rand_13",
+   "rand_14",
+   "rand_15",
+   "rand_16",
+   "rand_17",
+   "rand_18",
+   "rand_19",
+   "rand_20",
+   "rand_21",
+   "rand_22",
+   "rand_23",
+   "rand_24",
+   "rand_25",
+   "rand_26",
+   "rand_27",
+   "rand_28",
+   "rand_29",
+   "rand_30",
+   "rand_31"
+  ],
+  "theta": [
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -2.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -6.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0
+   ],
+   [
+    0.95,
+    0.0,
+    0.0,
+    0.0,
+    -2.0
+   ],
+   [
+    1.5,
+    0.0,
+    -1.5,
+    2.872295815024644,
+    -2.0
+   ],
+   [
+    0.5,
+    -3.0,
+    0.0,
+    0.0,
+    -2.0
+   ],
+   [
+    0.5,
+    3.0,
+    0.0,
+    0.0,
+    -2.0
+   ],
+   [
+    1.0956934985716344,
+    -1.3812797174167781,
+    -3.6722118085104425,
+    -2.9008341868288254,
+    0.5061619136021793
+   ],
+   [
+    -2.594755035179528,
+    2.1790735340993193,
+    0.3316897619927337,
+    -1.2017286567756913,
+    -2.6185022304187324
+   ],
+   [
+    -3.7734426308362963,
+    -2.254300341002616,
+    1.3649953175490426,
+    0.8831370694455005,
+    -1.0769191081499692
+   ],
+   [
+    1.5075738445675206,
+    -0.6664714561253771,
+    -2.9192279598207103,
+    1.3289300411644902,
+    -1.797165420194193
+   ],
+   [
+    -2.7977642648412875,
+    -0.29796380010427814,
+    2.370594162298354,
+    -1.6161467460375154,
+    -5.583829591484723
+   ],
+   [
+    -0.7635852814277744,
+    -1.808921732944468,
+    -3.273975635047025,
+    0.48199431592110376,
+    -3.610430937448619
+   ],
+   [
+    1.0328652123176738,
+    2.562927318407205,
+    -0.47698276227372816,
+    2.7275429621444234,
+    -2.000833490498824
+   ],
+   [
+    3.4193914289964793,
+    2.8075571395478782,
+    -3.8823495602770457,
+    2.1818405414734547,
+    1.8495603205307543
+   ],
+   [
+    0.10206978609662443,
+    2.574625324782037,
+    -3.471340026207402,
+    2.0479036776742996,
+    -5.466479929863189
+   ],
+   [
+    -2.0665942872452403,
+    2.3287099239550795,
+    -2.193044572661405,
+    -2.252671764988299,
+    -3.693353943939379
+   ],
+   [
+    -0.6968292585528584,
+    1.9087258258254627,
+    1.012051699358028,
+    2.7544658561846536,
+    -3.044764711266553
+   ],
+   [
+    -3.9203635135416643,
+    -0.8097230534503761,
+    -3.370959702674881,
+    0.9156874580198306,
+    -3.8092072112035424
+   ],
+   [
+    1.6212165652782904,
+    2.662808561652545,
+    -2.985463181910018,
+    2.188669772404644,
+    -5.524286787197292
+   ],
+   [
+    -0.9538359335128845,
+    -0.42135563292853995,
+    -0.08920362533228587,
+    2.858773931616267,
+    0.20552950481462684
+   ],
+   [
+    -1.245634152301398,
+    2.9695040889655067,
+    -1.4724516370583984,
+    -1.9037257264406253,
+    1.0407849704325578
+   ],
+   [
+    2.8856112763814217,
+    -1.517119558067355,
+    -2.870027544791747,
+    1.0203710958896153,
+    -0.2830517067619782
+   ],
+   [
+    -2.6635765697418226,
+    -0.6266563613707441,
+    3.282046129728438,
+    0.3684046053013379,
+    -1.3733126805898186
+   ],
+   [
+    -2.4469618168736513,
+    0.156133491707251,
+    0.18747781915935935,
+    -2.466386158522368,
+    1.8555415450136499
+   ],
+   [
+    -1.44254690973868,
+    -1.8749537056332906,
+    1.3802130713349543,
+    -1.8293556092591698,
+    -1.3784968598571261
+   ],
+   [
+    0.8179134110370061,
+    2.7745385587462863,
+    -3.421877875760986,
+    -0.00016305804828897763,
+    -0.047220165738814046
+   ],
+   [
+    -2.5821860762027296,
+    -0.6715996092928846,
+    -3.4968360123602293,
+    1.3552851826546606,
+    -5.297856905924106
+   ],
+   [
+    -0.8392663331362593,
+    2.241135786724393,
+    -0.22159730599990812,
+    2.4757316018453137,
+    0.1273369419109791
+   ],
+   [
+    3.322591680894127,
+    -2.2355819457065618,
+    -3.4114967573549437,
+    -2.578042478584692,
+    0.9508343547785545
+   ],
+   [
+    1.072559834779546,
+    -0.020569837206881658,
+    -2.691652670428158,
+    1.0424006263636425,
+    -3.455860897233616
+   ],
+   [
+    -2.5364534025942502,
+    2.7781148407456033,
+    2.407336292868872,
+    -0.11243702054838867,
+    0.5082725134370838
+   ],
+   [
+    -0.6189728286017502,
+    2.2651734352307766,
+    -3.305481022280847,
+    1.2505125414831966,
+    0.313236989641168
+   ],
+   [
+    -0.6604151023649614,
+    0.2484599017809872,
+    -3.0990906756755425,
+    -0.5583131961641632,
+    -5.997594479144617
+   ],
+   [
+    1.9550458107791924,
+    2.111255473405542,
+    -2.8885465670384196,
+    1.222714615600787,
+    0.56882470715711
+   ],
+   [
+    -0.8689565895626865,
+    -2.5575539196131647,
+    -0.1906642942640353,
+    -0.4287623511424572,
+    -2.610100456236421
+   ],
+   [
+    3.174409858110079,
+    0.4999202815408559,
+    -3.6782542327631944,
+    1.2689209447065481,
+    -1.4477931658931347
+   ],
+   [
+    -2.631828479834607,
+    -0.6499512032765828,
+    2.024399918925411,
+    -0.3646264088501612,
+    -1.2929591245662815
+   ],
+   [
+    -2.9811322246266316,
+    1.3567410656038819,
+    -1.7593407850680043,
+    -1.8562946375758906,
+    0.9035999886655564
+   ]
+  ],
+  "fitness_coarse": [
+   1.2684230895601716,
+   -2.4801083494821605,
+   0.4025023673535729,
+   5.2650887687614105,
+   -2.604070209270744,
+   -1.3122373966619931,
+   -1.1271151645723811,
+   -2.478824042991808,
+   Infinity,
+   -2.3723118564396772,
+   Infinity,
+   -1.2120793566683188,
+   5.073349630092777,
+   12.411458433453028,
+   -2.4810155185280687,
+   6.199658690126525,
+   -0.20869015082948061,
+   Infinity,
+   -2.500238308929368,
+   Infinity,
+   -0.12437718197882874,
+   4.188360241282713,
+   Infinity,
+   6.8096757446580085,
+   1.1455951776237496,
+   10.110129039017083,
+   -1.1466822452638235,
+   Infinity,
+   Infinity,
+   1.5902553776112809,
+   5.716504421044075,
+   -1.8410794710120546,
+   3.33297476945827,
+   6.7632420630609635,
+   Infinity,
+   4.925974347472995,
+   2.2656051787334492,
+   -1.7546077541545584,
+   1.0399561518626683,
+   Infinity
+  ],
+  "fitness_fine": [
+   5.109331508760587,
+   1.4904021648346635,
+   4.495904450639317,
+   9.11344274442178,
+   1.4011653226775056,
+   2.7010871587730567,
+   2.884236162916589,
+   1.4912042817585989,
+   Infinity,
+   1.7229483817568203,
+   Infinity,
+   2.8138479173220463,
+   9.222692009482213,
+   Infinity,
+   1.4889016605057057,
+   10.132287901956294,
+   3.925038012113476,
+   Infinity,
+   1.5708113965431874,
+   Infinity,
+   3.9951021439631544,
+   8.10440969474277,
+   Infinity,
+   10.8105644714358,
+   5.00844849602824,
+   Infinity,
+   2.72264852759122,
+   Infinity,
+   Infinity,
+   5.42860254759366,
+   9.584971272335663,
+   2.2185188775545615,
+   7.206430784247136,
+   11.100450590837625,
+   Infinity,
+   8.85720650554576,
+   6.149165201629683,
+   2.186187381144059,
+   4.927832076980417,
+   Infinity
+  ],
+  "newton_ladder_coarse": [
+   0.0008935908556716166,
+   3.769142152120625e-08,
+   6.161737786669619e-15
+  ],
+  "defect_ladder": {
+   "eps": [
+    0.01,
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06
+   ],
+   "slopes": [
+    1.0088215640236715,
+    1.0088224574207507,
+    0.9842184942554014,
+    1.008798955520285,
+    0.6361570338021131,
+    0.745953594113759,
+    0.6343941741050021,
+    1.0088224559975532,
+    NaN,
+    0.825456289218816,
+    NaN,
+    0.7103462196904591,
+    1.0003644930365652,
+    0.8971864056762955,
+    1.008822445648034,
+    1.008796065732725,
+    0.9914744439131135,
+    NaN,
+    0.9898932928863722,
+    NaN,
+    0.9916988348978183,
+    1.0088516898032376,
+    NaN,
+    0.6613168777962669,
+    1.008698527201886,
+    0.9664970787113305,
+    1.0087770901422597,
+    NaN,
+    NaN,
+    1.0088215397046782,
+    1.0085729212374117,
+    0.8416576657974593,
+    0.749363946970198,
+    1.0091975308513403,
+    NaN,
+    1.0088453578203724,
+    0.9961533598106476,
+    0.6479931184966368,
+    1.0087565022767133,
+    NaN
+   ]
+  },
+  "optimum_box": {
+   "theta": [
+    -1.7878937499999998,
+    -0.75,
+    2.71115,
+    -0.2737546875,
+    -2.8775
+   ],
+   "fitness": -3.4152505382431393,
+   "evaluations": 295245
+  },
+  "optimum_free": {
+   "theta": [
+    -1.8029,
+    -0.727490625,
+    2.704025,
+    -0.25124531249999993,
+    -2.8775
+   ],
+   "fitness": -3.4154044749829686
+  },
+  "single_predictor_r2": {
+   "p": 0.005419240905179423,
+   "log10_L": 0.03275092731799745,
+   "q": 0.04922245425287519,
+   "log10_l": 0.051347985895902504,
+   "log10_w_l_over_Xmax": 0.16333624661041568,
+   "far_field_power": 0.21142415369447454
+  }
+ },
+ "C0_4_p3_diagnosis": {
+  "A_norm_at_tuned": 1688501.0504770018,
+  "linearity_check": [
+   {
+    "eps": 0.01,
+    "rel_dev_from_eps_d": 16.306101594972443
+   },
+   {
+    "eps": 0.0001,
+    "rel_dev_from_eps_d": 4.394610550448744
+   },
+   {
+    "eps": 1e-06,
+    "rel_dev_from_eps_d": 0.05940331600339563
+   },
+   {
+    "eps": 1e-08,
+    "rel_dev_from_eps_d": 0.008508048544823931
+   }
+  ],
+  "window": [
+   1e-06,
+   1e-07,
+   1e-08,
+   1e-09
+  ],
+  "median_abs_slope_error": 0.0017795783331661097,
+  "max_abs_slope_error": 0.0918566859838692,
+  "monotone_violations": 0
+ },
+ "C0_5_search": {
+  "method": "deterministic grid + 4 refinements (NOT the GA: banned until C0-4)",
+  "gene_names": [
+   "p",
+   "log10_L",
+   "q",
+   "log10_l",
+   "log10_w_l_over_Xmax"
+  ],
+  "box_lower": [
+   -4.0,
+   -3.0,
+   -4.0,
+   -3.0,
+   -6.0
+  ],
+  "box_upper": [
+   4.0,
+   3.0,
+   4.0,
+   3.0,
+   2.0
+  ],
+  "theta_star": [
+   -1.7878937499999998,
+   -0.75,
+   2.71115,
+   -0.2737546875,
+   -2.8775
+  ],
+  "fitness_star": -3.4152505382431393,
+  "evaluations": 295245,
+  "fitness_naive": 1.2684230895601718,
+  "fitness_tuned_leg46": -2.48010834948216,
+  "gain_over_naive": 48269.59198384762,
+  "gain_over_tuned": 8.612756891720085,
+  "interior_margin": 0.16110625,
+  "far_field_power": 0.9232562500000001,
+  "constants": {
+   "naive": {
+    "Y0": 3.4042916374701123e-09,
+    "Z1": 9.919934722210439e-07,
+    "Z2": 2724993522.6661196,
+    "A_norm": 168850095.79027393,
+    "B": 8.069268512736858,
+    "H_norm": 7.005341467179166,
+    "XD_norm": 47.64095389951238,
+    "w_l": 745.2394128947751,
+    "budget": 1.8348631064554727e-10
+   },
+   "tuned_leg46": {
+    "Y0": 3.4042916374701123e-11,
+    "Z1": 9.922695493821761e-09,
+    "Z2": 48622231.669129275,
+    "A_norm": 1688501.0504770018,
+    "B": 14.398046022948428,
+    "H_norm": 7.005341467179166,
+    "XD_norm": 47.64095389951238,
+    "w_l": 7.452394128947751,
+    "budget": 1.028336160050752e-08
+   },
+   "searched": {
+    "Y0": 4.568997889372729e-12,
+    "Z1": 4.23585541905887e-09,
+    "Z2": 42062831.56709054,
+    "A_norm": 336916.9994770713,
+    "B": 62.423136310094534,
+    "H_norm": 9.643876039061714,
+    "XD_norm": 51.162488112883885,
+    "w_l": 0.988088432416367,
+    "budget": 1.1886979005838936e-08
+   }
+  },
+  "ga_run": false,
+  "ga_reason": "plan_of_record bans GA compute on a fitness that has not passed the gate; C0-4 reports FAIL"
+ },
+ "C0_6_walls": {
+  "analytic_upper_wall": 1.0,
+  "derivation": "|Omega_0| ~ |X|^-1, so nu ~ |X|^(p+q) gives the TRUE profile an infinite weighted sup norm for p+q > 1",
+  "ladder": [
+   {
+    "n": 201,
+    "X_max": 745.2394128947751,
+    "newton_residual": 6.161737786669619e-15,
+    "p_minus": -3.683656314242782,
+    "wall_power_analytic": 1.0,
+    "Z1_at_p0": 9.922695493821761e-09,
+    "fitness_tuned": -2.48010834948216,
+    "fitness_naive": 1.2684230895601718,
+    "Y0_tuned": 3.4042916374701123e-11,
+    "Z1_tuned": 9.922695493821761e-09,
+    "Z2_tuned": 48622231.669129275,
+    "closes": true
+   },
+   {
+    "n": 401,
+    "X_max": 745.2394128947751,
+    "newton_residual": 6.827871601444713e-15,
+    "p_minus": -2.853645982985782,
+    "wall_power_analytic": 1.0,
+    "Z1_at_p0": 1.2510052866378578e-06,
+    "fitness_tuned": 1.4904021648346637,
+    "fitness_naive": 5.109331508760587,
+    "Y0_tuned": 5.41262441002309e-09,
+    "Z1_tuned": 1.2510052866378578e-06,
+    "Z2_tuned": 2857348354.51429,
+    "closes": false
+   },
+   {
+    "n": 801,
+    "X_max": 745.2394128947751,
+    "newton_residual": 9.880984919163893e-15,
+    "p_minus": -1.6399371759886634,
+    "wall_power_analytic": 1.0,
+    "Z1_at_p0": 0.0004130804376186328,
+    "fitness_tuned": 5.380638266064737,
+    "fitness_naive": 8.838695519820083,
+    "Y0_tuned": 6.588698085838797e-07,
+    "Z1_tuned": 0.0004130804376186328,
+    "Z2_tuned": 182158646998.69495,
+    "closes": false
+   },
+   {
+    "n": 1601,
+    "X_max": 745.2394128947751,
+    "newton_residual": 5.112577028398846e-14,
+    "p_minus": -1.003469194468451,
+    "wall_power_analytic": 1.0,
+    "Z1_at_p0": 0.0754609025909899,
+    "fitness_tuned": 7.933231021419605,
+    "fitness_naive": 12.300781146381603,
+    "Y0_tuned": 2.8653524571769134e-06,
+    "Z1_tuned": 0.0754609025909899,
+    "Z2_tuned": 12790088166131.234,
+    "closes": false
+   },
+   {
+    "n": 3201,
+    "X_max": 745.2394128947751,
+    "newton_residual": 1.337778499088671e-10,
+    "p_minus": 2.9999999999998437,
+    "wall_power_analytic": 1.0,
+    "Z1_at_p0": 16.388530522828518,
+    "fitness_tuned": Infinity,
+    "fitness_naive": Infinity,
+    "Y0_tuned": 0.0028966461490213084,
+    "Z1_tuned": 16.388530522828518,
+    "Z2_tuned": 1234156633076974.0,
+    "closes": false
+   }
+  ]
+ },
+ "C0_6_censoring": {
+  "censored": 9,
+  "total": 40,
+  "max_far_field_power_among_censored": -2.4084473132872537,
+  "min_far_field_power_among_finite": -4.037560916474799,
+  "p_minus_at_n201": -3.683656314242782
+ },
+ "C0_7_ceiling": "No link of the L1->L4 chain moved. The object here is CLM, whose profile has been in closed form since 1985; nothing is certified by this leg and no novelty is claimed for the idea of searching a certificate (see C0-1).",
+ "verdict": "FAIL",
+ "elapsed_s": 73.65046286582947
+}

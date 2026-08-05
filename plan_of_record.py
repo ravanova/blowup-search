@@ -235,10 +235,60 @@ STAGES = [
             "proved case (Euler) and the open one (NS). Say that in every writeup."),
     },
     {
+        "id": "C-PILOT",
+        "name": ("Pilot: evolve the Lyapunov weight, on an object with a KNOWN answer "
+                 "-- GATE ANSWERED NO, leg 49; the GA was NOT run"),
+        "status": "DONE",
+        "why_here": (
+            "The narrowest member of the re-framing, and the right first bite: the fitness is "
+            "ONE NUMBER (the worst-case coercivity constant of the linearized operator under "
+            "a searched weight) and the constraint is checkable pointwise. Run where the "
+            "answer is known so the fitness itself can be validated before it is trusted."),
+        "deliverable": (
+            "A searched weight beating the hand-picked one on a known-answer object, with the "
+            "six-property viability gate re-run ON THE NEW FITNESS before any GA compute."),
+        "gate": {
+            "question": "Does the new fitness pass the six-property viability gate?",
+            "if_yes": "Proceed to stage B with the validated fitness.",
+            "if_no": ("STOP. Do not run the GA. Stage 3.5 is the precedent and it is "
+                      "non-negotiable -- a fitness that fails the gate produces confident "
+                      "garbage at scale."),
+            "answer": (
+                "**NO, leg 49 (Route-C-PILOT v0). 4 of 6 on the FROZEN predicate, and the "
+                "NO branch was taken: no GA compute has touched this fitness.** P2 finite "
+                "0.775 < 0.90 (nine of forty roster weights have Z_1 >= 1, so A is not an "
+                "approximate inverse in that norm at any residual); P3 max|slope-1| = 0.092 "
+                "> 0.05 against the known answer that Y_0 is linear in an injected defect "
+                "-- and the probe's own window had to be diagnosed first (the linear regime "
+                "starts at eps ~ 1/||A|| = 5.9e-07; median |slope-1| is 0.0018 inside it). "
+                "The deterministic grid that property 6 needed anyway found a weight beating "
+                "the naive one by 48,270x and leg 46's hand-tuned constant by 8.61x. TWO "
+                "further findings re-price stage B: (i) leg 46's 5186x reproduces at 5604x "
+                "but COLLAPSES TO 0.56x when c_l is pinned by a border row instead of coming "
+                "out implicitly, so the weight is preconditioning the border rows and not "
+                "choosing a function space; (ii) the analytic wall p* = 1 NEVER BINDS "
+                "(removing it costs 1.5e-04 decades), while a MEASURED lower wall Z_1 = 1 "
+                "climbs with refinement -- p_- = -3.68, -2.85, -1.64, -1.00 at n = 201, 401, "
+                "801, 1601 -- until the admissible band is EMPTY at n = 3201. The "
+                "certificate on this object closes only at the coarsest grid, and the reason "
+                "is float conditioning, not the equation."),
+        },
+        "time_box": "one leg",
+        "sequel": (
+            "Stage B does NOT start on this fitness. Both repairs are engineering, not "
+            "research, and neither is worth a leg on its own: carry the MEASURED lower wall "
+            "in the box as the analytic one already is (P2), and state the fitness's "
+            "defect-tracking accuracy as a resolution rather than assuming it exact (P3). "
+            "The leg's third finding is the one that should set the order of work: the float "
+            "rehearsal's Z_1 kills every weight at n ~ 3.2e3, which is the strongest "
+            "quantitative case this project has produced for L1's interval arithmetic. Do L1 "
+            "first."),
+    },
+    {
         "id": "L1",
         "name": ("Certify HL_S2_nonsymmetric FOR REAL: interval arithmetic + an analytic "
                  "far-field enclosure"),
-        "status": "QUEUED",
+        "status": "NEXT",
         "why_here": (
             "The ONLY movable link of the chain (L2 and L3 are occupied by Chen-Hou, L4 is "
             "out of reach by Wall 2), a novel result in its own right, AND the prerequisite "
@@ -262,27 +312,6 @@ STAGES = [
                       "comes next."),
         },
         "time_box": "two legs minimum; the tail lemma is mathematics, not compute",
-    },
-    {
-        "id": "C-PILOT",
-        "name": "Pilot: evolve the Lyapunov weight, on an object with a KNOWN answer",
-        "status": "NEXT",
-        "why_here": (
-            "The narrowest member of the re-framing, and the right first bite: the fitness is "
-            "ONE NUMBER (the worst-case coercivity constant of the linearized operator under "
-            "a searched weight) and the constraint is checkable pointwise. Run where the "
-            "answer is known so the fitness itself can be validated before it is trusted."),
-        "deliverable": (
-            "A searched weight beating the hand-picked one on a known-answer object, with the "
-            "six-property viability gate re-run ON THE NEW FITNESS before any GA compute."),
-        "gate": {
-            "question": "Does the new fitness pass the six-property viability gate?",
-            "if_yes": "Proceed to stage B with the validated fitness.",
-            "if_no": ("STOP. Do not run the GA. Stage 3.5 is the precedent and it is "
-                      "non-negotiable -- a fitness that fails the gate produces confident "
-                      "garbage at scale."),
-        },
-        "time_box": "one leg",
     },
     {
         "id": "B",
@@ -322,7 +351,15 @@ BANNED = [
     ("re-testing the scaling gauge as the near-null direction",
      "never -- leg 44 L-7 refuted it"),
     ("the PORT itself", "M"),
-    ("any GA compute on an unvalidated fitness", "C-PILOT"),
+    ("any GA compute on an unvalidated fitness -- C-PILOT's gate ANSWERED NO at leg 49 "
+     "(4/6), so this ban did NOT lift when the stage closed",
+     "never -- only a re-run of the six-property gate that PASSES on a repaired fitness"),
+    ("reading the float rehearsal's closure as resolution-independent -- leg 49 measured "
+     "the certificate on the CLM object closing ONLY at n=201 and the admissible weight "
+     "band going EMPTY at n=3201, because Z_1 is float conditioning", "L1"),
+    ("repeating 'closure is a property of the SPACE' as an explanation -- leg 49's gauge "
+     "ablation put the 5604x in the BORDER ROWS: pin c_l and it collapses to 0.56x",
+     "never -- the observation stands, the explanation does not"),
     ("another literature leg beyond M's three questions", "M"),
     ("re-opening stage V as posed -- the novelty gate answered YES on 2026-08-04 "
      "(arXiv:2410.05480 verifies CGL branches in the dissipation parameter, in interval "
@@ -355,6 +392,12 @@ DISCIPLINE = [
     (74, "Test all the suspects at once -- a battery costs about what the guesses cost."),
     (75, "Two defects in the same problem are not the same defect."),
     (76, "Keep the NEGATIVE construction in the artifact, or the next session re-tries it."),
+    (84, "A known-answer probe has a WINDOW, and the window is part of the probe -- leg 49's "
+         "slope-1 test was valid only for eps <~ 1/||A||, and outside it reported a property "
+         "of the probe as a property of the fitness."),
+    (85, "Re-measure your own headline before building a stage on it, and ablate the "
+         "MECHANISM and not just the effect -- leg 46's 5186x replicated at 5604x and still "
+         "had the wrong explanation attached to it for three legs."),
 ]
 
 

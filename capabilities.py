@@ -208,6 +208,23 @@ CAPABILITIES = [
                    "eps*; the figure calibration self-checks against Table 1 to 1.0e-05; "
                    "the defect discriminates 351x under a 1e-04 kappa perturbation"),
      "test": "test_viscous_novelty.py"},
+    {"module": "solver/weight_search.py",
+     "object": "SEARCHING the certificate's function space (Route-C-PILOT, leg 49)",
+     "holds": ("BorderedCLM -- the a=0 CLM steady system bordered with (c_l, c_omega) as "
+               "IMPLICIT unknowns, exact analytic Jacobian, exact quadratic remainder; the "
+               "weight fitness log10(Y_0/budget) over a two-factor algebraic weight family "
+               "plus the scalar border weights; FitnessEngine (batched, Jacobian inverted "
+               "once); the FROZEN six-property viability gate; grid_search; lower_wall; "
+               "PRECEDENTS + novelty_verdict()"),
+     "validated": ("the closed-form CLM profile nulls the residual and Newton converges to "
+                   "it, 4.13e-05 -> 4.24e-07 over n=201..801, with c_omega -> -1 as "
+                   "1/X_max; F(z+v)=F(z)+DF v+Q(v,v) to 9.7e-16; the fitness's global "
+                   "gauge invariance to 4.4e-16; the analytic wall's growth rate x7.39 "
+                   "measured vs x7.39 predicted. THE VERDICT IS PART OF THE ENTRY: the "
+                   "gate returns FAIL 4/6 (P2 finite 0.775 < 0.90, P3 max|slope-1| 0.092 > "
+                   "0.05), so NO GA has been run on this fitness, and the admissible band "
+                   "shuts entirely at n ~ 3.2e3 because Z_1 is float conditioning"),
+     "test": "test_weight_search.py"},
     {"module": "solver/target_selection.py", "object": "which object to certify (Route-M)",
      "holds": ("TARGET_LEDGER: six candidates x three questions; CERTIFICATION_RECORD; "
                "the radii-polynomial Y_0 BUDGET; the 3D-NS preprint closure audit"),
