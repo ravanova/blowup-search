@@ -452,7 +452,7 @@ def far_field_power(theta):
     return float(theta[0]) + float(theta[2])
 
 
-def in_box(theta, lower_wall_power=None):
+def in_box(theta, lower_wall_power=None, wall2d=None):
     """The analytic wall K3 (upper), as a hard constraint -- derived from the profile's
     tail BEFORE any run, so it is the equation's wall, not a fitted one -- AND, the P2
     repair, the MEASURED lower wall (`lower_wall()`), carried the same way.
@@ -460,7 +460,11 @@ def in_box(theta, lower_wall_power=None):
     `lower_wall_power` is None by default, which reproduces the pre-repair behaviour
     exactly (only the upper wall applies) -- callers that have measured a lower wall
     for their resolution (the six-property gate; anything built off a `FitnessEngine`
-    with `lower_wall_power` set) pass it through."""
+    with `lower_wall_power` set) pass it through.
+
+    `wall2d` is leg 59's 2-D model of the SAME conditioning wall (a `TwoFactorWall`).
+    None reproduces the previous behaviour exactly; supplying it replaces the
+    half-plane in p+q with the measured level set of the weight's log-range."""
     t = np.asarray(theta, dtype=float)
     if np.any(t < BOX_LOWER) or np.any(t > BOX_UPPER):
         return False
@@ -469,7 +473,142 @@ def in_box(theta, lower_wall_power=None):
         return False
     if lower_wall_power is not None and ffp < lower_wall_power + WALL_LOWER_DELTA:
         return False
+    if wall2d is not None and not wall2d.admits(t):
+        return False
     return True
+
+
+# --- THE 2-D WALL (leg 59, Route-WV) ----------------------------------------------
+# The lower wall above is a 1-D SLICE. `lower_wall()` sweeps ONE power on the
+# single-factor slice nu = (1+X^2)^(p/2) at w_l = 0.01 X_max, finds where Z_1 crosses
+# 1, and then `in_box` applies that crossing to the SUM p+q -- i.e. it assumes the
+# admissible set is a half-plane in the far-field power. It is not, and the mechanism
+# is not subtle: in this float rehearsal M = I - A DF is roundoff, so
+#
+#     Z_1 = max_i w_i sum_j |M_ij| / w_j  ~  eps * kappa * (max_i w_i / min_j w_j),
+#
+# which is controlled by the weight vector's DYNAMIC RANGE, not by its far-field
+# power. Two weights with the SAME p+q have different ranges as soon as the two
+# algebraic factors have different scales L != l (nu then dips or peaks INSIDE the
+# domain), and the border weight w_l enters the range too. So the wall is a level set
+# of the range in the (p, q) plane -- a curve, not a half-plane -- and the 1-D model
+# is that curve's intersection with one line.
+#
+# THE CALIBRATION IS INHERITED, NOT REFITTED. `two_factor_wall()` runs the SAME frozen
+# bisection `lower_wall()` runs, and then reads off the log-range AT that crossing.
+# On the slice the two models therefore agree exactly, by construction; off it they
+# disagree, and that disagreement is the thing this leg measures. No threshold moves.
+WALL_RANGE_DELTA = 0.0     # the range wall is used as measured -- the 1-D wall's own
+                           # WALL_LOWER_DELTA already sets the standoff on its slice
+
+
+def weight_log_range(problem, theta):
+    """MEASURED log10(max_i w_i / min_i w_i) over the full weight vector (nu, w_l, w_om).
+
+    This is the quantity the float conditioning actually sees. Gauge invariant by
+    construction -- a global rescale of the weight cancels in the ratio -- which is
+    the same invariance the fitness itself has."""
+    w, _ = problem.weight_vector(np.asarray(theta, dtype=float))
+    return float(np.log10(np.max(w) / np.min(w)))
+
+
+def log_range_analytic(problem, theta):
+    """The SAME quantity in closed form, from the two-factor geometry.
+
+    log10 nu(X) = (p/2) log10(1+(X/L)^2) + (q/2) log10(1+(X/l)^2) is stationary in X^2
+    where p/(X^2+L^2) + q/(X^2+l^2) = 0, i.e. at X_ext^2 = -(p l^2 + q L^2)/(p+q).
+    The extremes over the grid are therefore attained among four candidates -- X = 0
+    (log10 nu = 0), X = X_max, that interior stationary point when it is real and
+    inside the domain, and the two border weights log10 w_l, log10 w_om = 0. The max
+    minus the min over those candidates is the range.
+
+    Kept separate from `weight_log_range` on purpose: agreement between the two is a
+    known-answer check on the geometry (`test_weight_search.py` gate 10), and it is
+    the reason the wall can be evaluated for a candidate weight without touching the
+    grid."""
+    p, logL, q, logl, logwl = (float(t) for t in np.asarray(theta, dtype=float))
+    L, l = 10.0 ** logL, 10.0 ** logl
+    Xmax = float(np.abs(problem.X).max())
+
+    def lognu(X):
+        return (0.5 * p * np.log10(1.0 + (X / L) ** 2)
+                + 0.5 * q * np.log10(1.0 + (X / l) ** 2))
+
+    cands = [0.0, lognu(Xmax), np.log10(Xmax) + logwl, 0.0]
+    if abs(p + q) > 1e-12:
+        x2 = -(p * l * l + q * L * L) / (p + q)
+        if 0.0 < x2 <= Xmax * Xmax:
+            cands.append(lognu(np.sqrt(x2)))
+    return float(max(cands) - min(cands))
+
+
+def weighted_sup_analytic(theta, Xmax, n_scan=4001):
+    """sup_X nu(X) |Omega_0(X)| for the EXACT profile, from the geometry, not the grid.
+
+    This is the analytic wall K3's quantity, re-derived in the two-factor geometry.
+    With Omega_0(X) = -4X/(1+4X^2),
+
+        d log g / d log X  =  s(X) + (1 - 4X^2)/(1 + 4X^2),
+        s(X) = p r_L/(1+r_L) + q r_l/(1+r_l),   r_L = (X/L)^2, r_l = (X/l)^2,
+
+    so the sup is attained either at a root of that explicit equation or at the domain
+    edge X = X_max. The 1-D reading -- "the norm grows like X_max^(p+q-1)" -- is the
+    edge branch ONLY. When the two factors carry opposite-sign powers the weight has
+    an interior peak, the sup sits there, and the edge branch is simply not the
+    answer: the growth law changes even though p+q has not.
+
+    The scan locates sign changes of the derivative and bisects them; it is a root
+    find on a closed-form expression, not a maximum of sampled data."""
+    p, logL, q, logl = (float(t) for t in np.asarray(theta, dtype=float)[:4])
+    L, l = 10.0 ** logL, 10.0 ** logl
+
+    def dlog(X):
+        rL, rl = (X / L) ** 2, (X / l) ** 2
+        return (p * rL / (1.0 + rL) + q * rl / (1.0 + rl)
+                + (1.0 - 4.0 * X * X) / (1.0 + 4.0 * X * X))
+
+    def g(X):
+        lg = (0.5 * p * np.log1p((X / L) ** 2) + 0.5 * q * np.log1p((X / l) ** 2))
+        return np.exp(np.clip(lg, -LOG_NU_CLIP, LOG_NU_CLIP)) * abs(exact_profile(X))
+
+    xs = np.logspace(np.log10(1e-6), np.log10(Xmax), n_scan)
+    d = np.array([dlog(x) for x in xs])
+    cands = [g(Xmax)]
+    for i in np.where(np.sign(d[:-1]) != np.sign(d[1:]))[0]:
+        a, b = xs[i], xs[i + 1]
+        for _ in range(60):
+            m = np.sqrt(a * b)
+            if np.sign(dlog(m)) == np.sign(dlog(a)):
+                a = m
+            else:
+                b = m
+        cands.append(g(np.sqrt(a * b)))
+    return float(max(cands))
+
+
+class TwoFactorWall:
+    """The measured conditioning wall, stated in both weight factors.
+
+    `r_crit` is the log-range at the 1-D wall's own bisected crossing, so the model
+    reproduces `lower_wall()` exactly on the slice that measured it. `admits` is the
+    2-D generalisation: any weight whose log-range exceeds `r_crit` sits past the
+    conditioning wall, whatever its far-field power."""
+
+    def __init__(self, problem, r_crit, p_minus=None, w_l_gene=-2.0):
+        self.problem = problem
+        self.r_crit = float(r_crit)
+        self.p_minus = p_minus
+        self.w_l_gene = w_l_gene
+
+    def log_range(self, theta):
+        return log_range_analytic(self.problem, theta)
+
+    def admits(self, theta):
+        return bool(self.log_range(theta) <= self.r_crit - WALL_RANGE_DELTA)
+
+    def as_dict(self):
+        return {"r_crit": self.r_crit, "p_minus_1d": self.p_minus,
+                "w_l_gene": self.w_l_gene, "delta": WALL_RANGE_DELTA}
 
 
 class FitnessEngine:
@@ -481,13 +620,15 @@ class FitnessEngine:
     (which `plan_of_record.py` bans until the gate reports).
     """
 
-    def __init__(self, problem, z, lower_wall_power=None):
+    def __init__(self, problem, z, lower_wall_power=None, wall2d=None):
         self.pr = problem
         self.z = np.array(z, dtype=float)
         # P2 repair: the measured lower wall for THIS problem/resolution, carried in
         # the box the same way the analytic upper wall already is. None reproduces the
         # pre-repair behaviour (upper wall only).
         self.lower_wall_power = lower_wall_power
+        # leg 59: the same wall in both factors. None reproduces leg 50 exactly.
+        self.wall2d = wall2d
         self.J = problem.jacobian(self.z)
         self.A = np.linalg.inv(self.J)
         self.absA = np.abs(self.A)
@@ -523,7 +664,8 @@ class FitnessEngine:
         out = np.where((bud > 0) & (Y0 > 0), np.log10(np.abs(Y0) / np.abs(bud)), np.inf)
         out = np.where(np.isfinite(out), out, np.inf)
         if box:
-            bad = np.array([not in_box(th, self.lower_wall_power) for th in thetas])
+            bad = np.array([not in_box(th, self.lower_wall_power, self.wall2d)
+                            for th in thetas])
             out = np.where(bad, np.inf, out)
         return out
 
@@ -548,7 +690,7 @@ def hand_weights(problem=None):
     }
 
 
-def roster(problem, n_random=32, seed=0, lower_wall_power=None):
+def roster(problem, n_random=32, seed=0, lower_wall_power=None, wall2d=None):
     """The fixed weight roster the six-property gate is measured on.
 
     Structured like Gate 4's shape roster: controls (the two hand weights), trivial
@@ -576,10 +718,16 @@ def roster(problem, n_random=32, seed=0, lower_wall_power=None):
     }
     items += list(degenerate.items())
     for i in range(n_random):
+        tries = 0
         while True:
             th = BOX_LOWER + rng.random(5) * (BOX_UPPER - BOX_LOWER)
-            if in_box(th, lower_wall_power):
+            tries += 1
+            if in_box(th, lower_wall_power, wall2d):
                 break
+            if tries > 100000:
+                raise RuntimeError(
+                    "the admissible set is empty at this resolution -- that is a "
+                    "finding, not a draw failure; report it rather than widening it")
         items.append((f"rand_{i:02d}", th))
     return items
 
@@ -629,6 +777,56 @@ def lower_wall(engine, w_l_gene=-2.0, lo=-8.0, hi=3.0, iters=45):
         else:
             b = mid
     return 0.5 * (a + b)
+
+
+def two_factor_wall(engine, w_l_gene=-2.0, **kw):
+    """The conditioning wall, MEASURED exactly as `lower_wall` measures it, then read
+    off in the 2-D geometry instead of projected onto p+q.
+
+    One bisection, the same one: p_- is where Z_1 crosses 1 on the single-factor
+    slice. `r_crit` is that slice point's log-range. Nothing is fitted to the 2-D
+    data -- the model's one number comes from the 1-D measurement, which is what
+    makes the comparison between the two models a comparison of GEOMETRY and not of
+    calibration."""
+    p_minus = lower_wall(engine, w_l_gene=w_l_gene, **kw)
+    theta_wall = np.array([p_minus, 0.0, 0.0, 0.0, w_l_gene])
+    r_crit = log_range_analytic(engine.pr, theta_wall)
+    return TwoFactorWall(engine.pr, r_crit, p_minus=p_minus, w_l_gene=w_l_gene)
+
+
+def wall_model_disagreement(engine, wall, n=400, seed=11, lower_wall_power=None):
+    """How much of the observed Z_1 >= 1 failure set each wall model explains.
+
+    Draws weights inside the box (upper analytic wall only), evaluates Z_1, and scores
+    both models as classifiers of `Z_1 >= 1`. Magnitudes, not booleans: the counts of
+    admitted-but-failing and excluded-but-fine weights under each."""
+    rng = np.random.default_rng(seed)
+    th = []
+    while len(th) < n:
+        t = BOX_LOWER + rng.random(5) * (BOX_UPPER - BOX_LOWER)
+        if in_box(t):                       # upper analytic wall + box only
+            th.append(t)
+    th = np.array(th)
+    _, Z1, _ = engine.constants_many(th)
+    fails = Z1 >= 1.0
+    lw = engine.lower_wall_power if lower_wall_power is None else lower_wall_power
+    adm1 = np.array([far_field_power(t) >= lw + WALL_LOWER_DELTA for t in th])
+    adm2 = np.array([wall.admits(t) for t in th])
+    rng_vals = np.array([wall.log_range(t) for t in th])
+    out = {"n": int(n), "n_fail": int(fails.sum()),
+           "far_field_power": (th[:, 0] + th[:, 2]).tolist(),
+           "log_range": rng_vals.tolist(), "Z1": Z1.tolist(),
+           "fails": fails.tolist()}
+    for name, adm in (("wall_1d", adm1), ("wall_2d", adm2)):
+        out[name] = {
+            "admitted": int(adm.sum()),
+            "admitted_but_failing": int(np.sum(adm & fails)),
+            "excluded_but_fine": int(np.sum(~adm & ~fails)),
+            "failure_rate_among_admitted":
+                float(np.sum(adm & fails) / max(int(adm.sum()), 1)),
+            "misclassified": int(np.sum(adm & fails) + np.sum(~adm & ~fails)),
+        }
+    return out
 
 
 def interior_margin(theta):
@@ -752,11 +950,18 @@ def defect_ladder(problem, z_star, engine_thetas, direction=None, eps=None):
 
 
 def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
-                      per_gene=9, refine=4):
+                      per_gene=9, refine=4, wall_model="1d"):
     """The FROZEN predicate, run on the weight fitness. Returns a report dict.
 
     Both branches are actionable and were written before the run: PASS lifts the ban
     on GA compute and stage B proceeds; FAIL stops the stage and names the property.
+
+    `wall_model` selects which model of the conditioning wall the BOX carries -- "1d"
+    is leg 50's half-plane in p+q and is the default so leg 50's numbers reproduce
+    bit for bit; "2d" is leg 59's level set of the weight's log-range, calibrated off
+    the SAME bisection. Every threshold in this function is frozen and untouched by
+    that switch: the wall model decides which weights are ADMISSIBLE, never what
+    counts as passing.
     """
     zc, info_c = problem_coarse.newton()
     zf, _ = problem_fine.newton()
@@ -768,7 +973,20 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
     lw_c, lw_f = lower_wall(eng_c), lower_wall(eng_f)
     eng_c.lower_wall_power, eng_f.lower_wall_power = lw_c, lw_f
 
-    rost_c = roster(problem_coarse, n_random=n_random, seed=seed, lower_wall_power=lw_c)
+    # leg 59: the SAME crossing, read in both weight factors. In "2d" mode the box
+    # carries the log-range level set instead of the p+q half-plane -- and the 1-D
+    # power is kept on the report either way, so the two runs stay comparable.
+    wall_c = two_factor_wall(eng_c)
+    wall_f = two_factor_wall(eng_f)
+    if wall_model == "2d":
+        eng_c.lower_wall_power = eng_f.lower_wall_power = None
+        eng_c.wall2d, eng_f.wall2d = wall_c, wall_f
+        rost_c = roster(problem_coarse, n_random=n_random, seed=seed, wall2d=wall_c)
+        disagreement = wall_model_disagreement(eng_c, wall_c, lower_wall_power=lw_c)
+    else:
+        rost_c = roster(problem_coarse, n_random=n_random, seed=seed,
+                        lower_wall_power=lw_c)
+        disagreement = None
     labels = [lab for lab, _ in rost_c]
     th = np.array([t for _, t in rost_c])
     vc = eng_c.fitness_many(th, box=False)
@@ -805,6 +1023,8 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
                        "pass": bool(spread >= P1_SPREAD_MIN)},
         "P2_finite": {"finite_fraction": float(fin.mean()), "threshold": P2_FINITE_FRAC,
                       "lower_wall_power_coarse": lw_c, "lower_wall_power_fine": lw_f,
+                      "wall_model": wall_model,
+                      "r_crit_coarse": wall_c.r_crit, "r_crit_fine": wall_f.r_crit,
                       "pass": bool(fin.mean() >= P2_FINITE_FRAC)},
         "P3_monotone": {"violations": mono_viol, "max_slope_error": slope_err,
                         "n_resolved": int(resolved.sum()), "n_unresolved": n_unresolved,
@@ -840,6 +1060,10 @@ def six_property_gate(problem_coarse, problem_fine, n_random=32, seed=0,
         "defect_ladder": {"eps": eps.tolist(), "slopes": slopes.tolist(),
                           "resolution": resolution},
         "lower_wall": {"coarse": lw_c, "fine": lw_f},
+        "wall_model": wall_model,
+        "wall_2d": {"coarse": wall_c.as_dict(), "fine": wall_f.as_dict()},
+        "wall_model_disagreement": disagreement,
+        "roster_log_range": [float(log_range_analytic(problem_coarse, t)) for t in th],
         "optimum_box": {"theta": g_box["theta"].tolist(), "fitness": g_box["fitness"],
                         "evaluations": g_box["evaluations"]},
         "optimum_free": {"theta": g_free["theta"].tolist(), "fitness": g_free["fitness"]},

@@ -35,6 +35,14 @@ are the things that would make it untrustworthy:
       per-weight window and mark a weight UNRESOLVED rather than fit a slope through
       too few linear-regime points; a weight with an artificially tiny window must
       come back unresolved.
+  (10) THE 2-D GEOMETRY IS THE GRID'S GEOMETRY (leg 59).  The closed-form weight
+      log-range the 2-D wall evaluates must equal the range the grid actually carries.
+  (11) THE GROWTH LAW, RE-DERIVED IN 2-D, MEETS ITS KNOWN ANSWER (leg 59).  x7.39 on
+      the 1-D slice, and right where the 1-D law is wrong -- an interior-dominated
+      weight, where the edge branch X_max^(p+q-1) is the wrong branch entirely.
+  (12) THE 2-D WALL IS A STRICT GENERALISATION (leg 59).  Same bisected crossing, no
+      refitted constant, agrees on the measuring slice, explains strictly more of the
+      Z_1 >= 1 failure set off it, and is opt-in.
 
 Run: .venv/bin/python test_weight_search.py
 """
@@ -46,7 +54,9 @@ import numpy as np
 from solver.weight_search import (
     BOX_LOWER, BOX_UPPER, DEFECT_MIN_WINDOW, EXACT_C_OMEGA, EXACT_SLOPE0, GENE_NAMES,
     PRECEDENTS, WALL_POWER, BorderedCLM, FitnessEngine, defect_ladder, exact_hilbert,
-    exact_profile, hand_weights, in_box, lower_wall, novelty_verdict, six_property_gate,
+    exact_profile, far_field_power, hand_weights, in_box, log_range_analytic, lower_wall,
+    novelty_verdict, six_property_gate, two_factor_wall, wall_model_disagreement,
+    weight_log_range, weighted_sup_analytic,
 )
 
 
@@ -249,6 +259,104 @@ def test_repairs_measured():
           f"P3: {sum(resolved)}/2 hand weights resolved, windows reported per-weight")
 
 
+def test_two_factor_geometry():
+    """(10) The closed-form weight range IS the range the grid carries.
+
+    `log_range_analytic` is what the 2-D wall evaluates for a candidate weight without
+    touching the grid; `weight_log_range` is what the grid actually has. They must
+    agree to grid discreteness -- if they do not, the wall model is measuring a
+    different object from the one Z_1 sees."""
+    pr = BorderedCLM(n=201)
+    rng = np.random.default_rng(3)
+    errs = []
+    for _ in range(200):
+        th = BOX_LOWER + rng.random(5) * (BOX_UPPER - BOX_LOWER)
+        errs.append(abs(log_range_analytic(pr, th) - weight_log_range(pr, th)))
+    worst = max(errs)
+    assert worst < 0.15, f"the closed-form range is not the grid's: {worst:.3f} decades"
+    print(f"[ok] (10) closed-form weight range agrees with the grid's to "
+          f"{worst:.3f} decades over 200 in-box weights")
+
+
+def test_growth_law_in_two_factor_geometry():
+    """(11) The analytic growth rate, re-derived in 2-D, against its known answer.
+
+    The pre-committed window is the banked 1-D number: x7.39 predicted, x7.39 measured
+    over a 54.6x reach. The 2-D law must reproduce it on the 1-D slice AND must be
+    right where the 1-D law is not -- opposite-sign factor powers put the sup at an
+    interior peak, where the edge branch X_max^(p+q-1) is simply the wrong branch."""
+    Xa = BorderedCLM(n=201, rho_max=6.0).Xmax
+    Xb = BorderedCLM(n=201, rho_max=10.0).Xmax
+    reach = Xb / Xa
+
+    def measured(theta, Xmax):
+        X = np.logspace(-6.0, np.log10(Xmax), 100001)
+        p, logL, q, logl = (float(t) for t in theta[:4])
+        nu = ((1.0 + (X / 10.0 ** logL) ** 2) ** (0.5 * p)
+              * (1.0 + (X / 10.0 ** logl) ** 2) ** (0.5 * q))
+        return float(np.max(nu * np.abs(exact_profile(X))))
+
+    slice_1d = (1.5, 0.0, 0.0, 0.0)
+    g = measured(slice_1d, Xb) / measured(slice_1d, Xa)
+    g2 = weighted_sup_analytic(slice_1d, Xb) / weighted_sup_analytic(slice_1d, Xa)
+    assert abs(g / (reach ** 0.5) - 1.0) < 0.02, "the banked 1-D answer moved"
+    assert abs(g2 / g - 1.0) < 1e-6, \
+        f"the 2-D law misses the 1-D known answer: {g2:.4f} vs {g:.4f}"
+
+    interior = (3.0, np.log10(5.0), -1.5, np.log10(0.2))
+    gi = measured(interior, Xb) / measured(interior, Xa)
+    g2i = weighted_sup_analytic(interior, Xb) / weighted_sup_analytic(interior, Xa)
+    g1i = reach ** (interior[0] + interior[2] - 1.0)
+    assert abs(g2i / gi - 1.0) < 1e-4, \
+        f"the 2-D law misses an interior-dominated weight: {g2i:.4f} vs {gi:.4f}"
+    assert max(g1i / gi, gi / g1i) > 2.0, \
+        "this case is supposed to be one the 1-D law cannot see"
+    print(f"[ok] (11) 2-D growth law: x{g2:.3f} vs measured x{g:.3f} on the 1-D slice "
+          f"(known answer x{reach**0.5:.2f}); on an interior-dominated weight x{g2i:.3f} "
+          f"vs measured x{gi:.3f}, where the 1-D law says x{g1i:.3f} "
+          f"({max(g1i/gi, gi/g1i):.2f}x off)")
+
+
+def test_two_factor_wall_is_a_strict_generalisation():
+    """(12) The 2-D wall inherits the 1-D calibration and is opt-in.
+
+    On the slice that measured it the two models must agree; off the slice the 2-D one
+    must explain strictly more of the observed Z_1 >= 1 failure set. And `in_box` with
+    the default (None) must be untouched -- this is a new model, not a silent change."""
+    pr = BorderedCLM(n=201)
+    z, _ = pr.newton()
+    eng = FitnessEngine(pr, z)
+    lw = lower_wall(eng)
+    wall = two_factor_wall(eng)
+    assert abs(wall.p_minus - lw) < 1e-9, "the 2-D wall refitted the crossing"
+
+    # on the measuring slice: just inside the crossing admitted, just past it excluded
+    inside = np.array([lw + 0.5, 0.0, 0.0, 0.0, -2.0])
+    past = np.array([lw - 0.1, 0.0, 0.0, 0.0, -2.0])
+    assert wall.admits(inside) and not wall.admits(past), \
+        "the 2-D wall does not reproduce the 1-D crossing on its own slice"
+
+    # OFF the slice: a weight the 1-D wall admits (its far-field power is well above
+    # the crossing) but whose RANGE is past the wall because the border weight carries
+    # it. This is the case the 1-D model cannot see, and it must be excluded.
+    off = np.array([lw + 0.5, 0.0, 0.0, 0.0, BOX_UPPER[4]])
+    assert far_field_power(off) > lw + 0.05, "this probe is not above the 1-D wall"
+    assert in_box(off), "the default in_box must be unaffected by the wall existing"
+    assert in_box(off, lower_wall_power=lw), "the 1-D wall is supposed to admit this"
+    assert not in_box(off, wall2d=wall), "the supplied 2-D wall must bite off-slice"
+
+    dis = wall_model_disagreement(eng, wall, n=200, seed=11, lower_wall_power=lw)
+    m1 = dis["wall_1d"]["misclassified"]
+    m2 = dis["wall_2d"]["misclassified"]
+    assert m2 < m1, f"the 2-D wall explains no more than the 1-D one: {m2} vs {m1}"
+    assert (dis["wall_2d"]["failure_rate_among_admitted"]
+            < 0.5 * dis["wall_1d"]["failure_rate_among_admitted"]), \
+        "the 2-D wall does not halve the failure rate among admitted weights"
+    print(f"[ok] (12) 2-D wall r_crit={wall.r_crit:.2f} decades from the SAME "
+          f"crossing p_-={wall.p_minus:+.3f}; misclassified {m1} -> {m2} of "
+          f"{dis['n']} in-box weights ({dis['n_fail']} of which fail)")
+
+
 if __name__ == "__main__":
     t0 = time.time()
     test_ledger_and_verdict()
@@ -260,4 +368,7 @@ if __name__ == "__main__":
     test_lower_wall_moves_with_resolution()
     test_gate_is_computed_from_its_properties()
     test_repairs_measured()
+    test_two_factor_geometry()
+    test_growth_law_in_two_factor_geometry()
+    test_two_factor_wall_is_a_strict_generalisation()
     print(f"\nall weight-search gates pass ({time.time() - t0:.1f}s)")
