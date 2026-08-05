@@ -345,7 +345,7 @@ decay rates for Hou–Luo profiles). **No link of the L1→L4 chain moved. Clay 
 ## 8. Reproduction
 
     .venv/bin/python experiments/p2_route_nb_v1_targetnorm.py                       # ~4 min
-    .venv/bin/python writeup/4_p2_lottery/p2_route_nb_v1_targetnorm_evidence.py     # fig50
+    .venv/bin/python experiments/p2_route_nb_v1_targetnorm_evidence.py             # fig50
     .venv/bin/python test_target_norm.py                                            # 23 gates
 
 `solver/spectral_certificate.py` and `solver/bordered_hl.py` are imported **read-only**;
