@@ -88,7 +88,7 @@ CAPABILITIES = [
     # -- 2D Boussinesq (the CERTIFIED object -- see solver/target_selection.py) ------
     {"module": "solver/boussinesq_velocity.py", "object": "2D Boussinesq velocity (Biot-Savart)",
      "holds": "polar-grid stream-function solve with the boundary, Thomas sweeps",
-     "validated": ("manufactured stream-function solutions; the Route-L line sweep is\n                   gated to 9.5e-16 against the operator it inverts"),
+     "validated": ("manufactured stream-function solutions; the Route-L line sweep is\n                   gated to 9.5e-16 against the operator it inverts. FIRST EXTERNAL\n                   known-answer gate (leg 73): reproduces the classical Lamb corner-image\n                   velocity closed form (Lamb, Hydrodynamics Art. 155; Crosby-Johnson-\n                   Morrison, Phys. Fluids 25 (2013)) to 1.76e-4 relative at observed order\n                   2.00, pre-committed tolerance 1e-2 (57x margin)"),
      "test": "test_boussinesq_velocity.py"},
     {"module": "solver/boussinesq_rescaled.py", "object": "2D Boussinesq, rescaled RHS",
      "holds": "the rescaled (omega, eta, xi) system, modulation (c_l, c_omega), relaxation",
