@@ -137,7 +137,16 @@ def nb1_controls():
         "r2": f1["r2"],
         "note_even_modes_annihilated": ("h(theta) + h(pi - theta) = 1 kills every even "
                                         "mode; this control is retained BECAUSE that "
-                                        "broke two versions of the fitter")}
+                                        "broke two versions of the fitter"),
+        # The raw evidence that the spectrum really IS k^-2, quoted in the prose as the
+        # thing the two broken fitters contradicted.  k^2 |h_k| on the ODD modes must be
+        # flat; if it is not, the control's expected value is wrong and not the fitter.
+        "k2_hk_on_odd_modes": [{"k": int(kk), "k2_hk": float(kk ** 2 * hk[kk - 1])}
+                               for kk in (9, 17, 33, 65, 129, 255, 511, 1023)],
+        "k2_hk_flatness_rel_spread_k9_to_k129": float(
+            (max(kk ** 2 * hk[kk - 1] for kk in (9, 17, 33, 65, 129))
+             - min(kk ** 2 * hk[kk - 1] for kk in (9, 17, 33, 65, 129)))
+            / (129 ** 2 * hk[128]))}
 
     # NEGATIVE CONTROL 2: the sawtooth -- p = 1 AND exact coefficient values.
     k2, hk2, _ = coefficient_magnitudes(sawtooth_profile(Xt))
@@ -277,6 +286,10 @@ def nb4_ablations(n=801, rho_max=12.0):
                                   "measurement would be reporting the closure and not "
                                   "the profile"),
         "n_rows_that_fire": len(live),
+        # How far out the transform itself can see: the finest theta cell of an M-point
+        # staggered grid sits pi/M from the branch point, i.e. |X| = 2M/pi.  A domain
+        # shorter than this MUST be extrapolated; a longer one never is.
+        "finest_theta_cell_reaches_X": float(2.0 * M_PRIMARY / np.pi),
         "spread_where_it_fires": (float(max(r["p"] for r in live)
                                         - min(r["p"] for r in live)) if live else None),
         "spread_all_rows": float(max(r["p"] for r in ff) - min(r["p"] for r in ff))}
@@ -299,9 +312,17 @@ def nb4_ablations(n=801, rho_max=12.0):
                            "max_abs_diff_vs_order12": float(np.abs(h - ref).max()),
                            "rel_diff_vs_order12": float(np.abs(h - ref).max()
                                                         / np.abs(ref).max())})
+    # The spread must be taken WITHIN a domain: the two rho_max values sit at genuinely
+    # different exponents (that is NB-3's whole point), so a spread across both would
+    # report the domain ladder and call it interpolation sensitivity.
+    by_dom = {}
+    for r in orders:
+        by_dom.setdefault(r["rho_max"], []).append(r["p"])
     out["interpolation_order"] = {
         "rows": orders,
-        "spread": float(max(r["p"] for r in orders) - min(r["p"] for r in orders)),
+        "spread_within_domain": {str(k): float(max(v) - min(v))
+                                 for k, v in by_dom.items()},
+        "spread": float(max(max(v) - min(v) for v in by_dom.values())),
         "max_rel_interpolant_movement": float(max(r["rel_diff_vs_order12"]
                                                   for r in orders)),
         "why_the_second_column_is_here": (
@@ -377,6 +398,8 @@ def nb6_second_unknown(n=801, rho_max=12.0):
                      "equation forces Omega ~ |X|^(c_omega/c_l) and V ~ |X|^(2 c_omega/c_l), "
                      "so V should decay TWICE as fast and be the easier of the two"),
             "alpha_Omega": s["alpha"], "alpha_V_expected": 2.0 * s["alpha"],
+            "p_Omega_predicted": 1.0 + s["alpha"],
+            "p_V_predicted": 1.0 + 2.0 * s["alpha"],
             "Omega": {"p": fO["p"], "r2": fO["r2"],
                       "s_max_object": fO["p"] - 1.0,
                       "tail_exponent_physical": float(
