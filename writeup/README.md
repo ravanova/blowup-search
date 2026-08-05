@@ -467,6 +467,7 @@ writeup/
     truncation distance is **1.831e−01** against a ball of `r_max` = **1.18e−09**, so the
     certificate closes around the **truncated** object and the true one is **1.55e+08×**
     outside it. A float rehearsal, not a proof. 7/7 clauses; **no chain link moved**.
+    *(fig 59)*
 
 47. [TECHNICAL_P2_ROUTEPORT_V2.md](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) —
     **Route-PORT v2**, the one number leg 46 left unmeasured, on which the whole `L1` road
@@ -480,7 +481,24 @@ writeup/
     guesses were wrong in opposite directions, because leg 46's `X_max^−0.437` law was fitted
     to the *contraction ratio* and got extrapolated to the *weighted distance* (lesson 80).
     Re-prices `L1` as: interval arithmetic (engineering) **plus a tail lemma** (mathematics,
-    and nobody here has written one). 3/3 pre-committed clauses, 4.4 s.
+    and nobody here has written one). 3/3 pre-committed clauses, 4.4 s. *(fig 60)*
+
+> **Leg 60 reproduction check on items 46 and 47 (2026-08-05).** Both quartets were closed
+> by writing `experiments/p2_route_port_v1_bordered_evidence.py` and
+> `experiments/p2_route_port_v2_reach_evidence.py`, which re-derive every number the two
+> writeups quote from the committed JSON, each to half a unit in its own last quoted digit.
+> **111 of 114 re-derive.** Both **ban-bearing** numbers are among them and are exact:
+> `1.55e+08` ball radii (leg 46's clause P6b) and `+0.4703` decades per unit `ρ` (leg 47's
+> wrong-sign trend, re-fitted from the ladder rather than transcribed). **Three do not, and
+> the prose has deliberately NOT been edited to match** — a banked number that disagrees
+> with its own data is the user's call, not a leg's: (i) *v2 §2* "the gap at `ρ = 10` is
+> **28×** worse than at `ρ = 6`" — the stored ladder gives **63×**, and 28× is the
+> `ρ = 8 → 10` factor, so the sentence **understates** its own effect and the ban is
+> unaffected; (ii) *v1 §2.1* the reach table's `ρ = 8` row quotes `−2.541222`, which is the
+> `n = 201` value from §2's table, where that ladder holds `−2.541024` at `n = 301`
+> (`2.0e−04`, and the fitted slope `−0.437` is unaffected); (iii) *v1 §2* the `n = 1201`
+> gap prints `1.168%` for a value of `1.1685%`, a truncated last digit. Full ledger:
+> `experiments/journal/leg_60.md`, and both scripts print it on every run.
 
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
@@ -617,6 +635,10 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_k_v1_evidence.py         # fig40
 .venv/bin/python writeup/4_p2_lottery/p2_route_l_v1_evidence.py         # fig41
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
+
+# leg 60 -- these two also PRINT a reproduction ledger for their writeups' numbers:
+.venv/bin/python experiments/p2_route_port_v1_bordered_evidence.py      # fig59
+.venv/bin/python experiments/p2_route_port_v2_reach_evidence.py         # fig60
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
 .venv/bin/python experiments/p2_route_d_probe.py
