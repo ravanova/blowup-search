@@ -91,8 +91,10 @@ At n = 801: `D` = **1.854e+07 τ** at **order 4.01**; `H` = **2.040e+11 τ** at 
 > **NO.**
 
 No-branch honoured: magnitude and rate reported; the collocation realization cannot carry
-`L1`; the coefficient basis is the only lane left for it; **no grid-basis repairs proposed**,
-including the boundary-basis change the mechanism obviously invites.
+`L1`; the coefficient basis is the only lane left for it — which makes `L1`'s fate identical
+to `MM`'s; **no grid-basis repairs proposed**, including the boundary-basis change the
+mechanism obviously invites. That last clause follows from the gate's wording and is not a
+prediction about leg 54, which is live and unanswered as this is written.
 
 The negative is robust to that artifact: with the `H` defect deleted outright, `D` alone
 still needs n ≈ 52,163 (`N = 104,329`, dense) at its measured order 4.
@@ -107,6 +109,10 @@ the coefficient basis. **No link of the L1→L4 chain moved.** Clay ~0.05%.
 Dispatched under the narrow reading of the standing ban on "further ℓ¹-Fourier
 radii-polynomial machinery before MM's gate answers" (open direction question #1). This leg
 built **no ℓ¹-Fourier machinery**: it works in the sup-norm collocation basis, on the
-discretisation defect of stored operators. `DIRECTION.md` on `main` is still at its seed
-state and carries no leg 56 entry and no open-question list, so the thesis and gate used here
-are the ones in the dispatch prompt, quoted verbatim in the runner docstring and above.
+discretisation defect of stored operators.
+
+`main` advanced during the leg (`94eeb79`, the DM's queue for 54–60) and has been merged in.
+The leg 56 entry there — thesis, gate, both branches, territory — **matches the dispatch
+prompt this leg worked from**, and the work was checked against it after the merge. The only
+wording the prompt had condensed is the no-branch's closing clause, "which makes `L1`'s fate
+identical to `MM`'s", now restored in the gate answer above and in the technical writeup.

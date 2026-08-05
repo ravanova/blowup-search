@@ -208,8 +208,12 @@ norm, against an admissible **τ = 2.306e−14** — exceeding it by **2.04e+11�
 (it does not converge) and **order 4.01** for the derivative defect.
 
 Per the pre-committed no-branch: **the collocation realization cannot carry `L1`, and the
-coefficient basis is the only lane left for it. No grid-basis repairs are proposed** — not
-the boundary-basis change §8 obviously invites, nor any other.
+coefficient basis is the only lane left for it — which makes `L1`'s fate identical to `MM`'s.
+No grid-basis repairs are proposed** — not the boundary-basis change §8 obviously invites,
+nor any other.
+
+That last clause is a consequence of the gate's own wording, not a claim about `MM`'s
+outcome: leg 54 is live and unanswered as this is written, and nothing here predicts it.
 
 **The negative does not hinge on the `H` artifact.** With the Hilbert defect deleted
 outright, the derivative defect alone still requires n ≈ 52,163 at its measured order 4 —
