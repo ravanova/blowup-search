@@ -51,9 +51,9 @@ with a numerical artifact.
   at [writeup/1_gclm_1d/SUMMARY.md](writeup/1_gclm_1d/SUMMARY.md).
 - [CLAY_ROADMAP.md](CLAY_ROADMAP.md) — forward strategic plan for continuing the
   Clay pursuit (the two structural walls, ranked routes A–D, go/no-go criteria).
-- [ORCHESTRATION.md](ORCHESTRATION.md) — the multi-agent day contract: the
-  six-agent split, file ownership, the documentation quartet, and the hands-off
-  merge policy enforced by [scripts/merge_gate.sh](scripts/merge_gate.sh).
+- [ORCHESTRATION.md](ORCHESTRATION.md) — the multi-agent contract: the rolling
+  ten-leg pool, per-brief file ownership, the documentation quartet, and the
+  hands-off push policy gated by [scripts/merge_gate.sh](scripts/merge_gate.sh).
   [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) is the paste-able prompt
   that drives it.
 - [millennium_prize_problems.md](millennium_prize_problems.md) — survey of

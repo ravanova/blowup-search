@@ -255,9 +255,10 @@ Most of this is model-agnostic and outlives whatever happens to the Clay attempt
   Boussinesq Biot–Savart, fractional dissipation, interval arithmetic and
   Newton–Kantorovich certificate machinery.
 - **A multi-agent operating contract** ([`ORCHESTRATION.md`](ORCHESTRATION.md)):
-  six lanes with disjoint file ownership, a verifier that re-measures the
-  previous leg's headline before anyone builds on it, an executable merge gate,
-  and a short list of things that are *never* merged without a human.
+  a rolling pool of ten leg agents with disjoint per-brief file ownership, a
+  planner that writes every brief, rolling verification briefs that re-measure
+  landed headlines, an executable merge gate every push must pass, and a short
+  list of things that are *never* pushed without a human.
 
 ## Working rules (if you contribute)
 
