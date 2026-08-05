@@ -1,0 +1,514 @@
+{
+ "route": "TN",
+ "version": "v1",
+ "question": "Can the (H, D) consistency defect be enclosed by a rigorous bound that is smaller than leg 46's Y_0 budget at n = 801, with a convergence rate measured across n = 201/401/801?",
+ "clauses": [
+  "TN-1 referent",
+  "TN-2 split",
+  "TN-3 mechanism ablation",
+  "TN-4 through ||A|| and the budget",
+  "TN-5 tau is friendliest",
+  "TN-6 widths",
+  "TN-7 rate not endpoint"
+ ],
+ "fixed_reach": true,
+ "rungs": [
+  {
+   "certificate": {
+    "n": 201,
+    "N": 405,
+    "X_max": 745.2394128947751,
+    "p_star": 0.39,
+    "Y0": 5.522436933036818e-12,
+    "Z1": 8.547217579890699e-09,
+    "Z2": 220571129.61899996,
+    "A_norm": 9852.352563610288,
+    "budget": 2.2668424118625557e-09,
+    "Y0_over_budget": 0.0024361803467843612,
+    "closes": true,
+    "tau_admissible_defect": 2.3008133308537386e-13
+   },
+   "defects": {
+    "odd": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 201,
+     "interior_nodes": 199,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 1.047986528574496,
+     "defect_D_abs": 0.00011219876542201138,
+     "defect_D_abs_lower": 0.00011219876539492188,
+     "defect_H_abs": 0.004728748883333346,
+     "defect_H_abs_lower": 0.004728748883332836,
+     "truncation_H_abs": 0.019042302175201562,
+     "truncation_H_abs_lower": 0.01904230217520131,
+     "defect_D_rel": 0.00010706126687966868,
+     "defect_H_rel": 0.00451222296699324,
+     "width_frac_D": 2.4144201506203004e-10,
+     "width_frac_H": 1.0785277766276111e-13
+    },
+    "even": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 201,
+     "interior_nodes": 199,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 2.0000000000000018,
+     "defect_D_abs": 0.00010051253070373552,
+     "defect_D_abs_lower": 0.00010051253060776193,
+     "defect_H_abs": 3.3288641613048395e-06,
+     "defect_H_abs_lower": 3.3288641357507995e-06,
+     "truncation_H_abs": 5.903196942533557e-06,
+     "truncation_H_abs_lower": 5.903196942533139e-06,
+     "defect_D_rel": 5.025626535186779e-05,
+     "defect_H_rel": 1.6644320806524208e-06,
+     "width_frac_D": 9.54842039982356e-10,
+     "width_frac_H": 7.676504285601704e-09
+    }
+   },
+   "ratios": {
+    "tau": 2.3008133308537386e-13,
+    "defect_D_over_tau": 487648276.013678,
+    "defect_H_over_tau": 20552509931.688805,
+    "truncation_over_tau": 82763351202.14091
+   },
+   "wall_s": 24.01213312149048
+  },
+  {
+   "certificate": {
+    "n": 401,
+    "N": 805,
+    "X_max": 745.2394128947751,
+    "p_star": 0.39,
+    "Y0": 1.339980926418611e-11,
+    "Z1": 5.713694895801184e-08,
+    "Z2": 845853410.8019924,
+    "A_norm": 18630.869163062387,
+    "budget": 5.911189060394988e-10,
+    "Y0_over_budget": 0.022668551330839573,
+    "closes": true,
+    "tau_admissible_defect": 3.172792964546457e-14
+   },
+   "defects": {
+    "odd": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 401,
+     "interior_nodes": 399,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 1.047986528574496,
+     "defect_D_abs": 6.87240942465195e-06,
+     "defect_D_abs_lower": 6.872409397562505e-06,
+     "defect_H_abs": 0.004713129985416697,
+     "defect_H_abs_lower": 0.004713129985416178,
+     "truncation_H_abs": 0.022582015434088176,
+     "truncation_H_abs_lower": 0.022582015434087936,
+     "defect_D_rel": 6.5577268765086446e-06,
+     "defect_H_rel": 0.0044973192468682355,
+     "width_frac_D": 3.941768238052485e-09,
+     "width_frac_H": 1.1005050166703765e-13
+    },
+    "even": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 401,
+     "interior_nodes": 399,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 2.0000000000000018,
+     "defect_D_abs": 6.194167454531076e-06,
+     "defect_D_abs_lower": 6.194167268848123e-06,
+     "defect_H_abs": 3.108162443807132e-06,
+     "defect_H_abs_lower": 3.108162443700141e-06,
+     "truncation_H_abs": 8.023641006467006e-06,
+     "truncation_H_abs_lower": 8.023641006466615e-06,
+     "defect_D_rel": 3.09708372726554e-06,
+     "defect_H_rel": 1.5540812219035671e-06,
+     "width_frac_D": 2.997706374677329e-08,
+     "width_frac_H": 3.442267725733175e-11
+    }
+   },
+   "ratios": {
+    "tau": 3.172792964546457e-14,
+    "defect_D_over_tau": 216604408.21213007,
+    "defect_H_over_tau": 148548299182.52884,
+    "truncation_over_tau": 711739331447.8754
+   },
+   "wall_s": 32.38261866569519
+  },
+  {
+   "certificate": {
+    "n": 801,
+    "N": 1605,
+    "X_max": 745.2394128947751,
+    "p_star": 0.39,
+    "Y0": 9.970090516094336e-12,
+    "Z1": 1.5367419615327556e-07,
+    "Z2": 1406605454.6612077,
+    "A_norm": 15417.670644111318,
+    "budget": 3.5546559603399555e-10,
+    "Y0_over_budget": 0.028047976027308227,
+    "closes": true,
+    "tau_admissible_defect": 2.3055726395982093e-14
+   },
+   "defects": {
+    "odd": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 801,
+     "interior_nodes": 799,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 1.0480999185571827,
+     "defect_D_abs": 4.27378698208969e-07,
+     "defect_D_abs_lower": 4.27378671119527e-07,
+     "defect_H_abs": 0.00470413919071776,
+     "defect_H_abs_lower": 0.004704139190717218,
+     "truncation_H_abs": 0.02626013304273298,
+     "truncation_H_abs_lower": 0.02626013304273271,
+     "defect_D_rel": 4.0776522413750483e-07,
+     "defect_H_rel": 0.004488254514124478,
+     "width_frac_D": 6.33851011436385e-08,
+     "width_frac_H": 1.1523916794648208e-13
+    },
+    "even": {
+     "a": 0.5,
+     "b": 0.0,
+     "n": 801,
+     "interior_nodes": 799,
+     "excluded_nodes": 2,
+     "X_max": 745.2394128947751,
+     "f_norm_w": 2.0000000000000018,
+     "defect_D_abs": 3.86552199138236e-07,
+     "defect_D_abs_lower": 3.8655180168473275e-07,
+     "defect_H_abs": 3.130299204775382e-06,
+     "defect_H_abs_lower": 3.1302992046647138e-06,
+     "truncation_H_abs": 1.0322905983432404e-05,
+     "truncation_H_abs_lower": 1.0322905983432004e-05,
+     "defect_D_rel": 1.9327609956911813e-07,
+     "defect_H_rel": 1.565149602387692e-06,
+     "width_frac_D": 1.0282013765197012e-06,
+     "width_frac_H": 3.5353886466103635e-11
+    }
+   },
+   "ratios": {
+    "tau": 2.3055726395982093e-14,
+    "defect_D_over_tau": 18536770.035727352,
+    "defect_H_over_tau": 204033440973.58594,
+    "truncation_over_tau": 1138985282515.7275
+   },
+   "wall_s": 49.75952506065369
+  }
+ ],
+ "scale_curve": [
+  {
+   "a": 0.125,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 4.0094255858606225,
+   "defect_D_abs": 0.0018044196552082785,
+   "defect_D_abs_lower": 0.0018044196547748466,
+   "defect_H_abs": 0.004704141190813631,
+   "defect_H_abs_lower": 0.0047041411908130435,
+   "truncation_H_abs": 0.026260139666931196,
+   "truncation_H_abs_lower": 0.02626013966693093,
+   "defect_D_rel": 0.0004500444306964146,
+   "defect_H_rel": 0.0011732706069924224,
+   "width_frac_D": 2.4020572760019585e-10,
+   "width_frac_H": 1.2482701364594588e-13,
+   "defect_D_over_tau": 78263405117.55612,
+   "defect_H_over_tau": 204033527724.08936
+  },
+  {
+   "a": 0.25,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 2.02405146252483,
+   "defect_D_abs": 2.751734366945869e-05,
+   "defect_D_abs_lower": 2.751734356110091e-05,
+   "defect_H_abs": 0.004704140790826971,
+   "defect_H_abs_lower": 0.004704140790826395,
+   "truncation_H_abs": 0.026260138342091205,
+   "truncation_H_abs_lower": 0.02626013834209093,
+   "defect_D_rel": 1.359517985532504e-05,
+   "defect_H_rel": 0.0023241211391725044,
+   "width_frac_D": 3.9377994495961465e-09,
+   "width_frac_H": 1.2243005038185812e-13,
+   "defect_D_over_tau": 1193514496.0019183,
+   "defect_H_over_tau": 204033510375.3989
+  },
+  {
+   "a": 0.5,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 1.0480999185571827,
+   "defect_D_abs": 4.27378698208969e-07,
+   "defect_D_abs_lower": 4.27378671119527e-07,
+   "defect_H_abs": 0.00470413919071776,
+   "defect_H_abs_lower": 0.004704139190717218,
+   "truncation_H_abs": 0.02626013304273298,
+   "truncation_H_abs_lower": 0.02626013304273271,
+   "defect_D_rel": 4.0776522413750483e-07,
+   "defect_H_rel": 0.004488254514124478,
+   "width_frac_D": 6.33851011436385e-08,
+   "width_frac_H": 1.1523916794648208e-13,
+   "defect_D_over_tau": 18536770.035727352,
+   "defect_H_over_tau": 204033440973.58594
+  },
+  {
+   "a": 1.0,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 0.5861562532486915,
+   "defect_D_abs": 7.131687872104104e-08,
+   "defect_D_abs_lower": 7.131687871564849e-08,
+   "defect_H_abs": 0.004704132789965259,
+   "defect_H_abs_lower": 0.004704132789964722,
+   "truncation_H_abs": 0.026260111845328494,
+   "truncation_H_abs_lower": 0.02626011184532823,
+   "defect_D_rel": 1.2166871602201135e-07,
+   "defect_H_rel": 0.00802539043794765,
+   "width_frac_D": 7.561401937469679e-11,
+   "width_frac_H": 1.1413302723088881e-13,
+   "defect_D_over_tau": 3093239.2888505734,
+   "defect_H_over_tau": 204033163352.64307
+  },
+  {
+   "a": 2.0,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 0.36180184546387867,
+   "defect_D_abs": 7.131456858851137e-08,
+   "defect_D_abs_lower": 7.131456858306891e-08,
+   "defect_H_abs": 0.004704107186476162,
+   "defect_H_abs_lower": 0.004704107186475648,
+   "truncation_H_abs": 0.026260027056164984,
+   "truncation_H_abs_lower": 0.026260027056164717,
+   "defect_D_rel": 1.9710946608654429e-07,
+   "defect_H_rel": 0.013001888313877653,
+   "width_frac_D": 7.631612294127605e-11,
+   "width_frac_H": 1.091552825083011e-13,
+   "defect_D_over_tau": 3093139.091073674,
+   "defect_H_over_tau": 204032052848.09174
+  },
+  {
+   "a": 8.0,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 0.15225852197888293,
+   "defect_D_abs": 7.126837903000752e-08,
+   "defect_D_abs_lower": 7.126837902487544e-08,
+   "defect_H_abs": 0.004703595166057302,
+   "defect_H_abs_lower": 0.0047035951660568225,
+   "truncation_H_abs": 0.026258331425564187,
+   "truncation_H_abs_lower": 0.026258331425563913,
+   "defect_D_rel": 4.680748118643372e-07,
+   "defect_H_rel": 0.030892163571045732,
+   "width_frac_D": 7.20106175141761e-11,
+   "width_frac_H": 1.0197540905920383e-13,
+   "defect_D_over_tau": 3091135.703381153,
+   "defect_H_over_tau": 204009844898.09848
+  },
+  {
+   "a": 32.0,
+   "b": 0.0,
+   "n": 801,
+   "interior_nodes": 799,
+   "excluded_nodes": 2,
+   "X_max": 745.2394128947751,
+   "f_norm_w": 0.06528046335350252,
+   "defect_D_abs": 7.053272554020538e-08,
+   "defect_D_abs_lower": 7.053272553494584e-08,
+   "defect_H_abs": 0.004695417921078498,
+   "defect_H_abs_lower": 0.0046954179210780605,
+   "truncation_H_abs": 0.02623124082249886,
+   "truncation_H_abs_lower": 0.0262312408224986,
+   "defect_D_rel": 1.080456876634918e-06,
+   "defect_H_rel": 0.07192684732723462,
+   "width_frac_D": 7.456886383695894e-11,
+   "width_frac_H": 9.310147111372477e-14,
+   "defect_D_over_tau": 3059228.077606658,
+   "defect_H_over_tau": 203655171840.37912
+  }
+ ],
+ "mechanism_ablation": [
+  {
+   "n": 201,
+   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "defect_H_odd": 0.004728748883333346,
+   "defect_H_even": 3.3288641613048395e-06,
+   "defect_H_collapse": 1420.5292418660254,
+   "defect_D_odd": 0.00011219876542201138,
+   "defect_D_even": 0.00010051253070373552,
+   "defect_D_collapse": 1.1162664459491272
+  },
+  {
+   "n": 401,
+   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "defect_H_odd": 0.004713129985416697,
+   "defect_H_even": 3.108162443807132e-06,
+   "defect_H_collapse": 1516.3718340421324,
+   "defect_D_odd": 6.87240942465195e-06,
+   "defect_D_even": 6.194167454531076e-06,
+   "defect_D_collapse": 1.1094968734861592
+  },
+  {
+   "n": 801,
+   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "defect_H_odd": 0.00470413919071776,
+   "defect_H_even": 3.130299204775382e-06,
+   "defect_H_collapse": 1502.7762149833566,
+   "defect_D_odd": 4.27378698208969e-07,
+   "defect_D_even": 3.86552199138236e-07,
+   "defect_D_collapse": 1.1056170399799818
+  }
+ ],
+ "leg46_reference_as_stored": {
+  "source": "writeup/data/p2_route_l1_v1_interval.json :: L1_2_ladder[n=801]",
+  "budget": 3.5546559590282916e-10,
+  "Y0": 7.351345250491628e-12,
+  "Y0_over_budget": 0.020680891020747924,
+  "A_norm": 15417.670648061347,
+  "X_max": 745.2394128947751
+ },
+ "rates": {
+  "n": [
+   201,
+   401,
+   801
+  ],
+  "defect_D_odd": [
+   0.00011219876542201138,
+   6.87240942465195e-06,
+   4.27378698208969e-07
+  ],
+  "defect_D_odd_rate": [
+   {
+    "factor": 16.325972230284233,
+    "order": 4.029097003353995
+   },
+   {
+    "factor": 16.080374275677283,
+    "order": 4.007229080967609
+   }
+  ],
+  "defect_H_odd": [
+   0.004728748883333346,
+   0.004713129985416697,
+   0.00470413919071776
+  ],
+  "defect_H_odd_rate": [
+   {
+    "factor": 1.0033139119788712,
+    "order": 0.004773059988451959
+   },
+   {
+    "factor": 1.0019112518432018,
+    "order": 0.002754721910169197
+   }
+  ],
+  "truncation_odd": [
+   0.019042302175201562,
+   0.022582015434088176,
+   0.02626013304273298
+  ],
+  "truncation_odd_rate": [
+   {
+    "factor": 0.8432507820562677,
+    "order": -0.24596634364434483
+   },
+   {
+    "factor": 0.8599353018257972,
+    "order": -0.217699973731054
+   }
+  ],
+  "defect_D_even": [
+   0.00010051253070373552,
+   6.194167454531076e-06,
+   3.86552199138236e-07
+  ],
+  "defect_D_even_rate": [
+   {
+    "factor": 16.22696374315969,
+    "order": 4.0203211747194905
+   },
+   {
+    "factor": 16.02414232370196,
+    "order": 4.002175234979076
+   }
+  ],
+  "defect_H_even": [
+   3.3288641613048395e-06,
+   3.108162443807132e-06,
+   3.130299204775382e-06
+  ],
+  "defect_H_even_rate": [
+   {
+    "factor": 1.0710071373320418,
+    "order": 0.098968094429188
+   },
+   {
+    "factor": 0.9929282284152009,
+    "order": -0.010238655332723525
+   }
+  ]
+ },
+ "scale_curve_n": 801,
+ "D_only_extrapolation": {
+  "measured_order": 4.007229080967609,
+  "defect_D_over_tau_at_801": 18536770.035727352,
+  "n_required": 52163.068422209304,
+  "note": "the interval certificate is dense: cost grows like N^3 in the approximate inverse and N^2 in memory, with N = 2n+3"
+ },
+ "verdict": {
+  "gate": "Can the (H, D) consistency defect be enclosed by a rigorous bound that is smaller than leg 46's Y_0 budget at n = 801, with a convergence rate measured across n = 201/401/801?",
+  "answer": "no",
+  "defect_H_at_801": 0.00470413919071776,
+  "defect_D_at_801": 4.27378698208969e-07,
+  "tau_at_801": 2.3055726395982093e-14,
+  "defect_H_over_tau_at_801": 204033440973.58594,
+  "defect_D_over_tau_at_801": 18536770.035727352,
+  "H_rate_per_doubling": [
+   {
+    "factor": 1.0033139119788712,
+    "order": 0.004773059988451959
+   },
+   {
+    "factor": 1.0019112518432018,
+    "order": 0.002754721910169197
+   }
+  ],
+  "D_rate_per_doubling": [
+   {
+    "factor": 16.325972230284233,
+    "order": 4.029097003353995
+   },
+   {
+    "factor": 16.080374275677283,
+    "order": 4.007229080967609
+   }
+  ]
+ },
+ "elapsed_s": 147.18933176994324
+}

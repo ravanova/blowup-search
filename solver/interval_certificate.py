@@ -322,3 +322,223 @@ def _add_diag(blk, d):
     lo[idx, idx] = _down(lo[idx, idx] + d.lo)
     hi[idx, idx] = _up(hi[idx, idx] + d.hi)
     return lo, hi
+
+
+# --------------------------------------------------------------------------
+# ROUTE-TN (leg 56): the (H, D) CONSISTENCY DEFECT, enclosed
+# --------------------------------------------------------------------------
+# THE GAP THIS ADDRESSES, AND THE ONE IT DOES NOT.
+# This module's own docstring names two things that keep the interval certificate
+# at "step one of L1" rather than L1: the far-field tail beyond X_max, and the
+# CONSISTENCY of (H, D) with the operators they discretise.  What follows measures
+# the second one, at FIXED reach.  It is not, and must not be read as, an attack on
+# the first: X_max is held fixed throughout and the truncation term is computed
+# separately and reported separately, precisely so the two defects are not confused
+# with each other (standing discipline 75).
+#
+# THE QUANTITY HAS NO OPERATOR NORM, AND THAT IS THE FIRST FINDING (discipline 73).
+# There is no such thing as ||H_disc - H|| here.  H_disc maps R^n -> R^n; H maps
+# functions to functions.  The difference is only defined once a CLASS OF FUNCTIONS
+# is named, and its size depends on that class -- a function with features finer
+# than the local mesh has an enormous defect and a well-resolved one has a tiny
+# defect, on the same grid, with the same operator.  So the defect is reported ON A
+# NAMED CLASS, as a curve in the class's scale parameter, and never as a single
+# number pretending to be an operator norm.
+#
+# THE MECHANISM: BOTH OPERATORS ARE EXACT ON ONE COMMON OBJECT.
+# `line_hilbert_matrix` is NOT a quadrature rule.  It represents the data by the
+# C^1 cubic spline interpolant Pi_n f whose node slopes are the natural-spline
+# slopes, and then applies the EXACT Hilbert transform of that spline (Huang-Tong-
+# Wang App. C.1).  `slope_matrix` returns the derivative of the SAME interpolant.
+# Therefore, exactly:
+#
+#     H_disc f  =  H(Pi_n f) restricted to [-M, M]        (M = max |X|)
+#     D_disc f  =  (Pi_n f)'  at the nodes
+#
+# and BOTH consistency defects are one and the same interpolation error e = Pi_n f - f
+# seen through two different operators:
+#
+#     D_disc f - f'          =  e'                        (local, and bounded by e)
+#     H_disc f - H_M f       =  H(e) on [-M, M]           <-- THE GAP GATED HERE
+#     H_M f    - H f         =  the far-field tail        <-- THE OTHER GAP, reported not gated
+#
+# where H_M is the Hilbert transform truncated to [-M, M].  This is why H's defect
+# cannot be bounded from ||e||_sup: H is unbounded on L^infinity.  It has to be
+# evaluated, and that is what the closed form below is for.
+#
+# THE TEST CLASS.  f_{a,b}(X) = -(X - b) / ((X - b)^2 + a^2), whose whole-line
+# Hilbert transform, truncated Hilbert transform and derivative are ALL closed form:
+#
+#     H f_{a,b}(x) = a / ((x - b)^2 + a^2)
+#     f'_{a,b}(x)  = ((x - b)^2 - a^2) / ((x - b)^2 + a^2)^2
+#
+# (`a = 1/2, b = 0` is exactly the CLM pair `line_hilbert.py` already gates against).
+# The truncated transform follows from partial fractions of -u/((u^2+a^2)(X-u)):
+# with X = x - b, A = C = -X/(X^2+a^2), B = a^2/(X^2+a^2),
+#
+#     pi H_M f = (A/2) ln((u2^2+a^2)/(u1^2+a^2))
+#              + (B/a)(arctan(u2/a) - arctan(u1/a))
+#              - C ln|(x - M)/(x + M)|,     u1 = -M-b,  u2 = M-b,
+#
+# which tends to pi B/a = pi H f as M -> infinity, as it must.  The TRUNCATION is
+# formed directly, cancellation-free, rather than as a difference of two nearly
+# equal numbers.
+#
+# THE ENDPOINT NODES ARE EXCLUDED, AND WHY.  At x = +-M the truncated transform is
+# logarithmically divergent (the cut end of the integral sits on the evaluation
+# point).  H_disc's own boundary basis is one-sided and finite there, and the two
+# divergences cancel in the difference -- but not in floating point.  The defect is
+# therefore reported on the INTERIOR nodes, and the count of excluded nodes is
+# reported with it.  Those two nodes are where the far-field gap lives anyway.
+
+class SplineConsistency:
+    """Rigorous enclosures of the (H, D) consistency defect on the rational class.
+
+    `problem` is a `BorderedHL` (or anything exposing `X`, `H`, `D`).  All defects
+    are returned as enclosures together with their WIDTHS, because a rigorous bound
+    whose width is comparable to its value is a statement about the code and not
+    about the operator (standing discipline 86)."""
+
+    def __init__(self, problem):
+        self.pr = problem
+        self.X = np.asarray(problem.X, dtype=float)
+        self.M = float(np.abs(self.X).max())
+        self.interior = np.abs(self.X) < self.M          # drop the two endpoint nodes
+
+    # -- the class, enclosed -------------------------------------------------
+    # TWO families, and the second one exists to FALSIFY the first one's mechanism
+    # (standing discipline 85/90 -- ablate the mechanism, and only quote a control
+    # that could have come out the other way):
+    #
+    #   "odd"   f = -u/(u^2+a^2),  H f = a/(u^2+a^2),  f(+-M) ~ 1/M    DECAYS LIKE 1/X
+    #   "even"  g =  a/(u^2+a^2),  H g = u/(u^2+a^2),  g(+-M) ~ a/M^2  DECAYS LIKE 1/X^2
+    #
+    # (`H` is a rotation: H^2 = -1, so the second pair is the first one transformed,
+    # and both are exact.)  They have the SAME smoothness and the SAME interior
+    # resolution demands and differ by two orders of magnitude in their VALUE AT THE
+    # CUT.  If the H defect is set by interior interpolation, the two families give
+    # the same number; if it is set by what the discrete operator does at +-M, the
+    # "even" family's defect collapses.  Nothing in the code knows which is which.
+    def _coeffs(self, a, b, family):
+        """(A, B) of the partial-fraction decomposition; C == A in both families."""
+        iX = Interval.point(self.X)
+        u = iX - Interval.point(float(b))
+        ia = Interval.point(float(a))
+        ia2 = Interval.point(float(a) ** 2)
+        den = u * u + ia2
+        if family == "odd":
+            return u, den, (-u / den), (ia2 / den)
+        if family == "even":
+            return u, den, (ia / den), (ia * u / den)
+        raise ValueError(f"unknown family {family!r}")
+
+    def f(self, a, b=0.0, family="odd"):
+        """Enclosure of the test function at every node."""
+        u, den, _A, _B = self._coeffs(a, b, family)
+        if family == "odd":
+            return -u / den
+        return Interval.point(float(a)) / den
+
+    def f_prime(self, a, b=0.0, family="odd"):
+        """Enclosure of the test function's derivative at every node."""
+        u, den, _A, _B = self._coeffs(a, b, family)
+        ia2 = Interval.point(float(a) ** 2)
+        if family == "odd":
+            return (u * u - ia2) / (den * den)
+        return -(Interval.point(2.0 * float(a)) * u) / (den * den)
+
+    def H_exact(self, a, b=0.0, family="odd"):
+        """Enclosure of the WHOLE-LINE Hilbert transform at every node (= B/a)."""
+        _u, _den, _A, B = self._coeffs(a, b, family)
+        return B / Interval.point(float(a))
+
+    def H_truncation(self, a, b=0.0, family="odd"):
+        """Enclosure of (H f - H_M f): the FAR-FIELD gap, formed cancellation-free.
+
+        This is the OTHER named gap.  It is computed here only so that it can be
+        SUBTRACTED OFF and reported separately -- it is not what leg 56 gates."""
+        from solver.interval import IPI, iatan_small, ilog
+        M = self.M
+        _u, _den, A, B = self._coeffs(a, b, family)
+        Bov_a = B / Interval.point(float(a))              # B/a
+        u2 = float(M - b)
+        u1 = float(-M - b)
+        # arctan tail, both arguments small: pi - (atan(u2/a) - atan(u1/a))
+        t2 = iatan_small(np.full(self.X.shape, float(a) / u2))
+        t1 = iatan_small(np.full(self.X.shape, float(a) / (-u1)))
+        atan_part = Bov_a * (t2 + t1)
+        # log of the symmetric-cut ratio (a pure constant across nodes)
+        r = float((u2 * u2 + float(a) ** 2) / (u1 * u1 + float(a) ** 2))
+        log1 = A * Interval.point(0.5) * ilog(np.full(self.X.shape, r))
+        # -C ln|(x-M)/(x+M)| with C = A; safe only on the interior
+        Xi = np.where(self.interior, self.X, 0.0)
+        lg = ilog(np.maximum(M - Xi, 1e-300)) - ilog(np.maximum(M + Xi, 1e-300))
+        log2 = -A * lg
+        num = atan_part - log1 - log2
+        return num / IPI
+
+    # -- the discrete operators applied, rigorously --------------------------
+    def _apply(self, Mat, iv_vec):
+        """Rigorous enclosure of Mat @ v for an exact float Mat and enclosed input v.
+
+        The compensated path is used on the MIDPOINT (that is the evaluation whose
+        cancellation matters, leg 50), and the input's own radius is carried through
+        by the exact non-negative bound |Mat| @ rad.  Both pieces are rounded out."""
+        Mat = np.asarray(Mat, dtype=float)
+        mid = np.asarray(iv_vec.mid, dtype=float)
+        rad = np.asarray(iv_vec.rad, dtype=float)
+        core = dot2_matvec(Mat, mid)
+        m = Mat.shape[1]
+        spread = _up(np.abs(Mat) @ rad)
+        spread = _up(spread * (1.0 + _gamma(m)))
+        return Interval(_down(core.lo - spread), _up(core.hi + spread))
+
+    # -- the defects ---------------------------------------------------------
+    def defects(self, a, b=0.0, nu=None, family="odd"):
+        """Enclosures of the D and H consistency defects in the weighted sup norm.
+
+        Returns absolute defects, the relative ones (divided by the same weighted
+        norm of the test function itself), the enclosure widths, and the far-field
+        truncation term kept strictly separate."""
+        nu = np.ones_like(self.X) if nu is None else np.asarray(nu, dtype=float)
+        msk = self.interior
+        fv = self.f(a, b, family)
+        # --- D: (Pi_n f)' - f' at the nodes
+        Dd = self._apply(self.pr.D, fv)
+        dD = Dd - self.f_prime(a, b, family)
+        # --- H: H(Pi_n f) - H_M f on [-M, M]
+        Hd = self._apply(self.pr.H, fv)
+        trunc = self.H_truncation(a, b, family)
+        H_M = self.H_exact(a, b, family) - trunc
+        dH = Hd - H_M
+
+        def wsup(iv):
+            """Rigorous weighted sup of |iv| over the interior nodes, and its lower mate."""
+            lo = np.asarray(iv.lo)[msk]
+            hi = np.asarray(iv.hi)[msk]
+            m = np.maximum(np.abs(lo), np.abs(hi))
+            lowmag = np.minimum(np.abs(lo), np.abs(hi))
+            straddle = (lo <= 0) & (hi >= 0)
+            lowmag = np.where(straddle, 0.0, lowmag)
+            wu = _up(nu[msk] * m)
+            wl = _down(nu[msk] * lowmag)
+            return float(np.max(wu)), float(np.max(wl))
+
+        f_norm_hi, f_norm_lo = wsup(fv)
+        dD_hi, dD_lo = wsup(dD)
+        dH_hi, dH_lo = wsup(dH)
+        tr_hi, tr_lo = wsup(trunc)
+        return {
+            "a": float(a), "b": float(b),
+            "n": int(self.X.size), "interior_nodes": int(msk.sum()),
+            "excluded_nodes": int((~msk).sum()), "X_max": self.M,
+            "f_norm_w": f_norm_hi,
+            "defect_D_abs": dD_hi, "defect_D_abs_lower": dD_lo,
+            "defect_H_abs": dH_hi, "defect_H_abs_lower": dH_lo,
+            "truncation_H_abs": tr_hi, "truncation_H_abs_lower": tr_lo,
+            "defect_D_rel": float(_up(dD_hi / f_norm_lo)) if f_norm_lo > 0 else float("inf"),
+            "defect_H_rel": float(_up(dH_hi / f_norm_lo)) if f_norm_lo > 0 else float("inf"),
+            # lesson 86: how much of the bound is the bound, and how much is the code
+            "width_frac_D": float((dD_hi - dD_lo) / dD_hi) if dD_hi > 0 else float("nan"),
+            "width_frac_H": float((dH_hi - dH_lo) / dH_hi) if dH_hi > 0 else float("nan"),
+        }

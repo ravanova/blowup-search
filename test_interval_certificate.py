@@ -141,7 +141,7 @@ def test_Z1_below_one_at_every_rung():
           + " at n = 201, 401, 801 -- all below 1")
 
 
-if __name__ == "__main__":
+def _main():
     t0 = time.time()
     test_exact_rational_reference()
     test_compensated_is_sharper_and_consistent()
@@ -150,4 +150,143 @@ if __name__ == "__main__":
     test_poisoned_iterate_is_rejected()
     test_headline_and_its_mechanism()
     test_Z1_below_one_at_every_rung()
+    test_truncated_transform_matches_quadrature()
+    test_mechanism_ablation_separates()
+    test_D_converges_at_spline_order()
+    test_H_does_not_converge()
+    test_defect_bounds_are_not_evaluation_error()
     print(f"\nall interval-certificate gates pass ({time.time() - t0:.1f}s)")
+
+
+# --------------------------------------------------------------------------
+# Route-TN (leg 56): gates for the (H, D) consistency defect
+# --------------------------------------------------------------------------
+#  (8)  THE CLOSED-FORM REFERENCE IS CHECKED AGAINST INDEPENDENT QUADRATURE. The
+#       truncated Hilbert transform is the whole measurement's reference; if it is
+#       wrong, every defect below is a statement about an algebra slip. It is
+#       verified against a direct principal-value quadrature that shares no code.
+#  (9)  THE MECHANISM ABLATION SEPARATES. Two families of identical interior
+#       smoothness differing only in their value at the cut: H's defect must
+#       collapse by ~M/a and D's must NOT move. If both move, or neither, the
+#       mechanism named in the module docstring is wrong.
+#  (10) D CONVERGES AT THE SPLINE ORDER. Order 4 +- 0.25 across 201/401/801.
+#  (11) H DOES NOT CONVERGE. Flat to within 5% across a 4x refinement. This gate is
+#       falsifiable in the useful direction: if a future change makes H converge,
+#       it fails and must be re-read.
+#  (12) THE BOUND IS NOT ITS OWN EVALUATION ERROR (discipline 86). width/value must
+#       be below 1e-4 for both defects, else the number describes the code.
+
+def _consistency(n):
+    from solver.bordered_hl import BorderedHL
+    from solver.interval_certificate import SplineConsistency
+    b = BorderedHL(n=n)
+    nu = (1.0 + b.X ** 2) ** (0.5 * 0.39)
+    return b, SplineConsistency(b), nu
+
+
+def _pv_quadrature(sc, x, a, family, N=2_000_001):
+    """Independent PV quadrature of (1/pi) int_{-M}^{M} f(y)/(x-y) dy.
+
+    Shares no code with the closed form: the singularity is removed by subtracting
+    f(x), and the resulting explicit log term is added back."""
+    M = sc.M
+
+    def fn(u):
+        return (-u / (u * u + a * a)) if family == "odd" else (a / (u * u + a * a))
+
+    y = np.linspace(-M, M, N)
+    d = x - y
+    sing = np.abs(d) < 1e-13
+    safe = np.where(sing, 1.0, d)
+    g = np.where(sing, 0.0, (fn(y) - fn(x)) / safe)
+    h = 1e-6
+    g[sing] = -(fn(x + h) - fn(x - h)) / (2 * h)
+    return (np.trapezoid(g, y) + fn(x) * np.log(abs((x + M) / (x - M)))) / np.pi
+
+
+def test_truncated_transform_matches_quadrature():
+    """(8) the closed-form reference against independent principal-value quadrature."""
+    # The comparison is MIXED absolute/relative on purpose. The "even" family's
+    # truncated transform vanishes identically at X = 0 by symmetry (an even
+    # integrand against an odd kernel), so a pure relative test there divides by a
+    # true zero and reports 1e-16/1e-16 as a total failure. The criterion below is
+    # |closed - quad| <= atol + rtol |quad|, which is the honest statement.
+    ATOL, RTOL = 1e-12, 1e-9
+    b, sc, _nu = _consistency(201)
+    worst_abs = 0.0
+    for family in ("odd", "even"):
+        for a in (0.5, 2.0):
+            He = sc.H_exact(a, 0.0, family)
+            tr = sc.H_truncation(a, 0.0, family)
+            for j in (60, 100, 140):
+                closed = float(He.mid[j] - tr.mid[j])
+                quad = _pv_quadrature(sc, float(b.X[j]), a, family)
+                err = abs(closed - quad)
+                assert err <= ATOL + RTOL * abs(quad), (
+                    f"{family} a={a} node {j}: closed {closed:.12e} vs quad "
+                    f"{quad:.12e} (|diff| = {err:.2e})")
+                worst_abs = max(worst_abs, err)
+    assert worst_abs < 1e-12, f"closed form disagrees with quadrature by {worst_abs:.2e}"
+    print(f"    worst absolute disagreement {worst_abs:.2e} over 12 (family, a, node) cases")
+    print("[ok] (8) the truncated-transform reference matches independent quadrature")
+
+
+def test_mechanism_ablation_separates():
+    """(9) H's defect is the value at the cut; D's is interior interpolation."""
+    rows = []
+    for n in (201, 401, 801):
+        _b, sc, nu = _consistency(n)
+        o = sc.defects(0.5, 0.0, nu, family="odd")
+        e = sc.defects(0.5, 0.0, nu, family="even")
+        hc = o["defect_H_abs"] / e["defect_H_abs"]
+        dc = o["defect_D_abs"] / e["defect_D_abs"]
+        rows.append((n, hc, dc))
+        assert hc > 500.0, f"n={n}: H defect did not collapse ({hc:.1f}x)"
+        assert dc < 1.5, f"n={n}: D defect moved with the cut value ({dc:.2f}x)"
+    print("    " + "; ".join(f"n={n}: H {hc:.0f}x, D {dc:.2f}x" for n, hc, dc in rows))
+    print("[ok] (9) the ablation separates: the cut value drives H and not D")
+
+
+def test_D_converges_at_spline_order():
+    """(10) the derivative defect falls like h^4, the natural-spline order."""
+    vals = []
+    for n in (201, 401, 801):
+        _b, sc, nu = _consistency(n)
+        vals.append(sc.defects(0.5, 0.0, nu, family="odd")["defect_D_abs"])
+    orders = [float(np.log2(x / y)) for x, y in zip(vals[:-1], vals[1:])]
+    for o in orders:
+        assert 3.75 < o < 4.25, f"D order {o:.2f} is not the spline order 4"
+    print("    defects " + ", ".join(f"{v:.3e}" for v in vals)
+          + "; orders " + ", ".join(f"{o:.2f}" for o in orders))
+    print("[ok] (10) the D consistency defect converges at order 4")
+
+
+def test_H_does_not_converge():
+    """(11) the Hilbert defect is flat under refinement -- the leg's finding."""
+    vals = []
+    for n in (201, 401, 801):
+        _b, sc, nu = _consistency(n)
+        vals.append(sc.defects(0.5, 0.0, nu, family="odd")["defect_H_abs"])
+    drop = vals[0] / vals[-1]
+    assert 0.95 < drop < 1.05, (
+        f"H defect moved by {drop:.3f}x over a 4x refinement -- it used to be flat; "
+        "re-read the finding before trusting either number")
+    print("    defects " + ", ".join(f"{v:.4e}" for v in vals)
+          + f"; total change over 4x refinement {drop:.4f}x")
+    print("[ok] (11) the H consistency defect does NOT converge at fixed reach")
+
+
+def test_defect_bounds_are_not_evaluation_error():
+    """(12) discipline 86: the enclosure width must be far below the enclosed value."""
+    _b, sc, nu = _consistency(801)
+    d = sc.defects(0.5, 0.0, nu, family="odd")
+    assert d["width_frac_D"] < 1e-4, f"D bound is {d['width_frac_D']:.2e} wide"
+    assert d["width_frac_H"] < 1e-4, f"H bound is {d['width_frac_H']:.2e} wide"
+    assert d["excluded_nodes"] == 2, "exactly the two endpoint nodes are excluded"
+    print(f"    width/value: D {d['width_frac_D']:.2e}, H {d['width_frac_H']:.2e}; "
+          f"{d['interior_nodes']} interior nodes")
+    print("[ok] (12) both defect bounds dominate their own evaluation error")
+
+
+if __name__ == "__main__":
+    _main()
