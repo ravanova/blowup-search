@@ -102,7 +102,7 @@ changes character. Kept as test 14.
 |---|---|
 | module | `solver/certificate_shapes.py` |
 | gates (15/15) | `test_certificate_shapes.py` |
-| runner (221 s) | `experiments/p2_route_xs_v1_shapes.py` |
+| runner (357 s) | `experiments/p2_route_xs_v1_shapes.py` |
 | data | `writeup/data/p2_route_xs_v1_shapes.json` |
 | figure | `writeup/figures/fig52_route_xs_v1_shapes.png` (registered in `build_figures.py`) |
 | evidence script | `experiments/p2_route_xs_v1_shapes_evidence.py` |

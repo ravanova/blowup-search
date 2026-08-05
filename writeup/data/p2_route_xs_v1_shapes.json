@@ -386,6 +386,14 @@
   "first": 2.190835328396217,
   "last": 11.527648395372571,
   "ratio_last_over_first": 5.261759405628761,
+  "prior_claim_being_sharpened": {
+   "source": "legs 52-53 (CONTINUATION_PROMPT.md, capabilities.py)",
+   "wording": "the bordered tail inverse is a CONSTANT (2.19 ... 10.32 here, 9.44 in leg 52's ladder), not 1/K",
+   "constant_low": 2.19,
+   "constant_high": 10.32,
+   "leg52_ladder_value": 9.44,
+   "correction": "It is not a constant.  Over K = 4 ... 128 it runs 2.191 -> 11.528, exponent +0.437.  The 2.19 is the SMALLEST RUNG OF A RISING LADDER, not a bound (lesson 72).  The conclusion those legs drew is unaffected and in fact strengthened."
+  },
   "reading": "THE SHARP FORM OF 'A CONSTANT, NOT 1/K'.  It is not even a constant: it GROWS, at +0.44 in log-log, from 2.191 at K = 4 to 11.53 at K = 128.  A tail estimate needs this to fall like 1/Lambda_K.  The 2.19 that legs 52-53 quote is the SMALLEST rung of a rising ladder, not a bound (lesson 72)."
  },
  "XS4_dead_hypothesis": {
@@ -426,5 +434,5 @@
  "what_this_establishes": "Across the four published computer-assisted certificates this repository cites, no radii-polynomial certificate has an off-diagonal (shift) unbounded part whose tail inverse fails to decay.  The two near-misses fail for DIFFERENT and informative reasons: BDL publish a NON-BLOCK-DIAGONAL approximate inverse (which is exactly MM's remaining move) but still require a diagonal bounded below; and Chen-Hou certify a genuine transport operator but do so by ABANDONING the tail estimate entirely, extracting damping from the advection term in a weighted energy estimate.  So the dichotomy is a real classification of the published record, and TC/MM's negative is not an artifact of this repository.",
  "what_this_does_NOT_establish": "That no such certificate could exist -- four papers is a corpus, not a theorem, and the classification is TRANSCRIBED from full texts by a human-equivalent process.  That the dichotomy is this leg's finding -- it is folklore in print (XS0).  That Chen-Hou's energy method ports to HL_S2_nonsymmetric -- nobody has run that, and this leg does not claim it works.  Nothing here moves any link of the L1->L4 chain; Clay stays at ~0.05% behind Walls 1 and 2.",
  "forward_consequence_for_MM": "MM's one remaining free choice is the SHAPE of A, i.e. an approximate inverse that is not block diagonal.  BDL arXiv:1503.06315 is the published instance of that move, and this ledger locates what it costs: their Proposition 2.3 delivers the SAME decay gain s_L as the pure multiplier case, but only under assumption (4), a diagonal bounded below at the growth rate.  So the published precedent for MM's move does not carry over to a zero diagonal.  This is a statement about BDL's construction, NOT a prediction of MM's gate -- MM measures its own object.",
- "elapsed_s": 221.292555809021
+ "elapsed_s": 357.311904668808
 }

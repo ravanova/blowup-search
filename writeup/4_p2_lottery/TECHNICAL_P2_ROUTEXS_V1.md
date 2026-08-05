@@ -3,7 +3,7 @@
 **Branch** `leg/xs-v1`. **Exploration leg, not critical path.** **Gate answered: NO.**
 **Data** `writeup/data/p2_route_xs_v1_shapes.json`. **Figure** `fig52_route_xs_v1_shapes.png`.
 **Module** `solver/certificate_shapes.py`, **gates** `test_certificate_shapes.py` **15/15**.
-**Runner** `experiments/p2_route_xs_v1_shapes.py` (221 s, deterministic).
+**Runner** `experiments/p2_route_xs_v1_shapes.py` (357 s on a contended box, deterministic -- the numbers reproduce exactly).
 
 ---
 
@@ -285,7 +285,7 @@ diagonal. **MM measures its own object and this leg does not pre-empt its gate.*
 
 ```
 .venv/bin/python test_certificate_shapes.py                       # 15/15
-.venv/bin/python -u experiments/p2_route_xs_v1_shapes.py          # regenerate JSON (221 s)
+.venv/bin/python -u experiments/p2_route_xs_v1_shapes.py          # regenerate JSON (357 s)
 .venv/bin/python experiments/p2_route_xs_v1_shapes_evidence.py    # rebuild fig52 from JSON
 ```
 
