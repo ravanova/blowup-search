@@ -85,6 +85,11 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-L1 v2 | Certificate rebuilt where operators are exact; one term left over (weight class) | Y | Y | Y | Y | fig46 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL1_V2.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL1_V2.md) |
 | Route-PORT v2 | Reach makes the truncation gap WORSE (+0.47 dec/unit ρ) — tail lemma forced | Y | Y | **GAP: T only, no BLOG** | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) — see gap list below |
 | Route-T v1 | Bordering restores a bounded tail; works where the failure curve was worst | Y | Y | Y | Y | fig47 | [T](4_p2_lottery/TECHNICAL_P2_ROUTET_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTET_V1.md) |
+| Route-TC v1 | Assembling the bordered certificate: four terms in one polynomial; the term that ran out is Z₁'s block coupling | Y | Y | Y | Y | fig48 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETC_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETC_V1.md) |
+| Route-MM v1 | The shape of the approximate inverse, spent — gate answered **NO** | Y | Y | Y | Y† | fig49 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEMM_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEMM_V1.md) |
+| Route-NB v1 | Compactified-basis coefficient decay of `HL_S2_nonsymmetric`: is the target in the space? | Y | Y | Y | Y† | fig50 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENB_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENB_V1.md) |
+| Route-TN v1 | The `(H, D)` consistency defect of `L1` step one, enclosed — gate answered **NO** | Y | Y | Y | Y† | fig51 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETN_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETN_V1.md) |
+| Route-XS v1 | The shape dichotomy against published certificates — gate answered **NO** | Y | Y | Y | Y† | fig52 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEXS_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEXS_V1.md) |
 
 `gen*` = the runner is the `*_evidence.py` script itself (`--generate` recomputes from
 `solver/`), rather than a separate `experiments/*.py` file — legacy legs (HL anchor, GA
@@ -92,8 +97,14 @@ framework, Scenario 2/regular-profile) that predate the `experiments/` split lat
 use. Substance of quartet item 1 (a runner that produced the numbers) is present; form
 differs from the current convention.
 
-**Route-TC** (current `NEXT` stage per `plan_of_record.py`) has no writeup yet — it is
-in progress on `leg/tc-v1` as of this index's last update; see the section below.
+`Y†` = the `*_evidence.py` exists but lives in `experiments/` rather than beside its docs in
+`4_p2_lottery/` (4 files: MM, NB, TN, XS). Placement drift from the earlier Arc-4 routes, not
+a missing piece — see gap-list item 7.
+
+**Index currency.** Arc 4's table above is current through **leg 57 (Route-XS)**. Legs 53
+(TC), 54 (MM), 55 (NB), 56 (TN) and 57 (XS) were verified piece-by-piece against the files
+on disk when their rows were added — 25 of 25 quartet pieces present, none missing, none
+zero-byte; the full per-file inventory is in [novelty/leg_68.md](novelty/leg_68.md).
 
 ## Quartet gaps found (plain list)
 
@@ -133,9 +144,17 @@ in progress on `leg/tc-v1` as of this index's last update; see the section below
 6. **Route-D "advection scope" and "literature scope" (v15)** have no data JSON/figure by
    explicit design (stated in their own file headers: no measurement was produced). Not a
    gap — the negative construction ("no number here") is itself the honest artifact.
+7. **Evidence-script placement drift, legs 54–57** — `p2_route_mm_v1_shape_evidence.py`,
+   `p2_route_nb_v1_targetnorm_evidence.py`, `p2_route_tn_v1_consistency_evidence.py` and
+   `p2_route_xs_v1_shapes_evidence.py` all sit in `experiments/`, whereas every Arc-4 route
+   before them (including leg 53's `p2_route_tc_v1_evidence.py`) keeps its evidence script in
+   `writeup/4_p2_lottery/`. 4 files, all present and all runnable; nothing is missing, so
+   these are `Y†` in the table rather than `GAP`. Not moved here: relocating a script rewrites
+   the paths its own TECHNICAL file quotes, which is outside a links-and-labels remit.
+8. **`fig48` is assigned twice** — both `writeup/figures/fig48_route_tc_v1_assemble.png`
+   (leg 53, referenced by `TECHNICAL_P2_ROUTETC_V1.md`) and
+   `writeup/figures/fig48_weight_repairs_v1.png` exist. 1 duplicated figure number. Leg 53's
+   F slot is genuinely filled; renumbering the other is a registry decision, not an index one.
 
-## Route-TC (in progress, LEG's branch `leg/tc-v1`)
-
-`plan_of_record.py` marks `TC` as `NEXT` as of this index's last update. Reviewed for the
-docs contract once available — see the standing note below or the daily report for the
-verdict.
+Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
+the Arc 4 table above.
