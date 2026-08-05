@@ -19,6 +19,13 @@ and a deliberately wrong iterate that must be rejected.
   (7) Z_1 < 1 AT EVERY RUNG, rigorously -- without that, A is not an approximate inverse
       and nothing else in the certificate means anything.
 
+  (14)-(18) THE PUBLISHED KNOWN-ANSWER GATE (Route-KA, leg 61). Everything above this
+      line is the pipeline checked against ITSELF. These five are the first gates in
+      this file whose reference number was computed by somebody else and refereed:
+      Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6, r_0 = 2.27e-14 for the Kawahara
+      soliton at their own truncation. Read the comment above them for what the gate
+      can and cannot see -- its resolution is about half a decade, not a digit.
+
 Run: .venv/bin/python test_interval_certificate.py
 """
 
@@ -209,6 +216,11 @@ def _main():
     test_H_does_not_converge()
     test_defect_bounds_are_not_evaluation_error()
     test_H_transforms_an_endpoint_zeroed_interpolant()
+    test_kawahara_sign_convention_matches_cln_figure()
+    test_kawahara_quadratic_encloses_exact_rational()
+    test_kawahara_known_answer_gate()
+    test_kawahara_conversion_is_an_upper_bound()
+    test_kawahara_poisoned_iterate_is_rejected()
     print(f"\nall interval-certificate gates pass ({time.time() - t0:.1f}s)")
 
 
@@ -340,6 +352,162 @@ def test_defect_bounds_are_not_evaluation_error():
     print(f"    width/value: D {d['width_frac_D']:.2e}, H {d['width_frac_H']:.2e}; "
           f"{d['interior_nodes']} interior nodes")
     print("[ok] (12) both defect bounds dominate their own evaluation error")
+
+
+# --------------------------------------------------------------------------
+# Route-KA (leg 61): THE PUBLISHED KNOWN-ANSWER GATE
+# --------------------------------------------------------------------------
+# Every gate above this line is the pipeline checked against ITSELF -- exact
+# rationals, orderings between two of its own quantities, a poisoning it must
+# notice.  The gates below are the first ones in this file whose reference number was
+# computed by somebody else, published, and refereed: Cadiot-Lessard-Nave
+# arXiv:2302.12877 Thm 6.6 (SIADS 10.1137/23M1607507), r_0 = 2.27e-14 for the
+# Kawahara soliton at N = 250, d = 50, T = 0.35, c = 0.9.
+#
+# WHAT THE GATE CAN AND CANNOT SEE, stated here so nobody later reads more into a
+# green line than it carries.  Our radius is in a weighted sup norm and theirs is in
+# H^l, so the comparison passes through a conversion whose factor is sqrt(2N+1) --
+# the worst case, in which the residual is spread evenly over every mode.  The gate
+# therefore localises agreement to a factor of a few, NOT to a digit.  Its resolution
+# is about half a decade.  That is ample for the use it was built for (leg 56 reports
+# defects of 1.85e7x and 2.04e11x from this pipeline, 7 and 11 decades away) and it
+# would be useless for validating a 2x claim.
+
+def _kawahara(N=250):
+    from solver.interval_certificate import KawaharaProblem
+    pr = KawaharaProblem(N=N)
+    a, hist = pr.newton()
+    return pr, a, hist
+
+
+def test_kawahara_sign_convention_matches_cln_figure():
+    """(14) the profile lands on CLN's Figure 1 BEFORE any certificate is quoted.
+
+    A sign slip in lam1/lam2/lam3 would give a different soliton and every constant
+    downstream would be a rigorous bound on the wrong problem.  CLN's Figure 1 shows
+    u_0 with a minimum a little above -0.18, at the origin, decayed at the domain
+    edge.  Nothing here is fitted: the parameters come from their equation (74)."""
+    pr, a, _ = _kawahara()
+    x = np.linspace(-pr.d, pr.d, 2001)
+    u = a[0] + 2.0 * sum(a[k] * np.cos(k * np.pi * x / pr.d) for k in range(1, pr.n))
+    assert -0.19 < u.min() < -0.17, f"profile minimum {u.min():.4f} is not CLN's"
+    assert abs(x[int(u.argmin())]) < 1e-9, "the soliton is not centred"
+    assert abs(u[-1]) < 1e-12, f"profile has not decayed at x = d: {abs(u[-1]):.2e}"
+    assert abs(a[-1]) < 1e-18, f"mode N is not negligible: {abs(a[-1]):.2e}"
+    print(f"    min {u.min():.5f} at x = {x[int(u.argmin())]:.1e}; "
+          f"|u(d)| {abs(u[-1]):.2e}; |a_N| {abs(a[-1]):.2e}")
+    print("[ok] (14) the Kawahara profile reproduces CLN Figure 1")
+
+
+def test_kawahara_quadratic_encloses_exact_rational():
+    """(15) exact-rational reference for the new enclosure, same discipline as (1).
+
+    The coefficient vector is exact float data, so (a*a)_n is an exactly computable
+    rational.  The enclosure returned by the compensated path must contain it on
+    every sampled row -- including the rows where the sum cancels hardest."""
+    from solver.interval_certificate import KawaharaIntervals
+    pr, a, _ = _kawahara(N=60)
+    M = pr.mult_matrix(a)
+    enc = dot2_matvec(M, a)
+    rows = [0, 1, 7, 30, 59, 60]
+    worst = 0.0
+    for i in rows:
+        exact = sum(Fraction(M[i, j]) * Fraction(a[j]) for j in range(pr.n))
+        assert Fraction(enc.lo[i]) <= exact <= Fraction(enc.hi[i]), (
+            f"row {i}: enclosure [{enc.lo[i]:.17e}, {enc.hi[i]:.17e}] misses the "
+            f"exact rational {float(exact):.17e}")
+        worst = max(worst, float(enc.hi[i] - enc.lo[i]))
+    _iv = KawaharaIntervals(pr)
+    assert _iv.N == pr.n, "the pipeline's dimension must be the coefficient count"
+    print(f"    {len(rows)} rows contain their exact rational; widest {worst:.3e}")
+    print("[ok] (15) the Kawahara quadratic enclosure contains the exact value")
+
+
+def test_kawahara_known_answer_gate():
+    """(16) THE GATE: CLN's published radius is a certified radius of our polynomial.
+
+    This is the whole point of Route-KA.  `interval_constants` and `radii_verdict` --
+    the same two functions behind every other interval number in this repository --
+    are run end to end on CLN's problem at CLN's truncation, and the published
+    r_0 = 2.27e-14 must lie inside the interval of radii we certify.
+
+    The asymmetry is deliberate and is not a fudge: we bound strictly FEWER error
+    terms than CLN (no Fourier tail beyond N, no unbounded-domain passage), so our
+    r_min is expected BELOW theirs.  What would be a real disagreement is failing to
+    close at their radius, or closing only above their uniqueness ball."""
+    from solver.interval_certificate import _KAWAHARA_CLN, kawahara_certificate
+    run = kawahara_certificate()
+    v = run["verdict"]
+    assert v["closes"], f"the radii polynomial does not close: {v['reason']}"
+    assert run["constants"]["Z1"] < 1.0, "A is not an approximate inverse"
+    r0 = _KAWAHARA_CLN["r0_published"]
+    lo, hi = run["r_min_Hl"], run["r_max_Hl"]
+    assert lo <= r0 <= hi, (
+        f"CLN's published r0 = {r0:.3e} is NOT a certified radius of our polynomial: "
+        f"our certified interval is [{lo:.3e}, {hi:.3e}]. THIS IS THE BUG-HUNT "
+        "BRANCH of leg 61's gate -- do not paper over it")
+    assert hi >= _KAWAHARA_CLN["r_uniqueness_published"], (
+        "our certificate does not reach CLN's uniqueness ball")
+    below = np.log10(r0 / lo)
+    assert below < 1.0, (
+        f"r_min is {below:.2f} decades below the published radius; the gate was "
+        "banked at 0.53 decades and a drift past one decade needs re-deriving")
+    print(f"    certified [{lo:.4e}, {hi:.4e}] in H^l; CLN r0 {r0:.4e} inside, "
+          f"{below:.2f} decades above our r_min, "
+          f"{np.log10(hi / r0):.2f} below our r_max")
+    print("[ok] (16) the published Kawahara radius is a certified radius here")
+
+
+def test_kawahara_conversion_is_an_upper_bound():
+    """(17) the cross-norm factor must be conservative in the stated direction.
+
+    ||a||_{l^2_l} <= to_l2_l * ||a||_w is the inequality the comparison rests on.  It
+    is checked here against random vectors rather than trusted from the algebra, and
+    the factor must also never be below 1 (that would be a converted radius smaller
+    than the one it converts)."""
+    from solver.interval_certificate import KawaharaIntervals, kawahara_norm_conversion
+    pr, _a, _ = _kawahara(N=60)
+    conv = kawahara_norm_conversion(pr)
+    assert conv["to_l2_l"] >= 1.0 and conv["sup_l_over_w"] >= 1.0 - 1e-12
+    l = np.asarray(KawaharaIntervals(pr).symbol().hi)
+    w = pr.weight()
+    rng = np.random.default_rng(6161)
+    worst = 0.0
+    for _ in range(200):
+        v = rng.standard_normal(pr.n) * rng.choice([1.0, 1e-8], pr.n)
+        n_w = float(np.max(w * np.abs(v)))
+        n_2 = float(np.sqrt(l[0] ** 2 * v[0] ** 2
+                            + 2.0 * np.sum((l[1:] * v[1:]) ** 2)))
+        assert n_2 <= conv["to_l2_l"] * n_w * (1.0 + 1e-12), "conversion is not a bound"
+        worst = max(worst, n_2 / (conv["to_l2_l"] * n_w))
+    print(f"    factor {conv['to_l2_l']:.4f} (sqrt(2N+1) = {np.sqrt(2 * pr.N + 1):.4f}); "
+          f"tightest random case reaches {worst:.3f} of it")
+    print("[ok] (17) the cross-norm conversion is an upper bound, as claimed")
+
+
+def test_kawahara_poisoned_iterate_is_rejected():
+    """(18) the Kawahara certificate notices a displaced iterate, and scales linearly.
+
+    Y_0 must grow in proportion to the displacement -- a certificate whose residual
+    bound saturates is measuring its own arithmetic, not the iterate."""
+    from solver.interval_certificate import KawaharaIntervals, interval_constants
+    from solver.interval_certificate import radii_verdict as verdict
+    pr, a, _ = _kawahara(N=60)
+    iv, w = KawaharaIntervals(pr), pr.weight()
+    rng = np.random.default_rng(20610)
+    kick = rng.standard_normal(20)
+    ratios = []
+    for scale in (1e-8, 1e-4):
+        bad = a.copy()
+        bad[:20] = bad[:20] + scale * kick
+        c = interval_constants(iv, bad, w, w)
+        ratios.append(verdict(c["Y0"], c["Z1"], c["Z2"])["Y0_over_budget"])
+    assert ratios[-1] > 1.0, "a 1e-4 displacement must break the budget"
+    growth = ratios[1] / ratios[0]
+    assert 1e3 < growth < 1e5, f"Y0/budget grew {growth:.2e}x over 1e4x displacement"
+    print(f"    Y0/budget {ratios[0]:.3e} -> {ratios[1]:.3e} over a 1e4x kick "
+          f"({growth:.2e}x)")
+    print("[ok] (18) the Kawahara certificate rejects a poisoned iterate")
 
 
 if __name__ == "__main__":

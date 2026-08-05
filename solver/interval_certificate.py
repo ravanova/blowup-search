@@ -655,3 +655,345 @@ def full_interpolant_hilbert_matrix(x):
     HP[0, :] = np.nan
     HP[-1, :] = np.nan
     return HP + HQ @ _slope_matrix(x)
+
+
+# --------------------------------------------------------------------------
+# ROUTE-KA (leg 61): THE FIRST PUBLISHED KNOWN-ANSWER PROBLEM THIS PIPELINE HAS RUN
+# --------------------------------------------------------------------------
+# WHY THIS IS HERE.  Read the `validated` column of capabilities.py for the
+# certificate stack: every entry is validated INTERNALLY.  Enclosures contain exact
+# rationals; rigorous bounds dominate their float readings; a poisoned iterate is
+# rejected.  All of that is self-consistency.  What the stack had never done, before
+# this section, is point `interval_constants` + `radii_verdict` at a problem whose
+# certified radius is IN PRINT and see where it lands.
+#
+# THE PROBLEM.  Cadiot-Lessard-Nave, arXiv:2302.12877 (SIADS 10.1137/23M1607507),
+# section 6: the Kawahara soliton.  With Bond number T and wave speed c,
+#
+#     u_t + u u_y + (3/2) u_y + a(T) u_yyy + b(T) u_yyyyy = 0,
+#     a(T) = (1 - 3T)/6,   b(T) = (19 - 30T - 45T^2)/360,
+#
+# and the travelling-wave reduction x = y - ct, integrated once, becomes the zero
+# finding problem CLN call (75).  In the sign convention of their released code
+# (github.com/matthieucadiot/ProofKawahara.jl) it is
+#
+#     F(u) = L u + lam3 u^2 = 0,     L = I + lam1 d_xx + lam2 d_xxxx,
+#     lam1 = (1 - 3T)/(6(1 - c)),  lam2 = (19 - 30T - 45T^2)/(360(1 - c)),
+#     lam3 = 3/(4(1 - c)).
+#
+# THEIR PARAMETERS ARE NOT ALL IN THE PAPER.  The paper prints T = 0.35, c = 0.9 and
+# the constants (||DF_e(u0)^{-1}||_{2,l} <= 4.4, Y_0 <= 2.26e-14, r_0 = 2.27e-14,
+# uniqueness in B_0.015) but NOT the truncation.  `ProofKawahara.jl` lines 357-360
+# print it: N = 250 cosine modes (0..N) and half-domain d = 50.  The window this
+# section is gated against is pre-committed AT THAT TRUNCATION (writeup/novelty/
+# leg_61.md), which is only possible because CLN released their code.
+#
+# THE REPRESENTATION, AND WHY IT IS THE EXPONENTIAL ONE.  CLN write cosine series in
+# the L^2-orthonormal normalisation u = U_0 + sqrt(2) sum_{n>=1} U_n cos(n pi x / d).
+# Convolution is clumsy in that normalisation and trivial in the exponential one, so
+# this class carries the EVEN EXPONENTIAL coefficients
+#
+#     a_n = (1/|Omega_0|) int_{Omega_0} u(x) e^{-i n pi x / d} dx,   a_{-n} = a_n,
+#
+# i.e. u = sum_{n in Z} a_n e^{i n pi x / d}, with U_0 = a_0 and U_n = sqrt(2) a_n.
+# The two normalisations give the SAME l^2 norm on the whole-line index set, so
+# ||U||_{X^l} = ||a||_{l^2_l(Z)} exactly -- which is what makes the comparison to
+# CLN's radius a conversion between norms and not between conventions.
+#
+# The folded product.  With a, b even and supported on |n| <= N,
+#
+#     (a*b)_n = sum_{m in Z} a_m b_{n-m} = M(a) b,
+#     M(a)_{n,0} = a_n,   M(a)_{n,m} = a_{|n-m|} + a_{n+m}  (m >= 1),
+#
+# where a_k := 0 for k > N.  So the GALERKIN system this pipeline certifies is
+#
+#     F_n(a) = l_n a_n + lam3 (a*a)_n,  n = 0..N,   l_n = 1 - lam1 k_n^2 + lam2 k_n^4,
+#
+# with k_n = n pi / d.  It is a genuine polynomial map R^{N+1} -> R^{N+1}.
+#
+# WHAT THIS DOES *NOT* CERTIFY, SAID BEFORE THE NUMBER IS QUOTED (discipline 75).
+# The Galerkin system is the truncation of the PERIODIC problem on Omega_0.  CLN
+# certify strictly more: the Fourier tail n > N, and the passage from the periodic
+# problem to the one on R.  Their Theorem 6.6 states BOTH conclusions, and the
+# periodic one -- a solution in B_{r_0/sqrt(|Omega_0|)}(U_0) of X^l_e -- is the one
+# this section is comparable to.  Because we bound FEWER error terms than they do,
+# a converted radius BELOW theirs is evidence of over-optimism, not of sharpness.
+#
+# THE NORM IS NOT THEIRS, AND THE CONVERSION IS PART OF THE RESULT.  This pipeline
+# works in the weighted sup norm ||a||_w = max_n w_n |a_n|; CLN work in l^2_l.  For
+# a vector supported on |n| <= N (2N+1 whole-line entries),
+#
+#     ||a||_{l^2_l} <= sqrt(2N+1) * max_n (l_n / w_n) * ||a||_w,
+#
+# and `kawahara_norm_conversion` returns that factor with every step rounded up.
+
+_KAWAHARA_CLN = {
+    "source": "Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6 / ProofKawahara.jl",
+    "T": 0.35, "c": 0.9, "N": 250, "d": 50.0,
+    "r0_published": 2.27e-14,          # H^l(R) existence radius
+    "r_uniqueness_published": 0.015,   # H^l(R) uniqueness ball
+    "Y0_published": 2.26e-14,          # ||A F(u0)||_l
+    "DFinv_published": 4.4,            # ||DF_e(u0)^{-1}||_{2,l}
+}
+
+
+class KawaharaProblem:
+    """The finite Kawahara Galerkin system at CLN's published truncation.
+
+    Float layer only: parameters, the symbol l, the folded multiplication matrix, the
+    residual and its Jacobian, and a Newton solve seeded by the KdV soliton.  The
+    enclosures live in `KawaharaIntervals`; this class is what that class treats as
+    exact data.
+
+    The seed is not arbitrary and it is a check in its own right.  Dropping the fourth
+    derivative leaves u + lam1 u'' + lam3 u^2 = 0, whose sech^2 solution is
+
+        u(x) = alpha sech^2(beta x),  beta^2 = -1/(4 lam1),  alpha = 6 lam1 beta^2/lam3,
+
+    which at T = 0.35, c = 0.9 gives alpha = -0.2, beta = sqrt(3).  CLN's Figure 1
+    shows u_0 with a minimum near -0.18: the seed lands on their picture before any
+    Newton step, which is how the sign convention above was confirmed rather than
+    guessed."""
+
+    def __init__(self, N=250, d=50.0, T=0.35, c=0.9):
+        self.N, self.d, self.T, self.c = int(N), float(d), float(T), float(c)
+        self.n = self.N + 1
+        self.lam1 = (1.0 - 3.0 * T) / (6.0 * (1.0 - c))
+        self.lam2 = (19.0 - 30.0 * T - 45.0 * T ** 2) / (360.0 * (1.0 - c))
+        self.lam3 = 3.0 / (4.0 * (1.0 - c))
+        self.k = np.arange(self.n, dtype=float) * np.pi / self.d
+        self.l = 1.0 - self.lam1 * self.k ** 2 + self.lam2 * self.k ** 4
+
+    # -- the folded product ---------------------------------------------------
+    def mult_matrix(self, a):
+        """M(a): the matrix with (a*b) = M(a) b on even sequences truncated at N."""
+        a = np.asarray(a, dtype=float)
+        n = self.n
+        ext = np.zeros(2 * n)
+        ext[:n] = a                          # a_k = 0 for k > N
+        idx = np.arange(n)
+        diff = np.abs(idx[:, None] - idx[None, :])
+        summ = idx[:, None] + idx[None, :]
+        M = ext[diff] + ext[summ]
+        M[:, 0] = a                          # the m = 0 column is not doubled
+        return M
+
+    def residual(self, a):
+        a = np.asarray(a, dtype=float)
+        return self.l * a + self.lam3 * (self.mult_matrix(a) @ a)
+
+    def jacobian(self, a):
+        return np.diag(self.l) + 2.0 * self.lam3 * self.mult_matrix(a)
+
+    # -- the seed and the Newton solve ---------------------------------------
+    def kdv_seed(self, n_quad=8192):
+        """Even exponential coefficients of the KdV sech^2 soliton on Omega_0."""
+        beta = np.sqrt(-1.0 / (4.0 * self.lam1))
+        alpha = 6.0 * self.lam1 * beta ** 2 / self.lam3
+        x = (np.arange(n_quad) / n_quad - 0.5) * (2.0 * self.d)
+        u = alpha / np.cosh(beta * x) ** 2
+        # a_n = (1/|Omega_0|) int u e^{-i n pi x/d}; the grid is uniform and u is even
+        coef = np.fft.rfft(np.fft.ifftshift(u)) / n_quad
+        return np.real(coef[: self.n])
+
+    def newton(self, a0=None, tol=1e-15, maxit=60):
+        a = self.kdv_seed() if a0 is None else np.array(a0, dtype=float)
+        hist = []
+        for _ in range(maxit):
+            R = self.residual(a)
+            hist.append(float(np.max(np.abs(R))))
+            step = np.linalg.solve(self.jacobian(a), R)
+            a = a - step
+            if np.max(np.abs(step)) < tol * max(1.0, np.max(np.abs(a))):
+                break
+        hist.append(float(np.max(np.abs(self.residual(a)))))
+        return a, hist
+
+    def weight(self):
+        """The norm's weight vector: exact float data, close to but not equal to l.
+
+        Any positive vector defines a norm, so w carries no enclosure of its own --
+        but the conversion to CLN's l^2_l norm then needs sup_n l_n / w_n, which
+        `kawahara_norm_conversion` bounds rigorously rather than assuming it is 1."""
+        return self.l.copy()
+
+
+class KawaharaIntervals:
+    """Interval enclosures of F and DF for `KawaharaProblem`.
+
+    The coefficient vector a is exact float data.  The SYMBOL is not: lam1, lam2, lam3
+    and pi are all inexact, so l_n is enclosed rather than read.  That is the only
+    place widening enters the linear part, and it is why this class exists instead of
+    a call to the float layer."""
+
+    def __init__(self, problem):
+        self.pr = problem
+        self.n = self.N = problem.n
+
+    # -- the enclosed symbol --------------------------------------------------
+    def _lam(self):
+        from solver.interval import Interval as I
+        T, c = I.point(self.pr.T), I.point(self.pr.c)
+        one = I.point(1.0)
+        lam1 = (one - I.point(3.0) * T) / (I.point(6.0) * (one - c))
+        lam2 = ((I.point(19.0) - I.point(30.0) * T - I.point(45.0) * (T * T))
+                / (I.point(360.0) * (one - c)))
+        lam3 = I.point(3.0) / (I.point(4.0) * (one - c))
+        return lam1, lam2, lam3
+
+    def symbol(self):
+        """Enclosure of l_n = 1 - lam1 k_n^2 + lam2 k_n^4, k_n = n pi / d."""
+        from solver.interval import IPI, Interval as I
+        lam1, lam2, _ = self._lam()
+        idx = np.arange(self.pr.n, dtype=float)
+        k = (IPI * I.point(idx)) / I.point(self.pr.d)
+        k2 = k * k
+        return I.point(np.ones(self.pr.n)) - lam1 * k2 + lam2 * (k2 * k2)
+
+    # -- the pipeline's three hooks ------------------------------------------
+    def F(self, z):
+        """Enclosure of F(a). The quadratic term goes through the COMPENSATED matvec:
+        at a Newton-converged iterate l_n a_n and lam3 (a*a)_n cancel to ~1e-16 of
+        their own size, which is exactly the regime `matvec` loses and `dot2_matvec`
+        does not (leg 50's lesson, re-used rather than re-learned)."""
+        from solver.interval import Interval as I
+        a = np.asarray(z, dtype=float)
+        _, _, lam3 = self._lam()
+        lin = self.symbol() * I.point(a)
+        quad = dot2_matvec(self.pr.mult_matrix(a), a)
+        return lin + lam3 * quad
+
+    def jacobian(self, z):
+        """(Jlo, Jhi) enclosing DF(a) = diag(l) + 2 lam3 M(a)."""
+        from solver.interval import Interval as I
+        a = np.asarray(z, dtype=float)
+        _, _, lam3 = self._lam()
+        M = self.pr.mult_matrix(a)
+        two_lam3 = I.point(2.0) * lam3
+        lo = np.minimum(two_lam3.lo * M, two_lam3.hi * M)
+        hi = np.maximum(two_lam3.lo * M, two_lam3.hi * M)
+        lo, hi = _down(lo), _up(hi)
+        l = self.symbol()
+        idx = np.arange(self.pr.n)
+        lo[idx, idx] = _down(lo[idx, idx] + l.lo)
+        hi[idx, idx] = _up(hi[idx, idx] + l.hi)
+        return lo, hi
+
+    def bilinear_bound(self, w, nu=None):
+        """Rigorous bound on sup{ ||lam3 u*v||_w : ||u||_w, ||v||_w <= 1 }.
+
+        ||u||_w <= 1 means |u_m| <= 1/w_m for every m in Z (w is even-extended), so
+
+            |(u*v)_n| <= sum_{|m| <= N, |n-m| <= N} 1 / (w_{|m|} w_{|n-m|})
+
+        and the bound is w_n times that, maximised over n.  Every step rounds up.
+        `nu` is accepted for signature compatibility with the bordered classes and is
+        not used: this problem has one field and one weight."""
+        _, _, lam3 = self._lam()
+        w = np.asarray(w, dtype=float)
+        n = self.pr.n
+        inv = _up(1.0 / w)
+        ext = np.zeros(2 * n)                       # 1/w_k, zero for k > N
+        ext[:n] = inv
+        idx = np.arange(n)
+        m = np.arange(-n + 1, n)
+        d1 = ext[np.abs(m)]                         # 1/w_{|m|}
+        diff = np.abs(idx[:, None] - m[None, :])
+        d2 = np.where(diff < n, ext[np.minimum(diff, 2 * n - 1)], 0.0)
+        s = _up(d2 @ d1)
+        s = _up(s * (1.0 + _gamma(2 * n)))
+        total = float(np.max(_up(w * s)))
+        return float(_up(float(lam3.hi) * total))
+
+
+def kawahara_norm_conversion(pr):
+    """Rigorous factors taking a radius in ||.||_w to CLN's two published norms.
+
+    Returns the multiplier `to_l2_l` such that ||a||_{l^2_l} <= to_l2_l * ||a||_w for
+    a supported on |n| <= N -- that is sqrt(2N+1) * sup_n (l_n / w_n) -- and
+    `to_Hl`, which multiplies by sqrt(|Omega_0|) to reach the function-space norm
+    CLN quote r_0 in (their Thm 6.6 states the coefficient statement with the same
+    sqrt(|Omega_0|) between them)."""
+    iv = KawaharaIntervals(pr)
+    l = iv.symbol()
+    w = pr.weight()
+    ratio = float(np.max(_up(np.asarray(l.hi) / w)))
+    modes = 2 * pr.N + 1
+    sq = _up(np.sqrt(float(modes)) * (1.0 + 2.0 ** -52))
+    to_l2_l = float(_up(sq * ratio))
+    to_Hl = float(_up(to_l2_l * _up(np.sqrt(2.0 * pr.d) * (1.0 + 2.0 ** -52))))
+    return {"modes_whole_line": int(modes), "sup_l_over_w": ratio,
+            "to_l2_l": to_l2_l, "to_Hl": to_Hl,
+            "sqrt_Omega0": float(_up(np.sqrt(2.0 * pr.d) * (1.0 + 2.0 ** -52)))}
+
+
+def kawahara_trace_rows(pr):
+    """CLN's finite trace operator T^N_{4,e}, in this module's folded coefficients.
+
+    CLN do not certify the Newton iterate.  They PROJECT it onto ker T^N_{4,e} first,
+    so that its function representation lies in H^4_0(Omega_0) and can be extended by
+    zero to the whole line -- the step that makes the periodic computation say
+    anything about R at all.  For an even function the first and third derivatives
+    already vanish at x = d, so two constraints remain: the value and the second
+    derivative.  With mu_0 = 1, mu_n = 2 (the folding multiplicity),
+
+        u(d)   = sum_n mu_n (-1)^n a_n,     u''(d) = -sum_n mu_n k_n^2 (-1)^n a_n.
+
+    Returned as the 2 x (N+1) matrix of those two rows."""
+    n = pr.n
+    mu = np.full(n, 2.0)
+    mu[0] = 1.0
+    sgn = mu * (-1.0) ** np.arange(n)
+    return np.vstack([sgn, sgn * pr.k ** 2])
+
+
+def kawahara_trace_projection(pr, a):
+    """The l^2_l-nearest point of ker T^N_{4,e} to a -- CLN's projection, replicated.
+
+    Minimises sum_n mu_n l_n^2 (Delta_n)^2 subject to C(a + Delta) = 0, which is the
+    change of smallest X^l norm.  Float only: this is an ABLATION on the iterate, and
+    the iterate is exact data for the certificate whatever it is, so no enclosure of
+    the projection itself is needed."""
+    C = kawahara_trace_rows(pr)
+    mu = np.full(pr.n, 2.0)
+    mu[0] = 1.0
+    ginv = 1.0 / (mu * pr.l ** 2)
+    M = C @ (ginv[:, None] * C.T)
+    lam = np.linalg.solve(M, -(C @ a))
+    return a + ginv * (C.T @ lam)
+
+
+def kawahara_certificate(N=250, d=50.0, T=0.35, c=0.9, A=None, trace_project=False):
+    """Run the pipeline end to end on the Kawahara problem and convert to CLN's norms.
+
+    No new certificate algebra: `interval_constants` and `radii_verdict` are the same
+    functions that produced every other interval result in this repository.  The only
+    new code is the enclosure class above, which is what the gate is about.
+
+    `trace_project` replaces the Newton iterate by its projection onto ker T^N_{4,e},
+    which is the iterate CLN actually certify.  It is an ablation and it can only make
+    the certificate worse; it is here because it is the cheapest way to find out
+    whether the gap to their radius is OUR arithmetic or THEIR extra step."""
+    pr = KawaharaProblem(N=N, d=d, T=T, c=c)
+    a, hist = pr.newton()
+    if trace_project:
+        a = kawahara_trace_projection(pr, a)
+        hist = hist + [float(np.max(np.abs(pr.residual(a))))]
+    iv = KawaharaIntervals(pr)
+    w = pr.weight()
+    consts = interval_constants(iv, a, w, w, A=A)
+    verdict = radii_verdict(consts["Y0"], consts["Z1"], consts["Z2"])
+    conv = kawahara_norm_conversion(pr)
+    out = {"params": {"N": pr.N, "d": pr.d, "T": pr.T, "c": pr.c,
+                      "lam1": pr.lam1, "lam2": pr.lam2, "lam3": pr.lam3},
+           "float_residual_sup": hist[-1], "newton_history": hist,
+           "constants": consts, "verdict": verdict, "conversion": conv,
+           "trace_projected": bool(trace_project),
+           "published": dict(_KAWAHARA_CLN), "coefficients": a}
+    out["Y0_Hl"] = float(_up(consts["Y0"] * conv["to_Hl"]))
+    if verdict["closes"]:
+        out["r_min_w"] = verdict["r_min"]
+        out["r_min_l2_l"] = float(_up(verdict["r_min"] * conv["to_l2_l"]))
+        out["r_min_Hl"] = float(_up(verdict["r_min"] * conv["to_Hl"]))
+        out["r_max_Hl"] = float(_down(verdict["r_max"] * conv["to_Hl"]))
+    return out

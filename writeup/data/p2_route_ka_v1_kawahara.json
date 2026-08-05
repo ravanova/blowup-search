@@ -1,0 +1,239 @@
+{
+ "ablation_quadratic_tail": {
+  "decades_short": 2.978021857508948,
+  "explains_the_gap": false,
+  "gap_to_explain_absolute": 1.583080854402423e-14,
+  "l2_norm_Hl_normalised": 1.6652568895636677e-17,
+  "max_abs_coefficient": 8.957567769706032e-20,
+  "tail_over_gap": 0.0010519089312038105
+ },
+ "ablation_trace_projection": {
+  "Y0_Hl_newton_iterate": 6.769191455975771e-15,
+  "Y0_Hl_trace_projected": 6.939581772209916e-15,
+  "displacement_sup_norm": 8.673617379884035e-19,
+  "explains_the_gap": false,
+  "gap_it_needed_to_explain": 3.3386557533468726,
+  "ratio": 1.0251714429030852
+ },
+ "constants_vs_published": {
+  "A_norm_ours_weighted_sup": 2.9834059051019812,
+  "DFinv_published_2l": 4.4,
+  "Y0_ours_Hl": 6.769191455975771e-15,
+  "Y0_over_budget": 5.16872082517129e-13,
+  "Y0_published": 2.26e-14,
+  "Y0_ratio_decades": 0.5235716415373732,
+  "Y0_ratio_published_over_ours": 3.3386557533468726,
+  "Z1_ours": 3.059084947573585e-13,
+  "Z2_ours": 8545.454087924727,
+  "note": "the two A-norms are in DIFFERENT norms and are not the same quantity; the pair is reported for magnitude only"
+ },
+ "conversion": {
+  "modes_whole_line": 501,
+  "sqrt_Omega0": 10.000000000000004,
+  "sup_l_over_w": 1.000000000000007,
+  "to_Hl": 223.83029285599574,
+  "to_l2_l": 22.383029285599562,
+  "what_it_bounds": "||a||_{l^2_l} <= sqrt(2N+1) * sup_n(l_n/w_n) * ||a||_w, then sqrt(|Omega_0|) to CLN's H^l(R) normalisation; both factors round UP, so every converted radius here is CONSERVATIVE (too large, never too small)"
+ },
+ "gate": {
+  "certified_interval_Hl": [
+   6.76981691313456e-15,
+   0.02619290801318724
+  ],
+  "r_max_over_published_uniqueness": 1.7461938675458162,
+  "reading_A_margin_decades_above_r0": 12.062157860551338,
+  "reading_A_margin_decades_below_r0": 0.525448933661681,
+  "reading_A_published_r0_is_a_certified_radius": true,
+  "reading_B_headroom_decades_at_upper_end": 12.34551433552424,
+  "reading_B_r_min_inside_window": false,
+  "reading_B_shortfall_decades": 0.525448933661681,
+  "reading_B_shortfall_factor_at_lower_end": 3.3531187462334855,
+  "window_Hl_precommitted": [
+   2.27e-14,
+   0.015
+  ],
+  "window_span_decades": 11.820065401862559
+ },
+ "main": {
+  "Y0_Hl": 6.769191455975771e-15,
+  "constants": {
+   "A_norm": 2.9834059051019812,
+   "B": 1432.1641707068713,
+   "Y0": 3.024251708561549e-17,
+   "Z1": 3.059084947573585e-13,
+   "Z2": 8545.454087924727,
+   "rigorous": true
+  },
+  "conversion": {
+   "modes_whole_line": 501,
+   "sqrt_Omega0": 10.000000000000004,
+   "sup_l_over_w": 1.000000000000007,
+   "to_Hl": 223.83029285599574,
+   "to_l2_l": 22.383029285599562,
+   "what_it_bounds": "||a||_{l^2_l} <= sqrt(2N+1) * sup_n(l_n/w_n) * ||a||_w, then sqrt(|Omega_0|) to CLN's H^l(R) normalisation; both factors round UP, so every converted radius here is CONSERVATIVE (too large, never too small)"
+  },
+  "float_residual_sup": 1.3010426069826053e-18,
+  "newton_history": [
+   0.011931238158075314,
+   0.001544887309976901,
+   0.00020084644675451725,
+   1.0109501885075499e-05,
+   1.7780654270986573e-08,
+   9.597964784058277e-14,
+   1.734723475976807e-18,
+   1.3010426069826053e-18
+  ],
+  "params": {
+   "N": 250,
+   "T": 0.35,
+   "c": 0.9,
+   "d": 50.0,
+   "lam1": -0.08333333333333305,
+   "lam2": 0.08298611111111115,
+   "lam3": 7.500000000000002
+  },
+  "published": {
+   "DFinv_published": 4.4,
+   "N": 250,
+   "T": 0.35,
+   "Y0_published": 2.26e-14,
+   "c": 0.9,
+   "d": 50.0,
+   "r0_published": 2.27e-14,
+   "r_uniqueness_published": 0.015,
+   "source": "Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6 / ProofKawahara.jl"
+  },
+  "r_max_Hl": 0.02619290801318724,
+  "r_min_Hl": 6.76981691313456e-15,
+  "r_min_l2_l": 6.769816913134557e-16,
+  "r_min_w": 3.024531142212289e-17,
+  "trace_projected": false,
+  "verdict": {
+   "Y0_over_budget": 5.16872082517129e-13,
+   "budget": 5.85106414305386e-05,
+   "closes": true,
+   "r_max": 0.00011702128286111302,
+   "r_min": 3.024531142212289e-17,
+   "reason": "ok"
+  }
+ },
+ "poisoning": [
+  {
+   "Y0": 2.9070631631918786e-12,
+   "Y0_over_budget": 4.968434958356478e-08,
+   "Z1": 3.055089665563813e-13,
+   "closes": true,
+   "r_min_Hl": 6.506888071053451e-10,
+   "scale": 1e-12
+  },
+  {
+   "Y0": 2.9070415081713925e-08,
+   "Y0_over_budget": 0.0004968397975477184,
+   "Z1": 3.0387124898548637e-13,
+   "closes": true,
+   "r_min_Hl": 6.5076479362347564e-06,
+   "scale": 1e-08
+  },
+  {
+   "Y0": 0.00029052799666527023,
+   "Y0_over_budget": 4.966233024055072,
+   "Z1": 3.0010693235202017e-13,
+   "closes": false,
+   "r_min_Hl": null,
+   "scale": 0.0001
+  }
+ ],
+ "profile_check": {
+  "cln_figure1_min_read_off": -0.18,
+  "coefficient_at_N": 1.6116850873166408e-22,
+  "kdv_seed_alpha": -0.19999999999999996,
+  "kdv_seed_beta": 1.7320508075688803,
+  "u_at_domain_edge": 4.336808689942018e-18,
+  "u_min": -0.1816499295918008,
+  "u_min_location": 0.0
+ },
+ "published": {
+  "DFinv_published": 4.4,
+  "N": 250,
+  "T": 0.35,
+  "Y0_published": 2.26e-14,
+  "c": 0.9,
+  "d": 50.0,
+  "r0_published": 2.27e-14,
+  "r_uniqueness_published": 0.015,
+  "source": "Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6 / ProofKawahara.jl"
+ },
+ "referenced_elsewhere": {
+  "leg56_H_consistency_defect_x": 18500000.0,
+  "leg56_second_defect_x": 204000000000.0,
+  "source": "leg 56, Route-TN, writeup/4_p2_lottery/TECHNICAL_P2_ROUTETN_V1.md"
+ },
+ "resolution_sweep": [
+  {
+   "N": 60,
+   "Y0": 3.0109261072214407e-17,
+   "Y0_over_budget": 3.8157050117070315e-13,
+   "Z1": 8.465348587471538e-14,
+   "Z2": 6336.430845238534,
+   "closes": true,
+   "conversion_to_Hl": 110.0000000000008,
+   "float_residual_sup": 1.734723475976807e-18,
+   "r_min_Hl": 3.3130965499942985e-15
+  },
+  {
+   "N": 100,
+   "Y0": 2.974426645247847e-17,
+   "Y0_over_budget": 4.930707527190017e-13,
+   "Z1": 1.3454425223498393e-13,
+   "Z2": 8288.500802442602,
+   "closes": true,
+   "conversion_to_Hl": 141.7744687875794,
+   "float_residual_sup": 8.673617379884035e-19,
+   "r_min_Hl": 4.217749991432774e-15
+  },
+  {
+   "N": 150,
+   "Y0": 2.937446125445716e-17,
+   "Y0_over_budget": 5.017734858533416e-13,
+   "Z1": 1.9153828077680097e-13,
+   "Z2": 8540.981935064632,
+   "closes": true,
+   "conversion_to_Hl": 173.49351572897612,
+   "float_residual_sup": 1.3010426069826053e-18,
+   "r_min_Hl": 5.096759175757253e-15
+  },
+  {
+   "N": 200,
+   "Y0": 2.947213328217486e-17,
+   "Y0_over_budget": 5.036926315027629e-13,
+   "Z1": 2.484741361800034e-13,
+   "Z2": 8545.235369968152,
+   "closes": true,
+   "conversion_to_Hl": 200.2498439450095,
+   "float_residual_sup": 8.673617379884035e-19,
+   "r_min_Hl": 5.903273199951495e-15
+  },
+  {
+   "N": 250,
+   "Y0": 3.024251708561549e-17,
+   "Y0_over_budget": 5.16872082517129e-13,
+   "Z1": 3.059084947573585e-13,
+   "Z2": 8545.454087924727,
+   "closes": true,
+   "conversion_to_Hl": 223.83029285599574,
+   "float_residual_sup": 1.3010426069826053e-18,
+   "r_min_Hl": 6.76981691313456e-15
+  },
+  {
+   "N": 300,
+   "Y0": 2.936836236229408e-17,
+   "Y0_over_budget": 5.019335557994585e-13,
+   "Z1": 3.58504810495733e-13,
+   "Z2": 8545.480841034718,
+   "closes": true,
+   "conversion_to_Hl": 245.15301344262724,
+   "float_residual_sup": 8.673617379884035e-19,
+   "r_min_Hl": 7.20131027555989e-15
+  }
+ ]
+}
