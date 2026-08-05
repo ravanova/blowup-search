@@ -152,6 +152,15 @@ commit, append new findings with evidence and a claim-bearing/mechanical flag), 
 DM as a queue candidate — the sweep never touches those itself. Never more than five live;
 they occupy support bands, never leg slots.
 
+**The performance review** (`ORCHESTRATION.md` §12): on the same cadence, one Sonnet agent —
+inside the sweep's five-agent cap — profiles and tightens the paths that run repeatedly: the
+gate's always-on tests first, then frequently-mapped `test_*.py`, `scripts/merge_gate.sh`,
+the figure/evidence rebuild path, and heavily-imported `solver/` modules. It keeps a dated
+before/after timing ledger in `reports/PERF_REVIEW.md`; a change without a measured pair does
+not land. Behaviour-preserving only: known-answer magnitudes in `capabilities.py` unchanged,
+no tolerance loosened, no resolution lowered, no assertion dropped — anything else is
+claim-bearing and goes to the DM.
+
 Sequencing you must enforce:
 
 - A verifier's re-measurement completes **before** its leg consumes that number. If it finds a
