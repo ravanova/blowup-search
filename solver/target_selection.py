@@ -599,3 +599,459 @@ def gate_verdict():
             "uncertified_and_cheaper_than_certified": [t["id"] for t in live],
             "named_target": live[0]["id"] if live else None,
             "gate": "YES" if live else "NO"}
+
+
+# ==========================================================================
+# ROUTE-M2 (leg 63): THE SAME LEDGER, WITH THE LEG-57 PREDICATE AS A COLUMN
+# ==========================================================================
+# Stage M ranked candidates by Q1/Q2/Q3.  Legs 51-57 then refuted the METHOD's reach
+# rather than any candidate, and refuted it with a predicate sharp enough to screen:
+#
+#     does the linearization's UNBOUNDED part act as a MULTIPLIER (diagonal in the
+#     spectral basis -- cut at K and the tail inverse decays) or as a SHIFT
+#     (off-diagonal, tail inverse a constant that GROWS in K)?
+#
+# `solver/certificate_shapes.py` (leg 57) made that predicate executable on ONE dial:
+# `mu`, the strength of a `Lambda^1` dissipation.  That dial cannot screen targets,
+# because the thing that separates candidate MODELS is not the strength of dissipation
+# but its ORDER.  Where the crossover in that order SITS is then a measurement, and it
+# is not where a size comparison against the `k/2` off-diagonal would put it -- see
+# `multiplier_crossover`, which records the guess it refuted.
+#
+# So this section re-runs the predicate on a two-parameter dial, `nu * k^gamma`:
+#
+#     T[j, j] = -nu k^gamma ,   T[j+1, j] = 1 - k/2 ,   T[j-1, j] = k/2
+#
+# `gamma = 1` reproduces `spectral_certificate.tail_block(K, M, mu=nu)` ENTRY BY ENTRY
+# -- gated in `test_target_selection.py`, because a new dial that does not contain the
+# old one is a new operator, not a generalization (leg 53's wrong-operator control).
+# Nothing else is rebuilt: the weight classes, the bordered inverse and the
+# decay-exponent fit are imported from the modules that already own them.
+#
+# WHAT IS VERIFIED HERE (recomputed, reported as magnitudes):
+#   M2P1  the `K`-exponent of the tail inverse as a function of the dissipation ORDER
+#         `gamma` -- `screen_operator`, the executable predicate column.
+#   M2P2  the crossover order `gamma*(nu)` where that exponent changes sign, by
+#         bracketed bisection -- `multiplier_crossover`.  The number the ledger screens on.
+#   M2P3  the `M`-divergence at `nu = 0`, i.e. that the inviscid rows are shift-shaped
+#         for leg 52's measured reason and not by assertion.
+#
+# TRANSCRIBED, not verified: every `blowup` field of `M2_CANDIDATES` -- which model has
+# a PROVED blow-up, at which dissipation order, by whom.  Those are read off abstracts
+# and surveys (`writeup/novelty/leg_63.md` has the queries and the links) and are exactly
+# as good as that.  The provenance sits on the row so the next pass can check the quote
+# instead of trusting it.
+# --------------------------------------------------------------------------
+
+from solver.certificate_shapes import (            # noqa: E402  (ledger first, by design)
+    MULTIPLIER, SHIFT, TRIDIAGONAL_DOMINANT, decay_exponent,
+)
+from solver.spectral_certificate import (          # noqa: E402
+    bordered_tail_inverse_norm, tail_block,
+)
+
+#: nonzero diagonal, and the tail inverse still GROWS in K.  Not in leg 57's vocabulary
+#: because leg 57's dial could not reach it: at `gamma = 1` the diagonal/off-diagonal
+#: ratio is `2 nu`, independent of `k`, so this state only appears once the ORDER is
+#: allowed below 1.  For the certificate it is on the SHIFT side -- nothing to decay with.
+TRIDIAGONAL_SUBDOMINANT = "TRIDIAGONAL_SUBDOMINANT"
+
+#: the closed vocabulary a screened row may carry.  `TRIDIAGONAL_DOMINANT` is leg 57's
+#: label, earned from BDL-admissibility, and this dial never emits it -- it is listed so
+#: the vocabulary stays one set across the two modules instead of forking quietly.
+M2_SHAPES = (MULTIPLIER, SHIFT, TRIDIAGONAL_DOMINANT, TRIDIAGONAL_SUBDOMINANT)
+
+#: the predicate's verdict vocabulary, kept separate from the shape label so a row can
+#: never be quoted as "multiplier" without the measured exponent that licensed it
+MULTIPLIER_SIDE = "MULTIPLIER_SIDE"
+SHIFT_SIDE = "SHIFT_SIDE"
+
+#: memo for `screen_operator`, keyed on its full argument list -- see its docstring
+_SCREEN_CACHE = {}
+
+
+def fractional_tail_block(K, M, nu=0.0, gamma=1.0):
+    """The tail block with a dissipation of ORDER `gamma`: diagonal `-nu k^gamma`.
+
+    Identical to `spectral_certificate.tail_block(K, M, mu=nu)` when `gamma == 1`, and
+    that identity is a gated test rather than a comment.
+    """
+    K, M = int(K), int(M)
+    T = tail_block(K, M, mu=0.0)
+    if nu:
+        k = np.arange(K + 1, M + 1, dtype=float)
+        T[np.diag_indices_from(T)] -= float(nu) * k ** float(gamma)
+    return T
+
+
+def _log_weight(k, kind, param):
+    """The three weight classes, exactly as `spectral_certificate` defines them."""
+    if kind == "flat":
+        return np.zeros_like(k)
+    if kind == "algebraic":
+        return float(param) * np.log1p(k)
+    if kind == "geometric":
+        return k * np.log(float(param))
+    raise ValueError(kind)
+
+
+def _tridiagonal_inverse(Ts):
+    """The inverse of a tridiagonal matrix by Thomas elimination, O(n^2) not O(n^3).
+
+    The tail block is tridiagonal by construction, and on this machine a dense
+    `np.linalg.inv` at `n = 768` costs about ten seconds, which prices the crossover
+    bisection out of existence.  This is the same arithmetic at a lower exponent.
+
+    **No pivoting**, so it is not unconditionally safe: it returns `None` whenever the
+    elimination meets a zero (or denormal) pivot, and every caller falls back to the
+    dense inverse in that case.  `test_target_selection.py` gates the fast path against
+    the dense one across the whole dial, because a fast number that disagrees with the
+    slow one is not an optimization, it is a second operator.
+    """
+    n = Ts.shape[0]
+    a = np.diag(Ts, -1)
+    b = np.diag(Ts).astype(float).copy()
+    c = np.diag(Ts, 1)
+    if not np.all(np.isfinite(b)) or np.min(np.abs(b)) == 0.0:
+        return None
+    X = np.eye(n)
+    cp = np.zeros(max(n - 1, 1))
+    if abs(b[0]) < 1e-300:
+        return None
+    if n > 1:
+        cp[0] = c[0] / b[0]
+    X[0] /= b[0]
+    for i in range(1, n):
+        m = b[i] - a[i - 1] * cp[i - 1]
+        if abs(m) < 1e-300:
+            return None
+        if i < n - 1:
+            cp[i] = c[i] / m
+        X[i] = (X[i] - a[i - 1] * X[i - 1]) / m
+    for i in range(n - 2, -1, -1):
+        X[i] -= cp[i] * X[i + 1]
+    return X
+
+
+def fractional_tail_inverse_norm(K, M, kind="flat", param=0.0, nu=0.0, gamma=1.0,
+                                 dense=False):
+    """||T_tail^{-1}||_w with a dissipation of order `gamma`.  A magnitude, never a flag."""
+    T = fractional_tail_block(K, M, nu=nu, gamma=gamma)
+    k = np.arange(int(K) + 1, int(M) + 1, dtype=float)
+    lw = _log_weight(k, kind, param)
+    Ts = T * np.exp(lw[:, None] - lw[None, :])
+    A = None if dense else _tridiagonal_inverse(Ts)
+    if A is None:
+        A = np.linalg.inv(Ts)
+    return float(np.max(np.abs(A).sum(0)))
+
+
+def screen_m_divergence(nu, gamma, K=8, Ms=(128, 256, 512, 1024), kind="flat", param=0.0):
+    """Does the tail inverse EXIST as M -> infinity?  Growth in M at fixed K.
+
+    The question `certificate_shapes.m_divergence` asks on the `Lambda^1` dial, asked on
+    the order dial.  Linear growth means the tail operator is not boundedly invertible at
+    all and a certificate must border it (leg 52).
+    """
+    Ms = [int(m) for m in Ms]
+    vals = [fractional_tail_inverse_norm(K, m, kind, param, nu=nu, gamma=gamma)
+            for m in Ms]
+    s, _ = np.polyfit(np.log(Ms), np.log(vals), 1)
+    return {"M": Ms, "vals": vals, "exponent_in_M": float(s),
+            "ratio_last_over_first": float(vals[-1] / vals[0])}
+
+
+def screen_operator(nu, gamma, Ks=(4, 8, 16, 32, 64), M=768, kind="flat", param=0.0,
+                    border="analytic", Ms=(128, 256, 512, 1024)):
+    """THE PREDICATE, measured: is the unbounded part a multiplier or a shift?
+
+    The rule is leg 57's, unchanged -- if the tail block is boundedly invertible use the
+    unbordered inverse, otherwise the honest object is the BORDERED one -- and the verdict
+    is read off the SIGN of the `K`-exponent, which is returned next to it so the verdict
+    can never be quoted without its magnitude.
+
+    Bordering is only ever reached at `nu = 0`, where the bordered object is exactly the
+    one `spectral_certificate.bordered_tail_inverse_norm` already owns; the order dial is
+    vacuous there because there is no diagonal to give an order to.
+
+    Memoized on its full argument list.  The inviscid rows of the ledger all screen the
+    SAME operator -- the shape is a property of the operator, not of the target, which is
+    lesson 87 and the reason this column can be computed at all -- so without the memo the
+    ledger would pay for the identical bordered inverse four times over.
+    """
+    nu, gamma = float(nu), float(gamma)
+    key = (nu, gamma, tuple(int(K) for K in Ks), int(M), kind, float(param), border,
+           tuple(int(m) for m in Ms))
+    if key in _SCREEN_CACHE:
+        return dict(_SCREEN_CACHE[key])
+    md = screen_m_divergence(nu, gamma, K=int(Ks[0]) * 2, Ms=Ms, kind=kind, param=param)
+    invertible = md["exponent_in_M"] < 0.25
+    if invertible:
+        vals = [fractional_tail_inverse_norm(int(K), M, kind, param, nu=nu, gamma=gamma)
+                for K in Ks]
+    else:
+        vals = [bordered_tail_inverse_norm(int(K), M, kind, param, border, mu=0.0)
+                for K in Ks]
+    de = decay_exponent([int(K) for K in Ks], vals, tail=min(4, len(Ks)))
+    decays = None if de.get("refused") else de["exponent"] < 0.0
+    if not invertible:
+        shape = SHIFT
+    elif decays:
+        shape = MULTIPLIER
+    else:
+        # nonzero diagonal, tail inverse still GROWS.  Never TRIDIAGONAL_DOMINANT: leg 57
+        # earned that label from BDL-admissibility, and a diagonal that does not buy decay
+        # has not dominated anything the certificate cares about.
+        shape = TRIDIAGONAL_SUBDOMINANT
+    out = {"nu": nu, "gamma": gamma, "shape": shape,
+            "predicate": MULTIPLIER_SIDE if decays else SHIFT_SIDE,
+            "tail_block_boundedly_invertible": bool(invertible),
+            "needed_bordering": not invertible,
+            "M_exponent": md["exponent_in_M"],
+            "K": [int(K) for K in Ks], "tail_inverse": vals,
+            "K_exponent": de.get("exponent"),
+            "tail_inverse_decays": decays,
+            "ratio_last_over_first": de.get("ratio_last_over_first")}
+    _SCREEN_CACHE[key] = out
+    return dict(out)
+
+
+def multiplier_crossover(nu, lo=0.05, hi=2.0, tol=0.02, Ks=(4, 8, 16, 32, 64), M=768,
+                         kind="flat", param=0.0, Ms=(128, 256, 512)):
+    """The ORDER `gamma*(nu)` at which the tail inverse stops growing and starts decaying.
+
+    Bisection on the sign of the measured `K`-exponent.  `lo` must come out shift-side and
+    `hi` multiplier-side or the bracket is REFUSED rather than reported -- a crossover
+    quoted from an unbracketed bisection is a number with no content.
+
+    **THE HYPOTHESIS THIS FUNCTION KILLED, KEPT BECAUSE IT WAS THIS LEG'S OWN.**  The
+    obvious guess is `gamma* = 1`: the transport off-diagonal grows like `k/2`, so the
+    diagonal `nu k^gamma` should have to grow faster than `k` to win.  **It is false, and
+    by a wide margin** -- the measured crossover is far below 1 (see
+    `writeup/data/p2_route_m2_v1_targets.json`).  Entry-wise dominance is not the
+    coordinate; the tail inverse is set by the *recursion*, and a diagonal that is
+    pointwise much smaller than the off-diagonal still breaks it.  This is leg 57's
+    `delta < 1/2` lesson repeating on a different dial: the threshold a size comparison
+    predicts is not the threshold the operator has.
+    """
+    def f(g):
+        return screen_operator(nu, g, Ks=Ks, M=M, kind=kind, param=param, Ms=Ms)
+    a, b = float(lo), float(hi)
+    fa, fb = f(a), f(b)
+    if fa["predicate"] != SHIFT_SIDE or fb["predicate"] != MULTIPLIER_SIDE:
+        return {"refused": True, "reason": "bracket does not straddle the crossover",
+                "lo": {"gamma": a, "predicate": fa["predicate"],
+                       "K_exponent": fa["K_exponent"]},
+                "hi": {"gamma": b, "predicate": fb["predicate"],
+                       "K_exponent": fb["K_exponent"]}}
+    n = 0
+    while b - a > float(tol):
+        m = 0.5 * (a + b)
+        if f(m)["predicate"] == MULTIPLIER_SIDE:
+            b = m
+        else:
+            a = m
+        n += 1
+    return {"refused": False, "nu": float(nu), "gamma_star": 0.5 * (a + b),
+            "bracket": [a, b], "iterations": n, "tol": float(tol),
+            "K_exponent_below": f(a)["K_exponent"],
+            "K_exponent_above": f(b)["K_exponent"]}
+
+
+# --------------------------------------------------------------------------
+# THE M2 CANDIDATES -- uncertified targets on models where blow-up is PROVABLE
+# --------------------------------------------------------------------------
+# Stage M's `TARGET_LEDGER` is left EXACTLY as it was: it records an answered gate and
+# rewriting it would destroy that record.  These rows are the ones the leg-57 predicate
+# makes newly relevant -- DISSIPATIVE models, which stage M never considered because
+# until leg 51 nobody knew the shape of the unbounded part was the deciding variable.
+# Each carries the same fields as a `TARGET_LEDGER` row plus:
+#
+#   `dissipation`  {"gamma": the order of Lambda in the model's own dissipation,
+#                   "nu": the strength at which the predicate is evaluated}
+#   `blowup`       {"provable", "where", "kind", "source", "quote"} -- TRANSCRIBED.
+#                  `provable` answers the gate's "on a model where blow-up is provable",
+#                  which is a statement about the MODEL, not about the specific profile.
+M2_CANDIDATES = [
+    {
+        "rank": 1,
+        "id": "gCLM_Lambda2_viscous_profiles",
+        "object": ("gCLM with FULL Laplacian dissipation, nu Lambda^2 -- self-similar "
+                   "profiles off the proved neighbourhood of a = 1/2, i.e. the viscous "
+                   "unimodal branch that exists only as numerics"),
+        "source": "arXiv:1908.09385 (the proof) + the viscous unimodal numerics",
+        "certified": "NO",
+        "q1": ("No computer-assisted certificate of ANY dissipative self-similar profile "
+               "was located (leg 63 novelty pass, Q4): every certificate in this family "
+               "-- Chen-Hou-Huang for inviscid De Gregorio/gCLM, Chen-Hou for 2D "
+               "Boussinesq -- is inviscid.  The dissipative blow-up result that does "
+               "exist is ANALYTIC and local in a ('a close to 1/2'); profiles off that "
+               "neighbourhood are numerical only."),
+        "q2": {"dim": 1, "n_fields": 1, "n_modulation": 2,
+               "nonlocal": "one Hilbert transform on R, plus a Lambda^2 diagonal",
+               "note": ("The cheapest shape in either ledger AND the only one whose tail "
+                        "block the standard estimate can invert unaided: the k^2 diagonal "
+                        "beats the k/2 transport off-diagonal by a whole power of k, so "
+                        "no bordering is needed and Y_0 is not competing against a "
+                        "constant tail inverse.")},
+        "dissipation": {"gamma": 2.0, "nu": 0.1},
+        "blowup": {"provable": "YES",
+                   "where": "a close to 1/2, gamma = 2",
+                   "kind": "ANALYTIC",
+                   "source": "https://arxiv.org/abs/1908.09385",
+                   "quote": ("'We use the method in [chen2019finite] to prove finite time "
+                             "self-similar blowup for a close to 1/2 and gamma=2' -- "
+                             "abstract, fetched verbatim.  The a-neighbourhood is NOT "
+                             "quantified there and the nu-dependence is not stated.  "
+                             "TRANSCRIBED from the abstract, not read at full text.")},
+        "published": {"note": ("No (c_l, c_omega) table at gamma = 2 was transcribed this "
+                               "leg.  A promotion leg must read arXiv:1908.09385 at full "
+                               "text and pull the constants before any residual is "
+                               "computed -- this row is scoping, not a specification.")},
+        "q3": ("The first computer-assisted certificate of a DISSIPATIVE self-similar "
+               "blow-up profile, in the one family where dissipative blow-up is proved to "
+               "exist at all.  It is also the only row in either ledger whose "
+               "linearization the method's tail estimate is SHAPED for, which is the whole "
+               "point of the screen: legs 51-57 did not run out of targets, they ran out "
+               "of targets of the right shape."),
+        "our_machinery": ("solver/gclm_family.py owns the residual and "
+                          "solver/fractional_gclm.py owns the criticality exponent "
+                          "s_c = alpha/2; adding a diagonal Lambda^2 to a spectral "
+                          "residual is the cheapest modification in the repository."),
+    },
+    {
+        "rank": 2,
+        "id": "CCF_fractional_subcritical",
+        "object": ("Cordoba-Cordoba-Fontelos nonlocal flux with fractional dissipation "
+                   "Lambda^gamma, in the range where blow-up is proved"),
+        "source": ("Li-Rodrigo, SIAM J. Math. Anal., doi:10.1137/100794924; "
+                   "Kiselev, arXiv:1009.0540"),
+        "certified": "NO",
+        "q1": ("Blow-up is PROVED at small order; no computer-assisted certificate of a "
+               "self-similar profile was located."),
+        "q2": {"dim": 1, "n_fields": 1, "n_modulation": 2,
+               "nonlocal": "one Hilbert transform on R, plus a Lambda^gamma diagonal",
+               "note": ("Same cost class as rank 1.  The entire difference between the two "
+                        "rows is the ORDER of the dissipation, which is exactly the "
+                        "variable the screen measures.")},
+        "dissipation": {"gamma": 0.5, "nu": 0.1},
+        "blowup": {"provable": "YES",
+                   "where": ("small order only -- the located ranges are Lambda^{2 alpha} "
+                             "with alpha < 1/4, extended in parts of the literature toward "
+                             "alpha = 1/2, i.e. gamma < 1 at the most generous reading"),
+                   "kind": "ANALYTIC",
+                   "source": "https://arxiv.org/pdf/1009.0540",
+                   "quote": ("The range alpha in [1/2, 1] is stated as a longstanding OPEN "
+                             "problem, i.e. the proved region stops below it.  TRANSCRIBED "
+                             "from surveys, not full text.  The row is evaluated at the "
+                             "GENEROUS end of the proved range, which makes the screen "
+                             "harder to pass, not easier.")},
+        "published": {"note": "no profile constants transcribed this leg"},
+        "q3": ("Would be the first certificate for a dissipative CCF profile.  Ranked "
+               "below rank 1 for one measured reason and not for taste: its dissipation "
+               "ORDER sits below the measured crossover, so the method's tail estimate has "
+               "nothing to decay with there either."),
+        "our_machinery": "solver/gclm.py's Hilbert transform; nothing else.",
+    },
+]
+
+
+def m2_ledger():
+    """Stage M's UNCERTIFIED rows plus the dissipative candidates the predicate reaches.
+
+    Stage M's rows enter at `gamma = 0`, which is not an assumption about them -- it is
+    what their models are.  The predicate is then MEASURED on each, never assigned.
+    """
+    rows = []
+    for t in uncertified_targets():
+        r = dict(t)
+        r["dissipation"] = {"gamma": 0.0, "nu": 0.0}
+        r["blowup"] = {"provable": "YES", "where": "inviscid model",
+                       "kind": "CAP+ANALYTIC",
+                       "source": "arXiv:2210.07191 / arXiv:2308.01528, and the M ledger",
+                       "quote": ("Blow-up is established for the inviscid Hou-Luo / gCLM / "
+                                 "Boussinesq family; what is uncertified is the specific "
+                                 "profile, which is what these rows are.")}
+        r["origin"] = "TARGET_LEDGER"
+        rows.append(r)
+    for c in M2_CANDIDATES:
+        r = dict(c)
+        r["origin"] = "M2_CANDIDATES"
+        rows.append(r)
+    return rows
+
+
+def m2_rank_table(Ks=(4, 8, 16, 32, 64), M=768, n_per_dim=600):
+    """One row per M2 candidate with the PREDICATE MEASURED, ranked by it.
+
+    Ranking rule, pre-committed, in this order:
+      1. the predicate -- MULTIPLIER_SIDE first.  It dominates everything else because
+         legs 51-57 measured that the shift side costs the method its tail estimate
+         outright, not by a factor.
+      2. blow-up provability on the model -- the prize's own wording.
+      3. cost, via stage M's `cost_ratio_vs_certified`, unchanged.
+    """
+    rows = []
+    for t in m2_ledger():
+        d = t["dissipation"]
+        s = screen_operator(d["nu"], d["gamma"], Ks=Ks, M=M)
+        q2 = t["q2"]
+        c = cost_ratio_vs_certified(q2["dim"], q2["n_fields"], n_per_dim,
+                                    q2["n_modulation"])
+        rows.append({"id": t["id"], "origin": t["origin"], "certified": t["certified"],
+                     "gamma": d["gamma"], "nu": d["nu"],
+                     "predicate": s["predicate"], "shape": s["shape"],
+                     "K_exponent": s["K_exponent"],
+                     "tail_inverse_first": s["tail_inverse"][0],
+                     "tail_inverse_last": s["tail_inverse"][-1],
+                     "ratio_last_over_first": s["ratio_last_over_first"],
+                     "needed_bordering": s["needed_bordering"],
+                     "M_exponent": s["M_exponent"],
+                     "blowup_provable": t["blowup"]["provable"],
+                     "blowup_where": t["blowup"]["where"],
+                     "blowup_kind": t["blowup"]["kind"],
+                     "blowup_source": t["blowup"]["source"],
+                     "ratio": c["ratio"], "unknowns": c["unknowns"]})
+    rows.sort(key=lambda r: (0 if r["predicate"] == MULTIPLIER_SIDE else 1,
+                             0 if r["blowup_provable"] == "YES" else 1,
+                             r["ratio"]))
+    for i, r in enumerate(rows, 1):
+        r["m2_rank"] = i
+    return rows
+
+
+#: The constraint a YES verdict must be quoted WITH, every time.  It lives in the module
+#: rather than in prose so that it cannot be dropped in a summary.
+M2_LIFT_CONSTRAINT = (
+    "Every multiplier-side row in this ledger is DISSIPATIVE.  plan_of_record.py bans "
+    "re-opening stage V as posed, and its lift condition reads 'unless the question is "
+    "re-posed for a FLUID transport model, which needs L1 first'.  L1 is measured dead in "
+    "both realizations (legs 51-54).  Whether that lift condition can ever be met is "
+    "therefore a USER call.  Leg 63 surfaces it and does not make it: this ledger is "
+    "scoping, and nothing in it promotes a row into the committed sequence."
+)
+
+
+def m2_gate_verdict(rows=None):
+    """Leg 63's pre-committed gate, answered from the measured column.
+
+    "Is there at least one uncertified target, on a model where blow-up is provable,
+    whose linearization's unbounded part is a MULTIPLIER under the leg-57 predicate?"
+
+    A YES is SCOPING, not promotion: promoting any row into the committed sequence is
+    escalation #1, and this module does not make that call.  The blocking constraint
+    travels WITH the verdict rather than being left in prose.
+    """
+    rows = m2_rank_table() if rows is None else rows
+    live = [r for r in rows
+            if r["predicate"] == MULTIPLIER_SIDE
+            and r["certified"] == "NO"
+            and r["blowup_provable"] == "YES"]
+    return {"gate": "YES" if live else "NO",
+            "n_rows": len(rows),
+            "n_multiplier_side": sum(1 for r in rows if r["predicate"] == MULTIPLIER_SIDE),
+            "multiplier_side_ids": [r["id"] for r in live],
+            "top_candidate": live[0]["id"] if live else None,
+            "top_K_exponent": live[0]["K_exponent"] if live else None,
+            "promotion": "ESCALATION_1_USER_CALL -- this module promotes nothing",
+            "blocked_by": M2_LIFT_CONSTRAINT if live else None}

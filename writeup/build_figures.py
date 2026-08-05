@@ -305,6 +305,9 @@ P2_EVIDENCE = [
     "../experiments/p2_route_nb_v1_targetnorm_evidence.py",     # fig50 -- Route-NB v1 (leg 55)
     "../experiments/p2_route_tn_v1_consistency_evidence.py",    # fig51 -- Route-TN v1 (leg 56)
     "../experiments/p2_route_xs_v1_shapes_evidence.py",         # fig52 -- Route-XS v1 (leg 57)
+    # Leg 63 has no separate *_evidence.py: its runner rebuilds the figure from its own
+    # curated JSON when that JSON is present, and only re-measures under --recompute.
+    "../experiments/p2_route_m2_v1_targets.py",                 # fig57 -- Route-M2 v1 (leg 63)
     "../experiments/p2_weight_repairs_v2_evidence.py",          # fig58 -- Route-WV v2 (leg 59)
 ]
 

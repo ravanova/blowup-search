@@ -1,0 +1,789 @@
+{
+  "leg": 63,
+  "route": "M2",
+  "branch": "leg/m2-v1",
+  "title": "Target reselection, screened by the leg-57 multiplier/shift predicate",
+  "novelty": {
+    "file": "writeup/novelty/leg_63.md",
+    "verdict": "PROCEED_AS_SCOPING",
+    "committed_before_construction": true,
+    "screen_is_claimed": false,
+    "why_not": "leg 57 settled that the multiplier/shift dichotomy is folklore in print (Cadiot arXiv:2505.03091 sec 2 and 3); this leg uses it as bookkeeping",
+    "decisive_fact": "Chen arXiv:1908.09385 proves finite-time self-similar blowup for gCLM at a close to 1/2 with gamma = 2, analytically, TRANSCRIBED FROM THE ABSTRACT and not read at full text"
+  },
+  "settings": {
+    "Ks_prod": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "M_prod": 1024,
+    "Ks_ctrl": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "M_ctrl": 512,
+    "nu_reference": 0.1,
+    "nu_grid": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "gamma_grid": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0,
+      1.1,
+      1.2,
+      1.3,
+      1.4,
+      1.5,
+      1.6,
+      1.7,
+      1.8,
+      1.9,
+      2.0,
+      2.1,
+      2.2,
+      2.3,
+      2.4
+    ],
+    "weight_class": "flat",
+    "arithmetic": "float64, no intervals -- every number is a measurement"
+  },
+  "dial_containment": {
+    "max_entrywise_difference_at_gamma_1": 0.0,
+    "settings_checked": 4,
+    "fast_vs_dense_worst_relative": 2.9959548971103094e-15,
+    "note": "A dial that does not contain the old one is a new operator, not a generalization; and a fast path that disagrees with the dense one is a second operator.  Both are gated, both report magnitudes."
+  },
+  "predicate_curve": [
+    {
+      "gamma": 0.0,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "M_exponent": 0.9966640803565513,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "needed_bordering": true
+    },
+    {
+      "gamma": 0.1,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "M_exponent": 0.9426971057267496,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "needed_bordering": true
+    },
+    {
+      "gamma": 0.2,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "M_exponent": 0.8134927569417391,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "needed_bordering": true
+    },
+    {
+      "gamma": 0.3,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "M_exponent": 0.5469748007826941,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "needed_bordering": true
+    },
+    {
+      "gamma": 0.4,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.5130314450335759,
+      "M_exponent": 0.07769436886931537,
+      "tail_inverse_first": 25.489485477526063,
+      "tail_inverse_last": 3.2388865382663568,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 0.5,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.4448971225518264,
+      "M_exponent": -0.3045592444168507,
+      "tail_inverse_first": 8.60236420790222,
+      "tail_inverse_last": 1.2678761302202617,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 0.6,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.5199887406765294,
+      "M_exponent": -0.18805234208351354,
+      "tail_inverse_first": 5.410304057673184,
+      "tail_inverse_last": 0.6874047390755716,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 0.7,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.5605540067686839,
+      "M_exponent": 0.0033255319390642084,
+      "tail_inverse_first": 3.8210236238815174,
+      "tail_inverse_last": 0.44623013982705,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 0.8,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.605206234302714,
+      "M_exponent": 0.0002262291558649398,
+      "tail_inverse_first": 2.896737716159545,
+      "tail_inverse_last": 0.3041632818849996,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 0.9,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.6719837231809939,
+      "M_exponent": 7.021782211525998e-06,
+      "tail_inverse_first": 2.298616091932789,
+      "tail_inverse_last": 0.20178940712499438,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.0,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.767998671093401,
+      "M_exponent": 5.8388154487648325e-08,
+      "tail_inverse_first": 1.8825989684719298,
+      "tail_inverse_last": 0.1298058456615598,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.1,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.8833282575457397,
+      "M_exponent": 9.239065753812739e-11,
+      "tail_inverse_first": 1.572132640672868,
+      "tail_inverse_last": 0.08109327489634342,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.2,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.99752184421587,
+      "M_exponent": 6.217458942830601e-15,
+      "tail_inverse_first": 1.3377307144603698,
+      "tail_inverse_last": 0.05119670232078301,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.3,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.1140244296786757,
+      "M_exponent": -7.385246129118339e-18,
+      "tail_inverse_first": 1.1523797262871223,
+      "tail_inverse_last": 0.03165709800676021,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.4,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.2433966306945063,
+      "M_exponent": -5.846326373047009e-18,
+      "tail_inverse_first": 0.990103828464281,
+      "tail_inverse_last": 0.0188797127796525,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.5,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.3907544222082078,
+      "M_exponent": -1.186878813125329e-16,
+      "tail_inverse_first": 0.8658189563294298,
+      "tail_inverse_last": 0.010766737610180006,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.6,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.54854190579962,
+      "M_exponent": 7.283404217262746e-17,
+      "tail_inverse_first": 0.757986699927642,
+      "tail_inverse_last": 0.005953922907885742,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.7,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.694599392095053,
+      "M_exponent": -7.103229419128468e-17,
+      "tail_inverse_first": 0.6554348744366445,
+      "tail_inverse_last": 0.003286858143417697,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.8,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.81636226908327,
+      "M_exponent": -9.27818282398563e-17,
+      "tail_inverse_first": 0.5586741070484451,
+      "tail_inverse_last": 0.001860209072067167,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 1.9,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -1.9316045795107857,
+      "M_exponent": -8.611037637921955e-17,
+      "tail_inverse_first": 0.4876635285132384,
+      "tail_inverse_last": 0.0010775445155735812,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 2.0,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.027046594761337,
+      "M_exponent": -1.0478358497267227e-16,
+      "tail_inverse_first": 0.4250960288878148,
+      "tail_inverse_last": 0.0006358591584570609,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 2.1,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.1110180768923734,
+      "M_exponent": -3.520455994076894e-16,
+      "tail_inverse_first": 0.36801441653596545,
+      "tail_inverse_last": 0.000380517241581933,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 2.2,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.1922582472071435,
+      "M_exponent": -2.2057444347623363e-16,
+      "tail_inverse_first": 0.3165680461730866,
+      "tail_inverse_last": 0.00023057803065904854,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 2.3,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.2801182720547963,
+      "M_exponent": -3.3049683826026413e-16,
+      "tail_inverse_first": 0.2707926473075786,
+      "tail_inverse_last": 0.00014106325911710535,
+      "needed_bordering": false
+    },
+    {
+      "gamma": 2.4,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.3694123332364514,
+      "M_exponent": -3.1041267446302653e-16,
+      "tail_inverse_first": 0.23057850804302962,
+      "tail_inverse_last": 8.647813911340765e-05,
+      "needed_bordering": false
+    }
+  ],
+  "crossovers": [
+    {
+      "refused": false,
+      "nu": 0.01,
+      "gamma_star": 0.82421875,
+      "bracket": [
+        0.8203125,
+        0.828125
+      ],
+      "iterations": 8,
+      "tol": 0.01,
+      "K_exponent_below": 0.4371818703216551,
+      "K_exponent_above": -0.6770551871636604
+    },
+    {
+      "refused": false,
+      "nu": 0.1,
+      "gamma_star": 0.40234375,
+      "bracket": [
+        0.3984375,
+        0.40625
+      ],
+      "iterations": 8,
+      "tol": 0.01,
+      "K_exponent_below": 0.4371818703216551,
+      "K_exponent_above": -0.49539100184384627
+    },
+    {
+      "refused": false,
+      "nu": 1.0,
+      "gamma_star": 0.01171875,
+      "bracket": [
+        0.0078125,
+        0.015625
+      ],
+      "iterations": 8,
+      "tol": 0.01,
+      "K_exponent_below": 0.4371818703216551,
+      "K_exponent_above": -0.3033027224378274
+    }
+  ],
+  "crossover_summary": {
+    "gamma_star_by_nu": {
+      "0.01": 0.82421875,
+      "0.1": 0.40234375,
+      "1.0": 0.01171875
+    },
+    "min": 0.01171875,
+    "max": 0.82421875,
+    "strength_dependence": "gamma* moves a LOT with nu across the two decades measured, so 'the order decides and the strength only shifts it' is true in direction and false in magnitude at this truncation.  Every row's verdict is therefore re-run across nu in `row_robustness`, and the gate leans on the row that does not flip.",
+    "hypothesis_that_died": "gamma* = 1, i.e. the diagonal must out-grow the k/2 transport off-diagonal entry for entry.  Measured false at every strength tried, and by a wide margin -- the tail inverse is set by the recursion, not by an entrywise size comparison.  Same shape as leg 57's delta < 1/2 hypothesis dying on the Lambda^1 dial."
+  },
+  "resolution_control": [
+    {
+      "nu": 0.0,
+      "gamma": 0.0,
+      "K_exponent_prod": 0.4371818703216551,
+      "Ks_prod": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "M_prod": 1024,
+      "K_exponent_ctrl": 0.45088806736645337,
+      "Ks_ctrl": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "M_ctrl": 512,
+      "abs_difference": 0.013706197044798252,
+      "predicate_agrees": true
+    },
+    {
+      "nu": 0.1,
+      "gamma": 0.5,
+      "K_exponent_prod": -0.4448971225518264,
+      "Ks_prod": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "M_prod": 1024,
+      "K_exponent_ctrl": -0.42581058104060876,
+      "Ks_ctrl": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "M_ctrl": 512,
+      "abs_difference": 0.019086541511217636,
+      "predicate_agrees": true
+    },
+    {
+      "nu": 0.1,
+      "gamma": 1.0,
+      "K_exponent_prod": -0.767998671093401,
+      "Ks_prod": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "M_prod": 1024,
+      "K_exponent_ctrl": -0.7327341907799289,
+      "Ks_ctrl": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "M_ctrl": 512,
+      "abs_difference": 0.03526448031347218,
+      "predicate_agrees": true
+    },
+    {
+      "nu": 0.1,
+      "gamma": 2.0,
+      "K_exponent_prod": -2.027046594761337,
+      "Ks_prod": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "M_prod": 1024,
+      "K_exponent_ctrl": -1.9443778908138156,
+      "Ks_ctrl": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "M_ctrl": 512,
+      "abs_difference": 0.08266870394752135,
+      "predicate_agrees": true
+    }
+  ],
+  "row_robustness": [
+    {
+      "id": "gCLM_Lambda2_viscous_profiles",
+      "gamma": 2.0,
+      "by_nu": [
+        {
+          "nu": 0.01,
+          "predicate": "MULTIPLIER_SIDE",
+          "K_exponent": -1.80333785942168
+        },
+        {
+          "nu": 0.1,
+          "predicate": "MULTIPLIER_SIDE",
+          "K_exponent": -2.027046594761337
+        },
+        {
+          "nu": 1.0,
+          "predicate": "MULTIPLIER_SIDE",
+          "K_exponent": -1.9589158474057047
+        }
+      ],
+      "n_multiplier_side": 3,
+      "n_strengths": 3,
+      "robust": true
+    },
+    {
+      "id": "CCF_fractional_subcritical",
+      "gamma": 0.5,
+      "by_nu": [
+        {
+          "nu": 0.01,
+          "predicate": "SHIFT_SIDE",
+          "K_exponent": 0.4371818703216551
+        },
+        {
+          "nu": 0.1,
+          "predicate": "MULTIPLIER_SIDE",
+          "K_exponent": -0.4448971225518264
+        },
+        {
+          "nu": 1.0,
+          "predicate": "MULTIPLIER_SIDE",
+          "K_exponent": -0.4345098250766004
+        }
+      ],
+      "n_multiplier_side": 2,
+      "n_strengths": 3,
+      "robust": false
+    }
+  ],
+  "ledger": [
+    {
+      "id": "gCLM_Lambda2_viscous_profiles",
+      "origin": "M2_CANDIDATES",
+      "certified": "NO",
+      "gamma": 2.0,
+      "nu": 0.1,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -2.027046594761337,
+      "tail_inverse_first": 0.4250960288878148,
+      "tail_inverse_last": 0.0006358591584570609,
+      "ratio_last_over_first": 0.001495801219598943,
+      "needed_bordering": false,
+      "M_exponent": -1.0478358497267227e-16,
+      "blowup_provable": "YES",
+      "blowup_where": "a close to 1/2, gamma = 2",
+      "blowup_kind": "ANALYTIC",
+      "blowup_source": "https://arxiv.org/abs/1908.09385",
+      "ratio": 0.0005574063751733793,
+      "unknowns": 602,
+      "m2_rank": 1
+    },
+    {
+      "id": "CCF_fractional_subcritical",
+      "origin": "M2_CANDIDATES",
+      "certified": "NO",
+      "gamma": 0.5,
+      "nu": 0.1,
+      "predicate": "MULTIPLIER_SIDE",
+      "shape": "MULTIPLIER",
+      "K_exponent": -0.4448971225518264,
+      "tail_inverse_first": 8.60236420790222,
+      "tail_inverse_last": 1.2678761302202617,
+      "ratio_last_over_first": 0.1473869391690691,
+      "needed_bordering": false,
+      "M_exponent": -0.3045592444168507,
+      "blowup_provable": "YES",
+      "blowup_where": "small order only -- the located ranges are Lambda^{2 alpha} with alpha < 1/4, extended in parts of the literature toward alpha = 1/2, i.e. gamma < 1 at the most generous reading",
+      "blowup_kind": "ANALYTIC",
+      "blowup_source": "https://arxiv.org/pdf/1009.0540",
+      "ratio": 0.0005574063751733793,
+      "unknowns": 602,
+      "m2_rank": 2
+    },
+    {
+      "id": "gCLM_degenerate_one_scale",
+      "origin": "TARGET_LEDGER",
+      "certified": "NO",
+      "gamma": 0.0,
+      "nu": 0.0,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "ratio_last_over_first": 5.261759405628761,
+      "needed_bordering": true,
+      "M_exponent": 1.0268465886603988,
+      "blowup_provable": "YES",
+      "blowup_where": "inviscid model",
+      "blowup_kind": "CAP+ANALYTIC",
+      "blowup_source": "arXiv:2210.07191 / arXiv:2308.01528, and the M ledger",
+      "ratio": 0.0005574063751733793,
+      "unknowns": 602,
+      "m2_rank": 3
+    },
+    {
+      "id": "HL_singular_steady_stability",
+      "origin": "TARGET_LEDGER",
+      "certified": "NO",
+      "gamma": 0.0,
+      "nu": 0.0,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "ratio_last_over_first": 5.261759405628761,
+      "needed_bordering": true,
+      "M_exponent": 1.0268465886603988,
+      "blowup_provable": "YES",
+      "blowup_where": "inviscid model",
+      "blowup_kind": "CAP+ANALYTIC",
+      "blowup_source": "arXiv:2210.07191 / arXiv:2308.01528, and the M ledger",
+      "ratio": 0.0011129609019242556,
+      "unknowns": 1202,
+      "m2_rank": 4
+    },
+    {
+      "id": "HL_S2_nonsymmetric",
+      "origin": "TARGET_LEDGER",
+      "certified": "NO",
+      "gamma": 0.0,
+      "nu": 0.0,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "ratio_last_over_first": 5.261759405628761,
+      "needed_bordering": true,
+      "M_exponent": 1.0268465886603988,
+      "blowup_provable": "YES",
+      "blowup_where": "inviscid model",
+      "blowup_kind": "CAP+ANALYTIC",
+      "blowup_source": "arXiv:2210.07191 / arXiv:2308.01528, and the M ledger",
+      "ratio": 0.0011138868261355071,
+      "unknowns": 1203,
+      "m2_rank": 5
+    },
+    {
+      "id": "Boussinesq_S2_nonsymmetric",
+      "origin": "TARGET_LEDGER",
+      "certified": "NO",
+      "gamma": 0.0,
+      "nu": 0.0,
+      "predicate": "SHIFT_SIDE",
+      "shape": "SHIFT",
+      "K_exponent": 0.4371818703216551,
+      "tail_inverse_first": 2.190835328396217,
+      "tail_inverse_last": 11.527648395372571,
+      "ratio_last_over_first": 5.261759405628761,
+      "needed_bordering": true,
+      "M_exponent": 1.0268465886603988,
+      "blowup_provable": "YES",
+      "blowup_where": "inviscid model",
+      "blowup_kind": "CAP+ANALYTIC",
+      "blowup_source": "arXiv:2210.07191 / arXiv:2308.01528, and the M ledger",
+      "ratio": 0.6666682098736855,
+      "unknowns": 720003,
+      "m2_rank": 6
+    }
+  ],
+  "gate": {
+    "question": "Is there at least one uncertified target, on a model where blow-up is provable, whose linearization's unbounded part is a MULTIPLIER under the leg-57 predicate?",
+    "gate": "YES",
+    "n_rows": 6,
+    "n_multiplier_side": 2,
+    "multiplier_side_ids": [
+      "gCLM_Lambda2_viscous_profiles",
+      "CCF_fractional_subcritical"
+    ],
+    "top_candidate": "gCLM_Lambda2_viscous_profiles",
+    "top_K_exponent": -2.027046594761337,
+    "promotion": "ESCALATION_1_USER_CALL -- this module promotes nothing",
+    "blocked_by": "Every multiplier-side row in this ledger is DISSIPATIVE.  plan_of_record.py bans re-opening stage V as posed, and its lift condition reads 'unless the question is re-posed for a FLUID transport model, which needs L1 first'.  L1 is measured dead in both realizations (legs 51-54).  Whether that lift condition can ever be met is therefore a USER call.  Leg 63 surfaces it and does not make it: this ledger is scoping, and nothing in it promotes a row into the committed sequence.",
+    "top_candidate_robust_across_nu": true,
+    "answer_depends_on_a_fragile_row": false
+  },
+  "lift_constraint": "Every multiplier-side row in this ledger is DISSIPATIVE.  plan_of_record.py bans re-opening stage V as posed, and its lift condition reads 'unless the question is re-posed for a FLUID transport model, which needs L1 first'.  L1 is measured dead in both realizations (legs 51-54).  Whether that lift condition can ever be met is therefore a USER call.  Leg 63 surfaces it and does not make it: this ledger is scoping, and nothing in it promotes a row into the committed sequence.",
+  "promotion": "NONE.  This leg promotes nothing.  A YES is escalation #1 under ORCHESTRATION.md sec 8: branch pushed, main untouched, the sequence change escalated to the user.",
+  "survival_window": {
+    "source_row": "gCLM_degenerate_one_scale",
+    "source": "arXiv:2603.25104 section 4, Table 4.1",
+    "branch_caveat": "degenerate k = 3 branch; NOT the branch arXiv:1908.09385's gamma = 2 theorem is about -- illustration, not a claim about the proved object",
+    "criterion": "gamma* < gamma < alpha, with alpha = -c_omega the far-field decay",
+    "criterion_source": "solver/fractional_gclm.py, s_c = alpha/2, validated against XU eq (6.3) row by row",
+    "gamma_star_range_used": [
+      0.01171875,
+      0.82421875
+    ],
+    "no_solver_was_run": true,
+    "rows": [
+      {
+        "a": 0.1,
+        "c_omega": -3.8668,
+        "alpha_far_field": 3.8668,
+        "gamma_c_blowup_survives_below": 3.8668,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 3.8668,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": true,
+        "window_width_worst_case": 3.04258125,
+        "contains_gamma_2": true
+      },
+      {
+        "a": 0.2,
+        "c_omega": -0.8357,
+        "alpha_far_field": 0.8357,
+        "gamma_c_blowup_survives_below": 0.8357,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.8357,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": true,
+        "window_width_worst_case": 0.011481249999999998,
+        "contains_gamma_2": false
+      },
+      {
+        "a": 0.232931,
+        "c_omega": -0.6055,
+        "alpha_far_field": 0.6055,
+        "gamma_c_blowup_survives_below": 0.6055,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.6055,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": false,
+        "window_width_worst_case": -0.21871874999999996,
+        "contains_gamma_2": false
+      },
+      {
+        "a": 0.232932,
+        "c_omega": -0.6055,
+        "alpha_far_field": 0.6055,
+        "gamma_c_blowup_survives_below": 0.6055,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.6055,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": false,
+        "window_width_worst_case": -0.21871874999999996,
+        "contains_gamma_2": false
+      },
+      {
+        "a": 0.3,
+        "c_omega": -0.3479,
+        "alpha_far_field": 0.3479,
+        "gamma_c_blowup_survives_below": 0.3479,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.3479,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": false,
+        "window_width_worst_case": -0.47631875,
+        "contains_gamma_2": false
+      },
+      {
+        "a": 0.4,
+        "c_omega": -0.1718,
+        "alpha_far_field": 0.1718,
+        "gamma_c_blowup_survives_below": 0.1718,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.1718,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": false,
+        "window_width_worst_case": -0.65241875,
+        "contains_gamma_2": false
+      },
+      {
+        "a": 0.5,
+        "c_omega": -0.0872,
+        "alpha_far_field": 0.0872,
+        "gamma_c_blowup_survives_below": 0.0872,
+        "window_lo_best_case": 0.01171875,
+        "window_lo_worst_case": 0.82421875,
+        "window_hi": 0.0872,
+        "window_nonempty_best_case": true,
+        "window_nonempty_worst_case": false,
+        "window_width_worst_case": -0.7370187500000001,
+        "contains_gamma_2": false
+      }
+    ],
+    "n_rows": 7,
+    "n_nonempty_best_case": 7,
+    "n_nonempty_worst_case": 2,
+    "n_containing_gamma_2": 1,
+    "reading": "The window is real but NARROW and branch-dependent: on this branch it closes for most a once the crossover is taken at its worst measured value.  It is quoted at BOTH ends of the measured gamma* range for that reason."
+  },
+  "scope": "Float64, no intervals.  The predicate is measured on the SHARED spectral tail operator with a dissipation dial, not on each target's own linearization -- the shape is a property of the operator class (lesson 87), and that is what makes a column computable at all, but it means a row's verdict is a statement about its dissipation ORDER, not about its profile.  Every blow-up provability field is TRANSCRIBED from abstracts and surveys, not read at full text.  Nothing here says a certificate would close: that needs Y_0 under budget.",
+  "runtime_seconds": 940.3
+}

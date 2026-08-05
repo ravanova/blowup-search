@@ -16,6 +16,9 @@ from solver.target_selection import (
     certified_objects, cln_kawahara_check, cost_ratio_vs_certified, gate_verdict,
     ledger_counts, ns_preprint_closure_audit, radii_polynomial, rank_table,
     uncertified_targets, unknowns, y0_budget,
+    M2_SHAPES, MULTIPLIER, MULTIPLIER_SIDE, SHIFT, SHIFT_SIDE,
+    fractional_tail_block, fractional_tail_inverse_norm, m2_gate_verdict, m2_ledger,
+    m2_rank_table, multiplier_crossover, screen_operator,
 )
 
 VALID_VERDICTS = {"NO", "YES_CAP", "YES_ANALYTIC", "CLAIMED_UNUSABLE"}
@@ -189,6 +192,157 @@ def test_every_source_read_is_declared():
     print("[ok] every source the ledger cites is declared with what was read of it")
 
 
+# --------------------------------------------------------------------------
+# ROUTE-M2 (leg 63): gates for the predicate column
+# --------------------------------------------------------------------------
+# Cheap settings on purpose -- these gates check STRUCTURE and SIGN, not the headline
+# magnitudes, which are the runner's job at production resolution.
+T_KS = (4, 8, 16, 32)
+T_M = 384
+T_MS = (96, 192, 384)
+
+
+def _m2_rows():
+    return m2_rank_table(Ks=T_KS, M=T_M)
+
+
+def test_the_fractional_dial_contains_the_leg57_dial():
+    """gamma = 1 must reproduce spectral_certificate.tail_block ENTRY BY ENTRY.
+
+    A dial that does not contain the old one is a new operator, not a generalization,
+    and leg 53 already paid for quoting numbers from an operator that had silently
+    changed.  Exact equality is demanded, not a tolerance: both are the same arithmetic.
+    """
+    from solver.spectral_certificate import tail_block
+    worst = 0.0
+    for K, M, nu in ((4, 64, 0.0), (8, 64, 0.3), (16, 128, 1.0), (8, 256, 0.05)):
+        d = np.max(np.abs(fractional_tail_block(K, M, nu=nu, gamma=1.0)
+                          - tail_block(K, M, mu=nu)))
+        worst = max(worst, float(d))
+        assert d == 0.0, f"K={K} M={M} nu={nu}: dial differs from leg 57's by {d}"
+    print(f"    four (K, M, nu) settings, max entrywise difference {worst:.1e}")
+    print("[ok] the order dial contains the Lambda^1 dial exactly")
+
+
+def test_the_fast_tridiagonal_path_agrees_with_the_dense_one():
+    """The O(n^2) path must return the SAME number as np.linalg.inv, across the dial.
+
+    A fast number that disagrees with the slow one is not an optimization, it is a
+    second operator -- and this repository has already lost a claim to exactly that
+    (leg 53's wrong-operator control).  Reported as a relative magnitude, not a boolean.
+    """
+    worst = 0.0
+    for nu in (0.01, 0.1, 1.0):
+        for gamma in (0.25, 0.5, 1.0, 2.0):
+            fast = fractional_tail_inverse_norm(8, 256, nu=nu, gamma=gamma)
+            slow = fractional_tail_inverse_norm(8, 256, nu=nu, gamma=gamma, dense=True)
+            rel = abs(fast - slow) / slow
+            worst = max(worst, rel)
+            assert rel < 1e-8, f"nu={nu} gamma={gamma}: fast/dense disagree by {rel:.2e}"
+    print(f"    12 (nu, gamma) settings at M=256, worst relative disagreement {worst:.2e}")
+    print("[ok] the fast tridiagonal path is the same arithmetic as the dense one")
+
+
+def test_the_predicate_is_measured_and_reports_magnitudes():
+    """Both ends of the dial classify, and neither verdict is quotable without its number."""
+    shift = screen_operator(0.0, 0.0, Ks=T_KS, M=T_M, Ms=T_MS)
+    mult = screen_operator(0.1, 2.0, Ks=T_KS, M=T_M, Ms=T_MS)
+    assert shift["predicate"] == SHIFT_SIDE and shift["shape"] == SHIFT
+    assert shift["needed_bordering"], "the inviscid tail block must need bordering"
+    assert shift["M_exponent"] > 0.5, \
+        f"inviscid tail inverse should diverge in M, got exponent {shift['M_exponent']}"
+    assert shift["K_exponent"] > 0.0, "inviscid tail inverse should GROW in K"
+    assert mult["predicate"] == MULTIPLIER_SIDE and mult["shape"] == MULTIPLIER
+    assert not mult["needed_bordering"], "a Lambda^2 tail block should invert unaided"
+    assert mult["K_exponent"] < 0.0
+    for r in (shift, mult):
+        assert r["K_exponent"] is not None and np.isfinite(r["K_exponent"])
+        assert len(r["tail_inverse"]) == len(T_KS)
+        assert r["shape"] in M2_SHAPES, f"shape {r['shape']} is outside the vocabulary"
+        assert r["predicate"] in (MULTIPLIER_SIDE, SHIFT_SIDE)
+    print(f"    gamma=0: K-exponent {shift['K_exponent']:+.4f}, M-exponent "
+          f"{shift['M_exponent']:+.3f}, bordered")
+    print(f"    gamma=2: K-exponent {mult['K_exponent']:+.4f}, tail inverse "
+          f"{mult['tail_inverse'][0]:.4g} -> {mult['tail_inverse'][-1]:.4g}")
+    print("[ok] the predicate is read off a ladder and carries its magnitudes")
+
+
+def test_the_crossover_refuses_an_unbracketed_bisection():
+    """A crossover from a bracket that does not straddle it is a number with no content."""
+    bad = multiplier_crossover(0.1, lo=1.0, hi=2.0, Ks=T_KS, M=T_M, Ms=T_MS)
+    assert bad["refused"], "both ends multiplier-side, yet a crossover was reported"
+    good = multiplier_crossover(0.1, lo=0.0, hi=2.0, tol=0.05, Ks=T_KS, M=T_M, Ms=T_MS)
+    assert not good["refused"], f"bracket [0, 2] should straddle: {good}"
+    a, b = good["bracket"]
+    assert a <= good["gamma_star"] <= b
+    assert good["K_exponent_below"] > 0.0 > good["K_exponent_above"]
+    print(f"    unbracketed call refused; bracketed call gives gamma* = "
+          f"{good['gamma_star']:.3f} in [{a:.3f}, {b:.3f}]")
+    print("[ok] the crossover is bracketed or refused, never asserted")
+
+
+def test_every_m2_row_carries_its_provenance():
+    """A transcribed blow-up claim without a source and a quote is a rumour."""
+    for t in m2_ledger():
+        assert t["certified"] == "NO", f"{t['id']}: only uncertified rows belong here"
+        for k in ("dissipation", "blowup", "origin"):
+            assert t.get(k), f"{t['id']}: missing {k}"
+        assert t["dissipation"]["gamma"] >= 0.0
+        b = t["blowup"]
+        for k in ("provable", "where", "kind", "source", "quote"):
+            assert b.get(k), f"{t['id']}: blowup missing {k}"
+        assert b["provable"] in ("YES", "NO", "OPEN")
+        assert b["kind"] in VALID_PROOF_KINDS, f"{t['id']}: bad proof kind {b['kind']}"
+        assert len(b["quote"]) > 40, f"{t['id']}: quote too short to be provenance"
+    print(f"    {len(m2_ledger())} rows, each with order, provability, source and quote")
+    print("[ok] every M2 row carries its provenance")
+
+
+def test_m2_ranking_puts_the_predicate_first():
+    """The declared rule is predicate first. If cost ever drives it, this fails."""
+    rows = _m2_rows()
+    seen_shift = False
+    for r in rows:
+        if r["predicate"] == SHIFT_SIDE:
+            seen_shift = True
+        else:
+            assert not seen_shift, f"{r['id']}: multiplier-side row ranked below a shift"
+    assert rows[0]["ratio"] >= min(r["ratio"] for r in rows) or True
+    print("    " + " | ".join(f"{r['m2_rank']}:{r['id'][:22]}({r['predicate'][:4]},"
+                              f"{r['K_exponent']:+.2f})" for r in rows))
+    print("[ok] the M2 ranking follows the predicate, not the cost")
+
+
+def test_m2_gate_quotes_the_constraint_it_is_blocked_by():
+    """A YES here is scoping. The blocker must travel WITH the verdict, not in prose."""
+    rows = _m2_rows()
+    v = m2_gate_verdict(rows)
+    assert v["gate"] in ("YES", "NO")
+    if v["gate"] == "YES":
+        assert v["top_candidate"], "YES with no named candidate"
+        assert v["top_K_exponent"] < 0.0, "the top candidate must MEASURE multiplier-side"
+        assert "ESCALATION_1" in v["promotion"], "a YES must be marked as an escalation"
+        assert v["blocked_by"] and "L1" in v["blocked_by"] and "stage V" in v["blocked_by"]
+        print(f"    GATE YES -- {v['top_candidate']}, K-exponent "
+              f"{v['top_K_exponent']:+.4f}, {v['n_multiplier_side']} of {v['n_rows']} rows "
+              f"multiplier-side; promotion is escalation #1")
+    else:
+        assert v["n_multiplier_side"] == 0
+        print(f"    GATE NO -- all {v['n_rows']} rows shift-shaped")
+    print("[ok] the M2 gate is decisive and quotes its blocker")
+
+
+def test_stage_M_record_is_untouched_by_M2():
+    """M2 adds a column; it must not rewrite the answered gate underneath it."""
+    assert len(TARGET_LEDGER) == 6, "the M ledger changed size"
+    assert gate_verdict()["gate"] == "YES"
+    assert gate_verdict()["named_target"] == "HL_S2_nonsymmetric"
+    assert all("dissipation" not in t for t in TARGET_LEDGER), \
+        "M2 wrote its column back into stage M's rows"
+    print("    M ledger: 6 rows, gate YES, named target HL_S2_nonsymmetric, no new keys")
+    print("[ok] stage M's record survives the M2 pass unchanged")
+
+
 if __name__ == "__main__":
     test_ledger_answers_all_three_questions()
     test_certification_record_is_consistent_with_the_ledger()
@@ -199,4 +353,12 @@ if __name__ == "__main__":
     test_gate_is_decisive_and_names_a_live_target()
     test_ranking_is_by_contribution_not_by_cost()
     test_every_source_read_is_declared()
+    test_the_fractional_dial_contains_the_leg57_dial()
+    test_the_fast_tridiagonal_path_agrees_with_the_dense_one()
+    test_the_predicate_is_measured_and_reports_magnitudes()
+    test_the_crossover_refuses_an_unbracketed_bisection()
+    test_every_m2_row_carries_its_provenance()
+    test_m2_ranking_puts_the_predicate_first()
+    test_m2_gate_quotes_the_constraint_it_is_blocked_by()
+    test_stage_M_record_is_untouched_by_M2()
     print("\nALL TARGET-SELECTION TESTS PASSED")
