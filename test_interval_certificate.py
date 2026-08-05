@@ -141,6 +141,59 @@ def test_Z1_below_one_at_every_rung():
           + " at n = 201, 401, 801 -- all below 1")
 
 
+#  (13) THE CORRECTED STRUCTURAL CLAIM IS GATED, NOT JUST ASSERTED. The first version
+#       of this module claimed H_disc and D_disc share an interpolant; they do not.
+#       H_disc transforms an ENDPOINT-ZEROED interpolant. That is now a test: the
+#       full-interpolant matrix must differ from H_disc by exactly the endpoint basis
+#       contribution, the difference must be concentrated at the cut, and the genuine
+#       interpolation error must CONVERGE (order ~2) where the total does not. A
+#       future change that makes these coincide fails here and forces a re-read.
+
+def test_H_transforms_an_endpoint_zeroed_interpolant():
+    """(13) H_disc != H(natural-spline interpolant); the difference is the cut."""
+    rows = []
+    for n in (201, 401, 801):
+        b, sc, nu = _consistency(n)
+        d = sc.decomposition(0.5, 0.0, nu, family="odd")
+        rows.append(d)
+        # the endpoint artifact IS the defect, to within a fraction of a percent
+        share = d["defect_H_endpoint_zeroing"] / d["defect_H_total"]
+        assert 0.99 < share < 1.01, (
+            f"n={n}: endpoint zeroing is {share:.4f} of the total defect; the "
+            "attribution in this module's docstring no longer holds")
+        # and it is NOT the same object D differentiates
+        assert d["defect_H_interpolation"] < 0.05 * d["defect_H_total"], (
+            f"n={n}: the genuine interpolation error is no longer small against the "
+            "total -- H may have stopped zeroing its endpoints")
+
+    # the true interpolation error converges; the total does not
+    interp = [r["defect_H_interpolation"] for r in rows]
+    orders = [float(np.log2(x / y)) for x, y in zip(interp[:-1], interp[1:])]
+    for o in orders:
+        assert 1.6 < o < 2.3, f"interpolation order {o:.2f} is not ~2"
+
+    # The endpoint term must scale like the VALUE AT THE CUT, which is a prediction
+    # with a number attached: the two families differ there by M/a. (Checking the
+    # assembled matrices column-by-column would NOT show this -- the restored endpoint
+    # HQ columns multiply the slope operator's endpoint ROWS, so their influence
+    # spreads across every column of the product. The scaling is the honest test.)
+    b, sc, nu = _consistency(201)
+    odd = sc.decomposition(0.5, 0.0, nu, family="odd")
+    even = sc.decomposition(0.5, 0.0, nu, family="even")
+    ratio = odd["defect_H_endpoint_zeroing"] / even["defect_H_endpoint_zeroing"]
+    predicted = float(np.abs(b.X).max() / 0.5)
+    assert 0.5 * predicted < ratio < 2.0 * predicted, (
+        f"endpoint term scaled by {ratio:.1f}x between the families, but the value at "
+        f"the cut differs by {predicted:.1f}x -- it is not tracking f(+-M)")
+
+    print("    endpoint share " + ", ".join(
+        f"{r['defect_H_endpoint_zeroing'] / r['defect_H_total']:.4f}" for r in rows)
+        + "; interpolation orders " + ", ".join(f"{o:.2f}" for o in orders))
+    print(f"    endpoint term scales {ratio:.0f}x between families vs M/a = "
+          f"{predicted:.0f} predicted")
+    print("[ok] (13) H_disc transforms an ENDPOINT-ZEROED interpolant, not D's")
+
+
 def _main():
     t0 = time.time()
     test_exact_rational_reference()
@@ -155,6 +208,7 @@ def _main():
     test_D_converges_at_spline_order()
     test_H_does_not_converge()
     test_defect_bounds_are_not_evaluation_error()
+    test_H_transforms_an_endpoint_zeroed_interpolant()
     print(f"\nall interval-certificate gates pass ({time.time() - t0:.1f}s)")
 
 

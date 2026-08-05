@@ -149,7 +149,58 @@ def validation_block():
                 worst = max(worst, abs(float(He.mid[j] - tr.mid[j])
                                        - pv(float(b.X[j]), a, fam)))
                 cases += 1
+    # THE CORRECTION, checked at one node against quadrature that shares no code with
+    # either matrix: H_disc transforms the ENDPOINT-ZEROED interpolant.
+    from solver.interval_certificate import full_interpolant_hilbert_matrix
+    from solver.line_hilbert import natural_spline_slopes
+    Xg = b.X
+    fg = -Xg / (Xg * Xg + 0.25)
+    s_full = natural_spline_slopes(Xg, fg)
+    v0, s0 = fg.copy(), s_full.copy()
+    v0[0] = v0[-1] = s0[0] = s0[-1] = 0.0
+
+    def hermite(v, s, xq):
+        j = np.clip(np.searchsorted(Xg, xq, side="right") - 1, 0, Xg.size - 2)
+        hh = Xg[j + 1] - Xg[j]
+        t = (xq - Xg[j]) / hh
+        t2, t3 = t * t, t * t * t
+        val = (v[j] * (2 * t3 - 3 * t2 + 1) + hh * s[j] * (t3 - 2 * t2 + t)
+               + v[j + 1] * (-2 * t3 + 3 * t2) + hh * s[j + 1] * (t3 - t2))
+        return np.where((xq >= Xg[0]) & (xq <= Xg[-1]), val, 0.0)
+
+    def pv_spline(v, s, xp, N=6_000_001):
+        yy = np.linspace(Xg[0], Xg[-1], N)
+        gg = hermite(v, s, yy)
+        gx = float(hermite(v, s, np.array([xp]))[0])
+        dd = xp - yy
+        sg = np.abs(dd) < 1e-13
+        qq = np.where(sg, 0.0, (gg - gx) / np.where(sg, 1.0, dd))
+        if sg.any():
+            e = 1e-7
+            qq[sg] = -float(hermite(v, s, np.array([xp + e]))[0]
+                            - hermite(v, s, np.array([xp - e]))[0]) / (2 * e)
+        return (np.trapezoid(qq, yy) + gx * np.log(abs((xp + Xg[-1]) / (xp - Xg[-1])))) / np.pi
+
+    node = 1
+    xq = float(Xg[node])
+    h_disc = float((b.H @ fg)[node])
+    h_zeroed = pv_spline(v0, s0, xq)
+    h_full_q = pv_spline(fg, s_full, xq)
+    h_full_m = float((full_interpolant_hilbert_matrix(Xg) @ fg)[node])
+    sc201 = SplineConsistency(b)
+    h_ref = float((sc201.H_exact(0.5, 0.0, "odd") - sc201.H_truncation(0.5, 0.0, "odd")).mid[node])
     return {
+        "H_is_endpoint_zeroed_check": {
+            "n": 201, "node": node, "X": xq,
+            "H_disc": h_disc,
+            "H_of_endpoint_zeroed_interpolant_quadrature": h_zeroed,
+            "H_of_full_interpolant_quadrature": h_full_q,
+            "H_of_full_interpolant_matrix": h_full_m,
+            "H_M_reference": h_ref,
+            "abs_diff_H_disc_vs_endpoint_zeroed": abs(h_disc - h_zeroed),
+            "abs_diff_H_disc_vs_full": abs(h_disc - h_full_q),
+            "abs_diff_full_matrix_vs_quadrature": abs(h_full_m - h_full_q),
+        },
         "ilog_max_width": float(np.max(lg.hi - lg.lo)),
         "ilog_encloses_50_digit_reference": bool(log_ok),
         "iatan_max_width": float(np.max(at.hi - at.lo)),
@@ -231,6 +282,10 @@ def main():
             "defect_H_over_tau": float(dref["defect_H_abs"] / tau),
             "truncation_over_tau": float(dref["truncation_H_abs"] / tau),
         }
+        # THE CORRECTION (VER-C's review): H and D do NOT share an interpolant.
+        # line_hilbert_matrix drops the two endpoint basis functions, so it transforms
+        # an endpoint-ZEROED interpolant. Split the gated defect accordingly.
+        rec["decomposition"] = sc.decomposition(0.5, 0.0, nu, family="odd")
         rec["wall_s"] = time.time() - tr
         out["rungs"].append(rec)
         print("n=%4d  budget=%.4e  |A|=%.5g  tau=%.4e  dD=%.4e  dH=%.4e  trunc=%.4e"
@@ -268,13 +323,35 @@ def main():
         o, e = r["defects"]["odd"], r["defects"]["even"]
         out["mechanism_ablation"].append({
             "n": o["n"],
-            "value_at_cut_ratio_odd_over_even": float(
-                abs(o["f_norm_w"]) and (r["certificate"]["X_max"] / 0.5)),
+            # M/a is the ANALYTIC ratio of the two families' values at the cut, i.e. the
+            # collapse the mechanism predicts. It is a closed form, NOT a measurement --
+            # the first version of this file emitted it through a dead expression that
+            # made it look computed (lesson 90 in miniature). The measurement it is
+            # compared against is "defect_H_collapse" on the next line.
+            "predicted_collapse_M_over_a": float(r["certificate"]["X_max"] / 0.5),
             "defect_H_odd": o["defect_H_abs"], "defect_H_even": e["defect_H_abs"],
             "defect_H_collapse": float(o["defect_H_abs"] / e["defect_H_abs"]),
             "defect_D_odd": o["defect_D_abs"], "defect_D_even": e["defect_D_abs"],
             "defect_D_collapse": float(o["defect_D_abs"] / e["defect_D_abs"]),
         })
+
+    # -- the correction: attribute the Hilbert defect properly ----------------
+    dHi = [r["decomposition"]["defect_H_interpolation"] for r in out["rungs"]]
+    dHe = [r["decomposition"]["defect_H_endpoint_zeroing"] for r in out["rungs"]]
+    ordHi = rate(dHi)[-1]["order"]
+    tau_last = out["rungs"][-1]["ratios"]["tau"]
+    out["H_attribution"] = {
+        "note": ("H_disc transforms an ENDPOINT-ZEROED interpolant, not the natural-spline "
+                 "interpolant D differentiates. The gated quantity is the total; this block "
+                 "says which part of it is which."),
+        "defect_H_total": [r["defects"]["odd"]["defect_H_abs"] for r in out["rungs"]],
+        "defect_H_endpoint_zeroing": dHe, "defect_H_endpoint_zeroing_rate": rate(dHe),
+        "defect_H_interpolation": dHi, "defect_H_interpolation_rate": rate(dHi),
+        "endpoint_share_at_801": float(dHe[-1] / out["rungs"][-1]["defects"]["odd"]["defect_H_abs"]),
+        "interpolation_order": ordHi,
+        "n_required_interpolation_only": float(
+            RUNGS[-1] * (dHi[-1] / tau_last) ** (1.0 / ordHi)) if ordHi else None,
+    }
 
     # -- the extrapolation that makes the negative robust ---------------------
     # Even if the H boundary defect were zero, D alone converges at n^-4 and has to

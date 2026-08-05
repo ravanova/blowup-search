@@ -49,12 +49,26 @@ Plus, from Q6's sweep, the explicit statement that **when a function is given as
 which is `C^{k-1}` everywhere and `C^k` except at finitely many points, one can rigorously
 calculate the Hilbert transform.**
 
-**Read:** the structural fact this leg leans on — that `line_hilbert_matrix` is not a
-quadrature approximation but the **exact** Hilbert transform of the `C^1` spline interpolant,
-so the entire consistency defect is an **interpolation** error and not a quadrature error — is
+**Read:** the structural fact this leg leans on — that a spline-represented Hilbert transform
+is not a quadrature approximation but the **exact** transform of a piecewise polynomial — is
 **known**. It is the design principle of the method, stated in the sources above and in
 `solver/line_hilbert.py`'s own docstring (Appendix C.1 of Huang–Tong–Wang). This leg
-**re-derives** it and measures its size here. It does not discover it.
+**re-derives** it. It does not discover it.
+
+> **CORRECTED after VER-C's review.** This entry originally added "…so the entire consistency
+> defect is an **interpolation** error and not a quadrature error." **That is false for this
+> implementation, and the error was mine, not the literature's.**
+> `line_hilbert_matrix` assembles source columns for interior nodes only, so it transforms an
+> **endpoint-zeroed** interpolant — a different object from the natural-spline interpolant
+> `slope_matrix` differentiates. The measured defect is therefore ~99.99% an **endpoint
+> artifact** and only 4.4181e−07 of it is genuine interpolation error. Details in
+> `TECHNICAL_P2_ROUTETN_V1.md` §3 and §7.1.
+>
+> **This changes nothing about the novelty verdict** — that a spline Hilbert transform is
+> exact on its spline remains known and unbanked, and the specific endpoint-column choice in
+> this repository's own implementation is not a literature claim in either direction. The
+> correction is recorded here because a novelty log that quietly carries a retracted
+> structural claim is not auditable.
 
 ## Q3 — the specific realization: the source of this repo's spline-analytic H
 

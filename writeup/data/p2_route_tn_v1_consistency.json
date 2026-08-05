@@ -74,7 +74,15 @@
     "defect_H_over_tau": 20552509931.688805,
     "truncation_over_tau": 82763351202.14091
    },
-   "wall_s": 40.88874363899231
+   "decomposition": {
+    "a": 0.5,
+    "family": "odd",
+    "n": 201,
+    "defect_H_total": 0.004728748883333346,
+    "defect_H_interpolation": 6.31592079711307e-06,
+    "defect_H_endpoint_zeroing": 0.004735064804130196
+   },
+   "wall_s": 0.20484280586242676
   },
   {
    "certificate": {
@@ -137,7 +145,15 @@
     "defect_H_over_tau": 148548299182.52884,
     "truncation_over_tau": 711739331447.8754
    },
-   "wall_s": 64.90392470359802
+   "decomposition": {
+    "a": 0.5,
+    "family": "odd",
+    "n": 401,
+    "defect_H_total": 0.004713129985416697,
+    "defect_H_interpolation": 1.7021577416190103e-06,
+    "defect_H_endpoint_zeroing": 0.004714832143158067
+   },
+   "wall_s": 0.676950216293335
   },
   {
    "certificate": {
@@ -200,7 +216,15 @@
     "defect_H_over_tau": 204033440973.58594,
     "truncation_over_tau": 1138985282515.7275
    },
-   "wall_s": 149.5816900730133
+   "decomposition": {
+    "a": 0.5,
+    "family": "odd",
+    "n": 801,
+    "defect_H_total": 0.00470413919071776,
+    "defect_H_interpolation": 4.4181273608871345e-07,
+    "defect_H_endpoint_zeroing": 0.004704581003453576
+   },
+   "wall_s": 4.894343614578247
   }
  ],
  "scale_curve": [
@@ -355,7 +379,7 @@
  "mechanism_ablation": [
   {
    "n": 201,
-   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "predicted_collapse_M_over_a": 1490.4788257895502,
    "defect_H_odd": 0.004728748883333346,
    "defect_H_even": 3.3288641613048395e-06,
    "defect_H_collapse": 1420.5292418660254,
@@ -365,7 +389,7 @@
   },
   {
    "n": 401,
-   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "predicted_collapse_M_over_a": 1490.4788257895502,
    "defect_H_odd": 0.004713129985416697,
    "defect_H_even": 3.108162443807132e-06,
    "defect_H_collapse": 1516.3718340421324,
@@ -375,7 +399,7 @@
   },
   {
    "n": 801,
-   "value_at_cut_ratio_odd_over_even": 1490.4788257895502,
+   "predicted_collapse_M_over_a": 1490.4788257895502,
    "defect_H_odd": 0.00470413919071776,
    "defect_H_even": 3.130299204775382e-06,
    "defect_H_collapse": 1502.7762149833566,
@@ -385,6 +409,19 @@
   }
  ],
  "validation": {
+  "H_is_endpoint_zeroed_check": {
+   "n": 201,
+   "node": 1,
+   "X": -687.9426705819235,
+   "H_disc": -0.0018584719686150998,
+   "H_of_endpoint_zeroed_interpolant_quadrature": -0.001858471968612487,
+   "H_of_full_interpolant_quadrature": -0.0014880639570510525,
+   "H_of_full_interpolant_matrix": -0.001488063957051052,
+   "H_M_reference": -0.0014885580300490623,
+   "abs_diff_H_disc_vs_endpoint_zeroed": 2.6127103952555686e-15,
+   "abs_diff_H_disc_vs_full": 0.00037040801156404727,
+   "abs_diff_full_matrix_vs_quadrature": 4.336808689942018e-19
+  },
   "ilog_max_width": 3.552713678800501e-14,
   "ilog_encloses_50_digit_reference": true,
   "iatan_max_width": 1.4765966227514582e-14,
@@ -484,6 +521,47 @@
   ]
  },
  "scale_curve_n": 801,
+ "H_attribution": {
+  "note": "H_disc transforms an ENDPOINT-ZEROED interpolant, not the natural-spline interpolant D differentiates. The gated quantity is the total; this block says which part of it is which.",
+  "defect_H_total": [
+   0.004728748883333346,
+   0.004713129985416697,
+   0.00470413919071776
+  ],
+  "defect_H_endpoint_zeroing": [
+   0.004735064804130196,
+   0.004714832143158067,
+   0.004704581003453576
+  ],
+  "defect_H_endpoint_zeroing_rate": [
+   {
+    "factor": 1.004291279171304,
+    "order": 0.0061777613901638
+   },
+   {
+    "factor": 1.0021789697524532,
+    "order": 0.003140168930637275
+   }
+  ],
+  "defect_H_interpolation": [
+   6.31592079711307e-06,
+   1.7021577416190103e-06,
+   4.4181273608871345e-07
+  ],
+  "defect_H_interpolation_rate": [
+   {
+    "factor": 3.7105378912213336,
+    "order": 1.891628339608396
+   },
+   {
+    "factor": 3.852667889766824,
+    "order": 1.9458578272024611
+   }
+  ],
+  "endpoint_share_at_801": 1.0000939199963914,
+  "interpolation_order": 1.9458578272024611,
+  "n_required_interpolation_only": 4427687.598653231
+ },
  "D_only_extrapolation": {
   "measured_order": 4.007229080967609,
   "defect_D_over_tau_at_801": 18536770.035727352,
@@ -519,5 +597,5 @@
    }
   ]
  },
- "elapsed_s": 430.79701828956604
+ "elapsed_s": 12.903738260269165
 }

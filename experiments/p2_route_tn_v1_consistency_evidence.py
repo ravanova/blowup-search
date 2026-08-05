@@ -92,7 +92,8 @@ def main():
     a1.set_yscale("log"); a1.set_xticks(x); a1.set_xticklabels(["n=%d" % r["n"] for r in ab])
     a1.set_ylabel("weighted sup norm")
     a1.set_title("B. the mechanism, ablated (lesson 90): same interior\n"
-                 "smoothness, %.0fx different value AT THE CUT" % (745.24 / 0.5), fontsize=10)
+                 "smoothness, %.0fx different value AT THE CUT"
+                 % d["mechanism_ablation"][-1]["predicted_collapse_M_over_a"], fontsize=10)
     a1.legend(fontsize=7.5)
     a1.grid(alpha=0.3, axis="y")
     a1.set_xlim(-0.55, len(ab) - 0.45)
@@ -117,15 +118,24 @@ def main():
                  "the defect is a CURVE in the class, at n = %d" % d["scale_curve_n"], fontsize=10)
     a2.legend(fontsize=8); a2.grid(alpha=0.3, which="both")
 
-    # -- D: the two gaps kept separate ---------------------------------------
+    # -- D: attributing the Hilbert defect (the correction) -------------------
+    at = d["H_attribution"]
     a3 = ax[1, 0]
-    a3.semilogy(ns, tr, "d-", color=C["ours"], lw=2, label="far-field truncation (the OTHER gap)")
-    a3.semilogy(ns, dH, "o-", color=C["bad"], lw=2, label="consistency, Hilbert (THIS leg)")
-    a3.semilogy(ns, dD, "s-", color=C["warn"], lw=2, label="consistency, derivative (THIS leg)")
+    a3.loglog(ns, tr, "d-", color=C["ours"], lw=1.6, alpha=0.6,
+              label="far-field truncation (OTHER gap)")
+    a3.loglog(ns, at["defect_H_total"], "o-", color=C["bad"], lw=2.4,
+              label="H defect TOTAL (the gated quantity)")
+    a3.loglog(ns, at["defect_H_endpoint_zeroing"], "v--", color="#7a2a0a", lw=1.8,
+              label=r"  $\hookrightarrow$ endpoint zeroing (artifact, flat)")
+    a3.loglog(ns, at["defect_H_interpolation"], "^-", color=C["anchor"], lw=2,
+              label=r"  $\hookrightarrow$ TRUE interpolation, order %.2f" % at["interpolation_order"])
+    a3.loglog(ns, dD, "s-", color=C["warn"], lw=2, label="D defect, order 4.01")
     a3.set_xlabel("n"); a3.set_ylabel("weighted sup norm")
-    a3.set_title("D. two defects in the same problem are not the same\n"
-                 "defect (75): reach is FIXED, only n moves", fontsize=10)
-    a3.legend(fontsize=8); a3.grid(alpha=0.3)
+    a3.set_title("D. CORRECTED attribution: H_disc transforms an ENDPOINT-\n"
+                 "ZEROED interpolant, not the one D differentiates", fontsize=10)
+    a3.set_ylim(1e-7, 3.0)
+    a3.legend(fontsize=7.0, loc="upper right", framealpha=0.95)
+    a3.grid(alpha=0.3, which="both")
 
     # -- E: the budget arithmetic --------------------------------------------
     a4 = ax[1, 1]
@@ -162,11 +172,15 @@ def main():
         "D converges at the spline order and is merely far too\n"
         "large: order 4 would need n ~ %.0f (N = %.0f, dense).\n"
         "H does not converge at all -- %.4fx over a 4x refinement.\n\n"
-        "MECHANISM (ablated, not asserted). line_hilbert_matrix\n"
-        "builds interior source columns only, so it imposes\n"
-        "f(+-X_max) = 0 on its input. A test family that already\n"
-        "nearly vanishes there drops H's defect %.0fx and moves\n"
-        "D's by %.2fx. The control could have come out otherwise.\n\n"
+        "MECHANISM (ablated, not asserted; CORRECTED after review).\n"
+        "line_hilbert_matrix builds interior source columns only,\n"
+        "so it transforms an ENDPOINT-ZEROED interpolant -- NOT the\n"
+        "natural-spline interpolant D differentiates. That artifact\n"
+        "is %.4f of the measured defect. The genuine interpolation\n"
+        "error converges at order %.2f and would still need\n"
+        "n ~ %.2e, i.e. WORSE than D. The NO is strengthened.\n"
+        "A family that nearly vanishes at the cut drops H %.0fx and\n"
+        "moves D %.2fx: the control could have come out otherwise.\n\n"
         "CEILING. Nothing here is a statement about the far-field\n"
         "gap, about HL_S2_nonsymmetric's certification, or about\n"
         "any link of the L1-L4 chain. No link moved. Clay ~0.05%%."
@@ -177,6 +191,8 @@ def main():
          v["H_rate_per_doubling"][-1]["order"],
          ex["n_required"], 2 * ex["n_required"] + 3,
          dH[0] / dH[-1],
+         at["endpoint_share_at_801"], at["interpolation_order"],
+         at["n_required_interpolation_only"],
          ab[-1]["defect_H_collapse"], ab[-1]["defect_D_collapse"])
     a5.text(0.0, 1.0, txt, va="top", ha="left", fontsize=8.2, family="monospace",
             bbox=dict(boxstyle="round", fc="#fbf7ef", ec=C["bad"], lw=1.6))

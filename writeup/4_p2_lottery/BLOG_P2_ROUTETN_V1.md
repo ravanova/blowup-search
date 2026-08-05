@@ -40,7 +40,7 @@ and reported in its own column.
 ## First: the quantity does not exist until you say what it means
 
 The obvious phrasing — "bound ‖H_disc − H‖" — is not a thing. `H_disc` is an
-805 × 805 matrix taking grid vectors to grid vectors. `H` takes functions to functions.
+n × n matrix taking grid vectors to grid vectors. `H` takes functions to functions.
 Subtracting them is a type error.
 
 The difference only becomes a number once you name a **class of functions**, and then the
@@ -53,24 +53,52 @@ The class is the rational pair whose Hilbert transform, **truncated** Hilbert tr
 derivative are all closed-form — which happens to include the exact CLM profile the repo
 already tests against.
 
-## Then: the two operators turn out to be the same operator
+## Then: the two operators turn out **not** to be the same operator
 
-Reading `solver/line_hilbert.py` closely changes the whole shape of the problem.
-`line_hilbert_matrix` is **not a quadrature rule.** It represents the data by the C¹ cubic
-spline interpolant whose node slopes are the natural-spline slopes, and then applies the
-*exact* Hilbert transform of that spline. And `slope_matrix` returns the derivative of the
-*same* interpolant. So, exactly:
+> **I got this backwards on the first pass, and the correction is the most useful thing in
+> the leg.** My first draft said `H_disc` and `D_disc` were the exact Hilbert transform and
+> the exact derivative of *the same* spline interpolant, so both defects were "one
+> interpolation error through two operators". That is false, review caught it, and the
+> ablation further down had already contradicted it — I just hadn't reconciled the two.
+
+Reading `solver/line_hilbert.py` closely does change the shape of the problem, but not the
+way I first wrote it down. `line_hilbert_matrix` is indeed **not a quadrature rule**: it
+represents the data by a C¹ cubic spline and applies the *exact* Hilbert transform of that
+spline.
+
+**But it builds source columns for interior nodes only.** The two endpoint basis functions
+are dropped. So the spline it actually transforms is not the natural-spline interpolant
+`Π f` that `slope_matrix` differentiates — it is `Π⁰ f`, the one pinned to **zero value and
+zero slope at ±M**:
 
 ```
-H_disc f  =  H(Π f)  on [-M, M]          D_disc f  =  (Π f)'  at the nodes
+H_disc f  =  H(Π⁰ f)          D_disc f  =  (Π f)'
+                  ^^ a different, endpoint-zeroed interpolant
 ```
 
-Both consistency defects are **one interpolation error `e = Π f − f`, seen through two
-different operators.** That is a pleasant structure, and it is also why `H`'s defect cannot
-be bounded from `‖e‖_sup` the way `D`'s can: the Hilbert transform is unbounded on `L^∞`.
-It has to be *evaluated*. Hence the closed form, and hence the rigorous `log` and `arctan`
-this leg had to build (series with proved remainders — `np.log` carries no ULP guarantee
-this project is entitled to assume).
+Handed a function that is ≈ 1/X out there, `H_disc` silently sets it to zero over the two
+edge cells. At n = 201, node 1:
+
+| | value |
+|---|---|
+| `H_disc f` | −1.8584719686e−03 |
+| `H(Π⁰ f)` by quadrature | −1.8584719686e−03 — agrees to **2.6e−15** |
+| `H(Π f)` by quadrature | −1.4880639571e−03 — differs by 3.7e−04 |
+| the true reference `H_M f` | −1.4885580e−03 |
+
+So the defect is really two defects stacked:
+
+```
+H_disc f − H_M f  =  [endpoint zeroing]  +  [genuine interpolation error]
+                      4.70e−03, flat        4.42e−07, order 1.95
+```
+
+The artifact is **the entire measured defect** (99.99% of it), which is exactly why the total
+refuses to converge. And the genuine interpolation part is still why `H` cannot be bounded
+from `‖e‖_sup` the way `D`'s can — the Hilbert transform is unbounded on `L^∞`, so it has to
+be *evaluated*. Hence the closed forms, and hence the rigorous `log` and `arctan` this leg had
+to build (series with proved remainders — `np.log` carries no ULP guarantee this project is
+entitled to assume).
 
 ## The number the defect has to beat, and why it is so small
 
@@ -137,6 +165,13 @@ cut by a factor M/a ≈ 1490. Nothing in the code path knows which one it has.
 The same dial that moves `H` by three orders of magnitude moves `D` by eleven percent, and
 the collapse factor matches M/a to within 1%. The mechanism is measured.
 
+**And this table is what should have told me §3 was wrong.** A dial that leaves interior
+smoothness completely untouched cannot move a *pure interpolation error* by 1503× while
+moving the derivative's by 1.11%. Under the corrected reading it is exactly what has to
+happen: the dial changes `f(±M)`, which is precisely what the endpoint-zeroing term is
+proportional to and what the interpolation term barely notices. The evidence was sitting in
+my own results section, contradicting my own mechanism section, and I shipped both.
+
 And the enclosures are enclosures: width/value is 6.34e−08 for `D` and 1.15e−13 for `H`. These
 bounds are not their own evaluation error (lesson 86) — the risk that was flagged as this
 leg's central one, and it did not bite.
@@ -149,8 +184,11 @@ The gate's no-branch was written before the run and it is honoured: **the colloc
 realization cannot carry `L1`, and the coefficient basis is the only lane left for it. No
 grid-basis repairs are proposed here** — not the boundary-basis fix the mechanism section
 obviously invites, not anything else. The `H` artifact is *why* the no is sharp, but the no
-does not depend on it: even with the Hilbert defect deleted outright, the derivative alone
-still needs n ≈ 52,000.
+does not depend on it, in two independent ways: even with the Hilbert defect deleted
+outright, the derivative alone still needs n ≈ 52,000; and even with the *artifact* deleted
+instead, leaving only the genuine interpolation error, the Hilbert side needs **n ≈ 4.4
+million**, because order 1.95 is so much weaker than order 4. Correct attribution makes the
+answer more negative, not less.
 
 What genuinely changed is the reading of that honest docstring. The two named gaps were
 listed as peers. They are not. One of them — the far field — has been the subject of three

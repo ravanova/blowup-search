@@ -22,14 +22,45 @@ Novelty log `writeup/novelty/leg_56.md`.
 3. Read `solver/line_hilbert.py` closely — which changed the leg's shape (see below).
 4. Built, measured, ablated, wrote.
 
-## The reading that decided the leg
+## The reading that decided the leg — **and the one I got wrong**
 
 `line_hilbert_matrix` is **not a quadrature rule.** It applies the *exact* Hilbert transform
-of the `C¹` spline interpolant, and `slope_matrix` differentiates the *same* interpolant.
-So both consistency defects are one interpolation error seen through two operators — and
-because `H` is unbounded on `L^∞`, its defect cannot be bounded from `‖e‖_sup`; it must be
-evaluated against an exact reference. That is why the leg needed closed-form *truncated*
-Hilbert transforms and rigorous `log`/`arctan`, rather than a one-line estimate.
+of a `C¹` spline. Because `H` is unbounded on `L^∞`, its defect cannot be bounded from
+`‖e‖_sup`; it must be evaluated against an exact reference — which is why the leg needed
+closed-form *truncated* Hilbert transforms and rigorous `log`/`arctan` rather than a one-line
+estimate. All of that stands.
+
+**What I got wrong, caught by VER-C, corrected in place:** I claimed `slope_matrix`
+differentiates the *same* interpolant, so both defects were "one interpolation error through
+two operators". False. `line_hilbert_matrix` assembles source columns for **interior nodes
+only** (`Hp_full[:, 1:-1] = HP`), dropping the two endpoint basis functions, so it transforms
+an **endpoint-zeroed** interpolant `Π⁰`. `D` really does use the full natural-spline slope
+operator. They are different discretisations.
+
+I re-derived this independently before rewriting rather than taking the review on trust.
+At n = 201, node 1: `H_disc` = −1.8584719686e−03 matches `H(Π⁰f)` by PV quadrature to
+**2.61e−15**, while `H(Πf)` = −1.4880639571e−03 differs by 3.70e−04. I also built a
+full-interpolant Hilbert matrix (endpoint hats restored as one-sided half-hats) that
+reproduces the quadrature to **4.34e−19**, which made the decomposition ladder cheap.
+
+**The split** (`H_attribution`), all three rungs:
+
+| n | total (gated) | endpoint zeroing | true interpolation | interp. order |
+|---|---|---|---|---|
+| 201 | 4.7287e−03 | 4.7351e−03 | 6.3159e−06 | — |
+| 401 | 4.7131e−03 | 4.7148e−03 | 1.7022e−06 | 1.89 |
+| 801 | 4.7041e−03 | 4.7046e−03 | 4.4181e−07 | **1.95** |
+
+The artifact is **the whole defect** (share 1.00009 at n = 801), which is why the total does
+not converge. **The gate answer is unaffected and strengthened:** the genuine interpolation
+error, converging at order 1.95, would need **n ≈ 4.43e+06** to reach τ — an order of
+magnitude worse than the derivative side's 5.22e+04.
+
+**The lesson for me.** My own §8 ablation already refuted §3 and I shipped both: a dial that
+leaves interior smoothness untouched cannot move a pure interpolation error 1503× while
+moving the derivative's by 1.11×. The contradiction was inside the same document. *A
+mechanism section and a results section that disagree is a finding, not a formatting
+problem — reconcile them before shipping.*
 
 ## What was built
 
@@ -82,6 +113,8 @@ At n = 801: `D` = **1.854e+07 τ** at **order 4.01**; `H` = **2.040e+11 τ** at 
 2. **The figure's `Y₀` bar was labelled "leg 46" while plotting my own re-derived value.**
    Caught on visual inspection. Now both bars are shown, labelled separately, and the
    discrepancy is stated in the prose rather than hidden by the label.
+3. **The shared-interpolant claim** (above) — not caught by me, caught by VER-C. The worst of
+   the three, because it was a *mechanism* claim contradicted by my own measurements.
 
 ## Gate
 
@@ -103,6 +136,21 @@ still needs n ≈ 52,163 (`N = 104,329`, dense) at its measured order 4.
 
 No statement about `HL_S2_nonsymmetric` being certified, about the far-field gap, or about
 the coefficient basis. **No link of the L1→L4 chain moved.** Clay ~0.05%.
+
+## Left undone on purpose — one item for integration
+
+VER-C also flagged that `capabilities.py`'s `holds` fields for `solver/interval.py` and
+`solver/interval_certificate.py` do not mention the new capabilities (rigorous `ilog` /
+`iatan_small`; `SplineConsistency` and the `(H, D)` consistency defect). **`capabilities.py`
+is not in this leg's declared territory**, and a diff outside it fails the merge gate, so it
+is deliberately untouched. `test_capabilities.py` passes as-is. Suggested text for whoever
+folds this in:
+
+* `solver/interval.py` — add: *rigorous `log` and `arctan` (`ilog`, `iatan_small`) built from
+  series with proved remainders, plus enclosures of `log 2` and `pi`.*
+* `solver/interval_certificate.py` — add: *`SplineConsistency`: the `(H, D)` consistency
+  defect at fixed reach, on a rational test class with closed-form truncated Hilbert
+  transforms; measured NO against the certificate's own budget at leg 56.*
 
 ## Note for the Decision Maker
 

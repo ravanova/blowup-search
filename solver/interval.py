@@ -366,7 +366,18 @@ def ilog(x):
 
     with |(m-1)/(m+1)| <= 1/3 on m in [0.5, 1] -- exactly the range `_atanh_series`
     proves.  log 2 enters as the enclosure ILOG2, so the e log 2 term is bounded
-    and not evaluated."""
+    and not evaluated.
+
+    DOCUMENTATION GAP, recorded rather than papered over (raised in VER-C's review of
+    leg 56).  The argument reduction z = (m-1)/(m+1) is itself two rounded float
+    operations, and that rounding is NOT part of the remainder bound `_atanh_series`
+    proves -- that bound covers the series evaluation and its tail, taking z as given.
+    The omission is absorbed with large margin: |dz| <= 2u|z| gives |d log| <= ~4u,
+    about 4.4e-16, against the ~1.2e-14 widths this routine actually reports, so the
+    enclosures hold with roughly 15x room and every gate in `test_interval.py` passes
+    against an independent 50-digit reference.  It is a gap in the WRITE-UP of the
+    proof, not a gap in the enclosure.  Closing it properly means carrying z as an
+    interval into the series."""
     if not isinstance(x, Interval):
         x = Interval.point(np.asarray(x, dtype=float))
     if np.any(np.asarray(x.lo) <= 0.0):

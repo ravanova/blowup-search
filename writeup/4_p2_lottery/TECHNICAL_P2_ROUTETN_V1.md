@@ -34,29 +34,65 @@ difference is defined only relative to a **named class**, and its magnitude is a
 that class as much as of the operator. Reported accordingly as a curve (§7), never as a
 scalar impersonating an operator norm.
 
-## 3. The structural fact the leg turns on
+## 3. The structural fact the leg turns on — **corrected after VER-C's review**
+
+> **The first version of this section was wrong, and the correction is kept visible rather
+> than quietly patched.** It claimed that `H_disc` and `D_disc` are the exact Hilbert
+> transform and the exact derivative of the **same** natural-spline interpolant, so that both
+> consistency defects were "one interpolation error seen through two operators". **They are
+> not the same interpolant.** §8's own ablation already contained the evidence against that
+> claim; this section previously failed to reconcile the two.
 
 `line_hilbert_matrix` is **not a quadrature rule**. Per `solver/line_hilbert.py` (Huang–Tong–
 Wang arXiv:2603.25104 App. C.1), it expands the data in the `C¹₀` Hermite basis `{P_i, Q_i}`
-with node slopes taken from the natural cubic spline, and applies the **closed-form exact**
-Hilbert transform of each basis element. `slope_matrix` returns the derivative of the **same**
-interpolant. Writing `Π_n` for that interpolant:
+with node slopes from the natural cubic spline, and applies the **closed-form exact** Hilbert
+transform of each basis element. That much stands.
+
+**But it assembles source columns for INTERIOR nodes only** — `Hp_full[:, 1:-1] = HP`, and
+likewise `Hq_full` — so the two endpoint basis functions are dropped. `slope_matrix`, by
+contrast, really is the **full** natural-spline slope operator at every node. Writing `Π_n`
+for the natural-spline interpolant and `Π⁰_n` for the C¹ piecewise cubic that matches `f` and
+the natural-spline slopes at the **interior** nodes and is **zero with zero slope at ±M**:
 
 ```
-H_disc f = H(Π_n f)|_[-M,M]                D_disc f = (Π_n f)'|_nodes
+H_disc f = H(Π⁰_n f)|_[-M,M]               D_disc f = (Π_n f)'|_nodes
+                ^^ a DIFFERENT interpolant
 ```
 
-so with `e = Π_n f − f`:
+**Measured**, at n = 201, node 1 (`X = −687.943`), `a = 1/2`
+(`validation.H_is_endpoint_zeroed_check`):
+
+| quantity | value | vs `H_disc` |
+|---|---|---|
+| `H_disc f` | −1.8584719686e−03 | — |
+| `H(Π⁰_n f)`, PV quadrature | −1.8584719686e−03 | **2.61e−15** |
+| `H(Π_n f)`, PV quadrature | −1.4880639571e−03 | 3.704e−04 |
+| `H(Π_n f)`, full-interpolant matrix | −1.4880639571e−03 | (matches quadrature to 4.34e−19) |
+| `H_M f` (the reference) | −1.4885580e−03 | — |
+
+So the gated defect splits into two terms of completely different character:
+
+```
+H_disc f − H_M f  =  [H(Π⁰_n f) − H(Π_n f)]   +   [H(Π_n f) − H_M f]
+                      ENDPOINT ZEROING            TRUE INTERPOLATION
+                      O(f(±M)); does NOT          converges, order ≈ 1.95
+                      converge at fixed reach
+```
 
 | defect | equals | character |
 |---|---|---|
-| `D_disc f − f'` | `e'` | local; bounded by interpolation theory |
-| `H_disc f − H_M f` | `H(e)` on `[−M, M]` | **gated here** |
+| `D_disc f − f'` | `(Π_n f − f)'` | local; converges at the spline order 4 |
+| `H_disc f − H_M f` | endpoint zeroing **+** `H(Π_n f − f)` | **gated here** |
 | `H_M f − H f` | far-field tail | reported, **not** gated |
 
-`H` is unbounded on `L^∞`, so `H(e)` **cannot** be bounded from `‖e‖_sup`. It must be
-evaluated against an exact reference. That requirement is what the rest of the machinery
-exists to satisfy.
+`H` is unbounded on `L^∞`, so the interpolation part **cannot** be bounded from `‖e‖_sup`; it
+must be evaluated against an exact reference, which is what the closed forms in §4 are for.
+
+**What this changes and what it does not.** The gated quantity is unchanged — it is the defect
+of the operator **as implemented**, i.e. the left-hand side. What changes is the
+**attribution**, and it matters for anyone reading this code next: the Hilbert side is not a
+slightly worse version of the derivative side, it is a **structurally different, and much
+worse-conditioned, discretisation**. §7.1 gives the split.
 
 ## 4. The test class, and its closed forms
 
@@ -141,6 +177,22 @@ truncation is **1.139e+12 τ**.
   large. Extrapolating at that order, reaching τ needs **n ≈ 52,163** (`N = 104,329`, dense).
 * `H` **does not converge**: 1.0052× total over a 4× refinement. Refinement is not a lever.
 
+### 7.1 Attributing the Hilbert defect (`H_attribution`)
+
+| n | total (gated) | endpoint zeroing | order | true interpolation | order |
+|---|---|---|---|---|---|
+| 201 | 4.7287e−03 | 4.7351e−03 | — | 6.3159e−06 | — |
+| 401 | 4.7131e−03 | 4.7148e−03 | 0.01 | 1.7022e−06 | 1.89 |
+| 801 | 4.7041e−03 | 4.7046e−03 | 0.00 | 4.4181e−07 | **1.95** |
+
+**The endpoint-zeroing term is the entire defect**: its share at n = 801 is **1.00009**. That
+is why the total does not converge — the artifact does not, and it dominates by four orders.
+
+**The genuine interpolation error converges, and it is still hopeless.** At order 1.95, taking
+4.4181e−07 down to `τ = 2.3056e−14` needs **n ≈ 4.43e+06** — *worse* than the derivative
+side's n ≈ 5.22e+04, because order 1.95 is so much weaker than order 4. **Correct attribution
+strengthens the NO rather than weakening it.**
+
 **The scale curve** (n = 801, `odd`) — the answer to "the defect of what?":
 `a` = 0.125 → `D` 1.804e−03; 0.25 → 2.752e−05; 0.5 → 4.274e−07; ≥ 1 → floors at ≈ 7.13e−08.
 `H` is flat at 4.704e−03 across the whole range, because for large `|X|` the class member is
@@ -167,6 +219,15 @@ control could have come out the other way (both moving, or neither): it did not.
 
 The `even` family's `H` defect is *also* flat in `n` (3.33e−06 → 3.13e−06), so the
 non-convergence is a property of the cut and not of the particular family.
+
+**Reconciling this with §3, which the first version of this document failed to do.** These
+numbers were *already* incompatible with "one interpolation error through two operators":
+a dial that leaves interior smoothness untouched cannot move a pure interpolation error by
+1503× while moving the derivative's by 1.11×. Under the corrected reading it is exactly what
+must happen — the dial changes `f(±M)`, which is precisely what the endpoint-zeroing term is
+proportional to and what the interpolation term is nearly blind to. §7.1 measures the same
+statement directly, by separating the two terms rather than inferring the split from a
+contrast.
 
 ## 9. The bound is not its own evaluation error (discipline 86)
 
@@ -215,9 +276,18 @@ nor any other.
 That last clause is a consequence of the gate's own wording, not a claim about `MM`'s
 outcome: leg 54 is live and unanswered as this is written, and nothing here predicts it.
 
-**The negative does not hinge on the `H` artifact.** With the Hilbert defect deleted
-outright, the derivative defect alone still requires n ≈ 52,163 at its measured order 4 —
-a dense interval system of dimension 104,329.
+**The negative does not hinge on the `H` artifact — and correct attribution strengthens it.**
+Two independent ways to see that:
+
+1. With the Hilbert defect deleted outright, the derivative defect alone still requires
+   n ≈ 52,163 at its measured order 4 — a dense interval system of dimension 104,329.
+2. With the endpoint-zeroing artifact deleted instead, so that only the **genuine**
+   interpolation error remains (§7.1), the Hilbert side requires **n ≈ 4.43e+06** at its
+   measured order 1.95 — an order of magnitude *worse* than the derivative side.
+
+Repairing the endpoint basis would therefore move the binding constraint from 2.04e+11 τ to
+4.43e+06 in `n`, and would not come close to closing anything. That is an argument for the
+robustness of the NO; it is **not** a proposed repair, which the no-branch forbids.
 
 ## 12. Ceiling
 
