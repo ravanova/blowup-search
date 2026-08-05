@@ -1,0 +1,384 @@
+{
+  "benchmark": {
+    "beta_frac_of_half_pi": 0.7,
+    "d_core": 0.25,
+    "field_window": [
+      0.1,
+      10.0
+    ],
+    "gamma": 1.0,
+    "name": "Lamb-Oseen vortex in a right-angled corner (three images)",
+    "r0": 1.0,
+    "r_max": 1000.0,
+    "r_min": 0.001,
+    "sources": [
+      "Lamb, Hydrodynamics (1932), Art. 155 -- vortex in a corner",
+      "Greenhill, Messenger of Mathematics VIII (1878)",
+      "Crosby, Johnson & Morrison, Phys. Fluids 25 (2013), sec. IV eq. (14) -- arXiv:1301.6245, the quarter-plane three-image construction",
+      "Lamb-Oseen closed form: v_theta = (Gamma/2 pi R)(1 - exp(-R^2/d^2))"
+    ]
+  },
+  "closure_separation": [
+    {
+      "d_centre_u": 2.6575963651964685e-15,
+      "d_centre_v": 5.218048215738236e-15,
+      "d_p1_abs": 2.103785895490873e-15,
+      "d_p3_abs": 5.465056575684746e-15,
+      "n_r": 601
+    },
+    {
+      "d_centre_u": 8.534839501805891e-15,
+      "d_centre_v": 2.2065682614424986e-14,
+      "d_p1_abs": 8.68521834312963e-15,
+      "d_p3_abs": 9.632743279246181e-15,
+      "n_r": 1201
+    },
+    {
+      "d_centre_u": 8.576472865229334e-15,
+      "d_centre_v": 6.994405055138486e-14,
+      "d_p1_abs": 1.4769235097064626e-13,
+      "d_p3_abs": 4.1735874738851875e-14,
+      "n_r": 2401
+    }
+  ],
+  "exp1_check": {
+    "max_rel_err": 6.862716689181031e-14,
+    "max_rel_err_vs_independent_quadrature": 8.274145735711388e-14,
+    "per_point": {
+      "0.01": 6.862716689181031e-14,
+      "0.1": 1.2180683889719699e-16,
+      "0.5": 1.9833429711330103e-16,
+      "1.0": 0.0,
+      "10.0": 1.0188107748479364e-15,
+      "2.0": 7.094909443106665e-16,
+      "20.0": 1.1695339143960804e-14,
+      "5.0": 2.4171107009827934e-14
+    }
+  },
+  "gate": "Does a published, independent benchmark exist for the 2D polar-grid Biot-Savart / stream-function solve, and does solver/boussinesq_velocity.py reproduce it to a pre-committed tolerance?",
+  "gate_answer": "YES_AND_IT_REPRODUCES",
+  "invariant_residual": -1.6653345369377348e-16,
+  "ladder_dirichlet_control": [
+    {
+      "abs_err_vec": 0.0003951556655435423,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.031415926535897934,
+      "drho": 0.02302585092994036,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 49,
+      "n_r": 601,
+      "p1_rel_err_centre_velocity": 0.0028151221026327614,
+      "p3_rel_l2_phi_window": 0.00019478794650006946,
+      "pts_across_core_beta": 7.957747154594767,
+      "pts_across_core_rho": 10.85736204758134,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "dirichlet",
+      "rel_l2_velocity_window": 0.0005766067228799542,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.018047123618787637,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.13899535078512074,
+      "window": [
+        0.1,
+        10.0
+      ]
+    },
+    {
+      "abs_err_vec": 9.87405423371056e-05,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.015707963267948967,
+      "drho": 0.01151292546497018,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 99,
+      "n_r": 1201,
+      "p1_rel_err_centre_velocity": 0.0007034359048775999,
+      "p3_rel_l2_phi_window": 4.86611700117534e-05,
+      "pts_across_core_beta": 15.915494309189533,
+      "pts_across_core_rho": 21.71472409516268,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "dirichlet",
+      "rel_l2_velocity_window": 0.0001433201835559319,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.018317704050284225,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.13911638034912852,
+      "window": [
+        0.1,
+        10.0
+      ]
+    },
+    {
+      "abs_err_vec": 2.4682113828734434e-05,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.007853981633974483,
+      "drho": 0.00575646273248509,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 199,
+      "n_r": 2401,
+      "p1_rel_err_centre_velocity": 0.00017583744897948746,
+      "p3_rel_l2_phi_window": 1.2163058051177982e-05,
+      "pts_across_core_beta": 31.830988618379067,
+      "pts_across_core_rho": 43.42944819032536,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "dirichlet",
+      "rel_l2_velocity_window": 3.572966738575953e-05,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.018385307241745315,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.1391466203778559,
+      "window": [
+        0.1,
+        10.0
+      ]
+    }
+  ],
+  "ladder_robin": [
+    {
+      "abs_err_vec": 0.00039515566554383766,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.031415926535897934,
+      "drho": 0.02302585092994036,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 49,
+      "n_r": 601,
+      "p1_rel_err_centre_velocity": 0.002815122102634865,
+      "p3_rel_l2_phi_window": 0.0001947879464946044,
+      "pts_across_core_beta": 7.957747154594767,
+      "pts_across_core_rho": 10.85736204758134,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "robin",
+      "rel_l2_velocity_window": 0.0005766067226407185,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.01804712361878498,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.13899535078512595,
+      "window": [
+        0.1,
+        10.0
+      ]
+    },
+    {
+      "abs_err_vec": 9.874054233588647e-05,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.015707963267948967,
+      "drho": 0.01151292546497018,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 99,
+      "n_r": 1201,
+      "p1_rel_err_centre_velocity": 0.0007034359048689147,
+      "p3_rel_l2_phi_window": 4.8661170021386144e-05,
+      "pts_across_core_beta": 15.915494309189533,
+      "pts_across_core_rho": 21.71472409516268,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "robin",
+      "rel_l2_velocity_window": 0.000143320183434963,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.01831770405027569,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.13911638034915058,
+      "window": [
+        0.1,
+        10.0
+      ]
+    },
+    {
+      "abs_err_vec": 2.468211380800302e-05,
+      "blob": {
+        "a": 0.4539904997395468,
+        "b": 0.8910065241883678,
+        "beta": 1.0995574287564276,
+        "node_offset": {
+          "beta": 0.0,
+          "rho": 0.0
+        },
+        "r": 1.0
+      },
+      "dbeta": 0.007853981633974483,
+      "drho": 0.00575646273248509,
+      "finite_core_correction_rel": 2.332112546956228e-06,
+      "n_beta": 199,
+      "n_r": 2401,
+      "p1_rel_err_centre_velocity": 0.0001758374488317951,
+      "p3_rel_l2_phi_window": 1.2163058092913857e-05,
+      "pts_across_core_beta": 31.830988618379067,
+      "pts_across_core_rho": 43.42944819032536,
+      "r_max": 1000.0,
+      "r_min": 0.001,
+      "radial_bc": "robin",
+      "rel_l2_velocity_window": 3.572966731217345e-05,
+      "u_exact_finite_core": -0.018407837914765274,
+      "u_exact_point_vortex": -0.01840783791476527,
+      "u_numeric": -0.01838530724173674,
+      "v_exact_finite_core": 0.13915669884581103,
+      "v_exact_point_vortex": 0.1391570262019441,
+      "v_numeric": 0.13914662037792586,
+      "window": [
+        0.1,
+        10.0
+      ]
+    }
+  ],
+  "leg": 73,
+  "module_under_test": "solver/boussinesq_velocity.py",
+  "precommitted": {
+    "P1_rel_tol_finest": 0.01,
+    "P2_min_observed_order": 1.5,
+    "P3_rel_tol_finest": 0.001,
+    "reading_rule": "P1/P3 are accuracy, P2 is correctness; a P1/P3 miss with P2 holding is a resolution finding, a P2 failure is the disagrees branch",
+    "recorded_in": "writeup/novelty/leg_73.md"
+  },
+  "route": "BV",
+  "truncation_stress": [
+    {
+      "closure_own_error_p3": 2.3308878762874586e-05,
+      "closure_penalty_p3_ratio": 9.788150459367369,
+      "dirichlet_p1": 3.817973816533165e-05,
+      "dirichlet_p3": 2.6523076579816e-06,
+      "r_max": 5.0,
+      "r_max_over_blob_radius": 5.0,
+      "r_min": 0.2,
+      "robin_p1": 3.965305685168624e-05,
+      "robin_p3": 2.5961186420856187e-05,
+      "window": [
+        0.30000000000000004,
+        3.3333333333333335
+      ]
+    },
+    {
+      "closure_own_error_p3": 7.372555872680042e-08,
+      "closure_penalty_p3_ratio": 1.0080565002355841,
+      "dirichlet_p1": 0.0001322814778649016,
+      "dirichlet_p3": 9.15106517358087e-06,
+      "r_max": 20.0,
+      "r_max_over_blob_radius": 20.0,
+      "r_min": 0.05,
+      "robin_p1": 0.00013228492733552319,
+      "robin_p3": 9.22479073230767e-06,
+      "window": [
+        0.15,
+        10.0
+      ]
+    },
+    {
+      "closure_own_error_p3": -4.070129295242705e-11,
+      "closure_penalty_p3_ratio": 0.9999981179611483,
+      "dirichlet_p1": 0.00031260983077623913,
+      "dirichlet_p3": 2.1626170425184235e-05,
+      "r_max": 100.0,
+      "r_max_over_blob_radius": 100.0,
+      "r_min": 0.01,
+      "robin_p1": 0.000312609839290412,
+      "robin_p3": 2.1626129723891283e-05,
+      "window": [
+        0.15,
+        10.0
+      ]
+    },
+    {
+      "closure_own_error_p3": 7.018955458081705e-15,
+      "closure_penalty_p3_ratio": 1.0000000001442282,
+      "dirichlet_p1": 0.0007034359048775999,
+      "dirichlet_p3": 4.866561849963812e-05,
+      "r_max": 1000.0,
+      "r_max_over_blob_radius": 1000.0,
+      "r_min": 0.001,
+      "robin_p1": 0.0007034359048689147,
+      "robin_p3": 4.8665618506657074e-05,
+      "window": [
+        0.15,
+        10.0
+      ]
+    }
+  ],
+  "verdict": {
+    "p1_errors": [
+      0.002815122102634865,
+      0.0007034359048689147,
+      0.0001758374488317951
+    ],
+    "p1_finest": 0.0001758374488317951,
+    "p1_margin_factor": 56.87070681721464,
+    "p1_monotone": true,
+    "p1_observed_orders": [
+      2.0007066186886218,
+      2.000176615114827
+    ],
+    "p1_pass": true,
+    "p1_richardson_estimate": 4.395398102039714e-05,
+    "p2_min_order_seen": 2.000176615114827,
+    "p2_pass": true,
+    "p3_errors": [
+      0.0001947879464946044,
+      4.8661170021386144e-05,
+      1.2163058092913857e-05
+    ],
+    "p3_finest": 1.2163058092913857e-05,
+    "p3_margin_factor": 82.21616573405956,
+    "p3_monotone": true,
+    "p3_observed_orders": [
+      2.001061491683509,
+      2.0002650056962943
+    ],
+    "p3_pass": true
+  }
+}
