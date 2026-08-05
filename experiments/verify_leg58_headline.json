@@ -1,0 +1,225 @@
+{
+ "verifier": "VER-A",
+ "leg": 58,
+ "verifies": 54,
+ "claimed": {
+  "best_admissible_Z1": 8.9591,
+  "block_diag_baseline": 10.4584,
+  "MM1_equality_deviation": 1.89e-15,
+  "MM1_scope": "K >= 6 flat / K >= 4 algebraic"
+ },
+ "VER1_max_structural_deviation": 1.7763568394002505e-15,
+ "VER1_pass": true,
+ "VER2_best_admissible": {
+  "Z1": 8.959091169104095,
+  "shape": "ff_lift",
+  "class": "algebraic",
+  "param": 0.3,
+  "gauge": "null",
+  "K": 2,
+  "subblocks": {
+   "Z1_GG": 1.2418940475866892e-16,
+   "Z1_Gt": 8.878493286824149,
+   "Z1_tG": 0.7725656570833651,
+   "Z1_tt": 0.35822070343272117
+  }
+ },
+ "VER2_block_diagonal_baseline": {
+  "Z1": 10.458427031841403,
+  "class": "algebraic",
+  "param": 0.3,
+  "gauge": "null",
+  "K": 2
+ },
+ "VER2_improvement_factor": 1.1673535668336368,
+ "VER3_max_ratio_deviation_from_one": 3.552713678800501e-15,
+ "VER3_is_an_equality": true,
+ "VER3_second_factor_range": [
+  0.941176470588235,
+  1.3318429055906214
+ ],
+ "VER3_smallest_K_with_rhs_above_one": {
+  "flat": 5,
+  "algebraic": 4
+ },
+ "VER3_rows": [
+  {
+   "class": "flat",
+   "K": 2,
+   "rhs": 0.0,
+   "measured": 0.00048685706611330606,
+   "ratio": null,
+   "second_factor": 0.9980506822612085,
+   "smallest_sv_of_Gamma": 0.2210833685259685
+  },
+  {
+   "class": "flat",
+   "K": 4,
+   "rhs": 0.9961089494163425,
+   "measured": 0.9961089494163415,
+   "ratio": 0.999999999999999,
+   "second_factor": 0.9961089494163425,
+   "smallest_sv_of_Gamma": 0.05172032038088301
+  },
+  {
+   "class": "flat",
+   "K": 6,
+   "rhs": 1.9883495145631067,
+   "measured": 1.9883495145631052,
+   "ratio": 0.9999999999999992,
+   "second_factor": 0.9941747572815534,
+   "smallest_sv_of_Gamma": 0.022983561626090544
+  },
+  {
+   "class": "flat",
+   "K": 8,
+   "rhs": 2.976744186046511,
+   "measured": 2.9767441860465085,
+   "ratio": 0.9999999999999991,
+   "second_factor": 0.9922480620155038,
+   "smallest_sv_of_Gamma": 0.012981347686930954
+  },
+  {
+   "class": "flat",
+   "K": 16,
+   "rhs": 6.89230769230769,
+   "measured": 6.892307692307695,
+   "ratio": 1.0000000000000007,
+   "second_factor": 0.9846153846153843,
+   "smallest_sv_of_Gamma": 0.003282294421173867
+  },
+  {
+   "class": "flat",
+   "K": 32,
+   "rhs": 14.545454545454541,
+   "measured": 14.545454545454554,
+   "ratio": 1.0000000000000009,
+   "second_factor": 0.9696969696969694,
+   "smallest_sv_of_Gamma": 0.0008271714692219852
+  },
+  {
+   "class": "flat",
+   "K": 64,
+   "rhs": 29.176470588235283,
+   "measured": 29.176470588235297,
+   "ratio": 1.0000000000000004,
+   "second_factor": 0.941176470588235,
+   "smallest_sv_of_Gamma": 0.0002077469407670069
+  },
+  {
+   "class": "flat",
+   "K": 3,
+   "rhs": 0.4985394352482961,
+   "measured": 0.49853943524829625,
+   "ratio": 1.0000000000000004,
+   "second_factor": 0.9970788704965922,
+   "smallest_sv_of_Gamma": 1.170690169938321e-17
+  },
+  {
+   "class": "flat",
+   "K": 5,
+   "rhs": 1.49271137026239,
+   "measured": 1.4927113702623924,
+   "ratio": 1.0000000000000016,
+   "second_factor": 0.9951409135082601,
+   "smallest_sv_of_Gamma": 2.500523512576692e-17
+  },
+  {
+   "class": "algebraic",
+   "K": 2,
+   "rhs": 0.0,
+   "measured": 0.0019783021732865166,
+   "ratio": null,
+   "second_factor": 1.2762796886913301,
+   "smallest_sv_of_Gamma": 0.2690659055297655
+  },
+  {
+   "class": "algebraic",
+   "K": 4,
+   "rhs": 1.387314691515263,
+   "measured": 1.387314691515264,
+   "ratio": 1.0000000000000009,
+   "second_factor": 1.3134713724123706,
+   "smallest_sv_of_Gamma": 0.07116310134423334
+  },
+  {
+   "class": "algebraic",
+   "K": 6,
+   "rhs": 2.762439528325696,
+   "measured": 2.762439528325691,
+   "ratio": 0.9999999999999981,
+   "second_factor": 1.326982513848808,
+   "smallest_sv_of_Gamma": 0.03463300726924951
+  },
+  {
+   "class": "algebraic",
+   "K": 8,
+   "rhs": 4.123837120177818,
+   "measured": 4.123837120177822,
+   "ratio": 1.000000000000001,
+   "second_factor": 1.3318429055906214,
+   "smallest_sv_of_Gamma": 0.02097599470454433
+  },
+  {
+   "class": "algebraic",
+   "K": 16,
+   "rhs": 9.440943931923874,
+   "measured": 9.440943931923856,
+   "ratio": 0.9999999999999981,
+   "second_factor": 1.3257764591909174,
+   "smallest_sv_of_Gamma": 0.006358890429938236
+  },
+  {
+   "class": "algebraic",
+   "K": 32,
+   "rhs": 19.557528646674633,
+   "measured": 19.557528646674612,
+   "ratio": 0.9999999999999989,
+   "second_factor": 1.2922103726965786,
+   "smallest_sv_of_Gamma": 0.0019450091941769334
+  },
+  {
+   "class": "algebraic",
+   "K": 64,
+   "rhs": 38.18210292218107,
+   "measured": 38.182102922181016,
+   "ratio": 0.9999999999999986,
+   "second_factor": 1.2260522437911023,
+   "smallest_sv_of_Gamma": 0.0005969492845861889
+  },
+  {
+   "class": "algebraic",
+   "K": 3,
+   "rhs": 0.6948896306136602,
+   "measured": 0.6948896306136608,
+   "ratio": 1.0000000000000009,
+   "second_factor": 1.2997888968789206,
+   "smallest_sv_of_Gamma": 1.1979623310032245e-18
+  },
+  {
+   "class": "algebraic",
+   "K": 5,
+   "rhs": 2.0765773491688186,
+   "measured": 2.076577349168826,
+   "ratio": 1.0000000000000036,
+   "second_factor": 1.321821515199183,
+   "smallest_sv_of_Gamma": 5.4382490968876745e-18
+  }
+ ],
+ "VER3_max_smallest_sv_at_odd_K": 2.500523512576692e-17,
+ "VER3_min_smallest_sv_at_even_K": 0.0002077469407670069,
+ "VER4_truncation_ladder": {
+  "512": {
+   "best": 8.95314126991303,
+   "baseline": 10.444130480924388,
+   "shape": "ff_lift",
+   "K": 2
+  },
+  "2048": {
+   "best": 8.962800076359764,
+   "baseline": 10.46735100737887,
+   "shape": "ff_lift",
+   "K": 2
+  }
+ }
+}
