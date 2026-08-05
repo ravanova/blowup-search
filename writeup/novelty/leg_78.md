@@ -92,9 +92,9 @@ Leg 48 recovered published curve data by reading Dahne–Figueras' **pgf vector*
 numbers (`read_df_figure`). That route is **closed here**: `pdfimages -list` on 2604.01868 reports
 **90 embedded raster images**, Fig 4.2's panels among them, at **3125 × 2500 px**. Reading the
 black dashed limiting line off a bitmap at that size gives, optimistically, one part in ~2500 of
-the plotted axis range — i.e. **~1e−3 relative at best**, roughly **25× coarser than the printed
-−2.5114**. The figure cannot beat the caption. Recorded as a measured magnitude, not an
-impression: the file was pulled and inspected.
+the plotted axis range — i.e. **4.0e−04 relative at best**, roughly **10× coarser than the
+printed −2.5114's 3.98e−05 granularity**. The figure cannot beat the caption. Recorded as a
+measured magnitude, not an impression: the file was pulled and `pdfimages -list` run on it.
 
 ### 2.3 P3 — there is no artifact behind the number
 
@@ -151,6 +151,21 @@ with leg 74's C1, same day, different question.)
 **Banked:** as of **2026-08-06**, `−2.5114` (5 s.f., 3.98e−05 relative granularity) is the **best
 precision on record** for the Scenario-2 contraction ratio. No change to any solver. No claim
 about the Hou–Luo model.
+
+**The measured magnitudes that answer the gate's second clause** (re-measured by this leg, not
+quoted — the bordered ladder was re-run live; see `experiments/journal/leg_78.md` §5):
+
+| line | ratio | rel. err vs −2.5114 | in units of the anchor's 3.98e−05 print granularity |
+|---|---|---|---|
+| relaxation (`solver/hl_rescaled.py`) | −2.53344 | **8.78e−03** | **220×** |
+| bordered, extrapolated in reach (`solver/bordered_hl.py`) | −2.51192 | **2.09e−04** | **5.3×** |
+| *our own extrapolation's window spread* | — | 9.74e−05 | **2.4×** |
+
+The last row is the one that settles the counterfactual. **Even if CHL published a sixth digit
+tomorrow, we could not use it:** the spread of our own limit across its extrapolation windows is
+already **2.4×** the anchor's current print granularity. The comparison is saturated on our side
+at ~1e−4, so `−2.5114` at 3.98e−05 is not merely the best available anchor — it is a **finer**
+anchor than this repository's best line can currently resolve against.
 
 **Report-only flag, for a follow-up leg that owns the file — NOT edited here.** `capabilities.py`
 line 51 reads *"the Scenario-2 contraction ratio reproduces CHL's −2.5114 to ~1%"*, while line 304

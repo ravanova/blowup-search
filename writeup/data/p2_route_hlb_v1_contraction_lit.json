@@ -1,0 +1,311 @@
+{
+ "route": "HLB",
+ "version": "v1",
+ "leg": 78,
+ "pass_date": "2026-08-06",
+ "source": "arXiv:2604.01868 (Chen-Huang-Li), v1, 2026-04-02",
+ "gate": {
+  "question": "Does a primary source publish the Scenario-2 contraction ratio to tighter precision than the ~1% figure this repository currently checks against, and if so does our number still agree at that tighter tolerance?",
+  "answer": "NO TIGHTER VALUE FOUND",
+  "tightest_published": -2.5114,
+  "tightest_published_rel_granularity": 3.9818427968463806e-05,
+  "repo_check_tolerance": 0.01,
+  "anchor_is_tighter_than_the_check_by": 251.14,
+  "the_loose_side": "this repository's relaxation line, not the published anchor",
+  "channels_returning_a_sixth_digit": 0,
+  "channels_enumerated": 5,
+  "days_the_anchor_has_stood_at_5_significant_figures": 126
+ },
+ "anchor": {
+  "printed": -2.5114,
+  "last_digit_abs": 0.0001,
+  "print_granularity_rel": 3.9818427968463806e-05,
+  "is_an_error_bar": false,
+  "why_not": "CHL publish no error bar, no resolution study and no domain study for it, and print it once with an explicit '~='"
+ },
+ "query_log": [
+  {
+   "id": "P1",
+   "channel": "the source paper, full text",
+   "what": "every occurrence of the contraction ratio in the source PDF",
+   "command": "bash Papers/fetch.sh 2604.01868 && pdftotext Papers/2604.01868.pdf Papers/2604.01868.txt && grep -n '2.5114\\|2\\.511\\|0.4235\\|1.0636\\|0.0765' Papers/2604.01868.txt",
+   "links": [
+    "https://arxiv.org/abs/2604.01868",
+    "https://arxiv.org/pdf/2604.01868"
+   ],
+   "found": {
+    "occurrences_of_the_ratio": 2,
+    "occurrence_1": {
+     "where": "section 4, body text",
+     "line": 3139,
+     "text": "The computed limiting value of c_l/c_omega is -2.5114. Notably, this value is distinct from the ratio of approximately -2.9987 reported in [CHH22] for the odd-symmetric non-degenerate case."
+    },
+    "occurrence_2": {
+     "where": "Figure 4.2 caption",
+     "line": 3349,
+     "text": "The black dashed lines represent the computed limiting values (c_l, c_omega, c_r, c_l/c_omega) ~= (1.0636, -0.4235, 0.0765, -2.5114), respectively."
+    },
+    "digits_printed": 5,
+    "table_of_constants_in_paper": false,
+    "error_bar_or_resolution_study": false,
+    "stopping_criterion_quoted": "max{||Omega_t||_Linf, ||V_t||_Linf} < 1e-6",
+    "tighter_value": null
+   }
+  },
+  {
+   "id": "P2",
+   "channel": "the source paper, figures",
+   "what": "whether Fig 4.2 is VECTOR (so leg 48's read_df_figure trick could recover a sixth digit from the plotted dashed limit line) or RASTER",
+   "command": "pdfimages -list Papers/2604.01868.pdf",
+   "links": [
+    "https://arxiv.org/html/2604.01868v1"
+   ],
+   "found": {
+    "embedded_raster_images": 90,
+    "figure_px": [
+     3125,
+     2500
+    ],
+    "vector": false,
+    "best_readable_rel_precision_from_bitmap": 0.0004,
+    "note": "one part in ~2500 of the plotted axis range at best -- COARSER than the printed 5 digits, so the figure cannot beat the caption",
+    "tighter_value": null
+   }
+  },
+  {
+   "id": "P3",
+   "channel": "released artifacts",
+   "what": "code / data / supplement behind the number",
+   "command": "grep -n -i 'github\\|code is available\\|data availab\\|supplementary\\|zenodo' Papers/2604.01868.txt",
+   "links": [
+    "https://arxiv.org/abs/2604.01868"
+   ],
+   "found": {
+    "hits": 0,
+    "repository": null,
+    "dataset": null,
+    "supplement": null,
+    "tighter_value": null
+   }
+  },
+  {
+   "id": "P4",
+   "channel": "version and journal record",
+   "what": "a v2 or a journal version, the likeliest home for a constants table",
+   "command": "curl -sS https://arxiv.org/abs/2604.01868",
+   "links": [
+    "https://arxiv.org/abs/2604.01868"
+   ],
+   "found": {
+    "versions": [
+     "v1"
+    ],
+    "v1_submitted": "2026-04-02T10:25:28Z",
+    "comments": "51 pages",
+    "journal_ref": null,
+    "doi": "https://doi.org/10.48550/arXiv.2604.01868",
+    "days_at_v1_as_of_pass_date": 126,
+    "tighter_value": null
+   }
+  },
+  {
+   "id": "P5",
+   "channel": "replication",
+   "what": "any independent recomputation of the ratio, at any precision",
+   "command": "see the four endpoints in `links`",
+   "links": [
+    "https://api.semanticscholar.org/graph/v1/paper/arXiv:2604.01868/citations?fields=title,year,externalIds,abstract&limit=100",
+    "http://export.arxiv.org/api/query?search_query=all:%22Hou-Luo%22&start=0&max_results=60&sortBy=submittedDate&sortOrder=descending",
+    "http://export.arxiv.org/api/query?search_query=au:%22De+Huang%22+OR+au:%22Bojin+Chen%22&start=0&max_results=40&sortBy=submittedDate&sortOrder=descending",
+    "https://sites.google.com/view/de-huang/research"
+   ],
+   "found": {
+    "citing_works": 0,
+    "citing_works_note": "Semantic Scholar returns an empty `data` array",
+    "hou_luo_corpus_after_source": [
+     {
+      "arxiv": "2605.16322",
+      "date": "2026-05-05",
+      "author": "Yaoming Shi",
+      "title": "A unified Boussinesq-Euler formulation and finite-time blow-up for a Hou-Luo type boundary-jet system",
+      "reports_the_ratio": false,
+      "cites_source": false
+     }
+    ],
+    "author_submissions_after_source": 0,
+    "companion_updated": {
+     "arxiv": "2603.25104",
+     "version": "v2",
+     "date": "2026-06-16",
+     "checked_for": [
+      "2.511",
+      "2604.01868",
+      "non-symmetric"
+     ],
+     "hits": 0,
+     "note": "the one post-hoc update in this neighbourhood; pulled and grepped"
+    },
+    "near_misses_cleared": [
+     {
+      "arxiv": "2605.15149",
+      "date": "2026-05-14",
+      "author": "Jiajie Chen",
+      "why_checked": "the likeliest certifier, 1D limiting profiles",
+      "hits": 0
+     },
+     {
+      "arxiv": "2604.16842",
+      "date": "2026-04",
+      "why_checked": "singularity-formation survey, likeliest place for a TABLE",
+      "hits": 0
+     }
+    ],
+    "tighter_value": null
+   }
+  }
+ ],
+ "known_answer": {
+  "relaxation_line": {
+   "module": "solver/hl_rescaled.py (RescaledHLScenario2)",
+   "provenance": "writeup/data/p2_scenario2_relax.json (its own logged run; READ ONLY)",
+   "config": {
+    "n": 801,
+    "c": 0.35,
+    "rho_max": 7.0,
+    "nu": 0.02,
+    "steps": 14000,
+    "dt_frac": 0.3
+   },
+   "ratio_ic_x0_30": -2.5334388905280014,
+   "ratio_ic_x0_45": -2.535201685485299,
+   "residual_floor": 0.02160142293405883,
+   "rel_err_vs_CHL": 0.008775539749940806,
+   "ic_spread_rel": 0.0007019172403032517,
+   "independent_short_rerun": {
+    "steps": 3000,
+    "n": 801,
+    "ratio": -2.694,
+    "residual": 0.072,
+    "rel_err_vs_CHL": 0.0727,
+    "wall_s": 1038.9
+   },
+   "slack_over_print_granularity": 220.3889052800134
+  },
+  "bordered_line": {
+   "module": "solver/bordered_hl.py (BorderedHL, Newton + reach extrapolation)",
+   "provenance": "RE-RUN LIVE by this script",
+   "rungs": [
+    {
+     "n": 301,
+     "rho_max": 7.0,
+     "X_max": 274.15806163662324,
+     "residual": 9.325873406851315e-15,
+     "converged": true,
+     "c_l": 1.6106006194342815,
+     "c_omega": -0.6297210161268744,
+     "c_r": 0.4126706870489642,
+     "ratio": -2.55764152408371,
+     "rel_err_vs_CHL": 0.018412647958791894,
+     "wall_s": 52.81886839866638
+    },
+    {
+     "n": 301,
+     "rho_max": 8.0,
+     "X_max": 745.2394128947751,
+     "residual": 6.897260540483785e-15,
+     "converged": true,
+     "c_l": 1.5768259653414414,
+     "c_omega": -0.6205473560915236,
+     "c_r": 0.43743958075852335,
+     "ratio": -2.5410243873617886,
+     "rel_err_vs_CHL": 0.011795965342752455,
+     "wall_s": 50.479350090026855
+    },
+    {
+     "n": 301,
+     "rho_max": 9.0,
+     "X_max": 2025.770951041395,
+     "residual": 6.050715484207103e-15,
+     "converged": true,
+     "c_l": 1.5589074201305202,
+     "c_omega": -0.6160537000965424,
+     "c_r": 0.449572468724482,
+     "ratio": -2.530473268622885,
+     "rel_err_vs_CHL": 0.007594675727835049,
+     "wall_s": 47.40375471115112
+    },
+    {
+     "n": 301,
+     "rho_max": 10.0,
+     "X_max": 5506.616437351697,
+     "residual": 7.882583474838611e-15,
+     "converged": true,
+     "c_l": 1.548756467500016,
+     "c_omega": -0.6136652974191706,
+     "c_r": 0.456021179276041,
+     "ratio": -2.523780428864827,
+     "rel_err_vs_CHL": 0.004929692149728057,
+     "wall_s": 27.241210460662842
+    },
+    {
+     "n": 301,
+     "rho_max": 11.0,
+     "X_max": 14968.53542462403,
+     "residual": 4.9960036108132044e-15,
+     "converged": true,
+     "c_l": 1.5427185979888147,
+     "c_omega": -0.612310747506785,
+     "c_r": 0.45967849543753825,
+     "ratio": -2.519502726794322,
+     "rel_err_vs_CHL": 0.0032263784320785667,
+     "wall_s": 31.937206029891968
+    }
+   ],
+   "rungs_dropped_unconverged": [],
+   "extrapolation": [
+    {
+     "i": 0,
+     "x0": 274.15806163662324,
+     "rate": 0.63495407876042,
+     "limit": -2.512120849135487
+    },
+    {
+     "i": 1,
+     "x0": 745.2394128947751,
+     "rate": 0.6343251292756649,
+     "limit": -2.512170562328628
+    },
+    {
+     "i": 2,
+     "x0": 2025.770951041395,
+     "rate": 0.6391460463930508,
+     "limit": -2.511926042823752
+    }
+   ],
+   "best_limit": -2.511926042823752,
+   "rel_err_vs_CHL": 0.00020946198285892503,
+   "window_spread_abs": 0.00024451950487591745,
+   "window_spread_rel": 9.736382291786152e-05,
+   "slack_over_print_granularity": 5.260428237519043,
+   "own_uncertainty_over_print_granularity": 2.445195048759174
+  }
+ },
+ "capabilities_annotation_flag": {
+  "file": "capabilities.py",
+  "line": 51,
+  "edited_by_this_leg": false,
+  "text": "the Scenario-2 contraction ratio reproduces CHL's -2.5114 to ~1%",
+  "why_flagged": "the ~1% is a TOLERANCE on the relaxation line, not the PRECISION of the anchor; line 304 already records the bordered line reaching 2.1e-04 against the same anchor",
+  "understatement_factor": 41.895620532969126,
+  "owner": "whichever leg owns capabilities.py -- REPORT ONLY"
+ },
+ "predicate": {
+  "L1_anchor_precision_as_a_magnitude": 3.9818427968463806e-05,
+  "L2_channels_enumerated_none_tighter": 5,
+  "L3_loose_side_relax_slack_x": 220.3889052800134,
+  "L3_loose_side_bordered_slack_x": 5.260428237519043,
+  "L4_our_own_uncertainty_over_granularity_x": 2.445195048759174,
+  "L5_booleans_in_the_verdict": 0
+ },
+ "wall_s": 209.9083206653595
+}
