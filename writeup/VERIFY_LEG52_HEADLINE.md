@@ -492,3 +492,107 @@ topical recall without the identifier; LIT re-ran that query verbatim and it sti
 not resurface; and fetching by ID has always worked.* Resolving the `LITERATURE_CHECK.md`
 conflict therefore means keeping LIT's ninth pass **and** editing LEG's section down to
 that — not concatenating the two.
+
+---
+
+# PART D — SIGN-OFF ON LEG'S REVISED PR #5 (`f7a3932`)
+
+**VERDICT: NO UNRESOLVED GAP. MERGE IT.** Every item raised in Parts B and C is fixed in
+substance, and I re-derived each fix rather than taking the self-report. Three
+sentence-level scope qualifiers are missing in §2; they change no number and no
+conclusion, and §5b of the same document already states the correct scope. Listed in D.5
+as errata for the next leg, not as a blocker.
+
+## D.1 B.1 (scope) — FIXED, and the scope is now stated in three places
+
+`term_that_ran_out.statement` now matches `name`: it says `Z₁[Γ←tail]` **does** involve
+`Γ⁻¹` and is therefore "a statement about the block-diagonal approximate inverse THIS leg
+built, not about every finite block". Two new fields carry what was missing — a `scope`
+field spelling out what is and is not established, and
+`finite_block_independent_term = {Z1_tail_Gamma, 0.9961, below_one: true}`. TECHNICAL §0
+gains a **SCOPE, STATED EXACTLY** paragraph naming `Z₁[tail←Γ] = 0.9961 — below 1` and
+tying it to stage `MM`; §2 now says outright *"this term alone does not forbid closure"*.
+**No new mislabeling: `name`, `statement`, `scope` and the TECHNICAL prose all agree, and
+they agree with the code.**
+
+## D.2 B.2 (mechanism) — FIXED; the closed forms hold EXACTLY, re-derived here
+
+Recomputed from LEG's own `augmented_finite_block`, independently of its JSON:
+
+```
+K                4      8     16     32     64     128
+augmented    30.00 126.00 510.00 2046.0 8190.0 32766.0     2(K^2-1)  EXACT (all 6)
+far_field=False  12     28     60    124    252     508     4(K-1)    EXACT (all 6)
+```
+
+Both closed forms are exact to float64 at every `K` tested. The erratum about the leg-51
+`A_norm` mis-citation is carried in TECHNICAL §2 as a parenthetical. The coupling factor
+(2, not `K/2`) and the rank-one row-1 dominant path are both stated correctly.
+
+**TC-8 reproduced independently: max relative deviation of `‖Γ⁻¹‖` over all 24 rows =
+`0.000e+00`.** Six conventions (`shipped`, `unit_column`, `unit_row`, `unit_both`,
+`row_like_col`, `no_amplitude`), and the smallest `Z₁` lower bound anywhere is **20.4734**
+(`s = 0.3`, `K = 4`, `no_amplitude`) — below my Part B estimate of ≈23, above 1 by a
+factor 20, and still growing in `K`. `TC8_gate_survives_renormalisation = true` is
+correct.
+
+## D.3 B.3 (control) — REWIRED, not relabelled; it genuinely discriminates
+
+`amplitude_direction()` is new and is threaded into `far_field_column(h=...)`, so the
+border direction now determines the amplitude **column of `Γ`** — which is the right
+wiring, because the amplitude unknown *is* the coefficient of the border direction. I
+re-ran `z1_subblocks` for all four borders and reproduced every value:
+
+| border | `‖Γ⁻¹‖` | `Z₁[Γ←tail]` | vs analytic | reproduced |
+|---|---|---|---|---|
+| analytic | 277.28 | 546.57 | — | ✅ |
+| svd | 277.08 | 546.37 | 0.99963 (analytic/svd = 1.00038) | ✅ |
+| random | 6638.5 | 6907.8 | **12.64×** | ✅ |
+| second | 2.099e+16 | 2.099e+16 | **3.84e+13×** | ✅ |
+
+`Z₁[Γ←tail]` was identical for all four before and now spans 13 orders. **The control can
+fail, and the analytic border wins.**
+
+## D.4 Part C (withdrawal) — DONE, verified file by file
+
+* `T0_novelty.leg52_target_reference_flag` → *"STANDS. This pass's CLEARANCE IS
+  WITHDRAWN…"*; `PRECEDENTS[1].verdict` → `CLEARANCE_WITHDRAWN__FLAG_STANDS`.
+* TECHNICAL §6, `plan_of_record.py` stage `TC`, `CONTINUATION_PROMPT.md`,
+  `PHASE2_P2_NOTES.md` §42, `experiments/JOURNAL.md`, `LITERATURE_CHECK.md` — all
+  withdrawn. `git grep -iE "FLAG_CLEARED|FLAG CLEARED|flag is CLEARED|CLEARED \(arXiv"`
+  over the whole branch returns **only** the two deliberate strikethroughs
+  (`~~FLAG CLEARED~~ → CLEARANCE WITHDRAWN`), the two narrative "this pass FIRST reported
+  the flag cleared … that clearance is WITHDRAWN" passages, and this file quoting the old
+  text. **No live clearance survives.**
+* BDL entry marked `NARROWS_BUT_DOES_NOT_PRE_EMPT__SUPERSEDED_BY_LIT_NINTH_PASS` ✅.
+* **`LITERATURE_CHECK.md` conflict: LIT's ninth pass is preserved BYTE-FOR-BYTE** — the
+  merged-main file is an exact prefix of the branch file (checked programmatically), with
+  LEG's edited-down section appended after it. Not concatenated duplicates.
+
+## D.5 Prose audit, and the three errata that do not block
+
+Scanned **223 decimal tokens** in TECHNICAL against the 366 distinct numeric values in the
+curated JSON: **204 match**; the 19 that do not are arXiv identifiers, the Clay figure, and
+derived ratios (1.52/8.73, the `Z₁[Γ←tail]/‖Γ⁻¹‖` table, 1.78/1.84, 12.6). **Nothing
+fabricated.** LEG's 64/64 load-bearing count is consistent with this wider scan.
+
+Three sentences in §2 quote a **flat-class, `null`-gauge** measurement as a property of
+the whole sweep. Each is true where measured, none changes a conclusion, and **§5b already
+states the correct scope** (*"`Z₁[Γ←tail] = 2‖Γ⁻¹‖` is a fact about the shipped convention,
+not an identity"*):
+
+1. *"Measured across every row of the sweep"* precedes a 10-value ratio table, but the
+   sweep has 20 rows. Across all 20 the ratio is **1.6173 … 9.6688**, not 1.90–2.00; the
+   10 shown are the `null`-gauge rows. **(This over-general phrasing originated in my own
+   Part B text, which listed only null-gauge rows under "over every row of LEG's sweep".
+   LEG banked it faithfully. The error is mine before it is LEG's.)** The conclusion is
+   unaffected — the ratio is `O(1)` in every row, never `K/2`.
+2. The closed forms `2(K²−1)` and `4(K−1)` are exact for **flat, `null` gauge** only. At
+   `s = 0.3` `‖Γ⁻¹‖` goes 22.68, 81.71, 277.28, 919.19, 3015.64 (`≈ K^{1.71}`); under the
+   `dilation` gauge it is `1.776–1.783 ×` the formula. Still super-linear, still created
+   by the augmentation — the claim holds, the word *exactly* needs a class qualifier.
+3. *"grows **exactly ×2** per doubling of `K`"* for `Z₁[tail←Γ]`: the ratios are 2.99,
+   2.32, 2.11, 2.01 — converging to 2, not exactly 2 at any step.
+
+Fold into the next leg's errata or a one-line edit now; either is fine. **They do not
+block the merge.**
