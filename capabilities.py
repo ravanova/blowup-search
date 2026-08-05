@@ -176,7 +176,7 @@ CAPABILITIES = [
      "test": "test_op_lower.py"},
     {"module": "solver/holder_norms.py", "object": "weighted-Holder spaces (two gradings)",
      "holds": "the two-grading space Route-D v3+v4 jointly demanded",
-     "validated": ("norm axioms and the embedding constants; the weighted-l1 no-go is\n                   derived here and is UNSEARCHED at primary source"),
+     "validated": ("norm axioms and the embedding constants; the weighted-l1 no-go and\n                   the discrete-ball trap are derived here and were SEARCHED at primary\n                   source (leg 65, 4 papers full-text + 39 forward citations) and NOT\n                   found -- nearest cousin arXiv:2607.15256 SS1.2, same genre, resolved\n                   not obstructed"),
      "test": "test_holder_norms.py"},
     {"module": "solver/decay_grading.py", "object": "decay-graded function spaces",
      "holds": "algebraic-decay gradings on an unbounded domain",
