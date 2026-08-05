@@ -121,9 +121,34 @@ CAPABILITIES = [
     {"module": "solver/interval.py", "object": "rigorous interval arithmetic",
      "holds": ("hand-rolled outward-rounded intervals; no scipy, no mpmath; plus "
                "dot2_matvec -- the COMPENSATED (Ogita-Rump-Oishi error-free-transformation) "
-               "matvec whose bound is u|x.y| + gamma_m^2 sum|x_j y_j|, i.e. relative to the "
-               "ANSWER rather than to the terms"),
-     "validated": ("containment holds on adversarial cases, including the directed-rounding\n                   edge cases where naive intervals lose the answer"),
+               "matvec whose bound is u|x.y| + gamma_m^2 sum|x_j y_j| + 8 m eta, i.e. relative "
+               "to the ANSWER rather than to the terms, plus Rump's (BIT 2012) ABSOLUTE "
+               "underflow term; the plain reductions isum/matvec carry gamma_m sum|terms| + "
+               "2 m eta. Dekker's splitting RAISES OverflowError at |entry| >= 2^997 = 1.34e300 "
+               "instead of returning a NaN error term, and the Interval constructor widens a "
+               "NaN endpoint to the trivial enclosure [-inf, +inf] instead of storing it -- a "
+               "NaN endpoint used to pass the lo <= hi guard vacuously and then pass every "
+               "downstream containment check with it"),
+     "validated": ("containment holds on adversarial cases, including the directed-rounding\n"
+                   "                   edge cases where naive intervals lose the answer. Leg 69's "
+                   "size- and\n                   conditioning-matched corpus (exact "
+                   "fractions.Fraction ground truth, 14036\n                   cases): 0 false "
+                   "negatives in 12356 normal-range cases -- accumulation\n                   "
+                   "lengths 32 to 260, entry magnitudes 1e-100 to 1e100, the LIVE zero-diagonal\n"
+                   "                   bordered_linearization at K = 16..128, rows cancelled to "
+                   "~1e-32 relative --\n                   worst relative slack +5.06e-20 and no "
+                   "case touching an endpoint. The 62\n                   subnormal-band false "
+                   "negatives it found (scales 1e-150..1e-160, worst escape\n                   "
+                   "6.58 eta = 3.25e-323) and the silent [nan, nan] above 2^997 are REPAIRED and\n"
+                   "                   re-gated as soundness assertions: 0/200 across scales "
+                   "1e-145..1e-165 through\n                   both reductions, and the Dekker "
+                   "wall now raises. The repair is bit-for-bit\n                   inert in the "
+                   "live operating range (entries 0.5 to 128, ~140 decades above\n                "
+                   "   the subnormal band and ~298 below the wall): 100 pre/post enclosures on "
+                   "the\n                   live operator and the normal-range battery are "
+                   "identical endpoint bit\n                   patterns, the eta term first "
+                   "moving a bit only near input scale 1e-310. Both bands are gated in\n"
+                   "                   test_interval_stress.py"),
      "test": "test_interval.py"},
     {"module": "solver/interval_certificate.py",
      "object": "the certificate constants as RIGOROUS BOUNDS (Route-L1 step one, leg 50)",
