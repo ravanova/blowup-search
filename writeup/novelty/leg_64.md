@@ -16,7 +16,8 @@ already-computed number and runs nothing).
   `s*(1/2) = 3` **exactly**, in as many words. The standing repository claim that criticality
   at `a = 1/2` is "in neither ALS nor XU" is **wrong about XU** and must be corrected.
 * **`alpha_1` at `a = 1/2` — NO, not published anywhere located.** Searched beyond Tier 1
-  and Tier 2 across the full arXiv `Constantin-Lax-Majda` corpus (100-result API enumeration)
+  and Tier 2 across the full arXiv `Constantin-Lax-Majda` corpus (complete 25-result API
+  enumeration; `max_results=100` requested, `totalResults=25` returned)
   plus the four dissipative primary sources read in full text. The dissipative-gCLM exact-
   solution corpus is `(a,sigma) ∈ {(0,0), (0,1), (0,2), (1/2,1)}` on the line and
   `{(0,0), (0,1), (1/2,0), (1/2,1)}` periodic. **`sigma = 3` carries no exact solution, no
@@ -59,8 +60,8 @@ and are given so the reads are reproducible.
 |---|---|---|
 | `2607.19762` (Xu) | `s\*`, `Table 1`, `critical`, `marginal`, `Appendix A` | §6 at L1751; §6.1 at L1760; eq (6.3) at L1769; **the `s*(1/2) = 3` sentence at L1794–1797**; Figure 3 caption L1818–1829; **Table 1 at L230–247**, row `a = 0.5` |
 | `2207.07548` (ALS) | `a = 1/2`, `σ = 3`, `(61)`, section headings | §5.1 `a=0,σ=2` (L1044) · §5.2 `a=1/2,σ=1` (L1178) · §5.3 `a=0,σ=1` (L1298, eq (61) at L1385) · §5.4 `a=0,σ=0` (L1561). **No `σ = 3` anywhere.** |
-| `2010.01201` (LSS) | `viscos`, `dissipat`, `Lambda^`, `nu` | **one hit, and it is a bibliography entry** (L2236, the citation to ALS's *Nonlinearity* 33 (2020) paper). LSS is an **inviscid** paper. It cannot contain `alpha_1`. |
-| `1908.09385` (J. Chen) | `a = 1/2`, `critical`, `self-similar exponent`, `s = 3` | Chen's "critical dissipation" is **a different notion** — see §4. His `a = 1/2` self-similar ansatz is at L195–222 and is **inviscid** (`ν = 0`, stated in the line). |
+| `2010.01201` (LSS) | `viscos`, `dissipat`, `Lambda^`, `nu` | **one hit, and it is a bibliography entry** (L2236, the citation to J. Chen's *Nonlinearity* 33 (2020) paper). LSS is an **inviscid** paper. It cannot contain `alpha_1`. |
+| `1908.09385` (J. Chen) | `a = 1/2`, `critical`, `self-similar exponent`, `s = 3` | Chen's "critical dissipation" is **a different notion** — see §4. His `a = 1/2` self-similar ansatz is at L195–222 and is **inviscid** (`ν = 0`, stated in the line); Chen's actual **theorem** at `a ≈ 1/2` (Thm 1.1) is **viscous**, `0 ≤ ν ≤ 1`, using the full Laplacian. |
 
 ---
 
@@ -146,19 +147,25 @@ because `σ = 3` has no exact solution to write it down from.**
 ## 4. Two traps that would each have produced a wrong verdict
 
 **Trap 1 — "critical dissipation" means two different things at `a = 1/2`, and they differ by
-a whole unit of `σ`.** J. Chen (`1908.09385` §1.2, L84–96) defines criticality by **norm
-scaling**: `‖ω(t,·)‖_{L^{|a|^{-1}}}` is the conserved-in-scaling norm, so `Λ^γ` with
-`γ = |a|^{-1}` is *his* critical dissipation. At `a = 1/2` that is **`γ = 2`**. The
-scaling-relevance criticality of the *self-similar profile* — the one this repository's
-`alpha_1` sits at — is **`σ = 3`**. A search that reads Chen's "we prove global
-well-posedness with critical dissipation" as covering the point in question would wrongly
-close the gate; Chen's `s = 2` result is, in Xu's own classification, **subcritical**.
+two units of `σ`.** J. Chen (`1908.09385` §1.2, L84–96) defines criticality by **norm
+scaling**. His a-priori estimate `‖ω(t,·)‖_{L^{|a|}} ≤ ‖ω_0‖_{L^{|a|}}`, which makes `Λ^γ`
+with `γ = |a|^{-1}` the critical dissipation, is stated **only for `a ≤ −1`** — it does not
+apply at `a = 1/2`. In Chen's `a > −1` regime, which is where `a = 1/2` sits, his own text
+gives a different answer: for the initial-data classes where `‖ω‖_{L^1}` is conserved, "a
+simple scaling analysis shows that `L = Λ` corresponds to the critical dissipation," i.e.
+**`γ = 1`**. The scaling-relevance criticality of the *self-similar profile* — the one this
+repository's `alpha_1` sits at — is **`σ = 3`**, so Chen's own norm criticality is **two
+units below it**, not one. (Chen's Theorem 1.1 blow-up result separately uses the full
+Laplacian, `γ = 2` — his chosen instrument "for simplicity," not a criticality claim; that
+is the number behind Xu's "`s = 2 < 3`, subcritical." Either reading, Chen's result is nowhere
+near `σ = 3`.) A search that reads Chen's "we prove global well-posedness with critical
+dissipation" as covering the point in question would wrongly close the gate; Chen's result
+is, in Xu's own classification, **subcritical**.
 
 **Trap 2 — ALS's "marginal dissipation" is `σ = 0`, not the marginal case.** ALS's
-introduction (L~213) calls `σ = 0` "'marginal' dissipation" (it arises in a 1D Oldroyd-B
-stress model). That is a wholly unrelated use of the word: it is the *bottom* of the `σ`
-range, not the point `σ = σ_c`. Query Q4's only "marginal" hit in the dissipative corpus is
-this one, and it is a false friend.
+introduction (L~213) calls `σ = 0` "'marginal' dissipation." That is a wholly unrelated use
+of the word: it is the *bottom* of the `σ` range, not the point `σ = σ_c`. Query Q4's only
+"marginal" hit in the dissipative corpus is this one, and it is a false friend.
 
 ## 5. What this pass changes in the repository's own records
 
