@@ -189,7 +189,7 @@ re-run**:
 | [`capabilities.py`](capabilities.py) | What already exists, and the strongest known-answer gate each module passes. |
 | [`win_condition.py`](win_condition.py) | Tier-1/2 blow-up diagnostics. |
 | [`CLAY_ROADMAP.md`](CLAY_ROADMAP.md) | Strategy: the two walls, routes A–D, go/no-go criteria. |
-| [`ORCHESTRATION.md`](ORCHESTRATION.md) | The multi-agent contract: roster, leg territories, merge policy, how to start a run. |
+| [`ORCHESTRATION.md`](ORCHESTRATION.md) | The multi-agent contract: roster, leg territories, landing policy, how to start a run. |
 | [`ORCHESTRATOR_PROMPT.md`](ORCHESTRATOR_PROMPT.md) | **The paste-able prompt** that turns a fresh session into the orchestrator. Pure instruction — no notes about itself. |
 | [`DIRECTION.md`](DIRECTION.md) | The Decision Maker's ranked leg queue and live slot assignments. |
 | [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) | The critical-path leg's directive: what the last leg settled and what not to re-derive. |
@@ -266,9 +266,10 @@ Most of this is model-agnostic and outlives whatever happens to the Clay attempt
   Boussinesq Biot–Savart, fractional dissipation, interval arithmetic and
   Newton–Kantorovich certificate machinery.
 - **A multi-agent operating contract** ([`ORCHESTRATION.md`](ORCHESTRATION.md)):
-  six lanes with disjoint file ownership, a verifier that re-measures the
-  previous leg's headline before anyone builds on it, an executable merge gate,
-  and a short list of things that are *never* merged without a human.
+  ten parallel legs with disjoint file territories, a Decision Maker that plans
+  every leg, paired verifiers that re-measure headline numbers before anyone
+  builds on them, an executable merge gate every landing must pass, and a short
+  list of things that are *never* pushed without a human.
 
 ## Working rules (if you contribute)
 

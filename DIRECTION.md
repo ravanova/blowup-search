@@ -1,6 +1,6 @@
 # DIRECTION — the leg queue
 
-**Owner: the Decision Maker (Opus 5). No other agent edits this file.**
+**Owner: the Decision Maker (Fable 5). No other agent edits this file.**
 
 This is the Decision Maker's durable state. It exists so a DM whose context has bloated can be
 discarded and recreated from the file instead of re-derived from the whole repository.

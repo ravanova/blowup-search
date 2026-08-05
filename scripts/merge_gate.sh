@@ -1,13 +1,14 @@
 #!/bin/bash
 # Executable merge criterion for hands-off integration to main.
 #
-# The orchestration flow (ORCHESTRATION.md) lets a leg agent push its rebased
-# branch to main without human review IFF this script prints "MERGE GATE: PASS"
-# and exits 0 on the candidate branch. It is deliberately targeted, not
+# The orchestration flow (ORCHESTRATION.md §7b) integrates a branch to main
+# without human review IFF this script prints "MERGE GATE: PASS" and exits 0 on
+# the candidate branch — leg agents push their own rebased branches; the
+# orchestrator merges support branches. It is deliberately targeted, not
 # exhaustive: the always-on tests are the drift detector (plan_of_record <->
 # CONTINUATION_PROMPT <-> CLAY_ROADMAP agreement) and the capability index;
 # beyond that it runs only the tests that the diff against the base ref actually
-# touches. The full suite is a reproducibility brief's job, not a per-push cost.
+# touches. The full suite is REPRO's job, not a per-push cost.
 #
 # Usage:
 #   scripts/merge_gate.sh              # gate HEAD against origin/main
