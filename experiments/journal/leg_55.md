@@ -26,7 +26,15 @@ read off a solve. This leg measures it.
    the SEED — **there is no `### 55` entry to read**; the condensed thesis and the
    verbatim gate came from the spawn prompt. Recorded because the assignment said to read
    an entry that does not exist in the tree.
-2. Grepped `capabilities.py` for the object before building anything.
+2. Grepped `capabilities.py` for the object before building anything — **but only did half
+   of that instruction.** I read the index and then never appended my own entry, so
+   `test_capabilities.py` failed at the merge gate with
+   `solver modules with no capability entry: ['solver/target_norm.py']`. Caught by the
+   coordinator, not by me: I ran my own gates and the neighbouring ones and never ran the
+   repo's drift detector. **The rule is grep AND register** — the index is what stops the
+   next leg rebuilding this, which is the whole reason the file exists (leg 45). Entry
+   appended at the end of the certificate section, append-only, 29 insertions / 0
+   deletions, no existing entry reordered.
 3. **NB-0 novelty pass, committed before any construction** (`95dc055`), six queries with
    links. Verdict `PROCEED`. Leg 52's search-index flag explicitly NOT touched.
 4. Built `solver/target_norm.py`, then the gates, then the runner.
@@ -120,7 +128,8 @@ Territory: `solver/target_norm.py`, `test_target_norm.py`,
 `writeup/4_p2_lottery/BLOG_P2_ROUTENB_V1.md`, `.../TECHNICAL_P2_ROUTENB_V1.md`,
 `writeup/data/p2_route_nb_v1_targetnorm.json`,
 `writeup/figures/fig50_route_nb_v1_targetnorm.png`, `writeup/novelty/leg_55.md`,
-`experiments/journal/leg_55.md`, plus the one-line append to `writeup/build_figures.py`.
+`experiments/journal/leg_55.md`, plus the one-line append to `writeup/build_figures.py`
+and the append-only entry in `capabilities.py`.
 `solver/spectral_certificate.py` and `solver/bordered_hl.py`: **imported read-only, zero
 diff.**
 
