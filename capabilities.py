@@ -102,7 +102,15 @@ CAPABILITIES = [
                "radii_polynomial_status"),
      "validated": ("line sweep gated to 9.5e-16 against the operator it inverts; "
                    "radii_polynomial_status returns BLOCKED_AT_STEP_ONE and is gated to "
-                   "carry NO fabricated Y_0 or Z_1"),
+                   "carry NO fabricated Y_0 or Z_1 -- and now ALSO validates the constants a "
+                   "caller does supply: negative or non-finite Y_0/Z_1/Z_2 return "
+                   "INVALID_INPUT ahead of the discriminant, per the theorem's hypothesis "
+                   "that they are upper bounds on norms (van den Berg-Lessard, AMS Notices "
+                   "62(9):1057). Leg 79's 39-case adversarial battery measured 11 of 25 "
+                   "hypothesis-violating inputs coming back closes=True (44%, including the "
+                   "sign flip (-1.0,0.9,1e4)) against the UNGUARDED function; it is 0 of 25 "
+                   "with the guard, and the 11 are pinned by label in "
+                   "test_port_certification_regression.py"),
      "test": "test_port_certification.py"},
     {"module": "solver/fractional_boussinesq.py", "object": "2D Boussinesq, fractional dissipation",
      "holds": "the critical-dissipation exponent for the 2D object",

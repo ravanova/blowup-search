@@ -107,6 +107,9 @@ WHAT THIS IS NOT
 * **No link of the L1->L4 chain moved.**  A blocked link is not a moved link.
 """
 
+import math
+import numbers
+
 import numpy as np
 
 # --------------------------------------------------------------------------
@@ -312,6 +315,47 @@ def stall_verdict(rows):
 # --------------------------------------------------------------------------
 # the kill-switch
 # --------------------------------------------------------------------------
+def _hypothesis_violations(Y0, Z1, Z2):
+    """Which hypothesis of the radii polynomial theorem each supplied constant breaks.
+
+    `Y_0`, `Z_1`, `Z_2` are UPPER BOUNDS ON NORMS in the theorem this function implements
+    (van den Berg-Lessard, *Rigorous Numerics in Dynamics*, AMS Notices 62(9):1057, 2015;
+    Hungria-Lessard-Mireles James, Math. Comp.):
+
+        ||T(x)-x|| <= Y_0 ,      sup ||A(DF(x+rv) - A_dagger)u|| <= Z_1 + Z_2 r ,
+
+    hence **finite and nonnegative by hypothesis**.  A negative or non-finite constant is
+    therefore not a conservative input -- it is an input the imported theorem says nothing
+    about, and evaluating the discriminant on it asserts a contraction on data no run could
+    have produced (leg 79 measured 11 such inputs coming back `closes=True`).
+
+    `None` means NOT MEASURED and is a legitimate input by design -- it is the whole point of
+    the kill-switch -- so it is never a violation and is handled by the branches below.
+
+    Returns a list of strings naming the offending constant and the hypothesis it breaks.
+    The offending VALUES are deliberately not echoed into the returned dict's `Y0`/`Z1` keys:
+    a rejected fabrication must not be reported in the same slot as a measured bound.
+    """
+    bad = []
+    for name, v in (("Y_0", Y0), ("Z_1", Z1), ("Z_2", Z2)):
+        if v is None:
+            continue
+        if not isinstance(v, numbers.Real):
+            raise TypeError(f"{name} must be a real number or None, got "
+                            f"{type(v).__name__}; the radii polynomial's constants are "
+                            f"norms.")
+        f = float(v)
+        if math.isnan(f):
+            bad.append(f"{name} is NaN (a norm bound cannot be NaN; note that `NaN >= 1.0` "
+                       f"is False, so an unguarded NaN would slip past the contraction test)")
+        elif math.isinf(f):
+            bad.append(f"{name} is {'+' if f > 0 else '-'}infinite (a norm bound is finite "
+                       f"by hypothesis)")
+        elif f < 0.0:
+            bad.append(f"{name} is negative ({f!r}); it is an upper bound on a norm")
+    return bad
+
+
 def radii_polynomial_status(Y0, Z1, Z2=None):
     """Where the argument stands.  Refuses to invent a number it does not have.
 
@@ -319,6 +363,12 @@ def radii_polynomial_status(Y0, Z1, Z2=None):
     a stronger statement than a large value.  The function returns that, rather than
     substituting a bound and reporting a failure that would look like a merely quantitative
     shortfall.
+
+    Constants that ARE supplied are checked against the theorem's own hypotheses first
+    (`_hypothesis_violations`): a negative or non-finite `Y_0`/`Z_1`/`Z_2` returns
+    `INVALID_INPUT` with `closes=False`, never `EVALUATED`.  The blocked branch is tested
+    BEFORE that check, so `(None, None, <anything>)` still reports BLOCKED_AT_STEP_ONE --
+    a poisoned `Z_2` must not be allowed to convert "no bounds at all" into "bad bounds".
     """
     if Y0 is None and Z1 is None:
         return {"status": "BLOCKED_AT_STEP_ONE",
@@ -327,6 +377,14 @@ def radii_polynomial_status(Y0, Z1, Z2=None):
                         "under refinement), so Y_0 is undefined; and no approximate inverse A "
                         "(the Krylov solve stalls), so Z_1 cannot be bounded. There is no "
                         "radii polynomial to evaluate.")}
+    violations = _hypothesis_violations(Y0, Z1, Z2)
+    if violations:
+        return {"status": "INVALID_INPUT", "closes": False, "violations": violations,
+                "why": ("outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 "
+                        "are upper bounds on norms, hence finite and nonnegative): "
+                        + "; ".join(violations)
+                        + ". These constants cannot have come from a certificate run; no "
+                          "discriminant is evaluated.")}
     if Z1 is None:
         return {"status": "NO_Z1", "closes": False, "Y0": Y0,
                 "why": "A could not be constructed; Z_1 is unbounded-by-construction, not large."}

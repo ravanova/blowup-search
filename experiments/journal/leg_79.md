@@ -107,3 +107,15 @@ merge gate, which the contract forbids.
 - `writeup/novelty/leg_79.md` — the pre-construction pass, plus the findings section.
 
 No figure; none was required and none would carry information a table does not.
+
+---
+
+**STATUS UPDATE (2026-08-06, Leg 0 / ORCH, branch `bench/fix-port-certification-validation`).**
+The gap above is CLOSED. `radii_polynomial_status` now rejects negative and non-finite
+`Y_0`/`Z_1`/`Z_2` with status `INVALID_INPUT` ahead of the discriminant, so all **11 false
+closes became REJECTED: 11/25 -> 0/25**, and the NaN bypass of the `Z1 >= 1.0` guard went with
+them. The blocked branch is checked first and is byte-identical, so both call sites and both
+stored artifacts are unaffected. `test_port_certification_regression.py` was flipped from
+characterising the defect to gating its absence, keeping the 11 labels as the regression
+target; `capabilities.py`'s validated line was corrected in the same commit. This leg's report
+above is left exactly as written — it is the record of the pre-fix measurement.
