@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(git push:*)",
       "Bash(scripts/merge_gate.sh:*)",
       "Bash(./scripts/merge_gate.sh:*)",
       "Bash(git merge:*)",
