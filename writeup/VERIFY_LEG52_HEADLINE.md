@@ -280,3 +280,215 @@ is convention-dependent by a factor of 33 and is *not* the number the natural we
 pairing gives (that is 2.91/3.26); (ii) it grows like `√K` and leg 52 reports one `K`;
 (iii) TC-2's `Z₂ = 79.5` comes from the one weight class where the tail is unbounded — the
 urgent item at the top of this file.
+
+---
+
+# PART B — LINE REVIEW OF LEG'S PR #5 (`leg/tc-v1`, Route-TC v1, leg 53)
+
+**Verdict: REVIEWED — the gate answer NO is correct and is forced by the numbers. THREE
+GAPS FOUND, all in the ATTRIBUTION of the failure rather than in the failure itself.
+None of them flips the gate. Two are in load-bearing prose and in the curated JSON, so
+they should be corrected before merge.**
+
+Reviewed at `origin/leg/tc-v1`: `experiments/p2_route_tc_v1_assemble.py` (635 lines),
+`writeup/data/p2_route_tc_v1_assemble.json`, `BLOG_P2_ROUTETC_V1.md`,
+`TECHNICAL_P2_ROUTETC_V1.md`, `p2_route_tc_v1_evidence.py`, `writeup/build_figures.py`,
+`plan_of_record.py`, `LITERATURE_CHECK.md`.
+
+## B.0 What is right, and it is most of it
+
+* **The quartet is complete.** Runner → curated JSON → BLOG + TECHNICAL → `fig48`
+  registered at `writeup/build_figures.py:300`. The evidence script rebuilds from
+  committed data with no recomputation.
+* **Every number in TECHNICAL and BLOG is present in the JSON.** Checked exhaustively:
+  the TC-1 far-field column table (5 rows × 4 entries), both TC-4 sub-block tables
+  (10 rows × 6 entries), the TC-2 polynomial table (6 rows), the `poly_leg51_only`
+  counterfactual (`2.1416e−02` at `s=0.3, K=4`; `4.6422e−04` at flat `K=64`), TC-3's
+  truncation defects (`6.15e−02` / `1.10e−01`, exponents `−1.0000` / `−0.7794`), the
+  gauge ladder (`3347.4, 4556.6, 5862.2, 7222.1`, `+1865` per e-fold), the TC-5 control
+  table and the TC-5b border table. **No unsourced number found.**
+* **The gate answer is correctly forced.** `radii_polynomial` is right: with `Y₀ = 0`,
+  `disc = (1−Z₁)²`, so `r_max = (1−Z₁)/Z₂` when `Z₁ < 1` and `r_max = 0` otherwise. The
+  gate therefore reduces exactly to **`Z₁ < 1`**, and LEG says so in the docstring and in
+  §3 rather than reporting the degenerate `r = 0` as closure. That is the same reduction
+  Part A of this file flagged as urgent, and LEG reached it independently.
+  `Z1_lower_bound = max(sub-blocks) ≥ 43.15` in all 20 sweep rows ⇒ no positive interval.
+  **NO is correct.**
+* **The mechanism is real.** `Z₁[Γ←tail]` grows exactly `×4.00` per doubling of `K`
+  (59.0, 251, 1019, 4091, 16379, flat) and `Z₁[tail←Γ]` exactly `×2` (0.996, 2.977,
+  6.892, 14.545, 29.176). Both trends are clean and monotone; no split works.
+* **The positive control works.** `Z₁` falls like `1/μ` and crosses below 1 at `μ = 2`
+  (0.9156). The instrument can report the other answer.
+* **The ceiling (TC-7) is pre-committed and honest**, and the new `plan_of_record.py`
+  stage `MM` is written against precisely the limitation identified in B.1 below — LEG
+  saw it at the plan level even where the write-up overstates.
+
+## B.1 GAP — the curated JSON's `term_that_ran_out` attaches the wrong argument to the term
+
+`writeup/data/p2_route_tc_v1_assemble.json`:
+
+```
+"term_that_ran_out": {
+  "name": "Z1_Gamma_tail",                      <- Gamma <- tail
+  "min_over_every_split_and_class": 43.15,
+  "statement": "Z1[tail <- Gamma] = ||A_tail L_{tail,Gamma}||_w does not involve
+                Gamma^{-1}, so it is a lower bound on Z_1 for EVERY choice of finite
+                block. ..."                     <- the OTHER block, and the claim is
+                                                   FALSE of the one that is named
+```
+
+The `statement` is hard-coded at `p2_route_tc_v1_assemble.py:607-614` while `name` is
+computed at `:600-604`, so they can disagree — and they do.
+`Z₁[Γ←tail] = ‖Γ⁻¹ L_{Γ,tail}‖` depends on `Γ⁻¹` entirely (measured in B.2: it equals
+`2‖Γ⁻¹‖` to four digits), so the "lower bound for EVERY choice of finite block" argument
+does not apply to it.
+
+**Why this is not cosmetic.** The finite-block-INDEPENDENT sub-block is `Z₁[tail←Γ]`,
+whose minimum over the whole sweep is **0.9961 — below 1**, at flat `s = 0`, `K = 4`,
+under both gauges. So the leg does **not** establish that no finite block can close it; it
+establishes that *this* block-diagonal `A` cannot. TECHNICAL §2 writes *"it is already
+0.996 / 1.387 at `K = 4`"*, which reads as though both were already fatal; one of them is
+not, and it is exactly the one whose being fatal would make the result structural.
+`plan_of_record.py`'s outcome text is correct here ("with the block-diagonal approximate
+inverse the method requires") and stage `MM` asks the right follow-up — the JSON and
+TECHNICAL should be brought up to the plan's standard, not the reverse.
+
+## B.2 GAP — the mechanism paragraph names the wrong factor, and its `‖Γ⁻¹‖ ~ K` citation is about a different matrix
+
+TECHNICAL §2, the load-bearing sentence:
+
+> `‖Γ⁻¹‖` itself grows like `K` (leg 51 measured that: flat `A_norm` 165 → 359 → 769 →
+> 1633 over `K = 32 … 256`), so the product grows like `K²/2`.
+
+Both halves are wrong, and the second is checkable inside LEG's own JSON.
+
+**(a) LEG's `‖Γ⁻¹‖` grows like `K²`, not `K`.** From `TC4_z1_subblocks` (flat, null
+gauge): `30, 126, 510, 2046, 8190` at `K = 4, 8, 16, 32, 64` — **`×4.00` per doubling**.
+Leg 51's `165 → 359 → 769 → 1633` is `×2.1` per doubling and is the norm of a **different
+matrix**, leg 51's *unaugmented* finite block. At `K = 64` the two differ by **23×**
+(359 vs 8190).
+
+**(b) The `K²` is created by the augmentation, and it is a normalisation choice.**
+Re-running LEG's own `augmented_finite_block` with `far_field=False` (same gauge, same
+code path, flat class) — the same block *without* the amplitude column and matching row:
+
+```
+K            4      8     16     32     64    128
+with    ff  30    126    510   2046   8190  32766     x4.00 per doubling  (~ K^2)
+without ff  12     28     60    124    252    508     x2.02 per doubling  (= 4K-4)
+```
+
+Dropping the far-field unknown restores linear growth exactly. The inflation comes from
+the weight pairing in `augmented_finite_block`: the amplitude column carries
+`w_col = Wa = ‖ĥ‖_w ≈ K/2` while the matching row carries `w_row = ρ = w_{K+1}`, so in
+weighted coordinates the matching equation `a = a` has coefficient `1/Wa ≈ 2/K` — a
+deliberately weak equation, and inverting it costs a factor `K`. **This is the same
+convention-dependence Part A §A.4 flagged in leg 52's border, reappearing one level up,
+and LEG did not ablate it.**
+
+**(c) The coupling entry contributes a factor 2, not `K/2`.** Over every row of LEG's
+sweep:
+
+```
+Z1[Gamma<-tail] / ||Gamma^-1||  =  1.9667, 1.9921, 1.9980, 1.9995, 1.9999   (flat)
+                                   1.9028, 1.9503, 1.9712, 1.9826, 1.9896   (s = 0.3)
+```
+
+So `Z₁[Γ←tail] = 2‖Γ⁻¹‖` and **the whole `K²` lives in `‖Γ⁻¹‖`**, not in
+`(K from Γ⁻¹) × (K/2 from the coupling entry)` as §2 states. The dominant column of
+`L_{Γ,tail}` is the **rank-one row-1 term** (`−(−1)^m` into residual mode 1, weight 1 for
+*every* tail mode), not the `(K+1)/2` sub-diagonal entry §2 leads with.
+
+**Does this change the verdict?** No. Even granting the most favourable renormalisation
+(the `far_field=False` level, a factor 2.5 at `K = 4` rising to 43 at `K = 128`),
+`Z₁[Γ←tail]` at the best split would be `≈ 59/2.5 ≈ 24` (flat) and `≈ 43.15/1.9 ≈ 23`
+(`s = 0.3`) — still one to two orders above 1, and still growing in `K`. **The NO stands.
+The stated mechanism does not.** Given that this leg's whole methodological point is
+naming the mechanism (lessons 85 and 88), it should be corrected rather than shipped.
+
+## B.3 GAP (minor) — TC-5b's headline control cannot fail
+
+TECHNICAL §5: *"`Z₁[Γ←tail]` is 546.57 for all four [borders] … which is the sharpest
+statement of the result available."* `z_gt` is computed at
+`p2_route_tc_v1_assemble.py:364-373` from `Γ⁻¹` and `L_{Γ,tail}`, neither of which
+references the `border` argument. The identical value is a **tautology of the code**, not
+a measurement. The underlying claim (the coupling is not a property of the border) is true
+and worth stating — as a structural observation, not as a control that could have come out
+otherwise. Leg 52's own negative controls are the standard this falls short of: those
+could, and did, diverge.
+
+## B.4 Review notes (not gaps; no action required, but a later leg should know)
+
+1. **`Z1_total` sums all four sub-blocks** (`:393`). The norm induced by `‖·‖_w` on the
+   block system is `max(z_gg + z_tg, z_gt + z_tt)`, not the sum of four. The reported
+   `Z₁` is therefore a slight over-estimate (44.539 vs the correct 43.151 at the best
+   row). Conservative; changes nothing.
+2. **`Z1_tail_tail` is vacuous by construction.** For `border != None` (`:383-384`)
+   `Bs = inv(Ainv_s)`, so `Ainv_s @ Bs = I` identically and `z_tt ~ 1e-13` measures float
+   round-off, not the tail's truncation defect at `M`. TECHNICAL §2 reads it as "the
+   tail–tail block is fine", which is not something this quantity can report. It only
+   makes the NO stronger, so nothing turns on it.
+3. **TC-5's `μ = 0` row is a different configuration** from the `μ > 0` rows
+   (`far_field=True, border="analytic"` vs `far_field=False, border=None`, `:528-530`).
+   §5 explains why; the table still presents it as the top rung of one ladder.
+4. **TECHNICAL §4 says the bounded gauge improves "every number by a factor 1.8–2.0";
+   §2 and the BLOG say 1.52–8.73.** Both are true of different quantities (1.78–1.84 for
+   `‖Γ⁻¹‖`, 1.52–8.73 for `Z₁[Γ←tail]`); "every number" is the wrong quantifier.
+5. **BLOG collides two different 9.44s.** Line 14 is leg 52's tail constant (flat,
+   `K = 64`, `M = 3136`); line 144 is `Z₁[tail←Γ] = 9.441` at `K = 16`, `s = 0.3`. Both
+   correct, different quantities, same document, no distinction drawn.
+6. `quadratic_bound(kind, p, K=min(max(K,16),96))` (`:569`) clamps `K` for no stated
+   reason. Harmless — `Q` is `K`-independent for these classes — but unexplained.
+7. **Merge conflict: ONE file, `LITERATURE_CHECK.md`, and it is not mechanical.**
+   `git merge-tree origin/main origin/leg/tc-v1` conflicts only there;
+   `writeup/build_figures.py` auto-merges cleanly. That conflict is the substance of
+   Part C and must not be resolved by keeping both sections.
+
+---
+
+# PART C — ADJUDICATION: does `arXiv:2604.01868` resurface? (LIT vs LEG)
+
+**LIT's claim stands. LEG's "FLAG CLEARED" does not, and should be withdrawn from four
+places before PR #5 merges.** They are not both true under different phrasings — LIT
+tested LEG's phrasing too.
+
+| | query | evidence recorded | conclusion |
+|---|---|---|---|
+| **leg 52** (raised the flag) | `Chen Huang Li 2026 Hou-Luo model non-symmetric self-similar profile blowup proof` (no arXiv ID) | count only (5) | did not resurface |
+| **LIT** (ninth pass, merged to main) | (i) leg 52's query **verbatim**; (ii) `arXiv:2604.01868 Chen Huang Li Novel Self-similar Finite-time Blowups Hou-Luo Boussinesq` | **the returned links, enumerated** — (i) `2308.01528`, `2106.05422` ×2, Caltech mirror, Springer page; (ii) `2605.15130`, `2403.11471`, `2401.14615`, ResearchGate, `2305.05660`, CLM Springer, one arXiv listing page | flag **stands** |
+| **LEG** (TC-0, query 4) | `arXiv 2604.01868 Chen Huang Li non-symmetric self-similar blowup Hou-Luo model 2026` | count only (9); "title and author list matching the repo's record" | flag **CLEARED** |
+
+**Three reasons LIT wins, in order of strength.**
+
+1. **LEG did not test the flag as posed.** The flag was recorded against leg 52's logged
+   query, which names authors and topic but **not the arXiv identifier**. LEG's query 4
+   prepends the literal string `arXiv 2604.01868`. A query containing the ID is not a
+   test of topical recall; it is closer to retrieval by ID, which was never in dispute —
+   LIT confirms `WebFetch` on `arxiv.org/abs/2604.01868` and
+   `scripts/fetch_papers.sh 2604.01868` both work first try. **LIT re-ran leg 52's query
+   verbatim and reproduced the null result**; LEG did not run it at all.
+2. **LEG's evidence is precisely the failure mode LIT identifies.** LEG's stated ground
+   for clearing is that the result came back *"with title and author list matching the
+   repo's record."* LIT ran an essentially identical ID-bearing query and found the eight
+   returned **links** were all other papers while the **prose summary** named the title
+   and authors correctly — and names that prose as *"the underlying model answering from
+   its own knowledge, not from a link the search actually surfaced."* LEG's clearance
+   rests on the one signal LIT demonstrated is not probative.
+3. **LIT's pass is auditable and LEG's is not.** LIT enumerates the specific links
+   returned by both queries. LEG's `SEARCH_LOG` records `(query string, 9)` — a count.
+   Nothing in `T0_novelty` or in `LITERATURE_CHECK.md` on `leg/tc-v1` records which links
+   came back, so the clearance cannot be checked against the record it left.
+
+**What should change on `leg/tc-v1`** — four places, all saying the same wrong thing:
+
+* `experiments/p2_route_tc_v1_assemble.py:105` — `PRECEDENTS[1]["verdict"] = "FLAG_CLEARED"`;
+* same file `:433` — `"leg52_target_reference_flag": "CLEARED (arXiv:2604.01868 resurfaced)"`;
+* `writeup/4_p2_lottery/TECHNICAL_P2_ROUTETC_V1.md` §6 — "**FLAG CLEARED.**";
+* `plan_of_record.py`, stage `TC` outcome — "Leg 52's flag is CLEARED".
+
+The accurate statement — and it *is* a real finding of LEG's pass — is: *a query naming
+the arXiv identifier returns a summary that correctly names the paper; the flag was about
+topical recall without the identifier; LIT re-ran that query verbatim and it still does
+not resurface; and fetching by ID has always worked.* Resolving the `LITERATURE_CHECK.md`
+conflict therefore means keeping LIT's ninth pass **and** editing LEG's section down to
+that — not concatenating the two.
