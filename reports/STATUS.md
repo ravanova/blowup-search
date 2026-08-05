@@ -1,5 +1,9 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
+> **Superseded:** This snapshot reflects the four/six-agent contract in force on 2026-08-05;
+> the run now operates under the ten-leg contract — see `ORCHESTRATION.md` and the latest
+> `reports/ORCH_STATE.md` for current state.
+
 *Refreshed 2026-08-05, cycle 1 close.*
 
 ## ⚠ NEEDS YOU
