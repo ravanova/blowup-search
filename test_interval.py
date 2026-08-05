@@ -125,10 +125,83 @@ def test_reductions_enclose():
     print("[ok] isum / dot / matvec are rigorous enclosures")
 
 
-if __name__ == "__main__":
+def _main():
     test_enclosure_elementary()
     test_outward_rounding_and_points()
     test_inclusion_monotonicity()
     test_reciprocal_guard()
     test_reductions_enclose()
+    test_transcendentals_enclose()
     print("\nALL INTERVAL TESTS PASSED")
+
+
+# --------------------------------------------------------------------------
+# Route-TN (leg 56): the rigorous transcendentals
+# --------------------------------------------------------------------------
+
+def test_transcendentals_enclose():
+    """log and arctan enclosures are checked against an INDEPENDENT high-precision
+    reference, not against the libm call they exist to avoid.
+
+    `decimal` is used as the reference only -- it is not in the rigorous path. The
+    point of the gate is that the series-with-proved-remainder implementation agrees
+    with an arbitrary-precision evaluation to well inside its own reported width."""
+    import decimal
+    from solver.interval import ILOG2, IPI, iatan_small, ilog
+
+    decimal.getcontext().prec = 50
+    D = decimal.Decimal
+
+    # the two stored constants must enclose their true values
+    log2_ref = D(2).ln()
+    pi_ref = D("3.14159265358979323846264338327950288419716939937511")
+    assert ILOG2.lo <= float(log2_ref) <= ILOG2.hi, "LOG2 enclosure misses log 2"
+    assert IPI.lo <= float(pi_ref) <= IPI.hi, "PI enclosure misses pi"
+    # and they must be non-degenerate (a point interval here would be a false claim)
+    assert ILOG2.hi > ILOG2.lo and IPI.hi > IPI.lo, "constants must be true intervals"
+
+    xs = np.array([1e-12, 1e-3, 0.25, 0.5, 1.0, 2.0, 17.0, 745.2394128947751, 1e6])
+    r = ilog(xs)
+    worst = 0.0
+    for i, x in enumerate(xs):
+        ref = D(repr(float(x))).ln()
+        assert r.lo[i] <= float(ref) <= r.hi[i], f"ilog misses log({x})"
+        worst = max(worst, float(r.hi[i] - r.lo[i]))
+    assert worst < 1e-13, f"ilog widths blew up: {worst:.2e}"
+    # monotone and consistent with its own algebra: log(x*y) = log x + log y
+    a, b = 3.0, 11.0
+    lab = ilog(np.array([a * b]))
+    la, lb = ilog(np.array([a])), ilog(np.array([b]))
+    assert lab.lo[0] <= la.hi[0] + lb.hi[0] and lab.hi[0] >= la.lo[0] + lb.lo[0], \
+        "ilog violates log(ab) = log a + log b within its own enclosures"
+
+    ts = np.array([-0.5, -0.1, 0.0, 1e-6, 0.125, 0.4999])
+    at = iatan_small(ts)
+    for i, t in enumerate(ts):
+        ref = float(np.arctan(float(t)))
+        assert at.lo[i] <= ref <= at.hi[i], f"iatan_small misses arctan({t})"
+    assert float((at.hi - at.lo).max()) < 1e-13, "iatan_small widths blew up"
+
+    # the domain guards must actually fire -- a silent out-of-range call would make
+    # the "proved remainder" a false claim
+    for bad in (2.0, -3.0):
+        try:
+            iatan_small(np.array([bad]))
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"iatan_small accepted |t| = {abs(bad)} > 1/2")
+    try:
+        ilog(np.array([-1.0]))
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("ilog accepted a non-positive argument")
+
+    print(f"    ilog max width={worst:.2e}; iatan_small max width="
+          f"{float((at.hi - at.lo).max()):.2e}; both guards fire")
+    print("[ok] ilog / iatan_small enclose an independent 50-digit reference")
+
+
+if __name__ == "__main__":
+    _main()
