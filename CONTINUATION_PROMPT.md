@@ -11,8 +11,10 @@
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
 > bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
-> `PORT`, `V`, `C-PILOT`, `L1`, `T` and **`TC`** are **DONE**; **`MM` is NEXT.** Stage `B` is
-> still **blocked** — C-PILOT's gate answered **NO**, so the GA ban did not lift.
+> `PORT`, `V`, `C-PILOT`, `L1`, `T`, `TC` and **`MM`** are **DONE** (MM's gate answered **NO**
+> at leg 54); **`NG` is NEXT.** Stage `B` is still **blocked** and now pre-refuted — legs 52,
+> 53 and 54 each separately measured one of its three degrees of freedom (space, split,
+> shape of `A`) dead for this operator, before its still-banned GA would ever run.
 
 > ## 🔀 FOUR LEGS RUN AT ONCE NOW. If you are a leg agent, read this first.
 > **DIRECTIVE 1 below is the critical-path leg only.** Three exploration legs run beside it,
@@ -32,134 +34,100 @@
 
 ---
 
-# DIRECTIVE 1 — ROUTE-MM: THE MISMATCH. SPEND THE LAST FREE CHOICE, OR CLOSE THE LANE.
+# DIRECTIVE 1 — ROUTE-NG: THE NO-GO, STATED AS A THEOREM AND CHECKED AGAINST THE LITERATURE.
 
-`TC`'s gate answered **NO** at leg 53. The four terms are now in one polynomial and it does
-not close. **The term that ran out had never been computed before, because it does not exist
-until the pieces are assembled.**
+`MM`'s gate answered **NO** at leg 54, VERIFIED TWICE. Seven legs (51–57) now hold every part
+a real negative result needs, scattered across four PR bodies and a notes file: a named
+mechanism, an inequality that proves the block-diagonal case, a battery bottoming at 8.9591, a
+**positive control that reports the other answer**, and a literature classification. `NG`
+assembles that into one stated proposition and spends its effort on the one gap that decides
+whether this is a theorem or a table.
 
-## What leg 53 settled, and do not re-derive it
+## What MM settled, and do not re-derive it
 
-Leg 52 bordered the tail and bounded it. Leg 53 gave the far-field amplitude its own column,
-its own matching row and its own place in the polynomial. With the block-diagonal approximate
-inverse the method requires, `A = Γ⁻¹ ⊕ A_tail`, the four sub-blocks of `I − A L` are:
+Best admissible `Z₁` over **every** shape (block Gauss–Seidel, Schur complement) × class ×
+gauge × split, including `K = 2` and `K = 6` (a verifier caught the first draft's battery
+omitting them): **8.9591** (`ff_lift`, algebraic `s = 0.3`, `K = 2`), against a block-diagonal
+baseline of **10.4584** — a **1.167×** improvement where more than 8× was needed. `MM-1`'s
+inequality verifies as an **exact equality** (`1.89e−15`), restricted to `K ≥ 6` flat / `K ≥ 4`
+algebraic — its `|1 − K/2|` prefactor vanishes at `K = 2`, a gap VER-A caught before
+construction. Every **odd** split gives an exactly singular finite block in both classes and
+gauges, closing that corner. A candidate shape-independent floor (`MM-4`) was proposed, then
+**refuted** by an explicit rank-one counter-construction (floor → `~1e-16`, survives only
+because total `Z₁` then hits `5.7e+05`) — it holds only for the shapes actually tested.
 
-| sub-block | flat `s = 0`, best split | `s = 0.3`, best split | trend |
-|---|---|---|---|
-| `Z₁[ΓΓ]` (float inverse defect) | 3.5e−16 | 7.7e−16 | fine |
-| `Z₁[tail tail]` | 1.2e−12 | 6.0e−13 | fine |
-| **`Z₁[tail←Γ]`** | **0.996** | **1.387** | **×2 per doubling of `K`** |
-| **`Z₁[Γ←tail]`** | **59.0** | **43.15** | **×4 per doubling of `K`** |
+**The mechanism, unchanged since TC.** The unbounded part is **off-diagonal** (a shift) while
+the standard tail estimate needs a **multiplier**; the bordered tail inverse is a **constant**
+(`2.19 … 10.32`, growing `2.191 → 11.528` over `K = 4…128`, per leg 57's correction), not a
+decaying `1/K`. **The positive control makes the hypothesis necessary, not just sufficient:**
+`Λ¹` dissipation (a multiplier, no far-field kernel) drives the assembled `Z₁` to **0.9156 at
+`μ = 2`** — the instrument can say yes when the operator actually is a multiplier.
 
-Best split is `K = 4`; the sweep runs `K = 4 … 64`, both admissible classes (`s < α = 0.394`),
-both gauges. **Smallest `Z₁` lower bound anywhere in that sweep: 43.15** (and **20.47** over every
-normalisation of the augmented block ablated in TC-8). **Assembled `Z₁` at its minimum:
-44.54.** `Y₀ = 0` exactly, so the polynomial's only root is `r = 0` and there is **no
-positive interval** (`r_max = 0` in all ten rows). The same polynomial with leg 51's
-finite-block `Z₁` alone *does* close (`r_max` 2.14e−02 … 4.64e−04) — **the difference between
-those two columns is the whole leg.**
+**Novelty, closed by leg 57.** BDL (arXiv:1503.06315) does **not** cover the zero-diagonal
+case (assumptions (4)–(5) require a diagonal bounded away from zero) — but Cadiot
+(arXiv:2505.03091) §2–3 independently states the same dominance-hypothesis observation, so
+`NG-0` must resolve Cadiot's scope against **this** no-go specifically, not re-litigate BDL.
 
-**SCOPE — SAY THIS EXACTLY, IT WAS OVERSTATED ONCE ALREADY.** `Z₁[Γ←tail]` **contains
-`Γ⁻¹`** (it equals `2‖Γ⁻¹‖` to four digits in every row under the shipped convention), so what
-is established is that the **block-diagonal `A` the method requires** cannot close this — not
-that no finite block can. The genuinely finite-block-independent sub-block is `Z₁[tail←Γ]`, and
-its minimum over the whole sweep is **0.9961, BELOW 1.** That is exactly why `MM` is a real
-question.
+## NG — what is actually left, and it is one thing
 
-**THE MECHANISM, CORRECTED AFTER VERIFIER'S REVIEW.** `‖Γ⁻¹‖` for the augmented block is
-**exactly `2(K²−1)`** — `K²`, not `K` — and dropping the amplitude column restores **exactly
-`4(K−1)`**. **The `K²` is created by the augmentation's weight pairing** (amplitude column
-`≈ ‖ĥ‖_w ≈ K/2` against a matching row of weight `w_{K+1}`, so the matching equation carries
-coefficient `≈ 2/K`). The coupling itself contributes a factor **2, not `K/2`**, and its
-dominant column is the **rank-one row-1 term**, not the `(K+1)/2` sub-diagonal. TC-8 ablates
-five normalisations plus the un-augmented block; smallest `Z₁` lower bound over all of them is
-**20.47**, so the NO survives the renormalisation the corrected mechanism invites.
+Every degree of freedom `B` would offer is now separately dead (leg 52: space; leg 53: split;
+leg 54: shape of `A`). What is missing is not more measurement — it is the **write-up as a
+proposition**, with the one open mathematical question named honestly.
 
-**The structural fact underneath is unchanged.** The standard tail estimate works because the
-unbounded part is a **multiplier**: the split cuts an entry of size `Λ_M` and the tail inverse
-is `1/Λ_M`. Here it is **off-diagonal** while the bordered tail inverse is a **constant**
-(2.19 … 10.32 here, 9.44 in leg 52's ladder), not `1/K` — which is exactly the `×2` per
-doubling measured in `Z₁[tail←Γ]`, reaching 38.2 by `K = 64`. Tuning `s` cannot touch it.
+* **NG-0 THE NOVELTY PASS FIRST.** Resolve Cadiot's scope against this no-go — links, not
+  counts.
+* **NG-1 THE PROPOSITION.** Hypotheses (operator class, weight classes, admissible `A`),
+  conclusion, and a scope line separating measured from proved.
+* **NG-2 THE GAP, AND IT IS THE ONLY OPEN MATHEMATICS.** `MM-1` proves only the block-diagonal
+  case; leg 54 measured a battery over the shapes actually tried. **"No `A` we tried" is not
+  "no `A`."** Extend `MM-1` to a named class of approximate inverses strictly larger than
+  block-diagonal, or state the restriction as the theorem's actual hypothesis.
+* **NG-3 SHARPNESS.** The `μ = 2` control, reused, as the statement that the hypothesis
+  cannot be dropped.
 
-**The controls license the negative.** Positive: `Λ¹` dissipation, unbordered tail, no
-far-field unknown (a dissipative tail has no kernel) — the coupling falls like `1/μ` and the
-assembled `Z₁` reaches **0.9156 at `μ = 2`**. The instrument can say yes. Negative: the border direction is
-**wired through the amplitude column**, so a wrong direction changes `Γ` and the control can
-fail — `analytic/SVD = 1.0004`, random `13×` worse, the second singular pair `3.8e+13×` worse
-(it makes the augmented block essentially singular). *The first version computed the coupling
-from `Γ⁻¹` and `L_{Γ,tail}`, neither of which sees the border, and reported the resulting
-identical number as the sharpest form of the result — a **tautology of the code**. Fixed.*
-
-**TC-3, and it is the finding that was invisible before assembly.** The matching row's residual
-at the anchor is exactly `0.0` (same degeneracy that gives `Y₀ = 0` — the anchor *is* one basis
-mode). The expansion's truncation defect is 6.15e−02 / 1.10e−01, falling like `M^{−1.00}` /
-`M^{−0.78}`. But the **gauge row's entry on the far-field column is log-divergent**: `Σ_m m h_m`
-runs 3347 → 7222 over `M−K = 256 … 2048`, **+1865 per e-fold**, because the dilation gauge
-`Σ_k k b_k` has dual norm `max_k k/w_k`, infinite for every `s < 1`. **The far-field column has
-an entry that does not exist.** The repair is not a tuning: pin the exact dilation zero mode,
-which is **exactly `e₂`** (`‖L e₂‖_∞ = 0.0`, checked). Worth 1.5×–8.7×. Gate still **NO**.
-
-**TC-0 novelty: `PROCEED_NARROW`, six queries — and this leg's resurfacing clearance was
-WITHDRAWN.** Leg 53 first reported leg 52's search-index flag as cleared; VERIFIER adjudicated
-against LIT's ninth pass and **LIT wins. The flag STANDS.** Leg 53's query prepended the
-literal arXiv ID, which tests retrieval *by ID* (never in dispute) rather than the **topical
-recall** the flag was raised against; LIT re-ran leg 52's query **verbatim** and reproduced the
-null result. Leg 53 logged **counts, not links**, so its claim could not be audited — *a later
-pass must enumerate links.* BDL: leg 53 read the abstract only; **LIT's ninth pass settled it
-from the full PDF** — assumptions (4)–(5) require a diagonal bounded away from zero, so the
-zero-diagonal Fredholm case is outside their construction. Whether the literature treats an
-*off-diagonal* unbounded part is recorded as **unchecked**, not as a gap.
-
-## MM — what is actually left, and it is one thing
-
-Every other degree of freedom is now measured and banned: `s`, the weight family, the split
-`K`, the border direction. **The one remaining free choice is the SHAPE of `A`** — the method's
-block-diagonal approximate inverse is exactly what makes the coupling a term at all.
-
-* **MM-1 THE MISMATCH AS AN INEQUALITY, NOT A MOOD.** `Z₁ ≥ |1 − K/2| · (w_{K+1}/w_K) ·
-  ‖A_tail e_{K+1}‖_w / w_{K+1}` holds for **every** finite block, because that sub-block does
-  not contain `Γ⁻¹`. With leg 53's measured second factor (0.94 … 1.33) that is a statement
-  that no block-diagonal `A` can work for this operator. Write it as one.
-* **MM-2 THE ONE MOVE THAT IS NOT A TUNING.** An approximate inverse whose off-diagonal blocks
-  are **not zero** — one step of block Gauss–Seidel across the split, or the Schur complement
-  of the coupling — measured on the **same assembled object**
-  (`experiments/p2_route_tc_v1_assemble.py`), with the same controls.
-* **MM-3 THE NOVELTY PASS FIRST**, and commit the log.
-
-**Gate:** does a non-block-diagonal `A` bring the assembled `Z₁` below 1, on the `a = 0` CLM
-object at `s < 0.394`? **Yes** → report the assembled terms and the positive interval, then
-re-run on `HL_S2_nonsymmetric`; claim nothing about the target before that run. **No** → **STOP
-building `ℓ¹`-Fourier radii-polynomial certificates for inviscid self-similar transport and say
-so in the plan** (that is `T`'s own no-branch), and do not re-enter by tuning `s`, the weight
-family, the split, or the border.
+**Gate:** does the no-go admit a **proof** for a named class of approximate inverses strictly
+larger than block-diagonal, with hypotheses that provably contain the `a = 0` CLM
+linearization? **Yes** → the repository has a Tier-3-shaped negative theorem; write it as a
+standalone claim with its sharpness control, and escalate publication scoping to the user.
+**No** → **REPORT** the result as a measurement over a battery, not a theorem; cap the claim
+at "measured, not proved" everywhere it appears; the next stage is the target round (leg 63,
+Route-M2) with the multiplier/shift screen as its selection predicate.
 
 ---
 
 # DIRECTIVE 2 — THE THINGS FROM EARLIER LEGS THAT ARE STILL LIVE
 
-**STAGE `B` IS NOT NEXT, AND WHY.** It rested on one weight constant worth 5186×, therefore
-*"closure is a property of the SPACE."* Leg 49 reproduced the effect (5604×) and **refuted the
-explanation**: pin `c_l` with a border row and the same weight change is worth **0.56×** — the
-weight was preconditioning the **border rows**. The fitness also **failed its own viability gate
-4/6**, and **no GA compute has touched it**. Two named repairs, both engineering.
-`solver/weight_search.py` + `test_weight_search.py` **8/8** hold all of it. Leg 53 sharpens the
-warning: B's three degrees of freedom are the space, the **operator split** and the constants —
-and leg 53 measured the split to be worthless as a dial (`K/2` for every choice).
+**STAGE `B` IS NOT NEXT, AND IS NOW FULLY PRE-REFUTED.** Its three degrees of freedom are the
+space (leg 52: one weight constant's 5186× effect was in the border rows, not the space — pin
+`c_l` and it collapses to 0.56×), the operator split (leg 53: `K/2` for every choice), and the
+shape of the approximate inverse (leg 54: best improvement 1.167× where >8× was needed). All
+three are separately measured dead for this operator, and its GA is still banned besides
+(C-PILOT's viability gate answered NO 4/6, twice, and no repair has passed it).
+
+**THE TARGET WAS NEVER THE PROBLEM.** Leg 55 measured `HL_S2_nonsymmetric`'s norm directly for
+the first time: finite `ℓ¹_w` at `s = 0` (margin +0.394) and `s = 0.3` (margin +0.094),
+divergent only at `s = 1` — which is exactly the class the operator is least bad in (leg 51's
+own finding). So "the target was never in the space" is **not** available as an explanation for
+legs 52–54's failures; the block-coupling/shape finding stands as the operative reason.
+
+**THE (H,D) CONSISTENCY GAP IS NOW MEASURED, INDEPENDENTLY OF THE `ℓ¹`-FOURIER LANE.** Leg 56:
+in the sup-norm collocation realization, the defect exceeds `L1` step one's admissible `τ` by
+`1.85e7×` (derivative) / `2.04e11×` (Hilbert, corrected mechanism after review) at `n = 801`.
+The collocation realization cannot carry `L1` either.
 
 **THE CLAY CHAIN CANNOT BE CLIMBED AS WRITTEN** (`PHASE2_P2_NOTES.md` §24): `L1` a certified 1D
-toy profile — **the only movable link**, and legs 51–53 are the live work on it; `L2` 2D
-Boussinesq — **Chen–Hou proved it**; `L3` axisymmetric 3D Euler with boundary — **Chen–Hou
-proved that too**; `L4` 3D Navier–Stokes — Clay, out of reach by **Wall 2**. **The one
-Clay-adjacent route was tried and is closed:** stage `V` was closed by its own novelty gate at
-leg 48 (Dåhne–Figueras verify CGL branches in interval arithmetic; leg 48 re-derived their zeros
-to 1.8e−07, their branch to 3.0e−06, their fold to 3.8e−07).
+toy profile — the only movable link, now dead in both the coefficient-basis and collocation
+realizations; `L2`/`L3` — Chen–Hou proved both; `L4` — Clay, out of reach by **Wall 2**. Stage
+`V` was closed by its own novelty gate at leg 48; its ban lifts only "if re-posed for a fluid
+transport model, which needs `L1` first" — and `L1` is now dead in both realizations, so
+whether that condition can ever be met is an open question for the user (parked in
+`PROGRESS.md`).
 
-**FLAG STATUS.** Leg 52's search-index flag (`arXiv:2604.01868` not resurfacing) **STANDS** —
-leg 53's clearance was withdrawn, LIT reproduced the null result on leg 52's verbatim query,
-and fetching by ID has always worked. The BDL flag is **CLOSED** by LIT's ninth pass: their
-assumptions (4)–(5) require a diagonal bounded away from zero, their LU construction divides by
-it, and a vanishing diagonal is not on their own future-work list — **BDL does not cover the
-zero-diagonal Fredholm case.**
+**FLAG STATUS.** Leg 52's search-index flag **STANDS**. The BDL flag is **CLOSED** (assumptions
+(4)–(5) require a diagonal bounded away from zero; not on their own future-work list) — but
+leg 57 found Cadiot (arXiv:2505.03091) independently states the same dominance-hypothesis
+observation, so the ban on re-claiming leg 51's finding at full strength stays up for a
+**different, stronger** reason than the one that just closed.
 
 ---
 
@@ -242,40 +210,42 @@ The conclusion survived; the mechanism did not. **When a quantity has a suspicio
 closed form (`2(K²−1)`, `4(K−1)`), that is the signal to check what produced it.**
 
 **BANS ARE MACHINE-READABLE.** `plan_of_record.py` carries every ban with what lifts it;
-`.venv/bin/python plan_of_record.py` prints the ones in force. Three are new: **do not read leg
-53's assembled result as a statement about the target or as a failure of the TAIL term**, **do
-not repair the coupling by tuning `s`, the weight family, the split or the border** (all four
-measured), and **do not build further `ℓ¹`-Fourier machinery for this operator before `MM`'s
-gate answers.**
+`.venv/bin/python plan_of_record.py` prints the ones in force. New this cycle: **do not repair
+`B`'s three degrees of freedom (space, split, shape) — all three are separately measured dead**;
+**do not build further `ℓ¹`-Fourier or collocation machinery for this operator before `NG`'s
+gate answers**; **do not re-claim leg 51's methodological finding at full strength — Cadiot
+independently pre-empts it, a different reason than the BDL one that just closed.**
 
 **CLAY.** Odds remain **~0.05%** behind Walls 1 and 2.
-In 53 legs, **no link of the L1→L4 chain has moved.**
+In 57 legs, **no link of the L1→L4 chain has moved.**
 
 ---
 
-*Updated 2026-08-05 (session close). **THIS SESSION SHIPPED ROUTE-TC v1 — the four terms in one
-polynomial, and the term that ran out is the seam between them.***
+*Updated 2026-08-05 (session close). **THIS SESSION CLOSED MM (NO), MEASURED THE TARGET'S NORM
+(YES), MEASURED A SECOND L1 GAP (NO), BANKED THE SHAPE DICHOTOMY (NO), AND OPENED `NG`.***
 
-**(TC-A) THE GATE ANSWERED NO, AND THE TERM IS NAMED.** `Z₁`'s block-coupling sub-blocks:
-**43.15** at the best split in the whole sweep, **20.47** over every normalisation ablated,
-against the **1** it must be under. Not the tail constant (2.19–10.32, well-behaved), not `Y₀`
-(exactly 0), not `Z₂`. **Scope: the block-diagonal `A` the method requires cannot close it —
-NOT that no finite block can** (the finite-block-independent sub-block bottoms out at 0.9961).
+**(1) `MM` ANSWERED NO, VERIFIED TWICE.** Best admissible `Z₁` over every shape/class/gauge/
+split: **8.9591** vs block-diagonal baseline **10.4584** (1.167×, needed <1). A verifier caught
+the first draft's battery omitting `K=2`/`K=6` (true number, not the wrongly-reported 32.75/
+45.36) and refuted an over-claimed "shape-independent floor" by explicit counter-construction.
+Both fixed before merge.
 
-**(TC-B) THE MECHANISM IS THE SAME ONE, ONE LEVEL DOWN.** Leg 51: the method needs a multiplier
-and this operator is a shift. Leg 52: bordering repairs the shift's *invertibility*. Leg 53: it
-does not repair its *size*, and the size is what the seam needs. **Constant × `K/2` diverges for
-every `s`.**
+**(2) THE TARGET WAS NEVER THE PROBLEM (leg 55, gate YES).** `HL_S2_nonsymmetric` has finite
+`ℓ¹_w` norm at `s=0`/`0.3`, divergent only at `s=1` — narrowing, not falsifying, the ban-list
+clause. "The target was never in the space" is retired as an explanation for legs 52–54.
 
-**(TC-C) THE CEILING HELD.** `Y₀` is exactly zero *including the new matching row*, for the
-degenerate reason banked as a ban since leg 51: the anchor **is** one basis mode. Nothing is
-claimed about `HL_S2_nonsymmetric` — on the gate's own terms that run happens only if the
-polynomial closes here.
+**(3) THE COLLOCATION REALIZATION IS ALSO DEAD FOR `L1` (leg 56, gate NO).** The `(H,D)`
+consistency defect exceeds the admissible budget by `1.85e7×`/`2.04e11×`. Both named gaps in
+`L1` step one's collocation realization now have independently-verified magnitudes.
 
-**(TC-D) AND THE REVIEW CAUGHT THREE THINGS THE LEG GOT WRONG** — the scope of the failure,
-the mechanism behind the numbers, and a control that could not fail. All three are corrected in
-place, with the wrong versions left visible. **The gate answer was independently confirmed and
-did not move.**
+**(4) THE SHAPE DICHOTOMY IS BANKED AS AN EXECUTABLE LEDGER (leg 57, gate NO).** No published
+certificate has an off-diagonal unbounded part with a non-decaying tail inverse (4 papers,
+15/15 gates). Corrects legs 52–53's "constant 2.19–10.32" to a growing ladder (`2.191→11.528`).
 
-**NOVELTY: nothing banked; the resurfacing clearance WITHDRAWN; the BDL flag closed by LIT.
-No link of the chain moved.**
+**(5) `NG` OPENS.** With `B` pre-refuted on all three degrees of freedom, the Decision Maker
+(under the user's pre-delegation) chose to state the seven-leg negative as a proposition rather
+than jump to `B` or a fresh target round — see DIRECTIVE 1 above. This is escalation #1;
+reversible.
+
+**NOVELTY: BDL flag closed, replaced by a stronger Cadiot-based reason for the same ban. No
+link of the chain moved.**
