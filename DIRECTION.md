@@ -78,7 +78,14 @@ instruction, adds **176–181**: the user-authorized origin-H² construction leg
 "different space" construction attempts on L1's collocation death and the weighted-energy
 window (177, blocked on 165; 178), the leg-58 publication bundle and the two-scale scope-line
 correction (179, 180 — both unblocked now that 161/162 landed), and a scoping read of Xu's
-modulation technique (181). **Next fresh leg number for any future candidate is 182.**
+modulation technique (181). A twenty-second addition, completing the prior turn's
+interrupted draft, adds **182** (H2I, the intermediate-space scoping question between
+`ell^1_w` and origin-H²). A twenty-third addition, responding to a user message addressed
+directly to the DM relaying an external novelty review's four findings, adds **183** (XU8,
+top priority — does Xu §8 pre-empt part of Theorem NGX, blocking leg 179's bundle from being
+presented as ready) and **184** (GBW, pins the GA ban's lift condition against the
+coarsening loophole leg 160 found — tightens, does not lift, the ban). **Next fresh leg
+number for any future candidate is 185.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1291,6 +1298,76 @@ which the user's steer says not to do.
 leg 127's counterexample search) is still stale now that 127 proved the sharpest possible
 theorem; flagged twice already, still not worth a dedicated leg on its own — folding the
 correction into 179's bundle write-up is cheaper than a standalone fix.
+
+**DM update, 2026-08-06 — one leg drafted for the last open slot (182); one honest gap
+flagged.** The coordinator reports 173/174/175 landed with substantive answers relayed
+directly to the user, and 179's bundle landed flagging a leg-162-vs-126 ambiguity for the
+user's ruling — but **this DM has not been given the actual content of 173/174/175's
+findings**, only that they landed. Drafting a leg that specifically "builds on" unknown
+findings would mean guessing at their content, which this DM won't do — that's the honest
+gap, stated as asked. What follows instead is grounded only in facts already known to this DM
+directly (legs 127's and 163's own landed reports, both fully read in earlier turns), so it
+does not risk presupposing anything from 173/174/175:
+
+- **182 (H2I)**, new: leg 127 proved `ell^1_w` dead (unconditionally, `Z_1 >= 1` for every
+  bounded `A`); leg 163 found origin-H² structurally viable but capped at `a=0` exactness,
+  re-deriving Xu's own closed form with no transfer to the real target — leg 176 (in flight)
+  is testing whether that viable-but-capped space actually closes as a construction. Neither
+  space has been asked the natural next question: is there an INTERMEDIATE space —
+  interpolating between `ell^1_w` and origin-H² on some standard scale (weighted Sobolev,
+  Besov, or fractional) — that could avoid BOTH obstructions at once: no `ell^1_w`-class
+  zero-diagonal floor, AND no collapse to requiring `a=0` exactness the way origin-H² does?
+  This is a genuinely new question, not contingent on 173/174/175/176's still-unknown
+  outcomes, and it is exactly the shape of move 127 itself validated (test a different space
+  against the same operator) applied to the one gap between this repository's two now-mapped
+  points on the space axis.
+
+If the coordinator would rather have 173/174/175's actual findings summarized to this DM
+before drafting further in that specific direction, that's a cheap, worthwhile handoff for
+the next refill — this DM can fold them in properly rather than working around the gap again.
+
+**DM response, 2026-08-06 — user message addressed directly to the DM, forwarded verbatim by
+the coordinator: an external novelty review's four findings. Acted on all four below.**
+
+**Item 1 — Xu §8, blocking, top priority. Leg 183 (XU8) drafted above.** Leg 171 (XUL) found,
+but did not resolve, that Xu §8 carries its own interval-arithmetic no-go ("no weighted
+enclosure can exclude them") on the same operator Theorem NGX (leg 127) concerns, and it is
+banked nowhere. **Leg 179's combined methods-note bundle is downgraded to PROVISIONAL as of
+this update** — it landed before this review's point was raised, bundles Theorem NGX as a
+component of the publishable claim, and per the user's explicit instruction ("nothing should
+be drafted [about the note] until this answers"), it must not be presented to the user as
+"ready for review" until leg 183 reports. If 183 finds full or partial pre-emption, leg 179's
+prose needs a follow-up correction leg (not drafted yet — would presuppose 183's outcome).
+
+**Item 2 — the GA ban's gameable lift condition. Leg 184 (GBW) drafted above.** Leg 160
+measured that the unrepaired leg-49 fitness passes the frozen six-property gate 6/6 at a
+coarser resolution (n=101/151) where it fails at every resolution that exposed the original
+problem — a real loophole in the lift condition's wording ("passes on a repaired fitness,"
+no resolution floor), correctly not exploited by leg 160 itself. 184 pins the resolution (or
+requires stability across a pre-named minimum resolution set) in `plan_of_record.py`'s ban
+text — **this tightens the ban, it does not lift or loosen it**, so this DM is treating it as
+within a leg's own authority to land directly (narrowly scoped, one clause, same discipline
+as leg 65's annotation fix), rather than requiring separate user sign-off the way lifting a
+ban would. If the coordinator or user reads this differently, 184's own no-branch escalates
+rather than lands a broader edit, so the exposure is bounded either way.
+
+**Item 3 — leg-111-v2 already exists as leg 178 (WES), confirmed, no new leg drafted.**
+Per the coordinator's own note, leg 178 (currently live) is exactly the construction this
+review asks for. Recorded explicitly, binding on every leg and writeup pass from here:
+**no document may state the weighted-energy lane is dead until leg 178 reports.** The
+review's own relayed content from leg 165 (111/141 classified TIER 1: the zero-width window
+is a trial-space property, width 2.0 at p=2, with "EGM" cited as certifying a −1/2 gap) is
+recorded here as REPORTED, not independently re-verified by this DM — "EGM" does not appear
+in `solver/literature_gates.py` or anywhere else this DM has checked, so it is likely a
+citation leg 165 itself located and banked; if leg 178's own construction needs EGM's exact
+identity, that is 178's own work to locate precisely, not asserted here secondhand.
+
+**Item 4 — math-over-review rule stands, no action needed.** Already governing every refill
+since it was adopted; this update's own priority order (183, then 184, both directly
+user-flagged; 178 already live and not duplicated) is consistent with it.
+
+**Recommended dispatch order, this update:** **183 (top priority, blocking), 184, 182**, then
+whatever remains from the previous refill's pool (176, 177, 178 all already live).
 
 ---
 
@@ -5151,6 +5228,126 @@ built, beyond origin-H²?
 questions about the same paper — 171 asks about OTHER spaces Xu covers, 173 asks about Xu's
 certification METHOD generally, this asks specifically about the modulation technique).
 Immediately dispatchable.
+```
+
+```
+### 182 — ROUTE-H2I: IS THERE AN INTERMEDIATE SPACE BETWEEN ell^1_w AND ORIGIN-H² THAT AVOIDS
+BOTH OBSTRUCTIONS?
+**Thesis.** Two points on the space axis are now mapped: `ell^1_w` is dead unconditionally
+(leg 127, `Z_1 >= 1` for every bounded `A`); origin-H² is structurally viable but capped at
+`a=0` exactness, re-deriving Xu's own closed form with no transfer to the real target (leg
+163). Leg 176 (in flight) is testing whether origin-H² actually closes as a construction, but
+even a full success there does not extend past `a=0`. This leg asks the natural next
+question, grounded only in what legs 127 and 163 already established (not contingent on
+176's or any other in-flight leg's unknown outcome): is there an INTERPOLATING space between
+`ell^1_w` and origin-H² — on a standard scale (weighted Sobolev, Besov, or fractional) — that
+could avoid BOTH obstructions at once: no `ell^1_w`-class zero-diagonal floor, and no
+collapse to requiring `a=0` exactness? Scoping only, per the leg 111/163 precedent: identify
+candidate interpolation scales and check for a known obstruction analogous to either dead
+end before any construction leg is drafted.
+**Gate.** Does any interpolation scale between `ell^1_w` and origin-H² admit a formulation
+with (a) no `ell^1_w`-class zero-diagonal floor (checked against leg 127's own proof
+technique — does it generalize to the interpolated space, weakening or vanishing), and (b) no
+structural requirement of `a=0` exactness (checked against what specifically forces that
+requirement in leg 163's construction)?
+  yes -> Name the specific scale and point precisely, with both checks' reasoning. ESCALATE
+         as a candidate construction leg for the user — do not build under this leg's own
+         authority.
+  no  -> Report exactly which check fails for every candidate scale considered, and why. Bank
+         this as closing the interpolation-space question — the space axis's only two
+         tractable points are the ones already mapped.
+**Territory.** experiments/p2_route_h2i_v1_scoping.py, writeup/data/p2_route_h2i_v1_scoping.json,
+               writeup/novelty/leg_182.md, experiments/journal/leg_182.md.
+               Reads (never edits) legs 127's and 163's own reports/JSONs, read-only. No new
+               solver module; no certificate is built under this leg.
+**Difficulty.** standard
+**Independence.** Literature-plus-scoping only, no compute, no new solver module. Disjoint
+from 176 (construction, not scoping) and from every other live/reserve leg. Immediately
+dispatchable.
+```
+
+```
+### 183 — ROUTE-XU8: DOES Xu arXiv:2607.19762 §8 PRE-EMPT PART OF THEOREM NGX (LEG 127)?
+(USER-FLAGGED, TOP PRIORITY — blocks presenting leg 179's bundle as ready)
+**Thesis.** An external novelty review of this repository's writeups found that leg 171 (XUL)
+already surfaced, but did not itself resolve, a load-bearing fact: Xu §8 carries its own
+interval-arithmetic no-go on the SAME operator this repository's Theorem NGX (leg 127,
+`Z_1 >= 1` for every bounded `A` on `ell^1_w`) concerns — stated in Xu's own words as "no
+weighted enclosure can exclude them" — and this repository has it banked nowhere. The
+publishable methods note (leg 179's bundle: legs 51/54/58/126/127/157/158 composed into one
+claim about why the radii-polynomial `ell^1`-Fourier framework fails on transport operators
+with singular tails) rests on Theorem NGX's novelty. If Xu §8's no-go covers the same
+territory as any part of NGX, the note's novelty claim narrows and must say so precisely, not
+approximately. **Per the user's own instruction, nothing about the methods note should be
+presented as ready until this leg answers** — leg 179 is downgraded to PROVISIONAL below,
+pending exactly this.
+**Gate.** Does Xu §8's interval-arithmetic no-go ("no weighted enclosure can exclude them"),
+read at full-text depth with its exact hypotheses, cover the SAME operator/space/class that
+Theorem NGX (leg 127) proves `Z_1 >= 1` for — fully, partially, or not at all?
+  fully -> Theorem NGX is pre-empted; leg 127's landed claim needs an explicit novelty
+         correction (not a retraction of the mathematics, which stands regardless of who
+         proved it first — a priority correction to how it is described). ESCALATE
+         immediately; this is claim-adjacent and not this leg's to silently reword.
+  partially -> Name the exact boundary precisely (which sub-class Xu already covers, which
+         NGX reaches that Xu does not). ESCALATE with the precise scope-narrowing needed for
+         leg 179's bundle and any other prose citing NGX as fully novel.
+  not at all -> Theorem NGX's novelty is confirmed independent of Xu §8. Report this
+         precisely with Xu §8's own hypotheses recorded verbatim (what it DOES cover, to
+         close the question rather than leave it open-ended), and leg 179's bundle can be
+         confirmed (not just left provisional) on this specific point.
+**Territory.** experiments/p2_route_xu8_v1_novelty.py, writeup/data/p2_route_xu8_v1_novelty.json,
+               writeup/novelty/leg_183.md, experiments/journal/leg_183.md.
+               Reads (never edits) leg 127's own report/JSON and leg 171's own report/JSON.
+               If the outcome requires a correction to leg 127's or leg 179's prose, that
+               correction is ESCALATED, not made under this leg's own authority (both are
+               claim-bearing, landed results).
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module, no compute. Disjoint from
+171/173/181 (different questions about the same paper). **Top priority in the recommended
+dispatch order below — everything about presenting leg 179 as complete depends on it.**
+```
+
+```
+### 184 — ROUTE-GBW: PIN THE GA BAN'S LIFT CONDITION SO IT CANNOT BE SATISFIED BY COARSENING
+(USER-FLAGGED — closes a measured loophole, does not lift or loosen the ban)
+**Thesis.** Leg 160 measured that the UNMODIFIED, UNREPAIRED leg-49 fitness — the same one
+that failed the frozen six-property gate 4/6 at leg 49's own resolution, and again at leg
+59's repaired wall model with P3 stuck at 0.342 — passes the SAME gate 6/6 when re-run at a
+coarser resolution (n=101/151). Leg 160 correctly refused to use this (its own no-branch:
+report and escalate a pass, do not treat it as the lift condition being met, since the leg's
+whole point was a genuinely REPAIRED fitness, not a coarser grid on the same broken one).
+This is a real gap in the ban's own wording: `plan_of_record.py`'s lift condition currently
+reads "a re-run of the six-property gate that PASSES on a repaired fitness," with no
+resolution floor — so a future re-run at a suffiently coarse grid could satisfy the letter
+of the condition without a genuine repair. **This leg CLOSES the loophole; it does not lift,
+loosen, or satisfy the ban** — tightening a ban's wording to prevent an accidental gameable
+lift needs no user authorization the way lifting one does, but the edit touches
+`plan_of_record.py`'s ban infrastructure directly, so it is scoped as narrowly as leg 65's
+capabilities.py annotation-fix precedent: ONE clause added, nothing else in the file touched,
+and reported with full visibility rather than folded in quietly.
+**Gate.** Does `plan_of_record.py`'s GA-ban lift condition, after this leg's edit, require
+the six-property gate to pass at a PINNED resolution (or across a pre-named minimum set of
+resolutions with monotonic/stable results — not merely "some resolution"), specifically
+excluding the coarsening leg 160 found (n=101/151 passing where finer resolutions and the
+original construction both fail)?
+  yes -> Report the exact wording added, verify `test_plan_of_record.py`'s "exactly one
+         NEXT" invariant and every other merge-gate test still pass unchanged, and confirm
+         no already-landed leg's gate answer is retroactively altered by the wording (leg
+         160's own NO stays NO; this closes a future loophole, it does not relitigate a past
+         leg). Bank the corrected wording.
+  no  -> If the edit cannot be scoped this narrowly without touching something else in
+         `plan_of_record.py`, STOP and escalate the wording itself for the user's sign-off
+         instead of landing a broader edit under this leg's own authority.
+**Territory.** `plan_of_record.py` (ONE clause, the GA ban's lift-condition text ONLY — no
+               other ban, stage, or gate touched), experiments/p2_route_gbw_v1_banwording.py,
+               writeup/data/p2_route_gbw_v1_banwording.json,
+               writeup/novelty/leg_184.md, experiments/journal/leg_184.md.
+**Difficulty.** light
+**Independence.** The only leg in this file's history authorized to touch
+`plan_of_record.py` directly, and only for this one clause — checked explicitly against
+every other live/reserve leg, none of which touches this file. Immediately dispatchable;
+already flagged in `PROGRESS.md`'s NEEDS YOU per the coordinator's note, this leg is the
+mechanism the DM is choosing for it.
 ```
 
 ## Ranking rationale
