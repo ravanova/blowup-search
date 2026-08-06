@@ -154,11 +154,17 @@ against the calendar — regenerate the progress chart from git history:
 ```bash
 python3 scripts/legs_over_time.py            # writes reports/legs_over_time.html
 open reports/legs_over_time.html             # (or just open it in a browser)
+
+python3 scripts/legs_over_time.py --since 2026-08-01   # widen the x-axis floor
 ```
 
 It parses `Leg N: ...` commit subjects, so it stays accurate as new legs land;
 the output is gitignored rather than committed since it's stale the moment
-the next leg merges.
+the next leg merges. The x-axis floor defaults to `auto` — the hour the first
+numbered leg landed — so the chart frames the run instead of the flat line
+before it; `--since YYYY-MM-DD` widens it for calendar context. **Run it on a
+full clone:** the numbering starts at leg 54, and a shallow clone silently
+drops the early legs from the chart (`git fetch --unshallow` first).
 
 ### Starting an orchestrated run
 

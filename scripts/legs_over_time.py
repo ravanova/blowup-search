@@ -9,8 +9,12 @@ HTML chart (no external assets, works offline) to the output path.
 
 Usage:
     scripts/legs_over_time.py                          # writes reports/legs_over_time.html
-    scripts/legs_over_time.py --since 2026-08-01        # chart floor (default: 2026-08-01)
+    scripts/legs_over_time.py --since 2026-08-01        # chart floor (default: auto)
     scripts/legs_over_time.py -o some/other/path.html
+
+The default floor is `auto`: the top of the hour containing the first numbered
+leg, so the chart frames the run rather than a stretch of flat line before it.
+Pass an explicit YYYY-MM-DD to include earlier calendar context.
 """
 import argparse
 import html
@@ -97,7 +101,8 @@ TEMPLATE = """<!doctype html>
   --border:         rgba(255,255,255,0.10);
 }}
 * {{ box-sizing: border-box; }}
-body {{ margin: 0; background: var(--page); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text-primary); }}
+body {{ margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }}
+.viz-root {{ background: var(--page); color: var(--text-primary); min-height: 100vh; }}
 .wrap {{ max-width: 920px; margin: 0 auto; padding: 32px 20px 48px; }}
 h1 {{ font-size: 1.15rem; font-weight: 600; margin: 0 0 4px; }}
 .subtitle {{ color: var(--text-secondary); font-size: 0.88rem; margin: 0 0 24px; }}
@@ -220,9 +225,14 @@ for (; dayTickCursor < startOfDay(legsStart); dayTickCursor += dayTickStepMs) {{
   t.textContent = fmtDay(dayTickCursor);
   svg.appendChild(t);
 }}
-const tickStepMs = 2 * 3600 * 1000;
+const HOUR = 3600 * 1000;
+const spanMs = tMax - Math.max(tMin, startOfDay(legsStart));
+const MAX_TIME_TICKS = 10;
+const tickStepMs = [1, 2, 3, 4, 6, 8, 12, 24].map(h => h * HOUR)
+                     .find(step => spanMs / step <= MAX_TIME_TICKS) || 24 * HOUR;
 let tickCursor = Math.ceil(startOfDay(legsStart) / tickStepMs) * tickStepMs;
 for (; tickCursor <= tMax; tickCursor += tickStepMs) {{
+  if (tickCursor < tMin) continue;   // floor may sit mid-day; don't draw off the left edge
   const x = xScale(tickCursor);
   const t = el('text', {{ class: 'axis-label', x: x, y: H - margin.bottom + 20, 'text-anchor': 'middle' }});
   t.textContent = fmtTime(tickCursor);
@@ -300,10 +310,11 @@ def render(leg_times, chart_floor):
 
     span_label = f"{chart_floor.strftime('%b %-d')} – {last_t.strftime('%b %-d')}"
 
+    floor_fmt = "%b %-d, %Y" if (chart_floor.hour, chart_floor.minute) == (0, 0) else "%b %-d, %Y %H:%M"
     return TEMPLATE.format(
         leg_lo=lo,
         leg_hi=hi,
-        chart_floor_label=html.escape(chart_floor.strftime("%b %-d, %Y")),
+        chart_floor_label=html.escape(chart_floor.strftime(floor_fmt)),
         generated_on=html.escape(datetime.now(timezone.utc).strftime("%Y-%m-%d")),
         span_label=html.escape(span_label),
         leg_count=len(leg_times),
@@ -317,7 +328,8 @@ def render(leg_times, chart_floor):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("-o", "--output", default="reports/legs_over_time.html", help="output HTML path")
-    parser.add_argument("--since", default="2026-08-01", help="chart x-axis floor, YYYY-MM-DD (default: 2026-08-01)")
+    parser.add_argument("--since", default="auto",
+                        help="chart x-axis floor: YYYY-MM-DD, or 'auto' = the hour the first leg landed (default: auto)")
     parser.add_argument("--repo-root", default=".", help="git repo root (default: cwd)")
     args = parser.parse_args()
 
@@ -325,8 +337,11 @@ def main():
     if not leg_times:
         raise SystemExit("No 'Leg N:' commits found in git history.")
 
-    tz = leg_times[0][1].tzinfo
-    chart_floor = datetime.fromisoformat(args.since).replace(tzinfo=tz)
+    first_t = leg_times[0][1]
+    if args.since == "auto":
+        chart_floor = first_t.replace(minute=0, second=0, microsecond=0)
+    else:
+        chart_floor = datetime.fromisoformat(args.since).replace(tzinfo=first_t.tzinfo)
 
     html_out = render(leg_times, chart_floor)
     with open(args.output, "w") as f:
