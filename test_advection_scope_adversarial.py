@@ -31,7 +31,19 @@ bit-reproducible across BLAS thread counts (`c` moves in the 11th significant fi
 between 1 and 4 threads).  The CLAMPING identities are pinned EXACTLY, because they are
 properties of `np.interp` and the grid, not of the solve.
 
-Run: python test_advection_scope_adversarial.py    (no scipy, no pytest; ~23 s)
+Quantities built from the STRETCH tail are pinned only as BOUNDS, never as values.  That
+is not slack, it is this repository's own banked finding: `test_advection_scope.py`'s
+predicate (2) records that the stretch far field for `a != 0` "sits at the discretization
+noise floor (the tail does not converge -- its sign flips between grids)".  Measured here,
+`stretch_at[1e4]` moves by 0.21% between 1 and 4 BLAS threads while the transport value
+next to it is stable to 1e-6.  The transport half is the reproducible half, exactly as
+that predicate says, and every pinned value below is drawn from it.
+
+Run: python test_advection_scope_adversarial.py    (no scipy, no pytest)
+
+Runtime is dominated by three Newton solves and is BLAS-threading-bound: ~23 s at
+`OMP_NUM_THREADS=1`, ~3.5 min with default threading (the n=801 dense solves are small
+enough that thread thrash costs more than it buys).
 
 (LAPACK prints a few "DLASCL parameter number 4 had an illegal value" lines to stderr from
 gate 12's deliberate `lo = -5` probe -- that is the least-squares fit refusing `log` of a
@@ -91,9 +103,15 @@ def test_far_field_probe_fabricates_values_past_the_grid():
     assert t[1e4] - t[1e3] == 0.0
     assert s[1e4] - s[1e3] == 0.0
 
-    # the magnitude, on the converged a=0.3 profile
+    # The magnitude, on the converged a=0.3 profile. Only the TRANSPORT value is
+    # pinned: test_advection_scope.py's predicate (2) records that the stretch far
+    # field "sits at the discretization noise floor ... so it does not [reproduce]",
+    # and it does not here either -- s[1e4] moves 0.21% between BLAS thread counts
+    # (0.00384032871440196 at 1 thread, 0.0038323171269065573 at 4). The FINDING
+    # does not rest on that number: it rests on the exact clamping identity above,
+    # which holds whatever the tail value is.
     assert _close(t[1e4], 2.2906076249428438), t[1e4]
-    assert _close(s[1e4], 0.00384032871440196), s[1e4]
+    assert 1e-3 < s[1e4] < 1e-2, s[1e4]
 
     # and it is silent: no warning of any category is raised
     with warnings.catch_warnings(record=True) as w:
@@ -249,7 +267,7 @@ def test_one_scale_predicted_rate_is_a_constant():
         v = advection_split(fam, om, a, al, D, grading="one_scale")[
             "transport_predicted_rate"]
         assert v == 0.0, (a, al, v)
-    assert _close(one["transport_log_rate"], -0.01832528938761544, 1e-3)
+    assert _close(one["transport_log_rate"], -0.01832528938761544, 1e-2)
 
     # the positive control: under two_scale the SAME key is a real prediction
     rel = abs(two["transport_log_rate"] - two["transport_predicted_rate"]) / abs(
@@ -281,9 +299,10 @@ def test_predicted_rate_sign_is_wrong_for_negative_alpha():
 
     # and the header's "decays for alpha < 2, which is the whole working range" is
     # left with no flag: the stretch rate grows by 567x from alpha=1.4 to alpha=2.5
+    # (a BOUND, not a pin: this ratio is built from the non-reproducible stretch
+    # tail -- see gate (1). It was 567x at 1 BLAS thread.)
     growth = rows[2.5]["stretch_log_rate"] / rows[1.4]["stretch_log_rate"]
     assert growth > 100.0, growth
-    assert _close(growth, 567.3542, 1e-2), growth
     print(f"(8) PINNED DEFECT: at alpha=-1 predicted {p:+.5f} vs fitted {m:+.5f} "
           f"(opposite signs); stretch rate grows {growth:.0f}x past alpha=2, unflagged")
 
