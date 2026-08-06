@@ -146,7 +146,7 @@ svg {{ display: block; width: 100%; height: auto; overflow: visible; }}
       <div><div class="stat-label">Chart span</div><div class="stat-value">{span_label}</div></div>
       <div><div class="stat-label">Legs landed</div><div class="stat-value">{leg_count}</div></div>
       <div><div class="stat-label">Leg-numbering window</div><div class="stat-value">{numbering_window}</div></div>
-      <div><div class="stat-label">Gaps in numbering</div><div class="stat-value">{gaps_label}</div></div>
+      <div title="{gaps_title}"><div class="stat-label">Gaps in numbering</div><div class="stat-value">{gaps_label}</div></div>
     </div>
     <div class="legend"><span class="legend-swatch"></span> cumulative legs landed</div>
     <div class="chart-container" id="chart-container">
@@ -300,7 +300,16 @@ def render(leg_times, chart_floor):
     lo, hi = min(legs), max(legs)
     expected = set(range(lo, hi + 1))
     gaps = sorted(expected - set(legs))
-    gaps_label = ", ".join(str(g) for g in gaps) if gaps else "none"
+    # Reserved-but-unlanded numbers accumulate, so the full list outgrows the stat
+    # card. Past a handful, show the count and keep the numbers in the tooltip.
+    GAPS_INLINE_MAX = 6
+    gaps_all = ", ".join(str(g) for g in gaps) if gaps else "none"
+    if len(gaps) > GAPS_INLINE_MAX:
+        gaps_label = f"{len(gaps)} numbers"
+        gaps_title = f"Not yet landed: {gaps_all}"
+    else:
+        gaps_label = gaps_all
+        gaps_title = f"Leg numbers {lo}–{hi}, none missing" if not gaps else f"Not yet landed: {gaps_all}"
 
     first_t, last_t = leg_times[0][1], leg_times[-1][1]
     window = last_t - first_t
@@ -320,6 +329,7 @@ def render(leg_times, chart_floor):
         leg_count=len(leg_times),
         numbering_window=numbering_window,
         gaps_label=html.escape(gaps_label),
+        gaps_title=html.escape(gaps_title, quote=True),
         data_json=json.dumps(data),
         chart_floor_ms=int(chart_floor.timestamp() * 1000),
     )
