@@ -1,0 +1,1014 @@
+{
+  "leg": 139,
+  "route": "ROUTE-DGA",
+  "module_under_audit": "solver/decay_grading.py",
+  "module_edited": false,
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/decay_grading.py ever silently return a wrong value rather than propagating or flagging the invalid input?",
+  "what_this_is_not": "Not a measurement of anything physical.  No number here is a statement about blow-up or about any certificate constant.  No bound is sharpened; no banked result is contested.",
+  "batteries": {
+    "G1_guard_asymmetry": {
+      "what": "farfield_inverse_norm runs the SAME trapezoidal recursion on both alpha branches with the same coefficients p = 1/dtau + beta/2, q = 1/dtau - beta/2.  The alpha > 2 branch checks q <= 0 and raises; the alpha < 2 branch does not check it at all.  The module's docstring rests the whole one-pass induced-norm trick on 'Every coefficient in either recursion is non-negative' -- which is exactly what fails when dtau > 2c.",
+      "exact_continuum_finite_domain": 3.999996,
+      "ladder": [
+        {
+          "n": 8001,
+          "dtau": 0.0034538776394910683,
+          "dtau_over_2c": 0.0034538776394910683,
+          "below": {
+            "outcome": "value",
+            "norm": 3.9999691602986944,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.9999932900679637
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 4.000120265167516,
+            "exact": 3.999996,
+            "ratio_to_exact": 1.0000310663229455
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 2001,
+          "dtau": 0.013815510557964273,
+          "dtau_over_2c": 0.013815510557964273,
+          "below": {
+            "outcome": "value",
+            "norm": 3.9995666252625184,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.9998926562082858
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 4.001984947056923,
+            "exact": 3.999996,
+            "ratio_to_exact": 1.000497237261468
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 401,
+          "dtau": 0.06907755278982136,
+          "dtau_over_2c": 0.06907755278982136,
+          "below": {
+            "outcome": "value",
+            "norm": 3.9893001966237662,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.9973260464819881
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 4.05017476928065,
+            "exact": 3.999996,
+            "ratio_to_exact": 1.0125447048648675
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 100,
+          "dtau": 0.27910122339321763,
+          "dtau_over_2c": 0.27910122339321763,
+          "below": {
+            "outcome": "value",
+            "norm": 3.834859556357192,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.9587158478051458
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 4.959344391443006,
+            "exact": 3.999996,
+            "ratio_to_exact": 1.2398373376980891
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 60,
+          "dtau": 0.4683223917953991,
+          "dtau_over_2c": 0.4683223917953991,
+          "below": {
+            "outcome": "value",
+            "norm": 3.5791870734564335,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.8947976631617716
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 8.037774887468444,
+            "exact": 3.999996,
+            "ratio_to_exact": 2.0094457313128427
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 40,
+          "dtau": 0.7084877209212448,
+          "dtau_over_2c": 0.7084877209212448,
+          "below": {
+            "outcome": "value",
+            "norm": 3.190476339886836,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.7976198825915916
+          },
+          "above": {
+            "outcome": "value",
+            "norm": 104.94708421176581,
+            "exact": 3.999996,
+            "ratio_to_exact": 26.236797289738742
+          },
+          "asymmetric": false
+        },
+        {
+          "n": 28,
+          "dtau": 1.023371152441798,
+          "dtau_over_2c": 1.023371152441798,
+          "below": {
+            "outcome": "value",
+            "norm": 2.853376287039439,
+            "exact": 3.999996,
+            "ratio_to_exact": 0.7133447851046448
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 20,
+          "dtau": 1.4542642692593972,
+          "dtau_over_2c": 1.4542642692593972,
+          "below": {
+            "outcome": "value",
+            "norm": 26630.848243017965,
+            "exact": 3.999996,
+            "ratio_to_exact": 6657.71871847321
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 14,
+          "dtau": 2.1254631627637344,
+          "dtau_over_2c": 2.1254631627637344,
+          "below": {
+            "outcome": "value",
+            "norm": 3019942776557.5547,
+            "exact": 3.999996,
+            "ratio_to_exact": 754986449125.8378
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 12,
+          "dtau": 2.511911010538959,
+          "dtau_over_2c": 2.511911010538959,
+          "below": {
+            "outcome": "value",
+            "norm": 151881895799982.5,
+            "exact": 3.999996,
+            "ratio_to_exact": 37970511920507.55
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 8,
+          "dtau": 3.9472887308469353,
+          "dtau_over_2c": 3.9472887308469353,
+          "below": {
+            "outcome": "value",
+            "norm": 3.5602165509195296e+16,
+            "exact": 3.999996,
+            "ratio_to_exact": 8900550277849102.0
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 6,
+          "dtau": 5.52620422318571,
+          "dtau_over_2c": 5.52620422318571,
+          "below": {
+            "outcome": "value",
+            "norm": 1.9588989064067523e+17,
+            "exact": 3.999996,
+            "ratio_to_exact": 4.897252163269044e+16
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 4,
+          "dtau": 9.210340371976182,
+          "dtau_over_2c": 9.210340371976182,
+          "below": {
+            "outcome": "value",
+            "norm": 5.832802051321413e+17,
+            "exact": 3.999996,
+            "ratio_to_exact": 1.4582019710323245e+17
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        },
+        {
+          "n": 3,
+          "dtau": 13.815510557964274,
+          "dtau_over_2c": 13.815510557964274,
+          "below": {
+            "outcome": "value",
+            "norm": 932503170.7633643,
+            "exact": 3.999996,
+            "ratio_to_exact": 233126025.8168669
+          },
+          "above": {
+            "outcome": "raised",
+            "error": "ValueError: grid too coarse: need dtau < 2c",
+            "exact": 3.999996
+          },
+          "asymmetric": true
+        }
+      ],
+      "n_rows_asymmetric": 8,
+      "headline_pair": {
+        "n": 20,
+        "dtau": 1.4542642692593972,
+        "dtau_over_2c": 1.4542642692593972,
+        "below": {
+          "outcome": "value",
+          "norm": 26630.848243017965,
+          "exact": 3.999996,
+          "ratio_to_exact": 6657.71871847321
+        },
+        "above": {
+          "outcome": "raised",
+          "error": "ValueError: grid too coarse: need dtau < 2c",
+          "exact": 3.999996
+        },
+        "asymmetric": true
+      },
+      "worst_silent_ratio": 1.4582019710323245e+17,
+      "worst_silent_n": 4,
+      "mechanism_ablation_c": [
+        {
+          "c": 1.0,
+          "two_c": 2.0,
+          "predicted_n_at_dtau_equals_2c": 14.815510557964274,
+          "largest_n_refused_on_above_branch": 14,
+          "dtau_at_that_n": 2.1254631627637344,
+          "below_branch_at_same_n": 13.006178485690706,
+          "below_branch_ratio_to_exact": 3.2515478729705496
+        },
+        {
+          "c": 0.5,
+          "two_c": 1.0,
+          "predicted_n_at_dtau_equals_2c": 28.631021115928547,
+          "largest_n_refused_on_above_branch": 28,
+          "dtau_at_that_n": 1.023371152441798,
+          "below_branch_at_same_n": 2.853376287039439,
+          "below_branch_ratio_to_exact": 0.7133447851046448
+        },
+        {
+          "c": 0.25,
+          "two_c": 0.5,
+          "predicted_n_at_dtau_equals_2c": 56.262042231857095,
+          "largest_n_refused_on_above_branch": 56,
+          "dtau_at_that_n": 0.5023822021077917,
+          "below_branch_at_same_n": 1.5660019591952041,
+          "below_branch_ratio_to_exact": 0.39150088129968236
+        },
+        {
+          "c": 0.125,
+          "two_c": 0.25,
+          "predicted_n_at_dtau_equals_2c": 111.52408446371419,
+          "largest_n_refused_on_above_branch": 111,
+          "dtau_at_that_n": 0.25119110105389586,
+          "below_branch_at_same_n": 1.2317169357457753,
+          "below_branch_ratio_to_exact": 0.3079295418659857
+        }
+      ],
+      "positivity_probe": {
+        "rows": [
+          {
+            "alpha": 1.5,
+            "n": 401,
+            "dtau": 0.06907755278982136,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": false,
+            "module_value": 3.9893001966237662,
+            "reimplementation_one_pass": 3.989300196623768,
+            "true_discrete_induced_norm": 3.989300196623768,
+            "one_pass_understates_by": 1.0,
+            "negative_entry_fraction": 0.0,
+            "reimplementation_matches_module": true
+          },
+          {
+            "alpha": 1.5,
+            "n": 60,
+            "dtau": 0.4683223917953991,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": false,
+            "module_value": 3.5791870734564335,
+            "reimplementation_one_pass": 3.579187073456433,
+            "true_discrete_induced_norm": 3.579187073456433,
+            "one_pass_understates_by": 1.0,
+            "negative_entry_fraction": 0.0,
+            "reimplementation_matches_module": true
+          },
+          {
+            "alpha": 1.5,
+            "n": 28,
+            "dtau": 1.023371152441798,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": true,
+            "module_value": 2.853376287039439,
+            "reimplementation_one_pass": 2.853376287039439,
+            "true_discrete_induced_norm": 2.9577163427882205,
+            "one_pass_understates_by": 1.0365672260692407,
+            "negative_entry_fraction": 0.23214285714285715,
+            "reimplementation_matches_module": true
+          },
+          {
+            "alpha": 1.5,
+            "n": 20,
+            "dtau": 1.4542642692593972,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": true,
+            "module_value": 26630.848243017965,
+            "reimplementation_one_pass": 26630.848243017976,
+            "true_discrete_induced_norm": 87587.98786503004,
+            "one_pass_understates_by": 3.288967255783664,
+            "negative_entry_fraction": 0.225,
+            "reimplementation_matches_module": true
+          },
+          {
+            "alpha": 1.5,
+            "n": 14,
+            "dtau": 2.1254631627637344,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": true,
+            "module_value": 3019942776557.5547,
+            "reimplementation_one_pass": 3019942776557.556,
+            "true_discrete_induced_norm": 3500108323958.0474,
+            "one_pass_understates_by": 1.1589982270948305,
+            "negative_entry_fraction": 0.21428571428571427,
+            "reimplementation_matches_module": true
+          },
+          {
+            "alpha": 2.5,
+            "n": 401,
+            "dtau": 0.06907755278982136,
+            "two_c": 1.0,
+            "dtau_exceeds_2c": false,
+            "module_value": 4.05017476928065,
+            "reimplementation_one_pass": 4.050174769280652,
+            "true_discrete_induced_norm": 4.050174769280652,
+            "one_pass_understates_by": 1.0,
+            "negative_entry_fraction": 0.0,
+            "reimplementation_matches_module": true
+          }
+        ],
+        "note": "The map g -> h is formed as a matrix by a second, independent implementation of the same recursion (validated against the module on the clean extremal source: `reimplementation_matches_module`).  The module's one-pass value equals the true discrete induced norm IFF that matrix is entrywise non-negative -- the module's own stated hypothesis. Above dtau = 2c it is not, so the returned number stops being an induced norm; this is a correctness statement, NOT a discretization error, and it is what separates 'coarse but honest' from 'wrong'."
+      },
+      "verdict": "SILENT CORRUPTION.  At identical dtau above the module's own published threshold, one branch refuses and the other returns a finite plausible wrong induced norm, with no warning and no NaN."
+    },
+    "G2_fabricated_zero_norm": {
+      "what": "A negative speed c and a swapped domain (X0 > Xmax) both drive farfield_inverse_norm to return EXACTLY 0.0 -- the value of the boundary node, which is the only non-negative entry left -- while the `predicted` companion it returns beside it still reads 4.0.",
+      "cases": [
+        {
+          "case": "negative_speed_below",
+          "alpha": 1.5,
+          "kwargs": {
+            "c": -0.5
+          },
+          "outcome": "value",
+          "norm": 0.0,
+          "predicted_companion": 4.0,
+          "exactly_zero": true,
+          "exact_for_clean_input": 3.999996,
+          "warnings": []
+        },
+        {
+          "case": "negative_speed_above",
+          "alpha": 2.5,
+          "kwargs": {
+            "c": -0.5
+          },
+          "outcome": "value",
+          "norm": 0.0,
+          "predicted_companion": 4.0,
+          "exactly_zero": true,
+          "exact_for_clean_input": 3.999996,
+          "warnings": []
+        },
+        {
+          "case": "swapped_domain_below",
+          "alpha": 1.5,
+          "kwargs": {
+            "X0": 1000000000000.0,
+            "Xmax": 1.0
+          },
+          "outcome": "value",
+          "norm": 0.0,
+          "predicted_companion": 4.0,
+          "exactly_zero": true,
+          "exact_for_clean_input": 3.999996,
+          "warnings": []
+        },
+        {
+          "case": "swapped_domain_above",
+          "alpha": 2.5,
+          "kwargs": {
+            "X0": 1000000000000.0,
+            "Xmax": 1.0
+          },
+          "outcome": "raised",
+          "error": "ValueError: grid too coarse: need dtau < 2c"
+        }
+      ],
+      "n_exact_zero": 3,
+      "q_at_negative_c": 73.38241365054198,
+      "why_guard_blind": "The only guard in the module tests q <= 0.  With c < 0 we have beta = 1/c < 0, so q = 1/dtau - beta/2 = 73.382414 > 0 and the guard cannot fire.  It is a guard against one coarse-grid sign flip, not against an inadmissible c.",
+      "severity_direction": "A returned operator norm of 0.0 is the maximally UNSAFE direction: ||A_far|| enters a Newton-Kantorovich budget in the numerator, so zero makes any budget look infinitely comfortable.  The clean value is 3.999996.",
+      "verdict": "SILENT CORRUPTION (fabricated zero, 4/4 inadmissible cases)."
+    },
+    "G3_negative_alpha_coefficients": {
+      "what": "cos_power_coeffs takes any alpha.  Its docstring claims 'no Gamma of a negative argument is ever formed'; math.lgamma(alpha+1) forms exactly that for alpha < -1 and silently drops the sign (log|Gamma|).  Worse, for alpha <= -1 the function |cos(theta/2)|^alpha is not integrable, so NO cosine coefficient sequence exists -- and a finite array is returned anyway.  Its own file-mate cos_power_mass REFUSES alpha <= 1.",
+      "a_sign": {
+        "rows": [
+          {
+            "alpha": -1.2,
+            "outcome": "value",
+            "a0_module": 2.7180604934959542,
+            "a0_continued": -2.718060493495955,
+            "sign_module": 1,
+            "sign_continued": -1,
+            "sign_flipped": true,
+            "relative_error": 1.9999999999999998,
+            "gamma_arg_negative": true
+          },
+          {
+            "alpha": -1.5,
+            "outcome": "value",
+            "a0_module": 0.7627597635018132,
+            "a0_continued": -0.7627597635018132,
+            "sign_module": 1,
+            "sign_continued": -1,
+            "sign_flipped": true,
+            "relative_error": 2.0,
+            "gamma_arg_negative": true
+          },
+          {
+            "alpha": -1.8,
+            "outcome": "value",
+            "a0_module": 0.22078784747234248,
+            "a0_continued": -0.22078784747234195,
+            "sign_module": 1,
+            "sign_continued": -1,
+            "sign_flipped": true,
+            "relative_error": 2.000000000000002,
+            "gamma_arg_negative": true
+          },
+          {
+            "alpha": -2.5,
+            "outcome": "value",
+            "a0_module": 0.556417894449382,
+            "a0_continued": 0.5564178944493823,
+            "sign_module": 1,
+            "sign_continued": 1,
+            "sign_flipped": false,
+            "relative_error": 5.985912938999597e-16,
+            "gamma_arg_negative": true
+          },
+          {
+            "alpha": -3.5,
+            "outcome": "value",
+            "a0_module": 0.45765585810108705,
+            "a0_continued": -0.4576558581010882,
+            "sign_module": 1,
+            "sign_continued": -1,
+            "sign_flipped": true,
+            "relative_error": 1.9999999999999976,
+            "gamma_arg_negative": true
+          }
+        ],
+        "n_sign_flipped": 4,
+        "docstring_claim": "no Gamma of a negative argument is ever formed",
+        "docstring_claim_true": false
+      },
+      "b_divergence": {
+        "rows": [
+          {
+            "alpha": -1.5,
+            "f_true_at_theta_0.3": 1.01708293615529,
+            "K_ladder": [
+              {
+                "K": 100,
+                "abs_a_K": 45.13523720647163,
+                "series_value": 5.842868563515297,
+                "abs_error": 4.825785627360007
+              },
+              {
+                "K": 1000,
+                "abs_a_K": 142.7299315223766,
+                "series_value": 8.188716248787012,
+                "abs_error": 7.171633312631721
+              },
+              {
+                "K": 10000,
+                "abs_a_K": 451.3516669087319,
+                "series_value": -228.68664360146775,
+                "abs_error": 229.70372653762303
+              }
+            ],
+            "coefficient_growth_100_to_10000": 9.99998437681891,
+            "error_growth_100_to_10000": 47.599239641998906
+          },
+          {
+            "alpha": -2.5,
+            "f_true_at_theta_0.3": 1.0286333802140994,
+            "K_ladder": [
+              {
+                "K": 100,
+                "abs_a_K": 6017.97520892379,
+                "series_value": -915.9852754904747,
+                "abs_error": 917.0139088706887
+              },
+              {
+                "K": 1000,
+                "abs_a_K": 190306.55752192752,
+                "series_value": -12272.290156264055,
+                "abs_error": 12273.318789644269
+              },
+              {
+                "K": 10000,
+                "abs_a_K": 6018022.219807883,
+                "series_value": 3035745.3126666574,
+                "abs_error": 3035744.284033277
+              }
+            ],
+            "coefficient_growth_100_to_10000": 1000.0078117443926,
+            "error_growth_100_to_10000": 3310.467000191769
+          }
+        ],
+        "probe_theta": 0.3,
+        "note": "|a_K| grows like K^{|alpha|-1}; the truncated series is not converging to anything, so this is not a truncation error that a larger K repairs -- it gets worse."
+      },
+      "c_boundary_refusals": {
+        "alpha_minus_one_exact": {
+          "outcome": "raised",
+          "error": "ValueError: math domain error",
+          "warnings": []
+        },
+        "alpha_minus_two_exact": {
+          "outcome": "raised",
+          "error": "ValueError: math domain error",
+          "warnings": []
+        }
+      },
+      "d_valid_range_control": {
+        "rows": [
+          {
+            "alpha": -0.5,
+            "k": 0,
+            "a_k_module": 1.6692536833481482,
+            "a_k_quadrature": 1.6689124059195866,
+            "relative_error": 0.00020449091716923077
+          },
+          {
+            "alpha": -0.5,
+            "k": 1,
+            "a_k_module": -1.1128357888987654,
+            "a_k_quadrature": -1.1121532340416447,
+            "relative_error": 0.0006137237533719268
+          },
+          {
+            "alpha": -0.5,
+            "k": 2,
+            "a_k_module": 0.794882706356261,
+            "a_k_quadrature": 0.7942001514991404,
+            "relative_error": 0.0008594242343472946
+          },
+          {
+            "alpha": -0.5,
+            "k": 3,
+            "a_k_module": -0.6503585779278499,
+            "a_k_quadrature": -0.6496760230707294,
+            "relative_error": 0.0010506080459833044
+          },
+          {
+            "alpha": -0.25,
+            "k": 0,
+            "a_k_module": 1.2273413576376968,
+            "a_k_quadrature": 1.2273387731523384,
+            "relative_error": 2.105763636680528e-06
+          },
+          {
+            "alpha": -0.25,
+            "k": 1,
+            "a_k_module": -0.3506689593250562,
+            "a_k_quadrature": -0.3506637903543403,
+            "relative_error": 1.4740531694684609e-05
+          },
+          {
+            "alpha": -0.25,
+            "k": 2,
+            "a_k_module": 0.21040137559503372,
+            "a_k_quadrature": 0.2103962066243177,
+            "relative_error": 2.4567794253235278e-05
+          },
+          {
+            "alpha": -0.25,
+            "k": 3,
+            "a_k_module": -0.15551406022241623,
+            "a_k_quadrature": -0.15550889125170042,
+            "relative_error": 3.32390686745161e-05
+          }
+        ],
+        "max_relative_error": 0.0010506080459833044,
+        "note": "CONTROL THAT COULD HAVE FAILED: on -1 < alpha < 0 the expansion is legitimate (f is still integrable) and the module is RIGHT, matched against a Gamma-free midpoint quadrature.  So the finding is a sharp boundary at alpha = -1, not a blanket 'negative alpha is nonsense'."
+      },
+      "verdict": "SILENT CORRUPTION.  Sign flipped on -2 < alpha < -1 against the reflection-formula oracle; a divergent fabricated sequence for alpha <= -1; correct and verified on -1 < alpha < 0; exact pole at alpha = -1 raises.  Refusal exists one function away in the same file.",
+      "unused_truth_probe": 1.01708293615529
+    },
+    "G4_negative_norm": {
+      "what": "farfield_inverse_norm_finite computes 2(1 - (X0/Xmax)^e)/e with e = |2-alpha|.  With X0 > Xmax the ratio exceeds 1, the bracket goes negative, and the function returns a NEGATIVE operator norm.",
+      "rows": [
+        {
+          "alpha": 1.5,
+          "clean": 3.999996,
+          "swapped": -3999996.0,
+          "negative": true,
+          "magnitude_ratio": 1000000.0
+        },
+        {
+          "alpha": 2.5,
+          "clean": 3.999996,
+          "swapped": -3999996.0,
+          "negative": true,
+          "magnitude_ratio": 1000000.0
+        },
+        {
+          "alpha": 1.9,
+          "clean": 18.7380853110396,
+          "swapped": -296.9786384922232,
+          "negative": true,
+          "magnitude_ratio": 15.848931924611172
+        },
+        {
+          "alpha": 3.0,
+          "clean": 1.999999999998,
+          "swapped": -1999999999998.0,
+          "negative": true,
+          "magnitude_ratio": 1000000000000.0
+        }
+      ],
+      "n_negative": 4,
+      "degenerate_controls": {
+        "X0_equals_Xmax": {
+          "outcome": "value",
+          "value": 0.0,
+          "warnings": []
+        },
+        "X0_negative": {
+          "outcome": "raised",
+          "error": "TypeError: float() argument must be a string or a real number, not 'complex'",
+          "warnings": []
+        },
+        "alpha_exactly_2": {
+          "outcome": "raised",
+          "error": "ZeroDivisionError: float division by zero",
+          "warnings": []
+        }
+      },
+      "verdict": "SILENT CORRUPTION.  A quantity that is a norm by construction is returned negative, on both alpha branches, with no check that X0 < Xmax.  X0 < 0 does raise (a complex power), so the module refuses the more obviously broken input and accepts the subtler one."
+    },
+    "G5_algebra_constant_poison": {
+      "what": "algebra_constant returns S with the two-sided bracket S/4 <= M <= S/2, documented as SHARP.  It validates neither the sign, the finiteness, nor the length of its weights.  The published Beurling condition is a supremum over ALL pairs; every deviation measured here moves S DOWN, which is the unsafe direction for a quadratic bound.",
+      "clean_S": 385.9411764705883,
+      "clean_bracket": [
+        96.48529411764707,
+        192.97058823529414
+      ],
+      "clean_argmax": [
+        8,
+        8
+      ],
+      "poison_rows": [
+        {
+          "case": "inf_at_mode_1",
+          "S": 385.9411764705883,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": true,
+          "propagated_nan_or_inf": false,
+          "ratio_to_clean": 1.0,
+          "warnings": []
+        },
+        {
+          "case": "inf_at_mode_K",
+          "S": 273.06666666666666,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": false,
+          "propagated_nan_or_inf": false,
+          "ratio_to_clean": 0.7075344205659705,
+          "warnings": []
+        },
+        {
+          "case": "neg_inf_at_mode_1",
+          "S": 385.9411764705883,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": true,
+          "propagated_nan_or_inf": false,
+          "ratio_to_clean": 1.0,
+          "warnings": []
+        },
+        {
+          "case": "all_weights_sign_flipped",
+          "S": 385.9411764705883,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": true,
+          "propagated_nan_or_inf": false,
+          "ratio_to_clean": 1.0,
+          "warnings": []
+        },
+        {
+          "case": "nan_at_mode_1",
+          "S": NaN,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": false,
+          "propagated_nan_or_inf": true,
+          "ratio_to_clean": null,
+          "warnings": []
+        },
+        {
+          "case": "zero_at_mode_1",
+          "S": Infinity,
+          "S_clean": 385.9411764705883,
+          "bit_identical_to_clean": false,
+          "propagated_nan_or_inf": true,
+          "ratio_to_clean": null,
+          "warnings": [
+            "RuntimeWarning"
+          ]
+        }
+      ],
+      "n_absorbed": 4,
+      "n_bit_identical": 3,
+      "quadratic_coeffs_default_mode_count_for_K": {
+        "K": 8,
+        "modes": 16,
+        "len_v_required": 16
+      },
+      "truncation_rows": [
+        {
+          "case": "v_sized_2K_correct",
+          "len_v": 16,
+          "S": 385.9411764705883,
+          "M_hi_reported": 192.97058823529414,
+          "understatement_vs_2K": 1.0
+        },
+        {
+          "case": "v_sized_K",
+          "len_v": 8,
+          "S": 69.44444444444444,
+          "M_hi_reported": 34.72222222222222,
+          "understatement_vs_2K": 5.557552941176471
+        },
+        {
+          "case": "v_sized_K_over_2",
+          "len_v": 4,
+          "S": 16.200000000000003,
+          "M_hi_reported": 8.100000000000001,
+          "understatement_vs_2K": 23.823529411764707
+        }
+      ],
+      "verdict": "SILENT CORRUPTION.  +-Inf at mode 1 and a wholly sign-flipped weight vector return S BIT-IDENTICALLY to the clean call (0 ULP, no warning); an Inf that does register lowers S; a short v lowers it further.  The sharp bracket is reported unchanged in every case."
+    },
+    "G6_what_the_module_gets_right": {
+      "nan_propagation": {
+        "algebra_constant_nan_u": NaN,
+        "propagates_u": true,
+        "algebra_constant_nan_v": NaN,
+        "propagates_v": true,
+        "quadratic_coeffs_nan_h": [
+          null,
+          null,
+          null,
+          0.03125
+        ],
+        "quadratic_modes_poisoned": 3,
+        "quadratic_modes_total": 4,
+        "note": "mode 4 stays clean at 0.03125 because with K = 2 the only pair with j+k = 4 is (2,2), which never touches the poisoned entry -- correct, not absorbed."
+      },
+      "explicit_refusals": {
+        "farfield_alpha_exactly_2": {
+          "outcome": "value",
+          "value": "(inf, inf)",
+          "warnings": []
+        },
+        "farfield_X0_zero": {
+          "outcome": "raised",
+          "error": "ValueError: Geometric sequence cannot include zero",
+          "warnings": []
+        },
+        "cos_power_mass_alpha_1": {
+          "outcome": "raised",
+          "error": "ValueError: f_alpha is not integrable for alpha <= 1",
+          "warnings": []
+        },
+        "cos_power_mass_alpha_0.5": {
+          "outcome": "raised",
+          "error": "ValueError: f_alpha is not integrable for alpha <= 1",
+          "warnings": []
+        },
+        "cos_power_coeffs_alpha_minus_1": {
+          "outcome": "raised",
+          "error": "ValueError: math domain error",
+          "warnings": []
+        },
+        "quadratic_coeffs_empty": {
+          "outcome": "raised",
+          "error": "ValueError: a cannot be empty",
+          "warnings": []
+        },
+        "quadratic_coeffs_negative_M": {
+          "outcome": "raised",
+          "error": "ValueError: negative dimensions are not allowed",
+          "warnings": []
+        },
+        "algebra_constant_zero_weight": {
+          "outcome": "value",
+          "value": Infinity
+        }
+      },
+      "n_refusals": 6,
+      "resonance_guard": {
+        "alpha": 2.0,
+        "norm": Infinity,
+        "predicted": Infinity,
+        "both_inf": true
+      },
+      "hilbert_beyond_documented_range": {
+        "rows": [
+          {
+            "X": 100.0,
+            "H": 0.0063689336911785036,
+            "farfield_law": 0.006366197723675815,
+            "ratio": 1.0004297647703453,
+            "beyond_documented_ceiling": false
+          },
+          {
+            "X": 1000.0,
+            "H": 0.000636623974626066,
+            "farfield_law": 0.0006366197723675815,
+            "ratio": 1.0000066008921915,
+            "beyond_documented_ceiling": false
+          },
+          {
+            "X": 10000.0,
+            "H": 6.366198290492868e-05,
+            "farfield_law": 6.366197723675815e-05,
+            "ratio": 1.0000000890354146,
+            "beyond_documented_ceiling": false
+          },
+          {
+            "X": 100000.0,
+            "H": 6.366197730839351e-06,
+            "farfield_law": 6.366197723675816e-06,
+            "ratio": 1.0000000011252455,
+            "beyond_documented_ceiling": true
+          },
+          {
+            "X": 1000000.0,
+            "H": 6.366197723699413e-07,
+            "farfield_law": 6.366197723675815e-07,
+            "ratio": 1.0000000000037068,
+            "beyond_documented_ceiling": true
+          },
+          {
+            "X": 10000000.0,
+            "H": 6.366197713735198e-08,
+            "farfield_law": 6.366197723675815e-08,
+            "ratio": 0.9999999984385315,
+            "beyond_documented_ceiling": true
+          }
+        ],
+        "max_abs_ratio_deviation_beyond_ceiling": 1.561468510047348e-09,
+        "note": "The docstring says 'callers should stay below X ~ 1e4'.  Pushed to 1e7 the value still matches the exact far-field law -- the documented ceiling is conservative and no corruption occurs.  This control COULD have failed."
+      },
+      "fold_identity": {
+        "max_abs_err_cos": 5.551115123125783e-17,
+        "max_abs_err_sin": 5.551115123125783e-17,
+        "note": "the range-reduction fold is exact, including past |theta| > pi/2."
+      },
+      "quadratic_second_implementation": {
+        "max_abs_err": 0.0,
+        "note": "exact agreement with an independent double loop."
+      },
+      "coordinate_roundtrip": {
+        "max_abs_err": 2.0700951826313724e-11
+      },
+      "near_resonance_is_not_a_bug": {
+        "alpha": 2.000000001,
+        "measured": 55.36988284756396,
+        "exact_finite_domain": 55.26204147792877,
+        "ratio": 1.001951454683017,
+        "predicted_companion_infinite_domain": 1999999834.5192716,
+        "note": "The measured norm matches the exact TRUNCATED-domain value; it is the `predicted` companion (2/|alpha-2| = 2e9) that refers to the infinite domain, and the docstring says so explicitly.  Not a finding."
+      },
+      "farfield_symbol_coefficient_spotcheck": {
+        "alpha_2_c_half": 0.0,
+        "vanishes_at_resonance": true
+      }
+    }
+  },
+  "downstream_exposure": {
+    "method": "grep -rn over *.py for every public symbol of solver/decay_grading.py; NAME COLLISION handled explicitly -- solver/spectral_certificate.py defines a DIFFERENT algebra_constant(kind, param, K), and test_spectral_certificate.py / p2_route_l1_v2_spectral.py / p2_route_tc_v1_assemble.py call THAT one, not this module's.",
+    "farfield_inverse_norm": {
+      "call_sites": [
+        "experiments/p2_route_d_v3_spaces.py:356,399",
+        "experiments/p2_route_d_v6_bounds.py:217",
+        "experiments/p2_route_d_v7_seminorm.py:294",
+        "experiments/p2_route_d_v8_quadratic.py (import)",
+        "test_decay_grading.py:186"
+      ],
+      "n_used": "8001 everywhere (the default); dtau = 3.45e-3",
+      "c_used": "0.5 everywhere (C_ANCHOR = 0.5, solver/decay_collocation.py:51)",
+      "threshold": "dtau < 2c = 1.0",
+      "margin_decades": 2.4616930522448555,
+      "status": "LATENT -- every banked call site is 2.46 decades inside the threshold."
+    },
+    "algebra_constant": {
+      "call_sites": [
+        "experiments/p2_route_d_v3_spaces.py:171,239,270,305",
+        "test_decay_grading.py:134"
+      ],
+      "v_sizing": "len(v) = 2K at every site (np.ones(80) against np.ones(41), and (1+arange(1,2K+1))**t against (1+arange(K+1))**s)",
+      "status": "LATENT -- no banked site truncates v or passes a poisoned weight."
+    },
+    "cos_power_coeffs": {
+      "call_sites": [
+        "experiments/p2_route_d_v3_spaces.py:368,392",
+        "experiments/p2_route_d_v4_graded.py:262",
+        "test_decay_collocation.py:112",
+        "test_decay_grading.py"
+      ],
+      "alpha_used": "positive throughout (0, 1.5, 2, 2.5, 3, 4)",
+      "status": "LATENT -- no banked site passes alpha < 0."
+    },
+    "farfield_inverse_norm_finite": {
+      "call_sites": [
+        "experiments/p2_route_d_v3_spaces.py:357",
+        "experiments/p2_route_d_v4_graded.py:76",
+        "test_decay_grading.py:187"
+      ],
+      "status": "LATENT -- X0 = 1.0 < Xmax = 1e12 at every site."
+    },
+    "cos_power_mass": {
+      "call_sites": [
+        "solver/nk_bounds.py:326,331",
+        "four experiments",
+        "two tests"
+      ],
+      "status": "GUARDED at the source (alpha <= 1 raises); no finding."
+    },
+    "banked_numbers_at_risk": 0,
+    "severity": "All five findings are LATENT public-API hazards, the same severity shape as legs 66/69/79/115/120.  No banked number in writeup/data is wrong because of them, and this leg re-computes none."
+  },
+  "gate_answer": "YES",
+  "findings": {
+    "G1_headline": "farfield_inverse_norm enforces its own documented step condition dtau < 2c on the alpha > 2 branch only.  At n = 20 (dtau = 1.454 > 2c = 1.0) the alpha = 2.5 call raises ValueError('grid too coarse: need dtau < 2c') and the alpha = 1.5 call silently returns 26630.8 where the module's own exact closed form gives 3.999996 -- a factor 6658, no warning, no NaN. Worst silent ratio over the ladder: 1.458e+17x at n = 4.  The dangerous regime is not the wild one: just past the threshold (n = 28, dtau = 1.0234) it returns 2.8534, a perfectly believable norm that is 29% low.  MECHANISM, separated from mere discretization error: forming the map g -> h as a matrix shows 0.0% negative entries below the threshold (where the one-pass value equals the true discrete induced norm exactly, ratio 1.000000) and 21.4-23.2% negative entries above it, where the one-pass value understates the true discrete induced norm by up to 3.289x -- i.e. past dtau = 2c the returned quantity is not an induced norm at all.  The onset tracks c, not n: the largest n the alpha > 2 branch refuses is 14 / 28 / 56 / 111 against the predicted dtau = 2c values 14.82 / 28.63 / 56.26 / 111.52 for c = 1 / 0.5 / 0.25 / 0.125.",
+    "G2_headline": "A negative speed c and a swapped domain X0 > Xmax each make the same function return EXACTLY 0.0 as an induced norm (3/4 inadmissible cases), with the `predicted` companion still reading 4.0 beside it.  The module's single guard cannot fire: q = 73.382414 > 0 when c < 0.  Zero is the unsafe direction -- it makes any NK budget look free.  The one case of the four that IS refused (swapped domain, alpha = 2.5) is caught only incidentally, by the coarse-grid guard aimed at something else: a descending grid makes dtau negative, so q < 0 fires.  Nothing in the module checks c > 0 or X0 < Xmax.",
+    "G3_headline": "cos_power_coeffs fabricates a coefficient sequence for alpha <= -1 where none exists (f is not integrable): |a_K| grows 10x from K = 100 to K = 10000 at alpha = -1.5 and the evaluated series moves AWAY from the function it claims to be.  On -2 < alpha < -1 the returned a_0 has the WRONG SIGN against a reflection-formula oracle (4 of 5 probes), because math.lgamma returns log|Gamma| -- contradicting the docstring's 'no Gamma of a negative argument is ever formed'.  Sharp boundary: alpha = -1 raises, and on -1 < alpha < 0 the module is verified CORRECT against Gamma-free quadrature (max rel err 1.05e-03).",
+    "G4_headline": "farfield_inverse_norm_finite returns a NEGATIVE operator norm for X0 > Xmax on 4/4 alphas -- -4e+06 where the clean value is 3.999996.  X0 < 0 does raise, so the module refuses the obviously broken input and accepts the subtler one.",
+    "G5_headline": "algebra_constant absorbs weight poison: 3 of 6 poisoned weight vectors (+Inf and -Inf at mode 1, and a wholly sign-flipped u) return S BIT-IDENTICALLY to the clean call (385.9411765, 0 ULP, no warning); an Inf that does register moves S DOWN to 273.067 (0.7075x); and a v sized to len(u) instead of 2(len(u)-1) under-reports the SHARP constant by 5.558x.  Every direction is the unsafe one, and the two-sided bracket S/4 <= M <= S/2 is reported unchanged."
+  },
+  "controls_that_could_have_failed": "alpha in (-1,0) coefficients verified correct against Gamma-free quadrature; hilbert_of_cos_power pushed three decades past its documented X ~ 1e4 ceiling and still matching the exact far-field law; the alpha = 2 resonance returning inf; X0 = 0, empty input, negative M and cos_power_mass(alpha <= 1) all raising; NaN propagating through algebra_constant from both arguments; the range-reduction fold exact past |theta| > pi/2; quadratic_coeffs matching an independent double loop; and the near-resonance alpha = 2 + 1e-9 value, which is CORRECT and is reported as not a finding.  The mechanism ablation in G1 varies c and moves the onset with it -- if the cause were 'the grid is small' rather than the sign of q, it would not move.",
+  "escalation": "Gate YES -> the pre-committed branch is: report the exact failing case with magnitudes, ESCALATE, DO NOT PATCH.  solver/decay_grading.py is not edited under either branch of this leg's gate and is not edited here."
+}
