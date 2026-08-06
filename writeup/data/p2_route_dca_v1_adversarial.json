@@ -1,0 +1,650 @@
+{
+  "leg": 115,
+  "route": "DCA",
+  "branch": "leg/dca-v1",
+  "date": "2026-08-06",
+  "module_under_audit": "solver/decay_collocation.py",
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/decay_collocation.py ever silently return a wrong value rather than propagating or flagging the invalid input?",
+  "references": {
+    "L1_driscoll_hale_2016": "https://repository.kaust.edu.sa/handle/10754/599473 -- IMA J. Numer. Anal. 36 (2016) 108-132: boundary conditions imposed by 'the classical row deletion method' carry documented 'ambiguities... outside of two-point scalar boundary-value problems'",
+    "L1b_repo_internal_two_gauge_conditions": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTED.md sec 4: exactly two scalar gauge conditions measured necessary to remove the 2-parameter symmetry kernel",
+    "L2_numpy_atleast_2d": "https://numpy.org/doc/stable/reference/generated/numpy.atleast_2d.html -- a 1-D input is always reshaped to (1, N), a row",
+    "L3_numpy_complexwarning": "https://numpy.org/doc/stable/reference/generated/numpy.exceptions.ComplexWarning.html -- casting complex to real discards the imaginary part and warns, does not raise"
+  },
+  "seed": 20260806,
+  "G1_grid_collapse": {
+    "rows_vs_J": [
+      {
+        "J": 1,
+        "rows_retained": 0,
+        "rows_expected": 0
+      },
+      {
+        "J": 2,
+        "rows_retained": 1,
+        "rows_expected": 1
+      },
+      {
+        "J": 3,
+        "rows_retained": 2,
+        "rows_expected": 2
+      },
+      {
+        "J": 4,
+        "rows_retained": 3,
+        "rows_expected": 3
+      },
+      {
+        "J": 5,
+        "rows_retained": 4,
+        "rows_expected": 4
+      },
+      {
+        "J": 6,
+        "rows_retained": 5,
+        "rows_expected": 5
+      },
+      {
+        "J": 7,
+        "rows_retained": 6,
+        "rows_expected": 6
+      },
+      {
+        "J": 8,
+        "rows_retained": 7,
+        "rows_expected": 7
+      }
+    ],
+    "c_insensitivity_at_J1": {
+      "alpha": 1.5,
+      "results": [
+        {
+          "c": 0.0,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": 0.5,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": 1.0,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": 100.0,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": -50.0,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": 1000000.0,
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": "nan",
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": "inf",
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "c": "-inf",
+          "norm": 1.681792830507429,
+          "A": [
+            [
+              1.0
+            ]
+          ],
+          "M": [
+            [
+              1.0
+            ]
+          ]
+        }
+      ],
+      "all_bit_identical": true,
+      "predicted_closed_form": 1.681792830507429
+    },
+    "om_poison_at_J1": {
+      "alpha": 1.5,
+      "v_clean": 1.681792830507429,
+      "cases": [
+        {
+          "poison": "nan",
+          "om": "nan",
+          "c": "nan",
+          "norm": 1.681792830507429,
+          "identical_to_clean": true,
+          "jacobian_matrix_internally_poisoned": true
+        },
+        {
+          "poison": "+inf",
+          "om": "+inf",
+          "c": "+inf",
+          "norm": 1.681792830507429,
+          "identical_to_clean": true,
+          "jacobian_matrix_internally_poisoned": true
+        },
+        {
+          "poison": "-inf",
+          "om": "-inf",
+          "c": "-inf",
+          "norm": 1.681792830507429,
+          "identical_to_clean": true,
+          "jacobian_matrix_internally_poisoned": true
+        }
+      ],
+      "numpy_raised_runtime_warning_on_discarded_jacobian": false,
+      "all_identical_to_clean": true
+    },
+    "closed_form_multi_alpha": [
+      {
+        "alpha": 0.0,
+        "gauge": "origin",
+        "norm": 1.0,
+        "predicted": 1.0,
+        "match": "True"
+      },
+      {
+        "alpha": 0.0,
+        "gauge": "a0",
+        "norm": 1.0,
+        "predicted": 1.0,
+        "match": "True"
+      },
+      {
+        "alpha": 0.5,
+        "gauge": "origin",
+        "norm": 1.189207115002721,
+        "predicted": 1.189207115002721,
+        "match": "True"
+      },
+      {
+        "alpha": 0.5,
+        "gauge": "a0",
+        "norm": 1.189207115002721,
+        "predicted": 1.189207115002721,
+        "match": "True"
+      },
+      {
+        "alpha": 1.5,
+        "gauge": "origin",
+        "norm": 1.681792830507429,
+        "predicted": 1.681792830507429,
+        "match": "True"
+      },
+      {
+        "alpha": 1.5,
+        "gauge": "a0",
+        "norm": 1.681792830507429,
+        "predicted": 1.681792830507429,
+        "match": "True"
+      },
+      {
+        "alpha": 2.0,
+        "gauge": "origin",
+        "norm": 1.9999999999999998,
+        "predicted": 1.9999999999999998,
+        "match": "True"
+      },
+      {
+        "alpha": 2.0,
+        "gauge": "a0",
+        "norm": 1.9999999999999998,
+        "predicted": 1.9999999999999998,
+        "match": "True"
+      },
+      {
+        "alpha": 3.0,
+        "gauge": "origin",
+        "norm": 2.8284271247461894,
+        "predicted": 2.82842712474619,
+        "match": "True"
+      },
+      {
+        "alpha": 3.0,
+        "gauge": "a0",
+        "norm": 2.8284271247461894,
+        "predicted": 2.82842712474619,
+        "match": "True"
+      },
+      {
+        "alpha": -1.0,
+        "gauge": "origin",
+        "norm": 0.7071067811865476,
+        "predicted": 0.7071067811865476,
+        "match": "True"
+      },
+      {
+        "alpha": -1.0,
+        "gauge": "a0",
+        "norm": 0.7071067811865476,
+        "predicted": 0.7071067811865476,
+        "match": "True"
+      }
+    ],
+    "drop_insensitivity_at_J1": [
+      {
+        "drop": 0,
+        "norm": 1.681792830507429,
+        "M": [
+          [
+            1.0
+          ]
+        ],
+        "matches_default": true
+      },
+      {
+        "drop": 1,
+        "norm": 1.681792830507429,
+        "M": [
+          [
+            1.0
+          ]
+        ],
+        "matches_default": true
+      },
+      {
+        "drop": -1,
+        "norm": 1.681792830507429,
+        "M": [
+          [
+            1.0
+          ]
+        ],
+        "matches_default": true
+      },
+      {
+        "drop": 5,
+        "norm": 1.681792830507429,
+        "M": [
+          [
+            1.0
+          ]
+        ],
+        "matches_default": true
+      },
+      {
+        "drop": 100,
+        "norm": 1.681792830507429,
+        "M": [
+          [
+            1.0
+          ]
+        ],
+        "matches_default": true
+      }
+    ],
+    "c_sensitivity_control_J_geq_2": [
+      {
+        "J": 2,
+        "norm_c0p5": 1.0823922002923938,
+        "norm_c100": 4.134761883642342,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      },
+      {
+        "J": 3,
+        "norm_c0p5": 2.2047952186628024,
+        "norm_c100": 7.627409745185685,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      },
+      {
+        "J": 4,
+        "norm_c0p5": 3.0852486749848347,
+        "norm_c100": 11.319879529504115,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      },
+      {
+        "J": 5,
+        "norm_c0p5": 2.850724049449516,
+        "norm_c100": 16.1689223297413,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      },
+      {
+        "J": 8,
+        "norm_c0p5": 3.359001518507481,
+        "norm_c100": 31.613216569360088,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      },
+      {
+        "J": 16,
+        "norm_c0p5": 3.513137541199937,
+        "norm_c100": 88.70048224631682,
+        "sensitive_to_c": true,
+        "norm_nan_c": NaN,
+        "nan_c_propagates": true
+      }
+    ],
+    "degenerate_J_raises": {
+      "J0": "ZeroDivisionError: float division by zero",
+      "J-1": "ValueError: negative dimensions are not allowed",
+      "J-5": "ValueError: negative dimensions are not allowed"
+    },
+    "drop_out_of_range_raises_at_J8": {
+      "drop100": "ValueError: could not broadcast input array from shape (8,8) into shape (7,8)",
+      "drop-1": "ValueError: could not broadcast input array from shape (8,8) into shape (7,8)",
+      "drop8": "ValueError: could not broadcast input array from shape (8,8) into shape (7,8)",
+      "gauge_bogus": "KeyError: 'bogus'"
+    },
+    "downstream_exposure": {
+      "declared_J_by_caller": {
+        "test_decay_collocation.py": [
+          64,
+          128,
+          200,
+          400,
+          "sweep 8..~2000 (refinement ladder)"
+        ],
+        "experiments/p2_route_d_v4_graded.py (J_LADDER)": [
+          125,
+          250,
+          500,
+          1000,
+          2000
+        ],
+        "test_op_lower.py": [
+          "sweep, smallest observed >= 8"
+        ],
+        "test_nk_bounds.py": [
+          300,
+          600,
+          1200
+        ],
+        "test_nk_seminorm.py": [
+          1200,
+          400
+        ],
+        "test_holder_norms.py": [
+          150
+        ],
+        "solver/turning_point.py / test_turning_point.py": [
+          200
+        ],
+        "test_first_integral.py": [
+          1600
+        ]
+      },
+      "min_J_ever_declared_in_repo": 8,
+      "J1_reached_by_any_banked_run": false,
+      "verdict": "LATENT: no in-repo caller has ever used J below 8, let alone J = 1."
+    }
+  },
+  "G2_shape_ambiguous_sup_op_norm": {
+    "worked_example": {
+      "A_flat": [
+        10.0,
+        1.0,
+        1.0
+      ],
+      "intended_orientation": "(3,1) column: 3 domain slots into 1 codomain slot",
+      "flat_1d_result": 12.0,
+      "correct_column_result": 10.0,
+      "silently_reinterpreted_as_row_result": 12.0,
+      "flat_matches_correct": false,
+      "flat_matches_wrong_row": true
+    },
+    "randomized_battery": {
+      "n_cases": 30,
+      "n_mismatches": 30,
+      "mismatch_rate": 1.0,
+      "worst_ratio": 4.286456466553789,
+      "cases_sample": [
+        {
+          "n": 4,
+          "flat_result": 47.863530574525136,
+          "column_result": 18.422930510196768,
+          "mismatch": true
+        },
+        {
+          "n": 4,
+          "flat_result": 19.277669375195686,
+          "column_result": 12.287364487791113,
+          "mismatch": true
+        },
+        {
+          "n": 3,
+          "flat_result": 27.794779542182454,
+          "column_result": 19.645366263738627,
+          "mismatch": true
+        },
+        {
+          "n": 6,
+          "flat_result": 76.78408422441441,
+          "column_result": 19.907185790742403,
+          "mismatch": true
+        },
+        {
+          "n": 3,
+          "flat_result": 26.933051284845725,
+          "column_result": 11.453041665816496,
+          "mismatch": true
+        }
+      ]
+    },
+    "explicit_2d_control": {
+      "explicit_2d_atleast_2d_is_noop": true
+    }
+  },
+  "G3_complex_alpha": {
+    "silently_downcast": {
+      "cases": [
+        {
+          "alpha_real": 1.0,
+          "alpha_imag": 0.0,
+          "returned": 0.9987954562051724,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9987954562051724,
+          "matches_real_part_only": true
+        },
+        {
+          "alpha_real": 1.5,
+          "alpha_imag": 1e-10,
+          "returned": 0.9993975466275532,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9993975466275532,
+          "matches_real_part_only": true
+        },
+        {
+          "alpha_real": 1.5,
+          "alpha_imag": 0.1,
+          "returned": 0.9993975393685521,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9993975466275532,
+          "matches_real_part_only": false
+        },
+        {
+          "alpha_real": 1.5,
+          "alpha_imag": 1.0,
+          "returned": 0.9993968207275311,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9993975466275532,
+          "matches_real_part_only": false
+        },
+        {
+          "alpha_real": 0.0,
+          "alpha_imag": 1.0,
+          "returned": 0.9975916387472489,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9975923633360985,
+          "matches_real_part_only": false
+        },
+        {
+          "alpha_real": -1.0,
+          "alpha_imag": 2.0,
+          "returned": 0.9963878247819236,
+          "warning_categories": [
+            "ComplexWarning"
+          ],
+          "raised_exception": false,
+          "real_part_only_would_give": 0.9963907196450745,
+          "matches_real_part_only": false
+        }
+      ],
+      "n_cases": 6,
+      "n_silently_diverging_from_real_part_answer": 4,
+      "n_that_raised": 0
+    },
+    "python_builtin_contrast": {
+      "python_builtin_float_raises_TypeError": true,
+      "python_error_message": "float() argument must be a string or a real number, not 'complex'",
+      "numpy_float_result": 1.0,
+      "numpy_warning_categories": [
+        "ComplexWarning"
+      ],
+      "numpy_raises_exception": false
+    },
+    "full_pipeline": {
+      "alpha": "1.5+0.3j",
+      "graded_inverse_norm_result": 3.5626111859714866,
+      "is_finite_float": "True",
+      "raised_exception": false,
+      "warning_categories": [
+        "ComplexWarning",
+        "ComplexWarning"
+      ]
+    }
+  },
+  "G4_passes_and_raises": {
+    "nan_propagates_at_ordinary_J": {
+      "cases": 12,
+      "propagated": 12,
+      "all_propagated": true
+    },
+    "alpha2_no_blowup": {
+      "cases": [
+        {
+          "alpha": 1.9999,
+          "norm": 9.985302841957303,
+          "finite": "True"
+        },
+        {
+          "alpha": 2.0,
+          "norm": 9.98781914521039,
+          "finite": "True"
+        },
+        {
+          "alpha": 2.0001,
+          "norm": 9.990336232479438,
+          "finite": "True"
+        }
+      ],
+      "all_finite_and_smooth": true
+    }
+  },
+  "gate_answer": "YES",
+  "findings": {
+    "G1_headline": "At J=1, graded_inverse_norm's reported value is bit-identical whether c and the nodal field om are clean, NaN-poisoned, or Inf-poisoned, and regardless of `drop` or `gauge` choice -- it always equals the closed form (1+X_0^2)^(alpha/2), a function of alpha alone. No exception, no NaN in the output, despite numpy raising internal RuntimeWarnings while computing the (fully discarded) jacobian_matrix.",
+    "G2_headline": "sup_op_norm silently reinterprets a 1-D array's domain/codomain axes via np.atleast_2d's row-vector default. 30/30 randomized cases mismatch between the ambiguous flat call and the explicit-column call; worked example returns 12.0 instead of the correct 10.0.",
+    "G3_headline": "A complex-valued (type-degenerate) alpha runs to completion through norm_domain/norm_codomain/graded_inverse_norm and is silently downcast to float via NumPy's non-fatal ComplexWarning, discarding a measured dependence on the imaginary part -- where Python's own float() would raise TypeError."
+  },
+  "downstream_exposure_summary": "G1: no in-repo caller has EVER used J below 8 (grepped census in G1_grid_collapse.downstream_exposure); LATENT, same severity shape as legs 66/69/79/120. G2: sup_op_norm's only in-repo call site is inside graded_inverse_norm itself, which always passes a 2-D matrix from np.linalg.inv -- LATENT as a public-API hazard, no banked call site reachable. G3: no in-repo caller passes a complex alpha -- LATENT.",
+  "banked_numbers_at_risk": 0
+}
