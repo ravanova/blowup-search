@@ -30,7 +30,7 @@ prose as before.
 | B | 249 | H2CV2 | no |
 | C | 251 | P0T | yes |
 | D | 221 | BVRR | no |
-| E | 255 | P1A | yes |
+| E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
 | G | 256 | P1B | yes |
 | H | 257 | P1C | yes |
@@ -38,10 +38,10 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-C refill): 6/10 floor-eligible --
-A/253/NRSX, C/251/P0T, E/255/P1A, F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the
-"Slot-C refill" DM update at the tail of this file. 251 replaced 254 (DSSX) in slot C
-after 254 finished and escalated its cost-shaped finding, vacating the slot per §4a.)
+(Current snapshot, DM update of 2026-08-07 (slot-E refill): 5/10 floor-eligible --
+A/253/NRSX, C/251/P0T, F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the "Slot-E refill"
+DM update at the tail of this file. 248 (CNR2, repair, resuming from its WIP salvage)
+replaced 255 (P1A) in slot E after 255 landed clean and independently verified.)
 
 ---
 
@@ -10386,3 +10386,74 @@ number: **261.**
 Nothing in this update lifts a ban (the user lifted/re-posed Entry B; this DM only
 records it), changes any committed gate, or moves any claim about Walls 1 and 2; Clay
 stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — slot-E refill: 255 (P1A) LANDED AND VERIFIED (2 survivors,
+both non-fluid; the fluid-adjacent candidate killed on a Leray-projection screen); 248
+(CNR2) promoted per the pre-committed order; fresh candidate 261 drafted per the trigger
+
+**255 (P1A) landed clean and was independently §7b-verified** (`891ebaf`, `72258f0`).
+Finding, recorded at full strength: the four-screen census yields **2 survivors, both
+NON-fluid; the single fluid-adjacent candidate was killed on a Leray-projection screen.**
+If that kill stands, leg 174's empty target cell (`fluid_adjacent=True, grade=A`) has no
+reachable occupant among known models under the census's evidence tier — which would be
+the most consequential negative Phase 1 could produce. **This DM deliberately does NOT
+redirect Phase 1 on it yet**: 257 (P1C) is independently scoping the same question with
+255's finding forwarded, and may confirm or contest both the kill and the survivor list.
+The right moment to re-pose Phase 1 (if needed) is when 257 lands — one leg's read is not
+a programme redirect, per the same discipline that keeps one measurement from moving a
+banked claim.
+
+**Slot E: leg 248 (Route-CNR2) promoted, per the pre-committed reserve order** — no gate
+answer changed 248's ranking. Resume from `leg/248-cnr2-v1-wip`; spec and gate unchanged;
+brief carries the hardened anti-pausing clause verbatim.
+
+**Pre-committed trigger fired (fresh drafting in the same update that promotes any of
+248/228/210):**
+
+```
+### 261 — ROUTE-P1A2: THE FLUID CENSUS UNDER A RELAXED EVIDENCE TIER (Phase 1's fallback
+question, drafted BEFORE it is needed — dispatchable only after 257 lands)
+[FLOOR-ELIGIBLE: literature]
+**Thesis.** 255's census required proved-or-strongly-supported dissipative blow-up
+(screen (i)) and found the fluid cell empty. Its own no-branch anticipated exactly this
+contingency: "report which screen does most of the killing, as direct input to whether
+Phase 1 needs a weaker screen (i) tier." This leg runs the fluid-only census under a
+RELAXED tier — conjectured dissipative blow-up with serious numerical evidence, explicitly
+labeled as such — plus a direct re-examination of the Leray-projection kill's scope
+(which fluid models it actually reaches, not just the one candidate 255 tested). It
+extends 255's table; it does not contradict or reopen it.
+**Gate.** Under the relaxed tier, does at least one FLUID model enter the census with all
+other screens ((ii) profile, (iii) uncertified, (iv) Breden-Chu reach) still passing, with
+the evidence-tier downgrade carried explicitly per-row?
+  yes -> Bank the extended table with the tier labels prominent. These are Phase-1
+         fallback candidates, weaker-evidenced by construction — reportable to the user
+         alongside 257's verdict, never silently substituted for 255's tier-1 census.
+  no -> The fluid cell is empty even under the relaxed tier — report which screen kills
+        each candidate. Combined with 255 and 257, that would be the measured basis for
+        re-posing Phase 1's target itself (a user decision, not this leg's).
+**Territory.** experiments/p2_route_p1a2_v1_census2.py,
+               writeup/data/p2_route_p1a2_v1_census2.json,
+               writeup/novelty/leg_261.md, experiments/journal/leg_261.md.
+               Reads (never edits) 255's banked census table/JSON, 257's report once
+               landed, leg 174's matrix, capabilities.py.
+**Difficulty.** standard
+**Independence.** Own module; extends (never edits) 255's banked artifacts. **NOT
+dispatchable until 257 (P1C) lands** — its brief must carry 257's confirm/contest of the
+Leray-projection kill, else it re-litigates a question already in flight.
+```
+
+**FLOOR-TABLE block updated in this same edit** (E: 255 → 248). **Floor status: 5/10
+strictly (253, 251, 236, 256, 257) — met with margin.**
+
+**Canonical reserve line: reserve count 10 — legs 228, 210, 260, 259, 261, 229, 231, 232,
+233, 234.** Effective immediately-dispatchable: 4 (228, 210, 260, 259 — in that priority
+order; 260's pre-committed promotion trigger on a DSS-conditional 251 landing stands);
+261 blocked on 257; 229 blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next
+fresh leg number: **262.**
+
+Nothing in this update lifts a ban, changes any committed gate, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised — 255's finding is
+consequential but the pre-committed answer (wait for 257, then re-pose if needed, with
+the user) is already on record above.
