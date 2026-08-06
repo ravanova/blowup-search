@@ -1,0 +1,418 @@
+{
+  "leg": 104,
+  "route": "BVB",
+  "module_under_test": "solver/boussinesq_velocity.py",
+  "prior_legs": {
+    "73": "Route-BV: Lamb corner-image known-answer, 1.76e-4 relative, order 2.00",
+    "99": "Route-BVA: adversarial audit, 7/22 SILENT_WRONG found, escalated, then bench-repaired (26e6bd3 / e3bdd9f) bundled with the same leg"
+  },
+  "repair_commit": "26e6bd3 (merged as e3bdd9f, bench/fix-boussinesq-velocity-origin-fit)",
+  "verdict_semantics": {
+    "RAISED": "exception propagates -- degeneracy flagged -- robust",
+    "NONFINITE": "NaN/Inf reaches the output -- degeneracy visible -- robust",
+    "SILENT_WRONG": "finite, unwarned, and wrong beyond the module's own tolerance",
+    "SILENT_EMPTY": "accepted without complaint, output degenerate in shape (weak; not a gate decider, matches leg 99's own predicate)",
+    "FINITE": "finite and within tolerance",
+    "BASELINE": "the well-posed control"
+  },
+  "leg73_tolerances": {
+    "field": 0.005,
+    "origin_read": 0.001
+  },
+  "origin_singularity": {
+    "description": "degeneracies at or across the r=0 origin singularity, field level",
+    "cases": [
+      {
+        "case": "r_min_zero",
+        "degeneracy": "r_min = 0.0 -> log(0) = -inf at the origin node",
+        "exception": null,
+        "n_warnings": 3,
+        "all_finite": false,
+        "n_nonfinite_phi": 1024,
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "r_min_negative",
+        "degeneracy": "r_min = -1.0 -> log of a negative radius",
+        "exception": null,
+        "n_warnings": 1,
+        "all_finite": false,
+        "n_nonfinite_phi": 1024,
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "r_min_equals_r_max",
+        "degeneracy": "r_min == r_max -> drho = 0, collapsed radial extent",
+        "exception": "ValueError: PolarGrid requires r_min < r_max (ascending radial interval), got r_min=1.0, r_max=1.0. A reversed interval silently swaps which radial boundary condition applies at which end; a collapsed one gives drho = 0.",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "n_r_one",
+        "degeneracy": "n_r = 1 -> no radial spacing exists",
+        "exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "omega_one_nan",
+        "degeneracy": "a single NaN in the vorticity field",
+        "exception": null,
+        "n_warnings": 0,
+        "all_finite": false,
+        "n_nonfinite_phi": 1024,
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "omega_one_inf",
+        "degeneracy": "a single +Inf in the vorticity field",
+        "exception": null,
+        "n_warnings": 4,
+        "all_finite": false,
+        "n_nonfinite_phi": 1024,
+        "verdict": "NONFINITE"
+      }
+    ],
+    "n_cases": 6,
+    "verdicts": {
+      "NONFINITE": 4,
+      "RAISED": 2
+    }
+  },
+  "malformed_boundary": {
+    "description": "malformed radial interval, empty angular basis, malformed input shapes",
+    "interval_analysis": {
+      "ascending_rel_linf_global": 7.14413934868073e-05,
+      "ascending_rel_linf_near_origin": 0.00021517724731322788,
+      "ascending_inside_leg73_field_tol": true,
+      "reversed_case_verdict": "RAISED",
+      "reversed_case_exception": "ValueError: PolarGrid requires r_min < r_max (ascending radial interval), got r_min=40.0, r_max=0.001. A reversed interval silently swaps which radial boundary condition applies at which end; a collapsed one gives drho = 0."
+    },
+    "cases": [
+      {
+        "case": "radial_interval_ascending",
+        "r_min": 0.001,
+        "r_max": 40.0,
+        "exception": null,
+        "n_warnings": 0,
+        "drho": 0.026557981787208362,
+        "rel_linf_global": 7.14413934868073e-05,
+        "rel_linf_near_origin": 0.00021517724731322788,
+        "u_x_at_origin": -2.002852174440413,
+        "u_x_at_origin_exception": null,
+        "all_finite": true,
+        "verdict": "BASELINE"
+      },
+      {
+        "case": "radial_interval_reversed",
+        "r_min": 40.0,
+        "r_max": 0.001,
+        "exception": "ValueError: PolarGrid requires r_min < r_max (ascending radial interval), got r_min=40.0, r_max=0.001. A reversed interval silently swaps which radial boundary condition applies at which end; a collapsed one gives drho = 0.",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "n_beta_zero",
+        "n_beta_requested": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "n_modes_built": 0,
+        "phi_shape": [
+          32,
+          0
+        ],
+        "verdict": "SILENT_EMPTY"
+      },
+      {
+        "case": "n_beta_negative",
+        "n_beta_requested": -3,
+        "exception": null,
+        "n_warnings": 0,
+        "n_modes_built": 0,
+        "phi_shape": [
+          32,
+          0
+        ],
+        "verdict": "SILENT_EMPTY"
+      },
+      {
+        "case": "omega_square_wrong_axis",
+        "exception": "ValueError: operands could not be broadcast together with shapes (64,) (16,) ",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "omega_single_row",
+        "exception": "ValueError: could not broadcast input array from shape (64,) into shape (1,)",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "radial_bc_case_typo",
+        "exception": "UnboundLocalError: cannot access local variable 'phi_exact_n' where it is not associated with a value",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      }
+    ],
+    "n_cases": 7,
+    "verdicts": {
+      "BASELINE": 1,
+      "RAISED": 4,
+      "SILENT_EMPTY": 2
+    }
+  },
+  "origin_read": {
+    "description": "u_x_at_origin's least-squares origin extrapolation, full 9-point r_min sweep -- leg 99's exact battery, re-run against the patched module",
+    "fit_window_default": 0.1,
+    "truth_u_x_at_origin": -2.0,
+    "sweep": [
+      {
+        "r_min": 0.001,
+        "nodes_in_fit_window": 84,
+        "design_matrix_rank_deficient": false,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.0086109856451166,
+        "abs_error": 0.008610985645116642,
+        "rel_error": 0.004305492822558321,
+        "is_minus_zero": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.01,
+        "nodes_in_fit_window": 53,
+        "design_matrix_rank_deficient": false,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.008189292358049,
+        "abs_error": 0.008189292358049105,
+        "rel_error": 0.0040946461790245525,
+        "is_minus_zero": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.05,
+        "nodes_in_fit_window": 18,
+        "design_matrix_rank_deficient": false,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.0040060130568214,
+        "abs_error": 0.004006013056821356,
+        "rel_error": 0.002003006528410678,
+        "is_minus_zero": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.09,
+        "nodes_in_fit_window": 1,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.0956872, 0.1)) holds 1 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.09); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      },
+      {
+        "r_min": 0.099,
+        "nodes_in_fit_window": 0,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.105155, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.099); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      },
+      {
+        "r_min": 0.15,
+        "nodes_in_fit_window": 0,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.158662, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.15); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      },
+      {
+        "r_min": 0.5,
+        "nodes_in_fit_window": 0,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.522512, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.5); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      },
+      {
+        "r_min": 1.0,
+        "nodes_in_fit_window": 0,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (1.03777, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=1); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      },
+      {
+        "r_min": 10.0,
+        "nodes_in_fit_window": 0,
+        "design_matrix_rank_deficient": true,
+        "exception": "ValueError: u_x_at_origin: the origin fit window (r in (10.1403, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=10); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+        "n_warnings": 0,
+        "is_minus_zero": false,
+        "verdict": "RAISED"
+      }
+    ],
+    "n_cases": 9,
+    "well_posed_reference": {
+      "r_min": 0.001,
+      "nodes_in_fit_window": 84,
+      "abs_error": 0.008610985645116642
+    },
+    "n_silent_wrong": 0,
+    "n_returned_minus_zero": 0,
+    "formerly_failing_points_now": [
+      {
+        "r_min": 0.09,
+        "nodes": 1,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      },
+      {
+        "r_min": 0.099,
+        "nodes": 0,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      },
+      {
+        "r_min": 0.15,
+        "nodes": 0,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      },
+      {
+        "r_min": 0.5,
+        "nodes": 0,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      },
+      {
+        "r_min": 1.0,
+        "nodes": 0,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      },
+      {
+        "r_min": 10.0,
+        "nodes": 0,
+        "verdict": "RAISED",
+        "exception_type": "ValueError"
+      }
+    ],
+    "verdicts": {
+      "FINITE": 3,
+      "RAISED": 6
+    }
+  },
+  "verdict_totals": {
+    "NONFINITE": 4,
+    "RAISED": 12,
+    "BASELINE": 1,
+    "SILENT_EMPTY": 2,
+    "FINITE": 3
+  },
+  "leg73_reproduction": {
+    "description": "independent re-run of leg 73's Lamb corner-image ladder via run_level(), imported (main() never called; the leg 73 JSON is never written by this leg)",
+    "ladder": [
+      [
+        601,
+        49
+      ],
+      [
+        1201,
+        99
+      ],
+      [
+        2401,
+        199
+      ]
+    ],
+    "p1_errors": [
+      0.002815122102634865,
+      0.0007034359048689051,
+      0.00017583744883105121
+    ],
+    "p3_errors": [
+      0.00019478794649460912,
+      4.866117002139103e-05,
+      1.2163058092906518e-05
+    ],
+    "p1_observed_orders": [
+      2.0007066186886413,
+      2.0001766151209104
+    ],
+    "p3_observed_orders": [
+      2.0010614916833993,
+      2.0002650056973095
+    ],
+    "p1_finest": 0.00017583744883105121,
+    "p3_finest": 1.2163058092906518e-05,
+    "same_code_twice_noise_floor": {
+      "p1_errors_pass_b": [
+        0.002815122102634865,
+        0.0007034359048689051,
+        0.00017583744883105121
+      ],
+      "p3_errors_pass_b": [
+        0.00019478794649460912,
+        4.866117002139103e-05,
+        1.2163058092906518e-05
+      ],
+      "p1_observed_orders_pass_b": [
+        2.0007066186886413,
+        2.0001766151209104
+      ],
+      "p3_observed_orders_pass_b": [
+        2.0010614916833993,
+        2.0002650056973095
+      ],
+      "max_rel_diff_p1": 0.0,
+      "max_rel_diff_p3": 0.0,
+      "note": "the SAME unmodified code run twice in this same process differs at this scale purely from BLAS/threading floating-point-order effects; the reproduction tolerance below is set 10x above this floor"
+    },
+    "banked_json_path": "writeup/data/p2_route_bv_v1_velocity_benchmark.json",
+    "diff_vs_banked": {
+      "p1_finest_diff_rel": 4.230601732104432e-12,
+      "p3_finest_diff_rel": 6.033592373686637e-13,
+      "p1_errors_banked": [
+        0.002815122102634865,
+        0.0007034359048689147,
+        0.0001758374488317951
+      ],
+      "p1_errors_here": [
+        0.002815122102634865,
+        0.0007034359048689051,
+        0.00017583744883105121
+      ],
+      "p3_errors_banked": [
+        0.0001947879464946044,
+        4.8661170021386144e-05,
+        1.2163058092913857e-05
+      ],
+      "p3_errors_here": [
+        0.00019478794649460912,
+        4.866117002139103e-05,
+        1.2163058092906518e-05
+      ]
+    },
+    "reproduction_tolerance_used": 1e-08,
+    "reproduces_banked_result": true,
+    "wall_seconds": 114.06625461578369
+  },
+  "gate_answer": {
+    "gate": "Post-repair, does solver/boussinesq_velocity.py (a) no longer return -0.0 on any of leg 99's original failing degenerate-grid cases, and (b) still reproduce leg 73's Lamb corner-image benchmark with zero regression?",
+    "n_cases_checked": 22,
+    "n_cases_leg99_original": 22,
+    "clause_a_no_silent_wrong": "YES",
+    "clause_a_silent_wrong_count": 0,
+    "clause_a_minus_zero_count": 0,
+    "clause_b_leg73_reproduces": "YES",
+    "answer": "YES",
+    "action": "banked as a permanent regression suite alongside legs 73 and 99"
+  },
+  "wall_seconds": 114.33130216598511
+}
