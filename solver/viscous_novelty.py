@@ -175,6 +175,50 @@ PRECEDENTS = [
         "verdict": "EXCLUSION",
         "gate": None,
     },
+    # Appended by leg 197 (Route-VNL), append-only: this row was FOUND and characterized at
+    # primary-source depth by leg 174 (Route-VBS, writeup/data/p2_route_vbs_v1_scoping.json,
+    # ledger key "BCG-NS") but never reached this shared ledger -- leg 174's own audit
+    # recorded `arXiv_2208.09445_in_viscous_novelty_PRECEDENTS: false`, and none of the 12
+    # SEARCH_LOG queries above mentions compressible/implosion/imploding, so stage V's gate
+    # could not have reached it.  The `what`/`dial`/`rigor` text below is leg 174's Grade-B
+    # characterization, transcribed; `experiments/p2_route_vnl_v1_ledger.py` checks the
+    # transcription against leg 174's JSON rather than trusting this comment.
+    {
+        "id": "arXiv:2208.09445",
+        "who": "Buckmaster, Cao-Labora, Gomez-Serrano",
+        "what": "Smooth imploding solutions for 3D compressible fluids (Forum of Math Pi 13 "
+                "(2025) e6, doi 10.1017/fmp.2024.12). Theorem 1.3 is finite-time singularity "
+                "formation for the 3D isentropic compressible NAVIER-STOKES equations from "
+                "smooth, finite-energy data with density constant at infinity -- a genuine "
+                "viscous fluid equation. GRADE B, not A (leg 174's distinction): the object "
+                "the interval arithmetic encloses is the self-similar profile solving system "
+                "(1.5), the ODE reduction of the INVISCID compressible Euler system (1.3); "
+                "Navier-Stokes is reached from it by the analytic stability argument of "
+                "sections 7-8. The viscous term is DOMINATED, not enclosed -- section 7: "
+                "'in the Navier-Stokes case we need to restrict the parameter r to a regime "
+                "where the self-similar profile dominates the dissipation', i.e. dissipation "
+                "becomes an exponentially decaying forcing in self-similar time rather than "
+                "sitting at the leading scaling order as eps does in DF-CGL.",
+        "dial": "none followed; the dissipation (Lame viscosities mu_1 > 0, 2 mu_1 + mu_2 > 0) "
+                "is OUTSIDE the certified object -- it is dominated by the choice of "
+                "self-similar exponent r, not enclosed",
+        "rigor": "computer-assisted proof, interval arithmetic, essential and non-removable: "
+                 "the first 10000 Taylor coefficient pairs (W_j, Z_j) at r = r*, with rigorous "
+                 "error bounds, ~14 hours on a single CPU (section 1.3); Lemmas A.27/A.28 and "
+                 "Appendix B 'Implementation details of the computer-assisted part'. Remove "
+                 "the computer and the theorem does not stand as published.",
+        "verdict": "EXCLUSION",
+        "gate": None,
+        # leg-197 provenance fields; the seven fields above are the schema the gate reads.
+        "grade": "B",
+        "banked_by": "leg 174 (Route-VBS), ledger key BCG-NS",
+        "why_exclusion_not_pre_empts": "this module's vocabulary grades the CERTIFIED object: "
+            "PRE_EMPTS requires certification-under-dissipation of the profile itself. BCG's "
+            "certified equation carries no dissipative term, so it lands with the other "
+            "inviscid-certificate rows (Chen-Hou), exactly as leg 113 filed it "
+            "(clause_2_inviscid: True). It is nonetheless the strongest fluid-adjacent "
+            "occupant of the rung, and its absence here is what made the rung look empty.",
+    },
 ]
 
 # the arXiv queries that produced the ledger, kept so the check can be re-run and so a

@@ -39,8 +39,8 @@ the solution exists.
 
 ## Where it exists — and the check that stopped me over-claiming
 
-Newton also converged at large advection strength, past the survival boundary the
-GA had mapped. For about an hour that looked like the headline: the boundary is a
+Newton also converged at large (still positive) advection strength, past the survival
+boundary the GA had mapped on positive `a`. For about an hour that looked like the headline: the boundary is a
 genome artifact.
 
 It is not. Machine precision on a discrete system proves nothing on its own — a

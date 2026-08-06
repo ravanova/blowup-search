@@ -1,4 +1,15 @@
-# Phase-2 P2 — Does HQW25's exact two-scale traveling wave survive gCLM advection? A global GA fixed-point map
+# Phase-2 P2 — Does HQW25's exact a=0 two-scale traveling wave survive gCLM advection into a>0? A global GA fixed-point map
+
+> **SCOPE OF THE WORD "TWO-SCALE" IN THIS NOTE (corrected, leg 180).** The sweep runs over
+> `a ∈ {0, 0.1, …, 1.0}` — i.e. the whole map is `a ≥ 0`, and every non-trivial point is
+> `a > 0`. "Two-scale" here names the **residual** `R₂` of §1 and its `a = 0` anchor
+> (HQW25's exact CLM traveling wave), not the published two-scale self-similar blowup
+> *scenario*: Huang–Tong–Wang (`arXiv:2603.25104`, full text read at leg 112) scope that
+> scenario to **`a ≤ 0`** and report *one-scale* self-similar blowups for `a > 0`, as a
+> statement about **degenerate initial data**. Nothing here continues that scenario into
+> `a > 0`. What is continued into `a > 0` is the `a = 0` traveling-wave profile, an object
+> whose existence at positive `a` is itself published (same paper, Theorem 2.7, every
+> `a ∈ (−∞, 1)`; Theorem 7.10(3) for its compact support at `0 < a < 1`).
 
 **Status: a novel toy-model result (Tier-1/2), NOT a Clay solve.** This note maps
 how the Constantin–Lax–Majda (CLM) two-scale self-similar blowup — proved exact by
@@ -118,8 +129,8 @@ Predicate T1–T6 (scale-/gauge-invariant observables), verdict **descriptive
 
 ## 6. What the map says (honestly)
 
-**HQW25's exact a=0 two-scale traveling wave deforms _smoothly_ under advection —
-there is no sharp collapse at a critical `a*`.** (Fig17 Panel B.) The scale-
+**HQW25's exact a=0 two-scale traveling wave deforms _smoothly_ as advection is turned
+on into `a > 0` — there is no sharp collapse at a critical `a*`.** (Fig17 Panel B.) The scale-
 invariant residual floor is machine-zero at a=0, stays `< 10⁻²` out to `a_p ≈ 0.4`
 (a deformed-but-present traveling two-scale profile), then rises monotonically to
 `≈ 0.18` at a=1 (De Gregorio). The profile **stays even** the whole way — the
@@ -143,9 +154,12 @@ robust to genome enrichment, while the middle is not.
 ## 7. Scope: what this is and isn't
 
 New, to our knowledge: nobody has mapped how CLM's proven two-scale traveling wave
-behaves under gCLM advection. It uses HQW25's exact anchor and the §9 GA
+behaves under gCLM advection at `a > 0`. It uses HQW25's exact anchor and the §9 GA
 machinery. But:
 
+- the domain is **`a > 0`** (plus the `a = 0` anchor). The published two-scale
+  self-similar blowup *scenario* is scoped to `a ≤ 0` (`arXiv:2603.25104`), which this
+  map neither tests nor extends — see the scope box at the top;
 - a GA minimizing a residual **proves nothing** — this is Tier-1/2 evidence, not a
   Tier-3 proof;
 - the map is **genome-relative** (T4) — an upper bound on the true residual;

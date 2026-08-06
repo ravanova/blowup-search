@@ -129,8 +129,9 @@ the same mechanism.
 
 ## The boundary, and a coincidence that did not survive
 
-This project has confirmed four separate times that the two-scale structure stops
-existing somewhere around `a ≈ 0.5`, and has never had a mechanism for it. Two
+This project has confirmed four separate times that the two-scale structure inherited from
+the exact `a = 0` wave stops existing somewhere around `a ≈ 0.5` — that is, as `a` is turned
+*up* from zero, on positive `a` throughout — and has never had a mechanism for it. Two
 were available here. The critical radius shrinks steadily as `a` grows — at
 `a = 0.5` it is down to about three times the profile's own width — which is a
 geometric story: eventually there is no room for two scales. And the zero's order

@@ -1,0 +1,692 @@
+{
+  "leg": 220,
+  "route": "TNR",
+  "role": "LEG",
+  "what": "the repair of solver/target_norm.py's domain-guard WINDOW: the guard tested |Xt| <= max|X| and now tests X.min() <= Xt <= X.max()",
+  "repairs_finding_of": "leg 204 (Route-TNA2), finding 1",
+  "pre_repair_ref": "dc812c1",
+  "gate": "Does repairing the domain guard to window on the true data interval (per leg 204's own identified mechanism) cause the asymmetric-grid extrapolation case to now be correctly flagged (n_outside_grid>0/domain_valid=False), while leg 55's own banked margins and every other live call stay bit-identical?",
+  "gate_answer": "YES",
+  "A_zero_regression": {
+    "what": "A/B of the repaired module against the pre-repair module loaded from git dc812c1, both in the same process; every value the old module returned must be bit-identical on raw float64, only new KEYS may appear.  All eight cases are on grids SYMMETRIC about zero, which is what every live caller supplies",
+    "pre_repair_ref": "dc812c1",
+    "cases": [
+      {
+        "case": "in-window     rho_max=12, power, order=8",
+        "far_field": "power",
+        "interp_order": 8,
+        "X_lo_data": -40688.69785321492,
+        "X_hi_data": 40688.69785321492,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 0,
+        "n_outside_grid_repaired": 0,
+        "domain_valid_prerepair": true,
+        "domain_valid_repaired": true,
+        "p_prerepair": 1.403855224594087,
+        "p_repaired": 1.403855224594087,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.10385522459408691,
+        "margin_repaired": 0.10385522459408691,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "in-window     rho_max=12, power, order=4",
+        "far_field": "power",
+        "interp_order": 4,
+        "X_lo_data": -40688.69785321492,
+        "X_hi_data": 40688.69785321492,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 0,
+        "n_outside_grid_repaired": 0,
+        "domain_valid_prerepair": true,
+        "domain_valid_repaired": true,
+        "p_prerepair": 1.4038552325151292,
+        "p_repaired": 1.4038552325151292,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.10385523251512918,
+        "margin_repaired": 0.10385523251512918,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8,  power",
+        "far_field": "power",
+        "interp_order": 8,
+        "X_lo_data": -745.2394128947751,
+        "X_hi_data": 745.2394128947751,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 14,
+        "n_outside_grid_repaired": 14,
+        "domain_valid_prerepair": false,
+        "domain_valid_repaired": false,
+        "p_prerepair": 1.4038551509334543,
+        "p_repaired": 1.4038551509334543,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.10385515093345421,
+        "margin_repaired": 0.10385515093345421,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8,  clamp",
+        "far_field": "clamp",
+        "interp_order": 8,
+        "X_lo_data": -745.2394128947751,
+        "X_hi_data": 745.2394128947751,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 14,
+        "n_outside_grid_repaired": 14,
+        "domain_valid_prerepair": false,
+        "domain_valid_repaired": false,
+        "p_prerepair": 1.5654159793146842,
+        "p_repaired": 1.5654159793146842,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.2654159793146842,
+        "margin_repaired": 0.2654159793146842,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8,  zero",
+        "far_field": "zero",
+        "interp_order": 8,
+        "X_lo_data": -745.2394128947751,
+        "X_hi_data": 745.2394128947751,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 14,
+        "n_outside_grid_repaired": 14,
+        "domain_valid_prerepair": false,
+        "domain_valid_repaired": false,
+        "p_prerepair": 1.148838972163285,
+        "p_repaired": 1.148838972163285,
+        "p_bit_identical": true,
+        "margin_prerepair": -0.15116102783671503,
+        "margin_repaired": -0.15116102783671503,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=6,  n=201, power",
+        "far_field": "power",
+        "interp_order": 8,
+        "X_lo_data": -100.85657868513961,
+        "X_hi_data": 100.85657868513961,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 104,
+        "n_outside_grid_repaired": 104,
+        "domain_valid_prerepair": false,
+        "domain_valid_repaired": false,
+        "p_prerepair": 1.4038755533402747,
+        "p_repaired": 1.4038755533402747,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.10387555334027465,
+        "margin_repaired": 0.10387555334027465,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=6,  n=201, clamp",
+        "far_field": "clamp",
+        "interp_order": 8,
+        "X_lo_data": -100.85657868513961,
+        "X_hi_data": 100.85657868513961,
+        "grid_symmetric_to": 0.0,
+        "n_outside_grid_prerepair": 104,
+        "n_outside_grid_repaired": 104,
+        "domain_valid_prerepair": false,
+        "domain_valid_repaired": false,
+        "p_prerepair": 2.065889256733336,
+        "p_repaired": 2.065889256733336,
+        "p_bit_identical": true,
+        "margin_prerepair": 0.7658892567333357,
+        "margin_repaired": 0.7658892567333357,
+        "margin_bit_identical": true,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_hi_data",
+          "X_lo_data"
+        ]
+      }
+    ],
+    "n_cases": 7,
+    "far_field_none_cases": [
+      {
+        "case": "out-of-window rho_max=8, far_field='none'",
+        "n_nan_left_prerepair": 14,
+        "n_nan_left_repaired": 14,
+        "n_outside_grid_prerepair": 14,
+        "n_outside_grid_repaired": 14,
+        "field_bit_identical_including_nan_positions": true,
+        "downstream_refusal_prerepair": "ValueError",
+        "downstream_refusal_repaired": "ValueError",
+        "refusal_preserved": true
+      },
+      {
+        "case": "out-of-window rho_max=6, n=201, far_field='none'",
+        "n_nan_left_prerepair": 104,
+        "n_nan_left_repaired": 104,
+        "n_outside_grid_prerepair": 104,
+        "n_outside_grid_repaired": 104,
+        "field_bit_identical_including_nan_positions": true,
+        "downstream_refusal_prerepair": "ValueError",
+        "downstream_refusal_repaired": "ValueError",
+        "refusal_preserved": true
+      }
+    ],
+    "n_leaves_compared": 295203,
+    "n_cases_with_any_value_difference": 0,
+    "all_bit_identical": true,
+    "control_two_modules_really_differ": {
+      "distinct_module_objects": true,
+      "distinct_compactify_functions": true,
+      "prerepair_source_has_old_predicate": true,
+      "prerepair_source_lacks_new_predicate": true,
+      "repaired_source_has_new_predicate": true,
+      "repaired_source_lacks_old_predicate": true,
+      "disagree_on_an_asymmetric_grid": true,
+      "prerepair_count_on_that_grid": 4,
+      "repaired_count_on_that_grid": 1026,
+      "control_passes": true
+    }
+  },
+  "B_asymmetry_ladder": {
+    "what": "leg 204's asymmetry ladder verbatim (writeup/data/p2_route_tna2_v1_adversarial.json, the `ladder` field of the ASYMMETRIC GRID case), re-run against both module versions",
+    "rungs": [
+      {
+        "cut": -1000.0,
+        "X_min_data": -986.0485321107775,
+        "X_max_data": 40688.69785321492,
+        "n_grid_points": 677,
+        "harness_truth_samples_in_the_gap": 5,
+        "harness_truth_samples_outside_data": 5,
+        "prerepair": {
+          "n_outside_grid_reported": 0,
+          "domain_valid": true,
+          "n_warnings": 0,
+          "p": 1.403851370063524,
+          "err_vs_exact": 0.0038513700635240955,
+          "finite_reported": true
+        },
+        "repaired": {
+          "n_outside_grid_reported": 5,
+          "domain_valid": false,
+          "n_warnings": 3,
+          "p": 1.4038552100650787,
+          "err_vs_exact": 0.003855210065078829,
+          "finite_reported": true
+        },
+        "count_now_matches_truth": true,
+        "now_flagged": true,
+        "was_silent": true
+      },
+      {
+        "cut": -100.0,
+        "X_min_data": -97.87577912711738,
+        "X_max_data": 40688.69785321492,
+        "n_grid_points": 600,
+        "harness_truth_samples_in_the_gap": 53,
+        "harness_truth_samples_outside_data": 53,
+        "prerepair": {
+          "n_outside_grid_reported": 0,
+          "domain_valid": true,
+          "n_warnings": 0,
+          "p": 1.410247584090767,
+          "err_vs_exact": 0.010247584090766981,
+          "finite_reported": true
+        },
+        "repaired": {
+          "n_outside_grid_reported": 53,
+          "domain_valid": false,
+          "n_warnings": 3,
+          "p": 1.4038673644695963,
+          "err_vs_exact": 0.003867364469596346,
+          "finite_reported": true
+        },
+        "count_now_matches_truth": true,
+        "now_flagged": true,
+        "was_silent": true
+      },
+      {
+        "cut": -10.0,
+        "X_min_data": -9.708902589651528,
+        "X_max_data": 40688.69785321492,
+        "n_grid_points": 523,
+        "harness_truth_samples_in_the_gap": 535,
+        "harness_truth_samples_outside_data": 535,
+        "prerepair": {
+          "n_outside_grid_reported": 0,
+          "domain_valid": true,
+          "n_warnings": 0,
+          "p": -0.08888490073732189,
+          "err_vs_exact": 1.4888849007373217,
+          "finite_reported": false
+        },
+        "repaired": {
+          "n_outside_grid_reported": 535,
+          "domain_valid": false,
+          "n_warnings": 3,
+          "p": 1.4038492092605634,
+          "err_vs_exact": 0.0038492092605635353,
+          "finite_reported": true
+        },
+        "count_now_matches_truth": true,
+        "now_flagged": true,
+        "was_silent": true
+      },
+      {
+        "cut": -1.0,
+        "X_min_data": -0.9959420145786091,
+        "X_max_data": 40688.69785321492,
+        "n_grid_points": 449,
+        "harness_truth_samples_in_the_gap": 4107,
+        "harness_truth_samples_outside_data": 4107,
+        "prerepair": {
+          "n_outside_grid_reported": 0,
+          "domain_valid": true,
+          "n_warnings": 0,
+          "p": 0.11976407478762564,
+          "err_vs_exact": 1.2802359252123743,
+          "finite_reported": false
+        },
+        "repaired": {
+          "n_outside_grid_reported": 4107,
+          "domain_valid": false,
+          "n_warnings": 3,
+          "p": 1.4035787742562058,
+          "err_vs_exact": 0.0035787742562058966,
+          "finite_reported": true
+        },
+        "count_now_matches_truth": true,
+        "now_flagged": true,
+        "was_silent": true
+      },
+      {
+        "cut": -0.1,
+        "X_min_data": -0.09048678792763439,
+        "X_max_data": 40688.69785321492,
+        "n_grid_points": 407,
+        "harness_truth_samples_in_the_gap": 7721,
+        "harness_truth_samples_outside_data": 7721,
+        "prerepair": {
+          "n_outside_grid_reported": 0,
+          "domain_valid": true,
+          "n_warnings": 0,
+          "p": 0.2711768457163426,
+          "err_vs_exact": 1.1288231542836573,
+          "finite_reported": false
+        },
+        "repaired": {
+          "n_outside_grid_reported": 7721,
+          "domain_valid": false,
+          "n_warnings": 3,
+          "p": 1.4117197503611993,
+          "err_vs_exact": 0.011719750361199432,
+          "finite_reported": true
+        },
+        "count_now_matches_truth": true,
+        "now_flagged": true,
+        "was_silent": true
+      }
+    ],
+    "n_rungs": 5,
+    "n_rungs_silent_prerepair": 5,
+    "n_rungs_flagged_repaired": 5,
+    "n_rungs_count_matches_truth": 5,
+    "worst_rung": {
+      "X_min_data": -9.708902589651528,
+      "n_grid_points": 523,
+      "samples_in_the_gap": 535,
+      "prerepair_reported": 0,
+      "repaired_reported": 535,
+      "prerepair_p": -0.08888490073732189,
+      "prerepair_err_vs_exact": 1.4888849007373217
+    },
+    "reading": "the repair does not make the extrapolated ANSWER right -- it cannot, the data are not there.  It makes the answer VISIBLE: the same p comes back, now with a positive count, domain_valid = False and a TargetNormDomainWarning attached"
+  },
+  "C_leg55_banked_margins": {
+    "what": "leg 55's OWN nb5_norms path -- its solve_target, its _measure, its S_VALUES, imported from experiments/p2_route_nb_v1_targetnorm.py and not reimplemented -- re-run through the REPAIRED module.  This is the load-bearing regression check: the two margins are cited across the repo and must not move by one ULP",
+    "headline_domain": {
+      "rho_max": 12.0,
+      "n": 801,
+      "X_lo_data": -40688.69785321492,
+      "X_hi_data": 40688.69785321492,
+      "grid_symmetric_to": 0.0,
+      "grid_strictly_ascending": true,
+      "alpha": 0.3973531116778231,
+      "p": 1.3937445312885988,
+      "C": 0.48559511416865153,
+      "converged": true,
+      "residual": 1.329492071988625e-14,
+      "n_theta_points_outside_grid": 0,
+      "domain_valid": true,
+      "n_domain_warnings_raised": 0,
+      "classes": [
+        {
+          "s": 0.0,
+          "verdict": {
+            "s": 0.0,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.39374453128859876,
+            "finite": true,
+            "margin_predicted": 0.3973531116778231,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 1.5122086530122303,
+          "tail_finite": true
+        },
+        {
+          "s": 0.3,
+          "verdict": {
+            "s": 0.3,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.09374453128859872,
+            "finite": true,
+            "margin_predicted": 0.09735311167782312,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 3.328963898600388,
+          "tail_finite": true
+        },
+        {
+          "s": 0.39,
+          "verdict": {
+            "s": 0.39,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.0037445312885986404,
+            "finite": true,
+            "margin_predicted": 0.007353111677823099,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 4.57638884867989,
+          "tail_finite": true
+        },
+        {
+          "s": 1.0,
+          "verdict": {
+            "s": 1.0,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": -0.6062554687114012,
+            "finite": false,
+            "margin_predicted": -0.6026468883221769,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 123.12277748399391,
+          "tail_finite": false
+        }
+      ]
+    },
+    "shipped_domain": {
+      "rho_max": 8.0,
+      "n": 801,
+      "X_lo_data": -745.2394128947751,
+      "X_hi_data": 745.2394128947751,
+      "grid_symmetric_to": 0.0,
+      "grid_strictly_ascending": true,
+      "alpha": 0.3935782637981938,
+      "p": 1.3692459935956744,
+      "C": 0.4856849352476282,
+      "converged": true,
+      "residual": 2.275957200481571e-14,
+      "n_theta_points_outside_grid": 14,
+      "domain_valid": false,
+      "n_domain_warnings_raised": 13,
+      "classes": [
+        {
+          "s": 0.0,
+          "verdict": {
+            "s": 0.0,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": 0.36924599359567445,
+            "finite": true,
+            "margin_predicted": 0.3935782637981938,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 1.6328405670670003,
+          "tail_finite": true
+        },
+        {
+          "s": 0.3,
+          "verdict": {
+            "s": 0.3,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": 0.0692459935956744,
+            "finite": true,
+            "margin_predicted": 0.09357826379819378,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 3.659468228619716,
+          "tail_finite": true
+        },
+        {
+          "s": 0.39,
+          "verdict": {
+            "s": 0.39,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": -0.020754006404325565,
+            "finite": false,
+            "margin_predicted": 0.0035782637981937593,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 5.067556442315017,
+          "tail_finite": false
+        },
+        {
+          "s": 1.0,
+          "verdict": {
+            "s": 1.0,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": -0.6307540064043256,
+            "finite": false,
+            "margin_predicted": -0.6064217362018063,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 141.55527835628942,
+          "tail_finite": false
+        }
+      ]
+    },
+    "banked_p": 1.3937445312885988,
+    "rerun_p": 1.3937445312885988,
+    "p_bit_identical_to_banked": true,
+    "margins": [
+      {
+        "s": 0.0,
+        "leg55_banked_margin": 0.39374453128859876,
+        "rerun_margin_through_repaired_module": 0.39374453128859876,
+        "abs_difference_vs_banked": 0.0,
+        "bit_identical_to_banked": true,
+        "headline_domain_valid": true,
+        "headline_finite": true,
+        "counterfactual_margin_at_shipped_745_domain": 0.36924599359567445,
+        "counterfactual_domain_valid": false
+      },
+      {
+        "s": 0.3,
+        "leg55_banked_margin": 0.09374453128859872,
+        "rerun_margin_through_repaired_module": 0.09374453128859872,
+        "abs_difference_vs_banked": 0.0,
+        "bit_identical_to_banked": true,
+        "headline_domain_valid": true,
+        "headline_finite": true,
+        "counterfactual_margin_at_shipped_745_domain": 0.0692459935956744,
+        "counterfactual_domain_valid": false
+      }
+    ],
+    "n_margins_bit_identical": 2,
+    "n_margins": 2,
+    "why_it_could_not_move": "the solve grid is symmetric about zero to 0.0e+00 and strictly ascending, so X_lo = -X_hi exactly and all three repaired expressions reduce to the pre-repair ones bit for bit.  This is measured here, not argued: the equality is on raw float64 against the transcribed banked constants"
+  },
+  "D_still_open": {
+    "what": "leg 204 found SEVEN silent mechanisms.  This leg's declared territory is 'the domain-guard windowing logic only', so it repairs ONE.  The other six are re-measured here against the REPAIRED module so that 'not closed' is a number and not a promise",
+    "n_mechanisms_leg204_found": 7,
+    "n_repaired_by_this_leg": 1,
+    "n_still_open": 6,
+    "mechanisms": [
+      {
+        "mechanism": "domain_fields int() truncation / no type check",
+        "status": "STILL OPEN",
+        "magnitude": "5 of 7 type-compatible wrong values still read domain_valid = True, including every fraction in (-1, 1) and the STRING '0'",
+        "sweep": [
+          {
+            "input": "0.9",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "input": "0.5",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "input": "0.0008544921875",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "input": "-0.5",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "input": "True",
+            "n_outside_grid": 1,
+            "domain_valid": false
+          },
+          {
+            "input": "'0'",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "input": "'3'",
+            "n_outside_grid": 3,
+            "domain_valid": false
+          }
+        ]
+      },
+      {
+        "mechanism": "analytic_tail validates margin and nothing else",
+        "status": "STILL OPEN",
+        "magnitude": "4 of 4 corrupt parameter sets still return finite = True, including a NEGATIVE upper bound on a sum of non-negative terms",
+        "cases": [
+          {
+            "case": "C = NaN",
+            "finite": true,
+            "bound": NaN,
+            "reason": null
+          },
+          {
+            "case": "C = Inf",
+            "finite": true,
+            "bound": Infinity,
+            "reason": null
+          },
+          {
+            "case": "C = -0.5",
+            "finite": true,
+            "bound": -2.67943365634074,
+            "reason": null
+          },
+          {
+            "case": "N = NaN",
+            "finite": true,
+            "bound": NaN,
+            "reason": null
+          }
+        ]
+      },
+      {
+        "mechanism": "descending k into weighted_partial_sums (searchsorted)",
+        "status": "STILL OPEN",
+        "magnitude": "S_64 = 0.000000 against the true 1.120579, and S_4096 overstated by 6.93x; domain_valid = True, 0 warnings",
+        "S_64_wrong": 0.0,
+        "S_64_true": 1.1205791403942873,
+        "S_4096_overstatement": 6.925602807003564
+      },
+      {
+        "mechanism": "shuffled X/f pairing",
+        "status": "STILL OPEN",
+        "magnitude": "p = 1.091759e+00 against the exact 1.4, with n_outside_grid = 0, domain_valid = True, 0 warnings",
+        "p": 1.0917589180931975,
+        "n_outside_grid": 0,
+        "domain_valid": true,
+        "n_warnings": 0
+      },
+      {
+        "mechanism": "mismatched sinh scale c",
+        "status": "STILL OPEN",
+        "magnitude": "c = 1e-08 -> p = 0.854469, c = 1e+08 -> p = 0.012918, against the exact 1.4",
+        "cases": [
+          {
+            "c": 1e-08,
+            "p": 0.8544689443118855,
+            "err_vs_exact": 0.5455310556881144,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          {
+            "c": 100000000.0,
+            "p": 0.012918132273232913,
+            "err_vs_exact": 1.387081867726767,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          }
+        ]
+      },
+      {
+        "mechanism": "fitter absorbs NaN coefficients and overstates n_points",
+        "status": "STILL OPEN",
+        "magnitude": "150 of 225 in-band modes set to NaN: p = nan against the exact 1.4 (error nan), while n_points is reported as 225 and only 75 were finite -- a 3.0x overstatement, 0 warnings, domain_valid = True",
+        "n_in_band_modes": 225,
+        "n_set_to_nan": 150,
+        "p": NaN,
+        "err_vs_exact": NaN,
+        "n_points_reported": 225,
+        "n_points_finite": 75,
+        "overstatement": 3.0,
+        "n_warnings": 0
+      }
+    ]
+  },
+  "ceiling": "this repairs an input guard.  It moves no bound, certifies nothing, re-measures no physics and touches no link of the L1->L4 chain.  It extends no domain -- it NARROWS the accepted window to a subset, so a call can only move from silently-accepted to flagged, never the reverse"
+}

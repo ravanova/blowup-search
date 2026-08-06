@@ -150,7 +150,7 @@ unbounded domain is the entire reason the previous measurement had to be weighte
 Leg 11 observed that the whole-line Newton solve gets noticeably worse under grid
 refinement for `a` above about 0.5, and read that as evidence that the solutions stop
 being genuine continuum objects there — banking it as a *fourth* independent confirmation
-of a survival boundary the project had found three other ways.
+of a survival boundary the project had found three other ways (all of them at positive `a`).
 
 On its own support, the same object is grid-converged to between eight and twelve
 significant figures at `a = 0.5, 0.6, 0.8, 1.0` and `1.2`, with the solve converging from
@@ -159,7 +159,8 @@ represent a compactly supported profile whose edge regularity *degrades as `a` g
 the same class of instrument artifact as the ringing leg 12 found.
 
 That retires leg 11's argument, not the boundary itself: the other three confirmations
-are about a different question (whether the two-scale structure survives in the dynamics),
+are about a different question (whether the `a = 0` wave's two-scale structure survives
+continuation into positive `a`),
 and this leg says nothing about them. But the count goes from four to three, and
 separately, the compactly supported traveling wave exists well past the boundary as a
 genuine continuum object.

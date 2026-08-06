@@ -1,0 +1,1275 @@
+{
+ "route": "L1RH",
+ "version": "v1",
+ "gate": "Does origin-H^2 (or another space this leg identifies as structurally analogous, per leg 163's own scoping method) admit a certificate formulation for the collocation-basis realization of L1, and if built, does its diagnostic close?",
+ "float64_only": true,
+ "fixed_reach": true,
+ "ceiling": "HL_S2_nonsymmetric, NOT the a=0 CLM profile. Leg 163's obstruction O3 is carried: none of Xu's closed forms transfer to this object. Only the DEFINITION of the realization is imported.",
+ "arms": [
+  "weighted_sup",
+  "L2_h",
+  "X_h",
+  "X_h_origin"
+ ],
+ "rungs": [
+  {
+   "n": 201,
+   "N": 405,
+   "X_max": 745.2394128947751,
+   "p_star": 0.39,
+   "constants": {
+    "weighted_sup": {
+     "arm": "weighted_sup",
+     "Y0": 5.522436933036818e-12,
+     "Z1": 8.547217579890699e-09,
+     "Z2": 220571129.61899996,
+     "A_norm": 9852.352563610288,
+     "B": 11193.83051889964,
+     "budget": 2.2668424118625557e-09,
+     "tau": 2.3008133308537386e-13,
+     "closes": true,
+     "rigorous": true
+    },
+    "L2_h": {
+     "arm": "L2_h",
+     "Y0": 2.5866430321648948e-12,
+     "Z1": 2.4794160404021767e-10,
+     "Z2": 128194972.63588957,
+     "A_norm": 12626.376823312705,
+     "B": 5076.475002678395,
+     "B_witness": 21.061801997789203,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 241.02757224720173,
+     "budget": 3.900308954955679e-09,
+     "tau": 3.0890167540021025e-13,
+     "closes": true,
+     "tau_under_witness": 7.445382088480583e-11,
+     "rigorous": false
+    },
+    "X_h": {
+     "arm": "X_h",
+     "Y0": 2.6418659776344426e-12,
+     "Z1": 3.326038846260695e-11,
+     "Z2": 11100320463.533672,
+     "A_norm": 637.242382195336,
+     "B": 8709653.323192693,
+     "B_witness": 20.71111324199505,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 420530.42834667605,
+     "budget": 4.504374460262831e-11,
+     "tau": 7.068541870590916e-14,
+     "closes": true,
+     "tau_under_witness": 2.9725369406260128e-08,
+     "rigorous": false
+    },
+    "X_h_origin": {
+     "arm": "X_h_origin",
+     "Y0": 2.641859963872665e-12,
+     "Z1": 3.22746242245894e-11,
+     "Z2": 11076686247.137007,
+     "A_norm": 635.8855993522272,
+     "B": 8709653.323192693,
+     "B_witness": 20.917085562952614,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 416389.4294441685,
+     "budget": 4.513985399712485e-11,
+     "tau": 7.098738207487091e-14,
+     "closes": true,
+     "tau_under_witness": 2.9558395519890694e-08,
+     "rigorous": false
+    }
+   },
+   "defects": {
+    "weighted_sup": {
+     "f_norm": 1.047986528574495,
+     "defect_D": 0.00011219876540868867,
+     "defect_H_impl": 0.004728748883333104,
+     "defect_H_full": 6.315920796852505e-06,
+     "defect_endpoint": 0.0047350648041299395,
+     "endpoint_share": 1.0013356430955969,
+     "H_full_over_D": 0.056292248616519984
+    },
+    "L2_h": {
+     "f_norm": 1.7726108707205066,
+     "defect_D": 6.301524826196596e-05,
+     "defect_H_impl": 0.004538931912026055,
+     "defect_H_full": 6.023462140890035e-06,
+     "defect_endpoint": 0.004543804870851903,
+     "endpoint_share": 1.0010735915233575,
+     "H_full_over_D": 0.09558737459621512
+    },
+    "X_h": {
+     "f_norm": 8.866380348605684,
+     "defect_D": 0.006687414378029,
+     "defect_H_impl": 0.004542650269390049,
+     "defect_H_full": 0.00018385403790898504,
+     "defect_endpoint": 0.004543805151492661,
+     "endpoint_share": 1.0002542309079776,
+     "H_full_over_D": 0.027492544579415287
+    },
+    "X_h_origin": {
+     "f_norm": 8.866380348605684,
+     "defect_D": 0.006687414378029,
+     "defect_H_impl": 0.004542650269390049,
+     "defect_H_full": 0.00018385403790898504,
+     "defect_endpoint": 0.004543805151492661,
+     "endpoint_share": 1.0002542309079776,
+     "H_full_over_D": 0.027492544579415287
+    }
+   },
+   "ratios": {
+    "weighted_sup": {
+     "tau": 2.3008133308537386e-13,
+     "defect_D_over_tau": 487648275.9557737,
+     "defect_H_impl_over_tau": 20552509931.68775,
+     "defect_H_full_over_tau": 27450817.987519756,
+     "worst_over_tau": 487648275.9557737,
+     "tau_under_witness": null,
+     "worst_over_tau_under_witness": null,
+     "theta_B_free": 43564.02172897195,
+     "theta_B_free_D_only": 43564.02172897195
+    },
+    "L2_h": {
+     "tau": 3.0890167540021025e-13,
+     "defect_D_over_tau": 203997754.88534975,
+     "defect_H_impl_over_tau": 14693775636.3589,
+     "defect_H_full_over_tau": 19499609.8130128,
+     "worst_over_tau": 203997754.88534975,
+     "tau_under_witness": 7.445382088480583e-11,
+     "worst_over_tau_under_witness": 846366.8823586971,
+     "theta_B_free": 40184.92256491337,
+     "theta_B_free_D_only": 40184.92256491337
+    },
+    "X_h": {
+     "tau": 7.068541870590916e-14,
+     "defect_D_over_tau": 94608117210.88306,
+     "defect_H_impl_over_tau": 64265733337.309814,
+     "defect_H_full_over_tau": 2601017879.9947495,
+     "worst_over_tau": 94608117210.88306,
+     "tau_under_witness": 2.9725369406260128e-08,
+     "worst_over_tau_under_witness": 224973.29761091675,
+     "theta_B_free": 10862.44350954288,
+     "theta_B_free_D_only": 10862.44350954288
+    },
+    "X_h_origin": {
+     "tau": 7.098738207487091e-14,
+     "defect_D_over_tau": 94205676876.1487,
+     "defect_H_impl_over_tau": 63992362256.701935,
+     "defect_H_full_over_tau": 2589953771.1515102,
+     "worst_over_tau": 94205676876.1487,
+     "tau_under_witness": 2.9558395519890694e-08,
+     "worst_over_tau_under_witness": 226244.160429102,
+     "theta_B_free": 10816.237269202324,
+     "theta_B_free_D_only": 10816.237269202324
+    }
+   },
+   "object_vs_Xu_space": {
+    "Omega_at_origin": 0.9459594689067654,
+    "V_at_origin": 0.7402719395863196,
+    "oddness_residual_Omega": 1.3397480857562951,
+    "grid_symmetry_residual": 3.410605131648481e-13,
+    "note": "Xu eq (3.2) requires phi odd with phi(y) = a_1 y + o(y). This object satisfies NEITHER. Only the PERTURBATION space is constrained, by the border rows, which is what arm A3 measures."
+   },
+   "B_analytic_L2": {
+    "B": 5076.475002678395,
+    "Uop_L2_to_inf": 21.403678383469284,
+    "H_L2_to_inf": 4.345810411223232,
+    "D_L2_to_L2": 41.421379318220694,
+    "S1": 122.40367838346928,
+    "B1": 5071.129192267172,
+    "B2": 5076.475002678395,
+    "C_eq_X_over_L2": 1715.6891974445653,
+    "B_X_upper_via_C_eq": 8709653.323192693
+   },
+   "P4_isometry": {
+    "interp_error_L2_on_subgrid": 6.5363973455733445e-06,
+    "defect_H_full_L2_h": 6.023462140890035e-06,
+    "ratio_should_be_1": 0.9215263121923446,
+    "defect_H_impl_L2_h": 0.004538931912026055,
+    "ratio_impl_over_interp": 694.4088114685934,
+    "note": "H is an L^2 isometry commuting with d/dx. With the FULL interpolant the Hilbert-side defect is therefore the interpolation error itself; with the endpoint-ZEROED operator leg 46 actually runs, it is not."
+   },
+   "C3_singular_family": {
+    "lambda_0.25": {
+     "weighted_sup": {
+      "singular": 1.0282551217410723,
+      "physical": 1.0479885077780189,
+      "separation": 0.9811702266861818
+     },
+     "L2_h": {
+      "singular": 1.4449010735208287,
+      "physical": 1.7726142184330833,
+      "separation": 0.8151243843672092
+     },
+     "X_h": {
+      "singular": 22.64991766375304,
+      "physical": 8.866397093449235,
+      "separation": 2.5545796590237866
+     }
+    },
+    "lambda_0.50": {
+     "weighted_sup": {
+      "singular": 1.0163903759791189,
+      "physical": 1.0479885077780189,
+      "separation": 0.9698487802448373
+     },
+     "L2_h": {
+      "singular": 1.2410161028262576,
+      "physical": 1.7726142184330833,
+      "separation": 0.7001050143461356
+     },
+     "X_h": {
+      "singular": 58.0146208717036,
+      "physical": 8.866397093449235,
+      "separation": 6.543201286863925
+     }
+    },
+    "lambda_0.75": {
+     "weighted_sup": {
+      "singular": 1.0080887819106559,
+      "physical": 1.0479885077780189,
+      "separation": 0.9619273249933248
+     },
+     "L2_h": {
+      "singular": 1.0838914041188672,
+      "physical": 1.7726142184330833,
+      "separation": 0.6114649159685641
+     },
+     "X_h": {
+      "singular": 118.92360889491245,
+      "physical": 8.866397093449235,
+      "separation": 13.412844884059709
+     }
+    }
+   },
+   "wall_s": 69.02251935005188
+  },
+  {
+   "n": 401,
+   "N": 805,
+   "X_max": 745.2394128947751,
+   "p_star": 0.39,
+   "constants": {
+    "weighted_sup": {
+     "arm": "weighted_sup",
+     "Y0": 1.339980926418611e-11,
+     "Z1": 5.713694895801184e-08,
+     "Z2": 845853410.8019924,
+     "A_norm": 18630.869163062387,
+     "B": 22700.3207257497,
+     "budget": 5.911189060394988e-10,
+     "tau": 3.172792964546457e-14,
+     "closes": true,
+     "rigorous": true
+    },
+    "L2_h": {
+     "arm": "L2_h",
+     "Y0": 5.004646363267208e-13,
+     "Z1": 7.058298013334701e-09,
+     "Z2": 339035870.2025531,
+     "A_norm": 16295.217522507644,
+     "B": 10402.925574152736,
+     "B_witness": 42.749436225651095,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 243.34649746586908,
+     "budget": 1.4747701847683036e-09,
+     "tau": 9.05032524255223e-14,
+     "closes": true,
+     "tau_under_witness": 2.2023649487020268e-11,
+     "rigorous": false
+    },
+    "X_h": {
+     "arm": "X_h",
+     "Y0": 8.813320712052545e-13,
+     "Z1": 6.194347143111786e-10,
+     "Z2": 112340483344.49013,
+     "A_norm": 753.3728243443591,
+     "B": 74558359.23087427,
+     "B_witness": 42.32565881294612,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 1761540.4301295637,
+     "budget": 4.450755279798146e-12,
+     "tau": 5.907772534364408e-15,
+     "closes": true,
+     "tau_under_witness": 1.0406780171291902e-08,
+     "rigorous": false
+    },
+    "X_h_origin": {
+     "arm": "X_h_origin",
+     "Y0": 8.812532758336104e-13,
+     "Z1": 5.941381686567236e-10,
+     "Z2": 112272414090.33905,
+     "A_norm": 752.9163412963597,
+     "B": 74558359.23087427,
+     "B_witness": 42.44616130196116,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 1756539.5066109174,
+     "budget": 4.453453713069186e-12,
+     "tau": 5.914938312271584e-15,
+     "closes": true,
+     "tau_under_witness": 1.038982282467154e-08,
+     "rigorous": false
+    }
+   },
+   "defects": {
+    "weighted_sup": {
+     "f_norm": 1.047986528574495,
+     "defect_D": 6.872409411773361e-06,
+     "defect_H_impl": 0.004713129985416439,
+     "defect_H_full": 1.7021577413684279e-06,
+     "defect_endpoint": 0.004714832143157807,
+     "endpoint_share": 1.0003611523014715,
+     "H_full_over_D": 0.24767990953105948
+    },
+    "L2_h": {
+     "f_norm": 1.771917609881113,
+     "defect_D": 3.877332546085242e-06,
+     "defect_H_impl": 0.003179275405695213,
+     "defect_H_full": 1.0268547354945926e-06,
+     "defect_endpoint": 0.003180198195922327,
+     "endpoint_share": 1.0002902517427275,
+     "H_full_over_D": 0.26483535350388215
+    },
+    "X_h": {
+     "f_norm": 8.863268167217571,
+     "defect_D": 0.0004073899144013074,
+     "defect_H_impl": 0.0031792934452512453,
+     "defect_H_full": 9.876276026786841e-06,
+     "defect_endpoint": 0.003180201062737695,
+     "endpoint_share": 1.000285477733364,
+     "H_full_over_D": 0.02424280935206958
+    },
+    "X_h_origin": {
+     "f_norm": 8.863268167217571,
+     "defect_D": 0.0004073899144013074,
+     "defect_H_impl": 0.0031792934452512453,
+     "defect_H_full": 9.876276026786841e-06,
+     "defect_endpoint": 0.003180201062737695,
+     "endpoint_share": 1.000285477733364,
+     "H_full_over_D": 0.02424280935206958
+    }
+   },
+   "ratios": {
+    "weighted_sup": {
+     "tau": 3.172792964546457e-14,
+     "defect_D_over_tau": 216604407.80622306,
+     "defect_H_impl_over_tau": 148548299182.52072,
+     "defect_H_full_over_tau": 53648560.129474044,
+     "worst_over_tau": 216604407.80622306,
+     "tau_under_witness": null,
+     "worst_over_tau_under_witness": null,
+     "theta_B_free": 9541.909580181464,
+     "theta_B_free_D_only": 9541.909580181464
+    },
+    "L2_h": {
+     "tau": 9.05032524255223e-14,
+     "defect_D_over_tau": 42841913.877912946,
+     "defect_H_impl_over_tau": 35128852505.17963,
+     "defect_H_full_over_tau": 11346053.40663995,
+     "worst_over_tau": 42841913.877912946,
+     "tau_under_witness": 2.2023649487020268e-11,
+     "worst_over_tau_under_witness": 176053.13544289581,
+     "theta_B_free": 4118.256309009707,
+     "theta_B_free_D_only": 4118.256309009707
+    },
+    "X_h": {
+     "tau": 5.907772534364408e-15,
+     "defect_D_over_tau": 68958293846.2164,
+     "defect_H_impl_over_tau": 538154342733.7274,
+     "defect_H_full_over_tau": 1671742770.957817,
+     "worst_over_tau": 68958293846.2164,
+     "tau_under_witness": 1.0406780171291902e-08,
+     "worst_over_tau_under_witness": 39146.58594645166,
+     "theta_B_free": 924.8901740538982,
+     "theta_B_free_D_only": 924.8901740538982
+    },
+    "X_h_origin": {
+     "tau": 5.914938312271584e-15,
+     "defect_D_over_tau": 68874752853.4837,
+     "defect_H_impl_over_tau": 537502384201.57983,
+     "defect_H_full_over_tau": 1669717502.597916,
+     "worst_over_tau": 68874752853.4837,
+     "tau_under_witness": 1.038982282467154e-08,
+     "worst_over_tau_under_witness": 39210.477529407384,
+     "theta_B_free": 923.7696961679244,
+     "theta_B_free_D_only": 923.7696961679244
+    }
+   },
+   "object_vs_Xu_space": {
+    "Omega_at_origin": 0.9459594689067654,
+    "V_at_origin": 0.7402719395863196,
+    "oddness_residual_Omega": 1.3397003752285177,
+    "grid_symmetry_residual": 6.821210263296962e-13,
+    "note": "Xu eq (3.2) requires phi odd with phi(y) = a_1 y + o(y). This object satisfies NEITHER. Only the PERTURBATION space is constrained, by the border rows, which is what arm A3 measures."
+   },
+   "B_analytic_L2": {
+    "B": 10402.925574152736,
+    "Uop_L2_to_inf": 21.78467347694286,
+    "H_L2_to_inf": 6.1575093811816775,
+    "D_L2_to_L2": 84.65851453946763,
+    "S1": 122.78467347694286,
+    "B1": 10395.768064771553,
+    "B2": 10402.925574152736,
+    "C_eq_X_over_L2": 7167.05687255161,
+    "B_X_upper_via_C_eq": 74558359.23087427
+   },
+   "P4_isometry": {
+    "interp_error_L2_on_subgrid": 1.1181139146816364e-06,
+    "defect_H_full_L2_h": 1.0268547354945926e-06,
+    "ratio_should_be_1": 0.9183811434696005,
+    "defect_H_impl_L2_h": 0.003179275405695213,
+    "ratio_impl_over_interp": 2843.427099823238,
+    "note": "H is an L^2 isometry commuting with d/dx. With the FULL interpolant the Hilbert-side defect is therefore the interpolation error itself; with the endpoint-ZEROED operator leg 46 actually runs, it is not."
+   },
+   "C3_singular_family": {
+    "lambda_0.25": {
+     "weighted_sup": {
+      "singular": 1.0291355331881709,
+      "physical": 1.0479885077780189,
+      "separation": 0.9820103231572446
+     },
+     "L2_h": {
+      "singular": 1.4443733172249837,
+      "physical": 1.771920956284413,
+      "separation": 0.8151454567441472
+     },
+     "X_h": {
+      "singular": 33.53639731950554,
+      "physical": 8.863284906178468,
+      "separation": 3.7837435752660733
+     }
+    },
+    "lambda_0.50": {
+     "weighted_sup": {
+      "singular": 1.0163903759791189,
+      "physical": 1.0479885077780189,
+      "separation": 0.9698487802448373
+     },
+     "L2_h": {
+      "singular": 1.2410171097377845,
+      "physical": 1.771920956284413,
+      "separation": 0.7003794979320666
+     },
+     "X_h": {
+      "singular": 111.47823748625726,
+      "physical": 8.863284906178468,
+      "separation": 12.577530640874174
+     }
+    },
+    "lambda_0.75": {
+     "weighted_sup": {
+      "singular": 1.006659818583539,
+      "physical": 1.0479885077780189,
+      "separation": 0.9605637954159378
+     },
+     "L2_h": {
+      "singular": 1.0849070106025778,
+      "physical": 1.771920956284413,
+      "separation": 0.6122773178762712
+     },
+     "X_h": {
+      "singular": 277.6499739523682,
+      "physical": 8.863284906178468,
+      "separation": 31.32585456649627
+     }
+    }
+   },
+   "wall_s": 391.1574420928955
+  },
+  {
+   "n": 801,
+   "N": 1605,
+   "X_max": 745.2394128947751,
+   "p_star": 0.39,
+   "constants": {
+    "weighted_sup": {
+     "arm": "weighted_sup",
+     "Y0": 9.970090516094336e-12,
+     "Z1": 1.5367419615327556e-07,
+     "Z2": 1406605454.6612077,
+     "A_norm": 15417.670644111318,
+     "B": 45616.66567959964,
+     "budget": 3.5546559603399555e-10,
+     "tau": 2.3055726395982093e-14,
+     "closes": true,
+     "rigorous": true
+    },
+    "L2_h": {
+     "arm": "L2_h",
+     "Y0": 4.696796348063282e-12,
+     "Z1": 2.3033453670399358e-08,
+     "Z2": 742393311.9963907,
+     "A_norm": 17618.36929417902,
+     "B": 21068.72944937282,
+     "B_witness": 86.9198916936649,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 242.39249542125697,
+     "budget": 6.734974155707066e-10,
+     "tau": 3.8227000713012935e-14,
+     "closes": true,
+     "tau_under_witness": 9.265938095297373e-12,
+     "rigorous": false
+    },
+    "X_h": {
+     "arm": "X_h",
+     "Y0": 8.625457373748756e-12,
+     "Z1": 2.416795034904017e-09,
+     "Z2": 1308591858458.9583,
+     "A_norm": 1059.1701145681975,
+     "B": 617743948.9937105,
+     "B_witness": 85.58457496133659,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 7217935.5832844945,
+     "budget": 3.8209010269406813e-13,
+     "tau": 3.607447920203438e-16,
+     "closes": false,
+     "tau_under_witness": 2.603832670808204e-09,
+     "rigorous": false
+    },
+    "X_h_origin": {
+     "arm": "X_h_origin",
+     "Y0": 8.625425278356749e-12,
+     "Z1": 2.0610842411675046e-09,
+     "Z2": 1309088066791.2983,
+     "A_norm": 1059.5717440241788,
+     "B": 617743948.9937105,
+     "B_witness": 85.58705525910288,
+     "B_is": "analytic UPPER bound (leg 46's decomposition, L^2 step exact)",
+     "B_upper_over_witness": 7217726.408784328,
+     "budget": 3.819452721499968e-13,
+     "tau": 3.604713643074282e-16,
+     "closes": false,
+     "tau_under_witness": 2.601783685772241e-09,
+     "rigorous": false
+    }
+   },
+   "defects": {
+    "weighted_sup": {
+     "f_norm": 1.0480999185571813,
+     "defect_D": 4.27378685774471e-07,
+     "defect_H_impl": 0.0047041391907174865,
+     "defect_H_full": 4.4181273581063036e-07,
+     "defect_endpoint": 0.004704581003453297,
+     "endpoint_share": 1.00009391999639,
+     "H_full_over_D": 1.0337734438253579
+    },
+    "L2_h": {
+     "f_norm": 1.7717480886417882,
+     "defect_D": 2.4324756812138197e-07,
+     "defect_H_impl": 0.002232533361247494,
+     "defect_H_full": 1.865657015738453e-07,
+     "defect_endpoint": 0.0022327022451396577,
+     "endpoint_share": 1.0000756467496055,
+     "H_full_over_D": 0.7669786917694812
+    },
+    "X_h": {
+     "f_norm": 8.862409967119603,
+     "defect_D": 2.5295032928602988e-05,
+     "defect_H_impl": 0.002232564315625194,
+     "defect_H_full": 5.995555412692757e-07,
+     "defect_endpoint": 0.002232733130989881,
+     "endpoint_share": 1.0000756150062533,
+     "H_full_over_D": 0.023702500920301763
+    },
+    "X_h_origin": {
+     "f_norm": 8.862409967119603,
+     "defect_D": 2.5295032928602988e-05,
+     "defect_H_impl": 0.002232564315625194,
+     "defect_H_full": 5.995555412692757e-07,
+     "defect_endpoint": 0.002232733130989881,
+     "endpoint_share": 1.0000756150062533,
+     "H_full_over_D": 0.023702500920301763
+    }
+   },
+   "ratios": {
+    "weighted_sup": {
+     "tau": 2.3055726395982093e-14,
+     "defect_D_over_tau": 18536769.496403724,
+     "defect_H_impl_over_tau": 204033440973.5741,
+     "defect_H_full_over_tau": 19162820.039694123,
+     "worst_over_tau": 19162820.039694123,
+     "tau_under_witness": null,
+     "worst_over_tau_under_witness": null,
+     "theta_B_free": 420.0837512826802,
+     "theta_B_free_D_only": 406.3595885460255
+    },
+    "L2_h": {
+     "tau": 3.8227000713012935e-14,
+     "defect_D_over_tau": 6363239.6888144445,
+     "defect_H_impl_over_tau": 58402001716.22443,
+     "defect_H_full_over_tau": 4880469.251942543,
+     "worst_over_tau": 6363239.6888144445,
+     "tau_under_witness": 9.265938095297373e-12,
+     "worst_over_tau_under_witness": 26251.80155745206,
+     "theta_B_free": 302.02294372354123,
+     "theta_B_free_D_only": 302.02294372354123
+    },
+    "X_h": {
+     "tau": 3.607447920203438e-16,
+     "defect_D_over_tau": 70118913670.07317,
+     "defect_H_impl_over_tau": 6188763815887.025,
+     "defect_H_full_over_tau": 1661993615.795469,
+     "worst_over_tau": 70118913670.07317,
+     "tau_under_witness": 2.603832670808204e-09,
+     "worst_over_tau_under_witness": 9714.538576993758,
+     "theta_B_free": 113.50805424204496,
+     "theta_B_free_D_only": 113.50805424204496
+    },
+    "X_h_origin": {
+     "tau": 3.604713643074282e-16,
+     "defect_D_over_tau": 70172100846.90695,
+     "defect_H_impl_over_tau": 6193458168070.045,
+     "defect_H_full_over_tau": 1663254284.90332,
+     "worst_over_tau": 70172100846.90695,
+     "tau_under_witness": 2.601783685772241e-09,
+     "worst_over_tau_under_witness": 9722.189076258703,
+     "theta_B_free": 113.59415330771841,
+     "theta_B_free_D_only": 113.59415330771841
+    }
+   },
+   "object_vs_Xu_space": {
+    "Omega_at_origin": 0.9459594689067654,
+    "V_at_origin": 0.7402719395863196,
+    "oddness_residual_Omega": 1.3399568824585146,
+    "grid_symmetry_residual": 6.821210263296962e-13,
+    "note": "Xu eq (3.2) requires phi odd with phi(y) = a_1 y + o(y). This object satisfies NEITHER. Only the PERTURBATION space is constrained, by the border rows, which is what arm A3 measures."
+   },
+   "B_analytic_L2": {
+    "B": 21068.72944937282,
+    "Uop_L2_to_inf": 21.979405641702442,
+    "H_L2_to_inf": 8.71217643965681,
+    "D_L2_to_L2": 171.2320624990268,
+    "S1": 122.97940564170244,
+    "B1": 21059.01727293316,
+    "B2": 21068.72944937282,
+    "C_eq_X_over_L2": 29320.4177536249,
+    "B_X_upper_via_C_eq": 617743948.9937105
+   },
+   "P4_isometry": {
+    "interp_error_L2_on_subgrid": 2.01839836656969e-07,
+    "defect_H_full_L2_h": 1.865657015738453e-07,
+    "ratio_should_be_1": 0.9243254684699215,
+    "defect_H_impl_L2_h": 0.002232533361247494,
+    "ratio_impl_over_interp": 11060.915418009035,
+    "note": "H is an L^2 isometry commuting with d/dx. With the FULL interpolant the Hilbert-side defect is therefore the interpolation error itself; with the endpoint-ZEROED operator leg 46 actually runs, it is not."
+   },
+   "C3_singular_family": {
+    "lambda_0.25": {
+     "weighted_sup": {
+      "singular": 1.029147780084376,
+      "physical": 1.0481018979748509,
+      "separation": 0.9819157679925032
+     },
+     "L2_h": {
+      "singular": 1.4442378593781402,
+      "physical": 1.771751434724934,
+      "separation": 0.8151469958326064
+     },
+     "X_h": {
+      "singular": 53.3085746218631,
+      "physical": 8.86242670442122,
+      "separation": 6.015121636522977
+     }
+    },
+    "lambda_0.50": {
+     "weighted_sup": {
+      "singular": 1.0163982276959695,
+      "physical": 1.0481018979748509,
+      "separation": 0.9697513473259238
+     },
+     "L2_h": {
+      "singular": 1.2409686518737348,
+      "physical": 1.771751434724934,
+      "separation": 0.7004191601325817
+     },
+     "X_h": {
+      "singular": 220.16138946365876,
+      "physical": 8.86242670442122,
+      "separation": 24.84211117411288
+     }
+    },
+    "lambda_0.75": {
+     "weighted_sup": {
+      "singular": 1.007243283721746,
+      "physical": 1.0481018979748509,
+      "separation": 0.9610165630535998
+     },
+     "L2_h": {
+      "singular": 1.0858513218328256,
+      "physical": 1.771751434724934,
+      "separation": 0.6128688824803492
+     },
+     "X_h": {
+      "singular": 657.2855456438283,
+      "physical": 8.86242670442122,
+      "separation": 74.16541400742155
+     }
+    }
+   },
+   "wall_s": 2376.5084280967712
+  }
+ ],
+ "leg56_reference_as_stored": {
+  "source": "writeup/data/p2_route_tn_v1_consistency.json",
+  "tau_at_801": 2.3055726395982093e-14,
+  "defect_D_over_tau_at_801": 18536770.035727352,
+  "defect_H_over_tau_at_801": 204033440973.58594,
+  "endpoint_share_at_801": 1.0000939199963914,
+  "D_only_n_required": 52163.068422209304,
+  "realization_robust_ratio": 18536770.035727352
+ },
+ "leg46_reference_as_stored": {
+  "A_norm": 15417.670648061347,
+  "budget": 3.5546559590282916e-10,
+  "Z2": 1406605455.0215821,
+  "Y0": 7.351345250491628e-12
+ },
+ "rates": {
+  "weighted_sup": {
+   "n": [
+    201,
+    401,
+    801
+   ],
+   "defect_D": [
+    0.00011219876540868867,
+    6.872409411773361e-06,
+    4.27378685774471e-07
+   ],
+   "defect_D_rate": [
+    {
+     "factor": 16.3259722589398,
+     "order": 4.029097005886233
+    },
+    {
+     "factor": 16.080374713398673,
+     "order": 4.007229120238988
+    }
+   ],
+   "defect_H_full": [
+    6.315920796852505e-06,
+    1.7021577413684279e-06,
+    4.4181273581063036e-07
+   ],
+   "defect_H_full_rate": [
+    {
+     "factor": 3.7105378916144995,
+     "order": 1.891628339761263
+    },
+    {
+     "factor": 3.852667891624578,
+     "order": 1.9458578278981278
+    }
+   ],
+   "defect_H_impl": [
+    0.004728748883333104,
+    0.004713129985416439,
+    0.0047041391907174865
+   ],
+   "defect_H_impl_rate": [
+    {
+     "factor": 1.0033139119788748,
+     "order": 0.004773059988457067
+    },
+    {
+     "factor": 1.0019112518432052,
+     "order": 0.0027547219101739925
+    }
+   ],
+   "worst_over_tau": [
+    487648275.9557737,
+    216604407.80622306,
+    19162820.039694123
+   ],
+   "worst_over_tau_rate": [
+    {
+     "factor": 2.251331267422913,
+     "order": 1.1707783547509352
+    },
+    {
+     "factor": 11.30336805112952,
+     "order": 3.4986808097105113
+    }
+   ],
+   "n_required": 96631.72767118253,
+   "defect_D_over_tau": [
+    487648275.9557737,
+    216604407.80622306,
+    18536769.496403724
+   ],
+   "defect_D_over_tau_rate": [
+    {
+     "factor": 2.251331267422913,
+     "order": 1.1707783547509352
+    },
+    {
+     "factor": 11.685121717041687,
+     "order": 3.546600856792257
+    }
+   ],
+   "n_required_D_only": 89728.05676302064
+  },
+  "L2_h": {
+   "n": [
+    201,
+    401,
+    801
+   ],
+   "defect_D": [
+    6.301524826196596e-05,
+    3.877332546085242e-06,
+    2.4324756812138197e-07
+   ],
+   "defect_D_rate": [
+    {
+     "factor": 16.252216572341585,
+     "order": 4.022564589634309
+    },
+    {
+     "factor": 15.939861500076459,
+     "order": 3.994567188831749
+    }
+   ],
+   "defect_H_full": [
+    6.023462140890035e-06,
+    1.0268547354945926e-06,
+    1.865657015738453e-07
+   ],
+   "defect_H_full_rate": [
+    {
+     "factor": 5.865934033978806,
+     "order": 2.5523608471966828
+    },
+    {
+     "factor": 5.503984531091044,
+     "order": 2.460476415361668
+    }
+   ],
+   "defect_H_impl": [
+    0.004538931912026055,
+    0.003179275405695213,
+    0.002232533361247494
+   ],
+   "defect_H_impl_rate": [
+    {
+     "factor": 1.4276623861824658,
+     "order": 0.5136548509584736
+    },
+    {
+     "factor": 1.424066247287207,
+     "order": 0.5100162617605148
+    }
+   ],
+   "worst_over_tau": [
+    203997754.88534975,
+    42841913.877912946,
+    6363239.6888144445
+   ],
+   "worst_over_tau_rate": [
+    {
+     "factor": 4.761639628581587,
+     "order": 2.251458438388267
+    },
+    {
+     "factor": 6.73272043377875,
+     "order": 2.751189560302635
+    }
+   ],
+   "n_required": 238027.75968096068,
+   "defect_D_over_tau": [
+    203997754.88534975,
+    42841913.877912946,
+    6363239.6888144445
+   ],
+   "defect_D_over_tau_rate": [
+    {
+     "factor": 4.761639628581587,
+     "order": 2.251458438388267
+    },
+    {
+     "factor": 6.73272043377875,
+     "order": 2.751189560302635
+    }
+   ],
+   "n_required_D_only": 238027.75968096068
+  },
+  "X_h": {
+   "n": [
+    201,
+    401,
+    801
+   ],
+   "defect_D": [
+    0.006687414378029,
+    0.0004073899144013074,
+    2.5295032928602988e-05
+   ],
+   "defect_D_rate": [
+    {
+     "factor": 16.41526739280401,
+     "order": 4.036966345445857
+    },
+    {
+     "factor": 16.105530107479762,
+     "order": 4.009484242155484
+    }
+   ],
+   "defect_H_full": [
+    0.00018385403790898504,
+    9.876276026786841e-06,
+    5.995555412692757e-07
+   ],
+   "defect_H_full_rate": [
+    {
+     "factor": 18.615724936233917,
+     "order": 4.218449893808205
+    },
+    {
+     "factor": 16.47266240902134,
+     "order": 4.042001845693527
+    }
+   ],
+   "defect_H_impl": [
+    0.004542650269390049,
+    0.0031792934452512453,
+    0.002232564315625194
+   ],
+   "defect_H_impl_rate": [
+    {
+     "factor": 1.428823840144477,
+     "order": 0.5148280573601794
+    },
+    {
+     "factor": 1.4240545828848539,
+     "order": 0.5100044447229428
+    }
+   ],
+   "worst_over_tau": [
+    94608117210.88306,
+    68958293846.2164,
+    70118913670.07317
+   ],
+   "worst_over_tau_rate": [
+    {
+     "factor": 1.371961397738004,
+     "order": 0.4562398896190185
+    },
+    {
+     "factor": 0.9834478350688979,
+     "order": -0.024079565091566887
+    }
+   ],
+   "n_required": null,
+   "defect_D_over_tau": [
+    94608117210.88306,
+    68958293846.2164,
+    70118913670.07317
+   ],
+   "defect_D_over_tau_rate": [
+    {
+     "factor": 1.371961397738004,
+     "order": 0.4562398896190185
+    },
+    {
+     "factor": 0.9834478350688979,
+     "order": -0.024079565091566887
+    }
+   ],
+   "n_required_D_only": null
+  },
+  "X_h_origin": {
+   "n": [
+    201,
+    401,
+    801
+   ],
+   "defect_D": [
+    0.006687414378029,
+    0.0004073899144013074,
+    2.5295032928602988e-05
+   ],
+   "defect_D_rate": [
+    {
+     "factor": 16.41526739280401,
+     "order": 4.036966345445857
+    },
+    {
+     "factor": 16.105530107479762,
+     "order": 4.009484242155484
+    }
+   ],
+   "defect_H_full": [
+    0.00018385403790898504,
+    9.876276026786841e-06,
+    5.995555412692757e-07
+   ],
+   "defect_H_full_rate": [
+    {
+     "factor": 18.615724936233917,
+     "order": 4.218449893808205
+    },
+    {
+     "factor": 16.47266240902134,
+     "order": 4.042001845693527
+    }
+   ],
+   "defect_H_impl": [
+    0.004542650269390049,
+    0.0031792934452512453,
+    0.002232564315625194
+   ],
+   "defect_H_impl_rate": [
+    {
+     "factor": 1.428823840144477,
+     "order": 0.5148280573601794
+    },
+    {
+     "factor": 1.4240545828848539,
+     "order": 0.5100044447229428
+    }
+   ],
+   "worst_over_tau": [
+    94205676876.1487,
+    68874752853.4837,
+    70172100846.90695
+   ],
+   "worst_over_tau_rate": [
+    {
+     "factor": 1.3677824307631434,
+     "order": 0.4518387631023065
+    },
+    {
+     "factor": 0.9815119117460421,
+     "order": -0.02692231836997285
+    }
+   ],
+   "n_required": null,
+   "defect_D_over_tau": [
+    94205676876.1487,
+    68874752853.4837,
+    70172100846.90695
+   ],
+   "defect_D_over_tau_rate": [
+    {
+     "factor": 1.3677824307631434,
+     "order": 0.4518387631023065
+    },
+    {
+     "factor": 0.9815119117460421,
+     "order": -0.02692231836997285
+    }
+   ],
+   "n_required_D_only": null
+  }
+ },
+ "controls": {
+  "C1_reproduction": {
+   "what": "arm A0 must reproduce leg 46/56's banked numbers through this leg's own code path; a miss withdraws the leg",
+   "tau_here": 2.3055726395982093e-14,
+   "tau_banked": 2.3055726395982093e-14,
+   "tau_rel_err": 0.0,
+   "A_norm_here": 15417.670644111318,
+   "A_norm_banked": 15417.670648061347,
+   "A_norm_rel_err": 2.5620136455282847e-10,
+   "defect_D_over_tau_here": 18536769.496403724,
+   "defect_D_over_tau_banked": 18536770.035727352,
+   "defect_H_impl_over_tau_here": 204033440973.5741,
+   "defect_H_impl_over_tau_banked": 204033440973.58594,
+   "PASS": true
+  },
+  "C2_lesson90": {
+   "what": "lesson 90, twice: L2_h vs X_h must differ (the curvature term is wired) and X_h vs X_h_origin must differ (the border-row restriction is wired)",
+   "L2_vs_X_A_norm_ratio": 0.06011737504663042,
+   "X_vs_Xorigin_A_norm_ratio": 1.000379192587156,
+   "L2_vs_X_defect_ratio": 103.98884200141568,
+   "PASS_curvature_wired": true,
+   "PASS_restriction_wired": true
+  },
+  "C3_mechanism": {
+   "what": "novelty sec 4.2 under test: does the X_h norm separate Xu's singular family from a physical mode in a way the weighted-sup and L^2 norms do not, and does the separation GROW with n?",
+   "separations_at_finest_n": {
+    "lambda_0.25": {
+     "weighted_sup": 0.9819157679925032,
+     "L2_h": 0.8151469958326064,
+     "X_h": 6.015121636522977
+    },
+    "lambda_0.50": {
+     "weighted_sup": 0.9697513473259238,
+     "L2_h": 0.7004191601325817,
+     "X_h": 24.84211117411288
+    },
+    "lambda_0.75": {
+     "weighted_sup": 0.9610165630535998,
+     "L2_h": 0.6128688824803492,
+     "X_h": 74.16541400742155
+    }
+   },
+   "growth_201_to_801": {
+    "lambda_0.25": {
+     "weighted_sup": 1.0007598490924856,
+     "L2_h": 1.0000277398956905,
+     "X_h": 2.3546424223943014
+    },
+    "lambda_0.50": {
+     "weighted_sup": 0.9998995380301567,
+     "L2_h": 1.00044871237887,
+     "X_h": 3.7966295220025845
+    },
+    "lambda_0.75": {
+     "weighted_sup": 0.9990531904894882,
+     "L2_h": 1.002296070428769,
+     "X_h": 5.529432021953993
+    }
+   },
+   "PASS_curvature_separates": true
+  },
+  "C5_B_estimator_calibration": {
+   "what": "the ascent gives a LOWER witness for B, which is generous. In L2_h an analytic UPPER bound exists (leg 46's own decomposition, whose one norm-specific step is exact in L^2), so the estimator's looseness is a measured factor there -- and that factor is applied to the X arms, whose witnesses would otherwise be unaudited.",
+   "L2_B_upper": 21068.72944937282,
+   "L2_B_witness": 86.9198916936649,
+   "L2_upper_over_witness": 242.39249542125697,
+   "C_eq_X_over_L2": 29320.4177536249,
+   "B_X_upper_via_C_eq": 617743948.9937105,
+   "X_h_B_bracket": {
+    "lower_witness": 85.58457496133659,
+    "upper": 617743948.9937105,
+    "bracket_width_decades": 6.858413001864674
+   },
+   "X_h_worst_over_tau_upperB": 70118913670.07317,
+   "X_h_worst_over_tau_witnessB": 9714.538576993758,
+   "X_h_origin_B_bracket": {
+    "lower_witness": 85.58705525910288,
+    "upper": 617743948.9937105,
+    "bracket_width_decades": 6.858400415904815
+   },
+   "X_h_origin_worst_over_tau_upperB": 70172100846.90695,
+   "X_h_origin_worst_over_tau_witnessB": 9722.189076258703
+  }
+ },
+ "theta_B_free": {
+  "what": "defect/tau = Theta * B with Theta = 4 ||A||^2 defect / (1 - Z_1)^2. Theta is exact in every arm; B is the only unpinned factor. The realization comparison is therefore stated on Theta.",
+  "by_arm": {
+   "weighted_sup": 420.0837512826802,
+   "L2_h": 302.02294372354123,
+   "X_h": 113.50805424204496,
+   "X_h_origin": 113.59415330771841
+  },
+  "by_arm_D_only": {
+   "weighted_sup": 406.3595885460255,
+   "L2_h": 302.02294372354123,
+   "X_h": 113.50805424204496,
+   "X_h_origin": 113.59415330771841
+  },
+  "gain_over_weighted_sup": {
+   "weighted_sup": 1.0,
+   "L2_h": 1.3909001286577976,
+   "X_h": 3.7009157992162582,
+   "X_h_origin": 3.698110677797857
+  },
+  "gain_over_weighted_sup_D_only": {
+   "weighted_sup": 1.0,
+   "L2_h": 1.34545933344054,
+   "X_h": 3.58000664586764,
+   "X_h_origin": 3.5772931679434814
+  },
+  "ladder": {
+   "weighted_sup": [
+    43564.02172897195,
+    9541.909580181464,
+    420.0837512826802
+   ],
+   "L2_h": [
+    40184.92256491337,
+    4118.256309009707,
+    302.02294372354123
+   ],
+   "X_h": [
+    10862.44350954288,
+    924.8901740538982,
+    113.50805424204496
+   ],
+   "X_h_origin": [
+    10816.237269202324,
+    923.7696961679244,
+    113.59415330771841
+   ]
+  },
+  "ladder_rate": {
+   "weighted_sup": [
+    {
+     "factor": 4.565545435418334,
+     "order": 2.1907872260291863
+    },
+    {
+     "factor": 22.714302924229457,
+     "order": 4.50552912631378
+    }
+   ],
+   "L2_h": [
+    {
+     "factor": 9.75775171569552,
+     "order": 3.2865487746052073
+    },
+    {
+     "factor": 13.63557436477204,
+     "order": 3.7693035663731003
+    }
+   ],
+   "X_h": [
+    {
+     "factor": 11.744576614898568,
+     "order": 3.5539228008644743
+    },
+    {
+     "factor": 8.148233887276927,
+     "order": 3.0264873920823634
+    }
+   ],
+   "X_h_origin": [
+    {
+     "factor": 11.708802869450407,
+     "order": 3.549521674347762
+    },
+    {
+     "factor": 8.132194037007332,
+     "order": 3.0236446388039577
+    }
+   ]
+  }
+ },
+ "headline": {
+  "leg56_realization_robust_ratio_banked": 18536770.035727352,
+  "A0_worst_over_tau": 19162820.039694123,
+  "A1_L2_worst_over_tau": 6363239.6888144445,
+  "A2_X_worst_over_tau": 70118913670.07317,
+  "A3_Xorigin_worst_over_tau": 70172100846.90695,
+  "improvement_A0_to_A1": 2.913102507986363,
+  "improvement_A0_to_A2": 0.00026436190360312495,
+  "improvement_A0_to_A3": 0.0002641615296205114,
+  "A_norm_by_arm": {
+   "weighted_sup": 15417.670644111318,
+   "L2_h": 17618.36929417902,
+   "X_h": 1059.1701145681975,
+   "X_h_origin": 1059.5717440241788
+  },
+  "endpoint_share_by_arm": {
+   "weighted_sup": 1.00009391999639,
+   "L2_h": 1.0000756467496055,
+   "X_h": 1.0000756150062533,
+   "X_h_origin": 1.0000756150062533
+  }
+ },
+ "verdict": {
+  "gate": "Does origin-H^2 (or another space this leg identifies as structurally analogous, per leg 163's own scoping method) admit a certificate formulation for the collocation-basis realization of L1, and if built, does its diagnostic close?",
+  "formulation_exists": true,
+  "formulation_note": "all five constants form in every arm; Z_1 < 1 and the budget is positive in every arm, so the radii polynomial has a solution interval in each -- the FORMULATION conjunct is YES",
+  "best_alternative_arm": "X_h",
+  "theta_gain_best_arm": 3.7009157992162582,
+  "best_alternative_ratio_upperB": 70118913670.07317,
+  "best_alternative_ratio_witnessB": 9714.538576993758,
+  "closes_under_upper_B": false,
+  "closes_under_witness_B": false,
+  "n_required_best_arm": null
+ },
+ "elapsed_s": 2836.7054255008698
+}

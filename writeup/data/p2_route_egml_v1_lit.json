@@ -1,0 +1,297 @@
+{
+  "route": "EGML v1",
+  "leg": 190,
+  "gate": "Can 'EGM' be located as a real, checkable primary source, and does it state the p=2, -1/2-gap claim as relayed, with its own hypotheses?",
+  "citation": {
+    "arxiv": "1906.05811",
+    "tag": "EGM",
+    "authors": "Elgindi, Ghoul, Masmoudi",
+    "title": "Stable self-similar blowup for a family of nonlocal transport equations",
+    "venue": "arXiv v1 [math.AP], submitted 13 Jun 2019 (title page dated June 14, 2019); published as Analysis & PDE 14 (2021), no. 3, 891-908, doi:10.2140/apde.2021.14.891 (the published title hyphenates 'blow-up')",
+    "read": "FULL TEXT at leg 141, and re-read INDEPENDENTLY at leg 190 from BOTH the PDF and the arXiv LaTeX e-print (OSWModel_Final.tex, 48494 bytes, dated 13 Jun 2019).  Sections read closely at leg 190: sec 1 (space, weight, family, F_0), sec 2 (Prop. 2.1 and its complete proof), sec 3 (modulation), sec 6 (the C^alpha analogue)."
+  },
+  "E1_egm_constant": {
+    "what": "EGM sec 2's closing coefficient D(y) = -2HF_0 - 1 + (1/2)d_y(y phi)/phi, with their phi and their a = 0 profile",
+    "n_nodes": 4000,
+    "y_range": [
+      -1000.0,
+      1000.0
+    ],
+    "egm_printed_value": -0.5,
+    "max_dev_analytic": 4.440892098500626e-16,
+    "max_dev_finite_difference": 5.000001408017596e-06,
+    "spread_analytic": 8.881784197001252e-16,
+    "negative_controls": [
+      {
+        "control": "decoy_F_over_1p_y2_squared",
+        "max_dev_from_-0.5": 0.49999402951785643,
+        "is_constant_spread": 0.49999202955053
+      },
+      {
+        "control": "decoy_F_y_over_1p2y2",
+        "max_dev_from_-0.5": 0.34314285398792077,
+        "is_constant_spread": 0.3431418540180945
+      }
+    ],
+    "reading": "the -1/2 this repository quotes is EXACT and y-INDEPENDENT, and it falls out of EGM's own printed algebra.  The decoys go through the same code path and do not."
+  },
+  "E2_gamma_sweep": {
+    "what": "the same coefficient over the weight family phi_gamma = (1+y^2)^{gamma/2}/y^gamma, gamma = EGM's origin exponent",
+    "rows": [
+      {
+        "gamma": 2.0,
+        "D_at_origin_limit": 0.5,
+        "D_at_origin_measured": 0.5000000000000001,
+        "D_far_field_measured": -0.4999999999999998,
+        "spread_over_y": 0.9999980000020001,
+        "sup_over_y": 0.4999990000010001,
+        "fd_agrees_to": 5.000000115606973e-07
+      },
+      {
+        "gamma": 2.5,
+        "D_at_origin_limit": 0.25,
+        "D_at_origin_measured": 0.2500000000000001,
+        "D_far_field_measured": -0.4999999999999998,
+        "spread_over_y": 0.7499985000015001,
+        "sup_over_y": 0.24999925000075013,
+        "fd_agrees_to": 1.093749924685472e-06
+      },
+      {
+        "gamma": 3.0,
+        "D_at_origin_limit": 0.0,
+        "D_at_origin_measured": 1.5000000000000002e-16,
+        "D_far_field_measured": -0.4999999999999998,
+        "spread_over_y": 0.4999990000010001,
+        "sup_over_y": -4.9999949987821e-07,
+        "fd_agrees_to": 1.9999999149396118e-06
+      },
+      {
+        "gamma": 3.5,
+        "D_at_origin_limit": -0.25,
+        "D_at_origin_measured": -0.24999999999999983,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 0.24999950000050009,
+        "sup_over_y": -0.2500002499997499,
+        "fd_agrees_to": 3.281250341546915e-06
+      },
+      {
+        "gamma": 3.9,
+        "D_at_origin_limit": -0.44999999999999996,
+        "D_at_origin_measured": -0.44999999999999973,
+        "D_far_field_measured": -0.4999999999999998,
+        "spread_over_y": 0.049999900000100184,
+        "sup_over_y": -0.45000004999994986,
+        "fd_agrees_to": 4.618251098931214e-06
+      },
+      {
+        "gamma": 4.0,
+        "D_at_origin_limit": -0.5,
+        "D_at_origin_measured": -0.4999999999999998,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 8.881784197001252e-16,
+        "sup_over_y": -0.49999999999999956,
+        "fd_agrees_to": 5.000001408128618e-06
+      },
+      {
+        "gamma": 4.1,
+        "D_at_origin_limit": -0.5499999999999998,
+        "D_at_origin_measured": -0.5499999999999996,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 0.049999900000099795,
+        "sup_over_y": -0.50000004999995,
+        "fd_agrees_to": 5.401751792866172e-06
+      },
+      {
+        "gamma": 5.0,
+        "D_at_origin_limit": -1.0,
+        "D_at_origin_measured": -0.9999999999999998,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 0.49999900000099984,
+        "sup_over_y": -0.5000004999995,
+        "fd_agrees_to": 1.0000007898525176e-05
+      },
+      {
+        "gamma": 6.0,
+        "D_at_origin_limit": -1.5,
+        "D_at_origin_measured": -1.4999999999999998,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 0.9999980000019999,
+        "sup_over_y": -0.500000999999,
+        "fd_agrees_to": 1.750002534417483e-05
+      },
+      {
+        "gamma": 8.0,
+        "D_at_origin_limit": -2.5,
+        "D_at_origin_measured": -2.4999999999999996,
+        "D_far_field_measured": -0.5,
+        "spread_over_y": 1.9999960000039998,
+        "sup_over_y": -0.5000019999980001,
+        "fd_agrees_to": 4.200013277255721e-05
+      }
+    ],
+    "y_independent_at": [
+      4.0
+    ],
+    "leg_165_formula": "D_phi(0) = (3 - gamma)/2",
+    "leg_165_formula_reproduced": true,
+    "reading": "gamma = 4 is the ONLY member of the family whose coefficient is constant in y -- everywhere else the -1/2 is only the far-field value and the origin value is (3-gamma)/2, so the usable constant is the sup over y.  leg 165's D_phi(0) = (3-gamma)/2 is recovered from EGM's algebra rather than quoted.",
+    "caveat": "this is the LOCAL/diagonal term only.  EGM's proof also needs int Hf f F_0 phi = 0, which they establish using phi F_0 = (y^2+1)/y^3 -- gamma = 4 algebra.  So this sweep does NOT say 'any gamma >= 4 works', and no such claim is made or banked."
+  },
+  "E3_hilbert_of_F0": {
+    "what": "EGM's printed pair F_0 = y/(1+y^2), H F_0 = -1/(y^2+1), checked numerically",
+    "rows": [
+      {
+        "t_max": 5.0,
+        "n": 2001,
+        "S_grid_half_extent": 74.20321057778875,
+        "max_abs_err_vs_EGM": 0.008652892519433677,
+        "max_abs_err_vs_NEGATED_EGM": 1.9913996662822053,
+        "err_times_S": 0.6420724057265103
+      },
+      {
+        "t_max": 7.0,
+        "n": 2001,
+        "S_grid_half_extent": 548.3161232732465,
+        "max_abs_err_vs_EGM": 0.0011652360722862638,
+        "max_abs_err_vs_NEGATED_EGM": 1.9988348933782838,
+        "err_times_S": 0.6389177258541486
+      },
+      {
+        "t_max": 9.0,
+        "n": 2001,
+        "S_grid_half_extent": 4051.54190208279,
+        "max_abs_err_vs_EGM": 0.0001578374429795533,
+        "max_abs_err_vs_NEGATED_EGM": 1.9998421626650038,
+        "err_times_S": 0.6394850139492633
+      },
+      {
+        "t_max": 11.0,
+        "n": 2001,
+        "S_grid_half_extent": 29937.07084924806,
+        "max_abs_err_vs_EGM": 2.1382685370108234e-05,
+        "max_abs_err_vs_NEGATED_EGM": 1.99997861731463,
+        "err_times_S": 0.6401349668721101
+      }
+    ],
+    "truncation_law": {
+      "predicted_err_times_S": 0.6366197723675814,
+      "max_rel_dev_over_4_extents": 0.00856497645156479
+    },
+    "convention": "solver/line_hilbert.py's H IS EGM's H (the error against the NEGATED target is O(1) at every extent, so the sign convention is pinned, not assumed)",
+    "reading": "the pair EGM print is correct in this repository's own convention, on an instrument that shares no algebra with the paper.  The residual is the omitted 1/y tail, err ~ (2/pi)/S, verified over four grid extents -- it is truncation, not disagreement, and refining n at fixed extent correctly does nothing."
+  },
+  "E4_transcription_audit": {
+    "what": "the sign of the |a|-slope of EGM's gap, correct reading vs the banked one",
+    "latex_source_verbatim": "\\leq-\\Big(\\frac{1}{2}-C\\,|a|\\Big)\\int_\\RR f(y)^2 \\phi(y)dy",
+    "source_of_truth": "arXiv:1906.05811 e-print, OSWModel_Final.tex, proposition block",
+    "rows": [
+      {
+        "a": 0.0,
+        "C_assumed": 1.0,
+        "gap_correct": -0.5,
+        "gap_as_transcribed_in_repo": -0.5,
+        "abs_difference": 0.0,
+        "rel_difference": 0.0
+      },
+      {
+        "a": 0.01,
+        "C_assumed": 1.0,
+        "gap_correct": -0.49,
+        "gap_as_transcribed_in_repo": -0.51,
+        "abs_difference": 0.020000000000000018,
+        "rel_difference": 0.04081632653061228
+      },
+      {
+        "a": 0.05,
+        "C_assumed": 1.0,
+        "gap_correct": -0.45,
+        "gap_as_transcribed_in_repo": -0.55,
+        "abs_difference": 0.10000000000000003,
+        "rel_difference": 0.2222222222222223
+      },
+      {
+        "a": 0.1,
+        "C_assumed": 1.0,
+        "gap_correct": -0.4,
+        "gap_as_transcribed_in_repo": -0.6,
+        "abs_difference": 0.19999999999999996,
+        "rel_difference": 0.4999999999999999
+      },
+      {
+        "a": 0.2,
+        "C_assumed": 1.0,
+        "gap_correct": -0.3,
+        "gap_as_transcribed_in_repo": -0.7,
+        "abs_difference": 0.39999999999999997,
+        "rel_difference": 1.3333333333333333
+      }
+    ],
+    "sites_carrying_the_error": [
+      "experiments/journal/leg_141.md:30",
+      "experiments/journal/leg_141.md:117",
+      "writeup/novelty/leg_141.md:233",
+      "experiments/journal/leg_165.md:120",
+      "experiments/journal/leg_165.md:128",
+      "writeup/novelty/leg_190.md sec 2 (this leg's own novelty pass, now corrected in sec 8)"
+    ],
+    "corroboration_in_paper": [
+      "the proof splits M_a = (a=0 operator) + a Mtilde_a with |int f Mtilde_a f phi| <= C int |f|^2 phi, which can only ADD to -1/2",
+      "sec 6's C^alpha analogue reads (1/2 - C alpha), degrading the same way"
+    ],
+    "banked_numbers_moved": 0,
+    "reading": "zero error at a = 0 -- which is the ONLY value legs 141 and 165 ever compared at -- and a reversed slope everywhere off it.  The ar5iv HTML mirror, which leg 190's novelty pass accused of the error, is right; the pdftotext layout that seemed to contradict it silently drops \\Big( \\Big).  Nothing banked moves; the record is corrected."
+  },
+  "E5_p2_join": {
+    "what": "leg 111's admissible window (3, 2p+1) against EGM's gamma = 4",
+    "rows": [
+      {
+        "p": 1,
+        "window": [
+          3.0,
+          3.0
+        ],
+        "width": 0.0,
+        "egm_gamma_inside": false
+      },
+      {
+        "p": 2,
+        "window": [
+          3.0,
+          5.0
+        ],
+        "width": 2.0,
+        "egm_gamma_inside": true
+      },
+      {
+        "p": 3,
+        "window": [
+          3.0,
+          7.0
+        ],
+        "width": 4.0,
+        "egm_gamma_inside": true
+      }
+    ],
+    "whose_claim": {
+      "-1/2 gap": "EGM, arXiv:1906.05811 Prop. 2.1, verbatim in EGM_PRIMARY_READ",
+      "p = 2, width 2.0": "leg 165 / leg 111, experiments/journal/leg_165.md:106-108 -- NOT EGM; EGM say nothing about p",
+      "the join": "arithmetic about the two (3 < 4 < 5), not a claim EGM make, and not upgraded by this leg"
+    },
+    "reading": "the relayed sentence is a correct composite of two separately-true statements with different owners.  At p = 1 the window is (3,3), width 0.0, and EGM's gamma = 4 is OUTSIDE it."
+  },
+  "verbatim": {
+    "gap_at_a_zero": -0.5,
+    "locator": "Proposition 2.1, sec 2 'Coercivity', p. 6; displayed inequality (2.1)",
+    "statement_verbatim": "Proposition 2.1. There exists a universal constant C > 0 so that if a is small enough and if f is odd, f'(0) = Hf(0) = 0 and int_R |f|^2 phi(y) dy < +infty, int_R f M_a f phi(y) dy <= -(1/2 - C|a|) int_R f(y)^2 phi(y) dy.   (2.1)",
+    "hypotheses_verbatim": "three, all inside the statement: (i) 'a is small enough'; (ii) f is odd with f'(0) = Hf(0) = 0; (iii) int_R |f|^2 phi(y) dy < +infty.  Hypothesis (ii) is not free -- EGM buy it with modulation, sec 3: 'Since our coercivity estimate from the previous section relies on partial_y q(0) = H(q)(0) = 0, we will use that we have the free parameters mu and lambda to fix these conditions.'",
+    "weight_verbatim": "sec 1: 'We introduce first the following weighted space L^2_phi(R) = {f in L^2_loc(R) : int_R |f|^2 phi < infty}', 'where phi = (1+y^2)^2 / y^4.'  The origin exponent is therefore gamma = 4.",
+    "object_verbatim": "sec 1 p. 2: 'Hence, when a = 2 we get the De Gregorio model and when a = 0 we get CLM model.'  And, after (1.7): 'When a = 0, the profile F_0 has the form: F_0(y) = y/(1+y^2), HF_0(y) = -1/(y^2+1)'.",
+    "sign_correction_leg_190": "THIS ROW CORRECTS A TRANSCRIPTION THAT PROPAGATED THROUGH THREE LEGS.  experiments/journal/leg_141.md:30,117, writeup/novelty/leg_141.md:233 and experiments/journal/leg_165.md:120,128 all render the bracket as (-1/2 - C|a|), i.e. a gap IMPROVING with |a|; leg 190's own novelty pass sec 2 repeated it and additionally accused the ar5iv HTML mirror of the error.  The paper's LaTeX source settles it -- Prop. 2.1 reads '\\leq-\\Big(\\frac{1}{2}-C\\,|a|\\Big)\\int_\\RR f(y)^2 \\phi(y)dy' -- so the bracket is -(1/2 - C|a|) and the gap DEGRADES with |a|.  The proof forces the same reading: EGM split M_a f = (the a = 0 operator) + a Mtilde_a f and bound |int f Mtilde_a f phi| <= C int |f|^2 phi, which can only ADD to -1/2; and their own sec 6 C^alpha analogue reads (1/2 - C alpha), degrading identically.  The two readings AGREE EXACTLY at a = 0 (both -0.5), the only value this repository has ever quoted, so NO banked number moves -- legs 141 and 165 both compare at a = 0, gamma = 4.  What was wrong is the SIGN OF THE SLOPE in |a|: zero error on axis, and wrong direction everywhere off it.  The ar5iv HTML mirror is CORRECT; the error was ours, and the 'PDF evidence' against it was a pdftotext misparse that silently drops \\Big( ... \\Big).",
+    "how_obtained": "a theorem, proved in full in sec 2 from a weighted Hilbert-transform identity (Lemma 7.1).  NOT numerics.  The -1/2 is exact and y-independent: EGM's own last line evaluates -2HF_0 - 1 + (1/2) d_y(y phi)/phi = 2/(1+y^2) - 1 + (y^2-3)/(2(y^2+1)) = -1/2, identically in y."
+  },
+  "scope": "EGM's gap is a statement about the linearisation M_a at a = 0 (CLM) in L^2_phi with phi = (1+y^2)^2/y^4, under the three hypotheses above.  It is NOT a statement about HL_S2_nonsymmetric, this repository's target, and EGM say nothing about p, about leg 111's admissible window, or about any realization framing used here.",
+  "the_relayed_p2_claim": "the relayed sentence 'at p = 2 it is width 2.0 and EGM certifies a -1/2 gap' is a COMPOSITE of two separately-true statements and must not be quoted as one.  The '-1/2 gap' half is EGM's, verbatim above.  The 'p = 2, width 2.0' half is LEG 165's (experiments/journal/leg_165.md:106-108): leg 111's admissible window (3, 2p+1) is (3,3) of width 0.0 at p = 1 and (3,5) of width 2.0 at p = 2.  The JOIN -- that EGM's gamma = 4 lies inside (3,5) -- is arithmetic about the two, not a claim EGM make, and this row does not upgrade it.",
+  "gate_answer": "YES, with one correction that runs the other way from the one this leg expected.  EGM is arXiv:1906.05811 / Anal. PDE 14 (2021) 891-908, Prop. 2.1, read at full text from the PDF and the LaTeX e-print.  It states the -1/2 gap with three hypotheses (odd f, f'(0) = Hf(0) = 0, finite weighted norm), and the -1/2 is recomputed here from EGM's own algebra to 4.441e-16.  The 'p = 2, width 2.0' half is leg 165's, not EGM's.  The correction: the |a|-dependence is -(1/2 - C|a|), DEGRADING, not the (-1/2 - C|a|) that legs 141, 165 and this leg's own novelty pass transcribed -- identical at a = 0, so 0 banked numbers move.",
+  "headline": "EGM = arXiv:1906.05811 Prop. 2.1, gap -0.5 at a = 0, reproduced from EGM's own algebra to 4.441e-16 over 4000 nodes; gamma = 4 is the unique y-independent exponent of 10 scanned; one propagated sign error corrected, 0 banked numbers moved",
+  "elapsed_s": 34.05
+}

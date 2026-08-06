@@ -527,6 +527,114 @@ LSS_PRIMARY_READ = {
         "read PRE-EMPTED / CONFIRMED_AND_PRE-EMPTED.  Re-derived at leg 161 in "
         "experiments/p2_route_lss_v1_lit.py; see writeup/data/p2_route_lss_v1_lit.json."),
 }
+# APPENDED AT LEG 190 (Route-EGML): "EGM" ENTERS THE SHARED LEDGER FOR THE FIRST TIME.
+# "EGM" was relayed into this repository's steering documents twice ("at p = 2 it is width
+# 2.0 and EGM certifies a -1/2 gap") but the string never appeared in THIS module or in any
+# other shared ledger -- leg 141 read the paper at full text and banked it in its own leg
+# artifacts only.  This block closes that shared-ledger gap.  Nothing existing is touched.
+# NOTE ON SCOPE, same reason as LSS_PRIMARY_READ above: the arXiv id is deliberately NOT
+# added to any CLAIM_LEDGER row's `source` string.  `cited_ids`
+# (experiments/p2_route_lga_v1_ledger.py) scans that field with ARXIV_RE and cross-checks
+# every hit against ARXIV_METADATA, which has no 1906.05811 entry -- adding the id there
+# would report a real paper as a phantom citation and would require editing a file outside
+# this leg's territory.  CLAIM_LEDGER and PRIMARY_SOURCES are additionally hard-pinned at
+# their current sizes by test_literature_gates_selfconsistency.py and test_literature_gates.py.
+EGM_PRIMARY_READ = {
+    "arxiv": "1906.05811",
+    "tag": "EGM",
+    "authors": "Elgindi, Ghoul, Masmoudi",
+    "title": "Stable self-similar blowup for a family of nonlocal transport equations",
+    "venue": ("arXiv v1 [math.AP], submitted 13 Jun 2019 (title page dated June 14, 2019); "
+              "published as Analysis & PDE 14 (2021), no. 3, 891-908, "
+              "doi:10.2140/apde.2021.14.891 (the published title hyphenates 'blow-up')"),
+    "read": ("FULL TEXT at leg 141, and re-read INDEPENDENTLY at leg 190 from BOTH the PDF "
+             "and the arXiv LaTeX e-print (OSWModel_Final.tex, 48494 bytes, dated 13 Jun "
+             "2019).  Sections read closely at leg 190: sec 1 (space, weight, family, F_0), "
+             "sec 2 (Prop. 2.1 and its complete proof), sec 3 (modulation), sec 6 (the "
+             "C^alpha analogue)."),
+    "provenance_before_leg_190": ("located at leg 141 at primary source, and re-used since by "
+                                  "legs 159, 165, 181, capabilities.py:287 and four "
+                                  "Route-W*/XUL runners -- but ABSENT from every shared "
+                                  "ledger.  A ledger gap, not a knowledge gap."),
+    "spectral_gap": {
+        # THE NUMBER THIS REPOSITORY QUOTES.  It is the a = 0 (CLM) value, and it is exact.
+        "gap_at_a_zero": -0.5,
+        "locator": "Proposition 2.1, sec 2 'Coercivity', p. 6; displayed inequality (2.1)",
+        "statement_verbatim": (
+            "Proposition 2.1. There exists a universal constant C > 0 so that if a is small "
+            "enough and if f is odd, f'(0) = Hf(0) = 0 and int_R |f|^2 phi(y) dy < +infty, "
+            "int_R f M_a f phi(y) dy <= -(1/2 - C|a|) int_R f(y)^2 phi(y) dy.   (2.1)"),
+        "hypotheses_verbatim": (
+            "three, all inside the statement: (i) 'a is small enough'; (ii) f is odd with "
+            "f'(0) = Hf(0) = 0; (iii) int_R |f|^2 phi(y) dy < +infty.  Hypothesis (ii) is not "
+            "free -- EGM buy it with modulation, sec 3: 'Since our coercivity estimate from "
+            "the previous section relies on partial_y q(0) = H(q)(0) = 0, we will use that we "
+            "have the free parameters mu and lambda to fix these conditions.'"),
+        "weight_verbatim": (
+            "sec 1: 'We introduce first the following weighted space L^2_phi(R) = "
+            "{f in L^2_loc(R) : int_R |f|^2 phi < infty}', 'where phi = (1+y^2)^2 / y^4.'  "
+            "The origin exponent is therefore gamma = 4."),
+        "object_verbatim": (
+            "sec 1 p. 2: 'Hence, when a = 2 we get the De Gregorio model and when a = 0 we "
+            "get CLM model.'  And, after (1.7): 'When a = 0, the profile F_0 has the form: "
+            "F_0(y) = y/(1+y^2), HF_0(y) = -1/(y^2+1)'."),
+        "sign_correction_leg_190": (
+            "THIS ROW RECORDS A TRANSCRIPTION THAT PROPAGATED THROUGH THREE LEGS, AND ITS "
+            "REPAIR -- ALL FIVE SITES ARE NOW FIXED; DO NOT READ THIS ROW AS AN OUTSTANDING "
+            "DEFECT.  experiments/journal/leg_141.md:30,117, writeup/novelty/leg_141.md:233 "
+            "and experiments/journal/leg_165.md:120,128 all RENDERED the bracket as "
+            "(-1/2 - C|a|), i.e. a gap IMPROVING with |a|, UNTIL LEG 214 (2c901c4, "
+            "Route-EGMB) CORRECTED ALL FIVE -- each of them carries the corrected form "
+            "-(1/2 - C|a|) today, so the five files are RIGHT and this sentence is history, "
+            "not a warning about the live tree (staleness found and escalated by leg 213's "
+            "post-append ledger audit, Route-LGC2; re-tensed here at leg 227, Route-EGMT).  "
+            "Leg 190's own novelty pass sec 2 repeated the error and "
+            "additionally accused the ar5iv HTML mirror of it.  The paper's LaTeX "
+            "source settles it -- Prop. 2.1 reads "
+            "'\\leq-\\Big(\\frac{1}{2}-C\\,|a|\\Big)\\int_\\RR f(y)^2 \\phi(y)dy' -- so the "
+            "bracket is -(1/2 - C|a|) and the gap DEGRADES with |a|.  The proof forces the "
+            "same reading: EGM split M_a f = (the a = 0 operator) + a Mtilde_a f and bound "
+            "|int f Mtilde_a f phi| <= C int |f|^2 phi, which can only ADD to -1/2; and their "
+            "own sec 6 C^alpha analogue reads (1/2 - C alpha), degrading identically.  The "
+            "two readings AGREE EXACTLY at a = 0 (both -0.5), the only value this repository "
+            "has ever quoted, so NO banked number moves -- legs 141 and 165 both compare at "
+            "a = 0, gamma = 4.  What was wrong is the SIGN OF THE SLOPE in |a|: zero error on "
+            "axis, and wrong direction everywhere off it.  The ar5iv HTML mirror is CORRECT; "
+            "the error was ours, and the 'PDF evidence' against it was a pdftotext misparse "
+            "that silently drops \\Big( ... \\Big)."),
+        "how_obtained": ("a theorem, proved in full in sec 2 from a weighted Hilbert-transform "
+                         "identity (Lemma 7.1).  NOT numerics.  The -1/2 is exact and "
+                         "y-independent: EGM's own last line evaluates "
+                         "-2HF_0 - 1 + (1/2) d_y(y phi)/phi = 2/(1+y^2) - 1 + "
+                         "(y^2-3)/(2(y^2+1)) = -1/2, identically in y."),
+    },
+    "scope": (
+        "EGM's gap is a statement about the linearisation M_a at a = 0 (CLM) in L^2_phi with "
+        "phi = (1+y^2)^2/y^4, under the three hypotheses above.  It is NOT a statement about "
+        "HL_S2_nonsymmetric, this repository's target, and EGM say nothing about p, about "
+        "leg 111's admissible window, or about any realization framing used here."),
+    "the_relayed_p2_claim": (
+        "the relayed sentence 'at p = 2 it is width 2.0 and EGM certifies a -1/2 gap' is a "
+        "COMPOSITE of two separately-true statements and must not be quoted as one.  The "
+        "'-1/2 gap' half is EGM's, verbatim above.  The 'p = 2, width 2.0' half is LEG 165's "
+        "(experiments/journal/leg_165.md:106-108): leg 111's admissible window (3, 2p+1) is "
+        "(3,3) of width 0.0 at p = 1 and (3,5) of width 2.0 at p = 2.  The JOIN -- that EGM's "
+        "gamma = 4 lies inside (3,5) -- is arithmetic about the two, not a claim EGM make, "
+        "and this row does not upgrade it."),
+    "re_derived_at_leg_190": (
+        "experiments/p2_route_egml_v1_lit.py -> writeup/data/p2_route_egml_v1_lit.json.  "
+        "E1 reproduces EGM's own closing identity to 4.44e-16 (spread 8.88e-16) over 4000 "
+        "nodes spanning six decades, with two decoy profiles through the same code path "
+        "missing by 0.500 and 0.343; E2 finds gamma = 4 is the UNIQUE exponent in the family "
+        "(1+y^2)^{gamma/2}/|y|^gamma whose constant is y-independent (1 of 10 scanned, "
+        "spread 0.0000 against 0.0500 at gamma = 3.9 and 4.1), and recovers leg 165's "
+        "D_phi(0) = (3-gamma)/2 from EGM's algebra rather than by quotation, with the "
+        "far-field value -1/2 for every gamma; E3 confirms HF_0 = -1/(y^2+1) against "
+        "solver/line_hilbert.py, an instrument sharing no algebra with the paper, the "
+        "residual being the omitted 1/y tail (err * S = 0.639 vs 2/pi = 0.6366 over four "
+        "grid extents) and the negated target off by 2.0, which pins the sign convention.  "
+        "No verdict in CLAIM_LEDGER moves, no ban lifts, no route advances, no figure owed."),
+}
 XU_A_C_RECOMPUTED = 0.6888   # XU's own recompute; they quote 0.04% agreement
 XU_S2_BOUNDARY = 0.39        # where s* crosses the ordinary Laplacian s = 2 (c_l = 1/2)
 

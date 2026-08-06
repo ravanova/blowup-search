@@ -128,6 +128,13 @@ def second_derivative_sup(rp, b, edge_cutoffs=(1e-3, 1e-6, 1e-10), n=20001):
     for eps in edge_cutoffs:
         v = np.linspace(0.0, 1.0 - float(eps), int(n))
         e = np.abs(rp.e_of(b, v))
+        if not np.all(np.isfinite(e)):
+            # nan ** 0.0 == 1.0 and inf ** 0.0 == 1.0 in IEEE-754 (and numpy), so at
+            # p == 2 exactly (edge_cutoffs' exponent p - 2.0 == 0.0) a non-finite e
+            # would otherwise silently certify a fixed value of 2.0 regardless of what
+            # b actually is. Report the honest non-measurement instead (leg 109 H2).
+            out.append(float("nan"))
+            continue
         out.append(float(np.max(abs(p * (p - 1.0)) * e ** (p - 2.0))))
     return out
 
@@ -152,6 +159,12 @@ def step_adversary(K, levels=24, order=60, n_eval=2001, kind="step"):
     Chebyshev mode) kept as the CONTROL, because it reports a divergence that is
     purely the quadrature and vanishes under refinement.
     """
+    if kind not in ("step", "single"):
+        raise ValueError(
+            f"step_adversary: kind must be 'step' (the adversary) or 'single' (the "
+            f"designated control), got {kind!r} -- an unrecognised kind used to "
+            f"silently fall through to the adversary, switching the control off "
+            f"(leg 109 H5)")
     u, w = graded_grid(levels, order)
     v = np.linspace(-0.999, 0.999, int(n_eval))
     c = np.zeros(int(K))
@@ -217,17 +230,32 @@ def rehearsal(a, K=96, Xc0=10.0):
         return {"a": a, "K": K, "converged": False, "detail": r}
     b, Xc = r["b"], r["Xc"]
     npp = second_derivative_sup(rp, b)
-    finite = bool(rp.p >= 2.0 and max(npp) / min(npp) < 1.01)
+    # Guard the ratio: a non-finite cutoff (H2's nan**0.0 == 1.0 path, now refused
+    # upstream in second_derivative_sup) or a zero minimum must not be certified or
+    # crash -- both report `finite = False` rather than a fabricated True (leg 109 H2).
+    if not np.all(np.isfinite(npp)) or min(npp) == 0.0:
+        finite = False
+    else:
+        finite = bool(rp.p >= 2.0 and max(npp) / min(npp) < 1.01)
+    MACHINE_LEVEL = 1e-10  # what "machine level" / "roundoff" means below, quoted
+    Y0 = interpolant_defect(rp, b, Xc)
+    Z0 = z0_defect(rp, b, Xc)
+    y0_clause = (f"Y_0 is at machine level ({Y0:.3e} <= {MACHINE_LEVEL:.0e})"
+                 if Y0 <= MACHINE_LEVEL else
+                 f"Y_0 is NOT at machine level (measured {Y0:.3e} > {MACHINE_LEVEL:.0e})")
+    z0_clause = (f"Z_0 is roundoff ({Z0:.3e} <= {MACHINE_LEVEL:.0e})"
+                 if Z0 <= MACHINE_LEVEL else
+                 f"Z_0 is NOT roundoff (measured {Z0:.3e} > {MACHINE_LEVEL:.0e})")
     return {
         "a": float(a), "K": int(K), "converged": True,
         "Xc_over_c": r["Xc"], "newton_residual": r["residual"],
-        "Y0_interpolant_defect": interpolant_defect(rp, b, Xc),
-        "Z0": z0_defect(rp, b, Xc),
+        "Y0_interpolant_defect": Y0,
+        "Z0": Z0,
         "opnorm": rp.operator_norm(b, Xc),
         "N2_sup_by_cutoff": npp,
         "N2_finite": finite,
         "Z1": None,
-        "verdict": ("Y_0 is at machine level and Z_0 is roundoff. Z_2 is INFINITE in "
+        "verdict": (f"{y0_clause} and {z0_clause}. Z_2 is INFINITE in "
                     "the sup-to-sup setting because the finite Hilbert transform is "
                     "unbounded on the sup norm even on a bounded interval (see "
                     "step_adversary); and separately sup|N''| is finite only for "

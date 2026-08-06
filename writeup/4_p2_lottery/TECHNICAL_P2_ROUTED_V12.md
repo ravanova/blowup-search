@@ -251,6 +251,11 @@ with an old object's constants.
 ## 7. T6 — the survival boundary: a candidate mechanism, and the control that
 ## refuses to confirm it
 
+The boundary under discussion here is the one measured on **`a > 0`** — the point at
+which the `a > 0` continuation of the `a = 0` two-scale traveling wave stops fitting.
+It is not a boundary of the published two-scale *scenario*, which `arXiv:2603.25104`
+scopes to `a ≤ 0`; every `a` in the table below is positive.
+
 `X_c(a)` from the sinh-`ρ` build (`n = 801`), against the profile's own core
 half-width:
 

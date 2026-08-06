@@ -1,0 +1,605 @@
+{
+  "leg": 195,
+  "route": "PQVER",
+  "role": "VERIFY",
+  "verifies_commit": "e0eba8e",
+  "verifies_claim": "Leg 60's landed user-approved correction of Route-PORT v1/v2: 28x->63x, -2.541222->-2.541024, 1.168%->1.169%, with both ban-bearing numbers exact before and after and both evidence scripts reporting CLEAN 114/114",
+  "independence": "no import, exec or copy of leg 60's evidence scripts; half-ulp rule re-implemented on decimal; v2 slopes re-fitted with polyfit rather than read from the stored verdict fields",
+  "clause_V1_correction_confirmed": true,
+  "clause_V2_correction_complete": false,
+  "rows": [
+    {
+      "label": "(i) gap rho=10 vs rho=6, CORRECTED value",
+      "quoted": "63",
+      "quoted_as_float": 63.0,
+      "data": 62.987741082342914,
+      "abs_err": 0.012258917657085533,
+      "half_ulp": 0.5,
+      "half_ulps_out": 0.024517835314171066,
+      "rel_err": 0.00019458599455691322,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V2.md sec 2 / README item 47"
+    },
+    {
+      "label": "(i) gap rho=8 -> 10, leg 60's diagnosis of the OLD 28x",
+      "quoted": "28",
+      "quoted_as_float": 28.0,
+      "data": 28.163886733513852,
+      "abs_err": 0.16388673351385208,
+      "half_ulp": 0.5,
+      "half_ulps_out": 0.32777346702770416,
+      "rel_err": 0.0058530976254947175,
+      "pass": true,
+      "where": "leg 60 journal, claimed source of the error"
+    },
+    {
+      "label": "(i) OLD literal 28 against the rho=6 baseline it named",
+      "quoted": "28",
+      "quoted_as_float": 28.0,
+      "data": 62.987741082342914,
+      "abs_err": 34.987741082342914,
+      "half_ulp": 0.5,
+      "half_ulps_out": 69.97548216468583,
+      "rel_err": 1.2495621815122469,
+      "pass": false,
+      "where": "pre-e0eba8e prose"
+    },
+    {
+      "label": "(ii) reach ladder rho=8 (n=301), CORRECTED value",
+      "quoted": "-2.541024",
+      "quoted_as_float": -2.541024,
+      "data": -2.5410243873623113,
+      "abs_err": 3.8736231111613506e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.7747246222322701,
+      "rel_err": 1.5244338940369513e-07,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) resolution ladder n=201, leg 60's diagnosis of the OLD literal",
+      "quoted": "-2.541222",
+      "quoted_as_float": -2.541222,
+      "data": -2.5412218987965725,
+      "abs_err": 1.0120342741615218e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.20240685483230436,
+      "rel_err": 3.982470929975901e-08,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2, the adjacent table"
+    },
+    {
+      "label": "(ii) OLD literal -2.541222 against the reach row it sat in",
+      "quoted": "-2.541222",
+      "quoted_as_float": -2.541222,
+      "data": -2.5410243873623113,
+      "abs_err": 0.00019761263768858228,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 395.22527537716456,
+      "rel_err": 7.776283917287915e-05,
+      "pass": false,
+      "where": "pre-e0eba8e prose"
+    },
+    {
+      "label": "(ii) reach ladder rho=6 (untouched neighbour)",
+      "quoted": "-2.583087",
+      "quoted_as_float": -2.583087,
+      "data": -2.5830865254493696,
+      "abs_err": 4.7455063034718137e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.9491012606943627,
+      "rel_err": 1.8371453626888347e-07,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) reach ladder rho=7 (untouched neighbour)",
+      "quoted": "-2.557642",
+      "quoted_as_float": -2.557642,
+      "data": -2.557641524083721,
+      "abs_err": 4.7591627883036836e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.9518325576607367,
+      "rel_err": 1.8607619003377656e-07,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) reach ladder rho=9 (untouched neighbour)",
+      "quoted": "-2.530473",
+      "quoted_as_float": -2.530473,
+      "data": -2.5304732686230795,
+      "abs_err": 2.6862307933583907e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.5372461586716781,
+      "rel_err": 1.0615528374965433e-07,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) reach power-law slope, RE-FITTED here from the ladder",
+      "quoted": "-0.437",
+      "quoted_as_float": -0.437,
+      "data": -0.4369740062268909,
+      "abs_err": 2.599377310907869e-05,
+      "half_ulp": 0.0005,
+      "half_ulps_out": 0.05198754621815738,
+      "rel_err": 5.948231832741119e-05,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) extrapolated limit (unaffected, per leg 60)",
+      "quoted": "-2.511926",
+      "quoted_as_float": -2.511926,
+      "data": -2.511926042824432,
+      "abs_err": 4.282443200054331e-08,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.08564886400108662,
+      "rel_err": 1.7048444898672695e-08,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(ii) limit rel err vs CHL (unaffected, per leg 60)",
+      "quoted": "2.09e-04",
+      "quoted_as_float": 0.000209,
+      "data": 0.00020946198312965077,
+      "abs_err": 4.619831296507628e-07,
+      "half_ulp": 5e-07,
+      "half_ulps_out": 0.9239662593015256,
+      "rel_err": 0.0022104455964151327,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2.1"
+    },
+    {
+      "label": "(iii) n=1201 ratio gap %, CORRECTED value",
+      "quoted": "1.169",
+      "quoted_as_float": 1.169,
+      "data": 1.168502703465662,
+      "abs_err": 0.0004972965343379432,
+      "half_ulp": 0.0005,
+      "half_ulps_out": 0.9945930686758864,
+      "rel_err": 0.00042540336555854847,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2"
+    },
+    {
+      "label": "(iii) OLD literal 1.168 against the same stored value",
+      "quoted": "1.168",
+      "quoted_as_float": 1.168,
+      "data": 1.168502703465662,
+      "abs_err": 0.0005027034656621687,
+      "half_ulp": 0.0005,
+      "half_ulps_out": 1.0054069313243374,
+      "rel_err": 0.0004303968027929527,
+      "pass": false,
+      "where": "pre-e0eba8e prose"
+    },
+    {
+      "label": "(iii) headline 1.17% (leg 60: same row, unaffected)",
+      "quoted": "1.17",
+      "quoted_as_float": 1.17,
+      "data": 1.168502703465662,
+      "abs_err": 0.001497296534337833,
+      "half_ulp": 0.005,
+      "half_ulps_out": 0.2994593068675666,
+      "rel_err": 0.0012797406276391736,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 2"
+    },
+    {
+      "label": "late-rung distance rho=8",
+      "quoted": "0.1836",
+      "quoted_as_float": 0.1836,
+      "data": 0.18360836226225985,
+      "abs_err": 8.362262259836717e-06,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.16724524519673434,
+      "rel_err": 4.55460907398514e-05,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V2.md sec 2"
+    },
+    {
+      "label": "late-rung distance rho=9",
+      "quoted": "0.2049",
+      "quoted_as_float": 0.2049,
+      "data": 0.2048678787748369,
+      "abs_err": 3.212122516310645e-05,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.642424503262129,
+      "rel_err": 0.00015676537414888457,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V2.md sec 2"
+    },
+    {
+      "label": "late-rung distance rho=10",
+      "quoted": "0.3306",
+      "quoted_as_float": 0.3306,
+      "data": 0.3305974502606743,
+      "abs_err": 2.549739325730105e-06,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.0509947865146021,
+      "rel_err": 7.71246015042379e-06,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V2.md sec 2"
+    }
+  ],
+  "ban_bearing": [
+    {
+      "label": "BAN-BEARING: distance / r_max (leg 46 clause P6b)",
+      "quoted": "1.55e+08",
+      "quoted_as_float": 155000000.0,
+      "data": 154847066.43605494,
+      "abs_err": 152933.563945055,
+      "half_ulp": 500000.0,
+      "half_ulps_out": 0.30586712789011,
+      "rel_err": 0.0009866681544842258,
+      "pass": true,
+      "where": "README item 46 / TECHNICAL_P2_ROUTEPORT_V1.md sec 4"
+    },
+    {
+      "label": "BAN-BEARING: truncation distance",
+      "quoted": "1.831e-01",
+      "quoted_as_float": 0.1831,
+      "data": 0.18306607788302862,
+      "abs_err": 3.3922116971396576e-05,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.6784423394279315,
+      "rel_err": 0.00018526552141669348,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 4"
+    },
+    {
+      "label": "BAN-BEARING: ball r_min",
+      "quoted": "2.97e-12",
+      "quoted_as_float": 2.97e-12,
+      "data": 2.9655944698216905e-12,
+      "abs_err": 4.405530178309588e-15,
+      "half_ulp": 5e-15,
+      "half_ulps_out": 0.8811060356619177,
+      "rel_err": 0.0014833434943803327,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 4"
+    },
+    {
+      "label": "BAN-BEARING: ball r_max",
+      "quoted": "1.18e-09",
+      "quoted_as_float": 1.18e-09,
+      "data": 1.1822379467461651e-09,
+      "abs_err": 2.2379467461650702e-12,
+      "half_ulp": 5e-12,
+      "half_ulps_out": 0.4475893492330141,
+      "rel_err": 0.0018965650391229408,
+      "pass": true,
+      "where": "TECHNICAL_P2_ROUTEPORT_V1.md sec 4"
+    },
+    {
+      "label": "BAN-BEARING: wrong-sign trend, RE-FITTED here (leg 47's ban)",
+      "quoted": "0.4703",
+      "quoted_as_float": 0.4703,
+      "data": 0.47033361126385137,
+      "abs_err": 3.361126385137414e-05,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.6722252770274828,
+      "rel_err": 7.146770965633455e-05,
+      "pass": true,
+      "where": "README item 47 / TECHNICAL_P2_ROUTEPORT_V2.md sec 2"
+    },
+    {
+      "label": "BAN-BEARING: same slope vs the stored verdict field",
+      "quoted": "0.4703336113",
+      "quoted_as_float": 0.4703336113,
+      "data": 0.47033361126385137,
+      "abs_err": 3.614863963719017e-11,
+      "half_ulp": 5e-11,
+      "half_ulps_out": 0.7229727927438034,
+      "rel_err": 7.685744494695051e-11,
+      "pass": true,
+      "where": "p2_route_port_v2_reach.json verdict"
+    },
+    {
+      "label": "constituent: distance slope, re-fitted",
+      "quoted": "-0.0196",
+      "quoted_as_float": -0.0196,
+      "data": -0.01957525160670712,
+      "abs_err": 2.474839329287895e-05,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.494967865857579,
+      "rel_err": 0.0012626731271877015,
+      "pass": true,
+      "where": "README item 47"
+    },
+    {
+      "label": "constituent: r_max slope, re-fitted",
+      "quoted": "-0.4899",
+      "quoted_as_float": -0.4899,
+      "data": -0.48990886287055846,
+      "abs_err": 8.862870558457026e-06,
+      "half_ulp": 5e-05,
+      "half_ulps_out": 0.1772574111691405,
+      "rel_err": 1.8091183013792662e-05,
+      "pass": true,
+      "where": "README item 47"
+    },
+    {
+      "label": "BAN-BEARING: slope vs gate",
+      "quoted": "-0.05",
+      "quoted_as_float": -0.05,
+      "data": 0.47033361126385137,
+      "abs_err": NaN,
+      "half_ulp": NaN,
+      "half_ulps_out": NaN,
+      "rel_err": NaN,
+      "pass": true,
+      "where": "the ban 'closing the truncation gap by extending the domain'"
+    }
+  ],
+  "rounding_margin_correction_iii": {
+    "stored_pct": 1.168502703465662,
+    "tie_point_pct": 1.1685,
+    "margin_above_tie_pct": 2.703465662001747e-06,
+    "half_ulp_pct": 0.0005,
+    "margin_as_fraction_of_half_ulp": 0.005406931324003494,
+    "rounds_up_under_half_up": true,
+    "rounds_up_under_half_even": true,
+    "note": "1.169 is right under BOTH tie rules, but only because the stored value clears the tie by 0.54%% of a half-ulp; a relative perturbation of 4.6e-06 in the stored gap would flip the corrected digit back."
+  },
+  "derived": {
+    "gap_6_to_10": 62.987741082342914,
+    "gap_8_to_10": 28.163886733513852,
+    "reach_rho8_n301": -2.5410243873623113,
+    "resolution_n201": -2.5412218987965725,
+    "gap_1201_pct": 1.168502703465662,
+    "refit_slope_ratio": 0.47033361126385137,
+    "refit_slope_distance": -0.01957525160670712,
+    "refit_slope_rmax": -0.48990886287055846,
+    "refit_reach_power_law": -0.4369740062268909,
+    "old_literal_magnitudes": {
+      "i": {
+        "label": "(i) OLD literal 28 against the rho=6 baseline it named",
+        "quoted": "28",
+        "quoted_as_float": 28.0,
+        "data": 62.987741082342914,
+        "abs_err": 34.987741082342914,
+        "half_ulp": 0.5,
+        "half_ulps_out": 69.97548216468583,
+        "rel_err": 1.2495621815122469,
+        "pass": false,
+        "where": "pre-e0eba8e prose"
+      },
+      "ii": {
+        "label": "(ii) OLD literal -2.541222 against the reach row it sat in",
+        "quoted": "-2.541222",
+        "quoted_as_float": -2.541222,
+        "data": -2.5410243873623113,
+        "abs_err": 0.00019761263768858228,
+        "half_ulp": 5e-07,
+        "half_ulps_out": 395.22527537716456,
+        "rel_err": 7.776283917287915e-05,
+        "pass": false,
+        "where": "pre-e0eba8e prose"
+      },
+      "iii": {
+        "label": "(iii) OLD literal 1.168 against the same stored value",
+        "quoted": "1.168",
+        "quoted_as_float": 1.168,
+        "data": 1.168502703465662,
+        "abs_err": 0.0005027034656621687,
+        "half_ulp": 0.0005,
+        "half_ulps_out": 1.0054069313243374,
+        "rel_err": 0.0004303968027929527,
+        "pass": false,
+        "where": "pre-e0eba8e prose"
+      }
+    }
+  },
+  "propagation_audit": {
+    "stale": [
+      {
+        "file": "PHASE2_P2_NOTES.md",
+        "line": 2845,
+        "text": "ratio **-2.583087 / -2.557642 / -2.541222 / -2.530473**. Power law in X_max with slope",
+        "audit_trail": false,
+        "why": "reach ladder rho=8 slot still holds the corrected-away literal",
+        "should_be": -2.541024,
+        "data_value": -2.5410243873623113,
+        "abs_err": 0.00019761263768858228,
+        "rel_err": 7.776888670230844e-05,
+        "half_ulps_out": 395.22527537716456,
+        "consumed_as_a_number": false
+      },
+      {
+        "file": "experiments/p2_route_hrb_v1_postrepair.py",
+        "line": 560,
+        "text": "#       rho_max = 6/7/8/9 -> -2.583087 / -2.557642 / -2.541222 / -2.530473.",
+        "audit_trail": false,
+        "why": "reach ladder rho=8 slot still holds the corrected-away literal",
+        "should_be": -2.541024,
+        "data_value": -2.5410243873623113,
+        "abs_err": 0.00019761263768858228,
+        "rel_err": 7.776888670230844e-05,
+        "half_ulps_out": 395.22527537716456,
+        "consumed_as_a_number": false
+      }
+    ],
+    "legit": [
+      {
+        "file": "DIRECTION.md",
+        "line": 161,
+        "text": "numbers reproduce from stored data; two do not (v2's \"28x worse\" claim is 63x in its own",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "DIRECTION.md",
+        "line": 1594,
+        "text": "(v2's \"28x worse\" claim reproduces at 63x; v1's `rho=8` reach-table row quotes a different",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "DIRECTION.md",
+        "line": 5961,
+        "text": "corrected (28x->63x mislabeled baseline, a `-2.541222`->`-2.541024` transcription slip,",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "DIRECTION.md",
+        "line": 5962,
+        "text": "`1.168%`->`1.169%` rounding), both ban-bearing numbers confirmed exact before and after, both",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "PHASE2_P2_NOTES.md",
+        "line": 2842,
+        "text": "resolution-converged to the 4th decimal (-2.541222 -> -2.540746 over n=201..1201) and still",
+        "audit_trail": false,
+        "why": "correct use: -2.541222 IS the n=201 resolution row"
+      },
+      {
+        "file": "experiments/JOURNAL.md",
+        "line": 2942,
+        "text": "re-derived, 3 did not (a mislabelled \u03c1=8\u219210 baseline reading 28\u00d7 instead of 63\u00d7, a",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_168.md",
+        "line": 119,
+        "text": "banked `\u22122.583087/\u22122.557642/\u22122.541222`; the strong statement about the relaxation is (b)-i's",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 62,
+        "text": "**(1) SUBSTANTIVE \u2014 v2 \u00a72 and README item 47: \"the gap at `\u03c1 = 10` is 28\u00d7 worse than at",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 63,
+        "text": "`\u03c1 = 6`.\"** The stored ladder gives `4.374e+09 / 6.944e+07` = **62.99\u00d7**. The quoted 28\u00d7",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 70,
+        "text": "**(2) SUBSTANTIVE \u2014 v1 \u00a72.1: the reach table's `\u03c1 = 8` row quotes `\u22122.541222`.** The reach",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 72,
+        "text": "`\u22122.541222` is the `n = 201` value from \u00a72's *resolution* table on the same page. Magnitude:",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 79,
+        "text": "**(3) LAST-DIGIT \u2014 v1 \u00a72: the `n = 1201` row prints `1.168%`** for a stored",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/journal/leg_60.md",
+        "line": 98,
+        "text": "47's \"28\u00d7\") to match the data, or record the disagreement.** A leg may not make that edit",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "experiments/p2_route_port_v1_bordered_evidence.py",
+        "line": 158,
+        "text": "quoted_rat = [\"-2.541222\", \"-2.541024\", \"-2.540873\", \"-2.540791\", \"-2.540746\"]",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md",
+        "line": 58,
+        "text": "| 201 | 5.66e\u221215 | 16 | \u22122.541222 | 1.187% |",
+        "audit_trail": false,
+        "why": "correct use: -2.541222 IS the n=201 resolution row"
+      },
+      {
+        "file": "writeup/README.md",
+        "line": 482,
+        "text": "than `\u03c1 = 6` (a leg-60 reproduction audit corrected this from a misquoted 28\u00d7, which was",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/README.md",
+        "line": 498,
+        "text": "> literals: (i) *v2 \u00a72 / this item* \"the gap at `\u03c1 = 10` is 28\u00d7 worse than at `\u03c1 = 6`\" was",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/README.md",
+        "line": 501,
+        "text": "> table's `\u03c1 = 8` row quoted `\u22122.541222`, transcribed from the adjacent `n = 201` row of",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/README.md",
+        "line": 505,
+        "text": "> `1.168%` for a stored `1.1685%`, a truncated rather than rounded last digit \u2014 corrected to",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/data/p2_route_jr3_v1_journal_audit.json",
+        "line": 48,
+        "text": "\"added_by\": \"e0eba8e Leg 60: LEG (landed by orchestrator, user-approved correction) \\u2014 Route-PORT v1/v2 reproduction ledger lands; 3 non-ban-bearing discrepancies corrected (28x->63x mislabeled ba",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/data/p2_route_jr3_v1_journal_audit.json",
+        "line": 53,
+        "text": "\"added_by\": \"e0eba8e Leg 60: LEG (landed by orchestrator, user-approved correction) \\u2014 Route-PORT v1/v2 reproduction ledger lands; 3 non-ban-bearing discrepancies corrected (28x->63x mislabeled ba",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      },
+      {
+        "file": "writeup/data/p2_route_pgf_v1_ledger_audit.json",
+        "line": 96,
+        "text": "\"headline\": \"**Leg 60 (Route-PQ) answered NO \u2014 escalation #4.** 111/114 of Route-PORT v1/v2's quoted numbers reproduce from stored data; two do not (v2's \\\"28x worse\\\" claim is 63x in its own lad\",",
+        "audit_trail": true,
+        "why": "audit trail / leg 60's own record"
+      }
+    ],
+    "n_stale": 2,
+    "n_legit": 22,
+    "n_stale_consumed_as_a_number": 0,
+    "resolution_n201_value": -2.5412218987965725,
+    "reach_rho8_value": -2.5410243873623113
+  },
+  "expected_failures_are_the_old_literals": [
+    "(i) OLD literal 28 against the rho=6 baseline it named",
+    "(ii) OLD literal -2.541222 against the reach row it sat in",
+    "(iii) OLD literal 1.168 against the same stored value"
+  ],
+  "unexpected_failures": [],
+  "leg60_reported_magnitudes_rechecked": {
+    "i_relative_1.25": 1.2495621815122469,
+    "i_half_ulps_70": 69.97548216468583,
+    "ii_abs_1.98e-04": 0.00019761263768858228,
+    "ii_relative_7.8e-05": 7.776283917287915e-05,
+    "ii_half_ulps_395": 395.22527537716456,
+    "iii_abs_5.03e-06_in_percent_points": 0.0005027034656621687,
+    "iii_relative_4.3e-04": 0.0004303968027929527,
+    "iii_half_ulps_1.0": 1.0054069313243374,
+    "understatement_factor_of_the_old_28x": 2.249562181512247
+  }
+}

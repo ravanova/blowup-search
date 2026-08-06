@@ -174,6 +174,31 @@ The repair is a THRESHOLD plus PROPAGATION.  Both halves are deliberate:
     to what it returned before.  The guard adds fields and a warning; it computes
     nothing new and corrects nothing.  `coefficient_magnitudes` (a tuple) and
     `noise_floor` (a float) have no dict to carry a field and are untouched.
+
+--------------------------------------------------------------------------
+THE WINDOW ITSELF (repaired by leg 220 / Route-TNR, after leg 204 / Route-TNA2)
+--------------------------------------------------------------------------
+Leg 204's fourth audit of this module found a hole in the guard above: the THRESHOLD was
+right and the PROPAGATION was right, but the **window** was wrong.  `compactify` tested
+`inside = |Xt| <= max|X|`.  For a grid symmetric about zero that IS the data interval; for
+any other grid it is strictly larger, and every theta-sample in the gap was handed to
+`lagrange_interp_uniform`, whose index clip turns it into polynomial EXTRAPOLATION.
+`n_outside_grid` counted only samples beyond `max|X|`, so it reported `0`.  On leg 55's
+own headline grid truncated at `X_min = -9.71` -- still 523 real data points over four
+decades -- 535 of 16384 samples were extrapolated while the module reported
+`n_outside_grid = 0`, `domain_valid = True`, zero warnings, and a fitted exponent of
+`-0.0889` against the exact `1.4`: 386x the systematic, with the SIGN wrong.  That defeated
+leg 84's audit, the bench repair that answered it, and leg 94's precision pass, all three.
+
+The repair is one word wide: **the window is the data interval `[min X, max X]`**, so
+`inside = (Xt >= X_lo) & (Xt <= X_hi)`.  Two arithmetic sites follow it -- which grid edge
+a far-field sample continues FROM (`Xt > X_hi`, was `Xt > 0`) and which endpoint magnitude
+the `power` closure normalises by (per side, was `max|X|` for both).  On a symmetric grid
+all three reduce to the pre-repair expressions bit for bit, which is why leg 55's banked
+margins (`+0.394` at `s = 0`, `+0.094` at `s = 0.3`) are reproduced to `0.0` difference.
+
+`spectrum` now also reports `X_lo_data` / `X_hi_data`.  `X_max_data` is unchanged in name
+and value, but it is no longer the guard's threshold and must not be read as one.
 """
 
 import warnings
@@ -300,8 +325,9 @@ def compactify(X, f, M, c=0.5, far_field="power", tail_exponent=None, order=8):
     are UNIFORM in; interpolating in X directly would put a 745-to-0.04 spacing ratio
     inside the stencil.
 
-    `far_field` says what happens for |X_j| > max|X| -- and it is a real choice, not a
-    detail, because those points are exactly the branch point the exponent comes from:
+    `far_field` says what happens for X_j outside the DATA interval [min X, max X] -- and
+    it is a real choice, not a detail, because those points are exactly the branch point
+    the exponent comes from:
 
         "power" : continue |X|^tail_exponent from the last grid value (the steady
                   equation's own forced tail; tail_exponent = c_omega / c_l).
@@ -316,6 +342,14 @@ def compactify(X, f, M, c=0.5, far_field="power", tail_exponent=None, order=8):
     f = np.asarray(f, dtype=float)
     if X.shape != f.shape:
         raise ValueError("X and f must have the same shape")
+    # THE WINDOW IS THE DATA INTERVAL, NOT max|X| (leg 204 finding 1, repaired at leg 220).
+    # `X_lo`/`X_hi` are the true endpoints of the supplied grid.  `X_max = max|X|` is kept
+    # only because `spectrum` has always reported it under that name; it is NO LONGER the
+    # guard's threshold.  On a grid symmetric about zero -- which every live caller in this
+    # repository supplies, to |X_lo + X_hi| = 0.0e+00 exactly -- `X_lo = -X_hi = -X_max`
+    # and every branch below reduces to the pre-repair arithmetic bit for bit.
+    X_lo = float(X.min())
+    X_hi = float(X.max())
     X_max = float(np.abs(X).max())
     rho = np.arcsinh(X / float(c))
     rho_lo, rho_hi = float(rho[0]), float(rho[-1])
@@ -323,20 +357,27 @@ def compactify(X, f, M, c=0.5, far_field="power", tail_exponent=None, order=8):
 
     th = midpoint_theta_grid(M)
     Xt = X_of_theta(th)
-    inside = np.abs(Xt) <= X_max
+    inside = (Xt >= X_lo) & (Xt <= X_hi)
     out = np.full(th.size, np.nan)
 
     t = (np.arcsinh(Xt[inside] / float(c)) - rho_lo) / h_rho
     out[inside] = lagrange_interp_uniform(f, t, order=order)
 
     if (~inside).any():
-        f_hi = float(f[-1])                      # value at X = +X_max
-        f_lo = float(f[0])                       # value at X = -X_max
-        edge = np.where(Xt[~inside] > 0, f_hi, f_lo)
+        f_hi = float(f[-1])                      # value at X = X_hi
+        f_lo = float(f[0])                       # value at X = X_lo
+        above = Xt[~inside] > X_hi               # was `Xt > 0`: identical iff X_lo = -X_hi
+        edge = np.where(above, f_hi, f_lo)
         if far_field == "power":
             if tail_exponent is None:
                 raise ValueError("far_field='power' needs tail_exponent")
-            ratio = np.abs(Xt[~inside]) / X_max
+            # The power continuation is |X|^q measured from the edge it continues FROM, so
+            # each side normalises by its OWN endpoint magnitude.  Symmetric grid: both are
+            # X_max and this is the pre-repair `|Xt| / X_max`.  A one-sided grid whose data
+            # interval touches zero has a zero edge magnitude on that side; the resulting
+            # inf/0 is VISIBLE, and those samples are now counted in `n_outside` besides.
+            scale = np.where(above, X_hi, -X_lo)
+            ratio = np.abs(Xt[~inside]) / scale
             out[~inside] = edge * ratio ** float(tail_exponent)
         elif far_field == "clamp":
             out[~inside] = edge
@@ -351,8 +392,8 @@ def compactify(X, f, M, c=0.5, far_field="power", tail_exponent=None, order=8):
     # dynamic -- `X_max` above is the caller's own grid, not a hardcoded 745.
     _warn_if_outside(n_outside, "compactify",
                      f" ({n_outside} of {int(M)} samples, "
-                     f"{100.0 * n_outside / max(int(M), 1):.3f}%, beyond "
-                     f"|X| = {X_max:.6g} with far_field={far_field!r})")
+                     f"{100.0 * n_outside / max(int(M), 1):.3f}%, outside the DATA "
+                     f"interval [{X_lo:.6g}, {X_hi:.6g}] with far_field={far_field!r})")
     return th, out, n_outside
 
 
@@ -607,6 +648,10 @@ def spectrum(X, f, M=8192, c=0.5, far_field="power", tail_exponent=None, order=8
     out = {"k": k, "hk": hk, "hk_real_basis": hk_real, "M": int(M),
            "far_field": far_field,
            "X_max_data": float(np.abs(np.asarray(X, dtype=float)).max()),
+           # the guard's ACTUAL window since leg 220: the data interval, which equals
+           # (-X_max_data, +X_max_data) only on a grid symmetric about zero
+           "X_lo_data": float(np.asarray(X, dtype=float).min()),
+           "X_hi_data": float(np.asarray(X, dtype=float).max()),
            "frac_outside_grid": float(n_out) / float(max(int(M), 1))}
     # `n_outside_grid` was already here and already correct; what it lacked was a
     # threshold (`domain_valid`) and anywhere to go.  compactify has warned already, so

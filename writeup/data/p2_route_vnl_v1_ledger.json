@@ -1,0 +1,168 @@
+{
+  "leg": 197,
+  "route": "VNL",
+  "title": "bank arXiv:2208.09445 in the shared viscous-novelty ledger, append-only",
+  "gate": "Is arXiv:2208.09445 now present in solver/viscous_novelty.py::PRECEDENTS with the Grade B / viscous-term-dominated characterization leg 174 established, verbatim?",
+  "gate_answer": "YES",
+  "what_this_leg_is": "a transcription check, not a literature pass. Leg 174 did the primary-source reading; leg 197 carries its result into the ledger the next novelty gate will read, and verifies the transcription against leg 174's own JSON.",
+  "C1_presence": {
+    "target": "arXiv:2208.09445",
+    "n_matching_rows": 1,
+    "n_rows_total": 7,
+    "present": true
+  },
+  "C2_fidelity": {
+    "n_claims": 11,
+    "n_ok": 11,
+    "claims": [
+      {
+        "claim": "grade_B",
+        "leg174_field": "why_not_certified_object_dissipative",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "certified_object_is_inviscid_euler_ODE",
+        "leg174_field": "why_not_certified_object_dissipative",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "system_1_5",
+        "leg174_field": "why_not_certified_object_dissipative",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "transfer_is_analytic_sections_7_8",
+        "leg174_field": "why_not_certified_object_dissipative",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "viscous_term_dominated_quote",
+        "leg174_field": "third_quote",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "theorem_is_about_navier_stokes",
+        "leg174_field": "equation",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "finite_energy_smooth_data",
+        "leg174_field": "quote",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "ten_thousand_coefficient_pairs",
+        "leg174_field": "second_quote",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "fourteen_cpu_hours",
+        "leg174_field": "second_quote",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "computer_assistance_essential",
+        "leg174_field": "why_computer_assistance_essential",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      },
+      {
+        "claim": "journal_ref",
+        "leg174_field": "journal_ref",
+        "present_in_new_row": true,
+        "traceable_to_leg174": true,
+        "ok": true
+      }
+    ],
+    "all_traceable": true
+  },
+  "C3_append_only": {
+    "pre_leg197_digest_expected": "5d627e4c4865be19e9d1594738fc9133f13029f243f45b7a0959cbf009f9356b",
+    "pre_leg197_digest_measured": "5d627e4c4865be19e9d1594738fc9133f13029f243f45b7a0959cbf009f9356b",
+    "pre_existing_rows_unchanged": true,
+    "pre_existing_ids_unchanged": true,
+    "n_rows_before": 6,
+    "n_rows_after": 7,
+    "rows_added": 1,
+    "novelty_verdict_answer": "YES",
+    "novelty_verdict_pre_empting_ids": [
+      "arXiv:2410.05480"
+    ],
+    "gate_answer_unchanged": true
+  },
+  "classification_agreement": {
+    "leg174_certified_object_dissipative": false,
+    "leg174_pde_dissipative": true,
+    "leg174_fluid_adjacent": true,
+    "leg174_computer_assistance_essential": true,
+    "leg174_grade_cell": "fluid=True,grade=B",
+    "leg197_row_verdict": "EXCLUSION",
+    "leg197_row_grade": "B",
+    "verdict_consistent_with_leg174": true,
+    "grade_consistent_with_leg174": true,
+    "occupancy_cell_leg174": [
+      "fluid=True,grade=B"
+    ]
+  },
+  "fresh_primary_source_spot_check": {
+    "source": "https://arxiv.org/abs/2208.09445 (arXiv abstract page, fetched 2026-08-06)",
+    "title": "Smooth imploding solutions for 3D compressible fluids",
+    "authors": "Tristan Buckmaster, Gonzalo Cao-Labora, Javier Gomez-Serrano",
+    "abstract_clause_on_navier_stokes": "we provide simplified proofs of linear stability and non-linear stability, which allow us to construct asymptotically self-similar imploding solutions to the compressible Navier-Stokes equations with density independent viscosity for the case gamma=7/5",
+    "abstract_mentions_computer_assistance": false,
+    "abstract_mentions_interval_arithmetic": false,
+    "metadata_note": "the arXiv submission metadata records '16500 lines of code' -- the only abstract-page trace of the computer-assisted part",
+    "agrees_with_leg_174": true,
+    "what_it_confirms": [
+      "title, authors and the gamma = 7/5 compressible Navier-Stokes clause are as leg 174 recorded them",
+      "leg 174's claim that computer assistance is INVISIBLE at abstract depth (its stated reason for reading the PDF) reproduces exactly: 0 mentions in the abstract",
+      "the abstract's own framing -- Euler profiles constructed, Navier-Stokes reached via stability proofs -- is the Grade B shape, independently of leg 174's reading"
+    ],
+    "what_it_does_NOT_re-verify": [
+      "the interior locators (system (1.5), section 7's domination sentence, Lemmas A.27/A.28, Appendix B) are leg 174's full-text reading, not re-read here -- this leg transcribes, it does not re-derive"
+    ]
+  },
+  "the_hole_now_filled": {
+    "leg174_audit_said_present_in_PRECEDENTS": false,
+    "leg197_measures_present_in_PRECEDENTS": true,
+    "search_log_queries": 12,
+    "search_log_queries_that_could_reach_it": [],
+    "reading": "leg 174 measured the hole (absent, and unreachable by all 12 stage-V queries); leg 197 fills it. The SEARCH_LOG is NOT edited -- it is a record of what was asked in 2026-08-04, and rewriting it would destroy the evidence that stage V's gate could not have found this paper."
+  },
+  "what_this_does_NOT_change": [
+    "stage V's gate answer: still YES, still on arXiv:2410.05480 alone. The new row is EXCLUSION under this module's own vocabulary (the certified object carries no dissipative term), so novelty_verdict() is bit-identical before and after.",
+    "leg 174's occupancy matrix: unchanged. fluid-adjacent x Grade A is still EMPTY.",
+    "no claim of progress on this repository's own object; Clay odds ~0.05%."
+  ],
+  "row_as_banked": {
+    "id": "arXiv:2208.09445",
+    "who": "Buckmaster, Cao-Labora, Gomez-Serrano",
+    "what": "Smooth imploding solutions for 3D compressible fluids (Forum of Math Pi 13 (2025) e6, doi 10.1017/fmp.2024.12). Theorem 1.3 is finite-time singularity formation for the 3D isentropic compressible NAVIER-STOKES equations from smooth, finite-energy data with density constant at infinity -- a genuine viscous fluid equation. GRADE B, not A (leg 174's distinction): the object the interval arithmetic encloses is the self-similar profile solving system (1.5), the ODE reduction of the INVISCID compressible Euler system (1.3); Navier-Stokes is reached from it by the analytic stability argument of sections 7-8. The viscous term is DOMINATED, not enclosed -- section 7: 'in the Navier-Stokes case we need to restrict the parameter r to a regime where the self-similar profile dominates the dissipation', i.e. dissipation becomes an exponentially decaying forcing in self-similar time rather than sitting at the leading scaling order as eps does in DF-CGL.",
+    "dial": "none followed; the dissipation (Lame viscosities mu_1 > 0, 2 mu_1 + mu_2 > 0) is OUTSIDE the certified object -- it is dominated by the choice of self-similar exponent r, not enclosed",
+    "rigor": "computer-assisted proof, interval arithmetic, essential and non-removable: the first 10000 Taylor coefficient pairs (W_j, Z_j) at r = r*, with rigorous error bounds, ~14 hours on a single CPU (section 1.3); Lemmas A.27/A.28 and Appendix B 'Implementation details of the computer-assisted part'. Remove the computer and the theorem does not stand as published.",
+    "verdict": "EXCLUSION",
+    "gate": null,
+    "grade": "B",
+    "banked_by": "leg 174 (Route-VBS), ledger key BCG-NS",
+    "why_exclusion_not_pre_empts": "this module's vocabulary grades the CERTIFIED object: PRE_EMPTS requires certification-under-dissipation of the profile itself. BCG's certified equation carries no dissipative term, so it lands with the other inviscid-certificate rows (Chen-Hou), exactly as leg 113 filed it (clause_2_inviscid: True). It is nonetheless the strongest fluid-adjacent occupant of the rung, and its absence here is what made the rung look empty."
+  }
+}

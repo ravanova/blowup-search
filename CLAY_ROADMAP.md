@@ -306,3 +306,57 @@ form is `plan_of_record.py` and the drift detector is `test_plan_of_record.py`.
 4. **`B` — evolve the certificate.** The function space, the operator split, the constants.
    Fitness = the radii polynomial's margin, which is a theorem and cannot be faked by an
    under-resolved run.
+
+## 7.5 Addendum (2026-08-06) — the exit criterion is answered: pursue a full Clay solve
+
+**Status: ADOPTED 2026-08-06 by user ruling, resolving escalation #1** (stage `B` above
+closed its own gate NO at leg 126 — 1,686/1,686 of its declared search space covered, zero
+uncovered, a perfect search still 6.04x short — and had no successor for many cycles). **This
+supersedes §7's own "NOT adopted, and not claimed: any route to Clay" line and §7.3's "Clay
+stays where §6 left it."** The user explicitly accepts that this means building seriously
+heavy code. **What does NOT change, restated because it matters more now, not less: Walls 1
+and 2 still cap everything, Clay odds stay ~0.05% (recorded here, in the same paragraph, not
+quietly dropped now that the prize is bigger), and no output is ever described as movement
+toward Clay unless a link of the L1→L4 chain actually moves** — that rule is easier to erode
+under a Clay-directed programme, not harder.
+
+**Wall 2, corrected.** §2's naive form (spatial dimension is the barrier) is false — van den
+Berg–Williams certified genuinely 3D Ohta–Kawasaki stationary states in 2019. The real
+barrier is *time-dependent singularity formation*, not dimension. Every work stating a 3D
+singularity theorem *with* a certificate supplies the 3D-ness via a 2D reduction (Chen–Hou)
+or a spherically-symmetric ODE profile (BCG → CGSS) — never via the certificate itself. Any
+plan from here must say explicitly which side of that line it lives on.
+
+**Direction (a) (global regularity) stays closed** to anything search-/certificate-shaped:
+Tao's averaged-NS supercriticality barrier means energy methods plus the preserved algebraic
+structure are provably insufficient. Only direction (b) (blow-up) is in scope.
+
+**The ansatz is constrained.** Nečas–Růžička–Šverák and Tsai exclude nontrivial
+exactly-backward-self-similar 3D NS blow-up under the relevant decay — the target must be
+discretely self-similar, unstable-self-similar with a finite unstable spectrum, or
+non-self-similar. `arXiv:2604.09949` is the recorded negative-control citation for what
+happens when this is missed.
+
+**The missing rung is viscous certification, strictly on the Clay path.** Leg 174's own
+occupancy matrix has the Grade-A/fluid cell empty "for want of a target, not a method"; leg
+242 confirms nobody has filled it since (via the one precedent flagged closest, Dahne &
+Figueras). No certified viscous blow-up exists in any model, in any dimension, today. If it
+cannot be done in 1D, 3D NS is not a question of compute.
+
+**Programme, sequenced (do not build the 3D solver first — this repository's own Route-A
+discipline against debugging two unknowns at once applies with more force here):**
+
+1. **Phase 0 (`P0` in `plan_of_record.py`) — target selection under the Clay goal.** A
+   Route-M-shaped leg redone against Clay, not novelty: which object, which ansatz (screened
+   by NRS/Tsai above), and what certification would even mean for it.
+2. **Phase 1 — the viscous rung.** Can a viscous blow-up be certified in *any* model? A
+   well-defined, unclaimed target, genuinely on the Clay path, and does not need the 3D
+   solver.
+3. **Phase 2 — the heavy lift.** The 3D near-singular viscous solver (`PLAN.md` Stage 4,
+   unscheduled; AMR or dynamic rescaling, likely compiled/GPU). User-authorized but
+   deliberately sequenced after Phase 1 reports — a 3D candidate with no certification story
+   reproduces Hou–Luo 2013 and answers nothing.
+
+The machine-readable form of this addendum is `plan_of_record.py`'s `P0` stage; the ban
+review that accompanied this ruling (the DSS ban kept as-is, Stage V's ban re-posed since its
+own "needs L1 first" lift condition had become unliftable) is recorded there directly.

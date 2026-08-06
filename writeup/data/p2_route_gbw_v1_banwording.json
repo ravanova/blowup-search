@@ -1,0 +1,96 @@
+{
+  "leg": 184,
+  "route": "GBW",
+  "what": "the GA ban's lift condition in plan_of_record.py, pinned to the frozen resolution so a coarser grid cannot satisfy it",
+  "ban_subject_unchanged": "any GA compute on an unvalidated fitness -- C-PILOT's gate ANSWERED NO at leg 49 (4/6), so this ban did NOT lift when the stage closed",
+  "lift_condition_pre_edit": "never -- only a re-run of the six-property gate that PASSES on a repaired fitness",
+  "lift_condition_post_edit": "never -- only a re-run of the six-property gate that PASSES on a repaired fitness AT THE PINNED FROZEN RESOLUTION n = 201 coarse / 401 fine (wall_model '2d', seed 0, per_gene 9, refine 4 -- leg 59's configuration, the one legs 49 and 59 were scored at), or at a strictly FINER grid; a pass at any COARSER grid does NOT lift this ban. Leg 160 measured why: the unmodified, unrepaired leg-49 fitness passes 6/6 at n = 101/151 (P3 = 0.02007528568401651, P2 = 1.0000) while failing 5/6 at 201/401, because coarsening drops the residual floor ||rho||_inf from 4.79e-11 to 4.64e-13, below the frozen eps grid's 1e-11 bottom -- P3 stops failing because the probe stops measuring, with nothing repaired. Leg 160 reported that and refused to use it; its gate stays NO",
+  "pinning_predicate": {
+    "post_edit_pins_resolution": true,
+    "post_edit_checks": {
+      "R1_frozen_resolution_named": true,
+      "R2_named_as_a_pin": true,
+      "R3_coarser_excluded": true,
+      "R4_loophole_named_by_number": true
+    },
+    "pre_edit_pins_resolution": false,
+    "pre_edit_checks": {
+      "R1_frozen_resolution_named": false,
+      "R2_named_as_a_pin": false,
+      "R3_coarser_excluded": false,
+      "R4_loophole_named_by_number": false
+    }
+  },
+  "frozen_configuration": {
+    "n_coarse": 201,
+    "n_fine": 401,
+    "wall_model": "2d",
+    "seed": 0,
+    "per_gene": 9,
+    "refine": 4,
+    "source": "experiments/journal/leg_160.md (leg 59's configuration, unchanged)"
+  },
+  "excluded_coarsening": {
+    "n_coarse": 101,
+    "n_fine": 151,
+    "unrepaired_leg49_fitness_score_there": "6/6",
+    "unrepaired_leg49_fitness_score_at_frozen": "5/6",
+    "P3_worst_abs_slope_minus_1_at_loophole_grid": 0.02007528568401651,
+    "P3_worst_abs_slope_minus_1_at_frozen_grid": 0.3421493449940881,
+    "rho_inf_at_n201": 4.790972900601766e-11,
+    "rho_inf_at_n101": 4.640571829290985e-13,
+    "frozen_eps_grid_bottom": 1e-11,
+    "mechanism": "coarsening drops ||A||_w and with it the residual floor ||rho||_inf below the frozen eps grid's bottom, so P3's probe measures the fitness's own arithmetic noise instead of the injected defect; the property stops failing without anything being repaired"
+  },
+  "leg_160_numbers_verified_against_its_journal": {
+    "P3_at_loophole_grid": {
+      "value": "0.02007528568401651",
+      "found_in_leg_160_journal": true
+    },
+    "P2_at_loophole_grid": {
+      "value": "1.0000",
+      "found_in_leg_160_journal": true
+    },
+    "P3_at_frozen_grid": {
+      "value": "0.3421493449940881",
+      "found_in_leg_160_journal": true
+    },
+    "rho_inf_at_n201": {
+      "value": "4.790972900601766e-11",
+      "found_in_leg_160_journal": true
+    },
+    "rho_inf_at_n101": {
+      "value": "4.640571829290985e-13",
+      "found_in_leg_160_journal": true
+    }
+  },
+  "ban_still_in_force": true,
+  "lift_head": "never",
+  "ban_inventory": {
+    "total": 24,
+    "in_force": 17
+  },
+  "no_landed_gate_answer_altered": {
+    "leg_49": {
+      "scored_at": "n=201/401",
+      "result": "4/6",
+      "unchanged": true
+    },
+    "leg_59": {
+      "scored_at": "n=201/401",
+      "result": "5/6",
+      "unchanged": true
+    },
+    "leg_160": {
+      "scored_at": "n=201/401",
+      "result": "NO",
+      "unchanged": true
+    },
+    "note": "all three ran at the now-pinned configuration, so pinning ratifies what they already did; leg 160's own NO stays NO"
+  },
+  "compute": {
+    "ga": false,
+    "solver": false,
+    "note": "text predicate only; imports nothing from ga/ or solver/"
+  }
+}

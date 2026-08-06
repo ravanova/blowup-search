@@ -50,8 +50,8 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Conj 2.4 | Dynamic-relaxation leg, Conjecture 2.4 at POC fidelity | Y | Y | Y | Y | fig13 | [T](4_p2_lottery/TECHNICAL_P2_CONJ24.md) · [B](4_p2_lottery/BLOG_P2_CONJ24.md) |
 | Regular profile / Scenario 2 (B1) | CHL Scenario 2 modified rescaling (4.1)/(4.2), reproduced | gen* | Y | Y | Y | fig14/15 | [T](4_p2_lottery/TECHNICAL_P2_SCENARIO2.md) · [B](4_p2_lottery/BLOG_P2_SCENARIO2.md) |
 | GA framework | Genetic-algorithm global search + a=0 known-answer gate | gen* | Y | Y | Y | fig16 | [T](4_p2_lottery/TECHNICAL_P2_GA_FRAMEWORK.md) · [B](4_p2_lottery/BLOG_P2_GA_FRAMEWORK.md) |
-| Two-scale sweep | HQW25's exact two-scale traveling wave under gCLM advection | Y | Y | Y | Y | fig17 | [T](4_p2_lottery/TECHNICAL_P2_TWO_SCALE.md) · [B](4_p2_lottery/BLOG_P2_TWO_SCALE.md) |
-| Two-scale kladder | gCLM two-scale survival boundary: genuine (a*≈0.5–0.55) or genome-limited? Genuine | Y | Y | Y | Y | fig18 | [T](4_p2_lottery/TECHNICAL_P2_KLADDER.md) · [B](4_p2_lottery/BLOG_P2_KLADDER.md) |
+| Two-scale sweep | HQW25's exact a=0 two-scale traveling wave continued into gCLM advection at a>0 | Y | Y | Y | Y | fig17 | [T](4_p2_lottery/TECHNICAL_P2_TWO_SCALE.md) · [B](4_p2_lottery/BLOG_P2_TWO_SCALE.md) |
+| Two-scale kladder | survival boundary of the a>0 two-scale traveling wave: genuine (a*≈0.5–0.55, measured on a>0) or genome-limited? Genuine | Y | Y | Y | Y | fig18 | [T](4_p2_lottery/TECHNICAL_P2_KLADDER.md) · [B](4_p2_lottery/BLOG_P2_KLADDER.md) |
 | Route-D v1 | Rigorous interval-arithmetic core, a=0 NK framing | Y | Y | Y | Y | fig19 | [T](4_p2_lottery/TECHNICAL_P2_ROUTED.md) · [B](4_p2_lottery/BLOG_P2_ROUTED.md) |
 | Route-D v2 (dress) | Float dress rehearsal: naive NK does not close | Y | Y | Y | Y | fig20 | [T](4_p2_lottery/TECHNICAL_P2_ROUTED_DRESS.md) · [B](4_p2_lottery/BLOG_P2_ROUTED_DRESS.md) |
 | Route-D v3 (spaces) | Which space pair can carry the certificate | Y | Y | Y | Y | fig21 | [T](4_p2_lottery/TECHNICAL_P2_ROUTED_SPACES.md) · [B](4_p2_lottery/BLOG_P2_ROUTED_SPACES.md) |

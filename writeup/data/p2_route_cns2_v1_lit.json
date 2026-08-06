@@ -1,0 +1,384 @@
+{
+  "leg": 240,
+  "route": "CNS2",
+  "role": "LIT",
+  "date": "2026-08-06",
+  "gate_question": "Does arXiv:2208.09445's author group have subsequent published work that upgrades the viscous-term treatment from DOMINATED to ENCLOSED for this same 3D compressible Navier-Stokes object (or a directly comparable one), achieving a genuine Grade-A/fluid=True certificate?",
+  "gate_answer": "NO",
+  "gate_verdict_code": "NOT_UPGRADED_STILL_DOMINATED",
+  "realization_the_negative_holds_in": "The negative holds in the following named realization, and nowhere wider: the enumerated publication record of the three authors of arXiv:2208.09445 (Buckmaster, Cao-Labora, Gomez-Serrano) as listed by the arXiv API author queries and the author-maintained page https://sites.brown.edu/jgs/papers/ as of 2026-08-06; the two entries of that record whose object is a compressible-fluid system carrying a dissipative term (arXiv:2310.05325 and arXiv:2503.16813) read at full text in the pdftotext -layout extractions pinned in PDF_MD5; and the term census run case-insensitively over those complete extractions. It is NOT a statement about the wider literature, about unpublished work, or about the group's in-preparation CAP manuscript for the unstable-singularities thread (which is inviscid).",
+  "parent_paper": {
+    "id": "arXiv:2208.09445v2",
+    "authors": [
+      "Tristan Buckmaster",
+      "Gonzalo Cao-Labora",
+      "Javier Gomez-Serrano"
+    ],
+    "journal": "Forum of Mathematics Pi 13 (2025) e6",
+    "leg_174_grade": "B",
+    "leg_174_fluid": true,
+    "leg_174_reason": "the theorem is about compressible Navier-Stokes and computer assistance is essential, but the ENCLOSED object is the inviscid Euler ODE; the viscous term is DOMINATED, not enclosed"
+  },
+  "search_log": [
+    {
+      "kind": "arxiv-api-author-listing",
+      "n_entries": 11,
+      "newest": "2608.05114 (2026-08-05)",
+      "query": "http://export.arxiv.org/api/query?search_query=au:\"Cao-Labora\"&max_results=40&sortBy=submittedDate&sortOrder=descending",
+      "note": "complete career listing, read entry by entry -- a follow-up with an unexpected title cannot be missed by a listing the way it can by a keyword search"
+    },
+    {
+      "kind": "arxiv-api-author-listing",
+      "n_entries": 46,
+      "newest": "2605.18699 (2026-05-18)",
+      "query": "http://export.arxiv.org/api/query?search_query=au:\"Gomez-Serrano\"&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "note": "one name collision noted and NOT counted: 2108.11284 is Vicente Gomez-Serrano, battery chemistry"
+    },
+    {
+      "kind": "arxiv-api-author-listing",
+      "n_entries": 11,
+      "newest": "2511.22819 (2025-11-28)",
+      "query": "http://export.arxiv.org/api/query?search_query=au:\"Buckmaster\"&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "note": "listing polluted by unrelated Buckmasters (agriculture, gaze-contingent AI). The NARROWER form au:\"Buckmaster_T\" was tried first and DISCARDED: it returned only 2 entries, newest 2016, and would have hidden every paper this leg is about. Recorded because a query that silently under-returns is the failure mode."
+    },
+    {
+      "kind": "author-maintained-page",
+      "n_entries": 20,
+      "newest": "2026 submissions",
+      "query": "https://sites.brown.edu/jgs/papers/",
+      "note": "carries journal status the arXiv listing does not (this is where 2310.05325 = Cambridge J. Math. 13(4) 753-885 is confirmed as PUBLISHED); cross-checked against the arXiv listings, no entry in one and not the other"
+    },
+    {
+      "kind": "web-search",
+      "n_entries": 8,
+      "newest": null,
+      "query": "Buckmaster Cao-Labora Gomez-Serrano imploding Navier-Stokes viscous term interval arithmetic 2026",
+      "note": "no same-group hit not already in the listings"
+    },
+    {
+      "kind": "web-search",
+      "n_entries": 9,
+      "newest": null,
+      "query": "computer-assisted proof enclosing viscous term compressible Navier-Stokes implosion follow-up",
+      "note": "surfaced 2501.15701 -- DIFFERENT group, read anyway"
+    },
+    {
+      "kind": "web-search",
+      "n_entries": 10,
+      "newest": null,
+      "query": "arXiv 2208.09445 cited by Navier-Stokes implosion viscosity \"interval arithmetic\" 2026 new computer-assisted",
+      "note": "no same-group hit"
+    },
+    {
+      "kind": "web-search",
+      "n_entries": 8,
+      "newest": null,
+      "query": "Cao-Labora Gomez-Serrano 2026 compressible Navier-Stokes self-similar profile computer assisted proof viscosity enclosed",
+      "note": "no same-group hit"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "arXiv:2310.05325",
+      "date": "2023-10-09",
+      "latest_version": "v2 2025-04-21",
+      "authors": [
+        "Gonzalo Cao-Labora",
+        "Javier Gomez-Serrano",
+        "Jia Shi",
+        "Gigliola Staffilani"
+      ],
+      "title": "Non-radial implosion for compressible Euler and Navier-Stokes in T^3 and R^3",
+      "journal": "Cambridge Journal of Mathematics 13(4), 753-885",
+      "group_overlap": 2,
+      "same_object": true,
+      "depth": "FULL_TEXT"
+    },
+    {
+      "id": "arXiv:2301.10101",
+      "date": "2023-01-24",
+      "latest_version": "v1",
+      "authors": [
+        "Tristan Buckmaster",
+        "Gonzalo Cao-Labora",
+        "Javier Gomez-Serrano"
+      ],
+      "title": "Smooth self-similar imploding profiles to 3D compressible Euler",
+      "journal": "Quarterly of Applied Mathematics 81, 517-532",
+      "group_overlap": 3,
+      "same_object": false,
+      "depth": "ABSTRACT",
+      "why_not": "review/announcement OF the parent; its own object is Euler, nu = 0"
+    },
+    {
+      "id": "arXiv:2410.04532",
+      "date": "2024-10-06",
+      "latest_version": "v1",
+      "authors": [
+        "Gonzalo Cao-Labora",
+        "Javier Gomez-Serrano",
+        "Jia Shi",
+        "Gigliola Staffilani"
+      ],
+      "title": "Non-radial implosion for the defocusing NLS in T^d and R^d",
+      "journal": null,
+      "group_overlap": 2,
+      "same_object": false,
+      "depth": "ABSTRACT",
+      "why_not": "dispersive, no viscous term at all"
+    },
+    {
+      "id": "arXiv:2503.16813",
+      "date": "2025-03-21",
+      "latest_version": "v1",
+      "authors": [
+        "Gonzalo Cao-Labora",
+        "Javier Gomez-Serrano",
+        "Jia Shi",
+        "Gigliola Staffilani"
+      ],
+      "title": "A note on the existence of self-similar profiles of the hydrodynamic formulation of the focusing NLS",
+      "journal": "La Matematica 5(4)",
+      "group_overlap": 2,
+      "same_object": true,
+      "depth": "FULL_TEXT",
+      "why_not": "its abstract says 'compressible Euler equations with a certain dissipation', so it is IN scope on the gate's wording and was read at full text; it carries no certification apparatus of its own (see APPARATUS_CENSUS)"
+    },
+    {
+      "id": "arXiv:2509.14185",
+      "date": "2025-09-17",
+      "latest_version": "v1",
+      "authors": [
+        "Yongji Wang",
+        "et al. (22 authors incl. all three)"
+      ],
+      "title": "Discovery of Unstable Singularities",
+      "journal": null,
+      "group_overlap": 3,
+      "same_object": false,
+      "depth": "FULL_TEXT_AT_LEGS_175_196_212",
+      "why_not": "inviscid objects (3D Euler / IPM / Boussinesq); leg 196 classified all four of its 'computer-assisted' mentions and ACHIEVED = 0; the CAP manuscript is 'in preparation' (USC p.8 fn.2) and still unpublished at leg 212"
+    },
+    {
+      "id": "arXiv:2511.22819",
+      "date": "2025-11-28",
+      "latest_version": "v1",
+      "authors": [
+        "Yongji Wang",
+        "Tristan Leger",
+        "Ching-Yao Lai",
+        "Tristan Buckmaster"
+      ],
+      "title": "Resolving Sharp Gradients of Unstable Singularities to Machine Precision",
+      "journal": null,
+      "group_overlap": 1,
+      "same_object": false,
+      "depth": "FULL_TEXT_AT_LEGS_196_212",
+      "why_not": "inviscid; 0/0/0/0 apparatus terms over 27 pp (leg 196, re-verified leg 212)"
+    }
+  ],
+  "n_candidates_same_group": 6,
+  "n_candidates_on_object": 2,
+  "n_read_full_text_this_leg": 2,
+  "different_group_control": {
+    "id": "arXiv:2501.15701v2",
+    "authors": [
+      "Feng Shao",
+      "Dongyi Wei",
+      "Shumao Wang",
+      "Zhifei Zhang"
+    ],
+    "title": "Blow-up of the 3-D compressible Navier-Stokes equations for monatomic gases",
+    "why_it_is_here": "out of the gate's scope (different group) but it is the sharpest available control on the MECHANISM: an independent group, on the same object, at the degenerate gamma = 5/3, reaches the viscous theorem by the IDENTICAL delta_dis domination inequality -- and with 0 interval arithmetic, having replaced the computer-assisted profile step by an analytic one. The domination is therefore not an artifact of the parent's computer assistance; it is how this literature transfers an Euler profile to Navier-Stokes."
+  },
+  "apparatus_census": {
+    "arXiv:2310.05325v2": {
+      "interval arithmetic": 0,
+      "computer-assisted": 0,
+      "enclosure": 0,
+      "validated numerics": 0,
+      "certif": 0,
+      "rigorous": 0
+    },
+    "arXiv:2503.16813v1": {
+      "interval arithmetic": 0,
+      "computer-assisted": 1,
+      "enclosure": 0,
+      "validated numerics": 0,
+      "certif": 0,
+      "rigorous": 0
+    },
+    "arXiv:2501.15701v2": {
+      "interval arithmetic": 0,
+      "computer-assisted": 1,
+      "enclosure": 0,
+      "validated numerics": 0,
+      "certif": 0,
+      "rigorous": 0
+    },
+    "arXiv:2208.09445v2": {
+      "interval arithmetic": 2,
+      "computer-assisted": 34,
+      "enclosure": null,
+      "validated numerics": null,
+      "certif": null,
+      "rigorous": null
+    }
+  },
+  "nonzero_apparatus_hits_classified": [
+    {
+      "paper": "arXiv:2503.16813v1",
+      "line": 84,
+      "class": "CITATION_TO_OTHERS",
+      "quote": "via a computer assisted proof in the case d = p = 3 in [8] and [7]"
+    },
+    {
+      "paper": "arXiv:2501.15701v2",
+      "line": null,
+      "class": "CITATION_TO_OTHERS",
+      "quote": "cites 2208.09445 as [6]; establishes its own gamma = 5/3 profiles ANALYTICALLY, with 0 occurrences of 'interval arithmetic' over 4146 lines"
+    }
+  ],
+  "extraction_lines": {
+    "arXiv:2310.05325v2": 6642,
+    "arXiv:2208.09445v2": 10108,
+    "arXiv:2503.16813v1": 657,
+    "arXiv:2501.15701v2": 4146
+  },
+  "pdf_md5": {
+    "arXiv:2310.05325v2": "83b98f3ddc0ec1590c9012c7735147c1",
+    "arXiv:2208.09445v2": "98c5b7dd6f535cdb0146c64fece771e4",
+    "arXiv:2503.16813v1": "a811a5e630ab38cd85a0079243d42a9e",
+    "arXiv:2501.15701v2": "9ee1ea9f2de0543b84be2a2c244a5dee"
+  },
+  "alpha_definition": {
+    "paper": "arXiv:2310.05325v2",
+    "line": 169,
+    "quote": "First of all, let us define alpha = (gamma-1)/2 and the rescaled sound speed sigma = (1/alpha) rho^alpha"
+  },
+  "viscous_quotes": [
+    {
+      "paper": "arXiv:2208.09445v2",
+      "line": 636,
+      "label": "BCG-error-term",
+      "quote": "The last term can be treated as an error so long as",
+      "reads_on": "the viscous term, introduced one line above with prefactor e^{(2 - r + (1-r)/alpha) s}"
+    },
+    {
+      "paper": "arXiv:2208.09445v2",
+      "line": 637,
+      "label": "BCG-(1.20)",
+      "quote": "-delta_dis = 2 - r + (1/alpha)(1 - r) < 0 ,   (1.20)"
+    },
+    {
+      "paper": "arXiv:2208.09445v2",
+      "line": 639,
+      "label": "BCG-(1.21)",
+      "quote": "or equivalently   r > 2 gamma / (gamma + 1) ,   (1.21)"
+    },
+    {
+      "paper": "arXiv:2208.09445v2",
+      "line": 643,
+      "label": "BCG-gamma-ceiling",
+      "quote": "Given that we intend to restrict r < r_star, by the definition of r_star given in (1.16), we conclude that we require gamma < 1 + 2/sqrt(3)"
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 220,
+      "label": "CGSS-(1.5)",
+      "quote": "d_s U = -(r-1)U - (y+U).grad U - alpha S grad S + nu C_dis e^{-delta_dis s} Delta U / S^{1/alpha}",
+      "reads_on": "the viscous term is the ONLY nu-dependent term and it carries an explicit exponentially decaying prefactor in self-similar time"
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 227,
+      "label": "CGSS-C_dis-delta_dis",
+      "quote": "C_dis = r^{1+1/alpha} / alpha^{1/alpha} ,   delta_dis = (r-1)/alpha + r - 2"
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 249,
+      "label": "CGSS-(1.8)",
+      "quote": "In the case of Navier-Stokes (nu = 1), we need to impose an extra condition on our range of parameters, namely: delta_dis = (r-1)/alpha + r - 2 > 0.   (1.8)"
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 251,
+      "label": "CGSS-profiles-are-nu-0",
+      "quote": "From [8, 51], we know that there exist radially symmetric profiles (U, S) that solve (1.5) for nu = 0, with r in the range (1.6).",
+      "reads_on": "THE CERTIFIED OBJECT IS IMPORTED AND IT IS THE nu = 0 SYSTEM. [8] is the parent 2208.09445; [51] is MRRS."
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 343,
+      "label": "CGSS-Remark-1.5",
+      "quote": "condition (1.8) guarantees that delta_dis > 0, hence the term nu C_dis e^{-delta_dis s} Delta U / S^{1/alpha} in (1.5) has an exponential decay, which is crucial in the proof of stability. If nu = 0, this term vanishes and thus the condition is not needed. The proof is analogous to the Navier-Stokes one, except that one does not need to bound the dissipation term when doing energy estimates.",
+      "reads_on": "the authors' own statement of the mechanism, and of the fact that the Euler and Navier-Stokes proofs differ ONLY by bounding this one decaying term"
+    },
+    {
+      "paper": "arXiv:2310.05325v2",
+      "line": 2363,
+      "label": "CGSS-bootstrap-cost",
+      "quote": "delta_g << delta_dis is used in Lemmas 3.11 and 3.12 in order to control the term F_dis (1.15). Because F_dis has decay not faster than e^{-delta_dis s}, our bootstrap estimate can only have a lower decay.",
+      "reads_on": "the viscous term is an entry in the FORCING vector F of the perturbation equation (1.15) -- the textbook shape of DOMINATED"
+    },
+    {
+      "paper": "arXiv:2501.15701v2",
+      "line": 246,
+      "label": "SWWZ-same-form",
+      "quote": "d_s U = -(r-1)U - (z+U).grad U - (1/l) S grad S + nu C_dis e^{-delta_dis s} Delta U"
+    },
+    {
+      "paper": "arXiv:2501.15701v2",
+      "line": 252,
+      "label": "SWWZ-delta_dis",
+      "quote": "C_dis := r^{1+l} l^l ,   delta_dis := l(r-1) + r - 2,   with l = 2/(gamma-1)"
+    },
+    {
+      "paper": "arXiv:2501.15701v2",
+      "line": 269,
+      "label": "SWWZ-(1.4)",
+      "quote": "delta_dis = l(r-1) + r - 2 > 0   (1.4)"
+    }
+  ],
+  "arithmetic_checks": {
+    "delta_dis_agreement_max_abs_dev": 1.7763568394002505e-15,
+    "delta_dis_identical_across_three_papers": true,
+    "threshold_is_a_root_max_abs_residual": 2.220446049250313e-15,
+    "sign_change_at_threshold_everywhere": true,
+    "r_star_branches_at_gamma_5_3": {
+      "low_branch": 1.2679491924311228,
+      "high_branch": 1.2679491924311228,
+      "abs_dev": 0.0
+    },
+    "r_star_branches_agree": true,
+    "r_star_limit_large_gamma": 1.7320507230389324,
+    "r_star_limit_is_sqrt3": true,
+    "gamma_ceiling_bisected": 2.1547005383792506,
+    "gamma_ceiling_published": 2.1547005383792515,
+    "gamma_ceiling_matches": true,
+    "window_gamma_7_5": {
+      "lo": 1.1666666666666667,
+      "hi": 1.1909830056250525,
+      "width": 0.024316338958385808,
+      "nonempty": true,
+      "delta_dis_max": 0.1458980337503153
+    },
+    "window_gamma_5_3": {
+      "lo": 1.25,
+      "hi": 1.2679491924311228,
+      "width": 0.017949192431122807,
+      "nonempty": true,
+      "delta_dis_max": 0.07179676972449123
+    },
+    "delta_dis_gamma_7_5_is_6r_minus_7": true
+  },
+  "reading_note_gamma_5_3": "A misreading this leg caught in itself and is recording so nobody re-makes it: gamma = 5/3 is NOT excluded because the viscous window is empty. The runner computes that window as NONEMPTY -- r in (1.2500000, 1.2679492), width 1.79e-02. CGSS exclude gamma = 5/3 for a different reason: the PROFILES they import are MRRS's 'almost every gamma' result, from which gamma = 5/3 (the degenerate case) is excluded, while the parent's computer-assisted profile covers gamma = 7/5. Which is why the different-group control matters: Shao-Wei-Wang-Zhang supply the missing gamma = 5/3 profiles ANALYTICALLY, closing that hole without any certificate at all.",
+  "classifier_self_test": {
+    "as_measured": "NOT_UPGRADED_STILL_DOMINATED",
+    "if_apparatus_and_enclosed": "UPGRADED_TO_ENCLOSED",
+    "if_nothing_located": "NO_SUBSEQUENT_WORK",
+    "if_apparatus_but_still_dominated": "NOT_UPGRADED_STILL_DOMINATED"
+  },
+  "headline": "NOT UPGRADED. The one subsequent same-group work on the 3D compressible Navier-Stokes object itself -- Cao-Labora, Gomez-Serrano, Shi, Staffilani, arXiv:2310.05325, Cambridge J. Math. 13(4) 753-885 -- carries ZERO certification apparatus of its own (0/0/0/0/0/0 over a 6642-line full-text extraction), IMPORTS its certified profile from the parent and from MRRS as the nu = 0 system (1.9), and treats the viscous term exactly as the parent did: as a forcing term with prefactor e^{-delta_dis s}, admissible only under the SAME scalar inequality delta_dis = (r-1)/alpha + r - 2 > 0 the parent wrote as (1.20)/(1.21) 14 months earlier -- the two transcriptions agree to 1.78e-15 max absolute deviation over a 39 x 19 (gamma, r) grid. On the parent's own gamma = 7/5 the entire domination margin is delta_dis <= 0.1458980 on an r-window of width 2.43e-02. The Grade-A/fluid=True cell leg 174 found empty is still empty."
+}

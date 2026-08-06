@@ -416,7 +416,7 @@ def _run_extent(E, i, step):
     return best
 
 
-def critical_radius(X, E, min_rel_depth=1e-2):
+def critical_radius(X, E, min_rel_depth=1e-2, min_isolation=3):
     """The smallest X > 0 where E changes sign, by linear interpolation (inf if none).
 
     This is the radius the a-family's own velocity picks out, and it is where the
@@ -444,6 +444,34 @@ def critical_radius(X, E, min_rel_depth=1e-2):
     Non-finite E is NOT swallowed: a crossing whose endpoints are not both finite
     is interpolated as before, so a poisoned field still returns nan rather than
     being quietly reclassified as "no crossing".
+
+    REPAIR 2 (leg 0/BENCH, from leg 166's `pure_sign_noise`).  The relative-depth
+    guard above is SCALE-INVARIANT: for `E = (-1)^k` every constant-sign run is
+    exactly one node long with `|E| = 1 = max|E|`, so the excursion ratio on both
+    sides is exactly 1.0 -- the largest value the test can ever observe.  Leg 166
+    measured 0 of 15 thresholds separate that field from all 8 real crossings on
+    the relative-depth predicate alone, because the predicate never looks at
+    anything but a single crossing's own local magnitude.
+
+    What the relative-depth test cannot see, a purely COMBINATORIAL count does:
+    pure alternating-sign noise does not have one candidate crossing, it has one
+    on almost every node (799 of 799 possible positions in leg 166's construction),
+    while every real crossing this module has ever produced is the ONLY sign
+    change anywhere in its field.  `min_isolation` requires that no OTHER sign
+    change lie within that many nodes of the candidate -- a test that counts
+    nodes, never magnitudes, so it is scale-free in the sense the relative-depth
+    guard is not: it does not care what `|E|` equals anywhere.  It is gated the
+    same way the magnitude guard is (`thresh > 0.0`, i.e. off at
+    `min_rel_depth=0.0`), so the pre-repair reproduction path is untouched, and it
+    is checked in addition to the magnitude test, so it can only ever REJECT a
+    crossing the magnitude test alone would have accepted -- never re-admit one
+    the magnitude test rejected.  Measured: every real crossing in the a-family
+    (a in [0.15, 0.5]) is the sole sign change in its field (gap = inf, trivially
+    >= any `min_isolation`); leg 114's M3 one-point dip has its two sign changes
+    one node apart (gap = 1); pure sign noise has every sign change one node from
+    its neighbour (gap = 1 throughout).  The default `min_isolation=3` sits
+    comfortably above both adversaries' gap of 1 and below "no other crossing
+    anywhere" for every measured real field.
     """
     X = np.asarray(X, float)
     E = np.asarray(E, float)
@@ -454,8 +482,8 @@ def critical_radius(X, E, min_rel_depth=1e-2):
     sgn = np.sign(E)
     s = np.where(np.diff(sgn) != 0)[0]
     thresh = float(min_rel_depth) * float(np.max(np.abs(E))) if E.size else 0.0
-    for i in s:
-        i = int(i)
+    for pos in range(s.size):
+        i = int(s[pos])
         if not (np.isfinite(E[i]) and np.isfinite(E[i + 1])):
             # poison propagates, exactly as pre-repair
             t = -E[i] / (E[i + 1] - E[i])
@@ -470,9 +498,22 @@ def critical_radius(X, E, min_rel_depth=1e-2):
             lo = _run_extent(E, i, -1)
             hi = _run_extent(E, i + 1, +1)
             # a run this leg cannot judge (non-finite) is NOT quietly reclassified
-            # as "no crossing" -- the magnitude test simply does not apply to it.
-            if lo is not None and hi is not None and min(lo, hi) < thresh:
-                continue                      # unresolved: a roundoff-scale dip
+            # as "no crossing" -- the magnitude test simply does not apply to it,
+            # and (leg 166's OTHER, separately-tracked known gap) neither does the
+            # isolation test below: both stay gated on the SAME "fully resolved"
+            # condition, so a poisoned run's fate is exactly what it was before
+            # this repair -- untouched, on purpose, out of this repair's territory.
+            if lo is not None and hi is not None:
+                if min(lo, hi) < thresh:
+                    continue                  # unresolved: a roundoff-scale dip
+                # REPAIR 2: a genuine crossing is a LOCAL feature -- reject a
+                # candidate that has another sign change within `min_isolation`
+                # nodes.  This is the predicate outside the relative-depth class
+                # leg 166 asked for; see the docstring above.
+                if min_isolation > 0 and s.size > 1:
+                    gap = np.min(np.abs(np.delete(s, pos) - i))
+                    if gap < int(min_isolation):
+                        continue              # not isolated: noise, not a crossing
         t = -E[i] / (E[i + 1] - E[i])
         return float(X[i] + t * (X[i + 1] - X[i]))
     return float("inf")

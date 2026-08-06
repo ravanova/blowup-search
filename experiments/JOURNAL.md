@@ -3129,3 +3129,470 @@ No link of the L1->L4 chain moved in any of the fifteen. Clay unchanged at ~0.05
   corrects the "three independent sources" framing to one shared ancestor.
 
 No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.05%.
+
+- **Leg 195 (Route-PQVER) — V1 YES / V2 NO:** independently confirms leg 60's landed
+  Route-PORT correction on all five numbers (62.9877x, -2.5410243874, 1.1685027%,
+  1.548471e+08, +0.4703336113, all under 1 half-ulp); finds the corrected value had not
+  fully propagated (the old -2.541222 literal survived, unconsumed, in
+  PHASE2_P2_NOTES.md and experiments/p2_route_hrb_v1_postrepair.py) — fixed in this
+  integration cycle, 0 banked results affected.
+- **Leg 170 (Route-CDB) — YES on both clauses:** post-repair regression check of
+  solver/critical_dissipation.py (leg 154's non-integer-exponent truncation repair),
+  re-verified from scratch after the interrupted session: 96/96 case x entry-point
+  cells refused, 276,077/276,077 leaves bit-identical, 0 moved. Leg 121's battery
+  banked as a permanent regression suite. Secondary (non-claim-bearing): leg 121's
+  own banked JSON is a drifted environmental reference (0/9 rows bitwise, worst
+  2.95e-09 relative on alpha_1) -- does not affect either clause.
+- **Leg 196 (Route-USC2) — STILL_SHORT:** the authors' later work (arXiv:2511.22819,
+  read at full text, 27 pp) carries no certificate for arXiv:2509.14185's unstable
+  singularities -- 0 hits for interval arithmetic/enclosure/certif/eigen; all 4
+  "computer-assisted" mentions are definition/prerequisite/aspiration, 0 achieved.
+  0 of leg 175's 4 open items closed; 3 new obstructions named (binding one: a
+  6.0-decade gap between the 1e-13 residual and the +-1e-7 enclosure of lambda at
+  IPM's 4th unstable mode).
+- **Leg 190 (Route-EGML) — YES, with a correction:** "EGM" located at primary source
+  (arXiv:1906.05811 / Anal. PDE 14 (2021) 891, Prop. 2.1), appended to
+  literature_gates.py. Re-verified from the actual LaTeX e-print: the bracket is
+  -(1/2 - C|a|) (degrading), not the (-1/2 - C|a|) form legs 141/165 and this leg's
+  own novelty pass had carried -- identical at a=0 so 0 banked numbers move; 6 sites
+  flagged for the record, none patched under this leg's authority.
+- **Leg 187 (Route-M2CI) — NO:** the first attempted computer-assisted certificate of
+  Chen's inviscid gamma=2 profile (Object A) fails on ISOLATION, not budget -- the
+  profile sits on an exact dilation orbit (zero polynomial in exact Fraction
+  arithmetic, 5/5 test values), so its tangent is an exact kernel and Z_0+Z_1 >= 1 for
+  every admissible A; Y_0 is exactly 0, the best the framework admits, and it still
+  cannot close. Second, independent failure: Z_2 ~ n^2.36 over a 6x ladder. Fully
+  characterized negative, quartet complete (fig65).
+- **Leg 197 (Route-VNL) — YES:** arXiv:2208.09445 (Buckmaster-Cao-Labora-Gomez-Serrano)
+  appended to solver/viscous_novelty.py::PRECEDENTS (6->7 rows, append-only, 11/11
+  claims traceable to leg 174's own JSON). Stage V's verdict unchanged (YES on
+  arXiv:2410.05480 alone).
+- **Leg 198 (Route-BHA) — YES, ESCALATED (parked, not merged):** bordered_hl.py
+  silently accepts a negative border weight with no check -- induced_sup_norm can
+  return a NEGATIVE "operator norm" (-1.0 to -4.0e9 on hand-checked cases whose true
+  weighted norm is 101.0). Same-magnitude sign-flip corrupts Z_1 by up to 1.198e9x,
+  Z_2 by up to 1.189e17x, and can flip a certificate's own closure verdict (no root ->
+  root at 2.217e-11). Three more silent-corruption sites found (permuted-grid
+  velocity_matrix, arity-truncating pin, NaN-dropping tail_exponent mask). Blast
+  radius LATENT: 0 banked numbers currently impeached (no live caller passes a
+  negative border weight). Module unpatched, branch leg/198-bha-v1 pushed.
+- **Leg 201 (Route-ICA2) — YES, ESCALATED (parked, not merged):**
+  interval_certificate.py's matmul_point_interval silently returns a
+  non-containing enclosure in the subnormal band -- containment escape 200 eta =
+  24.63% of the returned magnitude at the shipped BorderedHL N=405, driving Y_0
+  19.66% below the quantity it claims to upper-bound while still flagged
+  rigorous=True. An independent unrepaired clone of leg 69's defect 1 (a repaired
+  sibling routine encloses at 0 eta on identical input). Severity LATENT: live
+  minimum row mass sits 292.9 decades above the failing band, 0 banked numbers
+  wrong. Module unpatched, branch leg/201-ica2-v1 pushed.
+- **Leg 204 (Route-TNA2) — YES, ESCALATED (parked, not merged):** target_norm.py's
+  domain guard windows on max|X| rather than the true data interval, so an
+  asymmetric grid silently extrapolates 535 of 16384 theta-samples while reporting
+  n_outside_grid=0 and domain_valid=True -- yields p=-0.0889 against exact 1.4
+  (386x systematic error, wrong sign), defeating three legs' (55/84/94) worth of
+  prior guard work while reporting clean. Three more silent-wrong mechanisms found
+  (frac_outside_grid threading, a negative analytic_tail bound with finite=True,
+  fit_exponent overstating n_points 3.0x when dropping NaN bins). 0 of 7 mechanisms
+  reachable from the banked call path -- leg 55's +0.394/+0.094 margins
+  uncontaminated. Module unpatched, branch leg/204-tna2-v1 pushed.
+- **Leg 214 (Route-EGMB) — YES:** the 5 leg-141/leg-165 prose sites flagged by leg
+  190 corrected to EGM Prop. 2.1's true bracket -(1/2 - C|a|), independently
+  re-verified against arXiv:1906.05811's own LaTeX e-print (not just trusting leg
+  190). Diff is exactly 5 lines / 5 changed characters across 3 files; 0 banked
+  numbers moved (both readings give -0.500000 at a=0). Mechanical, quartet-thin
+  per the leg-180/179/186/108 prose-correction precedent.
+- **Leg 200 (Route-PCA) — YES, ESCALATED (parked, not merged):** port_certification.py
+  has four independent silent-corruption mechanisms: line_sweep_solve inverts a
+  DIFFERENT operator when s_rho<0 (18820x relative error, no exception);
+  radii_polynomial_status closes on a ball of radius exactly 0 at Y_0=0 (leg 51's
+  own a=0 CLM value); leading_order_solve truncates integer rhs (rel err 1.000);
+  stall_verdict's NaN<2.0 comparison gives poisoned ladders a confident "bending"
+  verdict. Two of the four are catchable by guards that already exist in-repo and
+  are never called here. Measured: 0 banked numbers move -- the live PORT run's
+  min(s_rho)=0.3896>0 sits inside the corner where all four are dormant. Module
+  unpatched, branch leg/200-pca-v1 pushed.
+- **Leg 215 (Route-CGR) — NO, ESCALATED (parked, not merged):** the one-line isinf
+  repair at nk_bounds.py:430 closes leg 199's M1 mechanism cleanly (alpha=-inf now
+  raises instead of returning NaN; 8/8 live call sites bit-identical at 0 ULP), but
+  only 1 of leg 199's 16 originally-found gaps is M1 -- the other 15 (non-finiteness
+  defects across M2/M3/M4/M5/M7) live in read-only certificate_guards.py, out of
+  this leg's territory. Repair itself sound; gate's premise (that all 16 were the
+  missing-isinf family) is what fails. Parked pending a leg that owns
+  certificate_guards.py.
+- **Leg 205 (Route-BVR) — YES, ESCALATED (parked, not merged):** boussinesq_rescaled.py
+  silently fabricates origin slopes via TWO independent, separately-confirmed
+  mechanisms in odd_field_x_slope. Defect A (second occurrence of leg 99's class, at
+  the exact line leg 99 flagged and declined to test): empty fit window -> lstsq
+  returns exactly 0.0 vs truth 2.0 (2000x tolerance). Defect B (NEW, needs no
+  degenerate grid): hard-coded absolute r_win=0.4 with a discarded lstsq residual
+  drives modulation()'s c_l to +0.188 vs truth 1.4 (86.5%, 1731x tolerance) on a
+  FULLY RESOLVED grid -- rank and condition number constant throughout, so leg 99's
+  own fix is provably blind to B. Measured: no banked result re-run, but the safe
+  exp(-r^2)-class envelopes used elsewhere give reason (not proof) to expect no
+  movement. Module unpatched, branch leg/205-bvr-v1 pushed.
+- **Leg 193 (Route-M2CV) — YES:** independently reproduces leg 187's NO on both
+  failure points, upgrading the dilation-orbit kernel argument from a 5-value float
+  check to an EXACT symbolic identity in Q[X,b] (zero polynomial for every g>0, not
+  just 5 pinned values); DF[phi]=0 confirmed exactly. 20/20 floats reproduce at
+  relative difference 0.0. One precision caveat, not verdict-changing: Z_2's
+  n^2.36 is a ladder-dependent least-squares average -- local slopes climb
+  2.13->2.50, a second ladder fits 2.2466 -- but every local slope stays >=1.88 and
+  rising, so the divergence verdict itself is unaffected.
+- **Leg 206 (Route-GSA) — YES, landed directly (not claim-adjacent):** ga_search.py
+  silently returns a wrong value on 12 of 41 adversarial cases across six mechanisms
+  (a -inf optimum demoted to worst rank; a NaN gene surviving in a "converged"
+  individual at finite fitness; inverted bounds collapsing offspring onto a single
+  point; elite_frac>=1 freezing the breeding loop at 864347x worse while reporting
+  40 generations; a bounds-length mismatch returning a rank-1 genome). All six are
+  orthogonal to the standing GA ban (defects in optimiser input-handling, not
+  fitness validity) and measured, not assumed, clean: all 9 live ga_minimize call
+  sites audited safe (static ast parse) and the sole production fitness is
+  structurally unable to emit -inf. Module read-only, landed straight to main.
+- **Leg 208 (Route-TSA) — YES, ESCALATED (parked, not merged):** target_selection.py
+  is a SIXTH, never-enumerated member of leg 128's radii-polynomial guard class
+  (certificate_guards.py's own docstring claims to cover every such function; this
+  one was never on the list). 9/9 forbidden (Y0,Z1,Z2) triples return
+  feasible=True, 5 with a negative certified radius (worst -1413.71);
+  y0_budget(2.0,1.0) == y0_budget(0.0,1.0) == 0.5 bit-for-bit against a true budget
+  of 0; unknowns() understates the dim-2 count by 598.5x. LATENT: 85/85 banked Z1
+  records lie in [0,1), no negative input is constructible from any live caller.
+  Confirms leg 63's "exactly one candidate passes" and the whole gamma=2 line are
+  NOT at risk -- that predicate lives on a disjoint, parked, unmerged branch and
+  never touches Y0/Z1/Z2/budget. Process note for the DM: six legs have now each
+  found "the last" uncensused guard-class member one at a time; a systematic census
+  test may be worth more than another one-off audit.
+- **Leg 203 (Route-RSA) — YES, ESCALATED (parked, not merged), CLAIM-ADJACENT:**
+  rescaled_spectrum.py has 8 silent-corruption mechanisms. Headline (R1):
+  converged_spectrum(K_fine==K_coarse) certifies the entire continuum -- n_kept
+  goes from the correct 2 to ALL K (24/24 at K=48, 24x inflation), including a
+  spurious +-40.4623i pair, the exact Hopf-crossing signature the module exists to
+  rule out. R2 is the one NOT latent: 5/7 banked Route-E and 7/7 banked Route-G
+  rows sit on points above the module's own 1e-8 convergence threshold -- but
+  BOTH routes already banked their residuals and both are already flagged
+  converged=False by the module's own conservative check, so no banked number is
+  confirmed WRONG, only discoverably imprecise. Confirmed NOT downstream of the
+  origin-H^2 certificate work (176/186/192): that module imports only numpy and
+  math.comb. R3-R8 latent (sign-mismatched da degrading to a cold solve, a dropped
+  36.9-decade far-field term, non-integer K truncation, etc). Tenth audit-family
+  item and the first genuinely claim-adjacent one this cycle.
+- **Leg 212 (Route-USC2V) — YES on all three clauses:** independently confirms leg
+  196's STILL_SHORT verdict on arXiv:2511.22819 from a freshly re-fetched primary
+  source (PDF extraction byte-identical to leg 196's own). 29/29 comparison rows
+  agree, 0 disagreements: 0 certificate-apparatus terms, 0 of 4 computer-assisted
+  mentions ACHIEVED, 0 of leg 175's 4 open items closed, all 3 named obstructions
+  verbatim present (Fig.7(f) digit-exact, 6.0-decade gap and 1.570 decades/mode fit
+  both independently re-derived). 3 locator-only citation slips found, none moving
+  the gate.
+- **Leg 207 (Route-DPA) — YES, landed directly (not claim-adjacent):**
+  dissipative_profile.py has 4 latent silent-corruption sites. Most severe: Y_0/Z_2
+  are measured at the constructor's stored `a`, not the solved one -- inflation up
+  to 1.144e+12x when they drift; a zero profile silently echoes Chen's exact
+  Delta=-1/3 at residual_rms exactly 0.0 with no health indicator distinguishing it
+  from real convergence. Measured, not assumed: a static call-site audit of legs
+  125/185/187 finds 0 exposed sites -- every landed call passes an explicit gauge
+  and the correct norm string. Eleventh audit-family item.
+- **Leg 211 (Route-XU11) — YES, ESCALATED (parked, not merged):** Xu arXiv:2607.19762
+  characterizes NO anti-diffusive/sign-changing branch (0 of 12 verbatim-verified
+  passages admit nu<=0; his own dissipative equations at s6.1 and Appendix A both
+  STIPULATE nu>0). But his s=2 sub/supercritical boundary a~=0.39/0.386 (S6.1)
+  matches leg 185's independently-computed a*=0.38649640 to 4.48e-04 (0.116%),
+  within 1.23x of Xu's own stated error bar -- and his gamma := 1-s*c_l at s=2
+  equals this repo's own Delta parameter EXACTLY (0.0e+00 over all 8 Table 1 rows,
+  an algebraic identity not an approximation). Genuine external cross-validation
+  of leg 185's boundary location, though NOT of its sign-flip claim, which Xu's
+  paper does not address either way.
+- **Leg 202 (Route-PNA) — YES, ESCALATED (parked, not merged), MATERIALLY EXPOSED
+  (not just latent):** profile_newton.py has 3 mechanisms, 22 silent-wrong cases.
+  M1 is the serious one: `continuation` returns off-branch grid-scale roots as
+  converged=True at machine-zero relres (both gauges satisfied to 0.0e+00) --
+  c(a=1.50) = 0.20427/0.23717/0.97282 at n=101/201/301, all three "converged" at
+  machine precision, 376% apart. Route-D v11's own banked a_max_machine/GA_boundary
+  claims trust exactly this flag and show the branch-jump signature already in
+  their own JSON (weighted_defect 0.50/4788/73372 at a=0.5/0.8/1.0) -- the
+  rejecting information existed in the caller's own diagnostics and never reached
+  the module's verdict. Route-ASA (leg 122) confirmed NOT affected (substrate
+  a=0.0/0.3, inside the on-branch zone). M2: a small-amplitude start escapes the
+  scaling family at default parameters (Omega(0)=-0.75 not -1, c off by 6.15e+05x,
+  sign flipped). M3: c0 never range-checked. THE MOST CONSEQUENTIAL FINDING THIS
+  CYCLE given explicit banked-claim exposure, not just latency.
+- **Leg 213 (Route-LGC2) — NO, ESCALATED (parked, not merged), minor/cosmetic:**
+  legs 190's and 197's appended literature_gates.py/viscous_novelty.py rows are
+  clean on format, duplicates, and transcription (all measured, not asserted). But
+  EGM_PRIMARY_READ's own sign_correction_leg_190 field describes 5 prose sites as
+  still carrying the wrong bracket -- true when the row was written, false now
+  that leg 214 fixed all 5 (2c901c4). The ledger's own claim about this repo's
+  current files is backwards. 0 banked numbers move; a one-tense-word mechanical
+  fix, not urgent.
+- **Leg 209 (Route-SCA2) — YES, ESCALATED (parked, not merged), PROOF CONFIRMED
+  SAFE:** spectral_certificate.py (the module Theorem NGX is proved against) has 4
+  latent mechanisms, headline being an unordered NaN comparison (`nan > 0` is
+  False) sending sigma_min from 0.0349 to +inf and inverting
+  counterexample_norm_floor from 14.3206 to a plausible-looking 0.0 -- exactly the
+  theorem's own conclusion, reversed. But measured, not assumed: 0 shipped
+  (class,param) pairs produce NaN/Inf or a negative weight, nearest shipped s is
+  0.263852 clear of the failing band, and clean-input float64 matches exact
+  rational Gauss-Jordan to 7.24e-16. Explicitly distinguished and confirmed:
+  Theorem NGX rests on an exact folklore inequality and an analytic tail estimate,
+  neither of which touches this code path -- the proof itself is untouched, only
+  the numerical module has an adversarial-input gap. Careful, well-scoped finding.
+- **Leg 223 (Route-PUB3) — YES:** the audit-family synthesis, corrected to the
+  ACTUAL count this cycle -- THIRTEEN escalations (188, 198, 199, 200, 201, 202,
+  203, 204, 205, 208, 209, 213, 215), not the seven its own dispatch spec named.
+  Graded 1 MATERIALLY EXPOSED (202) / 1 claim-adjacent (203) / 1 uncertain (205) /
+  9 zero-so-far / 1 pending-ruling, and states plainly that not one of the seven
+  repair legs dispatched so far had actually landed at the time of writing, so
+  every "zero" is the finding leg's own unconfirmed measurement. Recovered a
+  second exposed consumer of leg 202's finding (Route-D v12, plausibly exposed,
+  in no shared ledger) and printed three unresolved banked-record disagreements
+  rather than silently picking a side. Self-referential finding: reports/STATUS.md
+  (orchestrator-owned, committed) was stale by ten escalations at time of writing
+  -- the same silent-wrong-bookkeeping shape the whole cycle was hunting in code.
+- **Leg 220 (Route-TNR) — YES on both clauses:** target_norm.py's domain guard now
+  windows on the true data interval [X.min(), X.max()] rather than |X|.max(),
+  closing leg 204's finding. 5/5 asymmetry rungs go silent->flagged with EXACT
+  counts matching independent truth (535/16384 at the worst rung, was 0). 295,203
+  A/B leaves bit-identical, leg 55's banked margins reproduce to 0 difference.
+  6 of leg 204's 7 mechanisms still open (territory was windowing only) --
+  re-measured post-repair so "open" is a number, not a guess.
+
+**EXTERNAL USER REVIEW APPLIED THIS CYCLE.** A composition-floor quota (>=3 of 10
+live slots must be math/literature/construction-typed, not audit/repair/verify)
+was written into ORCHESTRATION.md and DIRECTION.md so it survives a session
+restart. Leg 202's Route-D v11 exposure was split into three actions: leg 226
+(repair, now explicitly treating leg 202's prescribed fix as a hypothesis per the
+150/151/152/154 precedent), leg 236 (independent dependency trace -- which banked
+numbers actually move, separate from the repair), leg 237 (a class-level census:
+which other modules share leg 202's scale-invariant-residual blind spot). Leg 238
+folds leg 176 into PUB2 and applies leg 183's Xu-§8 citation to PUB1, both
+additive. A new gate-contract clause (lesson 91) requires every negative-result
+gate to name its realization/trial-space/basis. Three low-value slots (219
+duplicate, 222 FBA, 224 GCC) were preempted for 236/237/238; none of the three
+preempted agents had reached a landing.
+- **Leg 238 (Route-PUB4) — YES on both conjuncts, LANDED:** PUB2 gains leg 176's
+  construction outcome as its fourth data point (both halves inseparable: sigma_min
+  = 0.0908 truncation-independent to 0.139% over 16-fold, vs the NO's Z_1 best cell
+  140.72 where <1 is needed); PUB1 §3 now cites Xu §8 verbatim per leg 183. ONE
+  DISPATCH PREMISE CORRECTED: leg 192 has NOT actually verified leg 176 yet --
+  its only commit anywhere is a novelty pass (483b0d7), no runner, no verdict --
+  so PUB2 states leg 176's numbers as one leg's own float64 measurements, not as
+  independently confirmed. (Orchestrator note: leg 192's construction/measurement
+  work exists uncommitted in its own worktree, mid-background-compute -- not lost,
+  just not yet landed; leg 238's correction is accurate as of when it checked.)
+  ONE RESIDUE FLAGGED: PUB2's three sigma_min>=0.71465 call-sites (leg 163's own
+  witness) are optimistic by 7.9x against leg 176's true 0.0908 -- outside this
+  leg's territory, banked as a stated conflict, direction doesn't change any
+  conclusion. PUB1/PUB2 remain unapproved drafts.
+- **Leg 217 (Route-PCR) — repaired all 4 named mechanisms, gate NO overall,
+  ESCALATED (parked, not merged):** all four of leg 200's port_certification.py
+  mechanisms repair cleanly (5/5 mixed-sign sweeps that silently returned a
+  different operator's inverse now raise, vs 18820x error pre-repair; 5/5
+  radius-0 certificates rejected; 3/3 integer-rhs cases exact; 6/6 poisoned
+  ladders refused), with leg 195's 114/114 clean PORT reproduction bit-identical.
+  A lesson-90 control leg 200's own battery structurally could not contain
+  (all-negative s_rho, not just mixed-sign) confirms the repair: 1186.6 silent
+  error pre-repair -> 2.11e-16 post. BUT: two landed artifacts OUTSIDE this leg's
+  territory (test_port_certification_regression.py, a banked JSON row) still
+  assert the pre-repair accept on the exact degenerate input leg 200 flagged, and
+  3 more silent paths survive outside the 4 named mechanisms. Module not
+  fully closed; a post-repair verification leg is owed once these are addressed.
+- **Leg 239 (Route-USC3) — MIXED (per-obstruction, not averaged):** arXiv:2511.22819's
+  three new obstructions characterized. N1 TECHNIQUE-specific (precision: 6.0
+  decades residual-to-lambda at IPM's 4th unstable, 1.570 vs stated 2.0
+  decades/mode, recurring in 3 model classes incl. non-fluid Gross-Pitaevskii
+  vortices). N2 MODEL-specific (the paper itself names 2D incompressible porous
+  media at l.278-280 as the alternative class, existence conditional, frontier 0
+  modes on CCF vs +1 on IPM). N3 TECHNIQUE-specific (infrastructure: double-float
+  floor named in 5 settings across 4 classes, extended-precision/quadruple/
+  float64 all return 0 hits in 27pp). Escalation correctly did NOT fire: the
+  named class (2D IPM) matches only 1 solver file (a bibliography line, not a
+  model), against positive controls of 12 (Boussinesq) and 33 (gCLM) hits for
+  the same test -- a control that demonstrably could have fired and didn't.
+- **Leg 216 (Route-CGF) — mostly repaired, gate NO overall, ESCALATED (parked, not
+  merged):** 13 of leg 199's remaining 15 silent-accept gaps in
+  certificate_guards.py now correctly reject (M3 3/3, M2 4/5, M4 1/1, M5 4/5, M7
+  1/1), 43/43 live call-site values bit-identical at 0 ULP, 17/17 controls pass.
+  2 survivors correctly left unforced: D1b's accept lives outside this leg's
+  territory (nk_bounds.py:225); B_nonreal_Fraction can't be closed without
+  breaking leg 199's own M4 discrimination control (Fraction IS numbers.Real).
+  ONE MORE BANKED NUMBER MOVES outside this leg's territory: a root regression
+  test's raised_loudly count goes 5->7 (0 false_closes either side) -- needs a
+  leg that owns that file. **PROCESS GAP FOUND: scripts/merge_gate.sh does not
+  actually test certificate_guards.py** -- it maps solver/<name>.py to
+  test_<name>.py, and test_certificate_guards.py does not exist, so the file
+  three certified pipelines delegate their accept/reject decision to has never
+  been in the merge gate's own always-run set.
+- **Leg 230 (Route-TNRV) — YES on both clauses:** independently confirms leg 220's
+  target_norm.py repair with a DECISIVE new test case leg 220 never ran
+  (wide_asymmetric, X in [-41000, 745.2]): the pre-repair window falsely reports
+  0 outside where 7 samples truly escape, worst pre-repair undercount 9463
+  (677x). Also re-solved leg 55's margins from scratch (n=801, two bordered
+  Newton solves): all FOUR classes bit-identical to leg 220's quoted two, and
+  the other two (s=0.39, s=1) confirmed for the first time. Own harness caught
+  itself: a first draft's control predicate was wrong (a symmetric grid need
+  NOT report 0 outside), corrected before it could produce a spurious NO.
+- **Leg 240 (Route-CNS2) — NO, thorough negative, no escalation:** arXiv:2208.09445's
+  author group has 2 later works on the object, both read at full text, neither
+  encloses the viscous term. The published follow-up (2310.05325, Cambridge J.
+  Math.) imports its profile as the nu=0 system and admits viscosity by the SAME
+  scalar inequality the parent used 14 months earlier (agreement 1.78e-15 over a
+  39x19 grid). Strong control: a DIFFERENT author group (Shao-Wei-Wang-Zhang
+  2501.15701) reaches the identical theorem with 0 interval-arithmetic
+  occurrences -- domination is how this literature transfers an Euler profile to
+  NS, not an artifact of the computer-assisted method. Leg 174's Grade-A/fluid
+  cell stays EMPTY.
+- **Leg 241 (Route-PCRC) — (a) INCOMPLETE, (b) CHARACTERISED, ESCALATED (parked,
+  not merged):** correction for the stale port_certification.py artifacts is
+  authored and verified against leg 217's parked blob but deliberately NOT
+  applied -- applying it now would fail the merge gate against main (leg 217
+  hasn't landed), and the bank turns out stale in FIVE rows, not the one leg 217
+  named. All 3 residual silent paths characterized: leading_order_solve is
+  sign-blind in c_l (26.02 on leg 200's fixture, 7.42e+18 at the live 200-node
+  resolution, control <=1.6e-14); stall_verdict's positional read FLIPS
+  Route-L's own headline verdict at 94.56x (9.72 bending -> 0.10 flat); pack/
+  unpack layout-dependence at 1.32/1.42. None claim-adjacent, but two of the
+  three have margin exactly 0.0 -- correct only by a hardcoded literal and a
+  caller convention, nothing enforcing either. Ready-to-apply correction banked
+  for leg 217's own eventual landing commit.
+- **Leg 218 (Route-BHR) — YES on both clauses, LANDED:** repairs this cycle's
+  single highest-blast-radius latent defect (leg 198's negative-border-weight
+  acceptance in bordered_hl.py). Corrected the dispatch's own caller-set premise
+  (legs 54/58/127 don't import this module; real live callers are port_v1/v2,
+  l1_v1, l1rh_v1) and leg 198's own predicate ("zero weights are rejected" is
+  false at the mechanism site -- it's a silent +inf, not a ZeroDivisionError).
+  Adopted predicate np.all(isfinite(w) & (w>0)). Found a NEW in-kind extension:
+  +inf weights silently understate a norm by 33.7x. ONE CORRECTION TO LEG 198's
+  DIAGNOSTIC, NOT ITS VERDICT: the two Z_1 ratios don't reproduce exactly
+  (2.287e8 vs 1.198e9, 5.24x; 1.505e12 vs 2.651e12, 1.76x) because Z_1 sits at
+  the round-off floor (lesson 86) -- the verdict is robust, the ratio is
+  environment-dependent. 0 banked numbers at risk.
+- **Leg 227 (Route-EGMT) — YES, LANDED:** the tense-fix for leg 213's cosmetic
+  finding. EGM_PRIMARY_READ's sign_correction_leg_190 field now records leg
+  214's repair instead of asserting an outstanding defect. Diff is 5
+  deletions/11 insertions inside one string literal, every sibling field
+  byte-for-byte unchanged, 0 banked numbers/verdicts move.
+- **Leg 242 (Route-DFL2) — NO on both clauses, thorough negative:** Dahne &
+  Figueras have 0 joint works since arXiv:2410.05480 itself (still v2,
+  unpublished, "Submitted" 668 days on). 7 subsequent works on the author line,
+  2 genuine interval-arithmetic CAPs but on Almost Mathieu spectral gaps and
+  polygon Dirichlet eigenvalues -- 0/7 fluid-adjacent, 0/7 blow-up. One
+  candidate (Figueras-Gimeno-Parker, a fluid dynamicist coauthor) disqualifies
+  itself in its own text ("this paper does not include a computer-assisted
+  proof"). Live-probe control fires correctly (0 fluid/blow-up terms vs 15
+  interval-arithmetic hits over the same 6656 lines). Leg 174's
+  (fluid-adjacent, Grade A) occupancy cell stays EMPTY.
+- **Leg 243 (Route-PCRS) — YES, CLOSES THE CONCERN:** independently confirms
+  Route-L's published headline verdict is genuinely UNAFFECTED by leg 241's
+  stall_verdict positional-read finding -- not a second leg-202/226 exposure.
+  Found two additional holes in leg 241's own claim-adjacency evidence worth a
+  follow-up: line 49 doesn't cover the deep rung's own dims=(240,320) literal,
+  and L1_attribution's six further ladders reach stall_verdict through
+  attribution_summary and were never audited.
+- **Leg 237 (Route-SIRC) — YES, latent, not claim-adjacent:**
+  collocation_newton.py's ACollocation.newton/continuation are a SECOND
+  instance of leg 202's scale-invariant-residual defect class -- rel flat to
+  8.725e-14 while c spans 1.000e+06x, verdict True on a member with gauge
+  defect 999.0 and c wrong by 1000x. But GRADED LATENT: 0 escapes in 41 cases
+  across 6 trial routes (vs 2/2 escapes reproducing leg 202's own banked M2 to
+  the digit, confirming this is a measured contrast, not a null), and 0 of 14
+  call sites sit in claim-bearing runners (Route-D's real consumer calls the
+  sibling newton_gauged, which leg 150 already repaired). Census of 47 solver
+  files / 20 verdict sites found no other instances. Own discipline caught a
+  would-be false positive before it shipped (a criterion discovered mid-pass,
+  and an initial probe that would have read as a hit without the reachability
+  battery).
+- **Leg 235 (Route-CDAP) — YES, ESCALATED (parked, not merged), DIRECTLY BEARS
+  ON ROUTE-D v11 AGAIN:** a SECOND instance of the ignored-caller-diagnostic
+  shape, in the SAME runner leg 202 escalated but a DIFFERENT mechanism (min/max
+  selection, not a bad convergence flag) -- leg 226's dispatched repair does not
+  touch it. Route-D v11's v5_budget headline margin (1.0468e+10) is built from
+  newton_weighted_defect_min while newton_weighted_defect_max = 1.5196e-02 sits
+  one line away in the same dict, never compared -- violates that block's own
+  Y0 budget by 62.02x at a=0.45. 0 instances found in the other 195 banked
+  JSONs (4,320 verdicts screened, 190 hits all adjudicated by hand). CORRECTS
+  LEG 202: 2 of its 3 quoted weighted_defect magnitudes (4788, 73372) attach to
+  rows already marked grid_converged=false -- the correctly-scoped form is 17
+  rows all converged=true spanning 13.42 decades, shape confirmed, two
+  magnitudes on the wrong rows.
+- **Leg 244 (Route-PCRO) — YES, LANDED:** stall_verdict now keys its two rows
+  on m (the ladder's own parameter) rather than array position, closing leg
+  243's flagged fragility. 1682 permutations across 15 banked ladders (11
+  Route-L + 4 Route-K) now return ONE verdict each (worst ratio exactly 1.0,
+  vs up to 3795.25x pre-repair spread); all 10 published quantities including
+  Route-L's own headline gain (9.724454) reproduce bit-identical at difference
+  exactly 0.0. Deep rung's dims=(240,320) literal (line 180, never covered by
+  leg 241's line-49 literal) now closed too. Methodological finding worth
+  keeping: a MIS-KEYED repair (keying on k instead of m) PASSES the permutation
+  battery -- order-immunity alone is necessary but not sufficient, only the
+  preservation check catches it.
+- **Leg 245 (Route-BCL2) — NO, but relevant to the user's new Clay-directed
+  goal:** arXiv:2404.04054's authors (pinned for the first time in this repo:
+  Maxime Breden, Hugo Chu -- the ledger's own who field was a description, not
+  an attribution) published 7 papers in 28 months, 0 on a fluid model. THE
+  SHARPER FIND: the parent's own Remark 40 states the Navier-Stokes
+  nonlinearity (u.grad)u is reachable "in principle" by their Grade-A
+  machinery in d in {2,3} -- while the group's newest paper still calls a
+  higher-dimensional RECTANGLE "future work". Two near-misses on record:
+  Breden's 2019 3D NS CAP (periodic orbit, not blow-up) and Cadiot-Haziot's
+  vorticity-bearing water waves (inviscid, no viscous term). Directly relevant
+  to Phase 1 (the viscous rung) under the user's new exit-criterion ruling --
+  this group's own stated reachability claim is worth a full-text follow-up
+  before any Phase-1 leg builds machinery from scratch.
+- **Leg 246 (Route-ALSL2) — NO:** arXiv:2207.07548's authors (Ambrose,
+  Lushnikov, Siegel, Silantyev) have no certificate at any dissipation
+  exponent -- 19 subsequent works over 1483 days, 2 on the object, both read
+  at md5-pinned full text (4336 lines), 0 with a certification-apparatus
+  term. Their own published follow-up (Stud. Appl. Math. 155, e70115, 2025)
+  is exact pole dynamics at sigma in {0,1} only, and states a verbatim defeat
+  at gamma=2: "despite significant effort, we have been unable to generalize
+  this solution to the periodic domain." Cross-check found au:"Ambrose_D"
+  misses arXiv:2504.14346 -- the closest candidate to this repo's own gamma=2
+  object -- recurring under-return failure mode (legs 240/242) on a third
+  author-net query form.
+- **MAJOR PLAN CHANGE, 2026-08-06.** Per the user's direct ruling (forwarded
+  verbatim by the orchestrator to the DM, processed in full): PUB1 and PUB2
+  are APPROVED as the project's deliverable (two submission-blocking legs
+  drafted: 249 independently verifies leg 176's certificate, 250 fixes the
+  leg 163/176 sigma_min citation conflict). THE EXIT CRITERION IS CHANGED TO
+  A FULL CLAY SOLVE, superseding "a novel Tier-3 result, NOT Clay" -- this
+  resolves escalation #1 (stage B's exhaustion). plan_of_record.py: B marked
+  DONE, new stage P0 (target selection under Clay, screened by NRS/Tsai's
+  exclusion of exactly-backward-self-similar 3D NS blow-up) is NEXT. Wall 2
+  corrected per leg 172: the barrier is TIME-DEPENDENT singularity formation,
+  not spatial dimension. Stage V's ban re-posed (its "needs L1 first" lift
+  condition had become unliftable, L1 dead in 3 realizations); DSS ban kept
+  unchanged. Programme sequenced Phase 0 (leg 251, target selection) -> Phase
+  1 (viscous rung, no certified viscous blow-up exists in ANY model, any
+  dimension) -> Phase 2 (3D solver, user-authorized, unscheduled until Phase
+  1 reports). Clay odds UNCHANGED at ~0.05%, recorded in the same breath as
+  the goal change -- the evidentiary bar does not lower.
+- **Leg 247 (Route-VBR) — repair correct, gate NO, ESCALATED (parked, not
+  merged):** leg 235's diagnosed fix for Route-D v11's v5_budget lands
+  correctly -- the corrected margin moves from a fabricated 1.0468e+10 to the
+  true worst-case 1.6123e-02, which IS a violation: the block misses its own
+  Y0 budget by 62.0237x at a=0.45 (1 of 11 rows; the other 10 hold, worst
+  10.656x). Re-solved from scratch, reproduces to 0.82%. 0 of 196 other banked
+  JSONs affected (grown corpus, still isolated). REASSURING: Route-D v11's
+  own PROSE already stated the non-uniformity honestly (TECHNICAL/blog both
+  print 1.5e-2 and say "not uniformly under the budget") -- no written
+  conclusion moves. Residue: the banked anchor JSON itself still carries the
+  wrong 1.0468e+10 margin, outside this leg's territory -- needs a follow-up
+  leg to regenerate it.
+- **Leg 254 (Route-DSSX) — DSS ban scoping, gate NO (cost-shaped), ESCALATED,
+  USER-APPROVED AND APPLIED 2026-08-07:** the DSS ban's "expensive entrance"
+  (a global, unseeded periodic-orbit search of the rescaled gCLM flow) was
+  excluded by PRICE, not by measurement -- all three of the ban's recorded
+  reasons are local-linear spectral statements at a FIXED POINT of the flow
+  (Route-E cd43893, Route-H 9dba93f, Route-I 35929a4), 0 of 3 concerning a
+  global search; the phrase "expensive entrance" entered plan_of_record.py in
+  the same commit that authored the ban, never examined since; repo-wide grep
+  finds 0 periodic-orbit searches of the rescaled flow ever built, run, or
+  costed. The user approved leg 254's proposed re-posed wording: the DSS ban
+  is now split into Entry A (cheap entrances, bifurcation off a fixed point --
+  stays banned, "never," unchanged in substance) and Entry B (the expensive
+  entrance -- re-posed from "never" to "never -- unless a scoping leg answers
+  the function space, the object [gCLM's three reasons say nothing about NS],
+  and the price"). Applied directly to `plan_of_record.py`'s BANNED list; all
+  10 `test_plan_of_record.py` invariants pass. Leg 251 (Phase 0), which was
+  carrying a CONDITIONAL tier for any DSS-dependent candidate pending this
+  ruling, can now treat the expensive entrance as open-pending-a-scoping-leg
+  rather than flatly banned.

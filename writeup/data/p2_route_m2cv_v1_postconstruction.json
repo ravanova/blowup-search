@@ -1,0 +1,730 @@
+{
+  "leg": 193,
+  "route": "M2CV",
+  "role": "VERIFIER",
+  "generated_utc": "2026-08-06T20:26:32.483985+00:00",
+  "verifies": {
+    "leg": 187,
+    "route": "M2CI",
+    "commit": "b92031f",
+    "landed_gate_answer": "NO",
+    "module": "solver/chen_inviscid_certificate.py (read-only)"
+  },
+  "gate": "Does an independent re-run of leg 187's construction reproduce its claimed certificate closure (or, if leg 187 landed NO, reproduce its claimed failure point) from leg 187's own transcribed constants and construction script?",
+  "answer": "YES",
+  "answer_scope": "both failure points reproduced: the exact kernel forcing Z_0 + Z_1 >= 1, and Z_2's divergence with resolution",
+  "exact_symbolic": {
+    "method": "bivariate Q[X, b] with g = b^2 SYMBOLIC -- the identity is proved for EVERY b at once, where leg 187 proved it at 5 pinned rational g",
+    "residual_numerator_is_zero_for_all_b": true,
+    "residual_denominator_power": 4,
+    "DF_on_orbit_tangent_is_zero_for_all_b": true,
+    "DF_denominator_power": 5,
+    "orbit_tangent_is_nonzero": true,
+    "orbit_tangent_terms_d_db": {
+      "X^1 b^4": "16/3",
+      "X^3 b^2": "-16"
+    },
+    "orbit_tangent_denominator_power": 3,
+    "leg187_orbit_generator_formula_matches_d_dg": true,
+    "amplitude_controls": [
+      {
+        "kappa_perturbation": "1/100",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false,
+        "residual_terms": {
+          "X^1 b^3": "-1/10000",
+          "X^1 b^5": "-2/75",
+          "X^3 b^1": "-1/10000",
+          "X^3 b^3": "-2/75"
+        }
+      },
+      {
+        "kappa_perturbation": "-1/100",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false,
+        "residual_terms": {
+          "X^1 b^3": "-1/10000",
+          "X^1 b^5": "2/75",
+          "X^3 b^1": "-1/10000",
+          "X^3 b^3": "2/75"
+        }
+      },
+      {
+        "kappa_perturbation": "1",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false,
+        "residual_terms": {
+          "X^1 b^3": "-1",
+          "X^1 b^5": "-8/3",
+          "X^3 b^1": "-1",
+          "X^3 b^3": "-8/3"
+        }
+      },
+      {
+        "kappa_perturbation": "-1/1000",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false,
+        "residual_terms": {
+          "X^1 b^3": "-1/1000000",
+          "X^1 b^5": "1/375",
+          "X^3 b^1": "-1/1000000",
+          "X^3 b^3": "1/375"
+        }
+      }
+    ],
+    "parameter_controls": [
+      {
+        "a": "0",
+        "c_l": "1/3",
+        "c_omega": "-1",
+        "control": "a = 0 (CLM sibling)",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false
+      },
+      {
+        "a": "1",
+        "c_l": "1/3",
+        "c_omega": "-1",
+        "control": "a = 1",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false
+      },
+      {
+        "a": "1/2",
+        "c_l": "1/2",
+        "c_omega": "-1",
+        "control": "c_l = 1/2",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false
+      },
+      {
+        "a": "1/2",
+        "c_l": "1/3",
+        "c_omega": "-2",
+        "control": "c_omega = -2",
+        "residual_is_zero": false,
+        "DF_on_tangent_is_zero": false
+      }
+    ],
+    "leg187_five_g_rows_rechecked": [
+      {
+        "gamma": "3/8",
+        "kappa": "1",
+        "is_chen_profile": true,
+        "numerator_coeffs": [
+          "0"
+        ],
+        "exact_zero": true,
+        "control_perturbed_amplitude_coeffs": [
+          "0",
+          "-303/80000",
+          "0",
+          "-101/10000"
+        ],
+        "control_is_nonzero": true
+      },
+      {
+        "gamma": "1",
+        "kappa": "8/3",
+        "is_chen_profile": false,
+        "numerator_coeffs": [
+          "0"
+        ],
+        "exact_zero": true,
+        "control_perturbed_amplitude_coeffs": [
+          "0",
+          "-803/30000",
+          "0",
+          "-803/30000"
+        ],
+        "control_is_nonzero": true
+      },
+      {
+        "gamma": "2",
+        "kappa": "16/3",
+        "is_chen_profile": false,
+        "numerator_coeffs": [
+          "0"
+        ],
+        "exact_zero": true,
+        "control_perturbed_amplitude_coeffs": [
+          "0",
+          "-1603/15000",
+          "0",
+          "-1603/30000"
+        ],
+        "control_is_nonzero": true
+      },
+      {
+        "gamma": "1/7",
+        "kappa": "8/21",
+        "is_chen_profile": false,
+        "numerator_coeffs": [
+          "0"
+        ],
+        "exact_zero": true,
+        "control_perturbed_amplitude_coeffs": [
+          "0",
+          "-821/1470000",
+          "0",
+          "-821/210000"
+        ],
+        "control_is_nonzero": true
+      },
+      {
+        "gamma": "9/4",
+        "kappa": "6",
+        "is_chen_profile": false,
+        "numerator_coeffs": [
+          "0"
+        ],
+        "exact_zero": true,
+        "control_perturbed_amplitude_coeffs": [
+          "0",
+          "-5409/40000",
+          "0",
+          "-601/10000"
+        ],
+        "control_is_nonzero": true
+      }
+    ]
+  },
+  "operator_consistency": {
+    "b": 0.6123724356957945,
+    "kappa_at_chen_gamma": 1.0,
+    "ladder": [
+      {
+        "n": 201,
+        "rel_err_H_closed_form": 3.899667391504824e-06,
+        "rel_err_U_closed_form": 7.186645064957166e-06,
+        "grid_residual_sup": 0.00029226319910730103
+      },
+      {
+        "n": 401,
+        "rel_err_H_closed_form": 2.145667108988114e-07,
+        "rel_err_U_closed_form": 9.328242090696747e-07,
+        "grid_residual_sup": 1.888616808498611e-05
+      },
+      {
+        "n": 801,
+        "rel_err_H_closed_form": 1.2833136386891653e-08,
+        "rel_err_U_closed_form": 9.031275615336908e-07,
+        "grid_residual_sup": 1.1873793273053934e-06
+      }
+    ],
+    "orbit_at_g_equals_3_8_vs_chen_profile_sup": 1.1102230246251565e-15,
+    "H_closed_vs_chen_Ux_sup": 8.881784197001252e-16,
+    "U_closed_vs_chen_U_sup": 2.220446049250313e-16,
+    "note": "H and U closed forms agree with the repository's discrete operators to discretisation error, and the orbit passes exactly through Chen eq (2.2) at g = 3/8 (kappa = 8g/3 = 1, so -(16/3) g^{3/2} = -2 sqrt(g))"
+  },
+  "H3_isolation_fresh": {
+    "n": 801,
+    "weight_s": 2.0,
+    "centre_residual_sup": 1.1873793273053934e-06,
+    "orbit_tangent_norm_s": 3.302304025525987,
+    "rows": [
+      {
+        "ball_radius_r": 0.01,
+        "orbit_displacement_dgamma": 0.003034351265027241,
+        "distance_achieved": 0.010000000000000142,
+        "competitor_residual_sup": 1.1727112121939776e-06,
+        "competitor_over_centre_residual": 0.987646647727392
+      },
+      {
+        "ball_radius_r": 0.0001,
+        "orbit_displacement_dgamma": 3.0282501486983415e-05,
+        "distance_achieved": 9.999999999982188e-05,
+        "competitor_residual_sup": 1.1872341858509827e-06,
+        "competitor_over_centre_residual": 0.999877763195743
+      },
+      {
+        "ball_radius_r": 1e-06,
+        "orbit_displacement_dgamma": 3.0281893950712124e-07,
+        "distance_achieved": 9.99999999883572e-07,
+        "competitor_residual_sup": 1.187377880906837e-06,
+        "competitor_over_centre_residual": 0.9999987818563763
+      }
+    ]
+  },
+  "H4_H5_kernel_and_shadow_fresh": {
+    "n": 801,
+    "weight_s": 2.0,
+    "orbit_tangent_phi": {
+      "norm_s": 3.302304025525987,
+      "DF_image_norm_s": 1.0810725139005858e-05,
+      "relative_defect": 3.273691657534148e-06
+    },
+    "control_profile_itself": {
+      "norm_s": 1.9905227369915288,
+      "DF_image_norm_s": 1.9910428081879876,
+      "relative_defect": 1.0002612736779108
+    },
+    "control_localised_bump": {
+      "norm_s": 0.7357407004646916,
+      "DF_image_norm_s": 0.5071550789383268,
+      "relative_defect": 0.6893122517457702
+    },
+    "kernel_to_control_ratio": 210561.1413217159,
+    "sigma_min": 7.053168752759464e-09,
+    "sigma_max": 52.71330475990025,
+    "sigma_ratio": 1.338024391543159e-10,
+    "float_shadow_pinv_rcond_default": 1.0316116630124495e-07,
+    "float_shadow_pinv_rcond_1e-6": 0.9999989693180492,
+    "float_shadow_pinv_rcond_1e-4": 0.9999989693178248,
+    "float_shadow_pinv_rcond_1e-8": 0.9999989693180492,
+    "numpy_default_rcond_estimate": 1.7785772854495008e-13
+  },
+  "H7_divergence_fresh": {
+    "weight_s": 2.0,
+    "ns": [
+      201,
+      301,
+      401,
+      601,
+      801,
+      1201
+    ],
+    "rows": [
+      {
+        "n": 201,
+        "norm_A_bordered": 686.538408859677,
+        "norm_H_s": 745.881709977172,
+        "norm_VH_s": 3673722.9515220993,
+        "norm_D_s": 37.41991584079142,
+        "norm_B_s": 137471895.43176076,
+        "Z2": 94379736352.64493,
+        "sigma_ratio": 1.375818555161798e-06
+      },
+      {
+        "n": 301,
+        "norm_A_bordered": 1079.8084601827857,
+        "norm_H_s": 746.0147460837175,
+        "norm_VH_s": 3673732.917402539,
+        "norm_D_s": 56.19664153733874,
+        "norm_B_s": 206452943.89268434,
+        "Z2": 222929635444.96252,
+        "sigma_ratio": 9.181892500737256e-08
+      },
+      {
+        "n": 401,
+        "norm_A_bordered": 1565.3257433947601,
+        "norm_H_s": 746.108090974591,
+        "norm_VH_s": 3673738.588599871,
+        "norm_D_s": 74.95998937002636,
+        "norm_B_s": 275384897.7658839,
+        "Z2": 431067069815.07227,
+        "sigma_ratio": 1.3485624740483938e-08
+      },
+      {
+        "n": 601,
+        "norm_A_bordered": 2745.1671785458043,
+        "norm_H_s": 746.2388784869094,
+        "norm_VH_s": 3673743.8744137064,
+        "norm_D_s": 112.4733301776727,
+        "norm_B_s": 413199700.2528923,
+        "Z2": 1134302255319.2043,
+        "sigma_ratio": 9.065500486388253e-10
+      },
+      {
+        "n": 801,
+        "norm_A_bordered": 4167.499980276531,
+        "norm_H_s": 746.3313097269522,
+        "norm_VH_s": 3673746.9919537664,
+        "norm_D_s": 149.97999866781652,
+        "norm_B_s": 550990061.6217403,
+        "Z2": 2296251070941.167,
+        "sigma_ratio": 1.338024391543159e-10
+      },
+      {
+        "n": 1201,
+        "norm_A_bordered": 7633.38574988166,
+        "norm_H_s": 746.4612365868807,
+        "norm_VH_s": 3673750.199622855,
+        "norm_D_s": 224.98666627175075,
+        "norm_B_s": 826546303.0507982,
+        "Z2": 6309346771325.33,
+        "sigma_ratio": 9.031544435083465e-12
+      }
+    ],
+    "slopes_in_log_n": {
+      "Z2": 2.359536592682637,
+      "norm_A_bordered": 1.3561952844075784,
+      "norm_B_s": 1.0033413082750589,
+      "sigma_ratio": -6.6750913407312895
+    },
+    "component_slopes_in_log_n": {
+      "norm_H_s": 0.0004341981403732545,
+      "norm_VH_s": 4.0739952690821825e-06,
+      "norm_D_s": 1.0033421724274108
+    },
+    "local_pairwise_slopes_Z2": [
+      {
+        "n_lo": 201,
+        "n_hi": 301,
+        "local_slope_Z2": 2.128574518587138
+      },
+      {
+        "n_lo": 301,
+        "n_hi": 401,
+        "local_slope_Z2": 2.2987792728143415
+      },
+      {
+        "n_lo": 401,
+        "n_hi": 601,
+        "local_slope_Z2": 2.3910755737061704
+      },
+      {
+        "n_lo": 601,
+        "n_hi": 801,
+        "local_slope_Z2": 2.4550767730665224
+      },
+      {
+        "n_lo": 801,
+        "n_hi": 1201,
+        "local_slope_Z2": 2.495388549003633
+      }
+    ],
+    "local_slope_range_Z2": [
+      2.128574518587138,
+      2.495388549003633
+    ],
+    "Z2_growth_over_ladder": 66.8506505225951,
+    "sigma_ratio_collapse_over_ladder": 152334.80442363382,
+    "ladder_span": 5.975124378109452
+  },
+  "H7_divergence_independent_ladder": {
+    "ns": [
+      151,
+      251,
+      351,
+      501,
+      701,
+      901
+    ],
+    "Z2_slope": 2.2466192856811045,
+    "sigma_ratio_slope": -6.65483031110268,
+    "Z2_growth_over_ladder": 53.358196153311525,
+    "local_pairwise_slopes_Z2": [
+      {
+        "n_lo": 151,
+        "n_hi": 251,
+        "local_slope_Z2": 1.875594800174643
+      },
+      {
+        "n_lo": 251,
+        "n_hi": 351,
+        "local_slope_Z2": 2.2354976240071878
+      },
+      {
+        "n_lo": 351,
+        "n_hi": 501,
+        "local_slope_Z2": 2.354474582120861
+      },
+      {
+        "n_lo": 501,
+        "n_hi": 701,
+        "local_slope_Z2": 2.427890970248607
+      },
+      {
+        "n_lo": 701,
+        "n_hi": 901,
+        "local_slope_Z2": 2.4739790502794072
+      }
+    ],
+    "note": "a DIFFERENT ladder from leg 187's, to test whether n^2.36 is a stable exponent or an artefact of the resolutions chosen"
+  },
+  "H6b_symbol_fresh": {
+    "symbol_zero_at_s": 3.0,
+    "rows": [
+      {
+        "s": 1.0,
+        "symbol": -0.6666666666666667,
+        "tail_inverse_norm": 1.4999999999999998
+      },
+      {
+        "s": 2.0,
+        "symbol": -0.33333333333333337,
+        "tail_inverse_norm": 2.9999999999999996
+      },
+      {
+        "s": 2.9,
+        "symbol": -0.03333333333333344,
+        "tail_inverse_norm": 29.999999999999908
+      },
+      {
+        "s": 3.0,
+        "symbol": 0.0,
+        "tail_inverse_norm": Infinity
+      },
+      {
+        "s": 3.5,
+        "symbol": 0.16666666666666652,
+        "tail_inverse_norm": 6.000000000000005
+      }
+    ],
+    "note": "sigma(s) = c_omega + s c_l = s/3 - 1 vanishes at s = 3, the decay rate of BOTH the profile and its orbit tangent"
+  },
+  "H6c_decay_fresh": {
+    "measured_slope": -2.9999554835099955,
+    "exponent": 2.9999554835099955,
+    "tangent_slope": -2.9999258056218703,
+    "tangent_exponent": 2.9999258056218703,
+    "control_slope_on_Xminus2_profile": -1.9999109704414688
+  },
+  "leg187_own_functions_rerun": {
+    "Z2_slope": 2.359536592682637,
+    "sigma_ratio_slope": -6.6750913407312895,
+    "Z2_growth": 66.8506505225951,
+    "Z2_rows": [
+      {
+        "n": 201,
+        "Z2": 94379736352.64493
+      },
+      {
+        "n": 301,
+        "Z2": 222929635444.96252
+      },
+      {
+        "n": 401,
+        "Z2": 431067069815.07227
+      },
+      {
+        "n": 601,
+        "Z2": 1134302255319.2043
+      },
+      {
+        "n": 801,
+        "Z2": 2296251070941.167
+      },
+      {
+        "n": 1201,
+        "Z2": 6309346771325.33
+      }
+    ],
+    "gate_answer_from_module": "NO"
+  },
+  "reproduction_table": [
+    {
+      "quantity": "Z0_plus_Z1_lower_bound",
+      "leg_193_independent": 1.0,
+      "leg_187_banked": 1.0,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "kernel_relative_defect_n801",
+      "leg_193_independent": 3.273691657534148e-06,
+      "leg_187_banked": 3.273691657534148e-06,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "control_relative_defect_n801",
+      "leg_193_independent": 0.6893122517457702,
+      "leg_187_banked": 0.6893122517457702,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "kernel_to_control_ratio_n801",
+      "leg_193_independent": 210561.1413217159,
+      "leg_187_banked": 210561.1413217159,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "sigma_ratio_n801",
+      "leg_193_independent": 1.338024391543159e-10,
+      "leg_187_banked": 1.338024391543159e-10,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "pinv_shadow_default_rcond_n801",
+      "leg_193_independent": 1.0316116630124495e-07,
+      "leg_187_banked": 1.0316116630124495e-07,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "pinv_shadow_rcond_1e-6_n801",
+      "leg_193_independent": 0.9999989693180492,
+      "leg_187_banked": 0.9999989693180492,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "grid_residual_sup_n801",
+      "leg_193_independent": 1.1873793273053934e-06,
+      "leg_187_banked": 1.1873793273053934e-06,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "Z2_n801",
+      "leg_193_independent": 2296251070941.167,
+      "leg_187_banked": 2296251070941.167,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "norm_A_bordered_n801",
+      "leg_193_independent": 4167.499980276531,
+      "leg_187_banked": 4167.499980276531,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "norm_B_s_n801",
+      "leg_193_independent": 550990061.6217403,
+      "leg_187_banked": 550990061.6217403,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "Z2_slope_in_log_n",
+      "leg_193_independent": 2.359536592682637,
+      "leg_187_banked": 2.359536592682637,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "Z2_growth_over_6x_ladder",
+      "leg_193_independent": 66.8506505225951,
+      "leg_187_banked": 66.8506505225951,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "sigma_ratio_slope_in_log_n",
+      "leg_193_independent": -6.6750913407312895,
+      "leg_187_banked": -6.6750913407312895,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "sigma_ratio_collapse_over_6x_ladder",
+      "leg_193_independent": 152334.80442363382,
+      "leg_187_banked": 152334.80442363382,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "isolation_dgamma_at_r_1e-2",
+      "leg_193_independent": 0.003034351265027241,
+      "leg_187_banked": 0.003034351265027241,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "isolation_dgamma_at_r_1e-6",
+      "leg_193_independent": 3.0281893950712124e-07,
+      "leg_187_banked": 3.0281893950712124e-07,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "measured_decay_exponent",
+      "leg_193_independent": 2.9999554835099955,
+      "leg_187_banked": 2.9999554835099955,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "farfield_symbol_zero_at_s",
+      "leg_193_independent": 3.0,
+      "leg_187_banked": 3.0,
+      "relative_difference": 0.0
+    },
+    {
+      "quantity": "Z2_slope_leg187_own_function_rerun",
+      "leg_193_independent": 2.359536592682637,
+      "leg_187_banked": 2.359536592682637,
+      "relative_difference": 0.0
+    }
+  ],
+  "worst_relative_difference": {
+    "quantity": "Z0_plus_Z1_lower_bound",
+    "value": 0.0
+  },
+  "discrepancies_found": {
+    "verdict_changing": [],
+    "precision": [
+      {
+        "what": "'Z_2 ~ n^2.36' is a LEAST-SQUARES AVERAGE over a curving ladder, not a power-law exponent.  The local pairwise slopes climb monotonically across leg 187's own ladder, and refitting on a different ladder (n = 151..901) moves the global slope by 0.113 (4.8%).  The banked prose quotes 2.36 without that caveat.  This does NOT weaken the H7 failure -- the slope is >= 1.88 everywhere and INCREASING, so Z_2 diverges at least as fast as claimed.",
+        "magnitude": "local slopes 2.129..2.495 on leg 187's ladder; global fit 2.3595 (n = 201..1201) vs 2.2466 (n = 151..901)"
+      }
+    ],
+    "understatements": [
+      {
+        "what": "leg 187 verifies the orbit identity at FIVE pinned rational values of g and its kernel claim in prose plus a float residual.  Both are true for EVERY g > 0 and exactly, as bivariate identities in Q[X, b] -- the banked claim is weaker than the fact, not wrong.",
+        "magnitude": "5 rational g -> an identity in 2 symbols; float 3.27e-06 -> exact 0"
+      }
+    ],
+    "construction_notes_not_discrepancies": [
+      {
+        "what": "||B|| is a PRODUCT bound 2(||H|| + a ||VH|| ||D||), not the induced norm of the bilinear map, so Z_2's absolute size is an over-estimate.  It does not soften the divergence: ||H|| and ||VH|| are FLAT in n, so every power of n in ||B|| is the derivative operator's, which grows like n on a weighted sup norm for the structural reason leg 187 gives (B contains v_X, which the sup norm does not control).",
+        "magnitude": "slopes: ||H|| 0.0004, ||VH|| 0.0000, ||D|| 1.0033, ||A|| 1.3562"
+      },
+      {
+        "what": "the float columns reproduce BITWISE (relative difference exactly 0 on all 20 quantities) because an independent re-implementation still drives the same deterministic numpy code path on the same grid.  The independent content of this leg is therefore the EXACT algebra and the alternate ladder, not the float agreement, and this JSON says so rather than claiming more.",
+        "magnitude": "20/20 quantities at relative difference 0.0"
+      }
+    ]
+  },
+  "pinv_shadow_mechanism": {
+    "note": "the rcond trap leg 187 names, checked at two resolutions: pinv inverts the near-kernel exactly when the cutoff sits BELOW sigma_min/sigma_max, and returns the exact bound 1 when it sits above",
+    "n401": {
+      "n": 401,
+      "weight_s": 2.0,
+      "orbit_tangent_phi": {
+        "norm_s": 3.302174843973646,
+        "DF_image_norm_s": 0.00017195301710188412,
+        "relative_defect": 5.2072656726730376e-05
+      },
+      "control_profile_itself": {
+        "norm_s": 1.9900259457797898,
+        "DF_image_norm_s": 1.99099583837016,
+        "relative_defect": 1.0004873768567828
+      },
+      "control_localised_bump": {
+        "norm_s": 0.7357407004646916,
+        "DF_image_norm_s": 0.5068955786607129,
+        "relative_defect": 0.6889595455852302
+      },
+      "kernel_to_control_ratio": 13230.7354549008,
+      "sigma_min": 3.4003076534869597e-07,
+      "sigma_max": 25.21431315880541,
+      "sigma_ratio": 1.3485624740483938e-08,
+      "float_shadow_pinv_rcond_default": 2.873746705272614e-09,
+      "float_shadow_pinv_rcond_1e-6": 0.9999838472725102,
+      "float_shadow_pinv_rcond_1e-4": 0.9999838472724524,
+      "float_shadow_pinv_rcond_1e-8": 2.873746705272614e-09,
+      "numpy_default_rcond_estimate": 8.903988657493755e-14
+    },
+    "n801": {
+      "n": 801,
+      "weight_s": 2.0,
+      "orbit_tangent_phi": {
+        "norm_s": 3.302304025525987,
+        "DF_image_norm_s": 1.0810725139005858e-05,
+        "relative_defect": 3.273691657534148e-06
+      },
+      "control_profile_itself": {
+        "norm_s": 1.9905227369915288,
+        "DF_image_norm_s": 1.9910428081879876,
+        "relative_defect": 1.0002612736779108
+      },
+      "control_localised_bump": {
+        "norm_s": 0.7357407004646916,
+        "DF_image_norm_s": 0.5071550789383268,
+        "relative_defect": 0.6893122517457702
+      },
+      "kernel_to_control_ratio": 210561.1413217159,
+      "sigma_min": 7.053168752759464e-09,
+      "sigma_max": 52.71330475990025,
+      "sigma_ratio": 1.338024391543159e-10,
+      "float_shadow_pinv_rcond_default": 1.0316116630124495e-07,
+      "float_shadow_pinv_rcond_1e-6": 0.9999989693180492,
+      "float_shadow_pinv_rcond_1e-4": 0.9999989693178248,
+      "float_shadow_pinv_rcond_1e-8": 0.9999989693180492,
+      "numpy_default_rcond_estimate": 1.7785772854495008e-13
+    }
+  },
+  "headline_magnitudes": {
+    "exact_identity_holds_for_all_b": true,
+    "DF_on_tangent_exactly_zero_for_all_b": true,
+    "Z0_plus_Z1_lower_bound_reproduced": 1.0,
+    "kernel_to_control_ratio_n801": 210561.1413217159,
+    "Z2_slope_independent": 2.359536592682637,
+    "Z2_slope_banked": 2.359536592682637,
+    "Z2_slope_on_a_different_ladder": 2.2466192856811045,
+    "Z2_local_slope_min": 2.128574518587138,
+    "Z2_local_slope_max": 2.495388549003633,
+    "sigma_ratio_slope_on_a_different_ladder": -6.65483031110268,
+    "worst_relative_difference_over_20_quantities": 0.0,
+    "H_closed_form_vs_repo_operator_rel_err_n801": 1.2833136386891653e-08
+  }
+}

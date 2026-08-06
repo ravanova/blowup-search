@@ -1,0 +1,397 @@
+{
+  "leg": 181,
+  "route": "ROUTE-MOD",
+  "kind": "literature scoping (light); no solver module built, imported read-only only",
+  "paper": {
+    "arxiv": "2607.19762",
+    "version_read": "arXiv:2607.19762v1, 22 Jul 2026, physics.flu-dyn, 41 pp",
+    "url": "https://arxiv.org/abs/2607.19762",
+    "pdf_present_this_run": true
+  },
+  "gate": "Does Xu's modulation technique, read at full-text depth, apply (as stated, or via a straightforward adaptation) to any operator/space combination this repository has already built, beyond origin-H^2?",
+  "gate_answer": "YES",
+  "gate_yes_branch_verbatim": "Name the target and what modulation would require precisely, escalate as a candidate scoping question for a later leg.",
+  "headline": "Xu's 'modulation' is not Xu's and is not a technique: it is the STANDARD blow-up modulation, credited by Xu to Elgindi-Ghoul-Masmoudi, and as an operator it is the rank-2 projection onto the two origin Taylor functionals `v(0)` and `v'(0)` (eq A.13). It costs nothing, it buys nothing beyond deleting two already-known eigenvalues, and the dynamic modulation CLOSURE is explicitly OPEN (sec 8 p. 33). Its ONE structural prerequisite is that those two functionals be bounded on the realization. Applied to this repository: it is ALREADY RUNNING in two places -- energy_coercivity's `modulate=True`, and, unnoticed since leg 51, `bordered_linearization`'s GAUGE ROW, which is `v'(0)` character for character. So leg 127's `Z_1 >= 1` is a theorem about an already-partially-modulated object -- and that half of the projection is UNBOUNDED on `ell^1_w` for every s < 1, exactly the range leg 127 lives in. Whether COMPLETING the modulation would help is NOT settled here: the check pre-registered to settle it failed both its predictions and was found to be measuring the wrong quantity, so it is escalated (T2b) rather than asserted.",
+  "quotes": [
+    {
+      "id": "Q1-ABSTRACT-HEADLINE",
+      "where": "Abstract, p. 1",
+      "quote": "removing these by the standard modulation leaves a spectral gap of 1/2 on X",
+      "fragment": "removing these by the standard modulation leaves a spectral gap of",
+      "reading": "THE sentence legs 127/163 have been citing. Note what it does NOT say: it does not say a hypothesis is added, and it does not say anything dynamical. 'these' are the two point-spectrum modes just named.",
+      "new_to_this_repo": false,
+      "already_banked_by": "leg 127 journal l. 32-38; solver/energy_coercivity.py (K1)/(K2)",
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q2-STANDARD-NOT-XUS",
+      "where": "Section 1, p. 2",
+      "quote": "Inviscid stable self-similar blow-up for this family of nonlocal transport models was proved by Elgindi, Ghoul, and Masmoudi [15] using modulation, near a known family of self-similar solutions",
+      "fragment": "proved by Elgindi, Ghoul, and Masmoudi [15] using modulation, near a known family of self-similar solutions",
+      "reading": "There is NO 'Xu modulation technique'. Xu attributes the method, and calls it 'the standard modulation' at every one of its three appearances. This leg therefore cannot make a novel-technique claim, and its question reduces to 'does the move help anywhere here'.",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q3-WHAT-IS-MODULATED",
+      "where": "Section 3.2 ('The two symmetry modes and the numerical spectrum'), p. 10",
+      "quote": "They are modded out by the standard modulation (choosing the collapse time and spatial scale) and do not represent instability.",
+      "fragment": "They are modded out by the standard modulation (choosing the collapse time and spatial scale) and do not represent instability.",
+      "reading": "WHAT IS BEING MODULATED, in one sentence: the two free parameters of the self-similar ansatz -- the collapse time T and the spatial scale. Not the operator, not the space, not the norm. The two parameters generate the two eigenmodes at lambda = +1 (time shift) and lambda = 0 (scaling).",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q4-THE-MODES-ARE-EXACT",
+      "where": "Section 3.2, p. 10",
+      "quote": "every term cancels and La (y Omega') = 0; ... hence La (Omega + cl y Omega') = Omega + cl y Omega'",
+      "fragment": "every term cancels and",
+      "reading": "COST #1: the two modes must be EXACT and EXPLICIT. Xu proves both by direct substitution, using admissibility (H1)/(H3) (which give Omega' in L^1 with integral zero) and the profile equation itself. This is cheap for THIS operator and is not a restriction in practice, because the same two modes exist for every admissible profile.",
+      "new_to_this_repo": true,
+      "already_banked_by": "the modes themselves are banked -- solver/energy_coercivity.py (K1): L sin 2theta = 0 and L(sin theta + sin 2theta/2) = itself. What is new is that they are exact for ALL admissible a, not only a = 0.",
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q5-THE-PROJECTION-ITSELF",
+      "where": "eq (A.13), Section A.4, p. 37",
+      "quote": "Thus Q is the regular part at the collapse point: it removes the zeroth and first Taylor coefficients of v at y = 0, matching the origin-regularity mechanism of the realization X of Theorem 1.",
+      "fragment": "Thus Q is the regular part at the collapse point: it removes the zeroth and first Taylor coefficients of v at y = 0",
+      "reading": "WHAT MODULATION IS, AS AN OPERATOR -- and no file in this repository had written it down. P v = v(0) + v'(0) y, Q v = v - v(0) - v'(0) y. A RANK-2 PROJECTION ONTO THE TWO ORIGIN TAYLOR FUNCTIONALS. That is the whole technique.",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q6-THE-ONE-PREREQUISITE",
+      "where": "Definition A.2, Section A.4, p. 37",
+      "quote": "Because the weight y^{-2theta-1} blows up at the origin, elements of Y_theta carry no pointwise origin traces; the modulation projection is therefore defined on the physical X (which has traces) and mapped into Y_theta, not applied within Y_theta",
+      "fragment": "carry no pointwise origin traces; the modulation projection is therefore defined on the physical X (which has traces)",
+      "reading": "COST #2, AND THE ONLY STRUCTURAL ONE: the realization must carry the two origin TRACES, or the projection is not even defined on it. Xu supplies his own worked failure case. This is the sentence the criterion in this leg's docstring abstracts.",
+      "new_to_this_repo": false,
+      "already_banked_by": "leg 171, experiments/p2_route_xul_v1_lit.py entry S5-Y-THETA hypothesis (c). CITED, NOT CLAIMED.",
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q7-THE-TRANSFER-COST",
+      "where": "Section A.4, p. 39",
+      "quote": "Since elements of Y_theta carry no origin traces, the modulation-complement Q of Section A.1 cannot act inside Y_theta; it acts on the physical X, which has traces, and lands in Y_theta.",
+      "fragment": "the modulation-complement Q of Section A.1 cannot act inside",
+      "reading": "COST #3: when (b) fails you need a bounded transfer map J_X : X -> script-Y_{3/2}, which costs a constant C_Q (not 1), forces theta in (1, 2) because of 'the two integrable subtracted terms', and needs a double Hardy inequality on the core. That is the 'extra computational machinery' the leg spec asked about, and it is the ONLY machinery.",
+      "new_to_this_repo": false,
+      "already_banked_by": "leg 171, S5-Y-THETA hypothesis (c). CITED, NOT CLAIMED.",
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q8-SUBTRACTS-TWO-COEFFICIENTS",
+      "where": "Section A.4, p. 39",
+      "quote": "subtracting the two symmetry Taylor coefficients that phi in X possesses (phi is C^1 with phi(0) = 0, and v_pm = M_pm phi_pm has a value and a first derivative at 0)",
+      "fragment": "subtracting the two symmetry Taylor coefficients",
+      "reading": "The parenthesis matters for the transfer to THIS repository's odd realizations: on the physical odd space phi(0) = 0 holds AUTOMATICALLY, so the non-trivial functional is the FIRST ORIGIN DERIVATIVE. Xu's rank-2 count is per Hardy block on the CONJUGATED variable v = b^2 u; it is not two independent conditions on the physical odd function.",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q9-CLOSURE-IS-OPEN",
+      "where": "Section 8 (closing discussion), p. 33",
+      "quote": "Three inputs are still missing, and none is supplied here: a lower bound for the dissipation form in the Y_theta norm, a quadratic estimate for N(phi) = phi H phi in the same norm, and the modulation closure that removes the two symmetry directions along the flow",
+      "fragment": "and the modulation closure that removes the two symmetry directions along the flow",
+      "reading": "THE FINDING THAT CORRECTS THIS REPOSITORY'S OWN CITATION HABIT. 'gap 1/2 after modulation' is a STATIC statement -- the spectrum minus two known points. The DYNAMIC modulation closure, the thing that would make 'after modulation' mean anything, is one of three inputs Xu explicitly does not supply. No file in this repository records this.",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q10-CLOSURE-IS-OPEN-AGAIN",
+      "where": "Section 6.1, p. 31",
+      "quote": "the required weighted dissipation-form bound, nonlinear estimate, and modulation closure are open, Appendix A",
+      "fragment": "modulation closure are open",
+      "reading": "Q9 restated in a second, independent place in the paper, so the reading does not rest on one sentence.",
+      "new_to_this_repo": true,
+      "already_banked_by": null,
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "Q11-COERCIVITY-NOGO-CAPS-T1",
+      "where": "Section 8, p. 34",
+      "quote": "no coercivity certificate in an L^2-equivalent norm reaches the spectral gap",
+      "fragment": "coercivity certificate in an L",
+      "reading": "Why target T1 (energy_coercivity's weighted-L^2_phi) is APPLICABLE but CAPPED: modulation runs there, and Xu's own no-go says the lane it runs in cannot reach the gap regardless. So T1 is not a scoping question for a later leg -- it is closed from both ends.",
+      "new_to_this_repo": false,
+      "already_banked_by": "leg 141 (Route-WEL). CITED, NOT CLAIMED.",
+      "located": true,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    }
+  ],
+  "negative_locators": [
+    {
+      "id": "N1-NO-WEIGHTED-SEQUENCE-SPACE",
+      "fragment": "weighted sequence space",
+      "why": "`ell^1_w` is THIS repository's space, not Xu's. If this ever relocates, the whole framing of legs 127/163/171/181 is wrong.",
+      "located": false,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N2-CLOSURE-NOT-CLAIMED-PROVED",
+      "fragment": "we prove the modulation closure",
+      "why": "Q9/Q10 say the closure is OPEN. A claim that it is proved would contradict.",
+      "located": false,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N3-MODULATION-NOT-XUS-CONTRIBUTION",
+      "fragment": "our modulation technique",
+      "why": "Q2 says the technique is standard and attributed. If Xu claimed it, the leg's central 'nothing to transfer' reading would be wrong.",
+      "located": false,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N4-NOT-IN-THE-RADII-POLYNOMIAL-LANE",
+      "fragment": "radii polynomial",
+      "why": "Xu is not in this repository's certification lane at all; the transfer question is ours to ask, and nobody has answered it for us.",
+      "located": false,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N5-NO-GENERAL-BOUNDEDNESS-CLAIM",
+      "fragment": "the modulation projection is bounded on",
+      "why": "Xu states boundedness only for the specific transfer J_X : X -> script-Y_{3/2}, never in general. The criterion in this leg is OURS, abstracted from his worked cases, and must not be attributed to him.",
+      "located": false,
+      "located_source": "VERIFIED THIS RUN against Papers/2607.19762.pdf"
+    }
+  ],
+  "locator_summary": {
+    "quotes_total": 11,
+    "quotes_located": 11,
+    "negatives_total": 5,
+    "negatives_wrongly_located": 0,
+    "verified_this_run": true
+  },
+  "checks": {
+    "C1_trace_dual_norm": {
+      "rows": [
+        {
+          "s": 0.0,
+          "dual_norm_by_K": {
+            "64": 64.0,
+            "256": 256.0,
+            "1024": 1024.0,
+            "4096": 4096.0
+          },
+          "ratio_last_two_K": 4.0,
+          "saturates": false,
+          "predicted_finite": false
+        },
+        {
+          "s": 0.3,
+          "dual_norm_by_K": {
+            "64": 18.29388594013422,
+            "256": 48.44623464498835,
+            "1024": 127.96252378590351,
+            "4096": 337.7692883099474
+          },
+          "ratio_last_two_K": 2.639595393375294,
+          "saturates": false,
+          "predicted_finite": false
+        },
+        {
+          "s": 0.7,
+          "dual_norm_by_K": {
+            "64": 3.44461449150821,
+            "256": 5.263647276599303,
+            "1024": 7.9945357855035635,
+            "4096": 12.123660693281682
+          },
+          "ratio_last_two_K": 1.5164933923074597,
+          "saturates": false,
+          "predicted_finite": false
+        },
+        {
+          "s": 0.9,
+          "dual_norm_by_K": {
+            "64": 1.4947134862067775,
+            "256": 1.7350026973632946,
+            "1024": 1.9982438167450687,
+            "4096": 2.296892027964524
+          },
+          "ratio_last_two_K": 1.1494553410934218,
+          "saturates": false,
+          "predicted_finite": false
+        },
+        {
+          "s": 1.0,
+          "dual_norm_by_K": {
+            "64": 0.9846153846153847,
+            "256": 0.9961089494163424,
+            "1024": 0.9990243902439024,
+            "4096": 0.9997559189650964
+          },
+          "ratio_last_two_K": 1.0007322431047108,
+          "saturates": true,
+          "predicted_finite": true
+        },
+        {
+          "s": 1.5,
+          "dual_norm_by_K": {
+            "64": 0.3849001794597505,
+            "256": 0.3849001794597505,
+            "1024": 0.3849001794597505,
+            "4096": 0.3849001794597505
+          },
+          "ratio_last_two_K": 1.0,
+          "saturates": true,
+          "predicted_finite": true
+        }
+      ],
+      "prediction": "finite iff s >= 1",
+      "prediction_holds": true,
+      "reading": "Xu's modulation projection is UNBOUNDED on `ell^1_w` for every s < 1 -- which is exactly and only the range in which leg 127's `Z_1 >= 1` lives -- and bounded for s >= 1, which is exactly the range in which leg 127's obstruction (the tail kernel) has already LEFT the space. Modulation and the obstruction sit on opposite sides of s = 1."
+    },
+    "C2_same_crossing": {
+      "fredholm_sides": {
+        "kernel_exponent": -2.00236292896265,
+        "cokernel_exponent": 1.0011766190838682,
+        "kernel_in_space_iff": "s < 1",
+        "cokernel_bounded_iff": "s >= 1",
+        "crossing": 1.0
+      },
+      "predicted_kernel_exponent": -2.0,
+      "predicted_cokernel_exponent": 1.0,
+      "kernel_matches": true,
+      "cokernel_matches": true,
+      "reading": "The cokernel functional grows like `m`, i.e. at the SAME rate as the weights of `v'(0) = sum_k k b_k`. Xu's modulation functional and this repository's cokernel functional are the same growth class, so they enter the dual at the same exponent. `s = 1` is not a coincidence of two separate facts; it is one fact seen twice."
+    },
+    "C3_no_op": {
+      "K": 96,
+      "s": 0.3,
+      "argmax_column": 95,
+      "norm_unmodulated": 187.56839309846038,
+      "norm_modulated_domain_restricted": 2.0295669167417683,
+      "ratio_modulated_over_unmodulated": 0.010820410002000638,
+      "two_sided_compression_QLQ_is_singular": true,
+      "witness_l1w_mass_on_modulation_span": 123.14404323052813,
+      "witness_l1w_mass_total": 187.5683930984605,
+      "witness_mass_fraction_on_span": 0.6565287530393566,
+      "prediction_span_fraction_negligible": false,
+      "prediction_norm_essentially_unchanged": false,
+      "both_predictions_held": false,
+      "verdict": "INCONCLUSIVE -- BOTH PRE-REGISTERED PREDICTIONS FAILED, AND THE INSTRUMENT IS NOT MEASURING THE CERTIFICATE'S CONSTANT",
+      "reading": "Kept, not deleted (lesson 76). The domain-only restriction is OVERDETERMINED, so its `pinv` constant is a least-squares number and is not comparable to `||M_K^{-1}||_w`; the dimensionally comparable form, the two-sided compression `Q L Q`, is EXACTLY SINGULAR. So neither number is evidence that modulation repairs the `ell^1_w` object, and neither is evidence that it does not. This leg's verdict rests on C1, C2 and the gauge-row identity instead. The real output is escalation T2b: what the right finite-dimensional realization of 'quotient the lambda = 1 mode' inside a weighted-`ell^1` radii-polynomial certificate even is."
+    },
+    "gauge_row_identity": {
+      "gauge_row": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0
+      ],
+      "expected_v_prime_at_origin_coefficients": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0
+      ],
+      "max_abs_deviation": 0.0,
+      "is_exactly_v_prime_at_origin": true,
+      "reading": "Character for character, the gauge row is `v'(0)`. This is not an analogy: it is the same linear functional, and the module's own docstring already says which symmetry mode it removes."
+    }
+  },
+  "targets": [
+    {
+      "id": "T1-WEIGHTED-L2-COERCIVITY",
+      "target": "solver/energy_coercivity.py -- the weighted-`L^2_phi` odd sine realization",
+      "criterion_a_modes_in_space": "YES. Both modes are `span{sin theta, sin 2theta}` and the admissibility check (gamma < 3) keeps them in every weight of the named seven-weight family.",
+      "criterion_b_traces_bounded": "YES, trivially: the trial space is the finite-dimensional `span{sin 1..sin N}`, on which every linear functional is bounded.",
+      "verdict": "APPLIES -- AND IS ALREADY IMPLEMENTED",
+      "status": "NOT A SCOPING QUESTION. Closed from both ends.",
+      "detail": "`coercivity_gap(..., modulate=True)` already quotients the two modes by the `G`-orthogonal complement, and its own docstring calls this 'the modulation Xu's 1/2 refers to'. And Xu sec 8 p. 34 (Q11) independently caps the lane: no coercivity certificate in an `L^2`-equivalent norm reaches the gap. So there is nothing for a later leg to do here.",
+      "escalate": false
+    },
+    {
+      "id": "T2-ELL1W",
+      "target": "solver/spectral_certificate.py -- the `ell^1_w` line, `w_k = (1+k)^s`, where leg 127 proved `Z_1 >= 1` unconditionally",
+      "criterion_a_modes_in_space": "YES. `e_2` and `e_1 + e_2/2` are finitely supported, hence in `ell^1_w` for every `s`.",
+      "criterion_b_traces_bounded": "SPLIT, AND THIS IS THE ANSWER. `v(0) = 0` identically by oddness, so that half is free. `v'(0) = sum_k k b_k` has dual norm `sup_k k/(1+k)^s`, FINITE IFF `s >= 1` (check C1) -- and leg 127's theorem lives at `s < 1`.",
+      "verdict": "APPLIES, AND HALF OF IT HAS BEEN APPLIED SINCE LEG 51 WITHOUT ANYONE NOTICING. `bordered_linearization`'s GAUGE ROW IS `v'(0)`, character for character (exact check, deviation 0.0), and its own docstring says it removes the eigenvalue the dilation symmetry puts there -- Xu's lambda = 0 scaling mode. Leg 127's `Z_1 >= 1` is therefore a theorem about an ALREADY-PARTIALLY-MODULATED object.",
+      "status": "BANKED AS A NARROWING OF LEG 127 -- nothing banked is reversed; what changes is what leg 127's theorem is a theorem ABOUT. The SECOND half (the lambda = 1 mode) is UNDECIDED and is escalated as T2b.",
+      "detail": "Two solid findings and one honest non-finding. SOLID (1): the gauge-row identity above -- exact, not an analogy. SOLID (2): `v'(0)` is UNBOUNDED on `ell^1_w` for every `s < 1` (check C1, closed form, ladder-verified to K = 4096), which is exactly and only the range leg 127's theorem lives in; and at `s >= 1`, where it becomes bounded, the obstruction (the tail kernel, measured exponent -2.0024) has already LEFT the space -- `fredholm_sides`' crossing at s = 1.0, check C2, cokernel exponent +1.0012 confirming that Xu's modulation functional and this repository's cokernel functional are the same growth class. So modulation is unbounded where the obstruction is, and defined only where the obstruction is gone. NON-FINDING (3): whether removing the REMAINING half repairs anything is NOT decided here. Check C3 was pre-registered to decide it, both of its predictions failed, and interrogation showed the instrument is not measuring the certificate's constant (overdetermined one way, exactly singular the other). Recorded as such, and escalated as T2b rather than resolved by assertion.",
+      "escalate": false
+    },
+    {
+      "id": "T2b-WHAT-IS-MODULATION-IN-AN-ELL1-CERTIFICATE",
+      "target": "the same `ell^1_w` object, but a question this leg opened rather than closed: what IS the right finite-dimensional realization of 'quotient the lambda = 1 symmetry mode' inside a weighted-`ell^1` radii-polynomial certificate?",
+      "criterion_a_modes_in_space": "YES (as T2).",
+      "criterion_b_traces_bounded": "The lambda = 1 mode `e_1 + e_2/2` is finitely supported, so quotienting IT needs no unbounded functional -- unlike the lambda = 0 half. That is why the question is live rather than closed by C1.",
+      "verdict": "OPEN -- OPENED BY THIS LEG'S OWN FAILED CHECK",
+      "status": "ESCALATED as a candidate scoping question for a later leg.",
+      "detail": "The naive domain-only quotient is OVERDETERMINED (two fewer unknowns, same number of equations) so its constant is a least-squares number that does not solve the system; the naive two-sided compression `Q L Q` is EXACTLY SINGULAR. Both were measured here, at K = 96, s = 0.3. The literature already knows the answer's SHAPE and this repository already uses it: the `ell^1` way to remove a symmetry direction is a PHASE CONDITION -- give the direction its own unfolding parameter and its own column, keeping the system square -- which is precisely what leg 52's bordering does, and what the gauge row already does for lambda = 0. WHAT A LATER LEG WOULD HAVE TO DO, PRECISELY: add a SECOND border column/row pair for `e_1 + e_2/2`, keep the system square, and re-measure `||M_K^{-1}||_w` and `Z_1` on leg 127's own ladder. CHEAP, and decidable either way in one leg. STRONG PRIOR AGAINST, recorded now so nobody is sold a hope: leg 127 measured that the existing border's coupling column is supported on a SINGLE row, the truncation edge, so 'the bordering repair has nowhere else to reach'; a second border of the same kind has no obvious reason to reach further.",
+      "escalate": true
+    },
+    {
+      "id": "T3-ROUTE-D-WEIGHTED-HOLDER",
+      "target": "solver/holder_norms.py + solver/hilbert_holder.py -- Route-D's TWO-GRADING weighted-Holder space (a decay weight AND a smoothness grading), the space Route-D v5+ actually works in",
+      "criterion_a_modes_in_space": "NOT CHECKED HERE -- out of this leg's territory. The two modes exist for every admissible profile (Q4), so the question is only whether the decay grading admits them.",
+      "criterion_b_traces_bounded": "NOT CHECKED HERE. This is the whole scoping question: does the SMOOTHNESS grading exceed one derivative, so that `v -> v'(0)` is bounded? v7's provisional optimum sat at (alpha, gamma) = (1.4, 0.15), and `alpha > 1` is exactly the condition -- but what `alpha` indexes in that map is not verified by this leg.",
+      "verdict": "CANDIDATE -- UNDECIDED, AND THE ONLY ONE",
+      "status": "ESCALATED as a candidate scoping question for a later leg.",
+      "detail": "Why this is the only live candidate. It is the one space this repository has built that (i) is NOT `L^2`-equivalent, so Xu sec 8's coercivity no-go (Q11) does not cap it the way it caps T1; (ii) is not at `s < 1` in the `ell^1_w` sense, so T2's unboundedness argument does not transfer verbatim; and (iii) grades SMOOTHNESS explicitly, which is the only property criterion (b) actually asks about. WHAT A LATER LEG WOULD HAVE TO DO, PRECISELY: (1) evaluate the dual norm of `v -> v'(0)` in the two-grading norm and report whether it is finite; (2) if finite, check the two modes lie in the space under the decay grading; (3) ONLY THEN ask whether the Route-D obstruction is a symmetry-mode object at all -- because T2's check C3 is the cautionary case, where modulation was both available and completely useless. STRONG PRIOR AGAINST, recorded now so the later leg is not sold a hope: in every case this repository has measured, the obstruction has been a FAR-FIELD object, and modulation touches only the origin.",
+      "escalate": true
+    }
+  ],
+  "escalations": [
+    {
+      "id": "T2b-WHAT-IS-MODULATION-IN-AN-ELL1-CERTIFICATE",
+      "target": "the same `ell^1_w` object, but a question this leg opened rather than closed: what IS the right finite-dimensional realization of 'quotient the lambda = 1 symmetry mode' inside a weighted-`ell^1` radii-polynomial certificate?",
+      "criterion_a_modes_in_space": "YES (as T2).",
+      "criterion_b_traces_bounded": "The lambda = 1 mode `e_1 + e_2/2` is finitely supported, so quotienting IT needs no unbounded functional -- unlike the lambda = 0 half. That is why the question is live rather than closed by C1.",
+      "verdict": "OPEN -- OPENED BY THIS LEG'S OWN FAILED CHECK",
+      "status": "ESCALATED as a candidate scoping question for a later leg.",
+      "detail": "The naive domain-only quotient is OVERDETERMINED (two fewer unknowns, same number of equations) so its constant is a least-squares number that does not solve the system; the naive two-sided compression `Q L Q` is EXACTLY SINGULAR. Both were measured here, at K = 96, s = 0.3. The literature already knows the answer's SHAPE and this repository already uses it: the `ell^1` way to remove a symmetry direction is a PHASE CONDITION -- give the direction its own unfolding parameter and its own column, keeping the system square -- which is precisely what leg 52's bordering does, and what the gauge row already does for lambda = 0. WHAT A LATER LEG WOULD HAVE TO DO, PRECISELY: add a SECOND border column/row pair for `e_1 + e_2/2`, keep the system square, and re-measure `||M_K^{-1}||_w` and `Z_1` on leg 127's own ladder. CHEAP, and decidable either way in one leg. STRONG PRIOR AGAINST, recorded now so nobody is sold a hope: leg 127 measured that the existing border's coupling column is supported on a SINGLE row, the truncation edge, so 'the bordering repair has nowhere else to reach'; a second border of the same kind has no obvious reason to reach further.",
+      "escalate": true
+    },
+    {
+      "id": "T3-ROUTE-D-WEIGHTED-HOLDER",
+      "target": "solver/holder_norms.py + solver/hilbert_holder.py -- Route-D's TWO-GRADING weighted-Holder space (a decay weight AND a smoothness grading), the space Route-D v5+ actually works in",
+      "criterion_a_modes_in_space": "NOT CHECKED HERE -- out of this leg's territory. The two modes exist for every admissible profile (Q4), so the question is only whether the decay grading admits them.",
+      "criterion_b_traces_bounded": "NOT CHECKED HERE. This is the whole scoping question: does the SMOOTHNESS grading exceed one derivative, so that `v -> v'(0)` is bounded? v7's provisional optimum sat at (alpha, gamma) = (1.4, 0.15), and `alpha > 1` is exactly the condition -- but what `alpha` indexes in that map is not verified by this leg.",
+      "verdict": "CANDIDATE -- UNDECIDED, AND THE ONLY ONE",
+      "status": "ESCALATED as a candidate scoping question for a later leg.",
+      "detail": "Why this is the only live candidate. It is the one space this repository has built that (i) is NOT `L^2`-equivalent, so Xu sec 8's coercivity no-go (Q11) does not cap it the way it caps T1; (ii) is not at `s < 1` in the `ell^1_w` sense, so T2's unboundedness argument does not transfer verbatim; and (iii) grades SMOOTHNESS explicitly, which is the only property criterion (b) actually asks about. WHAT A LATER LEG WOULD HAVE TO DO, PRECISELY: (1) evaluate the dual norm of `v -> v'(0)` in the two-grading norm and report whether it is finite; (2) if finite, check the two modes lie in the space under the decay grading; (3) ONLY THEN ask whether the Route-D obstruction is a symmetry-mode object at all -- because T2's check C3 is the cautionary case, where modulation was both available and completely useless. STRONG PRIOR AGAINST, recorded now so the later leg is not sold a hope: in every case this repository has measured, the obstruction has been a FAR-FIELD object, and modulation touches only the origin.",
+      "escalate": true
+    }
+  ],
+  "what_is_new_to_this_repository": [
+    "Q2-STANDARD-NOT-XUS",
+    "Q3-WHAT-IS-MODULATED",
+    "Q4-THE-MODES-ARE-EXACT",
+    "Q5-THE-PROJECTION-ITSELF",
+    "Q8-SUBTRACTS-TWO-COEFFICIENTS",
+    "Q9-CLOSURE-IS-OPEN",
+    "Q10-CLOSURE-IS-OPEN-AGAIN",
+    "CRITERION (b)-as-a-test",
+    "GAUGE-ROW-IS-XUS-FUNCTIONAL"
+  ],
+  "what_is_new_to_the_world": "nothing -- a reading of one published paper",
+  "no_figure_because": "no measurement of a curve of this repository's own; every number is Xu's, arithmetic on Xu's, or a read-only evaluation of an existing module",
+  "ceiling": "literature-only; no link of L1 -> L4 moves; no ban lifted; no route promoted; solver/spectral_certificate.py byte-identical to origin/main"
+}

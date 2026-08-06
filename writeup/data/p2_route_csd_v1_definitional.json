@@ -1,0 +1,899 @@
+{
+ "leg": 164,
+ "route": "CSD",
+ "version": "v1",
+ "question": "does the a = 0 CLM linearization, as defined in this repository's certificate machinery, admit a compact-support representation under any basis change consistent with its own defining equations?",
+ "object": "the a = 0 CLM linearization: solver/spectral_certificate.py clm_anchor / clm_residual / bordered_linearization / tail_block, on the odd sine system {sin k theta} with X = tan(theta/2)",
+ "read_only": true,
+ "no_GA_compute": true,
+ "novelty_log": "writeup/novelty/leg_164.md",
+ "does_not_overwrite": "leg 162's parked branch leg/162-capg-v1 and its report are read, cited and left untouched",
+ "CSD1_self_consistency": {
+  "K": 12,
+  "operator": "L h = cos(theta) h - (H h) sin(theta) - sin(theta) h_theta",
+  "anchor": "Omega_0 = -sin(theta), c_omega = -1, c_l = 1 (spectral_certificate.clm_anchor)",
+  "columns": [
+   {
+    "k": 1,
+    "pointwise": {
+     "1": "1",
+     "2": "1/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 2,
+    "pointwise": {},
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 3,
+    "pointwise": {
+     "1": "1",
+     "2": "3/2",
+     "4": "-1/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 4,
+    "pointwise": {
+     "1": "-1",
+     "3": "2",
+     "5": "-1"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 5,
+    "pointwise": {
+     "1": "1",
+     "4": "5/2",
+     "6": "-3/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 6,
+    "pointwise": {
+     "1": "-1",
+     "5": "3",
+     "7": "-2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 7,
+    "pointwise": {
+     "1": "1",
+     "6": "7/2",
+     "8": "-5/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 8,
+    "pointwise": {
+     "1": "-1",
+     "7": "4",
+     "9": "-3"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 9,
+    "pointwise": {
+     "1": "1",
+     "8": "9/2",
+     "10": "-7/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 10,
+    "pointwise": {
+     "1": "-1",
+     "9": "5",
+     "11": "-4"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 11,
+    "pointwise": {
+     "1": "1",
+     "10": "11/2",
+     "12": "-9/2"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   },
+   {
+    "k": 12,
+    "pointwise": {
+     "1": "-1",
+     "11": "6",
+     "13": "-5"
+    },
+    "matches_bordered_linearization": true,
+    "matches_exact_central_difference_of_clm_residual": true
+   }
+  ],
+  "all_columns_match_bordered_linearization": true,
+  "all_columns_match_exact_central_difference": true,
+  "arithmetic": "fractions.Fraction throughout -- exact, no float anywhere in CSD1",
+  "reading": "the pointwise operator this leg measures IS the banked matrix, on three independent construction paths.  Discipline 85: re-measure the headline object before building on it."
+ },
+ "CSD2_existence": {
+  "construction": "m-fold box convolutions on [theta_c - h, theta_c + h] subset (0, pi), oddly extended; sine coefficients in closed form, b_k = (2 sin(k h/m)/k)^m sin(k theta_c).  No quadrature.",
+  "why_these_are_compactly_supported_in_X": "supp subset (0, pi) means the element vanishes on a neighbourhood of theta = \u00b1pi, i.e. on |X| > tan(theta_max/2) -- compact support in X.",
+  "K": 2048,
+  "K_ladder": [
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048
+  ],
+  "rows": [
+   {
+    "m": 1,
+    "smoothness": "discontinuous (box)",
+    "support_theta": [
+     0.3999999999999999,
+     2.0
+    ],
+    "support_X": [
+     0.20271003550867245,
+     1.5574077246549023
+    ],
+    "measured_coefficient_decay_exponent": -1.000894888064035,
+    "predicted_decay_exponent": -1.0,
+    "flat_l1_partial_sums": [
+     3.3362173981971694,
+     3.753505272792815,
+     4.170152979875111,
+     4.5942003343784235,
+     5.015126176740955,
+     5.436572397242612
+    ],
+    "flat_l1_converges": false,
+    "algebraic_partial_sums": {
+     "0.3": [
+      6.245493598696223,
+      7.871036771393411,
+      9.86169498981723,
+      12.352242525282689,
+      15.395456578926357,
+      19.144633743522114
+     ],
+     "1.0": [
+      42.913112242659274,
+      82.25041505011632,
+      159.82298792864702,
+      317.0115574088139,
+      628.8783324655117,
+      1252.2590148475776
+     ],
+     "2.0": [
+      1367.5790428575274,
+      5217.451260557654,
+      20214.493993745673,
+      80804.29873928044,
+      320979.07148932724,
+      1279553.1139599744
+     ],
+     "4.0": [
+      2946586.075234293,
+      43756277.20738552,
+      664649587.2508583,
+      10670670953.179157,
+      168836735422.1406,
+      2686478215844.417
+     ]
+    },
+    "geometric_log10_max_term": {
+     "1.02": [
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      1.826617460084448,
+      5.802294180677624,
+      14.360823330856164
+     ],
+     "1.05": [
+      0.021189299069938092,
+      0.7047045545329294,
+      3.078014938016894,
+      8.272250641790956,
+      18.680971416782622,
+      40.1433560576822
+     ]
+    }
+   },
+   {
+    "m": 2,
+    "smoothness": "C^0",
+    "support_theta": [
+     0.3999999999999999,
+     2.0
+    ],
+    "support_X": [
+     0.20271003550867245,
+     1.5574077246549023
+    ],
+    "measured_coefficient_decay_exponent": -2.0075174550133097,
+    "predicted_decay_exponent": -2.0,
+    "flat_l1_partial_sums": [
+     2.748433742627872,
+     2.7661242469526437,
+     2.775066980268305,
+     2.779414803156711,
+     2.78161695115816,
+     2.7827182868912383
+    ],
+    "flat_l1_converges": true,
+    "algebraic_partial_sums": {
+     "0.3": [
+      4.0999866317999825,
+      4.167760677395719,
+      4.209928243288081,
+      4.235177139254139,
+      4.250898271918104,
+      4.2605780202970385
+     ],
+     "1.0": [
+      13.150570970955402,
+      14.728410439387106,
+      16.32302060291972,
+      17.87443405618535,
+      19.438758360542536,
+      21.003513167274946
+     ],
+     "2.0": [
+      166.99559056997413,
+      313.33077109805834,
+      609.4873041285583,
+      1185.039067269301,
+      2341.41349122228,
+      4655.225960451069
+     ],
+     "4.0": [
+      212761.24001134926,
+      1620389.2593835176,
+      13100024.837389687,
+      101671587.32569906,
+      809960302.9535704,
+      6483073275.850043
+     ]
+    },
+    "geometric_log10_max_term": {
+     "1.02": [
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      3.5783220810608887,
+      11.823327455808876
+     ],
+     "1.05": [
+      0.021189299069938092,
+      0.021189299069938092,
+      1.414858799147571,
+      6.113337767594152,
+      16.38146455331776,
+      37.58068192801887
+     ]
+    }
+   },
+   {
+    "m": 4,
+    "smoothness": "C^2",
+    "support_theta": [
+     0.3999999999999999,
+     2.0
+    ],
+    "support_X": [
+     0.20271003550867245,
+     1.5574077246549023
+    ],
+    "measured_coefficient_decay_exponent": -4.04923788256812,
+    "predicted_decay_exponent": -4.0,
+    "flat_l1_partial_sums": [
+     3.6412714209076738,
+     3.641460071011081,
+     3.641484135045401,
+     3.6414871094739576,
+     3.6414874565319186,
+     3.641487501576954
+    ],
+    "flat_l1_converges": true,
+    "algebraic_partial_sums": {
+     "0.3": [
+      5.518467189639416,
+      5.519174383879587,
+      5.519284984245087,
+      5.519301833162963,
+      5.5193042615662415,
+      5.519304648583438
+     ],
+     "1.0": [
+      16.067911009383113,
+      16.08351361997171,
+      16.08744419619727,
+      16.088420090494708,
+      16.08865016840156,
+      16.088709392992897
+     ],
+     "2.0": [
+      95.30002774156594,
+      96.63284956848295,
+      97.29827605991494,
+      97.6308421190035,
+      97.78884233176228,
+      97.86960344763922
+     ],
+     "4.0": [
+      13123.220937776097,
+      23946.668491183114,
+      45386.6946704868,
+      89082.35894822318,
+      172584.1312466017,
+      341607.50548269216
+     ]
+    },
+    "geometric_log10_max_term": {
+     "1.02": [
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      7.035581957088745
+     ],
+     "1.05": [
+      0.021189299069938092,
+      0.021189299069938092,
+      0.021189299069938092,
+      2.760988998356467,
+      12.206774839482676,
+      32.74627386481964
+     ]
+    }
+   },
+   {
+    "m": 8,
+    "smoothness": "C^6",
+    "support_theta": [
+     0.3999999999999999,
+     2.0
+    ],
+    "support_X": [
+     0.20271003550867245,
+     1.5574077246549023
+    ],
+    "measured_coefficient_decay_exponent": -8.118530194462945,
+    "predicted_decay_exponent": -8.0,
+    "flat_l1_partial_sums": [
+     5.190396177084599,
+     5.190396644271592,
+     5.190396649085606,
+     5.190396649126567,
+     5.19039664912689,
+     5.190396649126892
+    ],
+    "flat_l1_converges": true,
+    "algebraic_partial_sums": {
+     "0.3": [
+      8.48701845277261,
+      8.487020192853318,
+      8.487020214487705,
+      8.487020214712723,
+      8.487020214714901,
+      8.487020214714919
+     ],
+     "1.0": [
+      30.18967749826119,
+      30.18971503903734,
+      30.189715763717427,
+      30.189715775770676,
+      30.189715775959563,
+      30.189715775962146
+     ],
+     "2.0": [
+      237.19677349097674,
+      237.19982236964134,
+      237.1999332478742,
+      237.19993686259497,
+      237.19993697553733,
+      237.19993697868347
+     ],
+     "4.0": [
+      26039.84274287935,
+      26060.838701115677,
+      26063.606076437816,
+      26063.95580527443,
+      26063.99948383084,
+      26064.00451354955
+     ]
+    },
+    "geometric_log10_max_term": {
+     "1.02": [
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567,
+      0.008600171761917567
+     ],
+     "1.05": [
+      0.026298002954179812,
+      0.026298002954179812,
+      0.026298002954179812,
+      0.026298002954179812,
+      5.565175922163586,
+      24.462491669028953
+     ]
+    }
+   },
+   {
+    "m": 16,
+    "smoothness": "C^14",
+    "support_theta": [
+     0.3999999999999999,
+     2.0
+    ],
+    "support_X": [
+     0.20271003550867245,
+     1.5574077246549023
+    ],
+    "measured_coefficient_decay_exponent": -15.422578158610095,
+    "predicted_decay_exponent": -16.0,
+    "flat_l1_partial_sums": [
+     7.37776549052682,
+     7.37776549073446,
+     7.3777654907345065,
+     7.3777654907345065,
+     7.3777654907345065,
+     7.3777654907345065
+    ],
+    "flat_l1_converges": true,
+    "algebraic_partial_sums": {
+     "0.3": [
+      13.102713991210642,
+      13.102713992014353,
+      13.102713992014564,
+      13.102713992014564,
+      13.102713992014564,
+      13.102713992014564
+     ],
+     "1.0": [
+      58.02589792313215,
+      58.02589794205744,
+      58.02589794206468,
+      58.02589794206468,
+      58.02589794206468,
+      58.02589794206468
+     ],
+     "2.0": [
+      643.7281549074576,
+      643.728156637329,
+      643.72815663846,
+      643.7281566384603,
+      643.7281566384603,
+      643.7281566384603
+     ],
+     "4.0": [
+      145036.14805175684,
+      145036.16262837008,
+      145036.16265613222,
+      145036.16265615664,
+      145036.16265615664,
+      145036.16265615664
+     ]
+    },
+    "geometric_log10_max_term": {
+     "1.02": [
+      0.019806539512410196,
+      0.019806539512410196,
+      0.019806539512410196,
+      0.019806539512410196,
+      0.019806539512410196,
+      0.019806539512410196
+     ],
+     "1.05": [
+      0.07016304874449229,
+      0.07016304874449229,
+      0.07016304874449229,
+      0.07016304874449229,
+      0.07016304874449229,
+      11.12914295955914
+     ]
+    }
+   }
+  ],
+  "flat_and_algebraic_contain_nonzero_compactly_supported_elements": true,
+  "geometric_contains_none": true,
+  "geometric_reason": "sum_k nu^k |b_k| < inf with nu > 1 means the element extends holomorphically to an annulus, i.e. is real-analytic on the circle; a real-analytic function vanishing on an open arc vanishes identically.  The measured max_k log10(nu^k |b_k|) ladders below grow without bound for every m, which is the numerical face of that theorem.",
+  "honest_reading": "this half of the question answers YES, AGAINST the leg's expected verdict, in 2 of the module's 3 weight classes.  'The domain is unbounded' is therefore NOT by itself a reason for the gate to answer no -- the invariance half (CSD3) is."
+ },
+ "CSD3_invariance": {
+  "rows": [
+   {
+    "total_L1_mass": 2.2765659829144993,
+    "mass_outside_supp_h": 0.2149556598042028,
+    "mass_outside_supp_anchor": 0.0,
+    "escape_fraction_vs_supp_h": 0.09442101016066877,
+    "escape_fraction_vs_supp_anchor": 0.0,
+    "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 0.0024813840539649737,
+    "hilbert_term_mass_outside_supp_h": 0.21530990832107866,
+    "hilbert_over_truncation_artifact": 86.77008622548273,
+    "truncation_leakage_max_abs_h_outside_supp": 0.0003906968793834231,
+    "m": 2,
+    "resolved": false
+   },
+   {
+    "total_L1_mass": 3.6966136998040153,
+    "mass_outside_supp_h": 0.18213731524786012,
+    "mass_outside_supp_anchor": 0.0,
+    "escape_fraction_vs_supp_h": 0.049271395401017035,
+    "escape_fraction_vs_supp_anchor": 0.0,
+    "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 3.001045188761575e-08,
+    "hilbert_term_mass_outside_supp_h": 0.18213731448382794,
+    "hilbert_over_truncation_artifact": 6069129.354196414,
+    "truncation_leakage_max_abs_h_outside_supp": 8.388547079185571e-10,
+    "m": 4,
+    "resolved": true
+   },
+   {
+    "total_L1_mass": 6.178783702202811,
+    "mass_outside_supp_h": 0.17029996331919472,
+    "mass_outside_supp_anchor": 0.0,
+    "escape_fraction_vs_supp_h": 0.027562052909940956,
+    "escape_fraction_vs_supp_anchor": 0.0,
+    "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 3.785401972624225e-15,
+    "hilbert_term_mass_outside_supp_h": 0.17029996331919414,
+    "hilbert_over_truncation_artifact": 44988607432127.99,
+    "truncation_leakage_max_abs_h_outside_supp": 3.9968028886505635e-15,
+    "m": 8,
+    "resolved": true
+   },
+   {
+    "total_L1_mass": 9.633951254522861,
+    "mass_outside_supp_h": 0.16523278529031105,
+    "mass_outside_supp_anchor": 0.0,
+    "escape_fraction_vs_supp_h": 0.017151092103848777,
+    "escape_fraction_vs_supp_anchor": 0.0,
+    "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 9.525882112430832e-15,
+    "hilbert_term_mass_outside_supp_h": 0.16523278529031155,
+    "hilbert_over_truncation_artifact": 17345667659973.502,
+    "truncation_leakage_max_abs_h_outside_supp": 5.861630625325631e-15,
+    "m": 16,
+    "resolved": true
+   }
+  ],
+  "truncation_ladder_m8": [
+   {
+    "K": 256,
+    "escape_fraction": 0.027562052910117527
+   },
+   {
+    "K": 512,
+    "escape_fraction": 0.027562052909939985
+   },
+   {
+    "K": 1024,
+    "escape_fraction": 0.02756205290994096
+   },
+   {
+    "K": 2048,
+    "escape_fraction": 0.027562052909940956
+   }
+  ],
+  "m2_artifact_ladder": [
+   {
+    "K": 256,
+    "m": 2,
+    "hilbert_over_truncation_artifact": 13.006648797037267,
+    "escape_fraction": 0.09434878421736034
+   },
+   {
+    "K": 512,
+    "m": 2,
+    "hilbert_over_truncation_artifact": 21.865775220106983,
+    "escape_fraction": 0.09438192413131907
+   },
+   {
+    "K": 1024,
+    "m": 2,
+    "hilbert_over_truncation_artifact": 35.656905345549575,
+    "escape_fraction": 0.09440565607423301
+   },
+   {
+    "K": 2048,
+    "m": 2,
+    "hilbert_over_truncation_artifact": 86.77008622548273,
+    "escape_fraction": 0.09442101016066877
+   }
+  ],
+  "m2_artifact_reading": "the m = 2 row's escape (0.0944, the LARGEST of the four) is real, but its truncation artifact at K = 2048 is only 86.8x smaller, below the PRE-SET 1000x bar -- because C^0 coefficients decay like k^-2 and the artifact falls only like 1/K.  The ladder above shows the ratio growing linearly in K, i.e. the artifact converges away and the escape does not.  The row is nevertheless EXCLUDED from the gate rather than admitted by lowering the bar, which is conservative: it is the largest escape of the four.",
+  "local_terms_preserve_support": "cos(theta) h and sin(theta) h_theta are pointwise multiples of h and h_theta, so they vanish identically off supp h; the ENTIRE escape is the term (H h) * Omega_0.",
+  "quadrature": "Gauss-Legendre, 6000 nodes on (0, pi)",
+  "excluded_from_gate_as_underresolved": [
+   {
+    "m": 2,
+    "escape_fraction": 0.09442101016066877,
+    "hilbert_over_truncation_artifact": 86.77008622548273
+   }
+  ]
+ },
+ "CSD3b_pointwise": {
+  "m": 8,
+  "K": 2048,
+  "n_outside_nodes": 3865,
+  "truncation_leakage_max_abs_h_outside": 3.9968028886505635e-15,
+  "max_abs_escape_density": 0.5134540452436378,
+  "min_abs_escape_density_away_from_forced_zeros": 1.8005403063732213e-05,
+  "fraction_of_outside_nodes_with_escape_above_1000x_leakage": 1.0,
+  "forced_zeros": "theta = 0 and theta = pi only, where Omega_0 = -sin(theta) = 0",
+  "reading": "the escape density is nonzero on essentially every outside node, not merely near supp h.  L h leaves the compactly supported class on the WHOLE complement, which is what the analyticity argument above predicts."
+ },
+ "CSD3_minimized": {
+  "rows": [
+   {
+    "K": 1,
+    "min_rayleigh": 0.030301852170432613,
+    "max_rayleigh": 0.030301852170432613,
+    "gram_condition_number": 1.0,
+    "float64_resolution_floor": 6.728362793680412e-18,
+    "resolved": true
+   },
+   {
+    "K": 2,
+    "min_rayleigh": 0.01164218178490391,
+    "max_rayleigh": 0.03165408065864023,
+    "gram_condition_number": 1.0000000000000009,
+    "float64_resolution_floor": 7.02861783411285e-18,
+    "resolved": true
+   },
+   {
+    "K": 4,
+    "min_rayleigh": 6.698670021604789e-05,
+    "max_rayleigh": 0.05160128632729476,
+    "gram_condition_number": 1.0000000000000013,
+    "float64_resolution_floor": 1.14577872361676e-17,
+    "resolved": true
+   },
+   {
+    "K": 8,
+    "min_rayleigh": 1.256757394778604e-09,
+    "max_rayleigh": 0.08021107998533007,
+    "gram_condition_number": 1.0000000000000069,
+    "float64_resolution_floor": 1.7810437565952825e-17,
+    "resolved": true
+   },
+   {
+    "K": 16,
+    "min_rayleigh": -1.6412708471951125e-18,
+    "max_rayleigh": 0.11643663853941627,
+    "gram_condition_number": 1.0000000000000329,
+    "float64_resolution_floor": 2.585412740328421e-17,
+    "resolved": false
+   },
+   {
+    "K": 32,
+    "min_rayleigh": -1.0002130779003715e-17,
+    "max_rayleigh": 0.15737045774891917,
+    "gram_condition_number": 1.0000000000000717,
+    "float64_resolution_floor": 3.4943261117732597e-17,
+    "resolved": false
+   }
+  ],
+  "resolved_K": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "decades_lost_over_resolved_range": 7.382217725827222,
+  "strictly_positive_over_resolved_range": true,
+  "unresolved_K": [
+   16,
+   32
+  ],
+  "not_used_for_the_gate": true,
+  "reading": "over the range float64 can resolve, the minimum is strictly positive at every K -- no compactly supported subspace of those dimensions is invariant -- and it falls by the decades reported above.  Beyond that range the computed eigenvalue goes NEGATIVE (a positive semi-definite form cannot), which is a statement about float64 and not about the operator (lesson 86), so this ladder is reported as the SHAPE of the ejection and is deliberately not what the gate is read off.  The exact statement is Luzin-Privalov and it holds at every K: if h and H h both vanish on an arc then the Hardy-class function F = -(H h) + const + i h is constant on a set of positive measure, hence h = 0.  The non-uniformity is the same severe ill-posedness that makes analytic continuation off an arc unstable, and it is why an APPROXIMATELY invariant compactly supported subspace exists while an invariant one does not.",
+  "K_modes": 1536,
+  "basis": "sin(i pi (theta - a)/(b - a)) on [a, b], 0 outside"
+ },
+ "CSD4_positive_control": {
+  "control_anchor": "compactly supported on [0.1000, 2.3000] (theta), strictly containing supp h -- the a > 0 structure of solver/first_integral.py",
+  "control": {
+   "total_L1_mass": 10.254039772912337,
+   "mass_outside_supp_h": 0.00013609632352554988,
+   "mass_outside_supp_anchor": 1.804569821783728e-15,
+   "escape_fraction_vs_supp_h": 1.3272459102905936e-05,
+   "escape_fraction_vs_supp_anchor": 1.7598623193863397e-16,
+   "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 3.550086244726117e-15,
+   "hilbert_term_mass_outside_supp_h": 0.00013609632352471686,
+   "hilbert_over_truncation_artifact": 38336061194.822174,
+   "truncation_leakage_max_abs_h_outside_supp": 3.9968028886505635e-15
+  },
+  "live_a0_anchor_same_call": {
+   "total_L1_mass": 6.178783702202811,
+   "mass_outside_supp_h": 0.17029996331919472,
+   "mass_outside_supp_anchor": 0.0,
+   "escape_fraction_vs_supp_h": 0.027562052909940956,
+   "escape_fraction_vs_supp_anchor": 0.0,
+   "local_terms_mass_outside_supp_h_TRUNCATION_ARTIFACT": 3.785401972624225e-15,
+   "hilbert_term_mass_outside_supp_h": 0.17029996331919414,
+   "hilbert_over_truncation_artifact": 44988607432127.99,
+   "truncation_leakage_max_abs_h_outside_supp": 3.9968028886505635e-15
+  },
+  "separation_ratio_live_over_control": 156614824957169.28,
+  "control_escape_at_truncation_floor": true,
+  "what_would_have_had_to_change": "one argument: `anchor_vals`/`anchor_supp`.  The transform H, the perturbation h, the multiplier, the transport, the quadrature and the norm are identical between the two rows.  So the measured difference is a statement about the ANCHOR's support and nothing else."
+ },
+ "CSD5_Xc_ladder": {
+  "rows": [
+   {
+    "a": 1.2,
+    "X_c": 1.6538176149628665,
+    "converged": true,
+    "residual": 1.9095836023552692e-14,
+    "iterations": 5
+   },
+   {
+    "a": 1.0,
+    "X_c": 2.006119047914233,
+    "converged": true,
+    "residual": 4.107825191113079e-15,
+    "iterations": 5
+   },
+   {
+    "a": 0.8,
+    "X_c": 2.58412494325337,
+    "converged": true,
+    "residual": 1.1102230246251565e-14,
+    "iterations": 7
+   },
+   {
+    "a": 0.6,
+    "X_c": 3.7250936955712555,
+    "converged": true,
+    "residual": 5.040412531798211e-14,
+    "iterations": 5
+   },
+   {
+    "a": 0.5,
+    "X_c": 4.8461214761693086,
+    "converged": true,
+    "residual": 2.4424906541753444e-15,
+    "iterations": 7
+   },
+   {
+    "a": 0.4,
+    "X_c": 6.984851781442625,
+    "converged": true,
+    "residual": 3.552713678800501e-15,
+    "iterations": 6
+   },
+   {
+    "a": 0.3,
+    "X_c": 12.256373329809298,
+    "converged": true,
+    "residual": 3.9968028886505635e-15,
+    "iterations": 8
+   },
+   {
+    "a": 0.25,
+    "X_c": 18.715770556159065,
+    "converged": true,
+    "residual": 9.325873406851315e-15,
+    "iterations": 5
+   },
+   {
+    "a": 0.2,
+    "X_c": 34.355700368420365,
+    "converged": true,
+    "residual": 1.9984014443252818e-15,
+    "iterations": 6
+   }
+  ],
+  "a_of_leg_162_corner": [
+   0.8,
+   0.5
+  ],
+  "X_c_at_leg_162_a_values": {
+   "0.8": 2.58412494325337,
+   "0.5": 4.8461214761693086
+  },
+  "log_log_slope_dlogXc_dloga": -1.6481425864423083,
+  "X_c_growth_factor_a_1p2_to_0p2": 20.7735726464564,
+  "a_equals_zero_refusal": "a must be positive; a = 0 is the degenerate limit (Omega = -exp(U/c), X_c = infinity) and has no support",
+  "reading": "leg 162's corner is parameterized by a finite support radius X_c, which is an OUTPUT of the a > 0 equations.  It grows without bound as a -> 0 and the landed module refuses a = 0 outright: at a = 0, E = c + a U = c != 0 never crosses zero, so there is no radius at which the profile ends."
+ },
+ "CSD6_bridge_to_leg_162": {
+  "source": "git show origin/leg/162-capg-v1:writeup/data/p2_route_capg_v1_corner.json",
+  "rows": [
+   {
+    "a": 0.2,
+    "best_Z1_over_A21_zero": 7.319561005816423,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "block_diag",
+    "s": 1.0,
+    "X_c_measured_here": 34.355700368420365
+   },
+   {
+    "a": 0.3,
+    "best_Z1_over_A21_zero": 1.1197691943099242,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "gs_upper",
+    "s": 1.0,
+    "X_c_measured_here": 12.256373329809298
+   },
+   {
+    "a": 0.4,
+    "best_Z1_over_A21_zero": 0.3019167877900842,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "gs_upper",
+    "s": 1.5,
+    "X_c_measured_here": 6.984851781442625
+   },
+   {
+    "a": 0.5,
+    "best_Z1_over_A21_zero": 0.18601933718335617,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "gs_upper",
+    "s": 1.5,
+    "X_c_measured_here": 4.8461214761693086
+   },
+   {
+    "a": 0.6,
+    "best_Z1_over_A21_zero": 0.14980753903575778,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "gs_upper",
+    "s": 1.5,
+    "X_c_measured_here": 3.7250936955712555
+   },
+   {
+    "a": 0.8,
+    "best_Z1_over_A21_zero": 0.08735093095524782,
+    "realization": "cheb_compact_support_olver_townsend",
+    "shape": "gs_upper",
+    "s": 1.0,
+    "X_c_measured_here": 2.58412494325337
+   }
+  ],
+  "log_log_correlation_Xc_vs_best_Z1": 0.993605168673035,
+  "reading": "leg 162's corner is best exactly where its support radius is SMALLEST, and degrades monotonically as X_c grows -- i.e. as the object is pushed toward the a = 0 one, whose X_c is infinite.  That is the quantitative form of the gate's NO: the corner's quality is a function of the very parameter the a = 0 object does not have.",
+  "does_not_modify_leg_162": true
+ },
+ "gate_conditions": {
+  "operator_is_the_banked_one": true,
+  "at_least_three_resolved_escape_rows": true,
+  "every_resolved_escape_fraction_above_1e-3": true,
+  "hilbert_term_dominates_truncation_artifact_by_1000x_on_resolved_rows": true,
+  "escape_is_everywhere_off_support": true,
+  "control_can_report_the_other_answer_and_does": true,
+  "control_separation_above_1e9": true,
+  "corner_parameter_absent_at_a_zero": true
+ },
+ "gate_conditions_failed": [],
+ "gate_question": "Does the a = 0 CLM linearization, as defined in this repository's certificate machinery, admit a compact-support representation under any basis change consistent with its own defining equations?",
+ "gate_answer": "NO",
+ "gate_branch": "no -> The linearization is structurally whole-line/unbounded by construction; leg 162's corner tests a DIFFERENT object, not the one leg 126's audit and leg 58/127's theorem cover.  This resolves the ambiguity without a user ruling: leg 126's completeness claim stands as scoped, and leg 162's corner is a genuinely separate (and still independently interesting, per leg 162's own measured Z_1 < 1) question about a related but distinct construction.",
+ "gate_answer_is_qualified": "the NO is on INVARIANCE, not on membership.  The domain does contain nonzero compactly supported elements in the flat and algebraic weight classes (CSD2), and none in the geometric class.  What no basis change reaches is a compactly supported subspace the linearization preserves: the anchor Omega_0 = -sin(theta) vanishes only at theta = 0, pi, so (H h) Omega_0 leaves supp h for every h != 0.",
+ "elapsed_s": 784.5501432418823
+}

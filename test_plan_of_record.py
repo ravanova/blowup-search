@@ -17,10 +17,15 @@ the most important thing to do.  Prose did not stop it.  These gates are the exe
       not left as an option analysis, now that it has been.
   (6) THE HONESTY INVARIANTS ARE STILL THERE. Both walls, the odds, and the statement that
       this plan does not move Clay. If a future session quietly deletes those, this fails.
+  (7) THE COMPOSITION FLOOR IS CODE, NOT A PREFERENCE (leg 258, ORCHESTRATION.md §3b). At
+      least 3 of the 10 live slots must be floor-eligible (math/literature/construction, not
+      audit/repair/verify), read from DIRECTION.md's own <!-- FLOOR-TABLE-START/END --> marker
+      -- a small, DM-maintained snapshot, not a parse of the file's prose.
 
 Run: .venv/bin/python test_plan_of_record.py
 """
 
+import re
 from pathlib import Path
 
 from plan_of_record import (
@@ -117,7 +122,16 @@ def test_6_honesty_invariants_survive():
     for name, text in WALLS:
         assert len(text) > 60, name
     assert abs(CLAY_ODDS - 0.0005) < 1e-9
-    assert "NOT Clay" in PRIZE
+    # 2026-08-06: the user's ruling changed the PRIZE from "novel Tier-3, NOT Clay" to
+    # "pursue a full Clay solve" -- a deliberate, authorized goal change, not drift. The
+    # invariant this test protects is not "the prize says NOT Clay" (that sentence itself
+    # changed by design) but that the ODDS and the WALLS still appear in the same breath as
+    # the prize, so the goal change is never quietly read as a claim that Clay odds moved.
+    assert "0.05%" in PRIZE or "~0.05%" in PRIZE, (
+        "the prize no longer states the Clay odds in the same breath as the goal -- "
+        "the 2026-08-06 ruling requires odds and goal recorded together, always")
+    assert "Walls 1 and 2" in PRIZE or "WALLS" in PRIZE.upper(), (
+        "the prize no longer points at the walls that cap it")
     # the roadmap and the plan must agree that nothing here moves Clay
     t = (ROOT / "CLAY_ROADMAP.md").read_text()
     sec = t[t.index("## 7."):]
@@ -127,8 +141,9 @@ def test_6_honesty_invariants_survive():
     assert nums == sorted(nums) and len(nums) >= 10, nums
     for n in (67, 68, 72, 73, 74):
         assert n in nums, f"lesson ({n}) has been dropped from the standing discipline"
-    print(f"  two walls intact, Clay at {CLAY_ODDS:.2%}, prize says NOT Clay, "
-          f"{len(DISCIPLINE)} discipline items retained  OK")
+    print(f"  two walls intact, Clay at {CLAY_ODDS:.2%}, prize records odds+walls "
+          f"alongside the 2026-08-06 goal change, {len(DISCIPLINE)} discipline items "
+          f"retained  OK")
 
 
 def test_8_continuation_prompt_has_not_become_an_archive():
@@ -165,6 +180,84 @@ def test_7_status_report_renders():
     print("  status_report() renders the sequence, the next gate and the live bans  OK")
 
 
+# --- leg 258: the composition floor (ORCHESTRATION.md §3b), read from a small,
+# DM-maintained marker in DIRECTION.md rather than the file's ~10,000 lines of prose. ---
+
+FLOOR_TABLE_START = "<!-- FLOOR-TABLE-START -->"
+FLOOR_TABLE_END = "<!-- FLOOR-TABLE-END -->"
+
+
+def parse_floor_table(text):
+    """Parse the FLOOR-TABLE marker block: a small pipe-table with an Eligible column.
+
+    Returns (total_slots, eligible_count). Raises ValueError if the markers are missing.
+    Deliberately ignores everything outside the marker block, and everything in it that
+    isn't a data row (header, separator) -- this must stay robust to DIRECTION.md's prose
+    changing freely around it, per the leg's instruction not to parse the file's prose.
+    """
+    if FLOOR_TABLE_START not in text or FLOOR_TABLE_END not in text:
+        raise ValueError("FLOOR-TABLE markers not found in DIRECTION.md")
+    block = text.split(FLOOR_TABLE_START, 1)[1].split(FLOOR_TABLE_END, 1)[0]
+    rows = []
+    for line in block.splitlines():
+        line = line.strip()
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 4:
+            continue
+        if cells[0].lower() == "slot":            # header row
+            continue
+        if re.fullmatch(r"-+", cells[0]):          # separator row
+            continue
+        rows.append(cells)
+    total = len(rows)
+    eligible = sum(1 for r in rows if r[3].strip().lower() == "yes")
+    return total, eligible
+
+
+def test_9_composition_floor_is_met():
+    """ORCHESTRATION.md §3b: at least 3 of the 10 live slots must be floor-eligible
+    (mathematics, external literature, or construction -- not audit, repair, or verify).
+    Landed leg 258, while the floor is met (a floor that is breached invites an
+    exception), from DIRECTION.md's own <!-- FLOOR-TABLE-START/END --> marker.
+    """
+    t = (ROOT / "DIRECTION.md").read_text()
+    total, eligible = parse_floor_table(t)
+    assert total == 10, f"floor table has {total} slots, expected 10"
+    assert eligible >= 3, (
+        f"composition floor breached: only {eligible}/{total} live slots are "
+        f"floor-eligible; ORCHESTRATION.md section 3b requires >= 3")
+    print(f"  composition floor: {eligible}/{total} live slots floor-eligible (>= 3 "
+          f"required)  OK")
+
+
+def test_10_composition_floor_parser_rejects_a_breached_fixture():
+    """Deliberate FIXTURE, not the real roster: prove the >= 3 check actually
+    discriminates by feeding the same parser a hand-built 2/10-eligible table and
+    confirming it reads as breached. This does not touch the real roster.
+    """
+    fixture = FLOOR_TABLE_START + "\n" + (
+        "| Slot | Leg | Route | Eligible |\n"
+        "|---|---|---|---|\n"
+        "| A | 901 | AAA | no |\n"
+        "| B | 902 | BBB | no |\n"
+        "| C | 903 | CCC | yes |\n"
+        "| D | 904 | DDD | no |\n"
+        "| E | 905 | EEE | no |\n"
+        "| F | 906 | FFF | yes |\n"
+        "| G | 907 | GGG | no |\n"
+        "| H | 908 | HHH | no |\n"
+        "| I | 909 | III | no |\n"
+        "| J | 910 | JJJ | no |\n"
+    ) + FLOOR_TABLE_END
+    total, eligible = parse_floor_table(fixture)
+    assert (total, eligible) == (10, 2), (total, eligible)
+    assert eligible < 3, "fixture must represent a breached floor to prove the check discriminates"
+    print(f"  fixture with {eligible}/{total} floor-eligible correctly reads as BREACHED "
+          f"(< 3)  OK")
+
+
 if __name__ == "__main__":
     import time
     t0 = time.time()
@@ -175,7 +268,9 @@ if __name__ == "__main__":
                test_5_roadmap_is_marked_adopted,
                test_6_honesty_invariants_survive,
                test_7_status_report_renders,
-               test_8_continuation_prompt_has_not_become_an_archive):
+               test_8_continuation_prompt_has_not_become_an_archive,
+               test_9_composition_floor_is_met,
+               test_10_composition_floor_parser_rejects_a_breached_fixture):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.1f}s)")

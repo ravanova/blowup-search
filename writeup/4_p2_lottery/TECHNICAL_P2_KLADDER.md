@@ -1,4 +1,19 @@
-# Phase-2 P2 — Is the gCLM two-scale survival boundary genuine or genome-limited? An a_p(K) convergence map
+# Phase-2 P2 — Is the survival boundary of the a>0 two-scale traveling wave genuine or genome-limited? An a_p(K) convergence map
+
+> **SCOPE OF THE WORD "TWO-SCALE" IN THIS NOTE (corrected, leg 180).** Everything measured
+> here lives at **`a > 0`**, on the sampled grid `a ∈ {0, 0.3, 0.4, 0.45, 0.5, 0.55, 0.6,
+> 0.65, 0.7, 0.8, 0.9, 1.0}`. "Two-scale" names the **residual/ansatz** `R₂ = Ω H(Ω) −
+> c_tw Ω_X − a U Ω_X` and its `a = 0` anchor — HQW25's exact CLM traveling wave `Ω₂ =
+> −1/(1+X²)` — and nothing more. It is **not** a claim that the published two-scale
+> self-similar blowup *scenario* extends to `a > 0`: Huang–Tong–Wang (`arXiv:2603.25104`,
+> full text read at leg 112) scope that scenario to **`a ≤ 0`**, and report *one-scale*
+> self-similar blowups for `a > 0` — a statement about which scenario **degenerate initial
+> data** produce. The object measured below is a different one and is published in its own
+> right: the same paper's Theorem 2.7 gives a traveling wave for every `a ∈ (−∞, 1)`, and
+> Theorem 7.10(3) makes it compactly supported for `0 < a < 1`. So `a*` is the boundary at
+> which the **`a > 0` continuation of the `a = 0` two-scale traveling wave** stops fitting
+> the two-scale residual to `10⁻²` — a property of this continuation, not of the two-scale
+> scenario.
 
 **Status: a novel toy-model result (Tier-1/2), NOT a Clay solve.** This note
 *sharpens* the prior leg ([TECHNICAL_P2_TWO_SCALE.md](TECHNICAL_P2_TWO_SCALE.md)),
@@ -7,15 +22,16 @@ was measured with a *fixed* even K=2 genome and a richer genome beat it. Because
 GA gives only an **upper bound** on the true minimal residual, `a_p(K)` can only
 *rise* with genome richness K. The open question this leg answers:
 
-> Does `a_p(K)` **saturate** as K grows (→ a genuine survival boundary `a*` where
-> HQW25's proven two-scale traveling wave really dies under advection), or keep
+> Does `a_p(K)` **saturate** as K grows (→ a genuine survival boundary `a* > 0` where the
+> `a > 0` continuation of HQW25's proven `a = 0` two-scale traveling wave really stops
+> fitting the two-scale residual under advection), or keep
 > **marching out** with K (→ no sharp boundary is resolvable — an honest
 > INCONCLUSIVE that would point straight to a rigorous / adaptive step)?
 
 **Answer: it saturates.** `a_p(K) = 0.40 → 0.50 → 0.50`, and at the boundary the
 residual floor is GA-converged, genome-converged, and basis-independent. The
-boundary is **`a* ≈ 0.5–0.55`** with a soft `~10⁻²` floor — genuine, not an
-artifact of a too-simple profile family.
+boundary is **`a* ≈ 0.5–0.55`**, i.e. **strictly inside `a > 0`**, with a soft
+`~10⁻²` floor — genuine, not an artifact of a too-simple profile family.
 
 Rebuild the figure from committed data (no GA re-run):
 `python writeup/4_p2_lottery/p2_two_scale_kladder_evidence.py` →
@@ -145,11 +161,13 @@ Reading it (Fig18 Panels A–C):
 under (8.3×10⁻³). That is exactly what a threshold crossing of a smoothly-rising,
 slightly basis-sensitive floor looks like. So the defensible statement is:
 
-> **The two-scale traveling wave persists (converged `relres < 10⁻²`) to `a ≈ 0.5`,
-> and its residual floor crosses the `10⁻²` threshold in the band `a ≈ 0.5–0.55`,
-> where the floor is GA-/genome-converged and basis-independent — a genuine,
-> resolvable boundary, not a genome artifact.** It is a soft crossing of a rising
-> floor, not a sharp collapse at a single `a*`.
+> **On `a > 0`, the continuation of HQW25's exact `a = 0` two-scale traveling wave
+> persists (converged `relres < 10⁻²`) to `a ≈ 0.5`, and its residual floor crosses
+> the `10⁻²` threshold in the band `a ≈ 0.5–0.55`, where the floor is
+> GA-/genome-converged and basis-independent — a genuine, resolvable boundary, not a
+> genome artifact.** It is a soft crossing of a rising floor, not a sharp collapse at
+> a single `a*`, and it is a statement about this `a > 0` continuation only — not about
+> the published two-scale *scenario*, which `arXiv:2603.25104` scopes to `a ≤ 0`.
 
 ## 7. Scope: what this is and isn't
 
@@ -158,6 +176,11 @@ saturates near `a ≈ 0.5–0.55`, and the map is now a *converged* upper-bound 
 with explicit GA-, genome-, and basis-convergence controls. But the ceiling is
 unchanged:
 
+- the whole map is measured on **`a > 0`** and says nothing about `a ≤ 0`, which is
+  where `arXiv:2603.25104` places the two-scale self-similar blowup *scenario*; the
+  boundary is a property of the `a > 0` traveling-wave continuation this note built,
+  and reading it as a boundary of that scenario would be a domain error (see the
+  scope box at the top);
 - a GA minimising a residual **proves nothing** — Tier-1/2 evidence, not a proof;
 - `floor(a; K)` is still an upper bound (we have shown it is *converged* at the
   boundary, not that it is the true infimum over *all* profiles);

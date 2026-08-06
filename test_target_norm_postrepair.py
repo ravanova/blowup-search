@@ -295,9 +295,182 @@ gate("the guard still fires on genuinely out-of-window input",
      f". The last reproduces leg 84's 14 of 16384 exactly, so gates 1-7 are a measurement "
      "of precision and not of a disabled guard")
 
+# ==========================================================================
+# GATES 9-13 -- ROUTE-TNRV, LEG 230.  The WINDOW's correctness on ASYMMETRIC grids.
+# ==========================================================================
+# Leg 94's gates above pin PRECISION on grids symmetric about zero, which is every grid
+# this repository's solver actually produces.  Leg 220 then repaired the window from
+# `|X| <= max|X|` to `[X.min(), X.max()]`, a change that is INVISIBLE to every gate above
+# because all of them are symmetric, where the two windows coincide bit for bit.
+#
+# These gates pin the repaired behaviour on grids where the two windows DIFFER, against a
+# CLOSED FORM rather than against a re-implementation of the module's own loop:
+# theta_j = -pi + 2 pi (j + 1/2) / M is inside iff theta_j is in
+# [2 arctan(X_lo), 2 arctan(X_hi)], which solves to two ceil/floor evaluations.
+#
+# `solver/target_norm.py` stays READ-ONLY here too.
+import json as _json
+import math as _math
+import os as _os
+
+_TNRV_M = 16384
+_TNRV_ALPHA = 0.4
+
+
+def _tnrv_closed_form_outside(X_lo, X_hi, M):
+    """#{j : X_j outside [X_lo, X_hi]} in closed form.  No array is built."""
+    M = int(M)
+    def _u(t):
+        return M * (t + _math.pi) / (2.0 * _math.pi) - 0.5
+    n_below = min(max(_math.ceil(_u(2.0 * _math.atan(float(X_lo)))), 0), M)
+    n_above = min(max(M - 1 - _math.floor(_u(2.0 * _math.atan(float(X_hi)))), 0), M)
+    return int(n_below + n_above)
+
+
+def _tnrv_grid(X_lo, X_hi, n=801, c=0.5):
+    """X = c sinh(rho) on a UNIFORM rho grid, endpoints NOT assumed symmetric."""
+    rho = np.linspace(_math.asinh(float(X_lo) / c), _math.asinh(float(X_hi) / c), int(n))
+    return c * np.sinh(rho)
+
+
+# (name, X_lo, X_hi, expected count -- the closed form is recomputed and must agree)
+_TNRV_RUNGS = [
+    ("clean_control",   -41000.0, 41000.0,     0),
+    ("wide_asymmetric", -41000.0,   745.2,     7),
+    ("symmetric_control", -745.2,   745.2,    14),
+    ("right_truncated",   -745.2,     3.0,  1685),
+    ("two_sided_offset",    -2.0,    50.0,  2522),
+    ("excludes_zero",       0.25,   745.2,  9477),
+    ("tiny_window",        -0.05,    0.05, 15862),
+    ("near_symmetric",    -745.2,   744.0,    14),
+]
+
+_tnrv_rows = []
+for _name, _lo, _hi, _pinned in _TNRV_RUNGS:
+    _X = _tnrv_grid(_lo, _hi)
+    _f = calibration_family(_X, _TNRV_ALPHA)
+    _truth = _tnrv_closed_form_outside(_X.min(), _X.max(), _TNRV_M)
+    # the PRE-REPAIR window, evaluated by the same closed form: [-max|X|, +max|X|]
+    _pre = _tnrv_closed_form_outside(-float(np.abs(_X).max()), float(np.abs(_X).max()),
+                                     _TNRV_M)
+    with warnings.catch_warnings(record=True) as _w:
+        warnings.simplefilter("always")
+        try:
+            _sp = spectrum(_X, _f, M=_TNRV_M, far_field="power",
+                           tail_exponent=-_TNRV_ALPHA)
+        except ValueError:
+            # One-sided interval (`excludes_zero`): the power continuation normalises by
+            # each side's OWN endpoint magnitude, which is <= 0 here, so the module
+            # REFUSES rather than returning a number.  That refusal is the module's
+            # documented "visible" behaviour and is measured in this leg's JSON; it is
+            # not gated here, and the clamp ablation is used only so the guard fields
+            # below can still be read on this rung.
+            _sp = spectrum(_X, _f, M=_TNRV_M, far_field="clamp")
+        _fit = fit_exponent(_sp["k"], _sp["hk"], K_LO, K_HI,
+                            n_outside_grid=_sp["n_outside_grid"])
+        _ps = weighted_partial_sums(_sp["k"], _sp["hk"], 0.0, CHECKPOINTS,
+                                    n_outside_grid=_sp["n_outside_grid"])
+        _tl = analytic_tail(_fit["p"], _fit["C"], CHECKPOINTS[-1], 0.0,
+                            n_outside_grid=_sp["n_outside_grid"])
+        _nv = norm_verdict(_fit["p"], 0.0, alpha=_TNRV_ALPHA,
+                           n_outside_grid=_sp["n_outside_grid"])
+    _tnrv_rows.append({
+        "name": _name, "pinned": _pinned, "truth": _truth, "pre": _pre,
+        "module": int(_sp["n_outside_grid"]),
+        "valid": _sp["domain_valid"],
+        "flags": [_fit["domain_valid"], _ps[-1]["domain_valid"], _tl["domain_valid"],
+                  _nv["domain_valid"]],
+        "n_warn": sum(1 for w in _w if issubclass(w.category, TargetNormDomainWarning)),
+        "X_lo": float(_X.min()), "X_hi": float(_X.max()),
+    })
+
+# --------------------------------------------------------------------------
+# GATE 9 -- the count is the TRUE one, on every rung, against the closed form
+# --------------------------------------------------------------------------
+_g9 = [r for r in _tnrv_rows if r["module"] == r["truth"] == r["pinned"]]
+gate("the reported n_outside_grid equals the closed-form truth on every rung",
+     len(_g9) == len(_tnrv_rows),
+     f"{len(_g9)} of {len(_tnrv_rows)} rungs agree with a count derived on paper "
+     f"(two ceil/floor evaluations, no array): "
+     + ", ".join(f"{r['name']} {r['module']}" for r in _tnrv_rows)
+     + ". These are pinned magnitudes, not 'greater than zero'")
+
+# --------------------------------------------------------------------------
+# GATE 10 -- every asymmetric rung is FLAGGED, and the clean control is NOT
+# --------------------------------------------------------------------------
+_g10_flag = [r for r in _tnrv_rows if r["truth"] > 0]
+_g10_ok = [r for r in _g10_flag
+           if r["module"] > 0 and r["valid"] is False and r["n_warn"] > 0]
+_clean = next(r for r in _tnrv_rows if r["name"] == "clean_control")
+gate("out-of-window rungs are flagged and the in-window rung is not",
+     len(_g10_ok) == len(_g10_flag) and _clean["module"] == 0
+     and _clean["valid"] is True and _clean["n_warn"] == 0,
+     f"{len(_g10_ok)} of {len(_g10_flag)} out-of-window rungs report "
+     f"domain_valid = False with a warning; the clean control at X_max = 41000 reports "
+     f"{_clean['module']} outside, domain_valid = {_clean['valid']}, "
+     f"{_clean['n_warn']} warnings. Without the clean row these gates could pass "
+     "vacuously on a guard that always fires (lesson 90)")
+
+# --------------------------------------------------------------------------
+# GATE 11 -- the ANTI-TAUTOLOGY row: the pre-repair window would have said CLEAN
+# --------------------------------------------------------------------------
+_wide = next(r for r in _tnrv_rows if r["name"] == "wide_asymmetric")
+_sym_rows = [r for r in _tnrv_rows
+             if r["X_lo"] == -r["X_hi"]]
+gate("the repaired window differs from the pre-repair one exactly where it must",
+     _wide["pre"] == 0 and _wide["truth"] == 7 and _wide["module"] == 7
+     and all(r["pre"] == r["truth"] for r in _sym_rows),
+     f"on X in [{_wide['X_lo']:.6g}, {_wide['X_hi']:.6g}] the OLD symmetric window "
+     f"[-max|X|, +max|X|] reports {_wide['pre']} outside -- perfectly clean -- where the "
+     f"true data interval is escaped by {_wide['truth']} samples, and the module now "
+     f"reports {_wide['module']}. On all {len(_sym_rows)} symmetric rungs the two windows "
+     "coincide and the counts are equal, so this is a real difference and not a "
+     "guard that changed everywhere. Worst undercount over the suite: "
+     f"{max(r['truth'] - r['pre'] for r in _tnrv_rows)} samples")
+
+# --------------------------------------------------------------------------
+# GATE 12 -- the flag REACHES every downstream surface, not just `spectrum`
+# --------------------------------------------------------------------------
+_g12 = [r for r in _tnrv_rows if all(v is (r["valid"]) for v in r["flags"])]
+gate("domain_valid propagates identically to all four downstream surfaces",
+     len(_g12) == len(_tnrv_rows),
+     f"{len(_g12)} of {len(_tnrv_rows)} rungs carry the same domain_valid through "
+     "fit_exponent, weighted_partial_sums, analytic_tail and norm_verdict as through "
+     "spectrum. A count nothing reads is not a guard")
+
+# --------------------------------------------------------------------------
+# GATE 13 -- leg 55's banked margins, pinned from the artifacts (lesson 68)
+# --------------------------------------------------------------------------
+# The re-solve itself is two bordered Newton solves (~110 s) and lives in
+# experiments/p2_route_tnrv_v1_postrepair.py.  What is pinned HERE, cheaply and
+# executably, is that its banked output still agrees with leg 55's banked output BIT FOR
+# BIT, and that the margins satisfy the independent identity margin = p - s - 1.
+_root = _os.path.dirname(_os.path.abspath(__file__))
+_nb = _json.load(open(_os.path.join(_root, "writeup", "data",
+                                    "p2_route_nb_v1_targetnorm.json")))["NB5_norms"]
+_tnrv = _json.load(open(_os.path.join(_root, "writeup", "data",
+                                      "p2_route_tnrv_v1_postrepair.json")))
+_pb = _tnrv["part_b_banked_margins"]
+_bank = {c["s"]: c["analytic_tail"]["margin"] for c in _nb["classes"]}
+_ident = [r for r in _pb["classes"]
+          if r["margin_rerun_leg230"] == _bank[r["s"]]
+          and (_pb["p_rerun_leg230"] - r["s"] - 1.0) == r["margin_rerun_leg230"]]
+gate("leg 55's banked margins survive the repair bit for bit",
+     len(_ident) == len(_pb["classes"]) and _pb["p_rerun_leg230"] == _nb["p"]
+     and len(_pb["classes"]) == 4,
+     f"{len(_ident)} of {len(_pb['classes'])} classes re-solve to the banked margin under "
+     f"`==` on raw float64 (never allclose): "
+     + ", ".join(f"s={r['s']} -> {r['margin_rerun_leg230']!r}" for r in _pb["classes"])
+     + f"; exponent p = {_pb['p_rerun_leg230']!r} against banked {_nb['p']!r}, "
+     f"difference {_pb['p_difference']!r}. Each margin also equals p - s - 1 evaluated "
+     "in plain Python here, so the agreement is not just two reads of one field")
+
 # --------------------------------------------------------------------------
 n_fail = sum(1 for r in results if r[0] == FAIL)
 print(f"\n{len(results) - n_fail}/{len(results)} gates pass")
+print("Route-TNRV, leg 230 added gates 9-13: the WINDOW's correctness on ASYMMETRIC "
+      "grids, which every gate above is structurally blind to because symmetric grids "
+      "make the repaired and pre-repair windows coincide.")
 print("Route-TNB, leg 94: these gates pin the guard's PRECISION (it must not reject valid "
       "input). test_target_norm_adversarial.py pins its SENSITIVITY (it must catch "
       "violations). A failure here means the guard has drifted toward over-rejection; the "

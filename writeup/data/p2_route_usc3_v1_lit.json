@@ -1,0 +1,501 @@
+{
+  "leg": 239,
+  "route": "USC3",
+  "role": "LIT",
+  "pass_date": "2026-08-06",
+  "generated": "2026-08-06",
+  "target": "arXiv:2511.22819v1",
+  "predecessor_target": "arXiv:2509.14185v1",
+  "gate": {
+    "question": "For each of the three obstructions arXiv:2511.22819 names, is it MODEL-specific (naming the alternative model class the paper itself points to) or TECHNIQUE-specific (a precision/infrastructure gap independent of model)?",
+    "answer": "MIXED",
+    "per_obstruction": {
+      "A": "TECHNIQUE_SPECIFIC",
+      "B": "MODEL_SPECIFIC",
+      "C": "TECHNIQUE_SPECIFIC"
+    },
+    "escalation_fires": false,
+    "escalation_hits": [],
+    "escalation_reasoning": "Obstruction B is MODEL_SPECIFIC and the paper names its alternative class explicitly: the 2D Incompressible Porous Media equation (l.278-280). That class is touched by 1 file under solver/, and that single hit is a citation string in the PRECEDENTS ledger, not a model. The same test returns 12 files for Boussinesq and 33 for the gCLM family, so it is a control that can fire. It does not fire here. No construction is proposed under this leg's authority."
+  },
+  "provenance": {
+    "pdf_url": "https://arxiv.org/pdf/2511.22819",
+    "pdf_md5": "8367d9b73bbc615a65da1f99bb3e520e",
+    "pdf_bytes": 3934832,
+    "extraction_tool": "pdftotext -layout",
+    "extraction_md5": "5e20c57bf6983934fd1f40292618545c",
+    "extraction_lines": 1593,
+    "pages_read": 27,
+    "identical_to_prior_passes": [
+      "leg_196",
+      "leg_212"
+    ],
+    "note": "Third independent fetch-and-extract. Both md5s reproduce legs 196 and 212 exactly, so line locators are directly comparable across all three passes."
+  },
+  "discriminators": {
+    "D1": "technique applied to the resisting object and it still resisted (leg 175's D1)",
+    "D2": "paper names a different MODEL CLASS in the obstruction's own passage (leg 175's D2)",
+    "D3": "cross-model recurrence: distinct model classes in which the paper exhibits it",
+    "D4": "all remedies offered are apparatus-side, not a change of model",
+    "rule": "MODEL_SPECIFIC iff D1 and D2; TECHNIQUE_SPECIFIC iff D3>=2 and D4 and not (D1 and D2); otherwise UNDETERMINED",
+    "D1_is_non_discriminating_in_this_leg": true,
+    "D1_note": "D1 is TRUE for all three obstructions -- each is by construction what is LEFT AFTER the loss-reweighting fix leg 175 identified. A control whose value is identical on every input is not a control (lesson 90); recorded as a finding, then set aside as non-decisive. D2 does the work."
+  },
+  "obstructions": [
+    {
+      "id": "A",
+      "leg_196_label": "N1",
+      "short": "the binding quantity is lambda's error bar, not the residual",
+      "stated_in": "sec.2.3.3 (l.674-690 -> l.769) + Fig.7(f) table (l.714-738)",
+      "quotes": [
+        {
+          "line": 678,
+          "section": "2.3.3",
+          "text": "On average, the magnitude of the non-smooth signal Rmax decays exponentially, reducing by one order of magnitude for each higher-order singularity."
+        },
+        {
+          "line": 683,
+          "section": "2.3.3",
+          "text": "the high-gradient nature of higher-order unstable modes still reduces the convergence rate of training. For a fixed computational budget (identical network size, iterations, and two training stages), the achievable background PDE residual for the smooth solution increases by approximately one order of magnitude for each successive singularity"
+        },
+        {
+          "line": 769,
+          "section": "2.3.3",
+          "text": "decreases the achievable lambda accuracy for a fixed computational budget by approximately two orders of magnitude per model."
+        }
+      ],
+      "D1_technique_applied_and_still_resisted": true,
+      "D1_evidence": "sec.2.3.3 reports the ladder AFTER both the gradient-normalized residual and the enhanced multistage method (l.666-667: 'Our enhanced multistage method successfully resolved all IPM singularities ... to high precision'); lambda accuracy still floors at 1e-7 at the 4th unstable.",
+      "D2_alternative_model_class_named": false,
+      "D2_evidence": "The whole passage is internal to IPM and attributes the loss to MODE ORDER and to a fixed computational budget. No alternative model class is named anywhere in it. The string 'per model' at l.769 is, in context, 'per successive singularity' -- the same quantity is stated at l.686 as 'for each successive singularity'. Recorded because it is the one string here that could be misread as a cross-model claim; it is not one.",
+      "D3_recurrence_classes": [
+        {
+          "class": "IPM (2D incompressible porous media)",
+          "locator": "sec.2.3.3, Fig.7(f) l.714-738",
+          "parameter": "lambda",
+          "fluid": true
+        },
+        {
+          "class": "CCF (1D Cordoba-Cordoba-Fontelos)",
+          "locator": "sec.2.3.1 l.466-475",
+          "parameter": "lambda",
+          "fluid": true,
+          "quote": "However, it is spurious. ... there is no meaningful variation ... and prevents us from finding a more accurate smooth lambda_s"
+        },
+        {
+          "class": "Gross-Pitaevskii vortices (2D elliptic BVP)",
+          "locator": "sec.3.2.1 l.941-944",
+          "parameter": "core coefficient a_n",
+          "fluid": false,
+          "quote": "this plateau is a spurious artifact caused by the insensitivity of the standard loss function to the extremely small value of Un around the origin"
+        }
+      ],
+      "D4_remedies_all_apparatus_side": true,
+      "D4_remedies": [
+        "larger networks with more weights (l.770)",
+        "introducing a third stage (l.771)",
+        "Both approaches, however, require more memory (l.772)",
+        "a single A100 GPU (80GB) (l.774)",
+        "more training stages in parallel on multiple GPUs (l.775)"
+      ],
+      "gap_kind_leg173_vocabulary": "precision",
+      "verdict": "TECHNIQUE_SPECIFIC",
+      "D3_recurrence_count": 3,
+      "D3_nonfluid_classes": 1
+    },
+    {
+      "id": "B",
+      "leg_196_label": "N2",
+      "short": "the discovery frontier stalled: CCF's 3rd unstable searched for and not found",
+      "stated_in": "sec.2.1.3 (l.269-281) + Fig.3",
+      "quotes": [
+        {
+          "line": 271,
+          "section": "2.1.3",
+          "text": "as lambda decreases, the solution's peak amplitude increases dramatically, reaching nearly 40 for lambda approx 0.455"
+        },
+        {
+          "line": 275,
+          "section": "2.1.3",
+          "text": "While our gradient-normalization method effectively reduces the residual in the peak region, a persistent non-smooth signal at the origin (inset of Fig.3b) remains for all tested lambda in [0.455, 0.4713]. This indicates that if a third unstable solution exists, it is located at a lambda value corresponding to an even higher-gradient profile."
+        },
+        {
+          "line": 278,
+          "section": "2.1.3",
+          "text": "The challenge of exploring the range lambda < 0.455 and resolving such a feature in the 1D CCF model appears to be even greater than finding highly unstable solutions in the 2D IPM equation."
+        },
+        {
+          "line": 280,
+          "section": "2.1.3",
+          "text": "A full investigation into the existence and properties of this third unstable solution is a compelling direction for future research."
+        }
+      ],
+      "D1_technique_applied_and_still_resisted": true,
+      "D1_evidence": "l.275: the gradient-normalization method WAS applied and 'effectively reduces the residual in the peak region'; the non-smooth origin signal survived it across the entire tested window. This is the first D1 = yes in the two-paper record (leg 175 measured D1 = 0 of 4).",
+      "D2_alternative_model_class_named": true,
+      "D2_named_class": "2D Incompressible Porous Media (IPM) equation",
+      "D2_evidence": "l.278-280 ranks difficulty BETWEEN TWO NAMED MODELS -- the only such sentence in 27 pages -- and in the surprising direction: the 1D model is rated harder than the 2D one.",
+      "paper_own_reasoning": [
+        "profile geometry as a function of the model's own parameter: peak amplitude reaches nearly 40 at lambda approx 0.455 (l.271-272), so a third solution 'would possess even more extreme gradients than the second' (l.273-274)",
+        "the residual fix worked and was not the binding constraint (l.275)",
+        "existence is conditional -- 'if a third unstable solution exists' (l.277) and 'a full investigation into the existence ... ' (l.280). No amount of precision decides an existence question; this is the one strand of the three that is not a numerics statement at all."
+      ],
+      "D3_recurrence_classes": [
+        {
+          "class": "CCF (1D Cordoba-Cordoba-Fontelos)",
+          "locator": "sec.2.1.3 l.269-281",
+          "parameter": "3rd unstable mode",
+          "fluid": true
+        }
+      ],
+      "D3_counter_evidence": "The frontier-stall does NOT recur. On IPM the frontier ADVANCED (+1 mode: the 4th unstable newly confirmed, l.105/l.131); on NLS excited states the analogous 'cannot reach the target solution' problem was SOLVED by targeted inequality constraints (sec.3.3.3 l.1187-1212). CCF is the only class where the frontier moved 0 modes.",
+      "D4_remedies_all_apparatus_side": false,
+      "D4_remedies": [
+        "'a compelling direction for future research' (l.281) -- no remedy offered"
+      ],
+      "gap_kind_leg173_vocabulary": "scope",
+      "verdict": "MODEL_SPECIFIC",
+      "D3_recurrence_count": 1,
+      "D3_nonfluid_classes": 0
+    },
+    {
+      "id": "C",
+      "leg_196_label": "N3",
+      "short": "the remaining margin is arithmetic- and hardware-bound (double-float round-off)",
+      "stated_in": "sec.1 l.50-51 (definition of success) + sec.2.3.3 l.770-775 (remedies)",
+      "quotes": [
+        {
+          "line": 50,
+          "section": "1",
+          "text": "we refer to machine precision as the highest achievable accuracy, where the remaining PDE residuals are dominated by the inherent round-off errors of double-float arithmetic, typically O(10^-13) or lower"
+        },
+        {
+          "line": 618,
+          "section": "2.3.1",
+          "text": "although the absolute PDE residual remains higher in the region of high solution gradient, this is constrained by the round-off error of double-float precision"
+        },
+        {
+          "line": 774,
+          "section": "2.3.3",
+          "text": "that can be implemented on a single A100 GPU (80GB). To further improve the lambda accuracy, one could use larger networks or more training stages in parallel on multiple GPUs."
+        }
+      ],
+      "D1_technique_applied_and_still_resisted": true,
+      "D1_evidence": "The round-off floor is by definition what remains after the full apparatus is applied (l.50-51 defines success AS reaching it).",
+      "D2_alternative_model_class_named": false,
+      "D2_evidence": "No model class is named in any of the passages that state the floor.",
+      "D3_recurrence_classes": [
+        {
+          "class": "CCF (1D Cordoba-Cordoba-Fontelos)",
+          "locator": "l.616-620, Fig.5f",
+          "floor_as_printed": "O(10^-13)",
+          "fluid": true
+        },
+        {
+          "class": "IPM (2D incompressible porous media)",
+          "locator": "l.1423-1424",
+          "floor_as_printed": "O(10^-11)-O(10^-13)",
+          "fluid": true
+        },
+        {
+          "class": "NLS with double-well potential (1D)",
+          "locator": "l.860-862",
+          "floor_as_printed": "loss plateau 10^-29; 'round-off error of the double-float precision'",
+          "fluid": false
+        },
+        {
+          "class": "Gross-Pitaevskii vortices (2D elliptic BVP)",
+          "locator": "l.948, l.1004-1005",
+          "floor_as_printed": "O(10^-15)",
+          "fluid": false
+        },
+        {
+          "class": "NLS excited states (2D)",
+          "locator": "l.1159-1161",
+          "floor_as_printed": "'reaching round-off errors throughout the domain'",
+          "fluid": false
+        }
+      ],
+      "D3_note": "the five rows are five SETTINGS spanning FOUR model classes -- NLS appears twice (double-well, sec.3.1; excited states, sec.3.3). Three of the five settings are not fluid equations at all. The count used by the rule is the number of rows, and it clears the threshold of 2 either way.",
+      "D4_remedies_all_apparatus_side": true,
+      "D4_remedies": [
+        "larger networks (l.770)",
+        "a third stage (l.771)",
+        "more memory (l.772)",
+        "multiple GPUs (l.775)"
+      ],
+      "gap_kind_leg173_vocabulary": "infrastructure",
+      "verdict": "TECHNIQUE_SPECIFIC",
+      "D3_recurrence_count": 5,
+      "D3_nonfluid_classes": 3
+    }
+  ],
+  "census": {
+    "interval arithmetic": 0,
+    "enclos": 0,
+    "certif": 0,
+    "eigen": 0,
+    "extended precision": 0,
+    "quadruple": 0,
+    "float64": 0,
+    "computer-assisted": 4,
+    "round-off": 9,
+    "double-float": 9,
+    "machine precision": 22,
+    "budget": 3,
+    "memory": 1,
+    "spurious": 8,
+    "existence": 4
+  },
+  "gpu_mentions": {
+    "raw_matches": 4,
+    "audited_real": 2,
+    "lines": [
+      774,
+      775
+    ],
+    "excluded_reason": "base64 payloads inside <latexit> blobs at l.695, l.739"
+  },
+  "model_name_census": {
+    "CCF": 42,
+    "IPM": 46,
+    "vortic": 30,
+    "NLS": 25,
+    "Gross-Pitaevskii": 5,
+    "Boussinesq": 2,
+    "Euler": 3
+  },
+  "paper_model_classes": [
+    {
+      "name": "CCF (1D Cordoba-Cordoba-Fontelos)",
+      "section": "2.1",
+      "fluid": true
+    },
+    {
+      "name": "IPM (2D incompressible porous media)",
+      "section": "2.2",
+      "fluid": true
+    },
+    {
+      "name": "NLS with double-well potential (1D)",
+      "section": "3.1",
+      "fluid": false
+    },
+    {
+      "name": "Gross-Pitaevskii vortices (2D elliptic BVP)",
+      "section": "3.2",
+      "fluid": false
+    },
+    {
+      "name": "NLS excited states (2D)",
+      "section": "3.3",
+      "fluid": false
+    }
+  ],
+  "ipm_lambda_table": [
+    {
+      "mode": 0,
+      "label": "stable",
+      "line": 714,
+      "lambda_s": "1.0285722760323",
+      "accuracy": 1e-13
+    },
+    {
+      "mode": 1,
+      "label": "1st unstable",
+      "line": 720,
+      "lambda_s": "0.472129736156",
+      "accuracy": 2e-12
+    },
+    {
+      "mode": 2,
+      "label": "2nd unstable",
+      "line": 726,
+      "lambda_s": "0.3149617817",
+      "accuracy": 3e-10
+    },
+    {
+      "mode": 3,
+      "label": "3rd unstable",
+      "line": 732,
+      "lambda_s": "0.24156641",
+      "accuracy": 1e-08
+    },
+    {
+      "mode": 4,
+      "label": "4th unstable",
+      "line": 738,
+      "lambda_s": "0.1987237",
+      "accuracy": 1e-07
+    }
+  ],
+  "lambda_ladder": {
+    "fitted_decades_lost_per_mode": 1.57,
+    "paper_stated_decades_per_mode": 2.0,
+    "ratio_stated_over_fitted": 1.274,
+    "residual_log10_at_best": -13.0,
+    "lambda_log10_accuracy_at_mode4": -7.0,
+    "decades_between_residual_and_lambda_at_mode4": 6.0,
+    "reproduces_legs_196_and_212": true,
+    "note": "fitted = best achieved across the five Fig.7(f) rows; stated = degradation at a FIXED computational budget. Not the same quantity -- they agree in order of magnitude, which is what makes this a cross-check rather than a tautology."
+  },
+  "ccf_frontier": {
+    "searched_lambda_window": [
+      0.455,
+      0.4713
+    ],
+    "window_width": 0.0163,
+    "peak_amplitude_at_low_end": 40,
+    "modes_in_suite_before": 3,
+    "modes_gained_this_paper_ccf": 0,
+    "modes_gained_this_paper_ipm": 1,
+    "remaining_search_region": "open half-line lambda < 0.455",
+    "finite_gap_quotable": false
+  },
+  "repo_infra_coverage": {
+    "IPM (2D incompressible porous media)": {
+      "solver_files": 1,
+      "touched": false,
+      "note": "the single hit is the citation string in solver/viscous_novelty.py::PRECEDENTS line 171, the ledger row for arXiv:2509.14185 -- a bibliography line, not a model"
+    },
+    "CCF (Cordoba-Cordoba-Fontelos)": {
+      "solver_files": 0,
+      "touched": false,
+      "note": "no hit anywhere in solver/"
+    },
+    "NLS / Gross-Pitaevskii": {
+      "solver_files": 1,
+      "touched": false,
+      "note": "same ledger, same kind of hit"
+    },
+    "Boussinesq": {
+      "solver_files": 12,
+      "touched": true,
+      "note": "POSITIVE CONTROL -- touched heavily"
+    },
+    "gCLM / CLM / De Gregorio": {
+      "solver_files": 33,
+      "touched": true,
+      "note": "POSITIVE CONTROL -- touched heavily"
+    }
+  },
+  "repo_family_the_gate_names": [
+    "gCLM / CLM / De Gregorio",
+    "Boussinesq"
+  ],
+  "gap_summary_leg173_vocabulary": {
+    "N1": {
+      "kind": "precision",
+      "verdict": "TECHNIQUE_SPECIFIC"
+    },
+    "N2": {
+      "kind": "scope",
+      "verdict": "MODEL_SPECIFIC"
+    },
+    "N3": {
+      "kind": "infrastructure",
+      "verdict": "TECHNIQUE_SPECIFIC"
+    }
+  },
+  "prior_art": {
+    "leg_175": "located the follow-up; read abstract + p.2 s1 + p.11 s2.3.3; classified the ORIGINAL paper's obstruction",
+    "leg_196": "read all 27 pp; answered 'is there a certificate' (STILL_SHORT); NAMED N1/N2/N3; classified none",
+    "leg_212": "independent VERIFY of leg 196, 29/29 rows, 3 locator slips; classified none",
+    "leg_173": "supplied the precision/scope/infrastructure vocabulary reused here",
+    "what_is_new_here": "the classification of each of the three, computed, plus the escalation boundary check"
+  },
+  "ceiling": "No link of the L1->L4 chain moved. Clay stays ~0.05%. This leg classifies someone else's obstructions and produces no new mathematical content. arXiv:2509.14185's EXCLUSION verdict in the precedents ledger is unchanged and this leg edits no ledger.",
+  "self_tests": [
+    {
+      "case": "real A (N1)",
+      "got": "TECHNIQUE_SPECIFIC",
+      "want": "TECHNIQUE_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "real B (N2)",
+      "got": "MODEL_SPECIFIC",
+      "want": "MODEL_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "real C (N3)",
+      "got": "TECHNIQUE_SPECIFIC",
+      "want": "TECHNIQUE_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "A + named alternative class -> MODEL",
+      "got": "MODEL_SPECIFIC",
+      "want": "MODEL_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "B - named class + recurrence -> TECHNIQUE",
+      "got": "TECHNIQUE_SPECIFIC",
+      "want": "TECHNIQUE_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "single class, no remedy -> UNDETERMINED",
+      "got": "UNDETERMINED",
+      "want": "UNDETERMINED",
+      "pass": true
+    },
+    {
+      "case": "overall real",
+      "got": "MIXED",
+      "want": "MIXED",
+      "pass": true
+    },
+    {
+      "case": "overall all-technique",
+      "got": "ALL_TECHNIQUE_SPECIFIC",
+      "want": "ALL_TECHNIQUE_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "overall all-model",
+      "got": "ALL_MODEL_SPECIFIC",
+      "want": "ALL_MODEL_SPECIFIC",
+      "pass": true
+    },
+    {
+      "case": "overall with undetermined",
+      "got": "UNDETERMINED_PRESENT",
+      "want": "UNDETERMINED_PRESENT",
+      "pass": true
+    },
+    {
+      "case": "escalation on IPM (real)",
+      "got": false,
+      "want": false,
+      "pass": true
+    },
+    {
+      "case": "escalation on Boussinesq (counterfactual)",
+      "got": true,
+      "want": true,
+      "pass": true
+    },
+    {
+      "case": "counterfactual names the right family",
+      "got": "Boussinesq",
+      "want": "Boussinesq",
+      "pass": true
+    },
+    {
+      "case": "escalation on gCLM (counterfactual)",
+      "got": true,
+      "want": true,
+      "pass": true
+    },
+    {
+      "case": "fitted decades/mode reproduces legs 196/212",
+      "got": 1.57,
+      "want": 1.57,
+      "pass": true
+    }
+  ],
+  "self_tests_pass": true
+}

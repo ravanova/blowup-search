@@ -4,6 +4,16 @@
 post maps a real, novel question in a 1D toy model — and is careful about what the
 map can and can't prove. It is not a breakthrough, and it caught its own limits.*
 
+> **One scope note, added later (leg 180).** The knob `a` below is turned from 0 **upward**,
+> to `a = 1`. Everything here is `a ≥ 0`. A later paper
+> ([Huang–Tong–Wang, arXiv:2603.25104](https://arxiv.org/abs/2603.25104)) puts the *two-scale
+> self-similar blowup scenario* on the other side of zero — at `a ≤ 0` — with `a > 0` giving
+> **one-scale** blowups, for degenerate initial data. So we are not extending that scenario
+> into positive `a`. We are taking the exact traveling-wave *profile* that sits at `a = 0`
+> and asking how far into positive `a` it can be continued. That is a legitimate object at
+> positive `a` — the same paper proves a traveling wave exists for every `a` below 1 — and
+> it is the only thing the map below is about.
+
 ## A singularity that travels
 
 Some finite-time singularities in fluid toy models are *self-similar*: zoom in on
@@ -17,8 +27,8 @@ a fixed profile sliding along, `Ω₂(X) = −1/(1+X²)`.
 CLM is the gentle end of a family. Crank a knob `a` (the *advection* strength) from
 0 up to 1 and you pass from CLM to the De Gregorio model, where the extra transport
 term makes singularity formation famously subtle. Natural question, apparently
-unasked: **does the two-scale traveling wave survive as you turn on advection, or
-does it break?**
+unasked: **does the two-scale traveling wave survive as you turn on advection — as `a` moves
+up from 0 toward 1 — or does it break?**
 
 ## Turning the question into a search
 
@@ -49,8 +59,8 @@ afterward.
 
 ![The map](../figures/fig17_two_scale_sweep.png)
 
-The two-scale traveling wave **doesn't snap** at some critical advection. It
-**deforms smoothly**: exact at `a=0`, still a good fit (residual under 1%) out to
+Continued into positive `a`, the two-scale traveling wave **doesn't snap** at some critical
+advection. It **deforms smoothly**: exact at `a=0`, still a good fit (residual under 1%) out to
 about `a ≈ 0.4`, then steadily worse, reaching ~18% by `a=1` (De Gregorio). All
 the way, the bump **stays symmetric** — even though we gave the search the freedom
 to make it lopsided, it never took it. And advection **picks a size**: at `a=0` the
@@ -79,7 +89,9 @@ undecided-pending-a-better-tool. We report both — the clean part and the murky
 A genetic algorithm minimizing a residual **proves nothing**. This is evidence, not
 a theorem — and the map is only as good as the shapes we let it search. What it
 genuinely adds: to our knowledge nobody had charted how CLM's proven two-scale
-traveling wave behaves as advection grows, and now there's a map — plus a concrete
+traveling wave behaves as advection grows into positive `a`, and now there's a map (for
+positive `a` only — negative `a`, where the published two-scale *scenario* lives, is
+outside it) — plus a concrete
 *starting guess* (the exact and near-exact profiles) that a future **rigorous,
 computer-assisted** step could try to certify.
 
