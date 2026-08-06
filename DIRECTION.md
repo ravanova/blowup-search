@@ -8913,3 +8913,50 @@ slot C; 243 newly drafted.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 218 lands YES (this cycle's highest-stakes
+repair, closed cleanly), 227 lands clean, 228/243 promoted into H/C
+
+**218 (BHR) landed on `main` (`d9a20fb`/`fe6aab0`) — gate YES on both clauses.** Closes this
+cycle's single highest-blast-radius latent defect (leg 198's `bordered_hl.py` finding,
+1.198e9x/1.189e17x corruption potential). Notably thorough: it found that BOTH the
+dispatch's own caller-set premise AND leg 198's own supporting predicate were false,
+corrected both rather than patching around them, adopted its own corrected predicate, found
+a genuinely new in-kind extension (`+inf` weights understate by 33.7x, not previously
+characterized), and reconciled an apparent `Z_1`-ratio discrepancy with leg 198's own numbers
+via lesson 86 (round-off floor, environment-dependent ratio, verdict itself robust). **0
+banked numbers at risk.** Given the stakes, leg 228 (BHRV, independent verification) was
+dispatched immediately rather than waiting for a natural vacancy — exactly the priority this
+DM assigned it when drafting it several updates ago.
+
+**227 (EGMT) landed cleanly** — the cosmetic tense-fix, exactly as scoped, no surprises.
+
+**Slots H and C refilled** with **228 (BHRV)** — independent verification of leg 218's own
+repair, given the stakes — and **243 (PCRS)** — this DM's own Route-L headline sanity check,
+drafted last round.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 235 | CDAP | audit/census — not floor-eligible |
+| C | 243 | PCRS | **live, newly promoted** — verify — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 237 | SIRC | audit/census — not floor-eligible |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 242 | DFL2 | FLOOR-ELIGIBLE (literature) |
+| H | 228 | BHRV | **live, newly promoted** — verify — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible |
+
+**Floor status: 2/10 (236, 242) — unchanged; neither 218 nor 227 was floor-eligible, so no
+change from this round's landings.**
+
+**Reserve queue: 6 undispatched legs (216, 229, 231, 232, 233, 234)** — 228 and 243 now live
+(off reserve); no other change.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
