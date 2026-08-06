@@ -1,0 +1,436 @@
+{
+ "HRB0_lesson90_control": {
+  "distinct_module_objects": true,
+  "distinct_source_files": true,
+  "post_has_new_error_type": true,
+  "post_propagates_nan": true,
+  "pre_lacks_ascending_helper": true,
+  "pre_lacks_new_error_type": true,
+  "pre_still_accepts_permuted_grid_silently": true,
+  "pre_still_launders_nan_to_zero": true,
+  "pre_still_mirrors_on_negative_M": true
+ },
+ "HRB1_clause_a_original_failing_configs": {
+  "G1_permuted_grid": {
+   "leg117_banked_worst_abs": 212.0356008474817,
+   "leg117_banked_worst_rel": 135.65234030539335,
+   "leg152_recomputed_worst_abs": 212.03560084748173,
+   "leg152_recomputed_worst_rel": 135.6523403053934,
+   "matches_leg152_recomputation_bitwise": true,
+   "post_raises": 20,
+   "pre_silent_and_finite": 20,
+   "pre_worst_abs_error": 212.03560084748173,
+   "pre_worst_rel_error": 135.6523403053934,
+   "rel_distance_from_leg117_abs": 1.3404215762261493e-16,
+   "rel_distance_from_leg117_rel": 4.1903750965767894e-16,
+   "sup_U_true": 1.5630810376741535,
+   "trials": 20,
+   "ulp_distance_from_leg117_abs": 1.0,
+   "ulp_distance_from_leg117_rel": 2.0,
+   "warn_escape_bit_identical_to_pre": true,
+   "warn_escape_emitted_warning": true,
+   "within_4_ulp_of_leg117": true
+  },
+  "G2_xref_clamp": {
+   "bad_refs": 4,
+   "grid": "np.linspace(0.0, 10.0, 501) -- leg 117's original G2 configuration",
+   "in_domain_refs": 5,
+   "leg117_banked_shift_at_minus5": 1.4712,
+   "over_rejected_detail": {},
+   "post_accepts_in_domain": 5,
+   "post_raises": 4,
+   "pre_behaviour": {
+    "-5.0": {
+     "pre_max_abs_error_vs_analytic_pin": 1.4712142280283191,
+     "pre_returned_finite": true,
+     "shift_is_uniform_std": 1.74469589334848e-05
+    },
+    "-50.0": {
+     "pre_max_abs_error_vs_analytic_pin": 1.560883213832816,
+     "pre_returned_finite": true,
+     "shift_is_uniform_std": 1.7446958933486923e-05
+    },
+    "20.0": {
+     "pre_max_abs_error_vs_analytic_pin": 0.024963635270286888,
+     "pre_returned_finite": true,
+     "shift_is_uniform_std": 1.7446958933478134e-05
+    },
+    "200.0": {
+     "pre_max_abs_error_vs_analytic_pin": 0.04745843409752082,
+     "pre_returned_finite": true,
+     "shift_is_uniform_std": 1.744695893347922e-05
+    }
+   },
+   "reproduces_leg117_1p4712": true
+  },
+  "G3_nonpositive_scale": {
+   "bad_scales": 5,
+   "good_scales": 4,
+   "positive_grid_ascending": true,
+   "post_bit_identical_on_good": 4,
+   "post_raises": 5,
+   "pre_returned_descending_mirror": 1
+  },
+  "G4_nan_defeats_guard": {
+   "endpoint_pm_inf_still_accepted": 1,
+   "interior_inf_still_rejected": 1,
+   "leg152_reported": "PATCHED (not documented)",
+   "post_rejects_nan_poisoned_grid": 1,
+   "pre_accepted_nan_poisoned_grid": 1
+  },
+  "G8_nan_laundering": {
+   "A": {
+    "clean_entries": 116,
+    "clean_entries_bit_identical": 116,
+    "poisoned_positions": 3,
+    "post_laundered_to_exact_zero": 0,
+    "post_propagates_nan": 6,
+    "pre_laundered_to_exact_zero": 6
+   },
+   "B": {
+    "clean_entries": 116,
+    "clean_entries_bit_identical": 116,
+    "poisoned_positions": 3,
+    "post_laundered_to_exact_zero": 0,
+    "post_propagates_nan": 6,
+    "pre_laundered_to_exact_zero": 6
+   },
+   "C": {
+    "clean_entries": 116,
+    "clean_entries_bit_identical": 116,
+    "poisoned_positions": 3,
+    "post_laundered_to_exact_zero": 0,
+    "post_propagates_nan": 6,
+    "pre_laundered_to_exact_zero": 6
+   }
+  }
+ },
+ "HRB2_clause_b_uncovered_surface_differential": {
+  "bit_identical": 13413,
+  "moved": 0,
+  "moved_detail": [],
+  "per_surface": {
+   "RescaledHLDynamic.run": {
+    "identical": 2757,
+    "leaves": 2757,
+    "moved": 0
+   },
+   "RescaledHLScenario2.run": {
+    "identical": 3180,
+    "leaves": 3180,
+    "moved": 0
+   },
+   "amp_gauge": {
+    "identical": 9,
+    "leaves": 9,
+    "moved": 0
+   },
+   "anchors_at_singularity": {
+    "identical": 24,
+    "leaves": 24,
+    "moved": 0
+   },
+   "max_speed_rho": {
+    "identical": 2,
+    "leaves": 2,
+    "moved": 0
+   },
+   "max_speed_s": {
+    "identical": 9,
+    "leaves": 9,
+    "moved": 0
+   },
+   "normalize_amp": {
+    "identical": 2709,
+    "leaves": 2709,
+    "moved": 0
+   },
+   "normalize_amp_target": {
+    "identical": 2709,
+    "leaves": 2709,
+    "moved": 0
+   },
+   "origin_gauges": {
+    "identical": 6,
+    "leaves": 6,
+    "moved": 0
+   },
+   "sinh_grid_origin": {
+    "identical": 2008,
+    "leaves": 2008,
+    "moved": 0
+   }
+  },
+  "run_detail": {
+   "dynrun_n151_nu0.01_s80": {
+    "c_l": 1.1374058997219785,
+    "c_omega": -0.3998854002607813,
+    "residual": 0.43122823250119413,
+    "steps": 80
+   },
+   "dynrun_n201_nu0.02_s120": {
+    "c_l": 1.0911817764999512,
+    "c_omega": -0.4533579471846344,
+    "residual": 0.28500766097249314,
+    "steps": 120
+   },
+   "dynrun_n301_nu0_s60": {
+    "c_l": 1.1685463535442473,
+    "c_omega": -0.6198873983326056,
+    "residual": 0.7906957714260564,
+    "steps": 60
+   },
+   "s2_n301_c0.5_rm8_nu0": {
+    "ratio_c_l_over_c_omega": 39.05427635037738,
+    "residual": 4.392040541304673,
+    "steps": 150
+   },
+   "s2_n401_c0.35_rm7_nu0.02": {
+    "ratio_c_l_over_c_omega": 107.72108915234229,
+    "residual": 3.96852530184073,
+    "steps": 300
+   }
+  },
+  "surfaces_leg152_never_called": [
+   "RescaledHLDynamic.run",
+   "RescaledHLScenario2.run (independent config)",
+   "normalize_amp",
+   "normalize_amp_target",
+   "amp_gauge",
+   "max_speed_s",
+   "max_speed_rho",
+   "origin_gauges"
+  ],
+  "total_leaves": 13413
+ },
+ "HRB3_clause_b_banked_record": {
+  "cap_gauge_42_null": {
+   "banked": 4.4e-16,
+   "c_l": 13.040251741375254,
+   "c_omega": 0.6314066701253087,
+   "c_r": 3.8177154264374344,
+   "ratio_to_banked": 0.5046468293750711,
+   "reproduced_at_or_below_banked": true,
+   "worst_d_tau": 2.220446049250313e-16
+  },
+  "cap_scenario2_ratio": {
+   "chl_published_ratio": -2.5114,
+   "ladder_monotone_toward_CHL": true,
+   "ladder_ratios": [
+    -3.1154506653516485,
+    -2.7582314233093532,
+    -2.5290470559085447
+   ],
+   "note": "the banked 2.09e-04 is a reach EXTRAPOLATION in rho_max over 24000-step relaxations, not a single run; this leg re-derives the ladder's SHAPE at reduced step count rather than re-running the endpoints (lesson 72), and the bitwise pre/post identity of the relaxation itself is HRB2's job",
+   "reach_ladder": {
+    "rho_max_6": {
+     "X_max": 70.59960507959772,
+     "ratio": -3.1154506653516485,
+     "residual": 1.5927215077675716
+    },
+    "rho_max_7": {
+     "X_max": 191.91064314563627,
+     "ratio": -2.7582314233093532,
+     "residual": 1.3755624960621806
+    },
+    "rho_max_8": {
+     "X_max": 521.6675890263425,
+     "ratio": -2.5290470559085447,
+     "residual": 1.1903906790284955
+    }
+   }
+  },
+  "cap_thm23_anchor": {
+   "anchor_gauge_c_l": 1.94846929901869,
+   "anchor_gauge_c_omega": -0.9687351893859546,
+   "c_l_dev_from_theory_2": 0.05153070098130996,
+   "c_l_matches_leg152_to_4dp": true,
+   "c_omega_dev_from_theory_minus1": 0.0312648106140454,
+   "c_omega_matches_leg152_to_4dp": true,
+   "falls_under_refinement": true,
+   "leg152_banked_c_l": 1.9485,
+   "leg152_banked_c_omega": -0.9687,
+   "refinement_factor": 1.8915273489337834,
+   "rel_steady_residual_delta004": 0.006167411714281664,
+   "rel_steady_residual_delta016": 0.011665827929698355
+  }
+ },
+ "HRB4_guard_activation_margin": {
+  "boundary_by_config": {
+   "n101_delta0.05": 1.038017431238747,
+   "n1201_delta0.02": 1.003849079833383,
+   "n2001_delta0.004": 1.0031137228687617,
+   "n2001_delta0.006": 1.0029103079132395,
+   "n201_delta0.02": 1.0234165446681263,
+   "n301_delta0.02": 1.0155245474849401
+  },
+  "control_guard_fires_below_M_star": {
+   "fired": 3,
+   "survived": 0,
+   "tried": 3
+  },
+  "control_guard_silent_above_M_star": {
+   "accepted": 3,
+   "tried": 3
+  },
+  "margin_factor_by_site": {
+   "experiments/p2_conj24_relax.py:136       M=150.0": 144.50624381229642,
+   "test_hl_rescaled.py:110                  M=500.0": 481.6874793743214,
+   "test_hl_rescaled.py:131                  M=500.0": 481.6874793743214,
+   "test_hl_rescaled.py:146                  M=200.0": 192.67499174972858,
+   "test_hl_rescaled.py:67,86                M=1000.0": 963.3749587486428,
+   "test_hl_rescaled_adversarial.py:445,506  M=20.0": 19.26749917497286
+  },
+  "margin_factor_smallest_shipped": 19.26749917497286,
+  "measured_M_star_worst_case": 1.038017431238747,
+  "scenario2_grid": {
+   "X_max": 745.2394128947751,
+   "X_min": -745.2394128947751,
+   "X_ref": 0.0,
+   "note": "X=0 is an exact node by construction, so the G2 guard has no boundary here",
+   "origin_is_a_node": true
+  },
+  "shipped_M_values": {
+   "experiments/p2_conj24_relax.py:136       M=150.0": 150.0,
+   "test_hl_rescaled.py:110                  M=500.0": 500.0,
+   "test_hl_rescaled.py:131                  M=500.0": 500.0,
+   "test_hl_rescaled.py:146                  M=200.0": 200.0,
+   "test_hl_rescaled.py:67,86                M=1000.0": 1000.0,
+   "test_hl_rescaled_adversarial.py:445,506  M=20.0": 20.0
+  },
+  "smallest_shipped_M": 20.0
+ },
+ "HRB5_isnan_vs_isfinite_preregistered": {
+  "discriminator": {
+   "criterion": "leg 117's own G8 bar: a finding requires the value to be indistinguishable from legitimate physics AND WRONG. A value that is indistinguishable because it is CORRECT is a narrower guard, not a silent corruption.",
+   "formula_route_at_xp_zero": {
+    "A": {
+     "Omega0": 0.0,
+     "Theta0": 0.0
+    },
+    "B": {
+     "Omega0": 0.0,
+     "Theta0": 0.0
+    },
+    "C": {
+     "Omega0": 0.0,
+     "Theta0": 0.0
+    }
+   },
+   "neg_inf_value_confirmed_by_two_independent_routes": true,
+   "xp_at_neg_inf": 0.0
+  },
+  "kinds": {
+   "A": {
+    "legit_Xle0_Omega0": 0.0,
+    "legit_Xle0_Theta0": 0.0,
+    "neg_inf_Omega0": 0.0,
+    "neg_inf_Theta0": 0.0,
+    "neg_inf_indistinguishable_from_legit_node": true,
+    "numpy_runtime_warnings_emitted": 1,
+    "pos_inf_Omega0": NaN,
+    "pos_inf_Omega0_is_nan": true,
+    "pos_inf_Theta0": 0.0,
+    "pos_inf_Theta0_is_nan": false,
+    "pre_and_post_agree_at_pm_inf": true
+   },
+   "B": {
+    "legit_Xle0_Omega0": 0.0,
+    "legit_Xle0_Theta0": 0.0,
+    "neg_inf_Omega0": 0.0,
+    "neg_inf_Theta0": 0.0,
+    "neg_inf_indistinguishable_from_legit_node": true,
+    "numpy_runtime_warnings_emitted": 2,
+    "pos_inf_Omega0": NaN,
+    "pos_inf_Omega0_is_nan": true,
+    "pos_inf_Theta0": NaN,
+    "pos_inf_Theta0_is_nan": true,
+    "pre_and_post_agree_at_pm_inf": true
+   },
+   "C": {
+    "legit_Xle0_Omega0": 0.0,
+    "legit_Xle0_Theta0": 0.0,
+    "neg_inf_Omega0": 0.0,
+    "neg_inf_Theta0": 0.0,
+    "neg_inf_indistinguishable_from_legit_node": true,
+    "numpy_runtime_warnings_emitted": 1,
+    "pos_inf_Omega0": NaN,
+    "pos_inf_Omega0_is_nan": true,
+    "pos_inf_Theta0": 0.0,
+    "pos_inf_Theta0_is_nan": false,
+    "pre_and_post_agree_at_pm_inf": true
+   }
+  },
+  "pos_inf_Theta0_across_kinds": {
+   "A": 0.0,
+   "B": NaN,
+   "C": 0.0
+  },
+  "pos_inf_any_wrong_finite_value": false,
+  "pos_inf_kinds_disagree": true
+ },
+ "HRB6_declared_residues": {
+  "residue_np_interp_sites": {
+   "X_max": 21.67975993548472,
+   "X_min": -18.342584171871394,
+   "clamped_value_offgrid_demo": 1.0,
+   "declared": "RescaledHLDynamic.gauge / max_speed_s still call np.interp unguarded",
+   "distance_of_X_eq_0_from_grid_min": 18.342584171871394,
+   "distance_of_X_eq_1_from_grid_max": 20.67975993548472,
+   "shipped_grid_brackets_X_eq_1_and_0": true,
+   "still_unguarded": true
+  },
+  "residue_sinh_grid_at_small_n": {
+   "declared": "n < 2 still raises IndexError rather than HLRescaledDomainError",
+   "observed": {
+    "0": "IndexError",
+    "1": "IndexError"
+   },
+   "visible_not_silent": true
+  },
+  "residue_solve3x3_absolute_pivot": {
+   "declared": "absolute 1e-14 pivot threshold still over-rejects a tiny well-conditioned matrix",
+   "matrix_condition_number": 1.0,
+   "matrix_scale": 1e-16,
+   "numpy_solves_it_fine": true,
+   "still_over_rejects": true,
+   "threshold": 1e-14
+  }
+ },
+ "closes": "leg 152 (HRR), which repaired leg 117 (HRA)'s four mechanisms",
+ "gate": {
+  "answer": "YES",
+  "clause_a": true,
+  "clause_a_checks": {
+   "G1_all_permutations_rejected": true,
+   "G1_matches_leg152_recomputation_bitwise": true,
+   "G1_warn_escape_preserves_leg117_record": true,
+   "G1_within_4ulp_of_leg117_banking": true,
+   "G2_all_out_of_domain_rejected": true,
+   "G2_no_over_rejection_in_domain": true,
+   "G2_reproduces_leg117_1p4712_shift": true,
+   "G3_all_nonpositive_scales_rejected": true,
+   "G3_no_over_rejection_on_good_scales": true,
+   "G4_endpoint_inf_boundary_preserved": true,
+   "G4_nan_poisoned_grid_rejected": true,
+   "G8_clean_entries_unmoved_all_kinds": true,
+   "G8_zero_laundering_all_kinds": true
+  },
+  "clause_b": true,
+  "clause_b_checks": {
+   "cap_gauge_42_reproduced": true,
+   "cap_scenario2_ladder_shape_reproduced": true,
+   "cap_thm23_anchor_reproduced": true,
+   "declared_residues_unchanged": true,
+   "guard_margin_control_fires_below": true,
+   "guard_margin_positive_and_large": true,
+   "no_wrong_finite_value_at_pm_inf": true,
+   "uncovered_surfaces_zero_movement": true
+  }
+ },
+ "leg": 168,
+ "pre_repair_lines": 577,
+ "pre_repair_ref": "2450ddf",
+ "route": "ROUTE-HRB",
+ "subject": "solver/hl_rescaled.py (READ-ONLY; edited nowhere by this leg)"
+}
