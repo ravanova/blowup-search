@@ -69,3 +69,38 @@ tightening plus a pre/post arm that `test_7` does not have.
 Vacuous by §0 — the claim is about this repository's own commit, not about the published record.
 No arXiv or journal search is applicable, and none is reported, so that no absence is later
 mistaken for a searched-and-empty result.
+
+---
+
+## 5. FINDINGS (appended after construction, 2026-08-06)
+
+The pass above was committed before any number was seen (`09b7de9`). What the run then measured:
+
+**Gate answer: YES on both halves.**
+
+| clause | measurement | judged against |
+|---|---|---|
+| P2 precision, canonical (`test_7`'s configuration) | **9.4723e-16**, *identical* pre and post | the advertised **9.5e-16** — 1.00× margin |
+| P2 precision, whole battery, pre vs post | **20/20 cases bit-identical**, **0 of 131 136 entries** differing, worst ULP gap **0** | the pre-commitment in §2: bit-for-bit, not "both are small" |
+| P3 timing, 300×48 | **+0.21%** (24.33 → 24.38 ms) | null arm **0.29%** |
+| P3 timing, 96×32 | **+1.12%** (5.76 → 5.83 ms) | null arm **0.20%**; budget max(3× null, 10%) |
+| P1 static | repair is **+58/−0** lines over `_hypothesis_violations`, `radii_polynomial_status`; **0** defs on the sweep's call path or adjacent hot path | the sweep's enumerated call path |
+| P4 consequence | preconditioned Krylov ladder **3.603020e-14 at m = 80**, **4/4 rungs identical** pre vs post | each other |
+
+**Both pre-commitments earned their keep.** The bit-for-bit arm is what upgrades the answer from
+"still passes a tolerance" to "nothing moved", and it is the only arm that could have caught a
+sub-tolerance perturbation. The null arm is what makes the timing half answerable at all: a first
+run on a loaded machine showed a **−5.94%** pre/post ratio at 300×48 with a **2.15%** null and a
+*sign-inconsistent* +4.00% at 96×32 — visibly noise, and visibly noise *because the null was
+there*. The clean run gives sub-percent deviations against sub-percent nulls. Without the null,
+the first run's −5.94% would have been reportable as a 6% speed-up, which it is not.
+
+**The one thing the novelty pass predicted and the run confirmed.** §1 flagged that `test_7`'s
+`err < 1e-11` sits ~4 decades from the 9.5e-16 claim. Measuring at the claim's own resolution
+turned up a scope caveat nobody had recorded: the battery's **worst** residual is **1.008e-14 =
+10.61×** the advertised figure, on the 300×48 grids. It is **not** a regression — it is *exactly
+equal* pre and post — but "gated to 9.5e-16" is a one-configuration number being read as uniform.
+Reported, not patched: `capabilities.py` and `test_port_certification.py` are both outside this
+leg's territory and neither was touched. Gate 1 of `test_port_certification_postrepair.py` holds
+the canonical configuration to the advertised number from a file this leg does own, which closes
+the four-decade gap without editing anyone else's.

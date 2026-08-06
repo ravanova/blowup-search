@@ -1,0 +1,449 @@
+{
+ "leg": 86,
+ "route": "PCB",
+ "version": 1,
+ "gate": "After the bench-repair, does solver/port_certification.py's line-sweep preconditioner still (a) hit the 9.5e-16 precision gate it was originally validated to, and (b) run within normal benchmark variance of its pre-repair timing?",
+ "P1_static": {
+  "repair_commit": "3f187d8b7c232dbb6ccbac0f88da73ea55e6b4c6",
+  "parent": "7b9c596af6c6a971071d030523bb3bfc86682f61",
+  "lines_added": 58,
+  "lines_removed": 0,
+  "top_level_defs_touched": [
+   "_hypothesis_violations",
+   "radii_polynomial_status"
+  ],
+  "sweep_call_path": [
+   "line_sweep_solve"
+  ],
+  "adjacent_hot_path": [
+   "make_preconditioner",
+   "leading_order_solve",
+   "gmres",
+   "krylov_ladder"
+  ],
+  "defs_touched_on_sweep_path": [],
+  "defs_touched_adjacent": [],
+  "reading": "the repair's text is disjoint from the sweep's call path"
+ },
+ "P2_precision": {
+  "claimed_precision_gate": 9.5e-16,
+  "n_cases": 20,
+  "canonical_case_rel_residual_post": 9.472295504939041e-16,
+  "canonical_case_rel_residual_pre": 9.472295504939041e-16,
+  "worst_rel_residual_pre": 1.0076967103552957e-14,
+  "worst_rel_residual_post": 1.0076967103552957e-14,
+  "worst_post_over_claimed_gate": 10.607333793213638,
+  "cases_bit_identical": 20,
+  "cases_total": 20,
+  "worst_ulp_gap_over_all_cases": 0,
+  "total_entries_differing": 0,
+  "rows": [
+   {
+    "case": "CANONICAL(test_7)",
+    "n_r": 48,
+    "n_b": 16,
+    "min_s_rho": 0.5086311127179339,
+    "rel_residual_pre": 9.472295504939041e-16,
+    "rel_residual_post": 9.472295504939041e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 768
+   },
+   {
+    "case": "seed0_48x16",
+    "n_r": 48,
+    "n_b": 16,
+    "min_s_rho": 0.5012027604276916,
+    "rel_residual_pre": 1.0694041523934728e-15,
+    "rel_residual_post": 1.0694041523934728e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 768
+   },
+   {
+    "case": "seed0_96x32",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.500760006429374,
+    "rel_residual_pre": 1.2512951658387506e-15,
+    "rel_residual_post": 1.2512951658387506e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed0_192x48",
+    "n_r": 192,
+    "n_b": 48,
+    "min_s_rho": 0.5004320272037259,
+    "rel_residual_pre": 9.109570059488374e-16,
+    "rel_residual_post": 9.109570059488374e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 9216
+   },
+   {
+    "case": "seed1_48x16",
+    "n_r": 48,
+    "n_b": 16,
+    "min_s_rho": 0.5082273722584794,
+    "rel_residual_pre": 8.656194401326774e-16,
+    "rel_residual_post": 8.656194401326774e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 768
+   },
+   {
+    "case": "seed1_96x32",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.5003841622399827,
+    "rel_residual_pre": 1.1558179207124498e-15,
+    "rel_residual_post": 1.1558179207124498e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed1_192x48",
+    "n_r": 192,
+    "n_b": 48,
+    "min_s_rho": 0.5003841622399827,
+    "rel_residual_pre": 9.146683417213109e-16,
+    "rel_residual_post": 9.146683417213109e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 9216
+   },
+   {
+    "case": "seed2_48x16",
+    "n_r": 48,
+    "n_b": 16,
+    "min_s_rho": 0.5085088147149412,
+    "rel_residual_pre": 8.228637243399225e-16,
+    "rel_residual_post": 8.228637243399225e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 768
+   },
+   {
+    "case": "seed2_96x32",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.5031765442882516,
+    "rel_residual_pre": 7.788669572622337e-16,
+    "rel_residual_post": 7.788669572622337e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed2_192x48",
+    "n_r": 192,
+    "n_b": 48,
+    "min_s_rho": 0.5002485146619451,
+    "rel_residual_pre": 1.076803888778143e-15,
+    "rel_residual_post": 1.076803888778143e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 9216
+   },
+   {
+    "case": "seed3_48x16",
+    "n_r": 48,
+    "n_b": 16,
+    "min_s_rho": 0.5045936549755896,
+    "rel_residual_pre": 8.712772922765836e-16,
+    "rel_residual_post": 8.712772922765836e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 768
+   },
+   {
+    "case": "seed3_96x32",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.5006976466278088,
+    "rel_residual_pre": 1.266329477109377e-15,
+    "rel_residual_post": 1.266329477109377e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed3_192x48",
+    "n_r": 192,
+    "n_b": 48,
+    "min_s_rho": 0.5001518200979143,
+    "rel_residual_pre": 9.957962099289605e-16,
+    "rel_residual_post": 9.957962099289605e-16,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 9216
+   },
+   {
+    "case": "seed5_96x32_marginal_s_rho",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.0010000054405029676,
+    "rel_residual_pre": 6.657636562981852e-15,
+    "rel_residual_post": 6.657636562981852e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed6_96x32_marginal_s_rho",
+    "n_r": 96,
+    "n_b": 32,
+    "min_s_rho": 0.0010023230567445137,
+    "rel_residual_pre": 1.0076967103552957e-14,
+    "rel_residual_post": 1.0076967103552957e-14,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 3072
+   },
+   {
+    "case": "seed7_300x48_live_c-1.0145",
+    "n_r": 300,
+    "n_b": 48,
+    "min_s_rho": 0.5003443201874758,
+    "rel_residual_pre": 1.0850155871377198e-15,
+    "rel_residual_post": 1.0850155871377198e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 14400
+   },
+   {
+    "case": "seed7_300x48_live_c-2.029",
+    "n_r": 300,
+    "n_b": 48,
+    "min_s_rho": 0.5003443201874758,
+    "rel_residual_pre": 1.2576317032732663e-15,
+    "rel_residual_post": 1.2576317032732663e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 14400
+   },
+   {
+    "case": "seed8_300x48",
+    "n_r": 300,
+    "n_b": 48,
+    "min_s_rho": 0.5004815869727577,
+    "rel_residual_pre": 1.0489997871806438e-15,
+    "rel_residual_post": 1.0489997871806438e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 14400
+   },
+   {
+    "case": "seed9_300x48",
+    "n_r": 300,
+    "n_b": 48,
+    "min_s_rho": 0.5002698828773484,
+    "rel_residual_pre": 1.4019653221028884e-15,
+    "rel_residual_post": 1.4019653221028884e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 14400
+   },
+   {
+    "case": "seed10_300x48",
+    "n_r": 300,
+    "n_b": 48,
+    "min_s_rho": 0.5002879243791942,
+    "rel_residual_pre": 1.0801929571455308e-15,
+    "rel_residual_post": 1.0801929571455308e-15,
+    "post_over_pre": 1.0,
+    "bit_identical": true,
+    "entries_differing": 0,
+    "max_ulp_gap": 0,
+    "entries": 14400
+   }
+  ]
+ },
+ "P3_timing": {
+  "300x48": {
+   "rounds": 15,
+   "calls_per_round": 6,
+   "median_s_pre": 0.024332329666018875,
+   "median_s_post": 0.024383260166359833,
+   "median_s_null": 0.02431328349969893,
+   "min_s_pre": 0.021095355167441692,
+   "min_s_post": 0.02075126533357737,
+   "min_s_null": 0.020993665333662648,
+   "post_over_pre_median": 1.0020931205946992,
+   "null_over_post_median": 0.9971301349293132,
+   "post_over_pre_min": 0.9836888342892,
+   "spread_pre_max_over_min": 1.3398498757769775,
+   "spread_post_max_over_min": 1.2499986426053165,
+   "spread_null_max_over_min": 1.2326753216251858,
+   "excess_over_noise": 0.7293446009286955
+  },
+  "96x32": {
+   "rounds": 15,
+   "calls_per_round": 6,
+   "median_s_pre": 0.005764156833417171,
+   "median_s_post": 0.005828684332906657,
+   "median_s_null": 0.005816835000587162,
+   "min_s_pre": 0.005664862499543233,
+   "min_s_post": 0.00550383950030664,
+   "min_s_null": 0.005682241666363552,
+   "post_over_pre_median": 1.011194612040289,
+   "null_over_post_median": 0.9979670656973825,
+   "post_over_pre_min": 0.9715751266249487,
+   "spread_pre_max_over_min": 1.111092840785893,
+   "spread_post_max_over_min": 1.1741535157686345,
+   "spread_null_max_over_min": 1.1441825923331952,
+   "excess_over_noise": 5.506627551060204
+  }
+ },
+ "P4_ladder": {
+  "pre": {
+   "ladder": [
+    {
+     "m": 10,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 20,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 40,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 80,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    }
+   ],
+   "verdict": {
+    "rel_at_min_dim": 3.603019998610402e-14,
+    "min_dim": 10,
+    "rel_at_max_dim": 3.603019998610402e-14,
+    "max_dim": 80,
+    "work_ratio": 8.0,
+    "residual_gain": 1.0,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   }
+  },
+  "post": {
+   "ladder": [
+    {
+     "m": 10,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 20,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 40,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    },
+    {
+     "m": 80,
+     "k": 7,
+     "rel_residual": 3.603019998610402e-14
+    }
+   ],
+   "verdict": {
+    "rel_at_min_dim": 3.603019998610402e-14,
+    "min_dim": 10,
+    "rel_at_max_dim": 3.603019998610402e-14,
+    "max_dim": 80,
+    "work_ratio": 8.0,
+    "residual_gain": 1.0,
+    "flat": true,
+    "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+   }
+  },
+  "comparison": {
+   "rel_at_max_dim_pre": 3.603019998610402e-14,
+   "rel_at_max_dim_post": 3.603019998610402e-14,
+   "post_over_pre": 1.0,
+   "gain_pre": 1.0,
+   "gain_post": 1.0,
+   "rungs_identical": 4,
+   "rungs_total": 4,
+   "identical": true
+  }
+ },
+ "gate_answer": {
+  "a_precision": {
+   "canonical_case_post": 9.472295504939041e-16,
+   "canonical_case_pre": 9.472295504939041e-16,
+   "claimed_gate": 9.5e-16,
+   "canonical_margin_factor": 1.0029247920999207,
+   "canonical_meets_claimed_gate": true,
+   "bit_identical_cases": "20/20",
+   "total_entries_differing": 0,
+   "worst_ulp_gap": 0,
+   "nothing_moved_across_the_repair": true,
+   "battery_scope_caveat": {
+    "worst_rel_residual_post": 1.0076967103552957e-14,
+    "worst_rel_residual_pre": 1.0076967103552957e-14,
+    "worst_over_claimed_gate": 10.607333793213638,
+    "moved_across_the_repair": false,
+    "note": "PRE-EXISTING, NOT A REGRESSION when moved_across_the_repair is false: the 9.5e-16 figure is test_7's single configuration, and the battery's worst case is larger on bigger grids in BOTH module versions by the identical amount. This is a scope caveat on how capabilities.py words the claim, not an effect of leg 79's repair."
+   },
+   "meets_gate": true
+  },
+  "b_timing": {
+   "worst_abs_pre_post_deviation": 0.011194612040289043,
+   "worst_null_arm_deviation": 0.0028698650706867612,
+   "criterion": "|post/pre - 1| <= max(3 x null deviation, 10%)",
+   "sign_consistent_across_grids": true,
+   "within_variance": true
+  },
+  "answer": "yes",
+  "reading": "no precision or performance regression -- the repair was surgical"
+ }
+}
