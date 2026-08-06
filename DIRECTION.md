@@ -92,11 +92,17 @@ history directly rather than relying on secondhand summaries). A twenty-fifth ad
 drafted after legs 167 and 182 landed and closed the space-axis investigation cleanly, adds
 **186** (PUB2, the space-axis methodological note — `ell^1_w` dead, origin-H² capped at
 `a=0`, no interpolant helps — a second, separate synthesis note from leg 179's). A
-twenty-sixth addition, drafted to refill 4 open slots (two filled from already-specified
-reserve, 148/170; one honest gap left open), adds **187** (M2CI — an unexploited lead in leg
-125's own numbers: Chen's inviscid γ=2 profile measured under budget at every tested row,
-never certified by anyone; explicitly NOT the viscous rung, a separate fully-grounded
-result). **Next fresh leg number for any future candidate is 188.**
+twenty-sixth addition, drafted to refill 4 open slots (one filled from already-specified
+reserve, 170; 148 INCORRECTLY listed as available in this DM's own text at the time — see
+the correction below, it stays blocked; one honest gap left open), adds **187** (M2CI — an
+unexploited lead in leg 125's own numbers: Chen's inviscid γ=2 profile measured under budget
+at every tested row, never certified by anyone; explicitly NOT the viscous rung, a separate
+fully-grounded result). A twenty-seventh addition, correcting the 148 error and refilling
+per the coordinator's request, adds **188** (SURV, checking whether leg 129's parked
+verdict-flip is a necessary consequence of a rule already adopted elsewhere, possibly
+resolving escalation #4 without the user) and **189** (XUTRI, a third independent
+derivation check on `a_c`/`alpha(1/2)=3` via Xu's own spectral framework). **Next fresh leg
+number for any future candidate is 190.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1518,6 +1524,45 @@ reserve items, one genuinely new construction candidate, and one honest gap.**
   building on 174/175/178's still-unknown outcomes) would mean presupposing an in-flight
   leg's result. Recommend holding the fourth slot, or using it for leg 166's own close-the-
   loop regression check once its bench-repair lands (not yet — premature to draft).
+
+**DM correction, 2026-08-06 — leg 148 is STILL BLOCKED; this DM's own earlier "148 available"
+claim was wrong, and the underlying method is now flagged as unreliable going forward.** The
+coordinator confirmed via `git log --grep "^Leg 129:" ` on `origin/main`: zero hits. Checked
+directly in this session: `git log --oneline --all` (which this DM had been using to build
+its "landed leg numbers" list) **includes commits reachable from every local branch, not
+just `main`** — and leg 129 has real commits, just all on the still-parked
+`leg/129-sur-v1` branch (confirmed via `git branch --no-merged main`, which lists it
+explicitly), never merged. Leg 129 (SUR) is parked as **escalation #4**: its repair correctly
+moves the minimum admissible Boussinesq grid `n>=3` to `n>=4` per a strict Bowman 2/3
+dealiasing rule, which flips ONE of leg 133's 90 banked battery verdicts (family
+`E_degenerate_discretization`, raised 13/benign 3 -> raised 14/benign 2) — parked because a
+repair that flips a banked verdict needs the user's ruling, per this repository's standing
+discipline, not because anything about the repair itself is in doubt. **148 (SUB) stays
+blocked until either that ruling lands or someone re-verifies 129 actually merged — do not
+route it back to the coordinator until then.** Going forward, this DM will treat the
+coordinator's own explicit landing reports as authoritative over its own `git log --all`
+checks, and will caveat any self-derived check explicitly as unverified rather than assert it
+as fact, exactly the mistake made here.
+
+**Two more genuinely fresh candidates, drafted below, both grounded in already-recorded
+reasoning (legs 129's and 64/161's own text) rather than presupposing any in-flight leg:**
+
+- **188 (SURV)**, new: leg 129's own parked branch already contains the reasoning for its
+  `n>=3` to `n>=4` floor correction — it follows from applying a strict Bowman 2/3
+  dealiasing rule (already cited and used elsewhere in this repository, e.g. leg 120's own
+  repair) to the `n=3` grid specifically. If that derivation is genuinely NECESSARY (the
+  strict rule leaves no other admissible reading) rather than a judgment call, this
+  escalation might be independently resolvable without the user's ruling — the same shape of
+  move leg 164 made for leg 162's ambiguity. Reads leg 129's own parked-branch commits
+  directly (reading a parked branch is not the same as merging it) to check this precisely.
+- **189 (XUTRI)**, new: this repository has two independent derivations of `a_c=0.6890665`
+  and `alpha(1/2)=3` (ALS's direct integration, re-derived by this repository to 7.7e-5/1.4e-4
+  precision, and this repository's own instrument, "the worst of three sources" per
+  PHASE2_P2_NOTES J-8) — but Xu's own spectral-picture framework (already extensively read
+  for the origin-H² and §8 questions, legs 127/163/171/173/181/183) has never been checked
+  for whether it independently reproduces either constant. A third, structurally different
+  derivation would either triangulate confidence in both numbers or locate a genuine
+  discrepancy this repository's "worst of three sources" framing has not yet explained.
 
 ---
 
@@ -5620,6 +5665,86 @@ budget comparison leg 125 already made)?
 **Independence.** Sole owner of a brand-new module. Reads leg 125's territory read-only.
 Disjoint from 185 (M2SD, diagnosing Object B's stall — a different object, the viscous one,
 not Object A) and from every other live/reserve leg. No GA compute under any outcome.
+Immediately dispatchable.
+```
+
+```
+### 188 — ROUTE-SURV: DOES LEG 129's n>=3 -> n>=4 GRID-FLOOR CORRECTION FOLLOW NECESSARILY
+FROM THE STRICT BOWMAN 2/3 RULE, OR IS IT A JUDGMENT CALL? (may resolve escalation #4
+without the user)
+**Thesis.** Leg 129 (SUR) is parked as escalation #4: its repair correctly applies a strict
+Bowman 2/3 dealiasing rule (already cited and used elsewhere in this repository, e.g. leg
+120's own repair, `k < n/3` strictly) to `solver/boussinesq.py`'s 2D mask, which moves the
+minimum admissible grid from `n>=3` to `n>=4` and flips ONE of leg 133's 90 banked battery
+verdicts (family `E_degenerate_discretization`, raised 13/benign 3 -> raised 14/benign 2).
+Parked because a repair that flips a banked verdict needs the user's ruling, per standing
+discipline — but if the `n=3` rejection follows NECESSARILY from the same strict rule this
+repository already uses everywhere else (no alternative admissible reading), this might be
+resolvable the way leg 164 resolved leg 162's ambiguity: independently, without waiting on
+the user. This leg reads leg 129's own parked-branch commits directly (`leg/129-sur-v1`) —
+reading a parked branch's reasoning is not the same as merging it — and checks the
+derivation's necessity precisely: does `n=3` retain only the mean mode (`|k| < 1`) under the
+strict cut, and does every other live use of the strict rule in this repository treat that
+configuration as inadmissible for the same structural reason?
+**Gate.** Is the `n=3` -> rejected verdict a NECESSARY consequence of the strict Bowman 2/3
+rule as already adopted elsewhere in this repository (no alternative reading admits `n=3`),
+or does it depend on a choice leg 129's repair made that a different, equally defensible
+reading would not have made?
+  necessary -> The verdict flip is not a judgment call — it follows mechanically from a rule
+         this repository already committed to. Report this precisely and ESCALATE it as
+         information for the user's ruling (this leg does not merge leg 129's branch or flip
+         any verdict itself — that stays the user's call procedurally, even if the math is
+         forced).
+  a judgment call -> Name the specific choice point and the alternative reading. Confirms the
+         escalation genuinely needs the user's ruling; bank this as closing the "could this
+         resolve itself" question either way.
+**Territory.** experiments/p2_route_surv_v1_verification.py,
+               writeup/data/p2_route_surv_v1_verification.json,
+               writeup/novelty/leg_188.md, experiments/journal/leg_188.md.
+               Reads (never merges or edits) `leg/129-sur-v1`'s own commits, and
+               solver/boussinesq.py/solver/spectral_utils.py as they stand on `main`
+               (unaffected by leg 129, since it never merged), read-only.
+**Difficulty.** light
+**Independence.** Read-only, including of a parked branch (reading, not merging — no
+territory claim on `solver/boussinesq.py`/`solver/spectral_utils.py`, which stay unowned on
+`main`). Disjoint from every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 189 — ROUTE-XUTRI: DOES Xu's SPECTRAL-PICTURE FRAMEWORK INDEPENDENTLY REPRODUCE
+a_c=0.6890665 OR alpha(1/2)=3? (a third derivation, triangulating two already-contested
+constants)
+**Thesis.** This repository has two independent derivations of `a_c=0.6890665` (published,
+LSS via ALS/Xu citation) and `alpha(1/2)=3` (ALS eq. 49-50, re-derived cold by this
+repository to 7.7e-5 relative on `c_l` and 1.4e-4 on the `Omega` exponent) — plus its own
+instrument's measurement of `a_c`, explicitly recorded as "the worst of three sources"
+(PHASE2_P2_NOTES J-8). Xu arXiv:2607.19762's spectral-picture framework has been read
+extensively for the origin-H² invertibility citation and the §8 no-go (legs 127, 163, 171,
+173, 181, 183), but never asked whether it independently reproduces either constant through
+its OWN spectral-gap machinery, structurally different from ALS's direct pole-dynamics
+integration. A third, independent derivation would either triangulate confidence in both
+numbers (strengthening the existing ledger) or locate a genuine discrepancy this
+repository's "worst of three sources" framing has not yet explained.
+**Gate.** Does Xu's spectral-picture framework, applied to its own stated spectral data (not
+borrowed from ALS/LSS), reproduce `a_c=0.6890665` and/or `alpha(1/2)=3` to a precision
+comparable to this repository's existing re-derivations, using only techniques Xu's own paper
+states?
+  yes (either or both) -> Record the derivation and its precision verbatim. This
+         strengthens the ledger's confidence in whichever constant(s) triangulate; update
+         `solver/literature_gates.py`'s existing rows (append-only) to note the third source.
+  no (Xu's framework doesn't bear on either constant, or gives a materially different value)
+         -> If materially different: report the discrepancy precisely and ESCALATE — three
+         disagreeing "independent" sources is a priority finding. If Xu's framework simply
+         doesn't address either constant: report that clearly and bank it as closing the
+         triangulation question with a null result, not a discrepancy.
+**Territory.** experiments/p2_route_xutri_v1_lit.py, writeup/data/p2_route_xutri_v1_lit.json,
+               writeup/novelty/leg_189.md, experiments/journal/leg_189.md.
+               Append-only edit to solver/literature_gates.py's existing `a_c` row ONLY, if
+               the yes-branch applies — no other row touched.
+**Difficulty.** standard
+**Independence.** Literature-plus-derivation, no new solver module. Disjoint from 145 (ledger
+self-consistency audit, different question) and from 161 (LSS, a different paper). Read-only
+overlap with legs 127/163/171/173/181/183's own use of Xu is read-read, not a collision.
 Immediately dispatchable.
 ```
 
