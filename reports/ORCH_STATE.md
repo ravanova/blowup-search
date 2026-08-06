@@ -22,6 +22,21 @@ first handoff message was sent to the user — the state below is the final, acc
 
 ## Resume checklist for the next orchestrator
 
+0. **TOP PRIORITY, ahead of everything else — two RED tests confirmed on `main` (leg 71,
+   landed at `e742f6d`).** Per `ORCHESTRATION.md`'s own rule, a red test on `main` is fixed
+   immediately, not queued: (a) `test_fractional_boussinesq.py` gate G6 (`p > 0` at `s=0.10`)
+   measures **p = -0.211**, wrong side of zero, monotonicity and the s=1.00 endpoint both
+   still pass — this is the same module leg 67 was independently searching the literature
+   for, whose own gate is now red; (b) `test_profile_newton.py` has an inverted assertion
+   (`assert not converged` at `a=0.9`) that Newton now **satisfies by converging** (relres
+   2.89e-06, 40 iters) — this reads like the solver got BETTER and a negative-control test
+   went stale, not a regression, but that needs confirming, not assuming. Dispatch a bench
+   investigation of both before building anything else on `fractional_boussinesq.py` or
+   `profile_newton.py`. Full detail in leg 71's `writeup/novelty/leg_71.md` and
+   `experiments/journal/leg_71.md` on `main`. Also flagged, mechanical, low priority: 7
+   modules are unreachable from `scripts/merge_gate.sh`'s test-name mapping (silently
+   ungated on future changes) — a `capabilities.py`-driven resolution is the cheap fix,
+   not yet built.
 1. Read `plan_of_record.py` — stage `NG` is still `NEXT`.
 2. Read `DIRECTION.md` in full — it is long (100+ candidate legs drafted across this session)
    but its Status section and live-assignments table are close to current (see the correction
@@ -65,7 +80,7 @@ first handoff message was sent to the user — the state below is the final, acc
 |---|---|---|---|
 | 58 | NG (critical path) | `leg/ng-v1` | Mid-build, interim finding may be stronger than mandate (see above). No push yet. |
 | 62 | CP | `leg/cp-v1` | Gate answered NO, full writeup still assembling. No push yet. |
-| 71 | CAP | `leg/cap-v1` | Dispatched very early in the session, no completion notification ever received — likely still running, or check for a pushed branch. |
+| 71 | CAP | landed, `e742f6d` | **Landed with the top-priority finding — see Resume checklist item 0.** Two red tests confirmed on main. |
 | 76 | MI (rework leg, not yet drafted as dispatchable) | — | Blocked on its verifier. Verifier (for leg 70) was still deepening its review at last check — found the core finding solid, expanding scope (leg 70 never recomputed its own K-counts; a wording defect; a sharper continuum signature). Check `verify/70-rc-review` for a push; draft leg 76 as a dispatchable leg once it lands. |
 | 100 | HNA (holder_norms.py) | `leg/hna-v1` | Gate YES — 6 silent-corruption mechanisms under NaN/Inf poisoning (all one IEEE-754 hazard), including its own `conformal_check` self-validation returning a bit-identical "clean" result on a poisoned grid, and a 2.1053x understated bound. Latent (no live certificate feeds NaN in), but `conformal_check` can't be trusted as a self-validation gate until repaired. **Needs a bench-repair** — dispatch one, bundle leg 100's commits, follow `bench/fix-fractional-gclm-negative-params` as the template. |
 | 101 | OLA (op_lower.py) | `leg/ola-v1` | Gate YES — the lower bound can EXCEED the true norm on 47/209 adversarial cases (46 via overflow to `inf`, 1 finite exceedance at 425 ULP). Production headroom measured at 307.9 decades, so no banked Route-D number is contaminated — but `capabilities.py`'s unqualified "brackets the norm from below" claim is now false as written. **Needs a bench-repair.** |
@@ -76,6 +91,7 @@ first handoff message was sent to the user — the state below is the final, acc
 | 98 | ICA (interval_certificate.py fix) | bundled, merged | **Landed on main** via `bench/fix-interval-certificate-validation` (merged at `3e52386`). Leg 61's Kawahara gate independently confirmed bit-identical at 17 digits. `leg/ica-v1`'s commits are bundled in — do not merge that branch separately if it's still visible on the remote. |
 | 83 | MFG (marginal_flow.py gate 11) | `leg/mfg-v1` (PR #14, escalated) + a ready bench-repair on `bench/fix-marginal-flow-gate11-coverage` | **Unresolved ordering question for the next orchestrator.** Leg 83 itself is still an open escalation (never merged to main). A bench-repair was built ON TOP of `leg/mfg-v1` (not main) and closes 4 of leg 83's 9 missed adversarial cases (including the 4.99e130 worst case) via a scale-free state-growth threshold (1e5, placed by measuring 4.06e2 as the largest legitimate growth in the existing suite) — 0 false positives, all 11 existing gates unchanged. **Decide first: merge `leg/mfg-v1` to main (closing leg 83's escalation as a normal landing, since the repair proves the finding is real and fixable), then rebase/merge the repair branch on top** — merging the repair branch as-is would also drag leg 83's commits in under a different SHA, which works but is messier. Neither branch has been merged yet; both are ready. |
 | 96, 97, 102 | LHA, WSA, JR2 | — | All three landed cleanly on main earlier in the session (robust / no bug found). No action needed. |
+| 68, 72, 90, 93 | IX, JR, EXT4, EXT5 | — | Also landed cleanly earlier this session (documentation/literature, no findings requiring follow-up). |
 
 **All agent handles above (except where noted "landed") are unreachable from a fresh session.**
 For any slot still showing an open branch, check `git ls-remote origin 'refs/heads/leg/<slug>-v1'`
