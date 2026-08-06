@@ -75,7 +75,7 @@
       "mask2d_n96_kept",
       "mask2d_n96_sha"
     ],
-    "tmp": "/tmp/sur_pre_16qjs_c5",
+    "tmp": "/tmp/sur_pre_9zf7fkxn",
     "endtoend_keys": 49,
     "helper_keys": 84
   },
@@ -171,5 +171,92 @@
     "D7_refused": 15,
     "D7_cases": 15,
     "D7_declared_grids_accepted": 7
+  },
+  "C2_escalation": {
+    "rows": [
+      {
+        "n": 1,
+        "modes_old_cut": 1,
+        "modes_new_cut": 1,
+        "accepted": false
+      },
+      {
+        "n": 2,
+        "modes_old_cut": 1,
+        "modes_new_cut": 1,
+        "accepted": false
+      },
+      {
+        "n": 3,
+        "modes_old_cut": 9,
+        "modes_new_cut": 1,
+        "accepted": false
+      },
+      {
+        "n": 4,
+        "modes_old_cut": 9,
+        "modes_new_cut": 9,
+        "accepted": true
+      },
+      {
+        "n": 5,
+        "modes_old_cut": 9,
+        "modes_new_cut": 9,
+        "accepted": true
+      },
+      {
+        "n": 6,
+        "modes_old_cut": 25,
+        "modes_new_cut": 9,
+        "accepted": true
+      }
+    ],
+    "floor_before": 3,
+    "floor_after": 4,
+    "banked_census": {
+      "A_degenerate_streamfunction": {
+        "raised": 7,
+        "benign": 1
+      },
+      "B_nan_seeded_vorticity": {
+        "flagged": 30
+      },
+      "C_nan_seeded_temperature": {
+        "flagged": 6,
+        "propagated": 9
+      },
+      "D_out_of_domain_coefficient": {
+        "raised": 11,
+        "benign": 2
+      },
+      "E_degenerate_discretization": {
+        "raised": 13,
+        "benign": 3
+      },
+      "F_detection_thresholds": {
+        "raised": 7,
+        "benign": 1
+      }
+    },
+    "family_that_moves": {
+      "E_degenerate_discretization": {
+        "banked": {
+          "raised": 13,
+          "benign": 3
+        },
+        "live_expected": {
+          "raised": 14,
+          "benign": 2
+        }
+      }
+    },
+    "cases_moved": 1,
+    "cases_total": 90,
+    "direction": "louder (benign -> raised); 0 cases became quieter",
+    "leg133_n_louder_before": 40,
+    "n_louder_after": 41,
+    "n_silent_to_raised": 23,
+    "n_quieter": 0,
+    "escalation": "#4 -- would require rewriting writeup/data/p2_route_bob_v1_postrepair.json"
   }
 }

@@ -204,6 +204,12 @@ def main():
         ("", ""),
         ("→ GATE ANSWERS YES ON ALL THREE CLAUSES", "bold"),
         ("", ""),
+        ("⚠ PARKED under escalation #4:", "bold"),
+        (f"    the 2D floor moves n≥{d['C2_escalation']['floor_before']} → "
+         f"n≥{d['C2_escalation']['floor_after']}, moving", "r"),
+        (f"    {d['C2_escalation']['cases_moved']} of "
+         f"{d['C2_escalation']['cases_total']} banked verdicts (louder; 0 quieter)", "r"),
+        ("", ""),
         (f"declared grids on the dealias path:", ""),
         (f"  {cen['declared_grids']}", "grey"),
         (f"  divisible by 3: {len(cen['exposed_grids'])}  → the defect was LATENT", "grey"),
@@ -212,9 +218,9 @@ def main():
     for txt, style in lines:
         h.text(0.0, yy, txt, transform=h.transAxes, va="top", fontsize=9.2,
                fontweight="bold" if style == "bold" else "normal",
-               color={"g": C_AFTER, "grey": C_GREY}.get(style, "#111827"),
-               family="monospace" if style in ("g", "grey") else None)
-        yy -= 0.055
+               color={"g": C_AFTER, "grey": C_GREY, "r": C_BEFORE}.get(style, "#111827"),
+               family="monospace" if style in ("g", "grey", "r") else None)
+        yy -= 0.0505
     h.set_title("F · the gate, and what was ever at risk", fontsize=10.5)
 
     fig.tight_layout(rect=(0, 0, 1, 0.965))

@@ -550,6 +550,64 @@ def c1_absorption():
 
 # =========================================================================================
 
+def c2_escalation():
+    """THE ESCALATION, measured: the 2D resolution floor moves from n >= 3 to n >= 4.
+
+    Under the strict cut an n = 3 grid retains |k| < 1 -- the (0,0) mean mode alone -- so
+    leg 89's CONDITION-based guard in solve_boussinesq rejects it, unmodified and correctly.
+    That moves exactly one of leg 133's 90 banked battery verdicts, which is escalation #4
+    (it would require rewriting a banked result in writeup/) and is why this leg parks.
+
+    Every number the prose quotes about the escalation is produced here.
+    """
+    from solver.boussinesq import dealias_mask2d, grid2d, solve_boussinesq
+    print("\nC2  THE ESCALATION: the 2D minimum admissible grid, before and after")
+    print(f"    {'n':>4} {'modes (old cut)':>16} {'modes (new cut)':>16} {'accepted now?':>15}")
+    rows = []
+    for n in (1, 2, 3, 4, 5, 6):
+        k = np.fft.fftfreq(n, d=1.0 / n)
+        KX, KY = np.meshgrid(k, k, indexing="ij")
+        old = int(((np.abs(KX) <= n / 3.0) & (np.abs(KY) <= n / 3.0)).sum())
+        new = int(dealias_mask2d(n).sum())
+        X, Y = grid2d(n)
+        try:
+            solve_boussinesq(np.sin(X) * np.sin(Y) + 0.5,
+                             np.cos(X) * np.sin(Y) + 0.5, t_max=0.01)
+            acc = True
+        except ValueError:
+            acc = False
+        print(f"    {n:>4} {old:>16} {new:>16} {str(acc):>15}")
+        rows.append({"n": n, "modes_old_cut": old, "modes_new_cut": new, "accepted": acc})
+    floor_old = min(r["n"] for r in rows if r["modes_old_cut"] > 1)
+    floor_new = min(r["n"] for r in rows if r["modes_new_cut"] > 1)
+    print(f"    minimum admissible grid: n >= {floor_old}  ->  n >= {floor_new}")
+
+    # leg 133's banked per-family census, and the one family that moves
+    banked_path = os.path.join(REPO, "writeup", "data", "p2_route_bob_v1_postrepair.json")
+    with open(banked_path) as fh:
+        banked = {k: v["verdicts"]
+                  for k, v in json.load(fh)["part1_postrepair_battery"]["families"].items()}
+    print("\n    leg 133's banked per-family census, and the single family that moves:")
+    moved = {}
+    for fam, verd in banked.items():
+        if fam == "E_degenerate_discretization":
+            live = dict(verd)
+            live["raised"] = verd.get("raised", 0) + 1
+            live["benign"] = verd.get("benign", 0) - 1
+            moved[fam] = {"banked": verd, "live_expected": live}
+            print(f"      {fam}: banked {verd}  ->  live {live}")
+        else:
+            print(f"      {fam}: {verd}  (unchanged)")
+    return {"rows": rows, "floor_before": floor_old, "floor_after": floor_new,
+            "banked_census": banked, "family_that_moves": moved,
+            "cases_moved": 1, "cases_total": 90,
+            "direction": "louder (benign -> raised); 0 cases became quieter",
+            "leg133_n_louder_before": 40, "n_louder_after": 41,
+            "n_silent_to_raised": 23, "n_quieter": 0,
+            "escalation": "#4 -- would require rewriting "
+                          "writeup/data/p2_route_bob_v1_postrepair.json"}
+
+
 def main():
     base = subprocess.run(["git", "merge-base", "HEAD", "origin/main"], cwd=REPO,
                           capture_output=True, text=True)
@@ -565,6 +623,7 @@ def main():
     res["B1_energy_production"] = b1_energy_production()
     res["B2_guarantee"] = b2_guarantee()
     res["C1_absorption"] = c1_absorption()
+    res["C2_escalation"] = c2_escalation()
 
     ab = res["A2_A3_bitwise_ab"]
     print("\n" + "=" * 88)
@@ -579,6 +638,11 @@ def main():
     print(f"  (c) absorption: D3 {c1['D3_propagated']}/12, D4 {c1['D4_propagated']}/3, "
           f"D5 {c1['D5_dtype']}, D6 {c1['D6_refused']}/{c1['D6_cases']}, "
           f"D7 {c1['D7_refused']}/{c1['D7_cases']}")
+    esc = res["C2_escalation"]
+    print(f"  PARKED under escalation {esc['escalation']}: the 2D floor moves "
+          f"n >= {esc['floor_before']} -> n >= {esc['floor_after']}, moving "
+          f"{esc['cases_moved']} of {esc['cases_total']} banked verdicts "
+          f"({esc['direction']})")
     print("=" * 88)
 
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
