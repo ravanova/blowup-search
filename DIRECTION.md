@@ -395,8 +395,8 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 100 | **HNA** — adversarial audit of holder_norms.py's norm/embedding-constant code | no | standard | `leg/hna-v1` | Under NaN-poisoned or degenerate weight-class inputs, does the norm computation silently return a wrong value? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | 97 | **WSA** — adversarial audit of weight_search.py's FitnessEngine | no | standard | `leg/wsa-v1` | Under a batch member driving the shared Jacobian near-singular, does FitnessEngine silently return a wrong fitness? |
-| LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
+| LEG-G | — | **OPEN** (97 landed, robust; 80 landed long ago) | — | — | — | — |
+| LEG-H | — | **OPEN** (both former occupants landed; see LEG-G note) | — | — | — | — |
 | LEG-I | 101 | **OLA** — adversarial audit of op_lower.py's lower-bound direction | no | standard | `leg/ola-v1` | Under adversarial/degenerate operator inputs, does op_lower.py ever return a bound that is not actually a lower bound? |
 | LEG-J | 102 | **JR2** — second freshness audit of experiments/JOURNAL.md and journal/ (legs 73–99) | no | light | `leg/jr2-v1` | Does the journal narrative and per-leg journal/leg_N.md file exist for every leg landed since leg 72's original pass? |
 
