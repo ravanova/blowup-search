@@ -96,6 +96,43 @@ CAPABILITIES = [
      "holds": "the marginal case and the invariant alpha_1",
      "validated": ("alpha_1 = 0 at a=0 == ALS eq (61); criticality sigma=3 at a=1/2 IS\n                   published (Xu arXiv:2607.19762 sec 6.1 + Table 1 row a=0.5 + Fig 3,\n                   's*(1/2)=3 exactly'); alpha_1 = +0.133683 there is SEARCHED-NOT-FOUND\n                   (leg 64, whole dissipative CLM corpus), i.e. measured, not\n                   independently validated"),
      "test": "test_critical_dissipation.py"},
+    # appended by leg 125 (Route-M2P) per ORCHESTRATION.md 5a -- own object's section, no reorder
+    {"module": "solver/dissipative_profile.py",
+     "object": "gCLM self-similar profiles at gamma = 2 (Route-M2P, leg 125)",
+     "holds": ("the FULL-TEXT transcription of J. Chen arXiv:1908.09385 with page/equation "
+               "provenance (Thm 1.1, eq (2.2), (2.7), (2.8), both criticality statements); "
+               "the BORDERED steady self-similar residual with an exact analytic Jacobian, "
+               "in two modes -- 'chen' (nu = 0, Chen's object as his text poses it) and "
+               "'viscous' (nu fixed, plus the diffusive-invariance constraint "
+               "c_omega + 2 c_l = 0 that (2.7) forces); a 4th-order cumulative velocity "
+               "operator; damped Newton; and the float certificate constants Y_0/Z_1/Z_2 in "
+               "a weighted sup norm against solver/target_selection.y0_budget"),
+     "validated": ("KNOWN-ANSWER GATE: Chen's closed form (2.2) nulls the discrete residual "
+                   "at 2.948e-04 -> 1.912e-05 -> 1.197e-06 -> 7.633e-08 over n = "
+                   "201/401/801/1601, observed order 3.95/4.00/3.97, and Newton independently "
+                   "recovers his c_l = 1/3 to 7.1e-06 at n=801. THE FINDING IS PART OF THE "
+                   "ENTRY: the profile Chen supplies AT gamma = 2 is the INVISCID one -- sec 2 "
+                   "p.4 opens 'Firstly, we study the inviscid problem, i.e. nu = 0' and states "
+                   "the diffusion term is 'asymptotically small', and nu enters only via (2.7) "
+                   "nu(t) ~ exp((c_omega + 2 c_l) t) = exp(-t/3) -> 0 and (2.8)'s vanishing "
+                   "c_omega correction. So there is NO dissipative steady profile here to "
+                   "certify, and mode='viscous' measures that directly: Newton STALLS at "
+                   "residual 3.75/2.65/2.65 with c_l running to -10.7. Object A is UNDER the "
+                   "radii-polynomial budget at every tested resolution (Y_0/budget 1.154e-07, "
+                   "1.926e-06, 5.800e-05 at s=0; best 1.325e-09 at s=1). ALSO PART OF THE "
+                   "ENTRY: this is the TRUNCATED DISCRETE system on |X| <= 745 in FLOAT with "
+                   "A = inv(J) -- the far field is NOT bounded and Z_1 is float conditioning, "
+                   "so Y_0 under budget is NECESSARY, never sufficient. Two instrument faults "
+                   "are fenced as regressions: the unbordered Jacobian is exactly singular "
+                   "(two gauge symmetries) and reported a resolution-INDEPENDENT Y_0 "
+                   "(0.179/0.190/0.148 at n=201/401/801, while the residual fell 4 orders), "
+                   "and the natural border U_X(0) = 8/3 is a TAUTOLOGY (invariant along the "
+                   "dilation family; bordered cond 1.233e+07 vs unbordered 1.225e+07, a factor "
+                   "0.99) -- the working border is Omega_X(0) = -2/b^3. CORRECTION BANKED: "
+                   "Chen's criticality formula is gamma = |a| - 1 (p.2), NOT the gamma = "
+                   "|a|^{-1} carried in from a prior leg-64 review, and it applies only for "
+                   "a <= -1. no_dynamics_run: true; nu is never swept"),
+     "test": "test_dissipative_profile.py"},
     {"module": "solver/marginal_flow.py", "object": "the augmented (Omega, mu) flow, driven",
      "holds": "time integration of (F_mu)+(M) as an initial-value problem",
      "validated": ("lambda_mu slope +2.0011 vs +2, zero at 1.50009 vs 1.5; `integrate` "
