@@ -359,23 +359,52 @@ def unbordered_Z_lower_bound(dp, gamma=float(GAMMA_CHEN), s=2.0):
     `Y_0` is: with `Y_0 = 0` the radii polynomial is `p(r) = Z_2 r^2 - (1 - Z_0 - Z_1) r`,
     which is nonnegative for every `r > 0`.
 
-    The float column is the numerical shadow of that argument for the concrete
-    `A = pinv(DF)` this repository would actually build -- it must come out at 1, and if it
-    does not, the DISCRETISATION is what is being measured, not the operator."""
+    THE FLOAT COLUMN, AND WHY IT IS REPORTED IN TWO REGIMES.  The naive shadow for the
+    concrete `A = pinv(DF)` this repository would build comes out at ~1e-9, NOT at 1 --
+    and that is not a refutation of the argument above, it is the discretisation inverting
+    a kernel that the continuum does not have.  `numpy`'s default `rcond` is a relative
+    `~n * eps ~ 1e-13`, while the grid's smallest singular value is only `sigma_min/sigma_max
+    ~ 1.3e-8` (n = 401) below the top -- far ABOVE the cutoff -- so `pinv` keeps the
+    near-null direction, treats `J` as invertible, and returns `A J = I` to round-off.
+    Truncate that direction at any honest cutoff (`rcond = 1e-6`, `1e-4`) -- which is what a
+    RIGOROUS `A` is forced to do, the direction being genuinely non-invertible in the
+    continuum -- and the shadow returns to 1, from below, converging as the grid refines
+    (0.99998 at n = 401, 0.9999990 at n = 801).
+
+    The clause is carried by the EXACT argument; the float columns are reported because the
+    discrepancy between them is itself the measurement (lesson 86: a single number here
+    would be a statement about `rcond`, not about the operator).  `sigma_ratio` is the
+    independent witness that the kernel is an operator fact: it collapses like `n^-6.7`
+    (1.376e-06 at n = 201 to 9.03e-12 at n = 1201), i.e. `DF` is becoming singular in the
+    continuum limit, exactly as an exact kernel element requires."""
     X = dp.X
     Om = orbit_profile(X, gamma)
     phi = orbit_generator(X, gamma)
     J = dp.jacobian_Omega(Om, float(C_L), float(C_OMEGA), 0.0)
-    A = np.linalg.pinv(J)
-    resid = phi - A @ (J @ phi)
+    sv = np.linalg.svd(J, compute_uv=False)
+    nphi = weighted_sup_norm(X, phi, s)
+
+    def shadow(rcond):
+        A = np.linalg.pinv(J) if rcond is None else np.linalg.pinv(J, rcond=rcond)
+        return weighted_sup_norm(X, phi - A @ (J @ phi), s) / nphi
+
     return {
         "bound_is_exact": True,
         "Z0_plus_Z1_lower_bound": 1.0,
         "argument": ("(I - A DF) phi = phi for every A, because DF phi = 0; hence "
                      "||I - A DF|| >= 1 in every norm, for every A, in every space "
                      "containing phi (every s <= 3)."),
-        "float_shadow_pinv": weighted_sup_norm(X, resid, s) / weighted_sup_norm(X, phi, s),
         "one_minus_Z_upper_bound": 0.0,
+        "sigma_min": float(sv[-1]),
+        "sigma_max": float(sv[0]),
+        "sigma_ratio": float(sv[-1] / sv[0]),
+        "float_shadow_pinv_default_rcond": shadow(None),
+        "float_shadow_pinv_rcond_1e-6": shadow(1e-6),
+        "float_shadow_pinv_rcond_1e-4": shadow(1e-4),
+        "float_shadow_note": ("the default-rcond column is ~1e-9 because numpy's cutoff "
+                              "(~1e-13 relative) is BELOW sigma_min/sigma_max, so pinv "
+                              "numerically inverts the near-kernel; the truncated columns "
+                              "are the honest shadow and return to the exact bound 1."),
     }
 
 
@@ -498,7 +527,6 @@ def certificate_battery(n=801, s=2.0, rho_max=8.0):
     # The bordered one, with Z_0 + Z_1 left as NOT MEASURED -- see the journal: this leg
     # has no interval enclosure of the tail, so it refuses to supply a number it cannot
     # bound (lesson 73).  What it CAN report is what the bordered budget would need.
-    z_needed = quad["Z2"] * 0.0   # Y_0 = 0 => any Z_0 + Z_1 < 1 closes; nothing else is needed
     return {
         "n": int(n), "weight_s": float(s), "rho_max": float(rho_max),
         "X_max": float(np.max(X)),
@@ -532,11 +560,97 @@ def certificate_battery(n=801, s=2.0, rho_max=8.0):
                                   "of the tail block, which this leg does not build and "
                                   "solver/interval_certificate.py's banked ceiling says "
                                   "this repository does not have."),
-            "unused": z_needed,
         },
         "guard_on_unbordered_constants": hypothesis_violations(
             (("Y_0", 0.0), ("Z_0", 0.0), ("Z_1", lower["Z0_plus_Z1_lower_bound"]),
              ("Z_2", quad["Z2"])), allow_none=False),
+    }
+
+
+def divergence_exponents(ns=(201, 301, 401, 601, 801, 1201), s=2.0):
+    """CLAUSE H7, decided: does `Z_2` SETTLE with resolution, or diverge?
+
+    Lesson 86 in its sharpest form.  A radii-polynomial `Z_2` is an OPERATOR norm; if the
+    discretisation's value grows without bound as `n -> infinity` then the quadratic map is
+    not bounded on the space that was chosen, and no single-resolution number for it is a
+    certificate constant -- it is a statement about the grid.
+
+    Reported as least-squares slopes in `log n`, over a 6x range of `n`, together with the
+    raw ladder so the fit can be checked rather than trusted.  The `sigma_ratio` slope is
+    the negative control that CAN come out flat: if the kernel were a grid artifact,
+    `sigma_min/sigma_max` would settle instead of collapsing."""
+    rows = []
+    for n in ns:
+        dp = DissipativeProfile(a=A_ADVECTION, n=n)
+        q = clause_quadratic_constant(dp, s=s)
+        J = dp.jacobian_Omega(orbit_profile(dp.X), float(C_L), float(C_OMEGA), 0.0)
+        sv = np.linalg.svd(J, compute_uv=False)
+        rows.append({"n": int(n), "Z2": q["Z2"], "norm_A_bordered": q["norm_A_bordered"],
+                     "norm_B_s": q["norm_B_s"], "sigma_ratio": float(sv[-1] / sv[0])})
+
+    ln = np.log([r["n"] for r in rows])
+    slopes = {k: float(np.polyfit(ln, np.log([r[k] for r in rows]), 1)[0])
+              for k in ("Z2", "norm_A_bordered", "norm_B_s", "sigma_ratio")}
+    return {
+        "weight_s": float(s), "rows": rows, "slopes_in_log_n": slopes,
+        "Z2_diverges": bool(slopes["Z2"] > 0.5),
+        "Z2_growth_over_ladder": rows[-1]["Z2"] / rows[0]["Z2"],
+        "sigma_ratio_collapse_over_ladder": rows[0]["sigma_ratio"] / rows[-1]["sigma_ratio"],
+        "reading": ("Z_2 grows like n^%.2f over a %gx range of n, so it is NOT an operator "
+                    "constant in the weighted sup space at s = %g; sigma_min/sigma_max "
+                    "collapses like n^%.2f, so the kernel is an operator fact and not the "
+                    "grid." % (slopes["Z2"], rows[-1]["n"] / rows[0]["n"], s,
+                               slopes["sigma_ratio"])),
+    }
+
+
+def gate_verdict(battery, divergence):
+    """Route-M2CI's pre-committed gate, answered on the battery -- never on `Y_0`.
+
+    THE GATE (verbatim, pre-committed): "Does a full radii-polynomial certificate close on
+    Chen's gamma = 2 inviscid profile (Object A), using leg 125's own transcribed constants
+    and recovered shape as the starting construction, with every hypothesis of the
+    certificate framework satisfied (not just the budget comparison leg 125 already made)?"
+
+    The answer is decided by two clauses that fail for reasons that are not numerical, and
+    a third framing fact that would drain the YES branch even if they did not."""
+    exact_ok = battery["H2_exact_defect_is_zero"]
+    z_lb = battery["H5_Z_lower_bound"]["Z0_plus_Z1_lower_bound"]
+    return {
+        "gate": ("Does a full radii-polynomial certificate close on Chen's gamma = 2 "
+                 "inviscid profile (Object A), with EVERY hypothesis of the framework "
+                 "satisfied, not just the budget comparison leg 125 already made?"),
+        "answer": "NO",
+        "failing_clauses": ["H3 isolation", "H5 contraction (Z_0 + Z_1 < 1)",
+                            "H7 quadratic constant Z_2 bounded"],
+        "H3_H5_reason": (
+            "Object A is not an isolated zero.  It lies on the EXACT one-parameter dilation "
+            "orbit Psi_g = -(16/3) g^{3/2} X / (X^2 + g)^2, whose residual numerator is the "
+            "ZERO POLYNOMIAL in exact rational arithmetic at every g tested (controls with "
+            "perturbed amplitude are nonzero).  The tangent phi = dPsi_g/dg is therefore an "
+            "exact kernel element of DF, so (I - A DF) phi = phi and ||I - A DF|| >= 1 for "
+            "EVERY admissible A, in every space containing phi (every s <= 3).  Hence "
+            "Z_0 + Z_1 >= %g and the contraction factor 1 - Z_0 - Z_1 <= 0.  No choice of "
+            "A, weight s, or truncation repairs this: it is an algebraic property of the "
+            "steady equation's symmetry group, not a numerical shortfall." % z_lb),
+        "H7_reason": divergence["reading"],
+        "why_Y0_was_never_the_binding_clause": (
+            "Leg 125 measured Y_0/budget between 1.325e-09 and 5.800e-05 and read that as "
+            "headroom.  This leg shows Y_0 is EXACTLY ZERO -- the best value the framework "
+            "admits, since the centre is an exact solution -- and the certificate still "
+            "cannot close.  Budget-under was never evidence about the clauses that fail."),
+        "and_the_YES_branch_would_have_been_hollow": (
+            "Because Y_0 = 0 exactly, the radii polynomial reduces to "
+            "p(r) = Z_2 r^2 - (1 - Z_0 - Z_1) r, so ANY bordered Z_0 + Z_1 < 1 would close "
+            "it -- and would assert a zero at a point ALREADY PUBLISHED IN CLOSED FORM "
+            "(Chen arXiv:1908.09385 eq (2.2); the whole branch a <= 1 in HQWW "
+            "arXiv:2305.05895).  The existence content would be nil.  This was written "
+            "down in writeup/novelty/leg_187.md BEFORE any number here was computed."),
+        "scope": ("INVISCID (nu = 0), Chen's own framing.  Nothing here bears on the "
+                  "viscous 'missing rung' question, which remains exactly as open as "
+                  "leg 125 left it."),
+        "exact_defect_verified": bool(exact_ok),
+        "Z0_plus_Z1_lower_bound": float(z_lb),
     }
 
 
