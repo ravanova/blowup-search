@@ -1,0 +1,336 @@
+{
+  "leg": 189,
+  "route": "ROUTE-XUTRI",
+  "paper": "Xu, arXiv:2607.19762v1 [physics.flu-dyn], 22 Jul 2026",
+  "paper_url": "https://arxiv.org/abs/2607.19762",
+  "read_at": "full text, pdftotext -layout of the fetched PDF (Papers/ is gitignored)",
+  "reference_values": {
+    "lss_a_c_full": 0.6890665337007457,
+    "lss_a_c_stored_here": 0.6890665,
+    "ours_a_c": 0.693493,
+    "ours_a_c_pct_err": 0.6423859065511849,
+    "ours_alpha_half_c_l_rel": 7.7e-05
+  },
+  "X1_spectral_columns_are_images_of_cl": {
+    "rows": [
+      {
+        "a": 0.0,
+        "c_l": 1.0,
+        "row_kind": "exact CLM anchor",
+        "far_field_printed": 0.5,
+        "far_field_from_cl": 0.5,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 1.0,
+        "s_star_from_cl": 1.0,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.1,
+        "c_l": 0.873,
+        "row_kind": "degree-6 interpolation",
+        "far_field_printed": 0.564,
+        "far_field_from_cl": 0.5635,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 1.145,
+        "s_star_from_cl": 1.145475372279496,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.2,
+        "c_l": 0.7474,
+        "row_kind": "Newton solve",
+        "far_field_printed": 0.626,
+        "far_field_from_cl": 0.6263000000000001,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 1.338,
+        "s_star_from_cl": 1.337971635001338,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.3,
+        "c_l": 0.6178,
+        "row_kind": "degree-6 interpolation",
+        "far_field_printed": 0.691,
+        "far_field_from_cl": 0.6911,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 1.619,
+        "s_star_from_cl": 1.6186468112657817,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.4,
+        "c_l": 0.4809,
+        "row_kind": "Newton solve",
+        "far_field_printed": 0.76,
+        "far_field_from_cl": 0.75955,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 2.079,
+        "s_star_from_cl": 2.079434393844874,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.5,
+        "c_l": 0.3333,
+        "row_kind": "degree-6 interpolation",
+        "far_field_printed": 0.833,
+        "far_field_from_cl": 0.83335,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 3.0,
+        "s_star_from_cl": 3.0003000300030003,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.6,
+        "c_l": 0.1691,
+        "row_kind": "Newton solve",
+        "far_field_printed": 0.915,
+        "far_field_from_cl": 0.91545,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 5.914,
+        "s_star_from_cl": 5.913660555884093,
+        "s_star_dev_at_printed_precision": 0.0
+      },
+      {
+        "a": 0.65,
+        "c_l": 0.0775,
+        "row_kind": "degree-6 interpolation",
+        "far_field_printed": 0.961,
+        "far_field_from_cl": 0.96125,
+        "far_field_dev_at_printed_precision": 0.0,
+        "s_star_printed": 12.9,
+        "s_star_from_cl": 12.903225806451614,
+        "s_star_dev_at_printed_precision": 0.0
+      }
+    ],
+    "decoy_rows": [
+      {
+        "a": 0.0,
+        "decoy_far_field_1_minus_cl": 0.0,
+        "decoy_far_field_abs_dev": 0.5,
+        "decoy_s_star_2_over_cl": 2.0,
+        "decoy_s_star_abs_dev": 1.0
+      },
+      {
+        "a": 0.1,
+        "decoy_far_field_1_minus_cl": 0.127,
+        "decoy_far_field_abs_dev": 0.43699999999999994,
+        "decoy_s_star_2_over_cl": 2.290950744558992,
+        "decoy_s_star_abs_dev": 1.1459507445589918
+      },
+      {
+        "a": 0.2,
+        "decoy_far_field_1_minus_cl": 0.25260000000000005,
+        "decoy_far_field_abs_dev": 0.37339999999999995,
+        "decoy_s_star_2_over_cl": 2.675943270002676,
+        "decoy_s_star_abs_dev": 1.3379432700026759
+      },
+      {
+        "a": 0.3,
+        "decoy_far_field_1_minus_cl": 0.3822,
+        "decoy_far_field_abs_dev": 0.30879999999999996,
+        "decoy_s_star_2_over_cl": 3.2372936225315634,
+        "decoy_s_star_abs_dev": 1.6182936225315634
+      },
+      {
+        "a": 0.4,
+        "decoy_far_field_1_minus_cl": 0.5191,
+        "decoy_far_field_abs_dev": 0.2409,
+        "decoy_s_star_2_over_cl": 4.158868787689748,
+        "decoy_s_star_abs_dev": 2.079868787689748
+      },
+      {
+        "a": 0.5,
+        "decoy_far_field_1_minus_cl": 0.6667000000000001,
+        "decoy_far_field_abs_dev": 0.1662999999999999,
+        "decoy_s_star_2_over_cl": 6.0006000600060005,
+        "decoy_s_star_abs_dev": 3.0006000600060005
+      },
+      {
+        "a": 0.6,
+        "decoy_far_field_1_minus_cl": 0.8309,
+        "decoy_far_field_abs_dev": 0.08410000000000006,
+        "decoy_s_star_2_over_cl": 11.827321111768185,
+        "decoy_s_star_abs_dev": 5.913321111768186
+      },
+      {
+        "a": 0.65,
+        "decoy_far_field_1_minus_cl": 0.9225,
+        "decoy_far_field_abs_dev": 0.03849999999999998,
+        "decoy_s_star_2_over_cl": 25.806451612903228,
+        "decoy_s_star_abs_dev": 12.906451612903227
+      }
+    ],
+    "n_rows": 8,
+    "n_rows_exact_at_printed_precision": 8,
+    "worst_far_field_dev": 0.0,
+    "worst_s_star_dev": 0.0,
+    "decoy_worst_far_field_dev": 0.5,
+    "decoy_worst_s_star_dev": 12.906451612903227,
+    "negative_control_fired": true,
+    "quote_far_field": "Table 1 caption: 'the focusing exponent c_l(a) ..., the far-field-line distance 1 - c_l/2, the exponent s*(a) = 1/c_l, and the anchor cross-checks'",
+    "verdict": "Both of Xu's spectral-side columns are exact algebraic images of the single profile quantity c_l: 8/8 rows reproduce to the printed digit with zero deviation, worst deviation 0.0e+00, while the two decoy maps miss by 0.500 and 12.906.  The sec 3 spectral picture therefore CONSUMES the sec 2 branch and supplies no independent determination of c_l, a_c or alpha."
+  },
+  "X2_endpoint_from_xus_own_bracket": {
+    "bracket": {
+      "a_lo": 0.68,
+      "c_l_lo": 0.0185,
+      "a_hi": 0.72,
+      "c_l_hi": -0.0659
+    },
+    "a_star_recomputed": 0.6887677725118484,
+    "a_star_as_printed_by_xu": 0.6888,
+    "abs_dev_from_xus_printed_endpoint": 3.2227488151570505e-05,
+    "rounds_to_xus_printed_endpoint": true,
+    "lss_a_c_full": 0.6890665337007457,
+    "rel_err_vs_lss": 0.00043357379046217947,
+    "pct_err_vs_lss": 0.04335737904621795,
+    "xu_claimed_pct": 0.04,
+    "claim_consistent": true,
+    "local_slope_dcl_da": -2.110000000000004,
+    "quote": "sec 2: 'the computed c_l(a) decreases monotonically from 1 at a = 0 and crosses zero at a* ~ 0.6888 (linear interpolation between the computed branch values c_l(0.68) = 0.0185 and c_l(0.72) = -0.0659), to be compared with the published a_c = 0.6890665 of [4].  The two agree to 0.04% relative error (Figure 1), which is the one quantitative check on the recomputed branch.'",
+    "verdict": "Xu's endpoint is internally consistent: his two printed branch values give a* = 0.6887678, which rounds to his printed 0.6888, and the relative error against LSS is 0.043%, which rounds to his printed 0.04%.  The third source's arithmetic checks out."
+  },
+  "X3_bracket_sensitivity_control": {
+    "bracket_main": {
+      "a_lo": 0.68,
+      "a_hi": 0.72,
+      "a_star": 0.6887677725118484,
+      "pct_err_vs_lss": 0.04335737904621795
+    },
+    "bracket_from_table_a065": {
+      "a_lo": 0.65,
+      "c_l_lo": 0.0775,
+      "a_hi": 0.72,
+      "c_l_hi": -0.0659,
+      "a_star": 0.6878312412831241,
+      "pct_err_vs_lss": 0.17927041253726334
+    },
+    "bracket_wide_a060": {
+      "a_lo": 0.6,
+      "c_l_lo": 0.1691,
+      "a_hi": 0.72,
+      "c_l_hi": -0.0659,
+      "a_star": 0.6863489361702128,
+      "pct_err_vs_lss": 0.39438826261632604
+    },
+    "a_star_spread_main_vs_a065": 0.00093653122872428,
+    "pct_spread": 0.1359130334910454,
+    "ratio_alt_over_main_pct": 4.134715162237212,
+    "control_reports_a_different_answer": true,
+    "verdict": "Three admissible brackets, all built from Xu's own published branch values through one code path, put the crossing at 0.688768, 0.687831 and 0.686349 -- a spread of 9.37e-04 in a, i.e. 0.14% of a_c, which is 4.1x the headline agreement when the a = 0.65 bracket is used.  The 0.04% is bracket-dependent, not a resolved determination."
+  },
+  "X4_resolution_propagated": {
+    "xu_two_grid_c_l": 0.0005,
+    "xu_a0_solution_accuracy": 0.0003,
+    "xu_c_l_at_zero": 1.00024,
+    "xu_c_l_at_zero_err_vs_exact_1": 0.00024000000000001798,
+    "local_slope_dcl_da": -2.110000000000004,
+    "implied_delta_a_from_two_grid": 0.00023696682464454934,
+    "implied_delta_a_from_a0_floor": 0.0001421800947867296,
+    "implied_rel_uncertainty_on_a_star": 0.0003438954194624427,
+    "observed_rel_disagreement_with_lss": 0.00043357379046217947,
+    "observed_over_uncertainty": 1.2607722171464708,
+    "cross_check_resolves_a_c": false,
+    "quote": "sec 2: 'the two-grid difference is |c_l(N=1024) - c_l(2048)| <~ 5e-4 (about three significant figures), a self-consistency measure rather than a certified continuum error bound (it can understate the true error against the high-precision branch of [4], which at nonzero a agrees only to about two or three significant figures ...)'",
+    "verdict": "Xu's own two-grid self-consistency of 5e-04 on c_l, pushed through his local slope dc_l/da = -2.110, is an uncertainty of 2.37e-04 on a*, i.e. 0.034% of a_c.  His observed disagreement with LSS is 0.043%, only 1.26x that -- and his own error bar is explicitly NOT a bound and may understate.  The cross-check is consistent with LSS but does not resolve a_c: it confirms two or three significant figures, which is what he claims for it."
+  },
+  "X5_alpha_half_provenance_and_precision": {
+    "printed_c_l_half": 0.3333,
+    "printed_s_star_half": 3.0,
+    "exact_c_l_half": 0.3333333333333333,
+    "gap_printed_vs_exact": 3.333333333332966e-05,
+    "xu_two_grid_resolution": 0.0005,
+    "gap_over_resolution": 0.06666666666665932,
+    "row_is_under_resolved": true,
+    "row_kind_per_xu": "degree-6 interpolation",
+    "precision_ladder": [
+      {
+        "source": "LSS arXiv:2010.01201 (35)-(36), leg 161 L2",
+        "route": "root of the scalar equation 3p^2 - p = 0",
+        "rel_precision_on_c_l": 0.0,
+        "kind": "exact, closed form"
+      },
+      {
+        "source": "ALS arXiv:2207.07548 (49)-(50), this repo J-3",
+        "route": "cold integration of the published a = 1/2 pole system",
+        "rel_precision_on_c_l": 7.7e-05,
+        "kind": "numerical"
+      },
+      {
+        "source": "Xu arXiv:2607.19762 Table 1 a = 0.5 row",
+        "route": "degree-6 interpolation of a Delta_a = 0.04 Newton branch",
+        "rel_precision_on_c_l": 0.0015,
+        "kind": "numerical, and CITED as exact"
+      }
+    ],
+    "ranked_best_to_worst": [
+      "LSS arXiv:2010.01201 (35)-(36), leg 161 L2",
+      "ALS arXiv:2207.07548 (49)-(50), this repo J-3",
+      "Xu arXiv:2607.19762 Table 1 a = 0.5 row"
+    ],
+    "xu_rel_precision_on_c_l_half": 0.0015,
+    "ours_over_xu_precision_factor": 19.48051948051948,
+    "quote_caption": "Table 1 caption: 'c_l(1/2) = 1/3 is exact ([20]; also [4, Thm. 2]).'",
+    "quote_sec6": "sec 6: 'The branch value is tested at a = 1/2, where s* = 3 exactly (c_l(1/2) = 1/3 by the exact solution of [20]; also [4, Thm. 2]) ... The only quantitative validation of the branch itself is the a_c cross-check of Section 2.'",
+    "verdict": "Xu does not derive alpha(1/2) = 3: he cites it, twice, from J. Chen [20] and LSS [4, Thm. 2].  His own Table 1 row is a degree-6 interpolation printing c_l = 0.3333, which sits 3.3e-05 from the exact 1/3 -- 15x BELOW his own 5e-04 resolution, so the row cannot distinguish a computation from a transcription of the cited value and carries no independent information.  On alpha(1/2) this repository's cold ALS integration is 19x more precise than Xu's stated branch resolution, and leg 161's LSS route is exact.  On this constant Xu is the WORST of the three sources -- the mirror image of J-8."
+  },
+  "X6_spectral_diagnostic_output": {
+    "evans_n_disc_value": 0,
+    "evans_a_range": [
+      0.0,
+      0.65
+    ],
+    "a_c_reference": 0.6890665337007457,
+    "coverage_gap_to_a_c": 0.03906653370074564,
+    "coverage_gap_frac_of_a_c": 0.05669486441451795,
+    "diagnostic_is_constant_over_range": true,
+    "n_distinct_values_reported": 1,
+    "quote_result": "sec 3.2: 'On the parameter values we ran it returns n_disc(a) = 0 for a in [0, 0.65]; we report this as exploratory evidence only.'",
+    "quote_status": "sec 3.2: 'This strand is exploratory: the computation records a per-point phase-increment and integer-defect diagnostic and anchors the a = 0 value to the proven empty strip of Theorem 2, but it does not enforce these diagnostics as hard gates, and its run outputs are not retained.'",
+    "quote_gap": "sec 1: 'beyond a = 0 the discrete exclusion rests on numerical evidence at the sampled advections (Section 3.2)'",
+    "verdict": "The one spectral computation Xu runs across the advection branch returns the single constant integer 0 over [0.0, 0.65], is declared exploratory with three recorded gaps and unretained outputs, and stops 0.0391 short of a_c (5.7% of the way to it).  A constant carries no location information; nothing in the spectral machinery locates a_c even in principle as run."
+  },
+  "X7_provenance_ledger": {
+    "ledger": [
+      {
+        "constant": "a_c = 0.6890665",
+        "xu_machinery": "spectral picture (sec 3: essential spectrum, gap 1/2, point spectrum {0,1}, Hardy-Mellin resolvent, sec 3.2 Evans determinant)",
+        "produces_it": false,
+        "why": "The spectral objects are functions of (Omega, c_l), which sec 2 supplies; Table 1's far-field column is exactly 1 - c_l/2 (X1).  The only branch-wide spectral computation returns a constant integer over [0, 0.65] and never reaches a_c (X6).",
+        "quote": "sec 1: 'We recompute c_l(a) independently ... to supply the operator coefficients (Omega, c_l) that Proposition 1 and the exponent s* below need at a > 0'"
+      },
+      {
+        "constant": "a_c = 0.6890665",
+        "xu_machinery": "profile continuation (sec 2: Newton continuation on a compactified real-line grid)",
+        "produces_it": true,
+        "why": "Genuinely independent of LSS -- started from the exact a = 0 CLM anchor and stepped up in Delta_a = 0.04, using no LSS data -- and lands at a* ~ 0.6888, 0.043% from LSS (X2).  But it is a profile-equation solve, the same KIND of object as this repository's own instrument, not spectral-gap machinery; it is bracket-dependent (X3) and does not resolve a_c beyond two or three significant figures (X4).",
+        "quote": "sec 2: 'we take theirs as the reference; the recomputation here is an independent lower-order cross-check'"
+      },
+      {
+        "constant": "alpha(1/2) = 3",
+        "xu_machinery": "spectral picture (sec 3) and the sec 6 exponent s*(a) = 1/c_l",
+        "produces_it": false,
+        "why": "s* is defined AS 1/c_l (Eq. (6.3)) -- an algebraic image of the profile branch, verified exactly against every Table 1 row (X1) -- and Xu calls it a formal scaling diagnostic, not a threshold.",
+        "quote": "sec 6.1: 's* is a formal scaling (dissipation-relevance) threshold read off the self-similar exponent ... and s* is not the sharp critical dissipation curve separating blow-up from global regularity, which for this family remains unknown.'"
+      },
+      {
+        "constant": "alpha(1/2) = 3",
+        "xu_machinery": "profile continuation (sec 2 branch, Table 1 a = 0.5 row)",
+        "produces_it": false,
+        "why": "Cited, not derived: the value is attributed to [20] and [4, Thm. 2] in both the Table 1 caption and sec 6.  The interpolated row printing 0.3333 sits 15x below Xu's own resolution and so carries no independent information (X5).",
+        "quote": "sec 6: 'The only quantitative validation of the branch itself is the a_c cross-check of Section 2.'"
+      }
+    ],
+    "n_cells": 4,
+    "n_cells_producing": 1,
+    "spectral_cells_producing": 0,
+    "materially_different_value_found": false,
+    "verdict": "Four cells (two constants x two machineries).  Exactly one produces a number, and it is the non-spectral one: sec 2's profile continuation on a_c.  Zero spectral cells produce either constant."
+  },
+  "gate_question": "does Xu's spectral-picture framework, applied to its own stated spectral data (not borrowed from ALS/LSS), reproduce a_c=0.6890665 and/or alpha(1/2)=3 to a precision comparable to this repository's existing re-derivations, using only techniques Xu's own paper states?",
+  "gate_answer": "NO -- and NOT materially different: null result, not a discrepancy",
+  "gate_branch_taken": "no (Xu's framework doesn't bear on either constant) -> report clearly, bank as closing the triangulation question with a null result, not a discrepancy.  No escalation: no materially different value exists.  literature_gates.py is NOT touched -- the yes-branch does not apply.",
+  "gate_verdict": "NO, on both constants, and for two different reasons.  (a) Xu's SPECTRAL machinery produces neither: its two branch-wide outputs are algebraic images of the profile quantity c_l -- the far-field line is exactly 1 - c_l/2 and s* is exactly 1/c_l, reproduced with zero deviation on 8/8 Table 1 rows while two decoy maps miss by 0.4-6 -- and its one branch-wide spectral computation returns a constant integer over [0, 0.65], declared exploratory, stopping short of a_c.  (b) Xu's NON-spectral sec 2 Newton continuation does independently recompute a_c, landing at 0.6887678, 0.043% from LSS -- but Xu himself calls it 'an independent lower-order cross-check' against LSS as 'the reference', it is bracket-dependent, and his own resolution admits only 1.26x margin over the observed disagreement, so it confirms two-to-three significant figures rather than resolving the constant.  On alpha(1/2) = 3 Xu is explicit that he CITES the value from J. Chen [20] and LSS [4, Thm. 2] and that 'the only quantitative validation of the branch itself is the a_c cross-check'; his interpolated Table 1 row is 15x under-resolved against his own error bar.  NO MATERIALLY DIFFERENT VALUE EXISTS ON EITHER CONSTANT, so there is no three-way disagreement and nothing to escalate.",
+  "what_this_changes": "The 'worst of three sources' framing (J-8) survives on the NUMBER and is narrowed on the STRUCTURE: the third source is a self-declared lower-order cross-check against LSS, not a structurally independent derivation, and it is non-spectral.  So a_c has ONE primary determination (LSS) plus two lower-order replications of the same profile equation (Xu's, 0.043%; this repository's, 0.64%), not three independent sources.  On alpha(1/2) = 3 the ordering INVERTS: this repository's two derivations (LSS (35)-(36) exact; ALS (49)-(50) at 7.7e-5) are both stronger than Xu, who cites rather than computes it.",
+  "runtime_s": 0.00013208389282226562
+}
