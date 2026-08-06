@@ -11,20 +11,28 @@ rate of memory (standing lesson 68).
 
 It re-runs all EIGHT of leg 114's SILENT_WRONG cases.  Leg 150's own arm A
 covered FIVE of them (its four M3 entries are one case at four dip depths, and
-two of its ten cases are ones leg 150 introduced itself).  Seven are fixed and
-one is not.
+two of its ten cases are ones leg 150 introduced itself).  All eight are now
+fixed.
 
-  *** THE SURVIVING CORRUPTION: `pure_sign_noise` still returns leg 114's
-      recorded value, 0.03502503128911139, BIT-IDENTICALLY. ***
+  *** UPDATE (leg 0/BENCH, bench/fix-collocation-newton-scale-invariant-gap):
+      `pure_sign_noise` NO LONGER returns leg 114's recorded value.
+      critical_radius gained a second, orthogonal predicate -- `min_isolation`,
+      a pure node-count that no OTHER sign change lie within `min_isolation`
+      nodes of a candidate -- because the relative-depth guard alone is
+      SCALE-INVARIANT and this field has no scale (every run is one node long
+      with |E| = max|E|).  The two `check_KNOWN_GAP_*` checks below are
+      INVERTED to `check_REPAIRED_*`, in leg 92's own convention: they now
+      assert the fix, at the field this leg named, and would fail again if a
+      future change bought the gap back. ***
 
-Three checks are named KNOWN_GAP: that corruption, its control (no admissible
-threshold in the landed predicate class repairs it -- so it is a class ceiling,
-not a tuning slip), and a SECOND, smaller gap this leg found in the same guard
-(one non-finite entry anywhere in E disables the magnitude test entirely).
+One check is still named KNOWN_GAP: a SECOND, smaller gap this leg found in the
+same guard (one non-finite entry anywhere in E disables the magnitude test
+entirely) that this repair's territory did not extend to closing -- see its own
+docstring for why it is untouched on purpose.
 
-Those checks assert the corruptions AS MEASURED, at leg 114's own values, in leg
-92's convention: a later repair FAILS this file and must INVERT them rather than
-weaken them.  The other checks pin the repair that did land and the bit-identity
+That check asserts the corruption AS MEASURED, at leg 166's own values, in leg
+92's convention: a later repair FAILS this file and must INVERT it rather than
+weaken it.  The other checks pin the repair that did land and the bit-identity
 that licenses it, so a future patch cannot buy the gaps back by breaking them.
 
 Run:  .venv/bin/python test_collocation_newton_postrepair.py
@@ -91,40 +99,51 @@ def _load_prerepair():
 
 
 @check
-def check_KNOWN_GAP_pure_sign_noise_still_returns_the_prerepair_radius():
-    """KNOWN GAP.  leg 114 `pure_sign_noise`: NOT fixed by leg 150.
+def check_REPAIRED_pure_sign_noise_no_longer_returns_the_prerepair_radius():
+    """INVERTED (leg 0/BENCH).  leg 114 `pure_sign_noise`: now fixed.
 
-    E = (-1)^k is pure alternating sign noise with no crossing to find, and
-    critical_radius returns leg 114's recorded 0.03502503128911139 unchanged.
+    E = (-1)^k is pure alternating sign noise with no crossing to find.
+    Pre-repair (and still, at min_rel_depth=0.0) critical_radius returned leg
+    114's recorded 0.03502503128911139.  It now returns inf -- the truth.
 
-    MECHANISM, and it is a predicate-CLASS ceiling rather than a threshold:
-    the landed guard requires each side's constant-sign excursion to reach
-    min_rel_depth * max|E|, which is SCALE-INVARIANT.  This field has no scale --
-    every run is one node long with |E| = 1, which is also max|E| -- so the
-    excursion ratio is exactly 1.0 on both sides, the largest value the test can
-    ever see.  No admissible threshold rejects it (see the control below).
-
-    A REPAIR MUST INVERT THIS CHECK, not weaken it.
+    MECHANISM OF THE FIX: the relative-depth guard alone is a predicate-CLASS
+    ceiling, not a threshold -- it requires each side's constant-sign excursion
+    to reach min_rel_depth * max|E|, which is SCALE-INVARIANT, and this field
+    has no scale (every run is one node long with |E| = 1 = max|E|, so the
+    excursion ratio is exactly 1.0 on both sides, the largest value that test
+    can ever see).  The added `min_isolation` guard is a DIFFERENT predicate,
+    outside that class: it is a pure node-count, never a magnitude, and it
+    requires no OTHER sign change lie within `min_isolation` nodes of a
+    candidate.  Pure sign noise has a sign change at (up to) every node --
+    799 of 799 possible positions here -- so no candidate is isolated.  Real
+    crossings (see the control below) are the ONLY sign change in their field.
     """
     E = (-1.0) ** np.arange(XG.size)          # leg 114's construction, verbatim
     xc = critical_radius(XG, E)
     leg114_recorded = 0.03502503128911139
-    assert xc == leg114_recorded, (
-        f"KNOWN GAP moved: expected leg 114's recorded {leg114_recorded!r}, got {xc!r}. "
-        "If a repair landed, INVERT this check.")
-    # and it is bit-identical to the pre-repair path
+    assert not np.isfinite(xc), (
+        f"pure_sign_noise still returns a finite radius: {xc!r} -- the gap is back")
+    # the pre-repair path (min_rel_depth=0.0) is UNTOUCHED by this repair: it
+    # still reproduces leg 114's recorded value bitwise, exactly as before.
     assert critical_radius(XG, E, min_rel_depth=0.0) == leg114_recorded
-    print(f"  KNOWN GAP  pure_sign_noise -> Xc = {xc!r} (leg 114's recorded value, "
-          f"bit-identical; truth is 'no crossing')")
+    print(f"  REPAIRED   pure_sign_noise -> Xc = {xc!r} (was leg 114's recorded "
+          f"{leg114_recorded!r}; min_rel_depth=0.0 still reproduces it bitwise)")
 
 
 @check
-def check_KNOWN_GAP_control_no_admissible_threshold_separates_it():
-    """The control that CAN report the other answer (standing lesson 90).
+def check_REPAIRED_control_the_isolation_predicate_separates_it():
+    """INVERTED (leg 0/BENCH) control (standing lesson 90).
 
-    If some min_rel_depth rejected the sign noise while keeping every real
-    crossing, the gap would be a tuning bug.  Measured: the two requirements are
-    disjoint over the whole parameter range.
+    Pre-repair, no min_rel_depth rejected the sign noise while keeping every
+    real crossing -- 0 of 11 thresholds did both, because relative depth alone
+    is the wrong predicate CLASS for a field with no scale.  The added
+    `min_isolation` guard is a different predicate (a node count, gated the
+    same way the magnitude guard is: off at min_rel_depth=0.0, on otherwise),
+    and it is orthogonal to the depth ratio -- so now the threshold ladder's
+    LOW end (where the relative-depth test alone kept the noise) is exactly
+    where the isolation test rejects it while every real crossing survives.
+    The ladder's HIGH end still fails on relative depth alone, unrelated to
+    this repair: that is leg 150's own control, re-measured here, not moved.
     """
     Enoise = (-1.0) ** np.arange(XG.size)
     real = []
@@ -143,17 +162,25 @@ def check_KNOWN_GAP_control_no_admissible_threshold_separates_it():
                    if np.isfinite(critical_radius(X, E, min_rel_depth=d)))
         if rejected and kept == len(real):
             both.append(d)
-    assert not both, (
-        f"a threshold now does BOTH ({both}) -- the gap is tunable after all; "
-        "re-read the KNOWN GAP check above, it may be invertible")
-    # and specifically: the smallest threshold that rejects the noise kills them all
-    assert np.isfinite(critical_radius(XG, Enoise, min_rel_depth=1.0))
+    # d=0.0 (the pre-repair path, isolation OFF) must still be the one place
+    # nothing rejects the noise -- the repair does not touch that escape hatch.
+    assert np.isfinite(critical_radius(XG, Enoise, min_rel_depth=0.0)), (
+        "min_rel_depth=0.0 no longer reproduces the pre-repair bypass")
+    assert both, (
+        "no threshold does BOTH any more -- the isolation guard stopped "
+        "separating the noise from the real crossings; re-check min_isolation")
+    # the module's own default (1e-2) is inside the separating range
+    assert 1e-2 in both, f"the shipped default 1e-2 no longer separates them: {both}"
+    # and the control that could still fail: a large enough relative-depth
+    # threshold rejects the real crossings too, on the ORIGINAL mechanism,
+    # unrelated to the isolation guard -- unmoved by this repair.
     kept_at_1 = sum(1 for X, E in real
                     if np.isfinite(critical_radius(X, E, min_rel_depth=1.0)))
     assert kept_at_1 == 0, f"expected all real crossings rejected at d=1.0, kept {kept_at_1}"
-    print(f"  KNOWN GAP control: 0 of 11 thresholds reject the sign noise AND keep all "
-          f"{len(real)} real crossings; at d=1.0 the noise survives and 0/{len(real)} "
-          f"real crossings do")
+    print(f"  REPAIRED   control: {len(both)} of 11 thresholds (including the shipped "
+          f"default 1e-2) now reject the sign noise AND keep all {len(real)} real "
+          f"crossings; d=0.0 still bypasses (untouched) and d=1.0 still rejects "
+          f"everything (leg 150's original ceiling, unmoved)")
 
 
 # ===========================================================================
@@ -398,8 +425,11 @@ def main():
     print(f"{len(_checks)}/{len(_checks)} checks ran, {n_gap} of them KNOWN GAPS.")
     print("Leg 150's repair holds on everything it tested and moves nothing clean. "
           "Leg 114's `pure_sign_noise` -- one of the 3 of its 8 that leg 150's arm A "
-          "never re-ran -- is STILL BROKEN, bit-identically, and no admissible "
-          "threshold in the landed predicate class repairs it.")
+          "never re-ran -- is now REPAIRED (leg 0/BENCH): a node-count isolation "
+          "predicate, orthogonal to the scale-invariant relative-depth guard, "
+          "closes it without moving a single clean-input float. One smaller, "
+          "separately-tracked gap (non-finite E disables the magnitude test) "
+          "remains open on purpose, out of this repair's territory.")
 
 
 if __name__ == "__main__":
