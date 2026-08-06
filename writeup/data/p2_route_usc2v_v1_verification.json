@@ -1,0 +1,506 @@
+{
+  "leg": 212,
+  "route": "ROUTE-USC2V",
+  "role": "VERIFY",
+  "pass_date": "2026-08-06",
+  "verifies_leg": 196,
+  "verifies_commit": "ba5ab91",
+  "verifies_claim": "leg 196's gate STILL_SHORT on arXiv:2511.22819: no certificate stated or locatable, 0 of leg 175's 4 open items closed, 3 new obstructions named by the authors",
+  "gate": {
+    "question": "Does an independent read of arXiv:2511.22819 at full-text depth confirm: (a) no certificate is stated or locatable, (b) 0 of leg 175's 4 open items are closed, and (c) the same three obstructions leg 196 named are actually present in the paper's own text?",
+    "verdict": "CONFIRMED",
+    "answered_branch": "YES -- independently confirmed",
+    "escalates": false
+  },
+  "independence": {
+    "imports_leg_196_code": false,
+    "primary_source_refetched_by_this_leg": true,
+    "pdf_md5": "8367d9b73bbc615a65da1f99bb3e520e",
+    "pdf_bytes": 3934832,
+    "pages": 27,
+    "extraction_md5": "5e20c57bf6983934fd1f40292618545c",
+    "extraction_lines": 1593,
+    "extraction_byte_identical_to_leg_196": true,
+    "note": "both passes read literally the same characters, so leg 196's line locators are checkable here with no pdftotext-version ambiguity"
+  },
+  "clause_a_no_certificate": {
+    "apparatus_census": {
+      "interval arithmetic": 0,
+      "enclosure": 0,
+      "validated numeric": 0,
+      "certif": 0
+    },
+    "apparatus_present": false,
+    "achieved_claims": [],
+    "certificate_present": false,
+    "confirms_no_certificate": true,
+    "rows": [
+      {
+        "label": "census:interval arithmetic",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:enclosure",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:validated numerics",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:certif",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:computer-assisted",
+        "leg_196_claim": 4,
+        "leg_212_observation": 4,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:eigen",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:spectrum",
+        "leg_196_claim": 1,
+        "leg_212_observation": 1,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:Boussinesq",
+        "leg_196_claim": 2,
+        "leg_212_observation": 2,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "census:Euler",
+        "leg_196_claim": 3,
+        "leg_212_observation": 3,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "cap_mentions:n",
+        "leg_196_claim": 4,
+        "leg_212_observation": 4,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.41:line",
+        "leg_196_claim": 41,
+        "leg_212_observation": 41,
+        "kind": "locator",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.41:kind",
+        "leg_196_claim": "PREREQUISITE",
+        "leg_212_observation": "PREREQUISITE",
+        "kind": "classification",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.49:line",
+        "leg_196_claim": 49,
+        "leg_212_observation": 49,
+        "kind": "locator",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.49:kind",
+        "leg_196_claim": "DEFINITION",
+        "leg_212_observation": "DEFINITION",
+        "kind": "classification",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.907:line",
+        "leg_196_claim": 907,
+        "leg_212_observation": 907,
+        "kind": "locator",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.907:kind",
+        "leg_196_claim": "ASPIRATION",
+        "leg_212_observation": "ASPIRATION",
+        "kind": "classification",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.1438:line",
+        "leg_196_claim": 1438,
+        "leg_212_observation": 1438,
+        "kind": "locator",
+        "agrees": true
+      },
+      {
+        "label": "cap_mention@l.1438:kind",
+        "leg_196_claim": "PREREQUISITE",
+        "leg_212_observation": "PREREQUISITE",
+        "kind": "classification",
+        "agrees": true
+      },
+      {
+        "label": "certificate_present",
+        "leg_196_claim": false,
+        "leg_212_observation": false,
+        "kind": "verdict",
+        "agrees": true
+      }
+    ],
+    "agrees": true
+  },
+  "clause_b_zero_items_closed": {
+    "n_items": 4,
+    "n_closed": 0,
+    "confirms_zero_closed": true,
+    "items": [
+      {
+        "id": "a",
+        "item": "Boussinesq / 3D Euler with boundary",
+        "closed": false,
+        "evidence": "sec.2 l.128-129 names the two models as CCF and IPM only. 'Boussinesq' occurs 2x in 27 pp: abstract l.24 (recap of [1]) and ref [2] title l.1460 (Chen-Hou). Never computed. '3D Euler' occurs 2x: l.135 (CCF motivated as an analog for it) and the same ref [2] title. Neither model is solved.",
+        "locators": [
+          128,
+          24,
+          1460,
+          135
+        ]
+      },
+      {
+        "id": "b",
+        "item": "the ~2 decade/mode margin ladder",
+        "closed": false,
+        "evidence": "sec.2.3.3 restates it in the paper's own words and it is now binding in lambda rather than in residual: l.684-690 + l.769 'decreases the achievable lambda accuracy for a fixed computational budget by approximately two orders of magnitude per model'. Residual half re-derived at l.676-679 and l.688-689 (1.0 decade/mode).",
+        "locators": [
+          684,
+          690,
+          769,
+          676,
+          688
+        ]
+      },
+      {
+        "id": "c",
+        "item": "the unstable-spectrum enclosure",
+        "closed": false,
+        "evidence": "ZERO 'eigen' in 1593 lines. 'spectrum' occurs once (l.36, 'a wide spectrum of unstable self-similar singularities' -- colloquial). 'spectral' twice, both about neural-network spectral bias (l.1186, ref l.1553). 'operator' occurs 0 times. No linearized-operator spectrum anywhere.",
+        "locators": [
+          36,
+          1186,
+          1553
+        ]
+      },
+      {
+        "id": "d",
+        "item": "the CAP announced Sep 2025 as 'Manuscript in preparation'",
+        "closed": false,
+        "evidence": "'preparation' occurs 0 times in the follow-up; the abs page shows v1 only, no journal ref, 251 days on; none of the 22 Semantic Scholar citers of 2509.14185 is such a manuscript (4 plausible titles pulled at abstract depth and ruled out).",
+        "locators": []
+      }
+    ],
+    "rows": [
+      {
+        "label": "items:total",
+        "leg_196_claim": 4,
+        "leg_212_observation": 4,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "items:closed",
+        "leg_196_claim": 0,
+        "leg_212_observation": 0,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "item(a):closed",
+        "leg_196_claim": false,
+        "leg_212_observation": false,
+        "kind": "verdict",
+        "agrees": true
+      },
+      {
+        "label": "item(b):closed",
+        "leg_196_claim": false,
+        "leg_212_observation": false,
+        "kind": "verdict",
+        "agrees": true
+      },
+      {
+        "label": "item(c):closed",
+        "leg_196_claim": false,
+        "leg_212_observation": false,
+        "kind": "verdict",
+        "agrees": true
+      },
+      {
+        "label": "item(d):closed",
+        "leg_196_claim": false,
+        "leg_212_observation": false,
+        "kind": "verdict",
+        "agrees": true
+      }
+    ],
+    "agrees": true
+  },
+  "clause_c_obstructions_present": {
+    "n_named_by_authors": 3,
+    "n_confirmed_present": 3,
+    "confirms_all_present": true,
+    "obstructions": [
+      {
+        "id": "N1",
+        "present": true,
+        "name": "the binding quantity moved from the residual to lambda's error bar",
+        "found_at": "Fig.7(f) l.714-738 (the table) + sec.2.3.3 l.690/769 (the stated rate)",
+        "verbatim": "fixed computational budget by approximately two orders of magnitude per model.",
+        "note": "the five-row table is present verbatim and every value matches; see LAMBDA_TABLE"
+      },
+      {
+        "id": "N2",
+        "present": true,
+        "name": "the discovery frontier stalled: CCF's 3rd unstable searched, not found",
+        "found_at": "sec.2.1.3 l.269-281",
+        "verbatim": "a persistent non-smooth signal at the origin (inset of Fig.3b) remains for all tested lambda in [0.455, 0.4713]. This indicates that if a third unstable solution exists, it is located at a lambda value corresponding to an even higher-gradient profile.",
+        "note": "the harder-than-2D claim is at l.279-280 verbatim; the 'suite of three' is l.157 verbatim ('Previous work successfully identified three self-similar solutions (stable [12], 1st unstable [3, 12], and 2nd unstable [1])')"
+      },
+      {
+        "id": "N3",
+        "present": true,
+        "name": "the remaining margin is hardware- and arithmetic-bound, not conceptual",
+        "found_at": "sec.1 l.49-51 (the definition of success) + sec.2.3.3 l.770-775 (the remedies)",
+        "verbatim": "that can be implemented on a single A100 GPU (80GB). To further improve the lambda accuracy, one could use larger networks or more training stages in parallel on multiple GPUs.",
+        "note": "double-float round-off is the floor by the paper's own definition, l.50-51; every remedy offered is budget (l.770-772 larger networks / third stage, l.775 more GPUs). Nothing on extended precision or interval arithmetic."
+      }
+    ],
+    "rows": [
+      {
+        "label": "obstructions:authors_named",
+        "leg_196_claim": 3,
+        "leg_212_observation": 3,
+        "kind": "count",
+        "agrees": true
+      },
+      {
+        "label": "obstruction(N1):located",
+        "leg_196_claim": true,
+        "leg_212_observation": true,
+        "kind": "verdict",
+        "agrees": true
+      },
+      {
+        "label": "obstruction(N2):located",
+        "leg_196_claim": true,
+        "leg_212_observation": true,
+        "kind": "verdict",
+        "agrees": true
+      },
+      {
+        "label": "obstruction(N3):located",
+        "leg_196_claim": true,
+        "leg_212_observation": true,
+        "kind": "verdict",
+        "agrees": true
+      }
+    ],
+    "agrees": true
+  },
+  "lambda_table_fig_7f": [
+    {
+      "mode": "stable",
+      "n": 0,
+      "lambda_s": 1.0285722760323,
+      "err": 1e-13,
+      "line": 714
+    },
+    {
+      "mode": "1st unstable",
+      "n": 1,
+      "lambda_s": 0.472129736156,
+      "err": 2e-12,
+      "line": 720
+    },
+    {
+      "mode": "2nd unstable",
+      "n": 2,
+      "lambda_s": 0.3149617817,
+      "err": 3e-10,
+      "line": 726
+    },
+    {
+      "mode": "3rd unstable",
+      "n": 3,
+      "lambda_s": 0.24156641,
+      "err": 1e-08,
+      "line": 732
+    },
+    {
+      "mode": "4th unstable",
+      "n": 4,
+      "lambda_s": 0.1987237,
+      "err": 1e-07,
+      "line": 738
+    }
+  ],
+  "derived": {
+    "residual_floor": 1e-13,
+    "worst_lambda_error_bar": 1e-07,
+    "worst_mode": "4th unstable",
+    "residual_to_lambda_gap_decades": 6.0,
+    "fitted_lambda_degradation_decades_per_mode": 1.569897000433602,
+    "stated_lambda_degradation_decades_per_mode": 2.0,
+    "stated_locator": "sec.2.3.3 l.690 + l.769",
+    "fit_vs_stated_ratio": 1.2739689288199192,
+    "residual_ladder_decades_per_mode_rederived": 1.0,
+    "residual_ladder_locators": "l.676-679 (|dlambda|~1e-3: 1e-3 -> 1e-7 over 4 modes); l.688-689 (Rmax floor 1e-14 -> 1e-10 over 4 modes)",
+    "days_usc_to_fix": 72,
+    "days_fix_to_pass": 251,
+    "days_usc_to_pass": 323
+  },
+  "search_reverification": {
+    "arxiv_abs_versions": [
+      "v1"
+    ],
+    "arxiv_abs_journal_ref": null,
+    "arxiv_api_query": "abs:\"unstable singularities\", newest first, 40 slots",
+    "arxiv_api_records": 14,
+    "arxiv_api_relevant_records": 2,
+    "semantic_scholar_citers_of_2509_14185": 22,
+    "citers_that_are_certificates": 0,
+    "citers_pulled_at_abstract_depth": [
+      "2602.17570",
+      "2607.19700",
+      "2510.20757",
+      "2606.25151"
+    ]
+  },
+  "term_census_full_text_leg_212": {
+    "interval arithmetic": 0,
+    "enclosure": 0,
+    "enclos": 0,
+    "validated numeric": 0,
+    "certif": 0,
+    "eigen": 0,
+    "computer-assisted": 4,
+    "computer assisted": 0,
+    "verification": 0,
+    "verified": 0,
+    "manuscript in preparation": 0,
+    "spectrum": 1,
+    "spectral": 2,
+    "Boussinesq": 2,
+    "Euler": 3,
+    "3D Euler": 2,
+    "rigorous": 3,
+    "machine precision": 22,
+    "round-off": 9
+  },
+  "cap_mentions_exhaustive_leg_212": [
+    {
+      "line": 41,
+      "section": "Abstract",
+      "kind": "PREREQUISITE",
+      "text": "providing an important ingredient for bridging the gap between numerical discovery and computer-assisted proofs for unstable phenomena in nonlinear PDEs"
+    },
+    {
+      "line": 49,
+      "section": "1 Introduction",
+      "kind": "DEFINITION",
+      "text": "Their rigorous mathematical validation via computer-assisted proofs (CAP) generally demands extremely high numerical accuracy [2]."
+    },
+    {
+      "line": 907,
+      "section": "3 (Gross-Pitaevskii vortices)",
+      "kind": "ASPIRATION",
+      "text": "Obtaining robust numerical approximations is paramount for better simulations and rigorous computer-assisted proofs."
+    },
+    {
+      "line": 1438,
+      "section": "5 Conclusion",
+      "kind": "PREREQUISITE",
+      "text": "Beyond numerical discovery, high accuracy is a prerequisite for rigorous mathematical verification via computer-assisted proofs."
+    }
+  ],
+  "rows_compared": 29,
+  "disagreements": [],
+  "self_tests": [
+    {
+      "case": "control (real observations)",
+      "expect": "CONFIRMED",
+      "got": "CONFIRMED",
+      "pass": true
+    },
+    {
+      "case": "injected: 'certif' x3 in the text (missed certificate)",
+      "expect": "DISCREPANCY",
+      "got": "DISCREPANCY",
+      "pass": true
+    },
+    {
+      "case": "injected: conclusion reclassified ACHIEVED (missed CAP claim)",
+      "expect": "DISCREPANCY",
+      "got": "DISCREPANCY",
+      "pass": true
+    },
+    {
+      "case": "injected: item (a) actually closed (miscounted open item)",
+      "expect": "DISCREPANCY",
+      "got": "DISCREPANCY",
+      "pass": true
+    },
+    {
+      "case": "injected: N2 not in the text (mistranscribed obstruction)",
+      "expect": "DISCREPANCY",
+      "got": "DISCREPANCY",
+      "pass": true
+    }
+  ],
+  "self_tests_all_pass": true,
+  "locator_notes": [
+    {
+      "where": "leg 196 JSON new_obstructions[N1].locator 'sec.2.3.3 l.696'",
+      "issue": "l.696 is a blank line in the shared extraction; the sentence it points at runs l.690 -> l.769 (a figure block splits it).",
+      "quoted_text_verbatim_present": true,
+      "moves_the_gate": false,
+      "severity": "locator only -- the quoted string is exact and present"
+    },
+    {
+      "where": "leg 196 JSON leg_175_open_items_recheck[b].evidence 'l.684-696'",
+      "issue": "same sentence; the range end should be l.690 (+ l.769 after the figure block), not l.696.",
+      "quoted_text_verbatim_present": true,
+      "moves_the_gate": false,
+      "severity": "locator only"
+    },
+    {
+      "where": "leg 196 JSON quotes[2].line = 130",
+      "issue": "the quoted sentence ('two canonical models ...') occupies l.128-129; l.130 is the line after it.",
+      "quoted_text_verbatim_present": true,
+      "moves_the_gate": false,
+      "severity": "locator only, off by one line"
+    }
+  ],
+  "ceiling": "No link of the L1->L4 chain moved. Clay stays ~0.05%. This leg edits no ledger, no solver module, and registers no figure (the convention for a literature-only pass in this repository: legs 175, 183, 189, 196 registered none)."
+}
