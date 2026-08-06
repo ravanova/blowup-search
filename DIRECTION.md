@@ -9782,3 +9782,436 @@ Nothing in this update lifts a ban. Escalation #1 is now genuinely closed (the p
 `NEXT` stage). No claim about Walls 1 and 2 moves beyond what's already recorded in the
 technical framing above; Clay stays ~0.05%. No direction question raised by this DM this
 cycle.
+
+---
+
+## DM session-boundary recovery update, 2026-08-06 — post-handoff reconciliation: leg 251
+re-confirmed for fresh dispatch (total loss, number reused), 192 retired as superseded,
+210 parked for 252, new leg 253 (NRSX) drafted to hold the composition floor, full
+ten-slot reassignment
+
+**Context (from the orchestrator's direct git audit, taken as ground truth):** the prior
+session's ten "live" slots were not all recoverable. Real committed progress exists for 221
+(`leg/221-bvrr-v1`), 236 (`leg/236-rddep-v1`, novelty-pass only), 228 (`verify/228-bhrv-v1`,
+novelty-pass only), 210 (`verify/210-m2sv-v1`, at/near baseline), 226 (`leg/226-pnr-v1`,
+novelty-pass only — found the dispatch's prescribed fix does not work as specified, which its
+gate explicitly authorizes). WIP-only salvage branches exist for 192
+(`verify/192-h2cv-v1-wip`), 249 (`verify/249-h2cv2-v1-wip`), 248 (`leg/248-cnr2-v1-wip`).
+Leg 245 (BCL2) landed (gate NO) before the boundary. **Leg 251 (P0T) is a total loss — no
+branch, no worktree, nothing ever committed.**
+
+### 1. Leg 251 (Route-P0T) — number REUSED, spec unchanged, dispatch fresh
+
+No work was ever committed under 251, so the number is clean and is reused (retiring it
+would create a phantom gap for no bookkeeping benefit — the withdrawn-191 precedent retired
+a number because a *drafted premise* was stale; here the spec is fully current). **The full
+spec at "### 251 — ROUTE-P0T" above stands verbatim as the dispatch text** — thesis, gate
+(both branches), territory, difficulty all unchanged; nothing that happened at the session
+boundary touches its premises. The fresh agent starts from scratch on `main`; there is no
+prior work to recover and it must not go looking for any. It remains the single most
+consequential leg in flight and dispatches at top priority alongside 249. The technical
+framing (Tao's supercriticality barrier, corrected Wall 2, NRS/Tsai constraint, viscous-rung
+sequencing) is in `CONTINUATION_PROMPT.md` Directive 1 — fold it into the brief as before.
+
+### 2. Slot-by-slot rulings on the salvage questions
+
+- **192 (H2CV): RETIRED, not resumed.** This DM's own prior roster already recorded it as
+  "superseded in practice by 249's recovery work, same underlying task." Spending a slot on
+  both would duplicate territory. The salvage branch `verify/192-h2cv-v1-wip` is preserved
+  as INPUT to 249's brief (it contains the 871-line runner / 592-line JSON / journal that
+  249 was dispatched to recover and verify). 192's number retires with its work absorbed;
+  no rework leg needed.
+- **249 (H2CV2): RESUME from salvage.** Top priority, submission-blocking for PUB2. Brief
+  the fresh agent to recover BOTH salvage branches (`verify/249-h2cv2-v1-wip` and
+  `verify/192-h2cv-v1-wip`), verify rather than trust the recovered artifacts, and land
+  under 249's existing gate, unchanged.
+- **248 (CNR2): RESUME from salvage.** The spec's premises (leg 237's finding, leg 226's
+  fix shape) are intact; the WIP branch is a head start, not a liability. Same gate.
+- **221/236/228/226: resume from their real branches** under their existing gates,
+  unchanged. For 226 specifically: the novelty-pass finding that the prescribed fix fails
+  as specified is WITHIN its gate's explicit authorization to find a different mechanism —
+  the fresh agent continues under that clause, it is not an escalation.
+- **210 (M2SV): PARKED back to reserve** (essentially zero independent progress; a verify
+  of closed-stage-B-era work). Its slot goes to 252, which is light, fixes a banked
+  artifact that is now known-WRONG (not merely stale), and unblocks 236's sequencing. 210
+  redispatches at the next vacancy; its branch `verify/210-m2sv-v1` stays preserved.
+
+### 3. New leg, drafted to hold the composition floor at 3/10
+
+With 245/246 landed and 192 retired, only 251 (math/construction) and 236 (math) of the
+live set are floor-eligible — 2/10, a §3b breach. 250 and 252 are fix/regen legs, not
+floor-eligible. None of the blocked reserve (229, 231-234) qualifies or is dispatchable.
+So one fresh floor-eligible leg is drafted now, chosen to be load-bearing for Phase 0
+without overlapping 251's territory:
+
+```
+### 253 — ROUTE-NRSX: PIN THE NRS/TSAI EXCLUSION'S EXACT HYPOTHESIS BOUNDARY, AND SWEEP FOR
+LATER STRENGTHENINGS THAT SHRINK THE SURVIVOR SPACE (literature — floor-eligible)
+**Thesis.** Leg 251's entire screen rests on the NRS/Tsai exclusion of nontrivial
+exactly-backward-self-similar 3D NS blow-up "under the relevant decay." The precise
+hypothesis set (Nečas-Růžička-Šverák's L³ condition; Tsai's local-energy/decay variants)
+determines exactly which candidate classes survive — and any LATER published strengthening
+(e.g. discretely-self-similar exclusions, Chae-Tsai-type extensions, weaker-decay variants)
+would SHRINK the survivor space 251 assumes. 251 applies the screen; this leg adversarially
+pins the screen itself, at full text, and hunts forward citations for strengthenings. A
+strengthening found AFTER 251 names its candidate could kill the candidate late; found now,
+it costs one literature leg.
+**Gate.** Does the full-text hypothesis set of NRS + Tsai, plus a forward-citation sweep for
+published strengthenings, leave the survivor classes named in 251's thesis (discretely
+self-similar; unstable-self-similar with finite unstable spectrum; non-self-similar) intact
+as genuinely not-excluded?
+  yes -> Bank the pinned hypothesis boundary as a checked input to Phase 0/1, with verbatim
+         locators for each hypothesis and each surveyed strengthening. 251's screen stands
+         on read-and-verified footing rather than folklore.
+  no -> Name precisely which survivor class a published result excludes, with the locator.
+        ESCALATE — this directly narrows or redirects 251's/Phase 1's candidate space and
+        must reach 251's agent (or its successor) before a candidate is banked.
+**Territory.** experiments/p2_route_nrsx_v1_screenbounds.py,
+               writeup/data/p2_route_nrsx_v1_screenbounds.json,
+               writeup/novelty/leg_253.md, experiments/journal/leg_253.md.
+               Reads (never edits) the same NRS/Tsai citations 251 reads — read-only
+               overlap, zero written-territory overlap with 251 or anything else live.
+**Difficulty.** standard
+**Independence.** Pure literature; edits no solver module, no shared ledger. Independent of
+all nine other slots (informs 251 but neither blocks nor is blocked by it — if both land,
+the orchestrator cross-checks their readings, which is a feature). Immediately dispatchable.
+```
+
+**Next fresh leg number for any future candidate is 254.** (Git history's highest is 249,
+but 250-253 are assigned in this file; 191 stays retired; 192 retires per §2 above.)
+
+### 4. The ten slots, assigned for immediate dispatch
+
+| Slot | Leg | Route | Start from | Floor status |
+|---|---|---|---|---|
+| A | 250 | PUB2FIX | fresh (spec above) | fix — not floor-eligible; SUBMISSION-BLOCKING |
+| B | 249 | H2CV2 | `verify/249-h2cv2-v1-wip` + recover `verify/192-h2cv-v1-wip` | verify — TOP PRIORITY, submission-blocking |
+| C | 248 | CNR2 | `leg/248-cnr2-v1-wip` | repair — not floor-eligible |
+| D | 221 | BVRR | `leg/221-bvrr-v1` (landing candidate) | repair — not floor-eligible |
+| E | 251 | P0T | fresh — total loss, nothing to recover | **FLOOR-ELIGIBLE (math/construction); most consequential leg in flight** |
+| F | 236 | RDDEP | `leg/236-rddep-v1` | FLOOR-ELIGIBLE (math) |
+| G | 253 | NRSX | fresh (spec above) | **FLOOR-ELIGIBLE (literature)** |
+| H | 228 | BHRV | `verify/228-bhrv-v1` | verify — not floor-eligible |
+| I | 252 | VBRG | fresh (spec above) | regen — not floor-eligible; light, unblocks 236's read |
+| J | 226 | PNR | `leg/226-pnr-v1` | repair — not floor-eligible |
+
+**Floor status: 3/10 (251, 236, 253) — MET.**
+
+### 5. Territory / sequencing flags for the orchestrator, resolved before dispatch
+
+- **248 vs 226:** different modules (`collocation_newton.py` vs `profile_newton.py`),
+  disjoint per 248's own spec — confirmed, no conflict. 248 also stays clear of leg 150's
+  earlier unrelated repair to its module, per its own territory clause.
+- **252 vs 236:** 252 regenerates the Route-D v11 anchor JSON that 236 reads. **Dispatch
+  252 before (or simultaneously with) 236's resume, and brief 236's fresh agent explicitly:
+  the currently-banked anchor margin at `a=0.45` is WRONG (pre-repair); read the
+  regenerated JSON once 252 lands, or use leg 247's reported 62.02x figure in the interim,
+  never the stale banked value.**
+- **249 vs 250:** disjoint (249 verifies the number, 250 reconciles a different number's
+  citation); 250's own sequencing note stands — it can start immediately on the
+  bound-vs-measurement question, folding "independently verified" in only if 249 lands
+  first.
+- **249 vs 192:** resolved by retiring 192 (§2); no two slots share that territory.
+- **253 vs 251:** read-only overlap on the same citations, zero written overlap — by
+  design.
+
+**Canonical reserve line: reserve count 6 — legs 210, 229, 231, 232, 233, 234.** Of these,
+only 210 is immediately dispatchable (parked verify, branch preserved); 229 stays blocked
+on 226, and 231-234 stay blocked on repairs 217/219/221/225, none of which has landed on
+`main` (re-confirmed by direct git check this update). Count 6 is above the §3a watermark
+of 3, but this DM flags, continuing the prior update's honesty on this point: **effective
+immediately-dispatchable reserve is 1.** If two slots free before the blocked pool clears,
+this DM will draft fresh unblocked candidates at that moment rather than let a slot idle —
+and if the composition floor breaches again two cycles after `P0` lands, the §5 commitment
+above (report the roster problem, stop papering) is still in force.
+
+Nothing in this update lifts a ban, changes any gate already committed, or moves any claim
+about Walls 1 and 2; Clay stays ~0.05%. Escalations: none new; #1 remains closed; leg 247's
+escalated finding is being closed by 252's dispatch. No direction question raised — the
+orchestrator's five requests were all answerable under the standing ruling.
+
+---
+
+## DM revision, 2026-08-07 — user steer applied (verbatim forward, ORCHESTRATION.md §3):
+DSS scoping prioritized AHEAD of P0's dispatch, Phase 1 authorized in parallel, legs
+254-257 drafted, 258 (floor lock) specified as a bench task, full ten-slot reassignment.
+SUPERSEDES the previous update's slot table — nothing from it was dispatched.
+
+**The steer, restated in one paragraph so this file carries it:** the DSS-ban scoping leg
+this DM drafted conditionally in the ban review is now user-prioritized, and must settle
+BEFORE P0 (leg 251) dispatches — because discretely-self-similar is one of the few ansatz
+classes surviving the NRS/Tsai screen, and P0 must not run its screen with a survivor
+banned by a clause that never argued against it. Phase 1 is authorized to start NOW, in
+parallel with P0 (they ask different questions; do not serialize). Phase 1's target, in
+this repository's own measured language: leg 174's occupancy matrix has exactly one empty
+cell (`fluid_adjacent=True, grade=A`) — move the viscous term from DOMINATED to ENCLOSED
+for a fluid self-similar object (leg 240's words). Reachability evidence: Breden-Chu's own
+Remark 40 (arXiv:2404.04054) states `(u·∇)u` is reachable in d ∈ {2,3}, yet their frontier
+is still 1D after 7 subsequent papers (leg 245). The stage-V ban must be ENGAGED, not
+skirted: Breden-Chu's weighted Sobolev setting is precisely the "namable fourth space" the
+re-posed ban's lift clause demands, and connecting the two via a scoping leg is a
+prerequisite to any Phase-1 construction. Three legs ordered (P1a census, P1b reproduction,
+P1c reach), all floor-eligible; do not rebuild what capabilities.py already lists; check
+why 236 is slow; lock the composition floor into code while it is met. Unchanged: the
+three-tier win condition, lesson 91, pre-committed gates, and the no-claimed-movement rule.
+
+### The four new legs
+
+```
+### 254 — ROUTE-DSSX: IS THE DSS EXPENSIVE ENTRANCE'S EXCLUSION COST-SHAPED OR SUBSTANTIVE?
+(THE BAN-REVIEW SCOPING LEG, NOW USER-PRIORITIZED — dispatches BEFORE leg 251)
+[FLOOR-ADJACENT: scoping from the repository's own research record — counted OUTSIDE the
+floor tally below, conservatively]
+**Thesis.** The DSS ban's "never" covers both the cheap entrances and "the DSS lane's
+expensive entrance," but the three recorded reasons argue only against the cheap entrances
+(ban review, above). Under the old cost-sensitive goal that distinction did not matter;
+under the Clay goal with heavy engineering explicitly authorized, it does. This leg reads
+the DSS lane's OWN history in this repository (the legs/reports that produced the ban, not
+the plan's printed one-liner) and determines what the expensive entrance actually IS and
+why it was excluded.
+**Gate.** Reading the DSS lane's own underlying record at full depth: was the expensive
+entrance excluded for a SUBSTANTIVE reason independent of cost (a measured failure, a
+structural obstruction), or only by cost/scope under the old goal?
+  yes (substantive) -> Name the reason with locators. The ban stands as written; record
+        explicitly that P0 must treat the DSS lane's expensive entrance as excluded by this
+        repository's own measurement, not by budget. No escalation needed.
+  no (cost-shaped) -> Draft a proposed re-posed ban wording that keeps the cheap entrances
+        banned by their three reasons while opening the expensive entrance under the Clay
+        goal, and ESCALATE to the user for the actual lift — this leg's authority ends at
+        the recommendation; no ban lifts under a leg's own signature.
+**Territory.** writeup/novelty/leg_254.md, experiments/journal/leg_254.md,
+               writeup/data/p2_route_dssx_v1_scoping.json (a locator ledger, no compute).
+               Reads (never edits) the DSS lane's own historical reports/JSONs and
+               plan_of_record.py's ban text.
+**Difficulty.** light
+**Independence.** Pure repository-record read. Blocks leg 251's dispatch BY USER PRIORITY
+(251 redispatches at the first vacancy after 254 lands, with 254's finding folded into its
+brief). Touches nothing any other slot writes. Immediately dispatchable, top of queue.
+```
+
+```
+### 255 — ROUTE-P1A: PHASE 1 TARGET CENSUS — DISSIPATIVE BLOW-UP MODELS WITH AN
+UNCERTIFIED SELF-SIMILAR/DSS PROFILE INSIDE BREDEN-CHU's STATED REACH
+[FLOOR-ELIGIBLE: math/literature]
+**Thesis.** Phase 1's goal (user authorization, this update): move the viscous term from
+DOMINATED to ENCLOSED for a fluid self-similar object — leg 174's one empty matrix cell.
+First question: WHICH models qualify? The census must satisfy all four screens jointly:
+(i) proved or strongly-supported DISSIPATIVE finite-time blow-up, (ii) a self-similar or
+DSS profile, (iii) no existing certificate (screened against leg 174's matrix,
+capabilities.py, and this repository's own precedent sweeps 240/242/245/246), (iv) a
+nonlinearity inside Breden-Chu's stated reach (Remark 40's own terms). TECHNICAL CAUTION,
+built into the gate per the user's own wording: viscous Burgers is Breden-Chu's home
+ground and DOES NOT blow up — "parabolic and certifiable" is not "blows up"; screens (i)
+and (iv) are independent and BOTH must pass. Grep capabilities.py before building
+anything: fractional_gclm.py, critical_dissipation.py, interval.py, nk_bounds.py,
+interval_certificate.py, and leg 61's Kawahara reproduction already exist.
+**Gate.** Does at least one model pass all four screens jointly, with each screen's verdict
+carried per-candidate in a banked table (including the failures, with which screen killed
+each)?
+  yes -> Bank the census table; name the surviving candidate(s) precisely, with locators
+         for (i) and (iv). These are Phase 1 construction's candidate pool — construction
+         itself stays gated behind P1c's ban-lift scoping, not authorized here.
+  no -> Bank the full kill table. This would mean Phase 1's target cell cannot be filled
+        from any known model — report which screen does most of the killing, as direct
+        input to whether Phase 1 needs a weaker screen (i) tier or a different technique.
+**Territory.** experiments/p2_route_p1a_v1_census.py,
+               writeup/data/p2_route_p1a_v1_census.json,
+               writeup/novelty/leg_255.md, experiments/journal/leg_255.md.
+               Reads (never edits) leg 174's matrix, capabilities.py, legs 240/242/245/246.
+**Difficulty.** standard
+**Independence.** Own module, reads-only overlap with 251/253's citation pool. Does not
+wait on 254 (the census RECORDS DSS-profile candidates regardless; whether the DSS lane's
+expensive entrance is in scope is 254's/the user's call, noted per-row, not decided here).
+Immediately dispatchable.
+```
+
+```
+### 256 — ROUTE-P1B: REPRODUCE ONE PUBLISHED BREDEN-CHU RESULT END TO END, ON ITS OWN
+GROUND (the leg-61 Kawahara shape, applied to the Grade-A technique)
+[FLOOR-ELIGIBLE: construction/reproduction]
+**Thesis.** Before any Phase-1 construction is even posable, the cheapest kill test: can
+this repository drive Breden-Chu's machinery AT ALL, on a result they already published?
+Exact shape of leg 61's Kawahara reproduction of Cadiot-Lessard-Nave. If it fails, Phase 1
+dies early and cheaply — which is the point of running it before construction. BAN
+DISCIPLINE, stated up front: this leg operates ENTIRELY within Breden-Chu's own published
+weighted-Sobolev setting — the namable FOURTH space the re-posed stage-V ban's lift clause
+demands — and touches none of the three dead realizations (ℓ¹_w coefficient basis,
+collocation basis, origin-H²). Together with P1c it CONSTITUTES the ban's own scoping
+route; it does not lift the ban, and no construction on any Phase-1 target runs under this
+leg's authority.
+**Gate.** Does an end-to-end reproduction of one published Breden-Chu certificate (chosen
+by the leg from arXiv:2404.04054's own results, stated before running) reproduce their
+published enclosure/existence verdict, with the leg's own independently-computed bounds
+landing inside (or explicably tighter/looser than) theirs?
+  yes -> Bank the reproduction as leg 61-grade evidence the machinery is usable here.
+         Phase-1 construction remains gated on P1c + the user's ban ruling.
+  no -> Report exactly which stage fails (setup, bounds, verification) and whether the
+        failure is ours (implementation) or theirs (a published gap — escalate immediately
+        if so; that would be a finding at full strength).
+**Territory.** experiments/p2_route_p1b_v1_bcrepro.py, solver/bc_weighted_sobolev.py (NEW
+               module — the fourth space gets its own file, touching no existing solver
+               module), writeup/data/p2_route_p1b_v1_bcrepro.json,
+               writeup/novelty/leg_256.md, experiments/journal/leg_256.md.
+               Reads (never edits) interval.py, nk_bounds.py, leg 61's reproduction.
+**Difficulty.** heavy
+**Independence.** New module; zero written overlap with any live slot. Reads-only overlap
+with P1c on the same paper — by design, their readings cross-check. Immediately
+dispatchable.
+```
+
+```
+### 257 — ROUTE-P1C: REMARK 40's REACH, MEASURED NOT ARGUED — AND THE STAGE-V BAN-LIFT
+SCOPING, FOLDED IN HERE (this DM's call, per the user's "your call")
+[FLOOR-ELIGIBLE: math/literature]
+**Thesis.** Remark 40 is the authors' claim; this leg establishes what it actually costs.
+Full-text read plus scoping computation, NO construction: which Breden-Chu hypotheses bind
+on a fluid nonlinearity, what the weighted-Sobolev setup demands in 2D/3D, and where their
+own "non-trivial ... future work" flag actually bites. FOLDED IN, as the designated
+stage-V ban-lift scoping (this DM's call between P1b and here — here, because
+establishing distinctness is a hypothesis-level question, not a reproduction-level one):
+establish whether the weighted-Sobolev setting is genuinely NOT subject to the same
+three-realization death (ℓ¹_w coefficient: leg 54's Z₁ block-coupling; collocation: leg
+56's (H,D) consistency defect; origin-H²: legs 163/176's a=0 cap) — mechanism by
+mechanism, named per lesson 91, not by analogy.
+**Gate.** Two clauses, both required for yes: (a) does the full-text read yield a concrete,
+banked account of what a 2D/3D fluid application demands (hypotheses that bind, setup
+cost, where "future work" bites)? (b) does the weighted-Sobolev setting demonstrably evade
+EACH of the three dead realizations' named death mechanisms?
+  yes -> Bank both. ESCALATE to the user with the ban's lift clause satisfied on paper:
+         a namable fourth space, with its own scoping leg establishing non-subjection.
+         The lift itself is the user's signature, not this leg's.
+  no -> Name which clause fails and which mechanism transfers (if (b)): a death mechanism
+        that follows the machinery into the fourth space would close Phase 1's Breden-Chu
+        route before construction spent anything — report at full strength; that is this
+        leg working, not failing.
+**Territory.** experiments/p2_route_p1c_v1_reach.py,
+               writeup/data/p2_route_p1c_v1_reach.json,
+               writeup/novelty/leg_257.md, experiments/journal/leg_257.md.
+               Reads (never edits) arXiv:2404.04054 full text, legs 54/56/163/176's death
+               reports, leg 245's locators.
+**Difficulty.** standard-to-heavy
+**Independence.** Reads-only overlap with P1b (same paper, cross-check by design) and the
+dead-realization reports. No written overlap with anything live. Immediately dispatchable.
+```
+
+```
+### 258 — ROUTE-FLOCK: LOCK THE COMPOSITION FLOOR INTO test_plan_of_record.py / THE MERGE
+GATE (BENCH TASK — this DM's call on the orchestrator's offered choice: run this as a
+MECHANICAL BENCH DISPATCH, not one of the ten research slots)
+**Thesis.** The floor is met (3/10) for the first time; encode it now, while satisfied,
+per the user's point 8 — "a floor that is breached invites an exception." Pure
+test-writing: a check that DIRECTION.md's live-slot table (or an equivalent
+machine-readable roster line) carries >= 3 floor-eligible legs.
+**Gate.** Does the new test (a) FAIL when run against a roster with 2/10 floor-eligible
+legs (verified by a deliberate fixture, not by editing the real roster), and (b) PASS
+against the current roster, and (c) run inside the existing merge gate without touching
+any other test's behavior?
+  yes -> Land it. The floor is now code.
+  no -> Report which clause fails; do not weaken an existing test to force the pass.
+**Territory.** test_plan_of_record.py (additive only) or the merge-gate script (additive
+               only), a machine-readable roster marker in DIRECTION.md if needed (the DM
+               will maintain it thereafter), experiments/journal/leg_258.md.
+**Difficulty.** light/mechanical
+**Independence.** Test-only. Orchestrator dispatches at its own convenience as a bench
+task; it does not consume a research slot and is excluded from the floor tally itself.
+```
+
+**Next fresh leg number for any future candidate is 259.**
+
+### The ten slots, revised — SUPERSEDES the previous table; nothing had been dispatched
+
+| Slot | Leg | Route | Start from | Floor status |
+|---|---|---|---|---|
+| A | 250 | PUB2FIX | fresh (spec above) | fix — SUBMISSION-BLOCKING |
+| B | 249 | H2CV2 | `verify/249-h2cv2-v1-wip` + recover `verify/192-h2cv-v1-wip` | verify — TOP PRIORITY, submission-blocking |
+| C | 254 | DSSX | fresh — USER-PRIORITIZED, dispatches before 251 | scoping (counted outside floor, conservatively) |
+| D | 221 | BVRR | `leg/221-bvrr-v1` (landing candidate) | repair |
+| E | 255 | P1A | fresh | **FLOOR-ELIGIBLE (math/literature)** |
+| F | 236 | RDDEP | `leg/236-rddep-v1` | FLOOR-ELIGIBLE (math) |
+| G | 256 | P1B | fresh | **FLOOR-ELIGIBLE (construction)** |
+| H | 257 | P1C | fresh | **FLOOR-ELIGIBLE (math/literature)** |
+| I | 252 | VBRG | fresh — light, unblocks 236's read | regen |
+| J | 226 | PNR | `leg/226-pnr-v1` | repair |
+
+**Floor status: 4/10 strictly (255, 256, 257, 236) — MET with margin; 254 arguably a
+fifth.** Leg 258 (FLOCK) runs as a bench task alongside, encoding the floor while it holds.
+
+**Displaced from the previous (never-dispatched) table:** 251 (P0T — now blocked on 254 BY
+USER PRIORITY; redispatches at the first vacancy after 254 lands, spec unchanged, 254's
+finding folded into its brief); 253 (NRSX — still fully specified and valuable, first-in-line
+among ordinary reserve); 248 (CNR2 — WIP branch `leg/248-cnr2-v1-wip` preserved, resume at
+next vacancy); 228 (BHRV — branch preserved); 210 (M2SV — stays parked).
+
+**Answering the user's point 8 on leg 236 (RDDEP)'s slowness, from the orchestrator's own
+ground truth:** it was mid-flight (novelty-pass committed, no construction) when the prior
+session ended by external interruption/graceful handoff — nothing in the work itself
+stalled it. Its fresh agent resumes from `leg/236-rddep-v1` with an updated brief: it now
+carries TWO Route-D v11 exposures (post-235), and it must read the REGENERATED anchor JSON
+once 252 lands (interim: leg 247's reported 62.02x, never the stale banked value).
+
+**Sequencing and ban discipline, restated as dispatch instructions:**
+- 254 dispatches immediately; 251 does NOT dispatch until 254 lands (user priority #1).
+- P1a/P1b/P1c dispatch now, in parallel with each other and with everything else. NO
+  Phase-1 CONSTRUCTION leg exists or dispatches until P1c reports AND the user rules on
+  the stage-V lift — the ban is engaged through its own clause, not skirted; nothing in
+  this update lifts it.
+- All three P1 briefs carry the do-not-rebuild instruction verbatim (point 7): grep
+  capabilities.py first; fractional_gclm.py, critical_dissipation.py, interval.py,
+  nk_bounds.py, interval_certificate.py, leg 61's Kawahara reproduction exist.
+- 252 before/with 236's resume, as before.
+
+**Canonical reserve line: reserve count 10 — legs 251, 253, 248, 228, 210, 229, 231, 232,
+233, 234.** Effective immediately-dispatchable: 4 (253, 248, 228, 210); 251 blocked on 254
+by user priority (expected to clear fast — 254 is light); 229 blocked on 226; 231-234
+blocked on repairs 217/219/221/225 (none landed on `main`). Count 10 is well above the §3a
+watermark.
+
+Nothing in this update lifts a ban (254 and 257 each terminate in a recommendation/
+escalation, never a lift under leg authority), changes any already-committed gate, or moves
+any claim about Walls 1 and 2; Clay stays ~0.05%. The no-claimed-movement rule is restated
+in every P1 leg's own gate language, per the user's point 9 — a Clay-directed programme is
+where it erodes most easily, so it is written into the legs, not just remembered. No
+direction question raised: the steer was explicit enough to act on directly, and the one
+delegated choice (where the ban-lift scoping folds) is decided above (P1c) with the reason
+recorded.
+
+---
+
+## DM refill, same cycle — leg 250 LANDED (71cde44, audited clean, §7b verifier in
+flight), 253 (NRSX) promoted into slot A
+
+**250 (PUB2FIX) landed, and the finding is better than the leg's own thesis anticipated:**
+the σ_min "conflict" was an INVERTED INEQUALITY, not a 7.9× measurement error —
+`0.71465 = 1/1.3993` (leg 163's own largest sampled ratio) bounds σ_min only from ABOVE,
+so leg 163's data support `σ_min ≤ 0.71465`, fully consistent with leg 176's measured
+`0.0908`. Recorded at full strength alongside it: NEITHER leg proves a LOWER bound on
+σ_min, and PUB2's "bounded away from zero" framing is now corrected accordingly. This is
+claim-bearing on a submission-track document, so the orchestrator's §7b post-landing
+verifier is correctly in flight; if that verifier confirms a gap, a rework leg gets cut at
+the top of the queue per the standing contract — nothing to pre-draft until it reports.
+
+**Slot A: leg 253 (Route-NRSX) promoted, per its own first-in-line ranking** — no
+re-ranking needed, and the reasons have only strengthened since it was drafted: it
+adversarially pins the NRS/Tsai hypothesis boundary that leg 251's screen (dispatching
+after 254), leg 255's census screen (iii)/(ii) reasoning, and the DSS-survivor argument in
+the user's own steer all lean on. Spec above stands verbatim; immediately dispatchable.
+
+| Slot | Leg | Route | Change |
+|---|---|---|---|
+| A | 253 | NRSX | **promoted this update** — FLOOR-ELIGIBLE (literature) |
+| B-J | — | — | unchanged from the revised table above |
+
+**Floor status: 5/10 strictly (253, 255, 256, 257, 236) — comfortably met**; 254 still
+counted conservatively outside.
+
+**Canonical reserve line: reserve count 9 — legs 251, 248, 228, 210, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 3 (248, 228, 210); 251 blocked on 254 by user
+priority (254 is light — expected to clear soon, and 251 is pre-committed as its
+successor at the next vacancy after it lands); 229 blocked on 226; 231-234 blocked on
+repairs 217/219/221/225. Count 9 is above the §3a watermark of 3, so no forced 8-leg
+draft triggers — but this DM notes the effective-dispatchable number (3) sits exactly at
+the watermark's spirit, and commits to drafting fresh unblocked candidates in the SAME
+update that next promotes any of 248/228/210, rather than waiting for the count to breach.
+
+Nothing in this update lifts a ban, changes any committed gate, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised.
