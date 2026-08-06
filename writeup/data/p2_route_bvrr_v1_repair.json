@@ -1,0 +1,972 @@
+{
+ "caller_census": {
+  "banked_artifacts": [
+   "writeup/data/spike1_stepB_rescaled.json",
+   "writeup/data/p2_route_brs_v1_status_audit.json",
+   "writeup/data/spike1_stepC_gate.json",
+   "writeup/data/p2_route_g_v1_g2.json",
+   "writeup/data/p2_route_k_v1_port.json",
+   "writeup/data/p2_route_l_v1_precond.json"
+  ],
+  "files": [
+   "./experiments/diagnose_stepC_drift.py",
+   "./experiments/p2_route_brs_v1_status_audit.py",
+   "./experiments/p2_route_bvrr_v1_repair.py",
+   "./experiments/p2_route_g_v1_collapse.py",
+   "./experiments/p2_route_k_v1_port.py",
+   "./experiments/p2_route_l_v1_precond.py",
+   "./experiments/spike1_stepC_gate.py",
+   "./experiments/spike1_stepC_relax.py",
+   "./solver/port_certification.py",
+   "./test_boussinesq_rescaled.py",
+   "./test_boussinesq_rescaled_status.py",
+   "./test_boussinesq_transport.py",
+   "./writeup/3_spikes/spike1_stepB_evidence.py"
+  ],
+  "grep_pattern": "odd_field_x_slope|boussinesq_rescaled import|import boussinesq_rescaled|RescaledBoussinesq|modulation\\(",
+  "n_hit_lines": 72,
+  "test_callers": [
+   "test_boussinesq_rescaled.py",
+   "test_boussinesq_transport.py",
+   "test_boussinesq_rescaled_status.py"
+  ],
+  "unbanked_callers": [
+   {
+    "reason": "print-only relaxation shakeout; writes no file under writeup/data/",
+    "script": "experiments/spike1_stepC_relax.py"
+   },
+   {
+    "reason": "print-only drift diagnostic; writes no file under writeup/data/",
+    "script": "experiments/diagnose_stepC_drift.py"
+   }
+  ]
+ },
+ "clause_a": {
+  "battery_is_leg_205s_own_file_not_a_reimplementation": true,
+  "battery_path": "experiments/p2_route_bvr_v1_adversarial.py",
+  "battery_ref": "origin/leg/205-bvr-v1",
+  "disposition_of_each_silent_wrong": {
+   "OK": [
+    "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.05",
+    "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.1",
+    "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.2",
+    "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.4",
+    "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=100",
+    "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=25",
+    "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=4",
+    "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=400",
+    "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(100) = 0.1 vs r_win 0.4",
+    "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(16) = 0.25 vs r_win 0.4",
+    "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(25) = 0.2 vs r_win 0.4",
+    "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(4) = 0.5 vs r_win 0.4",
+    "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(400) = 0.05 vs r_win 0.4"
+   ],
+   "RAISED": [
+    "F1 r_min sweep: 0 nodes -- EMPTY window",
+    "F1 r_min sweep: 1 node -- UNDER-determined",
+    "F1 r_min sweep: r_min = 1.0 -- EMPTY window",
+    "F1 r_min sweep: r_min > r_win -- EMPTY window, fine grid",
+    "F1 r_win sweep: r_win=0.0001 on the leg-73-class grid"
+   ]
+  },
+  "every_case": [
+   {
+    "after": "OK",
+    "after_over_tol": 0.9994262359445116,
+    "after_rel_err": 0.0004997131179722558,
+    "after_value": 2.0009994262359445,
+    "before": "OK",
+    "before_over_tol": 0.9994262359445116,
+    "before_rel_err": 0.0004997131179722558,
+    "before_value": 2.0009994262359445,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.005"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9984826057976015,
+    "after_rel_err": 0.0004992413028988008,
+    "after_value": 2.0009984826057976,
+    "before": "OK",
+    "before_over_tol": 0.9984826057976015,
+    "before_rel_err": 0.0004992413028988008,
+    "before_value": 2.0009984826057976,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.01"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9413032315639391,
+    "after_rel_err": 0.00047065161578196957,
+    "after_value": 2.000941303231564,
+    "before": "OK",
+    "before_over_tol": 0.9413032315639391,
+    "before_rel_err": 0.00047065161578196957,
+    "before_value": 2.000941303231564,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.02"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7759522991355183,
+    "after_rel_err": 0.00038797614956775917,
+    "after_value": 2.0007759522991355,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 9.537388778332323,
+    "before_rel_err": 0.0047686943891661615,
+    "before_value": 1.9904626112216677,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.05"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7759522991355183,
+    "after_rel_err": 0.00038797614956775917,
+    "after_value": 2.0007759522991355,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 233.29780079451723,
+    "before_rel_err": 0.11664890039725861,
+    "before_value": 1.7667021992054828,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.1"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7759522991355183,
+    "after_rel_err": 0.00038797614956775917,
+    "after_value": 2.0007759522991355,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1114.0609537344299,
+    "before_rel_err": 0.557030476867215,
+    "before_value": 0.8859390462655702,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.2"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7759522991355183,
+    "after_rel_err": 0.00038797614956775917,
+    "after_value": 2.0007759522991355,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1730.6977368352561,
+    "before_rel_err": 0.865348868417628,
+    "before_value": 0.26930226316474387,
+    "case": "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9984577153110408,
+    "after_rel_err": 0.0004992288576555204,
+    "after_value": 2.000998457715311,
+    "before": "OK",
+    "before_over_tol": 0.9984577153110408,
+    "before_rel_err": 0.0004992288576555204,
+    "before_value": 2.000998457715311,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=0.25"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 2.0009395437320605,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 2.0009395437320605,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=1"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7768106149184106,
+    "after_rel_err": 0.0003884053074592053,
+    "after_value": 2.0007768106149184,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1113.2183403623999,
+    "before_rel_err": 0.5566091701811999,
+    "before_value": 0.8867816596376003,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=100"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.777642730031225,
+    "after_rel_err": 0.0003888213650156125,
+    "after_value": 2.0007776427300312,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 232.2500867304853,
+    "before_rel_err": 0.11612504336524265,
+    "before_value": 1.7677499132695147,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=25"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7683980600918794,
+    "after_rel_err": 0.0003841990300459397,
+    "after_value": 2.000768398060092,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 2.15327382928332,
+    "before_rel_err": 0.00107663691464166,
+    "before_value": 1.9978467261707167,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.7759522991355183,
+    "after_rel_err": 0.00038797614956775917,
+    "after_value": 2.0007759522991355,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1730.6977368352561,
+    "before_rel_err": 0.865348868417628,
+    "before_value": 0.26930226316474387,
+    "case": "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=400"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320600664,
+    "after_rel_err": 0.0004697718660300332,
+    "after_value": -3.00140931559809,
+    "before": "OK",
+    "before_over_tol": 0.9395437320600664,
+    "before_rel_err": 0.0004697718660300332,
+    "before_value": -3.00140931559809,
+    "case": "F1 positive control: well-resolved grid, a=-3.0"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 0.5002348859330151,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 0.5002348859330151,
+    "case": "F1 positive control: well-resolved grid, a=0.5"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 1.0004697718660303,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 1.0004697718660303,
+    "case": "F1 positive control: well-resolved grid, a=1.0"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 2.0009395437320605,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 2.0009395437320605,
+    "case": "F1 positive control: well-resolved grid, a=2.0"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.517947, 0.366244)) holds 0 of 8 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.366244 by the field's own radial scale 0.732488; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "SILENT_WRONG",
+    "before_over_tol": 2000.0,
+    "before_rel_err": 1.0,
+    "before_value": 0.0,
+    "case": "F1 r_min sweep: 0 nodes -- EMPTY window"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.215443, 0.4)) holds 1 of 10 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.4 by the field's own radial scale 0.847799; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "SILENT_WRONG",
+    "before_over_tol": 93.8716568673994,
+    "before_rel_err": 0.0469358284336997,
+    "before_value": 1.9061283431326006,
+    "case": "F1 r_min sweep: 1 node -- UNDER-determined"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9713636476256227,
+    "after_rel_err": 0.00048568182381281133,
+    "after_value": 2.0009713636476256,
+    "before": "OK",
+    "before_over_tol": 0.9713636476256227,
+    "before_rel_err": 0.00048568182381281133,
+    "before_value": 2.0009713636476256,
+    "case": "F1 r_min sweep: 16 nodes in window"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.123285, 0.4)) holds 2 of 12 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.4 by the field's own radial scale 0.930458; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "OK",
+    "before_over_tol": 0.4226309121266869,
+    "before_rel_err": 0.00021131545606334345,
+    "before_value": 1.9995773690878733,
+    "case": "F1 r_min sweep: 2 nodes -- UNDER-determined (3 params)"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9916621577561457,
+    "after_rel_err": 0.0004958310788780729,
+    "after_value": 2.000991662157756,
+    "before": "OK",
+    "before_over_tol": 0.9916621577561457,
+    "before_rel_err": 0.0004958310788780729,
+    "before_value": 2.000991662157756,
+    "case": "F1 r_min sweep: 3 nodes -- exactly determined"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9922842273946131,
+    "after_rel_err": 0.0004961421136973065,
+    "after_value": 2.0009922842273946,
+    "before": "OK",
+    "before_over_tol": 0.9922842273946131,
+    "before_rel_err": 0.0004961421136973065,
+    "before_value": 2.0009922842273946,
+    "case": "F1 r_min sweep: 5 nodes in window"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9786098529809273,
+    "after_rel_err": 0.0004893049264904636,
+    "after_value": 2.000978609852981,
+    "before": "OK",
+    "before_over_tol": 0.9786098529809273,
+    "before_rel_err": 0.0004893049264904636,
+    "before_value": 2.000978609852981,
+    "case": "F1 r_min sweep: 9 nodes in window"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (1.10975, 0.4)) holds 0 of 200 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.4 by the field's own radial scale 1.56943; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "SILENT_WRONG",
+    "before_over_tol": 2000.0,
+    "before_rel_err": 1.0,
+    "before_value": 0.0,
+    "case": "F1 r_min sweep: r_min = 1.0 -- EMPTY window"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.534146, 0.4)) holds 0 of 200 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.4 by the field's own radial scale 1.00577; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "SILENT_WRONG",
+    "before_over_tol": 2000.0,
+    "before_rel_err": 1.0,
+    "before_value": 0.0,
+    "case": "F1 r_min sweep: r_min > r_win -- EMPTY window, fine grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 2.0009395437320605,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 2.0009395437320605,
+    "case": "F1 r_min sweep: well-resolved (leg 73-class grid)"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9335791186475539,
+    "after_rel_err": 0.00046678955932377697,
+    "after_value": 2.0009335791186476,
+    "before": "OK",
+    "before_over_tol": 0.9335791186475539,
+    "before_rel_err": 0.00046678955932377697,
+    "before_value": 2.0009335791186476,
+    "case": "F1 r_min sweep: well-resolved, coarser"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.000114855, 0.0001)) holds 0 of 400 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.0001 was capped to 0.0001 by the field's own radial scale 1.00032; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "SILENT_WRONG",
+    "before_over_tol": 2000.0,
+    "before_rel_err": 1.0,
+    "before_value": 0.0,
+    "case": "F1 r_win sweep: r_win=0.0001 on the leg-73-class grid"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit is rank-deficient (rank 2 < 3 parameters) over 21 in-window node(s). lstsq would return the minimum-norm solution, which is not the extrapolated d1'(0).",
+    "before": "OK",
+    "before_over_tol": 0.9994415183722793,
+    "before_rel_err": 0.0004997207591861397,
+    "before_value": 2.0009994415183723,
+    "case": "F1 r_win sweep: r_win=0.0003 on the leg-73-class grid"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit is rank-deficient (rank 2 < 3 parameters) over 32 in-window node(s). lstsq would return the minimum-norm solution, which is not the extrapolated d1'(0).",
+    "before": "OK",
+    "before_over_tol": 0.9994415183620653,
+    "before_rel_err": 0.0004997207591810326,
+    "before_value": 2.000999441518362,
+    "case": "F1 r_win sweep: r_win=0.0005 on the leg-73-class grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9994415183736116,
+    "after_rel_err": 0.0004997207591868058,
+    "after_value": 2.0009994415183736,
+    "before": "OK",
+    "before_over_tol": 0.9994415183736116,
+    "before_rel_err": 0.0004997207591868058,
+    "before_value": 2.0009994415183736,
+    "case": "F1 r_win sweep: r_win=0.001 on the leg-73-class grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9994415183571803,
+    "after_rel_err": 0.0004997207591785902,
+    "after_value": 2.000999441518357,
+    "before": "OK",
+    "before_over_tol": 0.9994415183571803,
+    "before_rel_err": 0.0004997207591785902,
+    "before_value": 2.000999441518357,
+    "case": "F1 r_win sweep: r_win=0.01 on the leg-73-class grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9994258323322569,
+    "after_rel_err": 0.0004997129161661285,
+    "after_value": 2.0009994258323323,
+    "before": "OK",
+    "before_over_tol": 0.9994258323322569,
+    "before_rel_err": 0.0004997129161661285,
+    "before_value": 2.0009994258323323,
+    "case": "F1 r_win sweep: r_win=0.1 on the leg-73-class grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.9395437320605105,
+    "after_rel_err": 0.0004697718660302552,
+    "after_value": 2.0009395437320605,
+    "before": "OK",
+    "before_over_tol": 0.9395437320605105,
+    "before_rel_err": 0.0004697718660302552,
+    "before_value": 2.0009395437320605,
+    "case": "F1 r_win sweep: r_win=0.4 on the leg-73-class grid"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.517947, 0.366244)) holds 0 of 8 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.366244 by the field's own radial scale 0.732488; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "RAISED",
+    "before_exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.13895, 0.1)) holds 0 of 8 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.01); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+    "case": "F2 modulation on EMPTY-window grid: 0 fit nodes"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.534146, 0.4)) holds 0 of 200 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.4 by the field's own radial scale 1.00577; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "RAISED",
+    "before_exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.522512, 0.1)) holds 0 of 200 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.5); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+    "case": "F2 modulation on EMPTY-window grid: r_min > r_win, fine grid"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.05888632011405041,
+    "after_rel_err": 2.9443160057025202e-05,
+    "after_value": 1.4000412204240797,
+    "before": "OK",
+    "before_over_tol": 0.05888632011405041,
+    "before_rel_err": 2.9443160057025202e-05,
+    "before_value": 1.4000412204240797,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(0.25) = 2 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 3.1720657846433046e-13,
+    "after_rel_err": 1.5860328923216522e-16,
+    "after_value": 1.3999999999999997,
+    "before": "OK",
+    "before_over_tol": 3.1720657846433046e-13,
+    "before_rel_err": 1.5860328923216522e-16,
+    "before_value": 1.3999999999999997,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(1) = 1 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.1626567055982139,
+    "after_rel_err": 8.132835279910695e-05,
+    "after_value": 1.3998861403060812,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1113.6347298293515,
+    "before_rel_err": 0.5568173649146758,
+    "before_value": 0.6204556891194538,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(100) = 0.1 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.17192453025862064,
+    "after_rel_err": 8.596226512931033e-05,
+    "after_value": 1.3998796528288189,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 98.31069531467587,
+    "before_rel_err": 0.049155347657337936,
+    "before_value": 1.3311825132797268,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(16) = 0.25 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.1618249812053639,
+    "after_rel_err": 8.091249060268195e-05,
+    "after_value": 1.3998867225131562,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 233.08013597213588,
+    "before_rel_err": 0.11654006798606795,
+    "before_value": 1.2368439048195048,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(25) = 0.2 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.17106531029899485,
+    "after_rel_err": 8.553265514949743e-05,
+    "after_value": 1.3998802542827906,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 3.0913653248860435,
+    "before_rel_err": 0.0015456826624430217,
+    "before_value": 1.3978360442725797,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(4) = 0.5 vs r_win 0.4"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": 0.16351461835746,
+    "after_rel_err": 8.175730917873e-05,
+    "after_value": 1.3998855397671497,
+    "before": "SILENT_WRONG",
+    "before_over_tol": 1730.824188058722,
+    "before_rel_err": 0.865412094029361,
+    "before_value": 0.18842306835889447,
+    "case": "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(400) = 0.05 vs r_win 0.4"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ValueError: odd_field_x_slope: the origin fit window (r in (0.517947, 0.366244)) holds 0 of 8 radial nodes, fewer than the 3 required for the three-parameter (r, r^3, r^5) fit. r_win=0.4 was capped to 0.366244 by the field's own radial scale 0.732488; refine the radial grid, lower r_min, or pass a field whose scale this grid resolves. Fitting anyway would return a fabricated finite value (leg 205 measured exactly 0.0 against a truth of 2.0).",
+    "before": "RAISED",
+    "before_exception": "ValueError: u_x_at_origin: the origin fit window (r in (0.13895, 0.1)) holds 0 of 8 radial nodes, fewer than the 2 required for the two-parameter fit. This grid does not resolve the origin neighbourhood (r_min=0.01); refine the radial grid, widen r_window, or lower r_min. Fitting anyway would return a fabricated finite value.",
+    "case": "F2 run(renorm=True) on EMPTY-window grid"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F2 the discarded least-squares residual, measured against the slope error"
+   },
+   {
+    "after": "OK",
+    "after_over_tol": -2000.0,
+    "after_rel_err": -1.0,
+    "before": "OK",
+    "before_over_tol": 0.0037983813564298635,
+    "before_rel_err": 1.8991906782149317e-06,
+    "case": "F2 widest surviving gap: rank-deficient odd-fit with sibling guard passing"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": 1.3998156714204588,
+    "before": "NONFINITE",
+    "before_value": 1.3976349126563483,
+    "case": "F3 inf planted in omega at r=10.23 (outside fit window)"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": "nan",
+    "before": "NONFINITE",
+    "before_value": "nan",
+    "case": "F3 nan planted in eta at r=0.05231 (inside fit window)"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": 1.3976349126563483,
+    "before": "NONFINITE",
+    "before_value": 1.3976349126563483,
+    "case": "F3 nan planted in eta at r=10.23 (outside fit window)"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": "nan",
+    "before": "NONFINITE",
+    "before_value": "nan",
+    "case": "F3 nan planted in omega at r=0.05231 (inside fit window)"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": 1.3998156714204588,
+    "before": "NONFINITE",
+    "before_value": 1.3976349126563483,
+    "case": "F3 nan planted in omega at r=10.23 (outside fit window)"
+   },
+   {
+    "after": "NONFINITE",
+    "after_value": 1.3998156714204588,
+    "before": "NONFINITE",
+    "before_value": 1.3976349126563483,
+    "case": "F3 nan planted in xi at r=10.23 (outside fit window (xi never enters modulation))"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+    "before": "RAISED",
+    "before_exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+    "case": "F4 PolarGrid(n_r=1, n_beta=16)"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ZeroDivisionError: float division by zero",
+    "before": "RAISED",
+    "before_exception": "ZeroDivisionError: float division by zero",
+    "case": "F4 modulation with omega = 0, eta nonzero (c_l = x/0)"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "ZeroDivisionError: float division by zero",
+    "before": "RAISED",
+    "before_exception": "ZeroDivisionError: float division by zero",
+    "case": "F4 modulation with omega = eta = 0 (c_l = 0/0)"
+   },
+   {
+    "after": "NO_REFERENT",
+    "after_exception": "ValueError: odd_field_x_slope: the (r, r^3, r^5) basis does not represent d1 over the fit window (r < 0.4): relative least-squares residual 0.692 exceeds max_rel_residual=0.5 over 84 nodes. The returned slope would be a finite plausible wrong number (leg 205 measured 0.269302 against a truth of 2.0 at a discarded residual of 8.6e-1).",
+    "before": "NO_REFERENT",
+    "before_value": 18.79017804526246,
+    "case": "F4 odd_field_x_slope on a CONSTANT (not odd-in-x) field"
+   },
+   {
+    "after": "NO_REFERENT",
+    "after_value": 0.6348323897483122,
+    "before": "NO_REFERENT",
+    "before_value": 0.6348323897483122,
+    "case": "F4 odd_field_x_slope on an EVEN-in-x field (annihilated by the cos(beta) projection)"
+   },
+   {
+    "after": "OK",
+    "after_value": 0.0,
+    "before": "OK",
+    "before_value": 0.0,
+    "case": "F4 odd_field_x_slope on the zero field"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 planted 10x wrong value on radius r=0.05231 (inside fit window)"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 planted 10x wrong value on radius r=10.23 (outside fit window)"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "UnboundLocalError: cannot access local variable 'step' where it is not associated with a value",
+    "before": "RAISED",
+    "before_exception": "UnboundLocalError: cannot access local variable 'step' where it is not associated with a value",
+    "case": "F4 run(max_steps=0)"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 run(tol=inf)"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "IndexError: index 2 is out of bounds for axis 0 with size 2",
+    "before": "RAISED",
+    "before_exception": "IndexError: index 2 is out of bounds for axis 0 with size 2",
+    "case": "F4 transport on n_r=2, n_beta=16"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "IndexError: index 1 is out of bounds for axis 0 with size 0",
+    "before": "RAISED",
+    "before_exception": "IndexError: index 1 is out of bounds for axis 0 with size 0",
+    "case": "F4 transport on n_r=200, n_beta=0"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+    "before": "RAISED",
+    "before_exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+    "case": "F4 transport on n_r=200, n_beta=1"
+   },
+   {
+    "after": "RAISED",
+    "after_exception": "IndexError: index 2 is out of bounds for axis 0 with size 2",
+    "before": "RAISED",
+    "before_exception": "IndexError: index 2 is out of bounds for axis 0 with size 2",
+    "case": "F4 transport on n_r=200, n_beta=2"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport on n_r=200, n_beta=4"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport on n_r=3, n_beta=16"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport on n_r=4, n_beta=16"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport on n_r=8, n_beta=16"
+   },
+   {
+    "after": "NONFINITE",
+    "before": "NONFINITE",
+    "case": "F4 transport with c_l=-inf"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport with c_l=0.0"
+   },
+   {
+    "after": "RETURNED",
+    "before": "RETURNED",
+    "case": "F4 transport with c_l=1e+300"
+   },
+   {
+    "after": "NONFINITE",
+    "before": "NONFINITE",
+    "case": "F4 transport with c_l=inf"
+   },
+   {
+    "after": "NONFINITE",
+    "before": "NONFINITE",
+    "case": "F4 transport with c_l=nan"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F5 advection_speeds with u = v = 0 (known answer s_rho = c_l, s_beta = 0)"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F5 angular DST-I round trip from_modes(to_modes(f)) on a random field"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F5 grad_xy on f = x (known answer f_x = 1, f_y = 0)"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F5 highest angular mode n=16 through the transform"
+   },
+   {
+    "after": "OK",
+    "before": "OK",
+    "case": "F5 odd_field_x_slope quadrature bias on well-posed input (convergence ladder)"
+   }
+  ],
+  "gate_answer_after": "NO",
+  "gate_answer_before": "YES",
+  "n_silent_wrong_after": 0,
+  "n_silent_wrong_before": 18,
+  "reproduces_leg_205_committed_totals": true,
+  "silent_wrong_after": [],
+  "silent_wrong_before": [
+   "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.05",
+   "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.1",
+   "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.2",
+   "F1 defect-B recovery: lam=400 (field scale 0.05), r_win=0.4",
+   "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=100",
+   "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=25",
+   "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=4",
+   "F1 envelope-scale sweep on the FULLY RESOLVED grid: lam=400",
+   "F1 r_min sweep: 0 nodes -- EMPTY window",
+   "F1 r_min sweep: 1 node -- UNDER-determined",
+   "F1 r_min sweep: r_min = 1.0 -- EMPTY window",
+   "F1 r_min sweep: r_min > r_win -- EMPTY window, fine grid",
+   "F1 r_win sweep: r_win=0.0001 on the leg-73-class grid",
+   "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(100) = 0.1 vs r_win 0.4",
+   "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(16) = 0.25 vs r_win 0.4",
+   "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(25) = 0.2 vs r_win 0.4",
+   "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(4) = 0.5 vs r_win 0.4",
+   "F2 modulation on the FULLY RESOLVED leg-73-class grid, eta scale 1/sqrt(400) = 0.05 vs r_win 0.4"
+  ],
+  "totals_after": {
+   "NONFINITE": 9,
+   "NO_REFERENT": 2,
+   "OK": 42,
+   "RAISED": 19,
+   "RETURNED": 9
+  },
+  "totals_before": {
+   "NONFINITE": 9,
+   "NO_REFERENT": 2,
+   "OK": 32,
+   "RAISED": 11,
+   "RETURNED": 9,
+   "SILENT_WRONG": 18
+  },
+  "totals_committed_by_leg_205": {
+   "NONFINITE": 9,
+   "NO_REFERENT": 2,
+   "OK": 32,
+   "RAISED": 11,
+   "RETURNED": 9,
+   "SILENT_WRONG": 18
+  },
+  "wall_seconds": 29.38
+ },
+ "clause_b": {
+  "banked_runs": [
+   {
+    "argv": [
+     "--generate"
+    ],
+    "artifact": "writeup/data/spike1_stepB_rescaled.json",
+    "artifact_comparison": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 28,
+     "leaves_identical": 28,
+     "leaves_moved": 0,
+     "moved_detail": [],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "artifact_leaves_moved": 0,
+    "calls": "odd_field_x_slope directly (spike1_stepB_evidence.py:84-85)",
+    "calls_bit_identical": 2,
+    "calls_compared": 2,
+    "calls_moved": 0,
+    "contamination": false,
+    "key": "spike1_stepB_rescaled",
+    "per_call_differential": {
+     "both_raise": 0,
+     "moved": [],
+     "n": 2,
+     "n_moved": 0,
+     "n_win_capped": 0,
+     "raise_post": 0,
+     "raise_pre": 0,
+     "same": 2
+    },
+    "returncode": 0,
+    "script": "writeup/3_spikes/spike1_stepB_evidence.py",
+    "wall_seconds": 22.4
+   },
+   {
+    "argv": [],
+    "artifact": "writeup/data/p2_route_brs_v1_status_audit.json",
+    "artifact_comparison": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 451,
+     "leaves_identical": 451,
+     "leaves_moved": 0,
+     "moved_detail": [],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "artifact_leaves_moved": 0,
+    "calls": "RescaledBoussinesq.run via a ScriptedRelaxation subclass",
+    "calls_bit_identical": 62,
+    "calls_compared": 62,
+    "calls_moved": 0,
+    "contamination": false,
+    "key": "p2_route_brs_v1_status_audit",
+    "per_call_differential": {
+     "both_raise": 0,
+     "moved": [],
+     "n": 62,
+     "n_moved": 0,
+     "n_win_capped": 0,
+     "raise_post": 0,
+     "raise_pre": 0,
+     "same": 62
+    },
+    "returncode": 0,
+    "script": "experiments/p2_route_brs_v1_status_audit.py",
+    "wall_seconds": 1.8
+   }
+  ],
+  "comparison": "== on float64 per call (NaN==NaN identical) and per artifact leaf",
+  "n_banked_artifacts_rerun": 2,
+  "skipped_slow": true,
+  "test_runs": [
+   {
+    "calls_bit_identical": 4999,
+    "calls_compared": 4999,
+    "calls_moved": 0,
+    "returncode": 0,
+    "stderr_tail": null,
+    "test": "test_boussinesq_rescaled.py",
+    "wall_seconds": 389.2
+   },
+   {
+    "calls_bit_identical": 0,
+    "calls_compared": 0,
+    "calls_moved": 0,
+    "returncode": 0,
+    "stderr_tail": null,
+    "test": "test_boussinesq_transport.py",
+    "wall_seconds": 1.6
+   },
+   {
+    "calls_bit_identical": 142,
+    "calls_compared": 142,
+    "calls_moved": 0,
+    "returncode": 0,
+    "stderr_tail": null,
+    "test": "test_boussinesq_rescaled_status.py",
+    "wall_seconds": 2.1
+   }
+  ],
+  "total_artifact_leaves_that_moved": 0,
+  "total_calls_that_moved": 0,
+  "total_odd_field_x_slope_calls_compared": 5205,
+  "zero_contamination": true
+ },
+ "escalating_leg": 205,
+ "gate_answer": "YES",
+ "gate_clause_a_every_adversarial_case_now_rejects": true,
+ "gate_clause_b_zero_contamination_bit_identical": true,
+ "leg": 221,
+ "lesson_90_control": {
+  "distinct_module_objects": true,
+  "post_has_max_rel_residual": true,
+  "post_has_min_points": true,
+  "post_raises_on_empty_window": true,
+  "post_recovers_on_defect_B": true,
+  "pre_fabricates_on_defect_B": true,
+  "pre_lacks_max_rel_residual": true,
+  "pre_lacks_min_points": true,
+  "pre_returns_exact_zero_on_empty_window": true
+ },
+ "lesson_90_magnitudes": {
+  "defect_A_pre": 0.0,
+  "defect_A_truth": 2.0,
+  "defect_B_post": 2.0007759522991355,
+  "defect_B_post_rel_err": 0.00038797614956775917,
+  "defect_B_pre": 0.26930226316474387,
+  "defect_B_pre_rel_err": 0.865348868417628,
+  "defect_B_truth": 2.0
+ },
+ "module": "solver/boussinesq_rescaled.py",
+ "pre_repair_n_lines": 280,
+ "pre_repair_ref": "1a3e63c",
+ "route": "ROUTE-BVRR",
+ "wall_seconds": 447.0
+}
