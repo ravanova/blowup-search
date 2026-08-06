@@ -1,0 +1,1158 @@
+#!/usr/bin/env python3
+"""ROUTE-P0T v1 — PHASE 0: TARGET SELECTION UNDER THE CLAY GOAL (leg 251).
+
+Route-M (leg 45) screened targets against NOVELTY and this repository's own
+multiplier/shift predicate.  This module re-runs that discipline against a
+DIFFERENT screen, keyed to the 2026-08-06 user ruling that changed the prize to a
+full Clay solve:
+
+  SCREEN 1 (NRS/Tsai).  Nečas-Růžička-Šverák and Tsai exclude nontrivial exactly
+      backward self-similar 3D INCOMPRESSIBLE Navier-Stokes blow-up.  A candidate
+      must be discretely self-similar, non-self-similar, rotated, or outside the
+      hypothesis set entirely, to survive.
+
+  SCREEN 2 (already-banked dead ends).  A candidate must not be a re-proposal,
+      under a new label, of something this repository has already measured dead:
+      L1's death in three realizations (legs 54 / 56 / 163+176), stage B's
+      exhaustion (leg 126), the space-axis synthesis (legs 179 / 186), and every
+      object in `solver/target_selection.py`'s CERTIFICATION_RECORD.
+
+GATE (pre-committed, DIRECTION.md leg 251):  Does at least one target object +
+ansatz combination survive BOTH screens?
+
+This module is a LEDGER, not a solver.  It runs no floating-point experiment; the
+quantities it carries are (a) hypotheses and conclusions transcribed from primary
+sources read at full text, and (b) magnitudes read back from this repository's own
+banked JSON/journals with their locators.  Everything it asserts about a paper is
+attributed to a line of extracted text or a numbered theorem.
+
+Run:  .venv/bin/python experiments/p2_route_p0t_v1_targetselection.py
+Writes: writeup/data/p2_route_p0t_v1_targetselection.json
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+OUT = os.path.join(ROOT, "writeup", "data", "p2_route_p0t_v1_targetselection.json")
+
+LEG = 251
+ROUTE = "P0T"
+DATE = "2026-08-07"
+CLAY_ODDS = "0.05%"
+
+
+# ---------------------------------------------------------------------------
+# The screen's own authority: what NRS/Tsai and their successors actually say.
+# Every row was read at full text for this leg unless `read_at_source` is False.
+# Line numbers are into `pdftotext` extractions of the linked PDFs.
+# ---------------------------------------------------------------------------
+
+SCREEN1_AUTHORITY = [
+    {
+        "id": "NRS96",
+        "cite": "Necas, Ruzicka, Sverak, Acta Math. 176 (1996) 283-294",
+        "ansatz_covered": "exactly backward self-similar (SS), no rotation",
+        "hypothesis": "U a weak solution of Leray's stationary system with U in L^3(R^3)",
+        "conclusion": "U == 0",
+        "read_at_source": False,
+        "source_status": "restated_by",
+        "locator": (
+            "Tsai 1998 l.75-77 ('The main result of [NRS] is that the only weak "
+            "solution of (1.3) belonging to L3(R3) is U == 0'); corroborated "
+            "Bradshaw-Tsai 1802.00038 l.74-79. ProjectEuclid served a "
+            "bot-protection page, not the PDF -- 5th failed route, after leg 253's 4."
+        ),
+    },
+    {
+        "id": "TSAI98-T1",
+        "cite": "Tsai, ARMA 143 (1998) 29-51, Theorem 1",
+        "ansatz_covered": "exactly backward self-similar (SS), no rotation",
+        "hypothesis": "U a weak solution of (1.3) with U in L^q(R^3), q in (3, infinity]",
+        "conclusion": "U constant, hence identically zero if q < infinity",
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "TSAI1998.txt l.161-163 (paper p.31)",
+    },
+    {
+        "id": "TSAI98-T2",
+        "cite": "Tsai, ARMA 143 (1998) 29-51, Theorem 2",
+        "ansatz_covered": "exactly backward self-similar (SS), no rotation",
+        "hypothesis": (
+            "u a weak solution of (1.1) of the self-similar form (1.2) satisfying the "
+            "LOCAL energy estimates (1.4) in Q_1(0,T); no boundary condition imposed"
+        ),
+        "conclusion": "u identically zero",
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "TSAI1998.txt l.164-166; 'purely local ... no boundary condition' at l.216-218",
+    },
+    {
+        "id": "TSAI98-GROWTH",
+        "cite": "Tsai, ARMA 143 (1998), eq. (1.10) / Remark 5.3",
+        "ansatz_covered": "exactly backward self-similar (SS), no rotation",
+        "hypothesis": (
+            "the sharp form is GROWTH, not decay: U(y) = o(|y|) and P(y) = O(|y|^N) for "
+            "some finite N (eq. (1.10)); Remark 5.3 sharpens to |U(y)| <= b|y| with b < a"
+        ),
+        "conclusion": "Pi is constant, whence triviality via Lemma 5.1",
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": (
+            "TSAI1998.txt l.193-196 for (1.10) verbatim: 'even a much weaker condition "
+            "... U(y) = o(|y|), P(y) = O(|y|^N) ... is sufficient to imply that Pi is "
+            "constant'.  Leg 253 pins Remark 5.3's b<a form at TSAI1998 l.1121-1126 and "
+            "flags that the final step to U==0 still uses U in L^q or U -> 0."
+        ),
+        "why_it_matters": (
+            "The repository's 19 prior paraphrases all called this a DECAY condition. It "
+            "is not: it admits profiles that GROW sublinearly. Independently found here "
+            "and by leg 253; the two reads agree."
+        ),
+    },
+    {
+        "id": "TSAI98-R54",
+        "cite": "Tsai, ARMA 143 (1998), Remark 5.4",
+        "ansatz_covered": "the escape hatch, stated by Tsai himself",
+        "hypothesis": "no growth assumption at all",
+        "conclusion": (
+            "NONTRIVIAL solutions exist: for ANY harmonic Phi on R^3, U = grad Phi with "
+            "P = -|U|^2/2 - a y.U satisfies Leray's equations (1.3)"
+        ),
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "TSAI1998.txt l.1686-1690",
+        "why_it_matters": (
+            "The exclusion is a statement about a GROWTH CLASS, not about the equation. "
+            "Any candidate claiming to survive screen 1 must name which hypothesis it "
+            "fails, not merely assert that it is 'different'."
+        ),
+    },
+    {
+        "id": "ESS03",
+        "cite": "Escauriaza, Seregin, Sverak (L^inf L^3 regularity criterion)",
+        "ansatz_covered": "SS, DSS and RSS alike, whenever the profile is in L^3",
+        "hypothesis": "u in L^inf([-1,0); L^3(R^3))",
+        "conclusion": "regularity, hence triviality of the profile",
+        "read_at_source": False,
+        "source_status": "restated_by",
+        "locator": (
+            "Pineau-Vicol 2607.09619 l.226-231 (states it applies to RSS because the "
+            "ansatz gives ||u(.,t)||_{L^3} = ||U||_{L^3} for all t<0 and all alpha); "
+            "Bradshaw-Tsai 1802.00038 l.104-106"
+        ),
+    },
+    {
+        "id": "CW17-DSS",
+        "cite": "Chae, Wolf, Comm. PDE 42(9) (2017) 1359-1374",
+        "ansatz_covered": "backward discretely self-similar (DSS)",
+        "hypothesis": "Type I bound, and scaling factor lambda sufficiently close to 1",
+        "conclusion": "U == 0",
+        "read_at_source": False,
+        "source_status": "restated_by",
+        "locator": (
+            "Bradshaw-Tsai 1802.00038 l.108-112 (with the delta = delta(N) dependence "
+            "spelled out); re-proved quantitatively as Pineau-Vicol Thm 1.6, "
+            "2607.09619 l.362-366, read at source here"
+        ),
+    },
+    {
+        "id": "PV26-RSS",
+        "cite": "Pineau, Vicol, arXiv:2607.09619v1 (10 Jul 2026), Theorem 1.4",
+        "ansatz_covered": "ROTATED backward self-similar (RSS), rotation speed alpha",
+        "hypothesis": "Type I upper bound with constant C_{U,0}; |alpha| < alpha_lo(C_{U,0}) or |alpha| > alpha_hi(C_{U,0})",
+        "conclusion": "U == 0",
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "2607.09619.txt l.239-244; the gap is stated at l.245",
+        "verbatim_gap": "'Theorem 1.4 resolves Conjecture 1.1 for |alpha| << 1 and |alpha| >> 1, but leaves open the case alpha ~ 1.'",
+        "caveat": "UNREFEREED PREPRINT, v1, 28 days old at the date of this leg.",
+    },
+    {
+        "id": "PV26-RDSS",
+        "cite": "Pineau, Vicol, arXiv:2607.09619v1, Theorem 1.7",
+        "ansatz_covered": "rotated DISCRETELY self-similar (RDSS)",
+        "hypothesis": (
+            "Type I bound; and either (|alpha| <= alpha_lo and 1 < lambda < lambda_bar), "
+            "or (|alpha| >= alpha_hi and 1 < lambda < lambda_bar^{1/(1+alpha^2)})"
+        ),
+        "conclusion": "U == 0",
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "2607.09619.txt l.425-433",
+        "caveat": "UNREFEREED PREPRINT, v1, 28 days old.",
+    },
+    {
+        "id": "AXI-TYPEI",
+        "cite": "Chen-Strain-Yau-Tsai (IMRN 2008) and Seregin-Sverak (Comm. PDE 34 (2009) 171-201)",
+        "ansatz_covered": "ANY axisymmetric Type I blow-up, self-similar or not",
+        "hypothesis": "axisymmetry plus the Type I rate",
+        "conclusion": (
+            "excluded; consequently any putative axisymmetric singularity must be Type II"
+        ),
+        "read_at_source": False,
+        "source_status": "restated_by",
+        "locator": (
+            "Pineau-Vicol 2607.09619.txt footnote 6, l.205-210, verbatim: 'In the "
+            "axisymmetric setting, Type I blowup for 3D Navier-Stokes has been ruled out "
+            "[14, 51]; consequently, any putative singularity must be of Type II.'"
+        ),
+    },
+    {
+        "id": "BT18-OPEN",
+        "cite": "Bradshaw, Tsai, arXiv:1802.00038 (survey), sec. 1",
+        "ansatz_covered": "what is LEFT after the exclusions -- the survivor statement",
+        "hypothesis": "n/a",
+        "conclusion": (
+            "(i) 'backward DSS solutions haven't been ruled out under any condition when "
+            "lambda is significantly larger than one'; (ii) solutions self-similar modulo "
+            "a ROTATION are not excluded under |u| <= C/(|x| + sqrt(-t)), 'even though "
+            "this assumption does exclude backward self-similar solutions', which the "
+            "authors call 'surprising' since both classes have STATIONARY ansatzes"
+        ),
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": "1802.00038.txt l.112-118 (DSS) and l.98-107 (rotated)",
+    },
+    {
+        "id": "CIV26-EULER-LIFT",
+        "cite": "Constantin, Ignatova, Vicol, arXiv:2602.17570v3 (20 Jul 2026)",
+        "ansatz_covered": "the 'certify an inviscid INCOMPRESSIBLE profile, then lift to NS' strategy",
+        "hypothesis": (
+            "finite kinetic energy gives similarity exponent gamma >= 2/5; a smooth "
+            "globally self-similar profile with an outgoing property gives gamma >= 1/2; "
+            "axisymmetric with a C^2 velocity profile gives gamma >= 1/2"
+        ),
+        "conclusion": (
+            "self-similar 3D Euler solutions are not viable for a lift to 3D NS under a "
+            "local outgoing property"
+        ),
+        "read_at_source": True,
+        "source_status": "read_at_source",
+        "locator": (
+            "2602.17570.txt l.6-11 (abstract, the three exponent bounds); the "
+            "non-viability of the lift is stated at 2607.09619.txt l.209-210 citing it"
+        ),
+        "why_it_matters": (
+            "This is the sentence that decides between an incompressible and a "
+            "compressible target: 'Incompressible fluids are not local, the outside "
+            "matters' (2602.17570.txt l.21), and every reported incompressible "
+            "self-similar singularity carries 'a remnant of compression due to either the "
+            "presence of boundaries ... or the lack of smoothness of vorticity' (l.23-27)."
+        ),
+    },
+]
+
+
+# ---------------------------------------------------------------------------
+# Screen 2's authority: this repository's own measured dead ends, with the
+# realization each negative holds in (lesson 91) and its magnitude.
+# ---------------------------------------------------------------------------
+
+SCREEN2_AUTHORITY = [
+    {
+        "id": "L1-R1-ELL1W",
+        "what": "L1 realization 1: ell^1_w coefficient basis",
+        "leg": 54,
+        "measured": (
+            "best admissible Z_1 over every shape/class/gauge/split = 8.9591 vs "
+            "block-diagonal baseline 10.4584 -- a 1.167x improvement where >8x was needed"
+        ),
+        "realization": "ell^1_w coefficient basis on the a=0 CLM linearization",
+        "locator": "experiments/journal/leg_54.md; plan_of_record.py:887; recomputed bit-identically by leg 126 at relative gap 0.00e+00",
+    },
+    {
+        "id": "L1-R2-COLLOCATION",
+        "what": "L1 realization 2: sup-norm collocation basis",
+        "leg": 56,
+        "measured": (
+            "(H,D) consistency defect exceeds L1 step one's admissible tau by 1.85e7x "
+            "(derivative) / 2.04e11x (Hilbert) at n = 801; the genuine interpolation error "
+            "would need n ~ 4.43e+06"
+        ),
+        "realization": "natural-spline collocation on the a=0 CLM linearization",
+        "locator": "experiments/journal/leg_56.md",
+    },
+    {
+        "id": "L1-R3-ORIGINH2",
+        "what": "L1 realization 3: origin-H^2, capped at a=0 with no transfer",
+        "leg": "163/176",
+        "measured": (
+            "best Z_1 cell 140.72 (K=2, M=64) where <1 is needed, growing ~K^2 to "
+            "66043.98; sigma_min = 0.0908047 at N=512, and leg 163's 0.7147 witness was "
+            "optimistic by 7.9x"
+        ),
+        "realization": "origin-H^2 Laguerre basis, a=0 exactly; obstruction O3 'FATAL for transfer'",
+        "locator": "experiments/journal/leg_176.md; leg 163 on branch leg/163-h2s-v1",
+    },
+    {
+        "id": "L1-NO-FOURTH-SPACE-BETWEEN",
+        "what": "the interpolation segment between realizations 1 and 3 is EMPTY",
+        "leg": 182,
+        "measured": (
+            "window width exactly ZERO: the only sigma = s + 1/p where neither ell^1_w "
+            "obstruction is present is sigma = 2 exactly, a single point at every p, and "
+            "there the target is out of the space by margin alpha - 1 = -0.602647 "
+            "exponent units, the SAME number at every p in {1, 1.25, 1.5, 1.75, 2, 3, 10, inf}"
+        ),
+        "realization": "ell^p_w / Besov-coefficient / weighted-Sobolev-on-the-circle / origin-regularity family",
+        "locator": "experiments/journal/leg_182.md",
+    },
+    {
+        "id": "STAGE-B-EXHAUSTED",
+        "what": "stage B's declared search space is exhausted",
+        "leg": 126,
+        "measured": (
+            "1686/1686 configurations covered, 0 uncovered (144 THEOREM / 1032 STRUCTURAL "
+            "/ 510 MEASURED); structure owns 76.6292% of the required 1.019466 decades, "
+            "tuning delivered 6.5919%, and a PERFECT search still lands at Z_1 >= 6.0424, "
+            "6.04x short"
+        ),
+        "realization": "the a=0 CLM linearization, five declared axes; mu is deliberately not an axis",
+        "locator": "experiments/journal/leg_126.md",
+    },
+    {
+        "id": "SPACE-AXIS-SYNTHESIS",
+        "what": "the space axis as an axis: two endpoints and an empty segment",
+        "leg": "179/186",
+        "measured": (
+            "60+ and 56 quantities respectively re-read from JSON, all reproducing; "
+            "leg 127 is a THEOREM (Z_1 >= 1 for every bounded A at s<1, sigma_min ~ M^-p "
+            "with p = 0.9925 / 0.6985 / 0.3202 at s = 0 / 0.3 / 0.7 against a predicted "
+            "1-s, 196/196 battery, min slack 7.7343e-10)"
+        ),
+        "realization": "ell^1_w at s<1 on this operator -- never a statement about the operator",
+        "locator": "experiments/journal/leg_179.md, experiments/journal/leg_186.md",
+    },
+    {
+        "id": "LERAY-PROJECTOR-LEAVES-L2MU",
+        "what": (
+            "the repository's candidate FOURTH space cannot host the incompressible "
+            "Navier-Stokes nonlinearity at all"
+        ),
+        "leg": 257,
+        "measured": (
+            "P[(U.grad)U] has an algebraic |x|^-4 tail for the divergence-free Gaussian "
+            "witness U = curl(e^{-|x|^2} e_3): fitted exponent -3.000000 exactly, stable "
+            "multipole ratio 1.000000 across four radii, and the coefficient of the tail "
+            "IS the energy integral |U|^2, so it cannot vanish -- while the Gaussian "
+            "control underflows to exactly 0.0. Hence F(U) = U - L^-1 P(...) is not "
+            "well-defined on H^2(mu), in d=2 or d=3, self-similar or not."
+        ),
+        "realization": "Breden-Chu weighted Sobolev H^2(mu), mu = e^{|x|^2/4}",
+        "locator": (
+            "experiments/journal/leg_257.md and writeup/data/p2_route_p1c_v1_reach.json "
+            "on branch leg/257-p1c-v1 (PR #19, PARKED, not on main); it explicitly "
+            "withdraws leg 255's concession that a later leg might argue the projector "
+            "into reach. Same leg measures Z_1 = 0.065136 there, vs leg 54's 8.9591 and "
+            "leg 176's 140.72 -- the space is good, the NONLINEARITY is what leaves it."
+        ),
+    },
+    {
+        "id": "CERTIFIED-BY-OTHERS",
+        "what": "objects whose certification would contribute nothing",
+        "leg": 45,
+        "measured": (
+            "6 objects in CERTIFICATION_RECORD: Chen-Hou 2D Boussinesq / 3D Euler with "
+            "boundary (CAP, 2210.07191 + Part II); Hou-Luo odd non-degenerate (CAP AND "
+            "analytic, 2308.01528); De Gregorio a=1 (CAP); the ENTIRE smooth gCLM branch "
+            "for all a <= 1 (analytic, 2305.05895); dissipative gCLM near a=1/2 (analytic, "
+            "1908.09385); 3D axisymmetric Euler without swirl (analytic, Elgindi)"
+        ),
+        "realization": "n/a -- a literature ledger, gated by test_target_selection.py 9/9",
+        "locator": "solver/target_selection.py:154-219; LITERATURE_CHECK.md:40-70",
+    },
+    {
+        "id": "GCLM-EXHAUSTED",
+        "what": "the gCLM model itself",
+        "leg": 42,
+        "measured": "exhausted at Stage 3.5",
+        "realization": "gCLM, this repository's whole measurement programme on it",
+        "locator": "plan_of_record.py BANNED entry 1 ('another gCLM measurement leg', lifted by: never)",
+    },
+    {
+        "id": "DSS-CHEAP-ENTRANCE",
+        "what": "obtaining a DSS orbit by bifurcation off a fixed point of a rescaled flow",
+        "leg": "Route-E/H/I, scoped by leg 254",
+        "measured": (
+            "3 of 3 reasons are local-linear spectral statements AT A FIXED POINT of the "
+            "gCLM rescaled flow: (1) the log-periodic directions are CONTINUOUS spectrum, "
+            "only isolated eigenvalues are the symmetry modes 0 and -1, positive control "
+            "+1.083/+4.578; (2) dissipation discretizes the continuum 2->8 but every "
+            "member lands on the negative real axis, max Re = 3e-13, control 6->9 at "
+            "+1.58; (3) inviscidly 141/144 unstable directions at K=144, leading "
+            "+4.5455+430.35i, and any mu>0 deletes the band, max Re = -1e-13 at mu=0.05"
+        ),
+        "realization": (
+            "gCLM ONLY, 1D, compactified odd-sine basis, one gauge, K<=384, conclusions "
+            "carried at exactly a=0 and a=1/2. Route-E verbatim: 'Nothing about NS. "
+            "gCLM's scaling structure is not NS's.'"
+        ),
+        "locator": (
+            "Route-E cd43893 sec 26, Route-H 9dba93f sec 29, Route-I 35929a4 sec 30; "
+            "scoped by leg 254 (branch leg/254-dssx-v1), whose finding the user ruled on "
+            "2026-08-07 -- see DSS_BAN_STATE below"
+        ),
+    },
+    {
+        "id": "UNSTABLE-SS-PRECISION",
+        "what": "the unstable-self-similar precision ladder",
+        "leg": "175/196",
+        "measured": (
+            "arXiv:2509.14185 Fig. 3b: Boussinesq log10 max residual -8.178 achieved vs "
+            "-7.020 needed, NONE certified, 4.82 decades open; net margin closure ~2 "
+            "decades per instability order; technique applied to 4 of 12 solutions. Leg "
+            "196: 0 of leg 175's 4 open items closed, 3 new obstructions named by the "
+            "authors and a 4th by a third party, 0 of 22 citing papers supplies a certificate"
+        ),
+        "realization": "the DeepMind/NYU PINN precision programme, inviscid objects",
+        "locator": "experiments/journal/leg_175.md, experiments/journal/leg_196.md",
+    },
+    {
+        "id": "GRADE-A-FLUID-CELL-EMPTY",
+        "what": (
+            "the occupancy matrix cell that Phase 1 exists to fill -- NOT a dead end, the "
+            "opposite: the recorded reason the cell is empty is the ABSENCE of a target"
+        ),
+        "leg": "174/242",
+        "measured": (
+            "Grade A x fluid-adjacent = EMPTY. Grade A x not-fluid = CGL (2410.05480). "
+            "Grade B x fluid = compressible NS (2208.09445). Leg 242 reprints it 'STILL "
+            "EMPTY' after 12 nets, 7 subsequent works, 0 joint, 0 fluid, 668 days"
+        ),
+        "realization": "a literature occupancy census, not a measurement on an operator",
+        "locator": (
+            "experiments/journal/leg_174.md:43-58 and :230 verbatim -- 'So the cell is "
+            "empty for want of a TARGET, not for want of a method'; "
+            "experiments/journal/leg_242.md:244-252"
+        ),
+    },
+]
+
+
+# ---------------------------------------------------------------------------
+# The DSS ban's live state, re-read from plan_of_record.py at run time so this
+# ledger cannot drift from the plan.  The user ruled on leg 254's escalation on
+# 2026-08-07 and the split landed on main.
+# ---------------------------------------------------------------------------
+
+def read_dss_ban_state():
+    """Re-read plan_of_record.py's BANNED list; classify the DSS entries.
+
+    Returns a dict recording, from the plan itself: how many DSS entries exist,
+    whether the expensive entrance has been SPLIT OUT, and whether its lift
+    condition is a flat 'never' or a conditional one.  This is the machine check
+    that keeps the CONDITIONAL tier below honest.
+    """
+    sys.path.insert(0, ROOT)
+    import plan_of_record  # noqa: E402
+
+    banned = getattr(plan_of_record, "BANNED", None)
+    if banned is None:  # pragma: no cover - defensive
+        raise RuntimeError("plan_of_record.BANNED not found; the plan's shape changed")
+
+    dss = [(what, lifts) for (what, lifts) in banned if "DSS" in what or "dss" in what]
+    expensive = [(w, l) for (w, l) in dss if "EXPENSIVE" in w.upper()]
+    cheap = [(w, l) for (w, l) in dss if "CHEAP" in w.upper()]
+
+    split = len(dss) >= 2 and len(expensive) == 1
+    if expensive:
+        lift = expensive[0][1]
+        flat_never = lift.strip().lower() == "never" or lift.strip().lower().startswith("never --") is False and lift.strip().lower() == "never"
+        conditional = "unless" in lift.lower() or "scoping" in lift.lower()
+    else:
+        lift = dss[0][1] if dss else ""
+        flat_never = lift.strip().lower().startswith("never --") and "unless" not in lift.lower()
+        conditional = False
+
+    return {
+        "dss_entries_in_plan": len(dss),
+        "split_into_cheap_and_expensive": split,
+        "cheap_entry_present": len(cheap) == 1,
+        "expensive_entrance_lift_condition": lift,
+        "expensive_entrance_is_flat_never": bool(flat_never and not conditional),
+        "expensive_entrance_has_conditional_lift": bool(conditional),
+        "read_from": "plan_of_record.BANNED, at run time",
+    }
+
+
+# ---------------------------------------------------------------------------
+# The candidates.  Fourteen (object, ansatz) pairs.  Every field is a claim with
+# a locator; `screen1` and `screen2` carry the verdict and the authority id that
+# produced it, so no verdict is free-floating.
+# ---------------------------------------------------------------------------
+
+S1_EXCLUDED = "EXCLUDED"
+S1_SURVIVES = "SURVIVES"
+S1_OUT_OF_SCOPE = "OUT_OF_SCOPE"
+
+S2_DEAD = "RE-PROPOSAL_OF_A_MEASURED_DEAD_END"
+S2_CLEAR = "CLEAR"
+
+CANDIDATES = [
+    # ---------------- killed at screen 1 ----------------
+    {
+        "id": "NS3D-EXACT-SS",
+        "object": "3D incompressible Navier-Stokes on T^3 (or R^3)",
+        "ansatz": "exactly backward self-similar profile, stationary in similarity variables",
+        "role": "NEGATIVE CONTROL -- the recorded example of missing the screen",
+        "screen1": {"verdict": S1_EXCLUDED, "by": ["NRS96", "TSAI98-T1", "TSAI98-T2"]},
+        "screen2": {"verdict": S2_DEAD, "by": ["CERTIFIED-BY-OTHERS"]},
+        "note": (
+            "arXiv:2604.09949 (Shahmurov, Apr 2026). Read at source for this leg: its "
+            "own sec 1 defines rescaled variables rho = r/sqrt(T*-t), zeta = z/sqrt(T*-t) "
+            "-- the EXACT backward self-similar scaling -- and seeks a stationary profile "
+            "Omega-bar in an analytically weighted Hilbert space X. That is precisely the "
+            "hypothesis class NRS/Tsai exclude. This repository ledgers it "
+            "CLAIMED_UNUSABLE at solver/target_selection.py:534-553; its scalar closure "
+            "audit passes (2*delta*M*K ~ 8.9e-5 printed, 2*M^2*K*delta ~ 4.3e-2 "
+            "corrected) -- the arithmetic is not the problem, which is why the ansatz is "
+            "decisive. Leg 93: 0 independent verdicts in 118 days."
+        ),
+    },
+    {
+        "id": "NS3D-UNSTABLE-SS",
+        "object": "3D incompressible Navier-Stokes",
+        "ansatz": "unstable backward self-similar profile with a FINITE unstable spectrum",
+        "role": "a class the plan of record listed as a SURVIVOR; it is not one",
+        "screen1": {"verdict": S1_EXCLUDED, "by": ["TSAI98-T1", "AXI-TYPEI"]},
+        "screen2": {"verdict": S2_DEAD, "by": ["UNSTABLE-SS-PRECISION"]},
+        "note": (
+            "Leg 253's decisive point, corroborated here at source: the exclusion is "
+            "STABILITY-BLIND. Under merely the Type I bound the profile lies in L^p for "
+            "every p > 3 (Pineau-Vicol 2607.09619.txt l.229-231, verbatim: the borderline "
+            "decay 'guarantees U in L^p(R^3) for every p > 3, but not membership in the "
+            "scaling-critical space L^3'), so TSAI98-T1 applies whatever the linearised "
+            "spectrum is. The finite-unstable-spectrum condition constrains the "
+            "LINEARISATION; Tsai constrains the PROFILE. They never meet. Killed twice: "
+            "the precision ladder is 4.82 decades open besides."
+        ),
+    },
+    {
+        "id": "NS3D-DSS-AXISYMMETRIC",
+        "object": "3D incompressible Navier-Stokes, axisymmetric",
+        "ansatz": "backward discretely self-similar, any lambda",
+        "role": "the DSS variant with the strongest heritage in this repository's own solvers",
+        "screen1": {"verdict": S1_EXCLUDED, "by": ["AXI-TYPEI", "CW17-DSS"]},
+        "screen2": {"verdict": S2_CLEAR, "by": []},
+        "note": (
+            "Composition, flagged as a composition: CW17-DSS Thm 1.1 puts DSS blow-up in "
+            "its class at Type I, and axisymmetric Type I is ruled out (AXI-TYPEI, "
+            "Pineau-Vicol footnote 6). Leg 253 makes the same inference and labels it an "
+            "inference rather than a citation; this leg carries that label unchanged. "
+            "Consequential because every axisymmetric-heritage object in this repository "
+            "-- Hou-Luo and its 1D reductions -- inherits the kill on the DSS route."
+        ),
+    },
+    {
+        "id": "NS3D-DSS-LAMBDA-NEAR-1",
+        "object": "3D incompressible Navier-Stokes",
+        "ansatz": "backward DSS with scaling factor lambda close to 1",
+        "role": "the DSS variant nearest the excluded SS class",
+        "screen1": {"verdict": S1_EXCLUDED, "by": ["CW17-DSS", "PV26-RDSS"]},
+        "screen2": {"verdict": S2_CLEAR, "by": []},
+        "note": (
+            "Pineau-Vicol Thm 1.6 re-proves CW17 quantitatively. The threshold "
+            "lambda_bar(C_{U,0}) has NO published numerical value, so a candidate cannot "
+            "buy safety by naming a lambda -- only by clearing the structural condition."
+        ),
+    },
+    {
+        "id": "EULER3D-SS-LIFTED-TO-NS",
+        "object": "3D incompressible Euler self-similar profile, lifted to Navier-Stokes",
+        "ansatz": "inviscid globally self-similar profile plus a viscous perturbation argument",
+        "role": (
+            "the BCG-shaped move applied to the INCOMPRESSIBLE case -- the obvious "
+            "candidate, and the one that has to be checked before proposing its "
+            "compressible sibling"
+        ),
+        "screen1": {"verdict": S1_EXCLUDED, "by": ["CIV26-EULER-LIFT"]},
+        "screen2": {"verdict": S2_CLEAR, "by": []},
+        "note": (
+            "Constantin-Ignatova-Vicol: gamma >= 2/5 for finite energy, gamma >= 1/2 for a "
+            "smooth globally self-similar outgoing profile, gamma >= 1/2 axisymmetric with "
+            "a C^2 profile -- and, as Pineau-Vicol state citing it, self-similar 3D Euler "
+            "solutions 'can however be shown to not be viable for a lift to 3D "
+            "Navier-Stokes, under a local outgoing property'. The mechanism is in CIV's "
+            "own first paragraph: 'Incompressible fluids are not local, the outside "
+            "matters.' This is why the surviving fluid candidate below is COMPRESSIBLE."
+        ),
+    },
+    # ---------------- killed at screen 2 ----------------
+    {
+        "id": "BOUSSINESQ-CHENHOU",
+        "object": "2D Boussinesq / 3D axisymmetric Euler with boundary, Chen-Hou profile",
+        "ansatz": "self-similar, inviscid",
+        "role": "POSITIVE CONTROL FOR SCREEN 2 -- clears screen 1 trivially and dies at screen 2",
+        "screen1": {"verdict": S1_OUT_OF_SCOPE, "by": []},
+        "screen2": {"verdict": S2_DEAD, "by": ["CERTIFIED-BY-OTHERS"]},
+        "note": (
+            "Certified by its authors (arXiv:2210.07191 Parts I+II, 145 pages plus a "
+            "separate numerics paper). Banned as a target at plan_of_record.py: 'a second "
+            "certificate of a certified object demonstrates capability and produces no "
+            "result'. Retained here because it is the control that proves screen 2 can "
+            "fire on something screen 1 waves through."
+        ),
+    },
+    {
+        "id": "GCLM-SMOOTH-BRANCH",
+        "object": "generalized Constantin-Lax-Majda, smooth self-similar profiles",
+        "ansatz": "one-scale self-similar, a <= 1",
+        "role": "this repository's most-measured object",
+        "screen1": {"verdict": S1_OUT_OF_SCOPE, "by": []},
+        "screen2": {"verdict": S2_DEAD, "by": ["CERTIFIED-BY-OTHERS", "GCLM-EXHAUSTED"]},
+        "note": (
+            "Dead twice: Huang-Qin-Wang-Wei (arXiv:2305.05895) classified the ENTIRE "
+            "smooth branch for all a <= 1 analytically, and the model carries its own "
+            "'never' ban from Stage 3.5 (leg 42)."
+        ),
+    },
+    {
+        "id": "CLM-A0-ELL1-CERTIFICATE",
+        "object": "the a=0 CLM linearization (and HL_S2_nonsymmetric through it)",
+        "ansatz": "radii-polynomial / Newton-Kantorovich certificate in ell^1-Fourier or collocation",
+        "role": "the object of legs 51-56, 126, 127, 163, 176, 182",
+        "screen1": {"verdict": S1_OUT_OF_SCOPE, "by": []},
+        "screen2": {
+            "verdict": S2_DEAD,
+            "by": ["L1-R1-ELL1W", "L1-R2-COLLOCATION", "L1-R3-ORIGINH2",
+                   "L1-NO-FOURTH-SPACE-BETWEEN", "STAGE-B-EXHAUSTED"],
+        },
+        "note": (
+            "Dead in three named realizations with the segment between two of them "
+            "measured empty, and the stage built on it exhausted 1686/1686. This is the "
+            "single most locator-dense negative in the repository and the exact thing "
+            "'do not re-propose under a new label' means."
+        ),
+    },
+    # ---------------- survives both screens ----------------
+    {
+        "id": "COMPRESSIBLE-NS-IMPLOSION-RADIAL",
+        "object": (
+            "3D isentropic compressible Navier-Stokes with density-independent viscosity, "
+            "gamma = 7/5, radially symmetric imploding self-similar profile at r = r^(n)"
+        ),
+        "ansatz": (
+            "smooth self-similar IMPLODING profile (U^E, S^E) solving the compressible "
+            "self-similar ODE system, at a non-integer similarity exponent r^(n) in "
+            "(r_n(gamma), r_{n+1}(gamma)), n odd and large"
+        ),
+        "role": "THE NAMED PHASE-1 CANDIDATE, unconditional",
+        "screen1": {"verdict": S1_OUT_OF_SCOPE, "by": []},
+        "screen2": {"verdict": S2_CLEAR, "by": ["GRADE-A-FLUID-CELL-EMPTY"]},
+        "note": (
+            "Screen 1 is OUT_OF_SCOPE, stated as scope and not as survival: NRS/Tsai's "
+            "hypothesis set is the INCOMPRESSIBLE Leray system (Tsai (1.3), with div U = "
+            "0). A compressible imploding profile is not a divergence-free solution of "
+            "that system and no NRS/Tsai hypothesis reaches it. Screen 2 is CLEAR and "
+            "positively so: this is the object leg 174 named as the missing TARGET."
+        ),
+    },
+    {
+        "id": "COMPRESSIBLE-NS-IMPLOSION-NONRADIAL",
+        "object": (
+            "3D compressible Navier-Stokes on T^3 and R^3, NON-radial imploding solutions "
+            "(Cao-Labora, Gomez-Serrano, Shi, Staffilani)"
+        ),
+        "ansatz": "non-radial perturbation of the radial imploding self-similar profile",
+        "role": "companion / extension of the named candidate; same certificate obligation",
+        "screen1": {"verdict": S1_OUT_OF_SCOPE, "by": []},
+        "screen2": {"verdict": S2_CLEAR, "by": ["GRADE-A-FLUID-CELL-EMPTY"]},
+        "note": (
+            "arXiv:2310.05325, Cambridge J. Math. 13(4) 753-885 (2026). Its sec 3.4.2 is a "
+            "'Dissipation term' ENERGY ESTIMATE -- the same analytic-domination "
+            "architecture as BCG, so it does not close the gap either. It matters for "
+            "Wall 2: it removes radial symmetry, but perturbatively OFF the radial "
+            "profile, so the 3D-ness still does not come from the certificate."
+        ),
+    },
+    {
+        "id": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+        "object": "3D incompressible Navier-Stokes, NON-axisymmetric",
+        "ansatz": (
+            "backward discretely self-similar with lambda significantly larger than 1, "
+            "profile not in L^inf_t L^3 -- equivalently a periodic orbit of the "
+            "dynamically rescaled flow"
+        ),
+        "role": "CONDITIONAL TIER -- survives both screens, not bankable",
+        "screen1": {"verdict": S1_SURVIVES, "by": ["BT18-OPEN"]},
+        "screen2": {"verdict": S2_CLEAR, "by": ["DSS-CHEAP-ENTRANCE"]},
+        "note": (
+            "Survives screen 1 on the survey's own words: 'backward DSS solutions haven't "
+            "been ruled out under any condition when lambda is significantly larger than "
+            "one'. Survives screen 2 because this repository's entire DSS negative is "
+            "gCLM-only and local-linear at a fixed point (leg 254, 3 of 3 reasons), and "
+            "Route-E says in as many words 'Nothing about NS'. NOT bankable for two "
+            "independent reasons recorded in `conditionality` below."
+        ),
+    },
+    {
+        "id": "NS3D-RDSS",
+        "object": "3D incompressible Navier-Stokes",
+        "ansatz": "rotated DISCRETELY self-similar, outside Pineau-Vicol Thm 1.7's two windows",
+        "role": "CONDITIONAL TIER -- same blocker as the DSS row",
+        "screen1": {"verdict": S1_SURVIVES, "by": ["PV26-RDSS"]},
+        "screen2": {"verdict": S2_CLEAR, "by": ["DSS-CHEAP-ENTRANCE"]},
+        "note": (
+            "Thm 1.7 kills (|alpha| <= alpha_lo, lambda < lambda_bar) and (|alpha| >= "
+            "alpha_hi, lambda < lambda_bar^{1/(1+alpha^2)}); the complement is open. It is "
+            "discretely self-similar, so it is a periodic orbit of the rescaled flow and "
+            "inherits the same expensive-entrance blocker."
+        ),
+    },
+    {
+        "id": "NS3D-RSS-ALPHA-1",
+        "object": "3D incompressible Navier-Stokes",
+        "ansatz": (
+            "ROTATED backward globally self-similar (RSS) at rotation speed alpha ~ 1 -- "
+            "a stationary profile in a frame rotating at self-similar angular speed"
+        ),
+        "role": "survives both screens, NOT DSS-dependent -- but has no numerical anchor",
+        "screen1": {"verdict": S1_SURVIVES, "by": ["PV26-RSS", "BT18-OPEN"]},
+        "screen2": {"verdict": S2_CLEAR, "by": []},
+        "note": (
+            "The narrowest genuinely open window, and it is expert-flagged, not "
+            "unexamined: Perelman's question, Tsai's book Conjecture 8.9, Bradshaw-Tsai "
+            "Open Problem 5.2. Crucially it has a STATIONARY ansatz, which is the shape a "
+            "certificate needs -- Bradshaw-Tsai call the asymmetry with SS 'surprising ... "
+            "at face value, rotated self-similar solutions appear very similar to "
+            "self-similar solutions (e.g. they both have stationary ansatzes)'. Named "
+            "unconditionally as a SURVIVOR; NOT named as the Phase-1 candidate, for the "
+            "three reasons in `blockers` below."
+        ),
+    },
+    {
+        "id": "NS3D-NON-SELF-SIMILAR",
+        "object": "3D incompressible Navier-Stokes",
+        "ansatz": "non-self-similar (Type II) blow-up",
+        "role": "survives screen 1 outright and is now FORCED; not certificate-shaped",
+        "screen1": {"verdict": S1_SURVIVES, "by": ["AXI-TYPEI"]},
+        "screen2": {"verdict": S2_CLEAR, "by": []},
+        "note": (
+            "Leg 253's third finding: this class is INTACT and, in the axisymmetric "
+            "setting, forced -- Pineau-Vicol footnote 6, 'any putative singularity must be "
+            "of Type II'. It is recorded as a survivor and NOT proposed, because a "
+            "non-self-similar blow-up has no stationary profile equation, hence nothing "
+            "for interval arithmetic to enclose. Naming it would be naming a class, not a "
+            "target."
+        ),
+    },
+]
+
+
+# ---------------------------------------------------------------------------
+# What a certificate for the named candidate would have to show.
+# ---------------------------------------------------------------------------
+
+CERTIFICATE_OBLIGATION = {
+    "candidate": "COMPRESSIBLE-NS-IMPLOSION-RADIAL",
+    "what_is_already_proved_by_others": [
+        "BCG Thm 1.1 (arXiv:2208.09445): for every gamma > 1 there is r^(3)(gamma) with a "
+        "smooth radially symmetric self-similar imploding solution of the compressible "
+        "EULER system.",
+        "BCG Thm 1.2: for gamma = 7/5 and every large odd n, an r^(n) in (r_n, r_{n+1}) "
+        "with a smooth self-similar imploding Euler profile.",
+        "BCG Thm 1.3: for gamma = 7/5 and large odd n, radially symmetric initial data "
+        "whose compressible NAVIER-STOKES solution blows up ASYMPTOTICALLY self-similarly "
+        "at the origin, with density constant at infinity and finite energy, on a finite "
+        "codimensional manifold of data.",
+        "CGSS (arXiv:2310.05325): the same conclusion non-radially, on T^3 and R^3.",
+    ],
+    "what_is_NOT_proved_and_is_the_target": (
+        "In every one of those, the DISSIPATIVE TERM IS DOMINATED, NOT ENCLOSED. The "
+        "authors state it themselves at BCG sec 7's opening sentence, read at full text "
+        "for this leg: 'The stability for the Euler equation will follow in general, while "
+        "in the Navier-Stokes case we need to restrict the parameter r to a regime where "
+        "the self-similar profile dominates the dissipation.' The computer-assisted part "
+        "encloses the INVISCID ODE profile (per leg 174: the first 10000 (W_j, Z_j) Taylor "
+        "coefficient pairs at r = r*, ~14 h single CPU, gamma = 7/5); the viscous term is "
+        "then handled analytically, by a parameter restriction, in the stability step."
+    ),
+    "certificate_must_show": [
+        "(1) EXISTENCE, in interval arithmetic, of a solution of the self-similar profile "
+        "system OF THE DISSIPATIVE EQUATION -- i.e. the enclosed object itself carries the "
+        "viscous term, rather than the viscous term being estimated against an enclosed "
+        "inviscid object. That is exactly leg 174's Grade A definition, and it is the "
+        "single thing that moves the object from the Grade-B cell to the empty one.",
+        "(2) A NAMED FUNCTION SPACE with the profile inside it and the linearised operator "
+        "boundedly invertible in it, with sigma_min bounded BELOW by a rigorous enclosure "
+        "-- not by a sampled Rayleigh ratio, which leg 250 established bounds it only from "
+        "ABOVE (0.0908 <= sigma_min <= 0.71465 was the entire content of that correction).",
+        "(3) A radii-polynomial margin Y_0, Z_0, Z_1, Z_2 with Z_1 < 1 ON THE ASSEMBLED "
+        "system, not term by term -- lesson 89: the coupling term that does not exist "
+        "until assembly is the one that decides. Legs 54/176 measured Z_1 = 8.9591 and "
+        "140.72 where <1 was needed; the number to beat is 1, and it must be reported for "
+        "the assembled operator.",
+        "(4) EXPLICIT r-COVERAGE: the certificate must state the interval of similarity "
+        "exponents r it covers and show it is NOT contained in BCG's dominance regime. A "
+        "Grade-A certificate that only re-covers the r where domination already works "
+        "certifies an object already certified, and screen 2 would kill it -- this is the "
+        "Chen-Hou lesson applied to ourselves in advance.",
+        "(5) A NEGATIVE CONTROL THAT CAN FAIL: the same machinery run at a viscosity where "
+        "the profile is known NOT to exist must report failure, not success (lesson 90 -- "
+        "a control whose numbers cannot come out differently is not a control).",
+    ],
+    "what_a_certificate_would_NOT_show": (
+        "It would not move any link of the L1->L4 chain. Compressible Navier-Stokes is not "
+        "the incompressible system the Clay problem asks about; L2 and L3 are Chen-Hou's "
+        "and are already proved; L4 is Clay. This candidate fills leg 174's empty "
+        "occupancy cell -- 'is a viscous blow-up certifiable in ANY model?' -- and that is "
+        "a Phase-1 question, not a Clay-chain question."
+    ),
+}
+
+
+WALL2_POSITION = {
+    "the_line": (
+        "Wall 2 corrected (CLAY_ROADMAP.md sec 7.5): the barrier is TIME-DEPENDENT "
+        "singularity formation, not dimension -- van den Berg-Williams certified genuinely "
+        "3D Ohta-Kawasaki STATIONARY states in 2019, buying the 3D-ness with "
+        "crystallographic symmetry (read at full text: 'By preserving the relevant "
+        "symmetries we achieve an enormous reduction in computational cost', double gyroid "
+        "and bcc-packed spheres). Every work stating a 3D singularity theorem WITH a "
+        "certificate supplies the 3D-ness via a 2D reduction (Chen-Hou) or a "
+        "spherically-symmetric ODE profile (BCG -> CGSS) -- never via the certificate."
+    ),
+    "which_side_the_named_candidate_lives_on": (
+        "THE SAME SIDE AS EVERY EXISTING WORK, stated plainly and not finessed: the named "
+        "candidate's 3D-ness comes from a SPHERICALLY-SYMMETRIC ODE PROFILE (BCG), and "
+        "CGSS's non-radial extension is a perturbation OFF that profile. The certificate "
+        "would enclose a 1D ODE system in the self-similar variable. This candidate does "
+        "NOT cross the Wall-2 line and is not proposed as doing so."
+    ),
+    "which_candidate_would_cross_it": (
+        "NS3D-RSS-ALPHA-1 would -- a rotated self-similar profile on R^3 has no symmetry "
+        "reduction to a 1D ODE, so its 3D-ness would have to come from the certificate "
+        "itself. That is one of the three reasons it is reported as a survivor rather than "
+        "named as the Phase-1 candidate: nobody has ever certified a time-dependent "
+        "singularity that way, in any equation."
+    ),
+}
+
+
+CONDITIONALITY = {
+    "instruction_this_implements": (
+        "The Decision Maker's mandate for this leg: any candidate whose viability depends "
+        "on the DSS lane's EXPENSIVE ENTRANCE goes in an explicitly-marked CONDITIONAL "
+        "tier -- reportable, not bankable."
+    ),
+    "ruling_status": (
+        "The user ruled on leg 254's escalation on 2026-08-07 and the split landed on "
+        "main. Entry A (cheap entrances -- bifurcation off a fixed point of a rescaled "
+        "flow) keeps its 'never' with all three measured reasons. Entry B (the expensive "
+        "entrance -- a GLOBAL, UNSEEDED periodic-orbit search) is re-posed from a flat "
+        "'never' to a conditional lift. So the correct wording is: BLOCKED ON ENTRY B's "
+        "OWN SCOPING LEG, not blocked on a flat ban, and not blocked on a pending ruling."
+    ),
+    "conditional_candidates": ["NS3D-DSS-NONAXI-LAMBDA-LARGE", "NS3D-RDSS"],
+    "blocker_1_entry_B": (
+        "A DSS blow-up IS a periodic orbit of the dynamically rescaled flow. With no "
+        "fixed point nearby to seed it -- and Entry A says there is none, in gCLM -- "
+        "entering means the global unseeded search, which is exactly Entry B. Entry B's "
+        "lift condition requires a scoping leg answering (a) the function space, (b) the "
+        "object, and (c) a price in leg-hours. None of the three is answered by this leg, "
+        "and this leg has no authority to lift a ban in any case."
+    ),
+    "blocker_2_leray_projector": (
+        "Independent of the ban entirely. Leg 257 measured that the Leray projection "
+        "P[(u.grad)u] LEAVES L^2(mu) in Breden-Chu's weighted Sobolev space -- an "
+        "algebraic |x|^-4 tail, fitted exponent -3.000000 exactly, multipole ratio "
+        "1.000000 across four radii, and the tail's coefficient IS the energy integral of "
+        "|U|^2 so it cannot vanish. Every incompressible candidate here "
+        "(NS3D-DSS-NONAXI-LAMBDA-LARGE, NS3D-RDSS, NS3D-RSS-ALPHA-1) needs that projector. "
+        "So this repository's most-developed Grade-A machinery -- the one whose Z_1 = "
+        "0.065136 finally beat leg 54's 8.9591 and leg 176's 140.72 -- cannot host any of "
+        "them. The named candidate is unaffected: the compressible system HAS NO LERAY "
+        "PROJECTOR, its pressure is the constitutive p(rho) = rho^gamma / gamma, and BCG's "
+        "own certified object is an ODE enclosure, not a weighted-Sobolev fixed point."
+    ),
+    "what_would_resolve_the_conditional_tier": (
+        "Entry B's scoping leg landing AND the user lifting it; plus a separate answer to "
+        "the projector obstruction, since the two are independent and neither implies the "
+        "other."
+    ),
+}
+
+
+RSS_BLOCKERS = {
+    "candidate": "NS3D-RSS-ALPHA-1",
+    "why_it_is_reported_and_not_named": [
+        "(1) NO NUMERICAL ANCHOR. A radii-polynomial certificate is an EXISTENCE argument "
+        "in a ball around an approximate solution. No approximate nontrivial RSS profile "
+        "has ever been computed, by anyone. There is nothing to put in the ball.",
+        "(2) THE EXPECTED ANSWER IS NONEXISTENCE. Perelman's question, as Pineau-Vicol "
+        "pose it (Conjecture 1.1), is that RSS solutions are TRIVIAL, and their Thm 1.4 "
+        "proves exactly that at both ends of the alpha range. A computer-assisted "
+        "existence proof is the wrong SHAPE for a conjecture whose expected answer is "
+        "'zero' -- lesson 87 applied to a target instead of an operator.",
+        "(3) IT IS ON THE WRONG SIDE OF WALL 2 (see WALL2_POSITION) and it needs the Leray "
+        "projector this repository has just measured out of reach (see CONDITIONALITY "
+        "blocker 2).",
+    ],
+    "why_it_is_reported_at_all": (
+        "Because it is a real survivor of both screens, because the plan of record did not "
+        "name this class at all, and because a target-selection leg that hides a survivor "
+        "it does not like is not a screen. If Phase 1 succeeds on the compressible rung "
+        "and the projector obstruction is ever answered, this is the row Phase 2 should "
+        "re-read first."
+    ),
+}
+
+
+# ---------------------------------------------------------------------------
+# Self-test: a screen that cannot report the other answer is not a screen.
+# ---------------------------------------------------------------------------
+
+def self_test(candidates):
+    """Lesson 90: state what would have had to differ for the gate to flip.
+
+    Both screens must be shown to actually fire, in both directions, on real rows
+    of this table -- not on invented fixtures.
+    """
+    s1_kills = [c["id"] for c in candidates if c["screen1"]["verdict"] == S1_EXCLUDED]
+    s2_kills = [c["id"] for c in candidates if c["screen2"]["verdict"] == S2_DEAD]
+    s1_only = [c["id"] for c in candidates
+               if c["screen1"]["verdict"] == S1_EXCLUDED
+               and c["screen2"]["verdict"] != S2_DEAD]
+    s2_only = [c["id"] for c in candidates
+               if c["screen2"]["verdict"] == S2_DEAD
+               and c["screen1"]["verdict"] != S1_EXCLUDED]
+    survivors = [c["id"] for c in candidates
+                 if c["screen1"]["verdict"] in (S1_SURVIVES, S1_OUT_OF_SCOPE)
+                 and c["screen2"]["verdict"] == S2_CLEAR]
+
+    return {
+        "screen1_fires_on": s1_kills,
+        "screen2_fires_on": s2_kills,
+        "killed_by_screen1_ALONE": s1_only,
+        "killed_by_screen2_ALONE": s2_only,
+        "both_screens_are_load_bearing": bool(s1_only) and bool(s2_only),
+        "survivors": survivors,
+        "if_screen1_were_removed_survivors_would_be": sorted(
+            set(survivors) | set(s1_only)),
+        "if_screen2_were_removed_survivors_would_be": sorted(
+            set(survivors) | set(s2_only)),
+        "if_the_plan_of_record_survivor_list_were_right": (
+            "unstable-self-similar with a finite unstable spectrum would be a survivor "
+            "and would be the natural Phase-1 candidate, since 2509.14185 supplies "
+            "numerical anchors for it. It is not: TSAI98-T1 is stability-blind. That is "
+            "the single result that changed this leg's answer."
+        ),
+        "what_would_have_made_the_gate_answer_NO": (
+            "If COMPRESSIBLE-NS-IMPLOSION-RADIAL had been killed at screen 2 -- i.e. if "
+            "the live novelty check had found that somebody had already ENCLOSED the "
+            "dissipative term -- then every remaining survivor would be either "
+            "DSS-blocked, anchor-less, or not certificate-shaped, and the gate would have "
+            "answered NO with the failure located at the already-banked-dead-end stage."
+        ),
+    }
+
+
+def build():
+    dss = read_dss_ban_state()
+    st = self_test(CANDIDATES)
+
+    survivors_uncond = [
+        c["id"] for c in CANDIDATES
+        if c["id"] in st["survivors"]
+        and c["id"] not in CONDITIONALITY["conditional_candidates"]
+    ]
+
+    gate_answer = "YES" if st["survivors"] else "NO"
+
+    doc = {
+        "leg": LEG,
+        "route": ROUTE,
+        "date": DATE,
+        "question": (
+            "Does at least one target object + ansatz combination survive BOTH the "
+            "NRS/Tsai screen (not excluded) AND a check against every already-banked dead "
+            "end in this repository's own record (not a re-proposal of something already "
+            "measured dead)?"
+        ),
+        "gate_answer": gate_answer,
+        "verdict": "CANDIDATE_NAMED_UNCONDITIONALLY_PLUS_A_CONDITIONAL_TIER",
+        "escalate": True,
+        "escalation_reason": (
+            "The yes-branch of this leg's own gate is an escalation by construction: it "
+            "names the Phase-1 candidate, which needs sign-off before anything is built "
+            "on it. This leg attempts no certification under its own authority."
+        ),
+        "named_phase1_candidate": "COMPRESSIBLE-NS-IMPLOSION-RADIAL",
+        "named_phase1_candidate_companion": "COMPRESSIBLE-NS-IMPLOSION-NONRADIAL",
+        "fluid_or_vortex_dynamics_adjacent": (
+            "YES -- it is a fluid equation with the viscous term in it, and it bears "
+            "DIRECTLY on Phase 1 (the viscous rung). It is compressible, so it carries no "
+            "vorticity-stretching mechanism in the radial case; CGSS's non-radial "
+            "extension does carry non-trivial vorticity."
+        ),
+        "screen1_authority": SCREEN1_AUTHORITY,
+        "screen2_authority": SCREEN2_AUTHORITY,
+        "candidates": CANDIDATES,
+        "counts": {
+            "candidates_screened": len(CANDIDATES),
+            "killed_at_nrs_tsai_stage": len(st["screen1_fires_on"]),
+            "killed_at_banked_dead_end_stage": len(st["screen2_fires_on"]),
+            "survive_both": len(st["survivors"]),
+            "survive_both_unconditionally": len(survivors_uncond),
+            "conditional_tier": len(CONDITIONALITY["conditional_candidates"]),
+        },
+        "survivors_unconditional": survivors_uncond,
+        "survivors_conditional": CONDITIONALITY["conditional_candidates"],
+        "certificate_obligation": CERTIFICATE_OBLIGATION,
+        "wall2_position": WALL2_POSITION,
+        "conditionality": CONDITIONALITY,
+        "rss_blockers": RSS_BLOCKERS,
+        "dss_ban_state_read_from_plan": dss,
+        "self_test": st,
+        "negative_control": {
+            "citation": "arXiv:2604.09949 (Shahmurov, 10 Apr 2026)",
+            "its_mistake": (
+                "It seeks a STATIONARY profile in EXACTLY backward self-similar variables "
+                "(its sec 1: rho = r/sqrt(T*-t), zeta = z/sqrt(T*-t)) for the 3D "
+                "INCOMPRESSIBLE Navier-Stokes equations, in an analytically weighted "
+                "Hilbert space -- i.e. squarely inside NRS/Tsai's hypothesis set, whose "
+                "conclusion is that the profile is zero. No amount of Newton-Kantorovich "
+                "validation can rescue an ansatz a theorem has already emptied."
+            ),
+            "why_this_leg_is_not_the_same_mistake": [
+                "The named candidate is a DIFFERENT EQUATION, not a different weight: "
+                "compressible Navier-Stokes, whose profiles are not divergence-free "
+                "solutions of Tsai's system (1.3). NRS/Tsai have no hypothesis that "
+                "reaches it. 2604.09949's object IS Tsai's object.",
+                "The named candidate's profile is not merely un-excluded -- its EXISTENCE "
+                "IS ALREADY A PUBLISHED THEOREM (BCG Thms 1.2/1.3), so the certificate "
+                "argues about the GRADE of an object known to exist. 2604.09949 asserted "
+                "existence of an object a theorem says does not exist.",
+                "This leg reports the ansatz screen's verdict for every candidate "
+                "including the ones it likes, and marks OUT_OF_SCOPE as scope rather than "
+                "dressing it up as survival. 2604.09949 does not mention NRS or Tsai at "
+                "all.",
+                "This leg attempts NO certification. It names a target and states the "
+                "obligation; leg 93 measured that 2604.09949 has 0 independent "
+                "confirmations in 118 days, which is what a certification claim with no "
+                "released verification package earns.",
+            ],
+        },
+        "honesty": {
+            "nrs_not_read_at_source": True,
+            "nrs_routes_tried_here": 1,
+            "nrs_routes_tried_by_leg_253": 4,
+            "unrefereed_preprints_relied_on": [
+                "arXiv:2607.09619v1 (Pineau-Vicol), 10 Jul 2026, 28 days old, v1, "
+                "unrefereed -- carries the RSS/RDSS rows",
+                "arXiv:2602.17570v3 (Constantin-Ignatova-Vicol), 20 Jul 2026 revision -- "
+                "carries the EULER3D-SS-LIFTED-TO-NS kill",
+            ],
+            "findings_carried_from_PARKED_branches_not_on_main": [
+                "leg 253 (leg/253-nrsx-v1) -- the survivor-class narrowing. Its own gate "
+                "answered NO and it is escalated. Every claim taken from it was "
+                "independently re-derived here from Tsai 1998, Bradshaw-Tsai and "
+                "Pineau-Vicol at full text; the two reads agree.",
+                "leg 254 (leg/254-dssx-v1) -- the DSS cost-vs-substance scoping.",
+                "leg 257 (leg/257-p1c-v1, PR #19) -- the Leray-projector obstruction. NOT "
+                "independently re-derived here; carried with its locator and its parked "
+                "status stated.",
+                "leg 163 (leg/163-h2s-v1) -- obstruction O3.",
+            ],
+            "inferences_not_published_as_such": [
+                "NS3D-DSS-AXISYMMETRIC's kill is a COMPOSITION of CW17-DSS Thm 1.1 with "
+                "AXI-TYPEI, not a single published theorem. Leg 253 makes the same "
+                "composition and labels it; this leg carries the label."
+            ],
+            "no_compute_performed": (
+                "This leg runs no floating-point experiment. Every magnitude in it is "
+                "either transcribed from a primary source read at full text or read back "
+                "from a banked JSON/journal with its locator. It is a ledger."
+            ),
+        },
+        "clay": {
+            "odds": CLAY_ODDS,
+            "statement": (
+                "Clay odds stay ~0.05%. THIS LEG MOVES NO LINK OF THE L1->L4 CHAIN, and "
+                "its yes-branch must not be read as movement toward Clay. What it does is "
+                "narrower and worth stating exactly: it names, for the first time in this "
+                "repository, a target for the empty Grade-A x fluid-adjacent cell of leg "
+                "174's occupancy matrix. That cell is Phase 1's question -- 'can a viscous "
+                "blow-up be certified in ANY model?' -- and the named candidate is "
+                "COMPRESSIBLE Navier-Stokes, which is not the system the Clay problem "
+                "asks about. Selecting a target is choosing what to try. It is never a "
+                "claim that anything moved."
+            ),
+        },
+    }
+    return doc
+
+
+def main():
+    doc = build()
+
+    # --- assertions the runner must survive, so the JSON cannot ship incoherent ---
+    st = doc["self_test"]
+    assert st["both_screens_are_load_bearing"], (
+        "a screen that never fires alone is decoration, not a screen")
+    assert doc["counts"]["candidates_screened"] == 14, doc["counts"]
+    assert doc["gate_answer"] in ("YES", "NO")
+    assert doc["counts"]["survive_both_unconditionally"] >= 1, (
+        "the yes-branch requires at least one unconditional survivor")
+    assert doc["named_phase1_candidate"] in doc["survivors_unconditional"], (
+        "the named candidate must be among the unconditional survivors")
+    for cid in doc["survivors_conditional"]:
+        assert cid in st["survivors"], cid
+        assert cid not in doc["survivors_unconditional"], (
+            f"{cid} is DSS-dependent and must not be bankable")
+    # the DSS ban must actually be in the state this leg says it is
+    dss = doc["dss_ban_state_read_from_plan"]
+    assert dss["dss_entries_in_plan"] >= 1
+    # every verdict must cite an authority that exists, or be a scope call
+    ids1 = {a["id"] for a in doc["screen1_authority"]}
+    ids2 = {a["id"] for a in doc["screen2_authority"]}
+    for c in doc["candidates"]:
+        for a in c["screen1"]["by"]:
+            assert a in ids1, f"{c['id']} cites unknown screen-1 authority {a}"
+        for a in c["screen2"]["by"]:
+            assert a in ids2, f"{c['id']} cites unknown screen-2 authority {a}"
+        if c["screen1"]["verdict"] == S1_EXCLUDED:
+            assert c["screen1"]["by"], f"{c['id']} excluded with no authority named"
+        if c["screen2"]["verdict"] == S2_DEAD:
+            assert c["screen2"]["by"], f"{c['id']} called dead with no authority named"
+
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    with open(OUT, "w") as fh:
+        json.dump(doc, fh, indent=1, sort_keys=False)
+        fh.write("\n")
+
+    # --- report ---
+    print(f"ROUTE-P0T v1 -- leg {LEG} -- Phase 0 target selection under the Clay goal")
+    print(f"  candidates screened            {doc['counts']['candidates_screened']}")
+    print(f"  killed at the NRS/Tsai stage   {doc['counts']['killed_at_nrs_tsai_stage']}"
+          f"   {st['screen1_fires_on']}")
+    print(f"  killed at the banked-dead stage {doc['counts']['killed_at_banked_dead_end_stage']}"
+          f"  {st['screen2_fires_on']}")
+    print(f"  killed by screen 1 ALONE       {st['killed_by_screen1_ALONE']}")
+    print(f"  killed by screen 2 ALONE       {st['killed_by_screen2_ALONE']}")
+    print(f"  survive BOTH                   {doc['counts']['survive_both']}")
+    print(f"    unconditional                {doc['survivors_unconditional']}")
+    print(f"    CONDITIONAL (DSS entrance)   {doc['survivors_conditional']}")
+    print()
+    print(f"  GATE ANSWER: {doc['gate_answer']}")
+    print(f"  NAMED PHASE-1 CANDIDATE: {doc['named_phase1_candidate']}")
+    print(f"  Wall 2: {WALL2_POSITION['which_side_the_named_candidate_lives_on'][:78]}...")
+    print()
+    print("  DSS ban state, read from plan_of_record.BANNED at run time:")
+    print(f"    entries mentioning DSS       {dss['dss_entries_in_plan']}")
+    print(f"    split cheap/expensive        {dss['split_into_cheap_and_expensive']}")
+    print(f"    expensive is a flat 'never'  {dss['expensive_entrance_is_flat_never']}")
+    print(f"    expensive has a conditional lift {dss['expensive_entrance_has_conditional_lift']}")
+    print()
+    print(f"  Clay odds: {CLAY_ODDS} -- no link of the L1->L4 chain moves in this leg.")
+    print(f"  wrote {os.path.relpath(OUT, ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
