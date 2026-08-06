@@ -103,3 +103,38 @@ the **measurement on this repository's class**, with magnitudes.
 * *re-opening stage V, gCLM measurement, Route-D sharpening, DSS, 2-D beta, the scaling
   gauge, domain extension, `s`-tuning, weight-family tuning* — none touched; this leg
   changes no bound and reports no physics.
+
+---
+
+# FINDINGS (appended after the run; the sections above are as committed BEFORE construction)
+
+**Gate answer: NO — confirmed robust.** Full narrative in `experiments/journal/leg_97.md`,
+every case in `writeup/data/p2_route_wsa_v1_adversarial.json`.
+
+| measurement | magnitude |
+|---|---|
+| adversarial cases run | 100+ across 10 gates |
+| silent finite fitness values | **0** |
+| finite answers whose higher-precision `Z_1` is ≥ 1 | **0** of 42 |
+| worst flattering of a weight by the shortcut | **+2.1e-11** decades (threshold 0.5) |
+| batch path vs documented per-theta path, max relative deviation | **5.6e-16** |
+| float64 `Z_1` vs EXACT rational defect, at `cond = 1.8e14` | **1.6e-12** relative |
+| a poisoned batch member's effect on a clean member | **exactly 0.0**, both orderings |
+| batch-shape (`k=1` vs `k=6`) summation-order effect, no poison involved | 1.0 ulp |
+| conditioning span over which `Z_1` is monotone | `cond(J)` 2.7e5 → 2.4e19 |
+| `cond(J)` at which `Z_1` crosses 1 | **2.4e18** |
+| poisoned genomes / states returning a number | **0 of 17** / **0 of 8** |
+| extreme-range weights underflowing `Z_1` to zero | **0 of 5** (all overflow, all refused) |
+
+**The thesis's own channel turned out not to exist**, and that is the sharpest result:
+`jacobian(z)` and `inv(J)` take no `theta` argument, so a batch member *cannot* drive the
+shared Jacobian anywhere. The conditioning hazard is real but enters through the **state**,
+and there the module's defect term `‖I − A·DF‖` makes it visible — monotonically, over 13
+decades, and faithfully to exact arithmetic. In Newton–Kantorovich `A` is an arbitrary
+operator, so a garbage inverse is a large `Z_1`, not an unsound certificate.
+
+**Two gaps, pinned not patched** (no patch authority under this leg): `in_box` admits a NaN
+genome 7/7 (harmless — `fitness` still returns `+inf`), and `LOG_NU_CLIP` is a silent
+weight substitution that no in-box genome can reach (`max|log ν| = 94.3` vs 500 over 122473
+admitted genomes, 5.3x headroom). Neither warrants escalation; both are executable gates
+(12, 13) so they cannot decay at the rate of memory.
