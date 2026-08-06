@@ -11,10 +11,13 @@
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
 > bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
-> `PORT`, `V`, `C-PILOT`, `L1`, `T`, `TC` and **`MM`** are **DONE** (MM's gate answered **NO**
-> at leg 54); **`NG` is NEXT.** Stage `B` is still **blocked** and now pre-refuted — legs 52,
-> 53 and 54 each separately measured one of its three degrees of freedom (space, split,
-> shape of `A`) dead for this operator, before its still-banned GA would ever run.
+> `PORT`, `V`, `C-PILOT`, `L1`, `T`, `TC`, `MM` and now **`NG`** are **DONE** (`NG`'s gate
+> answered **YES** at leg 58: a THEOREM on the class `A21 = 0`, ruled mergeable as-is by the
+> DM); **`B` is NEXT.** Stage `B`'s own GA is still banned (lift condition failed twice: leg
+> 49 4/6, leg 59 P3 unmoved at 0.342) and all three of its degrees of freedom are separately
+> dead for this operator (space: leg 52; split: leg 53; shape of `A`: leg 54's battery, now
+> proved on `A21 = 0` by leg 58's theorem). `B` can only be **answered**, not run — see
+> DIRECTIVE 1 below (Route-BX, leg 126).
 
 > ## 🔀 FOUR LEGS RUN AT ONCE NOW. If you are a leg agent, read this first.
 > **DIRECTIVE 1 below is the critical-path leg only.** Three exploration legs run beside it,
@@ -34,64 +37,49 @@
 
 ---
 
-# DIRECTIVE 1 — ROUTE-NG: THE NO-GO, STATED AS A THEOREM AND CHECKED AGAINST THE LITERATURE.
+# DIRECTIVE 1 — ROUTE-BX: STAGE B, ANSWERED FROM THE BANKED RECORD — THE CLOSURE AUDIT.
 
-`MM`'s gate answered **NO** at leg 54, VERIFIED TWICE. Seven legs (51–57) now hold every part
-a real negative result needs, scattered across four PR bodies and a notes file: a named
-mechanism, an inequality that proves the block-diagonal case, a battery bottoming at 8.9591, a
-**positive control that reports the other answer**, and a literature classification. `NG`
-assembles that into one stated proposition and spends its effort on the one gap that decides
-whether this is a theorem or a table.
+`NG`'s gate answered **YES** at leg 58, RULED MERGEABLE AS-IS BY THE DM (`ee5b2f4`): a THEOREM
+on the class `A21 = 0`, every `K`, every `s < 1` (`Z₁ ≥ 1`, exact three-line proof off the
+`(I − AL)x` block structure). `A21 ≠ 0` stays **measured, not proved** (leg 54's battery,
+floor `8.9591`) and is not reopened as a blocker — the gate's own wording asked for a class
+**strictly larger than block-diagonal**, not the fully general class, and pre-authorized
+stating the restriction honestly if it wasn't closed. `B` is now the last `QUEUED` stage in
+the committed sequence, and it can no longer be **run** as conceived (its GA lift condition
+has failed twice: leg 49 `4/6`, leg 59 P3 worst `|slope−1|` unmoved at `0.342` against the
+`0.05` floor) — only **answered**.
 
-## What MM settled, and do not re-derive it
+## What is actually left, and it is one audit
 
-Best admissible `Z₁` over **every** shape (block Gauss–Seidel, Schur complement) × class ×
-gauge × split, including `K = 2` and `K = 6` (a verifier caught the first draft's battery
-omitting them): **8.9591** (`ff_lift`, algebraic `s = 0.3`, `K = 2`), against a block-diagonal
-baseline of **10.4584** — a **1.167×** improvement where more than 8× was needed. `MM-1`'s
-inequality verifies as an **exact equality** (`1.89e−15`), restricted to `K ≥ 6` flat / `K ≥ 4`
-algebraic — its `|1 − K/2|` prefactor vanishes at `K = 2`, a gap VER-A caught before
-construction. Every **odd** split gives an exactly singular finite block in both classes and
-gauges, closing that corner. A candidate shape-independent floor (`MM-4`) was proposed, then
-**refuted** by an explicit rank-one counter-construction (floor → `~1e-16`, survives only
-because total `Z₁` then hits `5.7e+05`) — it holds only for the shapes actually tested.
+All three of `B`'s degrees of freedom are separately dead for this operator: the **space**
+(leg 52), the **split** (coupling entry `K/2` for every choice, leg 53), and the **shape of
+`A`** — measured over leg 54's battery and now **proved** impossible on `A21 = 0` at every `K`
+and every `s < 1` (leg 58's theorem). The third realization is dead too (leg 111: every
+admissible weight's coercivity gap negative, window width zero). `B`'s own deliverable
+pre-authorizes the exit this leg takes: an honest report that it does not close, and where the
+margin runs out. The leg's real work — the part that can answer either way — is the
+**completeness audit**: enumerate `B`'s declared search space (space × split ×
+constants/shape, plus the fitness route) against the banked refutations (legs 49, 52, 53, 54,
+56, 58, 59, 111), clause by clause, and either exhibit an admissible, ban-respecting corner
+that no banked result covers, or establish there is none. **NO GA compute runs on either
+branch** (the ban stands; its lift condition is the frozen six-property gate's PASS, which leg
+59 did not produce). No new ℓ¹-Fourier machinery is built; every number quoted is read from
+banked JSONs or recomputed from landed modules read-only.
 
-**The mechanism, unchanged since TC.** The unbounded part is **off-diagonal** (a shift) while
-the standard tail estimate needs a **multiplier**; the bordered tail inverse is a **constant**
-(`2.19 … 10.32`, growing `2.191 → 11.528` over `K = 4…128`, per leg 57's correction), not a
-decaying `1/K`. **The positive control makes the hypothesis necessary, not just sufficient:**
-`Λ¹` dissipation (a multiplier, no far-field kernel) drives the assembled `Z₁` to **0.9156 at
-`μ = 2`** — the instrument can say yes when the operator actually is a multiplier.
+**Gate:** auditing stage `B`'s full declared search space against the banked record, does any
+admissible, ban-respecting configuration remain that no banked measurement or theorem covers —
+i.e. a corner in which a searched certificate could still close on this operator? **Yes** →
+name the corner precisely, with the banked clause nearest to it and why it escapes; `B` stays
+`NEXT`, and the follow-up critical-path leg is the measurement of exactly that corner (if it
+needs GA compute, escalate the frozen gate's lift condition to the user — do not run it). **No**
+→ `B`'s own gate answers its pre-committed NO in the only sense that matters: nothing in the
+searchable space closes. Write the honest report `B`'s deliverable names, quantifying how much
+of the difficulty was tuning versus structure (the structure share is now theorem-grade). The
+committed sequence is then **EXHAUSTED**: what enters next is escalation #1, for the user,
+framed by the open question of the γ=2 dissipative certificate route (contingent on leg 125's
+gate, itself already escalated — see `DIRECTION.md`).
 
-**Novelty, closed by leg 57.** BDL (arXiv:1503.06315) does **not** cover the zero-diagonal
-case (assumptions (4)–(5) require a diagonal bounded away from zero) — but Cadiot
-(arXiv:2505.03091) §2–3 independently states the same dominance-hypothesis observation, so
-`NG-0` must resolve Cadiot's scope against **this** no-go specifically, not re-litigate BDL.
-
-## NG — what is actually left, and it is one thing
-
-Every degree of freedom `B` would offer is now separately dead (leg 52: space; leg 53: split;
-leg 54: shape of `A`). What is missing is not more measurement — it is the **write-up as a
-proposition**, with the one open mathematical question named honestly.
-
-* **NG-0 THE NOVELTY PASS FIRST.** Resolve Cadiot's scope against this no-go — links, not
-  counts.
-* **NG-1 THE PROPOSITION.** Hypotheses (operator class, weight classes, admissible `A`),
-  conclusion, and a scope line separating measured from proved.
-* **NG-2 THE GAP, AND IT IS THE ONLY OPEN MATHEMATICS.** `MM-1` proves only the block-diagonal
-  case; leg 54 measured a battery over the shapes actually tried. **"No `A` we tried" is not
-  "no `A`."** Extend `MM-1` to a named class of approximate inverses strictly larger than
-  block-diagonal, or state the restriction as the theorem's actual hypothesis.
-* **NG-3 SHARPNESS.** The `μ = 2` control, reused, as the statement that the hypothesis
-  cannot be dropped.
-
-**Gate:** does the no-go admit a **proof** for a named class of approximate inverses strictly
-larger than block-diagonal, with hypotheses that provably contain the `a = 0` CLM
-linearization? **Yes** → the repository has a Tier-3-shaped negative theorem; write it as a
-standalone claim with its sharpness control, and escalate publication scoping to the user.
-**No** → **REPORT** the result as a measurement over a battery, not a theorem; cap the claim
-at "measured, not proved" everywhere it appears; the next stage is the target round (leg 63,
-Route-M2) with the multiplier/shift screen as its selection predicate.
+Full spec: `DIRECTION.md` leg 126 (Route-BX).
 
 ---
 
