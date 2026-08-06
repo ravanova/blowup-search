@@ -1,0 +1,473 @@
+{
+ "leg": 125,
+ "route": "ROUTE-M2P",
+ "branch": "leg/125-m2p-v1",
+ "no_dynamics_run": true,
+ "stage_claimed": null,
+ "clay_odds_unchanged": 0.0005,
+ "honest_ceiling": "Not movement on L1->L4 and not Clay.  The prize is the sub-goal: no CAP of any dissipative self-similar profile exists in the searched literature, so the measured Y_0 is a novel data point.",
+ "float_not_certificate": "Every number here is floating point.  No number is a certificate; nk_bounds.budget's own header says the same of the budget.",
+ "M1_chen_constants": {
+  "equation": {
+   "value": "omega_t + a u omega_x = u_x omega - nu Lambda^gamma omega, u_x = H omega",
+   "provenance": "Chen arXiv:1908.09385, abstract and eq (1.1) p.1"
+  },
+  "theorem_1_1": {
+   "value": "Consider (1.1) with L omega = -d_xx omega.  There exists delta > 0 such that for a in (1/2 - delta, 1/2 + delta), 0 <= nu <= 1, (2.1) develops a self-similar singularity in finite time for some C_c^infty initial data.",
+   "provenance": "Chen, Theorem 1.1, p.3 (quoted verbatim)"
+  },
+  "a": {
+   "value": 0.5,
+   "provenance": "Chen sec 2, the a = 1/2 exact solution, eq (2.2) p.4"
+  },
+  "gamma": {
+   "value": 2.0,
+   "provenance": "Chen Theorem 1.1, L = -d_xx (full Laplacian)"
+  },
+  "b": {
+   "value": 0.6123724356957945,
+   "provenance": "Chen eq (2.2) p.4: b = sqrt(3/8); b^2 = 3/8 is used to close the verification identity on p.4"
+  },
+  "b_squared": {
+   "value": 0.375,
+   "provenance": "Chen p.4, 'we have used b^2 = 3/8'"
+  },
+  "c_l": {
+   "value": 0.3333333333333333,
+   "provenance": "Chen eq (2.2) p.4: c_l = 1/3"
+  },
+  "c_omega": {
+   "value": -1.0,
+   "provenance": "Chen eq (2.2) p.4: c_omega = -1"
+  },
+  "Omega": {
+   "value": "Omega(x) = -2 b x / (x^2 + b^2)^2",
+   "provenance": "Chen eq (2.2) p.4"
+  },
+  "U_x": {
+   "value": "U_x(x) = (b^2 - x^2) / (b^2 + x^2)^2",
+   "provenance": "Chen eq (2.2) p.4 (= H Omega)"
+  },
+  "U": {
+   "value": "U(x) = x / (b^2 + x^2)",
+   "provenance": "Chen eq (2.2) p.4"
+  },
+  "ubar_x_at_0": {
+   "value": 2.6666666666666665,
+   "provenance": "Chen p.5, 'where we have used ubar_x(0) = 8/3' (= 1/b^2)"
+  },
+  "steady_equation": {
+   "value": "(c_l x + a U) Omega_x = (c_omega + U_x) Omega,  a = 1/2",
+   "provenance": "Chen sec 2 p.4, the display above eq (2.2); the layout prints the advection coefficient a = 1/2 as a stacked fraction"
+  },
+  "nu_of_t": {
+   "value": "nu(t) = exp(int_0^t [c_omega(s) + 2 c_l(s)] ds) C_l(0)^-2 C_omega(0) nu",
+   "provenance": "Chen eq (2.7) p.5"
+  },
+  "nu_decay_rate_exact": {
+   "value": -0.3333333333333333,
+   "provenance": "Chen (2.40) p.11, 'the integrand in the exponent is bounded above by -1/3 and a small term'; equals 2 c_l + c_omega = 2/3 - 1 at eq (2.2)"
+  },
+  "nu_decay_rate_rigorous": {
+   "value": -0.25,
+   "provenance": "Chen eq (2.43) p.11: nu(t) <= exp(-t/4) nu(0)"
+  },
+  "profile_identity": {
+   "value": "Since nu(t) converges to 0, such profile is the same as the inviscid profile associated with a.",
+   "provenance": "Chen sec 2.6, final sentence of the proof of Theorem 1.1, p.12 (quoted verbatim) -- and Remark 2.1 p.11"
+  },
+  "delta": {
+   "value": null,
+   "provenance": "Chen (2.41) p.11: delta, nu_0 chosen so that (1 + C_2 + C_3 + C_2 C_3 + C_2^2)(delta + nu_0) < 1/1000, where C_2, C_3 are UNNAMED universal constants -- so the a-neighbourhood is UNQUANTIFIED in the paper.  Leg 63 flagged this; it is confirmed."
+  },
+  "nu_0": {
+   "value": null,
+   "provenance": "Chen (2.41)/(2.42) p.11.  Also note nu(0) <= C_l(0)^{-2} <= nu_0: Theorem 1.1's '0 <= nu <= 1' is reached by taking the initial length scale C_l(0) LARGE, i.e. the RESCALED viscosity is driven small."
+  },
+  "critical_dissipation_a_le_minus1": {
+   "value": "gamma = |a|^{-1}",
+   "provenance": "Chen sec 1.2 p.2, and Theorem 1.5 -- stated ONLY for a <= -1, where the a-priori L^{|a|} estimate holds"
+  },
+  "critical_dissipation_a_gt_minus1": {
+   "value": 1.0,
+   "provenance": "Chen sec 1.2 p.2: for a > -1 with ||omega||_{L^1} conserved, 'a simple scaling analysis shows that L = Lambda corresponds to the critical dissipation'"
+  },
+  "blowup_data_class": {
+   "value": "class 3 (omega_0 odd, omega_0 <= 0 for x > 0)",
+   "provenance": "Chen Remark 1.4 p.3 -- the class in which L^1 is NOT conserved (Lemma 3.1(b), eq (3.5)), so the L^1-based criticality of sec 1.2 does not classify the blow-up data"
+  },
+  "computer_assisted": {
+   "value": false,
+   "provenance": "Chen sec 2.3-2.5: weighted L^2 (weight phi) and weighted H^4 (weight psi) energy estimates, eq (2.12) p.6; no interval arithmetic, no computer assistance anywhere in the paper"
+  },
+  "weights": {
+   "value": "phi = (x^2+b^2)^3/(2b x^4) = -(1/omegabar)(x^2+b^2)/x^3, psi = (x^2+b^2)^3/(2b) = -x(x^2+b^2)/omegabar",
+   "provenance": "Chen eq (2.12) p.6"
+  }
+ },
+ "M2_known_answer_gate": [
+  {
+   "n": 601,
+   "hilbert_err_sup": 1.089612160498632e-07,
+   "velocity_err_sup": 7.467203436970545e-07,
+   "residual_rms": 8.247127796359173e-07,
+   "residual_sup": 3.74264695751636e-06
+  },
+  {
+   "n": 801,
+   "hilbert_err_sup": 3.4221697031711074e-08,
+   "velocity_err_sup": 7.373586035810779e-07,
+   "residual_rms": 2.61485140822353e-07,
+   "residual_sup": 1.1873793276939715e-06
+  },
+  {
+   "n": 1201,
+   "hilbert_err_sup": 7.139251856358442e-09,
+   "velocity_err_sup": 7.272661617068864e-07,
+   "residual_rms": 5.189994723300591e-08,
+   "residual_sup": 2.3580453578642135e-07
+  }
+ ],
+ "M3_newton_reconstruction": [
+  {
+   "n": 601,
+   "c_l_measured": 0.33333495176411787,
+   "c_l_chen": 0.3333333333333333,
+   "c_l_abs_err": 1.6184307845557022e-06,
+   "HOmega_at_0_measured": 2.666665062283081,
+   "HOmega_at_0_chen": 2.6666666666666665,
+   "shape_sup_err_vs_chen": 4.181048590456982e-06,
+   "newton_residual_rms": 1.1109890615826596e-15,
+   "newton_history": [
+    0.02532366941122494,
+    0.0009683160783905591,
+    4.6475319571779715e-06,
+    3.21889589688474e-11,
+    1.1109890615826596e-15
+   ],
+   "Delta_measured": -0.33333009647176426,
+   "nu_decay_rate_measured": -0.33333009647176426,
+   "seconds": 10.191040754318237
+  },
+  {
+   "n": 801,
+   "c_l_measured": 0.33333384635928326,
+   "c_l_chen": 0.3333333333333333,
+   "c_l_abs_err": 5.130259499441792e-07,
+   "HOmega_at_0_measured": 2.666666160210195,
+   "HOmega_at_0_chen": 2.6666666666666665,
+   "shape_sup_err_vs_chen": 1.323571098055254e-06,
+   "newton_residual_rms": 1.47572129590513e-15,
+   "newton_history": [
+    0.02532911324696808,
+    0.0009684600493512023,
+    4.64819486701685e-06,
+    3.219228356239344e-11,
+    1.47572129590513e-15
+   ],
+   "Delta_measured": -0.3333323072814335,
+   "nu_decay_rate_measured": -0.3333323072814335,
+   "seconds": 41.455657720565796
+  },
+  {
+   "n": 1201,
+   "c_l_measured": 0.33333343519755587,
+   "c_l_chen": 0.3333333333333333,
+   "c_l_abs_err": 1.0186422255697991e-07,
+   "HOmega_at_0_measured": 2.6666665675766925,
+   "HOmega_at_0_chen": 2.6666666666666665,
+   "shape_sup_err_vs_chen": 2.6055486768150615e-07,
+   "newton_residual_rms": 2.4310822407768967e-15,
+   "newton_history": [
+    0.025334450586683835,
+    0.0009686402354165947,
+    4.649049201007424e-06,
+    3.219768382962008e-11,
+    2.4310822407768967e-15
+   ],
+   "Delta_measured": -0.33333312960488826,
+   "nu_decay_rate_measured": -0.33333312960488826,
+   "seconds": 118.19851326942444
+  }
+ ],
+ "M4_delta_sweep": [
+  {
+   "a": 0.3,
+   "c_l": 0.6184174409951044,
+   "Delta": 0.23683488199020886,
+   "nu_decay_rate": 0.23683488199020886,
+   "residual_rms": 9.859425012829114e-16,
+   "converged": true
+  },
+  {
+   "a": 0.35,
+   "c_l": 0.5506769264479893,
+   "Delta": 0.10135385289597854,
+   "nu_decay_rate": 0.10135385289597854,
+   "residual_rms": 6.497786368904657e-16,
+   "converged": true
+  },
+  {
+   "a": 0.4,
+   "c_l": 0.4809584535792487,
+   "Delta": -0.038083092841502575,
+   "nu_decay_rate": -0.038083092841502575,
+   "residual_rms": 5.905883241060781e-16,
+   "converged": true
+  },
+  {
+   "a": 0.45,
+   "c_l": 0.40874132010891856,
+   "Delta": -0.18251735978216288,
+   "nu_decay_rate": -0.18251735978216288,
+   "residual_rms": 7.954743815384223e-16,
+   "converged": true
+  },
+  {
+   "a": 0.5,
+   "c_l": 0.33334150231348103,
+   "Delta": -0.33331699537303794,
+   "nu_decay_rate": -0.33331699537303794,
+   "residual_rms": 8.288713742504702e-16,
+   "converged": true
+  },
+  {
+   "a": 0.55,
+   "c_l": 0.25385689035843734,
+   "Delta": -0.4922862192831253,
+   "nu_decay_rate": -0.4922862192831253,
+   "residual_rms": 9.494357071069235e-16,
+   "converged": true
+  },
+  {
+   "a": 0.6,
+   "c_l": 0.16910119431959653,
+   "Delta": -0.661797611360807,
+   "nu_decay_rate": -0.661797611360807,
+   "residual_rms": 4.643770203485934e-15,
+   "converged": true
+  },
+  {
+   "a": 0.65,
+   "c_l": 0.07753308628017279,
+   "Delta": -0.8449338274396544,
+   "nu_decay_rate": -0.8449338274396544,
+   "residual_rms": 1.1770800301985314e-15,
+   "converged": true
+  },
+  {
+   "a": 0.7,
+   "c_l": -0.0228066094821194,
+   "Delta": -1.0456132189642389,
+   "nu_decay_rate": -1.0456132189642389,
+   "residual_rms": 1.4816488505615182e-15,
+   "converged": true
+  }
+ ],
+ "M4_controls": {
+  "heat_scaling_c_l_over_c_omega_one_half": 0.0,
+  "clm_a0_anchor_c_l_1_c_omega_-1": 1.0,
+  "chen_exact_1_3": -0.33333333333333337,
+  "note": "lesson 90: the functional returns EXACTLY 0.0 on the heat scaling and +1.0 at the a=0 CLM anchor, so it varies and can report the other answer."
+ },
+ "M5_nu_branch_search": [
+  {
+   "nu": 0.0,
+   "c_l": 0.33334150231348103,
+   "Delta": -0.33331699537303794,
+   "steadiness_defect": 0.33331699537303794,
+   "residual_rms": 8.288713742504702e-16,
+   "converged": true
+  },
+  {
+   "nu": 0.0001,
+   "c_l": 0.3324191732595936,
+   "Delta": -0.33516165348081284,
+   "steadiness_defect": 0.33516165348081284,
+   "residual_rms": 5.810855229735434e-16,
+   "converged": true
+  },
+  {
+   "nu": 0.001,
+   "c_l": 0.3245307726489885,
+   "Delta": -0.350938454702023,
+   "steadiness_defect": 0.350938454702023,
+   "residual_rms": 5.421819967789111e-15,
+   "converged": true
+  },
+  {
+   "nu": 0.01,
+   "c_l": 0.2690668874273645,
+   "Delta": -0.461866225145271,
+   "steadiness_defect": 0.461866225145271,
+   "residual_rms": 2.761654842570779e-15,
+   "converged": true
+  },
+  {
+   "nu": 0.1,
+   "c_l": 0.08119853003177101,
+   "Delta": -0.837602939936458,
+   "steadiness_defect": 0.837602939936458,
+   "residual_rms": 1.7005010305290143e-14,
+   "converged": true
+  },
+  {
+   "nu": 0.3,
+   "c_l": -0.0772235569611779,
+   "Delta": -1.1544471139223558,
+   "steadiness_defect": 1.1544471139223558,
+   "residual_rms": 4.820603877620501e-14,
+   "converged": true
+  }
+ ],
+ "M7_gamma2_branch": [
+  {
+   "nu": 0.0,
+   "a": 0.3864963972206034,
+   "residual_rms_absolute": 7.125815651121996e-16,
+   "residual_relative": 1.9327394059980515e-15,
+   "solution_scale": 0.36868993455650484,
+   "amplitude": 1.491111781516832,
+   "nontrivial": true,
+   "collapsed_to_trivial_null": false
+  },
+  {
+   "nu": 0.001,
+   "a": 0.37941302883945277,
+   "residual_rms_absolute": 9.245681430782105e-16,
+   "residual_relative": 2.4616224156591062e-15,
+   "solution_scale": 0.3755929980149514,
+   "amplitude": 1.512179329459369,
+   "nontrivial": true,
+   "collapsed_to_trivial_null": false
+  },
+  {
+   "nu": 0.01,
+   "a": 0.32023357401710256,
+   "residual_rms_absolute": 1.247653048629284e-15,
+   "residual_relative": 2.705617775235414e-15,
+   "solution_scale": 0.4611342592620004,
+   "amplitude": 1.7163009962918514,
+   "nontrivial": true,
+   "collapsed_to_trivial_null": false
+  },
+  {
+   "nu": 0.1,
+   "a": 0.28335400994386306,
+   "residual_rms_absolute": 7.721364113707405e-15,
+   "residual_relative": 1.1021452310765743e-14,
+   "solution_scale": 0.7005759219377272,
+   "amplitude": 1.88618240920189,
+   "nontrivial": true,
+   "collapsed_to_trivial_null": false
+  },
+  {
+   "nu": 0.3,
+   "a": 0.3820854853529409,
+   "residual_rms_absolute": 1.329685329535958e-14,
+   "residual_relative": 2.437198073574193e-14,
+   "solution_scale": 0.5455795095004123,
+   "amplitude": 1.5055977131621614,
+   "nontrivial": true,
+   "collapsed_to_trivial_null": false
+  },
+  {
+   "nu": 1.0,
+   "a": -10.092461405320627,
+   "residual_rms_absolute": 1.2070517780856019e-15,
+   "residual_relative": 5.485652392436699,
+   "solution_scale": 2.2003796298683e-16,
+   "amplitude": 1.6056210004835197e-15,
+   "nontrivial": false,
+   "collapsed_to_trivial_null": true
+  }
+ ],
+ "M7_diagnostics": {
+  "dilated_relative_residual": 0.055919624201451586,
+  "undilated_control_relative_residual": 1.7065204629108883,
+  "dilation_improves_by": 30.51738074567729,
+  "a_range_over_nontrivial_nu": [
+   0.28335400994386306,
+   0.3864963972206034
+  ],
+  "a_should_be_constant_under_dilation_covariance": true,
+  "verdict": "NON-TRIVIAL SOLUTIONS EXIST at every tested nu in [1e-3, 3e-1] with scale-invariant residual at the Newton floor, BUT the branch is NOT resolved: dilation covariance requires `a` to be independent of nu and the measured `a` is not.  In the odd subspace the system is short by one equation ((n-1)/2 residuals for (n-1)/2 + 1 unknowns), so Newton lands on an arbitrary point of a one-parameter set.  REPORTED AS AN OPEN LEAD, NOT AS A RESULT."
+ },
+ "M4_a_star": {
+  "a_star_linear_interpolation_of_Delta_sweep": 0.38634397338521675,
+  "a_star_direct_solve_c_l_imposed_one_half": 0.3864963972206034,
+  "agreement_abs": 0.00015242383538666138,
+  "chen_a": 0.5,
+  "Delta_at_chen_a": -0.33331699537303794,
+  "note": "Delta = 0 is NECESSARY for a gamma = 2 self-similar profile, not sufficient.  a* is where the necessary condition is met; it is NOT Chen's a = 1/2, and Chen's theorem says nothing about it."
+ },
+ "M6_y0_budget": [
+  {
+   "n": 601,
+   "Y0_discrete_newton_floor": 1.1200846238897792e-09,
+   "discrete_defect_sup": 8.104628079763643e-15,
+   "Y0_consistency_honest": 3.74264695751636e-06,
+   "Z0_used": 0.0,
+   "Z1_used_leg53_mu2_control": 0.9156181325483919,
+   "Z2_measured": 3842335069198.524,
+   "Z2_parts": {
+    "norm_A": 50529918.06924334,
+    "norm_B": 76040.79357368451,
+    "Z2": 3842335069198.524,
+    "norm_H": 7.720277407644,
+    "norm_VH": 675.780915723275,
+    "norm_D": 112.50000000000115
+   },
+   "budget_Y0_max": 4.632794528839721e-16,
+   "closes_with_honest_Y0": false,
+   "r_min_honest": NaN,
+   "closes_with_discrete_Y0": false,
+   "Y0_over_budget_ratio_honest": 8078594753.594008
+  },
+  {
+   "n": 801,
+   "Y0_discrete_newton_floor": 6.004826369301092e-08,
+   "discrete_defect_sup": 9.769962616701378e-15,
+   "Y0_consistency_honest": 1.1873793276939715e-06,
+   "Z0_used": 0.0,
+   "Z1_used_leg53_mu2_control": 0.9156181325483919,
+   "Z2_measured": 25450985573205.508,
+   "Z2_parts": {
+    "norm_A": 250169438.04196107,
+    "norm_B": 101734.9911820028,
+    "Z2": 25450985573205.508,
+    "norm_H": 7.905464788320781,
+    "norm_VH": 678.1278683494932,
+    "norm_D": 150.0000000000032
+   },
+   "budget_Y0_max": 6.994129494651999e-17,
+   "closes_with_honest_Y0": false,
+   "r_min_honest": NaN,
+   "closes_with_discrete_Y0": false,
+   "Y0_over_budget_ratio_honest": 16976799308.647215
+  },
+  {
+   "n": 1201,
+   "Y0_discrete_newton_floor": 2.1545622919273004e-07,
+   "discrete_defect_sup": 1.9789725413943415e-14,
+   "Y0_consistency_honest": 2.3580453578642135e-07,
+   "Z0_used": 0.0,
+   "Z1_used_leg53_mu2_control": 0.9156181325483919,
+   "Z2_measured": 367357844847554.6,
+   "Z2_parts": {
+    "norm_A": 2399497946.744092,
+    "norm_B": 153097.79503917767,
+    "Z2": 367357844847554.6,
+    "norm_H": 8.165657681387712,
+    "norm_VH": 680.3620609947485,
+    "norm_D": 224.99999999999483
+   },
+   "budget_Y0_max": 4.845615558839864e-18,
+   "closes_with_honest_Y0": false,
+   "r_min_honest": NaN,
+   "closes_with_discrete_Y0": false,
+   "Y0_over_budget_ratio_honest": 48663484117.35693
+  }
+ ],
+ "seconds": 664.9089062213898
+}
