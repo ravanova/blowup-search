@@ -42,7 +42,9 @@ This session adds **64–71**, a first refill adds **72–75**, a second refill 
 third adds **79** (implicitly, per its own entry above), a fourth refill adds **80–83**, a fifth
 refill adds **84–87**, a sixth refill adds **88–91**, a seventh refill adds **92–95**, an eighth
 refill adds **96–99**, a ninth refill adds **100–105**, and this tenth refill adds **106–109**.
-**Next fresh leg number for any future candidate is 110.**
+An eleventh refresh adds the **110–124** series, the user-directed promotion adds **125**, and
+the NG ruling of 2026-08-06 adds **126–127**. **Next fresh leg number for any future candidate
+is 128.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -399,7 +401,124 @@ on leg 125's yes-branch, with the user.
 
 ---
 
-## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
+**DM ruling 2026-08-06 — leg 58 (NG, critical path) answered YES and escalated; ruling: the
+gate answer is VERIFIED, the branch is MERGEABLE AS-IS, stage `NG` goes `DONE` and stage `B`
+goes `NEXT` per the plan's own queue; leg 126 (BX) is drafted for the critical-path slot and
+leg 127 (NGX) for the queue.** The branch (`leg/ng-v1`, final commit `3f2ee16`, merge base
+`ddb4e4c`) was read in full before ruling — the diff, both commits, the TECHNICAL, the novelty
+pass, the journal, the solver additions, the runner's arithmetic, and the banked leg 54 battery
+(`writeup/data/p2_route_mm_v1_shape.json`) it builds on. Reasoning, in full so it is auditable:
+
+1. **The gate answered YES in its own pre-committed wording, and the wording does not require
+   the fully general class.** The gate (`plan_of_record.py`, stage `NG`) asks for "a PROOF for
+   a named class of approximate inverses **strictly larger than block-diagonal**, with
+   hypotheses that provably contain the `a = 0` CLM linearization" — not for all `A`. The
+   named class is `𝒜_upper = {A : A₂₁ = 0}` (block-diagonal AND block-upper-triangular,
+   `A₁₂`/`A₂₂` free): strictly larger, since block-diagonal is the single point `A₁₂ = 0,
+   A₂₂ = A_tail` inside it, and the containment is verified numerically, not asserted
+   (`‖A₂₁‖ = 0` exactly on the in-class shapes while `‖A₁₂‖` reaches 218.97 on `gs_upper`).
+   The deliverable's own NG-2 clause pre-authorized exactly this outcome: "extend MM-1 beyond
+   block-diagonal A, **or state the restriction honestly**" — leg 58 did both. `NG` does not
+   stay open for `A₂₁ ≠ 0`; re-opening a stage whose gate has answered in its pre-committed
+   wording is goalpost-moving, and this file will not do it.
+2. **The proof itself is checked and correct.** I re-derived it: for `x = (0; h)` with
+   `T h = 0`, `(I − AL)x = (−A₁₁Bh − A₁₂Th ; h − A₂₁Bh − A₂₂Th)`; `Th = 0` kills the `A₁₂`
+   and `A₂₂` terms, `A₂₁ = 0` kills the third, so `Z₁ ≥ 1 + ‖A₁₁Bh‖_w/‖h‖_w ≥ 1` at every
+   split `K` and every `s < 1`. Exact, elementary, three lines. The one inherited dependency
+   is honestly attributed: kernel membership (`m⁻²` decay, threshold exactly `s = 1`) is leg
+   51's `fredholm_sides`, re-verified here on the vector actually used via the increment-ratio
+   ladder (r = 0.2498/0.3785 at s = 0/0.3 — the two classes legs 51–54 actually ran —
+   log-divergence exactly at s = 1, r = 0.9988). Both realizations are kept apart (lesson 70):
+   the infinite-tail bound is unconditional; the finite-`M` form pays
+   `ρ_M(‖A₁₂‖+‖A₂₂‖)` with `ρ_M ~ M^{−(1−s)}`, and the measurement holds to it (min slack
+   +5.336e−04, discrepancy/budget ratio 0.5047 < 1 over the whole sweep).
+3. **Consistency with the banked record is verified, not assumed.** Leg 54's baseline
+   10.4584 and best-admissible 8.9591 re-derive to 7.157e−06 relative; the in-class battery
+   minimum 6.0424 ≥ 1 as the theorem requires; MM4c's rank-one escape (floor → ~1e−16 at
+   total `Z₁` = 5.7e+05) does not contradict the theorem — it is a finite-`M`
+   truncation-budget exploit at enormous `‖A‖`, and the infinite-tail statement never sees
+   it. Sharpness is a genuine either-way control: the same two in-class shapes reach 0.6663 /
+   0.4026 at `μ = 2` (and the 0.9156-vs-0.6663 convention split with leg 53 is named and both
+   numbers emitted). The split-placement objection is measured, not argued — `‖T'⁻¹‖`
+   diverges as `M^{+(1−s)}` exactly where `ρ_M` vanishes as `M^{−(1−s)}`, matching to 12
+   digits — and is scoped as measured, not proved. The `A₂₁ ≠ 0` class stays "measured, not
+   proved" in every place it appears (TECHNICAL §7, solver docstrings, JSON gate fields,
+   journal); the scope line is load-bearing and present.
+4. **The novelty claim is now doubly confirmed.** NG-0 ran and was committed BEFORE
+   construction (`9c8b479`), resolved Cadiot arXiv:2505.03091 from the full text (Fourier
+   multiplier, `|l| ≥ l_min > 0`, `|l| → ∞`, infinite diagonal tail — this operator fails all
+   three), and pre-committed that leg 62's deeper reading governs on any disagreement. Leg 62
+   has since landed on `main` (`59daeaf`, gate NO on the located clauses) and independently
+   confirms: Cadiot does not cover the off-diagonal / zero-diagonal case. No located paper
+   states a lower bound on `Z₁` over a class of `A` (NG-0's N2, six query framings, links not
+   counts). The claim survives at its stated width: the inequality and its class, nothing more.
+5. **Merging is NOT an escalation, and leg 58's parking was the over-cautious reading.**
+   §8's four escalations: (i) a plan change "other than the one the current gate's
+   pre-committed YES/NO branch prescribes" — applying NG's yes-branch IS the pre-committed
+   branch, explicitly exempt; (ii) no ban is lifted or weakened; (iii) the prose claims no
+   Clay movement — it states the opposite, in the pre-committed ceiling language, and pins
+   odds at ~0.05%; (iv) nothing banked is deleted or rewritten. The yes-branch's "escalate
+   publication scoping to the user" is a *question for the user*, not a merge blocker: it goes
+   under `⚠ NEEDS YOU` while the result banks. Contrast the leg 63 precedent this file set:
+   that was a genuine escalation #1 (a plan change no gate had pre-committed); this is the
+   opposite case. **Ruling: the orchestrator merges `leg/ng-v1` as-is** (standard finish
+   protocol — rebase on current `main`, `scripts/merge_gate.sh`, land), and the §7b
+   post-landing verifier does its line-by-line review on `main` — this is the single most
+   claim-bearing landing of the run and gets the full treatment.
+6. **`plan_of_record.py` changes for the orchestrator, exactly** (integration commit, same
+   cycle as the merge): (a) stage `NG` status `NEXT` → `DONE`, recording the yes-branch
+   outcome (theorem on `𝒜_upper`/`A₂₁ = 0` at every `K`, every `s < 1`; general `A₂₁ ≠ 0`
+   class MEASURED ONLY, battery minimum 8.9591); (b) stage `B` status `QUEUED` → `NEXT` — the
+   plan's own queue, not a new stage, so no escalation; B's stage wording is NOT edited;
+   (c) `CONTINUATION_PROMPT.md` brought in step (orchestrator-owned; `test_plan_of_record.py`
+   enforces agreement); (d) `PROGRESS.md` `⚠ NEEDS YOU` gains the publication-scoping
+   question the yes-branch prescribes (the repository now holds a Tier-3-shaped negative
+   theorem with its sharpness control; Open question #3 below — the exit criterion — is the
+   frame the user should answer it in).
+7. **The two flagged loose ends need a bench-repair, not a leg.** (a) `capabilities.py`'s
+   `solver/spectral_certificate.py` entry stops at leg 53's assembly and now understates the
+   module (the four NG predicate functions, the theorem, the sharpness control) — a one-entry
+   factual refresh, same shape as the leg 65 annotation fix (`ab07316`). (b) One docstring
+   imprecision found in this review: `block_upper_triangular_bound`'s docstring states the
+   finite-`M` bound as `1 − rho·‖A22‖ + floor`, while the honest finite-`M` form (TECHNICAL
+   §2a) and the runner (which passes `a12 + a22` as the second argument) use
+   `rho·(‖A₁₂‖+‖A₂₂‖)` — no emitted number is wrong, but the parameter name invites misuse;
+   rename/clarify in one line. Neither blocks the merge; both go to one mechanical
+   bench-repair after it lands. (c) The `writeup/build_figures.py` conflict resolution is
+   CORRECT and needs nothing: the list is append-only by standing convention, keeping all four
+   entries (46/47/62/58) is the only right resolution, and the rebased diff shows exactly one
+   appended line (fig55's evidence script). No cleanup leg.
+8. **The critical path after `NG`: stage `B` can only be closed, not run, and closing it
+   honestly is the next leg.** B's search has three degrees of freedom, every one now
+   separately dead: the space (leg 52), the split (`K/2` at every choice, leg 53), the shape
+   of `A` (leg 54 measured; leg 58 now a THEOREM on `A₂₁ = 0`); its GA is banned and the lift
+   condition has failed twice (leg 49: 4/6; leg 59: FAIL, P3 worst |slope−1| unmoved at 0.342
+   against 0.05); and the third realization is dead too (leg 111/WE, `41f4ac0`: every
+   admissible weight's coercivity gap is negative, window width zero). B's own deliverable
+   pre-authorizes the exit: "or an honest report that it does not and where the margin runs
+   out," and its no-branch is pre-committed ("Report that too. A negative bounds how much of
+   the difficulty was tuning versus structure"). **Leg 126 (ROUTE-BX) is drafted below** to
+   answer B's gate from the banked record with a genuine either-way completeness audit,
+   running no GA compute. On its no-branch the committed sequence is EXHAUSTED — what enters
+   next is escalation #1 and the user's call, with the γ=2 dissipative certificate route
+   (contingent on leg 125's gate) the obvious leading candidate; Open question #3 is where
+   that decision already lives.
+9. **The `A₂₁ ≠ 0` mathematics stays alive as exploration, not as the critical path.**
+   **Leg 127 (ROUTE-NGX) is drafted below**: prove the full-class no-go via a quantitative
+   trade-off, or construct an admissible `A₂₁ ≠ 0` counterexample with `Z₁ < 1` — the one
+   outcome that would overturn the measured no-go and revive the method (and which is
+   therefore escalation #4 territory on that branch, pre-committed). It is the question
+   publication scoping will ask, and the highest-value open mathematics on the board short of
+   leg 125. Reserve order updated: 103/104 keep first claim (already promised), then **127**,
+   then 115, 123, 117–124 as before. LEG-A refills with 126 the moment `leg/ng-v1`'s merge
+   lands; 127 is NOT dispatchable before that merge (it owns files 58 is landing).
+
+---
+
+## THE `NEXT` CALL — recommendation to the orchestrator (OVERTAKEN 2026-08-06: `NG`'s gate
+has since ANSWERED YES and the DM ruling in Status supersedes this section — `NG` goes DONE
+on `leg/ng-v1`'s merge, `B` goes NEXT, leg 126 (BX) takes the critical-path slot. Preserved
+for the record.)
 
 **Mark stage `NG` as `NEXT` in `plan_of_record.py`'s SEQUENCE.** It is a new stage, sitting
 after `MM` and before `B`. This is escalation #1 (a route entering the committed sequence), and
@@ -586,7 +705,10 @@ distinct names, none pre-existing — **no collision.**
 Ranked. Each entry needs all six fields or it is not dispatchable.
 
 ```
-### 58 — ROUTE-NG: THE NO-GO, STATED AS A THEOREM (critical path, proposed stage `NG`)
+### 58 — ROUTE-NG: THE NO-GO, STATED AS A THEOREM (critical path, stage `NG`) (GATE ANSWERED
+YES 2026-08-06 on `leg/ng-v1` at `3f2ee16` — theorem on the class A21 = 0 at every K, every
+s < 1; A21 != 0 stays MEASURED ONLY at battery minimum 8.9591. Escalated by the leg, RULED
+MERGEABLE AS-IS by the DM — see the DM ruling in Status. Entry preserved for the record.)
 **Thesis.** Legs 51-57 produced every component of a result and assembled none of them. The
 mechanism is named (the unbounded part is off-diagonal; the bordered tail inverse is a constant
 2.19-10.32, not a decaying multiplier), the block-diagonal case is proved (MM-1's inequality
@@ -623,7 +745,9 @@ rather than blocking its work -- NG-0 runs its own pass regardless.
 ```
 
 ```
-### 62 — ROUTE-CP: THE CADIOT PRE-EMPTION, SETTLED FROM THE FULL TEXT
+### 62 — ROUTE-CP: THE CADIOT PRE-EMPTION, SETTLED FROM THE FULL TEXT (LANDED: gate NO at
+`59daeaf` — Cadiot does not cover the off-diagonal / zero-diagonal case; NG's novelty claim
+is confirmed at full-text depth by a second, independent reading)
 **Thesis.** Leg 57 flagged Cadiot arXiv:2505.03091 as independently pre-empting leg 51's
 methodological claim, and recommended not re-claiming that finding at full strength. That
 recommendation is correct and insufficient: the same paper is the single largest novelty risk to
@@ -2091,7 +2215,12 @@ result; explicitly disjoint from leg 60's numbers and its parked escalation.
 
 ```
 ### 111 — ROUTE-WE: THIRD-REALIZATION SCOPING — WEIGHTED-ENERGY COERCIVITY ON THE a=0 CLM
-KNOWN-ANSWER OBJECT (ASSIGNED, LEG-D)
+KNOWN-ANSWER OBJECT (LANDED: gate NO at `41f4ac0` — the THIRD realization dies on the same
+object: every admissible weight's coercivity gap is NEGATIVE, converging to -(3-gamma)/2, and
+the admissibility/damping window has ZERO width — damping at the origin needs gamma > 3 while
+the basis is in L^2_phi only for gamma < 3. gamma = 3's apparent +4e-3 gap collapses like
+n^-1 and moves with the quadrature cutoff, i.e. it is an artifact. See capabilities.py's
+energy_coercivity.py entry for the banked magnitudes.)
 **Thesis.** L1 is dead in two realizations, and lesson 87 says why in operator terms: every
 ell-1-Fourier tail estimate assumes the unbounded part is a diagonal MULTIPLIER, and inviscid
 self-similar transport carries a SHIFT. The same lesson records that the certified INVISCID
@@ -2458,6 +2587,116 @@ repairs in flight (holder_norms.py, op_lower.py, first_integral.py), the red-tes
 JSON name pre-checked distinct from every live and reserve leg — no collision.
 ```
 
+```
+### 126 — ROUTE-BX: STAGE B, ANSWERED FROM THE BANKED RECORD — THE CLOSURE AUDIT (critical
+path, stage `B`; dispatch into LEG-A the moment `leg/ng-v1`'s merge lands and the plan marks
+`B` as `NEXT`)
+**Thesis.** Stage B ("evolve the certificate -- the function space, the operator split, the
+constants") is the last QUEUED stage in the committed sequence, and it can no longer be RUN as
+conceived -- only answered. Its GA is banned and the lift condition has now failed twice on the
+frozen six-property gate (leg 49: 4/6; leg 59: FAIL with P2 repaired to 0.975 but P3 worst
+|slope-1| unmoved at 0.342 against the 0.05 floor -- "Stage B's fitness is dead as
+parameterized"). Its three degrees of freedom are each separately dead for this operator: the
+SPACE (leg 52), the SPLIT (coupling entry K/2 for every choice, leg 53), and the SHAPE of A --
+measured over leg 54's battery (best admissible 8.9591 where < 1 was needed) and now PROVED
+impossible on the class A21 = 0 at every K and every s < 1 (leg 58's theorem). The third
+realization is dead too (leg 111: every admissible weight's coercivity gap negative, window
+width zero). B's own deliverable pre-authorizes the exit this leg takes: "an honest report
+that it does not and where the margin runs out." The leg's REAL work -- the part that can
+answer either way -- is the COMPLETENESS AUDIT: enumerate B's declared search space against
+the banked refutations, clause by clause, and either exhibit an admissible, ban-respecting
+corner that no banked result covers, or establish there is none. NO GA compute runs on either
+branch (the ban stands; its lift condition is the frozen gate's PASS, which leg 59 did not
+produce). No new ell^1-Fourier machinery is built; every number quoted is read from banked
+JSONs or recomputed from landed modules read-only. Honest ceiling, pre-committed: closing B is
+bookkeeping on a measured negative, not movement on L1->L4; Clay odds stay ~0.05%.
+**Gate.** Auditing stage B's full declared search space (space x split x constants/shape,
+plus the fitness route) against the banked record (legs 49, 52, 53, 54, 56, 58, 59, 111):
+does any admissible, ban-respecting configuration remain that no banked measurement or
+theorem covers -- i.e. a corner in which a searched certificate could still close on this
+operator?
+  yes -> Name the corner precisely, with the banked clause nearest to it and why it escapes.
+         B stays NEXT; the follow-up critical-path leg is the measurement of exactly that
+         corner (if the corner needs GA compute, its gate is the frozen six-property gate's
+         lift condition, which did not pass at leg 59 -- escalate to the user, do not run it).
+  no  -> B's own gate ("does the searched certificate beat the hand-tuned one?") answers its
+         pre-committed NO in the only sense that matters: nothing in the searchable space
+         closes -- the floor is proved >= 1 on A21 = 0, measured 8.9591 at best anywhere, and
+         the fitness that would steer a search is dead as parameterized. Write the honest
+         report B's deliverable names, quantifying how much of the difficulty was tuning
+         versus structure (the structure share is now theorem-grade). The orchestrator applies
+         B's pre-committed no-branch and the committed sequence is EXHAUSTED: what enters next
+         is escalation #1, for the user, framed by Open question #3 (leading candidate: the
+         gamma=2 dissipative certificate route, contingent on leg 125's gate).
+**Territory.** experiments/p2_route_bx_v1_stageb.py,
+               experiments/p2_route_bx_v1_stageb_evidence.py,
+               writeup/4_p2_lottery/BLOG_P2_ROUTEBX_V1.md,
+               writeup/4_p2_lottery/TECHNICAL_P2_ROUTEBX_V1.md,
+               writeup/data/p2_route_bx_v1_stageb.json,
+               writeup/novelty/leg_126.md, experiments/journal/leg_126.md.
+               No figure by design (assembly/audit; the Route-D "no measurement, no figure"
+               convention) unless the yes-branch measures a corner, in which case fig62.
+**Difficulty.** standard
+**Independence.** Owns no solver module; reads banked JSONs and landed modules read-only.
+Read-set overlaps leg 110's (leg 54/56 data) are read-read and collide with nothing; 110 is
+the only live leg near those files and it also never writes them. Touches nothing owned by
+114/116/120/125, the repairs in flight, or either parked branch. NOT dispatchable until
+`leg/ng-v1` is merged and the plan marks `B` NEXT -- it quotes leg 58's theorem as banked, not
+as a branch.
+```
+
+```
+### 127 — ROUTE-NGX: THE GENERAL CLASS A21 != 0 — PROOF OR COUNTEREXAMPLE (exploration,
+reserve; NOT the critical path; not dispatchable before `leg/ng-v1`'s merge lands)
+**Thesis.** Leg 58 proved Z_1 >= 1 on A21 = 0 and left the general class exactly where it
+honestly is: MEASURED ONLY (battery minimum 8.9591 over seven shapes; MM4c's rank-one
+construction kills any column-floor route to a general proof by driving the hhat-column floor
+to ~1e-16 at a total-Z_1 cost of 5.7e+05). The open mathematics is the trade-off: leg 58 SS5
+measured that A21 != 0 buys back exactly one unit on the kernel direction (0.9451..0.9990,
+deficit tracking rho_M at ratio 0.856..0.997), so any A21 that cancels the hhat-column must
+feed B h back into the finite block -- the candidate theorem is a TWO-DIRECTION argument
+(pair x = (0; h) with the columns A21 populates) showing what it wins on one direction it
+pays, with interest, on another. Either that argument closes -- and the no-go becomes a
+theorem on EVERY bounded A, the strongest form publication scoping could ask for -- or the
+attempt localizes an explicit admissible A with A21 != 0 and Z_1 < 1, which would OVERTURN
+the measured no-go and revive the method (leg 54's battery says this needs to beat 8.9591 by
+~9x, and MM4c says naive cancellation costs 5 orders of magnitude -- so a counterexample, if
+it exists, is structurally clever, not a tweak). Both branches are results; failure to reach
+either is also pre-committed. No dynamics run; the object stays the a=0 CLM linearization
+with its exactly-zero Y_0 ceiling stated everywhere, as leg 58 states it.
+**Gate.** Can the no-go be DECIDED on the full bounded class -- either (i) a proof that
+Z_1 >= 1 for every bounded A (A21 free) at some s < 1, with hypotheses containing the a=0 CLM
+linearization, or (ii) an explicit admissible A with A21 != 0 and measured Z_1 < 1,
+grid-stable over >= 3 resolutions?
+  yes, (i)  -> The theorem reaches its sharp form. Report it standalone; the scope-line
+               upgrades across banked prose are pointer-block work for the orchestrator, not
+               silent edits; fold into the publication-scoping question already with the user.
+  yes, (ii) -> The measured no-go is OVERTURNED -- a banked conclusion reverses. That is
+               escalation #4 by definition: push the branch, park it, do not merge, list it
+               under NEEDS YOU. (It would also be the single best piece of news this
+               repository could produce short of leg 125's yes-branch.)
+  no        -> Neither the trade-off inequality nor a counterexample within a leg's work. The
+               restriction is recorded as fundamental at this machinery's level, with the
+               named obstruction (the two-direction argument's failure mode) kept in the
+               artifact per lesson 76; the scope line "measured, not proved" for A21 != 0
+               stands permanently, and no retry without new machinery.
+**Territory.** solver/spectral_certificate.py (append-only additions, sole owner once
+               `leg/ng-v1` is merged), test_spectral_certificate.py,
+               experiments/p2_route_ngx_v1_general.py,
+               experiments/p2_route_ngx_v1_general_evidence.py,
+               writeup/4_p2_lottery/BLOG_P2_ROUTENGX_V1.md,
+               writeup/4_p2_lottery/TECHNICAL_P2_ROUTENGX_V1.md,
+               writeup/data/p2_route_ngx_v1_general.json,
+               writeup/figures/fig63_route_ngx_v1_general.png (fig61 is 125's, fig62 is
+               reserved for 126's yes-branch),
+               writeup/novelty/leg_127.md, experiments/journal/leg_127.md
+**Difficulty.** heavy
+**Independence.** Sole owner of solver/spectral_certificate.py AFTER leg 58's merge lands
+(58's slot is terminated on landing; no other live or reserve leg claims the module). Reads
+leg 54's and 58's banked JSONs read-only. No overlap with 114/116/120/125/126, the repairs in
+flight, or either parked branch. JSON and figure names pre-checked distinct — no collision.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
@@ -2632,7 +2871,14 @@ These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`. The run continues arou
    result; leg 63's finding, if pursued, points at a possible *positive* one on a genuinely
    different object. These are no longer a hypothetical pair — both are now live, concrete,
    parked results waiting on user rulings, and the exit-criterion question decides how to weigh
-   them against each other, not just in the abstract.
+   them against each other, not just in the abstract. **UPDATE 2026-08-06: the negative half
+   is no longer conditional — leg 58 delivered the theorem (class `A₂₁ = 0`, doubly-confirmed
+   novelty), and its gate's own yes-branch puts PUBLICATION SCOPING to you: is a
+   standalone negative theorem with a sharpness control, on the a=0 CLM proxy object, worth
+   writing for the outside world now, or does it wait on leg 127's attempt at the sharp
+   (full-class) form and/or leg 125's positive-direction measurement? The DM's recommendation:
+   scope it now — the result is closed, doubly-checked and citable, and 127/125 can only add
+   to it, not subtract.**
 
 **Unofficial sketch — NOT a dispatchable leg, NOT to be built before the ruling on #2 above.**
 If the user green-lights (b) or (c), a first leg on the `γ=2` full-Laplacian gCLM candidate
