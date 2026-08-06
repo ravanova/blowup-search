@@ -872,6 +872,19 @@ fitness) — it answers a narrower, still-open question the user's steer raised:
 repaired fitness exists at all, informing (not presupposing) the user's still-pending ruling
 on what follows B's exhaustion.
 
+**DM note, 2026-08-06 — novelty/direction review scheduled, PENDING, no findings yet.** Per a
+user request forwarded verbatim ("review blog and writeups and assess which things in this
+project are genuinely novel... are we pursuing a direction that is worthwhile"), the
+orchestrator is dispatching an Opus review agent directly (read-only, surveying `writeup/`,
+`experiments/JOURNAL.md`, `PHASE2_P2_NOTES.md`, and this file's own history) — the DM has no
+agent-spawning tool, so this is the orchestrator's dispatch, not a leg. **No queue action is
+taken here**: this is a placeholder acknowledging the review is in flight so a future DM
+spawn (or this same session, resumed) knows to expect its findings and fold them in — cutting
+new legs, re-ranking, or escalating anything that would touch a banked claim or the odds
+assessment, per the standing rule that a review's own report never moves Clay's ~0.05% by
+itself, only what it finds and what a subsequent leg then verifies can. Awaiting the
+orchestrator's relay.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (OVERTAKEN 2026-08-06: `NG`'s gate
