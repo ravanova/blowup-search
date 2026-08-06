@@ -9637,3 +9637,116 @@ Nothing in this update lifts a ban unilaterally. Escalation #1 is RESOLVED by ru
 PUB1/PUB2 approval is recorded per ruling 1. The odds stay ~0.05%, recorded in the same
 paragraph as the goal change, per the user's own instruction. No further direction question
 raised by this DM — both rulings were clear enough to act on directly.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — plan_of_record.py changes CONFIRMED APPLIED,
+leg 192's real state resolved (recoverable, not stalled/fabricated), 249/251 dispatched,
+246 lands clean, 247 escalates with a Route-D v11 artifact still needing regeneration
+
+**All of this DM's proposed `plan_of_record.py` changes are confirmed applied by the
+orchestrator**: Stage B marked DONE (gate NO, leg 126); new stage `P0` added as NEXT with
+this DM's exact proposed content; the PRIZE line updated to state the Clay goal with odds
+and Walls recorded in the same breath, per instruction 6; Wall 2 corrected per this DM's own
+technical-framing paragraph (time-dependent singularity formation, not dimension); Stage V's
+ban re-posed with this DM's recommended forward-looking wording (naming the machinery as dead
+across models, not gated on the now-impossible "needs L1 first" precondition); the DSS ban
+kept unchanged, as recommended. `test_plan_of_record.py`'s honesty-invariant test was
+correctly adapted (checking odds+walls are recorded alongside the goal, not the now-obsolete
+literal "NOT Clay" string) rather than weakened. `CLAY_ROADMAP.md` got an appended §7.5
+(existing §7 untouched, so the drift-detector stays satisfied) and
+`CONTINUATION_PROMPT.md`'s Directive 1 now points at Route-P0T (leg 251). All 8
+plan-of-record tests pass, merge gate passes, pushed to `main`. **This closes escalation #1
+for real, not just as a recorded ruling — the plan itself now has a `NEXT` stage again.**
+
+**Leg 192's actual state resolved, per the orchestrator's direct check this DM requested**:
+its agent is gone from the active task list, but real, substantial work exists uncommitted in
+its own worktree (an 871-line runner, a 592-line JSON with real data, a full journal) — **not
+stalled or fabricated, just never landed.** Leg 249 was dispatched with explicit instructions
+to recover and verify that existing work rather than necessarily restarting from scratch —
+exactly the right call given what was actually found, and this DM's earlier flagged
+discrepancy (its own "substantively complete" tracking vs. leg 238's "no runner, no verdict"
+finding) is now resolved: BOTH were partially right — real work existed, it just never
+reached a landed commit. Leg 251 (Phase 0) was also dispatched, with the full technical
+framing folded into its brief.
+
+**246 (ALSL2) landed — a thorough NO.** No certificate exists for the Ambrose/Lushnikov/
+Siegel/Silantyev author line either. This closes the third of three "does this precedent's
+author line have later work" checks this cycle (240, 242, 246), all NO — this DM notes, for
+Phase 0's own benefit, that this repository's own literature survey has now checked every
+directly-relevant precedent in `viscous_novelty.py`'s ledger for a later-work upgrade and
+found nothing, which is itself part of why "the missing rung is strictly on the Clay path" is
+stated with confidence in the technical framing above, not just asserted.
+
+**247 (VBR) escalated, not merged.** The repair itself is correct — but it reveals something
+real: **Route-D v11's `v5_budget` genuinely misses its own Y0 budget by 62.02x at `a=0.45`**,
+confirmed, not an artifact of the min/max selection bug alone. Reassuringly, the prose
+(TECHNICAL/blog) already stated this non-uniformity honestly before the repair, so **no
+written conclusion moves** — but the banked anchor JSON itself still carries the WRONG
+margin (computed pre-repair) and needs regenerating. Drafted below, per the orchestrator's
+request.
+
+```
+### 252 — ROUTE-VBRG: REGENERATE Route-D v11's BANKED ANCHOR JSON WITH LEG 247's CORRECTED
+v5_budget MARGIN (leg 247's finding — the repair is correct, the ARTIFACT is now stale)
+**Thesis.** Leg 247 correctly repaired the `v5_budget` min/max selection bug and confirmed
+Route-D v11 genuinely misses its own Y0 budget by 62.02x at `a=0.45` — a real, now-corrected
+number. The prose already stated this non-uniformity honestly, so no written conclusion needs
+to change. But the banked anchor JSON (`experiments/p2_route_d_v11_anchor.py`'s own output
+artifact) still carries the PRE-repair margin, computed before leg 247's fix — it is now
+simply wrong, not merely imprecise, and needs regenerating from the repaired runner.
+**Gate.** Does regenerating the banked anchor JSON from leg 247's repaired
+`experiments/p2_route_d_v11_anchor.py` produce a margin at `a=0.45` matching leg 247's own
+reported 62.02x-budget-miss finding, with every OTHER banked value in the JSON unchanged
+(confirming leg 247's own 0/195-other-JSONs isolation finding extends to this regeneration,
+not just the original diagnosis)?
+  yes -> Bank the regenerated JSON. State explicitly that no prose conclusion changed (the
+         non-uniformity was already stated honestly) — this closes leg 247's finding as a
+         pure artifact-freshness fix, not a new correction to any written claim.
+  no -> If regeneration produces a DIFFERENT margin than leg 247 itself reported, or if any
+        other banked value in the JSON moves, escalate immediately — that would mean leg
+        247's own repair or isolation claim doesn't reproduce from a fresh run.
+**Territory.** the banked anchor JSON artifact `experiments/p2_route_d_v11_anchor.py`
+               produces (regenerate, do not hand-edit), experiments/p2_route_vbrg_v1_regen.py,
+               writeup/data/p2_route_vbrg_v1_regen.json,
+               writeup/novelty/leg_252.md, experiments/journal/leg_252.md.
+               Reads (never further edits) leg 247's own repaired code and report.
+**Difficulty.** light
+**Independence.** Regenerates one artifact from already-repaired code; does not re-touch leg
+247's own repair logic. Disjoint from 236 (RDDEP, the dependency trace, which reads whichever
+JSON is current — sequencing note: 236 should read the REGENERATED JSON once this leg lands,
+not the stale one) and every other live/reserve leg. Immediately dispatchable, not blocked.
+```
+
+**Leg 250 (the PUB2 citation fix, drafted several updates ago) is confirmed still ready and
+queued for the next vacancy**, per the orchestrator's own request — it was never dispatched,
+sitting correctly in reserve since its own drafting.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible (superseded in practice by 249's recovery work, same underlying task) |
+| B | 249 | H2CV2 | **live, newly promoted — TOP PRIORITY, submission-blocking for PUB2** |
+| C | 248 | CNR2 | repair — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 251 | P0T | **live, newly promoted — FLOOR-ELIGIBLE (math/construction), first leg of the new programme** |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 245 | BCL2 | FLOOR-ELIGIBLE (literature) |
+| H | 228 | BHRV | verify — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible |
+
+**Floor status: 3/10 (251, 236, 245) — MET.** (246's landing removed it from the floor
+count, but 251's promotion more than compensates — floor is comfortably met, no scramble
+needed this round.)
+
+**Reserve queue: 5 undispatched legs (229, 231-234), plus 250 and 252 (both newly drafted/
+confirmed) = 7 undispatched legs (229, 231, 232, 233, 234, 250, 252).** 250 and 252 are both
+immediately dispatchable, not blocked — ranked for the next vacancy ahead of the still-blocked
+229/231-234.
+
+Nothing in this update lifts a ban. Escalation #1 is now genuinely closed (the plan has a
+`NEXT` stage). No claim about Walls 1 and 2 moves beyond what's already recorded in the
+technical framing above; Clay stays ~0.05%. No direction question raised by this DM this
+cycle.
