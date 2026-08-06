@@ -412,3 +412,656 @@ def admissibility(family, gamma, n_grade=24, order=12):
         "increment_ratio": (inc[1] / inc[0]
                             if abs(inc[0]) > 1e-12 * max(abs(ladder[0]), 1.0) else None),
     }
+
+
+# ===========================================================================
+# ROUTE-WES (leg 178) -- THE SECOND, INDEPENDENTLY-CHOSEN CONSTRUCTION.
+# Appended beside leg 111's.  NOTHING ABOVE THIS LINE IS EDITED: leg 111's
+# banked numbers must reproduce bit-for-bit through the functions above, and
+# the driver checks that they do (control C1).
+# ===========================================================================
+#
+# WHY THERE IS A SECOND CONSTRUCTION, AND WHOSE IT IS
+# ---------------------------------------------------------------------------
+# Leg 111 measured a ZERO-WIDTH window on ONE construction: damping at the
+# origin needs `gamma > 3` (`D_phi(0) = (3 - gamma)/2`), while the trial space
+# `span{sin k theta}` is in `L^2_phi` only for `gamma < 3`.  It swept `gamma`
+# over seven weights and held the TRIAL SPACE fixed.  This block moves the
+# thing leg 111 held fixed.
+#
+# THE CONSTRUCTION IS NOT THIS REPOSITORY'S AND MAY NOT BE CLAIMED.  It is
+# Elgindi-Ghoul-Masmoudi, arXiv:1906.05811, Prop. 2.1, whose hypotheses are
+# `f` odd, `f'(0) = Hf(0) = 0`, `int |f|^2 phi < infinity` with
+# `phi(y) = (1 + y^2)^2 / y^4`, and whose conclusion is
+# `int f M_a f phi <= (-1/2 - C|a|) int f^2 phi` -- at `a = 0`, by EGM's own
+# sec 1 ("when a = 0 we get CLM model"), on THIS object.  The frame is Xu
+# arXiv:2607.19762's realization dichotomy (sec 3.1, Prop. 2), also not ours.
+# What is measured here -- a coercivity gap over a CONSTRAINED
+# finite-dimensional trial space, with admissibility gated and grid-stability
+# reported as a magnitude -- is what leg 178's novelty pass could not locate.
+#
+# THE TWO CONSTRAINTS, EXACT IN THIS BASIS
+# ---------------------------------------------------------------------------
+# `(sin k theta)'(0) = k` and, from `H(sin k theta) = -cos k theta + (-1)^k`,
+# `H(sin k theta)(0) = -1 + (-1)^k` (`0` for even `k`, `-2` for odd `k`).  So
+# for `h = sum c_k sin k theta`:
+#
+#     h'(0)   = sum_k k c_k                   ("dprime")
+#     (Hh)(0) = -2 sum_{k odd} c_k            ("hilbert")
+#
+# Both are exact integer functionals -- no quadrature enters the constraint,
+# which is why the constrained subspace is a QUADRATURE-INDEPENDENT object.
+#
+# VANISHING ORDER, AND WHY IT IS 3 AND NOT LEG 165's 2
+# ---------------------------------------------------------------------------
+# `sin k theta = k theta - k^3 theta^3/6 + O(theta^5)`, so an odd trigonometric
+# polynomial vanishes to ODD order only: `p in {1, 3, 5, ...}`.  `p = 2` is
+# unattainable.  Imposing `sum k c_k = 0` kills the `theta^1` coefficient and
+# leaves `-(sum c_k k^3) theta^3 / 6`, i.e. `p = 3` generically.  Membership
+# then needs `int theta^{2p} theta^{-gamma} < infinity`, i.e.
+# `gamma < 2p + 1 = 7`, against damping's `gamma > 3`: a window of WIDTH 4,
+# where leg 111's was width 0.  `wes_vanishing_order` MEASURES this from the
+# probe vector rather than asserting it.
+#
+# THE FALSIFICATION CONTROL IS PART OF THE CONSTRUCTION (lesson 90)
+# ---------------------------------------------------------------------------
+# `T3_hilbert_only` imposes `(Hh)(0) = 0` alone.  It removes a direction from
+# the trial space exactly as `T1`/`T2` do, and it does NOT change the vanishing
+# order, so its window stays `(3, 3)` and it must NOT pass.  If it passes, the
+# instrument is measuring "I deleted some directions" rather than "the space
+# changed", and leg 178's result is withdrawn rather than shipped.
+#
+# THE WEIGHT, AND AN EXACT FACT ABOUT IT
+# ---------------------------------------------------------------------------
+# Family `E` is EGM's own `(1 + X^2)^2 / X^4` transported into this module's
+# compactification `X = tan(theta/2)` with `dX = ((1 + X^2)/2) dtheta`:
+#
+#     phi^E(theta) = (1 + X^2)^3 / (2 X^4),      X = tan(theta/2)
+#
+# written from its own closed form in `X` and NOT from family `B`, so that the
+# driver's check that `phi^E / phi^B_4` is CONSTANT is a real measurement and
+# not an identity of the code.  Both have `D_phi == -1/2` IDENTICALLY in
+# `theta` -- family `B` at `gamma = 4` gives
+# `(3 - 2) cos^2(th/2) - 3/2 + sin^2(th/2) = -1/2`, and family `E` gives
+# `(3/2) cos th + (X^2 - 2)/(1 + X^2) = -1/2` -- which is the exact sense in
+# which the published weight is the one that makes the damping factor
+# CONSTANT, and the arithmetic reason EGM's constant is `-1/2`.  Both are
+# checked numerically by the driver rather than trusted.
+#
+# THE SPLIT THAT MAKES THE MECHANISM VISIBLE
+# ---------------------------------------------------------------------------
+# `wes_form_matrices` returns the form's LOCAL and NONLOCAL halves separately,
+#
+#     <L h, h>_phi  =  int h^2 D_phi phi  -  int sin th * phi * (H h) * h ,
+#
+# together with the residual of that integration-by-parts identity as measured
+# on the actual quadrature.  The identity has boundary terms that vanish only
+# if `h^2 sin th phi -> 0` at both ends; on a singular weight and an
+# unconstrained `p = 1` trial space they need not, and the residual is
+# therefore a MAGNITUDE this construction owes rather than an assumption it
+# makes.  The nonlocal half is the part no weight can touch -- Xu's ceiling
+# `KNOWN_ANSWER_CEILING = 0.5` is where it caps the total, and reporting it
+# separately is what turns "the gap is 0.5" into a mechanism.
+#
+# CEILING (unchanged from leg 111, and it binds every number below)
+# ---------------------------------------------------------------------------
+# Plain float64, nothing interval-enclosed.  The object is the `a = 0` CLM
+# linearisation (clause S7): a gap measured here bounds `HL_S2_nonsymmetric`'s
+# difficulty FROM BELOW, never above.  A gap on a constrained trial space is
+# NOT a certificate -- EGM buy the origin conditions with two free modulation
+# parameters -- and no link of the `L1 -> L4` chain can move from anything in
+# this block.
+
+# (name, constraints, declared vanishing order, admissible gamma upper bound)
+# Declared here before any computation; `wes_vanishing_order` measures it.
+WES_CONSTRAINT_CLASSES = (
+    ("T0_unconstrained", (), 1, 3.0),           # leg 111's own -- reproduction control
+    ("T1_dprime", ("dprime",), 3, 7.0),
+    ("T2_egm", ("dprime", "hilbert"), 3, 7.0),
+    ("T3_hilbert_only", ("hilbert",), 1, 3.0),  # FALSIFICATION control -- must not pass
+)
+
+# Eleven weights.  Family A is leg 111's ladder extended past its gamma = 4 stop
+# to the new membership threshold 7 and no further; family B adds the member
+# leg 111's enumeration excluded; E is EGM's own, from its own closed form.
+WES_WEIGHT_FAMILY = (
+    ("A0_flat", "A", 0.0),
+    ("A2", "A", 2.0),
+    ("A3", "A", 3.0),
+    ("A4_chen_hou", "A", 4.0),
+    ("A5", "A", 5.0),
+    ("A6", "A", 6.0),
+    ("A7", "A", 7.0),
+    ("B0", "B", 0.0),
+    ("B2", "B", 2.0),
+    ("B4_egm", "B", 4.0),
+    ("E_egm", "E", 4.0),
+)
+
+# The membership probe for each class: the SHORTEST integer vector satisfying
+# that class's constraints, so the probe is reproducible and quadrature-free.
+#   T0: sin th                          (leg 111's own probe, unchanged)
+#   T1: 2 sin th - sin 2th              h'(0) = 2 - 2 = 0
+#   T2: sin th + sin 2th - sin 3th      h'(0) = 1 + 2 - 3 = 0, (Hh)(0) = -2(1 - 1) = 0
+#   T3: sin th - sin 3th                (Hh)(0) = -2(1 - 1) = 0, h'(0) = 1 - 3 = -2 != 0
+WES_PROBE_VECTORS = {
+    "T0_unconstrained": (1.0,),
+    "T1_dprime": (2.0, -1.0),
+    "T2_egm": (1.0, 1.0, -1.0),
+    "T3_hilbert_only": (1.0, 0.0, -1.0),
+}
+
+__all__ = __all__ + [
+    "WES_CONSTRAINT_CLASSES",
+    "WES_PROBE_VECTORS",
+    "WES_WEIGHT_FAMILY",
+    "wes_admissibility",
+    "wes_coercivity_gap",
+    "wes_coercivity_gap_exact",
+    "wes_constrained_basis",
+    "wes_constraint_rows",
+    "wes_damping_factor",
+    "wes_form_matrices",
+    "wes_form_matrices_constrained",
+    "wes_point_mode_intersection",
+    "wes_trial_projector",
+    "wes_vanishing_order",
+    "wes_weight_values",
+]
+
+
+def wes_weight_values(theta, family, gamma):
+    """`phi(theta)`, extending `weight_values` with family `E`.
+
+    Families `A` and `B` are DELEGATED to leg 111's `weight_values` unchanged, so
+    the two constructions cannot silently drift apart.  Family `E` is EGM's
+    `(1 + X^2)^2 / X^4` times the Jacobian `(1 + X^2)/2` of `X = tan(theta/2)`,
+    evaluated from that closed form and NOT from family `B` -- the driver's
+    constancy check on `phi^E / phi^B_4` is then a measurement.
+    """
+    theta = np.asarray(theta, dtype=float)
+    if family in ("A", "B"):
+        return weight_values(theta, family, gamma)
+    if family == "E":
+        X = np.tan(0.5 * theta)
+        return (1.0 + X * X) ** 3 / (2.0 * X ** 4)
+    raise ValueError(f"unknown weight family {family!r}")
+
+
+def wes_damping_factor(theta, family, gamma):
+    """`D_phi(theta)`, extending `damping_factor` with family `E`.
+
+    For `E`, `(log phi)'(theta) = 3 X - 2 (1 + X^2)/X` and
+    `(1/2) sin theta (log phi)' = (X^2 - 2)/(1 + X^2)`, so
+    `D = (3/2) cos theta + (X^2 - 2)/(1 + X^2)`, which is `-1/2` identically.
+    It is written in the un-simplified form on purpose: a hard-coded `-0.5`
+    could not report the other answer (lesson 90).
+    """
+    theta = np.asarray(theta, dtype=float)
+    if family in ("A", "B"):
+        return damping_factor(theta, family, gamma)
+    if family == "E":
+        X = np.tan(0.5 * theta)
+        return 1.5 * np.cos(theta) + (X * X - 2.0) / (1.0 + X * X)
+    raise ValueError(f"unknown weight family {family!r}")
+
+
+def wes_constraint_rows(n, class_name):
+    """The class's constraint functionals as EXACT integer rows over `c_1..c_n`.
+
+    `dprime`  : `h'(0)   = sum_k k c_k`.
+    `hilbert` : `(Hh)(0) = sum_k (-1 + (-1)^k) c_k` (`-2` on odd `k`, `0` on even).
+
+    No quadrature and no weight enters, so the constrained subspace does not
+    move when the mesh does.
+    """
+    n = int(n)
+    names = dict((c[0], c[1]) for c in WES_CONSTRAINT_CLASSES)
+    if class_name not in names:
+        raise ValueError(f"unknown constraint class {class_name!r}")
+    rows = []
+    for which in names[class_name]:
+        if which == "dprime":
+            rows.append(np.array([float(k) for k in range(1, n + 1)]))
+        elif which == "hilbert":
+            rows.append(np.array([-1.0 + (-1.0) ** k for k in range(1, n + 1)]))
+        else:
+            raise ValueError(f"unknown constraint {which!r}")
+    return np.array(rows) if rows else np.zeros((0, n))
+
+
+def wes_trial_projector(n, class_name, rcond=1e-12):
+    """Orthonormal basis of the constrained trial space, as an `(n, d)` matrix.
+
+    The null space of the exact constraint rows, via their SVD.  `d = n - rank`.
+    The coercivity gap is a generalized Rayleigh quotient and is therefore
+    invariant under any change of basis of this subspace -- only the SPAN is
+    load-bearing, which is why an SVD basis is admissible here even though the
+    admissibility probe deliberately uses an explicit integer vector instead.
+    """
+    n = int(n)
+    R = wes_constraint_rows(n, class_name)
+    if R.shape[0] == 0:
+        return np.eye(n)
+    _, sv, Vt = np.linalg.svd(R)
+    rank = int(np.sum(sv > rcond * max(float(sv[0]), 1.0)))
+    return Vt[rank:].T
+
+
+def wes_vanishing_order(class_name, thetas=(1e-2, 1e-3, 1e-4)):
+    """MEASURE the probe's vanishing order at the origin instead of asserting it.
+
+    Returns the probe's values at the given `theta` and the log-log slopes
+    between consecutive ones.  A slope of `1` is `p = 1`, a slope of `3` is
+    `p = 3`.  Also returns the exact functional values `h'(0)` and `(Hh)(0)`
+    evaluated from the integer rows, so the constraint and its consequence are
+    reported side by side.
+    """
+    c = np.array(WES_PROBE_VECTORS[class_name], dtype=float)
+    n = len(c)
+    th = np.array(thetas, dtype=float)
+    vals = np.array([float(np.sum(c * np.sin(np.arange(1, n + 1) * t))) for t in th])
+    slopes = [float(math.log(abs(vals[i + 1]) / abs(vals[i]))
+                    / math.log(th[i + 1] / th[i])) for i in range(len(th) - 1)]
+    dprime = float(np.sum(c * np.arange(1, n + 1)))
+    hzero = float(np.sum(c * np.array([-1.0 + (-1.0) ** k for k in range(1, n + 1)])))
+    declared = dict((x[0], x[2]) for x in WES_CONSTRAINT_CLASSES)[class_name]
+    return {
+        "class": class_name, "probe": [float(x) for x in c],
+        "thetas": [float(t) for t in th], "values": [float(v) for v in vals],
+        "loglog_slopes": slopes,
+        "measured_order": slopes[-1],
+        "declared_order": float(declared),
+        "h_prime_at_0": dprime, "H_h_at_0": hzero,
+    }
+
+
+def wes_point_mode_intersection(class_name, n=8, rcond=1e-12):
+    """Dimension of `span{sin th, sin 2th} INTERSECT` the constrained space.
+
+    Prediction P5 of leg 178's novelty log: for `T2_egm` this is `0`, i.e. the
+    two origin constraints already remove BOTH of Xu's published point-spectrum
+    modes, so `modulate=True` and `modulate=False` must agree on `T2`.  This is
+    leg 178's own arithmetic about two functionals on a two-dimensional space --
+    it is NOT attributed to Xu (whose sec 3.2 attributes mode removal to
+    centering / the odd restriction) and NOT to EGM.
+    """
+    n = int(n)
+    M = np.zeros((n, 2))
+    for j, (_, c) in enumerate(known_modes()):
+        M[: len(c), j] = c
+    R = wes_constraint_rows(n, class_name)
+    if R.shape[0] == 0:
+        return {"class": class_name, "intersection_dim": 2, "singular_values": []}
+    RM = R @ M
+    sv = np.linalg.svd(RM, compute_uv=False)
+    top = max(float(sv[0]), 1.0)
+    rank = int(np.sum(sv > rcond * top))
+    return {"class": class_name, "intersection_dim": int(2 - rank),
+            "singular_values": [float(s) for s in sv]}
+
+
+def wes_form_matrices(n, family, gamma, mu=0.0, n_unif=None, n_grade=24, order=12):
+    """`(G, B, B_local, B_nonlocal, byparts_rel_residual)`.
+
+    `G` and `B` are exactly leg 111's `form_matrices` quantities, recomputed here
+    only so the local/nonlocal split shares one quadrature with them (the driver
+    checks the two agree).  In addition:
+
+        `B_local[j,k]    = int e_j e_k D_phi phi`
+        `B_nonlocal[j,k] = -(1/2) int sin th phi ((H e_k) e_j + (H e_j) e_k)`
+
+    and `byparts_rel_residual` is `max|Sym(B) - B_local - B_nonlocal|` divided by
+    `max|Sym(B)|`.  That identity holds only if the boundary terms of the
+    integration by parts vanish; on a singular weight and a `p = 1` trial space
+    they need not, so the residual is MEASURED and reported rather than assumed.
+    The split is defined only at `mu = 0` (the `Lambda^1` control is a Fourier
+    multiplier, not a local factor), and `B_local`/`B_nonlocal` are `None` when
+    `mu != 0`.
+    """
+    n = int(n)
+    if n_unif is None:
+        n_unif = max(64, 4 * n)
+    th, qw = graded_quadrature(n_unif=n_unif, n_grade=n_grade, order=order)
+    phi = wes_weight_values(th, family, gamma)
+    ks = np.arange(1, n + 1)
+    E = np.stack([np.sin(k * th) for k in ks])
+    HE = np.stack([-np.cos(k * th) + (-1.0) ** int(k) for k in ks])
+    LE = np.stack([clm_linearization_values(th, int(k)) for k in ks])
+    if mu:
+        LE = LE - mu * np.stack([k * np.sin(k * th) for k in ks])
+    pw = phi * qw
+    G = (E * pw) @ E.T
+    B = (E * pw) @ LE.T
+    if mu:
+        return G, B, None, None, None
+    D = wes_damping_factor(th, family, gamma)
+    B_loc = (E * (pw * D)) @ E.T
+    sw = pw * np.sin(th)
+    M = (E * sw) @ HE.T                      # M[j,k] = int e_j (H e_k) sin th phi
+    B_nl = -0.5 * (M + M.T)
+    S = 0.5 * (B + B.T)
+    scale = float(np.max(np.abs(S))) if S.size else 1.0
+    resid = float(np.max(np.abs(S - B_loc - B_nl))) / (scale if scale > 0 else 1.0)
+    return G, B, B_loc, B_nl, resid
+
+
+def wes_coercivity_gap(n, class_name, family, gamma, mu=0.0, n_unif=None,
+                       n_grade=24, order=12, modulate=False, rcond=1e-12,
+                       precomputed=None):
+    """The coercivity gap over the CONSTRAINED trial space, plus its two halves.
+
+    `precomputed` is an optional `(G, B, B_local, B_nonlocal, residual)` tuple from
+    `wes_form_matrices` with the SAME `(n, family, gamma, mu, n_grade, order)`.  The
+    form matrices do not depend on the trial class or on `modulate` -- only the
+    projector does -- so the driver assembles once per weight and reuses across all
+    four constraint classes.  This is a pure caching layer: passing `precomputed`
+    cannot change any returned number, and the driver checks one row both ways.
+
+    Same estimator as leg 111's `coercivity_gap` -- `gap = -lambda_max(Sym(B), G)`
+    by whitening with `G`'s own eigendecomposition and dropping directions below
+    `rcond * lambda_max(G)` -- restricted first to `wes_trial_projector`'s
+    subspace.  `class_name = "T0_unconstrained"` with `modulate=True` is exactly
+    leg 111's computation and must reproduce its banked numbers (control C1).
+
+    `modulate` defaults to **False** here, because on `T2_egm` the constraints
+    already remove both published point modes (`wes_point_mode_intersection`);
+    the driver reports both settings so that claim is checked, not assumed.
+
+    `local_gap` and `nonlocal_gap` are the same Rayleigh quotient run on
+    `B_local` and `B_nonlocal` alone: the local half is what the weight controls,
+    the nonlocal half is what it cannot touch.  Every quantity the measurement
+    divides by is returned (lesson 67).
+    """
+    if precomputed is None:
+        G, B, B_loc, B_nl, resid = wes_form_matrices(
+            n, family, gamma, mu=mu, n_unif=n_unif, n_grade=n_grade, order=order)
+    else:
+        G, B, B_loc, B_nl, resid = precomputed
+    n = int(n)
+    Q = wes_trial_projector(n, class_name, rcond=rcond)
+    if modulate:
+        modes = np.zeros((n, 2))
+        for j, (_, c) in enumerate(known_modes()):
+            modes[: len(c), j] = c
+        C = modes.T @ G @ Q
+        if C.shape[1]:
+            _, sv, Vt = np.linalg.svd(C)
+            rank = int(np.sum(sv > rcond * max(float(sv[0]), 1.0)))
+            Q = Q @ Vt[rank:].T
+
+    Gp = Q.T @ G @ Q
+    ev, U = np.linalg.eigh(0.5 * (Gp + Gp.T))
+    top = float(ev.max()) if ev.size else 0.0
+    keep = ev > rcond * top
+    dropped = int(np.sum(~keep))
+    if not np.any(keep):
+        return {"n": n, "class": class_name, "family": family, "gamma": float(gamma),
+                "mu": float(mu), "gap": float("nan"), "dim_trial": int(Q.shape[1]),
+                "dim_kept": 0, "dropped": dropped, "cond_G": float("inf"),
+                "local_gap": None, "nonlocal_gap": None,
+                "byparts_rel_residual": resid, "modulate": bool(modulate)}
+    W = U[:, keep] / np.sqrt(ev[keep])
+
+    def rayleigh(Mat):
+        if Mat is None:
+            return None
+        Mp = Q.T @ Mat @ Q
+        Mh = W.T @ (0.5 * (Mp + Mp.T)) @ W
+        return -float(np.linalg.eigvalsh(0.5 * (Mh + Mh.T)).max())
+
+    gap = rayleigh(0.5 * (B + B.T))
+    return {
+        "n": n, "class": class_name, "family": family, "gamma": float(gamma),
+        "mu": float(mu), "n_grade": int(n_grade), "order": int(order),
+        "modulate": bool(modulate),
+        "gap": gap,
+        "lambda_max": -gap,
+        "local_gap": rayleigh(B_loc),
+        "nonlocal_gap": rayleigh(B_nl),
+        "byparts_rel_residual": resid,
+        "dim_trial": int(Q.shape[1]),
+        "dim_kept": int(np.sum(keep)),
+        "dropped": dropped,
+        "cond_G": float(top / float(ev[keep].min())),
+    }
+
+
+def wes_constrained_basis(n, class_name):
+    """An EXACTLY-constrained INTEGER basis of the constrained space, `(n, d)`.
+
+    WHY THIS EXISTS, AND IT IS THE CENTRAL INSTRUMENT FINDING OF LEG 178.
+    `wes_trial_projector`'s SVD null-space basis satisfies the constraint only to
+    machine precision -- its leak along the constraint direction is `~1e-16`.  That
+    is harmless when everything in sight is finite.  It is NOT harmless here: at
+    `gamma > 3` the UNCONSTRAINED Gram's own entries are DIVERGENT
+    (`int sin j th sin k th th^-gamma ~ j k int th^{2-gamma}`), so a `1e-16` leak
+    multiplies a quantity that grows by `1.68e+07` per grading refinement.
+    Assemble-then-project therefore computes the constrained form as a
+    cancellation between divergent numbers, and the answer is dominated by its own
+    evaluation error (lesson 86: a bound dominated by its evaluation error is a
+    statement about the code).
+
+    The basis below is built from INTEGERS whose constraint residual is EXACTLY
+    zero in float64 (all products fit well inside `2^53` for `n <= 256`), and
+    `wes_form_matrices_constrained` contracts it against the basis functions
+    POINTWISE, before any weight is applied -- so the cancellation happens at each
+    `theta` at scale `eps * K * theta`, not at the scale of a divergent integral.
+
+        T0 : the identity -- leg 111's own trial space, unchanged.
+        T1 : v_j = (j+1) e_j - j e_{j+1},  j = 1..n-1.
+             `sum_k k v_j[k] = j(j+1) - (j+1)j = 0` EXACTLY.
+        T3 : all even `e_k`, plus differences of consecutive odd `e_k` --
+             `sum_{k odd}` is exactly zero on each.
+        T2 : `w_m = u_{m+1} v_m - u_m v_{m+1}`, where `u_m = sum_{k odd} v_m[k]`
+             equals `m+1` for odd `m` and `-m` for even `m` (never zero), so the
+             `n-2` columns are independent and satisfy BOTH constraints exactly.
+    """
+    n = int(n)
+    if class_name == "T0_unconstrained":
+        return np.eye(n)
+    if class_name == "T1_dprime":
+        V = np.zeros((n, n - 1))
+        for j in range(1, n):
+            V[j - 1, j - 1] = j + 1
+            V[j, j - 1] = -j
+        return V
+    if class_name == "T3_hilbert_only":
+        cols = []
+        odds = [k for k in range(1, n + 1) if k % 2 == 1]
+        for k in range(2, n + 1, 2):
+            c = np.zeros(n)
+            c[k - 1] = 1.0
+            cols.append(c)
+        for i in range(len(odds) - 1):
+            c = np.zeros(n)
+            c[odds[i] - 1] = 1.0
+            c[odds[i + 1] - 1] = -1.0
+            cols.append(c)
+        return np.stack(cols, axis=1) if cols else np.zeros((n, 0))
+    if class_name == "T2_egm":
+        V1 = wes_constrained_basis(n, "T1_dprime")            # (n, n-1), exact
+        odd_mask = np.array([1.0 if k % 2 == 1 else 0.0 for k in range(1, n + 1)])
+        u = odd_mask @ V1                                      # (n-1,), exact integers
+        cols = []
+        for m in range(V1.shape[1] - 1):
+            cols.append(u[m + 1] * V1[:, m] - u[m] * V1[:, m + 1])
+        return np.stack(cols, axis=1) if cols else np.zeros((n, 0))
+    raise ValueError(f"unknown constraint class {class_name!r}")
+
+
+def wes_form_matrices_constrained(n, class_name, family, gamma, mu=0.0, n_unif=None,
+                                  n_grade=24, order=12):
+    """Form matrices assembled DIRECTLY in the exactly-constrained basis.
+
+    Returns `(G, B, B_local, B_nonlocal, byparts_rel_residual, contamination)`.
+
+    The constrained basis functions `F_m = sum_k V[k,m] sin k theta` are formed
+    POINTWISE (`F = V.T @ E`) before any weight multiplies them, so the
+    order-`theta^{2p+1}` cancellation that makes the constrained space integrable
+    happens at each quadrature node at scale `eps * K_m * theta` -- rather than as
+    a difference of divergent integrals, which is what assemble-then-project does.
+
+    `contamination` is the MEASURED floor of that roundoff, not an assumption: it
+    is `max_m int (eps |V|^T |E|)_m^2 phi / int F_m^2 phi`, i.e. the weighted
+    energy of a bound on the pointwise cancellation error, relative to the
+    weighted energy of the basis function itself.  A value near `1` means the
+    grading depth has been pushed past the point where float64 can represent the
+    cancellation, and the number the quadrature prints is a statement about the
+    code.
+    """
+    n = int(n)
+    if n_unif is None:
+        n_unif = max(64, 4 * n)
+    V = wes_constrained_basis(n, class_name)
+    th, qw = graded_quadrature(n_unif=n_unif, n_grade=n_grade, order=order)
+    phi = wes_weight_values(th, family, gamma)
+    ks = np.arange(1, n + 1)
+    E = np.stack([np.sin(k * th) for k in ks])
+    LE = np.stack([clm_linearization_values(th, int(k)) for k in ks])
+    if mu:
+        LE = LE - mu * np.stack([k * np.sin(k * th) for k in ks])
+    HE = np.stack([-np.cos(k * th) + (-1.0) ** int(k) for k in ks])
+
+    F = V.T @ E                     # (d, nq) -- the cancellation, done pointwise
+    LF = V.T @ LE
+    HF = V.T @ HE
+    pw = phi * qw
+    G = (F * pw) @ F.T
+    B = (F * pw) @ LF.T
+
+    # measured roundoff floor of the pointwise cancellation
+    eps = float(np.finfo(float).eps)
+    Fabs = np.abs(V).T @ np.abs(E)
+    num = ((eps * Fabs) ** 2 * pw).sum(axis=1)
+    den = (F ** 2 * pw).sum(axis=1)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        contamination = float(np.nanmax(np.where(den > 0, num / den, 0.0)))
+
+    if mu:
+        return G, B, None, None, None, contamination
+    D = wes_damping_factor(th, family, gamma)
+    B_loc = (F * (pw * D)) @ F.T
+    sw = pw * np.sin(th)
+    M = (F * sw) @ HF.T
+    B_nl = -0.5 * (M + M.T)
+    S = 0.5 * (B + B.T)
+    scale = float(np.max(np.abs(S))) if S.size else 1.0
+    resid = float(np.max(np.abs(S - B_loc - B_nl))) / (scale if scale > 0 else 1.0)
+    return G, B, B_loc, B_nl, resid, contamination
+
+
+def wes_coercivity_gap_exact(n, class_name, family, gamma, mu=0.0, n_unif=None,
+                             n_grade=24, order=12, rcond=1e-12, precomputed=None):
+    """The coercivity gap on the exactly-constrained basis.  THE MEASUREMENT.
+
+    Identical estimator to leg 111's -- `gap = -lambda_max(Sym(B), G)` by whitening
+    with `G`'s own eigendecomposition -- but on form matrices that were never
+    assembled in the unconstrained basis, so no divergent quantity is ever formed
+    and then cancelled.  There is no `modulate` flag: on `T2_egm` the two origin
+    constraints already remove BOTH published point modes
+    (`wes_point_mode_intersection` returns dimension 0), which is the whole reason
+    the resulting gap is comparable with Xu's MODULATED ceiling of `1/2`.  On
+    `T1_dprime` one point-mode direction survives (dimension 1), so its raw gap is
+    bounded above by `-1` by the published eigenvalue `1` -- an internal
+    consistency check, not a defect.
+    """
+    if precomputed is None:
+        G, B, B_loc, B_nl, resid, contam = wes_form_matrices_constrained(
+            n, class_name, family, gamma, mu=mu, n_unif=n_unif, n_grade=n_grade,
+            order=order)
+    else:
+        G, B, B_loc, B_nl, resid, contam = precomputed
+    ev, U = np.linalg.eigh(0.5 * (G + G.T))
+    top = float(ev.max()) if ev.size else 0.0
+    keep = ev > rcond * top
+    dropped = int(np.sum(~keep))
+    if not np.any(keep):
+        return {"n": int(n), "class": class_name, "family": family,
+                "gamma": float(gamma), "mu": float(mu), "gap": float("nan"),
+                "dim_trial": int(G.shape[0]), "dim_kept": 0, "dropped": dropped,
+                "cond_G": float("inf"), "local_gap": None, "nonlocal_gap": None,
+                "byparts_rel_residual": resid, "contamination": contam}
+    W = U[:, keep] / np.sqrt(ev[keep])
+
+    def rayleigh(Mat):
+        if Mat is None:
+            return None
+        Mh = W.T @ (0.5 * (Mat + Mat.T)) @ W
+        return -float(np.linalg.eigvalsh(0.5 * (Mh + Mh.T)).max())
+
+    return {
+        "n": int(n), "class": class_name, "family": family, "gamma": float(gamma),
+        "mu": float(mu), "n_grade": int(n_grade), "order": int(order),
+        "gap": rayleigh(0.5 * (B + B.T)),
+        "local_gap": rayleigh(B_loc),
+        "nonlocal_gap": rayleigh(B_nl),
+        "byparts_rel_residual": resid,
+        "contamination": contam,
+        "dim_trial": int(G.shape[0]),
+        "dim_kept": int(np.sum(keep)),
+        "dropped": dropped,
+        "cond_G": float(top / float(ev[keep].min())),
+    }
+
+
+def wes_admissibility(class_name, family, gamma, n_grade=24, order=12, n_space=32):
+    """Is the CONSTRAINED trial space in `L^2_phi`?  Reported two independent ways.
+
+    (a) leg 111's own instrument, on this class's explicit integer probe vector:
+        `||h||^2_phi` at two grading depths (`ratio`), plus the equally-spaced
+        ladder whose INCREMENTS separate a log divergence (equal increments)
+        from a power divergence (geometrically growing increments).  Using an
+        explicit vector rather than an SVD basis keeps this reproducible and
+        independent of the projector's internals.
+    (b) a whole-space check the probe cannot fake: `lambda_max` of the
+        constrained Gram `Q^T G Q` at two grading depths, and its ratio.  If any
+        direction of the constrained space leaves the weighted space, this ratio
+        runs away even when the probe converges.
+
+    `exponent_margin = 2p + 1 - gamma` uses the class's DECLARED order `p`;
+    `wes_vanishing_order` reports the measured one alongside.
+    """
+    c = np.array(WES_PROBE_VECTORS[class_name], dtype=float)
+    ks = np.arange(1, len(c) + 1)
+
+    def probe_norm2(ng):
+        th, qw = graded_quadrature(n_grade=ng, order=order)
+        h = (c[:, None] * np.sin(ks[:, None] * th[None, :])).sum(axis=0)
+        return float(np.sum(h ** 2 * wes_weight_values(th, family, gamma) * qw))
+
+    def gram_top(ng, exact):
+        """`exact=True` assembles in the exactly-constrained basis; `exact=False`
+        is the assemble-then-project route.  Both are reported, because their
+        DISAGREEMENT is leg 178's instrument finding, not a nuisance."""
+        if exact:
+            G = wes_form_matrices_constrained(n_space, class_name, family, gamma,
+                                              n_grade=ng, order=order)[0]
+        else:
+            Gf, _, _, _, _ = wes_form_matrices(n_space, family, gamma, n_grade=ng,
+                                               order=order)
+            Q = wes_trial_projector(n_space, class_name)
+            G = Q.T @ Gf @ Q
+        return float(np.linalg.eigvalsh(0.5 * (G + G.T)).max())
+
+    a, b = probe_norm2(n_grade), probe_norm2(2 * n_grade)
+    ladder = [probe_norm2(n_grade + i * n_grade // 2) for i in range(3)]
+    inc = [ladder[1] - ladder[0], ladder[2] - ladder[1]]
+    ga, gb = gram_top(n_grade, True), gram_top(2 * n_grade, True)
+    pa, pb = gram_top(n_grade, False), gram_top(2 * n_grade, False)
+    p = dict((x[0], x[2]) for x in WES_CONSTRAINT_CLASSES)[class_name]
+    return {
+        "class": class_name, "family": family, "gamma": float(gamma),
+        "vanishing_order": float(p),
+        "exponent_margin": float(2 * p + 1) - float(gamma),
+        "probe": [float(x) for x in c],
+        "norm2_coarse": a, "norm2_fine": b,
+        "ratio": b / a if a > 0 else float("inf"),
+        "norm2_ladder": ladder, "increments": inc,
+        "increment_ratio": (inc[1] / inc[0]
+                            if abs(inc[0]) > 1e-12 * max(abs(ladder[0]), 1.0) else None),
+        "gram_top_coarse": ga, "gram_top_fine": gb,
+        "gram_top_ratio": gb / ga if ga > 0 else float("inf"),
+        "projected_gram_top_coarse": pa, "projected_gram_top_fine": pb,
+        "projected_gram_top_ratio": pb / pa if pa > 0 else float("inf"),
+    }
