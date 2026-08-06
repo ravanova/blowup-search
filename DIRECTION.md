@@ -41,8 +41,8 @@ fully-specified, unused numbers carried over from the prior session (do not renu
 This session adds **64–71**, a first refill adds **72–75**, a second refill adds **76–78**, a
 third adds **79** (implicitly, per its own entry above), a fourth refill adds **80–83**, a fifth
 refill adds **84–87**, a sixth refill adds **88–91**, a seventh refill adds **92–95**, an eighth
-refill adds **96–99**, and this ninth refill adds **100–105**. **Next fresh leg number for any
-future candidate is 106.**
+refill adds **96–99**, a ninth refill adds **100–105**, and this tenth refill adds **106–109**.
+**Next fresh leg number for any future candidate is 110.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -319,6 +319,19 @@ family is now 13 legs deep and remains extraordinarily productive.**
   not dispatchable until its corresponding repair (gclm.py, boussinesq_velocity.py,
   interval_certificate.py respectively) lands.
 
+**Table drift caught by the coordinator, not this file: LEG-G and LEG-H were stale.** LEG-G
+showed leg 97 (WSA) and LEG-H showed leg 80 (BHN) — both had actually landed clean (gate NO, no
+bug found) a while back: 97 cleared `weight_search.py`, 80 cleared `bordered_hl.py`, both now
+free again. Marked landed in their queue entries above. **96 (LHA), 100 (HNA), 101 (OLA) and 102
+(JR2) — the previous batch — are confirmed dispatched into LEG-C/E/I/J as specified.** Reserve
+(103–105) remains fully blocked; none of the three repairs (gclm.py, boussinesq_velocity.py,
+interval_certificate.py) has reported back yet. **The adversarial-audit family stands at 15+
+legs with roughly a 40% hit rate on real findings** — genuinely productive, not a fishing
+exercise. **Four fresh candidates (106–109) are added below, all immediately dispatchable
+(nothing pending), mixing two more adversarial audits with two documentation passes** per the
+coordinator's suggestion. **106 (HPA) → LEG-G, 108 (IX2) → LEG-H.** 107 (FIA) and 109 (RCA) join
+the still-blocked 103–105 as reserve.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -395,8 +408,8 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 100 | **HNA** — adversarial audit of holder_norms.py's norm/embedding-constant code | no | standard | `leg/hna-v1` | Under NaN-poisoned or degenerate weight-class inputs, does the norm computation silently return a wrong value? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | — | **OPEN** (97 landed, robust; 80 landed long ago) | — | — | — | — |
-| LEG-H | — | **OPEN** (both former occupants landed; see LEG-G note) | — | — | — | — |
+| LEG-G | 106 | **HPA** — adversarial audit of hilbert_pointwise.py's bound direction | no | standard | `leg/hpa-v1` | Under adversarial/degenerate inputs, can the pointwise \|H(h)\| bound be exceeded (fail to be a true bound)? |
+| LEG-H | 108 | **IX2** — second freshness audit of writeup/INDEX.md (since leg 68's pass) | no | light | `leg/ix2-v1` | Does INDEX.md correctly reflect every leg landed since leg 68, including the "no figure by design" convention this cycle established? |
 | LEG-I | 101 | **OLA** — adversarial audit of op_lower.py's lower-bound direction | no | standard | `leg/ola-v1` | Under adversarial/degenerate operator inputs, does op_lower.py ever return a bound that is not actually a lower bound? |
 | LEG-J | 102 | **JR2** — second freshness audit of experiments/JOURNAL.md and journal/ (legs 73–99) | no | light | `leg/jr2-v1` | Does the journal narrative and per-leg journal/leg_N.md file exist for every leg landed since leg 72's original pass? |
 
@@ -422,35 +435,38 @@ scope (advection) and Route-D v15 (literature scope) — "no measurement, no fig
 `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the current live
-nine plus the reserve (58, 62, 96, 71, 97, 80, 100, 101, 102, 103, 104, 105):
+nine plus the reserve (58, 62, 96, 71, 100, 106, 101, 108, 102, 103, 104, 105, 107, 109):
 `spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
 none-owned/read-only(96 reads `line_hilbert.py`, edits nothing under a bug-found outcome),
-`capabilities.py`(71, factual "test"-field only, pre-committed narrow), none-owned/read-only(97
-reads `weight_search.py`, edits nothing), `bordered_hl.py`(80), none-owned/read-only(100 reads
-`holder_norms.py`, edits nothing — a pure robustness audit, no bound-sharpening, same precedent
-as leg 69's interval.py stress test), none-owned/read-only(101 reads `op_lower.py`, edits
-nothing, same precedent), none(102, JOURNAL.md freshness, no solver module), none-owned/
-read-only(103 reads `gclm.py`, edits nothing — NOT dispatchable until leg 92's repair lands),
-none-owned/read-only(104 reads `boussinesq_velocity.py`, edits nothing — NOT dispatchable until
-leg 99's repair lands), none-owned/read-only(105 reads `interval_certificate.py`, edits nothing
-— NOT dispatchable until leg 98's repair lands). Twelve distinct — **no collision.**
-`target_selection.py`(63) stays off the live list (leg 63's branch parked pending the user's
-ruling). **Currently off-limits, repairs in flight:** `solver/gclm.py`(92), 
+`capabilities.py`(71, factual "test"-field only, pre-committed narrow), none-owned/read-only(100
+reads `holder_norms.py`, edits nothing — robustness only, no bound-sharpening, precedent set by
+leg 69), none-owned/read-only(106 reads `hilbert_pointwise.py`, edits nothing, same precedent),
+none-owned/read-only(101 reads `op_lower.py`, edits nothing, same precedent), none(108, INDEX.md
+freshness, no solver module), none(102, JOURNAL.md freshness, no solver module),
+none-owned/read-only(103 reads `gclm.py`, edits nothing — NOT dispatchable until leg 92's repair
+lands), none-owned/read-only(104 reads `boussinesq_velocity.py`, edits nothing — NOT
+dispatchable until leg 99's repair lands), none-owned/read-only(105 reads
+`interval_certificate.py`, edits nothing — NOT dispatchable until leg 98's repair lands),
+none-owned/read-only(107 reads `first_integral.py`, edits nothing, same Route-D-robustness-only
+precedent), none-owned/read-only(109 reads `reduced_certificate.py`, edits nothing, same
+precedent). Fourteen distinct — **no collision.** `target_selection.py`(63) stays off the live
+list (parked). `weight_search.py`(97) and `bordered_hl.py`(80) are **cleared and free again**
+(both landed clean) — neither is claimed by 106-109, so no re-verification of that freedom was
+required here. **Currently off-limits, repairs in flight:** `solver/gclm.py`(92),
 `solver/boussinesq_velocity.py`(99), `solver/interval_certificate.py`(98),
 `solver/boussinesq.py`(89, plus its banked-result audit), `solver/gclm_rescaled.py`(85) — none
-of 100-105 touches any of these for editing; 103/104/105 read them only for spec purposes and
-are explicitly blocked from dispatch until their repairs land. `solver/interval.py`,
-`solver/spectral_utils.py`, `solver/port_certification.py` and `solver/target_norm.py` remain
-fully repaired, unclaimed and independently re-verified or re-checked. LEG-D stays empty pending
-leg 76, whose territory (`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no live or reserve
-leg touches. `writeup/data` JSON files are likewise distinct names
-(`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+of the reserve touches any of these for editing; 103/104/105 read them for spec purposes only
+and are explicitly blocked from dispatch. `solver/interval.py`, `solver/spectral_utils.py`,
+`solver/port_certification.py` and `solver/target_norm.py` remain fully repaired and unclaimed.
+LEG-D stays empty pending leg 76, whose territory (`PHASE2_P2_NOTES.md`,
+`TECHNICAL_P2_ROUTEI_V1.md`) no live or reserve leg touches. `writeup/data` JSON files are
+likewise distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
 `p2_route_lha_v1_adversarial.json`(96), `p2_route_cap_v1_audit.json`(71),
-`p2_route_wsa_v1_adversarial.json`(97), `p2_route_bhn_v1_adversarial.json`(80),
-`p2_route_hna_v1_adversarial.json`(100), `p2_route_ola_v1_adversarial.json`(101),
-`p2_route_jr2_v1_journal_audit.json`(102, if generated — this leg is docs-only and may not
-produce one), `p2_route_glb_v1_postrepair.json`(103), `p2_route_bvb_v1_postrepair.json`(104),
-`p2_route_icb_v1_postrepair.json`(105)) — **no collision.**
+`p2_route_hna_v1_adversarial.json`(100), `p2_route_hpa_v1_adversarial.json`(106),
+`p2_route_ola_v1_adversarial.json`(101), none(108, docs-only), none(102, docs-only),
+`p2_route_glb_v1_postrepair.json`(103), `p2_route_bvb_v1_postrepair.json`(104),
+`p2_route_icb_v1_postrepair.json`(105), `p2_route_fia_v1_adversarial.json`(107),
+`p2_route_rca_v1_adversarial.json`(109)) — **no collision.**
 
 ## Queue
 
@@ -1126,7 +1142,8 @@ interval.py bench-repair's timing.
 ```
 
 ```
-### 80 — ROUTE-BHN: ADVERSARIAL AUDIT OF THE BORDERED HL NEWTON SOLVE
+### 80 — ROUTE-BHN: ADVERSARIAL AUDIT OF THE BORDERED HL NEWTON SOLVE (LANDED: gate NO — robust,
+no bug found; `bordered_hl.py` cleared and free again)
 **Thesis.** Legs 69 (IA) and 79 (PC) each found a real soundness or logic gap by running an
 adversarial battery against infrastructure that had only ever been validated on well-behaved
 inputs. solver/bordered_hl.py's damped Newton solve has the same shape of exposure:
@@ -1594,7 +1611,8 @@ performance.
 ```
 
 ```
-### 97 — ROUTE-WSA: ADVERSARIAL AUDIT OF weight_search.py's FitnessEngine
+### 97 — ROUTE-WSA: ADVERSARIAL AUDIT OF weight_search.py's FitnessEngine (LANDED: gate NO —
+robust, no bug found; `weight_search.py` cleared and free again)
 **Thesis.** solver/weight_search.py's FitnessEngine batches the weight fitness computation with
 "the Jacobian inverted once" -- a numerical shortcut validated on well-posed problems (the
 closed-form CLM profile, gauge-invariance to 4.4e-16). A single inverted Jacobian reused across
@@ -1831,6 +1849,101 @@ gate with zero regression?
 **Independence.** Reads solver/interval_certificate.py; edits nothing under any outcome.
 **NOT dispatchable until leg 98's bench-repair lands** -- mirrors leg 86's relationship to leg
 79 exactly, one pipeline behind.
+```
+
+```
+### 106 — ROUTE-HPA: ADVERSARIAL AUDIT OF hilbert_pointwise.py's BOUND DIRECTION
+**Thesis.** solver/hilbert_pointwise.py holds "the sharper pointwise bound and the payer rule it
+exposes," validated only as "no known-answer gate; sampled" -- on well-formed inputs. The one
+property that must hold for a pointwise bound to be safe to use downstream is that it is never
+EXCEEDED by the true |H(h)| value. Same soundness-direction check as leg 101 (OLA) applied to a
+different bound in the same certificate-adjacent family -- a pure robustness/soundness audit, no
+bound-sharpening, no new machinery, the precedent legs 69/100/101 already established for
+touching Route-D-adjacent code safely.
+**Gate.** Under an adversarial battery of degenerate or NaN-poisoned inputs, does
+solver/hilbert_pointwise.py's bound ever fail to dominate the true |H(h)| value on a case where
+both are computable?
+  yes -> A soundness violation in a bound whose entire purpose is to be safe to use downstream.
+         Report the exact failing case precisely; escalate, do not patch under this leg's own
+         authority.
+  no  -> Confirmed sound under the battery. Bank it as a permanent regression test.
+**Territory.** test_hilbert_pointwise_adversarial.py,
+               experiments/p2_route_hpa_v1_adversarial.py,
+               writeup/data/p2_route_hpa_v1_adversarial.json,
+               writeup/novelty/leg_106.md, experiments/journal/leg_106.md
+**Difficulty.** standard
+**Independence.** Reads solver/hilbert_pointwise.py; edits nothing under any outcome.
+Robustness/soundness audit only, not bound-sharpening or machinery-building.
+```
+
+```
+### 107 — ROUTE-FIA: ADVERSARIAL AUDIT OF first_integral.py
+**Thesis.** solver/first_integral.py holds "the profile on its own support," validated against
+the closed form nulling the ODE residual -- on well-formed parameters. Nobody has checked
+whether it silently returns a wrong profile value under adversarial or degenerate inputs: near
+the turning point (where the module's sibling, turning_point.py, documents "what actually makes
+the inverse diverge"), or NaN-poisoned profile parameters. Same robustness-only precedent as
+legs 100/101/106.
+**Gate.** Under an adversarial battery (inputs near the documented turning point, NaN-poisoned
+profile parameters), does solver/first_integral.py ever silently return a finite,
+plausible-looking wrong profile value instead of propagating or flagging the ill-conditioning?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_first_integral_adversarial.py,
+               experiments/p2_route_fia_v1_adversarial.py,
+               writeup/data/p2_route_fia_v1_adversarial.json,
+               writeup/novelty/leg_107.md, experiments/journal/leg_107.md
+**Difficulty.** standard
+**Independence.** Reads solver/first_integral.py; edits nothing under any outcome. Robustness
+audit only, no bound-sharpening or machinery-building.
+```
+
+```
+### 108 — ROUTE-IX2: SECOND FRESHNESS AUDIT OF writeup/INDEX.md (SINCE LEG 68's PASS)
+**Thesis.** Leg 68 (IX) closed writeup/INDEX.md's staleness gap as of legs 53-57. Since then,
+legs up through the 100s have landed -- most under the "no measurement, no figure" convention
+this cycle established for audit/literature/hygiene legs (the same convention Route-D scope and
+Route-D v15 set precedent for), so INDEX.md's Arc 4 table may not need a new row per leg the way
+earlier arcs did -- but that convention itself needs to be confirmed CORRECTLY REFLECTED in
+INDEX.md, not just assumed. Given the volume (100+ legs since leg 68's pass, several with real
+findings), a second pass is due -- the same audit, new window, mirroring leg 102 (JR2)'s
+relationship to leg 72.
+**Gate.** Does writeup/INDEX.md correctly account for every leg landed since leg 68's pass --
+either with a full quartet row (for legs that produced one) or an explicit note that the leg
+falls under the "no figure by design" audit/literature convention (for legs that did not)?
+  yes -> Confirmed current; report and close as a clean audit, no edits needed.
+  no  -> Add the missing rows/notes, marking `GAP` explicitly wherever a leg's documentation
+         status is genuinely unclear rather than guessing.
+**Territory.** writeup/INDEX.md (append-only edit), writeup/novelty/leg_108.md,
+               experiments/journal/leg_108.md
+**Difficulty.** light
+**Independence.** Touches one file outside any other leg's territory. Same pattern as legs 68
+and 102, different scope (INDEX.md vs. JOURNAL.md) and a later time window than leg 68's.
+```
+
+```
+### 109 — ROUTE-RCA: ADVERSARIAL AUDIT OF reduced_certificate.py's SELF-CONSISTENCY CLAIM
+**Thesis.** solver/reduced_certificate.py holds "the whole certificate in floats," validated as
+"internally self-consistent across the reduced space; explicitly NOT a proof -- float64
+throughout." Self-consistency is exactly the kind of property that can be silently violated
+under adversarial inputs without the code noticing -- nobody has checked whether the module can
+be fed a battery of adversarial/degenerate inputs (NaN-poisoned terms, near-singular sub-blocks)
+that it reports as "self-consistent" when they are not. Same robustness-only precedent as legs
+100/101/106/107.
+**Gate.** Under an adversarial battery of degenerate or NaN-poisoned inputs, does
+solver/reduced_certificate.py ever report internal self-consistency on a case that is not
+actually self-consistent?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_reduced_certificate_adversarial.py,
+               experiments/p2_route_rca_v1_adversarial.py,
+               writeup/data/p2_route_rca_v1_adversarial.json,
+               writeup/novelty/leg_109.md, experiments/journal/leg_109.md
+**Difficulty.** standard
+**Independence.** Reads solver/reduced_certificate.py; edits nothing under any outcome.
+Robustness audit only, no bound-sharpening or machinery-building.
 ```
 
 ## Ranking rationale
