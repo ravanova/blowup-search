@@ -631,7 +631,7 @@ STAGES = [
     {
         "id": "NG",
         "name": "THE NO-GO, STATED AS A THEOREM AND CHECKED AGAINST THE LITERATURE",
-        "status": "NEXT",
+        "status": "DONE",
         "why_here": (
             "Seven legs (51-57) produced a coherent negative with every part a real result "
             "needs, and all of it is currently scattered across four PR bodies and a notes "
@@ -682,7 +682,7 @@ STAGES = [
     {
         "id": "B",
         "name": "Evolve the CERTIFICATE -- the function space, the operator split, the constants",
-        "status": "QUEUED",
+        "status": "NEXT",
         "why_here": (
             "The bottleneck since Route-D has not been finding the object; it has been closing "
             "a certificate around an object we already have. Route-D hand-tuned a function "
