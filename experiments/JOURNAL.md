@@ -3524,3 +3524,16 @@ preempted agents had reached a landing.
   keeping: a MIS-KEYED repair (keying on k instead of m) PASSES the permutation
   battery -- order-immunity alone is necessary but not sufficient, only the
   preservation check catches it.
+- **Leg 245 (Route-BCL2) — NO, but relevant to the user's new Clay-directed
+  goal:** arXiv:2404.04054's authors (pinned for the first time in this repo:
+  Maxime Breden, Hugo Chu -- the ledger's own who field was a description, not
+  an attribution) published 7 papers in 28 months, 0 on a fluid model. THE
+  SHARPER FIND: the parent's own Remark 40 states the Navier-Stokes
+  nonlinearity (u.grad)u is reachable "in principle" by their Grade-A
+  machinery in d in {2,3} -- while the group's newest paper still calls a
+  higher-dimensional RECTANGLE "future work". Two near-misses on record:
+  Breden's 2019 3D NS CAP (periodic orbit, not blow-up) and Cadiot-Haziot's
+  vorticity-bearing water waves (inviscid, no viscous term). Directly relevant
+  to Phase 1 (the viscous rung) under the user's new exit-criterion ruling --
+  this group's own stated reachability claim is worth a full-text follow-up
+  before any Phase-1 leg builds machinery from scratch.
