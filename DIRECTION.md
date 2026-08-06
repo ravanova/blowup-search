@@ -8280,8 +8280,14 @@ extending landed literature/construction findings, not an audit/repair/verify]
 **Thesis.** Two small, independent, purely-additive edits to already-landed publication-
 scoping documents. (i) Leg 186 (PUB2, the space-axis synthesis note) explicitly did NOT
 include leg 176 (the origin-H² construction at `a=0`) because 176 had not landed when 186
-was drafted — 176 has since landed (`bb0f184`, gate YES with one flagged NO magnitude) and
-independently verified (leg 192). Fold it into PUB2 as the fourth data point PUB2's own text
+was drafted — 176 has since landed (`bb0f184`, gate YES with one flagged NO magnitude).
+**Correction, surfaced by leg 238's own landing: leg 176 is NOT yet independently verified —
+leg 192's only commit anywhere is its novelty pass; the construction/measurement work sits
+uncommitted in leg 192's own worktree, mid-background-compute, not lost but not landed.**
+Leg 238 correctly stated leg 176's numbers in PUB2 as one leg's own float64 measurement, not
+an independently-confirmed one — this parenthetical is fixed here to match, so this file
+itself doesn't repeat the premature claim leg 238 itself avoided. Fold leg 176 into PUB2 as
+the fourth data point PUB2's own text
 already anticipated ("with leg 176's construction outcome, if landed by the time this leg
 runs, folded in as a fourth data point"). (ii) Leg 183 flagged, as a non-blocking
 recommendation, that PUB1 (leg 179's bundle) §3's scope line would be stronger citing Xu §8
@@ -8477,6 +8483,112 @@ inference.
 **Reserve queue: still 11 undispatched legs (216, 225, 227, 228, 229, 230, 231, 232, 233,
 234, 235), unchanged by this update** — 239 was drafted fresh for the specific vacancy, not
 drawn from this pool.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 238 landed (with a correction this DM has
+fixed in its own record above), slot G vacated, floor back to 2/10, a new floor-eligible leg
+drafted to restore it
+
+**238 (PUB4) landed on `main` (`9afe3c2`) — gate YES on both conjuncts.** PUB2 gains leg
+176's data point; PUB1 §3 now cites Xu §8 per leg 183's own recommendation. Neither document
+is approved by this landing — both stay parked for the user, exactly as leg 238's own gate
+required.
+
+**Important correction leg 238 itself surfaced, now fixed in this file's own leg-238 entry
+above (not just noted here): leg 176 has NOT actually been independently verified yet.** Leg
+192's only commit anywhere is its novelty pass — no runner, no verdict landed. The
+construction/measurement work exists uncommitted in leg 192's own worktree
+(mid-background-compute, per its last status), so nothing is lost, just not yet landed. PUB2
+correctly states leg 176's numbers as one leg's own float64 measurement rather than claiming
+independent confirmation — this file's own leg-238 thesis (drafted by this DM) had wrongly
+asserted "independently verified (leg 192)" in its background paragraph; that has been
+corrected in place two sections above, matching what leg 238 itself actually did. The
+orchestrator continues watching leg 192 to completion; no action needed from this DM beyond
+the correction just made.
+
+**This vacates slot G. Since 238 was one of the three floor-eligible legs (236, 238, 239),
+the floor drops back to 2/10 (236, 239) unless slot G gets a new floor-eligible candidate —
+exactly the situation the composition-floor rule anticipates, and exactly why it says the
+trigger must "fail loudly" rather than let a non-floor-eligible leg fill the gap quietly.**
+Drafted now, per that rule's own text, before anything else fills slot G:
+
+```
+### 240 — ROUTE-CNS2: DOES arXiv:2208.09445's OWN AUTHORS HAVE LATER WORK UPGRADING GRADE B
+(VISCOUS-DOMINATED) TO GRADE A (VISCOUS TERM ACTUALLY ENCLOSED)? (restores the composition
+floor to 3/10, vacated by 238's landing)
+[FLOOR-ELIGIBLE: literature — extends a landed literature finding at full-text depth, not an
+audit/repair/verify]
+**Thesis.** Leg 174 (VBS) located and characterized `arXiv:2208.09445` (3D compressible
+Navier-Stokes finite-time blow-up, computer-assistance essential via ~10,000 interval-
+arithmetic Taylor coefficient pairs) as Grade B: the viscous term is DOMINATED, not enclosed
+— the certified object is the inviscid Euler ODE, not the genuinely viscous PDE. Leg 197
+(VNL) banked this characterization into the shared `viscous_novelty.py` ledger. Neither leg
+asked the natural follow-on question this repository's own established pattern (legs
+175->196, "did the authors' later work remove the obstruction") already applies elsewhere:
+does the SAME author group have subsequent work that upgrades Grade B to Grade A for this
+specific object — actually enclosing the viscous term rather than dominating it? If so, this
+would be the Grade-A/fluid=True cell leg 174's own occupancy matrix found EMPTY (the precise
+shape of "the missing rung," per leg 174's own language: empty "for want of a target, not a
+method").
+**Gate.** Does `arXiv:2208.09445`'s author group have subsequent published work that upgrades
+the viscous-term treatment from DOMINATED to ENCLOSED for this same 3D compressible
+Navier-Stokes object (or a directly comparable one), achieving a genuine Grade-A/fluid=True
+certificate?
+  yes -> This would fill the exact empty cell leg 174's occupancy matrix found — the single
+         most consequential literature finding this repository could produce for the "missing
+         rung" question. Record the citation and its hypotheses verbatim; ESCALATE
+         immediately, do not attempt to replicate it under this leg's own authority.
+  no (no such later work, or it stops short for a specific stated reason) -> Report the
+         search precisely (this repository's own discipline: report the search, not just the
+         absence) and, if a stated reason is found, report it in the same terms leg 174/175/
+         196 use, so this scoping is directly comparable to theirs. Bank it.
+**Territory.** experiments/p2_route_cns2_v1_lit.py, writeup/data/p2_route_cns2_v1_lit.json,
+               writeup/novelty/leg_240.md, experiments/journal/leg_240.md.
+               Reads (never edits) leg 174's own report/JSON and
+               solver/viscous_novelty.py's PRECEDENTS ledger, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from every other
+live/reserve leg (174/197 already landed and closed; this leg extends them, doesn't re-open
+them). Immediately dispatchable.
+```
+
+**Slot G filled with 240 (CNS2).** Floor restored to **3/10 (236 RDDEP, 239 USC3, 240
+CNS2)** — 238 is off the floor count now that it has landed and left the roster.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible (still mid-compute) |
+| B | 217 | PCR | repair — not floor-eligible |
+| C | 239 | USC3 | **FLOOR-ELIGIBLE (literature)** |
+| D | 221 | BVRR | repair — not floor-eligible (nearly done per orchestrator) |
+| E | 237 | SIRC | audit/census — not floor-eligible (kept per reviewer's priority) |
+| F | 236 | RDDEP | **FLOOR-ELIGIBLE (math)** |
+| G | 240 | CNS2 | **live, newly promoted — FLOOR-ELIGIBLE (literature)** |
+| H | 218 | BHR | repair — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible (gate corrected, item 3(a)) |
+
+**Floor status: 3/10 — MET, restored same-round as vacated.** This DM notes for its own
+future practice: floor-eligible legs (236, 238, 239, now 240) are landing/vacating faster
+than the non-floor-eligible repair/verify batch, precisely because they are lighter
+(literature-only, no solver module, no adversarial battery) — worth having 1-2 pre-drafted
+floor-eligible candidates sitting ready in reserve, not just drafted reactively each time a
+slot vacates. Flagged as a process note, not acted on immediately (no pre-drafted spare
+exists yet); if another floor slot vacates before this DM's next update, the next
+lightest-lift candidate is a literature check of whether either `arXiv:2402.xxxx`-class
+Route-E/Route-G-adjacent work (once leg 225 lands and the affected rows are known precisely)
+has an independent published cross-check — deferred until 225 lands so it isn't drafted
+blind.
+
+**Reserve queue: still 11 undispatched legs (216, 225, 227, 228, 229, 230, 231, 232, 233,
+234, 235), unchanged** — 240 was drafted fresh for this specific vacancy, not drawn from
+this pool.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
