@@ -3275,3 +3275,19 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   math.comb. R3-R8 latent (sign-mismatched da degrading to a cold solve, a dropped
   36.9-decade far-field term, non-integer K truncation, etc). Tenth audit-family
   item and the first genuinely claim-adjacent one this cycle.
+- **Leg 212 (Route-USC2V) — YES on all three clauses:** independently confirms leg
+  196's STILL_SHORT verdict on arXiv:2511.22819 from a freshly re-fetched primary
+  source (PDF extraction byte-identical to leg 196's own). 29/29 comparison rows
+  agree, 0 disagreements: 0 certificate-apparatus terms, 0 of 4 computer-assisted
+  mentions ACHIEVED, 0 of leg 175's 4 open items closed, all 3 named obstructions
+  verbatim present (Fig.7(f) digit-exact, 6.0-decade gap and 1.570 decades/mode fit
+  both independently re-derived). 3 locator-only citation slips found, none moving
+  the gate.
+- **Leg 207 (Route-DPA) — YES, landed directly (not claim-adjacent):**
+  dissipative_profile.py has 4 latent silent-corruption sites. Most severe: Y_0/Z_2
+  are measured at the constructor's stored `a`, not the solved one -- inflation up
+  to 1.144e+12x when they drift; a zero profile silently echoes Chen's exact
+  Delta=-1/3 at residual_rms exactly 0.0 with no health indicator distinguishing it
+  from real convergence. Measured, not assumed: a static call-site audit of legs
+  125/185/187 finds 0 exposed sites -- every landed call passes an explicit gauge
+  and the correct norm string. Eleventh audit-family item.
