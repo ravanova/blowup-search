@@ -468,6 +468,54 @@ likewise distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.
 `p2_route_icb_v1_postrepair.json`(105), `p2_route_fia_v1_adversarial.json`(107),
 `p2_route_rca_v1_adversarial.json`(109)) — **no collision.**
 
+**DM refresh 2026-08-06 — this block supersedes the table and paragraphs above it as the
+single authoritative account of live assignments.** Landed and cleared this cycle: 89 (BOA),
+92 (GLA), 99 (BVA), 83 (MFG), 106 (HPA, gate NO — hilbert_pointwise robust). Re-dispatched
+fresh after their uncommitted attempts were lost: **58** (NG, critical path, LEG-A,
+`leg/ng-v1`) and **62** (CP, LEG-B, `leg/cp-v1`) — their entries, gates, and territories are
+unchanged from this file. Running as bench-repairs outside the leg queue: the
+test_fractional_boussinesq.py G6 / test_profile_newton.py red-test investigation, and
+repairs tracking legs 100 (holder_norms.py), 101 (op_lower.py), 107 (first_integral.py) —
+their modules are off-limits to every leg below. Parked escalations, untouchable by any leg:
+leg 63/M2 (`leg/m2-v1`) and leg 60/PQ (`leg/pq-v1`). The seven open exploration slots are
+filled from the new 110-series queue below:
+
+| Slot | Leg | Route | Critical path? | Difficulty | Branch | Gate (short form) |
+|---|---|---|---|---|---|---|
+| LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`) | heavy | `leg/ng-v1` | Proof for a class of `A` strictly larger than block-diagonal? |
+| LEG-B | 62 | **CP** — Cadiot pre-emption, full text | no | standard | `leg/cp-v1` | Does Cadiot 2505.03091 cover the off-diagonal / non-decaying-tail case? |
+| LEG-C | 110 | **L1R** — L1 death-certificate reproduction audit | no (audits the chain's dead link) | light | `leg/l1r-v1` | Do both L1 death certificates (legs 54, 56) reproduce exactly from their own banked data? |
+| LEG-D | 111 | **WE** — third-realization scoping: weighted-energy coercivity on a=0 CLM | no (could re-price the dead link) | heavy | `leg/we-v1` | Does any named weight give a grid-stable positive coercivity gap? |
+| LEG-E | 112 | **AS2** — verify §24's two load-bearing readings of arXiv:2603.25104 from the full PDF | no | light | `leg/as2-v1` | Does the full text confirm the a-sign and the fixed-point identity? |
+| LEG-F | 113 | **MS** — lesson 87's multiplier/shift prediction vs the certified-blow-up literature | no | light | `leg/ms-v1` | Does any certified INVISCID self-similar blow-up use a diagonal-tail framework? |
+| LEG-G | 114 | **CNA** — adversarial audit of collocation_newton.py | no | standard | `leg/cna-v1` | Can the Newton solve be fooled into reporting convergence on a poisoned/degenerate case? |
+| LEG-H | 116 | **NKA** — adversarial fabrication-rejection audit of nk_bounds.py | no | standard | `leg/nka-v1` | Does a planted wrong point ever survive inside a reported certified ball? |
+| LEG-I | 120 | **SUA** — adversarial audit of spectral_utils.py (shared core) | no | standard | `leg/sua-v1` | Does the shared spectral core silently return wrong values on degenerate input? |
+| LEG-J | — | reserve/flex — first promotion: 103 (GLB) and 104 (BVB), now dispatchable (92's and 99's repairs landed); then 115, 123, 117-124 in queue order | — | — | — | — |
+
+**Territory-overlap check (explicit, as required).** Solver modules touched by the assigned
+set (58, 62, 110, 111, 112, 113, 114, 116, 120) plus the running repairs (100, 101, 107) and
+reserve 109: `spectral_certificate.py`(58); `certificate_shapes.py`+`literature_gates.py`(62);
+none(110 — reads banked `writeup/data` JSONs only, no solver module);
+`energy_coercivity.py`(111, NEW file, exists nowhere else, capabilities.py grepped first per
+the standing ban); none(112, literature — explicitly does NOT edit `literature_gates.py`,
+which 62 owns; banks its ledger in its own JSON); none(113, literature — same guard, no
+`literature_gates.py` edits); `collocation_newton.py`(114, read-only, robustness precedent of
+legs 69/100/101); `nk_bounds.py`(116, read-only, fabrication-rejection precedent of legs
+79/98); `spectral_utils.py`(120, read-only, shared-core precedent of leg 69);
+`holder_norms.py`(100, repair in flight), `op_lower.py`(101, repair in flight),
+`first_integral.py`(107, repair in flight); `reduced_certificate.py`(109, reserved).
+`fractional_boussinesq.py` and `profile_newton.py` are off-limits to all of the above (red-test
+investigation in flight). All distinct — **no collision.** `writeup/data` JSON ownership:
+`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+`p2_route_l1r_v1_repro.json`(110 — additionally reads, never writes,
+`leg_54_verify_headline.json`, `p2_route_l1_v1_interval.json`, `p2_route_l1_v2_spectral.json`
+and the leg-56 collocation record located via PHASE2_P2_NOTES.md; no other live leg touches
+those), `p2_route_we_v1_coercivity.json`(111), `p2_route_as2_v1_lit.json`(112),
+`p2_route_ms_v1_lit.json`(113), `p2_route_cna_v1_adversarial.json`(114),
+`p2_route_nka_v1_adversarial.json`(116), `p2_route_sua_v1_adversarial.json`(120) — all
+distinct names, none pre-existing — **no collision.**
+
 ## Queue
 
 Ranked. Each entry needs all six fields or it is not dispatchable.
@@ -1946,6 +1994,348 @@ actually self-consistent?
 Robustness audit only, no bound-sharpening or machinery-building.
 ```
 
+```
+### 110 — ROUTE-L1R: L1 DEATH-CERTIFICATE REPRODUCTION AUDIT (ASSIGNED, LEG-C)
+**Thesis.** The single most consequential negative in the repository — "L1 is dead in both
+realizations" (coefficient basis, leg 54; collocation basis, leg 56) — now gates the plan of
+record, the stage-V ban's lift condition, and the framing of NG itself. Leg 60/PQ just proved
+this project's banked negatives can partially fail reproduction from their own stored data
+(two quoted numbers did not reproduce; a probable transcription slip). Nobody has run that
+same reproduction discipline against the L1 death certificates. This leg re-derives every
+quoted headline number of both deaths — the +0.639 divergence-curve minimum, the 0.606-empty
+window, the per-class tail-divergence exponents, and the collocation realization's failing
+quantities — strictly from the banked `writeup/data` JSONs, touching no solver and re-running
+no measurement. It does NOT touch leg 60's two results or its escalation, and it lifts no ban
+under any outcome: a reproduction failure is a report to the user, not a revival of L1.
+**Gate.** Does every quoted headline number in the two L1 death records (PHASE2_P2_NOTES.md
+§§ for legs 54 and 56, and everywhere those numbers are re-quoted) reproduce exactly from the
+banked JSON data alone?
+  yes -> The death is final at the data level. Bank the reproduction script as a permanent
+         regression check and say so wherever the death is cited.
+  no  -> Report the exact discrepancy (file, field, quoted vs reproduced) and ESCALATE to the
+         user; change no conclusion, lift no ban, and do not re-measure under this leg.
+**Territory.** experiments/p2_route_l1r_v1_repro.py, writeup/data/p2_route_l1r_v1_repro.json,
+               writeup/novelty/leg_110.md, experiments/journal/leg_110.md.
+               Read-only: leg_54_verify_headline.json, p2_route_l1_v1_interval.json,
+               p2_route_l1_v2_spectral.json, plus the leg-56 collocation record located via
+               PHASE2_P2_NOTES.md. No solver module.
+**Difficulty.** light
+**Independence.** No solver module, no shared JSON writes. Same pattern as PQ, different
+result; explicitly disjoint from leg 60's numbers and its parked escalation.
+```
+
+```
+### 111 — ROUTE-WE: THIRD-REALIZATION SCOPING — WEIGHTED-ENERGY COERCIVITY ON THE a=0 CLM
+KNOWN-ANSWER OBJECT (ASSIGNED, LEG-D)
+**Thesis.** L1 is dead in two realizations, and lesson 87 says why in operator terms: every
+ell-1-Fourier tail estimate assumes the unbounded part is a diagonal MULTIPLIER, and inviscid
+self-similar transport carries a SHIFT. The same lesson records that the certified INVISCID
+blow-ups in the literature (Chen-Hou) did not use that machinery at all — they used weighted
+ENERGY estimates. That is a third realization, distinct from both dead ones, and nothing in
+the ban list covers it: it is not tuning s, weight family, K, or border direction inside the
+Z_1 machinery (all banned, lesson 88), not domain extension (banned), not stage B, and not
+stage V. This leg MEASURES, on the friendliest available object (the a=0 CLM linearization,
+one mode, analytic), the coercivity gap of the weighted-energy quadratic form for a small
+NAMED family of weights fixed in the driver before any computation — a magnitude under grid
+refinement, not a boolean. capabilities.py is grepped for the object before any solver code
+is written (standing ban). Under either outcome this leg claims no stage — NG stays NEXT —
+and its yes-branch escalates, it does not build.
+**Gate.** For at least one weight in the pre-named family, is the measured coercivity gap of
+the weighted-energy form on the a=0 CLM linearization positive and stable (within a
+pre-committed tolerance declared in the driver) across two grid refinements?
+  yes -> A candidate third realization for L1 exists. Bank the magnitudes and ESCALATE
+         scoping to the user; build nothing further under this leg.
+  no  -> The weighted-energy realization joins the dead list on the friendliest object, and
+         the wall bounds the real target's difficulty from below. Bank it as a third dead
+         realization, which STRENGTHENS NG's framing; report magnitudes, not the boolean.
+**Territory.** solver/energy_coercivity.py (NEW), test_energy_coercivity.py (NEW),
+               experiments/p2_route_we_v1_coercivity.py,
+               writeup/data/p2_route_we_v1_coercivity.json,
+               writeup/novelty/leg_111.md, experiments/journal/leg_111.md
+**Difficulty.** heavy
+**Independence.** Sole owner of a brand-new module; reads capabilities.py (grep only).
+Touches nothing owned by 58/62/100/101/107/109 or the repairs in flight. Lesson-87-shaped,
+not Z_1-shaped: no quantity this leg computes appears in the banned tuning list.
+```
+
+```
+### 112 — ROUTE-AS2: VERIFY §24's TWO LOAD-BEARING READINGS OF arXiv:2603.25104 FROM THE
+FULL PDF (ASSIGNED, LEG-E)
+**Thesis.** §24's "L1 is occupied territory" verdict — which re-priced the entire Route-D
+programme — rests on two readings its own text flags as UNVERIFIED: the a-sign in
+arXiv:2603.25104, and whether that paper's fixed point IS the banked first integral. §24
+says, verbatim, "the binding constraint on the next decision is ACCESS, not compute and not
+cleverness," and instructs treating the a>0 two-scale object as POSSIBLY WRONG until a
+session with PDF access verifies both. This environment has that access. The repository has
+been burned twice by literature read at the wrong depth (leg 53's abstract-page loss; CP
+exists for the same reason). Settle both readings from the full text, record the hypotheses
+verbatim, links not counts. This is not a re-litigation of either parked escalation and it
+lifts no ban: whatever the answer, L1 stays measured-dead — only its EXTERNAL-NOVELTY price
+can move.
+**Gate.** Does the full text of arXiv:2603.25104 confirm both load-bearing readings — the
+a-sign as §24 read it, and the identity of its fixed point with the banked first integral?
+  yes -> The occupied-territory verdict is confirmed at full-text depth. Bank the verbatim
+         hypotheses as a ledger entry in this leg's own JSON; close §24's open instruction.
+  no  -> The verdict rests on a misreading. Report exactly which reading fails and how, and
+         ESCALATE — the external pricing of L1 changes, though its measured death does not.
+**Territory.** experiments/p2_route_as2_v1_lit.py, writeup/data/p2_route_as2_v1_lit.json,
+               writeup/novelty/leg_112.md, experiments/journal/leg_112.md.
+               Does NOT edit solver/literature_gates.py (leg 62's territory).
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 62 (different
+paper, different question) and from both parked escalations.
+```
+
+```
+### 113 — ROUTE-MS: LESSON 87's MULTIPLIER/SHIFT PREDICTION, CHECKED AGAINST THE
+CERTIFIED-BLOW-UP LITERATURE (ASSIGNED, LEG-F)
+**Thesis.** Lesson 87 carries an explicitly UNCHECKED prediction, flagged in its own text:
+certified self-similar blow-ups that used ell-1-Fourier/radii-polynomial machinery
+(Dahne-Figueras, CGL) are all dissipative — diagonal multiplier — while certified inviscid
+ones (Chen-Hou) used weighted energy estimates instead. If that taxonomy is right, it is the
+operator-shape law behind both L1 deaths and behind NG's mechanism, and it directly motivates
+leg 111's third realization. If it is WRONG — if any published certified inviscid
+self-similar blow-up runs a diagonal-tail framework — then the dead realization has a
+published repair this project missed, which outranks everything else in this queue. Check it
+from full texts, verbatim hypotheses, links not counts. Scope guard: where the survey passes
+through Cadiot arXiv:2505.03091 it records METHOD SHAPE only and defers every
+coverage-of-NG's-hypothesis question to leg 62, which owns that question.
+**Gate.** Does any published certified INVISCID self-similar blow-up use a diagonal-tail
+(ell-1-multiplier / radii-polynomial) framework for its linearized tail estimate?
+  yes -> Lesson 87's prediction is falsified and a published repair to the dead realization
+         may exist. Record the citation and its hypotheses verbatim; ESCALATE.
+  no  -> The prediction is confirmed across the surveyed set. Bank the ledger; the
+         operator-shape law stands as the stated reason L1's two realizations died, and
+         leg 111 inherits the strengthened motivation.
+**Territory.** experiments/p2_route_ms_v1_lit.py, writeup/data/p2_route_ms_v1_lit.json,
+               writeup/novelty/leg_113.md, experiments/journal/leg_113.md.
+               Does NOT edit solver/literature_gates.py (leg 62's territory).
+**Difficulty.** light
+**Independence.** Literature-only, own JSON. Disjoint from 62 by the pre-committed scope
+guard above and from 112 (different papers, different question).
+```
+
+```
+### 114 — ROUTE-CNA: ADVERSARIAL AUDIT OF collocation_newton.py (ASSIGNED, LEG-G)
+**Thesis.** solver/collocation_newton.py is the solver behind the COLLOCATION realization of
+L1 — one of the two death certificates leg 110 audits at the data level. This leg audits the
+same conclusion at the code level, by the pattern that has found 11 real bugs in ~15 tries
+this session: under adversarial or degenerate inputs (NaN-poisoned residuals, near-singular
+Jacobian blocks, degenerate node spacing), does the Newton solve ever report convergence or
+a small residual on a case where the reported answer is wrong? Robustness-only precedent of
+legs 69/100/101: no bound-sharpening, no new machinery, edits nothing.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/collocation_newton.py ever report a converged solution or plausible residual that is
+silently wrong?
+  yes -> A silent-corruption gap in a death-certificate-bearing module. Report the exact
+         failing case; escalate, do not patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test; the collocation
+         death gains a code-level audit to match 110's data-level one.
+**Territory.** test_collocation_newton_adversarial.py,
+               experiments/p2_route_cna_v1_adversarial.py,
+               writeup/data/p2_route_cna_v1_adversarial.json,
+               writeup/novelty/leg_114.md, experiments/journal/leg_114.md
+**Difficulty.** standard
+**Independence.** Reads solver/collocation_newton.py; edits nothing under any outcome.
+Complementary to 110 (data level vs code level), zero file overlap with it.
+```
+
+```
+### 115 — ROUTE-DCA: ADVERSARIAL AUDIT OF decay_collocation.py (RESERVE)
+**Thesis.** solver/decay_collocation.py is the nodal spectral core under the collocation
+lane. Same silent-corruption question, same robustness-only precedent as legs 69/100/101:
+under NaN-poisoned nodal values or degenerate decay/grading parameters, does it silently
+return finite plausible-looking wrong values instead of flagging the input?
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/decay_collocation.py ever silently return a wrong value rather than propagating or
+flagging the invalid input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_decay_collocation_adversarial.py,
+               experiments/p2_route_dca_v1_adversarial.py,
+               writeup/data/p2_route_dca_v1_adversarial.json,
+               writeup/novelty/leg_115.md, experiments/journal/leg_115.md
+**Difficulty.** standard
+**Independence.** Reads solver/decay_collocation.py only; edits nothing. Disjoint from 114
+(different module, same lane).
+```
+
+```
+### 116 — ROUTE-NKA: ADVERSARIAL FABRICATION-REJECTION AUDIT OF nk_bounds.py (ASSIGNED,
+LEG-H)
+**Thesis.** solver/nk_bounds.py computes Newton-Kantorovich bounds — the quantity whose
+entire meaning is "everything inside this ball is certified." The one property that must
+hold is that a WRONG point cannot survive inside a reported ball. Legs 79 and 98 ran exactly
+this fabrication-rejection pattern against the port and the interval certificate and found
+real gaps; nobody has run it against the NK bound module itself. Plant wrong points, poison
+inputs, degrade constants; check whether a reported certified ball ever contains a planted
+non-solution.
+**Gate.** Under an adversarial battery (planted wrong points, poisoned constants, degenerate
+operators), does solver/nk_bounds.py ever report a certified ball that a planted
+non-solution survives?
+  yes -> A soundness violation in the certifying bound itself. Report the exact failing
+         case; escalate, do not patch under this leg's own authority.
+  no  -> Confirmed sound under the battery. Bank it as a permanent regression test.
+**Territory.** test_nk_bounds_adversarial.py, experiments/p2_route_nka_v1_adversarial.py,
+               writeup/data/p2_route_nka_v1_adversarial.json,
+               writeup/novelty/leg_116.md, experiments/journal/leg_116.md
+**Difficulty.** standard
+**Independence.** Reads solver/nk_bounds.py; edits nothing under any outcome.
+Fabrication-rejection precedent of legs 79/98.
+```
+
+```
+### 117 — ROUTE-HRA: ADVERSARIAL AUDIT OF hl_rescaled.py (RESERVE)
+**Thesis.** solver/hl_rescaled.py carries the rescaled HL dynamics and has dedicated tests
+but no adversarial battery. Same silent-corruption question and robustness-only precedent as
+legs 69/100/101/106.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/hl_rescaled.py ever silently return a wrong result instead of flagging the input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_hl_rescaled_adversarial.py,
+               experiments/p2_route_hra_v1_adversarial.py,
+               writeup/data/p2_route_hra_v1_adversarial.json,
+               writeup/novelty/leg_117.md, experiments/journal/leg_117.md
+**Difficulty.** standard
+**Independence.** Reads solver/hl_rescaled.py only; edits nothing.
+```
+
+```
+### 118 — ROUTE-TPA: ADVERSARIAL AUDIT OF turning_point.py (RESERVE)
+**Thesis.** solver/turning_point.py (Route-D v13's module) detects turning points — a
+classification output that can silently mislabel under degenerate input. Same
+robustness-only precedent; classification modules have not yet been covered by the audit
+family.
+**Gate.** Under an adversarial battery (degenerate branches, poisoned derivatives), does
+solver/turning_point.py ever silently return a wrong classification instead of flagging the
+input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_turning_point_adversarial.py,
+               experiments/p2_route_tpa_v1_adversarial.py,
+               writeup/data/p2_route_tpa_v1_adversarial.json,
+               writeup/novelty/leg_118.md, experiments/journal/leg_118.md
+**Difficulty.** standard
+**Independence.** Reads solver/turning_point.py only; edits nothing.
+```
+
+```
+### 119 — ROUTE-HHA: ADVERSARIAL AUDIT OF hilbert_holder.py (RESERVE)
+**Thesis.** solver/hilbert_holder.py carries Hilbert-transform Holder estimates — bound-
+bearing code, same category as hilbert_pointwise.py, which leg 106 just audited (gate NO,
+robust). Extend the same bound-direction battery to the Holder sibling.
+**Gate.** Under adversarial/degenerate inputs, can any bound hilbert_holder.py reports be
+exceeded (fail to be a true bound), or a wrong value be silently returned?
+  yes -> Soundness/corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_hilbert_holder_adversarial.py,
+               experiments/p2_route_hha_v1_adversarial.py,
+               writeup/data/p2_route_hha_v1_adversarial.json,
+               writeup/novelty/leg_119.md, experiments/journal/leg_119.md
+**Difficulty.** standard
+**Independence.** Reads solver/hilbert_holder.py only; edits nothing.
+```
+
+```
+### 120 — ROUTE-SUA: ADVERSARIAL AUDIT OF spectral_utils.py — THE SHARED CORE (ASSIGNED,
+LEG-I)
+**Thesis.** solver/spectral_utils.py is shared utility code that many solver modules import
+— the same load-bearing position solver/interval.py held when leg 69 audited it and set the
+shared-core precedent. It has dedicated tests (test_spectral_utils_dedicated.py) but no
+adversarial battery. A silent corruption here propagates into every downstream module at
+once, including already-audited ones, so it is the highest-leverage unaudited target left.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/spectral_utils.py ever silently return a wrong value instead of propagating or
+flagging the invalid input?
+  yes -> A silent-corruption gap in shared core code. Report the exact failing case and
+         which downstream modules consume the affected function; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_spectral_utils_adversarial.py,
+               experiments/p2_route_sua_v1_adversarial.py,
+               writeup/data/p2_route_sua_v1_adversarial.json,
+               writeup/novelty/leg_120.md, experiments/journal/leg_120.md
+**Difficulty.** standard
+**Independence.** Reads solver/spectral_utils.py only; edits nothing. Distinct from
+spectral_certificate.py (58's territory) — different module, checked explicitly.
+```
+
+```
+### 121 — ROUTE-CDA: ADVERSARIAL AUDIT OF critical_dissipation.py (RESERVE)
+**Thesis.** solver/critical_dissipation.py computes critical dissipation exponents — the
+same category of quantity whose sibling module (fractional_gclm.py) leg 91 audited. Same
+silent-corruption question, same robustness-only precedent.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/critical_dissipation.py ever silently return a wrong exponent instead of flagging
+the input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_critical_dissipation_adversarial.py,
+               experiments/p2_route_cda_v1_adversarial.py,
+               writeup/data/p2_route_cda_v1_adversarial.json,
+               writeup/novelty/leg_121.md, experiments/journal/leg_121.md
+**Difficulty.** standard
+**Independence.** Reads solver/critical_dissipation.py only; edits nothing.
+```
+
+```
+### 122 — ROUTE-ASA: ADVERSARIAL AUDIT OF advection_scope.py (RESERVE)
+**Thesis.** solver/advection_scope.py scopes advection terms and has never been through the
+audit family. Same silent-corruption question, same robustness-only precedent as legs
+69/100/101.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/advection_scope.py ever silently return a wrong result instead of flagging the input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_advection_scope_adversarial.py,
+               experiments/p2_route_asa_v1_adversarial.py,
+               writeup/data/p2_route_asa_v1_adversarial.json,
+               writeup/novelty/leg_122.md, experiments/journal/leg_122.md
+**Difficulty.** standard
+**Independence.** Reads solver/advection_scope.py only; edits nothing.
+```
+
+```
+### 123 — ROUTE-EXT6: FRESHNESS — ANY NEW CERTIFIED INVISCID SELF-SIMILAR RESULT, OR gCLM
+a>0 CERTIFICATE, SINCE THE EXT-FAMILY'S LAST WINDOWS? (RESERVE)
+**Thesis.** The EXT family (74/77/82/90/93) watches whether the outside world moves under
+this project's feet. The highest-value watch target now is the exact territory L1's death
+and NG's proposition occupy: a new certified inviscid self-similar blow-up, or a completed
+gCLM a>0 certificate, published since the last EXT windows closed, would re-price both at
+once. Same pattern, new window, new target class; links not counts, full-text depth for
+anything that hits.
+**Gate.** Has any result been published since the last EXT-family window that either (a)
+certifies an inviscid self-similar blow-up profile by any method, or (b) completes a
+computer-assisted gCLM a>0 blow-up certificate?
+  yes -> Locate the statement, record hypotheses verbatim, and escalate — NG's novelty and
+         L1's external pricing both move.
+  no  -> The window stays clear; bank the dated null ledger entry as the EXT family always
+         has.
+**Territory.** experiments/p2_route_ext6_v1_target_watch6.py,
+               writeup/data/p2_route_ext6_v1_target_watch6.json,
+               writeup/novelty/leg_123.md, experiments/journal/leg_123.md
+**Difficulty.** light
+**Independence.** Literature-only, own JSON. Disjoint from 112/113 (those verify specific
+already-cited papers; this watches for NEW ones) and from 62 (Cadiot coverage question).
+```
+
+```
+### 124 — ROUTE-FSA: ADVERSARIAL AUDIT OF finite_support.py (RESERVE)
+**Thesis.** solver/finite_support.py has neither a dedicated test file in the repository
+root nor an adversarial battery — the thinnest coverage of any solver module still standing.
+Same silent-corruption question, same robustness-only precedent.
+**Gate.** Under an adversarial battery of degenerate or poisoned inputs, does
+solver/finite_support.py ever silently return a wrong result instead of flagging the input?
+  yes -> Silent-corruption gap; report the exact failing case; escalate, do not patch.
+  no  -> Confirmed robust; bank the battery as a permanent regression test.
+**Territory.** test_finite_support_adversarial.py,
+               experiments/p2_route_fsa_v1_adversarial.py,
+               writeup/data/p2_route_fsa_v1_adversarial.json,
+               writeup/novelty/leg_124.md, experiments/journal/leg_124.md
+**Difficulty.** standard
+**Independence.** Reads solver/finite_support.py only; edits nothing.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
@@ -1953,6 +2343,32 @@ Refreshed whenever a gate answers. Rank by, in order:
 1. could this leg actually move a link of the L1→L4 chain;
 2. can its gate answer either way within one leg's work;
 3. is it independent of the other nine live legs.
+
+**Refreshed 2026-08-06 (DM cycle: 110-series). This paragraph supersedes the 2026-08-05
+refresh below for ranking purposes.** Criterion (1) is no longer entirely quiet, and that is
+the news of this refresh. L1 is measured dead in both realizations, and the plan treats that
+as law — but "dead in both realizations" is exactly two facts, and this cycle produced a
+reason to audit each and a lesson-87-shaped reason to believe a THIRD realization was never
+tried. Hence the top of the queue: **110 (L1R)** applies leg 60's hard-won discipline
+(banked negatives can fail reproduction from their own data) to the most consequential
+negative in the repository, at light cost, gate decidable either way in hours; **111 (WE)**
+is the only leg on the board that could genuinely re-price the dead link — the
+weighted-energy realization lesson 87 itself points at, untouched by any ban because it
+shares no quantity with the banned Z_1/s/K/border tuning space — and its yes-branch
+escalates rather than builds, so it cannot collide with NG's claim to NEXT; **112 (AS2)**
+closes §24's own explicitly-open instruction (verify the two load-bearing readings; the
+binding constraint was ACCESS, which this environment now has); **113 (MS)** checks lesson
+87's flagged-unchecked prediction, whose falsification would outrank everything else here.
+None of these four claims chain movement — per inherited law §5, ordering by proximity to
+the chain is a choice of what to try, never a claim about what happened. Below them, the
+audit family continues on criterion (2)+(3) grounds (11 real bugs in ~15 tries): **114
+(CNA)** and **120 (SUA)** rank above their siblings because collocation_newton.py bears a
+death certificate and spectral_utils.py is shared core (leg 69's precedent); **116 (NKA)**
+carries the fabrication-rejection pattern (legs 79/98, both hits) to the certifying bound
+itself. Reserve order: 103/104 first (post-repair closes, now unblocked by 92's and 99's
+landings), then 115, 123, 117, 118, 119, 121, 122, 124. Legs 58 and 62 keep their standing
+rank and entries unchanged. Nothing in this refresh lifts a ban, re-litigates either parked
+escalation, or moves any claim about Walls 1 and 2; Clay stays ~0.05%.
 
 **Refreshed 2026-08-05, resuming under the ten-leg contract.** Criterion (1) is still quiet —
 `L1` was the only movable link and it is measured dead in both realizations (coefficient basis

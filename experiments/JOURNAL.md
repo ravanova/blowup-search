@@ -2910,3 +2910,30 @@ them on leg 60's behalf.
 Legs 92, 96, 98, 99, 100 and 101 have branch progress but have NOT landed on `main` (0
 `main` commits each at this pass), so they are deliberately absent from this block and
 belong to a future window.
+
+## Landings, 2026-08-06 integration cycle (resumed after the RemoteTrigger self-chain)
+
+- **Leg 96 (Route-LHA) — NO:** `line_hilbert.py`'s dense operator (six importers) is robust —
+  0 silent corruptions in 25 in-scope adversarial cases; worst disagreement 3.07e-13 vs a
+  1e-08 threshold. Module untouched; battery banked as a permanent regression test.
+- **Leg 92 (Route-GLA) — YES, repaired:** `gclm.py` had 4 silent-corruption mechanisms under
+  adversarial inputs. Fixed via `bench/fix-gclm-silent-corruption`; all existing gates
+  unchanged.
+- **Leg 99 (Route-BVA) — YES, repaired:** `boussinesq_velocity.py` returned 7/22
+  `SILENT_WRONG` results under degenerate polar-grid inputs (r=0 singularity,
+  self-intersecting boundary). Fixed via `bench/fix-boussinesq-velocity-origin-fit`; leg 73's
+  Lamb-benchmark reproduction confirmed unaffected.
+- **Leg 89 — repaired:** `boussinesq.py`'s silent-corruption battery (4 defects). Fixed via
+  `bench/fix-boussinesq-silent-corruption`.
+- **Leg 83 (Route-MFG) — NO, partially repaired:** gate 11 missed 8 of 9 adversarial
+  divergent trajectories (worst: 4.99e130x state growth, Newton residual 1.6e-10 of
+  threshold). A scale-free state-growth threshold (via `bench/fix-marginal-flow-gate11-coverage`,
+  superseding the unmerged `leg/mfg-v1`) closes 4 of the 9 missed cases including the worst,
+  0 false positives, all 11 existing gates unchanged. 5 cases remain open — not re-raised as
+  a fresh escalation since the repair is a genuine partial fix, not a quiet one.
+- **Leg 106 (Route-HPA) — YES, not repaired (measurement leg, no fix in scope):**
+  `hilbert_pointwise.py`'s pointwise |H(h)| bound fails to dominate the true value on 2 of
+  the tested degenerate/NaN-poisoned configurations. Landed as a measurement; repair not yet
+  scheduled.
+
+No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
