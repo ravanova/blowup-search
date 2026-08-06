@@ -1,0 +1,876 @@
+{
+ "leg": 92,
+ "route": "GLA v1 -- adversarial audit of solver/gclm.py (physical-space gCLM)",
+ "module_under_audit": "solver/gclm.py",
+ "module_edited": false,
+ "gate_verbatim": "Under an adversarial battery of malformed physical-space inputs (NaN-seeded vorticity, degenerate transform input, extreme a), does solver/gclm.py ever silently return a finite, plausible-looking result instead of propagating or flagging the invalid input?",
+ "silent_corruption_definition": {
+  "flagged": "raises, OR outcome=='diverged', OR the numeric payload is itself non-finite, OR None is the true answer",
+  "silent": "entirely finite, ordinary-looking payload that disagrees with the module's documented formula or an exact invariant of it",
+  "structural": "a raise counts as FLAGGED, not silent",
+  "big_honest_number": "not corruption"
+ },
+ "profile_check": {
+  "what": "the profile is chosen so the zero-set max and the global max of H differ",
+  "profile": "w0 = sin(x) + 0.5*sin(2x)",
+  "n_scan": 4096,
+  "H_global_max": 0.7499998038507025,
+  "H_max_over_true_zero_set": 0.5,
+  "true_zeros": [
+   0.0,
+   3.141592653589793
+  ],
+  "T_star_exact_from_zero_set": 4.0,
+  "T_star_if_global_max_were_used_instead": 2.6666673640865732,
+  "ratio_globalmax_over_exact": 0.6666668410216433,
+  "measured_T_star_unit_amplitude": 3.9999999999986704
+ },
+ "amplitude_invariant": {
+  "what": "exact CLM homogeneity T*(eps w0) == T*(w0)/eps, violated by an ABSOLUTE zero-tolerance |w0| < 1e-12 at solver/gclm.py:289 that never measures the scale of its own input",
+  "invariant": "eps * T*(eps * w0) == T*(w0)",
+  "criterion_calibration": {
+   "note": "threshold measured, not guessed; see the family docstring",
+   "calibration_decades": [
+    {
+     "eps": 0.1,
+     "rel": 3.322897512704198e-13
+    },
+    {
+     "eps": 0.01,
+     "rel": 2.3530879573748826e-06
+    },
+    {
+     "eps": 0.001,
+     "rel": 2.353087957818972e-06
+    },
+    {
+     "eps": 0.0001,
+     "rel": 2.353087957485905e-06
+    }
+   ],
+   "measured_root_finder_noise_floor": 2.353087957818972e-06,
+   "threshold_used": 0.002353087957818972,
+   "headroom_over_floor": 1000.0
+  },
+  "tolerance_for_silent": 0.002353087957818972,
+  "reference_T_star": 3.9999999999986704,
+  "cases_run": 18,
+  "silent_corruptions": 11,
+  "worst_rel_violation": 0.3333331589781352,
+  "worst_case": {
+   "eps": 1e-12,
+   "returned_T_star": 2666667364086.5728,
+   "eps_times_T_star": 2.666667364086573,
+   "reference_T_star": 3.9999999999986704,
+   "rel_violation_of_exact_scaling": 0.3333331589781352,
+   "returned_value_is_finite": true,
+   "returned_value_is_positive": true,
+   "flagged_by_module": false,
+   "silent_corruption": true
+  },
+  "saturation_rel_violation": 0.3333333333333333,
+  "cases": [
+   {
+    "eps": 0.1,
+    "returned_T_star": 39.99999999999999,
+    "eps_times_T_star": 3.9999999999999996,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 3.322897512704198e-13,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 0.01,
+    "returned_T_star": 399.9990587646841,
+    "eps_times_T_star": 3.999990587646841,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 2.3530879573748826e-06,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 0.001,
+    "returned_T_star": 3999.9905876468392,
+    "eps_times_T_star": 3.999990587646839,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 2.353087957818972e-06,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 0.0001,
+    "returned_T_star": 39999.9058764684,
+    "eps_times_T_star": 3.9999905876468405,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 2.353087957485905e-06,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 1e-05,
+    "returned_T_star": 399991.5291346355,
+    "eps_times_T_star": 3.9999152913463556,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 2.1177163078707585e-05,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 1e-06,
+    "returned_T_star": 3999397.7507613543,
+    "eps_times_T_star": 3.999397750761354,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.00015056230932913314,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 1e-07,
+    "returned_T_star": 39972827.458916344,
+    "eps_times_T_star": 3.997282745891634,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.0006793135267593213,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": false
+   },
+   {
+    "eps": 1e-08,
+    "returned_T_star": 398648128.1344175,
+    "eps_times_T_star": 3.986481281344175,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.00337967966362497,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-09,
+    "returned_T_star": 3938261714.174125,
+    "eps_times_T_star": 3.9382617141741254,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.01543457145614138,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-10,
+    "returned_T_star": 37336122004.756905,
+    "eps_times_T_star": 3.7336122004756906,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.06659694988076707,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-11,
+    "returned_T_star": 309978984216.38654,
+    "eps_times_T_star": 3.099789842163865,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.2250525394587761,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 3e-12,
+    "returned_T_star": 898222778988.643,
+    "eps_times_T_star": 2.694668336965929,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.3263329157582938,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-12,
+    "returned_T_star": 2666667364086.5728,
+    "eps_times_T_star": 2.666667364086573,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.3333331589781352,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 6e-13,
+    "returned_T_star": 4444445606810.957,
+    "eps_times_T_star": 2.666667364086574,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.33333315897813487,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 5e-13,
+    "returned_T_star": 5333334728173.1455,
+    "eps_times_T_star": 2.666667364086573,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.3333331589781352,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-14,
+    "returned_T_star": 266666736408657.5,
+    "eps_times_T_star": 2.666667364086575,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.33333315897813465,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-15,
+    "returned_T_star": 2666667364086574.5,
+    "eps_times_T_star": 2.6666673640865746,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.33333315897813476,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   },
+   {
+    "eps": 1e-18,
+    "returned_T_star": 2.6666673640865736e+18,
+    "eps_times_T_star": 2.6666673640865737,
+    "reference_T_star": 3.9999999999986704,
+    "rel_violation_of_exact_scaling": 0.333333158978135,
+    "returned_value_is_finite": true,
+    "returned_value_is_positive": true,
+    "flagged_by_module": false,
+    "silent_corruption": true
+   }
+  ]
+ },
+ "nan_seeded_vorticity": {
+  "what": "NaN/Inf seeded directly into the physical-space vorticity",
+  "cases_run": 12,
+  "silent_corruptions": 0,
+  "note_on_analytic_branch": "a single NaN node poisons the whole rfft spectrum, so every candidate H-value is NaN; Python's builtin max(best, nan) KEEPS best, so best_h stays -inf and the function returns None -- reported as WRONG (the data does blow up, T* = 4.0) but not counted toward the gate, because None is not a finite plausible number",
+  "cases": [
+   {
+    "entry_point": "solve_gclm",
+    "case": "nan at one node (idx 7)",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "nan at three nodes",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "nan everywhere",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "+inf at one node (idx 7)",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "+inf at three nodes",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "+inf everywhere",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "-inf at one node (idx 7)",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "-inf at three nodes",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "solve_gclm",
+    "case": "-inf everywhere",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "omega_final_stats": {
+     "size": 64,
+     "nonfinite": 64,
+     "nonfinite_frac": 1.0,
+     "all_finite": false,
+     "max_abs_over_finite_entries": null
+    },
+    "payload_entirely_finite": false,
+    "flagged": true,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "clm_analytic_blowup_time",
+    "case": "nan at one node (idx 7), n_scan=256",
+    "returned": null,
+    "returned_None": true,
+    "true_answer_is_None": false,
+    "wrong_but_not_finite": true,
+    "wall_seconds": 0.23508278900408186,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "clm_analytic_blowup_time",
+    "case": "+inf at one node (idx 7), n_scan=256",
+    "returned": null,
+    "returned_None": true,
+    "true_answer_is_None": false,
+    "wrong_but_not_finite": true,
+    "wall_seconds": 0.15105082000081893,
+    "silent_corruption": false
+   },
+   {
+    "entry_point": "clm_analytic_blowup_time",
+    "case": "-inf at one node (idx 7), n_scan=256",
+    "returned": null,
+    "returned_None": true,
+    "true_answer_is_None": false,
+    "wrong_but_not_finite": true,
+    "wall_seconds": 0.2519809779987554,
+    "silent_corruption": false
+   }
+  ]
+ },
+ "viscosity_guard": {
+  "what": "solver/gclm.py:164 gates dissipation behind `if nu > 0.0`; NaN and every negative value fail that comparison, so the viscous step is skipped and the run silently becomes the inviscid run",
+  "inviscid_reference_outcome": "no_blowup",
+  "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+  "partially_flagged_note": "nu=nan and nu=-inf ALSO produce a bitwise-inviscid trajectory, i.e. the dissipation is silently dropped there too; they are NOT counted as silent corruptions because the energy_balance_residual field does carry the poison out (nan / inf respectively). The trajectory is silently wrong; one guard field is honest. Recorded at full strength rather than counted.",
+  "cases_run": 5,
+  "silent_corruptions": 1,
+  "cases": [
+   {
+    "nu": "nan",
+    "nu_is_invalid_input": true,
+    "guard_nu_gt_zero": false,
+    "viscous_step": "SKIPPED",
+    "outcome": "no_blowup",
+    "payload_entirely_finite": false,
+    "max_abs_diff_vs_inviscid_run": 0.0,
+    "bitwise_identical_to_inviscid_run": true,
+    "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+    "echoed_params_nu": null,
+    "echoed_params_nu_repr": "nan",
+    "energy_balance_residual": NaN,
+    "conservation_drift": 8.044909561851132e-17,
+    "silent_corruption": false
+   },
+   {
+    "nu": "-1.0",
+    "nu_is_invalid_input": true,
+    "guard_nu_gt_zero": false,
+    "viscous_step": "SKIPPED",
+    "outcome": "no_blowup",
+    "payload_entirely_finite": true,
+    "max_abs_diff_vs_inviscid_run": 0.0,
+    "bitwise_identical_to_inviscid_run": true,
+    "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+    "echoed_params_nu": -1.0,
+    "echoed_params_nu_repr": "-1.0",
+    "energy_balance_residual": 0.8767535010346897,
+    "conservation_drift": 0.8767535010346897,
+    "silent_corruption": true
+   },
+   {
+    "nu": "-0.0",
+    "nu_is_invalid_input": false,
+    "guard_nu_gt_zero": false,
+    "viscous_step": "SKIPPED",
+    "outcome": "no_blowup",
+    "payload_entirely_finite": true,
+    "max_abs_diff_vs_inviscid_run": 0.0,
+    "bitwise_identical_to_inviscid_run": true,
+    "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+    "echoed_params_nu": -0.0,
+    "echoed_params_nu_repr": "-0.0",
+    "energy_balance_residual": 2.105815512506592e-06,
+    "conservation_drift": 2.105815512506592e-06,
+    "silent_corruption": false
+   },
+   {
+    "nu": "+inf",
+    "nu_is_invalid_input": false,
+    "guard_nu_gt_zero": true,
+    "viscous_step": "APPLIED",
+    "outcome": "diverged",
+    "payload_entirely_finite": false,
+    "max_abs_diff_vs_inviscid_run": NaN,
+    "bitwise_identical_to_inviscid_run": false,
+    "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+    "echoed_params_nu": null,
+    "echoed_params_nu_repr": "inf",
+    "energy_balance_residual": 0.0,
+    "conservation_drift": 0.0,
+    "silent_corruption": false
+   },
+   {
+    "nu": "-inf",
+    "nu_is_invalid_input": true,
+    "guard_nu_gt_zero": false,
+    "viscous_step": "SKIPPED",
+    "outcome": "no_blowup",
+    "payload_entirely_finite": false,
+    "max_abs_diff_vs_inviscid_run": 0.0,
+    "bitwise_identical_to_inviscid_run": true,
+    "honest_separation_nu0_vs_nu0p01": 0.007363562320138239,
+    "echoed_params_nu": null,
+    "echoed_params_nu_repr": "-inf",
+    "energy_balance_residual": Infinity,
+    "conservation_drift": Infinity,
+    "silent_corruption": false
+   }
+  ]
+ },
+ "extreme_a": {
+  "what": "`a` swept nine decades past [0,1] and poisoned with NaN/+-Inf",
+  "rule": "a big honest number is not corruption; only a non-finite `a` that produces a fully finite payload with a non-diverged outcome counts",
+  "cases_run": 10,
+  "silent_corruptions": 0,
+  "cases": [
+   {
+    "a": 1.0,
+    "a_is_finite": true,
+    "outcome": "no_blowup",
+    "n_timesteps": 30,
+    "max_abs_omega_final": 1.2021381214629234,
+    "payload_entirely_finite": true,
+    "mean_drift": 7.908555162497724e-17,
+    "energy_balance_residual": 6.399297579643038e-08,
+    "conservation_drift": 6.399297579643038e-08,
+    "silent_corruption": false
+   },
+   {
+    "a": 10000.0,
+    "a_is_finite": true,
+    "outcome": "blowup_candidate",
+    "n_timesteps": 1,
+    "max_abs_omega_final": 7.690393277800123e+24,
+    "payload_entirely_finite": true,
+    "mean_drift": 6.941211124988722e-17,
+    "energy_balance_residual": 8.920005246692986e+25,
+    "conservation_drift": 8.920005246692986e+25,
+    "silent_corruption": false
+   },
+   {
+    "a": 100000000.0,
+    "a_is_finite": true,
+    "outcome": "blowup_candidate",
+    "n_timesteps": 1,
+    "max_abs_omega_final": 9.672346790899889e+84,
+    "payload_entirely_finite": true,
+    "mean_drift": 3.0656390797144405e-17,
+    "energy_balance_residual": 1.1813098220080667e+90,
+    "conservation_drift": 1.1813098220080667e+90,
+    "silent_corruption": false
+   },
+   {
+    "a": 1000000000000.0,
+    "a_is_finite": true,
+    "outcome": "blowup_candidate",
+    "n_timesteps": 1,
+    "max_abs_omega_final": 9.672629313116432e+144,
+    "payload_entirely_finite": false,
+    "mean_drift": 4.9262000255399507e-17,
+    "energy_balance_residual": NaN,
+    "conservation_drift": 4.9262000255399507e-17,
+    "silent_corruption": false
+   },
+   {
+    "a": 1e+16,
+    "a_is_finite": true,
+    "outcome": "blowup_candidate",
+    "n_timesteps": 1,
+    "max_abs_omega_final": 9.672629341368745e+204,
+    "payload_entirely_finite": false,
+    "mean_drift": 1.1874147329819267e-16,
+    "energy_balance_residual": NaN,
+    "conservation_drift": 1.1874147329819267e-16,
+    "silent_corruption": false
+   },
+   {
+    "a": 1e+300,
+    "a_is_finite": true,
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "max_abs_omega_final": null,
+    "payload_entirely_finite": false,
+    "mean_drift": 0.0,
+    "energy_balance_residual": 0.0,
+    "conservation_drift": 0.0,
+    "silent_corruption": false
+   },
+   {
+    "a": -1e+16,
+    "a_is_finite": true,
+    "outcome": "blowup_candidate",
+    "n_timesteps": 1,
+    "max_abs_omega_final": 9.672629341374427e+204,
+    "payload_entirely_finite": false,
+    "mean_drift": 2.761545297334111e-221,
+    "energy_balance_residual": NaN,
+    "conservation_drift": 2.761545297334111e-221,
+    "silent_corruption": false
+   },
+   {
+    "a": "nan",
+    "a_is_finite": false,
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "max_abs_omega_final": null,
+    "payload_entirely_finite": false,
+    "mean_drift": 0.0,
+    "energy_balance_residual": 0.0,
+    "conservation_drift": 0.0,
+    "silent_corruption": false
+   },
+   {
+    "a": "+inf",
+    "a_is_finite": false,
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "max_abs_omega_final": null,
+    "payload_entirely_finite": false,
+    "mean_drift": 0.0,
+    "energy_balance_residual": 0.0,
+    "conservation_drift": 0.0,
+    "silent_corruption": false
+   },
+   {
+    "a": "-inf",
+    "a_is_finite": false,
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "max_abs_omega_final": null,
+    "payload_entirely_finite": false,
+    "mean_drift": 0.0,
+    "energy_balance_residual": 0.0,
+    "conservation_drift": 0.0,
+    "silent_corruption": false
+   }
+  ]
+ },
+ "guard_swallows_nan": {
+  "what": "the logged artifact-guard value can report clean while its own input is NaN",
+  "mechanism": "solver/gclm.py:226 conservation_drift=max(mean_drift, energy_residual); builtin max returns the finite argument when the other is NaN",
+  "cases_run": 3,
+  "silent_corruptions": 2,
+  "cases": [
+   {
+    "a": 100000000.0,
+    "outcome": "blowup_candidate",
+    "max_abs_omega_final": 9.672346790899889e+84,
+    "mean_drift": 3.0656390797144405e-17,
+    "energy_balance_residual": 1.1813098220080667e+90,
+    "energy_balance_residual_is_nan": false,
+    "conservation_drift_LOGGED": 1.1813098220080667e+90,
+    "conservation_drift_is_finite": true,
+    "silent_corruption": false
+   },
+   {
+    "a": 1000000000000.0,
+    "outcome": "blowup_candidate",
+    "max_abs_omega_final": 9.672629313116432e+144,
+    "mean_drift": 4.9262000255399507e-17,
+    "energy_balance_residual": NaN,
+    "energy_balance_residual_is_nan": true,
+    "conservation_drift_LOGGED": 4.9262000255399507e-17,
+    "conservation_drift_is_finite": true,
+    "silent_corruption": true
+   },
+   {
+    "a": 1e+16,
+    "outcome": "blowup_candidate",
+    "max_abs_omega_final": 9.672629341368745e+204,
+    "mean_drift": 1.1874147329819267e-16,
+    "energy_balance_residual": NaN,
+    "energy_balance_residual_is_nan": true,
+    "conservation_drift_LOGGED": 1.1874147329819267e-16,
+    "conservation_drift_is_finite": true,
+    "silent_corruption": true
+   }
+  ]
+ },
+ "config_poisons": {
+  "what": "NaN in the stop-criteria block; every NaN comparison is False, so the criterion is silently dropped rather than flagged",
+  "blowup_detection_suppression": {
+   "what": "a NaN detector threshold turns a detected blow-up into a clean verdict",
+   "clean_outcome": "blowup_candidate",
+   "clean_max_abs_omega_final": 7.690393277800123e+24,
+   "clean_n_timesteps": 1,
+   "poisoned_outcome": "diverged",
+   "poisoned_n_timesteps": 6,
+   "poisoned_max_over_trajectory": 2.544452129996651e+153,
+   "verdict_flipped": true
+  },
+  "cases_run": 6,
+  "silent_corruptions": 5,
+  "cases": [
+   {
+    "case": "t_max=nan",
+    "outcome": "no_blowup",
+    "n_timesteps": 0,
+    "reference_n_timesteps": 30,
+    "t_final": 0.0,
+    "payload_entirely_finite": true,
+    "conservation_drift": 0.0,
+    "ran_zero_steps_but_reported_a_verdict": true,
+    "silent_corruption": true
+   },
+   {
+    "case": "t_max=-1.0",
+    "outcome": "no_blowup",
+    "n_timesteps": 0,
+    "reference_n_timesteps": 30,
+    "t_final": 0.0,
+    "payload_entirely_finite": true,
+    "conservation_drift": 0.0,
+    "ran_zero_steps_but_reported_a_verdict": true,
+    "silent_corruption": true
+   },
+   {
+    "case": "dt_max=nan",
+    "outcome": "diverged",
+    "n_timesteps": 1,
+    "reference_n_timesteps": 30,
+    "t_final": null,
+    "payload_entirely_finite": false,
+    "conservation_drift": 0.0,
+    "ran_zero_steps_but_reported_a_verdict": false,
+    "silent_corruption": false
+   },
+   {
+    "case": "c1=nan",
+    "outcome": "no_blowup",
+    "n_timesteps": 30,
+    "reference_n_timesteps": 30,
+    "t_final": 0.3,
+    "payload_entirely_finite": true,
+    "conservation_drift": 2.105815512506592e-06,
+    "ran_zero_steps_but_reported_a_verdict": false,
+    "silent_corruption": true
+   },
+   {
+    "case": "c2=nan",
+    "outcome": "no_blowup",
+    "n_timesteps": 30,
+    "reference_n_timesteps": 30,
+    "t_final": 0.3,
+    "payload_entirely_finite": true,
+    "conservation_drift": 2.105815512506592e-06,
+    "ran_zero_steps_but_reported_a_verdict": false,
+    "silent_corruption": true
+   },
+   {
+    "case": "amplification_factor=nan",
+    "outcome": "no_blowup",
+    "n_timesteps": 30,
+    "reference_n_timesteps": 30,
+    "t_final": 0.3,
+    "payload_entirely_finite": true,
+    "conservation_drift": 2.105815512506592e-06,
+    "ran_zero_steps_but_reported_a_verdict": false,
+    "silent_corruption": true
+   }
+  ]
+ },
+ "structural": {
+  "what": "structural/degenerate adversaries; a raise is FLAGGED, not silent",
+  "cases_run": 5,
+  "cases": [
+   {
+    "case": "solve_gclm(zeros)",
+    "raised": "ValueError",
+    "returned": null,
+    "flagged_by_raise": true
+   },
+   {
+    "case": "solve_gclm(empty)",
+    "raised": "ZeroDivisionError",
+    "returned": null,
+    "flagged_by_raise": true
+   },
+   {
+    "case": "analytic: fn returns wrong length",
+    "raised": "ValueError",
+    "returned": null,
+    "flagged_by_raise": true
+   },
+   {
+    "case": "analytic: constant 1.0 (H == 0, degenerate transform input)",
+    "raised": null,
+    "returned": "None",
+    "flagged_by_raise": false
+   },
+   {
+    "case": "analytic: identically zero",
+    "raised": null,
+    "returned": "None",
+    "flagged_by_raise": false
+   }
+  ]
+ },
+ "out_of_gate_cost_blowup": {
+  "what": "np.sign(nan) makes np.diff(sign) != 0 true at EVERY node, so the root list degenerates from O(1) to O(n_scan), each root costing 60 bisections of a dense trigonometric evaluation",
+  "out_of_gate": true,
+  "ladder": [
+   {
+    "n_scan": 64,
+    "wall_nan": 0.28520809399924474,
+    "wall_clean": 0.01715188600064721,
+    "ratio": 16.62838092490136
+   },
+   {
+    "n_scan": 128,
+    "wall_nan": 0.8219718800028204,
+    "wall_clean": 0.018762632003927138,
+    "ratio": 43.80898585181314
+   },
+   {
+    "n_scan": 256,
+    "wall_nan": 5.513516152997909,
+    "wall_clean": 0.18447021400061203,
+    "ratio": 29.888381616880523
+   },
+   {
+    "n_scan": 512,
+    "wall_nan": 26.627254974999232,
+    "wall_clean": 0.16566449200036004,
+    "ratio": 160.73000709736496
+   }
+  ]
+ },
+ "gate_answer": "yes",
+ "total_silent_corruptions": 19,
+ "total_gate_scoped_cases": 54,
+ "per_family_silent_corruptions": {
+  "amplitude_invariant": 11,
+  "nan_seeded_vorticity": 0,
+  "viscosity_guard": 1,
+  "extreme_a": 0,
+  "guard_swallows_nan": 2,
+  "config_poisons": 5
+ },
+ "headline": "GATE ANSWERS YES. 19 silent corruptions in 54 gate-scoped cases, across 4 independent mechanisms. Worst: clm_analytic_blowup_time returns a finite, positive, plausible blow-up time that violates the EXACT amplitude-scaling invariant of the CLM closed form by 0.3333 relative (saturating at 1/3) for initial vorticity of amplitude <= 1e-12, because the zero-detector at solver/gclm.py:289 uses an ABSOLUTE tolerance |w0| < 1e-12.",
+ "wall_seconds": 46.02523633000237
+}

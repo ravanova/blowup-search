@@ -64,6 +64,10 @@ class SolverResult:
     mean_drift: float  # |∫w dx drift| / ||w||_1 scale (never / the invariant)
     energy_balance_residual: float  # viscous-safe under-resolution signal
     conservation_drift: float  # max of the two above; the logged guard value
+    # True iff either guard input above was NaN. The logged conservation_drift is
+    # then NaN too -- see the G3 note in solve_gclm. A NaN guard is its own failure
+    # state, never a small number (leg 92 / Route-GLA).
+    guard_nan: bool = False
     params: dict = field(default_factory=dict)
 
 
@@ -80,6 +84,28 @@ def _nonlinear_rhs_hat(w_hat, k, mask, a, frozen_u):
         u_x = np.fft.irfft(hilbert_hat(w_hat, k), n)
     rhs = -a * u * w_x + w * u_x
     return np.fft.rfft(rhs) * mask, u
+
+
+def _require_finite(name, value, what):
+    """Reject a non-finite scalar run parameter, by name, before it is ever compared.
+
+    Leg 92 (Route-GLA) measured the failure this closes: every stop criterion in
+    `solve_gclm` is a bare comparison, and EVERY comparison against NaN is False.
+    `t_max = nan` makes `while t < t_max` false immediately -- zero timesteps, and a
+    returned `outcome="no_blowup"` with a wholly finite payload, a clean verdict from a
+    run that never happened. `amplification_factor = nan` disables the blow-up detector
+    outright: at a = 1e4 the clean run reports `blowup_candidate` and the poisoned one
+    reports `diverged`. A criterion that cannot fire is not a criterion, and silently
+    dropping it is worse than refusing it, so it is refused here.
+    """
+    v = float(value)
+    if not np.isfinite(v):
+        raise ValueError(
+            "%s = %r is not finite. %s Every stop criterion in solve_gclm is a bare "
+            "comparison and every comparison against NaN is False, so a non-finite "
+            "value here is silently DROPPED rather than applied -- the criterion "
+            "stops existing without saying so." % (name, v, what))
+    return v
 
 
 def solve_gclm(
@@ -104,6 +130,47 @@ def solve_gclm(
     per-run compute saver per PLAN.md's compute plan; audited via
     early_exit_reason).
     """
+    # -- run-parameter validation (leg 92 / Route-GLA repairs G2 and G4) --------
+    # These run BEFORE any state is built, so an invalid request never produces a
+    # partially-integrated result. NaN/negative `omega0` is deliberately NOT validated
+    # here: leg 92 measured that poisoned vorticity already reaches outcome="diverged"
+    # on step 1 in all 12 cases, and a wild but finite `a` is honestly propagated. Those
+    # paths were already correct and are left exactly as they were.
+    nu = float(nu)
+    if nu < 0.0 or np.isnan(nu):
+        raise ValueError(
+            "nu = %r is not an admissible viscosity: nu >= 0 is required (nu = 0, the "
+            "inviscid case, IS admissible; nu = -0.0 is 0.0 and is fine). A negative nu "
+            "is anti-diffusion -- an energy source, an ill-posed backward heat equation "
+            "-- and a NaN nu is no viscosity at all. Both used to fail the `if nu > 0.0` "
+            "gate below and run BITWISE INVISCID without a word: leg 92 measured "
+            "nu = -1.0 returning omega_final identical to the nu = 0 run, outcome "
+            "'no_blowup', entire payload finite." % nu)
+    t_max = _require_finite(
+        "t_max", t_max, "It is the integration horizon in `while t < t_max`.")
+    if t_max <= 0.0:
+        raise ValueError(
+            "t_max = %r is not a positive integration horizon. `while t < t_max` is "
+            "false at t = 0, so the run takes ZERO timesteps and still returns "
+            "outcome='no_blowup' with conservation_drift = 0.0 -- a clean verdict from "
+            "a run that never happened (leg 92 measured exactly this at t_max = -1.0)."
+            % t_max)
+    amplification_factor = _require_finite(
+        "amplification_factor", amplification_factor,
+        "It is the blow-up DETECTOR threshold in `m >= amplification_factor * m0`.")
+    dt_max = _require_finite("dt_max", dt_max, "It is the timestep ceiling.")
+    c1 = _require_finite("c1", c1, "It is the amplitude CFL coefficient.")
+    c2 = _require_finite("c2", c2, "It is the advective CFL coefficient.")
+    if not (dt_max > 0.0 and c1 > 0.0 and c2 > 0.0):
+        raise ValueError(
+            "dt_max = %r, c1 = %r, c2 = %r: all three timestep controls must be "
+            "strictly positive; a non-positive one makes dt <= 0 and the integration "
+            "cannot advance." % (dt_max, c1, c2))
+    if not np.isfinite(max_steps):
+        raise ValueError(
+            "max_steps = %r is not finite; `n_steps >= max_steps` would never fire and "
+            "the step budget would silently stop existing." % (max_steps,))
+
     t_start_wall = time.perf_counter()
     omega0 = np.asarray(omega0, dtype=float)
     n = len(omega0)
@@ -211,6 +278,19 @@ def solve_gclm(
 
     mean_drift = max_abs_mean_dev / max(max_l1, 1e-300)
     energy_residual = e_accum_err / max(max_e, 1e-300)
+    # G3 (leg 92 / Route-GLA). This used to be `max(mean_drift, energy_residual)`, and
+    # Python's builtin max returns `b` only when `b > a` -- NaN loses every comparison,
+    # so max(finite, nan) == finite. The ONE number LOGGING.md's `solver_run` event
+    # records as the artifact guard was precisely the one that swallowed the NaN: at
+    # a = 1e12 the energy residual is NaN while the logged conservation_drift read
+    # 4.926e-17, i.e. "clean", on a run that reached max|w| = 9.673e+144.
+    # A NaN guard input is now its own reportable failure state: the flag `guard_nan` is
+    # set and the logged value is NaN, never a small number. np.nanmax is used for the
+    # ordinary path so the intent ("the larger of the two") is explicit rather than
+    # resting on builtin max's NaN behaviour either way; +inf still propagates as +inf.
+    _guards = np.array([mean_drift, energy_residual], dtype=float)
+    guard_nan = bool(np.any(np.isnan(_guards)))
+    conservation_drift = float("nan") if guard_nan else float(np.nanmax(_guards))
     return SolverResult(
         outcome=outcome,
         early_exit_reason=early_exit_reason,
@@ -223,7 +303,8 @@ def solve_gclm(
         wall_clock_seconds=time.perf_counter() - t_start_wall,
         mean_drift=mean_drift,
         energy_balance_residual=energy_residual,
-        conservation_drift=max(mean_drift, energy_residual),
+        conservation_drift=conservation_drift,
+        guard_nan=guard_nan,
         params={
             "a": a,
             "nu": nu,
@@ -286,7 +367,24 @@ def clm_analytic_blowup_time(omega0_fn, n_scan=4096):
         h_val = eval_trig(h_hat, np.array([x_zero]))[0]
         best_h = max(best_h, h_val)
     # Grid points that are exactly zeros (e.g. x=0, pi for sine data).
-    exact = np.abs(w0) < 1e-12
+    #
+    # G1 (leg 92 / Route-GLA). This tolerance used to be the ABSOLUTE constant 1e-12,
+    # applied to data whose amplitude was never measured. Below that amplitude EVERY
+    # grid point satisfies it, so the "zero set" became the whole grid and best_h
+    # became the GLOBAL max of H(w0) instead of its max over the actual zero set --
+    # returning a finite, positive, entirely ordinary-looking blow-up time that was up
+    # to 1.5x too early, with no flag. The CLM closed form is exactly homogeneous of
+    # degree -1 in amplitude, so eps*T*(eps*w0) must not depend on eps; leg 92 measured
+    # it running 4.0 -> 2.667 (relative violation saturating at exactly 1/3) as the
+    # amplitude shrank below the fixed constant.
+    #
+    # The tolerance is therefore RELATIVE to the data's own scale, which is what makes
+    # it obey the same amplitude homogeneity the closed form does: scaling w0 by eps
+    # scales the tolerance by eps and leaves `exact` -- and hence T* -- unchanged.
+    # At the O(1) amplitudes every production caller uses, 1e-12 * scale reproduces the
+    # old constant to the bit, which is why this repair moves no banked number.
+    scale = float(np.max(np.abs(w0))) if w0.size else 0.0
+    exact = np.abs(w0) < 1e-12 * scale
     if np.any(exact):
         h_grid = np.fft.irfft(h_hat, n_scan)
         best_h = max(best_h, float(np.max(h_grid[exact])))
