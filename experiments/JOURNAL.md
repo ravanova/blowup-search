@@ -3596,3 +3596,110 @@ preempted agents had reached a landing.
   carrying a CONDITIONAL tier for any DSS-dependent candidate pending this
   ruling, can now treat the expensive entrance as open-pending-a-scoping-leg
   rather than flatly banned.
+- **Leg 250 (Route-PUB2FIX) — gate YES, landed and independently verified.**
+  PUB2's sigma_min "conflict" (leg 163's 0.71465 vs leg 176's 0.0908) was an
+  inverted inequality sign, not a 7.9x measurement error: sampled Rayleigh
+  ratios bound sigma_min only from ABOVE, so 0.71465 = 1/1.3993 is consistent
+  with 0.0908, not contradicting it. Also corrected: neither leg proves
+  sigma_min is bounded away from zero. Verifier independently re-derived the
+  bound direction from the G4 definition and confirmed all five edited sites;
+  flagged two minor DOCS-precision nits (queued as light leg 259/263-family
+  work, no urgency).
+- **Leg 258 (Route-FLOCK) — mechanical, landed.** Locked ORCHESTRATION.md
+  Sec3b's composition floor into `test_plan_of_record.py` via an additive
+  machine-readable marker in DIRECTION.md, DM-maintained thereafter.
+- **Leg 255 (Route-P1A) — gate YES, landed and independently verified.**
+  21-model Phase 1 target census: 2 survivors of all four screens, both
+  Keller-Segel d=3 and both NON-FLUID. The one fluid-adjacent candidate
+  clearing screens (i)-(iii), Li-Zhou arXiv:2404.17228 (KS-Navier-Stokes), is
+  killed by screen (iv) alone on the Leray-projection clause. Screen (iv)
+  kills 13/21 -- method reach, not target scarcity, is Phase 1's binding
+  constraint. Leg 174's fluid/Grade-A cell stays EMPTY. Unrecorded Grade-A
+  precedent found: Biernat-Donninger arXiv:1610.09496 (2016, non-fluid).
+  Verifier independently re-extracted Remark 40 and found a STRONGER reason
+  for the Li-Zhou kill (Breden-Chu's governing eq (2) is pointwise-local,
+  Leray projection can't be written in that form at all) and assessed the
+  "argue Leray into reach" question as negatively resolved (Calderon-Zygmund
+  on a non-A2 Gaussian weight), not open.
+- **Leg 178 (Route-WES) — gate YES per the user's 2026-08-07 ruling, landed.**
+  Clause 3 of the leg's own five-clause predicate is SCOPED (evaluated only
+  at grading depths where contamination < 1; spread 2.2839e-07 over the three
+  valid depths, 4379x margin) rather than overruled -- the instrument, not
+  the mathematics, was unstable at n_grade=96. Constraining EGM's trial space
+  by exact functionals moves a window from width 0.0 to 4.0 and a gap from
+  -0.4999241 to +0.499999667 (EGM's published -1/2, reproduced numerically,
+  not a new theorem), showing leg 111's zero-width closure is a property of
+  ONE unconstrained trial space, not of the operator. Bounded per the user's
+  ruling: no weighted-energy lane opens; leg 111's headline needs a scoped
+  correction (leg 263, in queue) and exactly one transfer-question probe
+  (leg 264, in queue) is licensed, both ranked behind the Phase 0/1 programme.
+- **Leg 256 (Route-P1B) — gate YES on both readings, landed and independently
+  verified.** End-to-end reproduction of Breden-Chu's published Theorem 42
+  (generalised viscous Burgers) in their own weighted-Sobolev H^2(mu) setting
+  (NEW module solver/bc_weighted_sobolev.py, none of the three dead
+  realizations touched). Independently-shot approximate solution matches
+  their released coefficients to 4.36e-10; certified interval
+  [9.6876e-04, 3.2976e-03] contains their published 1e-3 enclosure entirely.
+  Y/Z3/||LAL^-1|| reproduce to full print granularity; Z1 (1.308x) and Z2
+  (0.805x) differ, localised by ablation to their own L-infinity basis
+  bounds -- three independent signs their RELEASED VERIFICATION PACKAGE has
+  drifted from the paper's printed constants (one matched bound is commented
+  out in their notebook, their cell-16 bound overshoots by 136x, their
+  delta_lo multiplier is stale), while Theorem 42 itself is unaffected
+  (1.0114x margin on their own published constants) -- not escalated, per a
+  pre-committed attribution rule. Phase 1's cheapest kill test passes: this
+  repository CAN drive Breden-Chu's machinery. No Phase-1 construction on an
+  actual target ran under this leg's authority.
+- **MAJOR: leg 251 (Route-P0T) — gate YES, ESCALATED, PARKED (PR #20, NOT
+  merged) -- the single most consequential leg of this run.** Phase 0 screened
+  14 (object, ansatz) candidates and named ONE unconditional Phase-1
+  candidate: the 3D isentropic COMPRESSIBLE Navier-Stokes imploding
+  self-similar profile (U^E,S^E) at gamma=7/5 (Buckmaster-Cao-Gomez-Serrano
+  arXiv:2208.09445 Thms 1.2/1.3; non-radial companion CGSS arXiv:2310.05325).
+  EXPLICITLY FLAGGED BY THE LEG ITSELF: this is COMPRESSIBLE NS, not the
+  incompressible system Clay's problem asks about. Certificate obligation,
+  quoted from the authors' own Sec7: ENCLOSE the profile of the dissipative
+  equation rather than dominating the dissipative term by restricting a
+  parameter r -- nobody has done this. Wall 2 side stated plainly: same side
+  as every existing work (3D-ness from a spherically-symmetric ODE profile,
+  never from the certificate). Two DSS-family candidates reported in a
+  CONDITIONAL tier (non-axisymmetric DSS lambda>>1, and RDSS), blocked on
+  BOTH the DSS ban's Entry B scoping leg AND leg 257's Leray-projector
+  obstruction (below). A fourth candidate (Pineau-Vicol rotated
+  backward-self-similar, a 28-day-old unrefereed preprint) is reported but
+  deliberately NOT named -- no numerical anchor, expected answer is
+  nonexistence. Corrects the repository's own screen, agreeing with leg 253:
+  "unstable-self-similar with finite unstable spectrum" is EXCLUDED, not a
+  survivor (Tsai's theorem is stability-blind). No link of the L1->L4 chain
+  moved; Clay odds ~0.05%. A post-landing verifier is reviewing this given
+  the stakes; nothing is built and no user ruling has been made yet.
+- **Leg 253 (Route-NRSX) — gate NO, ESCALATED, PARKED (branch leg/253-nrsx-v1,
+  not merged).** Pinned the NRS/Tsai exclusion at full text: the sharp Tsai
+  hypothesis is Remark 5.3's SUB-LINEAR GROWTH condition, not the decay
+  condition 19 in-repo sites had been calling it. Excludes "unstable-
+  self-similar with finite unstable spectrum" outright (stability-blind);
+  narrows DSS three ways (axisymmetric DSS dies entirely); confirms
+  non-self-similar is intact and now FORCED. Surfaces a fourth candidate
+  class Phase 0's original brief never named: rotated backward self-similar
+  at alpha~1 (Pineau-Vicol arXiv:2607.09619v1, 28 days old, unrefereed) --
+  the one genuinely open window, bypassing the Bernoulli maximum-principle
+  argument the whole NRS/Tsai method rests on. Every exclusion threshold
+  (lambda_*, lambda-bar, alpha_lo, alpha_hi) is non-explicit. Forwarded
+  directly to leg 251, which folded it in.
+- **MAJOR: leg 257 (Route-P1C) — gate YES on both clauses, ESCALATED, PARKED
+  (PR #19, NOT merged).** Confirms the stage-V ban's lift clause is satisfied
+  ON PAPER: Breden-Chu's H^2(mu) weighted-Sobolev space is a genuine namable
+  FOURTH space, evading all three prior death mechanisms (leg 54's Z1
+  block-coupling, leg 56's (H,D) consistency defect, legs 163/176's
+  origin-H^2 a=0 cap) AT THE MECHANISM LEVEL, each with its own locator --
+  measured Z1 = 0.065136 in the new space vs 8.9591/140.72 in the dead ones.
+  Does NOT lift the ban itself (correctly escalates for the user's
+  signature). SEPARATELY AND INDEPENDENTLY found a NEW obstruction: the
+  Leray projection provably leaves L^2(mu) in this space -- an explicit
+  divergence-free Gaussian witness U = curl(e^{-|x|^2}e_3) shows
+  P[(U.grad)U] has an algebraic |x|^-4 tail whose coefficient IS the energy
+  (cannot vanish), while the space's own weight underflows to exactly 0.
+  CONFIRMS AND STRENGTHENS leg 255's Li-Zhou kill and WITHDRAWS leg 255's own
+  concession that the kill might be rescuable. The fluid cell now has TWO
+  independent kills. Both findings forwarded directly to leg 251, which
+  folded them in.
