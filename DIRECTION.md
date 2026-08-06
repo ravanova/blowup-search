@@ -362,14 +362,14 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 |---|---|---|---|---|---|---|
 | LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`, proposed `NEXT`) | heavy | `leg/ng-v1` | Does the no-go admit a proof for a class of `A` strictly larger than block-diagonal? |
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
-| LEG-C | 98 | **ICA** — adversarial fabrication-rejection audit of interval_certificate.py | no | standard | `leg/ica-v1` | Under poisoned interval enclosures, does `radii_verdict` ever accept an invalid certificate? |
+| LEG-C | 96 | **LHA** — adversarial audit of line_hilbert.py's dense operator | no | standard | `leg/lha-v1` | Under adversarial near-degenerate grid spacing, does the dense operator / cached slope_matrix silently return a wrong result? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | 91 | **FGA** — adversarial audit of fractional_gclm.py's critical-exponent computation | no | standard | `leg/fga-v1` | Under malformed dissipation-strength inputs, does s_c computation silently return a plausible-looking wrong value? |
+| LEG-G | 97 | **WSA** — adversarial audit of weight_search.py's FitnessEngine | no | standard | `leg/wsa-v1` | Under a batch member driving the shared Jacobian near-singular, does FitnessEngine silently return a wrong fitness? |
 | LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
-| LEG-I | 89 | **BOA** — adversarial audit of boussinesq.py | no | standard | `leg/boa-v1` | Under malformed physical-space inputs, does the module silently return a plausible-looking wrong result? |
-| LEG-J | 96 | **LHA** — adversarial audit of line_hilbert.py's dense operator | no | standard | `leg/lha-v1` | Under adversarial near-degenerate grid spacing, does the dense operator / cached slope_matrix silently return a wrong result? |
+| LEG-I | 99 | **BVA** — adversarial audit of boussinesq_velocity.py's degenerate-grid handling | no | standard | `leg/bva-v1` | Under degenerate polar-grid inputs (r=0, malformed boundary), does the solve silently return a wrong result? |
+| LEG-J | 98 | **ICA** — adversarial fabrication-rejection audit of interval_certificate.py | no | standard | `leg/ica-v1` | Under poisoned interval enclosures, does `radii_verdict` ever accept an invalid certificate? |
 
 **Several earlier paragraphs above ("third pass," "second pass," and their predecessors)
 recorded intermediate states that have since been overtaken by further landings; this paragraph
