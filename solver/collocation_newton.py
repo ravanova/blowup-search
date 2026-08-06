@@ -293,7 +293,8 @@ class ACollocation(Collocation):
                 "dropped_defect": float(abs(R[drop])),
                 "relres": relres}
 
-    def newton(self, om0=None, c0=0.5, tol=1e-13, max_iter=40, damping=True):
+    def newton(self, om0=None, c0=0.5, tol=1e-13, max_iter=40, damping=True,
+               gauge_tol=1e-8):
         """Newton on (Omega, c) with the TWO gauges the degeneracy demands.
 
         The zero set carries two symmetries at EVERY a: scaling
@@ -308,6 +309,36 @@ class ACollocation(Collocation):
         Gauges: Omega(theta=0) = -1 (spectral, theta=0 is not a node) and
         Omega at the node nearest X = 1 equals -1/2, both satisfied by the exact
         a = 0 anchor.
+
+        REPAIR (leg 248, from leg 237's Route-SIRC census).  `converged` used to
+        be `bool(rel < 1e-9)` with `rel = rms(R) / rms(Omega H(Omega))` -- and
+        that ratio is EXACTLY invariant under the first of the two symmetries
+        above, because R is homogeneous of degree 2 in (Omega, c) and so is the
+        denominator.  So the sole verdict of this method could not see the one
+        direction the two gauge rows exist to pin: leg 237 fed (lam Omega*,
+        lam c*) -- an exact zero of all J residual rows for every lam -- to this
+        expression and got `rel` flat to 8.725e-14 while the reported wave speed
+        c ran over 1.000e+06x and the ABSOLUTE residual rms over 1.128e+12x,
+        `converged=True` on 3 of 4 members whose gauges were violated by up to
+        999.  Same shape as leg 202 mechanism M2 on `profile_newton`, and the
+        fix already existed one method away: `newton_gauged`'s `converged_kept`
+        (leg 150) is an ABSOLUTE test ANDed with the relative one.
+
+        `converged` now ALSO requires the two gauge rows -- which this method
+        already assembles as F[J] and F[J+1], and then threw away -- to be
+        satisfied to `gauge_tol`.  The gauge defect is absolute and homogeneous
+        of degree 1, so it is precisely the non-scale-invariant companion `rel`
+        lacks; no new quantity is computed and nothing is tuned.  The threshold
+        1e-8 is leg 237's OWN escape predicate (`gd > 1e-8`), adopted unchanged
+        rather than fitted: it sits 1.1e+07x above the worst gauge defect among
+        the 17 converged cases of that leg's 41-case reachability battery
+        (8.882e-16) and 1.0e+08x below the smallest defect of an escaped member
+        (1.000 at lam = 2).  The separation is fifteen decades wide, so the
+        choice inside it is not load-bearing.
+
+        The pre-repair flag is NOT discarded -- it is returned unchanged as
+        `converged_relres_only`, and `gauge_tol=inf` reproduces the pre-repair
+        verdict exactly.  No float this method returns changes value.
         """
         J = self.J
         i1 = int(np.argmin(np.abs(self.X - 1.0)))
@@ -339,7 +370,11 @@ class ACollocation(Collocation):
                 # LEG 150: the same shape as the normal return, so `continuation`
                 # (which indexes r["relres"] unconditionally) flags the failure
                 # instead of dying with KeyError.
+                # LEG 248: carry the repair's keys on this branch too, so
+                # `continuation` and any caller can read them unconditionally.
                 return {"converged": False, "reason": "singular Jacobian",
+                        "converged_relres_only": False, "gauge_ok": False,
+                        "gauge_defect": float("nan"),
                         "Omega": om, "c": c, "history": hist,
                         "iterations": max(len(hist) - 1, 0),
                         "residual_rms": float("nan"), "relres": float("inf"),
@@ -356,26 +391,71 @@ class ACollocation(Collocation):
         hist.append(rms)
         src = om * (self.H @ om)
         rel = rms / float(np.sqrt(np.mean(src ** 2))) if np.any(src) else np.inf
-        return {"converged": bool(rel < 1e-9), "Omega": om, "c": c,
+        # LEG 248.  The two gauge rows, already assembled above as F[J] and
+        # F[J+1] and previously discarded.  Absolute, degree-1 homogeneous --
+        # the companion `rel` cannot be.
+        gauge_defect = float(max(abs(g0 @ om + 1.0), abs(om[i1] + 0.5)))
+        rel_ok = bool(rel < 1e-9)
+        gauge_ok = bool(gauge_defect <= float(gauge_tol))
+        if not rel_ok:
+            reason = (f"the scale-invariant residual did not converge: "
+                      f"relres = {rel:.4e} >= 1e-9")
+        elif not gauge_ok:
+            reason = (f"relres converged ({rel:.4e}) but the profile is OFF "
+                      f"GAUGE: max(|Omega(theta=0)+1|, |Omega(X~1)+1/2|) = "
+                      f"{gauge_defect:.4e} > gauge_tol = {float(gauge_tol):.4e}"
+                      f" -- relres is exactly invariant under "
+                      f"(Omega, c) -> (lam Omega, lam c) and cannot see this")
+        else:
+            reason = None
+        return {"converged": bool(rel_ok and gauge_ok),
+                "converged_relres_only": rel_ok,
+                "gauge_ok": gauge_ok, "gauge_defect": gauge_defect,
+                "reason": reason,
+                "Omega": om, "c": c,
                 "residual_rms": rms, "relres": rel, "history": hist,
                 "iterations": len(hist) - 1,
                 "nodal_sup": float(np.max(np.abs(R)))}
 
 
 def continuation(a_values, J=400, **kw):
-    """Follow the branch in a, warm-starting from the previous solution."""
+    """Follow the branch in a, warm-starting from the previous solution.
+
+    REPAIR (leg 248, from leg 237's Route-SIRC census).  All three of this
+    function's branch decisions -- retry, accept-the-retry, and reseed the
+    remainder of the ladder -- used to compare `relres` alone, i.e. the same
+    exactly-scale-invariant quantity `newton`'s verdict was built on, so an
+    off-gauge member could be preferred over an on-gauge one and then handed to
+    every later rung as the warm start.  Each decision now consults the gauge
+    defect `newton` returns:
+
+      * retry if the residual is unconverged OR the profile is off gauge;
+      * prefer the retry lexicographically -- on-gauge beats off-gauge first,
+        and `relres` decides only between members of the same gauge status;
+      * warm-start the next rung only from a member that is BOTH converged in
+        residual and on gauge.
+
+    Every clause can only REJECT a warm start the old code would have taken, so
+    a ladder whose members are all on gauge -- which is every ladder measured in
+    this repo -- runs bit-identically.  `gauge_tol=inf` reproduces the
+    pre-repair behaviour exactly.
+    """
     out, om, c = [], None, 0.5
     for a in a_values:
         col = ACollocation(J, a=float(a))
         r = col.newton(om0=om, c0=c, **kw)
-        if r["relres"] > 1e-10:
+        if r["relres"] > 1e-10 or not r["gauge_ok"]:
             alt = col.newton(om0=None, c0=0.5, **kw)
-            if alt["relres"] < r["relres"]:
+            # lexicographic: (on gauge, then smaller relres).  The pre-repair
+            # rule is the second component alone.
+            if ((alt["gauge_ok"], -alt["relres"])
+                    > (r["gauge_ok"], -r["relres"])):
                 r = alt
         out.append({"a": float(a), "converged": r["converged"], "c": r["c"],
                     "relres": r["relres"], "residual_rms": r["residual_rms"],
+                    "gauge_defect": r["gauge_defect"], "gauge_ok": r["gauge_ok"],
                     "iterations": r["iterations"], "Omega": r["Omega"]})
-        if r["relres"] < 1e-10:
+        if r["relres"] < 1e-10 and r["gauge_ok"]:
             om, c = r["Omega"], r["c"]
     return out
 
