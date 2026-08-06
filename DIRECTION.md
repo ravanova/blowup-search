@@ -72,8 +72,13 @@ validated numerics has ever reached a genuinely 3D PDE model, in any field). A t
 addition, responding to a user steer to stop drafting audit/freshness legs and focus Opus on
 maths (Part 1), plus three specific math directions to scope (Part 2), adds **173–175** (Xu's
 own certification method as a distinct lane; the viscous-certified-blow-up "missing rung"
-sharpened against what's already banked; arXiv:2509.14185's own stated obstruction). **Next
-fresh leg number for any future candidate is 176.**
+sharpened against what's already banked; arXiv:2509.14185's own stated obstruction). A
+twenty-first refill, keeping the queue flowing continuously per the user's standing
+instruction, adds **176–181**: the user-authorized origin-H² construction leg (176), two new
+"different space" construction attempts on L1's collocation death and the weighted-energy
+window (177, blocked on 165; 178), the leg-58 publication bundle and the two-scale scope-line
+correction (179, 180 — both unblocked now that 161/162 landed), and a scoping read of Xu's
+modulation technique (181). **Next fresh leg number for any future candidate is 182.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1237,6 +1242,55 @@ math-directed legs (Xu's own certification method as a distinct lane; the viscou
 "missing rung" sharpened against `arXiv:2410.05480`; `arXiv:2509.14185`'s own stated
 obstruction), light/scoping difficulty, no overlap with 164/165/171/172 (already running,
 correctly not duplicated) or with each other. No hold-open needed for these three slots.
+
+**DM update, 2026-08-06 — all 10 slots full; continuous-flow batch drafted below; the
+requested origin-H² construction leg is 176.** Honest accounting first, per the coordinator's
+explicit request: **176 is new and the priority item.** Beyond it, this refresh draws on two
+pools — (a) five genuinely NEW math-shaped legs (177–181), each independent of any
+in-flight leg's still-unknown outcome, and (b) previously-drafted, still-undispatched reserve
+from the last two refills that the coordinator's 10-slot list doesn't mention: **148, 109,
+110, 168** are unblocked and immediately dispatchable; **169, 170** stay gated on 153/154.
+Genuinely fresh math material is thinning for the reason the coordinator would expect: the
+highest-value next moves (deeper 173/174/175 construction attempts, anything building on
+165's classification or 174/175's catalogs) cannot be drafted yet without presupposing
+outcomes no leg has reported. **Saying so explicitly, as asked**: after this batch, the next
+refill likely needs at least one of 164/165/171/172/173/174/175 to report before more
+first-class math threads can be drafted honestly — the alternative is padding with hygiene,
+which the user's steer says not to do.
+
+- **176 (H2C)**, the requested construction leg: builds the origin-H² certificate leg 163
+  scoped, at `a=0`, under the user's explicit authorization despite the known ceiling (no
+  transfer to the real non-`a=0` target — this leg's own thesis states that ceiling up front,
+  it does not discover or hide it).
+- **177 (L1RH)**, new: applies leg 127's own reframing (space vs. operator) to L1's OTHER
+  dead realization — the collocation basis (leg 56) — by testing whether a non-`ell^1_w`
+  space fixes it the way origin-H² fixed the coefficient basis. Drafted now, blocked on leg
+  165's classification report (so it doesn't presuppose which realizations are
+  space-dependent), ready the moment 165 lands.
+- **178 (WES)**, new: applies the same "try a different space" move to the weighted-energy
+  realization's zero-width window (leg 111/141) — a genuinely new construction attempt, not
+  a repeat of 141's literature check or 165's data-only classification. Independent of 165;
+  does not need to wait.
+- **179 (PUB1)**, new: leg 58's publication-scoping bundle (action item #6 from the strategic
+  review), deferred until 161 and 162 landed — both have. Bundles the exponent-sum
+  conservation law, the discrete-ball trap, the `A21` inequality (now leg 127's sharper
+  theorem, not leg 58's narrower one), and leg 126's closure audit into one combined
+  methodological note, per the review's own suggested shape.
+- **180 (TSR)**, new: the in-repo half of action item #5 (deferred pending 161/162, now
+  unblocked) — corrects the two-scale `a*` survival boundary's scope line in `writeup/` and
+  `PHASE2_P2_NOTES.md` to state its `a<=0` domain precisely, per the review's own independent
+  check. Does NOT touch the user's personal `MEMORY.md` file, which stays outside any leg's
+  reach (flagged for the orchestrator to relay directly, as before).
+- **181 (MOD)**, new: Xu's origin-H² invertibility holds "with a gap of 1/2 AFTER
+  MODULATION" — the modulation technique itself has never been read for what it does or
+  whether it's transferable. Scopes it directly and asks whether the same modulation move
+  could be tried against anything still alive in the `ell^1_w` line (a definitional/
+  literature question, not a new construction attempt).
+
+**Small housekeeping note, not a leg:** leg 157 (CDX)'s framing (describing itself as feeding
+leg 127's counterexample search) is still stale now that 127 proved the sharpest possible
+theorem; flagged twice already, still not worth a dedicated leg on its own — folding the
+correction into 179's bundle write-up is cheaper than a standalone fix.
 
 ---
 
@@ -4896,7 +4950,209 @@ different paper/question, though both read the same PRECEDENTS ledger read-only 
 not a collision) and from every other live/reserve leg. Immediately dispatchable.
 ```
 
-## Ranking rationale
+```
+### 176 — ROUTE-H2C: BUILD THE ORIGIN-H² CERTIFICATE AT a=0 (USER-AUTHORIZED CONSTRUCTION,
+KNOWN CEILING STATED UP FRONT)
+**Thesis.** Leg 163 (H2S) scoped origin-H² as structurally viable for a certificate — an
+explicit split, shape, and bordered formulation with no `ell^1_w`-class obstruction,
+cross-checked against Xu at residual 2.8e-14 — but flagged that everything usable depends on
+`a=0` exactness, which only re-derives a closed form Xu already gives analytically, so
+NOTHING TRANSFERS to the real (non-`a=0`) target object. The user has explicitly authorized
+building it anyway, ceiling and all. **This leg's own honest ceiling, stated before any
+computation, per this repository's standing discipline**: even a complete success is not a
+step toward the real target — it is the first constructed (not merely scoped) certificate
+outside the `ell^1_w` lane this repository has ever built, valuable as a working example of
+the OTHER lane and as infrastructure a later leg on a non-`a=0` extension could reuse or
+learn from, not as movement on L1→L4. Build the certificate per leg 163's own scoped
+split/shape, using leg 163's report as the construction spec; measure `Z_1` (or whatever
+leg-163-scoped diagnostic is the certificate's closing quantity) the same way leg 54's
+battery measured every `ell^1_w` shape, so the two lanes' outputs are directly comparable.
+**No GA compute** — construction only, deterministic, per the leg 46/59/162 precedent.
+**Gate.** Does the origin-H² certificate, built per leg 163's own scoped formulation at
+`a=0`, actually close (its diagnostic quantity crosses the threshold a certificate needs), and
+does it reproduce Xu's own closed form to the precision leg 163 already established (2.8e-14
+class)?
+  yes -> The first working non-`ell^1_w` certificate this repository has built. Report the
+         magnitudes and the construction precisely, restate the ceiling (no transfer to
+         non-`a=0`) in the same breath, and bank it as infrastructure — do not claim Clay
+         movement or imply the ceiling has lifted.
+  no  -> Report exactly which step of leg 163's scoped construction fails to close and why,
+         with magnitudes. This is still informative — it would mean origin-H²'s structural
+         viability (leg 163's finding) does not survive contact with an actual construction
+         attempt, which matters for anyone considering the same lane later. Bank it as a
+         characterized negative.
+**Territory.** solver/origin_h2_certificate.py (NEW, capabilities.py grepped first per the
+               standing ban), test_origin_h2_certificate.py (NEW),
+               experiments/p2_route_h2c_v1_construction.py,
+               experiments/p2_route_h2c_v1_construction_evidence.py,
+               writeup/data/p2_route_h2c_v1_construction.json,
+               writeup/novelty/leg_176.md, experiments/journal/leg_176.md.
+               Reads (never edits) leg 163's own report/JSON and
+               solver/spectral_certificate.py (127's territory, closed on landing, read-only
+               reference for the `ell^1_w`-lane comparison).
+**Difficulty.** heavy
+**Independence.** Sole owner of a brand-new module. Disjoint from every other live/reserve
+leg. No GA compute under any outcome. Immediately dispatchable — the user's authorization is
+the only precondition, and it has been given.
+```
+
+```
+### 177 — ROUTE-L1RH: DOES A NON-ell^1_w SPACE FIX THE COLLOCATION-BASIS L1 DEATH TOO?
+(RESERVE — blocked until leg 165's classification report lands)
+**Thesis.** Leg 127 proved the coefficient-basis L1 death (leg 54) was a property of the
+`ell^1_w` space, not the operator — origin-H² fixes it. L1 has a SECOND death certificate,
+in the collocation basis (leg 56), never tested against any alternative space. Drafted now,
+blocked on leg 165's classification (does 165 find the collocation death is
+realization-dependent or realization-invariant across everything ALREADY tried) so this leg
+does not presuppose that answer — but 165 only reads banked data, so even a "realization-
+invariant so far" finding would not rule out an entirely untested space like origin-H², which
+is exactly what this leg tests directly, once 165's report gives it the right framing to cite.
+**Gate.** Does origin-H² (or another space this leg identifies as structurally analogous, per
+leg 163's own scoping method) admit a certificate formulation for the collocation-basis
+realization of L1, and if built, does its diagnostic close?
+  yes -> A second `ell^1_w`-artifact death, doubling the evidence for the space-vs-operator
+         reframing. ESCALATE as directly bearing on the publication scoping (leg 179's
+         bundle, if not already landed).
+  no  -> The collocation death is confirmed NOT a space artifact — it survives on origin-H²
+         too (or no analogous space applies). Bank this as strengthening the "some
+         obstructions are operator-level" reading leg 165 will have already scoped.
+**Territory.** experiments/p2_route_l1rh_v1_construction.py,
+               writeup/data/p2_route_l1rh_v1_construction.json,
+               writeup/novelty/leg_177.md, experiments/journal/leg_177.md.
+               Reads leg 56's and leg 163's own reports/JSONs read-only; new construction (if
+               any) goes in a NEW module, capabilities.py grepped first.
+**Difficulty.** heavy
+**Independence.** New territory if construction is needed; reads only closed/landed legs'
+JSONs otherwise. **NOT dispatchable until leg 165 lands.**
+```
+
+```
+### 178 — ROUTE-WES: DOES A DIFFERENT SPACE SHIFT THE WEIGHTED-ENERGY ZERO-WIDTH WINDOW?
+**Thesis.** Leg 111 measured a zero-width window (damping needs gamma>3, the weighted space
+exists only for gamma<3) on ONE weighted-energy construction. Leg 141 asked only whether that
+specific coincidence is published; leg 165 only classifies using banked data. Neither
+attempts a NEW construction. This leg does: following leg 127's playbook directly — the same
+operator, a genuinely different space/weight-class than leg 111's — does the coincidence
+persist, or is it (like the `ell^1_w` obstruction) a property of leg 111's specific
+construction rather than the operator? Pre-name the alternative space/weight-class family in
+the driver before any computation, per the leg-111 pre-naming discipline.
+**Gate.** For at least one pre-named alternative weighted-energy construction (different from
+leg 111's), is the measured coercivity gap positive and grid-stable across two refinements,
+outside the gamma>3-needs/gamma<3-exists coincidence?
+  yes -> The zero-width window is a construction artifact, not an operator fact — a genuine
+         third-realization revival. ESCALATE to the user; do not build further under this
+         leg's own authority.
+  no  -> The coincidence persists under a second, independently-chosen construction,
+         strengthening (not just repeating) leg 111's finding toward an operator-level fact.
+         Bank it.
+**Territory.** solver/energy_coercivity.py (append-only, new construction added alongside
+               leg 111's, existing functions untouched), experiments/p2_route_wes_v1_space.py,
+               writeup/data/p2_route_wes_v1_space.json,
+               writeup/novelty/leg_178.md, experiments/journal/leg_178.md
+**Difficulty.** heavy
+**Independence.** Append-only on a module leg 111 (landed, closed) owns solely; no other live
+leg touches it. No GA compute. Independent of 165/177 (different degrees of freedom).
+Immediately dispatchable.
+```
+
+```
+### 179 — ROUTE-PUB1: THE COMBINED METHODOLOGICAL NOTE — EXPONENT-SUM CONSERVATION LAW +
+DISCRETE-BALL TRAP + THE A21 INEQUALITY (NOW LEG 127's SHARPER FORM) + THE CLOSURE AUDIT
+(user-review action item #6, unblocked now that 161/162 have landed)
+**Thesis.** The strategic review recommended bundling leg 58's publication scoping as ONE
+section of a combined methodological note rather than standalone, deferred until 161 and 162
+landed so the note's content wouldn't be written ahead of what they found. Both have landed.
+Bundle: (i) the exponent-sum conservation law (leg 65's L1G lane), (ii) the discrete-ball trap
+(also leg 65), (iii) the `A21` inequality in its CURRENT, correct form — leg 127's
+`Z_1 >= 1` for every bounded `A`, superseding leg 58's narrower `A21=0`-only statement, with
+the supersession stated explicitly so nobody reads the note as citing the weaker result — and
+(iv) leg 126's closure audit (stage B's declared search space, fully covered). Fold in leg
+161's finding on whether LSS accounts for `alpha(1/2)=3`/`a_c`, and leg 162's parked,
+ambiguous compact-support corner finding, each exactly as landed, no softening or
+strengthening of either. Also corrects leg 157's stale framing (still describing itself as
+feeding leg 127's now-closed counterexample search) as a small, explicitly-flagged
+housekeeping note within the bundle, not a separate leg.
+**Gate.** Does the combined note state all four bundled results (plus 161's and 162's
+findings) accurately, with leg 58's superseded status and leg 162's honest ambiguity both
+stated explicitly, and does it correct leg 157's stale framing note?
+  yes -> Bank the combined note as the current publication-scoping draft; flag it to the user
+         as ready for their own review, not as something this leg's landing itself approves.
+  no  -> Report exactly which bundled claim doesn't reproduce from its own banked source;
+         escalate rather than silently soften it — a publication-scoping note that misstates
+         a banked result is exactly the kind of drift this repository's own discipline exists
+         to catch.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB1_V1.md (NEW),
+               writeup/4_p2_lottery/BLOG_P2_PUB1_V1.md (NEW),
+               writeup/novelty/leg_179.md, experiments/journal/leg_179.md.
+               Reads (never edits under this leg) legs 58/65/126/127/157/161/162's own
+               banked JSONs and reports. Corrects leg 157's writeup file's framing note
+               ONLY (a sentence-level fix, not a re-litigation of its finding).
+**Difficulty.** standard
+**Independence.** New writeup files; the one existing-file touch (157's framing note) is a
+narrow, explicitly-scoped correction, not a re-opening. Disjoint from every other live/reserve
+leg. Immediately dispatchable.
+```
+
+```
+### 180 — ROUTE-TSR: TWO-SCALE a* SCOPE-LINE CORRECTION (in-repo half of user-review action
+item #5, unblocked now that 161/162 have landed)
+**Thesis.** The strategic review's own independent check found a domain mismatch, not a wrong
+number: published literature (`arXiv:2603.25104`) states the two-scale scenario governs
+`a<=0`, while this repository's banked `a*~0.5-0.55` survival boundary was measured at
+`a>0`. Deferred until 161/162 landed so this leg's correction could be informed by whatever
+either found about the domain's boundaries; neither changed the `a*` finding itself, so the
+correction is exactly the one the review specified. Corrects `writeup/` and
+`PHASE2_P2_NOTES.md`'s scope-line language to state the domain precisely — re-framing, not
+withdrawing, per the review's own instruction. Does NOT touch the user's personal `MEMORY.md`
+file (outside any leg's or this DM's file access; the orchestrator relays that correction
+directly, as already noted in Status).
+**Gate.** Does every `writeup/` and `PHASE2_P2_NOTES.md` passage describing the `a*~0.5-0.55`
+survival boundary now state its measured domain (`a>0`) precisely, without asserting or
+implying the two-scale SCENARIO (which the literature scopes to `a<=0`) governs it?
+  yes -> Bank the corrected scope lines; the `a*` finding itself is untouched, only its
+         framing relative to the two-scale literature is sharpened.
+  no  -> Report exactly which passage still overclaims; this is a mechanical correction on
+         the leg 65 annotation-fix precedent, so a clean pass is expected, but report
+         honestly if one is missed.
+**Territory.** `writeup/` files describing the two-scale `a*` result (located by this leg,
+               grepped for the claim), `PHASE2_P2_NOTES.md` (scope-line sentences only),
+               writeup/novelty/leg_180.md, experiments/journal/leg_180.md. No solver module.
+**Difficulty.** light
+**Independence.** Prose-only, no solver module, no banked number changed. Disjoint from 179
+(different files — 179 writes NEW note files, 180 edits EXISTING scope lines). Immediately
+dispatchable.
+```
+
+```
+### 181 — ROUTE-MOD: WHAT DOES XU's "GAP OF 1/2 AFTER MODULATION" ACTUALLY REQUIRE, AND IS
+THE MODULATION TECHNIQUE TRANSFERABLE?
+**Thesis.** Legs 127/163 use Xu's origin-H² invertibility result but have only ever cited its
+headline (gap 1/2 "after modulation") without reading what the modulation technique itself
+does. This leg reads it directly: what is being modulated, what does the technique cost
+(additional hypotheses, a restricted sub-class, extra computational machinery), and — the
+genuinely new question — could the SAME modulation move be applied within the `ell^1_w` line,
+where leg 127 proved `Z_1 >= 1` unconditionally (no modulation involved in that proof)? If
+modulation is a general technique for improving spectral gaps, it is worth knowing whether it
+was even applicable there, even though leg 127's result is already the sharpest possible
+UNMODULATED statement.
+**Gate.** Does Xu's modulation technique, read at full-text depth, apply (as stated, or via a
+straightforward adaptation) to any operator/space combination this repository has already
+built, beyond origin-H²?
+  yes -> Name the target and what modulation would require precisely. ESCALATE as a
+         candidate scoping question for a later leg — do not build or test it here.
+  no  -> Modulation is confirmed specific to origin-H²'s own structure (or to a class this
+         repository's operator does not fall in for other reasons). Bank the ledger entry.
+**Territory.** experiments/p2_route_mod_v1_lit.py, writeup/data/p2_route_mod_v1_lit.json,
+               writeup/novelty/leg_181.md, experiments/journal/leg_181.md.
+               Reads Xu arXiv:2607.19762 and solver/spectral_certificate.py (127's territory,
+               closed on landing, read-only).
+**Difficulty.** light
+**Independence.** Literature-only plus read-only reference. Disjoint from 171/173 (different
+questions about the same paper — 171 asks about OTHER spaces Xu covers, 173 asks about Xu's
+certification METHOD generally, this asks specifically about the modulation technique).
+Immediately dispatchable.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
