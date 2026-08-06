@@ -1,26 +1,28 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-06, mid-cycle, after leg 60 landed and the pool was refilled to 9/10.*
+*Refreshed 2026-08-06, ~10:35 UTC, after a high-throughput cycle: 9 legs + 2 bench-repairs
+landed, pool refilled to 10/10 each time.*
 
 ## ⚠ NEEDS YOU
 
-1. **Nothing blocking right now.** Both prior escalations are in motion: leg 60 (PQ) is
-   resolved and landed; leg 63 (M2) is being scoped by a fresh Decision Maker per the user's
-   steer, with a promotion leg (125) to follow.
+1. **Nothing blocking right now.** All escalations this cycle (leg 116/NKA, leg 120/SUA)
+   are latent-only — no banked result affected, gate says escalate-don't-patch, and that's
+   done. Leg 120 also flagged a candidate shared-guard repair (nk_bounds.py +
+   port_certification.py + interval_certificate.py all had the same Y0/Z0/Z1 nonnegativity
+   gap, two of three already fixed) — noted for the DM's next queue pass, not urgent.
 2. **What is the exit criterion for this project?** Still open, still not urgent.
 
 ## Now
 
-- Timestamp: 2026-08-06
-- `main` SHA: `e0eba8e`
+- `main` SHA: `fb61a79`
 - Stop files: none present
-- 9 of 10 leg slots filled (58, 62, 110, 111, 112, 113, 114, 116, 120), 4 bench agents
-  (red-test investigation; repairs for holder_norms.py, op_lower.py, first_integral.py), 1
-  Decision Maker working the M2 pursuit scoping. Slot 10 opens once the DM drafts leg 125.
-- This cycle: leg 60 landed with a user-approved correction (3 non-ban-bearing discrepancies
-  fixed, both ban-bearing numbers confirmed exact); 3 stale PRs closed after empirical
-  verification that their findings were already fixed on `main`; a heartbeat mechanism
-  (`ORCHESTRATION.md` §9f) was added after an earlier batch of 13 agents was lost to an
-  apparent session-idle interruption, and is now covering the current pool.
+- 10/10 leg slots filled (58, 114, 125 continuing; 104, 105, 115, 117, 118, 119, 121 freshly
+  dispatched this cycle). 2 bench agents live (red-test Newton item 6; first_integral
+  bench-repair for leg 107).
+- This cycle: legs 113 (MS, NO), 116 (NKA, YES-latent, escalated not patched), 120 (SUA,
+  YES-latent, escalated not patched), 111 (WE, NO), 103 (GLB, YES — leg 92's repair
+  confirmed solid), 62 (CP, NO — closes NG's Cadiot scoping question) all landed clean, plus
+  bench-repairs for leg 100 (holder_norms.py, PR #16 closed as superseded) and leg 101
+  (op_lower.py). No user decision needed on any of it.
 
 Full detail: `PROGRESS.md` (git-ignored, live), `reports/ORCH_STATE.md`, and `DIRECTION.md`.
