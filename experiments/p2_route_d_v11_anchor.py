@@ -173,18 +173,41 @@ def v5_budget(v2, v4):
             if r["relres"] < 1e-8 and r["a"] <= a_max + 1e-12]
     wd = [r["weighted_defect"] for r in good]
     best = min(wd) if wd else float("inf")
+    worst = max(wd) if wd else float("inf")
+    # The budget condition Y0 <= Y0_max is a UNIVERSAL statement over the a-range
+    # this block declares it on ("for a < a*"), so the margin that certifies it is
+    # the WORST-CASE one: Y0_max / max(weighted_defect).  Building it from the min
+    # certifies nothing -- it reports the most favourable row of a set the claim
+    # quantifies over.  The min is kept, clearly named, as the best-row diagnostic.
+    over = [{"a": r["a"], "weighted_defect": r["weighted_defect"],
+             "violation_x": r["weighted_defect"] / Y0_MAX}
+            for r in good if r["weighted_defect"] > Y0_MAX]
+    under = [r["weighted_defect"] for r in good
+             if r["weighted_defect"] <= Y0_MAX]
     return {"Y0_max_from_v10": Y0_MAX,
             "GA_floor_rms": GA_FLOOR,
             "a_range_used": a_max,
+            "n_good_rows": len(good),
             "newton_weighted_defect_min": best,
-            "newton_weighted_defect_max": max(wd) if wd else None,
-            "margin": Y0_MAX / best if best > 0 else float("inf"),
+            "newton_weighted_defect_max": worst,
+            "margin": Y0_MAX / worst if worst > 0 else float("inf"),
+            "margin_selection": "worst-case: Y0_max / newton_weighted_defect_max",
+            "margin_at_best_row": Y0_MAX / best if best > 0 else float("inf"),
+            "budget_holds_uniformly": not over,
+            "rows_over_budget": over,
+            "worst_violation_x": (max(o["violation_x"] for o in over)
+                                  if over else None),
+            "margin_over_rows_within_budget": (Y0_MAX / max(under)
+                                               if under else None),
             "reading": "the budget condition is Y0 <= Y0_max.  Every earlier leg "
                        "compared 1e-2 against 2.45e-4 and concluded the profile "
                        "was ~40x too poor.  With Newton the weighted defect of "
-                       "the discrete profile is many orders BELOW the budget, so "
-                       "the profile's defect is no longer the binding constraint "
-                       "-- for a < a*.  What binds instead is the three unpriced "
+                       "the discrete profile is many orders BELOW the budget on "
+                       "most of the range but NOT uniformly (see rows_over_budget "
+                       "-- the margin above is worst-case, per leg 247), so the "
+                       "profile's defect stops being the binding constraint only "
+                       "where the budget actually holds.  What binds instead is "
+                       "the three unpriced "
                        "Z1 items, which is a different and more tractable "
                        "problem than 'find a better profile'.  CAREFUL: this is "
                        "the defect of the DISCRETE profile in the ROUTE-A "
@@ -236,8 +259,16 @@ def main():
           % (v3["last_machine_precision_a"],
              data["v4_grids"]["grid_converged_a_max"], v3["GA_boundary"]))
     b = data["v5_budget"]
-    print("  V5  weighted defect %.1e vs budget %.1e -- margin %.0fx"
-          % (b["newton_weighted_defect_min"], b["Y0_max_from_v10"], b["margin"]))
+    print("  V5  weighted defect (worst of %d good rows) %.4e vs budget %.2e "
+          "-- worst-case margin %.4gx (best row %.4e, margin %.4gx)"
+          % (b["n_good_rows"], b["newton_weighted_defect_max"],
+             b["Y0_max_from_v10"], b["margin"],
+             b["newton_weighted_defect_min"], b["margin_at_best_row"]))
+    if b["rows_over_budget"]:
+        print("      NOT uniform: %d row(s) over budget -- %s"
+              % (len(b["rows_over_budget"]),
+                 ", ".join("a=%.2f by %.2fx" % (o["a"], o["violation_x"])
+                           for o in b["rows_over_budget"])))
     print("\n[done] wrote %s" % OUT)
 
 

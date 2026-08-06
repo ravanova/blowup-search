@@ -1,0 +1,1181 @@
+{
+  "meta": {
+    "leg": "P2 Route-VBR v1 (leg 247): repair of Route-D v11 v5_budget's min/max selection, per leg 235's diagnosis",
+    "tier": "repair + regression -- no new mathematics",
+    "reproduce": "python experiments/p2_route_vbr_v1_repair.py",
+    "repairs": "experiments/p2_route_d_v11_anchor.py :: v5_budget",
+    "diagnosed_by": "leg 235 (Route-CDAP), branch leg/235-cdap-v1",
+    "gate": "Does using the correct selection (per leg 235's own diagnosis) for v5_budget's margin computation at a=0.45 bring the block back within its own declared Y0 budget, and does re-running the other 195 banked JSONs confirm they remain unaffected (matching leg 235's own 0/195 isolation finding)?"
+  },
+  "r1_corrected_block": {
+    "banked": {
+      "Y0_max_from_v10": 0.000245,
+      "a_range_used": 0.5,
+      "newton_weighted_defect_min": 2.340496906495767e-14,
+      "newton_weighted_defect_max": 0.015195816195658364,
+      "margin": 10467862585.933441
+    },
+    "corrected": {
+      "Y0_max_from_v10": 0.000245,
+      "GA_floor_rms": 0.01,
+      "a_range_used": 0.5,
+      "n_good_rows": 11,
+      "newton_weighted_defect_min": 2.340496906495767e-14,
+      "newton_weighted_defect_max": 0.015195816195658364,
+      "margin": 0.016122858874141922,
+      "margin_selection": "worst-case: Y0_max / newton_weighted_defect_max",
+      "margin_at_best_row": 10467862585.933441,
+      "budget_holds_uniformly": false,
+      "rows_over_budget": [
+        {
+          "a": 0.45,
+          "weighted_defect": 0.015195816195658364,
+          "violation_x": 62.02373957411577
+        }
+      ],
+      "worst_violation_x": 62.02373957411577,
+      "margin_over_rows_within_budget": 10.655996808538774
+    },
+    "good_rows": [
+      {
+        "a": 0.0,
+        "relres": 9.71364255399854e-15,
+        "weighted_defect": 2.0404871804230019e-10,
+        "row_margin": 1200693.649784217,
+        "within_budget": true
+      },
+      {
+        "a": 0.05,
+        "relres": 8.228304860678187e-14,
+        "weighted_defect": 2.4736761103063177e-09,
+        "row_margin": 99042.87751303925,
+        "within_budget": true
+      },
+      {
+        "a": 0.1,
+        "relres": 8.80510887890354e-15,
+        "weighted_defect": 2.340496906495767e-14,
+        "row_margin": 10467862585.933441,
+        "within_budget": true
+      },
+      {
+        "a": 0.15,
+        "relres": 3.5459813222820815e-14,
+        "weighted_defect": 8.957136730252033e-08,
+        "row_margin": 2735.2490799044244,
+        "within_budget": true
+      },
+      {
+        "a": 0.2,
+        "relres": 2.6604720377084077e-14,
+        "weighted_defect": 1.0825507624473443e-08,
+        "row_margin": 22631.73317121163,
+        "within_budget": true
+      },
+      {
+        "a": 0.25,
+        "relres": 2.1068009284589843e-14,
+        "weighted_defect": 1.287720593592463e-07,
+        "row_margin": 1902.5866420020727,
+        "within_budget": true
+      },
+      {
+        "a": 0.3,
+        "relres": 1.5839384616083975e-13,
+        "weighted_defect": 2.1678555931462193e-07,
+        "row_margin": 1130.149078077799,
+        "within_budget": true
+      },
+      {
+        "a": 0.35,
+        "relres": 6.407111953361836e-12,
+        "weighted_defect": 2.299174862774721e-05,
+        "row_margin": 10.655996808538774,
+        "within_budget": true
+      },
+      {
+        "a": 0.4,
+        "relres": 9.604316741393971e-15,
+        "weighted_defect": 2.3745410710865122e-08,
+        "row_margin": 10317.783212227027,
+        "within_budget": true
+      },
+      {
+        "a": 0.45,
+        "relres": 1.6005288648836091e-09,
+        "weighted_defect": 0.015195816195658364,
+        "row_margin": 0.016122858874141922,
+        "within_budget": false
+      },
+      {
+        "a": 0.5,
+        "relres": 1.955004123530594e-14,
+        "weighted_defect": 7.452803361201188e-07,
+        "row_margin": 328.73536054292555,
+        "within_budget": true
+      }
+    ],
+    "margin_change_x": 1.5402245436243672e-12,
+    "reading": "the selection change moves the headline margin from 1.04679e+10 (min-selected, meaningless as a certificate) to 0.0161229 (worst-case).  A margin < 1 IS the budget violation: the corrected number does not clear the budget, it quantifies by how much one row misses it."
+  },
+  "r3_regression": {
+    "json_files_screened": 196,
+    "json_files_unreadable": [],
+    "dicts_walked": 25598,
+    "minmax_sibling_pairs_seen": 187,
+    "files_affected": 0,
+    "affected": [],
+    "excluded_from_denominator": [
+      "p2_route_d_v11_anchor.json",
+      "p2_route_vbr_v1_repair.json"
+    ],
+    "positive_control": {
+      "on": "p2_route_d_v11_anchor.json :: v5_budget (BANKED, pre-repair)",
+      "fired": true,
+      "hit": {
+        "path": "/v5_budget",
+        "stem": "newton_weighted_defect",
+        "headline_key": "margin",
+        "headline_value": 10467862585.933441,
+        "favourable_end": 2.340496906495767e-14,
+        "unfavourable_end": 0.015195816195658364,
+        "budget_key": "Y0_max_from_v10",
+        "budget_value": 0.000245,
+        "violation_x": 62.02373957411577,
+        "headline_if_corrected": 0.016122858874141922
+      }
+    },
+    "per_file": [
+      {
+        "file": "bench_boussinesq_silent_corruption_check.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "bench_first_integral_support_guard_check.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "bench_holder_norms_nan_guard_check.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "bench_target_norm_domain_guard_check.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "blowup_curve.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "ga_vs_random.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "leg_54_verify_headline.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "nongenericity.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_conj24_relax.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_ga_framework.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_hl_anchor.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_literature_scope.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_regular_profile.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_regular_profile_traj.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_a12_v1_alpha_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_as2_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_asa_v1_adversarial.json",
+        "minmax_pairs": 4,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bdx_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bhn_v1_adversarial.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bhr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_boa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bob_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_brs_v1_status_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bv_v1_velocity_benchmark.json",
+        "minmax_pairs": 11,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bva_v1_adversarial.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bvb_v1_postrepair.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_bx_v1_stageb.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_c_pilot_v0.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cap_v1_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cda_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cdb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cdr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cdx_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cna_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cnb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cnr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cns2_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_cp_v1_cadiot.json",
+        "minmax_pairs": 12,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_csa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_csd_v1_definitional.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_dress.json",
+        "minmax_pairs": 26,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_probe.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v10_lower.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v12_defect.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v13_turning.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v14_first_integral.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v16_rehearsal.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v3_spaces.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v4_graded.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v5_holder.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v6_bounds.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v7_seminorm.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v8_quadratic.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_d_v9_sharpen.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dca_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dcb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dcr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dfl2_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dga_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_dpa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_e_v1_spectrum.json",
+        "minmax_pairs": 6,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_eca_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_egml_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext2_v1_target_watch2.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext3_v1_target_watch3.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext4_v1_target_watch4.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext5_v1_target_watch5.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext6_v1_target_watch6.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ext_v1_target_watch.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_f_v1_viscosity.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fd_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fga_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fgb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fia_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fib_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_fsa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_g_v1_collapse.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_g_v1_g2.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_gbw_v1_banwording.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_gca_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_gla_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_glb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_gra_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_gsa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_h2c_v1_construction.json",
+        "minmax_pairs": 8,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_h2i_v1_scoping.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_h_v1_critical.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hha_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hhb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hhr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hlb_v1_contraction_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hna_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hnb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hpa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hpr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hra_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hrb_v1_postrepair.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_hrr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_i_v1_driven.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ia_v1_interval_stress.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ica_v1_adversarial.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_icb_v1_postrepair.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ivb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ix3_v1_index_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ix4_v1_index_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_j_v1_literature.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_jr3_v1_journal_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_jr4_v1_journal_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_k_v1_port.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ka_v1_kawahara.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l1_v1_interval.json",
+        "minmax_pairs": 4,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l1_v2_spectral.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l1g_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l1r_v1_repro.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l1rh_v1_construction.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_l_v1_precond.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_lga_v1_ledger.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_lha_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_lss_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_m2ci_v1_construction.json",
+        "minmax_pairs": 2,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_m2cv_v1_postconstruction.json",
+        "minmax_pairs": 4,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_m2p_v1_promotion.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_m2sd_v1_diagnostic.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_m_v1_targets.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_mf2_v1_residual.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_mfg_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_mm_v1_shape.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_mod_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ms_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nb_v1_targetnorm.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nfa_v1_adversarial.json",
+        "minmax_pairs": 13,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ng_v1_nogo.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ngx_v1_general.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nka_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nkb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nkr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_nsa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ola_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_ola_v1_bench_check.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_olb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pc_v1_regression.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pcb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pcro_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pcrs_v1_verification.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pgf_v1_ledger_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_port_v1_bordered.json",
+        "minmax_pairs": 31,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_port_v2_reach.json",
+        "minmax_pairs": 5,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_pqver_v1_verification.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_rca_v1_adversarial.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_sdm_v1_mapping.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_sirc_v1_census.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_sua_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_t_v1_border.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tc_v1_assemble.json",
+        "minmax_pairs": 20,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tn_v1_consistency.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tna_v1_domain_audit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tnb_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tnr_v1_repair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tnrv_v1_postrepair.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_tpa_v1_adversarial.json",
+        "minmax_pairs": 4,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_usc2_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_usc2v_v1_verification.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_usc3_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_usc_v1_scoping.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_v_v0_novelty.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_vbs_v1_scoping.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_vna_v1_adversarial.json",
+        "minmax_pairs": 1,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_vnl_v1_ledger.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_w2l_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_we_v1_coercivity.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_wel_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_wex_v1_lit.json",
+        "minmax_pairs": 7,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_wsa_v1_adversarial.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_wvr_v1_fitness.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_xs_v1_shapes.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_xu8_v1_novelty.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_xul_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_xum_v1_scoping.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_route_xutri_v1_lit.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_scenario2_relax.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_two_scale_kladder.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_two_scale_sweep.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_weight_repairs_v1.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "p2_weight_repairs_v2.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "phase1_axis_screen.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "phase1_gate4.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "phase1_gate4_reform.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "phase1_gsustained.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "phase1_spike.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "spike0_rescaling.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "spike1_stepA_velocity.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "spike1_stepB_rescaled.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "spike1_stepC_gate.json",
+        "minmax_pairs": 8,
+        "hits": 0
+      },
+      {
+        "file": "stage3_6_rough.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "stage3_resolution.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      },
+      {
+        "file": "summary_metrics.json",
+        "minmax_pairs": 0,
+        "hits": 0
+      }
+    ],
+    "reading": "the control fires on the banked pre-repair block, so a null elsewhere is a measurement and not a broken instrument.  The named limit, restated from leg 235: this rule can only speak about dicts that actually carry a _min/_max sibling pair AND a budget-named sibling in the SAME record.  It is silent about, not clearing, every other shape."
+  },
+  "r2_resolve": {
+    "rows": [
+      {
+        "a": 0.4,
+        "n": 801,
+        "relres": 1.1201045820891197e-14,
+        "iterations": 7,
+        "c": 0.6065912092972086,
+        "weighted_defect": 2.3761617487735334e-08,
+        "banked_weighted_defect": 2.3745410710865122e-08,
+        "rel_difference_vs_bank": 0.0006825224910848112,
+        "violation_x_fresh": 9.698619382749116e-05,
+        "seconds": 33.52889084815979
+      },
+      {
+        "a": 0.45,
+        "n": 801,
+        "relres": 1.6136332491369584e-09,
+        "iterations": 40,
+        "c": 0.6212129177904757,
+        "weighted_defect": 0.015320233103213909,
+        "banked_weighted_defect": 0.015195816195658364,
+        "rel_difference_vs_bank": 0.008187576498266184,
+        "violation_x_fresh": 62.53156368658738,
+        "seconds": 245.496967792511
+      },
+      {
+        "a": 0.5,
+        "n": 801,
+        "relres": 8.040727121501696e-14,
+        "iterations": 11,
+        "c": 0.6360397157621205,
+        "weighted_defect": 7.452777847929075e-07,
+        "banked_weighted_defect": 7.452803361201188e-07,
+        "rel_difference_vs_bank": 3.423312125189082e-06,
+        "violation_x_fresh": 0.0030419501420118674,
+        "seconds": 58.99997806549072
+      }
+    ],
+    "reading": "a fresh Newton solve on the same discrete system.  The a = 0.45 defect is not a stale bank: it reproduces, and it is ~6 decades above both neighbours, which is why the min-selection hid it so completely."
+  },
+  "gate": {
+    "clause_1_a045_within_budget": false,
+    "clause_1_detail": "corrected worst-case margin 0.0161229 (< 1 means the budget is MISSED); a = 0.45 misses it by 62.0237x",
+    "clause_2_others_unaffected": true,
+    "clause_2_detail": "0 of 196 other banked JSONs affected",
+    "answer": "NO",
+    "reading": "the gate is a conjunction and clause 1 decides it.  The repair is correct and lands the right number; the number it lands is a budget MISS, so the block does not come back within its own budget -- it is not a failure of the repair, it is the repair reporting what was always true."
+  }
+}
