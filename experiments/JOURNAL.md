@@ -3453,3 +3453,20 @@ preempted agents had reached a landing.
   three have margin exactly 0.0 -- correct only by a hardcoded literal and a
   caller convention, nothing enforcing either. Ready-to-apply correction banked
   for leg 217's own eventual landing commit.
+- **Leg 218 (Route-BHR) — YES on both clauses, LANDED:** repairs this cycle's
+  single highest-blast-radius latent defect (leg 198's negative-border-weight
+  acceptance in bordered_hl.py). Corrected the dispatch's own caller-set premise
+  (legs 54/58/127 don't import this module; real live callers are port_v1/v2,
+  l1_v1, l1rh_v1) and leg 198's own predicate ("zero weights are rejected" is
+  false at the mechanism site -- it's a silent +inf, not a ZeroDivisionError).
+  Adopted predicate np.all(isfinite(w) & (w>0)). Found a NEW in-kind extension:
+  +inf weights silently understate a norm by 33.7x. ONE CORRECTION TO LEG 198's
+  DIAGNOSTIC, NOT ITS VERDICT: the two Z_1 ratios don't reproduce exactly
+  (2.287e8 vs 1.198e9, 5.24x; 1.505e12 vs 2.651e12, 1.76x) because Z_1 sits at
+  the round-off floor (lesson 86) -- the verdict is robust, the ratio is
+  environment-dependent. 0 banked numbers at risk.
+- **Leg 227 (Route-EGMT) — YES, LANDED:** the tense-fix for leg 213's cosmetic
+  finding. EGM_PRIMARY_READ's sign_correction_leg_190 field now records leg
+  214's repair instead of asserting an outstanding defect. Diff is 5
+  deletions/11 insertions inside one string literal, every sibling field
+  byte-for-byte unchanged, 0 banked numbers/verdicts move.
