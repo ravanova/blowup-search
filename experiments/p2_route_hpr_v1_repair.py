@@ -155,23 +155,40 @@ def failing_configurations(pre):
             inflated = _call(pre, kwargs, "inflate", HP)
             row["inflate_pair"] = [float(x) for x in inflated]
 
-            # the domination check itself, against leg 106's step adversary
+            # The domination check itself, against leg 106's step adversary.  The
+            # adversary's norms must be read at the SAME gamma the pair was computed
+            # at -- substituting the shipped gamma into the norms of a gamma = 0 bound
+            # silently understates the ratio by ~5 orders of magnitude.  When gamma is
+            # non-finite the pair (S, T) has no referent at all, so the ratio is
+            # recorded as null rather than bounded (lesson 73).
             gamma = kwargs.get("gamma", GAMMA)
-            ratios_pre, ratios_post = {}, {}
-            for delta in (1e-10, 1e-20, 1e-50):
-                g = gamma if (np.isfinite(gamma) and gamma > 0) else GAMMA
-                S, T = step_norms(THETA, delta, gamma=g)
-                psi = abs(psi_of_step(THETA, delta))
-                dpre = pre_pair[0] * S + pre_pair[1] * T
-                dpost = inflated[0] * S + inflated[1] * T
-                ratios_pre["delta=%g" % delta] = float(psi / dpre) if dpre > 0 else np.inf
-                ratios_post["delta=%g" % delta] = (
-                    float(psi / dpost) if np.isfinite(dpost) and dpost > 0 else 0.0)
-            row["step_ratio_pre_repair"] = ratios_pre
-            row["step_ratio_after_inflate"] = ratios_post
-            row["pre_repair_max_ratio"] = max(ratios_pre.values())
-            row["inflate_max_ratio"] = max(ratios_post.values())
-            row["inflate_dominates"] = bool(row["inflate_max_ratio"] <= 1.0)
+            row["norms_read_at_gamma"] = float(gamma) if np.isfinite(gamma) else None
+            if not np.isfinite(gamma):
+                row["step_ratio_pre_repair"] = None
+                row["step_ratio_after_inflate"] = None
+                row["pre_repair_max_ratio"] = None
+                row["inflate_max_ratio"] = None
+            else:
+                ratios_pre, ratios_post = {}, {}
+                for delta in (1e-10, 1e-20, 1e-50):
+                    S, T = step_norms(THETA, delta, gamma=gamma)
+                    psi = abs(psi_of_step(THETA, delta))
+                    dpre = pre_pair[0] * S + pre_pair[1] * T
+                    dpost = inflated[0] * S + inflated[1] * T
+                    ratios_pre["delta=%g" % delta] = (
+                        float(psi / dpre) if dpre > 0 else np.inf)
+                    ratios_post["delta=%g" % delta] = (
+                        float(psi / dpost) if np.isfinite(dpost) and dpost > 0 else 0.0)
+                row["step_ratio_pre_repair"] = ratios_pre
+                row["step_ratio_after_inflate"] = ratios_post
+                row["pre_repair_max_ratio"] = max(ratios_pre.values())
+                row["inflate_max_ratio"] = max(ratios_post.values())
+            # `inflate` dominates trivially here: the head is unbounded on every one of
+            # these configurations, so the honest dominating value is +inf.  Recorded as
+            # such rather than dressed up as a bound anyone would want.
+            row["inflate_is_infinite"] = bool(not np.all(np.isfinite(inflated)))
+            row["inflate_dominates"] = bool(
+                row["inflate_is_infinite"] or row["inflate_max_ratio"] <= 1.0)
 
             # extrapolate keeps leg 106's measurement runnable, and says so
             with warnings.catch_warnings(record=True) as caught:
@@ -295,8 +312,11 @@ def main():
         "A_v1_all_raise": all(r["raises"] for r in v1),
         "A_v2_all_raise": all(r["raises"] for r in v2),
         "A_all_inflate_dominate": all(r["inflate_dominates"] for r in fails),
-        "A_worst_pre_repair_step_ratio": max(r["pre_repair_max_ratio"] for r in fails),
-        "A_worst_post_inflate_step_ratio": max(r["inflate_max_ratio"] for r in fails),
+        "A_worst_pre_repair_step_ratio": max(r["pre_repair_max_ratio"] for r in fails
+                                             if r["pre_repair_max_ratio"] is not None),
+        "A_worst_post_inflate_step_ratio": max(r["inflate_max_ratio"] for r in fails
+                                               if r["inflate_max_ratio"] is not None),
+        "A_all_inflate_are_infinite": all(r["inflate_is_infinite"] for r in fails),
         "C_other_inputs": silent,
         "D_residual_band_not_rejected": band,
         "E_predicate_census": census,

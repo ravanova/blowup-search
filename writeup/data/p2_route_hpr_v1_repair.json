@@ -114,6 +114,7 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": 0.5,
       "step_ratio_pre_repair": {
         "delta=1e-10": 0.5267343448436457,
         "delta=1e-20": 1.026944028090569,
@@ -126,6 +127,7 @@
       },
       "pre_repair_max_ratio": 2.5275730767733466,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -145,6 +147,7 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": 0.5,
       "step_ratio_pre_repair": {
         "delta=1e-10": 0.5267343448436457,
         "delta=1e-20": 1.026944028090569,
@@ -157,6 +160,7 @@
       },
       "pre_repair_max_ratio": 2.5275730767733466,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -176,6 +180,7 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": 0.5,
       "step_ratio_pre_repair": {
         "delta=1e-10": 9.108748826449304e-05,
         "delta=1e-20": 1.7757562123793856e-09,
@@ -188,6 +193,7 @@
       },
       "pre_repair_max_ratio": 9.108748826449304e-05,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -207,6 +213,7 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": 0.5,
       "step_ratio_pre_repair": {
         "delta=1e-10": 0.5267343448436457,
         "delta=1e-20": 1.026944028090569,
@@ -219,6 +226,7 @@
       },
       "pre_repair_max_ratio": 2.5275730767733466,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -238,18 +246,20 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": 0.0,
       "step_ratio_pre_repair": {
-        "delta=1e-10": 1.107771814380162e-05,
-        "delta=1e-20": 2.159607997502734e-10,
-        "delta=1e-50": 5.315723648041366e-25
+        "delta=1e-10": 1.0376808034099816,
+        "delta=1e-20": 2.023107311224268,
+        "delta=1e-50": 4.979386832582854
       },
       "step_ratio_after_inflate": {
         "delta=1e-10": 0.0,
         "delta=1e-20": 0.0,
         "delta=1e-50": 0.0
       },
-      "pre_repair_max_ratio": 1.107771814380162e-05,
+      "pre_repair_max_ratio": 4.979386832582854,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -269,18 +279,20 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": -0.5,
       "step_ratio_pre_repair": {
-        "delta=1e-10": 0.00010109630790063759,
-        "delta=1e-20": 1.971228516225709e-09,
-        "delta=1e-50": 4.8520407731889625e-24
+        "delta=1e-10": 0.5374575337931776,
+        "delta=1e-20": 1.0478504203955505,
+        "delta=1e-50": 2.579029079123138
       },
       "step_ratio_after_inflate": {
         "delta=1e-10": 0.0,
         "delta=1e-20": 0.0,
         "delta=1e-50": 0.0
       },
-      "pre_repair_max_ratio": 0.00010109630790063759,
+      "pre_repair_max_ratio": 2.579029079123138,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -300,18 +312,20 @@
         Infinity,
         Infinity
       ],
+      "norms_read_at_gamma": -1e-12,
       "step_ratio_pre_repair": {
-        "delta=1e-10": 1.1077718143681347e-05,
-        "delta=1e-20": 2.1596079974792867e-10,
-        "delta=1e-50": 5.315723647983652e-25
+        "delta=1e-10": 1.0376808033987153,
+        "delta=1e-20": 2.023107311202303,
+        "delta=1e-50": 4.979386832528792
       },
       "step_ratio_after_inflate": {
         "delta=1e-10": 0.0,
         "delta=1e-20": 0.0,
         "delta=1e-50": 0.0
       },
-      "pre_repair_max_ratio": 1.1077718143681347e-05,
+      "pre_repair_max_ratio": 4.979386832528792,
       "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -331,18 +345,12 @@
         Infinity,
         Infinity
       ],
-      "step_ratio_pre_repair": {
-        "delta=1e-10": 0.007936681232895086,
-        "delta=1e-20": 1.5709004522775897e-07,
-        "delta=1e-50": 3.8666618980305045e-22
-      },
-      "step_ratio_after_inflate": {
-        "delta=1e-10": 0.0,
-        "delta=1e-20": 0.0,
-        "delta=1e-50": 0.0
-      },
-      "pre_repair_max_ratio": 0.007936681232895086,
-      "inflate_max_ratio": 0.0,
+      "norms_read_at_gamma": null,
+      "step_ratio_pre_repair": null,
+      "step_ratio_after_inflate": null,
+      "pre_repair_max_ratio": null,
+      "inflate_max_ratio": null,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -362,18 +370,12 @@
         Infinity,
         Infinity
       ],
-      "step_ratio_pre_repair": {
-        "delta=1e-10": 0.007936681232895086,
-        "delta=1e-20": 1.5709004522775897e-07,
-        "delta=1e-50": 3.8666618980305045e-22
-      },
-      "step_ratio_after_inflate": {
-        "delta=1e-10": 0.0,
-        "delta=1e-20": 0.0,
-        "delta=1e-50": 0.0
-      },
-      "pre_repair_max_ratio": 0.007936681232895086,
-      "inflate_max_ratio": 0.0,
+      "norms_read_at_gamma": null,
+      "step_ratio_pre_repair": null,
+      "step_ratio_after_inflate": null,
+      "pre_repair_max_ratio": null,
+      "inflate_max_ratio": null,
+      "inflate_is_infinite": true,
       "inflate_dominates": true,
       "extrapolate_matches_pre_repair": true,
       "extrapolate_warns": false
@@ -382,8 +384,9 @@
   "A_v1_all_raise": true,
   "A_v2_all_raise": true,
   "A_all_inflate_dominate": true,
-  "A_worst_pre_repair_step_ratio": 2.5275730767733466,
+  "A_worst_pre_repair_step_ratio": 4.979386832582854,
   "A_worst_post_inflate_step_ratio": 0.0,
+  "A_all_inflate_are_infinite": true,
   "C_other_inputs": [
     {
       "case": "theta<0",
