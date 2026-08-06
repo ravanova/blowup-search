@@ -1,0 +1,531 @@
+{
+  "leg": 151,
+  "route": "ROUTE-DCR",
+  "module": "solver/decay_collocation.py",
+  "repairs_finding_of_leg": 115,
+  "pre_repair_ref": "a595dcb",
+  "control_1_identity": {
+    "pre_repair_ref": "a595dcb",
+    "pre_repair_lines": 188,
+    "post_repair_lines": 298,
+    "distinct_module_objects": true,
+    "pre_has_guard_symbol": false,
+    "post_has_guard_symbol": true,
+    "pre_raise_count": 0,
+    "ok": true
+  },
+  "control_3_prescribed_vs_landed_predicate": {
+    "n_rows_total": 25,
+    "n_leg115_pinned_cases": 5,
+    "n_caught_by_leg115_prescribed_predicate": 1,
+    "n_caught_by_landed_shape_invariant": 5,
+    "prescribed_predicate_is_strictly_weaker": true,
+    "n_leg115_pins_the_prescription_would_have_missed": 4,
+    "landed_predicate_is_FALSE_somewhere": true,
+    "n_rows_landed_predicate_does_not_refuse": 16,
+    "rows": [
+      {
+        "J": 1,
+        "drop": 0,
+        "len_rows": 0,
+        "is_leg115_pinned_case": true,
+        "caught_by_leg115_prescribed_predicate": true,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 1,
+        "drop": 1,
+        "len_rows": 1,
+        "is_leg115_pinned_case": true,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 1,
+        "drop": -1,
+        "len_rows": 1,
+        "is_leg115_pinned_case": true,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 1,
+        "drop": 5,
+        "len_rows": 1,
+        "is_leg115_pinned_case": true,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 1,
+        "drop": 100,
+        "len_rows": 1,
+        "is_leg115_pinned_case": true,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 2,
+        "drop": 0,
+        "len_rows": 1,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 2,
+        "drop": 1,
+        "len_rows": 1,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 2,
+        "drop": 1,
+        "len_rows": 1,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 2,
+        "drop": 1,
+        "len_rows": 1,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 8,
+        "drop": 0,
+        "len_rows": 7,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 8,
+        "drop": 1,
+        "len_rows": 7,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 8,
+        "drop": 4,
+        "len_rows": 7,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 8,
+        "drop": 7,
+        "len_rows": 7,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 64,
+        "drop": 0,
+        "len_rows": 63,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 64,
+        "drop": 1,
+        "len_rows": 63,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 64,
+        "drop": 32,
+        "len_rows": 63,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 64,
+        "drop": 63,
+        "len_rows": 63,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 1000,
+        "drop": 0,
+        "len_rows": 999,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 1000,
+        "drop": 1,
+        "len_rows": 999,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 1000,
+        "drop": 500,
+        "len_rows": 999,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 1000,
+        "drop": 999,
+        "len_rows": 999,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": false
+      },
+      {
+        "J": 8,
+        "drop": -1,
+        "len_rows": 8,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 8,
+        "drop": 100000,
+        "len_rows": 8,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 64,
+        "drop": -1,
+        "len_rows": 64,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      },
+      {
+        "J": 64,
+        "drop": 100000,
+        "len_rows": 64,
+        "is_leg115_pinned_case": false,
+        "caught_by_leg115_prescribed_predicate": false,
+        "caught_by_landed_shape_invariant": true
+      }
+    ]
+  },
+  "clause_a_g1_grid_collapse": {
+    "n_cases": 19,
+    "pre_reproduces_leg115_headline": 19,
+    "pre_n_distinct_values": 1,
+    "post_n_raised": 19,
+    "leg115_headline": 1.681792830507429,
+    "rows": [
+      {
+        "kind": "drop",
+        "drop": 0,
+        "gauge": "origin",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 0,
+        "gauge": "a0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 1,
+        "gauge": "origin",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 1,
+        "gauge": "a0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": -1,
+        "gauge": "origin",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": -1,
+        "gauge": "a0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 5,
+        "gauge": "origin",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 5,
+        "gauge": "a0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 100,
+        "gauge": "origin",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "drop",
+        "drop": 100,
+        "gauge": "a0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "0.0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "0.5",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "1.0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "100.0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "-50.0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "1000000.0",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "nan",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "inf",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      },
+      {
+        "kind": "c",
+        "c": "-inf",
+        "pre_value": 1.681792830507429,
+        "pre_equals_leg115_headline": true,
+        "post_raised": true,
+        "post_value": null
+      }
+    ]
+  },
+  "clause_a_g2_shape_ambiguity": {
+    "worked_case_pre_flat": 12.0,
+    "worked_case_pre_column": 10.0,
+    "worked_case_post_raised": true,
+    "worked_case_post_column": 10.0,
+    "column_reading_unchanged_by_repair": true,
+    "battery_n_cases": 30,
+    "battery_pre_n_mismatch": 30,
+    "battery_post_n_raised": 30
+  },
+  "clause_a_g3_nonreal_alpha": {
+    "n_cases": 6,
+    "pre_n_silently_diverging": 4,
+    "post_n_raised": 6,
+    "end_to_end_pre_value": 3.562611185971488,
+    "end_to_end_post_raised": true,
+    "rows": [
+      {
+        "alpha": "(1.5+0.1j)",
+        "pre_value": 0.9993975393685521,
+        "pre_real_part_value": 0.9993975466275532,
+        "pre_silently_diverged": true,
+        "post_raised": true
+      },
+      {
+        "alpha": "(1.5+1j)",
+        "pre_value": 0.9993968207275311,
+        "pre_real_part_value": 0.9993975466275532,
+        "pre_silently_diverged": true,
+        "post_raised": true
+      },
+      {
+        "alpha": "1j",
+        "pre_value": 0.9975916387472489,
+        "pre_real_part_value": 0.9975923633360985,
+        "pre_silently_diverged": true,
+        "post_raised": true
+      },
+      {
+        "alpha": "(-1+2j)",
+        "pre_value": 0.9963878247819236,
+        "pre_real_part_value": 0.9963907196450745,
+        "pre_silently_diverged": true,
+        "post_raised": true
+      },
+      {
+        "alpha": "(1+0j)",
+        "pre_value": 0.9987954562051724,
+        "pre_real_part_value": 0.9987954562051724,
+        "pre_silently_diverged": false,
+        "post_raised": true
+      },
+      {
+        "alpha": "(1.5+1e-10j)",
+        "pre_value": 0.9993975466275532,
+        "pre_real_part_value": 0.9993975466275532,
+        "pre_silently_diverged": false,
+        "post_raised": true
+      }
+    ]
+  },
+  "clause_b_bitwise_differential": {
+    "n_quantities": 1672,
+    "n_bit_identical": 1672,
+    "n_moved": 0,
+    "movers": [],
+    "cheap_J_ladder": [
+      8,
+      16,
+      32,
+      64,
+      125,
+      128,
+      150,
+      250,
+      300,
+      400,
+      500,
+      600,
+      1000,
+      1200,
+      1600,
+      2000
+    ],
+    "inverse_J_ladder": [
+      8,
+      16,
+      32,
+      64,
+      125,
+      250,
+      500,
+      1000
+    ],
+    "alphas": [
+      0.0,
+      0.5,
+      1.0,
+      1.2,
+      1.5,
+      1.8,
+      2.0,
+      2.5,
+      3.0
+    ],
+    "gauges": [
+      "origin",
+      "a0"
+    ]
+  },
+  "clause_b_subclass_arm": {
+    "n_quantities": 220,
+    "n_bit_identical": 220,
+    "n_moved": 0,
+    "n_guard_fired_on_ACollocation_call_sites": 0,
+    "movers": [],
+    "note": "ACollocation call sites all pass J >= 8 in range; guards fire on 0. solver/collocation_newton.py is NOT edited by this leg."
+  },
+  "clause_b_guard_firing_census": {
+    "n_shipped_configurations_checked": 336,
+    "n_refused": {
+      "J_clause": 0,
+      "drop_clause": 0,
+      "alpha_clause": 0,
+      "shape_clause": 0
+    },
+    "total_refused": 0
+  },
+  "GATE_clause_a_all_three_findings_now_refused": true,
+  "GATE_clause_b_bit_identical_on_every_clean_case": true,
+  "GATE": "YES"
+}
