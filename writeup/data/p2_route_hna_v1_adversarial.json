@@ -1,0 +1,983 @@
+{
+  "leg": 100,
+  "route": "HNA",
+  "module_under_audit": "solver/holder_norms.py",
+  "module_edited": false,
+  "A0_validation_surface": {
+    "n_raise_sites": 0,
+    "n_assert_sites": 0,
+    "finiteness_guard_names_present": [],
+    "public_entry_points": [
+      "HolderNorm",
+      "conformal_check",
+      "decay_weight",
+      "family_op_norm",
+      "holder_H_constant",
+      "jacobian_identity_error",
+      "square_wave_partial_sum"
+    ],
+    "n_public_entry_points": 7,
+    "note": "the count of argument-validation sites in the whole module; a zero here is the structural reason every other gate below can find silence"
+  },
+  "A1_self_validation_on_poisoned_grid": {
+    "clean_conformal_check": [
+      0.0001517287054473293,
+      1.9094999985985477
+    ],
+    "clean_jacobian_identity_error": [
+      0.0005058518859734074,
+      1.9094999985985477
+    ],
+    "n_cases": 8,
+    "n_silent": 4,
+    "n_bit_identical_to_clean": 4,
+    "cases": [
+      {
+        "case": "conformal_check, theta[7] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.0,
+        "bit_identical_to_clean": true,
+        "ratio_to_clean": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "case": "conformal_check, theta[7] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "conformal_check, theta[64] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.0,
+        "bit_identical_to_clean": true,
+        "ratio_to_clean": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "case": "conformal_check, theta[64] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "conformal_check, theta[120] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.0,
+        "bit_identical_to_clean": true,
+        "ratio_to_clean": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "case": "conformal_check, theta[120] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "jacobian_identity_error, theta[64] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.0,
+        "bit_identical_to_clean": true,
+        "ratio_to_clean": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "case": "conformal_check, duplicated grid node (dtheta = 0)",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.00024376552996407952,
+          1.9094999985985477
+        ],
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      }
+    ]
+  },
+  "A2_vacuous_pass": {
+    "coarse_grid_sweep": [
+      {
+        "J": 4,
+        "conformal_err": 7.541113702640239,
+        "largest_resolved_absX": 1.6653345369377348e-16,
+        "resolved_anything": true
+      },
+      {
+        "J": 6,
+        "conformal_err": 0.12021050303926017,
+        "largest_resolved_absX": 0.0,
+        "resolved_anything": false
+      },
+      {
+        "J": 8,
+        "conformal_err": 0.05209785330978778,
+        "largest_resolved_absX": 1.6653345369377348e-16,
+        "resolved_anything": true
+      },
+      {
+        "J": 12,
+        "conformal_err": 0.019353597546427403,
+        "largest_resolved_absX": 0.0,
+        "resolved_anything": false
+      },
+      {
+        "J": 16,
+        "conformal_err": 0.010147958260368961,
+        "largest_resolved_absX": 0.21493983818206944,
+        "resolved_anything": true
+      },
+      {
+        "J": 24,
+        "conformal_err": 0.0042457187073556835,
+        "largest_resolved_absX": 0.28150601106517686,
+        "resolved_anything": true
+      },
+      {
+        "J": 32,
+        "conformal_err": 0.002324533006074825,
+        "largest_resolved_absX": 0.4302871445789552,
+        "resolved_anything": true
+      },
+      {
+        "J": 128,
+        "conformal_err": 0.0001517287054473293,
+        "largest_resolved_absX": 1.9094999985985477,
+        "resolved_anything": true
+      }
+    ],
+    "all_nan_grid_returns": [
+      0.0,
+      0.0
+    ],
+    "all_nan_grid_exception": null,
+    "all_nan_grid_warnings": [],
+    "all_nan_grid_verdict": "SILENT",
+    "all_inf_grid_returns": [
+      0.0,
+      0.0
+    ],
+    "note": "conformal_check on a 16-node grid whose every entry is NaN returns (0.0, 0.0): worst deviation from the exact conformal identity = 0.0, i.e. a PERFECT pass, on a grid with no valid node at all"
+  },
+  "A3_poisoned_operator": {
+    "clean_family_op_norm": [
+      661.2075718521894,
+      47
+    ],
+    "n_cases": 11,
+    "n_silent": 5,
+    "n_silent_returning_exactly_zero": 5,
+    "collapse_factor": 661.2075718521894,
+    "note": "a poisoned operator is reported as a lower bound of exactly 0.0 with arg = -1, numerically indistinguishable from the zero operator, while the clean operator scores 661.207572",
+    "cases": [
+      {
+        "case": "family_op_norm, A[3,7] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 661.2075718521894,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.0,
+          -0.02127659574468085
+        ]
+      },
+      {
+        "case": "family_op_norm, A[0,0] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 661.2075718521894,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.0,
+          -0.02127659574468085
+        ]
+      },
+      {
+        "case": "family_op_norm, A[47,47] = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 661.2075718521894,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.0,
+          -0.02127659574468085
+        ]
+      },
+      {
+        "case": "family_op_norm, A[3,7] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, A[0,0] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, A[47,47] = +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, A[3,7] = -Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, A[0,0] = -Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, A[47,47] = -Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, codomain alpha = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 661.2075718521894,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.0,
+          -0.02127659574468085
+        ]
+      },
+      {
+        "case": "family_op_norm, domain gamma = NaN",
+        "verdict": "SILENT",
+        "returned": [
+          0.0,
+          -1.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 661.2075718521894,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.0,
+          -0.02127659574468085
+        ]
+      }
+    ]
+  },
+  "A4_dropped_maximizer": {
+    "ratio_true_maximizer": 221.97837236723137,
+    "ratio_runner_up": 105.43571373550743,
+    "clean_two_vector_family": [
+      221.97837236723137,
+      1
+    ],
+    "clean_full_family": [
+      661.2075718521894,
+      47
+    ],
+    "understatement_factor": 2.105343289315412,
+    "n_cases": 3,
+    "n_silent": 2,
+    "note": "poisoning the maximizer returns the runner-up, 105.435714 instead of 221.978372, a factor 2.1053 understatement of the module's own lower bound, with no NaN, no warning and no exception",
+    "cases": [
+      {
+        "case": "family_op_norm, true maximizer poisoned with NaN",
+        "verdict": "SILENT",
+        "returned": [
+          105.43571373550743,
+          0.0
+        ],
+        "clean": [
+          221.97837236723137,
+          1.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 116.54265863172394,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          0.4749819210363394,
+          0.0
+        ]
+      },
+      {
+        "case": "family_op_norm, true maximizer poisoned with +Inf",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          105.43571373550743,
+          0.0
+        ],
+        "clean": [
+          221.97837236723137,
+          1.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "family_op_norm, poisoned extra inside the full family",
+        "verdict": "SILENT",
+        "returned": [
+          661.2075718521894,
+          47.0
+        ],
+        "clean": [
+          661.2075718521894,
+          47.0
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.0,
+        "bit_identical_to_clean": true,
+        "ratio_to_clean": [
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "A5_norms_under_poisoned_exponents": {
+    "clean_sup_seminorm_norm": [
+      0.9996893798319648,
+      0.7290476589888806,
+      1.7287370388208454
+    ],
+    "n_cases": 11,
+    "n_silent": 4,
+    "decay_weight_at_X0_with_NaN_alpha": 1.0,
+    "decay_weight_offaxis_with_NaN_alpha": [
+      NaN,
+      NaN
+    ],
+    "note": "IEEE-754 pow(1.0, NaN) = 1.0, so the node X = 0 keeps an exactly-1.0 weight under a NaN grading exponent; the sup over the grid still propagates NaN, so this one is latent, not live",
+    "cases": [
+      {
+        "case": "HolderNorm(alpha = NaN)",
+        "verdict": "FLAGGED_NAN",
+        "returned": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "case": "HolderNorm(alpha = +Inf)",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          Infinity,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "HolderNorm(gamma = NaN)",
+        "verdict": "FLAGGED_NAN",
+        "returned": [
+          0.9996893798319648,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "case": "HolderNorm(gamma = -0.5 (degenerate: negative grading))",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          0.9996893798319648,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "HolderNorm(gamma = 0 (degenerate: no Holder grading))",
+        "verdict": "SILENT",
+        "returned": [
+          0.9996893798319648,
+          0.9996891297543065,
+          1.9993785095862713
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.2706414707654259,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          1.0,
+          1.3712260336186797,
+          1.156554446794307
+        ]
+      },
+      {
+        "case": "HolderNorm(gamma = 1 (degenerate: Lipschitz endpoint))",
+        "verdict": "SILENT",
+        "returned": [
+          0.9996893798319648,
+          0.49964385478570955,
+          1.4993332346176744
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.22940380420317102,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          1.0,
+          0.6853377123227689,
+          0.8672997691079466
+        ]
+      },
+      {
+        "case": "HolderNorm(semi_alpha = NaN)",
+        "verdict": "FLAGGED_NAN",
+        "returned": [
+          0.9996893798319648,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "case": "HolderNorm(semi_alpha = NaN with sup_only=True)",
+        "verdict": "SILENT",
+        "returned": [
+          0.9996893798319648,
+          0.0,
+          0.9996893798319648
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.7290476589888806,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          1.0,
+          0.0,
+          0.5782772957267365
+        ]
+      },
+      {
+        "case": "HolderNorm(gamma = NaN with sup_only=True)",
+        "verdict": "SILENT",
+        "returned": [
+          0.9996893798319648,
+          0.0,
+          0.9996893798319648
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": [],
+        "max_abs_deviation_from_clean": 0.7290476589888806,
+        "bit_identical_to_clean": false,
+        "ratio_to_clean": [
+          1.0,
+          0.0,
+          0.5782772957267365
+        ]
+      },
+      {
+        "case": "HolderNorm, X[30] = NaN (poisoned grid)",
+        "verdict": "FLAGGED_NAN",
+        "returned": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "clean": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "case": "HolderNorm(alpha=+Inf).sup_part(zeros) [true answer 0.0]",
+        "verdict": "FLAGGED_WARN",
+        "returned": [
+          NaN
+        ],
+        "clean": [
+          0.0
+        ],
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ]
+      }
+    ]
+  },
+  "A6_embedding_constant": {
+    "clean_per_degree": [
+      0.7229011491994093,
+      0.8359515019975166,
+      0.8548322678393498
+    ],
+    "clean_random_best": 0.8914207747116539,
+    "n_cases": 4,
+    "n_random_arm_silently_zero": 4,
+    "degenerate_exponent_sweep": {
+      "gamma=0.0": {
+        "per_degree": [
+          0.9427849632414621,
+          1.4551998146041505,
+          2.003102357089139
+        ],
+        "random_best": 1.0300966294219904
+      },
+      "gamma=1.0": {
+        "per_degree": [
+          0.5230090143101978,
+          0.6500701809348948,
+          0.7400094768686508
+        ],
+        "random_best": 1.115424104338138
+      },
+      "gamma=0.3": {
+        "per_degree": [
+          0.7229011491994093,
+          0.8359515019975166,
+          0.8548322678393498
+        ],
+        "random_best": 0.8914207747116539
+      }
+    },
+    "note": "the per-degree arm propagates NaN (it is a plain list comprehension), but the random arm collapses to 0.0 -- a caller who reads only the second return value is told the Holder-Hilbert constant is zero, against a clean value of 0.891421",
+    "cases": [
+      {
+        "case": "holder_H_constant, gamma = NaN",
+        "per_degree": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "random_best": 0.0,
+        "per_degree_propagates_nan": true,
+        "random_best_is_exactly_zero": true,
+        "exception": null,
+        "warnings": [],
+        "verdict_whole_return": "FLAGGED_NAN",
+        "verdict_random_arm_alone": "SILENT"
+      },
+      {
+        "case": "holder_H_constant, gamma = -0.3 (degenerate)",
+        "per_degree": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "random_best": 0.0,
+        "per_degree_propagates_nan": true,
+        "random_best_is_exactly_zero": true,
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "verdict_whole_return": "FLAGGED_WARN",
+        "verdict_random_arm_alone": "FLAGGED_WARN"
+      },
+      {
+        "case": "holder_H_constant, theta[7] = NaN",
+        "per_degree": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "random_best": 0.0,
+        "per_degree_propagates_nan": true,
+        "random_best_is_exactly_zero": true,
+        "exception": null,
+        "warnings": [],
+        "verdict_whole_return": "FLAGGED_NAN",
+        "verdict_random_arm_alone": "SILENT"
+      },
+      {
+        "case": "holder_H_constant, theta[7] = +Inf",
+        "per_degree": [
+          NaN,
+          NaN,
+          NaN
+        ],
+        "random_best": 0.0,
+        "per_degree_propagates_nan": true,
+        "random_best_is_exactly_zero": true,
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "verdict_whole_return": "FLAGGED_WARN",
+        "verdict_random_arm_alone": "FLAGGED_WARN"
+      }
+    ]
+  },
+  "A7_positive_control": {
+    "n_cases": 4,
+    "n_signalled": 4,
+    "cases": [
+      {
+        "case": "HolderNorm called on a wrong-length vector",
+        "exception": "ValueError",
+        "warnings": [],
+        "signalled": true
+      },
+      {
+        "case": "family_op_norm with a non-conforming operator",
+        "exception": "ValueError",
+        "warnings": [],
+        "signalled": true
+      },
+      {
+        "case": "square_wave_partial_sum with m = NaN",
+        "exception": "ValueError",
+        "warnings": [],
+        "signalled": true
+      },
+      {
+        "case": "holder_H_constant with random degree above grid size",
+        "exception": "ValueError",
+        "warnings": [],
+        "signalled": true
+      }
+    ],
+    "note": "the harness CAN see a signal; every silence reported above is the module's, not the instrumentation's"
+  },
+  "A8_warning_decay": {
+    "n_cases": 2,
+    "n_that_go_silent_on_repeat": 2,
+    "cases": [
+      {
+        "case": "conformal_check, theta[64] = +Inf",
+        "clean": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "calls": [
+          {
+            "call": 1,
+            "n_new_warnings": 1,
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ]
+          },
+          {
+            "call": 2,
+            "n_new_warnings": 0,
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ]
+          },
+          {
+            "call": 3,
+            "n_new_warnings": 0,
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ]
+          }
+        ],
+        "warned_on_first_call": true,
+        "silent_from_call": 2,
+        "returned_value_constant_across_calls": true
+      },
+      {
+        "case": "family_op_norm, A[3,7] = +Inf",
+        "clean": [
+          661.2075718521894,
+          47
+        ],
+        "calls": [
+          {
+            "call": 1,
+            "n_new_warnings": 1,
+            "returned": [
+              0.0,
+              -1.0
+            ]
+          },
+          {
+            "call": 2,
+            "n_new_warnings": 0,
+            "returned": [
+              0.0,
+              -1.0
+            ]
+          },
+          {
+            "call": 3,
+            "n_new_warnings": 0,
+            "returned": [
+              0.0,
+              -1.0
+            ]
+          }
+        ],
+        "warned_on_first_call": true,
+        "silent_from_call": 2,
+        "returned_value_constant_across_calls": true
+      }
+    ],
+    "note": "under the interpreter's default warning filter the RuntimeWarning is emitted once per source location; repeat calls return the identical wrong value with no signal at all, so the Inf cases are silent in every practical caller and the NaN/Inf distinction is one warning wide"
+  },
+  "verdict": {
+    "gate": "Under an adversarial battery (NaN/Inf-poisoned weight-class parameters, degenerate grading exponents), does solver/holder_norms.py's norm or embedding-constant computation ever silently return a finite, plausible-looking wrong value instead of propagating or flagging the invalid input?",
+    "answer": "YES",
+    "n_distinct_silent_mechanisms": 6,
+    "findings": [
+      "conformal_check/jacobian_identity_error return values BIT-IDENTICAL to the clean grid on 4 of 8 NaN/Inf-poisoned grids (0.000151728705, unchanged)",
+      "conformal_check on an all-NaN grid returns [0.0, 0.0] -- worst deviation 0.0, a PERFECT pass",
+      "family_op_norm returns exactly 0.0 (arg = -1) on 5 of 11 poisoned operators, against a clean 661.207572",
+      "family_op_norm silently discards a poisoned test vector and returns the runner-up: 105.435714 instead of 221.978372, a 2.1053x understatement",
+      "holder_H_constant's random arm returns exactly 0.0 on 4 of 4 poisoned inputs, against a clean 0.891421",
+      "the Inf twins of those cases return the same wrong value and are flagged only by an incidental numpy RuntimeWarning that stops firing from call 2 onward under the default warning filter (2 of 2 cases)"
+    ],
+    "not_silent": [
+      "the norm objects themselves (HolderNorm.sup_part / .seminorm / .__call__) propagate NaN through np.max on every poisoned exponent and every poisoned grid tested (gate A5): 4 of 11 cases SILENT",
+      "holder_H_constant's per-degree arm propagates NaN on every poisoned input"
+    ],
+    "disposition": "solver/holder_norms.py is NOT patched under this leg (territory rule); the battery is banked as test_holder_norms_adversarial.py, which PINS the silence and will fail the day a guard lands -- invert it then, do not weaken it."
+  },
+  "runtime_seconds": 0.91
+}
