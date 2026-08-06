@@ -38,9 +38,10 @@ suspected.
 
 Last leg number actually landed/merged on main: **57**. Legs **58–63** are reserved,
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
-This session adds **64–71**, a first refill adds **72–75**, and this second refill adds
-**76–78**, a fourth refill adds **80–83**, and this fifth refill adds **84–87**. **Next fresh
-leg number for any future candidate is 88.**
+This session adds **64–71**, a first refill adds **72–75**, a second refill adds **76–78**, a
+third adds **79** (implicitly, per its own entry above), a fourth refill adds **80–83**, a fifth
+refill adds **84–87**, and this sixth refill adds **88–91**. **Next fresh leg number for any
+future candidate is 92.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -210,6 +211,30 @@ the stray Oldroyd-B gloss, fix the two mislabels — no other content changes.
   the next refill; no immediate promotion requested this time ("no rush") — all four are
   reserve.**
 
+**Leg 63 (M2) landed: gate YES — the most consequential landing of this entire run.** Full
+detail is in leg 63's queue entry above (now marked LANDED) and in the new "Open direction
+questions" §2 below: the target-reselection screen found exactly one candidate that passes the
+multiplier/shift predicate — gCLM with full Laplacian dissipation (γ=2) — where every inviscid
+target ever ranked fails it identically. Blow-up is proved for this model and no CAP of any
+dissipative self-similar profile exists in the literature leg 63 searched. This is escalation
+#1, correctly parked (`leg/m2-v1`, not merged) rather than decided by the leg or by this file —
+promoting it is the user's call. **Per the coordinator's explicit instruction, no dispatchable
+leg has been drafted for the γ=2 candidate; an unofficial, clearly-marked non-dispatchable
+sketch of what a first leg would need is appended after the open questions, so there is no
+restart cost if the user rules to pursue it.** This does not change queue mechanics — LEG-C is
+simply open now, refilled from ordinary reserve below like any other landing.
+
+**Slot refill: all of 58–87 have been dispatched at some point; reserve is exhausted again.**
+The coordinator confirms LEG-C=85 (GRA, replacing 63 after its landing), LEG-G=87 (IVB,
+replacing 82), LEG-I=86 (PCB, replacing 78) are now live. The Live assignments table below also
+already shows **LEG-E=84 (TNA)**, which resolves cleanly: leg 81 (BRS) must have landed too
+(unreported in detail) and all four of the prior batch (84–87) are now accounted for and
+dispatched — matching "reserve is fully exhausted" exactly, with no unexplained leftover.
+**Current live nine (LEG-D still held for 76):** 58 (NG, critical, A), 62 (CP, B), 85 (GRA, C),
+84 (TNA, E), 71 (CAP, F), 87 (IVB, G), 80 (BHN, H), 86 (PCB, I), 83 (MFG, J). **Four fresh
+candidates
+(88–91) are added below for the next refill.**
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -313,29 +338,32 @@ scope (advection) and Route-D v15 (literature scope) — "no measurement, no fig
 `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the current live
-nine plus the four new reserve candidates (58, 62, 63, 81, 71, 82, 80, 78, 83, 84, 85, 86, 87):
+nine plus the four new reserve candidates (58, 62, 85, 84, 71, 87, 80, 86, 83, 88, 89, 90, 91):
 `spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
-`target_selection.py`(63), `boussinesq_rescaled.py`(81), `capabilities.py`(71, factual
-"test"-field only, pre-committed narrow), none(82, literature watch, no code edits),
-`bordered_hl.py`(80), `hl_rescaled.py`(78), `marginal_flow.py`(83), none-owned/read-only(84
-reads `target_norm.py`, edits nothing under a bug-found outcome), none-owned/read-only(85 reads
-`gclm_rescaled.py`, edits nothing), none-owned/read-only(86 reads `port_certification.py`, now
-fully repaired and unclaimed, edits nothing), none-owned/read-only(87 reads `interval.py`, now
-fully repaired and unclaimed, edits nothing). All thirteen distinct — **no collision.** LEG-D
-stays empty pending leg 76, which needs its own territory check once its final scope (possibly
-expanded per the verifier's findings) is confirmed against `PHASE2_P2_NOTES.md` and
-`TECHNICAL_P2_ROUTEI_V1.md`, which no other live or reserve leg touches. `solver/interval.py`,
-`solver/spectral_utils.py` and `solver/port_certification.py` are **all three now fully
-repaired and unclaimed** — 86 and 87 read the latter two specifically to close the loop on their
-repairs, but neither edits them. `writeup/data` JSON files are likewise distinct names
-(`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
-`p2_route_m2_v1_targets.json`(63), `p2_route_cap_v1_audit.json`(71),
-`p2_route_bv_v1_velocity_benchmark.json`(73, landed), `p2_route_hlb_v1_contraction_lit.json`(78),
-`p2_route_bhn_v1_adversarial.json`(80), `p2_route_brs_v1_status_audit.json`(81),
-`p2_route_ext3_v1_target_watch3.json`(82), `p2_route_mfg_v1_adversarial.json`(83),
-`p2_route_tna_v1_domain_audit.json`(84), `p2_route_gra_v1_adversarial.json`(85),
-`p2_route_pcb_v1_postrepair.json`(86), `p2_route_ivb_v1_postrepair.json`(87)) — **no
-collision.**
+none-owned/read-only(85 reads `gclm_rescaled.py`, edits nothing under a bug-found outcome),
+none-owned/read-only(84 reads `target_norm.py`, edits nothing), `capabilities.py`(71, factual
+"test"-field only, pre-committed narrow), none-owned/read-only(87 reads `interval.py`, fully
+repaired and unclaimed, edits nothing), `bordered_hl.py`(80), none-owned/read-only(86 reads
+`port_certification.py`, fully repaired and unclaimed, edits nothing), `marginal_flow.py`(83),
+none-owned/read-only(88 reads `gclm_family.py`, edits nothing), none-owned/read-only(89 reads
+`boussinesq.py`, edits nothing), none(90, literature watch, no code edits), none-owned/read-only
+(91 reads `fractional_gclm.py`, edits nothing). All thirteen distinct — **no collision.**
+`target_selection.py`(63) is **off the live list** — leg 63's branch is parked pending the
+user's ruling (see Status and Open direction questions §2); no live or reserve leg touches it
+while that's pending, to avoid a merge conflict with whatever the user decides. `hl_rescaled.py`
+(78) and `boussinesq_rescaled.py`(81) are similarly no longer claimed (both legs landed) and are
+free for a future candidate if needed, but none of 88-91 uses them, so no re-verification of
+that freedom was required here. LEG-D stays empty pending leg 76, whose territory
+(`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no live or reserve leg touches.
+`solver/interval.py`, `solver/spectral_utils.py` and `solver/port_certification.py` remain fully
+repaired and unclaimed. `writeup/data` JSON files for the current live nine plus reserve are
+likewise distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+`p2_route_gra_v1_adversarial.json`(85), `p2_route_tna_v1_domain_audit.json`(84),
+`p2_route_cap_v1_audit.json`(71), `p2_route_ivb_v1_postrepair.json`(87),
+`p2_route_bhn_v1_adversarial.json`(80), `p2_route_pcb_v1_postrepair.json`(86),
+`p2_route_mfg_v1_adversarial.json`(83), `p2_route_gca_v1_adversarial.json`(88),
+`p2_route_boa_v1_adversarial.json`(89), `p2_route_ext4_v1_target_watch4.json`(90),
+`p2_route_fga_v1_adversarial.json`(91)) — **no collision.**
 
 ## Queue
 
@@ -411,7 +439,19 @@ file overlap. Informs NG's claim strength without gating NG's work.
 ```
 
 ```
-### 63 — ROUTE-M2: TARGET RESELECTION, SCREENED BY THE MEASURED PREDICATE
+### 63 — ROUTE-M2: TARGET RESELECTION, SCREENED BY THE MEASURED PREDICATE (LANDED: gate YES —
+escalation #1, parked on `leg/m2-v1`, not merged; see Status and the new §D2 note below)
+**Landed finding.** Every inviscid target this repository has ever ranked (including
+HL_S2_nonsymmetric) fails the multiplier/shift screen identically — tail-inverse K-exponent
+`+0.4372`, all four rows, the same mechanism legs 51-57 characterized. One candidate does NOT
+fail it: **gCLM with full Laplacian dissipation (γ=2)**, tail-inverse K-exponent `-2.0270`,
+robust across all 3 dissipation strengths tested. Blow-up on this model is proved (Chen
+arXiv:1908.09385); no computer-assisted certificate of any dissipative self-similar profile
+exists in the literature leg 63 searched. Leg 63 surfaced three readings and correctly picked
+none — this is escalation #1 by this file's own §1 ("promoting an exploration route into the
+committed sequence"), since acting on it would re-open stage V's dissipative direction, whose
+ban ("needs L1 first") may be permanently unmeetable now that L1 is measured dead in both
+realizations. Parked for the user; not this file's call to make.
 **Thesis.** Stage M chose HL_S2_nonsymmetric on defensible grounds and leg 55 has now confirmed
 the object itself was never the problem -- it sits in an admissible class with coefficients
 decaying k^{-1.396}. What legs 51-57 refuted is the METHOD's reach, and they refuted it with a
@@ -1206,6 +1246,110 @@ test file claimed by nobody else. Closes the loop on leg 69's finding, the highe
 repair of this cycle (shared by legs 58 and 61).
 ```
 
+```
+### 88 — ROUTE-GCA: ADVERSARIAL AUDIT OF gclm_family.py's RESIDUAL COMPUTATION
+**Thesis.** solver/gclm_family.py holds the a-family sinh-grid residual
+`R = (c_omega + H Omega) Omega - c_l X Omega_X - a U Omega_X`, validated on the exact a=0 profile
+(RMS 2.2e-7) -- well-behaved data only. Nobody has checked whether it silently returns a
+finite-looking but wrong residual under adversarial coefficient inputs (NaN-poisoned `c_l` or
+`c_omega`, wildly out-of-range `a`), rather than flagging the problem. Same adversarial-audit
+pattern as legs 69/79/80/83/85, applied to a module none of them has touched. This is a
+robustness audit of existing residual-computation code, not a new gCLM physics measurement or
+parameter sweep, so it does not fall under the gCLM-measurement ban (leg 42) -- the same
+distinction that clears legs 83 and 85.
+**Gate.** Under an adversarial battery (NaN/Inf-poisoned `c_l`/`c_omega`, `a` far outside
+`[0,1]`), does solver/gclm_family.py's residual computation ever silently return a finite,
+plausible-looking value instead of propagating the invalid input or flagging it?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_gclm_family_adversarial.py, experiments/p2_route_gca_v1_adversarial.py,
+               writeup/data/p2_route_gca_v1_adversarial.json,
+               writeup/novelty/leg_88.md, experiments/journal/leg_88.md
+**Difficulty.** standard
+**Independence.** Reads solver/gclm_family.py; edits nothing under any outcome. New test file
+claimed by nobody else. Distinct module from every other adversarial-audit leg dispatched so
+far.
+```
+
+```
+### 89 — ROUTE-BOA: ADVERSARIAL AUDIT OF boussinesq.py (PHYSICAL-SPACE 2D BOUSSINESQ)
+**Thesis.** solver/boussinesq.py got dedicated test coverage from leg 66 (QF), which asked
+"does a direct test find any discrepancy against what the indirect tests assumed" and answered
+no. That is a correctness check on well-behaved inputs, not a robustness check -- the same gap
+in kind that made legs 69, 79, 80, 83, 85 and 88 each worth running: does the module silently
+produce a wrong-but-plausible result under adversarial physical-space inputs (NaN-seeded initial
+vorticity, an all-zero or degenerate stream function, extreme grid-stretching parameters) rather
+than flagging them.
+**Gate.** Under an adversarial battery of malformed physical-space inputs (NaN-seeded vorticity,
+degenerate/zero stream function, extreme grid-stretching), does solver/boussinesq.py ever
+silently return a finite, plausible-looking result instead of propagating or flagging the
+invalid input?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_boussinesq_adversarial.py, experiments/p2_route_boa_v1_adversarial.py,
+               writeup/data/p2_route_boa_v1_adversarial.json,
+               writeup/novelty/leg_89.md, experiments/journal/leg_89.md
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq.py; edits nothing under any outcome. New test file
+claimed by nobody else. Distinct question from leg 66 (QF, landed) -- robustness under
+adversarial input, not correctness under well-behaved input.
+```
+
+```
+### 90 — ROUTE-EXT4: HAS THE RANK-4 TARGET OBJECT'S CONJECTURE BEEN RESOLVED SINCE?
+**Thesis.** The dated literature-watch pattern (legs 74/EXT rank 1, 77/EXT2 rank 2, 82/EXT3 rank
+3, all landed NO -- still uncertified) extends naturally to target_selection.py's rank-4
+candidate: HL_singular_steady_stability (Chen-Huang-Li, arXiv:2604.01868 Theorem 2.3 for
+existence, Conjecture 2.4 for stability -- explicitly OPEN, blocked on a function space because
+the profile is unbounded and only in L^p for p<2). Unlike ranks 1-3, this one is a named OPEN
+CONJECTURE, not merely "uncertified" -- a resolution (either direction) would be unusually
+consequential news for this repository's target ledger. A different object, a different
+question (a conjecture's resolution, not a certificate's existence), independent of legs 74/77/
+82's own dated findings.
+**Gate.** Has Chen-Huang-Li's Conjecture 2.4 (stability of the HL singular steady state) been
+proved or disproved, by anyone, since arXiv:2604.01868?
+  yes -> Materially changes the rank-4 entry's status either way. Report the citation and the
+         direction of the result precisely for leg 63's successor or a future leg to act on --
+         no self-edit of target_selection.py, which is currently parked pending the user's
+         ruling on leg 63's escalation (see Status) and untouched by any other leg regardless.
+  no  -> Confirmed still open as of this leg's search date. Bank the dated literature-watch
+         entry.
+**Territory.** experiments/p2_route_ext4_v1_target_watch4.py,
+               writeup/data/p2_route_ext4_v1_target_watch4.json,
+               writeup/novelty/leg_90.md, experiments/journal/leg_90.md
+**Difficulty.** light
+**Independence.** Does not touch solver/target_selection.py (parked pending the user; this leg
+reads only the citation already recorded in its ledger). Distinct object/question from legs 74,
+77, 82.
+```
+
+```
+### 91 — ROUTE-FGA: ADVERSARIAL AUDIT OF fractional_gclm.py's CRITICAL-EXPONENT COMPUTATION
+**Thesis.** solver/fractional_gclm.py's critical exponent `s_c` is validated against XU eq (6.3)
+row by row and marked PRE-EMPTED (Route-J) -- the physics claim is settled and this leg does not
+reopen it. What has never been checked is whether the code computing `s_c` is robust to malformed
+dissipation-strength inputs: negative `s`, `s` above the model's own admissible threshold, or
+NaN-poisoned dissipation parameters. Same adversarial-audit pattern as legs 69/79/80/83/85/88/89,
+a robustness check on existing code, not a re-measurement of the (already pre-empted, settled)
+physics -- it does not reopen or contest Route-J's finding in any way.
+**Gate.** Under an adversarial battery (negative `s`, `s` above the model's admissible
+threshold, NaN-poisoned dissipation strength), does solver/fractional_gclm.py's critical-exponent
+computation ever silently return a finite, plausible-looking `s_c` instead of propagating or
+flagging the invalid input?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_fractional_gclm_adversarial.py, experiments/p2_route_fga_v1_adversarial.py,
+               writeup/data/p2_route_fga_v1_adversarial.json,
+               writeup/novelty/leg_91.md, experiments/journal/leg_91.md
+**Difficulty.** standard
+**Independence.** Reads solver/fractional_gclm.py; edits nothing under any outcome. New test
+file claimed by nobody else. Does not touch or contest the PRE-EMPTED s_c finding (Route-J);
+robustness only.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
@@ -1301,26 +1445,62 @@ test that finding and its surrounding infrastructure — not to reopen it.
 
 ## Open direction questions for the user
 
-These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`. The run continues around them. Both
-carry over unchanged from the prior session — nothing in this refresh resolved or altered them,
-and no new question surfaced that clears the bar for "genuinely undecidable by the DM."
+These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`. The run continues around them.
 
 1. **`NG` entering the committed sequence is escalation #1**, and the DM is making the call
    under the user's explicit pre-delegation ("whichever pursues our goals best"). Flagged here
    so it is visible as a plan change and not just as a queue entry. Reversible: if you would
    rather go straight to the target round, swap slots LEG-A and LEG-C and mark `M2` as `NEXT`
    instead — the cost is that the target screen ships before the predicate it screens with is
-   written down.
-2. **Stage `V`'s ban has a lift condition that may now be unreachable.** It reads "unless the
-   question is re-posed for a FLUID transport model, which needs `L1` first." `L1` is, as of
-   this cycle, measured dead in both realizations. So either the condition is permanently unmet
-   — in which case the dissipative direction, the one place leg 53's positive control shows the
-   instrument actually works (`Z₁ = 0.9156` at `μ = 2`), is closed forever — or you re-word it.
-   Leg 63 surfaces this; only you can rule on it. **This is the single highest-value direction
-   question open right now.**
-3. **What is the exit criterion for this project?** Asked plainly because the honest reading of
-   this cycle invites it. The prize is a novel Tier-3 result on a model where blow-up is
-   provable. `NG`'s yes-branch would deliver a *negative* Tier-3-shaped result, which may or may
-   not be what you wanted to buy. If it is, `NG` → write-up is a short path to shipping. If it
-   is not, then leg 63's answer decides whether there is a positive path left at all, and the
-   two legs should be read as a pair.
+   written down. **This question is now overtaken in urgency by #2** — the target round (leg 63)
+   has itself landed since this was written, and its answer changes what "going straight to the
+   target round" would even mean.
+2. **UPDATED, no longer speculative — this is now the single highest-value, most concrete
+   decision open on this project.** Leg 63 (M2) landed: gate **YES**. Every inviscid target ever
+   ranked fails the multiplier/shift screen identically; **exactly one candidate passes it**:
+   gCLM with full Laplacian dissipation (`γ=2`), tail-inverse `K`-exponent `-2.0270`, robust
+   across three dissipation strengths. Blow-up on this model is **proved** (Chen
+   arXiv:1908.09385), and leg 63's search found **no computer-assisted certificate of any
+   dissipative self-similar profile in the literature** — meaning if this repository built one,
+   it would very plausibly be genuinely novel, not just novel-against-a-narrow-slice. The
+   obstruction is exactly stage `V`'s ban: "re-opening the dissipative direction needs `L1`
+   first," and `L1` is measured dead in both realizations. Three readings, and this file does
+   not pick one — that is the escalation:
+   - **(a) The condition is permanently unmet** — the dissipative direction, the one place leg
+     53's positive control shows the instrument actually works (`Z₁ = 0.9156` at `μ = 2`), stays
+     closed forever, and leg 63's finding is filed as "identified, not pursued."
+   - **(b) Re-word the ban's lift condition** to admit a certificate attempt on `γ=2` directly,
+     since the *reason* for the original "`L1` first" requirement (this repository's L1-Fourier
+     machinery needing validation before trusting it on a fluid transport model) may not bind
+     the same way against a model with *proved* blow-up and *no* prior CAP attempt to fail
+     against — there is no L1-shaped precedent for THIS object to be measured dead in the first
+     place.
+   - **(c) Something in between**: lift the ban narrowly, scoped to this one candidate, with its
+     own fresh novelty pass and its own gate, rather than a general re-opening of "the
+     dissipative direction."
+   Branch `leg/m2-v1` is parked, not merged, pending this ruling. **Per the coordinator's
+   request, this file has NOT drafted a dispatchable leg for the `γ=2` candidate** — doing so
+   would presuppose the ruling — but a short unofficial sketch of what a first leg on this
+   candidate would need is below, so that if you rule in favor of (b) or (c), there is no
+   restart cost.
+3. **What is the exit criterion for this project?** The prize is a novel Tier-3 result on a
+   model where blow-up is provable. `NG`'s yes-branch would deliver a *negative* Tier-3-shaped
+   result; leg 63's finding, if pursued, points at a possible *positive* one on a genuinely
+   different object. These are no longer a hypothetical pair — both are now live, concrete,
+   parked results waiting on user rulings, and the exit-criterion question decides how to weigh
+   them against each other, not just in the abstract.
+
+**Unofficial sketch — NOT a dispatchable leg, NOT to be built before the ruling on #2 above.**
+If the user green-lights (b) or (c), a first leg on the `γ=2` full-Laplacian gCLM candidate
+would plausibly need, in order: (i) a novelty pass specifically on dissipative gCLM CAP
+attempts (leg 63 searched broadly for "any dissipative self-similar profile"; a dedicated pass
+should search narrowly for `γ=2` / full-Laplacian gCLM specifically, the same discipline leg 62
+used for Cadiot against NG); (ii) locate or derive the steady self-similar profile equation
+under full Laplacian dissipation and confirm a Newton solve reaches it (the `μ=2` positive
+control from leg 53 already shows this repository's certificate machinery can produce `Z₁<1` in
+a dissipative setting — that result should be re-read against this specific candidate, not
+assumed to transfer); (iii) a fresh multiplier-vs-shift check at the ACTUAL linearization for
+this candidate (leg 63's screen used the existing predicate at a coarse level — a dedicated leg
+should re-derive the tail-inverse exponent from the candidate's own operator, not the ledger
+row); (iv) only then, a certificate attempt. This is a heavy, multi-leg undertaking, not a
+single leg — flagged here only so the shape of the work is visible alongside the decision.
