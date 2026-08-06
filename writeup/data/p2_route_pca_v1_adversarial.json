@@ -1,0 +1,1079 @@
+{
+ "clean_gates": [
+  "PCA1b_zero_speed_guard_false_positive",
+  "PCA4_degenerate_port_parameters",
+  "PCA8_gmres_projected_vs_true_residual",
+  "PCA8b_gmres_nonfinite_inputs",
+  "PCA9_radii_polynomial_status_holds"
+ ],
+ "gate": "Under adversarial and degenerate inputs, does port_certification.py ever silently return a wrong value rather than reject or visibly propagate the defect?",
+ "gate_answer": "YES",
+ "gates": {
+  "PCA10_closes_true_on_a_radius_zero_ball": {
+   "mechanism": "`radii_polynomial_status` returns `closes = bool(disc >= 0)`. It never forms the root `r_min = ((1-Z_1) - sqrt(disc)) / (2 Z_2)`, so it cannot notice that the ball it is certifying is degenerate.  `Y_0 = 0` with any admissible `Z_1 < 1` gives `r_min = 0` and `closes = True`.",
+   "n_silent": 4,
+   "rows": [
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.5,
+     "Z_2": 10000.0,
+     "case": "Y_0 = 0 (leg 51's banked value), Z_1 = 0.5, Z_2 = 1e4",
+     "closes": true,
+     "outcome": "SILENT",
+     "r_min_the_module_never_computes": 0.0,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.9,
+     "Z_2": 1.0,
+     "case": "Y_0 = 0, Z_1 = 0.9, Z_2 = 1.0",
+     "closes": true,
+     "outcome": "SILENT",
+     "r_min_the_module_never_computes": 0.0,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    {
+     "Y_0": -0.0,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "Y_0 = -0.0 (signed zero)",
+     "closes": true,
+     "outcome": "SILENT",
+     "r_min_the_module_never_computes": 0.0,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.0,
+     "Z_2": 0.0,
+     "case": "fully degenerate Y_0 = Z_1 = Z_2 = 0",
+     "closes": true,
+     "outcome": "SILENT",
+     "r_min_the_module_never_computes": 0.0,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    {
+     "Y_0": 1e-08,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "honest certificate (positive control)",
+     "closes": true,
+     "outcome": "CORRECT",
+     "r_min_the_module_never_computes": 2.0000000794384576e-08,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": null
+    },
+    {
+     "Y_0": 0.0625,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "discriminant exactly 0 -- double root",
+     "closes": true,
+     "outcome": "CORRECT",
+     "r_min_the_module_never_computes": 0.25,
+     "status": "EVALUATED",
+     "what_certificate_guards_radius_violation_would_say": null
+    }
+   ],
+   "the_guard_that_exists_and_is_not_called": {
+    "called_by": [
+     "solver/nk_bounds.py:561"
+    ],
+    "function": "solver/certificate_guards.py::radius_violation",
+    "leg_116_count_of_this_class_in_the_sibling": 14,
+    "not_called_by": [
+     "solver/port_certification.py"
+    ],
+    "what_port_certification_imports_from_that_module": "hypothesis_violations and NAN_HINT_GE_ONE only"
+   },
+   "verdict": "SILENT",
+   "why_Y0_zero_is_not_synthetic": "leg 51 measured Y_0 EXACTLY zero on the a=0 CLM profile (it is one basis mode); plan_of_record.py carries a standing ban on reading that zero as progress. The value is banked, and this function accepts it as a closing certificate."
+  },
+  "PCA1_line_sweep_unchecked_outward_upwinding": {
+   "banked_margin": {
+    "holds": true,
+    "min_s_rho_in_the_live_run": 0.38963488051119644,
+    "reading": "no banked PORT number is contaminated -- the live profile's radial speed is strictly outward everywhere.  The defect is LATENT, and the margin to it is 0.3896 in s_rho with only a printed advisory in the way.",
+    "source": "writeup/data/p2_route_l_v1_precond.json -> outward_upwinding"
+   },
+   "curve_in_min_s_rho": [
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": true,
+     "min_s_rho": 0.38963488051119644,
+     "relative_residual_against_advertised_operator": 5.756031509858331e-16,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 5.090726989377322e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 5.090726989377322e-16
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": true,
+     "min_s_rho": 0.1,
+     "relative_residual_against_advertised_operator": 8.9084736875633e-16,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.2903494199871404e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.2903494199871404e-16
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": true,
+     "min_s_rho": 0.001,
+     "relative_residual_against_advertised_operator": 1.9574228413970538e-15,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 3.810311118184228e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 3.810311118184228e-16
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": 0.0,
+     "relative_residual_against_advertised_operator": 1.939263588475336e-15,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 9.308396522343556e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 9.308396522343556e-16
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": -0.001,
+     "relative_residual_against_advertised_operator": 0.0027903593050951168,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.159026335942258e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 0.009685413205247068
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": -0.1,
+     "relative_residual_against_advertised_operator": 1.8075031136122366,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.408704103603923e-15
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 5.954650852379611
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": -0.4,
+     "relative_residual_against_advertised_operator": 20681.3398175765,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 7.884389995098791e-13
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 18819.788755777594
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": -1.0,
+     "relative_residual_against_advertised_operator": 0.4517153500280484,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 7.324451768739182e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.2097294989751992
+     }
+    },
+    {
+     "guard_was_called_by_line_sweep_solve": false,
+     "guard_would_say_holds": false,
+     "min_s_rho": -3.0,
+     "relative_residual_against_advertised_operator": 0.5018900383769527,
+     "vs_operator_the_code_assembles": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 7.556952145050569e-16
+     },
+     "vs_operator_the_docstring_advertises": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.1189766246949646
+     }
+    }
+   ],
+   "guard_is_advisory_only": {
+    "guard": "solver/port_certification.py::outward_upwinding_holds",
+    "so_a_False_holds_would_change": "nothing at all",
+    "sole_caller_in_repo": "experiments/p2_route_l_v1_precond.py:113",
+    "what_that_caller_does_with_it": "formats min/max into a print() at line 114; the `holds` field is never branched on"
+   },
+   "mechanism": "`line_sweep_solve` hard-codes the BACKWARD radial difference (`rhs[i] - sr*prev`, `prev = f_{i-1}`) regardless of the sign of `s_rho`, while choosing the ANGULAR difference direction pointwise by the sign of `s_beta` in the same loop body.  Where `s_rho < 0` the backward difference is the ANTI-upwind (downwind) stencil, so the routine returns the exact inverse of a DIFFERENT operator from the one its docstring names, with no exception, no NaN and no flag.  The precondition IS checked in this module -- by `outward_upwinding_holds`, a separate public function that `line_sweep_solve` never calls.",
+   "positive_control": "at every s_rho > 0 the same comparison returns CORRECT at ~1e-16, so this battery's reference can report the other answer and does",
+   "verdict": "SILENT",
+   "worst_case": {
+    "min_s_rho": -0.4,
+    "rel_error_vs_advertised_operator": 18819.788755777594,
+    "relative_residual": 20681.3398175765
+   }
+  },
+  "PCA1b_zero_speed_guard_false_positive": {
+   "answer": {
+    "how": "agrees with the independent reference",
+    "outcome": "CORRECT",
+    "rel_error": 1.8277978460543766e-16
+   },
+   "guard_says_holds": false,
+   "mechanism": "s_rho == 0 exactly: the guard's predicate is `min > 0`, so it reports holds=False, but the sweep is exact there because there is no radial coupling to upwind.",
+   "the_modules_own_ADI_control_runs_here": "experiments/p2_route_l_v1_precond.py:172-174 passes `0 * one` as s_rho",
+   "verdict": "CORRECT (guard conservative, and demonstrably unconsulted)"
+  },
+  "PCA2_leading_order_dtype_truncation": {
+   "cases": [
+    {
+     "case": "canonical basis vector e_0",
+     "classification": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.0
+     },
+     "dense_reference": [
+      [
+       0.5,
+       0.0
+      ],
+      [
+       -0.25,
+       0.0
+      ]
+     ],
+     "float_input_gives": [
+      [
+       0.5,
+       0.0
+      ],
+      [
+       -0.25,
+       0.0
+      ]
+     ],
+     "input_dtype": "int64",
+     "int_input_gives": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "output_dtype": "int64",
+     "worst_entrywise_absolute_error": 0.5
+    },
+    {
+     "case": "small integer rhs",
+     "classification": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 0.3333333333333333
+     },
+     "dense_reference": [
+      [
+       0.5,
+       1.0
+      ],
+      [
+       1.25,
+       1.5
+      ]
+     ],
+     "float_input_gives": [
+      [
+       0.5,
+       1.0
+      ],
+      [
+       1.25,
+       1.5
+      ]
+     ],
+     "input_dtype": "int64",
+     "int_input_gives": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "output_dtype": "int64",
+     "worst_entrywise_absolute_error": 0.5
+    },
+    {
+     "case": "indicator mask",
+     "classification": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.0
+     },
+     "dense_reference": [
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.25,
+       0.25
+      ]
+     ],
+     "float_input_gives": [
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.25,
+       0.25
+      ]
+     ],
+     "input_dtype": "int64",
+     "int_input_gives": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "output_dtype": "int64",
+     "worst_entrywise_absolute_error": 0.5
+    }
+   ],
+   "mechanism": "`np.zeros_like` inherits the input dtype, and NumPy assigns float into an integer array by silent truncation (numpy#7730, numpy#8733).  The result is finite, correctly shaped, and wrong.",
+   "sibling_asymmetry": {
+    "leading_order_solve": "out = np.zeros_like(rhs)   # line 262, no cast",
+    "line_sweep_solve": "rhs = np.asarray(rhs, float)  # line 446"
+   },
+   "verdict": "SILENT",
+   "worst_relative_error": 1.0
+  },
+  "PCA3_leading_order_sign_blindness": {
+   "mechanism": "`leading_order_solve` hard-codes the outward sweep; a negative `c_l` (inward dilation) is inverted with the downwind stencil and returned without a flag.",
+   "note": "c_l < 0 is not the sign the Hou-Luo rescaling produces, so this is a LATENT twin of PCA1 rather than a live contamination -- reported because it is the same missing check in the second solver.",
+   "rows": [
+    {
+     "c_l": 2.5,
+     "classification": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 1.3101400119365919e-16
+     }
+    },
+    {
+     "c_l": 0.5,
+     "classification": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 1.5937674565918416e-16
+     }
+    },
+    {
+     "c_l": 0.0,
+     "classification": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 0.0
+     }
+    },
+    {
+     "c_l": -0.5,
+     "classification": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 26.021826325746993
+     }
+    },
+    {
+     "c_l": -2.5,
+     "classification": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.9388739267162898
+     }
+    }
+   ],
+   "verdict": "SILENT"
+  },
+  "PCA4_degenerate_port_parameters": {
+   "mechanism": "Degenerate parameters reach `denom = c_diag - c_l/drho` and `a = c_l/drho` with no validation.",
+   "near_singular_amplification_factor": 5.0706024009129154e+30,
+   "reading": "every degenerate PARAMETER case is VISIBLE -- ZeroDivisionError, or NaN/Inf carried into the returned array.  The one that is finite is the 1-ULP-off-singular case, and there the amplification is itself the signal.",
+   "rows": [
+    {
+     "case": "drho = 0 (zero grid spacing)",
+     "detail": "ZeroDivisionError: float division by zero",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "c_l = 0 (no advection)",
+     "detail": [
+      [
+       0.5,
+       1.0
+      ],
+      [
+       1.5,
+       2.0
+      ]
+     ],
+     "outcome": "FINITE_OUTPUT"
+    },
+    {
+     "case": "c_diag == c_l/drho exactly (singular diagonal)",
+     "detail": "4 non-finite entries propagate out",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "c_diag within 1 ULP of singular",
+     "detail": [
+      [
+       2251799813685248.0,
+       4503599627370496.0
+      ],
+      [
+       -1.0141204801825828e+31,
+       -2.0282409603651661e+31
+      ]
+     ],
+     "outcome": "FINITE_OUTPUT"
+    },
+    {
+     "case": "c_diag = NaN",
+     "detail": "4 non-finite entries propagate out",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "c_l = inf",
+     "detail": "4 non-finite entries propagate out",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "rhs contains NaN",
+     "detail": "2 non-finite entries propagate out",
+     "outcome": "VISIBLE"
+    }
+   ],
+   "verdict": "VISIBLE"
+  },
+  "PCA5_stall_verdict_nan_and_ordering": {
+   "cases": [
+    {
+     "case": "honest flat ladder (control)",
+     "expected": "flat",
+     "outcome": "CORRECT",
+     "prose": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+     "reported": "flat",
+     "residual_gain": 1.0512698412698414
+    },
+    {
+     "case": "honest bending ladder (control)",
+     "expected": "bending",
+     "outcome": "CORRECT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "reported": "bending",
+     "residual_gain": 23.739361702127656
+    },
+    {
+     "case": "both residuals NaN",
+     "expected": "refuse / no verdict",
+     "outcome": "SILENT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "reported": "bending",
+     "residual_gain": NaN
+    },
+    {
+     "case": "NaN at the far end only",
+     "expected": "refuse / no verdict",
+     "outcome": "SILENT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "reported": "bending",
+     "residual_gain": NaN
+    },
+    {
+     "case": "NaN at the near end only",
+     "expected": "refuse / no verdict",
+     "outcome": "SILENT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "reported": "bending",
+     "residual_gain": NaN
+    },
+    {
+     "case": "+inf residual",
+     "expected": "refuse / no verdict",
+     "outcome": "SILENT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "reported": "bending",
+     "residual_gain": Infinity
+    },
+    {
+     "case": "negative residual (impossible norm)",
+     "expected": "refuse / no verdict",
+     "outcome": "SILENT",
+     "prose": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+     "reported": "flat",
+     "residual_gain": -25.0
+    }
+   ],
+   "machine_zero": {
+    "case": "ladder reaching machine zero -- the module's own docstring reports exactly this: '0.0401 -> 0.0 by m = 80'",
+    "detail": "ZeroDivisionError: float division by zero",
+    "outcome": "VISIBLE",
+    "reading": "a crash, not a silent wrong value, but it is reachable from a run this module already published"
+   },
+   "mechanism": "`stall_verdict` compares a possibly-NaN gain against 2.0 and emits a confident prose reading either way; and it reads the ladder's ends POSITIONALLY rather than by Krylov dimension.",
+   "n_silent": 6,
+   "ordering": {
+    "ascending_dims": {
+     "flat": false,
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "residual_gain": 33.0,
+     "work_ratio": 16.0
+    },
+    "mechanism": "`first, last = rows[0], rows[-1]` is POSITIONAL. `krylov_ladder(dims=...)` preserves the caller's order, so a descending `dims` tuple inverts the ratio (16.0 -> 0.0625) and flips the published verdict, on identical measurements, with no error.",
+    "outcome": "SILENT",
+    "same_data_descending_dims": {
+     "flat": true,
+     "prose": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+     "residual_gain": 0.030303030303030304,
+     "work_ratio": 0.0625
+    }
+   },
+   "verdict": "SILENT"
+  },
+  "PCA6_attribution_summary_ranks_a_nan": {
+   "control_ranking": [
+    {
+     "ablation": "angular transport OFF",
+     "flat": false,
+     "gain": 2.1166487068965516,
+     "gain_vs_full": 2.013420935142424,
+     "rel_at_max_dim": 0.3712,
+     "worse_than_full": false
+    },
+    {
+     "ablation": "full",
+     "flat": true,
+     "gain": 1.0512698412698414,
+     "gain_vs_full": 1.0,
+     "rel_at_max_dim": 0.63,
+     "worse_than_full": false
+    }
+   ],
+   "degenerate_flat_baseline": {
+    "outcome": "FINITE",
+    "raised": null,
+    "result": [
+     {
+      "ablation": "other",
+      "flat": false,
+      "gain": 2.0,
+      "gain_vs_full": 2.0,
+      "rel_at_max_dim": 0.25,
+      "worse_than_full": false
+     },
+     {
+      "ablation": "full",
+      "flat": true,
+      "gain": 1.0,
+      "gain_vs_full": 1.0,
+      "rel_at_max_dim": 0.5,
+      "worse_than_full": false
+     }
+    ]
+   },
+   "mechanism": "`attribution_summary` sorts ablations by `residual_gain` and divides every gain by the 'full' row's.  A NaN gain sorts without raising, so a poisoned ablation takes a RANK in the published attribution table.",
+   "missing_full_key": {
+    "outcome": "VISIBLE",
+    "raised": "KeyError: 'full'"
+   },
+   "poisoned_ranking": {
+    "note": "the NaN row is ranked and reported with gain=NaN, flat=False, i.e. it is presented as an ablation that UN-flattened the ladder",
+    "outcome": "SILENT",
+    "raised": null,
+    "result": [
+     {
+      "ablation": "full",
+      "flat": true,
+      "gain": 1.0512698412698414,
+      "gain_vs_full": 1.0,
+      "rel_at_max_dim": 0.63,
+      "worse_than_full": false
+     },
+     {
+      "ablation": "angular transport OFF",
+      "flat": false,
+      "gain": NaN,
+      "gain_vs_full": NaN,
+      "rel_at_max_dim": NaN,
+      "worse_than_full": false
+     }
+    ]
+   },
+   "verdict": "SILENT",
+   "zero_gain_baseline": {
+    "outcome": "VISIBLE",
+    "raised": "ZeroDivisionError: float division by zero",
+    "result": null
+   }
+  },
+  "PCA7_pack_unpack_shape_blindness": {
+   "clean_round_trip_max_abs_error": 0.0,
+   "mechanism": "`pack` is `np.concatenate([np.ravel(o), np.ravel(e), np.ravel(x)])` and `unpack` is three `reshape(self.shape)` calls.  Neither validates the per-field shape, only the total size -- so a transposed field round-trips into a different, finite, plausible field.",
+   "note": "the transposition survives only because nr*nb is layout-independent; a wrong TOTAL length is caught",
+   "outcome": "SILENT",
+   "transposed_field": {
+    "equals_original_e": false,
+    "equals_transpose_of_what_was_packed": true,
+    "max_abs_error_vs_intended_field": 3.1681127936280147,
+    "relative_error_vs_intended_field": 1.320353387413802,
+    "shape_returned": [
+     6,
+     4
+    ]
+   },
+   "transposed_field_raised": null,
+   "verdict": "SILENT",
+   "wrong_total_length_raised": "ValueError: cannot reshape array of size 25 into shape (6,4)"
+  },
+  "PCA8_gmres_projected_vs_true_residual": {
+   "ladder": [
+    {
+     "cond_measured": 1.3213156383358629,
+     "cond_target": 1.0,
+     "krylov_dim_used": 10,
+     "ratio_true_over_reported": 1.0000001700096413,
+     "reported_projected_residual": 7.64397221079518e-11,
+     "true_relative_residual": 7.643973510344154e-11
+    },
+    {
+     "cond_measured": 102.58661081683482,
+     "cond_target": 100.0,
+     "krylov_dim_used": 104,
+     "ratio_true_over_reported": 0.999999319039905,
+     "reported_projected_residual": 8.141575815796409e-11,
+     "true_relative_residual": 8.141570271708169e-11
+    },
+    {
+     "cond_measured": 10203.880746748817,
+     "cond_target": 10000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 0.9999999981303963,
+     "reported_projected_residual": 3.5655795949491936e-07,
+     "true_relative_residual": 3.565579588282973e-07
+    },
+    {
+     "cond_measured": 1007408.4532233614,
+     "cond_target": 1000000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 1.0000000000037688,
+     "reported_projected_residual": 0.0053096146734335345,
+     "true_relative_residual": 0.005309614673453545
+    },
+    {
+     "cond_measured": 100480575.47503117,
+     "cond_target": 100000000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 1.0000000003653893,
+     "reported_projected_residual": 0.08466248899585258,
+     "true_relative_residual": 0.08466248902678734
+    },
+    {
+     "cond_measured": 10129426458.549906,
+     "cond_target": 10000000000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 1.0000000027256106,
+     "reported_projected_residual": 0.21588484127100147,
+     "true_relative_residual": 0.2158848418594195
+    },
+    {
+     "cond_measured": 1020554234366.6167,
+     "cond_target": 1000000000000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 1.000000091692917,
+     "reported_projected_residual": 0.28112139037805584,
+     "true_relative_residual": 0.28112141615489616
+    },
+    {
+     "cond_measured": 102068128986506.22,
+     "cond_target": 100000000000000.0,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 1.0000005772698957,
+     "reported_projected_residual": 0.3438261412632276,
+     "true_relative_residual": 0.34382633974370824
+    },
+    {
+     "cond_measured": 2.8703951492401744e+16,
+     "cond_target": 1e+16,
+     "krylov_dim_used": 200,
+     "ratio_true_over_reported": 0.9999919428646216,
+     "reported_projected_residual": 0.38117201075369594,
+     "true_relative_residual": 0.38116893959920284
+    }
+   ],
+   "mechanism": "`gmres` reports the projected Arnoldi least-squares residual, never the true one; the module's cond~1e8 control does not carry a `rel_true` field.",
+   "module_own_controls": {
+    "cond_1e8_has_rel_true_in_module": false,
+    "cond_1e8_reported_by_module": 0.08640395900178172,
+    "cond_1e8_true_residual_measured_here": 0.08640395900307152,
+    "module_well_conditioned": {
+     "k": 19,
+     "rel_reported": 7.626805630577774e-11,
+     "rel_true": 7.626807282926199e-11
+    },
+    "ratio": 1.0000000000149276,
+    "reading": "the missing `rel_true` on the cond~1e8 control is a REPORTING asymmetry, not a wrong number: supplied here, it agrees to 1.49e-11 relative.",
+    "well_conditioned_has_rel_true_in_module": true
+   },
+   "prior_art": [
+    "https://link.springer.com/article/10.1007/BF02510248",
+    "https://epubs.siam.org/doi/10.1137/050630416"
+   ],
+   "verdict": "CORRECT (the gap is bounded by 8.1e-06 relative over cond 1e0..1e16; NULL result, reported)",
+   "worst_at_cond": 1e+16,
+   "worst_deviation_from_unity": 8.057135378436442e-06,
+   "worst_ratio_true_over_reported": 0.9999919428646216
+  },
+  "PCA8b_gmres_nonfinite_inputs": {
+   "mechanism": "Non-finite data reaches `np.linalg.lstsq` on the Hessenberg block, which raises `LinAlgError: SVD did not converge`.",
+   "reading": "every non-finite input is VISIBLE -- it raises.  This is the branch of the battery that came out clean, and it is why the YES verdict is scoped to the three mechanisms named, not to the module as a whole.",
+   "rows": [
+    {
+     "case": "b has a NaN",
+     "detail": "LinAlgError: SVD did not converge in Linear Least Squares",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "b has a +inf",
+     "detail": "LinAlgError: SVD did not converge in Linear Least Squares",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "b is all zeros",
+     "detail": "zero rhs is the legitimate early return rel=0.0, k=0",
+     "k": 0,
+     "outcome": "FINITE",
+     "reported_residual": 0.0
+    },
+    {
+     "case": "b is all NaN",
+     "detail": "LinAlgError: SVD did not converge in Linear Least Squares",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "matvec injects NaN",
+     "detail": "LinAlgError: SVD did not converge in Linear Least Squares",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "matvec injects +inf",
+     "detail": "LinAlgError: SVD did not converge in Linear Least Squares",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "m = 0",
+     "detail": {
+      "k": 0,
+      "rel": 1.0
+     },
+     "outcome": "FINITE"
+    },
+    {
+     "case": "m = -1",
+     "detail": "ValueError: negative dimensions are not allowed",
+     "outcome": "VISIBLE"
+    },
+    {
+     "case": "m > n",
+     "detail": {
+      "k": 1,
+      "rel": 1.2412670766236368e-16
+     },
+     "outcome": "FINITE"
+    }
+   ],
+   "verdict": "VISIBLE"
+  },
+  "PCA9_radii_polynomial_status_holds": {
+   "boundary_of_admissibility": [
+    {
+     "case": "Z1 exactly 1.0",
+     "closes": false,
+     "discriminant": null,
+     "raised": null,
+     "status": "Z1_EXCEEDS_ONE"
+    },
+    {
+     "case": "Z1 = 1 - 1 ULP",
+     "closes": false,
+     "discriminant": -4e-08,
+     "raised": null,
+     "status": "EVALUATED"
+    },
+    {
+     "case": "Z1 = 0, Z2 = 0, Y0 = 0 (fully degenerate)",
+     "closes": true,
+     "discriminant": 1.0,
+     "raised": null,
+     "status": "EVALUATED"
+    },
+    {
+     "case": "Z2 = 0 (polynomial degenerates to linear)",
+     "closes": true,
+     "discriminant": 0.25,
+     "raised": null,
+     "status": "EVALUATED"
+    },
+    {
+     "case": "Y0 = 0 exactly",
+     "closes": true,
+     "discriminant": 0.25,
+     "raised": null,
+     "status": "EVALUATED"
+    },
+    {
+     "case": "discriminant exactly 0",
+     "closes": true,
+     "discriminant": 0.0,
+     "raised": null,
+     "status": "EVALUATED"
+    },
+    {
+     "case": "bool True as Z1 (1.0 in disguise)",
+     "closes": false,
+     "discriminant": null,
+     "raised": null,
+     "status": "Z1_EXCEEDS_ONE"
+    }
+   ],
+   "fabricated_but_hypothesis_satisfying": {
+    "input": [
+     1e-30,
+     1e-30,
+     1e-30
+    ],
+    "note": "closes=True on constants no run produced.  This is NOT a new finding: leg 128 named this exact residual class ('constants that SATISFY the theorem's hypotheses and lie about a MAGNITUDE, which no hypothesis guard can detect') and it is restated here so the battery's coverage is honest, not to re-count it as a defect of this leg.",
+    "result": {
+     "Y0": 1e-30,
+     "Z1": 1e-30,
+     "Z2": 1e-30,
+     "closes": true,
+     "discriminant": 1.0,
+     "status": "EVALUATED"
+    }
+   },
+   "hypothesis_violating_inputs": [
+    {
+     "case": "Y0 negative",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z1 negative",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z2 negative",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Y0 NaN",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z1 NaN",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z2 NaN",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Y0 +inf",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z1 -inf",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "Z2 +inf",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    },
+    {
+     "case": "all three negative",
+     "closes": false,
+     "outcome": "CORRECT",
+     "raised": null,
+     "status": "INVALID_INPUT"
+    }
+   ],
+   "kill_switch": [
+    {
+     "case": "both None -- the kill switch",
+     "closes": false,
+     "leaked_a_value": false,
+     "raised": null,
+     "status": "BLOCKED_AT_STEP_ONE"
+    },
+    {
+     "case": "both None + poisoned Z2",
+     "closes": false,
+     "leaked_a_value": false,
+     "raised": null,
+     "status": "BLOCKED_AT_STEP_ONE"
+    },
+    {
+     "case": "both None + negative Z2",
+     "closes": false,
+     "leaked_a_value": false,
+     "raised": null,
+     "status": "BLOCKED_AT_STEP_ONE"
+    },
+    {
+     "case": "Z1 None only",
+     "closes": false,
+     "leaked_a_value": false,
+     "raised": null,
+     "status": "NO_Z1"
+    },
+    {
+     "case": "Y0 None only",
+     "closes": null,
+     "leaked_a_value": false,
+     "raised": "TypeError: unsupported operand type(s) for *: 'float' and 'NoneType'",
+     "status": null
+    }
+   ],
+   "kill_switch_asymmetry": "there is a `NO_Z1` branch and no `NO_Y0` branch: `radii_polynomial_status(None, 0.5, 1.0)` falls through to the discriminant and dies on `TypeError: unsupported operand type(s) for *: 'float' and 'NoneType'`. VISIBLE, so it does not answer the gate YES, but it is a bare arithmetic TypeError where the sibling case gets a named status -- and `None` is documented in this module as a legitimate NOT-MEASURED input in ANY slot.",
+   "mechanism": "delegates to solver/certificate_guards.hypothesis_violations with allow_none=True (leg 79's repair, leg 128's consolidation).",
+   "n_cases": 10,
+   "n_rejected": 10,
+   "verdict": "CORRECT (guard holds; no regression on legs 79/128)",
+   "wrong_type": [
+    {
+     "case": "Y0 a string",
+     "outcome": "VISIBLE",
+     "raised": "TypeError: Y_0 must be a real number or None, got str; the radii polynomial's constants are norms.",
+     "status": null
+    },
+    {
+     "case": "Z1 a numpy array",
+     "outcome": "VISIBLE",
+     "raised": "TypeError: Z_1 must be a real number or None, got ndarray; the radii polynomial's constants are norms.",
+     "status": null
+    },
+    {
+     "case": "Z2 complex",
+     "outcome": "VISIBLE",
+     "raised": "TypeError: Z_2 must be a real number or None, got complex; the radii polynomial's constants are norms.",
+     "status": null
+    }
+   ]
+  }
+ },
+ "headline": "Route-PCA gate answers YES: four SILENT wrong-value mechanisms in solver/port_certification.py, and TWO of them are a guard that already exists and is never called. (1) line_sweep_solve hard-codes the backward radial difference regardless of sign(s_rho) while choosing the ANGULAR difference direction pointwise by sign(s_beta) four lines away in the same loop, so where s_rho < 0 it returns the exact inverse of a DIFFERENT operator: at min(s_rho) = -0.4 the relative error against the operator its own docstring advertises is 18820x with a residual 20681x the rhs, finite, correctly shaped, no exception and no flag. The curve is NOT monotone in the violation -- the worst error is at a MILD breach (-0.4), not a gross one (1.12x at -3.0) -- and a breach 390x smaller than the live run's own margin already costs 0.97%. The check that would catch it, outward_upwinding_holds, is in the same file and its single caller (p2_route_l_v1_precond.py:113) only prints it. (2) radii_polynomial_status returns closes from the DISCRIMINANT ALONE and never forms r_min, so Y_0 = 0 -- the value leg 51 actually measured on the a=0 CLM profile -- returns closes=True for a ball of radius exactly 0; certificate_guards.radius_violation exists for this class (leg 116 counted 14 in nk_bounds) and port_certification imports only hypothesis_violations from it. Legs 79/128 repaired the hypothesis half and left the radius half. (3) leading_order_solve allocates np.zeros_like(rhs) with no float cast -- its sibling line_sweep_solve opens with np.asarray(rhs, float) -- so an integer rhs truncates every output; worst relative error 1.000 (an exact 0.5 returned as 0). Its twin sign-blindness costs 26.0x at c_l = -0.5. (4) stall_verdict emits the confident prose 'bending => finite ill-conditioning, and more Krylov work would help' on a NaN or +inf ladder (NaN < 2.0 is False), calls a negative residual 'flat' at gain -25.0, and flips its published verdict on IDENTICAL data when dims are passed descending (work ratio 16.0 -> 0.0625); attribution_summary then ranks the NaN ablation. NO BANKED NUMBER MOVES: the live PORT run had min(s_rho) = 0.3896 > 0 and float64 fields. The mechanism most likely a priori -- gmres reporting the projected Arnoldi residual as a solve quality -- is a NULL: reported and true agree to 8.1e-06 relative across cond 1e0..1e16, including on the module's own uncontrolled cond~1e8 calibration number 0.0864.",
+ "leg": 200,
+ "load_bearing_note": "Every banked PORT-family number was produced with min(s_rho) = 0.38963488051119644 > 0 (writeup/data/p2_route_l_v1_precond.json) and float64 fields, so no reach-table value moves. In leg 116's sense the three mechanisms are NOT load-bearing: the hypothesis-satisfying counterpart returns the same number. They are LATENT -- they fire on the next profile, grid or caller that leaves the corner the module was exercised in, and nothing in the module or its pipeline would say so.",
+ "load_bearing_on_a_banked_number": false,
+ "module_edited_by_this_leg": false,
+ "module_under_test": "solver/port_certification.py",
+ "n_gates": 12,
+ "n_silent": 7,
+ "route": "PCA",
+ "runtime_s": 152.84,
+ "silent_mechanisms": [
+  "PCA10_closes_true_on_a_radius_zero_ball",
+  "PCA1_line_sweep_unchecked_outward_upwinding",
+  "PCA2_leading_order_dtype_truncation",
+  "PCA3_leading_order_sign_blindness",
+  "PCA5_stall_verdict_nan_and_ordering",
+  "PCA6_attribution_summary_ranks_a_nan",
+  "PCA7_pack_unpack_shape_blindness"
+ ]
+}
