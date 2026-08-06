@@ -1,0 +1,1168 @@
+{
+  "leg": 185,
+  "route": "ROUTE-M2SD",
+  "branch": "leg/185-m2sd-v1",
+  "diagnostic_only": true,
+  "no_dynamics_run": true,
+  "builds_no_solver_module": true,
+  "stage_claimed": null,
+  "clay_odds_unchanged": 0.0005,
+  "float_not_certificate": "Every number here is floating point.  Nothing here is a certificate, and no radii-polynomial bound is computed.",
+  "reads_read_only": [
+    "solver/dissipative_profile.py (leg 125)",
+    "writeup/data/p2_route_m2p_v1_promotion.json (leg 125)"
+  ],
+  "direction_md_provenance_correction": {
+    "as_written_in_DIRECTION_md": "residual 2.65-3.75 with c_l running to -10.7",
+    "as_measured_here": "the runaway parameter is `a`, not `c_l` (c_l is HELD at 1/2 by newton_gamma2), it runs to -10.09246141, and the plateauing quantity is the RELATIVE residual over 4.4118-5.4857; the ABSOLUTE residual falls to 1.2071e-15",
+    "effect_on_the_gate": "none -- the gate's question is unchanged"
+  },
+  "D1_residual_trend_classification": {
+    "stalled_target_nu": 1.0,
+    "control_target_nu": 0.3,
+    "stalled": {
+      "a_final": -10.092461405320627,
+      "iters": 17,
+      "residual_rms_absolute_final": 1.2070517780856019e-15,
+      "residual_relative_final": 5.485652392436699,
+      "amplitude_final": 1.6056210004835197e-15,
+      "amplitude_initial": 1.7307061262723378,
+      "relative_residual_last4": [
+        4.411812358129814,
+        4.836674792387942,
+        5.234439119833318,
+        5.485652392436699
+      ],
+      "absolute_residual_last4": [
+        0.003801948900837124,
+        6.385097549461318e-05,
+        1.7971377014976545e-08,
+        1.2070517780856019e-15
+      ],
+      "amplitude_last4": [
+        0.005991107888954482,
+        9.684474228908394e-05,
+        2.528069622705889e-08,
+        1.6056210004835197e-15
+      ],
+      "trace": [
+        {
+          "iter": 0,
+          "residual_rms_absolute": 7.813312190178,
+          "residual_relative": 16.823916584256605,
+          "a": 0.386,
+          "amplitude": 1.7307061262723378,
+          "norm_dR_da_column": 12.814523095721828,
+          "sigma_min_augmented": 0.694840338815267,
+          "sigma_max_augmented": 4507.876419608203,
+          "sigma_min_dR_dOmega": 0.41721045408405777,
+          "cond_dR_dOmega": 10804.8021699379
+        },
+        {
+          "iter": 1,
+          "residual_rms_absolute": 1.81231537232443,
+          "residual_relative": 7.950862916097868,
+          "a": 2.494325479315173,
+          "amplitude": 0.9539676063506426,
+          "norm_dR_da_column": 6.111904861197582,
+          "sigma_min_augmented": 0.17913415512469386,
+          "sigma_max_augmented": 4509.118457904535,
+          "sigma_min_dR_dOmega": 0.09603410837048856,
+          "cond_dR_dOmega": 46953.301638506135
+        },
+        {
+          "iter": 2,
+          "residual_rms_absolute": 1.8546131064157358,
+          "residual_relative": 9.376585975209894,
+          "a": 5.401382181490699,
+          "amplitude": 0.7835438665523176,
+          "norm_dR_da_column": 6.10066414376054,
+          "sigma_min_augmented": 0.006167759598037995,
+          "sigma_max_augmented": 4509.817085126158,
+          "sigma_min_dR_dOmega": 0.003891131047730765,
+          "cond_dR_dOmega": 1158999.023627384
+        },
+        {
+          "iter": 3,
+          "residual_rms_absolute": 360.50119610055526,
+          "residual_relative": 44.218229761924384,
+          "a": -33.941870960123495,
+          "amplitude": 5.127049202587941,
+          "norm_dR_da_column": 209.2624962687809,
+          "sigma_min_augmented": 0.00013281229655285007,
+          "sigma_max_augmented": 8765.282014897306,
+          "sigma_min_dR_dOmega": 0.00013281229665518208,
+          "cond_dR_dOmega": 65997518.57054651
+        },
+        {
+          "iter": 4,
+          "residual_rms_absolute": 106.52392183770874,
+          "residual_relative": 33.9526756753079,
+          "a": -23.617086179896273,
+          "amplitude": 3.343526982681845,
+          "norm_dR_da_column": 88.47304010509549,
+          "sigma_min_augmented": 0.00011545692682252236,
+          "sigma_max_augmented": 4543.426855152317,
+          "sigma_min_dR_dOmega": 0.00011545692666128274,
+          "cond_dR_dOmega": 39351704.45408981
+        },
+        {
+          "iter": 5,
+          "residual_rms_absolute": 31.33485988756699,
+          "residual_relative": 28.682069138608504,
+          "a": -16.937586144831506,
+          "amplitude": 2.130975493155855,
+          "norm_dR_da_column": 36.25993676949947,
+          "sigma_min_augmented": 0.028090751754439876,
+          "sigma_max_augmented": 4514.335204369359,
+          "sigma_min_dR_dOmega": 0.027235556378532925,
+          "cond_dR_dOmega": 165751.53235817715
+        },
+        {
+          "iter": 6,
+          "residual_rms_absolute": 9.106185201840297,
+          "residual_relative": 24.21949156414028,
+          "a": -12.83822455402861,
+          "amplitude": 1.3156628823662215,
+          "norm_dR_da_column": 14.046235999653067,
+          "sigma_min_augmented": 0.2227940802397632,
+          "sigma_max_augmented": 4510.002170882872,
+          "sigma_min_dR_dOmega": 0.22279408023966077,
+          "cond_dR_dOmega": 20242.917433135735
+        },
+        {
+          "iter": 7,
+          "residual_rms_absolute": 2.5684216248328826,
+          "residual_relative": 13.101077259741517,
+          "a": -10.553615622524694,
+          "amplitude": 0.7537149331828328,
+          "norm_dR_da_column": 4.993691221210013,
+          "sigma_min_augmented": 0.16506293478240985,
+          "sigma_max_augmented": 4509.985424518065,
+          "sigma_min_dR_dOmega": 0.1650629347824589,
+          "cond_dR_dOmega": 27322.8234458687
+        },
+        {
+          "iter": 8,
+          "residual_rms_absolute": 0.7319153802731608,
+          "residual_relative": 4.264813220688617,
+          "a": -9.743199262874803,
+          "amplitude": 0.38415733747606307,
+          "norm_dR_da_column": 1.4707007206093894,
+          "sigma_min_augmented": 0.27995432838343476,
+          "sigma_max_augmented": 4510.560485085183,
+          "sigma_min_dR_dOmega": 0.27133252933411833,
+          "cond_dR_dOmega": 16623.736549961865
+        },
+        {
+          "iter": 9,
+          "residual_rms_absolute": 1.2261304449115138,
+          "residual_relative": 5.853674638351214,
+          "a": -9.948635712442954,
+          "amplitude": 0.5689766812576407,
+          "norm_dR_da_column": 1.9102883532790227,
+          "sigma_min_augmented": 0.12767402884122347,
+          "sigma_max_augmented": 4510.659292534145,
+          "sigma_min_dR_dOmega": 0.12442670595270666,
+          "cond_dR_dOmega": 36251.53666166012
+        },
+        {
+          "iter": 10,
+          "residual_rms_absolute": 2.241826169812691,
+          "residual_relative": 13.191113067544237,
+          "a": -10.354867942169422,
+          "amplitude": 0.8385882255867605,
+          "norm_dR_da_column": 3.58551666432572,
+          "sigma_min_augmented": 0.04568333591206476,
+          "sigma_max_augmented": 4510.695993890358,
+          "sigma_min_dR_dOmega": 0.04563349685537902,
+          "cond_dR_dOmega": 98846.16136662928
+        },
+        {
+          "iter": 11,
+          "residual_rms_absolute": 0.5620976403519686,
+          "residual_relative": 8.374331396317698,
+          "a": -10.127510341434881,
+          "amplitude": 0.3375784915682052,
+          "norm_dR_da_column": 0.7998234145972376,
+          "sigma_min_augmented": 0.40329528463725667,
+          "sigma_max_augmented": 4510.55956128361,
+          "sigma_min_dR_dOmega": 0.403069667698782,
+          "cond_dR_dOmega": 11190.520951465878
+        },
+        {
+          "iter": 12,
+          "residual_rms_absolute": 0.1418715249289041,
+          "residual_relative": 5.176486188548753,
+          "a": -10.097054202586857,
+          "amplitude": 0.16403359338917567,
+          "norm_dR_da_column": 0.1140922708128824,
+          "sigma_min_augmented": 0.5420698414453944,
+          "sigma_max_augmented": 4510.449728090774,
+          "sigma_min_dR_dOmega": 0.5420612542785873,
+          "cond_dR_dOmega": 8320.922575611097
+        },
+        {
+          "iter": 13,
+          "residual_rms_absolute": 0.030943820619248757,
+          "residual_relative": 4.433611207652933,
+          "a": -10.092650854224118,
+          "amplitude": 0.0460529893809425,
+          "norm_dR_da_column": 0.00936320426757024,
+          "sigma_min_augmented": 0.9266514184942464,
+          "sigma_max_augmented": 4510.41937813571,
+          "sigma_min_dR_dOmega": 0.9266514184942751,
+          "cond_dR_dOmega": 4867.439134194327
+        },
+        {
+          "iter": 14,
+          "residual_rms_absolute": 0.003801948900837124,
+          "residual_relative": 4.411812358129814,
+          "a": -10.092461822015288,
+          "amplitude": 0.005991107888954482,
+          "norm_dR_da_column": 0.0001268878721738208,
+          "sigma_min_augmented": 0.928503364140331,
+          "sigma_max_augmented": 4510.412972300962,
+          "sigma_min_dR_dOmega": 0.928503364140336,
+          "cond_dR_dOmega": 4857.723888245652
+        },
+        {
+          "iter": 15,
+          "residual_rms_absolute": 6.385097549461318e-05,
+          "residual_relative": 4.836674792387942,
+          "a": -10.092461405322313,
+          "amplitude": 9.684474228908394e-05,
+          "norm_dR_da_column": 3.4724241422090707e-08,
+          "sigma_min_augmented": 0.9287062349434986,
+          "sigma_max_augmented": 4510.412512307556,
+          "sigma_min_dR_dOmega": 0.9287062349434786,
+          "cond_dR_dOmega": 4856.662249696275
+        },
+        {
+          "iter": 16,
+          "residual_rms_absolute": 1.7971377014976545e-08,
+          "residual_relative": 5.234439119833318,
+          "a": -10.092461405320627,
+          "amplitude": 2.528069622705889e-08,
+          "norm_dR_da_column": 2.3299225212668173e-15,
+          "sigma_min_augmented": 0.9287082140021149,
+          "sigma_max_augmented": 4510.412503662568,
+          "sigma_min_dR_dOmega": 0.9287082140020876,
+          "cond_dR_dOmega": 4856.651890937651
+        },
+        {
+          "iter": 17,
+          "residual_rms_absolute": 1.2070517780856019e-15,
+          "residual_relative": 5.485652392436699,
+          "a": -10.092461405320627,
+          "amplitude": 1.6056210004835197e-15,
+          "norm_dR_da_column": 9.819762433889066e-30,
+          "sigma_min_augmented": 0.9287082143591516,
+          "sigma_max_augmented": 4510.412503660474,
+          "sigma_min_dR_dOmega": 0.9287082143591615,
+          "cond_dR_dOmega": 4856.651889068082
+        }
+      ],
+      "classification": {
+        "absolute_residual_floor": 1.2070517780856019e-15,
+        "final_amplitude": 1.6056210004835197e-15,
+        "tail_plateau_ratio": 3149781119470.334,
+        "classification": "CONVERGED to the TRIVIAL NULL Omega = 0 (artifact signature: the absolute residual reaches the Newton floor because the solution vanished)"
+      }
+    },
+    "control": {
+      "a_final": 0.3820854853529409,
+      "iters": 9,
+      "residual_rms_absolute_final": 1.329685329535958e-14,
+      "residual_relative_final": 2.437198073574193e-14,
+      "amplitude_final": 1.5055977131621614,
+      "classification": {
+        "absolute_residual_floor": 1.329685329535958e-14,
+        "final_amplitude": 1.5055977131621614,
+        "tail_plateau_ratio": 1696891208857.1794,
+        "classification": "CONVERGED to a non-trivial solution"
+      }
+    },
+    "leg125_reported_relative_residual_at_nu_1": 5.485652392436699,
+    "reproduced_relative_residual_at_nu_1": 5.485652392436699,
+    "note": "leg 125's M7 row for nu = 1.0 is reproduced to the digit.  What its single reported number could not show is that the ABSOLUTE residual falls to the Newton floor over the same iterations -- the relative residual is a 0/0 ratio here, not a plateau."
+  },
+  "D2_jacobian_conditioning": {
+    "along_stalled_path": [
+      {
+        "iter": 0,
+        "amplitude": 1.7307061262723378,
+        "a": 0.386,
+        "norm_dR_da_column": 12.814523095721828,
+        "sigma_min_augmented": 0.694840338815267,
+        "sigma_min_dR_dOmega": 0.41721045408405777,
+        "cond_dR_dOmega": 10804.8021699379
+      },
+      {
+        "iter": 1,
+        "amplitude": 0.9539676063506426,
+        "a": 2.494325479315173,
+        "norm_dR_da_column": 6.111904861197582,
+        "sigma_min_augmented": 0.17913415512469386,
+        "sigma_min_dR_dOmega": 0.09603410837048856,
+        "cond_dR_dOmega": 46953.301638506135
+      },
+      {
+        "iter": 2,
+        "amplitude": 0.7835438665523176,
+        "a": 5.401382181490699,
+        "norm_dR_da_column": 6.10066414376054,
+        "sigma_min_augmented": 0.006167759598037995,
+        "sigma_min_dR_dOmega": 0.003891131047730765,
+        "cond_dR_dOmega": 1158999.023627384
+      },
+      {
+        "iter": 3,
+        "amplitude": 5.127049202587941,
+        "a": -33.941870960123495,
+        "norm_dR_da_column": 209.2624962687809,
+        "sigma_min_augmented": 0.00013281229655285007,
+        "sigma_min_dR_dOmega": 0.00013281229665518208,
+        "cond_dR_dOmega": 65997518.57054651
+      },
+      {
+        "iter": 4,
+        "amplitude": 3.343526982681845,
+        "a": -23.617086179896273,
+        "norm_dR_da_column": 88.47304010509549,
+        "sigma_min_augmented": 0.00011545692682252236,
+        "sigma_min_dR_dOmega": 0.00011545692666128274,
+        "cond_dR_dOmega": 39351704.45408981
+      },
+      {
+        "iter": 5,
+        "amplitude": 2.130975493155855,
+        "a": -16.937586144831506,
+        "norm_dR_da_column": 36.25993676949947,
+        "sigma_min_augmented": 0.028090751754439876,
+        "sigma_min_dR_dOmega": 0.027235556378532925,
+        "cond_dR_dOmega": 165751.53235817715
+      },
+      {
+        "iter": 6,
+        "amplitude": 1.3156628823662215,
+        "a": -12.83822455402861,
+        "norm_dR_da_column": 14.046235999653067,
+        "sigma_min_augmented": 0.2227940802397632,
+        "sigma_min_dR_dOmega": 0.22279408023966077,
+        "cond_dR_dOmega": 20242.917433135735
+      },
+      {
+        "iter": 7,
+        "amplitude": 0.7537149331828328,
+        "a": -10.553615622524694,
+        "norm_dR_da_column": 4.993691221210013,
+        "sigma_min_augmented": 0.16506293478240985,
+        "sigma_min_dR_dOmega": 0.1650629347824589,
+        "cond_dR_dOmega": 27322.8234458687
+      },
+      {
+        "iter": 8,
+        "amplitude": 0.38415733747606307,
+        "a": -9.743199262874803,
+        "norm_dR_da_column": 1.4707007206093894,
+        "sigma_min_augmented": 0.27995432838343476,
+        "sigma_min_dR_dOmega": 0.27133252933411833,
+        "cond_dR_dOmega": 16623.736549961865
+      },
+      {
+        "iter": 9,
+        "amplitude": 0.5689766812576407,
+        "a": -9.948635712442954,
+        "norm_dR_da_column": 1.9102883532790227,
+        "sigma_min_augmented": 0.12767402884122347,
+        "sigma_min_dR_dOmega": 0.12442670595270666,
+        "cond_dR_dOmega": 36251.53666166012
+      },
+      {
+        "iter": 10,
+        "amplitude": 0.8385882255867605,
+        "a": -10.354867942169422,
+        "norm_dR_da_column": 3.58551666432572,
+        "sigma_min_augmented": 0.04568333591206476,
+        "sigma_min_dR_dOmega": 0.04563349685537902,
+        "cond_dR_dOmega": 98846.16136662928
+      },
+      {
+        "iter": 11,
+        "amplitude": 0.3375784915682052,
+        "a": -10.127510341434881,
+        "norm_dR_da_column": 0.7998234145972376,
+        "sigma_min_augmented": 0.40329528463725667,
+        "sigma_min_dR_dOmega": 0.403069667698782,
+        "cond_dR_dOmega": 11190.520951465878
+      },
+      {
+        "iter": 12,
+        "amplitude": 0.16403359338917567,
+        "a": -10.097054202586857,
+        "norm_dR_da_column": 0.1140922708128824,
+        "sigma_min_augmented": 0.5420698414453944,
+        "sigma_min_dR_dOmega": 0.5420612542785873,
+        "cond_dR_dOmega": 8320.922575611097
+      },
+      {
+        "iter": 13,
+        "amplitude": 0.0460529893809425,
+        "a": -10.092650854224118,
+        "norm_dR_da_column": 0.00936320426757024,
+        "sigma_min_augmented": 0.9266514184942464,
+        "sigma_min_dR_dOmega": 0.9266514184942751,
+        "cond_dR_dOmega": 4867.439134194327
+      },
+      {
+        "iter": 14,
+        "amplitude": 0.005991107888954482,
+        "a": -10.092461822015288,
+        "norm_dR_da_column": 0.0001268878721738208,
+        "sigma_min_augmented": 0.928503364140331,
+        "sigma_min_dR_dOmega": 0.928503364140336,
+        "cond_dR_dOmega": 4857.723888245652
+      },
+      {
+        "iter": 15,
+        "amplitude": 9.684474228908394e-05,
+        "a": -10.092461405322313,
+        "norm_dR_da_column": 3.4724241422090707e-08,
+        "sigma_min_augmented": 0.9287062349434986,
+        "sigma_min_dR_dOmega": 0.9287062349434786,
+        "cond_dR_dOmega": 4856.662249696275
+      },
+      {
+        "iter": 16,
+        "amplitude": 2.528069622705889e-08,
+        "a": -10.092461405320627,
+        "norm_dR_da_column": 2.3299225212668173e-15,
+        "sigma_min_augmented": 0.9287082140021149,
+        "sigma_min_dR_dOmega": 0.9287082140020876,
+        "cond_dR_dOmega": 4856.651890937651
+      },
+      {
+        "iter": 17,
+        "amplitude": 1.6056210004835197e-15,
+        "a": -10.092461405320627,
+        "norm_dR_da_column": 9.819762433889066e-30,
+        "sigma_min_augmented": 0.9287082143591516,
+        "sigma_min_dR_dOmega": 0.9287082143591615,
+        "cond_dR_dOmega": 4856.651889068082
+      }
+    ],
+    "at_trivial_null": {
+      "sigma_min_dR_dOmega": 0.9287082143591615,
+      "cond_dR_dOmega": 4856.651889068082,
+      "norm_dR_da_column": 9.819762433889066e-30
+    },
+    "reading": "dR/dOmega is NOT singular at the point Newton reached: sigma_min stays O(1) and the condition number is O(1e3-1e4) at the end of the path.  The trivial null is a NON-DEGENERATE root of the residual, which is exactly why Newton converges to it quadratically.  What DOES collapse is the a-column, because dR/da is quadratic in Omega: it falls by ~30 orders along the path, so `a` stops being identifiable and freezes.  No fold, no singular Jacobian, no obstruction."
+  },
+  "D3_parametrization_degeneracy": {
+    "identity": "dF/dOmega [ -X Omega_X ] + 2 nu dF/dnu = 0 at every solution",
+    "rows": [
+      {
+        "n": 401,
+        "a_converged": 0.3820854853529409,
+        "nu": 0.3,
+        "identity_violation": 0.006741220246061845,
+        "norm_dF_dOmega_term": 0.32207034715607047,
+        "norm_2nu_dF_dnu_term": 0.3259479588363295,
+        "identity_violation_relative": 0.020681891275308957,
+        "solution_residual_relative": 2.437198073574193e-14
+      },
+      {
+        "n": 801,
+        "a_converged": 0.3749947083799892,
+        "nu": 0.3,
+        "identity_violation": 0.003663092396534601,
+        "norm_dF_dOmega_term": 1.1843723045565862,
+        "norm_2nu_dF_dnu_term": 1.1865070305087029,
+        "identity_violation_relative": 0.003087290932413681,
+        "solution_residual_relative": 3.67162682159661e-14
+      },
+      {
+        "n": 1201,
+        "a_converged": 0.37140323903564937,
+        "nu": 0.3,
+        "identity_violation": 0.0033914564636326294,
+        "norm_dF_dOmega_term": 1.9183583924725365,
+        "norm_2nu_dF_dnu_term": 1.9203407335853044,
+        "identity_violation_relative": 0.0017660701584456475,
+        "solution_residual_relative": 9.337085255321718e-14
+      }
+    ],
+    "violation_relative_ladder": [
+      0.020681891275308957,
+      0.003087290932413681,
+      0.0017660701584456475
+    ],
+    "a_converged_ladder": [
+      0.3820854853529409,
+      0.3749947083799892,
+      0.37140323903564937
+    ],
+    "reading": "the discrete violation of the identity FALLS under refinement, so the identity is exact in the continuum and what is measured is discretisation error of the sinh-grid operators.  Consequence: (-X Omega_X, 2 nu) is a null direction of the (Omega, nu) Jacobian along EVERY solution, so nu is a gauge coordinate of this profile equation, not an independent continuation parameter.  Corroborating tell in the same table: the `a` leg 125's M7 converges to is itself grid-dependent, which a determinate solution's parameter would not be."
+  },
+  "D4_initial_guess_sensitivity": {
+    "target_nu": 1.0,
+    "source_solutions_for_dilation": {
+      "0.001": {
+        "a": 0.37941302883945277,
+        "residual_relative": 2.4616224156591062e-15,
+        "amplitude": 1.512179329459369
+      },
+      "0.01": {
+        "a": 0.32023357401710256,
+        "residual_relative": 2.705617775235414e-15,
+        "amplitude": 1.7163009962918514
+      },
+      "0.1": {
+        "a": 0.28335400994386306,
+        "residual_relative": 1.1021452310765743e-14,
+        "amplitude": 1.88618240920189
+      },
+      "0.3": {
+        "a": 0.3820854853529409,
+        "residual_relative": 2.437198073574193e-14,
+        "amplitude": 1.5055977131621614
+      }
+    },
+    "rows": [
+      {
+        "guess": "leg 125's own fixed guess: Chen profile, a0 = 0.386",
+        "a_final": -10.092461405320627,
+        "iters": 17,
+        "residual_relative": 5.485652392436699,
+        "residual_rms_absolute": 1.2070517780856019e-15,
+        "amplitude": 1.6056210004835197e-15,
+        "nontrivial": false,
+        "classification": "CONVERGED to the TRIVIAL NULL Omega = 0 (artifact signature: the absolute residual reaches the Newton floor because the solution vanished)"
+      },
+      {
+        "guess": "exact dilation of leg 125's own nu = 0.001 solution, mu = 31.6228",
+        "a_final": 0.37973896193629664,
+        "iters": 3,
+        "residual_relative": 1.346563694404013e-14,
+        "residual_rms_absolute": 7.474417669853493e-15,
+        "amplitude": 1.5134673138009873,
+        "nontrivial": true,
+        "classification": "CONVERGED to a non-trivial solution"
+      },
+      {
+        "guess": "exact dilation of leg 125's own nu = 0.01 solution, mu = 10.0000",
+        "a_final": 0.32035523280558303,
+        "iters": 3,
+        "residual_relative": 3.452211513668456e-14,
+        "residual_rms_absolute": 2.4219188309554217e-14,
+        "amplitude": 1.7173233953213185,
+        "nontrivial": true,
+        "classification": "CONVERGED to a non-trivial solution"
+      },
+      {
+        "guess": "exact dilation of leg 125's own nu = 0.1 solution, mu = 3.1623",
+        "a_final": 0.28342062790746925,
+        "iters": 2,
+        "residual_relative": 4.0289458659370487e-14,
+        "residual_rms_absolute": 3.4064956718407466e-14,
+        "amplitude": 1.885896898882944,
+        "nontrivial": true,
+        "classification": "CONVERGED to a non-trivial solution"
+      },
+      {
+        "guess": "exact dilation of leg 125's own nu = 0.3 solution, mu = 1.8257",
+        "a_final": 0.38243817048812456,
+        "iters": 3,
+        "residual_relative": 9.822672424468316e-15,
+        "residual_rms_absolute": 5.414078812964544e-15,
+        "amplitude": 1.5070371556341342,
+        "nontrivial": true,
+        "classification": "CONVERGED to a non-trivial solution"
+      },
+      {
+        "guess": "Chen profile, amplitude x 2",
+        "a_final": 0.20622443888730166,
+        "iters": 7,
+        "residual_relative": 5.717208811262466e-14,
+        "residual_rms_absolute": 8.029295634597328e-14,
+        "amplitude": 2.410724916628423,
+        "nontrivial": true,
+        "classification": "CONVERGED to a non-trivial solution"
+      },
+      {
+        "guess": "Chen profile, amplitude x 0.5",
+        "a_final": 2.4848637064979138,
+        "iters": 6,
+        "residual_relative": 1.9031134314694917,
+        "residual_rms_absolute": 6.747531991335395e-26,
+        "amplitude": 1.0642680244517714e-25,
+        "nontrivial": false,
+        "classification": "CONVERGED to the TRIVIAL NULL Omega = 0 (artifact signature: the absolute residual reaches the Newton floor because the solution vanished)"
+      },
+      {
+        "guess": "Chen profile, a0 = 0.0",
+        "a_final": 6.559549142310174,
+        "iters": 12,
+        "residual_relative": 4.191034892157788,
+        "residual_rms_absolute": 1.3499902557738993e-17,
+        "amplitude": 1.8224588012375503e-17,
+        "nontrivial": false,
+        "classification": "CONVERGED to the TRIVIAL NULL Omega = 0 (artifact signature: the absolute residual reaches the Newton floor because the solution vanished)"
+      }
+    ],
+    "n_guesses": 8,
+    "n_recovered_nontrivial": 5,
+    "recovered_a_values": [
+      0.37973896193629664,
+      0.32035523280558303,
+      0.28342062790746925,
+      0.38243817048812456,
+      0.20622443888730166
+    ],
+    "recovered_a_spread": 0.1762137316008229,
+    "worst_recovered_relative_residual": 5.717208811262466e-14,
+    "reading": "the SAME target that leg 125 could not solve is solved to relative residual ~1e-14 from several different starts.  That is the gate's own solver-artifact criterion, met verbatim.  The recovered solutions do NOT agree with each other on `a`, which is the second finding: at a single nu the solution set is at least one-parameter, so recovering convergence does not by itself deliver a determinate profile."
+  },
+  "D5_is_a_genuine_profile_reachable": {
+    "system": "unknowns (Omega, nu); equations (steady residual, dilation normalization Omega_X(0) = Chen's value).  c_l = 1/2 and c_omega = -1 IMPOSED, i.e. Delta = 0, the gamma = 2 steadiness condition.  `a` is a FIXED model parameter here, which is what it is in the equation.",
+    "a_sweep": [
+      {
+        "a": 0.3,
+        "nu_from_nu0_0p3": 0.017995833422658446,
+        "nu_from_nu0_0p01": 0.017995833422662862,
+        "sign_agrees_across_starts": true,
+        "relative_spread": 2.4542380817300434e-13,
+        "worst_relative_residual": 5.663891459781318e-14,
+        "amplitudes": [
+          1.8047655082033758,
+          1.8047655082034992
+        ],
+        "admissible_positive_nu": true,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.3,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": 0.017995833422658446,
+            "residual_relative": 4.095092628599175e-15,
+            "residual_rms_absolute": 2.1533096290294103e-15,
+            "amplitude": 1.8047655082033758,
+            "edge_over_amplitude": 1.0485705890034831e-06,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.0507208106510996e-14,
+            "iters": 6,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": true
+          },
+          {
+            "n": 401,
+            "a": 0.3,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": 0.017995833422662862,
+            "residual_relative": 5.663891459781318e-14,
+            "residual_rms_absolute": 2.9782261658629376e-14,
+            "amplitude": 1.8047655082034992,
+            "edge_over_amplitude": 1.0485705890035507e-06,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 9.642663178067039e-15,
+            "iters": 5,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": true
+          }
+        ]
+      },
+      {
+        "a": 0.3865,
+        "nu_from_nu0_0p3": 3.5204237273980614e-07,
+        "nu_from_nu0_0p01": -0.004250796508845847,
+        "sign_agrees_across_starts": false,
+        "relative_spread": 1.0000828179782324,
+        "worst_relative_residual": 1.0841527770320824e-13,
+        "amplitudes": [
+          1.4915953041908432,
+          1.446498422221202
+        ],
+        "admissible_positive_nu": false,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.3865,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": 3.5204237273980614e-07,
+            "residual_relative": 1.7181628542316668e-15,
+            "residual_rms_absolute": 6.143505121568111e-16,
+            "amplitude": 1.4915953041908432,
+            "edge_over_amplitude": 8.293162061900207e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.2410778352940797e-12,
+            "iters": 8,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": true
+          },
+          {
+            "n": 401,
+            "a": 0.3865,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": -0.004250796508845847,
+            "residual_relative": 1.0841527770320824e-13,
+            "residual_rms_absolute": 3.4356060977483556e-14,
+            "amplitude": 1.446498422221202,
+            "edge_over_amplitude": 5.25320526908666e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 2.5288541684703792e-06,
+            "iters": 8,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          }
+        ]
+      },
+      {
+        "a": 0.45,
+        "nu_from_nu0_0p3": -0.006066363468014141,
+        "nu_from_nu0_0p01": -0.007929355783055808,
+        "sign_agrees_across_starts": true,
+        "relative_spread": 0.2349487607836546,
+        "worst_relative_residual": 2.8301607694588686e-14,
+        "amplitudes": [
+          1.3196274772154806,
+          1.267490316217005
+        ],
+        "admissible_positive_nu": false,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.45,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": -0.006066363468014141,
+            "residual_relative": 1.695888574692953e-14,
+            "residual_rms_absolute": 4.8220000328851434e-15,
+            "amplitude": 1.3196274772154806,
+            "edge_over_amplitude": 6.305461642938733e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.5667675398946296e-07,
+            "iters": 7,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          },
+          {
+            "n": 401,
+            "a": 0.45,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": -0.007929355783055808,
+            "residual_relative": 2.8301607694588686e-14,
+            "residual_rms_absolute": 7.296804990866621e-15,
+            "amplitude": 1.267490316217005,
+            "edge_over_amplitude": 4.3434896554878743e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.4540310070205126e-14,
+            "iters": 5,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          }
+        ]
+      },
+      {
+        "a": 0.5,
+        "nu_from_nu0_0p3": -0.008175246262768656,
+        "nu_from_nu0_0p01": -0.00895316044499692,
+        "sign_agrees_across_starts": true,
+        "relative_spread": 0.08688710394584365,
+        "worst_relative_residual": 1.4154107758997092e-14,
+        "amplitudes": [
+          1.2094309180493037,
+          1.1664451119966548
+        ],
+        "admissible_positive_nu": false,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.5,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": -0.008175246262768656,
+            "residual_relative": 1.4154107758997092e-14,
+            "residual_rms_absolute": 3.5060333588133592e-15,
+            "amplitude": 1.2094309180493037,
+            "edge_over_amplitude": 5.328840747080538e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.0390188102443572e-10,
+            "iters": 8,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          },
+          {
+            "n": 401,
+            "a": 0.5,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": -0.00895316044499692,
+            "residual_relative": 9.054636984731442e-15,
+            "residual_rms_absolute": 2.085773676529452e-15,
+            "amplitude": 1.1664451119966548,
+            "edge_over_amplitude": 3.9946172238075196e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 1.9416729916750808e-14,
+            "iters": 6,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          }
+        ]
+      },
+      {
+        "a": 0.55,
+        "nu_from_nu0_0p3": -0.008746905537243914,
+        "nu_from_nu0_0p01": -0.009302856675534703,
+        "sign_agrees_across_starts": true,
+        "relative_spread": 0.059761335435046324,
+        "worst_relative_residual": 1.5266012359451003e-14,
+        "amplitudes": [
+          1.1415807841174548,
+          1.0980729123374577
+        ],
+        "admissible_positive_nu": false,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.55,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": -0.008746905537243914,
+            "residual_relative": 1.5266012359451003e-14,
+            "residual_rms_absolute": 3.537284660990281e-15,
+            "amplitude": 1.1415807841174548,
+            "edge_over_amplitude": 5.624123488221183e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 2.2368219508985137e-15,
+            "iters": 8,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          },
+          {
+            "n": 401,
+            "a": 0.55,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": -0.009302856675534703,
+            "residual_relative": 9.654768556061079e-15,
+            "residual_rms_absolute": 2.0713373282227614e-15,
+            "amplitude": 1.0980729123374577,
+            "edge_over_amplitude": 4.063583520622325e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 2.264785468449914e-14,
+            "iters": 6,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          }
+        ]
+      },
+      {
+        "a": 0.7,
+        "nu_from_nu0_0p3": -0.008650860819266836,
+        "nu_from_nu0_0p01": -0.009490245316051684,
+        "sign_agrees_across_starts": true,
+        "relative_spread": 0.08844708106387127,
+        "worst_relative_residual": 5.183808592128894e-14,
+        "amplitudes": [
+          1.0429660502087552,
+          0.995488798348509
+        ],
+        "admissible_positive_nu": false,
+        "runs": [
+          {
+            "n": 401,
+            "a": 0.7,
+            "nu0": 0.3,
+            "rho_max": 8.0,
+            "nu": -0.008650860819266836,
+            "residual_relative": 5.183808592128894e-14,
+            "residual_rms_absolute": 1.1543932878677069e-14,
+            "amplitude": 1.0429660502087552,
+            "edge_over_amplitude": 1.1683511440176684e-06,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 8.2497684743648e-16,
+            "iters": 9,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          },
+          {
+            "n": 401,
+            "a": 0.7,
+            "nu0": 0.01,
+            "rho_max": 8.0,
+            "nu": -0.009490245316051684,
+            "residual_relative": 1.998990776626587e-14,
+            "residual_rms_absolute": 3.982427225335619e-15,
+            "amplitude": 0.995488798348509,
+            "edge_over_amplitude": 6.48957601271607e-07,
+            "X_max": 745.2394128947751,
+            "odd_symmetry_defect": 3.66918618981589e-14,
+            "iters": 6,
+            "dilation_gauge_Omega_X_0": -8.709236820270943,
+            "admissible_positive_nu": false
+          }
+        ]
+      }
+    ],
+    "a_with_admissible_positive_nu": [
+      0.3
+    ],
+    "a_with_inadmissible_negative_nu": [
+      0.3865,
+      0.45,
+      0.5,
+      0.55,
+      0.7
+    ],
+    "grid_convergence_at_a_0p30": [
+      {
+        "n": 201,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 8.0,
+        "nu": 0.018028631849382193,
+        "residual_relative": 1.3521279737403616e-15,
+        "residual_rms_absolute": 7.103604942359025e-16,
+        "amplitude": 1.803320753676381,
+        "edge_over_amplitude": 1.050750459482851e-06,
+        "X_max": 745.2394128947751,
+        "odd_symmetry_defect": 1.2911152137529652e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.708343636939771,
+        "admissible_positive_nu": true
+      },
+      {
+        "n": 401,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 8.0,
+        "nu": 0.017995833422658446,
+        "residual_relative": 4.095092628599175e-15,
+        "residual_rms_absolute": 2.1533096290294103e-15,
+        "amplitude": 1.8047655082033758,
+        "edge_over_amplitude": 1.0485705890034831e-06,
+        "X_max": 745.2394128947751,
+        "odd_symmetry_defect": 1.0507208106510996e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709236820270943,
+        "admissible_positive_nu": true
+      },
+      {
+        "n": 801,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 8.0,
+        "nu": 0.017993756223880317,
+        "residual_relative": 1.5217008079180922e-14,
+        "residual_rms_absolute": 8.006318600986372e-15,
+        "amplitude": 1.8053103622523403,
+        "edge_over_amplitude": 1.0481348971574334e-06,
+        "X_max": 745.2394128947751,
+        "odd_symmetry_defect": 1.8245590146456514e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709293103246308,
+        "admissible_positive_nu": true
+      },
+      {
+        "n": 1201,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 8.0,
+        "nu": 0.017993643786367603,
+        "residual_relative": 3.108408441549943e-14,
+        "residual_rms_absolute": 1.635804918855932e-14,
+        "amplitude": 1.805437155636642,
+        "edge_over_amplitude": 1.0480516621173178e-06,
+        "X_max": 745.2394128947751,
+        "odd_symmetry_defect": 4.2162857210572216e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709296120249066,
+        "admissible_positive_nu": true
+      }
+    ],
+    "nu_ladder_at_a_0p30": [
+      0.018028631849382193,
+      0.017995833422658446,
+      0.017993756223880317,
+      0.017993643786367603
+    ],
+    "truncation_sensitivity_at_a_0p30": [
+      {
+        "n": 801,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 6.0,
+        "nu": 0.018003087112642764,
+        "residual_relative": 2.6553924393854257e-14,
+        "residual_rms_absolute": 1.6136143730380922e-14,
+        "amplitude": 1.805570835591796,
+        "edge_over_amplitude": 5.72110061054606e-05,
+        "X_max": 100.85657868513961,
+        "odd_symmetry_defect": 2.6440164582761743e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709295673210505,
+        "admissible_positive_nu": true
+      },
+      {
+        "n": 801,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 8.0,
+        "nu": 0.017993756223880317,
+        "residual_relative": 1.5217008079180922e-14,
+        "residual_rms_absolute": 8.006318600986372e-15,
+        "amplitude": 1.8053103622523403,
+        "edge_over_amplitude": 1.0481348971574334e-06,
+        "X_max": 745.2394128947751,
+        "odd_symmetry_defect": 1.8245590146456514e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709293103246308,
+        "admissible_positive_nu": true
+      },
+      {
+        "n": 801,
+        "a": 0.3,
+        "nu0": 0.3,
+        "rho_max": 10.0,
+        "nu": 0.017993782477725855,
+        "residual_relative": 9.349516836322163e-15,
+        "residual_rms_absolute": 4.399840287793657e-15,
+        "amplitude": 1.8053080254488691,
+        "edge_over_amplitude": 1.91976275771818e-08,
+        "X_max": 5506.616437351697,
+        "odd_symmetry_defect": 1.3686275054521526e-14,
+        "iters": 6,
+        "dilation_gauge_Omega_X_0": -8.709287686925,
+        "admissible_positive_nu": true
+      }
+    ],
+    "nu_at_chen_a_one_half": {
+      "a": 0.5,
+      "nu_from_nu0_0p3": -0.008175246262768656,
+      "nu_from_nu0_0p01": -0.00895316044499692,
+      "sign_agrees_across_starts": true,
+      "relative_spread": 0.08688710394584365,
+      "worst_relative_residual": 1.4154107758997092e-14,
+      "amplitudes": [
+        1.2094309180493037,
+        1.1664451119966548
+      ],
+      "admissible_positive_nu": false,
+      "runs": [
+        {
+          "n": 401,
+          "a": 0.5,
+          "nu0": 0.3,
+          "rho_max": 8.0,
+          "nu": -0.008175246262768656,
+          "residual_relative": 1.4154107758997092e-14,
+          "residual_rms_absolute": 3.5060333588133592e-15,
+          "amplitude": 1.2094309180493037,
+          "edge_over_amplitude": 5.328840747080538e-07,
+          "X_max": 745.2394128947751,
+          "odd_symmetry_defect": 1.0390188102443572e-10,
+          "iters": 8,
+          "dilation_gauge_Omega_X_0": -8.709236820270943,
+          "admissible_positive_nu": false
+        },
+        {
+          "n": 401,
+          "a": 0.5,
+          "nu0": 0.01,
+          "rho_max": 8.0,
+          "nu": -0.00895316044499692,
+          "residual_relative": 9.054636984731442e-15,
+          "residual_rms_absolute": 2.085773676529452e-15,
+          "amplitude": 1.1664451119966548,
+          "edge_over_amplitude": 3.9946172238075196e-07,
+          "X_max": 745.2394128947751,
+          "odd_symmetry_defect": 1.9416729916750808e-14,
+          "iters": 6,
+          "dilation_gauge_Omega_X_0": -8.709236820270943,
+          "admissible_positive_nu": false
+        }
+      ]
+    },
+    "leg125_a_star_from_Delta_sweep": 0.3864963972206034,
+    "reading": "the square system converges quadratically at every tested `a`, so the stall was a parametrization problem, not an existence one.  The SIGN of the recovered nu is the real content and it is stable across both starts: nu > 0 (a genuine diffusive profile) below leg 125's own a* = 0.3865, and nu < 0 (anti-diffusive, NOT a viscous profile) at and above it -- including Chen's a = 1/2.  The zero crossing lands on the same a* leg 125 measured independently from the Delta(a) sweep, which is a cross-check between two different computations, not a restatement. The MAGNITUDE of nu is start-dependent wherever nu < 0, so the square system still has more than one root there; only the sign is banked."
+  },
+  "D6_two_sided_calibration": {
+    "rows": [
+      {
+        "inconsistency_multiplier": 1.0,
+        "system_is_consistent": true,
+        "residual_floor": 4.533416814943949e-14,
+        "last5_floors": [
+          0.21569839236581503,
+          0.00452561188997856,
+          3.2747027643753335e-06,
+          1.3645648785971579e-11,
+          4.533416814943949e-14
+        ],
+        "tail_plateau_ratio": 4757965154555.988,
+        "final_amplitude": 3.1992234157938344,
+        "a_final": 0.1432464657641293,
+        "iters": 8,
+        "signature": "CONVERGED"
+      },
+      {
+        "inconsistency_multiplier": 1.5,
+        "system_is_consistent": false,
+        "residual_floor": 0.15338489148331513,
+        "last5_floors": [
+          0.15338489148331513,
+          0.15338489148331513,
+          0.15338489148331513,
+          0.15338489148331513,
+          0.15338489148331513
+        ],
+        "tail_plateau_ratio": 1.0,
+        "final_amplitude": 3.603972945818851,
+        "a_final": 0.12282496154445516,
+        "iters": 79,
+        "signature": "RESIDUAL PLATEAU at a positive floor with bounded amplitude (genuine-non-existence signature)"
+      },
+      {
+        "inconsistency_multiplier": 3.0,
+        "system_is_consistent": false,
+        "residual_floor": 0.6135395659332605,
+        "last5_floors": [
+          0.6135395659332605,
+          0.6135395659332605,
+          0.6135395659332605,
+          0.6135395659332605,
+          0.6135395659332605
+        ],
+        "tail_plateau_ratio": 1.0,
+        "final_amplitude": 4.698640512028761,
+        "a_final": 0.08700614101327935,
+        "iters": 79,
+        "signature": "RESIDUAL PLATEAU at a positive floor with bounded amplitude (genuine-non-existence signature)"
+      }
+    ],
+    "floor_ratio_measured": 4.0,
+    "floor_ratio_predicted_from_imposed_inconsistency": 4.0,
+    "reading": "the non-existence arm of the classifier FIRES, and quantitatively: on the provably-unsolvable systems the residual floor is flat to 4 significant figures over the last 5 iterations at bounded amplitude, and the floor scales with the imposed inconsistency exactly as predicted.  So the classifier could have returned 'genuine non-existence' on leg 125's stall and did not (lesson 90)."
+  },
+  "gate": {
+    "question": "Does the Newton stall on Object B, diagnosed against standard non-existence signatures (residual plateau shape, Jacobian singularity structure, parametrization degeneracy) versus standard solver-artifact signatures (basin-of-attraction sensitivity, recoverable convergence from a different initial guess at the SAME initial target), classify as one or the other?",
+    "answer": "SOLVER ARTIFACT",
+    "evidence": {
+      "no_residual_plateau": "the absolute residual at nu = 1.0 falls to 1.2071e-15 while the amplitude falls from 1.7307 to 1.6056e-15 -- Newton CONVERGED, to the trivial null Omega = 0",
+      "no_jacobian_singularity": "sigma_min(dR/dOmega) at the reached point is 0.9287 with condition number 4.8567e+03; the a-column norm collapses to 9.820e-30",
+      "parametrization_degeneracy_is_real_but_is_the_SOLVER's": "the exact null relation dF/dOmega[-X Omega_X] + 2 nu dF/dnu = 0 holds along every solution (discrete violation 2.068e-02 -> 1.766e-03 under refinement), so nu is a gauge coordinate and leg 125's continuation IN nu, with the dilation freedom unfixed, was moving along a gauge orbit",
+      "recoverable_at_the_SAME_target": "5 of 8 starts reach a non-trivial solution at the same nu = 1.0, worst relative residual 5.717e-14"
+    },
+    "what_changed_the_outcome": "the initial guess, and nothing else: leg 125 used ONE fixed guess (Chen's inviscid profile) for every nu, and at nu = 1.0 that guess is in the basin of the trivial null.  Seeding instead with the exact dilation of leg 125's own lower-nu solutions -- which the covariance identity says ARE solutions at nu = 1.0 -- converges in 2-3 iterations.",
+    "is_a_genuine_profile_reachable": "PARTLY, and the answer is a-dependent.  Re-parametrised as D3 prescribes (a fixed, nu unknown, dilation gauge imposed) the system is square and converges quadratically at every tested a.  The recovered nu is POSITIVE -- an admissible diffusive profile -- at a = 0.30 (nu = 0.01799364, grid-converged and truncation-insensitive), and NEGATIVE, i.e. anti-diffusive and not a viscous profile at all, at Chen's a = 1/2 (nu = -0.00817525 / -0.00895316 from the two starts).  So Object B is reachable BELOW a* ~ 0.3865 and is not reachable at Chen's a.",
+    "branch_taken": "solver artifact -> report exactly what changed the outcome and whether a genuine profile becomes reachable; ESCALATE as a candidate follow-up construction leg; do NOT build the corrected continuation here.  No corrected continuation is built in this module."
+  },
+  "honest_ceiling": "Not movement on L1->L4 and not Clay; Clay odds stay ~0.05%.  Diagnosing one solver's behaviour on one profile equation is not a theorem.  In particular the D5 objects are FLOAT solutions of a DISCRETISED equation on a truncated domain -- grid- and truncation-refined at a = 0.30, and nothing more than that.  No existence claim is made, and the negative half (nu < 0 at Chen's a) is a measurement on this discretisation, not a non-existence proof.",
+  "seconds": 191.78058433532715
+}
