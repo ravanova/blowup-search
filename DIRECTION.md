@@ -26,21 +26,24 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 192 | H2CV | no |
+| A | 253 | NRSX | yes |
 | B | 249 | H2CV2 | no |
-| C | 248 | CNR2 | no |
+| C | 254 | DSSX | no |
 | D | 221 | BVRR | no |
-| E | 251 | P0T | yes |
+| E | 255 | P1A | yes |
 | F | 236 | RDDEP | yes |
-| G | 245 | BCL2 | yes |
-| H | 228 | BHRV | no |
-| I | 210 | M2SV | no |
+| G | 256 | P1B | yes |
+| H | 257 | P1C | yes |
+| I | 252 | VBRG | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, leg 258: 3/10 floor-eligible -- E/251/P0T, F/236/RDDEP, G/245/BCL2 --
-matching the "Floor status: 3/10 ... MET" line in the most recent live-slot roster update
-below.)
+(Current snapshot, DM sync of 2026-08-07: 5/10 floor-eligible -- A/253/NRSX, E/255/P1A,
+F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the post-steer revised roster plus the slot-A
+refill in the two most recent DM updates at the tail of this file. Leg 254 (DSSX, scoping)
+is counted "no" conservatively, per the DM's own note. Leg 258's original snapshot was
+taken from the pre-steer prose table and was stale on arrival; corrected here in the same
+update that acknowledges its landing.)
 
 ---
 
@@ -10215,3 +10218,21 @@ update that next promotes any of 248/228/210, rather than waiting for the count 
 
 Nothing in this update lifts a ban, changes any committed gate, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM sync, 2026-08-07 — leg 258 (FLOCK) landed (00f7e06); its FLOOR-TABLE snapshot was
+stale on arrival and is now corrected to the dispatched roster
+
+**258 landed as specified** (marker block + two tests, test_10 proving the assertion fails
+on a 2/10 fixture — the gate's own honesty clause held). But its snapshot was taken from
+the PRE-steer prose table (E/251/P0T, G/245/BCL2 — a roster that was superseded before any
+of it dispatched, and 245 had already landed). **The FLOOR-TABLE block at the top of this
+file is now synced to the actual dispatched roster** (A/253, B/249, C/254, D/221, E/255,
+F/236, G/256, H/257, I/252, J/226 — 5/10 eligible, 254 conservatively "no").
+**Ownership recorded: this DM maintains the FLOOR-TABLE block from here on, in the same
+edit as any roster-changing update** — exactly as the §3a reserve-line discipline already
+works, and per the marker's own comment. The orchestrator does not need to touch it.
+
+Nothing else changes: slots, reserve line (count 9), floor status, and all sequencing
+notes stand as in the two updates above.
