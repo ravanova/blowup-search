@@ -1,0 +1,474 @@
+{
+ "leg": 165,
+ "route": "ROUTE-SDM",
+ "version": "v1",
+ "kind": "synthesis over banked data; no dynamics, no solver module, no new compute",
+ "sources_read_only": {
+  "leg_52": "p2_route_t_v1_border.json",
+  "leg_53": "p2_route_tc_v1_assemble.json",
+  "leg_56": "p2_route_tn_v1_consistency.json",
+  "leg_111": "p2_route_we_v1_coercivity.json",
+  "leg_127": "p2_route_ngx_v1_general.json",
+  "leg_141": "p2_route_wel_v1_lit.json"
+ },
+ "gate": "For each of legs 52, 53, 56, 111/141's dead findings, does the repository's own banked record contain evidence the finding is REALIZATION-DEPENDENT (i.e., a different choice within the same degree of freedom, already tried elsewhere in the banked record, behaves differently), or does every tried realization agree?",
+ "gate_answer": "YES",
+ "gate_answer_branch_verbatim": "Name it precisely, with the banked evidence for both realizations side by side. This is a genuinely novel synthesis finding -- ESCALATE as a candidate companion to leg 127's own reframing, not a ban-lifting result on its own.",
+ "the_named_row": "111/141",
+ "headline": "One of the four is realization-dependent and it is legs 111/141: leg 111's zero-width weighted-energy window is a property of the TRIAL SPACE span{sin k theta} (vanishing order p = 1), not of the operator.  Hold gamma at the published value 4 and move p to 2 -- the same degree of freedom, already measured on leg 111's own quadrature by leg 141 -- and the window goes from width 0.0 to width 2.0, the membership norm ratio per refinement goes from 1.678e+07 (divergent) to 1.0000000000000002 (convergent), and Elgindi-Ghoul-Masmoudi arXiv:1906.05811 Prop. 2.1 certifies a coercivity gap of -1/2 there, on this repository's own a = 0 CLM object.  The other three are not: 56 is magnitude-dependent only (its 2.04e+11 headline is 100.009% an endpoint-zeroing artifact of one basis choice, but the realization-robust 1.85e+07 is still a death), and 52 and 53 are invariant across every choice inside their axes -- and are, besides, the same l^1_w realization leg 127 already reframed, so they are subsumed by leg 127 rather than companions to it.",
+ "classification": [
+  {
+   "leg": "52",
+   "banked_dead_finding": "stage B's SPACE degree of freedom is dead for this operator: no choice of the weight exponent s buys closure",
+   "degree_of_freedom": "the weight exponent s of the l^1_w family (stage B's 'space' axis)",
+   "choices_actually_tried_in_the_banked_record": {
+    "leg_52_bordered_tail_ladder": [
+     {
+      "s": 0.0,
+      "class": "flat",
+      "bordered_tail_first": 7.45591542006977,
+      "bordered_tail_last": 9.438643302621854,
+      "bordered_growth_exponent": 0.1004703162957285
+     },
+     {
+      "s": 0.3,
+      "class": "algebraic",
+      "bordered_tail_first": 8.087034072079199,
+      "bordered_tail_last": 11.369619811899355,
+      "bordered_growth_exponent": 0.14682230136215776
+     },
+     {
+      "s": 0.394,
+      "class": "algebraic",
+      "bordered_tail_first": 8.30209111511902,
+      "bordered_tail_last": 12.15571534967583,
+      "bordered_growth_exponent": 0.16481014175532985
+     },
+     {
+      "s": 1.0,
+      "class": "algebraic",
+      "bordered_tail_first": 9.892873114229637,
+      "bordered_tail_last": 20.505737964110544,
+      "bordered_growth_exponent": 0.3185217613105546
+     },
+     {
+      "s": 1.5,
+      "class": "algebraic",
+      "bordered_tail_first": 11.44016405309688,
+      "bordered_tail_last": 31.81061246266558,
+      "bordered_growth_exponent": 0.44764748247495
+     }
+    ],
+    "leg_127_sigma_min_ladder_same_axis": [
+     {
+      "s": 0.0,
+      "K": 2,
+      "sigma_min_last": 0.00012201073694485145
+     },
+     {
+      "s": 0.0,
+      "K": 4,
+      "sigma_min_last": 0.00012189176011701625
+     },
+     {
+      "s": 0.0,
+      "K": 8,
+      "sigma_min_last": 0.00012165450121654431
+     },
+     {
+      "s": 0.3,
+      "K": 2,
+      "sigma_min_last": 0.0009284176564180837
+     },
+     {
+      "s": 0.3,
+      "K": 4,
+      "sigma_min_last": 0.0009277828119989831
+     },
+     {
+      "s": 0.3,
+      "K": 8,
+      "sigma_min_last": 0.0009265162793041944
+     },
+     {
+      "s": 0.7,
+      "K": 2,
+      "sigma_min_last": 0.012197802335333881
+     },
+     {
+      "s": 0.7,
+      "K": 4,
+      "sigma_min_last": 0.012194080257149641
+     },
+     {
+      "s": 0.7,
+      "K": 8,
+      "sigma_min_last": 0.012186650529640018
+     },
+     {
+      "s": 1.0,
+      "K": 2,
+      "sigma_min_last": 0.06720223593023703
+     },
+     {
+      "s": 1.0,
+      "K": 4,
+      "sigma_min_last": 0.06719776847876766
+     },
+     {
+      "s": 1.0,
+      "K": 8,
+      "sigma_min_last": 0.05314378695870398
+     },
+     {
+      "s": 1.5,
+      "K": 2,
+      "sigma_min_last": 0.035994711828932394
+     },
+     {
+      "s": 1.5,
+      "K": 4,
+      "sigma_min_last": 0.021591039070031855
+     },
+     {
+      "s": 1.5,
+      "K": 8,
+      "sigma_min_last": 0.01146063169940689
+     }
+    ]
+   },
+   "do_they_disagree": {
+    "leg_52_every_bordered_exponent_is_positive": true,
+    "leg_52_exponent_min": 0.1004703162957285,
+    "leg_52_exponent_max": 0.44764748247495,
+    "leg_52_exponent_is_monotone_in_s": true,
+    "leg_127_sigma_min_max_deviation_from_predicted_1_minus_s": 0.02186165145571506,
+    "leg_127_max_relative_K_spread_for_s_below_1": 0.002928257686684667,
+    "reading": "Every s < 1 the repository tried behaves the SAME way and behaves WORSE as s grows: the bordered tail norm grows without bound in all five classes, and sigma_min vanishes like M^-(1-s) uniformly, to within 0.0219 of the predicted exponent and to within 0.29% across K.  No choice inside the axis closes."
+   },
+   "structural_reason_banked_by_leg_52_itself": {
+    "kernel_exponent": -2.0023629289626506,
+    "cokernel_exponent": 1.001176619083868,
+    "kernel_in_space_iff": "s < 1",
+    "cokernel_bounded_iff": "s >= 1",
+    "crossing": 1.0
+   },
+   "window_on_this_axis": {
+    "kernel_needs_s_strictly_below": 1.0,
+    "cokernel_needs_s_at_least": 1.0,
+    "width": 0.0,
+    "same_shape_as_leg_111": "two complementary requirements meeting at a single point.  leg 52: kernel in space iff s < 1, cokernel bounded iff s >= 1, crossing 1.0.  leg 111: space needs gamma < 3, damping needs gamma > 3.  Two realizations, one shape -- and leg 111's turns out to be movable (below) while leg 52's is not, which is why the SHAPE of an obstruction does not settle its tier."
+   },
+   "tier": "TIER_3_REALIZATION_INVARIANT",
+   "why_this_row_is_NOT_a_companion_to_leg_127": "Xu's origin-H^2 realization IS a different space and DOES behave differently -- but that is leg 127's own banked finding, not a second one.  Legs 52 and 53 live INSIDE the l^1_w-at-s<1 realization leg 127 reframed.  Counting them as independent dead findings double-counts leg 127.  This row is SUBSUMED, not a companion.",
+   "prior_demotion_already_banked": "leg 49's gauge ablation put leg 52's 5604x effect in the BORDER ROWS, not the space -- pin c_l and it collapses to 0.56x.  plan_of_record.py carries that as a standing ban on repeating 'closure is a property of the SPACE' as an explanation.  The EXPLANATION was demoted once already; the axis's exhaustion is what survived."
+  },
+  {
+   "leg": "53",
+   "banked_dead_finding": "stage B's SPLIT degree of freedom is dead: the block coupling Z1[Gamma <- tail] never comes under 1 for any split the repository tried",
+   "degree_of_freedom": "the operator split -- finite-block size K, weight class, gauge row, normalisation, and the border direction that sets the amplitude column",
+   "choices_actually_tried_in_the_banked_record": {
+    "rows_in_the_sweep": 20,
+    "K_values": [
+     4,
+     8,
+     16,
+     32,
+     64
+    ],
+    "classes": [
+     {
+      "class": "algebraic",
+      "param": 0.3
+     },
+     {
+      "class": "flat",
+      "param": 0.0
+     }
+    ],
+    "gauges": [
+     "dilation",
+     "null"
+    ],
+    "normalisation_ablation_arms": 6,
+    "border_directions": [
+     "analytic",
+     "svd",
+     "second",
+     "random"
+    ]
+   },
+   "do_they_disagree": {
+    "min_coupling_over_every_split_and_class": 43.15129110858924,
+    "max_coupling_over_every_split_and_class": 26299.04136910264,
+    "best_over_all_normalisations": 20.473399995961532,
+    "value_it_has_to_beat": 1.0,
+    "shortfall_of_the_single_best_arm": 20.473399995961532,
+    "gate_survives_renormalisation": true,
+    "reading": "Nothing on this axis crosses 1.  The single most favourable arm in the whole record -- algebraic s=0.3, K=4, normalisation 'no_amplitude' -- still reports 20.4734 where it must be under 1, and the best arm at the shipped normalisation is 43.1513."
+   },
+   "the_axis_that_varies_hugely_and_still_does_not_close": {
+    "note": "Lesson 90's case.  Leg 53 first reported 546.57 for all four border directions and called four identical numbers its sharpest result; they were identical because the quantity referenced no border.  Wired through, the axis discriminates hard -- and every direction is worse, so the VERDICT is still invariant.  A flat axis and a wildly varying axis can both be tier 3; what decides the tier is whether any choice crosses the threshold.",
+    "by_border_direction": [
+     {
+      "border": "analytic",
+      "Z1_lower_bound": 546.572376400014
+     },
+     {
+      "border": "svd",
+      "Z1_lower_bound": 546.3672452634502
+     },
+     {
+      "border": "second",
+      "Z1_lower_bound": 2.098989590719546e+16
+     },
+     {
+      "border": "random",
+      "Z1_lower_bound": 6907.814148823506
+     }
+    ],
+    "analytic_over_svd": 1.0003754455237612,
+    "worst_over_analytic": 38402774844650.79,
+    "any_border_direction_below_one": false
+   },
+   "tier": "TIER_3_REALIZATION_INVARIANT",
+   "scope_leg_53_itself_recorded": "WHAT THIS LEG ESTABLISHES: that the block-diagonal approximate inverse the standard method requires cannot close this certificate, on this object, in either admissible class, at any split from K = 4 to 64, under either gauge, and under every normalisation of the augmented block tried in TC8.  WHAT IT DOES NOT ESTABLISH: that no finite block can.  The genuinely finite-block-INDEPENDENT sub-block is"
+  },
+  {
+   "leg": "56",
+   "banked_dead_finding": "the sup-norm COLLOCATION realization cannot carry L1: the (H, D) consistency defect exceeds L1 step one's admissible tau by 1.85e7x (derivative) / 2.04e11x (Hilbert) at n = 801",
+   "degree_of_freedom": "the collocation basis -- specifically which interpolant the discrete Hilbert operator transforms (endpoint-zeroed Pi^0 vs the full natural-spline Pi)",
+   "choices_actually_tried_in_the_banked_record": {
+    "A_endpoint_zeroed_shipped": {
+     "who_built_it": "solver/line_hilbert.py's line_hilbert_matrix, interior nodes only",
+     "defect_H_over_tau_at_801": 204033440973.58594,
+     "H_rate_order_per_doubling": 0.004773059988451959
+    },
+    "B_full_interpolant": {
+     "who_built_it": "leg 56 itself -- 'a full-interpolant Hilbert matrix (endpoint hats restored as one-sided half-hats)'",
+     "agreement_with_direct_PV_quadrature": 4.336808689942018e-19,
+     "residual_defect_is_only_the_true_interpolation_error": 4.4181273608871345e-07,
+     "interpolation_order": 1.9458578272024611,
+     "n_required_if_H_were_interpolation_only": 4427687.598653231
+    }
+   },
+   "do_they_disagree": {
+    "endpoint_share_of_the_headline_at_801": 1.0000939199963914,
+    "reading_of_that_share": "1.0000939 -- the endpoint-zeroing artifact is 100.009% of the gated H defect. The headline number is a property of choice (A), not of the operator, and leg 56 said so in its own journal: 'the artifact is THE WHOLE DEFECT, which is why the total does not converge.'",
+    "headline_under_A_over_tau": 204033440973.58594,
+    "headline_under_B_over_tau_D_alone": 18536770.035727352,
+    "magnitude_moved_by_the_basis_choice": 11006.957554111988,
+    "does_the_VERDICT_move": false,
+    "why_not": "With the H defect deleted outright, D alone still stands at 1.8537e+07 tau at measured order 4.0072, needing n = 52163 against the n = 801 actually reached, on a DENSE interval certificate whose cost grows like N^3 with N = 2n+3.  Leg 56 pre-committed exactly this robustness check and it is banked in its own JSON.",
+    "n_required_D_only": 52163.068422209304,
+    "D_measured_order": 4.007229080967609
+   },
+   "tier": "TIER_2_MAGNITUDE_DEPENDENT_VERDICT_INVARIANT",
+   "what_this_costs_the_banked_prose": "The 2.04e11x figure may not be quoted as the size of the collocation realization's gap without naming the endpoint-zeroed basis it belongs to.  The realization-robust number is 1.85e7x, and it is still a death: 1.10e4x smaller and 65x too many nodes."
+  },
+  {
+   "leg": "111/141",
+   "banked_dead_finding": "the WEIGHTED-ENERGY realization dies on the friendliest object: every admissible weight's coercivity gap is negative, converging to -(3-gamma)/2, and the admissibility/damping window has ZERO width -- damping at the origin needs gamma > 3 while the basis is in L^2_phi only for gamma < 3",
+   "degree_of_freedom": "the weighted-energy realization = (weight exponent gamma) x (TRIAL SPACE).  Leg 111 varied gamma over seven weights and held the trial space fixed at span{sin k theta}; the trial space is the other half of the same degree of freedom and it is what sets the membership threshold gamma < 2p + 1.",
+   "choices_actually_tried_in_the_banked_record": {
+    "A_leg_111_trial_space_sin_k_theta": {
+     "vanishing_order_p": 1,
+     "window": {
+      "p": 1,
+      "damping_needs_gamma_gt": 3.0,
+      "space_needs_gamma_lt": 3.0,
+      "window_width": 0.0,
+      "contains_gamma_4_the_published_exponent": false,
+      "who_lives_here": "leg 111's trial basis sin k theta -- ZERO WIDTH, the banked claim"
+     },
+     "largest_admissible_modulated_gap": -0.4999241101148309,
+     "weights_passing_the_gate": 0,
+     "weights_tried": 7,
+     "gamma_4_the_published_exponent_is_inadmissible": true,
+     "gamma_4_norm2_ratio_over_one_refinement": 16777216.000061583,
+     "gamma_4_increment_ratio": 4095.9999999999995,
+     "increment_ratio_reading": "4096 = 64^2, a POWER -- the norm diverges, so the basis is not in the space at the exponent the literature actually uses."
+    },
+    "B_trial_space_vanishing_to_higher_order": {
+     "vanishing_order_p": 2,
+     "who_tried_it": "leg 141, on leg 111's own graded quadrature (solver/energy_coercivity.py, imported read-only), with the p = 1 column as the instrument control reproducing leg 111's banked norms to abs_diff 0.0",
+     "window": {
+      "p": 2,
+      "damping_needs_gamma_gt": 3.0,
+      "space_needs_gamma_lt": 5.0,
+      "window_width": 2.0,
+      "contains_gamma_4_the_published_exponent": true,
+      "who_lives_here": "exponent-counting proxy for EGM's f'(0) = 0 (NB sin^2 is not odd, so this row is arithmetic on the exponent only)"
+     },
+     "gamma_4_membership_norm2_ratio": 1.0000000000000002,
+     "gamma_4_measured_convergent": true,
+     "contrast_p_1_same_gamma": {
+      "norm2_ratio": 16777216.000061583,
+      "measured_convergent": false
+     },
+     "published_certificate_in_this_realization": {
+      "locator": "Elgindi, Ghoul, Masmoudi, Stable self-similar blowup for a family of nonlocal transport equations, Anal. PDE 14 (2021) 891 -- Proposition 2.1 (sec 2, Coercivity)",
+      "arxiv": "1906.05811",
+      "hypotheses": "f odd, f'(0) = Hf(0) = 0, and integral |f|^2 phi dy < +infinity, with phi = (1 + y^2)^2 / y^4, i.e. gamma = 4 at the origin",
+      "coercivity_constant_at_a_equals_0": -0.5,
+      "same_operator": "EGM sec 1: 'when a = 2 we get the De Gregorio model and when a = 0 we get CLM model' -- this repository's own a = 0 object",
+      "the_price_EGM_states_openly": "their sec 3: the origin conditions are bought with the free modulation parameters mu and lambda"
+     }
+    }
+   },
+   "do_they_disagree": {
+    "window_width_recomputed_by_p": [
+     {
+      "p": 1,
+      "damping_needs_gamma_above": 3.0,
+      "space_needs_gamma_below": 3.0,
+      "width_recomputed": 0.0,
+      "width_as_banked_by_leg_141": 0.0,
+      "agree": true
+     },
+     {
+      "p": 2,
+      "damping_needs_gamma_above": 3.0,
+      "space_needs_gamma_below": 5.0,
+      "width_recomputed": 2.0,
+      "width_as_banked_by_leg_141": 2.0,
+      "agree": true
+     },
+     {
+      "p": 3,
+      "damping_needs_gamma_above": 3.0,
+      "space_needs_gamma_below": 7.0,
+      "width_recomputed": 4.0,
+      "width_as_banked_by_leg_141": 4.0,
+      "agree": true
+     }
+    ],
+    "window_width_p_1": 0.0,
+    "window_width_p_2": 2.0,
+    "window_width_p_3": 4.0,
+    "p_1_contains_the_published_exponent_gamma_4": false,
+    "p_2_contains_the_published_exponent_gamma_4": true,
+    "does_the_VERDICT_move": true,
+    "reading": "Same operator, same weight exponent gamma = 4, same quadrature code.  Move the trial space from vanishing order p = 1 to p = 2 and the window goes from width 0.0 to width 2.0, the membership norm goes from a ratio of 1.678e+07 per refinement (divergent) to 1.0000000000000002 (convergent), and the published literature certifies a coercivity gap of -1/2 exactly there.  Leg 111's zero-width window is a property of the trial space span{sin k theta}, not of the operator."
+   },
+   "the_three_constants_agree_to_machine_zero": {
+    "leg_111_D_phi_at_origin_at_gamma_4": -0.5,
+    "EGM_prop_2_1_constant_at_a_0": -0.5,
+    "Xu_published_modulated_spectral_gap": 0.5,
+    "max_abs_discrepancy": 0.0,
+    "why_it_matters_here": "The same formula that produces leg 111's death, evaluated at the exponent the literature uses, returns the literature's own certified constant.  The two sides of this row are not two different calculations disagreeing -- they are one calculation, read on two trial spaces."
+   },
+   "the_dichotomy_is_named_in_print_on_this_operator": {
+    "arxiv": "2607.19762",
+    "locator": "sec 8 (Discussion)",
+    "what_Xu_says_about_EGM": "EGM Prop. 2.1 'is not a counterexample but an instance of the realization mechanism of Section 3.1: the singular weight and origin constraints define their own realization, in which a gap is certified'",
+    "consequence_for_this_leg": "the classification is this leg's; the dichotomy is Xu's and is not claimed"
+   },
+   "tier": "TIER_1_VERDICT_DEPENDENT",
+   "caveats_carried_verbatim_from_leg_141_and_NOT_softened": [
+    "It decides the MEMBERSHIP half only -- exactly the half leg 111's `admissibility()` gate decides, and exactly the half that makes leg 111's window zero-width.  EGM's further hypothesis Hf(0) = 0 constrains the COERCIVITY, not the membership, and is not tested here; no coercivity gap is recomputed by this leg on any trial space.",
+    "exponent-counting proxy for EGM's f'(0) = 0 (NB sin^2 is not odd, so this row is arithmetic on the exponent only)",
+    "No coercivity gap is recomputed on any trial space by leg 141 or by this leg. The membership half is measured on both sides; the coercivity half at p = 2 rests on EGM's published proposition, not on a repository measurement."
+   ]
+  }
+ ],
+ "tier_summary": {
+  "TIER_1_verdict_dependent": [
+   "111/141"
+  ],
+  "TIER_2_magnitude_dependent_verdict_invariant": [
+   "56"
+  ],
+  "TIER_3_realization_invariant": [
+   "52",
+   "53"
+  ]
+ },
+ "controls": [
+  {
+   "control": "C1_predicate_can_report_NO",
+   "requirement": "at least one of the four gated rows must come back tier 3",
+   "tier_3_rows": [
+    "52",
+    "53"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "control": "C2_predicate_can_report_YES",
+   "row": "leg 127",
+   "degree_of_freedom": "the function-space realization of the a = 0 CLM linearisation L_0",
+   "choice_A_l1_w_at_s_below_1": {
+    "sigma_min_vanishes": true,
+    "max_deviation_from_predicted_1_minus_s": 0.02186165145571506,
+    "explicit_near_null_sequence_ratio_over_numerical_optimum": 1.0000000000044844,
+    "min_cosine_with_optimum": 0.9999999999999998,
+    "not_a_truncation_artifact_max_degradation": 1.3542912892527808,
+    "consequence": "no bounded approximate inverse: Z1 >= 1 for every bounded A"
+   },
+   "choice_B_origin_H2_realization": {
+    "source": "arXiv:2607.19762 (Xu, 2026) proves the SAME a = 0 CLM linearization on origin-H^2 has point spectrum exactly {0,1} and essential spectrum meeting {Re lam >= -1/2} in the single line {Re lam = -1/2}, hence is INVERTIBLE there after the standard modulation, with a spectral gap of 1/2.  Every statement in this leg is therefore about the l^1_w realization at s < 1 and about nothing else.  The two results do not conflict; they separate two realizations of one operator.",
+    "modulated_spectral_gap": 0.5,
+    "consequence": "invertible after modulation"
+   },
+   "does_the_VERDICT_move": true,
+   "tier": "TIER_1_VERDICT_DEPENDENT",
+   "verdict": "PASS -- the predicate returns tier 1 where the gate takes tier 1 as given"
+  },
+  {
+   "control": "C3_mu_positive_is_a_different_OPERATOR_not_a_different_realization",
+   "witnesses_collected_and_excluded_from_every_tier_1_finding": [
+    {
+     "leg": "53",
+     "what": "the assembled certificate closes under dissipation",
+     "min_mu_with_Z1_below_one": 2.0,
+     "control_can_report_below_one": true
+    },
+    {
+     "leg": "111",
+     "what": "the coercivity gap changes sign under dissipation",
+     "A2_gaps_over_mu": [
+      -0.4987569212189221,
+      0.746094032910232,
+      1.593593965917315,
+      3.0757989062787616,
+      5.820445045750358
+     ],
+     "sign_flips": true
+    },
+    {
+     "leg": "127",
+     "what": "sigma_min saturates instead of vanishing under dissipation",
+     "max_abs_exponent_for_mu_positive": 0.0026247852520269194,
+     "exponent_at_mu_0": 0.698488810373405
+    }
+   ],
+   "reading": "With mu > 0 the unbounded part becomes a diagonal multiplier and the kernel is destroyed -- that is lesson 87's dichotomy, a different OPERATOR.  It is why the instruments are not ones that return 'dead' for everything, and it is NOT evidence that any row's death is realization-dependent.  Barred structurally, not by judgement: no tier assignment above reads this block.",
+   "verdict": "PASS -- three mu > 0 witnesses present, none counted toward any tier"
+  }
+ ],
+ "all_controls_pass": true,
+ "prediction_check": {
+  "recorded_where": "writeup/novelty/leg_165.md sec 5, committed before this file existed",
+  "predicted": {
+   "52": "TIER_3_REALIZATION_INVARIANT",
+   "53": "TIER_3_REALIZATION_INVARIANT",
+   "56": "TIER_2_MAGNITUDE_DEPENDENT_VERDICT_INVARIANT",
+   "111/141": "TIER_1_VERDICT_DEPENDENT"
+  },
+  "observed": {
+   "52": "TIER_3_REALIZATION_INVARIANT",
+   "53": "TIER_3_REALIZATION_INVARIANT",
+   "56": "TIER_2_MAGNITUDE_DEPENDENT_VERDICT_INVARIANT",
+   "111/141": "TIER_1_VERDICT_DEPENDENT"
+  },
+  "matches": 4,
+  "of": 4
+ },
+ "what_is_NOT_claimed": "The realization dichotomy is Xu's, arXiv:2607.19762 Prop. 2 of sec 3.1, on this exact operator, and is used and not claimed.  No ban is lifted.  No realization is proposed, priced or recommended -- a tier-1 classification is not a licence to try the other side, and the gate's yes-branch says so.  L1 stays measured-dead in all three realizations.  No link of the L1 -> L4 chain moved.  Clay ~0.05%.",
+ "ceiling_S7": "Every magnitude here was measured on the a = 0 CLM linearisation -- one mode, analytic, the friendliest object in the repository -- with Y_0 exactly zero for the banned degenerate reason.  Nothing is claimed about HL_S2_nonsymmetric.  EGM's positive gap is on that same friendliest substrate and is bought with modulation, which EGM's own sec 3 states openly.",
+ "novelty_log": "writeup/novelty/leg_165.md",
+ "journal": "experiments/journal/leg_165.md",
+ "figure": "none -- no measurement of a curve (the 'no measurement, no figure' convention)",
+ "elapsed_s": 0.017819881439208984
+}
