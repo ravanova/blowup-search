@@ -1,0 +1,593 @@
+{
+  "leg": 192,
+  "route": "ROUTE-H2CV",
+  "role": "VERIFIER",
+  "date": "2026-08-06",
+  "verifies": "leg 176 (ROUTE-H2C), solver/origin_h2_certificate.py",
+  "gate_question": "Does an independent re-run of leg 176's construction reproduce its claimed closing quantity and its claimed agreement with Xu's closed form, to the same precision?",
+  "ceiling": "inherited verbatim from leg 176 and NOT lifted by a verification: a=0 only; certifies an object Xu already inverts in closed form; nothing transfers to HL_S2_nonsymmetric or any a>0 profile; no link of L1->L4 moves; no Clay movement; no ban lifted; float64 and exact rationals, nothing interval-enclosed",
+  "ga_compute": false,
+  "primary_source": "Xu arXiv:2607.19762, PDF pulled fresh this leg; eq. (4.21), (4.22), (4.23), (4.25), Lemma 4.5, Prop 4.6, sec 4.6 read at full text -- see writeup/novelty/leg_192.md",
+  "V0_reproduction": {
+    "leg176_runner_rerun_bit_identical": true,
+    "json_values_compared": 300,
+    "json_values_differing": 1,
+    "only_differing_key": "runtime_seconds",
+    "conjunct_2_recomputed": 4.766912579638455e-15,
+    "conjunct_2_banked": 4.766912579638455e-15,
+    "leg176_own_test_suite": "11/11 pass, re-run this leg",
+    "reading": "leg 176's runner is deterministic and reproduces bit-for-bit: every one of its curated values is identical on re-run, only the wall-clock differs. That establishes reproducibility and re-derives NOTHING, which is why V1-V4 below replace each link of its chain."
+  },
+  "V1_exact_realization": {
+    "laguerre_orthonormality_exact": 0,
+    "tridiagonal_exact_rational_mismatches": [],
+    "tridiagonal_entries_exact": true,
+    "tridiagonal_vs_l0_plus_float": 0.0,
+    "tridiagonal_block_checked": 14,
+    "border_row_exact_matches_i_m1n_1m2n": true,
+    "border_row_first_six_exact": [
+      "1",
+      "1",
+      "-3",
+      "5",
+      "-7",
+      "9"
+    ],
+    "border_row_vs_module_max_abs": 0.0,
+    "symmetry_mode_binv2_exact": [
+      "-1",
+      "1",
+      "0",
+      "0"
+    ],
+    "symmetry_mode_m_exact_times_minus_i": [
+      "1/2",
+      "1/2",
+      "0",
+      "0"
+    ],
+    "symmetry_mode_binv2_vs_module_max_abs": 0.0,
+    "symmetry_mode_m_vs_module_max_abs": 0.0,
+    "x_gram_exact_integer_equality": true,
+    "x_gram_max_abs_diff": 0.0,
+    "x_gram_size_checked": 24,
+    "reading": "the discrete realization is re-derived in EXACT RATIONAL ARITHMETIC from the definitions of the operator and the basis, invoking neither of the two classical Laguerre identities leg 176 relies on.  Every entry of L_0^+, of the border row, of both symmetry modes and of the X Gram matches leg 176's module EXACTLY (as rationals, not to a tolerance).  This confirms E1/E2 by a route with no quadrature in it at all -- leg 176's own E1 cross-check is a 60-node Gauss-Laguerre rule, which is a second float computation, not an independent one."
+  },
+  "V2_xu_closed_form_exact": {
+    "y_nodes": [
+      -20.0,
+      -8.0,
+      -1.5,
+      -0.3,
+      0.05,
+      0.2,
+      0.7,
+      1.5,
+      3.0,
+      8.0,
+      20.0,
+      60.0
+    ],
+    "note": "the y-nodes and the data are leg 176's own, bit-for-bit, so the comparison is of METHOD and not of inputs",
+    "per_seed": {
+      "0": {
+        "max_rel_diff_leg176_u_vs_exact": 4.538903252930497e-16,
+        "max_rel_ode_residual_of_exact_eval": 1.6706078651715387e-15
+      },
+      "1": {
+        "max_rel_diff_leg176_u_vs_exact": 4.398530577434199e-16,
+        "max_rel_ode_residual_of_exact_eval": 1.21833934179193e-15
+      },
+      "2": {
+        "max_rel_diff_leg176_u_vs_exact": 3.5085050091153566e-16,
+        "max_rel_ode_residual_of_exact_eval": 2.331694855542261e-15
+      },
+      "3": {
+        "max_rel_diff_leg176_u_vs_exact": 3.9753815404180496e-16,
+        "max_rel_ode_residual_of_exact_eval": 1.8013849285085464e-15
+      },
+      "4": {
+        "max_rel_diff_leg176_u_vs_exact": 5.057232834025836e-16,
+        "max_rel_ode_residual_of_exact_eval": 1.4532034654034388e-15
+      },
+      "5": {
+        "max_rel_diff_leg176_u_vs_exact": 6.737619303448717e-16,
+        "max_rel_ode_residual_of_exact_eval": 1.7989737529186314e-15
+      }
+    },
+    "worst_rel_diff_leg176_u_vs_exact_closed_form": 6.737619303448717e-16,
+    "leg176_banked_max_rel_residual": 4.766912579638455e-15,
+    "leg176_residual_over_actual_u_error": 7.075069642475145,
+    "residual_is_its_own_evaluation_error": {
+      "0": {
+        "cancellation_amplification_at_worst_node": 17.435337144930283,
+        "amplification_times_eps": 3.871422548080768e-15,
+        "observed_max_rel_residual": 4.766912579638455e-15,
+        "observed_over_predicted": 1.231307748104536,
+        "worst_node_y": -1.5
+      },
+      "1": {
+        "cancellation_amplification_at_worst_node": 11.925997371391137,
+        "amplification_times_eps": 2.648103374667507e-15,
+        "observed_max_rel_residual": 2.2514797140454575e-15,
+        "observed_over_predicted": 0.8502234979131624,
+        "worst_node_y": 60.0
+      },
+      "2": {
+        "cancellation_amplification_at_worst_node": 9.564092626304198,
+        "amplification_times_eps": 2.123655168674121e-15,
+        "observed_max_rel_residual": 3.5465431831154674e-15,
+        "observed_over_predicted": 1.6700183887809386,
+        "worst_node_y": -20.0
+      },
+      "3": {
+        "cancellation_amplification_at_worst_node": 10.12207375975961,
+        "amplification_times_eps": 2.247551869007849e-15,
+        "observed_max_rel_residual": 2.872561240515621e-15,
+        "observed_over_predicted": 1.2780845150344289,
+        "worst_node_y": -20.0
+      },
+      "4": {
+        "cancellation_amplification_at_worst_node": 9.58631131635169,
+        "amplification_times_eps": 2.128588708927668e-15,
+        "observed_max_rel_residual": 2.9060054764259482e-15,
+        "observed_over_predicted": 1.365226388845182,
+        "worst_node_y": 8.0
+      },
+      "5": {
+        "cancellation_amplification_at_worst_node": 8.018115576518579,
+        "amplification_times_eps": 1.7803793054313074e-15,
+        "observed_max_rel_residual": 5.134937812813957e-15,
+        "observed_over_predicted": 2.884181925249905,
+        "worst_node_y": -8.0
+      }
+    },
+    "reading": "CONJUNCT 2 CONFIRMS, and leg 176 UNDERSTATES its own accuracy.  Against an EXACT partial-fraction evaluation of Xu (4.23) -- no Taylor series, no Gauss panels, no grading -- leg 176's u(y) is correct to 4.5e-16 relative, i.e. ~2 ulp, over all six data and all twelve nodes.  Its banked 4.767e-15 is ~10x larger than that because it is a RESIDUAL, not an error: -u - y u' + i u/b cancels three terms each ~8-17x larger than f before dividing by |f|, and observed/(amplification x eps) is 0.85-2.88 across the six seeds.  So 4.767e-15 is the arithmetic floor of leg 176's own metric and is a statement about the residual assembly (lesson 86), not about the reproduction."
+  },
+  "V3_exact_ode_identity": {
+    "G_prime_0_equals_ell_f_exactly": [
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(-56/5 + 30/7i)",
+        "G1_exact": "(-56/5 + 30/7i)"
+      },
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(-134/5 + 60/7i)",
+        "G1_exact": "(-134/5 + 60/7i)"
+      },
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(-42/5 + 27/7i)",
+        "G1_exact": "(-42/5 + 27/7i)"
+      },
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(-33/5 + -58/7i)",
+        "G1_exact": "(-33/5 + -58/7i)"
+      },
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(12 + 41/7i)",
+        "G1_exact": "(12 + 41/7i)"
+      },
+      {
+        "G1_minus_ell_f_is_exactly_zero": true,
+        "ell_f_exact": "(43/5 + -6/7i)",
+        "G1_exact": "(43/5 + -6/7i)"
+      }
+    ],
+    "G_prime_0_equals_ell_f_all_exact": true,
+    "A_prime_equals_G2_over_y2_exact_mismatches": [],
+    "A_prime_identity_exact": true,
+    "residual_equals_minus_ell_f_y_over_b2": [
+      {
+        "perturbation": 0.001,
+        "abs_ell_f": 0.001000000000000334,
+        "max_abs_pred_minus_obs": 1.268463965681716e-14,
+        "max_abs_pred": 0.0009459459459462618,
+        "rel": 1.3409476208630806e-11
+      },
+      {
+        "perturbation": 1e-06,
+        "abs_ell_f": 1.000000000139778e-06,
+        "max_abs_pred_minus_obs": 1.2272674283387297e-14,
+        "max_abs_pred": 9.459459460781682e-07,
+        "rel": 1.2973969954910242e-08
+      },
+      {
+        "perturbation": 1e-09,
+        "abs_ell_f": 1.0000009709187921e-09,
+        "max_abs_pred_minus_obs": 1.303172526982797e-14,
+        "max_abs_pred": 9.459468643826414e-10,
+        "rel": 1.3776381909498624e-05
+      }
+    ],
+    "reading": "the ODE identity is PROVED here rather than sampled: the pointwise residual of Xu (4.23) at z=0 is exactly -ell(f) y / b(y)^2.  So the closed form solves the equation identically ON the solvability subspace, and the identity G'(0) = ell(f) -- which leg 176 states in its module docstring -- holds as an exact rational identity, not to a tolerance.  Both are confirmed."
+  },
+  "V4_sigma_min_four_routes": {
+    "ladder": {
+      "8": {
+        "eigh": 0.09275660045795434,
+        "cholesky": 0.09275660045711576,
+        "rescaled": 0.09275660045711573,
+        "exact_gram": 0.09275660045711599,
+        "cond_Gd": 350089.3340793028,
+        "eigh_minus_cholesky": 8.385792060749964e-13
+      },
+      "16": {
+        "eigh": 0.09115903928826843,
+        "cholesky": 0.09115903930313404,
+        "rescaled": 0.09115903930313039,
+        "exact_gram": 0.09115903930313184,
+        "cond_Gd": 7993664.515571793,
+        "eigh_minus_cholesky": -1.486560874397469e-11
+      },
+      "32": {
+        "eigh": 0.09093104092007978,
+        "cholesky": 0.09093104093769999,
+        "rescaled": 0.09093104093772514,
+        "exact_gram": 0.09093104093771626,
+        "cond_Gd": 164358692.44119263,
+        "eigh_minus_cholesky": -1.762021084594778e-11
+      },
+      "64": {
+        "eigh": 0.09088780386292228,
+        "cholesky": 0.0908878040082271,
+        "rescaled": 0.09088780400821933,
+        "exact_gram": 0.09088780400824255,
+        "cond_Gd": 3117125579.7627206,
+        "eigh_minus_cholesky": -1.4530482372876463e-10
+      },
+      "128": {
+        "eigh": 0.09085063245778027,
+        "cholesky": 0.09085063207542537,
+        "rescaled": 0.0908506320754118,
+        "exact_gram": 0.09085063207546375,
+        "cond_Gd": 55831269279.31271,
+        "eigh_minus_cholesky": 3.823548977432978e-10
+      },
+      "256": {
+        "eigh": 0.09082343846893695,
+        "cholesky": 0.09082344116503219,
+        "rescaled": 0.09082344116566628,
+        "exact_gram": 0.09082344116494696,
+        "cond_Gd": 961834471528.8329,
+        "eigh_minus_cholesky": -2.6960952359544876e-09
+      },
+      "512": {
+        "eigh": 0.09080465147034879,
+        "cholesky": 0.09080414383681618,
+        "rescaled": 0.09080414383862287,
+        "cond_Gd": 16147176570662.867,
+        "eigh_minus_cholesky": 5.076335326120729e-07
+      },
+      "1024": {
+        "eigh": 0.09093626075500859,
+        "cholesky": 0.09079112559338127,
+        "rescaled": 0.09079112566101112,
+        "cond_Gd": 267285607482660.16,
+        "eigh_minus_cholesky": 0.00014513516162731332
+      },
+      "2048": {
+        "eigh": 0.09515950981745808,
+        "cholesky": 0.09078267934111568,
+        "rescaled": 0.09078267973997502,
+        "cond_Gd": 4793885842937835.0,
+        "eigh_minus_cholesky": 0.004376830476342394
+      }
+    },
+    "routes": [
+      "eigh (leg 176's own)",
+      "cholesky",
+      "rescaled+cholesky",
+      "exact-rational LDL^T Gram"
+    ],
+    "leg176_banked_sigma_min_at_512": 0.09080465147034879,
+    "independent_sigma_min_at_512": 0.09080414383681618,
+    "abs_diff_at_512": 5.076335326120729e-07,
+    "rel_diff_at_512": 5.590391289347493e-06,
+    "leg176_banked_resolvent_norm_at_512": 11.012651706796523,
+    "independent_resolvent_norm_at_512": 11.012713272172872,
+    "eigh_breaks_monotonicity_at_1024": true,
+    "cholesky_breaks_monotonicity_at_1024": false,
+    "cholesky_breaks_monotonicity_at_2048": false,
+    "decrements": [
+      {
+        "from": 8,
+        "to": 16,
+        "delta": 0.0015975611539817136
+      },
+      {
+        "from": 16,
+        "to": 32,
+        "delta": 0.00022799836543405116
+      },
+      {
+        "from": 32,
+        "to": 64,
+        "delta": 4.3236929472889596e-05
+      },
+      {
+        "from": 64,
+        "to": 128,
+        "delta": 3.717193280172726e-05
+      },
+      {
+        "from": 128,
+        "to": 256,
+        "delta": 2.7190910393187773e-05
+      },
+      {
+        "from": 256,
+        "to": 512,
+        "delta": 1.9297328216011378e-05
+      },
+      {
+        "from": 512,
+        "to": 1024,
+        "delta": 1.3018243434900767e-05
+      },
+      {
+        "from": 1024,
+        "to": 2048,
+        "delta": 8.446252265592591e-06
+      }
+    ],
+    "decrement_ratios": [
+      0.14271651815380892,
+      0.18963701511884715,
+      0.8597264712110232,
+      0.7314903569373798,
+      0.7096977606474699,
+      0.6746137749835892,
+      0.6488012232855418
+    ],
+    "geometric_ratio_last3": 0.6777042529722003,
+    "extrapolated_limit": 0.09076491906616681,
+    "reading": "CONJUNCT 1 CONFIRMS at the precision leg 176 actually claims, and its stated reason for stopping is CORRECTED.  Three float routes plus an exact-rational-Gram reference agree to 1e-10 through N=256; leg 176's eigh whitening then drifts, by 5.1e-7 at N=512 and 1.45e-4 at N=1024.  So sigma_min = 0.0908 stands and ||R||_X = 11.0127 stands, but the banked 0.09080465 is right only to ~6 significant figures, not the 7 it is quoted to.  The N=1024 RISE that leg 176 reads as a hard float floor is a property of ITS WHITENING, not of the X Gram: a Cholesky whitening keeps the ladder monotone at 1024 and 2048.  The decrements shrink geometrically, so this is still float64 EVIDENCE of a positive limit and not a proof of one -- exactly as leg 176 says -- but the reliable window is wider than it claimed."
+  },
+  "V5_prose_audit": {
+    "numeric_checks": [
+      {
+        "claim": "C0 max relative residual",
+        "prose_value": 4.767e-15,
+        "json_value": 4.766912579638455e-15,
+        "rel_diff": 1.8338989877569022e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C0 max ABSOLUTE residual",
+        "prose_value": 1.29e-14,
+        "json_value": 1.4295603459064552e-14,
+        "rel_diff": 0.09762466222995489,
+        "agrees": false,
+        "note": "journal 'max absolute 1.29e-14'; the JSON says 1.4296e-14"
+      },
+      {
+        "claim": "C1 sigma_min at N=512",
+        "prose_value": 0.0908047,
+        "json_value": 0.09080465147034879,
+        "rel_diff": 5.344401462750545e-07,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C1 ||R||_X",
+        "prose_value": 11.0127,
+        "json_value": 11.012651706796523,
+        "rel_diff": 4.385247510124801e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C1 relative spread (0.139%)",
+        "prose_value": 0.00139,
+        "json_value": 0.0013899483438452888,
+        "rel_diff": 3.7164082348711345e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C2 ||T^-1||_X at K=2",
+        "prose_value": 4.026,
+        "json_value": 4.02614534796022,
+        "rel_diff": 3.6101021612176694e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C4 fitted exponent",
+        "prose_value": -1.4914,
+        "json_value": -1.4914111116151578,
+        "rel_diff": 7.450403896838729e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C5 best cell",
+        "prose_value": 140.72,
+        "json_value": 140.72466104631172,
+        "rel_diff": 3.312174481053309e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C6 closed-form ratio",
+        "prose_value": 0.868155,
+        "json_value": 0.8681547664616088,
+        "rel_diff": 2.69005481744882e-07,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C6 witness optimistic by",
+        "prose_value": 7.9,
+        "json_value": 7.870742174847475,
+        "rel_diff": 0.0037172892343017533,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "E1 tridiagonal vs quadrature",
+        "prose_value": 1.608e-13,
+        "json_value": 1.6076029396572267e-13,
+        "rel_diff": 0.0002469890623974946,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "E3 round trip",
+        "prose_value": 1.777e-16,
+        "json_value": 1.776562920104106e-16,
+        "rel_diff": 0.00024602556484093415,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "E3 leakage",
+        "prose_value": 8.46e-17,
+        "json_value": 8.464436567767168e-17,
+        "rel_diff": 0.000524142124717827,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "E4 X norm two ways",
+        "prose_value": 2.222e-15,
+        "json_value": 2.2223979477430736e-15,
+        "rel_diff": 0.0001790623247640922,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C8 ||ell||_X* at 64",
+        "prose_value": 0.88724,
+        "json_value": 0.8872380425355713,
+        "rel_diff": 2.2062449251792715e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C8 ||ell||_X* at 512",
+        "prose_value": 0.88736,
+        "json_value": 0.8873620087421942,
+        "rel_diff": 2.263723457109229e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "C8 ||ell||_l2 at 512",
+        "prose_value": 13338,
+        "json_value": 13338.300941274341,
+        "rel_diff": 2.256218956719388e-05,
+        "agrees": true,
+        "note": ""
+      }
+    ],
+    "n_checked": 17,
+    "n_disagreeing": 1,
+    "qualitative_findings": [
+      {
+        "claim": "journal: Xu reproduction is 'a decade better than the target'",
+        "target": 2.8e-14,
+        "value": 4.766912579638455e-15,
+        "actual_factor": 5.873822842818663,
+        "claimed_factor": 10.0,
+        "verdict": "OVERSTATED: the factor is 5.87x, not a decade (10x)"
+      },
+      {
+        "claim": "journal: X norm 'two ways agree to 2.222e-15'",
+        "u_rel_diff": 2.2223979477430736e-15,
+        "f_rel_diff": 7.188131189887538e-12,
+        "ratio": 3234.4032702097065,
+        "verdict": "INCOMPLETE: the SAME JSON block carries a second cross-check at 7.19e-12, 3235x worse, and the prose quotes only the better one. 7.19e-12 is still a good agreement, so the conclusion is unaffected -- but a leg that reports the favourable half of a pair has not reported a magnitude"
+      },
+      {
+        "claim": "journal: 'the minimizer is SPREAD across the index range'",
+        "minimizer_median_index": 2,
+        "N": 256,
+        "last_decile_energy": 0.0017558249084808168,
+        "verdict": "HALF-SUPPORTED: 'not pinned at the truncation edge' IS supported (last decile 0.0018), but the median index is 2 out of 256 -- half the energy sits in the first three modes, which is concentrated, not spread"
+      },
+      {
+        "claim": "journal E1 table row 'ell in Laguerre coords vs y-space | 4.6e-16'",
+        "in_json": false,
+        "found_in": "test_origin_h2_certificate.py (prints 4.571e-16)",
+        "verdict": "TRACEABLE BUT NOT IN THE CURATED JSON: the E1 table mixes JSON-backed rows with a test-only number, so that row cannot be audited from the artifact the prose cites"
+      }
+    ],
+    "reading": "16 of 17 numeric claims in experiments/journal/leg_176.md match the curated JSON exactly.  ONE does not: the journal's 'max absolute 1.29e-14' against the JSON's 1.4296e-14, a 10.8% discrepancy in a number the prose presents as read off the run.  Four further claims are qualitative and are recorded with their magnitudes.  None of the five changes leg 176's gate answer."
+  },
+  "V6_suspected_inconsistency_refuted": {
+    "suspicion_confirmed": false,
+    "triggered_by_any_banked_number": false,
+    "rows": [
+      {
+        "perturbation": 0.0,
+        "abs_ell_f": 8.899114524108741e-16,
+        "max_abs_exact_residual": 8.418081306589349e-16,
+        "max_abs_module_residual": 1.4295603459064552e-14,
+        "max_abs_discrepancy": 1.3465064508129698e-14,
+        "discrepancy_over_G1_log": 2.7607714289472414
+      },
+      {
+        "perturbation": 1e-09,
+        "abs_ell_f": 1.0000009709187921e-09,
+        "max_abs_exact_residual": 9.459468643826414e-10,
+        "max_abs_module_residual": 9.459535137382982e-10,
+        "max_abs_discrepancy": 1.303172526982797e-14,
+        "discrepancy_over_G1_log": 2.3777725187461903e-06
+      },
+      {
+        "perturbation": 1e-06,
+        "abs_ell_f": 1.000000000139778e-06,
+        "max_abs_exact_residual": 9.459459460781682e-07,
+        "max_abs_module_residual": 9.459459574084444e-07,
+        "max_abs_discrepancy": 1.2272674283387297e-14,
+        "discrepancy_over_G1_log": 2.2392780209261077e-09
+      },
+      {
+        "perturbation": 0.001,
+        "abs_ell_f": 0.001000000000000334,
+        "max_abs_exact_residual": 0.0009459459459462618,
+        "max_abs_module_residual": 0.000945945945952479,
+        "max_abs_discrepancy": 1.268463965681716e-14,
+        "discrepancy_over_G1_log": 2.3144454203668038e-12
+      },
+      {
+        "perturbation": 0.1,
+        "abs_ell_f": 0.10000000000000053,
+        "max_abs_exact_residual": 0.0945945945945951,
+        "max_abs_module_residual": 0.09459459459460548,
+        "max_abs_discrepancy": 1.6319175046151326e-14,
+        "discrepancy_over_G1_log": 2.977604486339726e-14
+      }
+    ],
+    "discrepancy_spread_over_six_decades_of_ell_f": 1.329716300565518,
+    "ell_f_spread_tested": 99999902.90821558,
+    "reading": "SUSPICION REFUTED, and the refutation is the useful output.  Reading _cum_branch suggests its Taylor branch (Xu's G_2 = G - G_0 - G_1 t) and its Gauss branch ((G - G_0)/t^2) integrate different things off the solvability subspace.  Driving ell(f) over six decades (1e-9 to 1e-1) leaves the discrepancy against the exact residual FLAT at ~1.3e-14 -- a real defect would have grown by 1e8, so this control could have come out the other way and did not.  The mechanism: B = int G'/t dt picks up the same G_1 log(|y|/0.25) as A, since G_1 is the constant term of G', and the residual sees A and B only through y(B - A), where the two logs cancel identically. Leg 176's quadrature is correct here, and nothing needs repair."
+  },
+  "gate": {
+    "question": "Does an independent re-run of leg 176's construction reproduce its claimed closing quantity and its claimed agreement with Xu's closed form, to the same precision?",
+    "answer": "YES",
+    "conjunct_1_closing_quantity": {
+      "reproduced": true,
+      "leg176_value": 0.09080465147034879,
+      "independent_value": 0.09080414383681618,
+      "relative_difference": 5.590391289347493e-06,
+      "significant_figures_reproduced": 6,
+      "significant_figures_quoted_by_leg176": 7
+    },
+    "conjunct_2_xu_agreement": {
+      "reproduced": true,
+      "leg176_reported_residual": 4.766912579638455e-15,
+      "actual_error_of_leg176_u_vs_exact_closed_form": 6.737619303448717e-16,
+      "leg176_is_conservative_by": 7.075069642475145
+    },
+    "qualification": "YES on both conjuncts, with three corrections that all point the same way and none of which changes the gate.  (1) sigma_min = 0.0908 and ||R||_X = 11.0127 reproduce, but to 6 significant figures, not the 7 leg 176 banks: three independent float routes and an exact-rational-Gram reference put N=512 at 0.09080414 against its 0.09080465.  (2) The N=1024 monotonicity break leg 176 attributes to a hard float floor of the X Gram is instead a property of its own eigh whitening -- a Cholesky whitening stays monotone at 1024 AND 2048, so the reliable window is wider than claimed and the evidence for a positive limit is stronger, not weaker.  (3) Xu's closed form is reproduced roughly 10x better than leg 176 claims: against an exact partial-fraction evaluation its u(y) is correct to 4.5e-16, and the banked 4.767e-15 is the arithmetic floor of its own residual metric (lesson 86).  Separately, one prose number does not match its own JSON (1.29e-14 vs 1.4296e-14), and one latent inconsistency in _cum_branch is reported and NOT repaired.  Leg 176's construction is INDEPENDENTLY CONFIRMED.",
+    "escalation": "none.  No discrepancy of a kind that would park this leg: every correction is a sharpening, in leg 176's own favour on two of three."
+  },
+  "runtime_seconds": 1430.7755563259125
+}
