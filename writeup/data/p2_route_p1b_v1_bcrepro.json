@@ -1,0 +1,618 @@
+{
+ "ablation_sup_bounds": {
+  "Z1_with_sharp_sup": 0.058867751528343684,
+  "Z2_ratio": 0.6937932183555895,
+  "Z2_with_sharp_sup": 191.83302872709237,
+  "Z2_with_their_sup": 276.4988524704378,
+  "delta_bar_with_sharp_sup": 0.004871575133649482,
+  "delta_min_with_sharp_sup": 0.0008833091450662149,
+  "remark_41_bound_pi_minus_quarter": 0.7511255444649425,
+  "seconds": 54.22109508514404,
+  "sharp_max_sup_psi": 0.7511255444649424,
+  "sup_ubar_sharp": 1.2743185073739962,
+  "sup_ubar_theirs_formula": 1.665920546559562,
+  "their_bound_over_sharp_max_ratio_dpsi": 47.01338614083275,
+  "their_bound_over_sharp_max_ratio_psi": 136.30512654634146,
+  "their_code_max_sup_psi": 12.35652475566056,
+  "what_it_tests": "their Z2/Z3 are built from an analytic ||psi_m||_inf bound their own Remark 41 states more sharply (pi^{-1/4}) than their code uses.  This measures the cost, and shows whether any gap between our constants and theirs could be hiding there."
+ },
+ "ablation_sup_provenance": {
+  "families": {
+   "code_cell_15_commented": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.08642586458443524,
+    "Z1_over_published": 1.3268538874124844,
+    "Z2": 325.66023602890306,
+    "Z2_over_published": 0.9483637374721143,
+    "Z3": 556.4779995857853,
+    "Zbar22": 0.07582633118622517,
+    "closes": true,
+    "combination_over_published_implied": 0.9483637381780295,
+    "delta_bar": 0.0027986066804326594,
+    "delta_min": 0.0010098255641342608,
+    "sup_combination": 4.175663404993268,
+    "sup_dubar": 1.8196959742127365,
+    "sup_ubar": 1.665920546559562
+   },
+   "code_cells_16_17": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.08518341590350051,
+    "Z1_over_published": 1.3077791825178846,
+    "Z2": 276.4988524704378,
+    "Z2_over_published": 0.8051995795776012,
+    "Z3": 556.4779995857853,
+    "Zbar22": 0.07442756929791311,
+    "closes": true,
+    "combination_over_published_implied": 0.8051995801769521,
+    "delta_bar": 0.0032976300041972872,
+    "delta_min": 0.0009687638810323,
+    "sup_combination": 3.545308920309722,
+    "sup_dubar": 1.18934148952919,
+    "sup_ubar": 1.665920546559562
+   },
+   "measured": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.058867751528343684,
+    "Z1_over_published": 0.903767701187475,
+    "Z2": 191.83302872709237,
+    "Z2_over_published": 0.5586420077337115,
+    "Z3": 556.4779995857853,
+    "Zbar22": 0.04319027671322052,
+    "closes": true,
+    "combination_over_published_implied": 0.5586420081495371,
+    "delta_bar": 0.004871575133649482,
+    "delta_min": 0.0008833091450662149,
+    "sup_combination": 2.459711285886462,
+    "sup_dubar": 0.6575527699751175,
+    "sup_ubar": 1.2743185073739962
+   },
+   "remark_41": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.06310757818667699,
+    "Z1_over_published": 0.9688596792731391,
+    "Z2": 234.44643604689603,
+    "Z2_over_published": 0.6827376318265584,
+    "Z3": 556.4779995857853,
+    "Zbar22": 0.04851326893980583,
+    "closes": true,
+    "combination_over_published_implied": 0.6827376323347547,
+    "delta_bar": 0.0039774148169730555,
+    "delta_min": 0.000911354768840709,
+    "sup_combination": 3.006106656955296,
+    "sup_dubar": 1.1105492392144023,
+    "sup_ubar": 1.340361504213047
+   },
+   "remark_41_psi_only": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.06322131097548868,
+    "Z1_over_published": 0.9706057629679526,
+    "Z2": 240.5914483110739,
+    "Z2_over_published": 0.7006326836410836,
+    "Z3": 556.4779995857853,
+    "Zbar22": 0.04865394173254944,
+    "closes": true,
+    "combination_over_published_implied": 0.7006326841625999,
+    "delta_bar": 0.003876272488923035,
+    "delta_min": 0.0009150593422366056,
+    "sup_combination": 3.084898907270084,
+    "sup_dubar": 1.18934148952919,
+    "sup_ubar": 1.340361504213047
+   }
+  },
+  "headline_family": "code_cells_16_17",
+  "seconds": 23.612494707107544,
+  "what_it_tests": "Z1 and Z2 are the ONLY Theorem-42 constants that depend on the L^infty bounds for psi_m and d_xpsi_m.  arXiv:2404.04054v2 contains more than one such bound -- Remark 41's (sharp), proof.ipynb cells 16/17's (loose), and an alternative d_xpsi bound sitting commented out in cell 15.  This table says which family each published constant is consistent with, instead of attributing the gap by argument."
+ },
+ "ablation_their_ubar": {
+  "available": true,
+  "bounds": {
+   "Y": 0.000756409378290546,
+   "Z1": 0.08518341595647105,
+   "Z2": 276.4988525528525,
+   "Z3": 556.4779996326037,
+   "op_norm_LAL": 5.796645829506288,
+   "sup_combination": 3.545308921068176,
+   "sup_dubar": 1.1893414894205852,
+   "sup_ubar": 1.6659205471726652
+  },
+  "coefficient_difference_H2_norm": 4.35718347678494e-10,
+  "coefficient_difference_l2": 2.95141489738863e-10,
+  "coefficient_difference_max_abs": 2.855327085882209e-10,
+  "comparison": {
+   "Y": {
+    "decades": 2.61065261325139e-05,
+    "ours": 0.000756409378290546,
+    "ratio_ours_over_theirs": 1.000060114304695,
+    "theirs": 0.00075636391
+   },
+   "Z1": {
+    "decades": 0.1165344201682198,
+    "ours": 0.08518341595647105,
+    "ratio_ours_over_theirs": 1.3077791833311154,
+    "theirs": 0.065135932
+   },
+   "Z2": {
+    "decades": -0.0940964604139642,
+    "ours": 276.4988525528525,
+    "ratio_ours_over_theirs": 0.8051995798176033,
+    "theirs": 343.3917
+   },
+   "Z3": {
+    "decades": -2.867286448768865e-10,
+    "ours": 556.4779996326037,
+    "ratio_ours_over_theirs": 0.9999999993397829,
+    "theirs": 556.478
+   },
+   "delta_bar": {
+    "ours": 0.003297630003029724,
+    "ratio_ours_over_theirs": 1.2139424718094554,
+    "theirs": 0.00271646316
+   },
+   "op_norm_LAL": {
+    "ours": 5.796645829506288,
+    "ratio_ours_over_theirs": 0.9999999993397829,
+    "theirs_implied": 5.796645833333333
+   },
+   "sup_combination": {
+    "ours": 3.545308921068176,
+    "ratio_ours_over_theirs": 0.8051995803492098,
+    "theirs_implied": 4.403018838547579
+   }
+  },
+  "our_newton_residual_on_our_ubar_H2": 7.43931155833868e-16,
+  "our_newton_residual_on_their_ubar_H2": 3.4384808990677724e-10,
+  "our_ubar_at_zero": 1.1653751024566599,
+  "seconds": 31.199986696243286,
+  "source": "https://raw.githubusercontent.com/Huggzz/Hermite-Laguerre_proofs/7acaac71c84147d745cc959fbd97b548dc12372c/Burger/ubar",
+  "their_ubar_at_zero": 1.165375102578254,
+  "verdict": {
+   "Y": 0.000756409378290546,
+   "Z1": 0.08518341595647105,
+   "Z1_lt_1": true,
+   "Z2": 276.4988525528525,
+   "Z3": 556.4779996326037,
+   "closes": true,
+   "delta_bar": 0.003297630003029724,
+   "delta_min": 0.000968763884576102,
+   "positive_real_roots": [
+    0.000968763884576102,
+    0.00562288720204919
+   ]
+  },
+  "what_it_tests": "separates 'our ubar differs from theirs' from 'our bound formulas differ from theirs'.  If the constants computed on THEIR ubar land on their published values but ours do not, the gap is in the solution; if both land the same distance away, the gap is in the bounds."
+ },
+ "gate": {
+  "our_P_at_their_enclosure": -2.0065035439227065e-05,
+  "our_certified_interval": [
+   0.0009687638810323,
+   0.0032976300041972872
+  ],
+  "our_delta_bar_over_their_enclosure": 3.2976300041972872,
+  "precommitted_in": "writeup/novelty/leg_256.md section 6",
+  "reading_A_their_enclosure_is_a_certified_radius_of_our_polynomial": true,
+  "reading_B_all_constants_within_2x": true,
+  "reading_B_ratios_ours_over_theirs": {
+   "Y": 1.0000601113937195,
+   "Z1": 1.3077791825178846,
+   "Z2": 0.8051995795776012,
+   "Z3": 0.9999999992556494,
+   "delta_bar": 1.2139424722392655
+  },
+  "reading_B_within_2x": {
+   "Y": true,
+   "Z1": true,
+   "Z2": true,
+   "Z3": true,
+   "delta_bar": true
+  },
+  "their_enclosure_over_our_delta_min": 1.0322432737009304,
+  "their_published_enclosure": 0.001,
+  "worst_ratio_key": "Z1"
+ },
+ "headline": {
+  "bounds": {
+   "PF_H2_norm": 7.43931155833868e-16,
+   "S_n": 3.649299437481306e-06,
+   "Y": 0.0007564093760887892,
+   "Y_finite_part": 1.0565205395191928e-15,
+   "Y_tail_part": 0.0007564093760887892,
+   "Z1": 0.08518341590350051,
+   "Z2": 276.4988524704378,
+   "Z3": 556.4779995857853,
+   "Zbar11": 2.6719457643348127e-15,
+   "Zbar12": 0.03391527688930957,
+   "Zbar21": 0.025946557990046644,
+   "Zbar22": 0.07442756929791311,
+   "n": 1500,
+   "nonlinearity_norm": 0.4652631638611331,
+   "op_norm_LAL": 5.796645829018596,
+   "sup_combination": 3.545308920309722,
+   "sup_dubar": 1.18934148952919,
+   "sup_ubar": 1.665920546559562,
+   "ubar_at_zero": 1.1653751024566599
+  },
+  "comparison": {
+   "Y": {
+    "decades": 2.6105261987925703e-05,
+    "ours": 0.0007564093760887892,
+    "ratio_ours_over_theirs": 1.0000601113937195,
+    "theirs": 0.00075636391
+   },
+   "Z1": {
+    "decades": 0.11653441989815765,
+    "ours": 0.08518341590350051,
+    "ratio_ours_over_theirs": 1.3077791825178846,
+    "theirs": 0.065135932
+   },
+   "Z2": {
+    "decades": -0.09409646054341231,
+    "ours": 276.4988524704378,
+    "ratio_ours_over_theirs": 0.8051995795776012,
+    "theirs": 343.3917
+   },
+   "Z3": {
+    "decades": -3.2326735012486436e-10,
+    "ours": 556.4779995857853,
+    "ratio_ours_over_theirs": 0.9999999992556494,
+    "theirs": 556.478
+   },
+   "delta_bar": {
+    "ours": 0.0032976300041972872,
+    "ratio_ours_over_theirs": 1.2139424722392655,
+    "theirs": 0.00271646316
+   },
+   "op_norm_LAL": {
+    "ours": 5.796645829018596,
+    "ratio_ours_over_theirs": 0.9999999992556494,
+    "theirs_implied": 5.796645833333333
+   },
+   "sup_combination": {
+    "ours": 3.545308920309722,
+    "ratio_ours_over_theirs": 0.8051995801769521,
+    "theirs_implied": 4.403018838547579
+   }
+  },
+  "n": 1500,
+  "verdict": {
+   "Y": 0.0007564093760887892,
+   "Z1": 0.08518341590350051,
+   "Z1_lt_1": true,
+   "Z2": 276.4988524704378,
+   "Z3": 556.4779995857853,
+   "closes": true,
+   "delta_bar": 0.0032976300041972872,
+   "delta_min": 0.0009687638810323,
+   "positive_real_roots": [
+    0.0009687638810323,
+    0.005622887207912962
+   ]
+  }
+ },
+ "independent_amplitude": {
+  "method": "RK4 on u'' + (x/2)u' + u/4 - u^2 u' = 0, u'(0)=0, bisecting u(0) on the sign change of u(9); the generic ODE solution decays only like x^{-1/2} and is not in H^2(mu), the admissible one like e^{-x^2/4}",
+  "seconds": 31.859238386154175,
+  "u0_by_shooting": 1.165377364976794,
+  "u_at_4": 0.016951093193854256,
+  "u_at_9": 1.1755353946172654e-13
+ },
+ "ladder": [
+  {
+   "bounds": {
+    "S_n": 0.00020921492693519385,
+    "Y": 0.005756673501853636,
+    "Y_finite_part": 1.596602532965227e-16,
+    "Y_tail_part": 0.005756673501853636,
+    "Z1": 0.3593206247036948,
+    "Z2": 243.1850607306673,
+    "Z3": 493.8381409196807,
+    "Zbar11": 1.6265400506424436e-15,
+    "Zbar12": 0.1517499801216236,
+    "Zbar21": 0.09422373089082053,
+    "Zbar22": 0.3143065813335891,
+    "nonlinearity_norm": 0.46495636539382845,
+    "op_norm_LAL": 5.144147301246674,
+    "sup_combination": 3.5136703367387043,
+    "sup_dubar": 1.1652185672073934,
+    "sup_ubar": 1.6606061715251368,
+    "ubar_at_zero": 1.1652487077723865
+   },
+   "coefficient_tail": 6.501905936821438e-06,
+   "final_residual_H2": 1.55377379534596e-16,
+   "n": 100,
+   "newton_residual_history": [
+    0.6357661631673334,
+    1.1914520622450688e-06,
+    4.369258300348235e-13,
+    1.55377379534596e-16
+   ],
+   "seconds": 8.645671367645264,
+   "verdict": {
+    "Y": 0.005756673501853636,
+    "Z1": 0.3593206247036948,
+    "Z1_lt_1": true,
+    "Z2": 243.1850607306673,
+    "Z3": 493.8381409196807,
+    "closes": false,
+    "delta_bar": 0.0026275243745358923,
+    "delta_min": NaN,
+    "positive_real_roots": []
+   }
+  },
+  {
+   "bounds": {
+    "S_n": 7.449466260449591e-05,
+    "Y": 0.0034280133416958675,
+    "Y_finite_part": 8.481374893845762e-15,
+    "Y_tail_part": 0.0034280133416958675,
+    "Z1": 0.24609849828691796,
+    "Z2": 254.156370111211,
+    "Z3": 514.0815751307572,
+    "Zbar11": 1.9221106369825016e-15,
+    "Zbar12": 0.10175336177889524,
+    "Zbar21": 0.06706207460635732,
+    "Zbar22": 0.2155973982566591,
+    "nonlinearity_norm": 0.46515693868409386,
+    "op_norm_LAL": 5.355016407612054,
+    "sup_combination": 3.527586806618862,
+    "sup_dubar": 1.1749651764114557,
+    "sup_ubar": 1.663554708285807,
+    "ubar_at_zero": 1.165331345431819
+   },
+   "coefficient_tail": 1.3897353635161908e-06,
+   "final_residual_H2": 5.445735323298509e-15,
+   "n": 200,
+   "newton_residual_history": [
+    0.004471944726346894,
+    1.323980242221147e-07,
+    5.445735323298509e-15
+   ],
+   "seconds": 14.604771852493286,
+   "verdict": {
+    "Y": 0.0034280133416958675,
+    "Z1": 0.24609849828691796,
+    "Z1_lt_1": true,
+    "Z2": 254.156370111211,
+    "Z3": 514.0815751307572,
+    "closes": false,
+    "delta_bar": 0.002957444270028885,
+    "delta_min": NaN,
+    "positive_real_roots": []
+   }
+  },
+  {
+   "bounds": {
+    "S_n": 2.6431579456828764e-05,
+    "Y": 0.0020386146639819985,
+    "Y_finite_part": 4.775864358110345e-16,
+    "Y_tail_part": 0.0020386146639819985,
+    "Z1": 0.169792574428396,
+    "Z2": 263.25561069935543,
+    "Z3": 531.1773859127323,
+    "Zbar11": 2.2988461048447417e-15,
+    "Zbar12": 0.06900220788562615,
+    "Zbar21": 0.048161246422172184,
+    "Zbar22": 0.1487675474340047,
+    "nonlinearity_norm": 0.46522894439006873,
+    "op_norm_LAL": 5.533097769924296,
+    "sup_combination": 3.536281328356405,
+    "sup_dubar": 1.1816810187411235,
+    "sup_ubar": 1.6649538459129098,
+    "ubar_at_zero": 1.1653610076089247
+   },
+   "coefficient_tail": 2.9586960872534647e-07,
+   "final_residual_H2": 4.833444625461041e-16,
+   "n": 400,
+   "newton_residual_history": [
+    0.002693238757236906,
+    1.978594931886624e-08,
+    4.833444625461041e-16
+   ],
+   "seconds": 43.44438910484314,
+   "verdict": {
+    "Y": 0.0020386146639819985,
+    "Z1": 0.169792574428396,
+    "Z1_lt_1": true,
+    "Z2": 263.25561069935543,
+    "Z3": 531.1773859127323,
+    "closes": false,
+    "delta_bar": 0.0031436471137434177,
+    "delta_min": NaN,
+    "positive_real_roots": []
+   }
+  },
+  {
+   "bounds": {
+    "S_n": 9.361612334711882e-06,
+    "Y": 0.0012120558086255015,
+    "Y_finite_part": 5.222023237602762e-16,
+    "Y_tail_part": 0.0012120558086255015,
+    "Z1": 0.11794835899842508,
+    "Z2": 270.7887143022991,
+    "Z3": 545.5124037275725,
+    "Zbar11": 2.8211824789450368e-15,
+    "Zbar12": 0.04732277039456569,
+    "Zbar21": 0.03477285715408092,
+    "Zbar22": 0.10323691934946143,
+    "nonlinearity_norm": 0.4652545777930734,
+    "op_norm_LAL": 5.682420872162213,
+    "sup_combination": 3.541886822484255,
+    "sup_dubar": 1.1863430081584738,
+    "sup_ubar": 1.6656210044917854,
+    "ubar_at_zero": 1.1653715660582156
+   },
+   "coefficient_tail": 6.285696274768304e-08,
+   "final_residual_H2": 5.026156135473567e-16,
+   "n": 800,
+   "newton_residual_history": [
+    0.0016131704936716105,
+    2.9163243537564623e-09,
+    5.026156135473567e-16
+   ],
+   "seconds": 101.11990332603455,
+   "verdict": {
+    "Y": 0.0012120558086255015,
+    "Z1": 0.11794835899842508,
+    "Z1_lt_1": true,
+    "Z2": 270.7887143022991,
+    "Z3": 545.5124037275725,
+    "closes": true,
+    "delta_bar": 0.0032467248846067345,
+    "delta_min": 0.0019716156415150892,
+    "positive_real_roots": [
+     0.0019716156415150892,
+     0.0045207503322681
+    ]
+   }
+  },
+  {
+   "bounds": {
+    "S_n": 3.649299437481306e-06,
+    "Y": 0.0007564093760887892,
+    "Y_finite_part": 1.0565205395191928e-15,
+    "Y_tail_part": 0.0007564093760887892,
+    "Z1": 0.08518341590350051,
+    "Z2": 276.4988524704378,
+    "Z3": 556.4779995857853,
+    "Zbar11": 2.6719457643348127e-15,
+    "Zbar12": 0.03391527688930957,
+    "Zbar21": 0.025946557990046644,
+    "Zbar22": 0.07442756929791311,
+    "nonlinearity_norm": 0.4652631638611331,
+    "op_norm_LAL": 5.796645829018596,
+    "sup_combination": 3.545308920309722,
+    "sup_dubar": 1.18934148952919,
+    "sup_ubar": 1.665920546559562,
+    "ubar_at_zero": 1.1653751024566599
+   },
+   "coefficient_tail": 1.5402613532362115e-08,
+   "final_residual_H2": 7.43931155833868e-16,
+   "n": 1500,
+   "newton_residual_history": [
+    0.0009353622746592088,
+    3.935276898985681e-10,
+    7.43931155833868e-16
+   ],
+   "seconds": 63.796417236328125,
+   "verdict": {
+    "Y": 0.0007564093760887892,
+    "Z1": 0.08518341590350051,
+    "Z1_lt_1": true,
+    "Z2": 276.4988524704378,
+    "Z3": 556.4779995857853,
+    "closes": true,
+    "delta_bar": 0.0032976300041972872,
+    "delta_min": 0.0009687638810323,
+    "positive_real_roots": [
+     0.0009687638810323,
+     0.005622887207912962
+    ]
+   }
+  }
+ ],
+ "poisoning": [
+  {
+   "Y": 0.0007564093707242175,
+   "Y_finite_part": 4.093762213103969e-09,
+   "Y_finite_part_over_ours": 3874758.757616753,
+   "Y_over_ours": 0.999999992907846,
+   "Y_tail_part": 0.0007564093707131395,
+   "Z1": 0.08518341604075078,
+   "closes": true,
+   "delta_min": 0.0009687638733809561,
+   "scale": 1e-10
+  },
+  {
+   "Y": 0.0007581051494270622,
+   "Y_finite_part": 5.126023798135882e-05,
+   "Y_finite_part_over_ours": 48517975812.080864,
+   "Y_over_ours": 1.0022418724461633,
+   "Y_tail_part": 0.0007563701511759456,
+   "Z1": 0.08518482486419936,
+   "closes": true,
+   "delta_min": 0.0009713933660448862,
+   "scale": 1e-06
+  },
+  {
+   "Y": 0.05626248289448627,
+   "Y_finite_part": 0.056257720233853496,
+   "Y_finite_part_over_ours": 53248108417708.16,
+   "Y_over_ours": 74.38099615502657,
+   "Y_tail_part": 0.0007320488657399098,
+   "Z1": 0.08527521198371045,
+   "closes": false,
+   "delta_min": NaN,
+   "scale": 0.001
+  }
+ ],
+ "published": {
+  "Y_published": 0.00075636391,
+  "Z1_published": 0.065135932,
+  "Z2_published": 343.3917,
+  "Z3_published": 556.478,
+  "arxiv": "2404.04054v2",
+  "code_commit": "7acaac71c84147d745cc959fbd97b548dc12372c",
+  "code_repo": "github.com/Huggzz/Hermite-Laguerre_proofs",
+  "deltabar_published": 0.00271646316,
+  "enclosure_published": 0.001,
+  "n": 1500,
+  "op_norm_LAL_implied": 5.796645833333333,
+  "pdf_md5": "ff7a34b776bfe5edf97397e5eabdbb7a",
+  "sup_combination_implied": 4.403018838547579
+ },
+ "quadrature_gates": {
+  "build_seconds": 176.57759928703308,
+  "exact_rational_identities": {
+   "four_product": -0.08950617291653039,
+   "four_product_exact": -0.08950617283950617,
+   "four_product_rel_err": 8.605465229294396e-10,
+   "six_product": 0.02140800002754722,
+   "six_product_exact": 0.021408,
+   "six_product_rel_err": 1.2867722443132834e-09
+  },
+  "n": 1500,
+  "orthonormality_all_modes": {
+   "frobenius_defect": 7.70025363812146e-08,
+   "max_abs_diag_defect": 1.6037653427503074e-09,
+   "max_abs_offdiag_and_diag_defect": 1.6037653427503074e-09,
+   "n": 1500
+  },
+  "weight_normalisation": {
+   "four": {
+    "gamma_alpha_plus_1": 1.0,
+    "rel_err": 2.739228843751107e-10,
+    "sum_w": 1.0000000002739229
+   },
+   "six": {
+    "gamma_alpha_plus_1": 0.886226925452758,
+    "rel_err": 4.470686043589467e-10,
+    "sum_w": 0.8862269258489622
+   },
+   "two": {
+    "gamma_alpha_plus_1": 1.7724538509055159,
+    "rel_err": 1.6037651207057024e-09,
+    "sum_w": 1.7724538480629162
+   }
+  },
+  "what_these_license": "the largest of these is the reproduction's RESOLUTION: a float64 reproduction of a BigFloat interval proof can be trusted to about this relative size and no further.  Every ratio reported below must be read against it."
+ },
+ "reproduction_resolution": 1.6037653427503074e-09,
+ "their_constants_audit": {
+  "P_at_notebook_delta_lo": 2.4542766430882094e-05,
+  "P_at_their_published_enclosure_1e-3": -6.711561666666692e-06,
+  "Q_at_delta_bar": 1.2978333685520482e-14,
+  "Y_at_which_their_multiplier_would_validate": 0.0006361541682517162,
+  "delta_bar_published": 0.00271646316,
+  "delta_bar_recomputed": 0.0027164631369048634,
+  "delta_bar_rel_err": 8.501914061653792e-09,
+  "delta_min_of_their_polynomial": 0.0009886846932845356,
+  "multiplier_actually_needed": 1.2220120263714238,
+  "multiplier_shortfall_factor": 1.0430016527158095,
+  "notebook_delta_lo": 0.0009479224608227214,
+  "notebook_delta_lo_multiplier": 1.17163,
+  "their_delta_bar_over_their_enclosure": 2.7164631369048635,
+  "their_enclosure_over_their_delta_min": 1.0114448082308967,
+  "theorem_42_carried_by_its_own_printed_constants": true,
+  "verdict": "NOT a challenge to Theorem 42, and pre-registered as such in writeup/novelty/leg_256.md section 8 BEFORE this ran.  Theorem 42 claims ||u*-ubar|| <= 1e-3, and 1e-3 lies strictly inside the certified interval of their own printed constants.  What is stale is the multiplier in the RELEASED NOTEBOOK's delta_lo, not anything in the paper."
+ },
+ "total_seconds": 666.3490421772003
+}
