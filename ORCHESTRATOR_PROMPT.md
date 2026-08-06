@@ -244,12 +244,58 @@ At cycle 12, or the first time you notice your context has been summarised:
 
 1. Write and commit `reports/ORCH_STATE.md`: cycle count, `main` SHA, every live agent with its
    leg number **and branch**, the queue, in-flight PRs, open escalations, the sharding ledger,
-   and what the next orchestrator must do first.
+   and what the next orchestrator must do first. Push it and confirm the push landed (`git log
+   -1 origin/main` shows your commit) before continuing to step 2 — your successor clones the
+   repo fresh and must see this commit.
 2. Refresh `PROGRESS.md`.
-3. Tell the user, in one line: paste the full text of `ORCHESTRATOR_PROMPT.md` into a fresh
-   session to resume (the file's contents, on their own — not the filename, not with a
-   question attached).
-4. Exit.
+3. **Schedule your successor** — this step chains automatically; it is not optional and it is
+   not something you ask the user about:
+   - `ToolSearch: "select:RemoteTrigger"`.
+   - `Read` your own `ORCHESTRATOR_PROMPT.md` in full.
+   - `git remote get-url origin` for the repo URL. Generate a fresh lowercase v4 UUID. Get the
+     current UTC time (`date -u +%Y-%m-%dT%H:%M:%SZ`) and compute a `run_once_at` 3 minutes
+     past it, RFC3339 UTC — do not guess either timestamp.
+   - Call `RemoteTrigger` with `action: "create"` and this body, with the full text of
+     `ORCHESTRATOR_PROMPT.md` you just read as `events[0].data.message.content` verbatim:
+     ```json
+     {
+       "name": "orchestrator-relay-<UTC timestamp>",
+       "run_once_at": "<3 minutes from now, RFC3339 UTC>",
+       "enabled": true,
+       "job_config": {
+         "ccr": {
+           "environment_id": "env_01ABQhVSqMhLqttSew8uQBm6",
+           "session_context": {
+             "model": "claude-sonnet-5",
+             "sources": [{"git_repository": {"url": "<the URL from git remote get-url origin, https:// form, no .git suffix>"}}],
+             "allowed_tools": ["Bash", "Read", "Write", "Edit", "Glob", "Grep", "Agent", "SendMessage", "TaskOutput", "TaskStop", "Monitor", "TodoWrite", "ToolSearch", "RemoteTrigger"]
+           },
+           "events": [{"data": {
+             "uuid": "<the uuid you generated>",
+             "session_id": "",
+             "type": "user",
+             "parent_tool_use_id": null,
+             "message": {"content": "<the full text of ORCHESTRATOR_PROMPT.md>", "role": "user"}
+           }}]
+         }
+       }
+     }
+     ```
+   - **Confirm the response contains a routine id.** If the call errors, retry once. If it
+     fails a second time, do not exit silently — this repository has no cron backstop, so a
+     failed self-trigger means the run stops here until a human notices. Write the failure and
+     the exact error into `reports/ORCH_STATE.md` (amend the commit you just pushed, or add a
+     new one) under a `## SELF-CHAIN FAILED` heading, and say so plainly in your final message
+     to the user.
+4. Tell the user, in one line: the successor is scheduled (include the routine link,
+   `https://claude.ai/code/routines/{id}`, if step 3 succeeded), and that pasting the full text
+   of `ORCHESTRATOR_PROMPT.md` into a fresh session also works at any time if they want to
+   intervene sooner or the self-chain failed.
+5. Exit.
+
+**This step only runs here, never from Step 4.** A `STOP`/`STOP-NOW`/`PAUSE`-triggered close is
+the user asking you to actually stop — never schedule a successor from Step 4's closing
+procedure, only from this proactive handoff.
 
 **Say honestly what a handoff loses.** Subagent handles do not survive your session — the next
 orchestrator cannot message your agents. That is why `ORCH_STATE.md` records **branches, not

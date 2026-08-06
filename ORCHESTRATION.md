@@ -9,6 +9,13 @@ parallel, audits the legs' own pushes to `main` and merges the support work unat
 writes a live progress file the user can read at any time, and hands off to a fresh
 orchestrator session before its own context runs out.
 
+**This manual paste is only needed to start the run, or to intervene by hand.** Once running,
+the orchestrator hands off by scheduling its own successor (§9e) — no cron, no human
+re-pasting. The one case that still needs a manual paste: a session died before it could
+schedule its successor (check `reports/ORCH_STATE.md` for a `## SELF-CHAIN FAILED` block, or
+just a stale timestamp with no explanation) — then paste `ORCHESTRATOR_PROMPT.md` fresh, same
+as starting a new run.
+
 Three things make that paste work, and breaking any of them brings back the failure where the
 session answers "I don't see a request yet":
 
@@ -349,14 +356,59 @@ whichever comes first.
 
 Handoff is: write and commit `reports/ORCH_STATE.md` (cycle count, `main` SHA, every live
 agent with its leg number and branch, the queue, in-flight PRs, open escalations, the sharding
-ledger, and what the next orchestrator must do first), refresh `PROGRESS.md`, print the resume
-instruction, and exit.
+ledger, and what the next orchestrator must do first), refresh `PROGRESS.md`, **schedule the
+successor session** (below), tell the user, and exit.
 
 **Be honest about what a handoff costs.** Subagent handles do not survive the session that
 spawned them — a fresh orchestrator cannot `SendMessage` the old agents. That is exactly why
 `ORCH_STATE.md` records **branches, not handles**: the new session gates and merges whatever
 the abandoned branches contain, and re-spawns a fresh agent for any leg that was mid-flight.
 Record in `ORCH_STATE.md` which legs were interrupted and how far they got.
+
+### 9e. Self-chaining — the run continues without a human re-pasting the prompt
+
+**User directive (2026-08-06):** rather than wait on a cron tick to notice a handoff (which
+means real downtime — the minimum cron interval is one hour, and a run typically hands off
+well before that), the orchestrator schedules its own successor at the exact moment it decides
+to hand off, via a one-time `RemoteTrigger` (`run_once_at`, ~3 minutes out — enough buffer for
+the `ORCH_STATE.md` push in §9d to land before the successor clones the repo). The full
+mechanics are in `ORCHESTRATOR_PROMPT.md` Step 5; this section is the rationale and the
+standing configuration, which is orchestrator-owned (agents don't touch it).
+
+**Why this is safe against the collision problem a periodic cron would have.** A cron fires on
+a wall-clock schedule regardless of whether the previous run is still going — with this run's
+actual cadence (single sessions running for hours), a cron would very likely fire mid-run and
+create two orchestrators dispatching against the same `DIRECTION.md` and the same ten leg
+slots. Self-chaining doesn't have this failure mode **by construction**: a session only ever
+creates its successor at the moment it has already decided to stop, so there is never more
+than one link of the chain live. No lock file is needed for this path.
+
+**What this does NOT cover, by the user's explicit choice (2026-08-06): a session that dies
+before reaching Step 5** — a hard crash, an unhandled error, being killed — never schedules a
+successor, and the chain silently stops. The alternative (a coarse safety-net cron with a lock
+file, checked at Step 0) was offered and declined in favor of simplicity. If the run appears to
+have gone quiet, check `reports/ORCH_STATE.md`'s last commit time and `reports/STATUS.md`
+before assuming everything is fine — a stale one with no `## SELF-CHAIN FAILED` heading and no
+newer routine visible at https://claude.ai/code/routines usually means a mid-run crash, not a
+graceful stop.
+
+**Standing configuration (change here, not in `ORCHESTRATOR_PROMPT.md`):**
+
+| Setting | Value |
+|---|---|
+| Environment | `env_01ABQhVSqMhLqttSew8uQBm6` ("More Freedom") |
+| Model | `claude-sonnet-5` |
+| Delay before the successor fires | 3 minutes from the moment Step 5 schedules it |
+| Repo | whatever `git remote get-url origin` returns in the handing-off session |
+
+**A failed self-trigger call is never silent.** Since there is no cron backstop, `ORCHESTRATOR_
+PROMPT.md` Step 5 requires one retry and, on a second failure, an explicit `## SELF-CHAIN
+FAILED` block in `ORCH_STATE.md` plus a plain statement to the user — a quiet exit with no
+successor scheduled and no error surfaced is the one outcome this mechanism must never produce.
+
+**Routines cannot be deleted via the API** — each fired one-time trigger stays listed (as
+"Ran") at https://claude.ai/code/routines. This is cosmetic clutter, not a functional problem,
+but a human doing periodic hygiene on that page is reasonable.
 
 ## 10. The sharding experiment (run it once, then stop)
 
