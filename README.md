@@ -148,6 +148,18 @@ Route-M came ten minutes from rebuilding a validated Scenario-2 integrator that
 had been in `solver/` for a week; the index exists so that cannot recur, and
 `test_capabilities.py` fails if it drifts from the tree.
 
+To see the pace of the orchestrated run — cumulative numbered legs landed
+against the calendar — regenerate the progress chart from git history:
+
+```bash
+python3 scripts/legs_over_time.py            # writes reports/legs_over_time.html
+open reports/legs_over_time.html             # (or just open it in a browser)
+```
+
+It parses `Leg N: ...` commit subjects, so it stays accurate as new legs land;
+the output is gitignored rather than committed since it's stale the moment
+the next leg merges.
+
 ### Starting an orchestrated run
 
 Paste the **full text** of [`ORCHESTRATOR_PROMPT.md`](ORCHESTRATOR_PROMPT.md) — and nothing
@@ -195,7 +207,7 @@ re-run**:
 | [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) | The critical-path leg's directive: what the last leg settled and what not to re-derive. |
 | [`LITERATURE_CHECK.md`](LITERATURE_CHECK.md) | Append-only novelty passes, with the queries run. |
 | [`PHASE2_P2_NOTES.md`](PHASE2_P2_NOTES.md) | The long working notes, including ~90 numbered banked lessons. |
-| [`scripts/`](scripts/) | `merge_gate.sh` (executable merge criterion), `fetch_papers.sh`, `cloud_setup.sh`. |
+| [`scripts/`](scripts/) | `merge_gate.sh` (executable merge criterion), `fetch_papers.sh`, `cloud_setup.sh`, `legs_over_time.py` (progress chart). |
 
 ## What has been banked
 
