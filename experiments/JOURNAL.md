@@ -2829,3 +2829,84 @@ No link of the L1->L4 chain moved in any of the eight. Clay unchanged at ~0.05%.
 
 Legs 58, 59, 61, 62, 63 and 71 have branch progress but no answered gate, so they are
 deliberately absent from this block.
+
+## Legs 59-97 (2026-08-06) — the twenty gates that answered after leg 72's pass
+
+Second freshness audit (leg 102, Route-JR2), same audit as leg 72's, new window. Twenty
+legs have answered their gate and landed on `main` since leg 72's block above, and none
+had a pointer here (measured: 0 of 20). Pointers only; every headline below is copied
+from that leg's own landed headline (`experiments/journal/leg_N.md` / its PR body), not
+re-derived. Full detail and the audit's own counts: `writeup/novelty/leg_102.md`,
+`experiments/journal/leg_102.md`.
+
+Legs 59 and 61 appear here, not in leg 72's block, because leg 72 deferred them as "branch
+progress but no answered gate" and their gates answered afterwards.
+
+- **Leg 59 (Route-WV) — FAIL 5/6:** the conditioning wall modelled in both weight factors;
+  the frozen six-property gate re-run answers FAIL 5 of 6 (P2 0.975 passes, P3 0.342
+  unmoved). The GA-compute ban therefore did not lift.
+- **Leg 61 (Route-KA) — YES on the literal gate, NO on the stricter pre-committed
+  window:** the interval pipeline reproduces CLN's published Kawahara radius end to end;
+  the gap between the two readings is measured, not argued.
+- **Leg 73 (Route-BV) — YES:** the first *external* known-answer check for the 2D velocity
+  solve — it reproduces Lamb's corner-image closed form to 1.76e-4 at order 2.00; the
+  `r^{-2n}` closure costs 2.3e-5 at 5x truncation.
+- **Leg 74 (Route-EXT) — NO:** `HL_S2_nonsymmetric` still uncertified 126 days on, 0 of 6
+  channels.
+- **Leg 77 (Route-EXT2) — NO:** the rank-2 target object is still uncertified, 133 days on.
+- **Leg 78 (Route-HLB) — NO:** precision audit of CHL's Scenario-2 contraction anchor — no
+  sixth digit exists on five channels; the `~1%` was ours, not theirs.
+- **Leg 79 (Route-PC) — NO, stop-the-line:** `radii_polynomial_status` performs no domain
+  validation; 11 of 25 hypothesis-violating inputs return `closes=True` (39-case battery).
+  The BLOCKED_AT_STEP_ONE half holds (0 of 3 carry a bound). Latent only — both in-repo
+  callers pass `(None, None)`. Not patched, per the gate; repaired outside the leg system.
+- **Leg 80 (Route-BHN) — NO:** the bordered Newton's `converged` flag survives 336 hostile
+  cases with 0 false reports; four reporting weaknesses measured, module untouched.
+- **Leg 81 (Route-BRS) — NO:** 0 of 12 recorded rungs fire the status predicate, 4.2
+  decades of margin at the loosest tolerance and 7.2 at the ladder's own.
+- **Leg 82 (Route-EXT3) — NO:** rank-3 `Boussinesq_S2_nonsymmetric` uncertified, 0 of 7
+  channels, 126 days open.
+- **Leg 84 (Route-TNA) — YES/SILENT:** 8 of 8 domain hazards return a number, 0 of 6
+  exponent-bearing surfaces carry a domain field, and 14 of 16384 samples move `p` by
+  0.4166. Repaired outside the leg system; leg 55's banked margins confirmed uncontaminated.
+- **Leg 86 (Route-LSP) — YES:** post-repair check of the line sweep — bit-identical across
+  the repair, 20 of 20, timing +1.12% against a 0.29% null.
+- **Leg 87 (Route-IVB) — YES:** independent post-repair regression check of
+  `solver/interval.py` (leg 69's two soundness defects), gate answers YES.
+- **Leg 88 (Route-GCA) — NO:** `gclm_family.py`'s residual propagates every poisoned
+  coefficient, 0 silent corruptions in 37 cases.
+- **Leg 89 (Route-BOA) — YES, escalated:** `solver/boussinesq.py` silently corrupts on 19
+  of 82 gate-deciding cases; module untouched by the leg. Repaired outside the leg system
+  (19/82 -> 0, bit-identical elsewhere, no banked Phase-1 result contaminated).
+- **Leg 90 (Route-EXT4) — STILL OPEN:** Chen-Huang-Li Conjecture 2.4 (stability of the HL
+  singular steady state) unresolved at 2026-08-06, 126 days after v1 — 10 channels, 0
+  resolutions in either direction, 4 false friends excluded on quoted grounds.
+- **Leg 91 (Route-FGA) — YES:** `fractional_gclm.py` silently accepts `s<0` and `nu<0`,
+  returning a finite `p` that moves the measured `s_c` by up to +13.3%. Repaired outside
+  the leg system (now rejected at construction; `s_c` untouched).
+- **Leg 93 (Route-EXT5) — NO:** no independent verdict on arXiv:2604.09949 in 118 days;
+  the author's own corpus asserts the negation.
+- **Leg 94 (Route-TNB) — NO:** leg 84's domain guard is PRECISE — 0 false positives over
+  163 in-window probes.
+- **Leg 97 (Route-WSA) — NO:** `FitnessEngine`'s shared inverse answers NO to the
+  silent-corruption gate, 0 of 100+ cases; banked as 14 regression gates.
+
+Addendum: leg 67's gate was already narrated in the block above; what landed in this
+window is its post-landing `VERIFY` review (primary source re-fetched, the negative holds,
+two precision caveats). Five bench-repairs also landed in this window, all dispatched
+outside the leg system: leg 64's Trap 1 prose, leg 69's `interval.py` soundness pair, leg
+84's `target_norm.py` domain guard, leg 89's `boussinesq.py` four defects, and leg 91's
+`fractional_gclm.py` parameter guard.
+
+No link of the L1->L4 chain moved in any of the twenty. Clay unchanged at ~0.05%.
+
+Per-leg file coverage inside this window is complete: 0 of 20 legs are missing
+`experiments/journal/leg_N.md`, and 0 of 20 are missing `writeup/novelty/leg_N.md`. The
+one standing gap is leg 72's own carry-over — `experiments/journal/leg_60.md` and
+`writeup/novelty/leg_60.md` are still absent from `main` (1 leg, 2 files), because branch
+`leg/pq-v1` was pushed and never merged per leg 60's own gate. This leg did not create
+them on leg 60's behalf.
+
+Legs 92, 96, 98, 99, 100 and 101 have branch progress but have NOT landed on `main` (0
+`main` commits each at this pass), so they are deliberately absent from this block and
+belong to a future window.
