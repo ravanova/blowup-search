@@ -88,6 +88,25 @@ CAPABILITIES = [
      "validated": ("point spectrum {0,1} at a=0, which XU Theorem 2 later proved -- but "
                    "in the LOOSE realization: our grid imposes NO origin condition (70)"),
      "test": "test_rescaled_spectrum.py"},
+    {"module": "solver/origin_h2_certificate.py",
+     "object": ("the a=0 CLM linearisation on the odd origin-H^2 space X -- the STRICT "
+                "realization, the one WITH the spectral gap (Route-H2C, leg 176)"),
+     "holds": ("L_0^+ = xi d/dxi + Volterra in the Laguerre basis, where it is EXACTLY "
+               "tridiagonal with rational entries (-n/2, 1/2, (n-1)/2); the X Gram I + J^4 "
+               "(exact, banded); Xu's two symmetry modes, which occupy exactly span{l_0,l_1}; "
+               "the bordered formulation [[L_0^+, m],[ell, 0]] with ell_n = i(-1)^n(1-2n); "
+               "Xu eq. (4.23)'s closed-form resolvent at z=0 with exact-Taylor inner integrals; "
+               "the Blaschke y-space evaluator and its FFT inverse; X operator norms and the "
+               "range-untruncated sigma_min diagnostic"),
+     "validated": ("the four structural identities are EXACT zeros, not tolerances -- "
+                   "L_0^+ b^-2 = b^-2, L_0^+ m = 0, ell.L_0^+ = 0 and ell(m) = 1 all to 0.0; "
+                   "the tridiagonal entries agree with an independent Laguerre quadrature to "
+                   "1.6e-13; Xu eq. (4.23) satisfies Xu's own ODE pointwise to 2.6e-15 relative "
+                   "(leg 163's class was 2.8e-14); the X norm agrees between the Gram form and "
+                   "an independent y-space quadrature to 1.3e-16.  CEILING: a=0 only, float64, "
+                   "nothing interval-enclosed, and it certifies an object Xu already inverts "
+                   "in closed form -- nothing transfers to a>0 or to HL_S2_nonsymmetric"),
+     "test": "test_origin_h2_certificate.py"},
     {"module": "solver/fractional_gclm.py", "object": "gCLM with fractional dissipation",
      "holds": "Lambda^s dissipation, the critical exponent s_c, relevance thresholds",
      "validated": "s_c = alpha/2 against XU eq (6.3) row by row (PRE-EMPTED, Route-J)",

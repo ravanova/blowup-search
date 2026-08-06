@@ -1,0 +1,301 @@
+{
+  "leg": 176,
+  "route": "ROUTE-H2C",
+  "date": "2026-08-06",
+  "object": "a=0 CLM linearisation L_0^+ on the odd origin-H^2 space X (Xu arXiv:2607.19762)",
+  "ceiling": "a=0 exactness only; certifies an object Xu already inverts in closed form; nothing transfers to HL_S2_nonsymmetric or any a>0 profile; no link of L1->L4 moves; float64, nothing interval-enclosed; Xu's own three sec-3.2 CAP gaps are NOT closed here",
+  "ga_compute": false,
+  "E1_realization_exactness": {
+    "tridiagonal_vs_independent_laguerre_quadrature": 1.6076029396572267e-13,
+    "quadrature_order": 60,
+    "block_checked": 12,
+    "L0_binv2_minus_binv2": 0.0,
+    "L0_m": 0.0,
+    "ell_dot_L0_untruncated_columns": 0.0,
+    "ell_of_m": [
+      1.0,
+      0.0
+    ],
+    "ell_of_binv2": 0.0,
+    "jacobi_symmetry": 0.0,
+    "reading": "L_0^+ is EXACTLY tridiagonal with entries (-n/2, 1/2, (n-1)/2); both Xu symmetry modes lie exactly in span{l_0,l_1}; ell is exactly the left null vector and ell(m)=1 exactly.  These are 0.0 and 1, not small numbers."
+  },
+  "E2_x_gram_padding": {
+    "max_abs_diff_pad4_vs_pad32": 0.0,
+    "reading": "J^4 has bandwidth 4, so pad>=4 gives the exact infinite-basis block."
+  },
+  "E3_projection_roundtrip": {
+    "max_err_first_30": 1.776562920104106e-16,
+    "leakage_modes_30_to_2000": 8.464436567767168e-17
+  },
+  "C0_xu_closed_form": {
+    "reference": "Xu arXiv:2607.19762 eq. (4.23) at z=0, bordered",
+    "check": "pointwise (L_0^+ u - f)(y) with ANALYTIC derivatives; no finite differences",
+    "max_abs_residual": 1.4295603459064552e-14,
+    "max_rel_residual": 4.766912579638455e-15,
+    "quadrature_ladder_kpan": {
+      "12": 5.289131333786806e-15,
+      "24": 4.766912579638455e-15,
+      "48": 5.1601343886440385e-15
+    },
+    "over_seeds": {
+      "0": 4.766912579638455e-15,
+      "1": 2.2514797140454575e-15,
+      "2": 3.5465431831154674e-15,
+      "3": 2.872561240515621e-15,
+      "4": 2.9060054764259482e-15,
+      "5": 5.134937812813957e-15
+    },
+    "leg163_established_class": 2.8e-14,
+    "reading": "the gate's second conjunct.  This check never mentions the Laguerre realization -- it is Xu's kernel against Xu's ODE, in y-space."
+  },
+  "C1_bordered_sigma_min_X": {
+    "ladder": {
+      "8": {
+        "sigma_min": 0.09275660045795434,
+        "sigma_max": 11.142494871672161,
+        "resolvent_norm": 10.780903947135172
+      },
+      "16": {
+        "sigma_min": 0.09115903928826843,
+        "sigma_max": 13.418962495012854,
+        "resolvent_norm": 10.969839171272326
+      },
+      "32": {
+        "sigma_min": 0.09093104092007978,
+        "sigma_max": 28.367018026729234,
+        "resolvent_norm": 10.997344689795316
+      },
+      "64": {
+        "sigma_min": 0.09088780386292228,
+        "sigma_max": 58.93969701598804,
+        "resolvent_norm": 11.002576335854787
+      },
+      "128": {
+        "sigma_min": 0.09085063245778027,
+        "sigma_max": 121.07415534226631,
+        "resolvent_norm": 11.007078024082174
+      },
+      "256": {
+        "sigma_min": 0.09082343846893695,
+        "sigma_max": 246.681458755562,
+        "resolvent_norm": 11.010373719136561
+      },
+      "512": {
+        "sigma_min": 0.09080465147034879,
+        "sigma_max": 499.64096369153697,
+        "resolvent_norm": 11.012651706796523
+      },
+      "1024": {
+        "sigma_min": 0.09093626075500859,
+        "sigma_max": 1007.795055096516,
+        "resolvent_norm": 10.996713430895298
+      }
+    },
+    "reliable_window": [
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "sigma_min_at_512": 0.09080465147034879,
+    "resolvent_norm_at_512": 11.012651706796523,
+    "spread_over_reliable_window": 0.00012638944973099309,
+    "relative_spread": 0.0013899483438452888,
+    "monotone_decreasing_through_512": true,
+    "n1024_breaks_monotonicity": true,
+    "reading": "BOUNDED AWAY FROM ZERO and truncation-independent.  The N=1024 row rises instead of falling -- that is the float floor of an X Gram whose entries reach ~1e12, not a mathematical statement, and it is why the reliable window stops at 512.  This is float64 EVIDENCE of a positive limit, not a proof of one: a decreasing positive sequence is reported as what it is."
+  },
+  "C2_tail_block_sigma_min": {
+    "ladder": {
+      "2": {
+        "64": 0.2503735617937019,
+        "128": 0.2492478223636528,
+        "256": 0.2486732466472271,
+        "512": 0.24837652731703622
+      },
+      "4": {
+        "64": 0.7937377247336036,
+        "128": 0.7402213630970103,
+        "256": 0.7001180926424404,
+        "512": 0.6690306287634162
+      },
+      "8": {
+        "64": 1.2474213997091483,
+        "128": 1.0449198941308606,
+        "256": 0.9139839131317075,
+        "512": 0.8244328234140121
+      },
+      "16": {
+        "64": 1.9253199289647094,
+        "128": 1.4168342071907465,
+        "256": 1.1434414978176877,
+        "512": 0.9767920489401325
+      }
+    },
+    "tail_inverse_norm_K2_at_512": 4.02614534796022,
+    "reading": "the ell^1_w comparison point.  There (leg 51/53) the tail inverse norm DIVERGED with M and no A_tail could make the tail estimate finite; here it converges, ||T^{-1}||_X = 4.03 at K=2, truncation-independent."
+  },
+  "C3_control_unbordered": {
+    "ladder": {
+      "64": 1.5488724195668752e-15,
+      "128": 9.752876529757357e-15,
+      "256": 1.3220452632668597e-14,
+      "512": 6.972501777380562e-14
+    },
+    "reading": "m IS the kernel, so without the border the diagnostic collapses to the float floor.  A control that can report the other answer, and does."
+  },
+  "C4_control_loose_L2_realization": {
+    "ladder": {
+      "64": 0.007040948160670493,
+      "128": 0.0025213515957335213,
+      "256": 0.0008952510283782521,
+      "512": 0.00031695363688839144
+    },
+    "fitted_exponent": -1.4914111116151578,
+    "reading": "THE SHARP ONE.  This is the realization this repository's own grid uses (capabilities.py, solver/rescaled_spectrum.py: 'our grid imposes NO origin condition').  Xu sec 4.6 says that realization has NO spectral gap -- the whole strip -1/2 < Re lam < 3/2 is point spectrum.  Measured here, not cited: sigma_min -> 0 like N^{-3/2}.  The origin condition is the entire difference between C1 and C4, and it is now a magnitude."
+  },
+  "C5_Z1_blockdiagonal_A": {
+    "ladder": {
+      "2": {
+        "64": 140.72466104631172,
+        "128": 182.23161776466935,
+        "256": 244.14671536801256
+      },
+      "4": {
+        "64": 697.9521044059479,
+        "128": 934.1414374187176,
+        "256": 1277.8622126961154
+      },
+      "8": {
+        "64": 2747.0383626279836,
+        "128": 3671.5818879907874,
+        "256": 5026.733716779442
+      },
+      "16": {
+        "64": 10516.426149053432,
+        "128": 13621.65621775958,
+        "256": 18417.49793993484
+      },
+      "32": {
+        "64": 43253.7491925073,
+        "128": 50728.94398150432,
+        "256": 66043.9811321921
+      }
+    },
+    "threshold": 1.0,
+    "min_over_battery": 140.72466104631172,
+    "max_over_battery": 66043.9811321921,
+    "reading": "DOES NOT CLOSE, and not marginally: the best cell is 140.7 where <1 is needed, growing like K^2 in the block size.  This is leg 54's own shape of A, and in this shape the X realization fails too -- but for a DIFFERENT reason than ell^1_w did.  There the operator itself had no truncation-independent sigma_min (leg 127); here C1 says it does, so the failure is of the block-diagonal SHAPE of A, not of the operator or the space."
+  },
+  "C6_closed_form_ratio": {
+    "M_convergence": {
+      "1024": 0.8681492121592279,
+      "2048": 0.8681522465694868,
+      "4096": 0.868153885807814,
+      "8192": 0.8681547664616088
+    },
+    "over_seeds": {
+      "0": 0.868153885807814,
+      "1": 0.8404652784717725,
+      "2": 0.7859395946487807,
+      "3": 0.6903593550615618
+    },
+    "leg163_G4_values": [
+      1.3993,
+      1.268,
+      1.3769
+    ],
+    "leg163_inferred_sigma_min_witness": 0.7147,
+    "sigma_min_measured_here": 0.09080465147034879,
+    "leg163_witness_optimistic_by": 7.870742174847475,
+    "reading": "leg 163 inferred sigma_min >= 0.7147 from THREE data.  That is a witness, not a bound, and C1 shows it is optimistic by 7.9x: the true value is 0.0908.  Random low-mode data does not find the worst direction -- these ratios sit near 0.87 while the operator norm is 11.0.  Correcting this is one of the things a construction leg is FOR."
+  },
+  "C7_galerkin_inconsistency": {
+    "kappa_ladder": {
+      "60": {
+        "abs_kappa": 5.848884174148528,
+        "last_coeff": 0.0016948374888868165,
+        "n2_times_last_coeff": 6.101414959992539
+      },
+      "120": {
+        "abs_kappa": 5.873459317737387,
+        "last_coeff": 0.00041652785743832345,
+        "n2_times_last_coeff": 5.998001147111857
+      },
+      "240": {
+        "abs_kappa": 5.885746889531825,
+        "last_coeff": 0.00010325690583553092,
+        "n2_times_last_coeff": 5.947597776126581
+      },
+      "480": {
+        "abs_kappa": 5.891890675429039,
+        "last_coeff": 2.570621714314935e-05,
+        "n2_times_last_coeff": 5.92271242978161
+      },
+      "960": {
+        "abs_kappa": 5.894962568377656,
+        "last_coeff": 6.413137679763024e-06,
+        "n2_times_last_coeff": 5.910347685669603
+      }
+    },
+    "exact_solution_n_times_coeff": {
+      "32": 5.961513954168881,
+      "64": 5.882121449983129,
+      "128": 5.798061466045254,
+      "256": 5.671784847531927,
+      "512": 5.459341541517058,
+      "1024": 5.116228667533571
+    },
+    "reading": "kappa MUST be 0 (ell(f)=0 was imposed and ell.L_0^+=0 exactly), yet the square Galerkin section returns kappa -> 5.895.  The mechanism is exact: the truncated ell row misses the term ell_N (N-2)/2 u_{N-1}, and N^2 |u_{N-1}| is constant, so the defect does NOT vanish.  Underneath it is a structural fact: the exact solution's Laguerre coefficients decay only like C/n (n|c_n| -> ~5.1), because the resolvent maps analytic data to u ~ log(y)/y, i.e. a LOG SINGULARITY at the Mellin origin xi=0.  No basis smooth at xi=0 converges geometrically here.  This is why C1 uses a range-untruncated section and not a square one."
+  },
+  "C8_border_row_dual_norm": {
+    "ladder": {
+      "64": {
+        "x_dual": 0.8872380425355713,
+        "l2": 577.3872184245162
+      },
+      "128": {
+        "x_dual": 0.8873117900938475,
+        "l2": 1652.6148976697505
+      },
+      "256": {
+        "x_dual": 0.887345112546454,
+        "l2": 4701.958740780272
+      },
+      "512": {
+        "x_dual": 0.8873620087421942,
+        "l2": 13338.300941274341
+      }
+    },
+    "reading": "ell is a BOUNDED functional on X and an unbounded one on l^2: the X* norm converges while the l^2 norm diverges like N^{3/2}.  The border row only makes sense in the X realization, which is itself part of the finding."
+  },
+  "E4_x_norm_two_ways": {
+    "u_gram": 0.9991217151299376,
+    "u_yspace": 0.9991217151299354,
+    "u_rel_diff": 2.2223979477430736e-15,
+    "f_gram": 0.05098372189567592,
+    "f_yspace": 0.050983721896042396,
+    "f_rel_diff": 7.188131189887538e-12,
+    "ratio_from_norms": 11.01037339225752,
+    "one_over_sigma_min": 11.010373719136561,
+    "minimizer_median_index": 2,
+    "minimizer_last_decile_energy": 0.0017558249084808168,
+    "N": 256,
+    "reading": "the Gram quadratic form c*Gc and the y-space integral int|phi|^2+|phi''|^2 are computed by completely different routes and agree to 2e-15, including the 2*pi Plancherel factor.  The minimizer is SPREAD over the index range, not pinned at the truncation edge -- so C1 is measuring a dilation mode of the operator, not an edge artifact."
+  },
+  "gate": {
+    "question": "Does the origin-H^2 certificate, built per leg 163's scoped formulation at a=0, actually close (its diagnostic quantity crosses the threshold a certificate needs), and does it reproduce Xu's own closed form to the precision leg 163 established (2.8e-14 class)?",
+    "conjunct_1_closes": true,
+    "conjunct_1_diagnostic": "sigma_min of the bordered operator in the X metric (leg 163's G4)",
+    "conjunct_1_value": 0.09080465147034879,
+    "conjunct_1_resolvent_norm": 11.012651706796523,
+    "conjunct_2_reproduces_xu": true,
+    "conjunct_2_value": 4.766912579638455e-15,
+    "answer": "YES",
+    "qualification": "YES on leg 163's OWN scoped closing diagnostic and YES on the Xu reproduction -- but the leg-54-comparable quantity Z_1 for a block-diagonal A does NOT close (best 140.7, needs <1).  The certificate closes as a statement about the OPERATOR AND SPACE (sigma_min = 0.0908, ||R||_X = 11.01, truncation-independent), not as a block-diagonal Newton-Kantorovich A.  Both magnitudes are reported; neither is allowed to stand for the other.",
+    "ceiling_restated": "a=0 only.  This certifies an object Xu already inverts in closed form.  Nothing transfers to non-a=0.  No Clay movement, no link of L1->L4 moved, no ban lifted."
+  },
+  "runtime_seconds": 816.4450716972351
+}
