@@ -63,11 +63,10 @@ next section, and test_interval_certificate_adversarial.py for the battery that
 motivated it.
 """
 
-import math
-import numbers
-
 import numpy as np
 
+from solver.certificate_guards import (
+    NAN_HINT_LT_ONE, hypothesis_violations as _shared_hypothesis_violations)
 from solver.interval import Interval, _down, _gamma, _up, dot2_matvec
 
 
@@ -126,27 +125,21 @@ class CertificateInputError(ValueError):
 def _hypothesis_violations(Y0, Z1, Z2):
     """Which hypothesis of the radii polynomial theorem each supplied constant breaks.
 
-    Mirrors `solver.port_certification._hypothesis_violations` (leg 79's repair) so the
-    two pipelines cannot drift apart on what "outside the theorem" means.  Returns a list
-    of strings naming the offending constant and the hypothesis it breaks; empty means
-    every constant is admissible.  `0.0` and `-0.0` are legitimate bounds and are NOT
-    violations -- a zero `Z_2` is a degeneracy of the polynomial, handled separately and
-    named as such, not a hypothesis failure."""
-    bad = []
-    for name, v in (("Y_0", Y0), ("Z_1", Z1), ("Z_2", Z2)):
-        if not isinstance(v, numbers.Real):
-            raise TypeError(f"{name} must be a real number, got {type(v).__name__}; the "
-                            f"radii polynomial's constants are norms.")
-        f = float(v)
-        if math.isnan(f):
-            bad.append(f"{name} is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` "
-                       f"is False, so the contraction guard alone is not a hypothesis check)")
-        elif math.isinf(f):
-            bad.append(f"{name} is {'+' if f > 0 else '-'}infinite (a norm bound is finite "
-                       f"by hypothesis)")
-        elif f < 0.0:
-            bad.append(f"{name} is negative ({f!r}); it is an upper bound on a norm")
-    return bad
+    Mirrored `solver.port_certification._hypothesis_violations` (leg 79's repair) so the
+    two pipelines could not drift apart on what "outside the theorem" means.  SINCE LEG 128
+    IT NO LONGER MIRRORS IT -- both call the SAME function,
+    `solver.certificate_guards.hypothesis_violations`, so drift is now impossible rather
+    than merely intended against.  The predicate, the message strings and this module's
+    raise-on-`None` policy are unchanged byte-for-byte; `nk_bounds.budget` is the third
+    caller and the reason the copy became an abstraction (the Rule of Three).
+
+    Returns a list of strings naming the offending constant and the hypothesis it breaks;
+    empty means every constant is admissible.  `0.0` and `-0.0` are legitimate bounds and
+    are NOT violations -- a zero `Z_2` is a degeneracy of the polynomial, handled
+    separately and named as such, not a hypothesis failure."""
+    return _shared_hypothesis_violations(
+        (("Y_0", Y0), ("Z_1", Z1), ("Z_2", Z2)),
+        allow_none=False, nan_hint=NAN_HINT_LT_ONE)
 
 
 # --------------------------------------------------------------------------

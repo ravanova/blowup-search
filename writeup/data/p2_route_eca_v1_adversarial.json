@@ -1,0 +1,1157 @@
+{
+ "leg": 144,
+ "route": "ECA",
+ "kind": "adversarial audit, read-only",
+ "module_under_audit": "solver/energy_coercivity.py",
+ "module_untouched": true,
+ "gate_question": "Does solver/energy_coercivity.py contain a silent-corruption site -- an input inside its public API's reachable domain for which it returns a finite, plausible number instead of refusing, warning, or reporting the quantity as absent?",
+ "gate_frozen_in": "writeup/novelty/leg_144.md (committed before construction)",
+ "direction_md_defect": "DIRECTION.md carries no section 144: 84 route sections, highest is '### 141 -- ROUTE-WEL' at line 3152; 0 hits for 'ROUTE-ECA' repo-wide and on origin/main. The gate above is this leg's own, declared in the novelty log before construction, in the wording the leg prompt supplied.",
+ "module_sha256_head": "c19c5018a5def7094d79ec2a9ff7d6bf30cd6ac4",
+ "C1_reproduction": {
+  "A0_flat": {
+   "gamma": 0.0,
+   "admissible_per_leg111": true,
+   "now": [
+    -1.467221401100708,
+    -1.4923039850878448,
+    -1.498135381828383,
+    -1.4995410858796279,
+    -1.4998861651722422
+   ],
+   "banked": [
+    -1.4672214011007048,
+    -1.4923039850878426,
+    -1.4981353818283831,
+    -1.4995410858796265,
+    -1.499886165172244
+   ],
+   "worst_abs_diff": 3.3306690738754696e-15,
+   "worst_rel_diff": 2.270052134856275e-15,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    1.0000000000000047,
+    1.000000000000005,
+    1.0000000000000075,
+    1.0000000000000142,
+    1.0000000000000284
+   ]
+  },
+  "A1": {
+   "gamma": 1.0,
+   "admissible_per_leg111": true,
+   "now": [
+    -0.9871127270741116,
+    -1.0033286594691357,
+    -1.0058219303179328,
+    -1.0061520187393929,
+    -1.0062007860433542
+   ],
+   "banked": [
+    -0.9871127270741117,
+    -1.0033286594691353,
+    -1.0058219303179312,
+    -1.0061520187393924,
+    -1.006200786043351
+   ],
+   "worst_abs_diff": 3.1086244689504383e-15,
+   "worst_rel_diff": 3.0894673429687685e-15,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    13.599182783277408,
+    29.31128854488544,
+    61.01773125765706,
+    124.67888927840639,
+    252.19138858918376
+   ]
+  },
+  "A2": {
+   "gamma": 2.0,
+   "admissible_per_leg111": true,
+   "now": [
+    -0.47814760073380497,
+    -0.4948693233918942,
+    -0.49875692121892157,
+    -0.49969405725308513,
+    -0.4999241101148312
+   ],
+   "banked": [
+    -0.4781476007338056,
+    -0.4948693233918947,
+    -0.4987569212189221,
+    -0.49969405725308413,
+    -0.4999241101148309
+   ],
+   "worst_abs_diff": 9.992007221626409e-16,
+   "worst_rel_diff": 1.999624985847225e-15,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    90.52313096777162,
+    388.8121344932845,
+    1607.9084862877885,
+    6536.170827413383,
+    26352.973201314122
+   ]
+  },
+  "A3": {
+   "gamma": 3.0,
+   "admissible_per_leg111": false,
+   "now": [
+    0.04260886750888923,
+    0.012644108305932164,
+    0.0036402453209640586,
+    0.000960740258408218,
+    0.00012147155707285128
+   ],
+   "banked": [
+    0.042608867508890355,
+    0.012644108305935035,
+    0.003640245320964228,
+    0.0009607402584078338,
+    0.00012147155707304335
+   ],
+   "worst_abs_diff": 2.8709673527416157e-15,
+   "worst_rel_diff": 1.5811636854240176e-12,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    417.83788749165905,
+    3472.7250166882977,
+    28195.35912175893,
+    226997.0915812495,
+    1821266.8945470555
+   ]
+  },
+  "A4_chen_hou": {
+   "gamma": 4.0,
+   "admissible_per_leg111": false,
+   "now": [
+    -2.387066563774262,
+    -3.371415013621429,
+    -3.097462732161306,
+    -0.3233542765263461,
+    -0.097404280337837
+   ],
+   "banked": [
+    -2.4472463031316485,
+    -3.180937177420267,
+    -1.2790306584445323,
+    -0.19261450570108976,
+    -0.07206396674547556
+   ],
+   "worst_abs_diff": 1.8184320737167736,
+   "worst_rel_diff": 1.4217267285275426,
+   "dropped_now": [
+    0,
+    2,
+    12,
+    44,
+    111
+   ],
+   "dropped_banked": [
+    0,
+    2,
+    13,
+    45,
+    109
+   ],
+   "cond_G_now": [
+    4948.5527962699425,
+    182979.81363460966,
+    4132755.5062137283,
+    94920172.80498776,
+    59871654.80786024
+   ]
+  },
+  "B0": {
+   "gamma": 0.0,
+   "admissible_per_leg111": true,
+   "now": [
+    -1.4781476007338081,
+    -1.4948693233919044,
+    -1.498756921219073,
+    -1.4996940572532522,
+    -1.4999241101145666
+   ],
+   "banked": [
+    -1.4781476007338012,
+    -1.494869323391856,
+    -1.4987569212190048,
+    -1.4996940572532447,
+    -1.4999241101146115
+   ],
+   "worst_abs_diff": 6.816769371198461e-14,
+   "worst_rel_diff": 4.548282162830036e-14,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    90.52313096777449,
+    388.8121344932673,
+    1607.9084862878371,
+    6536.170827401914,
+    26352.973201232162
+   ]
+  },
+  "B2": {
+   "gamma": 2.0,
+   "admissible_per_leg111": true,
+   "now": [
+    -0.48907380036690323,
+    -0.49743466169594786,
+    -0.4993784606094606,
+    -0.49984702862654135,
+    -0.4999620550574157
+   ],
+   "banked": [
+    -0.489073800366902,
+    -0.49743466169594747,
+    -0.49937846060946134,
+    -0.49984702862654146,
+    -0.49996205505741625
+   ],
+   "worst_abs_diff": 1.2212453270876722e-15,
+   "worst_rel_diff": 2.4970573483419e-15,
+   "dropped_now": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dropped_banked": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "cond_G_now": [
+    25.27414236908815,
+    103.0868689198173,
+    414.3450622319239,
+    1659.3796462927335,
+    6639.518434558006
+   ]
+  }
+ },
+ "C1_verdict": {
+  "reproducing_members": [
+   "A0_flat",
+   "A1",
+   "A2",
+   "A3",
+   "B0",
+   "B2"
+  ],
+  "non_reproducing_members": [
+   "A4_chen_hou"
+  ],
+  "worst_reproducing_abs_diff": 6.816769371198461e-14
+ },
+ "C1_determinism_A4_n64": [
+  -3.097462732161306,
+  -3.097462732161306,
+  -3.097462732161306
+ ],
+ "P1_gap_without_admissibility_guard": {
+  "guard_present": {
+   "coercivity_gap_calls_admissibility": false
+  },
+  "gap_at_n48": {
+   "A0_flat": -1.4966503179347306,
+   "A1": -1.0053218595407647,
+   "A2": -0.49776687862315255,
+   "A3": 0.006125196228527529,
+   "A4_chen_hou": -3.3469215821160345,
+   "B0": -1.49776687862312,
+   "B2": -0.4988834393115764
+  },
+  "silent": true,
+  "n_ladders": {
+   "A0_flat": [
+    -1.3514533018536292,
+    -1.467221401100708,
+    -1.4923039850878448,
+    -1.498135381828383,
+    -1.4995410858796279,
+    -1.4998861651722422
+   ],
+   "A1": [
+    -0.8973341497442101,
+    -0.9871127270741116,
+    -1.0033286594691357,
+    -1.0058219303179328,
+    -1.0061520187393929,
+    -1.0062007860433542
+   ],
+   "A2": [
+    -0.40096886790241937,
+    -0.47814760073380497,
+    -0.4948693233918942,
+    -0.49875692121892157,
+    -0.49969405725308513,
+    -0.4999241101148312
+   ],
+   "A3": [
+    0.13167451603439093,
+    0.04260886750888923,
+    0.012644108305932164,
+    0.0036402453209640586,
+    0.000960740258408218,
+    0.00012147155707285128
+   ],
+   "A4_chen_hou": [
+    -1.5388400984717356,
+    -2.387066563774262,
+    -3.371415013621429,
+    -3.097462732161306,
+    -0.3233542765263461,
+    -0.097404280337837
+   ],
+   "B0": [
+    -1.4009688679024181,
+    -1.4781476007338081,
+    -1.4948693233919044,
+    -1.498756921219073,
+    -1.4996940572532522,
+    -1.4999241101145666
+   ],
+   "B2": [
+    -0.45048443395120974,
+    -0.48907380036690323,
+    -0.49743466169594786,
+    -0.4993784606094606,
+    -0.49984702862654135,
+    -0.4999620550574157
+   ]
+  },
+  "monotonicity": {
+   "A0_flat": {
+    "gamma": 0.0,
+    "worst_increase": -0.00034507929261429204,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   },
+   "A1": {
+    "gamma": 1.0,
+    "worst_increase": -4.8767303961305686e-05,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   },
+   "A2": {
+    "gamma": 2.0,
+    "worst_increase": -0.000230052861746044,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   },
+   "A3": {
+    "gamma": 3.0,
+    "worst_increase": -0.0008392687013353667,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   },
+   "A4_chen_hou": {
+    "gamma": 4.0,
+    "worst_increase": 2.77410845563496,
+    "violates_nested_subspace_invariant": true,
+    "n_at_worst_increase": 128
+   },
+   "B0": {
+    "gamma": 0.0,
+    "worst_increase": -0.0002300528613143893,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   },
+   "B2": {
+    "gamma": 2.0,
+    "worst_increase": -0.00011502643087435427,
+    "violates_nested_subspace_invariant": false,
+    "n_at_worst_increase": 256
+   }
+  }
+ },
+ "P2_quadrature_dial": {
+  "A2": {
+   "n_grade": [
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+   ],
+   "gaps": [
+    -0.498756921218922,
+    -0.4987569212189216,
+    -0.49875692121892184,
+    -0.49875692121892157,
+    -0.4987569212189224,
+    -0.49875692121892223,
+    -0.49875692121892257,
+    -0.49875692121892284
+   ],
+   "spread_absolute": 1.27675647831893e-15,
+   "exceeds_published_ceiling": -0.9987569212189216
+  },
+  "A3": {
+   "n_grade": [
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+   ],
+   "gaps": [
+    0.0021587534135291387,
+    0.002937670180312928,
+    0.003307846202051056,
+    0.0036402453209640586,
+    0.003784302518437583,
+    0.003907975208764282,
+    0.003960337554643515,
+    0.004005036199788865
+   ],
+   "spread_absolute": 0.0018462827862597265,
+   "exceeds_published_ceiling": -0.49599496380021113
+  },
+  "A4_chen_hou": {
+   "n_grade": [
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+   ],
+   "gaps": [
+    0.5006153985816013,
+    0.5006211577737151,
+    0.5006215575163716,
+    -3.097462732161306,
+    -2.2479584610543517,
+    -73.85751908331022,
+    -127.85373248728844,
+    -127.85373248728844
+   ],
+   "spread_absolute": 128.3543540448048,
+   "exceeds_published_ceiling": 0.0006215575163716069
+  }
+ },
+ "P2_order_dial": {
+  "A4": [
+   -3.9821564784658148,
+   -3.3469215821160345,
+   -5.009452462376417
+  ],
+  "A2_control": [
+   -0.4977668786231518,
+   -0.49776687862315255,
+   -0.49776687862315194
+  ]
+ },
+ "P10_admissibility_kwargs": {
+  "n_grade=24,gamma=2.0": {
+   "ratio": 1.0000000000000002,
+   "increments": [
+    -2.220446049250313e-16,
+    4.440892098500626e-16
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=24,gamma=3.0": {
+   "ratio": 1.6176051093690436,
+   "increments": [
+    8.317766166719341,
+    8.317766166719338
+   ],
+   "increment_ratio": 0.9999999999999996,
+   "exponent_margin": 0.0,
+   "module_reads_as_converged": false,
+   "silent": true
+  },
+  "n_grade=24,gamma=4.0": {
+   "ratio": 16777216.000061583,
+   "increments": [
+    876149538490951.1,
+    3.5887085096589353e+18
+   ],
+   "increment_ratio": 4095.9999999999995,
+   "exponent_margin": -1.0,
+   "module_reads_as_converged": false,
+   "silent": true
+  },
+  "n_grade=1,gamma=2.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=1,gamma=3.0": {
+   "ratio": 1.063052568505227,
+   "increments": [
+    0.0,
+    0.6931471805599418
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 0.0,
+   "module_reads_as_converged": false,
+   "silent": true
+  },
+  "n_grade=1,gamma=4.0": {
+   "ratio": 2.000030794192815,
+   "increments": [
+    0.0,
+    25505.534560134583
+   ],
+   "increment_ratio": null,
+   "exponent_margin": -1.0,
+   "module_reads_as_converged": false,
+   "silent": true
+  },
+  "n_grade=0,gamma=2.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=0,gamma=3.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 0.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=0,gamma=4.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": -1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=-4,gamma=2.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=-4,gamma=3.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": 0.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  },
+  "n_grade=-4,gamma=4.0": {
+   "ratio": 1.0,
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "exponent_margin": -1.0,
+   "module_reads_as_converged": true,
+   "silent": true
+  }
+ },
+ "P10_suppression_factor": 16777216.000061583,
+ "P10_per_mode_ratio": {
+  "2.0": {
+   "1": 1.0000000000000002,
+   "2": 1.0000000000000002,
+   "8": 1.0,
+   "32": 1.0
+  },
+  "2.9": {
+   "1": 1.058279533734319,
+   "2": 1.0634410205928915,
+   "8": 1.0740812513511162,
+   "32": 1.08630986899687
+  },
+  "3.0": {
+   "1": 1.6176051093690436,
+   "2": 1.6365097858420292,
+   "8": 1.6733966725752267,
+   "32": 1.7135573336294017
+  },
+  "4.0": {
+   "1": 16777216.000061583,
+   "2": 16777216.000153963,
+   "8": 16777216.000654355,
+   "32": 16777216.00262705
+  }
+ },
+ "P10_per_mode_note": "NOT a finding of this leg: the convergence ratio is mode-independent to <3% at gamma=2.9, and leg 141/WEL (experiments/p2_route_wel_v1_lit.py, its p=1 control) already investigated admissibility()'s sin(theta) hardwiring.",
+ "P5_P6_P7_mesh": {
+  "default": {
+   "total_mass": 3.1415926535897927,
+   "mass_over_pi": 0.9999999999999999,
+   "n_nodes": 2112,
+   "nodes_outside_0_pi": 0,
+   "min_node": 1.3487640765347057e-11,
+   "max_node": 3.1415926535763052,
+   "silent": true
+  },
+  "n_unif=1": {
+   "total_mass": 6.283185307179585,
+   "mass_over_pi": 1.9999999999999998,
+   "n_nodes": 600,
+   "nodes_outside_0_pi": 0,
+   "min_node": 1.7264180179644233e-09,
+   "max_node": 3.141592651863375,
+   "silent": true
+  },
+  "n_unif=2": {
+   "total_mass": 3.1415926535897922,
+   "mass_over_pi": 0.9999999999999997,
+   "n_nodes": 600,
+   "nodes_outside_0_pi": 0,
+   "min_node": 8.632090089822116e-10,
+   "max_node": 3.141592652726584,
+   "silent": true
+  },
+  "n_unif=3": {
+   "total_mass": 3.1415926535897922,
+   "mass_over_pi": 0.9999999999999997,
+   "n_nodes": 612,
+   "nodes_outside_0_pi": 0,
+   "min_node": 5.754726726548056e-10,
+   "max_node": 3.1415926530143206,
+   "silent": true
+  },
+  "grade=1.0": {
+   "total_mass": 3.141592653589793,
+   "mass_over_pi": 1.0,
+   "n_nodes": 1536,
+   "nodes_outside_0_pi": 0,
+   "min_node": 0.0002262850624506329,
+   "max_node": 3.1413663685273425,
+   "silent": true
+  },
+  "grade=0.0": {
+   "total_mass": 3.141592653589793,
+   "mass_over_pi": 1.0,
+   "n_nodes": 1536,
+   "nodes_outside_0_pi": 0,
+   "min_node": 0.0002262850624506329,
+   "max_node": 3.1413663685273425,
+   "silent": true
+  },
+  "grade=1.5": {
+   "total_mass": 829.4350553425734,
+   "mass_over_pi": 264.0173780629407,
+   "n_nodes": 2112,
+   "nodes_outside_0_pi": 290,
+   "min_node": -408.75991300698115,
+   "max_node": 411.9015056605723,
+   "silent": true
+  },
+  "grade=2.0": {
+   "total_mass": 823552.7570879097,
+   "mass_over_pi": 262144.9843749996,
+   "n_nodes": 2112,
+   "nodes_outside_0_pi": 408,
+   "min_node": -409873.4740135125,
+   "max_node": 409876.61560616747,
+   "silent": true
+  },
+  "n_grade=0": {
+   "total_mass": 3.141592653589793,
+   "mass_over_pi": 1.0,
+   "n_nodes": 1536,
+   "nodes_outside_0_pi": 0,
+   "min_node": 0.0002262850624506329,
+   "max_node": 3.1413663685273425,
+   "silent": true
+  },
+  "n_grade=-4": {
+   "total_mass": 3.141592653589793,
+   "mass_over_pi": 1.0,
+   "n_nodes": 1536,
+   "nodes_outside_0_pi": 0,
+   "min_node": 0.0002262850624506329,
+   "max_node": 3.1413663685273425,
+   "silent": true
+  },
+  "order=1": {
+   "total_mass": 3.141592653589793,
+   "mass_over_pi": 1.0,
+   "n_nodes": 176,
+   "nodes_outside_0_pi": 0,
+   "min_node": 7.314590396335798e-10,
+   "max_node": 3.141592652858334,
+   "silent": true
+  }
+ },
+ "P6_divergence_under_ungraded_mesh": {
+  "grade=0.5": {
+   "gamma=3.0": 1.6176051093690436,
+   "gamma=4.0": 16777216.000061583
+  },
+  "grade=1.0": {
+   "gamma=3.0": 1.0,
+   "gamma=4.0": 1.0
+  },
+  "grade=0.0": {
+   "gamma=3.0": 1.0,
+   "gamma=4.0": 1.0
+  }
+ },
+ "P5_doubling_propagated": {
+  "flat_gram_diag_n_unif_1": 3.141592653589791,
+  "flat_gram_diag_default": 1.570796326794896,
+  "flat_gram_exact": 1.5707963267948966,
+  "gram_ratio": 1.9999999999999993,
+  "gap": {
+   "8": {
+    "default": -0.40096886790241937,
+    "n_unif=1": -0.40096946102580755
+   },
+   "16": {
+    "default": -0.47814760073380497,
+    "n_unif=1": -1.654095329307714
+   },
+   "32": {
+    "default": -0.4948693233918942,
+    "n_unif=1": -11.10108912094767
+   }
+  }
+ },
+ "P3_off_domain_weight": {
+  "theta=0.000000,gamma=2.0": {
+   "value": "inf",
+   "error": null,
+   "warnings": [
+    "divide by zero encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=0.000000,gamma=2.5": {
+   "value": "inf",
+   "error": null,
+   "warnings": [
+    "divide by zero encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=0.000000,gamma=3.0": {
+   "value": "inf",
+   "error": null,
+   "warnings": [
+    "divide by zero encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=3.141593,gamma=2.0": {
+   "value": 0.25,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=3.141593,gamma=2.5": {
+   "value": 0.1767766952966369,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=3.141593,gamma=3.0": {
+   "value": 0.125,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=-0.100000,gamma=2.0": {
+   "value": 100.08337501654017,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=-0.100000,gamma=2.5": {
+   "value": "nan",
+   "error": null,
+   "warnings": [
+    "invalid value encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=-0.100000,gamma=3.0": {
+   "value": -1001.2508858891425,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=-0.300000,gamma=2.0": {
+   "value": 11.194820787961271,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=-0.300000,gamma=2.5": {
+   "value": "nan",
+   "error": null,
+   "warnings": [
+    "invalid value encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=-0.300000,gamma=3.0": {
+   "value": -37.456372756595535,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.100000,gamma=2.0": {
+   "value": 100.08337501654017,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.100000,gamma=2.5": {
+   "value": 316.55736904720146,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.100000,gamma=3.0": {
+   "value": 1001.2508858891425,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.300000,gamma=2.0": {
+   "value": 11.194820787961271,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.300000,gamma=2.5": {
+   "value": 20.477240545961312,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=0.300000,gamma=3.0": {
+   "value": 37.456372756595535,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=3.241593,gamma=2.0": {
+   "value": 0.2506260431442856,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=3.241593,gamma=2.5": {
+   "value": 0.17733021758935172,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=3.241593,gamma=3.0": {
+   "value": 0.1254698261831606,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=4.000000,gamma=2.0": {
+   "value": 0.3023626092657595,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=4.000000,gamma=2.5": {
+   "value": 0.2242126468469135,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=4.000000,gamma=3.0": {
+   "value": 0.16626166551537178,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=7.000000,gamma=2.0": {
+   "value": 2.031713044204381,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=7.000000,gamma=2.5": {
+   "value": "nan",
+   "error": null,
+   "warnings": [
+    "invalid value encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=7.000000,gamma=3.0": {
+   "value": -2.8959666309959413,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=6.383185,gamma=2.0": {
+   "value": 100.08337501654137,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  },
+  "theta=6.383185,gamma=2.5": {
+   "value": "nan",
+   "error": null,
+   "warnings": [
+    "invalid value encountered in power"
+   ],
+   "silent": false
+  },
+  "theta=6.383185,gamma=3.0": {
+   "value": -1001.2508858891604,
+   "error": null,
+   "warnings": [],
+   "silent": true
+  }
+ },
+ "P3_mirror": {
+  "theta_plus_0.1": 100.08337501654017,
+  "theta_minus_0.1": 100.08337501654017,
+  "theta_plus_0.3": 11.194820787961271,
+  "theta_minus_0.3": 11.194820787961271,
+  "wrap_2pi_plus_0.1": 100.08337501654137,
+  "relative_mirror_error_0.1": 0.0,
+  "negative_weight_at_gamma_3": -1001.2508858891425,
+  "nan_at_gamma_2.5": "nan"
+ },
+ "P3_damping_factor_off_domain": {
+  "-1.0": 0.040302305868139765,
+  "4.0": -1.1536436208636118,
+  "7.0": 0.2539022543433047
+ },
+ "P4_family_guard": {
+  "weight_values": "ValueError: unknown weight family 'Z'",
+  "weight_values_lowercase": "ValueError: unknown weight family 'b'",
+  "damping_factor": "ValueError: unknown weight family 'Z'",
+  "damping_factor_at_origin": "ValueError: unknown weight family 'Z'",
+  "form_matrices": "ValueError: unknown weight family 'Z'",
+  "coercivity_gap": "ValueError: unknown weight family 'Z'",
+  "admissibility": "ValueError: unknown weight family 'Z'"
+ },
+ "P4_guard_reachable_on_all_paths": true,
+ "P8_negative_mu": {
+  "-5.0": -276.3922573869053,
+  "-1.0": -55.62251804329446,
+  "-0.5": -28.02932120653943,
+  "0.0": -0.49776687862315255,
+  "0.5": 1.6035034002359436,
+  "2.0": 5.83938474688637
+ },
+ "P9_small_trial_space": {
+  "0": {
+   "error": "ValueError: need at least one array to stack"
+  },
+  "1": {
+   "error": "ValueError: could not broadcast input array from shape (2,) into shape (1,)"
+  },
+  "2": {
+   "error": "ValueError: zero-size array to reduction operation maximum which has no identity"
+  },
+  "3": {
+   "error": null,
+   "gap": 0.4999999999999991,
+   "dim_trial": 1,
+   "dim_kept": 1,
+   "dropped": 0,
+   "silent": true,
+   "ceiling_excess": -8.881784197001252e-16,
+   "passes_module_ceiling_check": true
+  },
+  "4": {
+   "error": null,
+   "gap": -1.717182521257299e-15,
+   "dim_trial": 2,
+   "dim_kept": 2,
+   "dropped": 0,
+   "silent": true,
+   "ceiling_excess": -0.5000000000000017,
+   "passes_module_ceiling_check": true
+  },
+  "5": {
+   "error": null,
+   "gap": -0.20710678118654888,
+   "dim_trial": 3,
+   "dim_kept": 3,
+   "dropped": 0,
+   "silent": true,
+   "ceiling_excess": -0.7071067811865489,
+   "passes_module_ceiling_check": true
+  },
+  "6": {
+   "error": null,
+   "gap": -0.3090169943749469,
+   "dim_trial": 4,
+   "dim_kept": 4,
+   "dropped": 0,
+   "silent": true,
+   "ceiling_excess": -0.8090169943749469,
+   "passes_module_ceiling_check": true
+  }
+ },
+ "P9_positive_gap_across_gamma": {
+  "gamma=0.0": {
+   "3": 7.0895790862189e-17,
+   "4": -0.7499999999999996,
+   "5": -1.0606601717798219,
+   "8": -1.3514533018536292,
+   "48": -1.4966503179347306
+  },
+  "gamma=1.0": {
+   "3": 0.23076923076922976,
+   "4": -0.3995515387070872,
+   "5": -0.658632079289081,
+   "8": -0.8973341497442101,
+   "48": -1.0053218595407647
+  },
+  "gamma=2.0": {
+   "3": 0.4999999999999991,
+   "4": -1.717182521257299e-15,
+   "5": -0.20710678118654888,
+   "8": -0.40096886790241937,
+   "48": -0.49776687862315255
+  }
+ },
+ "sites": {
+  "A_inadmissible_gap_unguarded": {
+   "where": "coercivity_gap(), no admissibility consultation",
+   "magnitude": "A4_chen_hou (power-divergent, admissibility ratio 1.678e+07) returns a finite gap with no warning; its n-ladder VIOLATES the module's own nested-subspace monotonicity invariant at 1/7 members, worst increase +2.774108; the value moves 128.354 across the quadrature dial where the A2 control moves 1.3e-15"
+  },
+  "A2_not_reproducible_across_builds": {
+   "where": "coercivity_gap() on the inadmissible member",
+   "magnitude": "6 of 7 named weights reproduce leg 111's banked JSON to 6.8e-14 absolute; A4_chen_hou differs by up to 1.818 absolute / 142% relative (n=64: -3.0975 now vs -1.2790 banked), deterministic within this environment (3/3 identical runs)"
+  },
+  "B_admissibility_detector_suppressed": {
+   "where": "admissibility(n_grade<=0)",
+   "magnitude": "gamma=4's divergence signal collapses from ratio 1.678e+07 (increment_ratio 4096, a power) to ratio exactly 1.000000 with increments [0, 0] and increment_ratio None -- which the module's own docstring reads as CONVERGED. Suppression factor 1.678e+07"
+  },
+  "C_mesh_silently_ungraded_or_off_domain": {
+   "where": "graded_quadrature(grade>=1 or <=0, n_grade<=0)",
+   "magnitude": "grade=1.0 keeps total mass exactly pi (the module's own consistency gate still passes) while moving the innermost node from 1.349e-11 to 2.263e-04, which turns the gamma=4 divergence ratio from 1.678e+07 into 1.000000; grade=1.5 places 290/2112 nodes outside (0, pi) and integrates 264.0x the interval"
+  },
+  "D_n_unif_1_doubles_the_measure": {
+   "where": "graded_quadrature(n_unif=1) / form_matrices / coercivity_gap",
+   "magnitude": "total quadrature mass 2.000000 x pi (the two end panels each span the whole interval); the flat-weight Gram diagonal is 3.14159265 instead of pi/2 = 1.57079633; the gap agrees with the default to 5.9e-07 at n=8 and then diverges to -11.1011 vs -0.4949 at n=32 (22.4x)"
+  },
+  "E_weight_mirrored_off_domain": {
+   "where": "weight_values(theta outside (0, pi))",
+   "magnitude": "theta=-0.1 returns 100.08337502, the exact mirror of theta=+0.1 to 0.0e+00 relative, with no warning; at gamma=3 the same input returns a NEGATIVE weight -1001.2509 (an indefinite 'inner product') and at gamma=2.5 a silent NaN; theta=2pi+0.1 wraps to 100.08337502. Only theta exactly 0 warns"
+  },
+  "F_small_n_saturates_the_published_ceiling": {
+   "where": "coercivity_gap(n<=4, modulate=True)",
+   "magnitude": "n=3 returns gap = 0.4999999999999991 from a 1-dimensional trial space -- 8.9e-16 BELOW the published ceiling 0.5, so the module's own instrument-bug tripwire (a `<=` test) cannot fire; n=1 and n=2 raise loudly"
+  }
+ },
+ "gate_answer": "YES",
+ "gate_answer_wording": "YES. Six sites. The module returns finite, plausible, unwarned numbers for inputs inside its public API's reachable domain but outside the domain its own docstrings declare. Leg 144 has no patch authority under its own gate: ESCALATED, not patched.",
+ "scope_what_this_does_not_retract": "Leg 111 is NOT retracted. The 6 of 7 named weights its conclusion rests on reproduce its banked JSON to 6.8e-14 absolute. Every site lives at gamma >= 3 (already `admissible: false` in leg 111's own per_weight_verdict) or behind a non-default keyword argument. The zero-width window is UNCHANGED and if anything sharpened: the numbers beyond the admissibility edge are not merely artifacts of the quadrature, they are not reproducible across LAPACK builds. THE ONE CONSUMER-FACING CONSEQUENCE: the A4_chen_hou gap values banked in writeup/data/p2_route_we_v1_coercivity.json and echoed nowhere else must not be quoted as measurements -- leg 141/WEL's publication scoping should cite the admissible members only.",
+ "ceiling_S7": "Float64, one module, one process, the a=0 CLM linearisation -- the friendliest object in the repository. Nothing here moves a link of the L1->L4 chain, and a silent-corruption finding on this instrument can only widen the error bars on a NEGATIVE result, never turn one positive.",
+ "elapsed_s": 83.5514018535614
+}

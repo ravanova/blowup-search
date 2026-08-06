@@ -78,21 +78,25 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-K v1 | The L1→L2 certification port, step one | Y | Y | Y | Y | fig40 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEK_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEK_V1.md) |
 | Route-L v1 | 2D preconditioner: the stall attributed, and removed | Y | Y | Y | Y | fig41 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL_V1.md) |
 | Route-M v1 | Target selection: certify *what*, that isn't already done? | Y | Y | Y | Y | fig42 (**was missing, regenerated this session — see gap list**) | [T](4_p2_lottery/TECHNICAL_P2_ROUTEM_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEM_V1.md) |
-| Route-PORT v1 | Bordered system; a certificate that closes around the wrong (truncated) object | Y | Y | Y | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEPORT_V1.md) — see gap list below |
+| Route-PORT v1 | Bordered system; a certificate that closes around the wrong (truncated) object | Y | Y | Y | Y† | fig59 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEPORT_V1.md) — **quartet completed by leg 60**, gap-list item 1 now closed |
 | Route-V v0 | Novelty gate: dissipation certification pre-empted by Dähne–Figueras (2024), re-derived | Y | Y | Y | Y | fig43 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEV_V0.md) · [B](4_p2_lottery/BLOG_P2_ROUTEV_V0.md) |
 | Route-C-PILOT v0 | Certificate-weight fitness on a known-answer object — gate answered **NO** (4/6); GA not run | Y | Y | Y | Y | fig44 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEC_PILOT_V0.md) · [B](4_p2_lottery/BLOG_P2_ROUTEC_PILOT_V0.md) |
 | Route-L1 v1 | Certificate stops being a rehearsal: constants become interval bounds | Y | Y | Y | Y | fig45 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL1_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL1_V1.md) |
 | Route-L1 v2 | Certificate rebuilt where operators are exact; one term left over (weight class) | Y | Y | Y | Y | fig46 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL1_V2.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL1_V2.md) |
-| Route-PORT v2 | Reach makes the truncation gap WORSE (+0.47 dec/unit ρ) — tail lemma forced | Y | Y | **GAP: T only, no BLOG** | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) — see gap list below |
+| Route-PORT v2 | Reach makes the truncation gap WORSE (+0.47 dec/unit ρ) — tail lemma forced | Y | Y | **GAP: T only, no BLOG** | Y† | fig60 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) — E and F **added by leg 60**; only the BLOG is still owed, see gap list item 2 |
 | Route-T v1 | Bordering restores a bounded tail; works where the failure curve was worst | Y | Y | Y | Y | fig47 | [T](4_p2_lottery/TECHNICAL_P2_ROUTET_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTET_V1.md) |
 | Route-TC v1 | Assembling the bordered certificate: four terms in one polynomial; the term that ran out is Z₁'s block coupling | Y | Y | Y | Y | fig48 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETC_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETC_V1.md) |
 | Route-MM v1 | The shape of the approximate inverse, spent — gate answered **NO** | Y | Y | Y | Y† | fig49 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEMM_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEMM_V1.md) |
 | Route-NB v1 | Compactified-basis coefficient decay of `HL_S2_nonsymmetric`: is the target in the space? | Y | Y | Y | Y† | fig50 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENB_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENB_V1.md) |
 | Route-TN v1 | The `(H, D)` consistency defect of `L1` step one, enclosed — gate answered **NO** | Y | Y | Y | Y† | fig51 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETN_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETN_V1.md) |
 | Route-XS v1 | The shape dichotomy against published certificates — gate answered **NO** | Y | Y | Y | Y† | fig52 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEXS_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEXS_V1.md) |
-| Weight-repairs v1 | Named P2/P3 repairs to the certificate-weight fitness; six-property gate still FAILs | Y | Y | Y | **GAP: none** | fig48 (**duplicated number** — see gap list item 8) | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V1.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V1.md) — added by leg 108, see gap list item 9 |
+| Weight-repairs v1 | Named P2/P3 repairs to the certificate-weight fitness; six-property gate still FAILs | Y | Y | Y | Y | fig48 (**duplicated number** — see gap list item 8) | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V1.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V1.md) — row added by leg 108; its `E` mark **corrected by leg 138**, see gap list item 9 |
 | Weight-repairs v2 (leg 59) | The conditioning wall modelled in both weight factors; frozen six-property gate re-run still FAILs | Y | Y | Y | Y† | fig58 | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V2.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V2.md) |
 | Route-KA v1 (leg 61) | The interval pipeline reproduces CLN's published Kawahara radius end to end | Y | Y | **GAP: T only, no BLOG** | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEKA_V1.md) — see gap list item 10 |
+| Route-NG v1 (leg 58) | Stage `NG`: the no-go stated as a theorem on the class `A21 = 0` — gate answered **YES**; publication scoping **escalated and parked**, the route itself merged | Y | Y | Y | Y† | fig55 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENG_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENG_V1.md) — added by leg 138 |
+| Route-CP v1 (leg 62) | Cadiot arXiv:2505.03091's scope settled from the full text — gate answered **NO** | Y | Y | Y | Y† | fig56 | [T](4_p2_lottery/TECHNICAL_P2_ROUTECP_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTECP_V1.md) — added by leg 138 |
+| Route-BX v1 (leg 126) | Stage `B` answered from the banked record, the closure audit — gate answered **NO** | Y | Y | Y | Y† | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTEBX_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEBX_V1.md) — **explicitly no figure by design**: the yes-branch would have registered `fig62`, the no-branch measures nothing (see file header). Added by leg 138 |
+| Route-M2 v1 (leg 63) — **PARKED, NOT LANDED** | Target reselection under the multiplier/shift screen — gate answered **YES**, and that answer is **escalation #1**: parked on branch `leg/m2-v1`, never merged | — | — | — | — | `fig57` **reserved** | **No files on `main`.** Read the branch with `git show`; do not merge or build on it. Territory and finding: [DIRECTION.md](../DIRECTION.md) §63. Row added by leg 138 |
 
 `gen*` = the runner is the `*_evidence.py` script itself (`--generate` recomputes from
 `solver/`), rather than a separate `experiments/*.py` file — legacy legs (HL anchor, GA
@@ -101,8 +105,10 @@ use. Substance of quartet item 1 (a runner that produced the numbers) is present
 differs from the current convention.
 
 `Y†` = the `*_evidence.py` exists but lives in `experiments/` rather than beside its docs in
-`4_p2_lottery/` (4 files: MM, NB, TN, XS). Placement drift from the earlier Arc-4 routes, not
-a missing piece — see gap-list item 7.
+`4_p2_lottery/` (9 files: MM, NB, TN, XS, and — added by leg 138 — PORT v1, PORT v2, NG, CP,
+BX). Placement drift from the earlier Arc-4 routes, not a missing piece — see gap-list item 7.
+Every Arc-4 route landed since leg 57 follows the `experiments/` placement, so `Y†` is now the
+majority convention among recent routes rather than a drift from it.
 
 **Index currency.** Arc 4's table above is current through **leg 57 (Route-XS)**. Legs 53
 (TC), 54 (MM), 55 (NB), 56 (TN) and 57 (XS) were verified piece-by-piece against the files
@@ -134,6 +140,46 @@ against the files on disk; the full per-leg inventory is in
   `writeup/data/` for 24 of the 30 and a runner under `experiments/` for all 30. Nothing about
   this set is `GAP`.
 
+> ⚠ **Superseded in part by leg 138 (below).** Three legs in the list above — **58, 60 and
+> 62** — have since landed BLOG/TECHNICAL prose and/or registered figures on `main`, in
+> commits that post-date leg 108's own pass. The classification was true when written and is
+> false now; legs 58 and 62 have Arc 4 rows of their own above, and leg 60's work is recorded
+> in the Route-PORT v1/v2 rows. Nothing else in leg 108's block is disturbed.
+
+**Index currency — third pass (leg 138, Route-IX3).** Audit window pinned at
+`3474862` (`origin/main` HEAD when leg 138 began), range `63dc163..3474862`. Since leg 108's
+pass, **33 numbered legs** have landed (58, 60, 62, 71, 83, 85, 89, 92, 98, 99, 100, 101,
+103–107, 111–117, 119–121, 123, 126, 131, 134, 136, 141) plus repo-wide `Leg 0:` integration
+work, and this file again received **0 edits** across all of them. Full per-leg inventory and
+every claim re-checked against disk: [novelty/leg_138.md](novelty/leg_138.md),
+`experiments/p2_route_ix3_v1_index_audit.py` →
+`data/p2_route_ix3_v1_index_audit.json`. Note that leg *number* order and *landing* order
+differ here — the low numbers in that list are legs whose branches merged after leg 108's
+pass, not legs leg 108 missed. The result splits four ways:
+
+- **3 routes were owed a table row and now have one**: Route-NG v1 (leg 58), Route-CP v1
+  (leg 62), Route-BX v1 (leg 126). These are the only legs in the window that *added* a
+  route's BLOG/TECHNICAL pair.
+- **1 route is owed a row that says it did *not* land**: Route-M2 v1 (leg 63), gate YES but
+  escalation #1, parked on `leg/m2-v1` with **0 of its 4 declared artifacts on `main`**. It is
+  listed above as `PARKED, NOT LANDED`, and `fig57` is **reserved** by it rather than missing.
+  This is the first time the parked-escalation convention appears in this file at all.
+- **4 `GAP` marks on 3 existing rows were false and are corrected** (Route-PORT v1 `E`/`F`,
+  Route-PORT v2 `E`/`F`, Weight-repairs v1 `E`) — see gap-list items 1, 2 and 9. Three of
+  these went stale when leg 60 landed; the fourth was **incorrect when leg 108 wrote it**.
+- **29 of the 33 legs produced no BLOG/TECHNICAL and no figure**, by design, under the same
+  "no measurement, no figure" convention: legs **71, 83, 85, 89, 92, 98, 99, 100, 101,
+  103, 104, 105, 106, 107, 111, 112, 113, 114, 115, 116, 117, 119, 120, 121, 123, 131, 134,
+  136, 141**. All 33 file both `experiments/journal/leg_N.md` and `writeup/novelty/leg_N.md`,
+  and 32 of 33 file a curated JSON under `writeup/data/`. **No row is owed for any of them**
+  and nothing about this set is `GAP`.
+
+One state this file previously had no way to express, and now does: a route can be **landed
+with a parked escalation attached**. Route-NG v1 is that case — its own TECHNICAL header says
+"parked, not merged" of its *publication scoping*, while the route itself was ruled mergeable
+and `plan_of_record.py` prints stage `NG` as done. Route-M2 v1 is the different, stricter case:
+nothing merged. The two are not the same status and the rows say so.
+
 ## Quartet gaps found (plain list)
 
 1. **Route-PORT v1** (`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md`) — has a runner
@@ -145,6 +191,9 @@ against the files on disk; the full per-leg inventory is in
    radius — a load-bearing negative finding that currently has no rebuildable figure. Not
    fixed here: writing an `evidence.py` and choosing what to plot is a claim-bearing
    decision about how to represent the numbers, out of DOCS's mechanical-only remit.
+   **✅ CLOSED by leg 60, recorded by leg 138.** Both named pieces now exist:
+   `experiments/p2_route_port_v1_bordered_evidence.py` and
+   `writeup/figures/fig59_route_port_v1.png`. The row above reads `Y†` / `fig59`.
 2. **Route-PORT v2** (`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md`) — has runner
    (`experiments/p2_route_port_v2_reach.py`) and curated data
    (`writeup/data/p2_route_port_v2_reach.json`), but is missing all of: `BLOG_P2_ROUTEPORT_V2.md`,
@@ -152,6 +201,10 @@ against the files on disk; the full per-leg inventory is in
    result (truncation gap gets worse with reach) and per lesson 76 deserves the same care as
    a positive one. Not fixed here — writing the BLOG/TECHNICAL prose and picking what the
    figure should show is a claim-bearing decision, out of DOCS's mechanical-only remit.
+   **◐ NARROWED by leg 60, recorded by leg 138: 2 of the 3 named pieces now exist**
+   (`experiments/p2_route_port_v2_reach_evidence.py` and
+   `writeup/figures/fig60_route_port_v2.png`). **`BLOG_P2_ROUTEPORT_V2.md` is still absent**
+   and this item now stands for that one clause alone.
 3. **fig42 (Route-M v1)** — `p2_route_m_v1_evidence.py` references
    `writeup/figures/fig42_route_m_v1_targets.png`, which was absent from the repo (all other
    `fig1..fig47` present, fig42 was the one gap). **Fixed this session**: ran
@@ -193,6 +246,12 @@ against the files on disk; the full per-leg inventory is in
    legs 53–57 did not reach it. It had been referenced only obliquely, as the other half of the
    duplicated `fig48` in item 8. **Row added above**; the missing `*_evidence.py` stays `GAP` —
    writing one is a claim-bearing choice about what to plot, outside a links-and-labels remit.
+   **✖ WITHDRAWN by leg 138 — this clause was wrong when written, not stale.**
+   `writeup/4_p2_lottery/p2_weight_repairs_v1_evidence.py` exists and landed in `9d9b7ea`, the
+   same commit that created the route, which **pre-dates leg 108's own pass**. So the route has
+   **5 of 5** quartet pieces, not 4, and the `E` mark in its row is corrected to `Y`. The rest
+   of item 9 (why leg 68's by-number pass missed the route) stands. This is the only claim in
+   the file that failed for this reason rather than by going stale.
 10. **Route-KA v1 (leg 61) has TECHNICAL but no BLOG, no `*_evidence.py` and no figure** (found
    by leg 108). Runner `experiments/p2_route_ka_v1_kawahara.py` and curated data
    `writeup/data/p2_route_ka_v1_kawahara.json` are both present, and this is the leg that
@@ -205,6 +264,20 @@ against the files on disk; the full per-leg inventory is in
    flag, larger backlog. Confirmed on disk: `writeup/README.md`'s list still ends at entry 47
    and contains 0 mentions of Weight-repairs (v1 or v2) or Route-KA/Kawahara. The three rows and
    the convention block added above cover the gap here in the meantime.
+   **Re-checked by leg 138 and still true in substance, with one qualifier retired**: the
+   numbered list still ends at entry 47, still skips 45, and still has 0 mentions of
+   Weight-repairs or Route-KA/Kawahara — but it is no longer *untouched*, because leg 60 edited
+   entries 46 and 47 (adding the `fig 59` / `fig 60` references and a reproduction-check block).
+   The backlog grows by this window's 33 legs on top of the 58–102 window's. Same reason as
+   item 4 for not fixing it here (numeric prose, out of remit), same flag, larger backlog.
+12. **Figure-number registry has 2 unallocated numbers and 1 reserved one** (found by leg 138).
+   `writeup/figures/` holds 58 PNGs. **`fig53` and `fig54` name no file and are cited by no
+   writeup** — an unallocated hole below the `fig55`–`fig60` block `DIRECTION.md` pre-allocated;
+   `reports/TECH_DEBT_REVIEW_2026-08-05.md` row A3 independently records the same hole, together
+   with item 8's duplicated `fig48`. **`fig57` is different: it is *reserved*, not missing** —
+   pre-allocated to leg 63 / Route-M2, which is parked and unmerged (see its row above). Not
+   fixed here: renumbering is a registry ruling over citation keys already baked into banked
+   prose, which is exactly what row A3 says it needs, and it is not a links-and-labels decision.
 
 Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
 the Arc 4 table above.

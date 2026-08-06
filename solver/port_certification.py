@@ -107,10 +107,10 @@ WHAT THIS IS NOT
 * **No link of the L1->L4 chain moved.**  A blocked link is not a moved link.
 """
 
-import math
-import numbers
-
 import numpy as np
+
+from solver.certificate_guards import (
+    NAN_HINT_GE_ONE, hypothesis_violations as _shared_hypothesis_violations)
 
 # --------------------------------------------------------------------------
 # a small dependency-free GMRES (there is no scipy in this environment)
@@ -335,25 +335,17 @@ def _hypothesis_violations(Y0, Z1, Z2):
     Returns a list of strings naming the offending constant and the hypothesis it breaks.
     The offending VALUES are deliberately not echoed into the returned dict's `Y0`/`Z1` keys:
     a rejected fabrication must not be reported in the same slot as a measured bound.
+
+    SINCE LEG 128 THIS DELEGATES to `solver.certificate_guards.hypothesis_violations`, the
+    one guard all three radii-polynomial pipelines share.  The predicate, the message
+    strings and the `None`-is-NOT-MEASURED policy are unchanged byte-for-byte; what changed
+    is that `interval_certificate.py` and `nk_bounds.py` now read the SAME predicate instead
+    of a copy of it.  `allow_none=True` is this module's kill-switch semantics and is the
+    reason the shared guard takes the flag at all.
     """
-    bad = []
-    for name, v in (("Y_0", Y0), ("Z_1", Z1), ("Z_2", Z2)):
-        if v is None:
-            continue
-        if not isinstance(v, numbers.Real):
-            raise TypeError(f"{name} must be a real number or None, got "
-                            f"{type(v).__name__}; the radii polynomial's constants are "
-                            f"norms.")
-        f = float(v)
-        if math.isnan(f):
-            bad.append(f"{name} is NaN (a norm bound cannot be NaN; note that `NaN >= 1.0` "
-                       f"is False, so an unguarded NaN would slip past the contraction test)")
-        elif math.isinf(f):
-            bad.append(f"{name} is {'+' if f > 0 else '-'}infinite (a norm bound is finite "
-                       f"by hypothesis)")
-        elif f < 0.0:
-            bad.append(f"{name} is negative ({f!r}); it is an upper bound on a norm")
-    return bad
+    return _shared_hypothesis_violations(
+        (("Y_0", Y0), ("Z_1", Z1), ("Z_2", Z2)),
+        allow_none=True, nan_hint=NAN_HINT_GE_ONE)
 
 
 def radii_polynomial_status(Y0, Z1, Z2=None):

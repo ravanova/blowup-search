@@ -243,7 +243,18 @@ CAPABILITIES = [
                    "of the family has a NEGATIVE gap converging to -(3-gamma)/2 (measured "
                    "-1.499886, -1.006201, -0.499924 at gamma = 0,1,2), because damping at the "
                    "origin needs gamma > 3 while the basis is in L^2_phi only for gamma < 3 -- "
-                   "the SAME threshold, so the window has ZERO width. gamma = 3's apparent "
+                   "the SAME threshold, so the window has ZERO width ON THIS UNCONSTRAINED "
+                   "ODD-SINE TRIAL SPACE (p=1 vanishing order). Leg 141 (Route-WEL) found "
+                   "this content published -- not as this sentence, but as a special case: "
+                   "Elgindi-Ghoul-Masmoudi arXiv:1906.05811 Prop 2.1 certifies a POSITIVE "
+                   "gap of exactly 1/2 at gamma=4 on the SAME a=0 CLM linearization under "
+                   "hypotheses that ARE these two thresholds, imposed on the perturbation "
+                   "(not tested on a fixed basis); the window (3, 2p+1) by trial-space "
+                   "vanishing order p is 0 at p=1, 2 at p=2, 4 at p=3, containing gamma=4 "
+                   "for p>=2. Leg 111's own measurements are unchanged; what is capped is "
+                   "reading them as a structural obstruction rather than a property of the "
+                   "p=1 trial space. Independently verified line-by-line, leg 141's own "
+                   "post-landing review (2026-08-06). gamma = 3's apparent "
                    "+4e-3 gap collapses like n^-1 (0.0426 -> 0.000121 over n = 16..256) AND "
                    "moves with the quadrature cutoff (+0.002938 -> +0.004005), i.e. it is a "
                    "statement about the code. The Lambda^1 positive control reports the OTHER "
@@ -251,9 +262,54 @@ CAPABILITIES = [
                    "measurement. Float64; measured on the friendliest object, so the wall "
                    "bounds HL_S2_nonsymmetric FROM BELOW only"),
      "test": "test_energy_coercivity.py"},
+    {"module": "solver/certificate_guards.py",
+     "object": "radii polynomial hypotheses, the ONE shared guard",
+     "holds": ("the single validation predicate all three certificate-assembly modules "
+               "call -- Y_0/Z_0/Z_1/Z_2 finite and nonnegative, r_min admissible, "
+               "Holder-exponent ranges, weights that come from a norm"),
+     "validated": ("leg 128: the same defect was measured three times -- "
+                   "port_certification.py 11/25 (leg 79), interval_certificate.py 12/36\n"
+                   "                   (leg 98), nk_bounds.py 21/52 (leg 116) -- and the "
+                   "first two were repaired by COPYING one private function. Both copies "
+                   "are now deleted and all three call this module: identity holds for "
+                   "all three post-repair and for NONE pre-repair (the control comes out\n"
+                   "                   differently), 0 inline copies remain (was 2 + 2), "
+                   "and the three agree on a 7-case drift battery. 17 of leg 116's 21 "
+                   "false-closing certificates now reject; the 4 that remain supply "
+                   "constants that are nonnegative and finite, i.e. that SATISFY the\n"
+                   "                   theorem's hypotheses and lie about a MAGNITUDE, "
+                   "which no hypothesis guard can detect. NO known-answer gate of its own "
+                   "-- it is exercised through the three modules' suites and through "
+                   "test_repaired_all_three_modules_share_one_guard. Purely a REJECTION\n"
+                   "                   layer: 4626/4626 clean-input values across the "
+                   "three modules are bit-identical at 0 ULP against the pre-repair "
+                   "sources, so no banked number moved. The documented differences "
+                   "SURVIVE as parameters (port_certification's None-is-NOT-MEASURED\n"
+                   "                   kill-switch, interval_certificate's raise-on-None, "
+                   "three NaN parentheticals byte-for-byte, nk_bounds' fourth Z_0 slot)"),
+     "test": "test_nk_bounds_adversarial.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",
-     "validated": ("agrees with hand-computed cases; Route-D v6 found the discrete-ball\n                   TRAP here -- the bound was true and useless"),
+     "validated": ("agrees with hand-computed cases; Route-D v6 found the discrete-ball\n                   TRAP here -- the bound was true and useless. `budget` validated only\n"
+                   "                   Z_2 > 0 until leg 128: leg 116 measured 21/52 "
+                   "hypothesis-violating inputs returning a CLOSING certificate (19 "
+                   "load-bearing), the sharpest a certified ball [0.8083, 1.1917] around "
+                   "the NON-solution x=1.0 of F=x^2-2, containing no zero of F and\n"
+                   "                   missing sqrt(2) by 1.161 ball radii. It now routes "
+                   "hypothesis validation through solver/certificate_guards.py (17 of the "
+                   "21 reject; the 4 remaining are hypothesis-SATISFYING magnitude lies), "
+                   "refuses alpha >= 2 in farfield_modelling_error_bound (it returned a\n"
+                   "                   max over a truncated window as a supremum, >5e7x "
+                   "below the truth at alpha=3.0) and returns argmax_at_window_end, "
+                   "refuses gamma outside (0,1] (a negative gamma flipped the 1/gamma "
+                   "near-field term and REDUCED the claimed bound), and refuses\n"
+                   "                   non-positive/NaN q_cod or v_cod (the "
+                   "`1/q if q>0 else 0` mask dropped the dual bound 2.19x / 3.57x). "
+                   "NOT repaired in value: _I_out's log-grid floor falls 2.12% below the "
+                   "truth from X=1e11, because lowering it moves 15/15 clean live-range\n"
+                   "                   values (worst 1.08e-04 relative); X > 1e10 WARNS "
+                   "instead, and the live range tops out at X=3.2e7, 3.49 decades clear. "
+                   "4527/4527 of this module's clean values bit-identical at 0 ULP"),
      "test": "test_nk_bounds.py"},
     {"module": "solver/op_lower.py", "object": "a LOWER bound on ||A||",
      "holds": "the lower bound that says how much room the upper bounds have left",

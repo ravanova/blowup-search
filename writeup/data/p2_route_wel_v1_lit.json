@@ -1,0 +1,340 @@
+{
+  "leg": 141,
+  "route": "WEL",
+  "kind": "literature",
+  "gate": "Does any published work contain leg 111's zero-width-window obstruction (the damping/space gamma-threshold coincidence on the CLM linearization), explicitly or as a special case of a stated more-general result?",
+  "gate_answer": "YES",
+  "gate_answer_branch_verbatim": "The third realization's death was pre-empted in the literature. Record the located statement with hypotheses verbatim; cap the finding's novelty accordingly wherever it is cited.",
+  "claim_under_test": "damping at the origin needs gamma > 3 while the basis is in L^2_phi only for gamma < 3 -- the SAME threshold, so the window has ZERO width.   [capabilities.py, the solver/energy_coercivity.py row]",
+  "claim_source": "capabilities.py, the solver/energy_coercivity.py row (leg 111)",
+  "located": [
+    {
+      "id": "EGM-P21",
+      "paper": "1906.05811",
+      "cite": "Elgindi, Ghoul, Masmoudi, Stable self-similar blowup for a family of nonlocal transport equations, Anal. PDE 14 (2021) 891",
+      "locator": "Proposition 2.1 (sec 2, Coercivity)",
+      "supplies": "BOTH halves, as hypotheses, with a POSITIVE gap at gamma = 4",
+      "quote": "There exists a universal constant C > 0 so that if a is small enough and if f is odd, f'(0) = Hf(0) = 0 and int_R |f|^2 phi(y) dy < +infty, then int_R f M_a f phi(y) dy <= (-1/2 - C|a|) int_R f(y)^2 phi(y) dy.",
+      "fragment": "f is odd, f \u2032 (0) = Hf (0) = 0",
+      "why_it_is_the_answer": "The three hypotheses ARE leg 111's two thresholds, imposed on the perturbation instead of tested on a fixed basis: `int |f|^2 phi < infty` is leg 111's admissibility test verbatim, and `f odd, f'(0) = 0` is what a function must satisfy to pass it at this weight.  The weight is gamma = 4, PAST leg 111's damping threshold 3, and the gap is nonetheless -1/2.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1906.05811.pdf"
+    },
+    {
+      "id": "EGM-WEIGHT",
+      "paper": "1906.05811",
+      "cite": "same paper, Main Theorem (weighted space definition)",
+      "locator": "sec 1, `Main Theorem`, the definition of L^2_phi",
+      "supplies": "the weight exponent: gamma = 4 at the origin",
+      "quote": "phi = (1 + y^2)^2 / y^4",
+      "fragment": "L2loc (R) :",
+      "why_it_is_the_answer": "Same weight as Chen-Hou-Huang (3.6) up to the b-normalization; gamma = 4 near the origin, i.e. exactly leg 111's `A4_chen_hou` member.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1906.05811.pdf"
+    },
+    {
+      "id": "EGM-A0-IS-CLM",
+      "paper": "1906.05811",
+      "cite": "same paper, sec 1 (the family (1.4)) and (1.6)-(1.8)",
+      "locator": "sec 1",
+      "supplies": "the object: a = 0 of their family IS the CLM model, with F_0 = y/(1+y^2)",
+      "quote": "when a = 2 we get the De Gregorio model and when a = 0 we get CLM model ... When a = 0, the profile F_0 has the form F_0(y) = y/(1 + y^2), HF_0(y) = -1/(y^2 + 1)",
+      "fragment": "when a = 0 we get CLM",
+      "why_it_is_the_answer": "Fixes that Prop. 2.1 covers leg 111's object.  F_0 = y/(1+y^2) is leg 111's Omega(y) = -y/(y^2 + 1/4) up to the scaling symmetry the paper itself records (F_{a,mu}(z) := F_a(mu z) leaves (1.7) invariant) and the sign convention; a dilation of y does not change a decay RATE, which is why the constant 1/2 is the same number Xu publishes on the b = 1/2 normalization.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1906.05811.pdf"
+    },
+    {
+      "id": "EGM-PRICE",
+      "paper": "1906.05811",
+      "cite": "same paper, sec 3 (Modulation equation and derivation of the law)",
+      "locator": "sec 3, opening sentence",
+      "supplies": "the published RESOLUTION: the origin constraints are bought by modulation",
+      "quote": "Since our coercivity estimate from the previous section relies on d_y q(0) = H(q)(0) = 0, we will use that we have the 'free' parameters mu and lambda to fix these conditions.",
+      "fragment": "relies on \u2202y q(0) = H(q)(0) = 0",
+      "why_it_is_the_answer": "The window is not free: it is paid for with two modulation parameters.  That is the move leg 111's fixed-basis realization does not make.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1906.05811.pdf"
+    },
+    {
+      "id": "CHH-DAMPING",
+      "paper": "1905.06387",
+      "cite": "Chen, Hou, Huang, On the finite time blowup of the De Gregorio model for the 3D Euler equation, CPAM (doi 10.1002/cpa.21991)",
+      "locator": "sec 2.1, Derivation of the damping term",
+      "supplies": "the DAMPING half: choose the exponent so the multiplier is negative",
+      "quote": "For x close to 0, we choose a singular weight x^{-k}, k in N^+ to take advantage of the stretching term. ... Using integration by parts, we obtain I = < -C(k-1)/2 + (c_omega + u_x), omega^2 x^{-k} > = <D, omega^2 x^{-k}>.  We will choose k so that the coefficient D is negative (we choose k = 4 for a = 1 and small |a|).",
+      "fragment": "We will choose k so that the coefficient D is negative",
+      "why_it_is_the_answer": "This is leg 111's D_phi, obtained the same way (integration by parts of the transport term into a single multiplier), on the same family, with the same chosen exponent 4.  `Damping at the origin needs gamma > 3` is this sentence.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1905.06387.pdf"
+    },
+    {
+      "id": "CHH-SQUEEZE",
+      "paper": "1905.06387",
+      "cite": "same paper, sec 2.1",
+      "locator": "sec 2.1, two paragraphs below the damping derivation",
+      "supplies": "the SQUEEZE itself, stated in print -- at the FAR FIELD, threshold k = 1",
+      "quote": "In order to control the perturbation omega in the far field, we have to choose a weight phi that decays more slowly than x^{-1} so that the weighted L^2 norm of omega is not too weak for large |x|.  As a result, (c_l x + a u) omega_x does not produce a damping term for large |x| in our weighted L^2 estimate after performing integration by parts.  This is one of the subtleties in our analysis.",
+      "fragment": "This is one of the subtleties in our analysis.",
+      "why_it_is_the_answer": "Leg 111's obstruction SHAPE -- the exponent that buys damping is excluded by the exponent the norm can afford, on one and the same integration-by-parts identity -- in print, on this equation family, and named a `subtlety` rather than a no-go.  Located at the far field (threshold k = 1), not the origin (threshold gamma = 3); CHH escape it by taking the far-field damping from the vortex-stretching term instead.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1905.06387.pdf"
+    },
+    {
+      "id": "CHH-P31",
+      "paper": "1905.06387",
+      "cite": "same paper, Proposition 3.1 and the weights (3.6)-(3.7)",
+      "locator": "sec 3, (3.6) and Proposition 3.1",
+      "supplies": "BOTH halves paired, on the b = 1/2 CLM profile: gamma = 4 AND omega_{0,x}(0) = 0",
+      "quote": "phi = -1/omega_x^3 - 1/(b^2 omega_x) = (b^2 + x^2)^2/(b^2 x^4), b = 1/2 ... Note that phi ~ x^{-4} + 1 ... if |a| < a_0 and the initial data omega_bar + omega_0 of (3.4) satisfies that omega_0 is odd, omega_0 in H^2, omega_{0,x}(0) = 0 and E(0) < c|a|",
+      "fragment": "Note that \u03d5 \u224d x\u22124 + 1",
+      "why_it_is_the_answer": "b = 1/2 is leg 111's Omega(y) = -y/(y^2 + 1/4); the profile is obtained, in their words, `by using the exact formula of the solution of (1.3) with a = 0`.  gamma = 4 and omega_{0,x}(0) = 0 appear in ONE proposition on THIS profile.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/1905.06387.pdf"
+    },
+    {
+      "id": "XU-NOGO",
+      "paper": "2607.19762",
+      "cite": "Xu, The spectral picture of self-similar collapse in the Constantin-Lax-Majda equation",
+      "locator": "sec 8 (Discussion)",
+      "supplies": "a published weighted-energy/coercivity NO-GO on this operator -- with a DIFFERENT quantifier and a DIFFERENT mechanism, plus an explicit carve-out naming EGM Prop. 2.1",
+      "quote": "Two natural approaches do not reach the gap.  A weighted-energy/coercivity estimate cannot certify the gap: the far field is already coercive in plain L^2 with the sharp edge, but a local positive multiplier +phi H Omega near the origin (with H Omega(0) > 0) survives every L^2-equivalent weight, so no coercivity certificate in an L^2-equivalent norm reaches the spectral gap.  (The small-a coercivity estimate of Elgindi, Ghoul, and Masmoudi [15, Prop. 2.1], for odd f with f'(0) = Hf(0) = 0 in a singular-weighted space, is not a counterexample but an instance of the realization mechanism of Section 3.1: the singular weight and origin constraints define their own realization, in which a gap is certified; it neither contradicts nor supplies the X-gap here.)",
+      "fragment": "is not a counterexample but an instance of the realization mech",
+      "why_it_is_the_answer": "Two things at once.  (i) A published no-go for weighted-energy coercivity on exactly this operator -- but quantified over L^2-EQUIVALENT weights (bounded above and below), a strictly different class from leg 111's singular phi ~ theta^{-gamma}, and with a different mechanism (a surviving positive multiplier, not a threshold coincidence).  So it is NOT leg 111's result in print.  (ii) The parenthesis hands over the gate's answer: the singular-weight case IS treated, IS attributed, and in it `a gap is certified`.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "XU-EJECTION",
+      "paper": "2607.19762",
+      "cite": "same paper, Appendix A (the weighted semigroup space Y_theta)",
+      "locator": "Appendix A, after Definition A.2 / around (A.20)",
+      "supplies": "the same tension in Xu's own construction: the useful weight EJECTS the modes -- resolved, not called an obstruction",
+      "quote": "Because the weight y^{-2 theta - 1} blows up at the origin, elements of Y_theta carry no pointwise origin traces; the modulation projection is therefore defined on the physical X (which has traces) and mapped into Y_theta, not applied within Y_theta. ... The two symmetry modes are excluded from Y_{3/2} by that weight: the integrands of ||u_1||^2 and ||u_0||^2 behave like y^{-4} and y^{-2} at the origin and diverge.",
+      "fragment": "excluded from Y3/2 by that weight",
+      "why_it_is_the_answer": "The weight that puts the origin's essential line at the damped rate (theta = 3/2, core weight y^{-4}) is the weight that ejects the modes -- leg 111's coincidence in Xu's variables.  Xu does not treat it as an obstruction: the projection is done on X and transferred in.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "CH2D-SQUEEZE",
+      "paper": "2210.07191",
+      "cite": "Chen, Hou, Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data I: Analysis",
+      "locator": "sec 2 (weighted L^2 estimate of (2.32), weight phi = x^{-alpha} y^{-beta})",
+      "supplies": "the same squeeze on a DIFFERENT operator, with a NON-empty but expensive window (alpha >= 14)",
+      "quote": "Since omega(x,0) != 0, eta(x,0) != 0, we need to choose beta < 1 so that the energy is well-defined. ... This forces one to choose a very singular weight to extract a damping term for eta, e.g. alpha >= 14 if beta = 0, a new difficulty which is absent in [17,19,20,35].  We overcome it by using L^infty type estimates",
+      "fragment": "we need to choose \u03b2 < 1 so that the energy is well-defined",
+      "why_it_is_the_answer": "Same integration-by-parts identity, same squeeze, and -- decisively -- the same MECHANISM: it is the NON-VANISHING of the perturbation at the singular point (`omega(x,0) != 0`) that caps the exponent.  Leg 111's gamma = 3 is the p = 1 corner of this published phenomenon.  There the window is non-empty but expensive; here it is empty, and the difference is entirely the trial space.",
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2210.07191.pdf"
+    }
+  ],
+  "located_source": "recomputed from Papers/*.pdf",
+  "sentence_searched_and_not_found": {
+    "sentence": "the exponent needed for damping at the origin equals the exponent at which the weighted space stops containing the perturbation, so the admissible window has ZERO width",
+    "queries": [
+      "\"a=0\" CLM equation energy method fails no damping weight cannot give damping at origin scaling exponent 3",
+      "gCLM De Gregorio weighted energy estimate weight exponent k must exceed threshold for damping but weighted norm finite only below same threshold incompatible no admissible weight",
+      "no weighted L2 space can simultaneously give damping at the origin and contain the perturbation self-similar blowup one-dimensional model obstruction weight exponent coincide"
+    ],
+    "on_topic_hits": 0,
+    "reading": "The SENTENCE is unpublished.  The gate does not ask for the sentence -- it asks whether published work CONTAINS the obstruction `explicitly or as a special case of a stated more-general result`, and EGM Prop. 2.1 is that more general result."
+  },
+  "window_by_trial_space": {
+    "definition": "membership near the origin: integrand ~ theta^(2p - gamma), finite iff gamma < 2p + 1.  damping: D_phi(0) = (3 - gamma)/2 < 0 iff gamma > 3.  window = (3, 2p+1), width 2p - 2.",
+    "scope_of_this_check": "It decides the MEMBERSHIP half only -- exactly the half leg 111's `admissibility()` gate decides, and exactly the half that makes leg 111's window zero-width.  EGM's further hypothesis Hf(0) = 0 constrains the COERCIVITY, not the membership, and is not tested here; no coercivity gap is recomputed by this leg on any trial space.",
+    "family": "A",
+    "measurements": [
+      {
+        "p": 1,
+        "gamma": 3.0,
+        "membership_threshold_gamma_lt": 3,
+        "predicted_convergent": false,
+        "norm2_coarse": 26.935548429050133,
+        "norm2_fine": 43.57108076248881,
+        "ratio": 1.6176051093690436,
+        "norm2_ladder": [
+          26.935548429050133,
+          35.253314595769474,
+          43.57108076248881
+        ],
+        "increments": [
+          8.317766166719341,
+          8.317766166719338
+        ],
+        "increment_ratio": 0.9999999999999996,
+        "measured_convergent": false
+      },
+      {
+        "p": 1,
+        "gamma": 4.0,
+        "membership_threshold_gamma_lt": 3,
+        "predicted_convergent": false,
+        "norm2_coarse": 213955931254.6361,
+        "norm2_fine": 3.5895848731533573e+18,
+        "ratio": 16777216.000061583,
+        "norm2_ladder": [
+          213955931254.6361,
+          876363494422205.8,
+          3.5895848731533573e+18
+        ],
+        "increments": [
+          876149538490951.1,
+          3.5887085096589353e+18
+        ],
+        "increment_ratio": 4095.9999999999995,
+        "measured_convergent": false
+      },
+      {
+        "p": 2,
+        "gamma": 3.0,
+        "membership_threshold_gamma_lt": 5,
+        "predicted_convergent": true,
+        "norm2_coarse": 0.8,
+        "norm2_fine": 0.7999999999999998,
+        "ratio": 0.9999999999999998,
+        "norm2_ladder": [
+          0.8,
+          0.7999999999999999,
+          0.7999999999999998
+        ],
+        "increments": [
+          -1.1102230246251565e-16,
+          -1.1102230246251565e-16
+        ],
+        "increment_ratio": null,
+        "measured_convergent": true
+      },
+      {
+        "p": 2,
+        "gamma": 4.0,
+        "membership_threshold_gamma_lt": 5,
+        "predicted_convergent": true,
+        "norm2_coarse": 1.1780972450961722,
+        "norm2_fine": 1.1780972450961724,
+        "ratio": 1.0000000000000002,
+        "norm2_ladder": [
+          1.1780972450961722,
+          1.1780972450961724,
+          1.1780972450961724
+        ],
+        "increments": [
+          2.220446049250313e-16,
+          0.0
+        ],
+        "increment_ratio": null,
+        "measured_convergent": true
+      },
+      {
+        "p": 3,
+        "gamma": 3.0,
+        "membership_threshold_gamma_lt": 7,
+        "predicted_convergent": true,
+        "norm2_coarse": 0.5079365079365079,
+        "norm2_fine": 0.507936507936508,
+        "ratio": 1.0000000000000002,
+        "norm2_ladder": [
+          0.5079365079365079,
+          0.5079365079365079,
+          0.507936507936508
+        ],
+        "increments": [
+          0.0,
+          1.1102230246251565e-16
+        ],
+        "increment_ratio": null,
+        "measured_convergent": true
+      },
+      {
+        "p": 3,
+        "gamma": 4.0,
+        "membership_threshold_gamma_lt": 7,
+        "predicted_convergent": true,
+        "norm2_coarse": 0.4908738521234052,
+        "norm2_fine": 0.4908738521234051,
+        "ratio": 0.9999999999999999,
+        "norm2_ladder": [
+          0.4908738521234052,
+          0.4908738521234051,
+          0.4908738521234051
+        ],
+        "increments": [
+          -5.551115123125783e-17,
+          0.0
+        ],
+        "increment_ratio": null,
+        "measured_convergent": true
+      }
+    ],
+    "windows": [
+      {
+        "p": 1,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 3.0,
+        "window_width": 0.0,
+        "contains_gamma_4_the_published_exponent": false,
+        "who_lives_here": "leg 111's trial basis sin k theta -- ZERO WIDTH, the banked claim"
+      },
+      {
+        "p": 2,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 5.0,
+        "window_width": 2.0,
+        "contains_gamma_4_the_published_exponent": true,
+        "who_lives_here": "exponent-counting proxy for EGM's f'(0) = 0 (NB sin^2 is not odd, so this row is arithmetic on the exponent only)"
+      },
+      {
+        "p": 3,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 7.0,
+        "window_width": 4.0,
+        "contains_gamma_4_the_published_exponent": true,
+        "who_lives_here": "sin^3 theta: odd AND f'(0) = 0, so a genuine witness for the MEMBERSHIP half of EGM's hypothesis (it does NOT satisfy their further Hf(0) = 0, which constrains the coercivity, not the membership)"
+      }
+    ]
+  },
+  "leg111_instrument_control": {
+    "available": true,
+    "source": "writeup/data/p2_route_we_v1_coercivity.json",
+    "checks": [
+      {
+        "weight": "A3",
+        "gamma": 3.0,
+        "banked_norm2_coarse": 26.935548429050133,
+        "recomputed_norm2_coarse": 26.935548429050133,
+        "abs_diff_coarse": 0.0,
+        "banked_ratio": 1.6176051093690436,
+        "recomputed_ratio": 1.6176051093690436,
+        "rel_diff_ratio": 0.0,
+        "bit_identical_coarse": true
+      },
+      {
+        "weight": "A4_chen_hou",
+        "gamma": 4.0,
+        "banked_norm2_coarse": 213955931254.6361,
+        "recomputed_norm2_coarse": 213955931254.6361,
+        "abs_diff_coarse": 0.0,
+        "banked_ratio": 16777216.000061583,
+        "recomputed_ratio": 16777216.000061583,
+        "rel_diff_ratio": 0.0,
+        "bit_identical_coarse": true
+      }
+    ]
+  },
+  "constant_triangulation": {
+    "quantity": "the coercivity/damping constant at the published weight exponent gamma = 4",
+    "leg111_D_phi_at_origin_gamma_4": -0.5,
+    "leg111_formula": "D_phi(0) = (3 - gamma)/2, from solver/energy_coercivity.py",
+    "EGM_prop_2_1_constant_at_a_0": -0.5,
+    "EGM_locator": "arXiv:1906.05811 Prop. 2.1, the constant -1/2 - C|a| at a = 0",
+    "XU_modulated_gap": 0.5,
+    "XU_locator": "arXiv:2607.19762, published modulated spectral gap 1/2; already banked as KNOWN_ANSWER_CEILING in solver/energy_coercivity.py",
+    "max_abs_discrepancy": 0.0,
+    "reading": "Leg 111's own damping formula, evaluated at the exponent the literature actually uses, returns the literature's own coercivity constant to machine zero.  The damping half of the coincidence is not merely published -- it is the published constant."
+  },
+  "what_is_capped": "Leg 111's MEASUREMENTS stand untouched and are not re-run here.  What does not survive is the READING of them as a candidate structural obstruction to Chen-Hou-style weighted-energy certification on this operator class: the window is zero-width on the UNCONSTRAINED odd-sine trial space, which is not the space the published method is run in, and that method's first hypothesis is the one that reopens it.",
+  "what_is_NOT_claimed": "No ban is lifted, no route promoted, no link of L1 -> L4 moved.  EGM's positive gap is on the a = 0 CLM object -- this repository's friendliest substrate, whose blowup is explicit (Constantin-Lax-Majda 1985) -- and not on HL_S2_nonsymmetric.  L1 stays measured-dead in all three realizations.",
+  "novelty_log": "writeup/novelty/leg_141.md",
+  "journal": "experiments/journal/leg_141.md",
+  "figure": "none -- no measurement of a curve (the 'no measurement, no figure' convention)"
+}

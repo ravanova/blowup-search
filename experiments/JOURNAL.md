@@ -2827,8 +2827,10 @@ Full detail and the audit's own counts: `writeup/novelty/leg_72.md`,
 
 No link of the L1->L4 chain moved in any of the eight. Clay unchanged at ~0.05%.
 
-Legs 58, 59, 61, 62, 63 and 71 have branch progress but no answered gate, so they are
-deliberately absent from this block.
+Legs 58, 59, 61, 62 and 71 have since answered their gates and landed (see their pointer
+lines below, added at leg 137/JR3's flag — this sentence originally said all six had "no
+answered gate"; only leg 63 (Route-M2) still fits that description, parked as `leg/m2-v1`,
+escalation #1, unmerged).
 
 ## Legs 59-97 (2026-08-06) — the twenty gates that answered after leg 72's pass
 
@@ -3041,3 +3043,49 @@ belong to a future window.
   safe. Not patched.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
+
+## Pointer catch-up (leg 137/JR3's flag) — 15 legs with landed gates and no prior pointer
+
+Pointers only, per JR2/JR3 convention; full detail in each `experiments/journal/leg_N.md`.
+
+- **Leg 58 (Route-NG) — YES:** the no-go is a THEOREM on the class `A21 = 0`: `Z_1 >= 1`
+  at every `K`, every `s < 1`, three-line proof off the `(I - AL)x` block structure. The
+  general `A21 != 0` class stays measured only (battery floor 8.9591). Merged as-is by DM
+  ruling; stage `NG` -> DONE, stage `B` -> NEXT.
+- **Leg 71 (Route-CAP) — capabilities.py self-audit, landed.**
+- **Leg 85 (Route-GRA) — YES:** `gclm_rescaled.py`'s relaxation loop false-converges after
+  1 step on certain gauge-scale trajectories. Bench-repaired.
+- **Leg 98 (Route-ICA) — YES:** `interval_certificate.py` has the same Y0/Z0/Z1
+  fabrication-acceptance gap as leg 79's `port_certification.py`. Bench-repaired.
+- **Leg 100 (Route-HNA) — YES:** `holder_norms.py` silently accepts NaN/Inf/degenerate
+  input across 6 mechanisms. Bench-repaired, independently re-confirmed by leg 131.
+- **Leg 101 (Route-OLA) — YES:** `op_lower.py`'s lower bound is violated in 47 of 209
+  adversarial cases. Bench-repaired, independently re-confirmed by leg 132.
+- **Leg 105 (Route-ICB) — YES:** post-repair regression check on `interval_certificate.py`,
+  leg 98's battery independently re-derived, 0/36 false accepts, bitwise same-process match.
+- **Leg 107 (Route-FIA) — YES, escalated not patched:** `first_integral.py` fabricates
+  out-of-support values and NaN-absorbs; bench-repaired (compact-support guard).
+  Independently re-confirmed by leg 135.
+- **Leg 108 (Route-IX2) — second freshness audit of `writeup/INDEX.md` since leg 68.**
+- **Leg 123 (Route-EXT6) — NO:** literature watch, 0/17 channels find a new certified
+  inviscid self-similar profile or completed dissipative gCLM certificate.
+- **Leg 126 (Route-BX) — NO:** stage `B`'s full declared search space (1,686
+  configurations) is fully covered by the banked record, zero uncovered; even a perfect
+  search over the unexplored headroom lands at `Z_1 >= 6.0424`, 6.04x short. The committed
+  sequence is now exhausted (escalation #1, parked for the user).
+- **Leg 131 (Route-HNB) — YES:** independent re-confirmation of leg 100's `holder_norms.py`
+  repair, 14/31 -> 0/31 silent cases, 19/19 clean values bit-identical.
+- **Leg 134 (Route-FGB) — YES:** independent re-confirmation of leg 91's
+  `fractional_gclm.py` repair, 7/7 cases closed at construction, `s_c` bit-identical.
+- **Leg 136 (Route-MF2) — NO:** gate 11's 5 remaining divergent-trajectory misses
+  decompose into 3 mechanisms; 0 of 5 pre-named criteria admit a separating threshold.
+- **Leg 141 (Route-WEL) — YES:** leg 111's zero-width weighted-energy window is published
+  in content (Elgindi-Ghoul-Masmoudi Prop 2.1 et al.), though not as a literal sentence;
+  caps the reading of leg 111's numbers, does not rewrite them. Verified line-by-line by a
+  post-landing review: all 10 quoted fragments confirmed genuine in freshly-downloaded
+  PDFs, the numeric coincidence re-derived as a structural identity. Two process gaps
+  flagged by the verifier, not the math: the novelty cap was never written back into
+  `capabilities.py` (fixed in this same integration commit) and the DOCS quartet lacks
+  BLOG/TECHNICAL files (precedent-conformant with leg 65/L1G, flagged for a DOCS pass).
+
+No link of the L1->L4 chain moved in any of the fifteen. Clay unchanged at ~0.05%.

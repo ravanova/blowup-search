@@ -1,4 +1,5 @@
-"""ADVERSARIAL gates for solver/nk_bounds.py -- Route-NKA, leg 116.
+"""ADVERSARIAL gates for solver/nk_bounds.py -- Route-NKA (leg 116, measured) and
+Route-NKR (leg 128, REPAIRED and pins inverted).
 
 `test_nk_bounds.py` (Route-D, legs v6-v11) tests that this module COMPUTES correctly: every
 quantity in it dominates an independently computed measurement, and it is checked against an
@@ -18,19 +19,28 @@ misses the nearest zero `sqrt(2)` by **1.161 ball radii**.  The full battery, wi
 constant, every ball and every ratio, is
 `experiments/p2_route_nka_v1_adversarial.py` -> `writeup/data/p2_route_nka_v1_adversarial.json`.
 
-**THIS FILE DOES NOT PATCH ANYTHING, AND MUST NOT BE READ AS AN ENDORSEMENT.**  DIRECTION.md
-declares leg 116 read-only on `solver/nk_bounds.py` under BOTH branches of its gate; the
-repair belongs to a bench-repair agent under the orchestrator's authority, exactly as legs
-79, 98 and 69 were handled.  So the gates below split into three kinds, stated in each
-docstring, following leg 98's convention verbatim:
+**LEG 128 LANDED THE REPAIR, AND THIS FILE IS ITS RECORD.**  Leg 116 was read-only on
+`solver/nk_bounds.py` under both branches of its gate.  Leg 128 (Route-NKR) then closed the
+gap with ONE guard shared by all three certificate-assembly modules
+(`solver/certificate_guards.py`), rather than a third private copy of legs 79/98's function,
+and **inverted every GAP-PIN gate below in the same commit** -- which is what those pins were
+for.  Post-repair, of leg 116's 21 false accepts **17 reject and 4 remain**, and the 4 are a
+named class, not a leftover: their constants are nonnegative and finite, so they SATISFY the
+theorem's hypotheses and lie about a MAGNITUDE instead.  No hypothesis guard can see that.
 
-  * **GAP-PIN gates** assert the DEFECTIVE behaviour as it stands today, so the defect cannot
-    quietly change shape while it waits for repair (lesson 68: a finding kept in prose decays
-    at the rate of memory; a finding kept as an assertion does not).  **These gates will fail
-    the day the guard lands -- INVERT them, do not weaken them.**  Each names its inversion.
-  * **HOLDS gates** assert the checks that ARE in place and must never regress -- the NaN and
-    `+inf` rejections in `budget`, the `alpha <= 1` refusal in `cos_power_mass`, and the
-    `gamma = 0` division that raises instead of returning a number.
+So the gates below split into four kinds, stated in each docstring:
+
+  * **REPAIRED gates** (`test_repaired_*`) are leg 116's GAP-PINs, inverted exactly as each
+    pin's own docstring prescribed.  The pre-repair magnitude is kept in every docstring: a
+    repaired defect whose size is forgotten is one that can come back at a different size.
+  * **STILL-A-GAP gates** (`test_still_a_gap_*`) are the two clauses leg 128 did NOT close in
+    value, marked rather than dropped -- `_I_out`'s log-grid floor (closed as a WARNING,
+    because lowering it moves clean values: 15/15 live-range values move, worst 1.08e-04
+    relative) and the fabricated-magnitude class above.  Each names what would close it.
+  * **HOLDS gates** assert the checks that were ALREADY in place and must never regress --
+    the NaN and `+inf` rejections in `budget`, the `alpha <= 1` refusal in `cos_power_mass`,
+    and the `gamma = 0` refusal (now a named `ValueError`, formerly a bare
+    `ZeroDivisionError`; the intent is pinned, the exception type no longer is).
   * **CONTROL gates** are the positive controls: the honest certificate must still close at a
     genuine approximate zero and must still refuse at the planted point, and the reference
     integrator must still reproduce the module's own published asymptote -- so that a
@@ -199,15 +209,23 @@ def test_holds_nonintegrable_alpha_refuses_instead_of_inventing_a_constant():
 
 
 def test_holds_gamma_zero_raises_rather_than_returning_a_number():
-    """HOLDS.  The near-field half carries a `1/gamma`; `gamma = 0` must raise, not return."""
+    """HOLDS.  The near-field half carries a `1/gamma`; `gamma = 0` must raise, not return.
+
+    THE INTENT IS UNCHANGED; THE EXCEPTION TYPE IMPROVED (leg 128).  Before the repair this
+    was a bare `ZeroDivisionError` from inside the arithmetic -- sound, but leg 98's B20/B21
+    lesson applies: a caller with a broad `except` turns an anonymous arithmetic error into a
+    silent skip.  It is now a `ValueError` raised at the top of the function, naming `gamma`
+    and its range.  This gate asserts what it always meant -- gamma = 0 REFUSES rather than
+    returning a number -- and no longer pins the type it refuses with."""
     try:
         hilbert_farfield_bound(10.0, 1.5, 0.0)
-        raise AssertionError("gamma = 0 returned a bound instead of raising")
     except AssertionError:
         raise
-    except ZeroDivisionError:
-        pass
-    print("  holds: gamma = 0 raises ZeroDivisionError")
+    except (ValueError, ZeroDivisionError) as ex:
+        assert "gamma" in str(ex) or isinstance(ex, ZeroDivisionError), str(ex)
+    else:
+        raise AssertionError("gamma = 0 returned a bound instead of raising")
+    print("  holds: gamma = 0 refuses (now a named ValueError, was ZeroDivisionError)")
 
 
 def test_holds_bounds_are_sound_across_the_whole_live_operating_range():
@@ -237,140 +255,182 @@ def test_holds_bounds_are_sound_across_the_whole_live_operating_range():
 
 
 # ===========================================================================
-# GAP-PIN gates -- the defects, pinned so they cannot drift while awaiting repair
+# REPAIRED gates -- leg 116's GAP-PINs, INVERTED (leg 128)
 # ===========================================================================
+#
+# Each gate below was a GAP-PIN asserting a DEFECT, and each named its own inversion in its
+# docstring.  Leg 128 landed the shared guard (`solver/certificate_guards.py`) and these are
+# those named inversions, applied verbatim -- not weakened, not deleted.  The original
+# magnitudes are kept in the docstrings, because a repaired defect whose size is forgotten
+# is a defect that can come back at a different size (lesson 68).
+#
+# TWO PINS SURVIVE AS PINS, and they are marked STILL-A-GAP rather than quietly dropped:
+# `_I_out`'s bulk floor (closed in the FLAG sense, because lowering it moves clean values)
+# and the fabricated-MAGNITUDE class (structurally undetectable by any hypothesis guard).
 
 
-def test_gap_a_planted_non_solution_survives_inside_a_reported_certified_ball():
-    """GAP-PIN, and it is leg 116's headline -- the gate's question, answered YES.
+def test_repaired_planted_non_solution_no_longer_survives_a_certified_ball():
+    """INVERTED (was `test_gap_a_planted_non_solution_survives_...`), leg 116's headline.
 
-    `F(x) = x^2 - 2`, zeros exactly `+-sqrt(2)`.  The planted point `x = 1.0` is not one:
-    `|F(1.0)| = 1` and the nearest zero is `0.4142...` away.  Honest constants there REFUSE
-    (asserted in the control above).  A single H1 violation -- `Z_0 = -1`, which the published
-    theorem forbids because `Z_0` is a norm -- makes `budget` report `closes=True` with
-    `r_min = 0.09587`, i.e. the certified ball `[0.8083, 1.1917]`.  That ball contains NO zero
-    of `F`: it misses `sqrt(2)` by 1.161 ball radii.
+    `F(x) = x^2 - 2`, zeros exactly `+-sqrt(2)`; the planted point `x = 1.0` is not one.
+    BEFORE: a single `Z_0 = -1` -- forbidden, because `Z_0` is a norm -- made `budget` report
+    `closes=True` with `r_min = 0.19169540264054277`, i.e. the certified ball
+    `[0.8083, 1.1917]`, which contains NO zero of `F` and misses `sqrt(2)` by
+    1.1607902780527646 ball radii.  AFTER: rejected by hypothesis, with the violation naming
+    `Z_0`.
 
-    INVERSION WHEN REPAIRED: assert `closes is False` with a reason naming the violated
-    hypothesis.  Do NOT weaken the ball arithmetic -- it is the finding."""
+    The ball arithmetic is NOT weakened -- it is asserted unreachable instead."""
     honest = _p_constants(P_XPLANT)
     assert not budget(**honest)["closes"], "the control must refuse before the poison is read"
 
     c = dict(honest); c["Z0"] = -1.0
     v = budget(**c)
-    assert v["closes"], ("GOOD NEWS, BAD TEST: a negative Z_0 is now rejected. INVERT this "
-                         f"gate -- assert refusal with a reason. Got {v}")
+    assert v["closes"] is False, f"a negative Z_0 must be REFUSED, got {v}"
+    assert any("Z_0" in s and "negative" in s for s in v["violations"]), (
+        f"the refusal must name Z_0's nonnegativity hypothesis, got {v['violations']}")
+    assert v["reason"].startswith("INVALID_INPUT"), v["reason"]
+    assert math.isnan(v["r_min"]), f"a rejected input must carry no radius, got {v['r_min']}"
+    # and the ball the old defect produced is now unreachable
     ball = _ball_report(P_XPLANT, v)
-    assert ball["contains_a_zero"] is False, (
-        f"expected a certified ball with no zero of F inside it, got {ball}")
-    assert abs(v["r_min"] - 0.19169540264054277) < 1e-12, (
-        f"the pinned radius moved: {v['r_min']!r}")
-    assert abs(ball["gap_in_ball_radii"] - 1.1607902780527646) < 1e-9, (
-        f"the pinned miss distance moved: {ball['gap_in_ball_radii']!r} ball radii")
-    print(f"  GAP: certified ball [{ball['ball_lo']:.4f}, {ball['ball_hi']:.4f}] around the "
-          f"planted non-solution 1.0 holds NO zero; misses sqrt(2) by "
-          f"{ball['gap_in_ball_radii']:.3f} ball radii")
+    assert ball["ball_lo"] is None and ball["radius"] is None, (
+        f"no ball may be reported for a rejected input: {ball}")
+    print("  REPAIRED: Z_0 = -1 is refused by hypothesis; the old certified ball "
+          "[0.8083, 1.1917] (missing sqrt(2) by 1.161 radii) is unreachable")
 
 
-def test_gap_fabricated_zero_residual_certifies_the_planted_point_itself():
-    """GAP-PIN.  A residual reported as exactly zero (leg 98's `A1` case, in this module)
-    makes `budget` return `closes=True` with `r_min = 0.0` -- a certified "ball" that is
-    exactly the planted non-solution, whose true residual is 1.  A denormal-scale fabricated
-    `Y_0` does the same.
+def test_still_a_gap_fabricated_MAGNITUDE_is_not_detectable_by_a_hypothesis_guard():
+    """STILL A GAP, and it is the honest residue of leg 128's repair.
 
-    INVERSION WHEN REPAIRED: `Y_0 = 0` may legitimately close (`x_bar` is then an exact zero),
-    so the repair to assert here is on `r_min`: a `closes=True` must carry `r_min > 0`, or the
-    verdict must state that the centre is claimed to BE the zero."""
+    Leg 116's pin named its own inversion: "`Y_0 = 0` may legitimately close (`x_bar` is then
+    an exact zero), so the repair to assert here is on `r_min`: a `closes=True` must carry
+    `r_min > 0`, OR the verdict must state that the centre is claimed to BE the zero."  Leg
+    128 took the SECOND branch, because the first is not available: refusing `r_min <= 0`
+    would refuse the banked clean gate `test_nk_bounds.py::test_decay_and_budget`
+    (`budget(0.0, 1e-12, 0.3, 13.0)`, whose `r_min` is exactly 0.0), and every in-repo caller
+    passes `Y_0 = 0.0` literally.  So the verdict now SAYS SO: `degenerate_ball=True` plus a
+    `reason` naming which of the two mechanisms produced it.
+
+    THE RESIDUE, STATED AS A CLASS: `Y_0 = 0.0` and `Y_0 = 1e-300` are nonnegative and finite,
+    so they SATISFY the theorem's hypotheses.  The fabrication is in the VALUE, not the type,
+    and no validation layer can see it -- `solver/interval_certificate.py`'s own docstring
+    states the general fact ("Validity checking cannot catch this and no amount of it ever
+    will").  4 of leg 116's 21 false accepts are this class; 17 now reject.
+
+    INVERSION WHEN CLOSED: it cannot be closed here.  It would need the CALLER to certify that
+    `Y_0` came from a residual evaluation rather than a literal."""
     for Y0 in (0.0, 1e-300):
         c = dict(_p_constants(P_XPLANT)); c["Y0"] = Y0
         v = budget(**c)
-        assert v["closes"], (f"GOOD NEWS, BAD TEST: a fabricated Y_0 = {Y0} is now rejected. "
-                             f"INVERT this gate. Got {v}")
+        assert v["closes"], f"a hypothesis-satisfying Y_0 = {Y0} must still be evaluated: {v}"
         assert v["r_min"] < 1e-290, f"expected a ~zero radius, got {v['r_min']}"
-        ball = _ball_report(P_XPLANT, v)
-        assert ball["contains_a_zero"] is False, f"expected no zero in the ball: {ball}"
-    print("  GAP: Y_0 = 0 and Y_0 = 1e-300 both certify a zero-radius ball on a non-solution")
+        assert v["degenerate_ball"] is True, (
+            f"the repair's whole content here is the FLAG; it is missing for Y_0={Y0}: {v}")
+        assert "DEGENERATE_BALL" in v["reason"], v["reason"]
+        if Y0 == 0.0:
+            assert "honest zero-residual case" in v["reason"], v["reason"]
+        else:
+            assert "below float resolution" in v["reason"], v["reason"]
+    # the Z_2 half of the same class: a magnitude under-reported by six decades
+    c = dict(_p_constants(P_XPLANT)); c["Z2"] = 1e-6
+    v = budget(**c)
+    assert v["closes"], f"Z_2 = 1e-6 is hypothesis-satisfying and must be evaluated: {v}"
+    assert v["degenerate_ball"] is False, v
+    print("  STILL A GAP (by construction): Y_0 in {0, 1e-300} and Z_2 = 1e-6 satisfy the "
+          "hypotheses and lie about the MAGNITUDE; now flagged degenerate where the ball is, "
+          "but not detectable -- 4 of leg 116's 21 false accepts, 17 rejected")
 
 
-def test_gap_negative_Y0_yields_a_closing_certificate_with_a_negative_radius():
-    """GAP-PIN.  A sign-flipped residual makes the discriminant LARGER, so `closes=True`
-    while `r_min < 0` -- the theorem's conclusion asserted over an empty set.
+def test_repaired_negative_Y0_is_refused_and_a_negative_radius_is_unreachable():
+    """INVERTED (was `test_gap_negative_Y0_yields_a_closing_certificate_with_a_negative_radius`).
 
-    INVERSION WHEN REPAIRED: assert refusal, and keep the `r_min < 0` check as the thing the
-    repair must make unreachable."""
+    BEFORE: a sign-flipped residual made the discriminant LARGER, so `closes=True` with
+    `r_min < 0` -- the theorem's conclusion asserted over an empty set, for every one of
+    `Y_0 in {-1, -1e-12, -1e12, -inf}`.  AFTER: all four refused by hypothesis, and the
+    `r_min < 0` check is kept as the thing the repair makes unreachable."""
     for Y0 in (-1.0, -1e-12, -1e12, -INF):
         v = budget(Y0, 0.0, 0.3, 1.0)
-        assert v["closes"], (f"GOOD NEWS, BAD TEST: Y_0 = {Y0} is now rejected. INVERT this "
-                             f"gate. Got {v}")
-        assert v["r_min"] < 0.0, f"expected a negative r_min for Y_0 = {Y0}, got {v['r_min']}"
+        assert v["closes"] is False, f"Y_0 = {Y0} must be refused, got {v}"
+        assert any("Y_0" in s for s in v["violations"]), v["violations"]
+        assert not (v["r_min"] < 0.0), (
+            f"a negative radius must be unreachable, got {v['r_min']} for Y_0 = {Y0}")
     honest = budget(1.0, 0.0, 0.3, 1.0)
-    assert not honest["closes"], "the |Y_0| counterpart must not close"
-    print("  GAP: Y_0 in {-1, -1e-12, -1e12, -inf} all close, all with r_min < 0")
+    assert not honest["closes"], "the |Y_0| counterpart must still not close"
+    print("  REPAIRED: Y_0 in {-1, -1e-12, -1e12, -inf} all refused; r_min < 0 unreachable")
 
 
-def test_gap_negative_Z0_or_Z1_rescues_a_hopeless_certificate():
-    """GAP-PIN.  `Z_0` and `Z_1` are suprema of operator norms, so negative values are outside
-    the theorem.  `budget` treats them as extra contraction budget: a case that honestly
-    cannot close does close once one of them goes negative.
+def test_repaired_negative_Z0_or_Z1_no_longer_rescues_a_hopeless_certificate():
+    """INVERTED (was `test_gap_negative_Z0_or_Z1_rescues_a_hopeless_certificate`).
 
-    INVERSION WHEN REPAIRED: assert refusal for each, naming the nonnegativity hypothesis."""
+    BEFORE: `Z_0` and `Z_1` are suprema of operator norms, and `budget` treated negative
+    values as extra contraction budget -- a case that honestly cannot close did close once
+    either went negative (`Z_0 = -1e6`, `Z_1 = -1.0`, `Z_1 = -1e6`), each with `r_min > 0`.
+    AFTER: refused, naming the nonnegativity hypothesis, ahead of the contraction test --
+    which matters, because a negative `Z_0`/`Z_1` PASSES `Z_0 + Z_1 < 1`."""
     hopeless = {"Y0": 1.0, "Z0": 0.0, "Z1": 0.3, "Z2": 1.0}
     assert not budget(**hopeless)["closes"], "the honest counterpart must not close"
-    for slot, val in (("Z0", -1e6), ("Z1", -1.0), ("Z1", -1e6)):
+    for slot, val, name in (("Z0", -1e6, "Z_0"), ("Z1", -1.0, "Z_1"), ("Z1", -1e6, "Z_1")):
         c = dict(hopeless); c[slot] = val
         v = budget(**c)
-        assert v["closes"], (f"GOOD NEWS, BAD TEST: {slot} = {val} no longer rescues a "
-                             f"hopeless certificate. INVERT this gate. Got {v}")
-        assert v["r_min"] > 0.0, f"expected a positive radius for {slot}={val}: {v}"
-    print("  GAP: negative Z_0 / Z_1 buy a closing certificate the honest constants refuse")
+        assert v["closes"] is False, f"{slot} = {val} must be refused, got {v}"
+        assert any(name in s and "negative" in s for s in v["violations"]), (
+            f"{slot}={val}: the refusal must name {name}'s nonnegativity, "
+            f"got {v['violations']}")
+        # the contraction test alone would NOT have caught it -- why the guard runs first
+        assert (1.0 - c["Z0"] - c["Z1"]) > 0.0, (
+            f"{slot}={val} passes Z_0 + Z_1 < 1; the hypothesis guard is what rejects it")
+    print("  REPAIRED: negative Z_0 / Z_1 refused by hypothesis, ahead of the contraction "
+          "test they would otherwise pass")
 
 
-def test_gap_supremum_is_a_max_over_a_truncated_window_outside_the_documented_scope():
-    """GAP-PIN.  `farfield_modelling_error_bound` returns `max` over 40 samples of
-    `[X0, 1e4 X0]` as a supremum over `{X >= X0}`.  The module's docstring states the
-    hypothesis that makes this legitimate -- "For alpha < 2 both terms decay, so the
-    supremum sits at X0" -- but nothing enforces `alpha < 2`.  At `alpha = 2.5` the claimed
-    bound is ~1e4x below the truth and at `alpha = 3.0` ~1e8x, and the function's OWN
-    `argmax_X` pins to the window's last sample in every failing case: a self-diagnostic it
-    computes and discards.
+def test_repaired_alpha_at_or_above_2_raises_and_the_window_end_is_flagged():
+    """INVERTED (was `test_gap_supremum_is_a_max_over_a_truncated_window_...`).
 
-    LATENT: the in-repo callers use `alpha in [1.1, 1.8]`, so no banked number is affected --
-    asserted by `test_holds_bounds_are_sound_across_the_whole_live_operating_range`.
+    BEFORE: `farfield_modelling_error_bound` returned `max` over 40 samples of `[X0, 1e4 X0]`
+    as a supremum over `{X >= X0}` with nothing enforcing the `alpha < 2` hypothesis its own
+    docstring states.  The claimed bound sat >50x below the truth at `alpha = 2.25`, >5e3x at
+    `2.5` and >5e7x at `3.0`, and the function's OWN `argmax_X` pinned to the window's last
+    sample in every failing case -- a self-diagnostic it computed and discarded.
 
-    INVERSION WHEN REPAIRED: assert that `alpha >= 2` raises, or that the returned dict
-    carries a flag when `argmax_X` lands on the window boundary."""
-    for alpha, floor in ((2.25, 50.0), (2.5, 5e3), (3.0, 5e7)):
-        m = farfield_modelling_error_bound(alpha, 0.5, 1.0)
-        ref, ref_X = _reference_sup(alpha, 0.5, 1.0, decades=12, n_X=24)
-        ratio = ref / m["bound"]
-        assert ratio > floor, (
-            f"GOOD NEWS, BAD TEST: alpha={alpha} now under-reports by only {ratio:.4g}x "
-            f"(was > {floor}x). If a guard landed, INVERT this gate.")
-        assert abs(m["argmax_X"] - 1e4) < 1e-6, (
-            f"expected argmax pinned at the window end 1e4, got {m['argmax_X']}")
-        assert ref_X > 1e4, f"the reference should find its max beyond the window: {ref_X}"
+    AFTER: `alpha >= 2` raises `ValueError`, and `argmax_at_window_end` is returned so a
+    caller INSIDE the hypothesis can still see a window that ran out.  Both halves of the
+    named inversion, not one."""
+    for alpha in (2.0, 2.25, 2.5, 3.0):
+        try:
+            farfield_modelling_error_bound(alpha, 0.5, 1.0)
+        except ValueError as ex:
+            assert "alpha" in str(ex) and "supremum" in str(ex), str(ex)
+        else:
+            raise AssertionError(f"alpha = {alpha} must raise, it did not")
     inside = farfield_modelling_error_bound(1.9, 0.5, 1.0)
     assert abs(inside["argmax_X"] - 1.0) < 1e-9, (
         f"inside the documented scope the argmax must sit at X0, got {inside['argmax_X']}")
-    print("  GAP: alpha=2.25/2.5/3.0 under-report by >50x / >5e3x / >5e7x, argmax pinned "
-          "at the window end; alpha=1.9 keeps its argmax at X0")
+    assert inside["argmax_at_window_end"] is False, inside["argmax_at_window_end"]
+    # the self-diagnostic must be able to come out TRUE, or it is not a diagnostic (lesson 90)
+    narrow = farfield_modelling_error_bound(1.9, 0.5, 1.0, Xmax_factor=1.0, n_X=3)
+    assert narrow["argmax_at_window_end"] is True, (
+        f"a zero-width window must flag its own boundary: {narrow['argmax_at_window_end']}")
+    print("  REPAIRED: alpha >= 2 raises; argmax_at_window_end returned, False at alpha=1.9 "
+          "and True on a degenerate window (the flag can come out both ways)")
 
 
-def test_gap_Iout_log_grid_floor_undercuts_the_truth_past_X_1e11():
-    """GAP-PIN, and the mechanism is measured rather than asserted.  `_I_out` grades its bulk
-    panel `[0, X/2]` logarithmically from `eps = 1e-12 * max(X, 1)`, joined to `y = 0` by one
-    trapezoid.  The integrand's mass sits at `y = O(1)`, so once `eps` reaches that scale the
-    single panel `[0, eps]` replaces the resolved mass region.  The claimed UPPER bound then
-    falls BELOW the truth: by 2.12% at `alpha = 1.9, X = 1e12`, with onset already at
-    `X = 1e11`.  Past `X ~ 1e13` the same panel over-shoots instead, by up to ~30x -- the
-    conservative direction, and the reason this cannot be found by looking at large X alone.
+def test_still_a_gap_Iout_log_grid_floor_undercuts_the_truth_past_X_1e11_but_now_WARNS():
+    """STILL A GAP in value, CLOSED as a flag (was `test_gap_Iout_log_grid_floor_...`).
 
-    LATENT: the largest `X` any in-repo caller evaluates is `3.2e7` (X0 <= 3200, window
-    `1e4 X0`), 3.49 decades below the onset, where the module keeps a `+8.4e-5` relative
-    slack.
+    `_I_out` grades its bulk panel `[0, X/2]` logarithmically from `eps = 1e-12 * max(X, 1)`.
+    The integrand's mass sits at `y = O(1)`, so once `eps` reaches that scale the single panel
+    `[0, eps]` replaces the resolved mass region and the claimed UPPER bound falls BELOW the
+    truth -- by 2.12% at `alpha = 1.9, X = 1e12`, onset at `X = 1e11`.
 
-    INVERSION WHEN REPAIRED: assert domination at `X = 1e11 .. 1e13` too, and keep the
-    `X = 1e12` point -- it is the worst case."""
+    WHY IT IS NOT RECOMPUTED, MEASURED RATHER THAN ASSERTED: lowering the floor rebuilds the
+    geomspace grid, so it moves clean values.  Leg 128 measured 15/15 live-range values moving
+    (worst 1.08e-04 relative) when `eps` goes 1e-12 -> 1e-18, and any clean-input result moving
+    is this leg's own stop condition.  So the value is untouched and the out-of-range regime
+    WARNS instead, above a validated ceiling of `X = 1e10`.
+
+    LATENT: the largest `X` any in-repo caller evaluates is `3.2e7`, 3.49 decades below onset.
+
+    INVERSION WHEN CLOSED FOR REAL: assert domination at `X = 1e11 .. 1e13`, keep the
+    `X = 1e12` point (the worst case), and delete the warning assertions below."""
     m, r = _I_out(1e12, 1.9), _I_out_reference(1e12, 1.9)
     assert m < r, ("GOOD NEWS, BAD TEST: _I_out now dominates the truth at alpha=1.9, "
                    f"X=1e12. INVERT this gate. module={m}, reference={r}")
@@ -378,62 +438,126 @@ def test_gap_Iout_log_grid_floor_undercuts_the_truth_past_X_1e11():
     assert abs(under - 0.021237) < 5e-4, f"the pinned 2.12% under-report moved: {under}"
     assert _I_out(1e11, 1.9) < _I_out_reference(1e11, 1.9), (
         "the onset at X=1e11 disappeared -- if a repair landed, INVERT this gate")
-    # and the safe side, which is what keeps the finding latent
+    # the safe side, which is what keeps the finding latent
     assert _I_out(LIVE_X_MAX, 1.9) > _I_out_reference(LIVE_X_MAX, 1.9), (
         "the live range must stay on the dominating side of the crossover")
-    print(f"  GAP: _I_out falls {100 * under:.3f}% below the truth at X=1e12; live range "
-          f"(X<=3.2e7) is 3.49 decades clear")
+    # THE REPAIR'S OWN CONTENT: the regime is now announced, and only that regime.
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+        _I_out(1e12, 1.9)
+    assert any(issubclass(x.category, RuntimeWarning) and "validated ceiling" in str(x.message)
+               for x in w), f"X = 1e12 must warn, got {[str(x.message) for x in w]}"
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+        _I_out(LIVE_X_MAX, 1.9)
+    assert not w, f"the live range must NOT warn, got {[str(x.message) for x in w]}"
+    print(f"  STILL A GAP (flagged, not recomputed): _I_out falls {100 * under:.3f}% below the "
+          f"truth at X=1e12 and now WARNS above X=1e10; live range (X<=3.2e7) is 3.49 decades "
+          f"clear and stays silent")
 
 
-def test_gap_gamma_outside_the_holder_range_reduces_the_claimed_bound():
-    """GAP-PIN.  `gamma` is a Holder exponent in `(0, 1]`.  The near-field half carries a
-    `1/gamma`, so a negative `gamma` flips that half's sign and DROPS the claimed upper
-    bound below the `gamma = 0.5` value -- an unguarded domain, not a conservative one.
+def test_repaired_gamma_outside_the_holder_range_raises():
+    """INVERTED (was `test_gap_gamma_outside_the_holder_range_reduces_the_claimed_bound`).
 
-    INVERSION WHEN REPAIRED: assert that `gamma <= 0` raises."""
+    BEFORE: `gamma` is a Holder exponent in `(0, 1]`, and the near-field half carries a
+    `1/gamma`, so `gamma = -0.5` and `-0.05` flipped that half's sign and DROPPED the claimed
+    upper bound below the honest `gamma = 0.5` value.  AFTER: `gamma <= 0` raises, as the pin's
+    own inversion prescribed -- and so does `gamma > 1`, which is outside the range for the
+    same reason and was equally unguarded."""
     ref = hilbert_farfield_bound(10.0, 1.5, 0.5)[0]
-    for gamma in (-0.5, -0.05):
-        b, near, _ = hilbert_farfield_bound(10.0, 1.5, gamma)
-        assert near < 0.0, (f"GOOD NEWS, BAD TEST: gamma={gamma} no longer produces a "
-                            f"negative near-field part ({near}). INVERT this gate.")
-        assert b < ref, f"expected the bound to drop below the gamma=0.5 value {ref}, got {b}"
-    print(f"  GAP: gamma=-0.5 gives a negative near-field part and a bound below the "
-          f"gamma=0.5 reference {ref:.4e}")
+    assert ref > 0.0, ref
+    for gamma in (-0.5, -0.05, 0.0, 1.5, 3.0):
+        try:
+            hilbert_farfield_bound(10.0, 1.5, gamma)
+        except ValueError as ex:
+            assert "gamma" in str(ex) and "(0, 1]" in str(ex), str(ex)
+        else:
+            raise AssertionError(f"gamma = {gamma} must raise, it did not")
+    # the endpoints of the admissible range must still WORK, or the guard over-rejects
+    for gamma in (1e-6, 0.5, 1.0):
+        b = hilbert_farfield_bound(10.0, 1.5, gamma)[0]
+        assert b > 0.0 and math.isfinite(b), f"gamma = {gamma} is admissible: {b}"
+    print("  REPAIRED: gamma in {-0.5, -0.05, 0, 1.5, 3.0} raise; gamma in {1e-6, 0.5, 1.0} "
+          "still evaluate (the guard rejects the range, not the function)")
 
 
-def test_gap_two_point_dual_drops_nonpositive_kernel_entries_instead_of_flagging_them():
-    """GAP-PIN, with its reachability stated.  `two_point_dual` computes
-    `1/q if q > 0 else 0`.  On the DIAGONAL that is correct -- the suppressed increment is
-    genuinely zero.  Off it, an entry that is zero or negative has an honest contribution of
-    `+inf`, and substituting `0` makes that reference index artificially cheap, so the `min`
-    over `m0` selects it.  A negative codomain sup weight does the same through the other
-    term.  Measured: 2.19x and 3.57x below the honest bound on a 6-point instance.
+def test_repaired_two_point_dual_raises_on_nonpositive_kernel_or_weight_entries():
+    """INVERTED (was `test_gap_two_point_dual_drops_nonpositive_kernel_entries_...`).
 
-    CRAFTED-ONLY.  `HolderNorm`, the module's own weight source, produces a minimum
-    off-diagonal kernel entry of 3.58e-01 and a minimum weight of 1.0 across
-    `J in {125, 250, 500}` and `(alpha, gamma)` spanning the live range -- so no in-repo path
-    reaches this.  Reported as latent, not as an active fabrication.
+    BEFORE: `two_point_dual` computes `1/q if q > 0 else 0`, which is correct on the DIAGONAL
+    (the suppressed increment is genuinely zero) and a silent fabrication off it: an entry that
+    is zero or negative has an honest contribution of `+inf`, and substituting `0` makes that
+    reference index artificially cheap so the `min` over `m0` selects it.  Measured 2.19x
+    (zeroed `q` column) and 3.57x (negative `v_cod` entry) BELOW the honest bound.  AFTER: both
+    raise `ValueError`, as the pin's own inversion prescribed.
 
-    INVERSION WHEN REPAIRED: assert that a non-positive off-diagonal `q_cod` entry, or any
-    non-positive `v_cod` entry, raises or yields `+inf`."""
+    CRAFTED-ONLY, AND THE REPAIR MUST NOT BREAK THAT: `HolderNorm`, the module's own weight
+    source, has a minimum off-diagonal kernel entry of 3.58e-01 and a minimum weight of 1.0
+    across `J in {125, 250, 500}` and the live `(alpha, gamma)` range, so no in-repo path
+    reaches the guard -- asserted below, exactly as leg 116 asserted it."""
     cases, reach = family_C()
     by_name = {c["case"]: c for c in cases}
-    base = by_name["C00_control_wellformed"]["bound"]
-    for name, floor in (("C01_q_column_zeroed", 2.0), ("C04_v_one_negative", 3.0)):
+    assert by_name["C00_control_wellformed"]["outcome"] == "sound", (
+        "the well-formed control must still compute -- a guard that rejects everything is "
+        "not a repair")
+    for name in ("C01_q_column_zeroed", "C02_q_column_negative",
+                 "C03_q_single_offdiagonal_zero", "C04_v_one_negative", "C05_v_one_zero",
+                 "C06_v_one_nan"):
         c = by_name[name]
-        assert c["outcome"] == "false_bound", (
-            f"GOOD NEWS, BAD TEST: {name} is no longer accepted. INVERT this gate. Got {c}")
-        assert c["honest_over_reported"] > floor, (
-            f"{name}: expected the reported bound to sit >{floor}x below the honest "
-            f"{base}, got ratio {c['honest_over_reported']}")
-    # reachability -- the half that keeps this latent, and that a repair must not break
+        assert c["outcome"] == "raised", f"{name} must now raise, got {c}"
+        assert "ValueError" in c["exception"], f"{name}: {c['exception']}"
+        assert "do not come from a norm" in c["exception"], f"{name}: {c['exception']}"
+    # reachability -- the half that keeps this latent, and that the repair must not break
     for row in reach:
         assert row["n_offdiagonal_nonpositive"] == 0, (
             f"HolderNorm now produces a non-positive off-diagonal kernel entry: {row}")
         assert row["n_w_nonpositive"] == 0, f"HolderNorm now produces a non-positive w: {row}"
         assert row["min_offdiagonal_pair"] > 0.3, f"kernel floor moved: {row}"
-    print("  GAP: nonpositive q_cod / v_cod drop the dual bound 2.19x / 3.57x; NOT reachable "
-          "from HolderNorm (min off-diagonal kernel 3.58e-01, min weight 1.0)")
+    print("  REPAIRED: nonpositive/NaN q_cod and v_cod entries raise (they dropped the dual "
+          "bound 2.19x / 3.57x); still NOT reachable from HolderNorm, and the well-formed "
+          "control still computes")
+
+
+def test_repaired_all_three_modules_share_one_guard():
+    """NEW, and it is the clause that makes this a class repair rather than a third one-off.
+
+    `port_certification.py` (leg 79), `interval_certificate.py` (leg 98) and `nk_bounds.py`
+    (leg 128) now call the SAME function object.  Checked by identity, not by resemblance --
+    and then checked BEHAVIOURALLY, because identity alone would not catch a call site that
+    holds the shared function and ignores it."""
+    import solver.certificate_guards as cg
+    import solver.interval_certificate as ic
+    import solver.nk_bounds as nk
+    import solver.port_certification as pc
+
+    assert pc._shared_hypothesis_violations is cg.hypothesis_violations
+    assert ic._shared_hypothesis_violations is cg.hypothesis_violations
+    assert nk.hypothesis_violations is cg.hypothesis_violations
+
+    # behaviour: the same violating constants must be refused by all three, naming the same
+    # constants for the same reasons.
+    for (Y0, Z1, Z2) in ((-1.0, 0.3, 1.0), (NAN, 0.3, 1.0), (INF, 0.3, 1.0),
+                         (1e-6, -1.0, 1.0), (1e-6, 0.3, -1.0)):
+        vp = pc.radii_polynomial_status(Y0, Z1, Z2)
+        vi = ic.radii_verdict(Y0, Z1, Z2)
+        vn = nk.budget(Y0, 0.0, Z1, Z2)
+        assert vp["status"] == "INVALID_INPUT" and vp["closes"] is False, vp
+        assert vi["closes"] is False and vi["reason"].startswith("INVALID_INPUT"), vi
+        assert vn["closes"] is False and vn["reason"].startswith("INVALID_INPUT"), vn
+        assert len(vp["violations"]) == len(vi["violations"]) == len(vn["violations"]), (
+            f"the three pipelines disagree on how many hypotheses {(Y0, Z1, Z2)} breaks: "
+            f"{vp['violations']} / {vi['violations']} / {vn['violations']}")
+    # the documented differences must SURVIVE -- flattening them would be the wrong abstraction
+    assert pc._hypothesis_violations(None, None, None) == [], (
+        "port_certification's None-is-NOT-MEASURED kill-switch must survive the shared guard")
+    try:
+        ic._hypothesis_violations(None, 0.3, 1.0)
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("interval_certificate must still RAISE on None")
+    print("  REPAIRED: one guard object shared by all three modules, agreeing on 5 violating "
+          "inputs, with the None policies still differing as designed")
 
 
 # ===========================================================================
@@ -447,7 +571,8 @@ def main():
             print(t.__name__)
             t()
     print(f"\nALL {len(tests)} ADVERSARIAL GATES PASS "
-          f"(leg 116 -- the GAP-PIN gates assert DEFECTS, not correctness)")
+          f"(leg 116 measured; leg 128 REPAIRED -- the `test_repaired_*` gates are leg 116's "
+          f"GAP-PINs inverted, the two `test_still_a_gap_*` gates are the honest residue)")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,547 @@
+{
+  "leg": 130,
+  "route": "ROUTE-HPR",
+  "module": "solver/hilbert_pointwise.py",
+  "repairs": "leg 106 (Route-HPA), writeup/data/p2_route_hpa_v1_adversarial.json",
+  "pre_repair_ref": "d703492",
+  "pre_repair_module_lines": 210,
+  "alpha": 1.5,
+  "gamma": 0.5,
+  "shipped_rhos": [
+    1.0,
+    6.0,
+    25.0
+  ],
+  "B_zero_movement_bitwise": {
+    "n_configurations": 8376,
+    "n_bit_identical": 8376,
+    "n_moved": 0,
+    "first_disagreement": null
+  },
+  "B_zero_movement_curves": [
+    {
+      "rho": 1.0,
+      "n_theta": 140,
+      "curves_bit_identical": true,
+      "n_nodes": 139,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 0.38740198904269735,
+        "closure_semi": 1.4686898513898754,
+        "cq_sup": 1.6694062095181381,
+        "cq_semi": 1.8517881514841967
+      }
+    },
+    {
+      "rho": 1.0,
+      "n_theta": 560,
+      "curves_bit_identical": true,
+      "n_nodes": 559,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 0.39395704698858636,
+        "closure_semi": 1.4686898513898754,
+        "cq_sup": 1.6694062095181381,
+        "cq_semi": 1.850869204389275
+      }
+    },
+    {
+      "rho": 6.0,
+      "n_theta": 140,
+      "curves_bit_identical": true,
+      "n_nodes": 139,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 3.041209516872019,
+        "closure_semi": 0.43616999815353685,
+        "cq_sup": 3.4363707436786184,
+        "cq_semi": 0.43666003225968114
+      }
+    },
+    {
+      "rho": 6.0,
+      "n_theta": 560,
+      "curves_bit_identical": true,
+      "n_nodes": 559,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 3.0619681352908783,
+        "closure_semi": 0.4437531916905228,
+        "cq_sup": 3.4551400034539195,
+        "cq_semi": 0.4441033565751856
+      }
+    },
+    {
+      "rho": 25.0,
+      "n_theta": 140,
+      "curves_bit_identical": true,
+      "n_nodes": 139,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 6.2703598206005955,
+        "closure_semi": 0.10738051179434807,
+        "cq_sup": 6.619955093399834,
+        "cq_semi": 0.10738080533806177
+      }
+    },
+    {
+      "rho": 25.0,
+      "n_theta": 560,
+      "curves_bit_identical": true,
+      "n_nodes": 559,
+      "weighted_sups_bit_identical": true,
+      "weighted_sups": {
+        "closure_sup": 6.278394130014483,
+        "closure_semi": 0.10705873193652878,
+        "cq_sup": 6.650836459530543,
+        "cq_semi": 0.10705901948156792
+      }
+    }
+  ],
+  "A_failing_configurations": [
+    {
+      "family": "V1_rho",
+      "case": "rho=nan",
+      "pre_repair_pair": [
+        24.092157552756092,
+        0.0
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "non-finite argument(s) rho: the payer rule `rho*cT <= cS` is then False on the whole quadrature (IEEE-754 sec ",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": 0.5,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 0.5267343448436457,
+        "delta=1e-20": 1.026944028090569,
+        "delta=1e-50": 2.5275730767733466
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 2.5275730767733466,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V1_rho",
+      "case": "rho=+inf",
+      "pre_repair_pair": [
+        24.092157552756092,
+        0.0
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "non-finite argument(s) rho: the payer rule `rho*cT <= cS` is then False on the whole quadrature (IEEE-754 sec ",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": 0.5,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 0.5267343448436457,
+        "delta=1e-20": 1.026944028090569,
+        "delta=1e-50": 2.5275730767733466
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 2.5275730767733466,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V1_rho",
+      "case": "rho=-inf",
+      "pre_repair_pair": [
+        0.0,
+        1.4872882029618897
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "non-finite argument(s) rho: the payer rule `rho*cT <= cS` is then False on the whole quadrature (IEEE-754 sec ",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": 0.5,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 9.108748826449304e-05,
+        "delta=1e-20": 1.7757562123793856e-09,
+        "delta=1e-50": 4.370899395731431e-24
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 9.108748826449304e-05,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V1_rho",
+      "case": "rho=1e300",
+      "pre_repair_pair": [
+        24.092157552756092,
+        0.0
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "the payer crossover s* = (2 cos^gamma(theta/2)/rho)^(1/gamma) is not a representable positive float at rho = 1",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": 0.5,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 0.5267343448436457,
+        "delta=1e-20": 1.026944028090569,
+        "delta=1e-50": 2.5275730767733466
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 2.5275730767733466,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V2_gamma",
+      "case": "gamma=0",
+      "pre_repair_pair": [
+        0.0,
+        12.2293549063633
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ s^gamma no longer vanishes as the offset s -> 0, so NO account ta",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": 0.0,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 1.0376808034099816,
+        "delta=1e-20": 2.023107311224268,
+        "delta=1e-50": 4.979386832582854
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 4.979386832582854,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V2_gamma",
+      "case": "gamma=-0.5",
+      "pre_repair_pair": [
+        22.27167345072975,
+        1.3398047154768697
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ s^gamma no longer vanishes as the offset s -> 0, so NO account t",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": -0.5,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 0.5374575337931776,
+        "delta=1e-20": 1.0478504203955505,
+        "delta=1e-50": 2.579029079123138
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 2.579029079123138,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V2_gamma",
+      "case": "gamma=-1e-12",
+      "pre_repair_pair": [
+        0.0,
+        12.229354906496075
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "gamma = -1e-12 <= 0: the seminorm envelope cT ~ s^gamma no longer vanishes as the offset s -> 0, so NO account",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": -1e-12,
+      "step_ratio_pre_repair": {
+        "delta=1e-10": 1.0376808033987153,
+        "delta=1e-20": 2.023107311202303,
+        "delta=1e-50": 4.979386832528792
+      },
+      "step_ratio_after_inflate": {
+        "delta=1e-10": 0.0,
+        "delta=1e-20": 0.0,
+        "delta=1e-50": 0.0
+      },
+      "pre_repair_max_ratio": 4.979386832528792,
+      "inflate_max_ratio": 0.0,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V2_gamma",
+      "case": "gamma=nan",
+      "pre_repair_pair": [
+        24.06152344330172,
+        0.016812401184897505
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "non-finite argument(s) gamma: the payer rule `rho*cT <= cS` is then False on the whole quadrature (IEEE-754 se",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": null,
+      "step_ratio_pre_repair": null,
+      "step_ratio_after_inflate": null,
+      "pre_repair_max_ratio": null,
+      "inflate_max_ratio": null,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    },
+    {
+      "family": "V2_gamma",
+      "case": "gamma=inf",
+      "pre_repair_pair": [
+        24.06152344330172,
+        0.016812401184897505
+      ],
+      "pre_repair_is_finite": true,
+      "default_policy": "HilbertPointwiseDomainError",
+      "raises": true,
+      "message_head": "non-finite argument(s) gamma: the payer rule `rho*cT <= cS` is then False on the whole quadrature (IEEE-754 se",
+      "inflate_pair": [
+        Infinity,
+        Infinity
+      ],
+      "norms_read_at_gamma": null,
+      "step_ratio_pre_repair": null,
+      "step_ratio_after_inflate": null,
+      "pre_repair_max_ratio": null,
+      "inflate_max_ratio": null,
+      "inflate_is_infinite": true,
+      "inflate_dominates": true,
+      "extrapolate_matches_pre_repair": true,
+      "extrapolate_warns": false
+    }
+  ],
+  "A_v1_all_raise": true,
+  "A_v2_all_raise": true,
+  "A_all_inflate_dominate": true,
+  "A_worst_pre_repair_step_ratio": 4.979386832582854,
+  "A_worst_post_inflate_step_ratio": 0.0,
+  "A_all_inflate_are_infinite": true,
+  "C_other_inputs": [
+    {
+      "case": "theta<0",
+      "pre_repair_silent_and_finite": true,
+      "pre_repair_pair": [
+        0.1842242384172991,
+        3.8947612722412166
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "theta=0",
+      "pre_repair_silent_and_finite": true,
+      "pre_repair_pair": [
+        0.0,
+        0.0
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "theta=pi",
+      "pre_repair_silent_and_finite": true,
+      "pre_repair_pair": [
+        1.0227952119993073e-16,
+        0.0
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "theta=nan",
+      "pre_repair_silent_and_finite": false,
+      "pre_repair_pair": [
+        NaN,
+        NaN
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "alpha=nan",
+      "pre_repair_silent_and_finite": false,
+      "pre_repair_pair": [
+        NaN,
+        0.0
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "rho=0",
+      "pre_repair_silent_and_finite": true,
+      "pre_repair_pair": [
+        0.0,
+        1.4886168392691674
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    },
+    {
+      "case": "rho=-1",
+      "pre_repair_silent_and_finite": true,
+      "pre_repair_pair": [
+        0.0,
+        1.4886168392691674
+      ],
+      "post_repair": "HilbertPointwiseDomainError"
+    }
+  ],
+  "D_residual_band_not_rejected": [
+    {
+      "rho": 25.0,
+      "disposition": "accepted",
+      "head_sup": 0.0,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 5.902562621310497,
+      "head_share_of_returned": 0.0,
+      "warns": false
+    },
+    {
+      "rho": 1000.0,
+      "disposition": "accepted",
+      "head_sup": 0.0,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 13.523084609347526,
+      "head_share_of_returned": 0.0,
+      "warns": false
+    },
+    {
+      "rho": 100000.0,
+      "disposition": "accepted",
+      "head_sup": 0.0,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 23.1860645891865,
+      "head_share_of_returned": 0.0,
+      "warns": false
+    },
+    {
+      "rho": 1000000.0,
+      "disposition": "accepted",
+      "head_sup": 3.9046155886399325,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 24.092157552756092,
+      "head_share_of_returned": 0.1620699839808765,
+      "warns": true
+    },
+    {
+      "rho": 1000000000.0,
+      "disposition": "accepted",
+      "head_sup": 18.365972181030198,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 24.092157552756092,
+      "head_share_of_returned": 0.7623216036510259,
+      "warns": true
+    },
+    {
+      "rho": 1000000000000.0,
+      "disposition": "accepted",
+      "head_sup": 32.82732877342046,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 24.092157552756092,
+      "head_share_of_returned": 1.3625732233211751,
+      "warns": true
+    },
+    {
+      "rho": 1e+100,
+      "disposition": "accepted",
+      "head_sup": 457.02712215020154,
+      "head_vanishes_as_eps_to_zero": true,
+      "returned_total": 24.092157552756092,
+      "head_share_of_returned": 18.969954066978886,
+      "warns": true
+    },
+    {
+      "rho": 1e+300,
+      "disposition": "rejected",
+      "head_sup": Infinity,
+      "head_vanishes_as_eps_to_zero": false,
+      "returned_total": null,
+      "head_share_of_returned": null,
+      "warns": false
+    }
+  ],
+  "E_predicate_census": {
+    "n_configurations": 4188,
+    "n_with_positive_sup_head": 44,
+    "n_rejected_by_the_guard": 0,
+    "worst_head_share_among_accepted": 6.89514525481067e-05,
+    "worst_at": {
+      "theta": 3.141592643589793,
+      "pi_minus_theta": 9.99999993922529e-09,
+      "rho": 25.0,
+      "eps": 1e-10,
+      "head_sup": 5.756971185013958e-13
+    },
+    "warn_tolerance": 0.001,
+    "margin_to_warn_tolerance": 14.502957704949152
+  },
+  "gate_a_answer": "YES",
+  "gate_b_answer": "YES",
+  "gate_answer": "YES"
+}
