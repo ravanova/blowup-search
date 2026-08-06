@@ -91,8 +91,12 @@ solver artifact — grounded in leg 125's own already-landed report, found by re
 history directly rather than relying on secondhand summaries). A twenty-fifth addition,
 drafted after legs 167 and 182 landed and closed the space-axis investigation cleanly, adds
 **186** (PUB2, the space-axis methodological note — `ell^1_w` dead, origin-H² capped at
-`a=0`, no interpolant helps — a second, separate synthesis note from leg 179's). **Next
-fresh leg number for any future candidate is 187.**
+`a=0`, no interpolant helps — a second, separate synthesis note from leg 179's). A
+twenty-sixth addition, drafted to refill 4 open slots (two filled from already-specified
+reserve, 148/170; one honest gap left open), adds **187** (M2CI — an unexploited lead in leg
+125's own numbers: Chen's inviscid γ=2 profile measured under budget at every tested row,
+never certified by anyone; explicitly NOT the viscous rung, a separate fully-grounded
+result). **Next fresh leg number for any future candidate is 188.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1483,6 +1487,37 @@ drafting it is consistent with the math-over-review steer, not in tension with i
 and the leg 179 precedent for how to bundle them), not a presupposition of anything still in
 flight. `git log` shows nothing new beyond leg 185 has landed since the last check, so no
 other fresh math-shaped thread was found this pass.
+
+**DM update, 2026-08-06 — 4 open slots (live: 176, 177, 178, 185, 169, 186). Leg 166 found
+leg 150's repair incomplete (a structural predicate limitation lets one case still slip
+through; bench-repair dispatched outside the leg system) and leg 109's bench-repair landed,
+correcting two stale banked verdict strings it had flagged — both recorded, neither needs a
+DM-drafted leg (mechanical, already handled). Filling the 4 slots: two already-specified
+reserve items, one genuinely new construction candidate, and one honest gap.**
+
+- **170 (CDB)** — still available; `git log` confirms it has not landed, and the coordinator's
+  live-legs list doesn't include it either, so it appears to have been passed over rather
+  than dispatched. Already fully specified (postrepair regression check for leg 154's
+  `critical_dissipation.py` repair), no redraft needed.
+- **148 (SUB)** — still available on the same basis, already fully specified.
+- **187 (M2CI)**, new: leg 125's own landed numbers contain an unexploited lead. "Object A"
+  (Chen's actual profile — the INVISCID γ=2 closed form) measured UNDER the radii-polynomial
+  budget at all 9 tested rows (`Y_0`/budget 1.325e-09 .. 5.800e-05) — comfortably inside
+  certificate range. Chen's own proof of this profile's blow-up is analytic, not
+  computer-assisted. If a full certificate closes on Object A, that would be a genuinely
+  novel result independent of the viscous "missing rung" question this cycle has otherwise
+  focused on: the first computer-assisted certificate of Chen's specific γ=2 profile,
+  upgrading an analytic proof to CAP status — the same shape of achievement as Chen-Hou's own
+  work, applied to a different object nobody has certified yet (leg 125's own novelty pass
+  found none in the searched literature). **Flagged honestly: this is NOT the viscous rung
+  the user's earlier steer asked about** — Object A is inviscid — but it is a fully grounded,
+  high-value, genuinely fresh construction lead sitting unused in already-banked numbers.
+  Drafted below.
+- **Fourth slot: genuinely nothing else found this pass, said honestly.** Every other
+  immediately-adjacent thread (further Xu mining, further viscous-model cataloging, anything
+  building on 174/175/178's still-unknown outcomes) would mean presupposing an in-flight
+  leg's result. Recommend holding the fourth slot, or using it for leg 166's own close-the-
+  loop regression check once its bench-repair lands (not yet — premature to draft).
 
 ---
 
@@ -5542,6 +5577,50 @@ and no softening or strengthening of any of them?
 **Independence.** New writeup files only; no solver module, no existing file edited (unlike
 leg 179, which had one small correction to leg 157's framing note — this leg needs no such
 touch). Disjoint from every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 187 — ROUTE-M2CI: CAN A COMPUTER-ASSISTED CERTIFICATE CLOSE ON CHEN'S γ=2 INVISCID
+PROFILE ("OBJECT A")? (NOT the viscous rung — a separate, fully-grounded lead)
+**Thesis.** Leg 125 (M2P) landed gate NO on both its own clauses, but its own numbers contain
+an unexploited lead: "Object A" — Chen's actual analytically-proven profile, the INVISCID
+γ=2 closed form (his own text: "we study the inviscid problem, i.e. ν=0") — measured UNDER
+the radii-polynomial budget at all 9 tested rows (`Y_0`/budget ranging 1.325e-09 to
+5.800e-05), comfortably inside certificate range. Chen's proof of this profile's blow-up is
+analytic, not computer-assisted, and leg 125's own novelty pass found no CAP of any
+self-similar gCLM profile (dissipative OR inviscid at this specific parameter) in the
+searched literature. **Stated up front, honestly: this does NOT answer the viscous "missing
+rung" question** — Object A is inviscid, the same category as Chen-Hou's own already-CAP'd
+work, not a new category. What it offers instead is a fully independent, high-value result:
+the first computer-assisted certificate of Chen's SPECIFIC γ=2 profile, upgrading an
+analytic proof to CAP status, using infrastructure this repository already has (leg 125's own
+transcription of Chen's constants, Newton-recovered shape). No dynamics run; construction
+only, following the leg 54/58 certificate-battery discipline, no GA compute.
+**Gate.** Does a full radii-polynomial certificate close on Chen's γ=2 inviscid profile
+(Object A), using leg 125's own transcribed constants and recovered shape as the starting
+construction, with every hypothesis of the certificate framework satisfied (not just the
+budget comparison leg 125 already made)?
+  yes -> The first CAP of Chen's γ=2 profile. Report the full certificate precisely, stated
+         as inviscid and independent of the viscous-blow-up question — do not conflate the
+         two framings in the writeup. ESCALATE as a genuinely novel positive result for the
+         user's attention, on the same footing as leg 125's original benefit-test framing.
+  no  -> Report exactly which certificate hypothesis fails despite the budget comparison
+         looking favorable (a common shape: budget-under but a different clause of the
+         framework still fails). Bank as a characterized negative — the lead was real but
+         did not close.
+**Territory.** solver/dissipative_profile.py (read-only, leg 125's territory, closed on
+               landing) plus a NEW certificate-construction module
+               (`solver/chen_inviscid_certificate.py`, capabilities.py grepped first per the
+               standing ban), test_chen_inviscid_certificate.py (NEW),
+               experiments/p2_route_m2ci_v1_construction.py,
+               experiments/p2_route_m2ci_v1_construction_evidence.py,
+               writeup/data/p2_route_m2ci_v1_construction.json,
+               writeup/novelty/leg_187.md, experiments/journal/leg_187.md.
+**Difficulty.** heavy
+**Independence.** Sole owner of a brand-new module. Reads leg 125's territory read-only.
+Disjoint from 185 (M2SD, diagnosing Object B's stall — a different object, the viscous one,
+not Object A) and from every other live/reserve leg. No GA compute under any outcome.
+Immediately dispatchable.
 ```
 
 ## Ranking rationale
