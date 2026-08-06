@@ -6608,6 +6608,275 @@ Nothing in this update lifts a ban, resolves any parked escalation, or moves any
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle, matching the
 orchestrator's own report.
 
+---
+
+## DM bookkeeping update, cycle 1, same day — leg 196 landed, leg 202 promoted, watermark hit,
+8 new candidates drafted
+
+**196 (USC2) landed on `main`.** Gate **STILL SHORT**: the authors' follow-up paper
+(`arXiv:2511.22819`, ~72 days after `arXiv:2509.14185`) carries no certificate for the
+unstable singularities — 0 of leg 175's 4 open items closed, and the follow-up names 3 NEW
+obstructions of its own. Clean landing, no escalation (this is the "still short, new
+obstruction" branch of leg 196's own pre-committed gate, not the "certificate achieved"
+branch). Banked; the Wall-2 question (leg 172) stays answered NO on this literature line.
+
+**Slot G refilled: leg 202 (PNA) promoted from reserve, dispatched now.** Per the
+orchestrator's own report, live slots are: A=192(H2CV), B=187(M2CI), C=201(ICA2),
+D=188(SURV), E=190(EGML), F=200(PCA), **G=202(PNA, new)**, H=197(VNL), I=198(BHA),
+J=199(CGA).
+
+**Watermark hit exactly as flagged last update: reserve drops to 3 (203, 204, 205).** Per
+§3a and the standing instruction to draft at least 8 more the moment the count is at or below
+3, eight new fully-specified candidates are drafted below, all grounded in already-landed
+findings, none presupposing any in-flight leg's unknown outcome. Four close out the
+audit-family's now-fully-enumerated remaining pool (`ga_search.py`, `dissipative_profile.py`,
+`target_selection.py`, `spectral_certificate.py` — confirmed by grep against this file, the
+only four solver modules with zero prior name-matched adversarial-audit entry); one extends
+the postconstruction-verification pattern (192/193/194/195) to leg 185's own new numeric
+measurement; one is a literature cross-check grounded in leg 185's finding against Xu's
+already-fully-read paper; one independently re-verifies leg 196's own literature claim
+(same discipline as 195 applied to a literature landing, not just a construction); one is a
+ledger-consistency audit of this cycle's own three append-only ledger rows (189/190/197),
+the same pattern as leg 145's prior ledger self-consistency audit.
+
+```
+### 206 — ROUTE-GSA: ADVERSARIAL AUDIT OF ga_search.py (RESERVE)
+**Thesis.** `ga_search.py` is the GA infrastructure module this repository's own standing
+ban restricts ("no GA compute on an unvalidated fitness") — every leg that has ever touched
+it (49, 59, 160) measured the FITNESS, never the search infrastructure itself for silent
+defects under adversarial input. Confirmed zero prior name-matched adversarial-audit entry.
+Standard battery: NaN/Inf, degenerate population/parameter bounds, boundary-of-convergence
+inputs, planted wrong-value pass-through. **No GA compute under any outcome** — this leg
+audits the module's own robustness to bad input, it does not run or repair the banned
+search.
+**Gate.** Under adversarial and degenerate inputs, does `ga_search.py` ever silently return
+a wrong value (a fitness, a converged individual, a termination flag) rather than reject or
+visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude, and state explicitly whether it is
+         orthogonal to the standing GA ban (an infrastructure bug, not a fitness-validity
+         question) or bears on it. Escalate if claim-adjacent, do not patch under this leg's
+         own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_ga_search_adversarial.py, experiments/p2_route_gsa_v1_adversarial.py,
+               writeup/data/p2_route_gsa_v1_adversarial.json,
+               writeup/novelty/leg_206.md, experiments/journal/leg_206.md
+**Difficulty.** standard
+**Independence.** Reads solver/ga_search.py; edits nothing under either outcome. No GA
+compute triggered under either outcome — does not touch or lift the standing ban. Reserve —
+promote once a slot frees.
+```
+
+```
+### 207 — ROUTE-DPA: ADVERSARIAL AUDIT OF dissipative_profile.py (RESERVE)
+**Thesis.** `dissipative_profile.py` is leg 125's own construction module, read read-only by
+legs 185 and 187 for their own diagnostics/constructions, but never itself adversarially
+audited. Given leg 185 already found a genuine solver-artifact (a false Newton stall) one
+layer up in the SAME construction family, this module is a plausible place for a sibling
+defect. Standard battery: NaN/Inf, degenerate dilation-gauge parameters, boundary-of-
+convergence inputs (near `a*=0.3865`, leg 185's own measured sign-flip boundary), planted
+wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs (including parameters bracketing leg 185's
+own measured `a*=0.3865` sign-flip boundary), does `dissipative_profile.py` ever silently
+return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude, and state whether it bears on leg 125's or
+         leg 185's own banked numbers. Escalate as a priority finding if so, do not patch
+         under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. Independently strengthens leg 185's own diagnostic.
+**Territory.** test_dissipative_profile_adversarial.py,
+               experiments/p2_route_dpa_v1_adversarial.py,
+               writeup/data/p2_route_dpa_v1_adversarial.json,
+               writeup/novelty/leg_207.md, experiments/journal/leg_207.md
+**Difficulty.** standard
+**Independence.** Reads solver/dissipative_profile.py; edits nothing under either outcome.
+Read-only overlap with 125/185/187/193 (all read the same module read-only) — read-read, not
+a collision. Reserve — promote once a slot frees.
+```
+
+```
+### 208 — ROUTE-TSA: ADVERSARIAL AUDIT OF target_selection.py (RESERVE)
+**Thesis.** `target_selection.py` is leg 63/125's own screening module (the multiplier/shift
+predicate that selected the γ=2 candidate) and has never itself been adversarially audited,
+despite underwriting the single most consequential target-selection claim this run has
+produced. Standard battery: NaN/Inf, degenerate exponent/parameter input, boundary-of-
+screen-admissibility cases, planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `target_selection.py` ever silently
+return a wrong screening verdict (pass a candidate that should fail the multiplier/shift
+predicate, or vice versa) rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude, and state explicitly whether leg 63's own
+         "exactly one candidate passes" finding is at risk. This would be claim-adjacent to
+         the entire γ=2 line (63/125/174/185/187) — escalate immediately, do not patch under
+         this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. Independently strengthens leg 63's own screening claim.
+**Territory.** test_target_selection_adversarial.py,
+               experiments/p2_route_tsa_v1_adversarial.py,
+               writeup/data/p2_route_tsa_v1_adversarial.json,
+               writeup/novelty/leg_208.md, experiments/journal/leg_208.md
+**Difficulty.** standard
+**Independence.** Reads solver/target_selection.py; edits nothing under either outcome.
+Read-only overlap with 63/125/174 (all read this module read-only) — read-read, not a
+collision. Reserve — promote once a slot frees.
+```
+
+```
+### 209 — ROUTE-SCA2: ADVERSARIAL AUDIT OF spectral_certificate.py (RESERVE)
+**Thesis.** `spectral_certificate.py` is leg 127's own module — Theorem NGX itself
+(`Z_1 >= 1` for every bounded approximate inverse on `ell^1_w`) is proved against this
+module's own construction, and it has been read read-only by legs 163/171/173/181/183/192
+without ever itself being adversarially audited under degenerate/adversarial input. Given
+this is the single most load-bearing negative result this repository has produced, the audit
+family's own discipline (every claim-adjacent module gets checked, not assumed clean by
+proximity to a proof) applies here directly.
+**Gate.** Under adversarial and degenerate inputs (near-singular weight classes, boundary-of-
+admissibility `A`, NaN/Inf), does `spectral_certificate.py` ever silently return a wrong
+`Z_1`/`sigma_min` value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude, and state explicitly whether Theorem NGX's
+         own proof (not just its battery measurements) is at risk. This would be the single
+         highest-priority finding this repository could produce right now — escalate
+         immediately, do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. Independently strengthens Theorem NGX's own robustness.
+**Territory.** test_spectral_certificate_adversarial.py,
+               experiments/p2_route_sca2_v1_adversarial.py,
+               writeup/data/p2_route_sca2_v1_adversarial.json,
+               writeup/novelty/leg_209.md, experiments/journal/leg_209.md
+**Difficulty.** standard
+**Independence.** Reads solver/spectral_certificate.py; edits nothing under either outcome.
+Read-only overlap with 127/163/171/173/181/183/192 (all read this module read-only) —
+read-read, not a collision. Route name SCA2 chosen to avoid collision with any prior
+SCA-named leg; verify against capabilities.py's route registry before dispatch. Reserve —
+promote once a slot frees.
+```
+
+```
+### 210 — ROUTE-M2SV: INDEPENDENT VERIFICATION OF LEG 185's REPARAMETRIZED nu MEASUREMENT
+(RESERVE)
+**Thesis.** Leg 185 (M2SD) produced a genuinely new numeric construction result, not just a
+diagnostic classification: reparametrizing with `a` fixed, dilation gauge imposed, `nu` as
+the unknown, it recovered `nu = +0.01799364` (grid-converged, truncation-insensitive over
+55x of domain) at `a=0.30`, but NEGATIVE (`-0.00818`/`-0.00895`) at Chen's own `a=1/2` — the
+precise, now-measured shape of "Object B exists below `a*=0.3865` and is anti-diffusive at or
+above it." Per this repository's own postconstruction-verification discipline
+(192/193/194/195), a genuinely new numeric claim deserves independent re-derivation before
+being treated as settled, not just self-reported.
+**Gate.** Does an independent re-run of leg 185's reparametrized continuation reproduce
+`nu = +0.01799364` at `a=0.30` and the negative values at `a=1/2`, from leg 185's own script
+and transcribed constants?
+  yes -> Independently confirmed. Bank as the permanent verification record for this
+         repository's Object-B sign-flip finding.
+  no  -> Report the exact discrepancy precisely; escalate as a priority finding — this
+         directly informs leg 174's (VBS) "missing rung" catalog and leg 187's own inviscid
+         construction context.
+**Territory.** test_dissipative_profile_m2sd_postconstruction.py,
+               experiments/p2_route_m2sv_v1_postconstruction.py,
+               writeup/data/p2_route_m2sv_v1_postconstruction.json,
+               writeup/novelty/leg_210.md, experiments/journal/leg_210.md.
+               Reads (never edits) leg 185's own report/JSON and script, read-only.
+**Difficulty.** standard
+**Independence.** Read-only re-derivation of a closed leg's own numeric result. Disjoint
+from 207 (DPA, adversarial input testing of the module generally, not re-deriving 185's
+specific banked numbers) and from every other live/reserve leg. Reserve — promote once a
+slot frees.
+```
+
+```
+### 211 — ROUTE-XU11: DOES Xu arXiv:2607.19762 SAY ANYTHING ABOUT A SIGN-CHANGING/ANTI-
+DIFFUSIVE VISCOUS BRANCH, BEARING ON LEG 185's FINDING? (RESERVE)
+**Thesis.** Xu's paper has been read at full-text depth six times now (legs 127, 163, 171,
+173, 181, 183) for its origin-H² invertibility citation and its §8 no-go, but never asked
+the specific question leg 185's own new finding raises: does Xu's spectral-picture framework
+say anything — directly or as a derivable corollary — about a viscous branch that changes
+sign (anti-diffusive above some threshold), the exact shape of leg 185's `a*=0.3865`
+boundary? This is not a re-read of the whole paper; it is one targeted question against
+material already fully accessed, grounded in a finding (185) that postdates every prior read.
+**Gate.** Does Xu arXiv:2607.19762, at full-text depth, characterize or bear on a
+sign-changing/anti-diffusive viscous branch for this operator class (directly, or as a
+derivable corollary of a stated theorem)?
+  yes -> Record the exact passage and its hypotheses verbatim. ESCALATE as directly
+         informing leg 174's catalog and leg 185's own finding — do not build or attempt to
+         reconcile the two under this leg's own authority.
+  no  -> Xu's paper is confirmed silent on this specific question. Bank the ledger entry;
+         leg 185's finding stands as this repository's own frontier on it.
+**Territory.** experiments/p2_route_xu11_v1_lit.py, writeup/data/p2_route_xu11_v1_lit.json,
+               writeup/novelty/leg_211.md, experiments/journal/leg_211.md.
+               Does NOT edit solver/literature_gates.py or any certificate module.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from every other
+prior Xu-reading leg (each asked a different, non-overlapping question) and from every other
+live/reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 212 — ROUTE-USC2V: INDEPENDENT VERIFICATION OF LEG 196's LANDED LITERATURE FINDING
+(RESERVE)
+**Thesis.** Leg 196 (USC2) landed STILL SHORT: `arXiv:2511.22819` (the authors' follow-up,
+~72 days after `arXiv:2509.14185`) carries no certificate, closes 0 of leg 175's 4 open
+items, and names 3 new obstructions. This is a literature claim with specific, checkable
+content (a citation, a count of closed items, three named obstructions) — the same shape of
+claim leg 60's own history shows this repository should not take on a single leg's
+self-report alone, even for a literature-only finding, not just a numeric construction.
+**Gate.** Does an independent read of `arXiv:2511.22819` at full-text depth confirm: (a) no
+certificate is stated or locatable, (b) 0 of leg 175's 4 open items are closed, and (c) the
+same three obstructions leg 196 named are actually present in the paper's own text?
+  yes -> Independently confirmed. Bank as the permanent verification record; leg 196's
+         finding stands doubly-checked.
+  no  -> Report the exact discrepancy precisely (a missed certificate, a miscounted open
+         item, a mistranscribed obstruction); escalate as a priority finding — this directly
+         bears on the Wall-2 question (leg 172) and should not be left uncorrected.
+**Territory.** experiments/p2_route_usc2v_v1_verification.py,
+               writeup/data/p2_route_usc2v_v1_verification.json,
+               writeup/novelty/leg_212.md, experiments/journal/leg_212.md.
+               Reads (never edits) leg 196's own report/JSON, read-only.
+**Difficulty.** light
+**Independence.** Read-only re-verification of a landed, closed literature leg. Disjoint
+from every other live/reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 213 — ROUTE-LGC2: LEDGER CONSISTENCY AUDIT, THIS CYCLE'S THREE APPEND-ONLY ROWS
+(190/EGML, 197/VNL, AND 189/XUTRI'S NON-EDIT) (RESERVE)
+**Thesis.** This cycle appended (or, for 189, declined to append) rows to two shared
+ledgers: 190 (EGML) added an "EGM" row to `solver/literature_gates.py`; 197 (VNL) added an
+`arXiv:2208.09445` row to `solver/viscous_novelty.py::PRECEDENTS`; 189 (XUTRI) correctly did
+NOT touch `literature_gates.py`'s `a_c` row (gate NO, null result). Leg 145's own prior
+ledger self-consistency audit predates all three of these rows. Per the same discipline,
+check the newly-appended rows for internal consistency (citation format matches every other
+row in the same ledger, no duplicate or conflicting row, the claim transcribed matches the
+source leg's own banked report verbatim) before assuming append-only edits are automatically
+safe.
+**Gate.** Do the 190 and 197 rows match `literature_gates.py`'s and `viscous_novelty.py`'s
+own existing row format exactly, with no duplicate/conflicting entry and no transcription
+drift from legs 190's/197's own banked reports?
+  yes -> Bank the audit as confirming ledger integrity post-append; record the pass in
+         capabilities.py.
+  no  -> Name the exact inconsistency (format drift, duplicate, or transcription error)
+         precisely; escalate rather than silently reconcile it, since both ledgers are
+         shared infrastructure every literature-pass leg reads.
+**Territory.** experiments/p2_route_lgc2_v1_ledgeraudit.py,
+               writeup/data/p2_route_lgc2_v1_ledgeraudit.json,
+               writeup/novelty/leg_213.md, experiments/journal/leg_213.md.
+               Reads (never edits) solver/literature_gates.py and solver/viscous_novelty.py,
+               read-only.
+**Difficulty.** light
+**Independence.** Read-only ledger audit, no solver module edited. Disjoint from every other
+live/reserve leg (196/197/190/189 all already landed/closed; this reads their aftermath, not
+their in-flight state). Reserve — promote once a slot frees.
+```
+
+**Reserve queue: 11 undispatched legs (203, 204, 205, 206, 207, 208, 209, 210, 211, 212,
+213).** Well above the §3a watermark again. Promotion order when a slot next opens:
+unchanged for the pre-existing three (203 RSA, then 204 TNA2, then 205 BVR), followed by the
+eight new ones in the order drafted above (206 GSA, 207 DPA, 208 TSA, 209 SCA2, 210 M2SV,
+211 XU11, 212 USC2V, 213 LGC2) — this ordering is not a strong ranking claim, since all
+eleven are exploration legs of comparable weight (light-to-standard difficulty, each
+independently gated, none touching a live leg's territory); promote in this order absent a
+gate answer that changes the picture.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
+
 **File-territory collision check across all ten dispatched slots.** 192 reads
 `solver/origin_h2_certificate.py`; 187 owns `solver/chen_inviscid_certificate.py` (new
 module, sole owner); 170 reads `solver/critical_dissipation.py`; 188 reads
