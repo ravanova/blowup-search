@@ -3382,3 +3382,16 @@ preempted agents had reached a landing.
   witness) are optimistic by 7.9x against leg 176's true 0.0908 -- outside this
   leg's territory, banked as a stated conflict, direction doesn't change any
   conclusion. PUB1/PUB2 remain unapproved drafts.
+- **Leg 217 (Route-PCR) — repaired all 4 named mechanisms, gate NO overall,
+  ESCALATED (parked, not merged):** all four of leg 200's port_certification.py
+  mechanisms repair cleanly (5/5 mixed-sign sweeps that silently returned a
+  different operator's inverse now raise, vs 18820x error pre-repair; 5/5
+  radius-0 certificates rejected; 3/3 integer-rhs cases exact; 6/6 poisoned
+  ladders refused), with leg 195's 114/114 clean PORT reproduction bit-identical.
+  A lesson-90 control leg 200's own battery structurally could not contain
+  (all-negative s_rho, not just mixed-sign) confirms the repair: 1186.6 silent
+  error pre-repair -> 2.11e-16 post. BUT: two landed artifacts OUTSIDE this leg's
+  territory (test_port_certification_regression.py, a banked JSON row) still
+  assert the pre-repair accept on the exact degenerate input leg 200 flagged, and
+  3 more silent paths survive outside the 4 named mechanisms. Module not
+  fully closed; a post-repair verification leg is owed once these are addressed.
