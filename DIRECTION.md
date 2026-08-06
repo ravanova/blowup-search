@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 253 | NRSX | yes |
 | B | 249 | H2CV2 | no |
-| C | 254 | DSSX | no |
+| C | 251 | P0T | yes |
 | D | 221 | BVRR | no |
 | E | 255 | P1A | yes |
 | F | 236 | RDDEP | yes |
@@ -38,12 +38,10 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM sync of 2026-08-07: 5/10 floor-eligible -- A/253/NRSX, E/255/P1A,
-F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the post-steer revised roster plus the slot-A
-refill in the two most recent DM updates at the tail of this file. Leg 254 (DSSX, scoping)
-is counted "no" conservatively, per the DM's own note. Leg 258's original snapshot was
-taken from the pre-steer prose table and was stale on arrival; corrected here in the same
-update that acknowledges its landing.)
+(Current snapshot, DM update of 2026-08-07 (slot-C refill): 6/10 floor-eligible --
+A/253/NRSX, C/251/P0T, E/255/P1A, F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the
+"Slot-C refill" DM update at the tail of this file. 251 replaced 254 (DSSX) in slot C
+after 254 finished and escalated its cost-shaped finding, vacating the slot per §4a.)
 
 ---
 
@@ -10236,3 +10234,76 @@ works, and per the marker's own comment. The orchestrator does not need to touch
 
 Nothing else changes: slots, reserve line (count 9), floor status, and all sequencing
 notes stand as in the two updates above.
+
+---
+
+## DM update, 2026-08-07 — slot-C refill: 251 (P0T) DISPATCHES NOW with a conditional-tier
+instruction; 254's escalated finding recorded; 250's verifier clean, DOCS nits queued as
+leg 259; a standing brief clause against mid-leg pausing
+
+**254 (DSSX) finished and escalated** (branch `leg/254-dssx-v1`, PR #18, slot vacated per
+§4a): **the DSS lane's expensive entrance is COST-SHAPED, not substantive** — excluded
+under the old cost-sensitive goal, with no measured failure of its own. The proposed ban
+re-posing is with the user in NEEDS-YOU; no ban moves until that ruling.
+
+**Slot C: leg 251 (Route-P0T) promoted — dispatch now, not after the ruling.** Reasoning
+recorded: the user's prioritization ("settle the ban first") was aimed at a specific
+failure mode — P0 screening candidates with one of the few NRS/Tsai survivors banned by a
+clause that never argued against it. 254's finding settles the SUBSTANCE: the exclusion is
+cost-shaped, so 251 no longer risks wrongly treating DSS-expensive as measured-dead. The
+only thing outstanding is the ruling itself, and 251 can respect it without waiting:
+**brief addition (mandatory): 251 evaluates DSS-lane candidates on their merits under the
+NRS/Tsai + dead-end screens, but any candidate whose viability depends on the DSS
+expensive entrance goes in a separate, explicitly-marked CONDITIONAL tier — reportable,
+not bankable as THE Phase-1 candidate until the user's ruling lands. If the ruling arrives
+mid-leg, the orchestrator forwards it and the tier resolves accordingly.** 254's full
+finding (and its locators) folds into 251's brief alongside CONTINUATION_PROMPT.md
+Directive 1, as originally specified. This dispatches the plan's own NEXT stage; waiting
+would idle the single most consequential leg on a formality whose substance is already
+settled — the standing answer ("best for the overall goal") decides this without the user.
+
+**250's §7b verifier confirmed no gap** (landed `600055b`) — the inverted-inequality fix
+stands. Two DOCS-level prose-precision nits (no banked number wrong, no urgency), queued
+so they are not lost rather than interrupting anything:
+
+```
+### 259 — ROUTE-PUB2P: PUB2 PROSE-PRECISION PASS (two nits from leg 250's §7b verifier —
+DOCS-only, light, low priority)
+**Thesis.** Leg 250's verifier confirmed the fix clean but surfaced two prose-precision
+residues in TECHNICAL_P2_PUB2_V1.md: (a) §3.5 states `0.71465 = 1/1.3993` as "exactly"
+when it is a round-up by 7.0e-06 (§3.2 already discloses this correctly; §3.5 does not);
+(b) the table cell at line 175 (§3.1 — outside leg 250's three declared gate sites) still
+presents "σ_min bounded away from zero" as a verified conjunct, which §3.5 now correctly
+withdraws as unproven.
+**Gate.** After the pass, do §3.5's exactness wording and §3.1's table cell both match
+§3.5's own corrected epistemic status (upper bounds only, no proven floor, rounding
+disclosed), with no other sentence's meaning changed?
+  yes -> Bank; PUB2 is internally consistent on this point at every site, not just the
+         three leg 250 declared.
+  no -> Report which site resists; escalate rather than guess (same clause as 250's).
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md (the two named sites ONLY),
+               writeup/novelty/leg_259.md, experiments/journal/leg_259.md.
+**Difficulty.** light
+**Independence.** DOCS-only; disjoint from 249 (which verifies the number itself).
+Dispatchable at any vacancy; LOW priority — behind 248/228/210 in the reserve order.
+```
+
+**Standing brief clause, adopted from the orchestrator's observation (236 and 226 pausing
+mid-computation for interim reports): every future dispatch brief carries — "Run to your
+gate answer in one pass. Interim reports are for escalation-worthy findings only; a
+progress update is not one."** Recorded here so it applies to all future briefs without
+per-leg drafting.
+
+**FLOOR-TABLE block updated in this same edit** (C: 254 → 251). **Floor status: 6/10
+strictly (253, 251, 255, 236, 256, 257) — comfortably met.**
+
+**Canonical reserve line: reserve count 9 — legs 248, 228, 210, 259, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 4 (248, 228, 210, 259 — in that priority
+order); 229 blocked on 226; 231-234 blocked on repairs 217/219/221/225. Above the §3a
+watermark; the pre-committed refill trigger (draft fresh candidates in the same update
+that next promotes any of 248/228/210) stands.
+
+Nothing in this update lifts a ban — 254's re-posing sits with the user, and 251's
+conditional tier exists precisely so the leg cannot pre-empt that ruling. No committed
+gate changes; no claim about Walls 1 and 2 moves; Clay stays ~0.05%. Next fresh leg
+number: 260. No direction question raised.
