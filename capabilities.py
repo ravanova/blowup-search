@@ -68,7 +68,14 @@ CAPABILITIES = [
      "test": "test_gclm_family.py"},
     {"module": "solver/gclm_rescaled.py", "object": "1D CLM (a=0), dynamic rescaling",
      "holds": "rescaled flow, fixed point, upwind transport in the stretched coordinate",
-     "validated": ("relaxes to the exact CLM self-similar fixed point -4X/(1+4X^2)"),
+     "validated": ("relaxes to the exact CLM self-similar fixed point -4X/(1+4X^2) at the\n"
+                   "                   validated gauge f(0) = -4. The fixed point is a one-parameter LINE\n"
+                   "                   (Omega_0(lambda X) steady for every lambda) and the residual is\n"
+                   "                   degree-1 in lambda, so run()'s stopping test is RELATIVE to the\n"
+                   "                   frozen gauge, tol * max(|f(0)|/4, GAUGE_TOL_FLOOR) -- an absolute\n"
+                   "                   tol was met by the initial data alone for lambda < 3.4e-09 and\n"
+                   "                   reported convergence after 1 step (85, repaired). Exactly 1x at\n"
+                   "                   f(0) = -4, so every banked number is unchanged"),
      "test": "test_gclm_rescaled.py"},
     {"module": "solver/rescaled_spectrum.py", "object": "gCLM rescaled linearization, spectrum",
      "holds": "dense spectrum of the linearization about the rescaled fixed point",
