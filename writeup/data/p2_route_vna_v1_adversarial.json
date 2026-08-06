@@ -1,0 +1,278 @@
+{
+ "banked_numbers_exposed": false,
+ "disposition": "ESCALATED, NOT PATCHED -- the gate's yes-branch withholds patch authority from this leg",
+ "gate": "Under adversarial and degenerate inputs, does viscous_novelty.py ever silently return a wrong value rather than reject or visibly propagate the defect?",
+ "gate_answer": "YES",
+ "gates": {
+  "G1_antidissipation_guard_missing_in_margin_law": {
+   "exception_raised": false,
+   "module_sentence_relied_on": "branch_in_kappa docstring: 'the map has other zeros (with negative eps, i.e. anti-dissipation) and a continuation that does not check will happily report them as branch points'",
+   "most_negative_eps": -0.4210609258180659,
+   "n_rows_returned": 4,
+   "n_rows_with_inadmissible_eps": 4,
+   "rows": [
+    {
+     "Jinv_norm": 597.2414144320912,
+     "cond": 1.4534076629725303,
+     "eps": -0.24730157806155306,
+     "eps_admissible_by_branch_in_kappa_guard": false,
+     "kappa": 0.6345999999999999,
+     "mu": 0.8581633150734834,
+     "offset": 0.08
+    },
+    {
+     "Jinv_norm": 97.79644094060242,
+     "cond": 5.034582270578168,
+     "eps": -0.3415586025566256,
+     "eps_admissible_by_branch_in_kappa_guard": false,
+     "kappa": 0.47459999999999997,
+     "mu": 1.3688250105357673,
+     "offset": -0.08
+    },
+    {
+     "Jinv_norm": 91391.22407985103,
+     "cond": 114.16478177566694,
+     "eps": -0.334896843553965,
+     "eps_admissible_by_branch_in_kappa_guard": false,
+     "kappa": 0.5946,
+     "mu": 0.8496421775384004,
+     "offset": 0.04
+    },
+    {
+     "Jinv_norm": 5037.420436721724,
+     "cond": 23.803128783301176,
+     "eps": -0.4210609258180659,
+     "eps_admissible_by_branch_in_kappa_guard": false,
+     "kappa": 0.5146,
+     "mu": 0.4093432808761548,
+     "offset": -0.04
+    }
+   ],
+   "silently_returned_wrong_value": true,
+   "slope_expected_by_module": -1.0,
+   "slope_misreport_factor": 6.472178495170862,
+   "slope_reported": -6.472178495170862,
+   "what": "margin_law accepts rows branch_in_kappa's own documented guard rejects"
+  },
+  "G2_integrate_from_zero_xi1_passthrough": {
+   "exception_raised": false,
+   "honest_reference_xi1_1.0": {
+    "Q_imag": -0.12725216782426685,
+    "Q_real": 0.7328178780049042,
+    "n_steps": 100
+   },
+   "match_defect_at_xi1_1e-9": {
+    "abs_defect": 5651455778.719397,
+    "outcome": "value",
+    "relative": 2.77413191783097e+17,
+    "scale": 2.0371979221298675e-08
+   },
+   "module_sentence_relied_on": "integrate_from_zero docstring: 'the initial-value problem Q(0) = mu, Q'(0) = 0, integrated to xi1'",
+   "rows": [
+    {
+     "Q_imag": -2.28491802841313e-17,
+     "Q_real": 1.23203754902,
+     "abs_error_vs_honest_xi1_1": 0.5151828744673058,
+     "equals_initial_condition_mu": true,
+     "n_steps": 0,
+     "xi1": 1e-08
+    },
+    {
+     "Q_imag": -2.28491802841313e-17,
+     "Q_real": 1.23203754902,
+     "abs_error_vs_honest_xi1_1": 0.5151828744673058,
+     "equals_initial_condition_mu": true,
+     "n_steps": 0,
+     "xi1": 0.0
+    },
+    {
+     "Q_imag": -2.28491802841313e-17,
+     "Q_real": 1.23203754902,
+     "abs_error_vs_honest_xi1_1": 0.5151828744673058,
+     "equals_initial_condition_mu": true,
+     "n_steps": 0,
+     "xi1": -1.0
+    },
+    {
+     "Q_imag": -2.28491802841313e-17,
+     "Q_real": 1.23203754902,
+     "abs_error_vs_honest_xi1_1": 0.5151828744673058,
+     "equals_initial_condition_mu": true,
+     "n_steps": 0,
+     "xi1": -1000000.0
+    }
+   ],
+   "silently_returned_wrong_value": true,
+   "what": "integrate_from_zero returns Q(origin) for any xi1 <= 1e-8, n_steps = 0"
+  },
+  "G3_compare_to_published_branch_interp_tie": {
+   "clean_max_abs_diff": 0.00044945999999999875,
+   "clean_rms_diff": 0.0003136935719413668,
+   "exception_raised": false,
+   "inflation_factor": 2143.6616384105423,
+   "module_sentence_relied_on": "compare_to_published_branch docstring: 'our sweep is monotone in kappa, so a plain interpolation is well-defined'",
+   "poisoned_max_abs_diff": 0.9634901599999998,
+   "poisoned_rms_diff": 0.39334329520788797,
+   "silently_returned_wrong_value": true,
+   "what": "a duplicated kappa silently changes the published-agreement headline",
+   "worst_row": {
+    "diff": 0.9634901599999998,
+    "eps_ours": 0.9838088599999998,
+    "eps_published": 0.0203187,
+    "kappa": 0.800313
+   }
+  },
+  "G4_ledger_verdict_vocabulary_unenforced": {
+   "baseline_gate_answer": "YES",
+   "documented_vocabulary": [
+    "PRE_EMPTS",
+    "ADJACENT",
+    "EXCLUSION"
+   ],
+   "exception_raised": false,
+   "gate_answer_flipped": true,
+   "missing_key_behaviour": {
+    "exception": "KeyError",
+    "message": "'verdict'",
+    "outcome": "raised",
+    "warnings": []
+   },
+   "restored_gate_answer": "YES",
+   "silently_returned_wrong_value": true,
+   "typo_gate_answer": "NO",
+   "what": "one character in a ledger verdict flips stage V's gate answer"
+  },
+  "G5_positive_controls": {
+   "controls": {
+    "branch_in_kappa_nan_seed": {
+     "n_converged": 0,
+     "n_records": 1,
+     "outcome": "value",
+     "rejected_all": true,
+     "warnings": []
+    },
+    "dimension_zero_integrate_from_zero": {
+     "exception": "ZeroDivisionError",
+     "message": "complex division by zero",
+     "outcome": "raised",
+     "warnings": []
+    },
+    "kappa_zero_asymptotic_coefficients": {
+     "exception": "ZeroDivisionError",
+     "message": "complex division by zero",
+     "outcome": "raised",
+     "warnings": []
+    },
+    "margin_law_nan_seed_row": {
+     "exception": "LinAlgError",
+     "message": "SVD did not converge",
+     "outcome": "raised",
+     "warnings": []
+    },
+    "steps_per_osc_zero": {
+     "exception": "ZeroDivisionError",
+     "message": "float division by zero",
+     "outcome": "raised",
+     "warnings": []
+    }
+   },
+   "fold_of_degenerate_inputs": {
+    "collinear": {
+     "eps_star": 0.02999999999999403,
+     "interior": true,
+     "kappa_star": 0.5199999999999979,
+     "vertex_inside_bracket": true
+    },
+    "flat_eps_endpoint_maximum": {
+     "honestly_flagged_non_interior": true,
+     "interior": false
+    },
+    "tiny_curvature": {
+     "eps_star": 0.010000099999999991,
+     "interior": true,
+     "kappa_star": 0.5099999999999573,
+     "vertex_inside_bracket": true
+    }
+   },
+   "n_controls": 5,
+   "n_that_fired": 5,
+   "what": "guards in the same module that fire, and could have come out otherwise"
+  },
+  "G6_latency_real_pipeline": {
+   "any_banked_number_exposed": false,
+   "branch": {
+    "all_converged": true,
+    "all_eps_admissible": true,
+    "eps_max": 0.060634972869342454,
+    "eps_min": 4.214615910985052e-07,
+    "n_converged": 66,
+    "n_records": 66
+   },
+   "compare_to_published": {
+    "max_abs_diff": 1.3326970605555266e-05,
+    "n": 14,
+    "rms_diff": 8.953387270174675e-06
+   },
+   "fold": {
+    "abs_diff_eps_star": 1.4034342077362538e-07,
+    "abs_diff_kappa_star": 1.0615032501104515e-05,
+    "eps_star": 0.06063624034342077,
+    "interior": true,
+    "kappa_star": 0.5546333849674989,
+    "published_eps_star": 0.0606361
+   },
+   "margin_law": {
+    "expected_slope": -1.0,
+    "n_rows": 10,
+    "n_rows_with_inadmissible_eps": 0,
+    "slope": -0.9966467127879302
+   },
+   "runtime_s": 156.37584519386292,
+   "what": "the banked reproduction, run under the same conditions capabilities.py cites"
+  },
+  "G7_step_cap_termination": {
+   "first_step_at_nonpositive_hmax": {
+    "-0.001": {
+     "h": -0.001,
+     "xi_advances": false
+    },
+    "0.0": {
+     "h": 0.0,
+     "xi_advances": false
+    }
+   },
+   "kind": "non-termination, NOT a silent wrong value",
+   "rows": [
+    {
+     "hmax": 0.01,
+     "n_steps": 100,
+     "seconds": 0.005791902542114258
+    },
+    {
+     "hmax": 0.001,
+     "n_steps": 1000,
+     "seconds": 0.05774235725402832
+    },
+    {
+     "hmax": 0.0001,
+     "n_steps": 10000,
+     "seconds": 0.7595362663269043
+    }
+   ],
+   "terminates_for_nonpositive_hmax": false,
+   "what": "step count scales as 1/hmax; hmax <= 0 cannot terminate"
+  }
+ },
+ "leg": 143,
+ "module_edited_by_this_leg": false,
+ "module_under_audit": "solver/viscous_novelty.py",
+ "n_silent_corruption_sites": 4,
+ "route": "ROUTE-VNA",
+ "runtime_s": 266.40986371040344,
+ "silent_corruption_sites": [
+  "G1_antidissipation_guard_missing_in_margin_law",
+  "G2_integrate_from_zero_xi1_passthrough",
+  "G3_compare_to_published_branch_interp_tie",
+  "G4_ledger_verdict_vocabulary_unenforced"
+ ]
+}
