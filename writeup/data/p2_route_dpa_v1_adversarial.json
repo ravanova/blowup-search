@@ -1,0 +1,936 @@
+{
+ "banked_numbers_exposed": false,
+ "bears_on_leg_125_banked_numbers": false,
+ "bears_on_leg_185_banked_numbers": false,
+ "disposition": "ESCALATED / PARKED, NOT PATCHED -- the gate's yes-branch withholds patch authority from this leg and directs a branch-only push",
+ "gate": "Under adversarial and degenerate inputs (including parameters bracketing leg 185's own measured a* = 0.3865 sign-flip boundary), does dissipative_profile.py ever silently return a wrong value rather than reject or visibly propagate the defect?",
+ "gate_answer": "YES",
+ "gates": {
+  "G1_a_passthrough_newton_gamma2_to_Y0_Z2": {
+   "contract_quoted": "newton_gamma2 docstring: 'with the advection `a` as the free unknown'",
+   "nan_or_inf_returned": false,
+   "raised": false,
+   "rows": [
+    {
+     "Y0_defect_sup_as_the_module_reports_it": 0.05394934061486613,
+     "Y0_sup_as_the_module_reports_it": 0.426675560875004,
+     "Z2_as_the_module_reports_it": 732917.3279063057,
+     "a_drift": -0.027646806391160794,
+     "constructor_a": 0.39,
+     "defect_inflation_factor": 1143959298062.2146,
+     "defect_sup_at_constructor_a": 0.05394934061486613,
+     "defect_sup_at_solved_a": 4.716019241790548e-14,
+     "n": 201,
+     "newton_gamma2_residual_rms_at_solved_a": 1.4181097761435849e-14,
+     "solved_a": 0.3623531936088392
+    },
+    {
+     "Y0_defect_sup_as_the_module_reports_it": 0.014320602147234494,
+     "Y0_sup_as_the_module_reports_it": 0.4782913226620129,
+     "Z2_as_the_module_reports_it": 8215721.715503836,
+     "a_drift": -0.007914514647059112,
+     "constructor_a": 0.39,
+     "defect_inflation_factor": 241311461187.7468,
+     "defect_sup_at_constructor_a": 0.014320602147234494,
+     "defect_sup_at_solved_a": 5.934489011316657e-14,
+     "n": 401,
+     "newton_gamma2_residual_rms_at_solved_a": 1.329685329535958e-14,
+     "solved_a": 0.3820854853529409
+    }
+   ],
+   "severity": "severe -- the returned Y_0 is a norm of the wrong operator's defect",
+   "signatures": "y0_measure(dp, Omega, c_l, c_omega, nu=0.0, norm='sup') -- no `a` parameter; z2_quadratic_constant(dp, Omega, c_l, c_omega, nu=0.0, norm='sup') -- no `a` parameter, and uses abs(dp.a) in ||B||",
+   "silently_returned_wrong_value": true,
+   "what": "newton_gamma2's solved `a` cannot reach y0_measure / z2_quadratic_constant",
+   "worst_defect_inflation_factor": 1143959298062.2146
+  },
+  "G2_zero_profile_echoes_c_l0_at_residual_zero": {
+   "contract_quoted": "module header: 'Delta is measured here, not assumed: newton_profile solves for c_l and it is free to land anywhere'; newton docstring: 'c_l is then a genuine OUTPUT'",
+   "fabricated_Delta_at_chen_c_l0": -0.33333333333333337,
+   "fabricated_residual_rms": 0.0,
+   "honest_Delta_same_grid": -0.3333169953729733,
+   "honest_c_l_same_grid": 0.33334150231351334,
+   "honest_residual_rms_same_grid": 7.517388016782094e-16,
+   "nan_or_inf_returned": false,
+   "raised": false,
+   "rows": [
+    {
+     "Delta_reported": -0.33333333333333337,
+     "Omega_sup": 0.0,
+     "c_l0_in": 0.3333333333333333,
+     "c_l_out": 0.3333333333333333,
+     "c_l_unchanged": true,
+     "n": 201,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": -0.33333333333333337,
+     "residual_rms": 0.0,
+     "tag": "leg 125's own c_l0 (Chen's exact 1/3)"
+    },
+    {
+     "Delta_reported": -0.4,
+     "Omega_sup": 0.0,
+     "c_l0_in": 0.3,
+     "c_l_out": 0.3,
+     "c_l_unchanged": true,
+     "n": 201,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": -0.4,
+     "residual_rms": 0.0,
+     "tag": "leg 125's M-block c_l0"
+    },
+    {
+     "Delta_reported": 14.0,
+     "Omega_sup": 0.0,
+     "c_l0_in": 7.5,
+     "c_l_out": 7.5,
+     "c_l_unchanged": true,
+     "n": 201,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": 14.0,
+     "residual_rms": 0.0,
+     "tag": "an absurd c_l0, to show nothing constrains it"
+    },
+    {
+     "Delta_reported": -0.33333333333333337,
+     "Omega_sup": 0.0,
+     "c_l0_in": 0.3333333333333333,
+     "c_l_out": 0.3333333333333333,
+     "c_l_unchanged": true,
+     "n": 401,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": -0.33333333333333337,
+     "residual_rms": 0.0,
+     "tag": "leg 125's own c_l0 (Chen's exact 1/3)"
+    },
+    {
+     "Delta_reported": -0.4,
+     "Omega_sup": 0.0,
+     "c_l0_in": 0.3,
+     "c_l_out": 0.3,
+     "c_l_unchanged": true,
+     "n": 401,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": -0.4,
+     "residual_rms": 0.0,
+     "tag": "leg 125's M-block c_l0"
+    },
+    {
+     "Delta_reported": 14.0,
+     "Omega_sup": 0.0,
+     "c_l0_in": 7.5,
+     "c_l_out": 7.5,
+     "c_l_unchanged": true,
+     "n": 401,
+     "newton_iterations_taken": 1,
+     "nu_decay_rate_reported": 14.0,
+     "residual_rms": 0.0,
+     "tag": "an absurd c_l0, to show nothing constrains it"
+    }
+   ],
+   "severity": "severe -- residual_rms is EXACTLY 0.0, so no health indicator the module exposes can distinguish this from a converged solve",
+   "silently_returned_wrong_value": true,
+   "what": "the identically-zero profile is an exact fixed point that echoes c_l0 back",
+   "y0_defect_on_the_zero_profile": 0.0,
+   "y0_measure_on_the_zero_profile": 0.0
+  },
+  "G3_z2_quadratic_constant_silent_norm_fallback": {
+   "contract_quoted": "y0_measure: raise ValueError(f\"unknown norm {norm!r}: use 'sup' or 'l1'\") -- and leg 125's own test_y0_measure_refuses_an_unknown_norm gates it",
+   "inflation_grows_with_n": true,
+   "nan_or_inf_returned": false,
+   "raised": false,
+   "rows": [
+    {
+     "Z2_l1": 2971116449.3117814,
+     "Z2_sup": 2585320154.3584723,
+     "n": 201,
+     "norm_A_l1": 122087.63061350858,
+     "norm_A_sup": 104354.9061924796,
+     "returned_dict_records_which_norm": false,
+     "returned_keys": [
+      "Z2",
+      "norm_A",
+      "norm_B",
+      "norm_D",
+      "norm_H",
+      "norm_VH"
+     ],
+     "silent_fallback_inflation_over_sup": 1.149225732953388,
+     "unrecognised_norms": {
+      "": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      },
+      "2": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      },
+      "Sup": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      },
+      "frobenius": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      },
+      "inf": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      },
+      "linf": {
+       "Z2": 2971116449.3117814,
+       "identical_to_l1": true
+      }
+     }
+    },
+    {
+     "Z2_l1": 359383732649.57245,
+     "Z2_sup": 236100739586.51486,
+     "n": 401,
+     "norm_A_l1": 7627673.883643945,
+     "norm_A_sup": 4688111.015040425,
+     "returned_dict_records_which_norm": false,
+     "returned_keys": [
+      "Z2",
+      "norm_A",
+      "norm_B",
+      "norm_D",
+      "norm_H",
+      "norm_VH"
+     ],
+     "silent_fallback_inflation_over_sup": 1.5221626720821124,
+     "unrecognised_norms": {
+      "": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      },
+      "2": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      },
+      "Sup": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      },
+      "frobenius": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      },
+      "inf": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      },
+      "linf": {
+       "Z2": 359383732649.57245,
+       "identical_to_l1": true
+      }
+     }
+    },
+    {
+     "Z2_l1": 45237461116536.64,
+     "Z2_sup": 22340690760417.86,
+     "n": 801,
+     "norm_A_l1": 485370207.9701529,
+     "norm_A_sup": 219596920.399301,
+     "returned_dict_records_which_norm": false,
+     "returned_keys": [
+      "Z2",
+      "norm_A",
+      "norm_B",
+      "norm_D",
+      "norm_H",
+      "norm_VH"
+     ],
+     "silent_fallback_inflation_over_sup": 2.0248908863948896,
+     "unrecognised_norms": {
+      "": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      },
+      "2": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      },
+      "Sup": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      },
+      "frobenius": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      },
+      "inf": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      },
+      "linf": {
+       "Z2": 45237461116536.64,
+       "identical_to_l1": true
+      }
+     }
+    }
+   ],
+   "severity": "moderate -- a wrong Z_2, growing with n, with no record of the swap",
+   "sibling_y0_measure_message": "unknown norm 'frobenius': use 'sup' or 'l1'",
+   "sibling_y0_measure_raises_on_same_input": true,
+   "silently_returned_wrong_value": true,
+   "what": "z2_quadratic_constant silently substitutes the l1 norm for any unrecognised `norm`, while y0_measure raises on the same input",
+   "worst_inflation": 2.0248908863948896
+  },
+  "G4_degenerate_dilation_gauge_accepted": {
+   "contract_quoted": "newton docstring: 'scale_gauge (the value of Omega_X(0)) kills the second [symmetry]. c_l is then a genuine OUTPUT'",
+   "honest_Delta": -0.3333169953729733,
+   "honest_c_l": 0.33334150231351334,
+   "honest_residual_rms": 7.517388016782094e-16,
+   "n_accepted_with_wrong_Delta": 4,
+   "n_rejected_by_raising": 2,
+   "nan_or_inf_returned": false,
+   "newton_returns_a_convergence_flag": false,
+   "raised": false,
+   "rows": [
+    {
+     "Delta_abs_error_vs_honest": 1.0115228153677003,
+     "Delta_rel_error_vs_honest_pct": 303.47171893705325,
+     "Delta_reported": -1.3448398107406736,
+     "Omega_sup": 7.2777748443309065,
+     "c_l_out": -0.17241990537033675,
+     "exception": null,
+     "raised": false,
+     "residual_rms": 2.7524202713076553,
+     "residual_rms_over_honest_floor": 3661405085334229.0,
+     "scale_gauge": 0.0,
+     "tag": "exactly degenerate: the zero profile satisfies this gauge too"
+    },
+    {
+     "Delta_abs_error_vs_honest": 0.5643133869155892,
+     "Delta_rel_error_vs_honest_pct": 169.3023142381734,
+     "Delta_reported": 0.23099639154261586,
+     "Omega_sup": 11.750650474324146,
+     "c_l_out": 0.6154981957713079,
+     "exception": null,
+     "raised": false,
+     "residual_rms": 12.200230635142717,
+     "residual_rms_over_honest_floor": 1.6229348023417806e+16,
+     "scale_gauge": 1e-14,
+     "tag": "numerically degenerate"
+    },
+    {
+     "Delta_abs_error_vs_honest": 1.7205833826408332,
+     "Delta_rel_error_vs_honest_pct": 516.2003157731407,
+     "Delta_reported": -2.0539003780138065,
+     "Omega_sup": 29.864097284240813,
+     "c_l_out": -0.5269501890069032,
+     "exception": null,
+     "raised": false,
+     "residual_rms": 85.36471093269974,
+     "residual_rms_over_honest_floor": 1.1355634529191312e+17,
+     "scale_gauge": 8.709236820270943,
+     "tag": "sign-flipped gauge (parity-inconsistent with Omega0)"
+    },
+    {
+     "Delta_abs_error_vs_honest": 1422.253879887796,
+     "Delta_rel_error_vs_honest_pct": 426697.0780461794,
+     "Delta_reported": -1422.587196883169,
+     "Omega_sup": 15368.23905840064,
+     "c_l_out": -710.7935984415845,
+     "exception": null,
+     "raised": false,
+     "residual_rms": 1.0212861115077516e-08,
+     "residual_rms_over_honest_floor": 13585651.149412468,
+     "scale_gauge": 1000000.0,
+     "tag": "wildly out-of-scale gauge"
+    },
+    {
+     "c_l_out": null,
+     "exception": "LinAlgError",
+     "raised": true,
+     "scale_gauge": "nan",
+     "tag": "NaN gauge"
+    },
+    {
+     "c_l_out": null,
+     "exception": "LinAlgError",
+     "raised": true,
+     "scale_gauge": "inf",
+     "tag": "Inf gauge"
+    }
+   ],
+   "severity": "moderate -- residual_rms DOES rise ~11 orders, so the defect is detectable, but only by a caller who knows to look and has a floor to compare against",
+   "silently_returned_wrong_value": true,
+   "true_gauge_Omega_X_at_0": -8.709236820270943,
+   "what": "degenerate scale_gauge values are accepted and produce a wrong Delta; `newton` exposes no convergence flag, only residual_rms",
+   "worst_Delta_abs_error": 1422.253879887796
+  },
+  "G5_positive_controls": {
+   "a_diffusion_consistency_c_omega_guard": {
+    "-inf": {
+     "exception": "ValueError",
+     "message": "c_omega must be finite and non-zero, got -inf: Delta has no referent when the amplitude ex",
+     "raised": true
+    },
+    "0.0": {
+     "exception": "ValueError",
+     "message": "c_omega must be finite and non-zero, got 0.0: Delta has no referent when the amplitude exp",
+     "raised": true
+    },
+    "inf": {
+     "exception": "ValueError",
+     "message": "c_omega must be finite and non-zero, got inf: Delta has no referent when the amplitude exp",
+     "raised": true
+    },
+    "nan": {
+     "exception": "ValueError",
+     "message": "c_omega must be finite and non-zero, got nan: Delta has no referent when the amplitude exp",
+     "raised": true
+    }
+   },
+   "b_y0_measure_norm_guard": {
+    "2": {
+     "exception": "ValueError",
+     "raised": true
+    },
+    "L1": {
+     "exception": "ValueError",
+     "raised": true
+    },
+    "frobenius": {
+     "exception": "ValueError",
+     "raised": true
+    },
+    "sup ": {
+     "exception": "ValueError",
+     "raised": true
+    }
+   },
+   "c_nan_inf_propagation": {
+    "Omega0_nan": {
+     "exception": "LinAlgError",
+     "newton_raised": true
+    },
+    "nu_inf": {
+     "exception": "LinAlgError",
+     "newton_raised": true,
+     "residual_all_finite": false
+    },
+    "nu_nan": {
+     "exception": "LinAlgError",
+     "newton_raised": true,
+     "residual_all_finite": false
+    }
+   },
+   "d_radii_budget_passthrough_rejects": {
+    "Y0 NaN": {
+     "closes": false,
+     "has_violations": true,
+     "reason_prefix": "INVALID_INPUT: outside the hypotheses of"
+    },
+    "Y0 negative": {
+     "closes": false,
+     "has_violations": true,
+     "reason_prefix": "INVALID_INPUT: outside the hypotheses of"
+    },
+    "Z1 infinite": {
+     "closes": false,
+     "has_violations": true,
+     "reason_prefix": "INVALID_INPUT: outside the hypotheses of"
+    },
+    "well-formed control": {
+     "closes": true,
+     "has_violations": false,
+     "reason_prefix": null
+    }
+   },
+   "e_private_operators_at_small_n": {
+    "3": {
+     "D_annihilates_constants_sup": 0.0,
+     "cumint_of_ones_max_err": 0.0
+    },
+    "4": {
+     "D_annihilates_constants_sup": 0.0,
+     "cumint_of_ones_max_err": 1.1102230246251565e-16
+    },
+    "5": {
+     "D_annihilates_constants_sup": 0.0,
+     "cumint_of_ones_max_err": 2.220446049250313e-16
+    },
+    "6": {
+     "D_annihilates_constants_sup": 0.0,
+     "cumint_of_ones_max_err": 2.220446049250313e-16
+    },
+    "7": {
+     "D_annihilates_constants_sup": 0.0,
+     "cumint_of_ones_max_err": 2.220446049250313e-16
+    }
+   },
+   "f_planted_wrong_values_move_Y0": {
+    "Y0_amplitude_x1p5": 0.6492287195159546,
+    "Y0_c_l_planted_at_1": 1.9510074835160034,
+    "Y0_exact_chen_profile": 0.2173126903563905,
+    "Y0_parity_flipped": 1.447561948882721,
+    "amplitude_inflation": 2.9875324742941904,
+    "c_l_inflation": 8.977881044665969,
+    "parity_inflation": 6.661193814814656
+   },
+   "n_guards_that_fired": 14,
+   "silently_returned_wrong_value": false
+  },
+  "G6_latency_static_call_site_audit": {
+   "any_banked_number_exposed": false,
+   "conclusion": "ALL FOUR SITES ARE LATENT: every landed call site passes an explicit scale_gauge read from the true Chen profile, passes norm='sup' explicitly to z2_quadratic_constant, and feeds Y_0/Z_2 exclusively from dp.newton (which holds `a` fixed at the constructor value). Leg 185 imports only DissipativeProfile and chen_profile, so it cannot reach the Y_0/Z_2 path at all.",
+   "exposures": {
+    "G1_a_passthrough": {
+     "exposed": false,
+     "leg_125_Y0_Z2_are_fed_by": "dp.newton (which never moves `a`), not newton_gamma2",
+     "leg_125_composes_newton_gamma2_into_Y0_or_Z2": false,
+     "leg_125_newton_gamma2_call_lines": [
+      194
+     ],
+     "leg_125_y0_call_lines": [
+      237
+     ],
+     "leg_125_z2_call_lines": [
+      241
+     ],
+     "leg_185_can_reach_Y0_or_Z2": false,
+     "leg_185_imports_from_the_module": [
+      "DissipativeProfile",
+      "chen_profile"
+     ]
+    },
+    "G2_zero_profile_echo": {
+     "exposed": false,
+     "leg_125_ever_passes_a_zero_initial_profile": false,
+     "leg_125_newton_call_lines": [
+      276,
+      110,
+      136,
+      160,
+      236
+     ],
+     "leg_125_newton_calls_without_explicit_scale_gauge": [],
+     "leg_187_newton_calls_without_explicit_scale_gauge": []
+    },
+    "G3_z2_norm_fallback": {
+     "exposed": false,
+     "leg_125_z2_call_norms": [
+      [
+       241,
+       "'sup'"
+      ]
+     ],
+     "leg_125_z2_calls_with_unrecognised_norm": [],
+     "leg_187_z2_call_lines": []
+    },
+    "G4_degenerate_gauge": {
+     "exposed": false,
+     "leg_125_gauges_are_read_from_the_true_chen_profile": true,
+     "leg_125_newton_calls_without_explicit_scale_gauge": []
+    }
+   },
+   "silently_returned_wrong_value": false,
+   "sources_read": [
+    "experiments/p2_route_m2p_v1_promotion.py",
+    "experiments/p2_route_m2sd_v1_diagnostic.py",
+    "solver/chen_inviscid_certificate.py",
+    "test_dissipative_profile.py"
+   ],
+   "what": "static call-site audit of leg 125's and leg 185's own runners"
+  },
+  "G7_a_star_bracketing_battery": {
+   "a_star_leg_185": 0.3864963972206034,
+   "max_defect_inflation": 5102046512445.316,
+   "min_defect_inflation": 0.9999999999999993,
+   "n_cases": 21,
+   "n_raised": 0,
+   "note": "Delta is 0 by construction here because newton_gamma2 IMPOSES (c_l, c_omega) = (1/2, -1); this gate is about `a` and Y_0, not Delta. This leg does not re-measure a* and makes no claim about it.",
+   "rows": [
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.7819264807326012,
+     "a_drift": -0.10884656513990848,
+     "constructor_a": 0.38,
+     "defect_inflation_factor": 4257769102547.375,
+     "defect_sup_at_constructor_a": 0.32380452044621943,
+     "defect_sup_at_solved_a": 7.605027718682322e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.856700324570102e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.2711534348600915
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.32691762932264773,
+     "a_drift": -0.021287040231001364,
+     "constructor_a": 0.38,
+     "defect_inflation_factor": 580593728446.1411,
+     "defect_sup_at_constructor_a": 0.042162510258924674,
+     "defect_sup_at_solved_a": 7.261964467264459e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.9746407882307482e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.35871295976899864
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 5.541052863884865e-20,
+     "a_drift": 6.473504558628048,
+     "constructor_a": 0.38,
+     "defect_inflation_factor": 1.0,
+     "defect_sup_at_constructor_a": 2.0256017158793713e-19,
+     "defect_sup_at_solved_a": 2.0256017158793713e-19,
+     "iterations": 15,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 3.3564033946534117e-20,
+     "side_of_a_star": "below",
+     "solved_a": 6.853504558628048
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.8069112966343936,
+     "a_drift": -0.11424959175147115,
+     "constructor_a": 0.3855,
+     "defect_inflation_factor": 5020648787596.883,
+     "defect_sup_at_constructor_a": 0.3397377308412053,
+     "defect_sup_at_solved_a": 6.766809335090329e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.757860696706639e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.27125040824852886
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.3793658486749458,
+     "a_drift": -0.023480733728445335,
+     "constructor_a": 0.3855,
+     "defect_inflation_factor": 900550841245.2444,
+     "defect_sup_at_constructor_a": 0.04586638828976762,
+     "defect_sup_at_solved_a": 5.0931481254679056e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.4749075873733276e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.3620192662715547
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 2.1714382780217293e-17,
+     "a_drift": 6.671131142098256,
+     "constructor_a": 0.3855,
+     "defect_inflation_factor": 1.0,
+     "defect_sup_at_constructor_a": 1.0364576873530147e-16,
+     "defect_sup_at_solved_a": 1.0364576873530147e-16,
+     "iterations": 14,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.6048130959556906e-17,
+     "side_of_a_star": "below",
+     "solved_a": 7.056631142098256
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.8091348191493587,
+     "a_drift": -0.11474080622560384,
+     "constructor_a": 0.386,
+     "defect_inflation_factor": 4684645340887.366,
+     "defect_sup_at_constructor_a": 0.3411856734494414,
+     "defect_sup_at_solved_a": 7.283063041541027e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.7402954910761074e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.27125919377439617
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.3840801492162174,
+     "a_drift": -0.02364680639116079,
+     "constructor_a": 0.386,
+     "defect_inflation_factor": 978448782036.9852,
+     "defect_sup_at_constructor_a": 0.04614383283192948,
+     "defect_sup_at_solved_a": 4.716019241790548e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.4181097761435849e-14,
+     "side_of_a_star": "below",
+     "solved_a": 0.3623531936088392
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 3.245629497143813e-17,
+     "a_drift": 6.638225284939115,
+     "constructor_a": 0.386,
+     "defect_inflation_factor": 1.0,
+     "defect_sup_at_constructor_a": 1.4583413956986315e-16,
+     "defect_sup_at_solved_a": 1.4583413956986315e-16,
+     "iterations": 14,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 2.272965992131567e-17,
+     "side_of_a_star": "below",
+     "solved_a": 7.024225284939115
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.8113345599901935,
+     "a_drift": -0.11522848645393152,
+     "constructor_a": 0.3864963972206034,
+     "defect_inflation_factor": 4945632213265.705,
+     "defect_sup_at_constructor_a": 0.3426230966805166,
+     "defect_sup_at_solved_a": 6.927791673660977e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.7174692115140445e-14,
+     "side_of_a_star": "at",
+     "solved_a": 0.2712679107666719
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.38871667499148804,
+     "a_drift": -0.023806808012345027,
+     "constructor_a": 0.3864963972206034,
+     "defect_inflation_factor": 971439886713.6918,
+     "defect_sup_at_constructor_a": 0.046403104831789874,
+     "defect_sup_at_solved_a": 4.776734563449736e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.4118750702388904e-14,
+     "side_of_a_star": "at",
+     "solved_a": 0.3626895892082584
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 5.874274653397495e-17,
+     "a_drift": 6.5982583743487355,
+     "constructor_a": 0.3864963972206034,
+     "defect_inflation_factor": 1.0,
+     "defect_sup_at_constructor_a": 2.483714644515597e-16,
+     "defect_sup_at_solved_a": 2.483714644515597e-16,
+     "iterations": 14,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 3.911596973956413e-17,
+     "side_of_a_star": "at",
+     "solved_a": 6.984754771569339
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.8113504971988521,
+     "a_drift": -0.11523202598583931,
+     "constructor_a": 0.3865,
+     "defect_inflation_factor": 4751606569452.947,
+     "defect_sup_at_constructor_a": 0.3426335289779746,
+     "defect_sup_at_solved_a": 7.210898544940392e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.6984766718429508e-14,
+     "side_of_a_star": "above",
+     "solved_a": 0.2712679740141607
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.3887501511775274,
+     "a_drift": -0.02380795207654135,
+     "constructor_a": 0.3865,
+     "defect_inflation_factor": 999948400079.9991,
+     "defect_sup_at_constructor_a": 0.046404927815206734,
+     "defect_sup_at_solved_a": 4.6407322429331543e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.365880817025313e-14,
+     "side_of_a_star": "above",
+     "solved_a": 0.36269204792345866
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 5.905287887949759e-17,
+     "a_drift": 6.597943029089485,
+     "constructor_a": 0.3865,
+     "defect_inflation_factor": 0.9999999999999998,
+     "defect_sup_at_constructor_a": 2.4956995338605985e-16,
+     "defect_sup_at_solved_a": 2.495699533860599e-16,
+     "iterations": 14,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 3.930808577371137e-17,
+     "side_of_a_star": "above",
+     "solved_a": 6.984443029089485
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.8157584349311895,
+     "a_drift": -0.11621448159712389,
+     "constructor_a": 0.3875,
+     "defect_inflation_factor": 5102046512445.316,
+     "defect_sup_at_constructor_a": 0.3455289801603415,
+     "defect_sup_at_solved_a": 6.772360450213455e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.639323759034238e-14,
+     "side_of_a_star": "above",
+     "solved_a": 0.2712855184028761
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.3987705662454769,
+     "a_drift": -0.024116433891356315,
+     "constructor_a": 0.3875,
+     "defect_inflation_factor": 1171778667990.746,
+     "defect_sup_at_constructor_a": 0.046878403314053504,
+     "defect_sup_at_solved_a": 4.0006192802977125e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.225300938611132e-14,
+     "side_of_a_star": "above",
+     "solved_a": 0.3633835661086437
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 6.926120431995682e-16,
+     "a_drift": 6.497855515305947,
+     "constructor_a": 0.3875,
+     "defect_inflation_factor": 0.9999999999999993,
+     "defect_sup_at_constructor_a": 2.5736827586200266e-15,
+     "defect_sup_at_solved_a": 2.5736827586200282e-15,
+     "iterations": 14,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 4.3745835911772126e-16,
+     "side_of_a_star": "above",
+     "solved_a": 6.885355515305947
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.826643003625778,
+     "a_drift": -0.11867071723515077,
+     "constructor_a": 0.39,
+     "defect_inflation_factor": 4992041836210.922,
+     "defect_sup_at_constructor_a": 0.35276610840775957,
+     "defect_sup_at_solved_a": 7.066569551739121e-14,
+     "iterations": 6,
+     "nu": 0.05,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.614784683127397e-14,
+     "side_of_a_star": "above",
+     "solved_a": 0.27132928276484924
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 0.4258894175443364,
+     "a_drift": -0.024821580052199088,
+     "constructor_a": 0.39,
+     "defect_inflation_factor": 2387494580364.273,
+     "defect_sup_at_constructor_a": 0.04784425874990186,
+     "defect_sup_at_solved_a": 2.0039525594484076e-14,
+     "iterations": 8,
+     "nu": 0.3,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 5.4436164231547476e-15,
+     "side_of_a_star": "above",
+     "solved_a": 0.3651784199478009
+    },
+    {
+     "Delta_at_imposed_c_l": 0.0,
+     "Y0_as_reported": 2.2356486693795267e-16,
+     "a_drift": 6.233897115115881,
+     "constructor_a": 0.39,
+     "defect_inflation_factor": 0.9999999999999997,
+     "defect_sup_at_constructor_a": 1.1811512179046654e-15,
+     "defect_sup_at_solved_a": 1.1811512179046658e-15,
+     "iterations": 15,
+     "nu": 1.0,
+     "nu_decay_rate_at_imposed_c_l": 0.0,
+     "raised": false,
+     "residual_rms": 1.4718468801848983e-16,
+     "side_of_a_star": "above",
+     "solved_a": 6.623897115115881
+    }
+   ],
+   "severity": "the a* boundary is where G1 bites hardest in leg 185's own regime",
+   "silently_returned_wrong_value": true,
+   "steadiness_condition_holds_by_construction": true,
+   "what": "a*-bracketing sweep; no rejection, no hang, and G1 is live at every point"
+  },
+  "G8_leg185_prior_art_and_sharpening": {
+   "a_match_abs_err": 0.0,
+   "counted_as_an_independent_site_of_this_leg": false,
+   "leg_185_D3_claim_quoted": "`newton`, the *other* routine in the same module, DOES impose it (`scale_gauge`). The two routines disagree about gauge discipline and the stalled one is the one that skipped it.",
+   "leg_185_banked_a": -10.092461405320627,
+   "leg_185_banked_relative_residual": 5.485652392436699,
+   "newton_gamma2_collapse_is_prior_art_of_leg_185": true,
+   "relative_residual_match_abs_err": 8.881784197001252e-16,
+   "reproduced_a": -10.092461405320627,
+   "reproduced_relative_residual": 5.485652392436698,
+   "rows": {
+    "leg 185's CONTROL case": {
+     "Omega_sup": 1.5055977131621614,
+     "Omega_sup_over_chen": 0.8699326190085063,
+     "absolute_residual_rms": 1.329685329535958e-14,
+     "nu": 0.3,
+     "relative_residual_rms": 1.9465331608631128e-14,
+     "solved_a": 0.3820854853529409
+    },
+    "leg 185's STALLED case": {
+     "Omega_sup": 1.6056210004835197e-15,
+     "Omega_sup_over_chen": 9.277259588499687e-16,
+     "absolute_residual_rms": 1.2070517780856019e-15,
+     "nu": 1.0,
+     "relative_residual_rms": 5.485652392436698,
+     "solved_a": -10.092461405320627
+    }
+   },
+   "sharpening": "`newton`'s dilation-gauge protection is CONDITIONAL on the caller supplying a non-degenerate scale_gauge: with scale_gauge=None the target is read off the initial guess, so a zero guess collapses `newton` the same way (G2), and an explicitly degenerate gauge does not pin the amplitude either (G4). Leg 185's asymmetry is real but narrower than its D3 states.",
+   "silently_returned_wrong_value": false,
+   "what": "reproduce leg 185's banked stall numbers; credit the prior art; record the one place this leg's G2/G4 sharpen leg 185's own conclusion"
+  }
+ },
+ "leg": 207,
+ "leg_185_banked_numbers_reproduced_exactly": 0.0,
+ "module_edited_by_this_leg": false,
+ "module_under_audit": "solver/dissipative_profile.py",
+ "n_guards_that_fired_in_positive_controls": 14,
+ "n_independent_silent_corruption_sites": 4,
+ "prior_art_credited_not_claimed": "the newton_gamma2 zero-collapse belongs to leg 185 (G8), not to this leg",
+ "route": "ROUTE-DPA",
+ "runtime_s": 163.90937042236328,
+ "silent_corruption_sites": [
+  "G1_a_passthrough_newton_gamma2_to_Y0_Z2",
+  "G2_zero_profile_echoes_c_l0_at_residual_zero",
+  "G3_z2_quadratic_constant_silent_norm_fallback",
+  "G4_degenerate_dilation_gauge_accepted"
+ ]
+}
