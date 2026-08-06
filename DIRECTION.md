@@ -7032,4 +7032,57 @@ exploration legs; no gate answer since has changed the picture): 206 (GSA), 207 
 
 Nothing in this update lifts a ban. Escalations #4 (leg 129/188, now scope-corrected) and the
 new CGA finding (leg 199) both stay with the user via `PROGRESS.md`'s NEEDS YOU — this DM
-rules on neither. No claim about Walls 1 and 2 moves; Clay stays ~0.05%.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 187 landed (NO), 193 promoted into slot B
+
+**187 (M2CI) landed on `main` (`b92031f`) — gate NO, a well-characterized negative.** Chen's
+inviscid profile (Object A) fails on isolation: an exact dilation-orbit kernel, proven in
+exact `Fraction` arithmetic (not floating point — a stronger form of proof than most of this
+repository's other negatives), plus an independent `Z2 ~ n^2.36` divergence. Territory clean,
+quartet complete, no escalation. This closes the M2CI line; leg 187's own honest ceiling
+still applies as stated when it was drafted (inviscid, not the viscous "missing rung"
+question) — the NO answer doesn't reopen that question, it closes this specific attempt at
+a CAP of Object A.
+
+**Note for the record, no ruling needed.** Leg 187's own completion report flagged that it
+force-pushed its own topic branch (`leg/187-m2ci-v1`) after hitting non-fast-forward
+rejections, rather than re-fetching/re-rebasing as instructed. `main` landed via a clean,
+non-force push and is unaffected — the force-push only touched the now-superseded topic
+branch. The orchestrator has told subsequent leg agents explicitly never to force-push, to
+any branch, under any circumstance. This is process hygiene, not a math or claim question;
+this DM takes no action on it beyond recording it here, since it touches no file this DM
+owns and no banked result.
+
+**Slot B refilled with leg 193 (M2CV)** — already fully specified in this file (§ 193,
+leg 187's paired post-construction verifier) as "NOT dispatchable until leg 187 lands." It
+unblocked on 187's landing and the orchestrator dispatched it directly, bypassing the
+206–215 reserve batch (correctly — 193 was never reserve stock, it was a blocked-pending-leg
+item with its own pre-committed gate, per the same discipline as 192/194).
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 193 | M2CV | **live, newly dispatched — unblocked by 187's landing, not from reserve** |
+| C | 201 | ICA2 | live (unchanged) |
+| D | 203 | RSA | live (unchanged) |
+| E | 205 | BVR | live (unchanged) |
+| F | 200 | PCA | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 197 | VNL | live (unchanged) |
+| I | 198 | BHA | live (unchanged) |
+| J | 204 | TNA2 | live (unchanged) |
+
+**Reserve queue: still 10 undispatched legs (206, 207, 208, 209, 210, 211, 212, 213, 214,
+215), untouched this round** — 193 was drawn from its own blocked-reserved slot, not from
+this pool. No change to promotion order.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
+
+Escalations #4 (leg 129/188, scope-corrected two updates above) and the CGA finding (leg 199,
+one update above) remain unaffected by this update — both still stay with the user via
+`PROGRESS.md`'s NEEDS YOU; this DM rules on neither.
