@@ -47,9 +47,12 @@ Constantin-Lax-Majda equation* (22 Jul 2026).  This is the one that pre-empts us
     exponent", from exactly our argument (dissipation enters the rescaled equation with
     coefficient e^{-gamma tau}, gamma = 1 - s c_l).  In our gauge that is **s_c = alpha/2
     -- Route-F v1's headline, posted eleven days before our leg.**
-  * Theorem 2: the full point spectrum of the CLM linearization on the odd
-    origin-H^2 realization is **exactly {0, 1}**, the symmetry modes, rigorously, in our
-    own normalization Omega = -y/(y^2 + 1/4).  **That is Route-E v1's negative.**
+  * Theorem 2: the DISCRETE spectrum of the CLM linearization on the odd origin-H^2
+    realization, restricted to Re lambda > -1/2, is exactly {0, 1} -- no discrete
+    eigenvalue in the open strip (-1/2, 0).  Theorem 3 extends this to the FULL point
+    spectrum over all of C (also exactly {0, 1}, the symmetry modes) and states that the
+    essential line {Re lambda = -1/2} carries **no embedded eigenvalues**, in our own
+    normalization Omega = -y/(y^2 + 1/4).  **That combination is Route-E v1's negative.**
   * **Proposition 2, the realization dichotomy** -- the one to actually carry forward.
     The essential-spectrum SMEAR that grids WITHOUT AN ORIGIN CONDITION place inside the
     strip is the faithful spectrum of the MAXIMAL L^2 realization; imposing the single
@@ -484,11 +487,16 @@ CLAIM_LEDGER = [
     },
     {
         "claim": "the CLM linearization's isolated eigenvalues are only the symmetry modes",
-        "leg": "Route-E v1 (§26)", "source": "2607.19762 Theorem 2",
+        "leg": "Route-E v1 (§26)",
+        "source": ("2607.19762 Theorem 2 (discrete spectrum, Re lambda > -1/2); "
+                   "Theorem 3 (full point spectrum over C, no embedded eigenvalues)"),
         "verdict": "CONFIRMED_AND_PRE-EMPTED",
-        "note": ("Point spectrum exactly {0,1} on the odd origin-H^2 realization, proved, "
-                 "no embedded eigenvalues, in our own normalization Omega = -y/(y^2+1/4). "
-                 "Our dense solve found the same thing at two points."),
+        "note": ("Theorem 2: sigma_disc(L0|X) intersect {Re lambda > -1/2} = {0,+1} -- the "
+                 "DISCRETE spectrum, half-plane only.  Theorem 3 extends this to arbitrary "
+                 "lambda in C: the point spectrum of the physical realization is exactly "
+                 "{0,1}, and the essential line {Re lambda = -1/2} carries no embedded "
+                 "eigenvalues, in our own normalization Omega = -y/(y^2+1/4).  Our dense "
+                 "solve found the same thing at two points."),
         "survives": "nothing of the claim; the negative stands and is not ours.",
     },
     {
@@ -554,10 +562,16 @@ CLAIM_LEDGER = [
         "claim": "alpha_1 = +0.133683 at a = 1/2 (the marginal invariant at s = s_c = 3/2)",
         "leg": "Route-H v1 (§29)", "source": "not found in Tier 1",
         "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
-        "note": ("ALS do a = 1/2 at sigma = 0 and 1; criticality at a = 1/2 is sigma = 3, "
-                 "which is not in ALS and not in XU (who stop at recording s* itself).  So "
-                 "the MARGINAL case at a = 1/2 is not pre-empted by either.  It is also not "
-                 "searched beyond Tier 1, and the honest label is unsearched, not novel."),
+        "note": ("ALS do a = 1/2 at sigma = 0 and 1, not sigma = 3.  XU DOES record the "
+                 "sigma = 3 criticality at a = 1/2 exactly -- section 6.1: 's* = 3 exactly' "
+                 "-- confirmed by XU_TABLE1's own a = 0.5 row (s* = 3.000, transcribed "
+                 "above); XU's Lambda^s and ALS's Lambda^sigma are the same operator, so "
+                 "s*(1/2) = 3 IS this sigma = 3 criticality.  What XU does NOT record is "
+                 "the MARGINAL INVARIANT alpha_1 = +0.133683 itself -- only the criticality "
+                 "point, not this coefficient.  So the coefficient is not pre-empted by "
+                 "either source, even though the criticality point it sits at is XU's, not "
+                 "unpublished.  alpha_1 is not searched beyond Tier 1, and the honest label "
+                 "for THAT number is unsearched, not novel."),
         "survives": "provisionally, pending Tier 2/3.",
     },
     {
@@ -597,11 +611,14 @@ CLAIM_LEDGER = [
     },
     {
         "claim": "the discrete-ball trap, the weighted-l1 no-go, the elasticity discipline",
-        "leg": "Route-D v3/v6", "source": "2302.12877 (Tier 2, fetched, NOT read closely)",
+        "leg": "Route-D v3/v6", "source": "2302.12877 (Tier 2, fetched, read closely at leg 45)",
         "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
-        "note": ("Still the only claims with a real chance of being new, and still checked "
-                 "only by search.  Tier 2 is fetched and extracted; reading it is the next "
-                 "literature spend, and it is now cheap."),
+        "note": ("Still the only claims with a real chance of being new.  Read closely at "
+                 "leg 45 (Papers/MANIFEST.md, LITERATURE_CHECK.md): CLN's own Kawahara r_0 "
+                 "reproduced exactly against this project's radii-polynomial algebra.  They "
+                 "work in Hilbert/Fourier H^l spaces, not weighted l^1, so the discrete-ball "
+                 "trap and weighted-l1 no-go are narrowed, not closed -- still unsearched at "
+                 "primary source for the specific claims this row names."),
         "survives": "provisionally.",
     },
 ]
