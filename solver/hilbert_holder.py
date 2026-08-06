@@ -96,13 +96,113 @@ certified supremum.  The majorant itself is honest: every inequality above is
 pointwise in phi and holds for every h in the ball.
 
 Nothing here is interval-enclosed and nothing is rigorous.
+
+--------------------------------------------------------------------------
+THE DOMAIN GUARD (leg 153, repairing leg 119's escalation)
+--------------------------------------------------------------------------
+Leg 119 measured two configurations on which the returned pair is NOT a
+majorant -- an explicit adversarial h exceeds it -- and escalated rather than
+patching.  Both are one mechanism, and it is the sibling module
+`hilbert_pointwise.py`'s (leg 106/130) one dimension up: a two-point E_N pole
+instead of a single-point one.
+
+The per-point payer rule `take_T = (cT <= cS)` charges each increment to
+whichever account is cheaper.  As the pair separation dphi -> 0 the SUP account
+does not vanish (cS -> 2 cos^alpha(inner/2) != 0), and the near kernel has
+|cot(t/2)| ~ 2/|t|, so the sup-account integrand in d(log s) tends to a NONZERO
+constant: the sup route is LOGARITHMICALLY DIVERGENT at the endpoint.  The only
+thing that tames it is the seminorm envelope cT ~ s^gamma -> 0, which needs
+gamma > 0.
+
+  (V1) gamma = 0.0: cT tends to cos^alpha(inner/2), so NO account vanishes.
+  (V2) gamma < 0: cT diverges outright.
+
+In both, `increment_pair_bound` still returns a finite, plausible-looking pair --
+finite only because its log-graded mesh starts at s = eps*lo and never at s = 0.
+It is the eps-truncation of a divergent integral, not a bound.  Leg 119's
+adversary exceeds it by up to 1.2311x.
+
+That gamma > 0 is exactly the hypothesis under which the conjugate operator
+preserves Holder classes is the PLEMELJ-PRIVALOV theorem (Plemelj for smooth
+curves, Privalov for the circle -- which is this module's setting); nothing about
+the condition is new here, only its enforcement.  `_head_bound` computes, in
+closed form, a rigorous bound on the head the quadrature discards, and the
+guard's predicate is threshold-free:
+
+    reject iff that head does not VANISH as eps -> 0.
+
+The bound is exact and needs no free constant.  The charged envelope is
+min(cS, cT) <= cT = dphi^gamma cos^{alpha-gamma}(inner/2) ALWAYS (the payer rule
+takes the smaller), folding is 1-Lipschitz so dphi <= s, and |cot(t/2)| <= 2/|t|
+on each of the (up to four) one-sided near pieces, so
+
+    head <= sum_pieces 2 cmax^{alpha-gamma} s0^gamma / gamma ,   s0 = eps*lo ,
+
+which vanishes as eps -> 0 IFF gamma > 0.  So the predicate reduces to: every
+argument finite, eps in (0, 1), and **gamma > 0**.  Note what is NOT here: the
+sibling's payer-crossover clause, which catches its rho = 1e300 violator.  This
+module has no rho -- its payer rule is the bare `cT <= cS` -- so its crossover
+s* = 2^{1/gamma} cos(inner/2) >= cos(inner/2) > 0 is representable for every
+gamma > 0 (measured over gamma in 1e-3 .. 10) and the clause can never fire.  It
+is deliberately absent rather than transplanted dead.
+
+`on_unsound` selects what happens on a rejected configuration:
+
+  * `"raise"` (default) -- HilbertHolderDomainError.  A bound that does not
+    dominate must not reach a downstream consumer silently.
+  * `"inflate"` -- return a pair that TRULY dominates: the computed pair with the
+    closed-form head added to BOTH coefficients (the head's split between the S
+    and T accounts is unknown, and h_S S + h_T T <= head (S + T)).  At gamma <= 0
+    the head is +inf, so the honest answer is (inf, inf) -- correct, and useless,
+    which is the content of V1/V2.
+  * `"extrapolate"` -- the pre-repair number, with a warning, so leg 119's
+    battery can keep MEASURING the gap instead of deleting the measurement.
+
+Separately, an ACCEPTED configuration whose discarded head is a material
+fraction (`HEAD_WARN_TOL`) of the returned pair gets a
+HilbertHolderTruncationWarning.  It changes no returned value -- that is what
+keeps the accepted surface bit-identical -- and it exists because the map's own
+PRODUCTION optimum (alpha ~ 1.4, gamma ~ 0.15) is under-resolved at the default
+eps (worst head 5.08e-2 of the returned pair over the shipped pair grid) while
+its exact majorant is finite.  Rejecting it would be a claim about a
+configuration that is merely under-refined; the shipped (1.5, 0.5) sits at
+1.39e-5 on the same grid, 3646x smaller.
+
+Leg 119's OTHER reported diagnostic -- the eps-drift ratio -- is deliberately
+NOT the predicate.  Extending its gamma ladder below its own floor of 0.05 puts
+SOUND configurations (gamma = 1e-3 and 0.01, drift 2.359 and 2.168) ABOVE the
+"1.98x when unsound" figure leg 119 quotes as the bottom of a clean gap: the
+drift is continuous through gamma = 0+, because s0^gamma/gamma -> inf there.
+Using it would reject sound inputs.  See `writeup/novelty/leg_153.md` §4b.
 """
+
+import warnings
 
 import numpy as np
 
 from solver.nk_seminorm import hilbert_split_bound
 
 TWO_PI = 2.0 * np.pi
+
+#: Relative size of the discarded head at which an ACCEPTED configuration warns.
+#: Governs a warning only -- never a rejection, never a returned number.  The
+#: worst shipped (1.5, 0.5) configuration sits at 1.393e-05 (72x below); the
+#: production (1.4, 0.15) optimum this catches sits at 5.080e-02 (51x above).
+HEAD_WARN_TOL = 1e-3
+
+_UNSOUND_POLICIES = ("raise", "inflate", "extrapolate")
+
+
+class HilbertHolderDomainError(ValueError):
+    """The returned pair would not be a majorant on this configuration."""
+
+
+class HilbertHolderUnsoundWarning(UserWarning):
+    """`on_unsound='extrapolate'`: the pre-repair, non-dominating number."""
+
+
+class HilbertHolderTruncationWarning(UserWarning):
+    """Accepted, but the discarded inner head is a material share of the value."""
 
 
 def wrap(theta):
@@ -168,7 +268,74 @@ def near_padding(d, pad_max=2.0, pad_min=0.2, safety=0.9):
     return p if p >= float(pad_min) else None
 
 
-def increment_pair_bound(theta1, sigma, alpha, gamma, n_quad=400, eps=1e-10):
+def _near_pieces(th1, sig, pad):
+    """The (up to four) one-sided E_N interval lengths `lo`, in the same order
+    `_raw_increment_pair_bound` walks them.  Each is quadratured from eps*lo to
+    lo, so (0, eps*lo] is the head that integration discards."""
+    d = abs(float(sig))
+    n1, n2 = min(0.0, sig) - pad * d, max(0.0, sig) + pad * d
+    return [lo for pole in (0.0, sig)
+            for lo in (pole - n1, n2 - pole) if lo > 0]
+
+
+def _head_bound(th1, sig, alpha, gamma, eps):
+    """Rigorous bound on the E_N head the quadrature discards, in RETURNED units.
+
+    The charged envelope is min(cS, cT) <= cT = dphi^gamma cos^{alpha-gamma}
+    (inner/2); folding is 1-Lipschitz so dphi <= s; and |cot(t/2)| <= 2/|t| on
+    every near piece.  Hence the head over (0, s0], s0 = eps*lo, is at most
+    2 cmax^{alpha-gamma} s0^gamma / gamma per piece.  Returns +inf when that does
+    not vanish as eps -> 0, which is exactly gamma <= 0.
+    """
+    d = abs(float(sig))
+    pad = near_padding(d)
+    if pad is None:
+        return 0.0
+    if not (gamma > 0.0):
+        return np.inf
+    inner = min(abs(float(wrap(th1))), abs(float(wrap(th1 + sig))))
+    h = 0.0
+    for lo in _near_pieces(th1, sig, pad):
+        s0 = eps * lo
+        if alpha - gamma >= 0.0:
+            # cos is DEcreasing: the largest cos comes from the smallest inner.
+            c = np.cos(0.5 * max(0.0, inner - s0))
+        else:
+            # negative exponent: the largest cos^(a-g) comes from the largest inner.
+            c = np.cos(0.5 * min(np.pi, inner + s0))
+        h += 2.0 * c ** (alpha - gamma) * s0 ** gamma / gamma
+    w = np.cos(0.5 * inner) ** -(1.0 - gamma)
+    return float(w * h / (TWO_PI * d ** gamma))
+
+
+def _audit(theta1, sigma, alpha, gamma, eps):
+    """`(reason or None, head)` -- the whole soundness decision for one pair."""
+    named = (("theta1", theta1), ("sigma", sigma), ("alpha", alpha),
+             ("gamma", gamma), ("eps", eps))
+    bad = [n for n, v in named if not np.isfinite(v)]
+    if bad:
+        return ("non-finite argument(s) %s: the payer rule `cT <= cS` is then "
+                "False on the whole quadrature (IEEE-754 sec 5.11 makes every "
+                "comparison against NaN False), so the log-divergent sup account "
+                "is charged the near-pole singularity and the returned pair is "
+                "the eps-truncation of a divergent integral, not a bound"
+                % ", ".join(bad), np.inf)
+    if not (gamma > 0.0):
+        return ("gamma = %r <= 0: the seminorm envelope cT ~ dphi^gamma no longer "
+                "vanishes as the pair separation dphi -> 0, so NO account tames "
+                "the near kernel's logarithmic endpoint divergence (the sup "
+                "envelope cS -> 2 cos^alpha(inner/2) != 0 regardless).  gamma > 0 "
+                "is the Plemelj-Privalov hypothesis under which the conjugate "
+                "operator preserves the Holder class at all" % gamma, np.inf)
+    if not (0.0 < eps < 1.0):
+        return ("eps = %r is outside (0, 1); the discarded head (0, eps*lo) is "
+                "then not an inner neighbourhood of the near-pole singularity"
+                % eps, np.inf)
+    return None, _head_bound(float(theta1), float(sigma), alpha, gamma, eps)
+
+
+def increment_pair_bound(theta1, sigma, alpha, gamma, n_quad=400, eps=1e-10,
+                         on_unsound="raise"):
     """(u_S, u_T) for the weighted increment ratio of psi at one pair.
 
     Returns coefficients of S and T in
@@ -177,7 +344,46 @@ def increment_pair_bound(theta1, sigma, alpha, gamma, n_quad=400, eps=1e-10):
 
     th2 = th1 + sigma, d = |sigma|.  Valid only in the regime d <= (pi-|th_i|)/6
     (see the module docstring); `increment_regime` tests it.
+
+    Guarded since leg 153 -- see the module docstring.  `on_unsound` is one of
+    `"raise"` (default), `"inflate"` (a pair that truly dominates) or
+    `"extrapolate"` (the pre-repair pair, with a warning).  On every accepted
+    configuration the returned pair is bit-identical to the pre-guard module.
     """
+    if on_unsound not in _UNSOUND_POLICIES:
+        raise ValueError("on_unsound must be one of %r, got %r"
+                         % (_UNSOUND_POLICIES, on_unsound))
+    reason, head = _audit(theta1, sigma, alpha, gamma, eps)
+    if reason is not None:
+        if on_unsound == "raise":
+            raise HilbertHolderDomainError(reason)
+        if on_unsound == "inflate":
+            if not np.isfinite(head):
+                return np.inf, np.inf
+            uS, uT = _raw_increment_pair_bound(theta1, sigma, alpha, gamma,
+                                               n_quad, eps)
+            return uS + head, uT + head
+        warnings.warn("hilbert_holder: " + reason + " -- returning the "
+                      "pre-repair value anyway because on_unsound='extrapolate'",
+                      HilbertHolderUnsoundWarning, stacklevel=2)
+        return _raw_increment_pair_bound(theta1, sigma, alpha, gamma, n_quad, eps)
+    out = _raw_increment_pair_bound(theta1, sigma, alpha, gamma, n_quad, eps)
+    total = out[0] + out[1]
+    if total > 0.0 and head > HEAD_WARN_TOL * total:
+        warnings.warn("hilbert_holder: the E_N quadrature's inner endpoint "
+                      "s = eps*lo does not resolve the near-pole envelope at "
+                      "theta1 = %r, sigma = %r, gamma = %r: the discarded head is "
+                      "%.3g, i.e. %.3g of the returned pair.  The majorant is "
+                      "finite here (gamma > 0), so this is under-refinement, not "
+                      "a divergence -- decrease eps (or use on_unsound='inflate' "
+                      "for a pair that dominates as returned)"
+                      % (theta1, sigma, gamma, head, head / total),
+                      HilbertHolderTruncationWarning, stacklevel=2)
+    return out
+
+
+def _raw_increment_pair_bound(theta1, sigma, alpha, gamma, n_quad, eps):
+    """The pre-guard arithmetic, verbatim.  Nothing in here was touched."""
     th1 = float(theta1)
     sig = float(sigma)
     d = abs(sig)
@@ -301,9 +507,33 @@ def pair_grid(n_theta=48, n_d=28, d_lo=1e-5, d_hi=None):
     return out
 
 
+def _audit_config(alpha, gamma):
+    """`reason or None` for an (alpha, gamma) PAIR, independent of the pair grid.
+
+    The same predicate as `_audit`, minus the per-pair arguments: it is what
+    `hilbert_holder_constant` can decide before it builds a single curve.  Note
+    that pre-guard, `gamma = 0.0` reached this module's assembly and died inside
+    `solver.nk_seminorm.hilbert_split_bound`'s own `/gamma` with a bare
+    ZeroDivisionError, while `gamma = -0.3` returned a finite, plausible pair.
+    Neither polarity was safe; they were just differently unsafe.
+    """
+    bad = [n for n, v in (("alpha", alpha), ("gamma", gamma)) if not np.isfinite(v)]
+    if bad:
+        return ("non-finite argument(s) %s: the payer rule `cT <= cS` is then "
+                "False on the whole quadrature, so the log-divergent sup account "
+                "is charged the near-pole singularity" % ", ".join(bad))
+    if not (gamma > 0.0):
+        return ("gamma = %r <= 0: the seminorm envelope cT ~ dphi^gamma no longer "
+                "vanishes as the pair separation dphi -> 0, so no account tames "
+                "the near kernel's logarithmic endpoint divergence.  gamma > 0 is "
+                "the Plemelj-Privalov hypothesis under which the conjugate "
+                "operator preserves the Holder class at all" % gamma)
+    return None
+
+
 def hilbert_holder_constant(alpha, gamma, n_theta=48, n_d=28, n_quad=400,
                             curves=None, X_lo=1e-4, X_hi=1e8, n_X=90,
-                            rule="increment"):
+                            rule="increment", on_unsound="raise"):
     """(b_sup, b_semi) with T_psi <= b_sup S + b_semi T, plus where they are attained.
 
     The per-pair route choice must be a SINGLE rule applied to both coefficients:
@@ -319,8 +549,31 @@ def hilbert_holder_constant(alpha, gamma, n_theta=48, n_d=28, n_quad=400,
           pointwise route's much larger u_sup for a marginal gain in the sum, and
           the sweep maximum then jumps by a factor of ten;
       "pointwise" -- the pointwise route everywhere, as a control.
+
+    Guarded since leg 153 -- see the module docstring.  `on_unsound` is one of
+    `"raise"` (default), `"inflate"` (which reports the honest `(inf, inf)`,
+    since gamma <= 0 makes the exact majorant unbounded at every pair) or
+    `"extrapolate"` (the pre-repair path verbatim, with a warning, including
+    whatever it raised).  On every accepted configuration every returned number
+    is bit-identical to the pre-guard module.  The guard applies to ALL three
+    rules -- including `"pointwise"`, whose own coefficients come from
+    `hilbert_split_bound` and carry the same gamma hypothesis.
     """
+    if on_unsound not in _UNSOUND_POLICIES:
+        raise ValueError("on_unsound must be one of %r, got %r"
+                         % (_UNSOUND_POLICIES, on_unsound))
     alpha, gamma = float(alpha), float(gamma)
+    reason = _audit_config(alpha, gamma)
+    if reason is not None:
+        if on_unsound == "raise":
+            raise HilbertHolderDomainError(reason)
+        if on_unsound == "inflate":
+            return {"b_sup": np.inf, "b_semi": np.inf, "argmax_sup": None,
+                    "argmax_semi": None, "rule": rule, "n_increment_route": 0,
+                    "alpha": alpha, "gamma": gamma}
+        warnings.warn("hilbert_holder: " + reason + " -- running the pre-repair "
+                      "path anyway because on_unsound='extrapolate'",
+                      HilbertHolderUnsoundWarning, stacklevel=2)
     if curves is None:
         Xs = np.geomspace(X_lo, X_hi, int(n_X))
         pw = [hilbert_split_bound(X, alpha, gamma) for X in Xs]
@@ -331,7 +584,8 @@ def hilbert_holder_constant(alpha, gamma, n_theta=48, n_d=28, n_quad=400,
     for th, sig in pair_grid(n_theta=n_theta, n_d=n_d):
         uS, uT = pointwise_pair_bound(th, sig, alpha, gamma, curves=curves)
         if rule != "pointwise" and increment_regime(th, sig):
-            vS, vT = increment_pair_bound(th, sig, alpha, gamma, n_quad=n_quad)
+            vS, vT = increment_pair_bound(th, sig, alpha, gamma, n_quad=n_quad,
+                                          on_unsound=on_unsound)
             if rule == "increment" or vS + vT < uS + uT:
                 uS, uT = vS, vT
                 n_inc += 1
@@ -345,7 +599,7 @@ def hilbert_holder_constant(alpha, gamma, n_theta=48, n_d=28, n_quad=400,
 
 
 def sweep_convergence(alpha, gamma, levels=((32, 18), (48, 28), (72, 40)),
-                      n_quad=400):
+                      n_quad=400, on_unsound="raise"):
     """The same constant on progressively finer pair grids.
 
     A supremum sampled on a grid can only UNDER-report -- the mirror of v6's
@@ -354,7 +608,8 @@ def sweep_convergence(alpha, gamma, levels=((32, 18), (48, 28), (72, 40)),
     """
     out = []
     for nt, nd in levels:
-        r = hilbert_holder_constant(alpha, gamma, n_theta=nt, n_d=nd, n_quad=n_quad)
+        r = hilbert_holder_constant(alpha, gamma, n_theta=nt, n_d=nd,
+                                    n_quad=n_quad, on_unsound=on_unsound)
         out.append({"n_theta": nt, "n_d": nd, "b_sup": r["b_sup"],
                     "b_semi": r["b_semi"]})
     return out
