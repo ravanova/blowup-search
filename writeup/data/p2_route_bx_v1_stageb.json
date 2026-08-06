@@ -169,8 +169,11 @@
    "magnitude": {
     "leg49_P2_finite": 0.775,
     "leg49_P3_max_slope_error": 0.3656058258949979,
+    "leg50_P3_max_slope_error": 0.3421493449940881,
     "leg59_P2_finite": 0.975,
-    "leg59_P3_max_slope_error": 0.342,
+    "leg59_P3_max_slope_error": 0.3421493449940881,
+    "leg49_n_pass": 4,
+    "leg59_n_pass": 5,
     "P2_floor": 0.9,
     "P3_ceiling": 0.05
    },
@@ -183,8 +186,11 @@
    "statement": "the fitness is dead as parameterized independently of the ban: P3 is a property of the probe WINDOW's width in decades, not of the weight, so the quantity a search would steer on does not respond to the genes it would vary",
    "magnitude": {
     "P3_leg49": 0.3656058258949979,
-    "P3_leg59": 0.342,
-    "P3_ceiling": 0.05
+    "P3_leg50": 0.3421493449940881,
+    "P3_leg59": 0.3421493449940881,
+    "P3_ceiling": 0.05,
+    "P3_unmoved_leg50_to_leg59": true,
+    "spearman_window_width_vs_slope_error": -0.8779220779220779
    },
    "scope": "inviscid operator only (mu = 0)"
   },
@@ -194,8 +200,9 @@
    "type": "MEASURED",
    "statement": "the sup-norm collocation realization cannot carry L1 step one either: the (H,D) consistency defect exceeds the admissible tau by seven and eleven orders",
    "magnitude": {
-    "defect_over_tau_derivative": 18500000.0,
-    "defect_over_tau_hilbert": 204000000000.0,
+    "defect_over_tau_derivative": 18536770.035727352,
+    "defect_over_tau_hilbert": 204033440973.58594,
+    "tau_at_801": 2.3055726395982093e-14,
     "n": 801
    },
    "scope": "inviscid operator only (mu = 0)"
@@ -37971,5 +37978,5 @@
  "gate_answer": "NO",
  "gate_branch": "NO -> B's own gate ('does the searched certificate beat the hand-tuned one?') answers its pre-committed NO in the only sense that matters: nothing in the searchable space closes.",
  "ceiling": "Bookkeeping on a measured negative.  The object is the a = 0 CLM linearisation, whose Y_0 is EXACTLY zero because the anchor IS one basis mode (clause S7), so every magnitude here bounds HL_S2_nonsymmetric's difficulty from BELOW, not above.  No link of the L1 -> L4 chain moved under either branch, and none has moved in 125 legs.  Clay odds unchanged at ~0.05%.",
- "elapsed_s": 18.439905166625977
+ "elapsed_s": 14.814610958099365
 }

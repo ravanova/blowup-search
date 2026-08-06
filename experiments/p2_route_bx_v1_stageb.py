@@ -63,6 +63,7 @@ BANKED_FILES = {
     "leg54_mm_shape": "p2_route_mm_v1_shape.json",
     "leg56_collocation": "p2_route_tn_v1_consistency.json",
     "leg58_nogo": "p2_route_ng_v1_nogo.json",
+    "leg59_weight_repairs": "p2_weight_repairs_v2.json",
     "leg111_coercivity": "p2_route_we_v1_coercivity.json",
 }
 
@@ -117,6 +118,9 @@ OPERATOR_MU = 0.0
 def build_clauses(bk):
     mm, ng, cp = bk["leg54_mm_shape"], bk["leg58_nogo"], bk["leg49_c_pilot"]
     we, tn = bk["leg111_coercivity"], bk["leg56_collocation"]
+    wr = bk["leg59_weight_repairs"]
+    tnv = tn["verdict"]
+    p2_delta, p3_delta = wr["delta"]["P2_finite_fraction"], wr["delta"]["P3_max_slope_error"]
     target_alpha = float(mm["target_alpha"])
     crossing = float(ng["NG2a_fredholm_sides_leg51"]["crossing"])
 
@@ -224,29 +228,38 @@ def build_clauses(bk):
         "any GA compute on an unvalidated fitness is banned, and the ban lifts ONLY on a "
         "frozen six-property gate that PASSES.  It has failed twice: leg 49 at 4/6 and "
         "leg 59 at 5/6 with P3's worst |slope-1| unmoved to sixteen digits",
-        {"leg49_P2_finite": float(cp["C0_4_gate"]["properties"]["P2_finite"]
-                                  ["finite_fraction"]),
-         "leg49_P3_max_slope_error":
-             float(cp["C0_4_gate"]["properties"]["P3_monotone"]["max_slope_error"]),
-         "leg59_P2_finite": 0.975, "leg59_P3_max_slope_error": 0.342,
-         "P2_floor": 0.90, "P3_ceiling": 0.05},
+        {"leg49_P2_finite": float(p2_delta["leg49"]),
+         "leg49_P3_max_slope_error": float(p3_delta["leg49"]),
+         "leg50_P3_max_slope_error": float(p3_delta["leg50_1d_wall"]),
+         "leg59_P2_finite": float(p2_delta["leg59_2d_wall"]),
+         "leg59_P3_max_slope_error": float(p3_delta["leg59_2d_wall"]),
+         "leg49_n_pass": int(wr["delta"]["n_pass"]["leg49"]),
+         "leg59_n_pass": int(wr["delta"]["n_pass"]["leg59_2d_wall"]),
+         "P2_floor": float(p2_delta["threshold"]),
+         "P3_ceiling": float(p3_delta["threshold"])},
         lambda c: c["search"] == "GA")
 
     add("SEARCH-DEAD", 59, "MEASURED",
         "the fitness is dead as parameterized independently of the ban: P3 is a property "
         "of the probe WINDOW's width in decades, not of the weight, so the quantity a "
         "search would steer on does not respond to the genes it would vary",
-        {"P3_leg49": float(cp["C0_4_gate"]["properties"]["P3_monotone"]
-                           ["max_slope_error"]),
-         "P3_leg59": 0.342, "P3_ceiling": 0.05},
+        {"P3_leg49": float(p3_delta["leg49"]),
+         "P3_leg50": float(p3_delta["leg50_1d_wall"]),
+         "P3_leg59": float(p3_delta["leg59_2d_wall"]),
+         "P3_ceiling": float(p3_delta["threshold"]),
+         "P3_unmoved_leg50_to_leg59":
+             p3_delta["leg50_1d_wall"] == p3_delta["leg59_2d_wall"],
+         "spearman_window_width_vs_slope_error":
+             float(wr["D_probe_window"]["spearman_width_vs_slope_error"])},
         lambda c: c["search"] in ("grid", "GA"))
 
     # -- the REALIZATION axis ----------------------------------------------
     add("REAL-COLLOC", 56, "MEASURED",
         "the sup-norm collocation realization cannot carry L1 step one either: the (H,D) "
         "consistency defect exceeds the admissible tau by seven and eleven orders",
-        {"defect_over_tau_derivative": 1.85e7, "defect_over_tau_hilbert": 2.04e11,
-         "n": 801},
+        {"defect_over_tau_derivative": float(tnv["defect_D_over_tau_at_801"]),
+         "defect_over_tau_hilbert": float(tnv["defect_H_over_tau_at_801"]),
+         "tau_at_801": float(tnv["tau_at_801"]), "n": 801},
         lambda c: c["realization"] == "collocation")
 
     add("REAL-ENERGY", 111, "MEASURED",
