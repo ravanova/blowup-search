@@ -88,8 +88,11 @@ coarsening loophole leg 160 found — tightens, does not lift, the ban). A twent
 addition, drafted after leg 184 landed and one slot opened with no fresh reserve, adds
 **185** (M2SD, diagnosing leg 125's Object-B Newton stall as genuine non-existence versus a
 solver artifact — grounded in leg 125's own already-landed report, found by re-checking git
-history directly rather than relying on secondhand summaries). **Next fresh leg number for
-any future candidate is 186.**
+history directly rather than relying on secondhand summaries). A twenty-fifth addition,
+drafted after legs 167 and 182 landed and closed the space-axis investigation cleanly, adds
+**186** (PUB2, the space-axis methodological note — `ell^1_w` dead, origin-H² capped at
+`a=0`, no interpolant helps — a second, separate synthesis note from leg 179's). **Next
+fresh leg number for any future candidate is 187.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1452,6 +1455,34 @@ Independence field of anything blocked on a leg that's since landed" going forwa
 fine simplification — the pattern is mechanical (a repair lands, its regression-check leg
 unblocks) and doesn't need this DM to re-derive it by hand each time if the coordinator's own
 tracking already catches it.
+
+**DM update, 2026-08-06 — legs 167 and 182 landed clean; the space-axis investigation is now
+fully closed. One new candidate drafted below (186); `git log` re-checked, nothing else new
+has landed.**
+
+**182 (H2I) answered NO**: no interpolating space between `ell^1_w` and origin-H² avoids
+both obstructions. Combined with what was already banked, the space axis now has three
+resolved points, forming a complete, coherent result: `ell^1_w` is dead unconditionally (leg
+127), origin-H² is structurally viable but capped at `a=0` exactness with no transfer to the
+real target (leg 163), and no intermediate space rescues either (leg 182). This is exactly
+the shape of finding leg 179's bundle already demonstrated is worth writing up coherently
+rather than leaving scattered across three leg reports — and unlike a hygiene item, it is
+synthesizing genuinely new mathematical content (163 and 182 both postdate 179's bundle), so
+drafting it is consistent with the math-over-review steer, not in tension with it.
+
+- **186 (PUB2)**, new: bundles the space-axis closure (127, 163, 182) into one coherent
+  methodological note, on the same precedent as leg 179 — states the three results together,
+  with leg 163's known ceiling and leg 182's negative result both stated exactly as landed,
+  no softening or strengthening either. Flags explicitly, per this repository's own
+  discipline: this bundle is a NEW, separate note from leg 179's (which bundles the no-go
+  family: exponent-sum, discrete-ball trap, the `A21` inequality, closure audit) — the two
+  should not be merged into one document without the user's own editorial call, since they
+  answer different questions (why the method fails vs. where else it might live).
+
+**Honest accounting**: this is grounded entirely in already-landed results (127, 163, 182,
+and the leg 179 precedent for how to bundle them), not a presupposition of anything still in
+flight. `git log` shows nothing new beyond leg 185 has landed since the last check, so no
+other fresh math-shaped thread was found this pass.
 
 ---
 
@@ -5477,6 +5508,40 @@ or the other?
 **Independence.** Read-only re-diagnosis of a closed leg's own stalled run; no dynamics
 construction, no GA compute. Disjoint from 174 (VBS, cataloging OTHER models, not
 re-diagnosing this one) and from every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 186 — ROUTE-PUB2: THE SPACE-AXIS METHODOLOGICAL NOTE — ell^1_w DEAD (127) + ORIGIN-H²
+CAPPED AT a=0 (163) + NO INTERPOLANT HELPS (182)
+**Thesis.** The space axis is now fully mapped and closed: leg 127 proved `Z_1 >= 1`
+unconditionally for every bounded `A` on `ell^1_w`; leg 163 found origin-H² structurally
+viable but capped at `a=0` exactness, re-deriving Xu's own closed form with no transfer to
+the real (non-`a=0`) target; leg 182 confirmed no interpolating space between the two avoids
+both obstructions. Read separately, these are three leg reports; read together, they are one
+coherent finding about WHERE a certificate for this operator can and cannot live — exactly
+the shape of synthesis leg 179 already demonstrated is worth writing up as its own note
+rather than leaving scattered. This is genuinely new content (163 and 182 both postdate leg
+179's bundle), not a re-tread, and it is synthesis of landed mathematics, not audit/hygiene
+work — consistent with, not in tension with, the standing math-over-review steer.
+**Gate.** Does the combined note state all three space-axis results accurately — leg 163's
+known ceiling and leg 182's negative result stated exactly as landed, with leg 176's
+construction outcome (if landed by the time this leg runs) folded in as a fourth data point,
+and no softening or strengthening of any of them?
+  yes -> Bank the combined note as a second, SEPARATE publication-scoping draft from leg
+         179's (different question: where else the method might live, not why it fails on
+         `ell^1_w`). Flag both to the user together at the next natural check-in, explicitly
+         noting they are two documents, not one, unless the user's own editorial judgment
+         says otherwise.
+  no  -> Report exactly which bundled claim doesn't reproduce from its own banked source;
+         escalate rather than silently soften it, same discipline as leg 179.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md (NEW),
+               writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md (NEW),
+               writeup/novelty/leg_186.md, experiments/journal/leg_186.md.
+               Reads (never edits) legs 127/163/176/182's own banked JSONs and reports.
+**Difficulty.** light
+**Independence.** New writeup files only; no solver module, no existing file edited (unlike
+leg 179, which had one small correction to leg 157's framing note — this leg needs no such
+touch). Disjoint from every other live/reserve leg. Immediately dispatchable.
 ```
 
 ## Ranking rationale
