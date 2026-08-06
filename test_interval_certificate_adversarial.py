@@ -439,6 +439,217 @@ def test_banked_battery_reproduces():
           f"accounted for by name")
 
 
+# ==========================================================================
+# LEG 201 (Route-ICA2) -- THE DEGENERATE BANDS.  APPENDED, NOTHING ABOVE TOUCHED.
+# ==========================================================================
+# Leg 98's 39 cases above are ALL normal-range floats.  They ask whether this module
+# enforces the HYPOTHESES it is imported under.  They do not ask whether the module's own
+# ARITHMETIC is a bound.  Leg 201 drives it through the two bands leg 69 (Route-IA) named
+# in the primitive underneath, `solver/interval.py`:
+#
+#   the SUBNORMAL band  -- where a purely RELATIVE error bound underflows to zero while the
+#                          true accumulation error stays ABSOLUTE (a few eta).  Leg 69
+#                          repaired this IN `interval.py` with Rump's eta term (BIT
+#                          52:201-220, 2012): `_ETA_TERMS_PLAIN`, `_ETA_TERMS_DOT2`.
+#   the 2^997 band      -- where Dekker's splitting constant overflows and used to return a
+#                          silent NaN.  Leg 69 repaired this by raising in `_two_product`.
+#
+# **LEG 201's GATE ANSWERED YES, AND IS NOT REPAIRED.**  `interval_certificate.
+# matmul_point_interval` is a CLONE of `interval.matvec` that never received leg 69's eta
+# term, and in the subnormal band it returns an enclosure that DOES NOT CONTAIN the value it
+# encloses -- by up to 200 eta, which is 24.63% of the returned magnitude at the shipped
+# N = 405.  The defect reaches `interval_constants`, whose returned `Y_0` -- a claimed UPPER
+# bound -- comes back 19.66% BELOW the exact quantity it bounds, with no exception and
+# `rigorous: True`.
+#
+# The gates below are therefore **GAP-PIN**s: they assert the DEFECT, at measured
+# magnitudes, so that a repair cannot land silently and a regression cannot either.  Each
+# names its own inversion.  **Invert them on repair; do not weaken them.**  The repair is
+# one line -- the same eta term, in the same place, that `interval.matvec` already carries.
+#
+# Leg 201 did NOT patch `solver/interval_certificate.py` or `solver/interval.py`, under
+# either gate outcome, per the precedent of legs 66, 69, 79 and 98.
+
+from fractions import Fraction as _Fr
+
+from solver.interval import dot2_matvec, matvec as _matvec
+from solver.interval_certificate import matmul_point_interval as _mpi
+
+_ETA = 2.0 ** -1074
+_SUB_BASE_201 = 2.0 ** -537
+
+
+def _subnormal_pair(m, k):
+    """(M, v) whose m products are all exactly k*eta -- leg 201's deterministic case."""
+    return np.full((1, m), _SUB_BASE_201), np.full(m, k * _SUB_BASE_201)
+
+
+def _exact_row(M_row, v):
+    return sum((_Fr(float(a)) * _Fr(float(b)) for a, b in zip(M_row, v)), _Fr(0))
+
+
+def test_gappin_201_matmul_point_interval_loses_containment_when_subnormal():
+    """GAP-PIN (leg 201). `matmul_point_interval` returns a NON-CONTAINING enclosure.
+
+    Deterministic, not searched: every product is exactly k*eta, a forced rounding tie, so
+    the m per-product errors accumulate to m/2 eta while the relative guard
+    `gamma_m * sum|M_ij v_j|` underflows to EXACTLY ZERO -- leaving one nextafter push,
+    worth 1 eta, against it.
+
+    MEASURED at the two accumulation lengths this repository ships (BorderedCLM N=103,
+    BorderedHL N=405), both rounding directions:
+
+        m = 103 -> escape  50 eta = 24.04% of the returned magnitude
+        m = 405 -> escape 200 eta = 24.63% of the returned magnitude
+
+    ON REPAIR (add `_eta_floor(m, _ETA_TERMS_PLAIN)` to both error terms, exactly as
+    `interval.matvec` does): INVERT this gate to assert containment at every m, and keep
+    these magnitudes in the docstring as the record of what it protects against."""
+    for m, want in ((103, 50.0), (405, 200.0)):
+        for k in (1.5, 2.5):
+            M, v = _subnormal_pair(m, k)
+            lo, hi = _mpi(M, v[:, None], v[:, None])
+            exact = _exact_row(M[0], v)
+            esc = max(float(_Fr(float(lo[0, 0])) - exact) / _ETA,
+                      float(exact - _Fr(float(hi[0, 0]))) / _ETA)
+            assert esc == want, (
+                f"m={m} k={k}: containment escape {esc} eta, banked {want}. If this is "
+                "now <= 0 the defect is REPAIRED -- invert this gate, do not delete it.")
+    print("[ok] GAP-PIN 201: matmul_point_interval escapes containment by 50 eta "
+          "(m=103) and 200 eta (m=405) -- 24.63% of the returned magnitude")
+
+
+def test_gappin_201_interval_constants_Y0_is_below_the_quantity_it_bounds():
+    """GAP-PIN (leg 201). The defect reaches the certificate's own returned constant.
+
+    `Y_0` is documented as a RIGOROUS UPPER BOUND on `max_i w_i |(A F(z))_i|`.  On a
+    synthetic linear system (identity Jacobian -- the most favourable case there is) whose
+    `A @ F` products are subnormal, it comes back 19.66% BELOW that quantity at m = 405,
+    and 18.99% below at m = 103.  No exception; the result still carries `rigorous: True`.
+
+    Leg 98's `_containment_screen` cannot see this and is not expected to: it compares the
+    enclosure against a FLOAT re-evaluation, which makes the SAME underflow error, so the
+    screen's ratio is 0.996 -- four decades inside its 1e4 threshold.  That is two
+    different defects and they stay separate (discipline 75).
+
+    ON REPAIR: INVERT to assert `Y0 >= exact` at both m."""
+    from experiments.p2_route_ica2_v1_adversarial import SubnormalToy
+    for m, want_pct in ((103, 18.99), (405, 19.66)):
+        iv = SubnormalToy(m, 2.5)
+        A = np.full((m, m), _SUB_BASE_201)
+        c = interval_constants(iv, np.zeros(m), np.ones(m), np.ones(m), A=A)
+        exact = float(m * _Fr(_SUB_BASE_201) * _Fr(2.5 * _SUB_BASE_201))
+        pct = 100.0 * (1.0 - c["Y0"] / exact)
+        assert c["Y0"] < exact, (
+            f"m={m}: Y_0 = {c['Y0']!r} is now >= the exact {exact!r}. The defect is "
+            "REPAIRED -- invert this gate, do not delete it.")
+        assert abs(pct - want_pct) < 0.01, (
+            f"m={m}: Y_0 understated by {pct:.2f}%, banked {want_pct}%")
+    print("[ok] GAP-PIN 201: interval_constants returns Y_0 19.66% BELOW the quantity it "
+          "claims to bound, with rigorous=True")
+
+
+def test_holds_201_the_repaired_primitive_is_the_control_and_it_encloses():
+    """HOLDS + CONTROL (leg 201, discipline 90). The control CAN come out the other way.
+
+    `interval.matvec` -- leg 69's REPAIRED sibling of the routine under test -- is run on
+    BYTE-IDENTICAL input and encloses correctly at every m and both rounding directions.
+    That is what attributes the escape to the CLONE rather than to the data: if the input
+    were simply too hard for interval arithmetic, this control would fail too.
+
+    This gate also protects leg 69's repair itself from regressing."""
+    for m in (103, 405):
+        for k in (1.5, 2.5):
+            M, v = _subnormal_pair(m, k)
+            r = _matvec(M, Interval(v, v))
+            exact = _exact_row(M[0], v)
+            assert _Fr(float(r.lo[0])) <= exact <= _Fr(float(r.hi[0])), (
+                f"m={m} k={k}: leg 69's eta term has REGRESSED in interval.matvec -- the "
+                "control for leg 201's finding no longer holds")
+    print("[ok] HOLDS 201: interval.matvec (leg 69, repaired) encloses the same "
+          "byte-identical subnormal input at m=103 and m=405, both directions")
+
+
+def test_holds_201_the_same_routine_is_sound_in_the_normal_range():
+    """HOLDS (leg 201). The defect is BAND-SPECIFIC, and that is what scopes it.
+
+    The identical routine on O(1) data encloses correctly. Together with the scoping
+    measurement in the battery -- the live `BorderedCLM` minimum row mass is 1.63e-28,
+    **292.9 decades above** the top of the subnormal band -- this is why leg 201's finding
+    is LATENT: no banked number in this repository is shown to be wrong."""
+    rng = np.random.default_rng(20201)
+    for m in (103, 405):
+        M = rng.standard_normal((1, m))
+        v = rng.standard_normal(m)
+        lo, hi = _mpi(M, v[:, None], v[:, None])
+        exact = _exact_row(M[0], v)
+        assert _Fr(float(lo[0, 0])) <= exact <= _Fr(float(hi[0, 0])), (
+            f"m={m}: matmul_point_interval has lost containment in the NORMAL range. That "
+            "is a far more serious defect than leg 201's and is NOT what leg 201 found.")
+    print("[ok] HOLDS 201: matmul_point_interval is sound in the normal range -- "
+          "the defect is band-specific, 292.9 decades below any live operand")
+
+
+def test_holds_201_the_2_997_band_still_refuses_loudly():
+    """HOLDS (leg 201). Leg 69's defect-2 repair holds ONE LEVEL UP.
+
+    An oversized operand reaching `interval_constants` through the compensated residual
+    path -- which is how every shipped enclosure class in this module builds `F` -- raises
+    `OverflowError` out of the certificate entry point rather than returning `[nan, nan]`.
+    This is the informative confirmation leg 201's NO-branch would have banked, and it
+    holds even though the subnormal branch did not."""
+    from experiments.p2_route_ica2_v1_adversarial import run as _run201  # noqa: F401
+    big = 2.0 ** 997
+
+    class _BigToy:
+        n = N = 8
+
+        def F_float(self, z):
+            return np.full(8, big)
+
+        def F(self, z):
+            return dot2_matvec(np.full((8, 8), big), np.ones(8))
+
+        def jacobian(self, z):
+            return np.eye(8), np.eye(8)
+
+        def bilinear_bound(self, w, nu):
+            return 1.0
+
+    try:
+        interval_constants(_BigToy(), np.zeros(8), np.ones(8), np.ones(8), A=np.eye(8))
+    except OverflowError as e:
+        assert "2^997" in str(e)
+        print("[ok] HOLDS 201: 2^997 raises OverflowError out of interval_constants, "
+              "loudly -- leg 69's defect-2 repair holds one level up")
+        return
+    raise AssertionError(
+        "interval_constants returned at 2^997 instead of raising; leg 69's defect-2 "
+        "repair has regressed or been bypassed")
+
+
+def test_banked_201_battery_reproduces():
+    """Leg 201's headline counts are reproducible and are the numbers the writeup quotes."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        from experiments.p2_route_ica2_v1_adversarial import run as run201
+        data = run201(write=False, verbose=False)
+    t = data["totals"]
+    assert (t["cases"], t["silent_wrong"], t["sound"], t["raised"]) == (41, 11, 28, 2), (
+        f"leg 201 battery totals {t}, banked cases=41 silent_wrong=11 sound=28 raised=2")
+    assert data["answer"] == "YES"
+    h = data["headline"]
+    assert h["worst_escape_eta"] == 200.0
+    assert abs(h["worst_escape_relative"] - 0.2463) < 1e-4
+    assert abs(h["Y0_understated_percent"] - 19.664) < 1e-3
+    assert h["reachable_from_live_operator"] is False
+    print(f"[ok] leg 201 battery reproduces: {t['silent_wrong']}/{t['cases']} cases "
+          f"return a non-bound silently; worst escape {h['worst_escape_eta']:.0f} eta = "
+          f"{h['worst_escape_relative'] * 100:.2f}% of the returned magnitude; "
+          f"Y_0 understated {h['Y0_understated_percent']:.2f}%; unreachable from any "
+          "live operator (292.9 decades)")
+
+
 if __name__ == "__main__":
     # The poisoned cases divide by zero and take sqrt of NaN on purpose; numpy's
     # RuntimeWarnings are the EXPECTED noise of the battery, not a signal, and letting
@@ -459,6 +670,15 @@ if __name__ == "__main__":
     test_fixed_negative_weight_vector_is_refused()
     test_fixed_Z2_zero_reports_instead_of_raising()
     test_banked_battery_reproduces()
+    # -- leg 201 (Route-ICA2): the degenerate bands ------------------------------------
+    test_gappin_201_matmul_point_interval_loses_containment_when_subnormal()
+    test_gappin_201_interval_constants_Y0_is_below_the_quantity_it_bounds()
+    test_holds_201_the_repaired_primitive_is_the_control_and_it_encloses()
+    test_holds_201_the_same_routine_is_sound_in_the_normal_range()
+    test_holds_201_the_2_997_band_still_refuses_loudly()
+    test_banked_201_battery_reproduces()
     print("\nALL ADVERSARIAL GATES PASS -- 7 of them leg 98's GAP-PINs, INVERTED to "
-          "assert the guard that closed the defect (12/36 false accepts -> 0/36). "
-          "See the header.")
+          "assert the guard that closed the defect (12/36 false accepts -> 0/36); "
+          "plus leg 201's 2 GAP-PINs pinning an OPEN defect in the subnormal band "
+          "(matmul_point_interval escapes containment by 200 eta = 24.63%; Y_0 comes "
+          "back 19.66% below the quantity it bounds) and 3 HOLDS. See the header.")
