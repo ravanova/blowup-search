@@ -7508,3 +7508,99 @@ status (though it does not strictly require waiting).
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 206 lands, 208 escalates (a sixth guard-class
+member found ad hoc), 218 promoted into slot H
+
+**206 (GSA) landed on `main` — gate YES, correctly judged not claim-adjacent.** Six latent
+mechanisms found in `ga_search.py`; all 9 live call sites individually audited safe. Same
+shape as other clean landings: a real finding, properly scoped as non-contaminating, no
+escalation needed.
+
+**208 (TSA) escalated, not merged** (`leg/208-tsa-v1` pushed, `main` untouched).
+`target_selection.py` is a SIXTH never-enumerated member of leg 128's guard-class family: 9/9
+forbidden triples return `feasible=True` (5 with a NEGATIVE certified radius), and
+`y0_budget` is bit-for-bit wrong at `Z1=2.0`. Latent; 85/85 banked records sit in range.
+**Important, and explicitly checked by the leg itself**: leg 63's "exactly one candidate
+passes" screening and the whole γ=2 line (63/125/174/185/187/193) are confirmed NOT at risk
+— that predicate runs on a disjoint, parked, unmerged branch this defect never touches.
+
+**Process point, flagged by the orchestrator, not acted on immediately.** Six separate legs
+(79, 98, 116, 128, and now 208 — the coordinator counts six total) have each independently
+discovered "the last uncensused guard-class member" one at a time, ad hoc, rather than by a
+systematic sweep. This DM's own read: **worth queuing, not worth interrupting the current
+batch for.** A census leg (enumerate every `solver/` function computing a radii-polynomial-
+shaped verdict; assert each one either delegates to a guard or is on a pinned-gap list) would
+plausibly find a seventh member faster than continuing to discover them one repair-leg at a
+time — but every one of the six found so far cost roughly one leg's worth of effort and
+landed a real result, so there is no efficiency crisis forcing this now. Drafted below as
+reserve leg **224 (GCC, Guard-Class Census)**, ranked for promotion once the current repair
+batch (216-221) thins out, not ahead of it — the repairs already in hand are higher-value per
+slot than a census that might mostly re-find members already known.
+
+```
+### 224 — ROUTE-GCC: SYSTEMATIC GUARD-CLASS CENSUS — ENUMERATE EVERY radii-polynomial-SHAPED
+VERDICT FUNCTION IN solver/, ONE PASS INSTEAD OF SIX AD-HOC DISCOVERIES (RESERVE)
+**Thesis.** Six separate legs (79, 98, 116, 128, 208, and the family 128 itself was drafted
+to close) have each discovered, one at a time, that some `solver/` function computing a
+radii-polynomial-shaped feasibility/closure verdict was missing the shared guard discipline
+`nk_bounds.py`'s repair (128) established. Every discovery cost roughly one leg's worth of
+effort. A single systematic census — grep every function whose signature/return shape
+matches "feasible", "closes", "Y_0"/"Z_0"/"Z_1"-style verdict, or a certified-radius return,
+then check each one against the shared guard list — would either find the same six members
+faster (confirming completeness) or find a genuine SEVENTH member this repository's own
+ad-hoc discovery process has not yet reached.
+**Gate.** Does a systematic function-signature census of every `solver/` module find any
+radii-polynomial-shaped verdict function NOT already covered by the shared guard discipline
+(the ledger of six: 79/98/116/128/208's own targets) or a pinned-gap list?
+  yes -> Name the new function and module precisely; report whether its own failure mode
+         matches the established family shape (false-positive feasibility/closure) or is
+         genuinely different. Escalate if claim-adjacent (check banked contamination before
+         deciding), do not patch under this leg's own authority.
+  no  -> The six known members are confirmed to be the complete set (within this leg's own
+         search method's limits, stated honestly). Bank the census as closing the "are there
+         more" question for this discovery method — a future leg using a DIFFERENT method
+         (e.g. dynamic call-graph tracing rather than static signature grep) could still find
+         something this one misses, and that caveat is stated explicitly, not smoothed over.
+**Territory.** experiments/p2_route_gcc_v1_census.py, writeup/data/p2_route_gcc_v1_census.json,
+               writeup/novelty/leg_224.md, experiments/journal/leg_224.md.
+               Reads every solver/*.py file read-only; patches nothing under either outcome.
+**Difficulty.** standard
+**Independence.** Read-only census, no solver module edited. Disjoint from every other
+live/reserve leg (216-221 repair the six ALREADY-found members; this leg looks for a
+seventh). Reserve — promote once the current repair batch thins out; not ranked ahead of
+216-221's own higher-value-per-slot repairs.
+```
+
+**Slot H refilled with leg 218 (BHR)** — this DM's own top-ranked repair by blast radius
+(the `bordered_hl.py` negative-border-weight fix, 1.198e9x/1.189e17x corruption potential),
+now in flight.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 211 | XU11 | live (unchanged) |
+| C | 213 | LGC2 | live (unchanged) |
+| D | 203 | RSA | live (unchanged) |
+| E | 212 | USC2V | live (unchanged) |
+| F | 209 | SCA2 | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 218 | BHR | **live, newly promoted — replaces 206 (landed, OFF roster); top-ranked repair by blast radius** |
+| I | 210 | M2SV | live (unchanged) |
+| J | 207 | DPA | live (unchanged) |
+
+**Reserve queue, recounted precisely against the last-confirmed set (213, 216, 217, 218, 219,
+220, 221, 222, 223) minus this round's two promotions (213 -> C, 218 -> H): 7 remain (216,
+217, 219, 220, 221, 222, 223), plus the newly-drafted 224 = 8 undispatched legs (216, 217,
+219, 220, 221, 222, 223, 224).** Above the §3a watermark of 3 — no further batch needed.
+Promotion order, unchanged from the blast-radius ranking two updates above, with 224 appended
+at the end per this update's own note (behind the repair batch, not ahead of it): **221
+(BVRR) first** (closes the one escalation with unconfirmed contamination status), then 216
+(CGF), 217 (PCR), 219 (ICR2), 220 (TNR), 222 (FBA), 223 (PUB3), then 224 (GCC) last.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
