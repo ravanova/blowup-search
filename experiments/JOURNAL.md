@@ -3176,3 +3176,12 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   velocity_matrix, arity-truncating pin, NaN-dropping tail_exponent mask). Blast
   radius LATENT: 0 banked numbers currently impeached (no live caller passes a
   negative border weight). Module unpatched, branch leg/198-bha-v1 pushed.
+- **Leg 201 (Route-ICA2) — YES, ESCALATED (parked, not merged):**
+  interval_certificate.py's matmul_point_interval silently returns a
+  non-containing enclosure in the subnormal band -- containment escape 200 eta =
+  24.63% of the returned magnitude at the shipped BorderedHL N=405, driving Y_0
+  19.66% below the quantity it claims to upper-bound while still flagged
+  rigorous=True. An independent unrepaired clone of leg 69's defect 1 (a repaired
+  sibling routine encloses at 0 eta on identical input). Severity LATENT: live
+  minimum row mass sits 292.9 decades above the failing band, 0 banked numbers
+  wrong. Module unpatched, branch leg/201-ica2-v1 pushed.
