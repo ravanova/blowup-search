@@ -143,6 +143,36 @@ orchestrator happens to ask, is exactly the failure this fixes. If the orchestra
 the line is missing, stale, or already at/below the watermark, it asks the DM for a refresh
 in the same message as its next refill request (§4a) rather than waiting for a dedicated cycle.
 
+### 3b. The composition floor — a quota, not a preference
+
+**Diagnosed 2026-08-06, by external review.** The §3a watermark trigger refills the reserve
+on demand, and an audit/repair/verify leg is the cheapest kind to draft — every module in
+`solver/` can support one. Left unconstrained, the reserve refills with audits by default and
+the live roster inherits that composition: one review found leg 0 (orchestrator integration
+commits) at 57% of the last 60 commits on `main`, up from 25/60 and 9/60 in the two reviews
+before it, and a ten-slot roster with seven audit/repair/verify legs and zero math, literature,
+or construction legs. A prior "math-over-review" standing preference did not survive an
+orchestrator restart, because a preference recorded only in prose is exactly the kind of rule
+lesson 68 warns decays at the rate of memory.
+
+**The rule, executable, not a preference:** **at least 3 of the 10 live slots must at all
+times hold a leg whose primary output is mathematics, external literature, or construction**
+(not an adversarial audit, a repair, or a post-construction verification). The §3a watermark
+trigger **may not** fill a slot with an audit/repair/verify leg while the roster is below this
+floor. If the reserve contains no eligible math/literature/construction candidate at the
+moment a slot needs refilling and the floor is not met, the trigger **fails loudly** — the DM
+drafts an eligible candidate before the orchestrator dispatches anything else into that slot,
+rather than filling it with whatever cheap audit is sitting in reserve.
+
+**The orchestrator checks the floor at every refill** (`ORCHESTRATION.md` §4a's per-slot
+refill step): before dispatching a leg into a newly-vacated slot, count how many of the
+remaining nine live slots are math/literature/construction-typed; if the floor would be
+breached by filling this slot with an audit/repair/verify candidate, request an eligible
+candidate from the DM instead, even if that means a slot sits briefly unfilled rather than
+filled with an ineligible type. `test_plan_of_record.py` or the merge gate should assert this
+floor directly from `DIRECTION.md`'s own slot table if a checkable form can be added there —
+an unenforced rule is a rule that will drift again.
+
 | Band | Slots | Model | Lane | Branch prefix | Role |
 |---|---|---|---|---|---|
 | **LEG-A…J** | 10 | Opus, high effort | local worktree | `leg/<N>-<slug>` | One whole leg each, end to end: novelty pass → construction → measurement → gate answer → full quartet → **its own rebase, gate, and push to `main`** (§7b). Owns only its own files (§5). Terminated once its push lands; the slot refills with a fresh agent. |

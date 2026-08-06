@@ -197,6 +197,16 @@ exponent wrong (`K` instead of `K²`) and the responsible factor wrong (`K/2` in
 The conclusion survived; the mechanism did not. **When a quantity has a suspiciously tidy
 closed form (`2(K²−1)`, `4(K−1)`), that is the signal to check what produced it.**
 
+**NEW — LESSON 91, FROM EXTERNAL REVIEW (2026-08-06). "MEASURED DEAD" WITHOUT A NAMED
+REALIZATION IS NOT AN ADMISSIBLE GATE ANSWER.** Three banked closures were found over-read
+after the fact: leg 165 (legs 111/141's zero-width window turned out to be a property of one
+trial space, not the operator); leg 180 (the a*≈0.5–0.55 boundary was stated without its
+measured domain across 15 documents); leg 185 (leg 125's Object-B stall was a solver
+artifact, not non-existence). **Every leg reporting a negative result must name, in the
+gate's own answer wording, the exact realization, trial space, or basis the negative holds
+in** — "measured dead" alone, with no realization named, is not a complete gate answer and
+must be sent back for that naming before the finding is banked.
+
 **BANS ARE MACHINE-READABLE.** `plan_of_record.py` carries every ban with what lifts it;
 `.venv/bin/python plan_of_record.py` prints the ones in force. New this cycle: **do not repair
 `B`'s three degrees of freedom (space, split, shape) — all three are separately measured dead**;
