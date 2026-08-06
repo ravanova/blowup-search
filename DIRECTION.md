@@ -84,8 +84,12 @@ interrupted draft, adds **182** (H2I, the intermediate-space scoping question be
 directly to the DM relaying an external novelty review's four findings, adds **183** (XU8,
 top priority — does Xu §8 pre-empt part of Theorem NGX, blocking leg 179's bundle from being
 presented as ready) and **184** (GBW, pins the GA ban's lift condition against the
-coarsening loophole leg 160 found — tightens, does not lift, the ban). **Next fresh leg
-number for any future candidate is 185.**
+coarsening loophole leg 160 found — tightens, does not lift, the ban). A twenty-fourth
+addition, drafted after leg 184 landed and one slot opened with no fresh reserve, adds
+**185** (M2SD, diagnosing leg 125's Object-B Newton stall as genuine non-existence versus a
+solver artifact — grounded in leg 125's own already-landed report, found by re-checking git
+history directly rather than relying on secondhand summaries). **Next fresh leg number for
+any future candidate is 186.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1368,6 +1372,35 @@ user-flagged; 178 already live and not duplicated) is consistent with it.
 
 **Recommended dispatch order, this update:** **183 (top priority, blocking), 184, 182**, then
 whatever remains from the previous refill's pool (176, 177, 178 all already live).
+
+**DM update, 2026-08-06 — leg 184 (GBW) landed clean (`8a2cf6f`): the GA ban's lift
+condition now pins the frozen resolution and explicitly excludes leg 160's coarsening
+loophole. Ban stays fully in force; item 2 of the external review is closed.** One slot
+open; one new candidate drafted below, found by checking this repository's own git history
+directly for leg 125's actual landed outcome (not previously relayed to this DM in detail):
+
+**185 (M2SD)**, new: leg 125 (M2P) landed gate **NO on both clauses** — Chen's γ=2 profile
+turned out to be the INVISCID closed form (Chen's own text: "we study the inviscid problem,
+i.e. ν=0"), so there was no dissipative profile to certify; separately, "Object B" (the
+viscous steady state that WOULD have to exist for a genuine dissipative certificate) **stalls
+under Newton continuation** at residual 2.65-3.75 with `c_l` running to −10.7, rather than
+converging or cleanly diverging. That stall has never been diagnosed — is it genuine
+non-existence (no viscous γ=2 steady state exists, strengthening the "missing rung" framing
+leg 174 is independently cataloging alternatives for) or a solver artifact (bad initial
+guess, a parametrization singularity, insufficient continuation depth)? This is grounded
+entirely in leg 125's own already-landed report, not contingent on any in-flight leg's
+unknown content, and it is a genuine open diagnostic question this repository has not asked.
+
+**Honest accounting, as asked**: this is the one new candidate this DM found this pass by
+actually re-deriving ground truth (checking `git log` directly) rather than working from
+memory of what's already drafted. Everything else immediately adjacent — further Xu mining,
+further space-axis points, further viscous-model cataloging — is already covered by a live
+or provisional leg (171/173/181/183 on Xu; 182 on the interpolation space; 174/178 on
+viscous/weighted-energy alternatives) and drafting more there now would mean presupposing
+their still-unknown outcomes. If the coordinator wants a second candidate to fully use the
+open slot, the honest fallback is one of the still-available lower-priority reserve items
+from earlier refills (148, 109, 168, 179's eventual correction leg once 183 lands) rather
+than a fabricated new math thread.
 
 ---
 
@@ -5348,6 +5381,51 @@ original construction both fail)?
 every other live/reserve leg, none of which touches this file. Immediately dispatchable;
 already flagged in `PROGRESS.md`'s NEEDS YOU per the coordinator's note, this leg is the
 mechanism the DM is choosing for it.
+```
+
+```
+### 185 — ROUTE-M2SD: DOES LEG 125's OBJECT-B NEWTON STALL MEAN GENUINE NON-EXISTENCE, OR A
+SOLVER ARTIFACT?
+**Thesis.** Leg 125 (M2P) landed gate NO on both clauses: Chen's γ=2 profile is the INVISCID
+closed form (his own text: "we study the inviscid problem, i.e. ν=0"), not a dissipative one,
+so there was nothing to certify on Object A; separately, "Object B" — the viscous steady
+state that would have to exist for a genuine γ=2 dissipative certificate — was attempted
+under Newton continuation and STALLED at residual 2.65-3.75 with `c_l` running to −10.7,
+rather than converging to a solution or diverging cleanly to a certified non-existence. That
+stall has never been diagnosed. Two honest outcomes: (a) genuine non-existence — the
+continuation's own behavior (residual plateau, `c_l`'s monotone runaway) is characteristic of
+approaching a genuine obstruction, which would strengthen the "no viscous γ=2 gCLM profile
+exists" reading and directly inform leg 174's (VBS) catalog of alternative viscous models; or
+(b) a solver artifact — a bad initial guess, a parametrization singularity at the stalled
+point, or insufficient continuation depth, in which case a repaired continuation might still
+reach a genuine profile leg 125 itself never got the chance to test. Diagnostic only: no new
+dissipative-dynamics run, re-examine leg 125's own stalled continuation with standard
+diagnostics (residual trend classification, Jacobian conditioning near the stall,
+sensitivity to the initial guess) before concluding either way.
+**Gate.** Does the Newton stall on Object B, diagnosed against standard non-existence
+signatures (residual plateau shape, Jacobian singularity structure, parametrization
+degeneracy) versus standard solver-artifact signatures (basin-of-attraction sensitivity,
+recoverable convergence from a different initial guess at the SAME target), classify as one
+or the other?
+  genuine non-existence -> Report the diagnostic evidence precisely. Strengthens the "missing
+         rung" framing — bank this as informing leg 174's catalog; do not re-attempt
+         construction under this leg's own authority (that would be a new leg, informed by
+         this one's diagnosis).
+  solver artifact -> Report exactly what changed the outcome (different initial guess,
+         reparametrization) and whether a genuine profile becomes reachable. ESCALATE as a
+         candidate follow-up construction leg — do not build the corrected continuation here.
+  inconclusive -> Report what was tried and why neither signature was clean; bank as a
+         characterized open diagnostic, not a forced verdict.
+**Territory.** experiments/p2_route_m2sd_v1_diagnostic.py,
+               writeup/data/p2_route_m2sd_v1_diagnostic.json,
+               writeup/novelty/leg_185.md, experiments/journal/leg_185.md.
+               Reads (never edits) leg 125's own report/JSON and
+               solver/target_selection.py/solver/dissipative_profile.py, read-only (leg 125's
+               territory, closed on landing).
+**Difficulty.** standard
+**Independence.** Read-only re-diagnosis of a closed leg's own stalled run; no dynamics
+construction, no GA compute. Disjoint from 174 (VBS, cataloging OTHER models, not
+re-diagnosing this one) and from every other live/reserve leg. Immediately dispatchable.
 ```
 
 ## Ranking rationale
