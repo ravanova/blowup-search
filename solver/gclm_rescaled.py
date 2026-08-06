@@ -41,6 +41,27 @@ from solver.line_hilbert import line_hilbert_matrix
 
 PI = np.pi
 
+#: Floor on the gauge multiplier used by :meth:`RescaledCLM.run`'s stopping test.
+#:
+#: The rescaled CLM fixed point is a one-parameter LINE: Omega_lambda(X) = Omega_0(lambda X)
+#: is an exact steady state for every lambda > 0, selected by the origin slope f(0) = -4 lambda,
+#: which the scheme freezes exactly and which this module's docstring calls a free gauge.
+#: ||f_tau||_inf is degree-1 in lambda, so a FIXED ABSOLUTE stopping test is not scale-invariant
+#: along the one direction the module declares free: for lambda below ~tol/2.94 it is satisfied
+#: by the initial data and `run()` reports convergence after one step (leg 85, Route-GRA).
+#: The cure is to measure the residual against the already-frozen gauge |f(0)|/4 (= lambda),
+#: which is exactly 1 at the validated gauge f(0) = -4, so no banked number moves.
+#:
+#: The floor only guards the degenerate gauge f(0) = 0, where no scale exists. It is deliberately
+#: TINY rather than the more obvious 1e-6: the floor can only ever make the tolerance LOOSER than
+#: the scale-invariant value (max() picks it when lambda < floor), so any floor above the gauge
+#: scales one wants to certify re-admits the very false positive this fixes -- measured, floor
+#: 1e-6 leaves the lambda = 1e-8/1e-9/1e-10 false positives in place. 1e-15 is ~10x double
+#: precision epsilon, below every gauge member representable above roundoff, and it keeps the
+#: tolerance strictly positive so a state exactly at rest (residual identically 0) still reports
+#: converged.
+GAUGE_TOL_FLOOR = 1e-15
+
 
 def sinh_grid(n, c=0.5, rho_max=8.0):
     """Symmetric whole-line grid X = c*sinh(rho), rho uniform on [-rho_max, rho_max].
@@ -119,7 +140,14 @@ class RescaledCLM:
         return fn, c_omega, res
 
     def run(self, f_init, dt_frac=0.4, tol=1e-8, max_steps=200000, verbose=False):
-        """Evolve until ||f_tau||_inf < tol (or max_steps). Returns a result dict.
+        """Evolve until ||f_tau||_inf < tol * gauge (or max_steps). Returns a result dict.
+
+        STOPPING TEST (leg 85 / Route-GRA repair): `tol` is RELATIVE to the scaling gauge
+        the scheme has already frozen, `gauge = max(|f(0)|/4, GAUGE_TOL_FLOOR)`, and NOT an
+        absolute number. At the validated gauge f(0) = -4 the multiplier is exactly 1, so this
+        is bit-identical to the previous absolute test and no banked measurement moves; at any
+        other gauge member Omega_lambda(X) = Omega_0(lambda X) it is what makes the test
+        scale-invariant along the free direction. See GAUGE_TOL_FLOOR for the floor's rationale.
 
         NOTE on T*: a whole-line rescaling run resolves the *local* self-similar
         structure; the physical blow-up time T* (=2 for w0=-sin x) is a property of
@@ -129,6 +157,12 @@ class RescaledCLM:
         omega ~ (T-t)^{-1}, which this run recovers."""
         f = np.array(f_init, dtype=float)
         dt = dt_frac * self.drho  # tanh(rho) <= 1 => CFL ~ drho
+        # the gauge is frozen by the scheme at rho=0 for all time, so read it once, from the
+        # data. |f(0)|/4 = lambda, and equals 1 exactly at the validated gauge f(0) = -4.
+        # A non-finite f(0) leaves tol_eff non-finite, so `res < tol_eff` stays False: poisoned
+        # data can no more be reported converged than before.
+        gauge = max(abs(float(f[self.i0])) / 4.0, GAUGE_TOL_FLOOR)
+        tol_eff = tol * gauge
         tau = 0.0
         c_hist, res_hist, tau_hist = [], [], []
         res = np.inf
@@ -142,7 +176,7 @@ class RescaledCLM:
             tau_hist.append(tau)
             if verbose and step % 2000 == 0:
                 print(f"    step {step:6d} tau={tau:7.3f} c_omega={c_omega:+.5f} res={res:.2e}")
-            if res < tol:
+            if res < tol_eff:
                 break
         omega = self.X * f
         return {
@@ -154,7 +188,9 @@ class RescaledCLM:
             "residual": res,
             "tau": tau,
             "steps": step + 1,
-            "converged": res < tol,
+            "converged": res < tol_eff,
+            "gauge": gauge,
+            "tol_effective": tol_eff,
             "c_hist": np.array(c_hist),
             "res_hist": np.array(res_hist),
             "tau_hist": np.array(tau_hist),

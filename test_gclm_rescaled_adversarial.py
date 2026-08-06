@@ -10,15 +10,41 @@ file asks the complementary question, and it is the gate of leg 85:
     solver/gclm_rescaled.py's relaxation loop ever report having reached the fixed point when
     it has not?
 
-MEASURED ANSWER: YES, on one specific branch -- see test_gauge_false_positive_is_locked_in.
+LEG 85'S MEASURED ANSWER: YES, on one specific branch -- 4 of 25 trajectories, all in the
+amplitude-gauge family (lambda = 1e-6, 1e-8, 1e-9, 1e-10).
 
-*** THIS FILE CHARACTERIZES A KNOWN, UNREPAIRED DEFECT. ***
-Leg 85 was forbidden from patching solver/gclm_rescaled.py under its own authority, so the
-assertions below lock in the defect AS MEASURED.  They are written to FAIL LOUDLY if the
-behaviour changes in EITHER direction: if the false positive is ever repaired (by making the
-stopping test relative, or by checking the origin slope), test_gauge_false_positive_is_locked_in
-will fail, and that failure is the signal to delete it and replace it with the repaired
-predicate.  Do not "fix" it by loosening it.
+*** THE DEFECT IS NOW REPAIRED (bench repair, `Leg 0: ORCH`), AND THIS FILE IS INVERTED. ***
+Leg 85 was forbidden from patching solver/gclm_rescaled.py under its own authority, so its
+assertions locked in the defect AS MEASURED, with the instruction: "if this test fails because
+the drift is now small, the defect has been REPAIRED: delete this test and assert the repaired
+predicate instead.  Do not loosen it."  That is exactly what has been done here.  The repair
+makes run()'s stopping test RELATIVE to the frozen gauge -- `res < tol * max(|f(0)|/4, floor)`
+-- so it is scale-invariant along the direction the module declares free.
+
+The inversion is exact, in the sense of leg 84's precedent: every magnitude leg 85 measured is
+still asserted, at the same threshold, with only the SIGN of the claim flipped.  The two
+pinned-defect gates become pinned-repair gates (test_gauge_false_positive_is_repaired,
+test_repair_is_resolution_independent); the four ROBUST gates, which the repair was required
+not to disturb, are untouched and re-run as regression controls.
+
+Before -> after on leg 85's four false positives (n=601, tol=1e-8, post-stop relative drift over
+4000 steps; a genuinely relaxed trajectory scores ~2e-9):
+
+    lambda    steps before -> after     drift before -> after
+    1e-06        924 -> 1664            1.216e-03 -> 1.217e-09
+    1e-08        670 -> 1664            1.299e-01 -> 1.209e-09
+    1e-09          1 -> 1664            1.000e+00 -> 1.209e-09
+    1e-10          1 -> 1664            1.000e+00 -> 1.209e-09
+
+NOTE, and it matters for reading the assertions below: post-repair these trajectories still do
+NOT land on Omega_0, and their rate is still c_omega = +1.  That is not a residual bug.  A
+small-amplitude datum lambda*(-4 exp(-X^2/2)) is NOT the gauge-line member Omega_lambda (whose
+peak amplitude is 1 at every lambda); in the small-amplitude limit the equation linearizes to
+pure outward advection f_tau = -tanh(rho) f_rho, whose steady state is f == f(0) (measured
+non-flatness 5.1e-08) and whose rate is genuinely c_omega = 1 - H Omega(0) -> +1.  So the
+returned state IS at rest and the reported rate IS its true rate.  What the repair fixed is the
+HONESTY of the `converged` flag -- converged=True now means the state has actually stopped
+moving relative to its own amplitude -- not which fixed point a given datum flows to.
 
 THE MECHANISM.  The rescaled CLM fixed point is a ONE-PARAMETER LINE, not a point: the
 dilation term X d/dX is scale-invariant, so Omega_lambda(X) = Omega_0(lambda X) is an exact
@@ -31,14 +57,20 @@ by the INITIAL DATA -- the loop returns converged=True after ONE step, having re
 
 THE GAUGE-INVARIANT MEASURE used throughout is post-stop relative drift: how far the RETURNED
 state still moves, as a fraction of its own amplitude.  A genuinely relaxed trajectory scores
-~2e-9.  The failing trajectory scores 1.0 -- it subsequently changes by its entire amplitude.
+~2e-9.  The failing trajectory scored 1.0 -- it subsequently changed by its entire amplitude.
+It is this measure, not the raw residual, that the repaired gates are scored against, because
+it is the one quantity in the file that does not itself carry the gauge.
+
+RUNTIME went 11 s -> ~6 min across the inversion, and that increase is the finding: the four
+gauge trajectories used to stop after 1-924 steps on a tolerance their initial data already
+met, and now actually relax (1664 steps at n=601).  The cost is the work that was being skipped.
 
 Run: python test_gclm_rescaled_adversarial.py
 """
 
 import numpy as np
 
-from solver.gclm_rescaled import RescaledCLM, clm_profile
+from solver.gclm_rescaled import GAUGE_TOL_FLOOR, RescaledCLM, clm_profile
 
 DRIFT_STEPS = 2000
 
@@ -106,18 +138,28 @@ def test_residual_is_degree_one_in_the_gauge():
     assert abs(ratios[1] - ratios[2]) / ratios[2] < 1e-3, (
         f"residual not asymptotically degree-1 in the gauge: {ratios}")
     assert 2.0 < ratios[-1] < 4.0, f"residual/lambda drifted from its measured 2.94: {ratios[-1]}"
-    print(f"[ok] residual = {ratios[-1]:.3f} * lambda -- so tol=1e-8 is met by DATA for "
-          f"lambda < {1e-8 / ratios[-1]:.2e}")
+    print(f"[ok] residual = {ratios[-1]:.3f} * lambda -- an ABSOLUTE tol=1e-8 would be met by "
+          f"DATA alone for lambda < {1e-8 / ratios[-1]:.2e}; the repaired test is tol*lambda, "
+          "which is degree-1 on both sides and so scale-invariant")
 
 
 def test_validated_gauge_is_honest():
     """CONTROL: at the validated gauge f(0) = -4 the loop's report is trustworthy.
 
     Nothing already banked in this repository is impugned by this leg, and this test is what
-    says so.  Both a relaxed trajectory and a still-drifting one are reported correctly."""
+    says so.  Both a relaxed trajectory and a still-drifting one are reported correctly.
+
+    POST-REPAIR this is also the ZERO-REGRESSION gate: at f(0) = -4 the gauge multiplier is
+    EXACTLY 1.0, so the repaired stopping test `res < tol * max(|f(0)|/4, floor)` is the same
+    float comparison as the old `res < tol`, and every number below is unchanged (independently
+    confirmed: test_gclm_rescaled.py's full output is character-identical across the repair)."""
     s = RescaledCLM(n=601, c=0.5, rho_max=7.0)
 
     r = s.run(_gauss(s.X), dt_frac=0.4, tol=1e-8, max_steps=20000)
+    assert r["gauge"] == 1.0, f"validated gauge multiplier is {r['gauge']!r}, not exactly 1.0"
+    assert r["tol_effective"] == 1e-8, (
+        f"tol_effective is {r['tol_effective']!r}, not exactly the requested tol -- the repair "
+        "is supposed to be a bit-exact no-op at f(0) = -4")
     drift = _post_stop_drift(s, r)
     err = _shape_err(r["omega"], s.X)
     print(f"    relaxing:  conv={bool(r['converged'])} steps={r['steps']} "
@@ -181,60 +223,83 @@ def test_oscillation_does_not_trip_the_stopping_test():
     print("[ok] oscillation and marginal dt do not trip the stopping test")
 
 
-def test_gauge_false_positive_is_locked_in():
-    """*** THE LEG-85 FINDING, LOCKED IN AS MEASURED. ***
+def test_gauge_false_positive_is_repaired():
+    """*** THE LEG-85 FINDING, INVERTED: all four false positives are closed. ***
 
-    At gauge lambda = 1e-10 -- reachable purely by rescaling the amplitude, which the module's
-    own docstring calls FREE -- the loop reports converged=True after ONE step, and the state
-    it returns then moves by 100% of its own amplitude, with the rate c_omega at the WRONG SIGN.
+    Leg 85's four failing gauges are re-run at leg 85's own settings and scored on leg 85's own
+    gauge-invariant measure at leg 85's own threshold (drift < 1e-6, the number
+    test_validated_gauge_is_honest already used for a trustworthy report).  Each one previously
+    reported converged=True while still moving by up to 100% of its own amplitude.
 
-    If this test fails because the drift is now small, the defect has been REPAIRED: delete
-    this test and assert the repaired predicate instead.  Do not loosen it."""
+    The one-step stop is closed at the root: at lambda=1e-10 the INITIAL data has residual
+    2.94e-10, which the old absolute test (tol=1e-8) accepted outright; the repaired test
+    demands 1e-18, which no unrelaxed state meets."""
     s = RescaledCLM(n=601, c=0.5, rho_max=7.0)
-    r = s.run(_gauss(s.X, lam=1e-10), dt_frac=0.4, tol=1e-8, max_steps=20000)
-    drift = _post_stop_drift(s, r)
-    err = _shape_err(r["omega"], s.X)
-    print(f"    lambda=1e-10: converged={bool(r['converged'])} after {r['steps']} step(s), "
-          f"residual={r['residual']:.3e}")
-    print(f"                  c_omega={r['c_omega']:+.5f} (exact: -1), "
-          f"||Omega-Omega_0||_inf={err:.3e}, post-stop drift={drift:.4f}")
 
-    assert r["converged"], (
-        "REPAIRED? the lambda=1e-10 trajectory is no longer reported converged -- "
-        "delete this test and assert the repaired predicate")
-    # the report is a false positive by the gauge-invariant measure
-    assert drift > 0.5, (
-        f"REPAIRED? post-stop drift is now {drift:.3e}; the loop no longer stops on a "
-        "state that has not relaxed -- delete this test and assert the repaired predicate")
-    # ... and it stopped before doing any work at all
-    assert r["steps"] <= 2, f"expected a stop within 1-2 steps, got {r['steps']}"
-    # ... and the rate it hands back has the WRONG SIGN
-    assert r["c_omega"] > 0.5, f"expected c_omega ~ +1 (exact -1), got {r['c_omega']:+.5f}"
-    # ... and the profile is 100% of the peak away from Omega_0
-    assert err > 0.9, f"expected shape err ~ 1.0 (= |Omega_0|_inf), got {err:.3e}"
+    # the mechanism, checked directly: the initial datum no longer satisfies the stopping test
+    res_init = float(np.abs(s.rhs(_gauss(s.X, lam=1e-10))[0]).max())
+    print(f"    lambda=1e-10 initial residual={res_init:.4e}  old absolute tol=1.0e-08 "
+          f"(ACCEPTED it)  new tol_eff={1e-8 * 1e-10:.1e} (rejects it)")
+    assert res_init < 1e-8, "premise moved: the initial residual no longer undercuts tol=1e-8"
+    assert res_init > 1e-8 * 1e-10, "the repaired tolerance no longer rejects the initial data"
 
-    # the trivial fixed point f == 0 is likewise reported as convergence, with the same
-    # wrong-sign rate.  It IS at rest (drift 0), so it is a semantic false positive rather than
-    # a kinematic one, and it is recorded here, not counted with the one above.
+    seen = []
+    for lam, drift_before, steps_before in ((1e-6, 1.216e-3, 924), (1e-8, 1.299e-1, 670),
+                                            (1e-9, 1.0, 1), (1e-10, 1.0, 1)):
+        r = s.run(_gauss(s.X, lam=lam), dt_frac=0.4, tol=1e-8, max_steps=20000)
+        drift = _post_stop_drift(s, r)
+        print(f"    lambda={lam:8.1e} converged={bool(r['converged'])} steps={steps_before}->"
+              f"{r['steps']} tol_eff={r['tol_effective']:.2e} residual={r['residual']:.3e} "
+              f"drift {drift_before:.3e}->{drift:.3e}")
+        seen.append((lam, drift))
+        assert r["converged"], f"lambda={lam:g} no longer converges at all within 20000 steps"
+        # THE REPAIRED PREDICATE: a converged report now means the state has actually stopped
+        assert drift < 1e-6, (
+            f"lambda={lam:g}: reported converged while still drifting by {drift:.3e} -- "
+            "the gauge false positive is BACK.  Do not loosen this; fix the stopping test.")
+        # and it did real work rather than stopping on the initial data
+        assert r["steps"] > 100, f"lambda={lam:g} stopped after only {r['steps']} steps"
+        # the tolerance actually used is the gauge-relative one
+        assert abs(r["tol_effective"] - 1e-8 * lam) <= 1e-8 * lam * 1e-12, (
+            f"lambda={lam:g}: tol_effective {r['tol_effective']:.3e} is not tol*lambda")
+
+    worst = max(d for _, d in seen)
+    assert worst < 1e-6, f"worst post-stop drift {worst:.3e}"
+    print(f"[ok] REPAIRED: all 4 of leg 85's false positives closed; worst drift {worst:.3e} "
+          f"(was 1.000)")
+
+    # the trivial fixed point f == 0 still reports convergence.  It is EXACTLY at rest
+    # (residual identically 0.0, drift 0), so this is a semantic edge case, not a kinematic
+    # false positive, and the floor deliberately keeps the tolerance positive so that a state
+    # at exact rest is not reported as non-convergent.  Recorded, unchanged by the repair.
     r0 = s.run(np.zeros_like(s.X), dt_frac=0.4, tol=1e-8, max_steps=100)
     print(f"    f==0:         converged={bool(r0['converged'])} residual={r0['residual']:.1e} "
-          f"c_omega={r0['c_omega']:+.5f} -- a fixed point, but not the CLM one")
-    assert r0["converged"] and r0["c_omega"] > 0.5
+          f"c_omega={r0['c_omega']:+.5f} gauge={r0['gauge']:.1e} (the floor) -- at exact rest, "
+          "but not the CLM fixed point")
+    assert r0["converged"] and r0["residual"] == 0.0 and r0["c_omega"] > 0.5
+    assert r0["gauge"] == GAUGE_TOL_FLOOR, "the degenerate gauge f(0)=0 did not hit the floor"
 
-    print("[ok] LOCKED IN: the gauge false positive is present, exactly as leg 85 measured it")
 
-
-def test_false_positive_is_not_a_resolution_artifact():
-    """The failing trajectory is identical at three resolutions -- structural, not numerical."""
+def test_repair_is_resolution_independent():
+    """The repair holds at three resolutions -- as the defect did, it is the stopping test,
+    not the discretization.  Step counts scale with the grid (1211/1664/2404) because the time
+    step is dt_frac*drho; the drift verdict does not move."""
     seen = []
     for n, rho_max in ((401, 6.0), (601, 7.0), (901, 7.5)):
         s = RescaledCLM(n=n, c=0.5, rho_max=rho_max)
         r = s.run(_gauss(s.X, lam=1e-10), dt_frac=0.4, tol=1e-8, max_steps=20000)
-        seen.append((n, bool(r["converged"]), int(r["steps"]), float(r["c_omega"])))
+        drift = _post_stop_drift(s, r)
+        # the relaxed state is the linear-advection steady state f == f(0), not Omega_0
+        f = r["f"]
+        nonflat = float(np.abs(f - f[s.i0]).max() / np.abs(f).max())
+        seen.append((n, bool(r["converged"]), int(r["steps"]), drift, nonflat))
         print(f"    n={n:4d} converged={bool(r['converged'])} steps={r['steps']} "
-              f"c_omega={r['c_omega']:+.5f}")
-    assert all(c and st <= 2 and co > 0.5 for _, c, st, co in seen), (
-        f"the false positive is resolution-dependent: {seen}")
+              f"c_omega={r['c_omega']:+.5f} post-stop drift={drift:.3e} "
+              f"||f-f(0)||/||f||={nonflat:.2e}")
+    assert all(c and st > 100 and d < 1e-6 for _, c, st, d, _ in seen), (
+        f"the repair is resolution-dependent: {seen}")
+    assert all(nf < 1e-6 for *_, nf in seen), (
+        f"the small-gauge limit is not the constant-f steady state: {seen}")
     print("[ok] resolution-independent: the stopping test, not the discretization")
 
 
@@ -261,8 +326,8 @@ if __name__ == "__main__":
     test_validated_gauge_is_honest()
     test_nonfinite_is_never_reported_converged()
     test_oscillation_does_not_trip_the_stopping_test()
-    test_gauge_false_positive_is_locked_in()
-    test_false_positive_is_not_a_resolution_artifact()
+    test_gauge_false_positive_is_repaired()
+    test_repair_is_resolution_independent()
     test_reported_residual_is_the_pre_step_value()
     print("\nALL GCLM-RESCALED ADVERSARIAL TESTS PASSED "
-          "(the leg-85 false positive is present and locked in)")
+          "(leg 85's gauge false positive is repaired and pinned closed)")
