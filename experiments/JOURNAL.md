@@ -2967,5 +2967,30 @@ belong to a future window.
   Y0/Z0/Z1 nonnegativity gap (after port_certification.py and interval_certificate.py, both
   already repaired) — flagged for the DM as a candidate shared-guard repair rather than a
   third one-off fix.
+- **Leg 120 (Route-SUA) — YES, not repaired (audit leg, escalated per its own gate):**
+  `spectral_utils.py`'s `dealias_mask` retains one Fourier mode too many whenever 3|n
+  (Bowman 2013 requires k < n/3 strictly, module uses <=), making the "exact rate"
+  `energy_production` wrong by 1.66e-01 relative at n=81 vs 2.47e-14 elsewhere. Latent:
+  every grid size on that path is a power of two, so 0 of 107 banked
+  `energy_balance_residual` records are exposed. Five further silent-absorption defects
+  found (Nyquist/mean-mode poison erased, int truncation, malformed-k acceptance). The
+  one-character fix is verified bit-identical at every resolution the repo runs, but is
+  blocked by a test that encodes the defect (`test_spectral_utils_dedicated.py:121-122`)
+  and by an identical `<= n/3` cut in `boussinesq.py`'s 2D sibling — flagged for the DM as
+  a single repair pass covering both.
+- **Leg 111 (Route-WE) — NO, 0 of 7:** the Chen-Hou weighted-energy realization is the
+  THIRD to die on the a=0 CLM linearization. Every admissible weight's coercivity gap
+  converges to -(3-gamma)/2 as the grid refines, and damping at the origin needs gamma>3
+  while the weighted space exists only for gamma<3 — the same threshold, so the window has
+  zero width, not merely a bad margin. No escalation.
+- **Leg 103 (Route-GLB) — YES, repair confirmed solid:** leg 92's gclm.py fix holds under
+  its own 54 gate-scoped adversarial cases (19 silent corruptions -> 0), with zero
+  regression measured bitwise against the pre-repair module (0 of 20 banked T* values, 0
+  of 17 production runs moved). Leg 92's battery now a permanent 8-check regression suite.
+- **Leg 62 (Route-CP) — NO, 6 of 6 located clauses fail:** Cadiot arXiv:2505.03091 does not
+  cover NG's zero-diagonal case at full-text depth. Lemma 3.2's required shift saturates at
+  0.28723 on his own Whitham operator but grows linearly (63->1023 over M=128..2048) on
+  ours, so no finite shift survives the limit for us. NG (leg 58, live and concurrent) may
+  claim novelty against this paper and no further.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
