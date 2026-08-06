@@ -313,13 +313,18 @@ def render(leg_times, chart_floor):
 
     first_t, last_t = leg_times[0][1], leg_times[-1][1]
     window = last_t - first_t
+    # The plot renders epoch timestamps in the viewer's zone; commit timestamps carry
+    # their author's offset. Label everything in UTC so the header agrees with the axis
+    # instead of drifting an hour (or a day) away from it.
+    last_t = last_t.astimezone(timezone.utc)
+    chart_floor = chart_floor.astimezone(timezone.utc)
     hours, rem = divmod(int(window.total_seconds()), 3600)
     minutes = rem // 60
     numbering_window = f"{hours}h {minutes}m"
 
     span_label = f"{chart_floor.strftime('%b %-d')} – {last_t.strftime('%b %-d')}"
 
-    floor_fmt = "%b %-d, %Y" if (chart_floor.hour, chart_floor.minute) == (0, 0) else "%b %-d, %Y %H:%M"
+    floor_fmt = "%b %-d, %Y" if (chart_floor.hour, chart_floor.minute) == (0, 0) else "%b %-d, %Y %H:%M UTC"
     return TEMPLATE.format(
         leg_lo=lo,
         leg_hi=hi,
