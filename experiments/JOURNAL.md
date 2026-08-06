@@ -3291,3 +3291,13 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   from real convergence. Measured, not assumed: a static call-site audit of legs
   125/185/187 finds 0 exposed sites -- every landed call passes an explicit gauge
   and the correct norm string. Eleventh audit-family item.
+- **Leg 211 (Route-XU11) — YES, ESCALATED (parked, not merged):** Xu arXiv:2607.19762
+  characterizes NO anti-diffusive/sign-changing branch (0 of 12 verbatim-verified
+  passages admit nu<=0; his own dissipative equations at s6.1 and Appendix A both
+  STIPULATE nu>0). But his s=2 sub/supercritical boundary a~=0.39/0.386 (S6.1)
+  matches leg 185's independently-computed a*=0.38649640 to 4.48e-04 (0.116%),
+  within 1.23x of Xu's own stated error bar -- and his gamma := 1-s*c_l at s=2
+  equals this repo's own Delta parameter EXACTLY (0.0e+00 over all 8 Table 1 rows,
+  an algebraic identity not an approximation). Genuine external cross-validation
+  of leg 185's boundary location, though NOT of its sign-flip claim, which Xu's
+  paper does not address either way.
