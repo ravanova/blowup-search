@@ -2935,5 +2935,12 @@ belong to a future window.
   `hilbert_pointwise.py`'s pointwise |H(h)| bound fails to dominate the true value on 2 of
   the tested degenerate/NaN-poisoned configurations. Landed as a measurement; repair not yet
   scheduled.
+- **Leg 60 (Route-PQ) — escalation #4, resolved by the user, landed 2026-08-06:** reproduced
+  every quoted number in Route-PORT v1/v2 (legs 46/47) from their curated JSON; 111/114
+  re-derived, 3 did not (a mislabelled ρ=8→10 baseline reading 28× instead of 63×, a
+  transcription slip pasting the n=201 resolution-table value into the reach table's ρ=8
+  row, and a truncated last digit). Both ban-bearing numbers (leg 46's clause P6b, leg 47's
+  wrong-sign trend) were exact throughout. User approved the correction; applied directly to
+  the prose and to both evidence scripts' quoted literals — both now report CLEAN 114/114.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
