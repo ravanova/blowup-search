@@ -95,10 +95,170 @@ exactly the family v12's ringing belongs to.  What that retires is v11's argumen
 a*: the other three confirmations are about the two-scale GA problem, which is a
 different question, and this module says nothing about them.
 
+--------------------------------------------------------------------------
+THE SUPPORT GUARD (added by a bench repair, after leg 107 / Route-FIA)
+--------------------------------------------------------------------------
+Leg 107 audited this module adversarially and answered its gate **YES, on two
+independent sites** (`experiments/journal/leg_107.md`):
+
+  * **Finding A.**  `omega_of` computed `-|e|^{1/a}`, and the `abs` erased the branch cut
+    that is the entire reason the profile HAS compact support.  96 of 96 evaluations at
+    `v = X/X_c > 1` came back finite, nonzero and inside the profile's own gauge range
+    `|Omega| <= 1`, where the docstring twelve lines above says the answer is EXACTLY
+    ZERO -- 0 exceptions, 0 NaNs, 0 warnings.  At `a = 0.5`, `omega_of` at twice the
+    support radius returned -0.814, i.e. 81% of the peak amplitude.  Worse, a grid
+    overshooting `X_c` by 1% got the interior mirror value back to 3-4 significant
+    figures, so magnitude alone could not tell a caller it was out of domain.
+    Riding along: `even_cheb` clipped `v` into `[-1, 1]` before `arccos`, freezing
+    `s(v)` at `s(1)` for every `v > 1`, while `e_of` kept the UNCLIPPED `(1 - v^2)`
+    prefactor -- the two halves of `e(v)` described different points, and the result
+    overstated the true `|E|` (against this module's own `outer_velocity` quadrature)
+    by 1.56x at `v = 1.5` rising to 22.0x at `v = 10`.
+
+  * **Finding B.**  `first_integral_defect`'s default mask was
+    `(|Omega| > 1e-11) & (E > 1e-8)`.  Every ordered comparison against NaN is false
+    (IEEE-754 §5.11), so a NaN-poisoned point LEFT the sample instead of poisoning the
+    answer: **397 of 400 points could be NaN and the identity was still certified to
+    1.33e-15**, with the number getting BETTER as the poisoning got worse.  The flag at
+    398 was the pre-existing `< 3 survivors` arity guard, not poison detection.
+
+Both were latent -- 0 of 3 `omega_of` and 0 of 2 `first_integral_defect` call sites in
+the repo evaluate in the affected region -- so nothing banked was contaminated, and this
+repair is required to prove exactly that by leaving every in-support number alone.
+
+The repair follows the template merged earlier this session for the same bug class in
+`solver/target_norm.py` (silent domain extrapolation): **a named warning class, a
+DYNAMIC threshold, propagation into the returned value, warn-not-raise by default, and a
+strict mode.**  Where it departs from that template it is because it can afford to:
+
+  * **The threshold is not a tuned constant.**  `|v| > 1 + 4 eps` and `e < 0` are the
+    DEFINITION of leaving the support (`v = X/X_c`, and `E = c(1 - ...)` changes sign at
+    `X_c`), not a tolerance anyone picked.  `e == 0` is the support EDGE and is inside:
+    the true value there is zero and `-|0|^p` already returns it, so the edge is left
+    bit-for-bit alone, including the sign of the zero.
+  * **The answer outside is KNOWN, so the guard returns it.**  `target_norm`'s guard can
+    only flag, because the out-of-window answer there is unknowable.  Here the module's
+    own docstring supplies it: `Omega == 0`.  So `omega_of`'s default is
+    `on_outside="zero"` -- the TRUE value, plus a `FirstIntegralSupportWarning` -- and
+    not `"nan"`, because NaN would be a refusal to answer a question this module can
+    answer.  `e_of` defaults to `"nan"` instead, because `E` outside the support is
+    negative and NOT representable by the interior ansatz `e = (1 - v^2) s(v)`: the
+    module genuinely does not know it, and says so.
+  * **NaN still wins.**  A non-finite `e` (e.g. from a poisoned coefficient) is NEVER
+    rewritten to 0.0.  The `e < 0` rule fires only where `e` is finite, so the 20-probe
+    NaN-propagation property leg 107 verified is preserved exactly.
+  * **`on_outside="extrapolate"`** reproduces the pre-repair arithmetic bit-for-bit,
+    still with the warning, so leg 107's own battery can keep MEASURING the gap it
+    escalated.  An unconditional raise would have made that audit unrunnable.
+  * **`on_outside="raise"`**, or `warnings.simplefilter("error",
+    FirstIntegralGuardWarning)`, is the strict mode for callers who want it fatal.
+  * **`first_integral_defect` no longer drops what it cannot see.**  Non-finite points
+    anywhere in `Omega` or `U` are counted BEFORE any mask is applied, and the default
+    `on_nonfinite="nan"` refuses to certify the sample.  `detail=True` returns the full
+    census (`n_points`, `n_nonfinite`, `n_used`, `sample_valid`) so a caller can report
+    the surviving count rather than a bare number.
+
+**The Newton path is deliberately untouched.**  `residual`, `jacobian`, `solve` and
+`operator_norm` still use `|e|^{1/a}`, because where the equation is ENFORCED the `abs`
+cannot hide anything: leg 107 measured the residual on a sign-flipped state at 4.5e14x
+the clean one, and `solve`'s line search already refuses any step with `min e <= 0`.
+Guarding them would change the objective the banked `X_c`, `||A||` and edge exponents
+were computed from, which is precisely what a repair of a latent bug must not do.
+
 Plain float64.  Nothing here is interval-enclosed and nothing is rigorous.
 """
 
+import warnings
+
 import numpy as np
+
+
+# ---------------------------------------------------------------------------
+# the support guard
+# ---------------------------------------------------------------------------
+
+#: `v = X / X_c`, so the support is EXACTLY `|v| <= 1` -- this is a definition, not a
+#: tuning knob.  The slack is four ulps, enough to absorb a caller who reached `v = 1`
+#: by arithmetic (`1.0 - s` with `s` from a geomspace, `X / Xc` with a rounded `Xc`)
+#: and not enough to admit any point a caller meant to be outside.
+SUPPORT_TOL = 4.0 * np.finfo(float).eps
+
+_OUTSIDE_POLICIES = ("zero", "nan", "extrapolate", "raise")
+
+
+class FirstIntegralGuardWarning(UserWarning):
+    """Base class for both guards, so one filter catches the whole family."""
+
+
+class FirstIntegralSupportWarning(FirstIntegralGuardWarning):
+    """The profile was evaluated where it does not exist.
+
+    Leg 107 measured what that used to cost: 96 of 96 out-of-support evaluations
+    returned a finite, in-gauge-range value where the truth is exactly 0, and within 1%
+    of `X_c` the fabricated value agreed with the legitimate mirror value to better than
+    5e-2 relative.  The warning does not say the returned number is wrong -- with the
+    default policy it is now RIGHT, and equal to zero -- it says the caller asked outside
+    the support, which is almost always an off-by-one at the free boundary or an `X_c`
+    that moved between a solve and a later evaluation.
+    """
+
+
+class FirstIntegralSampleWarning(FirstIntegralGuardWarning):
+    """`first_integral_defect` was handed a sample containing non-finite points.
+
+    Before the repair those points left the sample silently: 397 of 400 could be NaN and
+    the identity was still certified to 1.33e-15.
+    """
+
+
+def support_fields(n_outside, n_points, max_abs_v=None):
+    """The keys every support-aware return in this module carries, uniformly.
+
+    `support_valid` is True (clean) / False (some point left the support) / None (the
+    caller did not supply points, so there is nothing to check).  `None` is FALSY on
+    purpose, exactly as in `solver/target_norm.py`'s `domain_fields`: a caller writing
+    `if not d["support_valid"]` errs toward distrust rather than toward silence.
+    """
+    if n_outside is None:
+        return {"n_points": int(n_points), "n_outside_support": None,
+                "frac_outside_support": None, "support_valid": None,
+                "max_abs_v": None}
+    n_outside, n_points = int(n_outside), int(n_points)
+    return {"n_points": n_points, "n_outside_support": n_outside,
+            "frac_outside_support": (float(n_outside) / n_points if n_points else 0.0),
+            "support_valid": bool(n_outside == 0),
+            "max_abs_v": (None if max_abs_v is None else float(max_abs_v))}
+
+
+def sample_fields(n_points, n_nonfinite, n_used):
+    """The census `first_integral_defect` reports instead of dropping points in silence."""
+    n_points, n_nonfinite, n_used = int(n_points), int(n_nonfinite), int(n_used)
+    return {"n_points": n_points, "n_nonfinite": n_nonfinite, "n_used": n_used,
+            "frac_nonfinite": (float(n_nonfinite) / n_points if n_points else 0.0),
+            "sample_valid": bool(n_nonfinite == 0 and n_used >= 3)}
+
+
+def _check_policy(on_outside, allowed=_OUTSIDE_POLICIES):
+    if on_outside not in allowed:
+        raise ValueError(f"on_outside must be one of {allowed!r}, got {on_outside!r}")
+
+
+def _signal_outside(n_outside, n_points, where, on_outside, max_abs_v, why):
+    """Raise or warn.  Called ONLY when `n_outside > 0`, so the clean path is untouched.
+
+    That "only" is the zero-regression property in one sentence: with no point outside
+    the support this function is never entered, no filter is consulted, and the arithmetic
+    below it is the pre-repair arithmetic verbatim.
+    """
+    msg = (f"first_integral.{where}: {n_outside} of {n_points} evaluation point(s) lie "
+           f"OUTSIDE the profile's own compact support ({why}"
+           + (f"; max |v| = {max_abs_v:.6g}" if max_abs_v is not None else "")
+           + f").  The module's own docstring says Omega == 0 there, so the pre-repair "
+             f"answer was wrong by its full magnitude (leg 107: 96/96 such evaluations "
+             f"returned a finite in-range value).  Policy on_outside={on_outside!r}.")
+    if on_outside == "raise":
+        raise ValueError(msg)
+    warnings.warn(msg, FirstIntegralSupportWarning, stacklevel=3)
 
 
 # ---------------------------------------------------------------------------
@@ -153,8 +313,16 @@ def graded_grid(levels=20, order=20):
             (half[:, None] * wg[None, :]).ravel())
 
 
-def even_cheb(K, v):
-    """(T_{2k}(v), d/dv T_{2k}(v)) for k = 0..K-1; shapes (len(v), K)."""
+def _even_cheb_raw(K, v):
+    """The pre-repair body, verbatim and unguarded.  Not for direct use.
+
+    Kept as its own function so that the guarded `even_cheb` below is provably ADDITIVE:
+    on a clean call it does nothing but forward to this, so no in-support number can move.
+    The `np.clip` stays because it has a legitimate job -- the REMOVABLE endpoints
+    `v = +-1`, which a caller reaches by arithmetic and where `arccos` of `1 + 2e-16`
+    would otherwise be NaN.  What it must not do is stand in for a domain check, which is
+    what leg 107 measured it doing.
+    """
     v = np.atleast_1d(np.asarray(v, float))
     n = 2 * np.arange(int(K))
     th = np.arccos(np.clip(v, -1.0, 1.0))
@@ -165,6 +333,51 @@ def even_cheb(K, v):
     bad = ~np.isfinite(dT)
     if bad.any():                       # the removable endpoints v = +-1
         dT[bad] = np.broadcast_to((n ** 2).astype(float), dT.shape)[bad]
+    return T, dT
+
+
+def _outside_mask(v):
+    """(mask, count, max|v|) for the points that left the scaled support |v| <= 1.
+
+    NaN is NOT outside: `np.abs(nan) > x` is false, so a NaN `v` flows through to a NaN
+    result and propagates, which is the behaviour leg 107 verified and this repair keeps.
+    """
+    out = np.abs(v) > 1.0 + SUPPORT_TOL
+    n = int(np.count_nonzero(out))
+    mx = float(np.max(np.abs(v))) if v.size else 0.0
+    return out, n, mx
+
+
+def even_cheb(K, v, on_outside="nan"):
+    """(T_{2k}(v), d/dv T_{2k}(v)) for k = 0..K-1; shapes (len(v), K).
+
+    Guarded (leg 107, finding A, second half).  The basis is the interior basis of the
+    scaled support `|v| <= 1`; for `|v| > 1` the pre-repair code silently evaluated at
+    `v = 1` (measured: `max |T_2k(v) - T_2k(1)| = 0.0` over `v` in {1.5, 3, 50}) and
+    `e_of` then multiplied that frozen value by an unclipped `(1 - v^2)`.
+
+    `on_outside` is one of:
+      * `"nan"` (default) -- rows outside become NaN, and a `FirstIntegralSupportWarning`
+        is raised.  NaN and not 0, because `T_2k` is not zero out there; the module simply
+        has no business evaluating it there.
+      * `"extrapolate"` -- the pre-repair clipped value, still warned about, so leg 107's
+        battery can keep measuring the gap.
+      * `"zero"` -- rows outside become 0.0 (accepted for signature uniformity with
+        `omega_of`; it is the right answer for `Omega`, not for `T`, so prefer `"nan"`).
+      * `"raise"` -- ValueError instead of a warning.
+    """
+    _check_policy(on_outside)
+    v = np.atleast_1d(np.asarray(v, float))
+    out, n_out, mx = _outside_mask(v)
+    if n_out:
+        _signal_outside(n_out, v.size, "even_cheb", on_outside, mx,
+                        "the even-Chebyshev basis is only the interior basis of "
+                        "|v| <= 1, and np.clip would freeze every such point at v = 1")
+    T, dT = _even_cheb_raw(K, v)
+    if n_out and on_outside in ("nan", "zero"):
+        fill = np.nan if on_outside == "nan" else 0.0
+        T[out, :] = fill
+        dT[out, :] = fill
     return T, dT
 
 
@@ -217,16 +430,124 @@ class ReducedProfile:
         self.g0 = even_cheb(self.K, np.array([0.0]))[0][0]         # T_{2k}(0)
 
     # -- fields ------------------------------------------------------------
-    def e_of(self, b, v=None):
-        """e(v) = (1 - v^2) s(v); at the collocation nodes when v is None."""
+    def _e_raw(self, b, v):
+        """e(v) = (1 - v^2) s(v), UNGUARDED.  The pre-repair arithmetic, verbatim."""
         if v is None:
             return self.PHI_v @ b
-        T, _ = even_cheb(self.K, v)
+        T, _ = _even_cheb_raw(self.K, v)
         return (1.0 - np.asarray(v, float) ** 2) * (T @ b)
 
-    def omega_of(self, b, v=None):
-        """Omega = -(e)^{1/a} -- the profile itself, on the scaled support."""
-        return -np.abs(self.e_of(b, v)) ** self.p
+    def e_of(self, b, v=None, on_outside="nan", detail=False):
+        """e(v) = (1 - v^2) s(v); at the collocation nodes when v is None.
+
+        Guarded (leg 107, finding A).  Outside `|v| <= 1` the true `E` is NEGATIVE and
+        grows like `(a m / pi) log(X / X_c)` (`solver/turning_point.py`), which the
+        interior ansatz cannot represent: leg 107 measured the extrapolated `e`
+        overstating the true `|E|` by 1.557x at `v = 1.5` and 22.008x at `v = 10`.  So
+        the default is `"nan"` -- the module does not know, and says so -- rather than a
+        number.  `on_outside="extrapolate"` returns the pre-repair value with a warning.
+
+        `detail=True` returns `{"e": <array>, **support_fields(...)}` instead of the bare
+        array, so a caller can record the provenance of the values it just took.  The
+        collocation-node branch (`v is None`) reports `support_valid=None`: those nodes
+        are interior by construction, and there is no caller-supplied `v` to check.
+        """
+        _check_policy(on_outside)
+        if v is None:
+            e = self.PHI_v @ b
+            return ({"e": e, **support_fields(None, e.size)} if detail else e)
+        vv = np.atleast_1d(np.asarray(v, float))
+        out, n_out, mx = _outside_mask(vv)
+        if n_out:
+            _signal_outside(n_out, vv.size, "e_of", on_outside, mx,
+                            "E < 0 beyond X_c and the interior ansatz e = (1-v^2)s(v) "
+                            "does not represent it")
+        e = self._e_raw(b, v)
+        if n_out and on_outside in ("nan", "zero"):
+            e = np.where(out, np.nan if on_outside == "nan" else 0.0, e)
+        if detail:
+            return {"e": e, **support_fields(n_out, vv.size, mx)}
+        return e
+
+    def _outside_support(self, e, out_v):
+        """Where the profile does not exist: past the free boundary, or where E < 0.
+
+        Two independent statements of the SAME structural fact, both taken from the
+        module's own docstring rather than chosen:
+
+          * `|v| > 1` -- the scaled support radius, by the definition `v = X / X_c`;
+          * `e < 0`   -- the branch cut.  `E` decreases and reaches zero at `X_c`;
+            beyond it `E^{1/a}` is not real, so `Omega == 0`.
+
+        `e == 0` is the support EDGE and counts as INSIDE: the true value there is zero
+        and `-|0|^p` already returns it, so this rule leaves the edge bit-for-bit alone
+        (including the sign of the zero, which matters because one banked call site
+        samples `v = linspace(0, 1, 401)` and hits `v = 1` exactly).
+
+        A non-finite `e` is never "outside": NaN must propagate, not be rewritten to a
+        clean 0.0.  That is why the test is `np.isfinite(e) & (e < 0.0)` and not `~(e >= 0)`.
+        """
+        return out_v | (np.isfinite(e) & (e < 0.0))
+
+    def omega_of(self, b, v=None, on_outside="zero", detail=False):
+        """Omega = -(e)^{1/a} -- the profile itself, on the scaled support.
+
+        Guarded (leg 107, finding A).  The pre-repair body was `-np.abs(e) ** p`, and the
+        `abs` erased the branch cut that is the whole reason this profile has compact
+        support: past `X_c` it returned a finite, in-range, mirror-plausible number where
+        the truth is exactly 0.
+
+        `on_outside`:
+          * `"zero"` (default) -- return the TRUE value, `0.0`, and raise a
+            `FirstIntegralSupportWarning`.  This module knows the answer outside its
+            support; refusing to give it would be a worse repair than giving it.
+          * `"nan"` -- refuse instead, for callers who would rather see the poison.
+          * `"extrapolate"` -- the pre-repair number, still warned about.
+          * `"raise"` -- ValueError.
+
+        `detail=True` returns `{"Omega": <array>, **support_fields(...)}`.
+        """
+        _check_policy(on_outside)
+        if v is None:
+            vv, out_v, mx = None, np.zeros(self.K, bool), None
+        else:
+            vv = np.atleast_1d(np.asarray(v, float))
+            out_v, _, mx = _outside_mask(vv)
+        e = self._e_raw(b, v)
+        om = -np.abs(e) ** self.p
+        outside = self._outside_support(e, out_v)
+        n_out = int(np.count_nonzero(outside))
+        n_pts = int(e.size)
+        if n_out:
+            _signal_outside(n_out, n_pts, "omega_of", on_outside, mx,
+                            "Omega == 0 wherever E <= 0; the pre-repair -|e|^{1/a} "
+                            "erased that branch cut")
+        if n_out and on_outside in ("zero", "nan"):
+            om = np.where(outside, 0.0 if on_outside == "zero" else np.nan, om)
+        if detail:
+            return {"Omega": om, **support_fields(n_out, n_pts, mx)}
+        return om
+
+    def _w_of(self, b, where, on_outside="zero"):
+        """|Omega| = e^{1/a} at the quadrature nodes, with the branch cut restored.
+
+        The integrands of `mass` and `outer_velocity` are `|Omega|`, so they carried the
+        same erased branch cut as `omega_of`.  On a converged profile `e > 0` at every
+        node and this is the pre-repair expression unchanged; on a state that has left the
+        support it stops integrating a fabricated `|e|^{1/a}` over a region where the
+        profile is zero.
+        """
+        e = self.PHI_u @ b
+        w = np.abs(e) ** self.p
+        outside = self._outside_support(e, np.zeros(e.shape, bool))
+        n_out = int(np.count_nonzero(outside))
+        if n_out:
+            _signal_outside(n_out, int(e.size), where, on_outside, None,
+                            "e < 0 at quadrature nodes: the profile is identically zero "
+                            "there, so |Omega| must not be integrated as |e|^{1/a}")
+            if on_outside in ("zero", "nan"):
+                w = np.where(outside, 0.0 if on_outside == "zero" else np.nan, w)
+        return w
 
     # -- the system --------------------------------------------------------
     def residual(self, b, Xc):
@@ -292,10 +613,13 @@ class ReducedProfile:
                 "converged": bool(res < 1e-10), "iterations": len(hist) - 1}
 
     # -- derived quantities ------------------------------------------------
-    def mass(self, b, Xc):
-        """m = int Omega dX over the support (the far field's only free constant)."""
-        wu = np.abs(self.PHI_u @ b) ** self.p
-        return -float(Xc * np.sum(self.w * wu))
+    def mass(self, b, Xc, on_outside="zero"):
+        """m = int Omega dX over the support (the far field's only free constant).
+
+        Guarded through `_w_of`: identical to the pre-repair value whenever `e > 0` at
+        every quadrature node, which is every converged profile this module produces.
+        """
+        return -float(Xc * np.sum(self.w * self._w_of(b, "mass", on_outside)))
 
     def edge_amplitude(self, b, Xc):
         """A in Omega ~ -A (X_c - X)^{1/a}, from (FI) with no fitting.
@@ -307,7 +631,7 @@ class ReducedProfile:
         s1 = float(T[0] @ b)
         return float((2.0 * s1 / Xc) ** self.p)
 
-    def outer_velocity(self, b, Xc, y_max=1e7, n=4001):
+    def outer_velocity(self, b, Xc, y_max=1e7, n=4001, on_outside="zero"):
         """(U_0, m): U(X) - (m/pi) log X -> U_0 as X -> infinity.
 
         Measured OUTSIDE the support, where Omega == 0 and H(Omega) is a plain
@@ -315,8 +639,8 @@ class ReducedProfile:
         constant, not the anchor's.  It is what turns v12's X_c ~ e^{c/a} into a
         prediction with a measured constant:  log X_c = -pi(c/a + U_0)/m.
         """
-        m = self.mass(b, Xc)
-        wq = -np.abs(self.PHI_u @ b) ** self.p
+        m = self.mass(b, Xc, on_outside=on_outside)
+        wq = -self._w_of(b, "outer_velocity", on_outside)
         y = np.geomspace(1.0, float(y_max), int(n))
         Hy = ((wq[None, :] / (y[:, None] - self.u[None, :])) @ self.w) / np.pi
         U = (-self.c / self.a
@@ -369,21 +693,79 @@ class ReducedProfile:
 # ---------------------------------------------------------------------------
 
 
-def first_integral_defect(Omega, U, a, c, mask=None):
+def first_integral_defect(Omega, U, a, c, mask=None, on_nonfinite="nan", detail=False):
     """max/min - 1 of |Omega| / E^{1/a} -- zero iff (FI) holds on the sample.
 
     Deliberately takes arrays rather than a solver object, so the same check runs
     against any discretization the project owns.  `mask` selects where the ratio
     is meaningful (Omega away from zero, E positive).
+
+    THE NaN GUARD (leg 107, finding B).  Every ordered comparison against NaN is false
+    (IEEE-754 §5.11), so the default mask used to DROP poisoned points rather than be
+    poisoned by them: leg 107 measured 397 of 400 points NaN and the identity still
+    certified to 1.33e-15, the number improving as the poisoning worsened, with the only
+    flag at 398 coming from the pre-existing `< 3 survivors` arity guard.
+
+    The fix is to count non-finite points BEFORE any mask is applied -- a mask cannot
+    select what it cannot see -- and to refuse rather than to certify:
+
+      * `on_nonfinite="nan"` (default): any non-finite point in `Omega` or `U` makes the
+        sample uncertifiable; return NaN and raise `FirstIntegralSampleWarning`.  The
+        rule is over the WHOLE input, including outside a caller-supplied mask, because a
+        NaN anywhere means the sample is not the object the caller believes it is.
+      * `on_nonfinite="drop"`: the pre-repair behaviour -- exclude them and answer anyway
+        -- but the warning still fires and `detail=True` reports how many were dropped.
+      * `on_nonfinite="raise"`: ValueError.
+
+    Unchanged, and deliberately: a FINITE poison (leg 107's control -- one doubled point
+    gives 1.000, one `inf` gives `inf`) was always caught, and still is; NaN in the
+    scalars `a` or `c` still gives NaN; the `< 3 survivors` arity guard still fires.
+
+    `detail=True` returns `{"defect": <float>, "reason": <str|None>, **sample_fields(...)}`
+    -- which is the "report the surviving count" half of leg 107's recommendation, so a
+    caller can see that a defect of 1.33e-15 was computed from 3 points and not 400.
     """
+    if on_nonfinite not in ("nan", "drop", "raise"):
+        raise ValueError("on_nonfinite must be 'nan', 'drop' or 'raise', got "
+                         f"{on_nonfinite!r}")
     Omega, U = np.asarray(Omega, float), np.asarray(U, float)
     E = float(c) + float(a) * U
+    finite = np.isfinite(Omega) & np.isfinite(U)
+    n_points = int(finite.size)
+    n_nonfinite = int(np.count_nonzero(~finite))
     if mask is None:
-        mask = (np.abs(Omega) > 1e-11) & (E > 1e-8)
-    if int(np.sum(mask)) < 3:
-        return np.nan
+        # the default mask now SAYS it is dropping non-finite points instead of doing it
+        # by accident, through a comparison that is false for a reason unrelated to the
+        # question being asked.
+        mask = (np.abs(Omega) > 1e-11) & (E > 1e-8) & finite
+    mask = np.asarray(mask, bool)
+    n_used = int(np.count_nonzero(mask))
+
+    def _out(val, reason):
+        if not detail:
+            return val
+        return {"defect": val, "reason": reason,
+                **sample_fields(n_points, n_nonfinite, n_used)}
+
+    if n_nonfinite:
+        msg = (f"first_integral.first_integral_defect: {n_nonfinite} of {n_points} "
+               f"sample point(s) are non-finite in Omega or U "
+               f"({100.0 * n_nonfinite / max(n_points, 1):.2f}%).  A mask cannot select "
+               f"what it cannot see: every ordered comparison against NaN is false, so "
+               f"before leg 107's repair these points left the sample instead of "
+               f"poisoning the answer (397/400 NaN still certified (FI) to 1.33e-15).  "
+               f"Policy on_nonfinite={on_nonfinite!r}.")
+        if on_nonfinite == "raise":
+            raise ValueError(msg)
+        warnings.warn(msg, FirstIntegralSampleWarning, stacklevel=2)
+        if on_nonfinite == "nan":
+            return _out(np.nan, "non-finite points in the sample")
+        mask = mask & finite
+        n_used = int(np.count_nonzero(mask))
+    if n_used < 3:
+        return _out(np.nan, "fewer than 3 usable points")
     r = np.abs(Omega[mask]) / E[mask] ** (1.0 / float(a))
-    return float(r.max() / r.min() - 1.0)
+    return _out(float(r.max() / r.min() - 1.0), None)
 
 
 def anchor_limit(X, c=0.5):
