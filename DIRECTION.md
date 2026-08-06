@@ -8592,3 +8592,94 @@ this pool.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 217 escalates (a strong partial repair, two
+out-of-territory artifacts and 3 more silent paths left open), a cleanup leg drafted, 230
+promoted into slot B
+
+**217 (PCR) escalated, not merged** (`leg/217-pcr-v1` pushed, `main` untouched; overall gate
+NO). Genuinely strong partial result: all four of leg 200's named mechanisms are correctly
+repaired, verified with a control leg 200's own battery structurally could not have caught
+(all-negative `s_rho`, 1186.6x silent error pre-repair collapsing to 2.11e-16 post-repair),
+and leg 195's own 114/114 PORT reproduction stays bit-identical. **But the module isn't
+closed**: two landed artifacts OUTSIDE leg 217's own declared territory —
+`test_port_certification_regression.py` and a banked JSON row — still assert the OLD
+pre-repair accept on the exact degenerate input leg 200 flagged, and **3 more silent paths
+survive outside the 4 named mechanisms leg 217 was scoped to fix.** Leg 217 correctly
+declined to touch either the out-of-territory artifacts or the 3 unscoped paths without
+authorization — same discipline as leg 215's own honest partial-fix report. Drafted below,
+per the orchestrator's explicit request.
+
+```
+### 241 — ROUTE-PCRC: CLEANUP FOR LEG 217's PARTIAL port_certification.py REPAIR — CORRECT
+THE TWO OUT-OF-TERRITORY STALE ARTIFACTS, CHARACTERIZE THE REMAINING 3 SILENT PATHS
+**Thesis.** Leg 217 correctly repaired all 4 of leg 200's named mechanisms (verified against
+a control its own predecessor's battery could not have caught) but left two things
+deliberately untouched, outside its own declared territory: (i)
+`test_port_certification_regression.py` and a banked JSON row still assert the OLD
+pre-repair accept behavior on the exact degenerate input leg 200 flagged — these are now
+STALE, not correct, now that the repair has landed on leg 217's own branch; and (ii) leg
+217's own report names 3 MORE silent paths in `port_certification.py` beyond the 4
+mechanisms it was scoped to fix, uncharacterized. This leg does both, in order: first update
+the two stale artifacts to match the post-repair behavior (a mechanical correction once leg
+217's repair itself is trusted — this leg does NOT re-litigate whether leg 217's repair
+itself is correct, that stays leg 217's own claim, verified separately by leg 231/PCRV once
+217 lands), then characterize (not necessarily repair) the 3 additional silent paths with
+the same precision leg 200's original report used for the original 4.
+**Gate.** (a) Do `test_port_certification_regression.py` and the banked JSON row now assert
+the CORRECT (post-leg-217-repair) behavior on the exact degenerate input leg 200 originally
+flagged, with no other assertion in either artifact touched; and (b) are all 3 additional
+silent paths leg 217 named characterized with a precise mechanism and magnitude, the same
+shape leg 200's own report used for its original 4?
+  (a) yes, (b) characterized -> Bank both. If any of the 3 additional paths is
+         claim-adjacent (a banked number depends on it), escalate that specifically rather
+         than folding it quietly into this cleanup leg's own landing — characterization is
+         this leg's job, repair of a NEW mechanism is not.
+  (a) or (b) incomplete -> Report precisely what remains and why (e.g. the stale artifacts
+         depend on a leg-217 branch state this leg cannot safely assume is final pre-merge);
+         do not force either half to closure prematurely.
+**Territory.** test_port_certification_regression.py (the specific stale assertions leg 200
+               flagged, ONLY), the specific banked JSON row leg 200/217 identified,
+               experiments/p2_route_pcrc_v1_cleanup.py,
+               writeup/data/p2_route_pcrc_v1_cleanup.json,
+               writeup/novelty/leg_241.md, experiments/journal/leg_241.md.
+               Reads (never edits beyond the two named stale artifacts) leg 217's own
+               branch/report for the repair's exact behavior, and leg 200's own report for
+               the 3 additional silent paths' starting characterization.
+**Difficulty.** standard
+**Independence.** Narrowly scoped to the two artifacts leg 217 explicitly declined to touch
+plus characterization (not repair) of 3 named paths. Does not re-touch any of leg 217's own
+4 repaired mechanisms. Best sequenced AFTER leg 217 itself lands/merges (so the "post-repair
+behavior" it aligns the stale artifacts to is final), but can begin the characterization half
+(b) immediately since that only reads leg 200's/217's own reports. Reserve — promote once a
+slot frees, ideally timed with or just after leg 217's own landing.
+```
+
+**Slot B refilled with leg 230 (TNRV)** — verifying leg 220's already-landed
+`target_norm.py` repair, per the postrepair-verification pattern.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 230 | TNRV | **live, newly promoted** — verify — not floor-eligible |
+| C | 239 | USC3 | FLOOR-ELIGIBLE (literature) |
+| D | 221 | BVRR | repair — not floor-eligible (nearly done) |
+| E | 237 | SIRC | audit/census — not floor-eligible |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 240 | CNS2 | FLOOR-ELIGIBLE (literature) |
+| H | 218 | BHR | repair — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible (actively running numerical probes) |
+
+**Floor status: 3/10 — still MET (236, 239, 240), unaffected by this round's changes.**
+
+**Reserve queue, recomputed precisely: previous reserve (216, 225, 227, 228, 229, 230, 231,
+232, 233, 234, 235) minus 230 (promoted to slot B) plus 241 (newly drafted) = 11 undispatched
+legs (216, 225, 227, 228, 229, 231, 232, 233, 234, 235, 241).**
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.

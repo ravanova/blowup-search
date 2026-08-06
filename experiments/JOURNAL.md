@@ -3395,3 +3395,15 @@ preempted agents had reached a landing.
   assert the pre-repair accept on the exact degenerate input leg 200 flagged, and
   3 more silent paths survive outside the 4 named mechanisms. Module not
   fully closed; a post-repair verification leg is owed once these are addressed.
+- **Leg 239 (Route-USC3) — MIXED (per-obstruction, not averaged):** arXiv:2511.22819's
+  three new obstructions characterized. N1 TECHNIQUE-specific (precision: 6.0
+  decades residual-to-lambda at IPM's 4th unstable, 1.570 vs stated 2.0
+  decades/mode, recurring in 3 model classes incl. non-fluid Gross-Pitaevskii
+  vortices). N2 MODEL-specific (the paper itself names 2D incompressible porous
+  media at l.278-280 as the alternative class, existence conditional, frontier 0
+  modes on CCF vs +1 on IPM). N3 TECHNIQUE-specific (infrastructure: double-float
+  floor named in 5 settings across 4 classes, extended-precision/quadruple/
+  float64 all return 0 hits in 27pp). Escalation correctly did NOT fire: the
+  named class (2D IPM) matches only 1 solver file (a bibliography line, not a
+  model), against positive controls of 12 (Boussinesq) and 33 (gCLM) hits for
+  the same test -- a control that demonstrably could have fired and didn't.
