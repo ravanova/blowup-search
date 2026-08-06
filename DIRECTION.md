@@ -8816,3 +8816,100 @@ and 242 now live (off reserve); no other change.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 241 escalates (partial, correctly deferred),
+a flagged claim gets a sanity-check leg, reserve tracking corrected (225 and 218 were never
+really reserve), 227 promoted into slot C
+
+**241 (PCRC) escalated, not merged** (`leg/241-pcrc-v1` pushed, `main` untouched).
+**(a) INCOMPLETE, correctly and deliberately so**: the correction for the stale
+`port_certification.py` artifacts is authored and verified against leg 217's own parked
+branch, but not applied — applying it now would fail the gate against `main`, since leg 217
+itself hasn't merged. Good discipline: not forcing a fix to land against a moving target.
+**Also found the bank is stale in FIVE rows, not the one leg 217 originally named** — a
+wider version of the same "stale artifact" problem, characterized precisely rather than
+undercounted. **(b) Characterized all 3 remaining silent paths, none claim-adjacent**, though
+two carry margin exactly `0.0` — correct only by a hardcoded literal or caller convention,
+nothing structurally enforcing it, worth remembering as fragile even though not currently
+wrong.
+
+**One note flagged by the orchestrator for a sanity check, taken seriously despite the leg's
+own "not claim-adjacent" conclusion**: leg 241's own report states `stall_verdict`'s
+positional-read finding "flips the published verdict on the one ladder carrying Route-L's
+headline" at 94.56x. The phrase itself — flipping a PUBLISHED verdict on a HEADLINE ladder —
+is alarming enough on its face that this DM does not want to rely solely on the same leg's
+own "concluded not claim-adjacent" judgment without an independent second look, exactly the
+orchestrator's own instinct. Drafted below as a light, non-urgent verification leg.
+
+```
+### 243 — ROUTE-PCRS: SANITY-CHECK LEG 241's "NOT CLAIM-ADJACENT" CONCLUSION ON THE
+stall_verdict / ROUTE-L HEADLINE-FLIP PHRASE (RESERVE, not urgent per the orchestrator's own
+framing, but not deferred indefinitely either)
+**Thesis.** Leg 241 (PCRC), characterizing `port_certification.py`'s 3 remaining silent
+paths, reported that `stall_verdict`'s positional-read finding "flips the published verdict
+on the one ladder carrying Route-L's headline" at 94.56x — and then concluded, in the same
+report, that this is NOT claim-adjacent. Those two statements sit close enough together that
+an independent second read is warranted before trusting the "not claim-adjacent" half at
+face value: a 94.56x flip of a HEADLINE ladder's published verdict is exactly the shape of
+thing this repository's own discipline treats as high-stakes when found elsewhere (e.g. leg
+202/226's Route-D v11 exposure). This leg does not re-litigate leg 241's own characterization
+of the mechanism — it independently re-checks specifically whether "Route-L's headline"
+really is unaffected, the same way leg 236 independently re-checks Route-D v11 rather than
+trusting leg 226's own repair-time re-derivation alone.
+**Gate.** Does an independent re-check confirm Route-L's own published headline verdict is
+UNAFFECTED by the `stall_verdict` positional-read finding leg 241 characterized (i.e., the
+94.56x flip occurs only in a case that does not correspond to Route-L's actual banked
+headline configuration), matching leg 241's own "not claim-adjacent" conclusion?
+  yes -> Independently confirmed; bank as closing this specific worry, distinct from and
+         additional to leg 241's own characterization.
+  no -> **Route-L's headline is affected.** This would be a second confirmed instance
+         (after leg 202/226) of a banked headline actually needing correction — escalate
+         immediately at the same priority, do not fold quietly into leg 241's own landing.
+**Territory.** experiments/p2_route_pcrs_v1_verification.py,
+               writeup/data/p2_route_pcrs_v1_verification.json,
+               writeup/novelty/leg_243.md, experiments/journal/leg_243.md.
+               Reads (never edits) leg 241's own report/JSON and Route-L's own banked
+               headline report, read-only.
+**Difficulty.** standard
+**Independence.** Read-only re-check. Disjoint from every other live/reserve leg. Reserve —
+not urgent per the orchestrator's own framing, but promote within the next few rounds rather
+than let it sit indefinitely, given what it's checking.
+```
+
+**Bookkeeping correction, per the orchestrator's own note: this DM's reserve tracking had
+two more errors.** **225 (RSR)** was dispatched earlier this cycle and is actively running
+(mid-work, having already caught and corrected its own R1-vs-R2 scope question) — it was
+never really "undispatched reserve," this DM's list was simply stale. **218 (BHR)** has a
+rich journal commit on its own branch but hasn't pushed to `main` — still finishing, correctly
+already tracked as live in slot H, not reserve (no correction needed there, just confirming
+this DM's slot-H entry was already right). Removing 225 from the reserve count:
+
+**Slot C refilled with leg 227 (EGMT)** — the tiny mechanical tense-fix for leg 213's
+cosmetic finding, fully unblocked and ready.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 235 | CDAP | audit/census — not floor-eligible |
+| C | 227 | EGMT | **live, newly promoted** — mechanical fix — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 237 | SIRC | audit/census — not floor-eligible |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 242 | DFL2 | FLOOR-ELIGIBLE (literature) |
+| H | 218 | BHR | repair — not floor-eligible (mid-finish, not landed) |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible |
+
+**Floor status: 2/10 (236, 242) — unchanged.**
+
+**Reserve queue, corrected: 7 undispatched legs (216, 228, 229, 231, 232, 233, 234), plus
+243 (new) = 8 undispatched legs (216, 228, 229, 231, 232, 233, 234, 243).** 225 removed
+(already dispatched, not reserve — this DM's tracking error, now fixed); 227 promoted to
+slot C; 243 newly drafted.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
