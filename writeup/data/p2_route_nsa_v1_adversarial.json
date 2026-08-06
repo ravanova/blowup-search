@@ -1,0 +1,812 @@
+{
+  "leg": 142,
+  "route": "ROUTE-NSA",
+  "module": "solver/nk_seminorm.py",
+  "read_only": true,
+  "module_edited": false,
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/nk_seminorm.py ever silently return a wrong value, or accept a fabricated certificate-feeding quantity unflagged?",
+  "gate_answer": "YES",
+  "decision_rule": "silent (no exception, no warning under catch_warnings(record=True)) AND refuted by an independent reference. Crashes and warned returns are recorded, not counted.",
+  "control": {
+    "status": "silent",
+    "warnings": [],
+    "T_upper": 63.8213165652836,
+    "P_upper": 183.3336535714697,
+    "A_upper": 69.37561656528361,
+    "contraction_slope": 0.44451681400517207,
+    "kappa_star": 0.12118451559325401,
+    "fixed_point_residual_rel": 2.350242514435202e-13,
+    "kappa_star_residual_rel": 0.0,
+    "C_half_exact": 2.0000000000000004,
+    "C_half_error": 4.440892098500626e-16,
+    "note": "test_nk_seminorm.py (5) asserts this fixed point, slope in (0,1), A_upper > C_sup, and alpha < 1 refused; all reproduced here."
+  },
+  "findings": {
+    "V1": {
+      "name": "negative C_sup accepted -> negative operator-norm upper bound",
+      "mechanism": "seminorm_closure line 227 does S = float(C_sup) with no check. derivative_bound then returns P < 0, and holder_interpolation_bound's `if P <= 0.0: return 0.0, inf` guard -- written for the degenerate P = 0 case -- swallows the negative P and reports T = 0. The fixed-point loop converges at T = 0 on the first iterate, contraction_slope = 0, and A_upper = S + T = S < 0 is returned with closes = True.",
+      "rows": [
+        {
+          "C_sup": -1.0,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "P_upper": -0.0033370869414527955,
+          "A_upper": -1.0,
+          "detail": null,
+          "operator_norm_upper": -1.0,
+          "violation": true,
+          "refutation": "A_upper is a claimed UPPER BOUND on ||A||_{Y->X}, an operator norm, which is >= 0 for every operator. A negative return is refuted with no computation."
+        },
+        {
+          "C_sup": -5.5543,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "P_upper": -9.127135181998911,
+          "A_upper": -5.5543,
+          "detail": null,
+          "operator_norm_upper": -5.5543,
+          "violation": true,
+          "refutation": "A_upper is a claimed UPPER BOUND on ||A||_{Y->X}, an operator norm, which is >= 0 for every operator. A negative return is refuted with no computation."
+        },
+        {
+          "C_sup": -1000000.0,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "P_upper": -2003335.0869414527,
+          "A_upper": -1000000.0,
+          "detail": null,
+          "operator_norm_upper": -1000000.0,
+          "violation": true,
+          "refutation": "A_upper is a claimed UPPER BOUND on ||A||_{Y->X}, an operator norm, which is >= 0 for every operator. A negative return is refuted with no computation."
+        },
+        {
+          "C_sup": -1e-12,
+          "status": "raised",
+          "warnings": [],
+          "closes": null,
+          "T_upper": null,
+          "P_upper": null,
+          "A_upper": null,
+          "detail": "TypeError: '>' not supported between instances of 'complex' and 'float'",
+          "operator_norm_upper": "TypeError: '>' not supported between instances of 'complex' and 'float'",
+          "violation": false,
+          "refutation": "A_upper is a claimed UPPER BOUND on ||A||_{Y->X}, an operator norm, which is >= 0 for every operator. A negative return is refuted with no computation."
+        }
+      ],
+      "n_violations": 3
+    },
+    "V2": {
+      "name": "negative anchor speed c silently deletes the seminorm part of ||A||",
+      "mechanism": "derivative_bound divides the (positive) bracket by c. For c < 0 the returned P is negative, which is not a derivative bound at all -- the derivation solves c h_X = -g - ... and the correct bound uses |c|. holder_interpolation_bound's P <= 0 branch then returns T = 0, so the SEMINORM PART VANISHES and A_upper collapses to the sup part C_sup alone, with closes = True.",
+      "headline": "at c = -0.5 (the anchor speed's own magnitude, sign flipped) the module reports ||A|| <= 5.554300 where the same module at c = +0.5 reports 69.375617 -- the claimed upper bound is understated by 12.4904x, silently.",
+      "rows": [
+        {
+          "c": -0.5,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "A_upper": 5.5543,
+          "P_upper": -24.565632347667695,
+          "detail": null,
+          "reference_T_upper_at_abs_c": 63.8213165652836,
+          "reference_A_upper_at_abs_c": 69.37561656528361,
+          "understatement_factor": 12.490433819794324,
+          "violation": true
+        },
+        {
+          "c": -1.0,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "A_upper": 5.5543,
+          "P_upper": -12.282816173833847,
+          "detail": null,
+          "reference_T_upper_at_abs_c": null,
+          "reference_A_upper_at_abs_c": null,
+          "understatement_factor": null,
+          "violation": true
+        },
+        {
+          "c": -0.001,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 0.0,
+          "A_upper": 5.5543,
+          "P_upper": -12282.816173833848,
+          "detail": null,
+          "reference_T_upper_at_abs_c": null,
+          "reference_A_upper_at_abs_c": null,
+          "understatement_factor": null,
+          "violation": true
+        },
+        {
+          "c": 1e-300,
+          "status": "silent",
+          "warnings": [],
+          "closes": false,
+          "T_upper": "inf",
+          "A_upper": null,
+          "P_upper": null,
+          "detail": null,
+          "reference_T_upper_at_abs_c": null,
+          "reference_A_upper_at_abs_c": null,
+          "understatement_factor": null,
+          "violation": false
+        }
+      ],
+      "n_violations": 3
+    },
+    "V3": {
+      "name": "NaN absorbed by the fixed-point loop: closes = True, T_upper = NaN",
+      "mechanism": "both loop exits are comparisons that are FALSE for NaN: `nxt > T_cap` and `abs(nxt - T) <= tol * max(1, T)`. A NaN iterate therefore neither trips the cap nor converges; the loop runs its full max_iter = 20000 and falls off the end into the success return, which has no NaN check. The +inf and 1e300 arms are the CONTROL: they take the T_cap branch and are reported honestly as closes = False, so this row can come out differently and does.",
+      "rows": [
+        {
+          "slot": "C_sup",
+          "value": "nan",
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": "nan",
+          "A_upper": "nan",
+          "reason": null,
+          "violation": true
+        },
+        {
+          "slot": "c",
+          "value": "nan",
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": "nan",
+          "A_upper": "nan",
+          "reason": null,
+          "violation": true
+        },
+        {
+          "slot": "C_sup",
+          "value": "inf",
+          "status": "silent",
+          "warnings": [],
+          "closes": false,
+          "T_upper": "inf",
+          "A_upper": null,
+          "reason": "no fixed point: the Hilbert feedback exceeds the interpolation gain",
+          "violation": false
+        },
+        {
+          "slot": "C_sup",
+          "value": 1e+300,
+          "status": "silent",
+          "warnings": [],
+          "closes": false,
+          "T_upper": "inf",
+          "A_upper": null,
+          "reason": "no fixed point: the Hilbert feedback exceeds the interpolation gain",
+          "violation": false
+        }
+      ],
+      "n_violations": 2
+    },
+    "V4": {
+      "name": "required_X0 accepts a NEGATIVE contraction constant as success",
+      "mechanism": "the acceptance test is `z <= target` with target = 1. Z1 is a contraction constant, so the intended predicate is 0 <= z <= target; the missing lower side means any negative z passes at the FIRST grid point, and the function returns found = True with the smallest, cheapest X0 and a J_needed the caller would act on. Chained with V1 this fabricates an entire certificate: seminorm_closure(C_sup = -1) -> A_upper = -1 -> required_X0 -> found = True, Z1 = -0.01, J_needed = 78.54, with no warning raised at any link.",
+      "rows": [
+        {
+          "case": "modelling_error < 0",
+          "A_upper": 69.375617,
+          "status": "silent",
+          "warnings": [],
+          "found": true,
+          "Z1": -69.375617,
+          "X0": 100.0,
+          "J_needed": 78.53981633974483,
+          "Z1_at_max": null,
+          "violation": true
+        },
+        {
+          "case": "modelling_error = 0",
+          "A_upper": 69.375617,
+          "status": "silent",
+          "warnings": [],
+          "found": true,
+          "Z1": 0.0,
+          "X0": 100.0,
+          "J_needed": 78.53981633974483,
+          "Z1_at_max": null,
+          "violation": false
+        },
+        {
+          "case": "modelling_error = NaN",
+          "A_upper": 69.375617,
+          "status": "silent",
+          "warnings": [],
+          "found": false,
+          "Z1": null,
+          "X0": null,
+          "J_needed": null,
+          "Z1_at_max": "nan",
+          "violation": false
+        },
+        {
+          "case": "A_upper < 0 (fed by V1)",
+          "A_upper": -1.0,
+          "status": "silent",
+          "warnings": [],
+          "found": true,
+          "Z1": -0.01,
+          "X0": 100.0,
+          "J_needed": 78.53981633974483,
+          "Z1_at_max": null,
+          "violation": true
+        },
+        {
+          "case": "honest control",
+          "A_upper": 69.375617,
+          "status": "silent",
+          "warnings": [],
+          "found": true,
+          "Z1": 0.6937561700000001,
+          "X0": 100.0,
+          "J_needed": 78.53981633974483,
+          "Z1_at_max": null,
+          "violation": false
+        }
+      ],
+      "n_violations": 2
+    },
+    "V5": {
+      "name": "the module's stated domain is enforced at ONE of four public entry points",
+      "mechanism": "seminorm_closure raises ValueError for alpha < 1 and for gamma outside (0, 1) -- the module DOES enforce its own docstring's gamma = 1 exclusion there, which is the question leg 131 left open and the answer is YES at that entry point. But derivative_bound, hilbert_split_bound, interpolation_constant and holder_interpolation_bound are public, are called directly by test_nk_seminorm.py and by solver/hilbert_holder.py (3 sites), and validate nothing. interpolation_constant returns a COMPLEX number for gamma outside [0, 1] -- (1-g)**(g-1) with 1-g < 0 and fractional exponent -- which propagates into holder_interpolation_bound's returned 'bound'.",
+      "rows": [
+        {
+          "entry": "derivative_bound",
+          "param": "alpha",
+          "value": 0.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": 24.90234300582919,
+          "finite": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "derivative_bound",
+          "param": "alpha",
+          "value": 0.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": 25.40170398680028,
+          "finite": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "derivative_bound",
+          "param": "alpha",
+          "value": -1.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": 83.15398277400293,
+          "finite": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "hilbert_split_bound",
+          "param": "gamma",
+          "value": 0.0,
+          "status": "raised",
+          "warnings": [],
+          "value_returned": "ZeroDivisionError: float division by zero",
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "interpolation_constant",
+          "param": "gamma",
+          "value": 0.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": 1.0,
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "holder_interpolation_bound",
+          "param": "gamma",
+          "value": 0.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            11.1086,
+            0.0
+          ],
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "hilbert_split_bound",
+          "param": "gamma",
+          "value": 1.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            0.5787466855717993,
+            0.642216328364962
+          ],
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "interpolation_constant",
+          "param": "gamma",
+          "value": 1.0,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": 1.0,
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "holder_interpolation_bound",
+          "param": "gamma",
+          "value": 1.0,
+          "status": "raised",
+          "warnings": [],
+          "value_returned": "ZeroDivisionError: float division by zero",
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "hilbert_split_bound",
+          "param": "gamma",
+          "value": 1.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            0.5787466855717993,
+            0.5726345910554971
+          ],
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "interpolation_constant",
+          "param": "gamma",
+          "value": 1.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": {
+            "__complex__": true,
+            "re": 2.3568338638331266e-17,
+            "im": 0.3849001794597505
+          },
+          "complex": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "holder_interpolation_bound",
+          "param": "gamma",
+          "value": 1.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            {
+              "__complex__": true,
+              "re": 6.138487752360688e-15,
+              "im": 100.24911275046065
+            },
+            -0.36621758241758245
+          ],
+          "complex": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "hilbert_split_bound",
+          "param": "gamma",
+          "value": -0.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            0.5787466855717993,
+            -0.5368449291145284
+          ],
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "interpolation_constant",
+          "param": "gamma",
+          "value": -0.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": {
+            "__complex__": true,
+            "re": 2.3568338638331266e-17,
+            "im": 0.3849001794597505
+          },
+          "complex": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "holder_interpolation_bound",
+          "param": "gamma",
+          "value": -0.5,
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            {
+              "__complex__": true,
+              "re": 9.147391499246409e-17,
+              "im": 1.4938824003157776
+            },
+            -0.04069084249084249
+          ],
+          "complex": true,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "hilbert_split_bound",
+          "param": "gamma",
+          "value": "nan",
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            0.5787466855717993,
+            "nan"
+          ],
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "interpolation_constant",
+          "param": "gamma",
+          "value": "nan",
+          "status": "silent",
+          "warnings": [],
+          "value_returned": "nan",
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        },
+        {
+          "entry": "holder_interpolation_bound",
+          "param": "gamma",
+          "value": "nan",
+          "status": "silent",
+          "warnings": [],
+          "value_returned": [
+            "nan",
+            "nan"
+          ],
+          "complex": false,
+          "guarded_in_seminorm_closure": true
+        }
+      ],
+      "n_silent_out_of_domain": 16,
+      "gamma_1_enforced_in_seminorm_closure": true
+    },
+    "V6": {
+      "name": "monotone-from-below iteration with no convergence flag returned",
+      "mechanism": "T starts at 0 and F is increasing, so every iterate is BELOW the fixed point T*. The loop breaks only on the tolerance test; running out of max_iter falls through to the success return, which reports closes = True and carries no iteration count and no convergence flag. The 'upper bound' property therefore rests entirely on convergence having happened, and the caller is given nothing to check it with.",
+      "severity": "CALLER-OVERRIDE ONLY at the shipped default -- measured, not assumed: at max_iter = 20000 the iteration converges for every gamma up to 0.99 (rel gap 0.000e+00 against max_iter = 200000, contraction slope 0.99 at gamma = 0.99), and gamma >= 0.999 is reported honestly as closes = False via the T_cap branch. The exhaustion path is reachable only when a caller lowers max_iter.",
+      "rows": [
+        {
+          "max_iter": 1,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 23.361925584048137,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 2.7318517189722464,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 2,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 42.160675422770154,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.5137640923754025,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 3,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 53.33057877321464,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.1967114933569398,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 5,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 61.62890970792448,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.0355743249028664,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 10,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 63.78274202240779,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.0006047802532896,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 20,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 63.82130494310102,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.0000001821050604,
+          "below_true_fixed_point": true
+        },
+        {
+          "max_iter": 100,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 63.8213165652836,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.0,
+          "below_true_fixed_point": false
+        },
+        {
+          "max_iter": 20000,
+          "status": "silent",
+          "warnings": [],
+          "closes": true,
+          "T_upper": 63.8213165652836,
+          "converged_T": 63.8213165652836,
+          "understatement_factor": 1.0,
+          "below_true_fixed_point": false
+        }
+      ],
+      "default_cap_probe": [
+        {
+          "gamma": 0.5,
+          "closes_at_default": true,
+          "T_at_default_20000": 63.8213165652836,
+          "T_at_200000": 63.8213165652836,
+          "rel_gap": 0.0,
+          "contraction_slope": 0.44451681400517207
+        },
+        {
+          "gamma": 0.9,
+          "closes_at_default": true,
+          "T_at_default_20000": 620.5734235268642,
+          "T_at_200000": 620.5734235268642,
+          "rel_gap": 0.0,
+          "contraction_slope": 0.8865552864227026
+        },
+        {
+          "gamma": 0.99,
+          "closes_at_default": true,
+          "T_at_default_20000": 3630165.3489807397,
+          "T_at_200000": 3630165.3489807397,
+          "rel_gap": 0.0,
+          "contraction_slope": 0.9899974308715856
+        },
+        {
+          "gamma": 0.999,
+          "closes_at_default": false,
+          "T_at_default_20000": "inf",
+          "T_at_200000": "inf",
+          "rel_gap": null,
+          "contraction_slope": null
+        }
+      ]
+    },
+    "V7": {
+      "name": "derivative_bound's sup is a max over a 120-point truncated log grid",
+      "mechanism": "hilbert_split_curves samples X on geomspace(1e-3, 1e6, 120) and derivative_bound takes np.max over those samples. A max over samples is not a supremum: the returned P -- and through it the claimed upper bound on ||A|| -- can only UNDERSTATE the true sup. This is leg 116's pre-registered clause on nk_bounds.py, inherited verbatim by this module.",
+      "magnitude": "SMALL AT THE SHIPPED SETTING, and reported as such: the shipped n_X = 120 understates the n_X = 2000 value of T by 6.680e-05 relative (63.821317 vs 63.825580). It is not small at coarser resolutions -- n_X = 30 understates by 3.1e-2. Refining X_hi moves the answer NON-MONOTONICALLY (1e6 -> 69.3756, 1e10 -> 69.2709), which is the grid, not the integrand.",
+      "rows": [
+        {
+          "n_X": 30,
+          "X_hi": 1000000.0,
+          "T_upper": 61.845555927085556,
+          "A_upper": 67.39985592708555,
+          "rel_understatement_vs_n_X_2000": 0.03102241901307538
+        },
+        {
+          "n_X": 60,
+          "X_hi": 1000000.0,
+          "T_upper": 63.63399918968902,
+          "A_upper": 69.18829918968902,
+          "rel_understatement_vs_n_X_2000": 0.0030016275374034783
+        },
+        {
+          "n_X": 120,
+          "X_hi": 1000000.0,
+          "T_upper": 63.8213165652836,
+          "A_upper": 69.37561656528361,
+          "rel_understatement_vs_n_X_2000": 6.679519966124262e-05
+        },
+        {
+          "n_X": 240,
+          "X_hi": 1000000.0,
+          "T_upper": 63.81973079797962,
+          "A_upper": 69.37403079797961,
+          "rel_understatement_vs_n_X_2000": 9.164052513678957e-05
+        },
+        {
+          "n_X": 480,
+          "X_hi": 1000000.0,
+          "T_upper": 63.823201994219524,
+          "A_upper": 69.37750199421953,
+          "rel_understatement_vs_n_X_2000": 3.72548658075776e-05
+        },
+        {
+          "n_X": 2000,
+          "X_hi": 1000000.0,
+          "T_upper": 63.82557980763035,
+          "A_upper": 69.37987980763035,
+          "rel_understatement_vs_n_X_2000": 0.0
+        }
+      ],
+      "X_hi_rows": [
+        {
+          "X_hi": 10000.0,
+          "T_upper": 63.81353987466473,
+          "A_upper": 69.36783987466472
+        },
+        {
+          "X_hi": 1000000.0,
+          "T_upper": 63.8213165652836,
+          "A_upper": 69.37561656528361
+        },
+        {
+          "X_hi": 100000000.0,
+          "T_upper": 63.81353987466473,
+          "A_upper": 69.36783987466472
+        },
+        {
+          "X_hi": 10000000000.0,
+          "T_upper": 63.716560172828785,
+          "A_upper": 69.27086017282879
+        },
+        {
+          "X_hi": 1000000000000.0,
+          "T_upper": 63.716560172828785,
+          "A_upper": 69.27086017282879
+        }
+      ]
+    },
+    "V8": {
+      "name": "interpolant_far_field_defect returns NaN entries under a warning",
+      "mechanism": "np.linspace(theta_last, pi - eps, n) is not required to be increasing; for theta_last > pi it runs BACKWARDS past pi, where cos(theta/2) < 0 and the weight cos(theta/2)**(-alpha) is NaN for fractional alpha. NaN theta_last produces the same output. This one DOES warn (RuntimeWarning: invalid value encountered in power), so by this leg's own decision rule it is NOT counted as a silent violation -- recorded for completeness.",
+      "rows": [
+        {
+          "case": "theta_last > pi",
+          "theta_last": 4.0,
+          "status": "warned",
+          "warnings": [
+            "RuntimeWarning"
+          ],
+          "h_pi": 1.0,
+          "weighted": [
+            "nan",
+            "nan",
+            2828427123.6337657
+          ],
+          "n_nan": 2
+        },
+        {
+          "case": "theta_last = NaN",
+          "theta_last": "nan",
+          "status": "silent",
+          "warnings": [],
+          "h_pi": 1.0,
+          "weighted": [
+            "nan",
+            "nan",
+            2828427123.6337657
+          ],
+          "n_nan": 2
+        },
+        {
+          "case": "theta_last = 0",
+          "theta_last": 0.0,
+          "status": "silent",
+          "warnings": [],
+          "h_pi": 1.0,
+          "weighted": [
+            1.0,
+            1.6817921998353935,
+            2828427123.6337657
+          ],
+          "n_nan": 0
+        },
+        {
+          "case": "honest control",
+          "theta_last": 3.0,
+          "status": "silent",
+          "warnings": [],
+          "h_pi": 1.0,
+          "weighted": [
+            53.15304963143807,
+            150.1966887821352,
+            2828427123.6337657
+          ],
+          "n_nan": 0
+        },
+        {
+          "case": "to_coef/h shape mismatch",
+          "status": "raised",
+          "warnings": [],
+          "detail": "ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 7 is different from 4)"
+        }
+      ],
+      "counted_as_violation": false
+    }
+  },
+  "counted_findings": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+  ],
+  "n_silent_violations": 10,
+  "blast_radius": {
+    "live_call_sites": {
+      "solver/hilbert_holder.py": {
+        "lines": [
+          266,
+          326,
+          409
+        ],
+        "function": "hilbert_split_bound",
+        "note": "the only solver->solver consumer; passes gamma through from its own caller. Leg 119 (5a74a86) already escalated this module for its own bound direction and recorded the gamma = 0 ZeroDivisionError raised inside hilbert_split_bound's /gamma."
+      },
+      "test_op_lower.py": {
+        "lines": [
+          96
+        ],
+        "function": "seminorm_closure(...)['A_upper']",
+        "note": "passes C_sup = nk_bounds.sup_part_upper(...), a max over dual candidates."
+      },
+      "experiments/p2_route_d_v7_seminorm.py": {
+        "lines": [
+          211,
+          254,
+          292,
+          300,
+          301
+        ],
+        "function": "seminorm_closure, required_X0",
+        "note": "the banked Route-D v7 evidence runner; same C_sup source."
+      },
+      "test_nk_seminorm.py": {
+        "lines": [
+          91,
+          104,
+          135,
+          150,
+          179,
+          182,
+          190,
+          196,
+          201,
+          203,
+          217
+        ],
+        "function": "all six public functions"
+      }
+    },
+    "verdict": "LATENT, 0 exposed. Every live call site supplies C_sup from nk_bounds.sup_part_upper (a max of dual-pairing magnitudes, structurally >= 0) and c = C_ANCHOR = 0.5 by default -- no in-repo caller passes a negative C_sup, a negative c, a NaN, or a lowered max_iter. The gaps are reachable by construction, not by any banked number. No banked Route-D v7 result is impeached.",
+    "banked_numbers_impeached": 0
+  },
+  "escalated_not_patched": true,
+  "guard_class": "NOT the leg 128 Y0/Z0/Z1 shared-guard class -- this module never touches the radii-polynomial coefficients. The nearest landed template is hilbert_pointwise.py's HilbertPointwiseDomainError (leg 130, 5905138): a domain guard on the module's own stated hypotheses, with an on_unsound escape that reproduces pre-repair numbers bit-identically."
+}
