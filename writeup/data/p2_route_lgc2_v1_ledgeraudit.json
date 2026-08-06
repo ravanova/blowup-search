@@ -1,0 +1,735 @@
+{
+ "route": "LGC2 v1",
+ "leg": 213,
+ "gate": "Do the 190 and 197 rows match literature_gates.py's and viscous_novelty.py's own existing row format exactly, with no duplicate/conflicting entry and no transcription drift from legs 190's/197's own banked reports?",
+ "A1_format_literature_gates": {
+  "template": "LSS_PRIMARY_READ (leg 161), named as the template by leg 190's own novelty sec 6",
+  "header_slots_required": [
+   "arxiv",
+   "tag",
+   "authors",
+   "title",
+   "venue",
+   "read",
+   "provenance_before_leg_N"
+  ],
+  "egm_header_slots": [
+   "arxiv",
+   "tag",
+   "authors",
+   "title",
+   "venue",
+   "read",
+   "provenance_before_leg_N"
+  ],
+  "lss_header_slots": [
+   "arxiv",
+   "tag",
+   "authors",
+   "title",
+   "venue",
+   "read",
+   "provenance_before_leg_N"
+  ],
+  "header_sequence_identical": true,
+  "header_fields_all_nonempty_str": true,
+  "egm_all_slots": [
+   "arxiv",
+   "tag",
+   "authors",
+   "title",
+   "venue",
+   "read",
+   "provenance_before_leg_N",
+   "spectral_gap",
+   "scope",
+   "the_relayed_p2_claim",
+   "re_derived_at_leg_N"
+  ],
+  "lss_all_slots": [
+   "arxiv",
+   "tag",
+   "authors",
+   "title",
+   "venue",
+   "read",
+   "provenance_before_leg_N",
+   "a_c",
+   "alpha_half",
+   "independence_correction",
+   "what_did_NOT_change"
+  ],
+  "egm_payload_subdicts": [
+   "spectral_gap"
+  ],
+  "lss_payload_subdicts": [
+   "a_c",
+   "alpha_half"
+  ],
+  "payload_count_egm": 1,
+  "payload_count_lss": 2,
+  "arxiv_id_bare_format_egm": true,
+  "arxiv_id_bare_format_lss": true,
+  "arxiv_convention_matches": true,
+  "bad_types": [],
+  "subdict_shared_fields": [
+   "how_obtained",
+   "hypotheses_verbatim"
+  ],
+  "subdict_egm_only": [
+   "gap_at_a_zero",
+   "locator",
+   "object_verbatim",
+   "sign_correction_leg_190",
+   "statement_verbatim",
+   "weight_verbatim"
+  ],
+  "pass": true
+ },
+ "A2_format_viscous_novelty": {
+  "n_rows": 7,
+  "appended_row_index": [
+   6
+  ],
+  "appended_row_is_last": true,
+  "schema_gate_reads": [
+   "id",
+   "who",
+   "what",
+   "dial",
+   "rigor",
+   "verdict",
+   "gate"
+  ],
+  "per_row": [
+   {
+    "i": 0,
+    "id": "arXiv:2410.05480",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 191,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 1,
+    "id": "arXiv:2404.04054",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 181,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 2,
+    "id": "arXiv:2207.07548",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 133,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 3,
+    "id": "arXiv:1908.09385",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 138,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 4,
+    "id": "arXiv:2210.07191 + Part II (2305.05660)",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 124,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 5,
+    "id": "arXiv:2509.14185",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 128,
+    "what_over_60": true,
+    "who_surname_list": true
+   },
+   {
+    "i": 6,
+    "id": "arXiv:2208.09445",
+    "has_all_seven": true,
+    "missing": [],
+    "extra": [
+     "banked_by",
+     "grade",
+     "why_exclusion_not_pre_empts"
+    ],
+    "id_prefixed": true,
+    "verdict_in_vocab": true,
+    "gate_is_none_or_str": true,
+    "what_len": 952,
+    "what_over_60": true,
+    "who_surname_list": true
+   }
+  ],
+  "all_rows_have_all_seven": true,
+  "all_ids_prefixed": true,
+  "all_verdicts_in_vocab": true,
+  "all_what_over_60": true,
+  "rows_with_extra_keys": [
+   "arXiv:2208.09445"
+  ],
+  "appended_extra_keys": [
+   "banked_by",
+   "grade",
+   "why_exclusion_not_pre_empts"
+  ],
+  "prior_rows_with_extra_keys": [],
+  "extra_keys_documented_in_source": true,
+  "module_own_test_would_pass": true,
+  "pass": true
+ },
+ "A3_duplicates_conflicts": {
+  "viscous_novelty_ids": [
+   "arXiv:2410.05480",
+   "arXiv:2404.04054",
+   "arXiv:2207.07548",
+   "arXiv:1908.09385",
+   "arXiv:2210.07191 + Part II (2305.05660)",
+   "arXiv:2509.14185",
+   "arXiv:2208.09445"
+  ],
+  "viscous_novelty_bare": [
+   "2410.05480",
+   "2404.04054",
+   "2207.07548",
+   "1908.09385",
+   "2210.07191",
+   "2509.14185",
+   "2208.09445"
+  ],
+  "n_unique": 7,
+  "duplicate_ids": [],
+  "verdict_conflicts_same_paper": {},
+  "literature_gates_1906_05811_sites": [
+   [
+    538,
+    "# every hit against ARXIV_METADATA, which has no 1906.05811 entry -- adding the id there"
+   ],
+   [
+    543,
+    "\"arxiv\": \"1906.05811\","
+   ]
+  ],
+  "n_1906_05811_sites": 2,
+  "claim_ledger_rows_mentioning_egm": 0,
+  "scope_note_promise_kept": true,
+  "egm_and_lss_are_different_papers": true,
+  "novelty_verdict_now": "YES",
+  "novelty_verdict_expected": "YES",
+  "novelty_verdict_unmoved": true,
+  "pass": true
+ },
+ "A4_transcription_egm_vs_leg190": {
+  "source": "writeup/data/p2_route_egml_v1_lit.json (leg 190's own banked report)",
+  "method": "BYTE EQUALITY per field, not similarity",
+  "header_fields": [
+   {
+    "field": "arxiv",
+    "identical": true,
+    "ledger_len": 10,
+    "json_len": 10
+   },
+   {
+    "field": "tag",
+    "identical": true,
+    "ledger_len": 3,
+    "json_len": 3
+   },
+   {
+    "field": "authors",
+    "identical": true,
+    "ledger_len": 24,
+    "json_len": 24
+   },
+   {
+    "field": "title",
+    "identical": true,
+    "ledger_len": 71,
+    "json_len": 71
+   },
+   {
+    "field": "venue",
+    "identical": true,
+    "ledger_len": 202,
+    "json_len": 202
+   },
+   {
+    "field": "read",
+    "identical": true,
+    "ledger_len": 321,
+    "json_len": 321
+   }
+  ],
+  "header_all_identical": true,
+  "verbatim_fields": [
+   {
+    "field": "gap_at_a_zero",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 4,
+    "json_len": 4
+   },
+   {
+    "field": "locator",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 69,
+    "json_len": 69
+   },
+   {
+    "field": "statement_verbatim",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 229,
+    "json_len": 229
+   },
+   {
+    "field": "hypotheses_verbatim",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 382,
+    "json_len": 382
+   },
+   {
+    "field": "weight_verbatim",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 190,
+    "json_len": 190
+   },
+   {
+    "field": "object_verbatim",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 198,
+    "json_len": 198
+   },
+   {
+    "field": "sign_correction_leg_190",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 1239,
+    "json_len": 1239
+   },
+   {
+    "field": "how_obtained",
+    "in_ledger": true,
+    "identical": true,
+    "ledger_len": 270,
+    "json_len": 270
+   }
+  ],
+  "verbatim_all_present": true,
+  "verbatim_all_identical": true,
+  "n_verbatim_fields": 8,
+  "prose_fields": [
+   {
+    "field": "scope",
+    "identical": true
+   },
+   {
+    "field": "the_relayed_p2_claim",
+    "identical": true
+   }
+  ],
+  "prose_all_identical": true,
+  "numeric_claims": [
+   {
+    "claim": "4.44e-16 (E1 max deviation)",
+    "measured": 4.440892098500626e-16,
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "spread 8.88e-16",
+    "measured": 8.881784197001252e-16,
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "4000 nodes",
+    "measured": 4000,
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "decoys miss by 0.500 and 0.343",
+    "measured": [
+     0.343,
+     0.5
+    ],
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "gamma=4 unique, 1 of 10 scanned",
+    "measured": [
+     1,
+     10
+    ],
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "spread 0.0500 at gamma = 3.9",
+    "measured": 0.049999900000100184,
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "leg 165's D_phi(0) = (3-gamma)/2 reproduced",
+    "measured": true,
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "err * S = 0.639 vs 2/pi = 0.6366, over four grid extents",
+    "measured": {
+     "n_extents": 4,
+     "err_times_S": [
+      0.6421,
+      0.6389,
+      0.6395,
+      0.6401
+     ],
+     "min": 0.6389,
+     "max": 0.6421
+    },
+    "in_prose": true,
+    "consistent": true
+   },
+   {
+    "claim": "negated target off by 2.0, pinning the sign convention",
+    "measured": 2.0,
+    "in_prose": true,
+    "consistent": true
+   }
+  ],
+  "n_numeric_claims": 9,
+  "n_numeric_traceable": 9,
+  "bracket_form_correct": true,
+  "slope_direction_correct": true,
+  "latex_source_quoted_verbatim": true,
+  "gap_at_a_zero_matches": true,
+  "pass": true
+ },
+ "A5_transcription_vnl_vs_leg174": {
+  "source": "writeup/data/p2_route_vbs_v1_scoping.json, ledger key BCG-NS (leg 174)",
+  "method": "substring containment, normalised for whitespace/case",
+  "n_claims": 20,
+  "n_traceable": 20,
+  "claims": [
+   {
+    "claim": "arXiv id matches leg 174's url",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "authors verbatim",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "title verbatim",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "journal ref",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "doi",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "Theorem 1.3 locator",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "Grade B",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "system (1.5) is the enclosed object",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "(1.5) is the ODE reduction of the INVISCID Euler system (1.3)",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "sections 7-8 analytic stability",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "section 7 domination quote verbatim",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "10000 coefficient pairs (W_j, Z_j)",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "~14 CPU-hours",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "Lemmas A.27/A.28",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "Appendix B implementation details",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "Lame viscosities mu_1 > 0, 2 mu_1 + mu_2 > 0",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "computer assistance essential/non-removable",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "density constant at infinity",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "banked_by names leg 174 / BCG-NS",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   },
+   {
+    "claim": "verdict EXCLUSION consistent with certified_object_dissipative=False",
+    "present_in_leg174": true,
+    "traceable_in_row": true
+   }
+  ],
+  "untraceable": [],
+  "pass": true
+ },
+ "A6_post_hoc_staleness_leg214": {
+  "ledger_field": "EGM_PRIMARY_READ['spectral_gap']['sign_correction_leg_190']",
+  "ledger_sentence_under_test": "experiments/journal/leg_141.md:30,117, writeup/novelty/leg_141.md:233 and experiments/journal/leg_165.md:120,128 all render the bracket as (-1/2 - C|a|),all render the bracket as (-1/2 - C|a|)",
+  "tense": "present indicative -- 'all render', not 'rendered at leg 190'",
+  "n_sites_named": 5,
+  "sites": [
+   {
+    "site": "experiments/journal/leg_141.md:30",
+    "exists": true,
+    "line": "> `int_R f M_a f phi(y) dy \u2264 -(1/2 - C|a|) int_R f(y)2 phi(y) dy`.\"",
+    "renders_wrong_bracket_parenthesised": false,
+    "renders_right_bracket": true,
+    "ledger_claim_holds_at_this_site": false
+   },
+   {
+    "site": "experiments/journal/leg_141.md:117",
+    "exists": true,
+    "line": "| EGM Prop. 2.1's constant `-(1/2 - C|a|)` at `a = 0` | **-0.500000** |",
+    "renders_wrong_bracket_parenthesised": false,
+    "renders_right_bracket": true,
+    "ledger_claim_holds_at_this_site": false
+   },
+   {
+    "site": "writeup/novelty/leg_141.md:233",
+    "exists": true,
+    "line": "> `int_R f M_a f phi(y) dy \u2264 -(1/2 - C|a|) int_R f(y)2 phi(y) dy`.\"",
+    "renders_wrong_bracket_parenthesised": false,
+    "renders_right_bracket": true,
+    "ledger_claim_holds_at_this_site": false
+   },
+   {
+    "site": "experiments/journal/leg_165.md:120",
+    "exists": true,
+    "line": "> `int_R f M_a f phi(y) dy \u2264 -(1/2 - C|a|) int_R f(y)2 phi(y) dy`\"",
+    "renders_wrong_bracket_parenthesised": false,
+    "renders_right_bracket": true,
+    "ledger_claim_holds_at_this_site": false
+   },
+   {
+    "site": "experiments/journal/leg_165.md:128",
+    "exists": true,
+    "line": "`D_phi(0) = (3 - \u03b3)/2` at `\u03b3 = 4` gives **-0.500000**; EGM's constant `-(1/2 - C|a|)` at `a = 0`",
+    "renders_wrong_bracket_parenthesised": false,
+    "renders_right_bracket": true,
+    "ledger_claim_holds_at_this_site": false
+   }
+  ],
+  "n_sites_still_carrying_the_error": 0,
+  "n_sites_now_corrected": 5,
+  "falsified_by": "leg 214 (Route-EGMB), commit 2c901c4, 5 lines / 5 ins / 5 del",
+  "leg_214_declined_to_touch_literature_gates": true,
+  "ledger_claim_holds_at_n_of_5": 0,
+  "banked_numbers_moved_by_this": 0,
+  "why_it_matters": "the field is the ledger's ONLY record of a three-leg propagated error and its repair.  Read today it points five readers at five files and tells each of them the file is wrong when it is right -- the exact inverse of the defect leg 190 created the field to record.  It is not a wrong NUMBER (0 move) and not a wrong CITATION; it is a wrong statement about this repository's own current state, in shared infrastructure, and it can only get staler.",
+  "pass": false
+ },
+ "A7_negative_controls": {
+  "n_controls": 12,
+  "n_fired": 12,
+  "ornaments": [],
+  "controls": [
+   {
+    "control": "A1 / header slot 'authors' renamed to 'author'",
+    "checker": "a1_format_literature_gates",
+    "fired": true
+   },
+   {
+    "control": "A1 / arXiv id carries the OTHER ledger's 'arXiv:' prefix",
+    "checker": "a1_format_literature_gates",
+    "fired": true
+   },
+   {
+    "control": "A2 / appended row loses its 'dial' key",
+    "checker": "a2_format_viscous_novelty",
+    "fired": true
+   },
+   {
+    "control": "A2 / appended row's id drops the 'arXiv:' prefix",
+    "checker": "a2_format_viscous_novelty",
+    "fired": true
+   },
+   {
+    "control": "A3 / the appended row duplicated verbatim",
+    "checker": "a3_duplicates",
+    "fired": true
+   },
+   {
+    "control": "A3 / duplicate row with a CONFLICTING verdict",
+    "checker": "a3_duplicates",
+    "fired": true
+   },
+   {
+    "control": "A4 / two words changed inside a *_verbatim field",
+    "checker": "a4_transcription_egm",
+    "fired": true
+   },
+   {
+    "control": "A4 / bracket reverted to the erroneous (-1/2 - C|a|)",
+    "checker": "a4_transcription_egm",
+    "fired": true
+   },
+   {
+    "control": "A4 / node count in the prose inflated 4000 -> 40000",
+    "checker": "a4_transcription_egm",
+    "fired": true
+   },
+   {
+    "control": "A5 / section-7 quote paraphrased rather than transcribed",
+    "checker": "a5_transcription_vnl",
+    "fired": true
+   },
+   {
+    "control": "A5 / Grade B upgraded to A against leg 174's finding",
+    "checker": "a5_transcription_vnl",
+    "fired": true
+   },
+   {
+    "control": "A6 / same predicate against the PRE-leg-214 blobs (git show 2c901c4^ at all five sites)",
+    "checker": "a6_staleness_after_leg_214",
+    "note": "the predicate must report the ledger's claim TRUE before leg 214 and FALSE after; if it said FALSE at both times it would be measuring nothing about leg 214, and the staleness finding would be an artifact of the predicate rather than a fact about the commit",
+    "detail": {
+     "pre_leg_214_sites": [
+      {
+       "site": "experiments/journal/leg_141.md:30",
+       "ledger_claim_held_before_leg_214": true
+      },
+      {
+       "site": "experiments/journal/leg_141.md:117",
+       "ledger_claim_held_before_leg_214": true
+      },
+      {
+       "site": "writeup/novelty/leg_141.md:233",
+       "ledger_claim_held_before_leg_214": true
+      },
+      {
+       "site": "experiments/journal/leg_165.md:120",
+       "ledger_claim_held_before_leg_214": true
+      },
+      {
+       "site": "experiments/journal/leg_165.md:128",
+       "ledger_claim_held_before_leg_214": true
+      }
+     ],
+     "n_held_before": 5
+    },
+    "fired": true
+   }
+  ],
+  "pass": true
+ },
+ "gate_clauses_as_worded": {
+  "format_literature_gates": true,
+  "format_viscous_novelty": true,
+  "no_duplicate_or_conflict": true,
+  "no_transcription_drift_190": true,
+  "no_transcription_drift_197": true
+ },
+ "gate_as_worded_clean": true,
+ "fourth_mode_staleness_found": true,
+ "gate_answer": "NO",
+ "escalation": {
+  "what": "EGM_PRIMARY_READ['spectral_gap']['sign_correction_leg_190'] is STALE",
+  "where": "solver/literature_gates.py, inside the leg-190 block",
+  "class": "post-hoc staleness -- NOT format drift, NOT a duplicate, NOT a transcription error against leg 190's own report (A1-A5 are all clean)",
+  "measured": "0 of 5 named sites still carry the bracket the field says they all carry; 5 of 5 now carry the corrected form",
+  "cause": "leg 214 (2c901c4) corrected all five prose sites and deliberately left literature_gates.py untouched, on the correct ground that leg 190's row states the MATHEMATICS correctly. The mathematics is correct. The sentence about the repository's own files is not.",
+  "banked_numbers_moved": 0,
+  "not_reconciled_here": "solver/literature_gates.py is read-only to leg 213 under both branches; the fix is one tense change and it belongs to whoever owns the ledger, not to its auditor.",
+  "suggested_repair_not_applied": "re-tense the sentence to '...rendered the bracket as (-1/2 - C|a|) until leg 214 (2c901c4) corrected all five', which leaves every other word intact."
+ },
+ "what_did_NOT_move": "no verdict in CLAIM_LEDGER moves; novelty_verdict() returns YES on arXiv:2410.05480 alone, unchanged; 0 banked numbers move; EGM's -1/2 at a = 0 and BCG's Grade B both stand exactly as legs 190 and 174 banked them.  No ban lifts, no route advances, no figure owed.",
+ "elapsed_s": 0.034
+}
