@@ -7844,3 +7844,236 @@ YOU; this DM rules on none of them, but has stated its own assessment on 202 exp
 the orchestrator's direct question: **yes, Route-D v11's headline plausibly needs re-scoping,
 pending leg 226's own re-derivation using the repaired module.** No direction question raised
 by this DM itself this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 223 landed, a reconciliation pass (real drift
+found on this DM's side too), 224/226 promoted, watermark hit again, 8 new postrepair-
+verification legs drafted
+
+**223 (PUB3) landed on `main` (`6cb9bca`) — gate YES.** The audit-family synthesis note
+corrected its own stale dispatch-time escalation count (7, drafted when the leg was written)
+to the actual count at landing time: **13**. It also found `reports/STATUS.md` (the
+orchestrator's own committed snapshot) stale by ten escalations — the orchestrator has since
+fully refreshed it. A genuinely useful catch from exactly the kind of self-auditing
+discipline this leg was drafted to apply.
+
+**Reconciliation, prompted by the orchestrator's own "worth double-checking your tracking"
+note, and warranted: this DM's reserve/live bookkeeping had drifted too, in the same
+direction as the orchestrator's 3-slot drift.** Cross-checking the orchestrator's latest
+roster against this DM's own running reserve list found two items this DM had continued
+carrying as "reserve, undispatched" that were, in fact, already dispatched rounds ago without
+the promotion reaching this DM in an update: **219 (ICR2)** (now confirmed live in slot F,
+per the orchestrator's own report of an accidental duplicate dispatch — the leg was already
+running from an earlier round this DM has no record of) and **223 (PUB3) itself** (just
+confirmed landed, meaning it was dispatched, ran, and completed without ever appearing in
+this DM's "live roster" bookkeeping in between). **Leg 207 (DPA) is also now known to have
+landed "several rounds ago"** per the orchestrator's own account of the vacant-slot-J bug —
+this DM has no gate detail for 207 beyond that it landed and freed the slot; recorded here as
+landed, unqualified, pending any later correction if the orchestrator's own records show
+otherwise. Going forward, this DM will treat the orchestrator's periodically-restated full
+live-slot roster as the single source of truth for occupancy, and will not carry a leg as
+"reserve" once it stops appearing in that roster as either live or explicitly reported
+escalated/landed — the drift here came from continuing to track old promotion-order lists
+past the point where the ground truth had already moved on.
+
+**224 (GCC) and 226 (PNR) promoted, filling slots E and J.** 226 (the top-priority repair for
+leg 202's Route-D v11 exposure) is now in flight — the fastest possible turnaround for this
+cycle's single highest-priority item, closing the slot-J gap the orchestrator found in the
+same stroke.
+
+**Live-slot roster, corrected and reconciled:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 217 | PCR | live (unchanged) |
+| C | 220 | TNR | live (unchanged) |
+| D | 221 | BVRR | live (unchanged) |
+| E | 224 | GCC | **live, newly promoted** |
+| F | 219 | ICR2 | live (duplicate dispatch, per orchestrator — only one push will land; recorded as one occupant of slot F, not two) |
+| G | 222 | FBA | live (unchanged) |
+| H | 218 | BHR | live (unchanged) |
+| I | 210 | M2SV | live (unchanged) |
+| J | 226 | PNR | **live, newly promoted — top priority, closes the slot-J gap** |
+
+**True reserve, after the reconciliation above: 3 items (216, 225, 227) — 219 and 223 are
+removed from the reserve count entirely (already dispatched/landed, not reserve stock this
+DM was correctly still holding).** This lands exactly AT the §3a watermark. Per standing
+instruction, eight new fully-specified candidates are drafted now, without waiting to be
+asked. All eight are postrepair-verification legs (the same 86/87/94/103/104/105/131-135/
+147/166-170/192-195 pattern) for this cycle's own repair batch, each blocked until its
+source repair lands — plus one genuinely new scoping question grounded directly in leg
+202/226's own finding.
+
+```
+### 228 — ROUTE-BHRV: POST-REPAIR VERIFICATION, LEG 218's bordered_hl.py REPAIR (RESERVE —
+NOT dispatchable until leg 218 lands)
+**Thesis.** Leg 218 (BHR) repairs this cycle's single highest-blast-radius latent defect
+(negative border weight corrupting Z_1 by up to 1.198e9x, Z_2 by up to 1.189e17x). Given the
+magnitude, this repair deserves the same independent postrepair verification this repository
+applies to every other repair, not a self-report alone.
+**Gate.** Does an independent re-run of leg 218's own adversarial battery confirm every
+negative-weight case now rejects, with every one of 54/58/127/192's own live values
+bit-identical pre/post repair?
+  yes -> Bank as the permanent verification record for this cycle's highest-stakes repair.
+  no  -> Report the exact discrepancy; escalate immediately given the magnitude leg 198
+         originally measured.
+**Territory.** test_bordered_hl_postrepair.py, experiments/p2_route_bhrv_v1_postrepair.py,
+               writeup/data/p2_route_bhrv_v1_postrepair.json,
+               writeup/novelty/leg_228.md, experiments/journal/leg_228.md.
+**Difficulty.** standard
+**Independence.** Reads solver/bordered_hl.py; edits nothing under either outcome. **NOT
+dispatchable until leg 218 lands.**
+```
+
+```
+### 229 — ROUTE-PNRV: POST-REPAIR VERIFICATION, LEG 226's profile_newton.py REPAIR AND ITS
+ROUTE-D v11 RE-SCOPING (RESERVE — NOT dispatchable until leg 226 lands; HIGHEST PRIORITY OF
+THE EIGHT)
+**Thesis.** Leg 226 is this cycle's single highest-priority item — it may determine whether
+Route-D v11's own banked headline needs correcting. Whichever way its gate lands, an
+independent re-derivation is essential before anyone treats either outcome (headline
+survives / headline changes) as settled — this is not an optional postrepair check, it is
+the same discipline every genuinely novel claim in this repository gets, applied at maximum
+stakes.
+**Gate.** Does an independent re-run of leg 226's repaired `profile_newton.py`, applied fresh
+to Route-D v11's own inputs, reproduce leg 226's own reported before/after
+`a_max_machine`/`GA_boundary` values (whether unchanged or changed) and its own resolution of
+the three-grid `a=1.50` disagreement?
+  yes -> Independently confirmed either way. If leg 226 found the headline changed, this
+         verification is what makes that correction safe to actually apply — do not apply
+         any headline correction under this leg's own authority, escalate for the
+         user/orchestrator to action.
+  no  -> Report the exact discrepancy immediately as the highest-priority finding in the
+         entire backlog — a mismatch here would mean even the REPAIR's own re-derivation is
+         unreliable.
+**Territory.** test_profile_newton_postrepair.py, experiments/p2_route_pnrv_v1_postrepair.py,
+               writeup/data/p2_route_pnrv_v1_postrepair.json,
+               writeup/novelty/leg_229.md, experiments/journal/leg_229.md.
+               Reads (never edits) Route-D v11's own banked report/JSON.
+**Difficulty.** heavy
+**Independence.** Reads solver/profile_newton.py; edits nothing under either outcome. **NOT
+dispatchable until leg 226 lands; promote THIS one immediately the moment it does, ahead of
+227/228/230-235.**
+```
+
+```
+### 230 — ROUTE-TNRV: POST-REPAIR VERIFICATION, LEG 220's target_norm.py REPAIR (RESERVE —
+NOT dispatchable until leg 220 lands)
+**Thesis/Gate/pattern identical to 228, applied to leg 220's repair** — does an independent
+re-run confirm the asymmetric-grid extrapolation case is now correctly flagged
+(`n_outside_grid>0`/`domain_valid=False`), with leg 55's own banked margins bit-identical?
+**Territory.** test_target_norm_postrepair.py, experiments/p2_route_tnrv_v1_postrepair.py,
+               writeup/data/p2_route_tnrv_v1_postrepair.json,
+               writeup/novelty/leg_230.md, experiments/journal/leg_230.md.
+**Difficulty.** standard
+**Independence.** Reads solver/target_norm.py; edits nothing. **NOT dispatchable until leg
+220 lands.**
+```
+
+```
+### 231 — ROUTE-PCRV: POST-REPAIR VERIFICATION, LEG 217's port_certification.py REPAIR
+(RESERVE — NOT dispatchable until leg 217 lands)
+**Thesis/Gate/pattern identical to 228** — does an independent re-run confirm all four of
+leg 200's named mechanisms now reject/raise correctly, with leg 195's own 114/114 clean PORT
+reproduction bit-identical?
+**Territory.** test_port_certification_postrepair.py, experiments/p2_route_pcrv_v1_postrepair.py,
+               writeup/data/p2_route_pcrv_v1_postrepair.json,
+               writeup/novelty/leg_231.md, experiments/journal/leg_231.md.
+**Difficulty.** standard
+**Independence.** Reads solver/port_certification.py; edits nothing. **NOT dispatchable until
+leg 217 lands.**
+```
+
+```
+### 232 — ROUTE-ICRV: POST-REPAIR VERIFICATION, LEG 219's interval_certificate.py REPAIR
+(RESERVE — NOT dispatchable until leg 219 lands)
+**Thesis/Gate/pattern identical to 228** — does an independent re-run confirm the subnormal-
+band enclosure escape is closed, with every live operator (140-298 decades clear, per leg
+69's own scoping) bit-identical?
+**Territory.** test_interval_certificate_postrepair2.py,
+               experiments/p2_route_icrv_v1_postrepair.py,
+               writeup/data/p2_route_icrv_v1_postrepair.json,
+               writeup/novelty/leg_232.md, experiments/journal/leg_232.md.
+**Difficulty.** standard
+**Independence.** Reads solver/interval_certificate.py; edits nothing. **NOT dispatchable
+until leg 219 lands** (now confirmed live in slot F per this update's reconciliation).
+```
+
+```
+### 233 — ROUTE-BVRRV: POST-REPAIR VERIFICATION, LEG 221's boussinesq_rescaled.py REPAIR AND
+ITS OWN ZERO-CONTAMINATION RE-CONFIRMATION (RESERVE — NOT dispatchable until leg 221 lands)
+**Thesis.** Leg 221 both repairs leg 205's two mechanisms AND performs the zero-contamination
+re-confirmation leg 205 itself skipped. Both halves deserve independent re-verification,
+given leg 205 was flagged as this cycle's least-certain escalation.
+**Gate.** Does an independent re-run confirm (a) both named mechanisms now reject correctly,
+and (b) the zero-contamination re-confirmation itself reproduces (no banked
+`boussinesq_rescaled.py`-dependent value actually moved)?
+  yes -> Bank as closing leg 205's finding on fully independently-confirmed footing.
+  no  -> Escalate immediately — this would upgrade leg 205 from "uncertain" to "confirmed
+         contaminated," the most serious possible outcome in this cycle's backlog.
+**Territory.** test_boussinesq_rescaled_postrepair.py,
+               experiments/p2_route_bvrrv_v1_postrepair.py,
+               writeup/data/p2_route_bvrrv_v1_postrepair.json,
+               writeup/novelty/leg_233.md, experiments/journal/leg_233.md.
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq_rescaled.py; edits nothing. **NOT dispatchable
+until leg 221 lands.**
+```
+
+```
+### 234 — ROUTE-RSRV: POST-REPAIR VERIFICATION, LEG 225's rescaled_spectrum.py REPAIR (leg
+203's finding) (RESERVE — NOT dispatchable until leg 225 lands)
+**Thesis/Gate/pattern identical to 228, at the claim-adjacent stakes leg 225 itself
+carries** — does an independent re-run confirm the `K_fine==K_coarse` fix rejects false
+convergence, AND that Route-E's/Route-G's own banked rows genuinely keep their independent
+residuals and `converged=False` flags unchanged?
+**Territory.** test_rescaled_spectrum_postrepair.py,
+               experiments/p2_route_rsrv_v1_postrepair.py,
+               writeup/data/p2_route_rsrv_v1_postrepair.json,
+               writeup/novelty/leg_234.md, experiments/journal/leg_234.md.
+**Difficulty.** standard
+**Independence.** Reads solver/rescaled_spectrum.py; edits nothing. **NOT dispatchable until
+leg 225 lands.**
+```
+
+```
+### 235 — ROUTE-CDAP: DOES THE "CALLER'S OWN DIAGNOSTIC ALREADY CONTRADICTS THE VERDICT"
+PATTERN (LEG 202/226'S FINDING) RECUR IN ANY OTHER BANKED HEADLINE VERDICT? (RESERVE)
+**Thesis.** Leg 202's finding is a genuinely new DEFECT SHAPE for this repository's audit
+family: not "a guard fails to validate adversarial input" (every other item this cycle), but
+"a caller's own already-computed diagnostic contradicts a verdict the caller then trusts
+anyway." This is worth checking for recurrence directly, before assuming it is a one-off:
+does any OTHER banked headline verdict (the same class as Route-D v11's
+`a_max_machine`/`GA_boundary`) have its own caller-side diagnostic that a fresh read would
+show already contradicts the trusted verdict, the same way leg 202 found for
+`weighted_defect`?
+**Gate.** Does a systematic check of every other banked headline verdict's own caller-side
+diagnostics find a SECOND instance of "the rejecting signal already existed in the caller's
+own data and was never used"?
+  yes -> Name the headline, the diagnostic, and the magnitude precisely. This would be the
+         second instance of a materially new defect shape — escalate immediately at the same
+         priority as leg 202/226, do not repair under this leg's own authority.
+  no  -> Bank the census as confirming leg 202's finding is (so far) a singular instance, not
+         a recurring pattern — still worth having checked rather than assumed.
+**Territory.** experiments/p2_route_cdap_v1_census.py, writeup/data/p2_route_cdap_v1_census.json,
+               writeup/novelty/leg_235.md, experiments/journal/leg_235.md.
+               Reads every banked headline's own report/JSON read-only; patches nothing.
+**Difficulty.** standard
+**Independence.** Read-only census, no solver module edited. Disjoint from every other
+live/reserve leg, including 224 (GCC, a function-signature census for a DIFFERENT defect
+shape — the guard-class family, not the ignored-diagnostic shape). Reserve — promote with
+elevated priority given what leg 202 already found once; not blocked on anything.
+```
+
+**Reserve queue: 11 undispatched legs (216, 225, 227, 228, 229, 230, 231, 232, 233, 234,
+235).** Above the §3a watermark of 3 again. **Promotion order: 235 (CDAP) first among the
+immediately-dispatchable** (elevated priority, directly follows from leg 202's finding, no
+block); then 216 (CGF), 225 (RSR — already ranked high from the prior update), 227 (EGMT,
+lowest urgency); 228-234 stay correctly blocked until their respective source repairs land,
+with **229 (PNRV) to be promoted the INSTANT leg 226 lands, ahead of every other blocked
+item**, given the stakes.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
