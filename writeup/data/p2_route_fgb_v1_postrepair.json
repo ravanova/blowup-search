@@ -1,0 +1,1384 @@
+{
+ "leg": 134,
+ "route": "FGB",
+ "title": "post-repair regression check of fractional_gclm.py's domain guard, and the banked s_c line re-run three ways",
+ "generated": "2026-08-06T11:44:05Z",
+ "repair_commit": "8d4fdec",
+ "not_a_physics_measurement": "s_c = alpha/2 is validated against XU eq (6.3) and PRE-EMPTED (Route-J). Nothing here re-measures or contests it. The banked s_c is touched only to ask whether the bits moved.",
+ "environment": {
+  "python": "3.12.3",
+  "numpy": "2.5.1",
+  "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64"
+ },
+ "sources": {
+  "pre_repair_ref": "8d4fdec^:solver/fractional_gclm.py",
+  "pre_repair_source_lines": 337,
+  "post_repair_source_lines": 373,
+  "diff_is_additive_only": true,
+  "banked_fga_json": "writeup/data/p2_route_fga_v1_adversarial.json",
+  "banked_f_json": "writeup/data/p2_route_f_v1_viscosity.json"
+ },
+ "B1_leg91_battery_rerun": {
+  "post": {
+   "A1": {
+    "rows": [
+     {
+      "fn": "critical_s",
+      "case": "alpha = -1 (negative decay exponent)",
+      "arg": "-1.0",
+      "returned": -0.5,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "critical_s",
+      "case": "alpha = 0 (degenerate)",
+      "arg": "0.0",
+      "returned": 0.0,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "critical_s",
+      "case": "alpha = NaN",
+      "arg": "nan",
+      "returned": "nan",
+      "exception": null,
+      "warnings": [],
+      "finite": false
+     },
+     {
+      "fn": "critical_s",
+      "case": "alpha = +inf",
+      "arg": "inf",
+      "returned": "inf",
+      "exception": null,
+      "warnings": [],
+      "finite": false
+     },
+     {
+      "fn": "critical_s",
+      "case": "alpha = '0.8' (a STRING)",
+      "arg": "0.8",
+      "returned": 0.4,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "relevance_exponent",
+      "case": "s = -0.5 (invalid: sigma = 2s < 0)",
+      "arg": "s=-0.5, alpha=1.0",
+      "returned": 2.0,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "relevance_exponent",
+      "case": "s = -2.0 (invalid)",
+      "arg": "s=-2.0, alpha=1.0",
+      "returned": 5.0,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "relevance_exponent",
+      "case": "s = NaN",
+      "arg": "s=nan, alpha=1.0",
+      "returned": "nan",
+      "exception": null,
+      "warnings": [],
+      "finite": false
+     },
+     {
+      "fn": "relevance_exponent",
+      "case": "s = 1e6 (far above any admissible s)",
+      "arg": "s=1000000.0, alpha=1.0",
+      "returned": -1999999.0,
+      "exception": null,
+      "warnings": [],
+      "finite": true
+     },
+     {
+      "fn": "relevance_exponent",
+      "case": "alpha = 0 with valid s",
+      "arg": "s=0.35, alpha=0.0",
+      "returned": "-inf",
+      "exception": null,
+      "warnings": [],
+      "finite": false
+     }
+    ],
+    "n_cases": 10,
+    "n_silent_finite": 6
+   },
+   "A2": {
+    "rows": [
+     {
+      "s": 1.0,
+      "exception": null,
+      "warnings": [],
+      "visc_all_finite": true,
+      "visc_k0_raw_before_mask": 0.0,
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": false,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": 65536.0,
+      "monotone_increasing_in_k": true,
+      "ratio_kmax_over_k1": 65536.0
+     },
+     {
+      "s": 0.35,
+      "exception": null,
+      "warnings": [],
+      "visc_all_finite": true,
+      "visc_k0_raw_before_mask": 0.0,
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": false,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": 48.50293012833273,
+      "monotone_increasing_in_k": true,
+      "ratio_kmax_over_k1": 48.50293012833273
+     },
+     {
+      "s": 0.0,
+      "exception": null,
+      "warnings": [],
+      "visc_all_finite": true,
+      "visc_k0_raw_before_mask": 1.0,
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": false,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": 1.0,
+      "monotone_increasing_in_k": true,
+      "ratio_kmax_over_k1": 1.0
+     },
+     {
+      "s": -0.5,
+      "exception": "ValueError: s = -0.5 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "warnings": []
+     },
+     {
+      "s": -2.0,
+      "exception": "ValueError: s = -2.0 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "warnings": []
+     },
+     {
+      "s": "nan",
+      "exception": null,
+      "warnings": [],
+      "visc_all_finite": false,
+      "visc_k0_raw_before_mask": "nan",
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": true,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": "nan",
+      "monotone_increasing_in_k": false,
+      "ratio_kmax_over_k1": "nan"
+     },
+     {
+      "s": 60.0,
+      "exception": null,
+      "warnings": [],
+      "visc_all_finite": true,
+      "visc_k0_raw_before_mask": 0.0,
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": false,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": 9.7453140114e+288,
+      "monotone_increasing_in_k": true,
+      "ratio_kmax_over_k1": 9.7453140114e+288
+     },
+     {
+      "s": 200.0,
+      "exception": null,
+      "warnings": [
+       "overflow encountered in power"
+      ],
+      "visc_all_finite": false,
+      "visc_k0_raw_before_mask": 0.0,
+      "visc_k0_after_mask": 0.0,
+      "mask_hid_a_nonfinite_k0": false,
+      "visc_at_k1": 1.0,
+      "visc_at_kmax": "inf",
+      "monotone_increasing_in_k": false,
+      "ratio_kmax_over_k1": "inf"
+     }
+    ],
+    "k_max": 256.0,
+    "s_overflow_wall": 64.0,
+    "n": 512
+   },
+   "A3": {
+    "rows": [
+     {
+      "s": 0.35,
+      "nu": 0.001,
+      "outcome": "under_resolved",
+      "steps": 435,
+      "T_est": 3.343539853057014,
+      "p": 0.4948162270066669,
+      "n_fit_points": 29,
+      "fit_rms": 0.0627920191525778,
+      "max_tail": 0.01024862703896233,
+      "p_finite": true,
+      "exception": null,
+      "warnings": [],
+      "seconds": 0.14,
+      "case": "CONTROL: valid s",
+      "invalid_input": false
+     },
+     {
+      "s": 0.0,
+      "nu": 0.001,
+      "outcome": "under_resolved",
+      "steps": 440,
+      "T_est": 3.343903074838112,
+      "p": 1.2310897607746367,
+      "n_fit_points": 28,
+      "fit_rms": 0.07608618991297002,
+      "max_tail": 0.014883315210885675,
+      "p_finite": true,
+      "exception": null,
+      "warnings": [],
+      "seconds": 0.15,
+      "case": "CONTROL: s = 0, literature's admissible floor",
+      "invalid_input": false
+     },
+     {
+      "s": -0.5,
+      "nu": 0.001,
+      "outcome": "EXCEPTION",
+      "steps": 0,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": "ValueError: s = -0.5 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "warnings": [],
+      "seconds": 0.0,
+      "case": "negative s (invalid, sigma = 2s < 0)",
+      "invalid_input": true
+     },
+     {
+      "s": -2.0,
+      "nu": 0.001,
+      "outcome": "EXCEPTION",
+      "steps": 0,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": "ValueError: s = -2.0 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "warnings": [],
+      "seconds": 0.0,
+      "case": "strongly negative s (invalid)",
+      "invalid_input": true
+     },
+     {
+      "s": 60.0,
+      "nu": 0.001,
+      "outcome": "max_steps",
+      "steps": 20000,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 2.3533366674243727e-38,
+      "p_finite": false,
+      "exception": null,
+      "warnings": [],
+      "seconds": 7.01,
+      "case": "s just under the float64 wall",
+      "invalid_input": true
+     },
+     {
+      "s": 200.0,
+      "nu": 0.001,
+      "outcome": "max_steps",
+      "steps": 20000,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 2.3533366674243727e-38,
+      "p_finite": false,
+      "exception": null,
+      "warnings": [
+       "invalid value encountered in irfft",
+       "invalid value encountered in multiply",
+       "overflow encountered in power"
+      ],
+      "seconds": 7.46,
+      "case": "s over the float64 wall (visc = inf)",
+      "invalid_input": true
+     },
+     {
+      "s": "nan",
+      "nu": 0.001,
+      "outcome": "diverged",
+      "steps": 1,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": null,
+      "warnings": [],
+      "seconds": 0.0,
+      "case": "s = NaN",
+      "invalid_input": true
+     }
+    ],
+    "n_silent_finite_p": 0,
+    "n_refused": 5,
+    "silent_s_values": [],
+    "refused_s_values": [
+     -0.5,
+     -2.0,
+     60.0,
+     200.0,
+     "nan"
+    ]
+   },
+   "A4": {
+    "clean_s_values": [
+     0.15,
+     0.25,
+     0.35,
+     0.45,
+     0.55,
+     0.65,
+     0.75
+    ],
+    "clean_p_values": [
+     0.902590997774264,
+     0.6857919437754333,
+     0.4948162270066669,
+     0.3037478943916543,
+     0.10588113426776592,
+     -0.0957412347474913,
+     -0.28952130579895774
+    ],
+    "clean_slope": -1.9744065573230045,
+    "clean_zero": 0.602491799107393,
+    "contaminations": [
+     {
+      "s_injected": -0.5,
+      "p_injected": "nan",
+      "contaminated_zero": "nan",
+      "shift": "nan",
+      "propagated_or_flagged": true
+     },
+     {
+      "s_injected": -2.0,
+      "p_injected": "nan",
+      "contaminated_zero": "nan",
+      "shift": "nan",
+      "propagated_or_flagged": true
+     }
+    ]
+   },
+   "A5": {
+    "rows": [
+     {
+      "s": 0.35,
+      "nu": "nan",
+      "outcome": "diverged",
+      "steps": 1,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": null,
+      "warnings": [],
+      "seconds": 0.0,
+      "case": "nu = NaN (the gate's NaN poisoning)",
+      "p_vs_control_percent": "nan"
+     },
+     {
+      "s": 0.35,
+      "nu": "inf",
+      "outcome": "diverged",
+      "steps": 1,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": null,
+      "warnings": [
+       "invalid value encountered in multiply"
+      ],
+      "seconds": 0.0,
+      "case": "nu = +inf",
+      "p_vs_control_percent": "nan"
+     },
+     {
+      "s": 0.35,
+      "nu": -0.001,
+      "outcome": "EXCEPTION",
+      "steps": 0,
+      "T_est": "nan",
+      "p": "nan",
+      "n_fit_points": 0,
+      "fit_rms": "nan",
+      "max_tail": 0.0,
+      "p_finite": false,
+      "exception": "ValueError: nu = -0.001 is a negative dissipation strength -- anti-dissipation, an energy source, not a viscosity. nu >= 0 is required (nu = 0, the inviscid case, IS admissible).",
+      "warnings": [],
+      "seconds": 0.0,
+      "case": "nu = -1e-3 (anti-dissipation)",
+      "p_vs_control_percent": "nan"
+     }
+    ],
+    "control_p": 0.4948162270066669,
+    "n_silent_finite_p": 0
+   }
+  },
+  "diff": {
+   "A1": {
+    "pre_n_silent_finite": 6,
+    "post_n_silent_finite": 6,
+    "n_cases": 10,
+    "in_gate_scope": false,
+    "note": "the PURE CLOSED FORMS critical_s / relevance_exponent, which the repair was explicitly scoped NOT to touch (leg 91 gates 2/3/5 are standing gap pins). They are not a construction path, so they are outside the gate's clause (a), which says 'at construction'."
+   },
+   "A2": {
+    "rows": [
+     {
+      "s": 1.0,
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": false,
+      "pre_monotone_increasing_in_k": true,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": true
+     },
+     {
+      "s": 0.35,
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": false,
+      "pre_monotone_increasing_in_k": true,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": true
+     },
+     {
+      "s": 0.0,
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": false,
+      "pre_monotone_increasing_in_k": true,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": true
+     },
+     {
+      "s": -0.5,
+      "negative_s": true,
+      "pre_raised": false,
+      "post_raised": true,
+      "pre_mask_hid_a_nonfinite_k0": true,
+      "pre_monotone_increasing_in_k": false,
+      "post_exception": "ValueError: s = -0.5 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "post_monotone_increasing_in_k": null
+     },
+     {
+      "s": -2.0,
+      "negative_s": true,
+      "pre_raised": false,
+      "post_raised": true,
+      "pre_mask_hid_a_nonfinite_k0": true,
+      "pre_monotone_increasing_in_k": false,
+      "post_exception": "ValueError: s = -2.0 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|.",
+      "post_monotone_increasing_in_k": null
+     },
+     {
+      "s": "nan",
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": true,
+      "pre_monotone_increasing_in_k": false,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": false
+     },
+     {
+      "s": 60.0,
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": false,
+      "pre_monotone_increasing_in_k": true,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": true
+     },
+     {
+      "s": 200.0,
+      "negative_s": false,
+      "pre_raised": false,
+      "post_raised": false,
+      "pre_mask_hid_a_nonfinite_k0": false,
+      "pre_monotone_increasing_in_k": false,
+      "post_exception": null,
+      "post_monotone_increasing_in_k": false
+     }
+    ],
+    "n_negative_s_cases": 2,
+    "n_negative_s_built_an_operator_pre": 2,
+    "n_negative_s_with_inverted_multiplier_pre": 2,
+    "n_negative_s_rejected_at_construction_post": 2,
+    "n_non_negative_s_cases": 6,
+    "n_non_negative_s_still_construct_post": 6,
+    "in_gate_scope": true
+   },
+   "A3": {
+    "pre_n_silent_finite_p": 2,
+    "post_n_silent_finite_p": 0,
+    "pre_silent_s_values": [
+     -0.5,
+     -2.0
+    ],
+    "post_silent_s_values": [],
+    "pre_n_refused": 3,
+    "post_n_refused": 5,
+    "rows": [
+     {
+      "case": "CONTROL: valid s",
+      "s": 0.35,
+      "invalid_input": false,
+      "outcome": "under_resolved",
+      "p": 0.4948162270066669,
+      "p_finite": true,
+      "exception": null
+     },
+     {
+      "case": "CONTROL: s = 0, literature's admissible floor",
+      "s": 0.0,
+      "invalid_input": false,
+      "outcome": "under_resolved",
+      "p": 1.2310897607746367,
+      "p_finite": true,
+      "exception": null
+     },
+     {
+      "case": "negative s (invalid, sigma = 2s < 0)",
+      "s": -0.5,
+      "invalid_input": true,
+      "outcome": "EXCEPTION",
+      "p": "nan",
+      "p_finite": false,
+      "exception": "ValueError: s = -0.5 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|."
+     },
+     {
+      "case": "strongly negative s (invalid)",
+      "s": -2.0,
+      "invalid_input": true,
+      "outcome": "EXCEPTION",
+      "p": "nan",
+      "p_finite": false,
+      "exception": "ValueError: s = -2.0 is outside the admissible dissipation range: the operator is (-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required (s = 0, the marginal case, IS admissible). For s < 0 the symbol is singular at k = 0 and |k|^{2s} is not a dissipation at all -- it decreases in |k|."
+     },
+     {
+      "case": "s just under the float64 wall",
+      "s": 60.0,
+      "invalid_input": true,
+      "outcome": "max_steps",
+      "p": "nan",
+      "p_finite": false,
+      "exception": null
+     },
+     {
+      "case": "s over the float64 wall (visc = inf)",
+      "s": 200.0,
+      "invalid_input": true,
+      "outcome": "max_steps",
+      "p": "nan",
+      "p_finite": false,
+      "exception": null
+     },
+     {
+      "case": "s = NaN",
+      "s": "nan",
+      "invalid_input": true,
+      "outcome": "diverged",
+      "p": "nan",
+      "p_finite": false,
+      "exception": null
+     }
+    ],
+    "in_gate_scope": true
+   },
+   "A4": {
+    "contaminations": [
+     {
+      "s_injected": -0.5,
+      "pre_p_injected": 2.1864010046627684,
+      "pre_shift": -0.0004169805342125743,
+      "pre_shift_percent": -0.06920932945981034,
+      "post_p_injected": "nan",
+      "post_shift": "nan",
+      "post_propagated_or_flagged": true
+     },
+     {
+      "s_injected": -2.0,
+      "pre_p_injected": 3.248145808015028,
+      "pre_shift": 0.08030830052370952,
+      "pre_shift_percent": 13.3293599419425,
+      "post_p_injected": "nan",
+      "post_shift": "nan",
+      "post_propagated_or_flagged": true
+     }
+    ],
+    "pre_clean_zero": 0.602491799107393,
+    "post_clean_zero": 0.602491799107393,
+    "n_injections": 2,
+    "n_reaching_the_fit_pre": 2,
+    "n_reaching_the_fit_post": 0,
+    "in_gate_scope": true,
+    "note": "clean_zero at n=512 is an AUDIT ARTEFACT, not a physics number; only the shift is claimed, and clean vs contaminated share every setting so resolution bias cancels."
+   },
+   "A5": {
+    "rows": [
+     {
+      "case": "nu = NaN (the gate's NaN poisoning)",
+      "nu": "nan",
+      "pre_p": "nan",
+      "pre_p_finite": false,
+      "pre_p_vs_control_percent": "nan",
+      "post_p": "nan",
+      "post_p_finite": false,
+      "post_exception": null,
+      "post_outcome": "diverged"
+     },
+     {
+      "case": "nu = +inf",
+      "nu": "inf",
+      "pre_p": "nan",
+      "pre_p_finite": false,
+      "pre_p_vs_control_percent": "nan",
+      "post_p": "nan",
+      "post_p_finite": false,
+      "post_exception": null,
+      "post_outcome": "diverged"
+     },
+     {
+      "case": "nu = -1e-3 (anti-dissipation)",
+      "nu": -0.001,
+      "pre_p": 0.5264038752129894,
+      "pre_p_finite": true,
+      "pre_p_vs_control_percent": 6.383713080189039,
+      "post_p": "nan",
+      "post_p_finite": false,
+      "post_exception": "ValueError: nu = -0.001 is a negative dissipation strength -- anti-dissipation, an energy source, not a viscosity. nu >= 0 is required (nu = 0, the inviscid case, IS admissible).",
+      "post_outcome": "EXCEPTION"
+     }
+    ],
+    "pre_n_silent_finite_p": 1,
+    "post_n_silent_finite_p": 0,
+    "n_negative_nu_silent_pre": 1,
+    "n_negative_nu_silent_post": 0,
+    "pre_control_p": 0.4948162270066669,
+    "post_control_p": 0.4948162270066669,
+    "in_gate_scope": true
+   },
+   "clause_a": {
+    "per_battery_pre_and_closed": {
+     "A2_negative_s_construction": [
+      2,
+      2
+     ],
+     "A3_pipeline_invalid_s_silent": [
+      2,
+      2
+     ],
+     "A4_injections_reaching_the_sc_fit": [
+      2,
+      2
+     ],
+     "A5_negative_nu_silent": [
+      1,
+      1
+     ]
+    },
+    "n_gate_scoped_silent_pre": 7,
+    "n_closed_post": 7,
+    "n_still_silent_post": 0
+   }
+  }
+ },
+ "B2_sc_line_bitwise": {
+  "post": {
+   "rows": [
+    {
+     "s": 0.15,
+     "T_est": 3.3386780699873086,
+     "p": 0.7330916148391896,
+     "fit_rms": 0.04115803360941145,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.015215326039697805
+    },
+    {
+     "s": 0.25,
+     "T_est": 3.3383739644853097,
+     "p": 0.5227460768873464,
+     "fit_rms": 0.03248799518776396,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.015622704994350875
+    },
+    {
+     "s": 0.35,
+     "T_est": 3.3379783111657626,
+     "p": 0.3183244325699477,
+     "fit_rms": 0.019509724646426762,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010164302607841487
+    },
+    {
+     "s": 0.45,
+     "T_est": 3.3374677050305115,
+     "p": 0.10917284508728804,
+     "fit_rms": 0.016253405252528063,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010597423691394478
+    },
+    {
+     "s": 0.55,
+     "T_est": 3.336828532374421,
+     "p": -0.10024320762054904,
+     "fit_rms": 0.024529285521164516,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010972989694892096
+    },
+    {
+     "s": 0.65,
+     "T_est": 3.3360769773990753,
+     "p": -0.3088875301763349,
+     "fit_rms": 0.0394805122791618,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010654472769108653
+    },
+    {
+     "s": 0.75,
+     "T_est": 3.335336640780013,
+     "p": -0.5027100741440743,
+     "fit_rms": 0.06477282761131922,
+     "n_points": 39,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.012141720856409568
+    }
+   ],
+   "slope": -2.067585686167017,
+   "s_zero": 0.5033053850201379
+  },
+  "pre": {
+   "rows": [
+    {
+     "s": 0.15,
+     "T_est": 3.3386780699873086,
+     "p": 0.7330916148391896,
+     "fit_rms": 0.04115803360941145,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.015215326039697805
+    },
+    {
+     "s": 0.25,
+     "T_est": 3.3383739644853097,
+     "p": 0.5227460768873464,
+     "fit_rms": 0.03248799518776396,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.015622704994350875
+    },
+    {
+     "s": 0.35,
+     "T_est": 3.3379783111657626,
+     "p": 0.3183244325699477,
+     "fit_rms": 0.019509724646426762,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010164302607841487
+    },
+    {
+     "s": 0.45,
+     "T_est": 3.3374677050305115,
+     "p": 0.10917284508728804,
+     "fit_rms": 0.016253405252528063,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010597423691394478
+    },
+    {
+     "s": 0.55,
+     "T_est": 3.336828532374421,
+     "p": -0.10024320762054904,
+     "fit_rms": 0.024529285521164516,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010972989694892096
+    },
+    {
+     "s": 0.65,
+     "T_est": 3.3360769773990753,
+     "p": -0.3088875301763349,
+     "fit_rms": 0.0394805122791618,
+     "n_points": 38,
+     "outcome": "under_resolved",
+     "steps": 575,
+     "max_tail": 0.010654472769108653
+    },
+    {
+     "s": 0.75,
+     "T_est": 3.335336640780013,
+     "p": -0.5027100741440743,
+     "fit_rms": 0.06477282761131922,
+     "n_points": 39,
+     "outcome": "under_resolved",
+     "steps": 580,
+     "max_tail": 0.012141720856409568
+    }
+   ],
+   "slope": -2.067585686167017,
+   "s_zero": 0.5033053850201379
+  },
+  "significance": {
+   "s_zero_abs_shift_banked_to_post": 7.66053886991358e-15,
+   "s_zero_rel_shift_banked_to_post": 1.5220458786879372e-14,
+   "route_f_window_systematic_halfspread_F7": 0.0452249463667026,
+   "route_f_resolution_spread_F5": 0.07643782496673573,
+   "shift_over_window_systematic": 1.6938746168538835e-13,
+   "shift_over_resolution_spread": 1.0021921572529436e-13,
+   "banked_s_zero_vs_predicted_s_c": 0.003305385020145546
+  },
+  "banked": {
+   "rows": [
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.15,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.3386780699873144,
+     "p": 0.7330916148392316,
+     "fit_rms": 0.041158033609412635,
+     "n_points": 38,
+     "amp_final": 994.6752323387389,
+     "max_tail": 0.015215326039696619,
+     "steps": 580,
+     "p_pred": 0.7
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.25,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.338373964485315,
+     "p": 0.5227460768873793,
+     "fit_rms": 0.032487995187760195,
+     "n_points": 38,
+     "amp_final": 1000.1027346766862,
+     "max_tail": 0.015622704994351384,
+     "steps": 580,
+     "p_pred": 0.5
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.35,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.3379783111657684,
+     "p": 0.31832443256996273,
+     "fit_rms": 0.01950972464642146,
+     "n_points": 38,
+     "amp_final": 916.2595190330562,
+     "max_tail": 0.010164302607842434,
+     "steps": 575,
+     "p_pred": 0.30000000000000004
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.45,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.337467705030517,
+     "p": 0.10917284508728227,
+     "fit_rms": 0.01625340525253233,
+     "n_points": 38,
+     "amp_final": 919.7771396811365,
+     "max_tail": 0.010597423691394702,
+     "steps": 575,
+     "p_pred": 0.09999999999999998
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.55,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.3368285323744264,
+     "p": -0.10024320762055065,
+     "fit_rms": 0.024529285521163707,
+     "n_points": 38,
+     "amp_final": 922.400581150265,
+     "max_tail": 0.010972989694892289,
+     "steps": 575,
+     "p_pred": -0.10000000000000009
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.65,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.3360769773990806,
+     "p": -0.3088875301762981,
+     "fit_rms": 0.03948051227915433,
+     "n_points": 38,
+     "amp_final": 919.5016906758294,
+     "max_tail": 0.010654472769108808,
+     "steps": 575,
+     "p_pred": -0.30000000000000004
+    },
+    {
+     "a": 0.0,
+     "nu": 0.001,
+     "s": 0.75,
+     "n": 8192,
+     "outcome": "under_resolved",
+     "T_est": 3.335336640780017,
+     "p": -0.5027100741440663,
+     "fit_rms": 0.0647728276113085,
+     "n_points": 39,
+     "amp_final": 959.8782957937285,
+     "max_tail": 0.012141720856409048,
+     "steps": 580,
+     "p_pred": -0.5
+    }
+   ],
+   "slope": -2.0675856861670567,
+   "s_zero": 0.5033053850201455,
+   "generated": "2026-08-02T01:15:27Z"
+  },
+  "comparisons": [
+   {
+    "quantity": "p(s=0.15)",
+    "banked": 0.7330916148392316,
+    "post": 0.7330916148391896,
+    "pre": 0.7330916148391896,
+    "ulps_banked_to_post": -378,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 5.724581959655103e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.15)",
+    "banked": 3.3386780699873144,
+    "post": 3.3386780699873086,
+    "pre": 3.3386780699873086,
+    "ulps_banked_to_post": -13,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.7291753223972115e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.25)",
+    "banked": 0.5227460768873793,
+    "post": 0.5227460768873464,
+    "pre": 0.5227460768873464,
+    "ulps_banked_to_post": -296,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 6.286532406819874e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.25)",
+    "banked": 3.338373964485315,
+    "post": 3.3383739644853097,
+    "pre": 3.3383739644853097,
+    "ulps_banked_to_post": -12,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5963072366646458e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.35)",
+    "banked": 0.31832443256996273,
+    "post": 0.3183244325699477,
+    "pre": 0.3183244325699477,
+    "ulps_banked_to_post": -271,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 4.725845849223195e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.35)",
+    "banked": 3.3379783111657684,
+    "post": 3.3379783111657626,
+    "pre": 3.3379783111657626,
+    "ulps_banked_to_post": -13,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.7295378189664071e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.45)",
+    "banked": 0.10917284508728227,
+    "post": 0.10917284508728804,
+    "pre": 0.10917284508728804,
+    "ulps_banked_to_post": 416,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 5.2880913046053236e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.45)",
+    "banked": 3.337467705030517,
+    "post": 3.3374677050305115,
+    "pre": 3.3374677050305115,
+    "ulps_banked_to_post": -12,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5967406995933835e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.55)",
+    "banked": -0.10024320762055065,
+    "post": -0.10024320762054904,
+    "pre": -0.10024320762054904,
+    "ulps_banked_to_post": 116,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.605917671549499e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.55)",
+    "banked": 3.3368285323744264,
+    "post": 3.336828532374421,
+    "pre": 3.336828532374421,
+    "ulps_banked_to_post": -12,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5970465567820717e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.65)",
+    "banked": -0.3088875301762981,
+    "post": -0.3088875301763349,
+    "pre": -0.3088875301763349,
+    "ulps_banked_to_post": -663,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.1914981885257087e-13,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.65)",
+    "banked": 3.3360769773990806,
+    "post": 3.3360769773990753,
+    "pre": 3.3360769773990753,
+    "ulps_banked_to_post": -12,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5974063411316954e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "p(s=0.75)",
+    "banked": -0.5027100741440663,
+    "post": -0.5027100741440743,
+    "pre": -0.5027100741440743,
+    "ulps_banked_to_post": -72,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5901025637712454e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "T_est(s=0.75)",
+    "banked": 3.335336640780017,
+    "post": 3.335336640780013,
+    "pre": 3.335336640780013,
+    "ulps_banked_to_post": -9,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.1983206851695345e-15,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "slope",
+    "banked": -2.0675856861670567,
+    "post": -2.067585686167017,
+    "pre": -2.067585686167017,
+    "ulps_banked_to_post": 89,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.9115986312483167e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   },
+   {
+    "quantity": "s_zero (THE BANKED s_c MEASUREMENT)",
+    "banked": 0.5033053850201455,
+    "post": 0.5033053850201379,
+    "pre": 0.5033053850201379,
+    "ulps_banked_to_post": -69,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 1.5220458786879372e-14,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": false
+   }
+  ],
+  "n_quantities": 16,
+  "n_zero_ulp_repair_arm": 16,
+  "n_zero_ulp_archive_arm": 0,
+  "worst_ulp_archive_arm": 663,
+  "worst_rel_archive_arm": 1.1914981885257087e-13
+ },
+ "B3_known_answer_bitwise": {
+  "post": {
+   "T_exact": 3.333333333333334,
+   "solver_vs_exact_at_2.5": 1.8638939280890554e-09,
+   "T_est": 3.333428324580673,
+   "T_rel_err": 2.8497374201741362e-05,
+   "max_tail": 0.014784515203792828
+  },
+  "pre": {
+   "T_exact": 3.333333333333334,
+   "solver_vs_exact_at_2.5": 1.8638939280890554e-09,
+   "T_est": 3.333428324580673,
+   "T_rel_err": 2.8497374201741362e-05,
+   "max_tail": 0.014784515203792828
+  },
+  "banked": {
+   "T_exact": 3.333333333333334,
+   "solver_vs_exact_at_2.5": 1.8638939280890554e-09,
+   "T_est": 3.333428324580673,
+   "T_rel_err": 2.8497374201741362e-05,
+   "max_tail": 0.014784515203792828
+  },
+  "comparisons": [
+   {
+    "quantity": "T_exact",
+    "banked": 3.333333333333334,
+    "post": 3.333333333333334,
+    "pre": 3.333333333333334,
+    "ulps_banked_to_post": 0,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 0.0,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": true
+   },
+   {
+    "quantity": "solver_vs_exact_at_2.5",
+    "banked": 1.8638939280890554e-09,
+    "post": 1.8638939280890554e-09,
+    "pre": 1.8638939280890554e-09,
+    "ulps_banked_to_post": 0,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 0.0,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": true
+   },
+   {
+    "quantity": "T_est",
+    "banked": 3.333428324580673,
+    "post": 3.333428324580673,
+    "pre": 3.333428324580673,
+    "ulps_banked_to_post": 0,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 0.0,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": true
+   },
+   {
+    "quantity": "T_rel_err",
+    "banked": 2.8497374201741362e-05,
+    "post": 2.8497374201741362e-05,
+    "pre": 2.8497374201741362e-05,
+    "ulps_banked_to_post": 0,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 0.0,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": true
+   },
+   {
+    "quantity": "max_tail",
+    "banked": 0.014784515203792828,
+    "post": 0.014784515203792828,
+    "pre": 0.014784515203792828,
+    "ulps_banked_to_post": 0,
+    "ulps_pre_to_post": 0,
+    "rel_banked_to_post": 0.0,
+    "repair_is_bitwise_noop": true,
+    "reproduces_banked_bitwise": true
+   }
+  ],
+  "n_quantities": 5,
+  "n_zero_ulp_repair_arm": 5,
+  "n_zero_ulp_archive_arm": 5
+ },
+ "B4_ulp_sensitivity": {
+  "nudged": {
+   "rows": [
+    {
+     "s": 0.15,
+     "p": 0.7330916148391896,
+     "T_est": 3.3386780699873086
+    },
+    {
+     "s": 0.25,
+     "p": 0.5227460768873462,
+     "T_est": 3.3383739644853097
+    },
+    {
+     "s": 0.35,
+     "p": 0.3183244325699477,
+     "T_est": 3.3379783111657626
+    },
+    {
+     "s": 0.45,
+     "p": 0.10917284508728856,
+     "T_est": 3.3374677050305115
+    },
+    {
+     "s": 0.55,
+     "p": -0.10024320762054739,
+     "T_est": 3.336828532374421
+    },
+    {
+     "s": 0.65,
+     "p": -0.3088875301763246,
+     "T_est": 3.3360769773990753
+    },
+    {
+     "s": 0.75,
+     "p": -0.502710074144128,
+     "T_est": 3.3353366407800134
+    }
+   ],
+   "slope": -2.067585686167067,
+   "s_zero": 0.5033053850201337
+  },
+  "comparisons": [
+   {
+    "quantity": "p(s=0.15)",
+    "ulps_post_to_nudged": 0
+   },
+   {
+    "quantity": "p(s=0.25)",
+    "ulps_post_to_nudged": -2
+   },
+   {
+    "quantity": "p(s=0.35)",
+    "ulps_post_to_nudged": 0
+   },
+   {
+    "quantity": "p(s=0.45)",
+    "ulps_post_to_nudged": 37
+   },
+   {
+    "quantity": "p(s=0.55)",
+    "ulps_post_to_nudged": 119
+   },
+   {
+    "quantity": "p(s=0.65)",
+    "ulps_post_to_nudged": 186
+   },
+   {
+    "quantity": "p(s=0.75)",
+    "ulps_post_to_nudged": -484
+   },
+   {
+    "quantity": "slope",
+    "ulps_post_to_nudged": -112
+   },
+   {
+    "quantity": "s_zero",
+    "ulps_post_to_nudged": -38
+   }
+  ],
+  "worst_ulp_response_to_one_ulp_in_visc": 484,
+  "worst_ulp_archive_arm": 663,
+  "archive_drift_over_one_ulp_response": 1.3698347107438016,
+  "one_ulp_accounts_for_the_archive_arm": false
+ },
+ "gate": {
+  "question": "Post-repair, does solver/fractional_gclm.py (a) reject every s<0 / nu<0 case in leg 91's original battery at construction, and (b) reproduce the banked s_c measurement bit-identically on the validated line?",
+  "clause_a_all_rejected_at_construction": true,
+  "clause_a_counts": {
+   "per_battery_pre_and_closed": {
+    "A2_negative_s_construction": [
+     2,
+     2
+    ],
+    "A3_pipeline_invalid_s_silent": [
+     2,
+     2
+    ],
+    "A4_injections_reaching_the_sc_fit": [
+     2,
+     2
+    ],
+    "A5_negative_nu_silent": [
+     1,
+     1
+    ]
+   },
+   "n_gate_scoped_silent_pre": 7,
+   "n_closed_post": 7,
+   "n_still_silent_post": 0
+  },
+  "clause_b_repair_arm_bitwise": true,
+  "clause_b_archive_arm_bitwise": false,
+  "answer": "yes",
+  "answer_qualifier": "clause (b) is answered on the REPAIR ARM (PRE vs POST in one environment), which is the arm that isolates the repair and the only arm a repair can be held to. The ARCHIVE ARM (BANKED vs POST) additionally spans a compiler/library environment change since 2026-08-02 and is reported separately, in ULPs."
+ },
+ "seconds": 42.4
+}
