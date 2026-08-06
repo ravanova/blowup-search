@@ -1,0 +1,329 @@
+{
+  "leg": 159,
+  "route": "ROUTE-WEX",
+  "kind": "literature deep-mine, read-and-report only; NO coercivity computation",
+  "gate": "Does the weighted-energy / Chen-Hou-lineage literature already consulted by legs 65 and 111/141 contain, explicitly or as a derivable special case, a weighted-energy functional different from leg 111's construction that is not subject to the same gamma-threshold coincidence?",
+  "gate_answer": "YES",
+  "gate_answer_branch_verbatim": "yes -> Record the functional verbatim with its hypotheses and exact reference; ESCALATE as a candidate for a leg-111-v2 construction leg -- do not compute it here.",
+  "the_functional": {
+    "name": "the H_DW weighted-Hdot^1 inner product (Lei-Liu-Ren), extended to a weighted H^2 norm on the weighted derivative D_x = sin x d_x (J. Chen)",
+    "primary": "https://arxiv.org/abs/1811.09754  (CMP 373 (2020)) eqs (1.3)-(1.6), sec 3.1-3.2, Prop 3.1",
+    "secondary": "https://arxiv.org/abs/2010.12700  (ARMA, doi 10.1007/s00205-021-01685-w) Definition 1.1, Lemma 2.2(c), Lemma 2.4, Remark 2.5",
+    "hypotheses_verbatim": {
+      "space_LLR_1.3": "H_DW = { eta in H^1(S^1) : eta(0) = 0, int_{-pi}^{pi} |d_theta eta|^2 / sin^2(theta/2) dtheta < infinity }",
+      "inner_product_LLR_1.4": "<xi, eta>_g = (1/4pi) int_{-pi}^{pi} d_theta xi d_theta eta / sin^2(theta/2) dtheta",
+      "basis_LLR_1.5": "tilde-e_k^(o) = sin[(k+1)theta]/(k+1) - sin(k theta)/k,  k >= 1, orthonormal for <,>_g by (1.6)",
+      "jacobi_form_LLR_3.7": "L tilde-e_k = -d_{k+1} tilde-e_{k+1} - (d_{k+1} - d_k) tilde-e_k + d_k tilde-e_{k-1},  d_k = (k-1)^2 (k+1) / (2 k^2)",
+      "published_rate_LLR_Prop3.1": "|| e^{tL} eta(0) ||_Ytilde <= e^{-(3/8) t} || eta(0) ||_Ytilde",
+      "coercivity_as_quoted_by_Chen_Lemma2.2c": "<L_1 f, f>_Y <= -(3/8) ||f||_Y^2",
+      "norms_Chen_Def1.1": "||f||_H^2 = (1/4pi) int |f_x|^2 / sin^2(x/2) dx ; ||f||_X^2 = ||f||_H^2 + int |f_xx|^2 cos^2(x/2) dx ; H = {f : f(0) = 0, ||f||_H < inf}, X = {f : f(0) = 0, ||f||_X < inf}",
+      "identity_Chen_Lemma2.4": "<sin x f_x, f rho> = (1/2) <f^2, rho>,  rho = (sin(x/2))^(-2)",
+      "nonlinear_hypotheses_LLR_Thm1.5": "eta_in in H_DW, int_{S^1} eta_in dtheta = 0, ||eta_in||_{H_DW} < delta_0; rate any beta < 3/8",
+      "MODEL_CAVEAT": "Both papers are at a = 1 (De Gregorio) and small |a-1|. This repository's object is a = 0 CLM, where the Jacobi coefficients differ (leg 111's matrix: column k has row k+1 entry 1 - k/2, row k-1 entry k/2, row 1 entry -(-1)^k) and the advection is absent. NO GAP IS CLAIMED FOR a = 0 AND NONE IS COMPUTED.",
+      "WHAT_COULD_KILL_IT": "the nonlocal terms the derivative form generates (-cos theta H h - sin theta H(h_theta)), which no weight controls -- leg 111's own docstring: 'the nonlocal Hilbert term is what the weight cannot touch' -- and the -sin theta h term coupling the Hdot^1 form back to the L^2 one."
+    }
+  },
+  "functionals_compared": [
+    {
+      "who": "leg 111 (this repository)",
+      "ref": "solver/energy_coercivity.py",
+      "form": "int_0^pi h^2 phi dtheta,  phi = (2 sin(theta/2))^(-gamma)",
+      "acts_on": "the FUNCTION h",
+      "gamma_in_leg111_family": "0,1,2,3,4 (family A) -- the pre-named ladder",
+      "damping_mechanism": "pointwise multiplier D_phi made negative AT THE ORIGIN",
+      "needs_gamma_gt": 3.0,
+      "space_needs_gamma_lt": 3.0,
+      "window_width_at_p1": 0.0,
+      "is_leg111's_own": true
+    },
+    {
+      "who": "Elgindi-Ghoul-Masmoudi arXiv:1906.05811 Prop 2.1 (leg 141's answer)",
+      "ref": "arXiv:1906.05811",
+      "form": "int |f|^2 phi,  phi = (1+y^2)^2 / y^4",
+      "acts_on": "the FUNCTION f",
+      "gamma_in_leg111_family": "4",
+      "damping_mechanism": "pointwise multiplier -- THE SAME MECHANISM as leg 111's",
+      "needs_gamma_gt": 3.0,
+      "space_needs_gamma_lt": "2p+1, opened by the hypotheses f'(0) = Hf(0) = 0 (p >= 2)",
+      "window_width_at_p1": 0.0,
+      "is_leg111's_own": true,
+      "note": "SAME functional as leg 111's, at gamma = 4, with TWO origin hypotheses. This is leg 141's finding and it is NOT leg 159's."
+    },
+    {
+      "who": "Jia-Stewart-Sverak arXiv:1710.02737 (3.82)-(3.83), and (3.132) for general m",
+      "ref": "arXiv:1710.02737",
+      "form": "|| |sin(theta/2)|^(-gamma_JSS) f ||_{L^2},  gamma_JSS in (m - 1/2, m)",
+      "acts_on": "the FUNCTION f",
+      "gamma_in_leg111_family": "2*gamma_JSS in (2m-1, 2m); at m = 2 that is (3, 4)",
+      "damping_mechanism": "spectral (complex-variable), but the SPACE is leg 111's family",
+      "needs_gamma_gt": 3.0,
+      "space_needs_gamma_lt": "2p+1, opened by splitting off P_{m-1} (their Y^(m) = Y_0^(m) (+) P_{m-1})",
+      "window_width_at_p1": 0.0,
+      "is_leg111's_own": true,
+      "note": "The published ladder in the VANISHING ORDER, and it lands exactly on leg 111's window (3, 2p+1) for p = m >= 2, and below the damping threshold (2*gamma_JSS in (1,2)) for m = 1. Same family, same coincidence."
+    },
+    {
+      "who": "Lei-Liu-Ren arXiv:1811.09754 (1.3)-(1.6); J. Chen arXiv:2010.12700 Def 1.1",
+      "ref": "arXiv:1811.09754 / arXiv:2010.12700",
+      "form": "(1/4pi) int |d_theta h|^2 / sin^2(theta/2) dtheta   [+ int |h_xx|^2 cos^2(x/2) for the X norm]",
+      "acts_on": "the DERIVATIVE d_theta h  (and d_x^2 h for Chen's X norm)",
+      "gamma_in_leg111_family": "2 -- BELOW leg 111's damping threshold 3, and on the ADMISSIBLE side of leg 111's own admissibility test",
+      "damping_mechanism": "NOT a pointwise multiplier: an EXACT identity (Chen Lemma 2.4, sin^-2(x/2) is an eigenfunction of the adjoint of sin x d_x) plus an exact tridiagonal diagonalisation in the basis LLR (1.5)",
+      "needs_gamma_gt": null,
+      "space_needs_gamma_lt": null,
+      "window_width_at_p1": null,
+      "is_leg111's_own": false,
+      "note": "THE GATE'S ANSWER. There is no gamma-threshold to push past, so there is nothing for the admissibility threshold to coincide with. Its own origin constraint is ONE condition (h'(0) = 0, implied by finiteness) where EGM Prop 2.1 needs TWO (f'(0) = Hf(0) = 0)."
+    }
+  ],
+  "quotes_located": [
+    {
+      "arxiv": "1811.09754",
+      "label": "LLR_space_and_inner_product_are_the_paper's_own",
+      "fragment": "We remark that the inner product in (1.4) and the exact form of the basis vectors",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "1811.09754",
+      "label": "LLR_found_it_accidentally",
+      "fragment": "are still mysterious to us even though we are fortunate enough to find them",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "1811.09754",
+      "label": "LLR_direct_energy_method_not_spectral",
+      "fragment": "using a direct energy method",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "2010.12700",
+      "label": "CHEN_the_weight_is_the_adjoint_eigenfunction_of_the_transport_field",
+      "fragment": "is an eigenfunction of the adjoint of sin x",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "2010.12700",
+      "label": "CHEN_the_weight_is_not_chosen_it_arises",
+      "fragment": "arise naturally from the viewpoint of energy estimates",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "2010.12700",
+      "label": "CHEN_H_norm_is_LLR's",
+      "fragment": "were first introduced in [19] for stability analysis",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "2010.12700",
+      "label": "CHEN_weighted_derivative",
+      "fragment": "We introduce the weighted derivative",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "1710.02737",
+      "label": "JSS_same_family_as_leg111_far_side_of_the_threshold",
+      "fragment": "Let us fix",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "1710.02737",
+      "label": "JSS_published_ladder_in_the_vanishing_order",
+      "fragment": "There is a natural generalization of Y0 to higher-order approximations",
+      "pdf_present": true,
+      "located": true
+    },
+    {
+      "arxiv": "2210.07191",
+      "label": "CH_the_squeeze_in_the_pointwise-multiplier_method",
+      "fragment": "so that the energy is well-defined",
+      "pdf_present": true,
+      "located": true
+    }
+  ],
+  "quotes_source": "relocated_in_pdf_text_at_run_time",
+  "weight_arithmetic": {
+    "definition": "m_gamma(theta) = (1/2)[cos th + sin th (log phi)'] = leg 111's own damping_factor MINUS its cos theta stretching term",
+    "prediction_from_novelty_log_sec8": "m_2 == -1/2 for every theta (variation 0); every other family-A member has variation |1 - gamma/2|; family B constant only at gamma = 0",
+    "grid_inset": "theta in [0.05, pi - 0.05]: both endpoints are weight singularities, so the measured variation of a NON-constant member is its predicted endpoint value |1 - gamma/2| shrunk by the inset (0.9988 where 1 is predicted). The CONSTANT member's variation is 0 to round-off and does not depend on the inset.",
+    "rows": [
+      {
+        "name": "A0_flat",
+        "family": "A",
+        "gamma": 0.0,
+        "m_min": -0.49937513019748314,
+        "m_max": 0.4993751301974836,
+        "variation": 0.9987502603949667,
+        "is_constant": false,
+        "constant_value": null,
+        "predicted_variation": 1.0,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 7.216449660063518e-16
+      },
+      {
+        "name": "A1",
+        "family": "A",
+        "gamma": 1.0,
+        "m_min": -0.49968756509874157,
+        "m_max": -0.0003124349012582073,
+        "variation": 0.49937513019748336,
+        "is_constant": false,
+        "constant_value": null,
+        "predicted_variation": 0.5,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 9.450790150467014e-11
+      },
+      {
+        "name": "A2",
+        "family": "A",
+        "gamma": 2.0,
+        "m_min": -0.5000000000000003,
+        "m_max": -0.49999999999999967,
+        "variation": 6.661338147750939e-16,
+        "is_constant": true,
+        "constant_value": -0.5,
+        "predicted_variation": 0.0,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 1.6279738668245614e-10
+      },
+      {
+        "name": "A3",
+        "family": "A",
+        "gamma": 3.0,
+        "m_min": -0.9996875650987413,
+        "m_max": -0.5003124349012584,
+        "variation": 0.4993751301974829,
+        "is_constant": false,
+        "constant_value": null,
+        "predicted_variation": 0.5,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 2.355285966260112e-10
+      },
+      {
+        "name": "A4_chen_hou",
+        "family": "A",
+        "gamma": 4.0,
+        "m_min": -1.4993751301974831,
+        "m_max": -0.5006248698025169,
+        "variation": 0.9987502603949663,
+        "is_constant": false,
+        "constant_value": null,
+        "predicted_variation": 1.0,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 3.218867394849667e-10
+      },
+      {
+        "name": "B0",
+        "family": "B",
+        "gamma": 0.0,
+        "m_min": 0.4999999999999992,
+        "m_max": 0.5000000000000008,
+        "variation": 1.5543122344752192e-15,
+        "is_constant": true,
+        "constant_value": 0.5,
+        "predicted_variation": null,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 2.7698321414248994e-10
+      },
+      {
+        "name": "B2",
+        "family": "B",
+        "gamma": 2.0,
+        "m_min": -0.4993751301974829,
+        "m_max": 0.49937513019748325,
+        "variation": 0.9987502603949662,
+        "is_constant": false,
+        "constant_value": null,
+        "predicted_variation": null,
+        "control_C1_max_abs_diff_vs_finite_difference_of_weight_values": 2.7317992312703154e-10
+      }
+    ],
+    "constant_members": [
+      "A2",
+      "B0"
+    ],
+    "predicted_constant_members": [
+      "A2",
+      "B0"
+    ],
+    "prediction_held": true,
+    "B0_is_constant_at_the_WRONG_SIGN": "+1/2, i.e. anti-damping; it is a member the prediction got right, not a candidate",
+    "control_C1_worst_abs_diff": 3.218867394849667e-10,
+    "control_C2_gamma3_is_NOT_constant": true,
+    "control_C2_gamma3_variation": 0.4993751301974829
+  },
+  "window_ladder": {
+    "note": "leg 111's window (3, 2p+1) in the weight exponent, as a function of the vanishing order p -- pure arithmetic, no operator. The published exponents of EGM and JSS are placed in it: both sit in the p >= 2 rows, i.e. both escape by CONSTRAINING THE ORIGIN, not by changing the functional.",
+    "rows": [
+      {
+        "vanishing_order_p": 1,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 3.0,
+        "window_width": 0.0,
+        "leg111_basis_sin_k_theta_has_this_p": true,
+        "EGM_1906.05811_gamma_4_admissible_here": false,
+        "JSS_1710.02737_band_2*gamma_in": [
+          1.0,
+          2.0
+        ],
+        "JSS_band_inside_window": false
+      },
+      {
+        "vanishing_order_p": 2,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 5.0,
+        "window_width": 2.0,
+        "leg111_basis_sin_k_theta_has_this_p": false,
+        "EGM_1906.05811_gamma_4_admissible_here": true,
+        "JSS_1710.02737_band_2*gamma_in": [
+          3.0,
+          4.0
+        ],
+        "JSS_band_inside_window": true
+      },
+      {
+        "vanishing_order_p": 3,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 7.0,
+        "window_width": 4.0,
+        "leg111_basis_sin_k_theta_has_this_p": false,
+        "EGM_1906.05811_gamma_4_admissible_here": true,
+        "JSS_1710.02737_band_2*gamma_in": [
+          5.0,
+          6.0
+        ],
+        "JSS_band_inside_window": true
+      },
+      {
+        "vanishing_order_p": 4,
+        "damping_needs_gamma_gt": 3.0,
+        "space_needs_gamma_lt": 9.0,
+        "window_width": 6.0,
+        "leg111_basis_sin_k_theta_has_this_p": false,
+        "EGM_1906.05811_gamma_4_admissible_here": true,
+        "JSS_1710.02737_band_2*gamma_in": [
+          7.0,
+          8.0
+        ],
+        "JSS_band_inside_window": true
+      }
+    ]
+  },
+  "what_is_NOT_claimed": [
+    "NO coercivity gap for the located functional on the a = 0 CLM linearisation: none is computed here and none is claimed. The published rate 3/8 is at a = 1.",
+    "The located functional does not lift a ban, promote a route, or move a link of the L1 -> L4 chain. L1 stays measured-dead in all three realizations.",
+    "Leg 111's measurements are untouched and remain correct for the construction leg 111 built.",
+    "Absence of a search hit is not absence of literature (PHASE2_P2_NOTES sec 24; leg 52's search-index flag still stands)."
+  ],
+  "correction_to_a_banked_reading": {
+    "where": "writeup/novelty/leg_141.md Q2, and experiments/journal/leg_141.md",
+    "banked": "arXiv:1811.09754 'concerns global regularity/blowup for the convective model, carries no weighted-energy coercivity estimate'; arXiv:2010.12700 and arXiv:1811.09754 'read and found not to carry the coincidence'",
+    "correction": "The second half is right and answers leg 141's gate: neither paper states the coincidence. The first half is not: sec 3.2 of arXiv:1811.09754 proves the decay estimate in a weighted Hdot^1 'using a direct energy method', and arXiv:2010.12700 quotes it as Lemma 2.2(c) in the form <L_1 f, f>_Y <= -(3/8)||f||_Y^2. That IS a weighted-energy coercivity estimate, and it is what leg 159 was sent to find.",
+    "status": "recorded as a correction to a banked reading, not as a criticism of a gate that answered its own question correctly"
+  },
+  "escalation": "leg-111-v2 construction leg: test the H_DW / Chen weighted-derivative functional on the a = 0 CLM linearisation this repository already carries. It is a CONSTRUCTION leg's job, with its own pre-committed gate, and the two terms named in WHAT_COULD_KILL_IT are what it has to survive.",
+  "novelty_log": "writeup/novelty/leg_159.md",
+  "journal": "experiments/journal/leg_159.md",
+  "figure": null
+}
