@@ -307,7 +307,7 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 |---|---|---|---|---|---|---|
 | LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`, proposed `NEXT`) | heavy | `leg/ng-v1` | Does the no-go admit a proof for a class of `A` strictly larger than block-diagonal? |
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
-| LEG-C | 85 | **GRA** — adversarial audit of gclm_rescaled.py's fixed-point reporting | no | standard | `leg/gra-v1` | Does the relaxation loop ever report reaching the fixed point when it hasn't? |
+| LEG-C | 90 | **EXT4** — has the rank-4 target's Conjecture 2.4 been resolved since? | no | light | `leg/ext4-v1` | Has Chen-Huang-Li's Conjecture 2.4 (HL singular steady stability) been proved or disproved since? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 84 | **TNA** — does target_norm.py silently extrapolate beyond its validated domain? | no | standard | `leg/tna-v1` | Under adversarial inputs past X_max=745, does target_norm.py silently return an untrustworthy result or flag the violation? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
