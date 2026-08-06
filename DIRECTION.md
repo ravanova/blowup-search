@@ -51,7 +51,11 @@ fourteenth refill, drafted after the 142–149 batch mostly landed and the reser
 again to 0, adds **150–156** (five repair legs closing loops on legs 114/115/117/119/121's
 unrepaired YES findings, plus 155/156's fourth freshness pass); legs **118, 122, 124** are
 recovered from the older, never-actually-dispatched 110-series reserve rather than
-redrafted. **Next fresh leg number for any future candidate is 157.**
+redrafted. A fifteenth refill, drafted in direct response to the user's "pre-empt the
+pre-emption" / "consider GA more" steer, adds **157–160** (three literature deep-mine legs on
+already-fully-read sources, plus one repaired-fitness leg gated solely by the frozen
+six-property check — no GA compute runs under any of the four). **Next fresh leg number for
+any future candidate is 161.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -814,6 +818,59 @@ Territory of the five new repair legs (150–154) is checked explicitly against 
 modules entirely): all eight solver files touched (`collocation_newton.py`,
 `decay_collocation.py`, `hl_rescaled.py`, `hilbert_holder.py`, `critical_dissipation.py`,
 `turning_point.py`, `advection_scope.py`, `finite_support.py`) are distinct — **no collision.**
+
+**DM response, 2026-08-06 — user steer, forwarded verbatim: "consider pre-empting the
+pre-emption" and "consider using GA more, where there is a chance of refining
+data/variables."** Decided under the standing directive, on this DM's own read of both:
+
+**On pre-empting the pre-emption.** This repository's own literature legs (57, 62, 65, 90,
+93, 111/141, 123) established that several of its negative results and "novel" claims were
+already anticipated in the literature — but every one of those legs asked a narrow YES/NO
+coverage question ("does paper X already cover/refute claim Y"), never "does paper X, having
+already been read at full-text depth, suggest a DIFFERENT construction this repo hasn't
+tried." That is genuinely unexplored territory in sources already paid for (no new literature
+search cost, full-text access already established) and it is exactly the "read deeper, don't
+just confirm/deny" shape the orchestrator's context flagged as legitimate. Three sources
+warrant it, each already fully read by a landed leg:
+- **Cadiot arXiv:2505.03091** (read in full by leg 62): confirmed NOT to cover the
+  off-diagonal/zero-diagonal case, but its own construction was never mined for whether it
+  suggests an alternative approximate-inverse DESIGN (not necessarily block-diagonal, not
+  necessarily requiring a positive diagonal) that could be adapted to the A21 != 0 class leg
+  127 (NGX) is currently searching for a counterexample in. A literature-sourced starting
+  candidate would be strictly cheaper than 127's from-scratch construction attempt.
+- **BDL arXiv:1503.06315** (read in full by leg 57, confirmed by `plan_of_record.py`'s own
+  ban text as "the reason to keep this ban"): publishes a non-block-diagonal approximate
+  inverse requiring a diagonal bounded below, confirmed not to extend to the zero-diagonal
+  case. Never checked: does BDL suggest a preconditioning, regularization, or
+  compensating-term trick (the same shape as leg 58's own SS5 finding — A21 != 0 buys back
+  one unit on the kernel direction at a cost elsewhere) that could be adapted computationally,
+  even if BDL's own theorem doesn't cover this case directly.
+- **The weighted-energy / Chen-Hou lineage** behind legs 65, 111, and 141: leg 111 measured a
+  zero-width window (damping needs gamma>3, the weighted space exists only for gamma<3) on
+  ONE weighted-energy construction. The same literature consulted for leg 141's novelty check
+  was never asked whether it contains a DIFFERENT weighted-energy functional (an added cross
+  term, a different Sobolev correction) that could shift either threshold.
+
+Three literature-deep-mine legs are drafted below (**157, 158, 159**) — light-to-standard
+difficulty, no compute, gate decidable either way, escalate (don't build) on a YES.
+
+**On GA.** `plan_of_record.py`'s live ban is unambiguous and this DM is not treating the
+user's directive as authority to lift it: "any GA compute on an unvalidated fitness... never
+[lifts] -- only a re-run of the six-property gate that PASSES on a repaired fitness." That
+gate has failed twice (leg 49: 4/6; leg 59: repaired to P2=0.975 but P3 worst |slope-1|
+unmoved at 0.342 against the 0.05 floor), and leg 59's own forward-pointer is explicit: "any
+future B proposal must change the fitness's DEFINITION, not its wall model" — leg 59 already
+tried a wall-model repair (2-D geometry) and it did not move P3 at all. **160 (WVR)** is
+drafted below as exactly the leg the coordinator's context describes: it proposes a
+genuinely different fitness DEFINITION (not a retry of 46/49/59's linear-defect-tracking
+metric), and its gate IS the frozen six-property check — **no GA compute runs on either
+branch**, mirroring leg 59's own template exactly. A pass is reported and escalated to the
+user as the lift condition being met (the user's call whether to then authorize GA, not this
+leg's); a fail banks as the third data point on a dead-as-parameterized fitness family. This
+leg does not reopen stage B (which leg 126 closed on the search space, independent of the
+fitness) — it answers a narrower, still-open question the user's steer raised: whether a
+repaired fitness exists at all, informing (not presupposing) the user's still-pending ruling
+on what follows B's exhaustion.
 
 ---
 
@@ -3798,6 +3855,138 @@ landed since leg 138's window closed?
 **Difficulty.** light
 **Independence.** Owns writeup/INDEX.md exclusively among live/reserve legs (same precedent
 as 68/108/138). Disjoint from 155 (JOURNAL.md, not INDEX.md). Immediately dispatchable.
+```
+
+```
+### 157 — ROUTE-CDX: DOES CADIOT arXiv:2505.03091 SUGGEST AN UNTRIED CONSTRUCTION FOR A21 !=
+0? (RESERVE)
+**Thesis.** Leg 62 read Cadiot arXiv:2505.03091 in full and settled a narrow coverage
+question: it does NOT cover the off-diagonal/zero-diagonal case leg 58's theorem occupies.
+That leg never asked the deeper question, and the paper is already fully consulted (no new
+access cost): does Cadiot's own construction — whatever approximate-inverse or
+preconditioning technique it uses for its covered (diagonal-bounded-below) case — suggest an
+adaptation, generalization, or explicit alternative construction that could be tried on the
+A21 != 0 class leg 127 (NGX) is searching? This is read-deeper-not-reconfirm: no coverage
+re-litigation, no re-opening of leg 62's settled NO.
+**Gate.** Does Cadiot arXiv:2505.03091, at full-text depth (including any construction,
+remark, or forward citation it contains), suggest a concrete alternative construction or
+adaptation applicable to the A21 != 0 class that has not already been tried in this
+repository (by leg 54's battery, leg 58's theorem, or leg 127's in-progress work)?
+  yes -> Record the construction verbatim with its hypotheses and exact page/section
+         reference; ESCALATE it as a candidate starting point for leg 127 or a follow-up leg
+         — do not build or test it under this leg's own authority.
+  no  -> Cadiot's construction is confirmed to offer nothing beyond its own settled scope.
+         Bank the ledger entry; this closes the "unmined literature" question for this
+         specific source.
+**Territory.** experiments/p2_route_cdx_v1_lit.py, writeup/data/p2_route_cdx_v1_lit.json,
+               writeup/novelty/leg_157.md, experiments/journal/leg_157.md.
+               Does NOT edit solver/literature_gates.py or solver/certificate_shapes.py.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 62 (settled,
+different question), 127 (NGX, mathematics not literature — this leg only surfaces a
+candidate for 127 to evaluate, never evaluates one itself), and 145/146 (code-level ledger
+audits of literature_gates.py/certificate_shapes.py, not literature reading). Immediately
+dispatchable.
+```
+
+```
+### 158 — ROUTE-BDX: DOES BDL arXiv:1503.06315 SUGGEST AN UNTRIED FIX FOR THE ZERO-DIAGONAL
+CASE? (RESERVE)
+**Thesis.** Leg 57 read BDL arXiv:1503.06315 in full and confirmed it publishes a
+non-block-diagonal approximate inverse requiring a diagonal bounded away from zero — the
+`plan_of_record.py` ban text itself cites this as "the reason to keep this ban." Never asked:
+does BDL's own construction contain a preconditioning, regularization, or compensating-term
+technique — the same SHAPE as leg 58's own SS5 finding, that A21 != 0 buys back exactly one
+unit on the kernel direction at a cost elsewhere — that could be adapted to the zero-diagonal
+case even though BDL's own theorem doesn't cover it? Full text already consulted; this is a
+second, deeper pass over the same source, not a new literature search.
+**Gate.** Does BDL arXiv:1503.06315, at full-text depth, contain a construction, technique,
+or remark that suggests a concrete way to compensate for a zero (rather than bounded-below)
+diagonal, applicable to leg 58's/127's operator class?
+  yes -> Record the technique verbatim with its hypotheses and exact reference; ESCALATE as a
+         candidate for leg 127 or a follow-up construction leg — do not build or test it here.
+  no  -> BDL is confirmed to offer nothing beyond the zero-diagonal exclusion leg 57 already
+         found. Bank the ledger entry.
+**Territory.** experiments/p2_route_bdx_v1_lit.py, writeup/data/p2_route_bdx_v1_lit.json,
+               writeup/novelty/leg_158.md, experiments/journal/leg_158.md.
+               Does NOT edit solver/literature_gates.py or solver/certificate_shapes.py.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 57 (settled,
+different question) and 157 (different paper). Immediately dispatchable.
+```
+
+```
+### 159 — ROUTE-WEX: DOES THE WEIGHTED-ENERGY LITERATURE CONTAIN AN UNTRIED FUNCTIONAL?
+(RESERVE)
+**Thesis.** Leg 111 measured a zero-width window on ONE weighted-energy construction on the
+a=0 CLM linearization (damping needs gamma>3, the weighted space exists only for gamma<3).
+Leg 141 (WEL) asks whether THAT SPECIFIC obstruction is published — a coverage question, not
+a construction search. The same Chen-Hou-lineage sources both legs already consulted were
+never asked whether they contain a DIFFERENT weighted-energy functional (an added cross term,
+a modified Sobolev correction, a different weight-class family) that could shift either
+threshold away from the coincidence leg 111 measured. Scope guard: this leg reads and reports
+only — it re-runs no coercivity computation and edits no solver module, same discipline as
+141.
+**Gate.** Does the weighted-energy / Chen-Hou-lineage literature already consulted by legs 65
+and 111/141 contain, explicitly or as a derivable special case, a weighted-energy functional
+different from leg 111's construction that is not subject to the same gamma-threshold
+coincidence?
+  yes -> Record the functional verbatim with its hypotheses and exact reference; ESCALATE as
+         a candidate for a leg-111-v2 construction leg — do not compute it here.
+  no  -> Confirms leg 111's construction was not merely one of many untried options; the
+         zero-width window is the literature's own apparent boundary too. Bank the ledger.
+**Territory.** experiments/p2_route_wex_v1_lit.py, writeup/data/p2_route_wex_v1_lit.json,
+               writeup/novelty/leg_159.md, experiments/journal/leg_159.md
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module (does not touch
+solver/energy_coercivity.py, which 144 audits at the code level — read-read on the same
+finding at most, not a collision). Disjoint from 141 (coverage of the specific obstruction,
+not a construction search). Immediately dispatchable.
+```
+
+```
+### 160 — ROUTE-WVR: A GENUINELY REPAIRED FITNESS DEFINITION FOR STAGE-B-STYLE GA, GATED BY
+THE FROZEN SIX-PROPERTY VIABILITY CHECK — NO GA COMPUTE ON EITHER BRANCH (RESERVE)
+**Thesis.** The GA ban's own stated lift condition is "a re-run of the six-property gate that
+PASSES on a repaired fitness" — never met (leg 49: 4/6; leg 59: repaired wall model, P2
+0.775->0.975, but P3 worst |slope-1| UNMOVED at 0.342 against the 0.05 floor). Leg 59's own
+forward-pointer is explicit: "any future B proposal must change the fitness's DEFINITION, not
+its wall model" — leg 59 already tried the wall-model repair and P3 did not move AT ALL,
+which is the strongest evidence yet that the defect is in what the fitness tracks, not how it
+models the geometry. This leg proposes a genuinely different fitness DEFINITION — not a
+retry of 46/49/59's linear-in-injected-defect |slope-1| metric — pre-named and fixed in the
+driver before any computation (per the leg-111 pre-naming discipline), e.g. a metric that
+tracks the defect's actual local curvature rather than assuming linearity, or a
+resolution-normalized coercivity measure that does not require P3's fixed 0.05 floor to be
+met by a linear proxy. Whatever the specific proposal, it must be a definitional change, per
+leg 59's own diagnosis of where the repair needs to happen.
+**Gate.** Does the new fitness definition pass the FROZEN six-property viability gate
+unchanged (all six properties, including P2 >= 0.90 and P3 max |slope-1| <= 0.05, exactly as
+specified in `plan_of_record.py`'s C-PILOT stage)?
+  yes -> The GA ban's recorded lift condition is met. Report it precisely, run NO GA compute,
+         and ESCALATE to the user (escalation #1) — lifting the ban and authorizing GA
+         compute is the user's call, never this leg's or the DM's, exactly as leg 59's own
+         precedent established. Note explicitly that this does NOT reopen stage B, which leg
+         126 closed on the search space independent of the fitness; a pass here informs the
+         user's still-open ruling on what follows B's exhaustion, it does not resolve it.
+  no  -> Report which properties still fail and by how much, and specifically whether P3
+         moved AT ALL (leg 59's own diagnostic). A third failure of a fitness-repair attempt,
+         after two wall/parameter repairs failed, is itself informative: bank it as evidence
+         that a linear-defect-tracking fitness may be structurally incompatible with this
+         operator, not merely under-tuned.
+**Territory.** solver/weight_search.py (read-only unless the yes-branch's report requires a
+               new fitness function definition to be added as code — if so, append-only, new
+               function, existing functions untouched), experiments/p2_route_wvr_v1_fitness.py,
+               experiments/p2_route_wvr_v1_fitness_evidence.py,
+               writeup/data/p2_route_wvr_v1_fitness.json,
+               writeup/novelty/leg_160.md, experiments/journal/leg_160.md.
+               NO GA compute of any kind runs under this leg, on either branch — the gate is
+               exactly the six-property check, nothing else.
+**Difficulty.** heavy
+**Independence.** Reads/appends solver/weight_search.py; no other live or reserve leg claims
+it (59's territory closed on landing). Touches no certificate term, no literature ledger, no
+target ledger, no GA/ga_search.py code path. Independent of 157/158/159 (literature, not
+fitness construction) and of 127/125 (different open questions entirely).
 ```
 
 ## Ranking rationale
