@@ -32,6 +32,28 @@ THE MODULE HAS NO VALIDATION SURFACE.  Gate A0 counts the argument-validation si
 (`raise`, `isfinite`, `isnan`, `assert`) in the module by AST, so "the module never checks"
 is a measurement and not an impression.
 
+**THE GAP THIS BATTERY MEASURED HAS SINCE BEEN CLOSED.**  Leg 100 answered its gate YES
+and, per its territory rule, did not patch the module; a later bench repair added the
+finiteness/degeneracy guard, and `test_holder_norms_adversarial.py` was INVERTED to assert
+the refusals.  This battery is leg 100's own artefact and its JSON is a banked measurement
+of the PRE-REPAIR module, so it must keep reproducing that measurement rather than
+silently re-pointing at repaired code and reporting a different answer.  It therefore
+loads its subject **by git blob hash** (`PREREPAIR_BLOB` below), which is content-addressed
+and so survives rebase, branch deletion and the repair's own merge; the blob stays
+reachable through history forever.  Set `HNA_AUDIT_LIVE=1` to audit the working-tree
+module instead -- useful for confirming the guard holds, but it will NOT reproduce the
+banked JSON, because the gaps below are closed and the calls now raise.
+
+REPRODUCIBILITY NOTE (measured by the bench repair, 2026-08-06).  Re-run against the
+pinned blob this battery reproduces every banked magnitude bit-identically -- the clean
+conformal error 1.517287054473293e-04, the clean operator norm 661.2075718521894, the
+2.1053x understatement, the clean embedding constant `random_best` 0.8914207747116539 --
+with exactly two exceptions, both in `A6.clean_per_degree`: 0.8359515019975166 reproduces
+as ...164 and 0.8548322678393498 as ...497, a 1-2 ULP difference, deterministic across
+repeated runs on one machine (3/3 identical) and attributable to BLAS matmul
+reduction-order differing between runners, not to any code change.  The committed JSON is
+left as leg 100 banked it; `runtime_seconds` was never reproducible in any case.
+
 Run:  python experiments/p2_route_hna_v1_adversarial.py
 Writes: writeup/data/p2_route_hna_v1_adversarial.json
 """
@@ -40,22 +62,48 @@ from __future__ import annotations
 import ast
 import json
 import os
+import subprocess
 import sys
 import time
+import types
 import warnings
 
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from solver.holder_norms import (  # noqa: E402
-    HolderNorm, conformal_check, decay_weight, family_op_norm, holder_H_constant,
-    jacobian_identity_error, square_wave_partial_sum,
-)
-
 NAN, INF = float("nan"), float("inf")
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODULE = os.path.join(HERE, "solver", "holder_norms.py")
+
+# The exact solver/holder_norms.py leg 100 audited, content-addressed.  Do not "update"
+# this to a branch name: the point is that it cannot drift.
+PREREPAIR_BLOB = "b614a1167ebd1b87fa0f63b0f94ebc63abb3b4d1"
+AUDIT_LIVE = os.environ.get("HNA_AUDIT_LIVE", "") not in ("", "0")
+
+
+def _load_subject():
+    """Import the module under audit: the pre-repair blob by default, else the live one."""
+    if AUDIT_LIVE:
+        src = open(MODULE).read()
+        return src, __import__("solver.holder_norms", fromlist=["*"])
+    src = subprocess.run(["git", "cat-file", "blob", PREREPAIR_BLOB],
+                         cwd=HERE, capture_output=True, text=True, check=True).stdout
+    mod = types.ModuleType("holder_norms_prerepair")
+    mod.__dict__["__file__"] = MODULE
+    exec(compile(src, f"<blob {PREREPAIR_BLOB[:12]}:solver/holder_norms.py>", "exec"),
+         mod.__dict__)
+    return src, mod
+
+
+_SRC, _SUBJECT = _load_subject()
+HolderNorm = _SUBJECT.HolderNorm
+conformal_check = _SUBJECT.conformal_check
+decay_weight = _SUBJECT.decay_weight
+family_op_norm = _SUBJECT.family_op_norm
+holder_H_constant = _SUBJECT.holder_H_constant
+jacobian_identity_error = _SUBJECT.jacobian_identity_error
+square_wave_partial_sum = _SUBJECT.square_wave_partial_sum
 
 
 # ---------------------------------------------------------------------------
@@ -141,7 +189,7 @@ def grid(J, eps=1e-3):
 
 
 def gate_A0():
-    src = open(MODULE).read()
+    src = _SRC                       # the audited source, not whatever is on disk today
     tree = ast.parse(src)
     n_raise = sum(1 for n in ast.walk(tree) if isinstance(n, ast.Raise))
     n_assert = sum(1 for n in ast.walk(tree) if isinstance(n, ast.Assert))
