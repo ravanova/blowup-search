@@ -1,0 +1,1956 @@
+{
+  "leg": 131,
+  "route": "HNB",
+  "module_under_check": "solver/holder_norms.py",
+  "module_edited": false,
+  "repair_commit": "fb61a79",
+  "original_audit_leg": 100,
+  "provenance": {
+    "prerepair_blob": "b614a1167ebd1b87fa0f63b0f94ebc63abb3b4d1",
+    "prerepair_arm_AUDIT_LIVE": false,
+    "postrepair_arm_AUDIT_LIVE": true,
+    "prerepair_source_len": 11274,
+    "postrepair_source_len": 34375,
+    "sources_differ": true,
+    "postrepair_source_is_working_tree": true,
+    "battery_file_unmodified_by_this_leg": true,
+    "module_file_unmodified_by_this_leg": true
+  },
+  "P1_battery_own_live_mode": {
+    "command": "HNA_AUDIT_LIVE=1 python experiments/p2_route_hna_v1_adversarial.py",
+    "returncode": 1,
+    "completed": false,
+    "runtime_seconds": 0.236,
+    "final_traceback_line": "ValueError: alpha = nan is not finite. It is the decay grading exponent of the weight (1 + X^2)^{alpha/2}. Every filter in solver/holder_norms.py is an ordered comparison, and IEEE-754 makes every comparison against NaN False, so a non-finite value here is SILENTLY DROPPED rather than propagated -- the returned number is then a maximum over an unannounced subset (leg 100 measured 2.1053x understatement, and 0.0 reported as exact agreement).",
+    "abort_frame": "File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a5a9919259fb3e442/experiments/p2_route_hna_v1_adversarial.py\", line 419, in gate_A5",
+    "grep_HNA_AUDIT_LIVE": [
+      "experiments/p2_route_hna_v1_adversarial.py:2",
+      "writeup/novelty/leg_131.md:4"
+    ],
+    "note": "the facility the repair added so the battery could be re-pointed at the working tree.  It has never been run to completion by anything on main, and it does not work: the abort is at the FIRST of three sites that call the subject bare, outside probe().  The battery's classification logic is already repair-aware (call/classify return FLAGGED_RAISE); only these three unwrapped reads are not."
+  },
+  "P2_gate_run_metadata": {
+    "prerepair": {
+      "A0": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A1": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A2": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A3": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A4": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A5": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A6": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A7": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A8": {
+        "arm": "prerepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      }
+    },
+    "postrepair": {
+      "A0": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A1": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A2": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A3": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A4": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A5": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": false,
+        "pass1_exception": "ValueError",
+        "pass1_message": "alpha = nan is not finite. It is the decay grading exponent of the weight (1 + X^2)^{alpha/2}. Every filter in solver/holder_norms.py is an ordered comparison, and IEEE-754 makes every comparison against NaN False, so a non-finite value here is SILENTLY DROPPED rather than propagated -- the returned number is then a maximum over an unannounced subset (leg 100 measured 2.1053x understatement, and 0",
+        "pass1_abort_site": {
+          "battery_line": 419,
+          "battery_source": "w0 = decay_weight(np.array([0.0, 1.0, 10.0]), NAN)",
+          "battery_function": "gate_A5",
+          "deepest_frame_file": "holder_norms.py",
+          "deepest_frame_line": 100
+        },
+        "shimmed": true,
+        "pass2_completed": true,
+        "shim_log": {
+          "decay_weight": {
+            "n_calls": 1,
+            "n_raised": 1,
+            "calls": [
+              {
+                "call_index": 1,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "alpha = nan is not finite. It is the decay grading exponent of the weight (1 + X^2)^{alpha/2}. Every filter in solver/holder_norms.py is an ordered comparison, and IEEE-754 makes every comparison against NaN False, so a non-finite value here is SILENTLY DROPPED rather than propagated -- the returned number is then a maximum over an unannounced subset (leg 100 measured 2.1053x understatement, and 0"
+              }
+            ]
+          }
+        }
+      },
+      "A6": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": false,
+        "pass1_exception": "ValueError",
+        "pass1_message": "gamma = 0.0 is not a Holder exponent: gamma > 0 is required. At gamma <= 0 the kernel |th_j - th_k|^{-gamma} does not decay in the separation, so the seminorm measures no smoothness. Leg 100 measured gamma = -0.3 returning an embedding constant of exactly 0.0 against a clean 0.891421.",
+        "pass1_abort_site": {
+          "battery_line": 470,
+          "battery_source": "pd, rb = holder_H_constant(th, g, degrees=degs, n_random=60)",
+          "battery_function": "gate_A6",
+          "deepest_frame_file": "holder_norms.py",
+          "deepest_frame_line": 143
+        },
+        "shimmed": true,
+        "pass2_completed": true,
+        "shim_log": {
+          "holder_H_constant": {
+            "n_calls": 8,
+            "n_raised": 5,
+            "calls": [
+              {
+                "call_index": 1,
+                "outcome": "RETURNED"
+              },
+              {
+                "call_index": 2,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "gamma = nan is not finite. It is the Holder (smoothness) exponent. Every filter in solver/holder_norms.py is an ordered comparison, and IEEE-754 makes every comparison against NaN False, so a non-finite value here is SILENTLY DROPPED rather than propagated -- the returned number is then a maximum over an unannounced subset (leg 100 measured 2.1053x understatement, and 0.0 reported as exact agreeme"
+              },
+              {
+                "call_index": 3,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "gamma = -0.3 is not a Holder exponent: gamma > 0 is required. At gamma <= 0 the kernel |th_j - th_k|^{-gamma} does not decay in the separation, so the seminorm measures no smoothness. Leg 100 measured gamma = -0.3 returning an embedding constant of exactly 0.0 against a clean 0.891421."
+              },
+              {
+                "call_index": 4,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "theta has 1 non-finite entry (flat index 7; first bad value nan) out of 128. It is the grid the Holder seminorm kernel is built from. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 5,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "theta has 1 non-finite entry (flat index 7; first bad value inf) out of 128. It is the grid the Holder seminorm kernel is built from. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 6,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "gamma = 0.0 is not a Holder exponent: gamma > 0 is required. At gamma <= 0 the kernel |th_j - th_k|^{-gamma} does not decay in the separation, so the seminorm measures no smoothness. Leg 100 measured gamma = -0.3 returning an embedding constant of exactly 0.0 against a clean 0.891421."
+              },
+              {
+                "call_index": 7,
+                "outcome": "RETURNED"
+              },
+              {
+                "call_index": 8,
+                "outcome": "RETURNED"
+              }
+            ]
+          }
+        }
+      },
+      "A7": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": true,
+        "shimmed": false
+      },
+      "A8": {
+        "arm": "postrepair",
+        "pass1_unpatched_completed": false,
+        "pass1_exception": "ValueError",
+        "pass1_message": "theta has 1 non-finite entry (flat index 64; first bad value inf) out of 128. It is the grid whose Jacobian identity is being checked. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0.",
+        "pass1_abort_site": {
+          "battery_line": 553,
+          "battery_source": "val = fn(*args)",
+          "battery_function": "gate_A8",
+          "deepest_frame_file": "holder_norms.py",
+          "deepest_frame_line": 117
+        },
+        "shimmed": true,
+        "pass2_completed": true,
+        "shim_log": {
+          "conformal_check": {
+            "n_calls": 4,
+            "n_raised": 3,
+            "calls": [
+              {
+                "call_index": 1,
+                "outcome": "RETURNED"
+              },
+              {
+                "call_index": 2,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "theta has 1 non-finite entry (flat index 64; first bad value inf) out of 128. It is the grid whose Jacobian identity is being checked. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 3,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "theta has 1 non-finite entry (flat index 64; first bad value inf) out of 128. It is the grid whose Jacobian identity is being checked. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 4,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "theta has 1 non-finite entry (flat index 64; first bad value inf) out of 128. It is the grid whose Jacobian identity is being checked. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              }
+            ]
+          },
+          "family_op_norm": {
+            "n_calls": 4,
+            "n_raised": 3,
+            "calls": [
+              {
+                "call_index": 1,
+                "outcome": "RETURNED"
+              },
+              {
+                "call_index": 2,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "A has 1 non-finite entry (flat index 151; first bad value inf) out of 2304. It is the operator whose family-restricted lower bound is wanted. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 3,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "A has 1 non-finite entry (flat index 151; first bad value inf) out of 2304. It is the operator whose family-restricted lower bound is wanted. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              },
+              {
+                "call_index": 4,
+                "outcome": "RAISED",
+                "exception": "ValueError",
+                "message": "A has 1 non-finite entry (flat index 151; first bad value inf) out of 2304. It is the operator whose family-restricted lower bound is wanted. A single non-finite entry is enough: leg 100 measured ONE NaN grid node leaving conformal_check bit-identical to its clean value (1.517287054473293e-04), and ONE NaN operator entry collapsing family_op_norm from 661.207572 to exactly 0.0."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "P2b_bare_sites_reprobed": {
+    "prerepair": {
+      "arm": "prerepair",
+      "n_sites": 6,
+      "n_silent": 3,
+      "sites": [
+        {
+          "site": "gate_A5:419  decay_weight(X=[0,1,10], alpha=NaN)",
+          "verdict": "FLAGGED_NAN",
+          "returned": [
+            1.0,
+            NaN,
+            NaN
+          ],
+          "exception": null,
+          "warnings": []
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=0.0)",
+          "verdict": "SILENT",
+          "returned": [
+            0.9427849632414621,
+            1.4551998146041505,
+            2.003102357089139,
+            1.0300966294219904
+          ],
+          "exception": null,
+          "warnings": [],
+          "degenerate": true
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=1.0)",
+          "verdict": "SILENT",
+          "returned": [
+            0.5230090143101978,
+            0.6500701809348948,
+            0.7400094768686508,
+            1.115424104338138
+          ],
+          "exception": null,
+          "warnings": [],
+          "degenerate": true
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=0.3)",
+          "verdict": "SILENT",
+          "returned": [
+            0.7229011491994093,
+            0.8359515019975166,
+            0.8548322678393498,
+            0.8914207747116539
+          ],
+          "exception": null,
+          "warnings": [],
+          "degenerate": false
+        },
+        {
+          "site": "gate_A8:553  conformal_check(theta[64]=+Inf) x3",
+          "repeats": [
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0001517287054473293,
+                1.9094999985985477
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            },
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0001517287054473293,
+                1.9094999985985477
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            },
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0001517287054473293,
+                1.9094999985985477
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            }
+          ],
+          "verdict": "FLAGGED_WARN",
+          "verdict_constant_across_repeats": true
+        },
+        {
+          "site": "gate_A8:553  family_op_norm(A[3,7]=+Inf) x3",
+          "repeats": [
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0,
+                -1.0
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            },
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0,
+                -1.0
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            },
+            {
+              "verdict": "FLAGGED_WARN",
+              "returned": [
+                0.0,
+                -1.0
+              ],
+              "exception": null,
+              "warnings": [
+                "RuntimeWarning"
+              ]
+            }
+          ],
+          "verdict": "FLAGGED_WARN",
+          "verdict_constant_across_repeats": true
+        }
+      ]
+    },
+    "postrepair": {
+      "arm": "postrepair",
+      "n_sites": 6,
+      "n_silent": 2,
+      "sites": [
+        {
+          "site": "gate_A5:419  decay_weight(X=[0,1,10], alpha=NaN)",
+          "verdict": "FLAGGED_RAISE",
+          "returned": null,
+          "exception": "ValueError",
+          "warnings": []
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=0.0)",
+          "verdict": "FLAGGED_RAISE",
+          "returned": null,
+          "exception": "ValueError",
+          "warnings": [],
+          "degenerate": true
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=1.0)",
+          "verdict": "SILENT",
+          "returned": [
+            0.5230090143101978,
+            0.6500701809348948,
+            0.7400094768686508,
+            1.115424104338138
+          ],
+          "exception": null,
+          "warnings": [],
+          "degenerate": true
+        },
+        {
+          "site": "gate_A6:470  holder_H_constant(theta, gamma=0.3)",
+          "verdict": "SILENT",
+          "returned": [
+            0.7229011491994093,
+            0.8359515019975166,
+            0.8548322678393498,
+            0.8914207747116539
+          ],
+          "exception": null,
+          "warnings": [],
+          "degenerate": false
+        },
+        {
+          "site": "gate_A8:553  conformal_check(theta[64]=+Inf) x3",
+          "repeats": [
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            },
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            },
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            }
+          ],
+          "verdict": "FLAGGED_RAISE",
+          "verdict_constant_across_repeats": true
+        },
+        {
+          "site": "gate_A8:553  family_op_norm(A[3,7]=+Inf) x3",
+          "repeats": [
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            },
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            },
+            {
+              "verdict": "FLAGGED_RAISE",
+              "returned": null,
+              "exception": "ValueError",
+              "warnings": []
+            }
+          ],
+          "verdict": "FLAGGED_RAISE",
+          "verdict_constant_across_repeats": true
+        }
+      ]
+    }
+  },
+  "P3_silent_census": {
+    "prerepair": {
+      "A0": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      },
+      "A1": {
+        "n_verdicts": 8,
+        "n_silent": 4,
+        "silent_cases": [
+          {
+            "case": "conformal_check, theta[7] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "clean": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "bit_identical_to_clean": true
+          },
+          {
+            "case": "conformal_check, theta[64] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "clean": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "bit_identical_to_clean": true
+          },
+          {
+            "case": "conformal_check, theta[120] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "clean": [
+              0.0001517287054473293,
+              1.9094999985985477
+            ],
+            "bit_identical_to_clean": true
+          },
+          {
+            "case": "jacobian_identity_error, theta[64] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0005058518859734074,
+              1.9094999985985477
+            ],
+            "clean": [
+              0.0005058518859734074,
+              1.9094999985985477
+            ],
+            "bit_identical_to_clean": true
+          }
+        ],
+        "by_verdict": {
+          "SILENT": 4,
+          "FLAGGED_WARN": 4
+        }
+      },
+      "A2": {
+        "n_verdicts": 1,
+        "n_silent": 1,
+        "silent_cases": [
+          {
+            "case": "",
+            "key": "all_nan_grid_verdict",
+            "returned": null,
+            "clean": null,
+            "bit_identical_to_clean": null
+          }
+        ],
+        "by_verdict": {
+          "SILENT": 1
+        }
+      },
+      "A3": {
+        "n_verdicts": 11,
+        "n_silent": 5,
+        "silent_cases": [
+          {
+            "case": "family_op_norm, A[3,7] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0,
+              -1.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "family_op_norm, A[0,0] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0,
+              -1.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "family_op_norm, A[47,47] = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0,
+              -1.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "family_op_norm, codomain alpha = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0,
+              -1.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "family_op_norm, domain gamma = NaN",
+            "key": "verdict",
+            "returned": [
+              0.0,
+              -1.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": false
+          }
+        ],
+        "by_verdict": {
+          "SILENT": 5,
+          "FLAGGED_WARN": 6
+        }
+      },
+      "A4": {
+        "n_verdicts": 3,
+        "n_silent": 2,
+        "silent_cases": [
+          {
+            "case": "family_op_norm, true maximizer poisoned with NaN",
+            "key": "verdict",
+            "returned": [
+              105.43571373550743,
+              0.0
+            ],
+            "clean": [
+              221.97837236723137,
+              1.0
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "family_op_norm, poisoned extra inside the full family",
+            "key": "verdict",
+            "returned": [
+              661.2075718521894,
+              47.0
+            ],
+            "clean": [
+              661.2075718521894,
+              47.0
+            ],
+            "bit_identical_to_clean": true
+          }
+        ],
+        "by_verdict": {
+          "SILENT": 2,
+          "FLAGGED_WARN": 1
+        }
+      },
+      "A5": {
+        "n_verdicts": 11,
+        "n_silent": 4,
+        "silent_cases": [
+          {
+            "case": "HolderNorm(gamma = 0 (degenerate: no Holder grading))",
+            "key": "verdict",
+            "returned": [
+              0.9996893798319648,
+              0.9996891297543065,
+              1.9993785095862713
+            ],
+            "clean": [
+              0.9996893798319648,
+              0.7290476589888806,
+              1.7287370388208454
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "HolderNorm(gamma = 1 (degenerate: Lipschitz endpoint))",
+            "key": "verdict",
+            "returned": [
+              0.9996893798319648,
+              0.49964385478570955,
+              1.4993332346176744
+            ],
+            "clean": [
+              0.9996893798319648,
+              0.7290476589888806,
+              1.7287370388208454
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "HolderNorm(semi_alpha = NaN with sup_only=True)",
+            "key": "verdict",
+            "returned": [
+              0.9996893798319648,
+              0.0,
+              0.9996893798319648
+            ],
+            "clean": [
+              0.9996893798319648,
+              0.7290476589888806,
+              1.7287370388208454
+            ],
+            "bit_identical_to_clean": false
+          },
+          {
+            "case": "HolderNorm(gamma = NaN with sup_only=True)",
+            "key": "verdict",
+            "returned": [
+              0.9996893798319648,
+              0.0,
+              0.9996893798319648
+            ],
+            "clean": [
+              0.9996893798319648,
+              0.7290476589888806,
+              1.7287370388208454
+            ],
+            "bit_identical_to_clean": false
+          }
+        ],
+        "by_verdict": {
+          "FLAGGED_NAN": 4,
+          "FLAGGED_WARN": 3,
+          "SILENT": 4
+        }
+      },
+      "A6": {
+        "n_verdicts": 8,
+        "n_silent": 2,
+        "silent_cases": [
+          {
+            "case": "holder_H_constant, gamma = NaN",
+            "key": "verdict_random_arm_alone",
+            "returned": null,
+            "clean": null,
+            "bit_identical_to_clean": null
+          },
+          {
+            "case": "holder_H_constant, theta[7] = NaN",
+            "key": "verdict_random_arm_alone",
+            "returned": null,
+            "clean": null,
+            "bit_identical_to_clean": null
+          }
+        ],
+        "by_verdict": {
+          "FLAGGED_NAN": 2,
+          "SILENT": 2,
+          "FLAGGED_WARN": 4
+        }
+      },
+      "A7": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      },
+      "A8": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      }
+    },
+    "postrepair": {
+      "A0": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      },
+      "A1": {
+        "n_verdicts": 8,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {
+          "FLAGGED_RAISE": 8
+        }
+      },
+      "A2": {
+        "n_verdicts": 1,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {
+          "FLAGGED_RAISE": 1
+        }
+      },
+      "A3": {
+        "n_verdicts": 11,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {
+          "FLAGGED_RAISE": 11
+        }
+      },
+      "A4": {
+        "n_verdicts": 3,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {
+          "FLAGGED_RAISE": 3
+        }
+      },
+      "A5": {
+        "n_verdicts": 11,
+        "n_silent": 1,
+        "silent_cases": [
+          {
+            "case": "HolderNorm(gamma = 1 (degenerate: Lipschitz endpoint))",
+            "key": "verdict",
+            "returned": [
+              0.9996893798319648,
+              0.49964385478570955,
+              1.4993332346176744
+            ],
+            "clean": [
+              0.9996893798319648,
+              0.7290476589888806,
+              1.7287370388208454
+            ],
+            "bit_identical_to_clean": false
+          }
+        ],
+        "by_verdict": {
+          "FLAGGED_RAISE": 10,
+          "SILENT": 1
+        }
+      },
+      "A6": {
+        "n_verdicts": 8,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {
+          "FLAGGED_NAN": 8
+        }
+      },
+      "A7": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      },
+      "A8": {
+        "n_verdicts": 0,
+        "n_silent": 0,
+        "silent_cases": [],
+        "by_verdict": {}
+      }
+    },
+    "prerepair_totals": {
+      "n_verdicts": 42,
+      "n_silent": 18
+    },
+    "postrepair_totals": {
+      "n_verdicts": 42,
+      "n_silent": 1
+    }
+  },
+  "P3b_validation_surface": {
+    "prerepair": {
+      "n_raise_sites": 0,
+      "n_assert_sites": 0,
+      "finiteness_guard_names_present": [],
+      "public_entry_points": [
+        "HolderNorm",
+        "conformal_check",
+        "decay_weight",
+        "family_op_norm",
+        "holder_H_constant",
+        "jacobian_identity_error",
+        "square_wave_partial_sum"
+      ],
+      "n_public_entry_points": 7,
+      "note": "the count of argument-validation sites in the whole module; a zero here is the structural reason every other gate below can find silence"
+    },
+    "postrepair": {
+      "n_raise_sites": 26,
+      "n_assert_sites": 0,
+      "finiteness_guard_names_present": [
+        "ValueError",
+        "isfinite"
+      ],
+      "public_entry_points": [
+        "HolderNorm",
+        "conformal_check",
+        "decay_weight",
+        "family_op_norm",
+        "holder_H_constant",
+        "jacobian_identity_error",
+        "square_wave_partial_sum"
+      ],
+      "n_public_entry_points": 7,
+      "note": "the count of argument-validation sites in the whole module; a zero here is the structural reason every other gate below can find silence"
+    }
+  },
+  "P4_clean_bitwise_differential": {
+    "n_compared": 19,
+    "n_bit_identical": 19,
+    "n_moved": 0,
+    "fields": [
+      {
+        "field": "A1.clean_conformal_check",
+        "prerepair": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "postrepair": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "prerepair_hex": [
+          "3f23e32ba7d04000",
+          "3ffe8d4fdedb15be"
+        ],
+        "postrepair_hex": [
+          "3f23e32ba7d04000",
+          "3ffe8d4fdedb15be"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A1.clean_jacobian_identity_error",
+        "prerepair": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "postrepair": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "prerepair_hex": [
+          "3f409364a747b400",
+          "3ffe8d4fdedb15be"
+        ],
+        "postrepair_hex": [
+          "3f409364a747b400",
+          "3ffe8d4fdedb15be"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A3.clean_family_op_norm",
+        "prerepair": [
+          661.2075718521894,
+          47
+        ],
+        "postrepair": [
+          661.2075718521894,
+          47
+        ],
+        "prerepair_hex": [
+          "4084a9a91b6e65ca",
+          "4047800000000000"
+        ],
+        "postrepair_hex": [
+          "4084a9a91b6e65ca",
+          "4047800000000000"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.ratio_true_maximizer",
+        "prerepair": 221.97837236723137,
+        "postrepair": 221.97837236723137,
+        "prerepair_hex": [
+          "406bbf4ed3911234"
+        ],
+        "postrepair_hex": [
+          "406bbf4ed3911234"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.ratio_runner_up",
+        "prerepair": 105.43571373550743,
+        "postrepair": 105.43571373550743,
+        "prerepair_hex": [
+          "405a5be2bbdd1b09"
+        ],
+        "postrepair_hex": [
+          "405a5be2bbdd1b09"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.clean_two_vector_family",
+        "prerepair": [
+          221.97837236723137,
+          1
+        ],
+        "postrepair": [
+          221.97837236723137,
+          1
+        ],
+        "prerepair_hex": [
+          "406bbf4ed3911234",
+          "3ff0000000000000"
+        ],
+        "postrepair_hex": [
+          "406bbf4ed3911234",
+          "3ff0000000000000"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.clean_full_family",
+        "prerepair": [
+          661.2075718521894,
+          47
+        ],
+        "postrepair": [
+          661.2075718521894,
+          47
+        ],
+        "prerepair_hex": [
+          "4084a9a91b6e65ca",
+          "4047800000000000"
+        ],
+        "postrepair_hex": [
+          "4084a9a91b6e65ca",
+          "4047800000000000"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.understatement_factor",
+        "prerepair": 2.105343289315412,
+        "postrepair": 2.105343289315412,
+        "prerepair_hex": [
+          "4000d7be38f3b3bc"
+        ],
+        "postrepair_hex": [
+          "4000d7be38f3b3bc"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A5.clean_sup_seminorm_norm",
+        "prerepair": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "postrepair": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "prerepair_hex": [
+          "3feffd7495112d8e",
+          "3fe7545bc192a4ae",
+          "3ffba8e82b51e91e"
+        ],
+        "postrepair_hex": [
+          "3feffd7495112d8e",
+          "3fe7545bc192a4ae",
+          "3ffba8e82b51e91e"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A6.clean_per_degree",
+        "prerepair": [
+          0.7229011491994093,
+          0.8359515019975166,
+          0.8548322678393498
+        ],
+        "postrepair": [
+          0.7229011491994093,
+          0.8359515019975166,
+          0.8548322678393498
+        ],
+        "prerepair_hex": [
+          "3fe722019741ac46",
+          "3feac01d5d43e29c",
+          "3feb5ac9333defc8"
+        ],
+        "postrepair_hex": [
+          "3fe722019741ac46",
+          "3feac01d5d43e29c",
+          "3feb5ac9333defc8"
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A6.clean_random_best",
+        "prerepair": 0.8914207747116539,
+        "postrepair": 0.8914207747116539,
+        "prerepair_hex": [
+          "3fec8684dc4b91b7"
+        ],
+        "postrepair_hex": [
+          "3fec8684dc4b91b7"
+        ],
+        "bit_identical": true
+      }
+    ],
+    "A2_coarse_grid_sweep": [
+      {
+        "J": 4,
+        "prerepair": [
+          7.541113702640239,
+          1.6653345369377348e-16
+        ],
+        "postrepair": [
+          7.541113702640239,
+          1.6653345369377348e-16
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 6,
+        "prerepair": [
+          0.12021050303926017,
+          0.0
+        ],
+        "postrepair": [
+          0.12021050303926017,
+          0.0
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 8,
+        "prerepair": [
+          0.05209785330978778,
+          1.6653345369377348e-16
+        ],
+        "postrepair": [
+          0.05209785330978778,
+          1.6653345369377348e-16
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 12,
+        "prerepair": [
+          0.019353597546427403,
+          0.0
+        ],
+        "postrepair": [
+          0.019353597546427403,
+          0.0
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 16,
+        "prerepair": [
+          0.010147958260368961,
+          0.21493983818206944
+        ],
+        "postrepair": [
+          0.010147958260368961,
+          0.21493983818206944
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 24,
+        "prerepair": [
+          0.0042457187073556835,
+          0.28150601106517686
+        ],
+        "postrepair": [
+          0.0042457187073556835,
+          0.28150601106517686
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 32,
+        "prerepair": [
+          0.002324533006074825,
+          0.4302871445789552
+        ],
+        "postrepair": [
+          0.002324533006074825,
+          0.4302871445789552
+        ],
+        "bit_identical": true
+      },
+      {
+        "J": 128,
+        "prerepair": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "postrepair": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "bit_identical": true
+      }
+    ],
+    "note": "same-process differential: both arms share BLAS, numpy, seeds and matmul reduction order, so any surviving bit difference is attributable to the patch and to nothing else"
+  },
+  "P4b_banked_json_comparison_informational": {
+    "available": true,
+    "banked_verdict_answer": "YES",
+    "banked_n_mechanisms": 6,
+    "n_fields": 11,
+    "n_bit_identical": 11,
+    "fields": [
+      {
+        "field": "A1.clean_conformal_check",
+        "banked": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "prerepair_rerun": [
+          0.0001517287054473293,
+          1.9094999985985477
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A1.clean_jacobian_identity_error",
+        "banked": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "prerepair_rerun": [
+          0.0005058518859734074,
+          1.9094999985985477
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A3.clean_family_op_norm",
+        "banked": [
+          661.2075718521894,
+          47
+        ],
+        "prerepair_rerun": [
+          661.2075718521894,
+          47
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.ratio_true_maximizer",
+        "banked": 221.97837236723137,
+        "prerepair_rerun": 221.97837236723137,
+        "bit_identical": true
+      },
+      {
+        "field": "A4.ratio_runner_up",
+        "banked": 105.43571373550743,
+        "prerepair_rerun": 105.43571373550743,
+        "bit_identical": true
+      },
+      {
+        "field": "A4.clean_two_vector_family",
+        "banked": [
+          221.97837236723137,
+          1
+        ],
+        "prerepair_rerun": [
+          221.97837236723137,
+          1
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.clean_full_family",
+        "banked": [
+          661.2075718521894,
+          47
+        ],
+        "prerepair_rerun": [
+          661.2075718521894,
+          47
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A4.understatement_factor",
+        "banked": 2.105343289315412,
+        "prerepair_rerun": 2.105343289315412,
+        "bit_identical": true
+      },
+      {
+        "field": "A5.clean_sup_seminorm_norm",
+        "banked": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "prerepair_rerun": [
+          0.9996893798319648,
+          0.7290476589888806,
+          1.7287370388208454
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A6.clean_per_degree",
+        "banked": [
+          0.7229011491994093,
+          0.8359515019975166,
+          0.8548322678393498
+        ],
+        "prerepair_rerun": [
+          0.7229011491994093,
+          0.8359515019975166,
+          0.8548322678393498
+        ],
+        "bit_identical": true
+      },
+      {
+        "field": "A6.clean_random_best",
+        "banked": 0.8914207747116539,
+        "prerepair_rerun": 0.8914207747116539,
+        "bit_identical": true
+      }
+    ],
+    "note": "EXCLUDED from the pass/fail criterion.  The battery's own docstring records 1-2 ULP BLAS reduction-order drift in A6.clean_per_degree between runners, predating the repair; this table therefore measures the machine, not the patch."
+  },
+  "P5_dedicated_known_answer": {
+    "command": "python test_holder_norms.py",
+    "returncode": 0,
+    "n_gates_ok": 6,
+    "all_passed_banner": true,
+    "runtime_seconds": 1.04,
+    "gate_lines": [
+      "[ok] (1) Holder seminorm exact on closed-form moduli (|th-pi/2|^0.5 -> 0.9511, target 1)",
+      "[ok] (2) H does not amplify the seminorm mode by mode ([cos k] vs [sin k] within 29%, no growth in k) -- its L^inf unboundedness is a SUMMATION effect",
+      "[ok] (3) conformal identity (pointwise, alpha-independent): X-weighted far-field seminorm = 2^gamma x the theta one with weight alpha-gamma, to 0.04% out to X=121 (Jacobian dX/dth=(1+X^2)/2 to 0.06%)",
+      "[ok] (4) the norm is an algebra with constant 1 (worst ||fg||/(||f|| ||g||) = 0.5393)",
+      "[ok] (5) the L^inf adversary is DEFUSED: sup ratio 1.80->4.07 (grows) but Holder ratio 1.02->0.85 (flat)",
+      "[ok] (6) family_op_norm reproduces the exact sup-to-sup norm when the seminorm is off (588.8142 vs 588.8142), is monotone in the family (50.53 -> 50.53), and is SMALLER in the Holder pair (stronger codomain norm)"
+    ],
+    "note": "predates the repair (one commit, 5a547a4, never touched since), so its passing is evidence the repair did not author; a TOLERANCE gate (0.04%/0.06%), hence necessary but not sufficient -- the bitwise differential is what makes clause (b) strong"
+  },
+  "P5b_capabilities_line": {
+    "entry_found": true,
+    "claims_present_in_ledger": {
+      "names_test_holder_norms.py": true,
+      "claims_every_entry_point_rejects": true,
+      "claims_gamma_gt_0": true,
+      "claims_2.1053x_understatement": true,
+      "claims_clean_0.891421": true,
+      "claims_53_of_53_bit_identical": true
+    },
+    "authored_by": "fb61a79 (the repair commit itself) -- `capabilities.py | 2 +-`",
+    "note": "the ledger line is the repair's self-report promoted to a ledger; the numbers below are re-measured here rather than read from it"
+  },
+  "P6_seventh_mechanism": {
+    "prerepair": {
+      "arm": "prerepair",
+      "clean_jacobian_identity_error": [
+        0.0005058518859734074,
+        1.9094999985985477
+      ],
+      "clean_conformal_check": [
+        0.0001517287054473293,
+        1.9094999985985477
+      ],
+      "n_cases": 3,
+      "n_silent": 2,
+      "cases": [
+        {
+          "case": "jacobian_identity_error, duplicated node (dtheta = 0)",
+          "verdict": "FLAGGED_WARN",
+          "returned": [
+            0.0008127828757138467,
+            1.9094999985985477
+          ],
+          "clean": [
+            0.0005058518859734074,
+            1.9094999985985477
+          ],
+          "exception": null,
+          "warnings": [
+            "RuntimeWarning"
+          ]
+        },
+        {
+          "case": "conformal_check, descending grid (coverage claim)",
+          "verdict": "SILENT",
+          "returned": [
+            0.2262418523645331,
+            1019.8141148113144
+          ],
+          "clean": [
+            0.0001517287054473293,
+            1.9094999985985477
+          ],
+          "exception": null,
+          "warnings": []
+        },
+        {
+          "case": "jacobian_identity_error, descending grid",
+          "verdict": "SILENT",
+          "returned": [
+            0.9735756699671507,
+            1019.8141148113144
+          ],
+          "clean": [
+            0.0005058518859734074,
+            1.9094999985985477
+          ],
+          "exception": null,
+          "warnings": []
+        }
+      ],
+      "scope": "found DURING the repair, so leg 100's battery has no case for it; measured and reported here, OUTSIDE clause (a)'s pass/fail criterion"
+    },
+    "postrepair": {
+      "arm": "postrepair",
+      "clean_jacobian_identity_error": [
+        0.0005058518859734074,
+        1.9094999985985477
+      ],
+      "clean_conformal_check": [
+        0.0001517287054473293,
+        1.9094999985985477
+      ],
+      "n_cases": 3,
+      "n_silent": 0,
+      "cases": [
+        {
+          "case": "jacobian_identity_error, duplicated node (dtheta = 0)",
+          "verdict": "FLAGGED_RAISE",
+          "returned": [],
+          "clean": [
+            0.0005058518859734074,
+            1.9094999985985477
+          ],
+          "exception": "ValueError",
+          "warnings": []
+        },
+        {
+          "case": "conformal_check, descending grid (coverage claim)",
+          "verdict": "FLAGGED_RAISE",
+          "returned": [],
+          "clean": [
+            0.0001517287054473293,
+            1.9094999985985477
+          ],
+          "exception": "ValueError",
+          "warnings": []
+        },
+        {
+          "case": "jacobian_identity_error, descending grid",
+          "verdict": "FLAGGED_RAISE",
+          "returned": [],
+          "clean": [
+            0.0005058518859734074,
+            1.9094999985985477
+          ],
+          "exception": "ValueError",
+          "warnings": []
+        }
+      ],
+      "scope": "found DURING the repair, so leg 100's battery has no case for it; measured and reported here, OUTSIDE clause (a)'s pass/fail criterion"
+    }
+  },
+  "P6b_sixth_mechanism_warning_decay": {
+    "prerepair_n_that_go_silent_on_repeat": 2,
+    "prerepair_n_cases": 2,
+    "prerepair_silent_from_call": [
+      2,
+      2
+    ],
+    "prerepair_returned_value_constant_across_calls": [
+      true,
+      true
+    ],
+    "postrepair_unshimmed_reprobe": [
+      {
+        "site": "gate_A8:553  conformal_check(theta[64]=+Inf) x3",
+        "verdict": "FLAGGED_RAISE",
+        "verdict_constant_across_repeats": true
+      },
+      {
+        "site": "gate_A8:553  family_op_norm(A[3,7]=+Inf) x3",
+        "verdict": "FLAGGED_RAISE",
+        "verdict_constant_across_repeats": true
+      }
+    ],
+    "note": "leg 100's 6th mechanism: under the interpreter's DEFAULT warning filter the incidental numpy RuntimeWarning fires once per source location, so the 2nd and 3rd identical calls returned the identical wrong value with no signal at all. Post-repair both sites raise on every one of 3 repeats, so the mechanism has no surface left: a ValueError does not decay."
+  },
+  "P7_positive_control": {
+    "prerepair": {
+      "n_cases": 4,
+      "n_signalled": 4,
+      "cases": [
+        {
+          "case": "HolderNorm called on a wrong-length vector",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "family_op_norm with a non-conforming operator",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "square_wave_partial_sum with m = NaN",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "holder_H_constant with random degree above grid size",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        }
+      ],
+      "note": "the harness CAN see a signal; every silence reported above is the module's, not the instrumentation's"
+    },
+    "postrepair": {
+      "n_cases": 4,
+      "n_signalled": 4,
+      "cases": [
+        {
+          "case": "HolderNorm called on a wrong-length vector",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "family_op_norm with a non-conforming operator",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "square_wave_partial_sum with m = NaN",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        },
+        {
+          "case": "holder_H_constant with random degree above grid size",
+          "exception": "ValueError",
+          "warnings": [],
+          "signalled": true
+        }
+      ],
+      "note": "the harness CAN see a signal; every silence reported above is the module's, not the instrumentation's"
+    }
+  },
+  "P8_gamma_one_boundary": {
+    "residual_input_class": "gamma = 1 (the Lipschitz endpoint)",
+    "why_it_is_not_an_incomplete_fix": [
+      "leg 100's own verdict() lists SIX findings, from gates A1/A2/A3/A4/A6/A8; gate A5 -- the only gate where this case lives -- is filed under not_silent, so gamma = 1 was never one of the six mechanisms the gate's clause (a) names",
+      "the repair's guard _reject_nonpositive_gamma is one-sided BY DESIGN and says so in its own docstring: 'Every gamma used anywhere in this repository lies in [0.05, 0.9]; no upper bound is imposed here, only positivity'",
+      "the values returned at gamma = 1 are BIT-IDENTICAL to an independent reference built from the module docstring's formula, so nothing is silently corrupted: it is the correct norm for the exponent requested",
+      "it is not a REGRESSION either -- the pre-repair arm accepts gamma = 1 and returns the identical numbers"
+    ],
+    "independent_reference_check": [
+      {
+        "gamma": 0.3,
+        "module_sup_part": 0.9996893798319648,
+        "reference_sup_part": 0.9996893798319648,
+        "module_seminorm": 0.7290476589888806,
+        "reference_seminorm": 0.7290476589888806,
+        "module_total": 1.7287370388208454,
+        "sup_bit_identical": true,
+        "seminorm_bit_identical": true
+      },
+      {
+        "gamma": 0.5,
+        "module_sup_part": 0.9996893798319648,
+        "reference_sup_part": 0.9996893798319648,
+        "module_seminorm": 0.6105974354366601,
+        "reference_seminorm": 0.6105974354366601,
+        "module_total": 1.610286815268625,
+        "sup_bit_identical": true,
+        "seminorm_bit_identical": true
+      },
+      {
+        "gamma": 1.0,
+        "module_sup_part": 0.9996893798319648,
+        "reference_sup_part": 0.9996893798319648,
+        "module_seminorm": 0.49964385478570955,
+        "reference_seminorm": 0.49964385478570955,
+        "module_total": 1.4993332346176744,
+        "sup_bit_identical": true,
+        "seminorm_bit_identical": true
+      }
+    ],
+    "n_reference_checks": 6,
+    "n_reference_bit_identical": 6,
+    "discrete_holder_hilbert_ladder": [
+      {
+        "gamma": 0.3,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.7226256205017992,
+          0.7974048313433832,
+          0.8321462865403565,
+          0.8372095149276442,
+          0.8209389197784005,
+          0.8166401557423038
+        ],
+        "growth_last_over_first": 1.130101303597871,
+        "random_best": 0.8774530818358134
+      },
+      {
+        "gamma": 0.5,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.5953708402401232,
+          0.5919511652062125,
+          0.5512763089228474,
+          0.5762934065974031,
+          0.5992468595973713,
+          0.685371808203889
+        ],
+        "growth_last_over_first": 1.151167913980246,
+        "random_best": 0.8929204788997577
+      },
+      {
+        "gamma": 0.9,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.4978503898538777,
+          0.5678916915787198,
+          0.6245762692195825,
+          0.6647256586190781,
+          0.6788607953403691,
+          0.7414670683347545
+        ],
+        "growth_last_over_first": 1.4893371250595584,
+        "random_best": 1.0547129903122632
+      },
+      {
+        "gamma": 1.0,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.5231265501920439,
+          0.5962582043092259,
+          0.6514894175807908,
+          0.6841719145766284,
+          0.6877658873408512,
+          0.7470340679366775
+        ],
+        "growth_last_over_first": 1.4280178814522706,
+        "random_best": 1.0905136965320392
+      },
+      {
+        "gamma": 1.5,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.716738475514081,
+          0.7091039615523147,
+          0.7141619454576282,
+          0.7176037796562058,
+          0.7051623680142475,
+          0.7577334918881524
+        ],
+        "growth_last_over_first": 1.0571966174198584,
+        "random_best": 1.1651158801814074
+      },
+      {
+        "gamma": 2.0,
+        "degrees": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "per_degree": [
+          0.7609388352049998,
+          0.7308113132155228,
+          0.7251096801026313,
+          0.7231497084785939,
+          0.7079728972851739,
+          0.7594406137339305
+        ],
+        "growth_last_over_first": 0.998031088174563,
+        "random_best": 1.1940962496236163
+      }
+    ],
+    "sibling_module_excludes_gamma_1": {
+      "file": "solver/nk_seminorm.py",
+      "lines": "89-97",
+      "three_stated_reasons": [
+        "the closure feedback is linear in T at gamma = 1, turning a condition-free sublinear closure into a genuine contraction condition ('closure needs the Hilbert feedback coefficient to beat 2c')",
+        "v5's U2: the Holder-Hilbert constant blows up at both ends",
+        "the classical failure of H on Lipschitz functions"
+      ],
+      "finding": "solver/holder_norms.py's repaired guard ADMITS an exponent that solver/nk_seminorm.py documents as excluded for three independent reasons. That is a cross-module admissibility boundary that is stated in one module and not enforced in the other -- reported, NOT patched (this leg edits nothing)."
+    },
+    "window_caveat": "the discrete ladder does NOT resolve the continuum divergence nk_seminorm.py names: over degrees 4..128 on a 256-node grid the gamma = 1 constant grows by a factor of about 1.43 against about 1.13 at gamma = 0.3 -- faster, but bounded. A finite grid cannot see an endpoint blow-up (lesson 84: a known-answer probe has a WINDOW), so no divergence is claimed here, only the faster growth and the sibling module's stated exclusion.",
+    "blast_radius": {
+      "n_grep_lines": 230,
+      "gamma_values_passed_in_repo": "every Route-D/NK consumer fixes GAMMA at 0.5 (test_nk_bounds, test_nk_seminorm, test_nk_hilbert_holder, test_nk_hilbert_pointwise, test_op_lower, p2_route_d_v6..v9) or 0.15 (p2_route_d_v12, the production optimum); the dedicated test uses 0.5 and 0.3",
+      "n_live_call_sites_with_gamma_ge_1": 0,
+      "max_gamma_passed_anywhere": 0.5,
+      "verdict": "LATENT. No live caller passes gamma >= 1, so no banked number in the repository is exposed. The module docstring's claim that every gamma in the repo lies in [0.05, 0.9] is CONFIRMED by this census, measured rather than taken from the ledger."
+    }
+  },
+  "gate": {
+    "question": "Post-repair, does solver/holder_norms.py (a) reject every case in leg 100's original 6-mechanism battery (no silent corruption remains), and (b) reproduce every previously-validated clean-call result bit-identically, including the module's dedicated test file and its capabilities.py validated line?",
+    "answer": "YES",
+    "clause_a": {
+      "criterion": "0 cases classified SILENT by leg 100's own classify() across the gates leg 100's own verdict() draws its SIX mechanisms from (A1, A2, A3, A4, A6, A8) plus the adversarial bare sites, WITH the pre-repair arm reproducing leg 100's silence as a live negative control, AND leg 100's positive control (A7) still signalling. Scope fixed in writeup/novelty/leg_131.md before the run.",
+      "scope_mechanism_gates": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A6",
+        "A8"
+      ],
+      "scope_excluded_gates": [
+        "A0",
+        "A5",
+        "A7"
+      ],
+      "scope_exclusion_reason": "A0 is an AST surface count with no verdicts; A7 is the positive control; A5 is filed by leg 100's own verdict() under not_silent ('the part that mostly BEHAVES') and contributes none of the six mechanisms",
+      "prerepair_n_silent_in_scope": 14,
+      "prerepair_n_verdicts_in_scope": 31,
+      "postrepair_n_silent_in_scope": 0,
+      "postrepair_n_verdicts_in_scope": 31,
+      "prerepair_n_silent_whole_battery": 18,
+      "postrepair_n_silent_whole_battery": 1,
+      "bare_sites_prerepair": {
+        "n_adversarial": 5,
+        "n_adversarial_silent": 2,
+        "adversarial_silent_sites": [
+          "gate_A6:470  holder_H_constant(theta, gamma=0.0)",
+          "gate_A6:470  holder_H_constant(theta, gamma=1.0)"
+        ],
+        "n_clean_control": 1,
+        "clean_control_returns": [
+          [
+            0.7229011491994093,
+            0.8359515019975166,
+            0.8548322678393498,
+            0.8914207747116539
+          ]
+        ]
+      },
+      "bare_sites_postrepair": {
+        "n_adversarial": 5,
+        "n_adversarial_silent": 1,
+        "adversarial_silent_sites": [
+          "gate_A6:470  holder_H_constant(theta, gamma=1.0)"
+        ],
+        "n_clean_control": 1,
+        "clean_control_returns": [
+          [
+            0.7229011491994093,
+            0.8359515019975166,
+            0.8548322678393498,
+            0.8914207747116539
+          ]
+        ]
+      },
+      "negative_control_live": true,
+      "positive_control_signals_both_arms": true,
+      "per_gate": {
+        "A0": {
+          "in_scope": false,
+          "prerepair_silent": 0,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 0,
+          "postrepair_verdicts": 0
+        },
+        "A1": {
+          "in_scope": true,
+          "prerepair_silent": 4,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 8,
+          "postrepair_verdicts": 8
+        },
+        "A2": {
+          "in_scope": true,
+          "prerepair_silent": 1,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 1,
+          "postrepair_verdicts": 1
+        },
+        "A3": {
+          "in_scope": true,
+          "prerepair_silent": 5,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 11,
+          "postrepair_verdicts": 11
+        },
+        "A4": {
+          "in_scope": true,
+          "prerepair_silent": 2,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 3,
+          "postrepair_verdicts": 3
+        },
+        "A5": {
+          "in_scope": false,
+          "prerepair_silent": 4,
+          "postrepair_silent": 1,
+          "prerepair_verdicts": 11,
+          "postrepair_verdicts": 11
+        },
+        "A6": {
+          "in_scope": true,
+          "prerepair_silent": 2,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 8,
+          "postrepair_verdicts": 8
+        },
+        "A7": {
+          "in_scope": false,
+          "prerepair_silent": 0,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 0,
+          "postrepair_verdicts": 0
+        },
+        "A8": {
+          "in_scope": true,
+          "prerepair_silent": 0,
+          "postrepair_silent": 0,
+          "prerepair_verdicts": 0,
+          "postrepair_verdicts": 0
+        }
+      },
+      "residual_out_of_scope_silent_cases": [
+        {
+          "case": "HolderNorm(gamma = 1 (degenerate: Lipschitz endpoint))",
+          "key": "verdict",
+          "returned": [
+            0.9996893798319648,
+            0.49964385478570955,
+            1.4993332346176744
+          ],
+          "clean": [
+            0.9996893798319648,
+            0.7290476589888806,
+            1.7287370388208454
+          ],
+          "bit_identical_to_clean": false
+        },
+        {
+          "case": "gate_A6:470  holder_H_constant(theta, gamma=1.0)",
+          "key": "bare site"
+        }
+      ],
+      "residual_note": "the ONE surviving input class is gamma = 1, at two sites; it is characterised in full in P8 and it is neither an incomplete fix of a leg-100 mechanism nor a repair regression",
+      "passes": true
+    },
+    "clause_b": {
+      "criterion": "every clean value the battery computes is bit-for-bit identical across a same-process pre/post differential, the dedicated known-answer file passes fresh, and capabilities.py's validated line is confirmed against measured values",
+      "n_clean_values_compared": 19,
+      "n_bit_identical": 19,
+      "n_moved": 0,
+      "dedicated_returncode": 0,
+      "dedicated_n_gates_ok": 6,
+      "passes": true
+    }
+  },
+  "runtime_seconds": 1.76
+}
