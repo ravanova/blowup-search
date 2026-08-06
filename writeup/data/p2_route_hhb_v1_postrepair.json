@@ -1,0 +1,1340 @@
+{
+ "B0_frozen_runner_abort_census": {
+  "aborted_in_gate": [
+   "A3_eps_truncation_mechanism"
+  ],
+  "gates_completed": [
+   "A1_known_answer",
+   "A2_degenerate_input_inventory"
+  ],
+  "gates_never_executed": [
+   "A4_VIOLATION_gamma_zero",
+   "A5_VIOLATION_gamma_negative",
+   "A6_CONTROL_shipped_and_production_are_safe",
+   "A7_alpha_inf_is_vacuous_not_a_finding",
+   "A8_soundness_predicate"
+  ],
+  "n_gates_completed": 2,
+  "n_gates_never_executed": 5,
+  "n_gates_started": 3,
+  "n_gates_total": 8,
+  "note": "leg 119's frozen battery is not a runnable post-repair regression suite in its shipped form: the guard it verifies is the thing that stops it.  Third instance of the shape leg 131 found and leg 147 confirmed.  This is a statement about the HARNESS, not about the repair's correctness -- the abort is the guard behaving as designed.",
+  "returncode": 1,
+  "stderr_tail": "(1.0, 0.05, 1.5, 0.0, n_quad=4000, eps=e)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a0877e4327c53e08e/solver/hilbert_holder.py\", line 359, in increment_pair_bound\n    raise HilbertHolderDomainError(reason)\nsolver.hilbert_holder.HilbertHolderDomainError: gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence (the sup envelope cS -> 2 cos^alpha(inner/2) != 0 regardless).  gamma > 0 is the Plemelj-Privalov hypothesis under which the conjugate operator preserves the Holder class at all\n",
+  "terminating_exception": "solver.hilbert_holder.HilbertHolderDomainError: gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence (the sup envelope cS -> 2 cos^alpha(inner/2) != 0 regardless).  gamma > 0 is the Plemelj-Privalov hypothesis under which the conjugate operator preserves the Holder class at all",
+  "wall_seconds": 12.04503345489502
+ },
+ "B1_clause_a_per_case": {
+  "assembly_hilbert_holder_constant": {
+   "V1_gamma_0.0": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic e",
+    "message_len": 294,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "V2_gamma_-0.5": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic ",
+    "message_len": 295,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "alpha_inf": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singula",
+    "message_len": 164,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "alpha_nan": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singula",
+    "message_len": 164,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_-0.3": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic ",
+    "message_len": 295,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_-1.0": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -1.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic ",
+    "message_len": 295,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_inf": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singula",
+    "message_len": 164,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_nan": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singula",
+    "message_len": 164,
+    "n_warnings": 0,
+    "outcome": "raised"
+   }
+  },
+  "inflate_policy": {
+   "V1_gamma_0.0": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "V2_gamma_-0.5": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "alpha_inf": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "alpha_nan": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "gamma_-0.3": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "gamma_-1.0": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "gamma_inf": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   },
+   "gamma_nan": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_infinite",
+    "value": [
+     "Infinity",
+     "Infinity"
+    ],
+    "warning_types": []
+   }
+  },
+  "low_level_increment_pair_bound": {
+   "V1_gamma_0.0": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic e",
+    "message_len": 356,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "V2_gamma_-0.5": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+    "message_len": 357,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "alpha_inf": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+    "message_len": 306,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "alpha_nan": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+    "message_len": 306,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_-0.3": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+    "message_len": 357,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_-1.0": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "gamma = -1.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+    "message_len": 357,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_inf": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+    "message_len": 306,
+    "n_warnings": 0,
+    "outcome": "raised"
+   },
+   "gamma_nan": {
+    "exc_module": "solver.hilbert_holder",
+    "exc_type": "HilbertHolderDomainError",
+    "is_domain_error": true,
+    "is_value_error": true,
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+    "message_len": 306,
+    "n_warnings": 0,
+    "outcome": "raised"
+   }
+  },
+  "n_failing_probed": 8,
+  "n_failing_rejected_at_assembly": 8,
+  "n_failing_rejected_at_low_level": 8,
+  "n_inflate_returning_finite": 0,
+  "n_sound_probed": 6,
+  "n_sound_wrongly_rejected": 0,
+  "note": "every entry is a TAG plus the returned value or the exception type, never a boolean; 'raised' and 'returned_infinite' both satisfy clause (a), 'returned_finite' on a failing configuration does not",
+  "rejection_homogeneity": {
+   "all_are_HilbertHolderDomainError": true,
+   "cases_whose_message_states_no_reason": [],
+   "distinct_exception_types": [
+    "HilbertHolderDomainError"
+   ],
+   "why": "leg 147's NO came from a heterogeneity INSIDE a clean headline count -- 3 of 4 survivors flagged, 1 silent.  The same probe is run here rather than trusting the aggregate."
+  },
+  "sound_configurations": {
+   "gamma_0.01": {
+    "leaves": 2,
+    "n_warnings": 1,
+    "outcome": "returned_finite",
+    "value": [
+     0.0007446439353689669,
+     24.902504068142672
+    ],
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   "gamma_0.05": {
+    "leaves": 2,
+    "n_warnings": 1,
+    "outcome": "returned_finite",
+    "value": [
+     0.0023577334613614797,
+     17.31008978992793
+    ],
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   "gamma_0.9": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_finite",
+    "value": [
+     0.1586438520937305,
+     4.396150394379737
+    ],
+    "warning_types": []
+   },
+   "gamma_1e-3": {
+    "leaves": 2,
+    "n_warnings": 1,
+    "outcome": "returned_finite",
+    "value": [
+     0.0001608371806686633,
+     27.294882308561306
+    ],
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   "production_1.4_0.15": {
+    "leaves": 2,
+    "n_warnings": 1,
+    "outcome": "returned_finite",
+    "value": [
+     0.005945428178591599,
+     9.32320757208159
+    ],
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   "shipped_1.5_0.5": {
+    "leaves": 2,
+    "n_warnings": 0,
+    "outcome": "returned_finite",
+    "value": [
+     0.03705418170880763,
+     4.460871100852915
+    ],
+    "warning_types": []
+   }
+  }
+ },
+ "B2_clause_a_dominance": {
+  "CONTROL_production_1.4_0.15": [
+   {
+    "T": 4.979852486119404,
+    "alpha": 1.4,
+    "bound": 46.433517024696364,
+    "delta": 0.001,
+    "gamma": 0.15,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.09952298552509832,
+    "true_weighted_increment": 4.621202242728263,
+    "u_S": 0.006018926771958835,
+    "u_T": 9.323066943716533,
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   {
+    "T": 1767.5216867944087,
+    "alpha": 1.4,
+    "bound": 16478.72902938181,
+    "delta": 1e-20,
+    "gamma": 0.15,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.002486325136530939,
+    "true_weighted_increment": 40.97147820383408,
+    "u_S": 0.006018926771958835,
+    "u_T": 9.323066943716533,
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   {
+    "T": 1767521.6867944081,
+    "alpha": 1.4,
+    "bound": 16478723.016473962,
+    "delta": 1e-40,
+    "gamma": 0.15,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 5.081492053847068e-06,
+    "true_weighted_increment": 83.73650006575923,
+    "u_S": 0.006018926771958835,
+    "u_T": 9.323066943716533,
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   {
+    "T": 9939504.876546485,
+    "alpha": 1.4,
+    "bound": 92666669.35745874,
+    "delta": 1e-45,
+    "gamma": 0.15,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 1.0190045265125824e-06,
+    "true_weighted_increment": 94.42775553209528,
+    "u_S": 0.006018926771958835,
+    "u_T": 9.323066943716533,
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   },
+   {
+    "T": 55893943.440130875,
+    "alpha": 1.4,
+    "bound": 521102976.44666463,
+    "delta": 1e-50,
+    "gamma": 0.15,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 2.0172406558789305e-07,
+    "true_weighted_increment": 105.11901099877326,
+    "u_S": 0.006018926771958835,
+    "u_T": 9.323066943716533,
+    "warning_types": [
+     "HilbertHolderTruncationWarning"
+    ]
+   }
+  ],
+  "CONTROL_shipped_1.5_0.5": [
+   {
+    "T": 41.88198077786683,
+    "alpha": 1.5,
+    "bound": 186.84597987263098,
+    "delta": 0.001,
+    "gamma": 0.5,
+    "n_warnings": 0,
+    "ratio_true_over_bound": 0.06660749811041362,
+    "true_weighted_increment": 12.44534325130465,
+    "u_S": 0.037294769392098415,
+    "u_T": 4.4603593629927065,
+    "warning_types": []
+   },
+   {
+    "T": 13247863576.467371,
+    "alpha": 1.5,
+    "bound": 59090232342.983574,
+    "delta": 1e-20,
+    "gamma": 0.5,
+    "n_warnings": 0,
+    "ratio_true_over_bound": 1.86574589336602e-09,
+    "true_weighted_increment": 110.2473583319656,
+    "u_S": 0.037294769392098415,
+    "u_T": 4.4603593629927065,
+    "warning_types": []
+   },
+   {
+    "T": 1.3247863576467372e+20,
+    "alpha": 1.5,
+    "bound": 5.909023234294629e+20,
+    "delta": 1e-40,
+    "gamma": 0.5,
+    "n_warnings": 0,
+    "ratio_true_over_bound": 3.8129572439571877e-19,
+    "true_weighted_increment": 225.30852945915035,
+    "u_S": 0.037294769392098415,
+    "u_T": 4.4603593629927065,
+    "warning_types": []
+   },
+   {
+    "T": 4.1893423032821134e+22,
+    "alpha": 1.5,
+    "bound": 1.8685972167225805e+23,
+    "delta": 1e-45,
+    "gamma": 0.5,
+    "n_warnings": 0,
+    "ratio_true_over_bound": 1.3597035250265342e-21,
+    "true_weighted_increment": 254.07382224324633,
+    "u_S": 0.037294769392098415,
+    "u_T": 4.4603593629927065,
+    "warning_types": []
+   },
+   {
+    "T": 1.3247863576467374e+25,
+    "alpha": 1.5,
+    "bound": 5.909023234294629e+25,
+    "delta": 1e-50,
+    "gamma": 0.5,
+    "n_warnings": 0,
+    "ratio_true_over_bound": 4.786562919345591e-24,
+    "true_weighted_increment": 282.83911502826226,
+    "u_S": 0.037294769392098415,
+    "u_T": 4.4603593629927065,
+    "warning_types": []
+   }
+  ],
+  "V1_gamma_0.0_through_extrapolate": [
+   {
+    "T": 1.999180832277797,
+    "alpha": 1.5,
+    "bound": 55.139127233563066,
+    "delta": 0.001,
+    "gamma": 0.0,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.0538750890891443,
+    "true_weighted_increment": 2.9706253920058727,
+    "u_S": 0.0,
+    "u_T": 27.580860292032444,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 2.0,
+    "alpha": 1.5,
+    "bound": 55.16172058406489,
+    "delta": 1e-20,
+    "gamma": 0.0,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.47705823563240307,
+    "true_weighted_increment": 26.315353096281605,
+    "u_S": 0.0,
+    "u_T": 27.580860292032444,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 2.0,
+    "alpha": 1.5,
+    "bound": 55.16172058406489,
+    "delta": 1e-40,
+    "gamma": 0.0,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.974946621515092,
+    "true_weighted_increment": 53.77973312039357,
+    "u_S": 0.0,
+    "u_T": 27.580860292032444,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 2.0,
+    "alpha": 1.5,
+    "bound": 55.16172058406489,
+    "delta": 1e-45,
+    "gamma": 0.0,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 1.0994187179957158,
+    "true_weighted_increment": 60.6458281269705,
+    "u_S": 0.0,
+    "u_T": 27.580860292032444,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 2.0,
+    "alpha": 1.5,
+    "bound": 55.16172058406489,
+    "delta": 1e-50,
+    "gamma": 0.0,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 1.2238908144803204,
+    "true_weighted_increment": 67.51192313376703,
+    "u_S": 0.0,
+    "u_T": 27.580860292032444,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   }
+  ],
+  "V2_gamma_-0.5_through_extrapolate": [
+   {
+    "T": 1.9741513671736144,
+    "alpha": 1.5,
+    "bound": 13.170932911318577,
+    "delta": 0.001,
+    "gamma": -0.5,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.053835947513422834,
+    "true_weighted_increment": 0.7090696529165603,
+    "u_S": 13.089410894555181,
+    "u_T": 0.04129471433596845,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 1.509631695033295e-08,
+    "alpha": 1.5,
+    "bound": 13.08941089517858,
+    "delta": 1e-20,
+    "gamma": -0.5,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.47987719359135605,
+    "true_weighted_increment": 6.281309766142416,
+    "u_S": 13.089410894555181,
+    "u_T": 0.04129471433596845,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 1.5096316950332947e-18,
+    "alpha": 1.5,
+    "bound": 13.089410894555181,
+    "delta": 1e-40,
+    "gamma": -0.5,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 0.9807076237476876,
+    "true_weighted_increment": 12.836885054656305,
+    "u_S": 13.089410894555181,
+    "u_T": 0.04129471433596845,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 4.7738745842859126e-21,
+    "alpha": 1.5,
+    "bound": 13.089410894555181,
+    "delta": 1e-45,
+    "gamma": -0.5,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 1.1059152312910672,
+    "true_weighted_increment": 14.475778876915808,
+    "u_S": 13.089410894555181,
+    "u_T": 0.04129471433596845,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "T": 1.509631695033295e-23,
+    "alpha": 1.5,
+    "bound": 13.089410894555181,
+    "delta": 1e-50,
+    "gamma": -0.5,
+    "n_warnings": 1,
+    "ratio_true_over_bound": 1.231122838838451,
+    "true_weighted_increment": 16.11467269922772,
+    "u_S": 13.089410894555181,
+    "u_T": 0.04129471433596845,
+    "warning_types": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   }
+  ],
+  "leg_153_banked_worst_ratio": 1.231122838838451,
+  "note": "the extrapolated pre-repair pair is STILL exceeded by leg 119's adversary, so the guard removes a real violation and is not decorative; on both sound configurations the ratio stays below 1 and FALLS as delta shrinks, the opposite asymptotics, which is the control that can report the other answer",
+  "worst_ratio_on_sound_configurations": 0.09952298552509832,
+  "worst_ratio_still_attainable_through_extrapolate": 1.231122838838451
+ },
+ "B3_clause_b_bitwise": {
+  "comparison_operator": "== on float64 (NOT allclose, NOT a tolerance)",
+  "moved_examples": [],
+  "n_float64_leaves_compared": 4505,
+  "n_leaves_moved": 0,
+  "n_surface_groups": 16,
+  "note": "both arms evaluated in ONE process on the same libm/BLAS, so a moved leaf can only come from the module's own source; capabilities.py records this module as 'no known-answer gate', which is why the referent is the other arm and not a banked absolute number",
+  "per_surface": {
+   "S1_increment_pair_bound_sound_grid": {
+    "n_leaves": 3840,
+    "n_moved": 0
+   },
+   "S2_hilbert_holder_constant_default_grid": {
+    "n_leaves": 18,
+    "n_moved": 0
+   },
+   "S3_hilbert_holder_constant_all_rules": {
+    "n_leaves": 21,
+    "n_moved": 0
+   },
+   "S4_sweep_convergence": {
+    "n_leaves": 8,
+    "n_moved": 0
+   },
+   "S5_pointwise_pair_bound": {
+    "n_leaves": 240,
+    "n_moved": 0
+   },
+   "S6_conjugate": {
+    "n_leaves": 17,
+    "n_moved": 0
+   },
+   "S6_cos_half": {
+    "n_leaves": 33,
+    "n_moved": 0
+   },
+   "S6_cq_sup_split": {
+    "n_leaves": 2,
+    "n_moved": 0
+   },
+   "S6_decomposition_exact": {
+    "n_leaves": 1,
+    "n_moved": 0
+   },
+   "S6_increment_regime": {
+    "n_leaves": 0,
+    "n_moved": 0
+   },
+   "S6_near_padding": {
+    "n_leaves": 7,
+    "n_moved": 0
+   },
+   "S6_pair_grid": {
+    "n_leaves": 248,
+    "n_moved": 0
+   },
+   "S6_quadratic_constant_full": {
+    "n_leaves": 4,
+    "n_moved": 0
+   },
+   "S6_weighted_seminorm": {
+    "n_leaves": 1,
+    "n_moved": 0
+   },
+   "S6_wrap": {
+    "n_leaves": 33,
+    "n_moved": 0
+   },
+   "S7_eps_ladder_sound": {
+    "n_leaves": 32,
+    "n_moved": 0
+   }
+  },
+  "seconds_post_arm": 54.193180561065674,
+  "seconds_pre_arm": 45.20709156990051,
+  "sha256_of_post_repair_hex_dump": "1c6b1289656a4b22c7dda8bfa0a0faa55b7e9ad001cd3b5befbc2ef0aefab7a3"
+ },
+ "B4_lesson_90_control": {
+  "CONTROL_IS_LIVE": true,
+  "assembly_split_polarity": {
+   "V1_gamma_0.0": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic e",
+     "message_len": 294,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "exc_module": "builtins",
+     "exc_type": "ZeroDivisionError",
+     "is_domain_error": false,
+     "is_value_error": false,
+     "message_head": "float division by zero",
+     "message_len": 22,
+     "n_warnings": 0,
+     "outcome": "raised"
+    }
+   },
+   "gamma_-0.3": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic ",
+     "message_len": 295,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 9,
+     "n_warnings": 52,
+     "outcome": "returned_finite",
+     "value": {
+      "alpha": 1.5,
+      "argmax_semi": [
+       0.00335630773229944,
+       1.1865667932145834
+      ],
+      "argmax_sup": [
+       0.019444315542698376,
+       1.1865667932145834
+      ],
+      "b_semi": 4.91897653279342,
+      "b_sup": 46.756438663776606,
+      "gamma": -0.3,
+      "n_increment_route": 481,
+      "rule": "increment"
+     },
+     "warning_types": [
+      "RuntimeWarning"
+     ]
+    }
+   }
+  },
+  "low_level": {
+   "V1_gamma_0.0": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic e",
+     "message_len": 356,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_finite",
+     "value": [
+      0.0,
+      27.58086868578648
+     ],
+     "warning_types": []
+    }
+   },
+   "V2_gamma_-0.5": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+     "message_len": 357,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_finite",
+     "value": [
+      13.089261573987466,
+      0.0414440922573335
+     ],
+     "warning_types": []
+    }
+   },
+   "alpha_inf": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+     "message_len": 306,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_finite",
+     "value": [
+      0.0,
+      0.0
+     ],
+     "warning_types": []
+    }
+   },
+   "alpha_nan": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+     "message_len": 306,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_nan",
+     "value": [
+      "NaN",
+      0.0
+     ],
+     "warning_types": []
+    }
+   },
+   "gamma_-0.3": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+     "message_len": 357,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_finite",
+     "value": [
+      22.839305141554846,
+      0.4110617154336208
+     ],
+     "warning_types": []
+    }
+   },
+   "gamma_-1.0": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "gamma = -1.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic ",
+     "message_len": 357,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_finite",
+     "value": [
+      3.1317840356891415,
+      0.0036650958649343157
+     ],
+     "warning_types": []
+    }
+   },
+   "gamma_inf": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+     "message_len": 306,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 8,
+     "outcome": "returned_nan",
+     "value": [
+      "NaN",
+      "NaN"
+     ],
+     "warning_types": [
+      "RuntimeWarning"
+     ]
+    }
+   },
+   "gamma_nan": {
+    "post_repair": {
+     "exc_module": "solver.hilbert_holder",
+     "exc_type": "HilbertHolderDomainError",
+     "is_domain_error": true,
+     "is_value_error": true,
+     "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so t",
+     "message_len": 306,
+     "n_warnings": 0,
+     "outcome": "raised"
+    },
+    "pre_repair": {
+     "leaves": 2,
+     "n_warnings": 0,
+     "outcome": "returned_nan",
+     "value": [
+      "NaN",
+      "NaN"
+     ],
+     "warning_types": []
+    }
+   }
+  },
+  "n_failing_where_pre_repair_ACCEPTS": 8,
+  "n_failing_where_pre_repair_returns_a_SILENT_FINITE_pair": 5,
+  "n_failing_where_the_two_arms_DIVERGE": 8,
+  "why": "lesson 90: a control that cannot come out differently is not a control.  The thing that had to change for this to report the other answer is named in advance -- the pre-repair arm accepting what the repaired arm rejects -- and the run aborts if it does not."
+ },
+ "B5_leg_153_claims_rederived": {
+  "i_head_warning_band": {
+   "HEAD_WARN_TOL": 0.001,
+   "SHIPPED_default_grid_48x28_nquad400": {
+    "band_still_separates": true,
+    "margin_above_worst_production": 53.84763279240704,
+    "margin_below_worst_shipped": 69.89778894015603,
+    "production_1.4_0.15": {
+     "argmax": [
+      3.1392554433125066,
+      -1.965856121773932,
+      0.9279381720324572,
+      3.6541207942213356,
+      0.24673302864799043
+     ],
+     "fraction_warned": 1.0,
+     "n_pairs": 2009,
+     "n_pairs_warned": 2009,
+     "worst_head_over_value": 0.05384763279240704
+    },
+    "production_over_shipped": 3763.830471850692,
+    "shipped_1.5_0.5": {
+     "argmax": [
+      1.1388662784023635,
+      1.965856121773932,
+      0.4542993702311809,
+      1.1578928498936518,
+      2.3064995968686987e-05
+     ],
+     "fraction_warned": 0.0,
+     "n_pairs": 2009,
+     "n_pairs_warned": 0,
+     "worst_head_over_value": 1.430660418824069e-05
+    }
+   },
+   "grid_resolution_effect": {
+    "margin_above_production_24x14": 50.804197109344514,
+    "margin_above_production_48x28": 53.84763279240704,
+    "margin_below_shipped_24x14": 71.8074881641849,
+    "margin_below_shipped_48x28": 69.89778894015603,
+    "note": "HEAD_WARN_TOL is a WARNING threshold: it changes no returned value and can reject nothing, so a moved margin is not a soundness question and is NOT a clause-(a) or clause-(b) failure.  It is reported because leg 153's banked margins are quoted on a coarser grid than the module ships.",
+    "production_ratio": 1.0599052018578745,
+    "shipped_ratio": 1.0273213109167714,
+    "worst_production_24x14": 0.050804197109344515,
+    "worst_production_48x28": 0.05384763279240704,
+    "worst_shipped_24x14": 1.3926124218598773e-05,
+    "worst_shipped_48x28": 1.430660418824069e-05
+   },
+   "leg_153_banked": {
+    "grid": "pair_grid(n_theta=24, n_d=14), n_quad=200",
+    "margin_above_worst_production": 50.804197109344514,
+    "margin_below_worst_shipped": 71.8074881641849,
+    "n_pairs": 481,
+    "production_over_shipped": 3648.121782620173,
+    "worst_production": 0.050804197109344515,
+    "worst_shipped": 1.3926124218598773e-05
+   },
+   "leg_153_grid_24x14_nquad200": {
+    "band_still_separates": true,
+    "margin_above_worst_production": 50.804197109344514,
+    "margin_below_worst_shipped": 71.8074881641849,
+    "production_1.4_0.15": {
+     "argmax": [
+      3.13052236269428,
+      -1.1865667932145834,
+      0.9681028028261859,
+      3.6675081697554597,
+      0.23550849357327813
+     ],
+     "fraction_warned": 1.0,
+     "n_pairs": 481,
+     "n_pairs_warned": 481,
+     "worst_head_over_value": 0.050804197109344515
+    },
+    "production_over_shipped": 3648.121782620173,
+    "shipped_1.5_0.5": {
+     "argmax": [
+      3.068844387563547,
+      -1.1865667932145834,
+      0.7533497068152546,
+      1.206526802771561,
+      2.7293483725619782e-05
+     ],
+     "fraction_warned": 0.0,
+     "n_pairs": 481,
+     "n_pairs_warned": 0,
+     "worst_head_over_value": 1.3926124218598773e-05
+    }
+   },
+   "reproduction_on_leg_153s_OWN_grid": {
+    "production_matches_banked": true,
+    "shipped_matches_banked": true,
+    "why": "the reproduction control: on leg 153's own grid this leg must recover leg 153's own numbers bitwise, otherwise the shipped-grid disagreement below would be a harness difference rather than a grid-resolution effect"
+   }
+  },
+  "ii_eps_drift_ladder": {
+   "adjudication": "Both legs reproduce, and their disagreement is the eps pair, not the module.  On leg 153's own 10-decade pair its numbers stand: 3 sound gammas above 1.98 and max-when-sound ~2.38.  But leg 119's 1.98 floor is banked from gate A8's 8-decade pair, and on THAT pair 0 sound gammas cross it -- the separation leg 119 reported is narrowed, not broken.  What is robust across both readings, and is the only thing the repair rests on, is that the margin COLLAPSES once the gamma ladder goes below 0.05 (1.478x -> 1.102x on leg 119's own pair) because the drift is continuous through gamma = 0+.  So leg 153's conclusion -- no fixed threshold on this diagnostic is safe, use the exact predicate -- is correct and unaffected; its supporting comparison mixed two eps pairs.",
+   "by_eps_pair": {
+    "leg_119_gate_A8_pair_1e-8_to_1e-16": {
+     "eps_hi": 1e-16,
+     "eps_lo": 1e-08,
+     "margin_on_leg_119s_own_ladder": 1.4799650731011476,
+     "margin_on_the_extended_ladder": 1.1020900513542444,
+     "max_drift_when_sound_extended_ladder": 1.7984453986942819,
+     "max_drift_when_sound_leg_119s_OWN_ladder_gamma_ge_0.05": 1.339253755260293,
+     "min_drift_when_unsound": 1.9820487818047858,
+     "n_sound_above_leg_119_banked_unsound_floor_1.98": 0,
+     "rows": [
+      {
+       "drift": 1.9849265673372882,
+       "gamma": -1.0,
+       "sound": false
+      },
+      {
+       "drift": 1.9854091113633603,
+       "gamma": -0.5,
+       "sound": false
+      },
+      {
+       "drift": 2.0485329316064407,
+       "gamma": -0.1,
+       "sound": false
+      },
+      {
+       "drift": 1.9820487818047858,
+       "gamma": 0.0,
+       "sound": false
+      },
+      {
+       "drift": 1.7984453986942819,
+       "gamma": 1e-06,
+       "sound": true
+      },
+      {
+       "drift": 1.7851139962139937,
+       "gamma": 0.001,
+       "sound": true
+      },
+      {
+       "drift": 1.6742808451603741,
+       "gamma": 0.01,
+       "sound": true
+      },
+      {
+       "drift": 1.339253755260293,
+       "gamma": 0.05,
+       "sound": true
+      },
+      {
+       "drift": 1.0570662690911594,
+       "gamma": 0.15,
+       "sound": true
+      },
+      {
+       "drift": 1.0000839644854074,
+       "gamma": 0.5,
+       "sound": true
+      },
+      {
+       "drift": 1.0000029226611022,
+       "gamma": 0.9,
+       "sound": true
+      }
+     ],
+     "separation_survives_the_extension": true
+    },
+    "leg_153_novelty_4b_pair_1e-6_to_1e-16": {
+     "eps_hi": 1e-16,
+     "eps_lo": 1e-06,
+     "margin_on_leg_119s_own_ladder": 1.6348122663671576,
+     "margin_on_the_extended_ladder": 1.1020925886740096,
+     "max_drift_when_sound_extended_ladder": 2.3834563881246815,
+     "max_drift_when_sound_leg_119s_OWN_ladder_gamma_ge_0.05": 1.606783650221274,
+     "min_drift_when_unsound": 2.626789620779935,
+     "n_sound_above_leg_119_banked_unsound_floor_1.98": 3,
+     "rows": [
+      {
+       "drift": 2.633113473381552,
+       "gamma": -1.0,
+       "sound": false
+      },
+      {
+       "drift": 2.6341750322219837,
+       "gamma": -0.5,
+       "sound": false
+      },
+      {
+       "drift": 2.7760341247906783,
+       "gamma": -0.1,
+       "sound": false
+      },
+      {
+       "drift": 2.626789620779935,
+       "gamma": 0.0,
+       "sound": false
+      },
+      {
+       "drift": 2.3834563881246815,
+       "gamma": 1e-06,
+       "sound": true
+      },
+      {
+       "drift": 2.3603683407375127,
+       "gamma": 0.001,
+       "sound": true
+      },
+      {
+       "drift": 2.16977471268397,
+       "gamma": 0.01,
+       "sound": true
+      },
+      {
+       "drift": 1.606783650221274,
+       "gamma": 0.05,
+       "sound": true
+      },
+      {
+       "drift": 1.1286808264891175,
+       "gamma": 0.15,
+       "sound": true
+      },
+      {
+       "drift": 1.0008305029614024,
+       "gamma": 0.5,
+       "sound": true
+      },
+      {
+       "drift": 1.0000059280580376,
+       "gamma": 0.9,
+       "sound": true
+      }
+     ],
+     "separation_survives_the_extension": true
+    }
+   },
+   "leg_119_banked": {
+    "margin": 1.4776119402985073,
+    "max_when_sound": 1.34,
+    "measured_on": "gate A8's pair, 1e-8 -> 1e-16",
+    "min_when_unsound": 1.98
+   },
+   "leg_153_banked": {
+    "margin": 1.103,
+    "max_when_sound": 2.3816,
+    "measured_on": "novelty 4b's pair, 1e-6 -> 1e-16",
+    "n_sound_above_1.98": 3
+   },
+   "note": "the diagnostic is a diagnostic, never the guard's predicate, which is the exact threshold-free gamma > 0 measured in (iii); nothing in the module's behaviour depends on which reading of this table is taken"
+  },
+  "iii_predicate_boundary_ladder": {
+   "n_disagreements": 0,
+   "note": "the guard is threshold-free: the smallest positive float64, 5e-324, is ACCEPTED and 0.0 is rejected, so the implemented predicate is exactly the analytic one and not an epsilon-thresholded approximation of it",
+   "rows": [
+    {
+     "agrees": true,
+     "gamma": -1e-12,
+     "outcome": "raised",
+     "predicate_says_sound": false
+    },
+    {
+     "agrees": true,
+     "gamma": -1e-30,
+     "outcome": "raised",
+     "predicate_says_sound": false
+    },
+    {
+     "agrees": true,
+     "gamma": 0.0,
+     "outcome": "raised",
+     "predicate_says_sound": false
+    },
+    {
+     "agrees": true,
+     "gamma": 5e-324,
+     "outcome": "returned_finite",
+     "predicate_says_sound": true
+    },
+    {
+     "agrees": true,
+     "gamma": 1e-300,
+     "outcome": "returned_finite",
+     "predicate_says_sound": true
+    },
+    {
+     "agrees": true,
+     "gamma": 1e-30,
+     "outcome": "returned_finite",
+     "predicate_says_sound": true
+    },
+    {
+     "agrees": true,
+     "gamma": 1e-12,
+     "outcome": "returned_finite",
+     "predicate_says_sound": true
+    },
+    {
+     "agrees": true,
+     "gamma": 1e-06,
+     "outcome": "returned_finite",
+     "predicate_says_sound": true
+    }
+   ]
+  }
+ },
+ "B6_capabilities_validated_line": {
+  "differing_lines": [],
+  "n_differing_lines": 0,
+  "note": "the capabilities-registered validated line, re-run independently rather than taken from leg 153's own commit message; the two subprocesses differ ONLY in which hilbert_holder source is bound",
+  "post_repair": {
+   "n_stdout_bytes": 880,
+   "returncode": 0,
+   "sha256_stdout": "a072fc5ebf54552b9e9593afc5d481b00bc9f6cbf708601b42a0f6b9da6961d1",
+   "stderr_tail": "theta1 = np.float64(3.141492653589793), sigma = np.float64(-1.4920662794764588), gamma = 0.2: the discarded head is 0.0563, i.e. 0.0158 of the returned pair.  The majorant is finite here (gamma > 0), so this is under-refinement, not a divergence -- decrease eps (or use on_unsound='inflate' for a pair that dominates as returned)\n  vS, vT = increment_pair_bound(th, sig, alpha, gamma, n_quad=n_quad,\n"
+  },
+  "post_repair_exit_zero": true,
+  "pre_repair": {
+   "n_stdout_bytes": 880,
+   "returncode": 0,
+   "sha256_stdout": "a072fc5ebf54552b9e9593afc5d481b00bc9f6cbf708601b42a0f6b9da6961d1",
+   "stderr_tail": ""
+  },
+  "stdout_byte_identical": true
+ },
+ "ab_isolation": {
+  "solver/nk_seminorm.py": {
+   "byte_identical": true,
+   "sha256_at_pin": "d6964d06e0b239c7c31e8ba338572d27167cc39851561f1a56aae0c4b739f54a",
+   "sha256_now": "d6964d06e0b239c7c31e8ba338572d27167cc39851561f1a56aae0c4b739f54a"
+  }
+ },
+ "capabilities_entry": {
+  "consequence": "no banked absolute number is an admissible referent for clause (b); the two-arm differential is forced",
+  "line": "capabilities.py:368-371",
+  "test": "test_nk_hilbert_holder.py",
+  "validated": "no known-answer gate; bounds checked against dense sampling"
+ },
+ "gate": "Post-repair, does solver/hilbert_holder.py (a) either raise on leg 119's failing configuration or provably dominate the true value there, and (b) reproduce every previously-validated result bit-identically?",
+ "gate_answer": {
+  "branch": "Repair confirmed solid and non-regressive. Bank leg 119's battery as a permanent regression suite.",
+  "clause_a_reject_or_dominate": "YES",
+  "clause_b_bit_identical": "YES",
+  "gate": "YES"
+ },
+ "leg": 169,
+ "module_checked": "solver/hilbert_holder.py",
+ "module_edited": false,
+ "pre_repair_pin": "07f2b03",
+ "pre_repair_source_sha256": "c0eb2ad3c94e4af2040441ea182e8ee92864395433da88a563128363538aae9e",
+ "read_only": true,
+ "repair_commit": "a9eb12b",
+ "route": "HHB",
+ "wall_seconds": 336.916220664978
+}
