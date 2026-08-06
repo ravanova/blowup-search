@@ -1,0 +1,117 @@
+{
+  "clause_a": {
+    "G1": {
+      "permutations_tested": 20,
+      "post_repair_raised": 20,
+      "pre_repair_error_in_units_of_true_scale": 135.6523403053934,
+      "pre_repair_silent": 20,
+      "pre_repair_worst_abs_error_vs_sorted": 212.03560084748173,
+      "true_scale_sup_U": 1.5630810376741535,
+      "warn_hatch_bit_identical_to_pre_repair": true,
+      "warn_hatch_n_warnings": 1,
+      "warn_hatch_warning_type": "HLRescaledDomainWarning"
+    },
+    "G2": {
+      "cases": [
+        {
+          "X_ref": -5.0,
+          "post_repair_raised": true,
+          "pre_repair_abs_shift_error": 1.4712142280283191,
+          "warn_hatch_bit_identical": true,
+          "warn_hatch_n_warnings": 1
+        },
+        {
+          "X_ref": -0.5,
+          "post_repair_raised": true,
+          "pre_repair_abs_shift_error": 0.7854847171220327,
+          "warn_hatch_bit_identical": true,
+          "warn_hatch_n_warnings": 1
+        },
+        {
+          "X_ref": 10.5,
+          "post_repair_raised": true,
+          "pre_repair_abs_shift_error": 0.0023753256122236444,
+          "warn_hatch_bit_identical": true,
+          "warn_hatch_n_warnings": 1
+        },
+        {
+          "X_ref": 25.0,
+          "post_repair_raised": true,
+          "pre_repair_abs_shift_error": 0.029961094916056474,
+          "warn_hatch_bit_identical": true,
+          "warn_hatch_n_warnings": 1
+        }
+      ],
+      "in_domain_cases": 4,
+      "in_domain_including_both_endpoints_accepted": 4,
+      "n_cases": 4,
+      "n_raised": 4
+    },
+    "G3": {
+      "bad_scale_cases": 5,
+      "delta_clause_is_declared_in_kind_extension": true,
+      "post_repair_rejected": 5,
+      "pre_repair_returns_exact_descending_mirror": true,
+      "pre_repair_warnings": 0
+    },
+    "G4": {
+      "clause_disposition": "PATCHED (DIRECTION.md leaves this to the leg author)",
+      "endpoint_inf_cases": 2,
+      "endpoint_inf_still_accepted": 2,
+      "interior_inf_still_rejected": true,
+      "post_repair_rejects_nan_poisoned_grid": true,
+      "pre_repair_accepted_nan_poisoned_grid": true,
+      "reason": "the fix adds no machinery -- it is the same one-token polarity flip np.any(d<=0) -> np.all(d>0) that velocity()'s own G1 guard needs, and leaving the class laxer than the free function it calls would be a new inconsistency"
+    },
+    "G8": {
+      "A": {
+        "n_laundered_post": 0,
+        "n_laundered_pre": 6,
+        "non_nan_entries_bit_identical": true,
+        "post_repair_nan_positions_are_nan": true,
+        "pre_repair_nan_positions_became_exact_zero": true
+      },
+      "B": {
+        "n_laundered_post": 0,
+        "n_laundered_pre": 6,
+        "non_nan_entries_bit_identical": true,
+        "post_repair_nan_positions_are_nan": true,
+        "pre_repair_nan_positions_became_exact_zero": true
+      },
+      "C": {
+        "n_laundered_post": 0,
+        "n_laundered_pre": 6,
+        "non_nan_entries_bit_identical": true,
+        "post_repair_nan_positions_are_nan": true,
+        "pre_repair_nan_positions_became_exact_zero": true
+      }
+    }
+  },
+  "clause_b": {
+    "class_leaves": 429530,
+    "comparison": "== on float64 (NaN==NaN treated as identical), not allclose",
+    "free_function_leaves": 122728,
+    "leaves_bit_identical": 552258,
+    "leaves_compared": 552258,
+    "leaves_moved": 0,
+    "moved_detail": [],
+    "solve_3x3_systems": 300
+  },
+  "gate_answer": "YES",
+  "gate_clause_a_all_four_mechanisms_closed": true,
+  "gate_clause_b_zero_clean_movement": true,
+  "leg": 152,
+  "lesson_90_control": {
+    "distinct_module_objects": true,
+    "post_has_new_error_type": true,
+    "post_propagates_nan": true,
+    "pre_accepts_permuted_grid_silently": true,
+    "pre_lacks_ascending_helper": true,
+    "pre_lacks_new_error_type": true,
+    "pre_launders_nan_to_zero": true
+  },
+  "module": "solver/hl_rescaled.py",
+  "pre_repair_n_lines": 577,
+  "pre_repair_ref": "2450ddf",
+  "route": "ROUTE-HRR"
+}

@@ -11,21 +11,31 @@ The gate leg 117 answered, verbatim (`DIRECTION.md`, leg 117):
    solver/hl_rescaled.py ever silently return a wrong result instead of flagging the
    input?"
 
-Answered **YES**. Four silent-corruption mechanisms found, none patched (`solver/
-hl_rescaled.py` is read-only under this leg's territory under any outcome). Escalated,
-not landed on main.
+Answered **YES**. Four silent-corruption mechanisms found, escalated, not patched.
 
-READ THIS BEFORE CHANGING ANYTHING HERE.
------------------------------------------
-Several checks below PIN CURRENT, DEFECTIVE BEHAVIOUR — they assert that the module is
-STILL silently wrong today, on purpose, so a regression (or a fix) cannot happen without
-this file screaming about it. Each is marked `PIN:` in its docstring and states what the
-CORRECT behaviour would be. **When a leg is authorised to repair `solver/hl_rescaled.py`,
-these PIN tests must be INVERTED in the same commit as the repair — never silently
-weakened or deleted.** This is leg 66/69/84's own precedent, reused verbatim by legs
-92/96/106/116/120.
+REPAIRED AT LEG 152 (Route-HRR). THE PINS BELOW ARE NOW INVERTED.
+-----------------------------------------------------------------
+Leg 152 landed the guards in `solver/hl_rescaled.py` and INVERTED every PIN in this file
+in the same commit — never weakened, never deleted, and never at a softer threshold than
+leg 117 measured. Each former `test_PIN_*` is now `test_REPAIRED_*` and asserts, on leg
+117's OWN configuration, that the module flags what it used to absorb; every magnitude
+leg 117 measured is still asserted, only the verdict is flipped. Each also asserts the
+documented `on_invalid="warn"` escape reproduces leg 117's number BIT-IDENTICALLY, so the
+measurement that authorised the repair survives the repair (leg 135's finding on
+`first_integral.py`: a repair that makes the escalating leg's battery unrunnable has
+destroyed the record it was meant to preserve).
 
-THE FOUR FINDINGS PINNED HERE (magnitudes, measured by
+The licence for the repair is `experiments/p2_route_hrr_v1_repair.py`'s differential:
+**552,258 of 552,258 clean-input leaves bit-identical** (`==` on float64, not `allclose`)
+against the pre-repair module read out of git at `2450ddf` and imported into the same
+process — grids, closed-form anchors, the free `velocity()`, both IC generators,
+`_solve_3x3` over 300 systems, `RescaledHL`, five real SSPRK3 steps of
+`RescaledHLDynamic`, and a 120-step `RescaledHLScenario2` relaxation. Zero clean values
+moved. `test_REPAIRED_zero_clean_input_movement` below re-runs a sample of that
+differential so the no-op guarantee is executable here too, not just in the runner.
+
+THE FOUR FINDINGS, AS MEASURED BY LEG 117 AND AS THEY STAND AFTER THE REPAIR
+(magnitudes, measured by
 `experiments/p2_route_hra_v1_adversarial.py`, `writeup/data/p2_route_hra_v1_adversarial.json`):
 
   G1. `velocity(X, Homega, X_ref)` never validates `X` is ascending. A permutation of a
@@ -54,12 +64,17 @@ Three further mechanisms were checked and found NOT exploitable to a silent, fin
 wrong result (soundness gates below, banked as controls so a future regression is
 caught just as loudly as the defects are):
 
-  G4. `RescaledHL.__init__`'s ascending guard `np.any(np.diff(X) <= 0)` has the identical
-      IEEE-754 comparison blind spot (a NaN anywhere defeats it) — the guard IS genuinely
-      defeated, but in every configuration tested the poisoned grid propagates to an
-      all-NaN Hilbert transform downstream (visible), not a plausible finite answer. This
-      is reported as a validation-gap CHARACTERIZATION, not a demonstrated silent-
-      corruption chain — see `test_CHARACTERIZE_nan_defeats_ascending_guard`.
+  G4. `RescaledHL.__init__`'s ascending guard `np.any(np.diff(X) <= 0)` had the identical
+      IEEE-754 comparison blind spot (a NaN anywhere defeated it). Leg 117 characterized
+      rather than exploited it (it chains to a visible all-NaN Hilbert transform, not a
+      finite wrong answer) and `DIRECTION.md` left the patch-or-document call to leg 152.
+      **Leg 152 PATCHED it**, and states the reasoning here as the gate requires: the fix
+      adds no machinery, it is the same one-token polarity flip
+      `np.any(d <= 0)` -> `np.all(d > 0)` that `velocity()`'s G1 guard needs anyway
+      (identical on every finite input, NaN-rejecting for free — SEI CERT NUM07-J), and
+      leaving the class laxer than the free function it calls would have been a NEW
+      inconsistency. The over-rejection controls are asserted alongside it: an endpoint
+      `+/-inf` grid is STILL accepted (leg 117's G7) and an interior `inf` still rejected.
   G6. `_solve_3x3`'s absolute 1e-14 pivot threshold never returned a silently-wrong
       solution over 300 random/rescaled systems (it always matched numpy or raised); it
       DOES over-reject a uniformly-tiny (1e-16) but perfectly well-conditioned matrix —
@@ -88,23 +103,58 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from solver.hl_rescaled import (
-    RescaledHL, RescaledHLDynamic, degenerate_ic, scenario2_ic, sinh_grid_at, velocity,
+    HLRescaledDomainError, HLRescaledDomainWarning, RescaledHL, RescaledHLDynamic,
+    RescaledHLScenario2, degenerate_ic, omega_bar, scenario2_ic, sinh_grid_at, velocity,
     _solve_3x3,
 )
 
+# The pre-repair module's own last commit. `git diff 2450ddf <repair> -- the module` was
+# EMPTY before leg 152, so this blob is byte-identical to what leg 117 audited. Pinned to
+# the module's own creating/last-touching commit and NOT to a leg's own hash, which the
+# rebase onto main rewrites (leg 130's correction, d871675).
+PRE_REPAIR_REF = "2450ddf"
+
+
+def _load_pre_repair():
+    """Import the pre-repair module from git under a private name, in this process.
+    Returns None if git is unavailable (the differential check then skips, loudly)."""
+    import importlib.util
+    import subprocess
+    import tempfile
+    root = os.path.dirname(os.path.abspath(__file__))
+    try:
+        src = subprocess.run(
+            ["git", "show", f"{PRE_REPAIR_REF}:solver/hl_rescaled.py"],
+            cwd=root, capture_output=True, text=True, check=True).stdout
+    except Exception:
+        return None
+    fd, path = tempfile.mkstemp(suffix="_pre_hl_rescaled.py")
+    with os.fdopen(fd, "w") as f:
+        f.write(src)
+    spec = importlib.util.spec_from_file_location("_pre_hl_rescaled_t", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
 
 # ============================================================================
-# PIN tests -- current, defective behaviour. MUST be inverted, not deleted, on repair.
+# INVERTED PINs (leg 152). Each was a `test_PIN_*` asserting the defect; each now
+# asserts the repair on leg 117's OWN configuration, at leg 117's OWN thresholds.
 # ============================================================================
 
-def test_PIN_velocity_silently_corrupted_by_permutation():
-    """PIN (G1): velocity() never checks X is ascending. A permutation of a correctly
-    sorted (X, Homega) pair is silently integrated wrong: finite output, zero warnings,
-    large disagreement with the correctly-sorted computation.
+def test_REPAIRED_velocity_rejects_non_ascending_X():
+    """INVERTED PIN (G1). Was: velocity() never checks X is ascending, and a permutation
+    of a correctly sorted (X, Homega) pair is silently integrated wrong (20/20 trials,
+    worst 212.0356 absolute = 135.65x the true scale sup|U| = 1.5631).
 
-    CORRECT behaviour would be: raise (or at minimum warn) when np.diff(X) is not
-    everywhere positive, exactly the guard RescaledHL.__init__ already has for its own
-    class -- the free function has no such guard."""
+    Now: every one of leg 117's 20 permutations raises HLRescaledDomainError. The
+    documented `on_invalid="warn"` escape still returns leg 117's number BIT-IDENTICALLY
+    with a warning, so the measurement survives its own repair.
+
+    NOTE on leg 117's prose: its headline said "91x the true scale". 91.30 is trial 0's
+    ratio; the WORST ratio, banked in its own JSON as `worst_max_rel_error`, is 135.65 and
+    pairs with the 212.0356 absolute the same prose quotes. Both numbers reproduce here
+    exactly; only the pairing in the prose was off."""
     _, X = sinh_grid_at(201, Xc=0.0, delta=None, M=50.0)
     Homega = 2.0 / (1.0 + 4.0 * X ** 2)
     U_true = velocity(X, Homega, X_ref=0.0)
@@ -112,94 +162,159 @@ def test_PIN_velocity_silently_corrupted_by_permutation():
     assert np.abs(U_true - Uex).max() < 1e-2, "sanity: sorted call should match analytic"
 
     rng = np.random.default_rng(0)
-    perm = rng.permutation(len(X))
-    Xp, Hp = X[perm], Homega[perm]
-    with warnings.catch_warnings(record=True) as wl:
-        warnings.simplefilter("always")
-        Up = velocity(Xp, Hp, X_ref=0.0)
-    inv = np.argsort(perm)
-    err = float(np.abs(Up[inv] - U_true).max())
-    print(f"    PIN G1: permuted call raised 0 exceptions, {len(wl)} warnings, "
-          f"max abs error vs correctly-sorted computation = {err:.4f}")
-    assert len(wl) == 0, "PIN G1 broken: a warning now fires (repair may be landing)"
-    assert np.all(np.isfinite(Up)), "PIN G1 broken: output is no longer finite"
-    assert err > 1.0, (f"PIN G1 broken: permutation error fell to {err:.4e}, expected a "
-                       f"large silent disagreement (repair may be landing -- INVERT this "
-                       f"test, do not delete it)")
-    print("[PIN] velocity() still silently mis-integrates a non-ascending X")
+    n_raised = 0
+    worst_err = 0.0
+    pre = _load_pre_repair()
+    for _ in range(20):
+        perm = rng.permutation(len(X))
+        Xp, Hp = X[perm], Homega[perm]
+        try:
+            velocity(Xp, Hp, X_ref=0.0)
+        except HLRescaledDomainError:
+            n_raised += 1
+        # the escape hatch must still MEASURE the defect, bit-identically
+        with warnings.catch_warnings(record=True) as wl:
+            warnings.simplefilter("always")
+            Uw = velocity(Xp, Hp, X_ref=0.0, on_invalid="warn")
+        assert len(wl) == 1 and isinstance(wl[0].message, HLRescaledDomainWarning), \
+            "on_invalid='warn' must emit exactly one HLRescaledDomainWarning"
+        inv = np.argsort(perm)
+        worst_err = max(worst_err, float(np.abs(Uw[inv] - U_true).max()))
+        if pre is not None:
+            assert np.all(Uw == pre.velocity(Xp, Hp, X_ref=0.0)), \
+                "on_invalid='warn' must reproduce the PRE-REPAIR value bitwise"
+    print(f"    G1 INVERTED: {n_raised}/20 permutations now raise "
+          f"HLRescaledDomainError; the warn-escape still measures the defect at "
+          f"{worst_err:.4f} absolute ({worst_err / float(np.abs(U_true).max()):.2f}x "
+          f"sup|U|), bit-identical to the pre-repair module")
+    assert n_raised == 20, f"G1 REGRESSION: only {n_raised}/20 permutations rejected"
+    # leg 117's OWN threshold, unchanged -- the defect it measured is still there to
+    # measure through the documented escape, so the repair did not erase the record
+    assert worst_err > 1.0, "G1: the warn-escape no longer reproduces leg 117's defect"
+    assert abs(worst_err - 212.0356008474817) < 1e-9, \
+        f"G1: leg 117's banked worst absolute error no longer reproduces ({worst_err})"
+    print("[inverted] velocity() rejects a non-ascending X")
 
 
-def test_PIN_velocity_silently_clamps_xref_out_of_domain():
-    """PIN (G2): velocity()'s X_ref pin via np.interp silently clamps when X_ref falls
-    outside [X.min(), X.max()] -- a documented numpy default, never checked here.
+def test_REPAIRED_velocity_rejects_xref_out_of_domain():
+    """INVERTED PIN (G2). Was: velocity()'s X_ref pin via np.interp silently clamped when
+    X_ref fell outside [X.min(), X.max()] (a documented numpy default), shifting the whole
+    returned array by a constant -- 1.4712 absolute at X_ref=-5.0 against a [0,10] window.
 
-    CORRECT behaviour would be: raise (or warn) when X_ref is outside the sampled range."""
+    Now: HLRescaledDomainError on all four of leg 117's out-of-domain values, with the
+    warn-escape reproducing the shift bit-identically. Over-rejection controls included:
+    BOTH endpoints and interior points are still accepted."""
     X = np.linspace(0.0, 10.0, 501)
     Homega = 2.0 / (1.0 + 4.0 * X ** 2)
-    X_ref_out = -5.0
-    with warnings.catch_warnings(record=True) as wl:
-        warnings.simplefilter("always")
-        U_out = velocity(X, Homega, X_ref=X_ref_out)
-    true_pinned = np.arctan(2.0 * X) - np.arctan(2.0 * X_ref_out)
-    err = float(np.abs(U_out - true_pinned).max())
-    print(f"    PIN G2: X_ref={X_ref_out} outside [0,10], {len(wl)} warnings, "
-          f"max abs error vs analytic pin = {err:.4f}")
-    assert len(wl) == 0, "PIN G2 broken: a warning now fires (repair may be landing)"
-    assert np.all(np.isfinite(U_out)), "PIN G2 broken: output is no longer finite"
-    assert err > 0.1, (f"PIN G2 broken: extrapolation error fell to {err:.4e} (repair may "
-                       f"be landing -- INVERT this test, do not delete it)")
-    print("[PIN] velocity() still silently clamps an out-of-domain X_ref")
+    pre = _load_pre_repair()
+    n_raised = 0
+    worst = 0.0
+    for X_ref_out in (-5.0, -0.5, 10.5, 25.0):
+        try:
+            velocity(X, Homega, X_ref=X_ref_out)
+        except HLRescaledDomainError:
+            n_raised += 1
+        with warnings.catch_warnings(record=True) as wl:
+            warnings.simplefilter("always")
+            U_out = velocity(X, Homega, X_ref=X_ref_out, on_invalid="warn")
+        assert len(wl) == 1, "warn-escape must emit exactly one warning"
+        true_pinned = np.arctan(2.0 * X) - np.arctan(2.0 * X_ref_out)
+        err = float(np.abs(U_out - true_pinned).max())
+        if X_ref_out == -5.0:
+            worst = err
+        if pre is not None:
+            assert np.all(U_out == pre.velocity(X, Homega, X_ref=X_ref_out)), \
+                "warn-escape must reproduce the PRE-REPAIR clamped value bitwise"
+    # over-rejection controls: in-domain, INCLUDING both endpoints, must still work
+    n_ok = 0
+    for X_ref_in in (0.0, 10.0, 5.0, float(X[1])):
+        velocity(X, Homega, X_ref=X_ref_in)
+        n_ok += 1
+    print(f"    G2 INVERTED: {n_raised}/4 out-of-domain X_ref values now raise; "
+          f"warn-escape still measures leg 117's {worst:.4f} shift at X_ref=-5.0; "
+          f"{n_ok}/4 in-domain values (both endpoints included) still accepted")
+    assert n_raised == 4, f"G2 REGRESSION: only {n_raised}/4 rejected"
+    assert err_close(worst, 1.4712, 1e-3), \
+        f"G2: leg 117's banked 1.4712 shift no longer reproduces ({worst})"
+    assert n_ok == 4, "G2 OVER-REJECTION: an in-domain X_ref was refused"
+    print("[inverted] velocity() rejects an out-of-domain X_ref and still accepts every "
+          "in-domain one")
 
 
-def test_PIN_sinh_grid_at_silently_reverses_on_negative_M():
-    """PIN (G3): sinh_grid_at(n, M=negative) is never validated; it silently returns the
-    exact descending mirror of the valid (M>0) grid, with zero warnings.
+def err_close(a, b, tol):
+    return abs(a - b) < tol
 
-    CORRECT behaviour would be: raise, or take abs(M), with a warning either way."""
+
+def test_REPAIRED_sinh_grid_at_rejects_non_positive_scale():
+    """INVERTED PIN (G3). Was: sinh_grid_at(n, M=negative) silently returned the exact
+    descending mirror of the valid (M>0) grid, zero warnings.
+
+    Now: HLRescaledDomainError. It REJECTS rather than silently taking abs(M) -- leg 117
+    offered either, and substituting a different input for the one you were given is the
+    defect class the target_norm.py/leg-94 precedent forbids, not a fix.
+
+    `delta <= 0` is leg 152's DECLARED in-kind extension: X = Xc + delta*sinh(s), so a
+    non-positive delta mirrors the grid by the identical mechanism. Leg 117 measured only
+    M; leaving delta would have been the incomplete-fix shape leg 147 caught on
+    nk_bounds.py. Both are asserted here."""
     kwargs = dict(Xc=0.0, delta=1.0, M=50.0, offset=False)
     _, X_pos = sinh_grid_at(11, **kwargs)
-    with warnings.catch_warnings(record=True) as wl:
-        warnings.simplefilter("always")
-        _, X_neg = sinh_grid_at(11, **{**kwargs, "M": -50.0})
-    print(f"    PIN G3: M=-50 call raised {len(wl)} warnings; "
-          f"X_neg == reverse(X_pos): {np.allclose(X_neg, X_pos[::-1])}")
-    assert len(wl) == 0, "PIN G3 broken: a warning now fires (repair may be landing)"
-    assert np.allclose(X_neg, X_pos[::-1]), "PIN G3 broken: negative M no longer mirrors"
-    assert not np.all(np.diff(X_neg) > 0), "PIN G3 broken: negative M grid is now ascending"
-    # the class constructor happens to catch the specific consequence -- confirm that
-    # protective side effect is also still intact, so a regression there is caught too
-    try:
-        RescaledHL(X_neg)
-        raise AssertionError("RescaledHL unexpectedly ACCEPTED the negative-M grid")
-    except ValueError:
-        pass
-    print("[PIN] sinh_grid_at(M<0) still silently returns a descending mirror grid")
+    assert np.all(np.diff(X_pos) > 0), "sanity: the valid grid is ascending"
+    n_rej = 0
+    bad = [{"M": -50.0}, {"M": 0.0}, {"M": -1e-12}, {"delta": -1.0}, {"delta": 0.0}]
+    for b in bad:
+        try:
+            sinh_grid_at(11, **{**kwargs, **b})
+        except HLRescaledDomainError:
+            n_rej += 1
+    # over-rejection control: every positive scale still builds the same grid
+    n_ok = 0
+    for b in [{"M": 50.0}, {"M": 1e-6}, {"delta": 1e-6}, {"delta": 100.0}]:
+        _, Xg = sinh_grid_at(11, **{**kwargs, **b})
+        assert np.all(np.diff(Xg) > 0)
+        n_ok += 1
+    print(f"    G3 INVERTED: {n_rej}/{len(bad)} non-positive scales now raise "
+          f"(M and the declared in-kind delta clause); {n_ok}/4 positive scales still "
+          f"build an ascending grid")
+    assert n_rej == len(bad), f"G3 REGRESSION: only {n_rej}/{len(bad)} rejected"
+    assert n_ok == 4, "G3 OVER-REJECTION: a legitimate positive scale was refused"
+    print("[inverted] sinh_grid_at rejects a non-positive M or delta")
 
 
-def test_PIN_degenerate_ic_launders_nan_to_zero():
-    """PIN (G8, the headline): degenerate_ic's closing `np.where(X > 0.0, field, 0.0)`
-    is an ordered comparison, so a NaN abscissa is silently laundered into the same
-    finite 0.0 a legitimate X<=0 point produces -- across all three `kind`s.
+def test_REPAIRED_degenerate_ic_propagates_nan():
+    """INVERTED PIN (G8, leg 117's headline). Was: degenerate_ic's closing
+    `np.where(X > 0.0, field, 0.0)` used an ordered comparison, so IEEE-754 made it False
+    wherever X was NaN and np.where wrote the same clean finite 0.0 a legitimate X<=0
+    point produces -- 6 laundered values per kind, all three kinds, zero warnings.
 
-    CORRECT behaviour would be: propagate NaN through, exactly as scenario2_ic already
-    does (checked below as the same-file negative control)."""
+    Now: a NaN abscissa propagates, exactly as scenario2_ic (same module, no closing mask)
+    already did -- the in-module reference behaviour the PIN itself named as CORRECT.
+    Every NON-NaN entry is asserted bit-identical to the pre-repair module, which is the
+    no-op half of the licence."""
     X = np.linspace(-5.0, 5.0, 51)
     nan_idx = [10, 30, 45]
     X[nan_idx] = np.nan
+    clean = np.array([i for i in range(51) if i not in nan_idx])
+    pre = _load_pre_repair()
     for kind in ("A", "B", "C"):
         with warnings.catch_warnings(record=True) as wl:
             warnings.simplefilter("always")
             Om, Th = degenerate_ic(X, kind=kind)
-        laundered = np.all(Om[nan_idx] == 0.0) and np.all(Th[nan_idx] == 0.0)
-        print(f"    PIN G8 kind={kind}: {len(wl)} warnings, all finite: "
-              f"{np.all(np.isfinite(Om)) and np.all(np.isfinite(Th))}, "
-              f"NaN positions -> exact 0.0: {laundered}")
-        assert len(wl) == 0, f"PIN G8({kind}) broken: a warning now fires"
-        assert np.all(np.isfinite(Om)) and np.all(np.isfinite(Th)), \
-            f"PIN G8({kind}) broken: output no longer all-finite"
-        assert laundered, (f"PIN G8({kind}) broken: NaN abscissas no longer become exact "
-                           f"0.0 (repair may be landing -- INVERT, do not delete)")
-    print("[PIN] degenerate_ic still silently launders NaN abscissas to exact 0.0")
+        n_laundered = int(np.sum(Om[nan_idx] == 0.0) + np.sum(Th[nan_idx] == 0.0))
+        print(f"    G8 INVERTED kind={kind}: {n_laundered}/6 NaN positions laundered to "
+              f"exact 0.0 (was 6/6), NaN propagated: "
+              f"{np.all(np.isnan(Om[nan_idx])) and np.all(np.isnan(Th[nan_idx]))}, "
+              f"{len(wl)} warnings")
+        assert n_laundered == 0, \
+            f"G8({kind}) REGRESSION: {n_laundered} NaN abscissas still laundered to 0.0"
+        assert np.all(np.isnan(Om[nan_idx])) and np.all(np.isnan(Th[nan_idx])), \
+            f"G8({kind}) REGRESSION: a NaN abscissa did not propagate"
+        if pre is not None:
+            Om_p, Th_p = pre.degenerate_ic(X, kind=kind)
+            assert np.all(Om[clean] == Om_p[clean]) and np.all(Th[clean] == Th_p[clean]), \
+                f"G8({kind}) NO-OP VIOLATED: a non-NaN entry moved"
+    print("[inverted] degenerate_ic propagates a NaN abscissa; every non-NaN entry is "
+          "bit-identical to the pre-repair module")
 
 
 def test_scenario2_ic_negative_control_propagates_nan():
@@ -220,29 +335,129 @@ def test_scenario2_ic_negative_control_propagates_nan():
 # Characterization -- a genuine gap, but not (yet) chained to a silent finite defect.
 # ============================================================================
 
-def test_CHARACTERIZE_nan_defeats_ascending_guard():
-    """CHARACTERIZE (G4): RescaledHL.__init__'s guard `np.any(np.diff(X) <= 0)` has the
-    same NaN-comparison blind spot as G8's mechanism -- a NaN anywhere makes it vacuously
-    pass, so a completely scrambled, NaN-containing array is accepted as a "valid" grid.
-    Distinct from a PIN: every configuration tested chains to a visible all-NaN Hilbert
-    transform downstream, not a plausible finite answer, so this is recorded as a genuine
-    validation gap without a demonstrated silent-corruption consequence. If this ever
-    starts returning a finite result instead, that is a NEW, more severe finding, not a
-    fix -- this test guards the boundary in that direction."""
+def test_REPAIRED_nan_no_longer_defeats_ascending_guard():
+    """INVERTED CHARACTERIZATION (G4). Was: RescaledHL.__init__'s guard
+    `np.any(np.diff(X) <= 0)` had the same NaN-comparison blind spot as G8's mechanism --
+    a NaN anywhere made it vacuously pass, so a completely scrambled, NaN-containing array
+    was accepted as a "valid" grid. Leg 117 recorded this as a characterization rather
+    than a PIN because it chains to a visible all-NaN Hilbert transform, not a finite
+    wrong answer, and DIRECTION.md left the patch-or-document call to leg 152.
+
+    LEG 152 PATCHED IT. The predicate is now `np.all(np.diff(X) > 0)`: identical on every
+    finite input, NaN-rejecting for free, because under IEEE-754 "confirm the good case"
+    fails CLOSED where "detect the bad case" fails OPEN (SEI CERT NUM07-J). The reasoning
+    is recorded in full in this file's module docstring and writeup/novelty/leg_152.md.
+
+    The two over-rejection controls are the load-bearing half of this test: leg 117's G7
+    finding is that an ENDPOINT +/-inf grid is well-defined and stays visible downstream,
+    so it must STILL be accepted, and an interior inf must still be rejected. A guard that
+    closed G4 by also refusing those would be a behaviour change, not a repair."""
     X = np.array([0.0, 1.0, np.nan, 0.5, 2.0])   # scrambled AND poisoned
-    assert not np.any(np.diff(X) <= 0), "guard should be defeated (sanity on the mechanism)"
-    s = RescaledHL(X)   # must NOT raise -- the guard is genuinely defeated
-    Omega = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
-    with warnings.catch_warnings(record=True) as wl:
-        warnings.simplefilter("always")
-        Hom = s.hilbert(Omega)
-    print(f"    G4: guard defeated (constructed OK), downstream all-NaN: "
-          f"{np.all(np.isnan(Hom))}, warnings: {len(wl)}")
-    assert np.all(np.isnan(Hom)), (
-        "G4 REGRESSION: the poisoned grid now produces a FINITE downstream result -- "
-        "this is a NEW silent-corruption chain, escalate immediately, do not weaken "
-        "this assertion")
-    print("[characterize] NaN defeats the ascending guard but stays visible downstream")
+    assert not np.any(np.diff(X) <= 0), \
+        "sanity on the mechanism: the OLD predicate is still vacuously satisfied here"
+    assert not np.all(np.diff(X) > 0.0), \
+        "sanity on the fix: the NEW predicate is not satisfied here"
+    raised = False
+    try:
+        RescaledHL(X)
+    except HLRescaledDomainError:
+        raised = True
+    # over-rejection controls
+    n_endpoint_ok = 0
+    for Xe in (np.array([0.0, 1.0, 2.0, 3.0, np.inf]),
+               np.array([-np.inf, 0.0, 1.0, 2.0, 3.0])):
+        RescaledHL(Xe)
+        n_endpoint_ok += 1
+    interior_rejected = False
+    try:
+        RescaledHL(np.array([0.0, 1.0, np.inf, 3.0, 4.0]))
+    except HLRescaledDomainError:
+        interior_rejected = True
+    print(f"    G4 INVERTED: NaN-poisoned scrambled grid rejected: {raised}; "
+          f"endpoint-inf grids still accepted: {n_endpoint_ok}/2 (leg 117's G7); "
+          f"interior inf still rejected: {interior_rejected}")
+    assert raised, "G4 REGRESSION: a NaN-poisoned grid is accepted again"
+    assert n_endpoint_ok == 2, "G4 OVER-REJECTION: an endpoint-inf grid was refused"
+    assert interior_rejected, "G4: an interior inf is no longer rejected"
+    print("[inverted] a NaN no longer defeats the ascending guard, and neither "
+          "over-rejection control moved")
+
+
+def test_REPAIRED_zero_clean_input_movement():
+    """THE LICENCE FOR THE WHOLE REPAIR, executable here and not only in the runner.
+
+    Every guard leg 152 added fires ONLY on input already outside the module's stated
+    contract. This re-runs a sample of `experiments/p2_route_hrr_v1_repair.py`'s
+    differential against the pre-repair module read out of git at 2450ddf and imported
+    into this process: grids, the closed-form anchors, the free velocity(), both IC
+    generators, RescaledHL's Hilbert/velocity/dX and a real RescaledHLDynamic SSPRK3 step.
+    Comparison is `==` on float64, NOT allclose. The full runner compares 552,258 leaves;
+    this samples the same surfaces so a regression cannot land without a test failing.
+
+    LESSON 90: the control that this comparison CAN report the other answer is asserted
+    first -- the pre-repair module must lack the new symbols and must still launder a NaN.
+    Without it, "0 moved" would be a tautology of the import."""
+    pre = _load_pre_repair()
+    if pre is None:
+        print("[skip] git unavailable; the differential is in the runner")
+        return
+    # lesson-90 control FIRST
+    assert not hasattr(pre, "HLRescaledDomainError"), \
+        "lesson-90 control FAILED: the 'pre-repair' module already has the new guard"
+    Xn = np.linspace(-5.0, 5.0, 51)
+    Xn[[10, 30, 45]] = np.nan
+    assert np.all(pre.degenerate_ic(Xn, kind="A")[0][[10, 30, 45]] == 0.0), \
+        "lesson-90 control FAILED: the pre-repair module no longer launders a NaN"
+
+    n = n_ident = 0
+
+    def cmp(a, b):
+        nonlocal n, n_ident
+        a, b = np.asarray(a, float).ravel(), np.asarray(b, float).ravel()
+        assert a.shape == b.shape
+        n += a.size
+        n_ident += int(np.sum(a == b))
+
+    for kw in (dict(n=101, Xc=1.0, delta=0.05, M=20.0, offset=True),
+               dict(n=201, Xc=0.0, delta=None, M=50.0, offset=True),
+               dict(n=201, Xc=1.0, delta=0.01, M=500.0, offset=True)):
+        s_p, X_p = pre.sinh_grid_at(**kw)
+        s_q, X_q = sinh_grid_at(**kw)
+        cmp(s_p, s_q); cmp(X_p, X_q)
+        X = X_q
+        cmp(pre.omega_bar(X), omega_bar(X))
+        Hom = 2.0 / (1.0 + 4.0 * X ** 2)
+        for X_ref in (0.0, 1.0, float(X[X.size // 3])):
+            cmp(pre.velocity(X, Hom, X_ref=X_ref), velocity(X, Hom, X_ref=X_ref))
+        for kind in ("A", "B", "C"):
+            op, tp = pre.degenerate_ic(X, kind=kind)
+            oq, tq = degenerate_ic(X, kind=kind)
+            cmp(op, oq); cmp(tp, tq)
+        op, vp = pre.scenario2_ic(X)
+        oq, vq = scenario2_ic(X)
+        cmp(op, oq); cmp(vp, vq)
+        a, b = pre.RescaledHL(X, X_ref=0.0), RescaledHL(X, X_ref=0.0)
+        Om = omega_bar(X)
+        cmp(a.hilbert(Om), b.hilbert(Om))
+        cmp(a.velocity(Om), b.velocity(Om))
+        cmp(a.dX(Om), b.dX(Om))
+
+    da, db = pre.RescaledHLDynamic(n=101, delta=0.05, M=20.0), \
+        RescaledHLDynamic(n=101, delta=0.05, M=20.0)
+    Oa = da.normalize_amp(omega_bar(da.X))
+    Ob = db.normalize_amp(omega_bar(db.X))
+    cmp(Oa, Ob)
+    Th = np.where(da.X > 1.0, np.pi / 2.0, 0.0)
+    ra, rb = da.step(Oa, Th, 1e-4), db.step(Ob, Th, 1e-4)
+    cmp(ra[0], rb[0]); cmp(ra[1], rb[1])
+    cmp([ra[2], ra[3], ra[4]], [rb[2], rb[3], rb[4]])
+
+    print(f"    NO-OP: {n_ident}/{n} clean-input leaves bit-identical to the pre-repair "
+          f"module at {PRE_REPAIR_REF} (== on float64, not allclose)")
+    assert n_ident == n, (
+        f"NO-OP VIOLATED: {n - n_ident} of {n} clean-input leaves MOVED. The repair's "
+        f"entire licence is a measured no-op on clean input -- ESCALATE, do not iterate.")
+    print("[ok] the repair moves nothing on clean input")
 
 
 def test_CHARACTERIZE_solve_3x3_overrejects_tiny_wellconditioned_matrix():
@@ -380,12 +595,13 @@ def test_degenerate_ic_rejects_unknown_kind():
 
 
 if __name__ == "__main__":
-    test_PIN_velocity_silently_corrupted_by_permutation()
-    test_PIN_velocity_silently_clamps_xref_out_of_domain()
-    test_PIN_sinh_grid_at_silently_reverses_on_negative_M()
-    test_PIN_degenerate_ic_launders_nan_to_zero()
+    test_REPAIRED_velocity_rejects_non_ascending_X()
+    test_REPAIRED_velocity_rejects_xref_out_of_domain()
+    test_REPAIRED_sinh_grid_at_rejects_non_positive_scale()
+    test_REPAIRED_degenerate_ic_propagates_nan()
     test_scenario2_ic_negative_control_propagates_nan()
-    test_CHARACTERIZE_nan_defeats_ascending_guard()
+    test_REPAIRED_nan_no_longer_defeats_ascending_guard()
+    test_REPAIRED_zero_clean_input_movement()
     test_CHARACTERIZE_solve_3x3_overrejects_tiny_wellconditioned_matrix()
     test_ascending_guard_rejects_finite_non_ascending_grids()
     test_normalize_amp_never_silently_finite_on_poison()
@@ -393,5 +609,7 @@ if __name__ == "__main__":
     test_inf_endpoints_never_silently_clean()
     test_degenerate_ic_rejects_unknown_kind()
     print("\nALL HL-RESCALED ADVERSARIAL GATES RAN")
-    print("NOTE: 4 of these PIN CURRENT DEFECTIVE BEHAVIOUR (G1, G2, G3, G8, see module "
-          "docstring). They must be INVERTED, not deleted, when a repair lands.")
+    print("NOTE: leg 152 INVERTED all 4 PINs (G1, G2, G3, G8) and the G4 characterization "
+          "in the same commit as the repair, at leg 117's own thresholds. The licence is "
+          "test_REPAIRED_zero_clean_input_movement + experiments/p2_route_hrr_v1_repair.py: "
+          "552,258/552,258 clean leaves bit-identical to the pre-repair module.")

@@ -32,7 +32,44 @@ verifiable via the Fourier multiplier -i sgn(xi)):
     U_bar(X)        =  2 sqrt(1-X) - 2   (X<1),   -2   (X>=1),
 and one checks (U_bar + 2X) Omega_bar_X + Omega_bar = 0 on X>1 (strong steady form,
 Remark 5.4: strong solution for X != singular point, weak at the singularity).
+
+INPUT GUARDS (leg 152, Route-HRR -- the repair of leg 117's Route-HRA audit)
+---------------------------------------------------------------------------
+Leg 117 measured four silent-corruption mechanisms here and escalated without patching.
+Leg 152 closes all four.  Every guard below fires ONLY on input that was already outside
+this module's stated contract; on contract-respecting input the module is BIT-IDENTICAL
+to its pre-repair self (commit `2450ddf`), verified by
+`experiments/p2_route_hrr_v1_repair.py` with `==` on float64, not `allclose`.
+
+  * `velocity()` now confirms `X` is strictly ascending -- the precondition its own
+    docstring already asserted and never checked.  The predicate is
+    `np.all(np.diff(X) > 0)` and NOT `np.any(np.diff(X) <= 0)`: under IEEE-754 every
+    ordered comparison against a NaN is False, so the "detect the bad case" form fails
+    OPEN on a NaN while the "confirm the good case" form fails CLOSED (SEI CERT NUM07-J).
+    The two agree on every finite input.
+  * `velocity()` now confirms `X_ref` lies in `[X.min(), X.max()]` instead of leaning on
+    `np.interp`'s silently-clamping default.  `scipy.interpolate.interp1d` raises on
+    out-of-range by default and requires an explicit opt-in to extrapolate; `np.interp`
+    has no such switch, so the check lives here.
+  * `sinh_grid_at()` now rejects `M <= 0` and `delta <= 0`, either of which silently
+    returned the exact DESCENDING MIRROR of the intended grid.  It rejects rather than
+    silently taking `abs()`: substituting a different input for the one you were given is
+    the defect, not the fix (the `target_norm.py`/leg-94 precedent).
+  * `degenerate_ic()` now propagates a NaN abscissa instead of laundering it into the
+    same clean `0.0` a legitimate `X <= 0` node produces -- matching `scenario2_ic`,
+    which already propagates, as the in-module reference behaviour.
+  * `RescaledHL.__init__`'s own ascending guard takes the same polarity flip, closing the
+    blind spot leg 117 characterized as G4.  This is not extra machinery: it is the one
+    token that also fixes `velocity()`, and leaving the class laxer than the free
+    function it calls would be a new inconsistency.
+
+`on_invalid="warn"` on `velocity()` reproduces the pre-repair number BIT-IDENTICALLY with
+a `HLRescaledDomainWarning` instead of an exception, so leg 117's own measurements (max
+abs error 212.04 on a permuted grid; the 1.4712 uniform shift at `X_ref=-5.0`) remain
+reproducible AFTER the repair rather than being erased by it.
 """
+
+import warnings
 
 import numpy as np
 
@@ -44,6 +81,39 @@ from solver.gclm_rescaled import _drho_upwind as _upwind_deriv
 PI = np.pi
 
 
+class HLRescaledDomainError(ValueError):
+    """Input outside `hl_rescaled.py`'s stated contract (non-ascending grid, an
+    out-of-range velocity pin, a non-positive grid scale).
+
+    Subclasses `ValueError` on purpose: `RescaledHL.__init__` has raised a plain
+    `ValueError` for a non-ascending grid since the module was created, and several
+    call sites catch that.  The new type narrows the diagnosis without breaking them."""
+
+
+class HLRescaledDomainWarning(UserWarning):
+    """Emitted instead of `HLRescaledDomainError` when a caller passes
+    `on_invalid="warn"` -- the documented opt-in that returns the pre-repair value."""
+
+
+def _flag(msg, on_invalid, stacklevel=3):
+    """Raise or warn.  Called ONLY on out-of-contract input, so the clean path never
+    reaches it and cannot be slowed or perturbed by it."""
+    if on_invalid == "raise":
+        raise HLRescaledDomainError(msg)
+    if on_invalid == "warn":
+        warnings.warn(msg, HLRescaledDomainWarning, stacklevel=stacklevel)
+        return
+    raise ValueError(
+        "on_invalid must be 'raise' or 'warn', got %r" % (on_invalid,))
+
+
+def _is_strictly_ascending(dX):
+    """True iff every consecutive gap is strictly positive.  NaN-rejecting by
+    construction (see the module docstring): `np.all(dX > 0)` is False on a NaN gap,
+    whereas `np.any(dX <= 0)` is False on one and would accept the grid."""
+    return bool(np.all(dX > 0.0))
+
+
 # --------------------------------------------------------------------------
 # grids
 # --------------------------------------------------------------------------
@@ -53,9 +123,25 @@ def sinh_grid_at(n, Xc=1.0, delta=None, M=1000.0, offset=True):
     Resolves an (X-Xc)^{-1/2}-type singularity at Xc. `offset` shifts nodes by
     half a cell so none lands exactly on Xc (where a singular profile is infinite).
     Reach is +-M about Xc. n need not be odd here (the origin X=0 is generally not
-    a node; the velocity pin interpolates U at X=0)."""
+    a node; the velocity pin interpolates U at X=0).
+
+    Both scales are validated (leg 152/G3): `M <= 0` or `delta <= 0` used to return the
+    exact DESCENDING MIRROR of the intended grid with zero warnings, which every
+    downstream consumer then mis-integrates.  `delta` carries the identical mechanism to
+    `M` (X = Xc + delta*sinh(s)) and is guarded in the same place, though leg 117
+    measured only `M`."""
     if delta is None:
         delta = 4.0 / n
+    if not M > 0.0:
+        raise HLRescaledDomainError(
+            "sinh_grid_at needs M > 0 (the grid reaches +-M about Xc); got M = %r. "
+            "A non-positive M silently returns the descending mirror of the intended "
+            "grid." % (M,))
+    if not delta > 0.0:
+        raise HLRescaledDomainError(
+            "sinh_grid_at needs delta > 0 (X = Xc + delta*sinh(s)); got delta = %r. "
+            "A non-positive delta silently returns the descending mirror of the "
+            "intended grid." % (delta,))
     s_hi = np.arcsinh((M) / delta)
     s_lo = np.arcsinh((-M) / delta)
     s = np.linspace(s_lo, s_hi, n)
@@ -106,13 +192,43 @@ def U_bar_exact(X):
 # --------------------------------------------------------------------------
 # velocity operator  U_X = H(Omega),  U(X_ref) = 0
 # --------------------------------------------------------------------------
-def velocity(X, Homega, X_ref=0.0):
+def velocity(X, Homega, X_ref=0.0, on_invalid="raise"):
     """Integrate U from U_X = Homega on a (sorted-ascending) non-uniform grid,
     pinned to U(X_ref) = 0. Trapezoidal cumulative integral; U at X_ref is
-    removed by linear interpolation so the pin is exact regardless of nodes."""
+    removed by linear interpolation so the pin is exact regardless of nodes.
+
+    Both preconditions are now CHECKED (leg 152, closing leg 117's G1 and G2):
+
+      * `X` strictly ascending.  The trapezoidal sum integrates in ARRAY ORDER (the
+        documented contract of numpy/SciPy trapezoid too), so a permuted grid returns a
+        finite, warning-free, badly wrong U -- leg 117 measured 212.04 absolute, 91x the
+        true scale, on 20/20 random permutations.
+      * `X_ref` inside `[X.min(), X.max()]`.  `np.interp` clamps to the nearest sampled
+        endpoint outside that range, silently, which shifts the whole returned array by a
+        constant (1.4712 at X_ref=-5.0 against a [0,10] window).
+
+    `on_invalid="raise"` (default) raises `HLRescaledDomainError`; `on_invalid="warn"`
+    warns `HLRescaledDomainWarning` and returns the PRE-REPAIR value bit-identically, so
+    leg 117's measurement of the defect survives its own repair.  Neither branch is
+    reachable from contract-respecting input."""
     X = np.asarray(X, dtype=float)
     Homega = np.asarray(Homega, dtype=float)
-    dU = 0.5 * (Homega[1:] + Homega[:-1]) * np.diff(X)
+    dX = np.diff(X)
+    if not _is_strictly_ascending(dX):
+        n_bad = int(np.sum(~(dX > 0.0)))
+        _flag("velocity() needs a strictly ascending X: %d of %d consecutive gaps are "
+              "not > 0 (non-finite gaps count as violations). The trapezoidal sum "
+              "integrates in array order, so an unsorted grid returns a finite but "
+              "wrong U." % (n_bad, dX.size), on_invalid)
+    else:
+        # only meaningful once the grid is known ordered; X.min()/X.max() on a poisoned
+        # grid are themselves unreliable, so this is deliberately not checked first.
+        if not (X.min() <= X_ref <= X.max()):
+            _flag("velocity() pins U(X_ref)=0 with np.interp, which CLAMPS to the "
+                  "nearest sampled endpoint outside the grid: X_ref = %r is outside "
+                  "[%r, %r], so the returned U would carry a constant offset error."
+                  % (X_ref, float(X.min()), float(X.max())), on_invalid)
+    dU = 0.5 * (Homega[1:] + Homega[:-1]) * dX
     U = np.concatenate([[0.0], np.cumsum(dU)])
     U_ref = np.interp(X_ref, X, U)
     return U - U_ref
@@ -130,8 +246,13 @@ class RescaledHL:
 
     def __init__(self, X, X_ref=0.0):
         X = np.asarray(X, dtype=float)
-        if np.any(np.diff(X) <= 0):
-            raise ValueError("X must be strictly ascending")
+        # Leg 152/G4: the predicate is `all(gaps > 0)`, not the original
+        # `any(gaps <= 0)`. Identical on every finite grid; the original form is
+        # vacuously satisfied by a NaN gap (IEEE-754 unordered comparison), which
+        # admitted a scrambled, NaN-poisoned array as a "valid" grid.
+        if not _is_strictly_ascending(np.diff(X)):
+            raise HLRescaledDomainError(
+                "X must be strictly ascending (non-finite gaps count as violations)")
         self.X = X
         self.n = X.size
         self.X_ref = X_ref
@@ -210,8 +331,14 @@ def degenerate_ic(X, kind="A"):
         Theta0 = (np.tanh(xp - 0.7) - np.tanh(-0.7)) * np.exp(-0.04 * xp)
     else:
         raise ValueError(f"unknown degenerate IC kind {kind!r}")
-    Omega0 = np.where(X > 0.0, Omega0, 0.0)
-    Theta0 = np.where(X > 0.0, Theta0, 0.0)
+    # Leg 152/G8 (leg 117's headline finding). `X > 0.0` is an ORDERED comparison, so
+    # IEEE-754 makes it False wherever X is NaN and np.where then wrote the same clean
+    # 0.0 a legitimate X <= 0 node produces -- a NaN abscissa laundered into data
+    # indistinguishable from valid one-sided-support physics. A NaN abscissa now
+    # propagates, exactly as scenario2_ic (same module, no closing mask) already does.
+    nan_X = np.isnan(X)
+    Omega0 = np.where(nan_X, np.nan, np.where(X > 0.0, Omega0, 0.0))
+    Theta0 = np.where(nan_X, np.nan, np.where(X > 0.0, Theta0, 0.0))
     return Omega0, Theta0
 
 
