@@ -1,0 +1,758 @@
+{
+ "leg": 241,
+ "route": "PCRC",
+ "title": "the cleanup behind leg 217's escalation: the two stale artifacts corrected, and the three residual silent paths characterised",
+ "depends_on": {
+  "leg_217_branch": "origin/leg/217-pcr-v1",
+  "landed_to_main": false
+ },
+ "G0_module_states": {
+  "in_tree_is_post_leg_217_repair": false,
+  "leg_217_blob_reachable": true,
+  "leg_217_ref": "origin/leg/217-pcr-v1",
+  "leg_217_blob_is_post_repair": true,
+  "the_two_modules_coincide": false,
+  "reading": "leg 217 is still PARKED: every 'post-repair' column below is measured on the blob at origin/leg/217-pcr-v1, not on the working tree. The two artifacts this leg corrects are therefore correct AGAINST THAT BLOB, and are red against the working tree until leg 217 merges."
+ },
+ "G1_flagged_inputs": {
+  "mechanism": "`radii_polynomial_status` returned `closes = bool(disc >= 0)` and never formed the smaller root r_min = ((1-Z_1) - sqrt(disc))/(2 Z_2) -- the radius of the ball the theorem concludes a zero lives INSIDE. With Y_0 = 0 (the value leg 51 measured on the a=0 CLM profile) and any contraction Z_1 < 1, r_min is exactly 0: a conclusion with no content, reported as a closing certificate.",
+  "rows": [
+   {
+    "site": "test_port_certification_regression.py:87-88",
+    "args": {
+     "Y0": 0.0,
+     "Z1": 0.0,
+     "Z2": 0.0
+    },
+    "note": "the test's own comment says its intent is that 0.0 is a legitimate BOUND, i.e. not a HYPOTHESIS violation. That intent survives the repair (status stays EVALUATED); what the repair changes is the RADIUS verdict, which legs 79/128 left behind.",
+    "in_tree": {
+     "Y0": 0.0,
+     "Z1": 0.0,
+     "Z2": 0.0,
+     "closes": true,
+     "discriminant": 1.0,
+     "status": "EVALUATED"
+    },
+    "post_leg_217": {
+     "Y0": 0.0,
+     "Z1": 0.0,
+     "Z2": 0.0,
+     "closes": false,
+     "discriminant": 1.0,
+     "r_min": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED",
+     "why": "the discriminant is nonnegative but the ball it would certify is degenerate: r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    "status_moved": false,
+    "closes_before": true,
+    "closes_after": false,
+    "r_min_after": 0.0,
+    "radius_violation_after": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+   },
+   {
+    "site": "writeup/data/p2_route_pc_v1_regression.json -> cases[Y0_negative_zero]",
+    "args": {
+     "Y0": -0.0,
+     "Z1": 0.1,
+     "Z2": 1.0
+    },
+    "note": "negative zero: signed but numerically 0.0, so it is admitted by the hypothesis guard and then certifies a ball of radius exactly 0.",
+    "in_tree": {
+     "Y0": -0.0,
+     "Z1": 0.1,
+     "Z2": 1.0,
+     "closes": true,
+     "discriminant": 0.81,
+     "status": "EVALUATED"
+    },
+    "post_leg_217": {
+     "Y0": -0.0,
+     "Z1": 0.1,
+     "Z2": 1.0,
+     "closes": false,
+     "discriminant": 0.81,
+     "r_min": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED",
+     "why": "the discriminant is nonnegative but the ball it would certify is degenerate: r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+    },
+    "status_moved": false,
+    "closes_before": true,
+    "closes_after": false,
+    "r_min_after": 0.0,
+    "radius_violation_after": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none"
+   }
+  ],
+  "status_preserved_on_both": true,
+  "reading": "BOTH inputs keep status EVALUATED and both flip closes True -> False on a ball of radius exactly 0. The hypothesis half (legs 79/128) is untouched; only the radius half moves."
+ },
+ "G2_blast_radius": {
+  "cases_total": 39,
+  "banked_cases_total": 39,
+  "rows_that_move": 5,
+  "moved": [
+   {
+    "label": "legit_close",
+    "deltas": {
+     "keys": {
+      "banked": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status"
+      ],
+      "post_repair": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "r_min",
+       "status"
+      ]
+     }
+    }
+   },
+   {
+    "label": "legit_fail",
+    "deltas": {
+     "keys": {
+      "banked": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status"
+      ],
+      "post_repair": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status",
+       "why"
+      ]
+     }
+    }
+   },
+   {
+    "label": "Y0_negative_zero",
+    "deltas": {
+     "closes": {
+      "banked": true,
+      "post_repair": false
+     },
+     "verdict": {
+      "banked": "CLOSES_LEGITIMATELY",
+      "post_repair": "REJECTED"
+     },
+     "keys": {
+      "banked": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status"
+      ],
+      "post_repair": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "r_min",
+       "radius_violation",
+       "status",
+       "why"
+      ]
+     }
+    }
+   },
+   {
+    "label": "Y0_bool_true",
+    "deltas": {
+     "keys": {
+      "banked": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status"
+      ],
+      "post_repair": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status",
+       "why"
+      ]
+     }
+    }
+   },
+   {
+    "label": "Z1_bool_false",
+    "deltas": {
+     "keys": {
+      "banked": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "status"
+      ],
+      "post_repair": [
+       "Y0",
+       "Z1",
+       "Z2",
+       "closes",
+       "discriminant",
+       "r_min",
+       "status"
+      ]
+     }
+    }
+   }
+  ],
+  "verdict_block_deltas": {},
+  "verdict_block_byte_identical": true,
+  "gate_answer_banked": "yes",
+  "gate_answer_post_repair": "yes",
+  "reading": "the repair is a rejection layer in leg 128's sense: it may turn something previously accepted into a refusal and must never move a clean-input number. Exactly the rows listed above move."
+ },
+ "G3_residual_leading_order_c_l": {
+  "mechanism": "`leading_order_solve` hard-codes the BACKWARD radial difference (`prev = (rhs[i] - a*prev)/denom`, sweeping i upward) regardless of sign(c_l). For c_l < 0 the advection is inward and the backward stencil is ANTI-upwind, so the routine returns the exact inverse of a matrix that is not the one its docstring names -- finite, correctly shaped, no exception, no flag. Leg 217 repaired the DTYPE defect in this same function (M3, `np.zeros_like` with no float cast) and deliberately left the sign defect: M3 is a one-token cast, this is M1's structural twin.",
+  "leg_200_fixture": {
+   "nr": 16,
+   "ncol": 4,
+   "drho": 0.1,
+   "c_diag": -1.2,
+   "seed": 3,
+   "rows": [
+    {
+     "c_l": 3.060593660871532,
+     "rel_error_vs_advertised_operator": 6.236178794804652e-16,
+     "rel_error_vs_assembled_operator": 6.236178794804652e-16,
+     "residual_over_rhs_vs_advertised": 1.270229024511056e-16,
+     "silent": true
+    },
+    {
+     "c_l": 2.5,
+     "rel_error_vs_advertised_operator": 1.3101400119365919e-16,
+     "rel_error_vs_assembled_operator": 1.3101400119365919e-16,
+     "residual_over_rhs_vs_advertised": 1.111197741264759e-16,
+     "silent": true
+    },
+    {
+     "c_l": 0.5,
+     "rel_error_vs_advertised_operator": 1.5937674565918416e-16,
+     "rel_error_vs_assembled_operator": 1.5937674565918416e-16,
+     "residual_over_rhs_vs_advertised": 1.3089234224889245e-16,
+     "silent": true
+    },
+    {
+     "c_l": 0.001,
+     "rel_error_vs_advertised_operator": 7.864161980661175e-18,
+     "rel_error_vs_assembled_operator": 7.864161980661175e-18,
+     "residual_over_rhs_vs_advertised": 9.571618438540094e-17,
+     "silent": true
+    },
+    {
+     "c_l": 0.0,
+     "rel_error_vs_advertised_operator": 0.0,
+     "rel_error_vs_assembled_operator": 0.0,
+     "residual_over_rhs_vs_advertised": 5.64258362629536e-17,
+     "silent": true
+    },
+    {
+     "c_l": -0.001,
+     "rel_error_vs_advertised_operator": 0.02126959606125344,
+     "rel_error_vs_assembled_operator": 8.483786317486379e-17,
+     "residual_over_rhs_vs_advertised": 0.02135172029067514,
+     "silent": true
+    },
+    {
+     "c_l": -0.5,
+     "rel_error_vs_advertised_operator": 26.021826325746993,
+     "rel_error_vs_assembled_operator": 5.849452471280308e-16,
+     "residual_over_rhs_vs_advertised": 24.03637237769041,
+     "silent": true
+    },
+    {
+     "c_l": -2.5,
+     "rel_error_vs_advertised_operator": 1.9388739267162898,
+     "rel_error_vs_assembled_operator": 8.217124714395993e-16,
+     "residual_over_rhs_vs_advertised": 1.9228152598365882,
+     "silent": true
+    },
+    {
+     "c_l": -3.060593660871532,
+     "rel_error_vs_advertised_operator": 1.8252243678516902,
+     "rel_error_vs_assembled_operator": 6.431885261483071e-16,
+     "residual_over_rhs_vs_advertised": 1.8490574947468916,
+     "silent": true
+    }
+   ]
+  },
+  "live_shaped_fixture": {
+   "nr": 200,
+   "ncol": 48,
+   "drho": 0.1,
+   "c_diag": -1.0145055559524538,
+   "seed": 241,
+   "rows": [
+    {
+     "c_l": 3.060593660871532,
+     "rel_error_vs_advertised_operator": 5.472338279265989e-16,
+     "rel_error_vs_assembled_operator": 5.472338279265989e-16,
+     "residual_over_rhs_vs_advertised": 2.550257317186943e-16,
+     "silent": true
+    },
+    {
+     "c_l": 2.5,
+     "rel_error_vs_advertised_operator": 7.137972788851373e-16,
+     "rel_error_vs_assembled_operator": 7.137972788851373e-16,
+     "residual_over_rhs_vs_advertised": 2.353968093431044e-16,
+     "silent": true
+    },
+    {
+     "c_l": 0.5,
+     "rel_error_vs_advertised_operator": 1.719813462899735e-16,
+     "rel_error_vs_assembled_operator": 1.719813462899735e-16,
+     "residual_over_rhs_vs_advertised": 1.278981906307136e-16,
+     "silent": true
+    },
+    {
+     "c_l": 0.001,
+     "rel_error_vs_advertised_operator": 5.080507551449108e-17,
+     "rel_error_vs_assembled_operator": 5.080507551449108e-17,
+     "residual_over_rhs_vs_advertised": 7.943134272130597e-17,
+     "silent": true
+    },
+    {
+     "c_l": 0.0,
+     "rel_error_vs_advertised_operator": 5.806997585368181e-17,
+     "rel_error_vs_assembled_operator": 5.806997585368181e-17,
+     "residual_over_rhs_vs_advertised": 1.8006344926716348e-17,
+     "silent": true
+    },
+    {
+     "c_l": -0.001,
+     "rel_error_vs_advertised_operator": 0.024484674661978102,
+     "rel_error_vs_assembled_operator": 9.991607117084663e-18,
+     "residual_over_rhs_vs_advertised": 0.024642798069634302,
+     "silent": true
+    },
+    {
+     "c_l": -0.5,
+     "rel_error_vs_advertised_operator": 7.420267590705271e+18,
+     "rel_error_vs_assembled_operator": 1.0512820839202226e-14,
+     "residual_over_rhs_vs_advertised": 7.972781142134204e+18,
+     "silent": true
+    },
+    {
+     "c_l": -2.5,
+     "rel_error_vs_advertised_operator": 1176.15442857832,
+     "rel_error_vs_assembled_operator": 3.3964423833602548e-15,
+     "residual_over_rhs_vs_advertised": 1138.281205334329,
+     "silent": true
+    },
+    {
+     "c_l": -3.060593660871532,
+     "rel_error_vs_advertised_operator": 272.74568947926565,
+     "rel_error_vs_assembled_operator": 1.5998608761311604e-14,
+     "residual_over_rhs_vs_advertised": 260.24695328249925,
+     "silent": true
+    }
+   ]
+  },
+  "magnitude_at_c_l_minus_0p5": {
+   "leg_200_fixture": 26.021826325746993,
+   "live_shaped_fixture": 7.420267590705271e+18
+  },
+  "magnitude_at_banked_c_l_sign_flipped": {
+   "c_l": -3.060593660871532,
+   "leg_200_fixture": 1.8252243678516902,
+   "live_shaped_fixture": 272.74568947926565
+  },
+  "amplification_law": {
+   "per_row_factor": "|a / (c_diag - a)| with a = c_l/drho",
+   "over_the_sweep": "that factor raised to nr, the number of radial nodes",
+   "rows": [
+    {
+     "c_l": -0.001,
+     "nr": 16,
+     "per_row": 0.00995514653029289,
+     "to_the_nr": 9.305988446123779e-33
+    },
+    {
+     "c_l": -0.5,
+     "nr": 16,
+     "per_row": 1.2545494844354,
+     "to_the_nr": 37.65344706069552
+    },
+    {
+     "c_l": -2.5,
+     "nr": 16,
+     "per_row": 1.0422966288361932,
+     "to_the_nr": 1.940266251140522
+    },
+    {
+     "c_l": -3.060593660871532,
+     "nr": 16,
+     "per_row": 1.0342837612058553,
+     "to_the_nr": 1.714886167978343
+    },
+    {
+     "c_l": -0.001,
+     "nr": 200,
+     "per_row": 0.00995514653029289,
+     "to_the_nr": 0.0
+    },
+    {
+     "c_l": -0.5,
+     "nr": 200,
+     "per_row": 1.2545494844354,
+     "to_the_nr": 4.983784545225727e+19
+    },
+    {
+     "c_l": -2.5,
+     "nr": 200,
+     "per_row": 1.0422966288361932,
+     "to_the_nr": 3965.213907048287
+    },
+    {
+     "c_l": -3.060593660871532,
+     "nr": 200,
+     "per_row": 1.0342837612058553,
+     "to_the_nr": 847.1127483513529
+    }
+   ],
+   "why_the_curve_is_not_monotone": "for c_l < 0 the factor is |a|/(|a| - |c_diag|), which exceeds 1 only once |a| > |c_diag| and tends to 1 from above as |a| -> infinity. It therefore PEAKS at a MARGINAL breach, |c_l| ~ drho*|c_diag| ~ 0.101, and decays toward both ends: a gross negative c_l is SAFER than a slight one. This is banked lesson 88 from the other side, and it is the same non-monotonicity leg 200 measured for M1 (worst at s_rho = -0.4, not at -3.0).",
+   "why_the_magnitude_is_fixture_bound": "the error is exponential in nr, so a magnitude quoted here is meaningless without its grid. Leg 200's 26.0x is a 16-node number; the same defect at the LIVE 200-node radial resolution is 7.4e+18. Both are given above, neither is borrowed for the other -- leg 53's lesson, and leg 217 restated it when it separated its own residue table by fixture."
+  },
+  "control_worst_rel_error_vs_the_operator_it_assembles": 1.5998608761311604e-14,
+  "control_reading": "the control column is ~1e-16 at EVERY c_l including the negative ones: the sweep is arithmetically exact throughout. All of the wrongness is in WHICH operator, none of it in the solve -- the column that could report the other answer, and does not.",
+  "c_l_zero_is_exact": {
+   "leg_200_fixture": 0.0,
+   "live_shaped_fixture": 5.806997585368181e-17,
+   "why": "c_l = 0 carries no radial coupling and is admissible in either direction -- the exact analogue of leg 217's `s_rho == 0` bit-identical branch in `line_sweep_solve`."
+  },
+  "verdict": "SILENT"
+ },
+ "G4_residual_stall_positional": {
+  "mechanism": "`stall_verdict` does `first, last = rows[0], rows[-1]` -- POSITIONAL, never keyed on `m`. `krylov_ladder` appends in the caller's `dims` order and never sorts. So reversing the `dims` tuple maps the published gain g -> 1/g and the work ratio w -> 1/w on IDENTICAL measurements, with no error, no NaN and no flag. Leg 217 repaired M4 in this same function -- the NaN comparison `flat = bool(gain < 2.0)` -- and left the positional read, which is a separate defect in the same two lines.",
+  "measured_on": "the four LIVE banked ladders of writeup/data/p2_route_l_v1_precond.json",
+  "rows": [
+   {
+    "ladder": "none",
+    "ascending_dims": {
+     "work_ratio": 16.0,
+     "residual_gain": 1.048694384970186,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "same_data_descending_dims": {
+     "work_ratio": 0.0625,
+     "residual_gain": 0.9535666580577999,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "gain_ratio_asc_over_desc": 1.0997599130679965,
+    "published_verdict_flips": false
+   },
+   {
+    "ladder": "radial only (Route-K)",
+    "ascending_dims": {
+     "work_ratio": 16.0,
+     "residual_gain": 1.2419759393363918,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "same_data_descending_dims": {
+     "work_ratio": 0.0625,
+     "residual_gain": 0.8051685772063478,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "gain_ratio_asc_over_desc": 1.5425042338905128,
+    "published_verdict_flips": false
+   },
+   {
+    "ladder": "ADI composition",
+    "ascending_dims": {
+     "work_ratio": 16.0,
+     "residual_gain": 1.0039719069473407,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "same_data_descending_dims": {
+     "work_ratio": 0.0625,
+     "residual_gain": 0.9960438066843746,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "gain_ratio_asc_over_desc": 1.0079595899394798,
+    "published_verdict_flips": false
+   },
+   {
+    "ladder": "full transport line sweep",
+    "ascending_dims": {
+     "work_ratio": 16.0,
+     "residual_gain": 9.724453522207629,
+     "flat": false,
+     "reading": "bending => finite ill-conditioning, and more Krylov work would help"
+    },
+    "same_data_descending_dims": {
+     "work_ratio": 0.0625,
+     "residual_gain": 0.10283354203054298,
+     "flat": true,
+     "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number"
+    },
+    "gain_ratio_asc_over_desc": 94.56499630557636,
+    "published_verdict_flips": true
+   }
+  ],
+  "line_sweep_deeper": {
+   "ascending": {
+    "work_ratio": 1.3333333333333333,
+    "residual_gain": 61.60560249945058,
+    "flat": false
+   },
+   "descending": {
+    "work_ratio": 0.75,
+    "residual_gain": 0.0162322899124137,
+    "flat": true
+   },
+   "gain_ratio": 3795.250259320312
+  },
+  "attribution_summary_ranking": {
+   "ascending": [
+    "line sweep",
+    "full"
+   ],
+   "descending": [
+    "full",
+    "line sweep"
+   ],
+   "ranking_inverts": true,
+   "why": "`attribution_summary` sorts by `-gain`, so inverting every gain inverts the published ranking as well as each verdict."
+  },
+  "ladders_whose_published_verdict_flips": [
+   "full transport line sweep"
+  ],
+  "sharpest": "'full transport line sweep' is the ladder that carries Route-L's entire headline -- 'the curve stops being flat'. Reversed, the same five measurements report FLAT, i.e. 'a continuum in the spectrum', which is the exact conclusion Route-L used the ladder to overturn.",
+  "verdict": "SILENT"
+ },
+ "G5_residual_pack_unpack": {
+  "mechanism": "`pack` is `np.concatenate([np.ravel(o), np.ravel(e), np.ravel(x)])` and `unpack` is three `reshape(self.shape)` calls. Neither validates a PER-FIELD shape, only the total size -- and a transpose is total-size-preserving at EVERY shape, square or not. So a field handed in the (beta, rho) layout round-trips into a different, finite, plausible field with no exception. A wrong TOTAL length is caught, by `reshape`, not by a check.",
+  "correction_to_leg_200s_note": "leg 200 recorded 'the transposition survives only because nr*nb is layout-independent'. That is true but reads as a squareness caveat; it is not one. nr*nb == nb*nr identically, so the live 200x48 grid is exactly as exposed as a square one -- measured below, not argued.",
+  "probes": [
+   {
+    "nr": 6,
+    "nb": 4,
+    "square": false,
+    "clean_round_trip_max_abs_error": 0.0,
+    "transposed_raised": null,
+    "shape_returned": [
+     6,
+     4
+    ],
+    "equals_intended_field": false,
+    "equals_reshaped_transpose": true,
+    "rel_error_vs_intended_field": 1.320353387413802,
+    "max_abs_error_vs_intended_field": 3.1681127936280147,
+    "wrong_total_length_raised": "ValueError",
+    "outcome": "SILENT"
+   },
+   {
+    "nr": 200,
+    "nb": 48,
+    "square": false,
+    "clean_round_trip_max_abs_error": 0.0,
+    "transposed_raised": null,
+    "shape_returned": [
+     200,
+     48
+    ],
+    "equals_intended_field": false,
+    "equals_reshaped_transpose": true,
+    "rel_error_vs_intended_field": 1.4183916763463038,
+    "max_abs_error_vs_intended_field": 5.644559271894465,
+    "wrong_total_length_raised": "ValueError",
+    "outcome": "SILENT"
+   },
+   {
+    "nr": 32,
+    "nb": 32,
+    "square": true,
+    "clean_round_trip_max_abs_error": 0.0,
+    "transposed_raised": null,
+    "shape_returned": [
+     32,
+     32
+    ],
+    "equals_intended_field": false,
+    "equals_reshaped_transpose": true,
+    "rel_error_vs_intended_field": 1.4133235001316409,
+    "max_abs_error_vs_intended_field": 4.719458847513836,
+    "wrong_total_length_raised": "ValueError",
+    "outcome": "SILENT"
+   }
+  ],
+  "live_grid": {
+   "n_r": 200,
+   "n_beta": 48,
+   "square": false
+  },
+  "magnitude_at_live_shape": 1.4183916763463038,
+  "magnitude_at_leg_200_fixture": 1.320353387413802,
+  "verdict": "SILENT"
+ },
+ "G6_claim_adjacency": {
+  "question": "does any banked number depend on one of the three residual paths -- i.e. is any of them CLAIM-ADJACENT rather than merely latent?",
+  "ledger": [
+   {
+    "path": "leading_order_solve sign-blind in c_l",
+    "banked_configuration": {
+     "c_l": 3.060593660871532,
+     "source": "writeup/data/p2_route_l_v1_precond.json -> seed.c_l"
+    },
+    "fires_when": "c_l < 0",
+    "margin_to_firing": 3.060593660871532,
+    "margin_is": "a MEASURED quantity: the seed's own dilation constant",
+    "claim_adjacent": false,
+    "why": "every PORT-family number was produced at c_l = +3.0605936608715 > 0, and c_l > 0 is what the Hou-Luo rescaling produces by construction. The path is LATENT, with a margin of 3.06 in the constant itself."
+   },
+   {
+    "path": "stall_verdict reads the ladder positionally",
+    "banked_configuration": {
+     "DIMS": [
+      10,
+      20,
+      40,
+      80,
+      160
+     ],
+     "deep": [
+      240,
+      320
+     ],
+     "source": "experiments/p2_route_l_v1_precond.py:49"
+    },
+    "fires_when": "the caller's `dims` tuple is not ascending",
+    "margin_to_firing": 0.0,
+    "margin_is": "NOT a numerical margin. The banked ladders are correct only because `DIMS` is a hard-coded ascending literal; nothing in `krylov_ladder` or `stall_verdict` enforces it, and no caller checks it. This is the one of the three with zero defence.",
+    "claim_adjacent": false,
+    "why": "the banked values ARE right -- DIMS is ascending -- so no banked number is wrong. But had it been written descending, the four published `flat` verdicts and the attribution ranking would all have inverted, silently, and Route-L's headline with them. Latent, undefended."
+   },
+   {
+    "path": "pack/unpack validate only the total size",
+    "banked_configuration": {
+     "n_r": 200,
+     "n_beta": 48,
+     "source": "writeup/data/p2_route_l_v1_precond.json -> grid"
+    },
+    "fires_when": "a caller supplies one of the three fields in the (beta, rho) layout -- at ANY grid shape, since a transpose preserves nr*nb",
+    "margin_to_firing": 0.0,
+    "margin_is": "NOT a numerical margin either. Every live caller obtains its fields FROM `unpack`, so the layout is correct by construction rather than by validation.",
+    "claim_adjacent": false,
+    "why": "no banked number was produced from an externally-laid-out field: `F`, `info`, `jacobian_vector` and `make_preconditioner` all round-trip fields that `unpack` itself produced. Latent."
+   }
+  ],
+  "any_claim_adjacent": false,
+  "answer": "NO. All three are latent in leg 200's exact sense: the hypothesis-satisfying counterpart returns the same number, so nothing in the banked record is wrong. Nothing here needs its own escalation under this leg's gate.",
+  "but": "two of the three have a margin of ZERO -- they are correct by a hard-coded literal and by caller convention respectively, not by any check. That is a weaker guarantee than `c_l > 0`, which is a measured 3.06, and it is the distinction a repair leg should be scoped on.",
+  "magnitudes_carried_forward": {
+   "leading_order_solve_at_c_l_minus_0p5_leg200_fixture": 26.021826325746993,
+   "stall_verdict_worst_gain_ratio": 94.56499630557636,
+   "pack_unpack_at_live_shape": 1.4183916763463038
+  }
+ },
+ "G7_the_correction_not_applied": {
+  "test_correction": {
+   "file": "test_port_certification_regression.py",
+   "lines": "86-88",
+   "stale_text_present_in_tree": true,
+   "replacement": "    # the boundary of the new guard: 0.0 is a legitimate BOUND, and so is -0.0 -- the\n    # HYPOTHESIS guard admits both (status stays EVALUATED). Since leg 217 the RADIUS\n    # half is also checked, and a ball of radius exactly 0 is not a certificate.\n    edge = radii_polynomial_status(0.0, 0.0, 0.0)\n    assert edge[\"status\"] == \"EVALUATED\", edge\n    assert edge[\"closes\"] is False and edge[\"r_min\"] == 0.0, edge\n    assert \"radius_violation\" in edge, edge\n",
+   "verified_against_leg_217_blob": true,
+   "in_tree_closes_on_the_same_input": true,
+   "red_against_the_working_tree": true
+  },
+  "json_row_correction": {
+   "file": "writeup/data/p2_route_pc_v1_regression.json",
+   "row": "cases[Y0_negative_zero]",
+   "banked": {
+    "label": "Y0_negative_zero",
+    "family": "PC2_sign",
+    "note": "negative zero -- signed but numerically 0.0; expected to behave as 0.0",
+    "Y0": -0.0,
+    "Z1": 0.1,
+    "Z2": 1.0,
+    "violates": [],
+    "outside_theorem": false,
+    "outcome": "RETURNED",
+    "status": "EVALUATED",
+    "closes": true,
+    "keys": [
+     "Y0",
+     "Z1",
+     "Z2",
+     "closes",
+     "discriminant",
+     "status"
+    ],
+    "carries_Y0": true,
+    "carries_Z1": true,
+    "verdict": "CLOSES_LEGITIMATELY"
+   },
+   "corrected": {
+    "label": "Y0_negative_zero",
+    "family": "PC2_sign",
+    "note": "negative zero -- signed but numerically 0.0; expected to behave as 0.0",
+    "Y0": -0.0,
+    "Z1": 0.1,
+    "Z2": 1.0,
+    "violates": [],
+    "outside_theorem": false,
+    "outcome": "RETURNED",
+    "status": "EVALUATED",
+    "closes": false,
+    "keys": [
+     "Y0",
+     "Z1",
+     "Z2",
+     "closes",
+     "discriminant",
+     "r_min",
+     "radius_violation",
+     "status",
+     "why"
+    ],
+    "carries_Y0": true,
+    "carries_Z1": true,
+    "verdict": "REJECTED"
+   }
+  },
+  "why_not_applied": [
+   "A1: leg 217 is PARKED. The corrected assertion is RED against this branch's own tree -- in-tree `radii_polynomial_status(0.0, 0.0, 0.0)` returns closes=True. `scripts/merge_gate.sh` maps a changed `test_*.py` straight to itself (case `test_*.py)` in its diff loop), so applying it makes THIS leg's merge gate fail. The correction is right against leg 217's blob and wrong against main; it cannot be both until leg 217 merges.",
+   "A2: the bank is stale in FIVE rows, not one. Leg 217's report names only `Y0_negative_zero`, and that is the only row whose `closes`/`verdict` move -- but `legit_close`, `legit_fail`, `Y0_bool_true` and `Z1_bool_false` all gain `r_min` and/or `why` in their recorded `keys` list. Those four are outside this leg's declared one-row territory. Correcting only the named row would leave an artifact that NO single run of the battery could emit: one row with post-repair keys beside four with pre-repair keys. That is a worse artifact than the stale one, so this leg does not produce it."
+  ],
+  "how_to_land": "apply both corrections IN leg 217's landing commit, and regenerate `p2_route_pc_v1_regression.json` wholesale rather than editing the single row -- the regeneration is what makes all five rows consistent, and G2 above certifies that the regeneration moves exactly those five rows and leaves the `verdict` block byte-identical."
+ },
+ "gate": {
+  "question": "(a) Do test_port_certification_regression.py and the banked JSON row now assert the CORRECT (post-leg-217-repair) behaviour on the exact degenerate input leg 200 originally flagged, with no other assertion in either artifact touched; and (b) are all 3 additional silent paths leg 217 named characterised with a precise mechanism and magnitude, the same shape leg 200's own report used for its original 4?",
+  "a": "INCOMPLETE -- authored and verified, deliberately NOT applied; see G7",
+  "b": "CHARACTERISED -- all three, mechanism and magnitude; see G3, G4, G5, G6",
+  "outcome": "branch pushed only; no merge, ahead of or in place of leg 217"
+ }
+}
