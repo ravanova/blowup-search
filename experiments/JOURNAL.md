@@ -3230,3 +3230,11 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   own fix is provably blind to B. Measured: no banked result re-run, but the safe
   exp(-r^2)-class envelopes used elsewhere give reason (not proof) to expect no
   movement. Module unpatched, branch leg/205-bvr-v1 pushed.
+- **Leg 193 (Route-M2CV) — YES:** independently reproduces leg 187's NO on both
+  failure points, upgrading the dilation-orbit kernel argument from a 5-value float
+  check to an EXACT symbolic identity in Q[X,b] (zero polynomial for every g>0, not
+  just 5 pinned values); DF[phi]=0 confirmed exactly. 20/20 floats reproduce at
+  relative difference 0.0. One precision caveat, not verdict-changing: Z_2's
+  n^2.36 is a ladder-dependent least-squares average -- local slopes climb
+  2.13->2.50, a second ladder fits 2.2466 -- but every local slope stays >=1.88 and
+  rising, so the divergence verdict itself is unaffected.
