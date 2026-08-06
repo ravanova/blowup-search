@@ -299,7 +299,12 @@ CAPABILITIES = [
                    "whether a radii polynomial closes. It is also DOMAIN-limited, not "
                    "resolution-limited: at the shipped X_max = 745 the far-field closure "
                    "moves the exponent by 0.190 and the measurement is not trustworthy "
-                   "there; the headline is taken where no sample point leaves the grid"),
+                   "there; the headline is taken where no sample point leaves the grid "
+                   "-- now CODE-ENFORCED (leg 84 adversarial audit + bench-repair): every "
+                   "exponent-bearing function returns domain_valid/n_outside_grid and warns "
+                   "on extrapolation (TargetNormDomainWarning); re-running the headline "
+                   "margins with the guard active reproduces +0.394/+0.094 to 0.0 diff -- "
+                   "confirmed NOT contaminated"),
      "test": "test_target_norm.py"},
 
     # -- literature, targets, search, plumbing --------------------------------------
