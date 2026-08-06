@@ -2996,5 +2996,26 @@ belong to a future window.
   boussinesq_velocity.py fix holds under leg 99's FULL 22-case battery (0 SILENT_WRONG, 0
   returning -0.0, vs 7/5 before), and leg 73's Lamb corner-image benchmark reproduces to
   ~1e-12 relative. Banked as a permanent regression suite alongside legs 73 and 99.
+- **Leg 115 (Route-DCA) — YES, not repaired (audit leg, latent):** `decay_collocation.py`'s
+  `graded_inverse_norm` at grid size J=1 returns a value bit-identical regardless of
+  NaN/Inf poisoning in c or the nodal field (the gauge row consumes the system's only
+  row, so J>=2 correctly propagates poison but J=1 cannot). Two further gaps:
+  `sup_op_norm` silently swaps domain/codomain axes on 1-D input (30/30 mismatch), and a
+  complex-valued alpha silently downcasts via ComplexWarning. All latent — no in-repo
+  caller uses J<8, non-2D sup_op_norm input, or complex alpha. Not patched.
+- **Leg 117 (Route-HRA) — YES, not repaired (audit leg, latent):** `hl_rescaled.py` has 4
+  silent-corruption mechanisms: `velocity()` never validates X is ascending (20/20
+  permutations silently wrong) or X_ref in-domain (4/4 out-of-domain silently clamp);
+  `sinh_grid_at(M<0)` silently mirrors; `degenerate_ic`'s closing `np.where(X>0.0,...)`
+  launders a NaN abscissa into the same 0.0 a legitimate X<=0 point produces. All latent
+  (0 of 35 in-repo call sites exposed). Not patched.
+- **Leg 119 (Route-HHA) — YES, not repaired (audit leg, latent):** `hilbert_holder.py`'s
+  per-point routing rule transplants leg 106's unsound shape from the sibling
+  hilbert_pointwise.py: two NaN-free configurations (gamma=0.0, gamma=-0.5) exceed the
+  reported bound by up to 1.23x at extreme adversarial feature widths, both eps-
+  truncations of a log-divergent integral. The public assembly API crashes cleanly at
+  gamma=0.0 exactly but returns a silent finite pair at gamma=-0.3. Shipped
+  (alpha=1.5,gamma=0.5) and production (alpha~1.4,gamma~0.15) configurations confirmed
+  safe. Not patched.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
