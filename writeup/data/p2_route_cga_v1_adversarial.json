@@ -1,0 +1,1418 @@
+{
+  "leg": 199,
+  "route": "CGA",
+  "module_under_audit": "solver/certificate_guards.py",
+  "module_edited_by_this_leg": false,
+  "gate": "Under adversarial and degenerate inputs, does certificate_guards.py ever silently ACCEPT (fail to reject) a case that should fail -- the same fabrication-acceptance shape leg 116 found in nk_bounds.py?",
+  "gate_answer": "YES",
+  "totals": {
+    "cases": 67,
+    "gate_hits": 16,
+    "controls": 43,
+    "control_failures": 0,
+    "secondary_not_gate_hits": 7
+  },
+  "mechanisms": {
+    "M1": "unit_range_violation is the ONLY one of the five exported guards with no isinf test, and nk_bounds.py:430 asks it for a CLOSED -inf lower endpoint, so alpha=-inf is admissible and manufactures bound=NaN",
+    "M2": "radius_violation and unit_range_violation call float() with no numbers.Real check, while hypothesis_violations in the same file raises",
+    "M3": "bool is numbers.Real, so a flag is silently reinterpreted as 1.0/0.0",
+    "M4": "float() underflows a negative rational to -0.0 before the f < 0.0 test",
+    "M5": "an empty container is a vacuous pass in two guards",
+    "M6": "a too-large int raises OverflowError on the line before the isinf test (SOUND, explicitly NOT counted as a gate hit)",
+    "M7": "invalid_input_reason([]) builds a rejection sentence naming no violation"
+  },
+  "headline": {
+    "mechanism": "M1",
+    "site": "solver/certificate_guards.py:162-178 (unit_range_violation), reached from solver/nk_bounds.py:430",
+    "probe": "farfield_modelling_error_bound(alpha=-inf, gamma=0.5, X0=1.0)",
+    "returns": "bound=NaN, hilbert_term=NaN, 40/40 window samples NaN, no exception",
+    "honest_reference_alpha_1p5": 2.537396530974982,
+    "sibling_non_finite_alphas": {
+      "+inf": "ValueError",
+      "NaN": "ValueError",
+      "-inf": "ACCEPTED"
+    },
+    "n_non_finite_alphas_accepted": "1 of 3"
+  },
+  "gamma_bool_ratio_ref_over_probe": 1.2605493138651522,
+  "blast_radius": [
+    {
+      "mechanism": "M1 (unit_range_violation accepts -inf at nk_bounds.py:430)",
+      "callers": [
+        "test_nk_bounds.py:192,207 (ALPHA=1.5)",
+        "experiments/p2_route_d_v6_bounds.py:170,200,224 (alphas=1.1..1.8)",
+        "experiments/p2_route_d_v7_seminorm.py:298 (alphas=1.1..1.8)",
+        "experiments/p2_route_d_v8_quadratic.py:306 (alphas=1.1..1.8)",
+        "experiments/p2_route_d_v9_sharpen.py:326 (alphas=1.1..1.8)",
+        "experiments/p2_route_nka_v1_adversarial.py:408,425 (LIVE_ALPHAS=1.1..1.8)",
+        "experiments/p2_route_nkr_v1_repair.py:230, p2_route_nkb_v1_postrepair.py:150"
+      ],
+      "min_alpha_any_caller": 1.1,
+      "distance_to_the_defect": "every in-repo alpha is in [1.1, 1.8]; the accept needs exactly -inf, which no caller passes and no computation in the repo produces as an exponent",
+      "live_values": [
+        {
+          "alpha": 1.1,
+          "bound": 2.4067460340658524,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.2,
+          "bound": 2.436836818269393,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.3,
+          "bound": 2.468678191251472,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.4,
+          "bound": 2.502212735334558,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.5,
+          "bound": 2.537396530974982,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.6,
+          "bound": 2.5741967920941167,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.7,
+          "bound": 2.612590023958565,
+          "finite": true,
+          "argmax_at_window_end": false
+        },
+        {
+          "alpha": 1.8,
+          "bound": 2.652560574204788,
+          "finite": true,
+          "argmax_at_window_end": false
+        }
+      ],
+      "all_live_bounds_finite": true,
+      "banked_numbers_impeached": 0,
+      "verdict": "LATENT"
+    },
+    {
+      "mechanism": "M2/M3 (no type gate in radius_violation / unit_range_violation)",
+      "callers": [
+        "nk_bounds.py:561 (r_min is the module's own float64)",
+        "nk_bounds.py:392,430 (gamma/alpha are floats at every call site)"
+      ],
+      "distance_to_the_defect": "reaching it requires a caller to pass a str/Decimal/bool exponent or radius; all 8 in-repo call paths pass floats",
+      "banked_numbers_impeached": 0,
+      "verdict": "LATENT"
+    },
+    {
+      "mechanism": "M4 (negative rational below the denormal floor)",
+      "callers": [
+        "port_certification.py:346",
+        "interval_certificate.py:140",
+        "nk_bounds.py:526"
+      ],
+      "distance_to_the_defect": "unreachable from float64 by construction, and all three pipelines are driven with float64 constants",
+      "banked_numbers_impeached": 0,
+      "verdict": "LATENT"
+    },
+    {
+      "mechanism": "M5 (empty container is a vacuous pass)",
+      "callers": [
+        "nk_bounds.py:225,227 via two_point_dual"
+      ],
+      "distance_to_the_defect": "the caller's own numpy pre-screen also passes an empty array, and the downstream `min` reduction then raises",
+      "banked_numbers_impeached": 0,
+      "verdict": "LATENT"
+    }
+  ],
+  "banked_numbers_impeached": 0,
+  "three_pipeline_agreement_control": [
+    {
+      "input": [
+        -1.0,
+        0.3,
+        1.0
+      ],
+      "n_violations": [
+        1,
+        1,
+        1
+      ],
+      "all_refuse": true
+    },
+    {
+      "input": [
+        "NaN",
+        0.3,
+        1.0
+      ],
+      "n_violations": [
+        1,
+        1,
+        1
+      ],
+      "all_refuse": true
+    },
+    {
+      "input": [
+        "+Infinity",
+        0.3,
+        1.0
+      ],
+      "n_violations": [
+        1,
+        1,
+        1
+      ],
+      "all_refuse": true
+    },
+    {
+      "input": [
+        1e-06,
+        -1.0,
+        1.0
+      ],
+      "n_violations": [
+        1,
+        1,
+        1
+      ],
+      "all_refuse": true
+    },
+    {
+      "input": [
+        1e-06,
+        0.3,
+        -1.0
+      ],
+      "n_violations": [
+        1,
+        1,
+        1
+      ],
+      "all_refuse": true
+    }
+  ],
+  "cases": [
+    {
+      "family": "A",
+      "case": "A_control_neg_float",
+      "probe": "-1.0",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is negative (-1.0); it is an upper bound on a norm"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_nan_float",
+      "probe": "nan",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is NaN (a norm bound cannot be NaN; note that `NaN >= 1.0` is False, so an unguarded NaN would slip past the contraction test)"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_posinf",
+      "probe": "inf",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is +infinite (a norm bound is finite by hypothesis)"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_neginf",
+      "probe": "-inf",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is -infinite (a norm bound is finite by hypothesis)"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_np_float64_neg",
+      "probe": "np.float64(-1.0)",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is negative (-1.0); it is an upper bound on a norm"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_np_float32_nan",
+      "probe": "np.float32(nan)",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is NaN (a norm bound cannot be NaN; note that `NaN >= 1.0` is False, so an unguarded NaN would slip past the contraction test)"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_np_float64_inf",
+      "probe": "np.float64(inf)",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is +infinite (a norm bound is finite by hypothesis)"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the guard's own reason for existing; a miss here voids the run",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_admissible_zero",
+      "probe": "0.0",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate bound must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_admissible_neg_zero",
+      "probe": "-0.0",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate bound must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_admissible_small_pos",
+      "probe": "1e-300",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate bound must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_admissible_one",
+      "probe": "1.0",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate bound must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_nonreal_str",
+      "probe": "'-1.0'",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: Y_0 must be a real number, got str; the radii polynomial's constants are norms.",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the docstring promises a TypeError on a non-real value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_nonreal_complex",
+      "probe": "(-1+0j)",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: Y_0 must be a real number, got complex; the radii polynomial's constants are norms.",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the docstring promises a TypeError on a non-real value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_nonreal_ndarray0d",
+      "probe": "array(-1.)",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: Y_0 must be a real number, got ndarray; the radii polynomial's constants are norms.",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the docstring promises a TypeError on a non-real value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A_control_nonreal_Decimal",
+      "probe": "Decimal('-1')",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: Y_0 must be a real number, got Decimal; the radii polynomial's constants are norms.",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the docstring promises a TypeError on a non-real value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "A",
+      "case": "A1_bool_True",
+      "probe": "True",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M3: `isinstance(True, numbers.Real)` is True, so a FLAG is silently reinterpreted as the number 1.0/0.0 and no signal distinguishes the two",
+      "consumer": {
+        "budget": {
+          "closes": false,
+          "r_min": "NaN",
+          "degenerate_ball": false,
+          "reason": null
+        }
+      },
+      "reference": {
+        "budget": {
+          "closes": false,
+          "r_min": "NaN",
+          "degenerate_ball": false
+        }
+      },
+      "magnitude": "arithmetically correct for the coerced value; the defect is the absence of a signal, NOT an arithmetic lie",
+      "status": "HIT"
+    },
+    {
+      "family": "A",
+      "case": "A1_bool_False",
+      "probe": "False",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M3: `isinstance(True, numbers.Real)` is True, so a FLAG is silently reinterpreted as the number 1.0/0.0 and no signal distinguishes the two",
+      "consumer": {
+        "budget": {
+          "closes": true,
+          "r_min": 0.0,
+          "degenerate_ball": true,
+          "reason": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius."
+        }
+      },
+      "reference": {
+        "budget": {
+          "closes": true,
+          "r_min": 0.0,
+          "degenerate_ball": true
+        }
+      },
+      "magnitude": "arithmetically correct for the coerced value; the defect is the absence of a signal, NOT an arithmetic lie",
+      "status": "HIT"
+    },
+    {
+      "family": "A",
+      "case": "A2_huge_int_pos",
+      "probe": "int(10**400)",
+      "guard_outcome_kind": "raise",
+      "guard_output": "OverflowError: int too large to convert to float",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "M6: `float(v)` overflows on the line BEFORE the isinf test that exists precisely to name this case. NOT a false accept -- it is sound -- but it is leg 98's B20/B21 shape (a bare arithmetic exception a caller with a broad `except` turns into a silent skip)",
+      "consumer": {
+        "budget": "raise: OverflowError: int too large to convert to float"
+      },
+      "reference": {
+        "budget(1e300)": false
+      },
+      "magnitude": "an effectively-infinite constant CRASHES instead of producing the module's own '+infinite (a norm bound is finite by hypothesis)'",
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "A",
+      "case": "A2_huge_int_neg",
+      "probe": "int(10**400) negated",
+      "guard_outcome_kind": "raise",
+      "guard_output": "OverflowError: int too large to convert to float",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "M6: `float(v)` overflows on the line BEFORE the isinf test that exists precisely to name this case. NOT a false accept -- it is sound -- but it is leg 98's B20/B21 shape (a bare arithmetic exception a caller with a broad `except` turns into a silent skip)",
+      "consumer": {
+        "budget": "raise: OverflowError: int too large to convert to float"
+      },
+      "reference": {
+        "budget(1e300)": false
+      },
+      "magnitude": "an effectively-infinite constant CRASHES instead of producing the module's own '+infinite (a norm bound is finite by hypothesis)'",
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "A",
+      "case": "A3_fraction_neg_below_denormal",
+      "probe": "Fraction(-1, 10**400)",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M4: `float()` underflows a NEGATIVE rational to -0.0 BEFORE the `f < 0.0` test, so a constant the docstring calls 'an input the theorem says nothing about' is admitted as nonnegative. Unreachable from float64 (a negative float below the denormal floor already IS -0.0); needs an exact type",
+      "consumer": {
+        "budget_closes": true,
+        "r_min": 1.4285743440423104e-06
+      },
+      "reference": {
+        "budget_closes": true,
+        "r_min": 1.4285743440423104e-06
+      },
+      "magnitude": "accepted negatives span (-5e-324, 0), so the budget inflation is <= 1 ULP: the ACCEPT is real, the MAGNITUDE is nil",
+      "status": "HIT"
+    },
+    {
+      "family": "A",
+      "case": "A3_fraction_neg_representable",
+      "probe": "Fraction(-1, 3)",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "Y_0 is negative (-0.3333333333333333); it is an upper bound on a norm"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "M4: `float()` underflows a NEGATIVE rational to -0.0 BEFORE the `f < 0.0` test, so a constant the docstring calls 'an input the theorem says nothing about' is admitted as nonnegative. Unreachable from float64 (a negative float below the denormal floor already IS -0.0); needs an exact type",
+      "consumer": {
+        "budget_closes": false,
+        "r_min": "NaN"
+      },
+      "reference": {
+        "budget_closes": true,
+        "r_min": 1.4285743440423104e-06
+      },
+      "magnitude": "accepted negatives span (-5e-324, 0), so the budget inflation is <= 1 ULP: the ACCEPT is real, the MAGNITUDE is nil",
+      "status": "ok"
+    },
+    {
+      "family": "A",
+      "case": "A6_empty_constants",
+      "probe": "()",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M5: zero constants checked, and the verdict returned is 'every constant is admissible' -- a vacuous pass. Not reachable from the three call sites, which all pass a fixed-length tuple",
+      "consumer": null,
+      "reference": null,
+      "magnitude": "0 of 0 constants validated",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "A",
+      "case": "A_control_three_pipelines_agree",
+      "probe": "5 violating triples",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        {
+          "input": [
+            -1.0,
+            0.3,
+            1.0
+          ],
+          "n_violations": [
+            1,
+            1,
+            1
+          ],
+          "all_refuse": true
+        },
+        {
+          "input": [
+            "NaN",
+            0.3,
+            1.0
+          ],
+          "n_violations": [
+            1,
+            1,
+            1
+          ],
+          "all_refuse": true
+        },
+        {
+          "input": [
+            "+Infinity",
+            0.3,
+            1.0
+          ],
+          "n_violations": [
+            1,
+            1,
+            1
+          ],
+          "all_refuse": true
+        },
+        {
+          "input": [
+            1e-06,
+            -1.0,
+            1.0
+          ],
+          "n_violations": [
+            1,
+            1,
+            1
+          ],
+          "all_refuse": true
+        },
+        {
+          "input": [
+            1e-06,
+            0.3,
+            -1.0
+          ],
+          "n_violations": [
+            1,
+            1,
+            1
+          ],
+          "all_refuse": true
+        }
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 128's shared-guard claim, re-derived here rather than quoted. If this fails the module is not the one under audit",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_nan",
+      "probe": "nan",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is NaN, so no ball was established",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_posinf",
+      "probe": "inf",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is infinite, so no finite ball was established",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_neginf",
+      "probe": "-inf",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is infinite, so no finite ball was established",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_zero",
+      "probe": "0.0",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_neg_zero",
+      "probe": "-0.0",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is -0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_negative",
+      "probe": "-1.0",
+      "guard_outcome_kind": "value",
+      "guard_output": "r_min is -1.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: r_min values the docstring says assert 'a zero inside a degenerate or empty set'",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_admissible_positive",
+      "probe": "0.5",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a real positive radius must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_control_admissible_denormal",
+      "probe": "5e-324",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a real positive radius must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "B",
+      "case": "B_nonreal_str",
+      "probe": "'0.5'",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M2: a non-float `r_min` is accepted as an admissible RADIUS with no type check, while the sibling guard in the same file refuses the same value",
+      "consumer": {
+        "nk_bounds:561 reachable_with_this_type": false,
+        "r_min is always the module's own float64": true
+      },
+      "reference": {
+        "hypothesis_violations same value": "raise: TypeError: Y_0 must be a real number, got str; the radii polynomial's constants are norms."
+      },
+      "magnitude": "4 of 4 non-Real types accepted here; the sibling raises on 3 of 4 (bool is numbers.Real and passes both)",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "B",
+      "case": "B_nonreal_bool_True",
+      "probe": "True",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M2: a non-float `r_min` is accepted as an admissible RADIUS with no type check, while the sibling guard in the same file refuses the same value",
+      "consumer": {
+        "nk_bounds:561 reachable_with_this_type": false,
+        "r_min is always the module's own float64": true
+      },
+      "reference": {
+        "hypothesis_violations same value": "value: []"
+      },
+      "magnitude": "4 of 4 non-Real types accepted here; the sibling raises on 3 of 4 (bool is numbers.Real and passes both)",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "B",
+      "case": "B_nonreal_Decimal",
+      "probe": "Decimal('0.5')",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M2: a non-float `r_min` is accepted as an admissible RADIUS with no type check, while the sibling guard in the same file refuses the same value",
+      "consumer": {
+        "nk_bounds:561 reachable_with_this_type": false,
+        "r_min is always the module's own float64": true
+      },
+      "reference": {
+        "hypothesis_violations same value": "raise: TypeError: Y_0 must be a real number, got Decimal; the radii polynomial's constants are norms."
+      },
+      "magnitude": "4 of 4 non-Real types accepted here; the sibling raises on 3 of 4 (bool is numbers.Real and passes both)",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "B",
+      "case": "B_nonreal_Fraction",
+      "probe": "Fraction(1, 2)",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M2: a non-float `r_min` is accepted as an admissible RADIUS with no type check, while the sibling guard in the same file refuses the same value",
+      "consumer": {
+        "nk_bounds:561 reachable_with_this_type": false,
+        "r_min is always the module's own float64": true
+      },
+      "reference": {
+        "hypothesis_violations same value": "value: []"
+      },
+      "magnitude": "4 of 4 non-Real types accepted here; the sibling raises on 3 of 4 (bool is numbers.Real and passes both)",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "B",
+      "case": "B_none",
+      "probe": "None",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: float() argument must be a string or a real number, not 'NoneType'",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL/secondary: `None` reaches `float()` and raises an UNNAMED TypeError rather than the module's own vocabulary",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "C",
+      "case": "C_control_alpha_in_range_1p5",
+      "probe": "1.5",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL: the two non-finite alphas the guard DOES catch, plus the closed upper endpoint and an in-range value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C_control_alpha_in_range_neg1e300",
+      "probe": "-1e+300",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL: the two non-finite alphas the guard DOES catch, plus the closed upper endpoint and an in-range value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C_control_alpha_boundary_2p0",
+      "probe": "2.0",
+      "guard_outcome_kind": "value",
+      "guard_output": "alpha is 2.0, outside the required range [-inf, 2.0)",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the two non-finite alphas the guard DOES catch, plus the closed upper endpoint and an in-range value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C_control_alpha_posinf",
+      "probe": "inf",
+      "guard_outcome_kind": "value",
+      "guard_output": "alpha is inf, outside the required range [-inf, 2.0)",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the two non-finite alphas the guard DOES catch, plus the closed upper endpoint and an in-range value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C_control_alpha_nan",
+      "probe": "nan",
+      "guard_outcome_kind": "value",
+      "guard_output": "alpha is NaN",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: the two non-finite alphas the guard DOES catch, plus the closed upper endpoint and an in-range value",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C1_alpha_minus_infinity_ACCEPTED",
+      "probe": "-inf at the real nk_bounds:430 site",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M1 (HEADLINE): `unit_range_violation` has no isinf test, and the alpha call site requests a CLOSED -inf endpoint, so `-inf < -inf` is False and a non-finite Holder exponent is ADMISSIBLE. Of the three non-finite alphas, +inf and NaN both REFUSE and -inf alone is accepted -- and it is the only one that MANUFACTURES a NaN in an upper-bound slot, the exact object this module's own NAN_HINT_* constants exist to warn about ('NaN >= 1.0 is False, so an unguarded NaN would slip past the contraction test')",
+      "consumer": {
+        "farfield_modelling_error_bound(-inf)": {
+          "kind": "value",
+          "bound": "NaN",
+          "hilbert_term": "NaN",
+          "pointwise_term": 0.7071067811865475,
+          "argmax_at_window_end": false,
+          "n_NaN_of_40_window_samples": 40,
+          "raised": false
+        }
+      },
+      "reference": {
+        "alpha=1.5 (honest)": {
+          "kind": "value",
+          "bound": 2.537396530974982
+        },
+        "alpha=+inf": "raise: ValueError: farfield_modelling_error_bound: alpha is inf, outside the required r",
+        "alpha=NaN": "raise: ValueError: farfield_modelling_error_bound: alpha is NaN. This function takes a "
+      },
+      "magnitude": "returns bound=NaN with 40 of 40 window samples NaN and does NOT raise, against an honest 2.537396530974982 at alpha=1.5; 1 of 3 non-finite alphas accepted",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "C",
+      "case": "C1b_alpha_neg1e300_accepted_then_crashes",
+      "probe": "-1e300",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M1, second half: the guard's declared admissible range [-inf, 2.0) contains a whole sub-range the guarded function cannot evaluate. The refusal that does eventually happen is an UNNAMED OverflowError from inside the quadrature, not the module's own vocabulary",
+      "consumer": {
+        "farfield_modelling_error_bound(-1e300)": "raise: OverflowError: (34, 'Numerical result out of range')"
+      },
+      "reference": {
+        "alpha=1.5": 2.537396530974982
+      },
+      "magnitude": null,
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_posinf",
+      "probe": "inf",
+      "guard_outcome_kind": "value",
+      "guard_output": "gamma is inf, outside the required range (0.0, 1.0]",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL, and it is the one that LOCALISES M1: at the gamma site the lower endpoint is FINITE (0.0, open), so +-inf are both refused by the same code that accepts -inf at the alpha site. The defect is the INTERACTION of a missing isinf test with a caller-supplied infinite endpoint",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_neginf",
+      "probe": "-inf",
+      "guard_outcome_kind": "value",
+      "guard_output": "gamma is -inf, outside the required range (0.0, 1.0]",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL, and it is the one that LOCALISES M1: at the gamma site the lower endpoint is FINITE (0.0, open), so +-inf are both refused by the same code that accepts -inf at the alpha site. The defect is the INTERACTION of a missing isinf test with a caller-supplied infinite endpoint",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_nan",
+      "probe": "nan",
+      "guard_outcome_kind": "value",
+      "guard_output": "gamma is NaN",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL, and it is the one that LOCALISES M1: at the gamma site the lower endpoint is FINITE (0.0, open), so +-inf are both refused by the same code that accepts -inf at the alpha site. The defect is the INTERACTION of a missing isinf test with a caller-supplied infinite endpoint",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_zero",
+      "probe": "0.0",
+      "guard_outcome_kind": "value",
+      "guard_output": "gamma is 0.0, outside the required range (0.0, 1.0]",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL, and it is the one that LOCALISES M1: at the gamma site the lower endpoint is FINITE (0.0, open), so +-inf are both refused by the same code that accepts -inf at the alpha site. The defect is the INTERACTION of a missing isinf test with a caller-supplied infinite endpoint",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_above_one",
+      "probe": "1.5",
+      "guard_outcome_kind": "value",
+      "guard_output": "gamma is 1.5, outside the required range (0.0, 1.0]",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL, and it is the one that LOCALISES M1: at the gamma site the lower endpoint is FINITE (0.0, open), so +-inf are both refused by the same code that accepts -inf at the alpha site. The defect is the INTERACTION of a missing isinf test with a caller-supplied infinite endpoint",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_admissible_interior",
+      "probe": "0.5",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate Holder exponent must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C2_control_gamma_admissible_upper_closed_endpoint",
+      "probe": "1.0",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a legitimate Holder exponent must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "C",
+      "case": "C3_gamma_bool",
+      "probe": "True",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M3 at the gamma site: `True` is admitted and silently evaluated as the exponent 1.0. Reported at its honest weight -- gamma=1.0 IS a legitimate exponent, so the number is correct FOR THAT EXPONENT; what is missing is any signal that the caller passed a flag",
+      "consumer": {
+        "hilbert_farfield_bound(X=1, alpha=1.5, gamma=True)": [
+          1.2209630139367613,
+          0.7858202650134002,
+          0.4351427489233612
+        ]
+      },
+      "reference": {
+        "gamma=0.5": [
+          1.5390840894727127,
+          1.1039413405493517,
+          0.4351427489233612
+        ]
+      },
+      "magnitude": "claimed upper bound 1.2209630139367613 vs 1.5390840894727127 at the live gamma=0.5, i.e. 1.260549x SMALLER",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "C",
+      "case": "C4_gamma_str",
+      "probe": "'0.5'",
+      "guard_outcome_kind": "value",
+      "guard_output": null,
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M2 at the gamma site: a STRING passes the exponent guard, and the refusal that eventually happens is an unnamed TypeError from the power operator three lines later -- leg 98's B20/B21 shape, in the module that was repaired for it",
+      "consumer": {
+        "hilbert_farfield_bound(gamma='0.5')": "raise: TypeError: unsupported operand type(s) for ** or pow(): 'float' and 'str'"
+      },
+      "reference": {
+        "gamma=0.5": [
+          1.5390840894727127,
+          1.1039413405493517,
+          0.4351427489233612
+        ]
+      },
+      "magnitude": null,
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "D",
+      "case": "D_control_all_negative",
+      "probe": "[-1.0, -1.0]",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "v_cod has 2 non-positive entries (worst -1.0); a weight defines a norm, so it is strictly positive and finite"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 116's own mechanism -- the `1/q if q > 0 else 0` mask prices an honestly-infinite contribution at zero (2.19x / 3.57x)",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_planted_neg_zero",
+      "probe": "[1.0, -0.0]",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "v_cod has 1 non-positive entry (worst -0.0); a weight defines a norm, so it is strictly positive and finite"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 116's own mechanism -- the `1/q if q > 0 else 0` mask prices an honestly-infinite contribution at zero (2.19x / 3.57x)",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_planted_nan",
+      "probe": "[1.0, nan]",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "v_cod has 1 NaN entry"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 116's own mechanism -- the `1/q if q > 0 else 0` mask prices an honestly-infinite contribution at zero (2.19x / 3.57x)",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_planted_inf",
+      "probe": "[1.0, inf]",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "v_cod has 1 infinite entry"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 116's own mechanism -- the `1/q if q > 0 else 0` mask prices an honestly-infinite contribution at zero (2.19x / 3.57x)",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_planted_negative",
+      "probe": "[1.0, 2.0, -3.0]",
+      "guard_outcome_kind": "value",
+      "guard_output": [
+        "v_cod has 1 non-positive entry (worst -3.0); a weight defines a norm, so it is strictly positive and finite"
+      ],
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "CONTROL: leg 116's own mechanism -- the `1/q if q > 0 else 0` mask prices an honestly-infinite contribution at zero (2.19x / 3.57x)",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_admissible_positive",
+      "probe": "[1.0, 2.0, 3.0]",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL (over-rejection): a genuine weight vector must NOT be refused",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D_control_allow_zero_semantics",
+      "probe": "[1.0, 0.0] allow_zero=True",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": false,
+      "gate_hit": false,
+      "why": "CONTROL: `allow_zero=True` is the rectangular-kernel path and permits zeros BY DESIGN, so accepting 0.0 here is correct and is NOT a hit",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "CONTROL_PASS"
+    },
+    {
+      "family": "D",
+      "case": "D1_empty_list",
+      "probe": "[]",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M5: an EMPTY weight vector is certified as one 'a norm could have produced'. The same empty-window shape leg 99 found in boussinesq_velocity.py",
+      "consumer": null,
+      "reference": null,
+      "magnitude": "0 of 0 entries validated",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "D",
+      "case": "D1_empty_ndarray",
+      "probe": "array([], dtype=float64)",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M5: an EMPTY weight vector is certified as one 'a norm could have produced'. The same empty-window shape leg 99 found in boussinesq_velocity.py",
+      "consumer": null,
+      "reference": null,
+      "magnitude": "0 of 0 entries validated",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "D",
+      "case": "D1_exhausted_generator",
+      "probe": "'GEN'",
+      "guard_outcome_kind": "value",
+      "guard_output": [],
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M5: an EMPTY weight vector is certified as one 'a norm could have produced'. The same empty-window shape leg 99 found in boussinesq_velocity.py",
+      "consumer": null,
+      "reference": null,
+      "magnitude": "0 of 0 entries validated",
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "D",
+      "case": "D1b_empty_at_the_consumer",
+      "probe": "two_point_dual with empty weights",
+      "guard_outcome_kind": "value",
+      "guard_output": {
+        "screen_treats_empty_as_clean": true
+      },
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M5 at the consumer: `nk_bounds.py:225`'s numpy pre-screen ALSO passes the empty array (`np.all` of an empty array is True), so the guard is never even consulted and the failure surfaces four lines later, in numpy's vocabulary",
+      "consumer": {
+        "two_point_dual(empty)": "raise: ValueError: zero-size array to reduction operation minimum which has no identity"
+      },
+      "reference": null,
+      "magnitude": null,
+      "status": "HIT_LATENT"
+    },
+    {
+      "family": "D",
+      "case": "D_secondary_dict",
+      "probe": "{'a': 1.0}",
+      "guard_outcome_kind": "raise",
+      "guard_output": "ValueError: could not convert string to float: 'a'",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "SECONDARY: an un-ravelled 2-D array (the docstring says 'a flattened array is fine') and a dict both raise from inside the list comprehension rather than in the module's own vocabulary. Sound, not a false accept",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "D",
+      "case": "D_secondary_2d_array",
+      "probe": "array([[ 1., -1.],\n       [ 2.,  3.]])",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: only 0-dimensional arrays can be converted to Python scalars",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "SECONDARY: an un-ravelled 2-D array (the docstring says 'a flattened array is fine') and a dict both raise from inside the list comprehension rather than in the module's own vocabulary. Sound, not a false accept",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "D",
+      "case": "D_secondary_2d_column",
+      "probe": "array([[ 1.],\n       [-1.]])",
+      "guard_outcome_kind": "raise",
+      "guard_output": "TypeError: only 0-dimensional arrays can be converted to Python scalars",
+      "guard_accepted": false,
+      "should_reject": true,
+      "gate_hit": false,
+      "why": "SECONDARY: an un-ravelled 2-D array (the docstring says 'a flattened array is fine') and a dict both raise from inside the list comprehension rather than in the module's own vocabulary. Sound, not a false accept",
+      "consumer": null,
+      "reference": null,
+      "magnitude": null,
+      "status": "SECONDARY_NOT_A_GATE_HIT"
+    },
+    {
+      "family": "E",
+      "case": "E_empty_violation_list",
+      "probe": "[]",
+      "guard_outcome_kind": "value",
+      "guard_output": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): . No discriminant is evaluated.",
+      "guard_accepted": true,
+      "should_reject": true,
+      "gate_hit": true,
+      "why": "M7 (hygiene): a full rejection sentence is assembled from an EMPTY reason list, producing 'INVALID_INPUT: ...nonnegative): . No discriminant is evaluated.' -- an accusation with no charge. Not reachable at nk_bounds.py:533, which is guarded by `if violations:`",
+      "consumer": {
+        "reachable_at_nk_bounds_533": false,
+        "guarded_by": "if violations:"
+      },
+      "reference": null,
+      "magnitude": "174 characters of rejection prose naming 0 violated hypotheses",
+      "status": "HIT_LATENT"
+    }
+  ]
+}
