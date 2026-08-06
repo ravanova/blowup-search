@@ -1,0 +1,579 @@
+{
+ "leg": 145,
+ "route": "ROUTE-LGA",
+ "object": "solver/literature_gates.py CLAIM_LEDGER self-consistency",
+ "edits_to_the_audited_module": 0,
+ "L1_source_resolution": {
+  "n_rows": 12,
+  "n_rows_resolving_to_primary_sources": 10,
+  "n_rows_unresolved": 2,
+  "rows": [
+   {
+    "claim": "s_c = alpha/2, the critical dissipation exponent is half the far-field",
+    "source": "2607.19762 \u00a76.1 eq (6.3)",
+    "verdict": "PRE-EMPTED",
+    "arxiv_ids": [
+     "2607.19762"
+    ],
+    "ids_in_primary_sources": [
+     "2607.19762"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the CLM linearization's isolated eigenvalues are only the symmetry mod",
+    "source": "2607.19762 Theorem 2",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "arxiv_ids": [
+     "2607.19762"
+    ],
+    "ids_in_primary_sources": [
+     "2607.19762"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the non-symmetry spectrum is a CONTINUUM, so there is no eigenvalue to",
+    "source": "2607.19762 Proposition 2 (realization dichotomy)",
+    "verdict": "PRE-EMPTED_AND_RE-CLASSIFIED",
+    "arxiv_ids": [
+     "2607.19762"
+    ],
+    "ids_in_primary_sources": [
+     "2607.19762"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "alpha(1/2) = 3 (twelve digits), and the odd-integer-alpha resonances",
+    "source": "2207.07548 \u00a75.2 + XU Table 1",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "arxiv_ids": [
+     "2207.07548"
+    ],
+    "ids_in_primary_sources": [
+     "2207.07548"
+    ],
+    "tags_matched": [
+     "XU"
+    ],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the alpha(a) branch and its endpoint a_c ~ 0.694",
+    "source": "XU Table 1; LSS a_c = 0.6890665",
+    "verdict": "PRE-EMPTED",
+    "arxiv_ids": [],
+    "ids_in_primary_sources": [],
+    "tags_matched": [
+     "XU"
+    ],
+    "resolved_via": "tag",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the closed-form viscous CLM blow-up (E) at a = 0, s = 1/2",
+    "source": "2207.07548 \u00a75.3 eqs (57)-(58)",
+    "verdict": "PRE-EMPTED",
+    "arxiv_ids": [
+     "2207.07548"
+    ],
+    "ids_in_primary_sources": [
+     "2207.07548"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "alpha_1 = 0 at a = 0: a LINE of viscous self-similar blow-ups",
+    "source": "2207.07548 \u00a75.3 eq (61)",
+    "verdict": "CONFIRMED_AND_PRE-EMPTED",
+    "arxiv_ids": [
+     "2207.07548"
+    ],
+    "ids_in_primary_sources": [
+     "2207.07548"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "alpha_1 = +0.133683 at a = 1/2 (the marginal invariant at s = s_c = 3/",
+    "source": "not found in Tier 1",
+    "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
+    "arxiv_ids": [],
+    "ids_in_primary_sources": [],
+    "tags_matched": [],
+    "resolved_via": null,
+    "status": "NAMES_NO_SOURCE"
+   },
+   {
+    "claim": "finite support of the a > 0 profiles, X_c the zero of c + aU, order 1/",
+    "source": "2209.08232 Proposition 2.3",
+    "verdict": "PARTIAL",
+    "arxiv_ids": [
+     "2209.08232"
+    ],
+    "ids_in_primary_sources": [
+     "2209.08232"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "beta = 2.92 as the 2D Boussinesq / Hou-Luo self-similar anchor",
+    "source": "2210.07191",
+    "verdict": "CONFIRMED (never claimed as ours)",
+    "arxiv_ids": [
+     "2210.07191"
+    ],
+    "ids_in_primary_sources": [
+     "2210.07191"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the SUPERCRITICAL exponents: what happens for s > s_c",
+    "source": "2207.07548 \u00a75.1 (Schochet, corrected)",
+    "verdict": "OPEN_QUESTION_ANSWERED_BY_THE_LITERATURE",
+    "arxiv_ids": [
+     "2207.07548"
+    ],
+    "ids_in_primary_sources": [
+     "2207.07548"
+    ],
+    "tags_matched": [],
+    "resolved_via": "arxiv_id",
+    "status": "RESOLVED"
+   },
+   {
+    "claim": "the discrete-ball trap, the weighted-l1 no-go, the elasticity discipli",
+    "source": "2302.12877 (Tier 2, fetched, NOT read closely)",
+    "verdict": "UNSEARCHED_AT_PRIMARY_SOURCE",
+    "arxiv_ids": [
+     "2302.12877"
+    ],
+    "ids_in_primary_sources": [],
+    "tags_matched": [],
+    "resolved_via": null,
+    "status": "ID_NOT_IN_PRIMARY_SOURCES"
+   }
+  ]
+ },
+ "L2_primary_source_coverage": {
+  "primary_sources": [
+   "2207.07548",
+   "2209.08232",
+   "2210.07191",
+   "2607.19762"
+  ],
+  "cited_by_a_row": [
+   "2207.07548",
+   "2209.08232",
+   "2210.07191",
+   "2302.12877",
+   "2607.19762"
+  ],
+  "declared_but_never_cited": [],
+  "cited_but_not_declared": [
+   "2302.12877"
+  ]
+ },
+ "L2b_phantom_citation_check": {
+  "n_distinct_ids_cited": 5,
+  "n_real": 5,
+  "n_phantom": 0,
+  "n_described_and_matching": 4,
+  "metadata_read_live": "2026-08-06 from arxiv.org citation_* meta tags",
+  "rows": [
+   {
+    "arxiv": "2207.07548",
+    "cited_by_n_rows": 4,
+    "has_arxiv_metadata": true,
+    "declared_in_primary_sources": true,
+    "authors_match": true,
+    "stored_authors": "Ambrose, Lushnikov, Siegel, Silantyev",
+    "real_authors": [
+     "Ambrose, David M.",
+     "Lushnikov, Pavel M.",
+     "Siegel, Michael",
+     "Silantyev, Denis A."
+    ],
+    "title_match": true,
+    "real_date": "2022/07/15"
+   },
+   {
+    "arxiv": "2209.08232",
+    "cited_by_n_rows": 1,
+    "has_arxiv_metadata": true,
+    "declared_in_primary_sources": true,
+    "authors_match": true,
+    "stored_authors": "Huang, Tong, Wei",
+    "real_authors": [
+     "Huang, De",
+     "Tong, Jiajun",
+     "Wei, Dongyi"
+    ],
+    "title_match": true,
+    "real_date": "2022/09/17"
+   },
+   {
+    "arxiv": "2210.07191",
+    "cited_by_n_rows": 1,
+    "has_arxiv_metadata": true,
+    "declared_in_primary_sources": true,
+    "authors_match": true,
+    "stored_authors": "Chen, Hou",
+    "real_authors": [
+     "Chen, Jiajie",
+     "Hou, Thomas Y."
+    ],
+    "title_match": true,
+    "real_date": "2022/10/13"
+   },
+   {
+    "arxiv": "2302.12877",
+    "cited_by_n_rows": 1,
+    "has_arxiv_metadata": true,
+    "declared_in_primary_sources": false
+   },
+   {
+    "arxiv": "2607.19762",
+    "cited_by_n_rows": 3,
+    "has_arxiv_metadata": true,
+    "declared_in_primary_sources": true,
+    "authors_match": true,
+    "stored_authors": "Xu",
+    "real_authors": [
+     "Xu, Jie"
+    ],
+    "title_match": true,
+    "real_date": "2026/07/22"
+   }
+  ],
+  "online_recheck": [
+   {
+    "arxiv": "2207.07548",
+    "reachable": true,
+    "title_matches_stored": true,
+    "authors_match_stored": true,
+    "date_matches_stored": true
+   },
+   {
+    "arxiv": "2209.08232",
+    "reachable": true,
+    "title_matches_stored": true,
+    "authors_match_stored": true,
+    "date_matches_stored": true
+   },
+   {
+    "arxiv": "2210.07191",
+    "reachable": true,
+    "title_matches_stored": true,
+    "authors_match_stored": true,
+    "date_matches_stored": true
+   },
+   {
+    "arxiv": "2302.12877",
+    "reachable": true,
+    "title_matches_stored": true,
+    "authors_match_stored": true,
+    "date_matches_stored": true
+   },
+   {
+    "arxiv": "2607.19762",
+    "reachable": true,
+    "title_matches_stored": true,
+    "authors_match_stored": true,
+    "date_matches_stored": true
+   }
+  ]
+ },
+ "L3_transcribed_numbers": {
+  "table_rows": [
+   {
+    "a": 0.0,
+    "c_l": 1.0,
+    "s_star": 1.0,
+    "s_star_minus_inv_cl": 0.0,
+    "rel": 0.0
+   },
+   {
+    "a": 0.1,
+    "c_l": 0.873,
+    "s_star": 1.145,
+    "s_star_minus_inv_cl": 0.00047537227949590033,
+    "rel": 0.00041499999999992097
+   },
+   {
+    "a": 0.2,
+    "c_l": 0.7474,
+    "s_star": 1.338,
+    "s_star_minus_inv_cl": 2.8364998662100405e-05,
+    "rel": 2.120000000005384e-05
+   },
+   {
+    "a": 0.3,
+    "c_l": 0.6178,
+    "s_star": 1.619,
+    "s_star_minus_inv_cl": 0.00035318873421830155,
+    "rel": 0.0002182000000000667
+   },
+   {
+    "a": 0.4,
+    "c_l": 0.4809,
+    "s_star": 2.079,
+    "s_star_minus_inv_cl": 0.00043439384487387045,
+    "rel": 0.0002088999999998443
+   },
+   {
+    "a": 0.5,
+    "c_l": 0.3333,
+    "s_star": 3.0,
+    "s_star_minus_inv_cl": 0.0003000300030002734,
+    "rel": 9.999999999999111e-05
+   },
+   {
+    "a": 0.6,
+    "c_l": 0.1691,
+    "s_star": 5.914,
+    "s_star_minus_inv_cl": 0.0003394441159070283,
+    "rel": 5.739999999987848e-05
+   },
+   {
+    "a": 0.65,
+    "c_l": 0.0775,
+    "s_star": 12.9,
+    "s_star_minus_inv_cl": 0.003225806451613522,
+    "rel": 0.000250000000000048
+   }
+  ],
+  "worst_rel_s_star_vs_inv_cl": 0.00041499999999992097,
+  "s2_boundary_stored": 0.39,
+  "s2_boundary_from_table_linear": 0.38604821037253473,
+  "s2_boundary_abs_diff": 0.003951789627465285,
+  "s2_boundary_note": "NOT a discrepancy.  XU section 6.1 states BOTH numbers in one sentence: 'for the ordinary Laplacian s = 2 the sub/supercritical boundary sits at a ~ 0.39 (where cl = 1/2; the branch inverts to a = 0.386)'.  The module stores XU's headline 0.39; inverting XU's own Table 1 linearly reproduces XU's own parenthetical 0.386 to 4 decimal places, which corroborates the transcription rather than contradicting it.",
+  "lss_a_c": 0.6890665,
+  "xu_a_c_recomputed": 0.6888,
+  "xu_a_c_rel_err_vs_lss": 0.0003867551245054844,
+  "chen_hou_pair_consistent": true,
+  "chen_hou_beta": 2.92056
+ },
+ "L4_quote_relocation": {
+  "n_quotes": 13,
+  "n_recheckable_this_run": 13,
+  "n_found_verbatim": 13,
+  "pdfs_present": {
+   "2607.19762": true,
+   "2207.07548": true,
+   "2209.08232": true,
+   "2210.07191": true
+  },
+  "rows": [
+   {
+    "row_claim_key": "s_c = alpha/2",
+    "arxiv": "2607.19762",
+    "locator": "section 6.1, eq (6.3)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "Define the scaling-critical dissipation exponent"
+   },
+   {
+    "row_claim_key": "s_c = alpha/2 (caveat)",
+    "arxiv": "2607.19762",
+    "locator": "section 6.1, paragraph after eq (6.3)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "not the sharp critical dissipation curve"
+   },
+   {
+    "row_claim_key": "isolated eigenvalues are only the symmetry modes",
+    "arxiv": "2607.19762",
+    "locator": "Theorem 2 (stated section 3.3, restated section 5)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "CLM discrete exclusion"
+   },
+   {
+    "row_claim_key": "full point spectrum over C (WHERE IT ACTUALLY LIVES)",
+    "arxiv": "2607.19762",
+    "locator": "Theorem 3 (stated section 5 ONLY)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "full point spectrum over C"
+   },
+   {
+    "row_claim_key": "the non-symmetry spectrum is a CONTINUUM",
+    "arxiv": "2607.19762",
+    "locator": "Proposition 2 (realization dichotomy at a = 0)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "removes the whole non-symmetry family"
+   },
+   {
+    "row_claim_key": "alpha(1/2) = 3 and the odd-integer resonances",
+    "arxiv": "2207.07548",
+    "locator": "section 1 (introduction), citing [31] Lushnikov et al",
+    "status": "FOUND_VERBATIM",
+    "anchor": "no exact solutions as a superposition of pole singularities"
+   },
+   {
+    "row_claim_key": "alpha(1/2) = 3 (the exponent itself)",
+    "arxiv": "2207.07548",
+    "locator": "section 1; system in section 5.2 eqs (49)-(50)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "double-pole singularities for a = 1/2"
+   },
+   {
+    "row_claim_key": "Schochet's corrected constant",
+    "arxiv": "2207.07548",
+    "locator": "section 5.1",
+    "status": "FOUND_VERBATIM",
+    "anchor": "(correcting the value of"
+   },
+   {
+    "row_claim_key": "Route-F s_c is NOT in ALS (the ledger's one NEGATIVE source claim)",
+    "arxiv": "2207.07548",
+    "locator": "section 8 (Conclusion)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "is the optimal lower"
+   },
+   {
+    "row_claim_key": "alpha_1 = 0 at a = 0: a LINE of viscous self-similar blow-ups",
+    "arxiv": "2207.07548",
+    "locator": "section 5.3, eq (61)",
+    "status": "FOUND_VERBATIM",
+    "anchor": "belongs to the general self-similar form"
+   },
+   {
+    "row_claim_key": "finite support of the a > 0 profiles",
+    "arxiv": "2209.08232",
+    "locator": "Proposition 2.3",
+    "status": "FOUND_VERBATIM",
+    "anchor": "must be compactly supported"
+   },
+   {
+    "row_claim_key": "finite support -- the MECHANISM the ledger names",
+    "arxiv": "2209.08232",
+    "locator": "proof of Proposition 2.4",
+    "status": "FOUND_VERBATIM",
+    "anchor": "there is some constant"
+   },
+   {
+    "row_claim_key": "beta = 2.92 as the 2D Boussinesq / Hou-Luo anchor",
+    "arxiv": "2210.07191",
+    "locator": "the profile section, remark on c_l/c_omega",
+    "status": "FOUND_VERBATIM",
+    "anchor": "is very close to the one reported by"
+   }
+  ]
+ },
+ "L5_negative_controls": [
+  {
+   "control": "phantom_arxiv_id",
+   "caught": true,
+   "must_be_caught_by": "check_source_resolution",
+   "why": "a fabricated id must not resolve against PRIMARY_SOURCES"
+  },
+  {
+   "control": "source_with_no_identifier",
+   "caught": true,
+   "must_be_caught_by": "check_source_resolution",
+   "why": "a source naming no paper is not a citation"
+  },
+  {
+   "control": "mutated_quote_anchor",
+   "caught": true,
+   "why": "the true anchor is found and a one-word mutation of it is not, so the relocation test can report the other answer"
+  }
+ ],
+ "L6_drift": {
+  "n_drift_rows": 2,
+  "n_verdicts_changed": 0,
+  "rows": [
+   {
+    "row_claim": "the CLM linearization's isolated eigenvalues are only the symmetry modes",
+    "stored_source": "2607.19762 Theorem 2",
+    "kind": "LOCATOR_UNDER-SUPPORTS_NOTE",
+    "what_the_row_asserts": [
+     "point spectrum exactly {0,1} on the odd origin-H^2 realization",
+     "no embedded eigenvalues"
+    ],
+    "what_the_cited_theorem_actually_says": "sigma_disc(L0|X) intersect {Re lambda > -1/2} = {0, +1}: the DISCRETE spectrum, and only in the half-plane Re lambda > -1/2.",
+    "where_the_asserted_content_lives": "Theorem 3 (full point spectrum over C)",
+    "verdict_changes": false,
+    "why_verdict_survives": "XU does prove both assertions, in Theorem 3, so the row's verdict CONFIRMED_AND_PRE-EMPTED is correct.  What is wrong is the LOCATOR: a reader who follows the citation to Theorem 2 does not find the statement the row attributes to it.",
+    "mechanism": "PRIMARY_SOURCES['2607.19762']['read'] records 'abstract, sections 2, 3, 6, 7 closely'.  Theorem 2 is STATED in section 3.3; Theorem 3 is stated ONLY in section 5, which is outside that set.  The reader saw the weaker theorem's statement and the stronger theorem's content (the abstract mentions 'to all of C by Theorem 3 of Section 5') and fused them onto the locator they had read.",
+    "blast_radius": [
+     {
+      "site": "solver/literature_gates.py:50",
+      "carries_drift": true,
+      "text": "docstring: 'Theorem 2: the full point spectrum ... is exactly {0, 1}'"
+     },
+     {
+      "site": "solver/literature_gates.py:487",
+      "carries_drift": true,
+      "text": "CLAIM_LEDGER row source + note"
+     },
+     {
+      "site": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEE_V1.md:15",
+      "carries_drift": true,
+      "text": "'arXiv:2607.19762 Theorem 2 (Xu) proves the full point spectrum ... no embedded eigenvalues'"
+     },
+     {
+      "site": "capabilities.py:88",
+      "carries_drift": true,
+      "text": "'point spectrum {0,1} at a=0, which XU Theorem 2 later proved'"
+     },
+     {
+      "site": "LITERATURE_CHECK.md (verdict table row)",
+      "carries_drift": false,
+      "text": "'isolated eigenvalues are only symmetry modes | Route-E v1 | XU Thm 2' -- CORRECT as written: that claim IS Theorem 2's scope"
+     }
+    ]
+   },
+   {
+    "row_claim": "the discrete-ball trap, the weighted-l1 no-go, the elasticity discipline",
+    "stored_source": "2302.12877 (Tier 2, fetched, NOT read closely)",
+    "kind": "STALE_PROVENANCE",
+    "what_the_row_asserts": [
+     "the cited paper has NOT been read closely"
+    ],
+    "what_the_cited_theorem_actually_says": "not a content claim -- a provenance claim about this project's own reading, and it is out of date.",
+    "where_the_asserted_content_lives": "Papers/MANIFEST.md line 23 and LITERATURE_CHECK.md line 62 both record 2302.12877 as READ at leg 45 ('Tier 2 is now read for what it gates'; their Kawahara r_0 reproduced exactly).",
+    "verdict_changes": false,
+    "why_verdict_survives": "The row's verdict UNSEARCHED_AT_PRIMARY_SOURCE is still what LITERATURE_CHECK.md's own seventh pass concludes -- CLN work in Hilbert/Fourier H^l, not weighted l^1, so the Route-D claims are narrowed, not closed.  Only the parenthetical is stale.",
+    "mechanism": "Flagged already by leg 65 (experiments/journal/leg_65.md line 77), which named this exact line, could not edit it from outside the territory, and handed it to the orchestrator.  It was never applied.  This audit is the second sighting.",
+    "blast_radius": [
+     {
+      "site": "solver/literature_gates.py:600",
+      "carries_drift": true,
+      "text": "CLAIM_LEDGER row source parenthetical"
+     },
+     {
+      "site": "LITERATURE_CHECK.md (verdict table row)",
+      "carries_drift": true,
+      "text": "'2302.12877 - fetched, NOT read' -- same stale parenthetical"
+     },
+     {
+      "site": "capabilities.py:179",
+      "carries_drift": true,
+      "text": "'UNSEARCHED at primary source' -- leg 65's own finding, also unapplied"
+     }
+    ]
+   }
+  ]
+ },
+ "L7_gate": {
+  "question": "Does every row in literature_gates.py's ledger (a) cite a real, checked source, and (b) accurately state that source's claim, with no drift between the stored summary and the paper's own text?",
+  "answer": "NO",
+  "answer_detail": "(a) holds: all 5 distinct arXiv ids cited by the ledger resolve to real papers whose title, authors and date match PRIMARY_SOURCES -- zero phantom citations.  (b) does NOT: 2 of 12 rows carry drift between the stored summary and the cited text, and 0 of 12 verdicts change as a result."
+ }
+}
