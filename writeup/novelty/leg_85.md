@@ -146,3 +146,148 @@ or edited:
 Reported per trajectory: `converged`, `residual`, `steps`, the **true** distance to the exact
 profile `||Omega - Omega_0||_inf` and its relative form, `c_omega` vs the exact `-1`, and the
 residual's own later history. **Magnitudes, never booleans alone.**
+
+---
+
+# LEG 85 FINDINGS (written after the battery; the §4 cap above is honoured)
+
+## GATE ANSWER: **YES** — a false-positive convergence report exists.
+
+Gate, verbatim: *"Under an adversarial battery of non-convergent upwind-transport trajectories
+(sustained oscillation, slow drift near a saddle rather than the fixed point), does
+`solver/gclm_rescaled.py`'s relaxation loop ever report having reached the fixed point when it
+has not?"* — **Yes**, on **4 of 25** trajectories, all in one family, by one mechanism.
+
+Per the yes-branch: **nothing was patched.** `solver/gclm_rescaled.py` is byte-identical to
+`origin/main`. This is escalated to the orchestrator, not repaired here.
+
+## The exact failing trajectory
+
+```
+solver  = RescaledCLM(n=601, c=0.5, rho_max=7.0)
+f_init  = 1e-10 * (-4.0 * np.exp(-solver.X**2 / 2.0))
+result  = solver.run(f_init, dt_frac=0.4, tol=1e-8, max_steps=20000)
+```
+
+| quantity | reported / measured | what it should be |
+|---|---|---|
+| `result["converged"]` | **`True`** | `False` |
+| `result["steps"]` | **1** (of a ~2000-step relaxation) | — |
+| `result["residual"]` | 2.942e-10 | — |
+| `result["c_omega"]` | **+1.00000** | **−1** (wrong **sign**; abs error **2.0**) |
+| `‖Ω − Ω₀‖_inf` (core) | **1.000** = **100%** of `max|Ω₀|` | ~1e-5 |
+| **post-stop relative drift** | **1.0000** (**100%**) | ~2.5e-9 |
+
+*Post-stop relative drift* is the gauge-invariant adjudicator this leg introduces: take the
+state the loop returned, integrate it 4000 further steps with the same integrator, and measure
+‖Δf‖_inf / ‖f_returned‖_inf. A genuinely relaxed trajectory scores **2.5e-09**. This one scores
+**1.0000** — the "converged" state subsequently moves by its own entire amplitude. That number
+is what forecloses the defence "the flag only ever claimed `res < tol`, and `res` really was
+< tol": by every scale-free measure the returned state is not at rest.
+
+Onset is graded, not a cliff — the full ladder at `tol = 1e-8`:
+
+| λ (= `-f(0)/4`) | converged | steps | c_omega | ‖Ω−Ω₀‖_inf | post-stop drift | verdict |
+|---|---|---|---|---|---|---|
+| 1e+00 | True | 1995 | −0.9977 | 1.07e-05 | 2.47e-09 | honest (the validated case) |
+| 1e-01 | True | 1920 | −0.9764 | 8.18e-01 | 2.46e-08 | honest |
+| 1e-02 | True | 1938 | −0.7585 | 9.80e-01 | 2.46e-07 | honest |
+| 1e-04 | True | 1189 | +0.9319 | 1.00e+00 | 1.25e-05 | honest |
+| **1e-06** | **True** | 924 | **+0.9993** | 1.00e+00 | **1.22e-03** | **FALSE POSITIVE** |
+| **1e-08** | **True** | 670 | **+1.0000** | 1.00e+00 | **1.30e-01** | **FALSE POSITIVE** |
+| **1e-09** | **True** | **1** | **+1.0000** | 1.00e+00 | **1.0000** | **FALSE POSITIVE** |
+| **1e-10** | **True** | **1** | **+1.0000** | 1.00e+00 | **1.0000** | **FALSE POSITIVE** |
+
+## The mechanism, measured not argued
+
+**The rescaled CLM fixed point is a one-parameter LINE, not a point.** The dilation term
+`X ∂_X` is scale-invariant and `H` is scale-invariant at the origin, so
+
+> Ω_λ(X) = Ω₀(λX) = −4λX/(1+4λ²X²)
+
+is an exact steady state for **every** λ > 0, all with `c_omega = −1`. Measured on the line
+(n=601): residual 2.11e-06 (λ=0.25), 4.75e-06 (λ=0.5), 2.16e-05 (λ=1), 4.03e-04 (λ=2), with
+`c_omega` = −0.9906, −0.9953, −0.9977, −0.9988 respectively. The member is selected by the
+origin slope `f(0) = −4λ`, **which the scheme freezes exactly** (both `tanh(0)` and
+`HΩ − HΩ(0)` vanish at ρ=0) — and the module's own docstring tells the caller that *"the
+rescaled initial amplitude is a **free gauge**"*.
+
+**The dynamics are equivariant along that gauge; the stopping test is not.** Measured
+directly, `‖f_τ‖_inf` is exactly degree-1 in λ:
+
+| λ | residual | residual/λ |
+|---|---|---|
+| 1e-03 | 2.9373e-03 | 2.9373 |
+| 1e-06 | 2.9423e-06 | 2.9423 |
+| 1e-09 | 2.9423e-09 | **2.9423** |
+
+while `tol` at line 145/157 is a **fixed absolute number**. Hence the closed-form threshold:
+the loop stops on the **initial data**, before performing any relaxation, whenever
+
+> **λ < tol / 2.942 = 3.40e-09**  (at `tol = 1e-8`)
+
+which is exactly where the 1-step stops appear in the ladder above.
+
+**It is structural, not numerical.** The failing trajectory is bit-for-bit the same verdict at
+three resolutions — n=401/601/901 all give `converged=True`, `steps=1`, `c_omega=+1.00000`. It
+is a property of the predicate `res < tol`, not of the discretization.
+
+This is the hazard §3/Q1 already established as **standard and documented** (an unnormalized
+absolute residual is not a convergence test when the solution scale is free; *"a small residual
+does not imply an equally small error, because a universal normalization scale is not known"*).
+**No novelty is claimed for the phenomenon** — only for the located, measured instance.
+
+## Scope of the damage — deliberately narrow, and stated against this leg's own interest
+
+* **No result currently on `main` is impugned.** Every trajectory in `test_gclm_rescaled.py`
+  and every banked run uses the validated gauge `f(0) = −4` (λ=1), where the report is
+  **trustworthy in both directions** — measured: a relaxing datum converges with post-stop drift
+  **2.47e-09**, and a genuinely still-drifting datum (far-field bump at the same gauge) is
+  correctly reported **`converged=False`** after 40000 steps with residual 3.86e-07. The battery
+  field `false_positive_at_validated_gauge_f0_minus4` is **`false`**.
+* This is therefore a **latent** false positive: reachable only by handing the module an origin
+  slope ~9 orders below the validated one — through a gauge the module itself calls free, with
+  no check, no warning, and no normalization enforced anywhere in `run()`.
+
+## What the battery found to be ROBUST (the audit's other half)
+
+* **No NaN bypass.** Overflowing amplitude (−4e6 datum), a NaN planted in the initial data, and
+  `dt_frac` = 2.0 and 3.0 past the stability limit all produce `residual = nan` and are all
+  correctly reported **`converged=False`**. `nan < tol` is `False`, and unlike
+  `solver/critical_dissipation.py` (which needed the leg-41 NaN guard) this loop never needed
+  one. Locked in as a regression test.
+* **Oscillation does not trip the stopping test** — the gate's first named adversarial case
+  **fails to break it**. `dt_frac` at 0.8/1.0/1.2/1.5 all still land on Ω₀ (shape err 1.07e-05,
+  post-stop drift ≤ 2.47e-09), and a mode-6 modulation in ρ lands on gauge member λ=1.3 with the
+  exact rate (`c_omega` = −0.99820, drift 1.89e-09). The gate's *second* named case — slow drift
+  rather than the fixed point — is the one that broke it, in the specific form of the scaling
+  gauge.
+* **Converging to a non-validated member of the gauge line is honest, not a false positive.**
+  λ = 0.25/0.5/2/4 all return `converged=True` with post-stop drift 6.2e-10 … 1.1e-08 and
+  `c_omega` within 1e-2 of −1, while sitting ‖Ω−Ω₀‖_inf = 0.333 (λ=2, 0.5) and 0.600 (λ=4, 0.25)
+  from Ω₀. These **are** genuine self-similar CLM fixed points; only the capabilities line's
+  word *"the exact ... fixed point −4X/(1+4X²)"* is narrower than what the loop actually
+  delivers. Recorded, deliberately **not** counted as failures.
+
+## Secondary observations (reported, not escalated)
+
+1. **The reported residual is one step stale.** `step()` returns `res = ‖L0‖_inf` where `L0` is
+   the RHS at the state passed **in**, so `result["residual"]` describes the **previous**
+   iterate, not the `f` returned alongside it. Measured mismatch at `dt_frac=0.4`, n=401:
+   reported 3.187087 vs 3.090352 for the returned state — **3.13%**. Harmless at these step
+   sizes; locked in so a future change is noticed.
+2. **`f ≡ 0` is reported as convergence** (`residual` exactly 0.0, `steps` 1, `c_omega` +1.0).
+   It is a *genuine* fixed point (post-stop drift 0.0) and so is not a kinematic false positive
+   — but it is not the CLM one, and the loop hands back a rate of the wrong sign with no flag.
+3. **`"converged"` is a raw `numpy.bool_`, not a Python `bool`** (line 157) — unlike the sibling
+   loops at `solver/hl_rescaled.py:418,573` and `solver/bordered_hl.py:253`, which all cast.
+   It is not JSON-serializable without a cast. Cosmetic; noted for whoever repairs the line.
+
+## The repair this leg did NOT make
+
+For the orchestrator's benefit only, and explicitly **not** applied: the cheapest sound fix is
+to make the stopping test **relative to the gauge the scheme has already frozen**, e.g.
+`res < tol * max(|f(0)|/4, floor)`, or equivalently to normalize the datum on entry and reject
+`f(0) = 0`. That change makes the test scale-invariant along exactly the direction the module
+declares free. It is one line in a file this leg is forbidden to touch, and it will change the
+banked λ=1 numbers by nothing (λ=1 ⇒ multiplier 1). **The decision is the orchestrator's.**
