@@ -1,0 +1,252 @@
+{
+ "leg": "Route-LSS v1 (leg 161)",
+ "title": "Lushnikov-Silantyev-Siegel arXiv:2010.01201 read at FULL TEXT: does its exact a = 1/2 solution account for alpha(1/2) = 3 and/or a_c?",
+ "generated": "2026-08-06T13:03:34Z",
+ "source": {
+  "arxiv": "2010.01201",
+  "tag": "LSS",
+  "authors": "Lushnikov, Silantyev, Siegel",
+  "title": "Collapse vs. blow up and global existence in the generalized Constantin-Lax-Majda equation",
+  "venue": "arXiv v2 [nlin.PS], 23 Aug 2021 (title page dated August 24, 2021), 50 pp",
+  "read": "FULL TEXT at leg 161; abstract, sec 1, sec 2 (Theorem 1), sec 4 (Theorem 2), sec 5 (Theorem 3), sec 6, sec 9, sec 12 and Table 1 closely.  Page numbers below are the paper's own printed pages, which equal the PDF page index.",
+  "provenance_before_leg_161": "secondary: cited via ALS and XU as 'the reference branch'; PHASE2_P2_NOTES J-8; never opened",
+  "a_c": {
+   "value_full": 0.6890665337007457,
+   "stored_here": 0.6890665,
+   "rel_truncation": 4.890782528296775e-08,
+   "locators": "abstract p. 1; sec 1 Eq. (8) p. 5; sec 12 p. 43; the bisection ladder is Table 1 p. 48",
+   "definition_verbatim": "We also find that alpha = 0 at the critical value a = a_c.",
+   "how_obtained": "the numerically located root of the nonlinear-eigenvalue alpha(a), by two routes: sec 8 time-dependent simulations on x in R under decaying BC (7), and sec 9's generalized Petviashvili method on Eq. (46)/(67).  NOT a theorem, and NOT a consequence of the a = 1/2 exact solution.",
+   "hypotheses_verbatim": "Table 1 caption p. 48: 'Accuracy of alpha(a) (for -1 <= a <= 0.689) and alpha_2(a) (for -1 <= a <= 0.689066533) is at least 3-4 digits of precision, whereas accuracy of alpha_e(a) is about 3-4 digits of precision for a < 0.3 and at least 5 digits of precision for a >= 0.3, with more precision for 0.3 <= a <= 0.6890665.'  Fig. 1 caption p. 13: 'The green curve terminates at a = a_c since the iteration used to solve the nonlinear eigenvalue problem for x in R does not converge for a > a_c.'",
+   "reading": "the seventeen printed digits are the bisection's residual ladder (alpha_e = 6.17e-17 at a = 0.6890665337007457), not seventeen certified digits.  Quote it as LSS's converged numerical critical value."
+  },
+  "alpha_half": {
+   "alpha_LSS": 0.3333333333333333,
+   "alpha_ours": 3.0,
+   "dictionary": "our alpha = 1/alpha_LSS = 1/alpha_ALS (same convention as ALS)",
+   "locators": "sec 4 pp. 10-11: ansatz Eq. (33), velocity Eq. (34), pole ODEs Eqs. (35)-(36), their integration Eq. (37) v_c = (t_c-t)^{1/3} vt, self-similar form Eq. (38) and the variable Eq. (39) xi = (x-x_0)/(t_c-t)^{1/3}, Theorem 2 p. 11; restated in words pp. 13-14 after Eq. (49); closed form Eq. (45) p. 12; Table 1 p. 48 row a = 0.5 gives alpha_e = 0.333333333",
+   "verbatim_pp_13_14": "...in agreement with the exact results of Section 3 (Eq. (30)) and Section 4 (Eq. (38)) for alpha = 1 and alpha = 1/3, respectively.",
+   "verbatim_theorem_2": "Theorem 2. Eqs. (38) and (39) provide an exact solution of Eq. (1) for a = 1/2 for any value of the real constants t_c, vt > 0 and x_0.",
+   "reading": "EXPLICIT, and exact.  It is also trivially implied twice over: the far-field exponent of Eq. (38) is |xi|^{-3} = |xi|^{-1/alpha}, and eliminating w_{-2} between Eqs. (35) and (36) reduces the exponent to the scalar root of 3p^2 = p."
+  },
+  "independence_correction": "ALS sec 5.2's a = 1/2, sigma = 1 system is the dissipative generalisation of LSS Eqs. (35)-(36); three of ALS's four authors are LSS's three; LSS (2020) precedes ALS (2022); and XU's Table 1 is checked against 'the high-precision branch of [LSS]' by XU's own statement.  So ALS sec 5.2, XU Table 1 row a = 0.5 and LSS sec 4 are ONE ancestor, not three, and must not be counted as independent confirmations of alpha(1/2) = 3.  The genuinely independent second source is J. Chen arXiv:1908.09385 (Nonlinearity 33(5), 2502, 2020), which LSS's own Note on p. 11 credits with discovering the same solution independently: 'After our arXiv preprint submission [35] we learned that the self-similar solution (38) was recently discovered by Jiajie Chen in [6].'",
+  "what_did_NOT_change": "the two banked findings share a PAPER but not a DERIVATION -- alpha(1/2) = 3 is exact and analytic (sec 4), a_c is converged numerics (secs 8-9), and LSS's own leading-order exponent alpha_0(a) = 2(1-a)^2/(2-a) is strictly positive on a < 1 so it cannot produce a_c.  No verdict in CLAIM_LEDGER moves; both rows already read PRE-EMPTED / CONFIRMED_AND_PRE-EMPTED.  Re-derived at leg 161 in experiments/p2_route_lss_v1_lit.py; see writeup/data/p2_route_lss_v1_lit.json."
+ },
+ "L1_theorem2_pde_residual": {
+  "rows": [
+   {
+    "tau": 1.0,
+    "v_c": 1.0,
+    "w_m2": 1.3333333333333333,
+    "omega_t_scale": 1.8403258361591872,
+    "rel_residual_a_0.5": 4.826201981458778e-16,
+    "rel_residual_a_0.45": 0.061652276701683086,
+    "rel_residual_a_0.55": 0.061652276701683086,
+    "rel_residual_a_0.0": 0.61652276701683,
+    "eq35_abs_residual": 0.0,
+    "eq36_abs_residual": 0.0
+   },
+   {
+    "tau": 0.1,
+    "v_c": 0.46415888336127786,
+    "w_m2": 2.872579586709178,
+    "omega_t_scale": 184.01777596993793,
+    "rel_residual_a_0.5": 6.178035633915524e-16,
+    "rel_residual_a_0.45": 0.061660402999526215,
+    "rel_residual_a_0.55": 0.06166040299952498,
+    "rel_residual_a_0.0": 0.6166040299952564,
+    "eq35_abs_residual": 0.0,
+    "eq36_abs_residual": 0.0
+   },
+   {
+    "tau": 0.01,
+    "v_c": 0.21544346900318845,
+    "w_m2": 6.188785111483703,
+    "omega_t_scale": 18382.299518070242,
+    "rel_residual_a_0.5": 7.916264890615001e-16,
+    "rel_residual_a_0.45": 0.0613150910493435,
+    "rel_residual_a_0.55": 0.0613150910493435,
+    "rel_residual_a_0.0": 0.6131509104934352,
+    "eq35_abs_residual": 8.881784197001252e-16,
+    "eq36_abs_residual": 5.684341886080802e-14
+   },
+   {
+    "tau": 0.001,
+    "v_c": 0.10000000000000005,
+    "w_m2": 13.333333333333327,
+    "omega_t_scale": 1822315.1602953924,
+    "rel_residual_a_0.5": 5.110655911266818e-16,
+    "rel_residual_a_0.45": 0.060541349784232895,
+    "rel_residual_a_0.55": 0.06054134978423162,
+    "rel_residual_a_0.0": 0.6054134978423231,
+    "eq35_abs_residual": 0.0,
+    "eq36_abs_residual": 9.094947017729282e-13
+   }
+  ],
+  "worst_rel_residual_at_a_half": 7.916264890615001e-16,
+  "best_rel_residual_at_a_not_half": 0.06054134978423162,
+  "separation_decades": 13.883531781479723,
+  "locator": "LSS sec 4 pp. 10-11, Eqs. (33), (34), (35), (36), (37); Theorem 2 p. 11",
+  "verdict": "Theorem 2 verified as a PDE residual, not quoted.  The controls at a = 0.45 / 0.55 / 0 are O(1): the code CAN report the other answer, and does whenever a != 1/2."
+ },
+ "L2_exponent_is_one_third": {
+  "p_root_bisected": 0.33333333333333337,
+  "p_root_minus_one_third": 5.551115123125783e-17,
+  "alpha_ours": 2.9999999999999996,
+  "alpha_ours_minus_3": -4.440892098500626e-16,
+  "coarse_grid_argmin_p": 0.3335,
+  "residual_at_one_third": 5.551115123125783e-17,
+  "residual_at_0.30": 0.12,
+  "residual_at_0.36": -0.11519999999999997,
+  "scalar_equation": "3 p^2 - p = 0  (LSS (36) after (35) eliminates w_{-2})",
+  "general_gamma_control": [
+   {
+    "gamma": 1.0,
+    "a_from_theorem1": 0.0,
+    "alpha_LSS": 1.0,
+    "alpha_ours": 1.0
+   },
+   {
+    "gamma": 2.0,
+    "a_from_theorem1": 0.5,
+    "alpha_LSS": 0.3333333333333333,
+    "alpha_ours": 3.0
+   },
+   {
+    "gamma": 3.0,
+    "a_from_theorem1": 0.6666666666666667,
+    "alpha_LSS": 0.16666666666666666,
+    "alpha_ours": 6.0
+   },
+   {
+    "gamma": 4.0,
+    "a_from_theorem1": 0.75,
+    "alpha_LSS": 0.1,
+    "alpha_ours": 10.0
+   }
+  ],
+  "locator": "LSS Eqs. (35)-(36) p. 10, Eq. (37) p. 10; general gamma Eqs. (42)-(45) p. 12",
+  "verdict": "alpha(1/2) = 3 is not a fit and not a transcription: it is the nonzero root of 3p^2 = p, which is what LSS's own (35)-(36) reduce to.  The same code path returns alpha_ours = 1 at gamma = 1 (a = 0) and 6 at gamma = 3 (a = 2/3), so it is not a tautology of the code."
+ },
+ "L3_far_field_exponent": {
+  "tail_dlog_omega_dlog_xi": -2.999999704411408,
+  "tail_minus_neg3": 2.955885918254353e-07,
+  "one_over_alpha_LSS": 3.0,
+  "rel_diff_vs_closed_form_with_minus": 5.097730196373371e-16,
+  "rel_diff_vs_printed_sign_of_eq38": 2.0,
+  "locator": "LSS Eq. (38)-(39) p. 11; Eq. (49) and the alpha = 1/3 sentence pp. 13-14",
+  "sign_finding": "Eq. (38) as PRINTED is internally inconsistent by an overall sign: its left expression (1/(t_c-t)) (4 i vt^2/3) ([xi-i vt]^{-2} - [xi+i vt]^{-2}) equals MINUS its right expression (1/(t_c-t)) 16 vt^3 xi/(3(xi^2+vt^2)^2), since [xi-i vt]^{-2} - [xi+i vt]^{-2} = 4 i vt xi/(xi^2+vt^2)^2 and i * 4i = -4.  Checked on the RENDERED PDF page 11, not on a text dump, so this is not an extraction artefact.  Which branch is correct is settled by measurement rather than by algebra: L1's PDE residual is 7.9e-16 for the ansatz (33)+(37), whose closed form carries the MINUS -- and that is also the sign convention of the a = 0 CLM profile -4X/(1+4X^2) this repository already uses.  Eq. (1) is NOT invariant under omega -> -omega (it flips the sign of the whole right-hand side), so the sign is not free.  Consequence: none for anything banked here -- the exponent, Theorem 2's content, and alpha(1/2) = 3 are all sign-independent.",
+  "verdict": "The profile decays as |xi|^{-3}, which is LSS Eq. (49)'s f ~ |xi|^{-1/alpha} at alpha = 1/3 -- the integer 3 is on the page as the far-field exponent as well as as 1/alpha.  The closed form built from (33)+(37) reproduces Eq. (38) to 5.1e-16 with a minus sign and disagrees by a factor -1 with the printed right-hand side; see sign_finding.  The exponent, which is what is gated here, is unaffected either way."
+ },
+ "L4_hilbert_check": {
+  "n_nodes": 2401,
+  "domain_half_width": 400.0,
+  "sinh_scale": 3.0,
+  "core_half_width": 20.0,
+  "rel_err_ux_vs_Homega": 2.4784264421096047e-05,
+  "rel_err_vs_3pct_perturbed_ux": 0.030024784264421123,
+  "locator": "LSS Eq. (2) p. 2, Eq. (19) p. 8, Eq. (34) p. 10",
+  "verdict": "Eq. (34)'s u satisfies u_x = H omega for the double-pole pair, checked with this repository's own whole-line Hilbert transform -- an instrument that shares no algebra with the paper.  The 3%-perturbed control fails, so the check can report otherwise."
+ },
+ "L5_ac_not_from_a_half": {
+  "alpha_0_min_over_a_lt_1": 1.998001998002002e-06,
+  "alpha_0_has_root_below_1": false,
+  "alpha_0_at_LSS_a_c": 0.14749737183504005,
+  "rows": [
+   {
+    "a": 0.0,
+    "alpha_0_LSS": 1.0,
+    "alpha_0_ours": 1.0
+   },
+   {
+    "a": 0.5,
+    "alpha_0_LSS": 0.3333333333333333,
+    "alpha_0_ours": 3.0
+   },
+   {
+    "a": 0.6666666666666666,
+    "alpha_0_LSS": 0.16666666666666669,
+    "alpha_0_ours": 5.999999999999999
+   },
+   {
+    "a": 0.6890665337007457,
+    "alpha_0_LSS": 0.14749737183504005,
+    "alpha_0_ours": 6.779781819559418
+   },
+   {
+    "a": 0.95,
+    "alpha_0_LSS": 0.00476190476190477,
+    "alpha_0_ours": 209.99999999999963
+   }
+  ],
+  "lss_a_c_full": 0.6890665337007457,
+  "repo_LSS_A_C": 0.6890665,
+  "repo_LSS_A_C_abs_err": 3.370074563857628e-08,
+  "repo_LSS_A_C_rel_err": 4.890782528296775e-08,
+  "table1_bisection_ladder_alpha_e": [
+   {
+    "a": 0.689,
+    "alpha_e": 0.000137203824593
+   },
+   {
+    "a": 0.68905,
+    "alpha_e": 3.409705703117e-05
+   },
+   {
+    "a": 0.68906,
+    "alpha_e": 1.347443362884e-05
+   },
+   {
+    "a": 0.689066,
+    "alpha_e": 1.10065641e-06
+   },
+   {
+    "a": 0.6890665,
+    "alpha_e": 6.950143e-08
+   },
+   {
+    "a": 0.68906653,
+    "alpha_e": 7.632094e-09
+   },
+   {
+    "a": 0.689066533,
+    "alpha_e": 1.445152e-09
+   },
+   {
+    "a": 0.6890665335,
+    "alpha_e": 4.13992e-10
+   },
+   {
+    "a": 0.6890665337,
+    "alpha_e": 1.537e-12
+   },
+   {
+    "a": 0.6890665337007,
+    "alpha_e": 9.43093e-14
+   },
+   {
+    "a": 0.68906653370074,
+    "alpha_e": 1.18169e-14
+   },
+   {
+    "a": 0.689066533700745,
+    "alpha_e": 1.505397e-15
+   },
+   {
+    "a": 0.6890665337007457,
+    "alpha_e": 6.169686e-17
+   }
+  ],
+  "locator": "LSS abstract p. 1; sec 1 Eq. (8) and the 'alpha = 0 at a = a_c' sentence p. 5; Eq. (45) and Fig. 1 caption pp. 12-13; sec 9 the generalized Petviashvili method p. 20+; Table 1 p. 48",
+  "verdict": "alpha_0(a) = 2(1-a)^2/(2-a) -- the closed-form exponent of the family that contains the a = 1/2 exact solution -- is strictly positive for every a < 1 and so has NO root.  a_c cannot come out of it.  LSS obtain a_c instead as the numerically located root of the nonlinear-eigenvalue alpha(a), by two independent numerical routes (sec 8 time-dependent, sec 9 GPM), and the seventeen printed digits are that bisection's residual ladder."
+ },
+ "gate": {
+  "question": "Does LSS arXiv:2010.01201's own exact a = 1/2 solution (read at full text, not via ALS's or Xu's secondary citation) explicitly contain, derive, or trivially imply (a) the alpha(1/2) = 3 scaling exponent, and/or (b) the a_c = 0.6890665 boundary value, with hypotheses recorded verbatim?",
+  "answer_clause_a": "YES",
+  "answer_clause_a_detail": "EXPLICITLY CONTAINS it.  LSS Eq. (39) p. 11 is xi = (x-x_0)/(t_c-t)^{1/3}, i.e. alpha_LSS(1/2) = 1/3 exactly, hence this repository's alpha(1/2) = 3 exactly under literature_gates.py's own dictionary (our alpha = 1/alpha_ALS). It is stated in words at pp. 13-14 ('in agreement with the exact results of Section 3 (Eq. (30)) and Section 4 (Eq. (38)) for alpha = 1 and alpha = 1/3, respectively'), it is the far-field exponent 1/alpha = 3 of Eq. (38), it is the closed form alpha_0(1/2) = 2(1-a)^2/(2-a) = 1/3 of Eq. (45), and Table 1 p. 48 lists alpha_e = 0.333333333 at a = 0.5.",
+  "answer_clause_b": "YES as primary source, NO from the a = 1/2 exact solution",
+  "answer_clause_b_detail": "a_c = 0.6890665337007457... is LSS's OWN number -- abstract p. 1, Eq. (8) p. 5, sec 12 p. 43 -- and this repository's LSS_A_C = 0.6890665 is that value truncated (4.89e-08 relative).  But it does NOT come from the a = 1/2 exact solution: it is defined by alpha(a_c) = 0 and located numerically by the sec 8 / sec 9 eigenvalue routes, while the exact-solution family's closed-form exponent alpha_0(a) = 2(1-a)^2/(2-a) is strictly positive on a < 1 and has no root at all.  The two banked findings share a PAPER, not a derivation.",
+  "consequence": "The provenance of solver/literature_gates.py's LSS row is upgraded from secondary-source (via ALS/Xu) to primary-source-read, with section, page and equation locators and LSS's own accuracy hypotheses verbatim.  One framing correction is earned and is flagged, not applied elsewhere: ALS sec 5.2, Xu Table 1's a = 0.5 row and LSS sec 4 are ONE ancestor (three of ALS's four authors are LSS's three; Xu checks against LSS's branch by Xu's own statement), so they must not be counted as independent confirmations of alpha(1/2) = 3.  The genuinely independent second source is J. Chen arXiv:1908.09385, which LSS's own Note on p. 11 credits with discovering the same solution independently."
+ },
+ "wall_clock_seconds": 9.56
+}

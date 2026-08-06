@@ -96,6 +96,25 @@ CAPABILITIES = [
      "holds": "the marginal case and the invariant alpha_1",
      "validated": ("alpha_1 = 0 at a=0 == ALS eq (61); criticality sigma=3 at a=1/2 IS\n                   published (Xu arXiv:2607.19762 sec 6.1 + Table 1 row a=0.5 + Fig 3,\n                   's*(1/2)=3 exactly'); alpha_1 = +0.133683 there is SEARCHED-NOT-FOUND\n                   (leg 64, whole dissipative CLM corpus), i.e. measured, not\n                   independently validated"),
      "test": "test_critical_dissipation.py"},
+    {"module": "solver/dissipative_profile.py",
+     "object": "Chen arXiv:1908.09385's gamma=2 (full-Laplacian) gCLM candidate",
+     "holds": ("Chen's transcribed constants with PER-CONSTANT provenance, the DISSIPATIVE "
+               "steady self-similar residual and its exact Jacobian, Newton with both gauges "
+               "fixed, the gauge-invariant gamma=2 obstruction Delta = 2 c_l/|c_omega| - 1, "
+               "and the Y_0/Z_2/budget measurement (FLOAT, never a certificate)"),
+     "validated": ("Chen's closed form eq (2.2) Omega = -2bx/(x^2+b^2)^2, b = sqrt(3/8) nulls "
+                   "the steady residual to sup 3.74e-06 (n=601) falling to 2.36e-07 (n=1201), "
+                   "and Newton RECOVERS his constants as free OUTPUTS -- c_l -> 0.333333435 "
+                   "(Chen 1/3) and H Omega(0) -> 2.666666568 (Chen 8/3), shape sup error "
+                   "4.18e-06 -> 2.61e-07 across n=601..1201.  Delta = -0.333317 at Chen's "
+                   "a=1/2 against his own exact -1/3, derived independently of his (2.40).  "
+                   "Lesson-90 controls: Delta returns EXACTLY 0.0 on the heat pair (1/2,-1) "
+                   "and EXACTLY +1.0 at the a=0 CLM anchor, so it varies and can report the "
+                   "other answer.  NOTE (leg 125): Chen has NO gamma=2 profile -- sec 2.6 "
+                   "p.12, 'Since nu(t) converges to 0, such profile is the same as the "
+                   "inviscid profile associated with a' -- so this module measures the "
+                   "obstruction to one; it does not construct one"),
+     "test": "test_dissipative_profile.py"},
     {"module": "solver/marginal_flow.py", "object": "the augmented (Omega, mu) flow, driven",
      "holds": "time integration of (F_mu)+(M) as an initial-value problem",
      "validated": ("lambda_mu slope +2.0011 vs +2, zero at 1.50009 vs 1.5; `integrate` "

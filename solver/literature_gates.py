@@ -437,6 +437,96 @@ XU_TABLE1 = [
 ]
 # [LSS] = Lushnikov, Silantyev, Siegel, cited by both ALS and XU as the reference branch.
 LSS_A_C = 0.6890665          # the published critical advection
+# PROVENANCE UPGRADED AT LEG 161 (Route-LSS): SECONDARY-SOURCE -> PRIMARY-SOURCE-READ.
+# For four citations this row was sourced through ALS and XU.  arXiv:2010.01201 has now
+# been fetched and read at full text (v2 [nlin.PS], 23 Aug 2021, 50 pp), and what it says
+# about the two numbers that sit downstream of it is recorded here with locators and with
+# LSS's own hypotheses verbatim.  `LSS_A_C` above is UNCHANGED (it is LSS's value
+# truncated at the 7th significant figure, 4.89e-08 relative) so that every number banked
+# against it stays comparable; the full sixteen printed digits are below.
+# NOTE ON SCOPE: the arXiv id is deliberately NOT added to the CLAIM_LEDGER row's `source`
+# string.  `cited_ids` (experiments/p2_route_lga_v1_ledger.py) scans that field with
+# ARXIV_RE and cross-checks every hit against ARXIV_METADATA, which has no 2010.01201
+# entry -- adding the id there would report a real paper as a phantom citation and would
+# require editing a file outside leg 161's territory.  The id lives in this dict and in
+# the row's `note` instead.
+LSS_PRIMARY_READ = {
+    "arxiv": "2010.01201",
+    "tag": "LSS",
+    "authors": "Lushnikov, Silantyev, Siegel",
+    "title": ("Collapse vs. blow up and global existence in the generalized "
+              "Constantin-Lax-Majda equation"),
+    "venue": "arXiv v2 [nlin.PS], 23 Aug 2021 (title page dated August 24, 2021), 50 pp",
+    "read": ("FULL TEXT at leg 161; abstract, sec 1, sec 2 (Theorem 1), sec 4 (Theorem 2), "
+             "sec 5 (Theorem 3), sec 6, sec 9, sec 12 and Table 1 closely.  Page numbers "
+             "below are the paper's own printed pages, which equal the PDF page index."),
+    "provenance_before_leg_161": ("secondary: cited via ALS and XU as 'the reference "
+                                  "branch'; PHASE2_P2_NOTES J-8; never opened"),
+    "a_c": {
+        "value_full": 0.6890665337007457,
+        "stored_here": 0.6890665,
+        "rel_truncation": 4.890782528296775e-08,
+        "locators": ("abstract p. 1; sec 1 Eq. (8) p. 5; sec 12 p. 43; the bisection "
+                     "ladder is Table 1 p. 48"),
+        "definition_verbatim": "We also find that alpha = 0 at the critical value a = a_c.",
+        "how_obtained": ("the numerically located root of the nonlinear-eigenvalue "
+                         "alpha(a), by two routes: sec 8 time-dependent simulations on "
+                         "x in R under decaying BC (7), and sec 9's generalized "
+                         "Petviashvili method on Eq. (46)/(67).  NOT a theorem, and NOT "
+                         "a consequence of the a = 1/2 exact solution."),
+        "hypotheses_verbatim": (
+            "Table 1 caption p. 48: 'Accuracy of alpha(a) (for -1 <= a <= 0.689) and "
+            "alpha_2(a) (for -1 <= a <= 0.689066533) is at least 3-4 digits of precision, "
+            "whereas accuracy of alpha_e(a) is about 3-4 digits of precision for a < 0.3 "
+            "and at least 5 digits of precision for a >= 0.3, with more precision for "
+            "0.3 <= a <= 0.6890665.'  Fig. 1 caption p. 13: 'The green curve terminates "
+            "at a = a_c since the iteration used to solve the nonlinear eigenvalue "
+            "problem for x in R does not converge for a > a_c.'"),
+        "reading": ("the seventeen printed digits are the bisection's residual ladder "
+                    "(alpha_e = 6.17e-17 at a = 0.6890665337007457), not seventeen "
+                    "certified digits.  Quote it as LSS's converged numerical critical "
+                    "value."),
+    },
+    "alpha_half": {
+        "alpha_LSS": 1.0 / 3.0,
+        "alpha_ours": 3.0,
+        "dictionary": "our alpha = 1/alpha_LSS = 1/alpha_ALS (same convention as ALS)",
+        "locators": ("sec 4 pp. 10-11: ansatz Eq. (33), velocity Eq. (34), pole ODEs "
+                     "Eqs. (35)-(36), their integration Eq. (37) v_c = (t_c-t)^{1/3} vt, "
+                     "self-similar form Eq. (38) and the variable Eq. (39) "
+                     "xi = (x-x_0)/(t_c-t)^{1/3}, Theorem 2 p. 11; restated in words "
+                     "pp. 13-14 after Eq. (49); closed form Eq. (45) p. 12; Table 1 "
+                     "p. 48 row a = 0.5 gives alpha_e = 0.333333333"),
+        "verbatim_pp_13_14": ("...in agreement with the exact results of Section 3 "
+                              "(Eq. (30)) and Section 4 (Eq. (38)) for alpha = 1 and "
+                              "alpha = 1/3, respectively."),
+        "verbatim_theorem_2": ("Theorem 2. Eqs. (38) and (39) provide an exact solution "
+                               "of Eq. (1) for a = 1/2 for any value of the real "
+                               "constants t_c, vt > 0 and x_0."),
+        "reading": ("EXPLICIT, and exact.  It is also trivially implied twice over: the "
+                    "far-field exponent of Eq. (38) is |xi|^{-3} = |xi|^{-1/alpha}, and "
+                    "eliminating w_{-2} between Eqs. (35) and (36) reduces the exponent "
+                    "to the scalar root of 3p^2 = p."),
+    },
+    "independence_correction": (
+        "ALS sec 5.2's a = 1/2, sigma = 1 system is the dissipative generalisation of LSS "
+        "Eqs. (35)-(36); three of ALS's four authors are LSS's three; LSS (2020) precedes "
+        "ALS (2022); and XU's Table 1 is checked against 'the high-precision branch of "
+        "[LSS]' by XU's own statement.  So ALS sec 5.2, XU Table 1 row a = 0.5 and LSS "
+        "sec 4 are ONE ancestor, not three, and must not be counted as independent "
+        "confirmations of alpha(1/2) = 3.  The genuinely independent second source is "
+        "J. Chen arXiv:1908.09385 (Nonlinearity 33(5), 2502, 2020), which LSS's own Note "
+        "on p. 11 credits with discovering the same solution independently: 'After our "
+        "arXiv preprint submission [35] we learned that the self-similar solution (38) "
+        "was recently discovered by Jiajie Chen in [6].'"),
+    "what_did_NOT_change": (
+        "the two banked findings share a PAPER but not a DERIVATION -- alpha(1/2) = 3 is "
+        "exact and analytic (sec 4), a_c is converged numerics (secs 8-9), and LSS's own "
+        "leading-order exponent alpha_0(a) = 2(1-a)^2/(2-a) is strictly positive on a < 1 "
+        "so it cannot produce a_c.  No verdict in CLAIM_LEDGER moves; both rows already "
+        "read PRE-EMPTED / CONFIRMED_AND_PRE-EMPTED.  Re-derived at leg 161 in "
+        "experiments/p2_route_lss_v1_lit.py; see writeup/data/p2_route_lss_v1_lit.json."),
+}
 XU_A_C_RECOMPUTED = 0.6888   # XU's own recompute; they quote 0.04% agreement
 XU_S2_BOUNDARY = 0.39        # where s* crosses the ordinary Laplacian s = 2 (c_l = 1/2)
 
@@ -531,11 +621,22 @@ CLAIM_LEDGER = [
     },
     {
         "claim": "the alpha(a) branch and its endpoint a_c ~ 0.694",
-        "leg": "Route-E v1 (§26)", "source": "XU Table 1; LSS a_c = 0.6890665",
+        "leg": "Route-E v1 (§26)",
+        "source": "XU Table 1; LSS a_c = 0.6890665 (LSS read at PRIMARY SOURCE, leg 161)",
         "verdict": "PRE-EMPTED",
         "note": ("The branch is LSS's, published.  Our a_c is 0.7% off the published value; "
                  "XU's recompute is 0.04% off.  We are the least accurate of the three and "
-                 "should quote theirs."),
+                 "should quote theirs.  "
+                 "LEG 161, PROVENANCE UPGRADE (secondary -> primary): LSS arXiv:2010.01201 "
+                 "is now read at full text and this number is theirs first-hand -- abstract "
+                 "p. 1, sec 1 Eq. (8) p. 5, sec 12 p. 43, a_c = 0.6890665337007457..., "
+                 "defined by 'alpha = 0 at the critical value a = a_c' (p. 5) and located "
+                 "numerically by sec 8's time-dependent simulations and sec 9's generalized "
+                 "Petviashvili method, with the bisection ladder printed in Table 1 p. 48.  "
+                 "It is NOT implied by LSS's exact a = 1/2 solution: the closed-form "
+                 "exponent of that family, alpha_0(a) = 2(1-a)^2/(2-a) (Eq. (45) p. 12 with "
+                 "Theorem 1's gamma = 1/(1-a)), is strictly positive for every a < 1 and "
+                 "has no root.  Hypotheses verbatim and locators in LSS_PRIMARY_READ."),
         "survives": "nothing.",
     },
     {
