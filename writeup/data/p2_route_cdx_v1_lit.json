@@ -1,0 +1,253 @@
+{
+  "leg": 157,
+  "route": "CDX",
+  "primary_paper": "arXiv:2505.03091",
+  "primary_url": "https://arxiv.org/abs/2505.03091",
+  "primary_title": "Cadiot, Stability analysis for localized solutions in PDEs and nonlocal equations on R^m (6 May 2025, 30 pp.)",
+  "secondary_paper": "arXiv:2504.05066",
+  "secondary_url": "https://arxiv.org/abs/2504.05066",
+  "secondary_title": "Breden, Payan, Reisch, Tang, Turing instability for nonlocal heterogeneous reaction-diffusion systems: a computer-assisted proof approach (7 Apr 2025, 25 pp., to appear Ann. Inst. Fourier).  Cadiot's [15] -- a BACKWARD citation, which leg 62 did not follow in its ledger.",
+  "how_obtained": "bash Papers/fetch.sh 2505.03091 2504.05066 -- egress probe HTTP 200; 1004 KB / 22 MB; text via `pdftotext -layout`.  Papers/ is gitignored on purpose.",
+  "CDX0_novelty": {
+    "log": "writeup/novelty/leg_157.md",
+    "committed_before_construction": true,
+    "verdict": "PROCEED_AS_LITERATURE",
+    "claims_mathematical_novelty": false,
+    "the_pass_changed_this_legs_answer": true,
+    "what_it_caught": "This leg's headline candidate -- arXiv:2504.05066, reached as Cadiot's backward citation [15] -- was drafted as 'never consulted by this repository'.  The in-repo sweep falsified that: reports/REPORT_2026-08-05.md ll. 219-223 records leg 62 identifying it mid-cycle and relaying its operative reading to leg 58 -- 'a \"zero diagonal\" framing would be falsifiable against Breden-Payan-Reisch-Tang arXiv:2504.05066; the correct framing is quantitative (off-diagonal row-sum growth vs. diagonal growth)'.  What remains is bookkeeping: the paper was never read at full text and is in no executable ledger.",
+    "what_is_genuinely_added": [
+      "arXiv:2504.05066 read at full text; Theorem 2.6 and both changes of basis located with verbatim hypotheses.",
+      "Farid-Lancaster [FL91]'s hypotheses, which CP_NOT_OBTAINED records as never obtained (paywalled), are now known SECONDHAND from BPRT section 2.1.",
+      "Cadiot's construction translated into this repository's A-shape language, with the A21 = 0 property measured rather than asserted."
+    ]
+  },
+  "CDX1_located": {
+    "constructions": [
+      {
+        "tag": "PSEUDO_DIAG",
+        "paper": "arXiv:2505.03091",
+        "url": "https://arxiv.org/abs/2505.03091",
+        "where": "section 3, the paragraph defining P, and eq. (15)",
+        "quote": "Our approach is based on a pseudo-diagonalization of DF(U0), that is we construct a linear operator P and its inverse, and study the spectrum of D = P^{-1} DF(U0) P instead.  ...  We choose the linear operator P as P = P^N + pi_N : l^2 -> l^2 where P^N = pi^N P^N pi^N and P^N : pi^N l^2 -> pi^N l^2 is invertible.  ...  In practice we choose P^N such that the columns of P^N approximate the eigenvectors of pi^N DF(U0) pi^N.",
+        "what_it_is": "A SIMILARITY transform, not an approximate inverse: an invertible finite block P^N on the first N modes, and the IDENTITY on the tail.  This is the technique leg 62 never examined AS a technique, and it is the natural candidate for manufacturing a nonzero diagonal out of a zero-diagonal operator -- conjugation moves the diagonal, which is exactly what a weighted space cannot do.",
+        "why_it_does_not_reach_us": "P is the IDENTITY on the tail BY CONSTRUCTION, and the tail is where our zero diagonal lives.  The paper says so itself for the tail rows: 'For the case n in Z^m \\ I^N, notice that lambda_n = (pi_N (L + DG(U0)) pi_N)_{n,n} = l(n~) + (DG(U0))_{n,n}' -- the RAW diagonal, unconjugated.  The pseudo-diagonalization cannot move it.",
+        "a21_is_zero": true
+      },
+      {
+        "tag": "L_CANCELS",
+        "paper": "arXiv:2505.03091",
+        "url": "https://arxiv.org/abs/2505.03091",
+        "where": "Lemma 3.3, proof (page 11)",
+        "quote": "Now, since L is diagonal, we have that L pi_N = pi_N L pi_N and therefore (P^N)^{-1} DF(U0) pi_N = (P^N)^{-1} DG(U0) pi_N and pi_N DF(U0) P^N = pi_N DG(U0) P^N.",
+        "what_it_is": "THE ALGEBRAIC HINGE OF THE WHOLE CONSTRUCTION, and it is one line.  The UNBOUNDED part L drops out of BOTH finite-tail coupling blocks, leaving only the bounded part DG(U0).  That is why Cadiot's coupling blocks are bounded and ours (leg 53's K/2) are not.",
+        "why_it_does_not_reach_us": "the cancellation is licensed by 'since L is diagonal' and by nothing else.  Our unbounded part is bidiagonal with an exactly zero diagonal, so L pi_N != pi_N L pi_N and the unbounded part SURVIVES in the coupling blocks.  This is leg 53's K/2 coupling, reached from the literature's side.",
+        "a21_is_zero": true
+      },
+      {
+        "tag": "SHIFT_S",
+        "paper": "arXiv:2505.03091",
+        "url": "https://arxiv.org/abs/2505.03091",
+        "where": "Lemma 3.2, proof (page 10)",
+        "quote": "Consequently, we can find some s in C big enough in amplitude such that |lambda_n + s| > (1/2) sum_{k in Z^m} |R_{n,k}| for all n in Z^m.  Consequently, the matrix D + sI satisfies the hypotheses (1) and (2) of Theorem 2.1 in [24].",
+        "what_it_is": "A SHIFT inside the approximate inverse: the tail is inverted as (S + tI)^{-1}, not S^{-1} (see Lemma 4.1's Z_{1,3}, Z_{1,4}).  This repository's A has never carried a shift.",
+        "why_it_does_not_reach_us": "MEASURED BY LEG 62 AND NOT RE-DERIVED HERE: the minimum-modulus s satisfying this inequality grows LINEARLY in the truncation for our operator (exponent ~ +1.005), so no finite s survives the limit; Cadiot's own Whitham operator SATURATES at 0.28723.  Note the shift exists only to satisfy [24]'s hypotheses -- see FL91_REPLACED.",
+        "a21_is_zero": true
+      },
+      {
+        "tag": "SYSTEMS_ELIMINATION",
+        "paper": "arXiv:2505.03091",
+        "url": "https://arxiv.org/abs/2505.03091",
+        "where": "section 5.3, proof of Theorem 5.5, eq. (46)",
+        "quote": "Then, taking the second equation of DF(u~)u - lambda u = 0, we have that (lambda_1 lambda_2 - 1) u_1 + (Delta - lambda_2 - lambda) u_2 = 0.  This implies that |lambda_2 + lambda| ||u_2||_2 <= ||(Delta - lambda_2 - lambda) u_2||_2 = ||(lambda_1 lambda_2 - 1) u_1||_2 <= |lambda_1 lambda_2 - 1| ||u_1||_2.  In particular, using the above, we have that ||u_1||_2 > 0.",
+        "what_it_is": "THE CLOSEST SHAPE-MATCH IN EITHER PAPER TO LEG 127's CANDIDATE PROOF.  It is a worked TWO-DIRECTION argument in the presence of a nonzero off-diagonal: use the row the off-diagonal populates to bound one component by the other, then substitute back.  DIRECTION.md ### 127 describes exactly this shape ('pair x = (0; h) with the columns A21 populates').",
+        "why_it_does_not_reach_us": "it is CONFIRMATION that leg 127's chosen proof shape is the one the literature uses, NOT a new technique: leg 58's SS5 already measured this trade-off (A21 != 0 buys back exactly one unit on the kernel direction).  It is also the COMPONENT index, not the Fourier index, and Cadiot's off-diagonal entry is the bounded constant lambda_1 lambda_2 - 1 = 1/9 against diagonals growing like |2 pi xi|^2.",
+        "a21_is_zero": false
+      },
+      {
+        "tag": "FL91_REPLACED",
+        "paper": "arXiv:2504.05066",
+        "url": "https://arxiv.org/abs/2504.05066",
+        "where": "section 2.1, the paragraph introducing Theorem 2.6 (page 9)",
+        "quote": "has also been generalized to some infinite matrices in [FL91, Theorem 2.1].  However, some of the assumptions of [FL91, Theorem 2.1] are needlessly restrictive (for instance, all the diagonal elements of L have to be nonzero), and others may not be straightforward to check in practice (like the invertibility of a one-parameter family of operators constructed from L).  We propose below a simpler and slightly more general statement, which is still strongly inspired from [FL91, Theorem 2.1] and from its proof, but is easier to use in practice.  Indeed, in addition to (2.2), we simply require that L has compact resolvent.",
+        "what_it_is": "THE SINGLE MOST RELEVANT SENTENCE THIS DEEP-MINE FOUND.  Cadiot's Lemma 3.2 imports Farid-Lancaster [24] = [FL91], which `CP_NOT_OBTAINED` records as 'NOT OBTAINED -- paywalled (Elsevier)'.  BPRT state FL91's hypotheses explicitly -- DISCHARGING leg 62's un-read-source gap secondhand -- and then REPLACE the theorem with one that drops the nonzero-diagonal requirement and the shift entirely.  Theorem 2.6's hypotheses in full: E Banach with a Schauder basis, property (2.2), and L has COMPACT RESOLVENT.  No l_min, no dominance, no multiplier.",
+        "why_it_does_not_reach_us": "two independent reasons, both recorded rather than one.  (i) It is an EIGENVALUE ENCLOSURE theorem, not an approximate-inverse construction -- it produces no Z_1 bound, so it is not applicable to the A21 != 0 class; it replaces the question rather than answering it.  (ii) Its one non-automatic hypothesis, COMPACT RESOLVENT, is measured on our operator below (CDX4) and is the hypothesis that fails.  Leg 62 already relayed the operative reading of this paper to leg 58 -- see CDX0.",
+        "a21_is_zero": true
+      },
+      {
+        "tag": "TWO_BASIS_CHANGES",
+        "paper": "arXiv:2504.05066",
+        "url": "https://arxiv.org/abs/2504.05066",
+        "where": "section 2.2, Definition 2.8 and Definition 2.14 / eq. (2.12)",
+        "quote": "The purpose of this section is to introduce two successive changes of basis, where the first one ensures that all the radii become finite, and the second one brings enough control on the first disks.  ...  Let f : x -> max(1, x^p), p >= 0, and Q be the infinite diagonal matrix ...  We then define M~ = Q^{-1} M Q.  ...  Let P_N be an invertible matrix of size 2N x 2N, obtained numerically such that P_N^{-1} Pi^N M~ Pi^N P_N is approximately diagonal ...  We then define P, an infinite matrix, by P = P_N + I - Pi^N.",
+        "what_it_is": "The most general preconditioning in this lineage: a DIAGONAL weight Q, then a finite-rank near-diagonalization P.  Notably BPRT allow Q^{-1} to be UNBOUNDED ('Q is invertible but its inverse is unbounded when p > 0'), which this repository's weight family does not exploit.",
+        "why_it_does_not_reach_us": "BOTH changes of basis are powerless on the tail, for two DIFFERENT measured reasons.  Q is diagonal, and a diagonal conjugation preserves the diagonal BITWISE (CDX5) -- it can never manufacture a nonzero diagonal, which is also why leg 52's weight family never could.  P is the identity on the tail, exactly as Cadiot's is (CDX3).  Their own operator does not need either to: its diagonal grows by Weyl's law, 'lambda_i >= kappa i^{2/n}' (eq. (2.5)).",
+        "a21_is_zero": true
+      }
+    ],
+    "unlocated_rows": [],
+    "all_located": true
+  },
+  "CDX2_a_shape": {
+    "constructions_whose_induced_A21_is_zero": [
+      "PSEUDO_DIAG",
+      "L_CANCELS",
+      "SHIFT_S",
+      "FL91_REPLACED",
+      "TWO_BASIS_CHANGES"
+    ],
+    "constructions_with_a_nonzero_off_diagonal": [
+      "SYSTEMS_ELIMINATION"
+    ],
+    "reading": "Every PRECONDITIONING construction in either paper induces an approximate inverse with A21 = 0 -- the class leg 58's theorem already proves Z_1 >= 1 on.  The single row with a nonzero off-diagonal (SYSTEMS_ELIMINATION) is off-diagonal in the COMPONENT index, is the bounded constant 1/9, and is an eigenvalue argument rather than a certificate construction."
+  },
+  "CDX3_identity_tail": {
+    "n": 240,
+    "n_finite": 24,
+    "max_abs_A21_when_P_is_identity_on_the_tail": 0.0,
+    "max_abs_A21_control_when_P_is_not": 24.013724513626638,
+    "control_reports_the_other_answer": true,
+    "reading": "`P = P_N + (I - Pi^N)` -- the shape BOTH papers use (Cadiot section 3; BPRT eq. (2.12)) -- induces an approximate inverse whose tail-by-finite block is EXACTLY zero.  The control perturbs only P's tail-by-finite block and the same code path reports a nonzero A21, so the zero is a property of the construction and not of the code (lesson 90)."
+  },
+  "CDX4_compact_resolvent": {
+    "hypothesis": "BPRT Theorem 2.6 (section 2.1): 'Let E a Banach space having a Schauder basis and satisfying assumption (2.2), and L ... a (possibly unbounded) linear operator.  Assume that L has a compact resolvent.'  This is the ONLY non-automatic hypothesis, and it is what replaces FL91's nonzero diagonal AND Cadiot's shift s.",
+    "ours_a0_CLM_tail_block": {
+      "sizes": [
+        128,
+        256,
+        512,
+        1024
+      ],
+      "min_abs_eigenvalue": [
+        0.5391772737750765,
+        0.4355676627671087,
+        0.36535419016264403,
+        0.3146330041814609
+      ],
+      "per_radius": {
+        "r=1": {
+          "count_in_disc": [
+            2,
+            2,
+            2,
+            4
+          ],
+          "new_eigenvalues_per_doubling": 0.5999999999999996,
+          "saturates": false
+        },
+        "r=10": {
+          "count_in_disc": [
+            20,
+            24,
+            28,
+            32
+          ],
+          "new_eigenvalues_per_doubling": 3.9999999999999982,
+          "saturates": false
+        },
+        "r=100": {
+          "count_in_disc": [
+            112,
+            160,
+            204,
+            248
+          ],
+          "new_eigenvalues_per_doubling": 45.199999999999996,
+          "saturates": false
+        }
+      },
+      "saturates": false,
+      "compact_resolvent_hypothesis_holds": false
+    },
+    "positive_control_growing_diagonal": {
+      "sizes": [
+        128,
+        256,
+        512,
+        1024
+      ],
+      "min_abs_eigenvalue": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "per_radius": {
+        "r=1": {
+          "count_in_disc": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "new_eigenvalues_per_doubling": -4.976455199828117e-18,
+          "saturates": true
+        },
+        "r=10": {
+          "count_in_disc": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "new_eigenvalues_per_doubling": 5.611028042184694e-16,
+          "saturates": true
+        },
+        "r=100": {
+          "count_in_disc": [
+            100,
+            100,
+            100,
+            100
+          ],
+          "new_eigenvalues_per_doubling": -1.6157809977107493e-15,
+          "saturates": true
+        }
+      },
+      "saturates": true,
+      "compact_resolvent_hypothesis_holds": true
+    },
+    "control_can_report_the_other_answer": true,
+    "reading": "For a compact resolvent the eigenvalues must leave every bounded set, so the count inside a fixed disc SATURATES.  The control (a diagonal operator with a growing symbol -- Cadiot's Assumption 1 class, BPRT's Weyl-law class) saturates at EVERY radius: the disc of radius r holds exactly floor(r) eigenvalues no matter how far the truncation runs.  Our tail block admits new eigenvalues into every fixed disc at a steady rate per doubling of the truncation, while its smallest eigenvalue modulus DECREASES monotonically -- the spectrum accumulates rather than escaping.  So the resolvent is not compact, and the one theorem in this lineage that needs no nonzero diagonal at all is nevertheless unavailable to us.  Two hypotheses, two independent failures: this is not the l_min obstruction again."
+  },
+  "CDX5_diagonal_conjugation": {
+    "per_weight_family": {
+      "algebraic_s_0.3": {
+        "diagonal_move": 0.0,
+        "offdiagonal_finite_in_float64": true
+      },
+      "algebraic_s_1.0": {
+        "diagonal_move": 0.0,
+        "offdiagonal_finite_in_float64": true
+      },
+      "geometric_1.05": {
+        "diagonal_move": 0.0,
+        "offdiagonal_finite_in_float64": true
+      },
+      "BPRT_Definition_2.8_p_2": {
+        "diagonal_move": 0.0,
+        "offdiagonal_finite_in_float64": true
+      },
+      "factorial_super_polynomial": {
+        "diagonal_move": 0.0,
+        "offdiagonal_finite_in_float64": false
+      }
+    },
+    "all_exactly_zero": true,
+    "families_whose_offdiagonal_overflows_float64": [
+      "factorial_super_polynomial"
+    ],
+    "note_on_the_overflow": "The super-polynomial family's DIAGONAL move is exactly 0.0 like every other family -- exp(lw_i - lw_i) = 1 is exact -- but its OFF-diagonal entries overflow float64.  Recorded rather than hidden: it says a factorial-type weight, which is the only kind that could shrink this operator's Gershgorin radii, is not representable in this arithmetic anyway.  A first draft returned a bare NaN here, which `max()` silently skipped and reported as a clean 0.0 -- a missing measurement wearing the costume of agreement.",
+    "control_dense_conjugation_move": 1787.4464882606662,
+    "control_reports_the_other_answer": true,
+    "reading": "A diagonal change of basis moves the diagonal by EXACTLY 0.0 in every weight family tried, including BPRT's own Definition 2.8 and a super-polynomial one this repository has never used.  A non-diagonal conjugation on the same matrix through the same path moves it.  This is the mechanism-level reason leg 52's weight search could not have repaired a zero diagonal, and it is why BPRT's first change of basis is not a candidate."
+  },
+  "CDX6_gate": {
+    "question": "Does Cadiot arXiv:2505.03091, at full-text depth (including any construction, remark, or forward citation it contains), suggest a concrete alternative construction or adaptation applicable to the A21 != 0 class that has not already been tried in this repository (by leg 54's battery, leg 58's theorem, or leg 127's in-progress work)?",
+    "answer": "no",
+    "pre_committed_no_branch": "Cadiot's construction is confirmed to offer nothing beyond its own settled scope.  Bank the ledger entry; this closes the 'unmined literature' question for this specific source.",
+    "why": "Every preconditioning construction in the paper and in its most relevant citation induces A21 = 0 (CDX2, CDX3); the one theorem that drops the nonzero-diagonal hypothesis outright (BPRT Theorem 2.6) is an eigenvalue enclosure rather than an approximate inverse AND fails its own compact- resolvent hypothesis on our operator (CDX4); the diagonal change of basis provably cannot move a zero diagonal (CDX5); and the one genuinely shape-matching argument (SYSTEMS_ELIMINATION) confirms leg 127's chosen proof shape rather than supplying a new one.",
+    "for_leg_127": "RELAY, NOT ESCALATION.  Two things are worth leg 127's attention and neither reverses a banked conclusion.  (1) Cadiot section 5.3 / Theorem 5.5 eq. (46) is a PUBLISHED WORKED INSTANCE of exactly the two-direction elimination DIRECTION.md ### 127 proposes -- the literature uses that shape, which is mild evidence the approach is the right one.  (2) The mechanism-level statement 'no published construction in this lineage conjugates the TAIL' (CDX3) is sharper than 'no published construction covers us', and it localizes precisely where an A21 != 0 construction would have to be original."
+  },
+  "ceiling": "Two papers is not a corpus and a corpus is not a theorem.  Every quote is transcribed from a full text by a human-equivalent process and is exactly as good as that; every row carries its URL so the next pass can check rather than trust.  All numbers are float64 measurements of finite truncations, no intervals.  Farid-Lancaster [FL91] is STILL NOT OBTAINED -- its hypotheses are now known only secondhand, from BPRT section 2.1, and that is recorded rather than glossed.  This leg builds and tests NO construction (its gate forbids it), is not evidence FOR leg 58's proposition, does not reopen leg 62's NO, and does not lift any standing ban.  No link of the L1->L4 chain moved.",
+  "elapsed_s": 113.15
+}

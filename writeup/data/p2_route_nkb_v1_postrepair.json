@@ -1,0 +1,5906 @@
+{
+  "leg": 147,
+  "route": "NKB",
+  "environment": {
+    "numpy": "2.5.1",
+    "python": "3.12.3"
+  },
+  "control_drift_diagnosis": {
+    "what_is_compared": "the pre-repair blob d7c65df through leg 116's own driver, against leg 116's banked JSON -- SAME SOURCE both sides, so leg 128's repair cannot appear in this number",
+    "leaves_moved": 22,
+    "leaves_compared": 763,
+    "moved_at_or_below_3_ulp": 20,
+    "moved_above_3_ulp": [
+      "relative_slack",
+      "relative_slack"
+    ],
+    "worst_relative_on_a_directly_computed_leaf": 3.3309487814636335e-16,
+    "moved_on_a_path_that_never_calls_nk_bounds": 6,
+    "cancellation_amplified_leaves": [
+      "relative_slack",
+      "relative_slack"
+    ],
+    "cancellation_mechanism": "relative_slack = (module - reference)/reference with slack ~8.4e-05, so a 1e-16 move in `module` is amplified ~1.2e4x into ~3.8e-12",
+    "verdict": "environmental float drift between leg 116's run and this one, not a repair regression: it is present in quantities the repair never touched and in quantities the module never computes"
+  },
+  "module": "solver/nk_bounds.py",
+  "shared_guard": "solver/certificate_guards.py",
+  "repair_commit": "bfe6883",
+  "pre_repair_blob_commit": "d7c65df",
+  "question": "Post-repair, does solver/nk_bounds.py reject every one of leg 116's 21 false-closing cases in an INDEPENDENT re-run from the battery's own driver, and reproduce every clean-call result bit-identically?",
+  "harness": {
+    "battery_driver": "experiments/p2_route_nka_v1_adversarial.py",
+    "battery_aborts_unmodified": true,
+    "abort_site": "family_B, B2 loop -- farfield_modelling_error_bound called bare",
+    "abort_cases_rerouted": 4,
+    "reroute_idiom": "the try/except that B5 and B6 in the same family already use",
+    "families_run_unmodified": [
+      "family_P",
+      "family_A",
+      "family_B(out_alphas=())",
+      "family_C"
+    ],
+    "pre_repair_source_bytes": 16676
+  },
+  "control_pre_repair_reproduces_leg_116": {
+    "banked_totals": {
+      "cases": 105,
+      "hypothesis_violating": 52,
+      "false_accepts": 21,
+      "false_bounds": 12,
+      "load_bearing": 19,
+      "degenerate_balls": 14,
+      "raised": 4
+    },
+    "replayed_totals": {
+      "cases": 105,
+      "hypothesis_violating": 52,
+      "false_accepts": 21,
+      "false_bounds": 12,
+      "load_bearing": 19,
+      "degenerate_balls": 14,
+      "raised": 4,
+      "rejected": 14,
+      "sound": 54
+    },
+    "totals_agree_on_every_banked_key": true,
+    "totals_disagreements": {},
+    "cases_in_banked": 105,
+    "cases_replayed": 105,
+    "names_matched": 105,
+    "values_compared": 763,
+    "values_moved": 22,
+    "bit_identical": 741,
+    "worst_ulp_distance": 23840,
+    "worst_relative_difference": 3.847279809210844e-12,
+    "moved_leaves_on_a_pure_reference_path": 6,
+    "moved_detail": [
+      {
+        "case": "B3_Iout_a1.2_X1e+14",
+        "field": "reference",
+        "pre": 1.1306242151453824e-13,
+        "post": 1.1306242151453825e-13,
+        "ulps": 1,
+        "relative_difference": 1.1163545158913128e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B3_Iout_a1.2_X1e+14",
+        "field": "reference_over_module",
+        "pre": 0.10833600727070226,
+        "post": 0.10833600727070228,
+        "ulps": 1,
+        "relative_difference": 1.2809949487189088e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.5_X3e+07",
+        "field": "module",
+        "pre": 1.638662320849087e-07,
+        "post": 1.6386623208490874e-07,
+        "ulps": 2,
+        "relative_difference": 3.2306570139455386e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.5_X3e+07",
+        "field": "reference_over_module",
+        "pre": 0.9999160276526254,
+        "post": 0.9999160276526251,
+        "ulps": 3,
+        "relative_difference": 3.3309487814636335e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.5_X3e+07",
+        "field": "relative_slack",
+        "pre": 8.397939932186869e-05,
+        "post": 8.397939932219179e-05,
+        "ulps": 23840,
+        "relative_difference": 3.847279809210844e-12,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.9_X1e+02",
+        "field": "module",
+        "pre": 0.03335858604951444,
+        "post": 0.033358586049514444,
+        "ulps": 1,
+        "relative_difference": 2.0800923317336557e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.9_X1e+02",
+        "field": "reference_over_module",
+        "pre": 0.9999185478903782,
+        "post": 0.9999185478903779,
+        "ulps": 2,
+        "relative_difference": 2.220626923997956e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B3_Iout_a1.9_X1e+02",
+        "field": "relative_slack",
+        "pre": 8.145874460849757e-05,
+        "post": 8.145874460870559e-05,
+        "ulps": 15349,
+        "relative_difference": 2.55365756393943e-12,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_-0.05",
+        "field": "bound",
+        "pre": -0.5548342458108368,
+        "post": -0.554834245810837,
+        "ulps": 1,
+        "relative_difference": 2.000999457058878e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_-0.05",
+        "field": "gamma_half_reference",
+        "pre": 0.27968059446756166,
+        "post": 0.2796805944675616,
+        "ulps": 1,
+        "relative_difference": 1.9848052503226572e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B5_gamma_-0.05",
+        "field": "out_part",
+        "pre": 0.11893390188713973,
+        "post": 0.1189339018871397,
+        "ulps": 2,
+        "relative_difference": 2.3336975559724834e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_-0.5",
+        "field": "bound",
+        "pre": 0.09645452301861636,
+        "post": 0.09645452301861634,
+        "ulps": 1,
+        "relative_difference": 1.43879077657519e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_-0.5",
+        "field": "gamma_half_reference",
+        "pre": 0.27968059446756166,
+        "post": 0.2796805944675616,
+        "ulps": 1,
+        "relative_difference": 1.9848052503226572e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B5_gamma_-0.5",
+        "field": "out_part",
+        "pre": 0.11893390188713973,
+        "post": 0.1189339018871397,
+        "ulps": 2,
+        "relative_difference": 2.3336975559724834e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_0.0",
+        "field": "gamma_half_reference",
+        "pre": 0.27968059446756166,
+        "post": 0.2796805944675616,
+        "ulps": 1,
+        "relative_difference": 1.9848052503226572e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B5_gamma_1.5",
+        "field": "bound",
+        "pre": 0.32456775705015867,
+        "post": 0.3245677570501586,
+        "ulps": 1,
+        "relative_difference": 1.7103100978289454e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_1.5",
+        "field": "gamma_half_reference",
+        "pre": 0.27968059446756166,
+        "post": 0.2796805944675616,
+        "ulps": 1,
+        "relative_difference": 1.9848052503226572e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B5_gamma_1.5",
+        "field": "out_part",
+        "pre": 0.11893390188713973,
+        "post": 0.1189339018871397,
+        "ulps": 2,
+        "relative_difference": 2.3336975559724834e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B5_gamma_3.0",
+        "field": "gamma_half_reference",
+        "pre": 0.27968059446756166,
+        "post": 0.2796805944675616,
+        "ulps": 1,
+        "relative_difference": 1.9848052503226572e-16,
+        "pure_reference_leaf": true
+      },
+      {
+        "case": "B5_gamma_3.0",
+        "field": "out_part",
+        "pre": 0.11893390188713973,
+        "post": 0.1189339018871397,
+        "ulps": 2,
+        "relative_difference": 2.3336975559724834e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B7_CQ_window_a1.9",
+        "field": "default_window",
+        "pre": 2.552202107802706,
+        "post": 2.5522021078027057,
+        "ulps": 1,
+        "relative_difference": 1.7400236779539255e-16,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "B7_CQ_window_a1.9",
+        "field": "wide_over_default",
+        "pre": 0.9999939131712318,
+        "post": 0.9999939131712319,
+        "ulps": 1,
+        "relative_difference": 1.1102297824037355e-16,
+        "pure_reference_leaf": false
+      }
+    ]
+  },
+  "clause_a_false_closing_cases": {
+    "survivor_classes": {
+      "P02_Y0_fabricated_zero": "flagged_degenerate",
+      "P06_Z2_shrunk_1e-6": "silent",
+      "P09_Y0_tiny_fabricated": "flagged_degenerate",
+      "A05_Y0_zero_fabricated": "flagged_degenerate"
+    },
+    "survivors_flagged_degenerate": 3,
+    "survivors_with_no_signal_at_all": 1,
+    "silent_survivor_cases": [
+      "P06_Z2_shrunk_1e-6"
+    ],
+    "banked_false_accepts": 21,
+    "now_rejected": 17,
+    "still_closing": 4,
+    "still_closing_and_load_bearing": 4,
+    "capabilities_ledger_claim": "17 of the 21 reject",
+    "independent_rerun_agrees_with_ledger": true,
+    "rows": [
+      {
+        "case": "P02_Y0_fabricated_zero",
+        "family": "P",
+        "constants_fed": {
+          "Y0": 0.0,
+          "Z0": 0.2857142857142857,
+          "Z1": 0.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.0,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": true,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "false_accept",
+          "closes": true,
+          "r_min": 0.0,
+          "degenerate_ball": true,
+          "reason": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius.",
+          "violations": null
+        },
+        "disposition": "still_closes",
+        "survivor_class": "flagged_degenerate"
+      },
+      {
+        "case": "P03_Y0_sign_flipped",
+        "family": "P",
+        "constants_fed": {
+          "Y0": -0.35714285714285715,
+          "Z0": 0.2857142857142857,
+          "Z1": 0.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -0.3660254037844386,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": true,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "P04_Z0_negative_unit",
+        "family": "P",
+        "constants_fed": {
+          "Y0": 0.35714285714285715,
+          "Z0": -1.0,
+          "Z1": 0.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.19169540264054277,
+          "ball_lo": 0.8083045973594573,
+          "ball_hi": 1.1916954026405429,
+          "degenerate_ball": false,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": 1.1607902780527646,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_0 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "P05_Z1_negative_unit",
+        "family": "P",
+        "constants_fed": {
+          "Y0": 0.35714285714285715,
+          "Z0": 0.2857142857142857,
+          "Z1": -1.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.23046402851673412,
+          "ball_lo": 0.7695359714832659,
+          "ball_hi": 1.230464028516734,
+          "degenerate_ball": false,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": 0.7973024468893153,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_1 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "P06_Z2_shrunk_1e-6",
+        "family": "P",
+        "constants_fed": {
+          "Y0": 0.35714285714285715,
+          "Z0": 0.2857142857142857,
+          "Z1": 0.0,
+          "Z2": 1e-06
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.5000003500121863,
+          "ball_lo": 0.49999964998781365,
+          "ball_hi": 1.5000003500121863,
+          "degenerate_ball": false,
+          "contains_a_zero": true,
+          "gap_in_ball_radii": 0.0,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "false_accept",
+          "closes": true,
+          "r_min": 0.5000003500121863,
+          "degenerate_ball": false,
+          "reason": null,
+          "violations": null
+        },
+        "disposition": "still_closes",
+        "survivor_class": "silent"
+      },
+      {
+        "case": "P08_Y0_negative_and_Z0_negative",
+        "family": "P",
+        "constants_fed": {
+          "Y0": -0.35714285714285715,
+          "Z0": -1.0,
+          "Z1": 0.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -0.16843871413581205,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": true,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm; Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm",
+            "Z_0 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "P09_Y0_tiny_fabricated",
+        "family": "P",
+        "constants_fed": {
+          "Y0": 1e-300,
+          "Z0": 0.2857142857142857,
+          "Z1": 0.0,
+          "Z2": 0.7142857142857143
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.0,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": true,
+          "contains_a_zero": false,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "false_accept",
+          "closes": true,
+          "r_min": 0.0,
+          "degenerate_ball": true,
+          "reason": "DEGENERATE_BALL (not refused): r_min underflowed to 0.0 with Y_0 = 1e-300 > 0. The true root is strictly positive but below float resolution (4*Z_2*Y_0 = 2.8571428571428573e-300 against one_minus^2 = 0.5102040816326531), so the ball is real but its radius is not resolved here. Flagged so a caller does not read it as a ball of positive radius.",
+          "violations": null
+        },
+        "disposition": "still_closes",
+        "survivor_class": "flagged_degenerate"
+      },
+      {
+        "case": "A02_Y0_negative_unit",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -1.0,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -0.7094810050208545,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A03_Y0_negative_tiny",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -1e-12,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -1.4285794769364202e-12,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-12); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-1e-12); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A04_Y0_negative_huge",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -1000000000000.0,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -999999.6500000613,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1000000000000.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-1000000000000.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A05_Y0_zero_fabricated",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 0.0,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.0,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "false_accept",
+          "closes": true,
+          "r_min": 0.0,
+          "degenerate_ball": true,
+          "reason": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius.",
+          "violations": null
+        },
+        "disposition": "still_closes",
+        "survivor_class": "flagged_degenerate"
+      },
+      {
+        "case": "A06_Y0_neg_inf",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -Infinity,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -Infinity,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is -infinite (a norm bound is finite by hypothesis)"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A10_Z0_negative_huge",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": -1000000.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 1.00000761449337e-06,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_0 is negative (-1000000.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A11_Z0_neg_inf",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": -Infinity,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": NaN,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
+          "violations": [
+            "Z_0 is -infinite (a norm bound is finite by hypothesis)"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A13_Z1_negative_unit",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": 0.0,
+          "Z1": -1.0,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 1.0,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_1 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A14_Z1_negative_huge",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": 0.0,
+          "Z1": -1000000.0,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 1.00000761449337e-06,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_1 is negative (-1000000.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A15_Z1_neg_inf",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": 0.0,
+          "Z1": -Infinity,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": NaN,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
+          "violations": [
+            "Z_1 is -infinite (a norm bound is finite by hypothesis)"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A21_Z2_denormal",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1.0,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1e-320
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 0.0,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": 0.0,
+          "degenerate_ball": true,
+          "reason": "INVALID_BUDGET: Y0_max = one_minus^2/(4*Z_2) is inf with Z_2 = 1e-320. Z_2 has underflowed, so the radii polynomial is no longer the quadratic this function certifies and no budget was established.",
+          "violations": null
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A22_Y0_neg_Z1_neg",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -1.0,
+          "Z0": 0.0,
+          "Z1": -1.0,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -0.41421356237309515,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": true
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm; Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-1.0); it is an upper bound on a norm",
+            "Z_1 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A25_Y0_negative_on_closing",
+        "family": "A",
+        "constants_fed": {
+          "Y0": -1e-06,
+          "Z0": 0.0,
+          "Z1": 0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": -1.428568513150985e-06,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": false
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-06); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Y_0 is negative (-1e-06); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      },
+      {
+        "case": "A26_Z1_negative_on_closing",
+        "family": "A",
+        "constants_fed": {
+          "Y0": 1e-06,
+          "Z0": 0.0,
+          "Z1": -0.3,
+          "Z2": 1.0
+        },
+        "pre_repair": {
+          "closes": true,
+          "r_min": 7.692312243845478e-07,
+          "ball_lo": null,
+          "ball_hi": null,
+          "degenerate_ball": null,
+          "contains_a_zero": null,
+          "gap_in_ball_radii": null,
+          "load_bearing": false
+        },
+        "post_repair": {
+          "found_in_rerun": true,
+          "outcome": "rejected",
+          "closes": false,
+          "r_min": NaN,
+          "degenerate_ball": null,
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-0.3); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_1 is negative (-0.3); it is an upper bound on a norm"
+          ]
+        },
+        "disposition": "rejected"
+      }
+    ],
+    "survivor_cases": [
+      "P02_Y0_fabricated_zero",
+      "P06_Z2_shrunk_1e-6",
+      "P09_Y0_tiny_fabricated",
+      "A05_Y0_zero_fabricated"
+    ]
+  },
+  "clause_b_clean_call_bit_identity": {
+    "values_compared": 359,
+    "values_moved": 0,
+    "bit_identical": 359,
+    "worst_ulp_distance": 0,
+    "worst_relative_difference": 0.0,
+    "moved_leaves_on_a_pure_reference_path": 0,
+    "moved_detail": [],
+    "scope": "the 53 hypothesis-SATISFYING cases of leg 116's battery, compared pre vs post in ONE process. This is NOT an attempt to reproduce capabilities.py's '4527/4527 clean values' -- that count comes from leg 128's own bench (experiments/p2_route_nkr_v1_repair.py) over a different case set, and using the repair's own case list to check the repair would be the circularity this leg exists to avoid. The two numbers are independent evidence for the same claim."
+  },
+  "all_case_bit_identity": {
+    "values_compared": 714,
+    "values_moved": 58,
+    "bit_identical": 656,
+    "worst_ulp_distance": 18439988674268495872,
+    "worst_relative_difference": 1.0,
+    "moved_leaves_on_a_pure_reference_path": 0,
+    "moved_detail": [
+      {
+        "case": "A02_Y0_negative_unit",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A02_Y0_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A02_Y0_negative_unit",
+        "field": "verdict.r_min",
+        "pre": -0.7094810050208545,
+        "post": NaN,
+        "ulps": 13825685893366043707,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A03_Y0_negative_tiny",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A03_Y0_negative_tiny",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A03_Y0_negative_tiny",
+        "field": "verdict.r_min",
+        "pre": -1.4285794769364202e-12,
+        "post": NaN,
+        "ulps": 13650729054054121472,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A04_Y0_negative_huge",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A04_Y0_negative_huge",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A04_Y0_negative_huge",
+        "field": "verdict.r_min",
+        "pre": -999999.6500000613,
+        "post": NaN,
+        "ulps": 13917957380719300315,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A06_Y0_neg_inf",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A06_Y0_neg_inf",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A06_Y0_neg_inf",
+        "field": "verdict.r_min",
+        "pre": -Infinity,
+        "post": NaN,
+        "ulps": 18439988674268495872,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A07_Y0_pos_inf",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A07_Y0_pos_inf",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A08_Y0_nan",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A08_Y0_nan",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A09_Z0_negative_unit",
+        "field": "verdict.Y0_max",
+        "pre": 0.7224999999999999,
+        "post": 0.0,
+        "ulps": 4604682921006826782,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A09_Z0_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 1.7,
+        "post": NaN,
+        "ulps": 4610785298501913805,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A10_Z0_negative_huge",
+        "field": "verdict.Y0_max",
+        "pre": 250000350000.12247,
+        "post": 0.0,
+        "ulps": 4777504016854159277,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A10_Z0_negative_huge",
+        "field": "verdict.one_minus_Z",
+        "pre": 1000000.7,
+        "post": NaN,
+        "ulps": 4524283084343450010,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A10_Z0_negative_huge",
+        "field": "verdict.r_min",
+        "pre": 1.00000761449337e-06,
+        "post": NaN,
+        "ulps": 4703791007974555648,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A11_Z0_neg_inf",
+        "field": "verdict.Y0_max",
+        "pre": Infinity,
+        "post": 0.0,
+        "ulps": 9218868437227405312,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A11_Z0_neg_inf",
+        "field": "verdict.one_minus_Z",
+        "pre": Infinity,
+        "post": NaN,
+        "ulps": 2251799813685248,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A13_Z1_negative_unit",
+        "field": "verdict.Y0_max",
+        "pre": 1.0,
+        "post": 0.0,
+        "ulps": 4607182418800017408,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A13_Z1_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 2.0,
+        "post": NaN,
+        "ulps": 4609434218613702656,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A13_Z1_negative_unit",
+        "field": "verdict.r_min",
+        "pre": 1.0,
+        "post": NaN,
+        "ulps": 4613937818241073152,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A14_Z1_negative_huge",
+        "field": "verdict.Y0_max",
+        "pre": 250000500000.25,
+        "post": 0.0,
+        "ulps": 4777504021769363456,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A14_Z1_negative_huge",
+        "field": "verdict.one_minus_Z",
+        "pre": 1000001.0,
+        "post": NaN,
+        "ulps": 4524283081766469632,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A14_Z1_negative_huge",
+        "field": "verdict.r_min",
+        "pre": 1.00000761449337e-06,
+        "post": NaN,
+        "ulps": 4703791007974555648,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A15_Z1_neg_inf",
+        "field": "verdict.Y0_max",
+        "pre": Infinity,
+        "post": 0.0,
+        "ulps": 9218868437227405312,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A15_Z1_neg_inf",
+        "field": "verdict.one_minus_Z",
+        "pre": Infinity,
+        "post": NaN,
+        "ulps": 2251799813685248,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A17_Z2_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A19_Z2_nan",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A20_Z2_pos_inf",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A22_Y0_neg_Z1_neg",
+        "field": "verdict.Y0_max",
+        "pre": 1.0,
+        "post": 0.0,
+        "ulps": 4607182418800017408,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A22_Y0_neg_Z1_neg",
+        "field": "verdict.one_minus_Z",
+        "pre": 2.0,
+        "post": NaN,
+        "ulps": 4609434218613702656,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A22_Y0_neg_Z1_neg",
+        "field": "verdict.r_min",
+        "pre": -0.41421356237309515,
+        "post": NaN,
+        "ulps": 13822253665139617588,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A23_Y0_neg_Z0Z1_sum_above_1",
+        "field": "verdict.one_minus_Z",
+        "pre": -0.8,
+        "post": NaN,
+        "ulps": 13826501215990159770,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A24_all_four_negative",
+        "field": "verdict.one_minus_Z",
+        "pre": 3.0,
+        "post": NaN,
+        "ulps": 4607182418800017408,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A25_Y0_negative_on_closing",
+        "field": "verdict.Y0_max",
+        "pre": 0.12249999999999998,
+        "post": 0.0,
+        "ulps": 4593491475932811099,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A25_Y0_negative_on_closing",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7,
+        "post": NaN,
+        "ulps": 4616639978017495450,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A25_Y0_negative_on_closing",
+        "field": "verdict.r_min",
+        "pre": -1.428568513150985e-06,
+        "post": NaN,
+        "ulps": 13740473287731314688,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A26_Z1_negative_on_closing",
+        "field": "verdict.Y0_max",
+        "pre": 0.42250000000000004,
+        "post": 0.0,
+        "ulps": 4601282703288162059,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A26_Z1_negative_on_closing",
+        "field": "verdict.one_minus_Z",
+        "pre": 1.3,
+        "post": NaN,
+        "ulps": 4612586738352862003,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "A26_Z1_negative_on_closing",
+        "field": "verdict.r_min",
+        "pre": 7.692312243845478e-07,
+        "post": NaN,
+        "ulps": 4705751826540003328,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P03_Y0_sign_flipped",
+        "field": "verdict.Y0_max",
+        "pre": 0.17857142857142858,
+        "post": 0.0,
+        "ulps": 4595601734043921847,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P03_Y0_sign_flipped",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7142857142857143,
+        "post": NaN,
+        "ulps": 4616511303742427721,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P03_Y0_sign_flipped",
+        "field": "verdict.r_min",
+        "pre": -0.3660254037844386,
+        "post": NaN,
+        "ulps": 13821385584447363412,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P04_Z0_negative_unit",
+        "field": "verdict.Y0_max",
+        "pre": 1.4,
+        "post": 0.0,
+        "ulps": 4608983858650965606,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P04_Z0_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 2.0,
+        "post": NaN,
+        "ulps": 4609434218613702656,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P04_Z0_negative_unit",
+        "field": "verdict.r_min",
+        "pre": 0.19169540264054277,
+        "post": NaN,
+        "ulps": 4625045661999350451,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P05_Z1_negative_unit",
+        "field": "verdict.Y0_max",
+        "pre": 1.0285714285714287,
+        "post": 0.0,
+        "ulps": 4607311093075085137,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P05_Z1_negative_unit",
+        "field": "verdict.one_minus_Z",
+        "pre": 1.7142857142857144,
+        "post": NaN,
+        "ulps": 4610720961364379940,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P05_Z1_negative_unit",
+        "field": "verdict.r_min",
+        "pre": 0.23046402851673412,
+        "post": NaN,
+        "ulps": 4623648875046952999,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P07_Z2_negative",
+        "field": "verdict.one_minus_Z",
+        "pre": 0.7142857142857143,
+        "post": NaN,
+        "ulps": 4616511303742427721,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P08_Y0_negative_and_Z0_negative",
+        "field": "verdict.Y0_max",
+        "pre": 1.4,
+        "post": 0.0,
+        "ulps": 4608983858650965606,
+        "relative_difference": 1.0,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P08_Y0_negative_and_Z0_negative",
+        "field": "verdict.one_minus_Z",
+        "pre": 2.0,
+        "post": NaN,
+        "ulps": 4609434218613702656,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      },
+      {
+        "case": "P08_Y0_negative_and_Z0_negative",
+        "field": "verdict.r_min",
+        "pre": -0.16843871413581205,
+        "post": NaN,
+        "ulps": 13816356901573360453,
+        "relative_difference": NaN,
+        "pure_reference_leaf": false
+      }
+    ]
+  },
+  "capabilities_ledger_magnitudes": {
+    "iout_crossover": {
+      "ledger_text": "_I_out's log-grid floor falls 2.12% below the truth from X=1e11 ... X > 1e10 WARNS instead, and the live range tops out at X=3.2e7, 3.49 decades clear",
+      "worst_under_report_percent": 2.124130335509977,
+      "worst_at_X": 1000000000000.0,
+      "first_X_where_module_falls_below_truth": 100000000000.0,
+      "live_range_max_X": 32000000.0,
+      "decades_of_margin_from_live_range": 3.494850021680094
+    },
+    "iout_warning_behaviour": {
+      "ledger_text": "X > 1e10 WARNS instead",
+      "rows": [
+        {
+          "X": 1000000000.0,
+          "value": 3.3823381543331136e-09,
+          "n_warnings": 0,
+          "warned": false,
+          "first_message": ""
+        },
+        {
+          "X": 10000000000.0,
+          "value": 3.3823378583248665e-10,
+          "n_warnings": 0,
+          "warned": false,
+          "first_message": ""
+        },
+        {
+          "X": 11000000000.0,
+          "value": 3.074852503453872e-10,
+          "n_warnings": 1,
+          "warned": true,
+          "first_message": "_I_out: X = 1.100e+10 is above the validated ceiling 1.000e+10. The bulk grid's floor eps = 1e-12*max(X,1) = 1.100e-02 approaches the mass scale y = O(1) of (1+y^2)^(-alpha/2), and leg 116 measured th"
+        },
+        {
+          "X": 100000000000.0,
+          "value": 3.3820270552486455e-11,
+          "n_warnings": 1,
+          "warned": true,
+          "first_message": "_I_out: X = 1.000e+11 is above the validated ceiling 1.000e+10. The bulk grid's floor eps = 1e-12*max(X,1) = 1.000e-01 approaches the mass scale y = O(1) of (1+y^2)^(-alpha/2), and leg 116 measured th"
+        },
+        {
+          "X": 1000000000000.0,
+          "value": 3.3117091037798056e-12,
+          "n_warnings": 1,
+          "warned": true,
+          "first_message": "_I_out: X = 1.000e+12 is above the validated ceiling 1.000e+10. The bulk grid's floor eps = 1e-12*max(X,1) = 1.000e+00 approaches the mass scale y = O(1) of (1+y^2)^(-alpha/2), and leg 116 measured th"
+        }
+      ],
+      "warns_above_1e10": true,
+      "silent_at_or_below_1e10": true
+    },
+    "alpha_ge_2_understatement": {
+      "ledger_text": "refuses alpha >= 2 in farfield_modelling_error_bound (it returned a max over a truncated window as a supremum, >5e7x below the truth at alpha=3.0)",
+      "rows": [
+        {
+          "alpha": 2.0,
+          "pre_reference_over_module": 0.9999815082567206,
+          "pre_outcome": "sound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: farfield_modelling_error_bound: alpha is 2.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated win"
+        },
+        {
+          "alpha": 2.25,
+          "pre_reference_over_module": 99.98195798401332,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: farfield_modelling_error_bound: alpha is 2.25, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated wi"
+        },
+        {
+          "alpha": 2.5,
+          "pre_reference_over_module": 9999.024259347394,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: farfield_modelling_error_bound: alpha is 2.5, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated win"
+        },
+        {
+          "alpha": 3.0,
+          "pre_reference_over_module": 99991570.89067742,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: farfield_modelling_error_bound: alpha is 3.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated win"
+        }
+      ]
+    },
+    "dual_bound_drop": {
+      "ledger_text": "refuses non-positive/NaN q_cod or v_cod (the `1/q if q>0 else 0` mask dropped the dual bound 2.19x / 3.57x)",
+      "rows": [
+        {
+          "case": "C01_q_column_zeroed",
+          "pre_honest_over_reported": 2.1901148886391293,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-dia"
+        },
+        {
+          "case": "C02_q_column_negative",
+          "pre_honest_over_reported": 2.1901148886391293,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-dia"
+        },
+        {
+          "case": "C03_q_single_offdiagonal_zero",
+          "pre_honest_over_reported": 1.0,
+          "pre_outcome": "sound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-dia"
+        },
+        {
+          "case": "C04_v_one_negative",
+          "pre_honest_over_reported": 3.567488561080683,
+          "pre_outcome": "false_bound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 no"
+        },
+        {
+          "case": "C05_v_one_zero",
+          "pre_honest_over_reported": 1.0,
+          "pre_outcome": "sound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 no"
+        },
+        {
+          "case": "C06_v_one_nan",
+          "pre_honest_over_reported": null,
+          "pre_outcome": "sound",
+          "post_outcome": "raised",
+          "post_exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 Na"
+        },
+        {
+          "case": "C07_C_has_nan",
+          "pre_honest_over_reported": null,
+          "pre_outcome": "sound",
+          "post_outcome": "sound",
+          "post_exception": ""
+        }
+      ]
+    },
+    "silent_survivor_anatomy": {
+      "case": "P06_Z2_shrunk_1e-6",
+      "why_no_guard_can_see_it": "Z_2 = 1e-06 is finite and strictly positive, so it SATISFIES every hypothesis of the theorem; the lie is about a magnitude, and magnitudes are not hypotheses",
+      "Z2_honest": 0.7142857142857143,
+      "Z2_fed": 1e-06,
+      "Z2_understated_by": 714285.7142857143,
+      "Z2_understated_decades": 5.853871964321762,
+      "honest_verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": false
+      },
+      "shrunk_verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 127551.02040816327,
+        "closes": true,
+        "r_min": 0.5000003500121863,
+        "degenerate_ball": false
+      },
+      "budget_inflated_by": 714285.7142857143,
+      "honest_Y0_over_its_budget": 2.0,
+      "load_bearing": "the honest constants REFUSE at this centre (closes=False, Y_0 exceeds its budget); the shrunk Z_2 is exactly what buys the certificate",
+      "ball": {
+        "radius": 0.5000003500121863,
+        "degenerate": false,
+        "ball_lo": 0.49999964998781365,
+        "ball_hi": 1.5000003500121863,
+        "contains_a_zero": true,
+        "gap_to_nearest_zero": 0.0,
+        "gap_in_ball_radii": 0.0
+      },
+      "ball_contains_a_true_zero": true,
+      "why_that_is_still_not_a_rescue": "the ball [0.49999965, 1.50000035] does happen to contain sqrt(2), so the CONCLUSION is true -- but it is true by accident of a ball of radius 0.50000035 (diameter 1.0000007) around a point whose residual is 1.0, not because anything was certified. This is Route-D v6's banked discrete-ball trap: a bound that is true and useless. The defect is that the module cannot tell the two apart."
+    },
+    "sharpest_banked_ball": {
+      "ledger_text": "the sharpest a certified ball [0.8083, 1.1917] around the NON-solution x=1.0 of F=x^2-2, containing no zero of F and missing sqrt(2) by 1.161 ball radii",
+      "centre": 1.0,
+      "good_centre": 1.4,
+      "rows": [
+        {
+          "module": "pre_repair",
+          "constants": {
+            "Y0": 0.35714285714285715,
+            "Z0": -1.0,
+            "Z1": 0.0,
+            "Z2": 0.7142857142857143
+          },
+          "closes": true,
+          "r_min": 0.19169540264054277,
+          "ball": {
+            "radius": 0.19169540264054277,
+            "degenerate": false,
+            "ball_lo": 0.8083045973594573,
+            "ball_hi": 1.1916954026405429,
+            "contains_a_zero": false,
+            "gap_to_nearest_zero": 0.2225181597325523,
+            "gap_in_ball_radii": 1.1607902780527646
+          },
+          "reason": null,
+          "violations": null
+        },
+        {
+          "module": "post_repair",
+          "constants": {
+            "Y0": 0.35714285714285715,
+            "Z0": -1.0,
+            "Z1": 0.0,
+            "Z2": 0.7142857142857143
+          },
+          "closes": false,
+          "r_min": NaN,
+          "ball": {
+            "radius": null,
+            "degenerate": null,
+            "ball_lo": null,
+            "ball_hi": null,
+            "contains_a_zero": null,
+            "gap_to_nearest_zero": null,
+            "gap_in_ball_radii": null
+          },
+          "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+          "violations": [
+            "Z_0 is negative (-1.0); it is an upper bound on a norm"
+          ]
+        }
+      ]
+    }
+  },
+  "test_suites": {
+    "test_nk_bounds.py": {
+      "path": "test_nk_bounds.py",
+      "returncode": 0,
+      "passed": true,
+      "final_line": "ALL NK-BOUNDS TESTS PASSED",
+      "stderr_tail": []
+    },
+    "test_nk_bounds_adversarial.py": {
+      "path": "test_nk_bounds_adversarial.py",
+      "returncode": 0,
+      "passed": true,
+      "final_line": "ALL 18 ADVERSARIAL GATES PASS (leg 116 measured; leg 128 REPAIRED -- the `test_repaired_*` gates are leg 116's GAP-PINs inverted, the two `test_still_a_gap_*` gates are the honest residue)",
+      "stderr_tail": []
+    },
+    "gate_roll_call": {
+      "holds_gates": [
+        "test_holds_nan_constants_are_rejected",
+        "test_holds_positive_infinity_is_rejected",
+        "test_holds_Z0_plus_Z1_at_or_above_one_is_rejected",
+        "test_holds_negative_and_zero_Z2_are_rejected",
+        "test_holds_nonintegrable_alpha_refuses_instead_of_inventing_a_constant",
+        "test_holds_gamma_zero_raises_rather_than_returning_a_number",
+        "test_holds_bounds_are_sound_across_the_whole_live_operating_range"
+      ],
+      "repaired_gap_pins": [
+        "test_repaired_planted_non_solution_no_longer_survives_a_certified_ball",
+        "test_repaired_negative_Y0_is_refused_and_a_negative_radius_is_unreachable",
+        "test_repaired_negative_Z0_or_Z1_no_longer_rescues_a_hopeless_certificate",
+        "test_repaired_alpha_at_or_above_2_raises_and_the_window_end_is_flagged",
+        "test_repaired_gamma_outside_the_holder_range_raises",
+        "test_repaired_two_point_dual_raises_on_nonpositive_kernel_or_weight_entries",
+        "test_repaired_all_three_modules_share_one_guard"
+      ],
+      "still_a_gap_gates": [
+        "test_still_a_gap_fabricated_MAGNITUDE_is_not_detectable_by_a_hypothesis_guard",
+        "test_still_a_gap_Iout_log_grid_floor_undercuts_the_truth_past_X_1e11_but_now_WARNS"
+      ],
+      "controls": [
+        "test_control_honest_certificate_closes_and_refuses",
+        "test_control_reference_integrator_reproduces_the_published_asymptote"
+      ],
+      "total_gates_defined": 18,
+      "suite_final_line": "ALL 18 ADVERSARIAL GATES PASS (leg 116 measured; leg 128 REPAIRED -- the `test_repaired_*` gates are leg 116's GAP-PINs inverted, the two `test_still_a_gap_*` gates are the honest residue)",
+      "all_reported_passing": true,
+      "n_holds_gates": 7,
+      "n_repaired_gap_pins": 7,
+      "n_still_a_gap_gates": 2,
+      "n_controls": 2
+    }
+  },
+  "reachability_pre": [
+    {
+      "J": 125,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5664823368707272,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000493495643554,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 125,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8432716208934751,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000041453470404,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 125,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35951892377329947,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000572457206525,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5653269387106672,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000123371018965,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8427384275041359,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000010363155365,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35820859008626893,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000143110523243,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5647560143070912,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000030842574001,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8424788029631832,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000025907755767,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35755981095941736,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000003577739467,
+      "n_w_nonpositive": 0
+    }
+  ],
+  "reachability_post": [
+    {
+      "J": 125,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5664823368707272,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000493495643554,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 125,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8432716208934751,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000041453470404,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 125,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35951892377329947,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000572457206525,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5653269387106672,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000123371018965,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8427384275041359,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000010363155365,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 250,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35820859008626893,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000143110523243,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "min_offdiagonal_pair": 0.5647560143070912,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000030842574001,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "min_offdiagonal_pair": 0.8424788029631832,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.0000025907755767,
+      "n_w_nonpositive": 0
+    },
+    {
+      "J": 500,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "min_offdiagonal_pair": 0.35755981095941736,
+      "n_offdiagonal_nonpositive": 0,
+      "min_w": 1.000003577739467,
+      "n_w_nonpositive": 0
+    }
+  ],
+  "totals_pre": {
+    "cases": 105,
+    "hypothesis_violating": 52,
+    "false_accepts": 21,
+    "false_bounds": 12,
+    "load_bearing": 19,
+    "degenerate_balls": 14,
+    "raised": 4,
+    "rejected": 14,
+    "sound": 54
+  },
+  "totals_post": {
+    "cases": 105,
+    "hypothesis_violating": 52,
+    "false_accepts": 4,
+    "false_bounds": 4,
+    "load_bearing": 4,
+    "degenerate_balls": 3,
+    "raised": 18,
+    "rejected": 31,
+    "sound": 48
+  },
+  "cases_pre": [
+    {
+      "case": "P00_control_honest_good_centre",
+      "family": "P",
+      "hypothesis_violating": false,
+      "centre": 1.4,
+      "constants": {
+        "Y0": 0.014285714285714377,
+        "Z0": 0.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": 1.0,
+        "Y0_max": 0.35,
+        "closes": true,
+        "r_min": 0.01443453995989572
+      },
+      "outcome": "sound",
+      "ball": {
+        "radius": 0.01443453995989572,
+        "degenerate": false,
+        "ball_lo": 1.3855654600401042,
+        "ball_hi": 1.4144345399598957,
+        "contains_a_zero": true,
+        "gap_to_nearest_zero": 0.0,
+        "gap_in_ball_radii": 0.0
+      },
+      "note": "the honest certificate must still CLOSE at a genuine approximate zero"
+    },
+    {
+      "case": "P01_control_honest_planted_point",
+      "family": "P",
+      "hypothesis_violating": false,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "honest constants at the planted non-solution must REFUSE -- they do"
+    },
+    {
+      "case": "P02_Y0_fabricated_zero",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.0,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": true,
+        "r_min": 0.0
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": 0.0,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a residual reported as exactly zero -- leg 98's A1 case, in this module"
+    },
+    {
+      "case": "P03_Y0_sign_flipped",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": -0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": -0.35714285714285715
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": true,
+        "r_min": -0.3660254037844386
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": -0.3660254037844386,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a signed residual used where its absolute value was meant"
+    },
+    {
+      "case": "P04_Z0_negative_unit",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": -1.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 2.0,
+        "Y0_max": 1.4,
+        "closes": true,
+        "r_min": 0.19169540264054277
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": 0.19169540264054277,
+        "degenerate": false,
+        "ball_lo": 0.8083045973594573,
+        "ball_hi": 1.1916954026405429,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.2225181597325523,
+        "gap_in_ball_radii": 1.1607902780527646
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_0: the theorem's contraction budget inflated from 0.71 to 2"
+    },
+    {
+      "case": "P05_Z1_negative_unit",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": -1.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 1.7142857142857144,
+        "Y0_max": 1.0285714285714287,
+        "closes": true,
+        "r_min": 0.23046402851673412
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": 0.23046402851673412,
+        "degenerate": false,
+        "ball_lo": 0.7695359714832659,
+        "ball_hi": 1.230464028516734,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.18374953385636106,
+        "gap_in_ball_radii": 0.7973024468893153
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_1, the same inflation through the other slot"
+    },
+    {
+      "case": "P06_Z2_shrunk_1e-6",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 1e-06
+      },
+      "poison": {
+        "Z2": 1e-06
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 127551.02040816327,
+        "closes": true,
+        "r_min": 0.5000003500121863
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": 0.5000003500121863,
+        "degenerate": false,
+        "ball_lo": 0.49999964998781365,
+        "ball_hi": 1.5000003500121863,
+        "contains_a_zero": true,
+        "gap_to_nearest_zero": 0.0,
+        "gap_in_ball_radii": 0.0
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a quadratic constant under-reported by six decades"
+    },
+    {
+      "case": "P07_Z2_negative",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": -0.7142857142857143
+      },
+      "poison": {
+        "Z2": -0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_2 -- the parabola opens downward"
+    },
+    {
+      "case": "P08_Y0_negative_and_Z0_negative",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": -0.35714285714285715,
+        "Z0": -1.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": -0.35714285714285715,
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 2.0,
+        "Y0_max": 1.4,
+        "closes": true,
+        "r_min": -0.16843871413581205
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": -0.16843871413581205,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "two violations at once"
+    },
+    {
+      "case": "P09_Y0_tiny_fabricated",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 1e-300,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": 1e-300
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": true,
+        "r_min": 0.0
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": 0.0,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a denormal-scale fabricated residual, not exactly zero"
+    },
+    {
+      "case": "A00_control_honest_closes",
+      "family": "A",
+      "hypothesis_violating": false,
+      "constants": {
+        "Y0": 1e-06,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": 1.4285743440423104e-06
+      },
+      "outcome": "sound"
+    },
+    {
+      "case": "A01_control_honest_hopeless",
+      "family": "A",
+      "hypothesis_violating": false,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected"
+    },
+    {
+      "case": "A02_Y0_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": -0.7094810050208545
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A03_Y0_negative_tiny",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1e-12,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1e-12
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": -1.4285794769364202e-12
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A04_Y0_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1000000000000.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1000000000000.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": -999999.6500000613
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A05_Y0_zero_fabricated",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 0.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": 0.0
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A06_Y0_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -Infinity,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": -Infinity
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A07_Y0_pos_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": Infinity,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": Infinity
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A08_Y0_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": NaN,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": NaN
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A09_Z0_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -1.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 1.7,
+        "Y0_max": 0.7224999999999999,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A10_Z0_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -1000000.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -1000000.0
+      },
+      "verdict": {
+        "one_minus_Z": 1000000.7,
+        "Y0_max": 250000350000.12247,
+        "closes": true,
+        "r_min": 1.00000761449337e-06
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A11_Z0_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -Infinity,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": Infinity,
+        "Y0_max": Infinity,
+        "closes": true,
+        "r_min": NaN
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A12_Z0_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": NaN,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A13_Z1_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -1.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 2.0,
+        "Y0_max": 1.0,
+        "closes": true,
+        "r_min": 1.0
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A14_Z1_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -1000000.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -1000000.0
+      },
+      "verdict": {
+        "one_minus_Z": 1000001.0,
+        "Y0_max": 250000500000.25,
+        "closes": true,
+        "r_min": 1.00000761449337e-06
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A15_Z1_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -Infinity,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": Infinity,
+        "Y0_max": Infinity,
+        "closes": true,
+        "r_min": NaN
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A16_Z1_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": NaN,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A17_Z2_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": -1.0
+      },
+      "poison": {
+        "Z2": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A18_Z2_zero",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 0.0
+      },
+      "poison": {
+        "Z2": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A19_Z2_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": NaN
+      },
+      "poison": {
+        "Z2": NaN
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A20_Z2_pos_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": Infinity
+      },
+      "poison": {
+        "Z2": Infinity
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A21_Z2_denormal",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1e-320
+      },
+      "poison": {
+        "Z2": 1e-320
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": Infinity,
+        "closes": true,
+        "r_min": 0.0
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A22_Y0_neg_Z1_neg",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.0,
+        "Z1": -1.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 2.0,
+        "Y0_max": 1.0,
+        "closes": true,
+        "r_min": -0.41421356237309515
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A23_Y0_neg_Z0Z1_sum_above_1",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.9,
+        "Z1": 0.9,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z0": 0.9,
+        "Z1": 0.9
+      },
+      "verdict": {
+        "one_minus_Z": -0.8,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A24_all_four_negative",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": -1.0,
+        "Z1": -1.0,
+        "Z2": -1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z0": -1.0,
+        "Z1": -1.0,
+        "Z2": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": 3.0,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A25_Y0_negative_on_closing",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1e-06,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1e-06
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": -1.428568513150985e-06
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A26_Z1_negative_on_closing",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1e-06,
+        "Z0": 0.0,
+        "Z1": -0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -0.3
+      },
+      "verdict": {
+        "one_minus_Z": 1.3,
+        "Y0_max": 0.42250000000000004,
+        "closes": true,
+        "r_min": 7.692312243845478e-07
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "B1_scope_a1.1_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.06416729134451485,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.06416538963943068,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999703633261694,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.005162044200713455,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.0051618285233682145,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.999958218617111,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.04502869987071104,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.045026798165626866,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999577668222792,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.0039658290782249245,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.003965613400879684,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999456160764909,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.04443302564402792,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.04443112393894374,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999572006394654,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.0039286184309749676,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.003928402753629727,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999451009689463,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.16220016208706584,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.16219134684604875,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999456520825648,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.03226959528195912,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.032267185530527355,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999253243986883,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.13694701801265963,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.1369382027716425,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999356302813669,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.030691180057334587,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.030688770305902828,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999214839107764,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.1361610329474353,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.1361522177064182,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999352587092922,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.03064208031680023,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.030639670565368468,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999213580994878,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.6973622939831366,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6973103027263772,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999254458447093,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.48431465816171065,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.48427439518335225,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999168660752263,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.6640410703959354,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6639890791391759,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.999921704757315,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.4822319269083692,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.4821916639300107,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999165070247078,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.6630039724402365,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6629519811834771,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999215822846913,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.4821671394161134,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.4821268764377549,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.999916495805983,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.0,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "module_bound": 2.737203564395427,
+      "module_argmax_X": 1.0,
+      "reference_sup_lower_bound": 2.7371529487298107,
+      "reference_argmax_X": 1.0,
+      "reference_over_module": 0.9999815082567206,
+      "argmax_at_window_end": false,
+      "exception": "",
+      "outcome": "sound",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.25",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.25,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "module_bound": 8.595624254201022,
+      "module_argmax_X": 10000.0,
+      "reference_sup_lower_bound": 859.4073430298924,
+      "reference_argmax_X": 1000000000000.0,
+      "reference_over_module": 99.98195798401332,
+      "argmax_at_window_end": true,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.5,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "module_bound": 76.28341963354717,
+      "module_argmax_X": 10000.0,
+      "reference_sup_lower_bound": 762759.7635018154,
+      "reference_argmax_X": 1000000000000.0,
+      "reference_over_module": 9999.024259347394,
+      "argmax_at_window_end": true,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_3.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 3.0,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "module_bound": 6366.734382677213,
+      "module_argmax_X": 10000.0,
+      "reference_sup_lower_bound": 636619772367.5819,
+      "reference_argmax_X": 1000000000000.0,
+      "reference_over_module": 99991570.89067742,
+      "argmax_at_window_end": true,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1.0,
+      "module": 1.4840189007307658,
+      "reference": 1.4838487615104465,
+      "reference_over_module": 0.9998853523898951,
+      "relative_slack": 0.00011466075568650776,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100.0,
+      "module": 0.07094157027844128,
+      "reference": 0.07093625143485519,
+      "reference_over_module": 0.9999250250090995,
+      "relative_slack": 7.498061257125523e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 32000000.0,
+      "module": 3.4340198882176503e-07,
+      "reference": 3.433733075300918e-07,
+      "reference_over_module": 0.9999164789587515,
+      "relative_slack": 8.352801759554869e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 10000000000.0,
+      "module": 1.1217794683774523e-09,
+      "reference": 1.1216854394777476e-09,
+      "reference_over_module": 0.9999161788013105,
+      "relative_slack": 8.382822527187965e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100000000000.0,
+      "module": 1.1256806006136782e-10,
+      "reference": 1.1256058748365146e-10,
+      "reference_over_module": 0.9999336172470923,
+      "relative_slack": 6.638715987012285e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1000000000000.0,
+      "module": 1.1220405494188282e-11,
+      "reference": 1.1280795023189347e-11,
+      "reference_over_module": 1.005382116451348,
+      "relative_slack": -0.00535330434396914,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 10000000000000.0,
+      "module": 1.6907358357111467e-12,
+      "reference": 1.1296402481490806e-12,
+      "reference_over_module": 0.668135272399865,
+      "relative_slack": 0.49670290030956604,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100000000000000.0,
+      "module": 1.0436273623415523e-12,
+      "reference": 1.1306242151453825e-13,
+      "reference_over_module": 0.10833600727070228,
+      "relative_slack": 8.230541397942343,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1.0,
+      "module": 1.3670412632804994,
+      "reference": 1.3668956952613047,
+      "reference_over_module": 0.9998935160019637,
+      "relative_slack": 0.00010649533808561959,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100.0,
+      "module": 0.0477129026775933,
+      "reference": 0.04770918831209113,
+      "reference_over_module": 0.9999221517599282,
+      "relative_slack": 7.7854300892198e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 32000000.0,
+      "module": 1.6386623208490874e-07,
+      "reference": 1.638524718527451e-07,
+      "reference_over_module": 0.9999160276526251,
+      "relative_slack": 8.397939932219179e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 10000000000.0,
+      "module": 5.24450800936295e-10,
+      "reference": 5.244067816756836e-10,
+      "reference_over_module": 0.9999160659864896,
+      "relative_slack": 8.394105902037629e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100000000000.0,
+      "module": 5.2442945364917134e-11,
+      "reference": 5.2441001535953155e-11,
+      "reference_over_module": 0.9999629344051816,
+      "relative_slack": 3.70669687276309e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1000000000000.0,
+      "module": 5.177359717973094e-12,
+      "reference": 5.244110379401511e-12,
+      "reference_over_module": 1.0128927996246222,
+      "relative_slack": -0.012728691160012398,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 10000000000000.0,
+      "module": 1.1577095947580214e-12,
+      "reference": 5.244113613080889e-13,
+      "reference_over_module": 0.452973149469059,
+      "relative_slack": 1.2076363713216218,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100000000000000.0,
+      "module": 1.0050004901661006e-12,
+      "reference": 5.244114635322557e-14,
+      "reference_over_module": 0.052180219677861454,
+      "relative_slack": 18.164350134468116,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1.0,
+      "module": 1.25288831134971,
+      "reference": 1.2527699212062995,
+      "reference_over_module": 0.9999055062272207,
+      "relative_slack": 9.450270269622285e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100.0,
+      "module": 0.033358586049514444,
+      "reference": 0.0333558689223067,
+      "reference_over_module": 0.9999185478903779,
+      "relative_slack": 8.145874460870559e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 32000000.0,
+      "module": 1.0569805203432426e-07,
+      "reference": 1.056891752800487e-07,
+      "reference_over_module": 0.9999160178063387,
+      "relative_slack": 8.39892472625474e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 10000000000.0,
+      "module": 3.3823378583248665e-10,
+      "reference": 3.382054118609929e-10,
+      "reference_over_module": 0.9999161113623705,
+      "relative_slack": 8.389567552342792e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100000000000.0,
+      "module": 3.3820270552486455e-11,
+      "reference": 3.3820541211564465e-11,
+      "reference_over_module": 1.0000080028655474,
+      "relative_slack": -8.00280150209221e-06,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1000000000000.0,
+      "module": 3.3117091037798056e-12,
+      "reference": 3.3820541214770382e-12,
+      "reference_over_module": 1.0212413033550998,
+      "relative_slack": -0.02079949497275077,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 10000000000000.0,
+      "module": 1.0403713306440435e-12,
+      "reference": 3.3820541215174056e-13,
+      "reference_over_module": 0.32508144177942117,
+      "relative_slack": 2.0761522236588763,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100000000000000.0,
+      "module": 1.0005107438565798e-12,
+      "reference": 3.382054121522496e-14,
+      "reference_over_module": 0.03380327639947166,
+      "relative_slack": 28.582931198220475,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.2",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1000.0,
+      "n_default": 0.008655327740575034,
+      "n_200001": 0.008654641222213858,
+      "default_over_fine": 1.000079323722792,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.5",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1000.0,
+      "n_default": 0.005094980575352279,
+      "n_200001": 0.005094561964633996,
+      "default_over_fine": 1.0000821681473675,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.9",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1000.0,
+      "n_default": 0.0033765208245887645,
+      "n_200001": 0.0033762383303885353,
+      "default_over_fine": 1.0000836712851953,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B5_gamma_-0.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": -0.5,
+      "X": 10.0,
+      "bound": 0.09645452301861634,
+      "near_part": -0.02247937886852337,
+      "out_part": 0.1189339018871397,
+      "exception": "",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "false_bound",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_-0.05",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": -0.05,
+      "X": 10.0,
+      "bound": -0.554834245810837,
+      "near_part": -0.6737681476979767,
+      "out_part": 0.1189339018871397,
+      "exception": "",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "false_bound",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_0.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 0.0,
+      "X": 10.0,
+      "exception": "ZeroDivisionError: float division by zero",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_1.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 1.5,
+      "X": 10.0,
+      "bound": 0.3245677570501586,
+      "near_part": 0.20563385516301896,
+      "out_part": 0.1189339018871397,
+      "exception": "",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "sound",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_3.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 3.0,
+      "X": 10.0,
+      "bound": 0.8751035974668119,
+      "near_part": 0.7561696955796722,
+      "out_part": 0.1189339018871397,
+      "exception": "",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "sound",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B6_alpha_0.5_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 0.5,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B6_alpha_0.9_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 0.9,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B6_alpha_1.0_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.0,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B7_CQ_window_a1.2",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "default_window": 4.112097024476181,
+      "default_argmax_X": 11.897937907435857,
+      "wide_window": 4.111994921680841,
+      "wide_argmax_X": 12.008752882360163,
+      "wide_over_default": 0.9999751701395341,
+      "outcome": "sound"
+    },
+    {
+      "case": "B7_CQ_window_a1.5",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "default_window": 3.1334083772055656,
+      "default_argmax_X": 3.6816096176004667,
+      "wide_window": 3.1316348296997756,
+      "wide_argmax_X": 3.5669847716464105,
+      "wide_over_default": 0.9994339877563704,
+      "outcome": "sound"
+    },
+    {
+      "case": "B7_CQ_window_a1.9",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "default_window": 2.5522021078027057,
+      "default_argmax_X": 2.490155197497901,
+      "wide_window": 2.552186572985494,
+      "wide_argmax_X": 2.521585161478168,
+      "wide_over_default": 0.9999939131712319,
+      "outcome": "sound"
+    },
+    {
+      "case": "C00_control_wellformed",
+      "family": "C",
+      "hypothesis_violating": false,
+      "bound": 1.6183261475901822,
+      "outcome": "sound",
+      "note": "the honest dual bound, against which every poison is measured"
+    },
+    {
+      "case": "C01_q_column_zeroed",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": 0.7389229469125068,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": 2.1901148886391293,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "one reference index m0 with an all-zero seminorm column: every |c_m|/q term for that m0 is honestly +inf, and `1/q if q>0 else 0` makes them all zero, so that m0 wins the min at a price of |sum c|/v_m0 alone"
+    },
+    {
+      "case": "C02_q_column_negative",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": 0.7389229469125068,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": 2.1901148886391293,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "the same mask catches NEGATIVE entries too -- q <= 0 is dropped, not flagged"
+    },
+    {
+      "case": "C03_q_single_offdiagonal_zero",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": 1.6183261475901822,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": 1.0,
+      "exception": "",
+      "outcome": "sound",
+      "note": "a single off-diagonal zero: dropped, but the min over m0 may already prefer another reference index, so the poison need not be load-bearing"
+    },
+    {
+      "case": "C04_v_one_negative",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": 0.45363176920739734,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": 3.567488561080683,
+      "exception": "",
+      "outcome": "false_bound",
+      "note": "a negative codomain sup weight makes the |sum c|/v_m0 term NEGATIVE, and the min over m0 selects it -- the claimed upper bound drops below the honest one"
+    },
+    {
+      "case": "C05_v_one_zero",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": 1.6183261475901822,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": 1.0,
+      "exception": "",
+      "outcome": "sound",
+      "note": "a zero weight divides to +inf, which the min discards -- a refusal, sound"
+    },
+    {
+      "case": "C06_v_one_nan",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": NaN,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "",
+      "outcome": "sound",
+      "note": "NaN propagates through min -- recorded, not a lie"
+    },
+    {
+      "case": "C07_C_has_nan",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": NaN,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "",
+      "outcome": "sound",
+      "note": "NaN in the functional row propagates"
+    }
+  ],
+  "cases_post": [
+    {
+      "case": "P00_control_honest_good_centre",
+      "family": "P",
+      "hypothesis_violating": false,
+      "centre": 1.4,
+      "constants": {
+        "Y0": 0.014285714285714377,
+        "Z0": 0.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": 1.0,
+        "Y0_max": 0.35,
+        "closes": true,
+        "r_min": 0.01443453995989572,
+        "degenerate_ball": false
+      },
+      "outcome": "sound",
+      "ball": {
+        "radius": 0.01443453995989572,
+        "degenerate": false,
+        "ball_lo": 1.3855654600401042,
+        "ball_hi": 1.4144345399598957,
+        "contains_a_zero": true,
+        "gap_to_nearest_zero": 0.0,
+        "gap_in_ball_radii": 0.0
+      },
+      "note": "the honest certificate must still CLOSE at a genuine approximate zero"
+    },
+    {
+      "case": "P01_control_honest_planted_point",
+      "family": "P",
+      "hypothesis_violating": false,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": false
+      },
+      "outcome": "rejected",
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "honest constants at the planted non-solution must REFUSE -- they do"
+    },
+    {
+      "case": "P02_Y0_fabricated_zero",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.0,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": true,
+        "r_min": 0.0,
+        "degenerate_ball": true,
+        "reason": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius."
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": 0.0,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a residual reported as exactly zero -- leg 98's A1 case, in this module"
+    },
+    {
+      "case": "P03_Y0_sign_flipped",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": -0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": -0.35714285714285715
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a signed residual used where its absolute value was meant"
+    },
+    {
+      "case": "P04_Z0_negative_unit",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": -1.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_0: the theorem's contraction budget inflated from 0.71 to 2"
+    },
+    {
+      "case": "P05_Z1_negative_unit",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": -1.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_1, the same inflation through the other slot"
+    },
+    {
+      "case": "P06_Z2_shrunk_1e-6",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 1e-06
+      },
+      "poison": {
+        "Z2": 1e-06
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 127551.02040816327,
+        "closes": true,
+        "r_min": 0.5000003500121863,
+        "degenerate_ball": false
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": 0.5000003500121863,
+        "degenerate": false,
+        "ball_lo": 0.49999964998781365,
+        "ball_hi": 1.5000003500121863,
+        "contains_a_zero": true,
+        "gap_to_nearest_zero": 0.0,
+        "gap_in_ball_radii": 0.0
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a quadratic constant under-reported by six decades"
+    },
+    {
+      "case": "P07_Z2_negative",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 0.35714285714285715,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": -0.7142857142857143
+      },
+      "poison": {
+        "Z2": -0.7142857142857143
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_2 is negative (-0.7142857142857143); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is negative (-0.7142857142857143); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a negative Z_2 -- the parabola opens downward"
+    },
+    {
+      "case": "P08_Y0_negative_and_Z0_negative",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": -0.35714285714285715,
+        "Z0": -1.0,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": -0.35714285714285715,
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm",
+          "Z_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-0.35714285714285715); it is an upper bound on a norm; Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "load_bearing": false,
+      "degenerate_ball": false,
+      "ball": {
+        "radius": null,
+        "degenerate": null,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": null,
+        "gap_to_nearest_zero": null,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "two violations at once"
+    },
+    {
+      "case": "P09_Y0_tiny_fabricated",
+      "family": "P",
+      "hypothesis_violating": true,
+      "centre": 1.0,
+      "constants": {
+        "Y0": 1e-300,
+        "Z0": 0.2857142857142857,
+        "Z1": 0.0,
+        "Z2": 0.7142857142857143
+      },
+      "poison": {
+        "Y0": 1e-300
+      },
+      "verdict": {
+        "one_minus_Z": 0.7142857142857143,
+        "Y0_max": 0.17857142857142858,
+        "closes": true,
+        "r_min": 0.0,
+        "degenerate_ball": true,
+        "reason": "DEGENERATE_BALL (not refused): r_min underflowed to 0.0 with Y_0 = 1e-300 > 0. The true root is strictly positive but below float resolution (4*Z_2*Y_0 = 2.8571428571428573e-300 against one_minus^2 = 0.5102040816326531), so the ball is real but its radius is not resolved here. Flagged so a caller does not read it as a ball of positive radius."
+      },
+      "outcome": "false_accept",
+      "load_bearing": true,
+      "degenerate_ball": true,
+      "ball": {
+        "radius": 0.0,
+        "degenerate": true,
+        "ball_lo": null,
+        "ball_hi": null,
+        "contains_a_zero": false,
+        "gap_to_nearest_zero": 0.41421356237309515,
+        "gap_in_ball_radii": null
+      },
+      "residual_at_planted_point": 1.0,
+      "distance_to_nearest_zero": 0.41421356237309515,
+      "note": "a denormal-scale fabricated residual, not exactly zero"
+    },
+    {
+      "case": "A00_control_honest_closes",
+      "family": "A",
+      "hypothesis_violating": false,
+      "constants": {
+        "Y0": 1e-06,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": 1.4285743440423104e-06,
+        "degenerate_ball": false
+      },
+      "outcome": "sound"
+    },
+    {
+      "case": "A01_control_honest_hopeless",
+      "family": "A",
+      "hypothesis_violating": false,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": false
+      },
+      "outcome": "rejected"
+    },
+    {
+      "case": "A02_Y0_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A03_Y0_negative_tiny",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1e-12,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1e-12
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1e-12); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-12); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A04_Y0_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1000000000000.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1000000000000.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1000000000000.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1000000000000.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A05_Y0_zero_fabricated",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 0.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.12249999999999998,
+        "closes": true,
+        "r_min": 0.0,
+        "degenerate_ball": true,
+        "reason": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius."
+      },
+      "outcome": "false_accept",
+      "exception": "",
+      "load_bearing": true,
+      "degenerate_ball": true
+    },
+    {
+      "case": "A06_Y0_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -Infinity,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is -infinite (a norm bound is finite by hypothesis)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A07_Y0_pos_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": Infinity,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": Infinity
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is +infinite (a norm bound is finite by hypothesis)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is +infinite (a norm bound is finite by hypothesis). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A08_Y0_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": NaN,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A09_Z0_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -1.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A10_Z0_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -1000000.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -1000000.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_0 is negative (-1000000.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A11_Z0_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": -Infinity,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_0 is -infinite (a norm bound is finite by hypothesis)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A12_Z0_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": NaN,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z0": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A13_Z1_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -1.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A14_Z1_negative_huge",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -1000000.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -1000000.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is negative (-1000000.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A15_Z1_neg_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": -Infinity,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -Infinity
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is -infinite (a norm bound is finite by hypothesis)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A16_Z1_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": NaN,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A17_Z2_negative_unit",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": -1.0
+      },
+      "poison": {
+        "Z2": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_2 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A18_Z2_zero",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 0.0
+      },
+      "poison": {
+        "Z2": 0.0
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": false
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A19_Z2_nan",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": NaN
+      },
+      "poison": {
+        "Z2": NaN
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction test `Z_0 + Z_1 < 1` alone is not a hypothesis check). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A20_Z2_pos_inf",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": Infinity
+      },
+      "poison": {
+        "Z2": Infinity
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_2 is +infinite (a norm bound is finite by hypothesis)"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is +infinite (a norm bound is finite by hypothesis). No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A21_Z2_denormal",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1.0,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1e-320
+      },
+      "poison": {
+        "Z2": 1e-320
+      },
+      "verdict": {
+        "one_minus_Z": 0.7,
+        "Y0_max": Infinity,
+        "closes": false,
+        "r_min": 0.0,
+        "degenerate_ball": true,
+        "reason": "INVALID_BUDGET: Y0_max = one_minus^2/(4*Z_2) is inf with Z_2 = 1e-320. Z_2 has underflowed, so the radii polynomial is no longer the quadratic this function certifies and no budget was established."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A22_Y0_neg_Z1_neg",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.0,
+        "Z1": -1.0,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z1": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm",
+          "Z_1 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm; Z_1 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A23_Y0_neg_Z0Z1_sum_above_1",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": 0.9,
+        "Z1": 0.9,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z0": 0.9,
+        "Z1": 0.9
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A24_all_four_negative",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1.0,
+        "Z0": -1.0,
+        "Z1": -1.0,
+        "Z2": -1.0
+      },
+      "poison": {
+        "Y0": -1.0,
+        "Z0": -1.0,
+        "Z1": -1.0,
+        "Z2": -1.0
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm",
+          "Z_0 is negative (-1.0); it is an upper bound on a norm",
+          "Z_1 is negative (-1.0); it is an upper bound on a norm",
+          "Z_2 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm; Z_0 is negative (-1.0); it is an upper bound on a norm; Z_1 is negative (-1.0); it is an upper bound on a norm; Z_2 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A25_Y0_negative_on_closing",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": -1e-06,
+        "Z0": 0.0,
+        "Z1": 0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Y0": -1e-06
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Y_0 is negative (-1e-06); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-06); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "A26_Z1_negative_on_closing",
+      "family": "A",
+      "hypothesis_violating": true,
+      "constants": {
+        "Y0": 1e-06,
+        "Z0": 0.0,
+        "Z1": -0.3,
+        "Z2": 1.0
+      },
+      "poison": {
+        "Z1": -0.3
+      },
+      "verdict": {
+        "one_minus_Z": NaN,
+        "Y0_max": 0.0,
+        "closes": false,
+        "r_min": NaN,
+        "degenerate_ball": null,
+        "violations": [
+          "Z_1 is negative (-0.3); it is an upper bound on a norm"
+        ],
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-0.3); it is an upper bound on a norm. No discriminant is evaluated."
+      },
+      "outcome": "rejected",
+      "exception": "",
+      "load_bearing": false,
+      "degenerate_ball": false
+    },
+    {
+      "case": "B1_scope_a1.1_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.06416729134451485,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.06416538963943068,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999703633261694,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.005162044200713455,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.0051618285233682145,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.999958218617111,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.04502869987071104,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.045026798165626866,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999577668222792,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.0039658290782249245,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.003965613400879684,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999456160764909,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.04443302564402792,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.04443112393894374,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999572006394654,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.1_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.1,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.0039286184309749676,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.003928402753629727,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999451009689463,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.16220016208706584,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.16219134684604875,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999456520825648,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.03226959528195912,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.032267185530527355,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999253243986883,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.13694701801265963,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.1369382027716425,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999356302813669,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.030691180057334587,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.030688770305902828,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999214839107764,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.1361610329474353,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.1361522177064182,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999352587092922,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.5_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.03064208031680023,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.030639670565368468,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999213580994878,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.15_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.15,
+      "X0": 200.0,
+      "module_bound": 0.6973622939831366,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6973103027263772,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999254458447093,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.15_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.15,
+      "X0": 3200.0,
+      "module_bound": 0.48431465816171065,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.48427439518335225,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999168660752263,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.5_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.5,
+      "X0": 200.0,
+      "module_bound": 0.6640410703959354,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6639890791391759,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.999921704757315,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.5_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.5,
+      "X0": 3200.0,
+      "module_bound": 0.4822319269083692,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.4821916639300107,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.9999165070247078,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.9_X0200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "X0": 200.0,
+      "module_bound": 0.6630039724402365,
+      "module_argmax_X": 200.0,
+      "reference_sup_lower_bound": 0.6629519811834771,
+      "reference_argmax_X": 200.0,
+      "reference_over_module": 0.9999215822846913,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B1_scope_a1.9_g0.9_X03200",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "gamma": 0.9,
+      "X0": 3200.0,
+      "module_bound": 0.4821671394161134,
+      "module_argmax_X": 3200.0,
+      "reference_sup_lower_bound": 0.4821268764377549,
+      "reference_argmax_X": 3200.0,
+      "reference_over_module": 0.999916495805983,
+      "argmax_at_window_end": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.0,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "reference_sup_lower_bound": 2.7371529487298107,
+      "reference_argmax_X": 1.0,
+      "exception": "ValueError: farfield_modelling_error_bound: alpha is 2.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.",
+      "outcome": "raised",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.25",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.25,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "reference_sup_lower_bound": 859.4073430298924,
+      "reference_argmax_X": 1000000000000.0,
+      "exception": "ValueError: farfield_modelling_error_bound: alpha is 2.25, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.",
+      "outcome": "raised",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_2.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 2.5,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "reference_sup_lower_bound": 762759.7635018154,
+      "reference_argmax_X": 1000000000000.0,
+      "exception": "ValueError: farfield_modelling_error_bound: alpha is 2.5, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.",
+      "outcome": "raised",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B2_unguarded_alpha_3.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 3.0,
+      "gamma": 0.5,
+      "X0": 1.0,
+      "reference_sup_lower_bound": 636619772367.5819,
+      "reference_argmax_X": 1000000000000.0,
+      "exception": "ValueError: farfield_modelling_error_bound: alpha is 3.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.",
+      "outcome": "raised",
+      "note": "the module docstring states 'For alpha < 2 both terms decay, so the supremum sits at X0'; alpha >= 2 is not checked, and the function's own argmax_X pins to the window's last sample -- a self-diagnostic it computes and discards"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1.0,
+      "module": 1.4840189007307658,
+      "reference": 1.4838487615104465,
+      "reference_over_module": 0.9998853523898951,
+      "relative_slack": 0.00011466075568650776,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100.0,
+      "module": 0.07094157027844128,
+      "reference": 0.07093625143485519,
+      "reference_over_module": 0.9999250250090995,
+      "relative_slack": 7.498061257125523e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 32000000.0,
+      "module": 3.4340198882176503e-07,
+      "reference": 3.433733075300918e-07,
+      "reference_over_module": 0.9999164789587515,
+      "relative_slack": 8.352801759554869e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 10000000000.0,
+      "module": 1.1217794683774523e-09,
+      "reference": 1.1216854394777476e-09,
+      "reference_over_module": 0.9999161788013105,
+      "relative_slack": 8.382822527187965e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100000000000.0,
+      "module": 1.1256806006136782e-10,
+      "reference": 1.1256058748365146e-10,
+      "reference_over_module": 0.9999336172470923,
+      "relative_slack": 6.638715987012285e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1000000000000.0,
+      "module": 1.1220405494188282e-11,
+      "reference": 1.1280795023189347e-11,
+      "reference_over_module": 1.005382116451348,
+      "relative_slack": -0.00535330434396914,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 10000000000000.0,
+      "module": 1.6907358357111467e-12,
+      "reference": 1.1296402481490806e-12,
+      "reference_over_module": 0.668135272399865,
+      "relative_slack": 0.49670290030956604,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.2_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 100000000000000.0,
+      "module": 1.0436273623415523e-12,
+      "reference": 1.1306242151453825e-13,
+      "reference_over_module": 0.10833600727070228,
+      "relative_slack": 8.230541397942343,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1.0,
+      "module": 1.3670412632804994,
+      "reference": 1.3668956952613047,
+      "reference_over_module": 0.9998935160019637,
+      "relative_slack": 0.00010649533808561959,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100.0,
+      "module": 0.0477129026775933,
+      "reference": 0.04770918831209113,
+      "reference_over_module": 0.9999221517599282,
+      "relative_slack": 7.7854300892198e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 32000000.0,
+      "module": 1.6386623208490874e-07,
+      "reference": 1.638524718527451e-07,
+      "reference_over_module": 0.9999160276526251,
+      "relative_slack": 8.397939932219179e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 10000000000.0,
+      "module": 5.24450800936295e-10,
+      "reference": 5.244067816756836e-10,
+      "reference_over_module": 0.9999160659864896,
+      "relative_slack": 8.394105902037629e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100000000000.0,
+      "module": 5.2442945364917134e-11,
+      "reference": 5.2441001535953155e-11,
+      "reference_over_module": 0.9999629344051816,
+      "relative_slack": 3.70669687276309e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1000000000000.0,
+      "module": 5.177359717973094e-12,
+      "reference": 5.244110379401511e-12,
+      "reference_over_module": 1.0128927996246222,
+      "relative_slack": -0.012728691160012398,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 10000000000000.0,
+      "module": 1.1577095947580214e-12,
+      "reference": 5.244113613080889e-13,
+      "reference_over_module": 0.452973149469059,
+      "relative_slack": 1.2076363713216218,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.5_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 100000000000000.0,
+      "module": 1.0050004901661006e-12,
+      "reference": 5.244114635322557e-14,
+      "reference_over_module": 0.052180219677861454,
+      "relative_slack": 18.164350134468116,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+00",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1.0,
+      "module": 1.25288831134971,
+      "reference": 1.2527699212062995,
+      "reference_over_module": 0.9999055062272207,
+      "relative_slack": 9.450270269622285e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+02",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100.0,
+      "module": 0.033358586049514444,
+      "reference": 0.0333558689223067,
+      "reference_over_module": 0.9999185478903779,
+      "relative_slack": 8.145874460870559e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X3e+07",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 32000000.0,
+      "module": 1.0569805203432426e-07,
+      "reference": 1.056891752800487e-07,
+      "reference_over_module": 0.9999160178063387,
+      "relative_slack": 8.39892472625474e-05,
+      "inside_live_range": true,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+10",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 10000000000.0,
+      "module": 3.3823378583248665e-10,
+      "reference": 3.382054118609929e-10,
+      "reference_over_module": 0.9999161113623705,
+      "relative_slack": 8.389567552342792e-05,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+11",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100000000000.0,
+      "module": 3.3820270552486455e-11,
+      "reference": 3.3820541211564465e-11,
+      "reference_over_module": 1.0000080028655474,
+      "relative_slack": -8.00280150209221e-06,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+12",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1000000000000.0,
+      "module": 3.3117091037798056e-12,
+      "reference": 3.3820541214770382e-12,
+      "reference_over_module": 1.0212413033550998,
+      "relative_slack": -0.02079949497275077,
+      "inside_live_range": false,
+      "outcome": "false_bound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+13",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 10000000000000.0,
+      "module": 1.0403713306440435e-12,
+      "reference": 3.3820541215174056e-13,
+      "reference_over_module": 0.32508144177942117,
+      "relative_slack": 2.0761522236588763,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B3_Iout_a1.9_X1e+14",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 100000000000000.0,
+      "module": 1.0005107438565798e-12,
+      "reference": 3.382054121522496e-14,
+      "reference_over_module": 0.03380327639947166,
+      "relative_slack": 28.582931198220475,
+      "inside_live_range": false,
+      "outcome": "sound"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.2",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "X": 1000.0,
+      "n_default": 0.008655327740575034,
+      "n_200001": 0.008654641222213858,
+      "default_over_fine": 1.000079323722792,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.5",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "X": 1000.0,
+      "n_default": 0.005094980575352279,
+      "n_200001": 0.005094561964633996,
+      "default_over_fine": 1.0000821681473675,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B4_quadrature_resolution_a1.9",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "X": 1000.0,
+      "n_default": 0.0033765208245887645,
+      "n_200001": 0.0033762383303885353,
+      "default_over_fine": 1.0000836712851953,
+      "outcome": "sound",
+      "note": "resolution slack, not the mechanism B3 measures"
+    },
+    {
+      "case": "B5_gamma_-0.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": -0.5,
+      "X": 10.0,
+      "exception": "ValueError: hilbert_farfield_bound: gamma is -0.5, outside the required range (0.0, 1.0]; gamma is a Holder exponent, and the near-field half carries a 1/gamma, so a value outside (0, 1] does not produce an upper bound.",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_-0.05",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": -0.05,
+      "X": 10.0,
+      "exception": "ValueError: hilbert_farfield_bound: gamma is -0.05, outside the required range (0.0, 1.0]; gamma is a Holder exponent, and the near-field half carries a 1/gamma, so a value outside (0, 1] does not produce an upper bound.",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_0.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 0.0,
+      "X": 10.0,
+      "exception": "ValueError: hilbert_farfield_bound: gamma is 0.0, outside the required range (0.0, 1.0]; gamma is a Holder exponent, and the near-field half carries a 1/gamma, so a value outside (0, 1] does not produce an upper bound.",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_1.5",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 1.5,
+      "X": 10.0,
+      "exception": "ValueError: hilbert_farfield_bound: gamma is 1.5, outside the required range (0.0, 1.0]; gamma is a Holder exponent, and the near-field half carries a 1/gamma, so a value outside (0, 1] does not produce an upper bound.",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B5_gamma_3.0",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.5,
+      "gamma": 3.0,
+      "X": 10.0,
+      "exception": "ValueError: hilbert_farfield_bound: gamma is 3.0, outside the required range (0.0, 1.0]; gamma is a Holder exponent, and the near-field half carries a 1/gamma, so a value outside (0, 1] does not produce an upper bound.",
+      "gamma_half_reference": 0.2796805944675616,
+      "outcome": "raised",
+      "note": "gamma is a Holder exponent in (0, 1]; the near-field half carries a 1/gamma, so gamma < 0 flips its sign and REDUCES the claimed upper bound"
+    },
+    {
+      "case": "B6_alpha_0.5_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 0.5,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B6_alpha_0.9_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 0.9,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B6_alpha_1.0_nonintegrable_mass",
+      "family": "B",
+      "hypothesis_violating": true,
+      "alpha": 1.0,
+      "exception": "ValueError: f_alpha is not integrable for alpha <= 1",
+      "outcome": "raised",
+      "note": "cos_power_mass raises for alpha <= 1, so the far-field asymptote M_alpha/(pi X) has no referent -- a refusal, which is the sound behaviour (discipline 73)"
+    },
+    {
+      "case": "B7_CQ_window_a1.2",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.2,
+      "default_window": 4.112097024476181,
+      "default_argmax_X": 11.897937907435857,
+      "wide_window": 4.111994921680841,
+      "wide_argmax_X": 12.008752882360163,
+      "wide_over_default": 0.9999751701395341,
+      "outcome": "sound"
+    },
+    {
+      "case": "B7_CQ_window_a1.5",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.5,
+      "default_window": 3.1334083772055656,
+      "default_argmax_X": 3.6816096176004667,
+      "wide_window": 3.1316348296997756,
+      "wide_argmax_X": 3.5669847716464105,
+      "wide_over_default": 0.9994339877563704,
+      "outcome": "sound"
+    },
+    {
+      "case": "B7_CQ_window_a1.9",
+      "family": "B",
+      "hypothesis_violating": false,
+      "alpha": 1.9,
+      "default_window": 2.5522021078027057,
+      "default_argmax_X": 2.490155197497901,
+      "wide_window": 2.552186572985494,
+      "wide_argmax_X": 2.521585161478168,
+      "wide_over_default": 0.9999939131712319,
+      "outcome": "sound"
+    },
+    {
+      "case": "C00_control_wellformed",
+      "family": "C",
+      "hypothesis_violating": false,
+      "bound": 1.6183261475901822,
+      "outcome": "sound",
+      "note": "the honest dual bound, against which every poison is measured"
+    },
+    {
+      "case": "C01_q_column_zeroed",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-diagonal) has 10 non-positive entries (worst 0.0); a weight defines a norm, so it is strictly positive and finite. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "one reference index m0 with an all-zero seminorm column: every |c_m|/q term for that m0 is honestly +inf, and `1/q if q>0 else 0` makes them all zero, so that m0 wins the min at a price of |sum c|/v_m0 alone"
+    },
+    {
+      "case": "C02_q_column_negative",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-diagonal) has 10 non-positive entries (worst -2.0); a weight defines a norm, so it is strictly positive and finite. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "the same mask catches NEGATIVE entries too -- q <= 0 is dropped, not flagged"
+    },
+    {
+      "case": "C03_q_single_offdiagonal_zero",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: q_cod (off-diagonal) has 2 non-positive entries (worst 0.0); a weight defines a norm, so it is strictly positive and finite. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "a single off-diagonal zero: dropped, but the min over m0 may already prefer another reference index, so the poison need not be load-bearing"
+    },
+    {
+      "case": "C04_v_one_negative",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 non-positive entry (worst -0.7644556303293035); a weight defines a norm, so it is strictly positive and finite. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "a negative codomain sup weight makes the |sum c|/v_m0 term NEGATIVE, and the min over m0 selects it -- the claimed upper bound drops below the honest one"
+    },
+    {
+      "case": "C05_v_one_zero",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 non-positive entry (worst 0.0); a weight defines a norm, so it is strictly positive and finite. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "a zero weight divides to +inf, which the min discards -- a refusal, sound"
+    },
+    {
+      "case": "C06_v_one_nan",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": null,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "ValueError: two_point_dual: the weights do not come from a norm, so the dual bound it returns would not be an upper bound for the continuum ball: v_cod has 1 NaN entry. (The `1/q if q > 0 else 0` mask is correct only on the suppressed diagonal; elsewhere it prices an infinite contribution at zero.)",
+      "outcome": "raised",
+      "note": "NaN propagates through min -- recorded, not a lie"
+    },
+    {
+      "case": "C07_C_has_nan",
+      "family": "C",
+      "hypothesis_violating": true,
+      "bound": NaN,
+      "honest_bound": 1.6183261475901822,
+      "honest_over_reported": null,
+      "exception": "",
+      "outcome": "sound",
+      "note": "NaN in the functional row propagates"
+    }
+  ]
+}
