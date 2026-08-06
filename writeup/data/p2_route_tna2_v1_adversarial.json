@@ -1,0 +1,681 @@
+{
+  "leg": 204,
+  "route": "TNA2",
+  "module_under_audit": "solver/target_norm.py",
+  "module_was_modified": false,
+  "gate": "Under adversarial and degenerate inputs, does target_norm.py ever silently return a wrong value rather than reject or visibly propagate the defect?",
+  "gate_answer": "YES",
+  "instrument": {
+    "calibration_family_alpha": 0.4,
+    "p_exact": 1.4,
+    "M": 16384,
+    "n_grid": 801,
+    "band": [
+      32,
+      256
+    ],
+    "s_probe": 0.3,
+    "reference_p": 1.403855224594087,
+    "systematic": 0.0038552245940870478,
+    "reference_n_outside_grid": 0,
+    "reference_domain_valid": true
+  },
+  "tally": {
+    "total": 41,
+    "REJECT": 12,
+    "VISIBLE": 6,
+    "SILENT_WRONG": 17,
+    "SILENT_OK": 6
+  },
+  "cases": [
+    {
+      "axis": "nonfinite",
+      "case": "NaN in f",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+      "detail": "a single non-finite sample anywhere in the input arrays is caught by coefficient_magnitudes' finiteness check before any coefficient is reported"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "Inf in f",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+      "detail": "a single non-finite sample anywhere in the input arrays is caught by coefficient_magnitudes' finiteness check before any coefficient is reported"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "-Inf in f",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+      "detail": "a single non-finite sample anywhere in the input arrays is caught by coefficient_magnitudes' finiteness check before any coefficient is reported"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "NaN in X",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+      "detail": "a single non-finite sample anywhere in the input arrays is caught by coefficient_magnitudes' finiteness check before any coefficient is reported"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "NaN planted in fit_exponent's hk (ladder 1..220 of 225)",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "150 of 225 modes (66.7%) set to NaN: the fit DROPS them silently and returns p = 1.404831 (err 0.004831) while reporting n_points = 225 when only 75 were finite -- an overstatement of 3.00x, with 0 warnings and domain_valid = True",
+      "detail": "the bin loop's `hh[idx].mean() > 0.0` test is False for any bin containing a NaN, so that bin is discarded; `acc` is reset regardless, so the fit proceeds on the surviving bins. `n_points` is m.sum(), the band width, not the number actually used",
+      "ladder": [
+        {
+          "n_nan": 1,
+          "frac_of_band": 0.0044444444444444444,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 224,
+          "overstatement_factor": 1.0044642857142858,
+          "n_bins": 18,
+          "p": 1.4038508609579559,
+          "err_vs_exact": 0.0038508609579559483,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": 0.0,
+          "outcome": "SILENT_WRONG"
+        },
+        {
+          "n_nan": 20,
+          "frac_of_band": 0.08888888888888889,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 205,
+          "overstatement_factor": 1.0975609756097562,
+          "n_bins": 16,
+          "p": 1.4038584509699232,
+          "err_vs_exact": 0.0038584509699233216,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": 0.0,
+          "outcome": "SILENT_WRONG"
+        },
+        {
+          "n_nan": 80,
+          "frac_of_band": 0.35555555555555557,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 145,
+          "overstatement_factor": 1.5517241379310345,
+          "n_bins": 11,
+          "p": 1.403603207698373,
+          "err_vs_exact": 0.0036032076983731898,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": 0.0,
+          "outcome": "SILENT_WRONG"
+        },
+        {
+          "n_nan": 150,
+          "frac_of_band": 0.6666666666666666,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 75,
+          "overstatement_factor": 3.0,
+          "n_bins": 4,
+          "p": 1.4048309456265615,
+          "err_vs_exact": 0.004830945626561611,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": 0.0,
+          "outcome": "SILENT_WRONG"
+        },
+        {
+          "n_nan": 200,
+          "frac_of_band": 0.8888888888888888,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 25,
+          "overstatement_factor": 9.0,
+          "n_bins": null,
+          "p": null,
+          "err_vs_exact": null,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": null,
+          "outcome": "VISIBLE"
+        },
+        {
+          "n_nan": 220,
+          "frac_of_band": 0.9777777777777777,
+          "n_points_reported": 225,
+          "n_points_actually_finite": 5,
+          "overstatement_factor": 45.0,
+          "n_bins": null,
+          "p": null,
+          "err_vs_exact": null,
+          "warned": false,
+          "domain_valid": true,
+          "frac_zero_modes": null,
+          "outcome": "VISIBLE"
+        }
+      ]
+    },
+    {
+      "axis": "nonfinite",
+      "case": "Inf planted in fit_exponent's hk",
+      "outcome": "VISIBLE",
+      "magnitude": "p = nan with 1 warning(s) (RuntimeWarning)",
+      "detail": "Inf survives the mean>0 test, becomes log(inf) in the bin, and polyfit returns nan -- the defect reaches the caller as a NaN exponent, which is legible"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "NEGATIVE coefficient magnitudes (|h_k| = -1e3, impossible)",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "50 of 225 |h_k| set to -1000 (a magnitude cannot be negative): p = 1.403946, err 0.003946 -- indistinguishable from clean (1.403855); the only trace is frac_zero_modes = 0.2222, which MISLABELS them as ZERO modes",
+      "detail": "the `hh <= 0.0` test that computes frac_zero_modes conflates 'annihilated by a symmetry' (legitimate, the reason the field exists) with 'negative' (impossible)",
+      "p": 1.4039459132569758,
+      "err": 0.003945913256975908,
+      "frac_zero_modes": 0.2222222222222222
+    },
+    {
+      "axis": "nonfinite",
+      "case": "analytic_tail with C = NaN",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "returns finite = True with bound = nan and reason = None -- a bound of nan is presented as a VALID tail bound",
+      "detail": "analytic_tail gates only on `margin = p - s - 1`; the prefactor C is never checked for finiteness, so a non-finite C passes straight through into the returned bound with finite = True and reason = None",
+      "bound": null,
+      "bound_repr": "nan"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "analytic_tail with C = Inf",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "returns finite = True with bound = inf and reason = None -- a bound of inf is presented as a VALID tail bound",
+      "detail": "analytic_tail gates only on `margin = p - s - 1`; the prefactor C is never checked for finiteness, so a non-finite C passes straight through into the returned bound with finite = True and reason = None",
+      "bound": null,
+      "bound_repr": "inf"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "analytic_tail with N = NaN",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "returns finite = True with bound = nan, reason = None -- the checkpoint N is not validated either",
+      "detail": "same mechanism: only `margin` is gated",
+      "bound_repr": "nan"
+    },
+    {
+      "axis": "nonfinite",
+      "case": "norm_verdict with p = NaN",
+      "outcome": "VISIBLE",
+      "magnitude": "finite = False with margin = nan -- the NaN is IN the dict beside the verdict, so a caller reading the margin sees it",
+      "detail": "bool(nan > 0) is False, so the verdict errs toward DIVERGENT, the conservative direction, and the margin field carries the NaN"
+    },
+    {
+      "axis": "degenerate",
+      "case": "zero-norm profile: identically zero",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "true ||.||_w over k >= 1 is 0.0000e+00 -- FINITE (all mass is in the k = 0 mean, which this module drops by construction) -- but norm_verdict returns finite = False from p = nan, with domain_valid = True and 0 warnings",
+      "detail": "a degenerate spectrum has no power law to fit; fit_exponent returns p = nan (all bins fail the mean>0 test) or a meaningless slope, and norm_verdict converts that into a DIVERGENT verdict on an object whose norm is 0.  The error is in the CONSERVATIVE direction, but the verdict is still wrong",
+      "true_norm": 0.0,
+      "p": null,
+      "p_repr": "nan",
+      "finite_reported": false
+    },
+    {
+      "axis": "degenerate",
+      "case": "zero-norm profile: constant 1.0",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "true ||.||_w over k >= 1 is 0.0000e+00 -- FINITE (all mass is in the k = 0 mean, which this module drops by construction) -- but norm_verdict returns finite = False from p = nan, with domain_valid = True and 0 warnings",
+      "detail": "a degenerate spectrum has no power law to fit; fit_exponent returns p = nan (all bins fail the mean>0 test) or a meaningless slope, and norm_verdict converts that into a DIVERGENT verdict on an object whose norm is 0.  The error is in the CONSERVATIVE direction, but the verdict is still wrong",
+      "true_norm": 0.0,
+      "p": null,
+      "p_repr": "nan",
+      "finite_reported": false
+    },
+    {
+      "axis": "degenerate",
+      "case": "zero-norm profile: constant 1e6",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "true ||.||_w over k >= 1 is 5.5882e-08 -- FINITE (all mass is in the k = 0 mean, which this module drops by construction) -- but norm_verdict returns finite = False from p = -0.05832443459105435, with domain_valid = True and 0 warnings",
+      "detail": "a degenerate spectrum has no power law to fit; fit_exponent returns p = nan (all bins fail the mean>0 test) or a meaningless slope, and norm_verdict converts that into a DIVERGENT verdict on an object whose norm is 0.  The error is in the CONSERVATIVE direction, but the verdict is still wrong",
+      "true_norm": 5.588237919028398e-08,
+      "p": -0.05832443459105435,
+      "p_repr": "-0.05832443459105435",
+      "finite_reported": false
+    },
+    {
+      "axis": "degenerate",
+      "case": "transform size M = 2",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "exception = None; returns 0 resolved mode(s) -- an EMPTY spectrum, returned as a normal result",
+      "detail": "kmax = M//2 - 1, so M = 2 yields an empty k array with no complaint; a caller then fits an exponent to nothing and gets NaN one function later"
+    },
+    {
+      "axis": "degenerate",
+      "case": "transform size M = 4",
+      "outcome": "SILENT_OK",
+      "magnitude": "exception = None; returns 1 resolved mode(s)",
+      "detail": "kmax = M//2 - 1, so M = 2 yields an empty k array with no complaint; a caller then fits an exponent to nothing and gets NaN one function later"
+    },
+    {
+      "axis": "degenerate",
+      "case": "transform size M = 8",
+      "outcome": "SILENT_OK",
+      "magnitude": "exception = None; returns 3 resolved mode(s)",
+      "detail": "kmax = M//2 - 1, so M = 2 yields an empty k array with no complaint; a caller then fits an exponent to nothing and gets NaN one function later"
+    },
+    {
+      "axis": "degenerate",
+      "case": "ODD transform size M = 3",
+      "outcome": "REJECT",
+      "magnitude": "IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed",
+      "detail": "the odd-M path dies inside lagrange_interp_uniform's 2-D fancy indexing"
+    },
+    {
+      "axis": "degenerate",
+      "case": "ODD transform size M = 17",
+      "outcome": "REJECT",
+      "magnitude": "IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed",
+      "detail": "the odd-M path dies inside lagrange_interp_uniform's 2-D fancy indexing"
+    },
+    {
+      "axis": "degenerate",
+      "case": "ODD transform size M = 33",
+      "outcome": "REJECT",
+      "magnitude": "IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed",
+      "detail": "the odd-M path dies inside lagrange_interp_uniform's 2-D fancy indexing"
+    },
+    {
+      "axis": "degenerate",
+      "case": "single-point grid",
+      "outcome": "REJECT",
+      "magnitude": "ZeroDivisionError: float division by zero",
+      "detail": "degenerate grids: single-point divides by (rho.size - 1) = 0, empty reduces max() over nothing"
+    },
+    {
+      "axis": "degenerate",
+      "case": "two-point grid",
+      "outcome": "SILENT_OK",
+      "magnitude": "returned a value",
+      "detail": "degenerate grids: single-point divides by (rho.size - 1) = 0, empty reduces max() over nothing"
+    },
+    {
+      "axis": "degenerate",
+      "case": "empty grid",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: zero-size array to reduction operation maximum which has no identity",
+      "detail": "degenerate grids: single-point divides by (rho.size - 1) = 0, empty reduces max() over nothing"
+    },
+    {
+      "axis": "boundary",
+      "case": "analytic_tail with N = 0",
+      "outcome": "REJECT",
+      "magnitude": "ZeroDivisionError: 0.0 cannot be raised to a negative power",
+      "detail": "N is the checkpoint the tail starts above; 0 and negative are not meaningful and the arithmetic happens to fail loudly"
+    },
+    {
+      "axis": "boundary",
+      "case": "analytic_tail with N < 0",
+      "outcome": "REJECT",
+      "magnitude": "TypeError: float() argument must be a string or a real number, not 'complex'",
+      "detail": "N is the checkpoint the tail starts above; 0 and negative are not meaningful and the arithmetic happens to fail loudly"
+    },
+    {
+      "axis": "boundary",
+      "case": "analytic_tail with a NEGATIVE prefactor C",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "C = -0.5 gives finite = True and bound = -3.298770 -- a NEGATIVE upper bound on a sum of NON-NEGATIVE terms (the same C with the right sign gives 3.298770); reason = None, 0 warnings",
+      "detail": "the sign of C is never checked; `finite` is decided by margin alone",
+      "bound": -3.2987697769322426,
+      "bound_positive_C": 3.2987697769322426
+    },
+    {
+      "axis": "boundary",
+      "case": "analytic_tail exactly AT the divergence threshold (margin = 0)",
+      "outcome": "VISIBLE",
+      "magnitude": "margin = 0.0, finite = False, bound = None, reason = 'p - s <= 1: the weighted sum diverges; the tail has no value' -- the module refuses to bound it and says why (lesson 73), which is the correct behaviour",
+      "detail": "this is the positive control for axis 3: the ONE parameter analytic_tail does gate, it gates correctly and reports a reason instead of a large number"
+    },
+    {
+      "axis": "boundary",
+      "case": "norm_verdict with p = +Inf",
+      "outcome": "VISIBLE",
+      "magnitude": "finite = True, margin = inf -- the unphysical exponent is echoed in the dict beside the verdict",
+      "detail": "norm_verdict is a pure comparison and carries its inputs, so an absurd p is readable by the caller"
+    },
+    {
+      "axis": "boundary",
+      "case": "norm_verdict with p < 0",
+      "outcome": "VISIBLE",
+      "magnitude": "finite = False, margin = -6.3 -- the unphysical exponent is echoed in the dict beside the verdict",
+      "detail": "norm_verdict is a pure comparison and carries its inputs, so an absurd p is readable by the caller"
+    },
+    {
+      "axis": "boundary",
+      "case": "compactify scale c = 0.5",
+      "outcome": "SILENT_OK",
+      "magnitude": "p = 1.403855, err 0.003855 = 1.0x the systematic; n_outside_grid = 0, domain_valid = True, 0 warnings; norm_verdict at s = 0.3 says finite = True",
+      "detail": "c is the sinh scale the data are uniform in.  A mismatched c collapses the interpolation stencil onto a tiny or enormous rho window; nothing in the module compares c to the grid it was handed",
+      "p": 1.403855224594087,
+      "err": 0.0038552245940870478,
+      "err_in_systematics": 1.0,
+      "finite_reported": true
+    },
+    {
+      "axis": "boundary",
+      "case": "compactify scale c = -0.5",
+      "outcome": "SILENT_OK",
+      "magnitude": "p = 1.403855, err 0.003855 = 1.0x the systematic; n_outside_grid = 0, domain_valid = True, 0 warnings; norm_verdict at s = 0.3 says finite = True",
+      "detail": "c is the sinh scale the data are uniform in.  A mismatched c collapses the interpolation stencil onto a tiny or enormous rho window; nothing in the module compares c to the grid it was handed",
+      "p": 1.403855224594087,
+      "err": 0.0038552245940870478,
+      "err_in_systematics": 1.0,
+      "finite_reported": true
+    },
+    {
+      "axis": "boundary",
+      "case": "compactify scale c = 1e-08",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "p = 0.854469, err 0.545531 = 141.5x the systematic; n_outside_grid = 0, domain_valid = True, 0 warnings; norm_verdict at s = 0.3 says finite = False",
+      "detail": "c is the sinh scale the data are uniform in.  A mismatched c collapses the interpolation stencil onto a tiny or enormous rho window; nothing in the module compares c to the grid it was handed",
+      "p": 0.8544689443118855,
+      "err": 0.5455310556881144,
+      "err_in_systematics": 141.5043514001293,
+      "finite_reported": false
+    },
+    {
+      "axis": "boundary",
+      "case": "compactify scale c = 1e+08",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "p = 0.012918, err 1.387082 = 359.8x the systematic; n_outside_grid = 0, domain_valid = True, 0 warnings; norm_verdict at s = 0.3 says finite = False",
+      "detail": "c is the sinh scale the data are uniform in.  A mismatched c collapses the interpolation stencil onto a tiny or enormous rho window; nothing in the module compares c to the grid it was handed",
+      "p": 0.012918132273232913,
+      "err": 1.387081867726767,
+      "err_in_systematics": 359.7927523740651,
+      "finite_reported": false
+    },
+    {
+      "axis": "boundary",
+      "case": "compactify scale c = 0",
+      "outcome": "REJECT",
+      "magnitude": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+      "detail": "c = 0 makes rho infinite and the finiteness check catches it"
+    },
+    {
+      "axis": "boundary",
+      "case": "weighted_partial_sums with checkpoints N <= 0",
+      "outcome": "VISIBLE",
+      "magnitude": "N = -5 -> S_N = 0.0, N = 0 -> 0.0, N = 1 -> 0.327328 -- an empty prefix correctly sums to 0",
+      "detail": "searchsorted returns j = -1 for a checkpoint below the first mode and the code special-cases it"
+    },
+    {
+      "axis": "passthrough",
+      "case": "the adjacent key: frac_outside_grid threaded as n_outside_grid",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "spectrum returns n_outside_grid = 14 AND frac_outside_grid = 0.0008544922 in the SAME dict.  Threading the count gives {'n_outside_grid': 14, 'domain_valid': False} and 1 warning(s); threading the fraction gives {'n_outside_grid': 0, 'domain_valid': True} and 0 warning(s) -- domain_valid flips False -> True and the warning disappears, on the exact configuration leg 84's YES was built on",
+      "detail": "domain_fields does `n = int(n_outside_grid)`, which TRUNCATES.  Any true violation rate below 100% of samples is a float in (0, 1) and truncates to 0, which is the literal definition of clean.  _warn_if_outside applies int() the same way, so the warning is suppressed too",
+      "n_outside_grid": 14,
+      "frac_outside_grid": 0.0008544921875,
+      "domain_fields_from_count": {
+        "n_outside_grid": 14,
+        "domain_valid": false
+      },
+      "domain_fields_from_frac": {
+        "n_outside_grid": 0,
+        "domain_valid": true
+      },
+      "verdict_from_count": {
+        "s": 0.5,
+        "p": 1.5654,
+        "margin_in_exponent_units": 0.0653999999999999,
+        "finite": true,
+        "n_outside_grid": 14,
+        "domain_valid": false
+      },
+      "verdict_from_frac": {
+        "s": 0.5,
+        "p": 1.5654,
+        "margin_in_exponent_units": 0.0653999999999999,
+        "finite": true,
+        "n_outside_grid": 0,
+        "domain_valid": true
+      }
+    },
+    {
+      "axis": "passthrough",
+      "case": "domain_fields' int() truncation, swept",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "6 of 8 type-compatible wrong values -- including every fraction in (-1, 1) and the STRING '0' -- are accepted and reported as domain_valid = True; the string '3' is accepted as a count of 3",
+      "detail": "no type check and no range check; int() silently accepts str, bool, and any float",
+      "sweep": [
+        {
+          "input": "0.9",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "0.5",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "0.0008544921875",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "-0.5",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "-0.99",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "True",
+          "n_outside_grid": 1,
+          "domain_valid": false
+        },
+        {
+          "input": "'0'",
+          "n_outside_grid": 0,
+          "domain_valid": true
+        },
+        {
+          "input": "'3'",
+          "n_outside_grid": 3,
+          "domain_valid": false
+        }
+      ]
+    },
+    {
+      "axis": "passthrough",
+      "case": "ASYMMETRIC GRID: the domain guard's window is max|X|, not the data interval",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "on a grid truncated at X_min = -9.709 (still 523 real data points spanning -9.71..4.07e+04), 535 of 16384 theta-samples (3.27%) are polynomially EXTRAPOLATED outside the data -- and the module reports n_outside_grid = 0, domain_valid = True, 0 warnings.  The fitted exponent is p = -0.088885 against the exact 1.4, an error of 1.488885 = 386x the systematic, and norm_verdict flips to finite = False",
+      "detail": "compactify computes `X_max = |X|.max()` and tests `inside = |Xt| <= X_max`.  For a grid symmetric about 0 that is exactly the data interval; for any other grid it is strictly larger, and every theta-sample in the gap is fed to lagrange_interp_uniform, whose index clip turns it into polynomial EXTRAPOLATION.  n_outside_grid counts only the samples beyond max|X|, so it reports 0",
+      "ladder": [
+        {
+          "cut": -1000.0,
+          "X_min_data": -986.0485321107775,
+          "X_max_data": 40688.69785321492,
+          "n_grid_points": 677,
+          "n_theta_samples_extrapolated": 5,
+          "frac_extrapolated": 0.00030517578125,
+          "n_outside_grid_reported": 0,
+          "domain_valid_reported": true,
+          "n_warnings": 0,
+          "p": 1.403851370063524,
+          "err_vs_exact": 0.0038513700635240955,
+          "err_in_systematics": 0.9990001800235285,
+          "finite_reported": true
+        },
+        {
+          "cut": -100.0,
+          "X_min_data": -97.87577912711738,
+          "X_max_data": 40688.69785321492,
+          "n_grid_points": 600,
+          "n_theta_samples_extrapolated": 53,
+          "frac_extrapolated": 0.00323486328125,
+          "n_outside_grid_reported": 0,
+          "domain_valid_reported": true,
+          "n_warnings": 0,
+          "p": 1.410247584090767,
+          "err_vs_exact": 0.010247584090766981,
+          "err_in_systematics": 2.658103008183808,
+          "finite_reported": true
+        },
+        {
+          "cut": -10.0,
+          "X_min_data": -9.708902589651528,
+          "X_max_data": 40688.69785321492,
+          "n_grid_points": 523,
+          "n_theta_samples_extrapolated": 535,
+          "frac_extrapolated": 0.03265380859375,
+          "n_outside_grid_reported": 0,
+          "domain_valid_reported": true,
+          "n_warnings": 0,
+          "p": -0.08888490073732189,
+          "err_vs_exact": 1.4888849007373217,
+          "err_in_systematics": 386.1992639860462,
+          "finite_reported": false
+        },
+        {
+          "cut": -1.0,
+          "X_min_data": -0.9959420145786091,
+          "X_max_data": 40688.69785321492,
+          "n_grid_points": 449,
+          "n_theta_samples_extrapolated": 4107,
+          "frac_extrapolated": 0.25067138671875,
+          "n_outside_grid_reported": 0,
+          "domain_valid_reported": true,
+          "n_warnings": 0,
+          "p": 0.11976407478762564,
+          "err_vs_exact": 1.2802359252123743,
+          "err_in_systematics": 332.07816923972126,
+          "finite_reported": false
+        },
+        {
+          "cut": -0.1,
+          "X_min_data": -0.09048678792763439,
+          "X_max_data": 40688.69785321492,
+          "n_grid_points": 407,
+          "n_theta_samples_extrapolated": 7721,
+          "frac_extrapolated": 0.47125244140625,
+          "n_outside_grid_reported": 0,
+          "domain_valid_reported": true,
+          "n_warnings": 0,
+          "p": 0.2711768457163426,
+          "err_vs_exact": 1.1288231542836573,
+          "err_in_systematics": 292.80347402197793,
+          "finite_reported": false
+        }
+      ]
+    },
+    {
+      "axis": "passthrough",
+      "case": "weighted_partial_sums with k in DESCENDING order",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "S_64 = 0.000000 against the true 1.120579 (the norm reported as EXACTLY ZERO), and S_4096 = 11.536158 against the true 1.665726 -- an overstatement of 6.93x; no warning, domain_valid = True",
+      "detail": "np.searchsorted assumes an ascending array and returns nonsense on a descending one; nothing checks the ordering of k, and the same descending k is what a caller gets from any reversed convention",
+      "S_sorted": [
+        {
+          "N": 64,
+          "S_N": 1.1205791403942873
+        },
+        {
+          "N": 512,
+          "S_N": 1.4305768068981661
+        },
+        {
+          "N": 4096,
+          "S_N": 1.6657262128275936
+        }
+      ],
+      "S_reversed": [
+        {
+          "N": 64,
+          "S_N": 0.0
+        },
+        {
+          "N": 512,
+          "S_N": 0.0
+        },
+        {
+          "N": 4096,
+          "S_N": 11.536158135258198
+        }
+      ],
+      "overstatement_factor": 6.925602807003564
+    },
+    {
+      "axis": "passthrough",
+      "case": "CONTROL: DESCENDING X grid (a legitimate convention)",
+      "outcome": "SILENT_OK",
+      "magnitude": "p = 1.403855 vs the ascending reference 1.403855, difference 2.44e-15 -- the rho mapping is sign-consistent, so a reversed grid is handled exactly right",
+      "detail": "this control CAN fail: h_rho would have to be mis-signed for it to. It is here so that the descending-k finding above is about searchsorted specifically, and not about the module being fragile to any reordering (lesson 90)",
+      "p": 1.4038552245940845,
+      "diff_vs_reference": 2.4424906541753444e-15
+    },
+    {
+      "axis": "passthrough",
+      "case": "SHUFFLED X/f pairs (uniform-rho assumption violated)",
+      "outcome": "SILENT_WRONG",
+      "magnitude": "p = 1.487250e-05 against the exact 1.4 -- an error of 1.399985, i.e. 99.999% of the true exponent -- with n_outside_grid = 0, domain_valid = True, 0 warnings",
+      "detail": "lagrange_interp_uniform indexes by position and assumes the samples are uniform in rho; a permuted pairing violates that silently, since the module never checks that arcsinh(X/c) is monotone or evenly spaced",
+      "p": 1.4872503625092524e-05,
+      "err_vs_exact": 1.3999851274963748
+    }
+  ],
+  "claim_adjacency": {
+    "non_test_importers_of_target_norm": 4,
+    "solver_modules_importing_target_norm": 0,
+    "banked_numbers_at_risk": [
+      "leg 55 capabilities.py line: p = 1.3937 (X_max = 4.1e+04) / 1.3963 (3.0e+05); margins +0.394 at s = 0, +0.094 at s = 0.3, -0.606 at s = 1"
+    ],
+    "reachability": [
+      {
+        "mechanism": "asymmetric grid (guard window = max|X|)",
+        "precondition": "the solve grid is not symmetric about X = 0",
+        "banked_value": "|X_min + X_max| = 0.000e+00 on BorderedHL(n=801, rho_max=8.0, c=0.5)",
+        "reachable": false
+      },
+      {
+        "mechanism": "shuffled / non-monotone X",
+        "precondition": "X is not ascending",
+        "banked_value": "np.all(diff(X) > 0) = True",
+        "reachable": false
+      },
+      {
+        "mechanism": "descending k into weighted_partial_sums",
+        "precondition": "k is not ascending",
+        "banked_value": "k comes from coefficient_magnitudes as np.arange(1, kmax+1), which is ascending by construction",
+        "reachable": false
+      },
+      {
+        "mechanism": "frac_outside_grid threaded as n_outside_grid",
+        "precondition": "a call site passes frac_outside_grid where a count is expected",
+        "banked_value": "grep over the repo: 2 occurrences of frac_outside_grid, one the definition in target_norm.spectrum and one a JSON field in experiments/p2_route_tnb_v1_postrepair.py; 0 pass-throughs",
+        "reachable": false
+      },
+      {
+        "mechanism": "NaN / negative entries in hk",
+        "precondition": "hk contains a non-finite or negative entry",
+        "banked_value": "coefficient_magnitudes raises on non-finite h and returns 2*|c_k| >= 0, so every hk produced by spectrum is finite and non-negative",
+        "reachable": false
+      },
+      {
+        "mechanism": "mismatched compactify scale c",
+        "precondition": "c differs from the grid's own sinh scale",
+        "banked_value": "leg 55's runner passes the same c = 0.5 to BorderedHL and to spectrum's default",
+        "reachable": false
+      },
+      {
+        "mechanism": "degenerate / zero-norm profile",
+        "precondition": "the profile has no k >= 1 content",
+        "banked_value": "the target is a converged non-trivial Newton solution",
+        "reachable": false
+      }
+    ],
+    "n_reachable": 0,
+    "verdict": "NOT CONTAMINATED: every silent mechanism has a precondition the banked call path provably does not meet -- the solve grid is symmetric to 0.0e+00 and strictly ascending, k is arange by construction, hk is finite and non-negative by construction, and no call site threads frac_outside_grid.  The findings are LATENT."
+  },
+  "prior_art": {
+    "leg_55": "built the module (Route-NB); the physics",
+    "leg_84": "Route-TNA: adversarial audit, DOMAIN axis, gate YES/SILENT",
+    "bench": "domain guard landed (TargetNormDomainWarning + domain_fields)",
+    "leg_94": "Route-TNB: precision/false-positive suite for that guard",
+    "this_leg": "the four axes none of the above touched"
+  }
+}
