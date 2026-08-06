@@ -137,10 +137,55 @@ def grad_xy(f, grid):
 # omega_x(0) the projection's quadrature bias CANCELS in the ratio (same basis both reads).
 # ---------------------------------------------------------------------------------------
 
-def odd_field_x_slope(g, grid, r_win=0.4, i_lo=3):
+def odd_field_x_slope(g, grid, r_win=0.4, i_lo=3, min_points=3, max_rel_residual=0.5):
     """g_x(0) for an odd-in-x field g. Projects onto cos(beta) (axis endpoint g=0 enforced,
     wall endpoint linearly extrapolated), then fits d1 = a r + b r^3 + c r^5 over a small-r
-    window and returns a. Extrapolatory (skips the innermost i_lo nodes)."""
+    window and returns a. Extrapolatory (skips the innermost i_lo nodes).
+
+    TWO GUARDS, both landed by leg 221 for mechanisms leg 205 measured and escalated without
+    patching.  Neither moves a value on in-contract input; both refuse rather than fabricate.
+
+    DEFECT A -- the fit window is REFUSED when it cannot determine the three parameters.
+    The unguarded form handed a masked window straight to np.linalg.lstsq, which absorbs an
+    empty (0,3) design matrix into a zero coefficient without raising or warning: leg 205
+    measured exactly 0.0 against a truth of 2.0 (100% relative error, 2000x this module's own
+    5e-4 acceptance tolerance), and one node against three parameters returning lstsq's
+    minimum-norm solution 1.9061 (4.694e-2, 93.9x) presented as the fit.  A fabricated 0.0 is
+    indistinguishable at the call site from the true statement "the origin strain vanishes".
+    This is the second occurrence of the mechanism leg 99 measured in the sibling
+    u_x_at_origin and leg 104 repaired THERE ONLY, at the line leg 99 named by number.
+    min_points is the well-posedness floor for this three-parameter fit, not an accuracy
+    guarantee; the rank returned by lstsq is checked as well, so a degenerate three-node
+    configuration is still refused.
+
+    DEFECT B -- the fit window is MEASURED IN THE FIELD'S OWN RADIAL SCALE, not in absolute
+    length.  r_win = 0.4 was a hard-coded absolute length that never referenced the field it
+    was fitting, and the lstsq residual that would have exposed the resulting misfit was
+    discarded by the `*_`.  On a FULLY RESOLVED grid (177 window nodes, rank 3, condition
+    number constant at 5.537e2 -- so the occupancy/rank guard above is provably blind to it)
+    leg 205 measured a smooth in-contract field of scale 0.05 read as 0.269302 against a truth
+    of 2.0 (86.5%, 1731x tolerance), and modulation()'s c_l as +0.188423 against 1.4 (same
+    86.5%) when omega and eta carry different radial scales -- refuting the claim two comment
+    blocks above that the projection's quadrature bias "CANCELS in the ratio", which holds
+    only when the two fields share a radial scale.  The cure is leg 205's own recovery
+    control read as a rule: d1 itself reports the field's scale through the radius at which
+    it peaks (for the d1 = a r exp(-lam r^2) class the module is validated on, r_peak =
+    1/sqrt(2 lam), so sqrt(2) r_peak is the envelope scale 1/sqrt(lam)), and the fit is
+    restricted to the inner HALF of that scale, where the (r, r^3, r^5) truncation is
+    controlled.  The cap is one-sided: it can only SHRINK the caller's window, never widen it,
+    and it is non-binding at and above the scale the module's own gate validates -- so on
+    in-contract input `min` returns the caller's r_win as the identical float and the fit is
+    bit-identical.  The discarded residual is then kept as a fit-quality backstop for shapes
+    the peak heuristic does not describe.  max_rel_residual = 0.5 is set from the measured
+    evidence set, not tuned: the worst legitimate in-repository fit is 4.4e-3 (Step-C's
+    `profile_ansatz` omega read, the field every banked relaxation runs on), the worst
+    precondition-violating field any harness in this repository feeds it is 0.147 (leg 81's
+    constant marker field, whose returned value is never recorded), and leg 205's headline
+    fabrication sat at 8.6e-1.  The backstop is deliberately the looser of the two guards --
+    the window cap is what closes the measured mechanism.
+
+    Raises ValueError if the window holds fewer than min_points nodes, if the fit is
+    rank-deficient, or if the relative least-squares residual exceeds max_rel_residual."""
     beta = grid.beta
     dbeta = beta[1] - beta[0]
     cb = np.cos(beta)
@@ -156,9 +201,61 @@ def odd_field_x_slope(g, grid, r_win=0.4, i_lo=3):
                           + 0.5 * dbeta * (wall_term + integrand[:, 0])
                           + 0.5 * dbeta * (integrand[:, -1] + axis_term))
     r = grid.r
-    m = (np.arange(len(r)) >= i_lo) & (r < r_win)
+    live = np.arange(len(r)) >= i_lo
+
+    # DEFECT B: size the window from the field's own radial scale, one-sided (shrink only).
+    a1 = np.where(live, np.abs(d1), 0.0)
+    peak = float(np.max(a1)) if a1.size else 0.0
+    if np.isfinite(peak) and peak > 0.0:
+        # The peak is taken at the OUTERMOST radius attaining it, not the innermost. The
+        # cap must bind only when d1 genuinely concentrates inside the window, so a tie or
+        # a flat run -- a d1 that does not decay at all, e.g. the constant marker fields
+        # leg 81's status audit drives run() with -- has to resolve OUTWARD, the direction
+        # in which the cap is non-binding and nothing moves. Resolving inward would shrink
+        # the window on a field that has no small scale, which is a fabrication of the
+        # opposite sign to the one being repaired.
+        i_peak = int(len(a1) - 1 - np.argmax(a1[::-1]))
+        r_scale = np.sqrt(2.0) * float(r[i_peak])
+        r_win_eff = min(float(r_win), 0.5 * r_scale)
+    else:
+        r_scale = np.inf          # d1 vanishes (or is non-finite): no scale to read
+        r_win_eff = float(r_win)
+
+    m = live & (r < r_win_eff)
+
+    # DEFECT A: refuse an under-determined window instead of letting lstsq fabricate a value.
+    n_in = int(m.sum())
+    min_points = max(int(min_points), 3)
+    if n_in < min_points:
+        raise ValueError(
+            f"odd_field_x_slope: the origin fit window (r in "
+            f"({r[min(i_lo, len(r) - 1)]:.6g}, "
+            f"{r_win_eff:.6g})) holds {n_in} of {len(r)} radial nodes, fewer than the "
+            f"{min_points} required for the three-parameter (r, r^3, r^5) fit. "
+            f"r_win={r_win:.6g} was capped to {r_win_eff:.6g} by the field's own radial "
+            f"scale {r_scale:.6g}; refine the radial grid, lower r_min, or pass a field "
+            f"whose scale this grid resolves. Fitting anyway would return a fabricated "
+            f"finite value (leg 205 measured exactly 0.0 against a truth of 2.0).")
+
     A = np.vstack([r[m], r[m] ** 3, r[m] ** 5]).T
-    coef, *_ = np.linalg.lstsq(A, d1[m], rcond=None)
+    coef, res, rank, _sv = np.linalg.lstsq(A, d1[m], rcond=None)
+    if rank < A.shape[1]:
+        raise ValueError(
+            f"odd_field_x_slope: the origin fit is rank-deficient (rank {rank} < "
+            f"{A.shape[1]} parameters) over {n_in} in-window node(s). lstsq would return "
+            f"the minimum-norm solution, which is not the extrapolated d1'(0).")
+
+    # DEFECT B, backstop: the residual lstsq already computed, no longer discarded.
+    nrm = float(np.linalg.norm(d1[m]))
+    rel_res = float(np.sqrt(res[0]) / nrm) if (np.size(res) and nrm > 0.0) else 0.0
+    if rel_res > max_rel_residual:
+        raise ValueError(
+            f"odd_field_x_slope: the (r, r^3, r^5) basis does not represent d1 over the fit "
+            f"window (r < {r_win_eff:.6g}): relative least-squares residual {rel_res:.4g} "
+            f"exceeds max_rel_residual={max_rel_residual:.4g} over {n_in} nodes. The "
+            f"returned slope would be a finite plausible wrong number (leg 205 measured "
+            f"0.269302 against a truth of 2.0 at a discarded residual of 8.6e-1).")
+
     return float(coef[0])
 
 
