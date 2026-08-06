@@ -9083,3 +9083,82 @@ than wait to be asked.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 237 lands YES with good discipline, slot E
+left open per the orchestrator's own judgment, one fresh floor-eligible candidate drafted
+since the opportunity was offered
+
+**237 (SIRC) landed on `main` (`c9d507a`) — gate YES.** Found a second instance of leg 202's
+scale-invariant-residual defect class, this time in `collocation_newton.py` — but correctly
+graded it latent and NOT claim-adjacent, after running a thorough 6-route reachability
+battery (0/41 escapes vs. 2/2 reproducing leg 202's own banked numbers, confirming the
+battery itself is a real contrast, not a null result that happened to find nothing). Good
+discipline: it caught and reported what could have been a false positive before shipping it
+as an escalation.
+
+**Flagged for the orchestrator's own checking, not this DM's**: leg 217's branch appears
+gone from local refs. This DM does not investigate git/branch state itself (outside its own
+file-only remit) — noting it here only so it isn't lost, and deferring entirely to the
+orchestrator's own verification.
+
+**Slot E left open, per the orchestrator's own judgment** — correctly declining to force a
+premature verification leg when nothing in the (confirmed-blocked) reserve is ready. Since
+the orchestrator explicitly invited a fresh draft in the meantime, this DM used the
+opportunity to draft one more floor-eligible candidate — a genuinely well-grounded literature
+question this file had not yet asked, directly relevant to the γ=2 dissipative gCLM line
+this repository has invested the most legs in (63, 125, 174, 185, 187, 193):
+
+```
+### 246 — ROUTE-ALSL2: DO Ambrose, Lushnikov, Siegel & Silantyev HAVE LATER WORK UPGRADING
+arXiv:2207.07548's gCLM-WITH-DISSIPATION ANALYSIS INTO AN ACTUAL COMPUTER-ASSISTED
+CERTIFICATE? (a fresh floor-eligible candidate, offered for slot E, not urgent)
+[FLOOR-ELIGIBLE: literature — extends a landed literature/precedent finding at full-text
+depth, not an audit/repair/verify]
+**Thesis.** `arXiv:2207.07548` (Ambrose, Lushnikov, Siegel, Silantyev), in
+`solver/viscous_novelty.py`'s own PRECEDENTS ledger, studies gCLM WITH dissipation —
+global existence vs. singularity formation, line vs. circle — via analysis and numerics,
+explicitly "no certificate of a profile." This is the single most directly relevant
+precedent to this repository's own γ=2 dissipative gCLM investigation line (63/125/174/185/
+187/193) of anything in the ledger, since it studies the SAME dissipative gCLM family this
+repository has spent the most legs on — yet nobody has checked whether these specific
+authors have since produced an actual certificate, the same "did the authors' later work
+close the gap" question this repository's pattern (175->196->239, 2208.09445->240,
+2410.05480->242) already applies to three other precedents.
+**Gate.** Do Ambrose, Lushnikov, Siegel, or Silantyev (or close collaborators) have
+subsequent published work that upgrades `arXiv:2207.07548`'s gCLM-with-dissipation analysis
+into an actual computer-assisted certificate of a profile (of any dissipation exponent
+`sigma`, not necessarily `gamma=2` specifically)?
+  yes -> This would bear directly on the entire γ=2 dissipative gCLM line this repository has
+         invested in — record the citation, its hypotheses, and precisely which dissipation
+         exponent(s) it covers, verbatim. ESCALATE immediately; do not attempt to replicate
+         or build on it under this leg's own authority.
+  no -> Report the search precisely, same discipline as 240/242/245. Bank as confirming this
+        specific precedent's own frontier is still "no certificate," which is itself useful
+        context for anyone evaluating leg 125/187/193's own novelty claims (no certificate
+        existed for THIS family before this repository's own attempts, and still doesn't
+        elsewhere).
+**Territory.** experiments/p2_route_alsl2_v1_lit.py, writeup/data/p2_route_alsl2_v1_lit.json,
+               writeup/novelty/leg_246.md, experiments/journal/leg_246.md.
+               Reads (never edits) solver/viscous_novelty.py's PRECEDENTS ledger and leg
+               63's/125's own reports, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 240/242/245
+(different author groups/papers) — same pattern, non-overlapping target. Immediately
+dispatchable, not blocked on anything. Offered for slot E; not urgent, per the orchestrator's
+own framing that E can stay open a while longer.
+```
+
+**Slot E: this DM offers 246 (ALSL2) but does not insist it be dispatched immediately** —
+the orchestrator's own judgment to leave E open stands; 246 is simply ready the moment the
+orchestrator wants it, restoring the floor to 3/10 if/when dispatched.
+
+**Reserve queue: 6 undispatched legs (229, 231, 232, 233, 234, 246)** — 246 added; all six
+remain either confirmed-blocked (229, 231-234) or offered-but-not-forced (246).
+
+**Floor status: 2/10 (236, 245) right now, unchanged; 246 ready to restore it to 3/10
+whenever dispatched.**
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
