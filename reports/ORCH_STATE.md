@@ -5,93 +5,121 @@ stop. A fresh orchestrator session reads this at Step 0b.5 **before dispatching 
 
 ---
 
-## Status: STOPPED (user request, graceful — not a proactive handoff)
+## Status: INTERRUPTED (laptop shutdown, not a graceful stop)
 
-The user asked to stop after noticing the run had stalled. **No self-chain trigger was
-scheduled.** This run does not resume on its own — it needs a human to either paste
-`ORCHESTRATOR_PROMPT.md` into a fresh session, or explicitly ask for the run to continue.
+The user's machine shut down mid-session. This is NOT a proactive handoff and NOT a
+`STOP`/`PAUSE` request — the session was cut off externally. The user explicitly asked for
+whatever could be saved/pushed before a new orchestrator takes over. **No self-chain trigger
+was scheduled** — the user said they will start the new orchestrator session themselves.
 
-## What happened this session
+## What was salvaged
 
-Resumed from the prior session's handoff (itself reached via a one-time `RemoteTrigger`
-self-chain, `trig_013o2kXgz594VB36GYWjMt6J`, now spent/`run_once_fired` — confirmed via
-`list_triggers`, no other trigger exists). Cleared the prior handoff's priority items: merged
-6 branches cleanly (legs 89, 92, 99, 83, 106, plus a fresh Decision Maker queue), resolved the
-leg-83 merge-order question, confirmed leg 106 was actually complete despite being flagged
-uncertain. Dispatched 13 background agents (2 re-spawned critical/exploration legs, 7 new
-exploration legs from the fresh queue, 4 bench agents for the top-priority red-test
-investigation and three repairs).
+At the moment of interruption, 8 background agents had no completion record. Two of them
+(192/H2CV, 195/PQVER, 196/USC2, 197/VNL — actually 4 of the 8) never got far enough to create
+a worktree; **nothing exists for those four, they simply need re-dispatch from scratch** using
+their fully-specified `DIRECTION.md` entries (§192, §195, §196, §197 — all still valid, none
+touched).
 
-**Around 2026-08-06 08:18-08:20 UTC, all 13 background agents stopped simultaneously** —
-every one halted right after its own "novelty pass" commit (the mandatory first step before
-construction), none progressed further, and the orchestrator's own ability to reach them via
-`TaskOutput`/`SendMessage` broke at the same time ("No task found with ID" for all 13). This
-reads as a single infrastructure interruption that took out the whole background-agent pool
-at once, not 13 independent stalls — the uniform stopping point (all mid-novelty-pass, none
-further) and the simultaneous loss of task-tracking are the evidence. Diagnosed when the user
-asked "Have things stalled?" — confirmed via `git worktree list` showing all agent worktrees
-frozen at their 08:11-08:18 UTC commits with zero progress since, against a check time over an
-hour later.
+The other 4 had real work, salvaged and pushed as WIP branches (not merged, not gated —
+**the next orchestrator must rebase, gate, and either finish or discard each**):
 
-**Recovery action taken, per user instruction ("don't issue more work, come to a graceful stop
-once everything is pushed"):** each worktree with real content was pushed to `origin` as its
-own branch (preserving the work, not merging — none of these have a complete quartet or an
-answered gate, so none belong on `main` yet):
-
-| Leg | Route | Branch pushed | Furthest state reached |
+| Leg | Route | Branch | State at interruption |
 |---|---|---|---|
-| 58 | NG (critical path) | `leg/ng-v1` | Novelty pass only: resolved Cadiot arXiv:2505.03091 from full text — does NOT cover off-diagonal/zero-diagonal, verdict PROCEED_NARROW. No construction. |
-| 62 | CP | `leg/cp-v1` | Novelty pass only, logged. No construction. |
-| 110 | L1R | `leg/l1r-v1` | Novelty pass + pre-committed gate written. No construction. |
-| 114 | CNA | `leg/cna-v1` | Novelty pass only, committed before construction. |
-| — | red-test investigation | `bench/fix-red-tests-g6-newton` | Novelty pass only (for both the G6 sign issue and the Newton item 6 discrepancy). No probe or fix yet. |
-| 100 | HNA repair | `bench/fix-holder-norms-nan-blind-validation` | Novelty pass ("Leg 100... 6 mechanisms, pinned not patched" — this is leg 100's original finding, re-committed; the repair itself never started). |
-| 101 | OLA repair | `bench/fix-op-lower-bound-violation` | Novelty pass only: confirmed the fix is not a repeat of a prior repair, and may only move the bound down. No fix written. |
-| 107 | FIA repair | `bench/fix-first-integral-support-extrapolation` | Novelty pass only: identified the repair template (merged `target_norm.py` domain guard) and confirmed 0 prior repairs of this module. No fix written. |
+| 187 | M2CI (Chen inviscid γ=2 certificate) | `leg/187-m2ci-v1` | Novelty pass complete and committed. Construction (`solver/chen_inviscid_certificate.py`) was **in progress, uncommitted** — salvaged as a WIP commit. Gate NOT answered. Needs a fresh agent to pick up construction from where the file was left, or restart construction from the novelty pass's own findings. |
+| 188 | SURV (does leg 129's verdict flip follow necessarily) | `leg/188-surv-v1` | Novelty pass complete and committed — and it found the leg's own premise is **false as drafted**: DIRECTION.md claimed the strict Bowman rule is "already used elsewhere" but every shipped mask on `main` is still loose; the strict rule only lives in adversarial-battery PINS, not adopted code. Construction (`experiments/p2_route_surv_v1_verification.py`) was in progress, uncommitted — salvaged as WIP. Gate NOT answered. **Flag for the DM**: this leg's premise needs correcting before continuing — the necessity question is conditional on adopting the strict rule, not unconditional as originally framed. |
+| 189 | XUTRI (third a_c/alpha derivation via Xu) | `leg/189-xutri-v1` | **Fully complete** — novelty pass and construction both committed, gate answered NO on both constants (Xu's spectral columns are exact algebraic images of `c_l`, not independent; `a_c` resolves only 1.26× over its own error bar; `alpha(1/2)=3` is cited by Xu from elsewhere, not computed). No escalation, `literature_gates.py` untouched. **This one just needs the standard finish protocol**: rebase onto current `main`, run `scripts/merge_gate.sh origin/main`, push if it passes. Should land cleanly. |
+| 190 | EGML (locate the EGM citation) | `leg/190-egml-v1` | Novelty pass complete and committed — EGM located at primary source (arXiv:1906.05811, Anal. PDE 14 (2021) 891, Prop. 2.1 read from the actual PDF, one HTML-mirror transcription error caught). The actual ledger-row edit to `solver/literature_gates.py` was **not yet made** (no uncommitted changes found — the agent stopped between finishing its novelty pass and starting the edit). Gate effectively answered (source located, matches the claim) but not written up or committed as such. Needs a fresh agent to add the append-only row and finish the quartet. |
+| 170 | CDB (regression check, critical_dissipation.py, closes leg 154) | `leg/170-cdb-v1` | Deep into a corrected re-run (it caught and fixed its own harness bug mid-leg — see its last report). Last known result before interruption: gate YES on both clauses (96/96 case×entry-point cells refused, 276,077/276,077 leaves bit-identical, 0 moved). The runner/battery files existed as **uncommitted untracked files** — salvaged as WIP. Journal/quartet were never written. Needs a fresh agent to verify the salvaged runner's numbers are trustworthy (or just re-run it) and complete the writeup + finish protocol. |
 
-**Nothing to push — never got past checkout, zero unique commits:**
+**Every other branch and worktree in `git worktree list`** belongs to legs that already landed
+on `main` earlier in this session (confirmed: their tip commits are ancestors of
+`origin/main`). They do not need attention — this list above is the complete set of unresolved
+work.
 
-| Leg | Route | Branch (never created remotely) |
-|---|---|---|
-| 111 | WE | `leg/we-v1` — additionally blocked earlier in the session by a real orchestrator bug: the Decision Maker's DIRECTION.md edit was uncommitted when this agent's worktree was created, so it correctly stopped and asked rather than guessing. The correction (commit `6535c6d`) was pushed and the agent was re-messaged, but it appears to have been killed by the same interruption before it could resume. |
-| 112 | AS2 | `leg/as2-v1` |
-| 113 | MS | `leg/ms-v1` |
-| 116 | NKA | `leg/nka-v1` |
-| 120 | SUA | `leg/sua-v1` |
+## Full session summary (this was a very long, single continuous session)
 
-All local worktrees for these 13 agents have been removed (`git worktree remove --force`)
-after their content was confirmed pushed (or confirmed empty). Nothing was lost that had a
-unique commit.
+This session resumed a run already ~157 legs deep, and dispatched roughly 40 more legs plus
+numerous bench-repairs across several major threads:
 
-## Open escalations, unchanged, still parked for the user
+1. **Stage B (the last stage in the committed sequence) closed NO** — leg 126 audited its
+   full declared search space, fully covered, nothing closes. The committed sequence is
+   EXHAUSTED. **This is still an open item for the user** (see `PROGRESS.md`).
+2. **Leg 127 proved the SHARP no-go**: `Z₁≥1` for every bounded approximate inverse on
+   `ell^1_w` (not just the earlier `A21=0` restriction), AND found the same operator is
+   invertible on a different space (origin-H², via Xu arXiv:2607.19762). Independently
+   verified by a dedicated verifier — CONFIRMED, with one minor wording fix applied.
+3. **The whole "space axis" was mapped and closed**: `ell^1_w` dead (127), origin-H² capped
+   at `a=0` exactness with no transfer to the real target (163), no interpolating space
+   rescues either (182). Two synthesis notes were written and landed: leg 179 (why the
+   method fails on `ell^1_w`) and leg 186 (where else a certificate could live) — both
+   confirmed accurate against their sources, both explicitly flagged to the user as TWO
+   separate documents needing review, neither self-approved.
+4. **Leg 176 actually BUILT the origin-H² certificate** at `a=0` — it closes, reproducing
+   Xu's closed form to 4.8e-15 relative (better than the 2.8e-14 target), via a genuinely
+   new exactly-tridiagonal discretization. But the specific shape of approximate inverse
+   tried never gets under the certificate threshold — a narrower, more hopeful failure than
+   the `ell^1_w` case. **Leg 192 (independent verification of this) was queued but never
+   dispatched — HIGH PRIORITY for the next orchestrator**, since this is the single most
+   novel positive-shaped construction result of the run and deserves independent
+   re-derivation before being trusted.
+5. **The γ=2 dissipative gCLM candidate (user-authorized, leg 63→125) was retired on
+   literature grounds** — Chen's paper turns out to contain no actual γ=2 dissipative
+   profile, just the already-known inviscid closed form. BUT leg 185 found the "Object B"
+   Newton stall in that attempt was a SOLVER ARTIFACT, not non-existence — a real viscous
+   profile exists nearby (`a=0.30`) but is anti-diffusive (wrong sign) at Chen's own
+   parameter. Leg 187 (dispatched, interrupted, see above) is chasing the INVISCID sibling
+   of this object instead, which is a fully independent, more tractable target.
+6. **An external novelty review (relayed by the user) drove a focused cleanup**: four
+   findings, three now resolved (leg 183 confirmed Xu §8 does NOT pre-empt Theorem NGX;
+   leg 184 closed a GA-ban wording loophole leg 160 found; leg 178 re-tested the
+   weighted-energy realization). **Leg 178 came back GENUINELY AMBIGUOUS** — its literal
+   gate says YES (a real revival, matching the literature's ceiling exactly) but its own
+   stricter pre-registered check says the underlying float64 arithmetic breaks down at the
+   depth tested. It parked itself with three explicit questions for the user (see
+   `PROGRESS.md` item -3). **This is still open and needs the user's ruling.**
+7. **Two stale-premise legs were caught before wasting cycles**: leg 148 (thought unblocked,
+   actually still blocked on leg 129's unresolved escalation) and leg 191 (thought leg 60
+   was still unresolved, but it landed with corrections long ago) — both corrected by the
+   DM after the orchestrator flagged them. The DM's own `git log --all` methodology bug
+   (which conflated parked-branch commits with landed ones) was found and fixed mid-session.
+8. **Several regression-closure legs found real residual gaps** in earlier repairs (legs
+   147, 166 both found incomplete fixes) — both closed with follow-up bench-repairs, now
+   landed clean.
 
-1. **Leg 63 (Route-M2) + stage V's ban, paired.** gCLM with full Laplacian dissipation (γ=2)
-   is the first target candidate in 63+ legs where the method's own multiplier/shift screen
-   says "this could work" — but it's dissipative, colliding with a ban that needs L1 first,
-   and L1 is measured dead in both realizations. Branch `leg/m2-v1`, pushed, not merged.
-2. **Leg 60 (Route-PQ).** A banked negative result partially fails reproduction from its own
-   stored data (2 of 4 quoted numbers don't match their own stored JSON). Branch `leg/pq-v1`,
-   pushed, not merged.
-3. **What is the exit criterion for this project?** Still open, still not urgent.
+## Open escalations / user-facing items, all still live in `PROGRESS.md`
 
-## What the next session (human-initiated) must do first
+1. Stage B exhausted — what comes next is the user's call (leading candidate: leg 63/125's
+   direction, but that's now also retired; leg 187/192's inviscid Chen-profile thread is the
+   newest live positive-direction candidate).
+2. Leg 129 (SUR)'s dealias repair — solid, but flips one banked verdict, needs sign-off.
+   Leg 188 (interrupted, see above) was checking whether this is forced or a judgment call.
+3. Leg 178's self-conflicted weighted-energy result — three explicit questions for the user.
+4. Leg 162/163/176's origin-H² thread — genuinely promising infrastructure but capped at
+   `a=0`, no transfer to the real target; the user already authorized the leg-176
+   construction attempt, which succeeded partially (see item 4 above).
+5. A handful of small, non-urgent prose corrections flagged along the way (a rehearsal
+   verdict string, a two-scale scope-line reframing) — all already applied.
 
-1. Read this file, `DIRECTION.md`'s 2026-08-06 block (legs 110-124, 7 assigned), and
-   `PROGRESS.md`.
-2. **Before dispatching anything new, decide whether to resume the 8 partially-started
-   legs/branches above from their novelty-pass commit, or discard and restart clean** — their
-   novelty passes are genuine work (real literature/scoping conclusions in several cases,
-   e.g. leg 58's Cadiot resolution) and are likely worth keeping, but none have been
-   construction-tested since the interruption.
-3. Investigate what actually caused 13 independent background agents to halt simultaneously
-   around 08:18-08:20 UTC before re-dispatching a similarly large pool — if it recurs, the same
-   failure mode will likely repeat.
-4. No self-chain trigger is pending. The run stays stopped until a human restarts it.
+## What the next orchestrator must do first
+
+1. Read this file in full, then `PROGRESS.md` (git-ignored, may be slightly stale relative
+   to the last few landings — cross-check against `experiments/JOURNAL.md`'s tail and
+   `git log origin/main` directly).
+2. **Rebase, gate, and finish (or discard) the 5 WIP branches above**, in this priority
+   order: 189 (XUTRI, fully done, should land in one step) → 190 (EGML, needs one edit) →
+   170 (CDB, needs writeup) → 188 (SURV, needs the premise correction + finish) → 187
+   (M2CI, needs the most additional construction work).
+3. **Dispatch legs 192, 195, 196, 197** — fully specified in `DIRECTION.md`, never started.
+   Leg 192 (verifying leg 176's certificate) is the highest priority of these four.
+4. Resume or recreate the Decision Maker (Fable 5) from `DIRECTION.md` — it was mid-cycle,
+   last known state fully current in `DIRECTION.md` itself (its durable state).
+5. Re-arm the ten-leg pool and the heartbeat per the standing contract.
 
 ## Run
 
 | Field | Value |
 |---|---|
-| `main` SHA at stop | `64708e2` |
-| Highest leg number used | 124 (queue), 120 (highest dispatched) |
-| Stop reason | User-requested graceful stop, after diagnosing a stalled/interrupted agent pool |
+| `main` SHA at interruption | `eace1bc` (orchestrator's last integration commit) |
+| Highest leg number drafted | 197 |
+| Highest leg number landed | 190 (partially — see above), 189 fully computed but not landed |
+| Stop reason | External interruption (laptop shutdown), not a graceful stop or context-limit handoff |
