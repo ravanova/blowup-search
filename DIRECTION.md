@@ -10307,3 +10307,82 @@ Nothing in this update lifts a ban — 254's re-posing sits with the user, and 2
 conditional tier exists precisely so the leg cannot pre-empt that ruling. No committed
 gate changes; no claim about Walls 1 and 2 moves; Clay stays ~0.05%. Next fresh leg
 number: 260. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — USER RULING APPLIED: leg 254 merged, DSS ban split (Entry A
+cheap/banned, Entry B expensive/liftable-by-scoping); 251's conditional tier re-anchored;
+Entry B's named scoping leg drafted as 260; anti-pausing clause hardened
+
+**The user ruled directly ("Let's get leg 254 merged") and the orchestrator applied it**
+(commit `47f76eb`, all 10 invariants pass, merge gate green, 254's artifacts merged
+alongside): the DSS ban is now **Entry A** (cheap entrances — bifurcation off a fixed
+point — banned "never," unchanged in substance) and **Entry B** (the expensive entrance —
+a global unseeded periodic-orbit search — re-posed to "never — unless a scoping leg
+answers the function space, the object, and the price"). **254's escalation is RESOLVED
+and removed from pending tracking; nothing else sits in NEEDS-YOU from this DM's queue.**
+The ban change was made BY THE USER's ruling, not by any leg or by this DM — recorded for
+the honesty ledger.
+
+**Leg 251 (in flight): its CONDITIONAL tier re-anchors.** DSS-expensive-dependent
+candidates are no longer "blocked on the user" but **"blocked on Entry B's own scoping
+leg"** — a liftable, work-shaped condition. The orchestrator has forwarded the ruling to
+251's agent. 251 still cannot bank a DSS-expensive candidate as THE Phase-1 candidate
+until Entry B's scoping leg answers — that is now the ban's own text, not a DM overlay.
+
+**Entry B's scoping leg, drafted now (this DM's call: cheap insurance — if 251's screen
+surfaces a DSS-conditional candidate, the lift path is ready instead of a round-trip):**
+
+```
+### 260 — ROUTE-DSSB: ENTRY B's OWN SCOPING LEG — THE FUNCTION SPACE, THE OBJECT, AND THE
+PRICE OF THE DSS EXPENSIVE ENTRANCE (the lift condition's three named questions, answered
+as a scoping, not a construction)
+[Counted OUTSIDE the floor tally, conservatively, same as 254 — scoping, not construction]
+**Thesis.** Entry B's re-posed wording (user ruling via leg 254, commit 47f76eb) makes the
+DSS expensive entrance liftable by exactly one thing: a scoping leg answering (1) what
+FUNCTION SPACE a global unseeded periodic-orbit search would run in, (2) what OBJECT it
+would target, and (3) what the PRICE actually is (compute, machinery to build, and which
+existing capabilities.py modules carry part of it). This leg answers those three, from leg
+254's own locators plus the DSS lane's historical record — it builds nothing and runs no
+search.
+**Gate.** Can all three questions be answered concretely — a named function space, a named
+object, a costed price (including what exists vs. what must be built) — such that the
+answer is actionable by a hypothetical construction leg without further scoping?
+  yes -> Bank the three answers with locators. ESCALATE to the user with Entry B's lift
+         condition satisfied on paper — the lift itself is the user's signature, exactly
+         as P1c's gate is worded for the stage-V ban. If 251 has a DSS-conditional
+         candidate by then, name the connection explicitly.
+  no -> Name which of the three resists a concrete answer and why — an unanswerable
+        price/space/object question is itself the measured reason Entry B stays shut, and
+        upgrades the ban's basis from cost-shaped to substantive. Report at full strength.
+**Territory.** experiments/p2_route_dssb_v1_scoping.py,
+               writeup/data/p2_route_dssb_v1_scoping.json,
+               writeup/novelty/leg_260.md, experiments/journal/leg_260.md.
+               Reads (never edits) leg 254's merged report/JSON, the DSS lane's historical
+               reports, capabilities.py.
+**Difficulty.** standard
+**Independence.** Reads-only; no written overlap with any live slot. NOT urgent — nothing
+is currently blocked purely on its absence (251 reports DSS candidates as conditional
+either way). Reserve priority: behind 248/228/210, ahead of 259 — UNLESS 251 lands with a
+DSS-conditional candidate in its yes-branch, in which case 260 promotes to the next
+vacancy immediately, pre-committed here so no re-ranking decision is needed at that
+moment.
+```
+
+**Anti-pausing clause, hardened (fourth occurrence — 236, 226, 252, and 221, the last
+dispatched before the clause existed):** every future brief carries, verbatim: **"Run to
+your gate answer in one continuous pass. Nothing wakes you if you stop mid-computation —
+there is no monitor, no background job, no resumption. A stopped leg is a stalled leg
+until a human notices."** The orchestrator's per-agent nudges cover pre-clause dispatches;
+this wording covers everything from here on.
+
+**Roster unchanged** (ten slots as in the slot-C refill update; FLOOR-TABLE block
+untouched, still 6/10). **Canonical reserve line: reserve count 10 — legs 248, 228, 210,
+260, 259, 229, 231, 232, 233, 234.** Effective immediately-dispatchable: 5 (248, 228,
+210, 260, 259 — in that priority order, with 260's pre-committed promotion trigger noted
+above); 229 blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg
+number: **261.**
+
+Nothing in this update lifts a ban (the user lifted/re-posed Entry B; this DM only
+records it), changes any committed gate, or moves any claim about Walls 1 and 2; Clay
+stays ~0.05%. No direction question raised.
