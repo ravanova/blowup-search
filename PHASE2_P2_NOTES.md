@@ -31,7 +31,12 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## pre-run plateau scout caught that near-transition floors are SEARCH-limited at the old budget
 ## (a=0.6 K4 drops 45% at 2× budget) → fixed budget pop150/gen250/8seeds (converged) + in-JSON
 ## budget/K6 spot-checks. Locked T1–T7 (commit 44a507c), logged 7/7. RESULT: a_p(K)=0.40→0.50→0.50
-## SATURATES; boundary a*≈0.5–0.55 is GA-converged (K4 1.7×-budget within 5%), genome-converged (K6
+## SATURATES; boundary a*≈0.5–0.55 — measured on **a > 0** (swept a ∈ {0, 0.3, …, 1.0}), for the
+## a>0 continuation of HQW25's exact a=0 two-scale traveling wave, NOT for the published two-scale
+## SCENARIO, which arXiv:2603.25104 scopes to a ≤ 0 (leg 112 read it at full text; the same paper's
+## Thm 2.7 gives a traveling wave for every a ∈ (−∞,1) and Thm 7.10(3) its compact support at
+## 0<a<1, so the a>0 object is real and published, just not that scenario) — is GA-converged (K4
+## 1.7×-budget within 5%), genome-converged (K6
 ## does NOT beat K4), and BASIS-independent (mixed Lorentzian+squared within 3× of K3); far-end
 ## robust (K4 floor 1.28e-1 at a=1); resolution fine (min 35 pts). Honest nuance: a* is a SOFT
 ## crossing (bases straddle 1e-2 at 0.55), not a razor edge. The T4 "soft boundary" caveat is now a
@@ -187,8 +192,8 @@ committed writeup/data/p2_hl_anchor.json via `python writeup/4_p2_lottery/p2_hl_
 ## below the boundary. Newton also converged at large a — which for an hour looked like "the
 ## boundary is a genome artifact" — but **the grid test overturns that**: spread in c across
 ## n=401/801/1601 is 3e-5 at a=0.5 and 1.3e-2 at a=1.0, with only 1 of 3 grids converging there,
-## so the large-a successes are solver artifacts and **the GA's a*~0.5-0.55 stands, confirmed a
-## FOURTH time by a genome-free method**. What it does to Y0 is a change of BINDING CONSTRAINT,
+## so the large-a successes are solver artifacts and **the GA's a*~0.5-0.55 (measured on a>0)
+## stands, confirmed a FOURTH time by a genome-free method**. What it does to Y0 is a change of BINDING CONSTRAINT,
 ## not a solved problem: the certificate sees the WEIGHTED sup defect, which is 6+ orders larger
 ## (1e-8..1e-7 typically, 1.5e-2 at a=0.45, ABOVE the 2.45e-4 budget) because the codomain weight
 ## amplifies the far field where the truncation lives. **Y0 is no longer SEARCH-limited, it is
@@ -1282,8 +1287,9 @@ SIX evidence pieces (do not relearn):
      moving with n. Spread in c over n=401/801/1601: **8e-4 (a=0) / 3e-4 (0.2) / 3e-5 (0.5) /
      3.7e-3 (0.8) / 1.3e-2 (1.0)**, and grids reaching machine precision 3/3/2/**1**/**1**. So
      solutions are continuum objects up to **a ≈ 0.5** and not beyond: **the GA's a*≈0.5–0.55
-     confirmed a FOURTH time, now by a method with no genome, no search budget and no
-     stochasticity** — and sharpened: below a*, an exact discrete traveling wave EXISTS.
+     (measured on a>0, as everywhere in this file) confirmed a FOURTH time, now by a method with
+     no genome, no search budget and no stochasticity** — and sharpened: for 0 < a below a*, an
+     exact discrete traveling wave EXISTS.
   V5 **WHAT IT DOES TO Y₀ — a change of BINDING CONSTRAINT, not a solved problem.** The
      certificate does not see the RMS; it sees the **weighted sup defect** sup(1+X²)^{(α+1)/2}|R₂|,
      which is **6+ orders larger** (the codomain weight amplifies exactly the far field where the
@@ -1561,9 +1567,11 @@ only up to a~0.5". On (RS) the same object is K-converged to **6.3e-13 / 4.9e-12
 basis failing on a compactly supported profile whose edge regularity is C^{1/a} and therefore
 gets WORSE as a grows — the same artifact family as §21's ringing (lesson 31). **What is
 retired is §20's ARGUMENT, not a\*:** the other three confirmations (§9-cont2 GA-/genome-/basis-
-convergence) are about the two-scale GA problem, a different question this leg does not touch.
-So a* is confirmed THREE times, and separately the compactly supported traveling wave exists
-as a grid-converged continuum object well past it.
+convergence) are about the two-scale GA problem — whether the a=0 anchor's two-scale structure
+survives continuation into a>0 — a different question this leg does not touch, and a different
+question again from the published two-scale SCENARIO (arXiv:2603.25104: a ≤ 0).
+So a* is confirmed THREE times, all on a>0, and separately the compactly supported traveling
+wave exists as a grid-converged continuum object well past it.
 
 **NOT CLAIMED.** Not a certificate — Y0, Z0, Z1, Z2 have not been computed in the reduced
 space; ||A|| converging says the approximate inverse EXISTS in the limit, nothing about the
@@ -1619,6 +1627,15 @@ useful and an unlabelled one is a liability.
   described as the **a <= 0** case, with **a > 0 giving ONE-scale self-similar blowups**. This
   project has worked the two-scale object at a > 0 throughout. **If that sign is right the
   question is not whether our object is novel but whether it is the RIGHT OBJECT.**
+  **[SCOPE CORRECTION, leg 180, on leg 112's full-text pass.** The sign is right AND the
+  inference does not follow. The a<=0/a>0 dichotomy is about **which self-similar blowup
+  scenario DEGENERATE INITIAL DATA produce** (the paper's own stated purpose, p.3), not about
+  which objects exist at which a. The same paper's **Thm 2.7 (p.15, proved p.44)** gives a
+  traveling wave for **every a in (-inf, 1)**, and **Thm 7.10(3) (p.45)** makes it compactly
+  supported for 0<a<1 — exactly what §21/§23 measured. So the a>0 object is the RIGHT object
+  and is published; what is NOT ours to claim is the two-scale SCENARIO, which is a<=0. Every
+  a*~0.5-0.55 statement in this file and in writeup/ is therefore scoped to a>0 and to the
+  continuation of the a=0 anchor, not to that scenario.**]
 - **arXiv:2305.05895 (same group, 2023)** — exact self-similar gCLM profiles for all a <= 1,
   "either smooth on the whole real line or **COMPACTLY SUPPORTED** and smooth in the interior
   of their closed supports"; existence via the fixed point of an a-dependent nonlinear map
@@ -1726,7 +1743,8 @@ branch predicts (-7.7/-6.0) — **the fits are floor-contaminated, so the honest
   fails**. (ii) **NORM-DEPENDENT** — a domain weight vanishing like (1-v)^{(2-1/a)/2} restores
   finiteness at the price of requiring perturbations to vanish at the edge (lesson 13's trade,
   in a new place). (iii) **NOT an explanation of a\***. The coincidence with the independently
-  measured a*~0.5-0.55 is recorded BECAUSE it is striking and because recording it is how the
+  measured a*~0.5-0.55 (measured on a>0) is recorded BECAUSE it is striking and because
+  recording it is how the
   next person disproves it. §22's a=1/3 control is the precedent — a tantalising coincidence at
   a* that a control killed. **No control has been run here, so it stays an observation.**
 
