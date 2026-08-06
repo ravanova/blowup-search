@@ -1,0 +1,812 @@
+{
+  "leg": 208,
+  "route": "TSA",
+  "role": "LEG",
+  "target": "solver/target_selection.py",
+  "gate": "Under adversarial and degenerate inputs, does target_selection.py ever silently return a wrong screening verdict (pass a candidate that should fail the multiplier/shift predicate, or vice versa) rather than reject or visibly propagate the defect?",
+  "premise_correction": "the dispatch names this file as leg 63's multiplier/shift screen; it is not.  main's file is Route-M v1 (commit 2450ddf).  Leg 63's screen is commit 7a58854 on the PARKED, unmerged branch leg/m2-v1 and adds screen_operator / multiplier_crossover / m2_gate_verdict, none of which exist on main",
+  "census_finding": "solver/certificate_guards.py (leg 128) declares itself 'ONE hypothesis guard for every radii-polynomial verdict function in this repository' and enumerates three members (legs 79, 98, 116); a fourth (nk_fourier) is pinned as a known gap.  The string 'target_selection' appears in NONE of certificate_guards.py, writeup/novelty/leg_128.md or experiments/journal/leg_128.md.  This module is a sixth verdict function of the same class that the census never enumerated",
+  "A_y0_budget_sign_blindness": {
+    "what": "y0_budget(Z1, Z2) = (1 - Z1)^2 / (2 Z2) with NO check that Z1 < 1, so it is invariant under Z1 -> 2 - Z1",
+    "rows": [
+      {
+        "Z1": 0.0,
+        "Z2": 1.0,
+        "budget_returned": 0.5,
+        "budget_true": 0.5,
+        "outside_theorem": false,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 0.25,
+        "Z2": 1.0,
+        "budget_returned": 0.28125,
+        "budget_true": 0.28125,
+        "outside_theorem": false,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 0.5,
+        "Z2": 1.0,
+        "budget_returned": 0.125,
+        "budget_true": 0.125,
+        "outside_theorem": false,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 0.75,
+        "Z2": 1.0,
+        "budget_returned": 0.03125,
+        "budget_true": 0.03125,
+        "outside_theorem": false,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 0.9,
+        "Z2": 1.0,
+        "budget_returned": 0.0049999999999999975,
+        "budget_true": 0.0049999999999999975,
+        "outside_theorem": false,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 1.0,
+        "Z2": 1.0,
+        "budget_returned": 0.0,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": false
+      },
+      {
+        "Z1": 1.1,
+        "Z2": 1.0,
+        "budget_returned": 0.005000000000000009,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      },
+      {
+        "Z1": 1.25,
+        "Z2": 1.0,
+        "budget_returned": 0.03125,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      },
+      {
+        "Z1": 1.5,
+        "Z2": 1.0,
+        "budget_returned": 0.125,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      },
+      {
+        "Z1": 2.0,
+        "Z2": 1.0,
+        "budget_returned": 0.5,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      },
+      {
+        "Z1": 3.0,
+        "Z2": 1.0,
+        "budget_returned": 2.0,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      },
+      {
+        "Z1": 5.0,
+        "Z2": 1.0,
+        "budget_returned": 8.0,
+        "budget_true": 0.0,
+        "outside_theorem": true,
+        "returns_positive_budget_anyway": true
+      }
+    ],
+    "mirror_pairs": [
+      {
+        "x": 0.1,
+        "Z1_lo": 0.9,
+        "Z1_hi": 1.1,
+        "budget_lo": 0.0049999999999999975,
+        "budget_hi": 0.005000000000000009,
+        "identical_bitwise": false,
+        "abs_difference": 1.1275702593849246e-17
+      },
+      {
+        "x": 0.25,
+        "Z1_lo": 0.75,
+        "Z1_hi": 1.25,
+        "budget_lo": 0.03125,
+        "budget_hi": 0.03125,
+        "identical_bitwise": true,
+        "abs_difference": 0.0
+      },
+      {
+        "x": 0.5,
+        "Z1_lo": 0.5,
+        "Z1_hi": 1.5,
+        "budget_lo": 0.125,
+        "budget_hi": 0.125,
+        "identical_bitwise": true,
+        "abs_difference": 0.0
+      },
+      {
+        "x": 0.75,
+        "Z1_lo": 0.25,
+        "Z1_hi": 1.75,
+        "budget_lo": 0.28125,
+        "budget_hi": 0.28125,
+        "identical_bitwise": true,
+        "abs_difference": 0.0
+      },
+      {
+        "x": 0.9,
+        "Z1_lo": 0.09999999999999998,
+        "Z1_hi": 1.9,
+        "budget_lo": 0.405,
+        "budget_hi": 0.4049999999999999,
+        "identical_bitwise": false,
+        "abs_difference": 1.1102230246251565e-16
+      }
+    ],
+    "n_mirror_pairs": 5,
+    "n_mirror_pairs_bitwise_identical": 3,
+    "mirror_worst_abs_difference": 1.1102230246251565e-16,
+    "mirror_note": "3 of 5 agree BIT FOR BIT; the other two (x = 0.1, 0.9) differ by <= 1.11e-16, which is the float representation of 0.9/1.1 and not a property of the function",
+    "n_outside_theorem": 7,
+    "n_outside_that_return_positive_budget": 6,
+    "sharpest_witness": {
+      "statement": "Z1 = 2.0 -- an operator whose ||I - A DF|| is TWICE the identity's tolerance, i.e. maximally not an approximate inverse -- is assigned EXACTLY the residual budget of Z1 = 0.0, a PERFECT inverse",
+      "budget_at_Z1_2": 0.5,
+      "budget_at_Z1_0": 0.5,
+      "identical_bitwise": true,
+      "true_budget_at_Z1_2": 0.0,
+      "overstatement": "infinite -- a finite positive budget where the truth is 0"
+    }
+  },
+  "B_radii_polynomial_forbidden": {
+    "what": "forbidden (Y0, Z1, Z2) triples -- each violates a NONNEGATIVITY hypothesis that the module's own comment states by calling the quantities ||A F(x)||, ||I - A DF(x)||, ||A(DF(v) - DF(x))||",
+    "rows": [
+      {
+        "label": "Z2_negative_unit",
+        "Y0": 0.001,
+        "Z1": 0.5,
+        "Z2": -1.0,
+        "feasible": true,
+        "reason": "Z2 = 0, affine",
+        "r_min": 0.002,
+        "r_max": "inf",
+        "Y0_budget": "inf",
+        "Y0_over_budget": 0.0,
+        "negative_radius": false,
+        "reason_contradicts_input": true
+      },
+      {
+        "label": "Z2_negative_large",
+        "Y0": 0.001,
+        "Z1": 0.5,
+        "Z2": -10000.0,
+        "feasible": true,
+        "reason": "Z2 = 0, affine",
+        "r_min": 0.002,
+        "r_max": "inf",
+        "Y0_budget": "inf",
+        "Y0_over_budget": 0.0,
+        "negative_radius": false,
+        "reason_contradicts_input": true
+      },
+      {
+        "label": "Y0_negative_unit",
+        "Y0": -1.0,
+        "Z1": 0.5,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": -1.0,
+        "r_max": 0.5,
+        "Y0_budget": 0.125,
+        "Y0_over_budget": -8.0,
+        "negative_radius": true,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "Y0_negative_small",
+        "Y0": -1e-06,
+        "Z1": 0.5,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": -1.999996000034976e-06,
+        "r_max": 0.5,
+        "Y0_budget": 0.125,
+        "Y0_over_budget": -8e-06,
+        "negative_radius": true,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "Y0_negative_huge",
+        "Y0": -1000000.0,
+        "Z1": 0.5,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": -1413.71365076144,
+        "r_max": 0.5,
+        "Y0_budget": 0.125,
+        "Y0_over_budget": -8000000.0,
+        "negative_radius": true,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "Z1_negative_unit",
+        "Y0": 0.001,
+        "Z1": -1.0,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": 0.0005000625156297289,
+        "r_max": 2.0,
+        "Y0_budget": 2.0,
+        "Y0_over_budget": 0.0005,
+        "negative_radius": false,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "Z1_negative_large",
+        "Y0": 0.001,
+        "Z1": -3.0,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": 0.00025000781298833985,
+        "r_max": 4.0,
+        "Y0_budget": 8.0,
+        "Y0_over_budget": 0.000125,
+        "negative_radius": false,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "Y0_and_Z1_negative",
+        "Y0": -1.0,
+        "Z1": -1.0,
+        "Z2": 1.0,
+        "feasible": true,
+        "reason": "ok",
+        "r_min": -0.4494897427831779,
+        "r_max": 2.0,
+        "Y0_budget": 2.0,
+        "Y0_over_budget": -0.5,
+        "negative_radius": true,
+        "reason_contradicts_input": false
+      },
+      {
+        "label": "all_three_negative",
+        "Y0": -1.0,
+        "Z1": -1.0,
+        "Z2": -1.0,
+        "feasible": true,
+        "reason": "Z2 = 0, affine",
+        "r_min": -0.5,
+        "r_max": "inf",
+        "Y0_budget": "inf",
+        "Y0_over_budget": -0.0,
+        "negative_radius": true,
+        "reason_contradicts_input": true
+      }
+    ],
+    "n_forbidden": 9,
+    "n_forbidden_that_return_feasible": 9,
+    "n_with_negative_certified_radius": 5,
+    "n_whose_reason_string_contradicts_its_input": 3,
+    "nan_inf_rows": [
+      {
+        "label": "Y0_nan",
+        "feasible": false,
+        "reason": "ok",
+        "r_min": "nan"
+      },
+      {
+        "label": "Z1_nan",
+        "feasible": false,
+        "reason": "ok",
+        "r_min": "nan"
+      },
+      {
+        "label": "Z2_nan",
+        "feasible": false,
+        "reason": "ok",
+        "r_min": "nan"
+      },
+      {
+        "label": "Y0_inf",
+        "feasible": false,
+        "reason": "no positive part: Y0 exceeds the budget",
+        "r_min": null
+      },
+      {
+        "label": "Z1_ninf",
+        "feasible": false,
+        "reason": "ok",
+        "r_min": "nan"
+      },
+      {
+        "label": "Z2_inf",
+        "feasible": false,
+        "reason": "no positive part: Y0 exceeds the budget",
+        "r_min": null
+      }
+    ],
+    "nan_inf_all_refused": true,
+    "nan_inf_note": "NaN is absorbed into a REFUSAL -- the benign direction -- but by accident, not by a guard: `feasible = r_min < min(...)` is False because every ordered comparison with NaN is False (Goldberg; see writeup/novelty/leg_208.md Q3), and the row still carries reason = 'ok' with r_min = nan, and emits a RuntimeWarning.  Reported, NOT inflated.",
+    "sharpest_witness": {
+      "statement": "radii_polynomial(-1.0, 0.5, 1.0) returns feasible = True with r_min = -1.0: a Newton-Kantorovich existence ball of NEGATIVE radius, asserting a zero inside an empty set",
+      "r_min": -1.0
+    },
+    "second_witness": {
+      "statement": "radii_polynomial(1e-3, 0.5, -1.0) returns feasible = True with reason = 'Z2 = 0, affine' while Z2 = -1.0.  The a <= 0 branch swallows every negative Z2 into the Z2 = 0 case and then NAMES the wrong one in its own output"
+    }
+  },
+  "C_budget_leaks_through_refusal": {
+    "what": "the Z1 >= 1 refusal is CORRECT; the magnitudes shipped alongside it are not, because `out` is assembled before the guard runs",
+    "rows": [
+      {
+        "Y0": 0.1,
+        "Z1": 1.0,
+        "Z2": 1.0,
+        "feasible": false,
+        "feasible_is_correct": true,
+        "Y0_budget_reported": 0.0,
+        "Y0_over_budget_reported": "inf",
+        "reads_as_headroom": false
+      },
+      {
+        "Y0": 0.1,
+        "Z1": 1.1,
+        "Z2": 1.0,
+        "feasible": false,
+        "feasible_is_correct": true,
+        "Y0_budget_reported": 0.005000000000000009,
+        "Y0_over_budget_reported": 19.999999999999964,
+        "reads_as_headroom": false
+      },
+      {
+        "Y0": 0.1,
+        "Z1": 1.5,
+        "Z2": 1.0,
+        "feasible": false,
+        "feasible_is_correct": true,
+        "Y0_budget_reported": 0.125,
+        "Y0_over_budget_reported": 0.8,
+        "reads_as_headroom": true
+      },
+      {
+        "Y0": 0.1,
+        "Z1": 2.0,
+        "Z2": 1.0,
+        "feasible": false,
+        "feasible_is_correct": true,
+        "Y0_budget_reported": 0.5,
+        "Y0_over_budget_reported": 0.2,
+        "reads_as_headroom": true
+      },
+      {
+        "Y0": 0.1,
+        "Z1": 3.0,
+        "Z2": 1.0,
+        "feasible": false,
+        "feasible_is_correct": true,
+        "Y0_budget_reported": 2.0,
+        "Y0_over_budget_reported": 0.05,
+        "reads_as_headroom": true
+      }
+    ],
+    "n_correct_refusals": 5,
+    "n_that_also_report_spare_headroom": 3,
+    "sharpest_witness": {
+      "statement": "at Z1 = 2.0, Z2 = 1.0, Y0 = 0.1 the verdict is correctly INFEASIBLE while the same dict reports Y0_over_budget = 0.2, i.e. 'you are using a fifth of your budget, 5x of headroom', for an operator with no budget at all",
+      "Y0_over_budget_at_Z1_2": 0.2
+    }
+  },
+  "D_unknowns_degenerate_exponent": {
+    "what": "the Q2 reach screen: exact unknown count and ratio to the certified object",
+    "rows": [
+      {
+        "dim": 1,
+        "unknowns": 1203.0,
+        "dim_used": 1,
+        "truncated": false,
+        "is_int": true
+      },
+      {
+        "dim": 1.4,
+        "unknowns": 1203.0,
+        "dim_used": 1,
+        "truncated": true,
+        "is_int": true
+      },
+      {
+        "dim": 1.5,
+        "unknowns": 1203.0,
+        "dim_used": 1,
+        "truncated": true,
+        "is_int": true
+      },
+      {
+        "dim": 1.9,
+        "unknowns": 1203.0,
+        "dim_used": 1,
+        "truncated": true,
+        "is_int": true
+      },
+      {
+        "dim": 1.999999,
+        "unknowns": 1203.0,
+        "dim_used": 1,
+        "truncated": true,
+        "is_int": true
+      },
+      {
+        "dim": 2,
+        "unknowns": 720003.0,
+        "dim_used": 2,
+        "truncated": false,
+        "is_int": true
+      },
+      {
+        "dim": 2.5,
+        "unknowns": 720003.0,
+        "dim_used": 2,
+        "truncated": true,
+        "is_int": true
+      },
+      {
+        "dim": 3,
+        "unknowns": 432000003.0,
+        "dim_used": 3,
+        "truncated": false,
+        "is_int": true
+      }
+    ],
+    "fractional_dim_understatement_factor": 598.5062344139651,
+    "fractional_dim_note": "unknowns(1.9, 2, 600, 3) = 1203, identical to the dim = 1 answer, against 720003 for dim = 2",
+    "negative_dim_returns": 3.0033333333333334,
+    "negative_dim_is_int": false,
+    "negative_dim_note": "unknowns(-1, ...) returns a FLOAT from a function whose docstring promises an exact count",
+    "nan_dim_raises": true,
+    "nan_dim_exception": "ValueError",
+    "ratio_rows": [
+      {
+        "n_per_dim": 0,
+        "ratio_1D_rank1": 1.5,
+        "ratio_2D_rank3": 1.5,
+        "rank1_passes_reach_screen": false,
+        "dimensions_indistinguishable": true
+      },
+      {
+        "n_per_dim": 1,
+        "ratio_1D_rank1": 1.0,
+        "ratio_2D_rank3": 1.0,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": true
+      },
+      {
+        "n_per_dim": 2,
+        "ratio_1D_rank1": 0.5,
+        "ratio_2D_rank3": 0.7857142857142857,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": false
+      },
+      {
+        "n_per_dim": 10,
+        "ratio_1D_rank1": 0.076158940397351,
+        "ratio_2D_rank3": 0.6721854304635762,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": false
+      },
+      {
+        "n_per_dim": 100,
+        "ratio_1D_rank1": 0.006766215585627624,
+        "ratio_2D_rank3": 0.6667222185187655,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": false
+      },
+      {
+        "n_per_dim": 600,
+        "ratio_1D_rank1": 0.0011138868261355071,
+        "ratio_2D_rank3": 0.6666682098736855,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": false
+      },
+      {
+        "n_per_dim": 5000,
+        "ratio_1D_rank1": 0.0001333733297767112,
+        "ratio_2D_rank3": 0.6666666888888882,
+        "rank1_passes_reach_screen": true,
+        "dimensions_indistinguishable": false
+      }
+    ],
+    "rank_table_docstring_claim": "'it cancels in the DIMENSION part of the ratio and only sets the scale, so the ranking it produces is insensitive to the choice'",
+    "claim_holds_at_default_600": true,
+    "claim_fails_at": "n_per_dim = 1, where the 1D rank-1 and 2D rank-3 candidates have the SAME ratio 1.0 and the dimension is invisible; and n_per_dim = 0, where rank 1's ratio is 1.5 > 1 and it FAILS the gate's own reach screen",
+    "containment": "gate_verdict() calls rank_table() with the default and does NOT forward n_per_dim, so neither degenerate resolution is reachable from the gate.  The containment is real and is why this row is LATENT, not contaminating"
+  },
+  "E_control_shared_guard": {
+    "what": "same tuples, two readers; only the reader varies",
+    "rows": [
+      {
+        "label": "Z2_negative_unit",
+        "shared_guard_violations": [
+          "Z_2 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Z2_negative_large",
+        "shared_guard_violations": [
+          "Z_2 is negative (-10000.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Y0_negative_unit",
+        "shared_guard_violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Y0_negative_small",
+        "shared_guard_violations": [
+          "Y_0 is negative (-1e-06); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Y0_negative_huge",
+        "shared_guard_violations": [
+          "Y_0 is negative (-1000000.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Z1_negative_unit",
+        "shared_guard_violations": [
+          "Z_1 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Z1_negative_large",
+        "shared_guard_violations": [
+          "Z_1 is negative (-3.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "Y0_and_Z1_negative",
+        "shared_guard_violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm",
+          "Z_1 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      },
+      {
+        "label": "all_three_negative",
+        "shared_guard_violations": [
+          "Y_0 is negative (-1.0); it is an upper bound on a norm",
+          "Z_1 is negative (-1.0); it is an upper bound on a norm",
+          "Z_2 is negative (-1.0); it is an upper bound on a norm"
+        ],
+        "shared_guard_rejects": true,
+        "target_selection_feasible": true
+      }
+    ],
+    "n_forbidden": 9,
+    "shared_guard_rejects": 9,
+    "target_selection_accepts": 9,
+    "control_is_informative": false,
+    "admissible_rows": [
+      {
+        "Y0": 1e-08,
+        "Z1": 0.3,
+        "Z2": 1000.0,
+        "shared_guard_rejects": false,
+        "target_selection_feasible": true
+      },
+      {
+        "Y0": 1e-12,
+        "Z1": 0.05,
+        "Z2": 1.0,
+        "shared_guard_rejects": false,
+        "target_selection_feasible": true
+      },
+      {
+        "Y0": 1e-06,
+        "Z1": 0.9,
+        "Z2": 0.01,
+        "shared_guard_rejects": false,
+        "target_selection_feasible": true
+      }
+    ],
+    "admissible_pass_both": true,
+    "reading": "9/9 forbidden triples are REJECTED by the repaired shared guard and 9/9 are ACCEPTED by target_selection.  The tuples are genuinely outside the theorem; the difference is the guard."
+  },
+  "F_reachability": {
+    "question": "is any adversarial case reachable from a banked call path, the way legs 201/204 separated 'latent' from 'contaminates'?",
+    "argument_1_by_construction": "every banked Y0/Z1/Z2 is a max of ABSOLUTE values, so no negative constant can arise from any call path in this repository",
+    "scanned": [
+      {
+        "file": "p2_route_c_pilot_v0.json",
+        "present": true,
+        "n_Z1_records": 3,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_route_l1_v1_interval.json",
+        "present": true,
+        "n_Z1_records": 18,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_weight_repairs_v1.json",
+        "present": true,
+        "n_Z1_records": 0,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_weight_repairs_v2.json",
+        "present": true,
+        "n_Z1_records": 0,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_route_port_v1_bordered.json",
+        "present": true,
+        "n_Z1_records": 43,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_route_port_v2_reach.json",
+        "present": true,
+        "n_Z1_records": 5,
+        "n_outside_0_le_Z1_lt_1": 0
+      },
+      {
+        "file": "p2_route_m_v1_targets.json",
+        "present": true,
+        "n_Z1_records": 16,
+        "n_outside_0_le_Z1_lt_1": 0
+      }
+    ],
+    "n_Z1_records_across_caller_jsons": 85,
+    "n_outside_theorem": 0,
+    "offenders": [],
+    "negative_Z1_elsewhere_in_repo": "64 records carry Z1 < 0, and ALL of them live in other legs' deliberate adversarial batteries -- p2_route_ica_v1 (4), p2_route_nfa_v1 (7), p2_route_nka_v1 (14), p2_route_nkb_v1 (34), p2_route_nsa_v1 (2), p2_route_pc_v1 (3) -- fed to the SIBLING functions, never to target_selection's.  Zero are measurements",
+    "weight_search_containment": "weight_search.fitness_many re-implements the budget inline WITH a `Z1 < 1.0` guard and never calls y0_budget on the GA path; y0_budget appears there only as a reporting field of certificate_constants",
+    "verdict": "LATENT.  85 of 85 banked (Y0,Z1,Z2) records across every caller lie inside 0 <= Z1 < 1, and no negative constant is constructible. NO banked number is contaminated."
+  },
+  "G_ledger_passthrough": {
+    "baseline_gate": {
+      "uncertified_count": 4,
+      "uncertified_and_cheaper_than_certified": [
+        "HL_S2_nonsymmetric",
+        "gCLM_degenerate_one_scale",
+        "Boussinesq_S2_nonsymmetric",
+        "HL_singular_steady_stability"
+      ],
+      "named_target": "HL_S2_nonsymmetric",
+      "gate": "YES"
+    },
+    "P1_planted_certified_object_marked_NO": {
+      "what": "Boussinesq_ChenHou is CAP-certified (Chen-Hou arXiv:2210.07191 + Part II); its `certified` field is flipped to 'NO'",
+      "gate_after": {
+        "uncertified_count": 5,
+        "uncertified_and_cheaper_than_certified": [
+          "HL_S2_nonsymmetric",
+          "gCLM_degenerate_one_scale",
+          "Boussinesq_S2_nonsymmetric",
+          "HL_singular_steady_stability",
+          "Boussinesq_ChenHou"
+        ],
+        "named_target": "HL_S2_nonsymmetric",
+        "gate": "YES"
+      },
+      "uncertified_count_before": 4,
+      "uncertified_count_after": 5,
+      "named_target_moved": false,
+      "module_propagates_silently": true,
+      "caught_by_landed_suite": [
+        "test_certification_record_is_consistent_with_the_ledger"
+      ],
+      "caught_messages": [
+        {
+          "test": "test_certification_record_is_consistent_with_the_ledger",
+          "message": "the certified reference vanished from the ledger"
+        }
+      ]
+    },
+    "P2_ledger_reordered": {
+      "what": "`uncertified_targets` docstring says 'in rank order' but does NOT sort; `gate_verdict` then takes live[0].  rank_table() DOES sort, so the two disagree the moment list order leaves rank order",
+      "gate_after": {
+        "uncertified_count": 4,
+        "uncertified_and_cheaper_than_certified": [
+          "HL_singular_steady_stability",
+          "Boussinesq_S2_nonsymmetric",
+          "gCLM_degenerate_one_scale",
+          "HL_S2_nonsymmetric"
+        ],
+        "named_target": "HL_singular_steady_stability",
+        "gate": "YES"
+      },
+      "named_target_before": "HL_S2_nonsymmetric",
+      "named_target_after": "HL_singular_steady_stability",
+      "named_target_moved": true,
+      "rank_of_named_after": 4,
+      "module_propagates_silently": true,
+      "caught_by_landed_suite": [
+        "test_gate_is_decisive_and_names_a_live_target"
+      ]
+    },
+    "ledger_restored_identical": true,
+    "reading": "the LEDGER half of the module is unguarded INTERNALLY but covered EXTERNALLY: the landed drift suite catches both plants.  The ARITHMETIC half has no such cover -- test_target_selection.py feeds it four admissible (Z1, Z2) pairs and nothing else"
+  },
+  "H_leg63_exposure": {
+    "branch_readable": true,
+    "branch": "leg/m2-v1",
+    "commit": "7a58854 (Leg 63: LEG -- Route-M2 v1)",
+    "status_per_writeup_INDEX": "PARKED, NOT LANDED -- No files on main",
+    "leg63_functions_present_on_branch": {
+      "screen_operator": true,
+      "multiplier_crossover": true,
+      "m2_ledger": true,
+      "m2_rank_table": true,
+      "m2_gate_verdict": true,
+      "screen_m_divergence": true,
+      "fractional_tail_inverse_norm": true
+    },
+    "leg63_functions_present_on_main": {
+      "screen_operator": false,
+      "multiplier_crossover": false,
+      "m2_ledger": false,
+      "m2_rank_table": false,
+      "m2_gate_verdict": false,
+      "screen_m_divergence": false,
+      "fractional_tail_inverse_norm": false
+    },
+    "n_leg63_functions_on_main": 0,
+    "predicate_consumes_defective_algebra": {
+      "y0_budget": false,
+      "radii_polynomial": false,
+      "Y0_budget": false
+    },
+    "how_the_predicate_actually_decides": "screen_operator reads the SIGN of a K-exponent fitted by decay_exponent to spectral_certificate tail-inverse norms, and m2_gate_verdict filters rows on (predicate == MULTIPLIER_SIDE, certified == 'NO', blowup_provable == 'YES').  No Y_0, no Z_1, no Z_2, no budget, no radii polynomial anywhere on that path",
+    "VERDICT": "leg 63's 'exactly one candidate passes' finding is NOT at risk from any defect in this audit.  The exposure is zero for a STRUCTURAL reason, not a lucky one: leg 63's predicate is a disjoint code path that never evaluates the radii-polynomial algebra, and it is not on `main` at all.  The gamma=2 line (63/125/174/185/187) is therefore untouched by this leg's YES",
+    "one_thing_worth_recording_for_whoever_unparks_the_branch": "m2_gate_verdict has the SAME unsorted-live[0] shape as main's gate_verdict (battery G, P2): `top_candidate = live[0]['id']` off an unsorted filter. On a one-element `live` -- which is exactly what 'exactly one candidate passes' means -- live[0] is unambiguous, so the finding as stated is safe. This leg did NOT run the parked branch and makes no measurement of it"
+  },
+  "gate_verdict": {
+    "answer": "YES",
+    "n_forbidden_triples_returning_feasible": 9,
+    "n_forbidden_triples": 9,
+    "n_with_negative_certified_radius": 5,
+    "y0_budget_outside_theorem_returning_positive": 6,
+    "y0_budget_worst_overstatement": "Z1 = 2.0 -- an operator whose ||I - A DF|| is TWICE the identity's tolerance, i.e. maximally not an approximate inverse -- is assigned EXACTLY the residual budget of Z1 = 0.0, a PERFECT inverse",
+    "correct_refusals_that_still_report_headroom": 3,
+    "fractional_dim_understatement_factor": 598.5062344139651,
+    "control_informative": false,
+    "reachability": "LATENT.  85 of 85 banked (Y0,Z1,Z2) records across every caller lie inside 0 <= Z1 < 1, and no negative constant is constructible. NO banked number is contaminated.",
+    "leg63_at_risk": false,
+    "escalation": "ESCALATION -- claim-adjacent module, gate answered YES.  Branch pushed, main NOT pushed, solver/target_selection.py NOT patched, no capabilities.py entry.  Parked for the Decision Maker"
+  }
+}
