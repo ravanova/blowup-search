@@ -3513,3 +3513,14 @@ preempted agents had reached a landing.
   rows already marked grid_converged=false -- the correctly-scoped form is 17
   rows all converged=true spanning 13.42 decades, shape confirmed, two
   magnitudes on the wrong rows.
+- **Leg 244 (Route-PCRO) — YES, LANDED:** stall_verdict now keys its two rows
+  on m (the ladder's own parameter) rather than array position, closing leg
+  243's flagged fragility. 1682 permutations across 15 banked ladders (11
+  Route-L + 4 Route-K) now return ONE verdict each (worst ratio exactly 1.0,
+  vs up to 3795.25x pre-repair spread); all 10 published quantities including
+  Route-L's own headline gain (9.724454) reproduce bit-identical at difference
+  exactly 0.0. Deep rung's dims=(240,320) literal (line 180, never covered by
+  leg 241's line-49 literal) now closed too. Methodological finding worth
+  keeping: a MIS-KEYED repair (keying on k instead of m) PASSES the permutation
+  battery -- order-immunity alone is necessary but not sufficient, only the
+  preservation check catches it.
