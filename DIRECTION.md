@@ -68,8 +68,12 @@ request plus a user steer to weight the batch toward Clay/novel-math over hygien
 repair/regression closures), recovers **109, 110** from the old 110-series reserve, and
 flags **148** as newly unblocked. A nineteenth addition, answering a user question about
 Wall 2 without rewording the odds, adds **172** (a literature scoping leg on whether
-validated numerics has ever reached a genuinely 3D PDE model, in any field). **Next fresh leg
-number for any future candidate is 173.**
+validated numerics has ever reached a genuinely 3D PDE model, in any field). A twentieth
+addition, responding to a user steer to stop drafting audit/freshness legs and focus Opus on
+maths (Part 1), plus three specific math directions to scope (Part 2), adds **173–175** (Xu's
+own certification method as a distinct lane; the viscous-certified-blow-up "missing rung"
+sharpened against what's already banked; arXiv:2509.14185's own stated obstruction). **Next
+fresh leg number for any future candidate is 176.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1152,6 +1156,87 @@ odds ceiling stays structural regardless of the answer below.**
 3. **No reword of the odds, no claim of movement, confirmed.** This answer and leg 172 both
    report on where the field's frontier is; neither is a claim that anything in this
    repository moved a link of the L1→L4 chain. Clay stays ~0.05%.
+
+---
+
+**DM update, 2026-08-06 — user steer, forwarded verbatim, two parts. Both addressed below.**
+
+**Part 1 — "stop doing so much review work, focus Opus on maths."** Received and sharpened
+into a standing rule for every future refill, not just this one: **no new adversarial-audit
+legs** (the `nk_seminorm`-style silent-corruption hunts — that family is, per this DM's own
+prior assessment, already down to `ga_search.py`'s banned lane and the currently-unreachable
+red-test/parked modules, so there is little left to draft anyway) **and no new freshness-
+audit legs** (JR/IX-style ledger checks) **unless something specific and urgent demands one**
+— a landed leg's own text flagging a concrete gap (the leg-76/128/150–154 precedent), not a
+cadence trigger. This does NOT retract 166–170 (already-drafted, already in reserve,
+closing loops on repairs already built — mechanical verification of found bugs, not new
+review-hunting) or 148/109/110 (already fully specified, pre-existing); it governs future
+drafting. **166–170/109/110/148 are re-ranked below every math-directed leg in this
+refresh's recommended dispatch order**, per the steer's spirit, even though they stay
+available.
+
+**Part 2 — three math-directed legs, drafted below (173, 174, 175), light/scoping first per
+the user's own instruction, heavier construction legs deferred until each is scoped:**
+
+- **173 (XUM)** scopes Xu arXiv:2607.19762's OWN certification method (uniform large-
+  imaginary-part bounds, trace-ideal membership, quadrature-error-in-trace-norm) as a
+  genuinely different lane from the `ell^1`-Fourier/radii-polynomial approach this
+  repository spent ~70 legs on — distinct from leg 171 (XUL), which only asks whether Xu
+  covers OTHER spaces; 173 asks what Xu's METHOD itself would take to mature into a working
+  certificate here.
+- **174 (VBS)** scopes the viscous-certified-blow-up question precisely, because the
+  literature answer is more nuanced than "missing entirely": `arXiv:2410.05480`
+  (Dahne-Figueras) already interval-verifies self-similar singular CGL profiles continued in
+  a dissipation parameter — re-derived by this repository's own leg 48/Route-V to 1.8e-07 —
+  which pre-empted stage V precisely because it may already BE a certified viscous blow-up,
+  just not in a fluid/vortex-dynamics-adjacent model. **Leg 125 (M2P) is already this
+  repository's live attempt at exactly the user's "missing rung"** — a certified viscous
+  blow-up on Chen's γ=2 dissipative gCLM, dispatch-ready per this DM's own prior correction
+  — so 174's job is narrower than starting from scratch: (a) confirm precisely whether
+  2410.05480 counts as "a viscous certified blow-up in any model" already (a definitional
+  question, sharpening rather than presupposing the user's framing), and (b) catalog any
+  OTHER candidate viscous fluid-adjacent models with an existing analytic (uncertified)
+  blow-up proof, as a fallback list if leg 125 doesn't close.
+- **175 (USC)** scopes arXiv:2509.14185 (Wang-Lai-Gomez-Serrano-Buckmaster et al., unstable
+  self-similar singularities for IPM and 3D Euler with boundary, CAP-ready precision,
+  inviscid, no certificate claimed) — currently in this repository's ledger only as a
+  one-line EXCLUSION row in `solver/viscous_novelty.py`/`LITERATURE_CHECK.md`, never read at
+  full-text depth for its actual method. **Correction to the coordinator's framing, checked
+  directly against `LITERATURE_CHECK.md`: the 1.8e-07/3.0e-06/3.8e-07 re-derivation numbers
+  already banked belong to `arXiv:2410.05480` (the CGL branch paper), not to `2509.14185`** —
+  2509.14185 has no re-derivation on file yet, so 175's first job is establishing what this
+  repository actually knows about it independently, not assuming prior work exists. Gate:
+  name precisely what "one model class away" means for THIS object — is it that the same
+  CAP-ready numerical technique, applied to a model already amenable to this repository's own
+  interval-arithmetic infrastructure (gCLM/CLM/Boussinesq), would let a certificate go
+  through, or does the CAP technique itself need independent maturation regardless of model.
+
+**Recommended dispatch order for the coordinator's 5-6 open slots, math-first per Part 1:**
+**173, 174, 175, 164, 165, 171, 172**, then (lower priority, still available) **148, 166,
+167, 168**, then **109, 110, 169, 170** as blocks clear. 163 stays live/already dispatched.
+
+**DM update, 2026-08-06 — leg 163 (H2S) landed as an escalation, PARKED, `leg/163-h2s-v1`,
+NOW IN PROGRESS.md's NEEDS YOU.** Reported outcome, stated exactly as the coordinator gave
+it: origin-H² IS structurally viable for a certificate (explicit split, shape, bordered
+formulation, no `ell^1_w`-class obstruction, verified against Xu at residual 2.8e-14) — but
+everything usable depends on `a=0` exactness, which would only re-derive a closed form Xu
+already gives analytically, so nothing transfers to the real (non-`a=0`) target object. This
+is a genuine yes/no split, not a clean win: structurally viable in the narrow sense leg 163's
+gate asked, but not obviously worth a construction leg, which is exactly why it's escalated
+rather than auto-followed-up. **No leg is drafted here that presupposes the user's ruling on
+whether a construction attempt is worth it anyway** — same discipline as every other parked
+escalation (leg 60/PQ, leg 63/125 before its ruling, leg 162/CAPG). Leg 174 (VBS) is
+unaffected — it concerns a structurally different question (viscous blow-up certification,
+not origin-H² feasibility) and does not depend on 163's outcome either way.
+
+**Answering the coordinator's question on the 3 open slots directly: yes, three math-content
+candidates are ready right now — dispatch 173 (XUM), 174 (VBS), 175 (USC).** These were
+drafted in this same DM turn, concurrently with the coordinator's message about the open
+slots, so the two crossed rather than this DM having nothing ready. All three are Part-2
+math-directed legs (Xu's own certification method as a distinct lane; the viscous-blow-up
+"missing rung" sharpened against `arXiv:2410.05480`; `arXiv:2509.14185`'s own stated
+obstruction), light/scoping difficulty, no overlap with 164/165/171/172 (already running,
+correctly not duplicated) or with each other. No hold-open needed for these three slots.
 
 ---
 
@@ -4677,6 +4762,141 @@ model (not an ODE, not a 1D/2D reduction)?
 every other live/reserve leg. Immediately dispatchable.
 ```
 
+```
+### 173 — ROUTE-XUM: SCOPING Xu arXiv:2607.19762's OWN CERTIFICATION METHOD AS A DIFFERENT
+LANE FROM THE ell^1-FOURIER APPROACH (user-review action item, Part 2 #1; light, scoping
+first)
+**Thesis.** Every use of Xu arXiv:2607.19762 so far (legs 127, 163, and reserve leg 171) has
+mined it for CITATIONS — the origin-H² invertibility fact, and (via 171) whatever other
+spaces it characterizes. None has scoped Xu's own certification METHOD, which per the user's
+own framing (uniform large-imaginary-part bounds, trace-ideal membership, quadrature error in
+trace norm) is methodologically distinct from the `ell^1`-Fourier/radii-polynomial machinery
+this repository built stage B's entire certificate infrastructure around and spent ~70 legs
+measuring dead in that one lane. This leg does NOT attempt to build a certificate — it reads
+Xu's method at full-text depth and catalogs, precisely: what each named technique actually
+does, what mathematical/numerical infrastructure it requires that this repository's own
+`solver/` code does or does not already have (compare against `holder_norms.py`,
+`hilbert_pointwise.py`, `op_lower.py`, `spectral_certificate.py`'s existing capabilities), and
+what "maturing by orders of magnitude" concretely means here — is the gap in precision
+(quadrature error bounds too loose by some measured factor), in scope (proven for a narrower
+operator class than needed), or in infrastructure (techniques exist on paper but no
+implementation anywhere)?
+**Gate.** Does Xu's certification method, as stated in the paper, already reach — or come
+within a scopeable, quantifiable distance of — a working certificate for the operator class
+this repository's own certificate work targets, using only techniques the paper itself
+states (no new mathematics invented under this leg)?
+  yes (or "within a stated, quantifiable distance") -> Name the exact remaining gap precisely
+         (a number, a missing lemma, a computational scale) and ESCALATE as a candidate new
+         construction lane for the user — do not attempt the construction under this leg's
+         own authority; that is a separate, heavier leg, contingent on this scoping.
+  no (the gap is not quantifiable from the paper alone, or is structurally large) -> Report
+         exactly which technique is farthest from usable and why. Bank this as a characterized
+         negative on the "different lane" question — the paper's method exists but is not
+         close to a working certificate by any measure this leg can establish.
+**Territory.** experiments/p2_route_xum_v1_scoping.py,
+               writeup/data/p2_route_xum_v1_scoping.json,
+               writeup/novelty/leg_173.md, experiments/journal/leg_173.md.
+               Reads (never edits) solver/holder_norms.py, solver/hilbert_pointwise.py,
+               solver/op_lower.py, solver/spectral_certificate.py (127's territory, closed on
+               landing) for infrastructure comparison only.
+**Difficulty.** light
+**Independence.** Literature-plus-comparison only, no compute, no new solver module. Disjoint
+from 171 (XUL, different-spaces coverage question, not method scoping) and from 163 (H2S,
+origin-H² feasibility, a different space-scoping question). Immediately dispatchable.
+```
+
+```
+### 174 — ROUTE-VBS: VISCOUS CERTIFIED BLOW-UP SCOPING — SHARPENING "THE MISSING RUNG"
+AGAINST WHAT'S ALREADY BANKED (user-review action item, Part 2 #2; light, scoping first)
+**Thesis.** The user's framing ("a viscous certified blow-up in any model — that's the
+missing rung") needs sharpening against what this repository's own literature ledger already
+contains, not treated as a blank-slate question: `arXiv:2410.05480` (Dahne-Figueras)
+interval-verifies self-similar singular CGL profiles continued in a dissipation parameter
+`epsilon` — re-derived independently by this repository's own leg 48/Route-V to 1.8e-07 —
+which is precisely what closed stage V for non-novelty. Whether that constitutes "a viscous
+certified blow-up in any model" already, or falls short of it in some specific way (e.g.
+branch verification without a completed blow-up argument, or a model too far from
+fluid/vortex dynamics to count), has never been asked directly — stage V's leg only asked
+whether it PRE-EMPTED this repository's own margin-continuation question, not whether it
+answers the user's broader one. Separately: **leg 125 (M2P), already dispatch-ready per this
+DM's own prior correction, is this repository's live attempt at a certified viscous blow-up
+on Chen's γ=2 dissipative gCLM** — a fluid/vortex-dynamics-adjacent model, unlike CGL. This
+leg does not duplicate 125's construction work; it (a) settles the CGL definitional question
+precisely, and (b) catalogs any OTHER published viscous fluid-adjacent model with an existing
+analytic (uncertified) blow-up proof, as a fallback list if leg 125's own attempt does not
+close.
+**Gate.** (a) Does `arXiv:2410.05480`'s interval-verified CGL branch work constitute a
+completed certified blow-up (not merely a certified profile/branch short of the blow-up
+argument itself), and (b) does the published literature contain any OTHER viscous
+fluid/vortex-dynamics-adjacent model (beyond Chen's γ=2 gCLM) with an existing analytic
+blow-up proof that has never been computer-certified?
+  yes on (a) -> The "missing rung" already has an occupant, just not in a fluid-adjacent
+         model — report this precisely; it reframes but does not retract the user's point
+         (fluid dynamics specifically still lacks one). ESCALATE the reframing to the user.
+  no on (a) -> CGL's branch work falls short of a completed certified blow-up in a specific,
+         named way. Report exactly what is missing; this confirms the rung is genuinely
+         empty, strengthening leg 125's priority.
+  For (b): report every candidate found, with its own analytic proof's citation, regardless
+         of (a)'s answer — this is the fallback catalog either way. Bank it; escalate nothing
+         on its own (a catalog is not a claim).
+**Territory.** experiments/p2_route_vbs_v1_scoping.py,
+               writeup/data/p2_route_vbs_v1_scoping.json,
+               writeup/novelty/leg_174.md, experiments/journal/leg_174.md.
+               Reads (never edits) solver/viscous_novelty.py's existing PRECEDENTS ledger and
+               `LITERATURE_CHECK.md`; does not touch leg 125's territory
+               (`solver/target_selection.py`) or presuppose its outcome.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from leg 125 (reads
+its context only, builds nothing, does not block or depend on its dispatch) and from
+157/158/159/161/171/173 (different papers/questions). Immediately dispatchable.
+```
+
+```
+### 175 — ROUTE-USC: arXiv:2509.14185 AT FULL-TEXT DEPTH — WHAT "ONE MODEL CLASS AWAY" FROM
+A CAP-READY CERTIFICATE ACTUALLY REQUIRES (user-review action item, Part 2 #3; light,
+scoping first)
+**Thesis.** `arXiv:2509.14185` (Wang, Lai, Gomez-Serrano, Buckmaster et al.) is in this
+repository's ledger (`solver/viscous_novelty.py::PRECEDENTS`, `LITERATURE_CHECK.md`) as a
+one-line EXCLUSION row: "unstable self-similar singularities for IPM and 3D Euler with
+boundary, CAP-ready precision, inviscid, no certificate claimed." It has never been read at
+full-text depth for its actual method or its own stated obstruction to certification.
+**Correction to the coordinator's framing, checked directly against this repository's own
+`LITERATURE_CHECK.md`: the banked re-derivation numbers (1.8e-07, 3.0e-06/1.9e-06 rms,
+3.8e-07) belong to `arXiv:2410.05480`'s CGL branches, NOT to `2509.14185`** — this repository
+has no independent re-derivation of `2509.14185`'s numerics on file, so this leg's first job
+is establishing what is actually known about it from scratch, not assuming prior
+verification exists. The user's framing — "still one model class away" — is the question:
+read the paper's own stated obstruction (if any) to turning its CAP-ready numerics into an
+actual certificate, and determine whether that obstruction is MODEL-specific (the same
+technique, applied to IPM or 3D Euler with boundary specifically, hits a wall a different but
+related model wouldn't) or TECHNIQUE-specific (CAP itself needs independent maturation
+regardless of model, the same shape of gap leg 173 scopes for Xu's method).
+**Gate.** Does `arXiv:2509.14185`'s own text state, imply, or make locatable an obstruction to
+certifying its CAP-ready unstable singularities, and is that obstruction MODEL-specific
+(naming which alternative model class would avoid it) or TECHNIQUE-specific (a precision or
+infrastructure gap independent of model)?
+  model-specific -> Name the alternative model class precisely, with the paper's own
+         reasoning for why it would or wouldn't face the same obstruction. If that
+         alternative model class is one this repository's own infrastructure already touches
+         (gCLM/CLM/Boussinesq family), ESCALATE as a candidate new construction lane for the
+         user — do not attempt it under this leg's own authority.
+  technique-specific -> Report the precision/infrastructure gap precisely, in the same terms
+         leg 173 uses for Xu's method, so the two scoping results are comparable. Bank it.
+  neither locatable -> The paper does not state its own obstruction explicitly; report what
+         CAN be inferred from its stated precision and scope, flagged as inference, not
+         quotation, and bank as a partial answer.
+**Territory.** experiments/p2_route_usc_v1_scoping.py,
+               writeup/data/p2_route_usc_v1_scoping.json,
+               writeup/novelty/leg_175.md, experiments/journal/leg_175.md.
+               Reads (never edits) solver/viscous_novelty.py's existing PRECEDENTS ledger and
+               `LITERATURE_CHECK.md`.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 174 (VBS, a
+different paper/question, though both read the same PRECEDENTS ledger read-only — read-read,
+not a collision) and from every other live/reserve leg. Immediately dispatchable.
+```
+
+## Ranking rationale
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
