@@ -6550,6 +6550,64 @@ merge or patch either) and from every other live/reserve leg. Reserve — promot
 frees.
 ```
 
+---
+
+## DM bookkeeping update, cycle 1, same day — orchestrator report on 195/170 landing + 200/201 promotion
+
+**195 (PQVER) landed on `main`.** Independently confirmed all five of leg 60's corrected
+numbers. Found one small propagation gap of its own: a stale `-2.541222` literal (the
+pre-correction transcription slip leg 60 already fixed in prose) survived uncorrected in two
+other files; **zero banked results were affected** (the stale literal was inert prose/comment
+context, not a computed input). The orchestrator fixed it directly in the integration commit
+rather than routing it back through a separate repair leg — correctly proportionate to a
+zero-blast-radius, mechanical propagation miss, same discipline as every other
+postrepair-verification leg's own no-branch. Escalation #4 (leg 60) is now doubly closed:
+landed AND independently re-verified, with this one cosmetic follow-on already swept up.
+
+**170 (CDB) landed on `main`.** Gate **YES** on both clauses: 96/96 adversarial cases
+correctly refused, 276077/276077 configurations bit-identical pre/post-repair on the
+integer-`p` battery. Leg 154's repair of `critical_dissipation.py` (leg 121's original
+finding) is now confirmed non-regressive, closing this audit-family loop cleanly.
+
+**Slots F and C refilled from reserve, both dispatched now**, per the orchestrator's own
+report: **200 (PCA)** into the vacated slot, **201 (ICA2)** into the other. Both are removed
+from the reserve queue — they are live, not reserve, as of this update.
+
+**Live assignments, corrected to match the orchestrator's own slot letters (supersedes the
+ten-slot table two sections above for slot-occupancy purposes only — no leg's content or
+gate changed, only which letter each already-assigned leg sits in, plus the two new
+promotions):**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 187 | M2CI | live (unchanged) |
+| C | 201 | ICA2 | **live, newly promoted from reserve** |
+| D | 188 | SURV | live (unchanged, corrected framing per above) |
+| E | 190 | EGML | live (unchanged) |
+| F | 200 | PCA | **live, newly promoted from reserve** |
+| G | 196 | USC2 | live (unchanged) |
+| H | 197 | VNL | live (unchanged) |
+| I | 198 | BHA | live (unchanged) |
+| J | 199 | CGA | live (unchanged) |
+
+(195 and 170 have landed and left the board entirely — they held no slot letter at landing
+time per the orchestrator's report, so no slot needs vacating for them beyond what's already
+reflected above.)
+
+**Reserve queue: 4 undispatched legs (202, 203, 204, 205).** Above the §3a watermark of 3 —
+no fresh batch drafted this update. **Flag for the orchestrator: the NEXT promotion out of
+this reserve (whichever of 202/203/204/205 fills the next open slot) will drop the count to
+3, exactly at the watermark; the promotion AFTER that will drop it to 2, below the
+watermark** — this DM will draft at least 8 more fully-specified candidates the moment that
+happens, per standing instruction, without waiting to be asked. Promotion order when a slot
+next opens, unchanged from the original draft (no re-ranking triggered by this update): 202
+(PNA), then 203 (RSA), then 204 (TNA2), then 205 (BVR).
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle, matching the
+orchestrator's own report.
+
 **File-territory collision check across all ten dispatched slots.** 192 reads
 `solver/origin_h2_certificate.py`; 187 owns `solver/chen_inviscid_certificate.py` (new
 module, sole owner); 170 reads `solver/critical_dissipation.py`; 188 reads
