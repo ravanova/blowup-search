@@ -103,11 +103,18 @@ verdict-flip is a necessary consequence of a rule already adopted elsewhere, pos
 resolving escalation #4 without the user) and **189** (XUTRI, a third independent
 derivation check on `a_c`/`alpha(1/2)=3` via Xu's own spectral framework). A twenty-eighth
 addition, refilling after legs 177/186 landed and only 3 of 10 slots were occupied, adds
-**190** (EGML, locating and banking the "EGM" citation), **191** (PQV, whether leg 60's
-correction changes any downstream conclusion), and **192–194** (independent post-
-construction verification for legs 176/187/178, drafted now and blocked until each lands —
-the postrepair-verification discipline applied to this cycle's new certificate-construction
-claims). **Next fresh leg number for any future candidate is 195.**
+**190** (EGML, locating and banking the "EGM" citation) and **192–194** (independent
+post-construction verification for legs 176/187/178, drafted now and blocked until each
+lands — the postrepair-verification discipline applied to this cycle's new
+certificate-construction claims). **191 was WITHDRAWN** (stale premise — leg 60 had already
+landed with its correction applied, contrary to 191's assumption; never dispatched, caught
+before dispatch) and its number stays retired. A twenty-ninth addition, after the withdrawal
+and a spot-check of `origin/main` against every reserve item's blocking premise, adds **195**
+(PQVER, replacing 191 — independent verification of leg 60's actually-landed correction),
+**196** (USC2, following up leg 175's technique-specific finding — does the authors' later,
+obstruction-removed work achieve a certificate) and **197** (VNL, sharing leg 174's located
+`arXiv:2208.09445` citation into the shared ledger). **Next fresh leg number for any future
+candidate is 198.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1599,6 +1606,62 @@ unknown content:
   for the first time — arguably more important than a repair check, since these claim
   genuinely novel positive results, not just non-regression. This is not a fresh audit hunt;
   it is the established postrepair-verification pattern applied one level up.
+
+**DM correction, 2026-08-06 — leg 191 (PQV) had a stale premise; withdrawn and redrafted.
+Second stale-premise instance this session (after leg 148); spot-check performed below on
+every currently-blocked reserve item, as the coordinator suggested.** Leg 60 (PQ) is NOT
+parked — it landed long ago at `e0eba8e`: "landed by orchestrator, user-approved correction,"
+all three discrepancies corrected (28x->63x mislabeled baseline, a transcription slip, a
+rounding fix), both ban-bearing numbers confirmed exact before and after, both scripts CLEAN
+114/114. **Leg 191 as drafted (asking whether the correction changes any conclusion, framed
+as informing a still-open ruling) is void — the ruling already happened and the correction
+already landed.** Withdrawn; redrafted below as **195**, on the coordinator's own suggested
+shape: independent verification that the LANDED correction is accurate, not a question about
+whether to make it.
+
+**Spot-check of every leg this DM has referenced as "blocked pending X" or "still parked,"
+against `git log origin/main` directly (not `--all`), before more get relayed:**
+- **129 (SUR)**: confirmed still absent from `origin/main` — genuinely parked, as before.
+- **176, 178** (feeding blocked legs 192, 194): **176 has landed** — gate YES on both
+  conjuncts, "the origin-H² certificate at `a=0`, BUILT," with one magnitude flagged NO in
+  the same breath (leg 192's own re-verification should check that caveat specifically, not
+  just the headline YES). **178 has NOT landed** — 194 stays correctly blocked.
+- **187** (feeding blocked leg 193): not found in this check — stays correctly blocked.
+- **174, 175**: both landed, with real findings this DM had not seen until this check (see
+  below) — neither was referenced as blocking anything, so no prior claim was stale here, but
+  their content changes what's worth drafting next.
+
+**174 (VBS) landed with the single most consequential finding of this cycle for the "missing
+rung" question.** It built an occupancy matrix (fluid vs. non-fluid × Grade A vs. Grade B
+certification) and found the **fluid=True/Grade-A cell is EMPTY** — that is the precise,
+now-measured shape of "the missing rung," and leg 174's own text says it is empty "for want
+of a TARGET, not a method," since the interval-arithmetic Taylor-coefficient technique is
+already Grade A on viscous Burgers (`arXiv:2404.04054`). It also located
+`arXiv:2208.09445` (3D compressible Navier-Stokes finite-time blow-up, Grade B — the
+viscous term is dominated, not enclosed) as a paper absent from the shared
+`solver/viscous_novelty.py` ledger despite being read by leg 113. **175 (USC) landed
+TECHNIQUE-SPECIFIC**: `arXiv:2509.14185`'s CAP obstruction was one loss-reweighting scheme,
+and — the detail worth following up — **the same authors removed it 72 days later**,
+meaning a newer version of their work may not carry the same obstruction.
+
+**Three new candidates, all grounded in what was just found, none presupposing 185/187/178's
+still-unknown outcomes:**
+
+- **195 (PQVER)**, replacing withdrawn 191: independently re-verify leg 60's already-landed
+  correction (114/114 clean claim, both ban-bearing numbers exact) from the banked data
+  directly, on the same postrepair-verification precedent as 192–194.
+- **196 (USC2)**, new: does the authors' later work (the version that removed
+  `arXiv:2509.14185`'s loss-reweighting obstruction, ~72 days on) achieve an actual
+  certificate, or does it still stop short for a different reason? Leg 175's own finding
+  makes this the obvious next literature question, not a presupposition of it.
+- **197 (VNL)**, new: add `arXiv:2208.09445` to `solver/viscous_novelty.py`'s shared
+  PRECEDENTS ledger (append-only), per leg 174's own characterization (Grade B, viscous term
+  dominated not enclosed) — the same "citation found but not yet shared-ledgered" gap as leg
+  190's EGM.
+
+**192 is now unblocked** (leg 176 landed) — flagging for dispatch, no redraft needed, with
+the specific note to check leg 176's own "one magnitude says NO" caveat, not just its headline
+YES.
 
 ---
 
@@ -5815,34 +5878,13 @@ live/reserve leg. Immediately dispatchable.
 ```
 
 ```
-### 191 — ROUTE-PQV: DOES SUBSTITUTING LEG 60's TWO CORRECTED NUMBERS CHANGE ANY CONCLUSION
-DRAWN FROM ROUTE-PORT v1/v2? (informs, does not resolve, escalation #4a)
-**Thesis.** Leg 60 (PQ) is parked as an escalation because two of Route-PORT's quoted numbers
-do not reproduce from their own banked data (v2's "28x worse" claim reproduces at 63x; v1's
-`rho=8` reach-table row quotes a different resolution's value) — parked because a ban resting
-on an unreproducible number is the user's call to correct or not. Independent of whether the
-user authorizes correcting the prose, there is a decidable question this leg answers:
-substituting the CORRECTED, reproducible values in place of the two wrong ones, does any
-downstream conclusion this repository has drawn from Route-PORT v1/v2 (any ban, any scope
-line, any comparison) actually change? If every conclusion is robust to the correction, that
-is useful, non-presupposing information for the user's ruling. If a conclusion DOES depend on
-the wrong number, that raises the stakes of the ruling and should be reported precisely.
-**Gate.** With the two corrected values substituted (63x in place of 28x; the correct-
-resolution `rho=8` value in place of the misquoted one), does any banked ban, scope line, or
-comparison that cites either number change its conclusion?
-  yes -> Name the exact conclusion and how it changes. ESCALATE this precisely — it
-         sharpens, but does not resolve, the user's pending ruling on leg 60.
-  no -> Every downstream conclusion is robust to the correction. Report this precisely; it
-         does not resolve the ruling (whether to correct the prose is still the user's call)
-         but lowers the stakes of it.
-**Territory.** experiments/p2_route_pqv_v1_verification.py,
-               writeup/data/p2_route_pqv_v1_verification.json,
-               writeup/novelty/leg_191.md, experiments/journal/leg_191.md.
-               Reads (never edits) leg 60's own parked branch (`leg/pq-v1`) and every
-               `writeup/` file citing Route-PORT v1/v2's numbers, read-only.
-**Difficulty.** standard
-**Independence.** Read-only, including of a parked branch (reading, not merging). Disjoint
-from every other live/reserve leg. Immediately dispatchable.
+### 191 — WITHDRAWN 2026-08-06. Stale premise: drafted on the assumption that leg 60 (PQ)
+was still parked awaiting the user's ruling on two unreproducible numbers. It was not — leg
+60 landed long ago at `e0eba8e` ("landed by orchestrator, user-approved correction"), all
+three discrepancies corrected, both ban-bearing numbers confirmed exact, both scripts CLEAN
+114/114. Never dispatched (the coordinator caught this before dispatch). Superseded by **195
+(PQVER)** below, which verifies the LANDED correction rather than asking whether to make it.
+Leg number 191 stays retired, not reused, per this file's numbering convention.
 ```
 
 ```
@@ -5911,6 +5953,93 @@ coercivity-gap measurement (positive-and-stable, or still zero-width) from its o
 **Difficulty.** standard
 **Independence.** Reads solver/energy_coercivity.py (leg 178's append-only addition); edits
 nothing under either outcome. **NOT dispatchable until leg 178 lands.**
+```
+
+```
+### 195 — ROUTE-PQVER: INDEPENDENT VERIFICATION OF LEG 60's LANDED PORT v1/v2 CORRECTION
+**Thesis.** Leg 60 landed at `e0eba8e` with a self-reported clean result: three discrepancies
+corrected (28x->63x mislabeled baseline, a `-2.541222`->`-2.541024` transcription slip,
+`1.168%`->`1.169%` rounding), both ban-bearing numbers confirmed exact before and after, both
+reproduction scripts reporting CLEAN 114/114. Per the same discipline this repository applies
+to every other landed correction (postrepair-verification, 86/87/94/103/104/105/131-135/
+147/166-170/192-194), a self-report is not an independent confirmation — re-run both
+reproduction scripts fresh, from their own drivers, against the corrected banked prose, and
+confirm the 114/114 claim and both ban-bearing numbers independently.
+**Gate.** Does an independent re-run of `experiments/p2_route_port_v1_bordered_evidence.py`
+and `experiments/p2_route_port_v2_reach_evidence.py` reproduce CLEAN 114/114, with both
+ban-bearing numbers exact and all three corrected discrepancies matching the corrected
+prose exactly?
+  yes -> Independently confirmed. Bank as the permanent verification record; escalation
+         #4 (leg 60) is now doubly closed — landed AND independently re-verified.
+  no -> Report the exact discrepancy precisely; escalate as a priority finding — a
+        user-approved correction that doesn't independently reproduce is serious.
+**Territory.** test_route_port_postcorrection.py,
+               experiments/p2_route_pqver_v1_verification.py,
+               writeup/data/p2_route_pqver_v1_verification.json,
+               writeup/novelty/leg_195.md, experiments/journal/leg_195.md.
+               Reads (never edits) leg 60's own landed evidence scripts and
+               `writeup/4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V1.md`/`V2.md`.
+**Difficulty.** standard
+**Independence.** Read-only re-verification of a landed, closed leg. Disjoint from every
+other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 196 — ROUTE-USC2: DOES THE AUTHORS' LATER WORK (POST-OBSTRUCTION-REMOVAL) ACHIEVE AN
+ACTUAL CERTIFICATE FOR arXiv:2509.14185's UNSTABLE SINGULARITIES?
+**Thesis.** Leg 175 (USC) landed TECHNIQUE-SPECIFIC: `arXiv:2509.14185`'s CAP-readiness
+obstruction was one specific loss-reweighting scheme, and the same authors (Wang, Lai,
+Gomez-Serrano, Buckmaster et al.) removed it in later work roughly 72 days on. That later
+work has never been located or read by this repository. Does it achieve an actual
+certificate (closing the CAP-ready numerics into a rigorous enclosure), or does removing
+that one obstruction simply expose a different one — the same shape of question leg 175
+itself asked, one paper later?
+**Gate.** Does the authors' later work (post-obstruction-removal) state, imply, or make
+locatable an actual certificate for the unstable singularities `arXiv:2509.14185` reported
+at CAP-ready precision, and if not, what NEW obstruction (if any) does it name?
+  certificate achieved -> This would be the single most consequential literature finding
+         this repository could produce — the first genuinely 3D PDE blow-up certificate
+         found anywhere, directly answering the Wall 2 question (leg 172). Record the
+         citation and its hypotheses verbatim; ESCALATE immediately, do not attempt to
+         replicate it under this leg's own authority.
+  still short, new/same obstruction -> Report exactly what remains, in the same terms leg
+         175 used, so the two findings are directly comparable. Bank it.
+  no later work locatable -> Report the search precisely (this repository's own discipline:
+         report the search, not just the absence). Bank as inconclusive.
+**Territory.** experiments/p2_route_usc2_v1_lit.py, writeup/data/p2_route_usc2_v1_lit.json,
+               writeup/novelty/leg_196.md, experiments/journal/leg_196.md.
+               Reads (never edits) solver/viscous_novelty.py's PRECEDENTS ledger, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from every other
+live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 197 — ROUTE-VNL: ADD arXiv:2208.09445 TO THE SHARED viscous_novelty.py LEDGER
+**Thesis.** Leg 174 (VBS) located and characterized `arXiv:2208.09445` (3D compressible
+Navier-Stokes finite-time blow-up from smooth finite-energy data, Grade B — computer
+assistance essential via ~10,000 interval-arithmetic Taylor coefficient pairs, but the
+viscous term is DOMINATED rather than enclosed, so its certified object is the inviscid
+Euler ODE) as present in leg 113's own literature ledger but confirmed ABSENT from the
+shared `solver/viscous_novelty.py::PRECEDENTS` list — the same "found but not
+shared-ledgered" gap leg 190 closed for "EGM." Bank it properly, append-only, using leg
+174's own characterization (already verified at primary-source depth by that leg — this leg
+does not need to re-read the paper, only transcribe the citation correctly into the shared
+ledger).
+**Gate.** Is `arXiv:2208.09445` now present in `solver/viscous_novelty.py::PRECEDENTS` with
+the Grade B / viscous-term-dominated characterization leg 174 established, verbatim?
+  yes -> Bank it; the shared ledger and leg 174's own occupancy matrix are now consistent
+         with each other.
+  no (a discrepancy is found between leg 174's characterization and a fresh check of the
+  paper) -> Report the discrepancy precisely; escalate rather than silently reconcile it,
+  since leg 174's occupancy-matrix conclusion depends on this exact characterization.
+**Territory.** solver/viscous_novelty.py (append-only, ONE new PRECEDENTS row),
+               experiments/p2_route_vnl_v1_ledger.py,
+               writeup/data/p2_route_vnl_v1_ledger.json,
+               writeup/novelty/leg_197.md, experiments/journal/leg_197.md.
+**Difficulty.** light
+**Independence.** One append-only ledger row. Disjoint from every other live/reserve leg.
+Immediately dispatchable.
 ```
 
 ## Ranking rationale
