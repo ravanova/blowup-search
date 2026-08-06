@@ -3248,3 +3248,16 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   fitness validity) and measured, not assumed, clean: all 9 live ga_minimize call
   sites audited safe (static ast parse) and the sole production fitness is
   structurally unable to emit -inf. Module read-only, landed straight to main.
+- **Leg 208 (Route-TSA) — YES, ESCALATED (parked, not merged):** target_selection.py
+  is a SIXTH, never-enumerated member of leg 128's radii-polynomial guard class
+  (certificate_guards.py's own docstring claims to cover every such function; this
+  one was never on the list). 9/9 forbidden (Y0,Z1,Z2) triples return
+  feasible=True, 5 with a negative certified radius (worst -1413.71);
+  y0_budget(2.0,1.0) == y0_budget(0.0,1.0) == 0.5 bit-for-bit against a true budget
+  of 0; unknowns() understates the dim-2 count by 598.5x. LATENT: 85/85 banked Z1
+  records lie in [0,1), no negative input is constructible from any live caller.
+  Confirms leg 63's "exactly one candidate passes" and the whole gamma=2 line are
+  NOT at risk -- that predicate lives on a disjoint, parked, unmerged branch and
+  never touches Y0/Z1/Z2/budget. Process note for the DM: six legs have now each
+  found "the last" uncensused guard-class member one at a time; a systematic census
+  test may be worth more than another one-off audit.
