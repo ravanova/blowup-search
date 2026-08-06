@@ -410,6 +410,54 @@ successor scheduled and no error surfaced is the one outcome this mechanism must
 "Ran") at https://claude.ai/code/routines. This is cosmetic clutter, not a functional problem,
 but a human doing periodic hygiene on that page is reasonable.
 
+### 9f. Heartbeat — keeping the session alive while agents work
+
+**Diagnosed 2026-08-06.** An orchestrator session that dispatches a batch of background agents
+and then only waits for their completion notifications can itself go idle and be reclaimed —
+taking every dispatched agent with it. In the incident that prompted this section, 13
+background agents (2 re-spawned legs, 7 new legs, 4 bench agents) all stopped simultaneously
+about ten minutes after dispatch, every one mid-novelty-pass and none further, with the
+orchestrator's own `TaskOutput`/`SendMessage` access to all 13 breaking at the same moment.
+The git worktrees survived on disk (their commits were recovered and pushed by hand after the
+fact), but the live agent processes and the orchestrator's tracking of them did not — the
+uniform stopping point and the simultaneous loss of tracking point at the orchestrating
+session (and its container) being judged idle and suspended, not at 13 independent agent
+failures.
+
+**The fix: never let the orchestrator's own turn go quiet for long stretches while agents are
+in flight.** Immediately after any dispatch that leaves agents running unattended for more
+than a few minutes — the initial ten-leg dispatch in Step 2, and every refill in Step 3's
+Terminate-and-refill step — arm a short heartbeat:
+
+```
+send_later(delay_minutes: 5-8, message: "Heartbeat: check on <N> in-flight agents — <list of
+  leg numbers/branches>. Poll git log / git worktree list for real progress since the last
+  heartbeat, refresh PROGRESS.md, and re-arm the next heartbeat if any are still pending.")
+```
+
+`send_later` is a scheduled Routine (the same mechanism §9e's self-chain uses), not a passive
+wait — it fires from outside the container and can wake a suspended session back up, which is
+exactly the property a completion notification cannot guarantee once the session has already
+gone quiet. On each heartbeat: check for real progress (new commits in each agent's worktree
+or branch, not just elapsed time), log it, and re-arm another heartbeat if agents are still
+pending. Stop re-arming for a given batch once every agent in it has landed, been collected, or
+been confirmed dead and re-spawned.
+
+**This does not replace completion notifications** — a notification that arrives is still the
+faster, preferred signal and should be acted on immediately. The heartbeat is a backstop for
+the case where the session goes quiet long enough that no notification ever gets the chance to
+arrive.
+
+**Secondary hardening, cheap and worth doing regardless of the heartbeat:**
+- Leg and bench agents should commit locally more than once during a leg (after the novelty
+  pass, again after construction, again after measurement) rather than saving every commit for
+  the finish protocol — cheap insurance if a worktree is ever actually lost, not just its live
+  process.
+- Don't fill every slot immediately just because it's empty if doing so means a large batch of
+  agents will all run unattended for a long stretch at once — ten legs plus a handful of
+  support/bench agents is the designed ceiling, not an instruction to always dispatch that many
+  in one go regardless of how long they'll run before the next heartbeat or notification.
+
 ## 10. The sharding experiment (run it once, then stop)
 
 The 2026-08-05 day suggested sharding a leg across agents cost more and took longer. Test it

@@ -21,7 +21,7 @@ invent a leg.
 calling them without this fails:
 
 ```
-ToolSearch: "select:SendMessage,TaskOutput,TaskStop,Monitor,TodoWrite"
+ToolSearch: "select:SendMessage,TaskOutput,TaskStop,Monitor,TodoWrite,send_later"
 ```
 
 **0b. Read the state, in this order:**
@@ -91,6 +91,19 @@ to the DM to re-cut or re-order. Do not paper over it.
 
 Post the roster as a short table (slot, leg number, route, model, branch, gate) for the record,
 then **dispatch immediately**. The user is hands-off; announcing is not asking.
+
+**Immediately after dispatching, arm a heartbeat (`ORCHESTRATION.md` §9f) — do not skip this.**
+A session that dispatches a batch of background agents and then only waits for their
+completion notifications can itself go idle and be reclaimed, taking every dispatched agent
+with it (this happened on 2026-08-06 — 13 agents lost mid-work). Call:
+
+```
+send_later(delay_minutes: 5-8, message: "Heartbeat: check on <N> in-flight agents — <leg
+  numbers/branches>. Poll for real progress, refresh PROGRESS.md, re-arm if any are still
+  pending.")
+```
+
+right after dispatch, whether this is the initial ten-leg dispatch or a mid-cycle refill.
 
 **Leg agents — one agent per whole leg. Do not shard** (§10 of the contract records the
 one-time control arm; it is not repeated):
@@ -173,9 +186,14 @@ Sequencing you must enforce:
 Repeat until stopped. One pass through this list is **one cycle**; number them from 1.
 
 1. **Stop files.** `ls STOP-NOW STOP PAUSE 2>/dev/null`. Any hit → §4.
-2. **Collect.** `TaskOutput` on finished background agents; `git branch -a` and `gh pr list`
+2. **Heartbeat.** If a heartbeat you armed (`ORCHESTRATION.md` §9f) is what woke this cycle,
+   or if any agents are running unattended and no heartbeat is currently armed, poll for real
+   progress (new commits in each agent's worktree or branch, not just elapsed time) and
+   re-arm the next `send_later` heartbeat before doing anything else this cycle. Do not let a
+   cycle end with agents in flight and no heartbeat armed.
+3. **Collect.** `TaskOutput` on finished background agents; `git branch -a` and `gh pr list`
    for pushed work.
-3. **Audit each leg that landed on `main`** since the last cycle (legs merge themselves —
+4. **Audit each leg that landed on `main`** since the last cycle (legs merge themselves —
    you never merge a leg branch):
    - the diff stayed inside the leg's declared territory, the quartet is complete, and every
      commit follows the convention. A violation → spawn a bench agent to repair **forward on
@@ -183,7 +201,7 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
    - claim-bearing landing → dispatch the paired verifier's post-landing review (trigger (b))
      and a DOCS quartet check. A confirmed gap goes to the DM as a rework leg and into the
      report, not into silence — and not to the user.
-4. **Gate and merge support branches** (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`), in
+5. **Gate and merge support branches** (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`), in
    the order they became ready:
    - `git checkout <branch>` then `scripts/merge_gate.sh origin/main`; check the diff stays
      inside the declared territory (`git diff --name-only`).
@@ -191,27 +209,31 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
    - **FAIL, or out of territory** → send the gate output back to the owning agent via
      `SendMessage`; it fixes, you re-gate. If that agent is gone, spawn a bench agent with the
      branch and the gate output.
-5. **Fix what is broken.** A red test on `main`, a bug an agent tripped over, a missing
+6. **Fix what is broken.** A red test on `main`, a bug an agent tripped over, a missing
    evidence script: spawn a bench agent and get it done. Do not queue it and move on.
-6. **Terminate and refill.** The moment a leg's push lands: `TaskStop` its agent if it has
+7. **Terminate and refill.** The moment a leg's push lands: `TaskStop` its agent if it has
    not already stopped — **a finished leg agent is never reused**. Then `SendMessage` the DM
    with what landed and get the next assignment from the queue (when no queued item is clear,
    the DM chooses the work — that is its mandate), and spawn a fresh Opus 5 leg agent on it.
    **Ten legs live is the target, at all times** — refill is per-slot and immediate, not
-   batched (§4 bench priority: refill legs first, then repairs, then extra routes).
-7. **Integration commit.** Once per cycle, in one commit
+   batched (§4 bench priority: refill legs first, then repairs, then extra routes). Arm or
+   refresh the heartbeat (step 2 above) for the refilled slot.
+8. **Integration commit.** Once per cycle, in one commit
    (`Leg 0: ORCH — integration cycle <n>, …`): apply the pre-committed plan branch for any gate
    that answered, add the one-line pointers into `experiments/JOURNAL.md`,
    `LITERATURE_CHECK.md` and `PHASE2_P2_NOTES.md`, and update `CONTINUATION_PROMPT.md` in step
    with `plan_of_record.py`. Then confirm `scripts/merge_gate.sh origin/main` still passes on
    `main`. **You are the only writer of these five files.**
-8. **Write `PROGRESS.md`** in the exact section order of `ORCHESTRATION.md` §9a, `⚠ NEEDS YOU`
+9. **Write `PROGRESS.md`** in the exact section order of `ORCHESTRATION.md` §9a, `⚠ NEEDS YOU`
    first. Rewrite it whole; do not append. Also refresh the committed `reports/STATUS.md`
    snapshot if anything landed this cycle.
-9. **Handoff check.** Cycle ≥ 12, or your context has been summarised → §5.
+10. **Handoff check.** Cycle ≥ 12, or your context has been summarised → §5.
 
 Update `PROGRESS.md` at least every ~10 minutes even if a cycle is slow — that file is how the
-user watches without asking. Use `Monitor` to wait on a condition rather than idling.
+user watches without asking. Use `Monitor` to wait on a condition rather than idling, and keep
+a heartbeat armed (step 2 above) whenever agents are running unattended — a `Monitor` or a
+notification you're expecting is not a substitute for the heartbeat, since both assume the
+session is still awake to receive them.
 
 **Escalations never stop the run.** The four in `ORCHESTRATION.md` §8 get parked as pushed
 branches, written into `⚠ NEEDS YOU` with the exact question and the options, and **every
