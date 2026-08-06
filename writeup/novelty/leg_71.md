@@ -125,3 +125,44 @@ modules currently claimed by a live leg (`spectral_certificate.py`,
 `weight_search.py`, `interval_certificate.py`, `interval.py`, `holder_norms.py`) are
 reported but **not corrected** this cycle, to avoid colliding with a live leg's own
 in-flight test changes.
+
+---
+
+# FINDINGS (appended after the audit ran)
+
+**Gate answer: NO.** 42 rows, 40 distinct cited tests, **33 clean**.
+
+- **S1 missing: 0.** Every cited test file exists; every cited module exists. There is no
+  deleted test and no renamed module hiding under a confident row.
+- **S2 uncollected / no-op: 0.** Every cited test runs.
+- **S3 RED at HEAD: 2** — `test_fractional_boussinesq.py` (36 passed, 1 failed: gate G6
+  `p > 0 at s=0.10`, measured **p = -0.211**) and `test_profile_newton.py` (the inverted
+  assertion `assert not rows[-1]["converged"]` -- Newton now **does** converge at a = 0.9,
+  relres 2.89e-06 in 40 iterations). Both reproduce deterministically. Reported, not
+  fixed.
+- **S4 relevance: 2** rows cite a test that never loads the module — `solver/ga_search.py`
+  (**corrected**: `test_ga.py` → `test_gclm_family.py`) and `solver/finite_support.py`
+  (the SUPERSEDED tombstone; left alone deliberately).
+- **7 modules are unreachable from `scripts/merge_gate.sh`'s name map** — green today,
+  ungated tomorrow. A hole in the merge gate, not in the index.
+
+**The three pre-flagged suspicions from the section above resolved unevenly**, which is
+why pre-registering them was worth it: rows 25/26 (`hilbert_holder`,
+`hilbert_pointwise`) are *accurate* — the cited tests exist, run and pass, and the odd
+name is only a merge-gate reachability problem. Row 38 (`ga_search`) was a **genuine
+mis-citation**. Rows 40/41/42's shared/borrowed tests are accurate as `test` fields but
+sit under `validated` prose that leg 66 falsified; they need a leg allowed to edit
+`validated`, so they are flagged rather than half-edited.
+
+**One false positive in this leg's own instrument**, recorded rather than deleted: the
+first classifier demanded a `__main__` block or top-level `test_*` functions and wrongly
+flagged `test_spectral_certificate.py` and `test_target_norm.py` as uncollected. Both are
+straight-line module-level gate scripts — a third valid style in this repo. Fixed, and
+documented in the script's docstring.
+
+**Two timeouts were contention artifacts, not red tests**: `test_advection_scope.py` and
+`test_marginal_flow.py` both exceeded 3600 s under a 6-way parallel sweep and both pass
+when re-timed alone (2363.7 s and **112.0 s** — a 32x blowup for the latter).
+
+Full evidence: `writeup/data/p2_route_cap_v1_audit.json`; discussion:
+`experiments/journal/leg_71.md`.

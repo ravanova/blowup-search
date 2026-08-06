@@ -35,6 +35,11 @@ Each entry records the four things that decide whether existing code can be reus
                "no known-answer gate" said plainly.  This is the field that stops a
                module being trusted further than it was tested.
   `test`       the file that re-checks the above
+
+SELF-AUDIT: leg 71 (Route-CAP), 2026-08-06, at e203b52 -- all 42 rows run against the
+suite; 2 RED at HEAD (test_fractional_boussinesq.py, test_profile_newton.py -- reported,
+NOT fixed here), 1 `test` field corrected (solver/ga_search.py); see
+writeup/data/p2_route_cap_v1_audit.json.
 """
 
 import sys
@@ -400,7 +405,12 @@ CAPABILITIES = [
     {"module": "solver/ga_search.py", "object": "generic real-coded genetic algorithm",
      "holds": "tournament + BLX-alpha + annealed mutation + elitism, deterministic per seed",
      "validated": "beats random search on the committed benchmark; NO fitness of its own",
-     "test": "test_ga.py"},
+     # Leg 71 (Route-CAP self-audit): was `test_ga.py`, which imports only the `ga/`
+     # package and never touches this module -- `ga_search` appears nowhere in it or in
+     # ga/. test_gclm_family.py is what actually exercises it (`from solver.ga_search
+     # import ga_minimize, GAConfig`), including the determinism-per-seed property claimed
+     # above. Factual `test`-field correction only; `validated` left frozen.
+     "test": "test_gclm_family.py"},
     {"module": "solver/boussinesq.py", "object": "2D Boussinesq, physical space",
      "holds": "pseudo-spectral solver (Phase 1, Gate 1a)",
      "validated": ("dedicated: test_boussinesq_dedicated.py (17 checks) + "

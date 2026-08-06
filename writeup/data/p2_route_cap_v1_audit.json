@@ -1,0 +1,1353 @@
+{
+  "leg": 71,
+  "route": "CAP",
+  "head": "a2cb1171720e0a5b3d189bf154ce03b28b6b06f3",
+  "interpreter": "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/.venv/bin/python",
+  "convention": "no pytest in this repo; every test_*.py is a self-running script run as `.venv/bin/python test_x.py` (scripts/merge_gate.sh)",
+  "gate": "Does every module row in capabilities.py have a test file that exists, is collected by pytest, and passes at current HEAD?",
+  "gate_answer": "no",
+  "gate_answer_scope": "'yes'/'no' is decided on S1/S2/S3 only -- existence, collectability and greenness. S4 rows are green but ungated/uncovered and are reported separately.",
+  "summary": {
+    "rows_total": 42,
+    "distinct_tests_run": 40,
+    "rows_clean": 33,
+    "S1_missing_test_file": [],
+    "S1_missing_module_file": [],
+    "S2_uncollected": [],
+    "S2_runtime_noop": [],
+    "S3_red_at_head": [
+      "solver/fractional_boussinesq.py",
+      "solver/profile_newton.py"
+    ],
+    "S3_timeout_unresolved": [],
+    "slow_but_green_alone": [
+      "solver/marginal_flow.py"
+    ],
+    "S4_no_coverage": [
+      "solver/ga_search.py",
+      "solver/finite_support.py"
+    ],
+    "S4_ungated_by_merge_gate": [
+      "solver/hilbert_holder.py",
+      "solver/hilbert_pointwise.py",
+      "solver/ga_search.py",
+      "solver/boussinesq.py",
+      "solver/gclm.py",
+      "solver/spectral_utils.py",
+      "solver/finite_support.py"
+    ],
+    "total_runtime_s": 21601.9
+  },
+  "serial_reruns": {
+    "test_marginal_flow.py": {
+      "test": "test_marginal_flow.py",
+      "returncode": 0,
+      "seconds": 112.04,
+      "timed_out": false,
+      "stdout_lines": 44,
+      "stderr_tail": [
+        ""
+      ],
+      "stdout_tail": [
+        "  (8) K=48: mu=0 -> 45 unstable (max Re +4.524), mu=1e-3 -> 0; crossover in [1e-05, 0.0001], (C) predicts 4.1e-05",
+        "  (8) K=96: mu=0 -> 93 unstable (max Re +4.546), mu=1e-3 -> 0; crossover in [1e-06, 1e-05], (C) predicts 5.1e-06",
+        "  (8) crossover falls by x10.0 from K=48 to K=96 ((C) predicts x8)  OK",
+        "",
+        "test_9_nonlinear_control_matches_the_spectral_gap",
+        "  (9) mu=0.05: twin-trajectory rate -1.0167 vs spectral gap -1.0114 (0.5%); mu=0: rate +1.904, kick grows x4.6e+05  OK",
+        "",
+        "test_10_refusal_predicate_and_the_lower_bound",
+        "  (10) signal/discretization 1604; leading inviscid eigenvalue +4.546 +430.3i, max Re at |Im|<=10 is only +1.004, measured generic rate +0.798  OK",
+        "",
+        "test_11_small_is_norm_dependent_and_divergence_is_refused",
+        "  (11a) coefficient-normalized perturbation is 3.6e+08x too large in the gauge functional: alpha 3.037 -> 1.171e+04 (naive) vs 3.037 (admissible)",
+        "  (11b) the diverged run is REFUSED (converged=False), the on-branch run is kept (mu_end=0.088780)  OK",
+        "",
+        "ALL GATES PASS (112s)"
+      ],
+      "serial": true
+    }
+  },
+  "rows": [
+    {
+      "module": "solver/hl_rescaled.py",
+      "module_exists": true,
+      "cited_test": "test_hl_rescaled.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 9,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_hl_rescaled.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_hl_rescaled.py",
+        "returncode": 0,
+        "seconds": 61.1,
+        "timed_out": false,
+        "stdout_lines": 22,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/line_hilbert.py",
+      "module_exists": true,
+      "cited_test": "test_line_hilbert.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 7,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_line_hilbert.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_line_hilbert.py",
+        "returncode": 0,
+        "seconds": 117.39,
+        "timed_out": false,
+        "stdout_lines": 13,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/gclm_family.py",
+      "module_exists": true,
+      "cited_test": "test_gclm_family.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 12,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_gclm_family.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_gclm_family.py",
+        "returncode": 0,
+        "seconds": 59.28,
+        "timed_out": false,
+        "stdout_lines": 39,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/gclm_rescaled.py",
+      "module_exists": true,
+      "cited_test": "test_gclm_rescaled.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 5,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_gclm_rescaled.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_gclm_rescaled.py",
+        "returncode": 0,
+        "seconds": 845.42,
+        "timed_out": false,
+        "stdout_lines": 13,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/rescaled_spectrum.py",
+      "module_exists": true,
+      "cited_test": "test_rescaled_spectrum.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 8,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_rescaled_spectrum.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_rescaled_spectrum.py",
+        "returncode": 0,
+        "seconds": 1005.39,
+        "timed_out": false,
+        "stdout_lines": 10,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/fractional_gclm.py",
+      "module_exists": true,
+      "cited_test": "test_fractional_gclm.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_fractional_gclm.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_fractional_gclm.py",
+        "returncode": 0,
+        "seconds": 27.0,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/critical_dissipation.py",
+      "module_exists": true,
+      "cited_test": "test_critical_dissipation.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 10,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_critical_dissipation.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_critical_dissipation.py",
+        "returncode": 0,
+        "seconds": 2999.88,
+        "timed_out": false,
+        "stdout_lines": 13,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/marginal_flow.py",
+      "module_exists": true,
+      "cited_test": "test_marginal_flow.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 11,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_marginal_flow.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_marginal_flow.py",
+        "returncode": -1,
+        "seconds": 3600.11,
+        "timed_out": true,
+        "stdout_lines": 0,
+        "stderr_tail": [
+          "TIMEOUT after 3600s"
+        ]
+      },
+      "serial_run": {
+        "test": "test_marginal_flow.py",
+        "returncode": 0,
+        "seconds": 112.04,
+        "timed_out": false,
+        "stdout_lines": 44,
+        "stderr_tail": [
+          ""
+        ],
+        "stdout_tail": [
+          "  (8) K=48: mu=0 -> 45 unstable (max Re +4.524), mu=1e-3 -> 0; crossover in [1e-05, 0.0001], (C) predicts 4.1e-05",
+          "  (8) K=96: mu=0 -> 93 unstable (max Re +4.546), mu=1e-3 -> 0; crossover in [1e-06, 1e-05], (C) predicts 5.1e-06",
+          "  (8) crossover falls by x10.0 from K=48 to K=96 ((C) predicts x8)  OK",
+          "",
+          "test_9_nonlinear_control_matches_the_spectral_gap",
+          "  (9) mu=0.05: twin-trajectory rate -1.0167 vs spectral gap -1.0114 (0.5%); mu=0: rate +1.904, kick grows x4.6e+05  OK",
+          "",
+          "test_10_refusal_predicate_and_the_lower_bound",
+          "  (10) signal/discretization 1604; leading inviscid eigenvalue +4.546 +430.3i, max Re at |Im|<=10 is only +1.004, measured generic rate +0.798  OK",
+          "",
+          "test_11_small_is_norm_dependent_and_divergence_is_refused",
+          "  (11a) coefficient-normalized perturbation is 3.6e+08x too large in the gauge functional: alpha 3.037 -> 1.171e+04 (naive) vs 3.037 (admissible)",
+          "  (11b) the diverged run is REFUSED (converged=False), the on-branch run is kept (mu_end=0.088780)  OK",
+          "",
+          "ALL GATES PASS (112s)"
+        ],
+        "serial": true
+      },
+      "serial_pass": true,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/boussinesq_velocity.py",
+      "module_exists": true,
+      "cited_test": "test_boussinesq_velocity.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 5,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_boussinesq_velocity.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_boussinesq_velocity.py",
+        "returncode": 0,
+        "seconds": 1.18,
+        "timed_out": false,
+        "stdout_lines": 7,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/boussinesq_rescaled.py",
+      "module_exists": true,
+      "cited_test": "test_boussinesq_rescaled.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 8,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_boussinesq_rescaled.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_boussinesq_rescaled.py",
+        "returncode": 0,
+        "seconds": 320.45,
+        "timed_out": false,
+        "stdout_lines": 10,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/port_certification.py",
+      "module_exists": true,
+      "cited_test": "test_port_certification.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 10,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_port_certification.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_port_certification.py",
+        "returncode": 0,
+        "seconds": 11.49,
+        "timed_out": false,
+        "stdout_lines": 32,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/fractional_boussinesq.py",
+      "module_exists": true,
+      "cited_test": "test_fractional_boussinesq.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 0,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_fractional_boussinesq.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_fractional_boussinesq.py",
+        "returncode": 1,
+        "seconds": 323.82,
+        "timed_out": false,
+        "stdout_lines": 50,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": false,
+      "flags": [
+        "S3_red"
+      ]
+    },
+    {
+      "module": "solver/interval.py",
+      "module_exists": true,
+      "cited_test": "test_interval.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_interval.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 69 (IA), read-only",
+      "run": {
+        "test": "test_interval.py",
+        "returncode": 0,
+        "seconds": 1.15,
+        "timed_out": false,
+        "stdout_lines": 13,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/interval_certificate.py",
+      "module_exists": true,
+      "cited_test": "test_interval_certificate.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 13,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_interval_certificate.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 61 (KA)",
+      "run": {
+        "test": "test_interval_certificate.py",
+        "returncode": 0,
+        "seconds": 600.98,
+        "timed_out": false,
+        "stdout_lines": 22,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/spectral_certificate.py",
+      "module_exists": true,
+      "cited_test": "test_spectral_certificate.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: straight-line module-level gates",
+      "n_test_functions": 0,
+      "has_main_block": false,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_spectral_certificate.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 58 (NG)",
+      "run": {
+        "test": "test_spectral_certificate.py",
+        "returncode": 0,
+        "seconds": 875.11,
+        "timed_out": false,
+        "stdout_lines": 28,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/nk_bounds.py",
+      "module_exists": true,
+      "cited_test": "test_nk_bounds.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_nk_bounds.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_nk_bounds.py",
+        "returncode": 0,
+        "seconds": 63.87,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/op_lower.py",
+      "module_exists": true,
+      "cited_test": "test_op_lower.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_op_lower.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_op_lower.py",
+        "returncode": 0,
+        "seconds": 71.66,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/holder_norms.py",
+      "module_exists": true,
+      "cited_test": "test_holder_norms.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_holder_norms.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 65 (L1G), landed",
+      "run": {
+        "test": "test_holder_norms.py",
+        "returncode": 0,
+        "seconds": 5.19,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/decay_grading.py",
+      "module_exists": true,
+      "cited_test": "test_decay_grading.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 7,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_decay_grading.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_decay_grading.py",
+        "returncode": 0,
+        "seconds": 7.42,
+        "timed_out": false,
+        "stdout_lines": 9,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/decay_collocation.py",
+      "module_exists": true,
+      "cited_test": "test_decay_collocation.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_decay_collocation.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_decay_collocation.py",
+        "returncode": 0,
+        "seconds": 385.85,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/collocation_newton.py",
+      "module_exists": true,
+      "cited_test": "test_collocation_newton.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_collocation_newton.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_collocation_newton.py",
+        "returncode": 0,
+        "seconds": 393.58,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/reduced_certificate.py",
+      "module_exists": true,
+      "cited_test": "test_reduced_certificate.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 7,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_reduced_certificate.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_reduced_certificate.py",
+        "returncode": 0,
+        "seconds": 71.99,
+        "timed_out": false,
+        "stdout_lines": 57,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/nk_fourier.py",
+      "module_exists": true,
+      "cited_test": "test_nk_fourier.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_nk_fourier.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_nk_fourier.py",
+        "returncode": 0,
+        "seconds": 27.88,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/nk_seminorm.py",
+      "module_exists": true,
+      "cited_test": "test_nk_seminorm.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_nk_seminorm.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_nk_seminorm.py",
+        "returncode": 0,
+        "seconds": 45.35,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/hilbert_holder.py",
+      "module_exists": true,
+      "cited_test": "test_nk_hilbert_holder.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_hilbert_holder.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_nk_hilbert_holder.py",
+        "returncode": 0,
+        "seconds": 253.25,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/hilbert_pointwise.py",
+      "module_exists": true,
+      "cited_test": "test_nk_hilbert_pointwise.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_hilbert_pointwise.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_nk_hilbert_pointwise.py",
+        "returncode": 0,
+        "seconds": 13.15,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/first_integral.py",
+      "module_exists": true,
+      "cited_test": "test_first_integral.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 7,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_first_integral.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_first_integral.py",
+        "returncode": 0,
+        "seconds": 2227.11,
+        "timed_out": false,
+        "stdout_lines": 39,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/turning_point.py",
+      "module_exists": true,
+      "cited_test": "test_turning_point.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_turning_point.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_turning_point.py",
+        "returncode": 0,
+        "seconds": 1609.81,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/profile_newton.py",
+      "module_exists": true,
+      "cited_test": "test_profile_newton.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_profile_newton.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_profile_newton.py",
+        "returncode": 1,
+        "seconds": 945.87,
+        "timed_out": false,
+        "stdout_lines": 5,
+        "stderr_tail": [
+          "  File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/test_profile_newton.py\", line 135, in <module>",
+          "    test_6_failure_reported()",
+          "  File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/test_profile_newton.py\", line 122, in test_6_failure_reported",
+          "    assert not rows[-1][\"converged\"], rows[-1]",
+          "           ^^^^^^^^^^^^^^^^^^^^^^^^^",
+          "AssertionError: {'a': 0.9, 'converged': True, 'residual_rms': 3.880940112012514e-07, 'relres': 2.8888943409112577e-06, 'c': np.float64(0.7483299284679625), 'iterations': 40}"
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": false,
+      "flags": [
+        "S3_red"
+      ]
+    },
+    {
+      "module": "solver/advection_scope.py",
+      "module_exists": true,
+      "cited_test": "test_advection_scope.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_advection_scope.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_advection_scope.py",
+        "returncode": 0,
+        "seconds": 2363.67,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) U ~ (M/pi) log X: a=0.0: -0.9970 vs -0.9969; a=0.3: -0.7544 vs -0.7540; a=0.5: -0.6862 vs -0.6870",
+          "[ok] (2) two-scale split: a=0.3: transport +0.317 (pred +0.318), grid-spread 0.4% vs stretch 5%; a=0.5: transport +0.480 (pred +0.567), grid-spread 2.6% vs stretch 99%",
+          "[ok] (3) a = 0 control: both advection pieces identically 0, and c_eff never changes sign",
+          "[ok] (4) one-scale grading fixes it: a=0.3: rate +0.317 -> -0.010, at X=1e4 3.11 -> 3.1e-04; a=0.5: rate +0.480 -> -0.016, at X=1e4 4.79 -> 4.8e-04",
+          "[ok] (5) stagnation point: a=0.3: X* = 7.16 (spread 0.7% over 3 grids); a=0.5: X* = 3.10 (spread 1.1% over 3 grids)",
+          "[ok] (6) inputs sane: relres 3.07e-14, d/dX matches the exact derivative to 4.8e-09 (it already carries 1/X_rho)",
+          "",
+          "ALL ADVECTION-SCOPE TESTS PASSED"
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/target_norm.py",
+      "module_exists": true,
+      "cited_test": "test_target_norm.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: straight-line module-level gates",
+      "n_test_functions": 0,
+      "has_main_block": false,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_target_norm.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_target_norm.py",
+        "returncode": 0,
+        "seconds": 0.91,
+        "timed_out": false,
+        "stdout_lines": 25,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/literature_gates.py",
+      "module_exists": true,
+      "cited_test": "test_literature_gates.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 9,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_literature_gates.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 62 (CP)",
+      "run": {
+        "test": "test_literature_gates.py",
+        "returncode": 0,
+        "seconds": 56.18,
+        "timed_out": false,
+        "stdout_lines": 29,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/certificate_shapes.py",
+      "module_exists": true,
+      "cited_test": "test_certificate_shapes.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 15,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_certificate_shapes.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 62 (CP)",
+      "run": {
+        "test": "test_certificate_shapes.py",
+        "returncode": 0,
+        "seconds": 271.21,
+        "timed_out": false,
+        "stdout_lines": 49,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/bordered_hl.py",
+      "module_exists": true,
+      "cited_test": "test_bordered_hl.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 11,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_bordered_hl.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_bordered_hl.py",
+        "returncode": 0,
+        "seconds": 437.83,
+        "timed_out": false,
+        "stdout_lines": 32,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/viscous_novelty.py",
+      "module_exists": true,
+      "cited_test": "test_viscous_novelty.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 8,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_viscous_novelty.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_viscous_novelty.py",
+        "returncode": 0,
+        "seconds": 791.72,
+        "timed_out": false,
+        "stdout_lines": 27,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/weight_search.py",
+      "module_exists": true,
+      "cited_test": "test_weight_search.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 9,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_weight_search.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 59 (WV)",
+      "run": {
+        "test": "test_weight_search.py",
+        "returncode": 0,
+        "seconds": 194.91,
+        "timed_out": false,
+        "stdout_lines": 11,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/target_selection.py",
+      "module_exists": true,
+      "cited_test": "test_target_selection.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 9,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_target_selection.py",
+      "merge_gate_name_exists": true,
+      "live_claimed_by": "leg 63 (M2)",
+      "run": {
+        "test": "test_target_selection.py",
+        "returncode": 0,
+        "seconds": 0.46,
+        "timed_out": false,
+        "stdout_lines": 19,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": []
+    },
+    {
+      "module": "solver/ga_search.py",
+      "module_exists": true,
+      "cited_test": "test_ga.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 14,
+      "has_main_block": true,
+      "test_imports_module": false,
+      "test_mentions_module": false,
+      "merge_gate_name": "test_ga_search.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_ga.py",
+        "returncode": 0,
+        "seconds": 440.89,
+        "timed_out": false,
+        "stdout_lines": 24,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_no_coverage",
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/boussinesq.py",
+      "module_exists": true,
+      "cited_test": "test_solver_boussinesq.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 6,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_boussinesq.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_solver_boussinesq.py",
+        "returncode": 0,
+        "seconds": 48.91,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/gclm.py",
+      "module_exists": true,
+      "cited_test": "test_solver_clm.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 4,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_gclm.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_solver_clm.py",
+        "returncode": 0,
+        "seconds": 23.51,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/spectral_utils.py",
+      "module_exists": true,
+      "cited_test": "test_solver_clm.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 4,
+      "has_main_block": true,
+      "test_imports_module": true,
+      "test_mentions_module": true,
+      "merge_gate_name": "test_spectral_utils.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_solver_clm.py",
+        "returncode": 0,
+        "seconds": 23.51,
+        "timed_out": false,
+        "stdout_lines": 8,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_ungated_by_merge_gate"
+      ]
+    },
+    {
+      "module": "solver/finite_support.py",
+      "module_exists": true,
+      "cited_test": "test_first_integral.py",
+      "test_exists": true,
+      "collectable": true,
+      "collect_detail": "parses; style: `__main__` block",
+      "n_test_functions": 7,
+      "has_main_block": true,
+      "test_imports_module": false,
+      "test_mentions_module": false,
+      "merge_gate_name": "test_finite_support.py",
+      "merge_gate_name_exists": false,
+      "live_claimed_by": null,
+      "run": {
+        "test": "test_first_integral.py",
+        "returncode": 0,
+        "seconds": 2227.11,
+        "timed_out": false,
+        "stdout_lines": 39,
+        "stderr_tail": [
+          ""
+        ]
+      },
+      "serial_run": null,
+      "serial_pass": false,
+      "passes": true,
+      "flags": [
+        "S4_no_coverage",
+        "S4_ungated_by_merge_gate"
+      ]
+    }
+  ]
+}
