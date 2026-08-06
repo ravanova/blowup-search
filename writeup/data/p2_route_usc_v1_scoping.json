@@ -1,0 +1,470 @@
+{
+  "leg": 175,
+  "route": "ROUTE-USC",
+  "pass_date": "2026-08-06",
+  "target": {
+    "id": "arXiv:2509.14185v1",
+    "title": "Discovery of Unstable Singularities",
+    "url": "https://arxiv.org/abs/2509.14185",
+    "authors_short": "Wang, Bennani, Martens, ..., Buckmaster, Georgiev, Gomez-Serrano, Jiang, Lai",
+    "pages": 20,
+    "read_at_full_text_depth_first_time_in_this_repository": true
+  },
+  "followup": {
+    "id": "arXiv:2511.22819v1",
+    "title": "Resolving Sharp Gradients of Unstable Singularities to Machine Precision via Neural Networks",
+    "url": "https://arxiv.org/abs/2511.22819",
+    "authors": "Yongji Wang, Tristan Leger, Ching-Yao Lai, Tristan Buckmaster",
+    "pages": 27,
+    "days_after_target": 72
+  },
+  "gate": {
+    "question": "Does arXiv:2509.14185's own text state, imply, or make locatable an obstruction to certifying its CAP-ready unstable singularities, and is that obstruction MODEL-specific or TECHNIQUE-specific?",
+    "locatable": true,
+    "verdict": "TECHNIQUE_SPECIFIC",
+    "answered_branch": "technique-specific",
+    "escalation_fires": false,
+    "discriminators": {
+      "D1_solutions_technique_was_applied_to": [
+        {
+          "model": "CCF",
+          "mode": "stable",
+          "log10": -13.714
+        },
+        {
+          "model": "CCF",
+          "mode": "1st unstable",
+          "log10": -13.589
+        },
+        {
+          "model": "IPM with boundary",
+          "mode": "stable",
+          "log10": -11.183
+        },
+        {
+          "model": "IPM with boundary",
+          "mode": "1st unstable",
+          "log10": -10.51
+        }
+      ],
+      "D1_of_those_still_stranded": [],
+      "D1_model_wall_detected": false,
+      "D2_models_stranded_in_usc": [
+        "Boussinesq",
+        "CCF",
+        "IPM with boundary"
+      ],
+      "D2_models_rescued_by_later_technique_change": [
+        "CCF",
+        "IPM with boundary"
+      ],
+      "D2_models_never_retried": [
+        "Boussinesq"
+      ],
+      "D2_technique_rescue_detected": true
+    }
+  },
+  "cap_threshold_log10": -13.0,
+  "single_stage_floor_log10": -8.0,
+  "residuals_usc_fig3b_p6": [
+    {
+      "model": "CCF",
+      "mode": "stable",
+      "log10_max_residual": -13.714,
+      "multistage_applied": true
+    },
+    {
+      "model": "CCF",
+      "mode": "1st unstable",
+      "log10_max_residual": -13.589,
+      "multistage_applied": true
+    },
+    {
+      "model": "CCF",
+      "mode": "2nd unstable",
+      "log10_max_residual": -6.664,
+      "multistage_applied": false
+    },
+    {
+      "model": "IPM with boundary",
+      "mode": "stable",
+      "log10_max_residual": -11.183,
+      "multistage_applied": true
+    },
+    {
+      "model": "IPM with boundary",
+      "mode": "1st unstable",
+      "log10_max_residual": -10.51,
+      "multistage_applied": true
+    },
+    {
+      "model": "IPM with boundary",
+      "mode": "2nd unstable",
+      "log10_max_residual": -8.101,
+      "multistage_applied": false
+    },
+    {
+      "model": "IPM with boundary",
+      "mode": "3rd unstable",
+      "log10_max_residual": -7.526,
+      "multistage_applied": false
+    },
+    {
+      "model": "Boussinesq",
+      "mode": "stable",
+      "log10_max_residual": -8.178,
+      "multistage_applied": false
+    },
+    {
+      "model": "Boussinesq",
+      "mode": "1st unstable",
+      "log10_max_residual": -8.038,
+      "multistage_applied": false
+    },
+    {
+      "model": "Boussinesq",
+      "mode": "2nd unstable",
+      "log10_max_residual": -7.772,
+      "multistage_applied": false
+    },
+    {
+      "model": "Boussinesq",
+      "mode": "3rd unstable",
+      "log10_max_residual": -7.558,
+      "multistage_applied": false
+    },
+    {
+      "model": "Boussinesq",
+      "mode": "4th unstable",
+      "log10_max_residual": -7.02,
+      "multistage_applied": false
+    }
+  ],
+  "per_model": {
+    "CCF": {
+      "modes": [
+        {
+          "mode": "stable",
+          "log10_max_residual": -13.714,
+          "multistage_applied": true
+        },
+        {
+          "mode": "1st unstable",
+          "log10_max_residual": -13.589,
+          "multistage_applied": true
+        },
+        {
+          "mode": "2nd unstable",
+          "log10_max_residual": -6.664,
+          "multistage_applied": false
+        }
+      ],
+      "multistage_modes": [
+        "stable",
+        "1st unstable"
+      ],
+      "best_log10": -13.714,
+      "worst_log10": -6.664,
+      "decades_short_of_cap_at_best": -0.714,
+      "decades_short_of_cap_at_worst": 6.336,
+      "meets_cap_threshold": true
+    },
+    "IPM with boundary": {
+      "modes": [
+        {
+          "mode": "stable",
+          "log10_max_residual": -11.183,
+          "multistage_applied": true
+        },
+        {
+          "mode": "1st unstable",
+          "log10_max_residual": -10.51,
+          "multistage_applied": true
+        },
+        {
+          "mode": "2nd unstable",
+          "log10_max_residual": -8.101,
+          "multistage_applied": false
+        },
+        {
+          "mode": "3rd unstable",
+          "log10_max_residual": -7.526,
+          "multistage_applied": false
+        }
+      ],
+      "multistage_modes": [
+        "stable",
+        "1st unstable"
+      ],
+      "best_log10": -11.183,
+      "worst_log10": -7.526,
+      "decades_short_of_cap_at_best": 1.817,
+      "decades_short_of_cap_at_worst": 5.474,
+      "meets_cap_threshold": false
+    },
+    "Boussinesq": {
+      "modes": [
+        {
+          "mode": "stable",
+          "log10_max_residual": -8.178,
+          "multistage_applied": false
+        },
+        {
+          "mode": "1st unstable",
+          "log10_max_residual": -8.038,
+          "multistage_applied": false
+        },
+        {
+          "mode": "2nd unstable",
+          "log10_max_residual": -7.772,
+          "multistage_applied": false
+        },
+        {
+          "mode": "3rd unstable",
+          "log10_max_residual": -7.558,
+          "multistage_applied": false
+        },
+        {
+          "mode": "4th unstable",
+          "log10_max_residual": -7.02,
+          "multistage_applied": false
+        }
+      ],
+      "multistage_modes": [],
+      "best_log10": -8.178,
+      "worst_log10": -7.02,
+      "decades_short_of_cap_at_best": 4.822,
+      "decades_short_of_cap_at_worst": 5.98,
+      "meets_cap_threshold": false
+    }
+  },
+  "lambda_usc_fig2f_p4": {
+    "CCF": {
+      "stable": 1.1807776628998,
+      "1st unstable": 0.6057337012032,
+      "2nd unstable": 0.471324863862
+    },
+    "IPM with boundary": {
+      "stable": 1.0285722760222,
+      "1st unstable": 0.4721297362414,
+      "2nd unstable": 0.3149620267088,
+      "3rd unstable": 0.2415604743989
+    },
+    "Boussinesq": {
+      "stable": 1.9205599746927,
+      "1st unstable": 1.3990961221852,
+      "2nd unstable": 1.2523481636489,
+      "3rd unstable": 1.1842500861997,
+      "4th unstable": 1.1448833556188
+    }
+  },
+  "unvalidated_solutions": [
+    {
+      "model": "Boussinesq",
+      "mode": "4th unstable"
+    }
+  ],
+  "residuals_after_technique_fix": {
+    "CCF": {
+      "best_log10": -13.0,
+      "worst_log10": -13.0,
+      "coverage": "full suite"
+    },
+    "IPM with boundary": {
+      "best_log10": -13.0,
+      "worst_log10": -11.0,
+      "coverage": "all modes, including the newly confirmed 4th unstable"
+    }
+  },
+  "models_not_retried_after_fix": [
+    "Boussinesq"
+  ],
+  "ladder": {
+    "signal_decay_decades_per_mode": 1.0,
+    "background_rise_decades_per_mode": 1.0,
+    "ipm_stable_best_log10": -14.0,
+    "ipm_4th_unstable_best_log10": -10.0,
+    "ipm_modes_spanned": 4,
+    "implied_decades_per_mode_from_worked_example": 1.0,
+    "stated_decades_per_mode": 1.0,
+    "agree_within_0p25_decade": true,
+    "net_margin_closure_decades_per_mode": 2.0
+  },
+  "gap_in_leg_173_terms": {
+    "precision_ccf": {
+      "status": "CLOSED",
+      "by": "arXiv:2511.22819v1",
+      "detail": "O(10^-13), full suite of previously discovered CCF solutions; round-off limited."
+    },
+    "precision_ipm": {
+      "status": "CLOSED",
+      "by": "arXiv:2511.22819v1",
+      "detail": "O(10^-11) to O(10^-13) across all modes, including a newly confirmed 4th unstable solution."
+    },
+    "precision_boussinesq": {
+      "status": "OPEN",
+      "decades_short_at_best": 4.822,
+      "decades_short_at_worst": 5.98,
+      "detail": "UNTESTED, not measured-dead: the gradient-normalization fix was never applied to Boussinesq. 'Boussinesq' appears exactly once in the follow-up, in the abstract's recap of [1], and never in its body. Headwind is the ~2 decade/mode margin ladder."
+    },
+    "scope_unstable_spectrum": {
+      "status": "OPEN",
+      "detail": "The finite-unstable-spectrum condition a CAP needs is called 'desirable' (USC p.19) and never established. The mode count comes from a PINN eigensolve assumed real and restricted to the solution's symmetry class. No residual reduction discharges this."
+    },
+    "infrastructure_cap": {
+      "status": "OPEN",
+      "detail": "No CAP for any of these solutions exists. USC's was 'Manuscript in preparation' (Sep 2025) and has not appeared. The SI defining every object such a CAP would enclose has never been uploaded."
+    }
+  },
+  "ledger_audit": {
+    "note": "solver/viscous_novelty.py and LITERATURE_CHECK.md were read, never edited. This leg has no authority over either.",
+    "recorded_what": "Unstable self-similar singularities for IPM and 3D Euler with boundary at near-machine precision, stated as CAP-ready. Inviscid.",
+    "defect": "The row names IPM and 3D Euler with boundary and omits CCF -- the ONLY model for which the paper actually claims CAP-sufficiency (USC p.8). The two models named are those where the claim is weakest.",
+    "wording_slip": "'near-machine precision' flattens a 6.7-decade stratification (Fig.3b spans -13.714 to -7.020); 2 of 12 solutions are at machine precision.",
+    "correct_as_recorded": [
+      "no certificate claimed",
+      "inviscid",
+      "EXCLUSION verdict"
+    ],
+    "verdict_unchanged_by_this_pass": "EXCLUSION"
+  },
+  "banked_numbers_correction": {
+    "claim_checked": "The re-derivation numbers 1.8e-07, 3.0e-06/1.9e-06 rms, 3.8e-07 were attributed to arXiv:2509.14185 in the coordinator's framing.",
+    "finding": "CONFIRMED MISATTRIBUTED. Papers/MANIFEST.md assigns exactly those figures to arXiv:2410.05480 (Dahne-Figueras, CGL branches). arXiv:2509.14185 appears in no manifest, no fetch tier, and no writeup/data JSON. There was no prior re-derivation of this paper."
+  },
+  "escalation_branch_checked": {
+    "fires": false,
+    "reason": "The gate answered TECHNIQUE_SPECIFIC, so the model-specific escalation branch does not apply.",
+    "near_miss_recorded_honestly": "CCF is NOT a member of this repository's gCLM a-family. solver/gclm_family.py implements omega_t + a u omega_x = omega H(omega) with u_x = H(omega); CCF is theta_t + (H theta) theta_x = 0 -- no stretching term, and the velocity is H theta itself rather than its antiderivative. grep for CCF/Cordoba over solver/ returns nothing. Only model-agnostic 1D tooling is shared (line_hilbert.py, interval.py, profile_newton.py). No construction lane is proposed."
+  },
+  "user_framing_correction": {
+    "framing": "still one model class away",
+    "finding": "Not supported. It was one loss-reweighting scheme away, and that scheme landed 72 days later on the same models, closing CCF and IPM to round-off. What remains open is narrower than a model class: the fix unpublished for Boussinesq, the ~2 decade/mode margin ladder, the unstable-spectrum enclosure (a proof obligation, not a numerics one), and a CAP announced in Sep 2025 that has not appeared."
+  },
+  "biblio": {
+    "usc_versions_on_arxiv": [
+      "v1"
+    ],
+    "usc_v1_date": "2025-09-17",
+    "fix_v1_date": "2025-11-28",
+    "pass_date": "2026-08-06",
+    "usc_si_published": false,
+    "usc_cap_manuscript_published": false
+  },
+  "quotes": [
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 8,
+      "section": "Implications for Future Studies",
+      "text": "This level of accuracy proves to be sufficient for utilizing the numerical solution for computer-assisted proofs for this specific problem[2], although the required precision for such proofs is generally problem-dependent.",
+      "bears_on": "CAP-readiness is claimed for CCF only, and the threshold is stated to be problem-dependent"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 8,
+      "section": "footnote 2",
+      "text": "Manuscript in preparation.",
+      "bears_on": "the promised CAP; still unpublished at the pass date"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 17,
+      "section": "Methods / Multi-stage Training",
+      "text": "If we only employ methods described up to this point, we are unable to reach maximum equation residuals much below 10^-8.",
+      "bears_on": "the precision floor is attributed to the METHOD, not to any model"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 17,
+      "section": "Methods / Multi-stage Training",
+      "text": "In this study, we apply two-stage training to the stable and first unstable solutions of the CCF and IPM equations.",
+      "bears_on": "the technique reached only 4 of 12 solutions"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 19,
+      "section": "Methods / Spectrum of Linearization",
+      "text": "For a computer-assisted proof to be feasible, it is desirable that the spectrum in the right-half mu-plane consists of a finite number of eigenvalues.",
+      "bears_on": "a CAP prerequisite stated as desirable and never established"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 19,
+      "section": "Methods / Spectrum of Linearization",
+      "text": "we learn the non-negative real eigenvalues of the corresponding linearized operators, under the assumption that there exist eigenvalues with non-negative real part that lie on the real axis",
+      "bears_on": "the unstable-mode count is assumed real, not enclosed"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 19,
+      "section": "Methods / Spectrum of Linearization",
+      "text": "Here, the eigenfunction problem is restricted to Psi that lie within the same symmetry class as the original solution.",
+      "bears_on": "the unstable subspace is enumerated only inside the symmetry class"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 18,
+      "section": "Methods / Validation of lambda",
+      "text": "there exists a limit to the resolution of lambda at which this method can discern admissibility",
+      "bears_on": "lambda digits come from a seed-averaged basin width, not an enclosure"
+    },
+    {
+      "src": "arXiv:2509.14185v1",
+      "page": 4,
+      "section": "footnote 1",
+      "text": "The Supplementary Information to the paper will be uploaded in a forthcoming version of the manuscript.",
+      "bears_on": "every object a CAP would enclose is deferred to a document that does not exist"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "page": 1,
+      "section": "Abstract",
+      "text": "For highly unstable solutions characterized by extreme gradients, the accuracy remained insufficient for validation. The primary obstacle is the presence of sharp solution gradients.",
+      "bears_on": "the same authors name USC's obstruction explicitly"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "page": 2,
+      "section": "1 Introduction",
+      "text": "We achieve O(10^-13) residuals for the full suite of previously discovered CCF solutions and achieve accuracy between O(10^-11) and O(10^-13) for the 2-D IPM solutions.",
+      "bears_on": "a loss re-weighting, on unchanged models, removed the barrier"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "page": 11,
+      "section": "2.3.3",
+      "text": "the best Rmax residual for the stable solution reaches O(10^-14), while the one for the 4th unstable solution stagnates at O(10^-10)",
+      "bears_on": "the residual technique gap has a ladder shape, ~1 decade per mode"
+    }
+  ],
+  "self_tests": {
+    "cases": [
+      {
+        "case": "actual_evidence",
+        "got": "TECHNIQUE_SPECIFIC",
+        "expected": "TECHNIQUE_SPECIFIC",
+        "pass": true
+      },
+      {
+        "case": "counterfactual_technique_applied_and_failed",
+        "got": "MODEL_SPECIFIC",
+        "expected": "MODEL_SPECIFIC",
+        "pass": true
+      },
+      {
+        "case": "counterfactual_no_followup",
+        "got": "NOT_LOCATABLE",
+        "expected": "NOT_LOCATABLE",
+        "pass": true
+      }
+    ],
+    "all_pass": true
+  },
+  "no_certificate_exists_search": {
+    "queries": [
+      "export.arxiv.org all:\"unstable singularities\" AND all:\"self-similar\", sortBy=submittedDate desc -> exactly 2 records: 2511.22819 (2025-11-28), 2509.14185 (2025-09-17)",
+      "export.arxiv.org all:\"Cordoba-Cordoba-Fontelos\" -> 1 unrelated 2010 record (Kiselev, 1009.0540, Regularity and blow up for active scalars)"
+    ],
+    "cap_found": false
+  }
+}
