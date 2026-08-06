@@ -3537,3 +3537,43 @@ preempted agents had reached a landing.
   to Phase 1 (the viscous rung) under the user's new exit-criterion ruling --
   this group's own stated reachability claim is worth a full-text follow-up
   before any Phase-1 leg builds machinery from scratch.
+- **Leg 246 (Route-ALSL2) — NO:** arXiv:2207.07548's authors (Ambrose,
+  Lushnikov, Siegel, Silantyev) have no certificate at any dissipation
+  exponent -- 19 subsequent works over 1483 days, 2 on the object, both read
+  at md5-pinned full text (4336 lines), 0 with a certification-apparatus
+  term. Their own published follow-up (Stud. Appl. Math. 155, e70115, 2025)
+  is exact pole dynamics at sigma in {0,1} only, and states a verbatim defeat
+  at gamma=2: "despite significant effort, we have been unable to generalize
+  this solution to the periodic domain." Cross-check found au:"Ambrose_D"
+  misses arXiv:2504.14346 -- the closest candidate to this repo's own gamma=2
+  object -- recurring under-return failure mode (legs 240/242) on a third
+  author-net query form.
+- **MAJOR PLAN CHANGE, 2026-08-06.** Per the user's direct ruling (forwarded
+  verbatim by the orchestrator to the DM, processed in full): PUB1 and PUB2
+  are APPROVED as the project's deliverable (two submission-blocking legs
+  drafted: 249 independently verifies leg 176's certificate, 250 fixes the
+  leg 163/176 sigma_min citation conflict). THE EXIT CRITERION IS CHANGED TO
+  A FULL CLAY SOLVE, superseding "a novel Tier-3 result, NOT Clay" -- this
+  resolves escalation #1 (stage B's exhaustion). plan_of_record.py: B marked
+  DONE, new stage P0 (target selection under Clay, screened by NRS/Tsai's
+  exclusion of exactly-backward-self-similar 3D NS blow-up) is NEXT. Wall 2
+  corrected per leg 172: the barrier is TIME-DEPENDENT singularity formation,
+  not spatial dimension. Stage V's ban re-posed (its "needs L1 first" lift
+  condition had become unliftable, L1 dead in 3 realizations); DSS ban kept
+  unchanged. Programme sequenced Phase 0 (leg 251, target selection) -> Phase
+  1 (viscous rung, no certified viscous blow-up exists in ANY model, any
+  dimension) -> Phase 2 (3D solver, user-authorized, unscheduled until Phase
+  1 reports). Clay odds UNCHANGED at ~0.05%, recorded in the same breath as
+  the goal change -- the evidentiary bar does not lower.
+- **Leg 247 (Route-VBR) — repair correct, gate NO, ESCALATED (parked, not
+  merged):** leg 235's diagnosed fix for Route-D v11's v5_budget lands
+  correctly -- the corrected margin moves from a fabricated 1.0468e+10 to the
+  true worst-case 1.6123e-02, which IS a violation: the block misses its own
+  Y0 budget by 62.0237x at a=0.45 (1 of 11 rows; the other 10 hold, worst
+  10.656x). Re-solved from scratch, reproduces to 0.82%. 0 of 196 other banked
+  JSONs affected (grown corpus, still isolated). REASSURING: Route-D v11's
+  own PROSE already stated the non-uniformity honestly (TECHNICAL/blog both
+  print 1.5e-2 and say "not uniformly under the budget") -- no written
+  conclusion moves. Residue: the banked anchor JSON itself still carries the
+  wrong 1.0468e+10 margin, outside this leg's territory -- needs a follow-up
+  leg to regenerate it.
