@@ -3301,3 +3301,25 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   an algebraic identity not an approximation). Genuine external cross-validation
   of leg 185's boundary location, though NOT of its sign-flip claim, which Xu's
   paper does not address either way.
+- **Leg 202 (Route-PNA) — YES, ESCALATED (parked, not merged), MATERIALLY EXPOSED
+  (not just latent):** profile_newton.py has 3 mechanisms, 22 silent-wrong cases.
+  M1 is the serious one: `continuation` returns off-branch grid-scale roots as
+  converged=True at machine-zero relres (both gauges satisfied to 0.0e+00) --
+  c(a=1.50) = 0.20427/0.23717/0.97282 at n=101/201/301, all three "converged" at
+  machine precision, 376% apart. Route-D v11's own banked a_max_machine/GA_boundary
+  claims trust exactly this flag and show the branch-jump signature already in
+  their own JSON (weighted_defect 0.50/4788/73372 at a=0.5/0.8/1.0) -- the
+  rejecting information existed in the caller's own diagnostics and never reached
+  the module's verdict. Route-ASA (leg 122) confirmed NOT affected (substrate
+  a=0.0/0.3, inside the on-branch zone). M2: a small-amplitude start escapes the
+  scaling family at default parameters (Omega(0)=-0.75 not -1, c off by 6.15e+05x,
+  sign flipped). M3: c0 never range-checked. THE MOST CONSEQUENTIAL FINDING THIS
+  CYCLE given explicit banked-claim exposure, not just latency.
+- **Leg 213 (Route-LGC2) — NO, ESCALATED (parked, not merged), minor/cosmetic:**
+  legs 190's and 197's appended literature_gates.py/viscous_novelty.py rows are
+  clean on format, duplicates, and transcription (all measured, not asserted). But
+  EGM_PRIMARY_READ's own sign_correction_leg_190 field describes 5 prose sites as
+  still carrying the wrong bracket -- true when the row was written, false now
+  that leg 214 fixed all 5 (2c901c4). The ledger's own claim about this repo's
+  current files is backwards. 0 banked numbers move; a one-tense-word mechanical
+  fix, not urgent.
