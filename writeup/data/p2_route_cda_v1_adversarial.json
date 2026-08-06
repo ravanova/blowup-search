@@ -1,0 +1,609 @@
+{
+  "leg": 121,
+  "route": "CDA",
+  "title": "adversarial audit of critical_dissipation.py's critical-exponent path",
+  "not_a_physics_measurement": "alpha_1 = 0 at a=0 (ALS eq 61), sigma=3 at a=1/2 (Xu Table 1), and alpha_1 = +0.133683 at a=1/2 (measured, leg 64) are all exactly as banked in capabilities.py. Nothing here re-measures or contests them. Every number is code behaviour under malformed or degenerate input.",
+  "C1_lambda_power_truncation": {
+    "rows": [
+      {
+        "case": "p = 1 (integer, control)",
+        "p_requested": 1.0,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 1,
+        "silently_truncated": false
+      },
+      {
+        "case": "p = 1.9 (should be invalid: not integral)",
+        "p_requested": 1.9,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 1,
+        "silently_truncated": true
+      },
+      {
+        "case": "p = 1.0000001 (a hair above integer)",
+        "p_requested": 1.0000001,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 1,
+        "silently_truncated": true
+      },
+      {
+        "case": "p = 2.9999999 (a hair below the next integer)",
+        "p_requested": 2.9999999,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 2,
+        "silently_truncated": true
+      },
+      {
+        "case": "p = 2.9",
+        "p_requested": 2.9,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 2,
+        "silently_truncated": true
+      },
+      {
+        "case": "p = 3.9",
+        "p_requested": 3.9,
+        "K": 64,
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_actually_used": 3,
+        "silently_truncated": true
+      },
+      {
+        "case": "p = -0.5 (negative, invalid)",
+        "p_requested": -0.5,
+        "K": 64,
+        "exception": "ValueError: p must be a positive integer (2s = p)",
+        "warnings": [],
+        "accepted": false,
+        "p_actually_used": null,
+        "silently_truncated": false
+      },
+      {
+        "case": "p = 0.5 (in (0,1), invalid)",
+        "p_requested": 0.5,
+        "K": 64,
+        "exception": "ValueError: p must be a positive integer (2s = p)",
+        "warnings": [],
+        "accepted": false,
+        "p_actually_used": null,
+        "silently_truncated": false
+      }
+    ],
+    "n_cases": 8,
+    "n_silently_truncated": 5
+  },
+  "C2_flow_identity_under_truncation": {
+    "K": 64,
+    "mus": [
+      0.0,
+      0.05,
+      0.1
+    ],
+    "rows": [
+      {
+        "p_true": 1,
+        "s_true": 0.5,
+        "p_requested": 1.1,
+        "s_requested": 0.55,
+        "p_actually_built": 1,
+        "s_actually_built": 0.5,
+        "residual_true": 9.71445146547012e-16,
+        "residual_fake": 9.71445146547012e-16,
+        "alpha_true": 1.0,
+        "alpha_fake": 1.0,
+        "alpha_1_true": 2.664535259100375e-14,
+        "alpha_1_fake": 2.664535259100375e-14,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 1,
+        "s_true": 0.5,
+        "p_requested": 1.5,
+        "s_requested": 0.75,
+        "p_actually_built": 1,
+        "s_actually_built": 0.5,
+        "residual_true": 9.71445146547012e-16,
+        "residual_fake": 9.71445146547012e-16,
+        "alpha_true": 1.0,
+        "alpha_fake": 1.0,
+        "alpha_1_true": 2.664535259100375e-14,
+        "alpha_1_fake": 2.664535259100375e-14,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 1,
+        "s_true": 0.5,
+        "p_requested": 1.9,
+        "s_requested": 0.95,
+        "p_actually_built": 1,
+        "s_actually_built": 0.5,
+        "residual_true": 9.71445146547012e-16,
+        "residual_fake": 9.71445146547012e-16,
+        "alpha_true": 1.0,
+        "alpha_fake": 1.0,
+        "alpha_1_true": 2.664535259100375e-14,
+        "alpha_1_fake": 2.664535259100375e-14,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 2,
+        "s_true": 1.0,
+        "p_requested": 2.1,
+        "s_requested": 1.05,
+        "p_actually_built": 2,
+        "s_actually_built": 1.0,
+        "residual_true": 1.4985625166838781e-05,
+        "residual_fake": 1.4985625166838781e-05,
+        "alpha_true": 1.0897181208302058,
+        "alpha_fake": 1.0897181208302058,
+        "alpha_1_true": 1.4675439450790417,
+        "alpha_1_fake": 1.4675439450790417,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 2,
+        "s_true": 1.0,
+        "p_requested": 2.5,
+        "s_requested": 1.25,
+        "p_actually_built": 2,
+        "s_actually_built": 1.0,
+        "residual_true": 1.4985625166838781e-05,
+        "residual_fake": 1.4985625166838781e-05,
+        "alpha_true": 1.0897181208302058,
+        "alpha_fake": 1.0897181208302058,
+        "alpha_1_true": 1.4675439450790417,
+        "alpha_1_fake": 1.4675439450790417,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 2,
+        "s_true": 1.0,
+        "p_requested": 2.9,
+        "s_requested": 1.45,
+        "p_actually_built": 2,
+        "s_actually_built": 1.0,
+        "residual_true": 1.4985625166838781e-05,
+        "residual_fake": 1.4985625166838781e-05,
+        "alpha_true": 1.0897181208302058,
+        "alpha_fake": 1.0897181208302058,
+        "alpha_1_true": 1.4675439450790417,
+        "alpha_1_fake": 1.4675439450790417,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 3,
+        "s_true": 1.5,
+        "p_requested": 3.1,
+        "s_requested": 1.55,
+        "p_actually_built": 3,
+        "s_actually_built": 1.5,
+        "residual_true": 2.880015486532439e-06,
+        "residual_fake": 2.880015486532439e-06,
+        "alpha_true": 1.172042517613463,
+        "alpha_fake": 1.172042517613463,
+        "alpha_1_true": 3.525129366895228,
+        "alpha_1_fake": 3.525129366895228,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 3,
+        "s_true": 1.5,
+        "p_requested": 3.5,
+        "s_requested": 1.75,
+        "p_actually_built": 3,
+        "s_actually_built": 1.5,
+        "residual_true": 2.880015486532439e-06,
+        "residual_fake": 2.880015486532439e-06,
+        "alpha_true": 1.172042517613463,
+        "alpha_fake": 1.172042517613463,
+        "alpha_1_true": 3.525129366895228,
+        "alpha_1_fake": 3.525129366895228,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "p_true": 3,
+        "s_true": 1.5,
+        "p_requested": 3.9,
+        "s_requested": 1.95,
+        "p_actually_built": 3,
+        "s_actually_built": 1.5,
+        "residual_true": 2.880015486532439e-06,
+        "residual_fake": 2.880015486532439e-06,
+        "alpha_true": 1.172042517613463,
+        "alpha_fake": 1.172042517613463,
+        "alpha_1_true": 3.525129366895228,
+        "alpha_1_fake": 3.525129366895228,
+        "bit_identical_alpha": true,
+        "bit_identical_residual": true,
+        "bit_identical_alpha_1": true,
+        "exception": null,
+        "warnings": []
+      }
+    ],
+    "n_cases": 9,
+    "n_silently_identical": 9
+  },
+  "C3_realistic_float_near_miss": {
+    "cases": [
+      {
+        "case": "s = 2.5 - 1e-12 (typical fit/subtraction noise)",
+        "s_value": "2.499999999999",
+        "p_computed": "4.999999999998",
+        "intended_p": 5,
+        "p_actually_used_by_int_cast": 4,
+        "off_by": 1,
+        "matches_intended": false
+      },
+      {
+        "case": "s = 5 * 0.1 * 5 (0.1 is not exact in binary)",
+        "s_value": "2.5",
+        "p_computed": "5.0",
+        "intended_p": 5,
+        "p_actually_used_by_int_cast": 5,
+        "off_by": 0,
+        "matches_intended": true
+      },
+      {
+        "case": "s = sum(0.5 for _ in range(5)) (accumulated rounding)",
+        "s_value": "2.5",
+        "p_computed": "5.0",
+        "intended_p": 5,
+        "p_actually_used_by_int_cast": 5,
+        "off_by": 0,
+        "matches_intended": true
+      }
+    ],
+    "n_cases": 3,
+    "n_off_by_one": 1
+  },
+  "C4_type_coercion_asymmetry": {
+    "rows": [
+      {
+        "case": "p = '3' (integer string)",
+        "p_repr": "'3'",
+        "type": "str",
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_built": 3
+      },
+      {
+        "case": "p = '3.0' (float-valued string)",
+        "p_repr": "'3.0'",
+        "type": "str",
+        "exception": "ValueError: invalid literal for int() with base 10: '3.0'",
+        "warnings": [],
+        "accepted": false,
+        "p_built": null
+      },
+      {
+        "case": "p = '3.5' (non-integral string)",
+        "p_repr": "'3.5'",
+        "type": "str",
+        "exception": "ValueError: invalid literal for int() with base 10: '3.5'",
+        "warnings": [],
+        "accepted": false,
+        "p_built": null
+      },
+      {
+        "case": "p = 3.0 (float, integral)",
+        "p_repr": "3.0",
+        "type": "float",
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_built": 3
+      },
+      {
+        "case": "p = 3.5 (float, non-integral)",
+        "p_repr": "3.5",
+        "type": "float",
+        "exception": null,
+        "warnings": [],
+        "accepted": true,
+        "p_built": 3
+      }
+    ]
+  },
+  "C5_negative_mu": {
+    "K": 48,
+    "da": 0.05,
+    "rows_positive_mu": [
+      {
+        "mu": 0.0,
+        "residual": 0.00414734047034478,
+        "alpha": 3.0036726065316444
+      },
+      {
+        "mu": 0.05,
+        "residual": 1.647296110590668e-05,
+        "alpha": 3.008956598711995
+      },
+      {
+        "mu": 0.1,
+        "residual": 2.8309578189222645e-06,
+        "alpha": 3.015047795531713
+      },
+      {
+        "mu": 0.2,
+        "residual": 8.991238730177197e-06,
+        "alpha": 3.02676273109032
+      }
+    ],
+    "rows_negative_mu": [
+      {
+        "mu": 0.0,
+        "residual": 0.00414734047034478,
+        "alpha": 3.0036726065316444
+      },
+      {
+        "mu": -0.05,
+        "residual": 3.510908321713172e-06,
+        "alpha": 3.0658099889049404
+      },
+      {
+        "mu": -0.1,
+        "residual": 2.3603926439909675e-06,
+        "alpha": 3.077422377734907
+      },
+      {
+        "mu": -0.2,
+        "residual": 7.1751301689904935e-06,
+        "alpha": 3.08902012178294
+      }
+    ],
+    "worst_residual_positive_mu": 1.647296110590668e-05,
+    "worst_residual_negative_mu": 7.1751301689904935e-06,
+    "negative_mu_silently_converges": true,
+    "seconds": 3.8
+  },
+  "C6_mu_decay_time_domain": {
+    "rows": [
+      {
+        "case": "CONTROL: normal decay, target < mu0",
+        "alpha_1": 0.13,
+        "mu0": 0.2,
+        "target": 0.02,
+        "returned": 346.15384615384613,
+        "exception": null,
+        "warnings": [],
+        "negative_time_returned": false
+      },
+      {
+        "case": "target > mu0 (decay TO a LARGER value -- meaningless)",
+        "alpha_1": 0.13,
+        "mu0": 0.2,
+        "target": 0.5,
+        "returned": -23.076923076923077,
+        "exception": null,
+        "warnings": [],
+        "negative_time_returned": true
+      },
+      {
+        "case": "target == mu0 (zero elapsed time, boundary)",
+        "alpha_1": 0.13,
+        "mu0": 0.2,
+        "target": 0.2,
+        "returned": 0.0,
+        "exception": null,
+        "warnings": [],
+        "negative_time_returned": false
+      },
+      {
+        "case": "mu0 < 0 (negative initial dissipation strength)",
+        "alpha_1": 0.13,
+        "mu0": -0.2,
+        "target": 0.02,
+        "returned": 423.07692307692304,
+        "exception": null,
+        "warnings": [],
+        "negative_time_returned": false
+      },
+      {
+        "case": "target < 0 (negative target dissipation strength)",
+        "alpha_1": 0.13,
+        "mu0": 0.2,
+        "target": -0.02,
+        "returned": -423.07692307692304,
+        "exception": null,
+        "warnings": [],
+        "negative_time_returned": true
+      },
+      {
+        "case": "mu0 = 0 (should be undefined: nothing to decay from)",
+        "alpha_1": 0.13,
+        "mu0": 0.0,
+        "target": 0.02,
+        "returned": null,
+        "exception": "ZeroDivisionError: float division by zero",
+        "warnings": [],
+        "negative_time_returned": false
+      }
+    ],
+    "n_cases": 6,
+    "n_negative_time_silent": 2
+  },
+  "C7_marginal_verdict_nan": {
+    "rows": [
+      {
+        "case": "CONTROL: alpha_1 = +0.13 (relaxes)",
+        "alpha_1": 0.13,
+        "verdict": "relaxes_to_inviscid",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": false
+      },
+      {
+        "case": "CONTROL: alpha_1 = -0.13 (runs away)",
+        "alpha_1": -0.13,
+        "verdict": "dissipation_runs_away",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": false
+      },
+      {
+        "case": "CONTROL: alpha_1 = 0.0 (neutral)",
+        "alpha_1": 0.0,
+        "verdict": "neutral_line",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": false
+      },
+      {
+        "case": "alpha_1 = NaN (poisoned upstream)",
+        "alpha_1": "nan",
+        "verdict": "dissipation_runs_away",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": true
+      },
+      {
+        "case": "alpha_1 = +inf",
+        "alpha_1": "inf",
+        "verdict": "relaxes_to_inviscid",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": true
+      },
+      {
+        "case": "alpha_1 = -inf",
+        "alpha_1": "-inf",
+        "verdict": "dissipation_runs_away",
+        "exception": null,
+        "warnings": [],
+        "definite_verdict_from_nan_or_inf": true
+      }
+    ],
+    "n_nonfinite_cases": 3,
+    "n_definite_verdict_from_nonfinite": 3
+  },
+  "C8_amplitude_eigenvalue_sign": {
+    "rows": [
+      {
+        "case": "CONTROL: mu = 0 (exact Route-E symmetry eigenvalue -1)",
+        "mu": 0.0,
+        "returned": -1.0,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "case": "CONTROL: mu = 0.5 (admissible dissipation)",
+        "mu": 0.5,
+        "returned": -1.7320508075688772,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "case": "mu = -0.1 (anti-dissipation, in the real branch)",
+        "mu": -0.1,
+        "returned": -0.7745966692414834,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "case": "mu = -0.3 (anti-dissipation, past the real branch)",
+        "mu": -0.3,
+        "returned": "nan",
+        "warnings": [
+          "invalid value encountered in sqrt"
+        ],
+        "finite": false
+      }
+    ]
+  },
+  "C9_positive_controls": {
+    "rows": [
+      {
+        "case": "lambda_power(K, 0): p below 1 after truncation",
+        "exception": "ValueError: p must be a positive integer (2s = p)",
+        "refused": true
+      },
+      {
+        "case": "lambda_power(K, -1): negative integer p",
+        "exception": "ValueError: p must be a positive integer (2s = p)",
+        "refused": true
+      },
+      {
+        "case": "lambda_power(K, 0.5): p in (0,1)",
+        "exception": "ValueError: p must be a positive integer (2s = p)",
+        "refused": true
+      },
+      {
+        "case": "p = '3.5' (non-integral STRING)",
+        "exception": "ValueError: invalid literal for int() with base 10: '3.5'",
+        "refused": true
+      },
+      {
+        "case": "amplitude_eigenvalue(mu=-0.3): past the real branch",
+        "returned": "nan",
+        "warned": true,
+        "is_nan": true
+      }
+    ]
+  },
+  "exposure": {
+    "n_call_sites_outside_module": 24,
+    "note": "Every call site outside solver/critical_dissipation.py and its own test file passes p as a literal integer or a value traced back to one (CRITICAL_POINTS). 0 call sites currently compute p arithmetically from a float. The defect is LATENT: no banked number is exposed today, but nothing in the module would stop a future caller from being silently corrupted, and C3 shows the arithmetic mistake is a realistic one (ordinary float64 rounding), not a contrived one."
+  },
+  "gate": {
+    "question": "Under an adversarial battery of degenerate or poisoned inputs, does solver/critical_dissipation.py ever silently return a wrong exponent instead of flagging the input?",
+    "answer": "yes",
+    "headline_case": "CriticalDissipativeFlow(0.0, mu=0.1, p=1.9, K=64): the module's own docstring says p is 2s, so p=1.9 requests s=0.95. int(p) silently builds p=1 (s=0.5) instead, the Newton solve converges to machine-precision residual, and f.alpha() / alpha_slope's alpha_1 are BIT-IDENTICAL to an honest p=1 request -- no exception, no warning, no field recording the substitution.",
+    "components": {
+      "p_truncation_silent": true,
+      "negative_mu_silent": true,
+      "mu_decay_time_negative_silent": true,
+      "marginal_verdict_nan_silent": true
+    }
+  },
+  "seconds": 6.7
+}
