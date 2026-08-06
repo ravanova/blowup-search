@@ -12,6 +12,38 @@ and needs the user.
 
 ---
 
+## Composition floor roster (machine-readable, DM-maintained)
+
+Leg 258 (ROUTE-FLOCK) added this marker so `test_plan_of_record.py` can check
+ORCHESTRATION.md §3b's composition floor (>= 3 of the 10 live slots floor-eligible: primary
+output is mathematics, external literature, or construction -- not audit, repair, or verify)
+without parsing this file's prose. **The DM keeps this block in sync with the "Live-slot
+roster" table below on every refill/promotion that changes a slot's occupant or type** --
+it is a snapshot of the same facts already stated in prose, not a new source of truth. Only
+the block between the two HTML comments is parsed; everything else in this file is free-form
+prose as before.
+
+<!-- FLOOR-TABLE-START -->
+| Slot | Leg | Route | Eligible |
+|---|---|---|---|
+| A | 192 | H2CV | no |
+| B | 249 | H2CV2 | no |
+| C | 248 | CNR2 | no |
+| D | 221 | BVRR | no |
+| E | 251 | P0T | yes |
+| F | 236 | RDDEP | yes |
+| G | 245 | BCL2 | yes |
+| H | 228 | BHRV | no |
+| I | 210 | M2SV | no |
+| J | 226 | PNR | no |
+<!-- FLOOR-TABLE-END -->
+
+(Current snapshot, leg 258: 3/10 floor-eligible -- E/251/P0T, F/236/RDDEP, G/245/BCL2 --
+matching the "Floor status: 3/10 ... MET" line in the most recent live-slot roster update
+below.)
+
+---
+
 ## Status
 
 **Resuming under the ten-leg contract.** The previous DM session ran under the older four-leg
