@@ -3487,3 +3487,16 @@ preempted agents had reached a landing.
   follow-up: line 49 doesn't cover the deep rung's own dims=(240,320) literal,
   and L1_attribution's six further ladders reach stall_verdict through
   attribution_summary and were never audited.
+- **Leg 237 (Route-SIRC) — YES, latent, not claim-adjacent:**
+  collocation_newton.py's ACollocation.newton/continuation are a SECOND
+  instance of leg 202's scale-invariant-residual defect class -- rel flat to
+  8.725e-14 while c spans 1.000e+06x, verdict True on a member with gauge
+  defect 999.0 and c wrong by 1000x. But GRADED LATENT: 0 escapes in 41 cases
+  across 6 trial routes (vs 2/2 escapes reproducing leg 202's own banked M2 to
+  the digit, confirming this is a measured contrast, not a null), and 0 of 14
+  call sites sit in claim-bearing runners (Route-D's real consumer calls the
+  sibling newton_gauged, which leg 150 already repaired). Census of 47 solver
+  files / 20 verdict sites found no other instances. Own discipline caught a
+  would-be false positive before it shipped (a criterion discovered mid-pass,
+  and an initial probe that would have read as a hit without the reachability
+  battery).
