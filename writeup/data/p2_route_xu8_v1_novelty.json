@@ -1,0 +1,606 @@
+{
+ "leg": 183,
+ "route": "ROUTE-XU8",
+ "version": "v1",
+ "user_flagged": true,
+ "priority": "TOP -- blocks presenting leg 179's bundle as ready",
+ "gate": "Does Xu sec 8's interval-arithmetic no-go (\"no weighted enclosure can exclude them\"), read at full-text depth with its exact hypotheses, cover the SAME operator/space/class that Theorem NGX (leg 127) proves Z_1 >= 1 for -- fully, partially, or not at all?",
+ "gate_answer": "NOT AT ALL",
+ "gate_answer_long": "NOT AT ALL.  Xu arXiv:2607.19762 sec 8's interval-arithmetic no-go does not cover the operator/space/class Theorem NGX proves Z_1 >= 1 for.  Theorem NGX's novelty is confirmed independent of Xu sec 8.  Per the gate's not-at-all branch, Xu sec 8's own hypotheses are recorded verbatim below -- what it DOES cover -- so the question closes rather than staying open-ended.",
+ "novelty_log": "writeup/novelty/leg_183.md (committed BEFORE this runner existed)",
+ "source": {
+  "arxiv": "2607.19762",
+  "citation": "Jie Xu, 'The spectral picture of self-similar collapse in the Constantin-Lax-Majda equation', arXiv:2607.19762v1, 22 Jul 2026, physics.flu-dyn, 41 pp.",
+  "url": "https://arxiv.org/abs/2607.19762",
+  "fetched_by": "bash Papers/fetch.sh 2607.19762  (Papers/ is gitignored)",
+  "text_source": "Papers/2607.19762.txt (2449 lines)",
+  "same_operator_as_leg_127": "YES and not in dispute -- Xu linearizes about Omega(y) = -y/(y^2 + 1/4) with c_l = 1, this repository's clm_one_scale normalisation.  The gate is not 'is it the same operator'; the operator is shared and the SPACE and the CLASS are where the answer lives."
+ },
+ "XU8_NOGO_VERBATIM": "Likewise a naive interval-arithmetic resolvent enclosure is unavailable: a weight is a change of norm, eigenvalues are norm-invariant, and the truncated La genuinely carries essential-smear eigenvalues inside the strip (the compactified grid mis-renders the continuous line at the wrong real part), so no weighted enclosure can exclude them.  The consequence is that the rigorous discrete exclusion must be analytical (the a = 0 anchor plus continuation) rather than a black-box computer-assisted enclosure; where a computer-assisted proof does enter, it must first be given a spectrally correct rendering of the essential spectrum (a non-periodic log-Mellin operator at high resolution feeding an argument-principle count), not applied to the raw grid.",
+ "XU8_HYPOTHESES": {
+  "H_Xu_1_object": "the TRUNCATED L_a -- a finite matrix, not the closed operator.  The concrete instrument is sec 7 'Linearized spectrum' (i): a dense finite-difference Jacobian of the rescaled residual on the compactified grid (N = 1024-8192) at the sampled advections a = 0.3, 0.4, 0.5, 0.6, 0.65.  ALL SAMPLED ADVECTIONS ARE a > 0.  At a = 0 there is nothing to enclose: Theorem 2 already excludes discrete spectrum in closed form, and sec 8 itself puts a = 0 on the ANALYTIC side ('the a = 0 anchor plus continuation').",
+  "H_Xu_2_task": "spectral exclusion from a REGION.  'Them' = essential-smear eigenvalues inside the strip; the strip is Proposition 2 eq (3.5), sigma_ess(L_0) contains {lambda : -1/2 <= Re lambda <= 3/2} on the maximal L2 realization.  The task served is n_disc(a), an integer winding count along a rectangular contour.",
+  "H_Xu_3_wrong_realization": "THE LOAD-BEARING HYPOTHESIS: the discretization imposes no origin condition, so it renders the WRONG realization.  Abstract: 'A realization dichotomy identifies the smear that discretizations without an origin condition place inside the strip as the faithful spectrum of the maximal L2 realization, which origin-H^2 removes.'  sec 7(ii) confirms it on Xu's own instrument: at a = 0.5 the rightmost mode sits at Re = +2.4931, within 0.3% of the plain-L2 origin indicial line +5/2.  THE SMEAR IS NOT NUMERICAL ERROR -- it is the true spectrum of the realization the grid actually built.",
+  "H_Xu_4_class_and_mechanism": "the quantified class is WEIGHTS (norms) and the mechanism is norm-INVARIANCE: 'a weight is a change of norm, eigenvalues are norm-invariant'.  A weight acts by diagonal similarity; similarity does not move eigenvalues; the eigenvalues are genuinely in the strip by H_Xu_3; therefore no weight removes them.  THE ARGUMENT IS VALID EXACTLY AND ONLY FOR SIMILARITY-INVARIANT QUANTITIES.",
+  "H_Xu_5_blackbox_not_CAP_per_se": "it is a statement about a BLACK-BOX route with the prerequisite named, not that computer-assisted proof is impossible on the object: 'where a computer-assisted proof does enter, it must first be given a spectrally correct rendering of the essential spectrum ... not applied to the raw grid.'",
+  "WHAT_IT_DOES_COVER_stated_positively": "For the a > 0 continuation task, applying a weighted interval-arithmetic resolvent enclosure to the raw compactified-grid truncation of L_a -- a discretization which imposes no origin condition and hence faithfully renders the maximal-L2 realization, in which the strip genuinely IS spectrum -- cannot exclude the strip eigenvalues, because a weight is a similarity and eigenvalues are similarity-invariant.",
+  "xu_own_novelty_claim": "'The novelty lies in the completeness of the point spectrum, the realization dichotomy, and the constructive resolvent.'  It names nothing adjacent to an approximate-inverse or radii-polynomial bound."
+ },
+ "THEOREM_NGX_HYPOTHESES": {
+  "read_from": "writeup/data/p2_route_ngx_v1_general.json and writeup/4_p2_lottery/TECHNICAL_P2_PUB1_V1.md sec 3.1 -- READ-ONLY",
+  "setting": "the a = 0 CLM steady linearisation in the compactified odd-sine COEFFICIENT basis, BORDERED with the far-field amplitude as an extra unknown and its matching condition as an extra equation, in weighted ell^1 with w_k = (1+k)^s",
+  "hypotheses": "s < 1; mu = 0 (no dissipation, so the tail block's diagonal is exactly zero and its far-field kernel lies in the space); A a BOUNDED operator on the space, the truncation of one fixed bounded operator so ||A||_w is uniform in M.  A21, A11, A12, A22 all arbitrary.",
+  "conclusion": "Z_1 = ||I - AL||_w >= 1.  Quantitatively, at truncation M, Z_1 >= 1 - ||A||_w sigma_min(L_M) with sigma_min(L_M) = c_s M^-(1-s) -> 0.",
+  "only_one_ingredient_is_this_projects": "the trade-off inequality is FOLKLORE and explicitly not claimed; the content is that sigma_min(L) = 0 on this operator in this space at s < 1, witnessed by an explicit sequence."
+ },
+ "DISJOINTNESS_AXES": [
+  {
+   "axis": "A_task",
+   "xu_sec8": "exclude eigenvalues from a 2-D region (the strip) of the lambda-plane; serve the winding count n_disc(a) of sec 3.2 / sec 7",
+   "theorem_ngx": "bound Z_1 = ||I - AL||_w for the Newton-Kantorovich / radii-polynomial contraction, at the single point lambda = 0 (invertibility of L itself)",
+   "disjoint": true
+  },
+  {
+   "axis": "B_quantified_class",
+   "xu_sec8": "over WEIGHTS (norms): 'no weighted enclosure'",
+   "theorem_ngx": "over BOUNDED APPROXIMATE INVERSES A on one fixed space, with A21 free",
+   "disjoint": true
+  },
+  {
+   "axis": "C_mechanism",
+   "xu_sec8": "similarity-INVARIANCE: a weight cannot move an eigenvalue",
+   "theorem_ngx": "a similarity-VARIANT quantity: sigma_min is 0 in ell^1_w at s < 1 and >= 1/2 after modulation on origin-H^2, by Xu's OWN Theorems 1-3",
+   "disjoint": true,
+   "note": "the decisive axis; a PROVED impossibility, not merely a difference, and the one the axis-C discriminator makes falsifiable on this repository's matrix"
+  },
+  {
+   "axis": "D_space",
+   "xu_sec8": "L2-type realizations reached by weights on a compactified grid; the paper contains no ell^1, no weighted sequence space, no Fourier-coefficient space (negative locators N1-N3)",
+   "theorem_ngx": "weighted ell^1 over odd-sine coefficients, w_k = (1+k)^s, s < 1",
+   "disjoint": true
+  },
+  {
+   "axis": "E_object",
+   "xu_sec8": "the RAW grid truncation, 'without an origin condition', at sampled a in {0.3, 0.4, 0.5, 0.6, 0.65}",
+   "theorem_ngx": "the BORDERED a = 0 matrix, carrying a gauge row that IS Xu's own v'(0) origin functional (leg 181, origin/main 2d89233) -- not a raw grid, and at the one advection sec 8 puts on the analytic side",
+   "disjoint": true
+  }
+ ],
+ "all_five_axes_disjoint": true,
+ "locators": {
+  "source": "Papers/2607.19762.txt (2449 lines)",
+  "mode": "RE_VERIFIED_AGAINST_THE_PDF_AT_RUN_TIME",
+  "positive": {
+   "P1_the_nogo_itself": {
+    "pins": "H-Xu-0: the sentence the whole gate is about, quoted COMPLETE rather than clipped at its memorable clause",
+    "fragment": "Likewise a naive interval-arithmetic resolvent enclosure is unavailable: a weight is a change of norm, eigenvalues are norm-invariant, and the truncated La genuinely carries essential-smear eigenvalues inside the strip",
+    "located": true
+   },
+   "P2_no_weighted_enclosure": {
+    "pins": "H-Xu-0: the clause leg 171 surfaced and did not resolve",
+    "fragment": "so no weighted enclosure can exclude them",
+    "located": true
+   },
+   "P3_grid_misrenders": {
+    "pins": "H-Xu-3: the smear is the grid rendering the WRONG realization, not numerical error",
+    "fragment": "the compactified grid mis-renders the continuous line at the wrong real part",
+    "located": true
+   },
+   "P4_a0_is_on_the_analytic_side": {
+    "pins": "H-Xu-1: sec 8 itself puts a = 0 -- leg 127's advection -- on the ANALYTIC side of its own dichotomy, i.e. outside the object being enclosed",
+    "fragment": "the rigorous discrete exclusion must be analytical (the a = 0 anchor plus continuation) rather than a black-box computer-assisted enclosure",
+    "located": true
+   },
+   "P5_not_the_raw_grid": {
+    "pins": "H-Xu-5: it is a statement about a BLACK-BOX route with the prerequisite named, not about computer-assisted proof per se",
+    "fragment": "it must first be given a spectrally correct rendering of the essential spectrum",
+    "located": true
+   },
+   "P6_sampled_advections": {
+    "pins": "H-Xu-1: the concrete instrument sec 8's 'truncated La' refers to, and its advections are all a > 0",
+    "fragment": "at the sampled advections a = 0.3, 0.4, 0.5, 0.6, 0.65",
+    "located": true
+   },
+   "P7_realization_dichotomy_abstract": {
+    "pins": "H-Xu-3: stated in the abstract -- the smear IS the faithful spectrum of the maximal L2 realization",
+    "fragment": "identifies the smear that discretizations without an origin condition place inside the strip as the faithful spectrum of the maximal L2 realization",
+    "located": true
+   },
+   "P8_prop2_strip": {
+    "pins": "H-Xu-2: the strip 'them' lives in, from Proposition 2",
+    "fragment": "the full vertical strip between the two indicial lines",
+    "located": true
+   },
+   "P9_theorem2_a0_closed_form": {
+    "pins": "H-Xu-1: at a = 0 there is nothing to enclose -- Theorem 2 already excludes discrete spectrum in closed form",
+    "fragment": "contains no discrete eigenvalue",
+    "located": true
+   },
+   "P10_xu_own_novelty_claim": {
+    "pins": "Xu's own novelty sentence -- it names nothing adjacent to an approximate-inverse bound",
+    "fragment": "The novelty lies in the completeness of the point spectrum, the realization dichotomy, and the constructive resolvent",
+    "located": true
+   },
+   "P11_gap_after_modulation": {
+    "pins": "Axis C's other end: Xu's OWN result that the same operator has a gap of 1/2 on X, which is what makes sigma_min norm-DEPENDENT",
+    "fragment": "removing these by the standard modulation leaves a spectral gap of",
+    "located": true
+   },
+   "P12_coercivity_half_is_L2_equivalent": {
+    "pins": "sec 8's OTHER no-go, for completeness: it is explicitly scoped to L2-EQUIVALENT norms (leg 141's, cited not claimed)",
+    "fragment": "no coercivity certificate in an L2 -equivalent norm reaches the spectral gap",
+    "located": true
+   }
+  },
+  "negative": {
+   "N1_weighted_ell1_space": {
+    "must_not_contain": "a weighted ell^1 / sequence space",
+    "probes": [
+     "weighted \u21131",
+     "weighted l1 space",
+     "sequence space",
+     "\u21131w",
+     "l 1 w space"
+    ],
+    "located": false,
+    "hits": []
+   },
+   "N2_fourier_coefficient_space": {
+    "must_not_contain": "a Fourier-coefficient / sine basis as the working space",
+    "probes": [
+     "Fourier coefficient space",
+     "sine basis",
+     "coefficient basis",
+     "odd sine"
+    ],
+    "located": false,
+    "hits": []
+   },
+   "N3_radii_polynomial_vocabulary": {
+    "must_not_contain": "the radii-polynomial / Newton-Kantorovich / approximate-inverse vocabulary",
+    "probes": [
+     "radii polynomial",
+     "radii-polynomial",
+     "Newton-Kantorovich",
+     "Newton-Kantorovic",
+     "approximate inverse",
+     "contraction mapping"
+    ],
+    "located": false,
+    "hits": []
+   },
+   "N4_bordered_system": {
+    "must_not_contain": "a bordered or augmented square system",
+    "probes": [
+     "bordered system",
+     "bordered linearization",
+     "border row",
+     "bordered operator"
+    ],
+    "located": false,
+    "hits": []
+   },
+   "N5_nogo_covers_approximate_inverses": {
+    "must_not_contain": "any claim that the sec 8 no-go covers approximate-inverse or preconditioner constructions",
+    "probes": [
+     "no approximate inverse",
+     "no preconditioner",
+     "any approximate inverse"
+    ],
+    "located": false,
+    "hits": []
+   },
+   "N6_z1_style_certificate_constant": {
+    "must_not_contain": "a Z_1-style certificate constant, i.e. the quantity NGX bounds",
+    "probes": [
+     "Z1 <",
+     "Z 1 <",
+     "||I - AL||",
+     "I - AL"
+    ],
+    "located": false,
+    "hits": []
+   }
+  },
+  "all_positive_located": true,
+  "any_negative_located": false
+ },
+ "interval_census": {
+  "interval_total": 8,
+  "interval_arithmetic_total": 2,
+  "reading": "of the interval-arithmetic occurrences, one is sec 8's own no-go and one describes Chen-Hou-Huang's De Gregorio proof (sec 1); Xu's own method is never interval arithmetic"
+ },
+ "axis_c_premise_check": {
+  "K": 14,
+  "unweighted_power_traces_j_1_to_4": [
+   "1",
+   "-353",
+   "-5",
+   "23205"
+  ],
+  "rows": [
+   {
+    "weight_exponent_p": 1,
+    "power_traces_match_exactly": true,
+    "power_traces": [
+     "1",
+     "-353",
+     "-5",
+     "23205"
+    ]
+   },
+   {
+    "weight_exponent_p": 2,
+    "power_traces_match_exactly": true,
+    "power_traces": [
+     "1",
+     "-353",
+     "-5",
+     "23205"
+    ]
+   }
+  ],
+  "weight_acts_as_a_similarity_on_this_matrix": true,
+  "arithmetic": "exact rational (fractions.Fraction), no float anywhere",
+  "what_would_have_falsified_it": "a one-sided (row-only or column-only) weighting, which is NOT a similarity and would change tr(M^j).  Then Xu sec 8's mechanism would not apply to this object at all and axis C would have to be argued differently."
+ },
+ "axis_c_discriminator": {
+  "rows": [
+   {
+    "K": 32,
+    "s_values": [
+     0.0,
+     0.3,
+     0.7,
+     0.9,
+     1.5
+    ],
+    "per_s": [
+     {
+      "s": 0.0,
+      "L_inverse_norm_w": 165.41205166348269,
+      "sigma_min": 0.00604550871561897
+     },
+     {
+      "s": 0.3,
+      "L_inverse_norm_w": 75.42522385154213,
+      "sigma_min": 0.013258164164925501
+     },
+     {
+      "s": 0.7,
+      "L_inverse_norm_w": 27.83177656080955,
+      "sigma_min": 0.0359301533560067
+     },
+     {
+      "s": 0.9,
+      "L_inverse_norm_w": 17.341121239245915,
+      "sigma_min": 0.0576663980490967
+     },
+     {
+      "s": 1.5,
+      "L_inverse_norm_w": 5.333285046379371,
+      "sigma_min": 0.18750169760359503
+     }
+    ],
+    "sigma_min_ratio_max_over_min": 31.015040490996572
+   },
+   {
+    "K": 64,
+    "s_values": [
+     0.0,
+     0.3,
+     0.7,
+     0.9,
+     1.5
+    ],
+    "per_s": [
+     {
+      "s": 0.0,
+      "L_inverse_norm_w": 359.0225282772128,
+      "sigma_min": 0.002785340532246121
+     },
+     {
+      "s": 0.3,
+      "L_inverse_norm_w": 134.79031424132862,
+      "sigma_min": 0.007418930697124125
+     },
+     {
+      "s": 0.7,
+      "L_inverse_norm_w": 38.58965663931974,
+      "sigma_min": 0.025913679651170588
+     },
+     {
+      "s": 0.9,
+      "L_inverse_norm_w": 21.30243354868933,
+      "sigma_min": 0.046942993518293445
+     },
+     {
+      "s": 1.5,
+      "L_inverse_norm_w": 7.048370973408247,
+      "sigma_min": 0.14187675475265868
+     }
+    ],
+    "sigma_min_ratio_max_over_min": 50.93695119506559
+   },
+   {
+    "K": 128,
+    "s_values": [
+     0.0,
+     0.3,
+     0.7,
+     0.9,
+     1.5
+    ],
+    "per_s": [
+     {
+      "s": 0.0,
+      "L_inverse_norm_w": 768.7726083735081,
+      "sigma_min": 0.0013007747532988976
+     },
+     {
+      "s": 0.3,
+      "L_inverse_norm_w": 236.45760416387097,
+      "sigma_min": 0.0042290879311581596
+     },
+     {
+      "s": 0.7,
+      "L_inverse_norm_w": 52.13283314429977,
+      "sigma_min": 0.019181769715681384
+     },
+     {
+      "s": 0.9,
+      "L_inverse_norm_w": 25.41649751120281,
+      "sigma_min": 0.03934452414457306
+     },
+     {
+      "s": 1.5,
+      "L_inverse_norm_w": 9.217923458319103,
+      "sigma_min": 0.10848430283910722
+     }
+    ],
+    "sigma_min_ratio_max_over_min": 83.39976046120202
+   }
+  ],
+  "XU_quantity_eigenvalues_is_weight_invariant": true,
+  "XU_invariance_established_how": "EXACTLY, in rational arithmetic -- axis_c_premise_check; it is a theorem, not a measurement",
+  "NGX_quantity_sigma_min_is_weight_invariant": false,
+  "NGX_largest_sigma_min_spread_over_the_weights": 83.39976046120202,
+  "verdict": "NOT invariant.  sigma_min moves by a factor of 83.4 across the tested weights on the same matrix, while the eigenvalues cannot move at all.  Xu sec 8's mechanism -- 'a weight is a change of norm, eigenvalues are norm-invariant' -- is therefore structurally incapable of reaching NGX's quantity.",
+  "how_it_could_have_come_out_the_other_way": "If NGX_quantity_sigma_min_is_weight_invariant were true, Xu sec 8's norm-invariance argument would transfer to Z_1/sigma_min and the gate answer would have to be 'partially' or 'fully' rather than 'not at all'.",
+  "the_stronger_form_is_leg_127s_own": "this leg's spread is a magnitude at fixed truncation; leg 127's landed ladder is sharper still -- the EXPONENT p in sigma_min ~ M^-p tracks 1 - s, i.e. the decay RATE is a function of the weight.  A similarity-invariant quantity cannot have a weight-dependent exponent.  See ngx_crosscheck."
+ },
+ "axis_c_float_eigenvalue_census": {
+  "rows": [
+   {
+    "K": 32,
+    "per_s": [
+     {
+      "s": 0.0,
+      "max_rel_deviation_from_unweighted": 0.0
+     },
+     {
+      "s": 0.3,
+      "max_rel_deviation_from_unweighted": 1.3542196131310866
+     },
+     {
+      "s": 0.7,
+      "max_rel_deviation_from_unweighted": 1.6268438818782476
+     },
+     {
+      "s": 0.9,
+      "max_rel_deviation_from_unweighted": 1.7273757312528373
+     },
+     {
+      "s": 1.5,
+      "max_rel_deviation_from_unweighted": 1.188452177771826
+     }
+    ],
+    "worst": 1.7273757312528373
+   },
+   {
+    "K": 64,
+    "per_s": [
+     {
+      "s": 0.0,
+      "max_rel_deviation_from_unweighted": 0.0
+     },
+     {
+      "s": 0.3,
+      "max_rel_deviation_from_unweighted": 1.9073380848015091
+     },
+     {
+      "s": 0.7,
+      "max_rel_deviation_from_unweighted": 1.4841597230031254
+     },
+     {
+      "s": 0.9,
+      "max_rel_deviation_from_unweighted": 1.6150785031010793
+     },
+     {
+      "s": 1.5,
+      "max_rel_deviation_from_unweighted": 1.6040324962191954
+     }
+    ],
+    "worst": 1.9073380848015091
+   },
+   {
+    "K": 128,
+    "per_s": [
+     {
+      "s": 0.0,
+      "max_rel_deviation_from_unweighted": 0.0
+     },
+     {
+      "s": 0.3,
+      "max_rel_deviation_from_unweighted": 1.6459452551125255
+     },
+     {
+      "s": 0.7,
+      "max_rel_deviation_from_unweighted": 1.5041388679475591
+     },
+     {
+      "s": 0.9,
+      "max_rel_deviation_from_unweighted": 1.5793170451065077
+     },
+     {
+      "s": 1.5,
+      "max_rel_deviation_from_unweighted": 1.8574224918825473
+     }
+    ],
+    "worst": 1.8574224918825473
+   }
+  ],
+  "worst_relative_deviation": 1.9073380848015091,
+  "reading": "the EXACT invariance holds (see axis_c_premise_check); the FLOAT eigenvalues of this matrix move by O(1) under the same similarity because the eigenvector matrix is severely ill-conditioned.  That is a statement about non-normality, not about the mathematics -- and it independently reproduces Xu's own sec 8 caveat on this repository's object."
+ },
+ "ngx_crosscheck": {
+  "available": true,
+  "source": "writeup/data/p2_route_ngx_v1_general.json (READ-ONLY)",
+  "object": "the a = 0 CLM steady linearisation in the compactified odd-sine coefficient basis, bordered with the far-field amplitude (leg 52's repair, leg 53's assembly, leg 54's single-matrix form), in weighted l^1 with w_k = (1+k)^s",
+  "statement": "for every bounded A, with A21 completely FREE:  Z1 >= 1 - ||A||_w sigma_min(L).  Taking A = L^-1 gives Z1 = 0 and ||A||_w = 1/sigma_min exactly, so the bound is ATTAINED and not merely valid -- the largest slack over the exact-inverse checks is 1.237e-08.",
+  "sigma_min_exponent_fits": [
+   {
+    "s": 0.0,
+    "K": 2,
+    "fitted_p": 0.9974737672374913,
+    "predicted_1_minus_s": 1.0
+   },
+   {
+    "s": 0.0,
+    "K": 4,
+    "fitted_p": 0.9924789728516444,
+    "predicted_1_minus_s": 1.0
+   },
+   {
+    "s": 0.0,
+    "K": 8,
+    "fitted_p": 0.9827123791112259,
+    "predicted_1_minus_s": 1.0
+   },
+   {
+    "s": 0.3,
+    "K": 2,
+    "fitted_p": 0.7020327631632883,
+    "predicted_1_minus_s": 0.7
+   },
+   {
+    "s": 0.3,
+    "K": 4,
+    "fitted_p": 0.698488810373405,
+    "predicted_1_minus_s": 0.7
+   },
+   {
+    "s": 0.3,
+    "K": 8,
+    "fitted_p": 0.6915606253430929,
+    "predicted_1_minus_s": 0.7
+   },
+   {
+    "s": 0.7,
+    "K": 2,
+    "fitted_p": 0.3218616514557151,
+    "predicted_1_minus_s": 0.30000000000000004
+   },
+   {
+    "s": 0.7,
+    "K": 4,
+    "fitted_p": 0.32016485033631215,
+    "predicted_1_minus_s": 0.30000000000000004
+   },
+   {
+    "s": 0.7,
+    "K": 8,
+    "fitted_p": 0.31685082999721764,
+    "predicted_1_minus_s": 0.30000000000000004
+   },
+   {
+    "s": 1.0,
+    "K": 2,
+    "fitted_p": 0.07924319351711688,
+    "predicted_1_minus_s": 0.0
+   },
+   {
+    "s": 1.0,
+    "K": 4,
+    "fitted_p": 0.07875050843796134,
+    "predicted_1_minus_s": 0.0
+   },
+   {
+    "s": 1.0,
+    "K": 8,
+    "fitted_p": 0.1685435240337109,
+    "predicted_1_minus_s": 0.0
+   },
+   {
+    "s": 1.5,
+    "K": 2,
+    "fitted_p": 0.39260218469167946,
+    "predicted_1_minus_s": -0.5
+   },
+   {
+    "s": 1.5,
+    "K": 4,
+    "fitted_p": 0.5000188728336935,
+    "predicted_1_minus_s": -0.5
+   },
+   {
+    "s": 1.5,
+    "K": 8,
+    "fitted_p": 0.5361706330497054,
+    "predicted_1_minus_s": -0.5
+   }
+  ],
+  "reading": "leg 127's own ladder already shows the exponent p in sigma_min ~ M^-p TRACKING 1 - s, i.e. sigma_min's decay rate is a function OF THE WEIGHT. A weight-invariant quantity cannot have a weight-dependent exponent.",
+  "realization_constraint_leg127_already_imposed": "arXiv:2607.19762 (Xu, 2026) proves the SAME a = 0 CLM linearization on origin-H^2 has point spectrum exactly {0,1} and essential spectrum meeting {Re lam >= -1/2} in the single line {Re lam = -1/2}, hence is INVERTIBLE there after the standard modulation, with a spectral gap of 1/2.  Every statement in this leg is therefore about the l^1_w realization at s < 1 and about nothing else.  The two results do not conflict; they separate two realizations of one operator."
+ },
+ "THE_ONE_GENUINE_ADJACENCY": {
+  "what": "Xu Proposition 2 says: drop the origin condition and the operator loses its gap.  Leg 181 (origin/main 2d89233) measured that the origin functional v'(0) -- half of Xu's own modulation projection, eq (A.13) -- has divergent dual norm on ell^1_w EXACTLY for s < 1, which is exactly the range in which leg 127 measures sigma_min -> 0.  Both obstructions are, mechanistically, 'the origin condition is not boundedly imposable here'.",
+  "why_it_is_not_a_pre_emption": [
+   "it is a kinship with Xu PROPOSITION 2, not with sec 8 -- and the gate asks about sec 8",
+   "Prop 2's conclusion is sigma_ess contains the strip IN L2, a spectral statement about a different space; no derivation of NGX's ell^1_w statement from it exists in the paper or anywhere else",
+   "leg 181 is THIS REPOSITORY's observation, landed two legs ago, not Xu's -- Xu never connects his origin condition to a weighted sequence space, because he never writes one down (negative locators N1/N2)"
+  ],
+  "status": "recorded as a convergence, claimed by nobody, escalated by nobody"
+ },
+ "CONSEQUENCE_FOR_LEG_179": {
+  "verdict": "NO SCOPE-NARROWING REQUIRED, and it is checkable rather than asserted.",
+  "evidence": "TECHNICAL_P2_PUB1_V1.md sec 8's grade table already scopes sec 3 to 'Z_1 >= 1 for every bounded A, on the ell^1_w realization at s < 1, on this operator.  NOT about the operator; NOT about the method in general', and its 'must never be read as saying' list already forbids '(2) That the Newton-Kantorovich or radii-polynomial method is obstructed in general'.  The note is already scoped strictly inside the region Xu sec 8 does not reach.",
+  "leg_127_had_already_disclaimed_it": "leg 127's own novelty pass, Finding 2 clause 1: 'Any no-go proved here is a statement about the ell^1_w Fourier-coefficient realization, not about the a = 0 CLM linearization as an operator.'  The scoping that protects the claim was in place before the question was asked.",
+  "prose_edited_by_this_leg": "NONE -- legs 127 and 179 are claim-bearing landed results and are outside this leg's territory",
+  "RECOMMENDATION_non_blocking_for_the_orchestrator": "Xu sec 8's interval-arithmetic paragraph is the NEAREST PUBLISHED RELATIVE of sec 3's framing -- same operator, different realization, different certificate quantity, both concluding an off-the-shelf enclosure does not enter.  A referee who knows the paper will ask.  The note would be STRONGER for citing it in sec 3's scope line alongside the origin-H^2 fact already there, framed as: Xu sec 8 rules out weighted resolvent enclosure of the raw grid truncation by norm-invariance of eigenvalues; sec 3 rules out bounded approximate inverses in ell^1_w by a norm-dependent lower-bound failure; the two are complementary and neither implies the other.  THIS IS AN ADDITION, NOT A CORRECTION TO A CLAIM.  Flagged, not done."
+ },
+ "external_queries": [
+  {
+   "query": "radii polynomial approximate inverse no-go weighted ell^1 Fourier coefficient operator not bounded below Constantin-Lax-Majda linearization",
+   "on_topic_hits": 0,
+   "returned": [
+    "https://arxiv.org/pdf/1503.06315",
+    "https://www.sciencedirect.com/science/article/abs/pii/S0167278916000294",
+    "https://arxiv.org/pdf/2404.08529",
+    "https://arxiv.org/pdf/2203.10340",
+    "https://arxiv.org/pdf/2401.14615",
+    "https://arxiv.org/pdf/2305.05895",
+    "https://arxiv.org/abs/1908.09385"
+   ],
+   "reading": "every hit is a SUCCESSFUL APPLICATION of the radii-polynomial method; none is a failure statement -- reproducing leg 127's Finding 1 independently"
+  },
+  {
+   "query": "\"interval arithmetic\" no-go weighted enclosure eigenvalues norm-invariant essential spectrum truncation self-similar blowup linearization",
+   "on_topic_hits": 0,
+   "returned": [
+    "https://arxiv.org/pdf/1912.05275",
+    "https://www.math.mcgill.ca/jplessard/Publications_files/eigs_enclosure.pdf",
+    "https://link.springer.com/chapter/10.1007/978-3-031-18487-1_23",
+    "https://www.sciencedirect.com/science/article/pii/S0377042700003423"
+   ],
+   "reading": "generic interval eigenvalue-enclosure methodology, none of it applied to a self-similar collapse linearization.  The nearest thing to Xu sec 8's statement in the indexed literature is Xu sec 8."
+  }
+ ],
+ "prior_legs_cited_not_reclaimed": {
+  "leg_141": "sec 8's coercivity half over L2-equivalent weights, and the EGM singular-weight parenthesis",
+  "leg_171": "sec 8's interval-arithmetic half, SURFACED and explicitly flagged as unresolved -- leg 171 gets the citation for surfacing it, this leg does the resolution",
+  "leg_127": "the origin-H^2 constraint on claims (Finding 2)",
+  "leg_181": "the gauge-row = Xu v'(0) identity and the s < 1 unboundedness (origin/main 2d89233)"
+ },
+ "ceiling": "The object is the a = 0 CLM linearization throughout -- this repository's friendliest substrate, whose Y_0 is exactly zero for the banned degenerate reason -- and NOT HL_S2_nonsymmetric.  New to the world: nothing; this is a reading of one published paper against a banked theorem.  No ban lifted (Xu's route to a CAP remains a different method and is not a lift condition for any ban in plan_of_record.py); no route promoted; L1 stays measured-dead in all three realizations; NO LINK OF THE L1 -> L4 CHAIN MOVES; Clay unchanged at ~0.05%.  No solver module built or mutated; solver/spectral_certificate.py imported READ-ONLY for the axis-C control.  No shared ledger touched."
+}
