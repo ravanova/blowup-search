@@ -9293,3 +9293,347 @@ on 217/219/221/225/226 to land.
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+# MAJOR TURNING POINT, 2026-08-06 — TWO USER RULINGS, RELAYED VERBATIM BY THE ORCHESTRATOR.
+RULING 1: PUB1/PUB2 APPROVED AS THE DELIVERABLE. RULING 2: THE EXIT CRITERION IS ANSWERED —
+PURSUE A FULL CLAY SOLVE. THIS SUPERSEDES "A NOVEL TIER-3 RESULT" AS THE GOAL OF RECORD, AND
+**RESOLVES ESCALATION #1** ("what comes next now that stage B is exhausted" — the answer is
+now: a new stage, under a new goal, per this ruling). Both rulings are recorded here in full
+because they change what every future leg in this file is for. Nothing below claims any
+movement has happened yet — this section records a DECISION, not a result.
+
+## RULING 1 — PUB1 and PUB2 approved. Two submission-blocking legs drafted.
+
+**Status change: PUB1 and PUB2 move from "drafted, parked for the user" to "approved, finish
+for submission."** Both preconditions the user named bind SUBMISSION, not approval — they
+are drafted below, immediately, per the user's own instruction.
+
+**(a) Leg 176 has no independent verification — draft the verification leg.** The user's own
+check (via leg 238's finding) is authoritative and more precise than this DM's own prior
+tracking: leg 192's only commit on ANY ref is its pre-registered novelty pass, not an
+ancestor of `main`, with no runner and no verdict landed. **This directly conflicts with
+what this DM recorded several updates ago** (leg 192 reported as "verification substantively
+complete... blocked on its own CPU-bound N=1024/2048 confirmation runs" — that earlier report
+implied real, near-complete progress existed uncommitted). **This DM flags this discrepancy
+explicitly rather than silently resolve it**: either (i) leg 192's agent made real progress
+that still sits uncommitted somewhere and simply hasn't landed, or (ii) the earlier
+"substantively complete" report was itself mistaken/stale and no real progress exists beyond
+the novelty pass. This DM cannot distinguish these from here (outside its remit to inspect
+running agent state or worktrees) — **this is the one thing this DM needs from the
+orchestrator**: check leg 192's actual current state (is its agent still alive, does
+uncommitted work exist in its worktree) before deciding whether to let it continue or
+redispatch fresh. The verification leg itself is drafted below regardless of that outcome —
+it is what leg 192 already was, or its clean replacement if 192 is confirmed stalled.
+
+**(b) The leg 163/176 σ_min conflict — draft the cleanup leg.** PUB2 quotes leg 163's witness
+`≥ 0.71465` at three call-sites; leg 176 measures the true value as `0.0908`, making leg
+163's witness optimistic by 7.9×. Leg 238 correctly left this outside its own territory and
+recorded the conflict in §3.5. Fix the three sites now.
+
+**Route-D v11 confirmed NOT a blocker for either document** — the user verified 0 matches
+for `v11`/`profile_newton` across all four files. Leg 236 stays high priority on its own
+merits (Route-D v11's own headline integrity), independent of PUB1/PUB2's publication path.
+
+```
+### 249 — ROUTE-H2CV2: THE ACTUAL INDEPENDENT VERIFICATION OF LEG 176's ORIGIN-H² CERTIFICATE
+(RULING-1(a), REPLACES/CONTINUES LEG 192 — SUBMISSION-BLOCKING FOR PUB2)
+**Thesis.** PUB2 currently states leg 176's σ_min = 0.0908 and ‖T⁻¹‖_X = 4.026 as one leg's
+own float64 measurement, honestly labeled as such in three sections — but a load-bearing
+number in an approved, submission-track document needs independent verification, not an
+honest label substituting for one. Leg 192 was drafted for exactly this and has been
+"live" for many cycles without landing; per this DM's own flagged discrepancy above, either
+resume leg 192's actual work (if real progress exists) or treat this leg as leg 192's clean
+restart (if it does not) — the orchestrator's own check on 192's live state decides which,
+not this leg's own authority.
+**Gate.** Does an independent re-run of leg 176's construction reproduce σ_min = 0.0908 and
+‖T⁻¹‖_X = 4.026 (or report a discrepancy precisely), to the same precision leg 176 itself
+claims?
+  yes -> Independently confirmed. PUB2's three float64-labeled sections can be upgraded to
+         "independently verified," with the exact re-derivation precision stated. This is
+         SUBMISSION-BLOCKING and should be prioritized accordingly.
+  no -> Report the exact discrepancy precisely; escalate immediately — PUB2 is an approved,
+        submission-track document and an unreproduced headline number in it is the single
+        highest-priority finding this repository could produce right now.
+**Territory.** test_origin_h2_certificate_postconstruction.py,
+               experiments/p2_route_h2cv_v1_postconstruction.py (leg 192's own file — reuse
+               if real progress exists there, per the orchestrator's check),
+               writeup/data/p2_route_h2cv_v1_postconstruction.json,
+               writeup/novelty/leg_192.md or leg_249.md (whichever this ends up filed under —
+               orchestrator's call once 192's actual state is known),
+               experiments/journal/leg_192.md or leg_249.md.
+**Difficulty.** heavy (CPU-bound per leg 192's own prior status; this is the reason it has
+sat mid-compute for so long, not necessarily a sign of trouble on its own)
+**Independence.** Reads solver/origin_h2_certificate.py; edits nothing under either outcome.
+SUBMISSION-BLOCKING for PUB2 — highest priority in the entire queue right now, above even
+Route-D v11's own exposures, since PUB2 is now an approved deliverable, not a parked draft.
+```
+
+```
+### 250 — ROUTE-PUB2FIX: FIX THE THREE σ_min CITATION SITES IN PUB2 (leg 163's optimistic
+witness vs. leg 176's true value — RULING-1(b), SUBMISSION-BLOCKING)
+**Thesis.** PUB2 quotes leg 163's witness `≥ 0.71465` at three call-sites; leg 176 measures
+the TRUE σ_min as `0.0908` — leg 163's witness is optimistic by 7.9×. Leg 238 correctly left
+this conflict unfixed (outside its own declared territory) and recorded it honestly in §3.5.
+This leg fixes the three sites: either replace leg 163's witness with leg 176's own
+measurement where the two conflict, or state both explicitly with the 7.9× discrepancy named
+— whichever reading is more accurate to what each leg actually established (leg 163's
+witness may have been a looser, earlier-stage BOUND rather than a wrong measurement; this leg
+determines which framing is correct before editing, not just deletes the smaller number).
+**Gate.** Do all three σ_min citation sites in PUB2 now state the relationship between leg
+163's witness and leg 176's true value accurately (bound vs. measurement, or explicit
+discrepancy, whichever is correct), with §3.5's own conflict note updated to match rather
+than left redundant?
+  yes -> Bank the fix. This closes ruling 1(b) — PUB2 no longer carries an internally
+         unreconciled numeric conflict.
+  no -> Report exactly which site resists a clean fix and why (e.g. it's unclear from either
+        leg's own report which framing is correct); escalate rather than guess.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md (the three σ_min sites and §3.5
+               ONLY), writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md (if it also cites the figure),
+               writeup/novelty/leg_250.md, experiments/journal/leg_250.md.
+               Reads (never edits) legs 163's and 176's own reports/JSONs.
+**Difficulty.** light
+**Independence.** Narrowly scoped prose fix, no solver module. Disjoint from 249 (that leg
+verifies the NUMBER, this leg reconciles the CITATION of a different, already-known number
+against it — sequencing note: best done AFTER 249 lands, so "independently verified" can be
+folded into the same edit, but can start immediately on the bound-vs-measurement question
+without waiting). SUBMISSION-BLOCKING for PUB2, immediately dispatchable.
+```
+
+## RULING 2 — The exit criterion is answered: pursue a full Clay solve.
+
+**This supersedes "a novel Tier-3 result on a model where blow-up is provable" as the plan's
+own stated prize. Recorded here, in the same paragraph as the odds, per the user's own
+explicit instruction 6: the goal has changed; the honest odds have not moved on their own —
+Clay stays ~0.05% behind Walls 1 and 2, and that number is the user's OWN accepted risk under
+the new goal, not a number this file quietly drops now that the goal is bigger.** Everything
+below is a decision record and a proposed program, not a claim that anything has moved.
+
+### 1. `plan_of_record.py` needs a new stage — drafted here, flagged for the orchestrator/user
+to apply, exactly the composition-floor precedent (this DM does not own that file)
+
+Stage `B` answered its gate NO at leg 126 (6.04× short of a perfect search over its full
+declared space) and has had no successor for many cycles — escalation #1, now resolved by
+this very ruling. **Proposed successor stage, drafted for literal transcription into
+`plan_of_record.py`'s SEQUENCE:**
+
+```
+[ ] P0       Target selection under the Clay goal -- a Route-M-shaped leg redone against
+             Clay rather than novelty: which object, which ansatz (constrained by NRS/Tsai
+             to discretely self-similar / unstable-self-similar-with-finite-spectrum /
+             non-self-similar -- see technical framing below), and what certification would
+             even mean for it.
+  deliverable: A named target object + ansatz class, with an explicit statement of what a
+               certificate for it would need to show, checked against NRS/Tsai's exclusion
+               and against every already-banked negative in this repository (L1's death in
+               three realizations, stage B's exhaustion, the ell^1_w/origin-H^2 space-axis
+               mapping).
+  GATE: Does a target+ansatz combination survive the NRS/Tsai screen AND avoid every already-
+        measured dead end this repository's own record contains?
+    yes -> Proceed to P1 (the viscous rung) using this leg's named object.
+    no  -> Report precisely which screen killed every candidate tried; this would mean the
+           Clay-path target-selection question itself needs more candidates or a different
+           screen before P1 can even be posed -- report honestly, do not force a candidate
+           through.
+```
+
+**This DM proposes `P0` as the stage code**, matching the plan's own short-mnemonic
+convention (`M`, `PORT`, `V`, `NG`, `B`). The prize/Clay lines at the top of
+`plan_of_record.py`'s own printed output also need updating (prize: pursue a full Clay
+solve, not "a novel Tier-3 result... NOT Clay"; Clay odds line: keep ~0.05% stated
+explicitly, do not delete it just because the goal changed). This DM drafts the content;
+applying it to the file is the orchestrator's action, per ruling 2's own explicit
+authorization ("this is no longer an unauthorized escalation").
+
+### 2. Ban review — two bans checked against the new goal, neither lifted unilaterally,
+one recommendation each
+
+**DSS ban** ("another DSS re-ask, or the DSS lane's expensive entrance," lifted by: never —
+"three independent reasons the cheap entrances fail"). **This DM's recommendation: DO NOT
+lift, but re-examine the wording.** The ban as written excludes the CHEAP entrances by three
+independent reasons and separately excludes "the expensive entrance" — reading the ban's own
+text (`.venv/bin/python plan_of_record.py`'s live output, checked directly by this DM before
+writing this recommendation), the "never" applies to the ban as a WHOLE clause, but the three
+reasons given are specifically about why the cheap entrances fail, and the expensive
+entrance's own exclusion is stated only by inclusion in the same banned phrase, not by its
+own independent reason. **Under the old goal (a Tier-3 result, cost-sensitive), an expensive
+entrance was correctly out of scope by default. Under a full Clay goal, where the user has
+explicitly accepted "building seriously heavy code," an expensive entrance is not
+automatically out of scope anymore** — but this DM does not know what DSS's "expensive
+entrance" actually IS in enough technical detail to recommend lifting it outright (this
+would need a leg reading the DSS lane's own history first, since this DM reasons from the
+plan's own printed ban text, not the underlying research). **Recommendation: keep the ban in
+force as written; draft a light scoping leg (below, if the user wants it prioritized) asking
+specifically whether DSS's expensive entrance is cost-shaped (excluded under the old goal for
+being expensive, now potentially in scope) or was excluded for a substantive reason
+independent of cost (in which case the Clay goal changes nothing). Do not lift until that
+scoping leg reports.**
+
+**Stage V's ban** ("re-opening stage V as posed," lifted by: never — "unless the question is
+re-posed for a FLUID transport model, which needs L1 first"). **This DM's recommendation:
+this ban's OWN LIFT CONDITION is now unliftable by its own wording**, exactly as the user
+states — L1 is measured dead in three realizations (`ell^1_w` coefficient basis, leg 54;
+collocation basis, leg 56; and the origin-H² lane, capped at `a=0` exactness with no transfer
+to the real target, leg 163/176). A lift condition that requires "L1 first" when L1 has three
+independently-dead attempts and no fourth candidate on the table is not a live path, it is a
+dead letter. **Recommendation: re-pose or retire the ban deliberately, do not leave it
+silently unliftable.** Given the new goal explicitly targets the viscous rung (Phase 1
+below) via ansätze NRS/Tsai do not exclude, and NOT via re-attempting `L1`'s own
+`ell^1`-Fourier/radii-polynomial machinery (that lane is the one measured dead three times,
+independent of which model it's aimed at) — this DM's recommendation is: **retire this ban's
+current wording and replace it with a forward-looking one**: "re-attempting the
+`ell^1`-Fourier/radii-polynomial machinery this repository has measured dead in three
+realizations (`ell^1_w` coefficient/collocation bases, origin-H² capped-at-`a=0`), on ANY
+model, fluid or otherwise — lifted by: a namable FOURTH space/basis this repository has not
+yet tried, with its own scoping leg establishing it isn't subject to the same three-realization
+death." This makes the ban precise about WHAT is dead (the machinery, across models) rather
+than gated on an now-impossible precondition (L1 succeeding first). **This DM does not apply
+either change itself — both are recommendations for the user's/orchestrator's sign-off, per
+ruling 2's own instruction not to lift anything unilaterally.**
+
+**One additional watch-item, not a formal third ban-review entry (the user asked for "at
+least two," this DM flags a candidate third rather than expanding scope unasked):** the
+"another gCLM measurement leg" ban ("lifted by: never — the model is exhausted, Stage 3.5, leg
+42") may also need a careful read before Phase 1 legs are drafted in detail, since Phase 1's
+viscous-rung target could plausibly be a gCLM-family object (this repository's most-built-out
+machinery). This DM has not read leg 42's own reasoning closely enough to recommend a
+disposition here — flagged for whoever drafts Phase 1's actual leg content to check first,
+not resolved in this update.
+
+### 3. Technical framing, recorded verbatim from the user's own text, cross-checked against
+this repository's own record where it already speaks to the same claims
+
+- **Direction (a), global regularity, is closed to anything search-/certificate-shaped**:
+  Tao's averaged-NS supercriticality barrier means energy methods plus preserved algebraic
+  structure are provably insufficient. **Only direction (b)** (blow-up) is in scope.
+- **Wall 2, as corrected by leg 172, is the operative constraint, and its NAIVE form (spatial
+  dimension is the barrier) is false.** The real barrier is TIME-DEPENDENT singularity
+  formation, not dimension — van den Berg–Williams certified genuinely 3D Ohta–Kawasaki
+  stationary states in 2019. **This DM checked leg 172's own landed finding for consistency**:
+  leg 172 asked whether any published work establishes a rigorous singularity/blow-up result
+  for a genuinely 3D PDE and reports its own answer in this file's queue — consistent with the
+  user's framing that the barrier is about TIME-DEPENDENT formation specifically, not 3D-ness
+  per se (a stationary-state certificate, however genuinely 3D, is a different category from a
+  time-dependent blow-up certificate). **Every work that states a 3D singularity theorem
+  carrying a certificate supplies the 3D-ness via a 2D reduction (Chen–Hou) or a
+  spherically-symmetric ODE profile (BCG → CGSS) — never via the certificate itself.** Any
+  Clay plan drafted from this point must say explicitly which side of that line it intends to
+  live on.
+- **The ansatz is constrained**: Nečas–Růžička–Šverák and Tsai exclude nontrivial
+  exactly-backward-self-similar 3D NS blow-up under the relevant decay. The target must be
+  discretely self-similar, unstable-self-similar with a finite unstable spectrum, or
+  non-self-similar. `arXiv:2604.09949` is the recorded example of what happens when this is
+  missed — flagged as a negative-control citation for Phase 0's own screen, not something to
+  repeat.
+- **The missing rung is viscous certification, and it is strictly on the Clay path.** Leg
+  174's own occupancy matrix (this DM cross-checked its own record above: "Grade-A/fluid cell
+  EMPTY... for want of a target, not a method") stands, and leg 242 (this DM's own drafted
+  leg, landed as a thorough NO) confirms nobody has filled it since via the one precedent
+  leg 174 flagged as closest (Dahne & Figueras). **No certified viscous blow-up exists in any
+  model, in any dimension. If it cannot be done in 1D, 3D NS is not a question of compute** —
+  this is the single sentence this DM will hold every future Phase 1/Phase 2 leg accountable
+  to.
+
+### 4. Sequencing — Phase 0 drafted now, Phase 1 described (not yet a single dispatchable
+leg — it is the shape of the NEW stage `P0`'s own successor), Phase 2 explicitly NOT drafted
+
+**Do not build the 3D solver first.** This repository's own Route-A discipline (two unknowns
+must not be debugged simultaneously) applies with more force to a 3D solver than to anything
+this repository has built so far. Programme order, per the user's own instruction:
+
+- **Phase 0 — target selection under the new goal.** Drafted below as leg 251, floor-eligible,
+  immediately dispatchable, IS the content of the proposed `P0` stage above.
+- **Phase 1 — the viscous rung.** Can a viscous blow-up be certified in ANY model? Well-defined,
+  unclaimed, genuinely on the Clay path, does NOT need the 3D solver. This is `P0`'s own gate's
+  yes-branch destination — not drafted as its own leg yet, since it depends on Phase 0's own
+  named object/ansatz. Floor-eligible by nature (construction/math), once posed concretely.
+- **Phase 2 — the heavy lift.** The 3D near-singular viscous solver (`PLAN.md` Stage 4,
+  unscheduled; AMR or dynamic rescaling, likely compiled/GPU). **User-authorized but
+  deliberately NOT drafted or sequenced yet** — Phase 1's own gate decides whether it's worth
+  its cost, per the user's own explicit reasoning: a 3D candidate with no certification story
+  reproduces Hou–Luo 2013 and answers nothing.
+
+```
+### 251 — ROUTE-P0T: PHASE 0 — TARGET SELECTION UNDER THE CLAY GOAL (a Route-M-shaped leg
+redone against Clay, not novelty — THE FIRST LEG OF THE NEW PROGRAMME)
+[FLOOR-ELIGIBLE: math/construction-scoping — the first leg of a live goal, not an
+audit/repair/verify]
+**Thesis.** Route-M (leg's own historical target-selection work) screened candidates against
+novelty and against this repository's own multiplier/shift predicate. This leg re-runs that
+same discipline against a DIFFERENT screen: NRS/Tsai's exclusion of nontrivial
+exactly-backward-self-similar 3D NS blow-up under the relevant decay, meaning any candidate
+object+ansatz combination must be discretely self-similar, unstable-self-similar with a
+finite unstable spectrum, or non-self-similar to survive. Cross-check every candidate against
+this repository's own already-banked dead ends before naming one (L1's three-realization
+death; stage B's exhaustion; the space-axis mapping legs 127/163/176/182 already produced) —
+this leg's job is to not re-propose something already measured dead under a new label.
+`arXiv:2604.09949` is recorded as the negative-control citation: whatever this leg proposes,
+it must explain why it is NOT the same mistake that paper made.
+**Gate.** Does at least one target object + ansatz combination survive BOTH the NRS/Tsai
+screen (not excluded) AND a check against every already-banked dead end in this repository's
+own record (not a re-proposal of something already measured dead)?
+  yes -> Name the object and ansatz precisely, state exactly what a certificate for it would
+         need to show, and state explicitly whether it is fluid/vortex-dynamics-adjacent
+         (bearing directly on Phase 1, the viscous rung) or a different model entirely.
+         ESCALATE as the candidate for Phase 1 — do not attempt certification under this
+         leg's own authority, that is Phase 1's job.
+  no -> Report precisely which screen killed every candidate tried, and whether the failure
+        is at the NRS/Tsai stage or the already-banked-dead-end stage. This would mean
+        target selection itself needs more candidates or a different screen before Phase 1
+        can even be posed — report honestly, this is itself a real and useful negative.
+**Territory.** experiments/p2_route_p0t_v1_targetselection.py,
+               writeup/data/p2_route_p0t_v1_targetselection.json,
+               writeup/novelty/leg_251.md, experiments/journal/leg_251.md.
+               Reads (never edits) every already-banked dead-end report this repository has
+               (L1: legs 54/56/163/176/182; stage B: leg 126; the space-axis synthesis: legs
+               179/186), and the NRS/Tsai/Tao/van den Berg-Williams/BCG-CGSS citations named
+               in the technical framing above (full-text read required, not abstract-only,
+               per this repository's own standing discipline).
+**Difficulty.** heavy
+**Independence.** New territory, own module. Reads (never edits) prior dead-end reports.
+Immediately dispatchable — this is the first leg of the new programme; no other live leg
+touches this question. HIGHEST PRIORITY alongside 249 (PUB2's own submission blocker) — this
+DM recommends both be dispatched immediately, in whichever order the orchestrator's own
+slot availability permits.
+```
+
+### 5. The composition floor should stop oscillating — acknowledged, not yet resolved
+
+**Agreed diagnosis, stated back precisely**: the floor's own oscillation (2/10, "genuinely
+zero dispatchable reserve," repeatedly, across many updates) was a symptom of an exhausted
+sequence generating only audits and blocked repairs — a live goal generates math and
+construction legs naturally, which is exactly what legs 249/250/251 above are. **This DM
+commits, per the user's own instruction: if the floor still breaches 2/10 (or below) TWO
+cycles after `P0` lands in `plan_of_record.py`, the problem is the ROSTER, not the reserve —
+this DM will report that explicitly rather than keep drafting one-off spares to paper over
+it.**
+
+### 6. What does not change — restated, because it matters more now, not less
+
+The three-tier win condition. Lesson 91 (name the realization — every negative-result gate
+this DM drafts from this point still names its realization explicitly). The pre-committed-gate
+contract (every leg above states both branches before any leg agent runs it). And, above all:
+**no output is ever described as movement toward Clay unless a link of the chain actually
+moves** — a goal change does not lower this bar, and this DM states explicitly that nothing
+in this entire update claims any such movement. The honest odds, ~0.05%, are recorded in this
+same section as the goal change, per instruction 6, as the user's own accepted risk — not
+quietly dropped now that the prize is bigger.
+
+### What this DM needs from the orchestrator, explicitly, to proceed
+
+1. **Check leg 192's actual live state** (agent alive? uncommitted worktree progress?) before
+   deciding whether leg 249 resumes it or restarts clean — this DM cannot check this itself.
+2. **Dispatch legs 249, 250, and 251 as top priority**, above the existing Route-D v11/audit-
+   family backlog — all three are either submission-blocking (249, 250) or the first leg of
+   the new programme (251).
+3. **Apply the proposed `plan_of_record.py` changes** (the `P0` stage, the prize/Clay lines)
+   once ready — this DM does not own that file.
+4. **Decide on the two ban-review recommendations** (DSS: keep banned, optionally dispatch a
+   light scoping leg on the expensive entrance; Stage V: retire/re-pose the current wording
+   per this DM's proposed replacement) — both are recommendations, not applied by this DM.
+
+Nothing in this update lifts a ban unilaterally. Escalation #1 is RESOLVED by ruling 2 itself.
+PUB1/PUB2 approval is recorded per ruling 1. The odds stay ~0.05%, recorded in the same
+paragraph as the goal change, per the user's own instruction. No further direction question
+raised by this DM — both rulings were clear enough to act on directly.
