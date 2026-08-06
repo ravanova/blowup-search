@@ -311,7 +311,7 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 84 | **TNA** — does target_norm.py silently extrapolate beyond its validated domain? | no | standard | `leg/tna-v1` | Under adversarial inputs past X_max=745, does target_norm.py silently return an untrustworthy result or flag the violation? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | 87 | **IVB** — post-repair regression check, interval.py | no | standard | `leg/ivb-v1` | Post-repair, does interval.py correctly handle leg 69's original cases with zero regression at the live K-range? |
+| LEG-G | 91 | **FGA** — adversarial audit of fractional_gclm.py's critical-exponent computation | no | standard | `leg/fga-v1` | Under malformed dissipation-strength inputs, does s_c computation silently return a plausible-looking wrong value? |
 | LEG-H | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
 | LEG-I | 89 | **BOA** — adversarial audit of boussinesq.py | no | standard | `leg/boa-v1` | Under malformed physical-space inputs, does the module silently return a plausible-looking wrong result? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
