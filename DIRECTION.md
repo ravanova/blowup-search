@@ -1007,6 +1007,31 @@ now, not acted on:
   exact block. If the verifier does not confirm, this leg is simply never dispatched and
   costs nothing.
 
+**DM update, 2026-08-06 — leg 127's verifier has CONFIRMED. Leg 163 (H2S) is unblocked and
+now fully specified as immediately dispatchable — no further drafting needed, dispatch it
+directly.** The verifier independently re-derived leg 127's proof and re-computed its
+numerics from scratch (banked JSON matches digit-for-digit; local slopes converge
+monotonically to `1-s` out to `M=4096`), and confirmed the Xu arXiv:2607.19762 citation is
+real and does prove the same operator invertible on origin-H² (spectral gap 1/2 after
+modulation). Territory is clean, zero deletions, figures rebuild byte-identically. One
+narrow, unrelated gap — a wrong claim that a singular sequence's far-field-amplitude
+component is exactly zero (it is actually 6.5% of the norm, growing with `M`) — is being
+corrected by a bench-repair outside the leg system, does not touch the theorem (the verifier
+separately confirmed bordered/unbordered `sigma_min` agree to 5.7e-15), and does not block
+leg 163 (checked explicitly in its own Independence field above: the repair touches
+`writeup/` prose only, not `solver/spectral_certificate.py` or Xu's citation). **Leg 163's
+own text has been updated in place** (its header, thesis, and Independence field) to record
+the confirmation rather than the prior contingency — no new leg number consumed, since it was
+already fully specified and only its blocking condition has changed.
+
+Scope-line propagation across banked prose (leg 58's `A21=0` restriction now superseded by
+127's stronger theorem; leg 54's "measured not proved" framing likewise superseded) stays the
+orchestrator's pointer-block work, as they stated — not touched here. Leg 157 (CDX, the
+Cadiot deep-mine) still needs its framing note updated to stop describing itself as feeding
+leg 127's now-closed counterexample search; flagged again, not yet edited, since it does not
+block anything and a full pass over every downstream reference is better done once alongside
+the orchestrator's own propagation pass than piecemeal here.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (OVERTAKEN 2026-08-06: `NG`'s gate
@@ -4218,18 +4243,26 @@ outcome.
 ```
 
 ```
-### 163 — ROUTE-H2S: ORIGIN-H² CERTIFICATE FEASIBILITY SCOPING (SPECULATIVE — NOT
-dispatchable until leg 127's full-treatment verifier confirms both the superseding proof and
-the Xu arXiv:2607.19762 invertibility citation)
-**Thesis.** Contingent, stated as contingent: IF leg 127's landed claim survives independent
-verification — `Z_1 >= 1` proved for every bounded `A` on the `ell^1_w` space (superseding leg
-58), AND Xu arXiv:2607.19762 is confirmed to prove the same bordered `a=0` CLM linearization
-invertible on a DIFFERENT space (origin-H², spectral gap 1/2) — then this repository's
-~70-leg obstruction would be a property of the certificate machinery's CHOSEN space, not of
-the operator, and the obvious next question is whether a certificate attempt in origin-H²
-itself is even structurally possible before anyone spends a leg building one. This leg does
-NOT build a certificate and does NOT presuppose the verifier's outcome — it is a SCOPING
-leg only, mirroring leg 111's third-realization-scoping template: enumerate what a
+### 163 — ROUTE-H2S: ORIGIN-H² CERTIFICATE FEASIBILITY SCOPING (UNBLOCKED 2026-08-06 — leg
+127's dedicated verifier CONFIRMED the theorem, the proof, the numerics, and the Xu
+arXiv:2607.19762 citation; immediately dispatchable)
+**Thesis.** No longer contingent: leg 127's full-treatment verifier independently re-derived
+the proof and re-computed the numerics from scratch, matching the banked JSON digit-for-digit
+(local slopes converge monotonically to `1-s` out to `M=4096`), and confirmed Xu
+arXiv:2607.19762 is a real citation, same operator, same profile, genuinely proving origin-H²
+invertibility with a spectral gap of 1/2 after modulation. (One small, unrelated side-finding
+gap — a wrong claim about a singular sequence's far-field-amplitude component, actually 6.5%
+of the norm and growing with `M`, not exactly zero — is being corrected by a bench-repair the
+orchestrator dispatched; it does not touch the theorem, which the verifier separately
+confirmed via bordered/unbordered `sigma_min` agreement to 5.7e-15, and this leg does not
+depend on it either way.) So: `Z_1 >= 1` is confirmed proved for every bounded `A` on the
+`ell^1_w` space (superseding leg 58), AND the same bordered `a=0` CLM linearization is
+confirmed invertible on origin-H² — meaning this repository's ~70-leg obstruction is a
+property of the certificate machinery's CHOSEN space, not of the operator, and the obvious
+next question is whether a certificate attempt in origin-H² itself is even structurally
+possible before anyone spends a leg building one. This leg still does NOT build a
+certificate — it is a SCOPING leg only, mirroring leg 111's third-realization-scoping
+template: enumerate what a
 certificate in origin-H² would need (a bordered operator formulation compatible with Xu's
 own realization, an analogous three degrees of freedom — space is fixed by definition here,
 so SPLIT and SHAPE — and any norm/embedding infrastructure this repository's existing
@@ -4260,10 +4293,12 @@ obstruction of the same class as the one that killed every `ell^1_w` attempt?
                solver/op_lower.py, and Xu arXiv:2607.19762 itself. No new solver module; no
                certificate is built or measured under this leg.
 **Difficulty.** standard
-**Independence.** Literature-plus-scoping only, no compute, no new solver module. **NOT
-dispatchable until leg 127's verifier confirms both the proof and the Xu citation** — if the
-verifier finds either claim does not hold, this leg is never dispatched and is withdrawn at
-the next refresh, at zero cost. Disjoint from every other live/reserve leg's territory.
+**Independence.** Literature-plus-scoping only, no compute, no new solver module.
+**Immediately dispatchable — leg 127's verifier confirmed both the proof and the Xu
+citation on 2026-08-06.** Disjoint from every other live/reserve leg's territory, including
+the in-flight bench-repair on leg 127's unrelated side-finding (that repair touches
+`writeup/` prose about the far-field-amplitude claim only, not `solver/spectral_certificate.py`
+or Xu's citation, so it does not block this leg).
 ```
 
 ## Ranking rationale
