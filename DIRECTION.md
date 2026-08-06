@@ -9162,3 +9162,134 @@ whenever dispatched.**
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 246 confirmed dispatched (floor restored to
+3/10), 235 escalates with a SECOND, distinct Route-D v11 exposure, 244 lands clean, two
+repairs drafted for slots B/C with territory checked against 226/236
+
+**246 (ALSL2) confirmed dispatched into slot E** per the orchestrator's own roster — the
+floor is met, **3/10 (236, 245, 246)**, as of this update.
+
+**244 (PCRO) landed cleanly** — closes leg 243's array-order fragility in `stall_verdict`
+with strong verification (1682 permutations, every published number bit-identical). No
+issues.
+
+**235 (CDAP) escalated, not merged** (`leg/235-cdap-v1` pushed, `main` untouched). **A
+SECOND, DISTINCT instance of the ignored-caller-diagnostic pattern, this time in Route-D
+v11's own runner (`experiments/p2_route_d_v11_anchor.py`), NOT the same mechanism leg 226 is
+repairing.** Leg 226's mechanism is a bad convergence flag in `profile_newton.py`; this one
+is a min/max SELECTION bug: `v5_budget`'s headline margin (`1.0468e+10`) is built from
+`newton_weighted_defect_min`, while `newton_weighted_defect_max=1.5196e-02` sits one line
+away and is never compared — violating that block's own Y0 budget by **62.02x at a=0.45**.
+Systematically confirmed isolated (0 instances across the other 195 banked JSONs, 4320
+verdicts screened) — a real, precisely-scoped, second headline exposure, not a recurrence of
+226's own mechanism. **It also corrects leg 202 itself**: 2 of leg 202's 3 quoted
+`weighted_defect` magnitudes attach to rows already marked `grid_converged=false` — leg 202's
+own finding SHAPE stands, but two of its cited numbers were on the wrong rows. Route-D v11
+now carries two independent, distinct exposures in flight.
+
+**Territory checked before drafting, per the orchestrator's own request.** 226 owns
+`solver/profile_newton.py` exclusively (a different file, a different mechanism — bad
+convergence flag, not min/max selection). 236 (RDDEP) only READS Route-D v11's own banked
+report/JSON, never edits the runner itself. **235's own fix target
+(`experiments/p2_route_d_v11_anchor.py`'s min/max selection logic) is confirmed disjoint
+from both** — no file-level collision with 226 or 236. Drafted below.
+
+```
+### 247 — ROUTE-VBR: REPAIR Route-D v11's v5_budget MIN/MAX SELECTION BUG (leg 235's
+finding — a SECOND, distinct Route-D v11 exposure, not the same mechanism as leg 226)
+**Thesis.** Leg 235 found `v5_budget`'s headline margin is built from
+`newton_weighted_defect_min` while `newton_weighted_defect_max` sits one line away, unused —
+violating the block's own Y0 budget by 62.02x at `a=0.45`, confirmed isolated to this one
+runner (0/195 other banked JSONs affected, 4320 verdicts screened). This is independent of
+leg 226's own repair (a different mechanism, `profile_newton.py`'s convergence flag) — fix
+this one on its own terms, using `newton_weighted_defect_max` (or an explicit,
+correctly-reasoned combination of both) rather than silently substituting one for the other.
+**Gate.** Does using the correct selection (per leg 235's own diagnosis) for `v5_budget`'s
+margin computation at `a=0.45` bring the block back within its own declared Y0 budget, and
+does re-running the other 195 banked JSONs confirm they remain unaffected (matching leg
+235's own 0/195 isolation finding)?
+  yes -> Bank the repair. Report the corrected `a=0.45` margin precisely — this is
+         Route-D v11's SECOND confirmed headline-adjacent correction this cycle (after
+         226/236's), so state plainly whether the corrected value changes any conclusion
+         Route-D v11's own headline draws, the same discipline leg 236 applies to leg 226.
+  no -> Report exactly which case resists the fix or which of the 195 other JSONs turns out
+        affected after all; escalate immediately rather than declare this closed.
+**Territory.** experiments/p2_route_d_v11_anchor.py (the `v5_budget` min/max selection logic
+               ONLY — confirmed disjoint from leg 226's `solver/profile_newton.py` and from
+               leg 236's read-only territory), experiments/p2_route_vbr_v1_repair.py,
+               writeup/data/p2_route_vbr_v1_repair.json,
+               writeup/novelty/leg_247.md, experiments/journal/leg_247.md.
+               Reads (never edits) leg 235's own report/JSON and leg 202's own report (for
+               the row-mislabeling correction leg 235 also found).
+**Difficulty.** standard
+**Independence.** Confirmed disjoint from 226 (different file, different mechanism) and 236
+(read-only on Route-D v11's data, doesn't edit the runner). Immediately dispatchable, not
+blocked on anything.
+```
+
+**Second slot filled with a repair for leg 237's own finding** (the second scale-invariant-
+residual instance, in `collocation_newton.py`) — leg 237 graded it latent/non-claim-adjacent
+but never repaired it, the same gap leg 202's finding left before leg 226 was drafted for it.
+
+```
+### 248 — ROUTE-CNR2: REPAIR collocation_newton.py's SCALE-INVARIANT-RESIDUAL DEFECT (leg
+237's finding — mirrors leg 226's fix for the same defect CLASS in profile_newton.py)
+**Thesis.** Leg 237 (SIRC) found a second instance of leg 202's scale-invariant-residual
+defect class in `collocation_newton.py`, confirmed via a thorough 6-route reachability
+battery (0/41 escapes vs. 2/2 reproducing leg 202's own banked numbers) as latent and NOT
+claim-adjacent — but never repaired, since 237's own territory was characterization, not
+repair (the same division of labor as 202/226). This leg closes it, using the same fix
+shape leg 226 applies to `profile_newton.py` (incorporating an available, non-scale-invariant
+diagnostic into the convergence verdict, per leg 237's own report of what that would be for
+this module).
+**Gate.** Does the repair cause all 41 of leg 237's own reachability-battery cases to
+correctly reject/flag, while the 2 cases that reproduce leg 202's own banked numbers remain
+correctly flagged as genuine (not accidentally suppressed by an overcorrected fix)?
+  yes -> Bank the repair; this closes leg 237's finding on the same footing as 226 closes
+         202's. Flag for a light postrepair check once a slot is available.
+  no -> Report exactly which case resists the fix; escalate rather than declare it closed.
+**Territory.** solver/collocation_newton.py (the scale-invariant-residual convergence check
+               only — does not touch leg 150's own earlier, different repair to this same
+               module), experiments/p2_route_cnr2_v1_repair.py,
+               writeup/data/p2_route_cnr2_v1_repair.json,
+               writeup/novelty/leg_248.md, experiments/journal/leg_248.md.
+               Reads (never edits) leg 237's own report/JSON.
+**Difficulty.** standard
+**Independence.** Confirmed disjoint from 226/247 (different files/modules) and from leg
+150's own already-closed, unrelated repair to the same module. Immediately dispatchable, not
+blocked on anything.
+```
+
+**Slots B and C filled with 247 (VBR) and 248 (CNR2) respectively.**
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 247 | VBR | **live, newly promoted** — repair — not floor-eligible |
+| C | 248 | CNR2 | **live, newly promoted** — repair — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 246 | ALSL2 | FLOOR-ELIGIBLE (literature) |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 245 | BCL2 | FLOOR-ELIGIBLE (literature) |
+| H | 228 | BHRV | verify — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible |
+
+**Floor status: 3/10 (236, 245, 246) — MET, unaffected by this round's two repair fills.**
+
+**Reserve queue: 5 undispatched legs (229, 231, 232, 233, 234), unchanged by this round's two
+promotions (247, 248 were drafted fresh, not drawn from this pool) — all five remain
+confirmed-blocked** (229 on leg 226; 231-234 on repairs 217/219/221/225, none landed yet).
+Still above the §3a watermark of 3 by count, but this DM notes explicitly: **effective
+immediately-dispatchable reserve is 0**, same situation as several updates ago, resolved each
+time by fresh drafting rather than by the blocked pool clearing. This DM will keep drafting
+fresh, unblocked candidates as needed rather than wait
+on 217/219/221/225/226 to land.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
