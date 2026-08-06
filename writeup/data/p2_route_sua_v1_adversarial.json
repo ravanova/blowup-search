@@ -1,0 +1,1392 @@
+{
+  "leg": 120,
+  "route": "SUA",
+  "branch": "leg/sua-v1",
+  "date": "2026-08-06",
+  "module_under_audit": "solver/spectral_utils.py",
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/spectral_utils.py ever silently return a wrong value instead of propagating or flagging the invalid input?",
+  "references": {
+    "L1_bowman_2013": "https://www.math.ualberta.ca/~bowman/talks/alias0.pdf -- p.29 Centered Convolutions: pad to N >= 3m-2 to prevent mode m-1 beating with itself to contaminate mode -m+1; with K=m-1 this is K < N/3 STRICTLY",
+    "L2_johnson_mit": "https://math.mit.edu/~stevenj/fft-deriv.pdf -- Algorithm 1 step 2: multiply Y_k by ZERO for k = N/2 (N even). A MULTIPLICATION, not an assignment."
+  },
+  "seed": 20260806,
+  "S1_dealias_boundary": {
+    "rows": [
+      {
+        "n": 6,
+        "divisible_by_3": true,
+        "K": 2,
+        "n_over_3": 2.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.25000000000000006,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 9,
+        "divisible_by_3": true,
+        "K": 3,
+        "n_over_3": 3.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.25,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 10,
+        "divisible_by_3": false,
+        "K": 3,
+        "n_over_3": 3.3333333333333335,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 7.614521120539392e-17,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 12,
+        "divisible_by_3": true,
+        "K": 4,
+        "n_over_3": 4.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.2499999999999998,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 16,
+        "divisible_by_3": false,
+        "K": 5,
+        "n_over_3": 5.333333333333333,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 1.56515718859625e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 20,
+        "divisible_by_3": false,
+        "K": 6,
+        "n_over_3": 6.666666666666667,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 4.268247127827779e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 24,
+        "divisible_by_3": true,
+        "K": 8,
+        "n_over_3": 8.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.24999999999999983,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 27,
+        "divisible_by_3": true,
+        "K": 9,
+        "n_over_3": 9.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.25000000000000017,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 32,
+        "divisible_by_3": false,
+        "K": 10,
+        "n_over_3": 10.666666666666666,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 1.6376346829876393e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 40,
+        "divisible_by_3": false,
+        "K": 13,
+        "n_over_3": 13.333333333333334,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 4.828096308620696e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 48,
+        "divisible_by_3": true,
+        "K": 16,
+        "n_over_3": 16.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.24999999999999972,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 50,
+        "divisible_by_3": false,
+        "K": 16,
+        "n_over_3": 16.666666666666668,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 2.0621818111765905e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 64,
+        "divisible_by_3": false,
+        "K": 21,
+        "n_over_3": 21.333333333333332,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 3.435594017022998e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 81,
+        "divisible_by_3": true,
+        "K": 27,
+        "n_over_3": 27.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.2499999999999999,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 96,
+        "divisible_by_3": true,
+        "K": 32,
+        "n_over_3": 32.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.2500000000000003,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 100,
+        "divisible_by_3": false,
+        "K": 33,
+        "n_over_3": 33.333333333333336,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 1.8102331567576363e-17,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 128,
+        "divisible_by_3": false,
+        "K": 42,
+        "n_over_3": 42.666666666666664,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 2.2785086361807133e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 192,
+        "divisible_by_3": true,
+        "K": 64,
+        "n_over_3": 64.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.24999999999999967,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 200,
+        "divisible_by_3": false,
+        "K": 66,
+        "n_over_3": 66.66666666666667,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 4.130815612900125e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 256,
+        "divisible_by_3": false,
+        "K": 85,
+        "n_over_3": 85.33333333333333,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 3.437683179325987e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 384,
+        "divisible_by_3": true,
+        "K": 128,
+        "n_over_3": 128.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.2500000000000002,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      },
+      {
+        "n": 512,
+        "divisible_by_3": false,
+        "K": 170,
+        "n_over_3": 170.66666666666666,
+        "bowman_strict_ok": true,
+        "spurious_coeff_at_K": 1.585400353759381e-16,
+        "true_coeff_at_K": 0.0,
+        "verdict": "ALIAS-FREE"
+      },
+      {
+        "n": 768,
+        "divisible_by_3": true,
+        "K": 256,
+        "n_over_3": 256.0,
+        "bowman_strict_ok": false,
+        "spurious_coeff_at_K": 0.24999999999999956,
+        "true_coeff_at_K": 0.0,
+        "verdict": "CONTAMINATED"
+      }
+    ],
+    "n_contaminated": 11,
+    "n_total": 23,
+    "contaminated_grids": [
+      6,
+      9,
+      12,
+      24,
+      27,
+      48,
+      81,
+      96,
+      192,
+      384,
+      768
+    ],
+    "spurious_coeff_on_contaminated": 0.25000000000000006,
+    "worst_spurious_on_clean": 4.828096308620696e-16,
+    "contaminated_iff_divisible_by_3": true
+  },
+  "S2_energy_production": {
+    "rows": [
+      {
+        "n": 12,
+        "divisible_by_3": true,
+        "energy_production": 0.038409506670077316,
+        "alias_free_reference": 0.03838956769738252,
+        "rel_err": 0.00051938518432851
+      },
+      {
+        "n": 16,
+        "divisible_by_3": false,
+        "energy_production": 0.04186944565154918,
+        "alias_free_reference": 0.04186944565154921,
+        "rel_err": 6.629076450311668e-16
+      },
+      {
+        "n": 20,
+        "divisible_by_3": false,
+        "energy_production": 0.005323966195380463,
+        "alias_free_reference": 0.005323966195380465,
+        "rel_err": 3.258329246121066e-16
+      },
+      {
+        "n": 24,
+        "divisible_by_3": true,
+        "energy_production": -0.022907617801973968,
+        "alias_free_reference": -0.023320237329640975,
+        "rel_err": 0.01769362471892816
+      },
+      {
+        "n": 27,
+        "divisible_by_3": true,
+        "energy_production": 0.01492736929838104,
+        "alias_free_reference": 0.01636721416865301,
+        "rel_err": 0.08797128548788742
+      },
+      {
+        "n": 32,
+        "divisible_by_3": false,
+        "energy_production": 0.006712496574516945,
+        "alias_free_reference": 0.006712496574516944,
+        "rel_err": 2.58431934634044e-16
+      },
+      {
+        "n": 40,
+        "divisible_by_3": false,
+        "energy_production": 0.0025258885992421863,
+        "alias_free_reference": 0.0025258885992421863,
+        "rel_err": 0.0
+      },
+      {
+        "n": 48,
+        "divisible_by_3": true,
+        "energy_production": 0.0007271995987085832,
+        "alias_free_reference": 0.0007790466640793614,
+        "rel_err": 0.06655193810764655
+      },
+      {
+        "n": 50,
+        "divisible_by_3": false,
+        "energy_production": 0.0014263107082860148,
+        "alias_free_reference": 0.0014263107082860135,
+        "rel_err": 9.121733430341123e-16
+      },
+      {
+        "n": 64,
+        "divisible_by_3": false,
+        "energy_production": -0.0002471686790754151,
+        "alias_free_reference": -0.0002471686790754156,
+        "rel_err": 1.9739191043279908e-15
+      },
+      {
+        "n": 81,
+        "divisible_by_3": true,
+        "energy_production": -5.1188637979343865e-05,
+        "alias_free_reference": -4.3893119207784094e-05,
+        "rel_err": 0.16621098940414264
+      },
+      {
+        "n": 96,
+        "divisible_by_3": true,
+        "energy_production": 0.00011440441891406663,
+        "alias_free_reference": 0.00011436806116080832,
+        "rel_err": 0.0003179012819600229
+      },
+      {
+        "n": 100,
+        "divisible_by_3": false,
+        "energy_production": -0.001518252937233399,
+        "alias_free_reference": -0.0015182529372333993,
+        "rel_err": 1.428223382147597e-16
+      },
+      {
+        "n": 128,
+        "divisible_by_3": false,
+        "energy_production": -0.0003548594777613649,
+        "alias_free_reference": -0.00035485947776136477,
+        "rel_err": 3.0553000284090107e-16
+      },
+      {
+        "n": 192,
+        "divisible_by_3": true,
+        "energy_production": 0.0003380329307492594,
+        "alias_free_reference": 0.00031583291572267493,
+        "rel_err": 0.07029037798605434
+      },
+      {
+        "n": 200,
+        "divisible_by_3": false,
+        "energy_production": 0.0003047687540525074,
+        "alias_free_reference": 0.00030476875405250725,
+        "rel_err": 5.336187640968169e-16
+      },
+      {
+        "n": 256,
+        "divisible_by_3": false,
+        "energy_production": -3.4533429977580475e-06,
+        "alias_free_reference": -3.4533429977579624e-06,
+        "rel_err": 2.465055201708161e-14
+      },
+      {
+        "n": 384,
+        "divisible_by_3": true,
+        "energy_production": -4.503007905898716e-05,
+        "alias_free_reference": -4.576719346181699e-05,
+        "rel_err": 0.016105737474262992
+      },
+      {
+        "n": 512,
+        "divisible_by_3": false,
+        "energy_production": -2.455731217094565e-05,
+        "alias_free_reference": -2.455731217094565e-05,
+        "rel_err": 0.0
+      },
+      {
+        "n": 768,
+        "divisible_by_3": true,
+        "energy_production": -2.400863280839349e-06,
+        "alias_free_reference": -2.363327180459146e-06,
+        "rel_err": 0.015882735446266342
+      }
+    ],
+    "refine_factor": 6,
+    "worst_rel_err_div3": 0.16621098940414264,
+    "worst_n_div3": 81,
+    "worst_rel_err_not_div3": 2.465055201708161e-14,
+    "worst_n_not_div3": 256,
+    "separation_decades": 12.828833085546924
+  },
+  "S3_exposure": {
+    "call_sites_1d": [
+      "solver/gclm.py:178",
+      "solver/fractional_gclm.py:195",
+      "phase2_spike0_probe.py:23"
+    ],
+    "declared_resolutions": {
+      "stage1_5_sweep.RESOLUTIONS": [
+        256,
+        512
+      ],
+      "stage1_5_sweep.N_REFERENCE": [
+        2048
+      ],
+      "stage2_5_sweep.RESOLUTIONS": [
+        256,
+        512
+      ],
+      "stage2_6_sweep.RESOLUTIONS": [
+        256,
+        512
+      ],
+      "stage3_6_sweep.RESOLUTIONS": [
+        1024,
+        2048,
+        4096
+      ],
+      "stage3_6_sweep.N_REFERENCE": [
+        4096
+      ],
+      "nongenericity_sweep.RESOLUTIONS": [
+        256,
+        512
+      ],
+      "ga.resolution_study.DEFAULT_RESOLUTIONS": [
+        256,
+        512,
+        1024
+      ],
+      "ga.evolve.fitness_resolution_N": [
+        256
+      ],
+      "experiments/p2_route_f_v1_viscosity.N_DEFAULT": [
+        8192
+      ],
+      "experiments/p2_route_fga_v1_adversarial.N_AUDIT": [
+        512
+      ],
+      "experiments/p2_route_gla_v1_adversarial.N_SOLVE": [
+        64
+      ],
+      "experiments/p2_route_h_v1_critical.h7 n": [
+        8192
+      ],
+      "phase2_spike0_probe.run N": [
+        2048
+      ],
+      "solver.fractional_gclm.FractionalGCLM default n": [
+        2048
+      ]
+    },
+    "all_declared_sizes": [
+      64,
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "declared_sizes_divisible_by_3": [],
+    "banked_energy_balance_residual_records": 107,
+    "banked_files": [
+      "writeup/data/p2_route_boa_v1_adversarial.json",
+      "writeup/data/p2_route_gla_v1_adversarial.json"
+    ],
+    "banked_records_at_risk": 0,
+    "sibling_same_cut": "solver/boussinesq.py:149 dealias_mask2d (<= n/3), out of territory, banked runs at n=32, unexposed",
+    "banked_numbers_at_risk": 0
+  },
+  "S4_nyquist_poison": {
+    "nyquist_even": [
+      {
+        "n": 8,
+        "poison": "nan",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0,
+        "warned_in_multiply": false,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 8,
+        "poison": "+inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 8,
+        "poison": "-inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 16,
+        "poison": "nan",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0000000000000013,
+        "warned_in_multiply": false,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 16,
+        "poison": "+inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0000000000000013,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 16,
+        "poison": "-inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 1.0000000000000013,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 64,
+        "poison": "nan",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": false,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 64,
+        "poison": "+inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 64,
+        "poison": "-inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 256,
+        "poison": "nan",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": false,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 256,
+        "poison": "+inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      },
+      {
+        "n": 256,
+        "poison": "-inf",
+        "spectrum_finite": true,
+        "physical_finite": true,
+        "max_abs_out": 0.9999999999999994,
+        "warned_in_multiply": true,
+        "value_before_assignment_finite": false,
+        "published_multiply_form_finite": false
+      }
+    ],
+    "n_erased": 12,
+    "n_nyquist_cases": 12,
+    "control_non_nyquist": [
+      {
+        "n": 64,
+        "slot": 5,
+        "poison": "nan",
+        "propagated": true,
+        "n_nonfinite": 1
+      },
+      {
+        "n": 64,
+        "slot": 5,
+        "poison": "+inf",
+        "propagated": true,
+        "n_nonfinite": 1
+      },
+      {
+        "n": 64,
+        "slot": 5,
+        "poison": "-inf",
+        "propagated": true,
+        "n_nonfinite": 1
+      },
+      {
+        "n": 256,
+        "slot": 5,
+        "poison": "nan",
+        "propagated": true,
+        "n_nonfinite": 1
+      },
+      {
+        "n": 256,
+        "slot": 5,
+        "poison": "+inf",
+        "propagated": true,
+        "n_nonfinite": 1
+      },
+      {
+        "n": 256,
+        "slot": 5,
+        "poison": "-inf",
+        "propagated": true,
+        "n_nonfinite": 1
+      }
+    ],
+    "all_non_nyquist_propagate": true,
+    "regression_odd_n": [
+      {
+        "n": 17,
+        "top_mode_poison_propagated": true,
+        "top_mode_rel_err": 5.828670879282072e-15
+      },
+      {
+        "n": 65,
+        "top_mode_poison_propagated": true,
+        "top_mode_rel_err": 1.4752088439706768e-14
+      },
+      {
+        "n": 129,
+        "top_mode_poison_propagated": true,
+        "top_mode_rel_err": 4.3853809472693683e-14
+      }
+    ],
+    "leg69_fix_intact": true
+  },
+  "S5_velocity_hat": {
+    "mean_mode_poison": [
+      {
+        "poison": "nan",
+        "u_hat_0_real": 0.0,
+        "u_hat_0_imag": 0.0,
+        "output_all_finite": true
+      },
+      {
+        "poison": "+inf",
+        "u_hat_0_real": 0.0,
+        "u_hat_0_imag": 0.0,
+        "output_all_finite": true
+      },
+      {
+        "poison": "-inf",
+        "u_hat_0_real": 0.0,
+        "u_hat_0_imag": 0.0,
+        "output_all_finite": true
+      }
+    ],
+    "n_erased": 3,
+    "dtype_truncation": [
+      {
+        "int_scale": 1,
+        "max_abs_err": 0.3333333333333333,
+        "rel_err": 1.0,
+        "out_dtype": "int64"
+      },
+      {
+        "int_scale": 3,
+        "max_abs_err": 0.6666666666666666,
+        "rel_err": 1.0,
+        "out_dtype": "int64"
+      },
+      {
+        "int_scale": 10,
+        "max_abs_err": 0.8125,
+        "rel_err": 0.40625,
+        "out_dtype": "int64"
+      },
+      {
+        "int_scale": 100,
+        "max_abs_err": 0.9375,
+        "rel_err": 0.04610655737704918,
+        "out_dtype": "int64"
+      },
+      {
+        "int_scale": 1000,
+        "max_abs_err": 0.9375,
+        "rel_err": 0.006100867678958785,
+        "out_dtype": "int64"
+      }
+    ],
+    "worst_dtype_rel_err": 1.0,
+    "dtypes_on_int_input": {
+      "derivative_hat": "complex128",
+      "hilbert_hat": "complex128",
+      "velocity_hat": "int64"
+    }
+  },
+  "S6_malformed_k": {
+    "rows": [
+      {
+        "fn": "hilbert_hat",
+        "case": "scalar 0.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 1.0
+      },
+      {
+        "fn": "hilbert_hat",
+        "case": "scalar 1.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 0.0
+      },
+      {
+        "fn": "hilbert_hat",
+        "case": "scalar -1.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 2.0
+      },
+      {
+        "fn": "hilbert_hat",
+        "case": "length-1 array",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 0.0
+      },
+      {
+        "fn": "hilbert_hat",
+        "case": "wrong length (n/2)",
+        "outcome": "REFUSED:ValueError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "velocity_hat",
+        "case": "scalar 0.0",
+        "outcome": "REFUSED:TypeError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "velocity_hat",
+        "case": "scalar 1.0",
+        "outcome": "REFUSED:TypeError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "velocity_hat",
+        "case": "scalar -1.0",
+        "outcome": "REFUSED:TypeError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "velocity_hat",
+        "case": "length-1 array",
+        "outcome": "REFUSED:IndexError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "velocity_hat",
+        "case": "wrong length (n/2)",
+        "outcome": "REFUSED:IndexError",
+        "rel_sup_err": null
+      },
+      {
+        "fn": "derivative_hat",
+        "case": "scalar 0.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 1.0
+      },
+      {
+        "fn": "derivative_hat",
+        "case": "scalar 1.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 0.8108108108108116
+      },
+      {
+        "fn": "derivative_hat",
+        "case": "scalar -1.0",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 1.1891891891891884
+      },
+      {
+        "fn": "derivative_hat",
+        "case": "length-1 array",
+        "outcome": "ACCEPTED",
+        "rel_sup_err": 0.6216216216216234
+      },
+      {
+        "fn": "derivative_hat",
+        "case": "wrong length (n/2)",
+        "outcome": "REFUSED:ValueError",
+        "rel_sup_err": null
+      }
+    ],
+    "n_accepted": 8,
+    "n_cases": 15,
+    "worst_silent_rel_sup_err": 2.0,
+    "worst_case": "hilbert_hat / scalar -1.0"
+  },
+  "S7_degenerate_n": {
+    "rows": [
+      {
+        "n": -8,
+        "grid": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "non_mean_modes_retained": 0
+      },
+      {
+        "n": -1,
+        "grid": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "non_mean_modes_retained": 0
+      },
+      {
+        "n": 0,
+        "grid": {
+          "outcome": "returned",
+          "length": 0
+        },
+        "wavenumbers": {
+          "outcome": "raised",
+          "exception": "ZeroDivisionError"
+        },
+        "dealias_mask": {
+          "outcome": "raised",
+          "exception": "ZeroDivisionError"
+        },
+        "non_mean_modes_retained": null
+      },
+      {
+        "n": 1,
+        "grid": {
+          "outcome": "returned",
+          "length": 1
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 1
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 1
+        },
+        "non_mean_modes_retained": 0
+      },
+      {
+        "n": 2,
+        "grid": {
+          "outcome": "returned",
+          "length": 2
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 2
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 2
+        },
+        "non_mean_modes_retained": 0
+      },
+      {
+        "n": 3,
+        "grid": {
+          "outcome": "returned",
+          "length": 3
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 2
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 2
+        },
+        "non_mean_modes_retained": 1
+      },
+      {
+        "n": 4,
+        "grid": {
+          "outcome": "returned",
+          "length": 4
+        },
+        "wavenumbers": {
+          "outcome": "returned",
+          "length": 3
+        },
+        "dealias_mask": {
+          "outcome": "returned",
+          "length": 3
+        },
+        "non_mean_modes_retained": 1
+      }
+    ],
+    "grid_returns_empty_for_nonpositive": true,
+    "wavenumbers_raises_at_zero": true,
+    "zero_non_mean_modes_at": [
+      -8,
+      -1,
+      1,
+      2
+    ]
+  },
+  "S8_passes": {
+    "integral_quantities": [
+      {
+        "case": "clean",
+        "integral": 8.310936655411193e-17,
+        "l1_norm": 3.996786721940289,
+        "energy": 1.5707963267948966,
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "one nan",
+        "integral": "nan",
+        "l1_norm": "nan",
+        "energy": "nan",
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "one +inf",
+        "integral": "+inf",
+        "l1_norm": "+inf",
+        "energy": "+inf",
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "one -inf",
+        "integral": "-inf",
+        "l1_norm": "+inf",
+        "energy": "+inf",
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "+inf and -inf",
+        "integral": "nan",
+        "l1_norm": "+inf",
+        "energy": "+inf",
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "all nan",
+        "integral": "nan",
+        "l1_norm": "nan",
+        "energy": "nan",
+        "n_warnings": 0,
+        "absorbed": false
+      },
+      {
+        "case": "empty",
+        "integral": "nan",
+        "l1_norm": "nan",
+        "energy": "nan",
+        "n_warnings": 3,
+        "absorbed": false
+      },
+      {
+        "case": "1e200 scale",
+        "integral": 5.840167256964543e+183,
+        "l1_norm": 3.996786721940289e+200,
+        "energy": "+inf",
+        "n_warnings": 0,
+        "absorbed": false
+      }
+    ],
+    "n_absorbed": 0,
+    "length_guard": [
+      {
+        "n": 64,
+        "n_coeffs": 33,
+        "correct_length": true,
+        "outcome": "accepted"
+      },
+      {
+        "n": 64,
+        "n_coeffs": 32,
+        "correct_length": false,
+        "outcome": "ValueError"
+      },
+      {
+        "n": 64,
+        "n_coeffs": 34,
+        "correct_length": false,
+        "outcome": "ValueError"
+      },
+      {
+        "n": 17,
+        "n_coeffs": 9,
+        "correct_length": true,
+        "outcome": "accepted"
+      },
+      {
+        "n": 17,
+        "n_coeffs": 8,
+        "correct_length": false,
+        "outcome": "ValueError"
+      }
+    ],
+    "length_guard_exact": true,
+    "conventions": {
+      "H_sin_is_minus_cos": 4.440892098500626e-16,
+      "H_cos_is_sin": 6.106226635438361e-16,
+      "energy_of_sin_is_half_pi": 0.0,
+      "integral_of_1_is_2pi": 0.0,
+      "l1_norm_of_sin_vs_4_NOT_A_DEFECT": 0.0032132780597109445
+    }
+  },
+  "S9_proposed_repair": {
+    "candidate": "wavenumbers(n) <= (n - 1) // 3",
+    "noop_on_banked_resolutions": true,
+    "noop_rows": [
+      {
+        "n": 64,
+        "kept_now": 22,
+        "kept_after": 22,
+        "identical": true
+      },
+      {
+        "n": 128,
+        "kept_now": 43,
+        "kept_after": 43,
+        "identical": true
+      },
+      {
+        "n": 256,
+        "kept_now": 86,
+        "kept_after": 86,
+        "identical": true
+      },
+      {
+        "n": 512,
+        "kept_now": 171,
+        "kept_after": 171,
+        "identical": true
+      },
+      {
+        "n": 1024,
+        "kept_now": 342,
+        "kept_after": 342,
+        "identical": true
+      },
+      {
+        "n": 2048,
+        "kept_now": 683,
+        "kept_after": 683,
+        "identical": true
+      },
+      {
+        "n": 4096,
+        "kept_now": 1366,
+        "kept_after": 1366,
+        "identical": true
+      },
+      {
+        "n": 8192,
+        "kept_now": 2731,
+        "kept_after": 2731,
+        "identical": true
+      }
+    ],
+    "closes_contamination": true,
+    "closure_rows": [
+      {
+        "n": 6,
+        "current_K": 2,
+        "current_spurious": 0.25000000000000006,
+        "proposed_K": 1,
+        "proposed_spurious": 6.197570059723945e-18
+      },
+      {
+        "n": 9,
+        "current_K": 3,
+        "current_spurious": 0.25,
+        "proposed_K": 2,
+        "proposed_spurious": 2.98771859513266e-17
+      },
+      {
+        "n": 12,
+        "current_K": 4,
+        "current_spurious": 0.2499999999999998,
+        "proposed_K": 3,
+        "proposed_spurious": 1.1102230246251565e-16
+      },
+      {
+        "n": 24,
+        "current_K": 8,
+        "current_spurious": 0.24999999999999983,
+        "proposed_K": 7,
+        "proposed_spurious": 5.568398425546763e-17
+      },
+      {
+        "n": 27,
+        "current_K": 9,
+        "current_spurious": 0.25000000000000017,
+        "proposed_K": 8,
+        "proposed_spurious": 1.33948934731173e-16
+      },
+      {
+        "n": 48,
+        "current_K": 16,
+        "current_spurious": 0.24999999999999972,
+        "proposed_K": 15,
+        "proposed_spurious": 6.387811599308281e-16
+      },
+      {
+        "n": 81,
+        "current_K": 27,
+        "current_spurious": 0.2499999999999999,
+        "proposed_K": 26,
+        "proposed_spurious": 7.508160047192277e-16
+      },
+      {
+        "n": 96,
+        "current_K": 32,
+        "current_spurious": 0.2500000000000003,
+        "proposed_K": 31,
+        "proposed_spurious": 6.993705206189816e-16
+      },
+      {
+        "n": 192,
+        "current_K": 64,
+        "current_spurious": 0.24999999999999967,
+        "proposed_K": 63,
+        "proposed_spurious": 4.288948615068189e-16
+      },
+      {
+        "n": 384,
+        "current_K": 128,
+        "current_spurious": 0.2500000000000002,
+        "proposed_K": 127,
+        "proposed_spurious": 7.148537801656807e-16
+      },
+      {
+        "n": 768,
+        "current_K": 256,
+        "current_spurious": 0.24999999999999956,
+        "proposed_K": 255,
+        "proposed_spurious": 1.1420844960168251e-15
+      }
+    ],
+    "counterexamples_1_to_4999": [],
+    "applied": false,
+    "blocks_on": "test_spectral_utils_dedicated.py:121-122 asserts the defect and must be inverted by the same repair"
+  },
+  "gate_answer": "YES",
+  "findings": {
+    "D1_dealias_boundary_off_by_one_mode": {
+      "what": "dealias_mask keeps k <= n/3; Bowman's alias-free condition is k < n/3 STRICTLY. For 3 | n the mask retains exactly one mode too many and that mode beats with itself back into the retained band.",
+      "contaminated_grids": [
+        6,
+        9,
+        12,
+        24,
+        27,
+        48,
+        81,
+        96,
+        192,
+        384,
+        768
+      ],
+      "spurious_coeff": 0.25000000000000006,
+      "true_coeff": 0.0,
+      "worst_on_clean_grids": 4.828096308620696e-16
+    },
+    "D2_energy_production_aliased_at_div3": {
+      "what": "energy_production, docstring 'Exact rate d/dt E', inherits D1: it is the cubic-in-w diagnostic feeding solver/gclm.py's energy-balance residual.",
+      "worst_rel_err_div3": 0.16621098940414264,
+      "at_n": 81,
+      "worst_rel_err_not_div3": 2.465055201708161e-14,
+      "separation_decades": 12.828833085546924
+    },
+    "D3_nyquist_poison_erased": {
+      "what": "derivative_hat ASSIGNS d[-1] = 0.0 where Johnson Algorithm 1 MULTIPLIES by zero; 0.0*nan = nan, so the published form propagates and the assignment erases.",
+      "erased": 12,
+      "of": 12,
+      "controls_propagate": true,
+      "leg69_fix_intact": true
+    },
+    "D4_velocity_hat_mean_mode_erased": {
+      "erased": 3,
+      "of": 3
+    },
+    "D5_velocity_hat_dtype_truncation": {
+      "worst_rel_err": 1.0,
+      "dtypes": {
+        "derivative_hat": "complex128",
+        "hilbert_hat": "complex128",
+        "velocity_hat": "int64"
+      }
+    },
+    "D6_malformed_k_broadcast": {
+      "accepted_silently": 8,
+      "of": 15,
+      "worst_rel_sup_err": 2.0,
+      "worst": "hilbert_hat / scalar -1.0"
+    },
+    "D7_degenerate_n_inconsistent": {
+      "rows": [
+        {
+          "n": -8,
+          "grid": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "non_mean_modes_retained": 0
+        },
+        {
+          "n": -1,
+          "grid": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "non_mean_modes_retained": 0
+        },
+        {
+          "n": 0,
+          "grid": {
+            "outcome": "returned",
+            "length": 0
+          },
+          "wavenumbers": {
+            "outcome": "raised",
+            "exception": "ZeroDivisionError"
+          },
+          "dealias_mask": {
+            "outcome": "raised",
+            "exception": "ZeroDivisionError"
+          },
+          "non_mean_modes_retained": null
+        },
+        {
+          "n": 1,
+          "grid": {
+            "outcome": "returned",
+            "length": 1
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 1
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 1
+          },
+          "non_mean_modes_retained": 0
+        },
+        {
+          "n": 2,
+          "grid": {
+            "outcome": "returned",
+            "length": 2
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 2
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 2
+          },
+          "non_mean_modes_retained": 0
+        },
+        {
+          "n": 3,
+          "grid": {
+            "outcome": "returned",
+            "length": 3
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 2
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 2
+          },
+          "non_mean_modes_retained": 1
+        },
+        {
+          "n": 4,
+          "grid": {
+            "outcome": "returned",
+            "length": 4
+          },
+          "wavenumbers": {
+            "outcome": "returned",
+            "length": 3
+          },
+          "dealias_mask": {
+            "outcome": "returned",
+            "length": 3
+          },
+          "non_mean_modes_retained": 1
+        }
+      ],
+      "grid_returns_empty_for_nonpositive": true,
+      "wavenumbers_raises_at_zero": true,
+      "zero_non_mean_modes_at": [
+        -8,
+        -1,
+        1,
+        2
+      ]
+    }
+  },
+  "banked_numbers_at_risk": 0
+}
