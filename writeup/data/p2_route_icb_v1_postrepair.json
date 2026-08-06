@@ -1,0 +1,365 @@
+{
+  "gate": {
+    "a_battery_rejects_every_case": true,
+    "answer": "YES",
+    "b_kawahara_zero_regression": true,
+    "verbatim": "Post-repair, does solver/interval_certificate.py (a) correctly reject every case in leg 98's original fabrication battery, and (b) still reproduce leg 61's Kawahara known-answer gate with zero regression?"
+  },
+  "leg": 105,
+  "part_a_battery": {
+    "gate_a_answer": true,
+    "postrepair_false_accept_cases": [],
+    "postrepair_load_bearing_cases": [],
+    "postrepair_totals": {
+      "cases": 39,
+      "false_accepts": 0,
+      "false_accepts_load_bearing": 0,
+      "hypothesis_violating": 36,
+      "raised": 7,
+      "rejected": 29
+    },
+    "prerepair_reproduces_leg98_exactly": true,
+    "prerepair_totals": {
+      "cases": 39,
+      "false_accepts": 12,
+      "false_accepts_load_bearing": 8,
+      "hypothesis_violating": 36,
+      "raised": 4,
+      "rejected": 20
+    }
+  },
+  "part_b_kawahara_bitwise": {
+    "all_bit_identical": true,
+    "n_bit_identical": 22,
+    "n_fields": 22,
+    "rows": [
+      {
+        "bit_identical": true,
+        "field": "constants.Y0",
+        "post": 2.9616446211384186e-17,
+        "pre": 2.9616446211384186e-17
+      },
+      {
+        "bit_identical": true,
+        "field": "constants.Z1",
+        "post": 3.0229505862294253e-13,
+        "pre": 3.0229505862294253e-13
+      },
+      {
+        "bit_identical": true,
+        "field": "constants.Z2",
+        "post": 8545.454087924725,
+        "pre": 8545.454087924725
+      },
+      {
+        "bit_identical": true,
+        "field": "constants.A_norm",
+        "post": 2.983405905101981,
+        "pre": 2.983405905101981
+      },
+      {
+        "bit_identical": true,
+        "field": "constants.B",
+        "post": 1432.1641707068713,
+        "pre": 1432.1641707068713
+      },
+      {
+        "bit_identical": true,
+        "field": "verdict.closes",
+        "post": true,
+        "pre": true
+      },
+      {
+        "bit_identical": true,
+        "field": "verdict.budget",
+        "post": 5.851064143053903e-05,
+        "pre": 5.851064143053903e-05
+      },
+      {
+        "bit_identical": true,
+        "field": "verdict.Y0_over_budget",
+        "post": 5.061719626940577e-13,
+        "pre": 5.061719626940577e-13
+      },
+      {
+        "bit_identical": true,
+        "field": "verdict.r_min",
+        "post": 2.962169675362552e-17,
+        "pre": 2.962169675362552e-17
+      },
+      {
+        "bit_identical": true,
+        "field": "verdict.r_max",
+        "post": 0.00011702128286111346,
+        "pre": 0.00011702128286111346
+      },
+      {
+        "bit_identical": true,
+        "field": "conversion.to_Hl",
+        "post": 223.83029285599574,
+        "pre": 223.83029285599574
+      },
+      {
+        "bit_identical": true,
+        "field": "conversion.to_l2_l",
+        "post": 22.383029285599562,
+        "pre": 22.383029285599562
+      },
+      {
+        "bit_identical": true,
+        "field": "conversion.sup_l_over_w",
+        "post": 1.000000000000007,
+        "pre": 1.000000000000007
+      },
+      {
+        "bit_identical": true,
+        "field": "conversion.sqrt_Omega0",
+        "post": 10.000000000000004,
+        "pre": 10.000000000000004
+      },
+      {
+        "bit_identical": true,
+        "field": "Y0_Hl",
+        "post": 6.629057828847969e-15,
+        "pre": 6.629057828847969e-15
+      },
+      {
+        "bit_identical": true,
+        "field": "r_min_w",
+        "post": 2.962169675362552e-17,
+        "pre": 2.962169675362552e-17
+      },
+      {
+        "bit_identical": true,
+        "field": "r_min_l2_l",
+        "post": 6.630233059255496e-16,
+        "pre": 6.630233059255496e-16
+      },
+      {
+        "bit_identical": true,
+        "field": "r_min_Hl",
+        "post": 6.630233059255499e-15,
+        "pre": 6.630233059255499e-15
+      },
+      {
+        "bit_identical": true,
+        "field": "r_max_Hl",
+        "post": 0.026192908013187337,
+        "pre": 0.026192908013187337
+      },
+      {
+        "bit_identical": true,
+        "field": "float_residual_sup",
+        "post": 1.3010426069826053e-18,
+        "pre": 1.3010426069826053e-18
+      },
+      {
+        "bit_identical": true,
+        "field": "newton_history",
+        "post": [
+          0.011931238158075314,
+          0.001544887309976901,
+          0.00020084644675451725,
+          1.0109501885075499e-05,
+          1.778065427011921e-08,
+          9.598138256405875e-14,
+          1.734723475976807e-18,
+          1.3010426069826053e-18
+        ],
+        "pre": [
+          0.011931238158075314,
+          0.001544887309976901,
+          0.00020084644675451725,
+          1.0109501885075499e-05,
+          1.778065427011921e-08,
+          9.598138256405875e-14,
+          1.734723475976807e-18,
+          1.3010426069826053e-18
+        ]
+      },
+      {
+        "bit_identical": true,
+        "field": "coefficients (Newton solution vector)",
+        "post": "<omitted, array>",
+        "pre": "<omitted, array>"
+      }
+    ]
+  },
+  "part_b_kawahara_full_post": {
+    "Y0_Hl": 6.629057828847969e-15,
+    "coefficients": null,
+    "constants": {
+      "A_norm": 2.983405905101981,
+      "B": 1432.1641707068713,
+      "Y0": 2.9616446211384186e-17,
+      "Z1": 3.0229505862294253e-13,
+      "Z2": 8545.454087924725,
+      "rigorous": true
+    },
+    "conversion": {
+      "modes_whole_line": 501,
+      "sqrt_Omega0": 10.000000000000004,
+      "sup_l_over_w": 1.000000000000007,
+      "to_Hl": 223.83029285599574,
+      "to_l2_l": 22.383029285599562
+    },
+    "float_residual_sup": 1.3010426069826053e-18,
+    "newton_history": [
+      0.011931238158075314,
+      0.001544887309976901,
+      0.00020084644675451725,
+      1.0109501885075499e-05,
+      1.778065427011921e-08,
+      9.598138256405875e-14,
+      1.734723475976807e-18,
+      1.3010426069826053e-18
+    ],
+    "params": {
+      "N": 250,
+      "T": 0.35,
+      "c": 0.9,
+      "d": 50.0,
+      "lam1": -0.08333333333333305,
+      "lam2": 0.08298611111111115,
+      "lam3": 7.500000000000002
+    },
+    "published": {
+      "DFinv_published": 4.4,
+      "N": 250,
+      "T": 0.35,
+      "Y0_published": 2.26e-14,
+      "c": 0.9,
+      "d": 50.0,
+      "r0_published": 2.27e-14,
+      "r_uniqueness_published": 0.015,
+      "source": "Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6 / ProofKawahara.jl"
+    },
+    "r_max_Hl": 0.026192908013187337,
+    "r_min_Hl": 6.630233059255499e-15,
+    "r_min_l2_l": 6.630233059255496e-16,
+    "r_min_w": 2.962169675362552e-17,
+    "trace_projected": false,
+    "verdict": {
+      "Y0_over_budget": 5.061719626940577e-13,
+      "budget": 5.851064143053903e-05,
+      "closes": true,
+      "r_max": 0.00011702128286111346,
+      "r_min": 2.962169675362552e-17,
+      "reason": "ok"
+    }
+  },
+  "part_b_kawahara_full_pre": {
+    "Y0_Hl": 6.629057828847969e-15,
+    "coefficients": null,
+    "constants": {
+      "A_norm": 2.983405905101981,
+      "B": 1432.1641707068713,
+      "Y0": 2.9616446211384186e-17,
+      "Z1": 3.0229505862294253e-13,
+      "Z2": 8545.454087924725,
+      "rigorous": true
+    },
+    "conversion": {
+      "modes_whole_line": 501,
+      "sqrt_Omega0": 10.000000000000004,
+      "sup_l_over_w": 1.000000000000007,
+      "to_Hl": 223.83029285599574,
+      "to_l2_l": 22.383029285599562
+    },
+    "float_residual_sup": 1.3010426069826053e-18,
+    "newton_history": [
+      0.011931238158075314,
+      0.001544887309976901,
+      0.00020084644675451725,
+      1.0109501885075499e-05,
+      1.778065427011921e-08,
+      9.598138256405875e-14,
+      1.734723475976807e-18,
+      1.3010426069826053e-18
+    ],
+    "params": {
+      "N": 250,
+      "T": 0.35,
+      "c": 0.9,
+      "d": 50.0,
+      "lam1": -0.08333333333333305,
+      "lam2": 0.08298611111111115,
+      "lam3": 7.500000000000002
+    },
+    "published": {
+      "DFinv_published": 4.4,
+      "N": 250,
+      "T": 0.35,
+      "Y0_published": 2.26e-14,
+      "c": 0.9,
+      "d": 50.0,
+      "r0_published": 2.27e-14,
+      "r_uniqueness_published": 0.015,
+      "source": "Cadiot-Lessard-Nave arXiv:2302.12877 Thm 6.6 / ProofKawahara.jl"
+    },
+    "r_max_Hl": 0.026192908013187337,
+    "r_min_Hl": 6.630233059255499e-15,
+    "r_min_l2_l": 6.630233059255496e-16,
+    "r_min_w": 2.962169675362552e-17,
+    "trace_projected": false,
+    "verdict": {
+      "Y0_over_budget": 5.061719626940577e-13,
+      "budget": 5.851064143053903e-05,
+      "closes": true,
+      "r_max": 0.00011702128286111346,
+      "r_min": 2.962169675362552e-17,
+      "reason": "ok"
+    }
+  },
+  "part_c_known_answer_gate": {
+    "Z1_below_one": true,
+    "certified_interval_Hl": [
+      6.630233059255499e-15,
+      0.026192908013187337
+    ],
+    "closes": true,
+    "decades_below_r0": 0.5344970626390779,
+    "decades_budget": 1.0,
+    "gate_16_would_pass": true,
+    "published_window": [
+      2.27e-14,
+      0.015
+    ],
+    "r0_is_a_certified_radius": true,
+    "reaches_uniqueness_ball": true,
+    "within_decades_budget": true
+  },
+  "part_d_banked_json_crosscheck_informational_only": {
+    "Y0_ratio_current_over_banked": 0.9792983212191326,
+    "available": true,
+    "banked_Y0": 3.024251708561549e-17,
+    "banked_commit": "leg 61, 83099a8 -- BEFORE this leg's repair AND before leg 69's solver/interval.py repair",
+    "banked_r_min_w": 3.024531142212289e-17,
+    "current_Y0": 2.9616446211384186e-17,
+    "current_r_min_w": 2.962169675362552e-17,
+    "note": "NOT a regression signal and NOT part of this leg's gate. sec 3 of writeup/novelty/leg_105.md shows this same ~2%-magnitude gap exists even between the LITERAL leg-61-original source (re-run today) and the committed JSON -- i.e. it predates both the interval.py and the interval_certificate.py repairs and is attributable to environment (BLAS/LAPACK) sensitivity of a Y_0 ~ 3e-17 quantity sitting at the float64 noise floor of a fully-converged Newton iterate, not to either repair. The bitwise same-process differential in Part B is this leg's actual zero-regression evidence.",
+    "r_min_ratio_current_over_banked": 0.9793814432989694
+  },
+  "prerepair_meta": {
+    "interval_py_changed_since_prerepair_rev": false,
+    "prerepair_has_certificate_input_error": false,
+    "prerepair_lines": 999,
+    "prerepair_rev": "3e523862627ee215e5faa2a305a209c098b6db90^1",
+    "prerepair_sha256": "98431b0d523de56f124b53ee85b8f1b8efe320a2c9d807e0e13f2a58e48f591f",
+    "repair_merge_commit": "3e523862627ee215e5faa2a305a209c098b6db90"
+  },
+  "question": "Post-repair, does solver/interval_certificate.py (a) correctly reject every case in leg 98's original fabrication battery, and (b) still reproduce leg 61's Kawahara known-answer gate with zero regression?",
+  "route": "ICB",
+  "static_diff": {
+    "lines_added": 240,
+    "lines_removed": 2,
+    "new_top_level_defs": [
+      "CertificateInputError",
+      "_containment_screen",
+      "_hypothesis_violations"
+    ],
+    "post_lines": 1237,
+    "pre_lines": 999,
+    "removed_top_level_defs": []
+  }
+}
