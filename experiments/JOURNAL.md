@@ -3185,3 +3185,13 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   sibling routine encloses at 0 eta on identical input). Severity LATENT: live
   minimum row mass sits 292.9 decades above the failing band, 0 banked numbers
   wrong. Module unpatched, branch leg/201-ica2-v1 pushed.
+- **Leg 204 (Route-TNA2) — YES, ESCALATED (parked, not merged):** target_norm.py's
+  domain guard windows on max|X| rather than the true data interval, so an
+  asymmetric grid silently extrapolates 535 of 16384 theta-samples while reporting
+  n_outside_grid=0 and domain_valid=True -- yields p=-0.0889 against exact 1.4
+  (386x systematic error, wrong sign), defeating three legs' (55/84/94) worth of
+  prior guard work while reporting clean. Three more silent-wrong mechanisms found
+  (frac_outside_grid threading, a negative analytic_tail bound with finite=True,
+  fit_exponent overstating n_points 3.0x when dropping NaN bins). 0 of 7 mechanisms
+  reachable from the banked call path -- leg 55's +0.394/+0.094 margins
+  uncontaminated. Module unpatched, branch leg/204-tna2-v1 pushed.
