@@ -1,0 +1,482 @@
+{
+  "leg": 91,
+  "route": "FGA",
+  "n": 512,
+  "nu": 0.001,
+  "amp_factor": 3000.0,
+  "title": "adversarial audit of fractional_gclm.py's critical-exponent path",
+  "not_a_physics_measurement": "s_c = alpha/2 is validated against XU eq (6.3) and PRE-EMPTED (Route-J). Nothing here re-measures or contests it. Every number is code behaviour under invalid input.",
+  "A1_pure_functions": {
+    "rows": [
+      {
+        "fn": "critical_s",
+        "case": "alpha = -1 (negative decay exponent)",
+        "arg": "-1.0",
+        "returned": -0.5,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "critical_s",
+        "case": "alpha = 0 (degenerate)",
+        "arg": "0.0",
+        "returned": 0.0,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "critical_s",
+        "case": "alpha = NaN",
+        "arg": "nan",
+        "returned": "nan",
+        "exception": null,
+        "warnings": [],
+        "finite": false
+      },
+      {
+        "fn": "critical_s",
+        "case": "alpha = +inf",
+        "arg": "inf",
+        "returned": "inf",
+        "exception": null,
+        "warnings": [],
+        "finite": false
+      },
+      {
+        "fn": "critical_s",
+        "case": "alpha = '0.8' (a STRING)",
+        "arg": "0.8",
+        "returned": 0.4,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "relevance_exponent",
+        "case": "s = -0.5 (invalid: sigma = 2s < 0)",
+        "arg": "s=-0.5, alpha=1.0",
+        "returned": 2.0,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "relevance_exponent",
+        "case": "s = -2.0 (invalid)",
+        "arg": "s=-2.0, alpha=1.0",
+        "returned": 5.0,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "relevance_exponent",
+        "case": "s = NaN",
+        "arg": "s=nan, alpha=1.0",
+        "returned": "nan",
+        "exception": null,
+        "warnings": [],
+        "finite": false
+      },
+      {
+        "fn": "relevance_exponent",
+        "case": "s = 1e6 (far above any admissible s)",
+        "arg": "s=1000000.0, alpha=1.0",
+        "returned": -1999999.0,
+        "exception": null,
+        "warnings": [],
+        "finite": true
+      },
+      {
+        "fn": "relevance_exponent",
+        "case": "alpha = 0 with valid s",
+        "arg": "s=0.35, alpha=0.0",
+        "returned": "-inf",
+        "exception": null,
+        "warnings": [],
+        "finite": false
+      }
+    ],
+    "n_cases": 10,
+    "n_silent_finite": 6
+  },
+  "A2_operator_construction": {
+    "rows": [
+      {
+        "s": 1.0,
+        "exception": null,
+        "warnings": [],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": 0.0,
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": false,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 65536.0,
+        "monotone_increasing_in_k": true,
+        "ratio_kmax_over_k1": 65536.0
+      },
+      {
+        "s": 0.35,
+        "exception": null,
+        "warnings": [],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": 0.0,
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": false,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 48.50293012833273,
+        "monotone_increasing_in_k": true,
+        "ratio_kmax_over_k1": 48.50293012833273
+      },
+      {
+        "s": 0.0,
+        "exception": null,
+        "warnings": [],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": 1.0,
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": false,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 1.0,
+        "monotone_increasing_in_k": true,
+        "ratio_kmax_over_k1": 1.0
+      },
+      {
+        "s": -0.5,
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": "inf",
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": true,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 0.00390625,
+        "monotone_increasing_in_k": false,
+        "ratio_kmax_over_k1": 0.00390625
+      },
+      {
+        "s": -2.0,
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": "inf",
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": true,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 2.3283064365386963e-10,
+        "monotone_increasing_in_k": false,
+        "ratio_kmax_over_k1": 2.3283064365386963e-10
+      },
+      {
+        "s": "nan",
+        "exception": null,
+        "warnings": [],
+        "visc_all_finite": false,
+        "visc_k0_raw_before_mask": "nan",
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": true,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": "nan",
+        "monotone_increasing_in_k": false,
+        "ratio_kmax_over_k1": "nan"
+      },
+      {
+        "s": 60.0,
+        "exception": null,
+        "warnings": [],
+        "visc_all_finite": true,
+        "visc_k0_raw_before_mask": 0.0,
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": false,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": 9.7453140114e+288,
+        "monotone_increasing_in_k": true,
+        "ratio_kmax_over_k1": 9.7453140114e+288
+      },
+      {
+        "s": 200.0,
+        "exception": null,
+        "warnings": [
+          "overflow encountered in power"
+        ],
+        "visc_all_finite": false,
+        "visc_k0_raw_before_mask": 0.0,
+        "visc_k0_after_mask": 0.0,
+        "mask_hid_a_nonfinite_k0": false,
+        "visc_at_k1": 1.0,
+        "visc_at_kmax": "inf",
+        "monotone_increasing_in_k": false,
+        "ratio_kmax_over_k1": "inf"
+      }
+    ],
+    "k_max": 256.0,
+    "s_overflow_wall": 64.0,
+    "n": 512
+  },
+  "A3_pipeline": {
+    "rows": [
+      {
+        "s": 0.35,
+        "nu": 0.001,
+        "outcome": "under_resolved",
+        "steps": 435,
+        "T_est": 3.343539853057014,
+        "p": 0.4948162270066669,
+        "n_fit_points": 29,
+        "fit_rms": 0.0627920191525778,
+        "max_tail": 0.01024862703896233,
+        "p_finite": true,
+        "exception": null,
+        "warnings": [],
+        "seconds": 0.98,
+        "case": "CONTROL: valid s",
+        "invalid_input": false
+      },
+      {
+        "s": 0.0,
+        "nu": 0.001,
+        "outcome": "under_resolved",
+        "steps": 440,
+        "T_est": 3.343903074838112,
+        "p": 1.2310897607746367,
+        "n_fit_points": 28,
+        "fit_rms": 0.07608618991297002,
+        "max_tail": 0.014883315210885675,
+        "p_finite": true,
+        "exception": null,
+        "warnings": [],
+        "seconds": 1.11,
+        "case": "CONTROL: s = 0, literature's admissible floor",
+        "invalid_input": false
+      },
+      {
+        "s": -0.5,
+        "nu": 0.001,
+        "outcome": "under_resolved",
+        "steps": 440,
+        "T_est": 3.344437135899129,
+        "p": 2.1864010046627684,
+        "n_fit_points": 28,
+        "fit_rms": 0.11378073452535761,
+        "max_tail": 0.014250036243876345,
+        "p_finite": true,
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "seconds": 0.95,
+        "case": "negative s (invalid, sigma = 2s < 0)",
+        "invalid_input": true
+      },
+      {
+        "s": -2.0,
+        "nu": 0.001,
+        "outcome": "under_resolved",
+        "steps": 440,
+        "T_est": 3.344609307248885,
+        "p": 3.248145808015028,
+        "n_fit_points": 28,
+        "fit_rms": 0.1424349134539419,
+        "max_tail": 0.013998670086471945,
+        "p_finite": true,
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "seconds": 0.94,
+        "case": "strongly negative s (invalid)",
+        "invalid_input": true
+      },
+      {
+        "s": 60.0,
+        "nu": 0.001,
+        "outcome": "max_steps",
+        "steps": 20000,
+        "T_est": "nan",
+        "p": "nan",
+        "n_fit_points": 0,
+        "fit_rms": "nan",
+        "max_tail": 2.3533366674243727e-38,
+        "p_finite": false,
+        "exception": null,
+        "warnings": [],
+        "seconds": 57.8,
+        "case": "s just under the float64 wall",
+        "invalid_input": true
+      },
+      {
+        "s": 200.0,
+        "nu": 0.001,
+        "outcome": "max_steps",
+        "steps": 20000,
+        "T_est": "nan",
+        "p": "nan",
+        "n_fit_points": 0,
+        "fit_rms": "nan",
+        "max_tail": 2.3533366674243727e-38,
+        "p_finite": false,
+        "exception": null,
+        "warnings": [
+          "invalid value encountered in irfft",
+          "invalid value encountered in multiply",
+          "overflow encountered in power"
+        ],
+        "seconds": 68.19,
+        "case": "s over the float64 wall (visc = inf)",
+        "invalid_input": true
+      },
+      {
+        "s": "nan",
+        "nu": 0.001,
+        "outcome": "diverged",
+        "steps": 1,
+        "T_est": "nan",
+        "p": "nan",
+        "n_fit_points": 0,
+        "fit_rms": "nan",
+        "max_tail": 0.0,
+        "p_finite": false,
+        "exception": null,
+        "warnings": [],
+        "seconds": 0.02,
+        "case": "s = NaN",
+        "invalid_input": true
+      }
+    ],
+    "n_silent_finite_p": 2,
+    "n_refused": 3,
+    "silent_s_values": [
+      -0.5,
+      -2.0
+    ],
+    "refused_s_values": [
+      60.0,
+      200.0,
+      "nan"
+    ]
+  },
+  "A4_sc_contamination": {
+    "clean_s_values": [
+      0.15,
+      0.25,
+      0.35,
+      0.45,
+      0.55,
+      0.65,
+      0.75
+    ],
+    "clean_p_values": [
+      0.902590997774264,
+      0.6857919437754333,
+      0.4948162270066669,
+      0.3037478943916543,
+      0.10588113426776592,
+      -0.0957412347474913,
+      -0.28952130579895774
+    ],
+    "clean_slope": -1.9744065573230045,
+    "clean_zero": 0.602491799107393,
+    "contaminations": [
+      {
+        "s_injected": -0.5,
+        "p_injected": 2.1864010046627684,
+        "p_injected_finite": true,
+        "outcome": "under_resolved",
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "contaminated_slope": -1.9818930757318223,
+        "contaminated_zero": 0.6020748185731805,
+        "shift": -0.0004169805342125743,
+        "shift_percent": -0.06920932945981034,
+        "propagated_or_flagged": false
+      },
+      {
+        "s_injected": -2.0,
+        "p_injected": 3.248145808015028,
+        "p_injected_finite": true,
+        "outcome": "under_resolved",
+        "exception": null,
+        "warnings": [
+          "divide by zero encountered in power"
+        ],
+        "contaminated_slope": -1.2419326766541574,
+        "contaminated_zero": 0.6828000996311026,
+        "shift": 0.08030830052370952,
+        "shift_percent": 13.3293599419425,
+        "propagated_or_flagged": false
+      }
+    ]
+  },
+  "A5_dissipation_strength": {
+    "rows": [
+      {
+        "s": 0.35,
+        "nu": "nan",
+        "outcome": "diverged",
+        "steps": 1,
+        "T_est": "nan",
+        "p": "nan",
+        "n_fit_points": 0,
+        "fit_rms": "nan",
+        "max_tail": 0.0,
+        "p_finite": false,
+        "exception": null,
+        "warnings": [],
+        "seconds": 0.0,
+        "case": "nu = NaN (the gate's NaN poisoning)",
+        "p_vs_control_percent": "nan"
+      },
+      {
+        "s": 0.35,
+        "nu": "inf",
+        "outcome": "diverged",
+        "steps": 1,
+        "T_est": "nan",
+        "p": "nan",
+        "n_fit_points": 0,
+        "fit_rms": "nan",
+        "max_tail": 0.0,
+        "p_finite": false,
+        "exception": null,
+        "warnings": [
+          "invalid value encountered in multiply"
+        ],
+        "seconds": 0.0,
+        "case": "nu = +inf",
+        "p_vs_control_percent": "nan"
+      },
+      {
+        "s": 0.35,
+        "nu": -0.001,
+        "outcome": "under_resolved",
+        "steps": 440,
+        "T_est": 3.3339163818819024,
+        "p": 0.5264038752129894,
+        "n_fit_points": 28,
+        "fit_rms": 0.06042056180609155,
+        "max_tail": 0.013591435145333595,
+        "p_finite": true,
+        "exception": null,
+        "warnings": [],
+        "seconds": 0.92,
+        "case": "nu = -1e-3 (anti-dissipation)",
+        "p_vs_control_percent": 6.383713080189039
+      }
+    ],
+    "control_p": 0.4948162270066669,
+    "n_silent_finite_p": 1
+  },
+  "gate": {
+    "question": "Under an adversarial battery (negative s, s above the model's admissible threshold, NaN-poisoned dissipation strength), does solver/fractional_gclm.py's critical-exponent computation ever silently return a finite, plausible-looking s_c instead of propagating or flagging the invalid input?",
+    "answer": "yes"
+  },
+  "seconds": 141.2
+}
