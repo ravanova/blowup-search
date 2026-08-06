@@ -6895,3 +6895,141 @@ Escalation #1 ("what comes next now that `B` is exhausted, 6.04x short of a perf
 stays with the user; this cycle's ten slots are all exploration legs precisely because no
 critical-path stage exists to fill LEG-A with. Nothing in this cycle lifts a ban, resolves
 any parked escalation, or moves any claim about Walls 1 and 2; Clay stays ~0.05%.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — a busy round: 190 landed, 188 and 199
+escalated (not merged), three refills, escalation #4's scope corrected
+
+**190 (EGML) landed on `main` — gate YES, with a self-correction.** Re-verifying the EGM
+citation from the actual arXiv LaTeX e-print (not just the PDF) found that leg 190's OWN
+prior novelty pass had the bracket sign backwards — the correct form DEGRADES with `|a|`,
+not improves. Identical at `a=0`, so **zero banked numbers move**. It flags 5 out-of-territory
+sites (in leg 141's and leg 165's own journal prose) that still carry the wrong-sign bracket
+— not patched under leg 190's own authority (out of territory, cosmetic, not urgent). Drafted
+below as reserve leg **214 (EGMB)** so this doesn't get lost as a someday-maybe.
+
+**188 (SURV) escalated, not merged** (`leg/188-surv-v1` pushed, `main` untouched). Gate:
+**(a) FORCED, (b) NO** — but the framing this DM corrected earlier in this file still had a
+SECOND false premise, now found and corrected by the leg's own honest work: only 2 of the 5
+named sites are actual dealiasing masks (`solver/boussinesq.py` and one other), and leg 129
+already strictifies BOTH of them — so there is no "adopt it for `boussinesq.py` alone, leaving
+four other modules inconsistent" scenario as this DM's prior correction (above, § 188) framed
+it. **The real new fact, replacing that framing:** leg 129's actual blast radius is WIDER than
+escalation #4's original scope, not narrower — four solver modules consume the two masks
+leg 129 touches (`solver/gclm.py`, `solver/fractional_gclm.py`,
+`solver/fractional_boussinesq.py`, `solver/boussinesq.py`), and critically,
+**`solver/gclm.py` currently has NO grid guard at all** — `solve_gclm(n=3)` runs clean today
+and would raise post-repair. **Escalation #4's ruling is therefore now about a 4-module
+refusal boundary (one of which, `gclm.py`, goes from "unguarded, silently accepts `n=3`" to
+"raises" for the first time, not just a verdict flip on an existing guard), not a single
+Boussinesq verdict as previously stated.** This supersedes this DM's own prior correction to
+§ 188 above for the SCOPE-of-escalation-#4 question specifically (that correction's math —
+the strict-rule-forced question — stands; only the "boussinesq.py alone" framing was itself
+still wrong, per the leg's own finding). Recorded in `PROGRESS.md`'s NEEDS YOU per the
+orchestrator; this DM does not rule on it.
+
+**199 (CGA) escalated, not merged** (`leg/199-cga-v1` pushed, `main` untouched). Real finding:
+`certificate_guards.py` silently accepts 16/67 adversarial inputs across 4 latent mechanisms.
+Headline: `alpha=-inf` slips through `nk_bounds.py`'s guard (the only one of 5 guards missing
+an `isinf` test) and produces NaN bounds with no exception raised. **0 banked numbers
+impeached** — all 8 live call sites use finite alphas in `[1.1, 1.8]`, nowhere near the
+failure band. A real latent defect in load-bearing guard code, not a banked-result problem;
+the leg's own report states the fix is a one-line `isinf` check. Drafted below as reserve leg
+**215 (CGR)**, following the repair-leg precedent (150–154), so this doesn't get lost either.
+
+**Live-slot roster, corrected to match the orchestrator's report (three refills this round,
+all from the pre-existing 203/204/205 reserve, which is now fully drained — the fresh 206–213
+batch is untouched and available for the next vacancy):**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 187 | M2CI | live (unchanged) |
+| C | 201 | ICA2 | live (unchanged) |
+| D | 203 | RSA | **live, newly promoted — replaces 188 (escalated, OFF roster)** |
+| E | 205 | BVR | **live, newly promoted — replaces 190 (landed, OFF roster)** |
+| F | 200 | PCA | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 197 | VNL | live (unchanged) |
+| I | 198 | BHA | live (unchanged) |
+| J | 204 | TNA2 | **live, newly promoted — replaces 199 (escalated, OFF roster)** |
+
+188 and 199 hold no slot — both are parked/escalated on their own unmerged branches, per the
+orchestrator's report, not landed and not live.
+
+```
+### 214 — ROUTE-EGMB: MECHANICAL BRACKET-SIGN REWORK, THE 5 OUT-OF-TERRITORY SITES LEG 190
+FLAGGED (RESERVE)
+**Thesis.** Leg 190's own self-correction (re-verifying EGM from the arXiv LaTeX e-print, not
+just the PDF) found the correct bracket form degrades with `|a|`, not improves as leg 190's
+own PRIOR novelty pass had it — identical at `a=0`, so no banked number is at risk, but 5
+sites in leg 141's and leg 165's own journal prose still carry the wrong-sign bracket. Leg
+190 correctly declined to patch these (out of its own declared territory) and flagged them
+instead. This leg does the mechanical fix: locate the 5 sites precisely, quote each verbatim
+before and after, confirm the corrected form matches the arXiv LaTeX source exactly, and fix
+only the bracket sign — no other claim in either journal file is touched.
+**Gate.** Do all 5 flagged sites (in leg 141's and leg 165's own journal/prose files) now
+state the bracket form correctly (degrades with `|a|`), matching the arXiv LaTeX source, with
+every other claim in those files byte-for-byte unchanged?
+  yes -> Bank the correction; confirm via diff that nothing else in either file moved.
+  no  -> Report exactly which site resisted the mechanical fix and why (e.g. the sign
+         appears in a derived, not verbatim, form) — escalate rather than force a fix that
+         changes the surrounding claim.
+**Territory.** The 5 specific files/lines leg 190 named (located by this leg from leg 190's
+               own report, not re-searched from scratch), writeup/novelty/leg_214.md,
+               experiments/journal/leg_214.md. Does not touch solver/literature_gates.py
+               (leg 190's own row is already correct, per its report — only the 5 PROSE sites
+               are wrong).
+**Difficulty.** light
+**Independence.** Prose-only, mechanical, no solver module, no banked number changed (leg
+190's own report: identical at a=0). Disjoint from every other live/reserve leg. Reserve —
+promote once a slot frees; not urgent (cosmetic per leg 190's own characterization) but
+cheap and worth closing before it's forgotten.
+```
+
+```
+### 215 — ROUTE-CGR: REPAIR certificate_guards.py's MISSING isinf TEST (leg 199's finding)
+(RESERVE)
+**Thesis.** Leg 199 (CGA) found `certificate_guards.py` silently accepts 16/67 adversarial
+inputs across 4 latent mechanisms, the headline being `alpha=-inf` slipping through
+`nk_bounds.py`'s guard (the only one of this module's 5 guards missing an `isinf` test),
+producing NaN bounds with no exception. 0 banked numbers are impeached (all 8 live call sites
+use finite alphas in `[1.1, 1.8]`), and leg 199's own report states the fix is a one-line
+`isinf` check. Same shape as the repair-family precedent (150–154): repair the named defect,
+do not re-litigate the finding leg's own measurement.
+**Gate.** Does adding the missing `isinf` check to `nk_bounds.py`'s guard (per leg 199's own
+identified mechanism) cause all 16 previously-silently-accepted adversarial cases to now
+raise/reject, while every one of the 8 live call sites (finite alphas in `[1.1, 1.8]`)
+remains bit-identical to its pre-repair banked value?
+  yes -> Bank the repair; this closes leg 199's own finding cleanly. Flag for a
+         postrepair-verification leg (same pattern as 169/170/147 etc.) once a slot is
+         available.
+  no  -> Report exactly which case still slips through or which live call site's value
+         moved; escalate rather than declare the repair complete on a partial fix.
+**Territory.** solver/nk_bounds.py (ONE guard clause, the missing `isinf` check leg 199
+               identified — no other guard or module touched),
+               experiments/p2_route_cgr_v1_repair.py,
+               writeup/data/p2_route_cgr_v1_repair.json,
+               writeup/novelty/leg_215.md, experiments/journal/leg_215.md.
+**Difficulty.** standard
+**Independence.** One-clause repair to a module named precisely by leg 199's own closed
+report; does not touch `certificate_guards.py` itself (leg 199's read-only territory,
+closed) or any other guard. Disjoint from every other live/reserve leg. Reserve — promote
+once a slot frees; not urgent (0 banked numbers at risk per leg 199's own report) but a real
+defect worth closing.
+```
+
+**Reserve queue: 10 undispatched legs (206, 207, 208, 209, 210, 211, 212, 213, 214, 215).**
+203/204/205 are now promoted (off reserve, onto the live roster above); 214/215 are new,
+drafted from this round's two escalation findings even though the watermark was not hit
+(11 → 10 after the three promotions, comfortably above 3) — both are cheap, concrete, and
+would otherwise only exist as a stray mention in a coordinator message. Promotion order for
+the next vacancy, unchanged in spirit from the prior ranking (all comparable-weight
+exploration legs; no gate answer since has changed the picture): 206 (GSA), 207 (DPA), 208
+(TSA), 209 (SCA2), 210 (M2SV), 211 (XU11), 212 (USC2V), 213 (LGC2), then 214 (EGMB) and 215
+(CGR) whenever a repair/mechanical-fix-shaped slot is preferred over a fresh audit.
+
+Nothing in this update lifts a ban. Escalations #4 (leg 129/188, now scope-corrected) and the
+new CGA finding (leg 199) both stay with the user via `PROGRESS.md`'s NEEDS YOU — this DM
+rules on neither. No claim about Walls 1 and 2 moves; Clay stays ~0.05%.
