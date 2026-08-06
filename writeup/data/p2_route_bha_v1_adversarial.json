@@ -1,0 +1,1975 @@
+{
+  "leg": 198,
+  "route": "BHA",
+  "module_under_test": "solver/bordered_hl.py",
+  "module_commits_ever": 1,
+  "scope": "the CERTIFICATE-CONSTANTS path and the matching condition; newton()'s converged flag is leg 80's subject and is OUT of scope",
+  "gate": {
+    "answer": "YES",
+    "primary_mechanism": "certificate_constants / induced_sup_norm accept a NEGATIVE scalar border weight without any check. The induced norm is computed as max_i w_row_i * sum_j |M_ij| / w_col_j; a negative w_col_j makes the inner sum negative, np.max selects it, and a NEGATIVE 'operator norm' is returned. The call returns normally, emits no warning, and every value is finite.",
+    "n_silent_wrong_weight_cases": 3,
+    "n_weight_cases": 15,
+    "positive_weight_control": "0/200 random POSITIVE-weight draws produced a negative constant",
+    "worst_case": {
+      "case": "w_r=-1e-6",
+      "Z1": 2.3306877491184455e-14,
+      "Z2": -17794560.52545428,
+      "A_norm": 0.33413005881520325,
+      "B": -26628194.70440983,
+      "Z1_understated_x": 204222.72517743992,
+      "A_norm_understated_x": 2751535.8575099306,
+      "negative_norms": [
+        "B",
+        "Z2"
+      ],
+      "radii_root": 2.217256462314402e-11
+    },
+    "secondary_mechanisms": [
+      "velocity_matrix accepts a permuted/non-monotone grid silently (the exact gap leg 152 closed in solver/hl_rescaled.py)",
+      "BorderedHL(pin=...) silently accepts and truncates a pin of arity > 3",
+      "tail_exponent silently DROPS NaN samples via its |f| > 0 mask and returns a plausible exponent",
+      "tail_exponent returns a finite slope on duplicate abscissas, where no slope exists"
+    ],
+    "clean_families": [
+      "A: Z_1 is a real check on a planted approximate inverse",
+      "C: the degenerate/near-singular matching condition VISIBLY propagates -- Y_0 explodes rather than shrinking",
+      "D: poisoned states propagate through the estimator",
+      "F: the exact-quadratic identity holds and is discriminating"
+    ],
+    "escalated": true,
+    "module_edited": false
+  },
+  "silent_wrong_predicate": "returns normally AND emits no warning AND every returned value is finite AND the value is materially wrong (for a norm: understated, or negative)",
+  "seed": 20260806,
+  "n_grid": 101,
+  "rho_max": 8.0,
+  "numpy_version": "2.5.1",
+  "baseline": {
+    "newton_converged": true,
+    "final_residual": 7.424616477180734e-15,
+    "constants": {
+      "Y0": 2.2176938727390236e-11,
+      "Z1": 4.759794036626423e-09,
+      "Z2": 30861683410.931065,
+      "A_norm": 919370.8379019338,
+      "B": 16784.132223162258,
+      "Uop_norm": 627.5972559212385,
+      "H_norm": 6.543439127435734,
+      "D_norm": 26.6449521916808,
+      "w_l": 745.2394128947751,
+      "Xmax": 745.2394128947751
+    },
+    "radii_root": null,
+    "radii_root_note": "None means the honest radii polynomial has NO real root at this (n, p): the certificate does NOT close here. That is the documented ceiling (legs 46/47), and it is the reference against which family B's fabricated roots are read"
+  },
+  "A_planted_inverse": {
+    "min_Z1_rise_over_planted_cases": 21.994806202896232,
+    "what": "plant a corrupted approximate inverse A and ask whether Z_1 = ||I - A J|| notices; the control is the exact A, which must NOT be flagged",
+    "cases": [
+      {
+        "case": "A_exact (control)",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 4.759794036626423e-09,
+        "Z2": 30861683410.931065,
+        "A_norm": 919370.8379019338,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 1.0,
+        "radii_root": null,
+        "Z1_rise_x": 1.0,
+        "Z1_detects": false
+      },
+      {
+        "case": "A_scaled_1+1e-7",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176940945084083e-11,
+        "Z1": 1.0469074740129935e-07,
+        "Z2": 30861686497.09941,
+        "A_norm": 919370.9298390178,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 0.9999999000000112,
+        "Z1_understated_x": 0.045465278974284484,
+        "radii_root": null,
+        "Z1_rise_x": 21.994806202896232,
+        "Z1_detects": false
+      },
+      {
+        "case": "A_scaled_1.01",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2398708114664053e-11,
+        "Z1": 0.010000004893687504,
+        "Z2": 31170300245.040375,
+        "A_norm": 928564.5462809531,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 0.9900990099009939,
+        "Z1_understated_x": 4.759791707333103e-07,
+        "radii_root": null,
+        "Z1_rise_x": 2100932.270753287,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_halved",
+        "exception": null,
+        "warnings": [],
+        "Y0": 1.1088469363695118e-11,
+        "Z1": 0.5000000023798858,
+        "Z2": 15430841705.465532,
+        "A_norm": 459685.4189509669,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 2.0,
+        "Z1_understated_x": 9.51958802794178e-09,
+        "radii_root": null,
+        "Z1_rise_x": 105046562.63115714,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_doubled",
+        "exception": null,
+        "warnings": [],
+        "Y0": 4.435387745478047e-11,
+        "Z1": 1.0000000095195882,
+        "Z2": 61723366821.86213,
+        "A_norm": 1838741.6758038676,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 0.5,
+        "Z1_understated_x": 4.759793991315144e-09,
+        "radii_root": null,
+        "Z1_rise_x": 210093126.262319,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_zero",
+        "exception": null,
+        "warnings": [],
+        "Y0": 0.0,
+        "Z1": 1.0,
+        "Z2": 0.0,
+        "A_norm": 0.0,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": null,
+        "Z1_understated_x": 4.759794036626423e-09,
+        "radii_root": null,
+        "Z1_rise_x": 210093124.26231897,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_identity",
+        "exception": null,
+        "warnings": [],
+        "Y0": 7.424616477180734e-15,
+        "Z1": 746.2394128947751,
+        "Z2": 33568.264446324516,
+        "A_norm": 1.0,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 2986.94737910708,
+        "Z1_understated_x": 6.378373956640088e-12,
+        "radii_root": -0.04440142647746409,
+        "Z1_rise_x": 156779769702.74194,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_transposed",
+        "exception": null,
+        "warnings": [],
+        "Y0": 7.060279543420179e-12,
+        "Z1": 190861.45563485945,
+        "Z2": 2642140062.593087,
+        "A_norm": 78709.46282664854,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 3.1410850789977594,
+        "Z1_understated_x": 2.4938477079062378e-14,
+        "radii_root": -0.0001444741392305248,
+        "Z1_rise_x": 40098679515581.61,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_from_wrong_state",
+        "exception": null,
+        "warnings": [],
+        "Y0": 9.864720681674668e-12,
+        "Z1": 1447996.0057525276,
+        "Z2": 7432760550.983812,
+        "A_norm": 221422.24727968164,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 2.248106098795836,
+        "Z1_understated_x": 3.2871596452731545e-15,
+        "radii_root": -0.00038962509173279996,
+        "Z1_rise_x": 304214004767907.3,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_border_cols_zeroed",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.215673434501358e-11,
+        "Z1": 6055.1203263933685,
+        "Z2": 30784752344.0228,
+        "A_norm": 917079.0582053314,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 1.0009118844890246,
+        "Z1_understated_x": 7.860775310903714e-13,
+        "radii_root": -3.9331940711461774e-07,
+        "Z1_rise_x": 1272139147156.2554,
+        "Z1_detects": true
+      },
+      {
+        "case": "A_one_entry_x1e6",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 2097385.908830036,
+        "Z2": 30861683410.931065,
+        "A_norm": 919370.8379019338,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 2.2693935420218076e-15,
+        "radii_root": -0.0001359216139251165,
+        "Z1_rise_x": 440646358369865.56,
+        "Z1_detects": true
+      }
+    ],
+    "n_planted": 10,
+    "n_detected_by_Z1": 9,
+    "control_Z1": 4.759794036626423e-09,
+    "control_flagged": false,
+    "verdict": "Z_1 is a REAL check on A: every planted A that changes the product A J raises Z_1 by orders of magnitude, and the exact A is not flagged. The scalar rescalings A -> s A are NOT corruption: they move Y_0 and Z_1 in exactly compensating directions and leave the radii root invariant, which is the estimator being self-consistent, not blind."
+  },
+  "B_scalar_weights": {
+    "what": "drive the three scalar border weights (w_l, w_om, w_r) through zero and through negative values, and isolate induced_sup_norm on a 2x2 whose weighted norm is hand-computable",
+    "cases": [
+      {
+        "case": "all_positive_default (control)",
+        "kwargs": {},
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 4.759794036626423e-09,
+        "Z2": 30861683410.931065,
+        "A_norm": 919370.8379019338,
+        "B": 16784.132223162258,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 1.0,
+        "A_norm_understated_x": 1.0,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_l=+1 (control)",
+        "kwargs": {
+          "w_l": 1.0
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 9.589375989048555e-14,
+        "Z1": 2.1732583236546278e-11,
+        "Z2": 247848685.87587288,
+        "A_norm": 3384.583457334294,
+        "B": 36614.35579890813,
+        "finite": true,
+        "Y0_understated_x": 231.26571272955795,
+        "Z1_understated_x": 219.01648712529425,
+        "A_norm_understated_x": 271.6348553644567,
+        "negative_norms": [],
+        "radii_root": 9.589489948015375e-14,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_om=+1e-9 (control)",
+        "kwargs": {
+          "w_om": 1e-09
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 0.16539097647273096,
+        "Z2": 2.4265224384845038e+20,
+        "A_norm": 60662551938.628784,
+        "B": 2000016782.132223,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 2.8779043078031527e-08,
+        "A_norm_understated_x": 1.5155492285125836e-05,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_r=+1e-6 (control)",
+        "kwargs": {
+          "w_r": 1e-06
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 2.7911659509969668e-05,
+        "Z2": 1.1886076258316883e+17,
+        "A_norm": 2229053650.617989,
+        "B": 26661709.67895177,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 0.00017053067141802476,
+        "A_norm_understated_x": 0.000412448950094604,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_l=-1",
+        "kwargs": {
+          "w_l": -1.0
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 9.589375989048555e-14,
+        "Z1": 2.164408211637563e-11,
+        "Z2": -20920553.754404873,
+        "A_norm": 3374.956486456513,
+        "B": -3099.381256966976,
+        "finite": true,
+        "Y0_understated_x": 231.26571272955795,
+        "Z1_understated_x": 219.91203004285524,
+        "A_norm_understated_x": 272.4096863444939,
+        "negative_norms": [
+          "B",
+          "Z2"
+        ],
+        "radii_root": 9.589366370681394e-14,
+        "SILENT_WRONG": true
+      },
+      {
+        "case": "w_l=-Xmax",
+        "kwargs": {
+          "w_l": -745.2394128947751
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 9.589375989048555e-14,
+        "Z1": 2.168827329881758e-11,
+        "Z2": 113092580.81874569,
+        "A_norm": 3379.763512916778,
+        "B": 16730.842318778894,
+        "finite": true,
+        "Y0_understated_x": 231.26571272955795,
+        "Z1_understated_x": 219.46394584053502,
+        "A_norm_understated_x": 272.0222389490516,
+        "negative_norms": [],
+        "radii_root": 9.589427987540855e-14,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_om=-1",
+        "kwargs": {
+          "w_om": -1.0
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 4.429012092869767e-09,
+        "Z2": 30850256803.362335,
+        "A_norm": 919249.5146366769,
+        "B": 16780.132223162258,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 1.0746852654318058,
+        "A_norm_understated_x": 1.0001319807770634,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_om=-1e-9",
+        "kwargs": {
+          "w_om": -1e-09
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 6.239453119810265e-14,
+        "Z2": -1999965689.1558871,
+        "A_norm": 0.9999996201603556,
+        "B": -999983224.4112159,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 76285.4363231623,
+        "A_norm_understated_x": 919371.1871155587,
+        "negative_norms": [
+          "B",
+          "Z2"
+        ],
+        "radii_root": 2.1705804846017418e-11,
+        "SILENT_WRONG": true
+      },
+      {
+        "case": "w_r=-1e-6",
+        "kwargs": {
+          "w_r": -1e-06
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 2.3306877491184455e-14,
+        "Z2": -17794560.52545428,
+        "A_norm": 0.33413005881520325,
+        "B": -26628194.70440983,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 204222.72517743992,
+        "A_norm_understated_x": 2751535.8575099306,
+        "negative_norms": [
+          "B",
+          "Z2"
+        ],
+        "radii_root": 2.217256462314402e-11,
+        "SILENT_WRONG": true
+      },
+      {
+        "case": "w_r=-1",
+        "kwargs": {
+          "w_r": -1.0
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 4.703980181380702e-09,
+        "Z2": 30614582640.527103,
+        "A_norm": 914914.5648861007,
+        "B": 16730.842318778894,
+        "finite": true,
+        "Y0_understated_x": 1.0,
+        "Z1_understated_x": 1.0118652403057826,
+        "A_norm_understated_x": 1.0048706985185965,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_l=0",
+        "kwargs": {
+          "w_l": 0.0
+        },
+        "exception": "ZeroDivisionError",
+        "exc_msg": "float division by zero",
+        "warnings": [
+          "RuntimeWarning",
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "w_om=0",
+        "kwargs": {
+          "w_om": 0.0
+        },
+        "exception": "ZeroDivisionError",
+        "exc_msg": "float division by zero",
+        "warnings": [
+          "RuntimeWarning",
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "w_r=0",
+        "kwargs": {
+          "w_r": 0.0
+        },
+        "exception": "ZeroDivisionError",
+        "exc_msg": "float division by zero",
+        "warnings": [
+          "RuntimeWarning",
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "w_om=nan",
+        "kwargs": {
+          "w_om": NaN
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": NaN,
+        "Z1": NaN,
+        "Z2": NaN,
+        "A_norm": NaN,
+        "B": NaN,
+        "finite": false,
+        "Y0_understated_x": null,
+        "Z1_understated_x": null,
+        "A_norm_understated_x": null,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      },
+      {
+        "case": "w_r=inf",
+        "kwargs": {
+          "w_r": Infinity
+        },
+        "exception": null,
+        "exc_msg": null,
+        "warnings": [],
+        "Y0": Infinity,
+        "Z1": Infinity,
+        "Z2": Infinity,
+        "A_norm": Infinity,
+        "B": 16757.487270970574,
+        "finite": false,
+        "Y0_understated_x": null,
+        "Z1_understated_x": null,
+        "A_norm_understated_x": null,
+        "negative_norms": [],
+        "radii_root": null,
+        "SILENT_WRONG": false
+      }
+    ],
+    "sign_flip_differential": [
+      {
+        "weight": "w_r",
+        "magnitude": 1e-06,
+        "positive": {
+          "Y0": 2.2176938727390236e-11,
+          "Z1": 2.7911659509969668e-05,
+          "Z2": 1.1886076258316883e+17,
+          "A_norm": 2229053650.617989,
+          "B": 26661709.67895177
+        },
+        "negative": {
+          "Y0": 2.2176938727390236e-11,
+          "Z1": 2.3306877491184455e-14,
+          "Z2": -17794560.52545428,
+          "A_norm": 0.33413005881520325,
+          "B": -26628194.70440983
+        },
+        "positive_warnings": [],
+        "negative_warnings": [],
+        "Z1_understated_x": 1197571812.0338907,
+        "A_norm_understated_x": 6671215569.5360775,
+        "root_positive": null,
+        "root_negative": 2.217256462314402e-11
+      },
+      {
+        "weight": "w_om",
+        "magnitude": 1e-09,
+        "positive": {
+          "Y0": 2.2176938727390236e-11,
+          "Z1": 0.16539097647273096,
+          "Z2": 2.4265224384845038e+20,
+          "A_norm": 60662551938.628784,
+          "B": 2000016782.132223
+        },
+        "negative": {
+          "Y0": 2.2176938727390236e-11,
+          "Z1": 6.239453119810265e-14,
+          "Z2": -1999965689.1558871,
+          "A_norm": 0.9999996201603556,
+          "B": -999983224.4112159
+        },
+        "positive_warnings": [],
+        "negative_warnings": [],
+        "Z1_understated_x": 2650728730497.4624,
+        "A_norm_understated_x": 60662574980.679695,
+        "root_positive": null,
+        "root_negative": 2.1705804846017418e-11
+      },
+      {
+        "weight": "w_l",
+        "magnitude": 1.0,
+        "positive": {
+          "Y0": 9.589375989048555e-14,
+          "Z1": 2.1732583236546278e-11,
+          "Z2": 247848685.87587288,
+          "A_norm": 3384.583457334294,
+          "B": 36614.35579890813
+        },
+        "negative": {
+          "Y0": 9.589375989048555e-14,
+          "Z1": 2.164408211637563e-11,
+          "Z2": -20920553.754404873,
+          "A_norm": 3374.956486456513,
+          "B": -3099.381256966976
+        },
+        "positive_warnings": [],
+        "negative_warnings": [],
+        "Z1_understated_x": 1.00408892923686,
+        "A_norm_understated_x": 1.0028524725922878,
+        "root_positive": 9.589489948015375e-14,
+        "root_negative": 9.589366370681394e-14
+      }
+    ],
+    "induced_sup_norm_isolated": [
+      {
+        "w_col": [
+          1.0,
+          1.0
+        ],
+        "returned": 101.0,
+        "true": 101.0,
+        "note": "control: the hand-computed answer"
+      },
+      {
+        "w_col": [
+          1.0,
+          -1.0
+        ],
+        "returned": -1.0,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "w_col": [
+          1.0,
+          -1e-09
+        ],
+        "returned": -3999999996.9999995,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "w_col": [
+          -1.0,
+          -1.0
+        ],
+        "returned": -7.0,
+        "exception": null,
+        "warnings": []
+      },
+      {
+        "w_col": [
+          1.0,
+          1e-09
+        ],
+        "returned": 100000000000.99998,
+        "exception": null,
+        "warnings": []
+      }
+    ],
+    "induced_sup_norm_true_value": 101.0,
+    "positive_weight_control_draws": 200,
+    "positive_weight_control_negatives": 0,
+    "n_silent_wrong": 3,
+    "n_rejected_by_exception": 3
+  },
+  "C_matching_condition": {
+    "what": "degenerate and near-singular matching condition: border rows made collinear, and the pin driven through wrong arity, NaN, Inf, unset, and set_pin_from on a garbage state",
+    "border_row_cases": [
+      {
+        "case": "Drow0 := e_i0  (border rows IDENTICAL)",
+        "cond_J": 8.624768791977768e+17,
+        "rank_J": 204,
+        "N": 205,
+        "inv_raised": null,
+        "warnings": [],
+        "Y0": 1.6508085291069482e+17,
+        "Z1": 9365.689739127916,
+        "Z2": 9.316420027738207e+21,
+        "finite": true,
+        "Y0_inflation_x": 7.443807052900732e+27,
+        "visible": true
+      },
+      {
+        "case": "Drow0 := e_i0 + 0.0001 e_(i0+1)  (NEAR-singular)",
+        "eps": 0.0001,
+        "cond_J": 84184462.51911347,
+        "inv_raised": null,
+        "warnings": [],
+        "Y0": 184956720.4558464,
+        "Z1": 2.2624925550808665e-05,
+        "Z2": 10441934078188.047,
+        "finite": true,
+        "Y0_inflation_x": 8.340047412739187e+18,
+        "visible": true
+      },
+      {
+        "case": "Drow0 := e_i0 + 1e-06 e_(i0+1)  (NEAR-singular)",
+        "eps": 1e-06,
+        "cond_J": 8418046827.444309,
+        "inv_raised": null,
+        "warnings": [],
+        "Y0": 18492687486.112072,
+        "Z1": 0.002517862409361577,
+        "Z2": 1043647824163660.9,
+        "finite": true,
+        "Y0_inflation_x": 8.338701618574691e+20,
+        "visible": true
+      },
+      {
+        "case": "Drow0 := e_i0 + 1e-10 e_(i0+1)  (NEAR-singular)",
+        "eps": 1e-10,
+        "cond_J": 84203099234876.16,
+        "inv_raised": null,
+        "warnings": [],
+        "Y0": 184871381909236.97,
+        "Z1": 17.311721993430496,
+        "Z2": 1.0433308377290684e+19,
+        "finite": true,
+        "Y0_inflation_x": 8.336199336696841e+24,
+        "visible": true
+      },
+      {
+        "case": "Drow0 := e_i0 + 1e-14 e_(i0+1)  (NEAR-singular)",
+        "eps": 1e-14,
+        "cond_J": 7.42239300837382e+17,
+        "inv_raised": null,
+        "warnings": [],
+        "Y0": 1.7573439161773462e+17,
+        "Z1": 16878.90335071338,
+        "Z2": 9.917657782611744e+21,
+        "finite": true,
+        "Y0_inflation_x": 7.924195209174161e+27,
+        "visible": true
+      },
+      {
+        "case": "honest Drow0 (CONTROL)",
+        "cond_J": 13442.866394632796,
+        "Y0": 116.05622741285289,
+        "Z1": 1.8600736396794856e-09,
+        "Z2": 7432760550.983812,
+        "warnings": [],
+        "visible": false
+      }
+    ],
+    "pin_cases": [
+      {
+        "case": "pin arity 3 (control)",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 3,
+        "stored_pin": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "silently_truncated": false,
+        "F_exception": null,
+        "F_msg": null,
+        "F_all_finite": true,
+        "G_block": [
+          -0.05404053109323459,
+          -1.6496463050458952,
+          -2.2597280604136802
+        ]
+      },
+      {
+        "case": "pin arity 5",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 5,
+        "stored_pin": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "silently_truncated": true,
+        "F_exception": null,
+        "F_msg": null,
+        "F_all_finite": true,
+        "G_block": [
+          -0.05404053109323459,
+          -1.6496463050458952,
+          -2.2597280604136802
+        ]
+      },
+      {
+        "case": "pin arity 2",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 2,
+        "stored_pin": [
+          1.0,
+          2.0
+        ],
+        "silently_truncated": false,
+        "F_exception": "IndexError",
+        "F_msg": "tuple index out of range",
+        "F_all_finite": null,
+        "G_block": null
+      },
+      {
+        "case": "pin arity 0",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 0,
+        "stored_pin": [],
+        "silently_truncated": false,
+        "F_exception": "IndexError",
+        "F_msg": "tuple index out of range",
+        "F_all_finite": null,
+        "G_block": null
+      },
+      {
+        "case": "pin NaN",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 3,
+        "stored_pin": [
+          null,
+          0.0,
+          0.0
+        ],
+        "silently_truncated": false,
+        "F_exception": null,
+        "F_msg": null,
+        "F_all_finite": false,
+        "G_block": [
+          null,
+          0.3503536949541049,
+          0.7402719395863196
+        ]
+      },
+      {
+        "case": "pin Inf",
+        "ctor_exception": null,
+        "ctor_msg": null,
+        "stored_pin_len": 3,
+        "stored_pin": [
+          null,
+          0.0,
+          0.0
+        ],
+        "silently_truncated": false,
+        "F_exception": null,
+        "F_msg": null,
+        "F_all_finite": false,
+        "G_block": [
+          null,
+          0.3503536949541049,
+          0.7402719395863196
+        ]
+      },
+      {
+        "case": "pin never set",
+        "F_exception": "ValueError",
+        "F_msg": "border targets not set; call set_pin_from() first"
+      }
+    ],
+    "set_pin_from_garbage": {
+      "state_max_abs": 1e+300,
+      "pin": [
+        -64114.764584410135,
+        146216.23284595332,
+        1e+300
+      ],
+      "G_block": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "G_exactly_zero": true,
+      "note": "set_pin_from(z) DEFINES the targets to be z's own origin values, so the three border residuals are identically zero at z for ANY z, including a state carrying 1e300. This is the module's design (the pin comes from the relaxation output), not a computational error -- but it means the border block of Y_0 cannot report a defect against a state pinned from itself, and that is worth having on the record."
+    }
+  },
+  "D_poison_passthrough": {
+    "what": "one poisoned entry of z, at 7 positions x 4 poisons, through certificate_constants",
+    "cases": [
+      {
+        "case": "Omega[5] := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[i0] := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[5] := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[i0] := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_l := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_omega := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_r := nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[5] := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[i0] := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[5] := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[i0] := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_l := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_omega := inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_r := inf",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[5] := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[i0] := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[5] := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[i0] := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_l := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_omega := -inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "c_r := -inf",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[5] := 1e300",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "Omega[i0] := 1e300",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "propagates": true
+      },
+      {
+        "case": "V[5] := 1e300",
+        "exception": null,
+        "warnings": [],
+        "Y0": 1e+300,
+        "Z1": 3.7908930959352025e+259,
+        "Z2": 51728306238.42914,
+        "all_finite": true,
+        "propagates": true
+      },
+      {
+        "case": "V[i0] := 1e300",
+        "exception": null,
+        "warnings": [],
+        "Y0": 1.1245102370794335e+302,
+        "Z1": 54917586.49062681,
+        "Z2": 24432274303.070362,
+        "all_finite": true,
+        "propagates": true
+      },
+      {
+        "case": "c_l := 1e300",
+        "exception": null,
+        "warnings": [],
+        "Y0": 7.452394128947765e+302,
+        "Z1": 1.477325956228244e+290,
+        "Z2": 7.140325347832414e+307,
+        "all_finite": true,
+        "propagates": true
+      },
+      {
+        "case": "c_omega := 1e300",
+        "exception": null,
+        "warnings": [],
+        "Y0": 9.999999999999998e+299,
+        "Z1": 5.770923241472688e+288,
+        "Z2": 1.3337605744740872e+308,
+        "all_finite": true,
+        "propagates": true
+      },
+      {
+        "case": "c_r := 1e300",
+        "exception": null,
+        "warnings": [],
+        "Y0": 9.999999987481227e+299,
+        "Z1": 2.7787355065678988e+295,
+        "Z2": 9.581250257115178e+304,
+        "all_finite": true,
+        "propagates": true
+      }
+    ],
+    "control": {
+      "case": "clean state (CONTROL)",
+      "Y0": 2.2176938727390236e-11,
+      "Z1": 4.759794036626423e-09,
+      "Z2": 30861683410.931065,
+      "all_finite": true,
+      "propagates": false,
+      "warnings": []
+    },
+    "n_cases": 28,
+    "n_propagate": 28,
+    "n_silently_absorbed": 0
+  },
+  "E_decay_exponent": {
+    "what": "the decay exponent p driven to extremes, plus a consistency check of constants_vs_weight",
+    "cases": [
+      {
+        "p": 0.0,
+        "p_label": "0.0",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 4.759794036626423e-09,
+        "Z2": 30861683410.931065,
+        "all_finite": true,
+        "direction": "identical to the p=0 reference",
+        "Y0_vs_p0_x": 1.0
+      },
+      {
+        "p": 0.5,
+        "p_label": "0.5",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 2.5557105321300303e-09,
+        "Z2": 3062417224.273228,
+        "all_finite": true,
+        "direction": "identical to the p=0 reference",
+        "Y0_vs_p0_x": 1.0
+      },
+      {
+        "p": 2.0,
+        "p_label": "2.0",
+        "exception": null,
+        "warnings": [],
+        "Y0": 1.324173223352085e-09,
+        "Z1": 6.663735960654202e-07,
+        "Z2": 19350576063.204617,
+        "all_finite": true,
+        "direction": "overstated (conservative, does NOT decide the gate)",
+        "Y0_vs_p0_x": 59.70946845412115
+      },
+      {
+        "p": -2.0,
+        "p_label": "-2.0",
+        "exception": null,
+        "warnings": [],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": 5.077660350298767e-05,
+        "Z2": 1.1021110856188869e+17,
+        "all_finite": true,
+        "direction": "identical to the p=0 reference",
+        "Y0_vs_p0_x": 1.0
+      },
+      {
+        "p": 60.0,
+        "p_label": "60.0",
+        "exception": null,
+        "warnings": [],
+        "Y0": 5.189490846566849e+157,
+        "Z1": 9.154102297604995e+159,
+        "Z2": "inf",
+        "all_finite": false,
+        "direction": "overstated (conservative, does NOT decide the gate)",
+        "Y0_vs_p0_x": 2.3400393130713874e+168
+      },
+      {
+        "p": 200.0,
+        "p_label": "200.0",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": "inf",
+        "Z1": "inf",
+        "Z2": "inf",
+        "all_finite": false,
+        "direction": "non-finite (visible)",
+        "Y0_vs_p0_x": null
+      },
+      {
+        "p": -200.0,
+        "p_label": "-200.0",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "direction": "identical to the p=0 reference",
+        "Y0_vs_p0_x": 1.0
+      },
+      {
+        "p": null,
+        "p_label": "nan",
+        "exception": null,
+        "warnings": [],
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "direction": "non-finite (visible)",
+        "Y0_vs_p0_x": null
+      },
+      {
+        "p": null,
+        "p_label": "inf",
+        "exception": null,
+        "warnings": [],
+        "Y0": "inf",
+        "Z1": "inf",
+        "Z2": "inf",
+        "all_finite": false,
+        "direction": "non-finite (visible)",
+        "Y0_vs_p0_x": null
+      },
+      {
+        "p": null,
+        "p_label": "-inf",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "Y0": 2.2176938727390236e-11,
+        "Z1": "nan",
+        "Z2": "nan",
+        "all_finite": false,
+        "direction": "identical to the p=0 reference",
+        "Y0_vs_p0_x": 1.0
+      }
+    ],
+    "constants_vs_weight_worst_rel_disagreement": 0.0,
+    "constants_vs_weight_note": "A = DF(z)^-1 is p-independent, so reusing one inverse across the curve is correct; this measures it rather than assuming it"
+  },
+  "F_quadratic_identity": {
+    "what": "the exact-quadratic identity under adversarial step size",
+    "cases": [
+      {
+        "scale": 1e-08,
+        "abs_defect": 2.776135273460885e-15,
+        "rel_defect": 0.9323313116934254,
+        "warnings": []
+      },
+      {
+        "scale": 0.001,
+        "abs_defect": 2.7496146364543866e-15,
+        "rel_defect": 5.4067250447203814e-11,
+        "warnings": []
+      },
+      {
+        "scale": 1.0,
+        "abs_defect": 1.4210854715202004e-14,
+        "rel_defect": 3.997409201843094e-16,
+        "warnings": []
+      },
+      {
+        "scale": 1000.0,
+        "abs_defect": 1.4901161193847656e-08,
+        "rel_defect": 3.812674634578734e-16,
+        "warnings": []
+      },
+      {
+        "scale": 1000000.0,
+        "abs_defect": 0.01171875,
+        "rel_defect": 3.7690294448524896e-16,
+        "warnings": []
+      },
+      {
+        "scale": 1e+150,
+        "abs_defect": 4.758454107128906e+285,
+        "rel_defect": 1.6304896425073628e-16,
+        "warnings": []
+      }
+    ],
+    "discrimination_control": {
+      "rel_defect_true_Q": 7.515006906288229e-16,
+      "rel_defect_Q_x_1p000001": 9.999989997097052e-07,
+      "note": "a 1e-6 relative corruption of Q is separated from the true Q by ~1e10 in the defect, so the identity is discriminating, not vacuous"
+    }
+  },
+  "G_velocity_matrix": {
+    "what": "velocity_matrix assumes an ascending grid; the same permuted-grid gap leg 152 closed in solver/hl_rescaled.py is tested here",
+    "known_answer": "U = W @ cos = sin on X in [-2,2], n=401, pinned U(0)=0",
+    "sorted_grid_max_err": 8.333344580058188e-06,
+    "permuted_grid_exception": null,
+    "permuted_grid_warnings": [],
+    "permuted_grid_all_finite": true,
+    "permuted_grid_max_err": 7.472304793130803,
+    "permuted_over_sorted_error_x": 896675.3650163626,
+    "degenerate": [
+      {
+        "case": "all-zero grid",
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "all_finite": true,
+        "all_zero": true,
+        "shape": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "NaN in grid",
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "all_finite": false,
+        "all_zero": false,
+        "shape": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "Inf in grid",
+        "exception": null,
+        "msg": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "all_finite": false,
+        "all_zero": false,
+        "shape": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "single node",
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "all_finite": true,
+        "all_zero": true,
+        "shape": [
+          1,
+          1
+        ]
+      },
+      {
+        "case": "descending grid",
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "all_finite": true,
+        "all_zero": false,
+        "shape": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "duplicate nodes",
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "all_finite": true,
+        "all_zero": false,
+        "shape": [
+          3,
+          3
+        ]
+      }
+    ],
+    "control_note": "the sorted grid reproduces sin to 8.333e-06, so the instrument works and a large permuted-grid error is the grid, not the quadrature"
+  },
+  "H_diagnostics": {
+    "what": "the two reported diagnostics under poisoned and degenerate data",
+    "tail_exponent": [
+      {
+        "case": "clean power law (CONTROL)",
+        "returned": -0.39999999999888575,
+        "expected": -0.4,
+        "abs_err": 1.1142753386650384e-12,
+        "warnings": []
+      },
+      {
+        "case": "one NaN inside window",
+        "returned": -0.3999999999988756,
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": 1.0158540675320182e-14
+      },
+      {
+        "case": "half the window NaN",
+        "returned": -0.39999999999834995,
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": 5.357936316841005e-13
+      },
+      {
+        "case": "one Inf inside window",
+        "returned": "nan",
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": null
+      },
+      {
+        "case": "one exact zero inside",
+        "returned": -0.3999999999988756,
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": 1.0158540675320182e-14
+      },
+      {
+        "case": "all NaN",
+        "returned": "nan",
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": null
+      },
+      {
+        "case": "all zero",
+        "returned": "nan",
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": null
+      },
+      {
+        "case": "sign-flipped",
+        "returned": -0.39999999999888575,
+        "exception": null,
+        "warnings": [],
+        "shift_from_honest": 0.0
+      }
+    ],
+    "tail_exponent_duplicate_abscissas": {
+      "case": "5 duplicate abscissas (slope UNDEFINED)",
+      "returned": 0.6906890595608515,
+      "exception": null,
+      "warnings": [
+        "RankWarning"
+      ],
+      "note": "no slope exists for a single distinct abscissa; a finite number is returned"
+    },
+    "tail_exponent_few_points": {
+      "case": "window with < 4 points",
+      "returned": "nan",
+      "exception": null,
+      "note": "the module's only explicit guard: m.sum() < 4 -> nan"
+    },
+    "tail_exponent_negative_window": {
+      "case": "window on the X < 0 side (log of negative abscissa)",
+      "returned": null,
+      "exception": "LinAlgError",
+      "msg": "SVD did not converge in Linear Least Squares",
+      "warnings": [
+        "RuntimeWarning"
+      ]
+    },
+    "profile_shape": [
+      {
+        "case": "converged profile (CONTROL)",
+        "exception": null,
+        "warnings": [],
+        "X_peak": 1.9698846755244428,
+        "Omega_peak": 1.6311821812695608,
+        "Omega_min": 0.03566466767862702,
+        "V_min": 0.002128159725112579,
+        "positive": true,
+        "asymmetry": 0.6816755041579633
+      },
+      {
+        "case": "all-negative Omega",
+        "exception": null,
+        "warnings": [],
+        "X_peak": -745.2394128947751,
+        "Omega_peak": -0.03566466767862702,
+        "Omega_min": -1.6311821812695608,
+        "V_min": 0.002128159725112579,
+        "positive": false,
+        "asymmetry": 1.111936935790414e+300
+      },
+      {
+        "case": "all-zero Omega",
+        "exception": null,
+        "warnings": [],
+        "X_peak": -745.2394128947751,
+        "Omega_peak": 0.0,
+        "Omega_min": 0.0,
+        "V_min": 0.002128159725112579,
+        "positive": false,
+        "asymmetry": 0.0
+      },
+      {
+        "case": "NaN in Omega",
+        "exception": null,
+        "warnings": [],
+        "X_peak": -243.15633291195974,
+        "Omega_peak": "nan",
+        "Omega_min": "nan",
+        "V_min": 0.002128159725112579,
+        "positive": false,
+        "asymmetry": "nan"
+      },
+      {
+        "case": "Inf in Omega",
+        "exception": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "X_peak": -243.15633291195974,
+        "Omega_peak": "inf",
+        "Omega_min": 0.03566466767862702,
+        "V_min": 0.002128159725112579,
+        "positive": true,
+        "asymmetry": "nan"
+      }
+    ]
+  },
+  "I_construction": {
+    "withdrawn_claim": {
+      "apparent_finding": "rho_max=-8 gives Y0=1.79 vs Y0=116.06 at rho_max=+8 (64.81x)",
+      "sorted_node_sets_identical": false,
+      "X_minus8_is_reversed_X_plus8": false,
+      "verdict": "WITHDRAWN as a defect measurement. The node sets are NOT identical, so rho_max=-8 is a different discretization, not the same object relabelled, and the 64.81x is not two answers to one question.",
+      "what_survives": "the grid is DESCENDING and velocity_matrix's trapezoidal antiderivative therefore runs backwards: sum(Uop) = 2247.365595 at rho_max=+8 and -2247.365595 at rho_max=-8, an exact sign flip. Whether that makes the ASSEMBLED system wrong is not settled here; what is settled is family G's direct known-answer measurement.",
+      "Uop_sum_ascending": 2247.365594659599,
+      "Uop_sum_descending": -2247.365594659599,
+      "exact_sign_flip": true
+    },
+    "what": "degenerate constructor parameters: node count, domain radius, grid stretch. NOTE the X_ascending column: velocity_matrix is a trapezoidal antiderivative that assumes an ASCENDING grid, so any row with X_ascending=False is a silently mis-oriented integration (family G measures what that costs).",
+    "cases": [
+      {
+        "case": "n=601 default (CONTROL)",
+        "kwargs": {
+          "n": 601
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 601,
+        "N": 1205,
+        "i0": 300,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 105.08344798737566,
+          "Z1": 1.1259613429197892e-07,
+          "Z2": 114303706247.80133
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "n=101 (CONTROL)",
+        "kwargs": {
+          "n": 101
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 116.056227412837,
+          "Z1": 1.8747544410251848e-09,
+          "Z2": 7432760550.984
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "n=3",
+        "kwargs": {
+          "n": 3
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 3,
+        "N": 9,
+        "i0": 1,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 229849277.9232443,
+          "Z1": 1.8182941232456412e-07,
+          "Z2": 159238271997.03046
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "n=5",
+        "kwargs": {
+          "n": 5
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 5,
+        "N": 13,
+        "i0": 2,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 1586.2599695970118,
+          "Z1": 2.202798927667247e-11,
+          "Z2": 268625079.3970878
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "n=1",
+        "kwargs": {
+          "n": 1
+        },
+        "exception": "ValueError",
+        "msg": "origin is not a node",
+        "warnings": []
+      },
+      {
+        "case": "n=0",
+        "kwargs": {
+          "n": 0
+        },
+        "exception": "ValueError",
+        "msg": "origin is not a node",
+        "warnings": []
+      },
+      {
+        "case": "n=2 (even)",
+        "kwargs": {
+          "n": 2
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 3,
+        "N": 9,
+        "i0": 1,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 229849277.9232443,
+          "Z1": 1.8182941232456412e-07,
+          "Z2": 159238271997.03046
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "n=100 (even)",
+        "kwargs": {
+          "n": 100
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 116.056227412837,
+          "Z1": 1.8747544410251848e-09,
+          "Z2": 7432760550.984
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "rho_max=0",
+        "kwargs": {
+          "n": 101,
+          "rho_max": 0.0
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 0.0,
+        "X_ascending": false,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": "ZeroDivisionError",
+        "constants_msg": "float division by zero",
+        "constants_warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "rho_max=-8",
+        "kwargs": {
+          "n": 101,
+          "rho_max": -8.0
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": false,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 1.7906215482717425,
+          "Z1": 5.867290803785505e-10,
+          "Z2": 1695609028.751855
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "rho_max=1e-14",
+        "kwargs": {
+          "n": 101,
+          "rho_max": 1e-14
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 5e-15,
+        "X_ascending": true,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 0.36256200600417776,
+          "Z1": 16.32871765452559,
+          "Z2": 2.7712812921102453e+31
+        },
+        "constants_all_finite": true
+      },
+      {
+        "case": "rho_max=nan",
+        "kwargs": {
+          "n": 101,
+          "rho_max": NaN
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": "nan",
+        "X_max_abs": "nan",
+        "X_ascending": false,
+        "X_all_finite": false,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": "nan",
+          "Z1": "nan",
+          "Z2": "nan"
+        },
+        "constants_all_finite": false
+      },
+      {
+        "case": "c=0 (grid stretch)",
+        "kwargs": {
+          "n": 101,
+          "c": 0.0
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [
+          "RuntimeWarning"
+        ],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": 0.0,
+        "X_max_abs": 0.0,
+        "X_ascending": false,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": "ZeroDivisionError",
+        "constants_msg": "float division by zero",
+        "constants_warnings": [
+          "RuntimeWarning"
+        ]
+      },
+      {
+        "case": "c=-0.5",
+        "kwargs": {
+          "n": 101,
+          "c": -0.5
+        },
+        "exception": null,
+        "msg": null,
+        "warnings": [],
+        "n_nodes": 101,
+        "N": 205,
+        "i0": 50,
+        "X_at_i0": -0.0,
+        "X_max_abs": 745.2394128947751,
+        "X_ascending": false,
+        "X_all_finite": true,
+        "set_pin_exception": null,
+        "constants_exception": null,
+        "constants_msg": null,
+        "constants_warnings": [],
+        "constants": {
+          "Y0": 1.7906215482717425,
+          "Z1": 5.867290803785505e-10,
+          "Z2": 1695609028.751855
+        },
+        "constants_all_finite": true
+      }
+    ],
+    "n_descending_grid_accepted": 5,
+    "controls_produce_finite_constants": true,
+    "control_note": "the two CONTROL rows must return finite constants; if they do not, this family is measuring the probe state and not the constructor, and is reported INCONCLUSIVE"
+  },
+  "runtime_sec": 5.98
+}
