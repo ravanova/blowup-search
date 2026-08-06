@@ -90,6 +90,9 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-NB v1 | Compactified-basis coefficient decay of `HL_S2_nonsymmetric`: is the target in the space? | Y | Y | Y | Y† | fig50 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENB_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENB_V1.md) |
 | Route-TN v1 | The `(H, D)` consistency defect of `L1` step one, enclosed — gate answered **NO** | Y | Y | Y | Y† | fig51 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETN_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETN_V1.md) |
 | Route-XS v1 | The shape dichotomy against published certificates — gate answered **NO** | Y | Y | Y | Y† | fig52 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEXS_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEXS_V1.md) |
+| Weight-repairs v1 | Named P2/P3 repairs to the certificate-weight fitness; six-property gate still FAILs | Y | Y | Y | **GAP: none** | fig48 (**duplicated number** — see gap list item 8) | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V1.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V1.md) — added by leg 108, see gap list item 9 |
+| Weight-repairs v2 (leg 59) | The conditioning wall modelled in both weight factors; frozen six-property gate re-run still FAILs | Y | Y | Y | Y† | fig58 | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V2.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V2.md) |
+| Route-KA v1 (leg 61) | The interval pipeline reproduces CLN's published Kawahara radius end to end | Y | Y | **GAP: T only, no BLOG** | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEKA_V1.md) — see gap list item 10 |
 
 `gen*` = the runner is the `*_evidence.py` script itself (`--generate` recomputes from
 `solver/`), rather than a separate `experiments/*.py` file — legacy legs (HL anchor, GA
@@ -105,6 +108,31 @@ a missing piece — see gap-list item 7.
 (TC), 54 (MM), 55 (NB), 56 (TN) and 57 (XS) were verified piece-by-piece against the files
 on disk when their rows were added — 25 of 25 quartet pieces present, none missing, none
 zero-byte; the full per-file inventory is in [novelty/leg_68.md](novelty/leg_68.md).
+
+**Index currency — second pass (leg 108, Route-IX2).** The paragraph above is superseded as a
+statement of currency, not corrected: it remains a true record of what leg 68 verified. Since
+leg 68's pass, **30 legs** have landed on `main` (58, 59, 61, 64–67, 69, 70, 72–74, 77–82, 84,
+86–94, 97, 102) and this file received **0 edits** across all of them. Leg 108 audited every one
+against the files on disk; the full per-leg inventory is in
+[novelty/leg_108.md](novelty/leg_108.md). The result splits cleanly in two:
+
+- **3 routes were owed a table row and now have one** (appended above): Weight-repairs v1 (no
+  leg number — predates the `Leg N:` commit convention), Weight-repairs v2 (leg 59), and
+  Route-KA v1 (leg 61). These are the only routes in the window that produced a
+  BLOG/TECHNICAL document under `4_p2_lottery/`.
+- **28 of the 30 legs produced no BLOG/TECHNICAL and no figure, by design.** They are
+  audit, adversarial-robustness, literature-watch, known-answer-check and hygiene legs running
+  under the "no measurement, no figure" convention that Route-D advection-scope and Route-D v15
+  set the precedent for (gap-list item 6). **This is not a quartet gap and no row is owed**, but
+  it was previously assumed rather than recorded, so it is recorded here:
+
+  legs **58** (verify lane; files its pair as `leg_58_verify.md`), **64, 65, 66, 67, 69, 70, 72,
+  73, 74, 77, 78, 79, 80, 81, 82, 84, 86, 87, 88, 89, 90, 91, 92, 93, 94, 97, 102**.
+
+  Their evidence lives in `experiments/journal/leg_N.md` + `writeup/novelty/leg_N.md` (present
+  for 29 of the 30 legs; leg 58 uses the `_verify` suffix), plus a curated JSON under
+  `writeup/data/` for 24 of the 30 and a runner under `experiments/` for all 30. Nothing about
+  this set is `GAP`.
 
 ## Quartet gaps found (plain list)
 
@@ -155,6 +183,28 @@ zero-byte; the full per-file inventory is in [novelty/leg_68.md](novelty/leg_68.
    (leg 53, referenced by `TECHNICAL_P2_ROUTETC_V1.md`) and
    `writeup/figures/fig48_weight_repairs_v1.png` exist. 1 duplicated figure number. Leg 53's
    F slot is genuinely filled; renumbering the other is a registry decision, not an index one.
+
+9. **Weight-repairs v1 was absent from the Arc 4 table entirely** (found by leg 108). All of
+   `experiments/p2_weight_repairs_v1.py`, `writeup/data/p2_weight_repairs_v1.json`,
+   `writeup/4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V1.md`, `TECHNICAL_P2_WEIGHT_REPAIRS_V1.md` and
+   `writeup/figures/fig48_weight_repairs_v1.png` exist on disk — 4 of 5 quartet pieces, with no
+   `*_evidence.py`. The route landed in commit `9d9b7ea`, which pre-dates the `Leg N:` commit
+   convention and therefore carries no leg number, which is why leg 68's by-number pass over
+   legs 53–57 did not reach it. It had been referenced only obliquely, as the other half of the
+   duplicated `fig48` in item 8. **Row added above**; the missing `*_evidence.py` stays `GAP` —
+   writing one is a claim-bearing choice about what to plot, outside a links-and-labels remit.
+10. **Route-KA v1 (leg 61) has TECHNICAL but no BLOG, no `*_evidence.py` and no figure** (found
+   by leg 108). Runner `experiments/p2_route_ka_v1_kawahara.py` and curated data
+   `writeup/data/p2_route_ka_v1_kawahara.json` are both present, and this is the leg that
+   reproduced a *published* radius end to end — the repository's one external known-answer check
+   of the interval pipeline, so per lesson 76 it earns the same care as a headline result. 3 of
+   5 quartet pieces present. Not fixed here: BLOG prose and figure selection are claim-bearing.
+11. **`writeup/README.md`'s numbered index is now stale by a further 30 legs** — item 4 recorded
+   it stopping at entry #47; leg 108 confirms it has received no entry for any leg in the
+   58–102 window either. Same reason as item 4 (numeric-prose paragraphs, out of remit), same
+   flag, larger backlog. Confirmed on disk: `writeup/README.md`'s list still ends at entry 47
+   and contains 0 mentions of Weight-repairs (v1 or v2) or Route-KA/Kawahara. The three rows and
+   the convention block added above cover the gap here in the meantime.
 
 Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
 the Arc 4 table above.
