@@ -40,8 +40,8 @@ Last leg number actually landed/merged on main: **57**. Legs **58–63** are res
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
 This session adds **64–71**, a first refill adds **72–75**, a second refill adds **76–78**, a
 third adds **79** (implicitly, per its own entry above), a fourth refill adds **80–83**, a fifth
-refill adds **84–87**, a sixth refill adds **88–91**, and this seventh refill adds **92–95**.
-**Next fresh leg number for any future candidate is 96.**
+refill adds **84–87**, a sixth refill adds **88–91**, a seventh refill adds **92–95**, and this
+eighth refill adds **96–99**. **Next fresh leg number for any future candidate is 100.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -257,6 +257,39 @@ exhausted again.**
   two post-repair regression closures per the coordinator's suggestion, alongside one more fresh
   adversarial audit.
 
+**Fifth round: two clean literature closures, a real (and serious) bug in `boussinesq.py`, and
+useful non-actionable context.**
+
+- **Legs 90 (EXT4) and 93 (EXT5) both landed: gate NO on both, thorough literature work.**
+  Chen-Huang-Li's Conjecture 2.4 remains open; no community verdict has appeared on
+  arXiv:2604.09949 in the confirm/refute/retract sense leg 93 asked about. Note: leg 93 was
+  never explicitly reported as dispatched into a slot in this file's prior update — its landing,
+  reopening LEG-J, indicates it was dispatched (presumably replacing leg 83/MFG, which must
+  therefore have also landed, unreported) — tracked per this file's established practice of not
+  chasing letter-for-letter reconciliation once leg numbers and outcomes are confirmed.
+- **Leg 89 (BOA) found a real and serious silent-corruption gap in `solver/boussinesq.py`**: a
+  false `blowup_candidate` flag triggered by ordinary floating-point dealiasing noise, amplified
+  **5.6e13×**; plus a silently-dropped `kappa` parameter and a NaN-masking bug. This is the
+  most severe finding of the whole adversarial-audit run so far — a 5.6e13× amplification of
+  numerical noise into a false positive is not a latent edge case, it is a live correctness
+  risk. Bench-repair in flight, **specifically investigating whether any banked Phase-1 result
+  was affected** — this is the first adversarial-audit finding with a real chance of touching
+  an already-published number, so treat its resolution as high-priority reading once it lands.
+  `solver/boussinesq.py` is **off-limits for any new candidate** until the repair and its
+  banked-result audit both resolve.
+- **Non-actionable context from leg 93, worth carrying forward**: arXiv:2604.09949's author has
+  since posted 6 papers claiming the OPPOSITE result using the same 5D-lifted machinery, with
+  zero cross-citation between them — a de facto self-refutation in the literature. This
+  repository's own M-5 audit (checked the arithmetic, found it sound) stands unaffected — the
+  self-refutation is about the *conclusion*, not the *computation* M-5 verified. Filed here so a
+  future candidate touching this corpus (e.g., a successor to leg 93, or anything referencing
+  rank-6 on the target ledger) starts from this context rather than re-discovering it.
+- **Reserve check: only leg 95 remains, and it is explicitly not dispatchable** (blocked on
+  leg 85's still-in-flight bench-repair). **Four fresh candidates (96–99) are added below; two
+  are selected for immediate promotion into LEG-C and LEG-J** (the two the coordinator reports
+  open): **98 (ICA)** and **96 (LHA)** — see Live assignments and the ranking rationale. **97
+  (WSA) and 99 (BVA) join 95 as reserve.**
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
@@ -329,14 +362,14 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 |---|---|---|---|---|---|---|
 | LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`, proposed `NEXT`) | heavy | `leg/ng-v1` | Does the no-go admit a proof for a class of `A` strictly larger than block-diagonal? |
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
-| LEG-C | 90 | **EXT4** — has the rank-4 target's Conjecture 2.4 been resolved since? | no | light | `leg/ext4-v1` | Has Chen-Huang-Li's Conjecture 2.4 (HL singular steady stability) been proved or disproved since? |
+| LEG-C | 98 | **ICA** — adversarial fabrication-rejection audit of interval_certificate.py | no | standard | `leg/ica-v1` | Under poisoned interval enclosures, does `radii_verdict` ever accept an invalid certificate? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 91 | **FGA** — adversarial audit of fractional_gclm.py's critical-exponent computation | no | standard | `leg/fga-v1` | Under malformed dissipation-strength inputs, does s_c computation silently return a plausible-looking wrong value? |
 | LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
 | LEG-I | 89 | **BOA** — adversarial audit of boussinesq.py | no | standard | `leg/boa-v1` | Under malformed physical-space inputs, does the module silently return a plausible-looking wrong result? |
-| LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
+| LEG-J | 96 | **LHA** — adversarial audit of line_hilbert.py's dense operator | no | standard | `leg/lha-v1` | Under adversarial near-degenerate grid spacing, does the dense operator / cached slope_matrix silently return a wrong result? |
 
 **Several earlier paragraphs above ("third pass," "second pass," and their predecessors)
 recorded intermediate states that have since been overtaken by further landings; this paragraph
@@ -360,30 +393,33 @@ scope (advection) and Route-D v15 (literature scope) — "no measurement, no fig
 `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the current live
-nine plus the four new reserve candidates (58, 62, 90, 88, 71, 91, 80, 89, 83, 92, 93, 94, 95):
-`spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62), none(90,
-literature watch, no code edits), none-owned/read-only(88 reads `gclm_family.py`, edits nothing
-under a bug-found outcome), `capabilities.py`(71, factual "test"-field only, pre-committed
-narrow), none-owned/read-only(91 reads `fractional_gclm.py`, edits nothing), `bordered_hl.py`
-(80), none-owned/read-only(89 reads `boussinesq.py`, edits nothing), `marginal_flow.py`(83),
-none-owned/read-only(92 reads `gclm.py`, edits nothing), none(93, literature watch, no code
-edits), none-owned/read-only(94 reads `target_norm.py`, now repaired, edits nothing),
-none-owned/read-only(95 reads `gclm_rescaled.py`, edits nothing — see note below). All thirteen
+nine plus the reserve (58, 62, 98, 88, 71, 91, 80, 89, 96, 92, 94, 95, 97, 99): `spectral_certificate.py`(58),
+`certificate_shapes.py`+`literature_gates.py`(62), none-owned/read-only(98 reads
+`interval_certificate.py`, edits nothing under a bug-found outcome), none-owned/read-only(88
+reads `gclm_family.py`, edits nothing), `capabilities.py`(71, factual "test"-field only,
+pre-committed narrow), none-owned/read-only(91 reads `fractional_gclm.py`, edits nothing),
+`bordered_hl.py`(80), none(89, `boussinesq.py` — off-limits, under repair and banked-result
+investigation, no new candidate touches it), none-owned/read-only(96 reads `line_hilbert.py`,
+edits nothing), none-owned/read-only(92 reads `gclm.py`, edits nothing, presumed live per
+Status), none-owned/read-only(94 reads `target_norm.py`, now repaired, edits nothing, presumed
+live per Status), none-owned/read-only(95 reads `gclm_rescaled.py`, edits nothing — still
+blocked pending leg 85's repair), none-owned/read-only(97 reads `weight_search.py`, edits
+nothing), none-owned/read-only(99 reads `boussinesq_velocity.py`, edits nothing). Fourteen
 distinct — **no collision.** `target_selection.py`(63) stays off the live list (leg 63's branch
-parked pending the user's ruling). `solver/interval.py`, `solver/spectral_utils.py` and
-`solver/port_certification.py` remain fully repaired, unclaimed and independently re-verified
-(legs 86, 87). `solver/gclm_rescaled.py` is **newly off-limits** — leg 85's bench-repair is in
-flight; leg 95 (below) reads it for spec purposes only and is **not dispatchable until that
-repair lands**, the same discipline leg 76 follows for its own pending dependency. LEG-D stays
-empty pending leg 76, whose territory (`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no
-live or reserve leg touches. `writeup/data` JSON files are likewise distinct names
+parked pending the user's ruling). `solver/boussinesq.py` is **newly off-limits** for any new
+candidate (leg 89's finding, repair and banked-result audit all in flight).
+`solver/gclm_rescaled.py` remains off-limits (leg 85's repair in flight; leg 95 still not
+dispatchable). `solver/interval.py`, `solver/spectral_utils.py` and `solver/port_certification.py`
+remain fully repaired, unclaimed and independently re-verified. LEG-D stays empty pending leg 76,
+whose territory (`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no live or reserve leg
+touches. `writeup/data` JSON files are likewise distinct names
 (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
-`p2_route_ext4_v1_target_watch4.json`(90), `p2_route_gca_v1_adversarial.json`(88),
+`p2_route_ica_v1_adversarial.json`(98), `p2_route_gca_v1_adversarial.json`(88),
 `p2_route_cap_v1_audit.json`(71), `p2_route_fga_v1_adversarial.json`(91),
-`p2_route_bhn_v1_adversarial.json`(80), `p2_route_boa_v1_adversarial.json`(89),
-`p2_route_mfg_v1_adversarial.json`(83), `p2_route_gla_v1_adversarial.json`(92),
-`p2_route_ext5_v1_target_watch5.json`(93), `p2_route_tnb_v1_postrepair.json`(94),
-`p2_route_grb_v1_postrepair.json`(95)) — **no collision.**
+`p2_route_bhn_v1_adversarial.json`(80), `p2_route_lha_v1_adversarial.json`(96),
+`p2_route_gla_v1_adversarial.json`(92), `p2_route_tnb_v1_postrepair.json`(94),
+`p2_route_grb_v1_postrepair.json`(95), `p2_route_wsa_v1_adversarial.json`(97),
+`p2_route_bva_v1_adversarial.json`(99)) — **no collision.**
 
 ## Queue
 
@@ -1305,7 +1341,13 @@ far.
 ```
 
 ```
-### 89 — ROUTE-BOA: ADVERSARIAL AUDIT OF boussinesq.py (PHYSICAL-SPACE 2D BOUSSINESQ)
+### 89 — ROUTE-BOA: ADVERSARIAL AUDIT OF boussinesq.py (PHYSICAL-SPACE 2D BOUSSINESQ) (LANDED:
+gate YES — the most serious finding of the whole adversarial-audit run)
+**Landed finding.** A false `blowup_candidate` flag triggered by ordinary floating-point
+dealiasing noise, amplified **5.6e13×**; plus a silently-dropped `kappa` parameter and a
+NaN-masking bug. Bench-repair in flight, specifically investigating whether any banked Phase-1
+result was affected. `solver/boussinesq.py` is off-limits for any new candidate until the
+repair and its banked-result audit both resolve.
 **Thesis.** solver/boussinesq.py got dedicated test coverage from leg 66 (QF), which asked
 "does a direct test find any discrepancy against what the indirect tests assumed" and answered
 no. That is a correctness check on well-behaved inputs, not a robustness check -- the same gap
@@ -1330,7 +1372,8 @@ adversarial input, not correctness under well-behaved input.
 ```
 
 ```
-### 90 — ROUTE-EXT4: HAS THE RANK-4 TARGET OBJECT'S CONJECTURE BEEN RESOLVED SINCE?
+### 90 — ROUTE-EXT4: HAS THE RANK-4 TARGET OBJECT'S CONJECTURE BEEN RESOLVED SINCE? (LANDED:
+gate NO — still open)
 **Thesis.** The dated literature-watch pattern (legs 74/EXT rank 1, 77/EXT2 rank 2, 82/EXT3 rank
 3, all landed NO -- still uncertified) extends naturally to target_selection.py's rank-4
 candidate: HL_singular_steady_stability (Chen-Huang-Li, arXiv:2604.01868 Theorem 2.3 for
@@ -1408,7 +1451,13 @@ well-behaved input, the same distinction leg 89 established for boussinesq.py.
 
 ```
 ### 93 — ROUTE-EXT5: HAS arXiv:2604.09949's 3D NS SELF-SIMILAR SINGULARITY CLAIM BEEN
-CONFIRMED, REFUTED, OR RETRACTED SINCE?
+CONFIRMED, REFUTED, OR RETRACTED SINCE? (LANDED: gate NO — but surfaced useful context, see
+Status)
+**Landed finding.** No formal confirmation/refutation/retraction found — but the author has
+since posted 6 papers claiming the OPPOSITE result with the same 5D-lifted machinery and zero
+cross-citation, a de facto self-refutation. M-5's own arithmetic audit stands unaffected (it
+checked the computation, not the conclusion). Filed as context for any future leg touching this
+corpus.
 **Thesis.** PHASE2_P2_NOTES's M-5 audited arXiv:2604.09949's computer-assisted claim of a
 finite-time singularity for 3D Navier-Stokes on T^3 rather than assuming it -- the arithmetic
 checked out (`2*delta*M*K` and Kantorovich's hypothesis both close, with margin). That audit is
@@ -1478,6 +1527,111 @@ fixed point with no regression?
 **Independence.** Reads solver/gclm_rescaled.py; edits nothing under any outcome.
 **NOT dispatchable until leg 85's bench-repair lands** -- drafted now so it is ready immediately
 after, the same discipline used for leg 76's pending dependency.
+```
+
+```
+### 96 — ROUTE-LHA: ADVERSARIAL AUDIT OF line_hilbert.py's DENSE OPERATOR
+**Thesis.** solver/line_hilbert.py's validated line covers a known-answer pair (rel 1.6e-4) and
+the cached slope operator matching the Thomas sweeps (2.7e-13) -- both on well-behaved,
+presumably-uniform-ish grid data (the module explicitly supports NON-uniform grids per its
+`holds` field, which makes this gap sharper: a spline-analytic Hilbert transform on a
+non-uniform grid has real degenerate cases -- near-duplicate points, extreme local stretching --
+that have never been adversarially tested). Same pattern as legs 69/79/80/83/85/88/89/91/92,
+applied to the module leg 75 (LM) only benchmarked for SPEED, never for robustness.
+**Gate.** Under an adversarial battery of near-degenerate non-uniform grids (near-duplicate
+points, extreme local stretching ratios), does solver/line_hilbert.py's dense operator or its
+cached `slope_matrix` ever silently return a finite, plausible-looking wrong result instead of
+propagating or flagging the ill-conditioning?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_line_hilbert_adversarial.py, experiments/p2_route_lha_v1_adversarial.py,
+               writeup/data/p2_route_lha_v1_adversarial.json,
+               writeup/novelty/leg_96.md, experiments/journal/leg_96.md
+**Difficulty.** standard
+**Independence.** Reads solver/line_hilbert.py; edits nothing under any outcome. New test file
+claimed by nobody else. Distinct from leg 75 (LM, speed benchmark) -- robustness, not
+performance.
+```
+
+```
+### 97 — ROUTE-WSA: ADVERSARIAL AUDIT OF weight_search.py's FitnessEngine
+**Thesis.** solver/weight_search.py's FitnessEngine batches the weight fitness computation with
+"the Jacobian inverted once" -- a numerical shortcut validated on well-posed problems (the
+closed-form CLM profile, gauge-invariance to 4.4e-16). A single inverted Jacobian reused across
+a batch is exactly the kind of optimization that can silently produce a wrong-but-plausible
+fitness value if any member of the batch pushes the shared Jacobian toward near-singularity --
+nobody has checked this. Same adversarial pattern as the rest of this family, applied to the
+one search/optimization-adjacent module in the certificate stack that has never been stress-
+tested this way. Does not reopen or contest stage B's own FAIL 4/6 gate verdict (frozen, still
+banned pending its own lift condition) -- this leg audits code robustness, not the fitness's
+scientific viability.
+**Gate.** Under an adversarial battery (a batch member driving the shared Jacobian toward
+near-singularity, NaN-poisoned weight parameters), does FitnessEngine ever silently return a
+finite, plausible-looking fitness value instead of propagating or flagging the ill-conditioning?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_weight_search_adversarial.py, experiments/p2_route_wsa_v1_adversarial.py,
+               writeup/data/p2_route_wsa_v1_adversarial.json,
+               writeup/novelty/leg_97.md, experiments/journal/leg_97.md
+**Difficulty.** standard
+**Independence.** Reads solver/weight_search.py; edits nothing under any outcome. Does not touch
+or contest leg 59 (WV)'s frozen gate verdict -- robustness only, no re-scoring.
+```
+
+```
+### 98 — ROUTE-ICA: ADVERSARIAL FABRICATION-REJECTION AUDIT OF interval_certificate.py
+**Thesis.** Leg 61 (KA) validated interval_certificate.py against a published known-answer
+(CLN's Kawahara radius) -- correctness on a well-formed problem. Leg 79 (PC) found that
+port_certification.py's sibling status function did NO domain validation and accepted fabricated
+Y_0/Z_1 11/25 times; leg 69 (IA) found real soundness gaps in the interval PRIMITIVE underneath
+BOTH certificate pipelines. Nobody has run the leg-79-style fabrication-rejection battery against
+THIS pipeline's own verdict function, `radii_verdict` / `interval_constants` -- does it correctly
+reject poisoned or hypothesis-violating interval enclosures (negative widths, NaN endpoints,
+enclosures that don't actually contain their claimed center), or can it be fooled the way
+port_certification.py's function was.
+**Gate.** Under an adversarial battery of poisoned interval enclosures (negative widths, NaN
+endpoints, non-containing enclosures) fed to `interval_constants` / `radii_verdict`, does the
+pipeline ever incorrectly report a closing/valid certificate?
+  yes -> A fabrication-rejection gap in the L1-step-one certificate pipeline, the same shape as
+         leg 79's finding in the sibling pipeline. Report the exact failing case precisely;
+         escalate, do not patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test, complementary to
+         leg 61's known-answer correctness gate.
+**Territory.** test_interval_certificate_adversarial.py,
+               experiments/p2_route_ica_v1_adversarial.py,
+               writeup/data/p2_route_ica_v1_adversarial.json,
+               writeup/novelty/leg_98.md, experiments/journal/leg_98.md
+**Difficulty.** standard
+**Independence.** Reads solver/interval_certificate.py; edits nothing under any outcome. Distinct
+question from leg 61 (known-answer correctness, not fabrication-rejection) -- the exact
+relationship leg 79 has to leg 61's sibling pipeline.
+```
+
+```
+### 99 — ROUTE-BVA: ADVERSARIAL AUDIT OF boussinesq_velocity.py's DEGENERATE-GRID HANDLING
+**Thesis.** Leg 73 (BV) gave solver/boussinesq_velocity.py its first external known-answer gate
+(the Lamb corner-image closed form, 1.76e-4 relative) -- correctness on a well-posed polar-grid
+problem. Nobody has checked robustness: does the Biot-Savart / stream-function solve silently
+return a plausible-looking wrong result under degenerate polar-grid inputs (r=0 at the origin
+singularity, a malformed or self-intersecting boundary) rather than flagging them. Same
+relationship to leg 73 that leg 89 (BOA) has to leg 66 (QF) -- a correctness check on
+well-behaved input is not a robustness check.
+**Gate.** Under an adversarial battery of degenerate polar-grid inputs (r=0 singularity,
+malformed/self-intersecting boundary), does solver/boussinesq_velocity.py ever silently return a
+finite, plausible-looking result instead of propagating or flagging the degeneracy?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test alongside leg 73's
+         known-answer gate.
+**Territory.** test_boussinesq_velocity_adversarial.py,
+               experiments/p2_route_bva_v1_adversarial.py,
+               writeup/data/p2_route_bva_v1_adversarial.json,
+               writeup/novelty/leg_99.md, experiments/journal/leg_99.md
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq_velocity.py; edits nothing under any outcome. Distinct
+question from leg 73 (BV, external correctness) -- robustness only.
 ```
 
 ## Ranking rationale
