@@ -3470,3 +3470,20 @@ preempted agents had reached a landing.
   214's repair instead of asserting an outstanding defect. Diff is 5
   deletions/11 insertions inside one string literal, every sibling field
   byte-for-byte unchanged, 0 banked numbers/verdicts move.
+- **Leg 242 (Route-DFL2) — NO on both clauses, thorough negative:** Dahne &
+  Figueras have 0 joint works since arXiv:2410.05480 itself (still v2,
+  unpublished, "Submitted" 668 days on). 7 subsequent works on the author line,
+  2 genuine interval-arithmetic CAPs but on Almost Mathieu spectral gaps and
+  polygon Dirichlet eigenvalues -- 0/7 fluid-adjacent, 0/7 blow-up. One
+  candidate (Figueras-Gimeno-Parker, a fluid dynamicist coauthor) disqualifies
+  itself in its own text ("this paper does not include a computer-assisted
+  proof"). Live-probe control fires correctly (0 fluid/blow-up terms vs 15
+  interval-arithmetic hits over the same 6656 lines). Leg 174's
+  (fluid-adjacent, Grade A) occupancy cell stays EMPTY.
+- **Leg 243 (Route-PCRS) — YES, CLOSES THE CONCERN:** independently confirms
+  Route-L's published headline verdict is genuinely UNAFFECTED by leg 241's
+  stall_verdict positional-read finding -- not a second leg-202/226 exposure.
+  Found two additional holes in leg 241's own claim-adjacency evidence worth a
+  follow-up: line 49 doesn't cover the deep rung's own dims=(240,320) literal,
+  and L1_attribution's six further ladders reach stall_verdict through
+  attribution_summary and were never audited.
