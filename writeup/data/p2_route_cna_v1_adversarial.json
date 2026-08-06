@@ -1,0 +1,916 @@
+{
+  "leg": 114,
+  "route": "CNA",
+  "module": "solver/collocation_newton.py",
+  "module_lines": 405,
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/collocation_newton.py ever report a converged solution or plausible residual that is silently wrong?",
+  "gate_answer": "yes",
+  "verdict_counts": {
+    "FINITE": 25,
+    "SILENT_WRONG": 8,
+    "NONFINITE": 12,
+    "RAISED": 9,
+    "SILENT_EMPTY": 7
+  },
+  "n_cases": 61,
+  "grid_J": 60,
+  "speed_c": 0.5,
+  "alpha_decay_class": 2.0,
+  "alpha_codomain": 1.0,
+  "row_tolerance": 1e-06,
+  "cases": [
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_None_anchor",
+      "verdict": "FINITE",
+      "note": "converged=True on the true_anchor, which is the intended solution",
+      "magnitudes": {
+        "converged": true,
+        "root": "true_anchor",
+        "kept_sup": 9.117706589734098e-15,
+        "dropped_defect": 4.309053114326389e-15,
+        "relres": 1.258154222176541e-14,
+        "sup_R_all_rows": 9.117706589734098e-15,
+        "norm_X_alpha2": 1.000000000000066,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 1.0000000000000275,
+        "weighted_defect": 3.4971896149083037e-14,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 0.14684050074592983
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_zeros",
+      "verdict": "SILENT_WRONG",
+      "note": "converged=True on the constant_minus_one: sup|R| over ALL rows = 2.335e-12, ||Omega||_X(alpha=2) = 5.8364e+03 against the exact anchor's 1.0000",
+      "magnitudes": {
+        "converged": true,
+        "root": "constant_minus_one",
+        "kept_sup": 1.0935696792554693e-14,
+        "dropped_defect": 2.335465154601477e-12,
+        "relres": 13.309324876986317,
+        "sup_R_all_rows": 2.335465154601477e-12,
+        "norm_X_alpha2": 5836.43352255588,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 5836.433522555655,
+        "weighted_defect": 1.724305967761555e-11,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 72.40040707713835
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_ones",
+      "verdict": "SILENT_WRONG",
+      "note": "converged=True on the constant_minus_one: sup|R| over ALL rows = 4.892e-12, ||Omega||_X(alpha=2) = 5.8364e+03 against the exact anchor's 1.0000",
+      "magnitudes": {
+        "converged": true,
+        "root": "constant_minus_one",
+        "kept_sup": 9.214851104397218e-15,
+        "dropped_defect": 4.891642646498429e-12,
+        "relres": 13.065452786310804,
+        "sup_R_all_rows": 4.891642646498429e-12,
+        "norm_X_alpha2": 5836.433522556398,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 5836.433522556174,
+        "weighted_defect": 3.253799645623337e-11,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 136.6210076952855
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_1e-8_times_anchor",
+      "verdict": "SILENT_WRONG",
+      "note": "converged=True on the constant_minus_one: sup|R| over ALL rows = 2.556e-12, ||Omega||_X(alpha=2) = 5.8364e+03 against the exact anchor's 1.0000",
+      "magnitudes": {
+        "converged": true,
+        "root": "constant_minus_one",
+        "kept_sup": 9.492406860546344e-15,
+        "dropped_defect": 2.5561774918969576e-12,
+        "relres": 13.183412565308322,
+        "sup_R_all_rows": 2.5561774918969576e-12,
+        "norm_X_alpha2": 5836.43352255591,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 5836.433522555685,
+        "weighted_defect": 2.6815201255700898e-11,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 112.59205286451844
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_0.1_times_anchor",
+      "verdict": "SILENT_WRONG",
+      "note": "converged=True on the third_spurious_root: sup|R| over ALL rows = 3.344e+00, ||Omega||_X(alpha=2) = 4.5495e+03 against the exact anchor's 1.0000",
+      "magnitudes": {
+        "converged": true,
+        "root": "third_spurious_root",
+        "kept_sup": 9.200973316580985e-15,
+        "dropped_defect": 3.343781136283794,
+        "relres": 12.570989442178128,
+        "sup_R_all_rows": 3.343781136283794,
+        "norm_X_alpha2": 4549.529005868361,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 4549.529005868187,
+        "weighted_defect": 33.12045352149038,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 139066636801603.95
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_2_times_anchor",
+      "verdict": "FINITE",
+      "note": "converged=True on the true_anchor, which is the intended solution",
+      "magnitudes": {
+        "converged": true,
+        "root": "true_anchor",
+        "kept_sup": 8.909539772616881e-15,
+        "dropped_defect": 1.7862447632133183e-14,
+        "relres": 1.5428185683885262e-14,
+        "sup_R_all_rows": 1.7862447632133183e-14,
+        "norm_X_alpha2": 1.000000000000063,
+        "norm_X_alpha2_true": 1.0000000000000384,
+        "norm_X_inflation": 1.0000000000000246,
+        "weighted_defect": 1.3682516468476852e-13,
+        "weighted_defect_true": 2.381624686066211e-13,
+        "weighted_defect_ratio": 0.5745034701952391
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "constant_profile_is_an_exact_root",
+      "verdict": "SILENT_WRONG",
+      "note": "Omega = -1 satisfies the gauge row AND every collocation residual row to machine precision, so the one-gauge system has it as a genuine second root",
+      "magnitudes": {
+        "sup_residual_at_constant": 2.8005375796169574e-13,
+        "gauge_row_at_constant": -3.552713678800501e-15,
+        "gauge_row_at_true_anchor": -1.5543122344752192e-15
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_NaN_poisoned",
+      "verdict": "NONFINITE",
+      "note": "the poison reaches the output and converged is False",
+      "magnitudes": {
+        "converged": false,
+        "kept_sup": NaN
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_Inf_poisoned",
+      "verdict": "NONFINITE",
+      "note": "the poison reaches the output and converged is False",
+      "magnitudes": {
+        "converged": false,
+        "kept_sup": NaN
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "c_NaN",
+      "verdict": "NONFINITE",
+      "note": "the poison reaches the output and converged is False",
+      "magnitudes": {
+        "converged": false,
+        "kept_sup": NaN
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "c_Inf",
+      "verdict": "NONFINITE",
+      "note": "the poison reaches the output and converged is False",
+      "magnitudes": {
+        "converged": false,
+        "kept_sup": NaN
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "om0_wrong_length",
+      "verdict": "RAISED",
+      "note": "ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,",
+      "magnitudes": {}
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "drop_equals_J",
+      "verdict": "RAISED",
+      "note": "ValueError: could not broadcast input array from shape (60,) into shape (59,)",
+      "magnitudes": {}
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "drop_negative",
+      "verdict": "RAISED",
+      "note": "ValueError: could not broadcast input array from shape (60,) into shape (59,)",
+      "magnitudes": {}
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "drop_out_of_range",
+      "verdict": "RAISED",
+      "note": "ValueError: could not broadcast input array from shape (60,) into shape (59,)",
+      "magnitudes": {}
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "max_iter_zero",
+      "verdict": "RAISED",
+      "note": "IndexError: list index out of range",
+      "magnitudes": {}
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "c_equals_zero_relres_is_identically_one",
+      "verdict": "SILENT_EMPTY",
+      "note": "at c = 0 (and a = 0) the residual IS the source, R = Omega H(Omega), so relres = rms(R)/rms(src) is identically 1.0 however well the solve converged -- the field does not mean what it is named",
+      "magnitudes": {
+        "converged": true,
+        "kept_sup": 2.7886179712635756e-15,
+        "relres": 1.0
+      }
+    },
+    {
+      "group": "A_newton_gauged",
+      "case": "a_NaN",
+      "verdict": "NONFINITE",
+      "note": "a = NaN passes float() and `self.a != 0.0` is True for NaN, so the a-term is assembled and the poison reaches the output",
+      "magnitudes": {
+        "converged": false
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "om0_zeros_control",
+      "verdict": "FINITE",
+      "note": "the SECOND gauge -- Omega at the node nearest X = 1 equals -1/2 -- excludes the constant, so the identical start that fools newton_gauged is refused here.  This is the mechanism, isolated.",
+      "magnitudes": {
+        "converged": false,
+        "relres": 0.0254144922788577,
+        "distance_to_constant": 0.6097653964819322
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "second_gauge_at_the_exact_anchor",
+      "verdict": "SILENT_EMPTY",
+      "note": "the docstring says both gauges are 'satisfied by the exact a = 0 anchor'; the second is satisfied only to O(grid spacing), so newton cannot return the exact anchor and max_iter=0 reports converged=True where max_iter=1 reports False",
+      "magnitudes": {
+        "X_at_gauge_node": 0.974156870921681,
+        "gauge_residual_at_exact_anchor": -0.013088474153936547
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "max_iter_0",
+      "verdict": "FINITE",
+      "note": "convergence report at this iteration budget",
+      "magnitudes": {
+        "converged": true,
+        "relres": 2.739400828919599e-13
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "max_iter_1",
+      "verdict": "FINITE",
+      "note": "convergence report at this iteration budget",
+      "magnitudes": {
+        "converged": false,
+        "relres": 0.0006405319468859337
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "max_iter_2",
+      "verdict": "FINITE",
+      "note": "convergence report at this iteration budget",
+      "magnitudes": {
+        "converged": false,
+        "relres": 2.0495927598911557e-07
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "max_iter_40",
+      "verdict": "FINITE",
+      "note": "convergence report at this iteration budget",
+      "magnitudes": {
+        "converged": true,
+        "relres": 3.5941998136507245e-14
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "singular_path_returns_a_different_dict",
+      "verdict": "SILENT_EMPTY",
+      "note": "the LinAlgError early-exit dict omits the result keys the normal path returns, so a caller that indexes them dies with KeyError",
+      "magnitudes": {
+        "missing_keys": [
+          "iterations",
+          "nodal_sup",
+          "relres",
+          "residual_rms"
+        ],
+        "reason": "singular Jacobian"
+      }
+    },
+    {
+      "group": "B_newton_two_gauge",
+      "case": "continuation_on_the_singular_path",
+      "verdict": "RAISED",
+      "note": "continuation indexes r['relres'] unconditionally on newton's result, so the documented singular-path return crashes it: KeyError: 'relres'",
+      "magnitudes": {}
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "E_constant_positive_no_crossing",
+      "verdict": "FINITE",
+      "note": "correctly reports no crossing",
+      "magnitudes": {
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "single_roundoff_scale_dip",
+      "verdict": "SILENT_WRONG",
+      "note": "E is 0.5 everywhere except ONE entry dipped to -1e-16 -- a relative perturbation of 4e-16 -- and a finite, entirely plausible critical radius comes back where the true answer is inf.  The returned radius moves by only 1.0e-04 across THIRTEEN orders of magnitude of dip depth (1e-16 to 1e-3), so it carries essentially no information about whether the crossing is real.",
+      "magnitudes": {
+        "true_answer": "inf",
+        "dip_1e-16": 15.025018773466835,
+        "dip_1e-12": 15.025018773466735,
+        "dip_1e-08": 15.025018772465833,
+        "dip_1e-03": 15.024918873142328
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "pure_sign_noise",
+      "verdict": "SILENT_WRONG",
+      "note": "an E that is pure alternating sign noise returns the first flicker as 'the radius where the profile ends'",
+      "magnitudes": {
+        "Xc": 0.03502503128911139,
+        "true_answer": "undefined"
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "E_one_NaN",
+      "verdict": "NONFINITE",
+      "note": "returns nan; expected nan -- an all-positive E with one +Inf genuinely has no sign change, so inf is the right answer there",
+      "magnitudes": {
+        "Xc": NaN
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "E_all_NaN",
+      "verdict": "NONFINITE",
+      "note": "returns nan; expected nan -- an all-positive E with one +Inf genuinely has no sign change, so inf is the right answer there",
+      "magnitudes": {
+        "Xc": NaN
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "E_one_Inf",
+      "verdict": "FINITE",
+      "note": "returns inf; expected inf -- an all-positive E with one +Inf genuinely has no sign change, so inf is the right answer there",
+      "magnitudes": {
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "E_identically_zero",
+      "verdict": "SILENT_EMPTY",
+      "note": "E vanishes IDENTICALLY -- the effective speed is zero at every radius -- and the function reports inf, i.e. 'the profile never ends'.  sign(0) = 0 for every entry so np.diff(np.sign(E)) is identically 0 and the degenerate case is indistinguishable from a healthy non-crossing one.",
+      "magnitudes": {
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "empty_input",
+      "verdict": "FINITE",
+      "note": "returns inf",
+      "magnitudes": {
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "single_point",
+      "verdict": "FINITE",
+      "note": "returns inf",
+      "magnitudes": {
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_critical_radius",
+      "case": "chain_bogus_radius_into_zero_order",
+      "verdict": "SILENT_WRONG",
+      "note": "the bogus radius feeds zero_order, which returns a finite plausible exponent from 141 points where the truth is (nan, 0)",
+      "magnitudes": {
+        "Xc_bogus": 15.025018773466833,
+        "p_at_bogus_Xc": 0.23245402082551214,
+        "points_at_bogus_Xc": 141,
+        "p_at_true_inf": NaN,
+        "points_at_true_inf": 0
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "clean_power_law",
+      "verdict": "FINITE",
+      "note": "recovers the constructed exponent",
+      "magnitudes": {
+        "p": 2.9999999999999987,
+        "n": 191,
+        "p_true": 3.0
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "NaN_poisoned_1pct",
+      "verdict": "FINITE",
+      "note": "the mask |Omega| > min_abs drops NaN, the survivors still lie on the power law, and the returned point count reports the loss honestly",
+      "magnitudes": {
+        "p": 2.9999999999999996,
+        "n": 188,
+        "rel_err_vs_clean": 2.960594732333752e-16
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "NaN_poisoned_20pct",
+      "verdict": "FINITE",
+      "note": "the mask |Omega| > min_abs drops NaN, the survivors still lie on the power law, and the returned point count reports the loss honestly",
+      "magnitudes": {
+        "p": 3.0,
+        "n": 158,
+        "rel_err_vs_clean": 4.440892098500628e-16
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "NaN_poisoned_95pct",
+      "verdict": "FINITE",
+      "note": "the mask |Omega| > min_abs drops NaN, the survivors still lie on the power law, and the returned point count reports the loss honestly",
+      "magnitudes": {
+        "p": 3.0,
+        "n": 12,
+        "rel_err_vs_clean": 4.440892098500628e-16
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "Inf_poisoned",
+      "verdict": "NONFINITE",
+      "note": "Inf survives the mask and reaches the fit",
+      "magnitudes": {
+        "p": NaN,
+        "n": 191
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "Xc_inf",
+      "verdict": "FINITE",
+      "note": "refused -- this is the module's ONE guard (line 364) plus the window mask",
+      "magnitudes": {
+        "p": NaN,
+        "n": 0
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "Xc_nan",
+      "verdict": "FINITE",
+      "note": "refused -- this is the module's ONE guard (line 364) plus the window mask",
+      "magnitudes": {
+        "p": NaN,
+        "n": 0
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "Xc_negative",
+      "verdict": "FINITE",
+      "note": "refused -- this is the module's ONE guard (line 364) plus the window mask",
+      "magnitudes": {
+        "p": NaN,
+        "n": 0
+      }
+    },
+    {
+      "group": "D_zero_order",
+      "case": "Xc_below_all_X",
+      "verdict": "FINITE",
+      "note": "refused -- this is the module's ONE guard (line 364) plus the window mask",
+      "magnitudes": {
+        "p": NaN,
+        "n": 0
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "theta_equals_pi",
+      "verdict": "NONFINITE",
+      "note": "1 + cos(pi) = 0, so I_1 = log(2/0) = inf and the recursion carries it",
+      "magnitudes": {
+        "I_k": [
+          0.0,
+          Infinity,
+          -Infinity,
+          NaN,
+          NaN
+        ]
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "theta_NaN",
+      "verdict": "NONFINITE",
+      "note": "propagates",
+      "magnitudes": {
+        "I_k": [
+          0.0,
+          NaN,
+          NaN,
+          NaN,
+          NaN
+        ]
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "K_negative",
+      "verdict": "RAISED",
+      "note": "ValueError: negative dimensions are not allowed",
+      "magnitudes": {}
+    },
+    {
+      "group": "E_kernels",
+      "case": "theta_outside_0_pi_-1",
+      "verdict": "SILENT_EMPTY",
+      "note": "theta outside (0, pi) is where X = tan(theta/2) is no longer the compactification the module is built on; finite plausible values come back with no complaint",
+      "magnitudes": {
+        "I_k": [
+          0.0,
+          0.26116848088744543,
+          0.3970584264888297,
+          0.36086150268203754
+        ]
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "theta_outside_0_pi_10",
+      "verdict": "SILENT_EMPTY",
+      "note": "theta outside (0, pi) is where X = tan(theta/2) is no longer the compactification the module is built on; finite plausible values come back with no complaint",
+      "magnitudes": {
+        "I_k": [
+          0.0,
+          2.5199424732571756,
+          -1.3617418883614458,
+          0.7954592416523245
+        ]
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "dtype_downgrade_at_K_200",
+      "verdict": "SILENT_EMPTY",
+      "note": "`dtype` is a public kwarg with no guard; the docstring's own warning that the recursion loses eps*k^2 is not enforced, and a float32 call returns a plausible number silently degraded",
+      "magnitudes": {
+        "I_199_longdouble": 0.007346027147770333,
+        "I_199_float64": 0.007346027147721368,
+        "I_199_float32": 0.007371596060693264,
+        "rel_dev_float32": 0.0034806450355538946,
+        "rel_dev_float64": 6.665531070018066e-12
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "refined_theta_sizes",
+      "verdict": "FINITE",
+      "note": "the node-exclusion filter is a no-op for EVEN refine (no fine midpoint coincides with a node) and removes exactly J points for odd refine -- correct in both cases, but refine=1 leaves an empty grid",
+      "magnitudes": {
+        "refine_1": 0,
+        "refine_3": 40,
+        "refine_8": 160
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "weighted_defect_refine_1_empty_grid",
+      "verdict": "RAISED",
+      "note": "ValueError: attempt to get argmax of an empty sequence",
+      "magnitudes": {}
+    },
+    {
+      "group": "E_kernels",
+      "case": "weighted_defect_theta_eval_empty",
+      "verdict": "RAISED",
+      "note": "ValueError: attempt to get argmax of an empty sequence",
+      "magnitudes": {}
+    },
+    {
+      "group": "E_kernels",
+      "case": "weighted_defect_om_NaN",
+      "verdict": "NONFINITE",
+      "note": "propagates",
+      "magnitudes": {
+        "value": NaN
+      }
+    },
+    {
+      "group": "E_kernels",
+      "case": "weighted_defect_alpha_400",
+      "verdict": "NONFINITE",
+      "note": "the codomain weight overflows visibly rather than saturating",
+      "magnitudes": {
+        "value": Infinity
+      }
+    },
+    {
+      "group": "C_reachability",
+      "case": "real_E_field_a_0.1250",
+      "verdict": "FINITE",
+      "note": "a real converged solver E field, not a synthetic one",
+      "magnitudes": {
+        "a": 0.125,
+        "min_E": 0.021293973822317624,
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_reachability",
+      "case": "real_E_field_a_0.1310",
+      "verdict": "FINITE",
+      "note": "a real converged solver E field, not a synthetic one",
+      "magnitudes": {
+        "a": 0.131,
+        "min_E": 0.0011006488178585405,
+        "Xc": Infinity
+      }
+    },
+    {
+      "group": "C_reachability",
+      "case": "real_E_field_a_0.1330",
+      "verdict": "FINITE",
+      "note": "a real converged solver E field, not a synthetic one",
+      "magnitudes": {
+        "a": 0.133,
+        "min_E": -0.005582350180757478,
+        "Xc": 73.93448783085243
+      }
+    },
+    {
+      "group": "C_reachability",
+      "case": "real_E_field_a_0.1500",
+      "verdict": "FINITE",
+      "note": "a real converged solver E field, not a synthetic one",
+      "magnitudes": {
+        "a": 0.15,
+        "min_E": -0.06144282287498104,
+        "Xc": 51.845551306081894
+      }
+    },
+    {
+      "group": "C_reachability",
+      "case": "real_E_field_a_0.3000",
+      "verdict": "FINITE",
+      "note": "a real converged solver E field, not a synthetic one",
+      "magnitudes": {
+        "a": 0.3,
+        "min_E": -0.4923995744602261,
+        "Xc": 6.148257014124775
+      }
+    }
+  ],
+  "J_ladder_spurious_constant": [
+    {
+      "J": 40,
+      "converged": true,
+      "distance_to_constant": 1.1435297153639112e-14,
+      "norm_X_alpha2": 2594.155660280856,
+      "norm_X_alpha2_true": 1.000000000000049,
+      "weighted_defect": 1.1171634070982002e-12,
+      "weighted_defect_true": 7.681873858131126e-14
+    },
+    {
+      "J": 60,
+      "converged": true,
+      "distance_to_constant": 1.3011813848606835e-13,
+      "norm_X_alpha2": 5836.43352255588,
+      "norm_X_alpha2_true": 1.0000000000000384,
+      "weighted_defect": 1.724305967761555e-11,
+      "weighted_defect_true": 2.381624686066211e-13
+    },
+    {
+      "J": 80,
+      "converged": true,
+      "distance_to_constant": 1.7430501486614958e-14,
+      "norm_X_alpha2": 10375.622544734271,
+      "norm_X_alpha2_true": 1.0000000000001732,
+      "weighted_defect": 2.7691993057796286e-11,
+      "weighted_defect_true": 7.627008600917761e-13
+    },
+    {
+      "J": 160,
+      "converged": true,
+      "distance_to_constant": 8.992806499463768e-14,
+      "norm_X_alpha2": 41501.49015484224,
+      "norm_X_alpha2_true": 1.0000000000001736,
+      "weighted_defect": 7.761555150911826e-12,
+      "weighted_defect_true": 4.943219736916587e-12
+    }
+  ],
+  "M2_basin_lambda_times_anchor": [
+    {
+      "lambda": 5.0,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 5.6343818499726694e-15,
+      "dropped_defect": 1.0120376758848693e-14
+    },
+    {
+      "lambda": 2.0,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 8.909539772616881e-15,
+      "dropped_defect": 1.7862447632133183e-14
+    },
+    {
+      "lambda": 1.0,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 9.117706589734098e-15,
+      "dropped_defect": 4.309053114326389e-15
+    },
+    {
+      "lambda": 0.9,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 6.328271240363392e-15,
+      "dropped_defect": 1.808102279010626e-14
+    },
+    {
+      "lambda": 0.8,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 9.353628982466944e-15,
+      "dropped_defect": 1.8084492237058214e-14
+    },
+    {
+      "lambda": 0.75,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 1.0186296250935811e-14,
+      "dropped_defect": 1.808622696053419e-14
+    },
+    {
+      "lambda": 0.7,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 5.169475958410885e-15,
+      "dropped_defect": 3.870168074904257e-15
+    },
+    {
+      "lambda": 0.6,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 9.492406860545088e-15,
+      "dropped_defect": 4.539250919588511e-14
+    },
+    {
+      "lambda": 0.5,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 8.368306048112117e-15,
+      "dropped_defect": 3.2068098176907256e-14
+    },
+    {
+      "lambda": 0.3,
+      "converged": true,
+      "root": "true_anchor",
+      "kept_sup": 9.33975119465913e-15,
+      "dropped_defect": 5.9612037528467e-14
+    },
+    {
+      "lambda": 0.1,
+      "converged": true,
+      "root": "third_spurious_root",
+      "kept_sup": 9.200973316580985e-15,
+      "dropped_defect": 3.343781136283794
+    },
+    {
+      "lambda": 0.01,
+      "converged": true,
+      "root": "constant_minus_one",
+      "kept_sup": 8.215650382221744e-15,
+      "dropped_defect": 4.214850690686937e-12
+    },
+    {
+      "lambda": 0.0001,
+      "converged": true,
+      "root": "constant_minus_one",
+      "kept_sup": 1.3433698597966909e-14,
+      "dropped_defect": 4.02122779519231e-12
+    },
+    {
+      "lambda": 1e-08,
+      "converged": true,
+      "root": "constant_minus_one",
+      "kept_sup": 9.492406860546344e-15,
+      "dropped_defect": 2.5561774918969576e-12
+    },
+    {
+      "lambda": 0.0,
+      "converged": true,
+      "root": "constant_minus_one",
+      "kept_sup": 1.0935696792554693e-14,
+      "dropped_defect": 2.335465154601477e-12
+    }
+  ],
+  "M2_basin_anchor_plus_noise": [
+    {
+      "epsilon": 1e-12,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 1e-06,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 0.001,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 0.01,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 0.05,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 0.1,
+      "draws": 20,
+      "landed_on_constant": 0
+    },
+    {
+      "epsilon": 0.3,
+      "draws": 20,
+      "landed_on_constant": 0
+    }
+  ],
+  "M3_reachability_margin": {
+    "a": 0.131,
+    "min_E": 0.0011006488178585405,
+    "Xc": Infinity,
+    "grid_Xmax": 76.39000931113527
+  },
+  "M3_reachability_noise_draws": [
+    {
+      "relative_noise": 1e-16,
+      "draws": 40,
+      "finite_Xc": 0
+    },
+    {
+      "relative_noise": 1e-14,
+      "draws": 40,
+      "finite_Xc": 0
+    },
+    {
+      "relative_noise": 1e-12,
+      "draws": 40,
+      "finite_Xc": 0
+    },
+    {
+      "relative_noise": 1e-10,
+      "draws": 40,
+      "finite_Xc": 0
+    },
+    {
+      "relative_noise": 1e-08,
+      "draws": 40,
+      "finite_Xc": 0
+    }
+  ]
+}
