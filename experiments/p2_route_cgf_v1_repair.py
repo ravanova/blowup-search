@@ -180,6 +180,37 @@ def measure_live():
     return live
 
 
+def measure_moved():
+    """What the repair is SUPPOSED to move: adversarial inputs, at the three consumers.
+
+    Kept strictly apart from `measure_live()`, whose contract is the opposite one. This
+    exists because one of these movements is asserted as an exact count in a test file
+    OUTSIDE this leg's territory (`test_port_certification_regression.py:160`,
+    `raised_loudly == 5`, with the comment "unchanged: bad TYPES still raise"), and a
+    repair that moves a banked number must say so with the number, not in prose.
+    """
+    import solver.interval_certificate as ic
+    import solver.nk_bounds as nk
+    import solver.port_certification as pc
+
+    out = {}
+    for lbl, args in (("Y0_bool_true", (True, 0.1, 1.0)),
+                      ("Z1_bool_false", (1.0, False, 1.0)),
+                      ("Y0_string", ("0.5", 0.1, 1.0)),
+                      ("Y0_honest", (1e-3, 0.1, 1.0))):
+        k, o = _call(pc.radii_polynomial_status, *args)
+        out[f"port_certification[{lbl}]"] = (k if k == "raise" else
+                                             f"value: status={_flat(o).get('status')}, "
+                                             f"closes={_flat(o).get('closes')}")
+        k, o = _call(ic.radii_verdict, *args)
+        out[f"interval_certificate[{lbl}]"] = (k if k == "raise" else
+                                               f"value: closes={_flat(o).get('closes')}")
+    k, o = _call(nk.budget, True, 0.0, 0.3, 13.0)
+    out["nk_bounds.budget[Y0_bool_true]"] = (k if k == "raise" else
+                                             f"value: closes={_flat(o).get('closes')}")
+    return out
+
+
 def _flat(obj):
     """Verdict dicts carry nested dicts; flatten to a comparable, JSON-safe shape."""
     if isinstance(obj, dict):
@@ -212,7 +243,7 @@ def _run_pre_variant():
     sys.modules["solver.certificate_guards"] = mod
     spec.loader.exec_module(mod)
     solver.certificate_guards = mod
-    out = {"merge_base": base, "live": measure_live()}
+    out = {"merge_base": base, "live": measure_live(), "moved": measure_moved()}
     os.unlink(tmp)
     return out
 
@@ -405,6 +436,11 @@ def main():
                          "identical": pre_live.get(k) == post_live.get(k)}
                      for k in sorted(post_live)}
 
+    post_moved, pre_moved = measure_moved(), pre["moved"]
+    intended = {k: {"pre": pre_moved.get(k), "post": post_moved.get(k),
+                    "changed": pre_moved.get(k) != post_moved.get(k)}
+                for k in sorted(post_moved)}
+
     cases = clause_one()
     ctrl = controls()
 
@@ -446,6 +482,24 @@ def main():
         "clause_2_live_sites_moved": moved,
         "clause_2_merge_base": pre["merge_base"],
         "controls_total": len(ctrl), "controls_failed": ctrl_fail,
+        "cross_territory_banked_assertion": {
+            "file": "test_port_certification_regression.py",
+            "line": 160,
+            "assertion": 'assert v["raised_loudly"] == 5  # unchanged: bad TYPES still raise',
+            "banked_value": 5,
+            "measured_after_this_repair": 7,
+            "new_labels": ["Y0_bool_true", "Z1_bool_false"],
+            "false_closes_before_and_after": 0,
+            "honest_paths_still_correct": True,
+            "why": ("M3's whole content is that `bool` IS a bad TYPE, so the count this "
+                    "assertion pins is exactly the count the repair is meant to raise. "
+                    "The file is OUTSIDE this leg's territory and is NOT edited here."),
+            "merge_gate_would_not_catch_it": (
+                "scripts/merge_gate.sh maps solver/<name>.py to test_<name>.py; "
+                "test_certificate_guards.py does not exist, so a diff touching only "
+                "solver/certificate_guards.py runs neither this test nor any consumer suite."),
+        },
+        "intended_movements_pre_vs_post": intended,
         "cases": cases, "live_bit_identity": bit_identical, "controls": ctrl,
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -461,6 +515,10 @@ def main():
           f"moved: {len(moved)}")
     for k in moved:
         print(f"  MOVED {k}: {pre_live.get(k)} -> {post_live.get(k)}")
+    print("INTENDED  adversarial outcomes the repair is meant to move:")
+    for k, v in intended.items():
+        if v["changed"]:
+            print(f"  CHANGED {k}: {v['pre']} -> {v['post']}")
     print(f"CONTROLS  {len(ctrl) - len(ctrl_fail)} of {len(ctrl)} pass"
           + ("" if not ctrl_fail else f"; FAILED: {ctrl_fail}"))
     print(f"GATE ANSWER: {payload['gate_answer']}")

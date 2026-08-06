@@ -32,6 +32,68 @@
  "clause_2_merge_base": "4f6cf4b1333974614255929be30f188c23abec39",
  "controls_total": 17,
  "controls_failed": [],
+ "cross_territory_banked_assertion": {
+  "file": "test_port_certification_regression.py",
+  "line": 160,
+  "assertion": "assert v[\"raised_loudly\"] == 5  # unchanged: bad TYPES still raise",
+  "banked_value": 5,
+  "measured_after_this_repair": 7,
+  "new_labels": [
+   "Y0_bool_true",
+   "Z1_bool_false"
+  ],
+  "false_closes_before_and_after": 0,
+  "honest_paths_still_correct": true,
+  "why": "M3's whole content is that `bool` IS a bad TYPE, so the count this assertion pins is exactly the count the repair is meant to raise. The file is OUTSIDE this leg's territory and is NOT edited here.",
+  "merge_gate_would_not_catch_it": "scripts/merge_gate.sh maps solver/<name>.py to test_<name>.py; test_certificate_guards.py does not exist, so a diff touching only solver/certificate_guards.py runs neither this test nor any consumer suite."
+ },
+ "intended_movements_pre_vs_post": {
+  "interval_certificate[Y0_bool_true]": {
+   "pre": "value: closes=False",
+   "post": "raise",
+   "changed": true
+  },
+  "interval_certificate[Y0_honest]": {
+   "pre": "value: closes=True",
+   "post": "value: closes=True",
+   "changed": false
+  },
+  "interval_certificate[Y0_string]": {
+   "pre": "raise",
+   "post": "raise",
+   "changed": false
+  },
+  "interval_certificate[Z1_bool_false]": {
+   "pre": "value: closes=False",
+   "post": "raise",
+   "changed": true
+  },
+  "nk_bounds.budget[Y0_bool_true]": {
+   "pre": "value: closes=False",
+   "post": "raise",
+   "changed": true
+  },
+  "port_certification[Y0_bool_true]": {
+   "pre": "value: status=EVALUATED, closes=False",
+   "post": "raise",
+   "changed": true
+  },
+  "port_certification[Y0_honest]": {
+   "pre": "value: status=EVALUATED, closes=True",
+   "post": "value: status=EVALUATED, closes=True",
+   "changed": false
+  },
+  "port_certification[Y0_string]": {
+   "pre": "raise",
+   "post": "raise",
+   "changed": false
+  },
+  "port_certification[Z1_bool_false]": {
+   "pre": "value: status=EVALUATED, closes=False",
+   "post": "raise",
+   "changed": true
+  }
+ },
  "cases": [
   {
    "case": "A1_bool_True",
