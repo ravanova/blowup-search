@@ -58,8 +58,11 @@ six-property check — no GA compute runs under any of the four). A sixteenth re
 response to the user's requested strategic-novelty review's concrete action items, adds
 **161–162** (LSS full-text read; the untried geometric-weight/compact-support CAP corner),
 alongside the correction that leg 125 was legal and ready to dispatch since its 2026-08-06
-ruling and should not have been sitting parked. **Next fresh leg number for any future
-candidate is 163.**
+ruling and should not have been sitting parked. A seventeenth addition, drafted after leg
+127 (NGX) landed gate YES-(i) UNVERIFIED (superseding leg 58; citing Xu arXiv:2607.19762 on
+origin-H² invertibility) with a full-treatment verifier in flight, adds **163** — a
+speculative origin-H² certificate-feasibility SCOPING leg, explicitly NOT dispatchable until
+the verifier confirms. **Next fresh leg number for any future candidate is 164.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -969,6 +972,40 @@ touched, disjoint from 145's read-only ledger audit and from 62/112/113's differ
 162 needs a NEW solver module (capabilities.py grepped first per the standing ban), disjoint
 from 127's `spectral_certificate.py`, 146's `certificate_shapes.py` (read-only reference,
 not edited), and every other live/reserve leg's territory.
+
+**DM note, 2026-08-06 — leg 127 (NGX) has landed, gate YES-(i), UNVERIFIED — a full-treatment
+verifier is in flight; nothing here treats this as settled.** Reported claim, stated exactly
+as the coordinator reported it and no more strongly: a one-direction argument (not the
+pre-registered two-direction one, which failed, giving only a vacuous `Z_1 >= 0.068`) proved
+`Z_1 >= 1` for EVERY bounded approximate inverse `A` (A21 free) at every `s < 1` on the
+bordered `a=0` CLM linearization — superseding leg 58's narrower `A21=0`-only theorem as the
+sharpest possible form of the no-go in this space. Separately, leg 127 cites Xu
+arXiv:2607.19762 (post-dates leg 58) as proving the SAME operator invertible on a DIFFERENT
+space (origin-H², spectral gap 1/2) — which would mean this repository's ~70-leg obstruction
+is a property of the `ell^1_w` certificate machinery's chosen space, not the operator itself.
+**Both claims are exactly what the verifier is checking (the proof, the numerics, and the Xu
+citation specifically) before this DM treats either as banked.** Per the coordinator's
+instruction, nothing is drafted here that presupposes verification. Two things are recorded
+now, not acted on:
+
+- **This reframes what leg 157 (CDX) was for.** 157 was drafted to surface a literature-
+  sourced construction candidate for leg 127's then-open counterexample search. If leg 127's
+  proof holds, there is no longer a counterexample to search for on THIS space — 157's Cadiot
+  read would need reframing (still worth doing for its own sake — Cadiot's construction is
+  still unread for anything beyond leg 62's narrow coverage question — but not as "feeding
+  127," since 127 would already be closed in the strongest possible form). Not editing 157
+  now; flagging for the next refresh once the verifier reports, per the coordinator's own
+  "hold off" instruction and their own statement that scope-line propagation is pointer-block
+  work they'll handle post-verification.
+- **A speculative next-question leg is drafted below (163), explicitly NOT dispatchable
+  until the leg 127 verifier confirms both the proof and the Xu citation.** This satisfies
+  the coordinator's ask to "start thinking about what a build-a-certificate-in-origin-H²
+  leg would need" without presupposing anything — its own thesis states the contingency in
+  its first line, its gate is a SCOPING question (does the space admit the same three
+  degrees of freedom a certificate needs, and is there a known obstruction analogous to
+  `ell^1_w`'s), not a certificate construction attempt, and its Independence field names the
+  exact block. If the verifier does not confirm, this leg is simply never dispatched and
+  costs nothing.
 
 ---
 
@@ -4178,6 +4215,55 @@ measured directly, does its `Z_1` fall under, at, or over 1?
 127/NGX (mathematics on the `A21 != 0` class in the existing whole-line representation, not a
 new basis) and from 157/158/159/161 (literature, not construction). No GA compute under any
 outcome.
+```
+
+```
+### 163 — ROUTE-H2S: ORIGIN-H² CERTIFICATE FEASIBILITY SCOPING (SPECULATIVE — NOT
+dispatchable until leg 127's full-treatment verifier confirms both the superseding proof and
+the Xu arXiv:2607.19762 invertibility citation)
+**Thesis.** Contingent, stated as contingent: IF leg 127's landed claim survives independent
+verification — `Z_1 >= 1` proved for every bounded `A` on the `ell^1_w` space (superseding leg
+58), AND Xu arXiv:2607.19762 is confirmed to prove the same bordered `a=0` CLM linearization
+invertible on a DIFFERENT space (origin-H², spectral gap 1/2) — then this repository's
+~70-leg obstruction would be a property of the certificate machinery's CHOSEN space, not of
+the operator, and the obvious next question is whether a certificate attempt in origin-H²
+itself is even structurally possible before anyone spends a leg building one. This leg does
+NOT build a certificate and does NOT presuppose the verifier's outcome — it is a SCOPING
+leg only, mirroring leg 111's third-realization-scoping template: enumerate what a
+certificate in origin-H² would need (a bordered operator formulation compatible with Xu's
+own realization, an analogous three degrees of freedom — space is fixed by definition here,
+so SPLIT and SHAPE — and any norm/embedding infrastructure this repository's existing
+`holder_norms.py`/`hilbert_pointwise.py`/`op_lower.py` machinery does or does not already
+cover), and name any KNOWN obstruction analogous to `ell^1_w`'s (does origin-H²'s own
+spectral-gap structure impose a floor the way `ell^1_w`'s diagonal-zero structure did, per
+Xu's own text, which leg 127 already read once for the invertibility citation and should be
+re-read here for what it says about the gap's own limitations).
+**Gate.** Does origin-H² admit a structurally viable certificate formulation — i.e., does Xu's
+own text (or this repository's existing norm/embedding infrastructure) supply, or straightforwardly
+adapt to, a split and shape analogous to what `ell^1_w`'s stage B needed, with no KNOWN
+obstruction of the same class as the one that killed every `ell^1_w` attempt?
+  yes -> A structurally viable certificate attempt exists in origin-H². Name the required
+         infrastructure precisely (what's reusable vs. what's new) and ESCALATE as a genuine
+         new research direction for the user — do not build anything under this leg's own
+         authority; a construction attempt is a separate, later leg's work, contingent on the
+         user's ruling the way leg 63/125's dissipative direction was.
+  no  -> Name the specific structural obstruction (spectral-gap-imposed floor, missing
+         embedding infrastructure, or incompatible bordering) that closes this direction
+         before a construction leg would even be worth drafting. Bank it as a scoped negative
+         — the origin-H² space is invertible for the OPERATOR per Xu, which does not by
+         itself imply a certificate is buildable there.
+**Territory.** experiments/p2_route_h2s_v1_scoping.py,
+               writeup/data/p2_route_h2s_v1_scoping.json,
+               writeup/novelty/leg_163.md, experiments/journal/leg_163.md.
+               Reads (never edits) solver/spectral_certificate.py (127's territory, closed on
+               landing), solver/holder_norms.py, solver/hilbert_pointwise.py,
+               solver/op_lower.py, and Xu arXiv:2607.19762 itself. No new solver module; no
+               certificate is built or measured under this leg.
+**Difficulty.** standard
+**Independence.** Literature-plus-scoping only, no compute, no new solver module. **NOT
+dispatchable until leg 127's verifier confirms both the proof and the Xu citation** — if the
+verifier finds either claim does not hold, this leg is never dispatched and is withdrawn at
+the next refresh, at zero cost. Disjoint from every other live/reserve leg's territory.
 ```
 
 ## Ranking rationale
