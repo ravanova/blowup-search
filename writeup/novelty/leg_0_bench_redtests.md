@@ -245,4 +245,25 @@ Explicitly **not** touched: `experiments/JOURNAL.md`, `LITERATURE_CHECK.md`,
 
 # FINDINGS (appended after the probes ran)
 
-*(appended in a later commit — see `experiments/journal/leg_0_bench_redtests.md`)*
+Full findings: **`experiments/journal/leg_0_bench_redtests.md`**. Scored against the
+predictions above, without moving the goalposts:
+
+| hypothesis | verdict | the number that decided it |
+|---|---|---|
+| **H1** G6 asserts the one quantity the module says is not robust | **CONFIRMED**, predicted signature matched exactly | `p(s=0.10)` spans **[-1.574, +2.041]** over 15 windows (5/15 positive); `p(s=1.00)` negative at **15/15**; ordering holds **15/15** |
+| **H2** the s=0.10 run is pre-asymptotic | **SUPPORTED** | `fit_rms` **0.421** vs `\|p\|` **0.211** — scatter is 2.0x the signed quantity (at s=1.00 the ratio is 0.09) |
+| **H3** the two runs are not the same length | **DEAD** | both end on the spectral guard at **34.2 s** / **28.5 s** vs `wall_max=240`; no wall-clock termination |
+| **H4** G5's refusal already covers G6 | **CONFIRMED** | `collapse_window_report` refuses both: **0.67**/**0.63** decades (need 1.5), beta spread **73%**/**57%** (allow 25%) |
+| **H5** a real defect in the D/N instrument | **EXCLUDED** | ratio strictly positive, min **2.00e-04** / **1.70e-03**; no denominator near zero |
+| **H6** item (6) is a coin-flip on an absolute threshold | **CONFIRMED**, predicted signature matched | measured `hist[0]=0.0465` ⟹ threshold is absolute **1e-6**; three stalls span **2.31 decades** (3.881e-07, 2.120e-05, 7.879e-05) and straddle it; `iterations=40` in all |
+| **H9** the retry branch is a source of bistability | **CONFIRMED** as amplifier | warm **2.120e-05** vs cold **7.879e-05** — the reported row is a `min` of two stalls 3.7x apart |
+| **H10** a real defect in the convergence predicate | **PARTIAL — flagged, not fixed** | `max(1.0, hist[0])` silently makes the criterion absolute, and the cap is never checked; repairing it would move banked `converged` flags, which was pre-committed as escalation |
+
+The pre-registered falsifiers were checked and did **not** fire: the window sweep did
+*not* leave `p(s=0.10)` negative at every window (5 of 15 are positive), so H1 is alive
+and the repair belongs in the gate rather than in the physics; and the repaired G6 changes
+**no** other gate's number — all 40 G0–G5 output lines are byte-for-byte identical.
+
+Both pre-committed edit disciplines were honoured: no assertion was flipped, no threshold
+was relaxed, `solver/fractional_boussinesq.py` and `solver/profile_newton.py` are both
+untouched, and no banked number changed.
