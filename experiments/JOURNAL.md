@@ -3238,3 +3238,13 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   n^2.36 is a ladder-dependent least-squares average -- local slopes climb
   2.13->2.50, a second ladder fits 2.2466 -- but every local slope stays >=1.88 and
   rising, so the divergence verdict itself is unaffected.
+- **Leg 206 (Route-GSA) — YES, landed directly (not claim-adjacent):** ga_search.py
+  silently returns a wrong value on 12 of 41 adversarial cases across six mechanisms
+  (a -inf optimum demoted to worst rank; a NaN gene surviving in a "converged"
+  individual at finite fitness; inverted bounds collapsing offspring onto a single
+  point; elite_frac>=1 freezing the breeding loop at 864347x worse while reporting
+  40 generations; a bounds-length mismatch returning a rank-1 genome). All six are
+  orthogonal to the standing GA ban (defects in optimiser input-handling, not
+  fitness validity) and measured, not assumed, clean: all 9 live ga_minimize call
+  sites audited safe (static ast parse) and the sole production fitness is
+  structurally unable to emit -inf. Module read-only, landed straight to main.
