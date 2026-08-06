@@ -8683,3 +8683,86 @@ legs (216, 225, 227, 228, 229, 231, 232, 233, 234, 235, 241).**
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 239 lands MIXED (escalation correctly held),
+241 promoted into slot C, floor back to 2/10, a spare floor-eligible candidate drafted now
+rather than reactively
+
+**239 (USC3) landed on `main` (`27b2d5b`) — gate MIXED.** Reported per-obstruction as its
+own gate required: 2 of `arXiv:2511.22819`'s three new obstructions are technique-specific,
+1 is model-specific. **Escalation correctly did NOT fire on the model-specific one** — the
+leg ran its own positive control before deciding (the named alternative model class was
+checked against this repository's own infrastructure and matched only a bibliography line,
+not an actual buildable model, versus 12/33 real hits for Boussinesq/gCLM terms) — exactly
+the falsifiable-control discipline this repository's own standing practice requires before
+an escalation fires. Clean landing.
+
+**Slot C refilled with leg 241 (PCRC)**, the cleanup leg drafted last round for leg 217's
+partial repair — now in flight.
+
+**This drops the composition floor back to 2/10 (236, 240), since 239 was floor-eligible.**
+Per this DM's own process note two updates above (floor-eligible legs land faster than the
+repair/verify batch; worth keeping a spare ready rather than scrambling each time), a new
+floor-eligible candidate is drafted now, proactively, rather than waiting for the
+orchestrator's next vacancy report — the orchestrator explicitly offered either sequencing
+this round; this DM chooses to draft first and let the orchestrator decide preempt-vs-wait
+once it exists, rather than pre-committing to preemption before the candidate is even
+written.
+
+```
+### 242 — ROUTE-DFL2: DO Dahne & Figueras (OR COAUTHORS) HAVE LATER WORK EXTENDING
+arXiv:2410.05480's CGL SELF-SIMILAR BRANCHES TOWARD A GENUINELY FLUID/VORTEX-DYNAMICS MODEL,
+OR TOWARD COMPLETING "THE MISSING RUNG"? (a spare floor-eligible candidate, drafted
+proactively per this DM's own process note)
+[FLOOR-ELIGIBLE: literature — extends a landed literature/re-derivation finding at full-text
+depth, not an audit/repair/verify]
+**Thesis.** `arXiv:2410.05480` (Dahne & Figueras) interval-verifies self-similar singular CGL
+branches continued in a dissipation parameter; leg 48 (Route-V) independently re-derived it
+to 1.8e-07, and it is the paper that closed stage V for non-novelty. Leg 174 (VBS) later
+asked whether this constitutes a completed certified viscous blow-up "in any model" (finding:
+yes, but NOT in a fluid/vortex-dynamics-adjacent model — CGL is the wrong category) and
+separately cataloged what other viscous fluid-adjacent models have an existing analytic
+blow-up proof. Neither leg asked the follow-up this repository's own established
+"check for later work by the same authors" pattern (175->196, 174/197->240) already applies
+twice elsewhere: does Dahne & Figueras (or a coauthor) have SUBSEQUENT published work that
+either (a) extends the same interval-verification technique to a genuinely fluid/vortex-
+dynamics-adjacent model (closing leg 174's own empty occupancy-matrix cell directly), or (b)
+completes the CGL branch work itself into an actual blow-up certificate rather than a
+verified-branch/continuation result (closing leg 174's (a)-question about whether the rung
+is genuinely empty)?
+**Gate.** Does Dahne & Figueras's subsequent published work extend the interval-verification
+technique to a fluid/vortex-dynamics-adjacent model, or complete the CGL work into an actual
+certified blow-up?
+  yes (either) -> This would bear directly on leg 174's own "missing rung" occupancy matrix
+         — record the citation and its hypotheses verbatim, state precisely which cell it
+         fills or doesn't, and ESCALATE; do not attempt to replicate or build on it under
+         this leg's own authority.
+  no -> Report the search precisely (this repository's own discipline: report the search,
+        not just the absence). Bank as confirming leg 174's own catalog is still current on
+        this specific author line.
+**Territory.** experiments/p2_route_dfl2_v1_lit.py, writeup/data/p2_route_dfl2_v1_lit.json,
+               writeup/novelty/leg_242.md, experiments/journal/leg_242.md.
+               Reads (never edits) leg 48's and leg 174's own reports/JSONs and
+               solver/viscous_novelty.py's PRECEDENTS ledger, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from every other
+live/reserve leg (48/174 already landed and closed; this extends them, doesn't re-open
+them; 240 checks a DIFFERENT author line, `arXiv:2208.09445`'s). Immediately dispatchable —
+this DM's own choice for the next floor vacancy, whether via preemption or natural opening,
+at the orchestrator's discretion.
+```
+
+**Reserve queue: 11 undispatched legs (216, 225, 227, 228, 229, 231, 232, 233, 234, 235,
+242).** (241 is now live in slot C, not reserve — the prior update's count already reflected
+that; this update adds 242 fresh.) 242 is flagged as floor-eligible and ranked for IMMEDIATE
+promotion the moment any slot opens (or via preemption, orchestrator's call this round, per
+its own offer) — do not let a non-floor-eligible reserve item take the next vacancy ahead of
+242 while the floor sits at 2/10.
+
+**Floor status: 2/10 (236, 240) right now, with 242 drafted and ready to restore it to
+3/10 the moment it is dispatched.**
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.

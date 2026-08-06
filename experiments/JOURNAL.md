@@ -3407,3 +3407,17 @@ preempted agents had reached a landing.
   named class (2D IPM) matches only 1 solver file (a bibliography line, not a
   model), against positive controls of 12 (Boussinesq) and 33 (gCLM) hits for
   the same test -- a control that demonstrably could have fired and didn't.
+- **Leg 216 (Route-CGF) — mostly repaired, gate NO overall, ESCALATED (parked, not
+  merged):** 13 of leg 199's remaining 15 silent-accept gaps in
+  certificate_guards.py now correctly reject (M3 3/3, M2 4/5, M4 1/1, M5 4/5, M7
+  1/1), 43/43 live call-site values bit-identical at 0 ULP, 17/17 controls pass.
+  2 survivors correctly left unforced: D1b's accept lives outside this leg's
+  territory (nk_bounds.py:225); B_nonreal_Fraction can't be closed without
+  breaking leg 199's own M4 discrimination control (Fraction IS numbers.Real).
+  ONE MORE BANKED NUMBER MOVES outside this leg's territory: a root regression
+  test's raised_loudly count goes 5->7 (0 false_closes either side) -- needs a
+  leg that owns that file. **PROCESS GAP FOUND: scripts/merge_gate.sh does not
+  actually test certificate_guards.py** -- it maps solver/<name>.py to
+  test_<name>.py, and test_certificate_guards.py does not exist, so the file
+  three certified pipelines delegate their accept/reject decision to has never
+  been in the merge gate's own always-run set.
