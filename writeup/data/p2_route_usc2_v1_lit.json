@@ -1,0 +1,411 @@
+{
+  "leg": 196,
+  "route": "ROUTE-USC2",
+  "role": "LIT",
+  "pass_date": "2026-08-06",
+  "target": {
+    "id": "arXiv:2511.22819v1",
+    "title": "Resolving Sharp Gradients of Unstable Singularities to Machine Precision via Neural Networks",
+    "url": "https://arxiv.org/abs/2511.22819",
+    "authors": [
+      "Yongji Wang",
+      "Tristan Leger",
+      "Ching-Yao Lai",
+      "Tristan Buckmaster"
+    ],
+    "pages": 27,
+    "versions_on_arxiv": [
+      "v1"
+    ],
+    "journal_ref": null,
+    "read_at_full_text_depth_first_time_in_this_repository": true,
+    "leg_175_read_depth": "abstract, p.2 sec.1, p.11 sec.2.3.3 only"
+  },
+  "predecessor": {
+    "id": "arXiv:2509.14185v1",
+    "title": "Discovery of Unstable Singularities",
+    "url": "https://arxiv.org/abs/2509.14185",
+    "author_count": 22,
+    "read_by": "leg 175, at full text"
+  },
+  "timing": {
+    "days_usc_to_fix": 72,
+    "days_fix_to_pass": 251,
+    "days_usc_to_pass": 323,
+    "cap_manuscript_announced": "USC p.8 footnote 2, 'Manuscript in preparation.'",
+    "cap_manuscript_published": false
+  },
+  "authorship": {
+    "cap_track_authors_on_usc_absent_from_fix": [
+      "Javier Gomez-Serrano",
+      "Gonzalo Cao-Labora"
+    ],
+    "note": "a locatable fact about who wrote what, consistent with the CAP being a separate track; NOT an inference about intent."
+  },
+  "gate": {
+    "question": "Does the authors' later work (post-obstruction-removal) state, imply, or make locatable an actual certificate for the unstable singularities arXiv:2509.14185 reported at CAP-ready precision, and if not, what NEW obstruction (if any) does it name?",
+    "verdict": "STILL_SHORT",
+    "answered_branch": "still short, new/same obstruction",
+    "certificate_found": false,
+    "escalation_fires": false,
+    "discriminators": {
+      "E3_later_work_located": true,
+      "E3_works_located": [
+        "arXiv:2511.22819v1"
+      ],
+      "E1_apparatus_terms_present": [],
+      "E1_apparatus_term_census": {
+        "interval arithmetic": 0,
+        "enclosure": 0,
+        "validated numerics": 0,
+        "certif": 0
+      },
+      "E1_apparatus_present": false,
+      "E2_cap_mention_kinds": [
+        "ASPIRATION",
+        "DEFINITION",
+        "PREREQUISITE"
+      ],
+      "E2_achieved_claims": [],
+      "E2_achievement_claimed": false
+    }
+  },
+  "term_census_full_text": {
+    "interval arithmetic": 0,
+    "enclosure": 0,
+    "validated numerics": 0,
+    "certif": 0,
+    "computer-assisted": 4,
+    "eigen": 0,
+    "spectrum": 1,
+    "Boussinesq": 2,
+    "Euler": 3
+  },
+  "cap_mentions_exhaustive": [
+    {
+      "line": 41,
+      "section": "Abstract",
+      "kind": "PREREQUISITE",
+      "text": "providing an important ingredient for bridging the gap between numerical discovery and computer-assisted proofs for unstable phenomena in nonlinear PDEs."
+    },
+    {
+      "line": 49,
+      "section": "1 Introduction",
+      "kind": "DEFINITION",
+      "text": "Their rigorous mathematical validation via computer-assisted proofs (CAP) generally demands extremely high numerical accuracy [2]."
+    },
+    {
+      "line": 907,
+      "section": "3 (Gross-Pitaevskii vortices)",
+      "kind": "ASPIRATION",
+      "text": "Obtaining robust numerical approximations is paramount for better simulations and rigorous computer-assisted proofs."
+    },
+    {
+      "line": 1438,
+      "section": "5 Conclusion",
+      "kind": "PREREQUISITE",
+      "text": "Beyond numerical discovery, high accuracy is a prerequisite for rigorous mathematical verification via computer-assisted proofs."
+    }
+  ],
+  "quotes": [
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 41,
+      "section": "Abstract",
+      "text": "providing an important ingredient for bridging the gap between numerical discovery and computer-assisted proofs for unstable phenomena in nonlinear PDEs.",
+      "bears_on": "the paper's own description of its contribution: an ingredient, not a bridge"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 1437,
+      "section": "5 Conclusion",
+      "text": "Beyond numerical discovery, high accuracy is a prerequisite for rigorous mathematical verification via computer-assisted proofs.",
+      "bears_on": "the paper's last word on certification -- future-facing, nothing claimed"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 130,
+      "section": "2",
+      "text": "We demonstrate our method on two canonical models: the 1D Cordoba-Cordoba-Fontelos equation and the 2D Incompressible Porous Media equation.",
+      "bears_on": "Boussinesq and 3D Euler with boundary -- leg 175's open item (a) -- are outside the follow-up's scope entirely"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 276,
+      "section": "2.1.3 Exploring higher Unstable Solutions",
+      "text": "a persistent non-smooth signal at the origin (inset of Fig.3b) remains for all tested lambda in [0.455, 0.4713]. This indicates that if a third unstable solution exists, it is located at a lambda value corresponding to an even higher-gradient profile.",
+      "bears_on": "NEW obstruction N2: the discovery frontier itself stalled on CCF"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 279,
+      "section": "2.1.3",
+      "text": "The challenge of exploring the range lambda < 0.455 and resolving such a feature in the 1D CCF model appears to be even greater than finding highly unstable solutions in the 2D IPM equation.",
+      "bears_on": "the authors rate the remaining 1D search harder than the 2D one"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 684,
+      "section": "2.3.3",
+      "text": "the high-gradient nature of higher-order unstable modes still reduces the convergence rate of training. For a fixed computational budget ... the achievable background PDE residual for the smooth solution increases by approximately one order of magnitude for each successive singularity",
+      "bears_on": "leg 175's ladder, re-verified at the primary source"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 696,
+      "section": "2.3.3",
+      "text": "decreases the achievable lambda accuracy for a fixed computational budget by approximately two orders of magnitude per model.",
+      "bears_on": "NEW obstruction N1: the ladder now degrades the enclosure width of lambda, which is what a self-similar CAP must enclose"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 773,
+      "section": "2.3.3",
+      "text": "Figure 6(f) shows the best inferred lambda for different singularities of IPM using a multistage setup that can be implemented on a single A100 GPU (80GB). To further improve the lambda accuracy, one could use larger networks or more training stages in parallel on multiple GPUs.",
+      "bears_on": "NEW obstruction N3: the remedy offered is budget, not method"
+    },
+    {
+      "src": "arXiv:2511.22819v1",
+      "line": 49,
+      "section": "1 Introduction",
+      "text": "we refer to machine precision as the highest achievable accuracy, where the remaining PDE residuals are dominated by the inherent round-off errors of double-float arithmetic, typically O(10^-13) or lower.",
+      "bears_on": "N3: the floor is double-float round-off, by the pipeline's own definition"
+    }
+  ],
+  "leg_175_open_items_recheck": [
+    {
+      "id": "a",
+      "item": "the precision fix is unpublished for Boussinesq / 3D Euler with boundary",
+      "closed_by_fix": false,
+      "evidence": "FIX sec.2 l.130 names its two models as CCF and IPM only; 'Boussinesq' occurs 2x in 27 pp (abstract recap of [1]; ref [2] title) and never in the body. Leg 175's ~4.8-decade Boussinesq gap is untouched.",
+      "leg_175_magnitude": "4.82 decades short of O(10^-13) at Boussinesq's best solution"
+    },
+    {
+      "id": "b",
+      "item": "the ~2 decade/mode margin ladder",
+      "closed_by_fix": false,
+      "evidence": "FIX sec.2.3.3 l.684-696 states it in the paper's own words and it is now the BINDING constraint, expressed in lambda rather than in residual (see N1).",
+      "leg_175_magnitude": "2.0 decades/mode net margin closure"
+    },
+    {
+      "id": "c",
+      "item": "the unstable-spectrum enclosure (a proof obligation, not a numerics one)",
+      "closed_by_fix": false,
+      "evidence": "ZERO occurrences of 'eigen' in the follow-up; no linearized-operator spectrum, no mode-count re-derivation, no treatment of eigenvalues off the real axis or outside the symmetry class. The paper that fixed the numerics did not touch it.",
+      "leg_175_magnitude": "not a quantity -- an assumption stated as 'desirable' in USC p.19"
+    },
+    {
+      "id": "d",
+      "item": "the CAP announced Sep 2025 as 'Manuscript in preparation'",
+      "closed_by_fix": false,
+      "evidence": "FIX never mentions it; eight independent search venues this pass returned no such record (see SEARCH_LOG).",
+      "leg_175_magnitude": "unpublished"
+    }
+  ],
+  "leg_175_items_closed_by_fix": 0,
+  "leg_175_items_total": 4,
+  "new_obstructions": [
+    {
+      "id": "N1",
+      "name": "the binding quantity moved from the residual to lambda's error bar",
+      "locator": "FIX Fig.7(f) l.714-738; sec.2.3.3 l.696",
+      "detail": "Residuals are at double-float round-off O(10^-13), but the scaling parameter lambda -- the object a self-similar blow-up certificate must enclose -- is pinned only to +-1e-7 at IPM's 4th unstable mode.",
+      "new_relative_to_leg_175": true,
+      "why_new": "leg 175 recorded the ladder as a RESIDUAL margin against the CAP threshold. The full text shows that margin is paid off and the ladder now degrades the ENCLOSURE WIDTH of lambda instead."
+    },
+    {
+      "id": "N2",
+      "name": "the discovery frontier stalled: CCF's 3rd unstable searched, not found",
+      "locator": "FIX sec.2.1.3 l.275-281",
+      "detail": "Searched across lambda in [0.455, 0.4713] with a persistent non-smooth signal at every tested value; the authors place the remaining search below 0.455 and rate it harder than the 2D IPM problem. 'the full suite of previously discovered CCF solutions' is a suite of THREE.",
+      "new_relative_to_leg_175": true,
+      "why_new": "not visible from the abstract, which reports only what was resolved."
+    },
+    {
+      "id": "N3",
+      "name": "the remaining margin is hardware- and arithmetic-bound, not conceptual",
+      "locator": "FIX sec.1 l.49-51; sec.2.3.3 l.769-775",
+      "detail": "The floor is double-float round-off by the pipeline's own definition of success, and every remedy offered for lambda accuracy is budget (larger networks, a third stage, more GPUs; the reported results fit one A100 80GB). A certificate generally needs arithmetic TIGHTER than the object it encloses.",
+      "new_relative_to_leg_175": true,
+      "why_new": "leg 175 read the fix as removing a method barrier; the full text shows what replaced it is a precision-arithmetic barrier."
+    },
+    {
+      "id": "N4",
+      "name": "third-party: low PDE residual does not discriminate accurate from inaccurate PINN solutions",
+      "locator": "arXiv:2606.25151 (McShannon, Dietrich, Jun 2026), which cites USC as [1]-class prior art; https://arxiv.org/abs/2606.25151",
+      "detail": "Parameter-poisoned PINNs reach loss at or below the clean baseline while differing from the true solution by large margins, on Burgers, an NS cavity and convection-diffusion.",
+      "new_relative_to_leg_175": true,
+      "why_new": "post-dates leg 175's pass. NOT the authors' own, and NOT on the singularity problems -- it makes no claim of error in USC or FIX. Recorded because it is the independent statement of why N1-N3 matter: a small residual is evidence, an enclosure is a proof.",
+      "is_third_party": true
+    }
+  ],
+  "new_obstructions_named_by_the_authors": 3,
+  "lambda_enclosure_ladder": {
+    "modes": [
+      {
+        "n": 0,
+        "label": "stable",
+        "lambda_s": 1.0285722760323,
+        "stated_accuracy": 1e-13,
+        "log10_accuracy": -13.0
+      },
+      {
+        "n": 1,
+        "label": "1st unstable",
+        "lambda_s": 0.472129736156,
+        "stated_accuracy": 2e-12,
+        "log10_accuracy": -11.699
+      },
+      {
+        "n": 2,
+        "label": "2nd unstable",
+        "lambda_s": 0.3149617817,
+        "stated_accuracy": 3e-10,
+        "log10_accuracy": -9.5229
+      },
+      {
+        "n": 3,
+        "label": "3rd unstable",
+        "lambda_s": 0.24156641,
+        "stated_accuracy": 1e-08,
+        "log10_accuracy": -8.0
+      },
+      {
+        "n": 4,
+        "label": "4th unstable",
+        "lambda_s": 0.1987237,
+        "stated_accuracy": 1e-07,
+        "log10_accuracy": -7.0
+      }
+    ],
+    "fitted_decades_lost_per_mode": 1.57,
+    "paper_stated_decades_per_mode": 2.0,
+    "agree_within_0p75_decade": true,
+    "note": "the fitted rate is over the BEST achieved lambda (Fig.7f); the stated rate is at FIXED computational budget. Related but not identical quantities -- they are expected to agree only in order of magnitude, and they do.",
+    "residual_log10_at_best": -13.0,
+    "lambda_log10_accuracy_at_mode4": -7.0,
+    "decades_between_residual_and_lambda_at_mode4": 6.0
+  },
+  "residual_ladder_crosscheck": {
+    "implied_decades_per_mode_from_worked_example": 1.0,
+    "stated_decades_per_mode": 1.0,
+    "agree_within_0p25_decade": true,
+    "net_margin_closure_decades_per_mode": 2.0,
+    "matches_leg_175_finding": true
+  },
+  "ccf_third_unstable_search": {
+    "searched_lambda_window": [
+      0.455,
+      0.4713
+    ],
+    "found": false,
+    "authors_next_range": "lambda < 0.455",
+    "authors_difficulty_rating": "greater than finding highly unstable solutions in 2D IPM",
+    "ccf_suite_size_after_fix": 3
+  },
+  "search_log": [
+    {
+      "n": 1,
+      "venue": "arXiv API export.arxiv.org",
+      "query": "all:\"unstable singularities\", 40 results, submittedDate desc",
+      "relevant_hits": [
+        "arXiv:2511.22819v1",
+        "arXiv:2509.14185v1"
+      ],
+      "outcome": "exactly two relevant records; the other 14 are unrelated senses of unstable/singularities. Identical to leg 175's result 8 months later."
+    },
+    {
+      "n": 2,
+      "venue": "arXiv API export.arxiv.org",
+      "query": "all:\"unstable singularities\" AND all:\"self-similar\" (leg 175 query, re-run)",
+      "relevant_hits": [
+        "arXiv:2511.22819v1",
+        "arXiv:2509.14185v1"
+      ],
+      "outcome": "unchanged"
+    },
+    {
+      "n": 3,
+      "venue": "arXiv API export.arxiv.org",
+      "query": "au:\"Gomez-Serrano\" AND abs:\"computer-assisted\", submittedDate desc",
+      "relevant_hits": [],
+      "outcome": "7 records, newest arXiv:2605.03920 (Burgers-Hilbert linear instability, May 2026). No CAP for unstable singularities."
+    },
+    {
+      "n": 4,
+      "venue": "arXiv API export.arxiv.org",
+      "query": "abs:\"Cordoba-Cordoba-Fontelos\" OR abs:\"incompressible porous media\" AND abs:\"computer-assisted\"",
+      "relevant_hits": [],
+      "outcome": "3 records: the same two, plus Kiselev 2010. No CAP."
+    },
+    {
+      "n": 5,
+      "venue": "arXiv abs page",
+      "query": "https://arxiv.org/abs/2511.22819 submission history",
+      "relevant_hits": [],
+      "outcome": "v1 only, no v2, no journal reference"
+    },
+    {
+      "n": 6,
+      "venue": "Semantic Scholar graph API",
+      "query": "citations of arXiv:2509.14185, limit 100",
+      "relevant_hits": [],
+      "outcome": "22 citing papers; NONE is a certificate for these singularities. Nearest are FIX itself and arXiv:2606.25151 (see N4)."
+    },
+    {
+      "n": 7,
+      "venue": "maintained author page https://sites.brown.edu/jgs/papers/",
+      "query": "Gomez-Serrano's own 2025-2026 list (the CAP author on the original)",
+      "relevant_hits": [],
+      "outcome": "nothing on a CAP for unstable self-similar singularities; his 2026 submissions are biharmonic nodal loops, Burgers-Hilbert, polygon eigenvalues, and the Tao/Wagner exploration paper."
+    },
+    {
+      "n": 8,
+      "venue": "web search, 4 query variants",
+      "query": "author-name / obstruction-framing / Cao-Labora / CCF-IPM-CAP variants",
+      "relevant_hits": [],
+      "outcome": "same two papers plus secondary coverage (Quanta 2026-01-09; a NASA Ames seminar page 2026-03-05; an LIMS event page). No primary source announcing a certificate. Secondary coverage was used for NO claim."
+    }
+  ],
+  "what_would_have_changed_the_answer": "any of searches 1/2/4 returning a third record; search 5 showing a v2 with a validation section; search 6 surfacing a CAP among the 22 citers; search 7 listing one.",
+  "self_tests": [
+    {
+      "case": "actual_evidence",
+      "got": "STILL_SHORT",
+      "expected": "STILL_SHORT",
+      "pass": true
+    },
+    {
+      "case": "counterfactual_apparatus_and_claim",
+      "got": "CERTIFICATE_ACHIEVED",
+      "expected": "CERTIFICATE_ACHIEVED",
+      "pass": true
+    },
+    {
+      "case": "counterfactual_apparatus_without_claim",
+      "got": "STILL_SHORT",
+      "expected": "STILL_SHORT",
+      "pass": true
+    },
+    {
+      "case": "counterfactual_claim_without_apparatus",
+      "got": "STILL_SHORT",
+      "expected": "STILL_SHORT",
+      "pass": true
+    },
+    {
+      "case": "counterfactual_no_later_work_located",
+      "got": "NOT_LOCATABLE",
+      "expected": "NOT_LOCATABLE",
+      "pass": true
+    }
+  ],
+  "self_tests_pass": true,
+  "ceiling": {
+    "chain_links_moved": 0,
+    "precedents_ledger_edited": false,
+    "usc_precedents_verdict_unchanged": "EXCLUSION",
+    "clay_percent": 0.05,
+    "note": "literature-only leg on someone else's inviscid, uncertified numerics. The one item touching this repository's agenda is leg 175's item (c): the unstable-spectrum enclosure is a PROOF obligation, and the paper that fixed the numerics did not touch it."
+  }
+}
