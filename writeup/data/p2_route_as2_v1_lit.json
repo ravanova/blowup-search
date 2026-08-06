@@ -1,0 +1,264 @@
+{
+  "leg": 112,
+  "route": "P2 Route-AS2 v1 -- full-text verification of sec 24's two flagged readings",
+  "kind": "literature verification; no computation of any bound, no figure, no ban lifted",
+  "date": "2026-08-06",
+  "gate": "Does the full text of arXiv:2603.25104 confirm both load-bearing readings -- the a-sign as sec 24 read it, and the identity of its fixed point with the banked first integral?",
+  "gate_answer": "YES (both readings confirmed)",
+  "gate_answer_detail": "R1 CONFIRMED word for word at p.1 and p.3, with one qualifier sec 24 did not carry: the a-sign dichotomy is CONDITIONAL on degenerate initial data. R2 CONFIRMED in the strongest available form: p.38 DEFINES the map as (1 - a T(omega)/r(omega))^{1/a}_+, which is (FI) under (omega,u,r)=(-Omega,-U,c) with the anchor constant r = c = 1/2 matching, and p.39 DERIVES it by our own two-line integration. Therefore the occupied-territory verdict is confirmed at full-text depth and sec 24's open instruction is closed.",
+  "version_read": "arXiv:2603.25104v2 [math.AP] 16 Jun 2026, 55 pages",
+  "version_cited_by_sec24": "2026-03-26 (v1)",
+  "readings_under_test": {
+    "R1": {
+      "name": "the a-sign in arXiv:2603.25104",
+      "flagged_unverified_by": "PHASE2_P2_NOTES.md sec 24 (Route-D v15, 2026-08-01)",
+      "our_text_verbatim": "the two-scale scenario is described as the a <= 0 case, with a > 0 giving ONE-scale self-similar blowups. This project has worked the two-scale object at a > 0 throughout. If that sign is right the question is not whether our object is novel but whether it is the RIGHT OBJECT.",
+      "why_it_was_unverified": "sec 24's own words: 'NOT ONE PAPER WAS READ. This container's network policy blocks arxiv.org and every publisher domain reached ... The only instrument was web SEARCH ... every technical statement below is a paraphrase of a search summary and is a LEAD, not a fact.'"
+    },
+    "R2": {
+      "name": "whether 2603.25104's fixed point IS the banked first integral",
+      "flagged_unverified_by": "PHASE2_P2_NOTES.md sec 24 (Route-D v15, 2026-08-01)",
+      "our_text_verbatim": "VERIFY THE TWO LOAD-BEARING READINGS -- the a-sign in arXiv:2603.25104, and whether its fixed point IS this first integral. Both need a PDF, i.e. a session with arXiv access or a human. The binding constraint on the next decision is ACCESS, not compute and not cleverness.",
+      "the_first_integral_verbatim": "PHASE2_P2_NOTES.md sec 23 (FI): Omega(X) = -( E(X)/c )^{1/a}, E = c + aU, U_X = H(Omega).",
+      "our_own_hedge_verbatim": "sec 23: 'Novelty UNCHECKED -- a first integral of a scalar traveling-wave equation is exactly the sort of thing that is folklore to people who work on gCLM/De Gregorio, and the literature search (standing item (5)) blocks any novelty claim.'"
+    }
+  },
+  "fulltext_findings": [
+    {
+      "id": "F1",
+      "reading": "R1",
+      "paper": "arXiv:2603.25104v2",
+      "page": 1,
+      "locator": "Abstract",
+      "quote": "our numerical study reveals distinct self-similar blowup behaviors depending on the sign of a. For a > 0, we observe one-scale self-similar blowups with regular profiles that have not been found in previous studies. In contrast, for a <= 0, we discover a novel two-scale self-similar blowup scenario where the outer profile converges to a singular function at the blowup time while the inner profile remains regular on a much smaller scale.",
+      "verdict": "CONFIRMS R1 word for word, including the direction of the inequality"
+    },
+    {
+      "id": "F2",
+      "reading": "R1",
+      "paper": "arXiv:2603.25104v2",
+      "page": 3,
+      "locator": "sec 1, Introduction",
+      "quote": "we call an initial datum degenerate if omega has zero first derivative at the eventual blowup point. The main purpose of this paper is to find out whether and how self-similar blowups can develop from degenerate initial data and in what ways they are different from those in the non-degenerate case.",
+      "verdict": "THE QUALIFIER sec 24 DID NOT CARRY: the entire a-sign dichotomy is CONDITIONAL on DEGENERATE initial data (omega'_0(0) = 0). It is not a general statement about gCLM at a > 0, and it therefore does not by itself say our a > 0 object is the wrong object"
+    },
+    {
+      "id": "F3",
+      "reading": "R1",
+      "paper": "arXiv:2603.25104v2",
+      "page": 3,
+      "locator": "sec 1, Introduction",
+      "quote": "For a > 0, we observe that smooth degenerate initial data could lead to asymptotically self-similar finite-time blowups with undiscovered regular profiles that share the same type of derivative degeneracy as the initial data.",
+      "verdict": "second, independent statement of R1's a > 0 half, in the body not the abstract"
+    },
+    {
+      "id": "F4",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 38,
+      "locator": "sec 7.1, definition of the nonlinear map R_a",
+      "quote": "R_a(omega)(x) = ( 1 - a T(omega)(x) / r(omega) )^{1/a}_+ ,  omega in D_a, where T(omega)(x) = (1/pi) INT_{-inf}^{+inf} ln| (x-y)/y | omega(y) dy and r(omega) = (1/pi) INT_0^{+inf} ( omega(0) - omega(y) ) / y^2 dy   (7.2)",
+      "verdict": "CONFIRMS R2. The map IS the first integral: sec 23's (FI) is Omega = -(1 + aU/c)^{1/a}, and under (omega, u, r) = (-Omega, -U, c) the two expressions are the same function. Not 'related to', not 'an analogue of' -- the same closed form, with the (.)_+ truncation that sec 23 derived separately as 'the profile ENDS'"
+    },
+    {
+      "id": "F5",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 39,
+      "locator": "Proposition 7.1, proof of the converse direction",
+      "quote": "if (omega(x), r) is a solution to (7.1) satisfying the conditions in the proposition, then for x such that omega(x) != 0, we have omega'/omega = u'/(a u - r). Solving this ODE and writing u = T(omega) gives omega(x) = ( 1 - a T(omega)(x)/r(omega) )^{1/a}_+",
+      "verdict": "this is sec 23's two-line integration VERBATIM. sec 23: 'R = Omega H(Omega) - E Omega_X = 0 <=> (log|Omega|)_X = (1/a)(log E)_X => |Omega| = C E^{1/a}'. Same derivation, same order, published first"
+    },
+    {
+      "id": "F6",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 37,
+      "locator": "sec 7, opening (the a = 0 case)",
+      "quote": "which admits an explicit solution omega(x) = 1/(1+x^2), u(x) = (1/2) ln(1+x^2), r = 1/2.",
+      "verdict": "this is sec 23's ANCHOR, sign-flipped: 'on the anchor U = -(1/2)log(1+X^2), c = 1/2, so Omega = -1/(1+X^2) exactly -- measured 1.11e-16'. The correspondence therefore fixes the CONSTANT as well as the form"
+    },
+    {
+      "id": "F7",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 15,
+      "locator": "Theorem 2.7 (proved as Theorem 7.9, p.44)",
+      "quote": "For any a in (-inf, 1), the generalized Constantin-Lax-Majda model admits a traveling wave solution of the form (2.16) (up to rescaling), where omega-bar is a non-negative even function such that omega-bar(x) is smooth in its support and non-increasing on [0,+inf), omega-bar(sqrt(s)) is convex in s for s > 0, omega-bar(0) > 0, omega-bar''(0) < 0",
+      "verdict": "the EXISTENCE of our object is a published theorem for a in (-inf, 1), by Schauder. Our a-range 0.2 .. 1.2 is covered on [0.2, 1) and NOT on [1, 1.2]"
+    },
+    {
+      "id": "F8",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 45,
+      "locator": "Theorem 7.10, case (3)",
+      "quote": "0 < a < 1: omega is compactly supported on [-L_omega, L_omega], where L_omega := sup{ x : omega(x) > 0 }.",
+      "verdict": "PROVES what sec 23 flagged as unproved. sec 23: 'The profile ENDS, forced not discovered ... CAVEAT SAID OUT LOUD: needs H(Omega) < 0 for X > 0 -- true on every solution found, not proved.' Their p.46 proof supplies exactly that ingredient via monotonicity of T(omega) with T(omega)(0) = 0"
+    },
+    {
+      "id": "F9",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 47,
+      "locator": "Theorem 7.11, case (2)",
+      "quote": "0 < a < 1: omega is compactly supported on [-L_omega, L_omega], and omega is smooth in the interior of (-L_omega, L_omega).",
+      "verdict": "sec 23's 'Only finitely smooth ... classical (C^1) exactly while a < 1' is the same object. NOT stated as a theorem there: the EDGE EXPONENT 1/a, which sec 23 fitted to rel err <= 1.4e-5. It is an immediate corollary of their own formula (g is C^1 and vanishes linearly at L_omega), so it is not available as a novelty claim either"
+    },
+    {
+      "id": "F10",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 52,
+      "locator": "Appendix C.3, the iterative method",
+      "quote": "To compute such a profile numerically, we apply the fixed-point iteration omega^{(n+1)} = R_a( omega^{(n)} ), n = 0,1,2,..., initialized with omega^{(0)}(x) = 1/(1+x^2). ... The iteration is terminated once the increment satisfies || omega^{(n+1)} - omega^{(n)} ||_{Linf(R)} < 10^{-8}.",
+      "verdict": "their NUMERICS are a plain Picard iteration stopped at 1e-8. sec 23's (RS) is a Newton solve on e = E/c with the (1-v^2)s ansatz, converging from a COLD START in 5-10 steps to ~1e-14, cross-build agreement 3.9e-6 / 4.3e-6 / 7.3e-5 and K-converged to 3.7e-13. That is a difference in INSTRUMENT ACCURACY of roughly six orders of magnitude and it is NOT a novelty claim -- it is recorded so nobody re-derives the identity thinking the numerics were the contribution"
+    },
+    {
+      "id": "F11",
+      "reading": "R2",
+      "paper": "arXiv:2603.25104v2",
+      "page": 37,
+      "locator": "sec 7.1, first sentence (and sec 2.5, p.15)",
+      "quote": "we follow the idea of [HQWW24]: we reformulate the problem as a fixed-point problem of some nonlinear map and then apply the Schauder fixed-point theorem to show the existence of fixed points.",
+      "verdict": "the METHOD's priority runs back to [HQWW24] = Huang-Qin-Wang-Wei, ARMA 248(2):22, 2024 = arXiv:2305.05895 -- a paper sec 24 already had at abstract level. Checked at full text: see F12"
+    },
+    {
+      "id": "F12",
+      "reading": "R2",
+      "paper": "arXiv:2305.05895 (HQWW24, ARMA 248(2):22, 2024)",
+      "page": 8,
+      "locator": "sec 3, definition of R_a (intermediate line on p.7)",
+      "quote": "R_a(f)(x) := ( T_a(f)(x)^{1/a} . exp( ((1-a)/a) INT_0^x ( T_a(f)(y) - T_a(f)(0) ) / ( y T_a(f)(y) ) dy ) ),  f in D",
+      "verdict": "SAME TRICK, DIFFERENT ALGEBRA. The extra exponential factor is forced by their ansatz Omega(x) = -x f(x) for the SELF-SIMILAR profile equation, whose c_l X Omega_X term contributes a 1/y kernel that the TRAVELING-WAVE equation does not have. So (FI) in our exact form is 2603.25104's specialization, dated Mar 2026 (v1) / Jun 2026 (v2); the method is 2024. Either date puts sec 23 (2026-08-01) second"
+    },
+    {
+      "id": "F13",
+      "reading": "R1",
+      "paper": "arXiv:2603.25104v2",
+      "page": 22,
+      "locator": "sec 4, Table 4.1 and surrounding text",
+      "quote": "We observe two critical values: a_{c,1} in (0.232931, 0.232932), where c_l changes sign from positive to negative, and a_{c,2} in (0.751405, 0.751406), where c_omega changes sign from negative to positive.",
+      "verdict": "BONUS CONSISTENCY CHECK on an existing ledger entry, not part of the gate: Papers/MANIFEST.md (leg 45) records this paper as having 'c_l changing sign at a ~ 0.2329'. Confirmed to 6 significant figures; the paper also carries a SECOND critical value at 0.7514 that the manifest does not mention"
+    }
+  ],
+  "numeric_recheck_of_R2": {
+    "why": "R2's identification is a change of variables with three sign flips. 'The a-sign is possibly wrong' is exactly a sign-slip failure mode, so the identification is MEASURED, not asserted.",
+    "correspondence_claimed": "(omega, u, r) = (-Omega, -U, c)",
+    "C1_substitution": {
+      "a_positive": {
+        "grid": "a in [0.05, 0.95] (40 pts) x E/c in (0.01, 0.99) (200 pts); profile bounded by 1, so max_abs_diff is meaningful",
+        "max_abs_diff": 2.220446049250313e-16,
+        "max_rel_diff": 1.154314695913369e-13,
+        "max_value_on_grid": 0.9825199774759198
+      },
+      "a_negative": {
+        "grid": "a in [-2.0, -0.05] (40 pts) x E/c in (0.01, 0.99) (200 pts); 1/a < 0 so values reach ~1e23 -- read max_rel_diff, not max_abs_diff",
+        "max_abs_diff": 2.5382719845424343e+23,
+        "max_rel_diff": 1.154560597644584e-13,
+        "max_value_on_grid": 1.8080940912888684e+37
+      },
+      "headline_max_rel_diff": 1.154560597644584e-13,
+      "meaning": "theirs (p.38) and ours (sec 23 FI) are the SAME function under (omega,u,r) = (-Omega,-U,c); anything above float round-off here would mean a sign slip in the identification"
+    },
+    "C2_anchor_residual": {
+      "equation": "(a u - r) omega_x = u_x omega at a = 0, r = 1/2 (their eq (7.1), p.37)",
+      "grid": "x in [-40, 40], 200001 points",
+      "max_abs_residual": 1.1102230246251565e-16,
+      "max_rel_residual": 3.418600505067074e-16,
+      "meaning": "their published a=0 traveling wave omega=1/(1+x^2), u=(1/2)ln(1+x^2), r=1/2 satisfies their own profile equation to machine precision; this is the same object as sec 23's anchor, which sec 23 measured at 1.11e-16"
+    },
+    "C3_a_to_zero_limit": {
+      "quantity": "| (1 - a u/r)^{1/a} - exp(-u/r) | at u/r = 0.7",
+      "ladder": [
+        {
+          "a": 0.1,
+          "abs_diff": 0.012602996612116113
+        },
+        {
+          "a": 0.01,
+          "abs_diff": 0.0012208384355572033
+        },
+        {
+          "a": 0.001,
+          "abs_diff": 0.00012170528905469657
+        },
+        {
+          "a": 0.0001,
+          "abs_diff": 1.2166758756870788e-05
+        },
+        {
+          "a": 1e-05,
+          "abs_diff": 1.2166371508581797e-06
+        },
+        {
+          "a": 1e-06,
+          "abs_diff": 1.2164587104290803e-07
+        }
+      ],
+      "fitted_order_in_a": 1.0047245509287326,
+      "meaning": "their R_0(omega) = exp(-T(omega)/r(omega)) (p.38) is the a -> 0 limit of their R_a, at first order in a -- the same statement as sec 23's gate 'a -> 0 IS the anchor ... the finite-a form approaches it at the predicted O(a) (fitted a^1.011)'"
+    }
+  },
+  "magnitudes": {
+    "papers_read_at_full_text": 2,
+    "pages_in_2603_25104": 55,
+    "pages_in_2305_05895": 48,
+    "fulltext_findings_with_page_locators": 13,
+    "searches_logged_in_novelty_pass": 2,
+    "abstracts_fetched_verbatim_and_excluded": 2,
+    "excluded_sources": [
+      "Okamoto-Sakajo-Wunsch DCDS-A 34 (2014) 3155-3170",
+      "arXiv:2411.01891 (Silantyev-Lushnikov-Siegel-Ambrose)"
+    ],
+    "term_counts": {
+      "2603.25104": {
+        "traveling wave": 37,
+        "fixed point": 19,
+        "two-scale": 40,
+        "one-scale": 8,
+        "degenerate": 85,
+        "compactly supported": 13,
+        "Schauder": 3
+      },
+      "2305.05895": {
+        "traveling wave": 0,
+        "fixed point": 67,
+        "two-scale": 0,
+        "one-scale": 0,
+        "degenerate": 0,
+        "compactly supported": 37,
+        "Schauder": 6
+      }
+    },
+    "term_count_source": {
+      "2603.25104": "recomputed from Papers/2603.25104.pdf",
+      "2305.05895": "recomputed from Papers/2305.05895.pdf"
+    },
+    "term_count_reading": "the single informative entry is that 'traveling wave' occurs 0 times in 2305.05895 and 'degenerate' 0 times, against 37 and 85 in 2603.25104. HQWW24 is about SELF-SIMILAR profiles only; the TRAVELING-WAVE specialization -- which is the equation sec 23 integrated -- is 2603.25104's. This corroborates F12 by a route independent of reading the two maps side by side.",
+    "their_existence_range_in_a": "(-inf, 1)",
+    "our_measured_range_in_a_sec23": "0.2 .. 1.2",
+    "our_range_NOT_covered_by_their_theorem": "[1, 1.2]",
+    "their_numerical_stopping_tolerance": 1e-08,
+    "our_sec23_newton_tolerance": 1e-14,
+    "instrument_accuracy_gap_orders_of_magnitude": 6,
+    "a_c1_from_table_4_1": [
+      0.232931,
+      0.232932
+    ],
+    "a_c2_from_table_4_1": [
+      0.751405,
+      0.751406
+    ],
+    "manifest_leg45_value_for_a_c1": 0.2329
+  },
+  "consequences": {
+    "L1_measured_death": "UNCHANGED. This leg lifts no ban and re-opens no route. plan_of_record.py's Route-D bound-sharpening ban and the gCLM-measurement ban are both untouched -- this leg produces no constant and runs no gCLM measurement.",
+    "L1_external_novelty_price": "CONFIRMED, not moved. sec 24 priced L1 as occupied territory on search-level evidence and retracted sec 23's novelty claim to 'PRESUME KNOWN'. Both acts were correct: the first integral is not merely presumed known, it is PUBLISHED IN OUR EXACT FORM with its own derivation and three of sec 23's 'free' consequences upgraded to theorems.",
+    "sec24_open_instruction": "CLOSED. Its recommendation (1) -- 'VERIFY THE TWO LOAD-BEARING READINGS ... Both need a PDF' -- is discharged. Its instruction to 'treat the a > 0 two-scale object as POSSIBLY WRONG until then' is discharged in a SPECIFIC direction: see below.",
+    "the_possibly_wrong_object": "sec 24's inference from R1 was 'the question is not whether our object is novel but whether it is the RIGHT OBJECT'. The full text answers that, and the answer is NOT the one the inference pointed at. Our a > 0 traveling wave is a REAL object -- Theorem 2.7 (p.15) proves it exists for every a in (-inf,1) and Theorem 7.10(3) (p.45) proves it is compactly supported exactly on 0 < a < 1, which is what sec 21/sec 23 measured. What 2603.25104's a-sign dichotomy governs is which BLOWUP SCENARIO degenerate initial data produce, a different question from whether the traveling wave exists. So the object is right and it is somebody else's.",
+    "literature_check_md": "NOT EDITED (integration-owned, five shared ledgers). The orchestrator's pointer should read: leg 112 verified sec 24's two readings at full text, both CONFIRMED, arXiv:2603.25104v2 pp.1/3/15/22/37/38/39/45/47/52.",
+    "papers_manifest": "NOT EDITED (this leg's territory excludes it). Two facts for whoever owns it next: (i) 2603.25104 is filed as Tier 3 'context, lowest priority' and it is in fact the paper that publishes sec 23's first integral -- it belongs in Tier 0; (ii) the leg-45 note 'c_l changing sign at a ~ 0.2329' is confirmed to 6 figures but omits the SECOND critical value a_{c,2} in (0.751405, 0.751406)."
+  },
+  "residual_risk": "(i) Priority could run earlier than HQWW24 (ARMA 2024): I checked Okamoto-Sakajo-Wunsch 2014 and arXiv:2411.01891 and neither carries (FI), but I did not run a systematic backward sweep of the pre-2023 gCLM traveling-wave literature. Since this project claims nothing on (FI), an earlier source would move only a date. (ii) a in [1, 1.2] is OUTSIDE their existence theorem, which stops at a < 1; sec 23's 'at a = 1 the edge is a CORNER, a > 1 is a cusp' sits at and above that endpoint. This is an unclaimed observation about an object whose family is published, and pursuing it would be a gCLM measurement leg, which is BANNED. Recorded, not pursued. (iii) The term counts are an extraction artifact of pypdf, not a semantic measurement; they are here as a reproducibility handle."
+}
