@@ -3261,3 +3261,17 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   never touches Y0/Z1/Z2/budget. Process note for the DM: six legs have now each
   found "the last" uncensused guard-class member one at a time; a systematic census
   test may be worth more than another one-off audit.
+- **Leg 203 (Route-RSA) — YES, ESCALATED (parked, not merged), CLAIM-ADJACENT:**
+  rescaled_spectrum.py has 8 silent-corruption mechanisms. Headline (R1):
+  converged_spectrum(K_fine==K_coarse) certifies the entire continuum -- n_kept
+  goes from the correct 2 to ALL K (24/24 at K=48, 24x inflation), including a
+  spurious +-40.4623i pair, the exact Hopf-crossing signature the module exists to
+  rule out. R2 is the one NOT latent: 5/7 banked Route-E and 7/7 banked Route-G
+  rows sit on points above the module's own 1e-8 convergence threshold -- but
+  BOTH routes already banked their residuals and both are already flagged
+  converged=False by the module's own conservative check, so no banked number is
+  confirmed WRONG, only discoverably imprecise. Confirmed NOT downstream of the
+  origin-H^2 certificate work (176/186/192): that module imports only numpy and
+  math.comb. R3-R8 latent (sign-mismatched da degrading to a cold solve, a dropped
+  36.9-decade far-field term, non-integer K truncation, etc). Tenth audit-family
+  item and the first genuinely claim-adjacent one this cycle.
