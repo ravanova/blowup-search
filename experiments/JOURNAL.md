@@ -3163,3 +3163,16 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   every admissible A; Y_0 is exactly 0, the best the framework admits, and it still
   cannot close. Second, independent failure: Z_2 ~ n^2.36 over a 6x ladder. Fully
   characterized negative, quartet complete (fig65).
+- **Leg 197 (Route-VNL) — YES:** arXiv:2208.09445 (Buckmaster-Cao-Labora-Gomez-Serrano)
+  appended to solver/viscous_novelty.py::PRECEDENTS (6->7 rows, append-only, 11/11
+  claims traceable to leg 174's own JSON). Stage V's verdict unchanged (YES on
+  arXiv:2410.05480 alone).
+- **Leg 198 (Route-BHA) — YES, ESCALATED (parked, not merged):** bordered_hl.py
+  silently accepts a negative border weight with no check -- induced_sup_norm can
+  return a NEGATIVE "operator norm" (-1.0 to -4.0e9 on hand-checked cases whose true
+  weighted norm is 101.0). Same-magnitude sign-flip corrupts Z_1 by up to 1.198e9x,
+  Z_2 by up to 1.189e17x, and can flip a certificate's own closure verdict (no root ->
+  root at 2.217e-11). Three more silent-corruption sites found (permuted-grid
+  velocity_matrix, arity-truncating pin, NaN-dropping tail_exponent mask). Blast
+  radius LATENT: 0 banked numbers currently impeached (no live caller passes a
+  negative border weight). Module unpatched, branch leg/198-bha-v1 pushed.
