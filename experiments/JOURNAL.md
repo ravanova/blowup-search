@@ -3421,3 +3421,22 @@ preempted agents had reached a landing.
   test_<name>.py, and test_certificate_guards.py does not exist, so the file
   three certified pipelines delegate their accept/reject decision to has never
   been in the merge gate's own always-run set.
+- **Leg 230 (Route-TNRV) — YES on both clauses:** independently confirms leg 220's
+  target_norm.py repair with a DECISIVE new test case leg 220 never ran
+  (wide_asymmetric, X in [-41000, 745.2]): the pre-repair window falsely reports
+  0 outside where 7 samples truly escape, worst pre-repair undercount 9463
+  (677x). Also re-solved leg 55's margins from scratch (n=801, two bordered
+  Newton solves): all FOUR classes bit-identical to leg 220's quoted two, and
+  the other two (s=0.39, s=1) confirmed for the first time. Own harness caught
+  itself: a first draft's control predicate was wrong (a symmetric grid need
+  NOT report 0 outside), corrected before it could produce a spurious NO.
+- **Leg 240 (Route-CNS2) — NO, thorough negative, no escalation:** arXiv:2208.09445's
+  author group has 2 later works on the object, both read at full text, neither
+  encloses the viscous term. The published follow-up (2310.05325, Cambridge J.
+  Math.) imports its profile as the nu=0 system and admits viscosity by the SAME
+  scalar inequality the parent used 14 months earlier (agreement 1.78e-15 over a
+  39x19 grid). Strong control: a DIFFERENT author group (Shao-Wei-Wang-Zhang
+  2501.15701) reaches the identical theorem with 0 interval-arithmetic
+  occurrences -- domination is how this literature transfers an Euler profile to
+  NS, not an artifact of the computer-assisted method. Leg 174's Grade-A/fluid
+  cell stays EMPTY.
