@@ -42,7 +42,12 @@ from experiments.p2_route_hpa_v1_adversarial import (                   # noqa: 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "writeup", "data", "p2_route_hpr_v1_repair.json")
 THETA = 1.0                      # the reference angle leg 106 states every violation at
-PRE_REPAIR_REF = "e95d0d2"       # last commit before the guard (the novelty correction)
+# The module's OWN last pre-guard commit -- Route-D v9, which created it, and which nothing
+# touched until leg 130.  Deliberately not "the commit before mine": a leg's own hashes are
+# rewritten by the rebase onto main, so a self-referential pin stops resolving the moment the
+# branch lands.  This one is an old ancestor of main and is verified byte-identical to the
+# module as it stood immediately before the guard.
+PRE_REPAIR_REF = "d703492"
 
 
 # ---------------------------------------------------------------------------

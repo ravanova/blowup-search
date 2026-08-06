@@ -3,7 +3,7 @@
   "route": "ROUTE-HPR",
   "module": "solver/hilbert_pointwise.py",
   "repairs": "leg 106 (Route-HPA), writeup/data/p2_route_hpa_v1_adversarial.json",
-  "pre_repair_ref": "e95d0d2",
+  "pre_repair_ref": "d703492",
   "pre_repair_module_lines": 210,
   "alpha": 1.5,
   "gamma": 0.5,
