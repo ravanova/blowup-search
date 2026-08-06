@@ -9,7 +9,7 @@ evolutionary (quality-diversity) search over initial data, and now with
 **computer-assisted certification** of self-similar blow-up profiles. Every
 claim in the repository is tiered, gated, and rebuildable from committed data.
 
-> **Status, stated plainly.** 52 legs in, nothing here resolves the Clay
+> **Status, stated plainly.** 146 legs in, nothing here resolves the Clay
 > problem, and the recorded probability that it ever will is **~0.05%**. The
 > realistic prize is a *novel Tier-3 (rigorously certified) result on a model
 > where blow-up is provable*. That is the target of record. See
@@ -94,7 +94,7 @@ about effort ([CLAY_ROADMAP.md](CLAY_ROADMAP.md) §2):
 Consequently the stated prize is a **novel Tier-3 result on a model where
 blow-up is provable**, as a genuine contribution and a stepping stone. No
 output of this repository is ever summarized as movement toward Clay unless a
-link of the chain actually moved — which has not happened in 52 legs.
+link of the chain actually moved — which has not happened in 146 legs.
 
 ## Where the project is right now
 
@@ -121,8 +121,10 @@ cannot fake.
 | `C-PILOT` | Evolve the Lyapunov weight on a known-answer object | ✅ gate answered **NO**; the GA was *not* run |
 | `L1` | Certify the target for real: interval arithmetic + analytic far-field enclosure | ✅ done |
 | `T` | The tail lemma — border the certificate with the far field transport cannot invert | ✅ done |
-| **`TC`** | **Assemble the bordered certificate: the far-field amplitude gets its own column, `Y₀`, and matching condition** | ⏳ **next** |
-| `B` | Evolve the certificate — space, operator split, constants | ⛔ blocked (C-PILOT's gate said NO) |
+| `TC` | Assemble the bordered certificate: the far-field amplitude gets its own column, `Y₀`, and matching condition | ✅ done |
+| `MM` | The mismatch — is a non-block-diagonal approximate inverse a real lane? | ✅ gate answered **NO** |
+| `NG` | The no-go, stated as a theorem and checked against the literature | ✅ closed **YES** (leg 58) |
+| **`B`** | **Evolve the certificate — space, operator split, constants** | ⛔ closed **NO** (leg 126): full declared search space (1,686 configurations) audited, zero uncovered, best reachable margin 6.04x short. Committed sequence exhausted; next step awaits a user ruling. |
 
 Every stage carries a **pre-committed gate naming both outcomes** before it is
 run, so the leg's job is to find out which one happened — not to decide
