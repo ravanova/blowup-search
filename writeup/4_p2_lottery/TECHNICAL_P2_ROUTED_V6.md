@@ -170,7 +170,7 @@ tuned against constants that did not include `Z₁`.
 
 **The optimum moves to `α ≈ 1.2`**, and the conditional budget there is
 `1.18 × 10⁻²`. That number invites a comparison that must be made carefully: the
-GA residual floor at the `a ≈ 0.5` two-scale boundary is also `~10⁻²`. The two
+GA residual floor at the `a ≈ 0.5` two-scale boundary (measured on `a > 0`) is also `~10⁻²`. The two
 being the same order is **not** a statement that the boundary profile could be
 certified. The budget above is *conditional* and *optimistic* — it prices only
 the far-field part of `Z₁`, uses the far-field `‖A‖` (v4 confirmed that predicts

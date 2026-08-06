@@ -150,7 +150,7 @@ unbounded domain is the entire reason the previous measurement had to be weighte
 Leg 11 observed that the whole-line Newton solve gets noticeably worse under grid
 refinement for `a` above about 0.5, and read that as evidence that the solutions stop
 being genuine continuum objects there — banking it as a *fourth* independent confirmation
-of a survival boundary the project had found three other ways.
+of a survival boundary the project had found three other ways (all of them at positive `a`).
 
 On its own support, the same object is grid-converged to between eight and twelve
 significant figures at `a = 0.5, 0.6, 0.8, 1.0` and `1.2`, with the solve converging from

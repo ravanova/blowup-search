@@ -99,7 +99,9 @@ twice differentiable.
 
 Now — this project has an independently measured "survival boundary" for the same family at
 `a* ≈ 0.5–0.55`, found three separate ways, none of which has anything to do with this
-calculation. So there's a coincidence sitting here, and I want to be careful with it in both
+calculation. (That boundary was measured at *positive* `a`, and it is the boundary of the
+positive-`a` continuation of the exact `a = 0` wave — not of the published two-scale
+*scenario*, which lives at `a ≤ 0`.) So there's a coincidence sitting here, and I want to be careful with it in both
 directions.
 
 I'm not going to claim it explains anything. Leg 14 solves the profile cleanly and

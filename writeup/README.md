@@ -92,10 +92,13 @@ writeup/
     fixed-point search infrastructure (validated tooling). *(fig 16)*
 18. [TECHNICAL_P2_TWO_SCALE.md](4_p2_lottery/TECHNICAL_P2_TWO_SCALE.md) ·
     [BLOG_P2_TWO_SCALE.md](4_p2_lottery/BLOG_P2_TWO_SCALE.md) — the two-scale
-    traveling-wave a-sweep (5/6 PARTIAL). *(fig 17)*
+    traveling-wave a-sweep, **on `a > 0`** (5/6 PARTIAL). *(fig 17)*
 19. [TECHNICAL_P2_KLADDER.md](4_p2_lottery/TECHNICAL_P2_KLADDER.md) ·
     [BLOG_P2_KLADDER.md](4_p2_lottery/BLOG_P2_KLADDER.md) — the a_p(K) convergence
-    map: the survival boundary is genuine, not genome-limited (7/7). *(fig 18)*
+    map: the survival boundary is genuine, not genome-limited (7/7). **Measured on
+    `a > 0`**: it is the boundary of the `a > 0` continuation of the `a = 0` two-scale
+    traveling wave, not of the published two-scale *scenario*, which `arXiv:2603.25104`
+    scopes to `a ≤ 0`. *(fig 18)*
 20. [TECHNICAL_P2_ROUTED.md](4_p2_lottery/TECHNICAL_P2_ROUTED.md) ·
     [BLOG_P2_ROUTED.md](4_p2_lottery/BLOG_P2_ROUTED.md) — **Route-D v1**: the rigorous
     interval-arithmetic core + the a=0 Newton–Kantorovich framing (the first Level-2
@@ -172,8 +175,8 @@ writeup/
     reaches `relres ~1e-14` where the GA and the relaxation both floored at `1e-2`
     — **twelve orders; that floor was the search, not the equation**. A grid-refinement
     table keeps the correction from becoming an over-claim: solutions stop moving with
-    `n` only up to `a ≈ 0.5`, so the survival boundary **survives a fourth, genome-free
-    confirmation**. `Y₀`'s binding constraint moves from *search* to *discretization*.
+    `n` only up to `a ≈ 0.5`, so the survival boundary of the `a > 0` traveling wave
+    **survives a fourth, genome-free confirmation**. `Y₀`'s binding constraint moves from *search* to *discretization*.
     *(fig 29)*
 31. [TECHNICAL_P2_ROUTED_V12.md](4_p2_lottery/TECHNICAL_P2_ROUTED_V12.md) ·
     [BLOG_P2_ROUTED_V12.md](4_p2_lottery/BLOG_P2_ROUTED_V12.md) — **Route-D v12**:
@@ -544,8 +547,8 @@ Forward plan: [../CLAY_ROADMAP.md](../CLAY_ROADMAP.md) — **§7 is the plan of 
 | `fig14_p2_regular_profile.png` | 4 | P2 — the regular Stage-1 positive profile (CHL Scenario 2) |
 | `fig15_p2_scenario2.png` | 4 | P2 — CHL modified (4.1)/(4.2): invariant `c_l/c_ω→-2.533` |
 | `fig16_p2_ga_framework.png` | 4 | P2 — GA global fixed-point map; a=0 known-answer gate |
-| `fig17_two_scale_sweep.png` | 4 | P2 — two-scale traveling wave deforms under advection to `a_p≈0.4` |
-| `fig18_two_scale_kladder.png` | 4 | P2 — a_p(K) saturates: boundary `a*≈0.5–0.55` genuine |
+| `fig17_two_scale_sweep.png` | 4 | P2 — the `a=0` two-scale traveling wave deforms under advection to `a_p≈0.4` (swept on `a>0`) |
+| `fig18_two_scale_kladder.png` | 4 | P2 — a_p(K) saturates: boundary `a*≈0.5–0.55` genuine (measured on `a>0`) |
 | `fig19_p2_route_d.png` | 4 | P2 — Route-D v1: interval enclosure, the 2-D valley, the line→circle diagonalization, and the banded+rank-1 linearized operator |
 | `fig20_p2_route_d_dress.png` | 4 | P2 — Route-D v2: the NK ball never closes (‖A_N‖ ~ N), the ablation that pins it on the far field, and the decay-graded repair (‖A‖ = 3.000 flat) |
 | `fig24_p2_route_d_v6.png` | 4 | P2 — Route-D v6: the discrete-ball trap (extremizer inflated ~J²), the two-point dual that saturates, the closed-form far-field `Z₁` bound, and the optimum moving once `Z₁` is priced |

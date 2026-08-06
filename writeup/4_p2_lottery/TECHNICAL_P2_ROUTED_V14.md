@@ -251,8 +251,11 @@ grows** — the same instrument-artifact family as v12's Gibbs ringing (banked l
 
 What that retires is v11's *argument*, not `a*`. The other three confirmations
 (GA-, genome- and basis-convergence in §9-cont2) are about the two-scale GA problem —
-whether the two-scale structure survives — which is a different question, and this leg
-says nothing about them. **So `a*` is confirmed three times, not four, and separately:
+whether the two-scale structure of the `a = 0` anchor survives continuation into
+`a > 0`, which is the domain all of this is measured on — which is a different
+question, and this leg says nothing about them. (It is also a different question from
+the published two-scale *scenario*: `arXiv:2603.25104` scopes that to `a ≤ 0`.)
+**So `a*` is confirmed three times, not four, and separately:
 the compactly supported traveling wave itself exists, as a grid-converged continuum
 object, well past it.**
 

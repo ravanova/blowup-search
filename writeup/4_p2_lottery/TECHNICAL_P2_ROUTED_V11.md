@@ -66,10 +66,13 @@ So Newton's own convergence is *not* the boundary test — it succeeds at isolat
 large `a` where the solution is not grid-converged. On the test that matters,
 solutions exist up to `a ≈ 0.5` and not beyond.
 
-**That is the GA's survival boundary `a* ≈ 0.5–0.55`, confirmed a fourth time —
-now by a method with no genome, no search budget and no stochasticity.** §9-cont2
-earned it with GA-, genome- and basis-convergence; this adds method-convergence,
-and sharpens the character: below `a*` an exact discrete traveling wave *exists*.
+**That is the GA's survival boundary `a* ≈ 0.5–0.55` — measured, here as there, on
+`a > 0` — confirmed a fourth time, now by a method with no genome, no search budget
+and no stochasticity.** §9-cont2 earned it with GA-, genome- and basis-convergence;
+this adds method-convergence, and sharpens the character: below `a*` (and above `0`)
+an exact discrete traveling wave *exists*. As throughout, "two-scale" names the `a = 0`
+anchor and its residual, not the published two-scale *scenario*, which
+`arXiv:2603.25104` scopes to `a ≤ 0`.
 
 ## 4. V5 — what this does and does not do to `Y₀`
 
@@ -130,8 +133,8 @@ combined; these are not increments.
 
 **Which link did v11 move?** None of them. It moved an *input* inside `L1`: it
 showed that the `10⁻²` residual floor five legs had treated as a property of the
-equation was a property of the search, and that below `a* ≈ 0.5` an exact discrete
-traveling wave exists. That makes `L1` look closer than it did — the defect is no
+equation was a property of the search, and that for `0 < a` below `a* ≈ 0.5` an exact
+discrete traveling wave exists. That makes `L1` look closer than it did — the defect is no
 longer the obstacle — but the binding constraint moved to far-field discretization
 rather than disappearing, and `L1` is still not done.
 

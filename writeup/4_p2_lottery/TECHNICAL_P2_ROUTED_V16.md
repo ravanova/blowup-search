@@ -117,7 +117,9 @@ is `p(p−1) = 2` exactly, checkable by hand, and the code reproduces `2.0000000
   trade in a new place: check which side of the inequality a marginality lives on before
   pricing it (lesson 13).
 - It is **not an explanation of `a*`.** The coincidence with the independently measured survival
-  boundary `a* ≈ 0.5–0.55` is striking and is recorded for exactly that reason — recording it is
+  boundary `a* ≈ 0.5–0.55` — measured on `a > 0`, for the `a > 0` continuation of the `a = 0`
+  two-scale traveling wave, not for the published two-scale *scenario* that `arXiv:2603.25104`
+  scopes to `a ≤ 0` — is striking and is recorded for exactly that reason — recording it is
   how the next person gets to disprove it. v12's `a = 1/3` control is the precedent: a
   tantalising arithmetic coincidence at `a*` that a control killed. No control has been run
   here, so it stays an observation.
