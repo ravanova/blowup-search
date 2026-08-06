@@ -7698,3 +7698,149 @@ ready to promote regardless of how any user ruling eventually lands (a repair fi
 silent-corruption mechanism is not itself claim-adjacent to any open escalation's ruling).
 No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No direction question raised this
 cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 202 escalates, DIFFERENT IN KIND: the first
+finding this cycle that plausibly requires re-scoping a banked headline (Route-D v11), not
+just a routine latent repair; 213 escalates with a cosmetic finding; C/G refilled
+
+**202 (PNA) escalated, not merged** (`leg/202-pna-v1` pushed, `main` untouched). **Different
+in kind from every other audit-family item this cycle** (all of which were latent):
+`profile_newton.py`'s `continuation` returns off-branch, grid-scale spurious roots as
+`converged=True` at machine-zero residual. **This one materially exposes a banked claim**:
+Route-D v11's own `a_max_machine`/`GA_boundary` verdicts trust exactly this flag, and v11's
+own JSON already shows the branch-jump signature in its own diagnostics
+(`weighted_defect` 0.50/4788/73372 at `a=0.5/0.8/1.0`) — **the rejecting information existed
+in the caller's own data and never reached the module's verdict.** At `a=1.50`, `c` reads
+`0.20427`/`0.23717`/`0.97282` at three different grids, all reported "converged," **376%
+apart**. Route-ASA (leg 122) is confirmed safe (stays on-branch throughout).
+
+**This DM's own assessment, since the orchestrator asked explicitly: yes, this plausibly
+needs actual re-scoping of Route-D v11's headline, not just a repair.** The reasoning: a
+convergence flag that a caller's own diagnostics already contradict, at three grids differing
+by 376% at `a=1.50` alone, is not "a latent defect nothing banked depends on" (this cycle's
+other nine items) — it is a specific, named, already-quantified inconsistency IN a banked
+headline's own supporting data. That does not mean the headline is WRONG (this DM does not
+know yet which of the three `a=1.50` values, if any, is the genuine on-branch one, or whether
+`a_max_machine`/`GA_boundary` themselves sit in the affected region) — but "does Route-D v11's
+headline survive using the caller's own already-existing rejection signal instead of the
+module's blind `converged=True`" is now a decidable, high-priority question this DM cannot
+answer from here and should not guess at. **Recorded, matching the orchestrator's own
+PROGRESS.md item 1b, as distinct from the routine escalation backlog** — this is the single
+highest-priority item in the entire audit-family backlog right now, ranked above even leg 203
+(RSA)'s claim-adjacent-but-not-headline-threatening finding.
+
+```
+### 226 — ROUTE-PNR: REPAIR profile_newton.py's OFF-BRANCH FALSE-CONVERGENCE BUG, WITH
+EXPLICIT ROUTE-D v11 RE-SCOPING (leg 202's finding — ELEVATED TO HIGHEST PRIORITY, THE FIRST
+ITEM THIS CYCLE THAT PLAUSIBLY THREATENS A BANKED HEADLINE) (RESERVE)
+**Thesis.** Leg 202 (PNA) found `continuation` reports `converged=True` at machine-zero
+residual for off-branch, grid-scale spurious roots — and Route-D v11's own
+`a_max_machine`/`GA_boundary` verdicts trust exactly this flag, while v11's OWN JSON already
+contains the rejecting signal (`weighted_defect` spiking to 4788/73372 at `a=0.8/1.0`) that
+never reached the verdict. At `a=1.50`, three grids report `c=0.20427/0.23717/0.97282`, all
+"converged," 376% apart. Same discipline as legs 221/225 (fix AND explicitly re-confirm the
+affected banked claim in the same pass) — but escalated further here, since the affected
+claim is a HEADLINE, not a background row: this leg must not just re-run existing numbers, it
+must determine whether `a_max_machine`/`GA_boundary` themselves change once the module's
+verdict correctly incorporates the caller's own already-existing `weighted_defect` rejection
+signal instead of ignoring it.
+**Gate.** Does repairing `continuation` to incorporate the caller's own `weighted_defect`
+diagnostic into its convergence verdict (rather than reporting bare machine-zero residual as
+sufficient) cause (a) every one of leg 202's off-branch adversarial cases to now correctly
+reject, (b) the three `a=1.50` grids to converge to a SINGLE genuine on-branch value once the
+spurious roots are excluded (or, if they still disagree, report that honestly rather than
+picking one), and (c) an explicit, fresh re-derivation of Route-D v11's own
+`a_max_machine`/`GA_boundary` headline verdicts using the repaired module?
+  (c) unchanged -> Route-D v11's headline is confirmed to survive the repair. Report the
+         before/after values precisely (not just "unchanged," show the numbers) and bank the
+         repair. This closes leg 202's finding without touching the headline.
+  (c) changed -> **Route-D v11's headline itself needs correcting.** Do NOT correct the
+         headline's own prose under this leg's authority — report the exact before/after
+         values and the mechanism precisely, and ESCALATE immediately as a priority finding
+         requiring the user's and orchestrator's attention, distinct from and above every
+         other item in this cycle's audit-family backlog.
+  (a)/(b) fail -> Report exactly which adversarial case still slips through or which grid
+         still disagrees after the fix; do not declare the repair complete on a partial fix
+         given what is at stake here.
+**Territory.** solver/profile_newton.py (the convergence-verdict logic, incorporating the
+               existing `weighted_defect` caller diagnostic), experiments/p2_route_pnr_v1_repair.py,
+               writeup/data/p2_route_pnr_v1_repair.json,
+               writeup/novelty/leg_226.md, experiments/journal/leg_226.md.
+               Reads (never blindly trusts) Route-D v11's own banked JSON/report and Route-ASA
+               (leg 122)'s own banked report (already confirmed safe, re-check only, do not
+               presuppose).
+**Difficulty.** heavy (the re-scoping question, not the mechanical fix, is the hard part)
+**Independence.** Owns profile_newton.py directly (leg 202's own read-only territory, closed
+on landing). Read-only overlap with Route-D v11's and Route-ASA's own banked data is
+read-read, not a collision, but this leg's own gate may require ESCALATING a headline
+correction, which stays outside this leg's own authority to make. Reserve — promote
+IMMEDIATELY, ranked above every other item in the backlog including 218/221/225.
+```
+
+**213 (LGC2) escalated with a minor, cosmetic finding, not urgent.** The
+`EGM_PRIMARY_READ` ledger's own `sign_correction_leg_190` field still describes 5 prose sites
+as wrong — but leg 214 already fixed them (`2c901c4`), so the field is now backwards (stale
+tense, not a stale fact). **0 banked numbers move.** Drafted below as a tiny reserve leg.
+
+```
+### 227 — ROUTE-EGMT: FLIP THE STALE-TENSE ledger FIELD, EGM_PRIMARY_READ's
+sign_correction_leg_190 (leg 213's cosmetic finding) (RESERVE)
+**Thesis.** Leg 213 (LGC2) found `EGM_PRIMARY_READ`'s own `sign_correction_leg_190` field
+still describes leg 214's 5 prose fixes as outstanding, even though leg 214 already landed
+them (`2c901c4`). A one-field tense update, mechanical, no other content touched.
+**Gate.** Does `EGM_PRIMARY_READ`'s `sign_correction_leg_190` field now correctly state the 5
+sites as fixed (past tense, citing `2c901c4`), with every other field in the same ledger
+entry byte-for-byte unchanged?
+  yes -> Bank the fix; confirm via diff that nothing else moved.
+  no  -> Report exactly what resisted the one-field edit.
+**Territory.** solver/literature_gates.py (the ONE field, `sign_correction_leg_190`, in the
+               `EGM_PRIMARY_READ` entry only), writeup/novelty/leg_227.md,
+               experiments/journal/leg_227.md.
+**Difficulty.** light
+**Independence.** One-field mechanical fix, no other ledger row or module touched. Disjoint
+from every other live/reserve leg. Reserve — lowest urgency in the whole backlog (0 banked
+numbers move per leg 213's own report), promote whenever a light slot is convenient.
+```
+
+**Slots C and G refilled** with **220 (TNR)** — repairing leg 204's `target_norm.py` finding
+— and **222 (FBA)** — closing the audit family's own module-coverage inventory
+(`fractional_boussinesq.py`) — both per the orchestrator's report.
+
+**Live-slot roster, corrected to match the orchestrator's latest report.** Note: slot B now
+shows **217 (PCR)** live, replacing 211 (XU11) — this DM has no independent record of 211's
+landing/escalation status this round (not mentioned in any message reaching this DM); per
+this file's own standing practice, the orchestrator's live-roster report is treated as
+authoritative over this DM's own derived tracking, so it is recorded as given without
+fabricating a reason.
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 217 | PCR | live (per orchestrator's report; 211's fate not detailed to this DM) |
+| C | 220 | TNR | **live, newly promoted — replaces 213 (escalated, OFF roster)** |
+| D | 221 | BVRR | live (unchanged) |
+| E | 212 | USC2V | live (unchanged) |
+| F | 209 | SCA2 | live (unchanged) |
+| G | 222 | FBA | **live, newly promoted — replaces 202 (escalated, OFF roster)** |
+| H | 218 | BHR | live (unchanged) |
+| I | 210 | M2SV | live (unchanged) |
+| J | 207 | DPA | live (unchanged) |
+
+**Reserve queue: 7 undispatched legs (216, 219, 223, 224, 225, 226, 227).** 220/222 now live
+(off reserve); 226 and 227 newly drafted. Above the §3a watermark of 3 — no further batch
+needed. **Promotion order, re-ranked for 226's priority: 226 (PNR) FIRST, unconditionally**
+— the only item this cycle that plausibly threatens a banked headline outranks everything,
+including the already-in-flight 218/221/225. Then **225 (RSR)** (the one other
+claim-adjacent item), then 216 (CGF), 219 (ICR2), then 223 (PUB3), 224 (GCC), 227 (EGMT) last
+(lowest urgency, purely cosmetic).
+
+Nothing in this update lifts a ban or moves any claim about Walls 1 and 2; Clay stays
+~0.05%. Escalation #4 (129/188), CGA (199), BHA (198), ICA2 (201), TNA2 (204), RSA (203), and
+now **PNA (202) — flagged as this cycle's highest-priority item and matching the
+orchestrator's own PROGRESS.md item 1b** — all stay with the user via `PROGRESS.md`'s NEEDS
+YOU; this DM rules on none of them, but has stated its own assessment on 202 explicitly per
+the orchestrator's direct question: **yes, Route-D v11's headline plausibly needs re-scoping,
+pending leg 226's own re-derivation using the repaired module.** No direction question raised
+by this DM itself this cycle.
