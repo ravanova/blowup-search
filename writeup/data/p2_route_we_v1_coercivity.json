@@ -1,0 +1,651 @@
+{
+ "leg": 111,
+ "route": "WE",
+ "object": "a = 0 CLM linearisation, odd sine basis",
+ "form": "weighted L^2 energy: gap = -sup <L h, h>_phi / ||h||^2_phi",
+ "tolerances": {
+  "stability_relative": 0.05,
+  "stability_absolute_reported_for_contrast": 0.05,
+  "admissibility": 0.05
+ },
+ "n_ladder": [
+  16,
+  32,
+  64,
+  128,
+  256
+ ],
+ "grade_ladder": [
+  12,
+  24,
+  48,
+  96
+ ],
+ "mu_ladder": [
+  0.0,
+  0.25,
+  0.5,
+  1.0,
+  2.0
+ ],
+ "known_answer_ceiling": 0.5,
+ "known_answer_source": "Xu arXiv:2607.19762 -- point spectrum exactly {0,1}, essential spectrum on Re lambda = -1/2, modulated gap 1/2",
+ "admissibility": {
+  "A0_flat": {
+   "family": "A",
+   "gamma": 0.0,
+   "exponent_margin": 3.0,
+   "norm2_coarse": 1.5707963267948968,
+   "norm2_fine": 1.5707963267948963,
+   "ratio": 0.9999999999999997,
+   "norm2_ladder": [
+    1.5707963267948968,
+    1.5707963267948966,
+    1.5707963267948963
+   ],
+   "increments": [
+    -2.220446049250313e-16,
+    -2.220446049250313e-16
+   ],
+   "increment_ratio": null,
+   "admissible": true,
+   "damping_at_origin": 1.5
+  },
+  "A1": {
+   "family": "A",
+   "gamma": 1.0,
+   "exponent_margin": 2.0,
+   "norm2_coarse": 1.3333333333333333,
+   "norm2_fine": 1.3333333333333333,
+   "ratio": 1.0,
+   "norm2_ladder": [
+    1.3333333333333333,
+    1.3333333333333333,
+    1.3333333333333333
+   ],
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "admissible": true,
+   "damping_at_origin": 1.0
+  },
+  "A2": {
+   "family": "A",
+   "gamma": 2.0,
+   "exponent_margin": 1.0,
+   "norm2_coarse": 1.5707963267948963,
+   "norm2_fine": 1.5707963267948968,
+   "ratio": 1.0000000000000002,
+   "norm2_ladder": [
+    1.5707963267948963,
+    1.5707963267948963,
+    1.5707963267948968
+   ],
+   "increments": [
+    0.0,
+    4.440892098500626e-16
+   ],
+   "increment_ratio": null,
+   "admissible": true,
+   "damping_at_origin": 0.5
+  },
+  "A3": {
+   "family": "A",
+   "gamma": 3.0,
+   "exponent_margin": 0.0,
+   "norm2_coarse": 26.935548429050133,
+   "norm2_fine": 43.57108076248881,
+   "ratio": 1.6176051093690436,
+   "norm2_ladder": [
+    26.935548429050133,
+    35.253314595769474,
+    43.57108076248881
+   ],
+   "increments": [
+    8.317766166719341,
+    8.317766166719338
+   ],
+   "increment_ratio": 0.9999999999999996,
+   "admissible": false,
+   "damping_at_origin": 0.0
+  },
+  "A4_chen_hou": {
+   "family": "A",
+   "gamma": 4.0,
+   "exponent_margin": -1.0,
+   "norm2_coarse": 213955931254.6361,
+   "norm2_fine": 3.5895848731533573e+18,
+   "ratio": 16777216.000061583,
+   "norm2_ladder": [
+    213955931254.6361,
+    876363494422205.8,
+    3.5895848731533573e+18
+   ],
+   "increments": [
+    876149538490951.1,
+    3.5887085096589353e+18
+   ],
+   "increment_ratio": 4095.9999999999995,
+   "admissible": false,
+   "damping_at_origin": -0.5
+  },
+  "B0": {
+   "family": "B",
+   "gamma": 0.0,
+   "exponent_margin": 3.0,
+   "norm2_coarse": 1.5707963267948963,
+   "norm2_fine": 1.5707963267948963,
+   "ratio": 1.0,
+   "norm2_ladder": [
+    1.5707963267948963,
+    1.5707963267948963,
+    1.5707963267948963
+   ],
+   "increments": [
+    0.0,
+    0.0
+   ],
+   "increment_ratio": null,
+   "admissible": true,
+   "damping_at_origin": 1.5
+  },
+  "B2": {
+   "family": "B",
+   "gamma": 2.0,
+   "exponent_margin": 1.0,
+   "norm2_coarse": 0.7853981633974482,
+   "norm2_fine": 0.7853981633974481,
+   "ratio": 0.9999999999999999,
+   "norm2_ladder": [
+    0.7853981633974482,
+    0.7853981633974482,
+    0.7853981633974481
+   ],
+   "increments": [
+    0.0,
+    -1.1102230246251565e-16
+   ],
+   "increment_ratio": null,
+   "admissible": true,
+   "damping_at_origin": 0.5
+  }
+ },
+ "gaps": {
+  "A0_flat": {
+   "modulated": [
+    -1.4672214011007048,
+    -1.4923039850878426,
+    -1.4981353818283831,
+    -1.4995410858796265,
+    -1.499886165172244
+   ],
+   "raw": [
+    -2.101462768843757,
+    -2.8146571978515507,
+    -3.909965206643204,
+    -5.516161802518651,
+    -7.825310828357045
+   ],
+   "rel_change": [
+    0.017095295889441725,
+    0.003907646698535958,
+    0.0009383024179883061,
+    0.00023012326628915147
+   ],
+   "abs_change": [
+    0.025082583987137808,
+    0.005831396740540562,
+    0.001405704051243406,
+    0.00034507929261740067
+   ],
+   "predicted_concentration_limit": -1.5,
+   "cond_G": [
+    1.0000000000000033,
+    1.0000000000000056,
+    1.0000000000000069,
+    1.0000000000000142,
+    1.0000000000000289
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  },
+  "A1": {
+   "modulated": [
+    -0.9871127270741117,
+    -1.0033286594691353,
+    -1.0058219303179312,
+    -1.0061520187393924,
+    -1.006200786043351
+   ],
+   "raw": [
+    -2.673482984123041,
+    -3.6850827366745276,
+    -5.164911990539273,
+    -7.291839269618345,
+    -10.323029543283463
+   ],
+   "rel_change": [
+    0.01642763987360294,
+    0.002484999132901389,
+    0.00032817779321720245,
+    4.846912101785741e-05
+   ],
+   "abs_change": [
+    0.016215932395023613,
+    0.0024932708487959143,
+    0.00033008842146120543,
+    4.876730395864115e-05
+   ],
+   "predicted_concentration_limit": -1.0,
+   "cond_G": [
+    13.599182783277424,
+    29.31128854488548,
+    61.0177312576571,
+    124.6788892784065,
+    252.191388589184
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  },
+  "A2": {
+   "modulated": [
+    -0.4781476007338056,
+    -0.4948693233918947,
+    -0.4987569212189221,
+    -0.49969405725308413,
+    -0.4999241101148309
+   ],
+   "raw": [
+    -4.080050799016577,
+    -5.710608257942188,
+    -8.036323873774634,
+    -11.338451339180283,
+    -16.016987758634514
+   ],
+   "rel_change": [
+    0.034971884481751175,
+    0.007855806863075169,
+    0.0018789434177108278,
+    0.00046038742788219493
+   ],
+   "abs_change": [
+    0.016721722658089133,
+    0.0038875978270274114,
+    0.0009371360341620116,
+    0.00023005286174676565
+   ],
+   "predicted_concentration_limit": -0.5,
+   "cond_G": [
+    90.52313096777512,
+    388.81213449327316,
+    1607.9084862876136,
+    6536.170827400359,
+    26352.97320123164
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  },
+  "A3": {
+   "modulated": [
+    0.042608867508890355,
+    0.012644108305935035,
+    0.003640245320964228,
+    0.0009607402584078338,
+    0.00012147155707304335
+   ],
+   "raw": [
+    -22.96497400137384,
+    -33.08009694826282,
+    -47.48071071397039,
+    -68.02909078520726,
+    -97.3810677089765
+   ],
+   "rel_change": [
+    0.7032517162466982,
+    0.712099482787922,
+    0.7360781558113911,
+    0.8735646226854806
+   ],
+   "abs_change": [
+    0.02996475920295532,
+    0.009003862984970808,
+    0.0026795050625563945,
+    0.0008392687013347905
+   ],
+   "predicted_concentration_limit": null,
+   "cond_G": [
+    417.83788748973717,
+    3472.7250165930604,
+    28195.359115384043,
+    226997.09126244189,
+    1821266.8808952686
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  },
+  "A4_chen_hou": {
+   "modulated": [
+    -2.4472463031316485,
+    -3.180937177420267,
+    -1.2790306584445323,
+    -0.19261450570108976,
+    -0.07206396674547556
+   ],
+   "raw": [
+    -13027.376247154427,
+    -6171.294858029165,
+    -2998.3689329901003,
+    -1477.0864227044972,
+    -732.8995246254528
+   ],
+   "rel_change": [
+    0.299802628509334,
+    0.5979076017207534,
+    0.8494058727760803,
+    0.6258642801424906
+   ],
+   "abs_change": [
+    0.7336908742886186,
+    1.9019065189757347,
+    1.0864161527434426,
+    0.1205505389556142
+   ],
+   "predicted_concentration_limit": null,
+   "cond_G": [
+    4880.683120803915,
+    129068.93219640969,
+    3404675.932806527,
+    51549567.18129489,
+    61517001.50122734
+   ],
+   "dropped": [
+    0,
+    2,
+    13,
+    45,
+    109
+   ],
+   "dim_trial": [
+    15,
+    31,
+    63,
+    127,
+    255
+   ]
+  },
+  "B0": {
+   "modulated": [
+    -1.4781476007338012,
+    -1.494869323391856,
+    -1.4987569212190048,
+    -1.4996940572532447,
+    -1.4999241101146115
+   ],
+   "raw": [
+    -1.4829730996838981,
+    -1.495471922573049,
+    -1.4988322268322267,
+    -1.4997034698449967,
+    -1.4999252866698363
+   ],
+   "rel_change": [
+    0.011312620370085843,
+    0.002600627202870092,
+    0.0006252755339922797,
+    0.00015339986196127476
+   ],
+   "abs_change": [
+    0.016721722658054716,
+    0.00388759782714887,
+    0.0009371360342398383,
+    0.00023005286136679182
+   ],
+   "predicted_concentration_limit": -1.5,
+   "cond_G": [
+    90.52313096777422,
+    388.81213449325173,
+    1607.9084862877846,
+    6536.170827401968,
+    26352.973201231358
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  },
+  "B2": {
+   "modulated": [
+    -0.489073800366902,
+    -0.49743466169594747,
+    -0.49937846060946134,
+    -0.49984702862654146,
+    -0.49996205505741625
+   ],
+   "raw": [
+    -1.1180339887499007,
+    -1.1180339887498492,
+    -1.1180339887498958,
+    -1.1180339887499224,
+    -1.118033988749925
+   ],
+   "rel_change": [
+    0.017095295889440726,
+    0.003907646698536666,
+    0.0009383024179862676,
+    0.00023012326629381617
+   ],
+   "abs_change": [
+    0.008360861329045455,
+    0.0019437989135138722,
+    0.00046856801708011764,
+    0.00011502643087479836
+   ],
+   "predicted_concentration_limit": -0.5,
+   "cond_G": [
+    25.274142369088196,
+    103.08686891981843,
+    414.34506223192,
+    1659.3796462928278,
+    6639.518434557451
+   ],
+   "dropped": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "dim_trial": [
+    14,
+    30,
+    62,
+    126,
+    254
+   ]
+  }
+ },
+ "per_weight_verdict": {
+  "A0_flat": {
+   "positive": false,
+   "stable_relative": true,
+   "stable_absolute": true,
+   "admissible": true,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "A1": {
+   "positive": false,
+   "stable_relative": true,
+   "stable_absolute": true,
+   "admissible": true,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "A2": {
+   "positive": false,
+   "stable_relative": true,
+   "stable_absolute": true,
+   "admissible": true,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "A3": {
+   "positive": true,
+   "stable_relative": false,
+   "stable_absolute": true,
+   "admissible": false,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "A4_chen_hou": {
+   "positive": false,
+   "stable_relative": false,
+   "stable_absolute": false,
+   "admissible": false,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "B0": {
+   "positive": false,
+   "stable_relative": true,
+   "stable_absolute": true,
+   "admissible": true,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  },
+  "B2": {
+   "positive": false,
+   "stable_relative": true,
+   "stable_absolute": true,
+   "admissible": true,
+   "gate_yes": false,
+   "gate_yes_under_absolute_reading": false
+  }
+ },
+ "quadrature_artifact_sweep": {
+  "A2": {
+   "gaps": [
+    -0.4987569212189218,
+    -0.4987569212189221,
+    -0.49875692121892207,
+    -0.4987569212189219
+   ],
+   "relative_spread": 6.677940560174246e-16
+  },
+  "A3": {
+   "gaps": [
+    0.0029376701803125746,
+    0.003640245320964228,
+    0.003907975208765126,
+    0.004005036199788941
+   ],
+   "relative_spread": 0.2665059605535187
+  }
+ },
+ "positive_control": {
+  "A0_flat": {
+   "mu": [
+    0.0,
+    0.25,
+    0.5,
+    1.0,
+    2.0
+   ],
+   "gaps": [
+    -1.4981353818283831,
+    -0.17270613407370883,
+    0.7995995725147977,
+    2.5377811765101637,
+    5.735838413376429
+   ],
+   "sign_flips": true
+  },
+  "A2": {
+   "mu": [
+    0.0,
+    0.25,
+    0.5,
+    1.0,
+    2.0
+   ],
+   "gaps": [
+    -0.4987569212189221,
+    0.746094032910232,
+    1.593593965917315,
+    3.0757989062787616,
+    5.820445045750358
+   ],
+   "sign_flips": true
+  }
+ },
+ "ceiling_check": {
+  "largest_admissible_modulated_gap": -0.4999241101148309,
+  "ceiling": 0.5,
+  "respected": true
+ },
+ "gate_question": "For at least one weight in the pre-named family, is the measured coercivity gap of the weighted-energy form on the a=0 CLM linearization positive and stable (within a pre-committed tolerance declared in the driver) across two grid refinements?",
+ "gate_answer": "NO",
+ "mechanism": "The whole local part of the form is a multiplier by the damping factor D_phi(theta) = (3/2) cos theta + (1/2) sin theta (log phi)', whose value at the origin is (3 - gamma)/2 for both named families. Damping at the origin therefore needs gamma > 3. The basis is in L^2_phi only for gamma < 3. THE TWO THRESHOLDS ARE THE SAME NUMBER: the window does not merely fail to contain a good weight, it has ZERO WIDTH, closing at gamma = 3 where the weighted norm log-diverges. Every admissible member's measured gap converges to -(3 - gamma)/2, i.e. to minus the damping factor at the origin, by concentration there.",
+ "ceiling_S7": "Measured on the a = 0 CLM linearisation: one mode, analytic, the friendliest object in the repository, and the same operator solver/spectral_certificate.py carries (checked matrix-for-matrix in test_energy_coercivity.py). A wall measured here bounds HL_S2_nonsymmetric's difficulty FROM BELOW, not above. Float64 throughout, nothing interval-enclosed. No stage is claimed under either branch and no link of the L1 -> L4 chain moves.",
+ "elapsed_s": 319.2868299484253
+}

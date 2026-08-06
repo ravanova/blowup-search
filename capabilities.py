@@ -221,6 +221,36 @@ CAPABILITIES = [
                    "close it -- the finite-block-independent sub-block bottoms out at 0.9961. "
                    "Do not read the bounded tail as a certificate"),
      "test": "test_spectral_certificate.py"},
+    {"module": "solver/energy_coercivity.py",
+     "object": ("the WEIGHTED-ENERGY (Chen-Hou-shaped) coercivity form of the a=0 CLM "
+                "linearisation -- the THIRD realization (Route-WE, leg 111)"),
+     "holds": ("the a=0 CLM linearisation applied POINTWISE in closed form (so no mode of "
+               "L e_k is ever dropped) and as a coefficient matrix; the weighted L^2 Gram "
+               "and form matrices; the coercivity gap -sup <L h,h>_phi/||h||^2_phi solved as "
+               "a generalized symmetric eigenproblem with explicit whitening; the damping "
+               "factor D_phi = (3/2)cos th + (1/2) sin th (log phi)' in closed form; a "
+               "SEVEN-MEMBER weight family named in the module before any computation "
+               "(two origin-singular power ladders); measured admissibility with the SHAPE "
+               "of each divergence; the two published point-spectrum modes; and the "
+               "Lambda^1-dissipation positive control"),
+     "validated": ("the coefficient matrix is EXACTLY equal (0.0) to "
+                   "spectral_certificate.bordered_linearization's interior block, so this is "
+                   "the same operator the other two L1 realizations died on; pointwise vs "
+                   "matrix agree to 1.9e-14; the two point-spectrum modes Xu arXiv:2607.19762 "
+                   "publishes (L sin2th = 0, L(sin th + sin2th/2) = itself) reproduce to "
+                   "2.2e-16; the flat-weight Gram is (pi/2)I to 1.4e-15 at n=64. THE CEILING "
+                   "IS PART OF THE ENTRY: leg 111's gate answered NO. Every ADMISSIBLE member "
+                   "of the family has a NEGATIVE gap converging to -(3-gamma)/2 (measured "
+                   "-1.499886, -1.006201, -0.499924 at gamma = 0,1,2), because damping at the "
+                   "origin needs gamma > 3 while the basis is in L^2_phi only for gamma < 3 -- "
+                   "the SAME threshold, so the window has ZERO width. gamma = 3's apparent "
+                   "+4e-3 gap collapses like n^-1 (0.0426 -> 0.000121 over n = 16..256) AND "
+                   "moves with the quadrature cutoff (+0.002938 -> +0.004005), i.e. it is a "
+                   "statement about the code. The Lambda^1 positive control reports the OTHER "
+                   "answer (-1.498 at mu=0 to +5.736 at mu=2), so the negative gap is a "
+                   "measurement. Float64; measured on the friendliest object, so the wall "
+                   "bounds HL_S2_nonsymmetric FROM BELOW only"),
+     "test": "test_energy_coercivity.py"},
     {"module": "solver/nk_bounds.py", "object": "Newton-Kantorovich constants, upper bounds",
      "holds": "genuine upper bounds for the Route-D constants",
      "validated": ("agrees with hand-computed cases; Route-D v6 found the discrete-ball\n                   TRAP here -- the bound was true and useless"),
