@@ -334,6 +334,71 @@ the still-blocked 103–105 as reserve.
 
 ---
 
+**DM ruling 2026-08-06 — the user has answered open question #2; legality resolved; leg 125
+(M2P) drafted and assigned.** The user's directive, verbatim: *"Leg 63, let's pursue this if it
+might be beneficial towards our goal of solving Clay or towards our sub-goal of producing novel
+beneficial output."*
+
+**Legality ruling (the DM's call, in the same way leg 111's was): pursuing leg 63's candidate
+does NOT require lifting stage V's ban. The ban stands, unmodified, and leg 125 is outside its
+scope.** Reasoning, in full so it is auditable:
+
+1. **What the ban's letter says.** The ban is "re-opening stage V **as posed**," and stage V as
+   posed (plan of record, SEQUENCE) is: *"Viscous survival, IN FLOAT: does the certificate's
+   margin survive dissipation as mu → criticality?"* — a **continuation** question about an
+   already-certified profile's margin as a dissipation parameter floats. It was closed for
+   **non-novelty**: arXiv:2410.05480 already verifies CGL branches in the dissipation
+   parameter, in interval arithmetic, and leg 48 confirmed it by re-deriving their zeros,
+   branch and fold.
+2. **What leg 63's candidate asks.** Certify, from scratch, at **fixed** γ=2, a dissipative
+   self-similar profile of gCLM whose blow-up Chen (arXiv:1908.09385) proved analytically.
+   That is a stage-**M**-shaped question (certify WHAT?) with a new target — not a margin
+   continuation, not in float, not derived from the a=0 CLM linearization, and no dissipation
+   parameter is varied toward criticality. Nothing leg 125 computes is a quantity stage V
+   computed.
+3. **The ban's reason does not attach.** V was closed because its question was pre-empted.
+   Leg 63's N3/N4 searches found the opposite here: **no computer-assisted certificate of any
+   dissipative self-similar profile exists** in the searched literature. The preemption that
+   closed V is precisely absent for this object.
+4. **The lift condition confirms the scope reading.** "Re-posed for a FLUID transport model,
+   which needs L1 first" is the condition for re-opening **V's own question** — margin survival
+   requires a certified inviscid base profile to float, which is what L1 was for. Certifying a
+   profile that is dissipative from the start has no inviscid base certificate to float, so the
+   precondition is not merely unmet, it is structurally inapplicable. A lift condition for
+   question Q does not fence off questions that are not Q.
+5. **Precedent.** Leg 111 (WE) was ruled dispatchable on exactly this construal: bans bind by
+   what a leg actually computes, not by topic adjacency ("not tuning s… not stage B, and not
+   stage V"). Same rule here.
+6. **The residual ambiguity is closed by the user anyway.** The prior DM's §2 cautiously read
+   the ban broadly ("the obstruction is exactly stage V's ban") and parked three readings. Even
+   under that broad reading, the user's directive is option (c): a narrow, single-candidate,
+   conditional authorization. So under **either** reading, a scoped promotion leg on this one
+   candidate is legal. What stays banned under either reading: re-running V's
+   margin-survival-in-float question, and any *general* re-opening of "the dissipative
+   direction" beyond this candidate. **Tripwire, binding on leg 125:** if its work drifts into
+   floating a dissipation parameter against an existing certificate's margin, that IS stage V
+   as posed — stop and escalate.
+
+**The "another gCLM measurement leg" ban also does not bind**, on leg 63's own landed
+construal: that ban is about running the model's blow-up dynamics (Stage 3.5's exhaustion).
+Leg 125 runs **no gCLM time evolution** — it transcribes published constants, Newton-solves a
+steady profile equation, and computes certificate constants; its JSON records
+`no_dynamics_run: true`, same discipline as leg 63.
+
+**Benefit test, under the user's stated condition (disjunctive).** Toward Clay: **no** — this
+does not move L1→L4, and the odds stay ~0.05%; leg 125's prose must say so. Toward novel
+beneficial output: **yes, and it is the strongest yes available** — the only screen-passing
+candidate in 63+ legs, proved blow-up, and an empty CAP literature for dissipative self-similar
+profiles, so even the *first measured Y_0* is a novel data point and a closed certificate would
+be a genuinely novel positive result. The next step is cheap (full-text read + transcription +
+first Y_0 measurement = one standard leg). The condition is met; leg 125 is drafted below and
+assigned to **LEG-J** (the flex slot), jumping the 103/104 reserve promotion on the user's
+directive — 103/104 remain next in line for whatever slot opens next. `NG` stays `NEXT`;
+leg 125 claims no stage; entering the committed sequence remains escalation #1 and happens only
+on leg 125's yes-branch, with the user.
+
+---
+
 ## THE `NEXT` CALL — recommendation to the orchestrator (unchanged from prior session)
 
 **Mark stage `NG` as `NEXT` in `plan_of_record.py`'s SEQUENCE.** It is a new stage, sitting
@@ -2336,6 +2401,63 @@ solver/finite_support.py ever silently return a wrong result instead of flagging
 **Independence.** Reads solver/finite_support.py only; edits nothing.
 ```
 
+```
+### 125 — ROUTE-M2P: M2 PROMOTION — CHEN'S γ=2 DISSIPATIVE gCLM PROFILE, FULL TEXT +
+CONSTANTS + FIRST Y_0 BUDGET MEASUREMENT (ASSIGNED, LEG-J, user-directed 2026-08-06)
+**Authority.** User directive 2026-08-06 ("pursue this if it might be beneficial...") plus the
+DM's legality ruling in Status: OUTSIDE stage V's ban (which stands unmodified — see the six
+numbered points), no gCLM dynamics run (JSON records `no_dynamics_run: true`). NG stays NEXT;
+this leg claims no stage. Branch `leg/m2-v1` stays parked: READ it via `git show`, never merge
+it or build on it — everything leg 125 needs is re-derived on its own branch from main.
+**Thesis.** Leg 63 found the only screen-passing candidate in 63+ legs — gCLM with full
+Laplacian dissipation (γ=2), tail-inverse K-exponent -2.0270, blow-up PROVED analytically
+(Chen arXiv:1908.09385) — and explicitly did not: read Chen's full text (the a-neighbourhood
+is unquantified, the dissipation-coefficient dependence unstated), transcribe the profile's
+constants, or measure Y_0. This leg discharges exactly those three debts, in order. (i) Novelty
+pass FIRST, narrow: γ=2 / full-Laplacian gCLM CAP attempts specifically, links not counts.
+(ii) Full-text read of arXiv:1908.09385 at line-level depth — this includes resolving the γ
+tension VER-I's leg-64 review already surfaced (Chen's γ=|a|^{-1} holds only for a ≤ -1; at
+a=1/2 his text gives γ=1 from L^1 conservation, while the abstract claims self-similar blow-up
+at "a close to 1/2 and γ=2") — locate the theorem, quote it verbatim, transcribe the profile
+equation and every constant with provenance. The repository has been burned twice by
+abstract-depth reading (leg 53/BDL; leg 64's Trap 1). (iii) Construct the profile numerically
+(Newton on the steady self-similar equation, NEW module) at >= 2 resolutions and compute the
+first Y_0 against the pipeline's radii-polynomial budget. The μ=2 positive control from leg 53
+(Z_1 = 0.9156) is RE-READ against this candidate, not assumed to transfer. Honest ceiling,
+pre-committed: this is not movement on L1→L4 and not Clay (odds stay ~0.05%); the prize is the
+sub-goal — no CAP of any dissipative self-similar profile exists in the searched literature,
+so even the measured Y_0 is a novel data point. Tripwire from the legality ruling: if the work
+drifts into floating a dissipation parameter against an existing certificate's margin, that IS
+stage V as posed — stop and escalate.
+**Gate.** With Chen's theorem located and constants transcribed from the FULL TEXT, and the
+profile constructed at two or more resolutions, does Y_0 come in under the radii-polynomial
+budget at any tested resolution?
+  yes -> The candidate advances. Bank the magnitudes; ESCALATE a full certificate-attempt leg
+         to the user (escalation #1 — entering the committed sequence stays the user's call).
+         Build no certificate under this leg's own authority.
+  no  -> Report the measured Y_0 and its gap to budget; the candidate is set aside as
+         "identified, measured, not under budget" — no retry without new information. If the
+         full text does not support the abstract as read (no explicit profile at γ=2, or the
+         a-neighbourhood excludes every usable case), that lands here too: quote the located
+         text verbatim and the candidate leaves the ledger's top slot on literature grounds —
+         which is itself the finding.
+**Territory.** solver/dissipative_profile.py (NEW), test_dissipative_profile.py (NEW),
+               experiments/p2_route_m2p_v1_promotion.py,
+               writeup/4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md,
+               writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md,
+               writeup/data/p2_route_m2p_v1_promotion.json,
+               writeup/figures/fig61_route_m2p_v1_promotion.png (next free figure number),
+               writeup/novelty/leg_125.md, experiments/journal/leg_125.md
+**Difficulty.** standard
+**Independence.** Sole owner of a brand-new module (capabilities.py grepped first, standing
+ban). Reads solver/fractional_gclm.py (unowned) and leg 53's banked control read-only. Touches
+NOTHING owned by 58 (spectral_certificate.py), 62 (certificate_shapes.py,
+literature_gates.py), 111 (energy_coercivity.py), 114/116/120 (their audit targets), the
+repairs in flight (holder_norms.py, op_lower.py, first_integral.py), the red-test modules
+(fractional_boussinesq.py, profile_newton.py), or either parked branch (leg/m2-v1, leg/pq-v1).
+JSON name pre-checked distinct from every live and reserve leg — no collision.
+```
+
 ## Ranking rationale
 
 Refreshed whenever a gate answers. Rank by, in order:
@@ -2467,8 +2589,18 @@ These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`. The run continues arou
    written down. **This question is now overtaken in urgency by #2** — the target round (leg 63)
    has itself landed since this was written, and its answer changes what "going straight to the
    target round" would even mean.
-2. **UPDATED, no longer speculative — this is now the single highest-value, most concrete
-   decision open on this project.** Leg 63 (M2) landed: gate **YES**. Every inviscid target ever
+2. **RESOLVED 2026-08-06 by user directive.** The user ruled: *"Leg 63, let's pursue this if
+   it might be beneficial towards our goal of solving Clay or towards our sub-goal of producing
+   novel beneficial output."* The DM's legality ruling (see Status) finds pursuit does not
+   require lifting stage V's ban — the ban stands, unmodified, and a from-scratch certification
+   of Chen's fixed-γ=2 dissipative profile is outside its scope ("stage V as posed" is margin
+   continuation in float, which this is not); even under the prior broad reading, the directive
+   is exactly reading (c) below, a narrow single-candidate authorization. The benefit condition
+   is met on the novel-output prong (Clay prong honestly fails; odds stay ~0.05%). **Leg 125
+   (ROUTE-M2P) is drafted in the queue and assigned to LEG-J.** Branch `leg/m2-v1` stays
+   parked and unmerged regardless — leg 125 re-derives on its own branch. The original entry is
+   preserved below for the record:
+   Leg 63 (M2) landed: gate **YES**. Every inviscid target ever
    ranked fails the multiplier/shift screen identically; **exactly one candidate passes it**:
    gCLM with full Laplacian dissipation (`γ=2`), tail-inverse `K`-exponent `-2.0270`, robust
    across three dissipation strengths. Blow-up on this model is **proved** (Chen
