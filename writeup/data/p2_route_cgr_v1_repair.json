@@ -1,0 +1,459 @@
+{
+  "leg": 215,
+  "route": "CGR",
+  "repairs": "leg 199 (Route-CGA) mechanism M1",
+  "file_repaired": "solver/nk_bounds.py (ONE added guard clause at the :430 site)",
+  "files_deliberately_untouched": [
+    "solver/certificate_guards.py -- leg 199's read-only closed territory"
+  ],
+  "gate": "Does adding the missing `isinf` check to `nk_bounds.py`'s guard (per leg 199's own identified mechanism) cause all 16 previously-silently-accepted adversarial cases to now raise/reject, while every one of the 8 live call sites (finite alphas in [1.1, 1.8]) remains bit-identical to its pre-repair banked value?",
+  "gate_answer": "NO",
+  "gate_clause_1_all_16_now_reject": false,
+  "gate_clause_2_all_8_bit_identical": true,
+  "totals": {
+    "leg_199_gate_hits_rerun": 16,
+    "now_reject": 1,
+    "still_accept": 15,
+    "live_sites": 8,
+    "live_sites_bit_identical": 8,
+    "live_sites_moved": 0,
+    "of_the_16_addressable_by_an_isinf_test": 1,
+    "of_the_16_inside_leg_215_territory": 1
+  },
+  "why_the_gate_answers_NO": "The repair did what leg 199 scoped it to do: the ONE M1 case (C1_alpha_minus_infinity_ACCEPTED) now refuses with a named ValueError, and all 8 live call sites are bit-identical. The gate's first clause counts all 16 of leg 199's hits, but 15 of the 16 are M2/M3/M4/M5/M7 -- type gates, bool coercion, a sub-denormal rational, empty containers, an empty rejection sentence. None of them is a finiteness defect, so no `isinf` test anywhere could reject them, and every one of their surfaces is inside solver/certificate_guards.py, which this leg's declared territory marks read-only. The gate's premise -- that the 16 cases were all the missing-isinf family -- is what fails, not the repair. Escalated rather than declared complete, per the NO branch.",
+  "still_accepting_cases": [
+    "A1_bool_True",
+    "A1_bool_False",
+    "A3_fraction_neg_below_denormal",
+    "A6_empty_constants",
+    "B_nonreal_str",
+    "B_nonreal_bool_True",
+    "B_nonreal_Decimal",
+    "B_nonreal_Fraction",
+    "C3_gamma_bool",
+    "C4_gamma_str",
+    "D1_empty_list",
+    "D1_empty_ndarray",
+    "D1_exhausted_generator",
+    "D1b_empty_at_the_consumer",
+    "E_empty_violation_list"
+  ],
+  "now_rejecting_cases": [
+    "C1_alpha_minus_infinity_ACCEPTED"
+  ],
+  "banked_numbers_impeached": 0,
+  "banked_numbers_moved_by_the_repair": 0,
+  "live_callers": [
+    "test_nk_bounds.py:192,207 (ALPHA=1.5)",
+    "experiments/p2_route_d_v6_bounds.py:170,200,224 (alphas=1.1..1.8)",
+    "experiments/p2_route_d_v7_seminorm.py:298 (alphas=1.1..1.8)",
+    "experiments/p2_route_d_v8_quadratic.py:306 (alphas=1.1..1.8)",
+    "experiments/p2_route_d_v9_sharpen.py:326 (alphas=1.1..1.8)",
+    "experiments/p2_route_nka_v1_adversarial.py:408,425 (LIVE_ALPHAS=1.1..1.8)",
+    "experiments/p2_route_nkr_v1_repair.py:230",
+    "experiments/p2_route_nkb_v1_postrepair.py:150"
+  ],
+  "live_site_config": {
+    "gamma": 0.5,
+    "X0": 1.0,
+    "n_X": 8,
+    "alphas": [
+      1.1,
+      1.2,
+      1.3,
+      1.4,
+      1.5,
+      1.6,
+      1.7,
+      1.8
+    ]
+  },
+  "cases_rerun": [
+    {
+      "case": "A1_bool_True",
+      "mechanism": "M3",
+      "surface": "certificate_guards.hypothesis_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "a FLAG coerced to 1.0/0.0; not a finiteness defect and not in this leg's territory"
+    },
+    {
+      "case": "A1_bool_False",
+      "mechanism": "M3",
+      "surface": "certificate_guards.hypothesis_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "a FLAG coerced to 1.0/0.0; not a finiteness defect and not in this leg's territory"
+    },
+    {
+      "case": "A3_fraction_neg_below_denormal",
+      "mechanism": "M4",
+      "surface": "certificate_guards.hypothesis_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "float() underflows to -0.0 before the `f < 0.0` test; accepted negatives span (-5e-324, 0), so <= 1 ULP. Not a finiteness defect"
+    },
+    {
+      "case": "A6_empty_constants",
+      "mechanism": "M5",
+      "surface": "certificate_guards.hypothesis_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "0 of 0 constants validated; a vacuous pass, not a finiteness defect"
+    },
+    {
+      "case": "B_nonreal_str",
+      "mechanism": "M2",
+      "surface": "certificate_guards.radius_violation",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: None",
+      "now_rejects": false,
+      "note": "a non-Real accepted as an admissible RADIUS; a type gate, not a finiteness gate"
+    },
+    {
+      "case": "B_nonreal_bool_True",
+      "mechanism": "M2",
+      "surface": "certificate_guards.radius_violation",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: None",
+      "now_rejects": false,
+      "note": "a non-Real accepted as an admissible RADIUS; a type gate, not a finiteness gate"
+    },
+    {
+      "case": "B_nonreal_Decimal",
+      "mechanism": "M2",
+      "surface": "certificate_guards.radius_violation",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: None",
+      "now_rejects": false,
+      "note": "a non-Real accepted as an admissible RADIUS; a type gate, not a finiteness gate"
+    },
+    {
+      "case": "B_nonreal_Fraction",
+      "mechanism": "M2",
+      "surface": "certificate_guards.radius_violation",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: None",
+      "now_rejects": false,
+      "note": "a non-Real accepted as an admissible RADIUS; a type gate, not a finiteness gate"
+    },
+    {
+      "case": "C1_alpha_minus_infinity_ACCEPTED",
+      "mechanism": "M1",
+      "surface": "nk_bounds.farfield_modelling_error_bound (the nk_bounds.py:430 site)",
+      "surface_in_leg_215_territory": true,
+      "an_isinf_test_could_address_it": true,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": false,
+      "post_repair_outcome": "raise: ValueError: farfield_modelling_error_bound: alpha is -inf, outside the required range [-inf, 2.0): a non-finite decay exponent makes the far-field integrand NaN, and NaN in an upper-bound slot passes the contraction test silently. This func",
+      "now_rejects": true,
+      "note": "THE REPAIR. Pre-repair this returned bound=NaN with 40/40 window samples NaN and did not raise; post-repair it refuses with the site's own named ValueError"
+    },
+    {
+      "case": "C1_at_the_guards_own_surface",
+      "mechanism": "M1",
+      "surface": "certificate_guards.unit_range_violation",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": true,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: None",
+      "now_rejects": false,
+      "note": "NOT a gate case of its own (leg 199 counted M1 once). Recorded because it states the repair's shape honestly: the shared guard is byte-identical, and the missing finiteness test is supplied at the ONE call site in the repository that gives it an infinite endpoint. A caller that invokes the guard directly with lo=-inf, lo_open=False still gets None -- there is no such caller in the repo, and closing it belongs to a leg that owns certificate_guards.py",
+      "counts_toward_the_16": false
+    },
+    {
+      "case": "C3_gamma_bool",
+      "mechanism": "M3",
+      "surface": "nk_bounds.hilbert_farfield_bound (the :392 gamma site)",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: (1.2209630139367613, 0.7858202650134002, 0.4351427489233612)",
+      "now_rejects": false,
+      "note": "gamma=True is coerced to the legitimate exponent 1.0 and returns 1.2209630139367613 vs 1.5390840894727127 at gamma=0.5 (1.2605493138651522x smaller). A missing SIGNAL, not an arithmetic lie; not a finiteness defect"
+    },
+    {
+      "case": "C4_gamma_str",
+      "mechanism": "M2",
+      "surface": "certificate_guards.unit_range_violation (the :392 gamma site)",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "guard value: None | consumer raise: TypeError: unsupported operand type(s) for ** or pow(): 'float' and 'str'",
+      "now_rejects": false,
+      "note": "a str gamma passes the exponent guard (guard returns None) and only then dies of an UNNAMED TypeError at the consumer -- leg 98's B20/B21 shape. A type gate in certificate_guards.py, not a finiteness gate; this leg neither repairs nor claims it, and the downstream crash is NOT scored as a rejection"
+    },
+    {
+      "case": "D1_empty_list",
+      "mechanism": "M5",
+      "surface": "certificate_guards.positive_weight_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "0 of 0 entries validated; not a finiteness defect"
+    },
+    {
+      "case": "D1_empty_ndarray",
+      "mechanism": "M5",
+      "surface": "certificate_guards.positive_weight_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "0 of 0 entries validated; not a finiteness defect"
+    },
+    {
+      "case": "D1_exhausted_generator",
+      "mechanism": "M5",
+      "surface": "certificate_guards.positive_weight_violations",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: []",
+      "now_rejects": false,
+      "note": "0 of 0 entries validated; not a finiteness defect"
+    },
+    {
+      "case": "D1b_empty_at_the_consumer",
+      "mechanism": "M5",
+      "surface": "nk_bounds.two_point_dual (the :225 pre-screen)",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "pre_screen_passes_empty=True; two_point_dual -> raise: ValueError: zero-size array to reduction operation minimum which has no identity",
+      "now_rejects": false,
+      "note": "the caller's own numpy pre-screen passes the empty array too, so the guard is never consulted; not a finiteness defect"
+    },
+    {
+      "case": "E_empty_violation_list",
+      "mechanism": "M7",
+      "surface": "certificate_guards.invalid_input_reason",
+      "surface_in_leg_215_territory": false,
+      "an_isinf_test_could_address_it": false,
+      "pre_repair_accepted": true,
+      "post_repair_accepted": true,
+      "post_repair_outcome": "value: INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): . No discriminant is evaluated.",
+      "now_rejects": false,
+      "note": "a rejection sentence naming 0 violated hypotheses; hygiene, not a finiteness defect"
+    }
+  ],
+  "live_site_bit_identity": [
+    {
+      "alpha": 1.1,
+      "pre_repair_hex": "0x1.341041090b96cp+1",
+      "post_repair_hex": "0x1.341041090b96cp+1",
+      "pre_repair_decimal": 2.4067460340658524,
+      "post_repair_decimal": 2.4067460340658524,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.2,
+      "pre_repair_hex": "0x1.37ea44d413ef4p+1",
+      "post_repair_hex": "0x1.37ea44d413ef4p+1",
+      "pre_repair_decimal": 2.436836818269393,
+      "post_repair_decimal": 2.436836818269393,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.3,
+      "pre_repair_hex": "0x1.3bfda59fe3024p+1",
+      "post_repair_hex": "0x1.3bfda59fe3024p+1",
+      "pre_repair_decimal": 2.468678191251472,
+      "post_repair_decimal": 2.468678191251472,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.4,
+      "pre_repair_hex": "0x1.404881c4f2c4cp+1",
+      "post_repair_hex": "0x1.404881c4f2c4cp+1",
+      "pre_repair_decimal": 2.502212735334558,
+      "post_repair_decimal": 2.502212735334558,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.5,
+      "pre_repair_hex": "0x1.44c968d6c2bd3p+1",
+      "post_repair_hex": "0x1.44c968d6c2bd3p+1",
+      "pre_repair_decimal": 2.537396530974982,
+      "post_repair_decimal": 2.537396530974982,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.6,
+      "pre_repair_hex": "0x1.497f47cdc1947p+1",
+      "post_repair_hex": "0x1.497f47cdc1947p+1",
+      "pre_repair_decimal": 2.5741967920941167,
+      "post_repair_decimal": 2.5741967920941167,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.7,
+      "pre_repair_hex": "0x1.4e6959936102ap+1",
+      "post_repair_hex": "0x1.4e6959936102ap+1",
+      "pre_repair_decimal": 2.612590023958565,
+      "post_repair_decimal": 2.612590023958565,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    },
+    {
+      "alpha": 1.8,
+      "pre_repair_hex": "0x1.53871ada6f2c8p+1",
+      "post_repair_hex": "0x1.53871ada6f2c8p+1",
+      "pre_repair_decimal": 2.652560574204788,
+      "post_repair_decimal": 2.652560574204788,
+      "bit_identical": true,
+      "ulps_moved": 0,
+      "finite": true,
+      "argmax_at_window_end": false
+    }
+  ],
+  "nonfinite_alpha_uniformity": [
+    {
+      "alpha": "-inf",
+      "label": "minus_inf",
+      "outcome_kind": "raise",
+      "raises_ValueError": true,
+      "message_head": "ValueError: farfield_modelling_error_bound: alpha is -inf, outside the required range [-inf, 2.0): a non-finite decay exponent makes the far-field int",
+      "pre_repair": "ACCEPTED, returned bound=NaN, 40/40 window samples NaN"
+    },
+    {
+      "alpha": "inf",
+      "label": "plus_inf",
+      "outcome_kind": "raise",
+      "raises_ValueError": true,
+      "message_head": "ValueError: farfield_modelling_error_bound: alpha is inf, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the tru",
+      "pre_repair": "already raised ValueError"
+    },
+    {
+      "alpha": "nan",
+      "label": "nan",
+      "outcome_kind": "raise",
+      "raises_ValueError": true,
+      "message_head": "ValueError: farfield_modelling_error_bound: alpha is NaN. This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports",
+      "pre_repair": "already raised ValueError"
+    }
+  ],
+  "controls": [
+    {
+      "control": "range_semantics_in_range_1p5",
+      "alpha": 1.5,
+      "should_raise": false,
+      "raised": false,
+      "ok": true,
+      "detail": "bound=2.537396530974982",
+      "why": "the repair must move NO finite alpha across the accept/reject line; alpha=-3.0 is in the declared range [-inf, 2.0) and must still evaluate"
+    },
+    {
+      "control": "range_semantics_in_range_1p9999",
+      "alpha": 1.9999,
+      "should_raise": false,
+      "raised": false,
+      "ok": true,
+      "detail": "bound=2.7371596782831986",
+      "why": "the repair must move NO finite alpha across the accept/reject line; alpha=-3.0 is in the declared range [-inf, 2.0) and must still evaluate"
+    },
+    {
+      "control": "range_semantics_upper_endpoint_2p0",
+      "alpha": 2.0,
+      "should_raise": true,
+      "raised": true,
+      "ok": true,
+      "detail": "ValueError: farfield_modelling_error_bound: alpha is 2.0, outside the required range [-inf, 2.0). This functio",
+      "why": "the repair must move NO finite alpha across the accept/reject line; alpha=-3.0 is in the declared range [-inf, 2.0) and must still evaluate"
+    },
+    {
+      "control": "range_semantics_above_2p5",
+      "alpha": 2.5,
+      "should_raise": true,
+      "raised": true,
+      "ok": true,
+      "detail": "ValueError: farfield_modelling_error_bound: alpha is 2.5, outside the required range [-inf, 2.0). This functio",
+      "why": "the repair must move NO finite alpha across the accept/reject line; alpha=-3.0 is in the declared range [-inf, 2.0) and must still evaluate"
+    },
+    {
+      "control": "range_semantics_negative_finite_-3p0",
+      "alpha": -3.0,
+      "should_raise": false,
+      "raised": false,
+      "ok": true,
+      "detail": "bound=795774715459485.1",
+      "why": "the repair must move NO finite alpha across the accept/reject line; alpha=-3.0 is in the declared range [-inf, 2.0) and must still evaluate"
+    },
+    {
+      "control": "C1b_alpha_neg1e300_unchanged",
+      "alpha": -1e+300,
+      "should_raise": null,
+      "raised": true,
+      "ok": true,
+      "detail": "raise: OverflowError: (34, 'Numerical result out of range')",
+      "why": "leg 199 filed this as SECONDARY_NOT_A_GATE_HIT (accepted, then an unnamed OverflowError from inside the quadrature). It is a FINITE alpha, so the isinf clause does not touch it and this leg does NOT claim it. Recorded so the repair's boundary is stated, not implied"
+    },
+    {
+      "control": "gamma_site_still_refuses_minus_inf",
+      "should_raise": null,
+      "raised": null,
+      "ok": true,
+      "detail": "value: gamma is -inf, outside the required range (0.0, 1.0]",
+      "why": "leg 199's localisation: the same guard function refuses -inf at the gamma site because that lower endpoint is FINITE (0.0, open). Unchanged here"
+    }
+  ],
+  "controls_failed": []
+}

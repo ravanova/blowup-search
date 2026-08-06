@@ -429,6 +429,18 @@ def farfield_modelling_error_bound(alpha, gamma, X0, Xmax_factor=1e4,
     """
     bad = unit_range_violation("alpha", alpha, -float("inf"), 2.0,
                                lo_open=False, hi_open=True)
+    if bad is None and np.isinf(float(alpha)):
+        # Leg 199 M1 / leg 215 repair. This is the ONLY call site in the repository
+        # that hands `unit_range_violation` an INFINITE endpoint, and that guard is the
+        # only one of the five that delegates non-finiteness to a plain comparison:
+        # with lo = -inf and lo_open=False the lower test is `-inf < -inf`, which is
+        # False, so alpha = -inf was admissible and returned bound = NaN (40/40 window
+        # samples NaN) with no exception. +inf and NaN were already refused here (by
+        # `f >= 2.0` and by the isnan test), so this clause fires on -inf ALONE and is a
+        # no-op for every finite alpha -- the 8 live call sites are bit-identical.
+        bad = (f"alpha is {float(alpha)!r}, outside the required range [-inf, 2.0): a "
+               f"non-finite decay exponent makes the far-field integrand NaN, and NaN "
+               f"in an upper-bound slot passes the contraction test silently")
     if bad is not None:
         raise ValueError(
             f"farfield_modelling_error_bound: {bad}. This function takes a MAX over "
