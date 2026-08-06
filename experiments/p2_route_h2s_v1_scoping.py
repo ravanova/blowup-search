@@ -585,9 +585,13 @@ def gate_4_bordered_at_zero():
             "leg_127_predicted_exponent": "1 - s",
             "leg_127_max_deviation": 0.0219,
             "leg_127_bordering_effect": (
-                "NONE -- the ell^1_w singular sequence has exactly zero far-field "
-                "amplitude component (5.7e-15 relative agreement between the bordered "
-                "and unbordered sigma_min at mu = 0), so the border never sees it"),
+                "NONE -- bordered and unbordered sigma_min agree to 5.7e-15 relative at "
+                "mu = 0.  MECHANISM, per leg 127's CORRECTED journal reading (the earlier "
+                "'exactly zero far-field component' phrasing is superseded and is NOT used "
+                "here): the far-field-amplitude component z[K+1] is NOT zero -- it is "
+                "6.5-6.8% of ||v||_1 and GROWING with M -- but its coupling column "
+                "C[:,K+1] is supported on a SINGLE ROW, the truncation edge, so leg 52's "
+                "bordering repair has nowhere else to reach."),
             "origin_H2_bordering_effect": (
                 "COMPLETE -- the only z-pole at z = 0 is c_1 = G'(0)/z, rank one, and "
                 "its residue direction IS the border column m = y b^{-2}"),
