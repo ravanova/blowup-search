@@ -719,7 +719,15 @@ BANNED = [
     ("the PORT itself", "M"),
     ("any GA compute on an unvalidated fitness -- C-PILOT's gate ANSWERED NO at leg 49 "
      "(4/6), so this ban did NOT lift when the stage closed",
-     "never -- only a re-run of the six-property gate that PASSES on a repaired fitness"),
+     "never -- only a re-run of the six-property gate that PASSES on a repaired fitness AT "
+     "THE PINNED FROZEN RESOLUTION n = 201 coarse / 401 fine (wall_model '2d', seed 0, "
+     "per_gene 9, refine 4 -- leg 59's configuration, the one legs 49 and 59 were scored at), "
+     "or at a strictly FINER grid; a pass at any COARSER grid does NOT lift this ban. Leg 160 "
+     "measured why: the unmodified, unrepaired leg-49 fitness passes 6/6 at n = 101/151 "
+     "(P3 = 0.02007528568401651, P2 = 1.0000) while failing 5/6 at 201/401, because "
+     "coarsening drops the residual floor ||rho||_inf from 4.79e-11 to 4.64e-13, below the "
+     "frozen eps grid's 1e-11 bottom -- P3 stops failing because the probe stops measuring, "
+     "with nothing repaired. Leg 160 reported that and refused to use it; its gate stays NO"),
     ("reading the float rehearsal's closure as resolution-independent -- leg 49 measured "
      "the certificate on the CLM object closing ONLY at n=201 and the admissible weight "
      "band going EMPTY at n=3201, because Z_1 is float conditioning", "L1"),
