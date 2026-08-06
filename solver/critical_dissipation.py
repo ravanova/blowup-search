@@ -157,11 +157,124 @@ WHAT THIS IS NOT
 * s = 3/2 and s = 5/2 are HYPERviscosity.  They are used here because they are where
   criticality can be posed exactly, not because they resemble NS.  What carries over
   is the MARGINAL STRUCTURE, not the exponent.
+
+--------------------------------------------------------------------------
+REPAIRED IN PLACE BY LEG 154 -- p IS NOW A CHECKED PRECONDITION, NOT A CLAIM
+--------------------------------------------------------------------------
+Everything above says "2s = p, a positive integer" as though it were guaranteed.  It
+was not checked.  Leg 121 measured what that cost: `CriticalDissipativeFlow(0.0,
+mu=0.1, p=1.9, K=64)` -- a request for s = 0.95 -- silently built p = 1 (s = 0.5) via
+`self.p = int(p)`, converged to residual 9.71e-16, and returned `alpha` and `alpha_1`
+BIT-IDENTICAL to an honest p = 1 run.  Not a plausible-looking wrong answer: an
+indistinguishable one, for a different input, at machine precision.
+
+`_validated_p` now refuses every non-integral and every non-finite float `p` with
+`CriticalDissipationDomainError`, in both `lambda_power` and
+`CriticalDissipativeFlow.__init__`.  It changes NOTHING for an integer `p` -- that is
+the licence the repair was granted under, and it is a measurement, not an assertion
+(leg 154's differential against this module's pre-repair commit 9dba93f).
+
+WHAT IS STILL NOT GUARDED, DECLARED RATHER THAN QUIETLY LEFT: `mu < 0`
+(anti-dissipation, leg 121's C5), `mu_decay_time`'s `0 <= target < mu0` (C6),
+`marginal_verdict` on a non-finite alpha_1 (C7), `amplitude_eigenvalue(mu < 0)` (C8),
+and `p = 1e300` (finite and integral, so a resource exhaustion rather than a silent
+substitution).  None is the exponent-truncation defect this repair was licensed to
+close, and each is a live escalation, not an oversight.
 """
+
+import warnings
 
 import numpy as np
 
 from solver.rescaled_spectrum import OddCompactBasis, RescaledFlow, match_filter
+
+
+# --------------------------------------------------------------------------
+# THE DOMAIN GUARD ON p (leg 154, repairing leg 121's finding)
+# --------------------------------------------------------------------------
+class CriticalDissipationDomainError(ValueError):
+    """`p` (= 2s) outside this module's validated domain: a finite integral exponent.
+
+    Subclasses `ValueError` deliberately: `lambda_power`'s original `p < 1` refusal was a
+    `ValueError`, callers are written against that, and leg 121's sub-integer CONTROL
+    asserts it.  The subclass adds a name to catch, it does not move the base.
+    """
+
+
+def _validated_p(p, on_noninteger="raise"):
+    """The exponent guard.  Returns the `int` the module will actually build with.
+
+    Leg 121 measured the defect this closes: `p = int(p)` accepted `p = 1.9` (i.e.
+    `s = 0.95`) and silently built `p = 1` (`s = 0.5`) instead, returning `alpha`,
+    the Newton residual and `alpha_1` BIT-IDENTICAL to an honest `p = 1` request at
+    machine precision.  The corrupted run did not look plausible -- it was
+    indistinguishable from an honest run of a DIFFERENT input.
+
+    TWO CLAUSES, EACH MEASURED NECESSARY (leg 154's novelty pass, before the patch):
+
+      * `np.isfinite` FIRST.  Not decoration.  `np.floor(inf) == inf`, so an
+        integrality test on its own is not merely imprecise on infinity, it is BLIND
+        to it -- `inf` would be accepted as "integral" and then truncated by `int()`
+        into an `OverflowError` from deep inside the constructor.  SEI CERT FLP04-C.
+      * THEN integrality.  This is the gate's actual subject, `p = 1.9`.
+
+    Leg 121's own prescribed predicate (`float(p) != round(float(p))`) implements the
+    second clause and not the first, and so raises `OverflowError` -- NOT a
+    `ValueError` -- on `±inf`, escaping its own CONTROL's `except ValueError`.
+
+    NON-FLOAT INPUTS ARE DELIBERATELY NOT TOUCHED.  Only `float`/`np.floating` take
+    the new path; `int`, `np.integer`, `bool`, `str`, `None` and everything else fall
+    through to the original `int(p)` unchanged.  That is what keeps leg 121's C4
+    type-coercion battery intact in BOTH directions: `'3'` still accepted, `'3.5'`
+    and `'3.0'` still refused by `int()` itself.  Widening the guard to strings would
+    newly ACCEPT `'3.0'`, which is a behaviour change on an input that was previously
+    refused, and the no-op licence forbids it.
+
+    NOT ADOPTED, AND RECORDED SO IT IS NOT REDISCOVERED AS AN IMPROVEMENT:
+    `operator.index` (PEP 357), which is what NumPy uses for `np.linspace`'s `num`,
+    would be the better library design -- and it rejects even exactly-integral floats,
+    so `p = 3.0` would start raising.  Leg 121's battery pins `p = 3.0` and
+    `np.float64(3.0)` as correctly ACCEPTED.  It would satisfy the repair's clause (a)
+    and fail its clause (b).
+
+    NOT GUARDED, AND DECLARED: `p = 1e300` is finite and integral, so it is accepted
+    and makes the `lambda_power` loop a resource exhaustion.  That is LOUD (an
+    unbounded matmul chain, eventually `MemoryError`), not a silent substitution of a
+    different exponent, which is what this repair is licensed to close.  Any cap would
+    be an arbitrary threshold with no measurement behind it.
+
+    `on_noninteger="truncate"` reproduces the pre-repair `int(p)` result BIT-IDENTICALLY
+    behind a `RuntimeWarning`, so leg 121's C1/C2/C3 bit-identity measurement -- the
+    evidence that authorised this repair -- stays executable after the guard lands
+    (banked lesson, leg 135).
+    """
+    if isinstance(p, (float, np.floating)):
+        pf = float(p)
+        if not np.isfinite(pf):
+            raise CriticalDissipationDomainError(
+                f"p (= 2s) must be a FINITE positive integer; got {pf!r}. "
+                "Non-finite exponents are refused here rather than at int() so the "
+                "failure is a ValueError with a domain message, not an OverflowError.")
+        if pf != np.floor(pf):
+            if on_noninteger == "truncate":
+                warnings.warn(
+                    f"p = {pf!r} is not an integer; truncating to {int(pf)} "
+                    f"(s = {0.5 * int(pf)}, NOT the requested s = {0.5 * pf}). This is "
+                    "the pre-repair behaviour, retained only so leg 121's measurement "
+                    "stays runnable. Do not use it to compute anything.",
+                    RuntimeWarning, stacklevel=3)
+            elif on_noninteger == "raise":
+                raise CriticalDissipationDomainError(
+                    f"p (= 2s) must be an integer; got {pf!r}, which would silently "
+                    f"build p = {int(pf)} (s = {0.5 * int(pf)}) instead of the "
+                    f"requested s = {0.5 * pf}. Lambda^p is an exact finite matrix in "
+                    "this basis ONLY for integer p -- see the module docstring. Pass an "
+                    "integer, or on_noninteger='truncate' to reproduce the pre-repair "
+                    "behaviour with a warning.")
+            else:
+                raise ValueError(
+                    f"on_noninteger must be 'raise' or 'truncate'; got {on_noninteger!r}")
+    return int(p)
 
 
 # --------------------------------------------------------------------------
@@ -188,15 +301,18 @@ def lambda_block(n_in):
     return C[1:n + 2, :]                      # rows m = 1..n+1
 
 
-def lambda_power(K, p):
+def lambda_power(K, p, on_noninteger="raise"):
     """Lambda^p as a K x K matrix on odd sine coefficients, p a positive integer.
 
     Each application widens the sine range by one mode, so the composite is built at
     full width and truncated ONCE at the end.  The truncation error is the size of
     the coefficients being dropped, which the K-ladder measures; `lambda_truncation`
     reports it directly rather than leaving it implicit.
+
+    `p` is validated for integrality by `_validated_p` -- the docstring's "p a positive
+    integer" used to be a claim about the caller and is now a checked precondition.
     """
-    K, p = int(K), int(p)
+    K, p = int(K), _validated_p(p, on_noninteger)
     if p < 1:
         raise ValueError("p must be a positive integer (2s = p)")
     M = np.eye(K)
@@ -235,10 +351,10 @@ class CriticalDissipativeFlow(RescaledFlow):
     gate in the test suite.
     """
 
-    def __init__(self, a, mu=0.0, p=1, K=96):
+    def __init__(self, a, mu=0.0, p=1, K=96, on_noninteger="raise"):
         super().__init__(a, K=K)
         self.mu = float(mu)
-        self.p = int(p)
+        self.p = _validated_p(p, on_noninteger)
         self.s = 0.5 * self.p
         Lp, _drop = lambda_power(self.K, self.p)
         self.Lp = Lp
