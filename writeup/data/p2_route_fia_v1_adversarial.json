@@ -1,0 +1,723 @@
+{
+ "gate": "Under an adversarial battery (inputs near the documented turning point, NaN-poisoned profile parameters), does solver/first_integral.py ever silently return a finite, plausible-looking wrong profile value instead of propagating or flagging the ill-conditioning?",
+ "gate_answer": "YES",
+ "gates": {
+  "G1_turning_point_continuation": {
+   "evaluations": 96,
+   "exceptions": 0,
+   "finite_nonzero_returns": 96,
+   "rows": [
+    {
+     "K": 48,
+     "Xc": 18.715770556159065,
+     "a": 0.25,
+     "band_width_in_supports": 1.6010135592587762,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -1.4482417377691548e-38,
+      "1.000001": -1.4482441547226395e-26,
+      "1.001": -1.4511399140591542e-14,
+      "1.01": -1.4774240448407102e-10,
+      "1.1": -1.7603463011623782e-06,
+      "1.5": -0.002209840787440521,
+      "2.0": -0.07331721370938657,
+      "5.0": -300.3073073536474
+     },
+     "s1": 0.1734523680023498,
+     "v_plausible_upper": 2.601013559258776
+    },
+    {
+     "K": 64,
+     "Xc": 18.71575900650487,
+     "a": 0.25,
+     "band_width_in_supports": 1.6009526598126982,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -1.4485601002035686e-38,
+      "1.000001": -1.448562517688365e-26,
+      "1.001": -1.4514589135905635e-14,
+      "1.01": -1.4777488223300694e-10,
+      "1.1": -1.7607332725631017e-06,
+      "1.5": -0.00221032656980296,
+      "2.0": -0.07333333080229468,
+      "5.0": -300.373322966199
+     },
+     "s1": 0.17346189958902347,
+     "v_plausible_upper": 2.600952659812698
+    },
+    {
+     "K": 96,
+     "Xc": 18.715758886719165,
+     "a": 0.25,
+     "band_width_in_supports": 1.6009513620050844,
+     "interior_max_abs_Omega": 1.0000000000000009,
+     "omega_outside": {
+      "1.000000001": -1.4485668855891593e-38,
+      "1.000001": -1.4485693030852788e-26,
+      "1.001": -1.451465712554856e-14,
+      "1.01": -1.477755744442285e-10,
+      "1.1": -1.7607415202389651e-06,
+      "1.5": -0.0022103369234762757,
+      "2.0": -0.07333367431232649,
+      "5.0": -300.3747299832893
+     },
+     "s1": 0.17346210272243268,
+     "v_plausible_upper": 2.6009513620050844
+    },
+    {
+     "K": 48,
+     "Xc": 12.256373329809298,
+     "a": 0.3,
+     "band_width_in_supports": 1.4496073392542121,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -4.7137509288851494e-32,
+      "1.000001": -4.713757484486828e-22,
+      "1.001": -4.721610462036641e-12,
+      "1.01": -1.0325713014418511e-08,
+      "1.1": -2.574329745132815e-05,
+      "1.5": -0.009839353618103619,
+      "2.0": -0.1821115013382726,
+      "5.0": -186.4821773703912
+     },
+     "s1": 0.19997695799385212,
+     "v_plausible_upper": 2.449607339254212
+    },
+    {
+     "K": 64,
+     "Xc": 12.256373326225395,
+     "a": 0.3,
+     "band_width_in_supports": 1.4496072478958735,
+     "interior_max_abs_Omega": 1.0000000000000007,
+     "omega_outside": {
+      "1.000000001": -4.713752335256699e-32,
+      "1.000001": -4.713758890860333e-22,
+      "1.001": -4.7216118707531214e-12,
+      "1.01": -1.0325716095147479e-08,
+      "1.1": -2.5743305131971807e-05,
+      "1.5": -0.009839356553724784,
+      "2.0": -0.18211155567216475,
+      "5.0": -186.48223300829676
+     },
+     "s1": 0.19997697589309282,
+     "v_plausible_upper": 2.4496072478958735
+    },
+    {
+     "K": 96,
+     "Xc": 12.25637332622089,
+     "a": 0.3,
+     "band_width_in_supports": 1.4496072476995048,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -4.7137523382796014e-32,
+      "1.000001": -4.713758893883239e-22,
+      "1.001": -4.721611873781064e-12,
+      "1.01": -1.0325716101769294e-08,
+      "1.1": -2.574330514848084e-05,
+      "1.5": -0.009839356560034705,
+      "2.0": -0.18211155578895186,
+      "5.0": -186.48223312788676
+     },
+     "s1": 0.19997697593156605,
+     "v_plausible_upper": 2.4496072476995048
+    },
+    {
+     "K": 48,
+     "Xc": 4.8461214761693086,
+     "a": 0.5,
+     "band_width_in_supports": 1.0796945487792433,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -3.617786694712664e-19,
+      "1.000001": -3.61778971355209e-13,
+      "1.001": -3.6214047865801794e-07,
+      "1.01": -3.654054401651502e-05,
+      "1.1": -0.003988609170882688,
+      "1.5": -0.14131976937651217,
+      "2.0": -0.8140018716087102,
+      "5.0": -52.09611978295745
+     },
+     "s1": 0.3007401742384409,
+     "v_plausible_upper": 2.0796945487792433
+    },
+    {
+     "K": 64,
+     "Xc": 4.8461214761833835,
+     "a": 0.5,
+     "band_width_in_supports": 1.0796945311004573,
+     "interior_max_abs_Omega": 1.0000000000000004,
+     "omega_outside": {
+      "1.000000001": -3.6177868547224e-19,
+      "1.000001": -3.6177898735619575e-13,
+      "1.001": -3.621404946749938e-07,
+      "1.01": -3.6540545632653086e-05,
+      "1.1": -0.003988609347293392,
+      "1.5": -0.14131977562689144,
+      "2.0": -0.8140019076108945,
+      "5.0": -52.09612208709725
+     },
+     "s1": 0.3007401808891032,
+     "v_plausible_upper": 2.0796945311004573
+    },
+    {
+     "K": 96,
+     "Xc": 4.846121476186167,
+     "a": 0.5,
+     "band_width_in_supports": 1.0796945245284042,
+     "interior_max_abs_Omega": 0.9999999999999993,
+     "omega_outside": {
+      "1.000000001": -3.6177869142056963e-19,
+      "1.000001": -3.6177899330453045e-13,
+      "1.001": -3.6214050062927237e-07,
+      "1.01": -3.6540546233449164e-05,
+      "1.1": -0.003988609412873715,
+      "1.5": -0.14131977795045736,
+      "2.0": -0.8140019209946343,
+      "5.0": -52.096122943656596
+     },
+     "s1": 0.3007401833614735,
+     "v_plausible_upper": 2.079694524528404
+    },
+    {
+     "K": 48,
+     "Xc": 2.58412494325337,
+     "a": 0.8,
+     "band_width_in_supports": 0.7998632033499453,
+     "interior_max_abs_Omega": 1.0000000000000002,
+     "omega_outside": {
+      "1.000000001": -4.881989889554061e-12,
+      "1.000001": -2.7453460958297695e-08,
+      "1.001": -0.00015447855449907835,
+      "1.01": -0.0027625134931206705,
+      "1.1": -0.051889974179823474,
+      "1.5": -0.48244393650628353,
+      "2.0": -1.4411557026274993,
+      "5.0": -19.389802626590598
+     },
+     "s1": 0.44652673738687704,
+     "v_plausible_upper": 1.7998632033499453
+    },
+    {
+     "K": 64,
+     "Xc": 2.584124941759912,
+     "a": 0.8,
+     "band_width_in_supports": 0.7998665872502029,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -4.8819566971158244e-12,
+      "1.000001": -2.74532743034033e-08,
+      "1.001": -0.00015447750420606357,
+      "1.01": -0.002762494710910839,
+      "1.1": -0.05188962138213195,
+      "1.5": -0.4824406563908126,
+      "2.0": -1.4411459042721706,
+      "5.0": -19.389670796160658
+     },
+     "s1": 0.4465243086524365,
+     "v_plausible_upper": 1.7998665872502029
+    },
+    {
+     "K": 96,
+     "Xc": 2.5841249412857694,
+     "a": 0.8,
+     "band_width_in_supports": 0.7998686367299253,
+     "interior_max_abs_Omega": 1.0,
+     "omega_outside": {
+      "1.000000001": -4.881936594081388e-12,
+      "1.000001": -2.7453161255674092e-08,
+      "1.001": -0.00015447686809501643,
+      "1.01": -0.0027624833354460924,
+      "1.1": -0.051889407709846375,
+      "1.5": -0.48243866978549627,
+      "2.0": -1.4411399698881646,
+      "5.0": -19.38959095292486
+     },
+     "s1": 0.446522837685313,
+     "v_plausible_upper": 1.7998686367299253
+    }
+   ],
+   "verdict": "GAP",
+   "widest_plausible_band": 2.601013559258776
+  },
+  "G2_mirror_property": {
+   "rows": [
+    {
+     "a": 0.25,
+     "rel_dev": {
+      "0.0001": 1.0212864557379575e-05,
+      "0.001": 7.711046616565298e-05,
+      "0.01": 0.0008490529702678273,
+      "0.1": 0.021623119865803564,
+      "1e-05": 1.0773340491931904e-06,
+      "1e-07": 6.719709788605144e-09
+     }
+    },
+    {
+     "a": 0.3,
+     "rel_dev": {
+      "0.0001": 1.1595125456675959e-05,
+      "0.001": 0.0001171039588276912,
+      "0.01": 0.0012871594707178913,
+      "0.1": 0.024895722311731316,
+      "1e-05": 1.1583248338276064e-06,
+      "1e-07": 8.148069441382688e-09
+     }
+    },
+    {
+     "a": 0.5,
+     "rel_dev": {
+      "0.0001": 3.671097249891009e-05,
+      "0.001": 0.0003694913743110817,
+      "0.01": 0.0038805119515114006,
+      "0.1": 0.05051893245347905,
+      "1e-05": 3.6685404183334214e-06,
+      "1e-07": 3.462224551498139e-08
+     }
+    },
+    {
+     "a": 0.8,
+     "rel_dev": {
+      "0.0001": 0.00012377609260716405,
+      "0.001": 0.0011904972084660903,
+      "0.01": 0.01035671349136269,
+      "0.1": 0.0715031819318902,
+      "1e-05": 1.2438090066457796e-05,
+      "1e-07": 1.231615834873523e-07
+     }
+    }
+   ],
+   "worst_rel_dev_at_1pct": 0.01035671349136269
+  },
+  "G3_clip_and_outer_e": {
+   "clip_max_dev": 0.0,
+   "clip_silently_evaluates_at_edge": true,
+   "rows": [
+    {
+     "e_poly": -0.004019537215451167,
+     "e_true_outer": -0.003978312612773034,
+     "ratio": 1.0103623336551721,
+     "v": 1.01
+    },
+    {
+     "e_poly": -0.04199516493754953,
+     "e_true_outer": -0.03800467771709278,
+     "ratio": 1.104999896332814,
+     "v": 1.1
+    },
+    {
+     "e_poly": -0.24997121986636603,
+     "e_true_outer": -0.16054071621517055,
+     "ratio": 1.5570580832050915,
+     "v": 1.5
+    },
+    {
+     "e_poly": -0.5999309276792785,
+     "e_true_outer": -0.27328465293174914,
+     "ratio": 2.19526022132354,
+     "v": 2.0
+    },
+    {
+     "e_poly": -4.799447421434228,
+     "e_true_outer": -0.630212257777507,
+     "ratio": 7.615604682714132,
+     "v": 5.0
+    },
+    {
+     "e_poly": -19.79772061341619,
+     "e_true_outer": -0.8995571940152194,
+     "ratio": 22.00829557601341,
+     "v": 10.0
+    }
+   ],
+   "worst_ratio": 22.00829557601341
+  },
+  "G4_nan_poisoned_defect": {
+   "absorbed_cases": 6,
+   "clean_defect": 6.217248937900877e-15,
+   "ladder": [
+    {
+     "defect": 6.217248937900877e-15,
+     "flagged": false,
+     "n_nan": 1,
+     "n_total": 400
+    },
+    {
+     "defect": 6.217248937900877e-15,
+     "flagged": false,
+     "n_nan": 10,
+     "n_total": 400
+    },
+    {
+     "defect": 6.217248937900877e-15,
+     "flagged": false,
+     "n_nan": 100,
+     "n_total": 400
+    },
+    {
+     "defect": 6.217248937900877e-15,
+     "flagged": false,
+     "n_nan": 300,
+     "n_total": 400
+    },
+    {
+     "defect": 2.886579864025407e-15,
+     "flagged": false,
+     "n_nan": 390,
+     "n_total": 400
+    },
+    {
+     "defect": 1.3322676295501878e-15,
+     "flagged": false,
+     "n_nan": 397,
+     "n_total": 400
+    },
+    {
+     "defect": "nan",
+     "flagged": true,
+     "n_nan": 398,
+     "n_total": 400
+    },
+    {
+     "defect": "nan",
+     "flagged": true,
+     "n_nan": 399,
+     "n_total": 400
+    },
+    {
+     "defect": "nan",
+     "flagged": true,
+     "n_nan": 400,
+     "n_total": 400
+    }
+   ],
+   "max_nan_absorbed_of_400": 397,
+   "others": {
+    "a_is_nan": "nan",
+    "c_is_nan": "nan",
+    "control_finite_poison_one_point": 1.0000000000000036,
+    "inf_in_Omega": "inf",
+    "nan_in_U": 6.217248937900877e-15
+   },
+   "verdict": "GAP"
+  },
+  "G5_nan_coefficients": {
+   "finite_values_returned": 0,
+   "probes": 20,
+   "rows": [
+    {
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "k": 0,
+     "mass": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "omega_of_0.5": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "residual_max": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    },
+    {
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "k": 1,
+     "mass": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "omega_of_0.5": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "residual_max": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    },
+    {
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "k": 10,
+     "mass": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "omega_of_0.5": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "residual_max": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    },
+    {
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "k": 63,
+     "mass": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "omega_of_0.5": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "residual_max": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    }
+   ],
+   "verdict": "ROBUST"
+  },
+  "G6_degenerate_radius": {
+   "clean": {
+    "edge": 1.1104355851864388e-05,
+    "mass": -4.066944034975278,
+    "opnorm": 4.51759312365288
+   },
+   "clean_mass_sign": "negative",
+   "negative_radius_mass": {
+    "outcome": "value",
+    "value": 1.6591139673728337
+   },
+   "rows": [
+    {
+     "Xc": "nan",
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "mass": {
+      "outcome": "value",
+      "value": "nan"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    },
+    {
+     "Xc": "inf",
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": 0.0
+     },
+     "mass": {
+      "outcome": "value",
+      "value": "-inf"
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "nan"
+     }
+    },
+    {
+     "Xc": "zero",
+     "edge_amplitude": {
+      "exception": "ZeroDivisionError",
+      "outcome": "raised"
+     },
+     "mass": {
+      "outcome": "value",
+      "value": -0.0
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": "inf"
+     }
+    },
+    {
+     "Xc": "negative",
+     "edge_amplitude": {
+      "exception": "TypeError",
+      "outcome": "raised"
+     },
+     "mass": {
+      "outcome": "value",
+      "value": 1.6591139673728337
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": 8.155306719899016
+     }
+    },
+    {
+     "Xc": "tiny",
+     "edge_amplitude": {
+      "exception": "OverflowError",
+      "outcome": "raised"
+     },
+     "mass": {
+      "outcome": "value",
+      "value": -3.3182279347456675e-301
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": 2.44797263467053e+301
+     }
+    },
+    {
+     "Xc": "huge",
+     "edge_amplitude": {
+      "outcome": "value",
+      "value": 0.0
+     },
+     "mass": {
+      "outcome": "value",
+      "value": -3.3182279347456673e+299
+     },
+     "operator_norm": {
+      "outcome": "value",
+      "value": 3.333333333333329
+     }
+    }
+   ]
+  },
+  "G7_constructor_guard": {
+   "a_inf_converged": false,
+   "a_inf_residual": "nan",
+   "probed": 6,
+   "rejected": 3,
+   "rows": [
+    {
+     "a": "nan",
+     "ctor": {
+      "exception": "ValueError",
+      "outcome": "raised"
+     }
+    },
+    {
+     "a": "zero",
+     "ctor": {
+      "exception": "ValueError",
+      "outcome": "raised"
+     }
+    },
+    {
+     "a": "negative",
+     "ctor": {
+      "exception": "ValueError",
+      "outcome": "raised"
+     }
+    },
+    {
+     "a": "inf",
+     "ctor": {
+      "outcome": "value",
+      "value": 0.0
+     }
+    },
+    {
+     "a": "denormal",
+     "ctor": {
+      "outcome": "value",
+      "value": 9.999999999999999e+299
+     }
+    },
+    {
+     "a": "huge",
+     "ctor": {
+      "outcome": "value",
+      "value": 1e-300
+     }
+    }
+   ]
+  },
+  "G8_newton_path": {
+   "cases": 5,
+   "dishonest_converged_flags": 0,
+   "rows": [
+    {
+     "Xc": "nan",
+     "case": "b0_nan",
+     "converged": false,
+     "rel_drift_vs_clean_Xc": null,
+     "residual": "nan"
+    },
+    {
+     "Xc": "nan",
+     "case": "Xc0_nan",
+     "converged": false,
+     "rel_drift_vs_clean_Xc": null,
+     "residual": "nan"
+    },
+    {
+     "Xc": 12.256373326225377,
+     "case": "Xc0_negative",
+     "converged": true,
+     "rel_drift_vs_clean_Xc": 1.4432899320127035e-15,
+     "residual": 3.7969627442180354e-14
+    },
+    {
+     "Xc": 12.256373326225361,
+     "case": "Xc0_1e-9",
+     "converged": true,
+     "rel_drift_vs_clean_Xc": 2.7755575615628914e-15,
+     "residual": 5.6621374255882984e-14
+    },
+    {
+     "Xc": 12.256373326225383,
+     "case": "Xc0_1e9",
+     "converged": true,
+     "rel_drift_vs_clean_Xc": 9.992007221626409e-16,
+     "residual": 6.994405055138486e-14
+    }
+   ],
+   "verdict": "ROBUST"
+  },
+  "G9_negative_e_inside": {
+   "min_e_at_nodes": -0.2941047059997357,
+   "omega_at_half": -0.016610628594127978,
+   "residual_amplification": 77584321687270.64,
+   "residual_clean": 2.3314683517128287e-14,
+   "residual_flipped": 1.8088539060297877
+  }
+ },
+ "headline": {
+  "defect_reported_on_397_of_400_nan": "nan",
+  "evaluations_outside_support": 96,
+  "exceptions_or_nans_raised_outside_support": 0,
+  "max_nan_points_absorbed_by_defect_of_400": 397,
+  "robust_gates": [
+   "G5_nan_coefficients",
+   "G8_newton_path"
+  ],
+  "silent_wrong_profile_values_outside_support": 96,
+  "widest_in_range_band_v": 2.601013559258776,
+  "worst_mirror_rel_dev_at_1pct": 0.01035671349136269
+ },
+ "leg": 107,
+ "module_under_test": "solver/first_integral.py (READ-ONLY, unedited)",
+ "route": "FIA",
+ "runtime_s": 24.9
+}
