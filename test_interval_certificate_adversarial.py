@@ -7,30 +7,42 @@ pipeline a WELL-FORMED problem.  This file asks the other question, the one leg 
 the sibling pipeline `solver/port_certification.py`: **what does the pipeline say when the
 input is not well formed?**
 
-**LEG 98's GATE ANSWERED YES.**  Of 36 hypothesis-violating inputs, **12 were reported as a
-CLOSING certificate**, and **8 of those 12 are LOAD-BEARING** -- the hypothesis-satisfying
-input of the same magnitude does NOT close, so the violation is exactly what bought the
-certificate.  The full battery, with every constant and every r-interval, is
-`experiments/p2_route_ica_v1_adversarial.py` -> `writeup/data/p2_route_ica_v1_adversarial.json`.
+**LEG 98's GATE ANSWERED YES, AND THE REPAIR HAS LANDED.**  Of 36 hypothesis-violating
+inputs, **12 were reported as a CLOSING certificate**, and **8 of those 12 were LOAD-BEARING**
+-- the hypothesis-satisfying input of the same magnitude does NOT close, so the violation was
+exactly what bought the certificate.  **It is now 0 of 36.**  The full battery, with every
+constant and every r-interval, is `experiments/p2_route_ica_v1_adversarial.py` ->
+`writeup/data/p2_route_ica_v1_adversarial.json`, whose `history.pre_fix` block carries leg 98's
+pre-repair numbers verbatim so regenerating the artifact cannot erase the finding.
 
-**THIS FILE DOES NOT PATCH ANYTHING, AND MUST NOT BE READ AS AN ENDORSEMENT.**  Leg 98 was
-declared claim-bearing and read-only on `solver/interval_certificate.py`; the repair belongs
-to a bench-repair agent under the orchestrator's authority, exactly as leg 79's finding in
-`port_certification.py` and leg 69's in `interval.py` were handled.  So the gates below split
-into three kinds, and the kind is stated in each docstring:
+**THE SEVEN GAP-PIN GATES BELOW HAVE BEEN INVERTED, NOT WEAKENED** -- the disposition leg 98
+wrote into each of their docstrings, and the same conversion legs 66/79/83/85/89/91/92 made
+when their findings were repaired.  Each one now asserts the REFUSAL, at the same inputs, with
+the same magnitudes quoted, and carries the pre-fix behaviour in its docstring as the record of
+what it is protecting against.  So the gates split into three kinds, and the kind is stated in
+each docstring:
 
-  * **GAP-PIN gates** assert the DEFECTIVE behaviour as it stands today, so the defect cannot
-    quietly change shape while it waits for repair (lesson 68: a finding kept in prose decays
-    at the rate of memory; a finding kept as an assertion does not).  Following leg 84's
-    convention verbatim: **these gates will fail the day the guard lands -- INVERT them, do
-    not weaken them.**  Each one names the inversion it expects.
-  * **HOLDS gates** assert the checks that ARE in place and must never regress -- notably the
-    NaN and infinity handling in `radii_verdict`, and `Interval`'s own `lo <= hi` validity
-    guard, which is leg 69's repair still holding the line and is the reason two of the
-    poisoned-enclosure cases raise instead of lying.
+  * **FIXED gates** (formerly GAP-PIN) assert the guard that closed leg 98's defect: the exact
+    inputs that used to buy a certificate must now be refused, and refused FOR THE STATED
+    REASON, not by accident.  Each keeps the measured size of the lie it rejects.
+  * **HOLDS gates** assert the checks that were ALREADY in place and must never regress --
+    notably the NaN and infinity handling in `radii_verdict`, which leg 98 measured as correct
+    4/4 and which the repair deliberately leaves as a returned non-closing verdict rather than
+    an exception, and `Interval`'s own `lo <= hi` validity guard, which is leg 69's repair
+    still holding the line and is the reason two of the poisoned-enclosure cases raise instead
+    of lying.
   * **CONTROL gates** are the positive controls: the honest certificate must still close at a
     converged iterate and must still fail at a displaced one, so that a "nothing closes any
-    more" regression cannot masquerade as robustness.
+    more" regression cannot masquerade as robustness.  These matter more after a repair than
+    before it, and the CONTROL below is unchanged from leg 98's version.
+
+WHERE THE REFUSAL SHOWS UP, AND WHY IT DIFFERS BETWEEN THE TWO FUNCTIONS
+-----------------------------------------------------------------------------
+`radii_verdict` RETURNS `closes=False` with a `reason` beginning `INVALID_INPUT` and a
+`violations` list -- it is a verdict function, every caller reads its `closes` field, and this
+is the shape leg 79's repair gave the sibling pipeline.  `interval_constants` RAISES
+`CertificateInputError` -- it returns rigorous BOUNDS, and there is no field of its result in
+which "no bound was established" could be reported honestly.
 
 WHICH HYPOTHESES, AND WHERE THEY COME FROM (writeup/novelty/leg_98.md)
 -----------------------------------------------------------------------------
@@ -55,14 +67,21 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from experiments.p2_route_ica_v1_adversarial import (Interval, _Poisoned, _iv_shrunk,
-                                                     _iv_zero, run, substrate)
-from solver.interval_certificate import interval_constants, radii_verdict
+from experiments.p2_route_ica_v1_adversarial import (PRE_FIX_MEASUREMENT, Interval,
+                                                     _Poisoned, _iv_shrunk, _iv_zero, run,
+                                                     substrate)
+from solver.interval_certificate import (CertificateInputError, interval_constants,
+                                         radii_verdict)
 
-# The battery's banked headline. A change here is a change in the finding, and it must be
-# accompanied by a change in writeup/novelty/leg_98.md and the JSON.
-BANKED = {"cases": 39, "hypothesis_violating": 36, "false_accepts": 12,
-          "false_accepts_load_bearing": 8, "rejected": 20, "raised": 4}
+# The battery's banked headline, AFTER the repair. A change here is a change in the finding,
+# and it must be accompanied by a change in the JSON.
+BANKED = {"cases": 39, "hypothesis_violating": 36, "false_accepts": 0,
+          "false_accepts_load_bearing": 0, "rejected": 29, "raised": 7}
+
+# What it was BEFORE the repair, as leg 98 measured it -- imported from the battery rather
+# than restated, so the two files cannot drift. 12/36 accepted, 8 load-bearing.
+assert PRE_FIX_MEASUREMENT["false_accepts"] == 12
+assert PRE_FIX_MEASUREMENT["false_accepts_load_bearing"] == 8
 
 _SUB = None
 
@@ -181,165 +200,208 @@ def test_holds_nan_and_zero_weights_are_rejected():
 
 
 # --------------------------------------------------------------------------
-# GAP-PIN -- the defect, pinned. INVERT these when the guard lands.
+# FIXED -- leg 98's seven GAP-PINs, INVERTED. Each asserts the guard that closed it.
 # --------------------------------------------------------------------------
-def test_gap_negative_Y0_is_accepted():
-    """GAP-PIN (H1). A NEGATIVE Y_0 closes the certificate. This is the finding.
+def test_fixed_negative_Y0_is_refused():
+    """FIXED (H1), was GAP-PIN. A NEGATIVE Y_0 is refused by hypothesis.
 
     Y_0 = ||A F(z)|| is a norm; it cannot be negative, and the theorem says nothing about
-    an input that is. The pipeline evaluates the discriminant anyway, and because a
-    negative Y_0 makes the discriminant LARGER it converts a failing certificate into a
-    passing one with a nonsensical NEGATIVE r_min.
+    an input that is. BEFORE THE REPAIR the pipeline evaluated the discriminant anyway,
+    and because a negative Y_0 makes the discriminant LARGER it converted a failing
+    certificate into a passing one with a nonsensical NEGATIVE r_min: at
+    (Y_0, Z_1, Z_2) = (-1.0, 0.3, 1.0) it returned closes=True, r_min = -0.8780, where
+    the sign-corrected (+1.0, 0.3, 1.0) does not close on a budget of 0.2450.
 
-    INVERSION WHEN REPAIRED: assert closes is False with a reason naming the hypothesis
-    violation (the sibling returns status INVALID_INPUT), for all four values below."""
+    The refusal must be BY HYPOTHESIS -- reason INVALID_INPUT, naming Y_0 -- and must
+    carry no r_min at all: a rejected fabrication may not be reported in the same slot
+    as a measured bound."""
     for Y0 in (-1.0, -1e-12, -1e6, -1e-30):
         v = radii_verdict(Y0, 0.3, 1.0)
-        assert v["closes"], (
-            "GOOD NEWS, BAD TEST: a negative Y_0 is now rejected -- the defect leg 98 "
-            "found has been repaired. INVERT this gate, do not delete it.")
-    v = radii_verdict(-1.0, 0.3, 1.0)
-    assert v["r_min"] < 0.0, f"expected a nonsensical negative r_min, got {v['r_min']}"
+        assert not v["closes"], f"a negative Y_0 = {Y0!r} still closes: {v}"
+        assert v["reason"].startswith("INVALID_INPUT"), (
+            f"Y_0 = {Y0!r} was refused for the wrong reason: {v['reason']!r}")
+        assert any("Y_0 is negative" in s for s in v["violations"]), v["violations"]
+        assert v["r_min"] is None and v["r_max"] is None, (
+            f"a refused input still carries an r-interval: {v}")
     honest = radii_verdict(1.0, 0.3, 1.0)
-    assert not honest["closes"], "the |Y_0| counterpart should not close"
-    print(f"[ok] GAP-PIN Y_0 < 0 accepted 4/4; at Y_0 = -1.0 the verdict is "
-          f"closes=True with r_min = {v['r_min']:.4f} < 0, where Y_0 = +1.0 "
-          f"(same magnitude) does NOT close on a budget of {honest['budget']:.4f}")
+    assert not honest["closes"] and honest["reason"] == "Y0 exceeds the budget", (
+        f"the |Y_0| counterpart changed behaviour: {honest}")
+    tiny = radii_verdict(1e-12, 0.3, 1.0)
+    assert tiny["closes"], f"an honest small Y_0 must still close: {tiny}"
+    print(f"[ok] FIXED Y_0 < 0 refused 4/4 as INVALID_INPUT with no r-interval "
+          f"(was: closes=True, r_min = -0.8780 at Y_0 = -1.0); the +1.0 counterpart "
+          f"still fails on its budget of {honest['budget']:.4f} and Y_0 = 1e-12 "
+          f"still closes")
 
 
-def test_gap_negative_Z1_is_accepted():
-    """GAP-PIN (H1). A NEGATIVE Z_1 closes, and it rescues an arbitrarily large Y_0.
+def test_fixed_negative_Z1_is_refused():
+    """FIXED (H1), was GAP-PIN. A NEGATIVE Z_1 is refused, and no longer rescues Y_0.
 
     Z_1 < 0 passes the `Z1 < 1.0` guard and then inflates the budget (1-Z_1)^2/(2 Z_2)
-    without bound. At Z_1 = -1e6 the budget is 5e11, so Y_0 = 1e3 -- a residual a
-    thousand times the size of anything this repository has ever certified -- closes.
+    without bound. BEFORE THE REPAIR, at Z_1 = -1e6 the budget was 5.000e+11, so
+    Y_0 = 1e3 -- a residual a thousand times the size of anything this repository has
+    ever certified -- closed.
 
-    INVERSION WHEN REPAIRED: both cases must be refused as hypothesis violations, NOT as
-    'Z_1 >= 1' (which would be the wrong reason for the right answer)."""
-    v = radii_verdict(1e-12, -5.0, 1.0)
-    assert v["closes"], ("GOOD NEWS, BAD TEST: a negative Z_1 is now rejected. INVERT "
-                         "this gate, do not delete it.")
-    hard = radii_verdict(1e3, -1e6, 1.0)
-    assert hard["closes"], ("GOOD NEWS, BAD TEST: Z_1 = -1e6 no longer rescues a large "
-                            "Y_0. INVERT this gate.")
+    Leg 98 named the trap in its own inversion note and it is gated here: the refusal
+    must NOT be 'Z1 >= 1', which would be the wrong reason for the right answer."""
+    for trip in ((1e-12, -5.0, 1.0), (1e3, -1e6, 1.0)):
+        v = radii_verdict(*trip)
+        assert not v["closes"], f"a negative Z_1 still closes: {trip} -> {v}"
+        assert v["reason"].startswith("INVALID_INPUT"), (
+            f"{trip} refused for the wrong reason: {v['reason']!r}")
+        assert v["reason"] != "Z1 >= 1" and any("Z_1 is negative" in s
+                                                for s in v["violations"]), v
+        assert v["budget"] == 0.0, f"a refused input still quotes a budget: {v}"
     honest = radii_verdict(1e3, 1e6, 1.0)
-    assert not honest["closes"], "the |Z_1| counterpart should not close"
-    print(f"[ok] GAP-PIN Z_1 < 0 accepted; Z_1 = -1e6 lifts the budget to "
-          f"{hard['budget']:.3e} and closes a Y_0 = 1e3 certificate that the same "
-          f"magnitude Z_1 = +1e6 rejects")
+    assert not honest["closes"] and honest["reason"] == "Z1 >= 1", (
+        f"the |Z_1| counterpart changed behaviour: {honest}")
+    print("[ok] FIXED Z_1 < 0 refused as INVALID_INPUT naming Z_1 (not as 'Z1 >= 1'), "
+          "and quotes no budget -- Z_1 = -1e6 no longer lifts the budget to 5.000e+11 "
+          "to rescue a Y_0 = 1e3 certificate")
 
 
-def test_gap_negative_infinite_Y0_is_accepted():
-    """GAP-PIN (H1). Y_0 = -inf closes, while Y_0 = +inf is refused.
+def test_fixed_negative_infinite_Y0_is_refused():
+    """FIXED (H1), was GAP-PIN. Y_0 = -inf is refused for the same reason +inf is.
 
-    The asymmetry is the tell: nothing is checking the hypothesis, only the arithmetic.
-
-    INVERSION WHEN REPAIRED: -inf must be refused for the same reason +inf is."""
+    BEFORE THE REPAIR, Y_0 = -inf closed with r_min = -1.341e+154 while Y_0 = +inf was
+    correctly refused. That asymmetry was the tell that the guard was arithmetic and not
+    a hypothesis check. Both directions are now refused as non-finite, and the SYMMETRY
+    is what this gate asserts."""
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         v = radii_verdict(-np.inf, 0.3, 1.0)
         plus = radii_verdict(np.inf, 0.3, 1.0)
-    assert v["closes"], ("GOOD NEWS, BAD TEST: Y_0 = -inf is now rejected. INVERT this "
-                         "gate, do not delete it.")
-    assert not plus["closes"], "Y_0 = +inf must stay rejected"
-    assert v["r_min"] < -1e150, f"expected r_min ~ -1.3e154, got {v['r_min']}"
-    print(f"[ok] GAP-PIN Y_0 = -inf closes with r_min = {v['r_min']:.3e} while "
-          f"Y_0 = +inf is refused -- the guard is arithmetic, not a hypothesis check")
+    for name, got in (("-inf", v), ("+inf", plus)):
+        assert not got["closes"], f"Y_0 = {name} still closes: {got}"
+        assert got["reason"].startswith("INVALID_INPUT"), (
+            f"Y_0 = {name} refused for the wrong reason: {got['reason']!r}")
+        assert any("infinite" in s for s in got["violations"]), got["violations"]
+        assert got["r_min"] is None, f"Y_0 = {name} still carries an r_min: {got}"
+    print("[ok] FIXED Y_0 = -inf and Y_0 = +inf are now refused identically, as "
+          "non-finite by hypothesis (was: -inf closed with r_min = -1.341e+154)")
 
 
-def test_gap_fabricated_zero_residual_enclosure_is_accepted():
-    """GAP-PIN (H2). An enclosure object that reports F(z) == [0, 0] closes, at a point
-    whose true residual is 5.9e-03.
+def test_fixed_fabricated_zero_residual_enclosure_is_refused():
+    """FIXED (H2), was GAP-PIN. An enclosure reporting F(z) == [0, 0] is refused.
 
-    `interval_constants` never checks that the enclosure it is handed contains anything.
-    The module's own docstring says containment IS gated -- but it is gated in the test
-    suite, for the real enclosure class, not enforced at runtime for whatever object the
-    caller passes. That distinction is the whole finding on this side of the battery.
+    BEFORE THE REPAIR this closed at an iterate whose true residual is 5.907e-03, on a
+    fabricated Y_0 of 7.9e-323 -- a lie of ~320 decades, undetected, because
+    `interval_constants` never checked that the enclosure it was handed contained
+    anything. The module's docstring said containment IS gated, but it was gated in the
+    test suite for the REAL enclosure class, not enforced at runtime for whatever object
+    a caller passes. That distinction was the whole finding on this side of the battery.
 
-    INVERSION WHEN REPAIRED: `interval_constants` should re-evaluate F in float at z and
-    refuse an enclosure that does not contain it; assert the refusal here."""
+    The guard re-evaluates F in float at the same point and compares in the Y_0 currency,
+    so the refusal names both numbers. The honest constants at the same point are
+    computed first and must be unaffected."""
     b, z, z_bad, w, nu, iv = _sub()
     honest = interval_constants(iv, z_bad, w, nu)
     assert not radii_verdict(honest["Y0"], honest["Z1"], honest["Z2"])["closes"]
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        c = interval_constants(_Poisoned(iv, f_hook=_iv_zero), z_bad, w, nu)
-        v = radii_verdict(c["Y0"], c["Z1"], c["Z2"])
-    assert v["closes"], ("GOOD NEWS, BAD TEST: a fabricated zero-residual enclosure is "
-                         "now rejected. INVERT this gate, do not delete it.")
-    assert c["Y0"] < 1e-300, f"expected a denormal-scale fabricated Y_0, got {c['Y0']}"
-    print(f"[ok] GAP-PIN a fabricated F == [0,0] enclosure gives Y_0 = {c['Y0']:.1e} "
-          f"(denormal) and CLOSES at an iterate whose honest Y_0 = {honest['Y0']:.3e} "
-          f"does not -- a lie of ~320 decades, undetected")
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            interval_constants(_Poisoned(iv, f_hook=_iv_zero), z_bad, w, nu)
+    except CertificateInputError as ex:
+        assert "does not contain the residual" in str(ex), f"wrong guard message: {ex}"
+    else:
+        raise AssertionError(
+            "a fabricated F == [0,0] enclosure still produced constants; it used to "
+            "yield Y_0 = 7.9e-323 and CLOSE at a point whose honest Y_0 is 5.907e-03")
+    print(f"[ok] FIXED a fabricated F == [0,0] enclosure is REFUSED "
+          f"(CertificateInputError) at an iterate whose honest Y_0 = {honest['Y0']:.3e} "
+          f"-- it used to return Y_0 = 7.9e-323 and close, a lie of ~320 decades")
 
 
-def test_gap_well_formed_non_containing_enclosure_is_accepted():
-    """GAP-PIN (H2), and the sharpest case in the battery.
+def test_fixed_well_formed_non_containing_enclosure_is_refused():
+    """FIXED (H2), was GAP-PIN, and the sharpest case in the battery.
 
     This enclosure is perfectly well formed -- lo <= hi, all endpoints finite, no NaN, a
     positive width -- so EVERY validity check that exists, including leg 69's, passes it.
-    It is simply the honest enclosure scaled by 1e-8, so it does not contain the residual.
-    The certificate closes with a Y_0 that is 1.0e+08 times too small. No amount of
-    interval-validity checking catches this one; only a containment check does.
+    It is simply the honest enclosure scaled by 1e-8, so it does not contain the residual,
+    and BEFORE THE REPAIR the certificate closed with a Y_0 that was 1.000e+08 times too
+    small. No amount of interval-validity checking catches this one; only a containment
+    check does, which is why the repair is a containment check and not a stricter
+    validity check.
 
-    INVERSION WHEN REPAIRED: assert refusal, and keep the 1e-8 factor -- it is the
-    measured size of the lie."""
+    The 1e-8 factor is kept, per leg 98's inversion note: it is the measured size of the
+    lie, and the guard's message must quote the resulting ratio."""
     b, z, z_bad, w, nu, iv = _sub()
     honest = interval_constants(iv, z_bad, w, nu)
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        c = interval_constants(_Poisoned(iv, f_hook=_iv_shrunk), z_bad, w, nu)
-        v = radii_verdict(c["Y0"], c["Z1"], c["Z2"])
-    assert v["closes"], ("GOOD NEWS, BAD TEST: a non-containing enclosure is now "
-                         "rejected. INVERT this gate, do not delete it.")
-    ratio = honest["Y0"] / c["Y0"]
-    assert 0.5e8 < ratio < 2e8, f"expected a ~1e8 understatement, measured {ratio:.3e}"
-    print(f"[ok] GAP-PIN a WELL-FORMED non-containing enclosure (lo<=hi, finite, positive "
-          f"width) understates Y_0 by {ratio:.3e}x -- {honest['Y0']:.3e} -> {c['Y0']:.3e} "
-          f"-- and closes; no validity check can see this, only containment")
+    poisoned = _Poisoned(iv, f_hook=_iv_shrunk)
+    fz = poisoned.F(z_bad)
+    assert np.all(fz.lo <= fz.hi) and np.all(np.isfinite(fz.lo)) and np.any(
+        fz.hi > fz.lo), "the poisoned enclosure must stay WELL FORMED, or the gate is moot"
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            interval_constants(poisoned, z_bad, w, nu)
+    except CertificateInputError as ex:
+        assert "does not contain the residual" in str(ex), f"wrong guard message: {ex}"
+        msg = str(ex)
+    else:
+        raise AssertionError(
+            "a well-formed NON-CONTAINING enclosure (the honest one scaled by 1e-8) "
+            "still produced constants; it used to understate Y_0 by 1.0e+08x and close")
+    print(f"[ok] FIXED a WELL-FORMED non-containing enclosure (lo<=hi, finite, positive "
+          f"width, 1e-8 x the honest one) is REFUSED by the containment screen, where "
+          f"the honest Y_0 = {honest['Y0']:.3e}; guard reports: {msg.split('--')[1].strip()[:60]}")
 
 
-def test_gap_negative_weight_vector_is_accepted():
-    """GAP-PIN (H3). A sign-flipped weight vector is accepted as a norm.
+def test_fixed_negative_weight_vector_is_refused():
+    """FIXED (H3), was GAP-PIN. A sign-flipped weight vector is refused as not a norm.
 
-    `w` defines the norm the certificate is stated in. Negated, it is not a norm, and the
-    whole-vector case even drives Y_0 NEGATIVE (-2.5e-28) -- the one end-to-end path in
-    this battery from structurally valid enclosures to a hypothesis-violating constant.
+    `w` defines the norm the certificate is stated in. Negated, it is not a norm, and
+    BEFORE THE REPAIR the whole-vector case drove Y_0 NEGATIVE (-2.463e-28) -- the one
+    end-to-end path in this battery from structurally valid enclosures to a
+    hypothesis-violating constant, which `radii_verdict` then closed. A single negative
+    component was accepted too.
 
-    INVERSION WHEN REPAIRED: `interval_constants` should refuse a `w` that is not strictly
-    positive and finite."""
+    Both are refused at the door now, by `interval_constants`, before any bound exists."""
     b, z, z_bad, w, nu, iv = _sub()
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        c = interval_constants(iv, z, -np.asarray(w), nu)
-        v = radii_verdict(c["Y0"], c["Z1"], c["Z2"])
-    assert v["closes"], ("GOOD NEWS, BAD TEST: a negative weight vector is now rejected. "
-                         "INVERT this gate, do not delete it.")
-    assert c["Y0"] < 0.0, f"expected a negative Y_0 from a negated weight, got {c['Y0']}"
-    print(f"[ok] GAP-PIN w -> -w is accepted as a norm and yields Y_0 = {c['Y0']:.3e} < 0, "
-          f"which radii_verdict then closes")
-
-
-def test_gap_Z2_zero_raises_instead_of_reporting():
-    """GAP-PIN, the mild one. Z_2 = 0 raises ZeroDivisionError.
-
-    A crash is a refusal, so this is not unsound -- but it is a bare `ZeroDivisionError`
-    from inside a verdict function, and a caller with a broad `except` turns it into a
-    silent skip. Z_2 = 0 is not exotic: it is what an exactly-linear system gives.
-
-    INVERSION WHEN REPAIRED: return a structured non-closing verdict naming the
-    degeneracy, rather than raising."""
-    for Z2 in (0.0, -0.0):
+    for name, wp in (("all negative", -np.asarray(w)),
+                     ("one negative", np.concatenate([[-w[0]], w[1:]]))):
         try:
-            radii_verdict(1e-12, 0.3, Z2)
-        except ZeroDivisionError:
-            pass
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                interval_constants(iv, z, wp, nu)
+        except CertificateInputError as ex:
+            assert "negative component" in str(ex), f"wrong guard message: {ex}"
         else:
-            raise AssertionError(
-                "GOOD NEWS, BAD TEST: Z_2 = 0 no longer raises. INVERT this gate to "
-                "assert the structured verdict that replaced it.")
-    print("[ok] GAP-PIN Z_2 = 0 and Z_2 = -0.0 both raise ZeroDivisionError from inside "
-          "radii_verdict rather than returning a verdict")
+            raise AssertionError(f"a weight vector with {name} components was accepted "
+                                 "as a norm; w -> -w used to yield Y_0 = -2.463e-28 and "
+                                 "close")
+    good = interval_constants(iv, z, w, nu)
+    assert radii_verdict(good["Y0"], good["Z1"], good["Z2"])["closes"], (
+        "the honest weight stopped closing -- the guard is too broad")
+    print("[ok] FIXED w -> -w and a single negative component are both REFUSED as not a "
+          "norm (w -> -w used to yield Y_0 = -2.463e-28, which radii_verdict closed); "
+          "the honest w still closes")
+
+
+def test_fixed_Z2_zero_reports_instead_of_raising():
+    """FIXED, was GAP-PIN, the mild one. Z_2 = 0 returns a structured verdict.
+
+    It used to raise a bare `ZeroDivisionError` from inside a verdict function. A crash
+    is a refusal, so that was never unsound -- but Z_2 = 0 is not exotic (it is what an
+    exactly-linear system gives) and a caller with a broad `except` turns a crash into a
+    silent skip.
+
+    The verdict is NON-closing and says why: with Z_2 = 0 the radii polynomial degenerates
+    from a quadratic to an affine function, whose feasibility is a different statement
+    from the one `radii_verdict` implements. Refusing is the conservative reading and the
+    repair adds no mathematics."""
+    for Z2 in (0.0, -0.0):
+        v = radii_verdict(1e-12, 0.3, Z2)
+        assert not v["closes"], f"Z_2 = {Z2!r} produced a closing certificate: {v}"
+        assert v["degenerate"] == "Z2 == 0" and "affine" in v["reason"], (
+            f"Z_2 = {Z2!r} refused without naming the degeneracy: {v}")
+        assert v["r_min"] is None and v["r_max"] is None and v["budget"] == 0.0, (
+            f"a degenerate verdict still quotes a radius or a budget: {v}")
+    assert radii_verdict(1e-12, 0.3, 1e-300)["closes"], (
+        "a tiny but nonzero Z_2 is a legitimate quadratic and must still close")
+    print("[ok] FIXED Z_2 = 0 and Z_2 = -0.0 return a structured non-closing verdict "
+          "naming the affine degeneracy, instead of raising ZeroDivisionError; "
+          "Z_2 = 1e-300 still closes")
 
 
 # --------------------------------------------------------------------------
@@ -348,20 +410,33 @@ def test_gap_Z2_zero_raises_instead_of_reporting():
 def test_banked_battery_reproduces():
     """The headline count is reproducible, and it is the number the writeup quotes.
 
-    12/36 hypothesis-violating inputs accepted; 8 of them load-bearing. If any of these
-    move, `writeup/novelty/leg_98.md` and the JSON are stale and must move with them."""
+    0 of 36 hypothesis-violating inputs accepted, down from leg 98's 12 (8 load-bearing).
+    Every case that used to be a false accept must now be a rejection or a refusal, BY
+    NAME -- a total that moves for some other reason would otherwise pass this gate."""
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         data = run(write=False, verbose=False)
     t = data["totals"]
     for k, want in BANKED.items():
         assert t[k] == want, (f"battery total {k} = {t[k]}, banked {want}. The finding "
-                              f"changed; update the JSON and writeup/novelty/leg_98.md.")
-    assert set(data["load_bearing_cases"]) <= set(data["false_accept_cases"])
+                              f"changed; update the JSON and this file together.")
+    assert data["false_accept_cases"] == [] and data["load_bearing_cases"] == []
+    by_case = {c["case"]: c["outcome"] for c in data["cases"]}
+    for case in PRE_FIX_MEASUREMENT["false_accept_cases"]:
+        assert by_case[case] in ("rejected", "raised"), (
+            f"{case} was a false accept before the repair and is {by_case[case]!r} now")
+    # and the positive controls still separate, inside the battery itself
+    assert data["substrate"]["honest_at_z_closes"] is True
+    assert data["substrate"]["honest_at_z_bad_closes"] is False
+    assert by_case["B01_baseline_valid"] == "valid_closes"
+    assert by_case["B03_honest_non_closing"] == "valid_rejects"
     print(f"[ok] battery reproduces: {t['false_accepts']}/{t['hypothesis_violating']} "
-          f"hypothesis-violating inputs reported a CLOSING certificate, "
-          f"{t['false_accepts_load_bearing']} of them load-bearing "
-          f"({t['rejected']} rejected, {t['raised']} raised)")
+          f"hypothesis-violating inputs reported a CLOSING certificate "
+          f"(was {PRE_FIX_MEASUREMENT['false_accepts']}, "
+          f"{PRE_FIX_MEASUREMENT['false_accepts_load_bearing']} load-bearing); "
+          f"{t['rejected']} rejected, {t['raised']} refused loudly, and all "
+          f"{len(PRE_FIX_MEASUREMENT['false_accept_cases'])} former false accepts are "
+          f"accounted for by name")
 
 
 if __name__ == "__main__":
@@ -376,13 +451,14 @@ if __name__ == "__main__":
     test_holds_Z1_at_and_above_one_is_rejected()
     test_holds_interval_validity_guard_still_catches_negative_width()
     test_holds_nan_and_zero_weights_are_rejected()
-    test_gap_negative_Y0_is_accepted()
-    test_gap_negative_Z1_is_accepted()
-    test_gap_negative_infinite_Y0_is_accepted()
-    test_gap_fabricated_zero_residual_enclosure_is_accepted()
-    test_gap_well_formed_non_containing_enclosure_is_accepted()
-    test_gap_negative_weight_vector_is_accepted()
-    test_gap_Z2_zero_raises_instead_of_reporting()
+    test_fixed_negative_Y0_is_refused()
+    test_fixed_negative_Z1_is_refused()
+    test_fixed_negative_infinite_Y0_is_refused()
+    test_fixed_fabricated_zero_residual_enclosure_is_refused()
+    test_fixed_well_formed_non_containing_enclosure_is_refused()
+    test_fixed_negative_weight_vector_is_refused()
+    test_fixed_Z2_zero_reports_instead_of_raising()
     test_banked_battery_reproduces()
-    print("\nALL ADVERSARIAL GATES PASS -- and 7 of them are GAP-PINs, pinning a DEFECT "
-          "rather than endorsing it. See the header.")
+    print("\nALL ADVERSARIAL GATES PASS -- 7 of them leg 98's GAP-PINs, INVERTED to "
+          "assert the guard that closed the defect (12/36 false accepts -> 0/36). "
+          "See the header.")

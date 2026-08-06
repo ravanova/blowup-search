@@ -69,6 +69,37 @@ N_GRID = 101
 THETA = (0.0, 0.0, 0.0, 0.0, -2.0)      # nu = 1, w_l = 1e-2 X_max, w_om = 1 (the gauge)
 POISON_STEP = 1e-3                      # the displacement that makes an iterate dishonest
 
+# THE PRE-FIX MEASUREMENT, VERBATIM.  This battery was written by leg 98 to MEASURE a
+# defect and now runs against the repaired module, so the numbers it prints are no longer
+# the numbers that motivated the repair.  They are carried here and written into the JSON
+# artifact under "history" so that regenerating the artifact cannot erase the finding
+# (the convention leg 79's bench repair established for the sibling pipeline).  The cases
+# and the judgement predicate are UNCHANGED -- the instrument that measured the defect is
+# the instrument that now measures its absence.
+PRE_FIX_MEASUREMENT = {
+    "commit": "c6aee16 (leg 98, Route-ICA, branch leg/ica-v1)",
+    "cases": 39, "hypothesis_violating": 36, "false_accepts": 12,
+    "false_accepts_load_bearing": 8, "rejected": 20, "raised": 4,
+    "false_accept_cases": ["A1_F_fabricated_zero", "A6_F_shrunk_1e-8_non_containing",
+                           "A11_weight_all_negative", "A12_weight_one_negative",
+                           "B04_Y0_negative_unit", "B05_Y0_negative_tiny",
+                           "B06_Y0_negative_huge", "B07_Z1_negative",
+                           "B08_Z1_negative_rescues_big_Y0", "B17_Y0_neg_inf",
+                           "B22_Y0_negative_Z1_negative",
+                           "B25_Y0_negative_Z1_just_below_one"],
+    "load_bearing_cases": ["A1_F_fabricated_zero", "A6_F_shrunk_1e-8_non_containing",
+                           "B04_Y0_negative_unit", "B06_Y0_negative_huge",
+                           "B07_Z1_negative", "B08_Z1_negative_rescues_big_Y0",
+                           "B17_Y0_neg_inf", "B25_Y0_negative_Z1_just_below_one"],
+    "raised_cases": ["A2_F_negative_width_excluding", "A3_F_endpoints_swapped",
+                     "B20_Z2_zero", "B21_Z2_negative_zero"],
+    "note": ("12 of 36 hypothesis-violating inputs were reported as CLOSING certificates, "
+             "8 of them load-bearing (the hypothesis-satisfying input of the same "
+             "magnitude does NOT close). Two mechanisms: radii_verdict evaluated the "
+             "discriminant on theorem-excluded constants, and interval_constants never "
+             "checked the enclosure it was handed for containment."),
+}
+
 
 # --------------------------------------------------------------------------
 # the substrate: the a=0 CLM bordered system, converged, and a point that is NOT
@@ -102,6 +133,21 @@ class _Poisoned:
     def __init__(self, inner, f_hook=None, j_hook=None):
         self.inner, self.f_hook, self.j_hook = inner, f_hook, j_hook
         self.n, self.N = inner.n, inner.N
+
+    def __getattr__(self, name):
+        """Forward everything not corrupted here, so the wrapper stays what its docstring
+        says it is: by duck typing indistinguishable from the real object.
+
+        Added by the leg-0 bench repair, and it makes the battery STRICTER, not laxer.
+        `interval_constants` now re-evaluates the residual in float to check containment
+        (`F_float`); without this forwarding the wrapper would simply lack that method
+        and every family-A case would be refused for "this object cannot be checked"
+        rather than for the lie it actually tells.  With it, A1 and A6 are caught by the
+        containment check itself -- which is the check leg 98 asked for, tested against
+        a genuinely non-containing enclosure of the real problem.  The hooks, the case
+        list and the judgement predicate are untouched.
+        """
+        return getattr(self.inner, name)
 
     def F(self, z):
         out = self.inner.F(z)
@@ -392,6 +438,7 @@ def run(n=N_GRID, write=True, verbose=True):
                    "false_accepts_load_bearing": len(load_bearing),
                    "rejected": len([c for c in poisoned if c["outcome"] == "rejected"]),
                    "raised": len(raised)},
+        "history": {"pre_fix": dict(PRE_FIX_MEASUREMENT)},
         "false_accept_cases": [c["case"] for c in false_accepts],
         "load_bearing_cases": [c["case"] for c in load_bearing],
         "raised_cases": [c["case"] for c in raised],
