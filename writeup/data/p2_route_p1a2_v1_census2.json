@@ -1,0 +1,1171 @@
+{
+ "leg": 261,
+ "route": "P1A2",
+ "date": "2026-08-07",
+ "extends": {
+  "leg_255": "writeup/data/p2_route_p1a_v1_census.json (read-only; no verdict changed)",
+  "leg_257": "writeup/data/p2_route_p1c_v1_reach.json on leg/257-p1c-v1 (read-only)"
+ },
+ "weight": "e^{|x|^2/4} -- Breden-Chu's mu, and Gallay's rho_infty(|xi|^2) (novelty pass sec 3)",
+ "witness": "U = curl(e^{-|x|^2} e_3); divergence-free exactly, Gaussian, so U in H^2(mu)",
+ "witness_div_max_abs_8th_order_fd": 1.4207992421466642e-13,
+ "source_closed_form_vs_finite_differences_max_abs_err": 3.986374669295856e-05,
+ "quadrature": {
+  "rule": "tensor Gauss-Legendre",
+  "n_per_axis": 60,
+  "half_width_L": 6.0,
+  "nodes": 216000
+ },
+ "part_B_operator_classes": [
+  {
+   "class": "C0-UNPROJECTED-CONTROL-d3",
+   "operator": "(U.grad)U, no projection",
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "magnitude": [
+    5.535586106946951e-85,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "log10_weighted_density": [
+    -155.6563107310635,
+    -Infinity,
+    -Infinity,
+    -Infinity
+   ],
+   "in_L2_mu": true,
+   "reached_by_leg_257_mechanism": false,
+   "note": "leg 257 reported this underflowing to exactly 0.0; reproduced."
+  },
+  {
+   "class": "C1-LERAY-VELOCITY-d3",
+   "formulation": "velocity-pressure",
+   "operator": "Leray projection P = I - grad Delta^{-1} div",
+   "monopole_int_S": -6.294800938736708e-16,
+   "dipole_int_yS": [
+    -2.220446049250313e-16,
+    -1.732555071631837e-16,
+    5.241412883780416e-17
+   ],
+   "quadrupole_M": [
+    [
+     3.9374024864305297,
+     -7.643625316022885e-17,
+     -1.3863645009444115e-18
+    ],
+    [
+     -1.70219741080232e-17,
+     3.9374024864305297,
+     5.887933871201732e-19
+    ],
+    [
+     -3.420885319840114e-18,
+     -8.69234466437323e-18,
+     -4.6320615951589715e-17
+    ]
+   ],
+   "energy_tensor_T": [
+    [
+     1.9687012432152657,
+     5.1723219891136584e-17,
+     0.0
+    ],
+    [
+     6.514699803922272e-17,
+     1.968701243215266,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "identity_M_equals_2T_max_abs_err": 2.220446049250313e-15,
+   "energy_int_U2_quadrature": 3.937402486430532,
+   "energy_int_U2_closed_form": 3.9374024864306048,
+   "energy_vs_closed_form_abs_err": 7.283063041541027e-14,
+   "T11_quadrature": 1.9687012432152657,
+   "T11_closed_form": 1.9687012432153024,
+   "leg_257_T": 3.9374024864305617,
+   "energy_vs_leg_257_abs_err": 2.9753977059954195e-14,
+   "leg_257_S11": 1.9687012432152875,
+   "T11_vs_leg_257_abs_err": 2.1760371282653068e-14,
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "psi_by_quadrature": [
+    0.00031332853432887697,
+    3.916606679110734e-05,
+    4.895758348890165e-06,
+    6.119697936107864e-07
+   ],
+   "psi_by_multipole": [
+    0.0003133285343288691,
+    3.916606679110864e-05,
+    4.89575834888858e-06,
+    6.119697936110725e-07
+   ],
+   "quadrature_over_multipole_ratio": [
+    1.000000000000025,
+    0.9999999999999668,
+    1.0000000000003237,
+    0.9999999999995325
+   ],
+   "psi_r10_vs_leg_257_abs_err": 2.3852447794681098e-18,
+   "grad_psi_magnitude": [
+    9.39985602986789e-05,
+    5.8749100186663905e-06,
+    3.671818761677299e-07,
+    2.2948867260422662e-08
+   ],
+   "fitted_exponent_psi": -3.0000000000001648,
+   "fitted_exponent_grad_psi": -3.9999999999995217,
+   "gaussian_control_magnitude": [
+    7.440151952041672e-43,
+    7.660678386856023e-173,
+    0.0,
+    0.0
+   ],
+   "log10_weighted_density": [
+    4.803604451395,
+    35.569510620154844,
+    164.05167521714907,
+    683.398873527065
+   ],
+   "lowest_nonvanishing_moment": "quadrupole",
+   "coefficient_is": "the energy tensor 2*int U_k U_l; its trace is 2*int|U|^2 > 0",
+   "coefficient_can_vanish": false,
+   "in_L2_mu": false,
+   "reached_by_leg_257_mechanism": true
+  },
+  {
+   "class": "C2-LERAY-BUOYANCY-d3",
+   "formulation": "velocity-pressure with a transported density (Boussinesq-type)",
+   "operator": "Leray projection applied to the buoyancy force rho e_3",
+   "term_is_linear_in_the_unknown": true,
+   "monopole_int_S": 8.217631886441377e-18,
+   "dipole_int_yS": [
+    -2.6646585660938813e-18,
+    -3.0630690548503573e-18,
+    -5.568327996831595
+   ],
+   "mass_int_rho_quadrature": 5.568327996831604,
+   "mass_int_rho_closed_form": 5.568327996831708,
+   "identity_dipole3_equals_minus_mass_abs_err": 8.881784197001252e-15,
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "psi_by_quadrature": [
+    0.0044311346272636965,
+    0.0011077836568159248,
+    0.000276945914203981,
+    6.9236478550995e-05
+   ],
+   "psi_by_multipole": [
+    0.0044311346272637,
+    0.001107783656815925,
+    0.00027694591420398125,
+    6.923647855099531e-05
+   ],
+   "quadrature_over_multipole_ratio": [
+    0.9999999999999992,
+    0.9999999999999998,
+    0.999999999999999,
+    0.9999999999999954
+   ],
+   "grad_psi_magnitude": [
+    0.0008862269254527455,
+    0.00011077836568159335,
+    1.3847295710198862e-05,
+    1.7309119637748906e-06
+   ],
+   "fitted_exponent_psi": -2.0000000000000044,
+   "fitted_exponent_grad_psi": -3.0000000000000067,
+   "log10_weighted_density": [
+    6.752451928947455,
+    38.12041808903542,
+    167.20464267735503,
+    687.1539009786012
+   ],
+   "lowest_nonvanishing_moment": "dipole",
+   "coefficient_is": "-int rho, the total buoyancy mass; conserved and sign-definite",
+   "coefficient_can_vanish": false,
+   "in_L2_mu": false,
+   "reached_by_leg_257_mechanism": true,
+   "stronger_than_leg_257_because": "the tail is |x|^-3, one power SLOWER than leg 257's |x|^-4, and it is produced by a LINEAR term. A Boussinesq-type row therefore leaves L^2(mu) before its quadratic nonlinearity is even considered."
+  },
+  {
+   "class": "C3-BIOT-SAVART-VELOCITY-d3",
+   "formulation": "vorticity, velocity recovered by Biot-Savart",
+   "operator": "u = curl(-Delta)^{-1} omega",
+   "omega_monopole_int_omega": [
+    4.7704895602193807e-17,
+    4.440892098500626e-16,
+    0.0
+   ],
+   "monopole_vanishes_structurally": "omega is a curl, so int omega = 0 for any decaying field",
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "velocity_magnitude": [
+    0.0008862269254527414,
+    0.00011077836568159267,
+    1.3847295710199084e-05,
+    1.7309119637748855e-06
+   ],
+   "fitted_exponent_velocity": -3.000000000000002,
+   "log10_weighted_density": [
+    6.75245192894745,
+    38.12041808903541,
+    167.20464267735503,
+    687.1539009786012
+   ],
+   "lowest_nonvanishing_moment": "dipole (the monopole is structurally zero)",
+   "in_L2_mu": false,
+   "but": "in the vorticity formulation the UNKNOWN is omega, and u appears only inside products. Whether this tail obstructs is measured in C4, not inferred here."
+  },
+  {
+   "class": "C4-VORTICITY-NONLINEARITY-d3",
+   "formulation": "vorticity",
+   "measured_on_ray": "e_1 (omega vanishes identically on the e_3 axis; see code comment)",
+   "operator": "(u.grad)omega - (omega.grad)u, u = Biot-Savart[omega]",
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "N_magnitude": [
+    5.740442050564891e-64,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "omega_magnitude": [
+    7.440151952041672e-43,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "velocity_magnitude_algebraic_control": [
+    0.00044311346272637054,
+    5.5389182840796324e-05,
+    6.923647855099542e-06,
+    8.654559818874428e-07
+   ],
+   "grad_u_magnitude": [
+    0.00018799712059732143,
+    1.174982003733259e-05,
+    7.343637523332871e-07,
+    4.589773452083044e-08
+   ],
+   "grad_omega_magnitude": [
+    1.480608932187406e-41,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "fitted_exponent_N_over_finite_radii": -Infinity,
+   "log10_weighted_density": [
+    -113.62474727817015,
+    -Infinity,
+    -Infinity,
+    -Infinity
+   ],
+   "in_L2_mu": true,
+   "reached_by_leg_257_mechanism": false,
+   "mechanism_of_the_escape": "every term of N is a product carrying a Gaussian factor (omega or grad omega), so the algebraic tail of u and grad u is multiplied away. The tail is real (C3) and does not survive the product."
+  },
+  {
+   "class": "C5-KELLER-SEGEL-CONTROL-d3",
+   "formulation": "parabolic-elliptic chemotaxis (leg 255's surviving family)",
+   "operator": "grad c = grad Delta^{-1}(-u), nonlocal",
+   "radii": [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   "nonlocal_factor_grad_c_magnitude": [
+    0.004431134627263407,
+    0.0011077836568158734,
+    0.00027694591420396536,
+    6.923647855099194e-05
+   ],
+   "fitted_exponent_grad_c": -1.9999999999999947,
+   "nonlinearity_magnitude": [
+    3.296831494679328e-45,
+    8.48637431708169e-176,
+    0.0,
+    0.0
+   ],
+   "log10_weighted_density": [
+    -76.10644445170298,
+    -304.1110474509102,
+    -Infinity,
+    -Infinity
+   ],
+   "in_L2_mu": true,
+   "reached_by_leg_257_mechanism": false,
+   "why_this_control_matters": "the model IS nonlocal and its nonlocal factor DOES have an algebraic |x|^-2 tail, yet the nonlinearity is Gaussian. So 'is the model nonlocal' is NOT the discriminator; 'is the nonlocal output multiplied by a localised factor' is."
+  }
+ ],
+ "part_A_relaxed_tier_fluid_census": [
+  {
+   "key": "KS-NS-LI-ZHOU",
+   "src": "arXiv:2404.17228 (CMP 2025, DOI 10.1007/s00220-025-05371-w)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": true,
+   "certified": false,
+   "cert_note": "no certification apparatus in the fetched abstract",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "the self-similar object is the Keller-Segel profile, not the velocity",
+   "note": "leg 255's single fluid-adjacent row clearing (i)-(iii); killed by (iv).",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "BCG-NS",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": true,
+   "cert_note": "certification apparatus present (leg 255 screen iii FAIL)",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "inherits an inviscid Euler profile",
+   "note": "leg 255: killed by iii, iv.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "FAIL",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "iii",
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "CGSS-NONRADIAL",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "inherits an inviscid Euler profile",
+   "note": "leg 255: killed by iv alone.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "MRRS-NS",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection / compressible implosion",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "compressible implosion ansatz",
+   "note": "leg 255: killed by iv alone.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "TAO-AVGNS",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "averaged Euler bilinear operator",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": true,
+   "nrs_status": "averaged model, NRS does not apply as stated",
+   "note": "leg 255: killed by iv. DSS-lane flagged, not decided.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "iv_a"
+   ]
+  },
+  {
+   "key": "MILLER-FR-HYPO",
+   "src": "arXiv:2307.03434",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Fourier restriction multiplier",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": true,
+   "nrs_status": "restricted model",
+   "ban_flag": "stage-V machinery",
+   "note": "leg 255: killed by iv. Carries the re-posed stage-V ban as a forward constraint.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "iv_a"
+   ]
+  },
+  {
+   "key": "PALASEK-SHELL",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": false,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "shell ladder",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": true,
+   "nrs_status": "shell model",
+   "ban_flag": "stage-V machinery",
+   "note": "leg 255: killed by ii, iv. Its screen-(ii) FAIL is UNCONFIRMED, not refuted.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "ii",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "KVW-PRANDTL",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": false,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Prandtl nonlocal pressure/boundary layer",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": true,
+   "nrs_status": "boundary-layer model",
+   "note": "leg 255: killed by ii, iv.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "ii",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "CHEN-GCLM-DISS",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": false,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none found",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Hilbert transform",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": true,
+   "nrs_status": "1D model",
+   "ban_flag": "gCLM ban -- barred from construction",
+   "note": "leg 255: killed by ii, iv. Carried as a row only; no gCLM object is instantiated.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "ii",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "NSE-3D",
+   "src": "the Clay problem itself",
+   "tier": "T1",
+   "blowup_proved": false,
+   "numerics": "none decisive",
+   "author_conclusion_positive": false,
+   "has_profile": false,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "NRS/Tsai kill backward self-similar profiles outright",
+   "note": "leg 255: killed by i, ii, iv.",
+   "is_control": false,
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "i",
+    "ii",
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "BOUSSINESQ-VISC",
+   "src": "leg 255 row (inherited)",
+   "tier": "T1",
+   "blowup_proved": false,
+   "numerics": "none decisive at tier 1",
+   "author_conclusion_positive": false,
+   "has_profile": false,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection + buoyancy coupling",
+   "leray_class": "C2-LERAY-BUOYANCY-d3",
+   "inherited_from_255": true,
+   "nrs_status": "n/a",
+   "note": "leg 255: killed by i, ii, iv. THIS LEG re-measures its (iv) via class C2.",
+   "is_control": false,
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "i",
+    "ii",
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "HOU-GNSE-3188",
+   "src": "arXiv:2405.10916v2 (Hou, 2024-05-17)",
+   "tier": "T2",
+   "blowup_proved": false,
+   "numerics": "serious",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "no interval-arithmetic enclosure; adaptive pseudo-spectral numerics",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "axisymmetric Biot-Savart / stream-function solve",
+   "leray_class": "C4-VORTICITY-NONLINEARITY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "self-similar, but at fractional dimension 3.188 with solution-dependent viscosity, in a cylinder with boundary -- NOT the R^3 backward-self-similar hypothesis NRS/Tsai address",
+   "note": "THE STRONGEST RELAXED-TIER FLUID ROW. Generalized axisymmetric NS with solution-dependent viscosity develops SELF-SIMILAR blowup at dimension 3.188, and the paper states the self-similar profile satisfies the axisymmetric NS equations with CONSTANT viscosity. Posed in vorticity/stream-function variables.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS-RELAXED",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "PASS"
+   },
+   "killed_by": [
+    "iv_a"
+   ]
+  },
+  {
+   "key": "HOU-BOUSSINESQ-2405",
+   "src": "arXiv:2405.10916v2 (same paper, Boussinesq half)",
+   "tier": "T2",
+   "blowup_proved": false,
+   "numerics": "serious",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "no enclosure",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection + buoyancy coupling",
+   "leray_class": "C2-LERAY-BUOYANCY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "n/a (Boussinesq)",
+   "note": "axisymmetric Boussinesq with CONSTANT viscosity, NEARLY self-similar blowup. The 'nearly' is carried, not rounded away: the profile is not exactly self-similar.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS-RELAXED",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "HOU-NSE-DEGEN-DIFF",
+   "src": "arXiv:2102.06663",
+   "tier": "T2",
+   "blowup_proved": false,
+   "numerics": "serious",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "no enclosure",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "axisymmetric Biot-Savart / stream-function solve",
+   "leray_class": "C4-VORTICITY-NONLINEARITY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "locally self-similar, degenerate diffusion vanishing like O(r^2)+O(z^2)",
+   "note": "3D axisymmetric NS with DEGENERATE diffusion coefficients, potential finite-time LOCALLY self-similar singularity, two-scale travelling wave. The degeneracy is a real qualifier: the dissipation vanishes at the singular point.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS-RELAXED",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "PASS"
+   },
+   "killed_by": [
+    "iv_a"
+   ]
+  },
+  {
+   "key": "HOU-NSE-2107",
+   "src": "arXiv:2107.06509 (FoCM 2023, DOI 10.1007/s10208-022-09578-4)",
+   "tier": "T2-",
+   "blowup_proved": false,
+   "numerics": "serious",
+   "author_conclusion_positive": false,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "no enclosure",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "axisymmetric Biot-Savart / stream-function solve",
+   "leray_class": "C4-VORTICITY-NONLINEARITY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "nearly self-similar, two-scale",
+   "note": "THE ROW THAT KEEPS THE RELAXED TIER HONEST. The most-cited 'potentially singular 3D NS' numerics, and the paper's OWN conclusion is negative: the solution does NOT develop a finite-time singularity, because a mild two-scale structure leads to viscous dominance over vortex stretching. Serious numerics pointing the OTHER way.",
+   "is_control": false,
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "PASS"
+   },
+   "killed_by": [
+    "i",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "SQG-DISSIPATIVE",
+   "src": "Constantin-Lai-Sharma-Tseng-Wu, J. Sci. Comput., DOI 10.1007/s10915-011-9471-9",
+   "tier": "T2-",
+   "blowup_proved": false,
+   "numerics": "serious",
+   "author_conclusion_positive": false,
+   "has_profile": false,
+   "profile_carries_dissipation": false,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Riesz transform u = grad^perp Lambda^{-1} theta",
+   "leray_class": "OTHER-NONLOCAL-NOT-MEASURED-HERE",
+   "inherited_from_255": false,
+   "nrs_status": "n/a (2D)",
+   "note": "The candidate blow-up datum's temperature gradient fits a DOUBLE-EXPONENTIAL in time equally well as an algebraic blowup, so the numerical evidence does not support finite-time singularity. A negative that was looked up, not assumed.",
+   "is_control": false,
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "NOT-MEASURED"
+   },
+   "killed_by": [
+    "i",
+    "ii",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "HYPODISS-NS-FORCED",
+   "src": "hypodissipative NS with forcing, (-Delta)^0.046 (see arXiv:2307.03434 family)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": false,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Leray projection",
+   "leray_class": "C1-LERAY-VELOCITY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "forced, so the unforced NRS hypothesis does not bind",
+   "note": "blow-up is PROVED but requires an external force; the dissipation is 0.1 orders of derivative. Recorded with the forcing qualifier attached, not suppressed.",
+   "is_control": false,
+   "verdicts": {
+    "i": "PASS",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "FAIL"
+   },
+   "killed_by": [
+    "ii",
+    "iv_a",
+    "iv_b"
+   ]
+  },
+  {
+   "key": "NSE-3D-VORTICITY",
+   "src": "the Clay problem, posed in vorticity variables",
+   "tier": "T1",
+   "blowup_proved": false,
+   "numerics": "none decisive",
+   "author_conclusion_positive": false,
+   "has_profile": false,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "none",
+   "remark40_local_polynomial": false,
+   "nonlocal_named": "Biot-Savart law",
+   "leray_class": "C4-VORTICITY-NONLINEARITY-d3",
+   "inherited_from_255": false,
+   "nrs_status": "omega in H^2(mu) gives u ~ |x|^-3 (class C3), hence u in L^3(R^3), hence NRS/Tsai force u == 0 for a backward self-similar profile",
+   "note": "ADDED BY THIS LEG so the formulation question is on the table as its own row rather than hidden inside NSE-3D. Screen (iv_b) PASSES here -- and (iv_a) does not.",
+   "is_control": false,
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "FAIL",
+    "iii": "PASS",
+    "iv_a": "FAIL",
+    "iv_b": "PASS"
+   },
+   "killed_by": [
+    "i",
+    "ii",
+    "iv_a"
+   ]
+  },
+  {
+   "key": "KS3D-NONEXPLICIT",
+   "src": "leg 255's surviving row (arXiv:2503.02263 / 2209.11206)",
+   "tier": "T1",
+   "blowup_proved": true,
+   "numerics": "n/a",
+   "author_conclusion_positive": true,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": false,
+   "cert_note": "no interval-arithmetic enclosure found",
+   "remark40_local_polynomial": true,
+   "nonlocal_named": "none (grad c enters multiplicatively)",
+   "leray_class": "C5-KELLER-SEGEL-CONTROL-d3",
+   "inherited_from_255": true,
+   "is_control": true,
+   "nrs_status": "n/a (not a fluid)",
+   "note": "leg 255's SURVIVOR, non-fluid. Here purely to show (iv_a) and (iv_b) can PASS.",
+   "verdicts": {
+    "i": "PASS",
+    "ii": "PASS",
+    "iii": "PASS",
+    "iv_a": "PASS",
+    "iv_b": "PASS"
+   },
+   "killed_by": []
+  },
+  {
+   "key": "VISCOUS-BURGERS-BC",
+   "src": "leg 255 caution row; Breden-Chu's own worked example",
+   "tier": "T1",
+   "blowup_proved": false,
+   "numerics": "none",
+   "author_conclusion_positive": false,
+   "has_profile": true,
+   "profile_carries_dissipation": true,
+   "profile_closed_form": false,
+   "certified": true,
+   "cert_note": "CERTIFIED -- it is Breden-Chu's own Theorem 42",
+   "remark40_local_polynomial": true,
+   "nonlocal_named": "none",
+   "leray_class": "C0-UNPROJECTED-CONTROL-d3",
+   "inherited_from_255": true,
+   "is_control": true,
+   "nrs_status": "n/a (1D)",
+   "note": "leg 255's caution row: parabolic, certified, self-similar profile, and it does NOT blow up. Must keep passing (iv) while failing (i) and (iii).",
+   "verdicts": {
+    "i": "FAIL",
+    "ii": "PASS",
+    "iii": "FAIL",
+    "iv_a": "PASS",
+    "iv_b": "PASS"
+   },
+   "killed_by": [
+    "i",
+    "iii"
+   ]
+  }
+ ],
+ "counts": {
+  "fluid_rows_enumerated": 18,
+  "non_fluid_control_rows": 2,
+  "rows_new_in_this_leg": 7,
+  "rows_inherited_from_leg_255": 11,
+  "rows_entering_via_the_relaxed_tier": 3,
+  "rows_whose_serious_numerics_point_the_other_way": 2,
+  "killed_by_i": 5,
+  "killed_by_ii": 8,
+  "killed_by_iii": 1,
+  "killed_by_iv_a": 18,
+  "killed_by_iv_b": 8,
+  "iv_b_not_measured": 6,
+  "rows_clearing_i_ii_iii": 8,
+  "rows_passing_iv_b_but_failing_iv_a": 4,
+  "survivors_of_all_five": 0
+ },
+ "gate_question": "Under the RELAXED tier, does at least one FLUID model enter the census with screens (ii), (iii) and (iv) still passing, with the evidence-tier downgrade carried explicitly per-row?",
+ "gate": "NO",
+ "gate_code": "NO_SURVIVOR_BUT_IV_B_PASSES_ON_A_FLUID_ROW",
+ "survivors": [],
+ "near_misses_iv_b_passes_iv_a_fails": [
+  "HOU-GNSE-3188",
+  "HOU-NSE-DEGEN-DIFF"
+ ],
+ "liveness_checks": [
+  {
+   "check": "not every row survives",
+   "ok": true,
+   "detail": "19 of 20 rows killed"
+  },
+  {
+   "check": "no single screen kills every row",
+   "ok": true,
+   "detail": "screens killing the whole table: none"
+  },
+  {
+   "check": "rows carrying no FAIL (reported, not required)",
+   "ok": true,
+   "detail": "1 of 20"
+  },
+  {
+   "check": "screen i kills something",
+   "ok": true,
+   "detail": "6 FAILs"
+  },
+  {
+   "check": "screen i passes something",
+   "ok": true,
+   "detail": "14 PASSes"
+  },
+  {
+   "check": "screen ii kills something",
+   "ok": true,
+   "detail": "8 FAILs"
+  },
+  {
+   "check": "screen ii passes something",
+   "ok": true,
+   "detail": "12 PASSes"
+  },
+  {
+   "check": "screen iii kills something",
+   "ok": true,
+   "detail": "2 FAILs"
+  },
+  {
+   "check": "screen iii passes something",
+   "ok": true,
+   "detail": "18 PASSes"
+  },
+  {
+   "check": "screen iv_a kills something",
+   "ok": true,
+   "detail": "18 FAILs"
+  },
+  {
+   "check": "screen iv_a passes something",
+   "ok": true,
+   "detail": "2 PASSes"
+  },
+  {
+   "check": "screen iv_b kills something",
+   "ok": true,
+   "detail": "8 FAILs"
+  },
+  {
+   "check": "screen iv_b passes something",
+   "ok": true,
+   "detail": "6 PASSes"
+  },
+  {
+   "check": "control KS3D-NONEXPLICIT still passes all four (leg 255's survivor)",
+   "ok": true,
+   "detail": "{'i': 'PASS', 'ii': 'PASS', 'iii': 'PASS', 'iv_a': 'PASS', 'iv_b': 'PASS'}"
+  },
+  {
+   "check": "control VISCOUS-BURGERS-BC still passes (ii)+(iv) while failing (i)+(iii)",
+   "ok": true,
+   "detail": "{'i': 'FAIL', 'ii': 'PASS', 'iii': 'FAIL', 'iv_a': 'PASS', 'iv_b': 'PASS'}"
+  },
+  {
+   "check": "screen (iv_a) over the FLUID cell (reported, not required)",
+   "ok": true,
+   "detail": "18 of 18 fluid rows FAIL (iv_a)"
+  },
+  {
+   "check": "the relaxed tier admits rows",
+   "ok": true,
+   "detail": "3 rows enter via PASS-RELAXED"
+  },
+  {
+   "check": "the relaxed tier has honest negatives",
+   "ok": true,
+   "detail": "2 rows whose serious numerics point the other way"
+  },
+  {
+   "check": "some class IS reached",
+   "ok": true,
+   "detail": "reached: ['C1-LERAY-VELOCITY-d3', 'C2-LERAY-BUOYANCY-d3']"
+  },
+  {
+   "check": "some class is NOT reached",
+   "ok": true,
+   "detail": "not reached: ['C0-UNPROJECTED-CONTROL-d3', 'C4-VORTICITY-NONLINEARITY-d3', 'C5-KELLER-SEGEL-CONTROL-d3']"
+  },
+  {
+   "check": "C1 reproduces leg 257's energy to 1e-9",
+   "ok": true,
+   "detail": "|dT| = 2.975e-14"
+  },
+  {
+   "check": "C1 reproduces leg 257's psi(r=10) to 1e-12",
+   "ok": true,
+   "detail": "|dpsi| = 2.385e-18"
+  },
+  {
+   "check": "C1's quadrupole IS 2x the energy tensor",
+   "ok": true,
+   "detail": "max|M - 2T| = 2.220e-15"
+  },
+  {
+   "check": "C1's psi exponent is -3 to 1e-3",
+   "ok": true,
+   "detail": "fitted -3.000000000"
+  },
+  {
+   "check": "C1's grad psi exponent is -4 to 1e-3",
+   "ok": true,
+   "detail": "fitted -4.000000000"
+  },
+  {
+   "check": "C2's dipole IS minus the mass",
+   "ok": true,
+   "detail": "err = 8.882e-15"
+  },
+  {
+   "check": "C2 decays SLOWER than C1",
+   "ok": true,
+   "detail": "C2 -3.000000 vs C1 -4.000000"
+  },
+  {
+   "check": "C4's weighted density CONVERGES while C1's DIVERGES",
+   "ok": true,
+   "detail": "C4 -inf vs C1 683.4 (log10 decades)"
+  },
+  {
+   "check": "C4's algebraic control is NON-zero where N is negligible",
+   "ok": true,
+   "detail": "|u|(r=80) = 8.654560e-07"
+  },
+  {
+   "check": "C5's nonlocal factor IS algebraic (so the control is not trivial)",
+   "ok": true,
+   "detail": "fitted -2.000000"
+  },
+  {
+   "check": "C5's nonlinearity is nevertheless in L^2(mu)",
+   "ok": true,
+   "detail": "control differs from C1"
+  }
+ ],
+ "self_test": [
+  {
+   "perturbation": "none (as measured)",
+   "gate": "NO",
+   "code": "NO_SURVIVOR_BUT_IV_B_PASSES_ON_A_FLUID_ROW"
+  },
+  {
+   "perturbation": "Remark 40 read as covering Biot-Savart",
+   "gate": "YES",
+   "code": "FLUID_ROW_SURVIVES_RELAXED_TIER"
+  },
+  {
+   "perturbation": "C4 measured as REACHED, and (iv_a) relaxed",
+   "gate": "NO",
+   "code": "FLUID_CELL_EMPTY_UNDER_THE_RELAXED_TIER"
+  },
+  {
+   "perturbation": "screen (i) tightened back to tier 1",
+   "gate": "NO",
+   "code": "FLUID_CELL_EMPTY_UNDER_THE_RELAXED_TIER",
+   "rows_entering_via_relaxed_tier": 0
+  }
+ ],
+ "scope_of_the_leray_obstruction": {
+  "question": "the Decision Maker's mandatory addition: is leg 257's mechanism general -- any fluid nonlinearity with a non-decaying Leray-projected tail whose coefficient is a conserved quantity?",
+  "answer": "PARTLY, AND THE BOUNDARY IS SHARP AND MEASURED. The mechanism is a multipole statement: it reaches a term exactly when the nonlocal operator's output is NOT multiplied by a localised factor, so that the lowest non-vanishing moment of its source survives. It REACHES the velocity-pressure formulation (C1, quadrupole = the energy tensor, |x|^-4) and -- newly, and harder -- the BUOYANCY coupling (C2, dipole = the total mass, |x|^-3, and LINEAR). It does NOT reach the vorticity formulation (C4) or chemotaxis (C5), where the nonlocal factor is multiplied by a Gaussian one.",
+  "discriminator": "NOT 'is the model nonlocal'. C5 is nonlocal, its nonlocal factor has an algebraic |x|^-2 tail, and its nonlinearity is still Gaussian. The discriminator is whether the nonlocal output stands alone.",
+  "consequence_for_leg_257": "leg 257's MEASUREMENT is untouched and is reproduced here to 12 digits independently. What this leg corrects is one sentence of extrapolation in its repair list (why_the_two_obvious_repairs_fail[2]): the vorticity formulation does NOT inherit the obstruction by the tail argument. It is killed by other things, named below.",
+  "what_kills_the_vorticity_route_instead": [
+   "screen (iv_a): Remark 40 names (u.grad)u and argues from H^2(mu) -> L^infty. It does not name Biot-Savart, and the Biot-Savart kernel is not diagonal in Breden-Chu's Hermite/Laguerre eigenbasis -- leg 257's own M2 rider names this as a NEW cost at the quadrature rung, and it remains uncosted.",
+   "NRS/Tsai, via a composition this leg records: omega in H^2(mu) gives, by class C3, u ~ |x|^-3, so |u|^3 r^2 ~ r^-7 is integrable at infinity and u in L^3(R^3). For a BACKWARD SELF-SIMILAR 3D NS profile NRS/Tsai then force u == 0. The vorticity formulation buys admissibility into the space and loses it again to the same ansatz constraint that already binds the velocity form.",
+   "the external prior art itself: Gallay and Wayne have used exactly this Gaussian weight on exactly the vorticity for two decades WITHOUT a self-similar blow-up profile appearing in it, which is evidence about the target, not the method."
+  ]
+ },
+ "ceiling": "CENSUS AND WITNESS QUADRATURE ONLY. Nothing certified, no solver module built, read-into or edited. No stage claimed; plan_of_record.py untouched. NO BAN LIFTED and none argued against. Leg 255's and leg 257's kills both STAND and are not reopened. No link of the L1->L4 chain moved. Clay odds stay ~0.05%, behind Walls 1 and 2."
+}
