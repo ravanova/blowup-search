@@ -376,6 +376,29 @@ CAPABILITIES = [
      "holds": "the profile on its own support (SUPERSEDES solver/finite_support.py)",
      "validated": "the closed form against the ODE; finite support is PARTIAL vs HTW Prop 2.3",
      "test": "test_first_integral.py"},
+    {"module": "solver/compact_cap_cheb.py",
+     "object": ("the certificate corner in a GLOBAL Chebyshev basis on the profile's own "
+                "COMPACT SUPPORT -- and its Z_1, which no leg had computed in any basis on "
+                "a finite support interval (Route-CAPG, leg 162)"),
+     "holds": ("two exact realizations of the same operator and the fact that they classify "
+               "OPPOSITELY: A = this repo's (1-v^2)T_n ansatz, whose unbounded part is a "
+               "SHIFT with exactly zero diagonal and off-diagonal ~n/2 (the same shape and "
+               "the same n/2 as the compactified whole-line tail block), and B = the "
+               "Olver-Townsend airfoil pairing sqrt(1-v^2)U_{n-1} -> T_m/sqrt(1-v^2), whose "
+               "unbounded part is an exact MULTIPLIER diag(-n).  Because B's tail has NO "
+               "KERNEL, leg 58's Proposition NG hypothesis (H2) fails there and the theorem "
+               "does not reach it.  Also: the bordered assembly with the free-boundary X_c "
+               "column, leg 54's Z_1 = colmax(I - AL) convention, a shape classifier run "
+               "against the banked whole-line block as a CONTROL, and the support-transfer "
+               "audit showing leg 126's own a=0 object has no support interval at all.  "
+               "THE CEILING IS PART OF THE ENTRY: Z_1 is ONE OF FOUR constants, Z_2 is "
+               "already measured infinite on this object in the sup realization, the "
+               "sub-1 values hold at 2 of 4 border gauges, and it is float64"),
+     "validated": ("dedicated: test_compact_cap_cheb.py (21 checks).  Realization B's "
+                   "Hilbert identity is the SAME one test_first_integral.py's gate 2 "
+                   "already banks; the operator matrix is gated against direct pointwise "
+                   "evaluation at 3.4e-04"),
+     "test": "test_compact_cap_cheb.py"},
     {"module": "solver/turning_point.py", "object": "the turning point at X_c",
      "holds": "what actually makes the inverse diverge", "validated": ("locates the zero of c + aU to the ODE integrator's own tolerance"),
      "test": "test_turning_point.py"},
