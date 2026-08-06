@@ -160,6 +160,15 @@ open reports/legs_over_time.html             # (or just open it in a browser)
 python3 scripts/legs_over_time.py --since 2026-08-01   # widen the x-axis floor
 ```
 
+That chart counts each leg **once, at its first commit**, so it reads flat while a
+leg is still working. For the work itself — commits, parallel legs in flight, and
+lines moved, binned in time — use its companion:
+
+```bash
+python3 scripts/work_over_time.py            # writes reports/work_over_time.html
+python3 scripts/work_over_time.py --bin 30   # coarser bins
+```
+
 It parses `Leg N: ...` commit subjects, so it stays accurate as new legs land;
 the output is gitignored rather than committed since it's stale the moment
 the next leg merges. The x-axis floor defaults to `auto` — the hour the first
@@ -215,7 +224,7 @@ re-run**:
 | [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) | The critical-path leg's directive: what the last leg settled and what not to re-derive. |
 | [`LITERATURE_CHECK.md`](LITERATURE_CHECK.md) | Append-only novelty passes, with the queries run. |
 | [`PHASE2_P2_NOTES.md`](PHASE2_P2_NOTES.md) | The long working notes, including ~90 numbered banked lessons. |
-| [`scripts/`](scripts/) | `merge_gate.sh` (executable merge criterion), `fetch_papers.sh`, `cloud_setup.sh`, `legs_over_time.py` (progress chart). |
+| [`scripts/`](scripts/) | `merge_gate.sh` (executable merge criterion), `fetch_papers.sh`, `cloud_setup.sh`, `legs_over_time.py` (progress chart), `work_over_time.py` (activity chart). |
 
 ## What has been banked
 

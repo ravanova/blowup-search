@@ -35,9 +35,10 @@ STOP
 STOP-NOW
 PAUSE
 
-# Regenerated on demand by scripts/legs_over_time.py — output is stale the
-# moment a new leg lands, so it's not a committed artifact.
+# Regenerated on demand by scripts/legs_over_time.py and work_over_time.py —
+# output is stale the moment a new commit lands, so neither is a committed artifact.
 reports/legs_over_time.html
+reports/work_over_time.html
 
 # Agent worktrees created by subagent isolation
 .claude/worktrees/
