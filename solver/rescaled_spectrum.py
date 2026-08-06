@@ -132,7 +132,47 @@ LIMITS OF THIS BUILD (say them out loud)
   the values of a at which alpha is an odd integer -- a = 0 (alpha = 1) and
   a = 1/2 (alpha = 3) -- where the profile is analytic and the method is spectral.
   Quantitative statements are quoted at those two points for that reason.
+
+--------------------------------------------------------------------------
+THE REFINEMENT GUARD (leg 225, repairing leg 203's finding R1)
+--------------------------------------------------------------------------
+Line 114 above states the specification: "the discrete eigenvalues are the ones
+that stop moving under refinement".  `converged_spectrum` used to accept any
+(K_coarse, K_fine) pair without ever checking that refinement HAPPENED.  Leg 203
+(Route-RSA, `experiments/journal/leg_203.md`, finding R1) measured what that
+costs at K_fine == K_coarse: the filter compares a spectrum with ITSELF, every
+match distance is identically 0.0, and the entire discretized continuum is
+returned as "the grid-independent part of the spectrum" -- n_kept goes 2 -> K
+(24/24, 32/32, 48/48, a 24x inflation at K = 48), including a purely imaginary
+conjugate pair at +-40.4623i, which is exactly the Hopf-crossing signature this
+module exists to RULE OUT.
+
+`converged_spectrum` now requires K_fine > K_coarse and raises ValueError
+otherwise.  Equality is called out by name in the message because it is the
+degenerate case that certifies everything; K_fine < K_coarse is rejected under
+the same guard because a COARSER second grid is not a refinement either, even
+though leg 203 measured that it happens to return the right answer (2) at a = 0.
+The guard rejects on the specification, not on the outcome.
+
+  * `on_no_refinement="raise"` (default) -- ValueError, as above.
+  * `on_no_refinement="allow"` -- the pre-repair behaviour verbatim, with a
+    warning, so leg 203's R1 measurement stays EXECUTABLE rather than becoming
+    a story about a number nobody can reproduce (lesson 68).
+
+WHAT THIS GUARD DOES NOT COVER, said out loud so nobody reads it as wider than
+it is.  Leg 225 measured both and repaired neither, because both sit outside the
+mechanism leg 203 named and (for the second) outside leg 225's declared file
+territory:
+  * `planted_eigenvalue_control` in this file takes the same (K_coarse, K_fine)
+    pair through the same `match_filter` and is UNGUARDED.
+  * `converged_dissipative_spectrum` in `solver/critical_dissipation.py` is a
+    re-implementation of this filter and is UNGUARDED.
+Leg 203's other seven mechanisms (R2-R8) are also untouched here; in particular
+R2 -- that `spectrum` and `converged_spectrum` discard `newton`'s `converged`
+flag -- is a separate design decision and is NOT what this repair addresses.
 """
+
+import warnings
 
 import numpy as np
 
@@ -350,8 +390,39 @@ def match_filter(ev_coarse, ev_fine, tol):
     return np.array(kept)[order], np.array(dist)[order]
 
 
-def converged_spectrum(a, K_coarse=96, K_fine=144, tol=1e-3, da=0.02, **kw):
-    """The grid-independent part of the spectrum at parameter `a`."""
+def converged_spectrum(a, K_coarse=96, K_fine=144, tol=1e-3, da=0.02,
+                       on_no_refinement="raise", **kw):
+    """The grid-independent part of the spectrum at parameter `a`.
+
+    Guarded since leg 225 -- see the module docstring.  `K_fine` must be strictly
+    greater than `K_coarse`, because the filter's whole content is that a
+    discrete eigenvalue is one that survives REFINEMENT; without refinement the
+    filter compares a spectrum with itself and keeps all K of them.
+    `on_no_refinement` is one of `"raise"` (the default) or `"allow"` (the
+    pre-repair behaviour, with a warning, so leg 203's R1 measurement -- the
+    evidence that authorised this repair -- stays executable).
+    """
+    K_coarse, K_fine = int(K_coarse), int(K_fine)
+    if K_fine <= K_coarse:
+        why = ("K_fine == K_coarse == %d: the filter would compare the spectrum "
+               "with ITSELF, every match distance would be 0.0, and all %d "
+               "eigenvalues -- the whole discretized continuum -- would be "
+               "certified as converged (leg 203 R1)" % (K_coarse, K_coarse)
+               ) if K_fine == K_coarse else (
+              "K_fine=%d < K_coarse=%d: a coarser second grid is not a "
+              "refinement, so 'stopped moving under refinement' is not what "
+              "the filter would be measuring" % (K_fine, K_coarse))
+        if on_no_refinement == "raise":
+            raise ValueError(
+                "converged_spectrum requires K_fine > K_coarse -- " + why +
+                ". Pass on_no_refinement='allow' to reproduce the pre-repair "
+                "behaviour anyway.")
+        if on_no_refinement != "allow":
+            raise ValueError("on_no_refinement must be 'raise' or 'allow', "
+                             "got %r" % (on_no_refinement,))
+        warnings.warn("converged_spectrum: " + why + " -- running the "
+                      "pre-repair path anyway because on_no_refinement='allow'",
+                      RuntimeWarning, stacklevel=2)
     ev_c, flow_c, out_c = spectrum(a, K_coarse, da=da, **kw)
     ev_f, flow_f, out_f = spectrum(a, K_fine, da=da, **kw)
     kept, dist = match_filter(ev_c, ev_f, tol)
