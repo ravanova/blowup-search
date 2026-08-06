@@ -139,3 +139,89 @@ finding was handled in the sibling pipeline.
 **Pre-committed reporting discipline (discipline 73, magnitudes not booleans):** every case
 reports the numbers the pipeline produced (`Y_0`, `Z_1`, `Z_2`, `r_min`, `r_max`), not just a
 pass/fail flag, so that a reader can check the verdict arithmetic without rerunning it.
+
+---
+
+# Findings (written AFTER construction; the pass above is unedited since its commit `ac57551`)
+
+**GATE: YES.** Quoting the gate verbatim — *"Under an adversarial battery of poisoned interval
+enclosures (negative widths, NaN endpoints, non-containing enclosures) fed to
+`interval_constants` / `radii_verdict`, does the pipeline ever incorrectly report a
+closing/valid certificate?"* — **yes, 12 times out of 36 hypothesis-violating inputs (33.3%),
+of which 8 are load-bearing.**
+
+Substrate: `BorderedCLM` (a = 0 CLM, bordered), `n = 101`, `N = 103`,
+`θ = (0, 0, 0, 0, −2)`. Positive controls: the honest certificate **closes** at the converged
+iterate (`Y_0 = 1.396e-11`, `Z_1 = 2.754e-09`, `Z_2 = 7.993e+05`) and **does not close** at that
+iterate displaced by `1e-3` (`Y_0 = 5.907e-03`), a separation of **4.23e+08×**.
+
+| magnitude | value |
+|---|---|
+| cases | 39 |
+| hypothesis-violating | 36 |
+| **reported a CLOSING certificate anyway** | **12 (33.3%)** |
+| of those, **load-bearing** — the same-magnitude hypothesis-*satisfying* input does NOT close | **8** |
+| correctly rejected | 20 |
+| raised (a refusal, but a loud one) | 4 |
+
+## The two halves of the claim, separated
+
+**(a) `radii_verdict` evaluates the discriminant on constants the theorem excludes.** This is
+leg 79's finding, unrepaired, in the other pipeline. Six load-bearing cases:
+
+* `Y_0 = −1.0, Z_1 = 0.3, Z_2 = 1.0` → **closes**, with a **negative** `r_min = −0.8780`.
+  `Y_0 = +1.0` does not close (budget `0.2450`).
+* `Y_0 = −1e6` → **closes**. `Y_0 = −inf` → **closes**, `r_min = −1.341e+154`, while
+  `Y_0 = +inf` is correctly refused — the asymmetry shows the guard is arithmetic, not a
+  hypothesis check.
+* `Z_1 = −5.0` → **closes** (`Z_1 < 0` passes the `Z1 < 1.0` guard).
+* `Y_0 = 1e3, Z_1 = −1e6` → **closes** on a budget of **5.000e+11**: a negative `Z_1` inflates
+  `(1−Z_1)²/(2Z_2)` without bound and rescues an arbitrarily large residual. `Z_1 = +1e6`
+  rejects the same `Y_0`.
+* `Y_0 = −1e-30, Z_1 = 1−1e-16` → **closes**; the `+1e-30` counterpart does not.
+
+**(b) `interval_constants` never checks the enclosure it is handed.** Two load-bearing cases,
+and the second is the sharper one:
+
+* An enclosure object reporting `F(z) ≡ [0, 0]` at the displaced iterate yields
+  `Y_0 = 7.9e-323` and **closes**, where the true residual is `5.907e-03` — a lie of roughly
+  **320 decades**, undetected.
+* The honest enclosure **scaled by 1e-8** — `lo ≤ hi`, every endpoint finite, positive width,
+  i.e. **passing every validity check that exists** — understates `Y_0` by **1.000e+08×**
+  (`5.907e-03 → 5.907e-11`) and **closes**. No amount of interval-*validity* checking sees
+  this; only a **containment** check does. This is the case that distinguishes the finding from
+  leg 69's, which was about validity.
+
+**(c) supplementary (H3): the weight vector is trusted too.** `w → −w` is accepted as a norm
+and produces `Y_0 = −2.463e-28`, which then closes — the one end-to-end path in the battery
+from structurally valid enclosures to a hypothesis-violating constant.
+
+## What HELD — and it is not nothing
+
+* **NaN is handled correctly, 4/4.** `radii_verdict`'s `if not (Z1 < 1.0)` is NaN-safe by
+  construction. The exact hazard that defeated the sibling before its repair is **absent here**.
+* **`Interval.__init__` refuses `lo > hi`** — leg 69's repair, still holding, now shown to cover
+  this pipeline's residual path. It is why the negative-width residual cases raise rather than
+  lie.
+* **The `Z_1` path is hard to fool**: a Jacobian enclosure poisoned to the identity, with
+  swapped endpoints, or with a NaN entry is rejected in all four attempts.
+
+## Severity: LATENT, not ACTIVE — and that is a measurement, not a reassurance
+
+No banked number in this repository is shown to be wrong. Every in-repo caller of
+`radii_verdict` receives constants from `interval_constants`, where `Y_0 = max(w · mag(·))` and
+`Z_1`, `Z_2` are weighted row-sum bounds over magnitudes — nonnegative whenever `w > 0`, and the
+shipped weight is `exp(clip(·))`, strictly positive by construction. The unsound inputs are
+reachable only by a caller that builds constants some other way, or hands in a fabricated
+enclosure object. What the gap removes is the **guarantee**, not any current number — the same
+scoping leg 69's finding carried.
+
+## What this leg did NOT do, deliberately
+
+It did not patch `solver/interval_certificate.py`, under any gate outcome, per its territory and
+per the precedent set by legs 66, 69 and 79. The recommended repair — reject non-finite/negative
+constants before the discriminant; return a structured verdict for `Z_2 = 0` instead of raising
+`ZeroDivisionError`; validate `w`; and, the one the sibling does not have, **re-evaluate `F` in
+float and refuse a non-containing enclosure** — is written out in `experiments/journal/leg_98.md`
+and each of the seven GAP-PIN gates in `test_interval_certificate_adversarial.py` states the
+assertion the repaired code should carry. **Invert those gates on repair; do not weaken them.**
