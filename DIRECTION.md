@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 262 | PVRW | yes |
 | B | 249 | H2CV2 | no |
-| C | 251 | P0T | yes |
+| C | 260 | DSSB | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
@@ -38,11 +38,12 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-H refill after 257's escalated YES):
-5/10 floor-eligible -- A/262/PVRW, C/251/P0T, F/236/RDDEP, G/256/P1B, H/261/P1A2 --
-matching the "Slot-H refill" DM update at the tail of this file. 261 (P1A2, the relaxed
-fluid census, blocked on 257 by its own spec and unblocked by 257's landing) replaced 257
-in slot H.)
+(Current snapshot, DM update of 2026-08-07 (slot-C refill after 251's escalated YES):
+4/10 floor-eligible -- A/262/PVRW, F/236/RDDEP, G/256/P1B, H/261/P1A2 -- matching the
+"Slot-C refill after Phase 0" DM update at the tail of this file. 260 (DSSB, Entry B's
+scoping leg, counted "no" conservatively) replaced 251 in slot C via its own
+pre-committed promotion trigger: 251 landed with DSS-conditional candidates in its
+yes-branch.)
 
 ---
 
@@ -10752,3 +10753,99 @@ stays SHUT by the user's own bounding, and 264's yes-branch pre-commits that no 
 opens under leg authority. Nothing here is a statement about HL_S2_nonsymmetric or any
 link of the L1→L4 chain; Clay stays ~0.05%. The leg-178 missing-forward flags (two
 notices above) are RESOLVED — the ruling arrived and is fully processed in this update.
+
+---
+
+## DM update, 2026-08-07 — slot-C refill after PHASE 0 ANSWERED: 251 (P0T) gate YES,
+escalated — one unconditional candidate named (BCG's compressible imploding profile,
+γ=7/5); 260's pre-committed promotion trigger FIRED (slot C = 260); Phase-1 costing leg
+265 drafted, blocked on 251's verifier
+
+**251 (P0T) finished gate YES, escalated** (PR #20, `leg/251-p0t-v1`, verifier in flight
+at `verify/251-p0t-review`). Recorded at full strength, with its own honesty flags kept
+attached: the ONE unconditional Phase-1 candidate is the **3D isentropic COMPRESSIBLE
+Navier-Stokes imploding self-similar profile at γ=7/5** (BCG arXiv:2208.09445; non-radial
+companion CGSS arXiv:2310.05325) — **explicitly compressible, NOT the incompressible
+system Clay's problem is about, per the leg's own flag**. The certificate obligation is
+exactly the term BCG's own §7 says nobody has enclosed, only dominated by parameter
+restriction — i.e., precisely Phase 1's "viscous term from DOMINATED to ENCLOSED," on a
+candidate that (being compressible) sits outside the Leray-projection kills, which apply
+to the incompressible projector in H²(µ). Two DSS candidates sit in a CONDITIONAL tier
+blocked on Entry B's scoping (leg 260) AND 257's obstruction; Pineau-Vicol is reported
+but not named (no numerical anchor — 262's read is in flight). NOTE: arXiv:2208.09445 is
+already in this repository's ledger via leg 174/197 (VNL) — 251's naming connects to an
+already-located citation, not a fresh one.
+
+**Slot C: leg 260 (Route-DSSB) — the pre-committed promotion trigger FIRED.** Its own
+reserve entry says: "UNLESS 251 lands with a DSS-conditional candidate in its yes-branch,
+in which case 260 promotes to the next vacancy immediately, pre-committed here so no
+re-ranking decision is needed at that moment." 251 landed with TWO. No discretion
+exercised; the trigger executes as written. **Brief additions (mandatory): 260 reads
+251's parked report (the two DSS-conditional candidates and what blocks them), 253's
+narrowing (non-axisymmetric only, thresholds non-explicit), and 257's obstruction — its
+"object" answer must name which surviving DSS shape it is scoping, and its price answer
+now has a concrete customer.** Anti-pausing clause verbatim.
+
+**Phase-1 costing: drafted NOW, dispatched only after the verifier — agreeing with the
+orchestrator's hold recommendation, and matching this DM's own pre-commitment
+(construction gated behind reports).** A costing leg is scoping, not construction — it
+does not need the stage-V lift (still with the user) and builds nothing — but it would
+inherit any defect the verifier finds in 251's naming, so it waits:
+
+```
+### 265 — ROUTE-P2C: WHAT WOULD A CERTIFICATE FOR BCG's IMPLODING PROFILE ACTUALLY COST?
+(Phase-1 costing of 251's unconditional candidate — scoping, NOT construction; blocked on
+251's verifier)
+[FLOOR-ELIGIBLE: math/literature]
+**Thesis.** 251 named the BCG γ=7/5 imploding self-similar profile as Phase 1's
+unconditional candidate; the certificate obligation is BCG §7's own never-enclosed
+dissipative term. Before any construction is posable, cost it: (1) the profile equation
+and the precise term to enclose, stated from BCG/CGSS full text; (2) what function-space
+setting the enclosure would run in — noting the stage-V lift question (H²(µ) legality)
+sits with the user, and compressible NS has no Leray projector, so 257's obstruction must
+be checked for a compressible ANALOGUE rather than assumed absent; (3) what exists in
+capabilities.py vs. what must be built; (4) the honest gap between "certificate for the
+compressible imploding profile" and Clay's incompressible problem, stated in the same
+breath as the cost, per 251's own flag.
+**Gate.** Can all four be answered concretely enough that a hypothetical construction leg
+could be drafted with a pre-committed gate and a named territory, with no further scoping
+needed?
+  yes -> Bank the costing dossier. ESCALATE to the user as Phase 1's construction
+         decision packet (cost + gap-to-Clay stated together). Construction itself needs
+         the user's go — not this leg's, and not the DM's.
+  no -> Name which of the four resists concreteness and why — if the blocker is the
+        compressible analogue of 257's obstruction, that is a finding at full strength
+        and goes straight to the user's packet alongside the stage-V lift question.
+**Territory.** experiments/p2_route_p2c_v1_costing.py,
+               writeup/data/p2_route_p2c_v1_costing.json,
+               writeup/novelty/leg_265.md, experiments/journal/leg_265.md.
+               Reads (never edits) BCG arXiv:2208.09445 + CGSS arXiv:2310.05325 full
+               text, 251's report as VERIFIED, 257's obstruction mechanism,
+               capabilities.py, leg 240's DOMINATED/ENCLOSED census rows.
+**Difficulty.** heavy
+**Independence.** Own module; read-only overlaps by design. **BLOCKED on
+`verify/251-p0t-review` landing clean** — if the verifier contests 251's naming, this
+leg's premise re-opens and it must be re-drafted, not patched. Once unblocked, it is the
+TOP-priority reserve item (ranking rule (a): it is the programme's next link).
+```
+
+**User-facing framing: held**, per the orchestrator's recommendation — 251's finding
+reaches the user through its verified report plus this DM's eventual packet (stage-V lift
++ 257's obstruction + 251's candidate + 265's costing when ready), not piecemeal.
+
+**FLOOR-TABLE block updated in this same edit** (C: 251 → 260). **Floor status: 4/10
+strictly (262, 236, 256, 261) — met** (260 counted "no" conservatively, same convention
+as 254).
+
+**Canonical reserve line: reserve count 12 — legs 265, 263, 264, 228, 210, 259, 229, 231,
+232, 233, 234, plus 178L mid-landing (dispatched, not reserve stock once it lands).**
+Effective immediately-dispatchable: 3 (228, 210, 259); 265 blocked on 251's verifier
+(TOP priority once clear); 263 sequenced behind 178's landing, 264 behind 263; 229
+blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg number:
+**266.**
+
+Nothing in this update lifts a ban or opens construction — 265's yes-branch terminates in
+a user decision packet, and 251's candidate is recorded with its own compressible-not-Clay
+flag attached, not as movement of any link. Clay stays ~0.05%. No direction question
+raised now; the assembled packet (after the verifier and 260/262/265 report) is where the
+user's Phase-1 construction decision lands.
