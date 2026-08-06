@@ -3195,3 +3195,9 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   fit_exponent overstating n_points 3.0x when dropping NaN bins). 0 of 7 mechanisms
   reachable from the banked call path -- leg 55's +0.394/+0.094 margins
   uncontaminated. Module unpatched, branch leg/204-tna2-v1 pushed.
+- **Leg 214 (Route-EGMB) — YES:** the 5 leg-141/leg-165 prose sites flagged by leg
+  190 corrected to EGM Prop. 2.1's true bracket -(1/2 - C|a|), independently
+  re-verified against arXiv:1906.05811's own LaTeX e-print (not just trusting leg
+  190). Diff is exactly 5 lines / 5 changed characters across 3 files; 0 banked
+  numbers moved (both readings give -0.500000 at a=0). Mechanical, quartet-thin
+  per the leg-180/179/186/108 prose-correction precedent.

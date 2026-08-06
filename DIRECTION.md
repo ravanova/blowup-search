@@ -7140,3 +7140,61 @@ Nothing in this update lifts a ban. Escalation #4 (leg 129/188) and the CGA find
 stay as previously recorded; leg 198's new finding joins them in `PROGRESS.md`'s NEEDS YOU,
 also unruled-on by this DM. No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No
 direction question raised this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — two more audit-family escalations (201, 204);
+now five this cycle; slots C/J refilled with 206/207
+
+**201 (ICA2) escalated, not merged** (`leg/201-ica2-v1` pushed, `main` untouched).
+`interval_certificate.py` silently returns a non-containing enclosure in the subnormal band
+— a 200-`eta` escape, 24.63% of returned magnitude at the shipped `N=405` — an independent,
+unrepaired CLONE of leg 69's already-fixed defect 1 (the same subnormal-range false-negative
+shape leg 69 found and fixed in `interval.py` itself, now found again one layer up, unrepaired,
+in this sibling module). **0 banked numbers affected** — 292.9 decades clear of any live
+operand, the same scoping discipline leg 69's own original finding used.
+
+**204 (TNA2) escalated, not merged** (`leg/204-tna2-v1` pushed, `main` untouched).
+`target_norm.py`'s domain guard windows on `max|X|`, not the true data interval — an
+asymmetric grid silently extrapolates 535/16384 samples while reporting
+`n_outside_grid=0`/`domain_valid=True`, defeating three legs' (55, 84, 94) worth of prior
+guard work in one silent stroke. **0 of 7 identified mechanisms are reachable from the
+banked call path** — leg 55's own margins stay uncontaminated.
+
+**Pattern flagged, not acted on.** This is now **five** audit-family escalations this cycle
+(188's sharpened finding, 198, 199, 201, 204) — every one latent, every one with 0 banked
+results currently contaminated, every one found by the SAME discipline (adversarial/degenerate
+input against a claim-adjacent module rather than assuming clean-by-proximity). Worth this
+DM's attention for a future batch-repair round once the current construction/verification
+slots clear — not something to act on mid-cycle by drafting a giant repair sweep now, since
+none of the five threatens a banked number today and this repository's own precedent (leg
+184's GBW, the repair-legs 150–154) is to repair one named defect per leg, not batch multiple
+unrelated fixes into one. Noted here so it isn't lost before the next natural planning point.
+
+**Slots C and J refilled with 206 (GSA) and 207 (DPA)** — the next two in the pre-committed
+206–213 promotion order, unchanged from prior ranking.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live, in progress (verification substantively complete per orchestrator, confirming leg 176 with two sharpenings, no escalation — blocked only on its own CPU-bound N=1024/2048 confirmation runs finishing; no action needed from anyone yet) |
+| B | 193 | M2CV | live (unchanged) |
+| C | 206 | GSA | **live, newly promoted — replaces 201 (escalated, OFF roster)** |
+| D | 203 | RSA | live (unchanged) |
+| E | 205 | BVR | live (unchanged) |
+| F | 200 | PCA | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 214 | EGMB | live (unchanged) |
+| I | 215 | CGR | live (unchanged) |
+| J | 207 | DPA | **live, newly promoted — replaces 204 (escalated, OFF roster)** |
+
+**Reserve queue: 6 undispatched legs (208, 209, 210, 211, 212, 213).** 206/207 now live (off
+reserve); no other change. Above the §3a watermark of 3 — no fresh batch needed yet.
+Promotion order for the next vacancy, unchanged: 208 (TSA), 209 (SCA2), 210 (M2SV), 211
+(XU11), 212 (USC2V), 213 (LGC2).
+
+Nothing in this update lifts a ban. Escalations #4 (129/188), CGA (199), BHA (198), and now
+ICA2 (201) and TNA2 (204) all stay with the user via `PROGRESS.md`'s NEEDS YOU — this DM
+rules on none of them. No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No direction
+question raised this cycle.
