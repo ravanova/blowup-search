@@ -101,8 +101,13 @@ fully-grounded result). A twenty-seventh addition, correcting the 148 error and 
 per the coordinator's request, adds **188** (SURV, checking whether leg 129's parked
 verdict-flip is a necessary consequence of a rule already adopted elsewhere, possibly
 resolving escalation #4 without the user) and **189** (XUTRI, a third independent
-derivation check on `a_c`/`alpha(1/2)=3` via Xu's own spectral framework). **Next fresh leg
-number for any future candidate is 190.**
+derivation check on `a_c`/`alpha(1/2)=3` via Xu's own spectral framework). A twenty-eighth
+addition, refilling after legs 177/186 landed and only 3 of 10 slots were occupied, adds
+**190** (EGML, locating and banking the "EGM" citation), **191** (PQV, whether leg 60's
+correction changes any downstream conclusion), and **192–194** (independent post-
+construction verification for legs 176/187/178, drafted now and blocked until each lands —
+the postrepair-verification discipline applied to this cycle's new certificate-construction
+claims). **Next fresh leg number for any future candidate is 195.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1563,6 +1568,37 @@ reasoning (legs 129's and 64/161's own text) rather than presupposing any in-fli
   for whether it independently reproduces either constant. A third, structurally different
   derivation would either triangulate confidence in both numbers or locate a genuine
   discrepancy this repository's "worst of three sources" framing has not yet explained.
+
+**DM update, 2026-08-06 — legs 177 and 186 landed clean; five new candidates drafted below to
+refill the queue, checked against `origin/main` (not `--all`, per the corrected methodology)
+before drafting anything.** `git log origin/main --grep "^Leg 1[7-9][0-9]:"` confirms 171–177,
+179–186 have real commits on `main`; 178, 187, 188, 189, 190 do not yet (consistent with the
+coordinator's report that 187/188/189 are running and 178 is still in flight). Five
+candidates, all grounded in already-known facts, none presupposing an in-flight leg's
+unknown content:
+
+- **190 (EGML)**, new: the "EGM" citation, relayed twice now (the external novelty review and
+  leg 165's own classification, "certifies a −1/2 gap" at `p=2` for the weighted-energy
+  window) has never been independently located or banked in `solver/literature_gates.py` —
+  it does not appear anywhere in this repository's own ledger. Locate and verify its exact
+  identity (full arXiv number, authors, precise claim and hypotheses) before leg 178's own
+  construction work needs it secondhand.
+- **191 (PQV)**, new: leg 60 (PQ) is parked as escalation #4 on two unreproducible numbers
+  (v2's "28x worse" claim reproduces at 63x; v1's `rho=8` reach-table row quotes a different
+  resolution's value) — parked because a ban resting on a wrong number is the user's call.
+  Independent of that ruling, there is a decidable math question: does substituting the
+  CORRECTED, reproducible numbers change any conclusion this repository has drawn from
+  Route-PORT v1/v2's results? If the qualitative conclusions are robust to the correction,
+  that is useful information for the user's ruling without presupposing it.
+- **192, 193, 194**, new, drafted now and blocked until their respective source leg lands:
+  independent post-construction verification for the three certificate-construction legs
+  this cycle has built — **192** for leg 176 (origin-H² at `a=0`), **193** for leg 187
+  (Chen's inviscid γ=2 profile), **194** for leg 178 (weighted-energy v2, once it lands). This
+  extends the SAME discipline this repository already applies to every repair
+  (86/87/94/103/104/105/131–135/147/166–170) to NEW constructions making certificate claims
+  for the first time — arguably more important than a repair check, since these claim
+  genuinely novel positive results, not just non-regression. This is not a fresh audit hunt;
+  it is the established postrepair-verification pattern applied one level up.
 
 ---
 
@@ -5746,6 +5782,135 @@ states?
 self-consistency audit, different question) and from 161 (LSS, a different paper). Read-only
 overlap with legs 127/163/171/173/181/183's own use of Xu is read-read, not a collision.
 Immediately dispatchable.
+```
+
+```
+### 190 — ROUTE-EGML: LOCATE AND VERIFY THE "EGM" CITATION
+**Thesis.** "EGM" has been relayed to this repository twice — the external novelty review's
+own summary of leg 165's classification (weighted-energy realization, TIER 1: "at `p=2` it
+is width 2.0 and EGM certifies a −1/2 gap") — but does not appear anywhere in
+`solver/literature_gates.py` or any other ledger this DM has checked. It is likely a citation
+leg 165 itself located, banked only in its own leg-165 JSON/report rather than the shared
+ledger. Locate it precisely: full arXiv identifier, authors, exact claim and hypotheses,
+verified at primary-source depth (not re-derived secondhand from the external review's
+paraphrase) — this is exactly the discipline every other citation in this repository's ledger
+already meets, and leg 178's own construction work may need EGM's precise identity for
+comparison.
+**Gate.** Can "EGM" be located as a real, checkable primary source, and does it state the
+`p=2`, `−1/2`-gap claim as relayed, with its own hypotheses?
+  yes -> Record the full citation and verbatim claim; add it to
+         `solver/literature_gates.py` (append-only, new row) so it is a shared-ledger
+         citation, not a leg-165-only reference.
+  no (cannot be located, or the claim doesn't match) -> Report precisely what was found
+         instead (a mis-transcription, a different citation the review may have meant, or
+         genuinely nothing matching). Flag for the coordinator to check with leg 165's own
+         report directly, since this leg's own search came up short.
+**Territory.** solver/literature_gates.py (append-only, ONE new row if located — no
+               existing row touched), experiments/p2_route_egml_v1_lit.py,
+               writeup/data/p2_route_egml_v1_lit.json,
+               writeup/novelty/leg_190.md, experiments/journal/leg_190.md.
+**Difficulty.** light
+**Independence.** Literature-only plus one append-only ledger row. Disjoint from every other
+live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 191 — ROUTE-PQV: DOES SUBSTITUTING LEG 60's TWO CORRECTED NUMBERS CHANGE ANY CONCLUSION
+DRAWN FROM ROUTE-PORT v1/v2? (informs, does not resolve, escalation #4a)
+**Thesis.** Leg 60 (PQ) is parked as an escalation because two of Route-PORT's quoted numbers
+do not reproduce from their own banked data (v2's "28x worse" claim reproduces at 63x; v1's
+`rho=8` reach-table row quotes a different resolution's value) — parked because a ban resting
+on an unreproducible number is the user's call to correct or not. Independent of whether the
+user authorizes correcting the prose, there is a decidable question this leg answers:
+substituting the CORRECTED, reproducible values in place of the two wrong ones, does any
+downstream conclusion this repository has drawn from Route-PORT v1/v2 (any ban, any scope
+line, any comparison) actually change? If every conclusion is robust to the correction, that
+is useful, non-presupposing information for the user's ruling. If a conclusion DOES depend on
+the wrong number, that raises the stakes of the ruling and should be reported precisely.
+**Gate.** With the two corrected values substituted (63x in place of 28x; the correct-
+resolution `rho=8` value in place of the misquoted one), does any banked ban, scope line, or
+comparison that cites either number change its conclusion?
+  yes -> Name the exact conclusion and how it changes. ESCALATE this precisely — it
+         sharpens, but does not resolve, the user's pending ruling on leg 60.
+  no -> Every downstream conclusion is robust to the correction. Report this precisely; it
+         does not resolve the ruling (whether to correct the prose is still the user's call)
+         but lowers the stakes of it.
+**Territory.** experiments/p2_route_pqv_v1_verification.py,
+               writeup/data/p2_route_pqv_v1_verification.json,
+               writeup/novelty/leg_191.md, experiments/journal/leg_191.md.
+               Reads (never edits) leg 60's own parked branch (`leg/pq-v1`) and every
+               `writeup/` file citing Route-PORT v1/v2's numbers, read-only.
+**Difficulty.** standard
+**Independence.** Read-only, including of a parked branch (reading, not merging). Disjoint
+from every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 192 — ROUTE-H2CV: INDEPENDENT POST-CONSTRUCTION VERIFICATION, LEG 176's ORIGIN-H²
+CERTIFICATE (RESERVE — NOT dispatchable until leg 176 lands)
+**Thesis.** Leg 176 builds the first certificate this repository has constructed outside the
+`ell^1_w` lane. Per the same discipline this repository applies to every repair (never trust
+a leg's own self-report alone), this construction — a genuinely novel positive-result claim,
+not just a non-regression check — deserves the same independent verification, applied one
+level up: re-derive the certificate's closing quantity from leg 176's own construction
+script, independently, and re-check the claimed agreement with Xu's closed form.
+**Gate.** Does an independent re-run of leg 176's construction reproduce its claimed closing
+quantity and its claimed agreement with Xu's closed form, to the same precision?
+  yes -> Independently confirmed. Bank as the permanent verification record for this
+         repository's first non-`ell^1_w` certificate.
+  no -> Report the exact discrepancy precisely; escalate as a priority finding — a
+         genuinely novel positive claim that doesn't independently reproduce is the single
+         most consequential kind of finding this repository could produce right now.
+**Territory.** test_origin_h2_certificate_postconstruction.py,
+               experiments/p2_route_h2cv_v1_postconstruction.py,
+               writeup/data/p2_route_h2cv_v1_postconstruction.json,
+               writeup/novelty/leg_192.md, experiments/journal/leg_192.md.
+**Difficulty.** standard
+**Independence.** Reads solver/origin_h2_certificate.py; edits nothing under either outcome.
+**NOT dispatchable until leg 176 lands.**
+```
+
+```
+### 193 — ROUTE-M2CV: INDEPENDENT POST-CONSTRUCTION VERIFICATION, LEG 187's CHEN-INVISCID
+CERTIFICATE (RESERVE — NOT dispatchable until leg 187 lands)
+**Thesis.** Leg 187 attempts the first computer-assisted certificate of Chen's γ=2 inviscid
+profile. Same discipline as 192, applied to this construction: if leg 187 lands YES (the
+certificate closes), that is this cycle's single most novel positive claim and deserves
+independent re-derivation before being presented as confirmed, not just self-reported.
+**Gate.** Does an independent re-run of leg 187's construction reproduce its claimed
+certificate closure (or, if leg 187 landed NO, reproduce its claimed failure point) from
+leg 187's own transcribed constants and construction script?
+  yes -> Independently confirmed either way. Bank as the permanent verification record.
+  no -> Report the exact discrepancy precisely; escalate as a priority finding.
+**Territory.** test_chen_inviscid_certificate_postconstruction.py,
+               experiments/p2_route_m2cv_v1_postconstruction.py,
+               writeup/data/p2_route_m2cv_v1_postconstruction.json,
+               writeup/novelty/leg_193.md, experiments/journal/leg_193.md.
+**Difficulty.** standard
+**Independence.** Reads solver/chen_inviscid_certificate.py; edits nothing under either
+outcome. **NOT dispatchable until leg 187 lands.**
+```
+
+```
+### 194 — ROUTE-WESV: INDEPENDENT POST-CONSTRUCTION VERIFICATION, LEG 178's WEIGHTED-ENERGY
+v2 CONSTRUCTION (RESERVE — NOT dispatchable until leg 178 lands)
+**Thesis.** Leg 178 tests whether a different weighted-energy construction shifts leg 111's
+zero-width window. Whichever way it lands, this is a genuinely new construction result (not a
+repair), and the same discipline as 192/193 applies: independently re-derive its measured
+coercivity gap from its own append-only addition to `solver/energy_coercivity.py`.
+**Gate.** Does an independent re-run of leg 178's construction reproduce its claimed
+coercivity-gap measurement (positive-and-stable, or still zero-width) from its own code?
+  yes -> Independently confirmed. Bank as the permanent verification record.
+  no -> Report the exact discrepancy precisely; escalate as a priority finding — this
+        directly bears on the external review's item 3, which has been open the longest of
+        the four.
+**Territory.** test_energy_coercivity_v2_postconstruction.py,
+               experiments/p2_route_wesv_v1_postconstruction.py,
+               writeup/data/p2_route_wesv_v1_postconstruction.json,
+               writeup/novelty/leg_194.md, experiments/journal/leg_194.md.
+**Difficulty.** standard
+**Independence.** Reads solver/energy_coercivity.py (leg 178's append-only addition); edits
+nothing under either outcome. **NOT dispatchable until leg 178 lands.**
 ```
 
 ## Ranking rationale
