@@ -26,22 +26,23 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 253 | NRSX | yes |
+| A | 262 | PVRW | yes |
 | B | 249 | H2CV2 | no |
 | C | 251 | P0T | yes |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
 | G | 256 | P1B | yes |
-| H | 257 | P1C | yes |
+| H | 261 | P1A2 | yes |
 | I | 252 | VBRG | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-E refill): 5/10 floor-eligible --
-A/253/NRSX, C/251/P0T, F/236/RDDEP, G/256/P1B, H/257/P1C -- matching the "Slot-E refill"
-DM update at the tail of this file. 248 (CNR2, repair, resuming from its WIP salvage)
-replaced 255 (P1A) in slot E after 255 landed clean and independently verified.)
+(Current snapshot, DM update of 2026-08-07 (slot-H refill after 257's escalated YES):
+5/10 floor-eligible -- A/262/PVRW, C/251/P0T, F/236/RDDEP, G/256/P1B, H/261/P1A2 --
+matching the "Slot-H refill" DM update at the tail of this file. 261 (P1A2, the relaxed
+fluid census, blocked on 257 by its own spec and unblocked by 257's landing) replaced 257
+in slot H.)
 
 ---
 
@@ -10457,3 +10458,175 @@ Nothing in this update lifts a ban, changes any committed gate, or moves any cla
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised — 255's finding is
 consequential but the pre-committed answer (wait for 257, then re-pose if needed, with
 the user) is already on record above.
+
+---
+
+## DM update, 2026-08-07 — slot-A refill after 253 (NRSX) gated NO and escalated: the
+NRS/Tsai screen was mis-stated (sub-linear growth, not decay), the survivor space is
+narrowed AND a fourth window opened (Pineau-Vicol rotated backward self-similar); fresh
+leg 262 drafted into slot A; no user interruption needed
+
+**253 (NRSX) finished gate NO, escalated per its own no-branch** (parked at
+`leg/253-nrsx-v1`, not merged). The finding, recorded at full strength — this is the leg
+WORKING, not failing: (1) Tsai 1998 + erratum, read at full text: the sharp hypothesis is
+**Remark 5.3's SUB-LINEAR GROWTH condition, not a decay condition** — this repository had
+been restating the screen wrong; (2) "unstable-self-similar with finite unstable
+spectrum" is **excluded outright** (the exclusion is stability-blind — a Type I bound
+alone puts the profile in every L^p, p>3); (3) **DSS narrowed three ways, axisymmetric
+DSS dead entirely** (the leg's own inference, labeled as such); (4) **non-self-similar is
+now FORCED, not just permitted**; (5) a **fourth candidate class 251's brief never
+named**: rotated backward self-similar at α≈1, per Pineau-Vicol arXiv:2607.09619v1 — a
+28-day-old UNREFEREED preprint — the one genuinely open window, bypassing the Bernoulli
+maximum-principle argument the whole NRS/Tsai method rests on; (6) every exclusion
+threshold (λ_*, λ̄, ᾱ) is non-explicit, depending on the unpublished Type-I constant.
+
+**Escalation routing decision (this DM's call): NO immediate user interruption.** 253's
+gate already routes the finding where it must go — "must reach leg 251's agent before a
+candidate is banked" — and the orchestrator has done that directly. 251's own eventual
+yes-branch ESCALATES its named candidate to the user anyway; the user will see 253's
+narrowing folded into that report, which is the decision moment. The NEEDS-YOU parking of
+253's branch suffices until then. Note for 260 (DSSB, reserve): its brief must now also
+read 253's report — the DSS "object" question is materially sharper (non-axisymmetric
+only, thresholds non-explicit).
+
+**Slot A: fresh leg 262, drafted from 253's own finding and promoted directly** — ranking
+rule (a) (a leg that could move the chain) puts it above 228/210 (verifies of closed-stage
+work); the one genuinely open window in Phase 0's survivor space is exactly what the
+plan's NEXT stage needs read adversarially, and 251 (breadth screen, in flight) will not
+do a proof-level read of a 28-day-old preprint:
+
+```
+### 262 — ROUTE-PVRW: THE PINEAU-VICOL ROTATED-SELF-SIMILAR WINDOW, READ ADVERSARIALLY AT
+FULL TEXT (the fourth class 253 surfaced — a 28-day-old unrefereed preprint carrying the
+only open window; does it hold, and what would a certificate in its class even mean?)
+[FLOOR-ELIGIBLE: literature/math]
+**Thesis.** 253 identified rotated backward self-similar solutions at α≈1
+(Pineau-Vicol arXiv:2607.09619v1) as the one candidate class genuinely open under the
+corrected NRS/Tsai screen — because rotation bypasses the Bernoulli maximum-principle
+argument the exclusion method rests on. But the preprint is 28 days old and unrefereed;
+Phase 0 must not lean on it unexamined. This leg does the proof-level adversarial read 251
+cannot: does the construction/argument hold at full text; where are the gap risks; is the
+Bernoulli bypass genuine or an artifact of a hypothesis the authors relax silently; and —
+253's point (6) carried forward — do PV's own thresholds inherit the non-explicit Type-I
+constant problem, or are they explicit? Then the certificate question: what would a
+certified object in this class need (profile equation, function space, what "enclosure"
+means for a rotating profile), stated concretely enough for Phase 1 to cost it.
+**Gate.** Two clauses, both required for yes: (a) the PV argument survives an adversarial
+full-text read (no located gap that breaks the rotated window's openness claim), AND (b)
+a certificate target in this class can be stated concretely (named profile equation,
+named space, named enclosure meaning).
+  yes -> Bank both. Forward to 251/Phase 0 as a candidate-class dossier: the window is
+         real as far as one careful read can establish, with the unrefereed caveat carried
+         prominently — refereed status is a fact, not a formality, and stays in every
+         restatement.
+  no -> Name the located gap or the concretization failure precisely, with locators. If
+        the gap breaks the window, 253's "only open window" collapses to non-self-similar
+        FORCED with no self-similar-adjacent class at all — report at full strength and
+        flag for 251 immediately; that materially changes Phase 0's answer space.
+**Territory.** experiments/p2_route_pvrw_v1_read.py,
+               writeup/data/p2_route_pvrw_v1_read.json,
+               writeup/novelty/leg_262.md, experiments/journal/leg_262.md.
+               Reads (never edits) arXiv:2607.09619v1 full text, 253's parked report
+               (branch leg/253-nrsx-v1), Tsai 1998 + erratum as 253 pinned them.
+**Difficulty.** heavy
+**Independence.** Own module, read-only overlap with 251/253's citation pool (by design —
+cross-checking readings is a feature). No written overlap with any live slot. Brief
+carries the anti-pausing clause verbatim. Immediately dispatchable.
+```
+
+**Flag to the orchestrator, recorded so it is not lost: the "leg 178 / leg 111 / transfer
+probe" ruling referenced as awaiting this DM's response was NEVER RECEIVED in this DM
+session** — no such forward appears in this session's record. This DM does not respond to
+rulings it has not seen; please re-forward the ruling text itself, and it will be
+processed in the next update.
+
+**FLOOR-TABLE block updated in this same edit** (A: 253 → 262). **Floor status: 5/10
+strictly (262, 251, 236, 256, 257) — met with margin.**
+
+**Canonical reserve line: reserve count 10 — legs 228, 210, 260, 259, 261, 229, 231, 232,
+233, 234.** Effective immediately-dispatchable: 4 (228, 210, 260, 259 — 260's brief now
+additionally reads 253's report, and its pre-committed promotion trigger on a
+DSS-conditional 251 landing stands); 261 blocked on 257; 229 blocked on 226; 231-234
+blocked on repairs 217/219/221/225. Next fresh leg number: **263.**
+
+Nothing in this update lifts a ban, changes any committed gate, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05% — 253's narrowing of the survivor space and PV's open
+window are recorded as facts about the LITERATURE, not as movement of any link of the
+chain. No direction question raised to the user: 253's escalation routes through 251's
+own eventual report, per its gate's own wording.
+
+---
+
+## DM update, 2026-08-07 — slot-H refill after 257 (P1C) escalated YES on both clauses:
+stage-V lift clause satisfied on paper AND a new obstruction independently closes the
+fluid route in H²(µ); 261 unblocked and promoted; DM recommendation drafted for the
+NEEDS-YOU packet; leg-178 ruling STILL not received
+
+**257 (P1C) escalated per its own yes-branch** (PR #19, `leg/257-p1c-v1`, not on main).
+Recorded at full strength:
+
+1. **The stage-V ban's lift clause is satisfied on paper.** Breden-Chu's H²(µ)
+   weighted-Sobolev space is a genuine namable fourth space: each of the three death
+   mechanisms (leg 54's Z₁ block-coupling; leg 56's (H,D) consistency defect; legs
+   163/176's origin-H² a=0 cap) evades AT THE MECHANISM LEVEL, each with its own locator,
+   not by analogy — measured Z₁ = 0.065136 in the new space against leg 54's 8.9591 and
+   leg 176's 140.72. 257 correctly does not lift on its own signature; the lift is the
+   user's, now pending in NEEDS-YOU.
+2. **A NEW, independent obstruction closes the FLUID route through this space anyway:**
+   the Leray projection provably leaves L²(µ) — an explicit divergence-free Gaussian
+   witness shows P[(u·∇)u] carries an algebraic |x|⁻⁴ tail whose coefficient IS the
+   energy (so it cannot vanish) while the space's own weight underflows to 0. This
+   CONFIRMS and STRENGTHENS leg 255's Li-Zhou kill and explicitly withdraws 255's own
+   concession that the kill might be rescuable. The fluid cell now has TWO independent
+   kills. Both findings are with 251's agent.
+
+**DM recommendation for the user's NEEDS-YOU packet (drafted per the orchestrator's
+invitation — a recommendation, not a decision):**
+
+> **On the lift: LIFT the stage-V ban per its own clause.** The clause's conditions are
+> met exactly as written (namable fourth space + its own scoping leg establishing
+> non-subjection, mechanism by mechanism, measured). Keeping a ban whose lift condition
+> has been honestly satisfied would convert it from a measurement into a superstition.
+> **But lift it with its practical value stated honestly in the same breath:** finding #2
+> means the lift does NOT reopen the fluid route through H²(µ) — that door is now closed
+> by two independent measurements, and 257 itself withdrew 255's rescuability concession.
+> What the lift buys: the machinery is legal again for NON-fluid targets (e.g., 255's two
+> non-fluid census survivors), for 256's in-flight reproduction, and for any FUTURE
+> space-modification proposal (a different weight evading the |x|⁻⁴-tail obstruction —
+> note the tail coefficient is the ENERGY, so polynomial reweighting looks structurally
+> doomed; any such proposal needs its own scoping leg either way).
+> **On Phase 1's target: no second decision is needed from you today.** This DM's
+> pre-committed re-posing moment ("when 257 lands") has arrived, but the honest
+> recommendation is to DEFER re-posing until 251 (Phase 0), 261 (the relaxed fluid
+> census, dispatching now), and 262 (the Pineau-Vicol window read) land — those three
+> determine what a fluid target even is before it is worth re-aiming Phase 1 at one.
+
+**Slot H: leg 261 (Route-P1A2) promoted — its own blocking condition ("NOT dispatchable
+until 257 lands") just cleared, and ranking rule (a) puts it first among dispatchables**
+(it feeds the user's eventual re-posing decision directly). **Brief addition, mandatory:**
+257 CONFIRMED and strengthened the Leray kill (explicit Gaussian witness, |x|⁻⁴ tail,
+energy coefficient) and withdrew 255's rescuability concession — 261's scope
+re-examination must incorporate 257's witness mechanism, not just 255's Li-Zhou screen,
+and its relaxed-tier candidates must each be checked against BOTH kills. Anti-pausing
+clause verbatim.
+
+**Leg-178 flag, SECOND notice:** the orchestrator again references "leg-178 dispatch
+instructions" as awaited, but the underlying ruling/text has still never reached this DM
+session — nothing to act on exists in this session's record. **Re-forward the ruling
+text itself; this DM will not respond to a ruling it has not seen.** Recorded twice now
+so the gap cannot be attributed to DM silence.
+
+**FLOOR-TABLE block updated in this same edit** (H: 257 → 261). **Floor status: 5/10
+strictly (262, 251, 236, 256, 261) — met with margin.**
+
+**Canonical reserve line: reserve count 9 — legs 228, 210, 260, 259, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 4 (228, 210, 260, 259 — 260's pre-committed
+promotion trigger stands, and its brief reads 253's and 257's reports); 229 blocked on
+226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg number: **263.**
+
+Nothing in this update lifts a ban — the stage-V lift is drafted as a RECOMMENDATION and
+sits with the user; 257's Z₁ = 0.065136 is recorded as a property of the fourth space,
+not as movement of any link (the same space's fluid application is closed by finding #2,
+and no output here is described as movement toward Clay). Clay stays ~0.05%. The one open
+direction question (re-posing Phase 1's target) is deliberately deferred with its trigger
+condition named: it ripens when 251, 261, and 262 have all landed.
