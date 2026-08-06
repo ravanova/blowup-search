@@ -1,0 +1,575 @@
+{
+  "leg": 80,
+  "route": "BHN",
+  "seed": 20260806,
+  "module_under_test": "solver/bordered_hl.py::BorderedHL.newton",
+  "module_edited": false,
+  "gate": "Under an adversarial battery (near-singular Jacobian at the starting iterate, NaN/Inf-poisoned initial guess, a residual sequence oscillating just above and below tolerance), does solver/bordered_hl.py's damped Newton solve ever incorrectly report convergence?",
+  "false_report_predicate": "converged is True AND (independently recomputed ||F(z_returned)||_inf >= tol OR z_returned non-finite)",
+  "baseline": {
+    "cases": [
+      {
+        "n": 101,
+        "N": 205,
+        "wall_s": 0.0634315013885498,
+        "sigma_min": 0.0004503825173074619,
+        "sigma_max": 27.868767395971503,
+        "cond": 61877.99553717219,
+        "null_direction_probes": [
+          {
+            "perturbation": 1e-06,
+            "residual": 1.1908196650978198e-10,
+            "residual_per_unit_error": 0.00011908196650978198
+          },
+          {
+            "perturbation": 0.001,
+            "residual": 1.254642085224411e-07,
+            "residual_per_unit_error": 0.0001254642085224411
+          },
+          {
+            "perturbation": 0.1,
+            "residual": 0.0006631049466474526,
+            "residual_per_unit_error": 0.006631049466474526
+          }
+        ],
+        "iterate_error_under_tol_1e-13": 8.39757714210955e-10,
+        "iterations": 16,
+        "final_residual": 7.424616477180734e-15,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": 0.125,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 7.424616477180734e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "n": 201,
+        "N": 405,
+        "wall_s": 0.2347872257232666,
+        "sigma_min": 0.00042796579191535316,
+        "sigma_max": 51.028730293849115,
+        "cond": 119235.53531106062,
+        "null_direction_probes": [
+          {
+            "perturbation": 1e-06,
+            "residual": 2.3336515705962846e-10,
+            "residual_per_unit_error": 0.00023336515705962846
+          },
+          {
+            "perturbation": 0.001,
+            "residual": 2.1779538600039117e-07,
+            "residual_per_unit_error": 0.00021779538600039117
+          },
+          {
+            "perturbation": 0.1,
+            "residual": 0.00018773173312856828,
+            "residual_per_unit_error": 0.0018773173312856828
+          }
+        ],
+        "iterate_error_under_tol_1e-13": 4.591465495959607e-10,
+        "iterations": 16,
+        "final_residual": 5.329070518200751e-15,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": 0.125,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 5.329070518200751e-15,
+        "returned_finite": true,
+        "false_report": false
+      }
+    ],
+    "roundoff_floor": {
+      "band_lo": 1.4432899320127035e-15,
+      "band_hi": 7.424616477180734e-15,
+      "rungs_in_band": 45,
+      "module_default_tol": 1e-13,
+      "decades_tol_above_floor": 1.1293259751617184
+    }
+  },
+  "near_singular": {
+    "cases": [
+      {
+        "amplitude_eps": 0.1,
+        "cond_at_start": 4019.621887119918,
+        "nullity_at_start": 0,
+        "linalgerror_raised": false,
+        "dist_to_root": 0.635464709134155,
+        "iterations": 40,
+        "final_residual": 0.4952854746219998,
+        "max_uphill_ratio": 1.1218913315723014,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 0.4952854746219998,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 0.01,
+        "cond_at_start": 47892.55592588052,
+        "nullity_at_start": 0,
+        "linalgerror_raised": false,
+        "dist_to_root": 0.22941478502596668,
+        "iterations": 40,
+        "final_residual": 0.0034794956226786855,
+        "max_uphill_ratio": 1.1263481145838863,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 0.0034794956226786855,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 0.0001,
+        "cond_at_start": 4963815.271493942,
+        "nullity_at_start": 0,
+        "linalgerror_raised": false,
+        "dist_to_root": 2.460650721185768,
+        "iterations": 40,
+        "final_residual": 0.6280279194862326,
+        "max_uphill_ratio": 1.069756761018206,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 0.6280279194862326,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 1e-06,
+        "cond_at_start": 496563498.9543646,
+        "nullity_at_start": 0,
+        "linalgerror_raised": false,
+        "dist_to_root": 4.760974732574704,
+        "iterations": 40,
+        "final_residual": 1.063000301753713,
+        "max_uphill_ratio": 10.674794671340553,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 1.063000301753713,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 1e-08,
+        "cond_at_start": 49656533065.784004,
+        "nullity_at_start": 0,
+        "linalgerror_raised": false,
+        "dist_to_root": 6.933693463325483,
+        "iterations": 40,
+        "final_residual": 0.7387831117934287,
+        "max_uphill_ratio": 1067.4872479759138,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 0.7387831117934287,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 1e-10,
+        "cond_at_start": 4965653524441.23,
+        "nullity_at_start": 2,
+        "linalgerror_raised": false,
+        "dist_to_root": 7.650180447519728,
+        "iterations": 40,
+        "final_residual": 3.132197183333205,
+        "max_uphill_ratio": 106748.73262581608,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 3.132197183333205,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 1e-13,
+        "cond_at_start": 4965653396398046.0,
+        "nullity_at_start": 3,
+        "linalgerror_raised": false,
+        "dist_to_root": 15.607089125046928,
+        "iterations": 40,
+        "final_residual": 1.0387297332803742,
+        "max_uphill_ratio": 106748732.70481649,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 1.0387297332803742,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "amplitude_eps": 0.0,
+        "cond_at_start": Infinity,
+        "nullity_at_start": 3,
+        "linalgerror_raised": true,
+        "dist_to_root": 1.6311821812695608,
+        "iterations": 0,
+        "final_residual": 0.9459594689067654,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": null,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 0.9459594689067654,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "vanishing_transport_scale": 0.01,
+        "cond_at_start": 42522.600658028234,
+        "nullity_at_start": 0,
+        "dist_to_root": 39.786143776941515,
+        "iterations": 40,
+        "final_residual": 3.2844528881978325,
+        "max_uphill_ratio": 37.769480102097205,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 3.2844528881978325,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "vanishing_transport_scale": 1e-05,
+        "cond_at_start": 42608836.97339949,
+        "nullity_at_start": 0,
+        "dist_to_root": 16.30745025093575,
+        "iterations": 40,
+        "final_residual": 24.68548280757622,
+        "max_uphill_ratio": 14.706563631209788,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 24.68548280757622,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "vanishing_transport_scale": 1e-08,
+        "cond_at_start": 42608703286.46753,
+        "nullity_at_start": 0,
+        "dist_to_root": 115.35140910610254,
+        "iterations": 40,
+        "final_residual": 7.499138688350868,
+        "max_uphill_ratio": 3972.9783338434263,
+        "lambda_min": 0.0009765625,
+        "lambda_collapsed": true,
+        "cond_array_len": 0,
+        "converged": false,
+        "recheck_residual": 7.499138688350868,
+        "returned_finite": true,
+        "false_report": false
+      }
+    ]
+  },
+  "poisoned_initial": {
+    "cases_run": 231,
+    "converged_true": 0,
+    "false_reports": [],
+    "nonfinite_returned_iterates": 222,
+    "slots_swept": 37,
+    "N": 205
+  },
+  "oscillation": {
+    "starts_scanned": 148,
+    "dips_found": 8,
+    "false_reports": [],
+    "dips": [
+      {
+        "dip_index": 21,
+        "dip_residual": 1.304512053934559e-15,
+        "next_residual": 2.220446049250313e-15,
+        "rise_ratio": 1.702127659574468,
+        "tol_placed": 1.7019396688362377e-15,
+        "sigma_min_at_returned": 0.0004503825173073207,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.6792123247455493e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 20,
+        "dip_residual": 1.4710455076283324e-15,
+        "next_residual": 1.4988010832439613e-15,
+        "rise_ratio": 1.0188679245283019,
+        "tol_placed": 1.4848584445442965e-15,
+        "sigma_min_at_returned": 0.00045038251730697204,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.4779844015322396e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 13,
+        "dip_residual": 1.3183898417423734e-15,
+        "next_residual": 1.7208456881689926e-15,
+        "rise_ratio": 1.305263157894737,
+        "tol_placed": 1.5062355308809322e-15,
+        "sigma_min_at_returned": 0.0004503825173069542,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.3183898417423734e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 33,
+        "dip_residual": 7.91033905045424e-16,
+        "next_residual": 1.2212453270876722e-15,
+        "rise_ratio": 1.543859649122807,
+        "tol_placed": 9.828766250677842e-16,
+        "sigma_min_at_returned": 0.0007233261803088804,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 7.91033905045424e-16,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 37,
+        "dip_residual": 1.3322676295501878e-15,
+        "next_residual": 2.1094237467877974e-15,
+        "rise_ratio": 1.5833333333333333,
+        "tol_placed": 1.6764000044290905e-15,
+        "sigma_min_at_returned": 0.000450382517306662,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.4155343563970746e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 27,
+        "dip_residual": 1.609823385706477e-15,
+        "next_residual": 1.9984014443252818e-15,
+        "rise_ratio": 1.2413793103448276,
+        "tol_placed": 1.793620188084545e-15,
+        "sigma_min_at_returned": 0.0004503825173081034,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.609823385706477e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 11,
+        "dip_residual": 1.5543122344752192e-15,
+        "next_residual": 1.8041124150158794e-15,
+        "rise_ratio": 1.1607142857142858,
+        "tol_placed": 1.6745608376609718e-15,
+        "sigma_min_at_returned": 0.0004503825173060065,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.5543122344752192e-15,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "dip_index": 22,
+        "dip_residual": 1.4016565685892601e-15,
+        "next_residual": 1.9984014443252818e-15,
+        "rise_ratio": 1.4257425742574257,
+        "tol_placed": 1.6736404963781187e-15,
+        "sigma_min_at_returned": 0.0004503825173066941,
+        "nullity_at_returned": 0,
+        "converged": true,
+        "recheck_residual": 1.4016565685892601e-15,
+        "returned_finite": true,
+        "false_report": false
+      }
+    ]
+  },
+  "degenerate_root": {
+    "cases": [
+      {
+        "constants_in": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "constants_out": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sigma_min_at_returned": 0.0,
+        "nullity_at_returned": 102,
+        "N": 205,
+        "iterations": 0,
+        "final_residual": 0.0,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": null,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 0.0,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "constants_in": [
+          1.06,
+          -0.42,
+          0.077
+        ],
+        "constants_out": [
+          1.06,
+          -0.42,
+          0.077
+        ],
+        "sigma_min_at_returned": 0.0,
+        "nullity_at_returned": 3,
+        "N": 205,
+        "iterations": 0,
+        "final_residual": 0.0,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": null,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 0.0,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "constants_in": [
+          1000000.0,
+          1000000.0,
+          1000000.0
+        ],
+        "constants_out": [
+          1000000.0,
+          1000000.0,
+          1000000.0
+        ],
+        "sigma_min_at_returned": 0.0,
+        "nullity_at_returned": 3,
+        "N": 205,
+        "iterations": 0,
+        "final_residual": 0.0,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": null,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 0.0,
+        "returned_finite": true,
+        "false_report": false
+      },
+      {
+        "constants_in": [
+          -3.7,
+          91.2,
+          -0.5
+        ],
+        "constants_out": [
+          -3.7,
+          91.2,
+          -0.5
+        ],
+        "sigma_min_at_returned": 0.0,
+        "nullity_at_returned": 3,
+        "N": 205,
+        "iterations": 0,
+        "final_residual": 0.0,
+        "max_uphill_ratio": 1.0,
+        "lambda_min": null,
+        "lambda_collapsed": false,
+        "cond_array_len": 0,
+        "converged": true,
+        "recheck_residual": 0.0,
+        "returned_finite": true,
+        "false_report": false
+      }
+    ],
+    "note": "residual is EXACTLY zero, so this is NOT a false report under the gate's strict reading; it is converged=True at a point where DF is exactly singular and the returned constants are whatever was passed in"
+  },
+  "lambda_collapse": {
+    "runs": 80,
+    "lambda_collapse_runs": 78,
+    "converged_runs": 1,
+    "worst_uphill_ratio": 279805.362581441,
+    "worst_case": {
+      "iterations": 40,
+      "final_residual": 3306.0208001705737,
+      "max_uphill_ratio": 279805.362581441,
+      "lambda_min": 0.0009765625,
+      "lambda_collapsed": true,
+      "cond_array_len": 0,
+      "converged": false,
+      "recheck_residual": 3306.0208001705737,
+      "returned_finite": true,
+      "false_report": false
+    },
+    "false_reports": [],
+    "note": "an uphill step is ACCEPTED whenever the backtracking budget is exhausted; the only trace left in the returned history is lambda == 1/1024"
+  },
+  "criterion_scope": {
+    "rootless_residual": {
+      "tol": 1e-12,
+      "returned_x": 28.0,
+      "residual_at_return": 6.914400106940203e-13,
+      "root_exists": false,
+      "iterations": 28,
+      "final_residual": 6.914400106940203e-13,
+      "max_uphill_ratio": 1.0,
+      "lambda_min": 1.0,
+      "lambda_collapsed": false,
+      "cond_array_len": 0,
+      "converged": true
+    },
+    "poisoned_tol": [
+      {
+        "tol": "inf",
+        "converged": true,
+        "final_residual": 0.797262349908046,
+        "iterations": 1
+      },
+      {
+        "tol": "nan",
+        "converged": false,
+        "final_residual": 0.02760263241544708,
+        "iterations": 5
+      }
+    ]
+  },
+  "reporting_surface": {
+    "cond_array_lengths": [
+      0,
+      0,
+      0
+    ],
+    "vacuous_all_guard_on_empty": true,
+    "N": 205,
+    "solve_seconds_thread_pinned": 0.0019575119018554687,
+    "threads_pinned_to": "1",
+    "note": "cond is advertised in the returned history and never populated; the solve timing is recorded because on a 12-core host the same solve costs ~1.0 s unpinned, a ~1200x BLAS-threading penalty that is an ENVIRONMENT effect, not a solver property"
+  },
+  "gate_answer": {
+    "cases_on_the_modules_own_system": 336,
+    "false_reports": 0,
+    "detail": [],
+    "answer": "NO",
+    "strict_reading": "no case in which converged=True while the independently recomputed residual was at or above tol, or while the returned iterate was non-finite",
+    "weaker_reading_measured_not_gated": "converged=True DOES occur at points where DF is exactly singular (family degenerate_root): residual exactly 0.0, nullity 3, and the three gauge constants come out equal to whatever went in",
+    "scope_limited_counterexample": "the same production loop, driven on a rootless residual (family criterion_scope), reports converged=True for a system with no solution; that is the residual criterion's documented limitation (novelty pass Q1/Q2) exercised through this code path, NOT a defect of the bordered system's F"
+  },
+  "wall_seconds": 46.821773052215576
+}
