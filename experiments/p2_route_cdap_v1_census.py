@@ -639,6 +639,25 @@ HAND_ADJUDICATED = {
         "inequality `holds` tests, and its companion `slack` is min'd at "
         "p2_route_ngx_v1_general.py:384.  Maximally wired.  This hit is why the wiring "
         "check now scans solver/ as well as the runner."),
+    # ---- leg 237 (Route-SIRC), landed mid-flight; same audit family as this leg.
+    # Its JSON is a CALIBRATION LOG: rows carrying `converged: true` beside a wrecked
+    # diagnostic are the positives it deliberately banked to grade the blind spot, and
+    # each such row carries its own `escaped: true` flag stating so.  A positive verdict
+    # beside a bad number here is the artifact's subject, not a signal it overlooked.
+    ("p2_route_sirc_v1_census.json", "c_relative_error"): (
+        "DISMISS-PROBE-RECORD",
+        "G3b_profile_newton_calibration is the KNOWN POSITIVE, re-run by leg 237 on "
+        "purpose: c_relative_error = 1.2307e4 and 6.1534e5 beside converged = true is "
+        "the demonstration, and both rows carry escaped = true in the same record.  "
+        "Leg 237's own gate answers YES on it."),
+    ("p2_route_sirc_v1_census.json", "gauge0_defect"): (
+        "DISMISS-PROBE-RECORD", "same calibration log; the defect is the exhibit."),
+    ("p2_route_sirc_v1_census.json", "gauge1_defect"): (
+        "DISMISS-PROBE-RECORD", "same calibration log; the defect is the exhibit."),
+    ("p2_route_sirc_v1_census.json", "residual_rms"): (
+        "DISMISS-PROBE-RECORD",
+        "same calibration log; the whole point of leg 237's gate is that this residual "
+        "is scale-invariant and therefore uninformative, which is what its spread shows."),
     ("p2_route_cp_v1_cadiot.json", "row_sum_max"): (
         "DISMISS-SCALE",
         "R-SELECT's budget-name heuristic mis-took `s_required` for a budget on row sums. "

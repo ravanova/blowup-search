@@ -42,13 +42,13 @@
   ]
  },
  "coverage": {
-  "json_files_scanned": 192,
+  "json_files_scanned": 196,
   "json_files_unreadable": [],
-  "dicts_walked": 25181,
-  "lists_walked": 15005,
-  "positive_verdicts_seen": 4278,
-  "files_carrying_a_positive_verdict": 127,
-  "verdicts_in_reach_of_some_rule": 3964,
+  "dicts_walked": 25514,
+  "lists_walked": 15133,
+  "positive_verdicts_seen": 4320,
+  "files_carrying_a_positive_verdict": 131,
+  "verdicts_in_reach_of_some_rule": 4002,
   "verdicts_structurally_out_of_reach": 162,
   "reach_note": "a positive verdict with no numeric sibling in its own record and no joinable sibling list cannot be spoken about by ANY rule here.  The census is SILENT about those, not clearing them: they are the named limit of this NO."
  },
@@ -111,13 +111,13 @@
   "scope_caveat_stated_plainly": "it is in the SAME runner leg 202 already escalated.  Zero instances were found in any of the other 191 banked JSONs.  A reviewer who scopes the gate's 'every other banked headline verdict' by ARTIFACT rather than by VERDICT should read this leg's answer as NO-plus-a-sharpening of 202; the leg reports it as YES because the gate's unit is the verdict, and because the repair already dispatched for 202 does not touch this one."
  },
  "screen": {
-  "raw_screened_records": 709,
-  "after_dedupe": 189,
-  "screened_hits_excluding_control": 180,
+  "raw_screened_records": 730,
+  "after_dedupe": 199,
+  "screened_hits_excluding_control": 190,
   "by_classification": {
    "DISMISS-INPUT-VARIABLE": 6,
-   "DISMISS-WIRED": 91,
-   "DISMISS-PROBE-RECORD": 60,
+   "DISMISS-WIRED": 93,
+   "DISMISS-PROBE-RECORD": 68,
    "DISMISS-UNRELATED": 1,
    "DISMISS-SCALE": 2,
    "DISMISS-INTENDED": 19,
@@ -4137,6 +4137,46 @@
    "reason": "the artifact is an adversarial/audit/repair probe log; a positive verdict beside a bad diagnostic here is the defect the audit leg deliberately banked, not a headline verdict this repository trusts"
   },
   {
+   "file": "p2_route_pcrs_v1_verification.json",
+   "path": "/G2_order_immune_vs_published/L3_stall_verdicts[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_agrees",
+   "verdict_value": true,
+   "diagnostic": "published_residual_gain",
+   "diag_value": 9.724453522207629,
+   "limit": 1.0,
+   "n_duplicate_records": 4,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_pcrs_v1_verification.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": false,
+   "reason": "the artifact is an adversarial/audit/repair probe log; a positive verdict beside a bad diagnostic here is the defect the audit leg deliberately banked, not a headline verdict this repository trusts"
+  },
+  {
+   "file": "p2_route_pcrs_v1_verification.json",
+   "path": "/G2_order_immune_vs_published/L3_stall_verdicts[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_agrees",
+   "verdict_value": true,
+   "diagnostic": "order_immune_residual_gain",
+   "diag_value": 9.724453522207629,
+   "limit": 1.0,
+   "n_duplicate_records": 4,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_pcrs_v1_verification.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": false,
+   "reason": "the artifact is an adversarial/audit/repair probe log; a positive verdict beside a bad diagnostic here is the defect the audit leg deliberately banked, not a headline verdict this repository trusts"
+  },
+  {
    "file": "p2_route_port_v1_bordered.json",
    "path": "/D_certificate/sweep[26]",
    "rule": "R-SELECT",
@@ -4650,6 +4690,176 @@
    "reason": "the opposite of the shape.  p2_route_sdm_v1_mapping.py:229-238 places the 20.4734 shortfall inside a block named `do_they_disagree` whose own `reading` field states it in words ('still reports 20.4734 where it must be under 1').  The sibling `gate_survives_renormalisation` is about whether TC8's gate survives renormalisation -- and it survives BECAUSE the shortfall is 20.47, not despite it.  The diagnostic is the headline, not a signal that was ignored."
   },
   {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[]",
+   "rule": "R-SPREAD",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "n_positive_rows": 4,
+   "diagnostic": "gauge0_defect",
+   "diag_min": 3.3306690738754696e-16,
+   "diag_max": 999.0,
+   "spread_decades": 18.477034003697323,
+   "n_duplicate_records": 1,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "same calibration log; the defect is the exhibit."
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[]",
+   "rule": "R-SPREAD",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "n_positive_rows": 4,
+   "diagnostic": "gauge_defect_sup",
+   "diag_min": 3.3306690738754696e-16,
+   "diag_max": 999.0,
+   "spread_decades": 18.477034003697323,
+   "n_duplicate_records": 1,
+   "wiring": "WIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py",
+     "line": 155,
+     "text": "bad = [x for x in rows if x[\"verdict_converged\"] and x[\"gauge_defect_sup\"] > 1e-8]"
+    }
+   ],
+   "classification": "DISMISS-WIRED",
+   "adjudicated_by_hand": false,
+   "reason": "the diagnostic reaches a comparison in the producing runner, so the verdict is not blind to it: 1 decisional site(s)"
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[]",
+   "rule": "R-SPREAD",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "n_positive_rows": 4,
+   "diagnostic": "residual_rms",
+   "diag_min": 1.777986867788154e-14,
+   "diag_max": 3.499755311166516e-08,
+   "spread_decades": 6.294109132339209,
+   "n_duplicate_records": 1,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "same calibration log; the whole point of leg 237's gate is that this residual is scale-invariant and therefore uninformative, which is what its spread shows."
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "diagnostic": "c_relative_error",
+   "diag_value": 999.0,
+   "limit": 1.0,
+   "n_duplicate_records": 2,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "G3b_profile_newton_calibration is the KNOWN POSITIVE, re-run by leg 237 on purpose: c_relative_error = 1.2307e4 and 6.1534e5 beside converged = true is the demonstration, and both rows carry escaped = true in the same record.  Leg 237's own gate answers YES on it."
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "diagnostic": "gauge0_defect",
+   "diag_value": -999.0,
+   "limit": 1.0,
+   "n_duplicate_records": 2,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "same calibration log; the defect is the exhibit."
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "diagnostic": "gauge1_defect",
+   "diag_value": -499.5,
+   "limit": 1.0,
+   "n_duplicate_records": 2,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "same calibration log; the defect is the exhibit."
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G2_escaped_member/rows[3]",
+   "rule": "R-MAGN",
+   "verdict_key": "verdict_converged",
+   "verdict_value": true,
+   "diagnostic": "gauge_defect_sup",
+   "diag_value": 999.0,
+   "limit": 1.0,
+   "n_duplicate_records": 2,
+   "wiring": "WIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py",
+     "line": 155,
+     "text": "bad = [x for x in rows if x[\"verdict_converged\"] and x[\"gauge_defect_sup\"] > 1e-8]"
+    }
+   ],
+   "classification": "DISMISS-WIRED",
+   "adjudicated_by_hand": false,
+   "reason": "the diagnostic reaches a comparison in the producing runner, so the verdict is not blind to it: 1 decisional site(s)"
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "path": "/G3b_profile_newton_calibration/rows[1]",
+   "rule": "R-MAGN",
+   "verdict_key": "converged",
+   "verdict_value": true,
+   "diagnostic": "c_relative_error",
+   "diag_value": 615335.8552701124,
+   "limit": 1.0,
+   "n_duplicate_records": 2,
+   "wiring": "UNWIRED",
+   "wiring_evidence": [
+    {
+     "runner": "experiments/p2_route_sirc_v1_census.py"
+    }
+   ],
+   "classification": "DISMISS-PROBE-RECORD",
+   "adjudicated_by_hand": true,
+   "reason": "G3b_profile_newton_calibration is the KNOWN POSITIVE, re-run by leg 237 on purpose: c_relative_error = 1.2307e4 and 6.1534e5 beside converged = true is the demonstration, and both rows carry escaped = true in the same record.  Leg 237's own gate answers YES on it."
+  },
+  {
    "file": "p2_route_tnb_v1_postrepair.json",
    "path": "/B2_boundary/rows[]",
    "rule": "R-SPREAD",
@@ -5104,6 +5314,15 @@
    "verdicts_out_of_reach": 0
   },
   {
+   "file": "p2_route_bhr_v1_repair.json",
+   "dicts": 90,
+   "lists": 67,
+   "positive_verdicts_seen": 3,
+   "screened_hits": 0,
+   "verdicts_in_reach": 3,
+   "verdicts_out_of_reach": 0
+  },
+  {
    "file": "p2_route_boa_v1_adversarial.json",
    "dicts": 243,
    "lists": 14,
@@ -5443,6 +5662,15 @@
    "positive_verdicts_seen": 4,
    "screened_hits": 0,
    "verdicts_in_reach": 4,
+   "verdicts_out_of_reach": 0
+  },
+  {
+   "file": "p2_route_dfl2_v1_lit.json",
+   "dicts": 42,
+   "lists": 13,
+   "positive_verdicts_seen": 1,
+   "screened_hits": 0,
+   "verdicts_in_reach": 1,
    "verdicts_out_of_reach": 0
   },
   {
@@ -6202,6 +6430,15 @@
    "verdicts_out_of_reach": 0
   },
   {
+   "file": "p2_route_pcrs_v1_verification.json",
+   "dicts": 94,
+   "lists": 36,
+   "positive_verdicts_seen": 7,
+   "screened_hits": 8,
+   "verdicts_in_reach": 6,
+   "verdicts_out_of_reach": 0
+  },
+  {
    "file": "p2_route_pgf_v1_ledger_audit.json",
    "dicts": 54,
    "lists": 143,
@@ -6254,6 +6491,15 @@
    "screened_hits": 1,
    "verdicts_in_reach": 3,
    "verdicts_out_of_reach": 1
+  },
+  {
+   "file": "p2_route_sirc_v1_census.json",
+   "dicts": 107,
+   "lists": 12,
+   "positive_verdicts_seen": 31,
+   "screened_hits": 13,
+   "verdicts_in_reach": 28,
+   "verdicts_out_of_reach": 0
   },
   {
    "file": "p2_route_sua_v1_adversarial.json",
