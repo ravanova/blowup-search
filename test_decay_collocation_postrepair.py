@@ -344,12 +344,18 @@ def check_lesson90_pre_repair_control():
     # Pinning it to the JSON bitwise would make this suite fail on any machine whose LAPACK
     # rounds the 16x16 inverse differently -- a statement about the build, not about the repair.
     g3v = _value(g3["G3c_pipeline_1.5+0.3j"])
-    assert g3v == G3_PIPELINE_VALUE_LIVE, (
-        f"CONTROL: G3 end-to-end pre-repair value moved: {g3v!r} != {G3_PIPELINE_VALUE_LIVE!r}")
+    assert isinstance(g3v, float) and np.isfinite(g3v), (
+        f"CONTROL: pre-repair G3 must return an ordinary finite float, got {g3v!r}")
     drift = abs(g3v - G3_PIPELINE_VALUE_LEG115_JSON) / abs(G3_PIPELINE_VALUE_LEG115_JSON)
+    # Deliberately a tolerance and NOT a bitwise pin. The bitwise value on the box this leg ran
+    # on is G3_PIPELINE_VALUE_LIVE, but it passes through np.linalg.inv on a 16x16 -- LAPACK --
+    # so pinning it exactly would make this suite fail on a different library build. That would
+    # be a statement about the build, not about the repair. 1e-14 is ~45 ULP of headroom around
+    # the 1 ULP actually observed, which still catches any real change of behaviour.
     assert drift < 1e-14, (
         f"CONTROL: pre-repair G3 value has drifted {drift:.3e} from leg 115's banked "
-        f"{G3_PIPELINE_VALUE_LEG115_JSON!r} -- more than the 1 ULP this suite documents.")
+        f"{G3_PIPELINE_VALUE_LEG115_JSON!r} -- far beyond the 1 ULP this suite documents.")
+    bitwise_matches_this_box = (g3v == G3_PIPELINE_VALUE_LIVE)
 
     n_total = len(g1) + len(g2) + len(g3)
     return {"n_cases": n_total, "pre_repair_silent": n_silent,
@@ -357,7 +363,8 @@ def check_lesson90_pre_repair_control():
             "J1_collapse_reproduced": J1_COLLAPSE_VALUE,
             "G2_axis_swap_reproduced": G2_WORKED_FLAT_WRONG,
             "G3_pipeline_live": g3v,
-            "G3_json_drift_rel": drift}
+            "G3_json_drift_rel": drift,
+            "G3_bitwise_matches_reference_box": bitwise_matches_this_box}
 
 
 def check_zero_regression_bitwise():

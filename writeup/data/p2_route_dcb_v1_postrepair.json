@@ -1,0 +1,1461 @@
+{
+  "leg": 167,
+  "route": "DCB",
+  "branch": "leg/167-dcb-v1",
+  "date": "2026-08-06",
+  "module_under_check": "solver/decay_collocation.py",
+  "module_edited_by_this_leg": false,
+  "closes": "leg 151 (Route-DCR), which repaired leg 115's (Route-DCA) three findings",
+  "gate": "Post-repair, does solver/decay_collocation.py (a) reject or correctly flag every one of leg 115's original 3 failing cases in an independent re-run, and (b) reproduce every previously-validated result bit-identically?",
+  "refs": {
+    "pre_repair": "a595dcb",
+    "repair": "746c57a",
+    "leg115_battery_and_runner": "53f03fe",
+    "pre_repair_source_sha256": "fdd816e95a3f1372f2930a75e47681dbdf3a39ca9e6e908d267e626a5638719e",
+    "note": "git log --oneline main -- solver/decay_collocation.py returns exactly two commits, so the pre/post boundary needs no judgement call."
+  },
+  "clause_a_reject_or_flag": {
+    "summary": {
+      "post_repair": {
+        "G1": {
+          "n": 32,
+          "REFUSED": 32,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 0
+        },
+        "G2": {
+          "n": 31,
+          "REFUSED": 31,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 0
+        },
+        "G3": {
+          "n": 13,
+          "REFUSED": 13,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 0
+        },
+        "ALL": {
+          "n": 76,
+          "REFUSED": 76,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 0
+        }
+      },
+      "pre_repair_control": {
+        "G1": {
+          "n": 32,
+          "REFUSED": 0,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 32
+        },
+        "G2": {
+          "n": 31,
+          "REFUSED": 0,
+          "FLAGGED": 0,
+          "SILENT_VALUE": 31
+        },
+        "G3": {
+          "n": 13,
+          "REFUSED": 0,
+          "FLAGGED": 13,
+          "SILENT_VALUE": 0
+        },
+        "ALL": {
+          "n": 76,
+          "REFUSED": 0,
+          "FLAGGED": 13,
+          "SILENT_VALUE": 63
+        }
+      }
+    },
+    "lesson90_control": {
+      "pre_repair_silent_values": 63,
+      "post_repair_silent_values": 0,
+      "pre_repair_refused": 0,
+      "post_repair_refused": 76,
+      "pre_reproduces_leg115_J1_value": true,
+      "pre_reproduces_leg115_G2_worked_flat": true,
+      "pre_G3_pipeline_live": 3.562611185971488,
+      "pre_G3_pipeline_leg115_json": 3.5626111859714866,
+      "pre_G3_pipeline_relative_drift": 3.7395818965489845e-16,
+      "pre_G3_pipeline_bitwise_equal_to_json": false,
+      "pre_reproduces_leg115_G3_pipeline_to_tolerance": true,
+      "VOID_unless_pre_repair_did_not_refuse": true,
+      "comparison_can_come_out_differently": true
+    },
+    "g3_pre_repair_under_production_warning_filters": {
+      "default": {
+        "n_calls": 6,
+        "n_warnings_surfaced": 1,
+        "all_returned_ordinary_finite_float": true,
+        "n_exceptions": 0
+      },
+      "always": {
+        "n_calls": 6,
+        "n_warnings_surfaced": 6,
+        "all_returned_ordinary_finite_float": true,
+        "n_exceptions": 0
+      },
+      "ignore": {
+        "n_calls": 6,
+        "n_warnings_surfaced": 0,
+        "all_returned_ordinary_finite_float": true,
+        "n_exceptions": 0
+      }
+    },
+    "residue_silent_after_repair": {},
+    "refusal_exception_types": {
+      "DecayCollocationDomainError": 76
+    },
+    "no_over_refusal_probes": {
+      "G2_column_spelling_3x1": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 10.0,
+        "warnings": []
+      },
+      "G3_real_alpha_float": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9993975466275532,
+        "warnings": []
+      },
+      "G3_real_alpha_int": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0000000000000098,
+        "warnings": []
+      },
+      "G3_real_alpha_np.float64": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9993975466275532,
+        "warnings": []
+      },
+      "G3_real_alpha_np.int64": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0000000000000098,
+        "warnings": []
+      },
+      "G1_ordinary_J2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0823922002923938,
+        "warnings": []
+      },
+      "G1_ordinary_J8": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 3.35900151850748,
+        "warnings": []
+      },
+      "G1_ordinary_J16": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 3.5131375411999377,
+        "warnings": []
+      }
+    },
+    "per_case_post": {
+      "G1a_J1_c=0.0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=0.5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=1.0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=100.0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=-50.0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=1000000.0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=nan": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=inf": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1a_J1_c=-inf": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1b_J1_om=nan": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1b_J1_om=+inf": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1b_J1_om=-inf": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1c_J1_drop=0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1c_J1_drop=1": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1c_J1_drop=-1": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1c_J1_drop=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1c_J1_drop=100": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1d_J1_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1d_J1_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.0_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.0_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.5_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.5_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=1.5_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=1.5_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=2.0_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=2.0_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=3.0_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=3.0_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=-1.0_gauge=origin": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1e_J1_alpha=-1.0_gauge=a0": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G1f_J1_gauged_jacobian_rows": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "gauged_jacobian: J = 1 leaves 0 collocation rows after the gauge row replaces one, so the returned system is the gauge row ALONE -- it depends on neither `om` nor `c`, and every input (including NaN/I",
+        "value": null,
+        "warnings": []
+      },
+      "G2a_worked_case_flat_3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand00_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand01_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand02_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand03_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand04_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand05_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand06_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand07_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand08_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand09_n=2": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 2) (as passed: ndim 1, shape (2,)) but the weights require exactly (2, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand10_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand11_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand12_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand13_n=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 5) (as passed: ndim 1, shape (5,)) but the weights require exactly (5, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand14_n=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 5) (as passed: ndim 1, shape (5,)) but the weights require exactly (5, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand15_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand16_n=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 5) (as passed: ndim 1, shape (5,)) but the weights require exactly (5, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand17_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand18_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand19_n=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 5) (as passed: ndim 1, shape (5,)) but the weights require exactly (5, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand20_n=6": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 6) (as passed: ndim 1, shape (6,)) but the weights require exactly (6, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand21_n=5": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 5) (as passed: ndim 1, shape (5,)) but the weights require exactly (5, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand22_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand23_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand24_n=2": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 2) (as passed: ndim 1, shape (2,)) but the weights require exactly (2, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand25_n=2": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 2) (as passed: ndim 1, shape (2,)) but the weights require exactly (2, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand26_n=2": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 2) (as passed: ndim 1, shape (2,)) but the weights require exactly (2, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand27_n=2": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 2) (as passed: ndim 1, shape (2,)) but the weights require exactly (2, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand28_n=4": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 4) (as passed: ndim 1, shape (4,)) but the weights require exactly (4, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G2b_rand29_n=3": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "sup_op_norm: A has shape (1, 3) (as passed: ndim 1, shape (3,)) but the weights require exactly (3, 1) = (len(w_dom), len(w_cod)). Rows of A are domain slots and columns are codomain slots; a 1-D A is",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(1+0j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (1+0j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by floa",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=(1+0j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got (1+0j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by fl",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(1.5+1e-10j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (1.5+1e-10j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated b",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=(1.5+1e-10j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got (1.5+1e-10j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(1.5+0.1j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (1.5+0.1j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by ",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=(1.5+0.1j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got (1.5+0.1j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated b",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(1.5+1j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (1.5+1j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by fl",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=(1.5+1j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got (1.5+1j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by ",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=1j": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got 1j. The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by float() ",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=1j": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got 1j. The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by float(",
+        "value": null,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(-1+2j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (-1+2j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by flo",
+        "value": null,
+        "warnings": []
+      },
+      "G3b_norm_codomain_alpha=(-1+2j)": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_codomain: alpha must be real, got (-1+2j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by f",
+        "value": null,
+        "warnings": []
+      },
+      "G3c_full_pipeline_alpha=1.5+0.3j": {
+        "outcome": "REFUSED",
+        "exc_type": "DecayCollocationDomainError",
+        "exc_msg": "Collocation.w_domain: alpha must be real, got (1.5+0.3j). The decay class is X^{-alpha} and the weight (1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is silently truncated by ",
+        "value": null,
+        "warnings": []
+      }
+    },
+    "per_case_pre": {
+      "G1a_J1_c=0.0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=0.5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=1.0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=100.0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=-50.0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=1000000.0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=nan": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=inf": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1a_J1_c=-inf": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1b_J1_om=nan": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1b_J1_om=+inf": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1b_J1_om=-inf": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1c_J1_drop=0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1c_J1_drop=1": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1c_J1_drop=-1": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1c_J1_drop=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1c_J1_drop=100": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1d_J1_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1d_J1_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.0_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.0_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.5_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.189207115002721,
+        "warnings": []
+      },
+      "G1e_J1_alpha=0.5_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.189207115002721,
+        "warnings": []
+      },
+      "G1e_J1_alpha=1.5_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1e_J1_alpha=1.5_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.681792830507429,
+        "warnings": []
+      },
+      "G1e_J1_alpha=2.0_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.9999999999999998,
+        "warnings": []
+      },
+      "G1e_J1_alpha=2.0_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.9999999999999998,
+        "warnings": []
+      },
+      "G1e_J1_alpha=3.0_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 2.82842712474619,
+        "warnings": []
+      },
+      "G1e_J1_alpha=3.0_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 2.82842712474619,
+        "warnings": []
+      },
+      "G1e_J1_alpha=-1.0_gauge=origin": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.7071067811865476,
+        "warnings": []
+      },
+      "G1e_J1_alpha=-1.0_gauge=a0": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.7071067811865476,
+        "warnings": []
+      },
+      "G1f_J1_gauged_jacobian_rows": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.0,
+        "warnings": []
+      },
+      "G2a_worked_case_flat_3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 12.0,
+        "warnings": []
+      },
+      "G2b_rand00_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 47.863530574525136,
+        "warnings": []
+      },
+      "G2b_rand01_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 19.277669375195686,
+        "warnings": []
+      },
+      "G2b_rand02_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 27.794779542182454,
+        "warnings": []
+      },
+      "G2b_rand03_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 76.78408422441441,
+        "warnings": []
+      },
+      "G2b_rand04_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 26.933051284845725,
+        "warnings": []
+      },
+      "G2b_rand05_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 47.406707712345025,
+        "warnings": []
+      },
+      "G2b_rand06_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 57.79825146168851,
+        "warnings": []
+      },
+      "G2b_rand07_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 48.55524106875862,
+        "warnings": []
+      },
+      "G2b_rand08_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 11.398278114887471,
+        "warnings": []
+      },
+      "G2b_rand09_n=2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 17.66709586993359,
+        "warnings": []
+      },
+      "G2b_rand10_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 38.88811777221653,
+        "warnings": []
+      },
+      "G2b_rand11_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 67.48803859550627,
+        "warnings": []
+      },
+      "G2b_rand12_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 21.085994560248594,
+        "warnings": []
+      },
+      "G2b_rand13_n=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 24.45548079585533,
+        "warnings": []
+      },
+      "G2b_rand14_n=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 52.25023164713173,
+        "warnings": []
+      },
+      "G2b_rand15_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 23.496336630382288,
+        "warnings": []
+      },
+      "G2b_rand16_n=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 61.59567962948538,
+        "warnings": []
+      },
+      "G2b_rand17_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 30.109430037214807,
+        "warnings": []
+      },
+      "G2b_rand18_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 40.18186996907275,
+        "warnings": []
+      },
+      "G2b_rand19_n=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 35.075791199280175,
+        "warnings": []
+      },
+      "G2b_rand20_n=6": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 50.42676969476569,
+        "warnings": []
+      },
+      "G2b_rand21_n=5": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 23.09863902532646,
+        "warnings": []
+      },
+      "G2b_rand22_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 56.068931191063285,
+        "warnings": []
+      },
+      "G2b_rand23_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 32.53764260492016,
+        "warnings": []
+      },
+      "G2b_rand24_n=2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 19.80062346473806,
+        "warnings": []
+      },
+      "G2b_rand25_n=2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 21.850872693778925,
+        "warnings": []
+      },
+      "G2b_rand26_n=2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 3.123522730359423,
+        "warnings": []
+      },
+      "G2b_rand27_n=2": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 17.45387122297897,
+        "warnings": []
+      },
+      "G2b_rand28_n=4": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 41.88089651383935,
+        "warnings": []
+      },
+      "G2b_rand29_n=3": {
+        "outcome": "SILENT_VALUE",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 37.92795786250988,
+        "warnings": []
+      },
+      "G3a_norm_domain_alpha=(1+0j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9987954562051724,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=(1+0j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.0000000000000098,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3a_norm_domain_alpha=(1.5+1e-10j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9993975466275532,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=(1.5+1e-10j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 4.514423135584042,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3a_norm_domain_alpha=(1.5+0.1j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9993975393685521,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=(1.5+0.1j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 4.310846817343481,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3a_norm_domain_alpha=(1.5+1j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9993968207275311,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=(1.5+1j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 1.1256596493934556,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3a_norm_domain_alpha=1j": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9975916387472489,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=1j": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9987947307424713,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3a_norm_domain_alpha=(-1+2j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9963878247819236,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3b_norm_codomain_alpha=(-1+2j)": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 0.9975894649817527,
+        "warnings": [
+          "ComplexWarning"
+        ]
+      },
+      "G3c_full_pipeline_alpha=1.5+0.3j": {
+        "outcome": "FLAGGED",
+        "exc_type": null,
+        "exc_msg": null,
+        "value": 3.562611185971488,
+        "warnings": [
+          "ComplexWarning",
+          "ComplexWarning"
+        ]
+      }
+    }
+  },
+  "clause_b_zero_regression": {
+    "n_quantities": 2491,
+    "n_quantities_bit_identical": 2491,
+    "n_float64_leaves": 24370487,
+    "n_float64_leaves_bit_identical": 24370487,
+    "n_leaves_moved": 0,
+    "moved": {},
+    "per_J": {
+      "2": {
+        "heavy": true,
+        "leaves": 342,
+        "identical": 342
+      },
+      "3": {
+        "heavy": true,
+        "leaves": 869,
+        "identical": 869
+      },
+      "4": {
+        "heavy": true,
+        "leaves": 1816,
+        "identical": 1816
+      },
+      "8": {
+        "heavy": true,
+        "leaves": 6676,
+        "identical": 6676
+      },
+      "16": {
+        "heavy": true,
+        "leaves": 25804,
+        "identical": 25804
+      },
+      "32": {
+        "heavy": true,
+        "leaves": 101692,
+        "identical": 101692
+      },
+      "64": {
+        "heavy": true,
+        "leaves": 403996,
+        "identical": 403996
+      },
+      "128": {
+        "heavy": true,
+        "leaves": 1610716,
+        "identical": 1610716
+      },
+      "256": {
+        "heavy": true,
+        "leaves": 6432604,
+        "identical": 6432604
+      },
+      "400": {
+        "heavy": true,
+        "leaves": 15695692,
+        "identical": 15695692
+      },
+      "512": {
+        "heavy": false,
+        "leaves": 19992,
+        "identical": 19992
+      },
+      "800": {
+        "heavy": false,
+        "leaves": 31224,
+        "identical": 31224
+      },
+      "1000": {
+        "heavy": false,
+        "leaves": 39024,
+        "identical": 39024
+      }
+    },
+    "J_full_matrix_arm": [
+      2,
+      3,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      400
+    ],
+    "J_vector_only_arm": [
+      512,
+      800,
+      1000
+    ],
+    "instrument": "sha256/uint64 view of raw IEEE-754 float64 bits; 0 ULP, not allclose",
+    "leg151_quantity_count_for_scale": 1672,
+    "blas_threads_pinned_to": "1",
+    "why_threads_pinned": "Multi-threaded BLAS picks its reduction order dynamically, so the last bit of a dot product can depend on how many threads were free. Clause (b) asserts 0 ULP, so the reduction order is fixed by construction rather than by luck. Measured side effect on this box with four legs running in parallel: a 400x400 np.linalg.inv took 3.5s unpinned and 0.0589s pinned, ~60x.",
+    "declared_limit_inverse_arm": "Every cheap quantity is swept at every J with the full 10-alpha set. The O(J^3) inverse arm is swept in full only to J = 400; above it the alpha set is [0.0, 1.5, 3.0] and the drop set is {0, J-1}. Same shape as leg 151's own declared cap (its inverse arm stopped at J = 1000 while its cheap arm reached J = 2000)."
+  },
+  "clause_b_validated_line": {
+    "capabilities_line": "capabilities.py:346 -> test_decay_collocation.py",
+    "post_repair_returncode": 0,
+    "pre_repair_returncode": 0,
+    "post_repair_passed": true,
+    "pre_repair_passed": true,
+    "stdout_bytes_identical": true,
+    "stdout_sha256_post": "fbad99a443e2406b",
+    "stdout_sha256_pre": "fbad99a443e2406b",
+    "n_gate_lines": 6,
+    "stdout_post": "[ok] (1) transforms exact on even trig polys (round-trip 2.8e-15, H 1.3e-14, d/dtheta 5.5e-13)\n[ok] (2) collocation == coefficient-space build (residual 1.2e-13, jacobian 2.6e-13, dc column 1.6e-13)\n[ok] (3) anchor is an exact zero (6.5e-13) and both kernel directions are annihilated (1.3e-12)\n[ok] (4) collocated far field converges to the exact operator a=1.2: 1.81e-03->9.28e-05 (J=500->2000), a=1.5: 7.48e-04->2.56e-05 (J=500->2000)\n[ok] (5) the gauged square system inverts (||AM - I||_max = 8.2e-14)\n[ok] (6) graded sup norms: ||f_a||_X = 1 exactly; ungraded ||A|| grows +1.36 per doubling of J (log-divergent, 11.5->15.6) while graded converges (3.73->4.01, increments 0.126->0.063)\n\nALL DECAY-COLLOCATION TESTS PASSED\n",
+    "stderr_tail_post": "",
+    "stderr_tail_pre": ""
+  },
+  "clause_b_inheritance_arm": {
+    "module_edited_by_leg151": false,
+    "checks": {
+      "J=16,K=2::theta": {
+        "leaves": 16,
+        "identical": 16
+      },
+      "J=16,K=2::X": {
+        "leaves": 16,
+        "identical": 16
+      },
+      "J=16,K=2::H": {
+        "leaves": 256,
+        "identical": 256
+      },
+      "J=16,K=2::D": {
+        "leaves": 256,
+        "identical": 256
+      },
+      "J=16,K=2::transport": {
+        "leaves": 256,
+        "identical": 256
+      },
+      "J=16,K=2::anchor": {
+        "leaves": 16,
+        "identical": 16
+      },
+      "J=64,K=2::theta": {
+        "leaves": 64,
+        "identical": 64
+      },
+      "J=64,K=2::X": {
+        "leaves": 64,
+        "identical": 64
+      },
+      "J=64,K=2::H": {
+        "leaves": 4096,
+        "identical": 4096
+      },
+      "J=64,K=2::D": {
+        "leaves": 4096,
+        "identical": 4096
+      },
+      "J=64,K=2::transport": {
+        "leaves": 4096,
+        "identical": 4096
+      },
+      "J=64,K=2::anchor": {
+        "leaves": 64,
+        "identical": 64
+      },
+      "J=200,K=2::theta": {
+        "leaves": 200,
+        "identical": 200
+      },
+      "J=200,K=2::X": {
+        "leaves": 200,
+        "identical": 200
+      },
+      "J=200,K=2::H": {
+        "leaves": 40000,
+        "identical": 40000
+      },
+      "J=200,K=2::D": {
+        "leaves": 40000,
+        "identical": 40000
+      },
+      "J=200,K=2::transport": {
+        "leaves": 40000,
+        "identical": 40000
+      },
+      "J=200,K=2::anchor": {
+        "leaves": 200,
+        "identical": 200
+      }
+    },
+    "n_leaves": 133896,
+    "n_leaves_bit_identical": 133896
+  },
+  "gate_answer": {
+    "clause_a": "YES",
+    "clause_b": "YES",
+    "overall": "YES"
+  },
+  "what_a_clean_clause_b_does_NOT_mean": "Golden-master / characterization testing does not infer correctness (Feathers; see writeup/novelty/leg_167.md Q1). A 0-ULP result says THE REPAIR MOVED NOTHING. It does not say any banked number is right."
+}

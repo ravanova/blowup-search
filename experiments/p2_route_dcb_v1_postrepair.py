@@ -68,7 +68,25 @@ import sys
 import tempfile
 import warnings
 
-import numpy as np
+# ---------------------------------------------------------------------------
+# BLAS THREADS PINNED TO ONE, and this is a correctness decision before it is a
+# speed one.  Multi-threaded BLAS chooses its reduction order dynamically, so the
+# last bit of a dot product can depend on how many threads happened to be free --
+# precisely the effect the reproducibility literature names as the reason strict
+# bitwise identity fails across runs (Demmel et al., ACM TOMS 10.1145/3389360;
+# WG21 P3375R3).  Clause (b) asserts 0 ULP, so the reduction order must be fixed,
+# not merely likely to repeat.  Pinning to one thread makes the differential
+# deterministic by construction rather than by luck.
+#
+# It is also, measured on this box while four legs ran in parallel, ~60x FASTER:
+# a 400x400 np.linalg.inv took 3.5s with the default thread pool (four legs
+# oversubscribing the cores) and 0.0589s pinned.  Must be set BEFORE numpy loads.
+# ---------------------------------------------------------------------------
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
+import numpy as np  # noqa: E402  -- must follow the thread pinning above
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if REPO not in sys.path:
@@ -288,22 +306,39 @@ def run_clause_a(dc_post, dc_pre):
     # --- the lesson-90 control: could this have come out differently? ----
     pre_silent = summary["pre_repair_control"]["ALL"][SILENT_VALUE]
     post_silent = summary["post_repair"]["ALL"][SILENT_VALUE]
+    pre_refused = summary["pre_repair_control"]["ALL"][REFUSED]
+    post_refused = summary["post_repair"]["ALL"][REFUSED]
+
+    g3_live = pre["G3c_full_pipeline_alpha=1.5+0.3j"]["value"]
+    g3_drift = (abs(g3_live - LEG115_G3_PIPELINE_VALUE) / abs(LEG115_G3_PIPELINE_VALUE)
+                if isinstance(g3_live, float) else float("inf"))
     control = {
         "pre_repair_silent_values": pre_silent,
         "post_repair_silent_values": post_silent,
+        "pre_repair_refused": pre_refused,
+        "post_repair_refused": post_refused,
         "pre_reproduces_leg115_J1_value": any(
             v["value"] is not None and v["value"] == LEG115_J1_COLLAPSE_VALUE
             for k, v in pre.items() if k.startswith("G1a")),
         "pre_reproduces_leg115_G2_worked_flat": (
             pre["G2a_worked_case_flat_3"]["value"] == LEG115_G2_WORKED_FLAT),
-        "pre_reproduces_leg115_G3_pipeline": (
-            pre["G3c_full_pipeline_alpha=1.5+0.3j"]["value"] == LEG115_G3_PIPELINE_VALUE),
+        # G3's banked value is compared to a TOLERANCE, not bitwise, and the reason is measured
+        # rather than assumed: it is the one of leg 115's three headline numbers that passes
+        # through np.linalg.inv (a 16x16, i.e. LAPACK), so its last bit is a property of the
+        # library build.  Demanding bitwise equality here would report a NO caused by the
+        # comparison rather than by the module -- see the journal, and leg 105's identical trap.
+        "pre_G3_pipeline_live": g3_live,
+        "pre_G3_pipeline_leg115_json": LEG115_G3_PIPELINE_VALUE,
+        "pre_G3_pipeline_relative_drift": g3_drift,
+        "pre_G3_pipeline_bitwise_equal_to_json": g3_live == LEG115_G3_PIPELINE_VALUE,
+        "pre_reproduces_leg115_G3_pipeline_to_tolerance": g3_drift < 1e-14,
     }
-    control["VOID_unless_pre_repair_is_silent"] = pre_silent > 0
+    control["VOID_unless_pre_repair_did_not_refuse"] = pre_refused == 0
     control["comparison_can_come_out_differently"] = bool(
-        pre_silent > 0 and control["pre_reproduces_leg115_J1_value"]
+        pre_refused == 0 and pre_silent > 0
+        and control["pre_reproduces_leg115_J1_value"]
         and control["pre_reproduces_leg115_G2_worked_flat"]
-        and control["pre_reproduces_leg115_G3_pipeline"])
+        and control["pre_reproduces_leg115_G3_pipeline_to_tolerance"])
 
     # --- the residue: any case the repaired module still answers silently ---
     residue = {k: v for k, v in post.items() if v["outcome"] == SILENT_VALUE}
@@ -328,9 +363,35 @@ def run_clause_a(dc_post, dc_pre):
         still_works[f"G1_ordinary_J{J}"] = classify(
             lambda J=J: dc_post.graded_inverse_norm(dc_post.Collocation(J), 1.5)[0])
 
+    # --- G3 under PRODUCTION warning filters, not forced ones -------------
+    # classify() forces warnings.simplefilter("always"), which is the generous reading: it lets
+    # a ComplexWarning count as FLAGGED.  That is not what a caller actually sees.  Leg 115's
+    # finding rests on the claim that this warning is easy to miss, so the claim is MEASURED
+    # here at both filter settings rather than repeated.
+    g3_prod = {}
+    for tag, filt in (("default", "default"), ("always", "always"), ("ignore", "ignore")):
+        col16 = dc_pre.Collocation(16)
+        om16 = col16.anchor()
+        seen, values = 0, []
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter(filt)
+            with np.errstate(all="ignore"):
+                for a in (1.0 + 0.0j, 1.5 + 1e-10j, 1.5 + 0.1j, 1.5 + 1.0j,
+                          0.0 + 1.0j, -1.0 + 2.0j):
+                    values.append(col16.norm_domain(om16, a))
+            seen = len(caught)
+        g3_prod[filt] = {
+            "n_calls": len(values),
+            "n_warnings_surfaced": seen,
+            "all_returned_ordinary_finite_float": all(
+                isinstance(v, float) and np.isfinite(v) for v in values),
+            "n_exceptions": 0,
+        }
+
     return {
         "summary": summary,
         "lesson90_control": control,
+        "g3_pre_repair_under_production_warning_filters": g3_prod,
         "residue_silent_after_repair": residue,
         "refusal_exception_types": exc_types,
         "no_over_refusal_probes": still_works,
@@ -349,8 +410,21 @@ J_CHEAP = (512, 800, 1000)                          # vector/scalar quantities o
                                                     # at J=1000 are 8 MB each; the cap is stated
                                                     # in the journal as an honest limit)
 ALPHAS = (-1.0, 0.0, 0.5, 1.0, 1.2, 1.5, 1.8, 2.0, 2.5, 3.0)
+ALPHAS_BIG = (0.0, 1.5, 3.0)      # the inverse arm's reduced alpha set at large J -- see below
 C_VALUES = (0.0, 0.5, 1.0, -50.0)
 GAUGES = ("origin", "a0")
+
+# The inverse arm (np.linalg.inv) is the only O(J^3) quantity here and it dominates the whole
+# run.  Every CHEAP quantity -- grid, transforms, H, D, transport, anchor, residual, jacobian,
+# dc_column, quadratic, both weights, both norms -- is swept at EVERY J in the list, full alpha
+# set.  The inverse arm is swept in full only up to J = 400 and thinned above it.  This is an
+# honest declared limit, not a silent one, and it is the same shape as leg 151's own (its
+# inverse arm capped at J = 1000 while its cheap arm reached J = 2000).
+J_INVERSE_FULL_MAX = 400
+
+
+def _inverse_arm_alphas(J):
+    return ALPHAS if J <= J_INVERSE_FULL_MAX else ALPHAS_BIG
 
 
 def _quantities(dc, J, heavy):
@@ -389,14 +463,15 @@ def _quantities(dc, J, heavy):
     # the gauged square system and the headline norm -- J >= 2 only, which is now the
     # module's own domain; J = 1 is clause (a)'s business, not clause (b)'s
     drops = sorted({0, 1, J // 2, J - 1})
+    inv_drops = drops if J <= J_INVERSE_FULL_MAX else sorted({0, J - 1})
     for gauge in GAUGES:
         for drop in drops:
             M, rows = dc.gauged_jacobian(col, om, dc.C_ANCHOR, gauge=gauge, drop=drop)
             q[f"gauged_jacobian.rows(g={gauge},d={drop})"] = np.asarray(rows, dtype=float)
             if heavy:
                 q[f"gauged_jacobian.M(g={gauge},d={drop})"] = M
-        for a in ALPHAS:
-            for drop in drops:
+        for a in _inverse_arm_alphas(J):
+            for drop in inv_drops:
                 v, A, M = dc.graded_inverse_norm(col, a, gauge=gauge, drop=drop)
                 q[f"graded_inverse_norm.value(a={a},g={gauge},d={drop})"] = v
                 if heavy:
@@ -468,6 +543,19 @@ def run_clause_b(dc_post, dc_pre):
         "J_vector_only_arm": list(J_CHEAP),
         "instrument": "sha256/uint64 view of raw IEEE-754 float64 bits; 0 ULP, not allclose",
         "leg151_quantity_count_for_scale": 1672,
+        "blas_threads_pinned_to": os.environ.get("OMP_NUM_THREADS"),
+        "why_threads_pinned": (
+            "Multi-threaded BLAS picks its reduction order dynamically, so the last bit of a "
+            "dot product can depend on how many threads were free. Clause (b) asserts 0 ULP, "
+            "so the reduction order is fixed by construction rather than by luck. Measured "
+            "side effect on this box with four legs running in parallel: a 400x400 "
+            "np.linalg.inv took 3.5s unpinned and 0.0589s pinned, ~60x."),
+        "declared_limit_inverse_arm": (
+            "Every cheap quantity is swept at every J with the full 10-alpha set. The O(J^3) "
+            "inverse arm is swept in full only to J = %d; above it the alpha set is %r and the "
+            "drop set is {0, J-1}. Same shape as leg 151's own declared cap (its inverse arm "
+            "stopped at J = 1000 while its cheap arm reached J = 2000)."
+            % (J_INVERSE_FULL_MAX, list(ALPHAS_BIG))),
     }
 
 
@@ -574,7 +662,12 @@ def main():
 
     sa = a["summary"]["post_repair"]["ALL"]
     ctrl = a["lesson90_control"]
-    clause_a_yes = (sa[SILENT_VALUE] == 0 and ctrl["comparison_can_come_out_differently"])
+    # The gate's own wording is "reject or CORRECTLY FLAG every one of leg 115's original 3
+    # failing cases", so the criterion is that no case is answered SILENTLY -- with the control
+    # attached, because a suite that refused everything would satisfy it vacuously.
+    clause_a_yes = (sa[SILENT_VALUE] == 0
+                    and sa[REFUSED] + sa[FLAGGED] == sa["n"]
+                    and ctrl["comparison_can_come_out_differently"])
     clause_b_yes = (b["n_leaves_moved"] == 0 and vline["stdout_bytes_identical"]
                     and vline["post_repair_passed"]
                     and inh["n_leaves"] == inh["n_leaves_bit_identical"])
