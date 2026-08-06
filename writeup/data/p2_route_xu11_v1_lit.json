@@ -1,0 +1,275 @@
+{
+  "leg": 211,
+  "route": "XU11",
+  "role": "LIT",
+  "source": "arXiv:2607.19762v1 (Xu), read at full text via pdftotext -layout",
+  "question": "does Xu characterize or bear on a sign-changing/anti-diffusive viscous branch for this operator class?",
+  "grounded_in": "leg 185 D5: nu > 0 below a* = 0.3864963972206034, nu < 0 at and above it including Chen's a = 1/2",
+  "leg185_nu_anchors": {
+    "a=0.30": 0.01799364,
+    "a=0.50": -0.00817525
+  },
+  "X1_passage_ledger": {
+    "pdf_present": true,
+    "pdftotext_ok": true,
+    "verified_against_pdf": true,
+    "n_passages": 12,
+    "n_verbatim_found": 12,
+    "n_passages_admitting_nu_le_0": 0,
+    "xu_ever_admits_nonpositive_nu": false,
+    "sign_of_nu_is_a_standing_hypothesis": true,
+    "places_the_dissipative_equation_is_written": [
+      "sec 6 eq (6.1)",
+      "App A eq (A.1)"
+    ],
+    "both_stipulate_nu_positive": true,
+    "passages": [
+      {
+        "id": "P1",
+        "locator": "sec 6, eq (6.1)",
+        "quote": "wt + a u wx = ux w \u2212 \u03bd \u039bs w, \u039b = (\u2212\u2202xx )1/2 , \u03bd > 0, s \u2208 (0, 2]. (6.1)",
+        "why_it_is_here": "the ONLY place Xu writes the dissipative gCLM equation in the main text",
+        "admits_nu_le_0": false,
+        "note": "nu > 0 is a STANDING HYPOTHESIS of the display, not a convention stated and later relaxed.  Xu never writes a second dissipative equation.",
+        "quote_normalized": "wt + a u wx = ux w \u2212 \u03bd \u039bs w, \u039b = (\u2212\u2202xx )1/2 , \u03bd > 0, s \u2208 (0, 2]. (6.1)",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P2",
+        "locator": "sec 6.1, eq (6.2)",
+        "quote": "\u2202\u03c4 W = \u2212Res[W ] \u2212 \u03bd e\u2212\u03b3\u03c4 \u039bsy W, \u03b3 := 1 \u2212 s cl . (6.2)",
+        "why_it_is_here": "defines gamma, the quantity that DOES change sign in Xu",
+        "admits_nu_le_0": false,
+        "note": "What changes sign here is gamma, the EXPONENT of the coefficient, not nu. nu is carried through unchanged and positive.",
+        "quote_normalized": "\u2202\u03c4 W = \u2212Res[W ] \u2212 \u03bd e\u2212\u03b3\u03c4 \u039bsy W, \u03b3 := 1 \u2212 s cl . (6.2)",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P3",
+        "locator": "sec 6.1, the sentence after eq (6.3)",
+        "quote": "for the ordinary Laplacian s = 2 the sub/supercritical boundary sits at a \u2248 0.39 (where cl = 1/2; the branch inverts to a = 0.386).",
+        "why_it_is_here": "THE PASSAGE THE GATE TURNS ON -- Xu's stated threshold",
+        "admits_nu_le_0": false,
+        "note": "States the threshold and its mechanism (c_l = 1/2) and prints 0.386.  Says nothing about the sign of nu.",
+        "quote_normalized": "for the ordinary Laplacian s = 2 the sub/supercritical boundary sits at a \u2248 0.39 (where cl = 1/2; the branch inverts to a = 0.386).",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P4",
+        "locator": "sec 6.1, disclaimer 1",
+        "quote": "s\u2217 is a formal scaling (dissipation-relevance) threshold read off the self-similar exponent",
+        "why_it_is_here": "downgrades sec 6 from theorem to diagnostic",
+        "admits_nu_le_0": false,
+        "note": "Decisive for the gate's SECOND limb: sec 6 is declared formal, so nothing in it is 'a stated theorem' from which a corollary could be derived.",
+        "quote_normalized": "s\u2217 is a formal scaling (dissipation-relevance) threshold read off the self-similar exponent",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P5",
+        "locator": "sec 6.1, disclaimer 2",
+        "quote": "and s\u2217 is not the sharp critical dissipation curve separating blow-up from global regularity, which for this family remains unknown.",
+        "why_it_is_here": "Xu's own statement of what his threshold is NOT",
+        "admits_nu_le_0": false,
+        "note": null,
+        "quote_normalized": "and s\u2217 is not the sharp critical dissipation curve separating blow-up from global regularity, which for this family remains unknown.",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P6",
+        "locator": "Table 1, a = 0.4 cross-check cell",
+        "quote": "(s = 2 boundary at \u2248 0.39, where cl = 1/2)",
+        "why_it_is_here": "the same threshold, printed a second time, in the table leg 145 transcribed",
+        "admits_nu_le_0": false,
+        "note": "This is the cell leg 145's s2_boundary_from_table_linear was checked against.  Its viscous reading was never asked for.",
+        "quote_normalized": "(s = 2 boundary at \u2248 0.39, where cl = 1/2)",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P7",
+        "locator": "Figure 3 caption",
+        "quote": "and crossing the ordinary-Laplacian value s = 2 at a \u2248 0.39 where cl = 1/2. This is a formal scaling diagnostic, not a proved persistence threshold.",
+        "why_it_is_here": "the threshold a third time, with the disclaimer attached to it",
+        "admits_nu_le_0": false,
+        "note": null,
+        "quote_normalized": "and crossing the ordinary-Laplacian value s = 2 at a \u2248 0.39 where cl = 1/2. This is a formal scaling diagnostic, not a proved persistence threshold.",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P8",
+        "locator": "Appendix A.1, eq (A.1)",
+        "quote": "wt = w Hw \u2212 \u03bd \u039bs w, \u039b = (\u2212\u2202xx )1/2 , \u03bd > 0, s \u2208 (0, 1), (A.1)",
+        "why_it_is_here": "the second and last place Xu writes a dissipative equation",
+        "admits_nu_le_0": false,
+        "note": "nu > 0 again, and s restricted further to (0,1) -- strictly BELOW s = 2, so the appendix never even reaches the Laplacian leg 185 works at.",
+        "quote_normalized": "wt = w Hw \u2212 \u03bd \u039bs w, \u039b = (\u2212\u2202xx )1/2 , \u03bd > 0, s \u2208 (0, 1), (A.1)",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P9",
+        "locator": "Appendix A.1, eq (A.3)",
+        "quote": "\u2202\u03c4 W = \u2212Res[W ] \u2212 \u03bd e\u2212\u03b3\u03c4 \u039bsy W, \u03b3 = 1 \u2212 s cl = 1 \u2212 s > 0, (A.3)",
+        "why_it_is_here": "gamma's sign fixed POSITIVE by hypothesis in the appendix",
+        "admits_nu_le_0": false,
+        "note": "The appendix works only on the side gamma > 0.  The other side of Xu's own threshold is never analyzed.",
+        "quote_normalized": "\u2202\u03c4 W = \u2212Res[W ] \u2212 \u03bd e\u2212\u03b3\u03c4 \u039bsy W, \u03b3 = 1 \u2212 s cl = 1 \u2212 s > 0, (A.3)",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P10",
+        "locator": "Appendix A.1, structural fact (ii), first half",
+        "quote": "The dissipative term is dissipative in the flat L2 pairing (its Fourier symbol",
+        "why_it_is_here": "the sign-definiteness claim",
+        "admits_nu_le_0": false,
+        "note": null,
+        "quote_normalized": "The dissipative term is dissipative in the flat L2 pairing (its Fourier symbol",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P11",
+        "locator": "Appendix A.1, structural fact (ii), second half (across the page break)",
+        "quote": "\u2212\u03bde\u2212\u03b3\u03c4 |k|s \u2264 0) and carries a coefficient that vanishes as \u03c4 \u2192 \u221e",
+        "why_it_is_here": "THE DEPENDENCE MADE EXPLICIT -- the <= 0 is inherited from nu > 0",
+        "admits_nu_le_0": false,
+        "note": "The symbol is nonpositive BECAUSE nu > 0.  Flip nu and this structural fact, which the whole persistence program of sec 8 rests on, reverses.  Xu does not consider that case.",
+        "quote_normalized": "\u2212\u03bde\u2212\u03b3\u03c4 |k|s \u2264 0) and carries a coefficient that vanishes as \u03c4 \u2192 \u221e",
+        "found_in_pdf": true
+      },
+      {
+        "id": "P12",
+        "locator": "sec 8, direction (iv)",
+        "quote": "the supercritical regime s > s\u2217 (a), where the dissipation is relevant, is outside the present framework.",
+        "why_it_is_here": "Xu's own scope exclusion, on the far side of his own threshold",
+        "admits_nu_le_0": false,
+        "note": "Xu declares the regime beyond his threshold out of scope.  Leg 185's negative-nu half sits on exactly that side at s = 2.",
+        "quote_normalized": "the supercritical regime s > s\u2217 (a), where the dissipation is relevant, is outside the present framework.",
+        "found_in_pdf": true
+      }
+    ]
+  },
+  "X2_collocation": {
+    "repo_a_star": 0.3864963972206034,
+    "repo_a_star_provenance": "leg 125 (Delta(a) sweep at nu = 0, c_l an OUTPUT) and leg 185 (sign of recovered nu at c_l = 1/2 imposed) -- two independent computations, same number",
+    "xu_boundary_headline": 0.39,
+    "xu_boundary_inverted_as_printed": 0.386,
+    "xu_boundary_from_table_linear": 0.38604821037253473,
+    "abs_gap_vs_headline": 0.0035036027793965974,
+    "abs_gap_vs_printed_inverted": 0.0004963972206034062,
+    "abs_gap_vs_table_inversion": 0.0004481868480686879,
+    "rel_gap_vs_printed_inverted": 0.0012843514821176299,
+    "rel_gap_vs_table_inversion": 0.0011596145560261795,
+    "same_to_printed_digits_of_xu": true,
+    "leg145_already_banked_this_number": true,
+    "leg145_locator": "experiments/p2_route_lga_v1_ledger.py:568 -> test_literature_gates_selfconsistency.py:107-110, as a TRANSCRIPTION self-consistency check with no viscous reading"
+  },
+  "X3_mechanism_identity": {
+    "identity_claimed": "Delta_repo(c_l, c_omega=-1) == -gamma_Xu(c_l, s=2)",
+    "hypothesis": "Xu's rescaling w = (T-t)^{-1} W (eq 6.1 / A.2) IS c_omega = -1, so the identity holds only under Xu's own time normalization",
+    "worst_abs_deviation_over_8_rows": 0.0,
+    "identity_exact_to_machine": true,
+    "decoy_worst_deviations": {
+      "gamma_with_s=1": 1.0,
+      "gamma_with_s=4": 2.0
+    },
+    "negative_control_fired": true,
+    "n_sign_changes_of_gamma_on_xu_table": 1,
+    "gamma_sign_change_bracket": [
+      {
+        "between_a": [
+          0.3,
+          0.4
+        ],
+        "gamma": [
+          -0.23560000000000003,
+          0.03820000000000001
+        ]
+      }
+    ],
+    "reading": "Xu's gamma at s = 2 and this repository's Delta are the SAME quantity up to sign.  Leg 185 IMPOSED Delta = 0, i.e. it sat exactly on Xu's marginal curve gamma = 0, and then let nu float."
+  },
+  "X4_specificity_controls": {
+    "s_scan": [
+      {
+        "s": 1.8,
+        "c_l_target": 0.5555555555555556,
+        "a_boundary": 0.34546708871033194,
+        "abs_gap_to_a_star": 0.04102930851027148
+      },
+      {
+        "s": 1.9,
+        "c_l_target": 0.5263157894736842,
+        "a_boundary": 0.36682557379570185,
+        "abs_gap_to_a_star": 0.019670823424901562
+      },
+      {
+        "s": 2.0,
+        "c_l_target": 0.5,
+        "a_boundary": 0.38604821037253473,
+        "abs_gap_to_a_star": 0.0004481868480686879
+      },
+      {
+        "s": 2.1,
+        "c_l_target": 0.47619047619047616,
+        "a_boundary": 0.40319073428829527,
+        "abs_gap_to_a_star": 0.016694337067691856
+      },
+      {
+        "s": 2.2,
+        "c_l_target": 0.45454545454545453,
+        "a_boundary": 0.41785538309928555,
+        "abs_gap_to_a_star": 0.03135898587868213
+      }
+    ],
+    "argmin_s": 2.0,
+    "argmin_is_the_ordinary_laplacian": true,
+    "gap_at_s2": 0.0004481868480686879,
+    "nearest_off_s2_gap": 0.016694337067691856,
+    "specificity_factor": 37.248609903727754,
+    "decoy_thresholds_from_xu": {
+      "max_protrusion_a_sec_3_1": 0.264,
+      "branch_endpoint_a_c": 0.6888
+    },
+    "decoy_gaps_to_a_star": {
+      "max_protrusion_a_sec_3_1": 0.1224963972206034,
+      "branch_endpoint_a_c": 0.30230360277939655
+    },
+    "decoy_control_fired": true,
+    "reading": "+-10% in s moves Xu's boundary by ~40x the observed gap, and Xu's other printed special advections miss a* by 2-3 orders.  The collocation is a property of s = 2 -- leg 185's own gamma = 2 case -- not of the inversion being loose."
+  },
+  "X5_resolution": {
+    "bracket": [
+      0.3,
+      0.4
+    ],
+    "local_slope_dcl_da": -1.3689999999999998,
+    "xu_declared_two_grid_c_l": 0.0005,
+    "xu_own_statement": "'a self-consistency measure rather than a certified continuum error bound' (sec 2 / sec 7)",
+    "implied_delta_a": 0.00036523009495982475,
+    "observed_gap": 0.0004481868480686879,
+    "observed_over_xu_uncertainty": 1.2271355900120673,
+    "resolved_apart": false,
+    "reading": "The two numbers sit within ~1.2 of Xu's OWN error bar, so they cannot be told apart at his stated resolution.  That is agreement in the only sense the source supports -- it is NOT a proof that they are the same number, and this leg does not claim one."
+  },
+  "X6_gate": {
+    "gate_wording": "Does Xu arXiv:2607.19762, at full-text depth, characterize or bear on a sign-changing/anti-diffusive viscous branch for this operator class (directly, or as a derivable corollary of a stated theorem)?",
+    "limb_1_characterizes_directly": false,
+    "limb_1_evidence": "nu > 0 is stipulated at BOTH places Xu writes a dissipative equation, (6.1) and (A.1); the sign-definiteness of the dissipative form in App A (ii) is DERIVED from it; and sec 8 (iv) puts the far side of his own threshold out of scope.  0/12 passages admit nu <= 0.",
+    "limb_2_derivable_corollary_of_a_stated_theorem": false,
+    "limb_2_evidence": "sec 6 is not a theorem.  Xu declares s* 'a formal scaling (dissipation-relevance) threshold' and the Figure 3 caption repeats 'a formal scaling diagnostic, not a proved persistence threshold'.  The paper's actual theorems (Thm 1, Thm 2, Lemma 1, Prop 1, Prop 2) are all inviscid spectral statements at or near a = 0 and mention no dissipation.",
+    "limb_3_bears_on": true,
+    "limb_3_evidence": "Xu STATES the threshold, three times, and prints 0.386; the mechanism he gives for it (c_l = 1/2, gamma = 1 - s c_l = 0 at s = 2) is exactly this repository's own Delta = 0, the condition leg 185 imposed; and the collocation with a* = 0.3864963972206034 is specific to s = 2.",
+    "answer": "YES",
+    "answer_qualified": "YES, on the 'bear on' limb only, at DIAGNOSTIC strength.  Xu does NOT characterize a sign-changing/anti-diffusive branch -- he stipulates nu > 0 throughout -- and the threshold he does state is declared by him to be a formal diagnostic, not a theorem.  What he supplies is the LOCATION and the MECHANISM of leg 185's boundary, from an independent source.",
+    "branch": "ESCALATE as directly informing leg 174's catalog and leg 185's own finding.  Do NOT build or attempt to reconcile the two under this leg's authority.  Push branch only, never main.  Report as parked.",
+    "what_this_leg_explicitly_did_not_do": [
+      "did not reconcile Xu's gamma-crossing with leg 185's nu sign change",
+      "did not construct or continue any viscous branch",
+      "did not edit solver/literature_gates.py or any certificate module",
+      "did not claim 0.386 as new (leg 145 banked it -- see novelty pass 2.1)",
+      "did not claim a* is PROVED equal to Xu's boundary (X5: not resolved apart)"
+    ]
+  },
+  "gate_answer": "YES",
+  "no_dynamics_run": true,
+  "claims_no_stage": true,
+  "runtime_s": 0.2838566303253174
+}
