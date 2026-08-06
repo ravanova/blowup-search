@@ -1,0 +1,1589 @@
+{
+  "leg": 106,
+  "route": "HPA",
+  "module_audited": "solver/hilbert_pointwise.py",
+  "read_only": true,
+  "gate": "Under an adversarial battery of degenerate or NaN-poisoned inputs, does solver/hilbert_pointwise.py's bound ever fail to dominate the true |H(h)| value on a case where both are computable?",
+  "scope_note": "Soundness DIRECTION only.  No bound is sharpened and no constant is improved; the plan-of-record ban on Route-D bound-sharpening is respected literally.  The module is not patched: the gate's yes-branch escalates, it does not repair.",
+  "shipped_configuration": {
+    "alpha": 1.5,
+    "gamma": 0.5,
+    "rho": [
+      1.0,
+      6.0,
+      25.0
+    ]
+  },
+  "A1_known_answer": {
+    "cases": 18,
+    "max_abs_error_vs_exact_conjugate": 2.05850542167596e-09,
+    "pv_of_constant_function": 0.0,
+    "note": "the battery's |H(h)| machinery is known-answer checked against solver.hilbert_holder.conjugate BEFORE any verdict is read from it"
+  },
+  "A2_quadrature_signed_error": {
+    "per_theta": [
+      {
+        "theta": 1e-06,
+        "rel_err_a_sup": -0.0267731956291144,
+        "rel_err_a_semi": -0.004929230106081706
+      },
+      {
+        "theta": 0.001,
+        "rel_err_a_sup": -0.026224636038462812,
+        "rel_err_a_semi": 0.0006838565359479354
+      },
+      {
+        "theta": 0.05,
+        "rel_err_a_sup": -0.009574082449592347,
+        "rel_err_a_semi": 0.001958308925101404
+      },
+      {
+        "theta": 0.5,
+        "rel_err_a_sup": -0.0074377078889861226,
+        "rel_err_a_semi": 0.007856445851956106
+      },
+      {
+        "theta": 1.0,
+        "rel_err_a_sup": 0.002349322872690962,
+        "rel_err_a_semi": -0.003105021354741444
+      },
+      {
+        "theta": 2.0,
+        "rel_err_a_sup": 0.00570898208945847,
+        "rel_err_a_semi": -0.010204674314017392
+      },
+      {
+        "theta": 3.0,
+        "rel_err_a_sup": 0.00063175129723958,
+        "rel_err_a_semi": -0.0019017594622783296
+      },
+      {
+        "theta": 3.1405926535897932,
+        "rel_err_a_sup": 0.0004149497953143122,
+        "rel_err_a_semi": -0.008979346588027681
+      },
+      {
+        "theta": 3.1415925535897933,
+        "rel_err_a_sup": 0.00016573867735325543,
+        "rel_err_a_semi": -0.11875269004859079
+      }
+    ],
+    "n_quad_ladder": [
+      {
+        "n_quad": 2,
+        "rel_err_sum": 3.9269726127643194
+      },
+      {
+        "n_quad": 3,
+        "rel_err_sum": 1.4713245411439844
+      },
+      {
+        "n_quad": 5,
+        "rel_err_sum": 0.3055393524583876
+      },
+      {
+        "n_quad": 10,
+        "rel_err_sum": 0.056783487869696
+      },
+      {
+        "n_quad": 25,
+        "rel_err_sum": 0.06285692786920105
+      },
+      {
+        "n_quad": 50,
+        "rel_err_sum": -0.035199176186698655
+      },
+      {
+        "n_quad": 100,
+        "rel_err_sum": 0.017828773334202186
+      },
+      {
+        "n_quad": 200,
+        "rel_err_sum": 0.011909567410503863
+      },
+      {
+        "n_quad": 400,
+        "rel_err_sum": 0.0017586266544729057
+      },
+      {
+        "n_quad": 800,
+        "rel_err_sum": 0.0009374242537512067
+      },
+      {
+        "n_quad": 1600,
+        "rel_err_sum": 0.0003521537119099971
+      }
+    ],
+    "worst_understatement_a_sup": -0.0267731956291144,
+    "note": "the DEFAULT quadrature understates its own majorant by up to 2.68% (at small theta); the sign matters because an understated majorant is the unsafe direction"
+  },
+  "A3_eps_truncation_vs_gamma": {
+    "rows": [
+      {
+        "gamma": 0.9,
+        "bound_at_eps_1e-4": 0.9667981210774675,
+        "bound_at_eps_1e-7": 0.9670438231152363,
+        "bound_at_eps_1e-10": 0.9670462799924395,
+        "bound_at_eps_1e-13": 0.9670504989391602,
+        "ratio_1e-13_over_1e-4": 1.0002610450477618
+      },
+      {
+        "gamma": 0.5,
+        "bound_at_eps_1e-4": 1.4391273143624912,
+        "bound_at_eps_1e-7": 1.4524561743256725,
+        "bound_at_eps_1e-10": 1.4528785070659733,
+        "bound_at_eps_1e-13": 1.4528937799215316,
+        "ratio_1e-13_over_1e-4": 1.009565842730974
+      },
+      {
+        "gamma": 0.25,
+        "bound_at_eps_1e-4": 2.278021497889856,
+        "bound_at_eps_1e-7": 2.47450264675453,
+        "bound_at_eps_1e-10": 2.5094434776586594,
+        "bound_at_eps_1e-13": 2.515659443107689,
+        "ratio_1e-13_over_1e-4": 1.1043176921016586
+      },
+      {
+        "gamma": 0.1,
+        "bound_at_eps_1e-4": 3.475490795882585,
+        "bound_at_eps_1e-7": 4.570134118311475,
+        "bound_at_eps_1e-10": 5.118756519150589,
+        "bound_at_eps_1e-13": 5.393719914580591,
+        "ratio_1e-13_over_1e-4": 1.551930426911368
+      },
+      {
+        "gamma": 0.03,
+        "bound_at_eps_1e-4": 4.449150087872555,
+        "bound_at_eps_1e-7": 6.964606982478784,
+        "bound_at_eps_1e-10": 9.009246841128636,
+        "bound_at_eps_1e-13": 10.671193478929915,
+        "ratio_1e-13_over_1e-4": 2.3984790955956594
+      },
+      {
+        "gamma": 0.01,
+        "bound_at_eps_1e-4": 4.804760129954158,
+        "bound_at_eps_1e-7": 8.007042002509442,
+        "bound_at_eps_1e-10": 10.995585283317057,
+        "bound_at_eps_1e-13": 13.784656167398731,
+        "ratio_1e-13_over_1e-4": 2.868958240279573
+      },
+      {
+        "gamma": 0.0,
+        "bound_at_eps_1e-4": 4.99842939296711,
+        "bound_at_eps_1e-7": 8.61377048276394,
+        "bound_at_eps_1e-10": 12.229110883806527,
+        "bound_at_eps_1e-13": 15.84445172571316,
+        "ratio_1e-13_over_1e-4": 3.1698860742149564
+      }
+    ],
+    "note": "truncation cost goes like eps^gamma: negligible at the shipped gamma = 0.5 (1.01x over 9 decades of eps) and TOTAL at gamma = 0 (3.17x and still growing -- the integral does not converge)"
+  },
+  "A4_degenerate_input_inventory": {
+    "theta": {
+      "0.0": [
+        0.0,
+        0.0
+      ],
+      "3.141592653589793": [
+        1.0227952119993073e-16,
+        0.0
+      ],
+      "-0.5": [
+        0.1842242384172991,
+        3.8947612722412166
+      ],
+      "3.641592653589793": [
+        NaN,
+        0.0
+      ],
+      "6.283185307179586": [
+        NaN,
+        0.0
+      ],
+      "nan": [
+        NaN,
+        NaN
+      ],
+      "inf": [
+        NaN,
+        NaN
+      ],
+      "-inf": [
+        NaN,
+        NaN
+      ],
+      "1e-300": [
+        NaN,
+        Infinity
+      ],
+      "5e-324": "ValueError: Geometric sequence cannot include zero"
+    },
+    "alpha_gamma": {
+      "alpha=nan,gamma=0.5": [
+        NaN,
+        0.0
+      ],
+      "alpha=1.5,gamma=nan": [
+        24.031835297854162,
+        0.033709286797857556
+      ],
+      "alpha=inf,gamma=0.5": [
+        0.0,
+        0.033709286797857556
+      ],
+      "alpha=1.5,gamma=inf": [
+        24.031835297854162,
+        0.033709286797857556
+      ],
+      "alpha=1.5,gamma=0.0": [
+        0.0,
+        12.230096974601773
+      ],
+      "alpha=1.5,gamma=1.5": [
+        0.19255596832897537,
+        0.5226396839852067
+      ],
+      "alpha=1.5,gamma=2.5": [
+        0.23118482357774464,
+        0.32378937421606707
+      ],
+      "alpha=0.0,gamma=0.0": [
+        0.0,
+        14.7487532240042
+      ],
+      "alpha=-1.0,gamma=0.5": [
+        0.0,
+        1.9073648725758747
+      ],
+      "alpha=1.5,gamma=-0.5": [
+        22.29797046872249,
+        1.3138861419556402
+      ]
+    },
+    "rho": {
+      "0.0": [
+        0.0,
+        1.4886168392691674
+      ],
+      "-1.0": [
+        0.0,
+        1.4886168392691674
+      ],
+      "nan": [
+        24.093257457011415,
+        0.0
+      ],
+      "inf": [
+        24.093257457011415,
+        0.0
+      ],
+      "-inf": [
+        0.0,
+        1.4886168392691674
+      ],
+      "1e+300": [
+        24.093257457011415,
+        0.0
+      ],
+      "1e-300": [
+        0.0,
+        1.4886168392691674
+      ]
+    },
+    "n_quad": {
+      "0": [
+        0.0,
+        0.0
+      ],
+      "1": [
+        0.0,
+        0.0
+      ],
+      "2": [
+        3.524827320973202,
+        6.708227297717705
+      ],
+      "-5": "ValueError: Number of samples, -5, must be non-negative.",
+      "nan": "ValueError: cannot convert float NaN to integer",
+      "inf": "OverflowError: cannot convert float infinity to integer"
+    },
+    "eps": {
+      "0.0": "ValueError: Geometric sequence cannot include zero",
+      "1.0": [
+        0.0,
+        0.0
+      ],
+      "2.0": [
+        NaN,
+        -Infinity
+      ],
+      "-0.001": [
+        NaN,
+        NaN
+      ],
+      "nan": [
+        NaN,
+        NaN
+      ],
+      "inf": [
+        NaN,
+        NaN
+      ]
+    },
+    "theta_grid": {
+      "0": 0.0,
+      "1": 1.0,
+      "2": 2.0,
+      "3": 3.0,
+      "-4": "ValueError: Number of samples, -2, must be non-negative.",
+      "lo=0.0": "ValueError: Geometric sequence cannot include zero",
+      "lo=nan": 0.0
+    },
+    "measured_pointwise": {
+      "S=1.0,T=1.0": {
+        "worst_ratio": 23.827530599306883,
+        "profile": "p",
+        "theta": 3.1
+      },
+      "S=0.0,T=0.0": {
+        "worst_ratio": Infinity,
+        "profile": "p",
+        "theta": 0.01
+      },
+      "S=nan,T=1.0": {
+        "worst_ratio": 0.0,
+        "profile": "",
+        "theta": 0.0
+      },
+      "S=inf,T=1.0": {
+        "worst_ratio": 0.0,
+        "profile": "",
+        "theta": 0.0
+      },
+      "S=-1.0,T=-1.0": {
+        "worst_ratio": 0.0,
+        "profile": "",
+        "theta": 0.0
+      },
+      "psi_is_nan": {
+        "worst_ratio": 0.0,
+        "profile": "",
+        "theta": 0.0
+      },
+      "empty_family": {
+        "worst_ratio": 0.0,
+        "profile": "",
+        "theta": 0.0
+      }
+    },
+    "n_inputs_returning_a_finite_pair": 19,
+    "note": "rho = NaN, +inf and 1e300 all return the SAME finite pair with a_semi exactly 0.0 -- IEEE-754 sec 5.11 makes `rho*cT <= cS` False everywhere; measured_pointwise reports worst_ratio 0.0 with an empty profile name whenever the ratio is NaN, which reads as 'no violation' and is the same silence for a poisoned norm, a poisoned psi and an empty family"
+  },
+  "A5_VIOLATION_rho_nan_or_inf": {
+    "theta": 1.0,
+    "coefficients_by_rho": {
+      "nan": [
+        24.092157552756092,
+        0.0
+      ],
+      "inf": [
+        24.092157552756092,
+        0.0
+      ],
+      "1e+300": [
+        24.092157552756092,
+        0.0
+      ]
+    },
+    "a_semi_value": 0.0,
+    "rows": [
+      {
+        "delta": 1e-10,
+        "S": 1.0,
+        "T": 93672.79343450359,
+        "true_abs_H": 12.690166824420869,
+        "bound": 24.092157552756092,
+        "ratio_true_over_bound": 0.5267343448436457
+      },
+      {
+        "delta": 1e-20,
+        "S": 1.0,
+        "T": 9367937670.001646,
+        "true_abs_H": 24.741297322619968,
+        "bound": 24.092157552756092,
+        "ratio_true_over_bound": 1.026944028090569
+      },
+      {
+        "delta": 1e-30,
+        "S": 1.0,
+        "T": 936727934383417.8,
+        "true_abs_H": 36.792427808115505,
+        "bound": 24.092157552756092,
+        "ratio_true_over_bound": 1.5271537108102022
+      },
+      {
+        "delta": 1e-40,
+        "S": 1.0,
+        "T": 9.367937670001723e+19,
+        "true_abs_H": 48.843558306314605,
+        "bound": 24.092157552756092,
+        "ratio_true_over_bound": 2.027363394057126
+      },
+      {
+        "delta": 1e-50,
+        "S": 1.0,
+        "T": 9.36727934383414e+24,
+        "true_abs_H": 60.89468879172794,
+        "bound": 24.092157552756092,
+        "ratio_true_over_bound": 2.5275730767733466
+      }
+    ],
+    "n_violating_cases": 4,
+    "first_violating_delta": 1e-20,
+    "worst_ratio": 2.5275730767733466,
+    "divergence_slope_measured_per_ln": 0.5233739470546768,
+    "divergence_slope_predicted_per_ln": 0.5233739473305312,
+    "slope_rel_error": 5.270694991565961e-10,
+    "eps_scan_of_the_bound": [
+      {
+        "eps": 1e-06,
+        "a_sup": 14.45088289664847
+      },
+      {
+        "eps": 1e-10,
+        "a_sup": 24.091787072301162
+      },
+      {
+        "eps": 1e-14,
+        "a_sup": 33.732691610180225
+      },
+      {
+        "eps": 1e-20,
+        "a_sup": 48.194048507062085
+      },
+      {
+        "eps": 1e-30,
+        "a_sup": 72.29631024155198
+      }
+    ],
+    "note": "|H(h)| grows like (2/pi) cos^alpha(theta/2) * ln(1/delta) without limit while the returned bound is frozen at its eps-truncated value, so EVERY sufficiently thin step violates it"
+  },
+  "A6_VIOLATION_gamma_zero": {
+    "theta": 1.0,
+    "coefficients": [
+      0.0,
+      12.2293549063633
+    ],
+    "a_sup_value": 0.0,
+    "rows": [
+      {
+        "delta": 1e-10,
+        "S": 1.0,
+        "T": 1.0,
+        "true_abs_H": 12.690166824420869,
+        "bound": 12.2293549063633,
+        "ratio_true_over_bound": 1.0376808034099816
+      },
+      {
+        "delta": 1e-20,
+        "S": 1.0,
+        "T": 1.0,
+        "true_abs_H": 24.741297322619968,
+        "bound": 12.2293549063633,
+        "ratio_true_over_bound": 2.023107311224268
+      },
+      {
+        "delta": 1e-30,
+        "S": 1.0,
+        "T": 1.0,
+        "true_abs_H": 36.792427808115505,
+        "bound": 12.2293549063633,
+        "ratio_true_over_bound": 3.008533817999779
+      },
+      {
+        "delta": 1e-40,
+        "S": 1.0,
+        "T": 1.0,
+        "true_abs_H": 48.843558306314605,
+        "bound": 12.2293549063633,
+        "ratio_true_over_bound": 3.9939603258140655
+      },
+      {
+        "delta": 1e-50,
+        "S": 1.0,
+        "T": 1.0,
+        "true_abs_H": 60.89468879172794,
+        "bound": 12.2293549063633,
+        "ratio_true_over_bound": 4.979386832582854
+      }
+    ],
+    "n_violating_cases": 5,
+    "first_violating_delta": 1e-10,
+    "worst_ratio": 4.979386832582854,
+    "note": "no NaN anywhere: gamma = 0 is an ordinary-looking argument and the violation is already 1.04x at delta = 1e-10"
+  },
+  "A6b_soundness_predicate": {
+    "rows": [
+      {
+        "gamma": -0.5,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 8252.803004370138,
+        "eps_drift_1e-16_over_1e-8": 10000.577522935626,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 17.441162641285803,
+        "a_semi": 1.349793098750884,
+        "eps_drift_1e-16_over_1e-8": 2.026121922571407,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 9.818883901308412,
+        "eps_drift_1e-16_over_1e-8": 1.9818742338937354,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 0.0,
+        "a_semi": 9.818883901308412,
+        "eps_drift_1e-16_over_1e-8": 1.9818742338937354,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.01,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 9.026303271471672,
+        "eps_drift_1e-16_over_1e-8": 1.815541259851475,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.01,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 0.010438230766783673,
+        "a_semi": 9.015808602582313,
+        "eps_drift_1e-16_over_1e-8": 1.815546362414444,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.01,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.01,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.01,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.01,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.01,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.1,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 4.7988163664072285,
+        "eps_drift_1e-16_over_1e-8": 1.1532016972438297,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.1,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 0.04686115301309794,
+        "a_semi": 4.749482197720613,
+        "eps_drift_1e-16_over_1e-8": 1.1532805232174106,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.1,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 12.02438574488543,
+        "a_semi": 0.8709533706934125,
+        "eps_drift_1e-16_over_1e-8": 1.0570119631001518,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.1,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 1.4136103113101923,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.1,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.1,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.1,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.5,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 1.4867258440501057,
+        "eps_drift_1e-16_over_1e-8": 1.0000982397616212,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 0.12444903777993951,
+        "a_semi": 1.3283051937642343,
+        "eps_drift_1e-16_over_1e-8": 1.0000999737192509,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 2.8491641553182894,
+        "a_semi": 0.346171797335486,
+        "eps_drift_1e-16_over_1e-8": 0.9994146927795539,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 5.814088852341951,
+        "a_semi": 0.08355578891358163,
+        "eps_drift_1e-16_over_1e-8": 1.0000233822227174,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.5,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.9,
+        "rho": 0.0,
+        "rho_label": "0.0",
+        "a_sup": 0.0,
+        "a_semi": 1.0563408226485362,
+        "eps_drift_1e-16_over_1e-8": 1.0000121373077258,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.9,
+        "rho": 1.0,
+        "rho_label": "1.0",
+        "a_sup": 0.16606796218124745,
+        "a_semi": 0.8009768509078585,
+        "eps_drift_1e-16_over_1e-8": 1.000008401583123,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.9,
+        "rho": 6.0,
+        "rho_label": "6.0",
+        "a_sup": 1.8149480368361948,
+        "a_semi": 0.19310534729082837,
+        "eps_drift_1e-16_over_1e-8": 1.0010260035145953,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.9,
+        "rho": 25.0,
+        "rho_label": "25.0",
+        "a_sup": 3.4678032769968663,
+        "a_semi": 0.04639349436590832,
+        "eps_drift_1e-16_over_1e-8": 0.9993428751456691,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.9,
+        "rho": 1e+300,
+        "rho_label": "1e+300",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.9,
+        "rho": 1e+308,
+        "rho_label": "inf",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.9,
+        "rho": null,
+        "rho_label": "nan",
+        "a_sup": 19.27133713143914,
+        "a_semi": 0.0,
+        "eps_drift_1e-16_over_1e-8": 2.0005437524626597,
+        "predicted_sound": false
+      }
+    ],
+    "n_sound": 20,
+    "n_unsound": 22,
+    "max_eps_drift_sound_and_gamma_at_least_0.1": 2.0005437524626597,
+    "max_eps_drift_sound_but_gamma_below_0.1": 2.0005437524626597,
+    "min_eps_drift_where_predicted_unsound": 1.9818742338937354,
+    "note": "the ANALYTIC predicate -- gamma > 0 and rho finite-and-not-NaN -- is exact, and it is what gates A5/A6 exhibit.  The eps-drift DIAGNOSTIC that would let a caller detect the failure at runtime separates the two regimes only for gamma >= 0.1 (drift <= 1.0001 there vs >= 1.98 when unsound); at gamma = 0.01 a formally sound configuration still drifts 2.00x over 8 decades of eps, because the truncation cost eps^gamma converges too slowly to tell the two apart numerically.  Reported rather than hidden: the runtime test is not a substitute for the predicate"
+  },
+  "A7_shipped_configuration_is_safe": {
+    "rho=1": {
+      "rows": [
+        {
+          "theta": 1e-06,
+          "pi_minus_theta": 3.141591653589793,
+          "ratio_vs_exact_bound": 0.706891737170877,
+          "ratio_vs_interpolated_bound": 0.7095231305917302,
+          "worst_delta": 2.0
+        },
+        {
+          "theta": 0.001,
+          "pi_minus_theta": 3.1405926535897932,
+          "ratio_vs_exact_bound": 0.7027457987977168,
+          "ratio_vs_interpolated_bound": 0.7022117539754956,
+          "worst_delta": 2.0
+        },
+        {
+          "theta": 0.05,
+          "pi_minus_theta": 3.0915926535897933,
+          "ratio_vs_exact_bound": 0.6753768339795528,
+          "ratio_vs_interpolated_bound": 0.6740531653060043,
+          "worst_delta": 2.0
+        },
+        {
+          "theta": 0.5,
+          "pi_minus_theta": 2.641592653589793,
+          "ratio_vs_exact_bound": 0.6131682401897711,
+          "ratio_vs_interpolated_bound": 0.6134005715433063,
+          "worst_delta": 2.0
+        },
+        {
+          "theta": 2.0,
+          "pi_minus_theta": 1.1415926535897931,
+          "ratio_vs_exact_bound": 0.6539823127439727,
+          "ratio_vs_interpolated_bound": 0.6540668495025771,
+          "worst_delta": 2.0
+        },
+        {
+          "theta": 3.0,
+          "pi_minus_theta": 0.14159265358979312,
+          "ratio_vs_exact_bound": 0.8260161605750457,
+          "ratio_vs_interpolated_bound": 0.820023985550035,
+          "worst_delta": 0.11505160005671296
+        },
+        {
+          "theta": 3.138592653589793,
+          "pi_minus_theta": 0.0030000000000001137,
+          "ratio_vs_exact_bound": 0.9711962297466266,
+          "ratio_vs_interpolated_bound": 0.9671483975085163,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 3.141492653589793,
+          "pi_minus_theta": 0.00010000000000021103,
+          "ratio_vs_exact_bound": 0.994869758704355,
+          "ratio_vs_interpolated_bound": 0.9868161824341438,
+          "worst_delta": 9.131651548032548e-05
+        },
+        {
+          "theta": 3.141591653589793,
+          "pi_minus_theta": 1.000000000139778e-06,
+          "ratio_vs_exact_bound": 0.999505568880319,
+          "ratio_vs_interpolated_bound": 0.9945689733849633,
+          "worst_delta": 1.2599210498948715e-06
+        },
+        {
+          "theta": 3.141592643589793,
+          "pi_minus_theta": 9.99999993922529e-09,
+          "ratio_vs_exact_bound": 0.9999495845678344,
+          "ratio_vs_interpolated_bound": 0.999789393291019,
+          "worst_delta": 1.7383504436393114e-08
+        }
+      ],
+      "max_ratio_vs_exact_bound": 0.9999495845678344,
+      "max_ratio_vs_interpolated_bound": 0.999789393291019
+    },
+    "rho=6": {
+      "rows": [
+        {
+          "theta": 1e-06,
+          "pi_minus_theta": 3.141591653589793,
+          "ratio_vs_exact_bound": 0.7067562209901141,
+          "ratio_vs_interpolated_bound": 0.7093958714330415,
+          "worst_delta": 0.11505160005671296
+        },
+        {
+          "theta": 0.001,
+          "pi_minus_theta": 3.1405926535897932,
+          "ratio_vs_exact_bound": 0.6984250932416719,
+          "ratio_vs_interpolated_bound": 0.6981268803707821,
+          "worst_delta": 0.11505160005671296
+        },
+        {
+          "theta": 0.05,
+          "pi_minus_theta": 3.0915926535897933,
+          "ratio_vs_exact_bound": 0.6568111111493806,
+          "ratio_vs_interpolated_bound": 0.6562505964911987,
+          "worst_delta": 0.11505160005671296
+        },
+        {
+          "theta": 0.5,
+          "pi_minus_theta": 2.641592653589793,
+          "ratio_vs_exact_bound": 0.564041644976897,
+          "ratio_vs_interpolated_bound": 0.5652157265905895,
+          "worst_delta": 0.11505160005671296
+        },
+        {
+          "theta": 2.0,
+          "pi_minus_theta": 1.1415926535897931,
+          "ratio_vs_exact_bound": 0.5718454560383521,
+          "ratio_vs_interpolated_bound": 0.5703657852055692,
+          "worst_delta": 0.027594593229224276
+        },
+        {
+          "theta": 3.0,
+          "pi_minus_theta": 0.14159265358979312,
+          "ratio_vs_exact_bound": 0.7303279237889096,
+          "ratio_vs_interpolated_bound": 0.7231940138080654,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 3.138592653589793,
+          "pi_minus_theta": 0.0030000000000001137,
+          "ratio_vs_exact_bound": 0.9408022559574326,
+          "ratio_vs_interpolated_bound": 0.9365965794368992,
+          "worst_delta": 0.00038073078774317513
+        },
+        {
+          "theta": 3.141492653589793,
+          "pi_minus_theta": 0.00010000000000021103,
+          "ratio_vs_exact_bound": 0.9881516530700755,
+          "ratio_vs_interpolated_bound": 0.9800360692012916,
+          "worst_delta": 2.1901843160352616e-05
+        },
+        {
+          "theta": 3.141591653589793,
+          "pi_minus_theta": 1.000000000139778e-06,
+          "ratio_vs_exact_bound": 0.9988189244240151,
+          "ratio_vs_interpolated_bound": 0.9938981442267094,
+          "worst_delta": 7.247796636776961e-08
+        },
+        {
+          "theta": 3.141592643589793,
+          "pi_minus_theta": 9.99999993922529e-09,
+          "ratio_vs_exact_bound": 0.9998825744164723,
+          "ratio_vs_interpolated_bound": 0.9997377128258979,
+          "worst_delta": 1e-09
+        }
+      ],
+      "max_ratio_vs_exact_bound": 0.9998825744164723,
+      "max_ratio_vs_interpolated_bound": 0.9997377128258979
+    },
+    "rho=25": {
+      "rows": [
+        {
+          "theta": 1e-06,
+          "pi_minus_theta": 3.141591653589793,
+          "ratio_vs_exact_bound": 0.7059487963833506,
+          "ratio_vs_interpolated_bound": 0.7085794345977507,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 0.001,
+          "pi_minus_theta": 3.1405926535897932,
+          "ratio_vs_exact_bound": 0.6753605135823174,
+          "ratio_vs_interpolated_bound": 0.6747545300979018,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 0.05,
+          "pi_minus_theta": 3.0915926535897933,
+          "ratio_vs_exact_bound": 0.5679397343781801,
+          "ratio_vs_interpolated_bound": 0.5676952634915887,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 0.5,
+          "pi_minus_theta": 2.641592653589793,
+          "ratio_vs_exact_bound": 0.5354957686946329,
+          "ratio_vs_interpolated_bound": 0.5358998915211188,
+          "worst_delta": 0.0066184353378049435
+        },
+        {
+          "theta": 2.0,
+          "pi_minus_theta": 1.1415926535897931,
+          "ratio_vs_exact_bound": 0.5485303629016823,
+          "ratio_vs_interpolated_bound": 0.5468003293813645,
+          "worst_delta": 0.0015874010519681986
+        },
+        {
+          "theta": 3.0,
+          "pi_minus_theta": 0.14159265358979312,
+          "ratio_vs_exact_bound": 0.673422458051208,
+          "ratio_vs_interpolated_bound": 0.6661936028415834,
+          "worst_delta": 0.00038073078774317513
+        },
+        {
+          "theta": 3.138592653589793,
+          "pi_minus_theta": 0.0030000000000001137,
+          "ratio_vs_exact_bound": 0.9097928150156618,
+          "ratio_vs_interpolated_bound": 0.9055605173180948,
+          "worst_delta": 2.1901843160352616e-05
+        },
+        {
+          "theta": 3.141492653589793,
+          "pi_minus_theta": 0.00010000000000021103,
+          "ratio_vs_exact_bound": 0.9810410326809937,
+          "ratio_vs_interpolated_bound": 0.9729175252706995,
+          "worst_delta": 1.2599210498948715e-06
+        },
+        {
+          "theta": 3.141591653589793,
+          "pi_minus_theta": 1.000000000139778e-06,
+          "ratio_vs_exact_bound": 0.9980676294409833,
+          "ratio_vs_interpolated_bound": 0.9932164923635959,
+          "worst_delta": 4.169352999734261e-09
+        },
+        {
+          "theta": 3.141592643589793,
+          "pi_minus_theta": 9.99999993922529e-09,
+          "ratio_vs_exact_bound": 0.9997735118709966,
+          "ratio_vs_interpolated_bound": 0.99967599749231,
+          "worst_delta": 1e-09
+        }
+      ],
+      "max_ratio_vs_exact_bound": 0.9997735118709966,
+      "max_ratio_vs_interpolated_bound": 0.99967599749231
+    },
+    "note": "domination HOLDS everywhere in the shipped configuration; the margin collapses toward zero as theta -> pi because the bound is asymptotically SATURATED there, not because it is violated",
+    "thinnest_margin": 0.0002106067089809871
+  },
+  "A8_grid_norm_hazard": {
+    "rows": [
+      {
+        "J": 80,
+        "theta": 3.121957699504857,
+        "grid_norm_ratio": 1.0320641285498042,
+        "worst_h_nodal_values": [
+          2.31090121232364,
+          -0.31177677511600727,
+          4.935315416863934,
+          -2.9408147247422725,
+          7.569621717420951,
+          -5.584350200113273,
+          10.222136276692975,
+          -8.25066380957913,
+          12.901441552225926,
+          -10.948284801859012,
+          15.616498822424003,
+          -13.6861037479307,
+          18.37677083765054,
+          -16.473495398157795,
+          21.19235830076099,
+          -19.320455417933317,
+          24.074154564557475,
+          -22.23775538749314,
+          27.034023865674243,
+          -25.23712138324737,
+          30.085009671207285,
+          -28.33144271477634,
+          33.241581402412336,
+          -31.53501907858807,
+          36.519930066662596,
+          -34.86385665665553,
+          39.93832639142326,
+          -38.33602674947122,
+          43.51755921533189,
+          -41.97210469410344,
+          47.281477600554076,
+          -45.79571252645187,
+          51.25766803928038,
+          -49.834196754267026,
+          55.47830921316228,
+          -54.11948369269086,
+          59.981262501189306,
+          -58.689170549709154,
+          64.81147908681741,
+          -63.58793310235961,
+          70.02283763543589,
+          -68.8693639237716,
+          75.68057575234137,
+          -74.59840435561371,
+          81.86455300110258,
+          -80.854607990411,
+          88.67369851042925,
+          -87.73658866992119,
+          96.232178370456,
+          -95.36818817460659,
+          104.69811326682276,
+          -103.90719402045131,
+          114.27616888631638,
+          -113.55792985649282,
+          125.23618801086603,
+          -124.58988733437083,
+          137.94154199522865,
+          -137.36607709062423,
+          152.89368132636434,
+          -152.387578495185,
+          170.80482149669882,
+          -170.36622439202264,
+          192.72193443500336,
+          -192.3485912145364,
+          220.2499305207595,
+          -219.93918009185757,
+          255.9808513412668,
+          -255.7296111210579,
+          304.39126746085213,
+          -304.1960319199131,
+          373.9361966653152,
+          -373.7930815527968,
+          482.7325710949675,
+          -482.6375563774615,
+          677.8829007852494,
+          -671.1098158098887,
+          753.6436294433703,
+          -422.86179311062403,
+          222.51059809126724,
+          -42.23362941076809
+        ],
+        "refined_norm_ratio": 0.1437362974282312,
+        "S_grid": 44031.4676853924,
+        "S_refined": 350251.7521037307,
+        "S_blowup": 7.954578180457245,
+        "T_grid": 86458.55136585014,
+        "T_refined": 415596.7795848498,
+        "T_blowup": 4.80689038873955
+      },
+      {
+        "J": 80,
+        "theta": 3.043417883165112,
+        "grid_norm_ratio": 0.2010592402461565,
+        "worst_h_nodal_values": [
+          0.5430367803210876,
+          0.3007567991538297,
+          0.3955377377244836,
+          -0.04123739344484617,
+          1.1116067633585494,
+          -0.5217708205336367,
+          0.4392518798312479,
+          0.30216937559555473,
+          1.2620089016967548,
+          -0.8721610343921917,
+          2.013441107079868,
+          -1.877545329198274,
+          1.0063400237643108,
+          -0.8085977041075451,
+          1.8039520843203327,
+          -1.168437919865317,
+          1.6966601725862056,
+          -1.7826913836275347,
+          1.9255215559474053,
+          -1.8767794383520715,
+          2.666369547230629,
+          -1.5358870291589346,
+          2.8670534287978766,
+          -1.622529297209581,
+          2.2330140025280207,
+          -2.4638188540507837,
+          2.7630750297834314,
+          -2.0041877280017677,
+          3.3509497096048153,
+          -2.692333407645689,
+          3.809528975290653,
+          -3.4349239470704327,
+          3.748227220814439,
+          -3.292161377257422,
+          4.627828170020334,
+          -3.900925385466975,
+          5.289132132359605,
+          -4.046777332648693,
+          5.386798046209059,
+          -4.303994810379153,
+          5.827259717431294,
+          -5.162254264245703,
+          6.403590162299432,
+          -4.9440670150363415,
+          6.7251515090873415,
+          -5.279446561891375,
+          7.237355183381524,
+          -6.3426946908061845,
+          7.610836454656911,
+          -6.767399347078683,
+          8.33377749129536,
+          -7.003437312359757,
+          9.50185241716441,
+          -7.975369095151431,
+          10.009997501724396,
+          -8.451535928390603,
+          11.372404978140548,
+          -9.236210449329471,
+          12.561914592015759,
+          -10.165993184705995,
+          14.295422086218974,
+          -11.395701817990568,
+          16.416977188442186,
+          -12.773787725570225,
+          18.956351178032296,
+          -14.276869493611056,
+          22.571147980401634,
+          -16.26181074682901,
+          27.68004594664061,
+          -18.970002153381618,
+          35.79224098224598,
+          -22.502645534978605,
+          50.22005254566355,
+          -27.695159830461293,
+          83.90623773490087,
+          -35.217307575825984,
+          157.8889042028841,
+          8.197819636488735,
+          -37.21568281203493,
+          -7.490007628440799
+        ],
+        "refined_norm_ratio": 0.10618015421642493,
+        "S_grid": 8774.402589015559,
+        "S_refined": 15585.401938645742,
+        "S_blowup": 1.7762351089470971,
+        "T_grid": 11043.052453594346,
+        "T_refined": 23280.76144900442,
+        "T_blowup": 2.108181732074168
+      },
+      {
+        "J": 160,
+        "theta": 3.131775176547325,
+        "grid_norm_ratio": 0.775730729736605,
+        "worst_h_nodal_values": [
+          1.4038341327289008,
+          0.5959126997826657,
+          2.2114887711650986,
+          -0.21289842240978363,
+          3.0195011115043604,
+          -1.0232225495661498,
+          3.82849904853608,
+          -1.8356853492619298,
+          4.639115873991898,
+          -2.650916774017888,
+          5.4519922560575695,
+          -3.4695530434459863,
+          6.26777826402606,
+          -4.292238672091516,
+          7.087135451378653,
+          -5.119628556551003,
+          7.91073901204346,
+          -5.952390136672626,
+          8.739280025016797,
+          -6.791205645757806,
+          9.573467803935115,
+          -7.636774466539022,
+          10.414032368812682,
+          -8.489815610216915,
+          11.261727059590685,
+          -9.351070337933045,
+          12.11733131198108,
+          -10.221304945173486,
+          12.981653618601179,
+          -11.101313732590654,
+          13.855534700800016,
+          -11.991922187722505,
+          14.739850918956861,
+          -12.893990406432948,
+          15.635517952916583,
+          -13.808416784400006,
+          16.543494786696012,
+          -14.73614201456512,
+          17.46478803768068,
+          -15.678153428711385,
+          18.400456673521226,
+          -16.635489727897465,
+          19.35161716714508,
+          -17.609246151528342,
+          20.31944914629351,
+          -18.60058014138659,
+          21.305201601922644,
+          -19.610717565061815,
+          22.31019972875208,
+          -20.640959572104897,
+          23.33585248194454,
+          -21.69269016669515,
+          24.383660946144612,
+          -22.76738459302381,
+          25.455227627445275,
+          -23.86661864412891,
+          26.55226679623053,
+          -24.992079021788477,
+          27.676616028591027,
+          -26.145574895322724,
+          28.830249117722804,
+          -27.329050830577838,
+          30.01529055528437,
+          -28.544601289109107,
+          31.23403181542081,
+          -29.79448692986411,
+          32.488949715045145,
+          -31.08115298769663,
+          33.782727171278935,
+          -32.40725004829702,
+          35.11827673432949,
+          -33.775657599042376,
+          36.498767344614066,
+          -35.18951080353392,
+          37.92765484603467,
+          -36.65223103204636,
+          39.40871689049088,
+          -38.16756078295947,
+          40.94609299405025,
+          -39.73960375506179,
+          42.5443306586793,
+          -41.3728709848811,
+          44.20843866384131,
+          -43.07233415299565,
+          45.94394886710496,
+          -44.843487398578596,
+          47.7569881470415,
+          -46.69241927462959,
+          49.65436248900831,
+          -48.62589684538189,
+          51.64365567893152,
+          -50.65146438920628,
+          53.73334565767847,
+          -52.7775597611615,
+          55.93294234201265,
+          -55.01365221895719,
+          58.253151681523974,
+          -57.37040648320081,
+          60.70607197547062,
+          -59.859879054042324,
+          63.305430103734025,
+          -62.49575443867289,
+          66.06686747686078,
+          -65.29363109399507,
+          69.00828836113826,
+          -68.27136973948195,
+          72.15028705583418,
+          -71.44952051697912,
+          75.51667556839631,
+          -74.8518506424013,
+          79.13514050237923,
+          -78.50600126241173,
+          83.03806764617653,
+          -82.44431200410992,
+          87.2635864372504,
+          -86.70486538983442,
+          91.85690588832743,
+          -91.33282270284145,
+          96.87204149934948,
+          -96.38215082540599,
+          102.37407350815779,
+          -101.91788040009385,
+          108.44213752589013,
+          -108.01909635831542,
+          115.17344050955856,
+          -114.78295376579379,
+          122.68873706085745,
+          -122.33015397216104,
+          131.1399255498032,
+          -130.81254056181854,
+          140.720787421603,
+          -140.4238384657379,
+          151.6824994784139,
+          -151.41516603276747,
+          164.3565919892628,
+          -164.1179929307186,
+          179.1898848539219,
+          -178.9790761495395,
+          196.79938716042489,
+          -196.61535954464748,
+          218.06186995428516,
+          -217.90354697301953,
+          244.26666653637577,
+          -244.13290388884352,
+          277.3907124606375,
+          -277.2803009473815,
+          320.62746753860324,
+          -320.53914573318605,
+          379.49284107824286,
+          -379.4253360200861,
+          464.4056753194679,
+          -464.3578398175469,
+          597.6918625805833,
+          -597.6633202572727,
+          837.3995062074486,
+          -837.3832314494456,
+          914.4538977218854,
+          -577.2489674139326,
+          231.06186576107325,
+          -20.09327061285883
+        ],
+        "refined_norm_ratio": 0.09933817826136944,
+        "S_grid": 150147.71088466936,
+        "S_refined": 1280915.5947735147,
+        "S_blowup": 8.531036452213412,
+        "T_grid": 309873.8333503192,
+        "T_refined": 1464850.894274158,
+        "T_blowup": 4.727249404818611
+      }
+    ],
+    "max_grid_norm_ratio": 1.0320641285498042,
+    "max_refined_norm_ratio": 0.1437362974282312,
+    "note": "this is NOT a defect of the bound: it is JOURNAL section B1's grid-seminorm lesson re-measured on this module.  The extremiser's TRUE norms are several-fold larger than the grid pairs can see, so a caller who feeds grid-evaluated S and T into the bound is not using the norms the theorem is stated in"
+  },
+  "A9_consumption_paths": {
+    "interpolation": [
+      {
+        "rho": 1.0,
+        "worst_interp_over_exact": 0.9233280001001775,
+        "where": {
+          "coefficient": "a_sup",
+          "theta": 0.03409535226555138,
+          "interpolated": 0.007684963360151644,
+          "exact": 0.008323113085834997
+        }
+      },
+      {
+        "rho": 6.0,
+        "worst_interp_over_exact": 0.9753965027376427,
+        "where": {
+          "coefficient": "a_sup",
+          "theta": 0.00010903304452667642,
+          "interpolated": 0.0011739257556744953,
+          "exact": 0.001203536974327508
+        }
+      }
+    ],
+    "weighted_sups_vs_n_theta": [
+      {
+        "n_theta": 70,
+        "closure_sup": 3.008860075144691,
+        "closure_semi": 0.4296052494447245,
+        "cq_sup": 3.4315531737534513,
+        "cq_semi": 0.43038798127472283
+      },
+      {
+        "n_theta": 140,
+        "closure_sup": 3.0524009650953126,
+        "closure_semi": 0.4402188755692265,
+        "cq_sup": 3.4315531737534513,
+        "cq_semi": 0.44071345856234995
+      },
+      {
+        "n_theta": 280,
+        "closure_sup": 3.059359851975197,
+        "closure_semi": 0.4450363700940056,
+        "cq_sup": 3.4315531737534513,
+        "cq_semi": 0.4454310987372071
+      },
+      {
+        "n_theta": 560,
+        "closure_sup": 3.0586115592345378,
+        "closure_semi": 0.448088978527157,
+        "cq_sup": 3.4348696114422625,
+        "cq_semi": 0.4484425647737977
+      },
+      {
+        "n_theta": 1120,
+        "closure_sup": 3.0608079277768545,
+        "closure_semi": 0.4487970143270699,
+        "cq_sup": 3.44256184229186,
+        "cq_semi": 0.4491545208238607
+      },
+      {
+        "n_theta": 2240,
+        "closure_sup": 3.065641014571709,
+        "closure_semi": 0.4491504760112625,
+        "cq_sup": 3.4450393055099218,
+        "cq_semi": 0.44950995358008217
+      }
+    ],
+    "closure_sup_understatement_at_140": 0.004318851885613317,
+    "closure_semi_understatement_at_140": 0.019885541525758166,
+    "note": "both consumption paths are optimistic: linear interpolation in log X understates the exact coefficient, and a max over 140 grid nodes understates the sup over theta.  Neither is large enough to break the shipped configuration (gate A7), but both eat the same far-field margin"
+  },
+  "gate_answer": "YES",
+  "headline": "Two computable configurations exceed the bound.  (V1) rho = NaN -- and identically rho = +inf and rho >= 1e300 -- returns (a_sup, a_semi) = (24.092158, 0.0) at theta = 1.0, and the step adversary of width 1e-20 attains |H(h)| = 24.741297, a ratio of 1.0269 rising to 2.5276 at width 1e-50.  (V2) gamma = 0, with no NaN anywhere, returns (0.0, 12.229355) and is already exceeded by 1.0377 at width 1e-10, rising to 4.9794.  Both are the eps-truncation of a logarithmically divergent integral.  The SHIPPED configuration (alpha 1.5, gamma 0.5, rho in {1, 6, 25}) is NOT affected: domination holds at every probed theta, with the margin narrowing to 2.11e-04 only as theta -> pi, where the bound is asymptotically saturated.",
+  "disposition": "ESCALATE, do not patch.  solver/hilbert_pointwise.py is untouched by this leg.  The repair, when it is authorised, is a guard -- reject non-finite rho and gamma <= 0 -- not a change to the majorant, which is correct wherever the payer rule selects the seminorm account on a neighbourhood of the singularity.  Gates A5, A6 and A6b pin the current silence deliberately and MUST BE INVERTED, not weakened, the day a guard lands.",
+  "runtime_seconds": 115.46434569358826
+}
