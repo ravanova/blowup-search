@@ -169,6 +169,30 @@ Both quantities that are iteration-capped stalls differ by ~50x, in opposite dir
 This is not a solver defect; it is what a stalled ill-conditioned least-squares does under a
 different LAPACK/BLAS backend.
 
+### The sharpest form: a 1e-13 perturbation moves the stall, the floor does not move at all
+
+`experiments/leg_0_bench_newton_eps.py` perturbs the last ladder point by `eps` and
+re-runs the gate's exact continuation. Two rows are enough:
+
+| eps | a=0.9 `residual_rms` | a=0.9 `c` | a=0.3 `relres` |
+|---|---|---|---|
+| 0 | **2.1197880415806517e-05** | 0.761460 | **2.576127359571511e-13** |
+| **1e-13** | **8.051646124505419e-06** | 0.760991 | **2.576127359571511e-13** |
+
+A relative perturbation of **1e-13** in `a` — seven orders below the ladder spacing and
+right at the double-precision floor — changes the a=0.9 stall by a factor of **2.63**,
+an amplification of order **1e12**. The a=0.3 value, which is a *genuine* convergence, is
+**bit-identical to all 16 digits** across the same perturbation.
+
+That is the finding in one table: **the converged points of this solver are exactly
+reproducible and the stalled point is chaotic.** `eps = 0` also reproduced
+2.1197880415806517e-05 bit-for-bit against the independent H9 run, so the stall is
+deterministic *within* a fixed environment and unstable *across* environments — precisely
+the profile of a quantity no gate should take the sign or the threshold-crossing of.
+
+Both thresholds the repaired gate asserts (`a=0.3 < 1e-9`, `a=0.9 > 1e-8`) held on every
+row measured.
+
 ### H9 — CONFIRMED as a contributing amplifier
 
 `continuation` re-solves from the cold anchor whenever `relres > 1e-10` and keeps the
