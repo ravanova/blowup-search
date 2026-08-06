@@ -1,0 +1,575 @@
+{
+  "what": "bench-repair evidence for solver/boussinesq.py's four silent-corruption defects (leg 89 / Route-BOA, escalated not patched)",
+  "module_repaired": "solver/boussinesq.py",
+  "pre_fix_measurement": {
+    "source": "writeup/data/p2_route_boa_v1_adversarial.json (leg 89, Route-BOA)",
+    "n_cases": 90,
+    "n_silent_gate_deciding": 19,
+    "n_silent_secondary": 4,
+    "n_cases_where_conservation_drift_masks_a_nan_limb": 13,
+    "gate_answer": "YES -- the module silently returns plausible-looking wrong results",
+    "silent_labels_by_family": {
+      "A_degenerate_streamfunction": [
+        "dealias_annihilated_vorticity_k15x15",
+        "dealias_annihilated_vorticity_k12x12",
+        "dealias_annihilated_vorticity_k14x3",
+        "dealias_annihilated_vorticity_houluo",
+        "denormal_vorticity_amp1e-300",
+        "denormal_vorticity_amp1e-18"
+      ],
+      "D_out_of_domain_coefficient": [
+        "nu_-0.5",
+        "nu_-1000000.0",
+        "nu_-1e-14",
+        "kappa_-0.5",
+        "kappa_-1000000.0",
+        "kappa_-1e-14",
+        "kappa_nan",
+        "kappa_-inf"
+      ],
+      "E_degenerate_discretization": [
+        "grid_n1",
+        "grid_n2",
+        "cfl_c1_nan",
+        "cfl_c1_and_c2_nan",
+        "cfl_c1_inf"
+      ],
+      "F_detection_thresholds": [
+        "t_max_nan",
+        "t_max_negative",
+        "amplification_factor_nan",
+        "amplification_factor_inf"
+      ]
+    },
+    "headline_magnitudes": {
+      "false_blowup_represented_m0": 1.7966923869651763e-16,
+      "false_blowup_amplification": 55657830311010.46,
+      "denormal_amplification": 1e+298,
+      "kappa_energy_residual_ratio_to_control": 1.0,
+      "nu_energy_residual_ratio_to_control": 1974500.0,
+      "conservation_drift_on_100pct_nan_theta": 8.077e-18,
+      "cfl_dt_relaxation_factor_c1_and_c2_nan": 168.8
+    }
+  },
+  "part_a_zero_regression": {
+    "pre_fix_ref": "origin/main",
+    "cases": {
+      "inviscid_default": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "viscous_nu_kappa": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "kappa_only": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "buoyancy_off": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "nonlinear_off": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "pure_diffusion": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "houluo": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "frozen_u": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "drift_guard_cold": {
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "drift_guard_hot_negative": {
+        "outcome": "under_resolved",
+        "n_timesteps": 1,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "tail_guard_cold": {
+        "outcome": "no_blowup",
+        "n_timesteps": 20,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "tail_guard_hot_negative": {
+        "outcome": "under_resolved",
+        "n_timesteps": 1,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "max_steps_branch": {
+        "outcome": "max_steps_hit",
+        "n_timesteps": 5,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "blowup_candidate_real": {
+        "outcome": "blowup_candidate",
+        "n_timesteps": 314,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "early_decay_exit": {
+        "outcome": "no_blowup",
+        "n_timesteps": 31,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "t_max_zero": {
+        "outcome": "no_blowup",
+        "n_timesteps": 0,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "phase1_rough_h0.3_n128": {
+        "outcome": "under_resolved",
+        "n_timesteps": 3,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "phase1_rough_h0.5_n128": {
+        "outcome": "under_resolved",
+        "n_timesteps": 6,
+        "bit_identical": true,
+        "differing_fields": []
+      },
+      "phase1_smooth_sharp_n128": {
+        "outcome": "no_blowup",
+        "n_timesteps": 50,
+        "bit_identical": true,
+        "differing_fields": []
+      }
+    },
+    "n_cases": 19,
+    "n_bit_identical": 19,
+    "n_differing": 0,
+    "status": "PASS -- every well-formed case bit-identical"
+  },
+  "part_b1_coefficient_domains": {
+    "call_sites": [
+      {
+        "file": "phase1_axis_screen.py",
+        "line": 120,
+        "kappa": "literal 0.0",
+        "nu": "swept, non-negative"
+      },
+      {
+        "file": "phase1_currency_probe.py",
+        "line": 94,
+        "kappa": "literal 0.0",
+        "nu": "literal 0.0"
+      },
+      {
+        "file": "phase1_gsustained_probe.py",
+        "line": 95,
+        "kappa": "literal 0.0",
+        "nu": "literal 0.0"
+      },
+      {
+        "file": "phase1_resolution_spike.py",
+        "line": 94,
+        "kappa": "default 0.0",
+        "nu": "literal 0.0"
+      },
+      {
+        "file": "ga/fitness2d.py",
+        "line": 70,
+        "kappa": "cfg[\"kappa\"]",
+        "nu": "bisected, non-negative"
+      }
+    ],
+    "ga_fitness2d_FITNESS2D_DEFAULTS_kappa": 0.0,
+    "ga_fitness2d_fitness_axis": "nu_crit_amp2x_kappa0",
+    "ga_fitness2d_kappa_in_domain": true,
+    "kappa_literal_or_config_at_every_site": {
+      "phase1_axis_screen.py": true,
+      "phase1_currency_probe.py": true,
+      "phase1_gsustained_probe.py": true,
+      "phase1_resolution_spike.py": true,
+      "ga/fitness2d.py": true
+    },
+    "n_call_sites": 5,
+    "n_call_sites_with_out_of_domain_kappa": 0,
+    "verdict": "CLEAN -- every solve_boussinesq call site in the repository passes kappa = 0.0 (literal at four sites, FITNESS2D_DEFAULTS['kappa'] = 0.0 at the fifth), which is IN domain. Defect 2 requires a negative or non-finite kappa and no caller has ever supplied one, so no banked run executed a different integration than the one its params record."
+  },
+  "part_b2_initial_condition_scales": {
+    "ZERO_OMEGA_REL_TOL": 1e-13,
+    "ics": {
+      "smooth_sharp_n128": {
+        "represented_m0": 0.2,
+        "state_scale": 1.9999999999999998,
+        "m0_over_state_scale": 0.10000000000000002,
+        "margin_over_tolerance": 1000000000000.0001,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n128": {
+        "represented_m0": 1.0,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 1.0,
+        "margin_over_tolerance": 10000000000000.0,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n128": {
+        "represented_m0": 0.7872052387410233,
+        "state_scale": 0.7887428935561024,
+        "m0_over_state_scale": 0.998050499310179,
+        "margin_over_tolerance": 9980504993101.79,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n128": {
+        "represented_m0": 0.6876779491200551,
+        "state_scale": 0.6898675833023241,
+        "m0_over_state_scale": 0.9968260080118746,
+        "margin_over_tolerance": 9968260080118.746,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n256": {
+        "represented_m0": 0.19999999999999996,
+        "state_scale": 1.9999999999999998,
+        "m0_over_state_scale": 0.09999999999999999,
+        "margin_over_tolerance": 999999999999.9999,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n256": {
+        "represented_m0": 0.9999999999999998,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 0.9999999999999998,
+        "margin_over_tolerance": 9999999999999.998,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n256": {
+        "represented_m0": 0.7859855858865175,
+        "state_scale": 0.7860078701123767,
+        "m0_over_state_scale": 0.9999716488514854,
+        "margin_over_tolerance": 9999716488514.854,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n256": {
+        "represented_m0": 0.6848466039289116,
+        "state_scale": 0.6848907409750272,
+        "m0_over_state_scale": 0.9999355560770864,
+        "margin_over_tolerance": 9999355560770.863,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n512": {
+        "represented_m0": 0.20000000000000004,
+        "state_scale": 2.0,
+        "m0_over_state_scale": 0.10000000000000002,
+        "margin_over_tolerance": 1000000000000.0001,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n512": {
+        "represented_m0": 0.9999999999999996,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 0.9999999999999996,
+        "margin_over_tolerance": 9999999999999.996,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n512": {
+        "represented_m0": 0.7856079571969392,
+        "state_scale": 0.7858041414148955,
+        "m0_over_state_scale": 0.9997503395469474,
+        "margin_over_tolerance": 9997503395469.473,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n512": {
+        "represented_m0": 0.6838450253265304,
+        "state_scale": 0.6842151090142117,
+        "m0_over_state_scale": 0.9994591120792194,
+        "margin_over_tolerance": 9994591120792.193,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n1024": {
+        "represented_m0": 0.2,
+        "state_scale": 1.9999999999999996,
+        "m0_over_state_scale": 0.10000000000000003,
+        "margin_over_tolerance": 1000000000000.0002,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n1024": {
+        "represented_m0": 1.0,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 1.0,
+        "margin_over_tolerance": 10000000000000.0,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n1024": {
+        "represented_m0": 0.7854702176591333,
+        "state_scale": 0.7854802869411939,
+        "m0_over_state_scale": 0.9999871807323137,
+        "margin_over_tolerance": 9999871807323.137,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n1024": {
+        "represented_m0": 0.6834315131900363,
+        "state_scale": 0.6834445665492723,
+        "m0_over_state_scale": 0.9999809006320703,
+        "margin_over_tolerance": 9999809006320.703,
+        "guard_would_fire": false
+      }
+    },
+    "worst_m0_over_state_scale": 0.09999999999999999,
+    "worst_margin_over_tolerance": 999999999999.9999,
+    "n_ics_where_guard_would_fire": 0,
+    "verdict": "CLEAN -- the least-resolved Phase-1 initial condition still carries m0/state_scale = 1.0000e-01, a factor 1.000e+12 above the tolerance. Defect 1 requires that ratio to be AT roundoff (leg 89's witness case: 1.797e-16); no Phase-1 IC is within twelve orders of magnitude of it."
+  },
+  "part_b3_banked_blowup_labels": {
+    "scanned": [
+      "bench_boussinesq_silent_corruption_check.json",
+      "bench_target_norm_domain_guard_check.json",
+      "blowup_curve.json",
+      "ga_vs_random.json",
+      "leg_54_verify_headline.json",
+      "nongenericity.json",
+      "p2_conj24_relax.json",
+      "p2_ga_framework.json",
+      "p2_hl_anchor.json",
+      "p2_literature_scope.json",
+      "p2_regular_profile.json",
+      "p2_regular_profile_traj.json",
+      "p2_route_a12_v1_alpha_lit.json",
+      "p2_route_bhn_v1_adversarial.json",
+      "p2_route_boa_v1_adversarial.json",
+      "p2_route_brs_v1_status_audit.json",
+      "p2_route_bv_v1_velocity_benchmark.json",
+      "p2_route_c_pilot_v0.json",
+      "p2_route_d_dress.json",
+      "p2_route_d_probe.json",
+      "p2_route_d_v10_lower.json",
+      "p2_route_d_v11_anchor.json",
+      "p2_route_d_v12_defect.json",
+      "p2_route_d_v13_turning.json",
+      "p2_route_d_v14_first_integral.json",
+      "p2_route_d_v16_rehearsal.json",
+      "p2_route_d_v3_spaces.json",
+      "p2_route_d_v4_graded.json",
+      "p2_route_d_v5_holder.json",
+      "p2_route_d_v6_bounds.json",
+      "p2_route_d_v7_seminorm.json",
+      "p2_route_d_v8_quadratic.json",
+      "p2_route_d_v9_sharpen.json",
+      "p2_route_e_v1_spectrum.json",
+      "p2_route_ext2_v1_target_watch2.json",
+      "p2_route_ext3_v1_target_watch3.json",
+      "p2_route_ext_v1_target_watch.json",
+      "p2_route_f_v1_viscosity.json",
+      "p2_route_fd_v1_lit.json",
+      "p2_route_g_v1_collapse.json",
+      "p2_route_g_v1_g2.json",
+      "p2_route_gca_v1_adversarial.json",
+      "p2_route_h_v1_critical.json",
+      "p2_route_hlb_v1_contraction_lit.json",
+      "p2_route_i_v1_driven.json",
+      "p2_route_ia_v1_interval_stress.json",
+      "p2_route_ivb_v1_postrepair.json",
+      "p2_route_j_v1_literature.json",
+      "p2_route_k_v1_port.json",
+      "p2_route_ka_v1_kawahara.json",
+      "p2_route_l1_v1_interval.json",
+      "p2_route_l1_v2_spectral.json",
+      "p2_route_l1g_v1_lit.json",
+      "p2_route_l_v1_precond.json",
+      "p2_route_m_v1_targets.json",
+      "p2_route_mm_v1_shape.json",
+      "p2_route_nb_v1_targetnorm.json",
+      "p2_route_pc_v1_regression.json",
+      "p2_route_pcb_v1_postrepair.json",
+      "p2_route_port_v1_bordered.json",
+      "p2_route_port_v2_reach.json",
+      "p2_route_t_v1_border.json",
+      "p2_route_tc_v1_assemble.json",
+      "p2_route_tn_v1_consistency.json",
+      "p2_route_tna_v1_domain_audit.json",
+      "p2_route_v_v0_novelty.json",
+      "p2_route_xs_v1_shapes.json",
+      "p2_scenario2_relax.json",
+      "p2_two_scale_kladder.json",
+      "p2_two_scale_sweep.json",
+      "p2_weight_repairs_v1.json",
+      "p2_weight_repairs_v2.json",
+      "phase1_axis_screen.json",
+      "phase1_gate4.json",
+      "phase1_gate4_reform.json",
+      "phase1_gsustained.json",
+      "phase1_spike.json",
+      "spike0_rescaling.json",
+      "spike1_stepA_velocity.json",
+      "spike1_stepB_rescaled.json",
+      "spike1_stepC_gate.json",
+      "stage3_6_rough.json",
+      "stage3_resolution.json",
+      "summary_metrics.json"
+    ],
+    "hits": [
+      {
+        "file": "bench_boussinesq_silent_corruption_check.json",
+        "count": 4
+      },
+      {
+        "file": "p2_route_boa_v1_adversarial.json",
+        "count": 16
+      },
+      {
+        "file": "stage3_6_rough.json",
+        "count": 50
+      }
+    ],
+    "n_files_scanned": 84,
+    "hits_attributable_to_solve_boussinesq": 0,
+    "verdict": "CLEAN -- no banked artifact records a `blowup_candidate` produced by solve_boussinesq. The only hits are stage3_6_rough.json (1D gCLM, via solver/gclm.py -- a different module) and leg 89's own adversarial artifact, which records the defect rather than depending on it. The banked Phase-1 outcomes are `under_resolved` and `no_blowup` only."
+  },
+  "part_b4_banked_headline_reproduction": {
+    "banked_artifact": "writeup/data/phase1_spike.json",
+    "resolution": 128,
+    "ics": {
+      "smooth_sharp": {
+        "banked_t_resolved": 2.4601338298340107,
+        "repaired_t_resolved": 2.4601338298340107,
+        "abs_diff_t": 0.0,
+        "banked_amp_resolved": 29.014550798817318,
+        "repaired_amp_resolved": 29.014550798817318,
+        "abs_diff_amp": 0.0,
+        "banked_outcome": "under_resolved",
+        "repaired_outcome": "under_resolved",
+        "outcome_matches": true,
+        "exact": true
+      },
+      "smooth_mild": {
+        "banked_t_resolved": 5.878944765640108,
+        "repaired_t_resolved": 5.878944765640108,
+        "abs_diff_t": 0.0,
+        "banked_amp_resolved": 4.7054120855366275,
+        "repaired_amp_resolved": 4.7054120855366275,
+        "abs_diff_amp": 0.0,
+        "banked_outcome": "under_resolved",
+        "repaired_outcome": "under_resolved",
+        "outcome_matches": true,
+        "exact": true
+      },
+      "rough_h0.5": {
+        "banked_t_resolved": 0.060000000000000005,
+        "repaired_t_resolved": 0.060000000000000005,
+        "abs_diff_t": 0.0,
+        "banked_amp_resolved": 1.0059798465581513,
+        "repaired_amp_resolved": 1.0059798465581513,
+        "abs_diff_amp": 0.0,
+        "banked_outcome": "under_resolved",
+        "repaired_outcome": "under_resolved",
+        "outcome_matches": true,
+        "exact": true
+      },
+      "rough_h0.3": {
+        "banked_t_resolved": 0.03,
+        "repaired_t_resolved": 0.03,
+        "abs_diff_t": 0.0,
+        "banked_amp_resolved": 1.0026313311215689,
+        "repaired_amp_resolved": 1.0026313311215689,
+        "abs_diff_amp": 0.0,
+        "banked_outcome": "under_resolved",
+        "repaired_outcome": "under_resolved",
+        "outcome_matches": true,
+        "exact": true
+      }
+    },
+    "worst_abs_diff": 0.0,
+    "n_exact": 4,
+    "n_ics": 4,
+    "verdict": "4 of 4 banked N=128 Phase-1 measurements reproduce EXACTLY against the repaired module (worst absolute difference 0.000e+00). The banked Phase-1 spike numbers do not move."
+  },
+  "part_c_battery_rerun": {
+    "battery": "experiments/p2_route_boa_v1_adversarial.py (unmodified)",
+    "leg_89_artifact_left_intact": "writeup/data/p2_route_boa_v1_adversarial.json",
+    "n_cases": 90,
+    "families": {
+      "A_degenerate_streamfunction": {
+        "n_cases": 8,
+        "verdicts": {
+          "raised": 7,
+          "benign": 1
+        },
+        "silent_labels": []
+      },
+      "B_nan_seeded_vorticity": {
+        "n_cases": 30,
+        "verdicts": {
+          "flagged": 30
+        },
+        "silent_labels": []
+      },
+      "C_nan_seeded_temperature": {
+        "n_cases": 15,
+        "verdicts": {
+          "flagged": 6,
+          "propagated": 9
+        },
+        "silent_labels": []
+      },
+      "D_out_of_domain_coefficient": {
+        "n_cases": 13,
+        "verdicts": {
+          "raised": 11,
+          "benign": 2
+        },
+        "silent_labels": []
+      },
+      "E_degenerate_discretization": {
+        "n_cases": 16,
+        "verdicts": {
+          "raised": 13,
+          "benign": 3
+        },
+        "silent_labels": []
+      },
+      "F_detection_thresholds": {
+        "n_cases": 8,
+        "verdicts": {
+          "raised": 7,
+          "benign": 1
+        },
+        "silent_labels": []
+      }
+    },
+    "n_silent_gate_deciding": 0,
+    "n_silent_secondary": 0,
+    "n_cases_where_conservation_drift_masks_a_nan_limb": 0,
+    "gate_answer": "NO",
+    "pre_fix": {
+      "n_silent_gate_deciding": 19,
+      "n_silent_secondary": 4,
+      "n_masked": 13,
+      "gate_answer": "YES"
+    },
+    "verdict": "Leg 89's gate flips from YES to NO: 0 gate-deciding silent cases (was 19 of 82), 0 secondary (was 4 of 8), and conservation_drift masks a NaN limb in 0 of 90 (was 13 of 90)."
+  },
+  "wall_seconds": 171.95519037699705,
+  "headline": "NO BANKED PHASE-1 RESULT IS CONTAMINATED. Defect 2 needs an out-of-domain kappa: 0 of 5 call sites ever passed one. Defect 1 needs a represented m0 at roundoff: the worst Phase-1 initial condition sits 1.00e+12x above the tolerance. No banked artifact records a solve_boussinesq blowup_candidate, and the banked N=128 Phase-1 spike column reproduces exactly against the repaired module. No rework leg is needed."
+}

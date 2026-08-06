@@ -623,6 +623,40 @@ def main():
         "n_silent_secondary": n_silent_secondary,
         "n_cases_where_conservation_drift_masks_a_nan_limb": n_masked,
         "gate_deciding_families": gate_families,
+        # The battery itself is UNCHANGED by the bench repair -- same 90 cases, same
+        # judgement predicate -- because its value is that it is the instrument that
+        # measured the defect and now measures its absence. This block preserves the
+        # PRE-FIX answer verbatim, so regenerating the artifact against repaired code
+        # (which reports 0 silent) can never erase the finding that motivated the fix.
+        "history": {
+            "pre_fix_measurement_2026_08_06": {
+                "module_state": "solver/boussinesq.py before "
+                                "bench/fix-boussinesq-silent-corruption",
+                "gate_answer": "YES",
+                "n_silent_gate_deciding": 19,
+                "n_silent_secondary": 4,
+                "n_cases_where_conservation_drift_masks_a_nan_limb": 13,
+                "verdicts_by_family": {
+                    "A_degenerate_streamfunction": {"silent": 6, "raised": 1, "benign": 1},
+                    "B_nan_seeded_vorticity": {"flagged": 30},
+                    "C_nan_seeded_temperature": {"flagged": 3, "propagated": 12},
+                    "D_out_of_domain_coefficient": {"silent": 8, "propagated": 2,
+                                                    "benign": 2, "flagged": 1},
+                    "E_degenerate_discretization": {"silent": 5, "benign": 5, "flagged": 6},
+                    "F_detection_thresholds": {"silent": 4, "benign": 4},
+                },
+            },
+            "post_fix_measurement_2026_08_06": {
+                "module_state": "solver/boussinesq.py after "
+                                "bench/fix-boussinesq-silent-corruption",
+                "gate_answer": "NO",
+                "n_silent_gate_deciding": 0,
+                "n_silent_secondary": 0,
+                "n_cases_where_conservation_drift_masks_a_nan_limb": 0,
+                "repair_evidence":
+                    "writeup/data/bench_boussinesq_silent_corruption_check.json",
+            },
+        },
         "families": families,
         "cases": cases,
         "wall_seconds": time.perf_counter() - t_start,
