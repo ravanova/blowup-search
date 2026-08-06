@@ -117,3 +117,69 @@ Writes only: `test_boussinesq_adversarial.py`, `experiments/p2_route_boa_v1_adve
 `experiments/journal/leg_89.md`. `solver/boussinesq.py` is **read-only under every gate
 outcome**, including the yes-branch: a silent-corruption finding is escalated, never patched
 under this leg's authority.
+
+---
+
+## 6. FINDINGS (appended after construction, 2026-08-06)
+
+The pass above was committed before any number was seen (`95d516e`). What the battery then
+measured, over **90 cases in 84 s**:
+
+**Gate answer: YES — 19 silent-corruption cases of 82 gate-deciding, plus 4 of 8 secondary.**
+Escalated, not patched; `solver/boussinesq.py` is unchanged.
+
+| family | cases | silent | magnitude |
+|---|---|---|---|
+| A — degenerate/zero stream function | 8 | **6** | false `blowup_candidate` off a represented `m0` of **1.797e-16**; amplification **5.566e+13**, and **1.0e+298** at amplitude 1e-300 |
+| B — NaN/Inf-seeded vorticity | 30 | **0** | all 30 reach `diverged` in 1 step |
+| C — NaN/Inf-seeded temperature | 15 | 0 | 12 propagated, 3 flagged; `theta_final` 100% NaN while `conservation_drift` = **8.077e-18** |
+| D — out-of-domain `nu`/`kappa` | 13 | **8** | 5/5 `kappa` values bit-identical to the `kappa=0` run, energy-residual ratio **1.000** |
+| E — degenerate grid / discretization | 16 | **5** | `n=1,2` retain **1** mode, report `drift = 0.0`; `c1=c2=nan` relaxes `dt_min` **168.8×** |
+| F — detection thresholds (secondary) | 8 | **4** | `amplification_factor=nan` runs past **4.013×** amplification reporting `no_blowup` |
+
+`conservation_drift` masks a NaN limb in **13 of 90** cases.
+
+Full narrative, the four defects in severity order, and the scope caveats:
+`experiments/journal/leg_89.md`.
+
+### The three things this pass predicted, and what the run did with them
+
+1. **§3 predicted the `max`-with-NaN mask, and the run confirmed it exactly.** The pass named
+   `conservation_drift` (`solver/boussinesq.py:141`, "max of the two above; the logged guard
+   value") as the sharp case *before* any measurement, on the ground that Python's builtin `max`
+   is order-dependent on NaN. Measured: 13 of 90 cases, with `drift_guard=1e-9` failing to fire on
+   a run whose `theta_final` is 100% NaN. The same defect turned up on the **`min`** side of the
+   timestep, which the pass did *not* anticipate: a non-finite `c1`/`c2` removes its CFL limb
+   rather than failing, worth a **168.8×** step relaxation.
+
+2. **§2's mapping of clause 3 earned its keep, and clause 1 came back clean.** Had "extreme
+   grid-stretching" been dropped as inapplicable to a uniform grid, families D and E — **13 of the
+   19** gate-deciding silent cases — would never have been run, and the leg would have reported
+   the gate's *easier* half. The named clause the module handles well is clause 1: NaN-seeded
+   vorticity is the one genuinely robust path, 30/30 flagged. **The gate's own headline example is
+   the case that passes**; the failures are next door to it.
+
+3. **The witness discipline is what makes the `kappa` finding statable.** §3 pre-committed to
+   bit-for-bit array equality against the neutral control rather than "both are small". Without
+   it, `kappa=-0.5` returning `energy_balance_residual = 2.2188e-07` is indistinguishable from a
+   healthy viscous run — that number *is* the `kappa=0` value, to the last bit, and only the
+   bit-identity witness says so. The `nu` contrast (residual ratio **1.9745e+06**) then shows the
+   energy guard catches the `nu` half by accident of the identity's shape and cannot, even in
+   principle, see the `kappa` half.
+
+### The one case the battery was corrected on, mid-run
+
+`t_max = 0.0` was initially graded a failure and was **reclassified as a control** before the
+final run: asking for zero integration time is a legitimate degenerate request, and returning at
+once is the right answer. Only the malformed values (`nan`, negative) are graded. Recorded here
+because the correction moved the secondary count from 5 to 4, and a count that moved should say
+why it moved.
+
+### Instrument that was measured and then refused
+
+`n_runtime_warnings` is recorded per case but **decides nothing**. numpy raises its invalid-value
+`RuntimeWarning`s from C with a once-per-code-location registry that `simplefilter("always")` does
+not reliably reset — measured to report 0 on a case that does warn on a fresh interpreter. It is a
+lower bound, kept for the record only. The "silently" half of the gate is decided structurally
+instead, on whether every validity field is finite and plausible; no warning instrumentation is
+needed, because the silent cases perform no non-finite arithmetic at all.
