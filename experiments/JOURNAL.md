@@ -2950,5 +2950,22 @@ belong to a future window.
   definition matches (FI) including the anchor constant, re-checked to 1.15e-13 relative).
   Priority dated: the traveling-wave form is 2603.25104's; the underlying method is HQWW24
   (2024). No ban lifted, L1 stays measured-dead.
+- **Leg 113 (Route-MS) — NO:** 0 of 8 published certified INVISCID self-similar blow-ups run
+  a diagonal-tail (ell1-multiplier/radii-polynomial) framework, over a 15-row located ledger;
+  holds 0/2 peer-review-confirmed, 0/6 with every judgement call reversed. Clause ablation:
+  only dropping "inviscid" flips the gate (Takayasu-Lessard-Jaquette-Okamoto, Numer. Math.
+  151:693-750 2022, on nonlinear heat). Lesson 87 confirmed; no published repair for the
+  realization legs 52-54 measured dead. No escalation.
+- **Leg 116 (Route-NKA) — YES, not repaired (audit leg, escalated per its own gate):**
+  `nk_bounds.py`'s `budget()` validates only Z2>0, so a forbidden Z0=-1 turns an honest
+  refusal at a planted non-solution into a certified ball containing no true zero (missing
+  by 1.16 ball radii); 21/52 hypothesis-violating inputs false-close, plus a second family
+  where `farfield_modelling_error_bound` under-reports by up to ~1e8x via a truncated-window
+  max standing in for a supremum. All latent — every in-repo caller stays inside the range
+  where the bounds dominate (worst ratio 0.99997); no banked Route-D number affected.
+  `solver/nk_bounds.py` not patched, per the gate. Third module found with the same
+  Y0/Z0/Z1 nonnegativity gap (after port_certification.py and interval_certificate.py, both
+  already repaired) — flagged for the DM as a candidate shared-guard repair rather than a
+  third one-off fix.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
