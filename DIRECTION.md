@@ -282,13 +282,13 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 |---|---|---|---|---|---|---|
 | LEG-A | 58 | **NG** — the no-go as a theorem | **YES** (stage `NG`, proposed `NEXT`) | heavy | `leg/ng-v1` | Does the no-go admit a proof for a class of `A` strictly larger than block-diagonal? |
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
-| LEG-C | 63 | **M2** — target reselection, screened by the measured predicate | no | standard | `leg/m2-v1` | Is there an uncertified target whose linearization has a **multiplier** unbounded part? |
+| LEG-C | 85 | **GRA** — adversarial audit of gclm_rescaled.py's fixed-point reporting | no | standard | `leg/gra-v1` | Does the relaxation loop ever report reaching the fixed point when it hasn't? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
 | LEG-E | 84 | **TNA** — does target_norm.py silently extrapolate beyond its validated domain? | no | standard | `leg/tna-v1` | Under adversarial inputs past X_max=745, does target_norm.py silently return an untrustworthy result or flag the violation? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
-| LEG-G | 82 | **EXT3** — has the rank-3 target object been certified since? | no | light | `leg/ext3-v1` | Has a certificate for Boussinesq_S2_nonsymmetric (arXiv:2604.01868 sec 6.2) been published since? |
+| LEG-G | 87 | **IVB** — post-repair regression check, interval.py | no | standard | `leg/ivb-v1` | Post-repair, does interval.py correctly handle leg 69's original cases with zero regression at the live K-range? |
 | LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
-| LEG-I | 78 | **HLB** — tighter known-answer check for HL's Scenario-2 contraction ratio | no | light | `leg/hlb-v1` | Does a primary source publish the contraction ratio to tighter precision than the ~1% this repository checks against? |
+| LEG-I | 86 | **PCB** — post-repair regression check, port_certification.py | no | light | `leg/pcb-v1` | Post-repair, does the line-sweep preconditioner still hit 9.5e-16 with no timing regression? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
 
 **Several earlier paragraphs above ("third pass," "second pass," and their predecessors)
