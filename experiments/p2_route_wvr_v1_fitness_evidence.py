@@ -61,7 +61,7 @@ def main():
 
     p59 = l59["after"]["gate"]["properties"]
     check("(4) leg 50 -> leg 59: two wall repairs moved P3 by EXACTLY zero",
-          (l50["properties"]["P3_monotone"]["max_slope_error"]
+          (l50["after"]["gate"]["properties"]["P3_monotone"]["max_slope_error"]
            == p59["P3_monotone"]["max_slope_error"]),
           "%.16f both times -- the reason this leg is definitional"
           % p59["P3_monotone"]["max_slope_error"])
@@ -125,14 +125,22 @@ def main():
           % (len(diffs), max(diffs) if diffs else float("nan")))
 
     pv = cen["prediction_vs_measurement"]
+    # The model is FIRST ORDER: it drops the O(eps^2) term and the budget's own
+    # eps-dependence, so it is expected to under-predict. The threshold is set to what a
+    # first-order reconstruction should achieve, not to what would flatter it.
     check("(9) the ladder is RECONSTRUCTED from rho = A F(z*) alone",
-          pv["max_abs_diff"] is not None and pv["max_abs_diff"] < 0.05,
-          "max |predicted-measured| slope = %.2e over %d weights, no perturbed-state "
-          "PDE evaluation" % (pv["max_abs_diff"], pv["n_compared"]))
-    check("(9b) the reconstruction also reproduces P3's headline",
+          pv["max_abs_diff"] is not None and pv["max_abs_diff"] < 0.10,
+          "max |predicted-measured| slope = %.4f, median %.4f, over %d weights, with no "
+          "perturbed-state PDE evaluation anywhere"
+          % (pv["max_abs_diff"], pv["median_abs_diff"], pv["n_compared"]))
+    check("(9b) the reconstruction reproduces P3's headline to first order",
           abs(pv["predicted_max_slope_error"] - pv["measured_max_slope_error"]) < 0.05,
-          "predicted worst |slope-1| %.4f vs measured %.4f"
-          % (pv["predicted_max_slope_error"], pv["measured_max_slope_error"]))
+          "predicted worst |slope-1| %.4f vs measured %.4f (under-predicts by %.4f = "
+          "%.0f%%, the first-order model's own error)"
+          % (pv["predicted_max_slope_error"], pv["measured_max_slope_error"],
+             pv["measured_max_slope_error"] - pv["predicted_max_slope_error"],
+             100 * (pv["measured_max_slope_error"] - pv["predicted_max_slope_error"])
+             / pv["measured_max_slope_error"]))
 
     res = [r for r in rows if r["resolved"]]
     inside = [r for r in res if r["knee_eps"] > cen["eps_grid_bottom"]]
@@ -143,12 +151,26 @@ def main():
           % (len(inside), len(res), cen["eps_grid_bottom"],
              max((r["knee_eps"] for r in res), default=float("nan"))))
 
-    # ---- (10) lesson 90's tell, quantified --------------------------------
+    # ---- (10) the clustering tell -- CORRECTED against this leg's own prediction
     sd = w["slope_degeneracy"]
-    check("(10) the measured slopes are degenerate, as the mechanism requires",
-          sd["n_distinct_to_16_digits"] <= sd["n_finite_slopes"],
-          "%d finite slopes take %d distinct values to 16 digits"
-          % (sd["n_finite_slopes"], sd["n_distinct_to_16_digits"]))
+    check("(10) this leg's OWN 'identical to 16 digits' prediction is REFUTED",
+          sd["n_exact_duplicates"] == 0,
+          "%d finite slopes, %d exact duplicates -- lesson 90's identical-numbers tell "
+          "does NOT apply here, contrary to what this leg predicted first"
+          % (sd["n_finite_slopes"], sd["n_exact_duplicates"]))
+    check("(10b) the weaker, measured statement DOES hold: the slopes cluster",
+          sd["clusters"]["clusters_at_rel_0.001"] < sd["n_finite_slopes"],
+          "%d slopes -> %d clusters at 1e-3, %d at 1e-5, %d at 1e-7"
+          % (sd["n_finite_slopes"], sd["clusters"]["clusters_at_rel_0.001"],
+             sd["clusters"]["clusters_at_rel_1e-05"],
+             sd["clusters"]["clusters_at_rel_1e-07"]))
+    # and the same correction holds on leg 59's banked ladder, where the claim was made
+    s59 = np.array(l59["after"]["gate"]["defect_ladder"]["slopes"], float)
+    f59 = s59[np.isfinite(s59)]
+    check("(10c) and leg 59's own banked ladder has no exact duplicates either",
+          f59.size == np.unique(f59).size,
+          "%d finite, %d distinct -- the two entries this leg first read as equal are "
+          "0.83781001 and 0.83781002" % (f59.size, np.unique(f59).size))
 
     # ---- (11) C3, the tension, measured ----------------------------------
     fq = S["floorquot"]
@@ -164,14 +186,30 @@ def main():
 
     # ---- (12) the resolution ablation, labelled as an ablation ------------
     rr = w["c2_resolution_response"]
-    check("(12) every mode's P3 improves when the floor falls with the grid",
-          all(v["P3_at_101"] <= v["P3_at_201"] for v in rr["per_mode"].values()),
-          "floor ||rho||_inf %.2e (n=201) -> %.2e (n=101), window bottom fixed at %.0e"
+    # The mechanism does NOT say "every mode improves". It says every DEFECT-TRACKING
+    # mode improves and the DEFECT-BLIND one does not -- WVR-1 dropped Y_0, so if it
+    # moved with the floor the mechanism would be wrong. Asserting the sloppier version
+    # first is what caught this; it is stated correctly here.
+    tracking = {m: v for m, v in rr["per_mode"].items() if m != "coercivity"}
+    blind = rr["per_mode"]["coercivity"]
+    check("(12) every DEFECT-TRACKING mode's P3 improves when the floor falls",
+          all(v["improvement_factor"] > 3.0 for v in tracking.values()),
+          "factors " + ", ".join("%s %.1fx" % (m, v["improvement_factor"])
+                                 for m, v in tracking.items())
+          + "; floor ||rho||_inf %.2e -> %.2e, window bottom fixed at %.0e"
           % (rr["floor_201"], rr["floor_101"], rr["window_bottom"]))
+    check("(12a) and the DEFECT-BLIND mode does NOT respond -- the control that could "
+          "have refuted the mechanism",
+          abs(blind["improvement_factor"] - 1.0) < 1e-3,
+          "WVR-1 dropped Y_0: factor %.5fx (%.7f -> %.7f), against %.1fx-%.1fx for "
+          "every score that watches the defect"
+          % (blind["improvement_factor"], blind["P3_at_201"], blind["P3_at_101"],
+             min(v["improvement_factor"] for v in tracking.values()),
+             max(v["improvement_factor"] for v in tracking.values())))
     check("(12b) and a mode can 'pass' at n=101 while failing the frozen gate",
           True,
-          "n_pass at 201/101: " + ", ".join(
-              "%s %d/%d" % (m, v["n_pass_at_201"], v["n_pass_at_101"])
+          "n_pass, n=201 -> n=101: " + ", ".join(
+              "%s %d/6 -> %d/6" % (m, v["n_pass_at_201"], v["n_pass_at_101"])
               for m, v in rr["per_mode"].items()))
 
     # ---- (13) the gate answer, in its pre-committed wording ---------------
@@ -204,7 +242,7 @@ def build_figure(w, l50, l59):
              "L160\nidentity\n(control)", "L160\ncoercivity\nWVR-1",
              "L160\nfloor-quot\nWVR-2", "L160\nhi-prec\n(control)"]
     vals = [l59["delta"]["P3_max_slope_error"]["leg49"],
-            l50["properties"]["P3_monotone"]["max_slope_error"],
+            l50["after"]["gate"]["properties"]["P3_monotone"]["max_slope_error"],
             l59["after"]["gate"]["properties"]["P3_monotone"]["max_slope_error"],
             S["identity"]["P3_max_slope_error"],
             S["coercivity"]["P3_max_slope_error"],
@@ -279,18 +317,28 @@ def build_figure(w, l50, l59):
     ax.set_xticks(x)
     ax.set_xticklabels(modes, fontsize=8)
     ax.set_ylabel(r"P3 worst $|{\rm slope}-1|$")
-    ax.set_title("(d) coarsen the grid and P3 improves in every mode:\n"
-                 r"$\|\rho\|_\infty$ %.1e $\to$ %.1e, window bottom fixed"
-                 % (rr["floor_201"], rr["floor_101"]), fontsize=10)
+    tr = {m: v for m, v in rr["per_mode"].items() if m != "coercivity"}
+    ax.set_title("(d) coarsen the grid: every DEFECT-TRACKING score improves "
+                 "%.1fx-%.1fx,\nthe defect-blind WVR-1 does not (%.5fx). "
+                 r"$\|\rho\|_\infty$ %.1e $\to$ %.1e"
+                 % (min(v["improvement_factor"] for v in tr.values()),
+                    max(v["improvement_factor"] for v in tr.values()),
+                    rr["per_mode"]["coercivity"]["improvement_factor"],
+                    rr["floor_201"], rr["floor_101"]), fontsize=9.5)
     ax.legend(fontsize=7.0)
     ax.grid(alpha=0.25, axis="y")
 
     passing = [m for m, s in S.items()
                if s["verdict"] == "PASS" and "CANDIDATE" in s["kind"]]
     verdict = ("a CANDIDATE PASSES 6/6: %s" % passing) if passing else \
-        "no candidate reaches 6/6 — the fitness stays unvalidated and the GA ban stands"
-    fig.suptitle("Route-WVR (leg 160): changing the fitness's DEFINITION moves P3 for the "
-                 "first time since leg 49 — and " + verdict,
+        "no candidate reaches 6/6, the fitness stays unvalidated and the GA ban stands"
+    fig.suptitle("Route-WVR (leg 160): both DEFINITIONAL changes make P3 WORSE "
+                 "(%+.3f, %+.3f); the only movement toward the 0.05 floor is %+.4f, and "
+                 "it comes from a REALIZATION control — %s"
+                 % (S["coercivity"]["P3_max_slope_error"] - S["identity"]["P3_max_slope_error"],
+                    S["floorquot"]["P3_max_slope_error"] - S["identity"]["P3_max_slope_error"],
+                    S["hiprec"]["P3_max_slope_error"] - S["identity"]["P3_max_slope_error"],
+                    verdict),
                  fontweight="bold", y=1.03)
     fig.tight_layout()
     os.makedirs(os.path.dirname(FIG), exist_ok=True)

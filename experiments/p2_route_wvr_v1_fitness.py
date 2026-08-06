@@ -80,11 +80,19 @@ has NO lower cut: the grid runs to eps = 1e-11. Writing the perturbed state's Ne
 than the fitness wherever eps |d_i| < |rho_i| at the component the weighted max selects.
 Note the mechanism is COMPONENTWISE and the max makes it weight-selected: a weight that
 puts its mass where the probe direction is small sees a floor-dominated signal. This
-predicts, before any run, the tell leg 50/59 already banked without reading it: identical
-slopes to 16 digits at different weights (their `defect_ladder.slopes` has 0.8378100167662509
-at two different roster entries), because the slope depends only on WHICH index the max
-selects -- a property of the state, not of the weight. Lesson 90 says four identical numbers
-should read as a mechanism or a bug, never as four measurements.
+predicts, before any run, a tell in leg 50/59's own banked ladder: if the slope depends only on
+WHICH index the weighted max selects, then weights selecting the same index must share a slope,
+and the 21 resolved slopes must CLUSTER rather than spread.
+
+    CORRECTION, recorded here because this leg got it wrong first. The prediction as
+    originally written in this docstring was that the slopes would be IDENTICAL to 16
+    digits, and it cited leg 59's `0.8378100167662509` as appearing twice. That is false
+    and the data refutes it: leg 59's 21 finite slopes have ZERO exact duplicates, and the
+    two entries in question are 0.83781001 and 0.83781002, differing in the 8th digit.
+    Lesson 90's "identical numbers are a tell" does NOT apply here. What is true is the
+    weaker, measured statement `slope_degeneracy` now reports: the 21 slopes fall into 10
+    clusters at a relative tolerance of 1e-3. The index selection is shared; the residual
+    spread is the O(eps^2) term and the budget's own eps-dependence, which differ per weight.
 
 C3 -- WHY THE ANCHOR IN WVR-2 IS NOT OPTIONAL
 -----------------------------------------------------------------------------
@@ -289,7 +297,29 @@ def floor_census(problem, z_star, thetas):
             "argmax_index_of_floor": i_max,
             "predicted_slope": slope,
         })
-    return {"rho_inf": float(np.abs(rho).max()),
+    # WHY WVR-2 subtracts too much, measured rather than argued: the floor ESTIMATE the
+    # definition can compute (tau = FLOOR_SAFETY * |A| @ |noise|, an absolute-value bound
+    # with no cancellation) against the floor that is actually there (rho = A F(z*), which
+    # cancels). If the ratio is large, componentwise subtraction annihilates the signal
+    # before it removes the floor -- and that is a property of the ESTIMATOR, not of the
+    # idea of subtracting.
+    noise = np.abs(np.asarray(problem.F(z_star))
+                   - np.asarray(problem._F_longdouble(z_star), dtype=float))
+    tau = 8.0 * (np.abs(eng0.A) @ noise)
+    ratio = tau / np.maximum(np.abs(rho), 1e-300)
+    over = {
+        "tau_inf": float(tau.max()),
+        "rho_inf": float(np.abs(rho).max()),
+        "tau_over_rho_inf": float(tau.max() / max(np.abs(rho).max(), 1e-300)),
+        "median_componentwise_tau_over_rho": float(np.median(ratio)),
+        "fraction_of_components_over_subtracted": float(np.mean(ratio > 1.0)),
+        "note": ("tau is an absolute-value bound on a signed quantity, so it carries no "
+                 "cancellation; rho does. This is the measured reason WVR-2's "
+                 "componentwise subtraction is defect-blind at n=201."),
+    }
+
+    return {"over_subtraction": over,
+            "rho_inf": float(np.abs(rho).max()),
             "rho_weighted_note": "rho = A F(z*), the float64 residual in state units",
             "residual_floor_of_F": float(problem.residual_floor(z_star)),
             "F_inf_at_z_star": float(np.abs(problem.F(z_star)).max()),
@@ -379,14 +409,26 @@ def run_at(n_c, n_f, frozen):
     }
     block["floor_census"] = cen
 
-    fin = meas[np.isfinite(meas)]
+    fin = np.sort(meas[np.isfinite(meas)])
+    clusters = {}
+    for tol in (1e-3, 1e-5, 1e-7):
+        c = 1 if fin.size else 0
+        for a, b in zip(fin[:-1], fin[1:]):
+            if abs(b - a) > tol * max(abs(a), 1e-30):
+                c += 1
+        clusters["clusters_at_rel_%g" % tol] = int(c)
     block["slope_degeneracy"] = {
         "n_finite_slopes": int(fin.size),
-        "n_distinct_to_16_digits": int(np.unique(fin).size),
-        "distinct_values": np.unique(fin).tolist(),
-        "note": ("leg 50/59's ladder repeated 0.8378100167662509 at two different "
-                 "weights; the fitted slope depends only on which component the "
-                 "weighted max selects, which is a property of the state"),
+        "n_exact_duplicates": int(fin.size - np.unique(fin).size),
+        "clusters": clusters,
+        "sorted_slopes": fin.tolist(),
+        "note": ("CORRECTED against this leg's own first prediction, which was that the "
+                 "slopes would be identical to 16 digits: there are ZERO exact "
+                 "duplicates, so lesson 90's identical-numbers tell does NOT apply. The "
+                 "measured statement is the clustering above -- weights whose weighted "
+                 "max selects the same component share a slope to ~3 significant "
+                 "figures, and the residual spread is the O(eps^2) term plus the "
+                 "budget's own eps-dependence."),
     }
     return block
 
