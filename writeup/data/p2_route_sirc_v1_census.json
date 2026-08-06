@@ -1,0 +1,1038 @@
+{
+  "leg": 237,
+  "route": "SIRC",
+  "gate": "Does any OTHER solver/ module (besides profile_newton.py, already confirmed affected) use a scale-invariant residual/ratio as its SOLE convergence or closure test, without an absolute-scale companion check?",
+  "answer": "YES",
+  "exposure_grade": "LATENT",
+  "answer_long": "YES -- solver/collocation_newton.py::ACollocation.newton (and `continuation`, transitively) computes `converged` from rel = rms(R)/rms(Omega H(Omega)) ALONE, which is exactly invariant under the module's own documented degeneracy (Omega, c) -> (lam Omega, lam c), and never consults either gauge row. Graded LATENT: across the six-route trial space named in G5 (lambda-scaled, small-amplitude, dilated, random, budget-truncated starts, and the a-ladder through `continuation`) the iteration returns to the gauged member in every case, so no caller is currently handed a wrong number. The negative is claimed in THAT trial space and nowhere wider (lesson 91).",
+  "criteria": {
+    "C1": "the boolean verdict is a function of a scale-invariant quantity only",
+    "C2": "no absolute-scale companion enters the SAME boolean",
+    "C3": "the equation admits a scaling degeneracy, so an escaped member exists"
+  },
+  "coverage": {
+    "solver_py_files": 47,
+    "modules_with_a_convergence_or_closure_verdict": 18,
+    "verdict_sites_classified": 20,
+    "modules_with_no_verdict_site": 27,
+    "modules_with_no_verdict_site_list": [
+      "advection_scope",
+      "boussinesq",
+      "boussinesq_velocity",
+      "certificate_guards",
+      "certificate_shapes",
+      "chen_inviscid_certificate",
+      "critical_dissipation",
+      "decay_collocation",
+      "decay_grading",
+      "energy_coercivity",
+      "fractional_boussinesq",
+      "fractional_gclm",
+      "ga_search",
+      "gclm",
+      "gclm_family",
+      "hilbert_holder",
+      "hilbert_pointwise",
+      "holder_norms",
+      "interval",
+      "line_hilbert",
+      "literature_gates",
+      "op_lower",
+      "origin_h2_certificate",
+      "spectral_utils",
+      "target_norm",
+      "target_selection",
+      "turning_point"
+    ]
+  },
+  "hits": [
+    {
+      "module": "solver/collocation_newton.py",
+      "function": "ACollocation.newton",
+      "line": 359,
+      "reason": "R = Omega H(Omega) - c Omega_X - a U Omega_X scales as lam^2 and the denominator Omega H(Omega) scales as lam^2, so rel is EXACTLY invariant under the module's own documented degeneracy (Omega, c) -> (lam Omega, lam c). The two gauge rows that pin the member are rows J and J+1 of F; `converged` is computed from R alone and never consults them. Same shape as leg 202 M2."
+    },
+    {
+      "module": "solver/collocation_newton.py",
+      "function": "continuation",
+      "line": 366,
+      "reason": "transitive: every branch decision -- retry, accept-the-retry, and RESEED THE REMAINDER OF THE LADDER -- is a comparison of the same scale-invariant relres, and the escaped member scores at machine zero on it. This is leg 202 M1's rescue-clause shape driven by leg 202 M2's blind quantity."
+    }
+  ],
+  "census": [
+    {
+      "module": "solver/collocation_newton.py",
+      "function": "ACollocation.newton",
+      "line": 359,
+      "verdict_expression": "converged = bool(rel < 1e-9), rel = rms(residual_a(om, c)) / rms(om * (H @ om))",
+      "scale_invariant": true,
+      "absolute_companion": false,
+      "scaling_degeneracy": true,
+      "hit": true,
+      "reason": "R = Omega H(Omega) - c Omega_X - a U Omega_X scales as lam^2 and the denominator Omega H(Omega) scales as lam^2, so rel is EXACTLY invariant under the module's own documented degeneracy (Omega, c) -> (lam Omega, lam c). The two gauge rows that pin the member are rows J and J+1 of F; `converged` is computed from R alone and never consults them. Same shape as leg 202 M2."
+    },
+    {
+      "module": "solver/collocation_newton.py",
+      "function": "continuation",
+      "line": 366,
+      "verdict_expression": "r[\"relres\"] > 1e-10 -> retry; accept alt if alt[\"relres\"] < r[\"relres\"]; reseed if r[\"relres\"] < 1e-10",
+      "scale_invariant": true,
+      "absolute_companion": false,
+      "scaling_degeneracy": true,
+      "hit": true,
+      "reason": "transitive: every branch decision -- retry, accept-the-retry, and RESEED THE REMAINDER OF THE LADDER -- is a comparison of the same scale-invariant relres, and the escaped member scores at machine zero on it. This is leg 202 M1's rescue-clause shape driven by leg 202 M2's blind quantity."
+    },
+    {
+      "module": "solver/collocation_newton.py",
+      "function": "ACollocation.newton_gauged",
+      "line": 285,
+      "verdict_expression": "converged = bool(converged_kept and full_ok); converged_kept = kept_last < 1e-11 (ABSOLUTE sup); full_ok = has_referent and relres < relres_tol",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "the relative half is ANDed with an absolute sup test on the gauged rows, and has_referent refuses to fabricate a denominator from an identically-zero source scale (leg 150's repair). The absolute companion is present and load-bearing -- G3 measures it."
+    },
+    {
+      "module": "solver/gclm_rescaled.py",
+      "function": "run",
+      "line": 191,
+      "verdict_expression": "converged = res < tol_eff, tol_eff = tol * max(|f(0)|/4, GAUGE_TOL_FLOOR)",
+      "scale_invariant": true,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "scale-invariant BY DESIGN (leg 85's Route-GRA repair) and the absolute scale is carried explicitly: the gauge is READ FROM THE DATA at f(0), returned as `gauge` and `tol_effective`, and floored so poisoned data cannot pass. Decisive difference from the defect class: the module's CLAIM quantity is the rate c_omega, which is itself invariant under the same lambda family, so an escaped member does not carry a wrong reported number -- there is nothing for the blindness to hide."
+    },
+    {
+      "module": "solver/marginal_flow.py",
+      "function": "run (record verdict)",
+      "line": 355,
+      "verdict_expression": "converged = finite and no diverged_at_tau and worst_res < NEWTON_STAGNATION and state_growth < STATE_GROWTH (1e5)",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "worst_res is a residual-over-floor RATIO, but it is ANDed with an absolute finiteness test and an absolute state-growth cap whose calibration is written out at the site (246x headroom above the largest legitimate trajectory, 141x below the nearest true positive)."
+    },
+    {
+      "module": "solver/nk_seminorm.py",
+      "function": "operator_norm_fixed_point",
+      "line": 242,
+      "verdict_expression": "closes = False if nxt > T_cap (ABSOLUTE cap); loop stop |nxt - T| <= tol * max(1.0, T)",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "the relative-with-floor expression is the loop's STOP, not the verdict; `closes` is decided by the absolute cap T_cap. The max(1.0, T) floor also makes the stop absolute for T < 1."
+    },
+    {
+      "module": "solver/interval_certificate.py",
+      "function": "KawaharaProblem.newton",
+      "line": 1034,
+      "verdict_expression": "loop stop max|step| < tol * max(1.0, max|a|); returns (a, hist) with NO boolean",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "no convergence boolean is returned at all -- the caller gets the residual ladder as a magnitude. The closure verdict is `closes` from the radii polynomial, whose Y_0 is a NORM (dimensional), so that test is not scale-invariant."
+    },
+    {
+      "module": "solver/port_certification.py",
+      "function": "gmres",
+      "line": 148,
+      "verdict_expression": "loop stop `rel < tol`; returns (x, relative_residual, krylov_dim) with NO boolean",
+      "scale_invariant": true,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "the module's own docstring at line 121 pre-empts this exact defect: 'Reported as a MAGNITUDE (the relative residual), never as converged/not (lesson 58)'. A scale-invariant quantity that is never turned into a boolean cannot be a sole convergence TEST. Banked as the explicit anti-instance."
+    },
+    {
+      "module": "solver/spectral_certificate.py",
+      "function": "tail_norm_ladder",
+      "line": 611,
+      "verdict_expression": "verdict from r = last increment ratio: \"converges\" if r < 0.95, \"log_divergent\" if r < 1.05, else \"power_divergent\"",
+      "scale_invariant": true,
+      "absolute_companion": false,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "scale-invariant and sole, but C3 FAILS: the property under test is membership of h in l^1_w, which is itself exactly invariant under h -> lam h. Every member of the family has the same true answer, so there is no escaped member whose reported number is wrong. This is the one site that satisfies C1 and C2 and is still not the defect -- which is why C3 is in the classification."
+    },
+    {
+      "module": "solver/dissipative_profile.py",
+      "function": "newton / solve_for_a",
+      "line": 333,
+      "verdict_expression": "loop stop nrm < tol (ABSOLUTE rms); returns residual_rms as a magnitude, NO boolean",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "the module has BOTH degeneracies (amplitude and dilation) and pins them with c_omega and an explicit `scale_gauge`, which is returned. The stop is an absolute rms and no boolean is manufactured from it."
+    },
+    {
+      "module": "solver/hl_rescaled.py",
+      "function": "RescaledHL.run / RescaledHLDynamic.run",
+      "line": "545, 700",
+      "verdict_expression": "converged = bool(res < tol), res = sup|L0| (ABSOLUTE)",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "absolute sup of the steady operator, plus an amplitude renormalisation gauge applied every step (normalize_amp) and an absolute divergence cut res > 1e8."
+    },
+    {
+      "module": "solver/boussinesq_rescaled.py",
+      "function": "run",
+      "line": 278,
+      "verdict_expression": "converged = res < tol (ABSOLUTE) with an explicit renorm to a fixed odd-slope target",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "the renorm block rescales to wx0_target/ex0_target every step, which is the absolute-scale companion made structural."
+    },
+    {
+      "module": "solver/bordered_hl.py",
+      "function": "BorderedHL.newton",
+      "line": 253,
+      "verdict_expression": "converged = bool(res[-1] < tol and isfinite(res[-1])), res = |F(z)|_inf over ALL rows INCLUDING the border",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "absolute sup over the full bordered system, gauge rows included."
+    },
+    {
+      "module": "solver/weight_search.py",
+      "function": "WeightedProblem.newton",
+      "line": 372,
+      "verdict_expression": "converged = bool(ladder[-1] < tol), ladder = |F|_inf; tol raised to residual_floor(z) when auto",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "absolute sup, and the auto floor is an absolute arithmetic-floor estimate; stalled_at_floor is reported separately."
+    },
+    {
+      "module": "solver/first_integral.py",
+      "function": "newton",
+      "line": 613,
+      "verdict_expression": "converged = bool(res < 1e-10), res = sup|residual| (ABSOLUTE)",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "absolute sup; the amplitude gauge Omega(0) = -1 is imposed exactly."
+    },
+    {
+      "module": "solver/finite_support.py",
+      "function": "solve",
+      "line": 324,
+      "verdict_expression": "converged = bool(hist[-1] < 1e-8), hist = sup|F| (ABSOLUTE)",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "absolute sup over the system including the free-boundary row."
+    },
+    {
+      "module": "solver/rescaled_spectrum.py",
+      "function": "newton",
+      "line": 284,
+      "verdict_expression": "converged = bool(res < 1e-8), res = sup|R| (ABSOLUTE); gauge returned as its own field",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": true,
+      "hit": false,
+      "reason": "absolute sup, and the normalisation gauge k.b + 1 is returned as `gauge` so the caller can see the member."
+    },
+    {
+      "module": "solver/viscous_novelty.py",
+      "function": "branch sweep",
+      "line": 607,
+      "verdict_expression": "ok = hist[-1] < tol AND -1e-6 <= eps_n < 1.0 AND |eps_n - eps| < 0.05 AND |mu_n - mu| < 0.5",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "absolute defect plus three absolute range/continuity checks."
+    },
+    {
+      "module": "solver/reduced_certificate.py",
+      "function": "build",
+      "line": 229,
+      "verdict_expression": "delegates: `if not r['converged']` from the profile solver it is handed",
+      "scale_invariant": false,
+      "absolute_companion": null,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "no verdict of its own; inherits whatever its input solver reports. Recorded so the census has no silent gap."
+    },
+    {
+      "module": "solver/nk_bounds.py, solver/nk_fourier.py, solver/interval_certificate.py",
+      "function": "radii-polynomial `closes`",
+      "line": "538, 315, 501",
+      "verdict_expression": "closes = (1 - Z1 > 0) and (Z2 > 0) and (disc >= 0) and r_min < r_max",
+      "scale_invariant": false,
+      "absolute_companion": true,
+      "scaling_degeneracy": false,
+      "hit": false,
+      "reason": "Z1 is dimensionless but Y_0 is a NORM of the defect and carries the absolute scale into the discriminant, so the test is not scale-invariant. certificate_guards.py additionally refuses hypothesis-violating inputs rather than laundering them."
+    }
+  ],
+  "G1_scale_invariance": {
+    "J": 200,
+    "a": 0.0,
+    "rows": [
+      {
+        "lambda": 1.0,
+        "rel": 9.010200889351202e-14,
+        "residual_rms": 1.777986867788154e-14,
+        "source_rms": 0.19733043576081483,
+        "c": 0.496088350088748,
+        "Omega_at_theta0": -0.9999999999999997
+      },
+      {
+        "lambda": 2.0,
+        "rel": 9.010200889351202e-14,
+        "residual_rms": 7.111947471152615e-14,
+        "source_rms": 0.7893217430432593,
+        "c": 0.992176700177496,
+        "Omega_at_theta0": -1.9999999999999993
+      },
+      {
+        "lambda": 10.0,
+        "rel": 1.694125346305477e-13,
+        "residual_rms": 3.3430249281990108e-12,
+        "source_rms": 19.73304357608148,
+        "c": 4.96088350088748,
+        "Omega_at_theta0": -9.999999999999991
+      },
+      {
+        "lambda": 1000.0,
+        "rel": 1.7735506931168928e-13,
+        "residual_rms": 3.499755311166516e-08,
+        "source_rms": 197330.4357608148,
+        "c": 496.08835008874803,
+        "Omega_at_theta0": -1000.0
+      },
+      {
+        "lambda": 0.001,
+        "rel": 1.571780664464292e-13,
+        "residual_rms": 3.1016016343916185e-20,
+        "source_rms": 1.9733043576081484e-07,
+        "c": 0.000496088350088748,
+        "Omega_at_theta0": -0.001
+      }
+    ],
+    "rel_spread_absolute": 8.725306041817726e-14,
+    "rel_spread_relative": 0.9683808550961187,
+    "c_dynamic_range": 1000000.0,
+    "residual_rms_dynamic_range": 1128370346584.8206,
+    "reading": "rel is constant to the quoted spread while c and the absolute residual both move over the quoted range: the verdict quantity cannot see the scaling direction."
+  },
+  "G2_escaped_member": {
+    "J": 200,
+    "a": 0.0,
+    "reference": {
+      "c": 0.496088350088748,
+      "relres": 9.010200889351202e-14,
+      "converged": true
+    },
+    "rows": [
+      {
+        "lambda": 1.0,
+        "verdict_converged": true,
+        "rel": 9.010200889351202e-14,
+        "residual_rms": 1.777986867788154e-14,
+        "c": 0.496088350088748,
+        "c_reference": 0.496088350088748,
+        "c_relative_error": 0.0,
+        "gauge0_defect": 3.3306690738754696e-16,
+        "gauge1_defect": 0.0,
+        "gauge_defect_sup": 3.3306690738754696e-16
+      },
+      {
+        "lambda": 2.0,
+        "verdict_converged": true,
+        "rel": 9.010200889351202e-14,
+        "residual_rms": 7.111947471152615e-14,
+        "c": 0.992176700177496,
+        "c_reference": 0.496088350088748,
+        "c_relative_error": 1.0,
+        "gauge0_defect": -0.9999999999999993,
+        "gauge1_defect": -0.5,
+        "gauge_defect_sup": 0.9999999999999993
+      },
+      {
+        "lambda": 10.0,
+        "verdict_converged": true,
+        "rel": 1.694125346305477e-13,
+        "residual_rms": 3.3430249281990108e-12,
+        "c": 4.96088350088748,
+        "c_reference": 0.496088350088748,
+        "c_relative_error": 9.0,
+        "gauge0_defect": -8.999999999999991,
+        "gauge1_defect": -4.5,
+        "gauge_defect_sup": 8.999999999999991
+      },
+      {
+        "lambda": 1000.0,
+        "verdict_converged": true,
+        "rel": 1.7735506931168928e-13,
+        "residual_rms": 3.499755311166516e-08,
+        "c": 496.08835008874803,
+        "c_reference": 0.496088350088748,
+        "c_relative_error": 999.0,
+        "gauge0_defect": -999.0,
+        "gauge1_defect": -499.5,
+        "gauge_defect_sup": 999.0
+      }
+    ],
+    "n_verdict_true_with_broken_gauge": 3,
+    "worst_c_relative_error": 999.0,
+    "worst_gauge_defect": 999.0,
+    "reading": "the verdict expression returns True on every member, including one whose gauges are off by the quoted defect and whose reported c is wrong by the quoted factor. This establishes C1 and C2. Whether the ITERATION can LAND there is a separate question -- see G5."
+  },
+  "G3_control_absolute_companion": {
+    "J": 200,
+    "a": 0.0,
+    "rows": [
+      {
+        "eps": 1e-06,
+        "converged": false,
+        "converged_kept_rows": true,
+        "kept_sup": 1.0902390101819068e-13,
+        "relres": 36.70009323699717,
+        "relres_has_referent": true,
+        "reason": "the gauged subsystem converged (kept_sup 1.090e-13) but the FULL residual over all 200 rows does not: relres = 3.6700e+01 >= relres_tol = 1.0000e+00"
+      },
+      {
+        "eps": 1e-08,
+        "converged": false,
+        "converged_kept_rows": true,
+        "kept_sup": 1.1057821325266587e-13,
+        "relres": 37.417172649885956,
+        "relres_has_referent": true,
+        "reason": "the gauged subsystem converged (kept_sup 1.106e-13) but the FULL residual over all 200 rows does not: relres = 3.7417e+01 >= relres_tol = 1.0000e+00"
+      },
+      {
+        "eps": 1e-10,
+        "converged": false,
+        "converged_kept_rows": true,
+        "kept_sup": 5.717648576819554e-14,
+        "relres": 41.286641060629606,
+        "relres_has_referent": true,
+        "reason": "the gauged subsystem converged (kept_sup 5.718e-14) but the FULL residual over all 200 rows does not: relres = 4.1287e+01 >= relres_tol = 1.0000e+00"
+      }
+    ],
+    "n_converged": 0,
+    "reading": "the absolute companion (kept_sup < 1e-11) is the field that separates the cases; the relative one does not."
+  },
+  "G3b_profile_newton_calibration": {
+    "available": true,
+    "n": 201,
+    "rows": [
+      {
+        "eps": 1e-08,
+        "converged": true,
+        "relres": 5.370740116856905e-06,
+        "c": -6127.935060523039,
+        "c_reference": 0.49797481247254166,
+        "c_relative_error": 12306.712873501878,
+        "gauge_defect_sup": 0.2500000282826913,
+        "escaped": true
+      },
+      {
+        "eps": 1e-10,
+        "converged": true,
+        "relres": 1.1065266985680062e-07,
+        "c": -306421.2591609528,
+        "c_reference": 0.49797481247254166,
+        "c_relative_error": 615335.8552701124,
+        "gauge_defect_sup": 0.2500000006721662,
+        "escaped": true
+      }
+    ],
+    "reference_c": 0.49797481247254166,
+    "n_escaped": 2,
+    "reading": "the KNOWN positive, re-run here at this leg's own resolution: on profile_newton the same class of start DOES reach an escaped member reported converged. That is the contrast that makes collocation_newton's grade LATENT rather than materially exposed."
+  },
+  "G5_reachability": {
+    "J": 200,
+    "reference_c": 0.496088350088748,
+    "rows": [
+      {
+        "route": "A_lambda_start",
+        "case": "lam=0.01",
+        "converged": true,
+        "relres": 7.217353551610178e-14,
+        "c": 0.49608835008875124,
+        "c_relative_error": 6.490067285065198e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=0.1",
+        "converged": true,
+        "relres": 6.980159742512673e-14,
+        "c": 0.4960883500887508,
+        "c_relative_error": 5.5948855905734456e-15,
+        "gauge_defect_sup": 8.881784197001252e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=1.5",
+        "converged": true,
+        "relres": 7.443675834666511e-14,
+        "c": 0.4960883500887518,
+        "c_relative_error": 7.609044403179886e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=2",
+        "converged": true,
+        "relres": 8.185513345043697e-14,
+        "c": 0.49608835008875385,
+        "c_relative_error": 1.1749259740204236e-14,
+        "gauge_defect_sup": 1.1102230246251565e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=5",
+        "converged": true,
+        "relres": 9.196969702331784e-14,
+        "c": 0.49608835008875324,
+        "c_relative_error": 1.0518384910278078e-14,
+        "gauge_defect_sup": 6.661338147750939e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=10",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=100",
+        "converged": true,
+        "relres": 7.56401722740345e-14,
+        "c": 0.49608835008875213,
+        "c_relative_error": 8.2804306740487e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "A_lambda_start",
+        "case": "lam=1000",
+        "converged": true,
+        "relres": 8.314397145730167e-14,
+        "c": 0.4960883500887504,
+        "c_relative_error": 4.811601607893163e-15,
+        "gauge_defect_sup": 7.771561172376096e-16,
+        "escaped": false
+      },
+      {
+        "route": "B_small_amplitude",
+        "case": "eps=1e-06",
+        "converged": true,
+        "relres": 8.258231668369651e-14,
+        "c": 0.4960883500887527,
+        "c_relative_error": 9.399407792163389e-15,
+        "gauge_defect_sup": 2.220446049250313e-16,
+        "escaped": false
+      },
+      {
+        "route": "B_small_amplitude",
+        "case": "eps=1e-08",
+        "converged": false,
+        "relres": 15714.392181672167,
+        "c": -6151.331376758854,
+        "c_relative_error": 12400.669082449544,
+        "gauge_defect_sup": 0.2499999999659417,
+        "escaped": false
+      },
+      {
+        "route": "B_small_amplitude",
+        "case": "eps=1e-10",
+        "converged": false,
+        "relres": 1807670.0539670198,
+        "c": -307591.0749329999,
+        "c_relative_error": 620033.8527730458,
+        "gauge_defect_sup": 0.24999999999998623,
+        "escaped": false
+      },
+      {
+        "route": "C_dilation",
+        "case": "mu=1.2",
+        "converged": true,
+        "relres": 8.758043901914978e-14,
+        "c": 0.49608835008875346,
+        "c_relative_error": 1.0965975757523953e-14,
+        "gauge_defect_sup": 8.881784197001252e-16,
+        "escaped": false
+      },
+      {
+        "route": "C_dilation",
+        "case": "mu=2",
+        "converged": true,
+        "relres": 7.699621011604629e-14,
+        "c": 0.4960883500887512,
+        "c_relative_error": 6.378169573253728e-15,
+        "gauge_defect_sup": 5.551115123125783e-16,
+        "escaped": false
+      },
+      {
+        "route": "C_dilation",
+        "case": "mu=5",
+        "converged": true,
+        "relres": 1.0179625598933104e-13,
+        "c": 0.4960883500887484,
+        "c_relative_error": 7.832839826802824e-16,
+        "gauge_defect_sup": 1.1102230246251565e-16,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=0",
+        "converged": false,
+        "relres": 0.0019455234874974385,
+        "c": 0.003720950595027958,
+        "c_relative_error": 0.9924994195200062,
+        "gauge_defect_sup": 7.2868394314085094e-06,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=1",
+        "converged": false,
+        "relres": 0.02383985948536389,
+        "c": 0.003084675438503043,
+        "c_relative_error": 0.9937820038750129,
+        "gauge_defect_sup": 0.0003601619994046956,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=2",
+        "converged": false,
+        "relres": 0.00012962044396516858,
+        "c": 0.003875624941133878,
+        "c_relative_error": 0.9921876316175525,
+        "gauge_defect_sup": 1.8193071338323819e-07,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=3",
+        "converged": false,
+        "relres": 0.11013490331381484,
+        "c": 0.0002446007018984848,
+        "c_relative_error": 0.9995069412497699,
+        "gauge_defect_sup": 0.1597453113676517,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=4",
+        "converged": false,
+        "relres": 0.021213224440891194,
+        "c": 0.26270098434286676,
+        "c_relative_error": 0.4704552439180023,
+        "gauge_defect_sup": 0.01219294449425723,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=5",
+        "converged": false,
+        "relres": 0.0007387927818398721,
+        "c": 0.0023806875138602944,
+        "c_relative_error": 0.9952010815947716,
+        "gauge_defect_sup": 4.184475664859022e-07,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=6",
+        "converged": false,
+        "relres": 0.0027838896449747024,
+        "c": -4.143181889222344,
+        "c_relative_error": 9.351701644437219,
+        "gauge_defect_sup": 0.2506117027741225,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=7",
+        "converged": false,
+        "relres": 0.026554190969684397,
+        "c": 0.00525215805366863,
+        "c_relative_error": 0.9894128575026423,
+        "gauge_defect_sup": 0.0009057758975403174,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=8",
+        "converged": false,
+        "relres": 0.0017465504037122376,
+        "c": 0.015328444381777466,
+        "c_relative_error": 0.9691013820843903,
+        "gauge_defect_sup": 7.167504328997598e-05,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=9",
+        "converged": false,
+        "relres": 0.004231586239854066,
+        "c": 0.10244397396409956,
+        "c_relative_error": 0.7934965133815927,
+        "gauge_defect_sup": 0.00026215807468210617,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=10",
+        "converged": false,
+        "relres": 0.009190365883561185,
+        "c": 0.1944608019948839,
+        "c_relative_error": 0.6080117544383058,
+        "gauge_defect_sup": 0.0006915101564612947,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=11",
+        "converged": false,
+        "relres": 0.0025707561442527903,
+        "c": 0.0015597611674166853,
+        "c_relative_error": 0.9968558802738713,
+        "gauge_defect_sup": 0.001056211512545091,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=12",
+        "converged": false,
+        "relres": 0.037238363343966144,
+        "c": 0.0017597311777877277,
+        "c_relative_error": 0.9964527867314906,
+        "gauge_defect_sup": 0.0002784435294398424,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=13",
+        "converged": false,
+        "relres": 0.000639671211300238,
+        "c": 0.4854054824314512,
+        "c_relative_error": 0.02153420384773336,
+        "gauge_defect_sup": 2.7240862222721596e-05,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=14",
+        "converged": false,
+        "relres": 0.0005711995761551695,
+        "c": 0.002091816404959214,
+        "c_relative_error": 0.9957833793021243,
+        "gauge_defect_sup": 3.5716249291439794e-08,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=15",
+        "converged": false,
+        "relres": 0.02130854869166618,
+        "c": 0.3470208006923716,
+        "c_relative_error": 0.30048589000267567,
+        "gauge_defect_sup": 0.03344019685372468,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=16",
+        "converged": false,
+        "relres": 0.004147286353460197,
+        "c": 0.0028157821398772554,
+        "c_relative_error": 0.994324030912289,
+        "gauge_defect_sup": 0.0006586269838855241,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=17",
+        "converged": false,
+        "relres": 0.0009980881548022835,
+        "c": 0.00734063190128542,
+        "c_relative_error": 0.9852029746314901,
+        "gauge_defect_sup": 1.7248933845418701,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=18",
+        "converged": false,
+        "relres": 0.000478522710146058,
+        "c": 0.008965435516312816,
+        "c_relative_error": 0.9819277442925057,
+        "gauge_defect_sup": 2.03440185692072e-06,
+        "escaped": false
+      },
+      {
+        "route": "D_random",
+        "case": "seed=19",
+        "converged": false,
+        "relres": 0.01982486865152028,
+        "c": 0.0036331574300115283,
+        "c_relative_error": 0.9926763903458697,
+        "gauge_defect_sup": 6.540887002720597e-05,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=1",
+        "converged": false,
+        "relres": 5.7382823816128705e-05,
+        "c": 0.4960728073114016,
+        "c_relative_error": 3.133066386998194e-05,
+        "gauge_defect_sup": 5.282441151166495e-13,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=2",
+        "converged": false,
+        "relres": 1.6364161688804108e-09,
+        "c": 0.4960883496929824,
+        "c_relative_error": 7.977724984056314e-10,
+        "gauge_defect_sup": 1.1102230246251565e-16,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=3",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=5",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=10",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=20",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      },
+      {
+        "route": "E_budget",
+        "case": "max_iter=60",
+        "converged": true,
+        "relres": 1.0110040951068107e-13,
+        "c": 0.4960883500887529,
+        "c_relative_error": 9.846998639409264e-15,
+        "gauge_defect_sup": 4.440892098500626e-16,
+        "escaped": false
+      }
+    ],
+    "continuation_ladder_J60": [
+      {
+        "a": 0.0,
+        "converged": true,
+        "relres": 3.8737278531529295e-14,
+        "c": 0.4870784354608422,
+        "far_field_fraction": 0.47392654279939833
+      },
+      {
+        "a": 0.3,
+        "converged": false,
+        "relres": 5.668979957361917e-07,
+        "c": 0.5653535947097392,
+        "far_field_fraction": 0.46926265764254893
+      },
+      {
+        "a": 0.6,
+        "converged": false,
+        "relres": 9.086166635466515e-05,
+        "c": 0.6515563339280462,
+        "far_field_fraction": 0.46356776649991677
+      },
+      {
+        "a": 0.8999999999999999,
+        "converged": false,
+        "relres": 0.004172552333509832,
+        "c": 0.6377457623854484,
+        "far_field_fraction": 0.45944972408749696
+      },
+      {
+        "a": 1.2,
+        "converged": false,
+        "relres": 0.001273830901248249,
+        "c": 0.9148326341340127,
+        "far_field_fraction": 0.4454490052730808
+      },
+      {
+        "a": 1.5,
+        "converged": false,
+        "relres": 0.0023395301574152282,
+        "c": 0.6800027991039148,
+        "far_field_fraction": 0.5112476190802765
+      }
+    ],
+    "n_cases": 41,
+    "n_converged": 17,
+    "n_escaped": 0,
+    "n_ladder_converged_off_anchor": 0,
+    "worst_gauge_defect_among_converged": 8.881784197001252e-16,
+    "worst_c_relative_error_among_converged": 1.1749259740204236e-14,
+    "reading": "if n_escaped is 0 the defect is LATENT in this module: the verdict cannot see the scaling direction, but the two gauge rows in the overdetermined Gauss-Newton pull every start in this trial space back to the gauged member, so no caller is currently handed a wrong number. Latent is not absent -- the guard is the ITERATION's behaviour, not the TEST, and nothing in the module enforces it."
+  },
+  "claim_adjacency": {
+    "question": "does a banked number depend on the hit function?",
+    "method": "git grep every call site of ACollocation.newton and of collocation_newton.continuation outside solver/, keeping only files that import ACollocation from this module",
+    "files_importing_ACollocation_outside_solver": [
+      "experiments/bench_first_integral_support_guard_check.py",
+      "experiments/journal/leg_135.md",
+      "experiments/journal/leg_151.md",
+      "experiments/journal/leg_167.md",
+      "experiments/p2_route_cna_v1_adversarial.py",
+      "experiments/p2_route_cnb_v1_postrepair.py",
+      "experiments/p2_route_cnr_v1_repair.py",
+      "experiments/p2_route_d_v12_defect.py",
+      "experiments/p2_route_d_v13_turning.py",
+      "experiments/p2_route_d_v14_first_integral.py",
+      "experiments/p2_route_dcb_v1_postrepair.py",
+      "experiments/p2_route_dcr_v1_repair.py",
+      "experiments/p2_route_tpa_v1_adversarial.py",
+      "test_collocation_newton.py",
+      "test_collocation_newton_adversarial.py",
+      "test_collocation_newton_postrepair.py",
+      "test_first_integral.py",
+      "test_turning_point.py",
+      "writeup/data/p2_route_dcr_v1_repair.json",
+      "writeup/novelty/leg_114.md",
+      "writeup/novelty/leg_118.md",
+      "writeup/novelty/leg_135.md",
+      "writeup/novelty/leg_150.md",
+      "writeup/novelty/leg_151.md",
+      "writeup/novelty/leg_237.md"
+    ],
+    "call_sites": [
+      {
+        "site": "experiments/p2_route_cnb_v1_postrepair.py:305:            rp = PRE.ACollocation(J, a=a).newton()",
+        "file": "experiments/p2_route_cnb_v1_postrepair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnb_v1_postrepair.py:306:            rq = POST.ACollocation(J, a=a).newton()",
+        "file": "experiments/p2_route_cnb_v1_postrepair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:229:    kern[\"newton_two_gauge\"] = (sha_arr(cp.newton(c0=C, max_iter=40)[\"Omega\"])",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:230:                                == sha_arr(cq.newton(c0=C, max_iter=40)[\"Omega\"]))",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:309:    rpost = cpost.newton(om0=bad, c0=C, max_iter=20)",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:312:    rpre2 = cpre.newton(om0=bad, c0=C, max_iter=20)",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "test_collocation_newton_adversarial.py:250:    r = col.newton(om0=_poison(col.anchor(), np.nan), c0=C, max_iter=20)",
+        "file": "test_collocation_newton_adversarial.py",
+        "kind": "test"
+      },
+      {
+        "site": "test_collocation_newton_adversarial.py:282:    rn = col.newton(c0=C, max_iter=0)          # the sibling, unchanged",
+        "file": "test_collocation_newton_adversarial.py",
+        "kind": "test"
+      },
+      {
+        "site": "test_collocation_newton_adversarial.py:325:    r = col.newton(om0=np.zeros(J), c0=C, max_iter=120)",
+        "file": "test_collocation_newton_adversarial.py",
+        "kind": "test"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:315:        PRE.continuation([float(\"nan\")], J=40, max_iter=20)",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "experiments/p2_route_cnr_v1_repair.py:320:        got = POST.continuation([float(\"nan\")], J=40, max_iter=20)",
+        "file": "experiments/p2_route_cnr_v1_repair.py",
+        "kind": "audit/repair runner"
+      },
+      {
+        "site": "test_collocation_newton_adversarial.py:256:    rows = continuation([float(\"nan\")], J=40, max_iter=20)",
+        "file": "test_collocation_newton_adversarial.py",
+        "kind": "test"
+      },
+      {
+        "site": "test_collocation_newton_adversarial.py:264:            f\"continuation([nan]) returns {len(rows)} flagged row with converged=False and \"",
+        "file": "test_collocation_newton_adversarial.py",
+        "kind": "test"
+      },
+      {
+        "site": "writeup/novelty/leg_114.md:220:  failure path takes it down: `continuation([nan], J=40)` \u2192 `KeyError('relres')`.",
+        "file": "writeup/novelty/leg_114.md",
+        "kind": "other"
+      }
+    ],
+    "n_call_sites": 14,
+    "n_in_audit_or_test_files": 13,
+    "n_in_claim_bearing_experiment_runners": 0,
+    "claim_bearing_sites": [],
+    "verdict": "NOT_CLAIM_ADJACENT",
+    "note": "Route-D's real consumers -- test_collocation_newton.py, experiments/p2_route_d_v12_defect.py, p2_route_d_v13_turning.py -- call `newton_gauged`, the sibling that carries leg 150's absolute companion, NOT the hit. That is why the grade is what it is, and it is the single most load-bearing fact in this leg."
+  }
+}
