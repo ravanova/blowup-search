@@ -1,0 +1,642 @@
+{
+ "leg": 216,
+ "route": "CGF",
+ "module_repaired": "solver/certificate_guards.py",
+ "modules_read_only": [
+  "solver/nk_bounds.py",
+  "solver/port_certification.py",
+  "solver/interval_certificate.py",
+  "solver/chen_inviscid_certificate.py"
+ ],
+ "repairs_the_finding_of": {
+  "leg": 199,
+  "branch": "leg/199-cga-v1",
+  "gate_hits": 16
+ },
+ "m1_repaired_elsewhere_by": {
+  "leg": 215,
+  "branch": "leg/215-cgr-v1",
+  "file": "solver/nk_bounds.py",
+  "landed_on_main": false
+ },
+ "gate": "Does repairing the remaining mechanisms in certificate_guards.py cause all 15 remaining previously-silently-accepted adversarial cases to now raise/reject, while every one of leg 199's own confirmed-safe live call sites stays bit-identical to its pre-repair banked value?",
+ "gate_answer": "NO",
+ "clause_1_cases_now_rejecting": 13,
+ "clause_1_cases_total": 15,
+ "clause_1_cases_resisting": [
+  "B_nonreal_Fraction",
+  "D1b_empty_at_the_consumer"
+ ],
+ "clause_2_live_sites_compared": 43,
+ "clause_2_live_sites_moved": [],
+ "clause_2_merge_base": "4f6cf4b1333974614255929be30f188c23abec39",
+ "controls_total": 17,
+ "controls_failed": [],
+ "cases": [
+  {
+   "case": "A1_bool_True",
+   "mechanism": "M3",
+   "surface": "hypothesis_violations",
+   "probe": "True",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: Y_0 must be a real number, got bool; the radii polynomial's constants are norms.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": {
+    "budget": "TypeError: Y_0 must be a real number, got bool; the radii polynomial's constants are norms."
+   },
+   "note": "a FLAG in a norm slot is now refused by type, before any coercion to 1.0/0.0",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "A1_bool_False",
+   "mechanism": "M3",
+   "surface": "hypothesis_violations",
+   "probe": "False",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: Y_0 must be a real number, got bool; the radii polynomial's constants are norms.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": {
+    "budget": "TypeError: Y_0 must be a real number, got bool; the radii polynomial's constants are norms."
+   },
+   "note": "a FLAG in a norm slot is now refused by type, before any coercion to 1.0/0.0",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "C3_gamma_bool",
+   "mechanism": "M3",
+   "surface": "unit_range_violation",
+   "probe": "True",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: gamma must be a real number, got bool; a Holder-type exponent is a real number.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": {
+    "hilbert_farfield_bound(gamma=True)": "TypeError: gamma must be a real number, got bool; a Holder-type exponent is a real number."
+   },
+   "note": "the 1.2605493138651522x-smaller claimed bound is no longer reachable: the flag is refused at the guard, not evaluated as the exponent 1.0",
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "B_nonreal_str",
+   "mechanism": "M2",
+   "surface": "radius_violation",
+   "probe": "'0.5'",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: r_min must be a real number, got str; r_min is the radius of the ball the theorem concludes a zero lives in, and the verdict function computes it as a float64 itself.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "sibling `hypothesis_violations` on the same value: \"TypeError: Y_0 must be a real number, got str; the radii polynomial's constants \"; the two guards now AGREE: True",
+   "siblings_agree": true,
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "B_nonreal_bool_True",
+   "mechanism": "M2",
+   "surface": "radius_violation",
+   "probe": "True",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: r_min must be a real number, got bool; r_min is the radius of the ball the theorem concludes a zero lives in, and the verdict function computes it as a float64 itself.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "sibling `hypothesis_violations` on the same value: \"TypeError: Y_0 must be a real number, got bool; the radii polynomial's constants\"; the two guards now AGREE: True",
+   "siblings_agree": true,
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "B_nonreal_Decimal",
+   "mechanism": "M2",
+   "surface": "radius_violation",
+   "probe": "Decimal('0.5')",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: r_min must be a real number, got Decimal; r_min is the radius of the ball the theorem concludes a zero lives in, and the verdict function computes it as a float64 itself.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "sibling `hypothesis_violations` on the same value: \"TypeError: Y_0 must be a real number, got Decimal; the radii polynomial's consta\"; the two guards now AGREE: True",
+   "siblings_agree": true,
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "B_nonreal_Fraction",
+   "mechanism": "M2",
+   "surface": "radius_violation",
+   "probe": "Fraction(1, 2)",
+   "after_outcome_kind": "value",
+   "after_output": "None",
+   "after_accepted": true,
+   "now_rejects": false,
+   "consumer_after": null,
+   "note": "sibling `hypothesis_violations` on the same value: '[]'; the two guards now AGREE: True",
+   "siblings_agree": true,
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": false
+  },
+  {
+   "case": "C4_gamma_str",
+   "mechanism": "M2",
+   "surface": "unit_range_violation",
+   "probe": "'0.5'",
+   "after_outcome_kind": "raise",
+   "after_output": "TypeError: gamma must be a real number, got str; a Holder-type exponent is a real number.",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": {
+    "hilbert_farfield_bound(gamma='0.5')": "TypeError: gamma must be a real number, got str; a Holder-type exponent is a real number."
+   },
+   "note": "the unnamed TypeError from the power operator three lines downstream (leg 98's B20/B21 shape) is replaced by a NAMED refusal at the guard",
+   "before_accepted": true,
+   "before_output": "None",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "A3_fraction_neg_below_denormal",
+   "mechanism": "M4",
+   "surface": "hypothesis_violations",
+   "probe": "Fraction(-1, 10**400)",
+   "after_outcome_kind": "value",
+   "after_output": "['Y_0 is negative (Fraction(-1, 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": {
+    "budget.closes": false,
+    "budget.r_min": "nan"
+   },
+   "note": "the sign is now read from the EXACT value, not from its float64 shadow -0.0; leg 199's magnitude for this one is <= 1 ULP and is not inflated here",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "A6_empty_constants",
+   "mechanism": "M5",
+   "surface": "hypothesis_violations",
+   "probe": "()",
+   "after_outcome_kind": "raise",
+   "after_output": "ValueError: hypothesis_violations: no constants were supplied, so an empty violation list would certify that every one of zero constants is admissible -- a vacuous pass. The radii polynomial's hypotheses are claims ABOUT",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "zero constants examined is no longer 'every constant is admissible'",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "D1_empty_list",
+   "mechanism": "M5",
+   "surface": "positive_weight_violations",
+   "probe": "[]",
+   "after_outcome_kind": "raise",
+   "after_output": "ValueError: positive_weight_violations: v_cod has no entries, so an empty violation list would certify that all zero of its entries came from a norm -- a vacuous pass. A weight vector DEFINES a norm; the empty vector def",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "an empty weight vector defines no norm and is refused",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "D1_empty_ndarray",
+   "mechanism": "M5",
+   "surface": "positive_weight_violations",
+   "probe": "[]",
+   "after_outcome_kind": "raise",
+   "after_output": "ValueError: positive_weight_violations: v_cod has no entries, so an empty violation list would certify that all zero of its entries came from a norm -- a vacuous pass. A weight vector DEFINES a norm; the empty vector def",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "an empty weight vector defines no norm and is refused",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "D1_exhausted_generator",
+   "mechanism": "M5",
+   "surface": "positive_weight_violations",
+   "probe": "GEN",
+   "after_outcome_kind": "raise",
+   "after_output": "ValueError: positive_weight_violations: v_cod has no entries, so an empty violation list would certify that all zero of its entries came from a norm -- a vacuous pass. A weight vector DEFINES a norm; the empty vector def",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "an empty weight vector defines no norm and is refused",
+   "before_accepted": true,
+   "before_output": "[]",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  },
+  {
+   "case": "D1b_empty_at_the_consumer",
+   "mechanism": "M5",
+   "surface": "nk_bounds.py:225 numpy pre-screen",
+   "probe": "two_point_dual with empty weights",
+   "after_outcome_kind": "value",
+   "after_output": "{'screen_treats_empty_as_clean': True}",
+   "after_accepted": true,
+   "now_rejects": false,
+   "consumer_after": {
+    "two_point_dual(empty)": "ValueError: zero-size array to reduction operation minimum which has no identity"
+   },
+   "note": "OUT OF TERRITORY: leg 199's accept flag for this case is literally `np.all(isfinite([])) and np.all([] > 0)`, evaluated in `solver/nk_bounds.py`. The guard is never consulted, so no edit to `certificate_guards.py` can move it; the repaired guard DOES now refuse the same empty vector at its own surface (D1_empty_ndarray).",
+   "before_accepted": true,
+   "before_output": "{'screen_treats_empty_as_clean': True}",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": false
+  },
+  {
+   "case": "E_empty_violation_list",
+   "mechanism": "M7",
+   "surface": "invalid_input_reason",
+   "probe": "[]",
+   "after_outcome_kind": "raise",
+   "after_output": "ValueError: invalid_input_reason: called with no violations, which would assemble a full INVALID_INPUT rejection sentence naming zero violated hypotheses. An empty violation list means the input is ADMISSIBLE; callers mu",
+   "after_accepted": false,
+   "now_rejects": true,
+   "consumer_after": null,
+   "note": "an accusation with no charge is no longer representable",
+   "before_accepted": true,
+   "before_output": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): . No discriminant",
+   "before_status": "HIT_LATENT",
+   "repaired_by_this_leg": true
+  }
+ ],
+ "live_bit_identity": {
+  "budget[closing].Y0_max": {
+   "pre": "0x1.34c67f9b291c1p-7",
+   "post": "0x1.34c67f9b291c1p-7",
+   "identical": true
+  },
+  "budget[closing].closes": {
+   "pre": true,
+   "post": true,
+   "identical": true
+  },
+  "budget[closing].degenerate_ball": {
+   "pre": true,
+   "post": true,
+   "identical": true
+  },
+  "budget[closing].one_minus_Z": {
+   "pre": "0x1.6666666664338p-1",
+   "post": "0x1.6666666664338p-1",
+   "identical": true
+  },
+  "budget[closing].r_min": {
+   "pre": "0x0.0p+0",
+   "post": "0x0.0p+0",
+   "identical": true
+  },
+  "budget[closing].reason": {
+   "pre": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius.",
+   "post": "DEGENERATE_BALL (not refused): r_min is exactly 0.0 AND Y_0 is exactly 0.0, which is the honest zero-residual case -- the centre itself is a zero and the theorem's conclusion holds on the closed ball {x_bar}. Flagged so a caller does not read it as a ball of positive radius.",
+   "identical": true
+  },
+  "budget[open].Y0_max": {
+   "pre": "0x0.0p+0",
+   "post": "0x0.0p+0",
+   "identical": true
+  },
+  "budget[open].closes": {
+   "pre": false,
+   "post": false,
+   "identical": true
+  },
+  "budget[open].degenerate_ball": {
+   "pre": false,
+   "post": false,
+   "identical": true
+  },
+  "budget[open].one_minus_Z": {
+   "pre": "-0x1.99999999999a0p-5",
+   "post": "-0x1.99999999999a0p-5",
+   "identical": true
+  },
+  "budget[open].r_min": {
+   "pre": "nan",
+   "post": "nan",
+   "identical": true
+  },
+  "budget[open].reason": {
+   "pre": null,
+   "post": null,
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.1]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.2]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.3]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.4]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.5]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.6]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.7]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_argmaxX[alpha=1.8]": {
+   "pre": "0x1.0000000000000p+0",
+   "post": "0x1.0000000000000p+0",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.1]": {
+   "pre": "0x1.341041090b96cp+1",
+   "post": "0x1.341041090b96cp+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.2]": {
+   "pre": "0x1.37ea44d413ef4p+1",
+   "post": "0x1.37ea44d413ef4p+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.3]": {
+   "pre": "0x1.3bfda59fe3024p+1",
+   "post": "0x1.3bfda59fe3024p+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.4]": {
+   "pre": "0x1.404881c4f2c4cp+1",
+   "post": "0x1.404881c4f2c4cp+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.5]": {
+   "pre": "0x1.44c968d6c2bd3p+1",
+   "post": "0x1.44c968d6c2bd3p+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.6]": {
+   "pre": "0x1.497f47cdc1947p+1",
+   "post": "0x1.497f47cdc1947p+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.7]": {
+   "pre": "0x1.4e6959936102ap+1",
+   "post": "0x1.4e6959936102ap+1",
+   "identical": true
+  },
+  "farfield_bound[alpha=1.8]": {
+   "pre": "0x1.53871ada6f2c8p+1",
+   "post": "0x1.53871ada6f2c8p+1",
+   "identical": true
+  },
+  "hilbert_farfield_bound[0]": {
+   "pre": "0x1.8a016a3614490p+0",
+   "post": "0x1.8a016a3614490p+0",
+   "identical": true
+  },
+  "hilbert_farfield_bound[1]": {
+   "pre": "0x1.1a9be6525ca32p+0",
+   "post": "0x1.1a9be6525ca32p+0",
+   "identical": true
+  },
+  "hilbert_farfield_bound[2]": {
+   "pre": "0x1.bd960f8ede97bp-2",
+   "post": "0x1.bd960f8ede97bp-2",
+   "identical": true
+  },
+  "hypothesis_violations[clean 3-tuple, allow_none]": {
+   "pre": [],
+   "post": [],
+   "identical": true
+  },
+  "hypothesis_violations[clean 4-tuple]": {
+   "pre": [],
+   "post": [],
+   "identical": true
+  },
+  "interval_certificate.radii_verdict": {
+   "pre": {
+    "Y0_over_budget": "0x1.bd1c1ca7c089cp-15",
+    "budget": "0x1.34c67f9b2ce5ep-6",
+    "closes": true,
+    "r_max": "0x1.b91b91b91b91ap-5",
+    "r_min": "0x1.7f7bfbbcd89dap-20",
+    "reason": "ok"
+   },
+   "post": {
+    "Y0_over_budget": "0x1.bd1c1ca7c089cp-15",
+    "budget": "0x1.34c67f9b2ce5ep-6",
+    "closes": true,
+    "r_max": "0x1.b91b91b91b91ap-5",
+    "r_min": "0x1.7f7bfbbcd89dap-20",
+    "reason": "ok"
+   },
+   "identical": true
+  },
+  "invalid_input_reason[one violation]": {
+   "pre": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+   "post": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+   "identical": true
+  },
+  "port_certification.radii_polynomial_status": {
+   "pre": {
+    "Y0": "0x1.0c6f7a0b5ed8dp-20",
+    "Z1": "0x1.3333333333333p-2",
+    "Z2": "0x1.a000000000000p+3",
+    "closes": true,
+    "discriminant": "0x1.f5b4edb2f661ep-2",
+    "status": "EVALUATED"
+   },
+   "post": {
+    "Y0": "0x1.0c6f7a0b5ed8dp-20",
+    "Z1": "0x1.3333333333333p-2",
+    "Z2": "0x1.a000000000000p+3",
+    "closes": true,
+    "discriminant": "0x1.f5b4edb2f661ep-2",
+    "status": "EVALUATED"
+   },
+   "identical": true
+  },
+  "positive_weight_violations[allow_zero]": {
+   "pre": [],
+   "post": [],
+   "identical": true
+  },
+  "positive_weight_violations[clean]": {
+   "pre": [],
+   "post": [],
+   "identical": true
+  },
+  "positive_weight_violations[dirty]": {
+   "pre": [
+    "v_cod has 1 NaN entry",
+    "v_cod has 1 infinite entry",
+    "v_cod has 1 non-positive entry (worst -3.0); a weight defines a norm, so it is strictly positive and finite"
+   ],
+   "post": [
+    "v_cod has 1 NaN entry",
+    "v_cod has 1 infinite entry",
+    "v_cod has 1 non-positive entry (worst -3.0); a weight defines a norm, so it is strictly positive and finite"
+   ],
+   "identical": true
+  },
+  "radius_violation[live r_min]": {
+   "pre": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+   "post": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+   "identical": true
+  },
+  "two_point_dual[clean]": {
+   "pre": [
+    "0x1.56f4063c4b130p+3",
+    "0x1.3945d2e1e8304p+2",
+    "0x1.a4f0ea4d02919p+2"
+   ],
+   "post": [
+    "0x1.56f4063c4b130p+3",
+    "0x1.3945d2e1e8304p+2",
+    "0x1.a4f0ea4d02919p+2"
+   ],
+   "identical": true
+  },
+  "unit_range_violation[live alpha]": {
+   "pre": null,
+   "post": null,
+   "identical": true
+  },
+  "unit_range_violation[live gamma]": {
+   "pre": null,
+   "post": null,
+   "identical": true
+  }
+ },
+ "controls": [
+  {
+   "control": "admissible_type_float_not_refused",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "radius_admissible_type_float_not_refused",
+   "pass": true,
+   "detail": "('value', None)"
+  },
+  {
+   "control": "admissible_type_np.float64_not_refused",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "radius_admissible_type_np.float64_not_refused",
+   "pass": true,
+   "detail": "('value', None)"
+  },
+  {
+   "control": "admissible_type_int_not_refused",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "radius_admissible_type_int_not_refused",
+   "pass": true,
+   "detail": "('value', None)"
+  },
+  {
+   "control": "admissible_type_np.int64_not_refused",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "radius_admissible_type_np.int64_not_refused",
+   "pass": true,
+   "detail": "('value', None)"
+  },
+  {
+   "control": "admissible_type_Fraction_not_refused",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "radius_admissible_type_Fraction_not_refused",
+   "pass": true,
+   "detail": "('value', None)"
+  },
+  {
+   "control": "M4_control_Fraction_minus_one_third_still_refused_BY_VALUE",
+   "pass": true,
+   "detail": "('value', ['Y_0 is negative (-0.3333333333333333); it is an upper bound on a norm'])"
+  },
+  {
+   "control": "minus_zero_still_admissible",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "allow_none_kill_switch_unmoved",
+   "pass": true,
+   "detail": "('value', [])"
+  },
+  {
+   "control": "None_still_raises_without_allow_none",
+   "pass": true,
+   "detail": "('raise', \"TypeError: Y_0 must be a real number, got NoneType; the radii polynomial's constants are norms.\")"
+  },
+  {
+   "control": "str_message_byte_identical",
+   "pass": true,
+   "detail": "TypeError: Y_0 must be a real number, got str; the radii polynomial's constants are norms."
+  },
+  {
+   "control": "negative_message_byte_identical",
+   "pass": true,
+   "detail": "['Y_0 is negative (-1.0); it is an upper bound on a norm']"
+  },
+  {
+   "control": "single_entry_weight_not_refused_as_empty",
+   "pass": true,
+   "detail": "('value', [])"
+  }
+ ]
+}

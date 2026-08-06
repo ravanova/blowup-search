@@ -92,6 +92,58 @@ INVALID_INPUT_PREFIX = ("INVALID_INPUT: outside the hypotheses of the radii poly
                         "and nonnegative): ")
 
 
+#: The tail of the `_require_real` message at each surface.  The CONSTANTS one is
+#: reproduced byte-for-byte from the `TypeError` `hypothesis_violations` already raised, so
+#: no rejection string any test or artifact quotes moves; the other two are new surfaces and
+#: say what is true THERE -- `r_min` is a radius, not a norm, and gamma/alpha are exponents.
+WHY_CONSTANTS = "the radii polynomial's constants are norms."
+WHY_RADIUS = ("r_min is the radius of the ball the theorem concludes a zero lives in, and "
+              "the verdict function computes it as a float64 itself.")
+WHY_EXPONENT = "a Holder-type exponent is a real number."
+
+
+def _require_real(name, value, allow_none=False, why=WHY_CONSTANTS):
+    """Raise `TypeError` unless `value` is a real number that is not a `bool`.
+
+    LEG 216, repairing leg 199's M2 and M3.  Two separate defects share one line:
+
+      M2  `radius_violation` and `unit_range_violation` called `float()` with no type
+          check at all, so `'0.5'`, `Decimal('0.5')` and `Fraction(1, 2)` were admissible
+          radii and exponents, while `hypothesis_violations` -- in this same file --
+          already raised on the same values.  One file, two answers.
+      M3  `bool` IS `numbers.Real`, so `isinstance` alone lets a FLAG through every guard
+          here.  It is not an arithmetic lie (`True` really is 1.0), it is the absence of
+          any signal that a caller passed a flag where a norm belongs -- and refusing
+          inputs no run could have produced is this module's entire purpose.  `bool` is
+          therefore excluded EXPLICITLY, before the `numbers.Real` test, because the
+          subtype relation is exactly the trap.
+
+    The message template is byte-identical to the one `hypothesis_violations` already
+    raised, so no rejection string any test or artifact quotes moves; only the SET of
+    inputs that reach it grows.
+    """
+    if isinstance(value, bool) or not isinstance(value, numbers.Real):
+        raise TypeError(f"{name} must be a real number{' or None' if allow_none else ''}"
+                        f", got {type(value).__name__}; {why}")
+
+
+def _is_negative_below_the_float_floor(value, f):
+    """Is `value` strictly negative although `float(value)` came out as `-0.0`?
+
+    LEG 216, repairing leg 199's M4.  `float()` UNDERFLOWS a negative rational -- e.g.
+    `Fraction(-1, 10**400)` -- to `-0.0` BEFORE the `f < 0.0` test, so a constant the
+    docstring calls "an input the theorem says nothing about" was admitted as nonnegative.
+    The sign is therefore taken from the EXACT value, not from its float64 shadow.
+
+    Magnitude, kept at leg 199's own honest weight and not inflated: the accepted
+    negatives span `(-5e-324, 0)`, so the budget inflation was <= 1 ULP -- the accept was
+    real, the magnitude is nil, and this is a guarantee restored, not a margin.  `-0.0`
+    itself is a legitimate bound and stays admissible: the test is `value < 0`, which is
+    False for `-0.0`.
+    """
+    return f == 0.0 and value < 0
+
+
 def hypothesis_violations(constants, allow_none=False, nan_hint=NAN_HINT_GE_ONE):
     """Which hypothesis of the radii polynomial theorem each supplied constant breaks.
 
@@ -108,17 +160,28 @@ def hypothesis_violations(constants, allow_none=False, nan_hint=NAN_HINT_GE_ONE)
     `port_certification`'s kill-switch semantics; with `allow_none=False` a `None` reaches
     the type check and raises, which is what the other two callers want.
 
-    Raises `TypeError` on a non-real value: a constant that is not a number is a caller
-    bug, not a fabricated bound, and must not be laundered into a `closes=False`.
+    Raises `TypeError` on a non-real value (and on a `bool`, which IS `numbers.Real`; see
+    `_require_real`): a constant that is not a number is a caller bug, not a fabricated
+    bound, and must not be laundered into a `closes=False`.
+
+    Raises `ValueError` on an EMPTY `constants` (leg 199's M5): returning "every constant
+    is admissible" after examining zero constants is a vacuous pass, and a verdict
+    function that received no constants at all is a caller bug of the same kind as a
+    constant that is not a number.  All three call sites pass a fixed-length tuple.
     """
+    items = list(constants)
+    if not items:
+        raise ValueError(
+            "hypothesis_violations: no constants were supplied, so an empty violation "
+            "list would certify that every one of zero constants is admissible -- a "
+            "vacuous pass. The radii polynomial's hypotheses are claims ABOUT "
+            "constants; with none supplied there is nothing to check and nothing to "
+            "certify.")
     bad = []
-    for name, v in constants:
+    for name, v in items:
         if v is None and allow_none:
             continue
-        if not isinstance(v, numbers.Real):
-            raise TypeError(f"{name} must be a real number{' or None' if allow_none else ''}"
-                            f", got {type(v).__name__}; the radii polynomial's constants "
-                            f"are norms.")
+        _require_real(name, v, allow_none=allow_none)
         f = float(v)
         if math.isnan(f):
             bad.append(f"{name} is NaN (a norm bound cannot be NaN; {nan_hint})")
@@ -127,11 +190,27 @@ def hypothesis_violations(constants, allow_none=False, nan_hint=NAN_HINT_GE_ONE)
                        f"by hypothesis)")
         elif f < 0.0:
             bad.append(f"{name} is negative ({f!r}); it is an upper bound on a norm")
+        elif _is_negative_below_the_float_floor(v, f):
+            bad.append(f"{name} is negative ({v!r}) but underflows to {f!r} in float64; "
+                       f"it is an upper bound on a norm")
     return bad
 
 
 def invalid_input_reason(violations):
-    """The rejection sentence, assembled once so the three pipelines phrase it alike."""
+    """The rejection sentence, assembled once so the three pipelines phrase it alike.
+
+    Raises `ValueError` on an EMPTY `violations` (leg 199's M7): the sentence is an
+    accusation, and assembling all 174 characters of it while naming zero violated
+    hypotheses states a rejection no guard made.  Not reachable at `nk_bounds.py:533`,
+    which is guarded by `if violations:` -- the fix keeps it unreachable rather than
+    making it representable.
+    """
+    if not violations:
+        raise ValueError(
+            "invalid_input_reason: called with no violations, which would assemble a "
+            "full INVALID_INPUT rejection sentence naming zero violated hypotheses. An "
+            "empty violation list means the input is ADMISSIBLE; callers must test it "
+            "(`if violations:`) before asking for the rejection prose.")
     return INVALID_INPUT_PREFIX + "; ".join(violations) + ". No discriminant is evaluated."
 
 
@@ -147,7 +226,13 @@ def radius_violation(r_min):
     Note what this is NOT: it is not a claim that `r_min = 0` is arithmetically wrong.  It
     is the observation that the CONCLUSION being drawn has no content there, so reporting
     it in the same slot as a real radius is the fabrication.
+
+    Raises `TypeError` on a non-real `r_min`, and on a `bool` (leg 199's M2/M3): this
+    guard used to call `float()` with no type check, so `'0.5'`, `Decimal('0.5')`,
+    `Fraction(1, 2)` and `True` were all admissible RADII while the sibling guard in this
+    same file refused three of the four.
     """
+    _require_real("r_min", r_min, why=WHY_RADIUS)
     f = float(r_min)
     if math.isnan(f):
         return "r_min is NaN, so no ball was established"
@@ -166,7 +251,14 @@ def unit_range_violation(name, value, lo, hi, lo_open=True, hi_open=False):
     hypotheses in their docstrings that the code did not check -- `nk_bounds`'s
     `gamma in (0, 1]` and `alpha < 2` -- and the failure mode is identical to the constants
     one: the docstring states the hypothesis, the code evaluates anyway.
+
+    Raises `TypeError` on a non-real `value`, and on a `bool` (leg 199's M2/M3): a `str`
+    gamma used to pass this guard and die three lines later of an unnamed `TypeError` from
+    the power operator (leg 98's B20/B21 shape), and `gamma=True` used to be evaluated
+    silently as the exponent 1.0, returning a claimed upper bound 1.2605493138651522x
+    SMALLER than the live `gamma=0.5`.
     """
+    _require_real(name, value, why=WHY_EXPONENT)
     f = float(value)
     if math.isnan(f):
         return f"{name} is NaN"
@@ -189,8 +281,19 @@ def positive_weight_violations(name, values, allow_zero=False):
 
     Takes any iterable of floats (a flattened array is fine); reports counts and the worst
     offender rather than every index, so the message stays quotable.
+
+    Raises `ValueError` on an EMPTY `values` (leg 199's M5): certifying that an empty
+    weight vector is one "a norm could have produced" is a vacuous pass -- zero entries
+    examined -- and it is the same empty-window shape leg 99 measured in
+    `boussinesq_velocity.py`.  A weight vector DEFINES a norm; the empty one defines none.
     """
     vals = [float(v) for v in values]
+    if not vals:
+        raise ValueError(
+            f"positive_weight_violations: {name} has no entries, so an empty violation "
+            f"list would certify that all zero of its entries came from a norm -- a "
+            f"vacuous pass. A weight vector DEFINES a norm; the empty vector defines "
+            f"none, and no bound computed against it is an upper bound for anything.")
     n_nan = sum(1 for v in vals if math.isnan(v))
     n_inf = sum(1 for v in vals if math.isinf(v))
     finite = [v for v in vals if not (math.isnan(v) or math.isinf(v))]
