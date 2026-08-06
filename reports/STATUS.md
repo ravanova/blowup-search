@@ -1,52 +1,55 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-07, cycle 1 — first landings audited, first refill dispatched. Full detail
-in `PROGRESS.md` (git-ignored, more current) and `reports/ORCH_STATE.md` (prior handoff).*
+*Refreshed 2026-08-07, cycle 1 — two major escalations surfaced (legs 253, 257), one user
+ruling applied (leg 254), one more forwarded to the DM (leg 178). Full detail in
+`PROGRESS.md` (git-ignored, more current).*
 
 ## ⚠ NEEDS YOU
 
-1. **Leg 254 (Route-DSSX) — escalation, parked at PR #18 (`leg/254-dssx-v1`).** The user's
-   2026-08-07 steer prioritized this leg to determine whether the DSS ban's "expensive
-   entrance" (a global, unseeded periodic-orbit search of the rescaled gCLM flow) was excluded
-   for a substantive reason or only by cost. **Finding: cost-shaped, not substantive** — all
-   three of the ban's recorded reasons are local-linear spectral statements at a fixed point of
-   the flow (0 of 3 concern a global search); the phrase "expensive entrance" entered
-   `plan_of_record.py` in the same commit that authored the ban, never examined afterward; a
-   repo-wide grep finds 0 periodic-orbit searches of the rescaled flow ever built, run, or
-   costed. Leg 254 proposes re-posed wording splitting the ban into a cheap-entrance clause
-   (stays banned as-is) and an expensive-entrance clause (opens under the Clay goal, gated on a
-   3-clause lift condition: function space, object, price) — full text in
-   `experiments/journal/leg_254.md` §8 and the PR body. **This is a ban weakening and cannot
-   land under a leg's own signature — needs a ruling before leg 251 (Phase 0 target selection)
-   redispatches with DSS treated as open.**
-2. **Leg 178 (WES)** — parked, self-conflicted gate, three explicit questions for the user,
-   unresolved for many cycles, not actioned this session.
+1. **Leg 257 (Route-P1C) — escalation, parked at PR #19 (`leg/257-p1c-v1`).** Stage-V ban's
+   lift clause is now satisfied on paper: Breden-Chu's H²(µ) weighted-Sobolev space is
+   confirmed a genuine "namable fourth space" — all three prior death mechanisms evade at the
+   mechanism level, each independently checked with its own locator (measured Z₁ = 0.065136 in
+   the new space vs 8.9591/140.72 in the dead ones). This is a ban weakening and needs a ruling
+   to actually lift, same as leg 254 was. Separately, and regardless of the ban question: leg
+   257 also independently found the Leray projection provably leaves L²(µ) in this space, which
+   structurally closes the fluid route through this machinery even if the ban lifts — this
+   confirms and strengthens leg 255's earlier finding that the one fluid-adjacent Phase-1
+   candidate (Li-Zhou) dies on the same clause. Both findings forwarded to leg 251 (Phase 0,
+   still in flight).
+2. **Leg 178 (WES)** — parked, self-conflicted gate, three explicit questions for the user.
+   The user has now ruled on all three (unpark under the YES branch; leg 111's headline gets a
+   scoped correction, not a global search-and-replace; the depth ladder becomes a contamination
+   cap) plus bounded what it licenses. Forwarded to the DM; dispatch pending its response.
 3. **Leg 129/188** — escalation #4 (Bowman dealiasing rule), sharpened in scope, still parked.
+
+(Leg 254's DSS-ban escalation is RESOLVED — the user ruled "let's get leg 254 merged" and it's
+applied to `main` at `47f76eb`, PR #18 closed with an explanation.)
 
 ## Now
 
 - Cycle: 1
-- `main` SHA: `f039d68`
-- Agents live: 11 (10 leg slots + 1 verifier), plus 1 Decision Maker (Fable 5)
+- `main` SHA: `f9952fb`
+- Agents live: 9 of 10 leg slots (A and H vacant, pending DM assignment), plus 1 Decision Maker
 
 ## Legs (10 slots)
 
 | Slot | Leg | Route | Notes |
 |---|---|---|---|
-| A | 253 | NRSX | fresh; NRS/Tsai hypothesis boundary |
+| A | (vacant) | — | leg 253 (NRSX) finished, escalated |
 | B | 249 | H2CV2 | resuming from salvage; TOP PRIORITY, submission-blocking |
-| C | 254 | DSSX | **done — escalated**, awaiting DM's next assignment for this slot |
+| C | 251 | P0T | Phase 0 target selection, most consequential leg in flight |
 | D | 221 | BVRR | resuming; zero-contamination re-confirmation |
-| E | 255 | P1A | Phase 1 target census |
+| E | 248 | CNR2 | resuming; repairing collocation_newton.py |
 | F | 236 | RDDEP | resuming; Route-D v11 dependency trace |
 | G | 256 | P1B | Breden-Chu end-to-end reproduction |
-| H | 257 | P1C | Remark 40 reach + stage-V ban-lift scoping |
-| I | 252 | VBRG | regenerates Route-D v11's stale anchor JSON |
+| H | (vacant) | — | leg 257 (P1C) finished, escalated |
+| I | 252 | VBRG | regenerating Route-D v11's stale anchor JSON |
 | J | 226 | PNR | highest-priority repair, threatens a banked headline |
 
-Session start recovered from a clean, graceful handoff — several of the prior session's "live"
-slots were not actually recoverable (subagent handles don't survive session boundaries); WIP
-was salvaged where real, leg 251 (Phase 0) was a total loss and redrafted. User steer applied:
-DSS-ban scoping prioritized (254), Phase 1 authorized in parallel with Phase 0 (legs 255-257).
-Landed this cycle: leg 250 (PUB2's σ_min citation fix — an inverted inequality sign, not a
-measurement error), leg 258 (composition floor locked into `test_plan_of_record.py`).
+Landed this cycle: leg 250 (PUB2's σ_min citation fix, verified), leg 258 (composition floor
+locked into code), leg 255 (Phase 1 census — 2 non-fluid survivors, fluid candidate killed,
+verified). User ruling applied on leg 254 (DSS ban split). Two new escalations surfaced (253,
+257), both forwarded to leg 251 and the DM. Session start recovered from a clean handoff;
+several "live" slots from the prior session were not actually recoverable and were
+salvaged/redrafted as needed.
