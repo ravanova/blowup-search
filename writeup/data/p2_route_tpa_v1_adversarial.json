@@ -1,0 +1,686 @@
+{
+ "leg": 118,
+ "route": "TPA",
+ "module_under_audit": "solver/turning_point.py",
+ "detection_primitive": "solver/collocation_newton.py:critical_radius (imported into turning_point.py's namespace)",
+ "gate": "Under an adversarial battery (degenerate branches, poisoned derivatives), does solver/turning_point.py ever silently return a wrong classification instead of flagging the input?",
+ "J_default": 100,
+ "a_default": 0.3,
+ "g1_positive_control": {
+  "Xc_direct": 6.133491174450277,
+  "Xc_from_hff": 6.133491174450277,
+  "outer_exponent": 3.329524897126787,
+  "inner_exponent": 3.5484507647443255,
+  "predicted_1_over_a": 3.3333333333333335,
+  "hff_meta": {
+   "raised": null,
+   "n_warnings": 0,
+   "warnings": []
+  },
+  "h_all_finite": true
+ },
+ "g2_offgrid_no_crossing_control": [
+  {
+   "X0": 0.3778541431289836,
+   "Xc_direct": "inf",
+   "correctly_infinite": true,
+   "hff_raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "hff_correctly_raised": true
+  },
+  {
+   "X0": 1.1378541431289835,
+   "Xc_direct": "inf",
+   "correctly_infinite": true,
+   "hff_raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "hff_correctly_raised": true
+  },
+  {
+   "X0": 5.297854143128983,
+   "Xc_direct": "inf",
+   "correctly_infinite": true,
+   "hff_raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "hff_correctly_raised": true
+  },
+  {
+   "X0": 17.008854143128985,
+   "Xc_direct": "inf",
+   "correctly_infinite": true,
+   "hff_raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "hff_correctly_raised": true
+  },
+  {
+   "X0": 50.50785414312898,
+   "Xc_direct": "inf",
+   "correctly_infinite": true,
+   "hff_raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "hff_correctly_raised": true
+  }
+ ],
+ "g3_nan_inf_controls": {
+  "nan_at_crossing": {
+   "Xc": "nan",
+   "is_nan": true
+  },
+  "nan_om_hff": {
+   "raised": "ValueError: no turning point: E does not change sign (a = 0?)",
+   "correctly_flagged": true
+  },
+  "distant_inf_does_not_disturb_crossing": {
+   "Xc_clean": 6.133491174450277,
+   "Xc_with_distant_inf": 6.133491174450277,
+   "unchanged": true
+  }
+ },
+ "g4_ongrid_tangency_defect": [
+  {
+   "touch_index": 10,
+   "X0": 0.16644563750959998,
+   "kind": "touch_from_above",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 0.16644563750959998,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    15.638377477755322,
+    0.16644563750959998
+   ],
+   "log_growth_result": 7.708167128673538e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 0.16644563750959998,
+    "near_Xc_fraction": 1.7200540913999523e-05
+   }
+  },
+  {
+   "touch_index": 10,
+   "X0": 0.16644563750959998,
+   "kind": "touch_from_below",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 0.16644563750959998,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    -15.638377477755322,
+    0.16644563750959998
+   ],
+   "log_growth_result": -7.708167128673538e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 0.16644563750959998,
+    "near_Xc_fraction": 1.7200540913999523e-05
+   }
+  },
+  {
+   "touch_index": 25,
+   "X0": 0.4234452969552192,
+   "kind": "touch_from_above",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 0.4234452969552192,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    13.8962794556796,
+    0.4234452969552192
+   ],
+   "log_growth_result": -1.4014478225930643e-16,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 0.4234452969552192,
+    "near_Xc_fraction": 0.0001469472403635679
+   }
+  },
+  {
+   "touch_index": 25,
+   "X0": 0.4234452969552192,
+   "kind": "touch_from_below",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 0.4234452969552192,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    -13.8962794556796,
+    0.4234452969552192
+   ],
+   "log_growth_result": 1.4014478225930643e-16,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 0.4234452969552192,
+    "near_Xc_fraction": 0.0001469472403635679
+   }
+  },
+  {
+   "touch_index": 50,
+   "X0": 1.0158326380634266,
+   "kind": "touch_from_above",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 1.0158326380634266,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    8.270380374261533,
+    1.0158326380634266
+   ],
+   "log_growth_result": -6.982660024413471e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 1.0158326380634266,
+    "near_Xc_fraction": 0.0013067677324410973
+   }
+  },
+  {
+   "touch_index": 50,
+   "X0": 1.0158326380634266,
+   "kind": "touch_from_below",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 1.0158326380634266,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    -8.270380374261533,
+    1.0158326380634266
+   ],
+   "log_growth_result": 7.896833836853695e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 1.0158326380634266,
+    "near_Xc_fraction": 0.0013067677324410973
+   }
+  },
+  {
+   "touch_index": 65,
+   "X0": 1.6609944585797638,
+   "kind": "touch_from_above",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 1.6609944585797638,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    4.252725890831928,
+    1.6609944585797638
+   ],
+   "log_growth_result": -9.066444330446586e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 1.6609944585797638,
+    "near_Xc_fraction": 0.0035720121246116095
+   }
+  },
+  {
+   "touch_index": 65,
+   "X0": 1.6609944585797638,
+   "kind": "touch_from_below",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 1.6609944585797638,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    -4.252725890831928,
+    1.6609944585797638
+   ],
+   "log_growth_result": 1.0245698467143324e-14,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 1.6609944585797638,
+    "near_Xc_fraction": 0.0035720121246116095
+   }
+  },
+  {
+   "touch_index": 85,
+   "X0": 4.314295488583659,
+   "kind": "touch_from_above",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 4.314295488583659,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    0.6166455716327306,
+    4.314295488583659
+   ],
+   "log_growth_result": -7.799662095479409e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 4.314295488583659,
+    "near_Xc_fraction": 0.0719879291639284
+   }
+  },
+  {
+   "touch_index": 85,
+   "X0": 4.314295488583659,
+   "kind": "touch_from_below",
+   "E_exactly_zero_at_touch": true,
+   "E_single_signed_elsewhere": true,
+   "Xc_reported": 4.314295488583659,
+   "silently_finite_not_inf": true,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_h_all_finite": true,
+   "inner_mode_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "inner_mode_result": [
+    -0.6166455716327306,
+    4.314295488583659
+   ],
+   "log_growth_result": 7.273404188543545e-15,
+   "source_of_the_row_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "source_of_the_row_result": {
+    "row_X": 127.32133646887188,
+    "Xc": 4.314295488583659,
+    "near_Xc_fraction": 0.0719879291639284
+   }
+  }
+ ],
+ "g5_composite_masks_real_crossing": [
+  {
+   "touch_frac_of_grid": 0.05,
+   "X0_touch": 0.08660938620062916,
+   "X_true_turning_point": 5.586609386200629,
+   "Xc_reported": 0.08660938620062916,
+   "reported_equals_spurious_touch": true,
+   "true_over_reported_ratio": 64.50350973807093,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  },
+  {
+   "touch_frac_of_grid": 0.1,
+   "X0_touch": 0.16644563750959998,
+   "X_true_turning_point": 5.6664456375096,
+   "Xc_reported": 0.16644563750959998,
+   "reported_equals_spurious_touch": true,
+   "true_over_reported_ratio": 34.04382188858978,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  },
+  {
+   "touch_frac_of_grid": 0.2,
+   "X0_touch": 0.33362523956315143,
+   "X_true_turning_point": 5.833625239563151,
+   "Xc_reported": 0.33362523956315143,
+   "reported_equals_spurious_touch": true,
+   "true_over_reported_ratio": 17.48556328412591,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  }
+ ],
+ "g6_natural_reachability": {
+  "rows": [
+   {
+    "J": 60,
+    "a": 0.15,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 60,
+    "a": 0.2,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 60,
+    "a": 0.3,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 60,
+    "a": 0.4,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 100,
+    "a": 0.15,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 100,
+    "a": 0.2,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 100,
+    "a": 0.3,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   },
+   {
+    "J": 100,
+    "a": 0.4,
+    "n_interior_extrema_of_U": 0,
+    "U_monotonic": true
+   }
+  ],
+  "any_real_profile_has_interior_extremum": false
+ },
+ "g7_poisoned_om_no_monkeypatch": [
+  {
+   "coefficient_index": 3,
+   "additive_perturbation": 10000.0,
+   "Xc_clean": 6.133491174450277,
+   "Xc_perturbed": 0.08197047817761025,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  },
+  {
+   "coefficient_index": 3,
+   "additive_perturbation": 100000000.0,
+   "Xc_clean": 6.133491174450277,
+   "Xc_perturbed": 0.08254886102975462,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  },
+  {
+   "coefficient_index": 50,
+   "additive_perturbation": 1000000.0,
+   "Xc_clean": 6.133491174450277,
+   "Xc_perturbed": 0.07176030894848674,
+   "hff_meta": {
+    "raised": null,
+    "n_warnings": 0,
+    "warnings": []
+   },
+   "hff_finite": true
+  }
+ ],
+ "g8_matrix_functions_under_poison": [
+  {
+   "case": "clean",
+   "graded_norm_by_radius": {
+    "raised": null,
+    "result": {
+     "by_cutoff": {
+      "20": 17.991111839179215,
+      "50": 116.52296441893691,
+      "200": 1520.302940534408,
+      "inf": 1520.302940534408
+     },
+     "argmax_X": 127.32133646887188,
+     "unweighted_row_sum": 462.40241351160694,
+     "cond": 62947.62252367795,
+     "smin": 0.0014184200372377395
+    },
+    "silently_finite": true
+   },
+   "source_of_the_row": {
+    "raised": null,
+    "result": {
+     "row_X": 127.32133646887188,
+     "Xc": 6.133491174450277,
+     "near_Xc_fraction": 0.43465059045905813
+    },
+    "silently_finite": true
+   },
+   "bordered_norm": {
+    "raised": null,
+    "result": 1409.1011651246984,
+    "silently_finite": true
+   },
+   "square_bordered_smin": {
+    "raised": null,
+    "result": [
+     1.4633432272145771e-08,
+     6298049934.055757
+    ],
+    "silently_finite": true
+   }
+  },
+  {
+   "case": "NaN_om",
+   "graded_norm_by_radius": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "source_of_the_row": {
+    "raised": null,
+    "result": {
+     "row_X": 0.00785414312898359,
+     "Xc": "nan",
+     "near_Xc_fraction": "nan"
+    },
+    "silently_finite": false
+   },
+   "bordered_norm": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "square_bordered_smin": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   }
+  },
+  {
+   "case": "inf_om",
+   "graded_norm_by_radius": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "source_of_the_row": {
+    "raised": null,
+    "result": {
+     "row_X": 0.00785414312898359,
+     "Xc": "nan",
+     "near_Xc_fraction": "nan"
+    },
+    "silently_finite": false
+   },
+   "bordered_norm": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "square_bordered_smin": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   }
+  },
+  {
+   "case": "c_is_NaN",
+   "graded_norm_by_radius": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "source_of_the_row": {
+    "raised": null,
+    "result": {
+     "row_X": 0.00785414312898359,
+     "Xc": "nan",
+     "near_Xc_fraction": "nan"
+    },
+    "silently_finite": false
+   },
+   "bordered_norm": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   },
+   "square_bordered_smin": {
+    "raised": "LinAlgError: SVD did not converge",
+    "result": null,
+    "silently_finite": false
+   }
+  }
+ ],
+ "wall_time_s": 88.985
+}
