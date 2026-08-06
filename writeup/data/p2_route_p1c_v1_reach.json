@@ -345,6 +345,81 @@
    "dense_A_TB": 9142202.326051762
   }
  ],
+ "leray_projection_on_L2mu": {
+  "witness": "U = curl(e^{-|x|^2} e_3); div U = 0 exactly; Gaussian, so U in H^2(mu)",
+  "T_quadrature_ladder": [
+   {
+    "n": 40,
+    "L": 5.0,
+    "T": 3.937402486563057,
+    "S_33": 0.0,
+    "S_11": 1.9687012432815318,
+    "S_12": 2.4568884897630335e-17
+   },
+   {
+    "n": 60,
+    "L": 6.0,
+    "T": 3.9374024864304165,
+    "S_33": 0.0,
+    "S_11": 1.9687012432152102,
+    "S_12": -1.100138581101419e-17
+   },
+   {
+    "n": 80,
+    "L": 7.0,
+    "T": 3.9374024864305617,
+    "S_33": 0.0,
+    "S_11": 1.9687012432152875,
+    "S_12": 2.0250583646243477e-18
+   }
+  ],
+  "T": 3.9374024864305617,
+  "decay_ladder": [
+   {
+    "r": 10.0,
+    "v_measured": 0.0003133285343288746,
+    "v_multipole_predicted": 0.00031332853432887165,
+    "ratio": 1.0000000000000093,
+    "g_norm_control": 0.0
+   },
+   {
+    "r": 20.0,
+    "v_measured": 3.9166066791109296e-05,
+    "v_multipole_predicted": 3.916606679110896e-05,
+    "ratio": 1.0000000000000087,
+    "g_norm_control": 0.0
+   },
+   {
+    "r": 40.0,
+    "v_measured": 4.8957583488886704e-06,
+    "v_multipole_predicted": 4.89575834888862e-06,
+    "ratio": 1.0000000000000104,
+    "g_norm_control": 0.0
+   },
+   {
+    "r": 80.0,
+    "v_measured": 6.119697936110834e-07,
+    "v_multipole_predicted": 6.119697936110775e-07,
+    "ratio": 1.0000000000000098,
+    "g_norm_control": 0.0
+   }
+  ],
+  "fitted_exponent_v": -3.000000000000002,
+  "multipole_prediction_v": -3.0,
+  "implied_exponent_grad_v": -4.000000000000002,
+  "control": "|(U.grad)U| on the same rays is the GAUSSIAN control and underflows to EXACTLY 0.0 at every radius, while v does not. A control that came out differently (lesson 90).",
+  "conclusion": "P((U.grad)U) has an ALGEBRAIC |x|^{-4} tail whose coefficient is fixed by T = int|U|^2 > 0. Therefore P((U.grad)U) is NOT in L^2(mu) for ANY nonzero divergence-free U in H^2(mu), and F(U) = U - L^{-1}P(...) is not well-defined as a map H^2(mu) -> H^2(mu).",
+  "cross_check_vs_leg_255_verifier": {
+   "eq2_locality_argument": "AGREE, and it is the cleanest of the three. Verified independently at line 84: the standing governing form is Lu = f(x, u, grad u), and line 693 defines g : u -> f(., u, grad u) as a NEMYTSKII operator -- pointwise-local by construction. P[(u.grad)u] is nonlocal and cannot be written in that form. Qualification: line 55 contemplates SYSTEMS, but a system of pointwise-local equations is still pointwise-local, so the argument survives.",
+   "muckenhoupt_A2_argument": "AGREE WITH THE DIRECTION, DISAGREE WITH THE INFERENCE AS STATED. e^{|x|^2/4} is indeed not A_2 (A_2 forces doubling, hence at most polynomial growth), so the standard Calderon-Zygmund weighted theory does not apply. BUT 'the standard SUFFICIENT condition fails' does not entail 'the operator is unbounded' -- A_2 is sufficient, not necessary. That is the same shape leg 57 had to discharge (a BDL-shaped reason to keep a ban, dissolved once the hypothesis was read). The verifier rightly calls it an assessment; this leg's position is that it should not be relied on as an argument AT ALL, because it does not need to be: the witness above EXHIBITS the failure. A demonstration replaces a heuristic."
+  },
+  "verdict_on_leg_255": "AGREE with leg 255's screen (iv) kill, and STRENGTHEN it. Leg 255 read absence-of-mention as a boundary and conceded a later leg 'could get it by arguing the Leray clause'. THAT CONCESSION IS NOT AVAILABLE: the clause is not unaddressed-but-plausible, it is FALSE. Leg 255's judgement was right for a stronger reason than it had, and its own relaxation caveat should be withdrawn.",
+  "why_the_two_obvious_repairs_fail": [
+   "BORDER the space with an algebraic far-field mode to absorb the tail -- this re-introduces EXACTLY the bordered far-field column that leg 54's Z1 block-coupling mechanism (M1) kills. The repair walks back into the death the fourth space was chosen to escape.",
+   "SWAP the Gaussian weight for an algebraic one so the tail is admissible -- this destroys the Poincare inequality (line 372), which section 5's clause_b caution already names as the SINGLE root of all three evasions. It breaks M1, M2 and M3's evasions simultaneously.",
+   "VORTICITY formulation, to remove the pressure -- Biot-Savart (u = curl Laplacian^{-1} omega) is nonlocal with the same algebraic tail, so the obstruction moves rather than lifts."
+  ]
+ },
  "self_test_codes_reached": [
   "CLAUSE_A_FAILS",
   "CLAUSE_B_FAILS",
@@ -368,7 +443,7 @@
    {
     "id": "H3",
     "statement": "INCOMPRESSIBILITY / pressure / Leray projection",
-    "status": "BINDS AND IS WHOLLY ABSENT. Body census: divergence-free 0, incompressib 0, solenoidal 0, pressure 0, leray projection 0, vorticity 0, velocity field 0, vector-valued 0 -- against a live control totalling 124. Every equation in the paper is SCALAR and UNCONSTRAINED. A Navier-Stokes application needs a divergence-free constraint and a pressure/Leray projection, and the Leray projector is NOT diagonal in the Hermite-Laguerre eigenbasis of L. THIS IS THE LARGEST UNPRICED ITEM."
+    "status": "BINDS, IS WHOLLY ABSENT, AND IS NOW MEASURED FALSE RATHER THAN MERELY UNPRICED. Body census: divergence-free 0, incompressib 0, solenoidal 0, pressure 0, leray projection 0, vorticity 0, velocity field 0, vector-valued 0 -- against a live control totalling 124. Every equation in the paper is SCALAR and UNCONSTRAINED. Section 4b then MEASURES the consequence: the Leray projection of the Navier-Stokes nonlinearity has an algebraic |x|^{-4} tail with coefficient int|U|^2 > 0, so it leaves L^2(mu) and F is not well-defined on H^2(mu). THIS CLOSES THE FLUID APPLICATION IN d = 2 AND d = 3."
    },
    {
     "id": "H4",
@@ -417,5 +492,6 @@
   },
   "single_root_of_all_three_evasions": "One inequality does most of the work and it is worth naming as such: the GENUINE POINCARE INEQUALITY (12, line 372) on the unbounded domain R^d, bought by the Gaussian weight. It makes L^{-1} compact (M1), it makes L exactly diagonal in an orthogonal eigenbasis so that no interpolatory consistency defect can exist (M2), and it removes any need for a far-field border or an exact closed-form anchor (M1, M3). THAT IS ALSO THE WARNING: three evasions resting on ONE structural fact are not three independent pieces of evidence, and this leg does not present them as such."
  },
+ "practical_conclusion": "The gate reads ESCALATE_BAN_LIFT_CASE because the three NAMED mechanisms genuinely do not transfer -- H^2(mu) IS a real fourth space and the ban's literal lift clause is met. But section 4b closes the FLUID application outright, via a FOURTH obstruction that is not one of the three and was not on the ban's list: the Leray projection leaves L^2(mu). So Phase 1's Breden-Chu route is closed BEFORE construction spent anything -- exactly the outcome DIRECTION.md 257's NO-branch describes, reached through the YES-branch. Both are reported; neither is allowed to stand for the other.",
  "ceiling": "SCOPING ONLY. Nothing built, nothing certified, no solver module added or edited. No stage claimed; plan_of_record.py untouched. NO BAN LIFTED -- clause (b)'s YES is a RECOMMENDATION to the user carrying its evidence, and DIRECTION.md 257's yes-branch says so explicitly. No link of the L1->L4 chain moved. Clay odds unchanged at ~0.05%. Every Breden-Chu quantity is THEIRS; the only things computed here are the embedding constant, the derived (U.grad)U tail bound and the DOF/cost arithmetic, all of which are scoping arithmetic on other people's results."
 }

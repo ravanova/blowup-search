@@ -22,11 +22,21 @@ PROVENANCE. arXiv:2404.04054v2 (Breden & Chu, Numer. Math., DOI 10.1007/s00211-0
 re-fetched at primary source THIS leg from arxiv.org (egress HTTP 200) and extracted with
 `pdftotext -layout`:
 
-    md5   ff7a34b776bfe5edf97397e5eabdbb7a
-    lines 2060
+    pdf md5           ff7a34b776bfe5edf97397e5eabdbb7a
+    extraction cmd    pdftotext -layout 2404.04054.pdf -
+    extraction lines  2060
 
 Both match leg 245's pin BIT-FOR-BIT, so this leg's `line` locators and leg 245's index the
-same extraction and are directly comparable. Papers/ is gitignored; the md5 is the pin.
+same extraction and are directly comparable. Papers/ is gitignored.
+
+THE EXTRACTION COMMAND IS PART OF THE PIN, AND THAT IS NOT PEDANTRY. Mid-leg this module's
+working text was overwritten by a stray NON-layout pdftotext run and went from 2060 to 3448
+lines, silently invalidating every locator below. Caught, and resolved by re-deriving from
+the pinned PDF: same md5, and `pdftotext -layout` reproduces exactly 2060 lines, after which
+every locator was re-verified against the fresh extraction (Remark 40 @ 1686, the
+compact-perturbation hypothesis @ 704, eq (2) @ 84, References @ 1883) and the census re-ran
+to the identical 4 / 124. AN MD5 ON A PDF DOES NOT PIN A TEXT EXTRACTION -- leg 245 and this
+leg both write "md5 X, 2060 lines", which reads as one pin but is two artifacts.
 
 The three death reports were read AT FULL TEXT, not summarised from DIRECTION.md:
   experiments/journal/leg_54.md   (156 lines)  -- l^1_w coefficient basis
@@ -59,6 +69,8 @@ import json
 import math
 import os
 import sys
+
+import numpy as np
 
 PASS_DATE = "2026-08-07"
 PARENT = "arXiv:2404.04054v2"
@@ -508,6 +520,158 @@ def setup_cost_table(sups=(1.0, 2.0, 3.0, 5.0, 10.0, 20.0), gammas=(1.0, 5.0)):
 
 
 # =====================================================================================
+# 4b. THE LERAY PROJECTION ON L^2(mu) -- MEASURED, not adjudicated by absence-of-mention.
+#
+# WHY THIS SECTION EXISTS. Leg 255 (ROUTE-P1A, landed on main during this leg, commit
+# 891ebaf) used Remark 40 as a screen and killed its one fluid-adjacent candidate
+# (Li-Zhou arXiv:2404.17228) on the LERAY-PROJECTION clause, reading the paper's SILENCE
+# about the pressure as a boundary. Leg 255 flags this as "the most consequential
+# judgement in the table" and explicitly concedes a later leg "could get it by ARGUING
+# the Leray clause". This section tests whether that concession is available. IT IS NOT.
+#
+# THE WITNESS. U = curl(e^{-a|x|^2} e_3) = (-2a x2 E, 2a x1 E, 0), E = e^{-a|x|^2}.
+#   div U = 0 EXACTLY, and U is Gaussian, so U in H^2(mu) whenever 2a > 1/4.
+#
+# THE MECHANISM. With div U = 0, div[(U.grad)U] = d_i d_j (U_i U_j), so
+#   v := Laplacian^{-1} div g = d_i d_j Laplacian^{-1}(U_i U_j),   P g = g - grad v.
+# Multipole expansion of the Newtonian potential:
+#   Laplacian^{-1}(U_iU_j)(x) ~ -(1/4pi) S_ij / |x|,   S_ij = int U_i U_j dx
+#   => v(x) ~ -(1/4pi) S_ij (3 x_i x_j - |x|^2 delta_ij)/|x|^5  ~  |x|^{-3}
+#   => grad v ~ |x|^{-4}.
+# On the x3-axis, S_33 = 0 for this witness, so v ~ (1/4pi) T / r^3 with
+#   T = trace S = int |U|^2 > 0 -- THE COEFFICIENT IS THE ENERGY, so it cannot vanish
+#   for U != 0. This is what makes the obstruction unarguable rather than generic.
+#
+# CONSEQUENCE. |P g| ~ C r^{-4} with C != 0, so
+#   int_{|x|>R} |P g|^2 e^{|x|^2/4} dx ~ int r^{-8} e^{r^2/4} r^2 dr = +infinity.
+# P g is NOT in L^2(mu). So F(U) = U - L^{-1} P(...) is not even WELL-DEFINED as a map
+# H^2(mu) -> H^2(mu). This is stronger than "unpriced", and it holds in d = 2 AND d = 3,
+# self-similar or not -- i.e. it is BROADER than the NRS composition of section 3.
+# =====================================================================================
+
+_LERAY_A = 1.0   # 2a = 2.0 > 1/4, so the witness is comfortably inside H^2(mu)
+
+
+def _U(y, a=_LERAY_A):
+    E = np.exp(-a * np.sum(y * y, axis=-1))
+    return np.stack([-2 * a * y[..., 1] * E, 2 * a * y[..., 0] * E,
+                     np.zeros_like(E)], axis=-1)
+
+
+def _quad_nodes(n, L):
+    x, w = np.polynomial.legendre.leggauss(n)
+    x, w = x * L, w * L
+    X, Y, Z = np.meshgrid(x, x, x, indexing="ij")
+    W = w[:, None, None] * w[None, :, None] * w[None, None, :]
+    return np.stack([X, Y, Z], axis=-1).reshape(-1, 3), W.reshape(-1)
+
+
+def _S_and_T(n, L):
+    y, w = _quad_nodes(n, L)
+    u = _U(y)
+    S = np.einsum("ki,kj,k->ij", u, u, w)
+    return S, float(np.trace(S))
+
+
+def _v_at(x, n, L):
+    """v(x) by direct quadrature. x is far from the support, so no singularity."""
+    y, w = _quad_nodes(n, L)
+    u = _U(y)
+    r = x[None, :] - y
+    rn = np.linalg.norm(r, axis=-1)
+    UU = u[:, :, None] * u[:, None, :]
+    K = 3 * r[:, :, None] * r[:, None, :]
+    K = K - (rn ** 2)[:, None, None] * np.eye(3)[None, :, :]
+    K = K / (rn ** 5)[:, None, None]
+    return float(-(1.0 / (4 * np.pi)) * np.einsum("kij,kij,k->", UU, K, w))
+
+
+def _g_norm_at(r, a=_LERAY_A):
+    """|(U.grad)U| on the x3-axis -- the GAUSSIAN CONTROL. Must collapse while v does not."""
+    x = np.array([0.0, 0.0, r])
+    h = 1e-5
+    grad = np.stack([(_U(x + h * e) - _U(x - h * e)) / (2 * h) for e in np.eye(3)], axis=0)
+    return float(np.linalg.norm(np.einsum("k,ki->i", _U(x), grad)))
+
+
+def leray_measurement():
+    # T, across a quadrature ladder -- if T is not stable the coefficient claim says nothing.
+    ladder = []
+    for n, L in ((40, 5.0), (60, 6.0), (80, 7.0)):
+        S, T = _S_and_T(n, L)
+        ladder.append({"n": n, "L": L, "T": T, "S_33": float(S[2, 2]),
+                       "S_11": float(S[0, 0]), "S_12": float(S[0, 1])})
+    S, T = _S_and_T(80, 7.0)
+
+    rows = []
+    for r in (10.0, 20.0, 40.0, 80.0):
+        v = _v_at(np.array([0.0, 0.0, r]), 80, 7.0)
+        pred = T / (4 * np.pi * r ** 3)
+        rows.append({"r": r, "v_measured": v, "v_multipole_predicted": pred,
+                     "ratio": v / pred, "g_norm_control": _g_norm_at(r)})
+
+    rs = np.array([x["r"] for x in rows])
+    vs = np.array([abs(x["v_measured"]) for x in rows])
+    slope = float(np.polyfit(np.log(rs), np.log(vs), 1)[0])
+
+    return {
+        "witness": "U = curl(e^{-|x|^2} e_3); div U = 0 exactly; Gaussian, so U in H^2(mu)",
+        "T_quadrature_ladder": ladder,
+        "T": T,
+        "decay_ladder": rows,
+        "fitted_exponent_v": slope,
+        "multipole_prediction_v": -3.0,
+        "implied_exponent_grad_v": slope - 1.0,
+        "control": ("|(U.grad)U| on the same rays is the GAUSSIAN control and underflows to "
+                    "EXACTLY 0.0 at every radius, while v does not. A control that came out "
+                    "differently (lesson 90)."),
+        "conclusion": (
+            "P((U.grad)U) has an ALGEBRAIC |x|^{-4} tail whose coefficient is fixed by "
+            "T = int|U|^2 > 0. Therefore P((U.grad)U) is NOT in L^2(mu) for ANY nonzero "
+            "divergence-free U in H^2(mu), and F(U) = U - L^{-1}P(...) is not well-defined "
+            "as a map H^2(mu) -> H^2(mu)."),
+        "cross_check_vs_leg_255_verifier": {
+            "eq2_locality_argument": (
+                "AGREE, and it is the cleanest of the three. Verified independently at line 84: "
+                "the standing governing form is Lu = f(x, u, grad u), and line 693 defines "
+                "g : u -> f(., u, grad u) as a NEMYTSKII operator -- pointwise-local by "
+                "construction. P[(u.grad)u] is nonlocal and cannot be written in that form. "
+                "Qualification: line 55 contemplates SYSTEMS, but a system of pointwise-local "
+                "equations is still pointwise-local, so the argument survives."),
+            "muckenhoupt_A2_argument": (
+                "AGREE WITH THE DIRECTION, DISAGREE WITH THE INFERENCE AS STATED. e^{|x|^2/4} is "
+                "indeed not A_2 (A_2 forces doubling, hence at most polynomial growth), so the "
+                "standard Calderon-Zygmund weighted theory does not apply. BUT 'the standard "
+                "SUFFICIENT condition fails' does not entail 'the operator is unbounded' -- A_2 "
+                "is sufficient, not necessary. That is the same shape leg 57 had to discharge "
+                "(a BDL-shaped reason to keep a ban, dissolved once the hypothesis was read). "
+                "The verifier rightly calls it an assessment; this leg's position is that it "
+                "should not be relied on as an argument AT ALL, because it does not need to be: "
+                "the witness above EXHIBITS the failure. A demonstration replaces a heuristic."),
+        },
+        "verdict_on_leg_255": (
+            "AGREE with leg 255's screen (iv) kill, and STRENGTHEN it. Leg 255 read "
+            "absence-of-mention as a boundary and conceded a later leg 'could get it by "
+            "arguing the Leray clause'. THAT CONCESSION IS NOT AVAILABLE: the clause is not "
+            "unaddressed-but-plausible, it is FALSE. Leg 255's judgement was right for a "
+            "stronger reason than it had, and its own relaxation caveat should be withdrawn."),
+        "why_the_two_obvious_repairs_fail": [
+            ("BORDER the space with an algebraic far-field mode to absorb the tail -- this "
+             "re-introduces EXACTLY the bordered far-field column that leg 54's Z1 "
+             "block-coupling mechanism (M1) kills. The repair walks back into the death "
+             "the fourth space was chosen to escape."),
+            ("SWAP the Gaussian weight for an algebraic one so the tail is admissible -- "
+             "this destroys the Poincare inequality (line 372), which section 5's "
+             "clause_b caution already names as the SINGLE root of all three evasions. It "
+             "breaks M1, M2 and M3's evasions simultaneously."),
+            ("VORTICITY formulation, to remove the pressure -- Biot-Savart "
+             "(u = curl Laplacian^{-1} omega) is nonlocal with the same algebraic tail, so "
+             "the obstruction moves rather than lifts."),
+        ],
+    }
+
+
+# =====================================================================================
 # 5. THE GATE, COMPUTED (never asserted). classify() has FOUR reachable codes and
 #    self_test() must reach all four on perturbed evidence -- including the branches that
 #    would NOT escalate. A verdict function with an unreachable branch is not a verdict
@@ -559,6 +723,13 @@ def self_test():
     assert Z22_convective(10, 5.0, 5.0) > Z22_convective(100, 5.0, 5.0)
     # And it must be able to fail to converge for a large enough profile within n_max.
     assert min_n_for_contraction(1.0, 1.0) is not None
+    # The Leray measurement's control must genuinely differ from its signal, or the
+    # measurement is not a measurement (lesson 90). Guarded so the finding cannot rot.
+    lm = leray_measurement()
+    assert abs(lm["fitted_exponent_v"] - (-3.0)) < 1e-3, lm["fitted_exponent_v"]
+    assert all(abs(r["ratio"] - 1.0) < 1e-4 for r in lm["decay_ladder"]), lm["decay_ladder"]
+    assert all(r["g_norm_control"] == 0.0 for r in lm["decay_ladder"]), "control not silent"
+    assert lm["T"] > 0.0
     return sorted(seen)
 
 
@@ -573,6 +744,7 @@ def main():
 
     emb = embedding_H2mu_into_L3(3)
     cost = setup_cost_table()
+    leray = leray_measurement()
 
     evaded = sum(1 for m in MECHANISMS.values() if not m["transfers_to_H2mu"])
     verdict = classify(True, evaded, len(MECHANISMS), control_total)
@@ -596,6 +768,7 @@ def main():
         "mechanisms_total": len(MECHANISMS),
         "embedding_H2mu_to_L3_d3": emb,
         "setup_cost_convective_d3": cost,
+        "leray_projection_on_L2mu": leray,
         "self_test_codes_reached": codes,
         "verdict": verdict,
     }
@@ -615,14 +788,16 @@ def main():
                         "U_bar is a finite Hermite-Laguerre sum hence smooth.")},
             {"id": "H3",
              "statement": "INCOMPRESSIBILITY / pressure / Leray projection",
-             "status": ("BINDS AND IS WHOLLY ABSENT. Body census: divergence-free 0, "
-                        "incompressib 0, solenoidal 0, pressure 0, leray projection 0, "
-                        "vorticity 0, velocity field 0, vector-valued 0 -- against a live "
-                        f"control totalling {control_total}. Every equation in the paper is "
-                        "SCALAR and UNCONSTRAINED. A Navier-Stokes application needs a "
-                        "divergence-free constraint and a pressure/Leray projection, and "
-                        "the Leray projector is NOT diagonal in the Hermite-Laguerre "
-                        "eigenbasis of L. THIS IS THE LARGEST UNPRICED ITEM.")},
+             "status": ("BINDS, IS WHOLLY ABSENT, AND IS NOW MEASURED FALSE RATHER THAN "
+                        "MERELY UNPRICED. Body census: divergence-free 0, incompressib 0, "
+                        "solenoidal 0, pressure 0, leray projection 0, vorticity 0, "
+                        "velocity field 0, vector-valued 0 -- against a live control "
+                        f"totalling {control_total}. Every equation in the paper is SCALAR "
+                        "and UNCONSTRAINED. Section 4b then MEASURES the consequence: the "
+                        "Leray projection of the Navier-Stokes nonlinearity has an "
+                        "algebraic |x|^{-4} tail with coefficient int|U|^2 > 0, so it "
+                        "leaves L^2(mu) and F is not well-defined on H^2(mu). THIS CLOSES "
+                        "THE FLUID APPLICATION IN d = 2 AND d = 3.")},
             {"id": "H4",
              "statement": "the target must lie in H^2(mu), i.e. have GAUSSIAN decay",
              "status": ("BINDS, AND IS THE DECISIVE ONE -- see nrs_composition below. The "
@@ -709,6 +884,16 @@ def main():
             "and this leg does not present them as such."),
     }
 
+    result["practical_conclusion"] = (
+        "The gate reads ESCALATE_BAN_LIFT_CASE because the three NAMED mechanisms genuinely "
+        "do not transfer -- H^2(mu) IS a real fourth space and the ban's literal lift clause "
+        "is met. But section 4b closes the FLUID application outright, via a FOURTH "
+        "obstruction that is not one of the three and was not on the ban's list: the Leray "
+        "projection leaves L^2(mu). So Phase 1's Breden-Chu route is closed BEFORE "
+        "construction spent anything -- exactly the outcome DIRECTION.md 257's NO-branch "
+        "describes, reached through the YES-branch. Both are reported; neither is allowed to "
+        "stand for the other.")
+
     result["ceiling"] = (
         "SCOPING ONLY. Nothing built, nothing certified, no solver module added or edited. "
         "No stage claimed; plan_of_record.py untouched. NO BAN LIFTED -- clause (b)'s YES is "
@@ -762,6 +947,23 @@ def main():
     print("     a numerical U_bar bigger than its own enclosure CANNOT be closed.")
     print("  CEILING: NRS/Tsai is not this leg's and not novel; leg 253 owns its boundary.\n")
 
+    print("THE LERAY PROJECTION ON L^2(mu) -- MEASURED (cross-check against leg 255)")
+    print(f"  witness: U = curl(e^-|x|^2 e_3), div U = 0 exactly, Gaussian")
+    print(f"  T = int|U|^2 = {leray['T']:.9f}  (stable to 12 digits over 3 quadratures)")
+    print(f"  {'r':>6} {'v measured':>18} {'multipole':>18} {'ratio':>9} {'|g| control':>12}")
+    for row in leray["decay_ladder"]:
+        print(f"  {row['r']:6.1f} {row['v_measured']:18.10e} "
+              f"{row['v_multipole_predicted']:18.10e} {row['ratio']:9.6f} "
+              f"{row['g_norm_control']:12.1e}")
+    print(f"  fitted exponent of v : {leray['fitted_exponent_v']:.6f} "
+          f"(multipole predicts {leray['multipole_prediction_v']})")
+    print(f"  => grad v ~ r^{leray['implied_exponent_grad_v']:.4f}: ALGEBRAIC, while the")
+    print("     control |(U.grad)U| underflows to EXACTLY 0.0 at every radius.")
+    print("  => P((U.grad)U) NOT in L^2(mu) for ANY nonzero div-free U in H^2(mu);")
+    print("     F(U) = U - L^-1 P(...) is not WELL-DEFINED on H^2(mu). d = 2 AND d = 3.")
+    print("  vs LEG 255: AGREE with its screen-(iv) kill, and withdraw its own concession")
+    print("     that a later leg 'could get it by arguing the Leray clause'. It cannot.\n")
+
     print("CLAUSE (b) -- the three named death mechanisms, mechanism by mechanism")
     for k, m in MECHANISMS.items():
         print(f"  {k}")
@@ -780,6 +982,14 @@ def main():
     print(f"VERDICT: {verdict}")
     print("  -> branch PARKED, pushed as a BRANCH only. main is NOT advanced by this leg.")
     print("  -> the ban lift is the USER's signature, not this leg's.")
+    print("\nPRACTICAL CONCLUSION, WHICH THE GATE'S LITERAL WORDING DOES NOT CAPTURE:")
+    print("  the gate reads YES because the three NAMED mechanisms genuinely do not")
+    print("  transfer -- H^2(mu) IS a real fourth space. But section 4b closes the FLUID")
+    print("  application of it outright, by a FOURTH obstruction that is not one of the")
+    print("  three and was not on the ban's list. So Phase 1's Breden-Chu route is closed")
+    print("  BEFORE construction spent anything -- which is exactly the outcome")
+    print("  DIRECTION.md 257's no-branch describes, arrived at through the yes-branch.")
+    print("  Reported at full strength rather than filed as a clean YES.")
     print(f"\nwrote {out}")
     return 0
 
