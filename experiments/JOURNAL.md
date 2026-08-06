@@ -2992,5 +2992,9 @@ belong to a future window.
   0.28723 on his own Whitham operator but grows linearly (63->1023 over M=128..2048) on
   ours, so no finite shift survives the limit for us. NG (leg 58, live and concurrent) may
   claim novelty against this paper and no further.
+- **Leg 104 (Route-BVB) — YES on both clauses, repair confirmed solid:** leg 99's
+  boussinesq_velocity.py fix holds under leg 99's FULL 22-case battery (0 SILENT_WRONG, 0
+  returning -0.0, vs 7/5 before), and leg 73's Lamb corner-image benchmark reproduces to
+  ~1e-12 relative. Banked as a permanent regression suite alongside legs 73 and 99.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
