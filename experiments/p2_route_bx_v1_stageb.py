@@ -536,10 +536,28 @@ def main():
     }
 
     # -- BX5: coverage gaps versus PROOF-STRENGTH gaps ----------------------
-    measured_only = sorted({r["shape"] for r in audited
-                            if r["covered"] and r["strongest_coverage"] == "MEASURED"
-                            and r["realization"] == "l1_fourier"})
+    # The proof-strength gap is a property of the A21 AXIS, not of a coverage type: it is
+    # exactly the admissible shapes whose A21 is non-zero, which is where leg 58's theorem
+    # stops and leg 54's battery is all the repository has.  (Deriving it from
+    # "strongest coverage == MEASURED" is wrong and an earlier draft did that: it also
+    # picks up the A21 = 0 shapes under the `far_field_in_tail` split placement, whose
+    # covering clause SPLIT-ALT happens to be a measurement.)
+    a21_nonzero_admissible = sorted({r["shape"] for r in audited
+                                     if r["realization"] == "l1_fourier"
+                                     and r["A21"] == "nonzero"
+                                     and r["admissible_shape"]})
+    a21_nonzero_inadmissible = sorted({r["shape"] for r in audited
+                                       if r["realization"] == "l1_fourier"
+                                       and r["A21"] == "nonzero"
+                                       and not r["admissible_shape"]})
+    measured_only = a21_nonzero_admissible
     proof_strength_gap = {
+        "inadmissible_A21_nonzero_shapes_excluded": a21_nonzero_inadmissible,
+        "why_excluded": (
+            "leg 54's own ADMISSIBLE map marks oracle_pinv and exact_inv inadmissible: "
+            "they invert the TRUNCATED operator, so their Z1 is a statement about "
+            "numpy.linalg.inv rather than about a certificate (leg 54 MM3, minimum Z1 "
+            "over the admissibility audit 1.03e4)"),
         "what_it_is": (
             "a configuration that banked MEASUREMENT covers -- it was tried and it did "
             "not close -- but that no THEOREM forbids"),

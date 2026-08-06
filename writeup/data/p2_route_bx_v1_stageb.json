@@ -37903,15 +37903,16 @@
   "gap": null
  },
  "BX5_proof_strength_gap": {
-  "what_it_is": "a configuration that banked MEASUREMENT covers -- it was tried and it did not close -- but that no THEOREM forbids",
-  "where_it_is": "the class A21 != 0, i.e. shapes block_diag, exact_inv, ff_lift, gs_lower, gs_upper, oracle_pinv, schur",
-  "shapes": [
-   "block_diag",
+  "inadmissible_A21_nonzero_shapes_excluded": [
    "exact_inv",
+   "oracle_pinv"
+  ],
+  "why_excluded": "leg 54's own ADMISSIBLE map marks oracle_pinv and exact_inv inadmissible: they invert the TRUNCATED operator, so their Z1 is a statement about numpy.linalg.inv rather than about a certificate (leg 54 MM3, minimum Z1 over the admissibility audit 1.03e4)",
+  "what_it_is": "a configuration that banked MEASUREMENT covers -- it was tried and it did not close -- but that no THEOREM forbids",
+  "where_it_is": "the class A21 != 0, i.e. shapes ff_lift, gs_lower, schur",
+  "shapes": [
    "ff_lift",
    "gs_lower",
-   "gs_upper",
-   "oracle_pinv",
    "schur"
   ],
   "why_it_is_NOT_a_stage_B_corner": "the gate asks for a corner in which a searched certificate could STILL CLOSE.  This one is measured not to: the best admissible Z1 anywhere in it is 8.9591 against the 1 required, MM4's general-A floor on the kernel direction is 5.0444, NG2d measured that A21 != 0 buys back at most ONE unit of the kernel column, and MM4c's explicit attempt to cancel that column costs a total Z1 of 5.66e5.  What is missing is PROOF STRENGTH on an infinite class, not an untried configuration.",
@@ -37970,5 +37971,5 @@
  "gate_answer": "NO",
  "gate_branch": "NO -> B's own gate ('does the searched certificate beat the hand-tuned one?') answers its pre-committed NO in the only sense that matters: nothing in the searchable space closes.",
  "ceiling": "Bookkeeping on a measured negative.  The object is the a = 0 CLM linearisation, whose Y_0 is EXACTLY zero because the anchor IS one basis mode (clause S7), so every magnitude here bounds HL_S2_nonsymmetric's difficulty from BELOW, not above.  No link of the L1 -> L4 chain moved under either branch, and none has moved in 125 legs.  Clay odds unchanged at ~0.05%.",
- "elapsed_s": 8.653502702713013
+ "elapsed_s": 18.439905166625977
 }
