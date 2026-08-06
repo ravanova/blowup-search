@@ -1,30 +1,54 @@
 """Leg 83 / Route-MFG — the permanent adversarial battery against gate 11.
 
-WHAT THIS FILE PINS, AND WHY IT ASSERTS THE *CURRENT* BEHAVIOUR
----------------------------------------------------------------------------
-`capabilities.py` records, for `solver/marginal_flow.py`, that "`integrate` reports
-`converged` and gate 11 enforces it (the NaN of leg 41)".  Gate 11
-(`test_marginal_flow.py::test_11`) exercises that predicate on exactly two
-trajectories: the leg-41 naive-perturbation trap, which ends in a NaN, and one healthy
-on-branch run.  Leg 83 asked what the predicate does on divergence that never produces
-a NaN, and the answer is measured here.
+This file BANKS A MEASUREMENT.  It was originally a CHARACTERISATION of a defect; it is
+now a gate on that defect's (partial) ABSENCE.  Read this before changing anything it
+asserts.
 
-    MEASURED: 8 of 9 scored divergent trajectories are reported `converged = True`,
-    including one whose state grows by 130 decades.  1 of 9 is caught -- the finite-time
-    blowup, i.e. the NaN case the gate was built for.  0 of 3 genuinely convergent
-    controls is falsely flagged.
+WHAT LEG 83 FOUND (2026-08-06).  `capabilities.py` records, for
+`solver/marginal_flow.py`, that "`integrate` reports `converged` and gate 11 enforces it
+(the NaN of leg 41)".  Gate 11 (`test_marginal_flow.py::test_11`) exercises that
+predicate on exactly two trajectories: the leg-41 naive-perturbation trap, which ends in
+a NaN, and one healthy on-branch run.  Leg 83 asked what the predicate does on
+divergence that never produces a NaN:
 
-**These are CHARACTERIZATION assertions, not soundness assertions.**  They encode what
-the predicate does today so the behaviour cannot change silently, following the
-precedent set by leg 69's `test_interval_stress.py`.  `solver/marginal_flow.py` was NOT
-modified by leg 83 -- the gate's `no` branch forbids patching under the leg's own
-authority.  When an authorised leg repairs the predicate, `test_currently_missed_*`
-below will START FAILING; that is the intended signal, and the correct response is to
-flip those cases from `assert converged is True` to `assert converged is False`, never
-to weaken them so a repair looks unnecessary.
+    MEASURED, BEFORE THE REPAIR: 8 of 9 scored divergent trajectories were reported
+    `converged = True`, including one whose state grows by 130 decades.  1 of 9 was
+    caught -- the finite-time blowup, i.e. the NaN case the gate was built for.  0 of 3
+    genuinely convergent controls was falsely flagged.
 
-The mechanism, in one line: every clause of `converged` is an observable of the inner
-Newton solve or of IEEE finiteness, and none is an observable of the state.
+The mechanism, in one line: every clause of `converged` was an observable of the inner
+Newton solve or of IEEE finiteness, and none was an observable of the state.
+
+WHAT WAS THEN FIXED.  `integrate` now tracks, at EVERY step, how far `b` and `mu` have
+grown relative to their own initial magnitude (per block, never as a joint norm -- see
+the module comment) and adds a fourth clause: `state_growth < 1e5`.  The bound is
+relative and therefore scale-free, because this module integrates trajectories at
+mu0 = 2e-3 and at mu0 = 4 and no absolute cap serves both.
+
+    MEASURED, AFTER THE REPAIR: 5 of 9 caught, 4 still missed, still 0 of 3 false
+    positives.  Newly caught: `mu_quartic` (1.4e7), `mu_exp_mild` (1.2e13),
+    `mu_negative_runaway` (1.2e13) and `mu_exp_extreme` -- leg 83's worst case, which
+    grows by 4.99e130 and which the old predicate accepted with a Newton residual
+    1.6e-10 of its threshold.
+
+WHAT IS DELIBERATELY STILL MISSED, AND WHY IT IS NOT A WEAKER FIX THAN IT LOOKS.  A
+growth bound cannot go below the growth of trajectories this module is SUPPOSED to
+accept.  `test_marginal_flow.py` test (6) at p = 5 has lambda_mu = +2 and is meant to
+grow mu from 2e-3 to 0.813 over tau = 3, a factor 4.06e2 -- growth is normal here, and a
+"must settle to a limit" clause would be flatly wrong for this module.  So:
+
+  * `mu_linear` (2.01e2) sits BELOW that legitimate ceiling.  No scale-free growth
+    observable can separate it from test (6); it is structurally out of reach.
+  * `b_quadratic` (3.73e3) is only 9.2x above the ceiling -- catchable only by a
+    threshold with too little headroom to be safe.
+  * `osc_sustained` (1.00) and `osc_growing` (1.99) never get large at all.  They have
+    no limit, but a state-MAGNITUDE clause is the wrong instrument for them; catching
+    them needs a tail/Cauchy test, which is a separate change (leg 83 disposition 2).
+
+These four remain pinned as `assert converged is True` for exactly the reason the
+original eight were: so the behaviour cannot change silently.  If a later repair catches
+them, flip those assertions -- never weaken the ones above so a repair looks
+unnecessary.  Tests 2 and 3 are SOUNDNESS assertions and must never be relaxed.
 
 Run:  .venv/bin/python test_marginal_flow_adversarial.py
 """
@@ -128,18 +152,22 @@ def test_3_no_false_positives_on_genuinely_convergent_flows():
           + ", ".join(f"{n} (res/floor {v:.1e})" for n, v in kept))
 
 
-def test_4_currently_missed_polynomial_and_exponential_growth():
-    """(4) CHARACTERIZATION -- unbounded growth with a healthy inner solve is NOT caught.
+def test_4_smooth_runaway_is_now_refused():
+    """(4) THE REPAIR -- unbounded growth with a PERFECTLY HEALTHY inner solve is caught.
 
-    Six members, ground truth `divergent` by closed form, every one reported
-    `converged = True`.  The magnitudes are asserted as well as the verdict, so that a
-    partial repair (one that catches some) is visible as a specific failure rather than
-    a silent change of subject.
+    Four members, ground truth `divergent` by closed form, each one of which the old
+    predicate accepted.  What makes them the interesting cases is the second block of
+    assertions: every one is finite, never breaks on a NaN, and has a Newton residual
+    BELOW ITS OWN FLOOR (`< 1.0`, i.e. at least 1e8x inside the stagnation threshold).
+    So none of the three original clauses fires on any of them -- they are refused by
+    the state clause and by nothing else, which is exactly what was missing.
+
+    The magnitudes are asserted as well as the verdict, so a regression that catches
+    them for some unrelated reason is visible as a specific failure rather than a silent
+    change of subject.  These are now SOUNDNESS assertions: do not relax them.
     """
     expect = {                    # name: (min state growth factor, exact law)
-        "mu_linear": (1e2, "mu = mu0 + tau"),
         "mu_quartic": (1e6, "mu = (1+tau)^4"),
-        "b_quadratic": (1e3, "b = (1+tau)^2"),
         "mu_exp_mild": (1e12, "mu = 0.3 e^{tau/2}"),
         "mu_exp_extreme": (1e120, "mu = 0.3 e^{5 tau}"),
         "mu_negative_runaway": (1e12, "mu = -0.3 e^{tau/2}"),
@@ -148,27 +176,57 @@ def test_4_currently_missed_polynomial_and_exponential_growth():
         r = rows()[name]
         assert r["fidelity_ok"], (name, r["fidelity_criterion"])
         assert r["state_growth_factor"] > floor_growth, (name, r["state_growth_factor"])
-        # the characterization: currently MISSED
-        assert r["gate11_converged"] is True, (
-            name, "gate 11 now catches this -- see the module docstring, flip the "
-                  "assertion rather than weakening it")
-        # and WHICH clause let it through: all three, comfortably
+        # the repair: now REFUSED
+        assert r["gate11_converged"] is False, (
+            name, "the state clause must refuse this; see the module docstring")
+        # and it is the STATE clause doing it -- none of the original three fires here
         assert r["clause_finite"] is True, (name, r)
         assert r["clause_no_nan_break"] is True, (name, r)
         assert r["worst_newton_residual_over_floor"] < 1.0, (name, r)
         print(f"  (4) {name:<22s} {law:<20s} state grew "
-              f"{r['state_growth_factor']:.2e}x, Newton residual/floor "
+              f"{r['state_growth_factor']:.2e}x with Newton residual/floor "
               f"{r['worst_newton_residual_over_floor']:.2e} "
-              f"({r['newton_headroom']:.1e}x below the threshold) -> converged=True")
+              f"({r['newton_headroom']:.1e}x below the Newton threshold) -> REFUSED")
 
 
-def test_5_currently_missed_sustained_oscillation():
-    """(5) CHARACTERIZATION -- a trajectory with NO LIMIT AT ALL is not caught either.
+def test_4b_what_the_growth_bound_still_cannot_reach():
+    """(4b) CHARACTERIZATION -- the two divergent cases a growth bound cannot separate.
+
+    `mu_linear` grows by 2.01e2 and `b_quadratic` by 3.73e3.  The largest growth reached
+    by any trajectory `test_marginal_flow.py` legitimately accepts is 4.06e2 (test (6) at
+    p = 5, where lambda_mu = +2 is SUPPOSED to grow mu by that much).  `mu_linear` is
+    below that ceiling outright; `b_quadratic` clears it by only 9.2x, which is not
+    enough headroom for a threshold that must never refuse a good run.
+
+    This is pinned, not hidden: the repair's limit is a measured quantity like its
+    coverage.  Catching these needs a different instrument (a per-block bound with a
+    tighter b channel, or a tail test), not a smaller number here.
+    """
+    for name, law in (("mu_linear", "mu = mu0 + tau"), ("b_quadratic", "b = (1+tau)^2")):
+        r = rows()[name]
+        assert r["fidelity_ok"], (name, r["fidelity_criterion"])
+        assert r["gate11_converged"] is True, (
+            name, "a later repair catches this -- flip the assertion, do not weaken "
+                  "the ones in test_4")
+        assert r["state_growth_factor"] < 1e5, (name, r["state_growth_factor"])
+        print(f"  (4b) {name:<21s} {law:<20s} state grew only "
+              f"{r['state_growth_factor']:.2e}x -- inside the 1e5 bound, still accepted")
+
+
+def test_5_still_missed_sustained_oscillation():
+    """(5) CHARACTERIZATION -- a trajectory with NO LIMIT AT ALL is still not caught.
 
     `osc_sustained` is a pure rotation: the exact amplitude is 1 for all time, so the
-    trajectory has no limit and never decays, while nothing about it is large.  This is
-    the member that separates "the predicate misses BIG numbers" from "the predicate
-    does not look at the state at all" -- it is missed at amplitude O(1).
+    trajectory has no limit and never decays, while nothing about it is large.  Before
+    the repair this was the member that separated "the predicate misses BIG numbers"
+    from "the predicate does not look at the state at all".  After the repair it makes a
+    sharper point: the state clause is a MAGNITUDE clause, and magnitude is the wrong
+    instrument for a bounded trajectory with no limit.  Amplitude 1.00 and 1.99 are not
+    distinguishable from a good run by any growth bound that leaves test (6) alone.
+
+    Catching these needs a tail/Cauchy or drift test (leg 83 disposition 2), which is a
+    separate change with its own regression surface -- test (6)'s p = 5 trajectory is
+    still growing at tau_end, so "must settle" is not available as a clause here.
     """
     for name in ("osc_sustained", "osc_growing"):
         r = rows()[name]
@@ -176,9 +234,10 @@ def test_5_currently_missed_sustained_oscillation():
         assert 0.5 <= r["numerical_damping_factor"] <= 2.0, (name, r)
         assert r["gate11_converged"] is True, (name, "flip, do not weaken")
         assert r["worst_newton_residual_over_floor"] < 1.0, (name, r)
+        assert r["state_growth_factor"] < 10.0, (name, r["state_growth_factor"])
         print(f"  (5) {name:<22s} amplitude {r['amp_end_computed']:.4f} at tau=20 "
-              f"({r['numerical_damping_factor']:.3f} of exact), Newton residual/floor "
-              f"{r['worst_newton_residual_over_floor']:.2e} -> converged=True")
+              f"({r['numerical_damping_factor']:.3f} of exact), state growth only "
+              f"{r['state_growth_factor']:.2f}x -> still converged=True")
 
 
 def test_6_the_fidelity_gate_excludes_what_the_integrator_did_not_reproduce():
@@ -212,49 +271,89 @@ def test_7_the_headline_counts():
     excluded = [r for r in rs if not r["fidelity_ok"]]
 
     assert len(div) == 9, len(div)
-    assert len(missed) == 8, [r["name"] for r in missed]
-    assert len(caught) == 1 and caught[0]["name"] == "nan_finite_time_blowup", caught
     assert len(conv) == 3 and not fp, (len(conv), fp)
     assert len(excluded) == 1, [r["name"] for r in excluded]
 
-    worst = max(missed, key=lambda r: r["state_growth_factor"])
-    head = min(r["newton_headroom"] for r in missed)
+    # BEFORE the repair: 1 caught / 8 missed.  AFTER: 5 caught / 4 missed, and the four
+    # that remain are named, because a count alone would let a regression swap one for
+    # another and still read 5.
+    assert len(caught) == 5, sorted(r["name"] for r in caught)
+    assert len(missed) == 4, sorted(r["name"] for r in missed)
+    assert sorted(r["name"] for r in caught) == [
+        "mu_exp_extreme", "mu_exp_mild", "mu_negative_runaway", "mu_quartic",
+        "nan_finite_time_blowup"], sorted(r["name"] for r in caught)
+    assert sorted(r["name"] for r in missed) == [
+        "b_quadratic", "mu_linear", "osc_growing", "osc_sustained"], \
+        sorted(r["name"] for r in missed)
+
+    # leg 83's worst case is caught, and it is caught on the STATE, not on Newton
+    worst = max(div, key=lambda r: r["state_growth_factor"])
+    assert worst["name"] == "mu_exp_extreme", worst["name"]
     assert worst["state_growth_factor"] > 1e120, worst["state_growth_factor"]
-    assert head > 1e7, head
-    print(f"  (7) gate 11 catch coverage on non-NaN divergence: {len(caught)}/{len(div)} "
-          f"caught, {len(missed)}/{len(div)} MISSED, {len(fp)}/{len(conv)} false "
-          f"positives, {len(excluded)} excluded on fidelity")
-    print(f"      worst miss {worst['name']}: state x{worst['state_growth_factor']:.2e}, "
-          f"mu_end {worst['mu_end']:.3e}; every missed case sits at least "
-          f"{head:.1e}x below the 1e8 Newton threshold")
+    assert worst["verdict"] == "CAUGHT", worst["verdict"]
+    assert worst["worst_newton_residual_over_floor"] < 1.0, worst
+    # and everything still missed is small -- no large state is accepted any more
+    assert max(r["state_growth_factor"] for r in missed) < 1e5, \
+        [(r["name"], r["state_growth_factor"]) for r in missed]
+
+    print(f"  (7) catch coverage on non-NaN divergence: {len(caught)}/{len(div)} caught "
+          f"(was 1/9), {len(missed)}/{len(div)} missed (was 8/9), {len(fp)}/{len(conv)} "
+          f"false positives, {len(excluded)} excluded on fidelity")
+    print(f"      leg 83's worst case {worst['name']} (state x"
+          f"{worst['state_growth_factor']:.2e}, mu_end {worst['mu_end']:.3e}) is REFUSED "
+          f"on the state clause, with its Newton residual "
+          f"{worst['worst_newton_residual_over_floor']:.2e} still 1e8x inside its own "
+          f"threshold")
+    print(f"      still accepted, all small: "
+          + ", ".join(f"{r['name']} (x{r['state_growth_factor']:.2e})"
+                      for r in sorted(missed, key=lambda r: -r["state_growth_factor"])))
 
 
-def test_8_the_predicate_has_no_state_clause_at_all():
-    """(8) THE MECHANISM, asserted directly rather than inferred from the misses.
+def test_8_the_predicate_now_has_a_state_clause():
+    """(8) THE MECHANISM, asserted directly rather than inferred from the verdicts.
 
     Two trajectories, identical in every inner-solve observable and 13 decades apart in
-    the state.  If the predicate had ANY state clause -- a bound on |mu|, a growth
-    ratio, a Cauchy tail -- these two could not agree.  They agree, which is the finding
-    stated without reference to any particular adversarial case.
+    the state.  Leg 83's finding was that they received the SAME verdict, which is
+    impossible if any state clause exists.  They must now disagree, and they must
+    disagree while STILL agreeing on all three original clauses -- otherwise the change
+    is being made by something other than the new clause.
+
+    The second half locates the threshold rather than trusting it: the same exponential
+    law, integrated for tau = 20 and for tau = 60, straddles 1e5 and gets both verdicts.
+    Both runs are finite with a healthy Newton, so the state clause is the only thing
+    that can be separating them.
     """
     r_ok = rows()["exact_fixed_point"]
     r_bad = rows()["mu_exp_mild"]
-    assert r_ok["gate11_converged"] == r_bad["gate11_converged"] is True, (r_ok, r_bad)
-    assert r_ok["clause_finite"] == r_bad["clause_finite"] is True
-    assert r_ok["clause_no_nan_break"] == r_bad["clause_no_nan_break"] is True
     ratio = r_bad["state_growth_factor"] / max(r_ok["state_growth_factor"], 1.0)
     assert ratio > 1e12, ratio
+    # the original three clauses still agree ...
+    assert r_ok["clause_finite"] == r_bad["clause_finite"] is True
+    assert r_ok["clause_no_nan_break"] == r_bad["clause_no_nan_break"] is True
+    assert r_ok["worst_newton_residual_over_floor"] < 1.0
+    assert r_bad["worst_newton_residual_over_floor"] < 1.0
+    # ... and the verdicts now differ anyway, which only a state clause can do
+    assert r_ok["gate11_converged"] is True, r_ok
+    assert r_bad["gate11_converged"] is False, r_bad
 
-    # and the same statement made against the source: the record `integrate` returns
-    # carries the state, so the information is present and simply unused.
+    # the clause is a growth bound, and here is where it sits
     A = MFG.SyntheticFlow(1, *MFG._scalar_mu(lambda u: 0.5 * u, lambda u: 0.5))
-    rec = integrate(A, [1.0], 0.3, 20.0, 0.25, n_sample=80)
-    assert rec["converged"] is True
-    assert np.isfinite(rec["mu_end"]) and rec["mu_end"] > 1e3, rec["mu_end"]
-    assert set(("mu", "b_end", "mu_end")) <= set(rec), sorted(rec)
-    print(f"  (8) the fixed point and a state {ratio:.1e}x larger are given the SAME "
-          f"verdict on all three clauses; `rec` carries mu_end={rec['mu_end']:.3e} and "
-          f"the predicate reads none of it")
+    near = integrate(A, [1.0], 0.3, 20.0, 0.25, n_sample=80)   # grows 2.2e4 -> kept
+    far = integrate(MFG.SyntheticFlow(1, *MFG._scalar_mu(lambda u: 0.5 * u,
+                                                         lambda u: 0.5)),
+                    [1.0], 0.3, 60.0, 0.25, n_sample=240)      # grows 1.1e13 -> refused
+    for rec in (near, far):
+        assert rec["finite"] is True and "diverged_at_tau" not in rec, rec["mu_end"]
+        assert rec["worst_newton_residual_over_floor"] < MFG.NEWTON_STAGNATION, rec
+        assert "state_growth" in rec and "state_growth_threshold" in rec, sorted(rec)
+    assert near["state_growth"] < near["state_growth_threshold"] <= far["state_growth"]
+    assert near["converged"] is True, near["state_growth"]
+    assert far["converged"] is False, far["state_growth"]
+    print(f"  (8) the fixed point and a state {ratio:.1e}x larger now get DIFFERENT "
+          f"verdicts while agreeing on all three original clauses")
+    print(f"      threshold located: same law grows {near['state_growth']:.2e}x over "
+          f"tau=20 (kept) and {far['state_growth']:.2e}x over tau=60 (refused), "
+          f"bound = {near['state_growth_threshold']:.0e}")
 
 
 if __name__ == "__main__":
@@ -263,11 +362,12 @@ if __name__ == "__main__":
     for fn in (test_1_the_harness_is_not_degenerate,
                test_2_the_design_case_is_still_caught,
                test_3_no_false_positives_on_genuinely_convergent_flows,
-               test_4_currently_missed_polynomial_and_exponential_growth,
-               test_5_currently_missed_sustained_oscillation,
+               test_4_smooth_runaway_is_now_refused,
+               test_4b_what_the_growth_bound_still_cannot_reach,
+               test_5_still_missed_sustained_oscillation,
                test_6_the_fidelity_gate_excludes_what_the_integrator_did_not_reproduce,
                test_7_the_headline_counts,
-               test_8_the_predicate_has_no_state_clause_at_all):
+               test_8_the_predicate_now_has_a_state_clause):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.0f}s)")

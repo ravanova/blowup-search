@@ -274,6 +274,17 @@ def integrate(A, b0, mu0, tau_end, dt, n_sample=200, branch_every=0):
     stride = max(1, n // int(n_sample))
     tau = 0.0
     worst_it, worst_res = 0, 0.0
+    # THE STATE'S OWN STARTING SCALE, PER BLOCK.  b and mu are measured against their
+    # own initial magnitude separately, never against a sup-norm of the concatenated
+    # state: |b| ~ 1 while mu ~ 2e-3, so a joint norm is blind to mu by three orders --
+    # and mu is the variable every runaway in this module's history actually ran away
+    # in.  MU_SCALE_FLOOR only keeps mu0 = 0 (the neutral line, an exact fixed point of
+    # (M)) from dividing by zero; it is far below any mu this module integrates.
+    MU_SCALE_FLOOR = 1e-12
+    b_scale = max(float(np.max(np.abs(np.asarray(b0, float)))), 1e-300)
+    mu_scale = max(abs(float(mu0)), MU_SCALE_FLOOR)
+    worst_b_growth = float(np.max(np.abs(np.asarray(b0, float)))) / b_scale
+    worst_mu_growth = abs(float(mu0)) / mu_scale
     rec = {"tau": [0.0], "mu": [float(mu0)], "alpha": [A.alpha(y)],
            "gauge": [A.gauge(y)], "branch_dist": [], "branch_tau": []}
     b_seed = np.asarray(b0, float)
@@ -291,6 +302,10 @@ def integrate(A, b0, mu0, tau_end, dt, n_sample=200, branch_every=0):
         tau += dt
         worst_it = max(worst_it, it)
         worst_res = max(worst_res, nrm / max(floor, 1e-300))
+        # EVERY step, not just the sampled ones and not just the last: a trajectory that
+        # runs away and comes back (or overshoots between samples) must still be seen.
+        worst_b_growth = max(worst_b_growth, float(np.max(np.abs(y[:-1]))) / b_scale)
+        worst_mu_growth = max(worst_mu_growth, abs(float(y[-1])) / mu_scale)
         if (i + 1) % stride == 0 or i == n - 1:
             rec["tau"].append(tau)
             rec["mu"].append(float(y[-1]))
@@ -308,11 +323,38 @@ def integrate(A, b0, mu0, tau_end, dt, n_sample=200, branch_every=0):
     # The discriminator that separates them cleanly is the implicit solve's own residual
     # over its floor: ~6e2 on a healthy run, 1e13 when Newton never converged.
     NEWTON_STAGNATION = 1e8
+    # AND A SECOND DISCRIMINATOR, BECAUSE THE FIRST ONE NEVER LOOKS AT THE STATE.  Every
+    # clause above is an observable of the inner Newton or of IEEE finiteness, so a
+    # trajectory that runs away SMOOTHLY -- healthy Newton at every step, finite at the
+    # end -- is accepted.  Leg 83 measured that directly: mu' = 5 mu from mu0 = 0.3 to
+    # tau = 60 ends at mu = 1.5e130, 130 decades from its start, with residual/floor
+    # 1.6e-02, i.e. 1.6e-10 of the threshold above; and the exact fixed point and a state
+    # 1.2e13x larger get the SAME verdict on all three clauses.  No re-tuning of 1e8
+    # reaches those -- Newton is well conditioned PRECISELY BECAUSE the run is smooth, so
+    # on that family the residual is anti-correlated with the failure it is asked to
+    # detect.  What was missing is a clause on the state itself.
+    #
+    # The bound is RELATIVE TO THE RUN'S OWN START and therefore scale-free: this module
+    # integrates trajectories at mu0 = 2e-3 and at mu0 = 4, and no absolute cap serves
+    # both.  1e5 is placed by measurement, not taste.  The largest growth any genuinely
+    # converged trajectory in test_marginal_flow.py reaches is 4.06e2 -- test (6) at
+    # p = 5, where lambda_mu = +2 is SUPPOSED to grow mu from 2e-3 to 0.813 over tau = 3;
+    # growth is normal here and a "must settle to a limit" clause would be wrong.  The
+    # nearest divergent trajectory this catches sits at 1.4e7.  1e5 is the geometric
+    # middle of that gap: 246x of headroom above anything legitimate, 141x below the
+    # nearest true positive.
+    STATE_GROWTH = 1e5
     finite = bool(np.all(np.isfinite(y)))
+    state_growth = max(worst_b_growth, worst_mu_growth)
     rec.update({"finite": finite,
                 "newton_stagnation_threshold": float(NEWTON_STAGNATION),
+                "state_growth_threshold": float(STATE_GROWTH),
+                "state_growth": float(state_growth),
+                "b_growth": float(worst_b_growth),
+                "mu_growth": float(worst_mu_growth),
                 "converged": bool(finite and "diverged_at_tau" not in rec
-                                  and worst_res < NEWTON_STAGNATION),
+                                  and worst_res < NEWTON_STAGNATION
+                                  and state_growth < STATE_GROWTH),
                 "dt": float(dt), "tau_end": float(tau), "steps": n,
                 "worst_newton_iters": int(worst_it),
                 "worst_newton_residual_over_floor": float(worst_res),
