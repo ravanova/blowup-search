@@ -473,6 +473,32 @@ CAPABILITIES = [
                    "margins with the guard active reproduces +0.394/+0.094 to 0.0 diff -- "
                    "confirmed NOT contaminated"),
      "test": "test_target_norm.py"},
+    {"module": "solver/bc_weighted_sobolev.py",
+     "object": "Breden-Chu weighted-Sobolev setting H^2(mu), mu = e^{|x|^2/4}/Z",
+     "holds": ("the operator L = -Delta - (x/2).grad and its even half-Hermite/Laguerre "
+               "eigenbasis psi_m = L_m^{(-1/2)}(x^2/4)e^{-x^2/4}/Zeta_m on the UNBOUNDED "
+               "domain; Gauss-Laguerre nodes/log-weights WITHOUT scipy (Sturm bisection "
+               "+ Newton); the six/four/two-product quadrature rules for products of "
+               "psi and d_xpsi; eq. (54)'s self-similar viscous-Burgers profile (F, DF, "
+               "Newton, an independent ODE-shooting seed); and all of arXiv:2404.04054 "
+               "section 6's bounds Y, Zbar11/12/21/22, Z1, Z2, Z3 plus Corollary 21's "
+               "radii polynomial.  NOT the ell^1_w/collocation/origin-H^2 machinery the "
+               "plan of record bans -- the norm is the HILBERT ||L.||_{L^2(mu)} and the "
+               "tail is controlled by L's Poincare gap, not by an ell^1 weight"),
+     "validated": ("reproduces Breden-Chu's published Theorem 42 END TO END at their own "
+                   "n = 1500 and their own quadrature sizes (N = 3n+3 / 2n+3): their "
+                   "enclosure 1e-3 is a certified radius of THIS module's radii "
+                   "polynomial, and an independently shot+Newton'd ubar matches their "
+                   "released coefficients to 4.36e-10 in H^2(mu).  Y reproduces to "
+                   "6.0e-05 relative and Z3 to their full print granularity; Z1 (1.31x) "
+                   "and Z2 (0.81x) differ, and the difference is localised by ablation "
+                   "to the L^infty bounds on psi_m, where their own code overshoots the "
+                   "measured sup by up to 136x.  CEILING: float64, NOT interval "
+                   "arithmetic -- this reproduces their CONSTANTS, not their proof; the "
+                   "reproduction's own resolution is 1.6e-09 relative, measured by their "
+                   "two exact rational quadrature identities and by <psi_a,psi_b> = "
+                   "delta_ab over all modes"),
+     "test": "test_bc_weighted_sobolev.py"},
 
     # -- literature, targets, search, plumbing --------------------------------------
     {"module": "solver/literature_gates.py", "object": "published results as executable gates",
