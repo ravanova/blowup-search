@@ -1,52 +1,52 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-06, ~23:52 BST — graceful, user-requested session close. Full detail in
-`reports/ORCH_STATE.md`, committed in the same close.*
+*Refreshed 2026-08-07, cycle 1 — first landings audited, first refill dispatched. Full detail
+in `PROGRESS.md` (git-ignored, more current) and `reports/ORCH_STATE.md` (prior handoff).*
 
 ## ⚠ NEEDS YOU
 
-0. **MAJOR DIRECTION CHANGE FROM THE USER — APPLIED.** PUB1/PUB2 approved as the deliverable
-   (submission-blocking legs 249 in flight, 250 ready in reserve). The exit criterion is now
-   a full Clay solve, applied to `plan_of_record.py` (new stage `P0` live as NEXT, stage `B`
-   marked DONE, Wall 2 corrected, one ban re-posed) — all 8 `test_plan_of_record.py`
-   invariants pass, merge gate green. Clay odds unchanged at ~0.05%, recorded alongside the
-   goal change per explicit instruction. Full technical framing in `CONTINUATION_PROMPT.md`
-   Directive 1 and `CLAY_ROADMAP.md` §7.5.
-1. Route-D v11 has two independently-confirmed distinct exposures this cycle (profile_newton
-   convergence flag, legs 202/226/236; v5_budget min/max selection, legs 235/247) — repairs
-   in flight, neither fully landed+independently-verified yet.
-2. Leg 178 (WES) — parked, self-conflicted gate, three explicit questions for the user,
-   unresolved for many cycles, not actioned by either ruling this session.
-3. Leg 129/188 — escalation #4 (Bowman dealiasing rule), sharpened in scope, still parked.
-4. Leg 251 (Phase 0 target selection) is the single most consequential leg in flight — its
-   YES branch names the object/ansatz the rest of the Clay-directed programme builds on;
-   treat its output as needing DM/user sign-off before anything is built on it.
+1. **Leg 254 (Route-DSSX) — escalation, parked at PR #18 (`leg/254-dssx-v1`).** The user's
+   2026-08-07 steer prioritized this leg to determine whether the DSS ban's "expensive
+   entrance" (a global, unseeded periodic-orbit search of the rescaled gCLM flow) was excluded
+   for a substantive reason or only by cost. **Finding: cost-shaped, not substantive** — all
+   three of the ban's recorded reasons are local-linear spectral statements at a fixed point of
+   the flow (0 of 3 concern a global search); the phrase "expensive entrance" entered
+   `plan_of_record.py` in the same commit that authored the ban, never examined afterward; a
+   repo-wide grep finds 0 periodic-orbit searches of the rescaled flow ever built, run, or
+   costed. Leg 254 proposes re-posed wording splitting the ban into a cheap-entrance clause
+   (stays banned as-is) and an expensive-entrance clause (opens under the Clay goal, gated on a
+   3-clause lift condition: function space, object, price) — full text in
+   `experiments/journal/leg_254.md` §8 and the PR body. **This is a ban weakening and cannot
+   land under a leg's own signature — needs a ruling before leg 251 (Phase 0 target selection)
+   redispatches with DSS treated as open.**
+2. **Leg 178 (WES)** — parked, self-conflicted gate, three explicit questions for the user,
+   unresolved for many cycles, not actioned this session.
+3. **Leg 129/188** — escalation #4 (Bowman dealiasing rule), sharpened in scope, still parked.
 
 ## Now
 
-- **Session closed gracefully by direct user request**, ~23:52 BST 2026-08-06. The user will
-  start the next orchestrator session manually; no self-chain `RemoteTrigger` was scheduled.
-- `main` SHA at close: `06e96d2`.
-- Composition floor (`ORCHESTRATION.md` §3b, added this session): at/above 3/10 at last
-  check (236, 251, and one more — verify against `DIRECTION.md`'s own canonical line).
-- Ten-leg roster at close (branches/worktrees, not a live-process guarantee — see
-  `reports/ORCH_STATE.md` for full detail including exact worktree paths):
+- Cycle: 1
+- `main` SHA: `f039d68`
+- Agents live: 11 (10 leg slots + 1 verifier), plus 1 Decision Maker (Fable 5)
 
-| Slot | Leg | Route | Branch |
+## Legs (10 slots)
+
+| Slot | Leg | Route | Notes |
 |---|---|---|---|
-| A | 192 | H2CV — **orphaned, needs fresh dispatch** | (uncommitted work only, see ORCH_STATE.md) |
-| B | 249 | H2CV2 (verify) — SUBMISSION-BLOCKING for PUB2 | `verify/249-h2cv2-v1` |
-| C | 248 | CNR2 (repair) | `leg/248-cnr2-v1` |
-| D | 221 | BVRR (repair) | `leg/221-bvrr-v1` |
-| E | 251 | P0T (Phase 0) — first leg of the new programme | `leg/251-p0t-v1` |
-| F | 236 | RDDEP (math) | `leg/236-rddep-v1` |
-| G | — | VACANT — 250/252 ready in reserve | |
-| H | 228 | BHRV (verify) | `verify/228-bhrv-v1` |
-| I | 210 | M2SV (verify) | `verify/210-m2sv-v1` |
-| J | 226 | PNR (repair) — top priority | `leg/226-pnr-v1` |
+| A | 253 | NRSX | fresh; NRS/Tsai hypothesis boundary |
+| B | 249 | H2CV2 | resuming from salvage; TOP PRIORITY, submission-blocking |
+| C | 254 | DSSX | **done — escalated**, awaiting DM's next assignment for this slot |
+| D | 221 | BVRR | resuming; zero-contamination re-confirmation |
+| E | 255 | P1A | Phase 1 target census |
+| F | 236 | RDDEP | resuming; Route-D v11 dependency trace |
+| G | 256 | P1B | Breden-Chu end-to-end reproduction |
+| H | 257 | P1C | Remark 40 reach + stage-V ban-lift scoping |
+| I | 252 | VBRG | regenerates Route-D v11's stale anchor JSON |
+| J | 226 | PNR | highest-priority repair, threatens a banked headline |
 
-## Legs
-
-See table above; `reports/ORCH_STATE.md` has full narrative detail per slot, what each leg
-already found in its novelty pass, and what the next orchestrator should verify (not assume)
-about liveness before proceeding.
+Session start recovered from a clean, graceful handoff — several of the prior session's "live"
+slots were not actually recoverable (subagent handles don't survive session boundaries); WIP
+was salvaged where real, leg 251 (Phase 0) was a total loss and redrafted. User steer applied:
+DSS-ban scoping prioritized (254), Phase 1 authorized in parallel with Phase 0 (legs 255-257).
+Landed this cycle: leg 250 (PUB2's σ_min citation fix — an inverted inequality sign, not a
+measurement error), leg 258 (composition floor locked into `test_plan_of_record.py`).
