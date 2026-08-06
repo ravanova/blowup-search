@@ -1,0 +1,189 @@
+{
+  "leg": 254,
+  "route": "Route-DSSX",
+  "date": "2026-08-07",
+  "kind": "locator_ledger",
+  "compute": "none -- this leg runs no solver, produces no measurement, and banks no new number. Every number below is QUOTED from the record cited beside it.",
+  "question": "The DSS ban ('another DSS re-ask, or the DSS lane's expensive entrance', lifted by: never -- 'three independent reasons the cheap entrances fail') bans the expensive entrance in the same phrase as the cheap ones. Was the expensive entrance excluded for a SUBSTANTIVE reason independent of cost, or only by cost/scope under the superseded goal?",
+  "gate_answer": "NO -- COST-SHAPED. Escalated to the user; the ban is not lifted by this leg.",
+
+  "ban_as_written": {
+    "file": "plan_of_record.py",
+    "lines": "799-800",
+    "phrase": "another DSS re-ask, or the DSS lane's expensive entrance",
+    "lift": "never -- three independent reasons the cheap entrances fail",
+    "authored_at": "bcebcd1",
+    "authored_date": "2026-08-04",
+    "pickaxe": "git log -S\"expensive entrance\" -- plan_of_record.py",
+    "pickaxe_commit_count": 1,
+    "note": "The phrase enters the repository at exactly one commit, the plan of record's own adoption. It was written into the ban simultaneously with the ban, not appended after an examination of the entrance."
+  },
+
+  "expensive_entrance_definition": {
+    "what_it_is": "a GLOBAL periodic-orbit search of the dynamically-rescaled flow, unseeded -- no local bifurcation supplying a starting guess",
+    "locators": [
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEG_V1.md", "line": 59, "quote": "The alternative was the DSS lane's expensive entrance (a periodic-orbit search with nothing to seed it, priced upward by 26). This is much cheaper and it answers a question that the expensive lane would have to assume."},
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEE_V1.md", "line": 416, "quote": "Entering it now costs a real build -- a periodic-orbit search in the rescaled flow with no fixed point nearby to seed it -- and 4.1 says where such an orbit would have to live"},
+      {"file": "PHASE2_P2_NOTES.md", "line": 1891, "quote": "periodic-orbit search with no fixed point nearby to seed it), and 4.1 says where such an orbit"}
+    ],
+    "total_definitional_mentions_in_repo": 3,
+    "everything_else_about_it_in_the_record": "a price"
+  },
+
+  "the_three_reasons": [
+    {
+      "index": 1,
+      "route": "Route-E v1",
+      "commit": "cd43893",
+      "date": "2026-08-02",
+      "notes_section": "PHASE2_P2_NOTES.md 26",
+      "code": "solver/rescaled_spectrum.py",
+      "tests": "test_rescaled_spectrum.py 8/8",
+      "data": "writeup/data/p2_route_e_v1_spectrum.json",
+      "figure": "fig34",
+      "writeups": ["writeup/4_p2_lottery/TECHNICAL_P2_ROUTEE_V1.md", "writeup/4_p2_lottery/BLOG_P2_ROUTEE_V1.md"],
+      "claim": "no Hopf: the log-periodic directions are CONTINUOUS spectrum, so there is no eigenvalue that could cross",
+      "realization": "gCLM rescaled flow, 1D, compactification X = tan(theta/2) with odd sines, gauge c_omega = 1 + (a-1) H(Omega)(0), K = 64/128/256 (to 384 in the resonance ladder); conclusions carried ONLY at a = 0 (closed form) and a = 1/2 (alpha = 3 exactly, residual 1.4e-14 at K = 192)",
+      "magnitudes": {
+        "isolated_grid_converged_eigenvalues": [0.0, -1.0],
+        "symmetry_mode_defects_a0": [3.0e-15, 3.3e-16],
+        "symmetry_mode_defects_a_half": [1.3e-10, 9.1e-15],
+        "two_by_two_block_exactness": 6.1e-16,
+        "free_error_bar_computed_lambda0_at_a_0p2": 0.35,
+        "free_error_bar_computed_lambda0_at_a_0p5": 8.9e-5,
+        "planted_positive_control_V6": 1.083,
+        "planted_positive_control_V12": 4.578,
+        "continuum_strip": "-1 < Re lambda < 1",
+        "continuum_closed_form": "s_lambda = (w-1)^(1-lambda) (w+1)^(1+lambda)",
+        "log_periodic_member": "X^(1-iy) e^(iy tau)",
+        "anchor_residual": 1.1e-16
+      },
+      "is_it_about_a_fixed_point": true,
+      "does_it_mention_a_global_search": false
+    },
+    {
+      "index": 2,
+      "route": "Route-H v1",
+      "commit": "9dba93f",
+      "date": "2026-08-03",
+      "notes_section": "PHASE2_P2_NOTES.md 29",
+      "code": "solver/critical_dissipation.py",
+      "tests": "test_critical_dissipation.py 10/10",
+      "data": "writeup/data/p2_route_h_v1_critical.json",
+      "figure": "fig37",
+      "writeups": ["writeup/4_p2_lottery/TECHNICAL_P2_ROUTEH_V1.md", "writeup/4_p2_lottery/BLOG_P2_ROUTEH_V1.md"],
+      "claim": "dissipation DOES discretize Route-E's continuum, and the lane stays shut anyway: everything condenses onto the negative real axis and nothing goes complex",
+      "realization": "same gCLM rescaled flow, with mu = nu/(A L^(2s)) promoted to an autonomous dynamical variable; mu_tau = (2s - alpha) mu, alpha = -c_omega",
+      "magnitudes": {
+        "converged_eigenvalues_before_after": [2, 8],
+        "max_Re_after_condensation": 3e-13,
+        "positive_control_converged_before_after": [6, 9],
+        "positive_control_leading_Re": 1.58
+      },
+      "is_it_about_a_fixed_point": true,
+      "does_it_mention_a_global_search": false
+    },
+    {
+      "index": 3,
+      "route": "Route-I v1",
+      "commit": "35929a4",
+      "date": "2026-08-03",
+      "notes_section": "PHASE2_P2_NOTES.md 30",
+      "code": "solver/marginal_flow.py",
+      "tests": "test_marginal_flow.py 11/11",
+      "data": "writeup/data/p2_route_i_v1_driven.json",
+      "figure": "fig38",
+      "writeups": ["writeup/4_p2_lottery/TECHNICAL_P2_ROUTEI_V1.md", "writeup/4_p2_lottery/BLOG_P2_ROUTEI_V1.md"],
+      "claim": "the stability inversion: inviscidly the log-periodic band IS the unstable set, and any mu > 0 DELETES it rather than damping it",
+      "realization": "gCLM rescaled flow at a = 1/2, integrating (F_mu)+(M) as an initial-value problem, K = 48/96/144",
+      "magnitudes": {
+        "unstable_direction_counts": {"K=48": "45/48", "K=96": "93/96", "K=144": "141/144"},
+        "max_Re_inviscid": {"K=48": 4.52, "K=96": 4.55, "K=144": 4.56},
+        "leading_inviscid_eigenvalue_K96": "+4.5455 + 430.35i",
+        "max_Re_restricted_by_abs_Im_K96": {"2": 0.313, "5": 0.718, "10": 1.004, "30": 2.252, "100": 3.365, "all": 4.546},
+        "max_Re_restricted_by_abs_Im_K144": {"2": 0.119, "5": 0.309, "10": 0.745, "30": 1.770, "100": 2.990, "all": 4.558},
+        "max_abs_Im": {"K=96": 430, "K=144": 661},
+        "max_Re_at_mu_0p05": -1e-13,
+        "viscous_discrete_ladder": [0.0, -1.0, -4.7],
+        "ladder_gap_flat_over_decades_of_mu": 4
+      },
+      "is_it_about_a_fixed_point": true,
+      "does_it_mention_a_global_search": false
+    }
+  ],
+
+  "the_finding": {
+    "reasons_total": 3,
+    "reasons_that_are_local_linear_statements_at_a_fixed_point": 3,
+    "reasons_that_address_a_global_unseeded_orbit_search": 0,
+    "explicit_price_sentences_excluding_the_expensive_entrance": 3,
+    "measurements_excluding_the_expensive_entrance": 0,
+    "repository_statements_that_the_reasons_do_NOT_cover_a_global_orbit": 2,
+    "price_sentences": [
+      {"file": "PHASE2_P2_NOTES.md", "section": "26 NEXT", "quote": "Do NOT default into the expensive DSS build."},
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEE_V1.md", "line": 419, "quote": "That is a much bigger commitment than this leg was, and it should be weighed against the alternatives ... rather than taken by default."},
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEG_V1.md", "line": 59, "quote": "This is much cheaper", "note": "Route-G's gate-check clause (b) -- the moment the choice was actually made. A literal price comparison; the expensive entrance lost on price."}
+    ],
+    "non_coverage_statements": [
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEE_V1.md", "lines": "369-372", "section": "6.4 What this does not say", "quote": "Not that gCLM has no DSS solution -- only that one is not born from a Hopf bifurcation off the self-similar branch that continues from CLM. Periodic orbits can exist without a fixed point nearby that spawned them, and 4.1 shows the log-periodic directions themselves are present (in the continuum)."},
+      {"file": "writeup/4_p2_lottery/BLOG_P2_ROUTEE_V1.md", "lines": "257-259", "quote": "Periodic orbits can exist without a fixed point nearby that spawned them -- and the log-periodic directions are present, in the continuum."}
+    ],
+    "absence_of_a_mechanism_is_not_an_obstruction": {
+      "file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEI_V1.md",
+      "lines": "141-144",
+      "quote": "The lane is not closed, but nothing in three legs has produced a mechanism by which it opens."
+    }
+  },
+
+  "was_the_fourth_door_ever_examined": {
+    "answer": "no",
+    "grep_terms": ["orbit search", "shooting method", "poincare", "poincare (accented)"],
+    "grep_scope": "*.md and *.py across the whole repository, .git excluded",
+    "periodic_orbit_searches_of_a_rescaled_flow_found": 0,
+    "unrelated_hits": [
+      {"file": "solver/viscous_novelty.py", "line": 44, "what": "a cited EXTERNAL rigorous shooting method, Stage V's object"},
+      {"file": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEV_V0.md", "line": 51, "what": "the same external theorem"},
+      {"file": "experiments/p2_route_w2l_v1_lit.py", "line": 176, "what": "a Poincare-section return map named inside a literature string"},
+      {"file": "writeup/novelty/leg_143.md", "line": 77, "what": "a shooting-method software-hazard search query"},
+      {"file": "millennium_prize_problems.md", "line": 4, "what": "the Poincare Conjecture"}
+    ],
+    "post_ban_legs_mentioning_DSS": [104, 113, 115, 116, 139, 156, 161, 179, 183, 218, 238, 240],
+    "post_ban_legs_mentioning_DSS_count": 12,
+    "of_those_that_are_ban_walk_non_contact_lines": 12,
+    "of_those_that_examine_the_expensive_entrance": 0,
+    "builds": 0,
+    "runs": 0,
+    "numeric_cost_estimates": 0
+  },
+
+  "substantive_residue": {
+    "statement": "One non-cost fact about the expensive entrance IS on the record and a future leg must carry it: 26 4.1 says where such an orbit would have to live -- the log-periodic directions, which are continuous spectrum AND of limited regularity at the origin (X^(1-iy), a fractional power at X = 0) -- and Route-I adds that in the VISCOUS gCLM problem that band is absent entirely (max Re = -1e-13 at mu = 0.05).",
+    "why_it_constrains_but_does_not_exclude": [
+      {"reason": "it is LOCAL -- a statement about the linearization at one fixed point, and the repository itself says a periodic orbit need not be near one", "locator": "TECHNICAL_P2_ROUTEE_V1.md 6.4"},
+      {"reason": "it is REALIZATION-BOUND -- gCLM, 1D, compactified odd-sine basis, one gauge, K <= 384, conclusions at exactly a = 0 and a = 1/2; Route-E's own not-claimed says the instrument cannot resolve even the modes it is known to have at generic a", "locator": "TECHNICAL_P2_ROUTEE_V1.md 6.4, PHASE2_P2_NOTES.md 26 NOT CLAIMED"},
+      {"reason": "it is NOT ABOUT THE CURRENT TARGET -- 'Nothing about NS. gCLM's scaling structure is not NS's; the only reason DSS is interesting for NS is a theorem about NS.' Phase 0 selects a target under the CLAY goal, i.e. NS; the three reasons' realization does not contain the new target", "locator": "TECHNICAL_P2_ROUTEE_V1.md 6.4"}
+    ]
+  },
+
+  "commissioning_record": {
+    "file": "DIRECTION.md",
+    "lines": "9450-9470",
+    "who": "the Decision Maker's 2026-08-06 ban review",
+    "what": "flagged that the three reasons are specifically about the cheap entrances and the expensive entrance's exclusion is stated only by inclusion in the same banned phrase; declined to lift; commissioned a scoping leg reading the DSS lane's own history. This leg is that leg."
+  },
+
+  "escalation": {
+    "escalated": true,
+    "authority": "a leg may not lift a ban under its own signature; this leg's output is a recommendation to the user",
+    "branch": "leg/254-dssx-v1",
+    "main_pushed": false,
+    "proposed_wording_location": "experiments/journal/leg_254.md section 8 -- two entries replacing plan_of_record.py:799-800: entry A keeps the cheap entrances banned 'never' with all three reasons stated in full at their realizations; entry B splits the expensive entrance out with a real three-clause lift condition (function space, object, price)",
+    "plan_of_record_touched_by_this_leg": false
+  },
+
+  "input_to_leg_251": {
+    "excluded_by_this_repository_own_measurement": "obtaining a DSS orbit by bifurcation off a self-similar FIXED POINT of a rescaled flow, in gCLM, at a = 0 and a = 1/2, inviscid or viscous. Three reasons, magnitudes above. A genuine dead end; Phase 0 must not re-enter it.",
+    "NOT_excluded_by_measurement": "a GLOBAL unseeded periodic-orbit search. Excluded by price under a superseded goal. Leg 251 should record this as OPEN PENDING THE USER'S RULING on entry B, not as a banked dead end, and must not count it against a candidate's NRS/Tsai survival.",
+    "not_addressed_at_all": "anything about Navier-Stokes -- the DSS lane's entire measured record is gCLM-only, by its own explicit statement."
+  }
+}
