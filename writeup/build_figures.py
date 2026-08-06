@@ -306,6 +306,8 @@ P2_EVIDENCE = [
     "../experiments/p2_route_tn_v1_consistency_evidence.py",    # fig51 -- Route-TN v1 (leg 56)
     "../experiments/p2_route_xs_v1_shapes_evidence.py",         # fig52 -- Route-XS v1 (leg 57)
     "../experiments/p2_weight_repairs_v2_evidence.py",          # fig58 -- Route-WV v2 (leg 59)
+    "../experiments/p2_route_port_v1_bordered_evidence.py",     # fig59 -- Route-PORT v1 (leg 46)
+    "../experiments/p2_route_port_v2_reach_evidence.py",        # fig60 -- Route-PORT v2 (leg 47)
 ]
 
 

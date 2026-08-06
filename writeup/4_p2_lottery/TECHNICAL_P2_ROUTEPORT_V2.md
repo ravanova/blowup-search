@@ -58,7 +58,9 @@ ladder. That is not mysterious: the tuned weight is `w_l = 0.01·X_max` *by cons
 the norm the ball is measured in changes as the domain grows, and `Z₂` grows with it.
 
 **Net: the ratio rises `+0.47` per unit `ρ`.** Every unit of reach costs a factor of ~3 *in
-the wrong direction*. The gap at `ρ = 10` is **28× worse** than at `ρ = 6`.
+the wrong direction*. The gap at `ρ = 10` is **63× worse** than at `ρ = 6`
+(`4.374e+09 / 6.944e+07 = 62.99`; a leg-60 reproduction audit caught this cell quoting the
+`ρ = 8 → 10` factor, 28.16×, instead — the wrong baseline, understating the effect by 2.25×).
 
 ## 3. The verdict
 

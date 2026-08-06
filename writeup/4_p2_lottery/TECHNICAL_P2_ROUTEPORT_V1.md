@@ -59,7 +59,7 @@ them. That is the same failure the relaxation has, which is the point.
 | 301 | 7.61e−15 | 4 | −2.541024 | 1.180% |
 | 501 | 1.25e−14 | 4 | −2.540873 | 1.174% |
 | 801 | 3.12e−14 | 4 | −2.540791 | 1.170% |
-| 1201 | 3.52e−14 | 4 | −2.540746 | 1.168% |
+| 1201 | 3.52e−14 | 4 | −2.540746 | 1.169% |
 
 `solver/hl_rescaled.py::RescaledHLScenario2` time-steps these same equations with the same
 origin gauge and **floors at residual ~1e−2** — its own leg said so in advance. The far field
@@ -78,7 +78,7 @@ The ratio is resolution-converged to the fourth decimal and still sits 1.17% fro
 |---|---|---|
 | 6 | 100.9 | −2.583087 |
 | 7 | 274.2 | −2.557642 |
-| 8 | 745.2 | −2.541222 |
+| 8 | 745.2 | −2.541024 |
 | 9 | 2025.8 | −2.530473 |
 
 A power law in `X_max` with slope **−0.437** — consistent with the tail exponent −0.394 —

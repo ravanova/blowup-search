@@ -467,6 +467,7 @@ writeup/
     truncation distance is **1.831e−01** against a ball of `r_max` = **1.18e−09**, so the
     certificate closes around the **truncated** object and the true one is **1.55e+08×**
     outside it. A float rehearsal, not a proof. 7/7 clauses; **no chain link moved**.
+    *(fig 59)*
 
 47. [TECHNICAL_P2_ROUTEPORT_V2.md](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) —
     **Route-PORT v2**, the one number leg 46 left unmeasured, on which the whole `L1` road
@@ -474,13 +475,35 @@ writeup/
     (`−0.02` per unit `ρ`, and it *rises* over the last three rungs — an algebraic far field
     keeps exposing more un-resolved tail), while **the ball shrinks fast** (`−0.49`, because
     the tuned weight `w_l = 0.01·X_max` grows by construction). Net **`+0.4703` per unit
-    `ρ`: extending the domain makes the truncation gap WORSE**, and `ρ = 10` is **28×** worse
-    than `ρ = 6`. So brute force cannot close it **at any size** — the trend has the wrong
+    `ρ`: extending the domain makes the truncation gap WORSE**, and `ρ = 10` is **63×** worse
+    than `ρ = 6` (a leg-60 reproduction audit corrected this from a misquoted 28×, which was
+    actually the `ρ = 8 → 10` factor). So brute force cannot close it **at any size** — the trend has the wrong
     sign — and **an analytic far-field enclosure is forced, not optional.** Both earlier
     guesses were wrong in opposite directions, because leg 46's `X_max^−0.437` law was fitted
     to the *contraction ratio* and got extrapolated to the *weighted distance* (lesson 80).
     Re-prices `L1` as: interval arithmetic (engineering) **plus a tail lemma** (mathematics,
-    and nobody here has written one). 3/3 pre-committed clauses, 4.4 s.
+    and nobody here has written one). 3/3 pre-committed clauses, 4.4 s. *(fig 60)*
+
+> **Leg 60 reproduction check on items 46 and 47 (2026-08-05), corrected 2026-08-06.** Both
+> quartets were closed by `experiments/p2_route_port_v1_bordered_evidence.py` and
+> `experiments/p2_route_port_v2_reach_evidence.py`, which re-derive every number the two
+> writeups quote from the committed JSON, each to half a unit in its own last quoted digit.
+> Leg 60 found **111 of 114 re-derive** and, per its pre-committed protocol, parked rather
+> than editing the prose itself — a banked number disagreeing with its own data is the
+> user's call, not a leg's. The user reviewed the three discrepancies and approved the
+> correction; all three are now fixed in the prose above and in the two scripts' own quoted
+> literals: (i) *v2 §2 / this item* "the gap at `ρ = 10` is 28× worse than at `ρ = 6`" was
+> the `ρ = 8 → 10` factor, not `ρ = 6 → 10` — corrected to **63×** (the sentence had
+> understated its own effect; the ban is unaffected either way); (ii) *v1 §2.1* the reach
+> table's `ρ = 8` row quoted `−2.541222`, transcribed from the adjacent `n = 201` row of
+> §2's resolution table — corrected to **−2.541024**, the ladder's actual value at `n = 301`
+> (the fitted slope `−0.437` and the extrapolated limit were computed from the correct
+> underlying data throughout and are unaffected); (iii) *v1 §2* the `n = 1201` gap printed
+> `1.168%` for a stored `1.1685%`, a truncated rather than rounded last digit — corrected to
+> **1.169%**. **Both scripts now report 114/114 and CLEAN**, including both **ban-bearing**
+> numbers (`1.55e+08` ball radii, leg 46's clause P6b; `+0.4703` decades per unit `ρ`, leg
+> 47's wrong-sign trend), which were exact before and after. Full ledger:
+> `experiments/journal/leg_60.md`, and both scripts print it on every run.
 
 
 **Novelty status:** [../LITERATURE_CHECK.md](../LITERATURE_CHECK.md) is the standing
@@ -617,6 +640,10 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 .venv/bin/python writeup/4_p2_lottery/p2_route_k_v1_evidence.py         # fig40
 .venv/bin/python writeup/4_p2_lottery/p2_route_l_v1_evidence.py         # fig41
 .venv/bin/python writeup/4_p2_lottery/p2_route_d_v10_evidence.py        # fig28
+
+# leg 60 -- these two also PRINT a reproduction ledger for their writeups' numbers:
+.venv/bin/python experiments/p2_route_port_v1_bordered_evidence.py      # fig59
+.venv/bin/python experiments/p2_route_port_v2_reach_evidence.py         # fig60
 
 # regenerate the Route-D data itself (deterministic; ~10 s and a few seconds):
 .venv/bin/python experiments/p2_route_d_probe.py
