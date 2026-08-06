@@ -135,3 +135,56 @@ arithmetic at all, their returned states being 100% finite.
 - `writeup/data/p2_route_boa_v1_adversarial.json` — curated data, every case's validity fields
 - `test_boussinesq_adversarial.py` — 12 permanent gates (2 soundness, 7 characterization, 3 control)
 - `writeup/novelty/leg_89.md` — novelty pass (committed pre-construction) + findings
+
+---
+
+## STATUS UPDATE, 2026-08-06 (appended by the bench repair; leg 89's report above is unchanged)
+
+**All four defects are repaired.** `solver/boussinesq.py` was patched on
+`bench/fix-boussinesq-silent-corruption` ("Leg 0: ORCH", a repo-wide bug fix, not a leg).
+Leg 89's report above is left exactly as written, as the record of the pre-fix measurement.
+
+Re-running **this leg's unchanged 90-case battery** against the repaired module:
+
+| | pre-fix (leg 89) | post-fix |
+|---|---|---|
+| gate answer | **YES** | **NO** |
+| silent, gate-deciding | 19 of 82 | **0** |
+| silent, secondary | 4 of 8 | **0** |
+| `conservation_drift` masks a NaN limb | 13 of 90 | **0** |
+
+`writeup/data/p2_route_boa_v1_adversarial.json` is deliberately **not** regenerated — it is
+this leg's banked evidence of the pre-fix module. The post-fix run, the zero-regression A/B
+against the pre-fix module loaded from git (19 of 19 well-formed cases bit-identical), and
+the Phase-1 contamination audit are in
+`writeup/data/bench_boussinesq_silent_corruption_check.json`.
+
+**The question this leg flagged as "the first thing the orchestrator should route" is
+answered: NO banked Phase-1 result is contaminated, and no rework leg is needed.**
+
+- **Defect 2 (`kappa` dropped):** all **5** `solve_boussinesq` call sites in the repository
+  pass `kappa = 0.0` — literal at `phase1_axis_screen.py:121`, `phase1_currency_probe.py:95`,
+  `phase1_gsustained_probe.py:96`, defaulted at `phase1_resolution_spike.py:94`, and
+  `FITNESS2D_DEFAULTS["kappa"] = 0.0` at `ga/fitness2d.py:71`. That is *in* domain. No banked
+  run ever executed an integration different from the one its `params` record.
+- **Defect 1 (false `blowup_candidate`):** the defect needs a represented `m0` at roundoff
+  relative to the state scale (this leg's witness: **1.797e-16**). Measured directly for every
+  Phase-1 initial condition at every banked resolution (smooth_sharp, smooth_mild, rough h=0.5,
+  rough h=0.3 at N = 128/256/512/1024): the **worst** ratio is **1.0e-01**, a factor **1e+12**
+  above the new tolerance. No Phase-1 IC is within twelve orders of magnitude of the defect's
+  precondition.
+- **No banked artifact records a `solve_boussinesq` `blowup_candidate`** at all. The only
+  `blowup_candidate` strings in `writeup/data/` are `stage3_6_rough.json` (1D gCLM, via
+  `solver/gclm.py` — a different module) and this leg's own artifact. Banked Phase-1 outcomes
+  are `under_resolved` and `no_blowup` only.
+- **End-to-end reproduction:** `phase1_spike.json`'s N=128 column re-run against the repaired
+  module reproduces **4 of 4** ICs exactly — worst absolute difference **0.0** in both
+  `t_resolved` and `amp_resolved`, outcomes identical.
+
+`test_boussinesq_adversarial.py`'s seven `test_characterize_*` gates are converted to
+`test_repaired_*` and **inverted, not weakened**: every magnitude this leg measured is still
+computed at the same threshold, and each docstring keeps the pre-fix numbers. 12/12 pass.
+
+**`leg/boa-v1` must NOT be merged separately** — its two commits are bundled into
+`bench/fix-boussinesq-silent-corruption`, the same pattern
+`bench/fix-port-certification-validation` used for leg 79.

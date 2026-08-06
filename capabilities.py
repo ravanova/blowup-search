@@ -397,7 +397,25 @@ CAPABILITIES = [
     {"module": "solver/boussinesq.py", "object": "2D Boussinesq, physical space",
      "holds": "pseudo-spectral solver (Phase 1, Gate 1a)",
      "validated": ("dedicated: test_boussinesq_dedicated.py (17 checks) + "
-                   "test_solver_boussinesq.py; odd-n derivative path checked correct"),
+                   "test_solver_boussinesq.py; odd-n derivative path checked correct "
+                   "-- and now ALSO hardened against malformed input. Leg 89's 90-case "
+                   "adversarial battery measured 19 of 82 gate-deciding cases silently "
+                   "returning a plausible-looking wrong result; it is 0 of 82 (and 0 of "
+                   "8 secondary) after the bench repair, with conservation_drift masking "
+                   "a NaN limb in 0 of 90 rather than 13 of 90. Four defects closed: a "
+                   "false blowup_candidate off a roundoff-level represented m0 (the "
+                   "exact-zero omega0 guard is now scale-aware at 1e-13 x the state "
+                   "scale), nu/kappa outside [0,inf) neither applied nor rejected (now "
+                   "validated at entry -- the energy identity structurally cannot see "
+                   "kappa, so no guard could ever have caught it), builtin max/min "
+                   "dropping a NaN limb (now NaN-propagating, with a non-finite drift "
+                   "reported as early_exit_reason='nonfinite_drift'), and a one-mode "
+                   "degenerate grid plus non-finite detection thresholds. NO BANKED "
+                   "PHASE-1 RESULT IS AFFECTED: all 5 call sites pass kappa=0.0, no "
+                   "banked artifact records a solve_boussinesq blowup_candidate, and "
+                   "phase1_spike.json's N=128 column reproduces exactly (4/4, worst "
+                   "diff 0.0) -- see writeup/data/bench_boussinesq_silent_corruption_"
+                   "check.json and test_boussinesq_adversarial.py"),
      "test": "test_boussinesq_dedicated.py"},
     {"module": "solver/gclm.py", "object": "gCLM, physical space",
      "holds": "pseudo-spectral solver (Stage 1)",
