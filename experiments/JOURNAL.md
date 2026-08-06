@@ -3089,3 +3089,43 @@ Pointers only, per JR2/JR3 convention; full detail in each `experiments/journal/
   BLOG/TECHNICAL files (precedent-conformant with leg 65/L1G, flagged for a DOCS pass).
 
 No link of the L1->L4 chain moved in any of the fifteen. Clay unchanged at ~0.05%.
+
+## Pointer catch-up #2 (leg 155/JR4's flag) — 17 legs, window e4199c2..e832ead
+
+- **Leg 122 (Route-ASA) — YES:** `advection_scope.py`'s far-field probe fabricates 4 of 8
+  values per call on the default grid (2.29061 vs honest 3.09296 at X=1e4, -25.94%).
+- **Leg 124 (Route-FSA) — YES:** `finite_support.py`'s `converged` flag self-reports true at
+  residual 3.331e-15 while violating the profile equation by 1.217 off-grid (3.66e14x); 0
+  importers repo-wide.
+- **Leg 127 (Route-NGX) — YES(i), UNVERIFIED pending dedicated review:** claims Z_1>=1 for
+  EVERY bounded approximate inverse (A21 free), superseding leg 58's A21=0-only theorem;
+  cites Xu arXiv:2607.19762 for the same operator's invertibility on origin-H^2.
+- **Leg 128 (Route-NKR) — landed, shared guard repair for nk_bounds.py + siblings.**
+- **Leg 133 (Route-BOB) — YES:** independent regression confirmation of leg 89's
+  boussinesq.py repair, 0/0/0 silent cases remaining.
+- **Leg 135 (Route-FIB) — YES:** independent regression confirmation of leg 107's
+  first_integral.py repair.
+- **Leg 138 (Route-IX3) — NO:** INDEX.md corrected, 14 rows.
+- **Leg 139 (Route-DGA) — YES:** decay_grading.py, five silent-corruption sites, headline a
+  half-enforced step condition (26630.848 vs exact 3.999996).
+- **Leg 140 (Route-NFA) — YES:** nk_fourier.py, a forbidden weight flips an honest refusal
+  into a certified ball missing the true solution by 1.990 ball radii.
+- **Leg 142 (Route-NSA) — YES:** nk_seminorm.py, a negative anchor speed understates a norm
+  12.4904x.
+- **Leg 144 (Route-ECA) — YES:** energy_coercivity.py, admissibility() collapses a 1.678e7
+  power-divergence signal to exactly 1.000000 "converged".
+- **Leg 146 (Route-CSA) — YES:** certificate_shapes.py, seven silent-corruption sites; also
+  independently corroborates leg 126's 1,686-configuration completeness count (7/7 agree).
+- **Leg 147 (Route-NKB) — NO (incomplete fix, not a regression):** leg 128's shared guard
+  closes 17/21 of leg 116's false-closing cases; the 4 survivors are not alike, one carries
+  no flag at all (Z_2 understated 714,285.7x).
+- **Leg 149 (Route-PGF) — NO:** PROGRESS.md/DIRECTION.md ledger drift found and reported.
+- **Leg 157 (Route-CDX) — NO:** Cadiot arXiv:2505.03091 offers no untried A21!=0
+  construction; every preconditioning shape induces A21=0.
+- **Leg 158 (Route-BDX) — YES with a ceiling:** BDL's own future-work item (2x2 cyclic
+  reduction) compensates the zero diagonal partially but stays ~2x short of BDL's own
+  threshold.
+- **Leg 161 (Route-LSS) — YES:** LSS arXiv:2010.01201 explicitly contains alpha(1/2)=3;
+  corrects the "three independent sources" framing to one shared ancestor.
+
+No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.05%.
