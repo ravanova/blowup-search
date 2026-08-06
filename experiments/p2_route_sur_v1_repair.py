@@ -608,6 +608,74 @@ def c2_escalation():
                           "writeup/data/p2_route_bob_v1_postrepair.json"}
 
 
+_PERF_CODE = r'''
+import time, json, numpy as np
+from solver.spectral_utils import grid, wavenumbers, hilbert_hat, derivative_hat, velocity_hat
+from solver.gclm import solve_gclm
+n=256; k=wavenumbers(n); w=np.sin(grid(n)); wh=np.fft.rfft(w); R=50000
+def bench(f, reps=3):
+    best=1e9
+    for _ in range(reps):
+        t=time.perf_counter()
+        for _ in range(R): f()
+        best=min(best, time.perf_counter()-t)
+    return best
+h=bench(lambda: hilbert_hat(wh,k)); d=bench(lambda: derivative_hat(wh.copy(),k,n))
+v=bench(lambda: velocity_hat(wh,k))
+w0=np.sin(grid(64))+0.3*np.sin(2*grid(64)); s=1e9
+for _ in range(3):
+    t=time.perf_counter(); solve_gclm(w0,a=0.0,nu=0.0,t_max=1.0,dt_max=5e-3)
+    s=min(s, time.perf_counter()-t)
+print("@@"+json.dumps({"hilbert_hat":h,"derivative_hat":d,"velocity_hat":v,"solve_gclm":s}))
+'''
+
+
+def c3_cost(base_ref):
+    """THE PRICE OF THE REPAIR, measured rather than waved away.
+
+    The validation added for D6 runs on every call in the solver's inner loop, and D4/D5
+    make `velocity_hat` do strictly more work (a complex128 allocation and a masked
+    multiply-by-zero on the mean mode). That is a real cost and it is reported as a
+    magnitude, not as "negligible".
+
+    Method: min-of-3 per variant, the two variants interleaved and the whole thing repeated,
+    so that a machine under variable load cannot flatter either side. Wall-clock timings are
+    machine- and load-dependent; the RATIO is the reportable quantity, not the seconds.
+    """
+    print("\nC3  the cost of the repair (min-of-3, interleaved, ratio is the quantity)")
+    tmp = tempfile.mkdtemp(prefix="sur_perf_")
+    tar = os.path.join(tmp, "solver.tar")
+    with open(tar, "wb") as fh:
+        subprocess.run(["git", "archive", base_ref, "solver"], cwd=REPO, stdout=fh, check=True)
+    subprocess.run(["tar", "-xf", tar, "-C", tmp], check=True)
+
+    def run(cwd, env=None):
+        p = subprocess.run([sys.executable, "-c", _PERF_CODE], cwd=cwd, env=env,
+                           capture_output=True, text=True)
+        if p.returncode:
+            raise RuntimeError(p.stderr[-2000:])
+        return json.loads([l for l in p.stdout.splitlines() if l.startswith("@@")][-1][2:])
+
+    post, pre = {}, {}
+    for _ in range(2):
+        a = run(REPO)
+        b = run(tmp, dict(os.environ, PYTHONPATH=tmp))
+        for kk in a:
+            post[kk] = min(post.get(kk, 1e9), a[kk])
+            pre[kk] = min(pre.get(kk, 1e9), b[kk])
+    print(f"    {'quantity':>16} {'pre (s)':>10} {'post (s)':>10} {'ratio':>8}")
+    out = {}
+    for kk in ("hilbert_hat", "derivative_hat", "velocity_hat", "solve_gclm"):
+        r = post[kk] / pre[kk]
+        print(f"    {kk:>16} {pre[kk]:>10.4f} {post[kk]:>10.4f} {r:>7.3f}x")
+        out[kk] = {"pre_s": pre[kk], "post_s": post[kk], "ratio": r}
+    print(f"    the headline is solve_gclm: {out['solve_gclm']['ratio']:.3f}x on a full "
+          f"200-step n=64 integration")
+    out["method"] = ("min-of-3 per variant, interleaved, 50000 calls per helper; "
+                     "wall-clock is machine/load dependent, the ratio is the quantity")
+    return out
+
+
 def main():
     base = subprocess.run(["git", "merge-base", "HEAD", "origin/main"], cwd=REPO,
                           capture_output=True, text=True)
@@ -624,6 +692,7 @@ def main():
     res["B2_guarantee"] = b2_guarantee()
     res["C1_absorption"] = c1_absorption()
     res["C2_escalation"] = c2_escalation()
+    res["C3_cost"] = c3_cost(base_ref)
 
     ab = res["A2_A3_bitwise_ab"]
     print("\n" + "=" * 88)

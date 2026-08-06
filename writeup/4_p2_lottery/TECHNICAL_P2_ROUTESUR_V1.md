@@ -267,6 +267,39 @@ its "must run" list to its "must be rejected" list;
 failure in the entire affected-test set (23 tests selected by import closure, plus the two
 always-on gate tests).
 
+## 6a. The price, measured
+
+A repair that adds per-call validation to a module in the solver's inner loop costs something,
+and "negligible" is not a measurement. Min-of-3 per variant, the two variants interleaved and
+repeated so a loaded machine cannot flatter either side (§C3 of the runner):
+
+| quantity | ratio post/pre |
+|---|---|
+| `hilbert_hat` (50k calls, n = 256) | **1.12×** |
+| `derivative_hat` | **0.88×** |
+| `velocity_hat` | **2.06×** |
+| **`solve_gclm`, full 200-step n = 64 integration** | **1.06×** |
+
+The headline is the last row: **+6.4% on a real solve**. `velocity_hat` doubles because D4 and
+D5 make it do strictly more work — a `complex128` allocation plus a masked multiply-by-zero on
+the mean mode — but it is not the dominant cost in a step, so the solve-level figure is what
+matters.
+
+The first version of the validation was worse (**+14.5%** on `solve_gclm`) because it called
+`np.asarray`/`np.shape` on every call; reading `.shape` directly gives identical refusals for
+roughly a seventh of the cost. That was found by measuring rather than by inspection.
+
+**A cheaper `velocity_hat` was available and was deliberately not taken.** Dividing the whole
+array by `|k|` with the zero entry replaced by `inf`, then adding `0.0j` once, removes the
+masked assignment entirely — but the trailing `+ 0.0j` would then also normalize signed zeros
+in the *non-zero* modes, so any entry whose quotient is `-0.0` would change bitwise. That
+trades the no-op guarantee this repair's whole licence rests on for 6%, which is not a trade
+this leg is entitled to make. Recorded so the option is not silently rediscovered as an
+improvement.
+
+Wall-clock seconds are machine- and load-dependent (another leg's tests were running
+concurrently); the **ratio** is the reportable quantity, and it is what the JSON carries.
+
 ## 7. Honest limits
 
 - **Every number here is a statement about code behaviour.** None is a physics measurement,
