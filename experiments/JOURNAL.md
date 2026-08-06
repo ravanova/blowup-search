@@ -3201,3 +3201,13 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   190). Diff is exactly 5 lines / 5 changed characters across 3 files; 0 banked
   numbers moved (both readings give -0.500000 at a=0). Mechanical, quartet-thin
   per the leg-180/179/186/108 prose-correction precedent.
+- **Leg 200 (Route-PCA) — YES, ESCALATED (parked, not merged):** port_certification.py
+  has four independent silent-corruption mechanisms: line_sweep_solve inverts a
+  DIFFERENT operator when s_rho<0 (18820x relative error, no exception);
+  radii_polynomial_status closes on a ball of radius exactly 0 at Y_0=0 (leg 51's
+  own a=0 CLM value); leading_order_solve truncates integer rhs (rel err 1.000);
+  stall_verdict's NaN<2.0 comparison gives poisoned ladders a confident "bending"
+  verdict. Two of the four are catchable by guards that already exist in-repo and
+  are never called here. Measured: 0 banked numbers move -- the live PORT run's
+  min(s_rho)=0.3896>0 sits inside the corner where all four are dormant. Module
+  unpatched, branch leg/200-pca-v1 pushed.
