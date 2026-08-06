@@ -1,0 +1,1336 @@
+{
+  "leg": 119,
+  "route": "HHA",
+  "module_audited": "solver/hilbert_holder.py",
+  "read_only": true,
+  "gate": "Under adversarial/degenerate inputs, can any bound hilbert_holder.py reports be exceeded (fail to be a true bound), or a wrong value be silently returned?",
+  "scope_note": "Soundness DIRECTION only.  No bound is sharpened and no constant is improved; the plan-of-record ban on Route-D bound-sharpening is respected literally.  The module is not patched: the gate's yes-branch escalates, it does not repair.",
+  "shipped_configuration": {
+    "alpha": 1.5,
+    "gamma": 0.5
+  },
+  "production_configuration": {
+    "alpha": 1.4,
+    "gamma": 0.15
+  },
+  "A1_known_answer": {
+    "cases": 18,
+    "max_abs_error_this_batterys_quadrature": 2.05850542167596e-09,
+    "pv_of_constant_function": 0.0,
+    "max_abs_error_modules_own_decomposition_exact": 1.282528633073099e-06,
+    "note": "the battery's own |H(h)| quadrature AND the module's own decomposition_exact are both checked against the exact spectral conjugate before any verdict is read from either"
+  },
+  "A2_degenerate_input_inventory": {
+    "gamma": {
+      "0.5": [
+        0.037054181708807636,
+        4.460871100852915
+      ],
+      "0.0": [
+        0.0,
+        27.58086868578648
+      ],
+      "-0.5": [
+        13.089261573987466,
+        0.0414440922573335
+      ],
+      "-1.0": [
+        3.1317840356891415,
+        0.003665095864934314
+      ],
+      "nan": [
+        NaN,
+        NaN
+      ],
+      "inf": [
+        [
+          NaN,
+          NaN
+        ],
+        "|WARN:RuntimeWarning"
+      ],
+      "-inf": [
+        [
+          NaN,
+          NaN
+        ],
+        "|WARN:RuntimeWarning"
+      ],
+      "1.0": [
+        0.2212190863559807,
+        4.634097114362755
+      ],
+      "1.5": [
+        1.094178644369927,
+        7.604141827814173
+      ]
+    },
+    "alpha": {
+      "1.5": [
+        0.037054181708807636,
+        4.460871100852915
+      ],
+      "0.0": [
+        0.0,
+        5.455633831325752
+      ],
+      "-0.5": [
+        0.0,
+        5.815278907300562
+      ],
+      "nan": [
+        NaN,
+        0.0
+      ],
+      "inf": [
+        0.0,
+        0.0
+      ],
+      "-inf": [
+        0.0,
+        Infinity
+      ]
+    },
+    "sigma": {
+      "0.05": [
+        0.037054181708807636,
+        4.460871100852915
+      ],
+      "0.0": "ZeroDivisionError: float division by zero",
+      "-0.0": "ZeroDivisionError: float division by zero",
+      "1e-300": [
+        [
+          NaN,
+          NaN
+        ],
+        "|WARN:RuntimeWarning"
+      ],
+      "nan": [
+        NaN,
+        NaN
+      ],
+      "inf": "ValueError: pair too wide for the increment route (d = inf)",
+      "-inf": "ValueError: pair too wide for the increment route (d = inf)",
+      "3.141592653589793": "ValueError: pair too wide for the increment route (d = 3.142)",
+      "6.283185307179586": "ValueError: pair too wide for the increment route (d = 6.283)",
+      "100.0": "ValueError: pair too wide for the increment route (d = 100.000)"
+    },
+    "theta1": {
+      "1.0": [
+        0.037054181708807636,
+        4.460871100852915
+      ],
+      "0.0": [
+        0.05525458582848488,
+        4.5380227931037505
+      ],
+      "3.141592653589793": [
+        1.1881542091377015,
+        0.3536184285926873
+      ],
+      "-1.0": [
+        0.035660450589304,
+        4.486580936880518
+      ],
+      "3.641592653589793": [
+        0.18018640089267451,
+        2.4717380441202415
+      ],
+      "nan": [
+        NaN,
+        NaN
+      ],
+      "inf": [
+        [
+          NaN,
+          NaN
+        ],
+        "|WARN:RuntimeWarning"
+      ],
+      "1e-300": [
+        0.05525458582848488,
+        4.5380227931037505
+      ]
+    },
+    "near_padding": {
+      "0.01": 2.0,
+      "2.5": 0.23097335529232552,
+      "3.0": null,
+      "0.0": "ZeroDivisionError: float division by zero",
+      "-1.0": null,
+      "nan": 2.0,
+      "inf": null
+    },
+    "increment_regime": {
+      "theta=1.0,sigma=0.05": true,
+      "theta=1.0,sigma=nan": true,
+      "theta=nan,sigma=0.05": true,
+      "theta=1.0,sigma=inf": false
+    },
+    "pointwise_pair_bound": {
+      "alpha=1.5,gamma=0.5": [
+        6.6897797797098155,
+        7.965482690215568
+      ],
+      "alpha=1.5,gamma=0.0": "ZeroDivisionError: float division by zero",
+      "alpha=1.5,gamma=-0.5": [
+        0.3811481717058947,
+        -0.41910340942092184
+      ],
+      "alpha=nan,gamma=0.5": [
+        NaN,
+        NaN
+      ],
+      "alpha=1.5,gamma=nan": [
+        NaN,
+        NaN
+      ]
+    },
+    "hilbert_holder_constant": {
+      "alpha=1.5,gamma=0.5": {
+        "b_sup": 1.195623749076294,
+        "b_semi": 4.944990129269292,
+        "argmax_sup": [
+          3.141492653589793,
+          -0.1886083918399713
+        ],
+        "argmax_semi": [
+          0.02499095122381237,
+          -1e-05
+        ],
+        "rule": "increment",
+        "n_increment_route": 214,
+        "alpha": 1.5,
+        "gamma": 0.5
+      },
+      "alpha=1.5,gamma=0.0": "ZeroDivisionError: float division by zero",
+      "alpha=1.5,gamma=-0.3": [
+        {
+          "b_sup": 44.910932698897604,
+          "b_semi": 4.46210564971652,
+          "argmax_sup": [
+            0.0001,
+            0.7697601822709715
+          ],
+          "argmax_semi": [
+            0.006285460336132305,
+            0.7697601822709715
+          ],
+          "rule": "increment",
+          "n_increment_route": 214,
+          "alpha": 1.5,
+          "gamma": -0.3
+        },
+        "|WARN:RuntimeWarning"
+      ],
+      "alpha=1.5,gamma=nan": {
+        "b_sup": 0.0,
+        "b_semi": 0.0,
+        "argmax_sup": null,
+        "argmax_semi": null,
+        "rule": "increment",
+        "n_increment_route": 214,
+        "alpha": 1.5,
+        "gamma": NaN
+      },
+      "alpha=nan,gamma=0.5": {
+        "b_sup": 0.0,
+        "b_semi": 0.0,
+        "argmax_sup": null,
+        "argmax_semi": null,
+        "rule": "increment",
+        "n_increment_route": 214,
+        "alpha": NaN,
+        "gamma": 0.5
+      }
+    },
+    "n_gamma_or_alpha_cases_returning_finite_pair": 10,
+    "note": "gamma=0.0 and gamma=-0.5/-1.0 return FINITE pairs with NO warning from increment_pair_bound; hilbert_holder_constant(1.5, 0.0, ...) instead CRASHES (ZeroDivisionError inside solver.nk_seminorm.hilbert_split_bound's own gamma divisor) -- a loud failure, not a silent one, for that one exact value -- while hilbert_holder_constant(1.5, -0.3, ...) returns a FINITE pair with only non-fatal RuntimeWarnings, no exception"
+  },
+  "A3_eps_truncation_mechanism": {
+    "gamma_0.0": [
+      {
+        "eps": 1e-06,
+        "u_S": 0.0,
+        "u_T": 16.70979722645251
+      },
+      {
+        "eps": 1e-08,
+        "u_S": 0.0,
+        "u_T": 22.145328774307572
+      },
+      {
+        "eps": 1e-10,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444
+      },
+      {
+        "eps": 1e-12,
+        "u_S": 0.0,
+        "u_T": 33.01639185259586
+      },
+      {
+        "eps": 1e-14,
+        "u_S": 0.0,
+        "u_T": 38.451999483439295
+      },
+      {
+        "eps": 1e-16,
+        "u_S": 0.0,
+        "u_T": 43.89312191978279
+      }
+    ],
+    "gamma_-0.5": [
+      {
+        "eps": 1e-06,
+        "u_S": 7.899701768151132,
+        "u_T": 0.04129471433596843
+      },
+      {
+        "eps": 1e-08,
+        "u_S": 10.494556332890241,
+        "u_T": 0.04129471433596843
+      },
+      {
+        "eps": 1e-10,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843
+      },
+      {
+        "eps": 1e-12,
+        "u_S": 15.684265473562315,
+        "u_T": 0.04129471433596843
+      },
+      {
+        "eps": 1e-14,
+        "u_S": 18.279156364314534,
+        "u_T": 0.04129471433596843
+      },
+      {
+        "eps": 1e-16,
+        "u_S": 20.87667995079415,
+        "u_T": 0.04129471433596843
+      }
+    ],
+    "gamma_0.5_shipped": [
+      {
+        "eps": 1e-06,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.456668374643805
+      },
+      {
+        "eps": 1e-08,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.460023009370353
+      },
+      {
+        "eps": 1e-10,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.460359362992706
+      },
+      {
+        "eps": 1e-12,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.4603940815944165
+      },
+      {
+        "eps": 1e-14,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.4603988284321945
+      },
+      {
+        "eps": 1e-16,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.46040062434336
+      }
+    ],
+    "growth_uT_gamma0_over_10_decades_of_eps": 2.626789620779935,
+    "growth_uS_gammaneg_over_10_decades_of_eps": 2.6427174801663664,
+    "growth_shipped_over_10_decades_of_eps": 1.0008305029614024,
+    "note": "the coefficient the singularity is charged to GROWS WITHOUT A PLATEAU as eps shrinks at gamma <= 0, while the shipped gamma = 0.5 converges after ~2 decades -- the finite pair increment_pair_bound returns at gamma <= 0 is where the quadrature happened to be cut off, not a bound"
+  },
+  "A4_VIOLATION_gamma_zero": {
+    "theta1": 1.0,
+    "sigma": 0.05,
+    "u_S": 0.0,
+    "u_T": 27.58086868578648,
+    "rows": [
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 0.001,
+        "S": 1.0,
+        "T": 1.999180832277797,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 2.9706253920058727,
+        "bound": 55.139127233563066,
+        "ratio_true_over_bound": 0.0538750890891443
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-06,
+        "S": 1.0,
+        "T": 1.999999180497001,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 7.0902870767950406,
+        "bound": 55.161697981467164,
+        "ratio_true_over_bound": 0.12853641813522826
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-09,
+        "S": 1.0,
+        "T": 1.9999999991804969,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 11.209944081158628,
+        "bound": 55.16172056146229,
+        "ratio_true_over_bound": 0.20321962344644934
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-12,
+        "S": 1.0,
+        "T": 1.99999999999918,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 15.329601088060661,
+        "bound": 55.16172058404227,
+        "ratio_true_over_bound": 0.27790288130525354
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-15,
+        "S": 1.0,
+        "T": 1.9999999999999991,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 19.44925809080254,
+        "bound": 55.16172058406487,
+        "ratio_true_over_bound": 0.3525861391716822
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-20,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 26.315353096281605,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 0.47705823563240307
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-25,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 33.18144810198024,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 0.6015303320971045
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-30,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 40.047543107898434,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 0.7260024285657863
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-40,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 53.77973312039357,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 0.974946621515092
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-45,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 60.6458281269705,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 1.0994187179957158
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-50,
+        "S": 1.0,
+        "T": 2.0,
+        "u_S": 0.0,
+        "u_T": 27.580860292032444,
+        "true_weighted_increment": 67.51192313376703,
+        "bound": 55.16172058406489,
+        "ratio_true_over_bound": 1.2238908144803204
+      }
+    ],
+    "n_violating_cases": 2,
+    "first_violating_delta": 1e-45,
+    "worst_ratio": 1.2238908144803204,
+    "note": "gamma = 0.0 is an ordinary-looking, entirely NaN-free argument.  u_S = 0.0 exactly (the whole near-pole mass was NOT charged there); the true weighted increment ratio exceeds the reported bound once the adversary's feature is narrower than roughly delta ~ 1e-45"
+  },
+  "A5_VIOLATION_gamma_negative": {
+    "theta1": 1.0,
+    "sigma": 0.05,
+    "u_S": 13.089261573987466,
+    "u_T": 0.0414440922573335,
+    "rows": [
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 0.001,
+        "S": 1.0,
+        "T": 1.9741513671736144,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 0.7090696529165603,
+        "bound": 13.170932911318578,
+        "ratio_true_over_bound": 0.05383594751342283
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-09,
+        "S": 1.0,
+        "T": 0.00477386806434636,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 2.675743357015473,
+        "bound": 13.089608030073178,
+        "ratio_true_over_bound": 0.2044173783407412
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-20,
+        "S": 1.0,
+        "T": 1.509631695033295e-08,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 6.281309766142416,
+        "bound": 13.089410895178581,
+        "ratio_true_over_bound": 0.479877193591356
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-30,
+        "S": 1.0,
+        "T": 1.509631695033295e-13,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 9.559097410294537,
+        "bound": 13.08941089455519,
+        "ratio_true_over_bound": 0.7302924086729404
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-40,
+        "S": 1.0,
+        "T": 1.5096316950332947e-18,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 12.836885054656305,
+        "bound": 13.089410894555183,
+        "ratio_true_over_bound": 0.9807076237476874
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-45,
+        "S": 1.0,
+        "T": 4.7738745842859126e-21,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 14.475778876915808,
+        "bound": 13.089410894555183,
+        "ratio_true_over_bound": 1.105915231291067
+      },
+      {
+        "theta1": 1.0,
+        "sigma": 0.05,
+        "delta": 1e-50,
+        "S": 1.0,
+        "T": 1.509631695033295e-23,
+        "u_S": 13.089410894555183,
+        "u_T": 0.04129471433596843,
+        "true_weighted_increment": 16.11467269922772,
+        "bound": 13.089410894555183,
+        "ratio_true_over_bound": 1.2311228388384508
+      }
+    ],
+    "n_violating_cases": 2,
+    "first_violating_delta": 1e-45,
+    "worst_ratio": 1.2311228388384508,
+    "assembly_level_gamma_neg0.3": {
+      "b_sup": 46.756438663776606,
+      "b_semi": 4.91897653279342,
+      "n_warnings": 52,
+      "warning_types": [
+        "RuntimeWarning"
+      ]
+    },
+    "note": "gamma < 0 needs no NaN either; the seminorm route now diverges (u_S carries the near-pole mass instead), and the public assembly API hilbert_holder_constant(1.5, -0.3, ...) itself returns a FINITE (b_sup, b_semi) with only non-fatal warnings for the whole 24x14 pair-grid sweep, never raising"
+  },
+  "A6_CONTROL_shipped_and_production_are_safe": {
+    "shipped_1.5_0.5": {
+      "alpha": 1.5,
+      "gamma": 0.5,
+      "by_pair": [
+        {
+          "theta1": 1.0,
+          "sigma": 0.05,
+          "rows": [
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 41.88198077786683,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 12.44534325130465,
+              "bound": 186.84597987263095,
+              "ratio_true_over_bound": 0.06660749811041364
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 41893.423021377195,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 46.963714204215705,
+              "bound": 186859.75891598334,
+              "ratio_true_over_bound": 0.0002513313432312183
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 13247863576.467371,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 110.2473583319656,
+              "bound": 59090232342.98356,
+              "ratio_true_over_bound": 1.865745893366021e-09
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 1324786357646737.2,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 167.77794389371817,
+              "bound": 5909023234294628.0,
+              "ratio_true_over_bound": 2.8393515686310576e-14
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1.3247863576467372e+20,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 225.30852945915035,
+              "bound": 5.909023234294628e+20,
+              "ratio_true_over_bound": 3.812957243957188e-19
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 1.3247863576467374e+25,
+              "u_S": 0.037294769392098415,
+              "u_T": 4.460359362992706,
+              "true_weighted_increment": 282.83911502826226,
+              "bound": 5.909023234294628e+25,
+              "ratio_true_over_bound": 4.786562919345592e-24
+            }
+          ],
+          "max_ratio": 0.06660749811041364
+        },
+        {
+          "theta1": 0.3,
+          "sigma": 0.01,
+          "rows": [
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 44.46485561811364,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 20.740700807764892,
+              "bound": 214.08991479774784,
+              "ratio_true_over_bound": 0.0968784579477215
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 44468.21860560196,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 107.71515091896404,
+              "bound": 214084.85954566454,
+              "ratio_true_over_bound": 0.0005031423107059482
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 14062085429.460598,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 267.1503657966902,
+              "bound": 67699570152.055756,
+              "ratio_true_over_bound": 3.946116130378089e-09
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 1406208542946059.8,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 412.09147022599194,
+              "bound": 6769957015203448.0,
+              "ratio_true_over_bound": 6.087061842498389e-14
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1.4062085429460599e+20,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 557.0325746536593,
+              "bound": 6.76995701520345e+20,
+              "ratio_true_over_bound": 8.228007554593306e-19
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 1.40620854294606e+25,
+              "u_S": 0.02126706275548676,
+              "u_T": 4.814333584562169,
+              "true_weighted_increment": 701.9736790905972,
+              "bound": 6.7699570152034495e+25,
+              "ratio_true_over_bound": 1.0368953266825161e-23
+            }
+          ],
+          "max_ratio": 0.0968784579477215
+        },
+        {
+          "theta1": 2.5,
+          "sigma": 0.05,
+          "rows": [
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 25.074167004621568,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 4.836067256068288,
+              "bound": 67.58424386964232,
+              "ratio_true_over_bound": 0.0715561346723976
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 25111.880723637805,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 17.238788861234614,
+              "bound": 67542.69753817357,
+              "ratio_true_over_bound": 0.0002552280185654659
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 7941073953.667608,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 39.9771032196971,
+              "bound": 21358831124.883904,
+              "ratio_true_over_bound": 1.871689653144088e-09
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 794107395366760.9,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 60.64829808722243,
+              "bound": 2135883112474078.0,
+              "ratio_true_over_bound": 2.839495182719578e-14
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 7.94107395366761e+19,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 81.31949295606985,
+              "bound": 2.1358831124740778e+20,
+              "ratio_true_over_bound": 3.8073007123444256e-19
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 7.941073953667609e+24,
+              "u_S": 0.14312673989796143,
+              "u_T": 2.689665308415386,
+              "true_weighted_increment": 101.99068782623944,
+              "bound": 2.135883112474078e+25,
+              "ratio_true_over_bound": 4.7751062420311746e-24
+            }
+          ],
+          "max_ratio": 0.0715561346723976
+        },
+        {
+          "theta1": 2.941592653589793,
+          "sigma": 0.01,
+          "rows": [
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 14.059984906865218,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 2.43862592026463,
+              "bound": 21.749947090481044,
+              "ratio_true_over_bound": 0.1121210047141634
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 14129.923799574644,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 11.220248469489489,
+              "bound": 21674.101679714942,
+              "ratio_true_over_bound": 0.0005176799774816345
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 4468274259.395838,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 27.31797077407123,
+              "bound": 6853894821.819327,
+              "ratio_true_over_bound": 3.9857586794452484e-09
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 446827425939583.75,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 41.95226377761031,
+              "bound": 685389482163602.0,
+              "ratio_true_over_bound": 6.120937783459644e-14
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 4.468274259395838e+19,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 56.58655678208541,
+              "bound": 6.85389482163602e+19,
+              "ratio_true_over_bound": 8.256116887504007e-19
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 4.468274259395838e+24,
+              "u_S": 0.18330812627523915,
+              "u_T": 1.5339019996867302,
+              "true_weighted_increment": 71.22084978453142,
+              "bound": 6.85389482163602e+24,
+              "ratio_true_over_bound": 1.0391295991252322e-23
+            }
+          ],
+          "max_ratio": 0.1121210047141634
+        }
+      ],
+      "max_ratio_over_all_pairs": 0.1121210047141634
+    },
+    "production_1.4_0.15": {
+      "alpha": 1.4,
+      "gamma": 0.15,
+      "by_pair": [
+        {
+          "theta1": 1.0,
+          "sigma": 0.05,
+          "rows": [
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 4.979852486119404,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 4.621202242728265,
+              "bound": 46.433517024696364,
+              "ratio_true_over_bound": 0.09952298552509838
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 39.56988161753459,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 17.450716176876824,
+              "bound": 368.9186742019852,
+              "ratio_true_over_bound": 0.04730233896298362
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 1767.5216867944087,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 40.97147820383408,
+              "bound": 16478.72902938181,
+              "ratio_true_over_bound": 0.002486325136530939
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 55893.94344013089,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 62.35398913411286,
+              "bound": 521102.98245957267,
+              "ratio_true_over_bound": 0.00011965770919177247
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1767521.6867944081,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 83.73650006575923,
+              "bound": 16478723.016473962,
+              "ratio_true_over_bound": 5.081492053847068e-06
+            },
+            {
+              "theta1": 1.0,
+              "sigma": 0.05,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 55893943.440130875,
+              "u_S": 0.006018926771958833,
+              "u_T": 9.323066943716533,
+              "true_weighted_increment": 105.11901099877326,
+              "bound": 521102976.44666463,
+              "ratio_true_over_bound": 2.0172406558789305e-07
+            }
+          ],
+          "max_ratio": 0.09952298552509838
+        },
+        {
+          "theta1": 0.3,
+          "sigma": 0.01,
+          "rows": [
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 5.071014880340066,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 4.1587459202007615,
+              "bound": 49.85236904034749,
+              "ratio_true_over_bound": 0.08342122952742576
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 40.28430881199752,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 21.600839254152124,
+              "bound": 396.0170160487052,
+              "ratio_true_over_bound": 0.05454523007540536
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 1799.4339769161588,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 53.574411599141605,
+              "bound": 17689.35586347427,
+              "ratio_true_over_bound": 0.0030286242197074182
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 56903.09866149911,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 82.64129554813037,
+              "bound": 559386.496478224,
+              "ratio_true_over_bound": 0.00014773559259728653
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1799433.9769161583,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 111.70817949679137,
+              "bound": 17689354.15990935,
+              "ratio_true_over_bound": 6.314994797829512e-06
+            },
+            {
+              "theta1": 0.3,
+              "sigma": 0.01,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 56903098.6614991,
+              "u_S": 0.0017052701824695256,
+              "u_T": 9.830510252184865,
+              "true_weighted_increment": 140.7750634473115,
+              "bound": 559386494.774659,
+              "ratio_true_over_bound": 2.5165974645852106e-07
+            }
+          ],
+          "max_ratio": 0.08342122952742576
+        },
+        {
+          "theta1": 2.5,
+          "sigma": 0.05,
+          "rows": [
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 4.264505719876747,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 2.8304665936607525,
+              "bound": 26.173912658289694,
+              "ratio_true_over_bound": 0.1081407518475958
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 33.93788457815108,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 10.137092367207917,
+              "bound": 208.24108116803745,
+              "ratio_true_over_bound": 0.048679599195069104
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 1515.9496221889742,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 23.53256744217447,
+              "bound": 9301.431379911983,
+              "ratio_true_over_bound": 0.002529994199924652
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 47938.536241888876,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 35.710272053539306,
+              "bound": 294136.8369168329,
+              "ratio_true_over_bound": 0.0001214070037192804
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1515949.622188974,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 47.88797666568303,
+              "bound": 9301423.234460888,
+              "ratio_true_over_bound": 5.148456903698633e-06
+            },
+            {
+              "theta1": 2.5,
+              "sigma": 0.05,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 47938536.241888866,
+              "u_S": 0.008153604696820945,
+              "u_T": 6.135707341564808,
+              "true_weighted_increment": 60.06568127860564,
+              "bound": 294136828.77138174,
+              "ratio_true_over_bound": 2.042099982158024e-07
+            }
+          ],
+          "max_ratio": 0.1081407518475958
+        },
+        {
+          "theta1": 2.941592653589793,
+          "sigma": 0.01,
+          "rows": [
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 0.001,
+              "S": 1.0,
+              "T": 3.5732814440842486,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 1.34974232415462,
+              "bound": 14.003959278812,
+              "ratio_true_over_bound": 0.09638290838197318
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-09,
+              "S": 1.0,
+              "T": 28.560311563936644,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 6.2917207505828125,
+              "bound": 111.53580163125102,
+              "ratio_true_over_bound": 0.05640987609865303
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-20,
+              "S": 1.0,
+              "T": 1275.7422641802652,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 15.350929367626634,
+              "bound": 4979.6595043652915,
+              "ratio_true_over_bound": 0.0030827267113684447
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-30,
+              "S": 1.0,
+              "T": 40342.51262149879,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 23.586573564586832,
+              "bound": 157468.9337171358,
+              "ratio_true_over_bound": 0.0001497855672723091
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-40,
+              "S": 1.0,
+              "T": 1275742.264180265,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 31.822217762073794,
+              "bound": 4979603.186300479,
+              "ratio_true_over_bound": 6.390512772106171e-06
+            },
+            {
+              "theta1": 2.941592653589793,
+              "sigma": 0.01,
+              "delta": 1e-50,
+              "S": 1.0,
+              "T": 40342512.62149878,
+              "u_S": 0.056374439250469234,
+              "u_T": 3.9032987067538367,
+              "true_weighted_increment": 40.05786195841887,
+              "bound": 157468877.39907095,
+              "ratio_true_over_bound": 2.5438589910627764e-07
+            }
+          ],
+          "max_ratio": 0.09638290838197318
+        }
+      ],
+      "max_ratio_over_all_pairs": 0.1081407518475958
+    },
+    "note": "domination HOLDS everywhere probed for both gamma > 0 configurations; the ratio falls toward ZERO (not toward 1) as delta shrinks, because gamma > 0 makes the reported T grow FASTER than the true increment as the adversary's feature narrows -- the opposite asymptotics from V1/V2"
+  },
+  "A7_alpha_inf_is_vacuous_not_a_finding": {
+    "a_sup": 0.0,
+    "a_semi": 0.0,
+    "decay_weight_at_alpha_inf_away_from_theta0": [
+      Infinity,
+      Infinity,
+      Infinity,
+      Infinity
+    ],
+    "note": "weight = +inf at every theta != 0 when alpha = inf, so the alpha=inf 'ball' of finite-S functions contains only h == 0; a (0, 0) bound on an empty (modulo the zero function) admissible set is vacuously correct, not a soundness gap -- reported as a control, not a finding, exactly as the novelty pass's MAY-NOT-claim clause anticipated for any degeneracy that turns out to be vacuous rather than violating"
+  },
+  "A8_soundness_predicate": {
+    "rows": [
+      {
+        "gamma": -1.0,
+        "u_S": 2.512401714892577,
+        "u_T": 0.0036719556764642455,
+        "eps_drift_1e-16_over_1e-8": 1.9849265673372882,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.5,
+        "u_S": 10.494556332890241,
+        "u_T": 0.04129471433596843,
+        "eps_drift_1e-16_over_1e-8": 1.9854091113633603,
+        "predicted_sound": false
+      },
+      {
+        "gamma": -0.1,
+        "u_S": 23.849701826604665,
+        "u_T": 7.2983800585088074,
+        "eps_drift_1e-16_over_1e-8": 2.0485329316064407,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.0,
+        "u_S": 0.0,
+        "u_T": 22.145328774307572,
+        "eps_drift_1e-16_over_1e-8": 1.9820487818047858,
+        "predicted_sound": false
+      },
+      {
+        "gamma": 0.05,
+        "u_S": 0.0024002980517839894,
+        "u_T": 15.287805852596374,
+        "eps_drift_1e-16_over_1e-8": 1.3392537552602932,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.15,
+        "u_S": 0.006485260560423015,
+        "u_T": 8.914818695019692,
+        "eps_drift_1e-16_over_1e-8": 1.0570662690911594,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.25,
+        "u_S": 0.011953097215585814,
+        "u_T": 6.392248150360332,
+        "eps_drift_1e-16_over_1e-8": 1.0090374503634,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.5,
+        "u_S": 0.037294769392098415,
+        "u_T": 4.460023009370353,
+        "eps_drift_1e-16_over_1e-8": 1.0000839644854074,
+        "predicted_sound": true
+      },
+      {
+        "gamma": 0.8,
+        "u_S": 0.11304503242006123,
+        "u_T": 4.249404343511447,
+        "eps_drift_1e-16_over_1e-8": 1.0000027261438698,
+        "predicted_sound": true
+      }
+    ],
+    "n_sound": 5,
+    "n_unsound": 4,
+    "max_eps_drift_sound": 1.3392537552602932,
+    "min_eps_drift_unsound": 1.9820487818047858,
+    "note": "the analytic predicate is exact -- gamma > 0 -- and the eps-drift diagnostic separates the two regimes with a clear gap here: every sound row drifts < 1.34x over 8 decades of eps (the smallest positive gamma tried, 0.05, is the closest approach) against >= 1.98x for every gamma <= 0 row, so no marginal gamma close to the boundary was found where the diagnostic and the predicate disagree"
+  },
+  "gate_answer": "YES",
+  "headline": "Two computable, entirely NaN-free configurations exceed increment_pair_bound's reported (u_S, u_T).  (V1) gamma = 0.0 at theta1=1.0, sigma=0.05 returns (0.000000, 27.580869); the true weighted increment ratio first exceeds the bound at delta = 1e-45, reaching a ratio of 1.2239 at delta = 1e-50.  (V2) gamma = -0.5 returns (13.089262, 0.041444) and is exceeded by 1.2311 at the same delta.  Both are the eps-truncation of a logarithmically divergent integral: the coefficient carrying the singularity grows 2.63x / 2.64x over 10 decades of eps with no plateau, against 1.0008x for the shipped gamma = 0.5 over the identical sweep.  The public assembly API is affected too: hilbert_holder_constant(1.5, -0.3, ...) returns a FINITE (b_sup, b_semi) = (46.7564, 4.9190) with only non-fatal warnings across a full pair-grid sweep, never raising -- while gamma = 0.0 EXACTLY crashes instead (ZeroDivisionError inside the pointwise route's hilbert_split_bound), a loud failure for that one value only.  The SHIPPED (alpha=1.5, gamma=0.5) and PRODUCTION (alpha~1.4, gamma~0.15) configurations are NOT affected: domination holds at every probed pair and delta, with the ratio falling toward zero (not toward one) as the adversary's feature narrows.",
+  "disposition": "ESCALATE, do not patch.  solver/hilbert_holder.py is untouched by this leg.  The repair, when authorised, is a guard on increment_pair_bound and hilbert_holder_constant -- reject gamma <= 0 (and non-finite gamma/alpha) -- not a change to the majorant, which is correct wherever the payer rule selects the seminorm account on a neighbourhood of the near-pole singularity.  Gates A2 (the gamma<=0 rows), A4, A5 and A8 (the unsound rows) are GAP-PINS in the sense of leg 84: they assert the CURRENT unsound behaviour so it cannot decay at the rate of memory, and MUST BE INVERTED, NOT WEAKENED, the day a guard lands.",
+  "runtime_seconds": 28.47816038131714
+}
