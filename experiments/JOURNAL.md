@@ -3440,3 +3440,16 @@ preempted agents had reached a landing.
   occurrences -- domination is how this literature transfers an Euler profile to
   NS, not an artifact of the computer-assisted method. Leg 174's Grade-A/fluid
   cell stays EMPTY.
+- **Leg 241 (Route-PCRC) — (a) INCOMPLETE, (b) CHARACTERISED, ESCALATED (parked,
+  not merged):** correction for the stale port_certification.py artifacts is
+  authored and verified against leg 217's parked blob but deliberately NOT
+  applied -- applying it now would fail the merge gate against main (leg 217
+  hasn't landed), and the bank turns out stale in FIVE rows, not the one leg 217
+  named. All 3 residual silent paths characterized: leading_order_solve is
+  sign-blind in c_l (26.02 on leg 200's fixture, 7.42e+18 at the live 200-node
+  resolution, control <=1.6e-14); stall_verdict's positional read FLIPS
+  Route-L's own headline verdict at 94.56x (9.72 bending -> 0.10 flat); pack/
+  unpack layout-dependence at 1.32/1.42. None claim-adjacent, but two of the
+  three have margin exactly 0.0 -- correct only by a hardcoded literal and a
+  caller convention, nothing enforcing either. Ready-to-apply correction banked
+  for leg 217's own eventual landing commit.
