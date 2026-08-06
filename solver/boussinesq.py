@@ -30,6 +30,56 @@ Test hooks mirror gclm.py: `nonlinear=False` turns off advection (pure
 diffusion); `buoyancy=False` turns off th_x (pure 2D Euler/NS on w); `frozen_u`
 = (cu, cv) replaces the self-consistent velocity with a constant divergence-free
 field, making the transport pure translation for the frozen-u acceptance check.
+
+INPUT VALIDATION AND NaN DISCIPLINE (repair of leg 89 / Route-BOA's findings).
+Leg 89's 90-case adversarial battery found that malformed inputs were dropped
+silently rather than propagated or flagged, on 19 of 82 gate-deciding cases. The
+four defects and the fix applied here:
+
+1. The `omega0 is identically zero` guard tested `== 0.0` exactly, so a vorticity
+   that is zero only to roundoff in the REPRESENTED (post-dealias) subspace --
+   e.g. sin(15x)sin(15y) at n=32, whose represented max|w| is 1.797e-16 -- slipped
+   past it, and the blow-up trigger `amplification_factor*m0` was then cleared in
+   one step by ordinary O(1) buoyancy forcing, returning `blowup_candidate`, the
+   most consequential label this module emits, on near-zero noise. The guard is
+   now SCALE-AWARE: it rejects when max|w_represented| falls below
+   `ZERO_OMEGA_REL_TOL` (1e-13) times the scale of the initial state itself
+   (max of the pre-mask |omega0|, the represented |w| and the represented |th|).
+   1e-13 is ~1e3 x double eps, i.e. "indistinguishable from zero after the FFT
+   round trip", with margin for accumulated roundoff; a genuinely small but
+   meaningful vorticity (any fixed fraction of the state scale) is untouched.
+2. `nu` and `kappa` were applied behind `if nu > 0.0` / `if kappa > 0.0`, so a
+   negative or non-finite value was neither applied nor rejected -- the run that
+   executed was the zero-coefficient run, bit for bit, while `params` recorded the
+   ignored value. `kappa` is invisible even in principle to the energy identity
+   `dE/dt = int(v*th) - nu*int(w^2)`, which does not contain it, so there was no
+   tell at all. Both are now validated at entry: the admissible domain is the
+   finite non-negative reals (nu, kappa >= 0; the inviscid Euler-analog nu=kappa=0
+   is the boundary, and a negative diffusivity is anti-diffusion, not physics).
+   Same treatment for every other scalar whose out-of-domain value was silently
+   absorbed rather than rejected: `t_max` (>= 0 finite; 0.0 stays legal and
+   returns at once), `dt_max`/`c1`/`c2` (> 0 finite -- a non-finite CFL safety
+   factor used to REMOVE its `min` limb rather than fail, relaxing dt_min 168x),
+   `amplification_factor` (> 0 finite -- a NaN made the threshold comparison
+   permanently False, disabling blow-up detection outright and reporting
+   `no_blowup` on a 4x amplification), `max_steps` (>= 1 integer), and
+   `drift_guard`/`tail_guard` (finite when given; NEGATIVE IS DELIBERATELY LEGAL
+   and is how test_boussinesq_dedicated.py forces a guard to fire).
+3. `conservation_drift` and the running drift guard used Python's builtin `max`,
+   which is order-dependent on NaN (`max(0.3, nan) -> 0.3`), so a 100%-NaN
+   `theta_final` reported a drift of 8.077e-18 and `drift_guard=1e-9` never fired.
+   Every guard-limb combination now goes through `_guard_max`, which PROPAGATES
+   NaN deliberately, and the drift guard treats a non-finite drift as its own
+   reportable failure (`outcome="under_resolved"`, `early_exit_reason=
+   "nonfinite_drift"`) rather than a comparison that quietly evaluates False.
+4. A degenerate grid (n = 1 or 2) leaves the 2/3 dealias mask retaining exactly
+   ONE mode -- the (0,0) mean -- so the method has no spatial resolution at all,
+   yet ran 30 steps and reported `no_blowup` with drift 0.0. A grid whose mask
+   retains no non-zero wavenumber is now rejected.
+
+The rule throughout: an input the module cannot honour is refused loudly at entry
+(ValueError) or flagged in `outcome`; it is never absorbed into a run that looks
+healthy. Banked by test_boussinesq_adversarial.py.
 """
 
 import time
@@ -38,6 +88,43 @@ from dataclasses import dataclass, field
 import numpy as np
 
 TWO_PI = 2.0 * np.pi
+
+# Relative tolerance for "the represented vorticity is zero". ~1e3 x double eps:
+# large enough to swallow the roundoff of an fft2/ifft2 round trip on an O(1)
+# field, small enough that any vorticity carrying a real fraction of the initial
+# state's scale is accepted. See the module docstring, defect 1.
+ZERO_OMEGA_REL_TOL = 1e-13
+
+
+def _guard_max(*values):
+    """`max` that PROPAGATES NaN, unlike the builtin.
+
+    `max(0.3, float("nan"))` returns 0.3 and `max(float("nan"), 0.3)` returns nan
+    -- the builtin's answer depends on argument order, because every comparison
+    against NaN is False. Every artifact-guard limb in this module goes through
+    this instead, so a poisoned limb can never be hidden behind a healthy one
+    (leg 89, defect 3).
+    """
+    vals = [float(v) for v in values]
+    if any(v != v for v in vals):  # v != v is True exactly for NaN
+        return float("nan")
+    return max(vals)
+
+
+def _check_scalar(name, value, minimum, strict):
+    """Return float(value), or raise ValueError if it is non-finite or below the
+    domain floor. `strict` selects `> minimum` over `>= minimum`."""
+    v = float(value)
+    if not np.isfinite(v):
+        raise ValueError(
+            f"{name} must be finite, got {value!r}; a non-finite {name} is "
+            "dropped rather than applied by the comparisons downstream, which "
+            "would silently run a different computation than the one requested"
+        )
+    if (v <= minimum) if strict else (v < minimum):
+        rel = ">" if strict else ">="
+        raise ValueError(f"{name} must be {rel} {minimum}, got {v!r}")
+    return v
 
 
 def grid2d(n):
@@ -201,7 +288,9 @@ def solve_boussinesq(
     exactly against roundoff drift (Gate 1b). The dynamics preserve the subspace
     on their own; this only removes float-level leakage on long runs.
     drift_guard: None, or a float — stop with outcome "under_resolved" when the
-    running artifact-guard drift (conservation) exceeds it.
+    running artifact-guard drift (conservation) exceeds it, or when that drift is
+    itself non-finite (then `early_exit_reason` is "nonfinite_drift"). A negative
+    threshold is legal and fires on the first step; a non-finite one is rejected.
     tail_guard: None, or a float — stop with outcome "under_resolved" when the
     fraction of enstrophy in the top band of retained modes (near the 2/3 dealias
     cut) exceeds it. This is the RIGHT under-resolution signal for a spectral
@@ -214,6 +303,41 @@ def solve_boussinesq(
     """
     if symmetry not in (None, "houluo"):
         raise ValueError(f"unknown symmetry {symmetry!r}")
+
+    # --- scalar-parameter domain validation (leg 89 defects 2 and 4) ---------
+    # Physical coefficients: the admissible domain is the finite non-negative
+    # reals. nu=kappa=0 is the inviscid Euler-analog this module is built for and
+    # stays legal; a negative diffusivity is anti-diffusion, and was previously
+    # neither applied nor rejected.
+    nu = _check_scalar("nu", nu, 0.0, strict=False)
+    kappa = _check_scalar("kappa", kappa, 0.0, strict=False)
+    # Integration window: 0.0 is a legitimate degenerate request (return at once);
+    # negative and NaN made `while t < t_max` False and returned a scientific
+    # conclusion from a run that never happened.
+    t_max = _check_scalar("t_max", t_max, 0.0, strict=False)
+    # Timestep controls: a non-finite one REMOVED its limb from the dt `min`.
+    dt_max = _check_scalar("dt_max", dt_max, 0.0, strict=True)
+    c1 = _check_scalar("c1", c1, 0.0, strict=True)
+    c2 = _check_scalar("c2", c2, 0.0, strict=True)
+    # Detection threshold: a non-finite one made `m >= amplification_factor*m0`
+    # permanently False, i.e. disabled blow-up detection while still reporting
+    # "no_blowup" as though the question had been asked and answered.
+    amplification_factor = _check_scalar(
+        "amplification_factor", amplification_factor, 0.0, strict=True)
+    if int(max_steps) != max_steps or int(max_steps) < 1:
+        raise ValueError(f"max_steps must be an integer >= 1, got {max_steps!r}")
+    max_steps = int(max_steps)
+    # Artifact guards: only finiteness is required. A NEGATIVE threshold is
+    # deliberately legal -- it is how test_boussinesq_dedicated.py forces each
+    # guard to fire on the first step -- but a NaN one silently never fires.
+    if drift_guard is not None:
+        drift_guard = _check_scalar("drift_guard", drift_guard, -np.inf, strict=False)
+    if tail_guard is not None:
+        tail_guard = _check_scalar("tail_guard", tail_guard, -np.inf, strict=False)
+    if frozen_u is not None:
+        frozen_u = (_check_scalar("frozen_u[0]", frozen_u[0], -np.inf, strict=False),
+                    _check_scalar("frozen_u[1]", frozen_u[1], -np.inf, strict=False))
+
     t_start_wall = time.perf_counter()
     omega0 = np.asarray(omega0, dtype=float)
     theta0 = np.asarray(theta0, dtype=float)
@@ -222,6 +346,16 @@ def solve_boussinesq(
         raise ValueError("omega0 and theta0 must be square n x n arrays")
     KX, KY, Ksq, inv_Ksq = wavenumbers2d(n)
     mask = dealias_mask2d(n)
+    # Degenerate grid (leg 89 defect 4): at n = 1 and n = 2 the 2/3 rule leaves
+    # only the (0,0) mean mode, so the discretization cannot represent ANY
+    # dynamics -- and it used to report the most reassuring guard numbers in the
+    # battery (drift exactly 0.0) precisely because nothing happened.
+    if not np.any(mask & (Ksq > 0.0)):
+        raise ValueError(
+            f"n={n} leaves the 2/3 dealias mask retaining only the mean mode: "
+            "the grid cannot represent any non-constant field, so no dynamics "
+            "can be computed on it (n >= 3 required)"
+        )
     dx = TWO_PI / n
 
     if symmetry == "houluo":
@@ -235,6 +369,25 @@ def solve_boussinesq(
     m0 = float(np.max(np.abs(w)))
     if m0 == 0.0:
         raise ValueError("omega0 is identically zero")
+    # Scale-aware zero test (leg 89 defect 1). `m0 == 0.0` above only catches a
+    # BIT-exact zero. A vorticity annihilated by the dealias mask, or one at a
+    # denormal amplitude, leaves m0 at roundoff -- nonzero, so the exact test
+    # misses it -- and then `amplification_factor * m0` is a threshold at the
+    # roundoff scale that ordinary O(1) buoyancy forcing clears in one step,
+    # producing a false "blowup_candidate". Compare against the scale of the
+    # initial state itself: the pre-mask input (so a fully dealias-annihilated
+    # omega0 is caught even when theta0 is also tiny) and both represented fields.
+    state_scale = _guard_max(m0, float(np.max(np.abs(omega0))),
+                             float(np.max(np.abs(th))))
+    if m0 <= ZERO_OMEGA_REL_TOL * state_scale:
+        raise ValueError(
+            f"omega0 is numerically zero: the represented (post-dealias) "
+            f"max|w| = {m0:.6e} is at or below {ZERO_OMEGA_REL_TOL:g} x the "
+            f"initial state scale {state_scale:.6e}, i.e. indistinguishable "
+            "from zero at working precision. Amplification relative to it is "
+            "meaningless -- growth off such an m0 is forcing response, not "
+            "amplification of the data -- so no blow-up verdict can be given"
+        )
 
     times = [0.0]
     max_omega = [m0]
@@ -331,23 +484,32 @@ def solve_boussinesq(
             outcome = "diverged"
             break
 
-        max_w_int_dev = max(max_w_int_dev, abs(_integral(w) - w_int0))
-        max_th_int_dev = max(max_th_int_dev, abs(_integral(th) - th_int0))
-        max_l1_w = max(max_l1_w, _integral(np.abs(w)))
-        max_l1_th = max(max_l1_th, _integral(np.abs(th)))
+        # Every accumulator uses _guard_max, not the builtin: a NaN entering any
+        # limb must reach the reported drift, not be dropped by an order-dependent
+        # comparison (leg 89 defect 3).
+        max_w_int_dev = _guard_max(max_w_int_dev, abs(_integral(w) - w_int0))
+        max_th_int_dev = _guard_max(max_th_int_dev, abs(_integral(th) - th_int0))
+        max_l1_w = _guard_max(max_l1_w, _integral(np.abs(w)))
+        max_l1_th = _guard_max(max_l1_th, _integral(np.abs(th)))
         e_now, p_now = kinetic_energy_and_prod(w_hat)
         e_accum_err += abs((e_now - e_prev) - 0.5 * dt * (p_now + p_prev))
         e_prev, p_prev = e_now, p_now
-        max_e = max(max_e, abs(e_now))
+        max_e = _guard_max(max_e, abs(e_now))
 
         tail = tail_fraction(w_hat)
-        max_tail_fraction = max(max_tail_fraction, tail)
+        max_tail_fraction = _guard_max(max_tail_fraction, tail)
         if drift_guard is not None:
-            running_drift = max(
-                max_w_int_dev / max(max_l1_w, 1e-300),
-                max_th_int_dev / max(max_l1_th, 1e-300),
-                e_accum_err / max(max_e, 1e-300),
+            running_drift = _guard_max(
+                max_w_int_dev / _guard_max(max_l1_w, 1e-300),
+                max_th_int_dev / _guard_max(max_l1_th, 1e-300),
+                e_accum_err / _guard_max(max_e, 1e-300),
             )
+            # A non-finite drift is its OWN failure, reported as such. It used to
+            # evaluate the comparison below to False and let the run continue.
+            if not np.isfinite(running_drift):
+                outcome = "under_resolved"
+                early_exit_reason = "nonfinite_drift"
+                break
             if running_drift > drift_guard:
                 outcome = "under_resolved"
                 break
@@ -376,9 +538,9 @@ def solve_boussinesq(
     if outcome is None:
         outcome = "no_blowup"
 
-    mean_drift = max(max_w_int_dev / max(max_l1_w, 1e-300),
-                     max_th_int_dev / max(max_l1_th, 1e-300))
-    energy_residual = e_accum_err / max(max_e, 1e-300)
+    mean_drift = _guard_max(max_w_int_dev / _guard_max(max_l1_w, 1e-300),
+                            max_th_int_dev / _guard_max(max_l1_th, 1e-300))
+    energy_residual = e_accum_err / _guard_max(max_e, 1e-300)
     return BoussinesqResult(
         outcome=outcome,
         early_exit_reason=early_exit_reason,
@@ -392,7 +554,7 @@ def solve_boussinesq(
         wall_clock_seconds=time.perf_counter() - t_start_wall,
         mean_drift=mean_drift,
         energy_balance_residual=energy_residual,
-        conservation_drift=max(mean_drift, energy_residual),
+        conservation_drift=_guard_max(mean_drift, energy_residual),
         max_tail_fraction=float(max_tail_fraction),
         params={
             "nu": nu,
