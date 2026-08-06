@@ -3500,3 +3500,16 @@ preempted agents had reached a landing.
   would-be false positive before it shipped (a criterion discovered mid-pass,
   and an initial probe that would have read as a hit without the reachability
   battery).
+- **Leg 235 (Route-CDAP) — YES, ESCALATED (parked, not merged), DIRECTLY BEARS
+  ON ROUTE-D v11 AGAIN:** a SECOND instance of the ignored-caller-diagnostic
+  shape, in the SAME runner leg 202 escalated but a DIFFERENT mechanism (min/max
+  selection, not a bad convergence flag) -- leg 226's dispatched repair does not
+  touch it. Route-D v11's v5_budget headline margin (1.0468e+10) is built from
+  newton_weighted_defect_min while newton_weighted_defect_max = 1.5196e-02 sits
+  one line away in the same dict, never compared -- violates that block's own
+  Y0 budget by 62.02x at a=0.45. 0 instances found in the other 195 banked
+  JSONs (4,320 verdicts screened, 190 hits all adjudicated by hand). CORRECTS
+  LEG 202: 2 of its 3 quoted weighted_defect magnitudes (4788, 73372) attach to
+  rows already marked grid_converged=false -- the correctly-scoped form is 17
+  rows all converged=true spanning 13.42 decades, shape confirmed, two
+  magnitudes on the wrong rows.
