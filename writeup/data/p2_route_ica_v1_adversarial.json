@@ -1,0 +1,889 @@
+{
+  "leg": 98,
+  "route": "ICA",
+  "question": "Under an adversarial battery of poisoned interval enclosures (negative widths, NaN endpoints, non-containing enclosures) fed to interval_constants / radii_verdict, does the pipeline ever incorrectly report a closing/valid certificate?",
+  "substrate": {
+    "object": "BorderedCLM (a=0 CLM, bordered)",
+    "n": 101,
+    "N": 103,
+    "theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "poison_step": 0.001,
+    "honest_at_z": {
+      "Y0": 1.3962887163722508e-11,
+      "Z1": 2.754268129183865e-09,
+      "Z2": 799283.1427753915
+    },
+    "honest_at_z_closes": true,
+    "honest_at_z_bad": {
+      "Y0": 0.005906547493950637,
+      "Z1": 2.1792677330349195e-09,
+      "Z2": 636761.9249782771
+    },
+    "honest_at_z_bad_closes": false
+  },
+  "totals": {
+    "cases": 39,
+    "hypothesis_violating": 36,
+    "false_accepts": 12,
+    "false_accepts_load_bearing": 8,
+    "rejected": 20,
+    "raised": 4
+  },
+  "false_accept_cases": [
+    "A1_F_fabricated_zero",
+    "A6_F_shrunk_1e-8_non_containing",
+    "A11_weight_all_negative",
+    "A12_weight_one_negative",
+    "B04_Y0_negative_unit",
+    "B05_Y0_negative_tiny",
+    "B06_Y0_negative_huge",
+    "B07_Z1_negative",
+    "B08_Z1_negative_rescues_big_Y0",
+    "B17_Y0_neg_inf",
+    "B22_Y0_negative_Z1_negative",
+    "B25_Y0_negative_Z1_just_below_one"
+  ],
+  "load_bearing_cases": [
+    "A1_F_fabricated_zero",
+    "A6_F_shrunk_1e-8_non_containing",
+    "B04_Y0_negative_unit",
+    "B06_Y0_negative_huge",
+    "B07_Z1_negative",
+    "B08_Z1_negative_rescues_big_Y0",
+    "B17_Y0_neg_inf",
+    "B25_Y0_negative_Z1_just_below_one"
+  ],
+  "raised_cases": [
+    "A2_F_negative_width_excluding",
+    "A3_F_endpoints_swapped",
+    "B20_Z2_zero",
+    "B21_Z2_negative_zero"
+  ],
+  "cases": [
+    {
+      "case": "A1_F_fabricated_zero",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 containment: F enclosed as exactly [0,0] at an iterate whose true residual is far from zero",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": {
+        "Y0": 8e-323,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 5e-324,
+        "r_max": 1.570445654166346e-06,
+        "budget": 7.85222825371962e-07
+      },
+      "outcome": "false_accept",
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "A2_F_negative_width_excluding",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity AND containment: lo=+1e-16 > hi=-1e-16, and the true residual is outside",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "ValueError: Interval requires lo <= hi"
+    },
+    {
+      "case": "A3_F_endpoints_swapped",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity: the honest enclosure with lo and hi exchanged (negative width, same magnitudes)",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "ValueError: Interval requires lo <= hi"
+    },
+    {
+      "case": "A4_F_nan_endpoint",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity: a NaN endpoint in component 0 of the residual enclosure",
+      "point": "z",
+      "weight": "honest",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": "nan",
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": "nan",
+        "r_max": "nan",
+        "budget": 6.255605435510079e-07
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A5_F_infinite_endpoint",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity: an unbounded endpoint in component 0 of the residual enclosure",
+      "point": "z",
+      "weight": "honest",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": "nan",
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": "nan",
+        "r_max": "nan",
+        "budget": 6.255605435510079e-07
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A6_F_shrunk_1e-8_non_containing",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 containment ONLY -- a well-formed interval (lo<=hi, finite) that simply does not contain the residual",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": {
+        "Y0": 5.906547493951376e-11,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 5.906658585533489e-11,
+        "r_max": 1.570445654166346e-06,
+        "budget": 7.85222825371962e-07
+      },
+      "outcome": "false_accept",
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "A7_J_endpoints_swapped",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity: the Jacobian enclosure with lo and hi exchanged",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.0377104170797706e-09,
+        "Z2": 636761.9249782771
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Y0 exceeds the budget",
+        "r_min": null,
+        "r_max": null,
+        "budget": 7.852228255942702e-07
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A8_J_nan_entry",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 validity: a NaN entry in the Jacobian enclosure",
+      "point": "z",
+      "weight": "honest",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan"
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A9_J_fabricated_identity",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 containment: DF enclosed as the identity, which contains none of the true Jacobian's off-diagonal mass",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": {
+        "Y0": 0.005906547493950637,
+        "Z1": 28721.417217964256,
+        "Z2": 636761.9249782771
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A10_F_and_J_both_fabricated",
+      "family": "A_poisoned_enclosure",
+      "violates": "H2 both: a fully fabricated certificate -- zero residual, identity Jacobian",
+      "point": "z_bad",
+      "weight": "honest",
+      "honest": {
+        "Y0": 0.005906547493950637,
+        "Z1": 2.1792677330349195e-09,
+        "Z2": 636761.9249782771
+      },
+      "honest_verdict_closes": false,
+      "constants": {
+        "Y0": 8e-323,
+        "Z1": 28721.417217964256,
+        "Z2": 636761.9249782771
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A11_weight_all_negative",
+      "family": "A_poisoned_enclosure",
+      "violates": "H3 norm data: w < 0 everywhere -- not a norm",
+      "point": "z",
+      "weight": "poisoned",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": -2.4630387149974178e-28,
+        "Z1": 2.754268129183862e-09,
+        "Z2": 144300.4248810159
+      },
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 5e-324,
+        "r_max": 6.929986506070858e-06,
+        "budget": 3.4649932434919076e-06
+      },
+      "outcome": "false_accept",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A12_weight_one_negative",
+      "family": "A_poisoned_enclosure",
+      "violates": "H3 norm data: a single negative weight component",
+      "point": "z",
+      "weight": "poisoned",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754153480106268e-09,
+        "Z2": 799283.1067777729
+      },
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 1.3962965117979823e-11,
+        "r_max": 1.2511211468953007e-06,
+        "budget": 6.255605717247605e-07
+      },
+      "outcome": "false_accept",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A13_weight_has_zero",
+      "family": "A_poisoned_enclosure",
+      "violates": "H3 norm data: a zero weight component -- 1/w_j is not finite",
+      "point": "z",
+      "weight": "poisoned",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": "nan",
+        "Z2": "nan"
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "A14_weight_has_nan",
+      "family": "A_poisoned_enclosure",
+      "violates": "H3 norm data: a NaN weight component",
+      "point": "z",
+      "weight": "poisoned",
+      "honest": {
+        "Y0": 1.3962887163722508e-11,
+        "Z1": 2.754268129183865e-09,
+        "Z2": 799283.1427753915
+      },
+      "honest_verdict_closes": true,
+      "constants": {
+        "Y0": "nan",
+        "Z1": "nan",
+        "Z2": "nan"
+      },
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B01_baseline_valid",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": null,
+      "valid_input": true,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 1.4286349880876516e-12,
+        "r_max": 0.6999999999999998,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "valid_closes",
+      "magnitude_counterpart_closes": true,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B02_baseline_valid_tight",
+      "family": "B_fabricated_constants",
+      "Y0": 0.001,
+      "Z1": 0.9,
+      "Z2": 1.0,
+      "violates": null,
+      "valid_input": true,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 0.010557280900008419,
+        "r_max": 0.09999999999999996,
+        "budget": 0.004999999999999996
+      },
+      "outcome": "valid_closes",
+      "magnitude_counterpart_closes": true,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B03_honest_non_closing",
+      "family": "B_fabricated_constants",
+      "Y0": 1.0,
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": null,
+      "valid_input": true,
+      "verdict": {
+        "closes": false,
+        "reason": "Y0 exceeds the budget",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "valid_rejects",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B04_Y0_negative_unit",
+      "family": "B_fabricated_constants",
+      "Y0": -1.0,
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -0.8779733838059499,
+        "r_max": 0.6999999999999998,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "B05_Y0_negative_tiny",
+      "family": "B_fabricated_constants",
+      "Y0": -1e-12,
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -1.4285239657851887e-12,
+        "r_max": 0.6999999999999998,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": true,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B06_Y0_negative_huge",
+      "family": "B_fabricated_constants",
+      "Y0": -1000000.0,
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -1413.5137356142454,
+        "r_max": 0.6999999999999998,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "B07_Z1_negative",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": -5.0,
+      "Z2": 1.0,
+      "violates": "H1: Z_1 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 1.6608936448392344e-13,
+        "r_max": 5.999999999999999,
+        "budget": 17.999999999999993
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "B08_Z1_negative_rescues_big_Y0",
+      "family": "B_fabricated_constants",
+      "Y0": 1000.0,
+      "Z1": -1000000.0,
+      "Z2": 1.0,
+      "violates": "H1: Z_1 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": 0.000999998999759555,
+        "r_max": 1000000.9999999999,
+        "budget": 500001000000.4998
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "B09_Z2_negative",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": -1.0,
+      "violates": "H1: Z_2 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": 1.4285239657851891e-12,
+        "r_max": -1.4000000000014288,
+        "budget": -0.24500000000000002
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": true,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B10_Z2_negative_big_Y0",
+      "family": "B_fabricated_constants",
+      "Y0": 1000000.0,
+      "Z1": 0.3,
+      "Z2": -1.0,
+      "violates": "H1: Z_2 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": 1413.513735614246,
+        "r_max": -1414.913735614246,
+        "budget": -0.24500000000000002
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B11_all_three_negative",
+      "family": "B_fabricated_constants",
+      "Y0": -1.0,
+      "Z1": -1.0,
+      "Z2": -1.0,
+      "violates": "H1: all three < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": -0.585786437626905,
+        "r_max": -3.4142135623730954,
+        "budget": -2.000000000000001
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B12_Y0_nan",
+      "family": "B_fabricated_constants",
+      "Y0": "nan",
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": "nan",
+        "r_max": "nan",
+        "budget": 0.24499999999999988
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B13_Z1_nan",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": "nan",
+      "Z2": 1.0,
+      "violates": "H1: Z_1 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B14_Z2_nan",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": "nan",
+      "violates": "H1: Z_2 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": "nan",
+        "r_max": "nan",
+        "budget": "nan"
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B15_all_nan",
+      "family": "B_fabricated_constants",
+      "Y0": "nan",
+      "Z1": "nan",
+      "Z2": "nan",
+      "violates": "H1: none finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B16_Y0_inf",
+      "family": "B_fabricated_constants",
+      "Y0": "inf",
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Y0 exceeds the budget",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B17_Y0_neg_inf",
+      "family": "B_fabricated_constants",
+      "Y0": "-inf",
+      "Z1": 0.3,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -1.3407807929942594e+154,
+        "r_max": 0.6999999999999998,
+        "budget": 0.24499999999999988
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": true
+    },
+    {
+      "case": "B18_Z1_neg_inf",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": "-inf",
+      "Z2": 1.0,
+      "violates": "H1: Z_1 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "ok",
+        "r_min": "nan",
+        "r_max": 1.7976931348623157e+308,
+        "budget": 1.7976931348623157e+308
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B19_Z2_inf",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": "inf",
+      "violates": "H1: Z_2 not finite",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Y0 exceeds the budget",
+        "r_min": null,
+        "r_max": null,
+        "budget": -5e-324
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": null,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B20_Z2_zero",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": 0.0,
+      "violates": "H1 edge: Z_2 = 0, the quadratic degenerates",
+      "valid_input": false,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "ZeroDivisionError: float division by zero"
+    },
+    {
+      "case": "B21_Z2_negative_zero",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 0.3,
+      "Z2": -0.0,
+      "violates": "H1 edge: Z_2 = -0.0",
+      "valid_input": false,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "ZeroDivisionError: float division by zero"
+    },
+    {
+      "case": "B22_Y0_negative_Z1_negative",
+      "family": "B_fabricated_constants",
+      "Y0": -0.001,
+      "Z1": -0.001,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 < 0 and Z_1 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -0.0009985029928936127,
+        "r_max": 1.0009999999999997,
+        "budget": 0.5010004999999996
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": true,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B23_Z1_exactly_one",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-12,
+      "Z1": 1.0,
+      "Z2": 1.0,
+      "violates": "boundary: Z_1 = 1, no contraction",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Z1 >= 1",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B24_Z1_just_below_one",
+      "family": "B_fabricated_constants",
+      "Y0": 1e-30,
+      "Z1": 0.9999999999999999,
+      "Z2": 1.0,
+      "violates": "boundary: Z_1 = 1 - 1e-16",
+      "valid_input": false,
+      "verdict": {
+        "closes": false,
+        "reason": "Y0 exceeds the budget",
+        "r_min": null,
+        "r_max": null,
+        "budget": 6.162975822039153e-33
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
+    },
+    {
+      "case": "B25_Y0_negative_Z1_just_below_one",
+      "family": "B_fabricated_constants",
+      "Y0": -1e-30,
+      "Z1": 0.9999999999999999,
+      "Z2": 1.0,
+      "violates": "H1: Y_0 < 0",
+      "valid_input": false,
+      "verdict": {
+        "closes": true,
+        "reason": "ok",
+        "r_min": -1.3075424481372155e-15,
+        "r_max": 1.1102230246251564e-16,
+        "budget": 6.162975822039153e-33
+      },
+      "outcome": "false_accept",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": true
+    }
+  ]
+}
