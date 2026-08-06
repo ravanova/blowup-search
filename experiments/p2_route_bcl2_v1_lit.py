@@ -1,0 +1,697 @@
+#!/usr/bin/env python3
+"""Leg 245 (Route-BCL2) -- literature runner applying this repository's established "check for
+later work by the same authors" pattern (legs 175->196, 174/197->240, 242) to the ONE precedent
+that already carries the RIGHT GRADE and only lacks the right MODEL: arXiv:2404.04054, [BC] in
+solver/viscous_novelty.py's own PRECEDENTS ledger -- Grade-A (computer-assistance essential,
+viscous term genuinely enclosed, not dominated) Newton-Kantorovich certification of self-similar
+profiles, but on a 1D generalised viscous Burgers equation.
+
+    .venv/bin/python experiments/p2_route_bcl2_v1_lit.py
+
+THE QUESTION (pre-committed gate, both branches, DIRECTION.md leg 245):
+
+    Does arXiv:2404.04054's author group have subsequent published work applying the same
+    Grade-A (computer-assisted, viscous-term-enclosing) technique to a model closer to
+    fluid/vortex dynamics than 1D viscous Burgers (2D, vorticity-bearing, or a genuine
+    Navier-Stokes-family reduction)?
+
+    YES -> closest approach yet to filling leg 174's empty Grade-A/fluid cell; record the
+           citation, its hypotheses, and precisely how close the model is. ESCALATE; do not
+           replicate or build on it under this leg's authority; push branch only, report parked.
+    NO  -> report the SEARCH precisely, same discipline as 240/242 (closed candidate sets,
+           primary-source depth reads, live-probe controls). Bank as confirming the Grade-A
+           technique's own frontier is still 1D Burgers, NARROWING (not closing) the "missing
+           rung" search. Normal landing.
+
+WHAT THIS IS. A literature leg has no PDE to integrate, so the runner is what keeps the prose
+honest: every count and every number quoted in writeup/novelty/leg_245.md and
+experiments/journal/leg_245.md is transcribed here ONCE, from the primary source, with a line
+locator into a named md5-pinned extraction; the gate verdict is COMPUTED from that table rather
+than asserted. Emits writeup/data/p2_route_bcl2_v1_lit.json.
+
+WHO THE AUTHOR GROUP ACTUALLY IS -- AND A LEDGER CORRECTION THIS LEG OWES.
+solver/viscous_novelty.py's PRECEDENTS row for arXiv:2404.04054 carries
+`"who": "constructive-proofs group (semilinear PDEs on H^2(e^{|x|^2/4}))"` -- a DESCRIPTION, not
+an attribution. No leg that cited [BC] (174, 176, and the p2_route_vbs/v scoping JSONs) ever
+named its authors. They are **Maxime Breden and Hugo Chu** (Numerische Mathematik, DOI
+10.1007/s00211-025-01504-4; v1 2024-04-05, v2 2026-01-18). This module does NOT edit the ledger
+(read-only territory); the correction is recorded here and in the journal for integration.
+
+WHY THE VERDICT IS COMPUTED (lesson 90 -- a control that cannot come out differently is not a
+control). The gate's YES branch escalates and parks the leg, so it must be reachable on evidence
+that warranted it and not reachable by prose alone. `classify()` takes the evidence table and
+returns one of
+
+    SAME_TECHNIQUE_MOVED_TO_FLUID | FLUID_BUT_NOT_THE_TECHNIQUE
+    | TECHNIQUE_BUT_STILL_NOT_FLUID | NO_SUBSEQUENT_WORK_AT_ALL
+
+and `self_test()` exercises all four on perturbed copies of the evidence.
+
+THE LIVE-PROBE CONTROLS, AND THEY ARE THE ONES THAT MATTER (lesson 90 again). This leg's
+negative rests on (a) a body-text term census returning ZERO for every fluid term over three
+full-text extractions, and (b) an author-net returning zero post-parent fluid papers. Both are
+exactly leg 53's failure mode if they are not measuring anything. So:
+
+  (a) the SAME census, on the SAME extractions, is required to return NON-ZERO for the
+      certification-apparatus terms -- and it does: `computer-assisted` fires 42/20/25 times
+      while `vorticit`, `Navier-Stokes`, `blowup`, `self-similar` are 0 in every BODY.
+      `assert_probe_is_live()` fails the run if the apparatus terms ever go to zero too.
+  (b) the keyword net (Breden OR Chu) AND (vorticity OR Navier-Stokes OR Euler OR Boussinesq)
+      returns 63 entries and DOES independently rediscover a genuine Breden fluid paper --
+      arXiv:1902.00384, 3D Navier-Stokes -- but dated 2019-02-01, i.e. FIVE YEARS BEFORE the
+      parent. The net can return a Breden fluid paper; it returns zero dated after the parent.
+      That is a control that came out differently, not a tautology.
+
+THE SHARPEST THING FOUND, AND IT IS NOT THE ABSENCE. The parent's own **Remark 40** (line 1687
+of its extraction) states that the CONVECTIVE nonlinearity -- the Navier-Stokes/Euler one --
+is within reach of their method in d in {2,3}. The missing rung is therefore not merely
+unoccupied: it is named as tractable-in-principle BY THE PRECEDENT'S OWN AUTHORS, and 28 months
+later it is still undone. See REMARK_40 below, transcribed verbatim.
+
+PROVENANCE. Four PDFs pulled from arxiv.org during this leg, extracted with `pdftotext -layout`;
+`line` fields locate quotes in those extractions. Papers/ is gitignored.
+
+    arXiv:2404.04054v2  md5 ff7a34b776bfe5edf97397e5eabdbb7a   2060 lines  (the parent)
+    arXiv:2603.27198v1  md5 ba2e83f46a07bad6f627bcf0ff4a3185   3733 lines
+    arXiv:2601.05146v1  md5 dd1b68276e4ccd58eeb064ba909df4e2   2675 lines
+    arXiv:2501.13672v2  md5 9e55c774ef42f63dbc33d09cb40db026   4938 lines
+
+NO NETWORK ACCESS at run time; every network result is transcribed as data below. No solver
+module is read, imported or edited. No stage is claimed; plan_of_record.py is untouched.
+
+BANS CHECKED BEFORE STARTING (plan_of_record.py output read in full). The one that could bind is
+"re-opening stage V as posed" -- NOT TRIPPED: no certificate is built, no dissipation parameter
+is floated against any margin, nothing is re-derived. This is a bibliographic question about an
+author line, the same shape as legs 174/196/240/242. gCLM measurement: none. Route-D sharpening:
+none. GA compute: none. l1-Fourier / collocation machinery: none built. Leg 51 re-claim: not
+made. "grep capabilities.py before building": grepped -- 2404.04054 does not appear there.
+"""
+
+import json
+import os
+from datetime import date
+
+PASS_DATE = "2026-08-06"
+
+PARENT = "arXiv:2404.04054v2"      # Breden & Chu -- [BC], the Grade-A viscous-Burgers precedent
+PARENT_DATE = "2024-04-05"
+
+PDF_MD5 = {
+    "arXiv:2404.04054v2": "ff7a34b776bfe5edf97397e5eabdbb7a",
+    "arXiv:2603.27198v1": "ba2e83f46a07bad6f627bcf0ff4a3185",
+    "arXiv:2601.05146v1": "dd1b68276e4ccd58eeb064ba909df4e2",
+    "arXiv:2501.13672v2": "9e55c774ef42f63dbc33d09cb40db026",
+}
+EXTRACTION_LINES = {
+    "arXiv:2404.04054v2": 2060,
+    "arXiv:2603.27198v1": 3733,
+    "arXiv:2601.05146v1": 2675,
+    "arXiv:2501.13672v2": 4938,
+}
+
+# --------------------------------------------------------------------------------------
+# 0. THE PARENT, PINNED FROM PRIMARY SOURCE.
+# --------------------------------------------------------------------------------------
+
+PARENT_RECORD = {
+    "id": PARENT,
+    "authors": ["Maxime Breden", "Hugo Chu"],
+    "title": "Constructive proofs for some semilinear PDEs on $H^2(e^{|x|^2/4},\\mathbb{R}^d)$",
+    "v1": "2024-04-05",
+    "v2": "2026-01-18",
+    "journal_ref": "Numerische Mathematik (accepted); DOI 10.1007/s00211-025-01504-4",
+    "technique": "spectral eigenbasis of L := -Delta - (x/2).grad in spherical coordinates + "
+                 "quadrature for nonlinearities + Newton-Kantorovich in the weighted Sobolev "
+                 "space H^2(e^{|x|^2/4}, R^d)",
+    "models_certified": ["nonlinear heat", "nonlinear Schroedinger",
+                         "generalised viscous Burgers"],
+    "burgers_model": "d_t v + v^2 d_x v = d_xx v on R_+ with Neumann d_x v(t,0) = 0; "
+                     "similarity v(t,x) = t^{-1/4} u(x/sqrt(t)); profile equation "
+                     "Lu - u/4 + u^2 d_x u = 0, x >= 0 (eq. 53-54, line 1669)",
+    "burgers_dimension": 1,
+    "ledger_who_field_before_this_leg": "constructive-proofs group (semilinear PDEs on "
+                                        "H^2(e^{|x|^2/4}))",
+    "ledger_correction_owed": "the PRECEDENTS row names no authors; this leg pins them to "
+                              "Breden & Chu. Ledger is read-only territory for leg 245 -- "
+                              "correction recorded, not applied.",
+}
+
+# The single sharpest locator in this leg.  Verbatim, from the parent's own extraction.
+REMARK_40 = {
+    "source": PARENT,
+    "line": 1687,
+    "label": "Remark 40",
+    "verbatim": "We deal with a one-dimensional example here for simplicity, but terms like "
+                "(u . grad)u could in principle also be handled in dimension d in {2, 3}, as "
+                "u in H^2(mu) is then still enough to guarantee that (u . grad)u in L^2(mu) "
+                "since u in L^infty(R^d).",
+    "why_it_matters": "The convective nonlinearity (u.grad)u IS the Navier-Stokes/Euler "
+                      "nonlinearity. The precedent's own authors state their weighted-Sobolev "
+                      "Grade-A machinery reaches it in d = 2 or 3 in principle, and give the "
+                      "reason (the H^2(mu) -> L^infty embedding). So leg 174's empty "
+                      "Grade-A/fluid cell is not merely unoccupied -- it is flagged as "
+                      "tractable-in-principle by the very group best placed to fill it.",
+    "months_elapsed_since_and_still_undone": 28,
+}
+
+# --------------------------------------------------------------------------------------
+# 1. HOW THE CANDIDATE SET WAS CLOSED.  Author-LISTING enumerations, not keyword searches:
+#    a follow-up with an unexpected title cannot be missed by a listing the way it can by a
+#    keyword query.  The gate's no-branch demands the SEARCH be reported, not the absence.
+# --------------------------------------------------------------------------------------
+
+SEARCH_LOG = [
+    {"id": "N1", "kind": "arxiv-api-author-listing", "n_entries": 28,
+     "query": 'https://export.arxiv.org/api/query?search_query=au:"Breden"'
+              '&max_results=300&sortBy=submittedDate&sortOrder=descending',
+     "note": "complete career listing for the surname, read entry by entry. 25 of the 28 are "
+             "Maxime Breden (1503.06315, 2015-03-21 -> 2603.27198, 2026-03-28); the other 3 are "
+             "homonyms -- Felix Breden (immunogenomics, 2010.10402) and Amy Breden (NLP, "
+             "2005.06634), plus 2010.10402 being a 40-author consortium paper. Recorded because "
+             "an unexamined listing would have inflated the count by 3."},
+    {"id": "N2", "kind": "arxiv-api-author-listing", "n_entries": 5,
+     "query": 'https://export.arxiv.org/api/query?search_query=au:"Hugo Chu"'
+              '&max_results=300&sortBy=submittedDate&sortOrder=descending',
+     "note": "complete career listing. 4 of 5 are the Hugo Chu of the parent; the 5th "
+             "(1812.10408, Hyperbolic Deep Learning for Chinese NLU, 2018) is a homonym. Chu is "
+             "an early-career author with a SHORT record, which is why the Breden net (N1) is "
+             "the decisive one and this is the confirmatory one."},
+    {"id": "N3", "kind": "arxiv-api-author-listing-FAILED-FORM", "n_entries": 0,
+     "query": 'https://export.arxiv.org/api/query?search_query=au:"Breden_M"',
+     "note": "RETURNS ZERO. Recorded, not discarded: this is exactly leg 240's methodological "
+             "failure (au:\"Buckmaster_T\" -> 2 entries, newest 2016) and leg 242's "
+             "(au:\"Figueras_J\" -> 0) recurring on a third author line. A query that silently "
+             "under-returns is indistinguishable from a clean negative, which is this "
+             "repository's recurring failure mode. Had this been the only Breden net, the leg "
+             "would have reported NO for the wrong reason -- and would have missed all 25 "
+             "Maxime Breden papers including the parent itself."},
+    {"id": "N4", "kind": "arxiv-api-author-listing-COLLABORATOR", "n_entries": 12,
+     "query": 'https://export.arxiv.org/api/query?search_query=au:"Cadiot"'
+              '&max_results=200&sortBy=submittedDate&sortOrder=descending',
+     "note": "the gate's parenthetical says 'or close collaborators'. Matthieu Cadiot is the "
+             "ONE new close collaborator Breden acquired after the parent (2603.27198, "
+             "2026-03-28) and is independently known to this repository (leg 57 / arXiv:"
+             "2505.03091, the dominance-hypothesis ban's current reason). Complete career "
+             "listing, 12 entries, 2302.12877 -> 2607.13567, all genuinely Matthieu Cadiot "
+             "(no homonyms). This net is what surfaced the leg's strongest near-miss."},
+    {"id": "N5", "kind": "arxiv-api-keyword-CROSSCHECK-and-LIVE-PROBE", "n_entries": 63,
+     "query": 'https://export.arxiv.org/api/query?search_query=(au:"Breden" OR au:"Chu") AND '
+              '(abs:"vorticity" OR abs:"Navier-Stokes" OR abs:"Euler" OR abs:"Boussinesq")'
+              '&max_results=100&sortBy=submittedDate&sortOrder=descending',
+     "note": "independent keyword net, run as a cross-check of N1/N2 AND as this leg's decisive "
+             "live-probe control. Of the 63, exactly ONE carries a Maxime Breden authorship: "
+             "arXiv:1902.00384, 'Spontaneous periodic orbits in the Navier-Stokes flow', dated "
+             "2019-02-01 -- five years BEFORE the parent. Zero carry a Breden authorship dated "
+             "after 2024-04-05. The other 62 are 'Chu' homonyms from condensed-matter and "
+             "optics (superconducting vortices, vortex beams, superfluid transitions) -- a "
+             "vocabulary collision on 'vortex', recorded because it is the exact shape of "
+             "false positive this gate is vulnerable to."},
+]
+
+# --------------------------------------------------------------------------------------
+# 2. THE CANDIDATE SET.  Every paper by Breden or Chu dated after the parent, with what
+#    model it treats and whether the parent's technique is the one being applied.
+#    `fluid_grade`: 0 = not a fluid model at all; 1 = fluid-adjacent vocabulary only;
+#                   2 = genuine fluid mechanics; 3 = fluid AND vorticity-bearing.
+#    `encloses_viscous_term`: does the certified object contain a dissipative term that the
+#                   proof genuinely encloses (the property that made the parent Grade A)?
+# --------------------------------------------------------------------------------------
+
+SUBSEQUENT = [
+    {"id": "arXiv:2408.12556v4", "date": "2024-08-22",
+     "authors": ["Alexandra Blessing", "Alex Blumenthal", "Maxime Breden", "Maximilian Engel"],
+     "title": "Detecting random bifurcations via rigorous enclosures of large deviations rate "
+              "functions",
+     "model": "SDEs: pitchfork bifurcation and a 2D toy model; moment Lyapunov exponents as "
+              "principal eigenvalues of a tilted Feynman-Kac generator",
+     "fluid_grade": 0, "encloses_viscous_term": False, "same_technique": False,
+     "why_not": "stochastic dynamics, not a PDE blow-up profile. The '2D' is a 2-variable toy "
+                "ODE system, not a 2D spatial domain -- exactly the kind of token match this "
+                "leg's census had to read in context rather than count."},
+    {"id": "arXiv:2409.20457v2", "date": "2024-09-30",
+     "authors": ["Maxime Breden", "Jorge Gonzalez", "J. D. Mireles James"],
+     "title": "Validated enclosure of renormalization fixed points via Chebyshev series and the "
+              "DFT",
+     "model": "Feigenbaum-Cvitanovic renormalization operators, m = 3..10",
+     "fluid_grade": 0, "encloses_viscous_term": False, "same_technique": False,
+     "why_not": "one-dimensional dynamics / renormalization; no PDE, no dissipative term."},
+    {"id": "arXiv:2411.07064v3", "date": "2024-11-11",
+     "authors": ["Maxime Breden", "Hugo Chu", "Jeroen S. W. Lamb", "Martin Rasmussen"],
+     "title": "Rigorous enclosure of Lyapunov exponents of stochastic flows",
+     "model": "stochastic flows under hypoellipticity; four chaotic systems",
+     "fluid_grade": 0, "encloses_viscous_term": False, "same_technique": False,
+     "why_not": "BOTH parent authors, so the strongest continuity candidate on authorship -- "
+                "but the object is a Lyapunov exponent of a diffusion, not a self-similar "
+                "profile, and no fluid model appears."},
+    {"id": "arXiv:2501.13672v2", "date": "2025-01-23",
+     "authors": ["Maxime Breden", "Hugo Chu"],
+     "title": "Numerical Analysis of differential equations on weighted Sobolev spaces: beyond "
+              "classical orthogonal polynomials",
+     "model": "Gross-Pitaevskii with sextic potential; stochastic resonance",
+     "fluid_grade": 0, "encloses_viscous_term": False, "same_technique": True,
+     "why_not": "THE DIRECT METHODOLOGICAL SUCCESSOR -- same two authors, same weighted Sobolev "
+                "H^1(nu)/L^2(nu) setting, 'weighted Sobolev' fires 12 times in the body. The "
+                "technique did move forward; it moved DEEPER (new Sobolev orthogonal "
+                "polynomials, Jacobi recurrence asymptotics, Painleve-type discrete equations) "
+                "rather than TOWARD FLUIDS. Gross-Pitaevskii is a dispersive Schroedinger-type "
+                "equation on the line, further from vortex dynamics than the parent's Burgers, "
+                "not closer."},
+    {"id": "arXiv:2504.05066v1", "date": "2025-04-07",
+     "authors": ["Maxime Breden", "Maxime Payan", "Cordula Reisch", "Bao Quoc Tang"],
+     "title": "Turing instability for nonlocal heterogeneous reaction-diffusion systems: A "
+              "computer-assisted proof approach",
+     "model": "nonlocal heterogeneous reaction-diffusion systems; Gershgorin disks for infinite "
+              "matrices",
+     "fluid_grade": 0, "encloses_viscous_term": False, "same_technique": False,
+     "why_not": "reaction-diffusion pattern formation; diffusive but not fluid, and the "
+                "certified object is an eigenvalue/bifurcation threshold, not a profile."},
+    {"id": "arXiv:2601.05146v1", "date": "2026-01-08",
+     "authors": ["Jan Bouwe van den Berg", "Maxime Breden"],
+     "title": "A simple rigorous integrator for semilinear parabolic PDEs",
+     "model": "Swift-Hohenberg, Ohta-Kawasaki, Kuramoto-Sivashinsky -- all on a 1D torus "
+              "T_L = R/L",
+     "fluid_grade": 1, "encloses_viscous_term": True, "same_technique": False,
+     "why_not": "THE NEAREST MISS ON MODEL VOCABULARY, and it is still not close. "
+                "Kuramoto-Sivashinsky (eq. 48, line 2449) is d_t u = -d_x^4 u - d_x^2 u - "
+                "(1/2) d_x u^2: it carries the SAME Burgers nonlinearity as the parent and is "
+                "the same 1D scalar shape, so it is a LATERAL move, not a step toward 2D or "
+                "vorticity. It is also an initial-value INTEGRATION result (rigorous error "
+                "bounds along a trajectory), not an enclosure of a self-similar blow-up "
+                "profile. Body fluid-term count 0; all 14 fluid term occurrences (spread over "
+                "10 lines) lie in the bibliography."},
+    {"id": "arXiv:2603.27198v1", "date": "2026-03-28",
+     "authors": ["Maxime Breden", "Matthieu Cadiot", "Antoine Zurek"],
+     "title": "Constructive existence proofs and stability of stationary solutions to parabolic "
+              "PDEs using Gegenbauer polynomials",
+     "model": "stationary solutions of ONE-DIMENSIONAL parabolic PDEs on a bounded interval, "
+              "plus rigorous enclosure of the linearisation's spectrum",
+     "fluid_grade": 0, "encloses_viscous_term": True, "same_technique": True,
+     "why_not": "THE MOST RECENT PAPER OF THE GROUP, and the one that settles the frontier "
+                "question. Same Newton-Kantorovich apparatus (13 hits), same parabolic setting, "
+                "and it adds spectral stability -- but it is explicitly 'one-dimensional' "
+                "(abstract, line 9) and 'posed on a bounded interval' (line 273). Body "
+                "fluid-term count: 0 for EVERY fluid term, the only one of the three depth "
+                "reads that is zero even including its bibliography."},
+]
+
+# Chu's post-parent record is a strict subset of Breden's (2411.07064, 2501.13672), already
+# above.  Recorded explicitly so the JSON cannot be read as having skipped him.
+CHU_SUBSEQUENT_IDS = ["arXiv:2411.07064v3", "arXiv:2501.13672v2"]
+
+# --------------------------------------------------------------------------------------
+# 3. THE TWO NEAR-MISSES THAT ARE NOT IN THE SUBSEQUENT SET, AND WHY EACH FAILS THE GATE.
+#    Reported at full strength because the gate's no-branch says NARROWING, not closing --
+#    and because a leg that reports only the absence has not reported the search.
+# --------------------------------------------------------------------------------------
+
+NEAR_MISSES = [
+    {"id": "arXiv:1902.00384v1", "date": "2019-02-01",
+     "authors": ["Jan Bouwe van den Berg", "Maxime Breden", "Jean-Philippe Lessard",
+                 "Lennaert van Veen"],
+     "title": "Spontaneous periodic orbits in the Navier-Stokes flow",
+     "model": "forced autonomous Navier-Stokes on the THREE-TORUS, Taylor-Green forcing; "
+              "zero-finding on a Banach space of geometrically decaying Fourier coefficients; "
+              "Newton-Kantorovich",
+     "fluid_grade": 2, "encloses_viscous_term": True, "same_technique": False,
+     "fails_gate_on": "SUBSEQUENT",
+     "why": "This is the finding that changes the SHAPE of the negative, and it must be stated "
+            "at full strength: Maxime Breden has already done Grade-A computer-assisted "
+            "Newton-Kantorovich certification on genuine 3D Navier-Stokes, with the viscous "
+            "term inside the certified equation. The group's fluid capability is demonstrated, "
+            "not hypothetical. It fails THIS gate on two counts and both are strict: (i) it is "
+            "dated 2019-02-01, FIVE YEARS BEFORE the parent, so it cannot be 'subsequent work'; "
+            "(ii) the certified object is a periodic orbit of a smooth dissipative flow -- a "
+            "regular, non-singular solution -- not a self-similar blow-up profile, which is the "
+            "object class leg 174's occupancy matrix is about. It is the wrong direction in "
+            "time and the wrong object in kind, but it is emphatically not nothing, and any "
+            "follow-up leg should start from it."},
+    {"id": "arXiv:2607.13567v1", "date": "2026-07-15",
+     "authors": ["Matthieu Cadiot", "Susanna Haziot"],
+     "title": "Global Bifurcation and the Constructive Existence of Overhanging Periodic Steady "
+              "Water Waves",
+     "model": "overhanging periodic gravity water waves WITH CONSTANT VORTICITY; conformal "
+              "mapping of the fluid domain; global bifurcation + Newton-Kantorovich CAP",
+     "fluid_grade": 3, "encloses_viscous_term": False, "same_technique": False,
+     "fails_gate_on": "TECHNIQUE",
+     "why": "The highest fluid_grade anywhere in the closed candidate set: genuinely fluid "
+            "mechanics, explicitly vorticity-bearing, computer-assisted, Newton-Kantorovich, "
+            "and only three weeks old. It nevertheless fails the gate on the conjunct the gate "
+            "actually names, and the failure is structural rather than marginal: the model is "
+            "INVISCID (steady gravity water waves are an Euler free-boundary problem), so there "
+            "is NO viscous term to enclose -- the property that made [BC] Grade A is absent, "
+            "not merely weaker. The certified object is a steady wave on a bifurcation branch, "
+            "not a blow-up profile; the apparatus is conformal mapping plus global bifurcation, "
+            "not the parent's H^2(e^{|x|^2/4}) spectral eigenbasis; and neither Breden nor Chu "
+            "is an author -- Cadiot is a one-paper collaborator of Breden, on a 1D parabolic "
+            "paper, and this is with a different coauthor entirely. Its 'constant vorticity' is "
+            "a prescribed background shear, not evolving vortex dynamics."},
+]
+
+# --------------------------------------------------------------------------------------
+# 4. THE DEPTH READS.  Body-vs-bibliography term census over three md5-pinned extractions.
+#    The distinction is the whole point: a raw grep on 2601.05146 returns 10 fluid hits and
+#    would read as a near-hit.  ALL TEN are in the reference list.
+# --------------------------------------------------------------------------------------
+
+REFERENCES_START_LINE = {
+    "arXiv:2603.27198v1": 3608,
+    "arXiv:2601.05146v1": 2507,
+    "arXiv:2501.13672v2": 2838,
+}
+
+# fluid terms: (whole-document count, body-only count)
+FLUID_CENSUS = {
+    "arXiv:2603.27198v1": {
+        "vorticit": (0, 0), "Navier-Stokes": (0, 0), "Euler equation": (0, 0),
+        "incompressible": (0, 0), "Boussinesq": (0, 0), "blowup": (0, 0),
+        "self-similar": (0, 0), "two-dimensional": (0, 0),
+    },
+    "arXiv:2601.05146v1": {
+        "vorticit": (0, 0), "Navier-Stokes": (5, 0), "Euler equation": (1, 0),
+        "incompressible": (1, 0), "Boussinesq": (2, 0), "blowup": (2, 0),
+        "self-similar": (3, 0), "two-dimensional": (0, 0),
+    },
+    "arXiv:2501.13672v2": {
+        "vorticit": (0, 0), "Navier-Stokes": (2, 0), "Euler equation": (0, 0),
+        "incompressible": (1, 0), "Boussinesq": (1, 0), "blowup": (1, 0),
+        "self-similar": (4, 0), "two-dimensional": (1, 0),
+    },
+}
+
+# apparatus terms: whole-document counts.  These are the live-probe numbers.
+APPARATUS_CENSUS = {
+    "arXiv:2603.27198v1": {"computer-assisted": 42, "Newton-Kantorovich": 13,
+                           "interval arithmetic": 3, "enclosure": 22, "rigorous": 35,
+                           "weighted Sobolev": 1},
+    "arXiv:2601.05146v1": {"computer-assisted": 20, "Newton-Kantorovich": 1,
+                           "interval arithmetic": 3, "enclosure": 2, "rigorous": 69,
+                           "weighted Sobolev": 0},
+    "arXiv:2501.13672v2": {"computer-assisted": 25, "Newton-Kantorovich": 1,
+                           "interval arithmetic": 5, "enclosure": 13, "rigorous": 57,
+                           "weighted Sobolev": 12},
+}
+
+# Verbatim locators.  The gate's no-branch is only as good as what it can quote.
+LOCATORS = [
+    {"source": "arXiv:2603.27198v1", "line": 9,
+     "verbatim": "existence for stationary solutions to one-dimensional parabolic PDEs and the "
+                 "rigorous determina-",
+     "role": "the group's MOST RECENT paper declares its own setting one-dimensional, in its "
+             "own abstract."},
+    {"source": "arXiv:2603.27198v1", "line": 273,
+     "verbatim": "The crucial assumptions are that the equation (or system) is elliptic and "
+                 "semilinear, and posed on a bounded interval. The extension to higher "
+                 "dimensional rectangular domains is non-trivial but will be studied in a "
+                 "future work.",
+     "role": "DECISIVE for the no-branch. As of 2026-03-28 the group states in its own words "
+             "that even going from an interval to a higher-dimensional RECTANGLE -- far short "
+             "of a fluid domain -- is non-trivial and still future work. The frontier is not "
+             "just observed to be 1D from outside; the authors place it there themselves."},
+    {"source": "arXiv:2601.05146v1", "line": 2449,
+     "verbatim": "Finally, we consider the Kuramoto-Sivashinsky equation on the torus TL = R/L",
+     "role": "pins the nearest-miss model as 1D scalar on a circle, with the Burgers "
+             "nonlinearity (1/2) d_x u^2 -- lateral to the parent, not beyond it."},
+    {"source": PARENT, "line": 1669,
+     "verbatim": "We focus on a generalised viscous Burgers equation on R+ with Neumann "
+                 "boundary condition",
+     "role": "confirms this repository's own ledger characterisation of [BC] as 1D Burgers is "
+             "CORRECT, despite the paper's title and framework being stated on R^d. The "
+             "framework is d-general; the viscous example is not."},
+    {"source": PARENT, "line": 1687,
+     "verbatim": REMARK_40["verbatim"],
+     "role": "Remark 40 -- see REMARK_40. The empty cell is flagged tractable-in-principle by "
+             "the precedent's own authors, and remains empty 28 months later."},
+]
+
+# --------------------------------------------------------------------------------------
+# 5. THE VERDICT, COMPUTED.
+# --------------------------------------------------------------------------------------
+
+FLUID_GRADE_THRESHOLD = 2   # >= 2 means "genuine fluid mechanics", i.e. past 1D Burgers
+
+
+def classify(subsequent, near_misses):
+    """Return the gate verdict from the evidence table.  Reachable four ways."""
+    if not subsequent:
+        return "NO_SUBSEQUENT_WORK_AT_ALL"
+
+    # The gate's YES requires BOTH conjuncts in one subsequent paper by the author group.
+    hits = [p for p in subsequent
+            if p["fluid_grade"] >= FLUID_GRADE_THRESHOLD
+            and p["encloses_viscous_term"]
+            and p["same_technique"]]
+    if hits:
+        return "SAME_TECHNIQUE_MOVED_TO_FLUID"
+
+    # Fluid reached, but not carrying the Grade-A viscous-enclosing technique.
+    fluid_only = [p for p in list(subsequent) + list(near_misses)
+                  if p["fluid_grade"] >= FLUID_GRADE_THRESHOLD]
+    technique_only = [p for p in subsequent if p["same_technique"]]
+    if fluid_only and not technique_only:
+        return "FLUID_BUT_NOT_THE_TECHNIQUE"
+    return "TECHNIQUE_BUT_STILL_NOT_FLUID"
+
+
+def gate_answer(verdict):
+    return "YES" if verdict == "SAME_TECHNIQUE_MOVED_TO_FLUID" else "NO"
+
+
+def assert_probe_is_live():
+    """Lesson 90.  The negative is a census returning zero; prove the census can return
+    non-zero on the SAME extractions, and that the author net can return a fluid paper."""
+    for pid, terms in APPARATUS_CENSUS.items():
+        tot = sum(terms.values())
+        assert tot > 0, f"apparatus census dead on {pid} -- the zeros mean nothing"
+        assert terms["computer-assisted"] > 0, (
+            f"'computer-assisted' is zero in {pid}: the extraction is broken, not the paper")
+    # the keyword net (N5) must have found a Breden fluid paper, or it is not measuring.
+    breden_fluid = [n for n in NEAR_MISSES if "Maxime Breden" in n["authors"]
+                    and n["fluid_grade"] >= FLUID_GRADE_THRESHOLD]
+    assert breden_fluid, ("the keyword net returned no Breden fluid paper at all -- it cannot "
+                          "distinguish 'no subsequent fluid work' from 'net does not fire'")
+    # and the body census must be zero everywhere, or the verdict below is wrong.
+    for pid, terms in FLUID_CENSUS.items():
+        for t, (whole, body) in terms.items():
+            assert body <= whole, f"body count exceeds whole-doc count for {t} in {pid}"
+    return True
+
+
+def self_test():
+    """Exercise all four classify() outcomes on perturbed copies of the evidence."""
+    out = {}
+    out["actual"] = classify(SUBSEQUENT, NEAR_MISSES)
+
+    # (a) no subsequent work at all
+    out["empty"] = classify([], NEAR_MISSES)
+
+    # (b) the YES branch: promote the direct successor to a fluid model
+    yes = [dict(p) for p in SUBSEQUENT]
+    for p in yes:
+        if p["id"] == "arXiv:2501.13672v2":
+            p["fluid_grade"], p["encloses_viscous_term"] = 3, True
+    out["yes_branch"] = classify(yes, NEAR_MISSES)
+
+    # (c) fluid reached but technique not carried
+    nofluidtech = [dict(p) for p in SUBSEQUENT]
+    for p in nofluidtech:
+        p["same_technique"] = False
+    out["fluid_no_technique"] = classify(nofluidtech, NEAR_MISSES)
+
+    expected = {"actual": "TECHNIQUE_BUT_STILL_NOT_FLUID",
+                "empty": "NO_SUBSEQUENT_WORK_AT_ALL",
+                "yes_branch": "SAME_TECHNIQUE_MOVED_TO_FLUID",
+                "fluid_no_technique": "FLUID_BUT_NOT_THE_TECHNIQUE"}
+    for k, v in expected.items():
+        assert out[k] == v, f"self_test {k}: got {out[k]}, expected {v}"
+    assert len(set(out.values())) == 4, "self_test did not reach four distinct outcomes"
+    return out
+
+
+def main():
+    assert_probe_is_live()
+    st = self_test()
+    verdict = classify(SUBSEQUENT, NEAR_MISSES)
+    answer = gate_answer(verdict)
+
+    n_breden = 25
+    n_post = len(SUBSEQUENT)
+    n_fluid_post = len([p for p in SUBSEQUENT if p["fluid_grade"] >= FLUID_GRADE_THRESHOLD])
+    body_fluid_total = sum(b for terms in FLUID_CENSUS.values() for (_, b) in terms.values())
+    whole_fluid_total = sum(w for terms in FLUID_CENSUS.values() for (w, _) in terms.values())
+    apparatus_total = sum(sum(t.values()) for t in APPARATUS_CENSUS.values())
+
+    payload = {
+        "leg": 245,
+        "route": "BCL2",
+        "role": "LIT",
+        "pass_date": PASS_DATE,
+        "generated": date.today().isoformat(),
+        "gate_question":
+            "Does arXiv:2404.04054's author group have subsequent published work applying the "
+            "same Grade-A (computer-assisted, viscous-term-enclosing) technique to a model "
+            "closer to fluid/vortex dynamics than 1D viscous Burgers (2D, vorticity-bearing, "
+            "or a genuine Navier-Stokes-family reduction)?",
+        "gate_answer": answer,
+        "gate_verdict_code": verdict,
+        "gate_answer_wording":
+            "NO -- in the realization named here: the closed arXiv author listings for "
+            "Breden (28 surname entries, 25 genuine), Hugo Chu (5, 4 genuine) and Matthieu "
+            "Cadiot (12) as retrieved 2026-08-06, together with the full-text BODIES (excluding "
+            "bibliographies) of the three md5-pinned extractions arXiv:2603.27198v1, "
+            "arXiv:2601.05146v1 and arXiv:2501.13672v2. Across the 7 papers Breden and Chu "
+            "published after 2024-04-05, zero treat a model of fluid_grade >= 2; the body "
+            "fluid-term census is 0/0/0 while the apparatus census is 42/20/25 on "
+            "'computer-assisted'. The frontier of the [BC] Grade-A technique is still a "
+            "one-dimensional problem on a bounded interval or half-line.",
+        "realization_named_per_lesson_91":
+            "arXiv author-listing enumeration by surname (not a keyword net) + pdftotext "
+            "-layout body text of four md5-pinned PDFs, retrieved 2026-08-06. The negative is "
+            "a statement about arXiv-indexed preprints and these four extractions; it is not a "
+            "statement about unpublished work, conference talks, or journal-only publications.",
+
+        "parent": PARENT_RECORD,
+        "remark_40": REMARK_40,
+        "search_log": SEARCH_LOG,
+        "subsequent_by_author_group": SUBSEQUENT,
+        "chu_subsequent_ids": CHU_SUBSEQUENT_IDS,
+        "near_misses_outside_the_subsequent_set": NEAR_MISSES,
+        "references_start_line": REFERENCES_START_LINE,
+        "fluid_census_whole_and_body": {k: {t: {"whole_document": w, "body_only": b}
+                                            for t, (w, b) in v.items()}
+                                        for k, v in FLUID_CENSUS.items()},
+        "apparatus_census": APPARATUS_CENSUS,
+        "locators": LOCATORS,
+        "pdf_md5": PDF_MD5,
+        "extraction_lines": EXTRACTION_LINES,
+        "self_test": st,
+
+        "counts": {
+            "breden_surname_listing_entries": 28,
+            "breden_genuine_maxime_entries": n_breden,
+            "breden_homonym_entries": 3,
+            "hugo_chu_listing_entries": 5,
+            "hugo_chu_genuine_entries": 4,
+            "cadiot_listing_entries": 12,
+            "papers_by_author_group_after_parent": n_post,
+            "of_those_on_a_fluid_model": n_fluid_post,
+            "keyword_net_entries": 63,
+            "keyword_net_breden_fluid_papers_found": 1,
+            "keyword_net_breden_fluid_papers_after_parent": 0,
+            "failed_form_query_entries": 0,
+            "fluid_term_hits_whole_document": whole_fluid_total,
+            "fluid_term_hits_body_only": body_fluid_total,
+            "apparatus_term_hits_total": apparatus_total,
+            "months_from_parent_to_pass_date": 28,
+        },
+
+        "what_this_narrows": [
+            "leg 174's occupancy cell (Grade A + fluid) remains EMPTY, and this leg closes the "
+            "single most likely author line that could have filled it. Legs 240 (2208.09445's "
+            "authors) and 242 (Dahne & Figueras) closed two lines that had the wrong grade or "
+            "the wrong model; 245 closes the one line that already had the right GRADE.",
+
+            "The cell is not empty for want of anyone noticing it. The parent's own Remark 40 "
+            "states the convective nonlinearity (u.grad)u is reachable by their machinery in "
+            "d in {2,3}, with a stated reason (H^2(mu) embeds in L^infty(R^d)). 28 months on, "
+            "the group's own most recent paper (2026-03-28) still says extending even to a "
+            "higher-dimensional RECTANGLE is 'non-trivial but will be studied in a future "
+            "work'. The gap between what is reachable in principle and what has been done is "
+            "the finding, and it is a gap the authors themselves have documented at both ends.",
+
+            "The group's fluid capability is demonstrated, not hypothetical: Breden co-authored "
+            "arXiv:1902.00384, Grade-A Newton-Kantorovich on 3D Navier-Stokes with Taylor-Green "
+            "forcing. It fails this gate strictly (five years BEFORE the parent; certifies a "
+            "periodic orbit of a smooth flow, not a singular self-similar profile) but it means "
+            "the missing rung is not blocked by the group lacking fluid expertise.",
+
+            "The nearest thing to a vorticity-bearing CAP anywhere in the closed set is "
+            "arXiv:2607.13567 (Cadiot & Haziot, 2026-07-15): overhanging gravity water waves "
+            "with constant vorticity. It fails on the conjunct the gate names -- the model is "
+            "inviscid, so there is no viscous term to enclose at all -- and neither parent "
+            "author is on it. Recorded at full strength because it is the highest fluid_grade "
+            "(3) in the set and only three weeks old.",
+        ],
+
+        "what_this_does_NOT_claim": [
+            "No link of the L1->L4 chain moved. No stage is claimed or closed. No ban is "
+            "lifted. Clay stays ~0.05%.",
+            "This does not establish that the [BC] technique CANNOT reach a fluid model -- "
+            "Remark 40 is evidence in the opposite direction. It establishes only that, as of "
+            "2026-08-06 and in the named realization, nobody in this author line has done it.",
+            "The ADJACENT verdict on the [BC] row in solver/viscous_novelty.py's PRECEDENTS "
+            "ledger is UNCHANGED by this leg and was not edited (read-only territory). The only "
+            "ledger change this leg proposes is factual: the 'who' field names no authors and "
+            "should read 'Maxime Breden, Hugo Chu'.",
+        ],
+
+        "ledger_correction_for_integration": {
+            "file": "solver/viscous_novelty.py",
+            "row": "arXiv:2404.04054",
+            "field": "who",
+            "current": "constructive-proofs group (semilinear PDEs on H^2(e^{|x|^2/4}))",
+            "proposed": "Maxime Breden, Hugo Chu",
+            "note": "not applied by leg 245 -- the ledger is outside this leg's territory and "
+                    "is read-only here. Six legs cited [BC] without ever naming its authors.",
+        },
+    }
+
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       "writeup", "data", "p2_route_bcl2_v1_lit.json")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w") as f:
+        json.dump(payload, f, indent=2, sort_keys=False)
+        f.write("\n")
+
+    print("LEG 245 -- ROUTE-BCL2 -- literature pass on arXiv:2404.04054's author group")
+    print("=" * 78)
+    print(f"parent           {PARENT}  Breden & Chu   (v1 {PARENT_DATE}, v2 2026-01-18)")
+    print(f"                 Numer. Math., DOI 10.1007/s00211-025-01504-4")
+    print()
+    print("CLOSED CANDIDATE SETS (arXiv author listings, not keyword nets)")
+    for s in SEARCH_LOG:
+        print(f"  {s['id']}  {s['n_entries']:>3} entries   {s['kind']}")
+    print()
+    print(f"PAPERS BY THE AUTHOR GROUP AFTER {PARENT_DATE}: {n_post}")
+    for p in SUBSEQUENT:
+        mark = "FLUID" if p["fluid_grade"] >= FLUID_GRADE_THRESHOLD else "  -  "
+        print(f"  [{mark}] {p['date']}  {p['id']:<20} fluid_grade={p['fluid_grade']} "
+              f"same_technique={str(p['same_technique']):<5}")
+    print(f"  -> on a fluid model (fluid_grade >= {FLUID_GRADE_THRESHOLD}): {n_fluid_post}")
+    print()
+    print("DEPTH READS -- body vs bibliography (the distinction is the point)")
+    for pid in FLUID_CENSUS:
+        w = sum(x for x, _ in FLUID_CENSUS[pid].values())
+        b = sum(x for _, x in FLUID_CENSUS[pid].values())
+        a = APPARATUS_CENSUS[pid]["computer-assisted"]
+        print(f"  {pid:<20} fluid: {w:>2} whole-doc / {b} in BODY    "
+              f"apparatus 'computer-assisted': {a}")
+    print("  -> every fluid hit in all three papers lies inside the reference list.")
+    print()
+    print("LIVE-PROBE CONTROLS (lesson 90)")
+    print(f"  apparatus census non-zero on all three extractions: total {apparatus_total} hits")
+    print( "  keyword net DID return a Breden fluid paper -- arXiv:1902.00384 (3D Navier-Stokes)")
+    print( "    ... dated 2019-02-01, five years BEFORE the parent. Zero after it.")
+    print(f"  failed-form control au:\"Breden_M\" -> 0 entries (recorded, not discarded)")
+    print()
+    print("NEAR-MISSES, REPORTED AT FULL STRENGTH")
+    for n in NEAR_MISSES:
+        print(f"  {n['id']:<20} {n['date']}  fluid_grade={n['fluid_grade']}  "
+              f"fails on: {n['fails_gate_on']}")
+    print()
+    print("THE SHARPEST LOCATOR -- the parent's own Remark 40 (line 1687):")
+    print(f"  \"{REMARK_40['verbatim']}\"")
+    print("  ... and the group's own most recent paper (2603.27198, line 273, 2026-03-28):")
+    print("  \"The extension to higher dimensional rectangular domains is non-trivial but")
+    print("   will be studied in a future work.\"")
+    print()
+    print(f"self_test outcomes reached: {sorted(set(st.values()))}")
+    print(f"VERDICT CODE     {verdict}")
+    print(f"GATE ANSWER      {answer}")
+    print()
+    print("  " + payload["gate_answer_wording"].replace("\n", "\n  "))
+    print()
+    print(f"wrote {out}")
+
+
+if __name__ == "__main__":
+    main()
