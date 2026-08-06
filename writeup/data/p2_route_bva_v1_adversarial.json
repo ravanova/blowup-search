@@ -1,0 +1,433 @@
+{
+  "leg": 99,
+  "route": "BVA",
+  "module_under_test": "solver/boussinesq_velocity.py",
+  "prior_gate": "leg 73 (Route-BV): Lamb corner-image known-answer, 1.76e-4 relative at observed order 2.00 -- correctness, not robustness",
+  "verdict_semantics": {
+    "RAISED": "exception propagates -- degeneracy flagged -- robust",
+    "NONFINITE": "NaN/Inf reaches the output -- degeneracy visible -- robust",
+    "SILENT_WRONG": "finite, unwarned, and wrong beyond the module's own tolerance",
+    "SILENT_EMPTY": "accepted without complaint, output degenerate in shape",
+    "FINITE": "finite and within tolerance",
+    "BASELINE": "the well-posed control"
+  },
+  "leg73_tolerances": {
+    "field": 0.005,
+    "origin_read": 0.001
+  },
+  "origin_singularity": {
+    "description": "degeneracies at or across the r=0 origin singularity, field level",
+    "cases": [
+      {
+        "case": "r_min_zero",
+        "degeneracy": "r_min = 0.0 -> log(0) = -inf at the origin node",
+        "exception": null,
+        "n_warnings": 3,
+        "warnings": [
+          "divide by zero encountered in log",
+          "invalid value encountered in add",
+          "invalid value encountered in multiply"
+        ],
+        "phi": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "u": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "r_min_negative",
+        "degeneracy": "r_min = -1.0 -> log of a negative radius",
+        "exception": null,
+        "n_warnings": 1,
+        "warnings": [
+          "invalid value encountered in log"
+        ],
+        "phi": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "u": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "r_min_equals_r_max",
+        "degeneracy": "r_min == r_max -> drho = 0, collapsed radial extent",
+        "exception": null,
+        "n_warnings": 33,
+        "warnings": [
+          "divide by zero encountered in scalar divide",
+          "invalid value encountered in scalar multiply",
+          "invalid value encountered in scalar subtract"
+        ],
+        "phi": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "u": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "n_r_one",
+        "degeneracy": "n_r = 1 -> no radial spacing exists",
+        "exception": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+        "n_warnings": 0,
+        "warnings": [],
+        "verdict": "RAISED"
+      },
+      {
+        "case": "omega_one_nan",
+        "degeneracy": "a single NaN in the vorticity field",
+        "exception": null,
+        "n_warnings": 0,
+        "warnings": [],
+        "phi": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "u": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "contamination_fraction_phi": 1.0,
+        "verdict": "NONFINITE"
+      },
+      {
+        "case": "omega_one_inf",
+        "degeneracy": "a single +Inf in the vorticity field",
+        "exception": null,
+        "n_warnings": 4,
+        "warnings": [
+          "invalid value encountered in matmul",
+          "invalid value encountered in subtract"
+        ],
+        "phi": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "u": {
+          "size": 1024,
+          "n_nonfinite": 1024,
+          "all_finite": false,
+          "max_abs_finite": null
+        },
+        "contamination_fraction_phi": 1.0,
+        "verdict": "NONFINITE"
+      }
+    ],
+    "verdicts": {
+      "NONFINITE": 5,
+      "RAISED": 1
+    }
+  },
+  "malformed_boundary": {
+    "description": "malformed radial interval, empty angular basis, malformed input shapes",
+    "reversed_interval_analysis": {
+      "rel_linf_global_ascending": 7.14413934868073e-05,
+      "rel_linf_global_reversed": 0.00014285621866717257,
+      "global_degradation_factor": 1.999628110467261,
+      "rel_linf_near_origin_ascending": 0.00021517724731322788,
+      "rel_linf_near_origin_reversed": 0.033029959655791745,
+      "near_origin_degradation_factor": 153.50117202545536,
+      "global_under_reports_local_by": 76.7648600366926,
+      "leg73_field_tol": 0.005,
+      "reversed_global_inside_leg73_tol": true,
+      "reversed_near_origin_inside_leg73_tol": false,
+      "reversed_near_origin_over_leg73_tol": 6.605991931158349
+    },
+    "cases": [
+      {
+        "case": "radial_interval_ascending",
+        "r_min": 0.001,
+        "r_max": 40.0,
+        "exception": null,
+        "n_warnings": 0,
+        "drho": 0.026557981787208362,
+        "r_at_index_0": 0.0010000000000000002,
+        "r_at_index_minus_1": 40.0,
+        "rel_linf_global": 7.14413934868073e-05,
+        "n_nodes_below_r_0p05": 148,
+        "rel_linf_near_origin": 0.00021517724731322788,
+        "u_x_at_origin": -2.002852174440413,
+        "all_finite": true,
+        "verdict": "BASELINE"
+      },
+      {
+        "case": "radial_interval_reversed",
+        "r_min": 40.0,
+        "r_max": 0.001,
+        "exception": null,
+        "n_warnings": 0,
+        "drho": -0.026557981787208362,
+        "r_at_index_0": 40.0,
+        "r_at_index_minus_1": 0.0010000000000000002,
+        "rel_linf_global": 0.00014285621866717257,
+        "n_nodes_below_r_0p05": 148,
+        "rel_linf_near_origin": 0.033029959655791745,
+        "u_x_at_origin": -0.0,
+        "all_finite": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "case": "n_beta_zero",
+        "n_beta_requested": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "n_modes_built": 0,
+        "phi_shape": [
+          32,
+          0
+        ],
+        "verdict": "SILENT_EMPTY"
+      },
+      {
+        "case": "n_beta_negative",
+        "n_beta_requested": -3,
+        "exception": null,
+        "n_warnings": 0,
+        "n_modes_built": 0,
+        "phi_shape": [
+          32,
+          0
+        ],
+        "verdict": "SILENT_EMPTY"
+      },
+      {
+        "case": "omega_square_wrong_axis",
+        "exception": "ValueError: operands could not be broadcast together with shapes (64,) (16,) ",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "omega_single_row",
+        "exception": "ValueError: could not broadcast input array from shape (64,) into shape (1,)",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      },
+      {
+        "case": "radial_bc_case_typo",
+        "exception": "UnboundLocalError: cannot access local variable 'phi_exact_n' where it is not associated with a value",
+        "n_warnings": 0,
+        "verdict": "RAISED"
+      }
+    ],
+    "verdicts": {
+      "BASELINE": 1,
+      "RAISED": 3,
+      "SILENT_EMPTY": 2,
+      "SILENT_WRONG": 1
+    }
+  },
+  "origin_read": {
+    "description": "u_x_at_origin's least-squares origin extrapolation under an empty or rank-deficient fit window",
+    "fit_window_default": 0.1,
+    "truth_u_x_at_origin": -2.0,
+    "sweep": [
+      {
+        "r_min": 0.001,
+        "nodes_in_fit_window": 84,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.0086109856451166,
+        "abs_error": 0.008610985645116642,
+        "rel_error": 0.004305492822558321,
+        "over_leg73_origin_tol": 8.610985645116642,
+        "design_matrix_rank_deficient": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.01,
+        "nodes_in_fit_window": 53,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.008189292358051,
+        "abs_error": 0.008189292358050881,
+        "rel_error": 0.004094646179025441,
+        "over_leg73_origin_tol": 8.189292358050881,
+        "design_matrix_rank_deficient": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.05,
+        "nodes_in_fit_window": 18,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -2.0040060130568214,
+        "abs_error": 0.004006013056821356,
+        "rel_error": 0.002003006528410678,
+        "over_leg73_origin_tol": 4.006013056821356,
+        "design_matrix_rank_deficient": false,
+        "verdict": "FINITE"
+      },
+      {
+        "r_min": 0.09,
+        "nodes_in_fit_window": 1,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -1.7838027118597815,
+        "abs_error": 0.21619728814021855,
+        "rel_error": 0.10809864407010927,
+        "over_leg73_origin_tol": 216.19728814021855,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "r_min": 0.099,
+        "nodes_in_fit_window": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -0.0,
+        "abs_error": 2.0,
+        "rel_error": 1.0,
+        "over_leg73_origin_tol": 2000.0,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "r_min": 0.15,
+        "nodes_in_fit_window": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -0.0,
+        "abs_error": 2.0,
+        "rel_error": 1.0,
+        "over_leg73_origin_tol": 2000.0,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "r_min": 0.5,
+        "nodes_in_fit_window": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -0.0,
+        "abs_error": 2.0,
+        "rel_error": 1.0,
+        "over_leg73_origin_tol": 2000.0,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "r_min": 1.0,
+        "nodes_in_fit_window": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -0.0,
+        "abs_error": 2.0,
+        "rel_error": 1.0,
+        "over_leg73_origin_tol": 2000.0,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      },
+      {
+        "r_min": 10.0,
+        "nodes_in_fit_window": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "u_x_at_origin": -0.0,
+        "abs_error": 2.0,
+        "rel_error": 1.0,
+        "over_leg73_origin_tol": 2000.0,
+        "design_matrix_rank_deficient": true,
+        "verdict": "SILENT_WRONG"
+      }
+    ],
+    "well_posed_reference": {
+      "r_min": 0.001,
+      "nodes_in_fit_window": 84,
+      "abs_error": 0.008610985645116642
+    },
+    "empty_window": {
+      "n_cases": 5,
+      "returned_values": [
+        -0.0
+      ],
+      "abs_error": 2.0,
+      "rel_error": 1.0,
+      "degradation_vs_well_posed": 232.2614486222278,
+      "over_leg73_origin_tol": 2000.0,
+      "warnings_emitted": 0,
+      "exceptions_raised": 0
+    },
+    "single_node_window": {
+      "n_cases": 1,
+      "abs_error": 0.21619728814021855,
+      "degradation_vs_well_posed": 25.107147665822172,
+      "warnings_emitted": 0
+    },
+    "cliff": {
+      "r_min_before": 0.09,
+      "nodes_before": 1,
+      "abs_error_before": 0.21619728814021855,
+      "r_min_after": 0.099,
+      "nodes_after": 0,
+      "abs_error_after": 2.0,
+      "r_min_relative_change": 0.10000000000000009,
+      "error_jump_factor": 9.250809837646367
+    },
+    "empty_lstsq_mechanism": {
+      "design_matrix_shape": [
+        0,
+        2
+      ],
+      "returned_coefficients": [
+        0.0,
+        0.0
+      ],
+      "returned_rank": 0,
+      "raised": false,
+      "warned": false
+    },
+    "verdicts": {
+      "FINITE": 3,
+      "SILENT_WRONG": 6
+    }
+  },
+  "verdict_totals": {
+    "NONFINITE": 5,
+    "RAISED": 4,
+    "BASELINE": 1,
+    "SILENT_EMPTY": 2,
+    "SILENT_WRONG": 7,
+    "FINITE": 3
+  },
+  "gate_answer": {
+    "gate": "Under an adversarial battery of degenerate polar-grid inputs (r=0 singularity, malformed/self-intersecting boundary), does solver/boussinesq_velocity.py ever silently return a finite, plausible-looking result instead of propagating or flagging the degeneracy?",
+    "answer": "YES",
+    "silent_wrong_cases": 7,
+    "silent_empty_cases": 2,
+    "raised_cases": 4,
+    "nonfinite_cases": 5,
+    "headline": "u_x_at_origin returns -0.0 (truth -2.0, abs error 2.0000, rel error 100.0%) whenever the grid's r_min exceeds the fit window r_window=0.1: the mask is empty, np.linalg.lstsq on a (0,2) design matrix returns [0.,0.] at rank 0 without raising or warning, and the function returns -2*0.0.",
+    "patched_by_this_leg": false,
+    "escalation": "Gate yes-branch: reported, not patched. solver/boussinesq_velocity.py is unmodified by leg 99."
+  },
+  "wall_seconds": 0.8398888111114502
+}
