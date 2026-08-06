@@ -1,0 +1,1482 @@
+{
+  "leg": 140,
+  "route": "ROUTE-NFA",
+  "target": "solver/nk_fourier.py",
+  "target_edited": false,
+  "date": "2026-08-06",
+  "realization": "the ell^1 Fourier (circle) realization of the a=0 gCLM two-scale traveling-wave operator; float64 throughout",
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/nk_fourier.py ever silently return a wrong value, or accept a fabricated certificate-feeding quantity unflagged?",
+  "A_radii_polynomial": {
+    "n_cases": 26,
+    "n_forbidden": 22,
+    "n_forbidden_that_close": 11,
+    "n_closes_with_negative_radius": 4,
+    "sharpest_negative_radius": -706.9318028416924,
+    "budget_inflation_ladder": [
+      {
+        "Z0": 0.0,
+        "Z1": 0.0,
+        "Y0_max": 0.125,
+        "inflation_vs_Z0_Z1_zero": 1.0
+      },
+      {
+        "Z0": -1.0,
+        "Z1": 0.0,
+        "Y0_max": 0.5,
+        "inflation_vs_Z0_Z1_zero": 4.0
+      },
+      {
+        "Z0": -1.0,
+        "Z1": -1.0,
+        "Y0_max": 1.125,
+        "inflation_vs_Z0_Z1_zero": 9.0
+      },
+      {
+        "Z0": -4.0,
+        "Z1": -4.0,
+        "Y0_max": 10.125,
+        "inflation_vs_Z0_Z1_zero": 81.0
+      },
+      {
+        "Z0": -9.0,
+        "Z1": -9.0,
+        "Y0_max": 45.125,
+        "inflation_vs_Z0_Z1_zero": 361.0
+      }
+    ],
+    "cases": [
+      {
+        "label": "admissible_baseline",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": false,
+        "why_forbidden": "",
+        "closes": true,
+        "r_min": 0.0014344504229021893,
+        "r_max": 0.3485655495770978,
+        "one_minus_Z": 0.7,
+        "discriminant": 0.48199999999999993,
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "admissible_tight",
+        "args": {
+          "Y0": 1e-08,
+          "Z0": 1e-12,
+          "Z1": 1e-09,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": false,
+        "why_forbidden": "",
+        "closes": true,
+        "r_min": 1.0000000216781046e-08,
+        "r_max": 0.4999999894994998,
+        "one_minus_Z": 0.999999998999,
+        "discriminant": 0.9999999179980001,
+        "Y0_max": 0.12499999974975001,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "admissible_refuses_1mZ_negative",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.6,
+          "Z1": 0.7,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": false,
+        "why_forbidden": "",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": -0.29999999999999993,
+        "discriminant": 0.08199999999999996,
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "admissible_refuses_disc_negative",
+        "args": {
+          "Y0": 0.5,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": false,
+        "why_forbidden": "",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": -3.5100000000000002,
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Y0_negative_small",
+        "args": {
+          "Y0": -0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Y0 bounds ||A F(x)|| >= 0",
+        "closes": true,
+        "r_min": -0.0014227876437735154,
+        "r_max": 0.3514227876437735,
+        "one_minus_Z": 0.7,
+        "discriminant": 0.49799999999999994,
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Y0_negative_unit",
+        "args": {
+          "Y0": -1.0,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Y0 bounds ||A F(x)|| >= 0",
+        "closes": true,
+        "r_min": -0.5534401142166734,
+        "r_max": 0.9034401142166733,
+        "one_minus_Z": 0.7,
+        "discriminant": 8.49,
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Y0_negative_huge",
+        "args": {
+          "Y0": -1000000.0,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Y0 bounds ||A F(x)|| >= 0",
+        "closes": true,
+        "r_min": -706.9318028416924,
+        "r_max": 707.2818028416923,
+        "one_minus_Z": 0.7,
+        "discriminant": 8000000.49,
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z0_negative",
+        "args": {
+          "Y0": 0.001,
+          "Z0": -1.0,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z0 bounds ||I - A A_dag|| >= 0",
+        "closes": true,
+        "r_min": 0.0005558989151153715,
+        "r_max": 0.8994441010848846,
+        "one_minus_Z": 1.8,
+        "discriminant": 3.232,
+        "Y0_max": 0.405,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z0_negative_large",
+        "args": {
+          "Y0": 0.001,
+          "Z0": -9.0,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z0 bounds ||I - A A_dag|| >= 0",
+        "closes": true,
+        "r_min": 0.00010204294137983183,
+        "r_max": 4.89989795705862,
+        "one_minus_Z": 9.8,
+        "discriminant": 96.03200000000002,
+        "Y0_max": 12.005000000000003,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z1_negative",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": -1.0,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z1 bounds ||A(DF - A_dag)|| >= 0",
+        "closes": true,
+        "r_min": 0.0005266077007057279,
+        "r_max": 0.9494733922992942,
+        "one_minus_Z": 1.9,
+        "discriminant": 3.602,
+        "Y0_max": 0.45125,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z1_negative_large",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": -9.0,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z1 bounds ||A(DF - A_dag)|| >= 0",
+        "closes": true,
+        "r_min": 0.00010101216231461763,
+        "r_max": 4.949898987837686,
+        "one_minus_Z": 9.9,
+        "discriminant": 98.00200000000001,
+        "Y0_max": 12.25125,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z0_and_Z1_negative",
+        "args": {
+          "Y0": 0.001,
+          "Z0": -1.0,
+          "Z1": -1.0,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "both bound norms >= 0",
+        "closes": true,
+        "r_min": 0.0003334074403474885,
+        "r_max": 1.4996665925596524,
+        "one_minus_Z": 3.0,
+        "discriminant": 8.992,
+        "Y0_max": 1.125,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Y0_Z0_Z1_all_negative",
+        "args": {
+          "Y0": -1.0,
+          "Z0": -1.0,
+          "Z1": -1.0,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "all three bound norms >= 0",
+        "closes": true,
+        "r_min": -0.28077640640441515,
+        "r_max": 1.7807764064044151,
+        "one_minus_Z": 3.0,
+        "discriminant": 17.0,
+        "Y0_max": 1.125,
+        "negative_certified_radius": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "Z2_negative",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": -2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z2: (0,inf) -> (0,inf)",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": 0.49799999999999994,
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z2_zero",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 0.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z2 strictly positive in the theorem",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": 0.48999999999999994,
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Y0_nan",
+        "args": {
+          "Y0": "nan",
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": "nan",
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z0_nan",
+        "args": {
+          "Y0": 0.001,
+          "Z0": "nan",
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": "nan",
+        "discriminant": "nan",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z1_nan",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": "nan",
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": "nan",
+        "discriminant": "nan",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z2_nan",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": "nan"
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": "nan",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Y0_inf",
+        "args": {
+          "Y0": "inf",
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": "-inf",
+        "Y0_max": 0.06124999999999999,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z0_inf",
+        "args": {
+          "Y0": 0.001,
+          "Z0": "inf",
+          "Z1": 0.2,
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": "-inf",
+        "discriminant": "inf",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z1_inf",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": "inf",
+          "Z2": 2.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": "-inf",
+        "discriminant": "inf",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z2_inf",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": "inf"
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "not finite",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": "-inf",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Y0_neg_Z2_inf",
+        "args": {
+          "Y0": -1.0,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": "inf"
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Y0 < 0 and Z2 not finite",
+        "closes": true,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 0.7,
+        "discriminant": "inf",
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "all_zero",
+        "args": {
+          "Y0": 0.0,
+          "Z0": 0.0,
+          "Z1": 0.0,
+          "Z2": 0.0
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "Z2 = 0 not allowed",
+        "closes": false,
+        "r_min": "nan",
+        "r_max": "nan",
+        "one_minus_Z": 1.0,
+        "discriminant": 1.0,
+        "Y0_max": 0.0,
+        "negative_certified_radius": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "Z2_denormal",
+        "args": {
+          "Y0": 0.001,
+          "Z0": 0.1,
+          "Z1": 0.2,
+          "Z2": 5e-324
+        },
+        "forbidden_by_theorem": true,
+        "why_forbidden": "admissible in sign, extreme in scale",
+        "closes": true,
+        "r_min": 0.0,
+        "r_max": "inf",
+        "one_minus_Z": 0.7,
+        "discriminant": 0.48999999999999994,
+        "Y0_max": "inf",
+        "negative_certified_radius": false,
+        "tag": "GAP-PIN"
+      }
+    ]
+  },
+  "B_weighted_ell1_op_norm": {
+    "n_cases": 12,
+    "n_negative_returns": 2,
+    "n_nonfinite_returns": 3,
+    "n_raised": 2,
+    "in_module_witnesses": [
+      {
+        "matrix": "gauged_jacobian_J",
+        "honest_positive_weight": 7.0,
+        "negative_weight": -1.251,
+        "unweighted_ell1_op_norm": 7.0,
+        "sign_flip": true
+      },
+      {
+        "matrix": "approximate_inverse_A",
+        "honest_positive_weight": 7.818233715642341,
+        "negative_weight": -1.000580943700644,
+        "unweighted_ell1_op_norm": 7.818233715642341,
+        "sign_flip": true
+      }
+    ],
+    "cases": [
+      {
+        "label": "w_dom_positive",
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "returned": 6.75,
+        "reference_with_abs_weight": 6.75,
+        "ratio_returned_over_reference": 1.0,
+        "returned_is_negative": false,
+        "returned_is_nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w_dom_graded",
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "returned": 4.25,
+        "reference_with_abs_weight": 4.25,
+        "ratio_returned_over_reference": 1.0,
+        "returned_is_negative": false,
+        "returned_is_nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w_dom_all_negative",
+        "forbidden": true,
+        "why_forbidden": "ell^1(w) needs w > 0",
+        "outcome": "value",
+        "returned": -4.0,
+        "reference_with_abs_weight": 6.75,
+        "ratio_returned_over_reference": -0.5925925925925926,
+        "returned_is_negative": true,
+        "returned_is_nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_dom_mixed_sign",
+        "forbidden": true,
+        "why_forbidden": "ell^1(w) needs w > 0",
+        "outcome": "value",
+        "returned": 4.25,
+        "reference_with_abs_weight": 6.75,
+        "ratio_returned_over_reference": 0.6296296296296297,
+        "returned_is_negative": false,
+        "returned_is_nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_dom_one_zero",
+        "forbidden": true,
+        "why_forbidden": "w = 0 is not a weight",
+        "outcome": "value",
+        "returned": "inf",
+        "reference_with_abs_weight": "inf",
+        "ratio_returned_over_reference": "nan",
+        "returned_is_negative": false,
+        "returned_is_nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_dom_all_zero",
+        "forbidden": true,
+        "why_forbidden": "w = 0 is not a weight",
+        "outcome": "value",
+        "returned": "inf",
+        "reference_with_abs_weight": "inf",
+        "ratio_returned_over_reference": "nan",
+        "returned_is_negative": false,
+        "returned_is_nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_dom_nan",
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "returned": "nan",
+        "reference_with_abs_weight": "nan",
+        "ratio_returned_over_reference": "nan",
+        "returned_is_negative": false,
+        "returned_is_nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_dom_inf",
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "returned": 0.0,
+        "reference_with_abs_weight": null,
+        "returned_is_negative": false,
+        "returned_is_nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_cod_all_negative",
+        "forbidden": true,
+        "why_forbidden": "ell^1(w) needs w > 0",
+        "outcome": "value",
+        "returned": -4.0,
+        "reference_with_abs_weight": 6.75,
+        "ratio_returned_over_reference": -0.5925925925925926,
+        "returned_is_negative": true,
+        "returned_is_nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_cod_zero",
+        "forbidden": true,
+        "why_forbidden": "w = 0 is not a weight",
+        "outcome": "value",
+        "returned": 0.0,
+        "reference_with_abs_weight": null,
+        "returned_is_negative": false,
+        "returned_is_nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w_cod_wrong_length",
+        "forbidden": true,
+        "why_forbidden": "shape mismatch",
+        "outcome": "raised",
+        "raised": "ValueError: operands could not be broadcast together with shapes (3,3) (4,1) ",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w_dom_wrong_length",
+        "forbidden": true,
+        "why_forbidden": "shape mismatch",
+        "outcome": "raised",
+        "raised": "ValueError: operands could not be broadcast together with shapes (3,) (4,) ",
+        "tag": "HOLDS"
+      }
+    ]
+  },
+  "C_ell1_op_norm_shape": {
+    "worst_case_ladder": [
+      {
+        "n": 2,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 2.0,
+        "under_report_factor": 2.0
+      },
+      {
+        "n": 4,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 4.0,
+        "under_report_factor": 4.0
+      },
+      {
+        "n": 16,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 16.0,
+        "under_report_factor": 16.0
+      },
+      {
+        "n": 64,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 64.0,
+        "under_report_factor": 64.0
+      },
+      {
+        "n": 256,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 256.0,
+        "under_report_factor": 256.0
+      },
+      {
+        "n": 1024,
+        "ell1_op_norm": 1.0,
+        "true_ell1_norm": 1024.0,
+        "under_report_factor": 1024.0
+      }
+    ],
+    "on_the_live_Y0_vector": [
+      {
+        "N": 8,
+        "Y0_correct_ell1": 0.001001550240054048,
+        "Y0_via_ell1_op_norm": 0.0009997788169944452,
+        "under_report_factor": 1.0017718149549597
+      },
+      {
+        "N": 16,
+        "Y0_correct_ell1": 0.0010053161677366705,
+        "Y0_via_ell1_op_norm": 0.0009993952072526744,
+        "under_report_factor": 1.0059245436049997
+      },
+      {
+        "N": 32,
+        "Y0_correct_ell1": 0.0010062329370219359,
+        "Y0_via_ell1_op_norm": 0.0009993498026600206,
+        "under_report_factor": 1.0068876126693518
+      },
+      {
+        "N": 64,
+        "Y0_correct_ell1": 0.0010064535441366644,
+        "Y0_via_ell1_op_norm": 0.0009993444538565536,
+        "under_report_factor": 1.0071137536738972
+      },
+      {
+        "N": 128,
+        "Y0_correct_ell1": 0.001006504964511862,
+        "Y0_via_ell1_op_norm": 0.000999343845421817,
+        "under_report_factor": 1.007165820976285
+      },
+      {
+        "N": 256,
+        "Y0_correct_ell1": 0.0010065162386178128,
+        "Y0_via_ell1_op_norm": 0.0009993437812996402,
+        "under_report_factor": 1.0071771671094454
+      }
+    ],
+    "controls": {
+      "matrix_matches_max_abs_column_sum": 0.0,
+      "empty_returns_zero": 0.0,
+      "nan_entry_propagates": "nan"
+    },
+    "max_under_report_factor": 1024.0,
+    "tag": "GAP-PIN"
+  },
+  "D_tail_Z1_column": {
+    "n_cases": 13,
+    "n_guarded": 6,
+    "n_forbidden_answered_silently": 4,
+    "sandwich_ladder": [
+      {
+        "k": 3,
+        "transport": 0.875,
+        "exact": 1.6666666666666667,
+        "sandwiches_one": true
+      },
+      {
+        "k": 4,
+        "transport": 0.8666666666666667,
+        "exact": 1.25,
+        "sandwiches_one": true
+      },
+      {
+        "k": 8,
+        "transport": 0.9047619047619047,
+        "exact": 1.0416666666666665,
+        "sandwiches_one": true
+      },
+      {
+        "k": 16,
+        "transport": 0.9450980392156862,
+        "exact": 1.0089285714285714,
+        "sandwiches_one": true
+      },
+      {
+        "k": 64,
+        "transport": 0.9848595848595849,
+        "exact": 1.0005040322580645,
+        "sandwiches_one": true
+      },
+      {
+        "k": 256,
+        "transport": 0.9961242084382391,
+        "exact": 1.0000307578740157,
+        "sandwiches_one": true
+      },
+      {
+        "k": 1024,
+        "transport": 0.9990253439191283,
+        "exact": 1.0000019110812133,
+        "sandwiches_one": true
+      },
+      {
+        "k": 1000000,
+        "transport": 0.999999000002,
+        "exact": 1.000000000002,
+        "sandwiches_one": true
+      }
+    ],
+    "cases": [
+      {
+        "label": "k=5_transport",
+        "kwargs": {
+          "k": 5.0
+        },
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "returned": 0.875,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=5_exact",
+        "kwargs": {
+          "k": 5.0,
+          "diag": "exact"
+        },
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "returned": 1.1333333333333333,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=1e9_transport",
+        "kwargs": {
+          "k": 1000000000.0
+        },
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "returned": 0.999999999,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=1_below_domain",
+        "kwargs": {
+          "k": 1.0
+        },
+        "forbidden": true,
+        "why_forbidden": "documented k >= 2",
+        "outcome": "raised",
+        "raised": "ValueError: tail column analysis applies to k >= 2",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=0_below_domain",
+        "kwargs": {
+          "k": 0.0
+        },
+        "forbidden": true,
+        "why_forbidden": "documented k >= 2",
+        "outcome": "raised",
+        "raised": "ValueError: tail column analysis applies to k >= 2",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=-5_negative",
+        "kwargs": {
+          "k": -5.0
+        },
+        "forbidden": true,
+        "why_forbidden": "documented k >= 2",
+        "outcome": "raised",
+        "raised": "ValueError: tail column analysis applies to k >= 2",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k=2_exact_vanishing_denominator",
+        "kwargs": {
+          "k": 2.0,
+          "diag": "exact"
+        },
+        "forbidden": true,
+        "why_forbidden": "exact model needs k > 1/(2c) + 1",
+        "outcome": "raised",
+        "raised": "ValueError: exact-diagonal tail model needs k > 2",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "unknown_diag_model",
+        "kwargs": {
+          "k": 5.0,
+          "diag": "nope"
+        },
+        "forbidden": true,
+        "why_forbidden": "unknown model",
+        "outcome": "raised",
+        "raised": "ValueError: unknown diag model 'nope'",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "c=0_zero_speed",
+        "kwargs": {
+          "k": 5.0,
+          "c": 0.0
+        },
+        "forbidden": true,
+        "why_forbidden": "c = 0 kills the transport diagonal",
+        "outcome": "raised",
+        "raised": "ZeroDivisionError: float division by zero",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "c=-1_negative_speed",
+        "kwargs": {
+          "k": 5.0,
+          "c": -1.0
+        },
+        "forbidden": true,
+        "why_forbidden": "speed sign not in the model",
+        "outcome": "value",
+        "returned": 1.125,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "c=nan",
+        "kwargs": {
+          "k": 5.0,
+          "c": "nan"
+        },
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "returned": "nan",
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "c=inf",
+        "kwargs": {
+          "k": 5.0,
+          "c": "inf"
+        },
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "returned": "nan",
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "c=1e-12_near_zero",
+        "kwargs": {
+          "k": 5.0,
+          "c": 1e-12
+        },
+        "forbidden": true,
+        "why_forbidden": "denominator -> 0",
+        "outcome": "value",
+        "returned": 83333333333.54166,
+        "tag": "GAP-PIN"
+      }
+    ]
+  },
+  "E_tail_weight_obstruction": {
+    "n_cases": 12,
+    "n_guarded": 2,
+    "n_forbidden_answered_silently": 6,
+    "affine_marginal_value": 1.0,
+    "homogeneity_degree_zero": {
+      "w=+k": 1.0,
+      "w=-k": 1.0,
+      "identical": true,
+      "mechanism": "z_w is a ratio of linear functionals of w, hence homogeneous of degree 0: w and -w CANNOT differ. Reported as a structural blind spot, not a coincidence."
+    },
+    "cases": [
+      {
+        "label": "w=k_affine_marginal",
+        "k_lo": 2,
+        "k_hi": 200,
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "sup_z_w": 1.0,
+        "nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w=k(1+k)_affine_u",
+        "k_lo": 2,
+        "k_hi": 200,
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "sup_z_w": 1.0,
+        "nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w=exp_decay",
+        "k_lo": 2,
+        "k_hi": 30,
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "sup_z_w": 2.8409083088495257,
+        "nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w=k^2",
+        "k_lo": 2,
+        "k_hi": 200,
+        "forbidden": false,
+        "why_forbidden": "",
+        "outcome": "value",
+        "sup_z_w": 1.0,
+        "nonfinite": false,
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w=-k_negative",
+        "k_lo": 2,
+        "k_hi": 200,
+        "forbidden": true,
+        "why_forbidden": "weight must be > 0",
+        "outcome": "value",
+        "sup_z_w": 1.0,
+        "nonfinite": false,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w=0_identically",
+        "k_lo": 2,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "weight must be > 0",
+        "outcome": "value",
+        "sup_z_w": "nan",
+        "nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w=0_at_one_mode",
+        "k_lo": 2,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "weight must be > 0",
+        "outcome": "value",
+        "sup_z_w": "inf",
+        "nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w=nan",
+        "k_lo": 2,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "sup_z_w": "nan",
+        "nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "w=inf",
+        "k_lo": 2,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "not finite",
+        "outcome": "value",
+        "sup_z_w": "nan",
+        "nonfinite": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "label": "k_lo=1_touches_k=0",
+        "k_lo": 1,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "u(0) = w(0)/0",
+        "outcome": "raised",
+        "raised": "ZeroDivisionError: float division by zero",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "k_lo_gt_k_hi_empty",
+        "k_lo": 20,
+        "k_hi": 2,
+        "forbidden": true,
+        "why_forbidden": "empty range",
+        "outcome": "raised",
+        "raised": "ValueError: zero-size array to reduction operation maximum which has no identity",
+        "tag": "HOLDS"
+      },
+      {
+        "label": "w=sign_alternating",
+        "k_lo": 2,
+        "k_hi": 20,
+        "forbidden": true,
+        "why_forbidden": "weight must be > 0",
+        "outcome": "value",
+        "sup_z_w": -1.0,
+        "nonfinite": false,
+        "tag": "GAP-PIN"
+      }
+    ]
+  },
+  "F_kernel_directions": {
+    "rows": [
+      {
+        "N": 0,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": true,
+        "dilation_second_component_dropped": true,
+        "tag": "HOLDS-VACUOUS"
+      },
+      {
+        "N": 1,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0625,
+        "worst": 0.0625,
+        "passes_gate3_tolerance_1e-14": false,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": true,
+        "tag": "GAP-PIN"
+      },
+      {
+        "N": 2,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": false,
+        "tag": "HOLDS"
+      },
+      {
+        "N": 3,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": false,
+        "tag": "HOLDS"
+      },
+      {
+        "N": 5,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": false,
+        "tag": "HOLDS"
+      },
+      {
+        "N": 10,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": false,
+        "tag": "HOLDS"
+      },
+      {
+        "N": 40,
+        "amplitude_direction_residual_sup": 0.0,
+        "dilation_direction_residual_sup": 0.0,
+        "worst": 0.0,
+        "passes_gate3_tolerance_1e-14": true,
+        "annihilation_is_vacuous_operator_is_zero": false,
+        "dilation_second_component_dropped": false,
+        "tag": "HOLDS"
+      }
+    ],
+    "n_truncations_that_break_the_documented_exactness": 1,
+    "worst_N": 1,
+    "worst_residual": 0.0625,
+    "over_gate3_tolerance_by": 6250000000000.0,
+    "anchor_degenerate_at_N0": {
+      "anchor_0": [
+        -0.5
+      ],
+      "note": "anchor(0) = [-0.5] is NOT Omega_2 = -(1+cos)/2; the a_1 term is dropped.  Its residual is still 0, but for the unrelated reason that every CONSTANT profile is an exact traveling wave -- a known-answer check that cannot fail there.",
+      "residual_sup": 0.0
+    },
+    "anchor_negative_N": "IndexError: index 0 is out of bounds for axis 0 with size 0"
+  },
+  "G_truncation_and_nan": {
+    "truncation_ladder": [
+      {
+        "N": 4,
+        "full_ell1": 1.0234375,
+        "truncated_ell1": 0.9925468749999999,
+        "discarded_ell1": 0.030890625000000005,
+        "discarded_fraction": 0.030183206106870236
+      },
+      {
+        "N": 8,
+        "full_ell1": 4.267075,
+        "truncated_ell1": 4.1320390625000005,
+        "discarded_ell1": 0.1350359375,
+        "discarded_fraction": 0.03164601922862851
+      },
+      {
+        "N": 16,
+        "full_ell1": 17.041143749999996,
+        "truncated_ell1": 16.48016015625,
+        "discarded_ell1": 0.5609835937500001,
+        "discarded_fraction": 0.03291936280685386
+      },
+      {
+        "N": 32,
+        "full_ell1": 67.688878125,
+        "truncated_ell1": 65.407670703125,
+        "discarded_ell1": 2.281207421875,
+        "discarded_fraction": 0.03370136254381893
+      },
+      {
+        "N": 64,
+        "full_ell1": 269.3589453125,
+        "truncated_ell1": 260.1651259765625,
+        "discarded_ell1": 9.193819335937501,
+        "discarded_fraction": 0.034132222062538825
+      }
+    ],
+    "jacobian_row_truncation": [
+      {
+        "M": 2,
+        "norm": 1.0,
+        "full_norm": 5.0,
+        "under_report_factor": 5.0
+      },
+      {
+        "M": 4,
+        "norm": 2.5,
+        "full_norm": 5.0,
+        "under_report_factor": 2.0
+      },
+      {
+        "M": 8,
+        "norm": 5.0,
+        "full_norm": 5.0,
+        "under_report_factor": 1.0
+      },
+      {
+        "M": 12,
+        "norm": 5.0,
+        "full_norm": 5.0,
+        "under_report_factor": 1.0
+      }
+    ],
+    "nan_census": [
+      {
+        "label": "clean",
+        "residual_nan_count": 0,
+        "residual_len": 12,
+        "residual_inf_count": 0,
+        "jacobian_nan_count": 0,
+        "jacobian_size": 84,
+        "raised": false
+      },
+      {
+        "label": "c_nan",
+        "residual_nan_count": 7,
+        "residual_len": 12,
+        "residual_inf_count": 0,
+        "jacobian_nan_count": 17,
+        "jacobian_size": 84,
+        "raised": false
+      },
+      {
+        "label": "c_inf",
+        "residual_nan_count": 7,
+        "residual_len": 12,
+        "residual_inf_count": 0,
+        "jacobian_nan_count": 0,
+        "jacobian_size": 84,
+        "raised": false
+      },
+      {
+        "label": "a_has_nan",
+        "residual_nan_count": 4,
+        "residual_len": 12,
+        "residual_inf_count": 0,
+        "jacobian_nan_count": 12,
+        "jacobian_size": 84,
+        "raised": false
+      },
+      {
+        "label": "a_has_inf",
+        "residual_nan_count": 3,
+        "residual_len": 12,
+        "residual_inf_count": 1,
+        "jacobian_nan_count": 5,
+        "jacobian_size": 84,
+        "raised": false
+      },
+      {
+        "label": "a_all_zero_c_inf",
+        "residual_nan_count": 7,
+        "residual_len": 12,
+        "residual_inf_count": 0,
+        "jacobian_nan_count": 0,
+        "jacobian_size": 84,
+        "raised": false
+      }
+    ],
+    "zero_profile_infinite_speed": {
+      "honest_answer": "all modes exactly 0 (Omega == 0 => F == 0)",
+      "returned_nan_count": 7,
+      "returned_len": 12,
+      "mechanism": "the `if w == 0.0: continue` fast path cannot skip w = inf*k*0 = nan, so NaN is injected where the honest coefficient is exactly zero",
+      "tag": "GAP-PIN"
+    },
+    "tag_truncation": "NOT-A-DEFECT (documented Galerkin projection)"
+  },
+  "H_load_bearing": {
+    "setup": {
+      "N": 8,
+      "c": 0.5,
+      "gauge": "origin",
+      "delta": 0.001,
+      "a_star_is_exact_zero_residual_ell1": 0.0,
+      "dist_xhat_to_astar_ell1": 0.001
+    },
+    "honest_good_inverse": {
+      "Y0": 0.001001550240054048,
+      "Z0": 3.969047313034935e-15,
+      "Z1": 0.0,
+      "Z2": 15.636467431284682,
+      "closes": true,
+      "r_min": 0.0010177466209968344,
+      "r_max": 0.06293531722763465
+    },
+    "honest_wrong_inverse_CONTROL": {
+      "Y0": 0.001001550240054048,
+      "Z0": 2.000000000000004,
+      "Z1": 0.0,
+      "Z2": 15.636467431284682,
+      "closes": false,
+      "note": "the control that can come out the other way: honest Z0 = 2 > 1 forces 1 - Z0 - Z1 < 0 and the module correctly REFUSES"
+    },
+    "fabricated": {
+      "Z0_from_negative_weight": -2.0,
+      "closes": true,
+      "r_min": 0.0003344330359589866,
+      "r_max": 0.19152475850993622,
+      "one_minus_Z": 3.0
+    },
+    "exclusion": {
+      "fabricated_ball_inside_honest_uniqueness_ball": true,
+      "a_star_inside_honest_existence_ball": true,
+      "fabricated_ball_excludes_a_star": true,
+      "certified_ball_contains_no_zero": true,
+      "miss_in_ell1": 0.0006655669640410135,
+      "miss_in_fabricated_radii": 1.990135221338109,
+      "dist_over_r_fab": 2.9901352213381087
+    }
+  },
+  "I_latency": {
+    "callers": {
+      "experiments/p2_route_d_dress.py": {
+        "imports": [
+          "C_ANCHOR",
+          "anchor",
+          "residual",
+          "jacobian",
+          "gauged_system",
+          "gauge_row",
+          "ell1_op_norm",
+          "radii_polynomial",
+          "tail_Z1_column",
+          "tail_weight_obstruction"
+        ],
+        "reachability": [
+          "Y0 is formed as float(np.abs(A @ G).sum()) + tail_defect -- the CORRECT ell^1 sum, NOT ell1_op_norm on a 1-D array, so the shape trap is not reached",
+          "the tail defect is computed from residual(a, c) UNTRUNCATED, so the Galerkin discard is compensated, not dropped",
+          "ell1_op_norm is only ever applied to genuine 2-D matrices (A, I - A@J, A@E_ft)",
+          "weighted_ell1_op_norm is NOT imported at all",
+          "every Z fed to radii_polynomial is a norm of a real matrix, hence nonnegative by construction",
+          "N_LADDER starts at 4, so kernel_directions is never called at N < 2"
+        ],
+        "reaches_any_gap": false
+      },
+      "experiments/p2_route_d_v3_spaces.py": {
+        "imports": [
+          "C_ANCHOR",
+          "anchor",
+          "jacobian",
+          "gauged_system",
+          "gauge_row",
+          "ell1_op_norm",
+          "residual"
+        ],
+        "reachability": [
+          "does not import radii_polynomial or weighted_ell1_op_norm",
+          "ell1_op_norm applied to matrices only"
+        ],
+        "reaches_any_gap": false
+      },
+      "test_nk_fourier.py": {
+        "imports": [
+          "the six known-answer gates"
+        ],
+        "reachability": [
+          "gate (3) exercises kernel_directions at N = 10 only; the N = 1 truncation is outside every gate",
+          "all inputs are well formed by construction"
+        ],
+        "reaches_any_gap": false
+      }
+    },
+    "n_callers": 3,
+    "n_callers_reaching_a_gap": 0,
+    "verdict": "EVERY gap measured here is LATENT: no in-repo caller supplies a forbidden constant, a non-positive weight, a 1-D array to ell1_op_norm, or N < 2 to kernel_directions. The finding is about what the module would accept, not about any number this repository has banked."
+  },
+  "summary": {
+    "gate_answer": "YES",
+    "gate_answer_wording": "Silent-corruption or fabrication-acceptance gap; report the exact failing case with magnitudes; escalate, do not patch (it IS partly the same Y0/Z0/Z1 guard class, so leg 128's shared guard may absorb that half).",
+    "same_guard_class_as_legs_79_98_116": true,
+    "guard_class_note": "The radii_polynomial half of this finding is the SAME Y0/Z0/Z1 nonnegativity guard class as legs 79 (port_certification), 98 (interval_certificate) and 116 (nk_bounds).  Leg 128's shared-guard repair has NOT landed, so this is a FOURTH instance of an OPEN class, and leg 128's shared guard would absorb it verbatim.  The other four findings (B, C, F, G) are module-specific and outside any sibling's reach.",
+    "n_forbidden_inputs_tested": 50,
+    "n_guards_that_fired": 10,
+    "radii_polynomial_false_closes": 11,
+    "radii_polynomial_forbidden_cases": 22,
+    "negative_certified_radius_cases": 4,
+    "sharpest_negative_radius": -706.9318028416924,
+    "max_budget_inflation": 361.0,
+    "weighted_norm_negative_returns": 2,
+    "weighted_norm_sharpest_sign_flip": {
+      "matrix": "gauged_jacobian_J",
+      "honest_positive_weight": 7.0,
+      "negative_weight": -1.251,
+      "unweighted_ell1_op_norm": 7.0,
+      "sign_flip": true
+    },
+    "ell1_shape_max_under_report": 1024.0,
+    "kernel_direction_break_N": 1,
+    "kernel_direction_residual": 0.0625,
+    "kernel_direction_over_tolerance": 6250000000000.0,
+    "load_bearing_ball_contains_no_zero": true,
+    "load_bearing_miss_in_radii": 1.990135221338109,
+    "all_latent": true,
+    "patched": false
+  }
+}
