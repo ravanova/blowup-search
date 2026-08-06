@@ -106,16 +106,45 @@ def test_2_negative_control_pre_repair_module_still_truncates():
           truncated == len(new), f"{truncated}/{len(new)} silent pre-repair")
     check("the two modules are distinguishable objects (else the differential is a "
           "tautology)", PRE is not CD and not hasattr(PRE, "_validated_p"))
-    # leg 121's headline, end to end, off the pre-repair module
-    rows = PRE.mu_branch(0.0, 1.9, [0.0, 0.05, 0.1], K=64)
-    sl = PRE.alpha_slope(rows)
-    banked = [r for r in json.loads(LEG121_JSON.read_text())
-              ["C2_flow_identity_under_truncation"]["rows"] if r["p_requested"] == 1.9][0]
-    check("pre-repair reproduces leg 121's banked residual/alpha/alpha_1 bit-identically",
-          rows[-1]["residual"] == banked["residual_fake"]
-          and rows[-1]["alpha"] == banked["alpha_fake"]
-          and sl["alpha_1"] == banked["alpha_1_fake"],
-          f"residual {rows[-1]['residual']!r}, alpha_1 {sl['alpha_1']!r}")
+    # leg 121's headline, end to end, off the pre-repair module.
+    #
+    # MEASURED, NOT ASSUMED (leg 170).  This check was first written as a bitwise
+    # equality and it FAILS that way: leg 121's banked C2 triple does NOT reproduce
+    # bit-for-bit on today's NumPy/BLAS, on 0 of 9 rows.  That is NOT the repair --
+    # `experiments/p2_route_cdb_v1_postrepair.py` R4 separates the two by running the
+    # PRE-repair module at 9dba93f and the post-repair escape hatch through the identical
+    # harness in ONE interpreter: they agree with each other on 9/9 rows and miss the
+    # banked JSON on 9/9, by the same amount.  Neither leg 121's driver nor its JSON has
+    # been touched since c4ddb7f, and the p_built = 2 / 3 branches terminate Newton at
+    # residual 1.5e-05 / 2.9e-06 rather than machine precision, which is exactly where a
+    # LAPACK change moves the converged iterate.
+    #
+    # So the honest pin is a BOUNDED drift, not an equality.  The bound is loose enough
+    # to absorb the measured environmental spread (worst observed: 2.95e-09 relative, on
+    # alpha_1 at p_built = 3) and tight enough that a real regression in the exponent
+    # path -- which would move alpha by O(1), the whole point of leg 121's finding --
+    # still trips it.  It CAN report the other answer.
+    rows_c2 = json.loads(LEG121_JSON.read_text())["C2_flow_identity_under_truncation"]["rows"]
+    worst_rel, worst_where, n_bitwise = 0.0, None, 0
+    for bk in rows_c2:
+        rr = PRE.mu_branch(0.0, float(bk["p_requested"]), [0.0, 0.05, 0.1], K=64)
+        ss = PRE.alpha_slope(rr)
+        for qty, got, want in (("residual", rr[-1]["residual"], bk["residual_fake"]),
+                               ("alpha", rr[-1]["alpha"], bk["alpha_fake"]),
+                               ("alpha_1", ss["alpha_1"], bk["alpha_1_fake"])):
+            if got == want:
+                n_bitwise += 1
+            tol = max(1e-13, 1e-7 * abs(want))
+            rel = abs(got - want) / max(abs(want), 1e-300)
+            if abs(got - want) > tol and rel > worst_rel:
+                worst_rel, worst_where = rel, f"{qty} at p={bk['p_requested']}"
+    check("KNOWN GAP: leg 121's banked C2 triple no longer reproduces BITWISE on today's "
+          "NumPy/BLAS, but every one of its 27 numbers stays inside max(1e-13 abs, 1e-7 "
+          "rel) of the banked value -- environmental drift, separated from the repair by "
+          "R4's in-process hatch-vs-pre-repair comparison, NOT a regression",
+          worst_where is None,
+          f"{n_bitwise}/27 numbers still bitwise; worst out-of-tolerance: "
+          f"{worst_where or 'none'}")
 
 
 def test_3_already_refused_cases_are_counted_separately():

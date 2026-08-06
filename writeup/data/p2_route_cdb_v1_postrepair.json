@@ -42,7 +42,7 @@
     "driver": "experiments/p2_route_cda_v1_adversarial.py",
     "ran_unmodified": true,
     "returncode": 1,
-    "seconds": 0.15,
+    "seconds": 0.24,
     "completed": false,
     "wrote_json": false,
     "n_sections_total": 9,
@@ -1384,6 +1384,84 @@
     "moved": []
   },
   "R4_escape_hatch": {
+    "banked_drift_per_band": [
+      {
+        "p_built": 1,
+        "quantity": "residual",
+        "pre_repair": 1.2490009027033011e-15,
+        "banked": 9.71445146547012e-16,
+        "abs": 2.7755575615628914e-16,
+        "rel": 0.2857142857142857
+      },
+      {
+        "p_built": 1,
+        "quantity": "alpha",
+        "pre_repair": 1.0000000000000004,
+        "banked": 1.0,
+        "abs": 4.440892098500626e-16,
+        "rel": 4.440892098500626e-16
+      },
+      {
+        "p_built": 1,
+        "quantity": "alpha_1",
+        "pre_repair": 2.220446049250312e-14,
+        "banked": 2.664535259100375e-14,
+        "abs": 4.440892098500629e-15,
+        "rel": 0.16666666666666682
+      },
+      {
+        "p_built": 2,
+        "quantity": "residual",
+        "pre_repair": 1.4985625166521327e-05,
+        "banked": 1.4985625166838781e-05,
+        "abs": 3.174543961037557e-16,
+        "rel": 2.1183927435088963e-11
+      },
+      {
+        "p_built": 2,
+        "quantity": "alpha",
+        "pre_repair": 1.0897181208303228,
+        "banked": 1.0897181208302058,
+        "abs": 1.170175067954915e-13,
+        "rel": 1.0738328064723865e-13
+      },
+      {
+        "p_built": 2,
+        "quantity": "alpha_1",
+        "pre_repair": 1.4675439450779417,
+        "banked": 1.4675439450790417,
+        "abs": 1.100008972798605e-12,
+        "rel": 7.495577740531366e-13
+      },
+      {
+        "p_built": 3,
+        "quantity": "residual",
+        "pre_repair": 2.8800154065894423e-06,
+        "banked": 2.880015486532439e-06,
+        "abs": 7.994299666691518e-14,
+        "rel": 2.77578356924626e-08
+      },
+      {
+        "p_built": 3,
+        "quantity": "alpha",
+        "pre_repair": 1.172042518626073,
+        "banked": 1.172042517613463,
+        "abs": 1.0126099958540635e-09,
+        "rel": 8.639703599797393e-10
+      },
+      {
+        "p_built": 3,
+        "quantity": "alpha_1",
+        "pre_repair": 3.5251293564907447,
+        "banked": 3.525129366895228,
+        "abs": 1.0404483496984085e-08,
+        "rel": 2.9515182037554203e-09
+      }
+    ],
+    "worst_relative_drift_overall": 0.2857142857142857,
+    "worst_relative_drift_on_quantities_above_1e-13_absolute": 2.9515182037554203e-09,
+    "worst_absolute_drift": 1.0404483496984085e-08,
+    "drift_note": "The largest RELATIVE drifts (2.9e-01 on residual, 1.7e-01 on alpha_1, both at p_built = 1) sit on quantities whose banked value is a machine zero (9.7e-16, 2.7e-14) -- they are absolute-tiny and relatively meaningless. Excluding quantities that moved less than 1e-13 in ABSOLUTE terms, the worst relative drift is on alpha_1 at p_built = 3, where the Newton solve terminates at residual 2.9e-06 rather than machine precision and an environment change therefore moves the converged iterate. Neither leg 121's driver nor its JSON has been modified since c4ddb7f, so this is the environment, not the record.",
     "n_rows": 9,
     "n_rows_hatch_matches_pre_repair_in_process": 9,
     "n_rows_hatch_matches_banked_json": 0,
@@ -1693,5 +1771,5 @@
       "p_1e300_accepted": true
     }
   },
-  "seconds": 25.3
+  "seconds": 99.6
 }

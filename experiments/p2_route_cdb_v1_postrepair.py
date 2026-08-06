@@ -642,7 +642,46 @@ def r4_escape_hatch_reproduces_leg121(PRE):
     n_pre_banked = sum(r["PRE_REPAIR_matches_banked"] for r in rows)
     worst_ulp = max([u for r in rows for u in r["ulp_pre_repair_vs_banked"].values()
                      if u is not None] or [0])
+
+    # ULP is the wrong unit for a quantity whose banked value is a machine zero: 9.71e-16
+    # vs 1.25e-15 is 1.4e15 ULP and also completely meaningless.  Report the RELATIVE and
+    # ABSOLUTE drift per p_built band alongside, so the prose can quote a magnitude that
+    # means something.  (Lesson: "small" in which norm?)
+    drift, seen_band = [], set()
+    for r in rows:
+        band = r["p_built"]
+        if band in seen_band:
+            continue                       # the three neighbours in a band are identical
+        seen_band.add(band)
+        for qty in ("residual", "alpha", "alpha_1"):
+            pre_v, bank_v = r[f"{qty}_pre_repair"], r[f"{qty}_banked"]
+            drift.append({
+                "p_built": band, "quantity": qty,
+                "pre_repair": pre_v, "banked": bank_v,
+                "abs": abs(pre_v - bank_v),
+                "rel": (abs(pre_v - bank_v) / abs(bank_v)) if bank_v else None,
+            })
+    finite_rel = [d["rel"] for d in drift if d["rel"] is not None]
+    # the near-zero quantities (residual at p=1, alpha_1 at p=1) have a huge RELATIVE drift
+    # on a tiny ABSOLUTE one; report both so neither can be quoted alone
+    worst_rel_overall = max(finite_rel)
+    worst_rel_above_1e_13_abs = max([d["rel"] for d in drift
+                                     if d["rel"] is not None and d["abs"] > 1e-13] or [0.0])
     return {
+        "banked_drift_per_band": drift,
+        "worst_relative_drift_overall": worst_rel_overall,
+        "worst_relative_drift_on_quantities_above_1e-13_absolute":
+            worst_rel_above_1e_13_abs,
+        "worst_absolute_drift": max(d["abs"] for d in drift),
+        "drift_note": (
+            "The largest RELATIVE drifts (2.9e-01 on residual, 1.7e-01 on alpha_1, both at "
+            "p_built = 1) sit on quantities whose banked value is a machine zero (9.7e-16, "
+            "2.7e-14) -- they are absolute-tiny and relatively meaningless. Excluding "
+            "quantities that moved less than 1e-13 in ABSOLUTE terms, the worst relative "
+            "drift is on alpha_1 at p_built = 3, where the Newton solve terminates at "
+            "residual 2.9e-06 rather than machine precision and an environment change "
+            "therefore moves the converged iterate. Neither leg 121's driver nor its JSON "
+            "has been modified since c4ddb7f, so this is the environment, not the record."),
         "n_rows": len(rows),
         "n_rows_hatch_matches_pre_repair_in_process": n_in_proc,
         "n_rows_hatch_matches_banked_json": n_banked,
