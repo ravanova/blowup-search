@@ -7604,3 +7604,97 @@ at the end per this update's own note (behind the repair batch, not ahead of it)
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 203 escalates (the first genuinely
+claim-adjacent audit-family finding this cycle), a repair leg drafted, 221 promoted into D
+
+**203 (RSA) escalated, not merged** (`leg/203-rsa-v1` pushed, `main` untouched).
+`rescaled_spectrum.py` has 8 silent-corruption mechanisms. Headline: `converged_spectrum`'s
+degenerate comparison `K_fine==K_coarse` certifies the ENTIRE continuum as converged,
+`n_kept` jumping from 2 to ALL `K`. **This is the tenth audit-family item this cycle and the
+first genuinely claim-adjacent one**: mechanism R2 puts 5/7 Route-E and 7/7 Route-G banked
+rows above the module's own convergence threshold. Stated precisely, not softened: **no
+banked number is confirmed WRONG** — both routes already banked their own residuals
+independently and are already flagged `converged=False` by the module's own separate,
+conservative check — the exposure is that those rows are *discoverably less precise* than
+the convergence label alone would suggest, not that any number is falsified. Confirmed NOT
+downstream of the origin-H² work (176/192/etc.). Recorded in `PROGRESS.md`'s NEEDS YOU; this
+DM does not rule on it, but drafts the requested repair leg below given the claim-adjacency.
+
+```
+### 225 — ROUTE-RSR: REPAIR rescaled_spectrum.py's K_fine==K_coarse DEGENERATE-COMPARISON
+BUG, WITH EXPLICIT ROUTE-E/ROUTE-G ROW RE-CONFIRMATION (leg 203's finding, THE FIRST
+GENUINELY CLAIM-ADJACENT AUDIT-FAMILY ITEM THIS CYCLE) (RESERVE)
+**Thesis.** Leg 203 (RSA) found `converged_spectrum`'s `K_fine==K_coarse` comparison
+degenerately certifies the entire continuum as converged. Mechanism R2 is claim-adjacent:
+5/7 Route-E and 7/7 Route-G banked rows sit above the module's own convergence threshold,
+though both routes already banked independent residuals and are already separately flagged
+`converged=False` by the module's own conservative check — so no banked number is currently
+wrong, only discoverably less precise than a bare convergence label would suggest. Same
+discipline as leg 221 (BVRR) applied to leg 205's finding: repair the mechanism AND
+explicitly re-confirm the claim-adjacent rows in the same pass, rather than trusting a
+"probably fine because of a separate flag" argument without re-running it.
+**Gate.** Does fixing the `K_fine==K_coarse` degenerate comparison (per leg 203's own
+identified mechanism) cause every one of leg 203's adversarial cases to now correctly reject
+false convergence, AND does an explicit, fresh re-run of the 5/7 Route-E and 7/7 Route-G
+banked rows confirm (a) their own independently-banked residuals are unchanged, and (b) their
+`converged=False` flag from the module's separate conservative check still holds post-repair
+(i.e., the repair doesn't silently relabel them `converged=True` for the wrong reason either)?
+  yes -> Bank the repair AND the explicit Route-E/Route-G re-confirmation together — this
+         closes leg 203's finding on stronger footing than it landed with, the same upgrade
+         leg 221 gives leg 205's finding. Flag for a postrepair-verification leg once a slot
+         is available.
+  no  -> If the re-confirmation itself turns up a moved residual or an unexpected flag flip
+         on any Route-E/Route-G row, this is a priority finding of a different order than
+         anything else in this cycle's audit-family backlog — escalate immediately, do not
+         fold it quietly into the repair's own landing.
+**Territory.** solver/rescaled_spectrum.py (the K_fine==K_coarse comparison only, plus the
+               other 7 named mechanisms if leg 203's own report scopes them as part of the
+               same repair — read leg 203's report first to confirm scope before coding),
+               experiments/p2_route_rsr_v1_repair.py,
+               writeup/data/p2_route_rsr_v1_repair.json,
+               writeup/novelty/leg_225.md, experiments/journal/leg_225.md.
+               Reads (never edits) Route-E's and Route-G's own banked rows/JSONs for the
+               re-confirmation.
+**Difficulty.** standard
+**Independence.** Owns rescaled_spectrum.py directly (leg 203's own read-only territory,
+closed on landing). Read-only overlap with Route-E/Route-G's own banked data is read-read,
+not a collision. Confirmed NOT downstream of the origin-H² work (176/192), per leg 203's own
+finding. Reserve — promote with elevated priority given the claim-adjacency (rank alongside
+218/221, ahead of the purely-latent repairs 216/217/219/220/222).
+```
+
+**Slot D refilled with leg 221 (BVRR)** — repairing leg 205's finding with the explicit
+zero-contamination re-confirmation, in flight now.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 211 | XU11 | live (unchanged) |
+| C | 213 | LGC2 | live (unchanged) |
+| D | 221 | BVRR | **live, newly promoted — replaces 203 (escalated, OFF roster)** |
+| E | 212 | USC2V | live (unchanged) |
+| F | 209 | SCA2 | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 218 | BHR | live (unchanged) |
+| I | 210 | M2SV | live (unchanged) |
+| J | 207 | DPA | live (unchanged) |
+
+**Reserve queue: 8 undispatched legs (216, 217, 219, 220, 222, 223, 224, 225).** 221 now live
+(off reserve); 225 newly drafted (claim-adjacent, elevated priority). Above the §3a
+watermark of 3 — no further batch needed. Promotion order, revised for 225's elevated
+priority: **225 (RSR) and 218 (already promoted this cycle)** rank jointly at the top of
+what remains — 225 by being the only claim-adjacent item in the whole backlog; then 216
+(CGF), 217 (PCR), 219 (ICR2), 220 (TNR); then 222 (FBA), 223 (PUB3), 224 (GCC) last as before.
+
+Nothing in this update lifts a ban. Escalation #4 (129/188), CGA (199), BHA (198), ICA2
+(201), TNA2 (204), and now RSA (203) all stay with the user via `PROGRESS.md`'s NEEDS YOU —
+this DM rules on none of them; it drafts repairs for the well-characterized ones so they are
+ready to promote regardless of how any user ruling eventually lands (a repair fixing a latent
+silent-corruption mechanism is not itself claim-adjacent to any open escalation's ruling).
+No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No direction question raised this
+cycle.
