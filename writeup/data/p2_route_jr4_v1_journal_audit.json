@@ -1,0 +1,555 @@
+{
+ "route": "JR4",
+ "leg": 155,
+ "kind": "documentation/hygiene audit -- read-only, no solver module, no measurement",
+ "gate": "At the pinned SHA, does every landed leg since JR3's window have (a) its experiments/journal/leg_N.md on main, (b) a JOURNAL.md pointer line, and (c) its writeup/novelty/leg_N.md?",
+ "gate_answer": "NO",
+ "gate_clauses": {
+  "a_journal_file": {
+   "answer": "YES",
+   "present": 17,
+   "of": 17,
+   "missing_legs": []
+  },
+  "b_journal_pointer": {
+   "answer": "NO",
+   "present": 0,
+   "of": 17,
+   "missing_legs": [
+    122,
+    124,
+    127,
+    128,
+    133,
+    135,
+    138,
+    139,
+    140,
+    142,
+    144,
+    146,
+    147,
+    149,
+    157,
+    158,
+    161
+   ]
+  },
+  "c_novelty_file": {
+   "answer": "YES",
+   "present": 17,
+   "of": 17,
+   "missing_legs": []
+  }
+ },
+ "window": {
+  "cut_sha": "e4199c27db94d49adb0fe1a8a0efd9a75cd24042",
+  "cut_sha_short": "e4199c2",
+  "cut_line_is": "leg 137 (JR3)'s own audit commit on main",
+  "pinned_sha": "e832eadf18738c10911d0fe34930a4732afd8bff",
+  "pinned_sha_is": "this leg's start SHA, verified equal to origin/main at dispatch",
+  "commits_in_window": 53,
+  "legs_in_window": 17,
+  "legs": [
+   122,
+   124,
+   127,
+   128,
+   133,
+   135,
+   138,
+   139,
+   140,
+   142,
+   144,
+   146,
+   147,
+   149,
+   157,
+   158,
+   161
+  ]
+ },
+ "prior_passes": [
+  {
+   "route": "JR",
+   "leg": 72,
+   "ledger": "experiments/JOURNAL.md + experiments/journal/",
+   "window": "through leg 70's era",
+   "gate_answer": "NO",
+   "narrated_legs": 8,
+   "pointer_coverage": "closed 8",
+   "carry_over_files": 2
+  },
+  {
+   "route": "JR2",
+   "leg": 102,
+   "ledger": "experiments/JOURNAL.md + experiments/journal/",
+   "window": "117a176..12c0894",
+   "gate_answer": "NO",
+   "narrated_legs": 20,
+   "pointer_coverage": "0 of 20 present",
+   "carry_over_files": 2
+  },
+  {
+   "route": "JR3",
+   "leg": 137,
+   "ledger": "experiments/JOURNAL.md + experiments/journal/",
+   "window": "12c0894..3474862",
+   "gate_answer": "NO",
+   "narrated_legs": 35,
+   "pointer_coverage": "20 of 35 present",
+   "carry_over_files": 0
+  }
+ ],
+ "ledger_sizes_at_pin": {
+  "JOURNAL_md_lines": 3091,
+  "journal_dir_files": 93,
+  "novelty_dir_files": 95
+ },
+ "per_leg": [
+  {
+   "leg": 122,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 3,
+   "first_window_commit_index": 40,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 124,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 43,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 127,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 3,
+   "first_window_commit_index": 45,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 128,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 4,
+   "first_window_commit_index": 13,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 133,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 4,
+   "first_window_commit_index": 0,
+   "landed_before_catchup": true
+  },
+  {
+   "leg": 135,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 8,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 138,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 6,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 139,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 5,
+   "first_window_commit_index": 19,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 140,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 17,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 142,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 10,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 144,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 24,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 146,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 29,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 147,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 36,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 149,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 3,
+   "first_window_commit_index": 31,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 157,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 38,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 158,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 51,
+   "landed_before_catchup": false
+  },
+  {
+   "leg": 161,
+   "journal_file_present": true,
+   "pointer_strict_hits": 0,
+   "pointer_loose_hits": 0,
+   "pointer_present": false,
+   "borderline": false,
+   "novelty_file_present": true,
+   "landing_commits_in_window": 2,
+   "first_window_commit_index": 48,
+   "landed_before_catchup": false
+  }
+ ],
+ "pointer_predicates": {
+  "strict_regex": "^\\s*-\\s*\\*\\*Legs?\\s+N\\b",
+  "loose_regex": "\\bLegs?\\s+N\\b",
+  "borderline_legs": [],
+  "borderline_count": 0,
+  "note": "The loose predicate is a control that CAN report the other answer (lesson 90) -- it DID at JR3, on exactly 1 leg of 15, and following that disagreement produced JR3's stale-assertion defect. Here it agrees with the strict predicate on all 17 in-window legs, so the missing-pointer count does not depend on the regex."
+ },
+ "catchup_commit": {
+  "sha": "4301c7efa50e17311ea812c302710a3a4fa514f6",
+  "sha_short": "4301c7e",
+  "subject": "Leg 0: ORCH \u2014 integration: JOURNAL.md pointer catch-up (15 legs flagged by leg 137/JR3) plus the leg-2830 correction; capabilities.py's energy_coercivity.py entry gets leg 141's novelty cap written back in",
+  "in_this_window": true,
+  "is_ancestor_of_pin": true,
+  "is_descendant_of_cut": true,
+  "position_in_window_oldest_first_1based": 5,
+  "commits_in_window_after_it": 48,
+  "diffstat": [
+   "",
+   " capabilities.py        | 13 ++++++++++++-",
+   " experiments/JOURNAL.md | 52 ++++++++++++++++++++++++++++++++++++++++++++++++--",
+   " 2 files changed, 62 insertions(+), 3 deletions(-)"
+  ],
+  "jr3_remedy_additions": {
+   "flagged_legs": [
+    58,
+    71,
+    85,
+    98,
+    100,
+    101,
+    105,
+    107,
+    108,
+    123,
+    126,
+    131,
+    134,
+    136,
+    141
+   ],
+   "flagged_count": 15,
+   "closed_at_pin": 15,
+   "still_open": [],
+   "per_leg": [
+    {
+     "leg": 58,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 2,
+     "closed": true
+    },
+    {
+     "leg": 71,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 85,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 98,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 100,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 101,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 105,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 107,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 108,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 123,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 126,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 131,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 134,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 136,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    },
+    {
+     "leg": 141,
+     "pointer_strict_hits": 1,
+     "pointer_loose_hits": 1,
+     "closed": true
+    }
+   ]
+  },
+  "jr3_remedy_correction": {
+   "original_assertion": "Legs 58, 59, 61, 62, 63 and 71 have branch progress but no answered gate",
+   "applied_at_pin": true,
+   "surviving_lines_mentioning_the_wording": [],
+   "surviving_lines_still_asserting_it": []
+  },
+  "window_legs_split": {
+   "landed_before_catchup": [
+    133
+   ],
+   "landed_before_catchup_count": 1,
+   "landed_after_catchup": [
+    122,
+    124,
+    127,
+    128,
+    135,
+    138,
+    139,
+    140,
+    142,
+    144,
+    146,
+    147,
+    149,
+    157,
+    158,
+    161
+   ],
+   "landed_after_catchup_count": 16,
+   "note": "A leg that landed BEFORE the catch-up could in principle have been covered by it and was not -- the batch was scoped to JR3's flagged list, not to the ledger's state at catch-up time. A leg that landed AFTER it could not have been. These are different defects (lesson 75) and are counted separately, not summed."
+  }
+ },
+ "coverage_shape_across_passes": [
+  {
+   "pass": "JR (72)",
+   "pointer_coverage": "8 narrated",
+   "per_leg_files": "1 leg missing (2 files)"
+  },
+  {
+   "pass": "JR2 (102)",
+   "pointer_coverage": "0 of 20",
+   "per_leg_files": "0 missing in-window; leg 60 open"
+  },
+  {
+   "pass": "JR3 (137)",
+   "pointer_coverage": "20 of 35",
+   "per_leg_files": "0 missing, 0 repo-wide; leg 60 closed"
+  },
+  {
+   "pass": "JR4 (155)",
+   "pointer_coverage": "0 of 17",
+   "per_leg_files": "0 missing, 0 repo-wide over 87 landed legs"
+  }
+ ],
+ "repo_wide_cross_check": {
+  "landed_legs_total": 87,
+  "landed_without_journal_file": [],
+  "landed_without_novelty_file": [],
+  "journal_file_orphans": [],
+  "novelty_file_orphans": [],
+  "journal_dir_leg_numbers": 87,
+  "novelty_dir_leg_numbers": 87,
+  "journal_dir_non_leg_entries": [
+   "README.md",
+   "leg_0_bench_redtests.md"
+  ],
+  "novelty_dir_non_leg_entries": [
+   "README.md",
+   "leg_0_bench_redtests.md",
+   "leg_54_verify_v2.md"
+  ],
+  "note": "The directory entry counts exceed the leg-number counts only by the non-leg entries enumerated by name here; the surplus is accounted for, not unexplained."
+ },
+ "remedy": {
+  "owner": "integration/orchestrator",
+  "reason": "experiments/JOURNAL.md is one of the five shared ledgers and is integration-owned; this leg reports the gap and edits nothing. It creates no file on any other leg's behalf, per the JR1/JR2/JR3 precedent that the COUNT is the finding.",
+  "missing_pointer_legs": [
+   122,
+   124,
+   127,
+   128,
+   133,
+   135,
+   138,
+   139,
+   140,
+   142,
+   144,
+   146,
+   147,
+   149,
+   157,
+   158,
+   161
+  ],
+  "missing_pointer_count": 17,
+  "files_this_leg_created_on_another_legs_behalf": 0,
+  "shared_ledgers_edited": 0
+ },
+ "figure": null,
+ "figure_rationale": "no measurement, no figure -- the repository's standing convention; DIRECTION.md's leg-155 territory declares no figure path",
+ "wall_clock_seconds": 4.782874584197998
+}
