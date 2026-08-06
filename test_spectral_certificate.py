@@ -34,6 +34,8 @@ from solver.spectral_certificate import (
     tail_singular_pair,
     block_upper_triangular_bound, kernel_membership_ladder, nogo_hypotheses,
     tail_kernel_defect,
+    counterexample_norm_floor, general_class_tradeoff, l1_bounded_below_constant,
+    singular_sequence_rate,
 )
 
 PASS, FAIL = "PASS", "FAIL"
@@ -362,6 +364,101 @@ gate("nogo_hypotheses separates mu = 0 from mu = 2 by orders of magnitude",
      and _h2["sigma_min"] > 100.0 * _h0["sigma_min"],
      f"sigma_min(T): {_h0['sigma_min']:.4e} at mu=0 vs {_h2['sigma_min']:.4e} at mu=2 "
      f"({_h2['sigma_min'] / _h0['sigma_min']:.0f}x); kernel norm {_h0['kernel_norm_l1_w']:.4f}")
+
+
+# ---------------------------------------------------------------------------
+# ROUTE-NGX (leg 127): the general class A21 != 0.  These gate the two halves of the
+# theorem separately -- the arithmetic of the trade-off, and the fact that the operator's
+# l^1_w realization falls on the "not bounded below" side of it.
+# ---------------------------------------------------------------------------
+
+# 32 -- the trade-off is arithmetic, and it is SHARP.  Gated so the one line the theorem
+# rests on cannot be silently edited, and so that "attained" is checked and not asserted.
+_t_zero = general_class_tradeoff(0.0, 100.0, 0.01)          # A = L^-1: ||A|| = 1/sigma_min
+_t_half = general_class_tradeoff(0.95, 10.0, 0.01)
+_t_viol = general_class_tradeoff(0.5, 10.0, 0.01)           # 0.5 < 0.9: must report FALSE
+gate("general_class_tradeoff is Z1 >= 1 - ||A|| sigma_min, and is ATTAINED",
+     abs(_t_zero["rhs"]) < 1e-15 and abs(_t_zero["slack"]) < 1e-15
+     and abs(_t_half["rhs"] - 0.9) < 1e-12 and _t_half["holds"]
+     and not _t_viol["holds"],
+     f"||A|| = 1/sigma_min gives rhs = {_t_zero['rhs']:.1e} and slack = "
+     f"{_t_zero['slack']:.1e} -- the bound is attained, not merely valid; a generic case "
+     f"gives rhs = {_t_half['rhs']:.4f} with holds = True, and a violating case "
+     f"(Z1 = 0.5 against the same rhs) correctly reports holds = False, so `holds` is not "
+     "a constant.  A21 never appears, which is why the class is the FULL bounded class "
+     "and not leg 58's A21 = 0")
+
+# 33 -- sigma_min = 1/||L^-1|| is computed by the identity, not an eigensolver, so it must
+# reproduce the norm exactly on a matrix whose inverse norm is known by hand.
+_D = np.diag([2.0, 5.0, 10.0])
+_sig, _j, _x = l1_bounded_below_constant(_D)
+gate("l1_bounded_below_constant inverts the induced-norm identity exactly",
+     abs(_sig - 2.0) < 1e-14 and _j == 0 and abs(np.abs(_x).sum() - 0.5) < 1e-14,
+     f"diag(2,5,10): sigma_min = {_sig:.15g} (exactly the smallest entry), attained on "
+     f"column {_j}, and the returned near-null vector has ||x|| = "
+     f"{np.abs(_x).sum():.15g} = 1/sigma_min")
+
+# 34 -- THE HALF THAT IS THIS LEG'S: the tail kernel's l^1_w norm CONVERGES for s < 1 while
+# the edge-row defect vanishes like M^(s-1).  Both halves are needed for the M^-(1-s) rate,
+# so both are gated on the vector actually built (not inferred from an exponent).
+_K = 4
+_norms, _edges = [], []
+for _M in (128, 256, 512, 1024):
+    _h = tail_right_null(_K, _K + _M)
+    _m = np.arange(_K + 1, _K + _M + 1, dtype=float)
+    _w = (1.0 + _m) ** 0.3
+    _norms.append(float(np.sum(np.abs(_h) * _w)))
+    # The LAST mode's coefficient is exactly zero: the kernel recursion alternates parity,
+    # which is the same fact that forces z_K = 0 in the proof.  The live edge row is the
+    # one before it, and taking index -1 here would report a NaN slope -- it did, on the
+    # first run of this gate, which is how the parity was re-confirmed.
+    _edges.append(float(abs(1.0 - (_K + _M - 1) / 2.0) * abs(_h[-2]) * _w[-2]))
+_edge_slope = float(np.polyfit(np.log([128, 256, 512, 1024]), np.log(_edges), 1)[0])
+_incr = [_norms[i + 1] - _norms[i] for i in range(len(_norms) - 1)]
+gate("s = 0.3: the kernel norm SETTLES while the edge defect falls like M^(s-1)",
+     _norms[-1] / _norms[0] < 1.10 and _incr[-1] < _incr[0]
+     and abs(_edge_slope - (0.3 - 1.0)) < 0.06,
+     f"||h||_w = {_norms[0]:.4f} -> {_norms[-1]:.4f} over M-K = 128..1024 (a rise of only "
+     f"{100 * (_norms[-1] / _norms[0] - 1):.1f}% over an 8x range, with the increments "
+     f"SHRINKING {_incr[0]:.4f} -> {_incr[-1]:.4f}: sum m^(s-2) converging, slowly, exactly "
+     f"as leg 58 warned a partial sum can look), while the edge row |1-M/2||h_M|w_M falls "
+     f"as M^({_edge_slope:+.4f}) against the predicted -0.70 -- the two halves that make "
+     "sigma_min ~ M^-(1-s)")
+
+# 35 -- and it must FAIL at s = 1.5, where the kernel norm diverges instead of settling.
+# Without this the previous gate would pass for a reason that has nothing to do with s.
+_n15 = []
+for _M in (128, 256, 512, 1024):
+    _h = tail_right_null(_K, _K + _M)
+    _m = np.arange(_K + 1, _K + _M + 1, dtype=float)
+    _n15.append(float(np.sum(np.abs(_h) * (1.0 + _m) ** 1.5)))
+gate("s = 1.5: the same kernel norm DIVERGES, so gate 34 is about s and not about h",
+     _n15[-1] / _n15[0] > 2.0,
+     f"||h||_w at s = 1.5: {_n15[0]:.4f} -> {_n15[-1]:.4f} (ratio "
+     f"{_n15[-1] / _n15[0]:.3f}, growing), against a ratio of "
+     f"{_norms[-1] / _norms[0]:.4f} at s = 0.3 on the identical vector")
+
+# 36 -- the counterexample floor is a MAGNITUDE and it diverges with the ladder.  Gated
+# because the honest reading of the theorem lives here: finite M does not exclude a
+# counterexample, unbounded ||A|| does.
+_floors = [counterexample_norm_floor(0.99, 6.432331e-03),
+           counterexample_norm_floor(0.99, 9.277828e-04)]
+gate("counterexample_norm_floor grows with the ladder and is finite at fixed M",
+     abs(_floors[0] - 1.5546) < 1e-3 and abs(_floors[1] - 10.7783) < 1e-3
+     and _floors[1] > _floors[0],
+     f"reaching Z1 = 0.99 needs ||A||_w >= {_floors[0]:.4f} at M-K = 128 and "
+     f"{_floors[1]:.4f} at M-K = 2048 (s = 0.3) -- modest at any FIXED M, unbounded along "
+     "the ladder, which is exactly the sense in which the no-go holds")
+
+# 37 -- singular_sequence_rate reports the exponent of a power law it did not choose.
+_Ms = np.array([128.0, 256.0, 512.0, 1024.0])
+gate("singular_sequence_rate recovers a planted exponent",
+     abs(singular_sequence_rate(_Ms, 3.7 * _Ms ** -0.7) - 0.7) < 1e-12
+     and abs(singular_sequence_rate(_Ms, 5.0 * np.ones(4))) < 1e-12,
+     "planted M^-0.70 recovered as "
+     f"{singular_sequence_rate(_Ms, 3.7 * _Ms ** -0.7):.12f}, and a constant ladder "
+     f"reports {singular_sequence_rate(_Ms, 5.0 * np.ones(4)):.1e} -- so a saturating "
+     "control (mu > 0) cannot be misread as a decaying one")
 
 
 n_fail = sum(1 for s, _, _ in results if s == FAIL)

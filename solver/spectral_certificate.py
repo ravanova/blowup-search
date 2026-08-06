@@ -804,3 +804,121 @@ def hilbert_pole_statement(k):
     return {"degree": int(k), "root_tested": "-i",
             "residual_at_root": float(abs(val)),
             "all_roots_in_lower_half_plane": True}
+
+
+# --------------------------------------------------------------------------
+# ROUTE NGX -- THE GENERAL CLASS `A21 != 0`, DECIDED (leg 127)
+#
+# Leg 58 proved `Z1 >= 1` on the class `A21 = 0` by testing `I - A L` on the single
+# direction `x = (0; h)`, where `T h = 0`: the `A12` and `A22` terms die with `T h`, and
+# what is left is `||h||_w`.  The argument STOPS at `A21 != 0` because the surviving
+# tail-row term becomes `h - A21 B h`, which `A21` can cancel.  Leg 54's battery covers
+# that case by MEASUREMENT ONLY (seven shapes, best admissible `Z1 = 8.9591`).
+#
+# `DIRECTION.md` conjectured the repair would be a TWO-DIRECTION argument: pair `(0; h)`
+# with the columns `A21` populates and show that what `A21` wins on one direction it pays
+# on another.  That is NOT what closes it, and the two-direction bound is genuinely weaker
+# -- carried out, it yields only `Z1 >= 1/(1 + eta)` with `eta = ||G^-1 B h||_w/||h||_w`,
+# and `eta` is large here, so it proves nothing.  What closes it is a ONE-direction
+# argument that never splits `A` into blocks at all, and therefore never has an `A21` to
+# be stopped by:
+#
+#     for every x:   ||x||_w  <=  ||(I - A L)x||_w  +  ||A||_w ||L x||_w
+#     minimising over x:   Z1  >=  1 - ||A||_w * sigma_min(L),
+#     sigma_min(L) := inf_{x != 0} ||L x||_w / ||x||_w = 1 / ||L^-1||_w.
+#
+# THAT INEQUALITY IS FOLKLORE AND IS NOT CLAIMED BY THIS REPOSITORY.  It is the
+# contrapositive, with a remainder, of the standing `Z1 < 1 => invertible` hypothesis of
+# every radii-polynomial paper (Breden-Desvillettes-Lessard arXiv:1503.06315, Cadiot
+# arXiv:2505.03091, arXiv:2411.18361).  `writeup/novelty/leg_127.md` records the pass that
+# established this and forbids the claim.  What leg 127 contributes is only WHICH SIDE OF
+# IT THIS OPERATOR'S `l^1_w` REALIZATION FALLS ON, and the explicit sequence that puts it
+# there.
+#
+# NAME THE REALIZATION (lesson 70), AND HERE IT IS NOT OPTIONAL.  arXiv:2607.19762 (Xu,
+# 2026) proves that the SAME `a = 0` CLM linearization, realized on origin-`H^2`, has point
+# spectrum exactly `{0, 1}` and essential spectrum meeting `{Re lam >= -1/2}` only in the
+# line `{Re lam = -1/2}` -- so after the standard modulation removes the two symmetry modes
+# it is INVERTIBLE there, with a spectral gap of `1/2`.  Nothing below contradicts that and
+# nothing below may be quoted as a statement about the operator: every function in this
+# section is a statement about weighted `l^1` of the odd-sine coefficients at `s < 1`.
+# --------------------------------------------------------------------------
+def l1_bounded_below_constant(Ls):
+    """`sigma_min = inf ||L x||_w / ||x||_w = 1 / ||L^-1||_w`, for an ALREADY-SCALED matrix.
+
+    `Ls` is expected in the coordinates where the weighted `l^1` operator norm is the plain
+    max-abs-column-sum (rows already multiplied by `w_row`, columns divided by `w_col`),
+    which is what `_scaled_tail` and leg 53's assembly both produce.  The identity
+    `inf_x ||Lx||/||x|| = 1/||L^-1||` is exact in ANY induced norm, so no eigensolver is
+    involved and nothing here is badly conditioned except the inverse itself.
+
+    Returns `(sigma_min, argmax_column, x)` with `x = L^-1 e_j` the direction attaining it:
+    `||L x||_w = 1` by construction and `||x||_w = 1/sigma_min`, so `x` IS the near-null
+    vector, returned so the caller can check it rather than trust it."""
+    Ls = np.asarray(Ls, dtype=float)
+    Li = np.linalg.inv(Ls)
+    colsums = np.abs(Li).sum(0)
+    j = int(np.argmax(colsums))
+    nrm = float(colsums[j])
+    return (1.0 / nrm if nrm > 0 else float("inf")), j, Li[:, j]
+
+
+def explicit_far_field_direction(Gs, Bs, h_scaled):
+    """The near-null direction WRITTEN DOWN instead of found: `v = (z; h)`, `G z = -B h`.
+
+    `h_scaled` is the analytic tail kernel `tail_right_null(K, M)` already multiplied by the
+    tail weights.  Choosing `z` to annihilate the finite rows exactly leaves `L v` supported
+    on the tail rows alone, and on this operator that support turns out to be a SINGLE row
+    -- the truncation edge `m = M` -- because the parity structure forces `z_K = 0`, which
+    kills the one finite-to-tail coupling entry `(1 - K/2)`.
+
+    This is the vector the proof uses.  `l1_bounded_below_constant` finds the optimum
+    numerically and independently; the runner checks the two agree, which is the difference
+    between a constructive proof and a report about `numpy.linalg.inv` (lesson 86)."""
+    z = np.linalg.solve(np.asarray(Gs, dtype=float),
+                        -np.asarray(Bs, dtype=float) @ np.asarray(h_scaled, dtype=float))
+    return np.concatenate([z, np.asarray(h_scaled, dtype=float)])
+
+
+def general_class_tradeoff(Z1, A_norm, sigma_min):
+    """THE TRADE-OFF, as one line of arithmetic that can be checked against banked data.
+
+        for EVERY bounded A, A21 completely free:   Z1  >=  1 - ||A||_w * sigma_min(L)
+
+    Returns the right-hand side and the slack `Z1 - rhs >= 0`.  The inequality is FOLKLORE
+    (see the section header); what is checkable here is that it is SHARP -- taking
+    `A = L^-1` gives `Z1 = 0` and `||A||_w = 1/sigma_min` exactly, so the right-hand side is
+    exactly `0` and the slack is exactly `0`.  A bound that is attained is not a lossy
+    estimate, and that is why the conclusion does not leak."""
+    rhs = 1.0 - float(A_norm) * float(sigma_min)
+    return {"Z1": float(Z1), "A_norm": float(A_norm), "sigma_min": float(sigma_min),
+            "rhs": float(rhs), "slack": float(Z1) - rhs, "holds": bool(float(Z1) >= rhs)}
+
+
+def counterexample_norm_floor(Z1_target, sigma_min):
+    """How big `||A||_w` MUST be for a counterexample reaching `Z1_target < 1` to exist.
+
+        ||A||_w  >=  (1 - Z1_target) / sigma_min(L)  =  (1 - Z1_target) * ||L^-1||_w
+
+    This is the whole content of the no-go in the general class, and it is a MAGNITUDE, not
+    a boolean: at any fixed truncation `M` the floor is finite and modest, so a
+    counterexample is NOT excluded at finite `M`.  It is excluded in the only sense the
+    method cares about -- uniformly in `M`, for a single bounded `A` -- because
+    `||L^-1||_w` diverges like `M^(1-s)` and the floor diverges with it."""
+    return float(1.0 - float(Z1_target)) / float(sigma_min)
+
+
+def singular_sequence_rate(Ms, ratios):
+    """The fitted exponent `p` in `sigma_min ~ M^(-p)`, reported as a shape (discipline 72).
+
+    The prediction this leg tests is `p = 1 - s`, from the edge-row mechanism: the defect is
+    `|1 - M/2| * |h_M| * w_M` with `h_M ~ M^-2` and `w_M ~ M^s`, i.e. `~ M^(s-1)`, against a
+    kernel norm `||h||_w ~ sum m^(s-2)` that CONVERGES for `s < 1`.  Both halves have to be
+    right for the exponent to come out, which is why the exponent and not the endpoint is
+    the reported quantity."""
+    Ms = np.asarray(Ms, dtype=float)
+    ys = np.asarray(ratios, dtype=float)
+    ok = (Ms > 0) & (ys > 0) & np.isfinite(ys)
+    if ok.sum() < 2:
+        return float("nan")
+    return float(-np.polyfit(np.log(Ms[ok]), np.log(ys[ok]), 1)[0])
