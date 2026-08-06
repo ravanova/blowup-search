@@ -1,0 +1,979 @@
+{
+  "leg": 149,
+  "route": "ROUTE-PGF",
+  "kind": "documentation/hygiene audit -- no solver module, no physics number",
+  "pinned_sha": "65d6ada7a99194143a059cd631e3de5f98a7168b",
+  "pin_scope": "DIRECTION.md only; PROGRESS.md is git-ignored and CANNOT be pinned",
+  "progress_path_read": "/home/andy/projects/Unsolved/PROGRESS.md",
+  "progress_self_declared_timestamp": "2026-08-06, mid-cycle (fresh orchestrator session, resumed from a stale/lost",
+  "gate_verbatim": "Does every escalation/parked-branch/open-question item in DIRECTION.md's Status and 'Open direction questions' sections have an accurate, current PROGRESS.md ⚠ NEEDS YOU entry, and does every PROGRESS.md ⚠ NEEDS YOU entry correspond to something actually live in DIRECTION.md (no stale entry left behind after a ruling lands)?",
+  "A1_direction_side": {
+    "open_questions_section_line": 3677,
+    "open_question_items": [
+      {
+        "id": "D-OQ1",
+        "source": "Open direction questions",
+        "ordinal": 1,
+        "headline": "1. **`NG` entering the committed sequence is escalation #1**, and the DM is making the call under the user's explicit pre-delegation (\"whichever pursues our goals best\"). Flagged h",
+        "leg_anchors": [
+          63
+        ],
+        "branch_anchors": [],
+        "status_markers": [
+          "OVERTAKEN"
+        ],
+        "numerics": [
+          "63"
+        ],
+        "chars": 694
+      },
+      {
+        "id": "D-OQ2",
+        "source": "Open direction questions",
+        "ordinal": 2,
+        "headline": "2. **RESOLVED 2026-08-06 by user directive.** The user ruled: *\"Leg 63, let's pursue this if it might be beneficial towards our goal of solving Clay or towards our sub-goal of prod",
+        "leg_anchors": [
+          53,
+          63,
+          125
+        ],
+        "branch_anchors": [
+          "leg/m2-v1"
+        ],
+        "status_markers": [
+          "RESOLVED",
+          "PARKED"
+        ],
+        "numerics": [
+          "0.05",
+          "0.9156",
+          "06",
+          "08",
+          "125",
+          "1908.09385",
+          "2.0270",
+          "2026",
+          "53",
+          "63"
+        ],
+        "chars": 3163
+      },
+      {
+        "id": "D-OQ3",
+        "source": "Open direction questions",
+        "ordinal": 3,
+        "headline": "3. **What is the exit criterion for this project?** The prize is a novel Tier-3 result on a model where blow-up is provable. `NG`'s yes-branch would deliver a *negative* Tier-3-sha",
+        "leg_anchors": [
+          58,
+          63,
+          125,
+          127
+        ],
+        "branch_anchors": [],
+        "status_markers": [
+          "PARKED"
+        ],
+        "numerics": [
+          "0",
+          "06",
+          "08",
+          "125",
+          "127",
+          "2026",
+          "58",
+          "63"
+        ],
+        "chars": 1128
+      }
+    ],
+    "status_items": [
+      {
+        "id": "S-PQ-PARKED",
+        "source": "Status / Live assignments",
+        "line": 93,
+        "anchor": "**Leg 60 (Route-PQ) answered NO — escalation #4.**",
+        "why_enumerated": "Status: leg 60 (Route-PQ), escalation #4 -- asserts the branch is parked AND that it is listed in PROGRESS.md's escalations for the user.",
+        "headline": "**Leg 60 (Route-PQ) answered NO — escalation #4.** 111/114 of Route-PORT v1/v2's quoted numbers reproduce from stored data; two do not (v2's \"28x worse\" claim is 63x in its own lad",
+        "leg_anchors": [
+          60,
+          72
+        ],
+        "branch_anchors": [
+          "leg/pq-v1"
+        ],
+        "status_markers": [
+          "PARKED"
+        ],
+        "numerics": [
+          "111",
+          "114",
+          "4",
+          "60",
+          "64",
+          "65",
+          "67",
+          "68",
+          "70",
+          "71",
+          "72"
+        ]
+      },
+      {
+        "id": "S-PARKED-PAIR",
+        "source": "Status / Live assignments",
+        "line": 868,
+        "anchor": "Parked escalations, untouchable by any leg:",
+        "why_enumerated": "Live assignments: the authoritative list of parked escalations binding every leg.",
+        "headline": "Parked escalations, untouchable by any leg: leg 63/M2 (`leg/m2-v1`) and leg 60/PQ (`leg/pq-v1`). The seven open exploration slots are filled from the new 110-series queue below: | ",
+        "leg_anchors": [
+          60,
+          63
+        ],
+        "branch_anchors": [
+          "leg/m2-v1",
+          "leg/pq-v1"
+        ],
+        "status_markers": [
+          "PARKED"
+        ],
+        "numerics": [
+          "110",
+          "60",
+          "63"
+        ]
+      },
+      {
+        "id": "S-BX-EXHAUSTED",
+        "source": "Status / Live assignments",
+        "line": 656,
+        "anchor": "leg 126 (BX) has landed, gate NO, and the committed sequence is",
+        "why_enumerated": "Status: stage B exhausted, escalation #1 for the user, written up in PROGRESS.md's NEEDS YOU alongside the M2 escalation and the exit-criterion question.",
+        "headline": "leg 126 (BX) has landed, gate NO, and the committed sequence is EXHAUSTED. There is currently NO critical-path leg.** Stage B's full declared search space (1,686 configurations: 14",
+        "leg_anchors": [
+          63,
+          125,
+          126
+        ],
+        "branch_anchors": [],
+        "status_markers": [
+          "STILL_OPEN",
+          "EXHAUSTED"
+        ],
+        "numerics": [
+          "1032",
+          "125",
+          "126",
+          "144",
+          "1686",
+          "510",
+          "6",
+          "6.0424",
+          "63"
+        ]
+      },
+      {
+        "id": "S-OQ-CLAIM",
+        "source": "Status / Live assignments",
+        "line": 3679,
+        "anchor": "These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`.",
+        "why_enumerated": "The file's own bidirectional invariant about the two ledgers -- the sentence this leg's gate is, in effect, a test of.  NOT itself an escalation item: it is excluded from the unmatched count, because a meta-sentence has no PROGRESS counterpart to be missing.",
+        "headline": "These also appear under `⚠ NEEDS YOU` in `PROGRESS.md`. The run continues around them. 1. **`NG` entering the committed",
+        "leg_anchors": [],
+        "branch_anchors": [],
+        "status_markers": [],
+        "numerics": []
+      }
+    ],
+    "direction_total_lines": 3755
+  },
+  "A2_progress_side": {
+    "needs_you_section_line": 3,
+    "items": [
+      {
+        "id": "P-1",
+        "ordinal": 1,
+        "headline": "1. **NEW, 2026-08-06 — Stage `B` (the last stage in the committed sequence) has answered its gate NO, and the committed sequence is now EXHAUSTED.** Leg 126 (Route-BX) audited stag",
+        "leg_anchors": [
+          63,
+          125,
+          126
+        ],
+        "branch_anchors": [],
+        "status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "numerics": [
+          "06",
+          "08",
+          "1032",
+          "125",
+          "126",
+          "144",
+          "1686",
+          "2026",
+          "510",
+          "6.04",
+          "6.0424",
+          "63"
+        ],
+        "chars": 1250
+      },
+      {
+        "id": "P-2",
+        "ordinal": 2,
+        "headline": "2. **Escalation #1 (leg 63, Route-M2): the γ=2 dissipative gCLM candidate.** Every inviscid target this repository has ever ranked fails the method's multiplier/shift screen identi",
+        "leg_anchors": [
+          63
+        ],
+        "branch_anchors": [
+          "leg/m2-v1"
+        ],
+        "status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "numerics": [
+          "06",
+          "08",
+          "1908.09385",
+          "2026",
+          "63"
+        ],
+        "chars": 644
+      },
+      {
+        "id": "P-3",
+        "ordinal": 3,
+        "headline": "3. **What is the exit criterion for this project?** The prize is a novel Tier-3 result on a model where blow-up is provable. With stage B closed as a measured/structural negative (",
+        "leg_anchors": [
+          58,
+          63,
+          125,
+          127
+        ],
+        "branch_anchors": [],
+        "status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "numerics": [
+          "125",
+          "127",
+          "58",
+          "63"
+        ],
+        "chars": 538
+      }
+    ],
+    "progress_total_lines": 66,
+    "self_declared_timestamp": "2026-08-06, mid-cycle (fresh orchestrator session, resumed from a stale/lost"
+  },
+  "A3_match": {
+    "loose_jaccard_floor": 0.15,
+    "median_pairwise_jaccard": 0.0578,
+    "max_pairwise_jaccard": 0.3969,
+    "n_cross_pairs_evaluated": 21,
+    "pairs": [
+      {
+        "progress_item": "P-1",
+        "direction_item": "D-OQ1",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.096,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-1",
+        "direction_item": "D-OQ2",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0962,
+        "shared_leg_anchors": [
+          63,
+          125
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-1",
+        "direction_item": "D-OQ3",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0629,
+        "shared_leg_anchors": [
+          63,
+          125
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-1",
+        "direction_item": "S-PARKED-PAIR",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0638,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-1",
+        "direction_item": "S-BX-EXHAUSTED",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": true,
+        "jaccard": 0.3969,
+        "shared_leg_anchors": [
+          63,
+          125,
+          126
+        ],
+        "verdict": "MATCHED"
+      },
+      {
+        "progress_item": "P-2",
+        "direction_item": "D-OQ1",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0404,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-2",
+        "direction_item": "D-OQ2",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": true,
+        "jaccard": 0.2244,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "MATCHED"
+      },
+      {
+        "progress_item": "P-2",
+        "direction_item": "D-OQ3",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0385,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-2",
+        "direction_item": "S-PARKED-PAIR",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0476,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-2",
+        "direction_item": "S-BX-EXHAUSTED",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0876,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-3",
+        "direction_item": "D-OQ1",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-3",
+        "direction_item": "D-OQ2",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0578,
+        "shared_leg_anchors": [
+          63,
+          125
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-3",
+        "direction_item": "D-OQ3",
+        "direction_source": "Open direction questions",
+        "strict": true,
+        "loose": true,
+        "jaccard": 0.3261,
+        "shared_leg_anchors": [
+          58,
+          63,
+          125,
+          127
+        ],
+        "verdict": "MATCHED"
+      },
+      {
+        "progress_item": "P-3",
+        "direction_item": "S-PARKED-PAIR",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0192,
+        "shared_leg_anchors": [
+          63
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      },
+      {
+        "progress_item": "P-3",
+        "direction_item": "S-BX-EXHAUSTED",
+        "direction_source": "Status / Live assignments",
+        "strict": true,
+        "loose": false,
+        "jaccard": 0.0543,
+        "shared_leg_anchors": [
+          63,
+          125
+        ],
+        "verdict": "BORDERLINE(strict-only)"
+      }
+    ],
+    "progress_items_unmatched": [],
+    "direction_oq_items_unmatched": [],
+    "direction_status_items_unmatched": [
+      "S-PQ-PARKED"
+    ],
+    "direction_status_items_excluded_as_meta": [
+      "S-OQ-CLAIM"
+    ],
+    "control_can_disagree": true,
+    "matched_pairs_only": [
+      {
+        "pair": "P-1~S-BX-EXHAUSTED",
+        "jaccard": 0.3969
+      },
+      {
+        "pair": "P-2~D-OQ2",
+        "jaccard": 0.2244
+      },
+      {
+        "pair": "P-3~D-OQ3",
+        "jaccard": 0.3261
+      }
+    ],
+    "progress_items_with_a_matched_counterpart": [
+      "P-1",
+      "P-2",
+      "P-3"
+    ],
+    "direction_oq_items_with_no_matched_counterpart": [
+      "D-OQ1"
+    ],
+    "progress_items_matched_to_status_not_to_an_open_question": [
+      "P-1"
+    ]
+  },
+  "A4_accuracy": {
+    "numeric_and_marker_checks": [
+      {
+        "pair": "P-1~D-OQ1",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "1032",
+          "125",
+          "126",
+          "144",
+          "1686",
+          "2026",
+          "510",
+          "6.04",
+          "6.0424"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "direction_status_markers": [
+          "OVERTAKEN"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-1~D-OQ2",
+        "numerics_agreeing": [
+          "06",
+          "08",
+          "125",
+          "2026",
+          "63"
+        ],
+        "n_agreeing": 5,
+        "progress_only_numerics": [
+          "1032",
+          "126",
+          "144",
+          "1686",
+          "510",
+          "6.04",
+          "6.0424"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "direction_status_markers": [
+          "RESOLVED",
+          "PARKED"
+        ],
+        "status_markers_conflict": true
+      },
+      {
+        "pair": "P-1~D-OQ3",
+        "numerics_agreeing": [
+          "06",
+          "08",
+          "125",
+          "2026",
+          "63"
+        ],
+        "n_agreeing": 5,
+        "progress_only_numerics": [
+          "1032",
+          "126",
+          "144",
+          "1686",
+          "510",
+          "6.04",
+          "6.0424"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-1~S-PARKED-PAIR",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "1032",
+          "125",
+          "126",
+          "144",
+          "1686",
+          "2026",
+          "510",
+          "6.04",
+          "6.0424"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-1~S-BX-EXHAUSTED",
+        "numerics_agreeing": [
+          "1032",
+          "125",
+          "126",
+          "144",
+          "1686",
+          "510",
+          "6.0424",
+          "63"
+        ],
+        "n_agreeing": 8,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "2026",
+          "6.04"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED",
+          "EXHAUSTED"
+        ],
+        "direction_status_markers": [
+          "STILL_OPEN",
+          "EXHAUSTED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-2~D-OQ1",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "1908.09385",
+          "2026"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "OVERTAKEN"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-2~D-OQ2",
+        "numerics_agreeing": [
+          "06",
+          "08",
+          "1908.09385",
+          "2026",
+          "63"
+        ],
+        "n_agreeing": 5,
+        "progress_only_numerics": [],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "RESOLVED",
+          "PARKED"
+        ],
+        "status_markers_conflict": true
+      },
+      {
+        "pair": "P-2~D-OQ3",
+        "numerics_agreeing": [
+          "06",
+          "08",
+          "2026",
+          "63"
+        ],
+        "n_agreeing": 4,
+        "progress_only_numerics": [
+          "1908.09385"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-2~S-PARKED-PAIR",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "1908.09385",
+          "2026"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-2~S-BX-EXHAUSTED",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "06",
+          "08",
+          "1908.09385",
+          "2026"
+        ],
+        "progress_status_markers": [
+          "PENDING_RULING",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "STILL_OPEN",
+          "EXHAUSTED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-3~D-OQ1",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "125",
+          "127",
+          "58"
+        ],
+        "progress_status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "OVERTAKEN"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-3~D-OQ2",
+        "numerics_agreeing": [
+          "125",
+          "63"
+        ],
+        "n_agreeing": 2,
+        "progress_only_numerics": [
+          "127",
+          "58"
+        ],
+        "progress_status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "RESOLVED",
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-3~D-OQ3",
+        "numerics_agreeing": [
+          "125",
+          "127",
+          "58",
+          "63"
+        ],
+        "n_agreeing": 4,
+        "progress_only_numerics": [],
+        "progress_status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-3~S-PARKED-PAIR",
+        "numerics_agreeing": [
+          "63"
+        ],
+        "n_agreeing": 1,
+        "progress_only_numerics": [
+          "125",
+          "127",
+          "58"
+        ],
+        "progress_status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "PARKED"
+        ],
+        "status_markers_conflict": false
+      },
+      {
+        "pair": "P-3~S-BX-EXHAUSTED",
+        "numerics_agreeing": [
+          "125",
+          "63"
+        ],
+        "n_agreeing": 2,
+        "progress_only_numerics": [
+          "127",
+          "58"
+        ],
+        "progress_status_markers": [
+          "STILL_OPEN",
+          "PARKED"
+        ],
+        "direction_status_markers": [
+          "STILL_OPEN",
+          "EXHAUSTED"
+        ],
+        "status_markers_conflict": false
+      }
+    ],
+    "n_matched_pairs_with_status_marker_conflict": 1,
+    "matched_pairs_in_conflict": [
+      "P-2~D-OQ2"
+    ],
+    "n_borderline_pairs_propagating_the_same_conflict": 1,
+    "borderline_pairs_propagating": [
+      "P-1~D-OQ2"
+    ]
+  },
+  "A5_ground_truth": {
+    "n_legs_landed_on_main_at_pin": 77,
+    "max_leg_landed": 142,
+    "parked_branch_assertions": [
+      {
+        "direction_item": "S-PQ-PARKED",
+        "branch": "leg/pq-v1",
+        "declared_by_direction": "parked / not merged / untouchable by any leg",
+        "owning_leg_per_direction": 60,
+        "owning_leg_landed_on_main_at_pin": true,
+        "verdict": "STALE — the branch's own leg has landed on main",
+        "legs_named_in_item": [
+          60,
+          72
+        ]
+      },
+      {
+        "direction_item": "S-PARKED-PAIR",
+        "branch": "leg/m2-v1",
+        "declared_by_direction": "parked / not merged / untouchable by any leg",
+        "owning_leg_per_direction": 63,
+        "owning_leg_landed_on_main_at_pin": false,
+        "verdict": "CURRENT — leg has not landed",
+        "legs_named_in_item": [
+          60,
+          63
+        ]
+      },
+      {
+        "direction_item": "S-PARKED-PAIR",
+        "branch": "leg/pq-v1",
+        "declared_by_direction": "parked / not merged / untouchable by any leg",
+        "owning_leg_per_direction": 60,
+        "owning_leg_landed_on_main_at_pin": true,
+        "verdict": "STALE — the branch's own leg has landed on main",
+        "legs_named_in_item": [
+          60,
+          63
+        ]
+      }
+    ],
+    "n_direction_side_stale_parked_assertions": 2
+  },
+  "A6_progress_internal": {
+    "live_this_cycle_declared": [
+      127,
+      128,
+      133,
+      135,
+      137,
+      138,
+      139,
+      140
+    ],
+    "live_this_cycle_count": 8,
+    "live_but_already_landed_on_main": [
+      128,
+      133,
+      135,
+      137,
+      138,
+      139,
+      140
+    ],
+    "live_and_genuinely_unlanded": [
+      127
+    ],
+    "landed_this_cycle_declared": [
+      126,
+      130,
+      131,
+      132,
+      134,
+      136,
+      141
+    ],
+    "landed_detail_section": [
+      126,
+      131,
+      134,
+      136,
+      141
+    ],
+    "declared_landed_missing_from_detail": [
+      130,
+      132
+    ],
+    "reserve_declared": [
+      129
+    ],
+    "reserve_blocker_legs_already_landed": [],
+    "reserve_blocked_on_133_but_133_landed": true,
+    "landed_on_main_but_absent_from_progress_entirely": [
+      142
+    ],
+    "text_claims_nine_other_exploration_legs": true,
+    "nine_vs_declared_live_count_delta": 1
+  },
+  "gate_answer": "NO",
+  "counts_headline": {
+    "progress_needs_you_items": 3,
+    "direction_open_questions": 3,
+    "direction_status_items_enumerated": 4,
+    "progress_items_unmatched": 0,
+    "direction_oq_items_unmatched": 0,
+    "direction_status_items_unmatched": 1,
+    "matched_pairs_with_contradicting_status_markers": 1,
+    "direction_side_stale_parked_branch_assertions": 2
+  }
+}
