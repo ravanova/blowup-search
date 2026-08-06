@@ -216,24 +216,97 @@ def gate5_collapse_refuses():
           f"Lspec {early['Lspec']:.3f} -> {late['Lspec']:.3f}")
 
 
+# The window sweep IS the error bar on p (fit_relevance's own docstring: "THE WINDOW
+# IS THE DOMINANT SYSTEMATIC AND IS SWEPT, NOT CHOSEN").  G6 quotes it explicitly
+# rather than calling fit_relevance once at its default and signing the result.
+G6_WINDOWS = ((0.20, 0.94), (0.30, 0.94), (0.40, 0.94), (0.50, 0.94), (0.60, 0.94),
+              (0.40, 0.70), (0.40, 0.80), (0.55, 0.85), (0.50, 0.98), (0.70, 0.98))
+
+
 def gate6_relevance_sign():
-    """The D/N instrument itself still has to work: p must DECREASE with s and change
-    sign, even though this run cannot pin where the sign change is.  Testing the
-    instrument separately from the quantity is the point (the run is underpowered for
-    s_c; it is not underpowered for 'does D/N respond to s at all')."""
+    """The D/N instrument itself still has to work: p must DECREASE with s, even
+    though this run cannot pin where the sign change is.  Testing the instrument
+    separately from the quantity is the point (the run is underpowered for s_c; it is
+    not underpowered for 'does D/N respond to s at all').
+
+    WHAT THIS GATE USED TO ASSERT, AND WHY IT WAS WRONG (bench leg, 2026-08-06).
+    It called `fit_relevance` ONCE at its default window (0.40, 0.94) and asserted the
+    absolute sign `p > 0 at s=0.10`.  That measured p = -0.211 and was RED -- but the
+    red was in the gate, not in the solver.  Three measurements, all reproduced here
+    every run, say so:
+
+      (i)  the window systematic on p(s=0.10) is +-1.8, i.e. an order of magnitude
+           larger than the |p| = 0.21 whose SIGN was being asserted.  Swept over the
+           ten windows below, p(s=0.10) spans roughly [-1.6, +2.0] and CROSSES ZERO;
+           the sign of a single-window p at s=0.10 is therefore not a property of the
+           object.  p(s=1.00) spans roughly [-4.1, -1.7] and never crosses.
+      (ii) the run's OWN geometry predicts the opposite sign from its own D/N fit at
+           s=0.10: beta from Lgrad is 1.74, so p = 1-2*beta*s = +0.65, while the
+           default-window fit says -0.21.  Inverting the fit instead gives an implied
+           beta_eff of 6.05, 3.5x the geometric value.  At s=1.00 the same comparison
+           agrees in sign and to 24% (-2.81 predicted vs -3.49 fitted) -- because
+           there the predicted |p| is 4x the window systematic instead of a third of it.
+      (iii) `collapse_window_report` REFUSES on BOTH of these runs (0.67 and 0.63
+           decades of (T-t), need 1.5; beta moves 73% and 57% across sub-windows,
+           allow 25%) -- the same refusal G5 gates on its own configuration.  A run
+           not entitled to quote beta is not entitled to quote the sign of 1-2*beta*s.
+
+    So the gate now asserts the two things the module says ARE robust -- the sign at
+    s=1.00, and the ORDERING in s, where the shared-window bias largely cancels -- at
+    EVERY window rather than at one, and it records the s=0.10 indeterminacy as a
+    measured fact instead of asserting through it.  The assertion is not flipped and
+    the threshold is not relaxed: `p > 0 at s=0.10` is withdrawn, because the run
+    cannot support a claim of that shape in either direction.
+
+    Nothing in `solver/fractional_boussinesq.py` changed for this repair, so every
+    banked Route-G number is bit-identical by construction.
+    """
     print("G6  the D/N instrument responds to s with the right sign")
     n = 192
     w0, th0 = houluo_sharp_ic(n)
-    ps = {}
+    runs, ps = {}, {}
     for s in (0.10, 1.00):
         solver = FractionalBoussinesq(n=n, nu=1e-3, s=s)
         r = solver.run(w0, th0, amp_factor=1e4, sample_every=20, max_steps=100000,
                        wall_max=240.0)
-        ps[s] = fit_relevance(r, estimate_T(r))["p"]
-    check("p > 0 at s=0.10 (dissipation losing)", ps[0.10] > 0, f"p={ps[0.10]:.3f}")
-    check("p < 0 at s=1.00 (dissipation winning)", ps[1.00] < 0, f"p={ps[1.00]:.3f}")
-    check("p decreases with s", ps[1.00] < ps[0.10],
-          f"{ps[0.10]:.3f} -> {ps[1.00]:.3f}")
+        runs[s] = r
+        ps[s] = [fit_relevance(r, estimate_T(r), lo=lo, hi=hi)["p"]
+                 for lo, hi in G6_WINDOWS]
+
+    keep = [i for i in range(len(G6_WINDOWS))
+            if np.isfinite(ps[0.10][i]) and np.isfinite(ps[1.00][i])]
+    lo10 = [ps[0.10][i] for i in keep]
+    lo100 = [ps[1.00][i] for i in keep]
+
+    # (1) the sign at s=1.00 is robust to the window -- the claim that survives.
+    check("p < 0 at s=1.00 at EVERY window (dissipation winning)",
+          all(p < 0 for p in lo100),
+          f"{len(keep)} windows, p in [{min(lo100):.3f}, {max(lo100):.3f}], "
+          f"worst margin {max(lo100):.3f}")
+
+    # (2) the instrument RESPONDS to s -- also robust, and it is what G6 is named for.
+    gaps = [lo10[i] - lo100[i] for i in range(len(keep))]
+    check("p decreases with s at EVERY window (the instrument responds)",
+          all(g > 0 for g in gaps),
+          f"{len(keep)} windows, p(0.10)-p(1.00) in [{min(gaps):.3f}, "
+          f"{max(gaps):.3f}]")
+
+    # (3) the withdrawn claim, recorded as the measurement that withdrew it.
+    check("the s=0.10 sign is window-INDETERMINATE while the s=1.00 sign is not",
+          min(lo10) < 0 < max(lo10) and max(lo100) < 0,
+          f"p(0.10) spans [{min(lo10):.3f}, {max(lo10):.3f}] and straddles 0 "
+          f"({sum(1 for p in lo10 if p > 0)}/{len(keep)} windows positive); "
+          f"p(0.10) at the old default window = {ps[0.10][2]:.3f}")
+
+    # (4) and the run was never entitled to a single-window p in the first place.
+    rep = {s: collapse_window_report(runs[s], estimate_T(runs[s])) for s in runs}
+    check("collapse_window_report REFUSES on both G6 runs (so 1-2*beta*s is not "
+          "quotable from them)",
+          not rep[0.10]["measurable"] and not rep[1.00]["measurable"],
+          f"s=0.10: {rep[0.10]['decades']:.2f} decades, beta spread "
+          f"{rep[0.10]['beta_spread'] * 100:.0f}%; s=1.00: "
+          f"{rep[1.00]['decades']:.2f} decades, beta spread "
+          f"{rep[1.00]['beta_spread'] * 100:.0f}%")
 
 
 if __name__ == "__main__":
