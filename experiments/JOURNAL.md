@@ -3335,3 +3335,15 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   Theorem NGX rests on an exact folklore inequality and an analytic tail estimate,
   neither of which touches this code path -- the proof itself is untouched, only
   the numerical module has an adversarial-input gap. Careful, well-scoped finding.
+- **Leg 223 (Route-PUB3) — YES:** the audit-family synthesis, corrected to the
+  ACTUAL count this cycle -- THIRTEEN escalations (188, 198, 199, 200, 201, 202,
+  203, 204, 205, 208, 209, 213, 215), not the seven its own dispatch spec named.
+  Graded 1 MATERIALLY EXPOSED (202) / 1 claim-adjacent (203) / 1 uncertain (205) /
+  9 zero-so-far / 1 pending-ruling, and states plainly that not one of the seven
+  repair legs dispatched so far had actually landed at the time of writing, so
+  every "zero" is the finding leg's own unconfirmed measurement. Recovered a
+  second exposed consumer of leg 202's finding (Route-D v12, plausibly exposed,
+  in no shared ledger) and printed three unresolved banked-record disagreements
+  rather than silently picking a side. Self-referential finding: reports/STATUS.md
+  (orchestrator-owned, committed) was stale by ten escalations at time of writing
+  -- the same silent-wrong-bookkeeping shape the whole cycle was hunting in code.
