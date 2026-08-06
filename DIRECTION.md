@@ -40,8 +40,8 @@ Last leg number actually landed/merged on main: **57**. Legs **58–63** are res
 fully-specified, unused numbers carried over from the prior session (do not renumber them).
 This session adds **64–71**, a first refill adds **72–75**, a second refill adds **76–78**, a
 third adds **79** (implicitly, per its own entry above), a fourth refill adds **80–83**, a fifth
-refill adds **84–87**, and this sixth refill adds **88–91**. **Next fresh leg number for any
-future candidate is 92.**
+refill adds **84–87**, a sixth refill adds **88–91**, and this seventh refill adds **92–95**.
+**Next fresh leg number for any future candidate is 96.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -232,8 +232,30 @@ already shows **LEG-E=84 (TNA)**, which resolves cleanly: leg 81 (BRS) must have
 dispatched — matching "reserve is fully exhausted" exactly, with no unexplained leftover.
 **Current live nine (LEG-D still held for 76):** 58 (NG, critical, A), 62 (CP, B), 85 (GRA, C),
 84 (TNA, E), 71 (CAP, F), 87 (IVB, G), 80 (BHN, H), 86 (PCB, I), 83 (MFG, J). **Four fresh
-candidates
-(88–91) are added below for the next refill.**
+candidates (88–91) are added below for the next refill.**
+
+**Fourth adversarial-audit round: two more real findings, two clean closures, reserve
+exhausted again.**
+
+- **Leg 84 (TNA) landed: gate YES**, bundled with its bench-repair. `target_norm.py` now has a
+  domain guard, and the repair independently re-checked leg 55 (NB)'s banked margins against
+  it — confirmed **not contaminated** (0.0 diff). Slot vacated.
+- **Leg 85 (GRA) found a real false-convergence bug**: `gclm_rescaled.py`'s relaxation loop
+  reports reaching the fixed point after 1 step on certain gauge-scale trajectories. Bench-repair
+  dispatched with leg 85's own suggested one-line fix. `solver/gclm_rescaled.py` is off-limits
+  for editing by any new candidate until it lands. Slot vacated.
+- **Legs 86 (PCB) and 87 (IVB) both landed: gate YES** — the `port_certification.py` and
+  `interval.py` repairs are confirmed solid with zero regression. Both loops fully closed. Slots
+  vacated.
+- **All of 88–91 dispatched or landed** (coordinator confirms LEG-C=90, LEG-G=91; the remaining
+  two, 88 and 89, are inferred into the other two openings — E and I — per this file's reserve
+  order, not individually confirmed). **Current live nine (LEG-D still held for 76):** 58 (NG,
+  critical, A), 62 (CP, B), 90 (EXT4, C), 88 (GCA, E, inferred), 71 (CAP, F), 91 (FGA, G), 80
+  (BHN, H), 89 (BOA, I, inferred), 83 (MFG, J). Reserve is empty. **Four fresh candidates
+  (92–95) are added below** — the adversarial-audit pattern's remaining pool of genuinely
+  untouched, safe `solver/` modules is thinning, so this batch mixes in one literature watch and
+  two post-repair regression closures per the coordinator's suggestion, alongside one more fresh
+  adversarial audit.
 
 ---
 
@@ -309,10 +331,10 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-B | 62 | **CP** — the Cadiot pre-emption, settled from the full text | no | standard | `leg/cp-v1` | Does Cadiot arXiv:2505.03091 already cover the off-diagonal / zero-diagonal case? |
 | LEG-C | 90 | **EXT4** — has the rank-4 target's Conjecture 2.4 been resolved since? | no | light | `leg/ext4-v1` | Has Chen-Huang-Li's Conjecture 2.4 (HL singular steady stability) been proved or disproved since? |
 | LEG-D | — | **OPEN, held for leg 76 (MI)** pending its verifier's confirmation of leg 70's finding | — | — | — | — |
-| LEG-E | 84 | **TNA** — does target_norm.py silently extrapolate beyond its validated domain? | no | standard | `leg/tna-v1` | Under adversarial inputs past X_max=745, does target_norm.py silently return an untrustworthy result or flag the violation? |
+| LEG-E | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 91 | **FGA** — adversarial audit of fractional_gclm.py's critical-exponent computation | no | standard | `leg/fga-v1` | Under malformed dissipation-strength inputs, does s_c computation silently return a plausible-looking wrong value? |
-| LEG-H | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
+| LEG-H | 80 | **BHN** — adversarial audit of the bordered HL Newton solve | no | standard | `leg/bhn-v1` | Does `bordered_hl.py`'s Newton solve ever falsely report convergence under an adversarial battery? |
 | LEG-I | 89 | **BOA** — adversarial audit of boussinesq.py | no | standard | `leg/boa-v1` | Under malformed physical-space inputs, does the module silently return a plausible-looking wrong result? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
 
@@ -338,32 +360,30 @@ scope (advection) and Route-D v15 (literature scope) — "no measurement, no fig
 `writeup/build_figures.py` and `writeup/curate_evidence.py` stay **append-only**.
 
 **Territory-overlap check (explicit, as required).** Solver modules touched by the current live
-nine plus the four new reserve candidates (58, 62, 85, 84, 71, 87, 80, 86, 83, 88, 89, 90, 91):
-`spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62),
-none-owned/read-only(85 reads `gclm_rescaled.py`, edits nothing under a bug-found outcome),
-none-owned/read-only(84 reads `target_norm.py`, edits nothing), `capabilities.py`(71, factual
-"test"-field only, pre-committed narrow), none-owned/read-only(87 reads `interval.py`, fully
-repaired and unclaimed, edits nothing), `bordered_hl.py`(80), none-owned/read-only(86 reads
-`port_certification.py`, fully repaired and unclaimed, edits nothing), `marginal_flow.py`(83),
-none-owned/read-only(88 reads `gclm_family.py`, edits nothing), none-owned/read-only(89 reads
-`boussinesq.py`, edits nothing), none(90, literature watch, no code edits), none-owned/read-only
-(91 reads `fractional_gclm.py`, edits nothing). All thirteen distinct — **no collision.**
-`target_selection.py`(63) is **off the live list** — leg 63's branch is parked pending the
-user's ruling (see Status and Open direction questions §2); no live or reserve leg touches it
-while that's pending, to avoid a merge conflict with whatever the user decides. `hl_rescaled.py`
-(78) and `boussinesq_rescaled.py`(81) are similarly no longer claimed (both legs landed) and are
-free for a future candidate if needed, but none of 88-91 uses them, so no re-verification of
-that freedom was required here. LEG-D stays empty pending leg 76, whose territory
-(`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no live or reserve leg touches.
-`solver/interval.py`, `solver/spectral_utils.py` and `solver/port_certification.py` remain fully
-repaired and unclaimed. `writeup/data` JSON files for the current live nine plus reserve are
-likewise distinct names (`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
-`p2_route_gra_v1_adversarial.json`(85), `p2_route_tna_v1_domain_audit.json`(84),
-`p2_route_cap_v1_audit.json`(71), `p2_route_ivb_v1_postrepair.json`(87),
-`p2_route_bhn_v1_adversarial.json`(80), `p2_route_pcb_v1_postrepair.json`(86),
-`p2_route_mfg_v1_adversarial.json`(83), `p2_route_gca_v1_adversarial.json`(88),
-`p2_route_boa_v1_adversarial.json`(89), `p2_route_ext4_v1_target_watch4.json`(90),
-`p2_route_fga_v1_adversarial.json`(91)) — **no collision.**
+nine plus the four new reserve candidates (58, 62, 90, 88, 71, 91, 80, 89, 83, 92, 93, 94, 95):
+`spectral_certificate.py`(58), `certificate_shapes.py`+`literature_gates.py`(62), none(90,
+literature watch, no code edits), none-owned/read-only(88 reads `gclm_family.py`, edits nothing
+under a bug-found outcome), `capabilities.py`(71, factual "test"-field only, pre-committed
+narrow), none-owned/read-only(91 reads `fractional_gclm.py`, edits nothing), `bordered_hl.py`
+(80), none-owned/read-only(89 reads `boussinesq.py`, edits nothing), `marginal_flow.py`(83),
+none-owned/read-only(92 reads `gclm.py`, edits nothing), none(93, literature watch, no code
+edits), none-owned/read-only(94 reads `target_norm.py`, now repaired, edits nothing),
+none-owned/read-only(95 reads `gclm_rescaled.py`, edits nothing — see note below). All thirteen
+distinct — **no collision.** `target_selection.py`(63) stays off the live list (leg 63's branch
+parked pending the user's ruling). `solver/interval.py`, `solver/spectral_utils.py` and
+`solver/port_certification.py` remain fully repaired, unclaimed and independently re-verified
+(legs 86, 87). `solver/gclm_rescaled.py` is **newly off-limits** — leg 85's bench-repair is in
+flight; leg 95 (below) reads it for spec purposes only and is **not dispatchable until that
+repair lands**, the same discipline leg 76 follows for its own pending dependency. LEG-D stays
+empty pending leg 76, whose territory (`PHASE2_P2_NOTES.md`, `TECHNICAL_P2_ROUTEI_V1.md`) no
+live or reserve leg touches. `writeup/data` JSON files are likewise distinct names
+(`p2_route_ng_v1_nogo.json`(58), `p2_route_cp_v1_cadiot.json`(62),
+`p2_route_ext4_v1_target_watch4.json`(90), `p2_route_gca_v1_adversarial.json`(88),
+`p2_route_cap_v1_audit.json`(71), `p2_route_fga_v1_adversarial.json`(91),
+`p2_route_bhn_v1_adversarial.json`(80), `p2_route_boa_v1_adversarial.json`(89),
+`p2_route_mfg_v1_adversarial.json`(83), `p2_route_gla_v1_adversarial.json`(92),
+`p2_route_ext5_v1_target_watch5.json`(93), `p2_route_tnb_v1_postrepair.json`(94),
+`p2_route_grb_v1_postrepair.json`(95)) — **no collision.**
 
 ## Queue
 
@@ -1145,7 +1165,12 @@ measurement, so it does not fall under the gCLM-measurement ban (leg 42).
 ```
 
 ```
-### 84 — ROUTE-TNA: DOES target_norm.py SILENTLY EXTRAPOLATE BEYOND ITS VALIDATED DOMAIN?
+### 84 — ROUTE-TNA: DOES target_norm.py SILENTLY EXTRAPOLATE BEYOND ITS VALIDATED DOMAIN? (LANDED:
+gate YES — silent gap found, bench-repair bundled)
+**Landed finding.** Confirmed silent: a real gap, since fixed by a bundled bench-repair that
+added a domain guard to `target_norm.py`. The repair also independently re-checked leg 55
+(NB)'s banked margins against the new guard and confirmed them **not contaminated** (0.0 diff)
+— good news beyond the leg's own scope.
 **Thesis.** solver/target_norm.py's own validated line already documents a known limitation:
 "DOMAIN-limited, not resolution-limited: at the shipped X_max = 745 the far-field closure moves
 the exponent by 0.190 and the measurement is not trustworthy there." That is a property of the
@@ -1172,7 +1197,12 @@ audits whether the code surfaces the already-known limitation.
 ```
 
 ```
-### 85 — ROUTE-GRA: ADVERSARIAL AUDIT OF gclm_rescaled.py's FIXED-POINT REPORTING
+### 85 — ROUTE-GRA: ADVERSARIAL AUDIT OF gclm_rescaled.py's FIXED-POINT REPORTING (LANDED: gate
+YES — real false-convergence bug found, bench-repair dispatched)
+**Landed finding.** A real false-convergence bug: the relaxation loop reports having reached
+the fixed point after 1 step on certain gauge-scale trajectories. Leg 85 supplied its own
+suggested one-line fix; a bench-repair is applying it. `solver/gclm_rescaled.py` is off-limits
+for editing by any new candidate until that repair lands.
 **Thesis.** solver/gclm_rescaled.py's validated line confirms it "relaxes to the exact CLM
 self-similar fixed point" -- on well-behaved data. Its relaxation loop's own convergence
 reporting has never been checked against adversarial non-convergent trajectories: oscillation
@@ -1198,7 +1228,8 @@ measurement -- the same distinction that clears leg 83.
 ```
 
 ```
-### 86 — ROUTE-PCB: POST-REPAIR REGRESSION CHECK, port_certification.py
+### 86 — ROUTE-PCB: POST-REPAIR REGRESSION CHECK, port_certification.py (LANDED: gate YES —
+repair confirmed solid, zero regression)
 **Thesis.** Leg 79's bench-repair just added domain validation to `radii_polynomial_status`
 (11/25 false `closes=True` results -> 0/25) inside a module whose OTHER claim -- the line-sweep
 preconditioner gated to 9.5e-16 against the operator it inverts -- has not been independently
@@ -1223,7 +1254,8 @@ performance regression, not fabrication-rejection).
 ```
 
 ```
-### 87 — ROUTE-IVB: POST-REPAIR REGRESSION CHECK, interval.py
+### 87 — ROUTE-IVB: POST-REPAIR REGRESSION CHECK, interval.py (LANDED: gate YES — repair
+confirmed solid, zero regression)
 **Thesis.** Leg 69's bench-repair fixed two real soundness gaps in the shared interval core
 (subnormal-range false negatives, a silent NaN above 2^997). Nobody has independently re-run
 leg 69's original adversarial corpus against the repaired module, nor confirmed that the fix did
@@ -1348,6 +1380,104 @@ flagging the invalid input?
 **Independence.** Reads solver/fractional_gclm.py; edits nothing under any outcome. New test
 file claimed by nobody else. Does not touch or contest the PRE-EMPTED s_c finding (Route-J);
 robustness only.
+```
+
+```
+### 92 — ROUTE-GLA: ADVERSARIAL AUDIT OF gclm.py (PHYSICAL-SPACE gCLM)
+**Thesis.** solver/gclm.py got dedicated test coverage from leg 66 (QF) -- a correctness check
+on well-behaved inputs, which found no discrepancy. That is the same relationship leg 89 (BOA)
+has to leg 66's boussinesq.py finding: a correctness check is not a robustness check. Nobody has
+checked whether solver/gclm.py silently produces a wrong-but-plausible result under adversarial
+physical-space inputs (NaN-seeded initial vorticity, a degenerate Hilbert-transform input,
+extreme parameter values for `a`) rather than flagging them. The last physical-space module in
+this family without a dedicated adversarial pass.
+**Gate.** Under an adversarial battery of malformed physical-space inputs (NaN-seeded vorticity,
+degenerate transform input, extreme `a`), does solver/gclm.py ever silently return a finite,
+plausible-looking result instead of propagating or flagging the invalid input?
+  yes -> A silent-corruption gap. Report the exact failing case precisely; escalate, do not
+         patch under this leg's own authority.
+  no  -> Confirmed robust. Bank the battery as a permanent regression test.
+**Territory.** test_gclm_adversarial.py, experiments/p2_route_gla_v1_adversarial.py,
+               writeup/data/p2_route_gla_v1_adversarial.json,
+               writeup/novelty/leg_92.md, experiments/journal/leg_92.md
+**Difficulty.** standard
+**Independence.** Reads solver/gclm.py; edits nothing under any outcome. New test file claimed
+by nobody else. Distinct question from leg 66 (QF, landed) -- robustness, not correctness on
+well-behaved input, the same distinction leg 89 established for boussinesq.py.
+```
+
+```
+### 93 — ROUTE-EXT5: HAS arXiv:2604.09949's 3D NS SELF-SIMILAR SINGULARITY CLAIM BEEN
+CONFIRMED, REFUTED, OR RETRACTED SINCE?
+**Thesis.** PHASE2_P2_NOTES's M-5 audited arXiv:2604.09949's computer-assisted claim of a
+finite-time singularity for 3D Navier-Stokes on T^3 rather than assuming it -- the arithmetic
+checked out (`2*delta*M*K` and Kantorovich's hypothesis both close, with margin). That audit is
+the most consequential external claim this repository has ever independently checked -- rank-6
+on the target ledger, "claimed by arXiv:2604.09949." Nobody has since watched whether the
+broader community has weighed in: an independent confirmation, a refutation, a retraction, or a
+published correction, any of which would be major news for how this repository frames its own
+finding. Distinct in KIND from legs 74/77/82/90 (which ask "does a certificate exist"), this
+leg asks "has the community's verdict on an EXISTING claim moved."
+**Gate.** Since arXiv:2604.09949 was posted, has any independent group published a confirmation,
+refutation, retraction, or correction of its 3D NS self-similar singularity claim?
+  yes -> Materially changes M-5's standing audit. Report the citation and its direction
+         precisely; this bears directly on how `NG` and any future write-up should characterize
+         the state of the field, so flag it prominently rather than filing it quietly.
+  no  -> Confirmed no community verdict has appeared since. Bank the dated literature-watch
+         entry; M-5's own arithmetic audit remains the best available check.
+**Territory.** experiments/p2_route_ext5_v1_target_watch5.py,
+               writeup/data/p2_route_ext5_v1_target_watch5.json,
+               writeup/novelty/leg_93.md, experiments/journal/leg_93.md
+**Difficulty.** light
+**Independence.** Does not touch solver/target_selection.py. Distinct question (community
+verdict, not certificate existence) from legs 74, 77, 82, 90.
+```
+
+```
+### 94 — ROUTE-TNB: POST-REPAIR REGRESSION CHECK, target_norm.py's NEW DOMAIN GUARD
+**Thesis.** Leg 84's bench-repair added a domain guard to target_norm.py and confirmed leg 55's
+banked margins survive it uncontaminated -- that closed the FALSE-NEGATIVE direction (silently
+accepting out-of-window input). It did not dedicate a check to the opposite failure mode: a
+guard that is too aggressive and flags legitimate IN-WINDOW input (well inside X_max=745) as a
+violation, which would be a new, self-inflicted correctness bug on top of the fix. Same
+"close the loop" pattern as legs 86 (PCB) and 87 (IVB), applied to the newest repair.
+**Gate.** Across a battery of legitimate in-window inputs spanning the validated range up to
+X_max=745, does target_norm.py's new domain guard ever incorrectly flag a valid input as a
+violation (a false positive)?
+  yes -> The repair over-corrected. Report the exact false-positive case precisely; escalate,
+         do not patch under this leg's own authority.
+  no  -> Confirmed the guard is precise -- catches violations without rejecting valid input.
+         Bank as a permanent regression test alongside leg 84's own battery.
+**Territory.** test_target_norm_postrepair.py, experiments/p2_route_tnb_v1_postrepair.py,
+               writeup/data/p2_route_tnb_v1_postrepair.json,
+               writeup/novelty/leg_94.md, experiments/journal/leg_94.md
+**Difficulty.** light
+**Independence.** Reads solver/target_norm.py, now repaired; edits nothing. Distinct failure
+direction from leg 84 (false positive vs. false negative). New test file claimed by nobody else.
+```
+
+```
+### 95 — ROUTE-GRB: POST-REPAIR REGRESSION CHECK, gclm_rescaled.py (PENDING leg 85's repair)
+**Thesis.** Leg 85 found a real false-convergence bug in gclm_rescaled.py's relaxation loop
+(reports reaching the fixed point after 1 step on certain gauge-scale trajectories) and supplied
+a suggested one-line fix; a bench-repair is applying it now. Once it lands, the same "close the
+loop" pattern that legs 86, 87 and 94 apply to their repairs should apply here too: confirm the
+fix actually closes leg 85's failing trajectories AND does not regress the module's
+already-validated behavior (the exact a=0 CLM fixed-point relaxation, previously confirmed).
+**Gate.** Post-repair, does solver/gclm_rescaled.py (a) no longer false-converge on leg 85's
+original failing gauge-scale trajectories, and (b) still relax correctly to the exact a=0 CLM
+fixed point with no regression?
+  yes -> Confirmed the repair is solid and non-regressive. Bank leg 85's battery plus this leg's
+         fixed-point regression check as a permanent suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate as a
+         priority finding, do not patch under this leg's own authority.
+**Territory.** test_gclm_rescaled_postrepair.py, experiments/p2_route_grb_v1_postrepair.py,
+               writeup/data/p2_route_grb_v1_postrepair.json,
+               writeup/novelty/leg_95.md, experiments/journal/leg_95.md
+**Difficulty.** standard
+**Independence.** Reads solver/gclm_rescaled.py; edits nothing under any outcome.
+**NOT dispatchable until leg 85's bench-repair lands** -- drafted now so it is ready immediately
+after, the same discipline used for leg 76's pending dependency.
 ```
 
 ## Ranking rationale
