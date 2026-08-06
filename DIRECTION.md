@@ -8384,3 +8384,99 @@ TNA2, RSA, and PNA (202, this cycle's highest-priority item, now further scoped 
 all stay with the user via `PROGRESS.md`'s NEEDS YOU. No claim about Walls 1 and 2 moves;
 Clay stays ~0.05%. The composition-floor shortfall (2/10, not yet 3/10) is the one open item
 this DM flags for its own next action, not a question for the user.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — preemption confirmed clean, both durable
+mirrors confirmed landed, leg 220 lands and opens slot C, the third floor-eligible candidate
+drafted and promoted (floor now MET, 3/10)
+
+**Preemption confirmed clean.** All three preempted agents (219-duplicate, 222/FBA,
+224/GCC) stopped via `TaskStop` before reaching a landing — no partial/orphaned result to
+reconcile. 236 (RDDEP), 237 (SIRC), 238 (PUB4) are now running in slots F, E, G
+respectively, exactly as assigned in the prior update.
+
+**Both flagged durable-mirror action items are confirmed done, proactively, by the
+orchestrator — before this DM's response even arrived.** `ORCHESTRATION.md` §3b now carries
+the composition floor as executable, restart-surviving law. `CONTINUATION_PROMPT.md` carries
+lesson 91 (the negative-result naming requirement, item 5). Both of this DM's "outside my
+one-file ownership, flagged for you" items are closed. This DM's own copies of the rules in
+this file stay as the record of WHY they exist and how this DM applies them to its own
+queue-drafting; the orchestrator's copies are now the enforceable ones.
+
+**220 (TNR) landed on `main`, cleanly.** Closes leg 204's `target_norm.py` finding: 6/7
+mechanisms re-measured and confirmed closed, a 295,203-leaf regression check clean. This
+opens slot C.
+
+**Slot C is exactly the vacancy this DM committed to filling with a third floor-eligible
+candidate, per the composition-floor update two sections above. Drafted now, per that
+commitment, rather than deferred:**
+
+```
+### 239 — ROUTE-USC3: THE THREE NEW OBSTRUCTIONS arXiv:2511.22819 NAMES — MODEL-SPECIFIC OR
+TECHNIQUE-SPECIFIC, SAME FRAMING AS LEGS 175/196? (the third composition-floor candidate)
+[FLOOR-ELIGIBLE: literature — extends a landed literature finding at full-text depth, not an
+audit/repair/verify]
+**Thesis.** Leg 196 (USC2) landed STILL SHORT: the authors' follow-up paper
+(`arXiv:2511.22819`, ~72 days after `arXiv:2509.14185`) removes the ONE loss-reweighting
+obstruction leg 175 identified, closes 0 of leg 175's 4 open items, and **names 3 NEW
+obstructions of its own** — but leg 196's own territory was scoped to answering "is there a
+certificate," not to characterizing what the three new obstructions actually ARE. This leg
+reads `arXiv:2511.22819` at the same full-text depth leg 175 used, and applies the exact same
+question leg 175 asked of the ORIGINAL obstruction: for each of the three new obstructions,
+is it MODEL-specific (naming an alternative model class that would avoid it) or
+TECHNIQUE-specific (a precision/infrastructure gap independent of model, the same shape
+leg 173 scoped for Xu's method)? This is not a re-read of ground leg 196 already covered —
+leg 196's own report states the three obstructions by name/citation only, per its own
+declared territory, and did not characterize each one's shape.
+**Gate.** For each of the three obstructions `arXiv:2511.22819` names, is it MODEL-specific
+(naming the alternative model class the paper itself points to) or TECHNIQUE-specific (a
+precision/infrastructure gap independent of model)?
+  any model-specific -> Name the alternative model class precisely, with the paper's own
+         reasoning. If that class is one this repository's own infrastructure already
+         touches (gCLM/CLM/Boussinesq family), ESCALATE as a candidate new construction lane
+         for the user — do not attempt it under this leg's own authority.
+  all technique-specific -> Report each precision/infrastructure gap precisely, in the same
+         terms leg 173 uses for Xu's method and leg 175 uses for the original obstruction, so
+         all three scoping results are directly comparable. Bank it.
+  mixed -> Report each of the three separately and precisely; do not average or summarize
+         into a single verdict for all three.
+**Territory.** experiments/p2_route_usc3_v1_lit.py, writeup/data/p2_route_usc3_v1_lit.json,
+               writeup/novelty/leg_239.md, experiments/journal/leg_239.md.
+               Reads (never edits) leg 196's own report/JSON and solver/viscous_novelty.py's
+               PRECEDENTS ledger, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from every other
+live/reserve leg (196 already landed and closed; this leg extends it, doesn't re-open it).
+Immediately dispatchable.
+```
+
+**Slot C filled with 239 (USC3).** The composition floor is now **MET: 3/10 floor-eligible
+(236 RDDEP, 238 PUB4, 239 USC3).** No further preemption or forced padding needed this round.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 217 | PCR | repair — not floor-eligible |
+| C | 239 | USC3 | **live, newly promoted — FLOOR-ELIGIBLE (literature)** |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 237 | SIRC | audit/census — not floor-eligible (kept per reviewer's explicit priority) |
+| F | 236 | RDDEP | **FLOOR-ELIGIBLE (math)** |
+| G | 238 | PUB4 | **FLOOR-ELIGIBLE (literature/construction-synthesis)** |
+| H | 218 | BHR | repair — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible (gate corrected, item 3(a)) |
+
+**Floor status: 3/10 — MET.** Going forward, this DM will keep at least one of 236/238/239's
+successors (or a freshly-drafted floor-eligible leg) live at all times, per the rule's own
+text, and will state each future draft's floor tag explicitly rather than leave it to
+inference.
+
+**Reserve queue: still 11 undispatched legs (216, 225, 227, 228, 229, 230, 231, 232, 233,
+234, 235), unchanged by this update** — 239 was drafted fresh for the specific vacancy, not
+drawn from this pool.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
