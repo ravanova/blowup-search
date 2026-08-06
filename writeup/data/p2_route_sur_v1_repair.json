@@ -1,0 +1,175 @@
+{
+  "leg": 129,
+  "route": "ROUTE-SUR",
+  "seed": 20260806,
+  "A1_identity": {
+    "counterexamples": 0,
+    "n_tested": 5000,
+    "n_unchanged": 3334,
+    "n_changed": 1666,
+    "changed_set_is_exactly_multiples_of_3": true
+  },
+  "A2_A3_bitwise_ab": {
+    "base_ref": "acce15901747b90efde4610163cf2d506689e7ed",
+    "quantities_compared": 226,
+    "buckets": {
+      "1D mask, declared power-of-two grids": {
+        "quantities": 21,
+        "differing": 0
+      },
+      "2D mask, banked n = 32": {
+        "quantities": 2,
+        "differing": 0
+      },
+      "every helper + energy_production, declared grids": {
+        "quantities": 84,
+        "differing": 0
+      },
+      "END-TO-END solver runs (gCLM n=64 x3, Boussinesq n=32)": {
+        "quantities": 49,
+        "differing": 0
+      },
+      "1D mask at 3 | n  <-- MUST differ; this is the control": {
+        "quantities": 33,
+        "differing": 33
+      }
+    },
+    "banked_quantities_moved": 0,
+    "div3_control_moved": 33,
+    "moved_keys": [
+      "mask1d_n12_kept",
+      "mask1d_n12_khi",
+      "mask1d_n12_sha",
+      "mask1d_n192_kept",
+      "mask1d_n192_khi",
+      "mask1d_n192_sha",
+      "mask1d_n24_kept",
+      "mask1d_n24_khi",
+      "mask1d_n24_sha",
+      "mask1d_n27_kept",
+      "mask1d_n27_khi",
+      "mask1d_n27_sha",
+      "mask1d_n384_kept",
+      "mask1d_n384_khi",
+      "mask1d_n384_sha",
+      "mask1d_n48_kept",
+      "mask1d_n48_khi",
+      "mask1d_n48_sha",
+      "mask1d_n6_kept",
+      "mask1d_n6_khi",
+      "mask1d_n6_sha",
+      "mask1d_n768_kept",
+      "mask1d_n768_khi",
+      "mask1d_n768_sha",
+      "mask1d_n81_kept",
+      "mask1d_n81_khi",
+      "mask1d_n81_sha",
+      "mask1d_n96_kept",
+      "mask1d_n96_khi",
+      "mask1d_n96_sha",
+      "mask1d_n9_kept",
+      "mask1d_n9_khi",
+      "mask1d_n9_sha",
+      "mask2d_n48_kept",
+      "mask2d_n48_sha",
+      "mask2d_n96_kept",
+      "mask2d_n96_sha"
+    ],
+    "tmp": "/tmp/sur_pre_16qjs_c5",
+    "endtoend_keys": 49,
+    "helper_keys": 84
+  },
+  "A4_census": {
+    "records": 129,
+    "files": {
+      "writeup/data/p2_route_bob_v1_postrepair.json": 17,
+      "writeup/data/p2_route_gla_v1_adversarial.json": 18,
+      "writeup/data/p2_route_glb_v1_postrepair.json": 5,
+      "writeup/data/p2_route_boa_v1_adversarial.json": 89
+    },
+    "declared_grids": [
+      32,
+      64,
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "exposed_grids": [],
+    "records_affected": 0
+  },
+  "B1_energy_production": {
+    "rows": [
+      {
+        "n": 12,
+        "rel_err_before": 0.00051938518432851,
+        "rel_err_after": 7.4106773586084135e-16
+      },
+      {
+        "n": 24,
+        "rel_err_before": 0.01769362471892816,
+        "rel_err_after": 1.1483269730163931e-15
+      },
+      {
+        "n": 27,
+        "rel_err_before": 0.08797128548788742,
+        "rel_err_after": 3.9374167018811336e-16
+      },
+      {
+        "n": 48,
+        "rel_err_before": 0.06655193810764655,
+        "rel_err_after": 5.356864909509351e-16
+      },
+      {
+        "n": 81,
+        "rel_err_before": 0.16621098940414264,
+        "rel_err_after": 0.0
+      },
+      {
+        "n": 96,
+        "rel_err_before": 0.0003179012819600229,
+        "rel_err_after": 6.090391326817669e-16
+      },
+      {
+        "n": 192,
+        "rel_err_before": 0.07029037798605434,
+        "rel_err_after": 4.2926133195661077e-16
+      },
+      {
+        "n": 384,
+        "rel_err_before": 0.016105737474262992,
+        "rel_err_after": 1.4542859642264278e-15
+      },
+      {
+        "n": 768,
+        "rel_err_before": 0.015882735446266342,
+        "rel_err_after": 7.391534696176836e-16
+      }
+    ],
+    "worst_before": 0.16621098940414264,
+    "worst_after": 1.4542859642264278e-15,
+    "worst_n_after": 384,
+    "decades_gained": 14.058009922103203
+  },
+  "B2_guarantee": {
+    "worst_spurious_div3": 1.1420844960168251e-15,
+    "worst_spurious_not_div3": 4.828096308620696e-16,
+    "bowman_holds_at": 23,
+    "leg120_div3": 0.25
+  },
+  "C1_absorption": {
+    "D3_propagated": 12,
+    "D3_exact_zero_on_finite": 4,
+    "D4_propagated": 3,
+    "D4_mean_mode_exact_zero": true,
+    "D5_dtype": "complex128",
+    "D5_worst_rel_err": 0.0,
+    "D6_refused": 15,
+    "D6_cases": 15,
+    "D7_refused": 15,
+    "D7_cases": 15,
+    "D7_declared_grids_accepted": 7
+  }
+}

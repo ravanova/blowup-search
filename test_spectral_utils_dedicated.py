@@ -96,11 +96,24 @@ def check_wavenumbers():
 
 
 def check_dealias_mask():
-    """2/3 rule: keep |k| <= n/3, boundary included, counted exactly.
+    """2/3 rule: keep |k| < n/3, boundary EXCLUDED, counted exactly.
 
     Named by zero existing tests. The off-by-one that matters is at the
     cut itself, so both n divisible by 3 (cut is an attained integer) and
     n not divisible by 3 are checked.
+
+    INVERTED BY LEG 129, and this file is the reason the repair needed a leg
+    rather than a one-line bench fix. Until then the last two lines asserted
+    `dealias_mask(96)[32]` is True, with the comment "k = n/3 must be
+    retained (<=, not <)" -- i.e. this test ENCODED the defect and would have
+    failed the correct behaviour. It was self-consistent and could never have
+    caught the bug, because the bug WAS the cut it checked against.
+
+    The alias-free condition is strict: Bowman 2013 (N >= 3K + 1), restated
+    in arXiv:2603.08892 (2026), and derivable in one line -- a quadratic
+    product reaches 2K, aliases to 2K - n, and re-enters the band iff
+    n <= 3K. Leg 120 MEASURED the consequence: a spurious self-beat
+    coefficient of exactly 0.25 at every grid with 3 | n.
     """
     out = {}
     for n in (16, 32, 48, 64, 96, 128):
@@ -108,17 +121,19 @@ def check_dealias_mask():
         k = wavenumbers(n)
         assert len(mask) == len(k), n
         n_kept = int(mask.sum())
-        n_expected = int(np.sum(k <= n / 3.0))
+        n_expected = int(np.sum(k < n / 3.0))
         assert n_kept == n_expected, (n, n_kept, n_expected)
         out[f"n{n}_kept"] = n_kept
         # boundary, explicitly: highest kept mode and lowest dropped mode
         k_hi = int(np.max(k[mask]))
         out[f"n{n}_k_hi"] = k_hi
-        assert k_hi <= n / 3.0, (n, k_hi)
-        assert k_hi + 1 > n / 3.0, (n, k_hi)
+        assert k_hi < n / 3.0, (n, k_hi)          # STRICT -- Bowman's N >= 3K + 1
+        assert k_hi + 1 >= n / 3.0, (n, k_hi)     # and it is the LARGEST such mode
         assert bool(mask[0]), n  # the mean mode is always kept
-    # n = 96: the cut 32 is exactly attained and MUST be kept (<=, not <)
-    assert bool(dealias_mask(96)[32]), "k = n/3 must be retained"
+    # n = 96: the cut 32 is exactly attained and must therefore be DROPPED (<, not <=).
+    # 31 is the largest retained mode. This is leg 129's inversion of the pinned defect.
+    assert not bool(dealias_mask(96)[32]), "k = n/3 must be DROPPED (Bowman: K < N/3)"
+    assert bool(dealias_mask(96)[31])
     assert not bool(dealias_mask(96)[33])
     return out
 

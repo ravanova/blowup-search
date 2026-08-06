@@ -14,15 +14,27 @@ THE GATE (DIRECTION.md, leg 120), answered YES:
     solver/spectral_utils.py ever silently return a wrong value instead of propagating or
     flagging the invalid input?
 
-READ THIS BEFORE CHANGING ANYTHING HERE.  Several checks below PIN CURRENT, DEFECTIVE
-BEHAVIOUR.  That is deliberate, and it is leg 66's own precedent: a leg whose territory is
-read-only on `solver/` reports defects and pins them rather than fixing them silently, so the
-defect cannot drift unnoticed and so the repair has an exact target.  **Every such check is
-marked `PIN:` in its docstring and states what the CORRECT behaviour would be.  When the
-repair lands, these checks WILL START FAILING -- that is the intended signal, not a
-regression.**  Update the pin then, in the same commit as the repair.
+**THE REPAIR LANDED (leg 129, Route-SUR), AND ALL SEVEN PINS ARE NOW INVERTED.**  Leg 120 was
+read-only on `solver/` and pinned seven defects rather than fixing them, each marked `PIN:`
+with the correct behaviour stated beside it, so that the repair would have an exact target and
+the defects could not drift.  Leg 129 made the repair and, in the same commit, turned every
+pin around: each check below now asserts the CORRECT behaviour and would fail if the defect
+returned.  **This file is therefore no longer a defect ledger -- it is the permanent regression
+suite for the repair**, which is what leg 120's yes-branch prescribed.  The pinned magnitudes
+are retained verbatim in the docstrings as the BEFORE column, because a regression suite that
+has forgotten what it is defending against cannot report a magnitude when it fires.
 
-THE SIX FINDINGS PINNED HERE (magnitudes, measured by
+The repair itself, in one line each: `dealias_mask` and `dealias_mask2d` cut at
+`k <= (n-1)//3` (strictly below n/3); `derivative_hat` MULTIPLIES the Nyquist entry by zero
+rather than assigning it; `velocity_hat` builds a complex128 output and multiplies the mean
+mode by zero; `hilbert_hat`/`derivative_hat`/`velocity_hat` all validate `k` with the same
+`ValueError`; `grid`/`wavenumbers`/`dealias_mask` refuse a degenerate `n` with the same
+`ValueError`.  Every one is a measured no-op on finite input at every grid size this repository
+has ever run -- 0 of 156 power-of-two and banked quantities moved in leg 129's bitwise A/B
+against the pre-repair module, including three end-to-end gCLM runs at n = 64 and a Boussinesq
+run at n = 32 (writeup/data/p2_route_sur_v1_repair.json).
+
+THE SEVEN FINDINGS, AS MEASURED BEFORE THE REPAIR (magnitudes, measured by
 experiments/p2_route_sua_v1_adversarial.py, banked in
 writeup/data/p2_route_sua_v1_adversarial.json):
 
@@ -76,13 +88,13 @@ writeup/data/p2_route_sua_v1_adversarial.json):
       modes: exactly the condition leg 89 made a hard ValueError in the 2D solver
       (`solver/boussinesq.py:349`); the 1D path has no equivalent guard.
 
-SEVERITY, MEASURED, NOT ASSERTED: **no banked result is affected.**  Every grid size declared
-on the `dealias_mask` path in the whole repository is a power of two -- {64, 256, 512, 1024,
-2048, 4096, 8192} -- and no power of two is divisible by 3.  All 107 banked
-`energy_balance_residual` records (in `p2_route_gla_v1_adversarial.json`, N_SOLVE = 64, and
-`p2_route_boa_v1_adversarial.json`, N = 32) are unexposed.  D1/D2 are LATENT, exactly the
-severity shape of legs 66, 69 and 79.  Leg 120's pre-committed yes-branch is "escalate, do not
-patch", and this leg edits no solver file.
+SEVERITY, MEASURED, NOT ASSERTED: **no banked result was ever affected.**  Every grid size
+declared on the `dealias_mask` path in the whole repository is a power of two -- {64, 256, 512,
+1024, 2048, 4096, 8192}, plus the 2D n = 32 -- and no power of two is divisible by 3.  Leg 120
+counted 107 banked `energy_balance_residual` records and found 0 exposed; leg 129 re-ran that
+census after legs 103 and 133 banked their own post-repair data and found **129** records in
+four files, still **0** exposed.  D1/D2 were LATENT -- exactly the severity shape of legs 66,
+69 and 79 -- and the repair closed them before any run picked a round grid number.
 
 NOT A RE-FIND OF LEG 66/69.  `check_leg69_odd_n_regression` is an explicit control that the
 odd-n fix is intact.  It is a PASS, and it is the reason D3 is stated as being about the
@@ -124,7 +136,7 @@ GRIDS_NOT_DIV3 = (10, 16, 20, 32, 40, 50, 64, 100, 128, 200, 256, 512)
 # =========================================================================
 
 def check_dealias_alias_free_guarantee():
-    """PIN (D1): the 2/3 rule's GUARANTEE, not its docstring.
+    """REGRESSION (D1, repaired by leg 129): the 2/3 rule's GUARANTEE, not its docstring.
 
     `test_spectral_utils_dedicated.py::check_dealias_mask` asserts that the mask keeps
     `k <= n/3` and, at line 121, that `dealias_mask(96)[32]` is True ("k = n/3 must be
@@ -138,12 +150,17 @@ def check_dealias_alias_free_guarantee():
     Bowman's experiment, verbatim in structure: put the field on the top retained mode K,
     square it, read mode K back.  The true coefficient there is exactly 0.
 
-    CORRECT BEHAVIOUR: alias-free at every n, i.e. the mask should keep `k < n/3` strictly
-    (equivalently `k <= (n - 1) // 3`).  The values below pin the CURRENT behaviour.
+    REQUIRED BEHAVIOUR, now asserted at every n: alias-free everywhere, i.e. the mask keeps
+    `k < n/3` strictly (equivalently `k <= (n - 1) // 3`).
+
+    BEFORE the repair: spurious coefficient exactly 2.500e-01 at all 11 grids with 3 | n,
+    against <= 4.83e-16 at all 12 without.  AFTER: <= 1.142e-15 at all 23.
     """
     out = {}
 
     # (a) every n NOT divisible by 3: alias-free, and this must never regress.
+    # These grids were ALWAYS correct -- this half of the check is unchanged by the repair,
+    # and it is what proves the repair did not simply move the defect somewhere else.
     worst_clean = 0.0
     for n in GRIDS_NOT_DIV3:
         spurious = _self_beat_coefficient(n)
@@ -152,24 +169,32 @@ def check_dealias_alias_free_guarantee():
     out["worst_spurious_not_div3"] = worst_clean
     assert worst_clean < 1e-12, out
 
-    # (b) every n divisible by 3: CONTAMINATED, at amplitude exactly 1/4.  PINNED.
+    # (b) every n divisible by 3: NOW ALSO ALIAS-FREE.  This is the inverted pin -- it
+    # asserted `abs(spurious - 0.25) < 1e-12` before leg 129's repair.
+    worst_div3 = 0.0
     for n in GRIDS_DIV3:
         spurious = _self_beat_coefficient(n)
-        assert abs(spurious - 0.25) < 1e-12, (
-            f"PIN D1 at n={n}: expected the pinned defect amplitude 0.25, got {spurious}. "
-            "If a repair to dealias_mask has landed (keeping k < n/3 strictly), this "
-            "assertion SHOULD fail -- update the pin in the same commit as the repair."
+        worst_div3 = max(worst_div3, spurious)
+        assert spurious < 1e-12, (
+            f"D1 REGRESSED at n={n}: spurious self-beat coefficient {spurious:.4e}, "
+            "expected round-off. The 2/3 cut has gone back to `k <= n/3`; it must be "
+            "`k <= (n - 1) // 3` (Bowman 2013: N >= 3K + 1). Pre-repair value was 0.25."
         )
-    out["spurious_div3"] = 0.25
-    out["n_contaminated"] = len(GRIDS_DIV3)
+    out["worst_spurious_div3"] = worst_div3
+    out["n_contaminated"] = 0
+    out["pre_repair_spurious_div3"] = 0.25
 
-    # (c) the defect is EXACTLY the boundary case, nothing else.
+    # (c) Bowman's inequality now holds at EVERY n, not just where 3 does not divide it.
     for n in GRIDS_DIV3 + GRIDS_NOT_DIV3:
         k = wavenumbers(n)
         K = int(np.max(k[dealias_mask(n)]))
-        bowman_ok = K < n / 3.0            # N >= 3K + 1
-        assert bowman_ok == (n % 3 != 0), (n, K, bowman_ok)
-    out["defect_iff_3_divides_n"] = True
+        assert K < n / 3.0, (                 # N >= 3K + 1, everywhere
+            f"D1 REGRESSED at n={n}: top retained mode {K} violates K < n/3 = {n / 3.0}"
+        )
+        # and it is the LARGEST admissible one -- the repair must not over-truncate,
+        # which would be a silent resolution loss rather than a fix.
+        assert K + 1 >= n / 3.0, (n, K, "mask truncates more than the 2/3 rule requires")
+    out["bowman_holds_at_all_n"] = True
     return out
 
 
@@ -212,17 +237,18 @@ def _alias_free_production(w, n, a, nu, f=6):
 
 
 def check_energy_production_aliasing():
-    """PIN (D2): `energy_production` is documented as the "Exact rate d/dt E".  It is exact
-    to round-off when 3 does not divide n, and carries a percent-level alias error when it
-    does -- because it evaluates a CUBIC product on the grid, and D1's retained band admits
-    the triad K + K + K = n.
+    """REGRESSION (D2, repaired by leg 129): `energy_production` is documented as the "Exact
+    rate d/dt E", and it is now exact to round-off at EVERY n.
 
-    This is the finding's teeth: D1 alone is a property of a mask, which a reader could
-    dismiss as a convention. D2 is a wrong number in a quantity `solver/gclm.py` logs as an
-    artifact guard on every run.
+    Before the repair it carried a percent-level alias error whenever 3 divided n, because it
+    evaluates a CUBIC product on the grid and D1's over-wide retained band admitted the triad
+    K + K + K = n.  This was the finding's teeth: D1 alone is a property of a mask, which a
+    reader could dismiss as a convention; D2 was a wrong number in a quantity
+    `solver/gclm.py` logs as an artifact guard on every run.
 
-    CORRECT BEHAVIOUR: round-off at every n.  The n-not-divisible-by-3 bound is a real
-    assertion; the divisible-by-3 floor pins the defect.
+    BEFORE: relative error 1.6621e-01 at n = 81 (worst of nine 3 | n grids), vs 2.47e-14 at
+    every n not divisible by 3.  AFTER: 1.4543e-15 worst over the same nine grids -- a gain
+    of 14.1 decades, measured in writeup/data/p2_route_sur_v1_repair.json.
     """
     out = {}
 
@@ -237,7 +263,8 @@ def check_energy_production_aliasing():
         assert rel < 1e-10, (n, rel)
     out["worst_rel_err_not_div3"] = worst_clean
 
-    # (b) contaminated where it is not.  PINNED, with the measured headline.
+    # (b) NOW EXACT where it used to be contaminated.  This is the inverted pin -- it
+    # asserted `worst_bad > 1e-3` before leg 129's repair.
     worst_bad, worst_n = 0.0, None
     for n in (12, 24, 27, 48, 81, 96, 192, 384, 768):
         w = _band_field(n)
@@ -248,12 +275,15 @@ def check_energy_production_aliasing():
             worst_bad, worst_n = rel, n
     out["worst_rel_err_div3"] = worst_bad
     out["worst_n_div3"] = worst_n
-    assert worst_bad > 1e-3, (
-        f"PIN D2: expected the pinned alias error (measured 1.6621e-01 at n=81), got "
-        f"{worst_bad:.4e} at n={worst_n}. If dealias_mask has been repaired this assertion "
-        "SHOULD fail -- update the pin in the same commit as the repair."
+    out["pre_repair_worst_rel_err_div3"] = 0.16621
+    assert worst_bad < 1e-10, (
+        f"D2 REGRESSED: relative alias error {worst_bad:.4e} at n={worst_n}, expected "
+        "round-off. energy_production is documented as the EXACT rate and is logged as an "
+        "artifact guard on every run. Pre-repair value was 1.6621e-01 at n=81."
     )
-    assert worst_bad / max(worst_clean, 1e-300) > 1e6, out
+    # and the two columns are now the same order of magnitude -- there is no longer a
+    # 3 | n class at all, which is the whole point of the repair.
+    assert worst_bad / max(worst_clean, 1e-300) < 1e3, out
     return out
 
 
@@ -261,17 +291,19 @@ def check_energy_production_aliasing():
 # D3 -- Nyquist poison erasure
 # =========================================================================
 
-def check_nyquist_poison_erased():
-    """PIN (D3): a non-finite Nyquist coefficient does not survive `derivative_hat`.
+def check_nyquist_poison_propagates():
+    """REGRESSION (D3, repaired by leg 129): a non-finite Nyquist coefficient now SURVIVES
+    `derivative_hat` instead of being erased.
 
-    Johnson Algorithm 1 says MULTIPLY that coefficient by zero; the module ASSIGNS
+    Johnson Algorithm 1 says MULTIPLY that coefficient by zero; the module used to ASSIGN
     `d[-1] = 0.0`.  `0.0 * nan = nan`, so the published form propagates and the assignment
-    erases.  The correct fix is one character of intent -- multiply instead of assign, or
-    check for non-finite input -- and it is NOT applied here (territory is read-only).
+    erased.  Leg 129 switched to `d[-1] = d[-1] * 0.0 + 0.0j`, which is Johnson's form with
+    the signed zero normalized so that finite input still gives exactly 0+0j.
 
-    CORRECT BEHAVIOUR: poison in, poison out.  Pinned as: poison in, clean number out.
+    BEFORE: 12/12 poisons erased, every one returning a fully finite spectrum with
+    max|w_x| = 1.0000, indistinguishable from clean input.  AFTER: 12/12 propagate.
     """
-    out = {"erased": 0, "cases": 0}
+    out = {"propagated": 0, "cases": 0}
     for n in (8, 16, 64, 256):
         k = wavenumbers(n)
         for tag, p in POISONS:
@@ -281,19 +313,26 @@ def check_nyquist_poison_erased():
                 warnings.simplefilter("ignore")
                 with np.errstate(all="ignore"):
                     d = derivative_hat(wh.copy(), k, n)
-                    phys = np.fft.irfft(d, n)
             out["cases"] += 1
-            if np.all(np.isfinite(d)):
-                out["erased"] += 1
-            assert np.all(np.isfinite(d)), (
-                f"PIN D3 at n={n}, poison={tag}: the poisoned Nyquist coefficient "
-                "PROPAGATED. If derivative_hat has been repaired this assertion SHOULD "
-                "fail -- update the pin in the same commit as the repair."
+            if not np.all(np.isfinite(d)):
+                out["propagated"] += 1
+            assert not np.all(np.isfinite(d)), (
+                f"D3 REGRESSED at n={n}, poison={tag}: the poisoned Nyquist coefficient was "
+                "ERASED and the caller got a clean, wrong, fully finite derivative. "
+                "derivative_hat must MULTIPLY the Nyquist entry by zero, not assign it "
+                "(Johnson, Notes on FFT-based differentiation, Algorithm 1 step 2)."
             )
-            assert np.all(np.isfinite(phys)), (n, tag)
-            # and the result is bit-indistinguishable from the clean input
-            assert abs(float(np.max(np.abs(phys))) - 1.0) < 1e-9, (n, tag)
-    assert out["erased"] == out["cases"] == 12, out
+    assert out["propagated"] == out["cases"] == 12, out
+
+    # THE NO-OP HALF, and it is the reason this repair was allowed to land: on FINITE input
+    # the Nyquist coefficient is still EXACTLY +0.0 + 0.0j -- not -0.0, not 1e-17. If this
+    # fails, the repair has changed a value on well-formed input, which it must never do.
+    for n in (8, 16, 64, 256):
+        k = wavenumbers(n)
+        wh = np.fft.rfft(np.sin(grid(n)) + 0.5 * np.cos(3 * grid(n)))
+        b = derivative_hat(wh.copy(), k, n)[-1]
+        assert b == 0 and not np.signbit(b.real) and not np.signbit(b.imag), (n, b)
+    out["exact_zero_on_finite_input"] = True
     return out
 
 
@@ -355,16 +394,21 @@ def check_leg69_odd_n_regression():
 # D4 / D5 -- velocity_hat
 # =========================================================================
 
-def check_velocity_hat_mean_mode_erased():
-    """PIN (D4): a poisoned mean-mode coefficient becomes exactly 0, undetectably.
+def check_velocity_hat_mean_mode_propagates():
+    """REGRESSION (D4, repaired by leg 129): a poisoned mean-mode coefficient now propagates.
 
-    The VALUE is the intended convention (u is chosen zero-mean; see the module docstring),
-    so this is not a wrong velocity.  What is pinned is that `w_hat[0] = nan` -- a signal
-    that the caller's field is corrupt -- is destroyed rather than passed on.
+    The VALUE was always the intended convention (u is chosen zero-mean; see the module
+    docstring), so this was never a wrong velocity.  What was pinned is that `w_hat[0] = nan`
+    -- a signal that the caller's field is corrupt -- was destroyed rather than passed on,
+    because `np.zeros_like` left index 0 at a fresh zero whatever came in.  Leg 129 multiplies
+    the mean mode by zero instead, so the convention is unchanged on finite input and the
+    corruption signal survives.
+
+    BEFORE: 3/3 poisons erased.  AFTER: 3/3 propagate, and finite input still gives +0.0.
     """
     n = 64
     k = wavenumbers(n)
-    out = {"erased": 0, "cases": 0}
+    out = {"propagated": 0, "cases": 0}
     for tag, p in POISONS:
         wh = np.fft.rfft(np.sin(grid(n)))
         wh[0] = p
@@ -373,30 +417,41 @@ def check_velocity_hat_mean_mode_erased():
             with np.errstate(all="ignore"):
                 u = velocity_hat(wh.copy(), k)
         out["cases"] += 1
-        assert u[0] == 0, (tag, u[0])
-        assert np.all(np.isfinite(u)), (tag,)
-        out["erased"] += 1
-    assert out["erased"] == 3, out
+        assert not np.all(np.isfinite(u)), (
+            f"D4 REGRESSED, poison={tag}: a non-finite mean mode was erased into a clean 0 "
+            "and the caller cannot tell its field was corrupt."
+        )
+        out["propagated"] += 1
+    assert out["propagated"] == 3, out
+
+    # THE NO-OP HALF: the zero-mean convention is untouched on well-formed input, and the
+    # mean mode is exactly +0.0 + 0.0j -- a multiplication can produce -0.0, so this is
+    # checked bitwise rather than with `== 0`.
+    u = velocity_hat(np.fft.rfft(np.sin(grid(n)) + 2.5), k)
+    assert u[0] == 0 and not np.signbit(u[0].real) and not np.signbit(u[0].imag), u[0]
+    out["mean_mode_exactly_plus_zero"] = True
     return out
 
 
-def check_velocity_hat_dtype_truncation():
-    """PIN (D5): integer input is silently truncated, and only in this one function.
+def check_velocity_hat_dtype_promotes():
+    """REGRESSION (D5, repaired by leg 129): integer input is no longer silently truncated.
 
-    `u_hat = np.zeros_like(w_hat)` inherits the input dtype; the float quotient
-    `-w_hat[nz] / |k[nz]|` is then unsafe-cast on assignment.  `derivative_hat` and
-    `hilbert_hat` both promote to complex128 on the same input.
+    `u_hat = np.zeros_like(w_hat)` used to inherit the input dtype, and the float quotient
+    `-w_hat[nz] / |k[nz]|` was then unsafe-cast on assignment.  `derivative_hat` and
+    `hilbert_hat` both promote to complex128 on the same input; `velocity_hat` was the only
+    one of the three that did not.  Leg 129 allocates complex128 explicitly.
 
-    CORRECT BEHAVIOUR: promote (or refuse).  Pinned as: truncate.
+    BEFORE: dtype int64, worst relative error 1.0000e+00 over 600 draws.  AFTER: complex128,
+    worst relative error 0.0.
     """
     out = {}
     kk = np.arange(33.0)
-    assert np.asarray(velocity_hat(np.zeros(33, dtype=np.int64), kk)).dtype == np.int64
+    assert np.asarray(velocity_hat(np.zeros(33, dtype=np.int64), kk)).dtype == np.complex128
     assert np.asarray(derivative_hat(np.zeros(4, dtype=np.int64),
                                      np.arange(4.0), 6)).dtype == np.complex128
     assert np.asarray(hilbert_hat(np.zeros(4, dtype=np.int64),
                                   np.arange(4.0))).dtype == np.complex128
-    out["velocity_hat_inherits_int64"] = True
+    out["all_three_promote"] = True
 
     rng = np.random.default_rng(SEED)
     worst = 0.0
@@ -407,13 +462,14 @@ def check_velocity_hat_dtype_truncation():
             u = velocity_hat(a.copy(), kk)
             ex = np.zeros(33)
             ex[1:] = -a[1:] / kk[1:]
-            rel = (float(np.max(np.abs(np.asarray(u, dtype=np.float64) - ex)))
+            rel = (float(np.max(np.abs(np.asarray(u).real - ex)))
                    / max(float(np.max(np.abs(ex))), 1e-300))
             worst = max(worst, rel)
     out["worst_rel_err"] = worst
-    assert worst > 0.5, (
-        f"PIN D5: expected the pinned truncation (measured rel err 1.0), got {worst:.4e}. "
-        "If velocity_hat has been repaired this assertion SHOULD fail."
+    out["pre_repair_worst_rel_err"] = 1.0
+    assert worst == 0.0, (
+        f"D5 REGRESSED: velocity_hat truncated integer input, worst relative error "
+        f"{worst:.4e} over 600 draws (pre-repair value was exactly 1.0)."
     )
     return out
 
@@ -422,60 +478,55 @@ def check_velocity_hat_dtype_truncation():
 # D6 -- malformed k
 # =========================================================================
 
-def check_malformed_k_broadcast():
-    """PIN (D6): a scalar or length-1 `k` is broadcast into a full-length wrong answer.
+def check_malformed_k_refused():
+    """REGRESSION (D6, repaired by leg 129): a malformed `k` is refused by all three
+    functions, with the same exception type.
 
-    `derivative_hat` validates `len(w_hat)` against `n` but never validates `k`; `hilbert_hat`
-    validates nothing.  `velocity_hat` refuses all five malformed cases (it indexes `k`), so
-    the module is INTERNALLY INCONSISTENT about the same caller error.
+    `derivative_hat` used to validate `len(w_hat)` against `n` but never `k`, and
+    `hilbert_hat` validated nothing, so a scalar or length-1 `k` BROADCAST into a
+    full-length, plausible, wrong answer.  `velocity_hat` refused the same inputs only by
+    accident of indexing `k`, and raised TypeError or IndexError depending on which -- so the
+    module gave three different behaviours for one caller error.
 
-    CORRECT BEHAVIOUR: refuse, as velocity_hat does.  Pinned as: 8/15 accepted.
+    BEFORE: 8/15 malformed cases accepted silently, worst relative sup error 2.0000e+00
+    (`hilbert_hat` with k = -1.0 returns the sign-flipped transform); refusals came as
+    TypeError, IndexError or ValueError.  AFTER: 15/15 refused, all ValueError.
     """
     n = 64
     x = grid(n)
     wh = np.fft.rfft(np.sin(3 * x) + 0.4 * np.sin(11 * x))
+    out = {"refused": 0, "cases": 0}
+
+    malformed = (0.0, 1.0, -1.0, np.array([2.0]), wavenumbers(32))
+    for bad in malformed:
+        for fn, args in ((hilbert_hat, (wh.copy(), bad)),
+                         (velocity_hat, (wh.copy(), bad)),
+                         (derivative_hat, (wh.copy(), bad, n))):
+            out["cases"] += 1
+            try:
+                fn(*args)
+            except ValueError:
+                out["refused"] += 1
+            except Exception as exc:            # noqa: BLE001 -- the point is the TYPE
+                raise AssertionError(
+                    f"D6: {fn.__name__} refused a malformed k with {type(exc).__name__}, "
+                    "not ValueError. All three must refuse alike -- the pre-repair module "
+                    "raised three different types for one caller error."
+                ) from exc
+            else:
+                raise AssertionError(
+                    f"D6 REGRESSED: {fn.__name__} ACCEPTED a malformed k ({bad!r}) and "
+                    "broadcast it into a full-length wrong answer."
+                )
+    assert out["refused"] == out["cases"] == 15, out
+
+    # THE NO-OP HALF: a well-formed k is still accepted, and the transform is unchanged.
     k_ok = wavenumbers(n)
     h_ok = np.fft.irfft(hilbert_hat(wh.copy(), k_ok), n)
-    out = {}
-
-    # hilbert_hat with a scalar k: silently returns a full-length wrong transform
-    h_zero = np.fft.irfft(hilbert_hat(wh.copy(), 0.0), n)
-    assert np.all(h_zero == 0), "scalar k=0 should annihilate the whole transform"
-    out["scalar_k0_rel_err"] = float(np.max(np.abs(h_zero - h_ok))
-                                     / np.max(np.abs(h_ok)))
-    h_neg = np.fft.irfft(hilbert_hat(wh.copy(), -1.0), n)
-    out["scalar_kneg_rel_err"] = float(np.max(np.abs(h_neg - h_ok))
-                                       / np.max(np.abs(h_ok)))
-    assert out["scalar_k0_rel_err"] > 0.9, out
-    assert out["scalar_kneg_rel_err"] > 1.9, out      # sign-flipped transform
-
-    # derivative_hat with a scalar k: accepted, no exception
-    d_bad = derivative_hat(wh.copy(), 1.0, n)
-    assert d_bad.shape == wh.shape, d_bad.shape
-    out["derivative_hat_accepts_scalar_k"] = True
-
-    # velocity_hat refuses the same inputs -- the inconsistency, asserted
-    for bad in (0.0, 1.0, -1.0):
-        try:
-            velocity_hat(wh.copy(), bad)
-            raise AssertionError("velocity_hat should refuse a scalar k")
-        except TypeError:
-            pass
-    try:
-        velocity_hat(wh.copy(), np.array([2.0]))
-        raise AssertionError("velocity_hat should refuse a length-1 k")
-    except IndexError:
-        pass
-    out["velocity_hat_refuses_all_five"] = True
-
-    # wrong-length k IS caught, by all three
-    for fn in (lambda: hilbert_hat(wh.copy(), wavenumbers(32)),
-               lambda: derivative_hat(wh.copy(), wavenumbers(32), n)):
-        try:
-            fn()
-            raise AssertionError("wrong-length k should raise")
-        except ValueError:
-            pass
+    assert np.isfinite(h_ok).all() and float(np.max(np.abs(h_ok))) > 0.5
+    assert derivative_hat(wh.copy(), k_ok, n).shape == wh.shape
+    assert velocity_hat(wh.copy(), k_ok).shape == wh.shape
+    out["well_formed_k_still_accepted"] = True
     return out
 
 
@@ -483,37 +534,51 @@ def check_malformed_k_broadcast():
 # D7 -- degenerate n
 # =========================================================================
 
-def check_degenerate_n():
-    """PIN (D7): inconsistent behaviour at the same invalid `n`, and no 1D guard for the
-    grid sizes leg 89 rejected in 2D.
+def check_degenerate_n_refused():
+    """REGRESSION (D7, repaired by leg 129): one consistent refusal at a degenerate `n`.
 
-    CORRECT BEHAVIOUR: one consistent refusal.  `solver/boussinesq.py:349` shows the shape
-    it should take -- leg 89 made "the mask retains only the mean mode" a hard ValueError.
+    BEFORE, three behaviours for one invalid input: `grid(0)` and `grid(-8)` returned EMPTY
+    arrays silently, `wavenumbers(0)` and `dealias_mask(0)` raised ZeroDivisionError, and
+    `wavenumbers(-8)` returned an empty array with no error.  `dealias_mask(1)` and
+    `dealias_mask(2)` retained ZERO non-mean modes -- exactly the condition leg 89 made a
+    hard ValueError in the 2D solver -- and the 1D path had no equivalent guard.
+
+    AFTER: every one is a ValueError, and `dealias_mask` additionally refuses any n whose
+    strict 2/3 cut retains no non-mean mode (n <= 3), which is leg 89's 2D guard in 1D.
     """
-    out = {}
-    # grid() accepts nonsense silently; wavenumbers()/dealias_mask() raise on n = 0
-    for n in (0, -1, -8):
-        assert grid(n).size == 0, n
-    out["grid_silent_on_nonpositive"] = True
-    for fn in (wavenumbers, dealias_mask):
+    out = {"refused": 0, "cases": 0}
+    for fn in (grid, wavenumbers, dealias_mask):
+        for bad in (0, -1, -8, 2.5):
+            out["cases"] += 1
+            try:
+                fn(bad)
+            except ValueError:
+                out["refused"] += 1
+            else:
+                raise AssertionError(
+                    f"D7 REGRESSED: {fn.__name__}({bad!r}) did not raise ValueError."
+                )
+    # n = 1, 2, 3: the strict cut retains no non-mean mode -- leg 89's 2D condition, in 1D
+    for n in (1, 2, 3):
+        out["cases"] += 1
         try:
-            fn(0)
-            raise AssertionError("expected ZeroDivisionError at n = 0")
-        except ZeroDivisionError:
-            pass
-    out["wavenumbers_raises_at_zero"] = True
-    # negative n: no error anywhere, empty arrays everywhere
-    for n in (-1, -8):
-        assert wavenumbers(n).size == 0 and dealias_mask(n).size == 0, n
-    out["negative_n_silent"] = True
+            dealias_mask(n)
+        except ValueError:
+            out["refused"] += 1
+        else:
+            raise AssertionError(
+                f"D7 REGRESSED: dealias_mask({n}) returned a mask retaining no non-mean "
+                "mode instead of refusing."
+            )
+    assert out["refused"] == out["cases"] == 15, out
 
-    # n = 1, 2: the mask retains ZERO non-mean modes -- leg 89's 2D ValueError condition
-    for n in (1, 2):
-        m = dealias_mask(n)
-        k = wavenumbers(n)
-        assert int(np.sum(m & (k > 0))) == 0, n
-    out["zero_non_mean_modes_at"] = [1, 2]
-    assert int(np.sum(dealias_mask(3) & (wavenumbers(3) > 0))) == 1
+    # THE NO-OP HALF: every grid the repository actually runs is still accepted, and n = 4
+    # (the smallest admissible size) still retains exactly one non-mean mode.
+    for n in (64, 256, 512, 1024, 2048, 4096, 8192):
+        assert int(dealias_mask(n).sum()) > 1, n
+        assert grid(n).size == n and wavenumbers(n).size == n // 2 + 1, n
+    assert int(np.sum(dealias_mask(4) & (wavenumbers(4) > 0))) == 1
+    out["declared_grids_accepted"] = 7
     return out
 
 
@@ -582,13 +647,13 @@ def check_length_guard_exact():
 CHECKS = [
     check_dealias_alias_free_guarantee,
     check_energy_production_aliasing,
-    check_nyquist_poison_erased,
+    check_nyquist_poison_propagates,
     check_non_nyquist_poison_propagates,
     check_leg69_odd_n_regression,
-    check_velocity_hat_mean_mode_erased,
-    check_velocity_hat_dtype_truncation,
-    check_malformed_k_broadcast,
-    check_degenerate_n,
+    check_velocity_hat_mean_mode_propagates,
+    check_velocity_hat_dtype_promotes,
+    check_malformed_k_refused,
+    check_degenerate_n_refused,
     check_integral_quantities_propagate,
     check_length_guard_exact,
 ]
@@ -602,8 +667,8 @@ def test_energy_production_aliasing():
     check_energy_production_aliasing()
 
 
-def test_nyquist_poison_erased():
-    check_nyquist_poison_erased()
+def test_nyquist_poison_propagates():
+    check_nyquist_poison_propagates()
 
 
 def test_non_nyquist_poison_propagates():
@@ -614,20 +679,20 @@ def test_leg69_odd_n_regression():
     check_leg69_odd_n_regression()
 
 
-def test_velocity_hat_mean_mode_erased():
-    check_velocity_hat_mean_mode_erased()
+def test_velocity_hat_mean_mode_propagates():
+    check_velocity_hat_mean_mode_propagates()
 
 
-def test_velocity_hat_dtype_truncation():
-    check_velocity_hat_dtype_truncation()
+def test_velocity_hat_dtype_promotes():
+    check_velocity_hat_dtype_promotes()
 
 
-def test_malformed_k_broadcast():
-    check_malformed_k_broadcast()
+def test_malformed_k_refused():
+    check_malformed_k_refused()
 
 
-def test_degenerate_n():
-    check_degenerate_n()
+def test_degenerate_n_refused():
+    check_degenerate_n_refused()
 
 
 def test_integral_quantities_propagate():
@@ -645,6 +710,7 @@ if __name__ == "__main__":
                          for k, v in list(metrics.items())[:4])
         print(f"PASS {fn.__name__}: {head}")
     print(f"\nall spectral_utils ADVERSARIAL checks passed ({len(CHECKS)} checks)")
-    print("NOTE: 7 of these PIN CURRENT DEFECTIVE BEHAVIOUR (D1-D7, see module docstring).")
-    print("They are expected to FAIL once solver/spectral_utils.py is repaired -- that is")
-    print("the intended signal. Banked magnitudes: writeup/data/p2_route_sua_v1_adversarial.json")
+    print("NOTE: leg 120 pinned 7 defects here (D1-D7); leg 129 REPAIRED all seven and")
+    print("inverted every pin, so these now assert the CORRECT behaviour and fail if the")
+    print("defect returns. Pre-repair magnitudes: writeup/data/p2_route_sua_v1_adversarial.json")
+    print("Repair + no-op measurement:          writeup/data/p2_route_sur_v1_repair.json")

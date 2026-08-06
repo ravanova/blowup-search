@@ -147,10 +147,24 @@ def wavenumbers2d(n):
 
 
 def dealias_mask2d(n):
-    """2/3-rule mask over fft2 modes: keep |kx|<=n/3 AND |ky|<=n/3."""
+    """2/3-rule mask over fft2 modes: keep |kx| < n/3 AND |ky| < n/3, STRICTLY.
+
+    The cut is `(n - 1) // 3`, the largest integer strictly below n/3. This
+    line used to read `cut = n / 3.0`, the identical off-by-one leg 120 found
+    in `solver/spectral_utils.dealias_mask`: at 3 | n it retained one mode too
+    many in EACH direction, so the alias-free guarantee failed on a band of
+    (2K+1)^2 - (2K-1)^2 modes rather than on one. See the 1D docstring for the
+    published condition (Bowman 2013; arXiv:2603.08892) and the elementary
+    argument (a quadratic product reaches 2K, aliases to 2K - n, and re-enters
+    the band iff n <= 3K).
+
+    NO-OP where it matters: `(n - 1) // 3 == floor(n/3)` whenever 3 does not
+    divide n, so this mask is bit-identical at the n = 32 of every banked
+    Boussinesq run and at every power of two. Leg 129 measured that.
+    """
     k = np.fft.fftfreq(n, d=1.0 / n)
     KX, KY = np.meshgrid(k, k, indexing="ij")
-    cut = n / 3.0
+    cut = (n - 1) // 3
     return (np.abs(KX) <= cut) & (np.abs(KY) <= cut)
 
 

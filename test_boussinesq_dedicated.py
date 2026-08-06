@@ -103,12 +103,34 @@ def check_wavenumbers2d():
 
 
 def check_dealias_mask2d():
-    """Square 2/3 cut: keep |kx| <= n/3 AND |ky| <= n/3, counted exactly."""
+    """Square 2/3 cut: keep |kx| < n/3 AND |ky| < n/3, STRICTLY, counted exactly.
+
+    INVERTED BY LEG 129, together with the 1D twin in
+    `test_spectral_utils_dedicated.py::check_dealias_mask`.  Both files asserted the
+    NON-strict cut (`kx = n/3 must be retained`), which encoded the off-by-one leg 120
+    measured: at 3 | n the mask kept one mode too many in EACH direction, and that mode
+    beats with itself straight back into the retained band.  The alias-free condition is
+    strict -- Bowman 2013 (N >= 3K + 1), restated in arXiv:2603.08892 (2026), and derivable
+    directly: a quadratic product reaches 2K, aliases to 2K - n, and re-enters the band iff
+    n <= 3K.
+
+    This file was outside leg 129's declared territory, which named only the 1D dedicated
+    test's two defect-encoding lines -- leg 120 audited the 1D module and never opened this
+    one, so the DM did not know the 2D twin carried the same assertion.  The edit is the
+    minimal in-kind extension: the same inversion, in the same shape, on the same two lines,
+    and nothing else in this file is touched.  Leaving it would have landed a suite that
+    asserts a defect the same commit removed.
+
+    NO-OP where it matters: `(n - 1) // 3 == floor(n/3)` whenever 3 does not divide n, so
+    the n = 32 of every banked Boussinesq run is bit-identical (measured in
+    writeup/data/p2_route_sur_v1_repair.json).  Of the grid sizes below, 48 and 96 change
+    and 16, 32, 64 do not.
+    """
     out = {}
     for n in (16, 32, 48, 64, 96):
         mask = dealias_mask2d(n)
         KX, KY, _, _ = wavenumbers2d(n)
-        keep1 = int(np.sum(np.abs(np.fft.fftfreq(n, d=1.0 / n)) <= n / 3.0))
+        keep1 = int(np.sum(np.abs(np.fft.fftfreq(n, d=1.0 / n)) < n / 3.0))
         out[f"n{n}_kept"] = int(mask.sum())
         assert int(mask.sum()) == keep1 * keep1, (n, int(mask.sum()), keep1**2)
         assert bool(mask[0, 0]), n  # the mean mode is always kept
@@ -116,12 +138,14 @@ def check_dealias_mask2d():
         assert np.array_equal(mask, mask.T), n
         kept_kx = np.abs(KX[mask])
         out[f"n{n}_kx_hi"] = float(np.max(kept_kx))
-        assert out[f"n{n}_kx_hi"] <= n / 3.0, n
-        assert out[f"n{n}_kx_hi"] + 1 > n / 3.0, n
-    # n = 96: the cut 32 is attained and must be RETAINED (<=, not <)
+        assert out[f"n{n}_kx_hi"] < n / 3.0, n          # STRICT
+        assert out[f"n{n}_kx_hi"] + 1 >= n / 3.0, n     # and the largest such mode
+    # n = 96: the cut 32 is attained and must therefore be DROPPED (<, not <=); 31 is the
+    # largest retained wavenumber. This is leg 129's inversion of the encoded defect.
     m = dealias_mask2d(96)
     KX, KY, _, _ = wavenumbers2d(96)
-    assert bool(m[(KX == 32) & (KY == 0)][0]), "kx = n/3 must be retained"
+    assert not bool(m[(KX == 32) & (KY == 0)][0]), "kx = n/3 must be DROPPED (K < n/3)"
+    assert bool(m[(KX == 31) & (KY == 0)][0])
     assert not bool(m[(KX == 33) & (KY == 0)][0])
     return out
 
