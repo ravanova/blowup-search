@@ -28,11 +28,14 @@ ToolSearch: "select:SendMessage,TaskOutput,TaskStop,Monitor,TodoWrite,send_later
 
 1. `.venv/bin/python plan_of_record.py` — the committed sequence, the stage marked `NEXT`, its
    pre-committed gate, the live bans. This is the law; every agent inherits it.
-2. `ORCHESTRATION.md` — your contract. §1 law, §3 the Decision Maker, §4 the roster, §5
-   collision avoidance, §6 the quartet, §7 commits and merges, §8 escalations, §9 progress
-   file and stopping, §10 the sharding experiment.
+2. `ORCHESTRATION.md` — your contract. §1 law, §3 the Decision Maker (§3a its reserve-queue
+   watermark), §4 the roster (§4a what counts as a vacancy), §5 collision avoidance, §6 the
+   quartet, §7 commits and merges, §8 escalations, §9 progress file and stopping, §10 the
+   sharding experiment.
 3. `CONTINUATION_PROMPT.md` — the critical-path leg's directive and the standing discipline.
-4. `DIRECTION.md` — the Decision Maker's leg queue and live assignments. **If it is a seed
+4. `DIRECTION.md` — the Decision Maker's leg queue, live assignments, and its reserve-count
+   line (§3a) — read that line directly rather than re-deriving the count from per-leg tags.
+   **If it is a seed
    with no queue yet, Step 1 fills it.**
 5. `reports/ORCH_STATE.md` — if it exists and is non-empty, **you are resuming**. Read it
    first: it names live branches, interrupted legs, and what to do first. Gate and merge what
@@ -79,6 +82,12 @@ it owns `DIRECTION.md` and no other file; and this task —
 > confirms a gap in a landed claim, cut a **rework leg** at the top of the queue — same
 > territory, gate pre-committed to the corrected measurement — rather than raising it to the
 > user. You may reason mathematically about direction. You may not build, measure, or write up.
+> **Maintain one canonical, always-current line in DIRECTION.md's Status section stating the
+> reserve count and the reserve leg numbers** (`ORCHESTRATION.md` §3a) — update it in the same
+> edit that adds, promotes, or dispatches any leg, rather than leaving the count to be
+> hand-derived from per-leg `(RESERVE)` tags that go stale on promotion. The moment that count
+> is at or below 3, draft at least 8 more fully-specified candidate legs immediately,
+> unprompted — do not wait to be asked, and do not wait for the count to reach 0.
 
 Keep the DM alive for the whole run and reach it with `SendMessage`. When the user hands you a
 steer, forward it **verbatim** and ask for a revised queue — do not interpret it yourself.
@@ -192,15 +201,22 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
    re-arm the next `send_later` heartbeat before doing anything else this cycle. Do not let a
    cycle end with agents in flight and no heartbeat armed.
 3. **Collect.** `TaskOutput` on finished background agents; `git branch -a` and `gh pr list`
-   for pushed work.
-4. **Audit each leg that landed on `main`** since the last cycle (legs merge themselves —
-   you never merge a leg branch):
+   for pushed work. **A leg reporting an escalation (§8) is collected here too** — its pushed
+   branch (never `main`) is a vacancy signal exactly like a landing, not a "wait and see."
+4. **Audit each leg that landed on `main`, and note every leg that escalated**, since the last
+   cycle (legs merge themselves — you never merge a leg branch). For each one, **before moving
+   to the next item in this list, do the refill in step 7 for that slot** — do not save all of
+   this cycle's refills for after every landing/escalation in the batch has been audited:
    - the diff stayed inside the leg's declared territory, the quartet is complete, and every
      commit follows the convention. A violation → spawn a bench agent to repair **forward on
      `main`** (never rewrite landed history), and record it in the report.
    - claim-bearing landing → dispatch the paired verifier's post-landing review (trigger (b))
      and a DOCS quartet check. A confirmed gap goes to the DM as a rework leg and into the
      report, not into silence — and not to the user.
+   - an escalation vacates its slot the instant it is reported, same as a landing
+     (`ORCHESTRATION.md` §4a) — refill it now, whether or not the user or the DM has ruled on
+     the escalated finding yet. Those are two independent decisions; only the refill is yours
+     to make unprompted.
 5. **Gate and merge support branches** (`verify/`, `lit/`, `repro/`, `docs/`, `prep/`), in
    the order they became ready:
    - `git checkout <branch>` then `scripts/merge_gate.sh origin/main`; check the diff stays
@@ -211,13 +227,22 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
      branch and the gate output.
 6. **Fix what is broken.** A red test on `main`, a bug an agent tripped over, a missing
    evidence script: spawn a bench agent and get it done. Do not queue it and move on.
-7. **Terminate and refill.** The moment a leg's push lands: `TaskStop` its agent if it has
-   not already stopped — **a finished leg agent is never reused**. Then `SendMessage` the DM
-   with what landed and get the next assignment from the queue (when no queued item is clear,
-   the DM chooses the work — that is its mandate), and spawn a fresh Opus 5 leg agent on it.
-   **Ten legs live is the target, at all times** — refill is per-slot and immediate, not
-   batched (§4 bench priority: refill legs first, then repairs, then extra routes). Arm or
-   refresh the heartbeat (step 2 above) for the refilled slot.
+7. **Terminate and refill.** The moment a slot vacates — a leg's push lands on `main`, **or a
+   leg escalates and parks its branch instead (§8) — both count, identically** (`ORCHESTRATION.md`
+   §4a) — `TaskStop` its agent if it has not already stopped: **a finished leg agent is never
+   reused.** Then `SendMessage` the DM with what happened (landed or escalated) and get the next
+   assignment from the queue (when no queued item is clear, the DM chooses the work — that is
+   its mandate), and spawn a fresh Opus 5 leg agent on it. **Ten legs live is the target, at all
+   times** — refill is per-slot and immediate, not batched (§4 bench priority: refill legs
+   first, then repairs, then extra routes), and it happens inline in step 4 above as each
+   vacancy is detected — **this step is where you confirm every slot from this cycle actually
+   got refilled, not the first place refill is allowed to happen.** If a batch of several legs
+   vacated in one cycle, every one of them should already show a fresh agent by the time you
+   reach this line; if any doesn't, that is this step's job to close before moving on. **In the
+   same `SendMessage` to the DM, check `DIRECTION.md`'s reserve-count line (`ORCHESTRATION.md`
+   §3a):** if it is missing, stale, or already at or below 3, say so explicitly and ask for a
+   fresh batch of at least 8 — do not wait for the reserve to hit 0 or for a dedicated cycle to
+   ask. Arm or refresh the heartbeat (step 2 above) for the refilled slot.
 8. **Integration commit.** Once per cycle, in one commit
    (`Leg 0: ORCH — integration cycle <n>, …`): apply the pre-committed plan branch for any gate
    that answered, add the one-line pointers into `experiments/JOURNAL.md`,

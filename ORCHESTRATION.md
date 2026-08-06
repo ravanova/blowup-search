@@ -119,7 +119,29 @@ and asks for a revised queue. The orchestrator does not interpret the steer itse
 
 The DM may reason mathematically about direction. It may not build, measure, or write up.
 
-## 4. The 32-slot roster
+### 3a. Reserve queue bookkeeping and watermark
+
+**Diagnosed 2026-08-06.** The reserve (queued-but-undispatched legs) ran completely dry this
+session — drained to two items with no buffer and no earlier signal — because DIRECTION.md
+tracked it only as prose scattered across a long, repeatedly-superseded history, plus a
+`(RESERVE)`/`(ASSIGNED)` tag on each leg's own heading that goes stale the moment that leg is
+promoted somewhere else in the file. Nobody was wrong to trust it; there was simply no single
+place that said the current count, so the only way to know it was hand-counting tags across a
+file that explicitly warns its own older paragraphs are superseded.
+
+**The fix: DIRECTION.md's Status section carries one canonical, always-current line**, e.g.
+`**Reserve queue: 4 undispatched legs (117, 118, 119, 121).**` — updated by the DM every time
+it touches the file, in the same edit that adds or promotes a leg. This is additive to the
+existing queue entries and ranking rationale, not a replacement for them; it exists so the
+count can be read in one line instead of re-derived by hand.
+
+**Watermark.** The moment that count is **at or below 3**, the DM drafts at least 8 more
+candidate legs — fully specified, same rigor as the initial queue (§3 above: thesis,
+pre-committed gate naming both branches, disjoint file territory, difficulty class) —
+**immediately, unprompted.** Waiting for the count to reach 0, or for the next time the
+orchestrator happens to ask, is exactly the failure this fixes. If the orchestrator notices
+the line is missing, stale, or already at/below the watermark, it asks the DM for a refresh
+in the same message as its next refill request (§4a) rather than waiting for a dedicated cycle.
 
 | Band | Slots | Model | Lane | Branch prefix | Role |
 |---|---|---|---|---|---|
@@ -132,13 +154,36 @@ The DM may reason mathematically about direction. It may not build, measure, or 
 | **BENCH** | 4 | assigned | assigned | assigned | Unassigned capacity. |
 
 **Bench priority, in this order:**
-1. **Refill a leg slot the moment one closes** — ten legs live is the target, not a ceiling
-   reached once. Refill is per-slot and immediate: terminate the finished agent, get the
-   next brief from the DM, spawn fresh.
+1. **Refill a leg slot the moment one vacates** (§4a) — ten legs live is the target, not a
+   ceiling reached once. Refill is per-slot and immediate: terminate the finished agent, get
+   the next brief from the DM, spawn fresh.
 2. **Repair work integration found.** A failing gate, a broken test on `main`, a bug an agent
    tripped over: spawn a bench agent to fix it. Issues get *worked*, not queued.
 3. **An eleventh+ parallel route** from the DM's queue, if every other slot is saturated and
    the queue has a ready, independent item.
+
+### 4a. Refill is triggered by vacancy, not only by landing on `main`
+
+**Diagnosed 2026-08-06.** A slot vacates in exactly two ways: a leg's push lands on `main`
+(§7b), or a leg **escalates** and parks its branch instead (§8) — never `main`. Both empty the
+slot the same way, and §8 already says so ("the orchestrator parks the item, refills the slot,
+and keeps every other leg moving"). The gap this closes: mechanical instructions elsewhere have
+been phrased around "the moment a leg's push **lands**," which reads as not covering the
+escalation case at all — and in practice it didn't. Two slots sat `VACANT` in the live progress
+file this session, both from escalations, waiting on a DM ruling on the *finding* when nothing
+about that ruling should have kept the *slot* empty — routing an escalated result and refilling
+its slot are independent decisions, and the second one never needs the first.
+
+**So: treat an escalation's branch-park exactly like a landing for refill purposes.** The
+slot is vacant the instant the escalation is reported, not the instant (if ever) the user or
+the DM resolves it. Refill it in the same turn, from the DM's queue or a promoted reserve item,
+same as any other closed leg.
+
+**Batches.** When several slots vacate in the same cycle — a run of landings, an escalation
+alongside them, several of either at once — refill each one as it is detected, not after every
+landed leg has been audited and every support branch merged. Detecting a vacancy and requesting
+its replacement from the DM is one action, not two steps apart in the loop; do not let "audit
+what landed" finish for the whole batch before the first refill request goes out.
 
 Never exceed 32 concurrent workers plus the DM. Steady state is ~16–24; the headroom is what
 makes "assign an idle agent to a new leg" possible without starving verification.
@@ -245,7 +290,9 @@ merge. A leg's finish protocol, in order, none skippable:
    slot refills with a fresh agent on a fresh brief — ten legs stay live.
 
 An outcome that falls under an escalation (§8) is the one exception: the agent pushes its
-*branch* only, never `main`, and reports it as parked.
+*branch* only, never `main`, and reports it as parked. This still vacates the slot exactly like
+a landing does, and it still refills immediately (§4a) — the escalation is a property of the
+*finding*, not a reason to leave the *slot* empty.
 
 **Claim-bearing legs land without pre-push review; the compensating control is post-landing
 verification.** Every landing that touches a mathematical claim, a gate answer, or any number
@@ -283,8 +330,10 @@ orchestrator records the dispute and its resolution in the progress file and the
 
 These are parked as pushed *branches* (never `main`), listed at the **top** of `PROGRESS.md`
 under `⚠ NEEDS YOU`, and left for the user. **Work does not stop for them** — the orchestrator
-parks the item, refills the slot, and keeps every other leg moving. Everything else lands as
-it turns green.
+parks the item, refills the slot, and keeps every other leg moving. "Refills the slot" means
+immediately, in the same turn the escalation is reported (§4a) — not once the user or the DM
+has ruled on the escalated finding; those are two separate decisions, and only the first one
+is the orchestrator's to make unprompted. Everything else lands as it turns green.
 
 **Everything short of these four is decided, not asked.** The user's standing answer is on
 record:
@@ -456,7 +505,11 @@ arrive.
 - Don't fill every slot immediately just because it's empty if doing so means a large batch of
   agents will all run unattended for a long stretch at once — ten legs plus a handful of
   support/bench agents is the designed ceiling, not an instruction to always dispatch that many
-  in one go regardless of how long they'll run before the next heartbeat or notification.
+  in one go regardless of how long they'll run before the next heartbeat or notification. **This
+  is a caution about the size of one dispatch batch, not license to defer the refill itself
+  (§4a)** — requesting the DM's next brief and spawning the replacement agent for a vacated slot
+  happens the same turn regardless; only "how many fresh agents get launched in the same breath"
+  is what this bullet paces.
 
 ## 10. The sharding experiment (run it once, then stop)
 

@@ -3009,6 +3009,18 @@ belong to a future window.
   `sinh_grid_at(M<0)` silently mirrors; `degenerate_ic`'s closing `np.where(X>0.0,...)`
   launders a NaN abscissa into the same 0.0 a legitimate X<=0 point produces. All latent
   (0 of 35 in-repo call sites exposed). Not patched.
+- **Leg 114 (Route-CNA) — YES, not repaired (audit leg, latent):**
+  `collocation_newton.py`'s `newton_gauged`'s `converged` flag is blind to the dropped row
+  (structurally always True on the reduced subsystem), and the one-gauge system has a
+  second, quiet root: Omega = -1 satisfies every residual row and the gauge row to 1e-13,
+  is returned with converged=True, and sits outside the decay class by 5.84e+03 at J=60,
+  growing to 4.15e+04 at J=160 — the inflation grows WITH resolution, not shrinks.
+  `critical_radius` also has no magnitude test (a -1e-16 dip in an otherwise-0.5 field
+  returns a finite X_c where the truth is infinite). All three measured latent, not live:
+  production always starts from the true anchor, 140 perturbation draws never hit the
+  spurious constant, 200 noise draws never flipped X_c. Banked as a 12-check regression
+  suite (7 KNOWN GAP assertions for a future repair to invert). Does not reopen leg 110's
+  L1R death certificate audit. Not patched.
 - **Leg 119 (Route-HHA) — YES, not repaired (audit leg, latent):** `hilbert_holder.py`'s
   per-point routing rule transplants leg 106's unsound shape from the sibling
   hilbert_pointwise.py: two NaN-free configurations (gamma=0.0, gamma=-0.5) exceed the
