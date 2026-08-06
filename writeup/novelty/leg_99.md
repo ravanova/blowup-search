@@ -56,8 +56,10 @@ That module is outside this leg's territory and was not tested; it is flagged in
 
 ## 1. The battery
 
-`experiments/p2_route_bva_v1_adversarial.py`, 14 cases in four families.  Each case is
-classified by what the module *does*, not by whether it "works":
+`experiments/p2_route_bva_v1_adversarial.py`, **22 cases in three families** (origin
+singularity, malformed boundary, origin read).  Totals: **7 `SILENT_WRONG`**, 2 `SILENT_EMPTY`,
+4 `RAISED`, 5 `NONFINITE`, 3 `FINITE`, 1 `BASELINE`.  Each case is classified by what the module
+*does*, not by whether it "works":
 
 | verdict | meaning |
 | --- | --- |
@@ -158,7 +160,7 @@ degeneracy visible:
 | `r_min == r_max` (`drho = 0`) | `NONFINITE` — 1024/1024 NaN, 33 RuntimeWarnings |
 | `n_r = 1` | `RAISED IndexError` |
 | `omega` containing one NaN | `NONFINITE` — one NaN contaminates 1024/1024 of `phi` |
-| `omega` containing one Inf | `NONFINITE` — 960/1024 NaN in `phi`, 1024/1024 in `u` |
+| `omega` containing one Inf | `NONFINITE` — 1024/1024 non-finite in `phi` (960 NaN + 64 Inf), 4 warnings |
 | `omega` shape `(n_beta, n_beta)` | `RAISED ValueError` |
 | `omega` shape `(1, n_beta)` | `RAISED ValueError` |
 | `radial_bc="Robin"` (case typo) | `RAISED UnboundLocalError` |
