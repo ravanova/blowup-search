@@ -1,0 +1,255 @@
+{
+  "leg": 122,
+  "route": "ASA",
+  "module_under_audit": "solver/advection_scope.py",
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/advection_scope.py ever silently return a wrong result instead of flagging the input?",
+  "category_T_trapz_order_dependence": {
+    "T1_ascending_control": {
+      "n": 4001,
+      "L": 1000.0,
+      "exact_closed_form": -3.1395926542564596,
+      "returned": -3.1396145658677934,
+      "rel_err": 6.97912555760892e-06,
+      "note": "control: ascending sorted X reproduces the closed form to O(1/n^2) discretization error"
+    },
+    "T2_exact_reversal": {
+      "returned": 3.1396145658677934,
+      "ascending": -3.1396145658677934,
+      "is_exact_negation": true,
+      "rel_err_vs_exact": 2.0000069791255575,
+      "nan_or_inf_anywhere": false,
+      "raised": false,
+      "verdict": "SILENT_CORRUPTION"
+    },
+    "T3_random_permutations": [
+      {
+        "seed": 0,
+        "returned": 31.03773419618051,
+        "rel_err_vs_exact": 10.885911203831341,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 1,
+        "returned": 282.2253479215667,
+        "rel_err_vs_exact": 90.89234560061273,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 2,
+        "returned": 73.06510478113722,
+        "rel_err_vs_exact": 24.272160699599105,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 3,
+        "returned": 524.5168654734057,
+        "rel_err_vs_exact": 168.06526076314364,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 4,
+        "returned": 1122.6768823843322,
+        "rel_err_vs_exact": 358.5867974026116,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      }
+    ],
+    "T4_single_adjacent_swap": {
+      "returned": -3.0146145658677934,
+      "ascending_reference": -3.1396145658677934,
+      "abs_diff_from_ascending": 0.125,
+      "rel_err_vs_exact": 0.039807103070912356,
+      "finite": true,
+      "note": "swapping exactly TWO adjacent array entries, everything else untouched",
+      "verdict": "SILENT_CORRUPTION"
+    },
+    "T5_velocity_log_rate_consequence": {
+      "sorted": {
+        "measured": 0.0003330840874277018,
+        "predicted": -0.9993703551223487,
+        "predicted_full_domain": -0.9993703551223487,
+        "mass_window": -3.1396145658677934,
+        "mass": -3.1396145658677934,
+        "window": [
+          10.0,
+          1000.0
+        ]
+      },
+      "shuffled": {
+        "measured": 0.0003330840874277021,
+        "predicted": 9.879617639388966,
+        "predicted_full_domain": 9.879617639388966,
+        "mass_window": 31.03773419618051,
+        "mass": 31.03773419618051,
+        "window": [
+          10.0,
+          1000.0
+        ]
+      },
+      "measured_rel_change": 9.765121301877006e-16,
+      "predicted_rel_change": 10.88584220929732,
+      "note": "'measured' (a np.polyfit slope) is order-independent and barely moves; 'predicted'/'mass'/'mass_window' (trapz-based) are corrupted by the same permutation -- an internally INCONSISTENT result package, silently returned"
+    }
+  },
+  "category_S_stagnation_point_order_dependence": {
+    "S1_sorted_ground_truth": {
+      "returned": 4.999999999876372,
+      "true_root": 5.0,
+      "abs_err": 1.2362821877331953e-10
+    },
+    "S2_shuffled_single_crossing": [
+      {
+        "seed": 0,
+        "returned": 5.897824448118586,
+        "true_root": 5.0,
+        "abs_err": 0.8978244481185857,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 1,
+        "returned": 4.987643547917476,
+        "true_root": 5.0,
+        "abs_err": 0.012356452082523894,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 2,
+        "returned": 5.44724795139946,
+        "true_root": 5.0,
+        "abs_err": 0.4472479513994596,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 3,
+        "returned": 9.192779371282576,
+        "true_root": 5.0,
+        "abs_err": 4.192779371282576,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      },
+      {
+        "seed": 4,
+        "returned": 4.234668785277082,
+        "true_root": 5.0,
+        "abs_err": 0.7653312147229183,
+        "finite": true,
+        "verdict": "SILENT_CORRUPTION"
+      }
+    ],
+    "S3_two_crossings": {
+      "sorted_first_crossing": 4.999999999876372,
+      "true_crossings": [
+        5.0,
+        12.0
+      ],
+      "shuffles": [
+        {
+          "seed": 100,
+          "returned": 12.317639706525505,
+          "finite": true,
+          "matches_a_real_crossing": true
+        },
+        {
+          "seed": 101,
+          "returned": 3.7435751470432876,
+          "finite": true,
+          "matches_a_real_crossing": false
+        },
+        {
+          "seed": 102,
+          "returned": 4.529426098582835,
+          "finite": true,
+          "matches_a_real_crossing": true
+        }
+      ]
+    },
+    "S4_nan_before_crossing_control": {
+      "returned": NaN,
+      "is_nan": true,
+      "note": "NaN strictly before the true root, SORTED order otherwise -- must never look like a real crossing"
+    }
+  },
+  "category_C_controls": {
+    "C1_mismatched_shapes": {
+      "raised": true,
+      "type": "ValueError",
+      "verdict": "PASS"
+    },
+    "C2_unknown_grading_key": {
+      "raised": true,
+      "type": "KeyError",
+      "verdict": "PASS"
+    },
+    "C3_nonfinite_scalars": {
+      "a_nan": {
+        "returned": NaN,
+        "is_nan": true
+      },
+      "c_nan": {
+        "returned": NaN,
+        "is_nan": true
+      },
+      "a_inf": {
+        "returned": NaN,
+        "is_nan_or_none": true
+      },
+      "verdict": "PASS"
+    },
+    "C4_extreme_scale_sorted": {
+      "returned": 2e+300,
+      "expected": 1.9999999999999998e+300,
+      "rel_err": 1.487016908477783e-16,
+      "finite": true,
+      "verdict": "PASS"
+    },
+    "C5_duplicate_node": {
+      "returned": 1.8380177767001666,
+      "reference": 1.837538713981456,
+      "rel_err": 0.00026070891190780113,
+      "verdict": "PASS"
+    },
+    "C6_window_too_small": {
+      "returned": NaN,
+      "is_nan": true,
+      "verdict": "PASS"
+    },
+    "C7_negative_window_bound": {
+      "raised": true,
+      "type": "LinAlgError",
+      "verdict": "PASS"
+    },
+    "C8_complex_profile": {
+      "returned": -2.746776880807905,
+      "real_part_only_reference": -2.746776880807905,
+      "imaginary_part_silently_discarded": true,
+      "complex_warning_fired": true,
+      "verdict": "WARNED_NOT_SILENT"
+    },
+    "C9_a_zero_control_shuffled": {
+      "returned": null,
+      "verdict": "PASS"
+    }
+  },
+  "summary": {
+    "T_gate_violations": 7,
+    "S_gate_violations": 5,
+    "total_gate_violations": 12,
+    "control_category_unexpected_risks": 0,
+    "complex_input_graded_separately_as_silent": false,
+    "gate_answer": "YES"
+  },
+  "exposure": {
+    "callers_of_advection_scope_functions": [
+      "test_advection_scope.py"
+    ],
+    "note": "The ONLY caller anywhere in the repository always constructs fam.X via TwoScaleNewton -> GCLMResidual -> solver.gclm_rescaled.sinh_grid, which is strictly increasing by construction (c*sinh(rho), c>0, rho ascending). No real call site has ever passed unsorted, shuffled, or otherwise mis-ordered X into this module. The mechanism is real; the exposure today is LATENT, in the same sense legs 100/101/120 measured for their modules.",
+    "banked_numbers_at_risk": 0
+  }
+}
