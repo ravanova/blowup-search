@@ -1,0 +1,2464 @@
+{
+  "leg": 136,
+  "route": "MF2",
+  "version": "v1",
+  "what": "classification of the 5 open divergent cases gate 11 still misses, and a pre-named family of 5 second criteria tested against them, the 11 gates' own trajectories, and the convergent controls",
+  "gate_question": "Does at least one pre-named criterion flag all 5 remaining divergent cases with zero false positives across the 11 existing gates, the 4 already-closed cases, and the well-behaved battery?",
+  "predicate_under_test": "solver/marginal_flow.py:integrate -> rec['converged'] = finite(y) and no NaN break and worst_newton_residual_over_floor < 1e8 and state_growth < 1e5",
+  "criteria_prenamed_at": "writeup/novelty/leg_136.md, commit aeced70",
+  "criteria": {
+    "C1": "TAIL_GROWTH_RATIO: max_TAIL v / max_PRE v, per block, max over blocks",
+    "C2": "TAIL_DRIFT_OVER_INITIAL_SCALE: (max_TAIL |dv|/dt) / initial block scale",
+    "C3": "MONOTONE_TAIL_FRACTION: fraction of TAIL steps with v increasing",
+    "C4": "TAIL_RANGE_OVER_INITIAL_SCALE: (max_TAIL v - min_TAIL v) / initial scale",
+    "C5": "TAIL_EFOLD_RATE: log(C1) / (mean tau of TAIL - mean tau of PRE)"
+  },
+  "open_cases": [
+    "mu_linear",
+    "b_quadratic",
+    "osc_sustained",
+    "osc_growing",
+    "osc_stiff_underresolved"
+  ],
+  "closed_by_state_growth_clause": [
+    "mu_quartic",
+    "mu_exp_mild",
+    "mu_negative_runaway",
+    "mu_exp_extreme"
+  ],
+  "summary": {
+    "n_open_cases_inherited": 5,
+    "n_open_scored_misses": 4,
+    "n_open_fidelity_excluded": 1,
+    "n_wellbehaved_trajectories": 14,
+    "n_wellbehaved_flagged_by_gate11_today": 0,
+    "largest_legitimate_state_growth": 406.29692503169844,
+    "largest_legitimate_state_growth_case": "gate6_lambda_mu_p5",
+    "criteria_admitting_a_threshold_all5": [],
+    "criteria_admitting_a_threshold_scored4": [],
+    "best_separation_ratio": 0.5480152489819359,
+    "best_separation_at": {
+      "window_frac": 0.1,
+      "criterion": "C1"
+    },
+    "conjunctions_admitting_a_threshold_pair": [],
+    "positive_control_criteria_admitting_a_threshold_on_the_closed_4": [
+      "C2",
+      "C4"
+    ],
+    "positive_control_best_separation_ratio": 29891.98220436369,
+    "efold_rate_legitimate_gate6_p5": 2.0039119140633432,
+    "efold_rate_divergent_mu_linear": 0.019068338082943427,
+    "instrumented_reproduction_failures": [],
+    "gate_answer": "no_characterized_residual",
+    "window_fractions_swept": [
+      0.1,
+      0.25,
+      0.5
+    ]
+  },
+  "mechanism_classification": [
+    {
+      "name": "mu_linear",
+      "mechanism": "SUB_THRESHOLD_UNBOUNDED_GROWTH",
+      "state_growth": 201.0,
+      "tail_range_over_scale": 49.16666666666667,
+      "tail_growth_ratio": 1.3311258278145695,
+      "tail_efold_rate": 0.019068338082943427,
+      "monotone_tail_fraction": 1.0,
+      "fidelity_ok": true,
+      "explanation": "genuinely unbounded but too slow to reach the 1e5 bound in the tau the run is given: growth 201, i.e. 0.00201 of the threshold, and only 0.495x above the module's own legitimate ceiling of 4.06e2."
+    },
+    {
+      "name": "b_quadratic",
+      "mechanism": "SUB_THRESHOLD_UNBOUNDED_GROWTH",
+      "state_growth": 3726.024212001819,
+      "tail_range_over_scale": 1583.1519611221802,
+      "tail_growth_ratio": 1.757733396495833,
+      "tail_efold_rate": 0.03760167574450868,
+      "monotone_tail_fraction": 1.0,
+      "fidelity_ok": true,
+      "explanation": "genuinely unbounded but too slow to reach the 1e5 bound in the tau the run is given: growth 3.73e+03, i.e. 0.0373 of the threshold, and only 9.18x above the module's own legitimate ceiling of 4.06e2."
+    },
+    {
+      "name": "osc_sustained",
+      "mechanism": "BOUNDED_NON_CONVERGENT",
+      "state_growth": 1.0,
+      "tail_range_over_scale": 0.2782607540799179,
+      "tail_growth_ratio": 1.0,
+      "tail_efold_rate": 0.0,
+      "monotone_tail_fraction": 0.496,
+      "fidelity_ok": true,
+      "explanation": "the state neither grows nor settles: growth 1 and tail range 0.278 of the initial scale.  A MAGNITUDE clause is the wrong instrument -- there is no magnitude to exceed."
+    },
+    {
+      "name": "osc_growing",
+      "mechanism": "BOUNDED_NON_CONVERGENT",
+      "state_growth": 1.9921702466899474,
+      "tail_range_over_scale": 1.035694062819828,
+      "tail_growth_ratio": 1.2616969435271517,
+      "tail_efold_rate": 0.04649151908899691,
+      "monotone_tail_fraction": 0.504,
+      "fidelity_ok": true,
+      "explanation": "the state neither grows nor settles: growth 1.99 and tail range 1.04 of the initial scale.  A MAGNITUDE clause is the wrong instrument -- there is no magnitude to exceed."
+    },
+    {
+      "name": "osc_stiff_underresolved",
+      "mechanism": "INTEGRATOR_ERASED_THE_DIVERGENCE",
+      "state_growth": 1.0,
+      "tail_range_over_scale": 3.654032786627856e-14,
+      "tail_growth_ratio": 1.0217795738828666,
+      "tail_efold_rate": 0.004309157477353664,
+      "monotone_tail_fraction": 0.448,
+      "fidelity_ok": false,
+      "explanation": "the computed trajectory does not diverge at all: amplitude retained 3.479e-14 of exact.  No state predicate can see what the stepper removed; this is a dt-vs-max|Im| hazard, not a gate-11 miss."
+    }
+  ],
+  "separation": {
+    "0.1": {
+      "C1": {
+        "criterion": "TAIL_GROWTH_RATIO: max_TAIL v / max_PRE v, per block, max over blocks",
+        "min_over_must_flag_scored4": 1.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 1.0,
+        "max_over_must_not_flag": 1.8247667411768733,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.5480152489819359,
+        "separation_ratio_all5": 0.5480152489819359,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.1104972375690607,
+          "b_quadratic": 1.2299016591687415,
+          "osc_sustained": 1.0,
+          "osc_growing": 1.0965306984134366,
+          "osc_stiff_underresolved": 1.0
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.0,
+          "exact_fixed_point": 1.0,
+          "damped_oscillation": 1.0,
+          "gate4_a0_neutral_mu0.25": 1.0000000000000655,
+          "gate4_a0_neutral_mu0.5": 0.9999999999999825,
+          "gate4_a0_neutral_mu1": 1.0000000000001872,
+          "gate4_a0_neutral_mu2": 0.9999999999999678,
+          "gate4_a0_neutral_mu4": 0.9999999999999635,
+          "gate5_gauge_on": 0.9998228307222852,
+          "gate5_gauge_off": 0.999793902482356,
+          "gate6_lambda_mu_p1": 0.9999964167431087,
+          "gate6_lambda_mu_p2": 1.000008243146123,
+          "gate6_lambda_mu_p4": 1.3496583828308468,
+          "gate6_lambda_mu_p5": 1.8247667411768733,
+          "gate7_alpha1_long": 0.9998706449933222,
+          "gate11_on_branch": 0.9998228307165916,
+          "gate3_dt_ladder_finest": 0.9998222633122221
+        }
+      },
+      "C2": {
+        "criterion": "TAIL_DRIFT_OVER_INITIAL_SCALE: (max_TAIL |dv|/dt) / initial block scale",
+        "min_over_must_flag_scored4": 3.3333333333333335,
+        "weakest_true_positive_scored4": "mu_linear",
+        "min_over_must_flag_all5": 1.423578459833118e-12,
+        "max_over_must_not_flag": 798.678277266257,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.004173562031438716,
+        "separation_ratio_all5": 1.782417902620052e-15,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 3.3333333333333335,
+          "b_quadratic": 121.83233634726639,
+          "osc_sustained": 3.8321603284419967,
+          "osc_growing": 10.199597137576799,
+          "osc_stiff_underresolved": 1.423578459833118e-12
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.3464107708414343e-13,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.0005387315168379398,
+          "gate4_a0_neutral_mu0.25": 1.6431300764452317e-13,
+          "gate4_a0_neutral_mu0.5": 1.7696955012524995e-13,
+          "gate4_a0_neutral_mu1": 2.7045032879868813e-13,
+          "gate4_a0_neutral_mu2": 1.6209256159527285e-14,
+          "gate4_a0_neutral_mu4": 5.706546346573305e-14,
+          "gate5_gauge_on": 0.004013252427773987,
+          "gate5_gauge_off": 0.004011658931227051,
+          "gate6_lambda_mu_p1": 0.008836010677517384,
+          "gate6_lambda_mu_p2": 0.06651595555011638,
+          "gate6_lambda_mu_p4": 19.871306907277148,
+          "gate6_lambda_mu_p5": 798.678277266257,
+          "gate7_alpha1_long": 0.0014187618252138139,
+          "gate11_on_branch": 0.004013252407528331,
+          "gate3_dt_ladder_finest": 0.00401950425221472
+        }
+      },
+      "C3": {
+        "criterion": "MONOTONE_TAIL_FRACTION: fraction of TAIL steps with v increasing",
+        "min_over_must_flag_scored4": 0.49,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.45,
+        "max_over_must_not_flag": 1.0,
+        "binding_false_positive": "gate6_lambda_mu_p2",
+        "separation_ratio_scored4": 0.49,
+        "separation_ratio_all5": 0.45,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.0,
+          "b_quadratic": 1.0,
+          "osc_sustained": 0.49,
+          "osc_growing": 0.51,
+          "osc_stiff_underresolved": 0.45
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.7083333333333334,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.44,
+          "gate4_a0_neutral_mu0.25": 0.625,
+          "gate4_a0_neutral_mu0.5": 0.5,
+          "gate4_a0_neutral_mu1": 0.75,
+          "gate4_a0_neutral_mu2": 0.0,
+          "gate4_a0_neutral_mu4": 0.5,
+          "gate5_gauge_on": 0.0,
+          "gate5_gauge_off": 0.0,
+          "gate6_lambda_mu_p1": 0.0,
+          "gate6_lambda_mu_p2": 1.0,
+          "gate6_lambda_mu_p4": 1.0,
+          "gate6_lambda_mu_p5": 1.0,
+          "gate7_alpha1_long": 0.0,
+          "gate11_on_branch": 0.0,
+          "gate3_dt_ladder_finest": 0.0
+        }
+      },
+      "C4": {
+        "criterion": "TAIL_RANGE_OVER_INITIAL_SCALE: (max_TAIL v - min_TAIL v) / initial scale",
+        "min_over_must_flag_scored4": 0.2689865011925089,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 3.644262528250906e-14,
+        "max_over_must_not_flag": 174.53360792779327,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.0015411730977554303,
+        "separation_ratio_all5": 2.0880004553384256e-16,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 19.166666666666668,
+          "b_quadratic": 668.9109339967818,
+          "osc_sustained": 0.2689865011925089,
+          "osc_growing": 0.834436446303743,
+          "osc_stiff_underresolved": 3.644262528250906e-14
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 5.70554050908208e-13,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 9.173764719208526e-05,
+          "gate4_a0_neutral_mu0.25": 2.1227464230832993e-13,
+          "gate4_a0_neutral_mu0.5": 1.5698553568199713e-13,
+          "gate4_a0_neutral_mu1": 3.581579477440755e-13,
+          "gate4_a0_neutral_mu2": 5.67323965583455e-14,
+          "gate4_a0_neutral_mu4": 5.706546346573305e-14,
+          "gate5_gauge_on": 0.021449001864293542,
+          "gate5_gauge_off": 0.021440260963729262,
+          "gate6_lambda_mu_p1": 0.00185644104181212,
+          "gate6_lambda_mu_p2": 0.01608244932632572,
+          "gate6_lambda_mu_p4": 4.902294447111214,
+          "gate6_lambda_mu_p5": 174.53360792779327,
+          "gate7_alpha1_long": 0.01529122495787641,
+          "gate11_on_branch": 0.02144900187007299,
+          "gate3_dt_ladder_finest": 0.021949474397960588
+        }
+      },
+      "C5": {
+        "criterion": "TAIL_EFOLD_RATE: log(C1) / (mean tau of TAIL - mean tau of PRE)",
+        "min_over_must_flag_scored4": 0.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.0,
+        "max_over_must_not_flag": 2.0048405527063364,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.0,
+        "separation_ratio_all5": 0.0,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 0.01746797946554166,
+          "b_quadratic": 0.03448903571544514,
+          "osc_sustained": 0.0,
+          "osc_growing": 0.04607564260649362,
+          "osc_stiff_underresolved": 0.0
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.0,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.0,
+          "gate4_a0_neutral_mu0.25": 1.6375789613220523e-14,
+          "gate4_a0_neutral_mu0.5": -4.385380947269407e-15,
+          "gate4_a0_neutral_mu1": 4.679590048794597e-14,
+          "gate4_a0_neutral_mu2": -8.049116928532514e-15,
+          "gate4_a0_neutral_mu4": -9.13158437754208e-15,
+          "gate5_gauge_on": -2.9530829007546147e-05,
+          "gate5_gauge_off": -3.4353126442653156e-05,
+          "gate6_lambda_mu_p1": -1.1944211037318417e-05,
+          "gate6_lambda_mu_p2": 2.747704049493048e-05,
+          "gate6_lambda_mu_p4": 0.9995050355763918,
+          "gate6_lambda_mu_p5": 2.0048405527063364,
+          "gate7_alpha1_long": -1.0780281146516695e-05,
+          "gate11_on_branch": -2.953082995664042e-05,
+          "gate3_dt_ladder_finest": -2.962541413580027e-05
+        }
+      }
+    },
+    "0.25": {
+      "C1": {
+        "criterion": "TAIL_GROWTH_RATIO: max_TAIL v / max_PRE v, per block, max over blocks",
+        "min_over_must_flag_scored4": 1.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 1.0,
+        "max_over_must_not_flag": 4.585838897807396,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.21806261019725853,
+        "separation_ratio_all5": 0.21806261019725853,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.3311258278145695,
+          "b_quadratic": 1.757733396495833,
+          "osc_sustained": 1.0,
+          "osc_growing": 1.2616969435271517,
+          "osc_stiff_underresolved": 1.0217795738828666
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.0972772204506338,
+          "exact_fixed_point": 1.0,
+          "damped_oscillation": 1.0,
+          "gate4_a0_neutral_mu0.25": 1.0000000000000404,
+          "gate4_a0_neutral_mu0.5": 0.999999999999985,
+          "gate4_a0_neutral_mu1": 1.000000000000174,
+          "gate4_a0_neutral_mu2": 0.999999999999934,
+          "gate4_a0_neutral_mu4": 0.9999999999999324,
+          "gate5_gauge_on": 0.9993438080528602,
+          "gate5_gauge_off": 0.9992719508148018,
+          "gate6_lambda_mu_p1": 0.9999832070148719,
+          "gate6_lambda_mu_p2": 1.0000126052955882,
+          "gate6_lambda_mu_p4": 2.137657251019289,
+          "gate6_lambda_mu_p5": 4.585838897807396,
+          "gate7_alpha1_long": 0.9994720202284672,
+          "gate11_on_branch": 0.9993438080534549,
+          "gate3_dt_ladder_finest": 0.9993412432668073
+        }
+      },
+      "C2": {
+        "criterion": "TAIL_DRIFT_OVER_INITIAL_SCALE: (max_TAIL |dv|/dt) / initial block scale",
+        "min_over_must_flag_scored4": 3.3333333333333335,
+        "weakest_true_positive_scored4": "mu_linear",
+        "min_over_must_flag_all5": 1.4771373324801997e-12,
+        "max_over_must_not_flag": 798.678277266257,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.004173562031438716,
+        "separation_ratio_all5": 1.849477285818008e-15,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 3.3333333333333335,
+          "b_quadratic": 121.83233634726639,
+          "osc_sustained": 3.878215470843976,
+          "osc_growing": 10.199597137576799,
+          "osc_stiff_underresolved": 1.4771373324801997e-12
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.078799143372548e-12,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.002340903105355543,
+          "gate4_a0_neutral_mu0.25": 1.800781745942004e-13,
+          "gate4_a0_neutral_mu0.5": 1.7696955012524995e-13,
+          "gate4_a0_neutral_mu1": 2.7045032879868813e-13,
+          "gate4_a0_neutral_mu2": 8.79296635503124e-14,
+          "gate4_a0_neutral_mu4": 1.0147438445073931e-13,
+          "gate5_gauge_on": 0.005107879150370772,
+          "gate5_gauge_off": 0.005106045865944838,
+          "gate6_lambda_mu_p1": 0.022185703626119442,
+          "gate6_lambda_mu_p2": 0.10536462255352534,
+          "gate6_lambda_mu_p4": 19.871306907277148,
+          "gate6_lambda_mu_p5": 798.678277266257,
+          "gate7_alpha1_long": 0.0018968757353626797,
+          "gate11_on_branch": 0.0051078791261090686,
+          "gate3_dt_ladder_finest": 0.005116820713041056
+        }
+      },
+      "C3": {
+        "criterion": "MONOTONE_TAIL_FRACTION: fraction of TAIL steps with v increasing",
+        "min_over_must_flag_scored4": 0.496,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.448,
+        "max_over_must_not_flag": 1.0,
+        "binding_false_positive": "gate6_lambda_mu_p2",
+        "separation_ratio_scored4": 0.496,
+        "separation_ratio_all5": 0.448,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.0,
+          "b_quadratic": 1.0,
+          "osc_sustained": 0.496,
+          "osc_growing": 0.504,
+          "osc_stiff_underresolved": 0.448
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.5,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.444,
+          "gate4_a0_neutral_mu0.25": 0.55,
+          "gate4_a0_neutral_mu0.5": 0.45,
+          "gate4_a0_neutral_mu1": 0.55,
+          "gate4_a0_neutral_mu2": 0.25,
+          "gate4_a0_neutral_mu4": 0.5,
+          "gate5_gauge_on": 0.0,
+          "gate5_gauge_off": 0.0,
+          "gate6_lambda_mu_p1": 0.0,
+          "gate6_lambda_mu_p2": 1.0,
+          "gate6_lambda_mu_p4": 1.0,
+          "gate6_lambda_mu_p5": 1.0,
+          "gate7_alpha1_long": 0.0,
+          "gate11_on_branch": 0.0,
+          "gate3_dt_ladder_finest": 0.0
+        }
+      },
+      "C4": {
+        "criterion": "TAIL_RANGE_OVER_INITIAL_SCALE: (max_TAIL v - min_TAIL v) / initial scale",
+        "min_over_must_flag_scored4": 0.2782607540799179,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 3.654032786627856e-14,
+        "max_over_must_not_flag": 314.07823592257694,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.0008859600005793195,
+        "separation_ratio_all5": 1.1634148338532465e-16,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 49.16666666666667,
+          "b_quadratic": 1583.1519611221802,
+          "osc_sustained": 0.2782607540799179,
+          "osc_growing": 1.035694062819828,
+          "osc_stiff_underresolved": 3.654032786627856e-14
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.921141138498144e-12,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.0005303541448853175,
+          "gate4_a0_neutral_mu0.25": 2.4802382370125997e-13,
+          "gate4_a0_neutral_mu0.5": 1.9451107391432743e-13,
+          "gate4_a0_neutral_mu1": 3.9201974999514277e-13,
+          "gate4_a0_neutral_mu2": 1.758593271006248e-13,
+          "gate4_a0_neutral_mu4": 2.1960211427085596e-13,
+          "gate5_gauge_on": 0.06206098595845593,
+          "gate5_gauge_off": 0.06203687352613452,
+          "gate6_lambda_mu_p1": 0.008394216168112412,
+          "gate6_lambda_mu_p2": 0.054545207080242096,
+          "gate6_lambda_mu_p4": 10.49802073172636,
+          "gate6_lambda_mu_p5": 314.07823592257694,
+          "gate7_alpha1_long": 0.04476045045644535,
+          "gate11_on_branch": 0.06206098593497869,
+          "gate3_dt_ladder_finest": 0.06269694296413382
+        }
+      },
+      "C5": {
+        "criterion": "TAIL_EFOLD_RATE: log(C1) / (mean tau of TAIL - mean tau of PRE)",
+        "min_over_must_flag_scored4": 0.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.0,
+        "max_over_must_not_flag": 2.0039119140633432,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.0,
+        "separation_ratio_all5": 0.0,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 0.019068338082943427,
+          "b_quadratic": 0.03760167574450868,
+          "osc_sustained": 0.0,
+          "osc_growing": 0.04649151908899691,
+          "osc_stiff_underresolved": 0.004309157477353664
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.006188790477494548,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.0,
+          "gate4_a0_neutral_mu0.25": 4.0412118096354884e-15,
+          "gate4_a0_neutral_mu0.5": -1.4988010832439728e-15,
+          "gate4_a0_neutral_mu1": 1.740829702612094e-14,
+          "gate4_a0_neutral_mu2": -6.594724766273647e-15,
+          "gate4_a0_neutral_mu4": -6.761258219967432e-15,
+          "gate5_gauge_on": -4.376048902031501e-05,
+          "gate5_gauge_off": -4.855428944746886e-05,
+          "gate6_lambda_mu_p1": -2.2096218594587845e-05,
+          "gate6_lambda_mu_p2": 1.658581071335345e-05,
+          "gate6_lambda_mu_p4": 0.9996190616462203,
+          "gate6_lambda_mu_p5": 2.0039119140633432,
+          "gate7_alpha1_long": -1.7603973397740118e-05,
+          "gate11_on_branch": -4.376048898063921e-05,
+          "gate3_dt_ladder_finest": -4.3931587249868827e-05
+        }
+      }
+    },
+    "0.5": {
+      "C1": {
+        "criterion": "TAIL_GROWTH_RATIO: max_TAIL v / max_PRE v, per block, max over blocks",
+        "min_over_must_flag_scored4": 1.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 1.0,
+        "max_over_must_not_flag": 20.17296891374438,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.04957128543031033,
+        "separation_ratio_all5": 0.04957128543031033,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.9900990099009899,
+          "b_quadratic": 3.8669589268917237,
+          "osc_sustained": 1.0,
+          "osc_growing": 1.5902178851259923,
+          "osc_stiff_underresolved": 1.0
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.0,
+          "exact_fixed_point": 1.0,
+          "damped_oscillation": 1.0,
+          "gate4_a0_neutral_mu0.25": 1.0000000000001115,
+          "gate4_a0_neutral_mu0.5": 1.0000000000000768,
+          "gate4_a0_neutral_mu1": 1.0000000000000406,
+          "gate4_a0_neutral_mu2": 1.0000000000000033,
+          "gate4_a0_neutral_mu4": 0.9999999999999933,
+          "gate5_gauge_on": 0.9966639353235501,
+          "gate5_gauge_off": 0.9965404204627708,
+          "gate6_lambda_mu_p1": 0.9999451822336775,
+          "gate6_lambda_mu_p2": 0.9999409806853223,
+          "gate6_lambda_mu_p4": 4.479954396545022,
+          "gate6_lambda_mu_p5": 20.17296891374438,
+          "gate7_alpha1_long": 0.995582167139866,
+          "gate11_on_branch": 0.996663935320255,
+          "gate3_dt_ladder_finest": 0.9966605571953624
+        }
+      },
+      "C2": {
+        "criterion": "TAIL_DRIFT_OVER_INITIAL_SCALE: (max_TAIL |dv|/dt) / initial block scale",
+        "min_over_must_flag_scored4": 3.3333333333333335,
+        "weakest_true_positive_scored4": "mu_linear",
+        "min_over_must_flag_all5": 1.4771373324801997e-12,
+        "max_over_must_not_flag": 798.678277266257,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.004173562031438716,
+        "separation_ratio_all5": 1.849477285818008e-15,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 3.3333333333333335,
+          "b_quadratic": 121.83233634726639,
+          "osc_sustained": 3.9517168160923264,
+          "osc_growing": 10.199597137576799,
+          "osc_stiff_underresolved": 1.4771373324801997e-12
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.078799143372548e-12,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.025800944114329986,
+          "gate4_a0_neutral_mu0.25": 1.9273471707492718e-13,
+          "gate4_a0_neutral_mu0.5": 1.7696955012524995e-13,
+          "gate4_a0_neutral_mu1": 2.7045032879868813e-13,
+          "gate4_a0_neutral_mu2": 1.645350522494482e-13,
+          "gate4_a0_neutral_mu4": 1.2811973704174306e-13,
+          "gate5_gauge_on": 0.008258409236177416,
+          "gate5_gauge_off": 0.008256161212967239,
+          "gate6_lambda_mu_p1": 0.09756751570037839,
+          "gate6_lambda_mu_p2": 0.22087537819441197,
+          "gate6_lambda_mu_p4": 19.871306907277148,
+          "gate6_lambda_mu_p5": 798.678277266257,
+          "gate7_alpha1_long": 0.003467987514263841,
+          "gate11_on_branch": 0.008258409217942372,
+          "gate3_dt_ladder_finest": 0.008276617368971156
+        }
+      },
+      "C3": {
+        "criterion": "MONOTONE_TAIL_FRACTION: fraction of TAIL steps with v increasing",
+        "min_over_must_flag_scored4": 0.496,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.448,
+        "max_over_must_not_flag": 1.0,
+        "binding_false_positive": "gate6_lambda_mu_p4",
+        "separation_ratio_scored4": 0.496,
+        "separation_ratio_all5": 0.448,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 1.0,
+          "b_quadratic": 1.0,
+          "osc_sustained": 0.496,
+          "osc_growing": 0.504,
+          "osc_stiff_underresolved": 0.448
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.75,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.444,
+          "gate4_a0_neutral_mu0.25": 0.6,
+          "gate4_a0_neutral_mu0.5": 0.525,
+          "gate4_a0_neutral_mu1": 0.625,
+          "gate4_a0_neutral_mu2": 0.475,
+          "gate4_a0_neutral_mu4": 0.45,
+          "gate5_gauge_on": 0.0,
+          "gate5_gauge_off": 0.0,
+          "gate6_lambda_mu_p1": 0.0,
+          "gate6_lambda_mu_p2": 0.68,
+          "gate6_lambda_mu_p4": 1.0,
+          "gate6_lambda_mu_p5": 1.0,
+          "gate7_alpha1_long": 0.0,
+          "gate11_on_branch": 0.0,
+          "gate3_dt_ladder_finest": 0.0
+        }
+      },
+      "C4": {
+        "criterion": "TAIL_RANGE_OVER_INITIAL_SCALE: (max_TAIL v - min_TAIL v) / initial scale",
+        "min_over_must_flag_scored4": 0.2918455834698789,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 3.6740488035796877e-14,
+        "max_over_must_not_flag": 385.33372637898583,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.000757383959645518,
+        "separation_ratio_all5": 9.534719003459781e-17,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 99.16666666666666,
+          "b_quadratic": 2746.8870063311942,
+          "osc_sustained": 0.2918455834698789,
+          "osc_growing": 1.3340896756367056,
+          "osc_stiff_underresolved": 3.6740488035796877e-14
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 1.921141138498144e-12,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.006788702543326707,
+          "gate4_a0_neutral_mu0.25": 2.4802382370125997e-13,
+          "gate4_a0_neutral_mu0.5": 2.2426505097428162e-13,
+          "gate4_a0_neutral_mu1": 3.9201974999514277e-13,
+          "gate4_a0_neutral_mu2": 4.944933351680447e-13,
+          "gate4_a0_neutral_mu4": 5.123679258645097e-13,
+          "gate5_gauge_on": 0.15909212954645283,
+          "gate5_gauge_off": 0.15903739964854666,
+          "gate6_lambda_mu_p1": 0.045307943712138546,
+          "gate6_lambda_mu_p2": 0.1688739721666623,
+          "gate6_lambda_mu_p4": 15.509043472429598,
+          "gate6_lambda_mu_p5": 385.33372637898583,
+          "gate7_alpha1_long": 0.12151026734061351,
+          "gate11_on_branch": 0.15909212962496558,
+          "gate3_dt_ladder_finest": 0.16011656522256748
+        }
+      },
+      "C5": {
+        "criterion": "TAIL_EFOLD_RATE: log(C1) / (mean tau of TAIL - mean tau of PRE)",
+        "min_over_must_flag_scored4": 0.0,
+        "weakest_true_positive_scored4": "osc_sustained",
+        "min_over_must_flag_all5": 0.0,
+        "max_over_must_not_flag": 2.002895690445165,
+        "binding_false_positive": "gate6_lambda_mu_p5",
+        "separation_ratio_scored4": 0.0,
+        "separation_ratio_all5": 0.0,
+        "admits_threshold_scored4": false,
+        "admits_threshold_all5": false,
+        "threshold_if_admissible": null,
+        "values_must_flag": {
+          "mu_linear": 0.022939479707260537,
+          "b_quadratic": 0.045082279704293494,
+          "osc_sustained": 0.0,
+          "osc_growing": 0.04638710415141919,
+          "osc_stiff_underresolved": 0.0
+        },
+        "values_must_not_flag": {
+          "decay_to_zero": 0.0,
+          "exact_fixed_point": 0.0,
+          "damped_oscillation": 0.0,
+          "gate4_a0_neutral_mu0.25": 5.573319583617975e-15,
+          "gate4_a0_neutral_mu0.5": 3.841371665202894e-15,
+          "gate4_a0_neutral_mu1": 2.031708135063995e-15,
+          "gate4_a0_neutral_mu2": 1.665334536937732e-16,
+          "gate4_a0_neutral_mu4": -3.3306690738754805e-16,
+          "gate5_gauge_on": -0.00011138805824376984,
+          "gate5_gauge_off": -0.00011551925735468428,
+          "gate6_lambda_mu_p1": -3.654617924747277e-05,
+          "gate6_lambda_mu_p2": -3.934737092396581e-05,
+          "gate6_lambda_mu_p4": 0.999741911354969,
+          "gate6_lambda_mu_p5": 2.002895690445165,
+          "gate7_alpha1_long": -7.379367201007567e-05,
+          "gate11_on_branch": -0.00011138805835397555,
+          "gate3_dt_ladder_finest": -0.00011150103962070799
+        }
+      }
+    }
+  },
+  "positive_control_on_the_already_closed_4": {
+    "0.1": {
+      "C1": {
+        "min_over_already_closed_4": 1.5106581569912563,
+        "max_over_must_not_flag": 1.8247667411768733,
+        "separation_ratio": 0.8278637060301557,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C2": {
+        "min_over_already_closed_4": 912620.0091641843,
+        "max_over_must_not_flag": 798.678277266257,
+        "separation_ratio": 1142.6628658136676,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C3": {
+        "min_over_already_closed_4": 1.0,
+        "max_over_must_not_flag": 1.0,
+        "separation_ratio": 1.0,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p2"
+      },
+      "C4": {
+        "min_over_already_closed_4": 4581538.771646699,
+        "max_over_must_not_flag": 174.53360792779327,
+        "separation_ratio": 26250.180845067607,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C5": {
+        "min_over_already_closed_4": 0.06875757023702618,
+        "max_over_must_not_flag": 2.0048405527063364,
+        "separation_ratio": 0.034295779853520156,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      }
+    },
+    "0.25": {
+      "C1": {
+        "min_over_already_closed_4": 3.0774668337666977,
+        "max_over_must_not_flag": 4.585838897807396,
+        "separation_ratio": 0.6710804505666589,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C2": {
+        "min_over_already_closed_4": 912620.0091641843,
+        "max_over_must_not_flag": 798.678277266257,
+        "separation_ratio": 1142.6628658136676,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C3": {
+        "min_over_already_closed_4": 1.0,
+        "max_over_must_not_flag": 1.0,
+        "separation_ratio": 1.0,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p2"
+      },
+      "C4": {
+        "min_over_already_closed_4": 9388421.03897561,
+        "max_over_must_not_flag": 314.07823592257694,
+        "separation_ratio": 29891.98220436369,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C5": {
+        "min_over_already_closed_4": 0.07494045346755097,
+        "max_over_must_not_flag": 2.0039119140633432,
+        "separation_ratio": 0.037397079652864484,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      }
+    },
+    "0.5": {
+      "C1": {
+        "min_over_already_closed_4": 14.780828346193347,
+        "max_over_must_not_flag": 20.17296891374438,
+        "separation_ratio": 0.7327046608455722,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C2": {
+        "min_over_already_closed_4": 912620.0091641843,
+        "max_over_must_not_flag": 798.678277266257,
+        "separation_ratio": 1142.6628658136676,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C3": {
+        "min_over_already_closed_4": 1.0,
+        "max_over_must_not_flag": 1.0,
+        "separation_ratio": 1.0,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p4"
+      },
+      "C4": {
+        "min_over_already_closed_4": 13073412.19737922,
+        "max_over_must_not_flag": 385.33372637898583,
+        "separation_ratio": 33927.505698063855,
+        "admits_threshold": true,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      },
+      "C5": {
+        "min_over_already_closed_4": 0.0897776986341188,
+        "max_over_must_not_flag": 2.002895690445165,
+        "separation_ratio": 0.04482395117349558,
+        "admits_threshold": false,
+        "binding_false_positive": "gate6_lambda_mu_p5"
+      }
+    }
+  },
+  "conjunctions": {
+    "0.1": {
+      "C1&C2": {
+        "t_i": 1.0,
+        "t_j": 3.3333333333333335,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C3": {
+        "t_i": 1.0,
+        "t_j": 0.49,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C4": {
+        "t_i": 1.0,
+        "t_j": 0.2689865011925089,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C5": {
+        "t_i": 1.0,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 8,
+        "false_positives": [
+          "decay_to_zero",
+          "exact_fixed_point",
+          "damped_oscillation",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C3": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.49,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C4": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.2689865011925089,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C5": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C4": {
+        "t_i": 0.49,
+        "t_j": 0.2689865011925089,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C5": {
+        "t_i": 0.49,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C4&C5": {
+        "t_i": 0.2689865011925089,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      }
+    },
+    "0.25": {
+      "C1&C2": {
+        "t_i": 1.0,
+        "t_j": 3.3333333333333335,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C3": {
+        "t_i": 1.0,
+        "t_j": 0.496,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C4": {
+        "t_i": 1.0,
+        "t_j": 0.2782607540799179,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C5": {
+        "t_i": 1.0,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 8,
+        "false_positives": [
+          "decay_to_zero",
+          "exact_fixed_point",
+          "damped_oscillation",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C3": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.496,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C4": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.2782607540799179,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C5": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C4": {
+        "t_i": 0.496,
+        "t_j": 0.2782607540799179,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C5": {
+        "t_i": 0.496,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C4&C5": {
+        "t_i": 0.2782607540799179,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      }
+    },
+    "0.5": {
+      "C1&C2": {
+        "t_i": 1.0,
+        "t_j": 3.3333333333333335,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C3": {
+        "t_i": 1.0,
+        "t_j": 0.496,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu0.5",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C4": {
+        "t_i": 1.0,
+        "t_j": 0.2918455834698789,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C1&C5": {
+        "t_i": 1.0,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 9,
+        "false_positives": [
+          "decay_to_zero",
+          "exact_fixed_point",
+          "damped_oscillation",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu0.5",
+          "gate4_a0_neutral_mu1",
+          "gate4_a0_neutral_mu2",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C3": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.496,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C4": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.2918455834698789,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C2&C5": {
+        "t_i": 3.3333333333333335,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C4": {
+        "t_i": 0.496,
+        "t_j": 0.2918455834698789,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C3&C5": {
+        "t_i": 0.496,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 6,
+        "false_positives": [
+          "decay_to_zero",
+          "gate4_a0_neutral_mu0.25",
+          "gate4_a0_neutral_mu0.5",
+          "gate4_a0_neutral_mu1",
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      },
+      "C4&C5": {
+        "t_i": 0.2918455834698789,
+        "t_j": 0.0,
+        "n_false_positives_at_the_only_admissible_thresholds": 2,
+        "false_positives": [
+          "gate6_lambda_mu_p4",
+          "gate6_lambda_mu_p5"
+        ],
+        "admits_threshold_pair": false
+      }
+    }
+  },
+  "synthetic_battery": [
+    {
+      "name": "mu_linear",
+      "family": "polynomial",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu(tau) = mu0 + tau, unbounded; the mildest possible non-NaN divergence",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "MISSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "rel_err_vs_exact 0.00e+00 < 1e-6",
+      "state_growth": 201.0,
+      "worst_newton_residual_over_floor": 0.059119376061289586,
+      "mu_end": 60.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.1104972375690607,
+          "C2": 3.3333333333333335,
+          "C3": 1.0,
+          "C4": 19.166666666666668,
+          "C5": 0.01746797946554166,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1.3311258278145695,
+          "C2": 3.3333333333333335,
+          "C3": 1.0,
+          "C4": 49.16666666666667,
+          "C5": 0.019068338082943427,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 1.9900990099009899,
+          "C2": 3.3333333333333335,
+          "C3": 1.0,
+          "C4": 99.16666666666666,
+          "C5": 0.022939479707260537,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "mu_quartic",
+      "family": "polynomial",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu = (1+tau)^4, 7 decades of growth with a perfectly conditioned Newton",
+      "gate11_converged": false,
+      "verdict_leg83_scoring": "CAUGHT",
+      "fidelity_ok": true,
+      "fidelity_criterion": "rel_err_vs_exact 1.51e-02 < 0.05",
+      "state_growth": 14055138.099641912,
+      "worst_newton_residual_over_floor": 0.7532697146269836,
+      "mu_end": 14055138.099641912,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.5106581569912563,
+          "C2": 912620.0091641843,
+          "C3": 1.0,
+          "C4": 4581538.771646699,
+          "C5": 0.06875757023702618,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 3.0774668337666977,
+          "C2": 912620.0091641843,
+          "C3": 1.0,
+          "C4": 9388421.03897561,
+          "C5": 0.07494045346755097,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 14.780828346193347,
+          "C2": 912620.0091641843,
+          "C3": 1.0,
+          "C4": 13073412.19737922,
+          "C5": 0.0897776986341188,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "b_quadratic",
+      "family": "polynomial",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "Omega-block growth b = (1+tau)^2 with mu frozen: does the block matter?",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "MISSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "rel_err_vs_exact 1.35e-03 < 0.05",
+      "state_growth": 3726.024212001819,
+      "worst_newton_residual_over_floor": 0.9558446973666709,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.2299016591687415,
+          "C2": 121.83233634726639,
+          "C3": 1.0,
+          "C4": 668.9109339967818,
+          "C5": 0.03448903571544514,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1.757733396495833,
+          "C2": 121.83233634726639,
+          "C3": 1.0,
+          "C4": 1583.1519611221802,
+          "C5": 0.03760167574450868,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 3.8669589268917237,
+          "C2": 121.83233634726639,
+          "C3": 1.0,
+          "C4": 2746.8870063311942,
+          "C5": 0.045082279704293494,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "mu_exp_mild",
+      "family": "exponential",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu = 0.3 e^{tau/2}, 13 decades, still nowhere near overflow",
+      "gate11_converged": false,
+      "verdict_leg83_scoring": "CAUGHT",
+      "fidelity_ok": true,
+      "fidelity_criterion": "fitted rate 0.5024 vs exact 0.5",
+      "state_growth": 12483918564014.93,
+      "worst_newton_residual_over_floor": 0.01150585421882034,
+      "mu_end": 3745175569204.479,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 20.377721752937003,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 11789304695232.664,
+          "C5": 0.5024070388619583,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1874.5156460545616,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 12476367467723.166,
+          "C5": 0.5024070388619584,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 3513808.9073033454,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 12483914535722.977,
+          "C5": 0.5024070388619584,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "mu_exp_extreme",
+      "family": "exponential",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu = 0.3 e^{5 tau} ~ 1e129 at tau=60: 130 decades and STILL finite",
+      "gate11_converged": false,
+      "verdict_leg83_scoring": "CAUGHT",
+      "fidelity_ok": true,
+      "fidelity_criterion": "fitted rate 5.0156 vs exact 5.0",
+      "state_growth": 4.992571859787686e+130,
+      "worst_newton_residual_over_floor": 0.015984620897442722,
+      "mu_end": 1.4977715579363057e+130,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 11736078195819.977,
+          "C2": 2.382582976773917e+131,
+          "C3": 1.0,
+          "C4": 4.992571859787215e+130,
+          "C5": 5.015614803274079,
+          "_window_frac": 0.1,
+          "_n_steps": 3001
+        },
+        "0.25": {
+          "C1": 4.718538318312279e+32,
+          "C2": 2.382582976773917e+131,
+          "C3": 1.0,
+          "C4": 4.992571859787686e+130,
+          "C5": 5.015614803274091,
+          "_window_frac": 0.25,
+          "_n_steps": 3001
+        },
+        "0.5": {
+          "C1": 2.2264603861381213e+65,
+          "C2": 2.382582976773917e+131,
+          "C3": 1.0,
+          "C4": 4.992571859787686e+130,
+          "C5": 5.015614803274587,
+          "_window_frac": 0.5,
+          "_n_steps": 3001
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "mu_negative_runaway",
+      "family": "exponential",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu -> -3e12: the documented 'finite but garbage' shape, made smooth",
+      "gate11_converged": false,
+      "verdict_leg83_scoring": "CAUGHT",
+      "fidelity_ok": true,
+      "fidelity_criterion": "fitted rate 0.5024 vs exact 0.5, and mu_end -3.745e+12 stayed negative",
+      "state_growth": 12483918564014.93,
+      "worst_newton_residual_over_floor": 0.01150585421882034,
+      "mu_end": -3745175569204.479,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 20.377721752937003,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 11789304695232.664,
+          "C5": 0.5024070388619583,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1874.5156460545616,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 12476367467723.166,
+          "C5": 0.5024070388619584,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 3513808.9073033454,
+          "C2": 5894106813358.164,
+          "C3": 1.0,
+          "C4": 12483914535722.977,
+          "C5": 0.5024070388619584,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "osc_sustained",
+      "family": "oscillation",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "pure rotation, 20 periods, |b| == 1 forever: no limit, never a NaN",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "MISSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "amplitude retained 0.931 of exact",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 0.0006938893903907228,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 3.8321603284419967,
+          "C3": 0.49,
+          "C4": 0.2689865011925089,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 1001
+        },
+        "0.25": {
+          "C1": 1.0,
+          "C2": 3.878215470843976,
+          "C3": 0.496,
+          "C4": 0.2782607540799179,
+          "C5": 0.0,
+          "_window_frac": 0.25,
+          "_n_steps": 1001
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 3.9517168160923264,
+          "C3": 0.496,
+          "C4": 0.2918455834698789,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 1001
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "osc_growing",
+      "family": "oscillation",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "rotation with Re = +0.05: oscillating AND unbounded",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "MISSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "amplitude retained 0.917 of exact",
+      "state_growth": 1.9921702466899474,
+      "worst_newton_residual_over_floor": 0.0022898349882893854,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0965306984134366,
+          "C2": 10.199597137576799,
+          "C3": 0.51,
+          "C4": 0.834436446303743,
+          "C5": 0.04607564260649362,
+          "_window_frac": 0.1,
+          "_n_steps": 1001
+        },
+        "0.25": {
+          "C1": 1.2616969435271517,
+          "C2": 10.199597137576799,
+          "C3": 0.504,
+          "C4": 1.035694062819828,
+          "C5": 0.04649151908899691,
+          "_window_frac": 0.25,
+          "_n_steps": 1001
+        },
+        "0.5": {
+          "C1": 1.5902178851259923,
+          "C2": 10.199597137576799,
+          "C3": 0.504,
+          "C4": 1.3340896756367056,
+          "C5": 0.04638710415141919,
+          "_window_frac": 0.5,
+          "_n_steps": 1001
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "osc_stiff_underresolved",
+      "family": "oscillation",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "omega dt = 4 rad/step: the hardest case for the inner solve in the battery",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "EXCLUDED_INTEGRATOR_DID_NOT_REPRODUCE_THE_CASE",
+      "fidelity_ok": false,
+      "fidelity_criterion": "amplitude retained 3.479e-14 of exact",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 0.9985742331327218,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 1.423578459833118e-12,
+          "C3": 0.45,
+          "C4": 3.644262528250906e-14,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 1001
+        },
+        "0.25": {
+          "C1": 1.0217795738828666,
+          "C2": 1.4771373324801997e-12,
+          "C3": 0.448,
+          "C4": 3.654032786627856e-14,
+          "C5": 0.004309157477353664,
+          "_window_frac": 0.25,
+          "_n_steps": 1001
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 1.4771373324801997e-12,
+          "C3": 0.448,
+          "C4": 3.6740488035796877e-14,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 1001
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "nan_finite_time_blowup",
+      "family": "nan_control",
+      "ground_truth": "divergent",
+      "battery": "synthetic",
+      "why": "mu' = mu^2 blows up at tau = 1: the synthetic analogue of leg 41's NaN",
+      "gate11_converged": false,
+      "verdict_leg83_scoring": "CAUGHT",
+      "fidelity_ok": true,
+      "fidelity_criterion": "the blowup was reached: worst Newton iters 22, finite=True",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 148502689285330.8,
+      "mu_end": -0.01803001413501547,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 0.00040670120094769835,
+          "C3": 0.0,
+          "C4": 0.0020855258967666726,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1.0,
+          "C2": 0.0006070979966691092,
+          "C3": 0.0,
+          "C4": 0.006532621417428722,
+          "C5": 0.0,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 0.001527960231688913,
+          "C3": 0.0,
+          "C4": 0.020864741128717165,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "decay_to_zero",
+      "family": "convergent_control",
+      "ground_truth": "convergent",
+      "battery": "synthetic",
+      "why": "mu -> 0: a real limit; a false positive here would be worse than a miss",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "PASSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "|mu_end| 1.71e-13 < 1e-6 mu0",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 0.9950661018698085,
+      "mu_end": -1.7141679427737263e-13,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 1.3464107708414343e-13,
+          "C3": 0.7083333333333334,
+          "C4": 5.70554050908208e-13,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1.0972772204506338,
+          "C2": 1.078799143372548e-12,
+          "C3": 0.5,
+          "C4": 1.921141138498144e-12,
+          "C5": 0.006188790477494548,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 1.078799143372548e-12,
+          "C3": 0.75,
+          "C4": 1.921141138498144e-12,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "exact_fixed_point",
+      "family": "convergent_control",
+      "ground_truth": "convergent",
+      "battery": "synthetic",
+      "why": "rhs == 0: the trivial limit",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "PASSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "rel_err_vs_exact 0.00e+00 < 1e-12",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 0.0,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 1.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 0.0,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 0.0,
+          "C3": 0.0,
+          "C4": 0.0,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "damped_oscillation",
+      "family": "convergent_control",
+      "ground_truth": "convergent",
+      "battery": "synthetic",
+      "why": "spiral in: oscillatory but WITH a limit, the near-miss of osc_sustained",
+      "gate11_converged": true,
+      "verdict_leg83_scoring": "PASSED",
+      "fidelity_ok": true,
+      "fidelity_criterion": "amp_end 4.93e-05 < 1e-3",
+      "state_growth": 1.0,
+      "worst_newton_residual_over_floor": 0.0005551115123125783,
+      "mu_end": 0.3,
+      "reproduction_rel_err_mu_end": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0,
+          "C2": 0.0005387315168379398,
+          "C3": 0.44,
+          "C4": 9.173764719208526e-05,
+          "C5": 0.0,
+          "_window_frac": 0.1,
+          "_n_steps": 1001
+        },
+        "0.25": {
+          "C1": 1.0,
+          "C2": 0.002340903105355543,
+          "C3": 0.444,
+          "C4": 0.0005303541448853175,
+          "C5": 0.0,
+          "_window_frac": 0.25,
+          "_n_steps": 1001
+        },
+        "0.5": {
+          "C1": 1.0,
+          "C2": 0.025800944114329986,
+          "C3": 0.444,
+          "C4": 0.006788702543326707,
+          "C5": 0.0,
+          "_window_frac": 0.5,
+          "_n_steps": 1001
+        }
+      },
+      "reproduction_ok": true
+    }
+  ],
+  "wellbehaved_battery": [
+    {
+      "name": "gate4_a0_neutral_mu0.25",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_4: a = 0 line of fixed points, held for tau = 40",
+      "a": 0.0,
+      "p": 1,
+      "K": 96,
+      "mu0": 0.25,
+      "tau_end": 40.0,
+      "dt": 0.5,
+      "gate11_converged": true,
+      "state_growth": 1.0000000000001166,
+      "b_growth": 1.0000000000001064,
+      "mu_growth": 1.0000000000001166,
+      "mu_end": 0.24999999999999145,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0000000000000655,
+          "C2": 1.6431300764452317e-13,
+          "C3": 0.625,
+          "C4": 2.1227464230832993e-13,
+          "C5": 1.6375789613220523e-14,
+          "_window_frac": 0.1,
+          "_n_steps": 81
+        },
+        "0.25": {
+          "C1": 1.0000000000000404,
+          "C2": 1.800781745942004e-13,
+          "C3": 0.55,
+          "C4": 2.4802382370125997e-13,
+          "C5": 4.0412118096354884e-15,
+          "_window_frac": 0.25,
+          "_n_steps": 81
+        },
+        "0.5": {
+          "C1": 1.0000000000001115,
+          "C2": 1.9273471707492718e-13,
+          "C3": 0.6,
+          "C4": 2.4802382370125997e-13,
+          "C5": 5.573319583617975e-15,
+          "_window_frac": 0.5,
+          "_n_steps": 81
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate4_a0_neutral_mu0.5",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_4: a = 0 line of fixed points, held for tau = 40",
+      "a": 0.0,
+      "p": 1,
+      "K": 96,
+      "mu0": 0.5,
+      "tau_end": 40.0,
+      "dt": 0.5,
+      "gate11_converged": true,
+      "state_growth": 1.0000000000000842,
+      "b_growth": 1.0000000000000842,
+      "mu_growth": 1.0000000000000706,
+      "mu_end": 0.4999999999999879,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9999999999999825,
+          "C2": 1.7696955012524995e-13,
+          "C3": 0.5,
+          "C4": 1.5698553568199713e-13,
+          "C5": -4.385380947269407e-15,
+          "_window_frac": 0.1,
+          "_n_steps": 81
+        },
+        "0.25": {
+          "C1": 0.999999999999985,
+          "C2": 1.7696955012524995e-13,
+          "C3": 0.45,
+          "C4": 1.9451107391432743e-13,
+          "C5": -1.4988010832439728e-15,
+          "_window_frac": 0.25,
+          "_n_steps": 81
+        },
+        "0.5": {
+          "C1": 1.0000000000000768,
+          "C2": 1.7696955012524995e-13,
+          "C3": 0.525,
+          "C4": 2.2426505097428162e-13,
+          "C5": 3.841371665202894e-15,
+          "_window_frac": 0.5,
+          "_n_steps": 81
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate4_a0_neutral_mu1",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_4: a = 0 line of fixed points, held for tau = 40",
+      "a": 0.0,
+      "p": 1,
+      "K": 96,
+      "mu0": 1.0,
+      "tau_end": 40.0,
+      "dt": 0.5,
+      "gate11_converged": true,
+      "state_growth": 1.0000000000001916,
+      "b_growth": 1.0000000000000924,
+      "mu_growth": 1.0000000000001916,
+      "mu_end": 0.9999999999999956,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.0000000000001872,
+          "C2": 2.7045032879868813e-13,
+          "C3": 0.75,
+          "C4": 3.581579477440755e-13,
+          "C5": 4.679590048794597e-14,
+          "_window_frac": 0.1,
+          "_n_steps": 81
+        },
+        "0.25": {
+          "C1": 1.000000000000174,
+          "C2": 2.7045032879868813e-13,
+          "C3": 0.55,
+          "C4": 3.9201974999514277e-13,
+          "C5": 1.740829702612094e-14,
+          "_window_frac": 0.25,
+          "_n_steps": 81
+        },
+        "0.5": {
+          "C1": 1.0000000000000406,
+          "C2": 2.7045032879868813e-13,
+          "C3": 0.625,
+          "C4": 3.9201974999514277e-13,
+          "C5": 2.031708135063995e-15,
+          "_window_frac": 0.5,
+          "_n_steps": 81
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate4_a0_neutral_mu2",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_4: a = 0 line of fixed points, held for tau = 40",
+      "a": 0.0,
+      "p": 1,
+      "K": 96,
+      "mu0": 2.0,
+      "tau_end": 40.0,
+      "dt": 0.5,
+      "gate11_converged": true,
+      "state_growth": 1.0000000000000133,
+      "b_growth": 1.0000000000000133,
+      "mu_growth": 1.0,
+      "mu_end": 1.9999999999990863,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9999999999999678,
+          "C2": 1.6209256159527285e-14,
+          "C3": 0.0,
+          "C4": 5.67323965583455e-14,
+          "C5": -8.049116928532514e-15,
+          "_window_frac": 0.1,
+          "_n_steps": 81
+        },
+        "0.25": {
+          "C1": 0.999999999999934,
+          "C2": 8.79296635503124e-14,
+          "C3": 0.25,
+          "C4": 1.758593271006248e-13,
+          "C5": -6.594724766273647e-15,
+          "_window_frac": 0.25,
+          "_n_steps": 81
+        },
+        "0.5": {
+          "C1": 1.0000000000000033,
+          "C2": 1.645350522494482e-13,
+          "C3": 0.475,
+          "C4": 4.944933351680447e-13,
+          "C5": 1.665334536937732e-16,
+          "_window_frac": 0.5,
+          "_n_steps": 81
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate4_a0_neutral_mu4",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_4: a = 0 line of fixed points, held for tau = 40",
+      "a": 0.0,
+      "p": 1,
+      "K": 96,
+      "mu0": 4.0,
+      "tau_end": 40.0,
+      "dt": 0.5,
+      "gate11_converged": true,
+      "state_growth": 1.0000000000000018,
+      "b_growth": 1.0000000000000018,
+      "mu_growth": 1.0,
+      "mu_end": 3.9999999999979003,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9999999999999635,
+          "C2": 5.706546346573305e-14,
+          "C3": 0.5,
+          "C4": 5.706546346573305e-14,
+          "C5": -9.13158437754208e-15,
+          "_window_frac": 0.1,
+          "_n_steps": 81
+        },
+        "0.25": {
+          "C1": 0.9999999999999324,
+          "C2": 1.0147438445073931e-13,
+          "C3": 0.5,
+          "C4": 2.1960211427085596e-13,
+          "C5": -6.761258219967432e-15,
+          "_window_frac": 0.25,
+          "_n_steps": 81
+        },
+        "0.5": {
+          "C1": 0.9999999999999933,
+          "C2": 1.2811973704174306e-13,
+          "C3": 0.45,
+          "C4": 5.123679258645097e-13,
+          "C5": -3.3306690738754805e-16,
+          "_window_frac": 0.5,
+          "_n_steps": 81
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate5_gauge_on",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_5: the headline trajectory, gauge projection ON",
+      "a": 0.5,
+      "p": 3,
+      "K": 96,
+      "mu0": 0.3,
+      "tau_end": 60.0,
+      "dt": 0.25,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 0.08877975347555782,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9998228307222852,
+          "C2": 0.004013252427773987,
+          "C3": 0.0,
+          "C4": 0.021449001864293542,
+          "C5": -2.9530829007546147e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 0.9993438080528602,
+          "C2": 0.005107879150370772,
+          "C3": 0.0,
+          "C4": 0.06206098595845593,
+          "C5": -4.376048902031501e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 0.9966639353235501,
+          "C2": 0.008258409236177416,
+          "C3": 0.0,
+          "C4": 0.15909212954645283,
+          "C5": -0.00011138805824376984,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate5_gauge_off",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_5: the same trajectory with the projection OFF",
+      "a": 0.5,
+      "p": 3,
+      "K": 96,
+      "mu0": 0.3,
+      "tau_end": 60.0,
+      "dt": 0.25,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 0.08881295707917826,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.999793902482356,
+          "C2": 0.004011658931227051,
+          "C3": 0.0,
+          "C4": 0.021440260963729262,
+          "C5": -3.4353126442653156e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 0.9992719508148018,
+          "C2": 0.005106045865944838,
+          "C3": 0.0,
+          "C4": 0.06203687352613452,
+          "C5": -4.855428944746886e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 0.9965404204627708,
+          "C2": 0.008256161212967239,
+          "C3": 0.0,
+          "C4": 0.15903739964854666,
+          "C5": -0.00011551925735468428,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate6_lambda_mu_p1",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_6: lambda_mu = p - 3 measured as a growth rate",
+      "a": 0.5,
+      "p": 1,
+      "K": 96,
+      "mu0": 0.002,
+      "tau_end": 3.0,
+      "dt": 0.02,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 4.942154603274588e-06,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9999964167431087,
+          "C2": 0.008836010677517384,
+          "C3": 0.0,
+          "C4": 0.00185644104181212,
+          "C5": -1.1944211037318417e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 151
+        },
+        "0.25": {
+          "C1": 0.9999832070148719,
+          "C2": 0.022185703626119442,
+          "C3": 0.0,
+          "C4": 0.008394216168112412,
+          "C5": -2.2096218594587845e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 151
+        },
+        "0.5": {
+          "C1": 0.9999451822336775,
+          "C2": 0.09756751570037839,
+          "C3": 0.0,
+          "C4": 0.045307943712138546,
+          "C5": -3.654617924747277e-05,
+          "_window_frac": 0.5,
+          "_n_steps": 151
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate6_lambda_mu_p2",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_6: lambda_mu = p - 3 measured as a growth rate",
+      "a": 0.5,
+      "p": 2,
+      "K": 96,
+      "mu0": 0.002,
+      "tau_end": 3.0,
+      "dt": 0.02,
+      "gate11_converged": true,
+      "state_growth": 1.0000004657436767,
+      "b_growth": 1.0000004657436767,
+      "mu_growth": 1.0,
+      "mu_end": 9.954072594032323e-05,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.000008243146123,
+          "C2": 0.06651595555011638,
+          "C3": 1.0,
+          "C4": 0.01608244932632572,
+          "C5": 2.747704049493048e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 151
+        },
+        "0.25": {
+          "C1": 1.0000126052955882,
+          "C2": 0.10536462255352534,
+          "C3": 1.0,
+          "C4": 0.054545207080242096,
+          "C5": 1.658581071335345e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 151
+        },
+        "0.5": {
+          "C1": 0.9999409806853223,
+          "C2": 0.22087537819441197,
+          "C3": 0.68,
+          "C4": 0.1688739721666623,
+          "C5": -3.934737092396581e-05,
+          "_window_frac": 0.5,
+          "_n_steps": 151
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate6_lambda_mu_p4",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_6: lambda_mu = p - 3 measured as a growth rate",
+      "a": 0.5,
+      "p": 4,
+      "K": 96,
+      "mu0": 0.002,
+      "tau_end": 3.0,
+      "dt": 0.02,
+      "gate11_converged": true,
+      "state_growth": 20.08229437526716,
+      "b_growth": 1.0004167364050798,
+      "mu_growth": 20.08229437526716,
+      "mu_end": 0.04016458875053432,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.3496583828308468,
+          "C2": 19.871306907277148,
+          "C3": 1.0,
+          "C4": 4.902294447111214,
+          "C5": 0.9995050355763918,
+          "_window_frac": 0.1,
+          "_n_steps": 151
+        },
+        "0.25": {
+          "C1": 2.137657251019289,
+          "C2": 19.871306907277148,
+          "C3": 1.0,
+          "C4": 10.49802073172636,
+          "C5": 0.9996190616462203,
+          "_window_frac": 0.25,
+          "_n_steps": 151
+        },
+        "0.5": {
+          "C1": 4.479954396545022,
+          "C2": 19.871306907277148,
+          "C3": 1.0,
+          "C4": 15.509043472429598,
+          "C5": 0.999741911354969,
+          "_window_frac": 0.5,
+          "_n_steps": 151
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate6_lambda_mu_p5",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_6: lambda_mu = p - 3 measured as a growth rate -- THE 4.06e2 LEGITIMATE CEILING",
+      "a": 0.5,
+      "p": 5,
+      "K": 96,
+      "mu0": 0.002,
+      "tau_end": 3.0,
+      "dt": 0.02,
+      "gate11_converged": true,
+      "state_growth": 406.29692503169844,
+      "b_growth": 1.0057080733277166,
+      "mu_growth": 406.29692503169844,
+      "mu_end": 0.8125938500633969,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 1.8247667411768733,
+          "C2": 798.678277266257,
+          "C3": 1.0,
+          "C4": 174.53360792779327,
+          "C5": 2.0048405527063364,
+          "_window_frac": 0.1,
+          "_n_steps": 151
+        },
+        "0.25": {
+          "C1": 4.585838897807396,
+          "C2": 798.678277266257,
+          "C3": 1.0,
+          "C4": 314.07823592257694,
+          "C5": 2.0039119140633432,
+          "_window_frac": 0.25,
+          "_n_steps": 151
+        },
+        "0.5": {
+          "C1": 20.17296891374438,
+          "C2": 798.678277266257,
+          "C3": 1.0,
+          "C4": 385.33372637898583,
+          "C5": 2.002895690445165,
+          "_window_frac": 0.5,
+          "_n_steps": 151
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate7_alpha1_long",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_7: the tau = 120 alpha_1 trajectory",
+      "a": 0.5,
+      "p": 3,
+      "K": 96,
+      "mu0": 0.3,
+      "tau_end": 120.0,
+      "dt": 0.25,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 0.05206657420980398,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9998706449933222,
+          "C2": 0.0014187618252138139,
+          "C3": 0.0,
+          "C4": 0.01529122495787641,
+          "C5": -1.0780281146516695e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 481
+        },
+        "0.25": {
+          "C1": 0.9994720202284672,
+          "C2": 0.0018968757353626797,
+          "C3": 0.0,
+          "C4": 0.04476045045644535,
+          "C5": -1.7603973397740118e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 481
+        },
+        "0.5": {
+          "C1": 0.995582167139866,
+          "C2": 0.003467987514263841,
+          "C3": 0.0,
+          "C4": 0.12151026734061351,
+          "C5": -7.379367201007567e-05,
+          "_window_frac": 0.5,
+          "_n_steps": 481
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate11_on_branch",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_11(b): the on-branch run gate 11 must KEEP",
+      "a": 0.5,
+      "p": 3,
+      "K": 96,
+      "mu0": 0.3,
+      "tau_end": 60.0,
+      "dt": 0.25,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 0.08877975349355142,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9998228307165916,
+          "C2": 0.004013252407528331,
+          "C3": 0.0,
+          "C4": 0.02144900187007299,
+          "C5": -2.953082995664042e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 241
+        },
+        "0.25": {
+          "C1": 0.9993438080534549,
+          "C2": 0.0051078791261090686,
+          "C3": 0.0,
+          "C4": 0.06206098593497869,
+          "C5": -4.376048898063921e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 241
+        },
+        "0.5": {
+          "C1": 0.996663935320255,
+          "C2": 0.008258409217942372,
+          "C3": 0.0,
+          "C4": 0.15909212962496558,
+          "C5": -0.00011138805835397555,
+          "_window_frac": 0.5,
+          "_n_steps": 241
+        }
+      },
+      "reproduction_ok": true
+    },
+    {
+      "name": "gate3_dt_ladder_finest",
+      "family": "wellbehaved_real_flow",
+      "ground_truth": "convergent",
+      "battery": "wellbehaved",
+      "why": "test_3/10: the finest rung of the dt ladder",
+      "a": 0.5,
+      "p": 3,
+      "K": 96,
+      "mu0": 0.3,
+      "tau_end": 60.0,
+      "dt": 0.125,
+      "gate11_converged": true,
+      "state_growth": 1.0,
+      "b_growth": 1.0,
+      "mu_growth": 1.0,
+      "mu_end": 0.08877963457454206,
+      "reproduction_rel_err_mu_end": 0.0,
+      "reproduction_rel_err_state_growth": 0.0,
+      "criteria": {
+        "0.1": {
+          "C1": 0.9998222633122221,
+          "C2": 0.00401950425221472,
+          "C3": 0.0,
+          "C4": 0.021949474397960588,
+          "C5": -2.962541413580027e-05,
+          "_window_frac": 0.1,
+          "_n_steps": 481
+        },
+        "0.25": {
+          "C1": 0.9993412432668073,
+          "C2": 0.005116820713041056,
+          "C3": 0.0,
+          "C4": 0.06269694296413382,
+          "C5": -4.3931587249868827e-05,
+          "_window_frac": 0.25,
+          "_n_steps": 481
+        },
+        "0.5": {
+          "C1": 0.9966605571953624,
+          "C2": 0.008276617368971156,
+          "C3": 0.0,
+          "C4": 0.16011656522256748,
+          "C5": -0.00011150103962070799,
+          "_window_frac": 0.5,
+          "_n_steps": 481
+        }
+      },
+      "reproduction_ok": true
+    }
+  ],
+  "wall_s": 66.1
+}
