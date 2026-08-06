@@ -8766,3 +8766,53 @@ its own offer) — do not let a non-floor-eligible reserve item take the next va
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 230 and 240 land clean, 235/242 promoted into
+B/G, floor unchanged at 2/10 (242 exactly replaces 240)
+
+**230 (TNRV) landed — independently confirmed leg 220's `target_norm.py` repair, and found
+something new in the process.** A decisive NEW test case (`wide_asymmetric`) leg 220 never
+ran: the pre-repair window falsely reported 0-outside where 7 samples truly escaped, worst
+undercount 677x. Also re-solved leg 55's other two margins for the first time. A strong
+independent-verification result, exactly the kind of thing this discipline exists to catch —
+a postrepair-verification leg finding the repair correct but the ORIGINAL repair's own test
+coverage incomplete.
+
+**240 (CNS2) landed — a thorough NO.** No viscous-term enclosure found anywhere in
+`arXiv:2208.09445`'s author group's later work; a DIFFERENT group independently reaching the
+same domination theorem via the identical mechanism confirms domination isn't a
+computer-assistance artifact of this one group's method. Leg 174's Grade-A/fluid occupancy
+cell stays confirmed empty. Clean, informative negative.
+
+**Slot G refilled with leg 242 (DFL2)** — the spare floor-eligible candidate drafted last
+round, now checking Dahne & Figueras's own later work, exactly replacing 240's floor-eligible
+occupancy. **Slot B refilled with leg 235 (CDAP)** — the recurrence census for leg 202's
+"ignored caller diagnostic" defect shape, per this DM's own promotion order.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 235 | CDAP | **live, newly promoted** — audit/census — not floor-eligible |
+| C | 241 | PCRC | repair/cleanup — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 237 | SIRC | audit/census — not floor-eligible |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 242 | DFL2 | **live, newly promoted** — FLOOR-ELIGIBLE (literature) |
+| H | 218 | BHR | repair — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible |
+
+**Floor status: 2/10 (236, 242) — unchanged by this round**, since 242 landed exactly in
+240's vacated floor-eligible occupancy. Still below the required 3; this DM will draft
+another spare floor-eligible candidate at the next opportunity rather than wait for the
+count to drop further.
+
+**Reserve queue: 9 undispatched legs (216, 225, 227, 228, 229, 231, 232, 233, 234)** — 235
+and 242 now live (off reserve); no other change.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
