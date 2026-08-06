@@ -5768,45 +5768,66 @@ Immediately dispatchable.
 ```
 
 ```
-### 188 — ROUTE-SURV: DOES LEG 129's n>=3 -> n>=4 GRID-FLOOR CORRECTION FOLLOW NECESSARILY
-FROM THE STRICT BOWMAN 2/3 RULE, OR IS IT A JUDGMENT CALL? (may resolve escalation #4
-without the user)
-**Thesis.** Leg 129 (SUR) is parked as escalation #4: its repair correctly applies a strict
-Bowman 2/3 dealiasing rule (already cited and used elsewhere in this repository, e.g. leg
-120's own repair, `k < n/3` strictly) to `solver/boussinesq.py`'s 2D mask, which moves the
-minimum admissible grid from `n>=3` to `n>=4` and flips ONE of leg 133's 90 banked battery
-verdicts (family `E_degenerate_discretization`, raised 13/benign 3 -> raised 14/benign 2).
-Parked because a repair that flips a banked verdict needs the user's ruling, per standing
-discipline — but if the `n=3` rejection follows NECESSARILY from the same strict rule this
-repository already uses everywhere else (no alternative admissible reading), this might be
-resolvable the way leg 164 resolved leg 162's ambiguity: independently, without waiting on
-the user. This leg reads leg 129's own parked-branch commits directly (`leg/129-sur-v1`) —
-reading a parked branch's reasoning is not the same as merging it — and checks the
-derivation's necessity precisely: does `n=3` retain only the mean mode (`|k| < 1`) under the
-strict cut, and does every other live use of the strict rule in this repository treat that
-configuration as inadmissible for the same structural reason?
-**Gate.** Is the `n=3` -> rejected verdict a NECESSARY consequence of the strict Bowman 2/3
-rule as already adopted elsewhere in this repository (no alternative reading admits `n=3`),
-or does it depend on a choice leg 129's repair made that a different, equally defensible
-reading would not have made?
-  necessary -> The verdict flip is not a judgment call — it follows mechanically from a rule
-         this repository already committed to. Report this precisely and ESCALATE it as
-         information for the user's ruling (this leg does not merge leg 129's branch or flip
-         any verdict itself — that stays the user's call procedurally, even if the math is
-         forced).
-  a judgment call -> Name the specific choice point and the alternative reading. Confirms the
-         escalation genuinely needs the user's ruling; bank this as closing the "could this
-         resolve itself" question either way.
+### 188 — ROUTE-SURV: CORRECTED 2026-08-06 BY THE DM, PREMISE FALSIFIED BY THE LEG'S OWN
+NOVELTY PASS (`c273084`) BEFORE CONSTRUCTION — IS n=3's EXCLUSION FORCED BY THE STRICT RULE
+ITSELF, GIVEN THAT RULE IS NOT YET ADOPTED ANYWHERE ELSE ON `main`?
+**Original premise, now confirmed false, preserved for the record:** this leg was drafted on
+the claim that the strict Bowman 2/3 rule (`k < n/3` strictly) is "already cited and used
+elsewhere in this repository, e.g. leg 120's own repair." **The leg's own novelty pass
+(committed before any analysis, `c273084`) checked this directly and found the opposite**:
+leg 120's landed commit is captioned "escalated, not patched" — it did NOT adopt the strict
+rule — and every shipped mask on `main` today is still the loose cut (`spectral_utils.py:36`
+`<= n/3`, `boussinesq.py:153/419`, `fractional_boussinesq.py:259`, `fractional_gclm.py:265`;
+a repo-wide grep for the strict form returns nothing). The strict rule lives on `main` only
+inside adversarial-battery PINS, which record the loose cut as a known defect (D1) rather
+than replace it. So "does `n=3`'s rejection follow necessarily from a rule this repository
+already committed to elsewhere" cannot be asked as originally framed — there is no
+already-adopted elsewhere to check it against, and the leg's own text says so before
+producing a single number.
+**Corrected thesis, narrowed to what can actually be answered without presupposing an
+adoption that hasn't happened.** Two questions survive, and this leg answers both without
+touching leg 129's parked branch (`leg/129-sur-v1`, still unmerged) or any of the five
+shipped loose masks: (i) taking the strict Bowman rule ON ITS OWN mathematical terms (not as
+"already used" but as a rule that COULD be adopted), is `n=3`'s exclusion (retaining only the
+mean mode, `|k| < 1`, under `k < n/3`) a forced consequence of the rule with no alternative
+admissible reading — i.e., is the MATH forced, independent of adoption status; and (ii),
+now that adoption status is known to be "nowhere on `main`, pinned as a defect in adversarial
+batteries only," does adopting the strict rule for `solver/boussinesq.py`'s mask ALONE (as
+leg 129's branch does) create a fresh internal inconsistency against the four other shipped
+loose masks that this leg must name, since that inconsistency was invisible under the
+original (false) "already used elsewhere" framing and is a NEW fact this correction surfaces.
+**Gate.** (a) Is `n=3`'s exclusion under the strict Bowman rule mathematically forced (no
+alternative admissible reading of the rule itself admits `n=3`), and (b) does adopting the
+strict rule for `boussinesq.py` alone — while `spectral_utils.py`/`boussinesq.py:419`/
+`fractional_boussinesq.py`/`fractional_gclm.py` stay on the loose cut — leave those four
+modules internally inconsistent with the newly-strict one on the same admissibility question?
+  (a) forced, (b) yes (inconsistency created) -> The math is forced but adopting it
+         piecemeal creates a NEW, previously-unstated problem: escalation #4 is not just "does
+         this one verdict flip," it is "does the repository adopt strict Bowman everywhere or
+         nowhere." ESCALATE both findings together as a SHARPENED version of escalation #4 —
+         this leg does not merge leg 129, patch any of the four modules, or pick an adoption
+         scope itself.
+  (a) forced, (b) no (four modules already satisfy strict, or the inconsistency doesn't
+         actually arise) -> Report why not, precisely (e.g. their own `n` never goes below 4
+         in any shipped caller). Escalate #4 as originally scoped, now on solid mathematical
+         footing rather than a false "already used" premise.
+  (a) not forced (an alternative admissible reading exists) -> The escalation was never
+         resolvable independently; confirms it needs the user's ruling on the rule itself, not
+         just its application to `n=3`. Bank this as closing the "could this resolve itself"
+         question.
 **Territory.** experiments/p2_route_surv_v1_verification.py,
                writeup/data/p2_route_surv_v1_verification.json,
                writeup/novelty/leg_188.md, experiments/journal/leg_188.md.
                Reads (never merges or edits) `leg/129-sur-v1`'s own commits, and
-               solver/boussinesq.py/solver/spectral_utils.py as they stand on `main`
-               (unaffected by leg 129, since it never merged), read-only.
+               solver/boussinesq.py, solver/spectral_utils.py, solver/fractional_boussinesq.py,
+               solver/fractional_gclm.py as they stand on `main` (unaffected by leg 129, since
+               it never merged), read-only.
 **Difficulty.** light
 **Independence.** Read-only, including of a parked branch (reading, not merging — no
-territory claim on `solver/boussinesq.py`/`solver/spectral_utils.py`, which stay unowned on
-`main`). Disjoint from every other live/reserve leg. Immediately dispatchable.
+territory claim on any of the four modules, which stay unowned on `main`). Disjoint from
+every other live/reserve leg. Immediately dispatchable — WIP already exists on
+`leg/188-surv-v1` (novelty pass committed, analysis not yet run); a fresh leg agent should
+resume that branch under THIS corrected framing, not the original false one.
 ```
 
 ```
@@ -6268,3 +6289,282 @@ this candidate (leg 63's screen used the existing predicate at a coarse level �
 should re-derive the tail-inverse exponent from the candidate's own operator, not the ledger
 row); (iv) only then, a certificate attempt. This is a heavy, multi-leg undertaking, not a
 single leg — flagged here only so the shape of the work is visible alongside the decision.
+
+---
+
+## DM cycle 2026-08-06 — RESUMPTION after external laptop shutdown
+
+**Context.** The orchestrator session that was running this got cut off by an external
+laptop shutdown (not a graceful stop). Per `reports/ORCH_STATE.md`, five branches were
+salvaged and pushed (`leg/170-cdb-v1`, `leg/187-m2ci-v1`, `leg/188-surv-v1`,
+`leg/189-xutri-v1`, `leg/190-egml-v1`), and leg 189 has since landed on `main` (`fac2870`,
+`2bc65e0` — confirmed via `git log main`, gate NO on both constants, do not re-queue).
+`git log --all --grep` confirms exactly the state `ORCH_STATE.md` describes: 176 fully
+landed on `main` (`bb0f184`); 170/187/188 have a novelty-pass commit plus one WIP snapshot
+commit each, no gate answer yet; 190 has only its novelty-pass commit (`b15e902`, EGM
+located at `arXiv:1906.05811`, Anal. PDE 14 (2021) 891, one HTML-mirror sign error caught) —
+needs the ledger-row edit plus journal/novelty-writeup finish; 192/195/196/197 have zero
+commits anywhere (fully specified, never dispatched, confirmed by grep). No other
+"never-dispatched reserve" numbers remain unaccounted for — every leg number from 129
+through 190 that isn't one of these five either has a landed commit on `main` or (148 only)
+is a genuinely blocked-pending-user item, not a fresh dispatch candidate.
+
+**Correction made this cycle: leg 188's premise.** Leg 188's own novelty pass
+(`c273084`, committed before any analysis, already on `leg/188-surv-v1`) found its drafted
+premise false: it claimed the strict Bowman 2/3 rule was "already used elsewhere, e.g. leg
+120's own repair," but leg 120's landed commit is captioned "escalated, not patched," and
+every shipped dealiasing mask on `main` today is still the loose cut. The strict rule exists
+on `main` only inside adversarial-battery pins (recording the loose cut as defect D1), never
+adopted in shipped code. Leg 188's queue entry (above, § 188) has been rewritten in place to
+ask the question this actually supports — is `n=3`'s exclusion mathematically forced by the
+strict rule ON ITS OWN TERMS, and does adopting it for `boussinesq.py` alone create a fresh
+inconsistency against the four other shipped loose masks — rather than the now-false
+"already adopted elsewhere" framing. This is not a retraction of leg 129's math, only of the
+precedent-claim this leg was originally handed.
+
+**Ten-slot dispatch, this cycle.** No critical-path stage exists (`B` closed NO at leg 126,
+6.04x short of a perfect search over its full declared space; escalation #1, parked for the
+user, per `plan_of_record.py`'s own printed state — this DM does not resolve it and does not
+pick a replacement `NEXT` stage). All ten slots are therefore exploration legs, ranked by (a)
+could it move a link of the L1→L4 chain, (b) can its gate answer either way within one leg,
+(c) is it independent of the other nine.
+
+| Slot | Leg | Route | Gate (one line) | Why this rank |
+|---|---|---|---|---|
+| LEG-A | 192 | H2CV | Does an independent re-run of leg 176's origin-H² construction reproduce its closing quantity and Xu-agreement, to the same precision? | Highest under criterion (a): leg 176 is the single most novel *positive*-shaped construction this run has produced (first certificate outside the `ell^1_w` lane) and has never been independently re-derived — exactly the check this repository's own discipline says a genuinely new positive claim needs before anyone trusts it. |
+| LEG-B | 187 | M2CI (resume WIP) | Does a full radii-polynomial certificate close on Chen's γ=2 INVISCID profile (Object A), using leg 125's transcribed constants? | Second-highest: also a live attempt at a genuinely novel positive result (first CAP of Chen's γ=2 profile), novelty pass already clean (N2/N3 pre-empted correctly, N4 identified), construction in progress — finishing it is higher-value than starting anything fresh. |
+| LEG-C | 170 | CDB (resume WIP) | Post-repair, does `critical_dissipation.py` reject/flag every non-integer-`p` case in leg 121's battery AND reproduce every integer-`p` result bit-identically? | Deep into a corrected re-run per `ORCH_STATE.md` (gate YES both clauses per last known result); finishing a near-complete regression check is cheap and closes a loop the audit family already opened. |
+| LEG-D | 188 | SURV (resume WIP, corrected framing) | (Corrected, see above) Is `n=3`'s exclusion forced by the strict Bowman rule on its own terms, and does adopting it for one module alone create a fresh cross-module inconsistency? | Premise now corrected in this same edit; resuming under the right framing is worth more than leaving a WIP branch stalled on a false premise. |
+| LEG-E | 190 | EGML (finish) | Is "EGM" locatable at primary-source depth with the claimed p=2, −1/2-gap statement, and is it now in the shared ledger? | Novelty pass done and citation confirmed correct; only the mechanical ledger-row-plus-writeup finish remains — cheapest possible close of an already-90%-done leg. |
+| LEG-F | 195 | PQVER | Does an independent re-run of leg 60's two reproduction scripts reproduce CLEAN 114/114 with both ban-bearing numbers exact? | Read-only re-verification of a landed, closed correction; light, decidable in one leg, zero collision risk with anything else in this batch. |
+| LEG-G | 196 | USC2 | Does the authors' later work (72 days after `arXiv:2509.14185`, obstruction removed) achieve an actual certificate, or name a new obstruction? | Directly extends leg 175's landed, technique-specific finding; if YES this would be the first genuinely-3D PDE blow-up certificate found anywhere in the literature this repository has surveyed — high value under criterion (a) even though the base rate is low. |
+| LEG-H | 197 | VNL | Is `arXiv:2208.09445` now present in `viscous_novelty.py::PRECEDENTS` with leg 174's Grade-B/viscous-dominated characterization, verbatim? | Mechanical ledger-consistency fix, same shape as 190's EGM gap; cheap, zero risk, closes a known bookkeeping hole. |
+| LEG-I | 198 | BHA (new, drafted below) | Under adversarial/degenerate input, does `bordered_hl.py` ever silently return a wrong value? | Highest-value never-audited module in the audit family's own inventory — it borders the actual target certificate construction (leg 54/58/127's own operator), unlike several already-audited peripheral modules. |
+| LEG-J | 199 | CGA (new, drafted below) | Under adversarial/degenerate input, does `certificate_guards.py` ever silently accept a case it should reject? | Same fabrication-acceptance shape that leg 116/128 found a real bug in (`nk_bounds.py` and siblings); `certificate_guards.py` is exactly the guard-layer module class that pattern has repeatedly caught real defects in, and it has never itself been audited. |
+
+**Reserve queue: 6 undispatched legs (200, 201, 202, 203, 204, 205) — all newly drafted this
+cycle, below, since the pre-existing reserve (192/195/196/197/198/199) is now fully consumed
+by the ten-slot dispatch above and the count would otherwise sit at 0.** Per §3a, drafting
+began immediately since the count was about to hit zero, not merely ≤3.
+
+```
+### 198 — ROUTE-BHA: ADVERSARIAL AUDIT OF bordered_hl.py
+**Thesis.** `bordered_hl.py` implements the bordered formulation (leg TC's own assembly: the
+far-field amplitude's own column, its own Y_0, and the matching condition) that sits directly
+upstream of every certificate-shape battery this repository has run (legs 54, 58, 127) — it
+is closer to the actual load-bearing construction than several already-audited peripheral
+modules (viscous_novelty.py, energy_coercivity.py) and has never itself had an adversarial
+battery run against it. Same standard battery as every other audit-family leg: NaN/Inf,
+degenerate/zero-measure input, boundary parameters (the matching condition at or near
+degeneracy), planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs (including a degenerate or near-singular
+matching condition), does `bordered_hl.py` ever silently return a wrong value rather than
+reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude. This module underwrites every bordered
+         certificate battery this repository has run (54/58/127) — escalate as a priority
+         finding, do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_bordered_hl_adversarial.py, experiments/p2_route_bha_v1_adversarial.py,
+               writeup/data/p2_route_bha_v1_adversarial.json,
+               writeup/novelty/leg_198.md, experiments/journal/leg_198.md
+**Difficulty.** standard
+**Independence.** Reads solver/bordered_hl.py; edits nothing under either outcome. Not
+touched by any live or reserve leg. Immediately dispatchable.
+```
+
+```
+### 199 — ROUTE-CGA: ADVERSARIAL AUDIT OF certificate_guards.py
+**Thesis.** `certificate_guards.py` is the guard-layer module class (accept/reject
+hypothesis checks feeding a certificate's closing verdict) that leg 116/128's own
+fabrication-acceptance pattern found a REAL bug in on a sibling module (`nk_bounds.py` and
+its neighbors, 21 false-closing cases). `certificate_guards.py` has never itself been
+audited under that same pattern, despite being exactly the shape of module the pattern
+targets.
+**Gate.** Under adversarial and degenerate inputs, does `certificate_guards.py` ever
+silently ACCEPT (fail to reject) a case that should fail — the same fabrication-acceptance
+shape leg 116 found in `nk_bounds.py`?
+  yes -> Name the exact mechanism, magnitude, and every certificate battery whose banked
+         verdict it could have silently affected. Escalate as a priority finding, do not
+         patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_certificate_guards_adversarial.py,
+               experiments/p2_route_cga_v1_adversarial.py,
+               writeup/data/p2_route_cga_v1_adversarial.json,
+               writeup/novelty/leg_199.md, experiments/journal/leg_199.md
+**Difficulty.** standard
+**Independence.** Reads solver/certificate_guards.py; edits nothing under either outcome.
+Disjoint from 128/NKR (a different, already-repaired module). Immediately dispatchable.
+```
+
+```
+### 200 — ROUTE-PCA: ADVERSARIAL AUDIT OF port_certification.py (RESERVE)
+**Thesis.** `port_certification.py` has been used as the bit-identical comparison target in
+leg 128's (NKR) regression check but has never itself had an adversarial battery run
+against its own logic, only a pre/post-repair equality check on a sibling module's fix.
+Standard battery: NaN/Inf, degenerate port parameters, boundary-of-admissibility inputs,
+planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `port_certification.py` ever
+silently return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; escalate as a priority finding (this module
+         underwrites every PORT-family route's own reach-table claims), do not patch under
+         this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_port_certification_adversarial.py,
+               experiments/p2_route_pca_v1_adversarial.py,
+               writeup/data/p2_route_pca_v1_adversarial.json,
+               writeup/novelty/leg_200.md, experiments/journal/leg_200.md
+**Difficulty.** standard
+**Independence.** Reads solver/port_certification.py; edits nothing under either outcome.
+Read-only overlap with leg 128's own bit-identical check (128 compares two versions of a
+sibling module against this one; that is read-read, not a collision) and with leg 195
+(PQVER, which re-runs PORT's own evidence scripts, not this module's adversarial battery).
+Reserve — promote once a slot frees.
+```
+
+```
+### 201 — ROUTE-ICA2: ADVERSARIAL AUDIT OF interval_certificate.py (RESERVE)
+**Thesis.** Sibling of 200 by the same reasoning: `interval_certificate.py` is named
+alongside `port_certification.py` in leg 128's own bit-identical regression check but has
+never itself been adversarially audited. Given leg 69 (IA) found real soundness gaps in the
+shared `interval.py` primitive underneath it (subnormal-range false negatives, a silent NaN
+above 2^997 — scoped as not affecting any live operator's actual range), this specific
+module is worth checking directly rather than assumed clean by association.
+**Gate.** Under adversarial and degenerate inputs — including inputs near `interval.py`'s
+own known failure bands (subnormal range, above 2^997), even though no live operator's range
+reaches them — does `interval_certificate.py` ever silently return a wrong value?
+  yes -> Name the exact mechanism and magnitude, and state explicitly whether it traces to
+         `interval.py`'s own known gaps or is a new, independent defect. Escalate as a
+         priority finding, do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. This would also be informative confirmation that leg 69's scoped
+         "no live operator affected" finding holds one level up.
+**Territory.** test_interval_certificate_adversarial.py,
+               experiments/p2_route_ica2_v1_adversarial.py,
+               writeup/data/p2_route_ica2_v1_adversarial.json,
+               writeup/novelty/leg_201.md, experiments/journal/leg_201.md
+**Difficulty.** standard
+**Independence.** Reads solver/interval_certificate.py (and solver/interval.py, read-only,
+for the known-failure-band inputs); edits nothing under either outcome. Disjoint from 200
+(different module) and from every other live/reserve leg. Reserve — promote once a slot
+frees.
+```
+
+```
+### 202 — ROUTE-PNA: ADVERSARIAL AUDIT OF profile_newton.py (RESERVE)
+**Thesis.** `profile_newton.py` is a shared Newton-continuation primitive in the same class
+as `collocation_newton.py`, which the audit family's own death-certificate history
+(`critical_radius`, leg 166) shows is exactly the kind of shared numerical-continuation
+module that hides real defects. `profile_newton.py` has never had an adversarial pass.
+**Gate.** Under adversarial and degenerate inputs (near-singular Jacobian, poor initial
+guess, boundary-of-convergence parameters), does `profile_newton.py` ever silently report a
+converged solution that is not (a false-positive convergence claim), or silently return a
+wrong value rather than reject/flag?
+  yes -> Name the exact mechanism and magnitude, and list every construction leg that calls
+         this module (candidates: 125, 185, 187) whose banked convergence claim could be
+         affected. Escalate as a priority finding, do not patch under this leg's own
+         authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_profile_newton_adversarial.py,
+               experiments/p2_route_pna_v1_adversarial.py,
+               writeup/data/p2_route_pna_v1_adversarial.json,
+               writeup/novelty/leg_202.md, experiments/journal/leg_202.md
+**Difficulty.** standard
+**Independence.** Reads solver/profile_newton.py; edits nothing under either outcome.
+Disjoint from collocation_newton.py's own already-audited history and from every other
+live/reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 203 — ROUTE-RSA: ADVERSARIAL AUDIT OF rescaled_spectrum.py (RESERVE)
+**Thesis.** `rescaled_spectrum.py` has never appeared in this repository's audit-family
+inventory under any name-match. Standard battery: NaN/Inf, degenerate/zero-measure
+rescaling parameters, boundary-of-admissibility inputs, planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `rescaled_spectrum.py` ever silently
+return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; escalate if claim-adjacent (check which
+         banked spectral-gap numbers, if any, depend on this module before deciding), do not
+         patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_rescaled_spectrum_adversarial.py,
+               experiments/p2_route_rsa_v1_adversarial.py,
+               writeup/data/p2_route_rsa_v1_adversarial.json,
+               writeup/novelty/leg_203.md, experiments/journal/leg_203.md
+**Difficulty.** standard
+**Independence.** Reads solver/rescaled_spectrum.py; edits nothing under either outcome. Not
+touched by any live or reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 204 — ROUTE-TNA2: ADVERSARIAL AUDIT OF target_norm.py (RESERVE)
+**Thesis.** `target_norm.py` has never appeared in this repository's audit-family inventory
+under any name-match, despite "norm" modules elsewhere (holder_norms.py, via its own
+audited siblings) being exactly the class of module this family has found real defects in.
+Standard battery: NaN/Inf, degenerate/zero-norm input, boundary parameters, planted
+wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `target_norm.py` ever silently
+return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; escalate if claim-adjacent, do not patch
+         under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_target_norm_adversarial.py,
+               experiments/p2_route_tna2_v1_adversarial.py,
+               writeup/data/p2_route_tna2_v1_adversarial.json,
+               writeup/novelty/leg_204.md, experiments/journal/leg_204.md
+**Difficulty.** standard
+**Independence.** Reads solver/target_norm.py; edits nothing under either outcome. Disjoint
+from 172/196/etc. (route name TNA2 chosen to avoid collision with any prior TNA-named leg;
+verify against capabilities.py's route registry before dispatch, per the standing rule for
+every leg). Reserve — promote once a slot frees.
+```
+
+```
+### 205 — ROUTE-BVR: ADVERSARIAL AUDIT OF boussinesq_rescaled.py (RESERVE)
+**Thesis.** `boussinesq_rescaled.py` has never appeared in this repository's audit-family
+inventory under any name-match, unlike its siblings `boussinesq.py` (leg 129's own repair
+target) and `boussinesq_velocity.py` (already audited). Standard battery: NaN/Inf,
+degenerate/zero-measure input, boundary parameters (including the same dealiasing-mask
+question leg 129/188 raise for `boussinesq.py`, checked here only as an input to the
+adversarial battery, not as a repair), planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `boussinesq_rescaled.py` ever
+silently return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; if it is the SAME dealiasing-mask question
+         leg 129/188 raise, state that explicitly as a second occurrence rather than a new
+         defect, and escalate together with escalation #4. If it is a genuinely different
+         defect, escalate separately.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_boussinesq_rescaled_adversarial.py,
+               experiments/p2_route_bvr_v1_adversarial.py,
+               writeup/data/p2_route_bvr_v1_adversarial.json,
+               writeup/novelty/leg_205.md, experiments/journal/leg_205.md
+**Difficulty.** standard
+**Independence.** Reads solver/boussinesq_rescaled.py; edits nothing under either outcome.
+Disjoint from 188 (SURV, which reads boussinesq.py, not boussinesq_rescaled.py, and does not
+merge or patch either) and from every other live/reserve leg. Reserve — promote once a slot
+frees.
+```
+
+**File-territory collision check across all ten dispatched slots.** 192 reads
+`solver/origin_h2_certificate.py`; 187 owns `solver/chen_inviscid_certificate.py` (new
+module, sole owner); 170 reads `solver/critical_dissipation.py`; 188 reads
+`solver/boussinesq.py`/`spectral_utils.py`/`fractional_boussinesq.py`/`fractional_gclm.py`
+read-only; 190 writes one append-only row to `solver/literature_gates.py`; 195 reads leg 60's
+own evidence scripts read-only; 196 reads `solver/viscous_novelty.py` read-only; 197 writes
+one append-only row to `solver/viscous_novelty.py` (read-write against 196's read-only — not
+a collision, same pattern as 174/178's prior read-read overlap on the same ledger); 198 reads
+`solver/bordered_hl.py`; 199 reads `solver/certificate_guards.py`. No two dispatched slots
+write the same file, and every read-only overlap is against a module or ledger already
+established as safe for concurrent read access under this repository's own append-only-row
+convention. All ten are independent under criterion (c).
+
+**Open direction question status: unchanged, correctly parked, not re-raised here.**
+Escalation #1 ("what comes next now that `B` is exhausted, 6.04x short of a perfect search")
+stays with the user; this cycle's ten slots are all exploration legs precisely because no
+critical-path stage exists to fill LEG-A with. Nothing in this cycle lifts a ban, resolves
+any parked escalation, or moves any claim about Walls 1 and 2; Clay stays ~0.05%.
