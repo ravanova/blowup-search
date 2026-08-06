@@ -40,6 +40,30 @@ from solver.certificate_shapes import (
     unlocated_rows,
 )
 
+# Route-CP (leg 62) -- Cadiot arXiv:2505.03091's scope, gates 16-25
+from solver.certificate_shapes import (
+    CADIOT_SCOPE,
+    CP_A1_GROWTH,
+    CP_A1_LMIN,
+    CP_CLASS,
+    CP_FORWARD,
+    CP_L31,
+    CP_L32,
+    CP_NOT_OBTAINED,
+    CP_SYNTHETIC_COVERING_SCOPE,
+    CP_SYSTEMS,
+    cadiot_covers,
+    cadiot_ratio_ladder,
+    cadiot_shift_requirement,
+    cadiot_symbol_admissibility,
+    cadiot_vs_bdl_thresholds,
+    cadiot_whitham_matrix,
+    cp_unlocated_rows,
+    our_operator_gershgorin,
+    shift_requirement_ladder,
+)
+from solver.spectral_certificate import tail_block
+
 SHAPES = {MULTIPLIER, TRIDIAGONAL_DOMINANT, SHIFT, NO_UNBOUNDED_PART}
 INVERSES = {BLOCK_DIAGONAL, NOT_BLOCK_DIAGONAL, FINITE_JACOBIAN, NO_APPROXIMATE_INVERSE}
 
@@ -256,6 +280,200 @@ def test_15_decay_exponent_refuses_rather_than_returning_a_number():
     print("  refuses on: too few rungs, a zero rung, an inf rung, a negative rung")
 
 
+# --------------------------------------------------------------------------
+# ROUTE-CP (leg 62): CADIOT'S SCOPE
+#
+# Gates 16-19 guard the BOOKKEEPING (located clauses, a gate that answers both ways);
+# gates 20-24 guard the MEASUREMENT (the paper's own constants re-derived, the mechanism
+# checked as an identity rather than assumed, and the two published thresholds kept
+# apart from the operator's own hinge).
+# --------------------------------------------------------------------------
+def test_16_every_cadiot_clause_is_traced_to_a_located_full_text_statement():
+    """Same guard as gate 1, for Route-CP's clauses. Never an abstract."""
+    assert cp_unlocated_rows() == [], cp_unlocated_rows()
+    for c in CADIOT_SCOPE:
+        assert c["where"] and c["quote"] and c["supports"], c["clause"]
+        assert "abstract" not in c["where"].lower(), c["clause"]
+    for f in CP_FORWARD:
+        assert f["url"].startswith("https://arxiv.org/abs/"), f["tag"]
+    assert "NOT OBTAINED" in CP_NOT_OBTAINED["status"]
+    print(f"  {len(CADIOT_SCOPE)} clauses + {len(CP_FORWARD)} forward rows, all located; "
+          f"Farid-Lancaster recorded NOT OBTAINED rather than glossed")
+
+
+def test_17_the_cadiot_gate_answers_no_on_the_located_clauses():
+    """Route-CP's gate, in DIRECTION.md's wording, answered off the ledger."""
+    g = cadiot_covers()
+    assert g["answer"] == "no", g
+    assert g["n_clauses_failing"] == len(CADIOT_SCOPE), g
+    assert g["forward_citations_relaxing_the_hypothesis"] == [], g
+    assert set(g["clauses_that_fail_for_our_operator"]) == {
+        CP_CLASS, CP_A1_LMIN, CP_A1_GROWTH, CP_L31, CP_L32, CP_SYSTEMS}
+    print(f"  gate answers '{g['answer']}': {g['n_clauses_failing']} of "
+          f"{len(g['clauses_examined'])} located clauses fail for our operator")
+
+
+def test_18_the_cadiot_gate_can_answer_yes_lesson_90():
+    """A gate that cannot come out the other way is not a gate. Both disjuncts live."""
+    g = cadiot_covers(scope=CP_SYNTHETIC_COVERING_SCOPE)
+    assert g["answer"] == "yes", g
+    assert g["n_clauses_failing"] == 0, g
+
+    relaxed = [dict(f) for f in CP_FORWARD]
+    relaxed[0]["relaxes_the_hypothesis"] = True
+    g2 = cadiot_covers(forward=relaxed)
+    assert g2["answer"] == "yes", g2
+    assert g2["forward_citations_relaxing_the_hypothesis"] == ["BCF"], g2
+    print("  flips to yes two independent ways: a covering scope, and a forward "
+          "citation that relaxes the hypothesis")
+
+
+def test_19_the_control_scope_is_never_counted_as_evidence():
+    """The fictitious clauses are not in the real scope ledger."""
+    real = {c["clause"] for c in CADIOT_SCOPE}
+    for c in CP_SYNTHETIC_COVERING_SCOPE:
+        assert c["where"].startswith("(none"), c
+    assert cadiot_covers()["answer"] == "no"
+    assert len(real) == len(CADIOT_SCOPE), "duplicate clause ids"
+    print(f"  {len(real)} distinct real clauses; the control cites nothing and is "
+          f"passed explicitly or not at all")
+
+
+def test_20_cadiots_own_constants_are_RE_DERIVED_not_quoted():
+    """The paper states l_min in words for three of its four examples. Reproduce them.
+
+    Whitham: 'notice that l(xi) >= l(0) = 1 - c = 0.2 for all xi in R'.
+    Swift-Hohenberg: |l| = (1 - |2 pi xi|^2)^2 + mu >= mu, with mu = 0.28 and 0.32.
+    """
+    for name in ("SH_square", "SH_hexagonal", "Whitham"):
+        a = cadiot_symbol_admissibility(name)
+        stated = a["author_states"]["l_min"]
+        assert abs(a["l_min"] - stated) < 1e-6, (name, a["l_min"], stated)
+        assert a["growth_exponent"] > 0.4, (name, a["growth_exponent"])
+        print(f"  {name:14s} l_min measured {a['l_min']:.6f} vs stated {stated} "
+              f"(|diff| {abs(a['l_min'] - stated):.2e}), growth "
+              f"{a['growth_exponent']:+.4f}")
+
+
+def test_21_cadiots_ONE_systems_example_has_a_BOUNDED_off_diagonal():
+    """Section 5.3 eq. (44): the off-diagonal is the constant lam1 lam2 - 1 = 1/9.
+
+    This is the only place an off-diagonal entry appears anywhere in the paper, so if
+    the framework reached an off-diagonal UNBOUNDED part it would have to be here.
+    """
+    a = cadiot_symbol_admissibility("GrayScott")
+    assert a["is_matrix_symbol"]
+    assert abs(a["offdiag_entry"] - 1.0 / 9.0) < 1e-12, a["offdiag_entry"]
+    assert a["l_min"] > 0.99, a["l_min"]
+    assert abs(a["growth_exponent"] - 2.0) < 1e-3, a["growth_exponent"]
+    assert a["offdiag_over_diag_exponent"] < -1.9, a["offdiag_over_diag_exponent"]
+    assert a["offdiag_over_diag_at_xi_max"] < 1e-8, a["offdiag_over_diag_at_xi_max"]
+    print(f"  Gray-Scott offdiag = {a['offdiag_entry']:.6f} (constant), diagonal grows "
+          f"{a['growth_exponent']:+.4f}; ratio exponent "
+          f"{a['offdiag_over_diag_exponent']:+.4f}, "
+          f"{a['offdiag_over_diag_at_xi_max']:.2e} at |xi| = {a['xi_max']:.0e}")
+
+
+def test_22_lemma_3_2s_shift_SATURATES_for_cadiot_and_DIVERGES_for_us():
+    """The load-bearing comparison, as two ladders and their exponents.
+
+    Cadiot's own Whitham operator: one finite s serves every truncation.  Ours at
+    mu = 0: the required |s| grows linearly with the truncation, so no s survives the
+    limit and Lemma 3.2 cannot be entered at all.
+    """
+    lad_c = shift_requirement_ladder(cadiot_whitham_matrix, (128, 256, 512, 1024))
+    assert lad_c["saturates"], lad_c
+    assert abs(lad_c["exponent"]) < 1e-6, lad_c
+    assert abs(lad_c["ratio_last_over_first"] - 1.0) < 1e-9, lad_c
+
+    lad_o = shift_requirement_ladder(lambda M: tail_block(8, M, mu=0.0),
+                                     (128, 256, 512, 1024, 2048))
+    assert not lad_o["saturates"], lad_o
+    assert lad_o["exponent"] > 0.95, lad_o
+    assert lad_o["s_required"][-1] > 500.0, lad_o
+    print(f"  Cadiot/Whitham |s| = {lad_c['s_required'][0]:.5f} at every N "
+          f"(exponent {lad_c['exponent']:+.1e}); ours {lad_o['s_required'][0]:.0f} -> "
+          f"{lad_o['s_required'][-1]:.0f} over M = 128..2048 "
+          f"(exponent {lad_o['exponent']:+.4f})")
+
+
+def test_23_the_control_MOVES_when_the_operator_moves_lesson_90():
+    """Four identical numbers should read as a bug unless something makes them move.
+
+    The saturating |s| above is identical across N.  That is saturation, not a tautology
+    of the code -- and the proof is that it moves when the convolution's l^1 norm moves,
+    while the ratio's EXPONENT does not (the numerator is exactly 2||V||_1 in the
+    interior, so the exponent belongs to Cadiot's SYMBOL alone).
+    """
+    levels, exps = [], []
+    for l1 in (0.05, 0.35, 2.0, 10.0):
+        A = cadiot_whitham_matrix(512, kernel_l1=l1)
+        levels.append(cadiot_shift_requirement(A))
+        exps.append(cadiot_ratio_ladder(A, np.abs(np.arange(-512, 513)),
+                                        hi_trim=8)["exponent"])
+    assert levels[0] == 0.0 and levels[-1] > 9.0, levels
+    assert levels[1] < levels[2] < levels[3], levels
+    assert max(exps) - min(exps) < 1e-9, exps
+    assert exps[0] < -0.5, exps
+    # and the binding row is the one Assumption 1 is about: |s| = sqrt((r/2)^2 - l_min^2)
+    predicted = float(np.sqrt((2 * 0.35 / 2.0) ** 2 - 0.2 ** 2))
+    assert abs(levels[1] - predicted) < 1e-6, (levels[1], predicted)
+    print(f"  |s| moves 0.0 -> {levels[-1]:.3f} with ||V||_1 while the exponent is "
+          f"fixed at {exps[0]:+.6f}; and |s| = sqrt((r/2)^2 - l_min^2) = "
+          f"{predicted:.5f} EXACTLY, i.e. the binding row is the one Assumption 1's "
+          f"l_min = 0.2 is about")
+
+
+def test_24_the_two_published_thresholds_are_not_the_operators_hinge():
+    """Three numbers on one dial, kept apart on purpose.
+
+    Cadiot's Lemma 3.2 admits this family for mu >= 1/2; BDL's assumption (5) only for
+    mu > 1; and leg 57 measured the OPERATOR's own hinge at mu = 0 exactly.  Conflating
+    them is how a hypothesis of a construction gets read as a property of an operator.
+    """
+    t = cadiot_vs_bdl_thresholds()
+    assert t["factor_between_them"] == 2.0, t
+    assert t["both_vacuous_at"] == 0.0 and t["leg_57_operator_hinge"] == 0.0
+
+    # measured, not asserted: the identity r_k = k - 1 that produces the 1/2
+    for mu in (0.25, 0.45, 1.0):
+        g = our_operator_gershgorin(K=8, M=512, mu=mu)
+        assert g["row_sum_identity_max_err_vs_k_minus_1"] < 1e-10, g
+    below = shift_requirement_ladder(lambda M: tail_block(8, M, mu=0.45),
+                                     (256, 512, 1024))
+    at = shift_requirement_ladder(lambda M: tail_block(8, M, mu=0.5), (256, 512, 1024))
+    assert not below["saturates"] and below["exponent"] > 0.95, below
+    assert at["saturates"] and max(at["s_required"]) == 0.0, at
+    assert our_operator_gershgorin(K=8, M=512, mu=0.0)["s_required"] > 250.0
+    print(f"  mu = 0.45 diverges (exponent {below['exponent']:+.4f}), mu = 0.50 needs "
+          f"|s| = 0 exactly; BDL needs mu > 1, factor "
+          f"{t['factor_between_them']:.0f}; the operator's own hinge is mu = 0")
+
+
+def test_25_the_ratio_ladder_refuses_at_an_exactly_zero_diagonal():
+    """When a quantity has no referent, say so instead of bounding it (discipline 73)."""
+    lad = cadiot_ratio_ladder(tail_block(8, 256, mu=0.0), np.arange(9, 257))
+    assert lad["refused"] and lad["exponent"] is None, lad
+    assert lad["n_infinite_rows"] == 248, lad
+    ok = cadiot_ratio_ladder(tail_block(8, 256, mu=1.0), np.arange(9, 257), hi_trim=1)
+    assert not ok["refused"] and abs(ok["exponent"]) < 0.01, ok
+    # and the flatness is mu-INDEPENDENT: the level moves, the exponent does not, because
+    # r_k = k - 1 exactly and the diagonal is mu*k (lesson 90 -- checked, not assumed).
+    exps, levels = [], []
+    for mu in (0.25, 0.5, 1.0, 2.0):
+        lad = cadiot_ratio_ladder(tail_block(8, 512, mu=mu), np.arange(9, 513), hi_trim=1)
+        exps.append(lad["exponent"])
+        levels.append(lad["ratio_at_window_top"])
+    assert max(exps) - min(exps) < 1e-9, exps
+    assert levels[0] > 3.9 and levels[-1] < 0.51, levels
+    print(f"  and the exponent is mu-independent ({exps[0]:+.4f} at every mu, spread "
+          f"{max(exps) - min(exps):.1e}) while the LEVEL moves "
+          f"{levels[0]:.3f} -> {levels[-1]:.3f}")
+    print(f"  mu = 0: {lad['n_infinite_rows']} rows with an exactly zero diagonal, "
+          f"exponent REFUSED; mu = 1: exponent {ok['exponent']:+.4f} (flat, not "
+          f"decaying)")
+
+
 if __name__ == "__main__":
     import time
     t0 = time.time()
@@ -273,7 +491,17 @@ if __name__ == "__main__":
                test_12_a_nonzero_diagonal_restores_decay,
                test_13_the_shift_is_the_only_case_that_fails,
                test_14_bdl_threshold_is_NOT_where_the_behaviour_changes,
-               test_15_decay_exponent_refuses_rather_than_returning_a_number):
+               test_15_decay_exponent_refuses_rather_than_returning_a_number,
+               test_16_every_cadiot_clause_is_traced_to_a_located_full_text_statement,
+               test_17_the_cadiot_gate_answers_no_on_the_located_clauses,
+               test_18_the_cadiot_gate_can_answer_yes_lesson_90,
+               test_19_the_control_scope_is_never_counted_as_evidence,
+               test_20_cadiots_own_constants_are_RE_DERIVED_not_quoted,
+               test_21_cadiots_ONE_systems_example_has_a_BOUNDED_off_diagonal,
+               test_22_lemma_3_2s_shift_SATURATES_for_cadiot_and_DIVERGES_for_us,
+               test_23_the_control_MOVES_when_the_operator_moves_lesson_90,
+               test_24_the_two_published_thresholds_are_not_the_operators_hinge,
+               test_25_the_ratio_ladder_refuses_at_an_exactly_zero_diagonal):
         print(f"\n{fn.__name__}")
         fn()
     print(f"\nALL GATES PASS ({time.time() - t0:.0f}s)")

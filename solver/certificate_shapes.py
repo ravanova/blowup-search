@@ -539,3 +539,667 @@ dependent row and column.  It is the wrong operator, not the wrong answer.  The
 comparison across mu must use the UNBORDERED inverse wherever the block is invertible,
 which is what `classify_operator` does.  These numbers are recorded ONLY so that the
 next agent who computes them recognises them and does not publish them."""
+
+
+# ==========================================================================
+# ROUTE-CP (leg 62): CADIOT arXiv:2505.03091's SCOPE, SETTLED FROM THE FULL TEXT
+# ==========================================================================
+# Leg 57 flagged this paper as independently stating the dominance-hypothesis
+# observation and recommended not re-claiming leg 51's finding at full strength.  That
+# recommendation is correct and INSUFFICIENT: the same paper is the single largest
+# novelty risk to leg 58's proposition, and leg 57 did not establish whether Cadiot's
+# construction REACHES the off-diagonal unbounded part with a non-decaying tail inverse
+# -- which is NG's hypothesis, not leg 51's.
+#
+# Everything below is ADDITIVE.  `SHAPE_LEDGER` above is leg 57's artifact and is NOT
+# touched: its "four papers" count is quoted in leg 57's prose, in PHASE2_P2_NOTES and
+# in CONTINUATION_PROMPT, and a leg that silently changes a number other documents quote
+# is a failure mode this repository keeps re-learning.
+#
+# The novelty pass ran BEFORE any of this: `writeup/novelty/leg_62.md`, verdict
+# PROCEED_AS_BOOKKEEPING.  **This leg claims no mathematical novelty of its own.**  It
+# settles the scope of somebody else's paper and measures one dial against that paper's
+# own worked examples.
+#
+# TRANSCRIBED vs VERIFIED, the same split as above, because transcription is where
+# errors hide:
+#   TRANSCRIBED -- every `quote` in `CADIOT_SCOPE` and `CP_FORWARD`, read off the full
+#                  text of the PDF (`bash Papers/fetch.sh 2505.03091`, 30 pp., extracted
+#                  with pypdf).  The `url` is on every row so the next pass can check the
+#                  quote rather than trust it.
+#   VERIFIED    -- every number produced by the functions below.  In particular
+#                  `cadiot_symbol_admissibility` RE-DERIVES the paper's own constants
+#                  (Whitham l_min = 0.2, which Cadiot states in words; Swift-Hohenberg
+#                  l_min = mu = 0.28 / 0.32) instead of citing them.
+
+#: Cadiot's clause identifiers, so prose cannot drift into free text.
+CP_CLASS = "CLASS"                # eq. (1)-(2): L is a Fourier multiplier
+CP_A1_LMIN = "A1_LMIN"            # Assumption 1, first half: |l| >= l_min > 0
+CP_A1_GROWTH = "A1_GROWTH"        # Assumption 1, second half: |l| -> +infinity
+CP_L31 = "LEMMA_3_1"              # compactness of (L + tI)^{-1}
+CP_L32 = "LEMMA_3_2"              # the generalized Gershgorin theorem and its shift s
+CP_SYSTEMS = "SYSTEMS"            # section 5.3, the one systems example
+
+#: The located clauses of arXiv:2505.03091 that decide whether our operator is inside
+#: its scope.  `holds_for_the_a0_CLM_linearisation` is the field the gate reads, and
+#: `why` says what the measurement below reports for it -- never a bare boolean.
+CADIOT_SCOPE = [
+    {
+        "clause": CP_CLASS,
+        "where": "section 1 (Introduction), equations (1) and (2)",
+        "quote": ("we assume that L is a Fourier multiplier operator, that is it is "
+                  "given by its symbol l : R^m -> C as F(Lu)(xi) = l(xi)F(u)(xi) for all "
+                  "xi in R^m ... If l is polynomial, then L is a linear differential "
+                  "operator with constant coefficients."),
+        "supports": ("THE CLASS DEFINITION, and it is reached BEFORE Assumption 1.  A "
+                     "Fourier multiplier is diagonal in the Fourier index by "
+                     "construction -- section 2.2 makes it explicit: 'the linear part L "
+                     "becomes an operator L_q : X_q -> l^2 defined as L_q U = "
+                     "(l(n/2q) u_n)_n'.  Our unbounded part is the DILATION TRANSPORT "
+                     "X d/dX = sin(theta) d/d(theta), a VARIABLE-coefficient operator "
+                     "with no symbol at all; its matrix in the sine basis is bidiagonal "
+                     "with EXACTLY ZERO diagonal.  It is outside the class at the level "
+                     "of the class, not at the level of a hypothesis."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured: `tail_block`'s diagonal is identically 0.0 and its "
+                "off-diagonals are ~ k/2, i.e. the whole unbounded part sits off the "
+                "Fourier-index diagonal."),
+    },
+    {
+        "clause": CP_A1_LMIN,
+        "where": "Assumption 1 (page 6), first half",
+        "quote": ("assume that there exists lmin > 0 such that |l(xi)| >= lmin for all "
+                  "xi in R^m"),
+        "supports": ("A UNIFORM LOWER BOUND on the symbol.  This is the clause the "
+                     "standing ban's lift condition names ('whether Cadiot's "
+                     "construction covers a ZERO DIAGONAL').  It does not."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured: the analogue of l_min for our operator is "
+                "min_k |diag(tail_block)| = 0.0 EXACTLY, against Cadiot's own worked "
+                "examples at 0.2 (Whitham), 0.28 / 0.32 (Swift-Hohenberg) and ~1.0 "
+                "(Gray-Scott) -- see `cadiot_symbol_admissibility`."),
+    },
+    {
+        "clause": CP_A1_GROWTH,
+        "where": "Assumption 1 (page 6), second half",
+        "quote": "lim_{|xi|_2 -> +infinity} |l(xi)| = +infinity",
+        "supports": ("The DIAGONAL is the thing that grows.  This is the half that makes "
+                     "the tail estimate a multiplier estimate, and it is used twice in "
+                     "section 3 (Lemma 3.1 and Lemma 3.2) rather than being decorative."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured: our diagonal is identically zero, so its growth exponent is "
+                "not merely small -- it has no referent (discipline 73).  The growth is "
+                "entirely in the OFF-diagonal, ~ k/2."),
+    },
+    {
+        "clause": CP_L31,
+        "where": "Lemma 3.1, proof (page 9)",
+        "quote": ("Now, we obtain that (L + tI)^{-1} : l^2 -> l^2 is compact thanks to "
+                  "Assumption 1."),
+        "supports": ("Assumption 1 is LOAD-BEARING, not a convenience: the whole "
+                     "eigenvalue / essential-spectrum split rests on this compactness, "
+                     "and the compactness is exactly '1/l(n) -> 0', i.e. a DECAYING tail "
+                     "inverse.  With a zero diagonal there is no t for which "
+                     "(L + tI)^{-1} is even defined by this route."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured by leg 57 and not re-derived here: the UNBORDERED tail inverse "
+                "at mu = 0 grows linearly in the truncation M, i.e. it does not exist as "
+                "M -> infinity (`m_divergence`, exponent_in_M ~ +1)."),
+    },
+    {
+        "clause": CP_L32,
+        "where": "Lemma 3.2, proof (page 10)",
+        "quote": ("since DG(U0)L^{-1} : l^2 -> l^2 is compact and |l(n~)| -> infinity as "
+                  "|n| -> infinity, there exists s0 in C sufficiently big in amplitude "
+                  "such that |l(n~) + s0| > (1/2) sum_{k != n} |(DG(U0))_{n,k}| for all n "
+                  "in Z^m"),
+        "supports": ("**THE LOAD-BEARING INEQUALITY, and the one this leg measures.**  "
+                     "The generalized Gershgorin theorem Cadiot imports from "
+                     "Farid-Lancaster (his [24]) requires ONE shift s in C, big enough in "
+                     "amplitude, that makes the shifted diagonal dominate half the row "
+                     "sum SIMULTANEOUSLY AT EVERY n.  Such an s exists in his setting "
+                     "because the row sums are BOUNDED (DG(U0) is compact and U0 has "
+                     "finitely many non-zero coefficients) while |l(n~)| -> infinity.  If "
+                     "instead the diagonal is identically zero and the row sums GROW, no "
+                     "finite s exists -- and that is a statement about his proof, "
+                     "measurable on our matrix, not an opinion about his paper."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured: `cadiot_shift_requirement` reports the minimum-modulus s "
+                "satisfying this inequality on modes K+1..M.  For our operator at mu = 0 "
+                "it GROWS LINEARLY in M (exponent ~ +1.005), so no finite s survives the "
+                "limit; for Cadiot's own Whitham operator it SATURATES."),
+    },
+    {
+        "clause": CP_SYSTEMS,
+        "where": "section 5.3 (the planar Gray-Scott model), equation (44)",
+        "quote": ("l(xi) = [[-lambda_1 |2 pi xi|_2^2 - 1, 0], "
+                  "[lambda_1 lambda_2 - 1, -|2 pi xi|_2^2 - lambda_2]] for all xi in R^2"),
+        "supports": ("**THE ONLY PLACE AN OFF-DIAGONAL ENTRY ENTERS THIS PAPER AT ALL**, "
+                     "and it enters BOUNDED.  A system is the sole route by which "
+                     "Cadiot's framework sees an off-diagonal term; in his one systems "
+                     "example the off-diagonal entry is the CONSTANT lambda_1 lambda_2 - "
+                     "1 = 1/9 while both diagonal entries grow like |2 pi xi|^2.  So even "
+                     "in the systems case the unbounded part is diagonal and the "
+                     "off-diagonal is a bounded perturbation of it.  Note also that this "
+                     "off-diagonality is in the COMPONENT index; ours is in the FOURIER "
+                     "index, which is a different axis of the same matrix."),
+        "holds_for_the_a0_CLM_linearisation": False,
+        "why": ("measured: the ratio |offdiag| / min_i |diag_i| for Cadiot's own "
+                "Gray-Scott symbol decays with exponent -2.000 in |xi| and is 2.53e-10 "
+                "at |xi| = 1e4.  For our operator the same ratio is FLAT in k "
+                "(1/(2 mu) at every mode) and infinite at mu = 0."),
+    },
+]
+
+#: The forward closure of arXiv:2505.03091, plus the one independent off-diagonal
+#: candidate the search produced -- all read at full text by the novelty pass
+#: (`writeup/novelty/leg_62.md`).  TRANSCRIBED.  `relaxes_the_hypothesis` is the field
+#: that would have to be True anywhere for the gate to move.
+CP_FORWARD = [
+    {
+        "tag": "BCF",
+        "arxiv": "2509.17099",
+        "url": "https://arxiv.org/abs/2509.17099",
+        "authors": "Blanco, Cadiot, Fassler",
+        "title": ("Proving the existence of localized patterns and saddle node "
+                  "bifurcations in 1D activator-inhibitor type models"),
+        "cites_2505_03091_as": "[19]",
+        "where": "Assumption 1",
+        "quote": ("Given l as in (5), assume there exists sigma_0 > 0 such that "
+                  "|det(l(xi))| >= sigma_0 for all xi in R.  That is, det(l(xi)) is "
+                  "bounded away uniformly from 0."),
+        "relaxes_the_hypothesis": False,
+        "note": ("The SYSTEMS form of Assumption 1, and the form that matters here "
+                 "because a system is the only route an off-diagonal entry has into this "
+                 "framework.  It is a NON-VANISHING DETERMINANT of the matrix symbol -- "
+                 "strictly a hypothesis to be checked (their Lemma 2.1 gives explicit "
+                 "parameter inequalities for it), not one that can be dropped."),
+    },
+    {
+        "tag": "VDAC",
+        "arxiv": "2509.16693",
+        "url": "https://arxiv.org/abs/2509.16693",
+        "authors": "van der Aalst, Cadiot",
+        "title": ("Existence proofs of traveling wave solutions on an infinite strip for "
+                  "the suspension bridge equation and proof of orbital stability"),
+        "cites_2505_03091_as": "[4]",
+        "where": "the symbol lower bound, by cases",
+        "quote": ("l(xi_1, xi_2) >= (2 pi xi_2)^2 c^2 + 1 - c^4/4 ... or "
+                  "(2 pi xi_2)^4 + 1"),
+        "relaxes_the_hypothesis": False,
+        "note": ("Same hypothesis, discharged by direct computation of an explicit "
+                 "POSITIVE lower bound on the symbol.  The forward closure of 2505.03091 "
+                 "into this case TIGHTENS the requirement rather than loosening it."),
+    },
+    {
+        "tag": "BH",
+        "arxiv": "2605.03920",
+        "url": "https://arxiv.org/abs/2605.03920",
+        "authors": "Castro, Gomez-Serrano, Pascual-Caballo",
+        "title": "Linear instability of a Burgers-Hilbert traveling wave",
+        "cites_2505_03091_as": None,
+        "where": "method section (its own placement of radii polynomials)",
+        "quote": ("In a broader context ... the reduction of the proof of existence to a "
+                  "fixed-point argument has also been particularly successful in the "
+                  "context of radii polynomials, developed in [7, 34, 45] and later used "
+                  "in [6, 19]."),
+        "relaxes_the_hypothesis": False,
+        "note": ("The strongest independent off-diagonal candidate the search produced: "
+                 "the Burgers-Hilbert linearisation's unbounded part IS a transport term. "
+                 " It is NOT a counterexample and does not cite 2505.03091.  It proceeds "
+                 "by Fuchsian ODE theory, reducing to a FINITE-dimensional system solved "
+                 "in interval arithmetic -- the Chen-Hou pattern again, the shift case "
+                 "certified by ABANDONING the tail estimate rather than repairing it, on "
+                 "the torus instead of the line.  A second, independent instance of the "
+                 "confirmation, from a different community."),
+    },
+]
+
+#: NOT OBTAINED, recorded rather than glossed (leg 53's failure mode was presenting a
+#: source it had not read as if it had).  Farid-Lancaster is Cadiot's reference [24], the
+#: engine behind his Lemma 3.2.
+CP_NOT_OBTAINED = {
+    "source": "Farid & Lancaster, Linear Algebra and its Applications 143:7-17 (1991)",
+    "role": "Cadiot's [24]; supplies the generalized Gershgorin theorem of his Lemma 3.2",
+    "status": "NOT OBTAINED -- paywalled (Elsevier)",
+    "why_it_did_not_block": ("the three hypotheses Cadiot verifies before invoking it are "
+                             "reproduced inside his own proof, and the load-bearing one "
+                             "is the shifted diagonal-dominance inequality quoted in "
+                             "`CADIOT_SCOPE[LEMMA_3_2]` -- a located statement in a "
+                             "source we do hold."),
+}
+
+
+def cp_unlocated_rows():
+    """Route-CP's analogue of `unlocated_rows`: every clause traced, never an abstract."""
+    bad = []
+    for r in CADIOT_SCOPE + CP_FORWARD:
+        key = r.get("clause") or r.get("tag")
+        w = (r.get("where") or "").lower()
+        if not w or "abstract" in w:
+            bad.append((key, r.get("where")))
+        if not r.get("quote"):
+            bad.append((key, "(no quote)"))
+    return bad
+
+
+# --------------------------------------------------------------------------
+# CADIOT'S OWN WORKED EXAMPLES, AS SYMBOLS -- so his hypothesis becomes a NUMBER
+# --------------------------------------------------------------------------
+# A hypothesis quoted is a sentence; a hypothesis MEASURED ON THE AUTHOR'S OWN EXAMPLES
+# is a magnitude with a scale attached.  Every symbol below is transcribed from the
+# section named in `where`, and every `author_states` field is a number the paper states
+# in words -- so the measurement can be checked against the author rather than believed.
+_TWO_PI = 2.0 * np.pi
+
+
+def _sh_symbol(xi, mu):
+    """Planar Swift-Hohenberg, section 5.1: l(xi) = -(1 - |2 pi xi|^2)^2 - mu."""
+    return -(1.0 - (_TWO_PI * np.asarray(xi, float)) ** 2) ** 2 - float(mu)
+
+
+def _whitham_symbol(xi, T=0.5, c=0.8):
+    """Capillary-gravity Whitham, section 5.2: l(xi) = m_T(2 pi xi) - c with
+    m_T(k) = sqrt(tanh(k)(1 + T k^2)/k).  The k -> 0 limit of m_T is 1, so l(0) = 1 - c.
+    """
+    k = _TWO_PI * np.asarray(xi, float)
+    out = np.empty(k.shape, float)
+    small = np.abs(k) < 1e-10
+    out[small] = 1.0
+    kk = k[~small]
+    out[~small] = np.sqrt(np.tanh(kk) * (1.0 + float(T) * kk ** 2) / kk)
+    return out - float(c)
+
+
+def _gray_scott_symbol(xi, lam1=1.0 / 9.0, lam2=10.0):
+    """Planar Gray-Scott, section 5.3 eq. (44) -- a 2x2 MATRIX symbol.
+
+    Returned shape is (n, 2, 2).  This is the only place an off-diagonal entry appears
+    anywhere in the paper, and it is the constant `lam1 lam2 - 1`.
+    """
+    k2 = (_TWO_PI * np.asarray(xi, float)) ** 2
+    n = k2.size
+    out = np.zeros((n, 2, 2))
+    out[:, 0, 0] = -lam1 * k2 - 1.0
+    out[:, 1, 1] = -k2 - float(lam2)
+    out[:, 1, 0] = lam1 * lam2 - 1.0
+    return out
+
+
+#: name -> the paper's own operator.  `author_states` is what the PAPER says the
+#: admissibility constant is, so `cadiot_symbol_admissibility` can be checked against it.
+CADIOT_EXAMPLES = {
+    "SH_square": {
+        "where": "section 5.1 / 5.1.1 (planar Swift-Hohenberg, the unstable square)",
+        "params": {"mu": 0.28, "nu1": -1.6, "nu2": 1.0},
+        "symbol": lambda xi: _sh_symbol(xi, 0.28),
+        "matrix": False,
+        "author_states": {"l_min": 0.28,
+                          "how": ("|l(xi)| = (1 - |2 pi xi|^2)^2 + mu >= mu, and mu = "
+                                  "0.28 is stated in section 5.1.1")},
+    },
+    "SH_hexagonal": {
+        "where": "section 5.1.2 (planar Swift-Hohenberg, the stable hexagon)",
+        "params": {"mu": 0.32, "nu1": -1.6, "nu2": 1.0},
+        "symbol": lambda xi: _sh_symbol(xi, 0.32),
+        "matrix": False,
+        "author_states": {"l_min": 0.32, "how": "same, with mu = 0.32"},
+    },
+    "Whitham": {
+        "where": "section 5.2 (capillary-gravity Whitham), Lemma 5.4's proof",
+        "params": {"T": 0.5, "c": 0.8},
+        "symbol": _whitham_symbol,
+        "matrix": False,
+        "author_states": {"l_min": 0.2,
+                          "how": ("verbatim: 'notice that l(xi) >= l(0) = 1 - c = 0.2 "
+                                  "for all xi in R'")},
+    },
+    "GrayScott": {
+        "where": "section 5.3 (planar Gray-Scott), equation (44)",
+        "params": {"lambda1": 1.0 / 9.0, "lambda2": 10.0},
+        "symbol": _gray_scott_symbol,
+        "matrix": True,
+        "author_states": {"l_min": None,
+                          "how": ("not stated as a number; the symbol is lower "
+                                  "triangular with diagonal entries -lam1|2 pi xi|^2 - 1 "
+                                  "and -|2 pi xi|^2 - lam2, so sigma_min is measured "
+                                  "here rather than quoted")},
+    },
+}
+
+
+def _xi_grid(xi_max=1.0e4, n_near=40001, n_far=40000, near=5.0):
+    """A grid dense near the origin (where l_min lives) and logarithmic far out."""
+    return np.concatenate([np.linspace(0.0, near, int(n_near)),
+                           np.geomspace(near, float(xi_max), int(n_far))[1:]])
+
+
+def cadiot_symbol_admissibility(name, xi_max=1.0e4, fit_from=1.0e2):
+    """Assumption 1, as two magnitudes, measured on ONE of Cadiot's own examples.
+
+    Returns `l_min` (Assumption 1's first half -- must be > 0), the growth exponent of
+    the symbol at large |xi| (Assumption 1's second half -- must be > 0), and, for the
+    one MATRIX example, the ratio |offdiag| / min_i |diag_i| and its exponent: the
+    quantity that says whether the unbounded part is still the diagonal.
+
+    Nothing here is a boolean.  `assumption_1_margin` is `l_min` itself, which is exactly
+    the distance from admissible to inadmissible in the paper's own units.
+    """
+    ex = CADIOT_EXAMPLES[name]
+    xi = _xi_grid(xi_max)
+    vals = ex["symbol"](xi)
+    if ex["matrix"]:
+        sig = np.linalg.svd(vals, compute_uv=False)[:, -1]
+        diag = np.minimum(np.abs(vals[:, 0, 0]), np.abs(vals[:, 1, 1]))
+        off = np.abs(vals[:, 1, 0]) + np.abs(vals[:, 0, 1])
+    else:
+        sig = np.abs(vals)
+        diag = sig
+        off = np.zeros_like(sig)
+    sel = xi >= float(fit_from)
+    growth = float(np.polyfit(np.log(xi[sel]), np.log(sig[sel]), 1)[0])
+    out = {
+        "name": name,
+        "where": ex["where"],
+        "params": dict(ex["params"]),
+        "is_matrix_symbol": bool(ex["matrix"]),
+        "l_min": float(sig.min()),
+        "argmin_xi": float(xi[int(np.argmin(sig))]),
+        "assumption_1_margin": float(sig.min()),
+        "growth_exponent": growth,
+        "sigma_min_at_xi_max": float(sig[-1]),
+        "author_states": ex["author_states"],
+        "xi_max": float(xi_max),
+    }
+    if ex["matrix"]:
+        ratio = off / diag
+        out["offdiag_over_diag_at_xi_max"] = float(ratio[-1])
+        out["offdiag_over_diag_exponent"] = float(
+            np.polyfit(np.log(xi[sel]), np.log(ratio[sel]), 1)[0])
+        out["offdiag_entry"] = float(off.max())
+    return out
+
+
+# --------------------------------------------------------------------------
+# LEMMA 3.2's REQUIREMENT, AS A NUMBER ON WHATEVER MATRIX YOU HAND IT
+# --------------------------------------------------------------------------
+def gershgorin_rows(T):
+    """(|diagonal|, off-diagonal row sums) of a finite matrix -- Lemma 3.2's two inputs.
+
+    `r_n = sum_{k != n} |T_{n,k}|` is Cadiot's `r_n`; `|lambda_n| = |T_{n,n}|` is the
+    modulus of his Gershgorin centre.
+    """
+    T = np.asarray(T, float)
+    d = np.abs(np.diag(T))
+    r = np.abs(T).sum(axis=1) - d
+    return d, r
+
+
+def gershgorin_dominance_ratio(T):
+    """`r_n / |lambda_n|`, row by row.  `inf` wherever the diagonal is exactly zero.
+
+    This is the quantity Cadiot's framework drives to zero and ours does not.  It is
+    reported as a LADDER over n (discipline 72), never as its endpoint.
+    """
+    d, r = gershgorin_rows(T)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        return np.where(d > 0.0, r / np.where(d > 0.0, d, 1.0), np.inf)
+
+
+def cadiot_shift_requirement(T):
+    """The MINIMUM-MODULUS shift `s` for which Lemma 3.2's proof can be entered.
+
+    Cadiot needs one `s in C` with `|lambda_n + s| > r_n / 2` **simultaneously at every
+    n**.  For real centres the minimiser of `|s|` is purely imaginary, `s = i t`, giving
+    `lambda_n^2 + t^2 > r_n^2/4` for all n, hence
+
+        |s|_min = sqrt( max_n ( r_n^2/4 - lambda_n^2 )_+ ).
+
+    Returned as a magnitude.  `0.0` means the unshifted matrix is already dominant.  The
+    number that matters is not its value at one truncation but whether it SATURATES as
+    the truncation grows: a value that grows without bound means no `s` exists on the
+    infinite matrix, i.e. Lemma 3.2 cannot be entered at all.
+    """
+    T = np.asarray(T, float)
+    lam = np.diag(T)
+    _, r = gershgorin_rows(T)
+    return float(np.sqrt(max(0.0, float(np.max(r ** 2 / 4.0 - lam ** 2)))))
+
+
+def shift_requirement_ladder(matrix_fn, sizes):
+    """`cadiot_shift_requirement` over a ladder of truncations, with its exponent.
+
+    `matrix_fn(n)` returns the truncated matrix at size parameter `n`.  The exponent is
+    fitted only when every rung is strictly positive; otherwise it is refused with a
+    reason rather than reported as a misleading number (discipline 73).
+    """
+    sizes = [int(s) for s in sizes]
+    vals = [cadiot_shift_requirement(matrix_fn(s)) for s in sizes]
+    out = {"sizes": sizes, "s_required": vals,
+           "ratio_last_over_first": None, "exponent": None, "refused": None}
+    if min(vals) <= 0.0:
+        out["refused"] = ("at least one rung is exactly 0 -- the unshifted matrix is "
+                          "already diagonally dominant there, so an exponent has no "
+                          "referent")
+        out["saturates"] = True
+        return out
+    out["exponent"] = float(np.polyfit(np.log(sizes), np.log(vals), 1)[0])
+    out["ratio_last_over_first"] = float(vals[-1] / vals[0])
+    out["saturates"] = bool(out["exponent"] < 0.1)
+    return out
+
+
+# --------------------------------------------------------------------------
+# THE POSITIVE CONTROL: CADIOT'S OWN WHITHAM OPERATOR, IN HIS OWN COORDINATES
+# --------------------------------------------------------------------------
+def _surrogate_kernel(m, kernel_l1):
+    """An even, deterministic, finitely-supported convolution kernel of given l^1 norm.
+
+    **This is a SURROGATE for `DG(U0)`, and it is labelled one.**  The published `u0` of
+    section 5.2 is not distributed with the paper, and this leg does not have it; what it
+    does have is Cadiot's EXACT symbol, transcribed from section 5.2.  The measurement
+    below is designed so that the surrogate cannot carry the conclusion: the l^1 norm is
+    a DIAL, and the reported exponent is checked to be the same at every setting of it,
+    because the mechanism is `r_n bounded / |l(n~)| -> infinity` and the kernel only sets
+    the numerator's level.
+
+    The centre coefficient is set to ZERO on purpose.  A convolution's centre lands on
+    the DIAGONAL, where it only helps Cadiot's dominance; zeroing it is the choice that
+    is conservative AGAINST his framework and it makes `r_n` exactly `2 ||V||_1` in the
+    interior, so the ratio's exponent is a property of HIS SYMBOL alone.
+    """
+    j = np.arange(-int(m), int(m) + 1)
+    v = 1.0 / (1.0 + np.abs(j.astype(float)))
+    v[int(m)] = 0.0
+    return v * (float(kernel_l1) / np.abs(v).sum())
+
+
+def cadiot_whitham_matrix(N, d=40.0, kernel_l1=0.35, m=8, T=0.5, c=0.8):
+    """`DF(U0)` for Cadiot's section 5.2 example: HIS symbol on the diagonal, a finitely
+    supported convolution off it.
+
+    His `F(u) = M_T u - c u + u^2`, so `DF(U0) = L + 2 U0 * (.)`: the diagonal is exactly
+    `l(n/2d) = m_T(2 pi n / 2d) - c` and the off-diagonal part is the discrete
+    convolution by `2 U0`, which is banded because `U0` has finitely many non-zero
+    coefficients (Cadiot's Lemma 3.2 proof says so in as many words).
+
+    `d` is the half-width of `Omega_d`.  The text does not state it to the precision
+    needed here; `40.0` is the half-width of the domain drawn in his Figure 3, and the
+    ladder's exponent is checked to be `d`-independent in `test_certificate_shapes.py`.
+    """
+    N = int(N)
+    n = np.arange(-N, N + 1)
+    lam = _whitham_symbol(n / (2.0 * float(d)), T=T, c=c)
+    A = np.diag(lam)
+    V = _surrogate_kernel(m, kernel_l1)
+    mm = int(m)
+    for off in range(-mm, mm + 1):
+        val = 2.0 * V[off + mm]
+        i = np.arange(max(0, off), min(2 * N + 1, 2 * N + 1 + off))
+        A[i, i - off] += val
+    return A
+
+
+def cadiot_ratio_ladder(T_matrix, index, lo_frac=0.25, hi_trim=0):
+    """The `r_n/|lambda_n|` ladder and its exponent in |index|, over a stated window.
+
+    The window is reported with the exponent because the ladder is PRE-ASYMPTOTIC for
+    Cadiot's Whitham operator (the symbol only reaches its `sqrt(T)|k|^{1/2}` growth
+    slowly), and quoting one exponent without the window it was fitted on is how leg 53
+    lost a mechanism.
+    """
+    ratio = gershgorin_dominance_ratio(T_matrix)
+    idx = np.asarray(index, float)
+    n_max = float(np.max(idx))
+    sel = (idx > lo_frac * n_max) & (idx <= n_max - hi_trim) & np.isfinite(ratio)
+    out = {"n_first": float(idx[idx > 0][0]) if np.any(idx > 0) else None,
+           "ratio_max": float(np.max(ratio[np.isfinite(ratio)]))
+           if np.any(np.isfinite(ratio)) else float("inf"),
+           "n_infinite_rows": int(np.sum(~np.isfinite(ratio))),
+           "window": [float(lo_frac * n_max), float(n_max - hi_trim)]}
+    if sel.sum() >= 4 and np.all(ratio[sel] > 0):
+        out["exponent"] = float(np.polyfit(np.log(idx[sel]), np.log(ratio[sel]), 1)[0])
+        out["ratio_at_window_top"] = float(ratio[sel][-1])
+        out["refused"] = False
+    else:
+        out["exponent"] = None
+        out["ratio_at_window_top"] = None
+        out["refused"] = True
+        out["reason"] = ("the ratio is not finite and positive across the window -- with "
+                         "an exactly zero diagonal every row is infinite and an exponent "
+                         "has no referent")
+    return out
+
+
+def our_operator_gershgorin(K=8, M=512, mu=0.0):
+    """The same two Lemma-3.2 quantities, on the matrix this repository actually built.
+
+    Lesson: a growth rate you cite must be measured on the matrix you actually built.
+    This calls `solver.spectral_certificate.tail_block` -- the a = 0 CLM linearisation's
+    far-field block, off-diagonals `~ k/2`, diagonal `-mu k` (exactly zero at `mu = 0`).
+    """
+    from solver.spectral_certificate import tail_block
+    T = tail_block(int(K), int(M), mu=float(mu))
+    d, r = gershgorin_rows(T)
+    ratio = gershgorin_dominance_ratio(T)
+    finite = np.isfinite(ratio)
+    # rows 0 and -1 of a TRUNCATED bidiagonal block are missing one neighbour each, so
+    # their row sums are boundary artifacts and are excluded from the quoted ladder.
+    interior = slice(1, -1)
+    ri = ratio[interior]
+    fi = np.isfinite(ri)
+    # r_k = k - 1 exactly for k >= 3 in the interior: check it rather than assume it,
+    # because that identity is WHY the ratio's exponent below is mu-independent.
+    k = np.arange(int(K) + 1, int(M) + 1, dtype=float)[interior]
+    row_sum_identity_err = float(np.max(np.abs(r[interior] - (k - 1.0))))
+    return {
+        "K": int(K), "M": int(M), "mu": float(mu),
+        "diag_min": float(d.min()), "diag_max": float(d.max()),
+        "row_sum_min": float(r.min()), "row_sum_max": float(r.max()),
+        "row_sum_identity_max_err_vs_k_minus_1": row_sum_identity_err,
+        "n_rows": int(d.size),
+        "n_rows_with_zero_diagonal": int(np.sum(d == 0.0)),
+        "ratio_interior_first": (float(ri[0]) if fi[0] else float("inf")),
+        "ratio_interior_last": (float(ri[-1]) if fi[-1] else float("inf")),
+        "ratio_max": (float(np.max(ratio[finite])) if finite.any() else float("inf")),
+        "s_required": cadiot_shift_requirement(T),
+    }
+
+
+#: The threshold this leg measured, kept as a named constant because two published
+#: hypotheses land on the SAME dial at DIFFERENT places and the factor between them is
+#: exactly 2.  See `cadiot_vs_bdl_thresholds`.
+CADIOT_MU_THRESHOLD = 0.5     # Lemma 3.2's shift exists iff mu >= 1/2 on this family
+BDL_MU_THRESHOLD = 1.0        # BDL assumption (5), delta = 1/(2 mu) < 1/2, iff mu > 1
+
+
+def cadiot_vs_bdl_thresholds():
+    """Where each published hypothesis admits the `Lambda^1`-dissipated CLM tail block.
+
+    Both are hypotheses about the SAME one-parameter family, so they can be compared as
+    numbers rather than as prose.  Row sums of `tail_block` are `r_k = k - 1` for
+    `k >= 3` and the diagonal is `mu k`, so:
+
+      * Cadiot Lemma 3.2 needs `mu k > (k-1)/2` for all k, i.e. `mu >= 1/2`;
+      * BDL assumption (5) needs `|offdiag/diag| = 1/(2 mu) < 1/2`, i.e. `mu > 1`.
+
+    **Both are vacuous at `mu = 0`**, which is the case of interest, and neither
+    threshold is where the TAIL INVERSE changes character -- leg 57 measured that
+    separately and it is `mu = 0` exactly.  These are hypotheses of two CONSTRUCTIONS,
+    not properties of the operator; recorded so the three numbers are never conflated.
+    """
+    return {
+        "cadiot_lemma_3_2_mu_threshold": CADIOT_MU_THRESHOLD,
+        "bdl_assumption_5_mu_threshold": BDL_MU_THRESHOLD,
+        "factor_between_them": BDL_MU_THRESHOLD / CADIOT_MU_THRESHOLD,
+        "both_vacuous_at": 0.0,
+        "leg_57_operator_hinge": 0.0,
+        "note": ("Cadiot's generalized-Gershgorin hypothesis is STRICTLY WEAKER than "
+                 "BDL's tridiagonal-dominance hypothesis on this family, by a factor of "
+                 "exactly 2 in mu -- Gershgorin bounds the whole row sum with a factor "
+                 "1/2, BDL bounds each ratio separately.  Neither reaches mu = 0.  This "
+                 "does NOT contradict leg 57, which measured a different quantity (the "
+                 "tail inverse's finiteness in M, whose hinge is zero-vs-nonzero "
+                 "diagonal); it compares two CONSTRUCTIONS' admissibility instead."),
+    }
+
+
+# --------------------------------------------------------------------------
+# THE GATE, AS AN EXECUTABLE PREDICATE -- AND IT CAN ANSWER BOTH WAYS
+# --------------------------------------------------------------------------
+#: FICTITIOUS.  Lesson 90: a gate that cannot come out the other way is not a gate.  This
+#: clause set describes a paper that WOULD cover our case; feeding it to `cadiot_covers`
+#: must flip the answer to "yes".  `test_certificate_shapes.py` runs both directions.
+CP_SYNTHETIC_COVERING_SCOPE = [
+    {
+        "clause": CP_CLASS,
+        "where": "(none -- this row is a control and cites nothing)",
+        "quote": "(none)",
+        "supports": "control",
+        "holds_for_the_a0_CLM_linearisation": True,
+        "why": "fictitious",
+    },
+    {
+        "clause": CP_A1_LMIN,
+        "where": "(none -- this row is a control and cites nothing)",
+        "quote": "(none)",
+        "supports": "control",
+        "holds_for_the_a0_CLM_linearisation": True,
+        "why": "fictitious",
+    },
+]
+
+
+def cadiot_covers(scope=None, forward=None):
+    """Route-CP's gate, answered off the located clauses, with the evidence attached.
+
+    The gate, in `DIRECTION.md`'s wording: *does Cadiot arXiv:2505.03091's construction
+    cover an operator whose unbounded part is off-diagonal with a non-decaying tail
+    inverse -- i.e. does it already contain leg 58's no-go, or a positive result that
+    contradicts it?*
+
+    It answers **yes** iff every located clause holds for our operator (the paper's
+    construction reaches it) or any forward citation relaxes the hypothesis.  Both
+    disjuncts are live: `CP_SYNTHETIC_COVERING_SCOPE` exercises the first and setting
+    `relaxes_the_hypothesis` on any `CP_FORWARD` row exercises the second.
+    """
+    scope = CADIOT_SCOPE if scope is None else scope
+    forward = CP_FORWARD if forward is None else forward
+    failing = [c["clause"] for c in scope
+               if not c["holds_for_the_a0_CLM_linearisation"]]
+    relaxed = [f["tag"] for f in forward if f.get("relaxes_the_hypothesis")]
+    covered = (not failing) or bool(relaxed)
+    return {
+        "gate": ("Does Cadiot arXiv:2505.03091's construction cover an operator whose "
+                 "unbounded part is off-diagonal with a non-decaying tail inverse -- "
+                 "i.e. does it already contain leg 58's no-go, or a positive result that "
+                 "contradicts it?"),
+        "answer": "yes" if covered else "no",
+        "clauses_examined": [c["clause"] for c in scope],
+        "clauses_that_fail_for_our_operator": failing,
+        "n_clauses_failing": len(failing),
+        "forward_citations_examined": [f["tag"] for f in forward],
+        "forward_citations_relaxing_the_hypothesis": relaxed,
+        "located": [{"clause": c["clause"], "where": c["where"], "quote": c["quote"]}
+                    for c in scope],
+    }
