@@ -59,6 +59,23 @@ THIS LEG DOES NOT PATCH. Per the gate's yes-branch, a silent-corruption finding 
 escalated, never repaired under the leg's own authority. solver/boussinesq_velocity.py is not
 edited by this leg under any outcome.
 
+SUPERSEDED BY THE REPAIR -- READ BEFORE RE-RUNNING
+---------------------------------------------------
+This script and its curated JSON are the FROZEN RECORD of the defect as measured against the
+UNPATCHED solver/boussinesq_velocity.py. A bench-repair (Leg 0: ORCH,
+bench/fix-boussinesq-velocity-origin-fit) has since patched the module: u_x_at_origin refuses an
+empty or rank-deficient origin fit window, and PolarGrid refuses r_min >= r_max. Against the
+patched module the SILENT_WRONG cases this script was built to measure now RAISE, so its
+reversed-interval and origin-read summaries -- which assume a returned value on both sides of
+the cliff -- no longer have numbers to report and the script will not run to completion. That
+is the fix working, not a broken script.
+
+It is deliberately left as leg 99 ran it, and the JSON is deliberately NOT regenerated: they are
+the evidence for the finding, and re-running would erase the magnitudes that justified the
+repair. The LIVE assertion of the current behaviour is test_boussinesq_velocity_adversarial.py,
+which the repair converted from characterizing these defects to asserting their refusal, keeping
+every measured magnitude in its docstrings.
+
 Run:  PYTHONPATH=. python experiments/p2_route_bva_v1_adversarial.py
 Writes: writeup/data/p2_route_bva_v1_adversarial.json
 """

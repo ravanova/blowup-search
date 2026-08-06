@@ -134,6 +134,57 @@ of its nine tests are marked CHARACTERIZATION: they pin the *defect*, not the de
 updated in the same commit as the patch. This is stated in the test file's own header so the next
 reader is not misled into thinking the battery blesses the bug.
 
+## UPDATE — bench repair (`Leg 0: ORCH`), landed bundled with this leg
+
+The escalation below was actioned. This leg's two commits are **bundled with the fix on
+`bench/fix-boussinesq-velocity-origin-fit`, so `leg/bva-v1` must NOT be merged separately.**
+
+* **`u_x_at_origin`** now counts the origin fit window and checks the least-squares rank, and
+  raises `ValueError` when the window holds fewer than `min_points` nodes (default 2, the
+  well-posedness floor for the two-parameter fit) or the fit is rank-deficient — before
+  `np.linalg.lstsq` can absorb a `(0, 2)` design matrix into `[0., 0.]`. The `-0.0` return
+  against a truth of `-2.0` is unreachable. A new `min_points` argument lets a caller demand an
+  accuracy margin above the well-posedness floor, since the default is not an accuracy
+  guarantee: the 18-node read measured above is still 4.01e-3 off truth.
+* **`PolarGrid.__init__`** now requires `r_min < r_max`, so the reversed interval is refused
+  before any solve. This subsumes the collapsed `r_min == r_max` case, which this leg had
+  measured as `NONFINITE`; raising is a strictly stronger flag than a non-finite field, so that
+  one sub-case moved from `NONFINITE` to `RAISED`.
+* **`n_beta <= 0` was deliberately NOT patched.** This leg classified it `SILENT_EMPTY` and
+  explicitly did not use it to answer the gate; the repair was scoped to the two defects the
+  gate turned on. The weak finding stays pinned as the gap it is.
+
+**Leg 73's headline is NOT affected — verified by re-running, not by argument.** Leg 73's grids
+are `r_min = 1e-3, r_max = 1e3` on the main ladder and `r_min = 1/r_max` on the truncation
+study: all strictly ascending, so defect 2 never applied. Its main-ladder grids put **398 nodes**
+in the origin fit window, three orders above the new floor. Its truncation study does reach
+`r_min = 0.2` with **0 nodes** in the window — inside defect 1's affected range — but the
+benchmark **never calls `u_x_at_origin`** (it scores P1/P3 field norms against the Lamb
+corner-image closed form), so that row was never exposed. Re-running
+`experiments/p2_route_bv_v1_velocity_benchmark.py` under the patched module reproduced
+`writeup/data/p2_route_bv_v1_velocity_benchmark.json` **byte-for-byte**: P1 finest
+**1.7584e-04**, P3 finest 1.2163e-05, observed orders **2.00, 2.00**, gate still
+`YES_AND_IT_REPRODUCES`.
+
+**Zero regression, verified.** `test_boussinesq_velocity.py` (leg 73's own five gates, including
+`u_x(0) = -2.0008`), `test_boussinesq_rescaled.py` (whose `modulation` path calls
+`u_x_at_origin`), `test_boussinesq_rescaled_status.py`, and `test_boussinesq_transport.py` all
+pass with identical numbers. Every `PolarGrid` construction in the repository was enumerated: all
+are strictly ascending, and every one that reaches `u_x_at_origin` puts 54–398 nodes in the
+window. The single repo grid with a thin window — the 16×8 grid at
+`test_boussinesq_rescaled_status.py:42`, 1 node — never calls the origin read, exactly as its own
+comment ("the loop never solves on it") says.
+
+**The battery is frozen, the tests carry the assertion.**
+`experiments/p2_route_bva_v1_adversarial.py` and its curated JSON are deliberately left as this
+leg ran them and are NOT regenerated — they are the evidence for the finding, and re-running
+would erase the magnitudes that justified the repair. Against the patched module the script no
+longer completes, because the cases it was built to measure now raise; a header note records
+this. `test_boussinesq_velocity_adversarial.py` grew 9 → 10 tests: the three CHARACTERIZATION
+tests are **inverted, not weakened** — every magnitude this leg measured is preserved in their
+docstrings and only the demand flipped from "returns the wrong number" to "raises" — and one new
+test pins the `min_points` lever.
+
 ## Escalation notes for the orchestrator
 
 1. **The fix is small and belongs to the module's owner, not to this leg.** Count the mask in

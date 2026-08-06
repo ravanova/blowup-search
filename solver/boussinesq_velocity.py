@@ -41,6 +41,19 @@ class PolarGrid:
     """
 
     def __init__(self, n_r=400, n_beta=48, r_min=1e-4, r_max=1e4):
+        # A reversed or collapsed radial interval is NOT a harmless relabelling. The Thomas
+        # solve only ever sees drho^2, so the interior discretization survives and the global
+        # error norm stays small -- but index 0 and index -1 swap physical meaning, so
+        # poisson_solve's "robin" branch imposes the far-field decay tail phi_n ~ r^{-2n} at
+        # the singular corner where the truth is the regularity tail phi_n ~ r^{+2n}. The
+        # damage is local and a global norm under-reports it (leg 99 measured 3.30e-2 near the
+        # origin behind a 1.43e-4 global norm). Refuse the input instead of solving it.
+        if not (float(r_min) < float(r_max)):
+            raise ValueError(
+                f"PolarGrid requires r_min < r_max (ascending radial interval), got "
+                f"r_min={r_min!r}, r_max={r_max!r}. A reversed interval silently swaps which "
+                f"radial boundary condition applies at which end; a collapsed one gives "
+                f"drho = 0.")
         self.n_r = int(n_r)
         self.n_beta = int(n_beta)
         self.M = self.n_beta + 1  # sin(pi j n / M) DST-I size
@@ -172,18 +185,48 @@ def velocity_from_vorticity(omega, grid, radial_bc="robin", phi_exact=None):
     return u, v, phi
 
 
-def u_x_at_origin(phi, grid, r_window=0.1):
+def u_x_at_origin(phi, grid, r_window=0.1, min_points=2):
     """u_x(0) = -phi_xy(0). Near the origin phi ~ c1 r^2 sin(2 beta) = 2 c1 x y (n=1 mode),
     so phi ~ 2 c1 x y  =>  u = -phi_y ~ -2 c1 x  =>  u_x(0) = -2 c1, with c1 = lim_{r->0}
     phi_1(r)/r^2 (phi_1 the n=1 radial coefficient). A clean, mode-localized origin read
     (contrast the noise-prone raw high-derivative reads of Spike-0 recon).
 
     We EXTRAPOLATE c1(r) = phi_1(r)/r^2 to r=0 by a linear fit over a small-r window,
-    skipping the innermost nodes where the first-order Robin BC contaminates the read."""
+    skipping the innermost nodes where the first-order Robin BC contaminates the read.
+
+    The fit is over the mask (grid.r[2], r_window). That window is only populated if the grid
+    actually RESOLVES the origin neighbourhood -- for r_min >= r_window it is empty. An empty
+    or rank-deficient design matrix is refused here rather than passed to np.linalg.lstsq,
+    which absorbs it into a zero coefficient without raising or warning: leg 99 measured the
+    unguarded path returning -0.0 against a truth of -2.0 (100% relative error, no warning),
+    which reads as the physically meaningful statement "the origin strain vanishes."
+
+    min_points is the number of in-window nodes required. The default 2 is the well-posedness
+    floor for this two-parameter fit, not an accuracy guarantee; the rank of the least-squares
+    solve is checked as well, so a degenerate 2-node configuration is still refused. Callers
+    wanting an accuracy margin should pass a larger min_points (leg 73's own grids put 258-398
+    nodes in this window).
+
+    Raises ValueError if the window holds fewer than min_points nodes or the fit is
+    rank-deficient."""
     phi_n = grid.to_modes(phi)
     c1 = phi_n[:, 0] / (grid.r ** 2)  # n=1 mode coefficient / r^2 -> c1(r)
     mask = (grid.r > grid.r[2]) & (grid.r < r_window)
+    n_in_window = int(mask.sum())
+    min_points = max(int(min_points), 2)
+    if n_in_window < min_points:
+        raise ValueError(
+            f"u_x_at_origin: the origin fit window (r in ({grid.r[2]:.6g}, {r_window:.6g})) "
+            f"holds {n_in_window} of {grid.n_r} radial nodes, fewer than the {min_points} "
+            f"required for the two-parameter fit. This grid does not resolve the origin "
+            f"neighbourhood (r_min={grid.r[0]:.6g}); refine the radial grid, widen r_window, "
+            f"or lower r_min. Fitting anyway would return a fabricated finite value.")
     rr = grid.r[mask]
     A = np.vstack([np.ones_like(rr), rr]).T  # fit c1 ~ a + b r, take a = c1(0)
-    coef, *_ = np.linalg.lstsq(A, c1[mask], rcond=None)
+    coef, _res, rank, _sv = np.linalg.lstsq(A, c1[mask], rcond=None)
+    if rank < A.shape[1]:
+        raise ValueError(
+            f"u_x_at_origin: the origin fit is rank-deficient (rank {rank} < "
+            f"{A.shape[1]} parameters) over {n_in_window} in-window node(s). lstsq would "
+            f"return the minimum-norm solution, which is not the extrapolated c1(0).")
     return -2.0 * float(coef[0])
