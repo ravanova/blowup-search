@@ -54,8 +54,12 @@ recovered from the older, never-actually-dispatched 110-series reserve rather th
 redrafted. A fifteenth refill, drafted in direct response to the user's "pre-empt the
 pre-emption" / "consider GA more" steer, adds **157–160** (three literature deep-mine legs on
 already-fully-read sources, plus one repaired-fitness leg gated solely by the frozen
-six-property check — no GA compute runs under any of the four). **Next fresh leg number for
-any future candidate is 161.**
+six-property check — no GA compute runs under any of the four). A sixteenth refill, in
+response to the user's requested strategic-novelty review's concrete action items, adds
+**161–162** (LSS full-text read; the untried geometric-weight/compact-support CAP corner),
+alongside the correction that leg 125 was legal and ready to dispatch since its 2026-08-06
+ruling and should not have been sitting parked. **Next fresh leg number for any future
+candidate is 163.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -884,6 +888,87 @@ new legs, re-ranking, or escalating anything that would touch a banked claim or 
 assessment, per the standing rule that a review's own report never moves Clay's ~0.05% by
 itself, only what it finds and what a subsequent leg then verifies can. Awaiting the
 orchestrator's relay.
+
+**DM response, 2026-08-06 — the review's findings have landed. Acting under the standing
+directive; Clay stays ~0.05% (the review itself doesn't move it, per the placeholder above —
+nothing here changes that).**
+
+**Coordinator's specific question, answered first: yes, dispatch leg 125.** Re-checked this
+file's own history rather than repeating the prior turns' summary. Leg 125 (M2P) was NOT
+left parked pending an unresolved ruling — the ruling happened and is recorded in full above
+("DM ruling 2026-08-06 — the user has answered open question #2; legality resolved; leg 125
+drafted and assigned," with the user's verbatim directive, a six-point legality analysis
+concluding the stage-V and gCLM-measurement bans do NOT bind, and a benefit test that passed
+disjunctively). It was assigned to LEG-J at that time. **What actually happened is a
+bookkeeping gap, not a live block**: every Live-assignments refresh since (the 110-series
+table, the 128-series ten-slot table, this DM's own fresh ten-slot dispatch, and the
+142–149/150–160 refills) rebuilt the ten-slot table from the undispatched backlog and none of
+them carried leg 125 forward into a slot — and this DM's own earlier turns compounded the
+gap by citing the *predecessor's* general caution ("check if you can find a ruling; if not,
+leave parked") without re-verifying that a ruling had, in fact, already landed by the time of
+this DM's first spawn. That was this DM's own error, corrected now: **leg 125 has been ready
+and legal since the ruling; nothing has changed that; dispatch it.**
+
+**Action items, disposed:**
+
+1. **Leg 125 — confirmed ready, dispatch.** No new draft needed; the leg is already fully
+   specified in the Queue below, unchanged since the ruling. Its own tripwire stands: if its
+   work drifts into floating a dissipation parameter against an existing certificate's
+   margin, that IS stage V as posed — stop and escalate.
+2. **New leg 161 (LSS)**, drafted below: reads Lushnikov-Silantyev-Siegel arXiv:2010.01201 at
+   full text (cited 4x in this repo via ALS/Xu as the reference branch for `a_c`, never read
+   at primary source) and checks whether its exact `a=1/2` solution accounts for the banked
+   `alpha(1/2)=3` finding (currently attributed to ALS eq. 49-50 per PHASE2_P2_NOTES J-3) and
+   the `a_c=0.6890665` boundary this repo's own instrument independently measured 0.7% off.
+3. **New leg 162 (CAPG)**, drafted below: tests the untried geometric-weight/compact-support
+   certificate corner (Chebyshev basis, per HTW arXiv:2603.25104's compact-support result for
+   `a=1`) against leg 126's declared-complete search-space audit and leg 58's `A21=0`
+   theorem — either it's a real corner leg 126 didn't enumerate, or a clean independent
+   confirmation that B's closure is broader than declared. No GA compute; any parameter
+   search inside the leg is a deterministic grid, the leg 46/59 precedent, not an
+   evolutionary search — the GA ban is untouched either way.
+4. **Wind down further adversarial-audit-family drafting — recorded as queue-shaping
+   guidance, not a retraction of anything already dispatched or landed.** This DM's own
+   128-series-derived refills already said the family's uncovered pool was "nearly empty"
+   before drafting 139/140, and the 142–149/150–160 batches have since closed nearly all of
+   what remained (nk_seminorm, viscous_novelty, energy_coercivity, literature_gates,
+   certificate_shapes, plus five repair legs for the family's own unrepaired findings).
+   Guidance for future refills: do not draft a NEW adversarial-audit-family leg on a
+   never-before-audited module unless one is flagged by name in a landed leg's own text (the
+   leg-76/128 precedent), the way 150–154 were. The reachable, still-genuinely-uncovered pool
+   is now essentially: `ga_search.py` (GA lane, banned compute, not auditable without running
+   what's banned) and the currently-unreachable red-test/parked modules. Nothing left
+   warrants a fresh draft on this DM's own read.
+5. **Re-frame (don't withdraw) the two-scale `a*` result — flagged, not drafted as a leg,
+   because part of it is outside this DM's or any leg's file scope.** The review's own
+   independent check is itself the finding to act on: published literature (arXiv:2603.25104)
+   states the two-scale scenario governs `a<=0`, while the banked `a*~0.5-0.55` survival
+   boundary was measured at `a>0` — a domain mismatch, not a wrong number. Two distinct
+   pieces: (a) `writeup/` and `PHASE2_P2_NOTES.md` scope-line language is in-repo and IS leg
+   territory — a leg can and should correct the domain caveat there, on the mechanical-
+   correction precedent (leg 65's `capabilities.py` annotation fix), since narrowing a scope
+   line to state the domain precisely is not a claim reversal; (b) the user's own
+   `MEMORY.md`-format personal memory file (`two-scale-kladder-result.md`, referenced in this
+   session's own system context) is OUTSIDE the repo and outside any leg's or this DM's
+   file access — recommend the orchestrator relay the corrected framing to the user directly
+   for that file, since neither a leg nor this DM can edit it. A dedicated re-framing leg for
+   piece (a) is a reasonable next-refill candidate once 161/162 land and inform exactly how
+   the caveat should read; not drafted this pass to avoid pre-writing its own conclusion.
+6. **Leg 58's publication-scoping bundle (one combined methodological note: exponent-sum
+   conservation law + discrete-ball trap + `A21=0` inequality + closure audit) — noted as
+   guidance, explicitly deferred, exactly as the coordinator suggested.** This is real
+   write-up work, contingent on how 161/162 land (a genuine LSS-explained coincidence or a
+   real untried CAP corner would both change what the combined note needs to say), so
+   drafting its leg now would risk presupposing an outcome neither 161 nor 162 has reached
+   yet. Revisit at the next refill once both report.
+
+**On difficulty and territory for 161/162 (checked against everything currently live):**
+161 is literature-only except for an append-only upgrade to `solver/literature_gates.py`'s
+existing LSS citation row (from secondary-source to primary-source-read) — no other row
+touched, disjoint from 145's read-only ledger audit and from 62/112/113's different papers.
+162 needs a NEW solver module (capabilities.py grepped first per the standing ban), disjoint
+from 127's `spectral_certificate.py`, 146's `certificate_shapes.py` (read-only reference,
+not edited), and every other live/reserve leg's territory.
 
 ---
 
@@ -4000,6 +4085,99 @@ specified in `plan_of_record.py`'s C-PILOT stage)?
 it (59's territory closed on landing). Touches no certificate term, no literature ledger, no
 target ledger, no GA/ga_search.py code path. Independent of 157/158/159 (literature, not
 fitness construction) and of 127/125 (different open questions entirely).
+```
+
+```
+### 161 — ROUTE-LSS: DOES LUSHNIKOV-SILANTYEV-SIEGEL arXiv:2010.01201 ACCOUNT FOR
+alpha(1/2)=3 AND THE a_c BOUNDARY? (user-review action item #2)
+**Thesis.** LSS arXiv:2010.01201 is cited four times in this repository, always secondhand —
+via ALS's and Xu's references to it as "the reference branch" for `a_c` — and never read at
+full text. Two separately-banked findings sit downstream of it without ever having checked
+the primary source: (i) `alpha(1/2)=3` (PHASE2_P2_NOTES J-3, currently attributed to
+integrating ALS eq. 49-50 directly, "cold, no shared grid, basis or code"); (ii)
+`a_c=0.6890665` (`solver/literature_gates.py`'s existing row, sourced via Xu Table 1 /
+ALS/LSS, with this repository's own instrument measured 0.7% off — "the worst of three
+sources," per PHASE2_P2_NOTES J-8). The review flags this as the cheapest, highest-value read
+on the board: if LSS's own exact `a=1/2` solution independently derives either or both
+numbers, that reclassifies two "independently confirmed, no shared code" coincidences into
+one shared-ancestor fact, which changes what any writeup should claim about their
+independence — a citation-depth correction in the shape of leg 65/112/113, not a new
+computation.
+**Gate.** Does LSS arXiv:2010.01201's own exact `a=1/2` solution (read at full text, not via
+ALS's or Xu's secondary citation) explicitly contain, derive, or trivially imply (a) the
+`alpha(1/2)=3` scaling exponent, and/or (b) the `a_c=0.6890665` boundary value, with
+hypotheses recorded verbatim?
+  yes -> Record the exact derivation and page/section reference for whichever number(s) LSS
+         accounts for directly. Upgrade `solver/literature_gates.py`'s existing LSS row from
+         secondary-source to primary-source-read (append-only edit to that one row). This
+         downgrades the "independently confirmed" framing for whichever finding(s) LSS
+         explains — flag for the leg-58-bundle writeup (action item #6) to reflect precisely,
+         do not silently reword any other file.
+  no  -> LSS's own text does not account for either number directly; both stay independently
+         confirmed as this repository's own re-derivations, strengthened rather than weakened
+         by having actually checked the primary alleged source and ruled it out. Bank the
+         ledger entry; upgrade the citation row's provenance note regardless (primary-source
+         read now, whatever it says).
+**Territory.** solver/literature_gates.py (append-only, LSS's existing row ONLY — no other
+               row touched), experiments/p2_route_lss_v1_lit.py,
+               writeup/data/p2_route_lss_v1_lit.json,
+               writeup/novelty/leg_161.md, experiments/journal/leg_161.md
+**Difficulty.** light
+**Independence.** Literature-only plus one append-only row edit. Disjoint from 145 (reads
+literature_gates.py, edits nothing) and from 62/112/113/157/158/159 (different papers,
+different questions). No solver-module compute.
+```
+
+```
+### 162 — ROUTE-CAPG: THE UNTRIED GEOMETRIC-WEIGHT / COMPACT-SUPPORT CAP CORNER, TESTED
+AGAINST LEG 126's AUDIT AND LEG 58's A21=0 THEOREM (user-review action item #3)
+**Thesis.** Every certificate corner this repository has killed (legs 49, 52, 53, 54, 56, 58,
+59, 111, and leg 126's completeness audit over all of them) worked in a compactified WHOLE-
+LINE representation with algebraic weights. HTW arXiv:2603.25104 proves compact support for
+the `a=1` (De Gregorio) profile with `c_omega/c_l > 0`, in a GLOBAL spectral (Chebyshev)
+basis on the finite interval its support occupies — a narrower, structurally different corner
+than "compactified whole line, algebraic weight," and the review's own independent check
+found no record of this repository ever having tried it. Two honest outcomes, both valuable:
+either (a) this is a real corner outside what leg 126 declared covered (1,686 configurations,
+zero uncovered, over the space/split/shape enumeration `certificate_shapes.py` supplies) —
+in which case leg 126's completeness claim needs a scope correction — or (b) building and
+testing it lands inside leg 58's `A21=0` theorem or leg 126's measured-battery coverage after
+all, which is a clean, independent strengthening of B's closure rather than a gap in it.
+Construction only, no dynamics: builds the compact-support/Chebyshev-basis certificate object
+explicitly per HTW's stated construction and measures its `Z_1` the same way leg 54's battery
+measured every other shape. **No GA compute under any outcome** — if the corner's free
+parameters (support radius, weight exponent) need a search, it is a deterministic grid over a
+pre-named range, the leg 46/59 precedent, never an evolutionary search; the GA ban is
+untouched regardless of this leg's outcome.
+**Gate.** (a) Is the compact-support/Chebyshev-basis corner already inside the
+space/split/shape enumeration leg 126 audited as complete (checked explicitly against
+`certificate_shapes.py`'s enumeration and leg 126's own JSON), and (b) when built and
+measured directly, does its `Z_1` fall under, at, or over 1?
+  yes, uncovered by 126 -> Name the exact enumeration gap (which of space/split/shape it
+         falls outside) and report the measured `Z_1`. If `Z_1 < 1` this is escalation #4 (a
+         banked completeness claim reversed) — push, park, do not merge, list under NEEDS
+         YOU. If `Z_1 >= 1` still, it closes on measurement, extending 126's declared
+         coverage rather than contradicting it — bank both the gap and the result.
+  yes, covered by 126, Z_1 >= 1 -> Clean independent confirmation; leg 126's completeness
+         claim is now cross-checked by direct construction, not enumeration alone. Bank it.
+  no (construction fails / degenerate) -> Report exactly which step of HTW's construction
+         does not transfer to this operator and why; bank as a characterized negative, same
+         discipline as every other dead corner in this file.
+**Territory.** solver/compact_cap_cheb.py (NEW, capabilities.py grepped first per the
+               standing ban), test_compact_cap_cheb.py (NEW),
+               experiments/p2_route_capg_v1_corner.py,
+               experiments/p2_route_capg_v1_corner_evidence.py,
+               writeup/data/p2_route_capg_v1_corner.json,
+               writeup/novelty/leg_162.md, experiments/journal/leg_162.md.
+               Reads (never edits) solver/certificate_shapes.py and leg 126's banked JSON to
+               classify coverage.
+**Difficulty.** heavy
+**Independence.** Sole owner of a brand-new module. Read-only overlap with
+`certificate_shapes.py` (146's territory, also read-only there) and leg 126's banked JSON
+(already landed, closed) is read-read on both counts, not a collision. Disjoint from
+127/NGX (mathematics on the `A21 != 0` class in the existing whole-line representation, not a
+new basis) and from 157/158/159/161 (literature, not construction). No GA compute under any
+outcome.
 ```
 
 ## Ranking rationale
