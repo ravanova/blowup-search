@@ -14,33 +14,28 @@ The gate leg 109 answered, verbatim:
    solver/reduced_certificate.py ever report internal self-consistency on a case that is
    not actually self-consistent?"
 
-Answered **YES**, on three independent sites. Leg 109 had NO patch authority under its own
-gate — its yes-branch reads "Report the exact failing case precisely; escalate, do not
-patch under this leg's own authority" — so `solver/reduced_certificate.py` is byte-
-identical to `origin/main` and the three gaps are OPEN. Gates 1, 2 and 5 below are
-therefore **CHARACTERIZATION** gates: they assert that the gap is open, at the measured
-magnitude, so the escalation is executable rather than a memory (lesson 68).
+Leg 109 answered **YES**, on three independent sites, with NO patch authority under its
+own gate ("escalate, do not patch"). **Leg 0 (bench repair) then applied the three fixes
+leg 109's journal named** (`experiments/journal/leg_109.md`, "Recommended repair"), and
+gates 1, 2 and 5 below have been converted from CHARACTERIZATION to **SOUNDNESS** gates,
+asserting the repaired property while keeping the pre-repair magnitude on the record in
+the docstrings and print output.
 
-  | gate | site | leg 109 measured |
-  |---|---|---|
-  | 1 | `rehearsal`'s hardcoded `verdict` | 1 distinct verdict string over 15 converged (a,K) cases whose Y_0 spans 10.1 orders of magnitude; 14 of 15 assert "machine level" where Y_0 > 1e-10 |
-  | 2 | `N2_finite` at p == 2 exactly | 4 of 4 poisoned states (all-NaN, all-inf, all-zero, garbage) certified `True` at a = 1/2, because `nan ** 0.0 == 1.0` |
-  | 3 | the three-cutoff ladder | 0 of 16 cases where it changed the answer away from `a <= 1/2`; every evaluated ratio is exactly 1.0 (lesson 90) |
-  | 4 | `z0_defect`'s residual side | reports the LEFT residual, 9.6x-278x LARGER than the right one — conservative, NOT corrupting |
-  | 5 | `step_adversary`'s `kind` dispatch | 6 of 6 unrecognised strings silently return the adversary; only exact `"single"` reaches the control |
-  | 6 | poisoned `b` away from p == 2 | 0 of 24 probes silently finite — the module propagates correctly everywhere else |
-  | 7 | degenerate `a` | 4 of 8 admitted by the constructor, 4 of 4 caught by `converged=False`, 0 emitted a verdict |
+  | gate | site | leg 109 measured (pre-repair) | now asserts (post-repair) |
+  |---|---|---|---|
+  | 1 | `rehearsal`'s hardcoded `verdict` | 1 distinct verdict string over 15 converged (a,K) cases whose Y_0 spans 10.1 orders of magnitude; 14 of 15 asserted "machine level" where Y_0 > 1e-10 | the verdict is computed from the measured Y_0/Z_0 against a real 1e-10 threshold: 15 distinct sentences, and each sentence's claim matches its own case |
+  | 2 | `N2_finite` at p == 2 exactly | 4 of 4 poisoned states (all-NaN, all-inf, all-zero, garbage) certified `True` at a = 1/2, because `nan ** 0.0 == 1.0` | `second_derivative_sup` refuses (reports NaN) whenever `e` is non-finite, so `N2_finite` is `False` on all-NaN/all-inf; all-zero and garbage remain `True` because that is mathematically correct (N''(e) = 2 for ANY finite e at p == 2, including 0, as the e -> 0 limit) — 2 of 4 certified, not 0 of 4, and the two that stay True are the two where True is the honest answer |
+  | 3 | the three-cutoff ladder | 0 of 16 cases where it changed the answer away from `a <= 1/2`; every evaluated ratio is exactly 1.0 (lesson 90) | unchanged — the ladder is still decorative; not part of this repair |
+  | 4 | `z0_defect`'s residual side | reports the LEFT residual, 9.6x-278x LARGER than the right one — conservative, NOT corrupting | unchanged — not part of this repair |
+  | 5 | `step_adversary`'s `kind` dispatch | 6 of 6 unrecognised strings silently return the adversary; only exact `"single"` reaches the control | 6 of 6 unrecognised strings now raise `ValueError`; only exact `"step"`/`"single"` are accepted |
+  | 6 | poisoned `b` away from p == 2 | 0 of 24 probes silently finite | unchanged — the module already propagated correctly here |
+  | 7 | degenerate `a` | 4 of 8 admitted by the constructor, 4 of 4 caught by `converged=False`, 0 emitted a verdict | unchanged — not part of this repair |
 
-**IF GATE 1, 2 OR 5 FAILS, THAT IS VERY LIKELY GOOD NEWS** — someone has repaired the
-gap. The correct response is to read leg 109's escalation
-(`experiments/journal/leg_109.md`, section "Recommended repair"), confirm the fix, and
-convert the characterization gate to a SOUNDNESS gate asserting the repaired property,
-keeping the pre-repair magnitude on the record. It must NOT be "fixed" by loosening a
-tolerance, and it must not be fixed by deleting the gate.
-
-Gates 3, 4, 6 and 7 assert properties that HOLD today. If one of those fails, the module
-has started absorbing bad input somewhere it previously flagged it, and the response is to
-fix the module.
+Gates 1, 2, 5 are SOUNDNESS gates now: if one of them fails, the repair has regressed —
+read `experiments/journal/leg_109.md`'s "Recommended repair" section before touching
+anything. Gates 3, 4, 6 and 7 assert properties that HOLD and were never part of this
+repair; if one of those fails, the module has started absorbing bad input somewhere it
+previously flagged it, and the response is to fix the module.
 
 Self-running, no pytest: `.venv/bin/python test_reduced_certificate_adversarial.py`.
 """
@@ -61,16 +56,15 @@ MACHINE_LEVEL = 1e-10
 
 
 def _n2_finite(rp, b):
-    """`rehearsal`'s own N2_finite expression, reproduced verbatim from line 220."""
+    """`rehearsal`'s own N2_finite expression, reproduced verbatim (post-repair)."""
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         npp = second_derivative_sup(rp, b)
     if not (rp.p >= 2.0):                 # Python short-circuits before the ratio
         return False, npp
-    try:
-        return bool(max(npp) / min(npp) < 1.01), npp
-    except ZeroDivisionError:
-        return "ZeroDivisionError", npp
+    if not np.all(np.isfinite(npp)) or min(npp) == 0.0:
+        return False, npp
+    return bool(max(npp) / min(npp) < 1.01), npp
 
 
 def _rehearse(a, k):
@@ -86,7 +80,7 @@ def test_clean_reference_selfcheck():
     """Every gate below is read against the module's own headline case; gate that first.
 
     This is also the POSITIVE CONTROL for gate 1: at a = 0.3, K = 96 the verdict sentence
-    is TRUE. Without this row, "14 of 15" would be indistinguishable from a broken build.
+    is TRUE (both before and after the repair -- this case never contradicted it).
     """
     print("\n[0] clean reference self-check")
     r = _rehearse(0.3, 96)
@@ -102,16 +96,21 @@ def test_clean_reference_selfcheck():
 
 
 # ---------------------------------------------------------------------------
-# 1. CHARACTERIZATION -- the verdict is a constant, not a measurement
+# 1. SOUNDNESS (post-repair) -- the verdict is a measurement, not a constant
 # ---------------------------------------------------------------------------
 def test_verdict_is_decoupled_from_the_numbers_it_asserts():
-    """`rehearsal` emits one hardcoded sentence for every input (leg 109, finding A).
+    """`rehearsal` used to emit one hardcoded sentence for every input (leg 109, finding
+    A), asserting "Y_0 is at machine level and Z_0 is roundoff" regardless of the
+    measured values -- lesson 90's shape, applied to a claim. Pre-repair magnitude kept
+    on the record: 15 converged (a, K) cases, 1 distinct verdict string, Y_0 spanning
+    10.10 orders of magnitude (1.23e-12 .. 1.55e-2), 14 of 15 contradicting the sentence.
 
-    The sentence asserts "Y_0 is at machine level and Z_0 is roundoff". Nothing in
-    `rehearsal` reads `Y0_interpolant_defect` or `Z0` before emitting it, so there is no
-    input for which it can come out differently — lesson 90's shape, applied to a claim.
+    Post-repair: the verdict is assembled from the measured Y0_interpolant_defect and Z0
+    against the same 1e-10 threshold the module's own docstring implies ("machine
+    level" / "roundoff"), so each case gets its own sentence and that sentence's Y_0/Z_0
+    claim must agree with the number reported beside it.
     """
-    print("\n[1] CHARACTERIZATION: the verdict sentence vs the numbers beside it")
+    print("\n[1] SOUNDNESS: the verdict sentence now tracks the numbers beside it")
     rows, verdicts = [], set()
     for a in (0.3, 0.5, 0.8, 1.0, 1.2):
         for k in (16, 32, 96):
@@ -119,58 +118,90 @@ def test_verdict_is_decoupled_from_the_numbers_it_asserts():
             if not r.get("converged"):
                 continue
             verdicts.add(r["verdict"])
-            rows.append((a, k, r["Y0_interpolant_defect"]))
-    y0s = [y for _, _, y in rows]
+            rows.append((a, k, r["Y0_interpolant_defect"], r["Z0"], r["verdict"]))
+    y0s = [y for _, _, y, _, _ in rows]
     false_rows = [t for t in rows if t[2] > MACHINE_LEVEL]
     worst = max(rows, key=lambda t: t[2])
     spread = np.log10(max(y0s) / min(y0s))
     print(f"    {len(rows)} converged cases, {len(verdicts)} distinct verdict string(s)")
     print(f"    Y_0 spans {min(y0s):.3e} .. {max(y0s):.3e}  ({spread:.2f} orders)")
-    print(f"    asserting 'machine level' where Y_0 > {MACHINE_LEVEL:g}: "
+    print(f"    Y_0 > {MACHINE_LEVEL:g} (should NOT read 'is at machine level'): "
           f"{len(false_rows)} of {len(rows)}")
     print(f"    worst: a={worst[0]}, K={worst[1]}, Y_0 = {worst[2]:.4e}")
-    assert len(verdicts) == 1, (
-        f"{len(verdicts)} distinct verdicts -- if this is now > 1 the verdict may have "
-        "been wired to the measurement; see the module docstring above")
-    assert "Y_0 is at machine level" in verdicts.pop()
-    assert len(false_rows) >= 14, len(false_rows)
-    assert spread > 9.0, spread
-    assert worst[2] > 1e-3, worst          # a=0.3, K=16 reaches 1.5e-2
-    print("[ok] CHARACTERIZED: one sentence, 10+ orders of magnitude beneath it")
+    # the fix is wired: at least as many distinct sentences as distinct Y_0/Z_0 pairs
+    assert len(verdicts) >= 14, (
+        f"only {len(verdicts)} distinct verdicts over {len(rows)} converged cases -- "
+        "the verdict may have regressed to a constant; see leg 109's journal")
+    assert spread > 9.0, spread            # the underlying spread is unchanged
+    assert worst[2] > 1e-3, worst          # a=0.3, K=16 still reaches 1.5e-2
+    # every sentence's claim must agree with its own case's numbers
+    n_checked = 0
+    for a, k, y0, z0, verdict in rows:
+        n_checked += 1
+        if y0 <= MACHINE_LEVEL:
+            assert "Y_0 is at machine level" in verdict, (a, k, y0, verdict)
+        else:
+            assert "Y_0 is NOT at machine level" in verdict, (a, k, y0, verdict)
+        if z0 <= MACHINE_LEVEL:
+            assert "Z_0 is roundoff" in verdict, (a, k, z0, verdict)
+        else:
+            assert "Z_0 is NOT roundoff" in verdict, (a, k, z0, verdict)
+    assert n_checked == len(rows)
+    print(f"    checked {n_checked} verdict sentences against their own Y_0/Z_0: all agree")
+    print("[ok] SOUNDNESS: the verdict is now a measurement of its own dict, "
+          f"not a constant ({len(false_rows)} of {len(rows)} cases correctly say NOT "
+          "at machine level)")
 
 
 # ---------------------------------------------------------------------------
-# 2. CHARACTERIZATION -- N2_finite certifies garbage at p == 2 exactly
+# 2. SOUNDNESS (post-repair) -- N2_finite refuses non-finite input at p == 2
 # ---------------------------------------------------------------------------
 def test_n2_finite_certifies_poisoned_states_at_a_one_half():
-    """`nan ** 0.0 == 1.0`, so at a = 1/2 the cutoff ladder is 2.0 for ANY b.
+    """`nan ** 0.0 == 1.0`, so pre-repair the cutoff ladder read 2.0 for ANY b at
+    a = 1/2 -- all-NaN, all-inf, all-zero and garbage were ALL certified `True`, 4 of 4.
 
-    POSITIVE CONTROL: the SAME poisoned vectors at a = 0.3 (p = 3.33), where the check
-    must refuse. The two code paths differ only in the exponent, so a control that comes
-    out differently is what makes the a = 1/2 row a finding.
+    Post-repair, `second_derivative_sup` requires `np.all(np.isfinite(e))` before
+    computing the power (leg 109's own recommended repair): all-NaN and all-inf now
+    report NaN cutoffs and `N2_finite = False`. all-zero and garbage stay `True`, and
+    that is the CORRECT answer, not a residual gap: N''(e) = p(p-1) e^{p-2} = 2 for
+    p == 2 and ANY finite e (including the e -> 0 limit at e = 0), so a finite input --
+    however unphysical -- genuinely has sup|N''| = 2. Only nan/inf are undefined, and
+    those are the two IEEE-754 exploits this repair closes.
+
+    POSITIVE CONTROL: the SAME poisoned vectors at a = 0.3 (p = 3.33), where the ratio
+    is not exactly 1.0 and the check must refuse everything but the finite garbage.
     """
-    print("\n[2] CHARACTERIZATION: N2_finite at p == 2 exactly")
-    assert np.nan ** 0.0 == 1.0, "the whole mechanism -- IEEE-754"
+    print("\n[2] SOUNDNESS: N2_finite at p == 2 exactly, post-repair")
+    assert np.nan ** 0.0 == 1.0, "the whole mechanism -- IEEE-754; unchanged, now guarded"
     k = 32
     poisons = {"all_nan": np.full(k, np.nan), "all_inf": np.full(k, np.inf),
                "all_zero": np.zeros(k),
                "garbage": np.random.default_rng(0).normal(size=k)}
     certified = {}
+    fin_by_name = {}
     for a in (0.5, 0.3):
         rp = ReducedProfile(a, K=k)
         n_true = 0
+        fin_by_name[a] = {}
         for name, b in poisons.items():
             fin, npp = _n2_finite(rp, b)
+            fin_by_name[a][name] = fin
             n_true += 1 if fin is True else 0
             print(f"    a={a} p={rp.p:.3f} {name:>8}: N2_finite={fin!s:>17} "
                   f"cutoffs={[f'{x:.4g}' for x in npp]}")
         certified[a] = n_true
-    print(f"    certified True: a=0.5 -> {certified[0.5]} of 4, "
+    print(f"    certified True: a=0.5 -> {certified[0.5]} of 4 (was 4 of 4 pre-repair), "
           f"a=0.3 -> {certified[0.3]} of 4")
-    assert certified[0.5] == 4, certified          # every poison certified
+    # the two genuinely undefined states must now be refused
+    assert fin_by_name[0.5]["all_nan"] is False, fin_by_name[0.5]
+    assert fin_by_name[0.5]["all_inf"] is False, fin_by_name[0.5]
+    # the two finite states are correctly True: N''(e) = 2 regardless of e's value
+    assert fin_by_name[0.5]["all_zero"] is True, fin_by_name[0.5]
+    assert fin_by_name[0.5]["garbage"] is True, fin_by_name[0.5]
+    assert certified[0.5] == 2, certified          # nan/inf refused; zero/garbage correct
     assert certified[0.3] == 1, certified          # only the finite garbage; control works
-    print("[ok] CHARACTERIZED: at a = 1/2 the check certifies an all-NaN state; "
-          "at a = 0.3 the same states are refused")
+    print("[ok] SOUNDNESS: at a = 1/2 all-NaN/all-inf are now refused (False); "
+          "all-zero/garbage stay True because that IS the correct value")
 
 
 # ---------------------------------------------------------------------------
@@ -238,27 +269,38 @@ def test_z0_reports_the_larger_residual():
 
 
 # ---------------------------------------------------------------------------
-# 5. CHARACTERIZATION -- the designated control is reachable only by exact string
+# 5. SOUNDNESS (post-repair) -- an unrecognised `kind` now raises, not falls through
 # ---------------------------------------------------------------------------
 def test_step_adversary_kind_falls_through_to_the_adversary():
-    """Any `kind` that is not exactly "single" returns the adversary, silently.
+    """Pre-repair, any `kind` that was not exactly "single" silently returned the
+    adversary -- 6 of 6 unrecognised strings, including the plausible typo "Single"
+    (a stray capital). The naive probe is the module's designated CONTROL (its
+    docstring: "kept as the CONTROL, because it reports a divergence that is purely the
+    quadrature"), and a control reachable only by exact string match is a control that a
+    typo switches off.
 
-    The naive probe is the module's designated CONTROL (its docstring: "kept as the
-    CONTROL, because it reports a divergence that is purely the quadrature"). A control
-    reachable only by exact string match is a control that a typo switches off.
+    Post-repair: `step_adversary` raises `ValueError` for any `kind` other than the two
+    recognised strings, so a typo is loud, not silent.
     """
-    print("\n[5] CHARACTERIZATION: step_adversary's kind dispatch")
+    print("\n[5] SOUNDNESS: step_adversary's kind dispatch now raises on typos")
     adversary = step_adversary(32, kind="step")
     control = step_adversary(32, kind="single")
     assert control != adversary, (control, adversary)   # the control is real
     unrecognised = ["typo", "", "STEP", "Single", "naive", None]
-    fell = [k for k in unrecognised if step_adversary(32, kind=k) == adversary]
+    raised = []
+    for k in unrecognised:
+        try:
+            step_adversary(32, kind=k)
+        except ValueError:
+            raised.append(k)
     print(f"    adversary(step) = {adversary:.6f}   control(single) = {control:.6f}")
-    print(f"    unrecognised kinds silently returning the adversary: "
-          f"{len(fell)} of {len(unrecognised)}  {fell}")
-    assert len(fell) == len(unrecognised), fell
-    print("[ok] CHARACTERIZED: 6 of 6 fall through; 'Single' (a capital) is not the "
-          "control")
+    print(f"    unrecognised kinds now raising ValueError: "
+          f"{len(raised)} of {len(unrecognised)}  {raised}")
+    assert len(raised) == len(unrecognised), (
+        f"only {len(raised)} of {len(unrecognised)} raised -- some unrecognised kind is "
+        f"still falling through silently: {[k for k in unrecognised if k not in raised]}")
+    print("[ok] SOUNDNESS: 6 of 6 unrecognised kinds (including 'Single', a stray "
+          "capital) now raise instead of silently returning the adversary")
 
 
 # ---------------------------------------------------------------------------
@@ -335,7 +377,8 @@ if __name__ == "__main__":
     test_step_adversary_kind_falls_through_to_the_adversary()
     test_poisoned_coefficients_propagate()
     test_degenerate_a_never_emits_a_verdict()
-    print("\nAll leg-109 adversarial gates passed: 4 SOUNDNESS gates hold, and 3 "
-          "CHARACTERIZATION gates (1, 2, 5) confirm the escalated gaps are still open. "
-          "If a characterization gate fails, read experiments/journal/leg_109.md before "
-          "touching anything.")
+    print("\nAll leg-109 adversarial gates passed: 7 SOUNDNESS gates hold -- gates 1, 2 "
+          "and 5 now confirm the bench repair (leg 109's three named fixes) closed the "
+          "escalated gaps, and gates 3, 4, 6, 7 confirm nothing else regressed. If a "
+          "gate fails, read experiments/journal/leg_109.md's 'Recommended repair' "
+          "before touching anything.")
