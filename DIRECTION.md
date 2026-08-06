@@ -45,7 +45,9 @@ refill adds **96–99**, a ninth refill adds **100–105**, and this tenth refil
 An eleventh refresh adds the **110–124** series, the user-directed promotion adds **125**, the
 NG ruling of 2026-08-06 adds **126–127**, and the twelfth refill (the reserve-drain refill of
 2026-08-06, drafted concurrently with the NG ruling and rebased on top of it) adds **128–141**.
-**Next fresh leg number for any future candidate is 142.**
+A thirteenth refill, drafted after leg 126's gate landed NO and exhausted the committed
+sequence (see the "leg 126 has landed" Status paragraph below), adds **142–149**.
+**Next fresh leg number for any future candidate is 150.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -593,6 +595,128 @@ on any other leg in it or on any undrafted leg; every gate can answer either way
 leg's work; territory disjointness is checked explicitly in each entry (none touches
 `spectral_certificate.py`, `target_selection.py`, the red-test modules, or anything 126/BX
 reads for its audit — 126 owns no solver module, so no collision is possible there).
+
+**DM re-anchor, 2026-08-06 — fresh DM spawn, all ten slots re-dispatched from a vacant board.**
+The prior DM session's live agent handles were lost when its container was reclaimed; its
+durable work (this file, and everything merged to `main`) survives intact and nothing below
+revises any finding. This paragraph is the current, authoritative account of live assignments
+and supersedes the 110-series table and its LEG-J flex note above for slot-occupancy purposes
+(the 128-series reserve-drain block above it is still the authoritative source for the
+individual leg specs and dispatch-order reasoning; only *who currently holds which slot* is
+refreshed here).
+
+Ground truth re-verified against `plan_of_record.py` and `git log`, not against this file's own
+prose: stages M, PORT, V, C-PILOT, L1, T, TC, MM, NG are DONE; **stage B is NEXT**. Legs with
+commits already on `main` include 58, 62, 79, 89, 92, 99, **105**, 107, 116, 120, 123, 60 (PQ,
+landed with corrections, not an open escalation), plus the full 1–57 backlog. Legs 125–141 have
+**zero commits on main** — all fully specified in the queue above, none previously dispatched
+under this incarnation of the DM. Leg 105 (ICB) landing unblocks leg 128 (NKR), which was gated
+on it. The `bench/fix-first-integral-support-extrapolation` repair has merged (commits
+`9c08287`/`aecafe6`), which technically unblocks leg 135 (FIB) — but leg 135 is deliberately
+held in reserve regardless this round, alongside leg 129 (SUR, still genuinely blocked on leg
+133/BOB, which has not landed). Leg 63 (M2, escalation #1) stays parked; leg 125 (M2P)
+presupposes a user ruling on it that has not been given and is **not dispatched**.
+
+**Fresh ten-slot dispatch, all slots filled from the undispatched 126–141 backlog — no slot is
+carried over from any earlier table, since none of the prior session's agents are live to
+carry over.**
+
+| Slot | Leg | Route | Critical path? | Difficulty | Branch | Gate (short form) |
+|---|---|---|---|---|---|---|
+| LEG-A | 126 | **BX** — stage B, answered from the banked record (closure audit) | **YES** (stage `B`, `NEXT`) | standard | `leg/bx-v1` | Does any admissible, ban-respecting corner of stage B's declared search space remain uncovered by the banked record (legs 49,52,53,54,56,58,59,111)? |
+| LEG-B | 127 | **NGX** — the general class A21 != 0, proof or counterexample | no | heavy | `leg/ngx-v1` | Can the no-go be decided on the full bounded class — proof for every bounded A, or an explicit admissible A21 != 0 counterexample with Z_1 < 1? |
+| LEG-C | 128 | **NKR** — shared-guard repair for the Y0/Z0/Z1 fabrication-acceptance gap (nk_bounds.py + siblings) | no | standard | `leg/nkr-v1` | Do all 21 false-closing cases in leg 116's battery now reject, with port_certification.py / interval_certificate.py bit-identical on clean inputs? |
+| LEG-D | 130 | **HPR** — repair the one unrepaired bound-direction violation, hilbert_pointwise.py | no | standard | `leg/hpr-v1` | Do both of leg 106's failing configurations now dominate the true \|H(h)\|, with the module bit-identical elsewhere? |
+| LEG-E | 133 | **BOB** — post-repair regression check, boussinesq.py | no | standard | `leg/bob-v1` | Does the repaired module pass leg 89's full battery and reproduce the banked n=32 results bit-identically, independently confirmed? |
+| LEG-F | 131 | **HNB** — post-repair regression check, holder_norms.py | no | standard | `leg/hnb-v1` | Does the repaired module reject leg 100's full 6-mechanism battery and reproduce clean calls bit-identically, independently confirmed? |
+| LEG-G | 132 | **OLB** — post-repair regression check, op_lower.py | no | standard | `leg/olb-v1` | Does the repaired module return a true lower bound on all 209 of leg 101's cases and reproduce the 307.878-decade headroom, independently confirmed? |
+| LEG-H | 134 | **FGB** — post-repair regression check, fractional_gclm.py | no | standard | `leg/fgb-v1` | Does the repaired module reject every s<0/nu<0 case in leg 91's battery and reproduce the banked s_c bit-identically? |
+| LEG-I | 141 | **WEL** — is leg 111's zero-width weighted-energy window published? | no | light | `leg/wel-v1` | Does any published work state, imply, or contain leg 111's gamma-threshold coincidence for CLM/gCLM weighted-energy coercivity? |
+| LEG-J | 136 | **MF2** — the five divergent trajectories gate 11 still misses | no | standard | `leg/mf2-v1` | Does at least one pre-named second criterion flag all 5 remaining divergent cases with zero false positives across the full battery? |
+
+**Territory-overlap re-check for this dispatch (nine chosen plus 126).** Modules touched:
+`solver/spectral_certificate.py`(127, sole owner post-58-merge); `solver/certificate_guards.py`
+(128, NEW) + `solver/nk_bounds.py`(128) + `solver/port_certification.py`/
+`solver/interval_certificate.py`(128, wiring-only); `solver/hilbert_pointwise.py`(130, sole
+owner); `solver/boussinesq.py`(133, read-only regression check); `solver/holder_norms.py`(131,
+read-only); `solver/op_lower.py`(132, read-only); `solver/fractional_gclm.py`(134, read-only);
+none(141, literature-only); `solver/marginal_flow.py`(136, read-only). 126 (BX) owns no solver
+module — reads banked JSONs and landed modules read-only. All distinct — **no collision.**
+`writeup/data` JSON names are all distinct per each entry's own Territory field above (checked
+directly in the queue entries) — **no collision.**
+
+**Reserve queue: 6 undispatched legs (129, 135, 137, 138, 139, 140).** 129 (SUR) is genuinely
+blocked until 133 (BOB, live this round in LEG-E) lands. 135 (FIB) is technically unblocked
+(its repair merged) but deliberately held back this round rather than bumping a live slot —
+next in line the moment a slot frees. 137 (JR3), 138 (IX3), 139 (DGA), 140 (NFA) are
+immediately dispatchable cadence/audit legs, promote in that order without re-ranking unless a
+gate answer changes the picture. This count (6) sits inside the 4–6 target band, so no new
+candidates are drafted this pass.
+
+**DM update, 2026-08-06 — leg 126 (BX) has landed, gate NO, and the committed sequence is
+EXHAUSTED. There is currently NO critical-path leg.** Stage B's full declared search space
+(1,686 configurations: 144 by theorem, 1,032 structurally, 510 by measurement) is covered with
+zero uncovered corners; even a perfect search over the residual headroom leaves Z₁ >= 6.0424,
+6.04x short of closing. Per leg 126's own pre-committed no-branch, this is escalation #1 for
+the user, not a DM call — the orchestrator has correctly NOT touched `plan_of_record.py` (doing
+so with no replacement `NEXT` stage would violate `test_plan_of_record.py`'s "exactly one
+`NEXT`" invariant and break the merge gate repo-wide) and has written it up in `PROGRESS.md`'s
+`⚠ NEEDS YOU`, linked alongside the still-open leg 63/125 (M2) escalation and the exit-criterion
+question. **This DM's recommendation, per the mandate to choose the work when the plan leaves
+the next leg genuinely unclear: no slot claims critical-path status until the user rules.**
+LEG-A's designation as "critical path" is retired for now — not reassigned to any other stage,
+since none is committed — and every currently live slot is, and should stay, pure exploration
+until the user's ruling reinstates a `NEXT` stage (most likely candidate per Open question #3:
+the gamma=2 dissipative gCLM route, contingent on leg 125, itself contingent on the same
+ruling — so nothing is drafted here that presupposes it, per this file's standing discipline).
+Leg 127 (NGX) is confirmed independent of all of this and needs no action — it is mathematics
+on the A21 != 0 class, not a claim on stage B or the plan's `NEXT` slot, and stays live.
+
+The orchestrator reports five reserve legs (135/FIB, 137/JR3, 138/IX3, 139/DGA, 140/NFA)
+promoted to fill five vacated slots this cycle, beyond leg 126's own. Only two outcomes are
+confirmed to this DM directly: **126 landed (gate NO, as above)** and **127 (NGX) is confirmed
+still live**. The specific mapping of which four of the other eight originally-dispatched legs
+(128, 130, 131, 132, 133, 134, 136, 141) landed/closed versus remain live under their original
+slots is not stated in the coordinator's message; per this file's standing practice when a
+slot-letter mapping is reported only in aggregate (see the 71/CAP precedent above), this file
+defers to the orchestrator's live tracking for the exact ten-slot letter assignment and will
+reconcile it explicitly on the next refresh. What is fixed regardless of that mapping: none of
+128/130/131/132/133/134/136/141/135/137/138/139/140 claims critical-path status — all ten are,
+and stay, pure exploration — and the territory-overlap check already run for each of these
+entries (in their own Territory/Independence fields, and in the two dispatch tables above)
+holds independent of which specific slot letter each currently occupies.
+
+**Reserve queue after this cycle's five promotions: 1 undispatched leg (129, SUR — still
+genuinely blocked until leg 133/BOB lands).** This is below the §3a watermark, so eight new
+fully-specified candidates (142–149) are drafted below, in the Queue, following the same
+audit-family and post-repair-regression patterns that have had a real hit rate this run:
+
+- **142 (NSA)** and **143 (VNA)** continue the adversarial-audit family onto two of the last
+  reachable, never-audited modules (`nk_seminorm.py`, `viscous_novelty.py`) — the family is
+  20+ legs deep at roughly a 50% hit rate and these are two of the genuinely few reachable
+  modules still uncovered per the 128-series refill's own inventory.
+- **144 (ECA)** audits `energy_coercivity.py`, leg 111's brand-new module (landed this run,
+  never adversarially tested) — the same "new module gets its first adversarial pass"
+  precedent as every other audit-family leg.
+- **145 (LGA)** and **146 (CSA)** become dispatchable now that leg 62 (CP) has landed and
+  cleared `literature_gates.py`/`certificate_shapes.py` (both were off-limits ledger modules
+  while 62 was live; both are confirmed landed per the ground-truth git check this DM ran on
+  spawning) — genuinely new territory for the audit family, not a re-tread.
+- **147 (NKB)** is the close-the-loop regression leg `nk_bounds.py` will need the moment leg
+  128 (NKR) lands, per the 86/87/94/103/104/105/131/132/133/134 pattern — drafted now, blocked
+  until 128 merges, so it is ready immediately rather than requiring another refill.
+- **148 (SUB)** is the equivalent close-the-loop regression leg for `spectral_utils.py` and
+  `boussinesq.py`'s dealias fix, needed the moment leg 129 (SUR) lands — double-blocked (129
+  itself is blocked on 133/BOB), drafted now for the same readiness reason.
+- **149 (PGF)** is a light hygiene leg: a freshness/self-consistency audit of `PROGRESS.md`'s
+  `⚠ NEEDS YOU` escalation ledger itself, newly load-bearing now that three linked escalations
+  (leg 126's stage-B exhaustion, leg 63/125's M2 ruling, and the exit-criterion question) sit
+  there together for the first time — the same "does the ledger say what actually happened"
+  question legs 68/72/102/108/137/138 have asked of every other freshness surface, now asked
+  of the one surface the user reads first.
+
+None of the eight presupposes any pending user ruling; none touches `plan_of_record.py`,
+`solver/target_selection.py` (leg 63's parked territory), or either parked branch.
 
 ---
 
@@ -3183,6 +3307,223 @@ papers and questions (those concern the ell-1/radii-polynomial lane; this is the
 weighted-energy lane's novelty) and from 127/NGX (that is mathematics on the A21 != 0
 class, not literature on the energy realization). Does NOT edit solver/literature_gates.py.
 Immediately dispatchable.
+```
+
+```
+### 142 — ROUTE-NSA: ADVERSARIAL AUDIT OF nk_seminorm.py (RESERVE)
+**Thesis.** One of the last reachable, never-audited modules per the 128-series inventory
+(decay_grading.py and nk_fourier.py, its siblings in that inventory, are already dispatched as
+139/DGA and 140/NFA). `nk_seminorm.py` computes seminorm bounds feeding the same certifying
+pipeline that legs 79/98/116 found the Y0/Z0/Z1 fabrication-acceptance gap in three times
+running (now under shared-guard repair as leg 128). Run the standard adversarial battery:
+NaN/Inf input, degenerate/zero-measure domains, boundary-of-validity parameters, and a planted
+wrong-value pass-through, per the pattern that has found a real defect in roughly half of the
+prior ~20 audits.
+**Gate.** Under adversarial and degenerate inputs, does `nk_seminorm.py` ever silently return
+a wrong seminorm value (accept NaN/Inf, mishandle a degenerate domain, or pass a planted wrong
+value through unflagged) rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; do not patch under this leg's own authority —
+         flag for a repair leg on the leg-76/128 precedent if it is claim-adjacent.
+  no  -> Bank the battery as the module's permanent regression suite; record in
+         capabilities.py (append-only) that the module has passed adversarial audit.
+**Territory.** test_nk_seminorm_adversarial.py, experiments/p2_route_nsa_v1_adversarial.py,
+               writeup/data/p2_route_nsa_v1_adversarial.json,
+               writeup/novelty/leg_142.md, experiments/journal/leg_142.md
+**Difficulty.** standard
+**Independence.** Reads solver/nk_seminorm.py; edits nothing under either outcome. Not
+touched by any live or reserve leg. Immediately dispatchable.
+```
+
+```
+### 143 — ROUTE-VNA: ADVERSARIAL AUDIT OF viscous_novelty.py (RESERVE)
+**Thesis.** The other genuinely-uncovered, reachable module per the same 128-series
+inventory. `viscous_novelty.py` is read by the EXT-family freshness legs (90/93/123) as part
+of their novelty-scoping claims but has itself never had an adversarial battery run against
+it. Same standard battery as every other audit-family leg: NaN/Inf, degenerate/zero-measure
+input, boundary parameters, planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs, does `viscous_novelty.py` ever silently
+return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; escalate for a repair leg if claim-adjacent,
+         do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py.
+**Territory.** test_viscous_novelty_adversarial.py,
+               experiments/p2_route_vna_v1_adversarial.py,
+               writeup/data/p2_route_vna_v1_adversarial.json,
+               writeup/novelty/leg_143.md, experiments/journal/leg_143.md
+**Difficulty.** standard
+**Independence.** Reads solver/viscous_novelty.py; edits nothing under either outcome. Not
+touched by any live or reserve leg. Immediately dispatchable.
+```
+
+```
+### 144 — ROUTE-ECA: ADVERSARIAL AUDIT OF energy_coercivity.py (RESERVE)
+**Thesis.** `energy_coercivity.py` is leg 111's brand-new module (the third-realization
+weighted-energy coercivity scoping, landed this run) and has never had an adversarial pass —
+every other module the audit family has covered got one shortly after landing; this one is
+overdue precisely because it landed mid-cycle during the reserve-drain refill. Standard
+battery: NaN/Inf input, degenerate weight classes, boundary-of-admissibility parameters
+(gamma near the 3-gamma threshold leg 111 itself measured), and a planted wrong-coercivity
+pass-through.
+**Gate.** Under adversarial and degenerate inputs (including gamma at or near the measured
+zero-width-window threshold), does `energy_coercivity.py` ever silently return a wrong
+coercivity-gap value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude. This module underwrites leg 111's
+         zero-width-window finding (feeding directly into leg 141/WEL's publication
+         scoping) — escalate rather than patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. Independently strengthens leg 111's finding.
+**Territory.** test_energy_coercivity_adversarial.py,
+               experiments/p2_route_eca_v1_adversarial.py,
+               writeup/data/p2_route_eca_v1_adversarial.json,
+               writeup/novelty/leg_144.md, experiments/journal/leg_144.md
+**Difficulty.** standard
+**Independence.** Reads solver/energy_coercivity.py; edits nothing under either outcome.
+Module unowned — leg 111 (WE) landed and closed. Read-only overlap with 141 (WEL, literature
+only, no code) is read-read on the same finding, not a collision. Immediately dispatchable.
+```
+
+```
+### 145 — ROUTE-LGA: ADVERSARIAL AUDIT OF literature_gates.py's LEDGER SELF-CONSISTENCY
+(RESERVE)
+**Thesis.** `literature_gates.py` was off-limits to the audit family while leg 62 (CP) was
+live (62 owns it); leg 62 has since landed and the module is cleared, the same
+free-again pattern as `weight_search.py` and `bordered_hl.py` after their own owning legs
+closed. The ledger backs every literature-lane leg's novelty claim (55, 57, 65, 90, 93, 112,
+113, 123, 141 and counting) — a defect here would not corrupt a computation, but could
+silently misreport what a citation actually says. Audit for self-consistency rather than the
+standard numerical battery: does every entry's stored claim match what its own cited
+paper/section says, and does every entry cite a paper actually checked (no phantom
+citations)?
+**Gate.** Does every row in literature_gates.py's ledger (a) cite a real, checked source, and
+(b) accurately state that source's claim, with no drift between the stored summary and the
+paper's own text?
+  yes -> Bank the ledger's clean bill as the permanent audit record; record the pass in
+         capabilities.py.
+  no  -> Name the exact row, the drift, and its blast radius (which downstream legs' novelty
+         claims cite it). Escalate — a ledger correction is claim-adjacent and not this leg's
+         to patch unilaterally if any downstream finding's wording would need to change.
+**Territory.** test_literature_gates_selfconsistency.py,
+               experiments/p2_route_lga_v1_ledger.py,
+               writeup/data/p2_route_lga_v1_ledger.json,
+               writeup/novelty/leg_145.md, experiments/journal/leg_145.md
+**Difficulty.** standard
+**Independence.** Reads solver/literature_gates.py; edits nothing under either outcome.
+Module is cleared and free — leg 62 (CP) landed and closed. Not touched by any live or
+reserve leg. Immediately dispatchable.
+```
+
+```
+### 146 — ROUTE-CSA: ADVERSARIAL AUDIT OF certificate_shapes.py (RESERVE)
+**Thesis.** `certificate_shapes.py` is leg 62's other owned module, likewise cleared and free
+now that 62 has landed. It supplies the shape/class enumeration that leg 54's battery and leg
+58's theorem both range over (the exact space leg 126/BX's closure audit just certified as
+fully covered) — a silent enumeration bug here would be the one thing that could put a hole in
+126's own "1,686 configurations, zero uncovered" count without 126 itself detecting it, since
+126 reads the enumeration as given. Standard adversarial battery plus an explicit completeness
+check: does the enumerated shape/class list match what legs 54/58/126 each assumed it to be.
+**Gate.** Under adversarial input (malformed shape descriptors, boundary class parameters,
+degenerate splits) does `certificate_shapes.py` ever silently return a wrong or incomplete
+enumeration, and does its enumerated set match what legs 54/58/126 each read from it?
+  yes -> Name the exact mechanism. If the enumeration itself is short or wrong, this directly
+         threatens leg 126's completeness claim — escalate immediately as a priority finding,
+         do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record in capabilities.py, and
+         note explicitly that leg 126's completeness count is independently corroborated.
+**Territory.** test_certificate_shapes_adversarial.py,
+               experiments/p2_route_csa_v1_adversarial.py,
+               writeup/data/p2_route_csa_v1_adversarial.json,
+               writeup/novelty/leg_146.md, experiments/journal/leg_146.md
+**Difficulty.** standard
+**Independence.** Reads solver/certificate_shapes.py; edits nothing under either outcome.
+Module is cleared and free — leg 62 (CP) landed and closed. Read-only overlap with 126/BX's
+own read-set is read-read, not a collision (126 has already landed regardless). Immediately
+dispatchable.
+```
+
+```
+### 147 — ROUTE-NKB: POST-REPAIR REGRESSION CHECK, nk_bounds.py (RESERVE — NOT dispatchable
+until leg 128/NKR lands)
+**Thesis.** Leg 128 (NKR) is repairing the Y0/Z0/Z1 fabrication-acceptance gap across
+nk_bounds.py and its two already-repaired siblings via one shared guard. Per the
+86/87/94/103/104/105/131/132/133/134 pattern, every repair in this repository gets an
+independent close-the-loop regression check rather than resting on its own self-report —
+`nk_bounds.py` is the one module in the 128 repair that has not previously had a postrepair
+leg drafted for it (its siblings' postrepair legs, 86 and 105, already exist and landed).
+**Gate.** Post-repair, does solver/nk_bounds.py (a) reject every one of leg 116's 21
+false-closing cases in an independent re-run, with every GAP-PIN inverted and every HOLDS
+gate still passing, and (b) reproduce every previously-validated clean-call result
+bit-identically, including its capabilities.py validated line?
+  yes -> Repair confirmed solid and non-regressive by an independent run. Bank leg 116's
+         battery as a permanent regression suite for this module specifically.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate
+         as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_nk_bounds_postrepair.py, experiments/p2_route_nkb_v1_postrepair.py,
+               writeup/data/p2_route_nkb_v1_postrepair.json,
+               writeup/novelty/leg_147.md, experiments/journal/leg_147.md
+**Difficulty.** standard
+**Independence.** Reads solver/nk_bounds.py; edits nothing under either outcome. **NOT
+dispatchable until leg 128 (NKR) lands** — drafted now so it is ready immediately after, same
+discipline as legs 95/103/104/105/131–135.
+```
+
+```
+### 148 — ROUTE-SUB: POST-REPAIR REGRESSION CHECK, spectral_utils.py + boussinesq.py DEALIAS
+FIX (RESERVE — NOT dispatchable until leg 129/SUR lands, which is itself blocked until leg
+133/BOB lands)
+**Thesis.** Leg 129 (SUR) is repairing the shared `<= n/3` dealias off-by-one in both
+`spectral_utils.py`'s `dealias_mask` and `boussinesq.py`'s `dealias_mask2d`, plus leg 120's
+five silent-absorption defects, inverting the defect-encoding assertion in
+test_spectral_utils_dedicated.py in the same commit. Same close-the-loop discipline as every
+other repair this run: an independent re-run of leg 120's full original battery against the
+repaired modules, not the repair's own bundled report.
+**Gate.** Post-repair, do `spectral_utils.py` and `boussinesq.py` (a) both use the strict
+(k < n/3) dealias cut, bit-identical at every grid size in the repository's declared set with
+all 107 banked energy_balance_residual records reproducing exactly, (b) show energy_
+production's 3|n error fall from 1.66e-01 to the 2.5e-14 class independently, and (c) have all
+five absorption-defect PINs inverted with every HOLDS gate passing?
+  yes -> Repair confirmed solid and non-regressive by an independent run. Bank leg 120's
+         battery as a permanent regression suite for both modules.
+  no  -> An incomplete fix or a repair regression. Report the exact value precisely; escalate
+         as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_spectral_utils_postrepair.py, test_boussinesq_dealias_postrepair.py,
+               experiments/p2_route_sub_v1_postrepair.py,
+               writeup/data/p2_route_sub_v1_postrepair.json,
+               writeup/novelty/leg_148.md, experiments/journal/leg_148.md
+**Difficulty.** standard
+**Independence.** Reads solver/spectral_utils.py and solver/boussinesq.py; edits nothing
+under either outcome. **NOT dispatchable until leg 129 (SUR) lands** — and 129 is itself
+blocked until leg 133 (BOB) lands, so this is a double-blocked deep-reserve draft, ready the
+moment its chain clears.
+```
+
+```
+### 149 — ROUTE-PGF: FRESHNESS/SELF-CONSISTENCY AUDIT OF PROGRESS.md's ⚠ NEEDS YOU LEDGER
+(RESERVE)
+**Thesis.** `PROGRESS.md`'s `⚠ NEEDS YOU` section is the one surface the user reads first, and
+it is now carrying three linked open items at once for the first time this run (leg 126's
+stage-B exhaustion, leg 63/125's M2 ruling, and the exit-criterion question) — exactly the
+"high throughput, per-item drift" condition legs 68/72/102/108/137/138 have each found real
+gaps under on their own freshness surfaces. Light hygiene: does every parked branch, every
+escalation, and every open direction question actually named in this file's own "Open
+direction questions for the user" section and Status have a corresponding, accurate entry in
+PROGRESS.md, and vice versa (no orphaned entry on either side)?
+**Gate.** Does every escalation/parked-branch/open-question item in DIRECTION.md's Status and
+"Open direction questions" sections have an accurate, current PROGRESS.md `⚠ NEEDS YOU` entry,
+and does every PROGRESS.md `⚠ NEEDS YOU` entry correspond to something actually live in
+DIRECTION.md (no stale entry left behind after a ruling lands)?
+  yes -> Bank the dated completeness record; no drift between the two ledgers.
+  no  -> Report the exact missing or stale entry per item (the count is the finding, per the
+         JR-family precedent); create nothing on another leg's or the user's behalf; escalate
+         only if the gap concerns a parked escalation, not general hygiene.
+**Territory.** experiments/p2_route_pgf_v1_ledger_audit.py,
+               writeup/data/p2_route_pgf_v1_ledger_audit.json,
+               writeup/novelty/leg_149.md, experiments/journal/leg_149.md
+**Difficulty.** light
+**Independence.** Reads PROGRESS.md and DIRECTION.md only; no solver module; edits neither
+file under either outcome (reports findings for the DM/orchestrator to act on, same
+discipline as the JR/IX freshness family). Not touched by any live or reserve leg. Immediately
+dispatchable.
 ```
 
 ## Ranking rationale
