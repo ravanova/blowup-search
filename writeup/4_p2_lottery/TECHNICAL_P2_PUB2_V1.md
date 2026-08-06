@@ -197,15 +197,24 @@ three test data.
 
 | | `ℓ¹_w` (§2) | origin-`H²` (§3) |
 |---|---|---|
-| `σ_min` | → 0 like `M^{−(1−s)}`; **0.9925 / 0.6985 / 0.3202** at `s = 0 / 0.3 / 0.7` | bounded away from 0: lower witness **≥ 0.71465**, from `‖u‖_X/‖f‖_X` = 1.3993 / 1.2680 / 1.3769 |
+| `σ_min` | → 0 like `M^{−(1−s)}`; **0.9925 / 0.6985 / 0.3202** at `s = 0 / 0.3 / 0.7` | does **not** go to 0: measured **0.0908** (leg 176, §3.5), flat to **0.139 %** over a 16-fold truncation range. Leg 163's three data `‖u‖_X/‖f‖_X` = 1.3993 / 1.2680 / 1.3769 give only `σ_min ≤ 0.71465` — an **upper** bound, see the note below |
 | truncation dependence | none available — `σ_min` has no truncation-independent value at all | ratio spread **1.444e−04** across four added decades of window (`n_quad` 600→1400, window `1e−4…1e+4` → `1e−6…1e+6`) |
 | consequence for `Z₁` | `Z₁ ≥ 1` for **every** bounded `A` | no such floor; the exact inverse is in closed form |
 | what bordering does | **nothing** — bordered and unbordered `σ_min` agree to **5.7e−15** | **everything** — the residue at `z = 0` *is* the border column |
 | block coupling of the split | `K/2` for every choice | **exactly zero** by construction |
 
-*(The lower witness is quoted as **0.71465**; the producing leg's journal rounds it to 0.7147,
-which its own data does not quite support. The weaker true value is used throughout. See the
-provenance log.)*
+*(**Provenance of the two numbers, and why they were never in conflict.** `0.71465` is exactly
+`1/1.3993`, the reciprocal of leg 163's own largest sampled ratio, rounded up in the fifth decimal
+(`1/1.3993 = 0.7146430`). Its producing leg wrote it as a **lower** witness `σ_min ≥ 0.7147`; that
+inequality is **inverted**. With `f = L u`, each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, so a
+finite family of sampled ratios bounds the infimum **only from above** — a sample can miss the
+worst direction and here it did, by a lot: leg 163's best ratio reached **12.71 %** of the true
+`‖R‖_X = 11.0127`, and leg 176's own four-datum re-run of the same construction reached only
+**7.88 %** of it. Once the sign is read correctly the two legs agree: `0.0908 ≤ 0.71465`. Under the
+erroneous `≥` reading they would not even be self-consistent, since the reciprocal of leg 176's
+re-run family is `1.1519`, which cannot also be a lower bound on the same quantity. **`0.0908` is
+the figure used throughout §3–§5; `0.71465` is retained here only as the (true, and very loose)
+upper bound leg 163's data actually establish.** See §3.5.)*
 
 ### 3.3 The ceiling, stated at full strength — this is the half that matters
 
@@ -326,16 +335,29 @@ useful output and the reason both numbers are reported with neither standing for
 **This note adopts that framing and adds nothing to it**: no claim is made here that some
 *other*, non-block-diagonal `A` closes it — that was not tested, by leg 176 or by anyone.
 
-**One correction this construction makes to §3.2's and §4.5's witness, flagged not silently
-applied.** The value `σ_min ≥ 0.71465` quoted in §3.2, §4.5 and §5(3) is **leg 163's three-datum
-witness**, and leg 176 states plainly that it was **optimistic by 7.9×**: *"That is a witness, not
-a bound. The measured value is 0.0908."* Reproducing leg 163's own quantity from the closed form
-gives 0.868155 over four data while the operator norm is 11.0 — i.e. **random low-mode data does
-not find the worst direction.** Those three call-sites lie outside the territory of the leg that
-folded this point in and are **left as banked**; a reader should take **0.0908** as the measured
-figure and `≥ 0.71465` as the superseded witness wherever the two appear together. *The direction
-of the correction does not change any conclusion in §3–§5: `σ_min` is still bounded away from zero
-and still truncation-independent, which is the only property those sections use it for.*
+**One correction this construction makes to §3.2's, §4.5's and §5(3)'s witness — now applied at
+all three sites, and it turns out to be a sign, not a magnitude.** Earlier drafts quoted
+`σ_min ≥ 0.71465` in §3.2, §4.5 and §5(3). That is **leg 163's three-datum witness**, and leg 176
+states plainly that it was **optimistic by 7.9×**: *"That is a witness, not a bound. The measured
+value is 0.0908."* Reproducing leg 163's own quantity from the closed form gives 0.868155 over four
+data while the operator norm is 11.0 — i.e. **random low-mode data does not find the worst
+direction.** Tracing it further: `0.71465` is exactly `1/1.3993`, the reciprocal of leg 163's own
+largest sampled ratio, and since each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, a finite family of
+such ratios bounds `σ_min` **only from above**. So leg 163's data support `σ_min ≤ 0.71465`, the
+`≥` was inverted, and **the two legs never actually disagreed** — `0.0908 ≤ 0.71465`. All three
+call-sites now carry `0.0908` as the measured figure, with `0.71465` retained only in §3.2 with
+its correct direction and its provenance named.
+
+*What the correction does and does not change.* It changes no conclusion in §3–§5. But it does
+sharpen how one property may be stated. The `≥` sign was carrying the claim "**bounded away from
+zero**", i.e. a lower bound — and **neither leg proves one**: leg 176's own domain-only truncation
+is, in its words, *"an upper bound closing down onto `σ_min`"*, and its ladder is *"float64
+evidence of a positive limit, not a proof of one."* What is established is a monotone-decreasing
+ladder that **flattens** (0.0908878 → 0.0908047 over `N = 64 … 512`, **0.0915 %**; 0.139 % over the
+full 16-fold range) together with two controls that report the other answer — against `ℓ¹_w`, where
+the analogous ladder **decays** like `M^{−(1−s)}`. That contrast is a contrast of ladder behaviour
+in both spaces, which is all §3–§5 ever use it for, and it survives the correction intact. What
+does not survive, and is not written anywhere in this note, is any claim to a *proved* floor.
 
 **What this does and does not change in §3.3's ceiling — nothing is lifted.** Leg 176 restates
 O3 itself: `a = 0` only, and what is certified is **"an object Xu already inverts in closed
@@ -483,7 +505,7 @@ was run, so the NO is not a discovery its own construction conveniently arrived 
 | Besov `B^s_{p,q}` coefficient realization | **FAILS** — same `σ = s + 1/p` invariant; `q` refines only the `σ = 2` line, measure zero, where the target's margin is −0.6026 | not reached — O3 applies |
 | weighted Sobolev `H^s_w` on the circle (`p = 2`) | **FAILS** — it is the `p = 2` row above: exponent `1−s` exactly | not reached — O3 applies |
 | origin-regularity index between `L²` and `H²` on the line | not reached | **FAILS** — O4, in Xu's own text |
-| origin-`H²` itself (the endpoint) | passes (`σ_min ≥ 0.71465`) | **FAILS** — O3, fatally |
+| origin-`H²` itself (the endpoint) | passes — `σ_min` measured at **0.0908** (§3.5), not the `0.71465` of earlier drafts, which was only an upper bound | **FAILS** — O3, fatally |
 
 **Every scale fails at least one check, and no scale passes both.**
 
@@ -522,7 +544,8 @@ has four parts:
 
 3. **The origin-`H²` endpoint is structurally viable and simultaneously worthless for the real
    target, and both halves are load-bearing.** Split, shape and bordered rows are explicit and
-   verified; `σ_min ≥ 0.71465`, truncation-independent to 1.44e−04; the `ℓ¹_w` obstruction does
+   verified; `σ_min` measured at **0.0908** (§3.5; the `0.71465` of earlier drafts was an upper
+   bound from three data, not a floor), truncation-independent to 1.44e−04; the `ℓ¹_w` obstruction does
    not recur. And every one of those objects is a consequence of `a = 0` exactness (O3, FATAL
    for transfer), the operator is non-normal so invertibility is not stability (O2, HIGH
    downstream), and what a certificate there would certify is a closed form its author already

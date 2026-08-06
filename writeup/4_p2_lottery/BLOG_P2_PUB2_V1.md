@@ -103,8 +103,14 @@ are careful not to convert it into a promise: nobody has tested whether a differ
 Two honesties about that number. It is ordinary floating point, one leg's own measurement — the
 independent re-derivation we commissioned has not reported. And it revises us, not the paper: the
 figure `0.71465` quoted earlier in this piece's technical companion was a three-sample **witness**,
-and the construction found the true value **7.9× smaller**. It is still bounded away from zero and
-still truncation-independent, which is all we ever used it for.
+and the construction found the true value **7.9× smaller**. The companion now carries `0.0908` at
+all three of those places. The revision turned out to be a **sign** rather than a magnitude:
+sampling three solves can tell you the number is no *bigger* than 0.71465, never that it is no
+smaller — so the old figure was a true upper bound wearing the wrong inequality, and the two legs
+never really disagreed. Worth saying plainly what that leaves. The quantity does not drift toward
+zero the way it did in the old room, and two controls confirm it. But a floating-point sequence
+that descends and flattens is evidence of a positive limit, not a proof of one, and we do not
+write it as one.
 
 None of this lifts the ceiling above. It is still the special parameter value, it still certifies
 an object Xu already inverts in closed form, and the leg that built it says so in its own summary:
