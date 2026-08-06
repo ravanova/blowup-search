@@ -3211,3 +3211,22 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   are never called here. Measured: 0 banked numbers move -- the live PORT run's
   min(s_rho)=0.3896>0 sits inside the corner where all four are dormant. Module
   unpatched, branch leg/200-pca-v1 pushed.
+- **Leg 215 (Route-CGR) — NO, ESCALATED (parked, not merged):** the one-line isinf
+  repair at nk_bounds.py:430 closes leg 199's M1 mechanism cleanly (alpha=-inf now
+  raises instead of returning NaN; 8/8 live call sites bit-identical at 0 ULP), but
+  only 1 of leg 199's 16 originally-found gaps is M1 -- the other 15 (non-finiteness
+  defects across M2/M3/M4/M5/M7) live in read-only certificate_guards.py, out of
+  this leg's territory. Repair itself sound; gate's premise (that all 16 were the
+  missing-isinf family) is what fails. Parked pending a leg that owns
+  certificate_guards.py.
+- **Leg 205 (Route-BVR) — YES, ESCALATED (parked, not merged):** boussinesq_rescaled.py
+  silently fabricates origin slopes via TWO independent, separately-confirmed
+  mechanisms in odd_field_x_slope. Defect A (second occurrence of leg 99's class, at
+  the exact line leg 99 flagged and declined to test): empty fit window -> lstsq
+  returns exactly 0.0 vs truth 2.0 (2000x tolerance). Defect B (NEW, needs no
+  degenerate grid): hard-coded absolute r_win=0.4 with a discarded lstsq residual
+  drives modulation()'s c_l to +0.188 vs truth 1.4 (86.5%, 1731x tolerance) on a
+  FULLY RESOLVED grid -- rank and condition number constant throughout, so leg 99's
+  own fix is provably blind to B. Measured: no banked result re-run, but the safe
+  exp(-r^2)-class envelopes used elsewhere give reason (not proof) to expect no
+  movement. Module unpatched, branch leg/205-bvr-v1 pushed.
