@@ -22,9 +22,37 @@ E ~ (a m / pi) log(X / X_c) < 0.  So for v = X/X_c > 1 the true profile value is
 zero.  That is the reference this battery measures against; it is the module's own
 sentence, quoted, not a convention imposed from outside.
 
-READ-ONLY.  `solver/first_integral.py` is not edited by this leg under either branch of
-the gate.  Every gate below is a measurement, and the two that FAIL are pinned, not
+READ-ONLY.  `solver/first_integral.py` was not edited by this leg under either branch of
+the gate.  Every gate below is a measurement, and the two that FAILED were pinned, not
 patched.
+
+WHAT THE BENCH REPAIR CHANGED HERE, AND WHY THE NUMBERS DID NOT
+---------------------------------------------------------------
+A later bench repair closed both escalated gaps in `solver/first_integral.py`
+(a compact-support guard on `omega_of`/`e_of`/`even_cheb`, and a NaN census in
+`first_integral_defect`).  This runner is leg 107's evidence and its numbers must keep
+reproducing, so every call below that deliberately leaves the support now passes the
+EXPLICIT legacy policy -- `on_outside="extrapolate"`, `on_nonfinite="drop"` -- which the
+repair kept for exactly this purpose.  Nothing about the measurement changed: the same
+arithmetic runs and the same numbers come back.  What changed is that the module now has
+to be ASKED for the pre-repair behaviour instead of supplying it by default -- which is
+the finding, restated as a diff.
+
+**On re-running this file and diffing the JSON.**  It does NOT come back byte-identical,
+and that is not the guard.  The Newton solve is not bit-reproducible across BLAS thread
+counts: the PRE-repair module, loaded from `origin/leg/fia-v1`, gives
+`X_c = 18.715770556159065` at `OMP_NUM_THREADS=1` -- leg 107's banked value exactly --
+and `18.71577055615906` at 4 threads, a last-ulp difference that then propagates into
+every number derived from `b`.  The guard's own neutrality was measured separately and
+in-process, where thread count is held fixed: **0 bit-differences in 860,200 values**
+across 19 surfaces, `writeup/data/bench_first_integral_support_guard_check.json`.  Pin
+`OMP_NUM_THREADS=1` if you want this file's JSON to reproduce to the last bit.
+
+The guard's warnings are filtered to "ignore" for the whole file, on the same reasoning
+`solver/target_norm.py`'s domain guard records: a battery whose job is to evaluate
+outside the window would otherwise emit one warning per probe and train the reader to
+filter the category away.  Everything the warnings would have said is measured and
+recorded below instead.
 
 Runtime ~40 s.  Deterministic; no RNG anywhere.
 """
@@ -33,13 +61,22 @@ import json
 import os
 import sys
 import time
+import warnings
 
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from solver.first_integral import (ReducedProfile, even_cheb,      # noqa: E402
+from solver.first_integral import (FirstIntegralGuardWarning,     # noqa: E402
+                                   ReducedProfile, even_cheb,
                                    first_integral_defect)
+
+# this battery evaluates outside the support ON PURPOSE -- see the docstring above
+warnings.simplefilter("ignore", FirstIntegralGuardWarning)
+
+# the explicit legacy policies that reproduce the pre-repair arithmetic bit-for-bit
+LEGACY_OUTSIDE = {"on_outside": "extrapolate"}
+LEGACY_NONFINITE = {"on_nonfinite": "drop"}
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                    "writeup", "data", "p2_route_fia_v1_adversarial.json")
@@ -89,7 +126,7 @@ def gate_1():
             s1 = float(T[0] @ b)
             om = {}
             for v in (1.0 + 1e-9, 1.0 + 1e-6, 1.001, 1.01, 1.1, 1.5, 2.0, 5.0):
-                om[str(v)] = _j(rp.omega_of(b, np.array([v]))[0])
+                om[str(v)] = _j(rp.omega_of(b, np.array([v]), **LEGACY_OUTSIDE)[0])
             # |Omega| = |(v^2-1) s1|^{1/a} = 1 (the gauge amplitude |Omega(0)|) at:
             v_plaus = float(np.sqrt(1.0 + 1.0 / s1))
             interior_max = float(np.max(np.abs(rp.omega_of(b, np.linspace(0, 1, 401)))))
@@ -125,7 +162,7 @@ def gate_2():
         dev = {}
         for d in (1e-7, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1):
             i = float(rp.omega_of(b, np.array([1.0 - d]))[0])
-            o = float(rp.omega_of(b, np.array([1.0 + d]))[0])
+            o = float(rp.omega_of(b, np.array([1.0 + d]), **LEGACY_OUTSIDE)[0])
             dev[str(d)] = _j(abs(o / i - 1.0)) if i != 0.0 else "nan"
         rows.append({"a": a, "rel_dev": dev})
         print(f"    a={a}: " + "  ".join(f"d={k}:{v:.1e}" for k, v in dev.items()))
@@ -141,7 +178,7 @@ def gate_2():
 def gate_3():
     """The intermediate e is wrong outside too, independently of the abs()."""
     print("\n[G3] even_cheb's clip, and e_poly vs the module's own outer quadrature")
-    T_far, _ = even_cheb(6, np.array([1.5, 3.0, 50.0]))
+    T_far, _ = even_cheb(6, np.array([1.5, 3.0, 50.0]), **LEGACY_OUTSIDE)
     T_edge, _ = even_cheb(6, np.array([1.0]))
     clip_dev = float(np.max(np.abs(T_far - T_edge[0][None, :])))
     print(f"    max |T_2k(v>1) - T_2k(1)| over v in (1.5, 3, 50): {clip_dev:.1e} "
@@ -155,7 +192,7 @@ def gate_3():
         Hy = ((wq[None, :] / (y[:, None] - rp.u[None, :])) @ rp.w) / np.pi
         # E(X_c) = 0 exactly, so e(v) = (a/c) * (U(X) - U(X_c))
         e_true = (a / rp.c) * Xc * float(np.sum(0.5 * (Hy[1:] + Hy[:-1]) * np.diff(y)))
-        e_poly = float(rp.e_of(b, np.array([v]))[0])
+        e_poly = float(rp.e_of(b, np.array([v]), **LEGACY_OUTSIDE)[0])
         rows.append({"v": v, "e_poly": e_poly, "e_true_outer": e_true,
                      "ratio": e_poly / e_true})
         print(f"    v={v:<6} e_poly={e_poly:+.6e}  e_true={e_true:+.6e}  "
@@ -182,7 +219,7 @@ def gate_4():
     for nbad in (1, 10, 100, 300, 390, 397, 398, 399, 400):
         Op = Om.copy()
         Op[:nbad] = np.nan
-        d = first_integral_defect(Op, U, a, c)
+        d = first_integral_defect(Op, U, a, c, **LEGACY_NONFINITE)
         ladder.append({"n_nan": nbad, "n_total": N, "defect": _j(d),
                        "flagged": bool(np.isnan(d))})
         print(f"      {nbad:3d}/{N} NaN in Omega -> defect {d!s:<24} "
@@ -191,9 +228,11 @@ def gate_4():
     worst_absorbed = max(r["n_nan"] for r in ladder if not r["flagged"])
     others = {
         "nan_in_U": _j(first_integral_defect(
-            Om, np.where(np.arange(N) == 7, np.nan, U), a, c)),
+            Om, np.where(np.arange(N) == 7, np.nan, U), a, c,
+            **LEGACY_NONFINITE)),
         "inf_in_Omega": _j(first_integral_defect(
-            np.where(np.arange(N) == 3, np.inf, Om), U, a, c)),
+            np.where(np.arange(N) == 3, np.inf, Om), U, a, c,
+            **LEGACY_NONFINITE)),
         "a_is_nan": _j(first_integral_defect(Om, U, float("nan"), c)),
         "c_is_nan": _j(first_integral_defect(Om, U, a, float("nan"))),
         # CONTROL: a FINITE poison of the same single point IS caught
@@ -331,7 +370,7 @@ def gate_9():
     bneg = b.copy()
     bneg[0] *= -1.0
     e_nodes = rp.e_of(bneg)
-    om = float(rp.omega_of(bneg, np.array([0.5]))[0])
+    om = float(rp.omega_of(bneg, np.array([0.5]), **LEGACY_OUTSIDE)[0])
     res = float(np.max(np.abs(rp.residual(bneg, Xc))))
     clean_res = float(np.max(np.abs(rp.residual(b, Xc))))
     print(f"    sign-flipped b_0: min e at nodes = {e_nodes.min():.6f} (<0), "
