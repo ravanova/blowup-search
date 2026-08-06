@@ -1100,7 +1100,11 @@ def main():
     post_cases = run_battery()
     post = _census(post_cases)
     post_probes = part3_defect_probes()
-    zr = compare_zero_regression(pre["zero_regression"], part5_zero_regression_n32())
+    post_hashes = part5_zero_regression_n32()
+    zr = compare_zero_regression(pre["zero_regression"], post_hashes)
+    # Publish the post-repair hash table itself, so test_boussinesq_postrepair.py can pin
+    # the module at the bit level without needing the pre-repair blob.
+    zr["postrepair_hashes"] = post_hashes
 
     trans = verdict_transitions(pre["census"], post, post_cases)
 
