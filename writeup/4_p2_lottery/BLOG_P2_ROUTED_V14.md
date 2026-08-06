@@ -159,7 +159,8 @@ represent a compactly supported profile whose edge regularity *degrades as `a` g
 the same class of instrument artifact as the ringing leg 12 found.
 
 That retires leg 11's argument, not the boundary itself: the other three confirmations
-are about a different question (whether the two-scale structure survives in the dynamics),
+are about a different question (whether the `a = 0` wave's two-scale structure survives
+continuation into positive `a`),
 and this leg says nothing about them. But the count goes from four to three, and
 separately, the compactly supported traveling wave exists well past the boundary as a
 genuine continuum object.

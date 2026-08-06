@@ -571,7 +571,8 @@ committed 6fc1ff0 before the run.
 GENOME-LIMITED (the honest headline):** at a=0.5 even-K3 cuts floor 4× (2.45e-2→5.6e-3) → K=2 map is a
 genome-relative UPPER BOUND, survival boundary NOT sharply pinned (pre-committed INCONCLUSIVE branch,
 reported). BUT a=1 K=3 does NOT rescue (1.83e-1→1.43e-1) → De Gregorio-end degradation robust.
-**Picture:** HQW25's exact a=0 two-scale traveling wave DEFORMS SMOOTHLY under advection — no sharp
+**Picture:** HQW25's exact a=0 two-scale traveling wave DEFORMS SMOOTHLY as advection is turned on
+into a>0 (the swept domain; the two-scale SCENARIO of arXiv:2603.25104 is a<=0 and is not in it) — no sharp
 collapse, persists small-a, degrades to De Gregorio, stays even, advection SELECTS a scale (lifts the
 valley). Fig17 (writeup/4_p2_lottery/p2_two_scale_sweep_evidence.py, rebuilds from writeup/data/p2_two_scale_sweep.json).
 TECHNICAL/BLOG_P2_TWO_SCALE.md.
@@ -1256,7 +1257,7 @@ two numbers and BOTH have to be earned before any decision is made from it.**
 HONEST CEILING unchanged: plain float64, nothing interval-enclosed, nothing rigorous. Clay odds ~0.05%.
 
 ## §20 — ROUTE-D v11 DONE (2026-07-31): NEWTON ON THE PROFILE — the 1e-2 residual floor was the
-## SEARCH, not the equation (12 orders); the survival boundary a*≈0.5 SURVIVES a fourth,
+## SEARCH, not the equation (12 orders); the survival boundary a*≈0.5 (on a>0) SURVIVES a fourth,
 ## genome-free confirmation; and Y₀'s binding constraint moves from SEARCH to DISCRETIZATION.
 
 The §19 "next brick", item (1) — the other side of the inequality. Built solver/profile_newton.py

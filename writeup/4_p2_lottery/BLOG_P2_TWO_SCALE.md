@@ -27,8 +27,8 @@ a fixed profile sliding along, `Ω₂(X) = −1/(1+X²)`.
 CLM is the gentle end of a family. Crank a knob `a` (the *advection* strength) from
 0 up to 1 and you pass from CLM to the De Gregorio model, where the extra transport
 term makes singularity formation famously subtle. Natural question, apparently
-unasked: **does the two-scale traveling wave survive as you turn on advection, or
-does it break?**
+unasked: **does the two-scale traveling wave survive as you turn on advection — as `a` moves
+up from 0 toward 1 — or does it break?**
 
 ## Turning the question into a search
 
