@@ -7086,3 +7086,57 @@ Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
 Escalations #4 (leg 129/188, scope-corrected two updates above) and the CGA finding (leg 199,
 one update above) remain unaffected by this update — both still stay with the user via
 `PROGRESS.md`'s NEEDS YOU; this DM rules on neither.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — 197 landed (YES), 198 escalated, slots H/I
+refilled from the repair pair (214, 215)
+
+**197 (VNL) landed on `main` — gate YES.** `arXiv:2208.09445` banked into
+`solver/viscous_novelty.py::PRECEDENTS` (6 rows -> 7), all 11/11 claims traceable to leg
+174's own JSON, stage V's verdict unchanged. Clean, mechanical, no escalation — exactly the
+"found but not yet shared-ledgered" gap this leg was drafted to close.
+
+**198 (BHA) escalated, not merged** (`leg/198-bha-v1` pushed, `main` untouched). **The most
+consequential audit finding this cycle**: `bordered_hl.py` silently accepts a negative
+border weight and can return a NEGATIVE "operator norm," corrupting `Z_1` by up to
+**1.198e9x** and `Z_2` by up to **1.189e17x** — large enough to flip a certificate's own
+closure verdict. **0 banked numbers are currently impeached** (no live caller ever passes a
+negative weight), but this is exactly the shape of latent defect the audit family's own
+"claim-adjacent module, checked rather than assumed clean by proximity" discipline exists to
+catch — `bordered_hl.py` sits directly upstream of every certificate-shape battery this
+repository has run (54, 58, 127), which is precisely why leg 198 was drafted at LEG-I
+priority in the first place (see the original ten-slot table, above: "closer to the actual
+load-bearing construction than several already-audited peripheral modules"). Recorded in
+`PROGRESS.md`'s NEEDS YOU for the user; this DM does not rule on it.
+
+**Slots H and I refilled with the two repair legs (214, 215) rather than fresh audits from
+206–213** — the orchestrator's choice, and the right one: both close out THIS cycle's own
+open findings (214 fixes leg 190's prose sign error; 215 fixes leg 199's certificate_guards.py
+gap) rather than opening new surface area, which is lower-risk and higher-value than starting
+a fresh audit while two known, well-characterized, low-cost repairs sit ready.
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live (unchanged) |
+| B | 193 | M2CV | live (unchanged) |
+| C | 201 | ICA2 | live (unchanged) |
+| D | 203 | RSA | live (unchanged) |
+| E | 205 | BVR | live (unchanged) |
+| F | 200 | PCA | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 214 | EGMB | **live, newly promoted — replaces 197 (landed, OFF roster)** |
+| I | 215 | CGR | **live, newly promoted — replaces 198 (escalated, OFF roster)** |
+| J | 204 | TNA2 | live (unchanged) |
+
+**Reserve queue: 8 undispatched legs (206, 207, 208, 209, 210, 211, 212, 213).** 214 and 215
+are now live (off reserve); no other change. Still comfortably above the §3a watermark of 3
+— no fresh batch needed. Promotion order for the next vacancy, unchanged: 206 (GSA), 207
+(DPA), 208 (TSA), 209 (SCA2), 210 (M2SV), 211 (XU11), 212 (USC2V), 213 (LGC2).
+
+Nothing in this update lifts a ban. Escalation #4 (leg 129/188) and the CGA finding (leg 199)
+stay as previously recorded; leg 198's new finding joins them in `PROGRESS.md`'s NEEDS YOU,
+also unruled-on by this DM. No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No
+direction question raised this cycle.
