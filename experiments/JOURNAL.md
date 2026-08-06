@@ -3156,3 +3156,10 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   -(1/2 - C|a|) (degrading), not the (-1/2 - C|a|) form legs 141/165 and this leg's
   own novelty pass had carried -- identical at a=0 so 0 banked numbers move; 6 sites
   flagged for the record, none patched under this leg's authority.
+- **Leg 187 (Route-M2CI) — NO:** the first attempted computer-assisted certificate of
+  Chen's inviscid gamma=2 profile (Object A) fails on ISOLATION, not budget -- the
+  profile sits on an exact dilation orbit (zero polynomial in exact Fraction
+  arithmetic, 5/5 test values), so its tangent is an exact kernel and Z_0+Z_1 >= 1 for
+  every admissible A; Y_0 is exactly 0, the best the framework admits, and it still
+  cannot close. Second, independent failure: Z_2 ~ n^2.36 over a 6x ladder. Fully
+  characterized negative, quartet complete (fig65).
