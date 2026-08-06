@@ -1,0 +1,998 @@
+{
+  "leg": 150,
+  "route": "ROUTE-CNR",
+  "pre_repair_ref": "d4a6387",
+  "pre_repair_sha256": "31ea0a2f861ce6a7370ace74c17b142a93394e1a00be3a475b894a189afee917",
+  "arm_A_failing_cases": {
+    "cases": [
+      {
+        "case": "M1 third root, om0=0.1*anchor",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 8.646e-15) but the FULL residual over all 60 rows does not: relres = 1.2571e+01 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.3780000000000p-47",
+        "dropped_defect_pre": 3.343781136283766,
+        "relres_pre": 12.570989442177847,
+        "relres_post": "12.570989442177847",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "M2 constant, om0=zeros",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 8.660e-15) but the FULL residual over all 60 rows does not: relres = 1.3222e+01 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.37ffffffffdbcp-47",
+        "dropped_defect_pre": 3.1641356201816917e-12,
+        "relres_pre": 13.222456579157248,
+        "relres_post": "13.222456579157248",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "M2 constant, om0=ones",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 8.438e-15) but the FULL residual over all 60 rows does not: relres = 1.3143e+01 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.30000000000a6p-47",
+        "dropped_defect_pre": 4.187095115071308e-12,
+        "relres_pre": 13.143094804299315,
+        "relres_post": "13.143094804299315",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "M2 constant, om0=1e-8*anchor",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 1.077e-14) but the FULL residual over all 60 rows does not: relres = 1.4226e+01 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.840000000014ep-47",
+        "dropped_defect_pre": 2.818856259523269e-12,
+        "relres_pre": 14.225841997861826,
+        "relres_post": "14.225841997861826",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "M2 constant, om0=0.01*anchor",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 1.077e-14) but the FULL residual over all 60 rows does not: relres = 1.3110e+01 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.83ffffffff7b4p-47",
+        "dropped_defect_pre": 3.6339820042030567e-12,
+        "relres_pre": 13.110232066840139,
+        "relres_post": "13.110232066840139",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "relres has no referent, c=0",
+        "converged_pre": true,
+        "converged_post": false,
+        "reason_post": "the gauged subsystem converged (kept_sup 2.789e-15) but the FULL residual over all 60 rows does not: relres = 1.0000e+00 >= relres_tol = 1.0000e+00",
+        "kept_sup": "0x1.91e1d837f4c72p-49",
+        "dropped_defect_pre": 0.39264647114549994,
+        "relres_pre": 1.0,
+        "relres_post": "1.0",
+        "relres_has_referent": true,
+        "fixed": true
+      },
+      {
+        "case": "M3 one-point dip, eps=1e-16",
+        "Xc_pre": "15.025018773466835",
+        "Xc_post": "inf",
+        "zero_order_pre": [
+          "0.23245402082551214",
+          141
+        ],
+        "zero_order_post": [
+          "nan",
+          0
+        ],
+        "fixed": true
+      },
+      {
+        "case": "M3 one-point dip, eps=1e-12",
+        "Xc_pre": "15.025018773466735",
+        "Xc_post": "inf",
+        "zero_order_pre": [
+          "0.2324540208254932",
+          141
+        ],
+        "zero_order_post": [
+          "nan",
+          0
+        ],
+        "fixed": true
+      },
+      {
+        "case": "M3 one-point dip, eps=1e-08",
+        "Xc_pre": "15.025018772465833",
+        "Xc_post": "inf",
+        "zero_order_pre": [
+          "0.23245402063362766",
+          141
+        ],
+        "zero_order_post": [
+          "nan",
+          0
+        ],
+        "fixed": true
+      },
+      {
+        "case": "M3 one-point dip, eps=0.001",
+        "Xc_pre": "15.024918873142328",
+        "Xc_post": "inf",
+        "zero_order_pre": [
+          "0.23243487031994908",
+          141
+        ],
+        "zero_order_post": [
+          "nan",
+          0
+        ],
+        "fixed": true
+      }
+    ],
+    "structural": {
+      "max_iter_0_pre": "IndexError",
+      "max_iter_0_post": {
+        "converged": true,
+        "iterations": 0,
+        "reason": null
+      },
+      "singular_dict_missing_post": [],
+      "singular_dict_missing_pre": [
+        "iterations",
+        "nodal_sup",
+        "relres",
+        "residual_rms"
+      ],
+      "continuation_nan_pre": "KeyError('relres')",
+      "continuation_nan_post": {
+        "rows": 1,
+        "converged": false,
+        "relres": "inf"
+      }
+    },
+    "n_fixed": 10
+  },
+  "arm_B_zero_regression": {
+    "cases": [
+      {
+        "tag": "a0.0_J40",
+        "J": 40,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.b521da1f589b1p-46",
+        "dropped_defect": "0x1.f9b0000000000p-46",
+        "identical": true
+      },
+      {
+        "tag": "a0.05_J40",
+        "J": 40,
+        "a": 0.05,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.2d401d0bf805cp-10",
+        "dropped_defect": "0x1.7a0cdd5ea386cp-10",
+        "identical": true
+      },
+      {
+        "tag": "a0.1_J40",
+        "J": 40,
+        "a": 0.1,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.1a4e69b35fc59p-11",
+        "dropped_defect": "0x1.6382589289d27p-11",
+        "identical": true
+      },
+      {
+        "tag": "a0.2_J40",
+        "J": 40,
+        "a": 0.2,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.ba3dd583dbfc0p-13",
+        "dropped_defect": "0x1.184402e84c818p-12",
+        "identical": true
+      },
+      {
+        "tag": "a0.3_J40",
+        "J": 40,
+        "a": 0.3,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.6931518f39375p-10",
+        "dropped_defect": "0x1.cc75973b9c44bp-10",
+        "identical": true
+      },
+      {
+        "tag": "a0.4_J40",
+        "J": 40,
+        "a": 0.4,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.292e4de2df504p-8",
+        "dropped_defect": "0x1.7cc8dbe0419acp-8",
+        "identical": true
+      },
+      {
+        "tag": "a0.5_J40",
+        "J": 40,
+        "a": 0.5,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.f7b309b0719c4p-5",
+        "dropped_defect": "0x1.408091e1280aap-4",
+        "identical": true
+      },
+      {
+        "tag": "a0.0_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c54c3ea53b5e2p-47",
+        "dropped_defect": "0x1.3680000000000p-48",
+        "identical": true
+      },
+      {
+        "tag": "a0.05_J60",
+        "J": 60,
+        "a": 0.05,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.23e459d3535dfp-11",
+        "dropped_defect": "0x1.c094b960f251fp-11",
+        "identical": true
+      },
+      {
+        "tag": "a0.1_J60",
+        "J": 60,
+        "a": 0.1,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.cff2349baf566p-15",
+        "dropped_defect": "0x1.65bfd71104d9ap-14",
+        "identical": true
+      },
+      {
+        "tag": "a0.2_J60",
+        "J": 60,
+        "a": 0.2,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.adf751fce0e2fp-18",
+        "dropped_defect": "0x1.4db70ec634252p-17",
+        "identical": true
+      },
+      {
+        "tag": "a0.3_J60",
+        "J": 60,
+        "a": 0.3,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.86e01a4fa09f0p-11",
+        "dropped_defect": "0x1.311b7134c2e40p-10",
+        "identical": true
+      },
+      {
+        "tag": "a0.4_J60",
+        "J": 60,
+        "a": 0.4,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.fd237faf16c6fp-8",
+        "dropped_defect": "0x1.8f9b88d1ab08ap-7",
+        "identical": true
+      },
+      {
+        "tag": "a0.5_J60",
+        "J": 60,
+        "a": 0.5,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.9d9f080ac30e9p-5",
+        "dropped_defect": "0x1.4788e890652b1p-4",
+        "identical": true
+      },
+      {
+        "tag": "a0.0_J80",
+        "J": 80,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.1ecda6b6f52c3p-44",
+        "dropped_defect": "0x1.e1ec000000000p-44",
+        "identical": true
+      },
+      {
+        "tag": "a0.05_J80",
+        "J": 80,
+        "a": 0.05,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.4af15abf3288ep-12",
+        "dropped_defect": "0x1.25a04dafa8240p-11",
+        "identical": true
+      },
+      {
+        "tag": "a0.1_J80",
+        "J": 80,
+        "a": 0.1,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c0ca7ddf65169p-16",
+        "dropped_defect": "0x1.8f9866b151b2dp-15",
+        "identical": true
+      },
+      {
+        "tag": "a0.2_J80",
+        "J": 80,
+        "a": 0.2,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.0b914050f4376p-15",
+        "dropped_defect": "0x1.df97a34b0778bp-15",
+        "identical": true
+      },
+      {
+        "tag": "a0.3_J80",
+        "J": 80,
+        "a": 0.3,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.f1ec73249216ep-12",
+        "dropped_defect": "0x1.c0c604d80a3ffp-11",
+        "identical": true
+      },
+      {
+        "tag": "a0.4_J80",
+        "J": 80,
+        "a": 0.4,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.6bce5cc803ca0p-11",
+        "dropped_defect": "0x1.495b9a2141badp-10",
+        "identical": true
+      },
+      {
+        "tag": "a0.5_J80",
+        "J": 80,
+        "a": 0.5,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.5b75905c667a2p-5",
+        "dropped_defect": "0x1.3a39468bed45ep-4",
+        "identical": true
+      },
+      {
+        "tag": "a0.0_J120",
+        "J": 120,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.53513ed2fa759p-44",
+        "dropped_defect": "0x1.5686000000000p-43",
+        "identical": true
+      },
+      {
+        "tag": "a0.3_J120",
+        "J": 120,
+        "a": 0.3,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.ebd213a0a98a2p-13",
+        "dropped_defect": "0x1.0f708090b43eep-11",
+        "identical": true
+      },
+      {
+        "tag": "a0.5_J120",
+        "J": 120,
+        "a": 0.5,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.10c5f8a11194cp-5",
+        "dropped_defect": "0x1.2ea23f29a690fp-4",
+        "identical": true
+      },
+      {
+        "tag": "c0.1_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.1,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.1ec076d5d2603p-27",
+        "dropped_defect": "0x1.e7c6557000000p-28",
+        "identical": true
+      },
+      {
+        "tag": "c0.3_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.3,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.0ccd8589a3d64p-45",
+        "dropped_defect": "0x1.4eb8000000000p-45",
+        "identical": true
+      },
+      {
+        "tag": "c0.5_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c54c3ea53b5e2p-47",
+        "dropped_defect": "0x1.3680000000000p-48",
+        "identical": true
+      },
+      {
+        "tag": "c0.8_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.8,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.5b2c3d588eb10p-46",
+        "dropped_defect": "0x1.3800000000000p-49",
+        "identical": true
+      },
+      {
+        "tag": "c1.0_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 1.0,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.0d5e1183e2559p-45",
+        "dropped_defect": "0x1.0898000000000p-46",
+        "identical": true
+      },
+      {
+        "tag": "lam0.3_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.3e8c874882b39p-44",
+        "dropped_defect": "0x1.ddae000000000p-44",
+        "identical": true
+      },
+      {
+        "tag": "lam0.5_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.ec437f420e25fp-47",
+        "dropped_defect": "0x1.26e0000000000p-48",
+        "identical": true
+      },
+      {
+        "tag": "lam0.8_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.6d05f6199a6e9p-45",
+        "dropped_defect": "0x1.0d76000000000p-44",
+        "identical": true
+      },
+      {
+        "tag": "lam1.0_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c54c3ea53b5e2p-47",
+        "dropped_defect": "0x1.3680000000000p-48",
+        "identical": true
+      },
+      {
+        "tag": "lam1.2_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.2231e9dcb9116p-45",
+        "dropped_defect": "0x1.9cec000000000p-45",
+        "identical": true
+      },
+      {
+        "tag": "lam2.0_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.26ad714b8ba1fp-45",
+        "dropped_defect": "0x1.9ae0000000000p-45",
+        "identical": true
+      },
+      {
+        "tag": "lam5.0_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c807ccf19ab44p-46",
+        "dropped_defect": "0x1.20ec000000000p-45",
+        "identical": true
+      },
+      {
+        "tag": "test4_start_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.c325d07681a54p-46",
+        "dropped_defect": "0x1.20d8000000000p-45",
+        "identical": true
+      },
+      {
+        "tag": "drop1_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.6449d40f655d3p-47",
+        "dropped_defect": "0x1.1400000000000p-49",
+        "identical": true
+      },
+      {
+        "tag": "drop7_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.acfb7dc10c199p-46",
+        "dropped_defect": "0x1.ec80000000000p-46",
+        "identical": true
+      },
+      {
+        "tag": "drop30_J60",
+        "J": 60,
+        "a": 0.0,
+        "c": 0.5,
+        "Omega_bitwise_identical": true,
+        "history_bitwise_identical": true,
+        "float_key_diffs": [],
+        "converged_pre": true,
+        "converged_post": true,
+        "converged_moved": false,
+        "relres": "0x1.140e4856f4952p-46",
+        "dropped_defect": "0x1.9500000000000p-47",
+        "identical": true
+      }
+    ],
+    "n_identical": 40,
+    "n_moved": 0,
+    "critical_radius_real_fields": [
+      {
+        "a": 0.0,
+        "Xc_pre": "inf",
+        "Xc_post": "inf",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "nan",
+          0
+        ]
+      },
+      {
+        "a": 0.1,
+        "Xc_pre": "inf",
+        "Xc_post": "inf",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "nan",
+          0
+        ]
+      },
+      {
+        "a": 0.15,
+        "Xc_pre": "51.845551306080154",
+        "Xc_post": "51.845551306080154",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "nan",
+          0
+        ]
+      },
+      {
+        "a": 0.2,
+        "Xc_pre": "17.609365814379515",
+        "Xc_post": "17.609365814379515",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "nan",
+          2
+        ]
+      },
+      {
+        "a": 0.25,
+        "Xc_pre": "9.433675721017167",
+        "Xc_post": "9.433675721017167",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "nan",
+          4
+        ]
+      },
+      {
+        "a": 0.3,
+        "Xc_pre": "6.148257014124812",
+        "Xc_post": "6.148257014124812",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "3.706554093908656",
+          6
+        ]
+      },
+      {
+        "a": 0.35,
+        "Xc_pre": "4.471962326507038",
+        "Xc_post": "4.471962326507038",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "3.3786569094956276",
+          7
+        ]
+      },
+      {
+        "a": 0.4,
+        "Xc_pre": "3.493167243280638",
+        "Xc_post": "3.493167243280638",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "2.8616352129763047",
+          9
+        ]
+      },
+      {
+        "a": 0.45,
+        "Xc_pre": "2.859467890624634",
+        "Xc_post": "2.859467890624634",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "2.503568830964919",
+          10
+        ]
+      },
+      {
+        "a": 0.5,
+        "Xc_pre": "2.418469428719305",
+        "Xc_post": "2.418469428719305",
+        "identical": true,
+        "zero_order_identical": true,
+        "zero_order_post": [
+          "2.23653804514631",
+          11
+        ]
+      },
+      {
+        "a": 0.2,
+        "grid": "log2000",
+        "Xc_pre": "17.164940629561894",
+        "Xc_post": "17.164940629561894",
+        "identical": true,
+        "zero_order_identical": null
+      },
+      {
+        "a": 0.3,
+        "grid": "log2000",
+        "Xc_pre": "6.127911303893356",
+        "Xc_post": "6.127911303893356",
+        "identical": true,
+        "zero_order_identical": null
+      },
+      {
+        "a": 0.5,
+        "grid": "log2000",
+        "Xc_pre": "2.4162094499695352",
+        "Xc_post": "2.4162094499695352",
+        "identical": true,
+        "zero_order_identical": null
+      }
+    ],
+    "critical_radius_identical": 13,
+    "critical_radius_total": 13,
+    "untouched_kernels_identical": {
+      "refined_theta": true,
+      "velocity_integrals": true,
+      "weighted_defect": true,
+      "interpolant_residual": true,
+      "newton_two_gauge": true
+    },
+    "float64_comparisons": 3570
+  },
+  "arm_C_m3_margins": {
+    "min_rel_depth_threshold": 0.01,
+    "real_fields": [
+      {
+        "a": 0.15,
+        "run_length": 1,
+        "rel_depth": 0.1228889959682606,
+        "Xc": "51.845551306080154"
+      },
+      {
+        "a": 0.2,
+        "run_length": 2,
+        "rel_depth": 0.4332260390763986,
+        "Xc": "17.609365814379515"
+      },
+      {
+        "a": 0.25,
+        "run_length": 4,
+        "rel_depth": 0.7195123636887073,
+        "Xc": "9.433675721017167"
+      },
+      {
+        "a": 0.3,
+        "run_length": 6,
+        "rel_depth": 0.9848559860750209,
+        "Xc": "6.148257014124812"
+      },
+      {
+        "a": 0.4,
+        "run_length": 11,
+        "rel_depth": 1.0,
+        "Xc": "3.493167243280638"
+      },
+      {
+        "a": 0.5,
+        "run_length": 15,
+        "rel_depth": 1.0,
+        "Xc": "2.418469428719305"
+      }
+    ],
+    "adversaries": [
+      {
+        "eps": 1e-16,
+        "run_length": 1,
+        "rel_depth": 2e-16
+      },
+      {
+        "eps": 1e-12,
+        "run_length": 1,
+        "rel_depth": 2e-12
+      },
+      {
+        "eps": 1e-08,
+        "run_length": 1,
+        "rel_depth": 2e-08
+      },
+      {
+        "eps": 0.001,
+        "run_length": 1,
+        "rel_depth": 0.002
+      }
+    ],
+    "worst_real_rel_depth": 0.1228889959682606,
+    "worst_adversary_rel_depth": 0.002,
+    "accept_side_margin": 12.28889959682606,
+    "reject_side_margin": 5.0,
+    "run_length_predicate_is_dead": true
+  },
+  "arm_D_blast_radius": {
+    "leg110_repro_runner_present": false,
+    "leg110_note": "DIRECTION.md sec 110 is ASSIGNED, not landed: no experiments/p2_route_l1r_v1_repro.py, no writeup/novelty/leg_110.md and no experiments/journal/leg_110.md exist on main, so gate clause (b)'s reference to 'leg 110's death-certificate reproduction' has no artifact to check.  Leg 110's own declared territory says 'No solver module' -- it reads banked JSON only -- so this patch provably cannot reach it.",
+    "capabilities_validated_line": "matches the dense Newton solve on shared problems, and reports the defect the certificate sees",
+    "capabilities_line_present": true,
+    "consumers": [
+      "solver/turning_point.py",
+      "experiments/p2_route_d_v12_defect.py",
+      "experiments/p2_route_d_v13_turning.py",
+      "experiments/p2_route_d_v14_first_integral.py",
+      "test_collocation_newton.py",
+      "test_turning_point.py",
+      "test_first_integral.py",
+      "experiments/bench_first_integral_support_guard_check.py"
+    ]
+  },
+  "gate_clause_a_all_fixed": true,
+  "gate_clause_b_zero_movement": true
+}

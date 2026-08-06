@@ -171,7 +171,7 @@ class ACollocation(Collocation):
 
     # -- the solve, in the certificate's own coordinates --------------------
     def newton_gauged(self, c=0.5, om0=None, drop=0, tol=1e-14, max_iter=60,
-                      damping=True):
+                      damping=True, relres_tol=1.0):
         """Newton on EXACTLY the system solver/decay_collocation gauges.
 
         `gauged_jacobian` builds M = [gauge row ; DF rows except `drop`] with the
@@ -191,6 +191,29 @@ class ACollocation(Collocation):
 
         Returns the profile plus BOTH defects: the rows Newton enforced (machine
         zero, by construction) and the one row it does not see.
+
+        REPAIR (leg 150, from leg 114's M1/M2).  `converged` used to be read off
+        `hist[-1]` alone -- i.e. off the (J-1)-row subsystem Newton actually
+        solves -- so it was structurally True for ANY root of that subsystem,
+        however large the dropped row's residual and however far the profile is
+        from the decay class the Route-D bounds live in.  It now ALSO requires
+        `relres`, which this method already computed over all J rows including
+        the dropped one and then never consulted, to have a referent and to be
+        below `relres_tol` (default 1.0: the residual must be smaller than the
+        source term it is supposed to cancel).
+
+        Leg 150's novelty pass measured the two obvious alternatives dead before
+        this one was written: an ABSOLUTE clause on `dropped_defect` moves clean
+        a-family solves (they legitimately carry 8.5e-05 .. 8.0e-02 there, which
+        is the aliasing this module's own docstring is about), and the decay
+        predicate |Omega(theta=pi)| closes to 7.4x between a clean a=0.5/J=240
+        solve (0.105) and M1's spurious root (0.779).  `relres` separates 249x:
+        clean worst 5.05e-02 against 1.257e+01 / 1.322e+01 / 1.314e+01 on the
+        three spurious roots.
+
+        The pre-repair flag is NOT discarded -- it is returned unchanged as
+        `converged_kept_rows`, so every number leg 114 measured is still readable
+        off this dict.  No float this method returns changes value.
         """
         J = self.J
         g0 = self.to_coef.sum(axis=0)                 # evaluation at theta = 0
@@ -215,8 +238,15 @@ class ACollocation(Collocation):
             try:
                 step = np.linalg.solve(M, -F)
             except np.linalg.LinAlgError:
-                return {"converged": False, "reason": "singular gauged matrix",
-                        "Omega": om, "c": c, "history": hist}
+                # LEG 150: carry the normal path's keys so callers cannot KeyError
+                # on the failure branch (leg 114's incomplete-dict gap).
+                return {"converged": False, "converged_kept_rows": False,
+                        "relres_has_referent": False,
+                        "reason": "singular gauged matrix",
+                        "Omega": om, "c": float(c), "drop": int(drop),
+                        "history": hist, "iterations": max(len(hist) - 1, 0),
+                        "kept_sup": float("nan"), "dropped_defect": float("nan"),
+                        "relres": float("nan")}
             t, base = 1.0, hist[-1]
             while damping and t > 1e-5:
                 if np.max(np.abs(F_of(om + t * step))) < base:
@@ -226,12 +256,42 @@ class ACollocation(Collocation):
 
         R = self.residual_a(om, c)
         src = om * (self.H @ om)
-        scale = float(np.sqrt(np.mean(src ** 2))) or 1.0
-        return {"converged": bool(hist[-1] < 1e-11), "Omega": om, "c": float(c),
-                "drop": int(drop), "history": hist, "iterations": len(hist) - 1,
+        src_rms = float(np.sqrt(np.mean(src ** 2)))
+        # LEG 150.  The old `scale = ... or 1.0` fabricated a referent of exactly
+        # 1.0 out of an identically-zero source scale, so a profile with NOTHING
+        # to converge to could still report a relative residual.  When a quantity
+        # has no referent, say so instead of bounding it.  On every case where the
+        # old fallback did NOT fire (src_rms > 0) the expression below is the
+        # pre-repair expression unchanged, hence bit-identical.
+        has_referent = src_rms > 0.0
+        relres = (float(np.sqrt(np.mean(R ** 2)) / src_rms) if has_referent
+                  else float("nan"))
+        # max_iter=0 left `hist` empty and `hist[-1]` raised IndexError, where the
+        # sibling `newton` returns.  Evaluate the residual at the start point.
+        kept_last = hist[-1] if hist else float(np.max(np.abs(F_of(om))))
+        converged_kept = bool(kept_last < 1e-11)
+        full_ok = bool(has_referent and relres < float(relres_tol))
+        if not converged_kept:
+            reason = "the gauged (J-1)-row subsystem did not converge"
+        elif not has_referent:
+            reason = ("relres has no referent: the source scale ||Omega H(Omega)|| "
+                      "is identically zero, so the residual equation is degenerate")
+        elif not full_ok:
+            reason = (f"the gauged subsystem converged (kept_sup {kept_last:.3e}) but the "
+                      f"FULL residual over all {J} rows does not: relres = {relres:.4e} "
+                      f">= relres_tol = {float(relres_tol):.4e}")
+        else:
+            reason = None
+        return {"converged": bool(converged_kept and full_ok),
+                "converged_kept_rows": converged_kept,
+                "relres_has_referent": bool(has_referent),
+                "reason": reason,
+                "Omega": om, "c": float(c),
+                "drop": int(drop), "history": hist,
+                "iterations": max(len(hist) - 1, 0),
                 "kept_sup": float(np.max(np.abs(R[rows]))),
                 "dropped_defect": float(abs(R[drop])),
-                "relres": float(np.sqrt(np.mean(R ** 2)) / scale)}
+                "relres": relres}
 
     def newton(self, om0=None, c0=0.5, tol=1e-13, max_iter=40, damping=True):
         """Newton on (Omega, c) with the TWO gauges the degeneracy demands.
@@ -276,8 +336,14 @@ class ACollocation(Collocation):
             try:
                 step = np.linalg.lstsq(Jm, -F, rcond=None)[0]
             except np.linalg.LinAlgError:
+                # LEG 150: the same shape as the normal return, so `continuation`
+                # (which indexes r["relres"] unconditionally) flags the failure
+                # instead of dying with KeyError.
                 return {"converged": False, "reason": "singular Jacobian",
-                        "Omega": om, "c": c, "history": hist}
+                        "Omega": om, "c": c, "history": hist,
+                        "iterations": max(len(hist) - 1, 0),
+                        "residual_rms": float("nan"), "relres": float("inf"),
+                        "nodal_sup": float("nan")}
             t, base = 1.0, float(np.max(np.abs(F)))
             while damping and t > 1e-4:
                 if np.max(np.abs(full(om + t * step[:J], c + t * step[J]))) < base:
@@ -332,12 +398,52 @@ def effective_speed(X, U, c, a):
     return np.asarray(c, dtype=float) + float(a) * np.asarray(U, dtype=float)
 
 
-def critical_radius(X, E):
+def _run_extent(E, i, step):
+    """max |E| over the maximal constant-sign run containing index `i`, walking `step`.
+
+    Returns None if the run contains a non-finite value, i.e. "this leg cannot judge
+    the magnitude here" -- which is kept distinct from "the magnitude is small".
+    """
+    s0 = np.sign(E[i])
+    j, best = i, 0.0
+    while 0 <= j < E.size:
+        if not np.isfinite(E[j]):
+            return None
+        if np.sign(E[j]) != s0:
+            break
+        best = max(best, abs(float(E[j])))
+        j += step
+    return best
+
+
+def critical_radius(X, E, min_rel_depth=1e-2):
     """The smallest X > 0 where E changes sign, by linear interpolation (inf if none).
 
     This is the radius the a-family's own velocity picks out, and it is where the
     profile ends: the leading balance Omega H(Omega) = E Omega_X with E ~ -a h_c
     (X_c - X) forces Omega ~ (X_c - X)^{1/a}, an algebraic ZERO of order 1/a.
+
+    REPAIR (leg 150, from leg 114's M3).  The crossing test used to be the bare
+    `np.diff(np.sign(E)) != 0`, which carries no magnitude information at all: an
+    E that is 0.5 everywhere with ONE entry dipped to -1e-16 returned
+    X_c = 15.025019 where the truth is `inf`, and the answer moved by only 1.0e-04
+    across thirteen decades of dip depth.  A crossing is now accepted only if the
+    constant-sign excursion on EACH side of it reaches `min_rel_depth * max|E|`
+    -- leg 114's own prescription, "a magnitude threshold on the crossing relative
+    to |E|".  Both sides, because one side is measurably not enough: a one-point
+    dip is rejected on its far side and then readmitted one index later through
+    its own re-crossing back up, whose far side is the whole clean field.
+
+    Leg 150 measured the tempting alternative (require the new sign to be
+    SUSTAINED for more than one node) dead first: a real crossing at a = 0.15 has
+    run length 1, identical to the adversary.  The relative depth separates where
+    the run length does not -- worst real field 1.229e-01, worst adversary
+    2.0e-03, so the default 1e-2 sits 12.3x below the first and 5.0x above the
+    second.  `min_rel_depth=0.0` reproduces the pre-repair answer exactly.
+
+    Non-finite E is NOT swallowed: a crossing whose endpoints are not both finite
+    is interpolated as before, so a poisoned field still returns nan rather than
+    being quietly reclassified as "no crossing".
     """
     X = np.asarray(X, float)
     E = np.asarray(E, float)
@@ -345,12 +451,31 @@ def critical_radius(X, E):
     X, E = X[o], E[o]
     m = X > 0
     X, E = X[m], E[m]
-    s = np.where(np.diff(np.sign(E)) != 0)[0]
-    if s.size == 0:
-        return float("inf")
-    i = s[0]
-    t = -E[i] / (E[i + 1] - E[i])
-    return float(X[i] + t * (X[i + 1] - X[i]))
+    sgn = np.sign(E)
+    s = np.where(np.diff(sgn) != 0)[0]
+    thresh = float(min_rel_depth) * float(np.max(np.abs(E))) if E.size else 0.0
+    for i in s:
+        i = int(i)
+        if not (np.isfinite(E[i]) and np.isfinite(E[i + 1])):
+            # poison propagates, exactly as pre-repair
+            t = -E[i] / (E[i + 1] - E[i])
+            return float(X[i] + t * (X[i + 1] - X[i]))
+        if thresh > 0.0:
+            # BOTH sides must be resolved.  Testing only the far side is not enough
+            # and leg 150 measured why: a one-point dip has an unresolved run BELOW
+            # the axis, which that test correctly rejects -- and then the field's
+            # own re-crossing back UP one index later has a fully resolved far side,
+            # so the same artifact is readmitted through the other door.  The
+            # excursion on each side of a real crossing reaches `thresh`.
+            lo = _run_extent(E, i, -1)
+            hi = _run_extent(E, i + 1, +1)
+            # a run this leg cannot judge (non-finite) is NOT quietly reclassified
+            # as "no crossing" -- the magnitude test simply does not apply to it.
+            if lo is not None and hi is not None and min(lo, hi) < thresh:
+                continue                      # unresolved: a roundoff-scale dip
+        t = -E[i] / (E[i + 1] - E[i])
+        return float(X[i] + t * (X[i + 1] - X[i]))
+    return float("inf")
 
 
 def zero_order(X, om, Xc, lo=0.5, hi=0.97, min_abs=1e-13):
