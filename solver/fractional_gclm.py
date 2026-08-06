@@ -148,12 +148,48 @@ class FractionalGCLM:
     error.
     """
 
+    # DOMAIN GUARD (bench repair, leg 91's finding).  Both bounds are the literature's,
+    # not this file's taste: the dissipative-gCLM corpus writes the dissipation as
+    # Lambda^sigma-hat = |k|^sigma with sigma = 2 s, and works at sigma >= 0 throughout --
+    # the lowest exponent anyone treats is the "marginal" sigma = 0 (the Oldroyd-B stress
+    # reading), which is why **s = 0 is ADMISSIBLE and is not rejected here**.  Below that
+    # the object is not a weak dissipation, it is a different operator: for a negative
+    # exponent |k|^{2s} is singular at k = 0 and Riesz-potential theory says the multiplier
+    # is not well defined there at all.  The `self.visc[0] = 0.0` line below -- written for
+    # the correct physical reason that the mean is not dissipated -- would OVERWRITE that
+    # inf, which is precisely the signal that the operator is ill-defined, and what survived
+    # was a finite multiplier DECREASING in |k|: a smoothing operator wearing the
+    # dissipation's name.  Leg 91 measured what that costs: the pipeline ran to completion
+    # and returned a finite, plausible-looking p (+2.1864 at s = -0.5), which, injected into
+    # the p(s) fit whose zero crossing IS the measured s_c, moved that crossing by -0.07% at
+    # s = -0.5 and +13.33% at s = -2.0 -- with no exception, no warning, and no field of the
+    # returned dict recording it.  A negative nu is the same failure on the other input: an
+    # energy SOURCE wearing the dissipation's name, +6.38% on p, equally silent.
+    #
+    # There is no published UPPER bound on sigma, so none is imposed: the only upper wall is
+    # float64's own overflow of |k|^{2s}, and the module already refuses there correctly
+    # (visc goes non-finite, the run's isfinite check breaks out, p = nan).  Likewise NaN
+    # inputs already propagate correctly and are deliberately left to do so -- they are not
+    # converted into exceptions here.  This guard closes the LOW side only, which is where
+    # the gap was.
     def __init__(self, n=2048, a=0.0, nu=0.0, s=1.0, dt_frac=0.02):
         self.n = int(n)
         self.dt_frac = float(dt_frac)
         self.a = float(a)
         self.nu = float(nu)
         self.s = float(s)
+        if self.s < 0.0:
+            raise ValueError(
+                "s = %r is outside the admissible dissipation range: the operator is "
+                "(-Delta)^s with symbol |k|^{2s}, and sigma = 2 s >= 0 is required "
+                "(s = 0, the marginal case, IS admissible). For s < 0 the symbol is "
+                "singular at k = 0 and |k|^{2s} is not a dissipation at all -- it "
+                "decreases in |k|." % self.s)
+        if self.nu < 0.0:
+            raise ValueError(
+                "nu = %r is a negative dissipation strength -- anti-dissipation, an "
+                "energy source, not a viscosity. nu >= 0 is required (nu = 0, the "
+                "inviscid case, IS admissible)." % self.nu)
         self.x = np.arange(self.n) * TWO_PI / self.n
         self.k = wavenumbers(self.n)
         self.mask = dealias_mask(self.n)

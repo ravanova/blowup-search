@@ -140,6 +140,21 @@ the measured `s_c`, moves that crossing by −0.07 % (invisible) at `s = -0.5` a
   forbids editing it under any gate outcome, and the yes-branch says escalate. **Escalated.**
   The obvious repair (validate `s >= 0` and `nu >= 0` in `__init__`, and check the monotonicity of
   `visc` before masking `k = 0`) is one the orchestrator commissions, not this leg.
+* **UPDATE (bench repair, `Leg 0: ORCH`, landed with this leg).** The escalation was actioned
+  and the two commits above are bundled with the fix, so **`leg/fga-v1` must NOT be merged
+  separately.** `FractionalGCLM.__init__` now raises `ValueError` for `s < 0` and for `nu < 0`,
+  before `visc` is built — so the `visc[0] = 0.0` masking line is never reached on an invalid
+  exponent. `s = 0` and `nu = 0` stay admissible (gate 14, new). NaN/`inf` inputs still
+  propagate exactly as before (`NaN < 0.0` is `False`), and the float64 upper wall is
+  untouched, since both were already correct. Gates 6, 7, 8, 9 and 13 are **inverted, not
+  weakened**; gates 2, 3 and 5 remain gap pins — the repair was scoped to the operator, so the
+  pure closed forms `critical_s` / `relevance_exponent` still carry no domain. The repair is a
+  **verified no-op at every valid input**: `test_fractional_gclm.py`'s six gates pass, and a
+  pre/post sweep over `critical_s`, `relevance_exponent` and the full `run → estimate_T →
+  fit_relevance` pipeline at `s ∈ {0, 0.15, 0.35, 0.55, 0.75, 1.0}`, `nu ∈ {0, 1e-3}` is
+  **bit-identical**, down to the SHA-256 of the final vorticity field. `s_c = alpha/2` is
+  untouched and remains PRE-EMPTED (Route-J).
+
 * **The 13 gates in `test_fractional_gclm_adversarial.py` PIN the current silence deliberately.**
   Gates 2, 3, 5, 6, 7, 8, 9 and 13 **will fail the day a guard lands. INVERT them, do not weaken
   them** — keep every magnitude at the same threshold and flip only the sign of the signal claim
