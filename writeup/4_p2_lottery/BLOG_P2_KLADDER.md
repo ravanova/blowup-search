@@ -6,6 +6,17 @@ advection, and admitted one number was suspect. Here we pin it down — and are 
 as careful about what "pinned down" is worth. Still not a breakthrough. Still a toy
 model.*
 
+> **One scope note, added later (leg 180).** Everything below is measured at **positive** `a`.
+> The published paper that proves a *two-scale* self-similar blowup **scenario** for this
+> model family ([Huang–Tong–Wang, arXiv:2603.25104](https://arxiv.org/abs/2603.25104)) places
+> that scenario at `a ≤ 0`, and reports *one-scale* blowups for `a > 0` — a statement about
+> what **degenerate initial data** do. We are not continuing that scenario into `a > 0`. We
+> are continuing one specific object into `a > 0`: the exact traveling-wave *profile* that
+> sits at `a = 0`. That object exists at positive `a` in the published literature too (same
+> paper, Theorem 2.7, for every `a` below 1). So when we say "the two-scale traveling wave
+> survives to about `a ≈ 0.5`", read it as: *this `a > 0` continuation of the `a = 0` wave
+> keeps fitting to about `a ≈ 0.5`.* The number below is unchanged; only its label is.
+
 ## The loose end
 
 [Last time](BLOG_P2_TWO_SCALE.md) we took a *proven* two-scale singularity of the
@@ -57,14 +68,16 @@ increasing richness (call it K = 2, 3, 4 "pieces"), each at the **converged** bu
   pushes it to `0.50`.
 - **But it stops there.** Going richer still — more pieces, and a completely
   different *kind* of profile shape as a cross-check — **does not** push the boundary
-  any further. It saturates at about **`a ≈ 0.5–0.55`**.
+  any further. It saturates at about **`a ≈ 0.5–0.55`** — a positive `a`, well inside the
+  range we swept (`a = 0` up to `a = 1`).
 
 That distinction is the point. If the boundary had kept sliding outward every time
 we enriched the search, we'd have had to report defeat: "no real boundary here, our
-tool just can't resolve it." Instead it converges. **The two-scale traveling wave
-genuinely survives advection up to `a ≈ 0.5`, and genuinely starts failing in the
-band `0.5–0.55`** — and beyond it degrades steadily to a poor fit by the De Gregorio
-end, exactly as before.
+tool just can't resolve it." Instead it converges. **On positive `a`, the continuation of
+the `a = 0` two-scale traveling wave genuinely survives advection up to `a ≈ 0.5`, and
+genuinely starts failing in the band `0.5–0.55`** — and beyond it degrades steadily to a
+poor fit by the De Gregorio end, exactly as before. (What happens at `a ≤ 0` — the side the
+published two-scale *scenario* lives on — we did not measure and do not claim.)
 
 We ran three independent guards, and all three agree it's real: throwing more
 compute at the boundary doesn't move it, adding more profile pieces doesn't move it,
