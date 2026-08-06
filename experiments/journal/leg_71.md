@@ -1,6 +1,7 @@
 # Leg 71 — Route-CAP: the `capabilities.py` self-audit
 
-**Branch** `leg/cap-v1`. **Merge base** `e203b52` (leg 66). **Date** 2026-08-05/06.
+**Branch** `leg/cap-v1`. **Audited at** `10fed85`, rebased onto `origin/main` `9d0e328`.
+**Date** 2026-08-05/06.
 **Quartet** `experiments/p2_route_cap_v1_audit.py`,
 `writeup/data/p2_route_cap_v1_audit.json`, `writeup/novelty/leg_71.md`, this journal.
 No figure (pure audit, per the "no measurement, no figure" convention).
@@ -12,8 +13,16 @@ No figure (pure audit, per the "no measurement, no figure" convention).
 
 **ANSWER: NO.**
 
-42 rows, 40 distinct cited test files, **33 rows clean**. 6.3 hours of cumulative test
-runtime (22,839 s of parallel sweep plus 2,364 s + 112 s of serial re-timing).
+42 rows, 40 distinct cited test files, **33 rows clean**, 8,426 s (2.3 h) of cumulative
+test runtime.
+
+**Audited twice.** The first full sweep ran at the original merge base `e203b52`. By the
+time it finished, `origin/main` had advanced a long way (legs 78, 83, 85, 98 and others),
+so after rebasing the **entire sweep was re-run from a cleared cache at the rebased HEAD
+`10fed85`** — the gate asks about *current* HEAD, and shipping numbers measured against a
+superseded tree would be exactly the kind of stale-but-confident claim this leg exists to
+catch. Both audits agree on every count below. Where the rebase changed the answer, it is
+called out explicitly.
 
 | category | count | modules |
 |---|---|---|
@@ -23,7 +32,7 @@ runtime (22,839 s of parallel sweep plus 2,364 s + 112 s of serial re-timing).
 | S2 runtime no-op | **0** | — |
 | **S3 RED at HEAD** | **2** | `solver/fractional_boussinesq.py`, `solver/profile_newton.py` |
 | S3 timeout unresolved | **0** | — |
-| S4 cited test does not exercise the module | **2** | `solver/ga_search.py`, `solver/finite_support.py` |
+| S4 cited test does not exercise the module | **1** (was 2) | `solver/finite_support.py` — `ga_search` closed by this leg's correction |
 | S4 unreachable from the merge gate's name map | **7** | `hilbert_holder`, `hilbert_pointwise`, `ga_search`, `boussinesq`, `gclm`, `spectral_utils`, `finite_support` |
 
 The `test` field is in better shape than the charter feared in one specific respect —
@@ -33,9 +42,11 @@ the existing detector cannot see: *greenness* and *relevance*.
 
 ## PRIORITY BUG REPORT — 2 red tests at HEAD
 
-Both reproduce deterministically (each run twice, standalone). **Neither is fixed here** —
-a red test found by an audit is a bug report, not a silent repair, and repairing either
-would mean touching a `validated` claim this leg is pre-committed not to touch.
+Both reproduce deterministically — each run standalone, and both **re-confirmed red at the
+rebased HEAD `10fed85`** after main advanced by tens of legs (171.6 s and 295.3 s), so
+neither is an artifact of a stale tree. **Neither is fixed here** — a red test found by an
+audit is a bug report, not a silent repair, and repairing either would mean touching a
+`validated` claim this leg is pre-committed not to touch.
 
 ### 1. `test_fractional_boussinesq.py` — 36 passed, **1 failed**
 
@@ -86,10 +97,14 @@ The parallel sweep runs 6 tests at once and these are multi-minute numerics.
 `test_advection_scope.py` and `test_marginal_flow.py` both hit the 3600 s cap under
 contention. Re-timed **alone**, both pass:
 
-| test | 6-way parallel | alone | verdict |
-|---|---|---|---|
-| `test_advection_scope.py` | TIMEOUT > 3600 s | **PASS, 2363.7 s** | green, genuinely slow |
-| `test_marginal_flow.py` | TIMEOUT > 3600 s | **PASS, 112.0 s** | green; **32x** contention blowup |
+| test | 6-way parallel | alone | 3-way (re-audit) | verdict |
+|---|---|---|---|---|
+| `test_advection_scope.py` | TIMEOUT > 3600 s | **PASS, 2363.7 s** | PASS, 3045.6 s | green, genuinely slow |
+| `test_marginal_flow.py` | TIMEOUT > 3600 s | **PASS, 112.0 s** | PASS, 744.0 s | green; **32x** contention blowup |
+
+At 3 workers there were **no timeouts at all**, and the whole sweep cost 8,426 s against
+the 6-worker sweep's 22,839 s — fewer workers finished the same 40 tests in **37%** of the
+cumulative time. The worker count is now 3 in the script, with the reason recorded there.
 
 `test_marginal_flow.py`'s 112 s → >3600 s blowup is far past linear and looks like BLAS
 thread oversubscription rather than CPU sharing. Worth knowing before anyone parallelises
@@ -132,19 +147,22 @@ Cited test `test_first_integral.py` never mentions `finite_support`. The row is 
 SUPERSEDED tombstone kept "only so the name resolves to a warning", so there is no test
 that *should* cover it and no better citation exists. Left alone deliberately.
 
-### Rows 39–41: `gclm.py`, `boussinesq.py`, `spectral_utils.py` — **needs a leg that may edit `validated`**
-All three rows say, in `validated`: *"no dedicated test file — exercised through
-test_solver_clm.py"* (resp. `test_solver_boussinesq.py`). **That sentence is now false.**
-Leg 66 landed `test_gclm_dedicated.py`, `test_boussinesq_dedicated.py` and
-`test_spectral_utils_dedicated.py`, all present at this leg's merge base.
+### Rows 39–41: `gclm.py`, `boussinesq.py`, `spectral_utils.py` — **already fixed on main; no action**
+At the original merge base these three rows still said, in `validated`, *"no dedicated
+test file — exercised through test_solver_clm.py"* (resp. `test_solver_boussinesq.py`),
+a sentence leg 66 had already falsified by landing `test_gclm_dedicated.py`,
+`test_boussinesq_dedicated.py` and `test_spectral_utils_dedicated.py`.
 
-I did **not** repoint the `test` fields. Doing so would leave each row internally
-self-contradictory — a `test` field citing the dedicated file directly above a `validated`
-field insisting no dedicated file exists — and the contradiction lives in the prose this
-leg is pre-committed not to touch. The cited tests are not stale by the audit's own
-definition (they exist, run, pass, and do reference their modules), so the honest outcome
-is a flag, not a half-edit. **Recommend a follow-up leg chartered to update `validated`
-and `test` together for these three rows.**
+I deliberately did **not** repoint those `test` fields, because doing so would have left
+each row self-contradictory — a `test` field citing the dedicated file directly above a
+`validated` field insisting no dedicated file exists — and the contradiction lives in
+prose this leg is pre-committed not to touch. The plan was to recommend a follow-up leg.
+
+**The rebase settled it: main has since repointed all three** (`test_gclm_dedicated.py`,
+`test_boussinesq_dedicated.py`, `test_spectral_utils_dedicated.py`), and all three are
+green at HEAD (13.5 s, and the pair inside the sweep). The recommendation is withdrawn as
+already-done rather than carried forward — recorded here because "I flagged it and the
+tree fixed it independently" is a different fact from "I fixed it."
 
 ### Modules under a live leg
 No stale or red row landed on a module claimed by a live leg, so the

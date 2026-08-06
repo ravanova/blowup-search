@@ -130,7 +130,9 @@ in-flight test changes.
 
 # FINDINGS (appended after the audit ran)
 
-**Gate answer: NO.** 42 rows, 40 distinct cited tests, **33 clean**.
+**Gate answer: NO.** 42 rows, 40 distinct cited tests, **33 clean**. Measured twice — at
+the original merge base `e203b52`, then re-run in full from a cleared cache at the rebased
+HEAD `10fed85` after `origin/main` advanced by tens of legs. Both agree.
 
 - **S1 missing: 0.** Every cited test file exists; every cited module exists. There is no
   deleted test and no renamed module hiding under a confident row.
@@ -141,8 +143,8 @@ in-flight test changes.
   relres 2.89e-06 in 40 iterations). Both reproduce deterministically. Reported, not
   fixed.
 - **S4 relevance: 2** rows cite a test that never loads the module — `solver/ga_search.py`
-  (**corrected**: `test_ga.py` → `test_gclm_family.py`) and `solver/finite_support.py`
-  (the SUPERSEDED tombstone; left alone deliberately).
+  (**corrected**: `test_ga.py` → `test_gclm_family.py`, leaving 1) and
+  `solver/finite_support.py` (the SUPERSEDED tombstone; left alone deliberately).
 - **7 modules are unreachable from `scripts/merge_gate.sh`'s name map** — green today,
   ungated tomorrow. A hole in the merge gate, not in the index.
 
@@ -151,8 +153,9 @@ why pre-registering them was worth it: rows 25/26 (`hilbert_holder`,
 `hilbert_pointwise`) are *accurate* — the cited tests exist, run and pass, and the odd
 name is only a merge-gate reachability problem. Row 38 (`ga_search`) was a **genuine
 mis-citation**. Rows 40/41/42's shared/borrowed tests are accurate as `test` fields but
-sit under `validated` prose that leg 66 falsified; they need a leg allowed to edit
-`validated`, so they are flagged rather than half-edited.
+sat under `validated` prose that leg 66 falsified, so they were flagged rather than
+half-edited — and the rebase revealed main had already repointed all three, so that
+recommendation is withdrawn as already-done.
 
 **One false positive in this leg's own instrument**, recorded rather than deleted: the
 first classifier demanded a `__main__` block or top-level `test_*` functions and wrongly

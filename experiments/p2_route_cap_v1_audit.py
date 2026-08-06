@@ -70,7 +70,10 @@ if not PY.exists():
 
 TIMEOUT_S = 3600
 SERIAL_TIMEOUT_S = 7200   # budget for the alone/unloaded re-timing of a slow test
-WORKERS = 6
+# 3, not 6: at 6 the box thrashes (test_marginal_flow.py went 112s -> >3600s, a 32x
+# blowup that looks like BLAS thread oversubscription), which costs more wall time in
+# re-timing than the extra workers ever bought.
+WORKERS = 3
 
 # Results are appended here as each test finishes, so an interrupted sweep resumes.
 # Kept OUTSIDE the repository: it is scratch, not evidence.

@@ -36,10 +36,11 @@ Each entry records the four things that decide whether existing code can be reus
                module being trusted further than it was tested.
   `test`       the file that re-checks the above
 
-SELF-AUDIT: leg 71 (Route-CAP), 2026-08-06, at e203b52 -- all 42 rows run against the
-suite; 2 RED at HEAD (test_fractional_boussinesq.py, test_profile_newton.py -- reported,
-NOT fixed here), 1 `test` field corrected (solver/ga_search.py); see
-writeup/data/p2_route_cap_v1_audit.json.
+SELF-AUDIT: leg 71 (Route-CAP), 2026-08-06 -- all 42 rows run against the suite, twice
+(at e203b52 and again at 10fed85 after rebase); 33 clean, 2 RED at HEAD
+(test_fractional_boussinesq.py, test_profile_newton.py -- reported, NOT fixed here),
+1 `test` field corrected (solver/ga_search.py, which cited a test that never loaded it).
+See writeup/data/p2_route_cap_v1_audit.json and experiments/journal/leg_71.md.
 """
 
 import sys

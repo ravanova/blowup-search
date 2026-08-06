@@ -1,7 +1,7 @@
 {
   "leg": 71,
   "route": "CAP",
-  "head": "a2cb1171720e0a5b3d189bf154ce03b28b6b06f3",
+  "head": "10fed856da973ce97a1ab76425c63cc1ba1315e6",
   "interpreter": "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/.venv/bin/python",
   "convention": "no pytest in this repo; every test_*.py is a self-running script run as `.venv/bin/python test_x.py` (scripts/merge_gate.sh)",
   "gate": "Does every module row in capabilities.py have a test file that exists, is collected by pytest, and passes at current HEAD?",
@@ -20,11 +20,8 @@
       "solver/profile_newton.py"
     ],
     "S3_timeout_unresolved": [],
-    "slow_but_green_alone": [
-      "solver/marginal_flow.py"
-    ],
+    "slow_but_green_alone": [],
     "S4_no_coverage": [
-      "solver/ga_search.py",
       "solver/finite_support.py"
     ],
     "S4_ungated_by_merge_gate": [
@@ -36,38 +33,9 @@
       "solver/spectral_utils.py",
       "solver/finite_support.py"
     ],
-    "total_runtime_s": 21601.9
+    "total_runtime_s": 8425.8
   },
-  "serial_reruns": {
-    "test_marginal_flow.py": {
-      "test": "test_marginal_flow.py",
-      "returncode": 0,
-      "seconds": 112.04,
-      "timed_out": false,
-      "stdout_lines": 44,
-      "stderr_tail": [
-        ""
-      ],
-      "stdout_tail": [
-        "  (8) K=48: mu=0 -> 45 unstable (max Re +4.524), mu=1e-3 -> 0; crossover in [1e-05, 0.0001], (C) predicts 4.1e-05",
-        "  (8) K=96: mu=0 -> 93 unstable (max Re +4.546), mu=1e-3 -> 0; crossover in [1e-06, 1e-05], (C) predicts 5.1e-06",
-        "  (8) crossover falls by x10.0 from K=48 to K=96 ((C) predicts x8)  OK",
-        "",
-        "test_9_nonlinear_control_matches_the_spectral_gap",
-        "  (9) mu=0.05: twin-trajectory rate -1.0167 vs spectral gap -1.0114 (0.5%); mu=0: rate +1.904, kick grows x4.6e+05  OK",
-        "",
-        "test_10_refusal_predicate_and_the_lower_bound",
-        "  (10) signal/discretization 1604; leading inviscid eigenvalue +4.546 +430.3i, max Re at |Im|<=10 is only +1.004, measured generic rate +0.798  OK",
-        "",
-        "test_11_small_is_norm_dependent_and_divergence_is_refused",
-        "  (11a) coefficient-normalized perturbation is 3.6e+08x too large in the gauge functional: alpha 3.037 -> 1.171e+04 (naive) vs 3.037 (admissible)",
-        "  (11b) the diverged run is REFUSED (converged=False), the on-branch run is kept (mu_end=0.088780)  OK",
-        "",
-        "ALL GATES PASS (112s)"
-      ],
-      "serial": true
-    }
-  },
+  "serial_reruns": {},
   "rows": [
     {
       "module": "solver/hl_rescaled.py",
@@ -86,11 +54,28 @@
       "run": {
         "test": "test_hl_rescaled.py",
         "returncode": 0,
-        "seconds": 61.1,
+        "seconds": 26.12,
         "timed_out": false,
         "stdout_lines": 22,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    delta=0.016  rel steady residual (1.25<X<20) = 1.167e-02",
+          "    delta=0.004  rel steady residual (1.25<X<20) = 6.167e-03",
+          "[ok] explicit Thm 2.3 profile is a numerical steady state on its support",
+          "    Theta steady residual (1.25<X<20) = 0.000e+00  (c_l+2c_omega=0.0e+00)",
+          "[ok] c_l+2c_omega=0 makes the Theta equation exactly consistent",
+          "    anchor gauge: c_l=+1.9485 (want 2)  c_omega=-0.9687 (want -1)",
+          "[ok] CHL degenerate gauge returns (c_l,c_omega)=(2,-1) on the Thm-2.3 anchor",
+          "    |Omega_x(0)|=1.02e-04 (old gauge, degenerate)  |H(Omega)(0)|=1.243e+00 (CHL gauge, usable)",
+          "[ok] nonlocal H(Omega)(0) gauge is non-degenerate where the slope gauge fails",
+          "    worst |A x - b| and |x - numpy| over random systems = 6.75e-14",
+          "[ok] hand-rolled 3x3 solve matches numpy and flags singular systems",
+          "    (c_l,c_omega,c_r)=(+13.0403,+0.6314,+3.8177)  d_tau{Om(0),Om_X(0),V(0)} = (+2.2e-16,+0.0e+00,+0.0e+00)",
+          "[ok] Scenario-2 gauge (4.2) nulls d_tau{Omega(0),Omega_X(0),V(0)} exactly",
+          "",
+          "ALL HL-RESCALED TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -115,11 +100,26 @@
       "run": {
         "test": "test_line_hilbert.py",
         "returncode": 0,
-        "seconds": 117.39,
+        "seconds": 38.22,
         "timed_out": false,
         "stdout_lines": 13,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] natural spline slopes on non-uniform grid: max err 1.75e-04",
+          "    worst |S f - sweeps| / |slopes|_inf over 3 grids x 3 fields = 1.92e-13",
+          "[ok] cached slope operator == the Thomas sweeps it replaces, at rounding",
+          "[ok] A,B special values and branch continuity",
+          "[ok] A,B match direct closed form at moderate |s|",
+          "[ok] precomputed matrix matches on-the-fly transform",
+          "    refinement errors: ['2.35e-03', '5.22e-04', '1.16e-04']",
+          "[ok] error decreases under whole-line refinement (resolution + reach M)",
+          "    n= 1200 c=0.5 rho_max=8.0: max abs err 8.600e-04  rel 4.300e-04",
+          "    n= 2400 c=0.5 rho_max=9.0: max abs err 3.154e-04  rel 1.577e-04",
+          "[ok] CLM known-answer pair recovered to rel 1.577e-04 (< 1% POC target)",
+          "",
+          "ALL LINE-HILBERT TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -144,11 +144,28 @@
       "run": {
         "test": "test_gclm_family.py",
         "returncode": 0,
-        "seconds": 59.28,
+        "seconds": 29.42,
         "timed_out": false,
         "stdout_lines": 39,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    a=+1.0  R2rms=4.211e-02  odd-asymmetry=1.57e-14",
+          "[ok] even_lorentz = a=0 TW valley; a!=0 breaks it (the sweep signal)",
+          "    seed 0: (A,B)=(-0.676,3.055)  c_tw=+0.1934 (pred +0.1934)  res=1.40e-08",
+          "    seed 1: (A,B)=(-1.237,2.470)  c_tw=+0.3936 (pred +0.3936)  res=2.70e-08",
+          "    seed 2: (A,B)=(-0.501,2.045)  c_tw=+0.1751 (pred +0.1751)  res=4.20e-09",
+          "[ok] GA recovers a=0 two-scale traveling members (3/3), speed self-consistent",
+          "    relnorm(Omega_2)=6.53e-08  relnorm(1e-3*Omega_2)=6.53e-08",
+          "[ok] relative two-scale fitness is scale-invariant; anchor ~0, mismatch O(1)",
+          "[ok] rational_mixed decomposes into even (two-scale) + odd (skew) parts",
+          "    tail ratio |sq|/|lorentz| (|X|>5) = 3.833e-02 (squared pole decays faster)",
+          "    single squared pole: two-scale relres=1.135e-01 (NOT a null -> new basis)",
+          "    Lorentzian+zero-squared mix: relres=1.297e-08 (~anchor, T1 preserved)",
+          "[ok] squared-pole basis is genuinely different yet contains the a=0 anchor",
+          "",
+          "ALL GCLM-FAMILY TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -173,11 +190,26 @@
       "run": {
         "test": "test_gclm_rescaled.py",
         "returncode": 0,
-        "seconds": 845.42,
+        "seconds": 377.83,
         "timed_out": false,
         "stdout_lines": 13,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "steady residual ||f_tau||=4.02e-06  c_omega=-0.99914  HOmega(0)=1.99914",
+          "[ok] Omega_0 is a numerical steady state with the exact rate/HOmega(0)",
+          "    origin f(0) drift after 300 steps: 0.00e+00",
+          "[ok] origin slope f(0)=-4 held to machine precision",
+          "    converged=True steps=3058 tau=16.3 c_omega=-0.99914 shape_err=2.06e-06",
+          "[ok] perturbed data converges to Omega_0 with correct rate (one-scale is stable!)",
+          "    narrower IC: converged=True steps=3024 c_omega=-0.99914 shape_err=1.93e-06",
+          "[ok] second (narrower) perturbation also converges to Omega_0",
+          "    n=  901 c_omega=-0.998580 shape_err=3.96e-06 conv=True",
+          "    n= 1801 c_omega=-0.999479 shape_err=7.72e-07 conv=True",
+          "[ok] converged rate and profile are resolution-stable",
+          "",
+          "ALL GCLM-RESCALED TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -202,11 +234,23 @@
       "run": {
         "test": "test_rescaled_spectrum.py",
         "returncode": 0,
-        "seconds": 1005.39,
+        "seconds": 87.11,
         "timed_out": false,
         "stdout_lines": 10,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) the CLM self-similar profile Omega = -sin(theta) nulls the rescaled residual to 1.1e-16 with c_omega = -1 exactly, at K = 16..128",
+          "[ok] (2) operators exact: H 2.2e-16, U 0.0e+00, X d/dX 2.2e-16, d/dX 4.4e-16; the velocity recursion is a polynomial identity to 1.0e-13 (k up to 30)",
+          "[ok] (3) the Jacobian matches central differences to 4.6e-11 relative (a = 0 and 0.35, random directions off the anchor)",
+          "[ok] (4) structural identities hold: defects 1.2e-15/1.1e-16 at a = 0 and 1.9e-13/4.8e-15 at a = 1/2; the 2x2 block [[-1,0],[1,0]] is exact to 5.8e-16",
+          "[ok] (5) at a = 0 exactly 2 of 96 eigenvalues survive refinement -- 0 and -1, the analytically predicted pair -- and the other 95 sit on the imaginary axis to 1e-9 (the discretized continuum)",
+          "[ok] (5b) the closed-form continuum satisfies L s = lambda s to 4.0e-05 over the whole strip (numerical derivative); the lambda = 4i member is exactly tau-periodic with period 2pi/4 to 2.6e-16 -- the log-periodic DSS structure is CONTINUOUS spectrum, not an eigenvalue",
+          "[ok] (6) positive control: with a planted potential the SAME filter returns a converged eigenvalue at +1.0831 -- in the right half plane and 1.08 away from anything the plain operator has, so 'only two survive' is a measurement, not a blind spot",
+          "[ok] (7) past the branch Newton reports converged=False (residual 9.27e-03) instead of returning its last iterate as a profile",
+          "",
+          "ALL RESCALED-SPECTRUM TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -231,11 +275,21 @@
       "run": {
         "test": "test_fractional_gclm.py",
         "returncode": 0,
-        "seconds": 27.0,
+        "seconds": 18.72,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) the closed form z_0/(1 - t z_0/2) matches an independent RK4 to 2.3e-14 on the CIRCLE, and the solver matches the closed form to 1.9e-09 at t = 2.5 (amplitude 2.415)",
+          "[ok] (2) with the nonlinearity off the integrating factor reproduces exp(-nu|k|^{2s} t) to 6.7e-16, at s = 0.25/0.5/1.0/1.5",
+          "[ok] (3) T = 2/max{H(w0): w0=0} = 3.33333333; the exact solution's amplitude grows 206x by T(1-1e-3), and a run recovers its own T to 1.8e-04 relative",
+          "[ok] (4) s_c = alpha/2 and p = 1 - 2s/alpha agree (p(s_c) = 0); alpha = 2 gives s_c = 1 exactly -- the Laplacian is critical precisely at the NS scaling beta = 1/2",
+          "[ok] (5) at a = 0 (alpha = 1 exactly, nothing fitted) the measured relevance exponents ['+0.543', '+0.122', '-0.303'] track the prediction ['+0.500', '+0.100', '-0.300']; slope -2.116 vs -2",
+          "[ok] (6) at a fixed time the starved grid's spectral tail is 1.2e-02 against 4.2e-32 resolved (3e+29 x), its amplitude is already wrong by 2.4%, and with the guard on it reports 'under_resolved' rather than a number",
+          "",
+          "ALL FRACTIONAL-GCLM TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -260,11 +314,26 @@
       "run": {
         "test": "test_critical_dissipation.py",
         "returncode": 0,
-        "seconds": 2999.88,
+        "seconds": 311.15,
         "timed_out": false,
         "stdout_lines": 13,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1b) Lambda^2 = -d^2/dX^2 to 3.8e-08 relative, against a second-derivative built by finite differences on the interpolant",
+          "[ok] (1) Lambda is exact in the basis: coefficients [1, 1/2] to 1e-15 against the conjugate-Poisson identity, and 5.6e-08 relative against a completely independent line-grid Hilbert transform",
+          "[ok] (2) at mu = 0 the dissipative flow reproduces Route-E's residual, Jacobian and gauge BIT FOR BIT -- the extension does not perturb what it extends",
+          "[ok] (3) the exact Jacobian matches finite differences to 4.0e-11 relative, including the quotient term the re-derived gauge (N') contributes",
+          "[ok] (4) the closed-form viscous solution (E) satisfies omega_t = omega H(omega) - nu Lambda omega to 6.3e-16 over nu, mu_0 and t, with ||omega||_inf = (1+mu_0)/(T-t) to 1e-4",
+          "[ok] (5) Newton rediscovers (E) from a cold start to 8.2e-15, and alpha = 1 to 3.1e-15 at every mu on the branch: alpha_1 = 0, so a = 0 carries a LINE of viscous self-similar blow-ups, neutral to all orders",
+          "[ok] (6) the marginal verdict has the sign the algebra says, not the reflex one: alpha_1 > 0 makes mu DECAY, each decade costing >9x the tau of the last (346 then 3808) -- algebraic, because the linear term is gone",
+          "[ok] (7) with dissipation on, -c_omega is still the far-field exponent: window sweep 1.261/2.660/2.983/3.238 vs -c_omega = 3.0255, best window off by 0.043 (the sweep is the systematic and both ends are contaminated -- inner by the core, outer by the series tail)",
+          "[ok] (8) at a = 1/2, s = 3/2 the drift is K-converged: alpha_1 = 0.13272 / 0.13342 / 0.13358 at K = 96/144/192 (spread 8.6e-04) while the Lambda^3 truncation falls 0.084 -> 0.017 -- and alpha_1 is POSITIVE, so the critical viscous solution relaxes onto the inviscid profile",
+          "[ok] (9) the dissipative filter has a positive control: planting a localized potential takes it from 6 converged eigenvalues to 9, with one at +1.582 in the right half plane -- so 'the ladder does not move' is a measurement",
+          "[ok] (10) a slope below the solve error is REFUSED: the K=288 third-point rung would have quoted alpha_1 = -0.001704 (the OPPOSITE verdict to a=1/2) off a 2.0e-05 drift measured through a 3.8e-04 residual",
+          "",
+          "ALL CRITICAL-DISSIPATION TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -288,18 +357,8 @@
       "live_claimed_by": null,
       "run": {
         "test": "test_marginal_flow.py",
-        "returncode": -1,
-        "seconds": 3600.11,
-        "timed_out": true,
-        "stdout_lines": 0,
-        "stderr_tail": [
-          "TIMEOUT after 3600s"
-        ]
-      },
-      "serial_run": {
-        "test": "test_marginal_flow.py",
         "returncode": 0,
-        "seconds": 112.04,
+        "seconds": 743.97,
         "timed_out": false,
         "stdout_lines": 44,
         "stderr_tail": [
@@ -320,11 +379,11 @@
           "  (11a) coefficient-normalized perturbation is 3.6e+08x too large in the gauge functional: alpha 3.037 -> 1.171e+04 (naive) vs 3.037 (admissible)",
           "  (11b) the diverged run is REFUSED (converged=False), the on-branch run is kept (mu_end=0.088780)  OK",
           "",
-          "ALL GATES PASS (112s)"
-        ],
-        "serial": true
+          "ALL GATES PASS (744s)"
+        ]
       },
-      "serial_pass": true,
+      "serial_run": null,
+      "serial_pass": false,
       "passes": true,
       "flags": []
     },
@@ -345,11 +404,20 @@
       "run": {
         "test": "test_boussinesq_velocity.py",
         "returncode": 0,
-        "seconds": 1.18,
+        "seconds": 1.3,
         "timed_out": false,
         "stdout_lines": 7,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] angular DST-I round-trips and isolates modes",
+          "[ok] Poisson interior (Dirichlet BC), 2-mode: phi rel err 4.25e-05",
+          "[ok] velocity from vorticity (robin): phi 1.78e-05, u 2.86e-05, v 2.86e-05",
+          "[ok] radial convergence: errs ['2.87e-04', '7.14e-05', '1.78e-05'], order ~2.00",
+          "[ok] u_x(0) origin read: -2.0008 (expected -2)",
+          "",
+          "ALL BOUSSINESQ-VELOCITY (STEP A) TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -374,11 +442,23 @@
       "run": {
         "test": "test_boussinesq_rescaled.py",
         "returncode": 0,
-        "seconds": 320.45,
+        "seconds": 115.34,
         "timed_out": false,
         "stdout_lines": 10,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] grad_xy known answer: f_x 3.89e-04, f_y 3.89e-04",
+          "[ok] grad_xy convergence: errs ['1.51e-03', '3.89e-04', '9.88e-05'], order ~1.97",
+          "[ok] odd_field_x_slope: -2.1000 (true -2.1), errs ['2.3e-05', '2.3e-05', '2.3e-05']",
+          "[ok] c_l ratio bias-cancels: c_l err 2.74e-16 < slope err 2.31e-05",
+          "[ok] modulation: c_l -3.2381 (true -3.2381), c_omega -3.6185, c_theta -10.4750, u_x0 -1.9994",
+          "[ok] RHS wiring matches term-by-term re-assembly (c_l=1.0769, c_om=0.0476)",
+          "[ok] integrator stable 60 steps: c_l=+1.0623, c_omega=-0.1213, res=9.03e-01",
+          "[ok] renorm pins c_l: drift 0.0000 (renorm) vs 0.0478 (off), c_l0=3.000",
+          "",
+          "ALL BOUSSINESQ-RESCALED (STEP B, PIECES 2-4 + RENORM) TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -403,11 +483,28 @@
       "run": {
         "test": "test_port_certification.py",
         "returncode": 0,
-        "seconds": 11.49,
+        "seconds": 2.26,
         "timed_out": false,
         "stdout_lines": 32,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "  artifact: residual non-monotone, Route-G ladder grows 16.0x while c_omega holds to 0.77%; both seeds flat, levels differ 2.7x; status BLOCKED_AT_STEP_ONE  OK",
+          "",
+          "test_7_line_sweep_is_an_exact_inverse",
+          "  full transport operator applied to its own sweep returns the rhs to 9.5e-16  OK",
+          "",
+          "test_8_outward_upwinding_is_a_magnitude_not_a_boolean",
+          "  the sweep's precondition reports min(s_rho), so a marginal case is visible  OK",
+          "",
+          "test_9_attribution_ranks_by_shape_not_endpoint",
+          "  a bending ladder starting HIGHER outranks a flat one ending lower (gain 4.5 vs 1.02)  OK",
+          "",
+          "test_10_route_l_artifact",
+          "  artifact: velocity-OFF is worse, wall fractions proportional, top ablation 'pure dilation, no angular', sweep reaches 3.3e-06, ADI worse than nothing  OK",
+          "",
+          "ALL GATES PASS (2s)"
         ]
       },
       "serial_run": null,
@@ -432,11 +529,28 @@
       "run": {
         "test": "test_fractional_boussinesq.py",
         "returncode": 1,
-        "seconds": 323.82,
+        "seconds": 171.56,
         "timed_out": false,
         "stdout_lines": 50,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "G5  the direct collapse fit REFUSES (and is right to)",
+          "  [PASS] amplitude grows by >20x before the guard fires  growth 89.8, outcome=under_resolved",
+          "  [PASS] blow-up time extrapolates past the run  T=3.5175 vs t_final=3.3431",
+          "  [PASS] amplitude exponent is within 0.25 of -1 (the assumed regime)  -1.068",
+          "  [PASS] collapse_window_report REFUSES on this run  only 0.78 decades of (T-t) (need 1.5); beta moves 80% across sub-windows (allow 25%)",
+          "  [PASS] the refusal is on window length, not on noise  0.78 decades of (T-t)",
+          "  [PASS] beta really does move >25% across sub-windows  [1.79, 2.079, 0.823]",
+          "  [PASS] spectral beta drifts upward late (background contamination)  Lspec 0.406 -> 1.182",
+          "G6  the D/N instrument responds to s with the right sign",
+          "  [FAIL] p > 0 at s=0.10 (dissipation losing)  p=-0.211",
+          "  [PASS] p < 0 at s=1.00 (dissipation winning)  p=-3.486",
+          "  [PASS] p decreases with s  -0.211 -> -3.486",
+          "==========================================================================",
+          "36 passed, 1 failed",
+          "FAILED: p > 0 at s=0.10 (dissipation losing)"
         ]
       },
       "serial_run": null,
@@ -463,11 +577,26 @@
       "run": {
         "test": "test_interval.py",
         "returncode": 0,
-        "seconds": 1.15,
+        "seconds": 0.52,
         "timed_out": false,
         "stdout_lines": 13,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "0.1+0.2 -> [0.29999999999999999, 0.3000000000000001]",
+          "[ok] elementary ops enclose the exact rational result",
+          "    1/3 width=2.22e-16, 0.5*4 encloses 2 (width=6.7e-16)",
+          "[ok] outward rounding straddles inexact results; points start width 0",
+          "    point-width=5.200e-02  box-width=1.220e-01",
+          "[ok] enclosures are inclusion-monotone under input widening",
+          "[ok] reciprocal guards zero and encloses [1/4, 1/2]",
+          "    point-matvec max width=3.55e-15; box matvec covers 64 samples",
+          "[ok] isum / dot / matvec are rigorous enclosures",
+          "    ilog max width=3.55e-14; iatan_small max width=1.48e-14; both guards fire",
+          "[ok] ilog / iatan_small enclose an independent 50-digit reference",
+          "",
+          "ALL INTERVAL TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -482,7 +611,7 @@
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 13,
+      "n_test_functions": 18,
       "has_main_block": true,
       "test_imports_module": true,
       "test_mentions_module": true,
@@ -492,11 +621,28 @@
       "run": {
         "test": "test_interval_certificate.py",
         "returncode": 0,
-        "seconds": 600.98,
+        "seconds": 258.91,
         "timed_out": false,
-        "stdout_lines": 22,
+        "stdout_lines": 32,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    endpoint share 1.0013, 1.0004, 1.0001; interpolation orders 1.89, 1.95",
+          "    endpoint term scales 1539x between families vs M/a = 1490 predicted",
+          "[ok] (13) H_disc transforms an ENDPOINT-ZEROED interpolant, not D's",
+          "    min -0.18165 at x = 0.0e+00; |u(d)| 4.34e-18; |a_N| 1.61e-22",
+          "[ok] (14) the Kawahara profile reproduces CLN Figure 1",
+          "    6 rows contain their exact rational; widest 4.337e-19",
+          "[ok] (15) the Kawahara quadratic enclosure contains the exact value",
+          "    certified [6.7698e-15, 2.6193e-02] in H^l; CLN r0 2.2700e-14 inside, 0.53 decades above our r_min, 12.06 below our r_max",
+          "[ok] (16) the published Kawahara radius is a certified radius here",
+          "    factor 11.0000 (sqrt(2N+1) = 11.0000); tightest random case reaches 0.315 of it",
+          "[ok] (17) the cross-norm conversion is an upper bound, as claimed",
+          "    Y0/budget 3.684e-04 -> 3.682e+00 over a 1e4x kick (1.00e+04x)",
+          "[ok] (18) the Kawahara certificate rejects a poisoned iterate",
+          "",
+          "all interval-certificate gates pass (258.2s)"
         ]
       },
       "serial_run": null,
@@ -521,11 +667,28 @@
       "run": {
         "test": "test_spectral_certificate.py",
         "returncode": 0,
-        "seconds": 875.11,
+        "seconds": 324.85,
         "timed_out": false,
         "stdout_lines": 28,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[PASS] weighted l^1 operator norm: 7.000000 == 7.000000 (column sums, not rows)",
+          "[PASS] analytic right null vector is a kernel: ||T h|| / ||h|| = 3.55e-15 on the interior rows",
+          "[PASS] analytic left null vector is a cokernel, opposite parity: ||u^T T|| / ||u|| = 5.14e-14 on the interior columns, support overlap = 0; the one column reaching outside the block gives 3.56e+00, which is why the null space is 1-dimensional",
+          "[PASS] kernel is one-dimensional: sigma_min 2.71e-01 -> 8.54e-03, sigma_2 stays > 1.652",
+          "[PASS] optimal border direction is the far field: |cos| -> 1.00000 at M = 3136",
+          "[PASS] bordering bounds the tail where the object has finite norm: flat0.0: bordered 7.46->9.44 vs unbordered 4.06->48.76; algebraic0.3: bordered 8.09->11.37 vs unbordered 3.03->20.67",
+          "[PASS] bordering fails at s = 1, as the Fredholm sides predict: s=1: 9.89 -> 20.51 (still growing)",
+          "[PASS] kernel decays like m^-2, cokernel grows like m: kernel m^-2.0024 (in space iff s<1), cokernel m^+1.0012 (bounded iff s>=1)",
+          "[PASS] negative controls keep diverging: second 13.04->48.76, random 1584->668",
+          "[PASS] analytic border achieves the SVD optimum: analytic / SVD = 1.0070 (a proof cannot border with a singular vector)",
+          "[PASS] the far field is annihilated except at the truncation edge, and that falls like 1/M: relative l1 defect 5.86e-02 -> 2.93e-02 -> 1.46e-02 -> 7.32e-03 over M-K = 256..2048 (halves per doubling); supported on the LAST mode only: True -- so ker T is the far field for the infinite operator, and A12 cannot reach that direction up to O(1/M) (leg 54 MM-4)",
+          "[PASS] every ODD split has a singular finite block; every even one does not: odd K=3..11: smallest singular value <= 1.7e-16; even K=2..12: >= 2.4e-02 -- the split must be EVEN (leg 54 MM-1b)",
+          "[PASS] the dilation zero mode is exactly e_2: ||L e_2||_inf over the unbordered rows = 0.0e+00 (exactly zero)",
+          "",
+          "26/26 gates pass"
         ]
       },
       "serial_run": null,
@@ -550,11 +713,21 @@
       "run": {
         "test": "test_nk_bounds.py",
         "returncode": 0,
-        "seconds": 63.87,
+        "seconds": 18.95,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) discrete-ball trap: extremizer inflation 3.0e+03 -> 5.0e+04 over J=125..500 (smooth profile: 1.0275)",
+          "[ok] (2) two-point dual valid on the continuum ball: worst ratio 0.0003 <= 1 over 24 x 5 checks",
+          "[ok] (3) far-field modelling identity exact to 7.26e-17 (relative)",
+          "[ok] (4) local Holder envelope: worst ratio 0.9649 <= 1 over 15 unit-ball elements",
+          "[ok] (5) bounds dominate: |H| at X=20: 4.22e-02<=1.26e-01; |H| at X=61: 1.46e-02<=3.52e-02; |H| at X=139: 1.04e-02<=1.43e-02; modelling at X0=20: 1.847e-01<=5.621e-01; X*bound->1.681 (sharp 1.669); C_Q_sup <= 3.133",
+          "[ok] (6) modelling bound ~ X0^-0.554 (predicted -0.500), 2.048e-01 -> 4.410e-02; budget algebra correct",
+          "",
+          "ALL NK-BOUNDS TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -579,11 +752,21 @@
       "run": {
         "test": "test_op_lower.py",
         "returncode": 0,
-        "seconds": 71.66,
+        "seconds": 21.89,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) the reported maximum 2.8056 is reproduced exactly by the named family member (bump3.12/0.50), whose codomain norm is finite",
+          "[ok] (2) beats the sign-pattern baseline by 2.8-3.1x over J = 200..400",
+          "[ok] (3) 2.884 <= ||A|| <= 46.83 -- a bracket of 16x (the sign patterns made it 50x)",
+          "[ok] (4) the extremizer is a wide FAR-FIELD shape (centre theta = 3.12, i.e. X ~ 93); top five: bump3.12/0.50 2.884, bump3.12/1.00 2.837, bump2.96/1.00 2.754, bump3.12/0.20 2.749, bump2.96/0.50 2.692",
+          "[ok] (5) stable in J (2.682, 2.884, 3.067 over J = 200/400/800) while the sign-pattern baseline degrades (0.973 -> 0.921)",
+          "[ok] (6) ascent runs and is reported: family 2.8056 -> after ascent 2.8056 (gain 1.000x); headline 2.8056",
+          "",
+          "ALL OP-LOWER TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -608,11 +791,21 @@
       "run": {
         "test": "test_holder_norms.py",
         "returncode": 0,
-        "seconds": 5.19,
+        "seconds": 4.35,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) Holder seminorm exact on closed-form moduli (|th-pi/2|^0.5 -> 0.9511, target 1)",
+          "[ok] (2) H does not amplify the seminorm mode by mode ([cos k] vs [sin k] within 29%, no growth in k) -- its L^inf unboundedness is a SUMMATION effect",
+          "[ok] (3) conformal identity (pointwise, alpha-independent): X-weighted far-field seminorm = 2^gamma x the theta one with weight alpha-gamma, to 0.04% out to X=121 (Jacobian dX/dth=(1+X^2)/2 to 0.06%)",
+          "[ok] (4) the norm is an algebra with constant 1 (worst ||fg||/(||f|| ||g||) = 0.5393)",
+          "[ok] (5) the L^inf adversary is DEFUSED: sup ratio 1.80->4.07 (grows) but Holder ratio 1.02->0.85 (flat)",
+          "[ok] (6) family_op_norm reproduces the exact sup-to-sup norm when the seminorm is off (588.8142 vs 588.8142), is monotone in the family (50.53 -> 50.53), and is SMALLER in the Holder pair (stronger codomain norm)",
+          "",
+          "ALL HOLDER-NORM TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -637,11 +830,22 @@
       "run": {
         "test": "test_decay_grading.py",
         "returncode": 0,
-        "seconds": 7.42,
+        "seconds": 2.69,
         "timed_out": false,
         "stdout_lines": 9,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) cos_power_coeffs matches exact alpha=0,2,4 and the pointwise |cos(th/2)|^alpha",
+          "[ok] (2) H(cos k th) = sin k th on the model profiles (alpha=2: 1.7e-16, alpha=4: 5.6e-17)",
+          "[ok] (3) the theta -> +-pi fold agrees with the direct sum (3.3e-13, 3.6e-13 on scale 149.6)",
+          "[ok] (4) Q(h) = h H(h) is a PURE convolution -- agrees with the independent sum/difference build to 2.4e-17 (rounding), 0.0 at the anchor",
+          "[ok] (5) algebra_constant is two-sided sharp: measured sup in [S/4, S/2] on 4 weight pairs",
+          "[ok] (6) X^(a+1) f_a H(f_a) -> (int f_a)/pi for a=1.2,1.5,1.8 (<= 0.0% after the known O(X^(1-a)) fit) -- one power gained",
+          "[ok] (7) far-field resonance at alpha=2 confirmed twice: ||L^-1|| = the exact finite-domain norm (<=0.01%) and lim X^(a+1) DF[f_a] = c a - 1 (<=0.3%)",
+          "",
+          "ALL DECAY-GRADING TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -666,11 +870,21 @@
       "run": {
         "test": "test_decay_collocation.py",
         "returncode": 0,
-        "seconds": 385.85,
+        "seconds": 139.5,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) transforms exact on even trig polys (round-trip 2.8e-15, H 1.3e-14, d/dtheta 5.5e-13)",
+          "[ok] (2) collocation == coefficient-space build (residual 1.2e-13, jacobian 2.6e-13, dc column 1.6e-13)",
+          "[ok] (3) anchor is an exact zero (6.5e-13) and both kernel directions are annihilated (1.3e-12)",
+          "[ok] (4) collocated far field converges to the exact operator a=1.2: 1.81e-03->9.28e-05 (J=500->2000), a=1.5: 7.48e-04->2.56e-05 (J=500->2000)",
+          "[ok] (5) the gauged square system inverts (||AM - I||_max = 8.7e-14)",
+          "[ok] (6) graded sup norms: ||f_a||_X = 1 exactly; ungraded ||A|| grows +1.36 per doubling of J (log-divergent, 11.5->15.6) while graded converges (3.73->4.01, increments 0.126->0.063)",
+          "",
+          "ALL DECAY-COLLOCATION TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -695,11 +909,21 @@
       "run": {
         "test": "test_collocation_newton.py",
         "returncode": 0,
-        "seconds": 393.58,
+        "seconds": 192.63,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) I_k: closed forms exact, quadrature agrees to 1.4e-09; the float64 recursion drifts 1.7e-11 by k=800 (hence longdouble)",
+          "[ok] (2) a=0 reproduces decay_collocation exactly; the exact anchor's residual is 1.8e-12 on the nodes and 1.9e-12 BETWEEN them; U matches -log(1+X^2)/2",
+          "[ok] (3) analytic Jacobian (a=0.35) matches finite differences to 1.5e-08; dF/dc exact",
+          "[ok] (4) the gauged system Newton enforces goes to machine zero: 5.6e-14 (a=0, and it returns the exact anchor to 2.6e-14) / 6.2e-14 (a=0.3)",
+          "[ok] (5) two independent discretizations agree: X_c/c = 12.257 (theta-collocation) vs 12.243 (sinh-rho), 0.1%; zero order 3.59 / 3.55 vs the predicted 1/a = 3.33",
+          "[ok] (6) rows enforced 6.2e-14, row displaced by the gauge 1.8e-04, weighted off-node defect 5.2e-02 at X=2037.2 -- against a control (exact anchor) of 3.2e-10",
+          "",
+          "6/6 gates passed."
         ]
       },
       "serial_run": null,
@@ -724,11 +948,28 @@
       "run": {
         "test": "test_reduced_certificate.py",
         "returncode": 0,
-        "seconds": 71.99,
+        "seconds": 26.31,
         "timed_out": false,
         "stdout_lines": 57,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "      gamma=0.5: 0.3308 0.3057 0.2732 0.2325 0.2021 0.1644   slope -0.0488",
+          "      gamma=0.85: 0.2062 0.1510 0.1020 0.0676 0.0430 0.0343   slope -0.0502",
+          "  [PASS] gamma >= 0.35 stops the divergence   slopes 0.35:-0.0212, 0.5:-0.0488, 0.85:-0.0502",
+          "  [PASS] gamma = 0.15 does NOT (the threshold is real, not an artefact of using any seminorm at all)   +0.0658",
+          "  [PASS] holder_seminorm exact on |x-c|^gamma (constant 1)   1.000000000000",
+          "",
+          "[7] the assembled rehearsal refuses to return a budget",
+          "      Y0=1.23e-12  Z0=1.42e-11  ||A||=4.5181  N2_finite=True  Z1=None",
+          "  [PASS] Z_1 is reported as None, not as zero   ",
+          "  [PASS] verdict says the budget does not close   ",
+          "  [PASS] a=0.3 has finite N''   ",
+          "  [PASS] a=0.8 does not   ",
+          "",
+          "========================================================================",
+          "16/16 passed"
         ]
       },
       "serial_run": null,
@@ -753,11 +994,21 @@
       "run": {
         "test": "test_nk_fourier.py",
         "returncode": 0,
-        "seconds": 27.88,
+        "seconds": 8.8,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) exact anchor: max |b_m| = 0.000e+00 over N in {1,2,5,12,40}; c=0.45 gives 2.500e-02",
+          "[ok] (2) jacobian vs finite difference: max err = 1.414e-10",
+          "[ok] (3) kernel annihilated to 0.000e+00; gauge<w> = origin:-0.500, a0:-0.125, a1:-0.250; sigma_min(gauged) = 1.318e-01",
+          "[ok] (4) grid cross-check: rel err = 1.582e-04 (|R2|max = 0.236, discretization-limited)",
+          "[ok] (5) tail: assembled band vs closed form max err 0.000e+00; z(k)->1 from both sides; affine-u weight marginal at 1.000000000",
+          "[ok] (6) radii polynomial: r_min=1.429e-12, Y0_max=0.0612; Z0+Z1>1 correctly rejected",
+          "",
+          "ALL NK-FOURIER TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -782,11 +1033,21 @@
       "run": {
         "test": "test_nk_seminorm.py",
         "returncode": 0,
-        "seconds": 45.35,
+        "seconds": 15.59,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) split refactor exact to 1.6e-16; dominates measurements (worst ratio 0.844); up to 4.30x sharper than v6's bound",
+          "[ok] (2) interpolation inequality holds on 32 profiles x 4 (alpha,gamma): worst ratio 0.4611 <= 1",
+          "[ok] (3) closed-form minimum matches brute force to 1.0e-10 (kappa* to 3.1e-05); C(1/2) = 2 exactly",
+          "[ok] (4) solve-for-the-derivative identity exact to 1.9e-16 (relative) -- (P) is a rearrangement, not an approximation",
+          "[ok] (5) fixed point T = 63.821 (slope 0.445 < 1, unique); monotone in C_sup; closes for C_sup up to 5e3 because the gain is sublinear (F(2T)/F(T) = 1.414 vs 2^gamma = 1.414); alpha < 1 refused",
+          "[ok] (6) closure bound 63.82 (J-free) dominates measured 0.842; v6's dual on the same quantity grows like J^+0.49; interpolant defect: w|h| jumps 3.6e-03 -> 1.3e+02 past the last node",
+          "",
+          "ALL NK-SEMINORM TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -811,11 +1072,21 @@
       "run": {
         "test": "test_nk_hilbert_holder.py",
         "returncode": 0,
-        "seconds": 253.25,
+        "seconds": 64.85,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) E_N + E_F + G reproduces the exact conjugate to 5.6e-06 over 7 pairs x 3 profiles (quadrature-limited)",
+          "[ok] (2) the bound dominates the measured weighted seminorm of H(h) on 9 profiles x 2 (alpha,gamma); worst ratio 0.2389 <= 1",
+          "[ok] (3) pair sweep converged over 4 grid levels (spread 4.25e-04, b = (1.1937, 4.9410)); quadrature spread 4.33e-04",
+          "[ok] (4) increment route beats the pointwise-only control 237x (6.135 vs 1452.1); the min-SUM rule inflates b_sup 1.19 -> 2.61; the shrinking pad keeps wide pairs finite",
+          "[ok] (5) b_semi rises to 18.6 at gamma=0.05 (from 13.0 at 0.1) and again to 7.2 at 0.9; C_Q_full bowls with an INTERIOR minimum 3.331 at gamma=0.65, while the sup-only C_Q is monotone",
+          "[ok] (6) closed-form simplex max exact to 2.9e-11; C_Q_full = 3.426 brackets the measured 0.994 from above and exceeds v6's sup-only 3.133",
+          "",
+          "ALL HILBERT-HOLDER TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -842,11 +1113,21 @@
       "run": {
         "test": "test_nk_hilbert_pointwise.py",
         "returncode": 0,
-        "seconds": 13.15,
+        "seconds": 4.53,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) folded kernel reproduces the exact conjugate to 1.5e-07 over 18 cases; its own p.v. integrates to 0.0e+00, which is what licenses the global subtraction (no band, no remainder)",
+          "[ok] (2) valid at rho = 1, 6, 25: worst measured/bound 0.9731 <= 1 (nearly attained -- the bound is not loose on the anchor shape)",
+          "[ok] (3) sharper than v6 at every sampled X: ratio 0.091-0.994 (median 0.674)",
+          "[ok] (4) quadrature flat to 1.8e-03 over 8x; the weighted sup flat to 7.7e-03 over a 4x theta refinement",
+          "[ok] (5) ||A|| bowls in rho: optimum 46.89 at rho = 9.0, vs 74.57 at the neutral rho = 1 (which is worse than v6's 69.15) -- the payer rule must be tuned to the answer's T/S, not to 1",
+          "[ok] (6) ||A|| 69.15 -> 47.05 (-32%) and C_Q_full 3.362 (v6 sup-only 3.133) still above the measured 0.996",
+          "",
+          "ALL HILBERT-POINTWISE TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -873,11 +1154,28 @@
       "run": {
         "test": "test_first_integral.py",
         "returncode": 0,
-        "seconds": 2227.11,
+        "seconds": 947.92,
         "timed_out": false,
         "stdout_lines": 39,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[6] X_c/c against the independent whole-line build",
+          "      a=0.3: reduced 12.256373  whole-line 12.256421  rel 3.93e-06",
+          "      a=0.4: reduced 6.984852  whole-line 6.984882  rel 4.27e-06",
+          "      a=0.5: reduced 4.846121  whole-line 4.845770  rel 7.26e-05",
+          "  [PASS] agrees to <1e-4 (v12's two builds agreed to ~1e-3)   worst 7.26e-05",
+          "      X_c/c over K=32/64/128/192: 12.256377650 12.256373326 12.256373326 12.256373326",
+          "  [PASS] K-converged in the reduced basis   spread 3.7e-13 over K=64..192 (K=32 already within 4e-07)",
+          "",
+          "[7] the reconstructed Omega solves the ORIGINAL residual R",
+          "      max|R| = 6.84e-07 4.28e-08 2.66e-09 1.85e-10",
+          "  [PASS] R -> 0 at the U-quadrature's own 2nd order   fitted n^-1.98, final 1.9e-10",
+          "  [PASS] Omega ~ (X_c - X)^{1/a} at the edge   worst relative exponent error 6.3e-06",
+          "",
+          "========================================================================",
+          "11/11 passed"
         ]
       },
       "serial_run": null,
@@ -902,11 +1200,21 @@
       "run": {
         "test": "test_turning_point.py",
         "returncode": 0,
-        "seconds": 1609.81,
+        "seconds": 549.12,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) inner homogeneous mode ~ (X_c-X)^3.507 at X_c=6.1286 (predicted 1/a = 3.333, and POSITIVE -- v12's writeup had the sign wrong)",
+          "[ok] (2) outer homogeneous mode GROWS to 2.228e+05 by X=1e8: exponent d log h / d log log(X/X_c) = 3.3307 vs the predicted 1/a = 3.3333",
+          "[ok] (3) both fits are quadrature-converged: outer spread 1.6e-04 over a 16x refinement, inner 1.1e-04",
+          "[ok] (4) the far-field exponent tracks the profile's own 1/a: a=0.25 -> 3.998 (4.000), a=0.30 -> 3.331 (3.333), a=0.40 -> 2.485 (2.500)",
+          "[ok] (5) a=0.3: ||A|| by outer cutoff 20/50/200/inf = 27.7/165/1.84e+03/7.57e+04 and 86% of the extremal row comes from within 10% of X_c; the a=0 control is 3.54/3.54/3.54/3.54",
+          "[ok] (6) restoring the speed adds KERNEL, not range: the square bordered system at a=0 has cond 6.1e+18 (smin 3.1e-17), and the overdetermined version's norm grows 4.05e+03 -> 1.06e+04 over J=200->400 even at the anchor, where the plain system is flat",
+          "",
+          "6/6 gates passed."
         ]
       },
       "serial_run": null,
@@ -931,16 +1239,24 @@
       "run": {
         "test": "test_profile_newton.py",
         "returncode": 1,
-        "seconds": 945.87,
+        "seconds": 295.29,
         "timed_out": false,
         "stdout_lines": 5,
         "stderr_tail": [
+          "Traceback (most recent call last):",
           "  File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/test_profile_newton.py\", line 135, in <module>",
           "    test_6_failure_reported()",
           "  File \"/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/test_profile_newton.py\", line 122, in test_6_failure_reported",
           "    assert not rows[-1][\"converged\"], rows[-1]",
           "           ^^^^^^^^^^^^^^^^^^^^^^^^^",
           "AssertionError: {'a': 0.9, 'converged': True, 'residual_rms': 3.880940112012514e-07, 'relres': 2.8888943409112577e-06, 'c': np.float64(0.7483299284679625), 'iterations': 40}"
+        ],
+        "stdout_tail": [
+          "[ok] (1) from a perturbed start Newton finds a DISCRETE zero: rms 1.8e-15 (the exact continuum anchor scores 2.4e-08 on the same system, its discretization error); profiles differ by 2.0e-03, c = 0.497971",
+          "[ok] (2) the two-parameter degeneracy is real: one gauge solved directly stalls at 8.8e-05 after 40 iterations, while two gauges in least squares reach 1.8e-15 in 5",
+          "[ok] (3) convergence is quadratic at a = 0.2: 1e-02 -> 1e-03 -> 7e-06 -> 2e-10 -> 1e-15 -> 1e-15",
+          "[ok] (4) the analytic Jacobian matches finite differences to 6.7e-11 (both the Omega block and the c column)",
+          "[ok] (5) continuation to a = 0.5: relres between 5.9e-15 and 3.1e-08 -- the GA's floor on the same quantity was ~1e-2, i.e. 6-12 orders of magnitude below it"
         ]
       },
       "serial_run": null,
@@ -967,7 +1283,7 @@
       "run": {
         "test": "test_advection_scope.py",
         "returncode": 0,
-        "seconds": 2363.67,
+        "seconds": 3045.56,
         "timed_out": false,
         "stdout_lines": 8,
         "stderr_tail": [
@@ -1006,11 +1322,35 @@
       "run": {
         "test": "test_target_norm.py",
         "returncode": 0,
-        "seconds": 0.91,
+        "seconds": 0.52,
         "timed_out": false,
         "stdout_lines": 25,
         "stderr_tail": [
-          ""
+          "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/solver/target_norm.py:604: TargetNormDomainWarning: target_norm.compactify: 14 theta-sample(s) lie outside the supplied data window, so the far-field closure -- not the data -- determines those modes (14 of 16384 samples, 0.085%, beyond |X| = 745.239 with far_field='power').  capabilities.py calls the measurement untrustworthy there; the headline is taken where no sample point leaves the grid.",
+          "  th, h, n_out = compactify(X, f, M, c=c, far_field=far_field,",
+          "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/solver/target_norm.py:604: TargetNormDomainWarning: target_norm.compactify: 14 theta-sample(s) lie outside the supplied data window, so the far-field closure -- not the data -- determines those modes (14 of 16384 samples, 0.085%, beyond |X| = 745.239 with far_field='clamp').  capabilities.py calls the measurement untrustworthy there; the headline is taken where no sample point leaves the grid.",
+          "  th, h, n_out = compactify(X, f, M, c=c, far_field=far_field,",
+          "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/solver/target_norm.py:604: TargetNormDomainWarning: target_norm.compactify: 14 theta-sample(s) lie outside the supplied data window, so the far-field closure -- not the data -- determines those modes (14 of 16384 samples, 0.085%, beyond |X| = 745.239 with far_field='zero').  capabilities.py calls the measurement untrustworthy there; the headline is taken where no sample point leaves the grid.",
+          "  th, h, n_out = compactify(X, f, M, c=c, far_field=far_field,",
+          "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/test_target_norm.py:202: TargetNormDomainWarning: target_norm.compactify: 14 theta-sample(s) lie outside the supplied data window, so the far-field closure -- not the data -- determines those modes (14 of 16384 samples, 0.085%, beyond |X| = 745.239 with far_field='none').  capabilities.py calls the measurement untrustworthy there; the headline is taken where no sample point leaves the grid.",
+          "  _, h_none, n_none = compactify(Xs, calibration_family(Xs, 0.4), 16384, far_field=\"none\")"
+        ],
+        "stdout_tail": [
+          "[PASS] sawtooth sits at p = 1 (flat threshold): p = 1.00078 vs 1 exactly -- alpha = 0, a jump, ||.||_(l^1) divergent",
+          "[PASS] 1/(1+|X|) sits at p = 2 (s = 1 threshold): p = 1.98878 vs 2 exactly -- and s = 1 is the class the ban clause names",
+          "[PASS] calibration family recovers 1 + alpha: alpha->p: 0.1000->1.1075, 0.3935->1.3974, 0.6000->1.6033, 1.0000->2.0040; worst defect 0.0075 (also vs spectral_certificate.coefficient_decay_exponent)",
+          "[PASS] REGRESSION exact-zero sub-sequence: every EVEN mode zeroed, p = 1.99600 vs 2 -- version 1 of the fitter returned -0.06 here because it took logs of the zeros",
+          "[PASS] REGRESSION roundoff-zero sub-sequence: every EVEN mode at 1e-18, p = 1.99600 vs 2 -- version 2 still returned -0.25 because one sparse log-bin caught a single such mode",
+          "[PASS] clean power laws recovered: worst defect 2.26e-03 over p = 1.0, 1.3935, 2.0, 2.5",
+          "[PASS] closure fires at X_max = 745 and not at 4e+04: 14 sample points outside the short grid, 0 outside the long one -- which is why the headline is measured on the long one",
+          "[PASS] closure changes p when it fires: power/clamp/zero give p = 1.4039 / 1.5654 / 1.1488, spread 0.4166 -- this ablation is not a tautology of the code",
+          "[PASS] far_field='none' refuses to invent data: 14 points left NaN and the transform refuses them",
+          "[PASS] partial sums reduce at s = 0: S_8 = 1.527422, S_64 = 1.629431",
+          "[PASS] divergent tail has no value, and says so: s = 1 -> p - s <= 1: the weighted sum diverges; the tail has no value; s = 0.3 -> bound 3.4435",
+          "[PASS] analytic tail dominates the true remainder: checked at s = 0 and s = 0.3 against the summed remainder to k = 2e+05",
+          "[PASS] verdict reports a magnitude: s = 0.3 margin +0.0963 in exponent units; s = 1 finite = False",
+          "",
+          "23/23 gates pass"
         ]
       },
       "serial_run": null,
@@ -1035,11 +1375,28 @@
       "run": {
         "test": "test_literature_gates.py",
         "returncode": 0,
-        "seconds": 56.18,
+        "seconds": 14.1,
         "timed_out": false,
         "stdout_lines": 29,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "  8410 rungs refused on d tau; the deepest would have read c_l off by >= 3.2e-01 while tau there is 2.8e-17  OK",
+          "",
+          "test_6_supercritical_balance",
+          "  spread(beta=1)/spread(beta=2) = 49; the beta=2 residual falls 2.02e-02 -> 1.87e-03 on deeper ladders (ALS's O(tau) term)  OK",
+          "",
+          "test_7_branch_against_xu",
+          "  our alpha(a) vs XU s*(a): worst 3.15e-03 over 6 rows, exact at a=0 and a=1/2; a_c ours 0.64% vs XU 0.04%  OK  [F PRE-EMPTED]",
+          "",
+          "test_8_ledger_does_not_rot",
+          "  12 claims, 7 pre-empted; every entry names a source and what survives  OK",
+          "",
+          "test_9_artifact_matches_the_module",
+          "  committed JSON agrees with a fresh call on all six headline numbers  OK",
+          "",
+          "ALL GATES PASS (14s)"
         ]
       },
       "serial_run": null,
@@ -1064,11 +1421,28 @@
       "run": {
         "test": "test_certificate_shapes.py",
         "returncode": 0,
-        "seconds": 271.21,
+        "seconds": 137.51,
         "timed_out": false,
         "stdout_lines": 49,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "test_12_a_nonzero_diagonal_restores_decay",
+          "  mu=0.25  invertible, K-exponent = -0.849, decays",
+          "  mu=1.0   invertible, K-exponent = -0.915, decays",
+          "  mu=2.0   invertible, K-exponent = -0.933, decays",
+          "",
+          "test_13_the_shift_is_the_only_case_that_fails",
+          "  mu=0.0   SHIFT, needs bordering, K-exponent = +0.437, does NOT decay",
+          "",
+          "test_14_bdl_threshold_is_NOT_where_the_behaviour_changes",
+          "  mu=0.25 is OUTSIDE BDL (delta=2) and still decays (-0.849) -- the hypothesis is dead",
+          "",
+          "test_15_decay_exponent_refuses_rather_than_returning_a_number",
+          "  refuses on: too few rungs, a zero rung, an inf rung, a negative rung",
+          "",
+          "ALL GATES PASS (137s)"
         ]
       },
       "serial_run": null,
@@ -1093,11 +1467,28 @@
       "run": {
         "test": "test_bordered_hl.py",
         "returncode": 0,
-        "seconds": 437.83,
+        "seconds": 103.22,
         "timed_out": false,
         "stdout_lines": 32,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    peak at X=2.042, min Omega=2.233e-02, asymmetry=0.673",
+          "    far-field exponent -0.3766 vs c_omega/c_l = -0.3952",
+          "[ok] positive, regular, non-symmetric -- and the tail knows the constants",
+          "    claimed 52.500000, best of 2000 sampled directions 52.452978",
+          "[ok] the weighted induced norm is an upper bound and is nearly attained",
+          "    B = 8.3064e+03 bounds the worst of 200 sampled unit directions (2.3113e+00); slack 3593.8x",
+          "[ok] the Z_2 assembly is an upper bound on the form it bounds",
+          "    tuned norm: Y0=1.011e-12 Z1=9.542e-11 Z2=2.206e+08 budget=2.267e-09",
+          "    r in [1.011e-12, 4.534e-09], Y0/budget = 4.461e-04",
+          "[ok] the radii polynomial closes in float, and both modules agree it does",
+          "    n=801: naive w_l=745 -> Y0/budget 3.514e+01 (FAILS)",
+          "          tuned w_l=7.5 -> Y0/budget 6.712e-03 (CLOSES); one constant is worth 5236x",
+          "[ok] closure is a property of the SPACE, not of the object alone",
+          "",
+          "ALL BORDERED-HL TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -1122,11 +1513,28 @@
       "run": {
         "test": "test_viscous_novelty.py",
         "returncode": 0,
-        "seconds": 791.72,
+        "seconds": 236.23,
         "timed_out": false,
         "stdout_lines": 27,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "  defect at the zero 8.16e-07 (relative 7.5e-05), at kappa+1e-4 2.86e-04: 351x  OK",
+          "",
+          "test_5_resolution_and_truncation_are_measured",
+          "  step halving moves the defect 7.9e-12 (defect 4.9e-10); xi_1 = 15/20/30 moves kappa by 3.6e-08  OK",
+          "",
+          "test_6_the_dissipation_branch_folds_at_their_number",
+          "  fold at eps*=0.0606364, kappa*=0.554636; published 0.0606361, 0.554644  (deps=3.0e-07, dkappa=8.0e-06)  OK",
+          "",
+          "test_7_margin_proxy_dies_at_the_fold_not_at_zero",
+          "  ||J^-1||: eps=0 7.15e-01, mid-branch 2.35e-02, at the fold 1.53e+00 (65x); cond(J) 8.4e+00 / 1.9e+01 / 2.4e+03  OK",
+          "",
+          "test_8_figure_calibration_checks_itself",
+          "  SKIPPED: Papers/2410.05480.pdf not present (Papers/ is gitignored; bash Papers/fetch.sh 2410.05480)",
+          "",
+          "ALL GATES PASS (236s)"
         ]
       },
       "serial_run": null,
@@ -1141,7 +1549,7 @@
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 9,
+      "n_test_functions": 12,
       "has_main_block": true,
       "test_imports_module": true,
       "test_mentions_module": true,
@@ -1151,11 +1559,27 @@
       "run": {
         "test": "test_weight_search.py",
         "returncode": 0,
-        "seconds": 194.91,
+        "seconds": 70.52,
         "timed_out": false,
-        "stdout_lines": 11,
+        "stdout_lines": 14,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[ok] (1) ledger 4 entries, verdict PROCEED_NARROW computed off it",
+          "[ok] (2) |Omega - Omega_0|_sup falls 4.13e-05 -> 2.59e-06 -> 4.24e-07 over n = 201, 401, 801; residual floor 1.9e-14 -> 4.8e-14 -> 8.6e-14",
+          "[ok] (3) exact quadratic identity to 9.56e-16 relative -- Z_2 is exact",
+          "[ok] (4) fitness invariant under global weight scaling to 6.66e-16",
+          "[ok] (5) wall at p+q = 1.0: norm flat below/at it; above it x7.39 with reach against the predicted x7.39",
+          "[ok] (6) naive->tuned gain 5604x under the implicit gauge, 0.56x when c_l is pinned",
+          "[ok] (7) lower wall p_- = -3.737, -2.933, -1.676 at n = 201, 401, 801 -- the admissible band shrinks",
+          "[ok] (8) gate returns 6/6 properties with thresholds; verdict FAIL == AND of them",
+          "[ok] (9) P2: wall=-3.737 excludes below/admits above; P3: 1/2 hand weights resolved, windows reported per-weight",
+          "[ok] (10) closed-form weight range agrees with the grid's to 0.034 decades over 200 in-box weights",
+          "[ok] (11) 2-D growth law: x7.389 vs measured x7.389 on the 1-D slice (known answer x7.39); on an interior-dominated weight x1.000 vs measured x1.000, where the 1-D law says x7.389 (7.39x off)",
+          "[ok] (12) 2-D wall r_crit=11.61 decades from the SAME crossing p_-=-3.737; misclassified 38 -> 1 of 200 in-box weights (70 of which fail)",
+          "",
+          "all weight-search gates pass (70.0s)"
         ]
       },
       "serial_run": null,
@@ -1180,11 +1604,28 @@
       "run": {
         "test": "test_target_selection.py",
         "returncode": 0,
-        "seconds": 0.46,
+        "seconds": 0.21,
         "timed_out": false,
         "stdout_lines": 19,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    ratio(1D,2 fields) = 1.114e-03   ratio(3D,3 fields) = 6.000e+02",
+          "[ok] unknown counts are exact and the reference object is the unit",
+          "[ok] Y0 budget brackets the radii polynomial's root exactly, on four (Z1,Z2)",
+          "    published r0 = 2.270e-14, ours 2.270e-14, rel err 0.0e+00, implied Z1 = 4.41e-03",
+          "[ok] the feasibility algebra reproduces a COMPLETED certificate's radius",
+          "    printed 2dMK = 8.942e-05; corrected 2M^2Kd = 4.315e-02 (ratio = M = 482.6); their K from their parts, rel err 2.2e-04",
+          "[ok] NS-preprint closure audited in both forms; both close, and it is recorded",
+          "    GATE YES -> HL_S2_nonsymmetric (rank 1, cost ratio 1.114e-03 of the certified object)",
+          "[ok] the gate is decisive and internally consistent",
+          "    uncertified ranks [1, 2, 3, 4] carry costs ['1.1e-03', '5.6e-04', '6.7e-01', '1.1e-03'] -- not sorted by cost",
+          "[ok] ranking follows the stated criterion (contribution first)",
+          "    7 new source blocks; every ledger citation resolves",
+          "[ok] every source the ledger cites is declared with what was read of it",
+          "",
+          "ALL TARGET-SELECTION TESTS PASSED"
         ]
       },
       "serial_run": null,
@@ -1195,43 +1636,59 @@
     {
       "module": "solver/ga_search.py",
       "module_exists": true,
-      "cited_test": "test_ga.py",
+      "cited_test": "test_gclm_family.py",
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 14,
+      "n_test_functions": 12,
       "has_main_block": true,
-      "test_imports_module": false,
-      "test_mentions_module": false,
+      "test_imports_module": true,
+      "test_mentions_module": true,
       "merge_gate_name": "test_ga_search.py",
       "merge_gate_name_exists": false,
       "live_claimed_by": null,
       "run": {
-        "test": "test_ga.py",
+        "test": "test_gclm_family.py",
         "returncode": 0,
-        "seconds": 440.89,
+        "seconds": 29.42,
         "timed_out": false,
-        "stdout_lines": 24,
+        "stdout_lines": 39,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "    a=+1.0  R2rms=4.211e-02  odd-asymmetry=1.57e-14",
+          "[ok] even_lorentz = a=0 TW valley; a!=0 breaks it (the sweep signal)",
+          "    seed 0: (A,B)=(-0.676,3.055)  c_tw=+0.1934 (pred +0.1934)  res=1.40e-08",
+          "    seed 1: (A,B)=(-1.237,2.470)  c_tw=+0.3936 (pred +0.3936)  res=2.70e-08",
+          "    seed 2: (A,B)=(-0.501,2.045)  c_tw=+0.1751 (pred +0.1751)  res=4.20e-09",
+          "[ok] GA recovers a=0 two-scale traveling members (3/3), speed self-consistent",
+          "    relnorm(Omega_2)=6.53e-08  relnorm(1e-3*Omega_2)=6.53e-08",
+          "[ok] relative two-scale fitness is scale-invariant; anchor ~0, mismatch O(1)",
+          "[ok] rational_mixed decomposes into even (two-scale) + odd (skew) parts",
+          "    tail ratio |sq|/|lorentz| (|X|>5) = 3.833e-02 (squared pole decays faster)",
+          "    single squared pole: two-scale relres=1.135e-01 (NOT a null -> new basis)",
+          "    Lorentzian+zero-squared mix: relres=1.297e-08 (~anchor, T1 preserved)",
+          "[ok] squared-pole basis is genuinely different yet contains the a=0 anchor",
+          "",
+          "ALL GCLM-FAMILY TESTS PASSED"
         ]
       },
       "serial_run": null,
       "serial_pass": false,
       "passes": true,
       "flags": [
-        "S4_no_coverage",
         "S4_ungated_by_merge_gate"
       ]
     },
     {
       "module": "solver/boussinesq.py",
       "module_exists": true,
-      "cited_test": "test_solver_boussinesq.py",
+      "cited_test": "test_boussinesq_dedicated.py",
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 6,
+      "n_test_functions": 17,
       "has_main_block": true,
       "test_imports_module": true,
       "test_mentions_module": true,
@@ -1239,13 +1696,30 @@
       "merge_gate_name_exists": false,
       "live_claimed_by": null,
       "run": {
-        "test": "test_solver_boussinesq.py",
+        "test": "test_boussinesq_dedicated.py",
         "returncode": 0,
-        "seconds": 48.91,
+        "seconds": 13.49,
         "timed_out": false,
-        "stdout_lines": 8,
+        "stdout_lines": 19,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "PASS check_biot_savart_hand_values: sinx_siny_u=5e-16, sinx_siny_v=5.55e-16, sin2x_u=0, sin2x_v=7.77e-16",
+          "PASS check_biot_savart_invariants: div_u=5.09e-16, curl_u_minus_w=4.22e-16, u_mean=2.36e-19, v_mean=0",
+          "PASS check_reflect_involution: involution_ax0=0, involution_ax1=0, fixes_cosx=6.11e-16, negates_sinx=6.11e-16",
+          "PASS check_parity_projectors: oo_idempotent=2.22e-16, eo_idempotent=2.22e-16, oo_of_eo=5.55e-17, eo_of_oo=5.55e-17",
+          "PASS check_parity_residual: w_in_subspace=7.79e-16, th_in_subspace=4.16e-16, w_wrong_parity=1, th_wrong_parity=1",
+          "PASS check_solve_rejects_bad_arguments: unknown_symmetry=1, zero_omega0=1, non_square=1, rank1_theta=1",
+          "PASS check_result_contract: no_blowup_outcome=no_blowup, max_steps_outcome=max_steps_hit, no_blowup_drift=7.61e-06",
+          "PASS check_pure_diffusion_exact: j1k1_w=1.33e-15, j1k1_th=2.89e-15, j2k3_w=6.66e-16, j2k3_th=2.66e-15",
+          "PASS check_buoyancy_switch: frozen_w_change=3.33e-16, frozen_th_change=4.44e-16, buoyancy_w_change=1, buoyancy_th_change=4.44e-16",
+          "PASS check_frozen_u_translation: w_rel_err=3.25e-14, th_rel_err=7.66e-15, sup_norm_change=3.33e-16, grid_sampling_effect=5.23e-05",
+          "PASS check_under_resolved_guards: tail_hot_outcome=under_resolved, tail_cold_outcome=no_blowup, drift_hot_outcome=under_resolved, drift_cold_outcome=no_blowup",
+          "PASS check_houluo_symmetry_is_preserved_and_enforced: input_w_residual=0.3, input_th_residual=0.289, output_w_residual=3.34e-16, output_th_residual=3.36e-16",
+          "PASS check_mean_invariants: mean_drift=0, w_int_err=0, th_int_err=0",
+          "",
+          "all boussinesq dedicated checks passed (17 checks)"
         ]
       },
       "serial_run": null,
@@ -1258,11 +1732,11 @@
     {
       "module": "solver/gclm.py",
       "module_exists": true,
-      "cited_test": "test_solver_clm.py",
+      "cited_test": "test_gclm_dedicated.py",
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 4,
+      "n_test_functions": 14,
       "has_main_block": true,
       "test_imports_module": true,
       "test_mentions_module": true,
@@ -1270,13 +1744,30 @@
       "merge_gate_name_exists": false,
       "live_claimed_by": null,
       "run": {
-        "test": "test_solver_clm.py",
+        "test": "test_gclm_dedicated.py",
         "returncode": 0,
-        "seconds": 23.51,
+        "seconds": 4.3,
         "timed_out": false,
-        "stdout_lines": 8,
+        "stdout_lines": 16,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "PASS check_rhs_degregorio_stationary_mode: rhs_max_abs=2.12e-15, u_err=5e-16, growth_term_max_abs=0.5, a2_equals_minus_growth=8.44e-15",
+          "PASS check_rhs_frozen_u: a1.0_c1.0=4e-15, a1.0_c-2.5=4e-15, a0.5_c3.0=3.83e-15, a0.0_c1.0=0",
+          "PASS check_rhs_dealiasing: k_cut=21, all_above_cut_masked_max=5.84e-14, all_above_cut_unmasked_max=0.5, max_abs_above_cut=0",
+          "PASS check_energy_from_gradient: sin1x=0, sin2x=2.83e-16, sin5x=1.81e-16, sin13x=4.28e-16",
+          "PASS check_energy_from_gradient_odd_n: n65_got=1.61e+03, n65_exact=1.61e+03, n65_rel_err=3.53e-15, n64_rel_err=4.52e-16",
+          "PASS check_clm_blowup_time_closed_form: sin=0, 2sin=0, 10sin=2.78e-16, cos=2.22e-16",
+          "PASS check_clm_blowup_time_no_blowup: 1+0.5sin=-1, const=-1, neg=-1, n_scan_stability=2.22e-16",
+          "PASS check_solve_gclm_rejects_zero_data: message_mentions_zero=1",
+          "PASS check_solve_gclm_result_contract: no_blowup_outcome=no_blowup, no_blowup_steps=50, blowup_outcome=blowup_candidate, blowup_steps=325",
+          "PASS check_solve_gclm_early_decay_exit: t_full=8, t_early=0.8, steps_saved_ratio=10",
+          "PASS check_solve_gclm_pure_diffusion_exact: k1_rel_err=3.07e-15, k3_rel_err=2.18e-15, k6_rel_err=2.76e-14, dt_independence=5.33e-15",
+          "PASS check_solve_gclm_degregorio_stationary: outcome_no_blowup=1, max_drift_from_initial=2.61e-15, amplitude_ratio=1, conservation_drift=2.09e-14",
+          "PASS check_solve_gclm_mean_invariant: a0.0_mean_drift=2.47e-16, a0.0_abs_mean_err=0, a0.5_mean_drift=2.49e-16, a0.5_abs_mean_err=0",
+          "",
+          "all gclm dedicated checks passed (14 checks)"
         ]
       },
       "serial_run": null,
@@ -1289,11 +1780,11 @@
     {
       "module": "solver/spectral_utils.py",
       "module_exists": true,
-      "cited_test": "test_solver_clm.py",
+      "cited_test": "test_spectral_utils_dedicated.py",
       "test_exists": true,
       "collectable": true,
       "collect_detail": "parses; style: `__main__` block",
-      "n_test_functions": 4,
+      "n_test_functions": 10,
       "has_main_block": true,
       "test_imports_module": true,
       "test_mentions_module": true,
@@ -1301,13 +1792,27 @@
       "merge_gate_name_exists": false,
       "live_claimed_by": null,
       "run": {
-        "test": "test_solver_clm.py",
+        "test": "test_spectral_utils_dedicated.py",
         "returncode": 0,
-        "seconds": 23.51,
+        "seconds": 0.43,
         "timed_out": false,
-        "stdout_lines": 8,
+        "stdout_lines": 12,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "PASS check_grid: n2_spacing_err=0, n7_spacing_err=0, n16_spacing_err=4.44e-16, n64_spacing_err=5.55e-16",
+          "PASS check_wavenumbers: n2_int_err=0, n8_int_err=0, n9_int_err=0, n15_int_err=0",
+          "PASS check_dealias_mask: n16_kept=6, n16_k_hi=5, n32_kept=11, n32_k_hi=10",
+          "PASS check_hilbert_convention: sin_err=4.44e-16, cos_err=6.11e-16, sin3x_err=3.16e-15, const_err=0",
+          "PASS check_hilbert_algebra: h_squared_err=4.13e-16, skew_err=4.04e-16",
+          "PASS check_velocity_hat: single_mode_err=4.44e-16, u_x_vs_Hw_err=9.45e-16, u_mean_abs=6.94e-18, mean_only_u_max=0",
+          "PASS check_derivative_even_n: n16_sin3x=3.03e-15, n16_const=0, n16_top=7.49e-15, n32_sin3x=4.88e-15",
+          "PASS check_derivative_odd_n: n17_top_mode_rel_err=5.83e-15, n17_matches_ik_reference=0, n65_top_mode_rel_err=1.48e-14, n65_matches_ik_reference=0",
+          "PASS check_integral_quantities: integral_const=0, integral_sin=3.49e-16, integral_1pcos=0, l1_const=0",
+          "PASS check_energy_production: a0.0_nu0.0=4.24e-16, a1.0_nu0.0=3.77e-16, a0.0_nu0.1=2.83e-16, a1.0_nu0.05=2.83e-16",
+          "",
+          "all spectral_utils dedicated checks passed (10 checks)"
         ]
       },
       "serial_run": null,
@@ -1334,11 +1839,28 @@
       "run": {
         "test": "test_first_integral.py",
         "returncode": 0,
-        "seconds": 2227.11,
+        "seconds": 947.92,
         "timed_out": false,
         "stdout_lines": 39,
         "stderr_tail": [
           ""
+        ],
+        "stdout_tail": [
+          "[6] X_c/c against the independent whole-line build",
+          "      a=0.3: reduced 12.256373  whole-line 12.256421  rel 3.93e-06",
+          "      a=0.4: reduced 6.984852  whole-line 6.984882  rel 4.27e-06",
+          "      a=0.5: reduced 4.846121  whole-line 4.845770  rel 7.26e-05",
+          "  [PASS] agrees to <1e-4 (v12's two builds agreed to ~1e-3)   worst 7.26e-05",
+          "      X_c/c over K=32/64/128/192: 12.256377650 12.256373326 12.256373326 12.256373326",
+          "  [PASS] K-converged in the reduced basis   spread 3.7e-13 over K=64..192 (K=32 already within 4e-07)",
+          "",
+          "[7] the reconstructed Omega solves the ORIGINAL residual R",
+          "      max|R| = 6.84e-07 4.28e-08 2.66e-09 1.85e-10",
+          "  [PASS] R -> 0 at the U-quadrature's own 2nd order   fitted n^-1.98, final 1.9e-10",
+          "  [PASS] Omega ~ (X_c - X)^{1/a} at the edge   worst relative exponent error 6.3e-06",
+          "",
+          "========================================================================",
+          "11/11 passed"
         ]
       },
       "serial_run": null,
