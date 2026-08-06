@@ -3150,3 +3150,9 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   0 of leg 175's 4 open items closed; 3 new obstructions named (binding one: a
   6.0-decade gap between the 1e-13 residual and the +-1e-7 enclosure of lambda at
   IPM's 4th unstable mode).
+- **Leg 190 (Route-EGML) — YES, with a correction:** "EGM" located at primary source
+  (arXiv:1906.05811 / Anal. PDE 14 (2021) 891, Prop. 2.1), appended to
+  literature_gates.py. Re-verified from the actual LaTeX e-print: the bracket is
+  -(1/2 - C|a|) (degrading), not the (-1/2 - C|a|) form legs 141/165 and this leg's
+  own novelty pass had carried -- identical at a=0 so 0 banked numbers move; 6 sites
+  flagged for the record, none patched under this leg's authority.
