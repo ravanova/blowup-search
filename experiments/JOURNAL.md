@@ -3129,3 +3129,10 @@ No link of the L1->L4 chain moved in any of the fifteen. Clay unchanged at ~0.05
   corrects the "three independent sources" framing to one shared ancestor.
 
 No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.05%.
+
+- **Leg 195 (Route-PQVER) — V1 YES / V2 NO:** independently confirms leg 60's landed
+  Route-PORT correction on all five numbers (62.9877x, -2.5410243874, 1.1685027%,
+  1.548471e+08, +0.4703336113, all under 1 half-ulp); finds the corrected value had not
+  fully propagated (the old -2.541222 literal survived, unconsumed, in
+  PHASE2_P2_NOTES.md and experiments/p2_route_hrb_v1_postrepair.py) — fixed in this
+  integration cycle, 0 banked results affected.

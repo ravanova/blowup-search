@@ -2842,7 +2842,7 @@ not in sec 32.
 resolution-converged to the 4th decimal (-2.541222 -> -2.540746 over n=201..1201) and still
 1.17% from CHL's -2.5114. Reach/stretch/datum were ablated TOGETHER before naming a suspect
 (lesson 74) and reach is the mover: rho_max = 6/7/8/9 -> X_max = 100.9/274.2/745.2/2025.8 ->
-ratio **-2.583087 / -2.557642 / -2.541222 / -2.530473**. Power law in X_max with slope
+ratio **-2.583087 / -2.557642 / -2.541024 / -2.530473**. Power law in X_max with slope
 **-0.437** (consistent with the tail exponent -0.394), extrapolating to **-2.511926 vs CHL's
 -2.5114, rel err 2.09e-04**; two independent windows agree to **0.93%**.
 

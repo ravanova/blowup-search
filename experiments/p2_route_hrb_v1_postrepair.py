@@ -557,7 +557,7 @@ def hrb3_banked_record():
     # (iii) the Scenario-2 contraction ratio.  The banked 2.09e-04 is a REACH
     #       EXTRAPOLATION over rho_max (PHASE2_P2_NOTES P-3), not a single run, and the
     #       banked reach ladder is the number an independent leg can actually re-derive:
-    #       rho_max = 6/7/8/9 -> -2.583087 / -2.557642 / -2.541222 / -2.530473.
+    #       rho_max = 6/7/8/9 -> -2.583087 / -2.557642 / -2.541024 / -2.530473.
     #       Reproducing the LADDER's SHAPE (lesson 72) is the honest check here; the
     #       24000-step endpoints are not re-run.
     out["cap_scenario2_ratio"] = {
