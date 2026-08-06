@@ -64,6 +64,10 @@ All certificate constants are computed in the weighted sup norm
     ||z|| = max( max_j nu_j |Omega_j|,  max_j nu_j |V_j|,
                  w_l |c_l|, w_om |c_omega|, w_r |c_r| ),      nu_j = (1 + X_j^2)^(p/2)
 
+EVERY weight must be strictly positive and finite -- that is what makes the display
+above a norm rather than a seminorm or an indefinite form -- and since leg 218 that
+precondition is CHECKED (`_check_weights`) rather than merely stated.
+
 with the scalar weights defaulting to w_l = max|X| (so that the c_l X term of the
 residual is O(1) at unit norm), w_om = w_r = 1. The decay exponent p is a FREE
 PARAMETER and `constants_vs_weight` sweeps it, because which p closes the radii
@@ -78,6 +82,53 @@ from solver.hl_rescaled import sinh_grid_origin
 
 CHL_RATIO = -2.5114          # Chen-Huang-Li Fig 4.2, c_l/c_omega (normalization-free)
 CHL_TRIPLE = (1.0636, -0.4235, 0.0765)   # their raw triple; OUR normalization differs
+
+
+# --------------------------------------------------------------------------
+# the border-weight guard (leg 218, repairing leg 198's BHA-1)
+# --------------------------------------------------------------------------
+class BorderedHLDomainError(ValueError):
+    """A weight outside the domain on which this module's norm IS a norm.
+
+    Same shape and the same `ValueError` base as `HLRescaledDomainError`,
+    `DecayCollocationDomainError`, `CriticalDissipationDomainError` and
+    `HilbertPointwiseDomainError`, so callers already catching `ValueError` are
+    unaffected."""
+
+
+def _check_weights(w, name, on_nonpositive="raise"):
+    """Every weight of ||z||_w = max_i w_i |z_i| must be strictly positive and finite.
+
+    That is the DEFINITION, not a convention: at w_i < 0 the map is not non-negative,
+    at w_i = 0 it is a seminorm (the component is deleted), and at w_i = +inf the
+    component is deleted from the induced norm's column sum. Leg 198 measured all
+    three reachable, finite and unwarned through `induced_sup_norm`, the worst in the
+    certificate-FABRICATING direction: a single negative scalar returns a NEGATIVE
+    "operator norm", understating Z_1 by ~1e8-1e12x, driving Z_2 negative, and turning
+    a certificate that does not close into one that does.
+
+    The polarity is `all(good)` and not `any(bad)` on purpose (SEI CERT NUM07-J, the
+    one-token flip leg 152 adopted for `solver/hl_rescaled.py`): ordered comparisons
+    all return False on NaN, so "detect the bad case" fails OPEN on NaN while
+    "confirm the good case" fails CLOSED.
+
+    `on_nonpositive="allow"` restores the pre-repair arithmetic exactly, so leg 198's
+    measured magnitudes stay reproducible after the repair its own finding authorised
+    (leg 135's rule). It is an escape hatch, not a mode: nothing in this module uses it.
+    """
+    if on_nonpositive == "allow":
+        return
+    if on_nonpositive != "raise":
+        raise BorderedHLDomainError(
+            "on_nonpositive must be 'raise' or 'allow', got %r" % (on_nonpositive,))
+    bad = ~(np.isfinite(w) & (w > 0.0))
+    if bool(np.any(bad)):
+        k = int(np.argmax(bad))
+        raise BorderedHLDomainError(
+            "%s must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a "
+            "norm only for w > 0 -- but entry %d is %r (%d of %d entries inadmissible). "
+            "Pass on_nonpositive='allow' to reproduce the pre-repair behaviour."
+            % (name, k, float(w[k]), int(np.count_nonzero(bad)), int(np.size(bad))))
 
 
 # --------------------------------------------------------------------------
@@ -103,16 +154,21 @@ def velocity_matrix(X, i0):
 # --------------------------------------------------------------------------
 # weighted sup norms
 # --------------------------------------------------------------------------
-def induced_sup_norm(M, w_row, w_col):
+def induced_sup_norm(M, w_row, w_col, on_nonpositive="raise"):
     """Induced norm of M as a map (weighted sup, weights w_col) -> (ditto, w_row).
 
     For ||z||_w = max_i w_i |z_i| the induced norm is the weighted max row sum
     max_i w_i sum_j |M_ij| / w_j. Scalars broadcast, so w_row=None means the
-    unweighted sup norm on the codomain."""
+    unweighted sup norm on the codomain.
+
+    Both weight vectors must be strictly positive and finite; see `_check_weights`
+    for why, and for the `on_nonpositive` escape hatch."""
     M = np.asarray(M, dtype=float)
     w_row = np.ones(M.shape[0]) if w_row is None else np.broadcast_to(
         np.asarray(w_row, dtype=float), (M.shape[0],))
     w_col = np.broadcast_to(np.asarray(w_col, dtype=float), (M.shape[1],))
+    _check_weights(w_row, "w_row", on_nonpositive)
+    _check_weights(w_col, "w_col", on_nonpositive)
     return float(np.max(w_row * (np.abs(M) @ (1.0 / w_col))))
 
 
@@ -253,14 +309,23 @@ class BorderedHL:
                    "converged": bool(res[-1] < tol and np.isfinite(res[-1]))}
 
     # -- weights and certificate constants ---------------------------------
-    def weights(self, p=0.0, w_l=None, w_om=1.0, w_r=1.0):
-        """Domain/codomain weight vector for the norm named in the module docstring."""
+    def weights(self, p=0.0, w_l=None, w_om=1.0, w_r=1.0, on_nonpositive="raise"):
+        """Domain/codomain weight vector for the norm named in the module docstring.
+
+        Rejects any inadmissible weight here, where the offending scalar still has a
+        name, rather than leaving it to `induced_sup_norm` (which would catch the same
+        thing one level down, but as an anonymous vector entry)."""
         nu = (1.0 + self.X ** 2) ** (0.5 * p)
         if w_l is None:
             w_l = float(np.abs(self.X).max())
+        for val, name in ((w_l, "w_l"), (w_om, "w_om"), (w_r, "w_r")):
+            _check_weights(np.asarray([val], dtype=float), name, on_nonpositive)
+        _check_weights(nu, "nu (the decay weight (1 + X^2)^(p/2), p=%r)" % (p,),
+                       on_nonpositive)
         return np.concatenate([nu, nu, [w_l, w_om, w_r]]), nu, float(w_l)
 
-    def certificate_constants(self, z, p=0.0, w_l=None, w_om=1.0, w_r=1.0, A=None):
+    def certificate_constants(self, z, p=0.0, w_l=None, w_om=1.0, w_r=1.0, A=None,
+                              on_nonpositive="raise"):
         """(Y_0, Z_1, Z_2) in float, in the weighted sup norm, at the state z.
 
         A is the approximate inverse; default A = DF(z)^-1 computed in float64, which
@@ -274,25 +339,26 @@ class BorderedHL:
         weighted operator norms of Uop, D and H -- every one of them measured on the
         actual matrix, none assumed.
         """
-        w, nu, w_l = self.weights(p=p, w_l=w_l, w_om=w_om, w_r=w_r)
+        w, nu, w_l = self.weights(p=p, w_l=w_l, w_om=w_om, w_r=w_r,
+                                  on_nonpositive=on_nonpositive)
         J = self.jacobian(z)
         if A is None:
             A = np.linalg.inv(J)
         Fz = self.F(z)
 
         Y0 = float(np.max(w * np.abs(A @ Fz)))
-        Z1 = induced_sup_norm(np.eye(self.N) - A @ J, w, w)
+        Z1 = induced_sup_norm(np.eye(self.N) - A @ J, w, w, on_nonpositive)
 
         # the bilinear bound
-        Uop_ni = induced_sup_norm(self.Uop, None, nu)     # nu-weighted -> plain sup
-        H_ni = induced_sup_norm(self.H, None, nu)
-        D_nn = induced_sup_norm(self.D, nu, nu)
+        Uop_ni = induced_sup_norm(self.Uop, None, nu, on_nonpositive)  # nu-wtd -> plain sup
+        H_ni = induced_sup_norm(self.H, None, nu, on_nonpositive)
+        D_nn = induced_sup_norm(self.D, nu, nu, on_nonpositive)
         Xmax = float(np.abs(self.X).max())
         S1 = Uop_ni + Xmax / w_l + 1.0 / w_r
         B1 = S1 * D_nn + 1.0 / w_om
         B2 = S1 * D_nn + H_ni + 2.0 / w_om
         B = max(B1, B2)
-        A_norm = induced_sup_norm(A, w, w)
+        A_norm = induced_sup_norm(A, w, w, on_nonpositive)
         Z2 = 2.0 * A_norm * B
         return {"Y0": Y0, "Z1": Z1, "Z2": Z2, "p": float(p),
                 "A_norm": A_norm, "B": B, "Uop_norm": Uop_ni, "H_norm": H_ni,

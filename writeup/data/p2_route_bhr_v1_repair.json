@@ -1,0 +1,722 @@
+{
+  "leg": 218,
+  "route": "BHR",
+  "role": "LEG (repair family, 150-154 precedent)",
+  "generated": "2026-08-06T22:07:14",
+  "elapsed_s": 1144.4,
+  "module_under_repair": "solver/bordered_hl.py",
+  "repairs": "leg 198 BHA-1 (the border-weight guard) ONLY",
+  "residues_not_patched": [
+    "BHA-2 velocity_matrix accepts a permuted grid (896675x)",
+    "BHA-3 BorderedHL(pin=) truncates a mis-arity pin",
+    "BHA-4 tail_exponent silently drops NaN samples (5.358e-13)"
+  ],
+  "gate": "Does adding a border-weight non-negativity guard (per leg 198's own identified mechanism) cause every one of leg 198's adversarial negative-weight cases to now reject, while every live caller across 54/58/127/192's own re-derivation stays bit-identical to its pre-repair banked value?",
+  "provenance": {
+    "pre_ref": "0c075b8",
+    "pre_blob": "a6ab17dfd84eb21d4b63f709fc7a464419d6bb51",
+    "origin_main_blob": "a6ab17dfd84eb21d4b63f709fc7a464419d6bb51",
+    "blob_identical": true,
+    "source_bytes": 15619
+  },
+  "lesson90_control": {
+    "what": "pre-repair must ACCEPT w_r = -1e-6 where post-repair REFUSES; the differential is void otherwise",
+    "pre_accepts": true,
+    "pre_Z1": 5.098903540858722e-15,
+    "pre_A_norm": 0.3341300588148494,
+    "pre_Z2": -17794560.525435437,
+    "post_exception": "BorderedHLDomainError",
+    "modules_distinguishable": true
+  },
+  "adopted_predicate": "np.all(np.isfinite(w) & (w > 0)), confirm-good polarity",
+  "predicate_note": "the gate's own word 'non-negativity' (any(w<0)) is the WEAKEST of the three candidates and admits w=0 (a seminorm), NaN and +inf; family P measures all three on the same inputs",
+  "P_predicate": {
+    "what": "every candidate predicate on the same inputs, against what the pre- and post-repair modules actually return on leg 198's hand-computable 2x2 (true weighted norm 101.0 exactly)",
+    "matrix": [
+      [
+        1.0,
+        100.0
+      ],
+      [
+        3.0,
+        4.0
+      ]
+    ],
+    "true_norm": 101.0,
+    "cases": [
+      {
+        "case": "positive (control)",
+        "w_col": [
+          1.0,
+          1.0
+        ],
+        "w_col_repr": [
+          "1.0",
+          "1.0"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": 101.0,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": 101.0,
+          "exception": null,
+          "message": null,
+          "warnings": []
+        },
+        "pre_silent_wrong": false,
+        "understatement_x": 1.0,
+        "post_rejects": false,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": false,
+          "any(w<=0)  [detect-bad, non-positivity]": false,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": false
+        }
+      },
+      {
+        "case": "negative",
+        "w_col": [
+          1.0,
+          -1.0
+        ],
+        "w_col_repr": [
+          "1.0",
+          "-1.0"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": -1.0,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is -1.0 (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": true,
+        "understatement_x": -101.0,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": true,
+          "any(w<=0)  [detect-bad, non-positivity]": true,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "negative tiny",
+        "w_col": [
+          1.0,
+          -1e-09
+        ],
+        "w_col_repr": [
+          "1.0",
+          "-1e-09"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": -3999999996.9999995,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is -1e-09 (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": true,
+        "understatement_x": -2.5250000018937504e-08,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": true,
+          "any(w<=0)  [detect-bad, non-positivity]": true,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "both negative",
+        "w_col": [
+          -1.0,
+          -1.0
+        ],
+        "w_col_repr": [
+          "-1.0",
+          "-1.0"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": -7.0,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1.0 (2 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": true,
+        "understatement_x": -14.428571428571429,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": true,
+          "any(w<=0)  [detect-bad, non-positivity]": true,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "zero",
+        "w_col": [
+          1.0,
+          0.0
+        ],
+        "w_col_repr": [
+          "1.0",
+          "0.0"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": Infinity,
+          "exception": null,
+          "warnings": [
+            "RuntimeWarning"
+          ]
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is 0.0 (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": false,
+        "understatement_x": null,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": false,
+          "any(w<=0)  [detect-bad, non-positivity]": true,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "nan",
+        "w_col": [
+          1.0,
+          null
+        ],
+        "w_col_repr": [
+          "1.0",
+          "nan"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": NaN,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is nan (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": false,
+        "understatement_x": null,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": false,
+          "any(w<=0)  [detect-bad, non-positivity]": false,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "posinf",
+        "w_col": [
+          1.0,
+          null
+        ],
+        "w_col_repr": [
+          "1.0",
+          "inf"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": 3.0,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is inf (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": true,
+        "understatement_x": 33.666666666666664,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": false,
+          "any(w<=0)  [detect-bad, non-positivity]": false,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      },
+      {
+        "case": "neginf",
+        "w_col": [
+          1.0,
+          null
+        ],
+        "w_col_repr": [
+          "1.0",
+          "-inf"
+        ],
+        "true_norm": 101.0,
+        "pre": {
+          "returned": 3.0,
+          "exception": null,
+          "warnings": []
+        },
+        "post": {
+          "returned": null,
+          "exception": "BorderedHLDomainError",
+          "message": "w_col must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 1 is -inf (1 of 2 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+          "warnings": []
+        },
+        "pre_silent_wrong": true,
+        "understatement_x": 33.666666666666664,
+        "post_rejects": true,
+        "predicates": {
+          "any(w<0)   [the gate's literal word: NON-NEGATIVITY]": true,
+          "any(w<=0)  [detect-bad, non-positivity]": true,
+          "not all(isfinite(w) & w>0)  [ADOPTED, confirm-good]": true
+        }
+      }
+    ],
+    "w_row_is_guarded_too": [
+      {
+        "case": "leg 198's own 2x2 (max picks the UNflipped row)",
+        "w_row": [
+          1.0,
+          -1.0
+        ],
+        "true_norm": 101.0,
+        "pre_returned": 101.0,
+        "pre_correct_by_luck": true,
+        "pre_understatement_x": 1.0,
+        "post_exception": "BorderedHLDomainError"
+      },
+      {
+        "case": "a 2x2 where the luck runs out",
+        "w_row": [
+          1.0,
+          -1.0
+        ],
+        "true_norm": 403.0,
+        "pre_returned": 3.0,
+        "pre_correct_by_luck": false,
+        "pre_understatement_x": 134.33333333333334,
+        "post_exception": "BorderedHLDomainError"
+      }
+    ],
+    "n_pre_silent_wrong": 5,
+    "n_post_rejects": 7,
+    "control_positive_unchanged": true
+  },
+  "A_clause_a_adversarial": {
+    "what": "leg 198's adversarial negative-weight cases re-run against the guard, at leg 198's own configuration (n=101, rho_max=8.0, p=0.0)",
+    "configuration": {
+      "n": 101,
+      "rho_max": 8.0,
+      "p": 0.0,
+      "pre_converged": true,
+      "post_converged": true,
+      "pre_final_residual": 7.438494264988549e-15,
+      "post_final_residual": 7.438494264988549e-15
+    },
+    "honest_constants": {
+      "Y0": 2.291116230087714e-11,
+      "Z1": 5.518026149436946e-09,
+      "Z2": 30861683411.03575,
+      "A_norm": 919370.8379050525
+    },
+    "honest_radii_root": null,
+    "cases": [
+      {
+        "case": "w_r = -1e-6",
+        "pre": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 5.098903540858722e-15,
+          "Z2": -17794560.525435437,
+          "A_norm": 0.3341300588148494
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_r must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1e-06 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [
+          "Z2"
+        ],
+        "pre_radii_root": 2.2906493831549586e-11
+      },
+      {
+        "case": "w_om = -1e-9",
+        "pre": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 1.8873791122807154e-13,
+          "Z2": -1999965956.3911026,
+          "A_norm": 0.9999997537802049
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_om must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1e-09 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [
+          "Z2"
+        ],
+        "pre_radii_root": 2.2409007242995422e-11
+      },
+      {
+        "case": "w_l = -1 * Xmax",
+        "pre": {
+          "Y0": 9.420560775633845e-14,
+          "Z1": 2.1896949528914337e-11,
+          "Z2": 113092580.81871988,
+          "A_norm": 3379.7635129160067
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_l must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -745.2394128947751 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair b",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [],
+        "pre_radii_root": 9.420610959523311e-14
+      },
+      {
+        "case": "w_r = -1.0",
+        "pre": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 5.515705292336921e-09,
+          "Z2": 30614582640.631405,
+          "A_norm": 914914.5648892177
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_r must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1.0 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [],
+        "pre_radii_root": null
+      },
+      {
+        "case": "w_om = -1.0",
+        "pre": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 4.9499890153854604e-09,
+          "Z2": 30850256803.46704,
+          "A_norm": 919249.5146397968
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_om must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1.0 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [],
+        "pre_radii_root": null
+      },
+      {
+        "case": "all three negative",
+        "pre": {
+          "Y0": 9.420560775633845e-14,
+          "Z1": 1.9929848971630154e-11,
+          "Z2": -21230292.9964776,
+          "A_norm": 3362.7660138339943
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_l must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is -1.0 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [
+          "Z2"
+        ],
+        "pre_radii_root": 9.42055135545074e-14
+      },
+      {
+        "case": "w_r = 0.0 (the SEMINORM case leg 198 read as rejected)",
+        "pre": null,
+        "pre_exception": "ZeroDivisionError",
+        "pre_warnings": [
+          "RuntimeWarning"
+        ],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_r must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is 0.0 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": null,
+        "escape_hatch_exception": "ZeroDivisionError"
+      },
+      {
+        "case": "w_om = 0.0",
+        "pre": null,
+        "pre_exception": "ZeroDivisionError",
+        "pre_warnings": [
+          "RuntimeWarning"
+        ],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_om must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is 0.0 (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": null,
+        "escape_hatch_exception": "ZeroDivisionError"
+      },
+      {
+        "case": "w_r = nan",
+        "pre": {
+          "Y0": NaN,
+          "Z1": NaN,
+          "Z2": NaN,
+          "A_norm": NaN
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_r must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is nan (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [],
+        "pre_radii_root": null
+      },
+      {
+        "case": "w_r = +inf",
+        "pre": {
+          "Y0": Infinity,
+          "Z1": Infinity,
+          "Z2": Infinity,
+          "A_norm": Infinity
+        },
+        "pre_exception": null,
+        "pre_warnings": [],
+        "post_exception": "BorderedHLDomainError",
+        "post_message": "w_r must be strictly positive and finite -- ||z||_w = max_i w_i |z_i| is a norm only for w > 0 -- but entry 0 is inf (1 of 1 entries inadmissible). Pass on_nonpositive='allow' to reproduce the pre-repair behaviour.",
+        "post_rejects": true,
+        "escape_hatch_reproduces_pre": true,
+        "escape_hatch_exception": null,
+        "pre_negative_constants": [],
+        "pre_radii_root": null
+      }
+    ],
+    "n_cases": 10,
+    "n_post_rejects": 10,
+    "n_pre_accepted": 8,
+    "sign_flip_differential": [
+      {
+        "case": "w_r = +/-1e-6",
+        "positive": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 1.165945415732852e-06,
+          "Z2": 1.1886076258321376e+17,
+          "A_norm": 2229053650.6188316
+        },
+        "negative": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 5.098903540858722e-15,
+          "Z2": -17794560.525435437,
+          "A_norm": 0.3341300588148494
+        },
+        "Z1_understated_x": 228665909.52149913,
+        "A_norm_understated_x": 6671215569.545663,
+        "radii_root_positive": null,
+        "radii_root_negative": 2.2906493831549586e-11,
+        "post_rejects_negative": true,
+        "post_still_accepts_positive": true
+      },
+      {
+        "case": "w_om = +/-1e-9",
+        "positive": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 0.28401857225974964,
+          "Z2": 2.4265224384590794e+20,
+          "A_norm": 60662551937.99319
+        },
+        "negative": {
+          "Y0": 2.291116230087714e-11,
+          "Z1": 1.8873791122807154e-13,
+          "Z2": -1999965956.3911026,
+          "A_norm": 0.9999997537802049
+        },
+        "Z1_understated_x": 1504830536757.0833,
+        "A_norm_understated_x": 60662566874.31797,
+        "radii_root_positive": null,
+        "radii_root_negative": 2.2409007242995422e-11,
+        "post_rejects_negative": true,
+        "post_still_accepts_positive": true
+      }
+    ],
+    "escape_hatch_reproduces_all_pre": true
+  },
+  "C_live_callers": {
+    "what": "the live caller set enumerated BY IMPORT, and the guard's firing rate on the configurations they ship",
+    "live_callers": [
+      {
+        "file": "experiments/p2_route_port_v1_bordered.py",
+        "site": "322, 358",
+        "leg": 46,
+        "note": "the banked PORT certificate"
+      },
+      {
+        "file": "experiments/p2_route_port_v2_reach.py",
+        "site": "100",
+        "leg": 47
+      },
+      {
+        "file": "experiments/p2_route_l1_v1_interval.py",
+        "site": "106",
+        "leg": 50
+      },
+      {
+        "file": "experiments/p2_route_l1rh_v1_construction.py",
+        "site": "86",
+        "leg": 56,
+        "note": "imports induced_sup_norm directly"
+      },
+      {
+        "file": "test_bordered_hl.py",
+        "site": "205-214, 234, 261, 284",
+        "note": "the capabilities.py validated line"
+      },
+      {
+        "file": "test_interval_certificate.py",
+        "site": "86"
+      }
+    ],
+    "n_live_callers": 6,
+    "legs_named_by_the_gate": {
+      "54": {
+        "files_checked": 3,
+        "hits": [
+          {
+            "file": "experiments/p2_route_mm_v1_shape.py",
+            "mentions_bordered_hl": 0
+          },
+          {
+            "file": "experiments/p2_route_mm_v1_shape_evidence.py",
+            "mentions_bordered_hl": 0
+          },
+          {
+            "file": "experiments/p2_route_mm_v1_headline_verify.py",
+            "mentions_bordered_hl": 0
+          }
+        ],
+        "landed": true,
+        "calls_this_module": false
+      },
+      "58": {
+        "files_checked": 2,
+        "hits": [
+          {
+            "file": "experiments/p2_route_ng_v1_nogo.py",
+            "mentions_bordered_hl": 0
+          },
+          {
+            "file": "experiments/p2_route_ng_v1_nogo_evidence.py",
+            "mentions_bordered_hl": 0
+          }
+        ],
+        "landed": true,
+        "calls_this_module": false
+      },
+      "127": {
+        "files_checked": 2,
+        "hits": [
+          {
+            "file": "experiments/p2_route_ngx_v1_general.py",
+            "mentions_bordered_hl": 0
+          },
+          {
+            "file": "experiments/p2_route_ngx_v1_general_evidence.py",
+            "mentions_bordered_hl": 0
+          }
+        ],
+        "landed": true,
+        "calls_this_module": false
+      },
+      "192": {
+        "files_checked": 0,
+        "hits": [],
+        "landed": false,
+        "calls_this_module": false,
+        "note": "no journal and no runner on main -- leg 192 has not landed, so it has no re-derivation to be bit-identical to"
+      }
+    },
+    "shipped_configurations_probed": 34,
+    "shipped_configurations_accepted": 34,
+    "guard_fires_on_shipped": 0
+  },
+  "B_clause_b_bit_identity": {
+    "what": "every float64 leaf the module can be asked for, on CLEAN input, pre- vs post-repair in the SAME process, compared with == on raw bytes (NaN == NaN counted identical); NOT allclose",
+    "method": "pre-repair module read out of git at 0c075b8 and exec'd into this interpreter under the name bordered_hl_pre",
+    "grids": [
+      {
+        "n": 51,
+        "rho_max": 8.0,
+        "c": 0.5,
+        "leaves": 6898,
+        "moved": 0
+      },
+      {
+        "n": 101,
+        "rho_max": 8.0,
+        "c": 0.5,
+        "leaves": 13050,
+        "moved": 0
+      },
+      {
+        "n": 101,
+        "rho_max": 9.0,
+        "c": 0.5,
+        "leaves": 13098,
+        "moved": 0
+      },
+      {
+        "n": 201,
+        "rho_max": 8.0,
+        "c": 0.5,
+        "leaves": 25350,
+        "moved": 0
+      },
+      {
+        "n": 401,
+        "rho_max": 8.0,
+        "c": 0.5,
+        "leaves": 49950,
+        "moved": 0
+      }
+    ],
+    "total_leaves": 108346,
+    "leaves_moved": 0,
+    "movers": [],
+    "configurations_per_grid": null,
+    "bit_identical": true
+  },
+  "clause_a_every_adversarial_case_rejects": true,
+  "clause_b_every_live_caller_bit_identical": true,
+  "gate_answer": "YES",
+  "banked_numbers_impeached": 0,
+  "banked_numbers_moved": 0
+}
