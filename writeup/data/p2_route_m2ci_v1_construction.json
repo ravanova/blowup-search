@@ -1,0 +1,447 @@
+{
+ "leg": 187,
+ "route": "M2CI",
+ "generated_utc": "2026-08-06T19:52:15.962631+00:00",
+ "object": "Chen arXiv:1908.09385 eq (2.2) p.4 -- the INVISCID a = 1/2 gCLM self-similar profile Omega = -2bX/(X^2+b^2)^2, b^2 = 3/8, c_l = 1/3, c_omega = -1 (nu = 0)",
+ "scope_disclaimer": "INVISCID (nu = 0), Chen's own framing.  Nothing here bears on the viscous 'missing rung' question, which remains exactly as open as leg 125 left it.",
+ "gate_verdict": {
+  "gate": "Does a full radii-polynomial certificate close on Chen's gamma = 2 inviscid profile (Object A), with EVERY hypothesis of the framework satisfied, not just the budget comparison leg 125 already made?",
+  "answer": "NO",
+  "failing_clauses": [
+   "H3 isolation",
+   "H5 contraction (Z_0 + Z_1 < 1)",
+   "H7 quadratic constant Z_2 bounded"
+  ],
+  "H3_H5_reason": "Object A is not an isolated zero.  It lies on the EXACT one-parameter dilation orbit Psi_g = -(16/3) g^{3/2} X / (X^2 + g)^2, whose residual numerator is the ZERO POLYNOMIAL in exact rational arithmetic at every g tested (controls with perturbed amplitude are nonzero).  The tangent phi = dPsi_g/dg is therefore an exact kernel element of DF, so (I - A DF) phi = phi and ||I - A DF|| >= 1 for EVERY admissible A, in every space containing phi (every s <= 3).  Hence Z_0 + Z_1 >= 1 and the contraction factor 1 - Z_0 - Z_1 <= 0.  No choice of A, weight s, or truncation repairs this: it is an algebraic property of the steady equation's symmetry group, not a numerical shortfall.",
+  "H7_reason": "Z_2 grows like n^2.36 over a 5.97512x range of n, so it is NOT an operator constant in the weighted sup space at s = 2; sigma_min/sigma_max collapses like n^-6.68, so the kernel is an operator fact and not the grid.",
+  "why_Y0_was_never_the_binding_clause": "Leg 125 measured Y_0/budget between 1.325e-09 and 5.800e-05 and read that as headroom.  This leg shows Y_0 is EXACTLY ZERO -- the best value the framework admits, since the centre is an exact solution -- and the certificate still cannot close.  Budget-under was never evidence about the clauses that fail.",
+  "and_the_YES_branch_would_have_been_hollow": "Because Y_0 = 0 exactly, the radii polynomial reduces to p(r) = Z_2 r^2 - (1 - Z_0 - Z_1) r, so ANY bordered Z_0 + Z_1 < 1 would close it -- and would assert a zero at a point ALREADY PUBLISHED IN CLOSED FORM (Chen arXiv:1908.09385 eq (2.2); the whole branch a <= 1 in HQWW arXiv:2305.05895).  The existence content would be nil.  This was written down in writeup/novelty/leg_187.md BEFORE any number here was computed.",
+  "scope": "INVISCID (nu = 0), Chen's own framing.  Nothing here bears on the viscous 'missing rung' question, which remains exactly as open as leg 125 left it.",
+  "exact_defect_verified": true,
+  "Z0_plus_Z1_lower_bound": 1.0
+ },
+ "battery_n801": {
+  "n": 801,
+  "weight_s": 2.0,
+  "rho_max": 8.0,
+  "X_max": 745.2394128947751,
+  "object": "Chen arXiv:1908.09385 eq (2.2) p.4, INVISCID a = 1/2 profile (nu = 0)",
+  "chen_constants_provenance": {
+   "a": "Chen sec 2, the a = 1/2 exact solution, eq (2.2) p.4",
+   "b_squared": "Chen p.4, 'we have used b^2 = 3/8'",
+   "c_l": "Chen eq (2.2) p.4: c_l = 1/3",
+   "c_omega": "Chen eq (2.2) p.4: c_omega = -1",
+   "Omega": "Chen eq (2.2) p.4",
+   "profile_identity": "Chen sec 2.6, final sentence of the proof of Theorem 1.1, p.12 (quoted verbatim) -- and Remark 2.1 p.11",
+   "computer_assisted": "Chen sec 2.3-2.5: weighted L^2 (weight phi) and weighted H^4 (weight psi) energy estimates, eq (2.12) p.6; no interval arithmetic, no computer assistance anywhere in the paper"
+  },
+  "H1_space_membership": [
+   {
+    "s": 1.0,
+    "norm_full_grid": 1.8454478187733763,
+    "norm_inner_half": 1.8454478187733763,
+    "ratio_vs_half_domain": 1.0,
+    "finite_in_continuum": true
+   },
+   {
+    "s": 2.0,
+    "norm_full_grid": 1.9905227369915288,
+    "norm_inner_half": 1.9905227369915288,
+    "ratio_vs_half_domain": 1.0,
+    "finite_in_continuum": true
+   },
+   {
+    "s": 2.5,
+    "norm_full_grid": 2.0812585424107795,
+    "norm_inner_half": 2.0812585424107795,
+    "ratio_vs_half_domain": 1.0,
+    "finite_in_continuum": true
+   },
+   {
+    "s": 2.9,
+    "norm_full_grid": 2.166901541049744,
+    "norm_inner_half": 2.166901541049744,
+    "ratio_vs_half_domain": 1.0,
+    "finite_in_continuum": true
+   },
+   {
+    "s": 3.0,
+    "norm_full_grid": 2.1908862568419623,
+    "norm_inner_half": 2.1908862568419623,
+    "ratio_vs_half_domain": 1.0,
+    "finite_in_continuum": true
+   },
+   {
+    "s": 3.1,
+    "norm_full_grid": 2.37288033187631,
+    "norm_inner_half": 2.2159297857133744,
+    "ratio_vs_half_domain": 1.0708283029430052,
+    "finite_in_continuum": false
+   },
+   {
+    "s": 3.5,
+    "norm_full_grid": 33.434460439733066,
+    "norm_inner_half": 23.56099161754208,
+    "ratio_vs_half_domain": 1.4190599862036284,
+    "finite_in_continuum": false
+   }
+  ],
+  "H2_exact_defect_is_zero": true,
+  "H2_exact_rows": [
+   {
+    "gamma": "3/8",
+    "kappa": "1",
+    "is_chen_profile": true,
+    "numerator_coeffs": [
+     "0"
+    ],
+    "exact_zero": true,
+    "control_perturbed_amplitude_coeffs": [
+     "0",
+     "-303/80000",
+     "0",
+     "-101/10000"
+    ],
+    "control_is_nonzero": true
+   },
+   {
+    "gamma": "1",
+    "kappa": "8/3",
+    "is_chen_profile": false,
+    "numerator_coeffs": [
+     "0"
+    ],
+    "exact_zero": true,
+    "control_perturbed_amplitude_coeffs": [
+     "0",
+     "-803/30000",
+     "0",
+     "-803/30000"
+    ],
+    "control_is_nonzero": true
+   },
+   {
+    "gamma": "2",
+    "kappa": "16/3",
+    "is_chen_profile": false,
+    "numerator_coeffs": [
+     "0"
+    ],
+    "exact_zero": true,
+    "control_perturbed_amplitude_coeffs": [
+     "0",
+     "-1603/15000",
+     "0",
+     "-1603/30000"
+    ],
+    "control_is_nonzero": true
+   },
+   {
+    "gamma": "1/7",
+    "kappa": "8/21",
+    "is_chen_profile": false,
+    "numerator_coeffs": [
+     "0"
+    ],
+    "exact_zero": true,
+    "control_perturbed_amplitude_coeffs": [
+     "0",
+     "-821/1470000",
+     "0",
+     "-821/210000"
+    ],
+    "control_is_nonzero": true
+   },
+   {
+    "gamma": "9/4",
+    "kappa": "6",
+    "is_chen_profile": false,
+    "numerator_coeffs": [
+     "0"
+    ],
+    "exact_zero": true,
+    "control_perturbed_amplitude_coeffs": [
+     "0",
+     "-5409/40000",
+     "0",
+     "-601/10000"
+    ],
+    "control_is_nonzero": true
+   }
+  ],
+  "H2_float_grid_defect_sup": 1.1873793273053934e-06,
+  "H3_isolation": {
+   "weight_s": 2.0,
+   "orbit_tangent_norm_s": 3.302304025525987,
+   "rows": [
+    {
+     "ball_radius_r": 0.01,
+     "orbit_displacement_dgamma": 0.003034351265027241,
+     "distance_achieved": 0.010000000000000142,
+     "competitor_residual_sup": 1.1727112121939776e-06,
+     "centre_residual_sup": 1.1873793273053934e-06
+    },
+    {
+     "ball_radius_r": 0.0001,
+     "orbit_displacement_dgamma": 3.0282501486983415e-05,
+     "distance_achieved": 9.999999999982188e-05,
+     "competitor_residual_sup": 1.1872341858509827e-06,
+     "centre_residual_sup": 1.1873793273053934e-06
+    },
+    {
+     "ball_radius_r": 1e-06,
+     "orbit_displacement_dgamma": 3.0281893950712124e-07,
+     "distance_achieved": 9.99999999883572e-07,
+     "competitor_residual_sup": 1.187377880906837e-06,
+     "centre_residual_sup": 1.1873793273053934e-06
+    }
+   ]
+  },
+  "H4_injectivity": {
+   "orbit_tangent_phi": {
+    "norm_s": 3.302304025525987,
+    "DF_image_norm_s": 1.0810725139005858e-05,
+    "relative_defect": 3.273691657534148e-06
+   },
+   "control_profile_itself": {
+    "norm_s": 1.9905227369915288,
+    "DF_image_norm_s": 1.9910428081879876,
+    "relative_defect": 1.0002612736779108
+   },
+   "control_localised_bump": {
+    "norm_s": 0.7357407004646916,
+    "DF_image_norm_s": 0.5071550789383268,
+    "relative_defect": 0.6893122517457702
+   },
+   "kernel_to_control_ratio": 210561.1413217159
+  },
+  "H5_Z_lower_bound": {
+   "bound_is_exact": true,
+   "Z0_plus_Z1_lower_bound": 1.0,
+   "argument": "(I - A DF) phi = phi for every A, because DF phi = 0; hence ||I - A DF|| >= 1 in every norm, for every A, in every space containing phi (every s <= 3).",
+   "one_minus_Z_upper_bound": 0.0,
+   "sigma_min": 7.053168752759464e-09,
+   "sigma_max": 52.71330475990025,
+   "sigma_ratio": 1.338024391543159e-10,
+   "float_shadow_pinv_default_rcond": 1.0316116630124495e-07,
+   "float_shadow_pinv_rcond_1e-6": 0.9999989693180492,
+   "float_shadow_pinv_rcond_1e-4": 0.9999989693178248,
+   "float_shadow_note": "the default-rcond column is ~1e-9 because numpy's cutoff (~1e-13 relative) is BELOW sigma_min/sigma_max, so pinv numerically inverts the near-kernel; the truncated columns are the honest shadow and return to the exact bound 1."
+  },
+  "H6a_bordered": {
+   "sigma_min": 0.0003362750731460792,
+   "sigma_max": 52.71330475990037,
+   "cond": 156756.50373586122,
+   "unbordered_sigma_min": 7.053168752759464e-09
+  },
+  "H6b_farfield_symbol": {
+   "profile_decay_exponent": 3.0,
+   "symbol_zero_at_s": 3.0,
+   "rows": [
+    {
+     "s": 1.0,
+     "symbol": -0.6666666666666667,
+     "tail_inverse_norm": 1.4999999999999998,
+     "centre_finite_norm": true,
+     "admissible": true
+    },
+    {
+     "s": 2.0,
+     "symbol": -0.33333333333333337,
+     "tail_inverse_norm": 2.9999999999999996,
+     "centre_finite_norm": true,
+     "admissible": true
+    },
+    {
+     "s": 2.5,
+     "symbol": -0.16666666666666674,
+     "tail_inverse_norm": 5.999999999999997,
+     "centre_finite_norm": true,
+     "admissible": true
+    },
+    {
+     "s": 2.9,
+     "symbol": -0.03333333333333344,
+     "tail_inverse_norm": 29.999999999999908,
+     "centre_finite_norm": true,
+     "admissible": true
+    },
+    {
+     "s": 2.99,
+     "symbol": -0.0033333333333332993,
+     "tail_inverse_norm": 300.00000000000307,
+     "centre_finite_norm": true,
+     "admissible": true
+    },
+    {
+     "s": 3.0,
+     "symbol": 0.0,
+     "tail_inverse_norm": Infinity,
+     "centre_finite_norm": true,
+     "admissible": false
+    },
+    {
+     "s": 3.5,
+     "symbol": 0.16666666666666652,
+     "tail_inverse_norm": 6.000000000000005,
+     "centre_finite_norm": false,
+     "admissible": false
+    }
+   ]
+  },
+  "H6c_measured_decay": {
+   "measured_slope": -2.9999554835099955,
+   "exponent": 2.9999554835099955,
+   "control_slope_on_Xminus2_profile": -1.9999109704414688
+  },
+  "H7_quadratic": {
+   "n": 801,
+   "weight_s": 2.0,
+   "norm_A_bordered": 4167.499980276531,
+   "norm_H_s": 746.3313097269522,
+   "norm_VH_s": 3673746.9919537664,
+   "norm_D_s": 149.97999866781652,
+   "norm_B_s": 550990061.6217403,
+   "Z2": 2296251070941.167,
+   "profile_norm_s": 1.9905227369915288
+  },
+  "unbordered_budget": {
+   "one_minus_Z": 0.0,
+   "Y0_max": 0.0,
+   "closes": false,
+   "r_min": NaN,
+   "degenerate_ball": false
+  },
+  "bordered_budget_requirement": {
+   "Y_0": 0.0,
+   "note": "with Y_0 = 0 exactly the radii polynomial is p(r) = Z_2 r^2 - (1 - Z_0 - Z_1) r, so ANY bordered Z_0 + Z_1 < 1 closes it -- and the closure would assert a zero at a point already known to be one. The existence content is nil; see clause H2.",
+   "Z2_at_this_resolution": 2296251070941.167,
+   "Z0_plus_Z1": null,
+   "Z0_plus_Z1_status": "NOT MEASURED -- bounding it needs a rigorous enclosure of the tail block, which this leg does not build and solver/interval_certificate.py's banked ceiling says this repository does not have."
+  },
+  "guard_on_unbordered_constants": []
+ },
+ "divergence_exponents": {
+  "weight_s": 2.0,
+  "rows": [
+   {
+    "n": 201,
+    "Z2": 94379736352.64493,
+    "norm_A_bordered": 686.538408859677,
+    "norm_B_s": 137471895.43176076,
+    "sigma_ratio": 1.375818555161798e-06
+   },
+   {
+    "n": 301,
+    "Z2": 222929635444.96252,
+    "norm_A_bordered": 1079.8084601827857,
+    "norm_B_s": 206452943.89268434,
+    "sigma_ratio": 9.181892500737256e-08
+   },
+   {
+    "n": 401,
+    "Z2": 431067069815.07227,
+    "norm_A_bordered": 1565.3257433947601,
+    "norm_B_s": 275384897.7658839,
+    "sigma_ratio": 1.3485624740483938e-08
+   },
+   {
+    "n": 601,
+    "Z2": 1134302255319.2043,
+    "norm_A_bordered": 2745.1671785458043,
+    "norm_B_s": 413199700.2528923,
+    "sigma_ratio": 9.065500486388253e-10
+   },
+   {
+    "n": 801,
+    "Z2": 2296251070941.167,
+    "norm_A_bordered": 4167.499980276531,
+    "norm_B_s": 550990061.6217403,
+    "sigma_ratio": 1.338024391543159e-10
+   },
+   {
+    "n": 1201,
+    "Z2": 6309346771325.33,
+    "norm_A_bordered": 7633.38574988166,
+    "norm_B_s": 826546303.0507982,
+    "sigma_ratio": 9.031544435083465e-12
+   }
+  ],
+  "slopes_in_log_n": {
+   "Z2": 2.359536592682637,
+   "norm_A_bordered": 1.3561952844075784,
+   "norm_B_s": 1.0033413082750589,
+   "sigma_ratio": -6.6750913407312895
+  },
+  "Z2_diverges": true,
+  "Z2_growth_over_ladder": 66.8506505225951,
+  "sigma_ratio_collapse_over_ladder": 152334.80442363382,
+  "reading": "Z_2 grows like n^2.36 over a 5.97512x range of n, so it is NOT an operator constant in the weighted sup space at s = 2; sigma_min/sigma_max collapses like n^-6.68, so the kernel is an operator fact and not the grid."
+ },
+ "clause_ladder": [
+  {
+   "n": 401,
+   "grid_defect_sup": 1.888616808498611e-05,
+   "kernel_relative_defect": 5.2072656726730376e-05,
+   "control_relative_defect": 0.6889595455852302,
+   "kernel_to_control_ratio": 13230.7354549008,
+   "sigma_min_unbordered": 3.4003076534869597e-07,
+   "sigma_min_bordered": 0.0009227415894844269,
+   "bordered_cond": 27325.432652161773,
+   "norm_A_bordered": 1565.3257433947601,
+   "norm_B_s": 275384897.7658839,
+   "Z2": 431067069815.07227
+  },
+  {
+   "n": 601,
+   "grid_defect_sup": 3.742646965954055e-06,
+   "kernel_relative_defect": 1.0343079078033303e-05,
+   "control_relative_defect": 0.689476360607085,
+   "kernel_to_control_ratio": 66660.64867196068,
+   "sigma_min_unbordered": 3.53151043172915e-08,
+   "sigma_min_bordered": 0.0005162953681889879,
+   "bordered_cond": 75451.95186454241,
+   "norm_A_bordered": 2745.1671785458043,
+   "norm_B_s": 413199700.2528923,
+   "Z2": 1134302255319.2043
+  },
+  {
+   "n": 801,
+   "grid_defect_sup": 1.1873793273053934e-06,
+   "kernel_relative_defect": 3.273691657534148e-06,
+   "control_relative_defect": 0.6893122517457702,
+   "kernel_to_control_ratio": 210561.1413217159,
+   "sigma_min_unbordered": 7.053168752759464e-09,
+   "sigma_min_bordered": 0.0003362750731460792,
+   "bordered_cond": 156756.50373586122,
+   "norm_A_bordered": 4167.499980276531,
+   "norm_B_s": 550990061.6217403,
+   "Z2": 2296251070941.167
+  }
+ ],
+ "leg125_budget_lead": {
+  "min": 1.325e-09,
+  "max": 5.8e-05,
+  "rows": 9,
+  "source": "leg 125 (Route-M2P), writeup/data/p2_route_m2p_v1_promotion.json",
+  "reading_then": "comfortably inside certificate range",
+  "reading_now": "correct, and irrelevant -- Y_0 is EXACTLY ZERO here and the certificate still cannot close"
+ },
+ "headline_magnitudes": {
+  "Y0_exact": 0.0,
+  "Z0_plus_Z1_lower_bound_every_A": 1.0,
+  "contraction_factor_upper_bound": 0.0,
+  "exact_orbit_gammas_verified_zero": 5,
+  "kernel_relative_defect_n801": 3.273691657534148e-06,
+  "control_relative_defect_n801": 0.6893122517457702,
+  "kernel_to_control_ratio_n801": 210561.1413217159,
+  "Z2_slope_in_log_n": 2.359536592682637,
+  "Z2_growth_over_6x_ladder": 66.8506505225951,
+  "sigma_ratio_slope_in_log_n": -6.6750913407312895,
+  "sigma_ratio_collapse_over_6x_ladder": 152334.80442363382,
+  "farfield_symbol_zero_at_s": 3.0,
+  "measured_profile_decay_exponent": 2.9999554835099955,
+  "decay_control_on_Xminus2": -1.9999109704414688,
+  "bordering_sigma_min_lift_n801": 47677.16255399614
+ }
+}
