@@ -3136,3 +3136,8 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   fully propagated (the old -2.541222 literal survived, unconsumed, in
   PHASE2_P2_NOTES.md and experiments/p2_route_hrb_v1_postrepair.py) — fixed in this
   integration cycle, 0 banked results affected.
+- **Leg 170 (Route-CDB) — YES on both clauses:** post-repair regression check of
+  solver/critical_dissipation.py (leg 154's non-integer-exponent truncation repair),
+  re-verified from scratch after the interrupted session: 96/96 case x entry-point
+  cells refused, 276,077/276,077 leaves bit-identical, 0 moved. Leg 121's battery
+  banked as a permanent regression suite.
