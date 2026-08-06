@@ -10,14 +10,13 @@
 
 > ## ⛔ RUN THIS FIRST: `.venv/bin/python plan_of_record.py`
 > It prints the committed sequence, the current stage, its pre-committed gate and the live
-> bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`,
-> `PORT`, `V`, `C-PILOT`, `L1`, `T`, `TC`, `MM` and now **`NG`** are **DONE** (`NG`'s gate
-> answered **YES** at leg 58: a THEOREM on the class `A21 = 0`, ruled mergeable as-is by the
-> DM); **`B` is NEXT.** Stage `B`'s own GA is still banned (lift condition failed twice: leg
-> 49 4/6, leg 59 P3 unmoved at 0.342) and all three of its degrees of freedom are separately
-> dead for this operator (space: leg 52; split: leg 53; shape of `A`: leg 54's battery, now
-> proved on `A21 = 0` by leg 58's theorem). `B` can only be **answered**, not run — see
-> DIRECTIVE 1 below (Route-BX, leg 126).
+> bans. **`test_plan_of_record.py` fails if this file and the plan disagree.** Stages `M`
+> through **`B`** are all **DONE** (`B`'s own gate answered NO at leg 126: 1,686/1,686 of its
+> declared search space covered, zero uncovered, a perfect search still 6.04x short —
+> escalation #1, "what comes next," sat parked for many cycles). **`P0` is NEXT — RESOLVED
+> BY THE USER'S 2026-08-06 RULING: the exit criterion is answered, pursue a full Clay solve.**
+> This supersedes the prior "novel Tier-3 result, NOT Clay" prize. Clay odds stay ~0.05%,
+> recorded in the same breath as the goal change — see DIRECTIVE 1 below (Route-P0T, leg 251).
 
 > ## 🔀 FOUR LEGS RUN AT ONCE NOW. If you are a leg agent, read this first.
 > **DIRECTIVE 1 below is the critical-path leg only.** Three exploration legs run beside it,
@@ -37,55 +36,76 @@
 
 ---
 
-# DIRECTIVE 1 — ROUTE-BX: STAGE B, ANSWERED FROM THE BANKED RECORD — THE CLOSURE AUDIT.
+# DIRECTIVE 1 — ROUTE-P0T: PHASE 0, TARGET SELECTION UNDER THE CLAY GOAL.
 
-`NG`'s gate answered **YES** at leg 58, RULED MERGEABLE AS-IS BY THE DM (`ee5b2f4`): a THEOREM
-on the class `A21 = 0`, every `K`, every `s < 1` (`Z₁ ≥ 1`, exact three-line proof off the
-`(I − AL)x` block structure). `A21 ≠ 0` stays **measured, not proved** (leg 54's battery,
-floor `8.9591`) and is not reopened as a blocker — the gate's own wording asked for a class
-**strictly larger than block-diagonal**, not the fully general class, and pre-authorized
-stating the restriction honestly if it wasn't closed. `B` is now the last `QUEUED` stage in
-the committed sequence, and it can no longer be **run** as conceived (its GA lift condition
-has failed twice: leg 49 `4/6`, leg 59 P3 worst `|slope−1|` unmoved at `0.342` against the
-`0.05` floor) — only **answered**.
+**Escalation #1 is RESOLVED.** Stage `B` answered its own gate NO at leg 126 (1,686/1,686 of
+its declared search space covered, zero uncovered; a perfect search still lands 6.04x short)
+and the committed sequence sat EXHAUSTED for many cycles with no successor. **The user's
+2026-08-06 ruling answers "what comes next" by changing the goal itself: pursue a full Clay
+solve**, superseding the prior "novel Tier-3 result, NOT Clay" prize. The user explicitly
+accepts this means building seriously heavy code, and explicitly does NOT lower the
+evidentiary bar for the change — Clay odds stay **~0.05%**, recorded in the same breath as
+the goal change, and no output is ever described as movement toward Clay unless a link of the
+L1→L4 chain actually moves. That rule is easier to erode under a Clay-directed programme, not
+harder, and it does not relax.
 
-## What is actually left, and it is one audit
+## The technical framing this leg (and every Phase 0/1 leg after it) must work inside
 
-All three of `B`'s degrees of freedom are separately dead for this operator: the **space**
-(leg 52), the **split** (coupling entry `K/2` for every choice, leg 53), and the **shape of
-`A`** — measured over leg 54's battery and now **proved** impossible on `A21 = 0` at every `K`
-and every `s < 1` (leg 58's theorem). The third realization is dead too (leg 111: every
-admissible weight's coercivity gap negative, window width zero). `B`'s own deliverable
-pre-authorizes the exit this leg takes: an honest report that it does not close, and where the
-margin runs out. The leg's real work — the part that can answer either way — is the
-**completeness audit**: enumerate `B`'s declared search space (space × split ×
-constants/shape, plus the fitness route) against the banked refutations (legs 49, 52, 53, 54,
-56, 58, 59, 111), clause by clause, and either exhibit an admissible, ban-respecting corner
-that no banked result covers, or establish there is none. **NO GA compute runs on either
-branch** (the ban stands; its lift condition is the frozen six-property gate's PASS, which leg
-59 did not produce). No new ℓ¹-Fourier machinery is built; every number quoted is read from
-banked JSONs or recomputed from landed modules read-only.
+- **Direction (a) (global regularity) is closed** to anything search-/certificate-shaped:
+  Tao's averaged-NS supercriticality barrier means energy methods plus the preserved
+  algebraic structure are provably insufficient. Only direction (b) (blow-up) is in scope.
+- **Wall 2, corrected**: its naive form (spatial dimension is the barrier) is FALSE — van den
+  Berg–Williams certified genuinely 3D Ohta–Kawasaki stationary states in 2019. The real
+  barrier is TIME-DEPENDENT singularity formation, not dimension. Every work stating a 3D
+  singularity theorem *with* a certificate supplies the 3D-ness via a 2D reduction (Chen–Hou)
+  or a spherically-symmetric ODE profile (BCG → CGSS) — never via the certificate itself.
+  This leg must state explicitly which side of that line its own proposal lives on.
+- **The ansatz is constrained**: Nečas–Růžička–Šverák and Tsai exclude nontrivial
+  exactly-backward-self-similar 3D NS blow-up under the relevant decay — the target must be
+  discretely self-similar, unstable-self-similar with a finite unstable spectrum, or
+  non-self-similar. `arXiv:2604.09949` is the recorded negative-control citation for what
+  happens when this is missed.
+- **The missing rung is viscous certification, strictly on the Clay path.** Leg 174's own
+  occupancy matrix has the Grade-A/fluid cell empty "for want of a target, not a method"; leg
+  242 confirms nobody has filled it since. No certified viscous blow-up exists in any model,
+  in any dimension, today. If it cannot be done in 1D, 3D NS is not a question of compute.
 
-**Gate:** auditing stage `B`'s full declared search space against the banked record, does any
-admissible, ban-respecting configuration remain that no banked measurement or theorem covers —
-i.e. a corner in which a searched certificate could still close on this operator? **Yes** →
-name the corner precisely, with the banked clause nearest to it and why it escapes; `B` stays
-`NEXT`, and the follow-up critical-path leg is the measurement of exactly that corner (if it
-needs GA compute, escalate the frozen gate's lift condition to the user — do not run it). **No**
-→ `B`'s own gate answers its pre-committed NO in the only sense that matters: nothing in the
-searchable space closes. Write the honest report `B`'s deliverable names, quantifying how much
-of the difficulty was tuning versus structure (the structure share is now theorem-grade). The
-committed sequence is then **EXHAUSTED**: what enters next is escalation #1, for the user,
-framed by the open question of the γ=2 dissipative certificate route (contingent on leg 125's
-gate, itself already escalated — see `DIRECTION.md`).
+## What this leg does, and the sequencing that binds every leg after it
 
-Full spec: `DIRECTION.md` leg 126 (Route-BX).
+**Do not build the 3D solver first.** This repository's own Route-A discipline — two unknowns
+are never debugged simultaneously — applies with more force here than anywhere it has been
+applied before. The programme is Phase 0 (this leg: which object, which ansatz, survives the
+NRS/Tsai screen and every already-banked dead end) → Phase 1 (the viscous rung: can a viscous
+blow-up be certified in *any* model? — does not need the 3D solver) → Phase 2 (the 3D
+near-singular viscous solver, `PLAN.md` Stage 4, user-authorized but sequenced strictly after
+Phase 1 reports, since a 3D candidate with no certification story reproduces Hou–Luo 2013 and
+answers nothing).
+
+**Gate:** does a target+ansatz combination survive BOTH the NRS/Tsai screen and a check
+against every already-banked dead end this repository's own record contains (L1's death in
+three realizations: legs 54/56/163/176/182; stage B's own exhaustion, leg 126; the space-axis
+synthesis, legs 179/186)? **Yes** → name the object and ansatz precisely, state what a
+certificate for it would need to show, state whether it is fluid/vortex-dynamics-adjacent
+(bearing directly on Phase 1) — escalate as the Phase 1 candidate, do not attempt
+certification under this leg's own authority. **No** → report precisely which screen killed
+every candidate tried; target selection itself needs more candidates or a different screen
+before Phase 1 can even be posed — report honestly, this is itself a real and useful negative.
+
+**Ban review accompanying this ruling** (neither lifted unilaterally, both recorded in
+`plan_of_record.py`'s `BANNED` list directly): the DSS ban is kept as-is (an optional light
+scoping leg on whether its "expensive entrance" was excluded for cost or substance is
+available if wanted); Stage V's ban is re-posed, since its own "needs L1 first" lift
+condition had become unliftable (L1 is dead in three realizations with no fourth candidate) —
+replaced with a forward-looking wording naming the machinery, not the model, as what's dead.
+
+Full spec: `DIRECTION.md` leg 251 (Route-P0T).
 
 ---
 
 # DIRECTIVE 2 — THE THINGS FROM EARLIER LEGS THAT ARE STILL LIVE
 
-**STAGE `B` IS NOT NEXT, AND IS NOW FULLY PRE-REFUTED.** Its three degrees of freedom are the
+**STAGE `B` IS DONE (gate NO, leg 126), NOT NEXT — `P0` is next, per DIRECTIVE 1 above.** `B`
+was fully pre-refuted before its own closure audit ran. Its three degrees of freedom are the
 space (leg 52: one weight constant's 5186× effect was in the border rows, not the space — pin
 `c_l` and it collapses to 0.56×), the operator split (leg 53: `K/2` for every choice), and the
 shape of the approximate inverse (leg 54: best improvement 1.167× where >8× was needed). All

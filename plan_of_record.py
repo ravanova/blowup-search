@@ -24,28 +24,63 @@ carries a pre-committed gate naming BOTH outcomes.  A plan that has drifted fail
 WHAT WAS ADOPTED, AND WHAT WAS NOT
 --------------------------------------------------------------------------
 Adopted by the user on 2026-08-04, after leg 44: **re-aim the search machinery from finding
-the OBJECT to closing the CERTIFICATE**, sequenced behind a target-selection leg.
+the OBJECT to closing the CERTIFICATE**, sequenced behind a target-selection leg. Stage B,
+that certificate-search stage, closed its own gate NO at leg 126 (audited its full declared
+search space: 1,686/1,686 configurations covered, zero uncovered; a perfect search would
+still land at Z1 >= 6.0424, 6.04x short) -- the committed sequence was EXHAUSTED for many
+cycles, parked as escalation #1.
 
-**NOT adopted, and not claimed:** any route to Clay.  Walls 1 and 2 (`CLAY_ROADMAP.md` §2)
-are untouched by all of this — a cheaper certificate does not make 3D Navier-Stokes reachable
-by interval arithmetic, and if NS is globally smooth the whole programme is empty by
-construction.  **Clay stays a ~0.05% horizon.**  The prize this plan is aimed at is a *novel
-Tier-3 result on a model where blow-up is provable*, which is what §2 has said since
-2026-07-23.
+**SUPERSEDING RULING, 2026-08-06 (user decision, resolving escalation #1):** the exit
+criterion is answered -- **pursue a full Clay solve.** This supersedes the "novel Tier-3
+result, NOT Clay" prize below. The user explicitly accepts that this means building
+seriously heavy code, and explicitly does NOT lower the evidentiary bar for the change:
+**Clay stays a ~0.05% horizon, recorded in the same breath as the goal change, not quietly
+dropped now that the prize is bigger.** Walls 1 and 2 (`CLAY_ROADMAP.md` §2, and Wall 2 as
+corrected below per leg 172) still cap everything. No output is ever described as movement
+toward Clay unless a link of the L1->L4 chain actually moves -- that rule is EASIER to erode
+under a Clay-directed programme, not harder, and it does not relax.
+
+The programme is sequenced deliberately, per this repository's own Route-A discipline (two
+unknowns are never debugged simultaneously): Phase 0 (target selection under the Clay goal,
+constrained by Necas-Ruzicka-Sverak and Tsai's exclusion of nontrivial exactly-backward-
+self-similar 3D NS blow-up) before Phase 1 (the viscous rung -- can ANY model's viscous
+blow-up be certified? No certified viscous blow-up exists in any model, in any dimension,
+today; if it cannot be done in 1D, 3D NS is not a question of compute) before Phase 2 (the
+3D near-singular viscous solver, `PLAN.md` Stage 4, user-authorized but unscheduled until
+Phase 1 reports -- a 3D candidate with no certification story reproduces Hou-Luo 2013 and
+answers nothing).
 """
 
 ADOPTED = "2026-08-04"
 ADOPTED_BY = "user decision, in session; supersedes the ranked-item habit"
 
-PRIZE = ("A novel Tier-3 result on a model where blow-up is provable. "
-         "NOT Clay -- see WALLS.")
+GOAL_CHANGE_DATE = "2026-08-06"
+GOAL_CHANGE_BY = ("user ruling, resolving escalation #1 (stage B exhausted with no "
+                   "successor); supersedes the prior Tier-3-not-Clay prize")
+
+PRIZE = ("Pursue a full Clay solve (rigorous resolution of the 3D Navier-Stokes "
+         "regularity/blow-up problem), adopted 2026-08-06, superseding the prior "
+         "'novel Tier-3 result, NOT Clay' prize. Clay odds stay ~0.05% -- an accepted "
+         "risk under the new goal, not a claim of movement -- behind Walls 1 and 2.")
 
 WALLS = [
     ("Wall 1", "A search can only argue FOR blow-up, never for regularity. If 3D NS is "
-               "globally smooth, this programme is empty by construction. Caps everything."),
-    ("Wall 2", "Provable != where Clay lives. Validated/interval numerics reach 1D and 2D "
-               "models; 3D NS is far out of reach. A cheaper certificate does not move this "
-               "-- it is a dimensional wall, not a tuning wall."),
+               "globally smooth, this programme is empty by construction. Caps everything. "
+               "Direction (a) (global regularity) is additionally closed to anything "
+               "search-/certificate-shaped by Tao's averaged-NS supercriticality barrier: "
+               "energy methods plus the preserved algebraic structure are provably "
+               "insufficient. Only direction (b) (blow-up) is in scope."),
+    ("Wall 2", "CORRECTED 2026-08-06 per leg 172: the NAIVE form (spatial dimension is the "
+               "barrier) is FALSE -- van den Berg-Williams certified genuinely 3D "
+               "Ohta-Kawasaki stationary states in 2019. The real barrier is TIME-DEPENDENT "
+               "singularity formation, not dimension. Every work stating a 3D singularity "
+               "theorem WITH a certificate supplies the 3D-ness via a 2D reduction "
+               "(Chen-Hou) or a spherically-symmetric ODE profile (BCG -> CGSS) -- never "
+               "via the certificate itself. Any Clay plan must say explicitly which side of "
+               "that line it lives on. The missing rung is viscous certification: no "
+               "certified viscous blow-up exists in any model, any dimension (leg 174's "
+               "occupancy matrix, leg 242 confirms still empty). A cheaper certificate does "
+               "not by itself cross this -- it is what Phase 1 exists to test."),
 ]
 
 CLAY_ODDS = 0.0005
@@ -682,7 +717,17 @@ STAGES = [
     {
         "id": "B",
         "name": "Evolve the CERTIFICATE -- the function space, the operator split, the constants",
-        "status": "NEXT",
+        "status": "DONE",
+        "done": (
+            "leg 126, 2026-08-05. GATE: NO. Route-BX audited stage B's full declared search "
+            "space (space x split x constants/shape, plus the fitness route) against the "
+            "banked refutations: 1,686 of 1,686 enumerated configurations covered (144 by "
+            "theorem, 1,032 structurally, 510 by measurement), zero uncovered. Even a "
+            "perfect search over the residual headroom lands at Z1 >= 6.0424, 6.04x short. "
+            "The committed sequence was EXHAUSTED with no successor for many cycles -- "
+            "parked as escalation #1, RESOLVED 2026-08-06 by the user's ruling that "
+            "supersedes the goal itself (see the module docstring's SUPERSEDING RULING). "
+            "Stage P0 below is the resolution, not a continuation of B's own search."),
         "why_here": (
             "The bottleneck since Route-D has not been finding the object; it has been closing "
             "a certificate around an object we already have. Route-D hand-tuned a function "
@@ -700,6 +745,46 @@ STAGES = [
                       "tuning versus structure, which is worth knowing either way."),
         },
         "time_box": "unscoped until C-PILOT reports",
+    },
+    {
+        "id": "P0",
+        "name": "Target selection under the CLAY goal -- object, ansatz, what a certificate "
+                "would even mean",
+        "status": "NEXT",
+        "why_here": (
+            "The user's 2026-08-06 ruling resolves escalation #1 by changing the goal itself: "
+            "pursue a full Clay solve, not a novel Tier-3 result. Stage B's own exhaustion "
+            "does not carry over as a dead end for THIS goal -- B searched certificates for "
+            "an object already named under the OLD goal (HL_S2_nonsymmetric); P0 re-does "
+            "target selection (Route-M's own discipline) against a DIFFERENT screen. "
+            "Necas-Ruzicka-Sverak and Tsai exclude nontrivial exactly-backward-self-similar "
+            "3D NS blow-up under the relevant decay, so any candidate must be discretely "
+            "self-similar, unstable-self-similar with a finite unstable spectrum, or "
+            "non-self-similar. arXiv:2604.09949 is the recorded negative-control citation: "
+            "what happens when this constraint is missed."),
+        "deliverable": (
+            "A named target object + ansatz class, with an explicit statement of what a "
+            "certificate for it would need to show, checked against the NRS/Tsai exclusion "
+            "and against every already-banked dead end this repository's own record "
+            "contains (L1's death in three realizations: legs 54/56/163/176/182; stage B's "
+            "own exhaustion, leg 126; the space-axis synthesis, legs 179/186)."),
+        "gate": {
+            "question": ("Does a target+ansatz combination survive the NRS/Tsai screen AND "
+                         "avoid every already-measured dead end this repository's own record "
+                         "contains?"),
+            "if_yes": ("Proceed to Phase 1 (the viscous rung) using this leg's named object. "
+                       "State explicitly whether it is fluid/vortex-dynamics-adjacent, "
+                       "bearing directly on Phase 1's own scope."),
+            "if_no": ("Report precisely which screen killed every candidate tried (NRS/Tsai, "
+                      "or the already-banked-dead-end check). This means target selection "
+                      "itself needs more candidates or a different screen before Phase 1 can "
+                      "even be posed -- report honestly, do not force a candidate through."),
+        },
+        "time_box": ("one leg (Phase 0). Phase 1 (the viscous rung) and Phase 2 (the 3D "
+                     "solver, PLAN.md Stage 4) are sequenced strictly after -- per this "
+                     "repository's own Route-A discipline, two unknowns are never debugged "
+                     "simultaneously. Phase 2 is user-authorized but unscheduled until "
+                     "Phase 1 reports."),
     },
 ]
 
@@ -739,7 +824,20 @@ BANNED = [
      "(arXiv:2410.05480 verifies CGL branches in the dissipation parameter, in interval "
      "arithmetic), and leg 48 re-derived their zeros, branch and fold to confirm it",
      "never -- unless the question is re-posed for a FLUID transport model, which needs L1 first"),
-    ("reading V-rigorous's L1 prerequisite as optional -- a float study cannot be upgraded into a certificate after the fact", "L1"),
+    ("RE-POSED 2026-08-06 (ban review, user ruling 2): re-attempting the ell^1-Fourier/"
+     "radii-polynomial machinery this repository has measured DEAD in three realizations "
+     "(ell^1_w coefficient basis leg 54, collocation basis leg 56, origin-H^2 capped at "
+     "a=0 with no transfer to the real target legs 163/176), on ANY model, fluid or "
+     "otherwise -- this retires the prior 'needs L1 first' wording, which the ban review "
+     "found had become an impossible precondition (L1 has three independent dead "
+     "attempts and no fourth candidate) rather than a live lift path",
+     "never -- unless a namable FOURTH space/basis this repository has not yet tried is "
+     "proposed, with its own scoping leg establishing it is not subject to the same "
+     "three-realization death"),
+    ("SUPERSEDED 2026-08-06 (ban review): reading V-rigorous's L1 prerequisite as optional "
+     "-- a float study cannot be upgraded into a certificate after the fact. Retained for "
+     "the record; the re-posed ban above is now the operative wording on this question.",
+     "never -- superseded by the re-posed ban above, retained for history only"),
     ("closing the truncation gap by extending the domain", "never -- leg 47 measured the trend and it has the WRONG SIGN, +0.47 decades per unit rho"),
     ("sweeping another weight FAMILY without first bordering the tail -- leg 51 measured "
      "flat, algebraic (nine exponents) and geometric, and the divergence curve has no zero; "

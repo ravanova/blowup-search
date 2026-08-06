@@ -117,7 +117,16 @@ def test_6_honesty_invariants_survive():
     for name, text in WALLS:
         assert len(text) > 60, name
     assert abs(CLAY_ODDS - 0.0005) < 1e-9
-    assert "NOT Clay" in PRIZE
+    # 2026-08-06: the user's ruling changed the PRIZE from "novel Tier-3, NOT Clay" to
+    # "pursue a full Clay solve" -- a deliberate, authorized goal change, not drift. The
+    # invariant this test protects is not "the prize says NOT Clay" (that sentence itself
+    # changed by design) but that the ODDS and the WALLS still appear in the same breath as
+    # the prize, so the goal change is never quietly read as a claim that Clay odds moved.
+    assert "0.05%" in PRIZE or "~0.05%" in PRIZE, (
+        "the prize no longer states the Clay odds in the same breath as the goal -- "
+        "the 2026-08-06 ruling requires odds and goal recorded together, always")
+    assert "Walls 1 and 2" in PRIZE or "WALLS" in PRIZE.upper(), (
+        "the prize no longer points at the walls that cap it")
     # the roadmap and the plan must agree that nothing here moves Clay
     t = (ROOT / "CLAY_ROADMAP.md").read_text()
     sec = t[t.index("## 7."):]
@@ -127,8 +136,9 @@ def test_6_honesty_invariants_survive():
     assert nums == sorted(nums) and len(nums) >= 10, nums
     for n in (67, 68, 72, 73, 74):
         assert n in nums, f"lesson ({n}) has been dropped from the standing discipline"
-    print(f"  two walls intact, Clay at {CLAY_ODDS:.2%}, prize says NOT Clay, "
-          f"{len(DISCIPLINE)} discipline items retained  OK")
+    print(f"  two walls intact, Clay at {CLAY_ODDS:.2%}, prize records odds+walls "
+          f"alongside the 2026-08-06 goal change, {len(DISCIPLINE)} discipline items "
+          f"retained  OK")
 
 
 def test_8_continuation_prompt_has_not_become_an_archive():
