@@ -309,12 +309,19 @@ def check_CONTROL_valid_input_is_still_accepted():
         d = float(np.max(np.abs(r.omega_final - ctrl.omega_final)))
         out[f"{name}_0.5_max_abs_diff_from_neutral_run"] = d
         assert d > 0.0, f"in-domain {name} was dropped: the run is identical"
-    X3, Y3 = grid2d(3)
-    r3 = solve_boussinesq(np.sin(X3) * np.sin(Y3) + 0.5,
-                          np.cos(X3) * np.sin(Y3) + 0.5, t_max=T_MAX)
-    out["n3_outcome"] = r3.outcome
-    out["n3_retained_modes"] = int(np.sum(dealias_mask2d(3)))
-    assert out["n3_retained_modes"] > 1, out
+    # "the smallest grid that can carry a non-constant field" was n = 3 when this control
+    # was written and is n = 4 since leg 129 made the 2/3 cut strict (|k| < n/3, Bowman
+    # 2013): at n = 3 the strict cut retains |k| < 1, i.e. the mean mode alone, so leg 89's
+    # condition-based guard rejects it unmodified. The control's INTENT -- the smallest
+    # admissible grid must still run and must still be right -- is preserved exactly; only
+    # the arithmetic value of "smallest" moved. n = 3 and n = 4 are neither powers of two
+    # nor banked grids, and leg 129's bitwise A/B moved 0 of 156 banked quantities.
+    X4, Y4 = grid2d(4)
+    r4 = solve_boussinesq(np.sin(X4) * np.sin(Y4) + 0.5,
+                          np.cos(X4) * np.sin(Y4) + 0.5, t_max=T_MAX)
+    out["n4_outcome"] = r4.outcome
+    out["n4_retained_modes"] = int(np.sum(dealias_mask2d(4)))
+    assert out["n4_retained_modes"] > 1, out
     rc = solve_boussinesq(np.full((N, N), 2.0), th0, t_max=T_MAX)
     out["constant_vorticity_outcome"] = rc.outcome
     out["constant_vorticity_amplification"] = float(rc.max_omega[-1] / rc.max_omega[0])

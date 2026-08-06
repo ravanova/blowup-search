@@ -368,7 +368,8 @@ def solve_boussinesq(
         raise ValueError(
             f"n={n} leaves the 2/3 dealias mask retaining only the mean mode: "
             "the grid cannot represent any non-constant field, so no dynamics "
-            "can be computed on it (n >= 3 required)"
+            "can be computed on it (n >= 4 required since leg 129 made the 2/3 cut "
+            "strict: at n = 3 the alias-free band is |k| < 1, the mean mode alone)"
         )
     dx = TWO_PI / n
 

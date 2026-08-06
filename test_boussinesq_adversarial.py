@@ -403,12 +403,26 @@ def check_repaired_degenerate_grid_is_rejected():
     energy_balance_residual = 0.0 -- the most reassuring numbers in the whole battery,
     produced by a discretization that cannot represent any dynamics at all.
 
-    POST-FIX: a grid whose mask retains no non-zero wavenumber is rejected. n >= 3
-    retains more than the mean mode and must keep running, which is asserted here so the
-    repair cannot creep into a resolution floor it was never given authority to impose.
+    POST-FIX: a grid whose mask retains no non-zero wavenumber is rejected. Grids above the
+    floor must keep running, which is asserted here so the repair cannot creep into a
+    resolution floor it was never given authority to impose.
+
+    THE FLOOR MOVED FROM n >= 3 TO n >= 4 AT LEG 129, and this check is the tripwire that
+    caught it -- working exactly as leg 89 intended. It is NOT a policy creep of the kind the
+    docstring above warns about; it is arithmetic. Leg 129 repaired the 2/3 cut from
+    `|k| <= n/3` to `|k| < n/3` (strict, per Bowman 2013 and arXiv:2603.08892), and at n = 3
+    the strict cut retains `|k| < 1`, i.e. the (0,0) mean mode and nothing else. So a 3-point
+    grid genuinely cannot represent any non-constant field under a CORRECT 2/3 rule, and
+    leg 89's guard -- which tests the CONDITION "no non-zero wavenumber survives the mask"
+    rather than hard-coding a value of n -- rejects it on its own, unmodified. The old
+    assertion `dealias_mask2d(3) > 1` was only ever true because of the defect.
+
+    Leg 129's no-op licence is untouched by this: n = 3 is not a power of two, is not a
+    banked grid, and appears in no run anywhere in the repository. The bitwise A/B moved
+    0 of 156 banked quantities.
     """
     out = {}
-    for n in (1, 2):
+    for n in (1, 2, 3):
         Xn, Yn = grid2d(n)
         wn = np.sin(Xn) * np.sin(Yn) + 0.5
         thn = np.cos(Xn) * np.sin(Yn) + 0.5
@@ -419,8 +433,9 @@ def check_repaired_degenerate_grid_is_rejected():
         out[f"n{n}_rejected"] = 1.0 if msg else 0.0
         assert msg is not None, f"n={n}: a one-mode grid still runs"
         assert "mean mode" in msg, msg
-    assert int(np.sum(dealias_mask2d(3))) > 1, "n=3 should retain more than the mean mode"
-    for n in (3, 4, 5):
+    # n = 4 is the floor: the strict cut keeps |k| < 4/3, i.e. |k| = 1 as well as the mean.
+    assert int(np.sum(dealias_mask2d(4))) > 1, "n=4 should retain more than the mean mode"
+    for n in (4, 5, 6):
         Xn, Yn = grid2d(n)
         r = solve_boussinesq(np.sin(Xn) * np.sin(Yn) + 0.5,
                              np.cos(Xn) * np.sin(Yn) + 0.5, t_max=T_MAX)

@@ -1,7 +1,19 @@
 # Route-SUR v1 — the dealias-boundary repair, and the measured no-op that licensed it
 
 **Leg 129. Branch `leg/129-sur-v1`. Claim-bearing (it moves numbers in a shared numerical
-core). Gate: YES on all three clauses.**
+core). Gate: YES on all three clauses — PARKED under escalation #4, branch pushed, `main`
+untouched.**
+
+> ⚠ **Why this is parked.** The corrected cut moves the 2D solver's minimum admissible grid
+> from `n >= 3` to `n >= 4`: under a *strict* 2/3 rule an `n = 3` grid retains `|k| < 1`, the
+> mean mode alone, and leg 89's condition-based guard rejects it unmodified. That moves exactly
+> **one of leg 133's 90 banked battery verdicts** — family `E_degenerate_discretization`, from
+> `raised 13 / benign 3` to `raised 14 / benign 2`. Making the census check pass would require
+> rewriting `writeup/data/p2_route_bob_v1_postrepair.json`, and rewriting a banked result in
+> `writeup/` is **escalation #4**, never merged without the user. The move is strictly in the
+> safer direction — `n_quieter = 0` unchanged, `n_louder` 40 → 41, `n_silent_to_raised` 23
+> unchanged, all 90 cases still zero-silent, and leg 133's bitwise `n = 32` regression hashes
+> still pass. See §6.
 
 Runner `experiments/p2_route_sur_v1_repair.py` · data
 `writeup/data/p2_route_sur_v1_repair.json` · figure `writeup/figures/fig61_route_sur_v1_repair.png`
@@ -218,7 +230,44 @@ Both are minimal and in-kind. Neither touches a shared ledger.
 
 ---
 
-## 6. Honest limits
+## 6. The escalation: the 2D resolution floor moves 3 → 4
+
+`solver/boussinesq.py` carries leg 89's guard, which raises when *"the 2/3 dealias mask retains
+only the mean mode"*. It tests the **condition**, not a hard-coded `n` — which is why it needed
+no edit, and why its behaviour changed the moment the mask became correct.
+
+| `n` | retained modes, old cut | retained modes, new cut | accepted? |
+|---|---|---|---|
+| 1, 2 | 1 | 1 | rejected, before and after |
+| **3** | **2** | **1** | **was accepted, now rejected** |
+| 4, 5, 6 | ≥ 2 | ≥ 2 | accepted, before and after |
+
+At `n = 3` the strict band is `|k| < 1`. A 3-point grid cannot carry a non-constant field under
+a correct 2/3 rule, so rejecting it is right — but "right" is not the same as "this leg's to
+land", and the number it moves was banked by leg 133 six commits ago.
+
+**Scope, measured rather than asserted.** No power of two, no banked grid, no
+`energy_balance_residual` record (0 of 129), and none of the 156 quantities in the §3 A/B are
+affected. `n = 3` and `n = 4` appear in no run anywhere in the repository outside two
+adversarial batteries. The leg's own pre-committed no-branch — *"if ANY power-of-two-grid
+quantity changes at all, stop and escalate"* — did **not** fire; this is a narrower and
+different thing, and the two must not be confused.
+
+**The decision the user/DM owns:** re-bank leg 133's `E` family census as `14/2` (the repair is
+correct and the move is strictly louder), or reject the 2D half of this repair. The 1D half is
+independent of the question and unaffected by it.
+
+Three dependent edits are already made and are *not* themselves the escalation — ordinary
+in-kind updates whose intent is preserved exactly:
+`test_boussinesq_adversarial.py::check_repaired_degenerate_grid_is_rejected` moves `n = 3` from
+its "must run" list to its "must be rejected" list;
+`test_boussinesq_postrepair.py::check_CONTROL_valid_input_is_still_accepted` takes `n = 4` as
+"the smallest grid that can carry a non-constant field"; and the guard's message now reads
+`n >= 4 required`. Both files pass afterwards **except** the census check, which is the only
+failure in the entire affected-test set (23 tests selected by import closure, plus the two
+always-on gate tests).
+
+## 7. Honest limits
 
 - **Every number here is a statement about code behaviour.** None is a physics measurement,
   none contests any banked result, and nothing here touches a link of the L1→L4 chain.
