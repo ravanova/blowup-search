@@ -1,0 +1,354 @@
+{
+  "what": "bench repair check: solver/target_norm.py domain guard",
+  "not_a_leg": true,
+  "base_ref_for_prepatch_module": "origin/leg/tna-v1",
+  "A_zero_regression": {
+    "what": "A/B of the patched module against the pre-guard module loaded from git origin/leg/tna-v1; every value the old module returned must be bit-identical, only new keys may appear",
+    "cases": [
+      {
+        "case": "in-window   rho_max=12, power",
+        "far_field": "power",
+        "n_outside_grid": 0,
+        "domain_valid": true,
+        "p_prepatch": 1.403855224594087,
+        "p_patched": 1.403855224594087,
+        "p_bit_identical": true,
+        "margin_prepatch": 0.10385522459408691,
+        "margin_patched": 0.10385522459408691,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_max_data",
+          "domain_valid",
+          "frac_outside_grid"
+        ],
+        "new_keys_fit_exponent": [
+          "domain_valid",
+          "n_outside_grid"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8, power",
+        "far_field": "power",
+        "n_outside_grid": 14,
+        "domain_valid": false,
+        "p_prepatch": 1.4038551509334543,
+        "p_patched": 1.4038551509334543,
+        "p_bit_identical": true,
+        "margin_prepatch": 0.10385515093345421,
+        "margin_patched": 0.10385515093345421,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_max_data",
+          "domain_valid",
+          "frac_outside_grid"
+        ],
+        "new_keys_fit_exponent": [
+          "domain_valid",
+          "n_outside_grid"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8, clamp",
+        "far_field": "clamp",
+        "n_outside_grid": 14,
+        "domain_valid": false,
+        "p_prepatch": 1.5654159793146842,
+        "p_patched": 1.5654159793146842,
+        "p_bit_identical": true,
+        "margin_prepatch": 0.2654159793146842,
+        "margin_patched": 0.2654159793146842,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_max_data",
+          "domain_valid",
+          "frac_outside_grid"
+        ],
+        "new_keys_fit_exponent": [
+          "domain_valid",
+          "n_outside_grid"
+        ]
+      },
+      {
+        "case": "out-of-window rho_max=8, zero",
+        "far_field": "zero",
+        "n_outside_grid": 14,
+        "domain_valid": false,
+        "p_prepatch": 1.148838972163285,
+        "p_patched": 1.148838972163285,
+        "p_bit_identical": true,
+        "margin_prepatch": -0.15116102783671503,
+        "margin_patched": -0.15116102783671503,
+        "n_value_differences": 0,
+        "differences": [],
+        "new_keys_spectrum": [
+          "X_max_data",
+          "domain_valid",
+          "frac_outside_grid"
+        ],
+        "new_keys_fit_exponent": [
+          "domain_valid",
+          "n_outside_grid"
+        ]
+      }
+    ],
+    "n_cases": 4,
+    "n_cases_with_any_value_difference": 0,
+    "all_bit_identical": true
+  },
+  "B_leg55_contamination_check": {
+    "what": "leg 55's nb5_norms re-run with the guard active, at its own headline domain (rho_max = 12) and, as a counterfactual, at the shipped rho_max = 8 domain where 14 theta-samples fall outside the data",
+    "leg55_headline_run": {
+      "rho_max": 12.0,
+      "n": 801,
+      "X_max": 40688.69785321492,
+      "alpha": 0.3973531116778231,
+      "p": 1.3937445312885988,
+      "C": 0.48559511416865153,
+      "converged": true,
+      "residual": 1.329492071988625e-14,
+      "n_theta_points_outside_grid": 0,
+      "domain_valid": true,
+      "n_domain_warnings_raised": 0,
+      "first_warning": null,
+      "classes": [
+        {
+          "s": 0.0,
+          "verdict": {
+            "s": 0.0,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.39374453128859876,
+            "finite": true,
+            "margin_predicted": 0.3973531116778231,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "analytic_tail": {
+            "finite": true,
+            "margin": 0.39374453128859876,
+            "bound": 0.04663508781987077,
+            "reason": null,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 1.5122086530122303,
+          "norm_upper_bound": 1.558843740832101
+        },
+        {
+          "s": 0.3,
+          "verdict": {
+            "s": 0.3,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.09374453128859872,
+            "finite": true,
+            "margin_predicted": 0.09735311167782312,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "analytic_tail": {
+            "finite": true,
+            "margin": 0.09374453128859872,
+            "bound": 2.9241414362726283,
+            "reason": null,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 3.328963898600388,
+          "norm_upper_bound": 6.253105334873016
+        },
+        {
+          "s": 0.39,
+          "verdict": {
+            "s": 0.39,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": 0.0037445312885986404,
+            "finite": true,
+            "margin_predicted": 0.007353111677823099,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "analytic_tail": {
+            "finite": true,
+            "margin": 0.0037445312885986404,
+            "bound": 164.72212947193427,
+            "reason": null,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 4.57638884867989,
+          "norm_upper_bound": 169.29851832061416
+        },
+        {
+          "s": 1.0,
+          "verdict": {
+            "s": 1.0,
+            "p": 1.3937445312885988,
+            "margin_in_exponent_units": -0.6062554687114012,
+            "finite": false,
+            "margin_predicted": -0.6026468883221769,
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "analytic_tail": {
+            "finite": false,
+            "margin": -0.6062554687114012,
+            "bound": null,
+            "reason": "p - s <= 1: the weighted sum diverges; the tail has no value",
+            "n_outside_grid": 0,
+            "domain_valid": true
+          },
+          "S_N_at_4096": 123.12277748399391,
+          "norm_upper_bound": null
+        }
+      ]
+    },
+    "shipped_domain_counterfactual": {
+      "rho_max": 8.0,
+      "n": 801,
+      "X_max": 745.2394128947751,
+      "alpha": 0.3935782637981938,
+      "p": 1.3692459935956744,
+      "C": 0.4856849352476282,
+      "converged": true,
+      "residual": 2.275957200481571e-14,
+      "n_theta_points_outside_grid": 14,
+      "domain_valid": false,
+      "n_domain_warnings_raised": 13,
+      "first_warning": "target_norm.compactify: 14 theta-sample(s) lie outside the supplied data window, so the far-field closure -- not the data -- determines those modes (14 of 16384 samples, 0.085%, beyond |X| = 745.239 with far_field='power').  capabilities.py calls the measurement untrustworthy there; the headline is taken where no sample point leaves the grid.",
+      "classes": [
+        {
+          "s": 0.0,
+          "verdict": {
+            "s": 0.0,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": 0.36924599359567445,
+            "finite": true,
+            "margin_predicted": 0.3935782637981938,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "analytic_tail": {
+            "finite": true,
+            "margin": 0.36924599359567445,
+            "bound": 0.06098027841992913,
+            "reason": null,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 1.6328405670670003,
+          "norm_upper_bound": 1.6938208454869295
+        },
+        {
+          "s": 0.3,
+          "verdict": {
+            "s": 0.3,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": 0.0692459935956744,
+            "finite": true,
+            "margin_predicted": 0.09357826379819378,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "analytic_tail": {
+            "finite": true,
+            "margin": 0.0692459935956744,
+            "bound": 4.854310215774996,
+            "reason": null,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 3.659468228619716,
+          "norm_upper_bound": 8.513778444394712
+        },
+        {
+          "s": 0.39,
+          "verdict": {
+            "s": 0.39,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": -0.020754006404325565,
+            "finite": false,
+            "margin_predicted": 0.0035782637981937593,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "analytic_tail": {
+            "finite": false,
+            "margin": -0.020754006404325565,
+            "bound": null,
+            "reason": "p - s <= 1: the weighted sum diverges; the tail has no value",
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 5.067556442315017,
+          "norm_upper_bound": null
+        },
+        {
+          "s": 1.0,
+          "verdict": {
+            "s": 1.0,
+            "p": 1.3692459935956744,
+            "margin_in_exponent_units": -0.6307540064043256,
+            "finite": false,
+            "margin_predicted": -0.6064217362018063,
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "analytic_tail": {
+            "finite": false,
+            "margin": -0.6307540064043256,
+            "bound": null,
+            "reason": "p - s <= 1: the weighted sum diverges; the tail has no value",
+            "n_outside_grid": 14,
+            "domain_valid": false
+          },
+          "S_N_at_4096": 141.55527835628942,
+          "norm_upper_bound": null
+        }
+      ]
+    },
+    "margins": [
+      {
+        "s": 0.0,
+        "leg55_banked_margin": 0.39374453128859876,
+        "rerun_margin_at_leg55_headline_domain": 0.39374453128859876,
+        "abs_difference_vs_banked": 0.0,
+        "reproduces_banked_margin": true,
+        "headline_domain_valid": true,
+        "headline_finite": true,
+        "counterfactual_margin_at_shipped_745_domain": 0.36924599359567445,
+        "counterfactual_domain_valid": false,
+        "counterfactual_finite": true,
+        "margin_cost_of_the_contaminated_domain": 0.024498537692924316,
+        "verdict_would_have_flipped": false
+      },
+      {
+        "s": 0.3,
+        "leg55_banked_margin": 0.09374453128859872,
+        "rerun_margin_at_leg55_headline_domain": 0.09374453128859872,
+        "abs_difference_vs_banked": 0.0,
+        "reproduces_banked_margin": true,
+        "headline_domain_valid": true,
+        "headline_finite": true,
+        "counterfactual_margin_at_shipped_745_domain": 0.0692459935956744,
+        "counterfactual_domain_valid": false,
+        "counterfactual_finite": true,
+        "margin_cost_of_the_contaminated_domain": 0.024498537692924316,
+        "verdict_would_have_flipped": false
+      }
+    ],
+    "leg55_headline_is_clean": true,
+    "leg55_banked_p": 1.3937445312885988,
+    "rerun_p_at_headline": 1.3937445312885988,
+    "p_reproduces": true,
+    "any_banked_margin_changed": false,
+    "any_verdict_would_have_flipped": false
+  },
+  "headline": {
+    "guard_changes_no_number": true,
+    "leg55_headline_domain_had_zero_samples_outside": true,
+    "leg55_banked_margins_reproduce_exactly": true,
+    "leg55_needs_a_rework_leg": false
+  }
+}
