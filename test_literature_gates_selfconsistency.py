@@ -25,7 +25,7 @@ and every leg that quotes the row inherits the misreport silently.
   (5) THE NEGATIVE CONTROLS FIRE.  A fabricated arXiv id and a source naming no paper must
       both be CAUGHT.  Without this the resolution gate would be an ornament that cannot
       come out differently (banked lesson 90).
-  (6) THE DRIFT CENSUS IS PINNED TO THE MODULE'S CURRENT TEXT.  Two rows drift.  This gate
+  (6) THE DRIFT CENSUS IS PINNED TO THE MODULE'S CURRENT TEXT.  Three rows drift.  This gate
       asserts the drift is STILL THERE, quoting the exact strings that carry it.  That is
       deliberate: leg 145's gate answered NO and the finding is ESCALATED, not patched, so
       the audit record must fail loudly the moment someone repairs the module -- which is
@@ -111,7 +111,7 @@ def test_3_transcribed_numbers():
 
 
 def test_4_quote_record_is_well_formed():
-    assert len(QUOTES) == 13, len(QUOTES)
+    assert len(QUOTES) == 14, len(QUOTES)
     for q in QUOTES:
         assert q["arxiv"] in ARXIV_METADATA, q["arxiv"]
         assert q["locator"] and q["quote"] and q["find"] and q["supports"]
@@ -144,11 +144,12 @@ def test_6_drift_census_is_pinned_to_the_module_text():
     If someone repairs `literature_gates.py`, these assertions fail -- on purpose.  That
     failure means "leg 145's audit record is now stale, re-run it", not "the module broke".
     """
-    assert len(DRIFT) == 2, len(DRIFT)
+    assert len(DRIFT) == 3, len(DRIFT)
     assert sum(1 for d in DRIFT if d["verdict_changes"]) == 0, "no verdict changes"
 
     by_kind = {d["kind"]: d for d in DRIFT}
-    assert set(by_kind) == {"LOCATOR_UNDER-SUPPORTS_NOTE", "STALE_PROVENANCE"}, set(by_kind)
+    assert set(by_kind) == {"LOCATOR_UNDER-SUPPORTS_NOTE", "FALSE_NEGATIVE_ABOUT_A_SOURCE",
+                            "STALE_PROVENANCE"}, set(by_kind)
 
     # (i) the Theorem 2 / Theorem 3 misattribution, still present
     spec = [c for c in CLAIM_LEDGER if "isolated eigenvalues" in c["claim"]]
@@ -166,7 +167,17 @@ def test_6_drift_census_is_pinned_to_the_module_text():
     assert "Theorem 2: the full point spectrum" in src, (
         "docstring drift repaired -- re-run the audit")
 
-    # (ii) the stale provenance parenthetical, still present
+    # (ii) the false negative about XU, still present -- and refuted by this same
+    #      module's OWN transcription of XU Table 1, whose a = 0.5 row reads s* = 3.000
+    marg = [c for c in CLAIM_LEDGER if "0.133683" in c["claim"]]
+    assert len(marg) == 1, marg
+    assert "not in ALS and not in XU" in marg[0]["note"], marg[0]["note"]
+    assert marg[0]["verdict"] == "UNSEARCHED_AT_PRIMARY_SOURCE", marg[0]["verdict"]
+    a_half = [r for r in XU_TABLE1 if abs(r[0] - 0.5) < 1e-9]
+    assert len(a_half) == 1 and abs(a_half[0][2] - 3.0) < 1e-3, a_half
+    assert abs(a_half[0][1] - 1.0 / 3.0) < 1e-3, a_half
+
+    # (iii) the stale provenance parenthetical, still present
     trap = [c for c in CLAIM_LEDGER if "discrete-ball trap" in c["claim"]]
     assert len(trap) == 1, trap
     assert trap[0]["source"] == "2302.12877 (Tier 2, fetched, NOT read closely)", trap[0]
@@ -179,9 +190,9 @@ def test_6_drift_census_is_pinned_to_the_module_text():
             f = site["site"].split(":")[0].split(" ")[0]
             assert (ROOT / f).exists(), f
     carriers = sum(1 for d in DRIFT for s in d["blast_radius"] if s["carries_drift"])
-    assert carriers == 7, carriers
-    print(f"  2 drift rows still present verbatim, 0 verdicts changed, {carriers} quote sites "
-          f"carry them; LITERATURE_CHECK.md's own Thm-2 row is correct and excluded  OK")
+    assert carriers == 8, carriers
+    print(f"  3 drift rows still present verbatim, 0 verdicts changed, {carriers} quote sites "
+          f"carry them; the sites legs 64/65 already corrected are excluded  OK")
 
 
 def test_7_artifact_matches_a_fresh_call():
@@ -199,11 +210,11 @@ def test_7_artifact_matches_a_fresh_call():
     # every quote that was recheckable on the recorded run was found
     q = d["L4_quote_relocation"]
     assert q["n_found_verbatim"] == q["n_recheckable_this_run"], q
-    assert d["L6_drift"]["n_drift_rows"] == 2
+    assert d["L6_drift"]["n_drift_rows"] == 3
     assert d["L6_drift"]["n_verdicts_changed"] == 0
     assert d["L7_gate"]["answer"] == "NO"
     print(f"  committed JSON agrees with a fresh call: 10/12 resolved, 0 phantom, "
-          f"{q['n_found_verbatim']}/{q['n_recheckable_this_run']} quotes relocated, 2 drift "
+          f"{q['n_found_verbatim']}/{q['n_recheckable_this_run']} quotes relocated, 3 drift "
           f"rows  OK")
 
 

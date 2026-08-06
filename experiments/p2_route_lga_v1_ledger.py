@@ -215,6 +215,18 @@ QUOTES = [
                      "ledger flags"),
     },
     {
+        "row_claim_key": "sigma = 3 criticality at a = 1/2 (the ledger says XU lacks it)",
+        "arxiv": "2607.19762", "locator": "section 6.1, validation paragraph after eq (6.3)",
+        "quote": ("The branch value is tested at a = 1/2, where s* = 3 exactly (cl (1/2) = "
+                  "1/3 by the exact solution of [20]; also [4, Thm. 2]) and J. Chen [20] "
+                  "proved blow-up at s = 2 < 3 (subcritical), consistent with persistence."),
+        "find": "= 3 exactly",
+        "supports": ("NOTHING in the ledger -- it REFUTES the row's parenthetical 'not in "
+                     "ALS and not in XU'.  XU's s is ALS's sigma (both are Lambda = "
+                     "(-d_xx)^{1/2}), so s* = 3 at a = 1/2 IS the sigma = 3 criticality, "
+                     "printed exactly here AND as Table 1's a = 0.5 row (s* = 3.000)"),
+    },
+    {
         "row_claim_key": "beta = 2.92 as the 2D Boussinesq / Hou-Luo anchor",
         "arxiv": "2210.07191", "locator": "the profile section, remark on c_l/c_omega",
         "quote": ("We remark that the ratio cl /comega approx -2.9205600 is very close to the "
@@ -359,6 +371,48 @@ DRIFT = [
             {"site": "LITERATURE_CHECK.md (verdict table row)", "carries_drift": False,
              "text": ("'isolated eigenvalues are only symmetry modes | Route-E v1 | XU Thm 2' "
                       "-- CORRECT as written: that claim IS Theorem 2's scope")},
+        ],
+    },
+    {
+        "row_claim": "alpha_1 = +0.133683 at a = 1/2 (the marginal invariant at s = s_c = 3/2)",
+        "stored_source": "not found in Tier 1",
+        "kind": "FALSE_NEGATIVE_ABOUT_A_SOURCE",
+        "what_the_row_asserts": [
+            "criticality at a = 1/2 is sigma = 3, which is not in ALS and not in XU "
+            "(who stop at recording s* itself)",
+        ],
+        "what_the_cited_theorem_actually_says": (
+            "XU section 6.1 prints it exactly: 'The branch value is tested at a = 1/2, where "
+            "s* = 3 exactly'.  XU's Lambda^s and ALS's Lambda^sigma are the same operator "
+            "(Lambda = (-d_xx)^{1/2}), so s*(1/2) = 3 IS the sigma = 3 criticality -- and it "
+            "is Table 1's a = 0.5 row (s* = 3.000) as well."),
+        "where_the_asserted_content_lives": (
+            "XU section 6.1 validation paragraph, and XU Table 1 row a = 0.5 -- a table this "
+            "module already transcribes IN FULL as XU_TABLE1, whose a = 0.5 row reads 3.000."),
+        "verdict_changes": False,
+        "why_verdict_survives": (
+            "The row's verdict UNSEARCHED_AT_PRIMARY_SOURCE is about alpha_1 = +0.133683, the "
+            "marginal INVARIANT, and that is genuinely not published -- leg 64 searched the "
+            "whole dissipative CLM corpus and did not find it.  Only the supporting "
+            "parenthetical about sigma = 3 is false."),
+        "mechanism": (
+            "Found already by leg 64, which was DISPATCHED beyond Tier 1 on the strength of "
+            "this very parenthetical and discovered it was false without leaving Tier 1: "
+            "'That parenthetical is false about XU' (experiments/journal/leg_64.md line 40). "
+            "Leg 64 corrected PHASE2_P2_NOTES.md's J-2 copy and capabilities.py line 97.  It "
+            "could not correct this one -- solver/literature_gates.py was leg 62's territory "
+            "-- so the module is now the ONLY place in the repository still carrying it.  "
+            "Sharpest form: the refutation is one row of a table THIS MODULE ITSELF "
+            "transcribes (XU_TABLE1 a = 0.5 -> s* = 3.000), sitting 120 lines above the row "
+            "that denies it."),
+        "blast_radius": [
+            {"site": "solver/literature_gates.py:557", "carries_drift": True,
+             "text": "CLAIM_LEDGER row note: 'not in ALS and not in XU'"},
+            {"site": "capabilities.py:97", "carries_drift": False,
+             "text": ("CORRECTED by leg 64: 'criticality sigma=3 at a=1/2 IS published (Xu "
+                      "sec 6.1 + Table 1 row a=0.5 + Fig 3)'")},
+            {"site": "PHASE2_P2_NOTES.md (J-2 parenthetical)", "carries_drift": False,
+             "text": "CORRECTED by leg 64; the false wording no longer appears in the file"},
         ],
     },
     {
@@ -652,8 +706,10 @@ def main():
             "answer_detail": (
                 "(a) holds: all 5 distinct arXiv ids cited by the ledger resolve to real "
                 "papers whose title, authors and date match PRIMARY_SOURCES -- zero phantom "
-                "citations.  (b) does NOT: 2 of 12 rows carry drift between the stored "
-                "summary and the cited text, and 0 of 12 verdicts change as a result."),
+                "citations.  (b) does NOT: 3 of 12 rows carry drift between the stored "
+                "summary and the cited text, and 0 of 12 verdicts change as a result.  Two "
+                "of the three were found by earlier legs (64, 65) working from OUTSIDE this "
+                "module's territory, reported, and never applied here."),
         },
     }
 
