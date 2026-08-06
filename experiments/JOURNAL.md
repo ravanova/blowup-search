@@ -2942,5 +2942,13 @@ belong to a future window.
   row, and a truncated last digit). Both ban-bearing numbers (leg 46's clause P6b, leg 47's
   wrong-sign trend) were exact throughout. User approved the correction; applied directly to
   the prose and to both evidence scripts' quoted literals — both now report CLEAN 114/114.
+- **Leg 112 (Route-AS2) — YES on both flagged readings:** verified §24's two unresolved
+  readings of arXiv:2603.25104 from the full PDF. The a-sign dichotomy holds but is
+  conditional on degenerate initial data, so §24's "possibly the wrong object" inference does
+  not follow (their Thm 2.7/7.10 prove existence for all a in (-inf,1)). The fixed-point
+  identification with the banked first integral is confirmed in its strongest form (their p.38
+  definition matches (FI) including the anchor constant, re-checked to 1.15e-13 relative).
+  Priority dated: the traveling-wave form is 2603.25104's; the underlying method is HQWW24
+  (2024). No ban lifted, L1 stays measured-dead.
 
 No link of the L1->L4 chain moved. Clay unchanged at ~0.05%.
