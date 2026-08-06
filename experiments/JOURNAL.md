@@ -3577,3 +3577,22 @@ preempted agents had reached a landing.
   conclusion moves. Residue: the banked anchor JSON itself still carries the
   wrong 1.0468e+10 margin, outside this leg's territory -- needs a follow-up
   leg to regenerate it.
+- **Leg 254 (Route-DSSX) — DSS ban scoping, gate NO (cost-shaped), ESCALATED,
+  USER-APPROVED AND APPLIED 2026-08-07:** the DSS ban's "expensive entrance"
+  (a global, unseeded periodic-orbit search of the rescaled gCLM flow) was
+  excluded by PRICE, not by measurement -- all three of the ban's recorded
+  reasons are local-linear spectral statements at a FIXED POINT of the flow
+  (Route-E cd43893, Route-H 9dba93f, Route-I 35929a4), 0 of 3 concerning a
+  global search; the phrase "expensive entrance" entered plan_of_record.py in
+  the same commit that authored the ban, never examined since; repo-wide grep
+  finds 0 periodic-orbit searches of the rescaled flow ever built, run, or
+  costed. The user approved leg 254's proposed re-posed wording: the DSS ban
+  is now split into Entry A (cheap entrances, bifurcation off a fixed point --
+  stays banned, "never," unchanged in substance) and Entry B (the expensive
+  entrance -- re-posed from "never" to "never -- unless a scoping leg answers
+  the function space, the object [gCLM's three reasons say nothing about NS],
+  and the price"). Applied directly to `plan_of_record.py`'s BANNED list; all
+  10 `test_plan_of_record.py` invariants pass. Leg 251 (Phase 0), which was
+  carrying a CONDITIONAL tier for any DSS-dependent candidate pending this
+  ruling, can now treat the expensive entrance as open-pending-a-scoping-leg
+  rather than flatly banned.

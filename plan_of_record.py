@@ -796,8 +796,40 @@ STAGES = [
 BANNED = [
     ("another gCLM measurement leg", "never -- the model is exhausted (Stage 3.5, leg 42)"),
     ("another Route-D bound-sharpening leg", "B"),
-    ("another DSS re-ask, or the DSS lane's expensive entrance",
-     "never -- three independent reasons the cheap entrances fail"),
+    ("another DSS CHEAP-ENTRANCE re-ask -- any attempt to obtain a DSS orbit by BIFURCATION "
+     "OFF A FIXED POINT of a rescaled flow (Hopf or otherwise), inviscid or viscous",
+     "never -- three independent reasons, each a measured spectral statement at the fixed point "
+     "of the gCLM rescaled flow in the compactified odd-sine basis (gauge c_omega = 1 + (a-1) "
+     "H(Omega)(0)), carried at a=0 (closed form) and a=1/2 (alpha=3 exactly) because the free "
+     "error bar is 0.35 at a=0.2 vs 8.9e-5 at a=1/2: (1) Route-E cd43893 / PHASE2_P2_NOTES §26 "
+     "-- the log-periodic directions are CONTINUOUS spectrum, the only grid-converged isolated "
+     "eigenvalues are the two exact symmetry modes 0 and -1, planted positive control +1.083 "
+     "(V=6) / +4.578 (V=12); a continuum has no eigenvalue to move. (2) Route-H 9dba93f / §29 "
+     "-- dissipation DOES discretize that continuum (converged eigenvalues 2 -> 8, condensing "
+     "on the negative integers) and every member still lands on the negative real axis, max Re "
+     "= 3e-13, nothing goes complex; positive control 6 -> 9 with one at Re = +1.58. (3) "
+     "Route-I 35929a4 / §30 -- inviscidly the log-periodic band IS the unstable set (141/144 "
+     "unstable directions at K=144, leading +4.5455+430.35i, Re rising with |Im|) and any mu>0 "
+     "DELETES it rather than damping it: max Re = -1e-13 at mu=0.05"),
+    ("the DSS lane's EXPENSIVE entrance -- a GLOBAL periodic-orbit search of a rescaled flow "
+     "with no fixed point nearby to seed it (TECHNICAL_P2_ROUTEG_V1.md:59, "
+     "TECHNICAL_P2_ROUTEE_V1.md:416). SPLIT OUT AND RE-POSED 2026-08-07 (leg 254, user-"
+     "approved): it was excluded by PRICE, not by measurement. All three reasons above are "
+     "local-linear statements at a fixed point; 0 of 3 concern a global search. Route-E's own "
+     "sec 6.4 states the opposite of an exclusion -- 'periodic orbits can exist without a "
+     "fixed point nearby that spawned them' -- and Route-G's gate-check (b) rejected this "
+     "entrance in a literal cost comparison ('this is much cheaper'). It has never been "
+     "built, run, or costed with a number (repo-wide grep: 0 periodic-orbit searches of a "
+     "rescaled flow), and 12 of 12 post-ban legs mentioning DSS are ban-walk non-contact "
+     "lines that never inspect it",
+     "never -- unless a scoping leg answers all three of: (a) the FUNCTION SPACE the search "
+     "runs in, carrying sec 26 sec 4.1's recorded difficulty -- the orbit's building blocks "
+     "are of LIMITED REGULARITY at the origin (X^{1-iy}, fractional power at X=0) and in the "
+     "VISCOUS gCLM problem that band is absent entirely (max Re = -1e-13 at mu=0.05); (b) the "
+     "OBJECT, since all three reasons hold only in gCLM -- Route-E: 'Nothing about NS. "
+     "gCLM's scaling structure is not NS's' -- while Phase 0's target is NS; and (c) a PRICE "
+     "in leg-hours against Phase 1's viscous rung. Under the Clay goal, expense alone neither "
+     "holds nor lifts a ban"),
     ("re-measuring beta on the 2D object", "never -- leg 43 showed the object does not converge"),
     ("re-testing the scaling gauge as the near-null direction",
      "never -- leg 44 L-7 refuted it"),
