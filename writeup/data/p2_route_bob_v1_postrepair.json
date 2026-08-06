@@ -1,0 +1,1908 @@
+{
+  "leg": 133,
+  "route": "BOB",
+  "module_under_audit": "solver/boussinesq.py",
+  "module_edited": false,
+  "closes_the_loop_on": {
+    "leg": 89,
+    "route": "BOA",
+    "repair_commit": "0c54d8a",
+    "merge_commit": "14b2e98"
+  },
+  "gate_verbatim": "Post-repair, does solver/boussinesq.py (a) pass leg 89's full original battery -- no false blowup_candidate under dealiasing noise, kappa honored, NaNs propagated or flagged -- and (b) reproduce the banked n=32 Boussinesq results bit-identically, confirming the repair's no-contamination conclusion independently?",
+  "gate_answer": "YES",
+  "clause_a_battery_passes": true,
+  "clause_b_banked_record_uncontaminated": true,
+  "control_is_valid": true,
+  "part0_provenance": {
+    "battery_file": "experiments/p2_route_boa_v1_adversarial.py",
+    "leg89_rev": "4959e6b",
+    "instrument_bytes_compared": 27886,
+    "instrument_sha256_leg89": "d0227e2cb8121c5264535a6fcca952844639fdb3f8a2c531b0483e2e04d59fda",
+    "instrument_sha256_head": "d0227e2cb8121c5264535a6fcca952844639fdb3f8a2c531b0483e2e04d59fda",
+    "instrument_byte_identical": true,
+    "battery_total_bytes_leg89": 31497,
+    "battery_total_bytes_head": 33492,
+    "battery_delta_bytes_in_main_payload": 1995,
+    "solver_sha256_prerepair": "af2772dde377f9b40ebee869644a3740b40dc61599c4c62c763ab93b65c01b55",
+    "solver_sha256_postrepair": "82444b8fba228fa9633bcedb38b22aebe80a1e7ea9c645a2e8bb7c0fda8744db",
+    "solver_changed_by_repair": true,
+    "note": "if instrument_byte_identical is False the rest of this run is not 'leg 89's original battery' and the gate cannot be answered from it"
+  },
+  "part1_postrepair_battery": {
+    "n_cases": 90,
+    "families": {
+      "A_degenerate_streamfunction": {
+        "n_cases": 8,
+        "verdicts": {
+          "raised": 7,
+          "benign": 1
+        },
+        "silent_labels": []
+      },
+      "B_nan_seeded_vorticity": {
+        "n_cases": 30,
+        "verdicts": {
+          "flagged": 30
+        },
+        "silent_labels": []
+      },
+      "C_nan_seeded_temperature": {
+        "n_cases": 15,
+        "verdicts": {
+          "flagged": 6,
+          "propagated": 9
+        },
+        "silent_labels": []
+      },
+      "D_out_of_domain_coefficient": {
+        "n_cases": 13,
+        "verdicts": {
+          "raised": 11,
+          "benign": 2
+        },
+        "silent_labels": []
+      },
+      "E_degenerate_discretization": {
+        "n_cases": 16,
+        "verdicts": {
+          "raised": 13,
+          "benign": 3
+        },
+        "silent_labels": []
+      },
+      "F_detection_thresholds": {
+        "n_cases": 8,
+        "verdicts": {
+          "raised": 7,
+          "benign": 1
+        },
+        "silent_labels": []
+      }
+    },
+    "n_silent_gate_deciding": 0,
+    "n_silent_secondary": 0,
+    "n_cases_where_conservation_drift_masks_a_nan_limb": 0,
+    "leg89_gate_answer": "NO",
+    "verdict_by_label": {
+      "dealias_annihilated_vorticity_k15x15": "raised",
+      "dealias_annihilated_vorticity_k12x12": "raised",
+      "dealias_annihilated_vorticity_k14x3": "raised",
+      "dealias_annihilated_vorticity_houluo": "raised",
+      "denormal_vorticity_amp1e-300": "raised",
+      "denormal_vorticity_amp1e-18": "raised",
+      "CONTROL_exactly_zero_vorticity": "raised",
+      "CONTROL_constant_vorticity_psi_zero": "benign",
+      "omega0_single_nan__full": "flagged",
+      "omega0_single_nan__nonlinear_off": "flagged",
+      "omega0_single_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_nan__houluo": "flagged",
+      "omega0_single_nan__frozen_u": "flagged",
+      "omega0_single_posinf__full": "flagged",
+      "omega0_single_posinf__nonlinear_off": "flagged",
+      "omega0_single_posinf__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_posinf__houluo": "flagged",
+      "omega0_single_posinf__frozen_u": "flagged",
+      "omega0_single_neginf__full": "flagged",
+      "omega0_single_neginf__nonlinear_off": "flagged",
+      "omega0_single_neginf__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_neginf__houluo": "flagged",
+      "omega0_single_neginf__frozen_u": "flagged",
+      "omega0_all_nan__full": "flagged",
+      "omega0_all_nan__nonlinear_off": "flagged",
+      "omega0_all_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_all_nan__houluo": "flagged",
+      "omega0_all_nan__frozen_u": "flagged",
+      "omega0_corner_nan__full": "flagged",
+      "omega0_corner_nan__nonlinear_off": "flagged",
+      "omega0_corner_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_corner_nan__houluo": "flagged",
+      "omega0_corner_nan__frozen_u": "flagged",
+      "omega0_huge_1e308__full": "flagged",
+      "omega0_huge_1e308__nonlinear_off": "flagged",
+      "omega0_huge_1e308__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_huge_1e308__houluo": "flagged",
+      "omega0_huge_1e308__frozen_u": "flagged",
+      "theta0_single_nan__full": "flagged",
+      "theta0_single_nan__buoyancy_off": "propagated",
+      "theta0_single_nan__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_single_nan__buoyancy_off_drift_guard_1e-9": "flagged",
+      "theta0_single_nan__buoyancy_off_tail_guard_1e-6": "propagated",
+      "theta0_single_inf__full": "flagged",
+      "theta0_single_inf__buoyancy_off": "propagated",
+      "theta0_single_inf__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_single_inf__buoyancy_off_drift_guard_1e-9": "flagged",
+      "theta0_single_inf__buoyancy_off_tail_guard_1e-6": "propagated",
+      "theta0_all_nan__full": "flagged",
+      "theta0_all_nan__buoyancy_off": "propagated",
+      "theta0_all_nan__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_all_nan__buoyancy_off_drift_guard_1e-9": "flagged",
+      "theta0_all_nan__buoyancy_off_tail_guard_1e-6": "propagated",
+      "nu_-0.5": "raised",
+      "nu_-1000000.0": "raised",
+      "nu_-1e-14": "raised",
+      "nu_nan": "raised",
+      "nu_-inf": "raised",
+      "kappa_-0.5": "raised",
+      "kappa_-1000000.0": "raised",
+      "kappa_-1e-14": "raised",
+      "kappa_nan": "raised",
+      "kappa_-inf": "raised",
+      "CONTROL_nu_0.5_in_domain": "benign",
+      "CONTROL_kappa_0.5_in_domain": "benign",
+      "nu_posinf": "raised",
+      "grid_n1": "raised",
+      "grid_n2": "raised",
+      "grid_n3": "benign",
+      "grid_n4": "benign",
+      "grid_n5": "benign",
+      "cfl_c1_nan": "raised",
+      "cfl_c2_nan": "raised",
+      "cfl_c1_and_c2_nan": "raised",
+      "cfl_c1_inf": "raised",
+      "cfl_c2_inf": "raised",
+      "step_dt_max_zero": "raised",
+      "step_dt_max_negative": "raised",
+      "step_dt_max_nan": "raised",
+      "step_c1_zero": "raised",
+      "step_c1_negative": "raised",
+      "step_c2_negative": "raised",
+      "t_max_nan": "raised",
+      "t_max_negative": "raised",
+      "CONTROL_t_max_zero": "benign",
+      "amplification_factor_nan": "raised",
+      "amplification_factor_inf": "raised",
+      "amplification_factor_negative": "raised",
+      "guard_drift_guard_nan": "raised",
+      "guard_tail_guard_nan": "raised"
+    },
+    "exception_by_label": {
+      "dealias_annihilated_vorticity_k15x15": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.796692e-16 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "dealias_annihilated_vorticity_k12x12": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 8.529235e-17 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "dealias_annihilated_vorticity_k14x3": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 6.506209e-15 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "dealias_annihilated_vorticity_houluo": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.986074e-16 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "denormal_vorticity_amp1e-300": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.000000e-300 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "denormal_vorticity_amp1e-18": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.000000e-18 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given",
+      "CONTROL_exactly_zero_vorticity": "ValueError: omega0 is identically zero",
+      "nu_-0.5": "ValueError: nu must be >= 0.0, got -0.5",
+      "nu_-1000000.0": "ValueError: nu must be >= 0.0, got -1000000.0",
+      "nu_-1e-14": "ValueError: nu must be >= 0.0, got -1e-14",
+      "nu_nan": "ValueError: nu must be finite, got nan; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "nu_-inf": "ValueError: nu must be finite, got -inf; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "kappa_-0.5": "ValueError: kappa must be >= 0.0, got -0.5",
+      "kappa_-1000000.0": "ValueError: kappa must be >= 0.0, got -1000000.0",
+      "kappa_-1e-14": "ValueError: kappa must be >= 0.0, got -1e-14",
+      "kappa_nan": "ValueError: kappa must be finite, got nan; a non-finite kappa is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "kappa_-inf": "ValueError: kappa must be finite, got -inf; a non-finite kappa is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "nu_posinf": "ValueError: nu must be finite, got inf; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "grid_n1": "ValueError: n=1 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)",
+      "grid_n2": "ValueError: n=2 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)",
+      "cfl_c1_nan": "ValueError: c1 must be finite, got nan; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "cfl_c2_nan": "ValueError: c2 must be finite, got nan; a non-finite c2 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "cfl_c1_and_c2_nan": "ValueError: c1 must be finite, got nan; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "cfl_c1_inf": "ValueError: c1 must be finite, got inf; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "cfl_c2_inf": "ValueError: c2 must be finite, got inf; a non-finite c2 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "step_dt_max_zero": "ValueError: dt_max must be > 0.0, got 0.0",
+      "step_dt_max_negative": "ValueError: dt_max must be > 0.0, got -0.001",
+      "step_dt_max_nan": "ValueError: dt_max must be finite, got nan; a non-finite dt_max is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "step_c1_zero": "ValueError: c1 must be > 0.0, got 0.0",
+      "step_c1_negative": "ValueError: c1 must be > 0.0, got -0.05",
+      "step_c2_negative": "ValueError: c2 must be > 0.0, got -0.4",
+      "t_max_nan": "ValueError: t_max must be finite, got nan; a non-finite t_max is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "t_max_negative": "ValueError: t_max must be >= 0.0, got -1.0",
+      "amplification_factor_nan": "ValueError: amplification_factor must be finite, got nan; a non-finite amplification_factor is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "amplification_factor_inf": "ValueError: amplification_factor must be finite, got inf; a non-finite amplification_factor is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "amplification_factor_negative": "ValueError: amplification_factor must be > 0.0, got -1.0",
+      "guard_drift_guard_nan": "ValueError: drift_guard must be finite, got nan; a non-finite drift_guard is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+      "guard_tail_guard_nan": "ValueError: tail_guard must be finite, got nan; a non-finite tail_guard is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested"
+    }
+  },
+  "part2_prerepair_control_battery": {
+    "n_cases": 90,
+    "families": {
+      "A_degenerate_streamfunction": {
+        "n_cases": 8,
+        "verdicts": {
+          "silent": 6,
+          "raised": 1,
+          "benign": 1
+        },
+        "silent_labels": [
+          "dealias_annihilated_vorticity_k15x15",
+          "dealias_annihilated_vorticity_k12x12",
+          "dealias_annihilated_vorticity_k14x3",
+          "dealias_annihilated_vorticity_houluo",
+          "denormal_vorticity_amp1e-300",
+          "denormal_vorticity_amp1e-18"
+        ]
+      },
+      "B_nan_seeded_vorticity": {
+        "n_cases": 30,
+        "verdicts": {
+          "flagged": 30
+        },
+        "silent_labels": []
+      },
+      "C_nan_seeded_temperature": {
+        "n_cases": 15,
+        "verdicts": {
+          "flagged": 3,
+          "propagated": 12
+        },
+        "silent_labels": []
+      },
+      "D_out_of_domain_coefficient": {
+        "n_cases": 13,
+        "verdicts": {
+          "silent": 8,
+          "propagated": 2,
+          "benign": 2,
+          "flagged": 1
+        },
+        "silent_labels": [
+          "nu_-0.5",
+          "nu_-1000000.0",
+          "nu_-1e-14",
+          "kappa_-0.5",
+          "kappa_-1000000.0",
+          "kappa_-1e-14",
+          "kappa_nan",
+          "kappa_-inf"
+        ]
+      },
+      "E_degenerate_discretization": {
+        "n_cases": 16,
+        "verdicts": {
+          "silent": 5,
+          "benign": 5,
+          "flagged": 6
+        },
+        "silent_labels": [
+          "grid_n1",
+          "grid_n2",
+          "cfl_c1_nan",
+          "cfl_c1_and_c2_nan",
+          "cfl_c1_inf"
+        ]
+      },
+      "F_detection_thresholds": {
+        "n_cases": 8,
+        "verdicts": {
+          "silent": 4,
+          "benign": 4
+        },
+        "silent_labels": [
+          "t_max_nan",
+          "t_max_negative",
+          "amplification_factor_nan",
+          "amplification_factor_inf"
+        ]
+      }
+    },
+    "n_silent_gate_deciding": 19,
+    "n_silent_secondary": 4,
+    "n_cases_where_conservation_drift_masks_a_nan_limb": 13,
+    "leg89_gate_answer": "YES",
+    "verdict_by_label": {
+      "dealias_annihilated_vorticity_k15x15": "silent",
+      "dealias_annihilated_vorticity_k12x12": "silent",
+      "dealias_annihilated_vorticity_k14x3": "silent",
+      "dealias_annihilated_vorticity_houluo": "silent",
+      "denormal_vorticity_amp1e-300": "silent",
+      "denormal_vorticity_amp1e-18": "silent",
+      "CONTROL_exactly_zero_vorticity": "raised",
+      "CONTROL_constant_vorticity_psi_zero": "benign",
+      "omega0_single_nan__full": "flagged",
+      "omega0_single_nan__nonlinear_off": "flagged",
+      "omega0_single_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_nan__houluo": "flagged",
+      "omega0_single_nan__frozen_u": "flagged",
+      "omega0_single_posinf__full": "flagged",
+      "omega0_single_posinf__nonlinear_off": "flagged",
+      "omega0_single_posinf__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_posinf__houluo": "flagged",
+      "omega0_single_posinf__frozen_u": "flagged",
+      "omega0_single_neginf__full": "flagged",
+      "omega0_single_neginf__nonlinear_off": "flagged",
+      "omega0_single_neginf__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_single_neginf__houluo": "flagged",
+      "omega0_single_neginf__frozen_u": "flagged",
+      "omega0_all_nan__full": "flagged",
+      "omega0_all_nan__nonlinear_off": "flagged",
+      "omega0_all_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_all_nan__houluo": "flagged",
+      "omega0_all_nan__frozen_u": "flagged",
+      "omega0_corner_nan__full": "flagged",
+      "omega0_corner_nan__nonlinear_off": "flagged",
+      "omega0_corner_nan__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_corner_nan__houluo": "flagged",
+      "omega0_corner_nan__frozen_u": "flagged",
+      "omega0_huge_1e308__full": "flagged",
+      "omega0_huge_1e308__nonlinear_off": "flagged",
+      "omega0_huge_1e308__nonlinear_off_buoyancy_off": "flagged",
+      "omega0_huge_1e308__houluo": "flagged",
+      "omega0_huge_1e308__frozen_u": "flagged",
+      "theta0_single_nan__full": "flagged",
+      "theta0_single_nan__buoyancy_off": "propagated",
+      "theta0_single_nan__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_single_nan__buoyancy_off_drift_guard_1e-9": "propagated",
+      "theta0_single_nan__buoyancy_off_tail_guard_1e-6": "propagated",
+      "theta0_single_inf__full": "flagged",
+      "theta0_single_inf__buoyancy_off": "propagated",
+      "theta0_single_inf__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_single_inf__buoyancy_off_drift_guard_1e-9": "propagated",
+      "theta0_single_inf__buoyancy_off_tail_guard_1e-6": "propagated",
+      "theta0_all_nan__full": "flagged",
+      "theta0_all_nan__buoyancy_off": "propagated",
+      "theta0_all_nan__buoyancy_off_nonlinear_off": "propagated",
+      "theta0_all_nan__buoyancy_off_drift_guard_1e-9": "propagated",
+      "theta0_all_nan__buoyancy_off_tail_guard_1e-6": "propagated",
+      "nu_-0.5": "silent",
+      "nu_-1000000.0": "silent",
+      "nu_-1e-14": "silent",
+      "nu_nan": "propagated",
+      "nu_-inf": "propagated",
+      "kappa_-0.5": "silent",
+      "kappa_-1000000.0": "silent",
+      "kappa_-1e-14": "silent",
+      "kappa_nan": "silent",
+      "kappa_-inf": "silent",
+      "CONTROL_nu_0.5_in_domain": "benign",
+      "CONTROL_kappa_0.5_in_domain": "benign",
+      "nu_posinf": "flagged",
+      "grid_n1": "silent",
+      "grid_n2": "silent",
+      "grid_n3": "benign",
+      "grid_n4": "benign",
+      "grid_n5": "benign",
+      "cfl_c1_nan": "silent",
+      "cfl_c2_nan": "benign",
+      "cfl_c1_and_c2_nan": "silent",
+      "cfl_c1_inf": "silent",
+      "cfl_c2_inf": "benign",
+      "step_dt_max_zero": "flagged",
+      "step_dt_max_negative": "flagged",
+      "step_dt_max_nan": "flagged",
+      "step_c1_zero": "flagged",
+      "step_c1_negative": "flagged",
+      "step_c2_negative": "flagged",
+      "t_max_nan": "silent",
+      "t_max_negative": "silent",
+      "CONTROL_t_max_zero": "benign",
+      "amplification_factor_nan": "silent",
+      "amplification_factor_inf": "silent",
+      "amplification_factor_negative": "benign",
+      "guard_drift_guard_nan": "benign",
+      "guard_tail_guard_nan": "benign"
+    },
+    "exception_by_label": {
+      "CONTROL_exactly_zero_vorticity": "ValueError: omega0 is identically zero"
+    }
+  },
+  "part2_control_vs_leg89_banked_artifact": {
+    "banked_artifact": "writeup/data/p2_route_boa_v1_adversarial.json",
+    "banked_n_cases": 90,
+    "rerun_n_cases": 90,
+    "labels_only_in_banked": [],
+    "labels_only_in_rerun": [],
+    "n_labels_compared": 90,
+    "n_verdicts_agreeing": 90,
+    "n_verdicts_disagreeing": 0,
+    "disagreements": {},
+    "banked_totals": {
+      "n_silent_gate_deciding": 19,
+      "n_silent_secondary": 4,
+      "n_cases_where_conservation_drift_masks_a_nan_limb": 13,
+      "gate_answer": "YES"
+    },
+    "rerun_totals": {
+      "n_silent_gate_deciding": 19,
+      "n_silent_secondary": 4,
+      "n_cases_where_conservation_drift_masks_a_nan_limb": 13,
+      "gate_answer": "YES"
+    }
+  },
+  "part1b_verdict_transitions_prerepair_to_postrepair": {
+    "n_labels_compared": 90,
+    "transition_matrix": {
+      "flagged->flagged": 33,
+      "silent->raised": 23,
+      "propagated->propagated": 9,
+      "benign->benign": 7,
+      "flagged->raised": 7,
+      "benign->raised": 5,
+      "propagated->flagged": 3,
+      "propagated->raised": 2,
+      "raised->raised": 1
+    },
+    "loudness_order": {
+      "silent": 0,
+      "benign": 1,
+      "propagated": 2,
+      "flagged": 3,
+      "raised": 4
+    },
+    "n_unchanged": 50,
+    "n_moved_louder": 40,
+    "n_moved_quieter": 0,
+    "moved_quieter": [],
+    "moved_louder": [
+      {
+        "label": "amplification_factor_inf",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: amplification_factor must be finite, got inf; a non-finite amplification_factor is dropped rather than applied by the comparisons downstream, which would silently run a different computati",
+        "invalid_because": "amplification_factor = inf disables blow-up detection"
+      },
+      {
+        "label": "amplification_factor_nan",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: amplification_factor must be finite, got nan; a non-finite amplification_factor is dropped rather than applied by the comparisons downstream, which would silently run a different computati",
+        "invalid_because": "amplification_factor = nan disables blow-up detection"
+      },
+      {
+        "label": "amplification_factor_negative",
+        "from": "benign",
+        "to": "raised",
+        "exception": "ValueError: amplification_factor must be > 0.0, got -1.0",
+        "invalid_because": "amplification_factor = -1.0 disables blow-up detection"
+      },
+      {
+        "label": "cfl_c1_and_c2_nan",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: c1 must be finite, got nan; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "CFL safety factor non-finite (c1_and_c2_nan)"
+      },
+      {
+        "label": "cfl_c1_inf",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: c1 must be finite, got inf; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "CFL safety factor non-finite (c1_inf)"
+      },
+      {
+        "label": "cfl_c1_nan",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: c1 must be finite, got nan; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "CFL safety factor non-finite (c1_nan)"
+      },
+      {
+        "label": "cfl_c2_inf",
+        "from": "benign",
+        "to": "raised",
+        "exception": "ValueError: c2 must be finite, got inf; a non-finite c2 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "CFL safety factor non-finite (c2_inf)"
+      },
+      {
+        "label": "cfl_c2_nan",
+        "from": "benign",
+        "to": "raised",
+        "exception": "ValueError: c2 must be finite, got nan; a non-finite c2 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "CFL safety factor non-finite (c2_nan)"
+      },
+      {
+        "label": "dealias_annihilated_vorticity_houluo",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.986074e-16 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working pr",
+        "invalid_because": "as above, under the Hou-Luo parity projection"
+      },
+      {
+        "label": "dealias_annihilated_vorticity_k12x12",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 8.529235e-17 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working pr",
+        "invalid_because": "omega0 lies entirely above the 2/3 dealias cut: the represented vorticity is zero to roundoff (|w|_rep = 8.5292e-17), so psi == 0, u == 0"
+      },
+      {
+        "label": "dealias_annihilated_vorticity_k14x3",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 6.506209e-15 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working pr",
+        "invalid_because": "omega0 lies entirely above the 2/3 dealias cut: the represented vorticity is zero to roundoff (|w|_rep = 6.5062e-15), so psi == 0, u == 0"
+      },
+      {
+        "label": "dealias_annihilated_vorticity_k15x15",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.796692e-16 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working pr",
+        "invalid_because": "omega0 lies entirely above the 2/3 dealias cut: the represented vorticity is zero to roundoff (|w|_rep = 1.7967e-16), so psi == 0, u == 0"
+      },
+      {
+        "label": "denormal_vorticity_amp1e-18",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.000000e-18 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working pr",
+        "invalid_because": "max|omega0| = 1e-18 is numerically zero; the exact-zero guard tests == 0.0 and does not fire"
+      },
+      {
+        "label": "denormal_vorticity_amp1e-300",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.000000e-300 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working p",
+        "invalid_because": "max|omega0| = 1e-300 is numerically zero; the exact-zero guard tests == 0.0 and does not fire"
+      },
+      {
+        "label": "grid_n1",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: n=1 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)",
+        "invalid_because": "n = 1: the 2/3 mask retains 1 mode(s); no spatial resolution"
+      },
+      {
+        "label": "grid_n2",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: n=2 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)",
+        "invalid_because": "n = 2: the 2/3 mask retains 1 mode(s); no spatial resolution"
+      },
+      {
+        "label": "guard_drift_guard_nan",
+        "from": "benign",
+        "to": "raised",
+        "exception": "ValueError: drift_guard must be finite, got nan; a non-finite drift_guard is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one re",
+        "invalid_because": "drift_guard_nan: every `> guard` comparison is False"
+      },
+      {
+        "label": "guard_tail_guard_nan",
+        "from": "benign",
+        "to": "raised",
+        "exception": "ValueError: tail_guard must be finite, got nan; a non-finite tail_guard is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requ",
+        "invalid_because": "tail_guard_nan: every `> guard` comparison is False"
+      },
+      {
+        "label": "kappa_-0.5",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: kappa must be >= 0.0, got -0.5",
+        "invalid_because": "kappa = -0.5 is outside [0, inf) -- negative: anti-diffusion, ill-posed"
+      },
+      {
+        "label": "kappa_-1000000.0",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: kappa must be >= 0.0, got -1000000.0",
+        "invalid_because": "kappa = -1000000.0 is outside [0, inf) -- hugely negative"
+      },
+      {
+        "label": "kappa_-1e-14",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: kappa must be >= 0.0, got -1e-14",
+        "invalid_because": "kappa = -1e-14 is outside [0, inf) -- negative at roundoff scale"
+      },
+      {
+        "label": "kappa_-inf",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: kappa must be finite, got -inf; a non-finite kappa is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "kappa = -inf is outside [0, inf) -- -inf"
+      },
+      {
+        "label": "kappa_nan",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: kappa must be finite, got nan; a non-finite kappa is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "kappa = nan is outside [0, inf) -- NaN"
+      },
+      {
+        "label": "nu_-0.5",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: nu must be >= 0.0, got -0.5",
+        "invalid_because": "nu = -0.5 is outside [0, inf) -- negative: anti-diffusion, ill-posed"
+      },
+      {
+        "label": "nu_-1000000.0",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: nu must be >= 0.0, got -1000000.0",
+        "invalid_because": "nu = -1000000.0 is outside [0, inf) -- hugely negative"
+      },
+      {
+        "label": "nu_-1e-14",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: nu must be >= 0.0, got -1e-14",
+        "invalid_because": "nu = -1e-14 is outside [0, inf) -- negative at roundoff scale"
+      },
+      {
+        "label": "nu_-inf",
+        "from": "propagated",
+        "to": "raised",
+        "exception": "ValueError: nu must be finite, got -inf; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "nu = -inf is outside [0, inf) -- -inf"
+      },
+      {
+        "label": "nu_nan",
+        "from": "propagated",
+        "to": "raised",
+        "exception": "ValueError: nu must be finite, got nan; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "nu = nan is outside [0, inf) -- NaN"
+      },
+      {
+        "label": "nu_posinf",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: nu must be finite, got inf; a non-finite nu is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "nu = +inf: exp(-inf*0*dt) at the mean mode is nan"
+      },
+      {
+        "label": "step_c1_negative",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: c1 must be > 0.0, got -0.05",
+        "invalid_because": "timestep parameter out of domain (c1_negative)"
+      },
+      {
+        "label": "step_c1_zero",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: c1 must be > 0.0, got 0.0",
+        "invalid_because": "timestep parameter out of domain (c1_zero)"
+      },
+      {
+        "label": "step_c2_negative",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: c2 must be > 0.0, got -0.4",
+        "invalid_because": "timestep parameter out of domain (c2_negative)"
+      },
+      {
+        "label": "step_dt_max_nan",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: dt_max must be finite, got nan; a non-finite dt_max is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "timestep parameter out of domain (dt_max_nan)"
+      },
+      {
+        "label": "step_dt_max_negative",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: dt_max must be > 0.0, got -0.001",
+        "invalid_because": "timestep parameter out of domain (dt_max_negative)"
+      },
+      {
+        "label": "step_dt_max_zero",
+        "from": "flagged",
+        "to": "raised",
+        "exception": "ValueError: dt_max must be > 0.0, got 0.0",
+        "invalid_because": "timestep parameter out of domain (dt_max_zero)"
+      },
+      {
+        "label": "t_max_nan",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: t_max must be finite, got nan; a non-finite t_max is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested",
+        "invalid_because": "t_max = nan: no step can be taken"
+      },
+      {
+        "label": "t_max_negative",
+        "from": "silent",
+        "to": "raised",
+        "exception": "ValueError: t_max must be >= 0.0, got -1.0",
+        "invalid_because": "t_max = -1.0: no step can be taken"
+      },
+      {
+        "label": "theta0_all_nan__buoyancy_off_drift_guard_1e-9",
+        "from": "propagated",
+        "to": "flagged",
+        "exception": "",
+        "invalid_because": "theta0 carries a non-finite value (all_nan)"
+      },
+      {
+        "label": "theta0_single_inf__buoyancy_off_drift_guard_1e-9",
+        "from": "propagated",
+        "to": "flagged",
+        "exception": "",
+        "invalid_because": "theta0 carries a non-finite value (single_inf)"
+      },
+      {
+        "label": "theta0_single_nan__buoyancy_off_drift_guard_1e-9",
+        "from": "propagated",
+        "to": "flagged",
+        "exception": "",
+        "invalid_because": "theta0 carries a non-finite value (single_nan)"
+      }
+    ],
+    "note": "n_moved_quieter is the repair-regression counter: any case whose verdict got softer would be a defect introduced by the fix. Each louder move carries the case's own `invalid_because` so an over-refusal of VALID input would be visible as a tightening on a case whose justification does not describe a malformed input."
+  },
+  "part3_defect_probes_postrepair": {
+    "defect1_false_blowup_dealias_annihilated": {
+      "raised": true,
+      "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.796692e-16 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given"
+    },
+    "defect1_false_blowup_denormal_1e-300": {
+      "raised": true,
+      "exception": "ValueError: omega0 is numerically zero: the represented (post-dealias) max|w| = 1.000000e-300 is at or below 1e-13 x the initial state scale 1.000000e+00, i.e. indistinguishable from zero at working precision. Amplification relative to it is meaningless -- growth off such an m0 is forcing response, not amplification of the data -- so no blow-up verdict can be given"
+    },
+    "defect2_kappa_negative_dropped": {
+      "raised": true,
+      "exception": "ValueError: kappa must be >= 0.0, got -0.5"
+    },
+    "defect2_nu_negative_dropped": {
+      "raised": true,
+      "exception": "ValueError: nu must be >= 0.0, got -0.5"
+    },
+    "defect2_kappa_nan_dropped": {
+      "raised": true,
+      "exception": "ValueError: kappa must be finite, got nan; a non-finite kappa is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested"
+    },
+    "CONTROL_defect2_kappa_in_domain_0.5": {
+      "requested_coefficient": 0.5,
+      "bit_identical_omega_to_zero_coefficient_run": false,
+      "bit_identical_theta_to_zero_coefficient_run": false,
+      "max_abs_diff_omega": 0.03922750676040254,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "CONTROL_defect2_nu_in_domain_0.5": {
+      "requested_coefficient": 0.5,
+      "bit_identical_omega_to_zero_coefficient_run": false,
+      "bit_identical_theta_to_zero_coefficient_run": false,
+      "max_abs_diff_omega": 0.21738667503283238,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "defect3_nan_limb_masked_by_builtin_max": {
+      "nan_fraction_theta_final": 1.0,
+      "conservation_drift": "nan",
+      "mean_drift": "nan",
+      "energy_balance_residual": "nan",
+      "outcome": "under_resolved",
+      "early_exit_reason": "nonfinite_drift",
+      "guard_masks_a_nan_limb": false,
+      "raised": false
+    },
+    "defect4_degenerate_grid_n1": {
+      "raised": true,
+      "exception": "ValueError: n=1 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)"
+    },
+    "defect4_degenerate_grid_n2": {
+      "raised": true,
+      "exception": "ValueError: n=2 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 required)"
+    },
+    "CONTROL_defect4_grid_n3_still_runs": {
+      "n": 3,
+      "retained_modes_after_dealias": 9,
+      "outcome": "no_blowup",
+      "n_timesteps": 30,
+      "conservation_drift": 1.112233578857435e-07,
+      "raised": false
+    },
+    "defect5_nonfinite_cfl_factor_relaxes_dt": {
+      "raised": true,
+      "exception": "ValueError: c1 must be finite, got nan; a non-finite c1 is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested"
+    },
+    "defect5_nonfinite_amplification_factor_disables_detection": {
+      "raised": true,
+      "exception": "ValueError: amplification_factor must be finite, got nan; a non-finite amplification_factor is dropped rather than applied by the comparisons downstream, which would silently run a different computation than the one requested"
+    }
+  },
+  "part3_defect_probes_prerepair": {
+    "defect1_false_blowup_dealias_annihilated": {
+      "represented_m0_independently_computed": 1.7966923869651763e-16,
+      "m0_reported_by_module": 1.7966923869651763e-16,
+      "outcome": "blowup_candidate",
+      "amplification": 55657830311010.46,
+      "false_blowup_label_emitted": true,
+      "raised": false
+    },
+    "defect1_false_blowup_denormal_1e-300": {
+      "m0_reported_by_module": 1.0000000000000004e-300,
+      "outcome": "blowup_candidate",
+      "amplification": 9.999999999479186e+297,
+      "false_blowup_label_emitted": true,
+      "raised": false
+    },
+    "defect2_kappa_negative_dropped": {
+      "requested_coefficient": -0.5,
+      "bit_identical_omega_to_zero_coefficient_run": true,
+      "bit_identical_theta_to_zero_coefficient_run": true,
+      "max_abs_diff_omega": 0.0,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "defect2_nu_negative_dropped": {
+      "requested_coefficient": -0.5,
+      "bit_identical_omega_to_zero_coefficient_run": true,
+      "bit_identical_theta_to_zero_coefficient_run": true,
+      "max_abs_diff_omega": 0.0,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "defect2_kappa_nan_dropped": {
+      "requested_coefficient": "nan",
+      "bit_identical_omega_to_zero_coefficient_run": true,
+      "bit_identical_theta_to_zero_coefficient_run": true,
+      "max_abs_diff_omega": 0.0,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "CONTROL_defect2_kappa_in_domain_0.5": {
+      "requested_coefficient": 0.5,
+      "bit_identical_omega_to_zero_coefficient_run": false,
+      "bit_identical_theta_to_zero_coefficient_run": false,
+      "max_abs_diff_omega": 0.03922750676040254,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "CONTROL_defect2_nu_in_domain_0.5": {
+      "requested_coefficient": 0.5,
+      "bit_identical_omega_to_zero_coefficient_run": false,
+      "bit_identical_theta_to_zero_coefficient_run": false,
+      "max_abs_diff_omega": 0.21738667503283238,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "defect3_nan_limb_masked_by_builtin_max": {
+      "nan_fraction_theta_final": 1.0,
+      "conservation_drift": 8.077335912845782e-18,
+      "mean_drift": 8.077335912845782e-18,
+      "energy_balance_residual": "nan",
+      "outcome": "no_blowup",
+      "early_exit_reason": null,
+      "guard_masks_a_nan_limb": true,
+      "raised": false
+    },
+    "defect4_degenerate_grid_n1": {
+      "n": 1,
+      "retained_modes_after_dealias": 1,
+      "outcome": "no_blowup",
+      "n_timesteps": 30,
+      "conservation_drift": 0.0,
+      "raised": false
+    },
+    "defect4_degenerate_grid_n2": {
+      "n": 2,
+      "retained_modes_after_dealias": 1,
+      "outcome": "no_blowup",
+      "n_timesteps": 30,
+      "conservation_drift": 0.0,
+      "raised": false
+    },
+    "CONTROL_defect4_grid_n3_still_runs": {
+      "n": 3,
+      "retained_modes_after_dealias": 9,
+      "outcome": "no_blowup",
+      "n_timesteps": 30,
+      "conservation_drift": 1.112233578857435e-07,
+      "raised": false
+    },
+    "defect5_nonfinite_cfl_factor_relaxes_dt": {
+      "dt_min": 0.3,
+      "dt_min_of_control": 0.001777443257853062,
+      "dt_relaxation_factor": 168.7817592345333,
+      "n_timesteps": 1,
+      "outcome": "no_blowup",
+      "raised": false
+    },
+    "defect5_nonfinite_amplification_factor_disables_detection": {
+      "outcome": "no_blowup",
+      "peak_amplification_reached": 4.01276241234652,
+      "detection_disabled_but_reported_no_blowup": true,
+      "raised": false
+    }
+  },
+  "part5_zero_regression_n32_prerepair_vs_postrepair": {
+    "n_cases": 15,
+    "n_bit_identical": 15,
+    "n_differing": 0,
+    "grid_n": 32,
+    "hash_basis": "sha256 of the float64 bit pattern of omega_final, theta_final and the max_omega trajectory, plus repr() of every scalar the result carries",
+    "cases": {
+      "blowup_candidate_real": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "blowup_candidate",
+        "n_timesteps": 314,
+        "differing_fields": []
+      },
+      "buoyancy_off": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "drift_guard_cold": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "drift_guard_hot_negative": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "under_resolved",
+        "n_timesteps": 1,
+        "differing_fields": []
+      },
+      "frozen_u": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "houluo_symmetry": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "inviscid_default": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "kappa_only": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "max_steps_branch": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "max_steps_hit",
+        "n_timesteps": 5,
+        "differing_fields": []
+      },
+      "nonlinear_off": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "nu_only": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "pure_diffusion": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "t_max_zero": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 0,
+        "differing_fields": []
+      },
+      "tail_guard_cold": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      },
+      "viscous_nu_and_kappa": {
+        "present_in_both": true,
+        "bit_identical": true,
+        "outcome": "no_blowup",
+        "n_timesteps": 30,
+        "differing_fields": []
+      }
+    }
+  },
+  "part4a_call_sites": {
+    "n_call_sites_total": 74,
+    "n_call_sites_in_audit_or_test_files": 41,
+    "n_production_call_sites": 33,
+    "production_call_sites": [
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 106,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 127,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 148,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 168,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_phase1_measurement.py",
+        "line": 50,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "phase1_currency_probe.py",
+        "line": 94,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_wall.py",
+        "line": 63,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_wall.py",
+        "line": 79,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_wall.py",
+        "line": 100,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "phase1_axis_screen.py",
+        "line": 120,
+        "nu": null,
+        "nu_source": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='nu', ctx=Load())], keywor",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "phase1_resolution_spike.py",
+        "line": 94,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "phase1_gsustained_probe.py",
+        "line": 95,
+        "nu": 0.0,
+        "nu_source": "literal",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 436,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 438,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 460,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 468,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 477,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 498,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 539,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 540,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 547,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 548,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 579,
+        "nu": 0.01,
+        "nu_source": "literal",
+        "kappa": 0.01,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 588,
+        "nu": 0.01,
+        "nu_source": "literal",
+        "kappa": 0.01,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 605,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 380,
+        "nu": 0.1,
+        "nu_source": "literal",
+        "kappa": 0.1,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 381,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 423,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 349,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 351,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 352,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 353,
+        "nu": 0.0,
+        "nu_source": "signature_default",
+        "kappa": 0.0,
+        "kappa_source": "signature_default"
+      },
+      {
+        "file": "ga/fitness2d.py",
+        "line": 70,
+        "nu": null,
+        "nu_source": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='nu', ctx=Load())], keywor",
+        "kappa": null,
+        "kappa_source": "Subscript(value=Name(id='cfg', ctx=Load()), slice=Constant(value='kappa'), ctx=L"
+      }
+    ],
+    "n_production_sites_with_non_literal_coefficient": 7,
+    "non_literal_sites": [
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 127,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_solver_boussinesq.py",
+        "line": 148,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "phase1_axis_screen.py",
+        "line": 120,
+        "nu": null,
+        "nu_source": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='nu', ctx=Load())], keywor",
+        "kappa": 0.0,
+        "kappa_source": "literal"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 436,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 438,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "test_boussinesq_dedicated.py",
+        "line": 423,
+        "nu": null,
+        "nu_source": "Name(id='nu', ctx=Load())",
+        "kappa": null,
+        "kappa_source": "Name(id='kappa', ctx=Load())"
+      },
+      {
+        "file": "ga/fitness2d.py",
+        "line": 70,
+        "nu": null,
+        "nu_source": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='nu', ctx=Load())], keywor",
+        "kappa": null,
+        "kappa_source": "Subscript(value=Name(id='cfg', ctx=Load()), slice=Constant(value='kappa'), ctx=L"
+      }
+    ],
+    "n_production_sites_with_out_of_domain_coefficient": 0,
+    "out_of_domain_sites": []
+  },
+  "part4a2_nonliteral_site_resolution": {
+    "ga/fitness2d.py:70": {
+      "kappa_expression": "cfg['kappa']",
+      "kappa_default": 0.0,
+      "kappa_default_in_domain": true,
+      "fitness_axis": "nu_crit_amp2x_kappa0",
+      "nu_expression": "float(nu), bisected inside [0.0, 1.5]",
+      "nu_bisection_range": [
+        0.0,
+        1.5
+      ],
+      "nu_range_in_domain": true
+    },
+    "phase1_axis_screen.py:120": {
+      "kappa_expression": "0.0 (literal)",
+      "nu_expression": "float(nu) from bisect_nu_crit, bracketed by the module's own bisection range"
+    },
+    "note": "the remaining non-literal sites are in test files (test_solver_boussinesq.py, test_boussinesq_dedicated.py), which produce no banked artifact; they are excluded from the contamination verdict and counted separately"
+  },
+  "part4f_banked_coefficient_values": {
+    "n_files_scanned": 121,
+    "keys_scanned": [
+      "nu",
+      "kappa",
+      "nu_crit",
+      "nu0",
+      "nu_c"
+    ],
+    "by_key_scientific_measurements": {
+      "nu": {
+        "n": 71,
+        "min": 0.0,
+        "max": 2.0,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "kappa": {
+        "n": 207,
+        "min": 0.209734,
+        "max": 1.8571428571428574,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "nu_crit": {
+        "n": 47,
+        "min": 0.0073,
+        "max": 1.437,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "nu0": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "nu_c": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      }
+    },
+    "by_key_audit_artifacts": {
+      "nu": {
+        "n": 13,
+        "min": -1000000.0,
+        "max": 0.5,
+        "n_out_of_domain": 4,
+        "out_of_domain_examples": [
+          {
+            "file": "writeup/data/p2_route_fga_v1_adversarial.json",
+            "path": "$.A5_dissipation_strength.rows[2].nu",
+            "value": -0.001
+          },
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[53].kwargs.nu",
+            "value": -0.5
+          },
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[54].kwargs.nu",
+            "value": -1000000.0
+          },
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[55].kwargs.nu",
+            "value": -1e-14
+          }
+        ]
+      },
+      "kappa": {
+        "n": 4,
+        "min": -1000000.0,
+        "max": 0.5,
+        "n_out_of_domain": 3,
+        "out_of_domain_examples": [
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[58].kwargs.kappa",
+            "value": -0.5
+          },
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[59].kwargs.kappa",
+            "value": -1000000.0
+          },
+          {
+            "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+            "path": "$.cases[60].kwargs.kappa",
+            "value": -1e-14
+          }
+        ]
+      },
+      "nu_crit": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "nu0": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      },
+      "nu_c": {
+        "n": 0,
+        "min": null,
+        "max": null,
+        "n_out_of_domain": 0,
+        "out_of_domain_examples": []
+      }
+    },
+    "n_recorded_coefficients_out_of_domain": 0,
+    "n_out_of_domain_inside_audit_artifacts": 7,
+    "scanner_positive_control": "the scanner reports 7 out-of-domain coefficient(s) inside adversarial-battery artifacts, where a negative nu/kappa is the deliberately injected DATA rather than a contamination. So the zero reported for scientific artifacts is a measurement, not a scan that could only return zero (lesson 90)."
+  },
+  "part4b_banked_blowup_labels": {
+    "n_files_scanned": 121,
+    "roots_scanned": [
+      "writeup/data",
+      "experiments",
+      "reports"
+    ],
+    "n_files_with_a_blowup_candidate_string": 6,
+    "n_occurrences_total": 100,
+    "n_occurrences_inside_audit_artifacts": 49,
+    "n_hits_attributable_to_a_banked_solve_boussinesq_measurement": 0,
+    "scanner_positive_control": "the scanner is demonstrably able to report a non-zero count: it finds the deliberately-provoked blowup_candidate labels inside leg 89's own battery artifact and the bench-repair check. A scanner that could only ever return 0 would be lesson 90's forbidden control.",
+    "hits": [
+      {
+        "file": "writeup/data/bench_boussinesq_silent_corruption_check.json",
+        "n_occurrences": 4,
+        "n_occurrences_in_a_boussinesq_context": 2,
+        "n_occurrences_in_a_gclm_context": 1,
+        "classification": "audit_artifact",
+        "declared": {
+          "module_repaired": "solver/boussinesq.py"
+        },
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      },
+      {
+        "file": "writeup/data/p2_route_cap_v1_audit.json",
+        "n_occurrences": 1,
+        "n_occurrences_in_a_boussinesq_context": 0,
+        "n_occurrences_in_a_gclm_context": 1,
+        "classification": "scientific_measurement",
+        "declared": {
+          "leg": "71",
+          "route": "CAP"
+        },
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      },
+      {
+        "file": "writeup/data/stage3_6_rough.json",
+        "n_occurrences": 50,
+        "n_occurrences_in_a_boussinesq_context": 0,
+        "n_occurrences_in_a_gclm_context": 0,
+        "classification": "scientific_measurement",
+        "declared": {},
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      },
+      {
+        "file": "writeup/data/p2_route_gla_v1_adversarial.json",
+        "n_occurrences": 9,
+        "n_occurrences_in_a_boussinesq_context": 0,
+        "n_occurrences_in_a_gclm_context": 1,
+        "classification": "audit_artifact",
+        "declared": {
+          "module_under_audit": "solver/gclm.py",
+          "leg": "92",
+          "route": "GLA v1 -- adversarial audit of solver/gclm.py (physical-space gCLM)"
+        },
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      },
+      {
+        "file": "writeup/data/p2_route_glb_v1_postrepair.json",
+        "n_occurrences": 20,
+        "n_occurrences_in_a_boussinesq_context": 0,
+        "n_occurrences_in_a_gclm_context": 1,
+        "classification": "audit_artifact",
+        "declared": {
+          "module_under_check": "solver/gclm.py",
+          "leg": "103",
+          "route": "GLB v1 -- post-repair regression check on solver/gclm.py"
+        },
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      },
+      {
+        "file": "writeup/data/p2_route_boa_v1_adversarial.json",
+        "n_occurrences": 16,
+        "n_occurrences_in_a_boussinesq_context": 0,
+        "n_occurrences_in_a_gclm_context": 0,
+        "classification": "audit_artifact",
+        "declared": {
+          "module_under_audit": "solver/boussinesq.py",
+          "leg": "89",
+          "route": "BOA"
+        },
+        "n_attributable_to_a_banked_solve_boussinesq_measurement": 0
+      }
+    ]
+  },
+  "part4c_zero_guard_false_refusal": {
+    "ZERO_OMEGA_REL_TOL": 1e-13,
+    "n_ics_checked": 16,
+    "n_ics_where_guard_would_fire": 0,
+    "worst_ic": "smooth_sharp_n256",
+    "worst_m0_over_state_scale": 0.09999999999999999,
+    "worst_margin_over_tolerance": 999999999999.9999,
+    "ics": {
+      "smooth_sharp_n128": {
+        "represented_m0": 0.2,
+        "state_scale": 1.9999999999999998,
+        "m0_over_state_scale": 0.10000000000000002,
+        "margin_over_tolerance": 1000000000000.0001,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n128": {
+        "represented_m0": 1.0,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 1.0,
+        "margin_over_tolerance": 10000000000000.0,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n128": {
+        "represented_m0": 0.7872052387410233,
+        "state_scale": 0.7887428935561024,
+        "m0_over_state_scale": 0.998050499310179,
+        "margin_over_tolerance": 9980504993101.79,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n128": {
+        "represented_m0": 0.6876779491200551,
+        "state_scale": 0.6898675833023241,
+        "m0_over_state_scale": 0.9968260080118746,
+        "margin_over_tolerance": 9968260080118.746,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n256": {
+        "represented_m0": 0.19999999999999996,
+        "state_scale": 1.9999999999999998,
+        "m0_over_state_scale": 0.09999999999999999,
+        "margin_over_tolerance": 999999999999.9999,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n256": {
+        "represented_m0": 0.9999999999999998,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 0.9999999999999998,
+        "margin_over_tolerance": 9999999999999.998,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n256": {
+        "represented_m0": 0.7859855858865175,
+        "state_scale": 0.7860078701123767,
+        "m0_over_state_scale": 0.9999716488514854,
+        "margin_over_tolerance": 9999716488514.854,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n256": {
+        "represented_m0": 0.6848466039289116,
+        "state_scale": 0.6848907409750272,
+        "m0_over_state_scale": 0.9999355560770864,
+        "margin_over_tolerance": 9999355560770.863,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n512": {
+        "represented_m0": 0.20000000000000004,
+        "state_scale": 2.0,
+        "m0_over_state_scale": 0.10000000000000002,
+        "margin_over_tolerance": 1000000000000.0001,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n512": {
+        "represented_m0": 0.9999999999999996,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 0.9999999999999996,
+        "margin_over_tolerance": 9999999999999.996,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n512": {
+        "represented_m0": 0.7856079571969392,
+        "state_scale": 0.7858041414148955,
+        "m0_over_state_scale": 0.9997503395469474,
+        "margin_over_tolerance": 9997503395469.473,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n512": {
+        "represented_m0": 0.6838450253265304,
+        "state_scale": 0.6842151090142117,
+        "m0_over_state_scale": 0.9994591120792194,
+        "margin_over_tolerance": 9994591120792.193,
+        "guard_would_fire": false
+      },
+      "smooth_sharp_n1024": {
+        "represented_m0": 0.2,
+        "state_scale": 1.9999999999999996,
+        "m0_over_state_scale": 0.10000000000000003,
+        "margin_over_tolerance": 1000000000000.0002,
+        "guard_would_fire": false
+      },
+      "smooth_mild_n1024": {
+        "represented_m0": 1.0,
+        "state_scale": 1.0,
+        "m0_over_state_scale": 1.0,
+        "margin_over_tolerance": 10000000000000.0,
+        "guard_would_fire": false
+      },
+      "rough_h0.5_n1024": {
+        "represented_m0": 0.7854702176591333,
+        "state_scale": 0.7854802869411939,
+        "m0_over_state_scale": 0.9999871807323137,
+        "margin_over_tolerance": 9999871807323.137,
+        "guard_would_fire": false
+      },
+      "rough_h0.3_n1024": {
+        "represented_m0": 0.6834315131900363,
+        "state_scale": 0.6834445665492723,
+        "m0_over_state_scale": 0.9999809006320703,
+        "margin_over_tolerance": 9999809006320.703,
+        "guard_would_fire": false
+      }
+    }
+  },
+  "part4d_phase1_reproduction": {
+    "banked_artifact": "writeup/data/phase1_spike.json",
+    "resolution": 128,
+    "n_ics": 4,
+    "n_ics_reproducing_every_field_exactly": 4,
+    "n_fields_compared_per_ic": 6,
+    "worst_relative_difference": 0.0,
+    "ics": {
+      "smooth_sharp": {
+        "fields": {
+          "t_resolved": {
+            "banked": 2.4601338298340107,
+            "repaired": 2.4601338298340107,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "amp_resolved": {
+            "banked": 29.014550798817318,
+            "repaired": 29.014550798817318,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "outcome": {
+            "banked": "under_resolved",
+            "repaired": "under_resolved",
+            "exact": true
+          },
+          "growth_rate_fixed_window": {
+            "banked": 0.607463905095114,
+            "repaired": 0.607463905095114,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "exponent": {
+            "banked": 2.45,
+            "repaired": 2.45,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "tstar": {
+            "banked": 5.8753234443357485,
+            "repaired": 5.8753234443357485,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          }
+        },
+        "all_fields_exact": true,
+        "n_fields_compared": 6
+      },
+      "smooth_mild": {
+        "fields": {
+          "t_resolved": {
+            "banked": 5.878944765640108,
+            "repaired": 5.878944765640108,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "amp_resolved": {
+            "banked": 4.7054120855366275,
+            "repaired": 4.7054120855366275,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "outcome": {
+            "banked": "under_resolved",
+            "repaired": "under_resolved",
+            "exact": true
+          },
+          "growth_rate_fixed_window": {
+            "banked": 1.2388586159228212,
+            "repaired": 1.2388586159228212,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "exponent": {
+            "banked": 0.3,
+            "repaired": 0.3,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "tstar": {
+            "banked": 6.2158577045445655,
+            "repaired": 6.2158577045445655,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          }
+        },
+        "all_fields_exact": true,
+        "n_fields_compared": 6
+      },
+      "rough_h0.5": {
+        "fields": {
+          "t_resolved": {
+            "banked": 0.060000000000000005,
+            "repaired": 0.060000000000000005,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "amp_resolved": {
+            "banked": 1.0059798465581513,
+            "repaired": 1.0059798465581513,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "outcome": {
+            "banked": "under_resolved",
+            "repaired": "under_resolved",
+            "exact": true
+          },
+          "growth_rate_fixed_window": {
+            "banked": "nan",
+            "repaired": "nan",
+            "exact": true,
+            "abs_diff": 0.0
+          },
+          "exponent": {
+            "banked": null,
+            "repaired": null,
+            "exact": true
+          },
+          "tstar": {
+            "banked": null,
+            "repaired": null,
+            "exact": true
+          }
+        },
+        "all_fields_exact": true,
+        "n_fields_compared": 6
+      },
+      "rough_h0.3": {
+        "fields": {
+          "t_resolved": {
+            "banked": 0.03,
+            "repaired": 0.03,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "amp_resolved": {
+            "banked": 1.0026313311215689,
+            "repaired": 1.0026313311215689,
+            "abs_diff": 0.0,
+            "rel_diff": 0.0,
+            "exact": true
+          },
+          "outcome": {
+            "banked": "under_resolved",
+            "repaired": "under_resolved",
+            "exact": true
+          },
+          "growth_rate_fixed_window": {
+            "banked": "nan",
+            "repaired": "nan",
+            "exact": true,
+            "abs_diff": 0.0
+          },
+          "exponent": {
+            "banked": null,
+            "repaired": null,
+            "exact": true
+          },
+          "tstar": {
+            "banked": null,
+            "repaired": null,
+            "exact": true
+          }
+        },
+        "all_fields_exact": true,
+        "n_fields_compared": 6
+      }
+    }
+  },
+  "part4e_repair_selfreport_crosscheck": {
+    "available": true,
+    "artifact": "writeup/data/bench_boussinesq_silent_corruption_check.json",
+    "repair_claims": {
+      "n_silent_gate_deciding": 0,
+      "n_silent_secondary": 0,
+      "n_cases_where_conservation_drift_masks_a_nan_limb": 0,
+      "n_call_sites": 5,
+      "n_call_sites_with_out_of_domain_kappa": 0,
+      "n_banked_blowup_hits_attributable_to_solve_boussinesq": 0,
+      "n_phase1_n128_ics_exact": 4,
+      "phase1_worst_abs_diff": 0.0,
+      "n_wellformed_cases_bit_identical": 19
+    },
+    "note": "this block is the CLAIM under audit, not evidence for it. Leg 133's numbers are computed independently above; agreement is a corroboration and disagreement is this leg's finding."
+  },
+  "wall_seconds": 37.669038407999324
+}
