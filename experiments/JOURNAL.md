@@ -3323,3 +3323,15 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   that leg 214 fixed all 5 (2c901c4). The ledger's own claim about this repo's
   current files is backwards. 0 banked numbers move; a one-tense-word mechanical
   fix, not urgent.
+- **Leg 209 (Route-SCA2) — YES, ESCALATED (parked, not merged), PROOF CONFIRMED
+  SAFE:** spectral_certificate.py (the module Theorem NGX is proved against) has 4
+  latent mechanisms, headline being an unordered NaN comparison (`nan > 0` is
+  False) sending sigma_min from 0.0349 to +inf and inverting
+  counterexample_norm_floor from 14.3206 to a plausible-looking 0.0 -- exactly the
+  theorem's own conclusion, reversed. But measured, not assumed: 0 shipped
+  (class,param) pairs produce NaN/Inf or a negative weight, nearest shipped s is
+  0.263852 clear of the failing band, and clean-input float64 matches exact
+  rational Gauss-Jordan to 7.24e-16. Explicitly distinguished and confirmed:
+  Theorem NGX rests on an exact folklore inequality and an analytic tail estimate,
+  neither of which touches this code path -- the proof itself is untouched, only
+  the numerical module has an adversarial-input gap. Careful, well-scoped finding.
