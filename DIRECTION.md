@@ -7198,3 +7198,313 @@ Nothing in this update lifts a ban. Escalations #4 (129/188), CGA (199), BHA (19
 ICA2 (201) and TNA2 (204) all stay with the user via `PROGRESS.md`'s NEEDS YOU — this DM
 rules on none of them. No claim about Walls 1 and 2 moves; Clay stays ~0.05%. No direction
 question raised this cycle.
+
+---
+
+## DM bookkeeping update, cycle 1, same day — three more results (200, 215, 205), then 193
+lands and 211 promotes; watermark hit again; 8 repair/synthesis legs drafted (216-223)
+
+**200 (PCA) escalated, not merged** (`leg/200-pca-v1` pushed, `main` untouched). FOUR
+silent-corruption mechanisms in `port_certification.py`. Most notable: `radii_polynomial_status`
+returns `closes=True` on a ball of radius exactly 0 at `Y_0=0` (leg 51's own `a=0` CLM value)
+— it reads the discriminant alone and never forms `r_min`. Also: `line_sweep_solve` inverts a
+DIFFERENT operator at 18820x; `leading_order_solve` truncates integer input; `stall_verdict`'s
+`NaN < 2.0` comparison gives a confidently wrong verdict. **0 banked numbers move** — the live
+PORT run's own parameters sit in the dormant corner none of the four mechanisms reach.
+
+**215 (CGR) landed its own gate as NO, escalated** (`leg/215-cgr-v1` pushed, `main`
+untouched). The repair correctly fixes leg 199's M1 mechanism (8/8 live call sites bit-
+identical pre/post), **but M1 is only 1 of the 16 gaps leg 199 found** — the other 15 live in
+`certificate_guards.py` itself, outside leg 215's own declared (read-only) territory. Leg 215
+explicitly requested a follow-up leg that owns that module; drafted below as **216 (CGF)**.
+
+**205 (BVR) escalated, not merged** (`leg/205-bvr-v1` pushed, `main` untouched). TWO
+independent silent-fabrication mechanisms in `boussinesq_rescaled.py`: one confirms a note
+leg 99 already flagged but declined to test; one is new and needs no degenerate grid at all
+(fully resolved, rank/condition-number constant throughout the failure — a stronger, more
+alarming shape than most of this cycle's other findings). **This leg did NOT re-run any
+banked result to confirm zero contamination** — flagged by the orchestrator, and by this DM,
+as slightly less certain than the other six escalations this cycle. The follow-up repair leg
+drafted below (221, BVRR) explicitly re-confirms zero contamination as part of its own gate,
+closing that gap.
+
+**193 (M2CV) landed on `main` (`069a2be`) — gate YES.** Independently confirmed leg 187's NO
+on both failure points, and upgraded the dilation-orbit-kernel argument from 5 tested values
+to an **exact symbolic identity** (zero polynomial for every `g>0`) — a strictly stronger form
+of the same proof leg 187 gave in exact `Fraction` arithmetic. One non-verdict-changing
+precision caveat on `Z2`'s exponent (ladder-dependent, but every local slope still `>=1.88`
+and rising). Clean, no escalation; the M2CI line (187/193) is now closed with independent
+confirmation, matching this repository's own postconstruction-verification discipline.
+
+**Roster, corrected to the orchestrator's latest report (211 promoted into B, the last item
+of the original 206-213 batch):**
+
+| Slot | Leg | Route | Status |
+|---|---|---|---|
+| A | 192 | H2CV | live, in progress (per earlier update) |
+| B | 211 | XU11 | **live, newly promoted — last item of the 206-213 batch** |
+| C | 206 | GSA | live (unchanged) |
+| D | 203 | RSA | live (unchanged) |
+| E | 212 | USC2V | live (unchanged) |
+| F | 209 | SCA2 | live (unchanged) |
+| G | 202 | PNA | live (unchanged) |
+| H | 208 | TSA | live (per orchestrator's report; this DM has no independent record of what
+       vacated slot H before 208 landed there, and does not fabricate one — the roster above
+       is taken as authoritative from the orchestrator's own report, as this file's standing
+       practice already treats coordinator landing/slot reports as authoritative over this
+       DM's own derived checks) |
+| I | 210 | M2SV | live (unchanged) |
+| J | 207 | DPA | live (unchanged) |
+
+**Reserve after this round: only 1 undispatched leg (213, LGC2) remains from the original
+206-213 batch — every other item has been promoted.** This is below the §3a watermark of 3,
+so eight new fully-specified candidates are drafted now, per standing instruction, without
+waiting to be asked. Six are targeted repairs closing this cycle's own well-characterized
+escalations (188/198/199/200/201/204/205's remaining M1-only gap), one closes the last
+genuinely-uncovered load-bearing module in the audit family's own inventory
+(`fractional_boussinesq.py`), and one is a methodological synthesis note bundling all seven
+of this cycle's audit-family escalations into one document, the same pattern as legs 179/186.
+
+```
+### 216 — ROUTE-CGF: REPAIR certificate_guards.py's REMAINING 15 GAPS (leg 199's finding,
+leg 215's explicit follow-up request)
+**Thesis.** Leg 199 (CGA) found 16 silent-acceptance gaps across 4 mechanisms in
+`certificate_guards.py`. Leg 215 (CGR) fixed exactly 1 of the 16 (mechanism M1, in
+`nk_bounds.py`'s guard clause, its own declared territory) and explicitly flagged that the
+other 15 live inside `certificate_guards.py` itself, which it did not own. This leg owns that
+module directly and closes the remaining 3 mechanisms leg 199 named, one at a time, per its
+own report — no re-litigation of leg 199's measurement, repair only.
+**Gate.** Does repairing the remaining 3 mechanisms in `certificate_guards.py` (per leg 199's
+own identified defects) cause all 15 remaining previously-silently-accepted adversarial cases
+to now raise/reject, while every one of leg 199's own confirmed-safe live call sites stays
+bit-identical to its pre-repair banked value?
+  yes -> Bank the repair; leg 199's finding is now fully closed (16/16, combined with leg
+         215's M1 fix). Flag for a postrepair-verification leg once a slot is available.
+  no  -> Report exactly which mechanism resists repair or which live call site's value moved;
+         escalate rather than declare the module fully closed on a partial fix.
+**Territory.** solver/certificate_guards.py (the 3 remaining mechanisms leg 199 named —
+               leg 215's M1 fix in solver/nk_bounds.py is untouched, already landed there),
+               experiments/p2_route_cgf_v1_repair.py,
+               writeup/data/p2_route_cgf_v1_repair.json,
+               writeup/novelty/leg_216.md, experiments/journal/leg_216.md.
+**Difficulty.** standard
+**Independence.** Owns certificate_guards.py directly (leg 199's own read-only territory,
+closed on landing); does not touch nk_bounds.py (leg 215's territory, already repaired).
+Disjoint from every other live/reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 217 — ROUTE-PCR: REPAIR port_certification.py's FOUR SILENT-CORRUPTION MECHANISMS (leg
+200's finding) (RESERVE)
+**Thesis.** Leg 200 (PCA) found four independent mechanisms: a zero-radius false `closes=True`
+at `Y_0=0` (reading the discriminant alone, never forming `r_min`), `line_sweep_solve`
+inverting the wrong operator at 18820x, `leading_order_solve` truncating integer input, and
+`stall_verdict`'s `NaN < 2.0` giving a confident false verdict. 0 banked numbers move today,
+but this module underwrites every PORT-family reach-table claim, so it is worth closing
+before any future PORT-family leg runs closer to the dormant corner these mechanisms occupy.
+**Gate.** Does repairing all four named mechanisms (per leg 200's own report) cause every one
+of leg 200's adversarial cases to now reject/raise correctly, while leg 195's (PQVER) own
+independently-reproduced 114/114 clean result and every other live PORT-family call stays
+bit-identical?
+  yes -> Bank the repair; leg 200's finding closes cleanly. Flag for a postrepair-
+         verification leg once a slot is available.
+  no  -> Report exactly which mechanism resists repair or which banked PORT number moved;
+         escalate immediately rather than declare the module closed.
+**Territory.** solver/port_certification.py (the four named mechanisms only),
+               experiments/p2_route_pcr_v1_repair.py,
+               writeup/data/p2_route_pcr_v1_repair.json,
+               writeup/novelty/leg_217.md, experiments/journal/leg_217.md.
+**Difficulty.** standard
+**Independence.** Owns port_certification.py directly (leg 200's own read-only territory,
+closed on landing). Read-only overlap with leg 195 (re-runs PORT's own evidence scripts, not
+this module's internals) is read-read, not a collision. Reserve — promote once a slot frees.
+```
+
+```
+### 218 — ROUTE-BHR: REPAIR bordered_hl.py's NEGATIVE-BORDER-WEIGHT ACCEPTANCE (leg 198's
+finding, THE MOST CONSEQUENTIAL LATENT DEFECT THIS CYCLE) (RESERVE)
+**Thesis.** Leg 198 (BHA) found `bordered_hl.py` silently accepts a negative border weight,
+returning a negative "operator norm" that corrupts `Z_1` by up to 1.198e9x and `Z_2` by up to
+1.189e17x — large enough to flip a certificate's own closure verdict. 0 banked numbers are
+impeached today (no live caller passes a negative weight), but this module sits directly
+upstream of every bordered-certificate battery this repository has run (54, 58, 127), making
+it the single highest-priority repair in this cycle's backlog by blast-radius alone.
+**Gate.** Does adding a border-weight non-negativity guard (per leg 198's own identified
+mechanism) cause every one of leg 198's adversarial negative-weight cases to now reject,
+while every live caller across 54/58/127/192's own re-derivation stays bit-identical to its
+pre-repair banked value?
+  yes -> Bank the repair as closing this cycle's single highest-priority latent defect. Flag
+         for a postrepair-verification leg IMMEDIATELY on the next available slot, given the
+         stakes leg 198 measured.
+  no  -> Report exactly which case still slips through or which of 54/58/127/192's own
+         values moved; escalate immediately — do not declare this closed on a partial fix
+         given the magnitude leg 198 measured.
+**Territory.** solver/bordered_hl.py (the border-weight guard only),
+               experiments/p2_route_bhr_v1_repair.py,
+               writeup/data/p2_route_bhr_v1_repair.json,
+               writeup/novelty/leg_218.md, experiments/journal/leg_218.md.
+**Difficulty.** standard
+**Independence.** Owns bordered_hl.py directly (leg 198's own read-only territory, closed on
+landing). Read-only overlap with 54/58/127/192 (all read this module's outputs, not its
+internals) is read-read, not a collision. Reserve — promote once a slot frees; RANKED FIRST
+among 216-221 for promotion given the measured blast radius.
+```
+
+```
+### 219 — ROUTE-ICR2: REPAIR interval_certificate.py's SUBNORMAL-BAND ENCLOSURE ESCAPE (leg
+201's finding, an unrepaired clone of leg 69's defect 1) (RESERVE)
+**Thesis.** Leg 201 (ICA2) found `interval_certificate.py` silently returns a non-containing
+enclosure in the subnormal band — a 200-`eta` escape, 24.63% of returned magnitude at the
+shipped `N=405` — the same shape leg 69 already found and fixed in `interval.py` itself, now
+found again, unrepaired, one layer up. 0 banked numbers affected (292.9 decades clear).
+**Gate.** Does applying the same subnormal-range fix leg 69 already validated in
+`interval.py` (or an equivalent guard) to `interval_certificate.py` close leg 201's own
+adversarial battery, while every live operator (140-298 decades clear of the failure band,
+per leg 69's own scoping) stays bit-identical?
+  yes -> Bank the repair; this closes the second instance of leg 69's own defect shape. Flag
+         for a postrepair-verification leg once a slot is available.
+  no  -> Report exactly which case resists the fix; escalate rather than declare it closed.
+**Territory.** solver/interval_certificate.py (the subnormal-band guard only; does NOT
+               re-touch solver/interval.py, leg 69's own already-repaired territory),
+               experiments/p2_route_icr2_v1_repair.py,
+               writeup/data/p2_route_icr2_v1_repair.json,
+               writeup/novelty/leg_219.md, experiments/journal/leg_219.md.
+**Difficulty.** standard
+**Independence.** Owns interval_certificate.py directly (leg 201's own read-only territory,
+closed on landing). Does not touch interval.py. Reserve — promote once a slot frees.
+```
+
+```
+### 220 — ROUTE-TNR: REPAIR target_norm.py's DOMAIN-GUARD WINDOWING BUG (leg 204's finding)
+(RESERVE)
+**Thesis.** Leg 204 (TNA2) found `target_norm.py`'s domain guard windows on `max|X|`, not the
+true data interval — an asymmetric grid silently extrapolates 535/16384 samples while
+reporting `n_outside_grid=0`/`domain_valid=True`, defeating three legs' (55, 84, 94) worth of
+prior guard work. 0 of 7 mechanisms are reachable from the banked call path today, but this
+guard is exactly the kind of silent-pass-through infrastructure this repository's own
+discipline treats as urgent to close once found, regardless of current contamination.
+**Gate.** Does repairing the domain guard to window on the true data interval (per leg 204's
+own identified mechanism) cause the asymmetric-grid extrapolation case to now be correctly
+flagged (`n_outside_grid>0`/`domain_valid=False`), while leg 55's own banked margins and
+every other live call stay bit-identical?
+  yes -> Bank the repair; leg 204's finding closes cleanly. Flag for a postrepair-
+         verification leg once a slot is available.
+  no  -> Report exactly which case resists the fix or which banked margin moved; escalate
+         immediately.
+**Territory.** solver/target_norm.py (the domain-guard windowing logic only),
+               experiments/p2_route_tnr_v1_repair.py,
+               writeup/data/p2_route_tnr_v1_repair.json,
+               writeup/novelty/leg_220.md, experiments/journal/leg_220.md.
+**Difficulty.** standard
+**Independence.** Owns target_norm.py directly (leg 204's own read-only territory, closed on
+landing). Reserve — promote once a slot frees.
+```
+
+```
+### 221 — ROUTE-BVRR: REPAIR boussinesq_rescaled.py's TWO FABRICATION MECHANISMS, WITH ITS
+OWN ZERO-CONTAMINATION RE-CONFIRMATION (leg 205's finding, flagged as less certain than this
+cycle's other six escalations) (RESERVE)
+**Thesis.** Leg 205 (BVR) found two independent silent-fabrication mechanisms in
+`boussinesq_rescaled.py` — one confirming a note leg 99 already flagged but declined to test,
+one new and needing no degenerate grid at all (fully resolved, rank/condition-number constant
+throughout). **Leg 205 itself did not re-run any banked result to confirm zero
+contamination** — the orchestrator and this DM both flagged this as a real gap relative to
+every other escalation this cycle. This repair leg closes both the fix AND that gap in the
+same pass, rather than trusting leg 205's own "probably zero contamination" framing.
+**Gate.** Does repairing both named mechanisms cause every adversarial case in leg 205's own
+battery to now reject/raise correctly, AND does a fresh, explicit re-run of every banked
+result that calls `boussinesq_rescaled.py` (not just an assumption of dormancy) confirm zero
+contamination, bit-identical pre/post repair?
+  yes -> Bank the repair AND the zero-contamination re-confirmation together — this closes
+         leg 205's finding on stronger footing than it landed with. Flag for a postrepair-
+         verification leg once a slot is available.
+  no  -> If the zero-contamination check itself fails (a banked result WAS reachable and
+         DOES move), this is a priority finding of a different order than anything else this
+         cycle — escalate immediately, do not fold it quietly into the repair's own landing.
+**Territory.** solver/boussinesq_rescaled.py (the two named mechanisms only),
+               experiments/p2_route_bvrr_v1_repair.py,
+               writeup/data/p2_route_bvrr_v1_repair.json,
+               writeup/novelty/leg_221.md, experiments/journal/leg_221.md.
+**Difficulty.** standard
+**Independence.** Owns boussinesq_rescaled.py directly (leg 205's own read-only territory,
+closed on landing). Reserve — promote once a slot frees; RANKED with elevated priority among
+216-221 given the explicit zero-contamination gap this leg is designed to close.
+```
+
+```
+### 222 — ROUTE-FBA: ADVERSARIAL AUDIT OF fractional_boussinesq.py (closes the last
+genuinely-uncovered load-bearing module in the audit family's own inventory) (RESERVE)
+**Thesis.** A full name-match sweep of every "ADVERSARIAL AUDIT OF X.py" entry in this file
+against every module in `solver/` finds exactly one genuinely uncovered, load-bearing module
+left: `fractional_boussinesq.py` (named directly in escalation #4's own 4-module refusal-
+boundary finding, alongside gclm.py/fractional_gclm.py/boussinesq.py, all three of which have
+their own audit entries already). Standard battery: NaN/Inf, degenerate/zero-measure input,
+boundary parameters (including the same `n=3`/`n=4` grid-floor question escalation #4
+raises), planted wrong-value pass-through.
+**Gate.** Under adversarial and degenerate inputs (including grid sizes at or near the
+`n=3`/`n=4` boundary escalation #4 raises), does `fractional_boussinesq.py` ever silently
+return a wrong value rather than reject or visibly propagate the defect?
+  yes -> Name the exact mechanism and magnitude; if it is the SAME dealiasing-mask question
+         escalation #4 raises, state that explicitly rather than presenting it as a new
+         defect. Escalate if claim-adjacent, do not patch under this leg's own authority.
+  no  -> Bank the battery as the permanent regression suite; record the pass in
+         capabilities.py. This closes the audit family's own module-coverage inventory.
+**Territory.** test_fractional_boussinesq_adversarial.py,
+               experiments/p2_route_fba_v1_adversarial.py,
+               writeup/data/p2_route_fba_v1_adversarial.json,
+               writeup/novelty/leg_222.md, experiments/journal/leg_222.md.
+**Difficulty.** standard
+**Independence.** Reads solver/fractional_boussinesq.py; edits nothing under either outcome.
+Disjoint from 188/220 (dealiasing-mask escalation, a different question about the SAME
+module's grid guard specifically — read-read, not a collision) and from every other
+live/reserve leg. Reserve — promote once a slot frees.
+```
+
+```
+### 223 — ROUTE-PUB3: THE AUDIT-FAMILY METHODOLOGICAL SYNTHESIS — SEVEN LATENT DEFECTS,
+ZERO-TO-UNCERTAIN CONTAMINATION, ONE COMMON DISCIPLINE (RESERVE)
+**Thesis.** This single cycle produced seven audit-family escalations (188's sharpened
+scope-finding, 198 BHA, 199 CGA, 200 PCA, 201 ICA2, 204 TNA2, 205 BVR) — the highest density
+of real findings the audit family has produced in one cycle across this run's whole history.
+Read separately, these are seven leg reports and a growing NEEDS YOU backlog; read together,
+they are one finding about the discipline itself: adversarial/degenerate input against
+claim-adjacent modules reliably surfaces latent defects that ordinary use (and even the
+modules' own construction-time testing) never triggers, and — the honest caveat every other
+audit-family synthesis in this file states — every one of the seven currently contaminates
+zero banked numbers (205's own uncertain case pending 221's re-confirmation). Bundle
+precisely, per the leg 179/186 discipline: name each of the seven, its mechanism, its
+magnitude, its contamination status (confirmed-zero for six, pending-221 for 205), and the
+repair leg (216-221) each has waiting in reserve.
+**Gate.** Does the combined note state all seven escalations accurately, with each one's
+contamination status stated exactly as landed (no softening 205's uncertain status into a
+false "zero" before 221 confirms it)?
+  yes -> Bank the combined note as a THIRD publication-scoping/methods draft (distinct from
+         179's ell^1_w-death bundle and 186's space-axis bundle — this one is about the
+         audit-family's own hit-rate discipline, not about the certificate mathematics).
+         Flag to the user at the next natural check-in.
+  no  -> Report exactly which bundled claim doesn't reproduce from its own banked source;
+         escalate rather than silently soften it, same discipline as 179/186.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md (NEW),
+               writeup/4_p2_lottery/BLOG_P2_PUB3_V1.md (NEW),
+               writeup/novelty/leg_223.md, experiments/journal/leg_223.md.
+               Reads (never edits) legs 188/198/199/200/201/204/205's own banked
+               JSONs/reports.
+**Difficulty.** standard
+**Independence.** New writeup files only; no solver module. Disjoint from every other
+live/reserve leg. Best promoted AFTER at least 221 lands (so 205's contamination status is
+settled rather than pending), but does not strictly require it — the gate handles the
+pending case honestly either way. Reserve — promote once a slot frees, preferably late in
+this batch's promotion order.
+```
+
+**Reserve queue: 9 undispatched legs (213, 216, 217, 218, 219, 220, 221, 222, 223).**
+Promotion order for the next vacancy: **218 (BHR) first** — the highest blast-radius repair
+this cycle found (1.198e9x/1.189e17x corruption potential); then **221 (BVRR)** — closes the
+one escalation whose zero-contamination status is still unconfirmed; then 216 (CGF), 217
+(PCR), 219 (ICR2), 220 (TNR) in the order drafted (comparable weight, no differentiating
+stakes among them); then 213 (LGC2, the one surviving item from the original batch) and 222
+(FBA); 223 (PUB3) last, since its own gate is strongest once 221 has landed and settled 205's
+status (though it does not strictly require waiting).
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised this cycle.
