@@ -1431,6 +1431,28 @@ filling it from the existing lower-priority pool (148, 109, 168's sibling regres
 closures, or a leg-179-adjacent housekeeping item once the user has reviewed the now-
 confirmed bundle) rather than manufacturing new math-shaped content this turn.
 
+**DM update, 2026-08-06 — leg 109 (RCA) landed (3 silent-corruption sites in
+`reduced_certificate.py`, bench-repair dispatched); checked `git log` against every number
+this DM has drafted rather than re-answer from memory. Found two already-specified,
+newly-unblocked legs — no fresh drafting needed for the open slot.**
+
+`git log` confirms **153 and 154 have both landed**, which unblocks the two postrepair
+regression legs drafted for exactly this moment: **169 (HHB)**, closing the loop on leg 153's
+`hilbert_holder.py` repair, and **170 (CDB)**, closing the loop on leg 154's
+`critical_dissipation.py` repair — both fully specified already, both now dispatchable, no
+edits needed to either. **148 (SUB)** does not appear in `git log` as landed either, so it
+remains available too, unless the coordinator has it in flight outside this DM's visibility.
+168 is confirmed in flight (dispatched, not yet landed) per the coordinator's own report,
+consistent with `git log` showing no leg-168 commit yet.
+
+**Answering directly: the pool is 169, 170, and 148 — pick any one for the open slot; no new
+draft required this turn.** If the coordinator would rather this DM stop tracking the
+mechanical-closure pool explicitly and just say "reserve is technically nonzero, check the
+Independence field of anything blocked on a leg that's since landed" going forward, that's a
+fine simplification — the pattern is mechanical (a repair lands, its regression-check leg
+unblocks) and doesn't need this DM to re-derive it by hand each time if the coordinator's own
+tracking already catches it.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (OVERTAKEN 2026-08-06: `NG`'s gate
