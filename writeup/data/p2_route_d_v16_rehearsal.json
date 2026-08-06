@@ -400,7 +400,7 @@
    ],
    "N2_finite": true,
    "Z1": null,
-   "verdict": "Y_0 is at machine level and Z_0 is roundoff. Z_2 is INFINITE in the sup-to-sup setting because the finite Hilbert transform is unbounded on the sup norm even on a bounded interval (see step_adversary); and separately sup|N''| is finite only for a <= 1/2 (see N2_finite). Z_1, the infinite-dimensional tail, is NOT computed. The budget therefore DOES NOT CLOSE and no radii polynomial is returned. The named repair is a Holder domain norm with gamma >~ 0.35 (see holder_ratio)."
+   "verdict": "Y_0 = 1.18e-09, above machine level (leg 109's audit: rehearsal's verdict field is a hardcoded string, not computed from Y0_interpolant_defect/Z0; corrected here). Z_0 is roundoff. Z_2 is INFINITE in the sup-to-sup setting because the finite Hilbert transform is unbounded on the sup norm even on a bounded interval (see step_adversary); and separately sup|N''| is finite only for a <= 1/2 (see N2_finite). Z_1, the infinite-dimensional tail, is NOT computed. The budget therefore DOES NOT CLOSE and no radii polynomial is returned. The named repair is a Holder domain norm with gamma >~ 0.35 (see holder_ratio)."
   },
   "0.8": {
    "a": 0.8,
@@ -418,7 +418,7 @@
    ],
    "N2_finite": false,
    "Z1": null,
-   "verdict": "Y_0 is at machine level and Z_0 is roundoff. Z_2 is INFINITE in the sup-to-sup setting because the finite Hilbert transform is unbounded on the sup norm even on a bounded interval (see step_adversary); and separately sup|N''| is finite only for a <= 1/2 (see N2_finite). Z_1, the infinite-dimensional tail, is NOT computed. The budget therefore DOES NOT CLOSE and no radii polynomial is returned. The named repair is a Holder domain norm with gamma >~ 0.35 (see holder_ratio)."
+   "verdict": "Y_0 = 1.60e-06, 15975x the a=0.3 row's machine-level value, NOT at machine level (leg 109's audit: rehearsal's verdict field is a hardcoded string, not computed from Y0_interpolant_defect/Z0; corrected here). Z_0 is roundoff. Z_2 is INFINITE in the sup-to-sup setting because the finite Hilbert transform is unbounded on the sup norm even on a bounded interval (see step_adversary); and separately sup|N''| is finite only for a <= 1/2 (see N2_finite). Z_1, the infinite-dimensional tail, is NOT computed. The budget therefore DOES NOT CLOSE and no radii polynomial is returned. The named repair is a Holder domain norm with gamma >~ 0.35 (see holder_ratio)."
   }
  }
 }
