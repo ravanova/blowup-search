@@ -107,10 +107,13 @@ WHAT THIS IS NOT
 * **No link of the L1->L4 chain moved.**  A blocked link is not a moved link.
 """
 
+import math
+
 import numpy as np
 
 from solver.certificate_guards import (
-    NAN_HINT_GE_ONE, hypothesis_violations as _shared_hypothesis_violations)
+    NAN_HINT_GE_ONE, hypothesis_violations as _shared_hypothesis_violations,
+    radius_violation as _radius_violation)
 
 # --------------------------------------------------------------------------
 # a small dependency-free GMRES (there is no scipy in this environment)
@@ -256,7 +259,16 @@ def leading_order_solve(rhs, c_l, drho, c_diag):
 
     This is the same move Chen-Hou describe (arXiv:2210.07191 abstract): split the linearized
     operator into a leading-order part designed to be sharply estimable, plus a remainder.
+
+    **LEG 217 (Route-PCR) -- `rhs` is cast to float before the output buffer is allocated,
+    matching the `np.asarray(rhs, float)` its sibling `line_sweep_solve` opens with.**
+    Before this repair `np.zeros_like(rhs)` inherited an INTEGER dtype from an integer rhs
+    -- an ordinary thing to hand a linear solver (a canonical basis vector, a masked
+    indicator) -- and every `out[i] = prev` truncated toward zero: leg 200 measured an
+    exact answer of 0.5 returned as 0, worst relative error 1.000.  The truncation is
+    documented NumPy behaviour (numpy#7730, numpy#8733); the missing cast was the defect.
     """
+    rhs = np.asarray(rhs, float)
     a = c_l / drho
     denom = c_diag - a
     out = np.zeros_like(rhs)
@@ -300,8 +312,31 @@ def krylov_ladder(matvec, b, dims=(10, 20, 40, 80, 160)):
 
 
 def stall_verdict(rows):
-    """Flat-or-bending, as a magnitude: how much does 16x the Krylov work buy?"""
+    """Flat-or-bending, as a magnitude: how much does 16x the Krylov work buy?
+
+    **LEG 217 (Route-PCR) -- a non-finite or negative relative residual is now REFUSED.**
+    The verdict used to be `flat = bool(gain < 2.0)`, and `NaN < 2.0` is `False`, so a
+    poisoned ladder came back `flat=False` carrying the confident prose *"bending =>
+    finite ill-conditioning, and more Krylov work would help"* -- the exact opposite of
+    this module's finding about the operator -- and a NEGATIVE residual (an impossible
+    norm) came back `flat=True` at gain -25.0.  This is byte-for-byte the mechanism
+    `certificate_guards.NAN_HINT_GE_ONE` exists to warn about, moved from a certificate
+    verdict to an attribution verdict.  The harm was never the lost information; it was
+    the prose, and `attribution_summary` then RANKED the NaN ablation into the published
+    table.  A residual of exactly 0.0 is admissible (the module's own docstring reports a
+    ladder reaching machine zero) and is deliberately left to raise `ZeroDivisionError`
+    below, as it did before this repair.
+    """
     first, last = rows[0], rows[-1]
+    for end, row in (("near", first), ("far", last)):
+        r = float(row["rel_residual"])
+        if not math.isfinite(r) or r < 0.0:
+            raise ValueError(
+                f"stall_verdict: the {end} end of the ladder (m = {row.get('m')!r}) has "
+                f"rel_residual = {r!r}, which is not a relative residual. A flat/bending "
+                "verdict on it would be prose asserted over a defect: NaN < 2.0 is False, "
+                "so this used to be reported as 'bending', and a negative residual as "
+                "'flat'. Refusing to issue a verdict.")
     gain = first["rel_residual"] / last["rel_residual"]
     return {"rel_at_min_dim": first["rel_residual"], "min_dim": first["m"],
             "rel_at_max_dim": last["rel_residual"], "max_dim": last["m"],
@@ -387,8 +422,32 @@ def radii_polynomial_status(Y0, Z1, Z2=None):
         return {"status": "NO_Z2", "closes": False, "Y0": Y0, "Z1": Z1,
                 "why": "quadratic term unmeasured."}
     disc = (1.0 - Z1) ** 2 - 4.0 * Z2 * Y0
-    return {"status": "EVALUATED", "closes": bool(disc >= 0.0), "Y0": Y0, "Z1": Z1,
-            "Z2": Z2, "discriminant": float(disc)}
+    if disc < 0.0:
+        return {"status": "EVALUATED", "closes": False, "Y0": Y0, "Z1": Z1,
+                "Z2": Z2, "discriminant": float(disc),
+                "why": "the radii polynomial has no real root; no ball is established."}
+    # LEG 217 (Route-PCR): form r_min and GATE ON IT. `closes` used to come from the
+    # discriminant alone, so the smaller root -- the radius of the ball the theorem
+    # concludes a zero lives INSIDE -- was never computed and never checked. With
+    # Y_0 = 0 (the value leg 51 measured on the a=0 CLM profile) and any contraction
+    # Z_1 < 1, r_min is exactly 0 and the old code returned closes=True on a ball of
+    # radius zero: a conclusion with no content. `certificate_guards.radius_violation`
+    # was written verbatim for this class and `nk_bounds.py` already calls it; legs
+    # 79/128 repaired the HYPOTHESIS half of this defect here and left the RADIUS half.
+    if Z2 > 0.0:
+        r_min = ((1.0 - Z1) - math.sqrt(disc)) / (2.0 * Z2)
+    else:
+        # Z_2 == 0 (nonnegative by the hypothesis check above): the polynomial is linear,
+        # -(1 - Z_1) r + Y_0 <= 0, whose admissible radii start at Y_0 / (1 - Z_1).
+        r_min = Y0 / (1.0 - Z1)
+    violation = _radius_violation(r_min)
+    out = {"status": "EVALUATED", "closes": bool(violation is None), "Y0": Y0, "Z1": Z1,
+           "Z2": Z2, "discriminant": float(disc), "r_min": float(r_min)}
+    if violation is not None:
+        out["radius_violation"] = violation
+        out["why"] = ("the discriminant is nonnegative but the ball it would certify is "
+                      "degenerate: " + violation)
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -442,16 +501,53 @@ def line_sweep_solve(rhs, s_rho, s_beta, drho, dbeta, c_diag, thomas):
 
     `thomas` is injected rather than imported so this module keeps no dependency on the
     Boussinesq solver package.
+
+    **LEG 217 (Route-PCR) -- the radial difference direction is now chosen by
+    `sign(s_rho)`, which is the rule this same loop body already applied, pointwise, to
+    `s_beta` four lines below.**  Before this repair the BACKWARD difference was
+    hard-coded: where `s_rho < 0` that is the anti-upwind (downwind) stencil, so the
+    routine returned the exact inverse of a DIFFERENT operator from the one this docstring
+    names -- finite, correctly shaped, no exception and no flag.  Leg 200 measured 18820x
+    relative error against the advertised operator at `min(s_rho) = -0.4`, with a residual
+    20681x the rhs, and 0.97% at a breach of only -1e-3.
+
+    The radial direction cannot be chosen POINTWISE the way the angular one is, and that
+    asymmetry is structural rather than an omission: the angular difference lives inside a
+    tridiagonal block that Thomas solves in either direction, whereas the radial direction
+    fixes the ORDER of the sweep itself.  Uniformly-positive `s_rho` makes the operator
+    block LOWER bidiagonal (sweep outward, `prev = f_{i-1}`); uniformly-negative `s_rho`
+    makes it block UPPER bidiagonal (sweep inward, `prev = f_{i+1}`) and is equally exact.
+    MIXED signs make it neither, so no single sweep inverts it and the routine now RAISES
+    rather than return the inverse of an operator it was not asked for.  `s_rho == 0`
+    carries no radial coupling and is admissible in either direction -- which is also why
+    `outward_upwinding_holds`, whose predicate is `min > 0`, is CONSERVATIVE there rather
+    than wrong (leg 200's PCA1b).
     """
     rhs = np.asarray(rhs, float)
     nr, nb = rhs.shape
+    s_rho = np.asarray(s_rho, float)
+    if not np.all(np.isfinite(s_rho)):
+        raise ValueError(
+            "line_sweep_solve: s_rho has non-finite entries, so no upwind direction is "
+            "defined; the sweep would return a finite, wrong inverse.")
+    has_pos = bool(np.any(s_rho > 0.0))
+    has_neg = bool(np.any(s_rho < 0.0))
+    if has_pos and has_neg:
+        raise ValueError(
+            "line_sweep_solve: sign(s_rho) is MIXED (min "
+            f"{float(np.min(s_rho))!r}, max {float(np.max(s_rho))!r}). First-order "
+            "upwinding then needs the backward difference on some radial lines and the "
+            "forward difference on others, so the operator is neither block-lower nor "
+            "block-upper bidiagonal and no single sweep is its exact inverse. Refusing "
+            "rather than returning the exact inverse of a different operator.")
+    inward = has_neg                      # s_rho <= 0 everywhere: upwind is FORWARD
     out = np.empty_like(rhs)
     prev = np.zeros(nb)
-    for i in range(nr):
+    for i in (range(nr - 1, -1, -1) if inward else range(nr)):
         sr = s_rho[i] / drho
         sb = s_beta[i]
         a = np.zeros(nb)
-        b = np.full(nb, float(c_diag)) - sr
+        b = np.full(nb, float(c_diag)) + (sr if inward else -sr)
         c = np.zeros(nb)
         pos = sb > 0
         a[pos] = sb[pos] / dbeta
@@ -460,7 +556,7 @@ def line_sweep_solve(rhs, s_rho, s_beta, drho, dbeta, c_diag, thomas):
         c[~pos] = -sb[~pos] / dbeta
         a[0] = 0.0
         c[-1] = 0.0
-        prev = thomas(a, b, c, rhs[i] - sr * prev)
+        prev = thomas(a, b, c, rhs[i] + (sr * prev if inward else -sr * prev))
         out[i] = prev
     return out
 

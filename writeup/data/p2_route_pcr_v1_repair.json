@@ -1,0 +1,605 @@
+{
+ "gate": "Does repairing all four named mechanisms (per leg 200's own report) cause every one of leg 200's adversarial cases to now reject/raise correctly, while leg 195's (PQVER) own independently-reproduced 114/114 clean result and every other live PORT-family call stays bit-identical?",
+ "gate_answer": "YES on the four named mechanisms and on the 114/114 regression; NO on 'every other live PORT-family call stays bit-identical' -- two landed artifacts outside this leg's territory encode the pre-repair behaviour on two DEGENERATE inputs",
+ "gates": {
+  "PCR1_line_sweep_sign_selection": {
+   "curve_in_min_s_rho": [
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 5.090726989377322e-16
+     },
+     "before_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 5.090726989377322e-16
+     },
+     "bit_identical_to_prerepair": true,
+     "guard_outward_upwinding_holds": true,
+     "min_s_rho": 0.38963488051119644,
+     "sign_pattern": "nonneg"
+    },
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.2903494199871404e-16
+     },
+     "before_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 4.2903494199871404e-16
+     },
+     "bit_identical_to_prerepair": true,
+     "guard_outward_upwinding_holds": true,
+     "min_s_rho": 0.1,
+     "sign_pattern": "nonneg"
+    },
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 3.810311118184228e-16
+     },
+     "before_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 3.810311118184228e-16
+     },
+     "bit_identical_to_prerepair": true,
+     "guard_outward_upwinding_holds": true,
+     "min_s_rho": 0.001,
+     "sign_pattern": "nonneg"
+    },
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 9.308396522343556e-16
+     },
+     "before_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 9.308396522343556e-16
+     },
+     "bit_identical_to_prerepair": true,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": 0.0,
+     "sign_pattern": "nonneg"
+    },
+    {
+     "after_leg217": {
+      "how": "raised ValueError: line_sweep_solve: sign(s_rho) is MIXED (min -0.001, max 5.731643960887419). First-order upwinding then needs the backward difference on some radial lines and the forward difference on others, so the operator is neither block-lower nor block-upper bidiagonal and no single sweep is its exact inverse. Refusing rather than returning the exact inverse of a different operator.",
+      "outcome": "VISIBLE",
+      "rel_error": null
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 0.009685413205247068
+     },
+     "bit_identical_to_prerepair": null,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": -0.001,
+     "sign_pattern": "mixed"
+    },
+    {
+     "after_leg217": {
+      "how": "raised ValueError: line_sweep_solve: sign(s_rho) is MIXED (min -0.1, max 5.731643960887419). First-order upwinding then needs the backward difference on some radial lines and the forward difference on others, so the operator is neither block-lower nor block-upper bidiagonal and no single sweep is its exact inverse. Refusing rather than returning the exact inverse of a different operator.",
+      "outcome": "VISIBLE",
+      "rel_error": null
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 5.954650852379611
+     },
+     "bit_identical_to_prerepair": null,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": -0.1,
+     "sign_pattern": "mixed"
+    },
+    {
+     "after_leg217": {
+      "how": "raised ValueError: line_sweep_solve: sign(s_rho) is MIXED (min -0.4, max 5.731643960887419). First-order upwinding then needs the backward difference on some radial lines and the forward difference on others, so the operator is neither block-lower nor block-upper bidiagonal and no single sweep is its exact inverse. Refusing rather than returning the exact inverse of a different operator.",
+      "outcome": "VISIBLE",
+      "rel_error": null
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 18819.788755777594
+     },
+     "bit_identical_to_prerepair": null,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": -0.4,
+     "sign_pattern": "mixed"
+    },
+    {
+     "after_leg217": {
+      "how": "raised ValueError: line_sweep_solve: sign(s_rho) is MIXED (min -1.0, max 5.731643960887419). First-order upwinding then needs the backward difference on some radial lines and the forward difference on others, so the operator is neither block-lower nor block-upper bidiagonal and no single sweep is its exact inverse. Refusing rather than returning the exact inverse of a different operator.",
+      "outcome": "VISIBLE",
+      "rel_error": null
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.2097294989751992
+     },
+     "bit_identical_to_prerepair": null,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": -1.0,
+     "sign_pattern": "mixed"
+    },
+    {
+     "after_leg217": {
+      "how": "raised ValueError: line_sweep_solve: sign(s_rho) is MIXED (min -3.0, max 5.731643960887419). First-order upwinding then needs the backward difference on some radial lines and the forward difference on others, so the operator is neither block-lower nor block-upper bidiagonal and no single sweep is its exact inverse. Refusing rather than returning the exact inverse of a different operator.",
+      "outcome": "VISIBLE",
+      "rel_error": null
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.1189766246949646
+     },
+     "bit_identical_to_prerepair": null,
+     "guard_outward_upwinding_holds": false,
+     "min_s_rho": -3.0,
+     "sign_pattern": "mixed"
+    }
+   ],
+   "leg200_prerepair_worst": {
+    "min_s_rho": -0.4,
+    "rel_error_vs_advertised_operator": 18820.0,
+    "relative_residual": 20681.0
+   },
+   "mechanism": "M1 -- line_sweep_solve's radial difference now follows sign(s_rho)",
+   "n_breached_cases": 5,
+   "n_breached_cases_now_visible": 5,
+   "n_breached_cases_silent_before": 5,
+   "n_clean_cases": 4,
+   "n_clean_cases_bit_identical": 4,
+   "uniform_negative_control": {
+    "after_leg217": {
+     "how": "agrees with the independent reference",
+     "outcome": "CORRECT",
+     "rel_error": 2.1052995066451833e-16
+    },
+    "before_leg217": {
+     "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+     "outcome": "SILENT",
+     "rel_error": 1186.6068134497607
+    },
+    "case": "uniformly NEGATIVE s_rho -- the operator is block UPPER bidiagonal and one INWARD sweep is its exact inverse",
+    "relative_residual_against_advertised_operator": 1.5433513227856987e-16,
+    "why_this_control_matters": "leg 200's nine cases are all MIXED-sign, so a repair that simply refused every s_rho < 0 would pass its battery unchanged. This case can only pass if the radial direction is genuinely SELECTED by sign. Lesson 90: a control that cannot come out differently is not a control."
+   },
+   "verdict": "REPAIRED",
+   "zero_speed_case": {
+    "after_leg217": {
+     "how": "agrees with the independent reference",
+     "outcome": "CORRECT",
+     "rel_error": 1.0604192054821131e-16
+    },
+    "bit_identical_to_prerepair": true,
+    "case": "s_rho identically 0 (the module's own ADI control's configuration)",
+    "guard_would_say_holds": false,
+    "note": "the guard's predicate is `min > 0`, so it stays CONSERVATIVE here rather than wrong; the sweep is exact because there is nothing to upwind. The repair does not change this case by a single bit."
+   }
+  },
+  "PCR2_radii_polynomial_radius_gate": {
+   "five_documented_branches_unchanged": {
+    "Z1_exceeds_one": "Z1_EXCEEDS_ONE",
+    "blocked": "BLOCKED_AT_STEP_ONE",
+    "invalid_input_negative_Y0": "INVALID_INPUT",
+    "no_Z1": "NO_Z1",
+    "no_Z2": "NO_Z2"
+   },
+   "guard_reused_not_reinvented": "solver/certificate_guards.py::radius_violation, already called by solver/nk_bounds.py:561",
+   "mechanism": "M2 -- radii_polynomial_status now forms r_min = ((1-Z_1) - sqrt(disc)) / (2 Z_2) and gates `closes` on certificate_guards.radius_violation(r_min); before, `closes` came from the discriminant alone and r_min was never computed",
+   "n_degenerate_now_rejected": 5,
+   "n_positive_controls_still_closing": 3,
+   "rows": [
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.5,
+     "Z_2": 10000.0,
+     "case": "Y_0 = 0 (leg 51's banked value on the a=0 CLM profile), Z_1=0.5, Z_2=1e4",
+     "closes_after_leg217": false,
+     "expected": "reject",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.9,
+     "Z_2": 1.0,
+     "case": "Y_0 = 0, Z_1 = 0.9, Z_2 = 1.0",
+     "closes_after_leg217": false,
+     "expected": "reject",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": -0.0,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "Y_0 = -0.0 (signed zero)",
+     "closes_after_leg217": false,
+     "expected": "reject",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 0.0,
+     "Z_1": 0.0,
+     "Z_2": 0.0,
+     "case": "fully degenerate Y_0 = Z_1 = Z_2 = 0",
+     "closes_after_leg217": false,
+     "expected": "reject",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 1e-08,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "honest certificate (POSITIVE CONTROL -- must still close)",
+     "closes_after_leg217": true,
+     "expected": "close",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 2.0000000794384576e-08,
+     "radius_violation": null,
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 0.0625,
+     "Z_1": 0.5,
+     "Z_2": 1.0,
+     "case": "discriminant exactly 0, double root (POSITIVE CONTROL)",
+     "closes_after_leg217": true,
+     "expected": "close",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 0.25,
+     "radius_violation": null,
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 1.0,
+     "Z_1": 0.1,
+     "Z_2": 1.0,
+     "case": "genuine non-closure (NEGATIVE CONTROL)",
+     "closes_after_leg217": false,
+     "expected": "reject",
+     "guard_agrees": null,
+     "outcome": "CORRECT",
+     "r_min_now_computed": null,
+     "radius_violation": null,
+     "status": "EVALUATED"
+    },
+    {
+     "Y_0": 1e-06,
+     "Z_1": 0.1,
+     "Z_2": 1.0,
+     "case": "the documented closing triple legs 79/128 gate on (POSITIVE CONTROL)",
+     "closes_after_leg217": true,
+     "expected": "close",
+     "guard_agrees": true,
+     "outcome": "CORRECT",
+     "r_min_now_computed": 1.1111124828544483e-06,
+     "radius_violation": null,
+     "status": "EVALUATED"
+    }
+   ],
+   "verdict": "REPAIRED"
+  },
+  "PCR3_leading_order_dtype": {
+   "float_path_bit_identity": [
+    {
+     "bit_identical_to_prerepair": true,
+     "case": "random float rhs"
+    },
+    {
+     "bit_identical_to_prerepair": true,
+     "case": "the exact-0.5 witness, as floats"
+    }
+   ],
+   "integer_cases": [
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 0.0
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.0
+     },
+     "case": "canonical basis vector e_0",
+     "input_dtype": "int64",
+     "output_dtype_after": "float64",
+     "output_dtype_before": "int64"
+    },
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 0.0
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 0.41617993900090167
+     },
+     "case": "small integer rhs",
+     "input_dtype": "int64",
+     "output_dtype_after": "float64",
+     "output_dtype_before": "int64"
+    },
+    {
+     "after_leg217": {
+      "how": "agrees with the independent reference",
+      "outcome": "CORRECT",
+      "rel_error": 0.0
+     },
+     "before_leg217": {
+      "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+      "outcome": "SILENT",
+      "rel_error": 1.0
+     },
+     "case": "indicator mask",
+     "input_dtype": "int64",
+     "output_dtype_after": "float64",
+     "output_dtype_before": "int64"
+    }
+   ],
+   "leg200_prerepair_worst_relative_error": 1.0,
+   "mechanism": "M3 -- leading_order_solve casts rhs to float before allocating np.zeros_like(rhs); its sibling line_sweep_solve always did",
+   "n_integer_cases_now_correct": 3,
+   "n_integer_cases_silent_before": 3,
+   "verdict": "REPAIRED"
+  },
+  "PCR4_stall_verdict_nan_guard": {
+   "attribution_summary": {
+    "healthy_ranking_still_works": true,
+    "healthy_top_ablation": "angular transport OFF",
+    "note": "before the repair the NaN ablation took a RANK in the published attribution table at gain=NaN, flat=False -- presented as an ablation that UN-flattened the ladder",
+    "outcome": "VISIBLE",
+    "poisoned_ranking_raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = nan, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict."
+   },
+   "cases": [
+    {
+     "case": "honest flat ladder (POSITIVE CONTROL)",
+     "expected": "flat",
+     "outcome": "CORRECT",
+     "prose": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+     "raised": null,
+     "reported": "flat",
+     "residual_gain": 1.0512698412698414
+    },
+    {
+     "case": "honest bending ladder (POSITIVE CONTROL)",
+     "expected": "bending",
+     "outcome": "CORRECT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "raised": null,
+     "reported": "bending",
+     "residual_gain": 23.739361702127656
+    },
+    {
+     "case": "both residuals NaN",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = nan, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    },
+    {
+     "case": "NaN at the far end only",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the far end of the ladder (m = 160) has rel_residual = nan, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    },
+    {
+     "case": "NaN at the near end only",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = nan, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    },
+    {
+     "case": "+inf residual",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = inf, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    },
+    {
+     "case": "-inf residual",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = -inf, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    },
+    {
+     "case": "negative residual (an impossible norm)",
+     "expected": "refuse",
+     "outcome": "CORRECT",
+     "prose": null,
+     "raised": "ValueError: stall_verdict: the near end of the ladder (m = 10) has rel_residual = -0.5, which is not a relative residual. A flat/bending verdict on it would be prose asserted over a defect: NaN < 2.0 is False, so this used to be reported as 'bending', and a negative residual as 'flat'. Refusing to issue a verdict.",
+     "reported": "raised",
+     "residual_gain": null
+    }
+   ],
+   "controls_unchanged": [
+    {
+     "case": "honest flat ladder (POSITIVE CONTROL)",
+     "expected": "flat",
+     "outcome": "CORRECT",
+     "prose": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+     "raised": null,
+     "reported": "flat",
+     "residual_gain": 1.0512698412698414
+    },
+    {
+     "case": "honest bending ladder (POSITIVE CONTROL)",
+     "expected": "bending",
+     "outcome": "CORRECT",
+     "prose": "bending => finite ill-conditioning, and more Krylov work would help",
+     "raised": null,
+     "reported": "bending",
+     "residual_gain": 23.739361702127656
+    }
+   ],
+   "leg200_prerepair_nan_prose": "bending => finite ill-conditioning, and more Krylov work would help",
+   "leg200_prerepair_negative_gain": -25.0,
+   "machine_zero_ladder": {
+    "case": "0.0401 -> 0.0 by m = 80, from this module's own docstring",
+    "note": "0.0 is a legitimate residual and is NOT rejected by the new guard; it still reaches the same ZeroDivisionError it reached before, which is a crash and not a silent wrong value. Deliberately unchanged -- repairing it is not one of this leg's four mechanisms.",
+    "raised": "ZeroDivisionError: float division by zero"
+   },
+   "mechanism": "M4 -- stall_verdict raises on a non-finite or negative rel_residual instead of comparing it to 2.0; NaN < 2.0 is False, which used to emit the confident prose 'bending'",
+   "n_poisoned": 6,
+   "n_poisoned_now_refused": 6,
+   "verdict": "REPAIRED"
+  },
+  "PCR5_leg195_114_regression": {
+   "bit_identical": true,
+   "expected_total": 114,
+   "figures_dirty_after_rebuild": "(none -- byte-identical)",
+   "scripts": [
+    {
+     "exit_code": 0,
+     "expected_numbers": 59,
+     "numbers_re_derived": 59,
+     "reports_CLEAN": true,
+     "script": "p2_route_port_v1_bordered_evidence.py",
+     "seconds": 26.3
+    },
+    {
+     "exit_code": 0,
+     "expected_numbers": 55,
+     "numbers_re_derived": 55,
+     "reports_CLEAN": true,
+     "script": "p2_route_port_v2_reach_evidence.py",
+     "seconds": 16.9
+    }
+   ],
+   "total_numbers_re_derived": 114,
+   "verdict": "CLEAN 114/114, unmoved",
+   "what": "leg 60's two reproduction ledgers over the banked Route-PORT prose, the 114 numbers leg 195 (Route-PQVER) independently re-derived"
+  },
+  "PCR6_residual_open_defects": {
+   "leading_order_solve_sign_blind_in_c_l": {
+    "defect": "leading_order_solve hard-codes the backward radial difference regardless of sign(c_l) -- M1's twin in the radial-only preconditioner",
+    "leg200_magnitude_at_c_l_minus_0p5": 26.0,
+    "this_leg": {
+     "how": "finite, plausibly-shaped, wrong; no exception and no flag",
+     "outcome": "SILENT",
+     "rel_error": 1.0554961073780562
+    },
+    "why_not_repaired": "not among this leg's four named mechanisms -- M3 is the DTYPE defect in this function only. Fixing it would put a fifth mechanism in the diff."
+   },
+   "pack_unpack_shape_blind": {
+    "defect": "pack ravels whatever it is given and unpack reshapes to self.shape, so a transposed field round-trips into a different, finite, plausible field",
+    "leg200_relative_error": 1.3204,
+    "round_tripped_without_exception": true,
+    "this_leg_relative_error": 0.564932682866032,
+    "why_not_repaired": "leg 200 reports this as 'one minor extra', not as one of its four mechanisms."
+   },
+   "stall_verdict_reads_the_ladder_positionally": {
+    "ascending": {
+     "flat": false,
+     "residual_gain": 33.0,
+     "work_ratio": 16.0
+    },
+    "defect": "`first, last = rows[0], rows[-1]` is POSITIONAL; identical measurements in descending dims order give the opposite published verdict",
+    "descending": {
+     "flat": true,
+     "residual_gain": 0.030303030303030304,
+     "work_ratio": 0.0625
+    },
+    "still_open": true,
+    "why_not_repaired": "M4 as named is the NaN comparison. Sorting the ladder by m is a second, independent change to the same function."
+   },
+   "summary": "three silent paths survive this leg, all outside its four named mechanisms; the module is NOT closed"
+  },
+  "PCR7_collateral_on_landed_artifacts": {
+   "item_1": {
+    "assertion": "edge = radii_polynomial_status(0.0, 0.0, 0.0); assert edge['status'] == 'EVALUATED' and edge['closes'] is True",
+    "its_stated_intent": "the comment above it reads '# the boundary of the new guard: 0.0 is a legitimate bound, and so is -0.0' -- i.e. it gates the HYPOTHESIS guard, and 0.0 must not be rejected as a hypothesis violation. That intent SURVIVES: status is still EVALUATED.",
+    "leg200_calls_this_case": "'fully degenerate Y_0 = Z_1 = Z_2 = 0' -- one of the four rows of its PCA10 gate, classified SILENT",
+    "outside_this_legs_territory": true,
+    "site": "test_port_certification_regression.py:87-88",
+    "test_exit_code": 1,
+    "what_moved": {
+     "closes": false,
+     "r_min": 0.0,
+     "radius_violation": "r_min is 0.0 <= 0: the theorem concludes a zero INSIDE the ball of radius r_min, and a degenerate or empty ball contains none",
+     "status": "EVALUATED"
+    }
+   },
+   "item_2": {
+    "input": "radii_polynomial_status(-0.0, 0.1, 1.0)",
+    "leg200_calls_this_case": "'Y_0 = -0.0 (signed zero)', classified SILENT",
+    "outside_this_legs_territory": true,
+    "regenerated_and_reverted_by_this_leg": true,
+    "site": "writeup/data/p2_route_pc_v1_regression.json -> cases[Y0_negative_zero]",
+    "what_did_NOT_move": "that JSON's entire `verdict` block -- false_closes 0, 0.0% of the 25 outside-theorem inputs, gate answer 'yes' -- is byte-identical. Only this one case row reclassifies, and it reclassifies from an ACCEPT to a REFUSE on a degenerate ball.",
+    "what_moved": {
+     "closes": false,
+     "r_min": 0.0,
+     "verdict": "CLOSES_LEGITIMATELY -> REJECTED"
+    }
+   },
+   "reading": "neither is a clean-input number moving. Both are exactly the effect leg 128's rejection-layer standard anticipates, on the two inputs leg 200 nominated as fabricated certificates. But amending them is outside this leg's territory, so the repair cannot land silently: see the leg's gate answer."
+  }
+ },
+ "headline": "Leg 217 (Route-PCR) repaired all four mechanisms leg 200 escalated, and the repair is a rejection layer that moves no clean-input number. M1: 5/5 mixed-sign s_rho cases that used to return the exact inverse of a DIFFERENT operator (leg 200's worst: 18820x relative error at min(s_rho) = -0.4, residual 20681x the rhs) now RAISE, while 4/4 non-negative cases are BIT-IDENTICAL to the pre-repair arithmetic and a uniformly-NEGATIVE s_rho -- the control leg 200's all-mixed battery did not have -- is now solved EXACTLY (2.11e-16) rather than refused, which is what distinguishes upwinding by sign from refusing when nervous. M2: 5/5 degenerate balls rejected on r_min with 3/3 honest certificates still closing. M3: 3/3 integer rhs cases exact (worst pre-repair relative error 1.000, an exact 0.5 returned as 0) with the float path bit-identical. M4: 6/6 poisoned ladders refused and attribution_summary no longer RANKS a NaN ablation, with both honest ladders keeping their exact verdicts. THE LOAD-BEARING REGRESSION HOLDS: leg 195's 114/114 re-derives CLEAN (114/114) and fig59/fig60 rebuild byte-identically. BUT THE MODULE IS NOT CLOSED: three silent paths outside the four named mechanisms survive by design (leading_order_solve sign-blind in c_l at 26.0x; stall_verdict reading the ladder positionally, 16.0 -> 0.0625; pack/unpack shape-blind at 1.32), and TWO landed artifacts outside this leg's territory encode the pre-repair accept on degenerate input -- test_port_certification_regression.py:88 asserts closes=True on (Y_0, Z_1, Z_2) = (0, 0, 0), and p2_route_pc_v1_regression.json's Y0_negative_zero row reclassifies CLOSES_LEGITIMATELY -> REJECTED with its summary block byte-identical.",
+ "leg": 217,
+ "leg195_114_regression_clean": true,
+ "mechanisms_repaired": [
+  "M1 line_sweep_solve sign(s_rho)",
+  "M2 radii_polynomial_status r_min",
+  "M3 leading_order_solve float cast",
+  "M4 stall_verdict NaN/negative guard"
+ ],
+ "module_closed": false,
+ "module_repaired": "solver/port_certification.py",
+ "n_mechanisms_repaired": 4,
+ "prior_leg": {
+  "branch": "leg/200-pca-v1",
+  "gate_answer": "YES",
+  "leg": 200,
+  "n_silent_gates": "7 of 12",
+  "route": "PCA"
+ },
+ "route": "PCR",
+ "runtime_s": 44.25
+}
