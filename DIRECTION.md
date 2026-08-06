@@ -1402,6 +1402,35 @@ open slot, the honest fallback is one of the still-available lower-priority rese
 from earlier refills (148, 109, 168, 179's eventual correction leg once 183 lands) rather
 than a fabricated new math thread.
 
+**DM update, 2026-08-06 — two significant landings recorded; checked `git log` again for
+anything fresh beyond what the coordinator relayed; found nothing new this pass, said
+honestly rather than padded.**
+
+- **Leg 164 (CSD) resolved leg 162's ambiguity independently, no user ruling needed.** The
+  `a=0` CLM linearization admits NO invariant compact-support representation — a
+  Luzin-Privalov uniqueness argument, 14 orders of magnitude of positive control. Leg 126's
+  completeness claim stands as scoped; leg 162's corner is confirmed a genuinely different
+  object, not a reversal of anything banked. PROGRESS.md item 0 closed.
+- **Leg 183 (XU8) answered NOT AT ALL** — Xu §8's no-go does not overlap Theorem NGX (leg
+  127) on 5 independently-checked disjointness axes. **Leg 179's publication bundle is now
+  CONFIRMED, not provisional** — ready for the user's review, no outstanding blocker. The
+  external review's item 1 is closed, alongside item 2 (leg 184, already recorded above).
+  Item 3 (leg 178) stays in flight; item 4 stands confirmed with no action needed. Of the
+  four items, only 3 is still open.
+
+**On the one open slot: no new candidate found this pass, said explicitly rather than
+forced.** Re-checked `git log` for anything landed beyond leg 185 that might open fresh
+ground the way leg 125's stall did last time — nothing has landed since. Leg 164's own
+technique (a Luzin-Privalov uniqueness argument establishing non-invariance) is genuinely
+new machinery this repository hasn't used before, but every place it might obviously apply
+next (the interpolation-space question, leg 182; the collocation-basis space test, leg 177)
+is already a live or reserve leg whose own construction may or may not need this technique —
+drafting a leg presupposing that it does would be presupposing those legs' still-unknown
+paths, not extending known ground the way leg 185 did. **Recommend holding the slot**, or
+filling it from the existing lower-priority pool (148, 109, 168's sibling regression
+closures, or a leg-179-adjacent housekeeping item once the user has reviewed the now-
+confirmed bundle) rather than manufacturing new math-shaped content this turn.
+
 ---
 
 ## THE `NEXT` CALL — recommendation to the orchestrator (OVERTAKEN 2026-08-06: `NG`'s gate
