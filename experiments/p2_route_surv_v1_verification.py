@@ -1,13 +1,30 @@
-"""Leg 188 -- ROUTE-SURV: is leg 129's n>=3 -> n>=4 floor correction NECESSARY,
-or is it a judgment call?
+"""Leg 188 -- ROUTE-SURV: is leg 129's n>=3 -> n>=4 floor correction FORCED, and
+does adopting it piecemeal create a fresh cross-module inconsistency?
 
 Leg 129 (SUR) is parked as escalation #4. Its repair makes both dealias masks cut
 STRICTLY (`k < n/3`, i.e. `cut = (n-1)//3`), which moves the minimum admissible
 Boussinesq grid from n>=3 to n>=4 and flips ONE of leg 133's 90 banked battery
-verdicts. This runner asks the ONE question DIRECTION.md section 188 poses: does
-`n=3 -> rejected` follow NECESSARILY from the strict rule (no alternative
-admissible reading), or did leg 129's repair make a choice a different, equally
-defensible reading would not have made?
+verdicts.
+
+THE FRAMING WAS CORRECTED MID-LEG. This leg's novelty pass (committed FIRST, at
+c273084) found the ORIGINAL premise false: DIRECTION.md section 188 says the strict
+rule is "already cited and used elsewhere in this repository, e.g. leg 120's own
+repair", but leg 120's landed commit says "escalated, not patched" and NO shipped
+module on `main` uses the strict cut. DIRECTION.md section 188 still carries that
+false premise verbatim as of this commit; the corrected framing came from the
+Decision Maker directly and is what this runner answers. It has two parts:
+
+  (a) Taking the strict rule ON ITS OWN MATHEMATICAL TERMS -- not "already used"
+      but as a rule that COULD be adopted -- is n=3's exclusion FORCED, with no
+      alternative admissible reading of the rule admitting n=3? Sections V0-V8.
+
+  (b) Now that adoption status is known, does strictifying `solver/boussinesq.py`'s
+      mask ALONE leave the other four named `n/3` sites internally inconsistent
+      with it on the SAME ADMISSIBILITY question? Sections B1-B5.
+
+Part (b) turns out to rest on a SECOND false premise, which B1/B2 measure rather
+than argue: three of the five named sites are diagnostic reporting bands that gate
+no grid, and the one remaining real mask is strictified by the SAME leg-129 diff.
 
 READ-ONLY, in every sense that matters here:
   * `leg/129-sur-v1` is READ (git show) and never merged.
@@ -66,6 +83,8 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from solver.boussinesq import dealias_mask2d, solve_boussinesq, wavenumbers2d  # noqa: E402
+from solver.gclm import solve_gclm  # noqa: E402
+from solver.spectral_utils import dealias_mask as spectral_dealias_mask  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "writeup", "data", "p2_route_surv_v1_verification.json")
@@ -104,12 +123,15 @@ def mask2d_with(n, cutfn):
     return (np.abs(KX) <= c) & (np.abs(KY) <= c)
 
 
-def guard_accepts(n, cutfn):
+def guard_accepts_exact(n, cutfn):
     """solve_boussinesq's OWN guard condition, evaluated on a given mask.
 
     main, solver/boussinesq.py:352 --
         if not np.any(mask & (Ksq > 0.0)): raise ValueError(...)
     so the grid is accepted iff the mask retains at least one non-constant mode.
+
+    This is the LITERAL form: it materializes the full n x n mask. It is O(n^2)
+    in memory and time, so the 1..5000 census below cannot use it directly.
     """
     k = np.fft.fftfreq(n, d=1.0 / n)
     KX, KY = np.meshgrid(k, k, indexing="ij")
@@ -117,7 +139,51 @@ def guard_accepts(n, cutfn):
     return bool(np.any(mask2d_with(n, cutfn) & (Ksq > 0.0)))
 
 
+def guard_accepts(n, cutfn):
+    """O(n) form of the same predicate, used for the 1..5000 census.
+
+    The 2D mask is a TENSOR PRODUCT of the 1D band (`|kx| <= c AND |ky| <= c`),
+    so it retains a non-constant mode iff the 1D band does. This is not assumed:
+    `V0` below checks the two forms agree at every n = 1..400, including all the
+    marginal 3 | n cases, before any census result is reported.
+    """
+    k = np.fft.fftfreq(n, d=1.0 / n)
+    return bool(np.any((np.abs(k) <= cutfn(n)) & (np.abs(k) > 0.0)))
+
+
 results = {"leg": 188, "route": "SURV", "reads_parked_branch": PARKED, "merges": None}
+
+# ===========================================================================
+# V0 -- THE O(n) PREDICATE IS THE O(n^2) ONE, CHECKED NOT ASSUMED
+# ===========================================================================
+hdr("V0  THE FAST GUARD PREDICATE AGREES WITH THE LITERAL n x n MASK")
+
+v0_rows, v0_bad = 0, []
+for n_ in range(1, 401):
+    for nm, fn in (("loose", cut_loose), ("strict", cut_strict),
+                   ("overstrict", cut_overstrict)):
+        fast, exact = guard_accepts(n_, fn), guard_accepts_exact(n_, fn)
+        v0_rows += 1
+        if fast != exact:
+            v0_bad.append({"n": n_, "cut": nm, "fast": fast, "exact": exact})
+v0_ok = not v0_bad
+print(f"  (n, cut) pairs checked against the literal n x n mask : {v0_rows}")
+print(f"  disagreements                                         : {len(v0_bad)}")
+print(f"  marginal 3 | n grids inside the checked range         : "
+      f"{len([n_ for n_ in range(1, 401) if n_ % 3 == 0])}")
+if not v0_ok:
+    print(f"  VOID: the fast predicate is not the guard. {v0_bad[:5]}")
+    sys.exit(1)
+
+results["V0_fast_predicate_equals_literal_mask"] = {
+    "range_checked": [1, 400],
+    "cuts_checked": ["loose", "strict", "overstrict"],
+    "pairs_checked": v0_rows,
+    "disagreements": len(v0_bad),
+    "marginal_grids_in_range": len([n_ for n_ in range(1, 401) if n_ % 3 == 0]),
+    "reason": ("the 2D mask is the tensor product of the 1D band, so it retains a "
+               "non-constant mode iff the 1D band does"),
+}
 
 # ===========================================================================
 # V1 -- VERDICT-DIFFERENCE CENSUS, and the control that can report otherwise
@@ -295,8 +361,18 @@ for nm, b in (("n=3 loose ", b3_loose), ("n=3 strict", b3_strict),
               ("n=4 loose ", b4_loose), ("n=4 strict", b4_strict)):
     print(f"  {nm}: top retained K = {b['top_retained_mode']}, "
           f"alias coefficient |.| = {b['alias_coefficient_abs']}")
-control_clean = (b4_loose["alias_coefficient_abs"] == 0.0)
-print(f"  POSITIVE CONTROL n=4 (3 does not divide 4) reads exactly 0.0 : {control_clean}")
+# The n=4 control is roundoff, not exactly 0.0: the exact continuum coefficient
+# at K is zero, and float64 FFT roundoff on an O(1) field leaves a residue near
+# machine epsilon. What matters is the SEPARATION from the n=3 alias, reported in
+# decades rather than as a boolean.
+CONTROL_TOL = 1e-20
+control_clean = (b4_loose["alias_coefficient_abs"] < CONTROL_TOL)
+control_decades = float(np.log10(b3_loose["alias_coefficient_abs"]
+                                 / max(b4_loose["alias_coefficient_abs"], 1e-323)))
+print(f"  POSITIVE CONTROL n=4 (3 does not divide 4) reads {b4_loose['alias_coefficient_abs']:.4e}"
+      f"  < {CONTROL_TOL:.0e} : {control_clean}")
+print(f"  separation between the n=3 alias and the n=4 control : "
+      f"{control_decades:.1f} decades")
 ratio = (b3_loose["alias_coefficient_abs"] / b3_loose["field_own_coefficient_abs"]
          if b3_loose["alias_coefficient_abs"] else None)
 print(f"  n=3 loose: alias as a fraction of the field's own amplitude  : {ratio}")
@@ -304,7 +380,9 @@ print(f"  n=3 loose: alias as a fraction of the field's own amplitude  : {ratio}
 results["V4_bowman_experiment"] = {
     "n3_loose": b3_loose, "n3_strict": b3_strict,
     "n4_loose": b4_loose, "n4_strict": b4_strict,
-    "positive_control_n4_reads_exactly_zero": control_clean,
+    "positive_control_n4_below_tolerance": control_clean,
+    "positive_control_tolerance": CONTROL_TOL,
+    "n3_alias_over_n4_control_decades": control_decades,
     "n3_loose_alias_over_field_amplitude": ratio,
     "meaning": ("under the LOOSE cut an n=3 grid retains k = +-1, whose square reaches "
                 "k = 2 == -1 (mod 3) and lands back ON a retained mode: the whole "
@@ -323,13 +401,33 @@ readings = []
 
 
 def add(name, source, retained_mask, verdict_note):
+    """Record a reading, and test it against the ONE contract every consumer needs.
+
+    All four consumer modules (gclm, fractional_gclm, boussinesq,
+    fractional_boussinesq) evolve REAL fields. A dealias mask that is not
+    conjugate-symmetric -- one that keeps +k but drops -k -- turns a real field
+    complex, which is not a stricter-or-looser reading of the 2/3 rule but a mask
+    the solvers cannot use at all. That is measured here, not argued: a real test
+    field is masked and its imaginary residue read back.
+    """
     keeps = sorted({int(abs(kk[i])) for i in range(n) if retained_mask[i]})
     nonconst = any(v != 0 for v in keeps)
+    # conjugate symmetry: k and -k must be kept or dropped together
+    idx = {round(float(kk[i])): i for i in range(n)}
+    conj_sym = all(bool(retained_mask[i]) == bool(retained_mask[idx[-round(float(kk[i]))]])
+                   for i in range(n))
+    rng_ = np.random.default_rng(0)
+    f_real = rng_.standard_normal(n)
+    f_back = np.fft.ifft(np.fft.fft(f_real) * retained_mask)
+    imag_residue = float(np.max(np.abs(f_back.imag)))
     readings.append({
         "reading": name, "source": source,
         "wavenumbers_retained_at_n3": keeps,
         "retains_a_non_constant_mode": nonconst,
-        "n3_admissible_under_this_reading": nonconst,
+        "mask_is_conjugate_symmetric": conj_sym,
+        "imaginary_residue_on_a_real_field": imag_residue,
+        "usable_by_the_solvers_at_all": conj_sym,
+        "n3_admissible_under_this_reading": bool(nonconst and conj_sym),
         "note": verdict_note,
     })
 
@@ -366,7 +464,15 @@ add("zero the highest aliased_fraction = 1/3 of the wavenumber components",
 
 for r in readings:
     print(f"  {r['reading']:<52} keeps |k| in {r['wavenumbers_retained_at_n3']}"
+          f"  conj-sym: {str(r['mask_is_conjugate_symmetric']):>5}"
+          f"  imag residue: {r['imaginary_residue_on_a_real_field']:.2e}"
           f"  -> n=3 admissible: {r['n3_admissible_under_this_reading']}")
+
+unusable = [r["reading"] for r in readings if not r["usable_by_the_solvers_at_all"]]
+if unusable:
+    print(f"\n  readings DISQUALIFIED as unusable (not conjugate-symmetric): {unusable}")
+    print("  such a mask returns a complex field from a real one; it is not a looser")
+    print("  reading of the 2/3 rule, it is a mask no consumer module can run.")
 
 admits = [r["reading"] for r in readings if r["n3_admissible_under_this_reading"]]
 denies = [r["reading"] for r in readings if not r["n3_admissible_under_this_reading"]]
@@ -382,6 +488,8 @@ results["V5_alternative_reading_census"] = {
     "n_admitting_n3": len(admits),
     "n_denying_n3": len(denies),
     "admitting_readings_that_are_not_the_loose_cut_leg120_measured_defective": non_loose_admits,
+    "readings_disqualified_as_not_conjugate_symmetric": unusable,
+    "n_disqualified": len(unusable),
 }
 
 # ===========================================================================
@@ -421,7 +529,7 @@ def live_accept(nn):
     om = rng.standard_normal((nn, nn))
     th = rng.standard_normal((nn, nn))
     try:
-        solve_boussinesq(om, th, t_end=1e-6, dt=1e-6)
+        solve_boussinesq(om, th, t_max=1e-6, dt_max=1e-6, max_steps=2)
         return {"n": nn, "accepted": True, "error": None}
     except ValueError as e:
         return {"n": nn, "accepted": False, "error": str(e).split("\n")[0][:160]}
@@ -555,11 +663,305 @@ results["premise_check"] = {
 }
 
 # ===========================================================================
+# PART (b) -- THE CROSS-MODULE CONSISTENCY QUESTION
+#
+# The corrected framing asks: if boussinesq.py's mask ALONE goes strict, are the
+# other four `n/3` sites left internally inconsistent with it ON THE SAME
+# ADMISSIBILITY QUESTION? Answering that needs two things the original framing
+# assumed rather than checked: (B1) whether those sites answer an admissibility
+# question at all, and (B2) whether leg 129 really changes boussinesq.py alone.
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# B1 -- SITE CENSUS: which `n/3` sites are MASKS and which are DIAGNOSTICS?
+# ---------------------------------------------------------------------------
+hdr("B1  EVERY n/3 SITE IN solver/, CLASSIFIED BY WHAT IT ACTUALLY GATES")
+
+# The five sites the corrected framing names, plus the consuming line that
+# decides the classification. Each `consumer` string is verified to be PRESENT
+# in that file's source on main -- quoted evidence, not assertion.
+SITES = [
+    {"file": "solver/spectral_utils.py", "line": 36,
+     "cut_text": "return wavenumbers(n) <= n / 3.0",
+     "consumer": "return wavenumbers(n) <= n / 3.0",
+     "kind": "DEALIAS_MASK",
+     "why": "the expression IS the returned mask; callers multiply the spectrum by it"},
+    {"file": "solver/boussinesq.py", "line": 153,
+     "cut_text": "cut = n / 3.0",
+     "consumer": "return (np.abs(KX) <= cut) & (np.abs(KY) <= cut)",
+     "kind": "DEALIAS_MASK",
+     "why": "feeds dealias_mask2d's returned mask, which solve_boussinesq guards on"},
+    {"file": "solver/boussinesq.py", "line": 419,
+     "cut_text": "k_cut = n / 3.0",
+     "consumer": "tail_mask = (KX * KX + KY * KY) > (0.75 * k_cut) ** 2",
+     "kind": "DIAGNOSTIC_BAND",
+     "why": "defines a tail-ENERGY reporting band at 0.75*k_cut; gates no grid"},
+    {"file": "solver/fractional_boussinesq.py", "line": 259,
+     "cut_text": "k_cut = self.n / 3.0",
+     "consumer": "band_mask = (self.kmag > 0.9 * k_cut) & (self.kmag <= k_cut)",
+     "kind": "DIAGNOSTIC_BAND",
+     "why": "tail_fraction's reporting band; the module's real mask is dealias_mask2d"},
+    {"file": "solver/fractional_gclm.py", "line": 265,
+     "cut_text": "k_cut = self.n / 3.0",
+     "consumer": "keep = self.k <= k_cut",
+     "kind": "DIAGNOSTIC_BAND",
+     "why": "tail-ratio reporting band; the module's real mask is dealias_mask"},
+]
+
+main_srcs = {p: git_show("main", p) for p in
+             {s["file"] for s in SITES} | {"solver/gclm.py"}}
+
+
+def has_code_line(src, text):
+    """Is `text` present as an actual CODE line, not as prose quoting it?
+
+    Leg 129's repaired docstrings quote the old line verbatim inside backticks
+    ("This line used to read `cut = n / 3.0`"), so a naive substring test reports
+    the loose cut as still present in a file that no longer contains it. Matching
+    whole stripped lines removes that false positive.
+    """
+    return any(ln.strip() == text for ln in src.splitlines())
+
+
+for s in SITES:
+    src = main_srcs[s["file"]]
+    s["cut_text_present_on_main"] = has_code_line(src, s["cut_text"])
+    s["consumer_present_on_main"] = has_code_line(src, s["consumer"])
+    print(f"  {s['file']}:{s['line']:<4} {s['kind']:<16} "
+          f"cut_found={s['cut_text_present_on_main']} "
+          f"consumer_found={s['consumer_present_on_main']}")
+    print(f"      consumer: {s['consumer']}")
+
+all_sites_verified = all(s["cut_text_present_on_main"] and s["consumer_present_on_main"]
+                         for s in SITES)
+n_masks = sum(1 for s in SITES if s["kind"] == "DEALIAS_MASK")
+n_diag = sum(1 for s in SITES if s["kind"] == "DIAGNOSTIC_BAND")
+print(f"\n  every quoted line located verbatim on main : {all_sites_verified}")
+print(f"  sites that are REAL dealias masks          : {n_masks}")
+print(f"  sites that are DIAGNOSTIC reporting bands  : {n_diag}")
+print("  a diagnostic band gates no grid, so it cannot be inconsistent with a mask")
+print("  ON AN ADMISSIBILITY QUESTION -- it does not answer that question at all.")
+
+results["B1_site_census"] = {
+    "sites": SITES,
+    "every_quoted_line_located_verbatim_on_main": all_sites_verified,
+    "n_dealias_masks": n_masks,
+    "n_diagnostic_bands": n_diag,
+    "total_n_over_3_sites_in_solver": len(SITES),
+}
+
+# ---------------------------------------------------------------------------
+# B2 -- DOES LEG 129 REALLY CHANGE boussinesq.py ALONE?
+# ---------------------------------------------------------------------------
+hdr("B2  WHAT LEG 129'S DIFF ACTUALLY STRICTIFIES")
+
+parked_srcs = {p: git_show(PARKED, p) for p in main_srcs}
+site_status = []
+for s in SITES:
+    p_src = parked_srcs[s["file"]]
+    still_loose = has_code_line(p_src, s["cut_text"])
+    site_status.append({
+        "file": s["file"], "line": s["line"], "kind": s["kind"],
+        "loose_cut_still_present_on_parked_branch": still_loose,
+        "strictified_by_leg129": not still_loose,
+    })
+    print(f"  {s['file']}:{s['line']:<4} {s['kind']:<16} "
+          f"strictified by leg 129 = {not still_loose}")
+
+masks_strictified = [r for r in site_status
+                     if r["kind"] == "DEALIAS_MASK" and r["strictified_by_leg129"]]
+diags_strictified = [r for r in site_status
+                     if r["kind"] == "DIAGNOSTIC_BAND" and r["strictified_by_leg129"]]
+files_touched = sorted({r["file"] for r in site_status if r["strictified_by_leg129"]})
+print(f"\n  dealias masks strictified      : {len(masks_strictified)} of {n_masks}")
+print(f"  diagnostic bands strictified   : {len(diags_strictified)} of {n_diag}")
+print(f"  solver files whose cut changed : {files_touched}")
+premise_b_true = (files_touched == ["solver/boussinesq.py"])
+print(f"  corrected framing's premise 'boussinesq.py ALONE' holds : {premise_b_true}")
+
+results["B2_what_leg129_strictifies"] = {
+    "site_status": site_status,
+    "dealias_masks_strictified": len(masks_strictified),
+    "dealias_masks_total": n_masks,
+    "diagnostic_bands_strictified": len(diags_strictified),
+    "solver_files_whose_cut_changed": files_touched,
+    "premise_boussinesq_alone_holds": premise_b_true,
+    "finding": ("leg 129 strictifies BOTH real dealias masks, not boussinesq.py alone; "
+                "the second premise handed to this leg is false in the same direction "
+                "as the first"),
+}
+
+# ---------------------------------------------------------------------------
+# B3 -- CONSUMER CENSUS: who actually calls the two masks?
+# ---------------------------------------------------------------------------
+hdr("B3  WHO CONSUMES THE TWO REAL MASKS (the blast radius of leg 129's repair)")
+
+CONSUMERS = [
+    ("solver/gclm.py", 178, "mask = dealias_mask(n)", "dealias_mask (1D)"),
+    ("solver/fractional_gclm.py", 195, "self.mask = dealias_mask(self.n)", "dealias_mask (1D)"),
+    ("solver/boussinesq.py", 348, "mask = dealias_mask2d(n)", "dealias_mask2d (2D)"),
+    ("solver/fractional_boussinesq.py", 218, "self.mask = dealias_mask2d(self.n)",
+     "dealias_mask2d (2D)"),
+]
+consumer_rows = []
+for path, line, text, which in CONSUMERS:
+    src = main_srcs.get(path) or git_show("main", path)
+    main_srcs[path] = src
+    found = has_code_line(src, text)
+    named_in_escalation4 = (path == "solver/boussinesq.py")
+    consumer_rows.append({
+        "file": path, "line": line, "call": text, "mask": which,
+        "call_present_on_main": found,
+        "named_in_escalation_4": named_in_escalation4,
+    })
+    print(f"  {path:<34}:{line:<4} {which:<20} found={found}  "
+          f"named in escalation #4 = {named_in_escalation4}")
+
+unnamed = [r["file"] for r in consumer_rows if not r["named_in_escalation_4"]]
+print(f"\n  consumer modules NOT named in escalation #4 : {len(unnamed)}  {unnamed}")
+
+results["B3_consumer_census"] = {
+    "consumers": consumer_rows,
+    "n_consumers": len(consumer_rows),
+    "consumer_modules_not_named_in_escalation_4": unnamed,
+    "n_not_named": len(unnamed),
+}
+
+# ---------------------------------------------------------------------------
+# B4 -- THE NEW REFUSAL ON THE 1D PATH, WHICH ESCALATION #4 DOES NOT MENTION
+# ---------------------------------------------------------------------------
+hdr("B4  LEG 129 ADDS A HARD REFUSAL TO dealias_mask; solve_gclm HAS NO GUARD OF ITS OWN")
+
+PARKED_RAISE = "dealias_mask: n={n} retains no non-mean mode under the 2/3 rule"
+parked_spectral = parked_srcs["solver/spectral_utils.py"]
+raise_added = "retains no non-mean mode under the 2/3 rule" in parked_spectral
+raise_on_main = "retains no non-mean mode under the 2/3 rule" in main_srcs["solver/spectral_utils.py"]
+print(f"  parked dealias_mask raises on a degenerate grid : {raise_added}")
+print(f"  main's dealias_mask raises on a degenerate grid : {raise_on_main}")
+
+# main's 1D mask at small n, called live
+live_1d = []
+for nn in (1, 2, 3, 4, 5, 6):
+    try:
+        m = spectral_dealias_mask(nn)
+        kk1 = np.fft.rfftfreq(nn, d=1.0 / nn)
+        live_1d.append({"n": nn, "raised": False,
+                        "non_mean_modes_retained": int(np.sum(m & (kk1 > 0)))})
+    except Exception as e:                                   # noqa: BLE001
+        live_1d.append({"n": nn, "raised": True, "error": type(e).__name__})
+    # the parked predicate, rebuilt from its own quoted source (never imported)
+    live_1d[-1]["parked_cut"] = int((nn - 1) // 3)
+    live_1d[-1]["parked_would_raise"] = bool((nn - 1) // 3 < 1)
+for r in live_1d:
+    print(f"    n={r['n']}: main retains {r.get('non_mean_modes_retained')} non-mean mode(s), "
+          f"parked cut = {r['parked_cut']}, parked raises = {r['parked_would_raise']}")
+
+new_refusals = [r["n"] for r in live_1d
+                if not r.get("raised", False) and r["parked_would_raise"]]
+print(f"  grids where main returns a mask but the repair REFUSES : {new_refusals}")
+
+# does solve_gclm guard its own grid size?
+gclm_src = main_srcs["solver/gclm.py"]
+gclm_has_floor = any(f"n < {j}" in gclm_src for j in (1, 2, 3, 4, 5))
+gclm_has_mean_guard = "retaining only the mean mode" in gclm_src
+print(f"  solver/gclm.py hardcodes a grid floor            : {gclm_has_floor}")
+print(f"  solver/gclm.py has boussinesq's mean-mode guard  : {gclm_has_mean_guard}")
+
+live_gclm = []
+for nn in (3, 4):
+    rng = np.random.default_rng(0)
+    om = rng.standard_normal(nn)
+    try:
+        solve_gclm(om, t_max=1e-6, dt_max=1e-6, max_steps=2)
+        live_gclm.append({"n": nn, "accepted_on_main": True, "error": None})
+    except Exception as e:                                   # noqa: BLE001
+        live_gclm.append({"n": nn, "accepted_on_main": False,
+                          "error": f"{type(e).__name__}: {str(e).splitlines()[0][:120]}"})
+for r in live_gclm:
+    print(f"    solve_gclm(n={r['n']}) on main: accepted = {r['accepted_on_main']}"
+          + (f"  [{r['error'][:80]}]" if r["error"] else ""))
+
+gclm_gains_refusal = bool(live_gclm[0]["accepted_on_main"] and 3 in new_refusals)
+print(f"  => solve_gclm(n=3) runs today and would REFUSE after the repair : "
+      f"{gclm_gains_refusal}")
+
+results["B4_new_refusal_on_the_1d_path"] = {
+    "parked_dealias_mask_raises_on_degenerate_grid": raise_added,
+    "main_dealias_mask_raises_on_degenerate_grid": raise_on_main,
+    "main_1d_mask_at_small_n": live_1d,
+    "grids_where_main_returns_a_mask_but_repair_refuses": new_refusals,
+    "gclm_hardcodes_a_grid_floor": gclm_has_floor,
+    "gclm_has_the_boussinesq_mean_mode_guard": gclm_has_mean_guard,
+    "live_solve_gclm_on_main": live_gclm,
+    "solve_gclm_gains_a_refusal_it_does_not_have_today": gclm_gains_refusal,
+    "finding": ("the repair's behaviour change is NOT confined to boussinesq.py: "
+                "solver/gclm.py has no grid guard of its own, so it inherits a new "
+                "ValueError at n <= 3 through spectral_utils.dealias_mask -- a module "
+                "escalation #4 never names"),
+}
+
+# ---------------------------------------------------------------------------
+# B5 -- THE ONE REAL MASK/DIAGNOSTIC MISMATCH, AND ITS MEASURED MAGNITUDE
+# ---------------------------------------------------------------------------
+hdr("B5  AT 3 | n THE DIAGNOSTIC BAND OUTRUNS THE REPAIRED MASK BY EXACTLY ONE MODE")
+
+mismatch_rows = []
+for nn in (32, 64, 96, 99, 128, 201, 256):
+    kk1 = np.fft.rfftfreq(nn, d=1.0 / nn)
+    keep_loose = kk1 <= nn / 3.0            # fractional_gclm.py:267 verbatim
+    keep_strict = kk1 <= (nn - 1) // 3      # what the repaired mask retains
+    extra = int(np.sum(keep_loose & ~keep_strict))
+    # the measured consequence: the diagnostic is a max-ratio, and every mode the
+    # repaired mask drops carries identically zero power after masking.
+    rng = np.random.default_rng(0)
+    w_hat = (rng.standard_normal(kk1.size) + 1j * rng.standard_normal(kk1.size))
+    w_hat_masked = w_hat * keep_strict      # what the solver's state actually is
+    pk = np.abs(w_hat_masked) ** 2
+    hi = int(np.searchsorted(kk1, 0.9 * (nn / 3.0)))
+    b_loose = pk[hi:][keep_loose[hi:]]
+    b_strict = pk[hi:][keep_strict[hi:]]
+    t_loose = float(b_loose.max() / (pk.max() + 1e-300)) if b_loose.size else 0.0
+    t_strict = float(b_strict.max() / (pk.max() + 1e-300)) if b_strict.size else 0.0
+    mismatch_rows.append({
+        "n": nn, "three_divides_n": nn % 3 == 0,
+        "modes_in_diagnostic_band_not_in_repaired_mask": extra,
+        "tail_ratio_with_loose_diagnostic_band": t_loose,
+        "tail_ratio_with_strict_diagnostic_band": t_strict,
+        "abs_difference": abs(t_loose - t_strict),
+    })
+    r = mismatch_rows[-1]
+    print(f"    n={nn:>4}  3|n={str(r['three_divides_n']):>5}  extra modes={extra}  "
+          f"tail ratio {t_loose:.6e} vs {t_strict:.6e}  |diff| = {r['abs_difference']:.3e}")
+
+extra_at_div3 = sorted({r["modes_in_diagnostic_band_not_in_repaired_mask"]
+                        for r in mismatch_rows if r["three_divides_n"]})
+extra_at_nondiv3 = sorted({r["modes_in_diagnostic_band_not_in_repaired_mask"]
+                           for r in mismatch_rows if not r["three_divides_n"]})
+max_diff = max(r["abs_difference"] for r in mismatch_rows)
+print(f"\n  extra modes at 3 | n     : {extra_at_div3}")
+print(f"  extra modes at 3 not | n : {extra_at_nondiv3}")
+print(f"  largest tail-ratio difference across all tested grids : {max_diff:.3e}")
+print("  the statistic is a MAX over the band and the extra mode is identically zero")
+print("  after masking, so the mismatch moves no reported number.")
+
+results["B5_diagnostic_band_mismatch"] = {
+    "rows": mismatch_rows,
+    "extra_modes_at_multiples_of_3": extra_at_div3,
+    "extra_modes_at_non_multiples_of_3": extra_at_nondiv3,
+    "largest_absolute_tail_ratio_difference": max_diff,
+    "statistic_form": "band.max() / pk.max(), fractional_gclm.py:296-297",
+    "finding": ("a real but INCONSEQUENTIAL mismatch: exactly one extra wavenumber at "
+                "3 | n, carrying identically zero power after masking, inside a max-based "
+                "ratio -- the reported diagnostic moves by 0.0"),
+}
+
+# ===========================================================================
 # GATE
 # ===========================================================================
 hdr("GATE -- ROUTE-SURV")
 
 conditions = {
+    "V0 the fast guard predicate is the literal n x n mask": v0_ok,
     "V1 acceptance differs at exactly one grid, n=3": (len(flips_strict) == 1
                                                        and flips_strict == [3]),
     "V1 control reports a different count": control_ok,
@@ -567,8 +969,8 @@ conditions = {
     "V3 the guard is condition-based and leg 129 left it verbatim": (
         guard_on_main and guard_on_parked and not hardcoded_floor_main
         and not hardcoded_floor_parked),
-    "V4 the loose n=3 band is genuinely aliased, control at n=4 reads 0.0": (
-        b3_loose["alias_coefficient_abs"] > 0.0 and control_clean),
+    "V4 the loose n=3 band is genuinely aliased, n=4 control is clean": (
+        b3_loose["alias_coefficient_abs"] > 1e-3 and control_clean),
     "V5 no reading other than the measured-defective loose cut admits n=3": (
         len(non_loose_admits) == 0),
     "V6 no power of two is divisible by 3": not any_div3,
@@ -581,30 +983,85 @@ for k, v in conditions.items():
     print(f"  [{'PASS' if v else 'FAIL'}]  {k}")
 all_pass = all(conditions.values())
 
-answer = "NECESSARY" if all_pass else "A JUDGMENT CALL"
-print(f"\n  GATE ANSWER: {answer}")
-print("  -- CONDITIONAL on adopting the strict cut, which main has NOT done in any")
-print("     shipped module. The choice point that remains is UPSTREAM of n=3: whether")
-print("     to make the cut strict at all. Given strict, n=3 is forced.")
-print("  This leg merges nothing and flips no verdict. Escalation #4 stands, for the user.")
+answer_a = "FORCED" if all_pass else "NOT FORCED"
+print(f"\n  GATE (a) -- is n=3's exclusion under the strict rule mathematically FORCED?")
+print(f"     ANSWER: {answer_a}")
+print("     Forced as MATH, and independent of adoption status: no reading other than")
+print("     the one leg 120 measured defective retains a non-constant mode at n=3.")
+print("     It remains CONDITIONAL on adopting strict, which no shipped module does.")
+
+# ---- (b) --------------------------------------------------------------------
+b_conditions = {
+    "B1 every quoted cut and consumer line located verbatim on main": all_sites_verified,
+    "B1 three of the five n/3 sites are diagnostic bands, not masks": (n_diag == 3
+                                                                       and n_masks == 2),
+    "B2 leg 129 strictifies BOTH real masks, not boussinesq.py alone": (
+        len(masks_strictified) == n_masks and not premise_b_true),
+    "B2 leg 129 strictifies no diagnostic band": len(diags_strictified) == 0,
+    "B5 the diagnostic mismatch moves no reported number": max_diff == 0.0,
+}
+for k, v in b_conditions.items():
+    print(f"  [{'PASS' if v else 'FAIL'}]  {k}")
+
+inconsistency_created = not all(b_conditions.values())
+answer_b = "YES (inconsistency created)" if inconsistency_created else "NO"
+print(f"\n  GATE (b) -- does strictifying boussinesq.py alone leave the other four")
+print(f"     modules internally inconsistent on the SAME ADMISSIBILITY question?")
+print(f"     ANSWER: {answer_b}")
+print("     Two independent reasons, both measured above:")
+print(f"       (i)  {n_diag} of the {len(SITES)} named sites are DIAGNOSTIC reporting bands")
+print("            that gate no grid. They do not answer an admissibility question, so")
+print("            they cannot disagree with a mask about one.")
+print(f"       (ii) the remaining site, solver/spectral_utils.py:36, IS a real mask -- and")
+print("            leg 129 strictifies it in the SAME diff. The 'boussinesq.py alone'")
+print("            premise is false; both real masks move together.")
+print("     The one real mask/diagnostic mismatch (B5) is exactly one wavenumber at")
+print(f"     3 | n, carrying zero power after masking: reported diagnostics move by {max_diff:.1e}.")
+print("\n  BUT the correction surfaces a DIFFERENT new fact, in the opposite direction:")
+print(f"     leg 129's blast radius is WIDER than escalation #4 states, not narrower.")
+print(f"     {len(unnamed)} consumer modules outside escalation #4's scope call the two")
+print(f"     repaired masks ({unnamed}), and solver/gclm.py has NO grid guard of its own,")
+print(f"     so it inherits a brand-new refusal at n <= 3: solve_gclm(n=3) runs today")
+print(f"     and would raise after the repair (measured: {gclm_gains_refusal}).")
+print("\n  This leg merges nothing and flips no verdict. Escalation #4 stands, for the user.")
 
 results["gate"] = {
-    "question": ("Is the n=3 -> rejected verdict a NECESSARY consequence of the strict "
-                 "Bowman 2/3 rule as already adopted elsewhere in this repository (no "
-                 "alternative reading admits n=3), or does it depend on a choice leg 129's "
-                 "repair made that a different, equally defensible reading would not have "
-                 "made?"),
-    "answer": answer,
-    "answer_is_conditional_on": "adopting the strict cut, which no shipped module on main does",
-    "conditions": conditions,
-    "all_conditions_pass": all_pass,
+    "question": ("(a) Is n=3's exclusion under the strict Bowman rule mathematically "
+                 "forced (no alternative admissible reading of the rule itself admits "
+                 "n=3), and (b) does adopting the strict rule for boussinesq.py alone -- "
+                 "while spectral_utils.py / boussinesq.py:419 / fractional_boussinesq.py "
+                 "/ fractional_gclm.py stay on the loose cut -- leave those four modules "
+                 "internally inconsistent with the newly-strict one on the same "
+                 "admissibility question?"),
+    "answer_a": answer_a,
+    "answer_a_conditions": conditions,
+    "answer_a_all_conditions_pass": all_pass,
+    "answer_a_is_conditional_on": ("adopting the strict cut, which no shipped module on "
+                                   "main does; the math itself is adoption-independent"),
+    "answer_b": answer_b,
+    "answer_b_inconsistency_created": inconsistency_created,
+    "answer_b_conditions": b_conditions,
+    "answer_b_reasons": [
+        (f"{n_diag} of the {len(SITES)} named sites are diagnostic reporting bands that "
+         "gate no grid, so they answer no admissibility question"),
+        ("the one remaining real mask, solver/spectral_utils.py:36, is strictified by the "
+         "SAME leg-129 diff -- the 'boussinesq.py alone' premise is false"),
+    ],
+    "branch_taken": "(a) forced, (b) no",
+    "new_fact_the_correction_surfaces": (
+        "leg 129's blast radius is WIDER than escalation #4 states, not narrower: "
+        f"{len(unnamed)} consumer modules outside its stated scope call the two repaired "
+        "masks, and solver/gclm.py has no grid guard of its own, so it inherits a new "
+        "ValueError at n <= 3 that main does not have"),
     "choice_point_located": ("upstream of n=3: whether to make the cut strict at all "
                             "(leg 129's gate, already answered YES on its own three clauses). "
                             "At the n=3 verdict itself there is no choice: the pre-existing "
                             "leg-89 guard fires on its own criterion."),
     "this_leg_merged_leg129": False,
     "this_leg_flipped_any_verdict": False,
+    "this_leg_edited_any_solver_module": False,
 }
+all_pass = all_pass and not inconsistency_created
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, "w") as f:

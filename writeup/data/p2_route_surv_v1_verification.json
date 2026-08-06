@@ -1,0 +1,855 @@
+{
+ "leg": 188,
+ "route": "SURV",
+ "reads_parked_branch": "leg/129-sur-v1",
+ "merges": null,
+ "V0_fast_predicate_equals_literal_mask": {
+  "range_checked": [
+   1,
+   400
+  ],
+  "cuts_checked": [
+   "loose",
+   "strict",
+   "overstrict"
+  ],
+  "pairs_checked": 1200,
+  "disagreements": 0,
+  "marginal_grids_in_range": 133,
+  "reason": "the 2D mask is the tensor product of the 1D band, so it retains a non-constant mode iff the 1D band does"
+ },
+ "V1_verdict_difference_census": {
+  "n_scanned": 5000,
+  "grids_where_acceptance_differs_loose_vs_strict": [
+   3
+  ],
+  "count": 1,
+  "direction_at_each": {
+   "3": {
+    "loose_accepts": true,
+    "strict_accepts": false
+   }
+  },
+  "control_overstrict_rule_cut_is_n_over_3_minus_1": {
+   "grids_where_acceptance_differs": [
+    3,
+    4,
+    5
+   ],
+   "count": 3,
+   "can_report_a_different_count_than_the_strict_arm": true
+  }
+ },
+ "V2_readings_differ_iff_3_divides_n": {
+  "range_checked": [
+   1,
+   1000
+  ],
+  "grids_where_top_retained_mode_differs": 333,
+  "all_differing_grids_divisible_by_3": true,
+  "no_agreeing_grid_divisible_by_3": true,
+  "n3_is_a_marginal_grid": true,
+  "mode_count_table_n_1_to_12": [
+   {
+    "n": 1,
+    "modes_retained_loose": 1,
+    "modes_retained_strict": 1,
+    "accepted_loose": false,
+    "accepted_strict": false
+   },
+   {
+    "n": 2,
+    "modes_retained_loose": 1,
+    "modes_retained_strict": 1,
+    "accepted_loose": false,
+    "accepted_strict": false
+   },
+   {
+    "n": 3,
+    "modes_retained_loose": 9,
+    "modes_retained_strict": 1,
+    "accepted_loose": true,
+    "accepted_strict": false
+   },
+   {
+    "n": 4,
+    "modes_retained_loose": 9,
+    "modes_retained_strict": 9,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 5,
+    "modes_retained_loose": 9,
+    "modes_retained_strict": 9,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 6,
+    "modes_retained_loose": 25,
+    "modes_retained_strict": 9,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 7,
+    "modes_retained_loose": 25,
+    "modes_retained_strict": 25,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 8,
+    "modes_retained_loose": 25,
+    "modes_retained_strict": 25,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 9,
+    "modes_retained_loose": 49,
+    "modes_retained_strict": 25,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 10,
+    "modes_retained_loose": 49,
+    "modes_retained_strict": 49,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 11,
+    "modes_retained_loose": 49,
+    "modes_retained_strict": 49,
+    "accepted_loose": true,
+    "accepted_strict": true
+   },
+   {
+    "n": 12,
+    "modes_retained_loose": 81,
+    "modes_retained_strict": 49,
+    "accepted_loose": true,
+    "accepted_strict": true
+   }
+  ]
+ },
+ "V3_who_decided_n3": {
+  "guard_text": "if not np.any(mask & (Ksq > 0.0)):",
+  "guard_present_on_main": true,
+  "guard_present_on_parked_branch_verbatim": true,
+  "guard_is_condition_based_not_a_numeric_floor": true,
+  "parked_branch_introduces_a_numeric_floor": false,
+  "guard_line_sha256_16": "9a43d4c736c18aa0",
+  "leg129_code_line_changes_in_boussinesq_py": [
+   "+    The cut is `(n - 1) // 3`, the largest integer strictly below n/3. This",
+   "+    line used to read `cut = n / 3.0`, the identical off-by-one leg 120 found",
+   "+    in `solver/spectral_utils.dealias_mask`: at 3 | n it retained one mode too",
+   "+    many in EACH direction, so the alias-free guarantee failed on a band of",
+   "+    (2K+1)^2 - (2K-1)^2 modes rather than on one. See the 1D docstring for the",
+   "+    published condition (Bowman 2013; arXiv:2603.08892) and the elementary",
+   "+    argument (a quadratic product reaches 2K, aliases to 2K - n, and re-enters",
+   "+    the band iff n <= 3K).",
+   "+    NO-OP where it matters: `(n - 1) // 3 == floor(n/3)` whenever 3 does not",
+   "+    divide n, so this mask is bit-identical at the n = 32 of every banked",
+   "+    Boussinesq run and at every power of two. Leg 129 measured that.",
+   "-    cut = n / 3.0",
+   "+    cut = (n - 1) // 3"
+  ],
+  "n_code_line_changes": 13,
+  "guard_predates_the_strict_question": "leg 89 defect 4; leg 129 is 40 legs later"
+ },
+ "V4_bowman_experiment": {
+  "n3_loose": {
+   "n": 3,
+   "top_retained_mode": 1,
+   "exact_coefficient_at_K": 0.0,
+   "alias_coefficient_abs": 0.24999999999999994,
+   "field_own_coefficient_abs": 0.5
+  },
+  "n3_strict": {
+   "n": 3,
+   "top_retained_mode": 0,
+   "alias_coefficient_abs": null,
+   "note": "band is the mean mode alone; the experiment has no field to run on"
+  },
+  "n4_loose": {
+   "n": 4,
+   "top_retained_mode": 1,
+   "exact_coefficient_at_K": 0.0,
+   "alias_coefficient_abs": 7.498798913309287e-33,
+   "field_own_coefficient_abs": 0.5
+  },
+  "n4_strict": {
+   "n": 4,
+   "top_retained_mode": 1,
+   "exact_coefficient_at_K": 0.0,
+   "alias_coefficient_abs": 7.498798913309287e-33,
+   "field_own_coefficient_abs": 0.5
+  },
+  "positive_control_n4_below_tolerance": true,
+  "positive_control_tolerance": 1e-20,
+  "n3_alias_over_n4_control_decades": 31.522948300892917,
+  "n3_loose_alias_over_field_amplitude": 0.4999999999999999,
+  "meaning": "under the LOOSE cut an n=3 grid retains k = +-1, whose square reaches k = 2 == -1 (mod 3) and lands back ON a retained mode: the whole nonlinear term of an n=3 Boussinesq run is alias-contaminated"
+ },
+ "V5_alternative_reading_census": {
+  "readings": [
+   {
+    "reading": "loose: |k| <= n/3",
+    "source": "solver/boussinesq.py:153 and solver/spectral_utils.py:36 as main ships them",
+    "wavenumbers_retained_at_n3": [
+     0,
+     1
+    ],
+    "retains_a_non_constant_mode": true,
+    "mask_is_conjugate_symmetric": true,
+    "imaginary_residue_on_a_real_field": 0.0,
+    "usable_by_the_solvers_at_all": true,
+    "n3_admissible_under_this_reading": true,
+    "note": "THIS IS THE READING LEG 120 MEASURED DEFECTIVE (alias error 1.6621e-01 rel at n=81)"
+   },
+   {
+    "reading": "floor: |k| <= floor(n/3)",
+    "source": "the corpus's informal 'keep the first 2/3 of the modes'",
+    "wavenumbers_retained_at_n3": [
+     0,
+     1
+    ],
+    "retains_a_non_constant_mode": true,
+    "mask_is_conjugate_symmetric": true,
+    "imaginary_residue_on_a_real_field": 0.0,
+    "usable_by_the_solvers_at_all": true,
+    "n3_admissible_under_this_reading": true,
+    "note": "identical to the loose reading at every 3|n, hence at n=3"
+   },
+   {
+    "reading": "strict: |k| < n/3  (cut = (n-1)//3)",
+    "source": "Bowman 2013 p.29 (pad to N >= 3m-2, i.e. K < N/3); leg 129's repair",
+    "wavenumbers_retained_at_n3": [
+     0
+    ],
+    "retains_a_non_constant_mode": false,
+    "mask_is_conjugate_symmetric": true,
+    "imaginary_residue_on_a_real_field": 0.0,
+    "usable_by_the_solvers_at_all": true,
+    "n3_admissible_under_this_reading": false,
+    "note": "empties the non-constant band at n=3"
+   },
+   {
+    "reading": "Bowman padding form: N >= 3K+1",
+    "source": "Bowman 2013, stated as a padding requirement rather than a mask",
+    "wavenumbers_retained_at_n3": [
+     0
+    ],
+    "retains_a_non_constant_mode": false,
+    "mask_is_conjugate_symmetric": true,
+    "imaginary_residue_on_a_real_field": 0.0,
+    "usable_by_the_solvers_at_all": true,
+    "n3_admissible_under_this_reading": false,
+    "note": "solve N >= 3K+1 at N=3: K < 1, so K = 0"
+   },
+   {
+    "reading": "zero |k| >= (2/3)*k_Nyquist",
+    "source": "arXiv:2603.08892 (2026), the form leg 129's novelty pass located",
+    "wavenumbers_retained_at_n3": [
+     0
+    ],
+    "retains_a_non_constant_mode": false,
+    "mask_is_conjugate_symmetric": true,
+    "imaginary_residue_on_a_real_field": 0.0,
+    "usable_by_the_solvers_at_all": true,
+    "n3_admissible_under_this_reading": false,
+    "note": "(2/3)*1.5 = 1.0, so |k| >= 1 is zeroed: k = +-1 goes"
+   },
+   {
+    "reading": "zero the highest aliased_fraction = 1/3 of the wavenumber components",
+    "source": "FourierFlows.jl dealias! (inequality not stated in its docs; leg 129 logged it unresolved)",
+    "wavenumbers_retained_at_n3": [
+     0,
+     1
+    ],
+    "retains_a_non_constant_mode": true,
+    "mask_is_conjugate_symmetric": false,
+    "imaginary_residue_on_a_real_field": 0.22300948400552714,
+    "usable_by_the_solvers_at_all": false,
+    "n3_admissible_under_this_reading": false,
+    "note": "one third of three modes is one; the highest are k = +-1"
+   }
+  ],
+  "n_readings": 6,
+  "n_admitting_n3": 2,
+  "n_denying_n3": 4,
+  "admitting_readings_that_are_not_the_loose_cut_leg120_measured_defective": [],
+  "readings_disqualified_as_not_conjugate_symmetric": [
+   "zero the highest aliased_fraction = 1/3 of the wavenumber components"
+  ],
+  "n_disqualified": 1
+ },
+ "V6_no_banked_grid_can_move": {
+  "powers_of_two_checked": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63,
+   64
+  ],
+  "residues_of_2_pow_m_mod_3": [
+   1,
+   2
+  ],
+  "any_power_of_two_divisible_by_3": false,
+  "reason": "2 == -1 (mod 3) so 2^m == (-1)^m in {1,2}",
+  "grid_sizes_named_in_the_plan": [
+   32,
+   64,
+   96,
+   101,
+   128,
+   151,
+   201,
+   256,
+   401,
+   801
+  ],
+  "of_those_divisible_by_3": [
+   96,
+   201,
+   801
+  ]
+ },
+ "V7_live_acceptance_on_main": {
+  "calls": [
+   {
+    "n": 2,
+    "accepted": false,
+    "error": "n=2 leaves the 2/3 dealias mask retaining only the mean mode: the grid cannot represent any non-constant field, so no dynamics can be computed on it (n >= 3 req"
+   },
+   {
+    "n": 3,
+    "accepted": true,
+    "error": null
+   },
+   {
+    "n": 4,
+    "accepted": true,
+    "error": null
+   }
+  ],
+  "guard_boolean_under_strict_mask": {
+   "2": false,
+   "3": false,
+   "4": true
+  },
+  "main_dealias_mask2d_3_retained_modes": 9,
+  "strict_mask_3_retained_modes": 1
+ },
+ "V8_counterfactual_cost": {
+  "pre_mask_nonconstant_amplitude": 1.069308980730229,
+  "post_strict_mask_nonconstant_amplitude": 0.0,
+  "post_mask_field_is_exactly_constant_bitwise": true,
+  "consequence": "admitting n=3 under the strict cut re-opens leg 89 defect 4 -- the exact pathology solve_boussinesq's guard was written to close"
+ },
+ "attributed_leg129": {
+  "source": "git show leg/129-sur-v1:writeup/data/p2_route_sur_v1_repair.json",
+  "floor_before": 3,
+  "floor_after": 4,
+  "cases_moved": 1,
+  "cases_total": 90,
+  "family_that_moves": {
+   "E_degenerate_discretization": {
+    "banked": {
+     "raised": 13,
+     "benign": 3
+    },
+    "live_expected": {
+     "raised": 14,
+     "benign": 2
+    }
+   }
+  },
+  "n_louder_before": 40,
+  "n_louder_after": 41,
+  "n_quieter": 0,
+  "n_silent_to_raised": 23,
+  "escalation_reason": "#4 -- would require rewriting writeup/data/p2_route_bob_v1_postrepair.json",
+  "independent_recompute_of_leg129_table": [
+   {
+    "n": 1,
+    "leg129_modes_old": 1,
+    "recomputed_modes_old": 1,
+    "leg129_modes_new": 1,
+    "recomputed_modes_new": 1,
+    "leg129_accepted": false,
+    "recomputed_accepted_under_strict": false,
+    "agrees": true
+   },
+   {
+    "n": 2,
+    "leg129_modes_old": 1,
+    "recomputed_modes_old": 1,
+    "leg129_modes_new": 1,
+    "recomputed_modes_new": 1,
+    "leg129_accepted": false,
+    "recomputed_accepted_under_strict": false,
+    "agrees": true
+   },
+   {
+    "n": 3,
+    "leg129_modes_old": 9,
+    "recomputed_modes_old": 9,
+    "leg129_modes_new": 1,
+    "recomputed_modes_new": 1,
+    "leg129_accepted": false,
+    "recomputed_accepted_under_strict": false,
+    "agrees": true
+   },
+   {
+    "n": 4,
+    "leg129_modes_old": 9,
+    "recomputed_modes_old": 9,
+    "leg129_modes_new": 9,
+    "recomputed_modes_new": 9,
+    "leg129_accepted": true,
+    "recomputed_accepted_under_strict": true,
+    "agrees": true
+   },
+   {
+    "n": 5,
+    "leg129_modes_old": 9,
+    "recomputed_modes_old": 9,
+    "leg129_modes_new": 9,
+    "recomputed_modes_new": 9,
+    "leg129_accepted": true,
+    "recomputed_accepted_under_strict": true,
+    "agrees": true
+   },
+   {
+    "n": 6,
+    "leg129_modes_old": 25,
+    "recomputed_modes_old": 25,
+    "leg129_modes_new": 9,
+    "recomputed_modes_new": 9,
+    "leg129_accepted": true,
+    "recomputed_accepted_under_strict": true,
+    "agrees": true
+   }
+  ],
+  "all_rows_agree": true
+ },
+ "premise_check": {
+  "claim_in_DIRECTION_md": "the strict rule is 'already cited and used elsewhere in this repository, e.g. leg 120's own repair'",
+  "shipped_modules_on_main": {
+   "solver/spectral_utils.py": {
+    "contains_loose_cut_n_over_3_point_0": true,
+    "contains_strict_integer_cut": false
+   },
+   "solver/boussinesq.py": {
+    "contains_loose_cut_n_over_3_point_0": true,
+    "contains_strict_integer_cut": false
+   },
+   "solver/fractional_boussinesq.py": {
+    "contains_loose_cut_n_over_3_point_0": true,
+    "contains_strict_integer_cut": false
+   },
+   "solver/fractional_gclm.py": {
+    "contains_loose_cut_n_over_3_point_0": true,
+    "contains_strict_integer_cut": false
+   }
+  },
+  "any_shipped_module_uses_the_strict_cut": false,
+  "leg120_disposition": "escalated, not patched (commit 750724b)",
+  "where_the_strict_rule_IS_in_force_on_main": [
+   "test_spectral_utils_adversarial.py (pins the loose cut as defect D1)",
+   "experiments/p2_route_sua_v1_adversarial.py (Bowman's condition, measured)"
+  ],
+  "consequence": "the necessity claim is CONDITIONAL on adopting the strict cut; it is not the unpacking of a rule main has already adopted in code"
+ },
+ "B1_site_census": {
+  "sites": [
+   {
+    "file": "solver/spectral_utils.py",
+    "line": 36,
+    "cut_text": "return wavenumbers(n) <= n / 3.0",
+    "consumer": "return wavenumbers(n) <= n / 3.0",
+    "kind": "DEALIAS_MASK",
+    "why": "the expression IS the returned mask; callers multiply the spectrum by it",
+    "cut_text_present_on_main": true,
+    "consumer_present_on_main": true
+   },
+   {
+    "file": "solver/boussinesq.py",
+    "line": 153,
+    "cut_text": "cut = n / 3.0",
+    "consumer": "return (np.abs(KX) <= cut) & (np.abs(KY) <= cut)",
+    "kind": "DEALIAS_MASK",
+    "why": "feeds dealias_mask2d's returned mask, which solve_boussinesq guards on",
+    "cut_text_present_on_main": true,
+    "consumer_present_on_main": true
+   },
+   {
+    "file": "solver/boussinesq.py",
+    "line": 419,
+    "cut_text": "k_cut = n / 3.0",
+    "consumer": "tail_mask = (KX * KX + KY * KY) > (0.75 * k_cut) ** 2",
+    "kind": "DIAGNOSTIC_BAND",
+    "why": "defines a tail-ENERGY reporting band at 0.75*k_cut; gates no grid",
+    "cut_text_present_on_main": true,
+    "consumer_present_on_main": true
+   },
+   {
+    "file": "solver/fractional_boussinesq.py",
+    "line": 259,
+    "cut_text": "k_cut = self.n / 3.0",
+    "consumer": "band_mask = (self.kmag > 0.9 * k_cut) & (self.kmag <= k_cut)",
+    "kind": "DIAGNOSTIC_BAND",
+    "why": "tail_fraction's reporting band; the module's real mask is dealias_mask2d",
+    "cut_text_present_on_main": true,
+    "consumer_present_on_main": true
+   },
+   {
+    "file": "solver/fractional_gclm.py",
+    "line": 265,
+    "cut_text": "k_cut = self.n / 3.0",
+    "consumer": "keep = self.k <= k_cut",
+    "kind": "DIAGNOSTIC_BAND",
+    "why": "tail-ratio reporting band; the module's real mask is dealias_mask",
+    "cut_text_present_on_main": true,
+    "consumer_present_on_main": true
+   }
+  ],
+  "every_quoted_line_located_verbatim_on_main": true,
+  "n_dealias_masks": 2,
+  "n_diagnostic_bands": 3,
+  "total_n_over_3_sites_in_solver": 5
+ },
+ "B2_what_leg129_strictifies": {
+  "site_status": [
+   {
+    "file": "solver/spectral_utils.py",
+    "line": 36,
+    "kind": "DEALIAS_MASK",
+    "loose_cut_still_present_on_parked_branch": false,
+    "strictified_by_leg129": true
+   },
+   {
+    "file": "solver/boussinesq.py",
+    "line": 153,
+    "kind": "DEALIAS_MASK",
+    "loose_cut_still_present_on_parked_branch": false,
+    "strictified_by_leg129": true
+   },
+   {
+    "file": "solver/boussinesq.py",
+    "line": 419,
+    "kind": "DIAGNOSTIC_BAND",
+    "loose_cut_still_present_on_parked_branch": true,
+    "strictified_by_leg129": false
+   },
+   {
+    "file": "solver/fractional_boussinesq.py",
+    "line": 259,
+    "kind": "DIAGNOSTIC_BAND",
+    "loose_cut_still_present_on_parked_branch": true,
+    "strictified_by_leg129": false
+   },
+   {
+    "file": "solver/fractional_gclm.py",
+    "line": 265,
+    "kind": "DIAGNOSTIC_BAND",
+    "loose_cut_still_present_on_parked_branch": true,
+    "strictified_by_leg129": false
+   }
+  ],
+  "dealias_masks_strictified": 2,
+  "dealias_masks_total": 2,
+  "diagnostic_bands_strictified": 0,
+  "solver_files_whose_cut_changed": [
+   "solver/boussinesq.py",
+   "solver/spectral_utils.py"
+  ],
+  "premise_boussinesq_alone_holds": false,
+  "finding": "leg 129 strictifies BOTH real dealias masks, not boussinesq.py alone; the second premise handed to this leg is false in the same direction as the first"
+ },
+ "B3_consumer_census": {
+  "consumers": [
+   {
+    "file": "solver/gclm.py",
+    "line": 178,
+    "call": "mask = dealias_mask(n)",
+    "mask": "dealias_mask (1D)",
+    "call_present_on_main": true,
+    "named_in_escalation_4": false
+   },
+   {
+    "file": "solver/fractional_gclm.py",
+    "line": 195,
+    "call": "self.mask = dealias_mask(self.n)",
+    "mask": "dealias_mask (1D)",
+    "call_present_on_main": true,
+    "named_in_escalation_4": false
+   },
+   {
+    "file": "solver/boussinesq.py",
+    "line": 348,
+    "call": "mask = dealias_mask2d(n)",
+    "mask": "dealias_mask2d (2D)",
+    "call_present_on_main": true,
+    "named_in_escalation_4": true
+   },
+   {
+    "file": "solver/fractional_boussinesq.py",
+    "line": 218,
+    "call": "self.mask = dealias_mask2d(self.n)",
+    "mask": "dealias_mask2d (2D)",
+    "call_present_on_main": true,
+    "named_in_escalation_4": false
+   }
+  ],
+  "n_consumers": 4,
+  "consumer_modules_not_named_in_escalation_4": [
+   "solver/gclm.py",
+   "solver/fractional_gclm.py",
+   "solver/fractional_boussinesq.py"
+  ],
+  "n_not_named": 3
+ },
+ "B4_new_refusal_on_the_1d_path": {
+  "parked_dealias_mask_raises_on_degenerate_grid": true,
+  "main_dealias_mask_raises_on_degenerate_grid": false,
+  "main_1d_mask_at_small_n": [
+   {
+    "n": 1,
+    "raised": false,
+    "non_mean_modes_retained": 0,
+    "parked_cut": 0,
+    "parked_would_raise": true
+   },
+   {
+    "n": 2,
+    "raised": false,
+    "non_mean_modes_retained": 0,
+    "parked_cut": 0,
+    "parked_would_raise": true
+   },
+   {
+    "n": 3,
+    "raised": false,
+    "non_mean_modes_retained": 1,
+    "parked_cut": 0,
+    "parked_would_raise": true
+   },
+   {
+    "n": 4,
+    "raised": false,
+    "non_mean_modes_retained": 1,
+    "parked_cut": 1,
+    "parked_would_raise": false
+   },
+   {
+    "n": 5,
+    "raised": false,
+    "non_mean_modes_retained": 1,
+    "parked_cut": 1,
+    "parked_would_raise": false
+   },
+   {
+    "n": 6,
+    "raised": false,
+    "non_mean_modes_retained": 2,
+    "parked_cut": 1,
+    "parked_would_raise": false
+   }
+  ],
+  "grids_where_main_returns_a_mask_but_repair_refuses": [
+   1,
+   2,
+   3
+  ],
+  "gclm_hardcodes_a_grid_floor": false,
+  "gclm_has_the_boussinesq_mean_mode_guard": false,
+  "live_solve_gclm_on_main": [
+   {
+    "n": 3,
+    "accepted_on_main": true,
+    "error": null
+   },
+   {
+    "n": 4,
+    "accepted_on_main": true,
+    "error": null
+   }
+  ],
+  "solve_gclm_gains_a_refusal_it_does_not_have_today": true,
+  "finding": "the repair's behaviour change is NOT confined to boussinesq.py: solver/gclm.py has no grid guard of its own, so it inherits a new ValueError at n <= 3 through spectral_utils.dealias_mask -- a module escalation #4 never names"
+ },
+ "B5_diagnostic_band_mismatch": {
+  "rows": [
+   {
+    "n": 32,
+    "three_divides_n": false,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 0,
+    "tail_ratio_with_loose_diagnostic_band": 0.5747234987885728,
+    "tail_ratio_with_strict_diagnostic_band": 0.5747234987885728,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 64,
+    "three_divides_n": false,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 0,
+    "tail_ratio_with_loose_diagnostic_band": 0.6407876856171162,
+    "tail_ratio_with_strict_diagnostic_band": 0.6407876856171162,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 96,
+    "three_divides_n": true,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 1,
+    "tail_ratio_with_loose_diagnostic_band": 0.7423609453401813,
+    "tail_ratio_with_strict_diagnostic_band": 0.7423609453401813,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 99,
+    "three_divides_n": true,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 1,
+    "tail_ratio_with_loose_diagnostic_band": 0.12511531889993457,
+    "tail_ratio_with_strict_diagnostic_band": 0.12511531889993457,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 128,
+    "three_divides_n": false,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 0,
+    "tail_ratio_with_loose_diagnostic_band": 0.5134729633146567,
+    "tail_ratio_with_strict_diagnostic_band": 0.5134729633146567,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 201,
+    "three_divides_n": true,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 1,
+    "tail_ratio_with_loose_diagnostic_band": 0.6596308128373243,
+    "tail_ratio_with_strict_diagnostic_band": 0.6596308128373243,
+    "abs_difference": 0.0
+   },
+   {
+    "n": 256,
+    "three_divides_n": false,
+    "modes_in_diagnostic_band_not_in_repaired_mask": 0,
+    "tail_ratio_with_loose_diagnostic_band": 0.7615854116751453,
+    "tail_ratio_with_strict_diagnostic_band": 0.7615854116751453,
+    "abs_difference": 0.0
+   }
+  ],
+  "extra_modes_at_multiples_of_3": [
+   1
+  ],
+  "extra_modes_at_non_multiples_of_3": [
+   0
+  ],
+  "largest_absolute_tail_ratio_difference": 0.0,
+  "statistic_form": "band.max() / pk.max(), fractional_gclm.py:296-297",
+  "finding": "a real but INCONSEQUENTIAL mismatch: exactly one extra wavenumber at 3 | n, carrying identically zero power after masking, inside a max-based ratio -- the reported diagnostic moves by 0.0"
+ },
+ "gate": {
+  "question": "(a) Is n=3's exclusion under the strict Bowman rule mathematically forced (no alternative admissible reading of the rule itself admits n=3), and (b) does adopting the strict rule for boussinesq.py alone -- while spectral_utils.py / boussinesq.py:419 / fractional_boussinesq.py / fractional_gclm.py stay on the loose cut -- leave those four modules internally inconsistent with the newly-strict one on the same admissibility question?",
+  "answer_a": "FORCED",
+  "answer_a_conditions": {
+   "V0 the fast guard predicate is the literal n x n mask": true,
+   "V1 acceptance differs at exactly one grid, n=3": true,
+   "V1 control reports a different count": true,
+   "V2 the two readings differ exactly on multiples of 3": true,
+   "V3 the guard is condition-based and leg 129 left it verbatim": true,
+   "V4 the loose n=3 band is genuinely aliased, n=4 control is clean": true,
+   "V5 no reading other than the measured-defective loose cut admits n=3": true,
+   "V6 no power of two is divisible by 3": true,
+   "V7 main accepts n=3 today and the strict guard boolean refuses it": true,
+   "V8 admitting n=3 under strict gives an exactly constant field": true,
+   "leg 129's own n=1..6 table reproduces independently": true
+  },
+  "answer_a_all_conditions_pass": true,
+  "answer_a_is_conditional_on": "adopting the strict cut, which no shipped module on main does; the math itself is adoption-independent",
+  "answer_b": "NO",
+  "answer_b_inconsistency_created": false,
+  "answer_b_conditions": {
+   "B1 every quoted cut and consumer line located verbatim on main": true,
+   "B1 three of the five n/3 sites are diagnostic bands, not masks": true,
+   "B2 leg 129 strictifies BOTH real masks, not boussinesq.py alone": true,
+   "B2 leg 129 strictifies no diagnostic band": true,
+   "B5 the diagnostic mismatch moves no reported number": true
+  },
+  "answer_b_reasons": [
+   "3 of the 5 named sites are diagnostic reporting bands that gate no grid, so they answer no admissibility question",
+   "the one remaining real mask, solver/spectral_utils.py:36, is strictified by the SAME leg-129 diff -- the 'boussinesq.py alone' premise is false"
+  ],
+  "branch_taken": "(a) forced, (b) no",
+  "new_fact_the_correction_surfaces": "leg 129's blast radius is WIDER than escalation #4 states, not narrower: 3 consumer modules outside its stated scope call the two repaired masks, and solver/gclm.py has no grid guard of its own, so it inherits a new ValueError at n <= 3 that main does not have",
+  "choice_point_located": "upstream of n=3: whether to make the cut strict at all (leg 129's gate, already answered YES on its own three clauses). At the n=3 verdict itself there is no choice: the pre-existing leg-89 guard fires on its own criterion.",
+  "this_leg_merged_leg129": false,
+  "this_leg_flipped_any_verdict": false,
+  "this_leg_edited_any_solver_module": false
+ }
+}
