@@ -3021,6 +3021,16 @@ belong to a future window.
   spurious constant, 200 noise draws never flipped X_c. Banked as a 12-check regression
   suite (7 KNOWN GAP assertions for a future repair to invert). Does not reopen leg 110's
   L1R death certificate audit. Not patched.
+- **Leg 121 (Route-CDA) — YES, not repaired (audit leg, latent):**
+  `critical_dissipation.py`'s precondition "p a positive integer (2s=p)" is enforced only
+  by a bare `int(p)` cast: `CriticalDissipativeFlow(..., p=1.9, ...)` requests s=0.95 but
+  silently builds p=1 (s=0.5) instead, converging to machine precision with alpha/alpha_1
+  bit-identical to an honest p=1 run, no exception, no warning. A realistic float-
+  arithmetic route to the same defect was demonstrated (2.0*(2.5-1e-12) lands int(p)=4,
+  one unit below the intended 5). Supporting findings: negative mu (anti-dissipation)
+  converges with no domain check, mu_decay_time can return a negative time,
+  marginal_verdict(NaN) returns a definite wrong classification. All 24 call sites outside
+  the module pass p as a literal integer — latent, 0 banked exponents at risk. Not patched.
 - **Leg 119 (Route-HHA) — YES, not repaired (audit leg, latent):** `hilbert_holder.py`'s
   per-point routing rule transplants leg 106's unsound shape from the sibling
   hilbert_pointwise.py: two NaN-free configurations (gamma=0.0, gamma=-0.5) exceed the
