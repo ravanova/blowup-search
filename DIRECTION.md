@@ -313,7 +313,7 @@ Ten slots, live at all times under the current contract. LEG-A carries the criti
 | LEG-F | 71 | **CAP** — capabilities.py self-audit | no | light | `leg/cap-v1` | Does every module row in capabilities.py have a test file that exists, is collected, and passes at HEAD? |
 | LEG-G | 87 | **IVB** — post-repair regression check, interval.py | no | standard | `leg/ivb-v1` | Post-repair, does interval.py correctly handle leg 69's original cases with zero regression at the live K-range? |
 | LEG-H | 88 | **GCA** — adversarial audit of gclm_family.py's residual computation | no | standard | `leg/gca-v1` | Under NaN/Inf-poisoned coefficients, does the residual silently return a plausible-looking wrong value? |
-| LEG-I | 86 | **PCB** — post-repair regression check, port_certification.py | no | light | `leg/pcb-v1` | Post-repair, does the line-sweep preconditioner still hit 9.5e-16 with no timing regression? |
+| LEG-I | 89 | **BOA** — adversarial audit of boussinesq.py | no | standard | `leg/boa-v1` | Under malformed physical-space inputs, does the module silently return a plausible-looking wrong result? |
 | LEG-J | 83 | **MFG** — adversarial audit of marginal_flow.py's gate 11 | no | standard | `leg/mfg-v1` | Does gate 11 catch non-NaN divergent trajectories, or only the NaN case it was built for? |
 
 **Several earlier paragraphs above ("third pass," "second pass," and their predecessors)
