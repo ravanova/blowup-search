@@ -1,0 +1,1455 @@
+{
+  "leg": 88,
+  "route": "GCA v1 -- adversarial audit of solver/gclm_family.py",
+  "module_under_audit": "solver/gclm_family.py",
+  "module_edited": false,
+  "grid_n": 401,
+  "gate_verbatim": "Under an adversarial battery (NaN/Inf-poisoned c_l/c_omega, a far outside [0,1]), does solver/gclm_family.py's residual computation ever silently return a finite, plausible-looking value instead of propagating the invalid input or flagging it?",
+  "silent_corruption_definition": {
+    "nonfinite_branch": "poisoned input AND residual array entirely finite AND scalar norm finite",
+    "magnitude_branch": "finite norm departing from the exact linear-in-a law by more than 1e-09 relative",
+    "structural": "a raise counts as FLAGGED, not silent"
+  },
+  "baseline": {
+    "what": "the two exact a=0 anchors, unpoisoned -- the reference scale",
+    "one_scale": {
+      "profile": "Omega_0 = -4X/(1+4X^2)",
+      "n": 401,
+      "gauge_c_omega": -0.999128498607682,
+      "gauge_c_l": 1.0,
+      "residual_rms": 7.346616678447006e-07,
+      "stats": {
+        "size": 401,
+        "nonfinite": 0,
+        "nonfinite_frac": 0.0,
+        "all_finite": true,
+        "rms_over_finite_entries": 7.346616678447006e-07,
+        "max_abs_over_finite_entries": 2.9314852104944666e-06
+      }
+    },
+    "two_scale": {
+      "profile": "Omega_2 = -1/(1+X^2)",
+      "n": 401,
+      "gauge_c_tw": 0.5000000361854503,
+      "residual_rms": 1.2288881602209271e-07,
+      "relnorm": 1.0422935285765323e-06,
+      "stats": {
+        "size": 401,
+        "nonfinite": 0,
+        "nonfinite_frac": 0.0,
+        "all_finite": true,
+        "rms_over_finite_entries": 1.2288881602209271e-07,
+        "max_abs_over_finite_entries": 3.767433360835071e-07
+      }
+    }
+  },
+  "poisoned_coefficients": {
+    "what": "NaN/+-Inf substituted into c_l and c_omega, singly and in all 9 joint pairs",
+    "cases_run": 15,
+    "silent_corruptions": 0,
+    "min_nonfinite_frac_across_cases": 1.0,
+    "cases": [
+      {
+        "poisoned": "c_l",
+        "value": "nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": true,
+        "echoed_c_l_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": "nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": false,
+        "echoed_c_l_finite": true,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l",
+        "value": "+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": true,
+        "echoed_c_l_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": "+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": false,
+        "echoed_c_l_finite": true,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l",
+        "value": "-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": true,
+        "echoed_c_l_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": "-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 0,
+          "max_abs_deviation": 0.0,
+          "max_rel_deviation": 0.0
+        },
+        "scalar_norm_finite": false,
+        "echoed_c_omega_finite": false,
+        "echoed_c_l_finite": true,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=nan,c_omega=nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=nan,c_omega=+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=nan,c_omega=-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=+inf,c_omega=nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=+inf,c_omega=+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=+inf,c_omega=-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=-inf,c_omega=nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=-inf,c_omega=+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_l+c_omega",
+        "value": "c_l=-inf,c_omega=-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "scalar_norm_finite": false,
+        "silent_corruption": false
+      }
+    ]
+  },
+  "extreme_finite_coefficients": {
+    "what": "extreme but finite coefficients; overflow to inf is the HONEST answer, a finite plausible number would not be",
+    "cases_run": 10,
+    "cases": [
+      {
+        "poisoned": "c_l",
+        "value": 1e+300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": Infinity,
+          "max_abs_over_finite_entries": 4.9996554754956215e+299
+        },
+        "scalar_norm": Infinity,
+        "overflowed_to_inf": true
+      },
+      {
+        "poisoned": "c_l",
+        "value": -1e+300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": Infinity,
+          "max_abs_over_finite_entries": 4.9996554754956215e+299
+        },
+        "scalar_norm": Infinity,
+        "overflowed_to_inf": true
+      },
+      {
+        "poisoned": "c_l",
+        "value": 1e-300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 0.22858305934364032,
+          "max_abs_over_finite_entries": 0.4999651870402859
+        },
+        "scalar_norm": 0.22858305934364032,
+        "overflowed_to_inf": false
+      },
+      {
+        "poisoned": "c_l",
+        "value": 1e+16,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2285832852485722.5,
+          "max_abs_over_finite_entries": 4999655475495621.0
+        },
+        "scalar_norm": 2285832852485722.5,
+        "overflowed_to_inf": false
+      },
+      {
+        "poisoned": "c_l",
+        "value": -1e+16,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2285832852485722.5,
+          "max_abs_over_finite_entries": 4999655475495621.0
+        },
+        "scalar_norm": 2285832852485722.5,
+        "overflowed_to_inf": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": 1e+300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": Infinity,
+          "max_abs_over_finite_entries": 9.999981114263095e+299
+        },
+        "scalar_norm": Infinity,
+        "overflowed_to_inf": true
+      },
+      {
+        "poisoned": "c_omega",
+        "value": -1e+300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": Infinity,
+          "max_abs_over_finite_entries": 9.999981114263095e+299
+        },
+        "scalar_norm": Infinity,
+        "overflowed_to_inf": true
+      },
+      {
+        "poisoned": "c_omega",
+        "value": 1e-300,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 0.4073831812151237,
+          "max_abs_over_finite_entries": 0.9991243257518136
+        },
+        "scalar_norm": 0.4073831812151237,
+        "overflowed_to_inf": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": 1e+16,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 4077388027215580.0,
+          "max_abs_over_finite_entries": 9999981114263096.0
+        },
+        "scalar_norm": 4077388027215580.0,
+        "overflowed_to_inf": false
+      },
+      {
+        "poisoned": "c_omega",
+        "value": -1e+16,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 4077388027215579.0,
+          "max_abs_over_finite_entries": 9999981114263092.0
+        },
+        "scalar_norm": 4077388027215579.0,
+        "overflowed_to_inf": false
+      }
+    ]
+  },
+  "a_far_outside_unit_interval": {
+    "what": "a swept nine decades outside [0,1] (|a| = 1e1..1e9, both signs), plus a in {NaN, +-Inf, 1e300}",
+    "verdict_criterion": "agreement with an INDEPENDENT recomputation of the documented formula; the linear law is reported as a magnitude only, not as a verdict",
+    "pure_advection_constant_k": 0.2768550537744719,
+    "k_provenance": "||U Omega_X||_rms, computed independently of the cases judged",
+    "max_rel_dev_from_pure_linear_law": 8.069666512788842e-08,
+    "dev_times_abs_a_should_be_constant_if_not_saturating": {
+      "|a|=1e1": 8.069666512788842e-07,
+      "|a|=1e2": 8.069663826049123e-07,
+      "|a|=1e3": 8.069664936272147e-07,
+      "|a|=1e5": 8.069545032185488e-07,
+      "|a|=1e7": 8.08242361927114e-07,
+      "|a|=1e9": 8.881784197001252e-07
+    },
+    "anti_saturation_reading": "the deviation from a PURE linear law decays as 1/|a| over nine decades, so ||R|| tracks |a| with no ceiling; a clamp would make it grow",
+    "worst_reference_disagreement_rel": 1.96452004313604e-16,
+    "decades_of_a_covered": 9,
+    "cases_run": 16,
+    "silent_corruptions": 0,
+    "finite_a_cases": [
+      {
+        "a": -1000000000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 276855053.7744717,
+          "max_abs_over_finite_entries": 948142603.9602093
+        },
+        "scalar_norm": 276855053.7744717,
+        "norm_over_abs_a": 0.2768550537744717,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.1920928955078125e-07,
+          "max_rel_deviation": 1.257292827607018e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 5.551115123125783e-16
+      },
+      {
+        "a": -10000000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2768550.537744496,
+          "max_abs_over_finite_entries": 9481426.039601736
+        },
+        "scalar_norm": 2768550.537744496,
+        "norm_over_abs_a": 0.2768550537744496,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.862645149230957e-09,
+          "max_rel_deviation": 1.96452004313604e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.060219158778636e-14
+      },
+      {
+        "a": -100000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 27685.505377223777,
+          "max_abs_over_finite_entries": 94814.26039566044
+        },
+        "scalar_norm": 27685.505377223777,
+        "norm_over_abs_a": 0.2768550537722378,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.4551915228366852e-11,
+          "max_rel_deviation": 1.5347812837058083e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069545032185488e-12
+      },
+      {
+        "a": -1000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 276.8550535510592,
+          "max_abs_over_finite_entries": 948.1426035997004
+        },
+        "scalar_norm": 276.8550535510592,
+        "norm_over_abs_a": 0.2768550535510592,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.1368683772161603e-13,
+          "max_rel_deviation": 1.199047878346514e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069662715826098e-10
+      },
+      {
+        "a": -100.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 27.68550515403449,
+          "max_abs_over_finite_entries": 94.81426003551168
+        },
+        "scalar_norm": 27.68550515403449,
+        "norm_over_abs_a": 0.2768550515403449,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.4210854715202004e-14,
+          "max_rel_deviation": 1.498809853062132e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069663048893005e-09
+      },
+      {
+        "a": -10.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2.7685503143321,
+          "max_abs_over_finite_entries": 9.481425679092819
+        },
+        "scalar_norm": 2.7685503143321,
+        "norm_over_abs_a": 0.27685503143321,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.7763568394002505e-15,
+          "max_rel_deviation": 1.8735123804400393e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069660129006451e-08
+      },
+      {
+        "a": 10.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2.7685507611575146,
+          "max_abs_over_finite_entries": 9.48142640011137
+        },
+        "scalar_norm": 2.7685507611575146,
+        "norm_over_abs_a": 0.27685507611575144,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.7763568394002505e-15,
+          "max_rel_deviation": 1.8735122379681027e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069666512788842e-08
+      },
+      {
+        "a": 100.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 27.68550560085991,
+          "max_abs_over_finite_entries": 94.81426075653023
+        },
+        "scalar_norm": 27.68550560085991,
+        "norm_over_abs_a": 0.2768550560085991,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.4210854715202004e-14,
+          "max_rel_deviation": 1.498809841664377e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069663826049123e-09
+      },
+      {
+        "a": 1000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 276.8550539978846,
+          "max_abs_over_finite_entries": 948.1426043207189
+        },
+        "scalar_norm": 276.8550539978846,
+        "norm_over_abs_a": 0.2768550539978846,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.1368683772161603e-13,
+          "max_rel_deviation": 1.1990478774346936e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069664936272147e-10
+      },
+      {
+        "a": 100000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 27685.5053776706,
+          "max_abs_over_finite_entries": 94814.26039638146
+        },
+        "scalar_norm": 27685.5053776706,
+        "norm_over_abs_a": 0.276855053776706,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.4551915228366852e-11,
+          "max_rel_deviation": 1.534781283694137e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.069545032185488e-12
+      },
+      {
+        "a": 10000000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 2768550.5377449426,
+          "max_abs_over_finite_entries": 9481426.039602458
+        },
+        "scalar_norm": 2768550.5377449426,
+        "norm_over_abs_a": 0.27685505377449426,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.862645149230957e-09,
+          "max_rel_deviation": 1.9645200431358903e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.08242361927114e-14
+      },
+      {
+        "a": 1000000000.0,
+        "stats": {
+          "size": 401,
+          "nonfinite": 0,
+          "nonfinite_frac": 0.0,
+          "all_finite": true,
+          "rms_over_finite_entries": 276855053.7744721,
+          "max_abs_over_finite_entries": 948142603.96021
+        },
+        "scalar_norm": 276855053.7744721,
+        "norm_over_abs_a": 0.2768550537744721,
+        "reference_agreement": {
+          "nonfinite_masks_agree": true,
+          "compared_entries": 401,
+          "max_abs_deviation": 1.1920928955078125e-07,
+          "max_rel_deviation": 1.257292827607017e-16
+        },
+        "silent_corruption": false,
+        "rel_dev_from_pure_linear_law": 8.881784197001252e-16
+      }
+    ],
+    "nonfinite_a_cases": [
+      {
+        "a": "nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "silent_corruption": false
+      },
+      {
+        "a": "+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "silent_corruption": false
+      },
+      {
+        "a": "-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "silent_corruption": false
+      }
+    ],
+    "overflow_case": {
+      "a": 1e+300,
+      "stats": {
+        "size": 401,
+        "nonfinite": 0,
+        "nonfinite_frac": 0.0,
+        "all_finite": true,
+        "rms_over_finite_entries": Infinity,
+        "max_abs_over_finite_entries": 9.481426039602097e+299
+      },
+      "scalar_norm": Infinity,
+      "overflowed_to_inf": true
+    }
+  },
+  "poisoned_two_scale": {
+    "what": "c_tw and a poisoned on the two-scale traveling-wave residual",
+    "cases_run": 6,
+    "silent_corruptions": 0,
+    "cases": [
+      {
+        "poisoned": "c_tw",
+        "value": "nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_tw",
+        "value": "+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": Infinity,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "c_tw",
+        "value": "-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": Infinity,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "a (two-scale path)",
+        "value": "nan",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "gauge_c_tw_returned": NaN,
+        "gauge_c_tw_finite": false,
+        "relnorm": NaN,
+        "relnorm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "a (two-scale path)",
+        "value": "+inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "gauge_c_tw_returned": NaN,
+        "gauge_c_tw_finite": false,
+        "relnorm": NaN,
+        "relnorm_finite": false,
+        "silent_corruption": false
+      },
+      {
+        "poisoned": "a (two-scale path)",
+        "value": "-inf",
+        "stats": {
+          "size": 401,
+          "nonfinite": 401,
+          "nonfinite_frac": 1.0,
+          "all_finite": false,
+          "rms_over_finite_entries": null,
+          "max_abs_over_finite_entries": null
+        },
+        "scalar_norm": NaN,
+        "gauge_c_tw_returned": NaN,
+        "gauge_c_tw_finite": false,
+        "relnorm": NaN,
+        "relnorm_finite": false,
+        "silent_corruption": false
+      }
+    ]
+  },
+  "structural_adversaries": {
+    "what": "wrong-shaped coefficients and profiles; a raise is a FLAG, not a silence",
+    "cases_run": 5,
+    "raised": 4,
+    "cases": [
+      {
+        "case": "c_l as wrong-length array (7 vs n)",
+        "raised": true,
+        "expectation": "raise",
+        "exception": "ValueError"
+      },
+      {
+        "case": "Omega wrong length (7 vs n)",
+        "raised": true,
+        "expectation": "raise",
+        "exception": "ValueError"
+      },
+      {
+        "case": "Omega as (n,1) column",
+        "raised": true,
+        "expectation": "raise",
+        "exception": "ValueError"
+      },
+      {
+        "case": "a=None in constructor",
+        "raised": true,
+        "expectation": "raise",
+        "exception": "TypeError"
+      },
+      {
+        "case": "c_l per-node array, one NaN entry",
+        "raised": false,
+        "expectation": "exactly 1 nonfinite residual node",
+        "stats": {
+          "size": 401,
+          "nonfinite": 1,
+          "nonfinite_frac": 0.0024937655860349127,
+          "all_finite": false,
+          "rms_over_finite_entries": 7.348987405181464e-07,
+          "max_abs_over_finite_entries": 2.9314852104944666e-06
+        },
+        "localized_exactly": true
+      }
+    ]
+  },
+  "denom_fallback": {
+    "what": "the `denom > 0 else 0.0` guards: NaN denom compares False, so a NaN-poisoned profile yields a FINITE gauge speed of exactly 0.0",
+    "nan_poisoned_profile": {
+      "poisoned_nodes": 1,
+      "gauge_c_tw_returned": 0.0,
+      "gauge_c_tw_is_finite": true,
+      "gauge_c_tw_is_exactly_zero": true,
+      "accompanying_residual_stats": {
+        "size": 401,
+        "nonfinite": 401,
+        "nonfinite_frac": 1.0,
+        "all_finite": false,
+        "rms_over_finite_entries": null,
+        "max_abs_over_finite_entries": null
+      },
+      "residual_still_propagates_the_poison": true
+    },
+    "constant_profile": {
+      "note": "Omega_X == 0 identically, so denom == 0 legitimately and any c_tw is an arbitrary gauge; 0.0 is a defensible choice, not corruption",
+      "gauge_c_tw_returned": 0.0,
+      "residual_stats": {
+        "size": 401,
+        "nonfinite": 0,
+        "nonfinite_frac": 0.0,
+        "all_finite": true,
+        "rms_over_finite_entries": 0.25119151771049364,
+        "max_abs_over_finite_entries": 1.5136999485371212
+      }
+    },
+    "reading": "The SCALAR gauge is silently zeroed, but the RESIDUAL it accompanies is 100% nonfinite, so no consumer of the residual receives a clean-looking value. Recorded as a bounded caveat, not a gate failure."
+  },
+  "out_of_gate": {
+    "what": "amplitude scaling of residual_two_scale_relnorm -- NOT the gated question (the gate is scoped to coefficients); reported separately",
+    "docstring_claim": "normalizing by ||Omega H Omega|| 'makes the fitness invariant under the family's scaling symmetry' so a GA cannot 'CHEAT by shrinking the amplitude to zero (trivial null)'",
+    "mechanism": "line 236's max(scale, 1e-30) floor: once the RMS of Omega*H(Omega) falls below 1e-30 the denominator stops tracking eps^2 while the numerator keeps falling, so relnorm ~ eps^2 -> 0",
+    "reference_relnorm_at_eps_1": 1.0422935285765323e-06,
+    "invariance_holds_down_to_eps_decade": -14,
+    "first_decade_breaking_1pct": -15,
+    "relnorm_at_first_break": 1.2288881604046248e-07,
+    "ratio_to_reference_at_first_break": 0.11790231126954477,
+    "first_decade_returning_exactly_zero": -78,
+    "severity": "LATENT, not active: the GA's realized genome amplitudes are O(1), many decades above the break. No GA run is included here -- that would be a gCLM measurement, which this leg is banned from.",
+    "ladder": [
+      {
+        "eps_decade": 0,
+        "relnorm": 1.0422935285765323e-06,
+        "ratio_to_reference": 1.0
+      },
+      {
+        "eps_decade": -1,
+        "relnorm": 1.0422935282501784e-06,
+        "ratio_to_reference": 0.9999999996868886
+      },
+      {
+        "eps_decade": -2,
+        "relnorm": 1.0422935281625852e-06,
+        "ratio_to_reference": 0.9999999996028498
+      },
+      {
+        "eps_decade": -3,
+        "relnorm": 1.0422935282724538e-06,
+        "ratio_to_reference": 0.9999999997082603
+      },
+      {
+        "eps_decade": -4,
+        "relnorm": 1.042293528455142e-06,
+        "ratio_to_reference": 0.9999999998835353
+      },
+      {
+        "eps_decade": -5,
+        "relnorm": 1.0422935282438519e-06,
+        "ratio_to_reference": 0.9999999996808189
+      },
+      {
+        "eps_decade": -6,
+        "relnorm": 1.0422935283861024e-06,
+        "ratio_to_reference": 0.9999999998172971
+      },
+      {
+        "eps_decade": -7,
+        "relnorm": 1.0422935287494018e-06,
+        "ratio_to_reference": 1.0000000001658549
+      },
+      {
+        "eps_decade": -8,
+        "relnorm": 1.0422935283984633e-06,
+        "ratio_to_reference": 0.9999999998291565
+      },
+      {
+        "eps_decade": -9,
+        "relnorm": 1.0422935283690129e-06,
+        "ratio_to_reference": 0.9999999998009012
+      },
+      {
+        "eps_decade": -10,
+        "relnorm": 1.0422935285414192e-06,
+        "ratio_to_reference": 0.9999999999663117
+      },
+      {
+        "eps_decade": -11,
+        "relnorm": 1.0422935285398833e-06,
+        "ratio_to_reference": 0.9999999999648381
+      },
+      {
+        "eps_decade": -12,
+        "relnorm": 1.0422935283239609e-06,
+        "ratio_to_reference": 0.9999999997576772
+      },
+      {
+        "eps_decade": -13,
+        "relnorm": 1.0422935284508026e-06,
+        "ratio_to_reference": 0.999999999879372
+      },
+      {
+        "eps_decade": -14,
+        "relnorm": 1.0422935282079222e-06,
+        "ratio_to_reference": 0.9999999996463471
+      },
+      {
+        "eps_decade": -15,
+        "relnorm": 1.2288881604046248e-07,
+        "ratio_to_reference": 0.11790231126954477
+      },
+      {
+        "eps_decade": -16,
+        "relnorm": 1.228888160007067e-09,
+        "ratio_to_reference": 0.0011790231123140218
+      },
+      {
+        "eps_decade": -17,
+        "relnorm": 1.2288881601626679e-11,
+        "ratio_to_reference": 1.179023112463309e-05
+      },
+      {
+        "eps_decade": -18,
+        "relnorm": 1.228888160089941e-13,
+        "ratio_to_reference": 1.1790231123935331e-07
+      },
+      {
+        "eps_decade": -19,
+        "relnorm": 1.2288881604279299e-15,
+        "ratio_to_reference": 1.1790231127178073e-09
+      },
+      {
+        "eps_decade": -20,
+        "relnorm": 1.22888816018187e-17,
+        "ratio_to_reference": 1.1790231124817318e-11
+      },
+      {
+        "eps_decade": -21,
+        "relnorm": 1.228888160093456e-19,
+        "ratio_to_reference": 1.1790231123969055e-13
+      },
+      {
+        "eps_decade": -22,
+        "relnorm": 1.2288881601177418e-21,
+        "ratio_to_reference": 1.1790231124202057e-15
+      },
+      {
+        "eps_decade": -23,
+        "relnorm": 1.2288881600650836e-23,
+        "ratio_to_reference": 1.1790231123696844e-17
+      },
+      {
+        "eps_decade": -24,
+        "relnorm": 1.2288881601947494e-25,
+        "ratio_to_reference": 1.1790231124940887e-19
+      },
+      {
+        "eps_decade": -25,
+        "relnorm": 1.2288881595399528e-27,
+        "ratio_to_reference": 1.1790231118658619e-21
+      },
+      {
+        "eps_decade": -26,
+        "relnorm": 1.2288881602506387e-29,
+        "ratio_to_reference": 1.17902311254771e-23
+      },
+      {
+        "eps_decade": -27,
+        "relnorm": 1.2288881599628654e-31,
+        "ratio_to_reference": 1.1790231122716137e-25
+      },
+      {
+        "eps_decade": -28,
+        "relnorm": 1.2288881598977808e-33,
+        "ratio_to_reference": 1.1790231122091702e-27
+      },
+      {
+        "eps_decade": -29,
+        "relnorm": 1.2288881603907844e-35,
+        "ratio_to_reference": 1.179023112682169e-29
+      },
+      {
+        "eps_decade": -30,
+        "relnorm": 1.228888160105319e-37,
+        "ratio_to_reference": 1.1790231124082872e-31
+      },
+      {
+        "eps_decade": -31,
+        "relnorm": 1.228888159787867e-39,
+        "ratio_to_reference": 1.1790231121037164e-33
+      },
+      {
+        "eps_decade": -32,
+        "relnorm": 1.2288881601958908e-41,
+        "ratio_to_reference": 1.1790231124951837e-35
+      },
+      {
+        "eps_decade": -33,
+        "relnorm": 1.2288881600180822e-43,
+        "ratio_to_reference": 1.17902311232459e-37
+      },
+      {
+        "eps_decade": -34,
+        "relnorm": 1.2288881599164552e-45,
+        "ratio_to_reference": 1.1790231122270868e-39
+      },
+      {
+        "eps_decade": -35,
+        "relnorm": 1.228888159861917e-47,
+        "ratio_to_reference": 1.1790231121747617e-41
+      },
+      {
+        "eps_decade": -36,
+        "relnorm": 1.2288881601508167e-49,
+        "ratio_to_reference": 1.1790231124519385e-43
+      },
+      {
+        "eps_decade": -37,
+        "relnorm": 1.228888159669765e-51,
+        "ratio_to_reference": 1.1790231119904066e-45
+      },
+      {
+        "eps_decade": -38,
+        "relnorm": 1.2288881596748943e-53,
+        "ratio_to_reference": 1.179023111995328e-47
+      },
+      {
+        "eps_decade": -39,
+        "relnorm": 1.2288881604307871e-55,
+        "ratio_to_reference": 1.1790231127205485e-49
+      },
+      {
+        "eps_decade": -40,
+        "relnorm": 1.2288881601248131e-57,
+        "ratio_to_reference": 1.1790231124269902e-51
+      },
+      {
+        "eps_decade": -41,
+        "relnorm": 1.2288881598829723e-59,
+        "ratio_to_reference": 1.1790231121949626e-53
+      },
+      {
+        "eps_decade": -42,
+        "relnorm": 1.2288881600971266e-61,
+        "ratio_to_reference": 1.179023112400427e-55
+      },
+      {
+        "eps_decade": -43,
+        "relnorm": 1.2288881599719252e-63,
+        "ratio_to_reference": 1.1790231122803061e-57
+      },
+      {
+        "eps_decade": -44,
+        "relnorm": 1.2288881605067729e-65,
+        "ratio_to_reference": 1.179023112793451e-59
+      },
+      {
+        "eps_decade": -45,
+        "relnorm": 1.2288881598617272e-67,
+        "ratio_to_reference": 1.1790231121745796e-61
+      },
+      {
+        "eps_decade": -46,
+        "relnorm": 1.228888160037178e-69,
+        "ratio_to_reference": 1.179023112342911e-63
+      },
+      {
+        "eps_decade": -47,
+        "relnorm": 1.2288881600649634e-71,
+        "ratio_to_reference": 1.1790231123695688e-65
+      },
+      {
+        "eps_decade": -48,
+        "relnorm": 1.2288881601946363e-73,
+        "ratio_to_reference": 1.17902311249398e-67
+      },
+      {
+        "eps_decade": -49,
+        "relnorm": 1.2288881601255387e-75,
+        "ratio_to_reference": 1.1790231124276863e-69
+      },
+      {
+        "eps_decade": -50,
+        "relnorm": 1.2288881598088302e-77,
+        "ratio_to_reference": 1.179023112123829e-71
+      },
+      {
+        "eps_decade": -51,
+        "relnorm": 1.2288881601071803e-79,
+        "ratio_to_reference": 1.1790231124100728e-73
+      },
+      {
+        "eps_decade": -52,
+        "relnorm": 1.228888159995915e-81,
+        "ratio_to_reference": 1.1790231123033223e-75
+      },
+      {
+        "eps_decade": -53,
+        "relnorm": 1.2288881598788463e-83,
+        "ratio_to_reference": 1.179023112191004e-77
+      },
+      {
+        "eps_decade": -54,
+        "relnorm": 1.2288881598931527e-85,
+        "ratio_to_reference": 1.1790231122047299e-79
+      },
+      {
+        "eps_decade": -55,
+        "relnorm": 1.2288881602543137e-87,
+        "ratio_to_reference": 1.179023112551236e-81
+      },
+      {
+        "eps_decade": -56,
+        "relnorm": 1.2288881601974683e-89,
+        "ratio_to_reference": 1.1790231124966972e-83
+      },
+      {
+        "eps_decade": -57,
+        "relnorm": 1.2288881598597045e-91,
+        "ratio_to_reference": 1.179023112172639e-85
+      },
+      {
+        "eps_decade": -58,
+        "relnorm": 1.22888816000762e-93,
+        "ratio_to_reference": 1.1790231123145524e-87
+      },
+      {
+        "eps_decade": -59,
+        "relnorm": 1.2288881599249022e-95,
+        "ratio_to_reference": 1.1790231122351911e-89
+      },
+      {
+        "eps_decade": -60,
+        "relnorm": 1.2288881600023328e-97,
+        "ratio_to_reference": 1.1790231123094797e-91
+      },
+      {
+        "eps_decade": -61,
+        "relnorm": 1.228888160144856e-99,
+        "ratio_to_reference": 1.1790231124462197e-93
+      },
+      {
+        "eps_decade": -62,
+        "relnorm": 1.22888816038267e-101,
+        "ratio_to_reference": 1.1790231126743838e-95
+      },
+      {
+        "eps_decade": -63,
+        "relnorm": 1.2288881603172013e-103,
+        "ratio_to_reference": 1.1790231126115717e-97
+      },
+      {
+        "eps_decade": -64,
+        "relnorm": 1.228888159967564e-105,
+        "ratio_to_reference": 1.1790231122761218e-99
+      },
+      {
+        "eps_decade": -65,
+        "relnorm": 1.2288881601114945e-107,
+        "ratio_to_reference": 1.1790231124142119e-101
+      },
+      {
+        "eps_decade": -66,
+        "relnorm": 1.228888160238111e-109,
+        "ratio_to_reference": 1.1790231125356908e-103
+      },
+      {
+        "eps_decade": -67,
+        "relnorm": 1.2288881599730495e-111,
+        "ratio_to_reference": 1.1790231122813846e-105
+      },
+      {
+        "eps_decade": -68,
+        "relnorm": 1.228888159748791e-113,
+        "ratio_to_reference": 1.179023112066226e-107
+      },
+      {
+        "eps_decade": -69,
+        "relnorm": 1.2288881599410954e-115,
+        "ratio_to_reference": 1.1790231122507271e-109
+      },
+      {
+        "eps_decade": -70,
+        "relnorm": 1.2288881599259258e-117,
+        "ratio_to_reference": 1.1790231122361731e-111
+      },
+      {
+        "eps_decade": -71,
+        "relnorm": 1.2288881601543713e-119,
+        "ratio_to_reference": 1.179023112455349e-113
+      },
+      {
+        "eps_decade": -72,
+        "relnorm": 1.228888160005248e-121,
+        "ratio_to_reference": 1.1790231123122767e-115
+      },
+      {
+        "eps_decade": -73,
+        "relnorm": 1.2288881599183118e-123,
+        "ratio_to_reference": 1.179023112228868e-117
+      },
+      {
+        "eps_decade": -74,
+        "relnorm": 1.2288881598502707e-125,
+        "ratio_to_reference": 1.179023112163588e-119
+      },
+      {
+        "eps_decade": -75,
+        "relnorm": 1.228888160021179e-127,
+        "ratio_to_reference": 1.1790231123275612e-121
+      },
+      {
+        "eps_decade": -76,
+        "relnorm": 1.2288881127811482e-129,
+        "ratio_to_reference": 1.1790230670044065e-123
+      },
+      {
+        "eps_decade": -77,
+        "relnorm": 1.2375796952551637e-131,
+        "ratio_to_reference": 1.1873619679336733e-125
+      },
+      {
+        "eps_decade": -78,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -79,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -80,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -81,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -82,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -83,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -84,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -85,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -86,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -87,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -88,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      },
+      {
+        "eps_decade": -89,
+        "relnorm": 0.0,
+        "ratio_to_reference": 0.0
+      }
+    ]
+  },
+  "gate_answer": {
+    "answer": "no",
+    "silent_corruptions": 0,
+    "gate_scoped_cases": 37,
+    "reading": "no -- every NaN/Inf-poisoned c_l, c_omega, c_tw and a propagates to a 100%-nonfinite residual array and a non-finite scalar norm; every finite a nine decades outside [0,1] returns the exact linear-in-a magnitude with no clamp; every wrong-shaped input raises. The battery is banked as a permanent regression test.",
+    "caveats_recorded_not_counted": [
+      "gauge_c_tw returns a finite 0.0 on a NaN-poisoned PROFILE (denom_fallback); the accompanying residual is still 100% nonfinite, and profile poisoning is not the gated input class.",
+      "residual_two_scale_relnorm loses its advertised scale-invariance below an amplitude threshold (out_of_gate); that is the amplitude domain, not the coefficient domain the gate asks about."
+    ]
+  },
+  "wall_seconds": 11.751902103424072
+}
