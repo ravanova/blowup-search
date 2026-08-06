@@ -30,40 +30,63 @@
   "totals": {
     "cases": 39,
     "hypothesis_violating": 36,
-    "false_accepts": 12,
-    "false_accepts_load_bearing": 8,
-    "rejected": 20,
-    "raised": 4
+    "false_accepts": 0,
+    "false_accepts_load_bearing": 0,
+    "rejected": 29,
+    "raised": 7
   },
-  "false_accept_cases": [
-    "A1_F_fabricated_zero",
-    "A6_F_shrunk_1e-8_non_containing",
-    "A11_weight_all_negative",
-    "A12_weight_one_negative",
-    "B04_Y0_negative_unit",
-    "B05_Y0_negative_tiny",
-    "B06_Y0_negative_huge",
-    "B07_Z1_negative",
-    "B08_Z1_negative_rescues_big_Y0",
-    "B17_Y0_neg_inf",
-    "B22_Y0_negative_Z1_negative",
-    "B25_Y0_negative_Z1_just_below_one"
-  ],
-  "load_bearing_cases": [
-    "A1_F_fabricated_zero",
-    "A6_F_shrunk_1e-8_non_containing",
-    "B04_Y0_negative_unit",
-    "B06_Y0_negative_huge",
-    "B07_Z1_negative",
-    "B08_Z1_negative_rescues_big_Y0",
-    "B17_Y0_neg_inf",
-    "B25_Y0_negative_Z1_just_below_one"
-  ],
+  "history": {
+    "pre_fix": {
+      "commit": "c6aee16 (leg 98, Route-ICA, branch leg/ica-v1)",
+      "cases": 39,
+      "hypothesis_violating": 36,
+      "false_accepts": 12,
+      "false_accepts_load_bearing": 8,
+      "rejected": 20,
+      "raised": 4,
+      "false_accept_cases": [
+        "A1_F_fabricated_zero",
+        "A6_F_shrunk_1e-8_non_containing",
+        "A11_weight_all_negative",
+        "A12_weight_one_negative",
+        "B04_Y0_negative_unit",
+        "B05_Y0_negative_tiny",
+        "B06_Y0_negative_huge",
+        "B07_Z1_negative",
+        "B08_Z1_negative_rescues_big_Y0",
+        "B17_Y0_neg_inf",
+        "B22_Y0_negative_Z1_negative",
+        "B25_Y0_negative_Z1_just_below_one"
+      ],
+      "load_bearing_cases": [
+        "A1_F_fabricated_zero",
+        "A6_F_shrunk_1e-8_non_containing",
+        "B04_Y0_negative_unit",
+        "B06_Y0_negative_huge",
+        "B07_Z1_negative",
+        "B08_Z1_negative_rescues_big_Y0",
+        "B17_Y0_neg_inf",
+        "B25_Y0_negative_Z1_just_below_one"
+      ],
+      "raised_cases": [
+        "A2_F_negative_width_excluding",
+        "A3_F_endpoints_swapped",
+        "B20_Z2_zero",
+        "B21_Z2_negative_zero"
+      ],
+      "note": "12 of 36 hypothesis-violating inputs were reported as CLOSING certificates, 8 of them load-bearing (the hypothesis-satisfying input of the same magnitude does NOT close). Two mechanisms: radii_verdict evaluated the discriminant on theorem-excluded constants, and interval_constants never checked the enclosure it was handed for containment."
+    }
+  },
+  "false_accept_cases": [],
+  "load_bearing_cases": [],
   "raised_cases": [
+    "A1_F_fabricated_zero",
     "A2_F_negative_width_excluding",
     "A3_F_endpoints_swapped",
-    "B20_Z2_zero",
-    "B21_Z2_negative_zero"
+    "A6_F_shrunk_1e-8_non_containing",
+    "A10_F_and_J_both_fabricated",
+    "A11_weight_all_negative",
+    "A12_weight_one_negative"
   ],
   "cases": [
     {
@@ -78,20 +101,10 @@
         "Z2": 636761.9249782771
       },
       "honest_verdict_closes": false,
-      "constants": {
-        "Y0": 8e-323,
-        "Z1": 2.1792677330349195e-09,
-        "Z2": 636761.9249782771
-      },
-      "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 5e-324,
-        "r_max": 1.570445654166346e-06,
-        "budget": 7.85222825371962e-07
-      },
-      "outcome": "false_accept",
-      "poison_is_load_bearing": true
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "CertificateInputError: the residual enclosure does not contain the residual: it gives Y_0 = 7.905050e-323, while F re-evaluated in float at the same point gives 5.906547e-03 in the sa"
     },
     {
       "case": "A2_F_negative_width_excluding",
@@ -146,10 +159,10 @@
       },
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": "nan",
-        "r_max": "nan",
-        "budget": 6.255605435510079e-07
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "poison_is_load_bearing": false
@@ -173,10 +186,10 @@
       },
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": "nan",
-        "r_max": "nan",
-        "budget": 6.255605435510079e-07
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "poison_is_load_bearing": false
@@ -193,20 +206,10 @@
         "Z2": 636761.9249782771
       },
       "honest_verdict_closes": false,
-      "constants": {
-        "Y0": 5.906547493951376e-11,
-        "Z1": 2.1792677330349195e-09,
-        "Z2": 636761.9249782771
-      },
-      "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 5.906658585533489e-11,
-        "r_max": 1.570445654166346e-06,
-        "budget": 7.85222825371962e-07
-      },
-      "outcome": "false_accept",
-      "poison_is_load_bearing": true
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "CertificateInputError: the residual enclosure does not contain the residual: it gives Y_0 = 5.906547e-11, while F re-evaluated in float at the same point gives 5.906547e-03 in the sam"
     },
     {
       "case": "A7_J_endpoints_swapped",
@@ -254,7 +257,7 @@
       },
       "verdict": {
         "closes": false,
-        "reason": "Z1 >= 1",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
         "budget": 0.0
@@ -301,20 +304,10 @@
         "Z2": 636761.9249782771
       },
       "honest_verdict_closes": false,
-      "constants": {
-        "Y0": 8e-323,
-        "Z1": 28721.417217964256,
-        "Z2": 636761.9249782771
-      },
-      "verdict": {
-        "closes": false,
-        "reason": "Z1 >= 1",
-        "r_min": null,
-        "r_max": null,
-        "budget": 0.0
-      },
-      "outcome": "rejected",
-      "poison_is_load_bearing": false
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "CertificateInputError: the residual enclosure does not contain the residual: it gives Y_0 = 7.905050e-323, while F re-evaluated in float at the same point gives 5.906547e-03 in the sa"
     },
     {
       "case": "A11_weight_all_negative",
@@ -328,20 +321,10 @@
         "Z2": 799283.1427753915
       },
       "honest_verdict_closes": true,
-      "constants": {
-        "Y0": -2.4630387149974178e-28,
-        "Z1": 2.754268129183862e-09,
-        "Z2": 144300.4248810159
-      },
-      "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 5e-324,
-        "r_max": 6.929986506070858e-06,
-        "budget": 3.4649932434919076e-06
-      },
-      "outcome": "false_accept",
-      "poison_is_load_bearing": false
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "CertificateInputError: the weight vector has 103 negative component(s) (w[101] = np.float64(-7.452394128947751)); ||z||_w = max_i w_i |z_i| is a norm only for a strictly positive w, a"
     },
     {
       "case": "A12_weight_one_negative",
@@ -355,20 +338,10 @@
         "Z2": 799283.1427753915
       },
       "honest_verdict_closes": true,
-      "constants": {
-        "Y0": 1.3962887163722508e-11,
-        "Z1": 2.754153480106268e-09,
-        "Z2": 799283.1067777729
-      },
-      "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 1.3962965117979823e-11,
-        "r_max": 1.2511211468953007e-06,
-        "budget": 6.255605717247605e-07
-      },
-      "outcome": "false_accept",
-      "poison_is_load_bearing": false
+      "constants": null,
+      "verdict": null,
+      "outcome": "raised",
+      "exception": "CertificateInputError: the weight vector has 1 negative component(s) (w[0] = np.float64(-1.0)); ||z||_w = max_i w_i |z_i| is a norm only for a strictly positive w, and a negative one "
     },
     {
       "case": "A13_weight_has_zero",
@@ -389,7 +362,7 @@
       },
       "verdict": {
         "closes": false,
-        "reason": "Z1 >= 1",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
         "budget": 0.0
@@ -416,7 +389,7 @@
       },
       "verdict": {
         "closes": false,
-        "reason": "Z1 >= 1",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
         "budget": 0.0
@@ -490,15 +463,15 @@
       "violates": "H1: Y_0 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -0.8779733838059499,
-        "r_max": 0.6999999999999998,
-        "budget": 0.24499999999999988
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": false,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     },
     {
       "case": "B05_Y0_negative_tiny",
@@ -509,13 +482,13 @@
       "violates": "H1: Y_0 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -1.4285239657851887e-12,
-        "r_max": 0.6999999999999998,
-        "budget": 0.24499999999999988
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-12); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": true,
       "poison_is_load_bearing": false
     },
@@ -528,15 +501,15 @@
       "violates": "H1: Y_0 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -1413.5137356142454,
-        "r_max": 0.6999999999999998,
-        "budget": 0.24499999999999988
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": false,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     },
     {
       "case": "B07_Z1_negative",
@@ -547,15 +520,15 @@
       "violates": "H1: Z_1 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 1.6608936448392344e-13,
-        "r_max": 5.999999999999999,
-        "budget": 17.999999999999993
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-5.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": false,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     },
     {
       "case": "B08_Z1_negative_rescues_big_Y0",
@@ -566,15 +539,15 @@
       "violates": "H1: Z_1 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": 0.000999998999759555,
-        "r_max": 1000000.9999999999,
-        "budget": 500001000000.4998
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is negative (-1000000.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": false,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     },
     {
       "case": "B09_Z2_negative",
@@ -586,10 +559,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": 1.4285239657851891e-12,
-        "r_max": -1.4000000000014288,
-        "budget": -0.24500000000000002
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": true,
@@ -605,10 +578,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": 1413.513735614246,
-        "r_max": -1414.913735614246,
-        "budget": -0.24500000000000002
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": false,
@@ -624,10 +597,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": -0.585786437626905,
-        "r_max": -3.4142135623730954,
-        "budget": -2.000000000000001
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1.0); it is an upper bound on a norm; Z_1 is negative (-1.0); it is an upper bound on a norm; Z_2 is negative (-1.0); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": false,
@@ -643,10 +616,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": "nan",
-        "r_max": "nan",
-        "budget": 0.24499999999999988
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": null,
@@ -662,7 +635,7 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "Z1 >= 1",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
         "budget": 0.0
@@ -681,10 +654,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": "nan",
-        "r_max": "nan",
-        "budget": "nan"
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": null,
@@ -700,7 +673,7 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "Z1 >= 1",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_1 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check); Z_2 is NaN (a norm bound cannot be NaN; note that `NaN < 1.0` is False, so the contraction guard alone is not a hypothesis check). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
         "budget": 0.0
@@ -719,10 +692,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "Y0 exceeds the budget",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is +infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
-        "budget": 0.24499999999999988
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": null,
@@ -737,15 +710,15 @@
       "violates": "H1: Y_0 not finite",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -1.3407807929942594e+154,
-        "r_max": 0.6999999999999998,
-        "budget": 0.24499999999999988
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": null,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     },
     {
       "case": "B18_Z1_neg_inf",
@@ -757,10 +730,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "ok",
-        "r_min": "nan",
-        "r_max": 1.7976931348623157e+308,
-        "budget": 1.7976931348623157e+308
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_1 is -infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": null,
@@ -776,10 +749,10 @@
       "valid_input": false,
       "verdict": {
         "closes": false,
-        "reason": "Y0 exceeds the budget",
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Z_2 is +infinite (a norm bound is finite by hypothesis). No discriminant is evaluated.",
         "r_min": null,
         "r_max": null,
-        "budget": -5e-324
+        "budget": 0.0
       },
       "outcome": "rejected",
       "magnitude_counterpart_closes": null,
@@ -793,9 +766,16 @@
       "Z2": 0.0,
       "violates": "H1 edge: Z_2 = 0, the quadratic degenerates",
       "valid_input": false,
-      "verdict": null,
-      "outcome": "raised",
-      "exception": "ZeroDivisionError: float division by zero"
+      "verdict": {
+        "closes": false,
+        "reason": "Z2 == 0 (degenerate: the radii polynomial is affine, not quadratic; this function certifies the quadratic case and makes no claim about the affine one)",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
     },
     {
       "case": "B21_Z2_negative_zero",
@@ -805,9 +785,16 @@
       "Z2": -0.0,
       "violates": "H1 edge: Z_2 = -0.0",
       "valid_input": false,
-      "verdict": null,
-      "outcome": "raised",
-      "exception": "ZeroDivisionError: float division by zero"
+      "verdict": {
+        "closes": false,
+        "reason": "Z2 == 0 (degenerate: the radii polynomial is affine, not quadratic; this function certifies the quadratic case and makes no claim about the affine one)",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
+      },
+      "outcome": "rejected",
+      "magnitude_counterpart_closes": false,
+      "poison_is_load_bearing": false
     },
     {
       "case": "B22_Y0_negative_Z1_negative",
@@ -818,13 +805,13 @@
       "violates": "H1: Y_0 < 0 and Z_1 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -0.0009985029928936127,
-        "r_max": 1.0009999999999997,
-        "budget": 0.5010004999999996
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-0.001); it is an upper bound on a norm; Z_1 is negative (-0.001); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": true,
       "poison_is_load_bearing": false
     },
@@ -875,15 +862,15 @@
       "violates": "H1: Y_0 < 0",
       "valid_input": false,
       "verdict": {
-        "closes": true,
-        "reason": "ok",
-        "r_min": -1.3075424481372155e-15,
-        "r_max": 1.1102230246251564e-16,
-        "budget": 6.162975822039153e-33
+        "closes": false,
+        "reason": "INVALID_INPUT: outside the hypotheses of the radii polynomial theorem (Y_0, Z_1, Z_2 are upper bounds on norms, hence finite and nonnegative): Y_0 is negative (-1e-30); it is an upper bound on a norm. No discriminant is evaluated.",
+        "r_min": null,
+        "r_max": null,
+        "budget": 0.0
       },
-      "outcome": "false_accept",
+      "outcome": "rejected",
       "magnitude_counterpart_closes": false,
-      "poison_is_load_bearing": true
+      "poison_is_load_bearing": false
     }
   ]
 }

@@ -155,3 +155,43 @@ Mirror the sibling's repair, which is already written and tested in
 
 Gates 7–13 of `test_interval_certificate_adversarial.py` are written so the repair flips them,
 and each docstring states the assertion the repaired code should carry.
+
+---
+
+## STATUS UPDATE (2026-08-06, leg 0 bench repair — this leg's report is left as written)
+
+**The repair has landed on `bench/fix-interval-certificate-validation`, and it followed all
+four recommendations above.** Leg 98's report is deliberately unedited: it is the record of the
+pre-fix measurement, and the numbers in it are the numbers that motivated the repair.
+
+* **12/36 false accepts → 0/36**, 8 load-bearing → 0. Same 39 cases, same judgement predicate;
+  the battery is the instrument that measured the defect and now measures its absence. The
+  pre-fix totals are carried in `experiments/p2_route_ica_v1_adversarial.PRE_FIX_MEASUREMENT`
+  and written into the JSON under `history.pre_fix`, so regenerating the artifact cannot erase
+  the finding. Post-fix split: 29 rejected, 7 refused with an exception.
+* `radii_verdict` gained `_hypothesis_violations`, the same check leg 79's repair put in the
+  sibling, and **returns** `closes=False` / `reason: INVALID_INPUT` rather than raising —
+  recommendation 1, in the sibling's own shape. Raising would have converted the NaN and
+  infinity paths, which this leg measured as *already correct 4/4*, from a sound refusal into
+  an exception; those are HOLDS gates and they are untouched.
+* `Z_2 = 0` returns a structured non-closing verdict naming the affine degeneracy —
+  recommendation 2. No mathematics was added: the affine case is refused, not certified.
+* `interval_constants` refuses a `w` with negative components — recommendation 3, narrowed on
+  purpose to the *negative* case. Zero and NaN components are left to drive `Z_1` non-finite as
+  they do today, because that path is already sound, is pinned as a HOLDS gate, and a weight
+  can underflow to zero legitimately mid-sweep.
+* `interval_constants` re-evaluates `F` in float at `z` (new `F_float` on all three enclosure
+  classes) and refuses an enclosure that does not contain it — **recommendation 4, the one that
+  is not in the sibling**, and the only thing that catches case A6.
+* **The one thing this leg could not have known**: exact componentwise containment of the float
+  residual FAILS on honest data (40/103 components at BorderedCLM n=101), because the float
+  evaluation of `F` is itself noisy — this repository's own lesson 86, `residual_floor`. The
+  check is therefore made in the `Y_0` currency with a measured slack of `1e4`: honest data
+  never exceeds ratio 1.0 (0.038–1.000 across BorderedCLM n=101/201/401 and Kawahara N=250),
+  and this leg's sharpest lie sits at 1.0e+08. It is a screen against order-of-magnitude
+  fabrication and is documented as one, not as a proof of containment.
+* **Blast radius as this leg scoped it, re-verified independently and confirmed: LATENT.** Leg
+  61's Kawahara known-answer gate certifies **bit-identically** before and after
+  (`Y_0 = 3.02425170856154917e-17`, `r_min_Hl = 6.76981691313455990e-15`,
+  `r_max_Hl = 2.61929080131872404e-02`, 17 significant digits on every constant), and all 18
+  gates of `test_interval_certificate.py` print byte-identical output. No banked number moves.
