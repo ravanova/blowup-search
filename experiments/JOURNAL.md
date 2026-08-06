@@ -3140,4 +3140,13 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   solver/critical_dissipation.py (leg 154's non-integer-exponent truncation repair),
   re-verified from scratch after the interrupted session: 96/96 case x entry-point
   cells refused, 276,077/276,077 leaves bit-identical, 0 moved. Leg 121's battery
-  banked as a permanent regression suite.
+  banked as a permanent regression suite. Secondary (non-claim-bearing): leg 121's
+  own banked JSON is a drifted environmental reference (0/9 rows bitwise, worst
+  2.95e-09 relative on alpha_1) -- does not affect either clause.
+- **Leg 196 (Route-USC2) — STILL_SHORT:** the authors' later work (arXiv:2511.22819,
+  read at full text, 27 pp) carries no certificate for arXiv:2509.14185's unstable
+  singularities -- 0 hits for interval arithmetic/enclosure/certif/eigen; all 4
+  "computer-assisted" mentions are definition/prerequisite/aspiration, 0 achieved.
+  0 of leg 175's 4 open items closed; 3 new obstructions named (binding one: a
+  6.0-decade gap between the 1e-13 residual and the +-1e-7 enclosure of lambda at
+  IPM's 4th unstable mode).
