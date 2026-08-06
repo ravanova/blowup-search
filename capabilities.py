@@ -134,6 +134,36 @@ CAPABILITIES = [
                    "inviscid profile associated with a' -- so this module measures the "
                    "obstruction to one; it does not construct one"),
      "test": "test_dissipative_profile.py"},
+    {"module": "solver/chen_inviscid_certificate.py",
+     "object": ("Object A -- Chen arXiv:1908.09385 eq (2.2)'s INVISCID (nu=0) a=1/2 gCLM "
+                "profile -- against EVERY radii-polynomial hypothesis, not just the budget"),
+     "holds": ("exact Fraction rational-function arithmetic on the steady defect; the EXACT "
+               "one-parameter dilation orbit Psi_g = -(16/3) g^{3/2} X/(X^2+g)^2 through the "
+               "profile and its tangent (the kernel); the seven-clause certificate battery "
+               "H1..H7; the far-field symbol clause sigma(s) = c_omega + s c_l; the bordered "
+               "(phase-condition) repair; and the n-ladder that decides whether a clause is "
+               "an operator fact or the grid.  Imports solver/dissipative_profile.py "
+               "READ-ONLY for Chen's constants and operators; uses the ONE shared budget and "
+               "the ONE shared hypothesis guard.  FLOAT throughout except the Fraction "
+               "parts; never a certificate"),
+     "validated": ("the defect numerator is the ZERO POLYNOMIAL in exact rational arithmetic "
+                   "at g in {3/8, 1, 2, 1/7, 9/4} (g=3/8 is Chen eq (2.2) verbatim, and the "
+                   "module's H Psi and U match leg 125's chen_profile to <1e-13), so Y_0 = 0 "
+                   "EXACTLY -- while the certificate still cannot close, because the orbit "
+                   "tangent is an exact kernel and (I - A DF)phi = phi forces Z_0+Z_1 >= 1 "
+                   "for EVERY A.  Kernel is an operator fact, not the grid: its relative "
+                   "defect falls 5.21e-05 -> 3.27e-06 across n=401..801 while a localised-bump "
+                   "control stays flat at 0.689 (separation 2.11e05), and "
+                   "sigma_min/sigma_max collapses like n^-6.68.  Z_2 ~ n^2.36 (9.44e10 -> "
+                   "6.31e12 over n=201..1201), so it is NOT an operator constant here.  "
+                   "Far-field symbol vanishes at s=3 = the profile's MEASURED decay exponent "
+                   "2.999955 (X^-2 control measures -1.999911).  Lesson-90 controls that CAN "
+                   "fail: perturbed amplitude, a=0, c_l=1/2, the bump, the X^-2 profile, and "
+                   "the sigma-ratio collapse.  TRAP BANKED: pinv with default rcond silently "
+                   "inverts the near-kernel (shadow 2.87e-09 instead of 1) whenever "
+                   "sigma_min/sigma_max > n*eps; truncated at rcond=1e-6 it returns to "
+                   "0.99998 -> 0.9999990"),
+     "test": "test_chen_inviscid_certificate.py"},
     {"module": "solver/marginal_flow.py", "object": "the augmented (Omega, mu) flow, driven",
      "holds": "time integration of (F_mu)+(M) as an initial-value problem",
      "validated": ("lambda_mu slope +2.0011 vs +2, zero at 1.50009 vs 1.5; `integrate` "
