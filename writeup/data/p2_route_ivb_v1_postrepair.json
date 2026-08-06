@@ -1,0 +1,1316 @@
+{
+  "eta": 5e-324,
+  "ground_truth": "exact rational (fractions.Fraction) on exact float64 inputs",
+  "leg": 87,
+  "module_under_test": "solver/interval.py (post-repair, read-only)",
+  "part_A_leg69_corpus_rerun": {
+    "cases": 14036,
+    "dekker_probe": {
+      "at_wall": "OverflowError",
+      "at_wall_message_head": "_two_product: Dekker's error-free splitting overflowed (max |a| = 1.33939e+300, ",
+      "below_wall_encloses_exact": true,
+      "below_wall_magnitude": 6.696928794914171e+299,
+      "below_wall_width": 4.461050725433349e+284,
+      "e_first_raise": 997,
+      "e_first_silent_nonfinite": null,
+      "leg69_e_crit": 997,
+      "probe": "dekker_split_overflow_rerun",
+      "wall_unmoved": true
+    },
+    "delta_vs_banked_prerepair": [
+      {
+        "cases_post": 6772,
+        "cases_pre": 6772,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 0,
+        "false_negatives_repaired": 0,
+        "family": "elementary_ops",
+        "reproducer_post": null,
+        "reproducer_pre": null,
+        "slack_change": 0.0,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 0.0,
+        "worst_relative_slack_post": 5.0591067023618705e-20,
+        "worst_relative_slack_pre": 5.0591067023618705e-20
+      },
+      {
+        "cases_post": 240,
+        "cases_pre": 240,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 0,
+        "false_negatives_repaired": 0,
+        "family": "isum_cancellation",
+        "reproducer_post": null,
+        "reproducer_pre": null,
+        "slack_change": 0.0,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 0.0,
+        "worst_relative_slack_post": 0.4930564171798272,
+        "worst_relative_slack_pre": 0.4930564171798272
+      },
+      {
+        "cases_post": 720,
+        "cases_pre": 720,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 0,
+        "false_negatives_repaired": 0,
+        "family": "matvec_point_and_box",
+        "reproducer_post": null,
+        "reproducer_pre": null,
+        "slack_change": 0.0,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 0.0,
+        "worst_relative_slack_post": 1.7403580402497008e-12,
+        "worst_relative_slack_pre": 1.7403580402497008e-12
+      },
+      {
+        "cases_post": 720,
+        "cases_pre": 720,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 0,
+        "false_negatives_repaired": 0,
+        "family": "dot2_normal_range",
+        "reproducer_post": null,
+        "reproducer_pre": null,
+        "slack_change": 0.0,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 0.0,
+        "worst_relative_slack_post": 0.4991042453068184,
+        "worst_relative_slack_pre": 0.4991042453068184
+      },
+      {
+        "cases_post": 3904,
+        "cases_pre": 3904,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 0,
+        "false_negatives_repaired": 0,
+        "family": "tail_block_conditioning",
+        "reproducer_post": null,
+        "reproducer_pre": null,
+        "slack_change": 0.0,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 0.0,
+        "worst_relative_slack_post": 0.4763772490895882,
+        "worst_relative_slack_pre": 0.4763772490895882
+      },
+      {
+        "cases_post": 840,
+        "cases_pre": 840,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 43,
+        "false_negatives_repaired": 43,
+        "family": "dot2_subnormal_range",
+        "reproducer_post": null,
+        "reproducer_pre": {
+          "escape_eta": 6.5786122625061205,
+          "exact_float": "0.0",
+          "hi": "7.4e-323",
+          "lo": "3.5e-323",
+          "tag": "scale=1e-155"
+        },
+        "slack_change": 1.3124028815351167,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 6.5786122625061205,
+        "worst_relative_slack_post": 0.4900763487218517,
+        "worst_relative_slack_pre": -0.8223265328132651
+      },
+      {
+        "cases_post": 840,
+        "cases_pre": 840,
+        "corpus_identical_size": true,
+        "false_negatives_post": 0,
+        "false_negatives_pre": 19,
+        "false_negatives_repaired": 19,
+        "family": "matvec_subnormal_range",
+        "reproducer_post": null,
+        "reproducer_pre": {
+          "escape_eta": 3.9024398676072254,
+          "exact_float": "0.0",
+          "hi": "4e-323",
+          "lo": "2e-323",
+          "tag": "scale=1e-160"
+        },
+        "slack_change": 1.4510042303101787,
+        "worst_escape_eta_post": 0.0,
+        "worst_escape_eta_pre": 3.9024398676072254,
+        "worst_relative_slack_post": 0.4753942634083722,
+        "worst_relative_slack_pre": -0.9756099669018063
+      }
+    ],
+    "false_negatives": 0,
+    "families": [
+      {
+        "cases": 6772,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 416,
+        "false_negatives": 0,
+        "family": "elementary_ops",
+        "note": "+, -, *, / and reciprocal on adversarial endpoint pairs spanning 1e-320 to 1e300, including the subnormal boundary; exact-rational check on both endpoints",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 5.0591067023618705e-20
+      },
+      {
+        "cases": 240,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "isum_cancellation",
+        "note": "rigorous sum at accumulation lengths 32..258 (the certificate's own K range, bordered), with the terms driven to ~1e-32 relative cancellation",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 0.4930564171798272
+      },
+      {
+        "cases": 720,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "matvec_point_and_box",
+        "note": "uncompensated matvec at n x m up to 8 x 260, catastrophically cancelled rows; plus the interval-vector (box) path checked at every box CORNER pair",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 1.7403580402497008e-12
+      },
+      {
+        "cases": 720,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "dot2_normal_range",
+        "note": "the COMPENSATED matvec both live legs use, at m = 32..260 and input scales 1e-100..1e100, every row driven to ~1e-32 relative cancellation -- this is the regime the certificate stack actually occupies",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 0.4991042453068184
+      },
+      {
+        "cases": 3904,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "tail_block_conditioning",
+        "note": "the LIVE bordered linearization (spectral_certificate.bordered_linearization) at K = 16, 32, 64, 128, whose tail diagonal is EXACTLY zero, against vectors chosen to cancel its rows",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 0.4763772490895882
+      },
+      {
+        "cases": 840,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "dot2_subnormal_range",
+        "note": "the compensated matvec at input scales 1e-120..1e-185, i.e. products straddling the normal/subnormal boundary (min normal 2.2e-308, eta = 4.9e-324); the ORO bound u|x.y| + gamma^2 |x||y| is purely RELATIVE and carries no absolute eta term",
+        "reproducer": null,
+        "scale_scan": {
+          "1e-120": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-125": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-130": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-135": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-140": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-145": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-150": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-155": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-160": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-165": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-170": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-175": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-180": {
+            "cases": 60,
+            "false_negatives": 0
+          },
+          "1e-185": {
+            "cases": 60,
+            "false_negatives": 0
+          }
+        },
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 0.4900763487218517
+      },
+      {
+        "cases": 840,
+        "cases_touching_an_endpoint": 0,
+        "cases_with_unbounded_endpoint": 0,
+        "false_negatives": 0,
+        "family": "matvec_subnormal_range",
+        "note": "the UNCOMPENSATED matvec over the same subnormal band, to separate which of the two reductions carries the defect",
+        "reproducer": null,
+        "worst_absolute_escape_eta": 0.0,
+        "worst_relative_slack": 0.4753942634083722
+      }
+    ],
+    "prerepair_false_negatives": 62,
+    "prerepair_worst_escape_eta": 6.5786122625061205
+  },
+  "part_B_fresh_battery": {
+    "cases": 6873,
+    "dekker_wall_2d": {
+      "cells": 324,
+      "enclosed": 40,
+      "family": "dekker_wall_2d_sweep",
+      "holes": [],
+      "missed": 0,
+      "note": "|a| = 2^ea, |b| = 2^eb over ea, eb in {0, 500, 900, 960, 996, 997, 998, 1000, 1023} x signs, including cells where the PRODUCT overflows; every cell must either raise OverflowError or enclose the exact rational product",
+      "product_overflow_cells": 252,
+      "raised": 284,
+      "silent_nan": 0,
+      "smallest_max_exponent_that_raised": 900,
+      "wall_exponent_operand_a": 997,
+      "wall_exponent_operand_b": 997
+    },
+    "eta_calibration": {
+      "by_reduction": {
+        "dot2_matvec": {
+          "cases": 252,
+          "false_negatives": 0,
+          "max_radius_utilisation": 0.027157118478406173,
+          "min_headroom_eta": 82.87813642477326,
+          "reproducer": null,
+          "worst_escape_eta": 0.0
+        },
+        "matvec": {
+          "cases": 252,
+          "false_negatives": 0,
+          "max_radius_utilisation": 0.06732177090665388,
+          "min_headroom_eta": 21.99999970634454,
+          "reproducer": null,
+          "worst_escape_eta": 0.0
+        }
+      },
+      "family": "eta_per_term_calibration",
+      "implemented_dot2_eta_per_term": 8.0,
+      "implemented_plain_eta_per_term": 2.0,
+      "note": "empirical absolute-error demand of both reductions in the subnormal band, in units of eta per accumulated term, against the implemented constants (plain 2.0, dot2 8.0) and the published Rump BIT 2012 Thm 4.3 coefficient 0.5 for the plain recursive dot product",
+      "published_plain_eta_per_term_rump_thm_4_3": 0.5,
+      "scale_scan": {
+        "1e-130": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 7.71380959090214e+33
+        },
+        "1e-133": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 1.1634702875925767e+28
+        },
+        "1e-136": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 1.8947710934798437e+22
+        },
+        "1e-139": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 1.196184072070489e+16
+        },
+        "1e-142": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 9225431007.289892
+        },
+        "1e-145": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 13036.072516159493
+        },
+        "1e-148": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 83.81115526530844
+        },
+        "1e-151": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 83.02667983685481
+        },
+        "1e-154": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 36.71870248560195
+        },
+        "1e-157": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 21.99999970634454
+        },
+        "1e-160": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 21.999999999999847
+        },
+        "1e-163": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-166": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-169": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-172": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-175": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-178": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-181": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-184": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-187": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        },
+        "1e-190": {
+          "cases": 24,
+          "false_negatives": 0,
+          "min_headroom_eta": 23.0
+        }
+      },
+      "worst_radius_utilisation": 0.06732177090665388
+    },
+    "false_negatives": 0,
+    "half_eta_aligned_extremal": {
+      "by_reduction": {
+        "dot2_matvec": {
+          "cases": 10,
+          "false_negatives": 0,
+          "max_demand_eta_per_term": 0.5,
+          "min_headroom_eta": 35.0,
+          "min_margin_factor": 16.0
+        },
+        "matvec": {
+          "cases": 10,
+          "false_negatives": 0,
+          "max_demand_eta_per_term": 0.5,
+          "min_headroom_eta": 9.0,
+          "min_margin_factor": 4.0
+        }
+      },
+      "cases": 20,
+      "detail": [
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 35.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 37.0
+          },
+          "exact_over_eta": 14.0,
+          "m": 4,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 9.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 11.0
+          },
+          "parity": "even",
+          "predicted_error_eta": 2.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 35.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 37.0
+          },
+          "exact_over_eta": 18.0,
+          "m": 4,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 9.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 11.0
+          },
+          "parity": "odd",
+          "predicted_error_eta": 2.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 125.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 133.0
+          },
+          "exact_over_eta": 248.0,
+          "m": 16,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 27.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 35.0
+          },
+          "parity": "even",
+          "predicted_error_eta": 8.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 125.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 133.0
+          },
+          "exact_over_eta": 264.0,
+          "m": 16,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 27.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 35.0
+          },
+          "parity": "odd",
+          "predicted_error_eta": 8.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 485.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 517.0
+          },
+          "exact_over_eta": 4064.0,
+          "m": 64,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 99.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 131.0
+          },
+          "parity": "even",
+          "predicted_error_eta": 32.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 485.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 517.0
+          },
+          "exact_over_eta": 4128.0,
+          "m": 64,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 99.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 131.0
+          },
+          "parity": "odd",
+          "predicted_error_eta": 32.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 965.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 1029.0
+          },
+          "exact_over_eta": 16320.0,
+          "m": 128,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 195.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 259.0
+          },
+          "parity": "even",
+          "predicted_error_eta": 64.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 965.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 1029.0
+          },
+          "exact_over_eta": 16448.0,
+          "m": 128,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 195.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 259.0
+          },
+          "parity": "odd",
+          "predicted_error_eta": 64.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 1940.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 2069.0
+          },
+          "exact_over_eta": 66435.0,
+          "m": 258,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 390.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 519.0
+          },
+          "parity": "even",
+          "predicted_error_eta": 129.0
+        },
+        {
+          "dot2_matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 1940.0,
+            "implemented_eta_per_term": 8.0,
+            "radius_eta": 2069.0
+          },
+          "exact_over_eta": 66693.0,
+          "m": 258,
+          "matvec": {
+            "demand_eta_per_term": 0.5,
+            "headroom_eta": 390.0,
+            "implemented_eta_per_term": 2.0,
+            "radius_eta": 519.0
+          },
+          "parity": "odd",
+          "predicted_error_eta": 129.0
+        }
+      ],
+      "false_negatives": 0,
+      "family": "half_eta_aligned_extremal",
+      "note": "closed-form extremal subnormal data: every product lands exactly halfway between two subnormals with the ties broken in the SAME direction, so the absolute accumulation error is exactly m*eta/2 -- Rump BIT 2012 Thm 4.3 attained with equality.  This is the case the eta constants must cover",
+      "published_bound_eta_per_term": 0.5,
+      "reproducer": null
+    },
+    "live_k_range": {
+      "by_K": {
+        "K=128": {
+          "cases": 3096,
+          "exact_zero_entries": 16133,
+          "false_negatives": 0,
+          "max_abs": 128.0,
+          "min_nonzero_abs": 0.5,
+          "shape": [
+            129,
+            129
+          ],
+          "worst_relative_slack": 0.375
+        },
+        "K=16": {
+          "cases": 408,
+          "exact_zero_entries": 229,
+          "false_negatives": 0,
+          "max_abs": 16.0,
+          "min_nonzero_abs": 0.5,
+          "shape": [
+            17,
+            17
+          ],
+          "worst_relative_slack": 0.375
+        },
+        "K=32": {
+          "cases": 792,
+          "exact_zero_entries": 965,
+          "false_negatives": 0,
+          "max_abs": 32.0,
+          "min_nonzero_abs": 0.5,
+          "shape": [
+            33,
+            33
+          ],
+          "worst_relative_slack": 0.375
+        },
+        "K=64": {
+          "cases": 1560,
+          "exact_zero_entries": 3973,
+          "false_negatives": 0,
+          "max_abs": 64.0,
+          "min_nonzero_abs": 0.5,
+          "shape": [
+            65,
+            65
+          ],
+          "worst_relative_slack": 0.375
+        }
+      },
+      "cases": 5856,
+      "cases_touching_an_endpoint": 0,
+      "false_negatives": 0,
+      "family": "live_k_range_exact_rational",
+      "leg69_banked_worst_relative_slack": 0.4763772490895882,
+      "min_headroom_eta": 2.308225808846707e+293,
+      "note": "bordered_linearization at K = 16, 32, 64, 128 -- entries 0.5 to 128, tail diagonal exactly zero -- both reductions, cancelled and uncancelled, every row checked against exact rational ground truth",
+      "reproducer": null,
+      "worst_relative_slack": 0.375
+    },
+    "nan_widening": {
+      "checks": {
+        "-inf,nan": {
+          "contains_0": true,
+          "contains_1e300": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "0,nan": {
+          "contains_0": true,
+          "contains_1e300": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "entire*entire": {
+          "contains_0": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "entire*zero": {
+          "contains_0": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "entire+entire": {
+          "contains_0": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "entire-entire": {
+          "contains_0": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "nan,+inf": {
+          "contains_0": true,
+          "contains_1e300": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "nan,1": {
+          "contains_0": true,
+          "contains_1e300": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        },
+        "nan,nan": {
+          "contains_0": true,
+          "contains_1e300": true,
+          "hi": "inf",
+          "lo": "-inf",
+          "stored_nan": false
+        }
+      },
+      "decoration_gap": {
+        "note": "IEEE 1788-2015 set-based flavor distinguishes these with a decoration (trv/ill); solver/interval.py carries none, so a caller cannot tell a trivially-widened result from a computed one.  Sound but uninformative -- recorded, not patched (this leg may not edit the module)",
+        "widened_from_nan_equals_genuine_entire": true
+      },
+      "family": "nan_widening_path",
+      "nan_row_isolation": {
+        "row0_widened": true,
+        "row1_encloses_5": true,
+        "row1_hi": "5.000000000000002",
+        "row1_lo": "4.999999999999998",
+        "row1_width": 3.552713678800501e-15,
+        "row2_widened": true
+      },
+      "note": "NaN handling: soundness of the widening, plus the decoration gap that IEEE 1788-2015 fills with `trv`/`ill` and this module does not",
+      "stored_nan_endpoints": 0
+    },
+    "pre_post_differential": {
+      "attribution": {
+        "live_cancelled": {
+          "endpoints": 976,
+          "matches_post": 976,
+          "matches_pre": 2
+        },
+        "note": "post-repair source with _ETA_TERMS_* set to 0.0: keeps the extra outward push, removes the eta floor.  Agreement with the POST module attributes a difference to the push; agreement with PRE attributes it to the eta term",
+        "verdict": "the live-range widening is ENTIRELY the extra outward push; the eta term moves no bit in the live range (matches_pre counts only the endpoints the push happened to leave unchanged)"
+      },
+      "detail": [
+        {
+          "cancelled": false,
+          "endpoints": 68,
+          "identical": 68,
+          "label": "bordered_linearization K=16",
+          "max_ulp_widening": 0,
+          "n_rows": 17,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": true,
+          "endpoints": 68,
+          "identical": 0,
+          "label": "bordered_linearization K=16",
+          "max_ulp_widening": 2,
+          "n_rows": 17,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 68
+        },
+        {
+          "cancelled": false,
+          "endpoints": 132,
+          "identical": 132,
+          "label": "bordered_linearization K=32",
+          "max_ulp_widening": 0,
+          "n_rows": 33,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": true,
+          "endpoints": 132,
+          "identical": 0,
+          "label": "bordered_linearization K=32",
+          "max_ulp_widening": 2,
+          "n_rows": 33,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 132
+        },
+        {
+          "cancelled": false,
+          "endpoints": 260,
+          "identical": 260,
+          "label": "bordered_linearization K=64",
+          "max_ulp_widening": 0,
+          "n_rows": 65,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": true,
+          "endpoints": 260,
+          "identical": 0,
+          "label": "bordered_linearization K=64",
+          "max_ulp_widening": 1,
+          "n_rows": 65,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 260
+        },
+        {
+          "cancelled": false,
+          "endpoints": 516,
+          "identical": 516,
+          "label": "bordered_linearization K=128",
+          "max_ulp_widening": 0,
+          "n_rows": 129,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": true,
+          "endpoints": 516,
+          "identical": 0,
+          "label": "bordered_linearization K=128",
+          "max_ulp_widening": 2,
+          "n_rows": 129,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 516
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=4 scale=1e-100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=4 scale=1e-8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=4 scale=1e0",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=4 scale=1e8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=4 scale=1e100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=32 scale=1e-100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=32 scale=1e-8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=32 scale=1e0",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=32 scale=1e8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=32 scale=1e100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=258 scale=1e-100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=258 scale=1e-8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=258 scale=1e0",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=258 scale=1e8",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        },
+        {
+          "cancelled": false,
+          "endpoints": 16,
+          "identical": 16,
+          "label": "normal m=258 scale=1e100",
+          "max_ulp_widening": 0,
+          "n_rows": 4,
+          "narrower": 0,
+          "post_contains_exact": 0,
+          "pre_contains_exact": 0,
+          "wider": 0
+        }
+      ],
+      "family": "pre_post_bit_differential",
+      "first_scale_where_a_bit_moves": "1e-160",
+      "live_range_cancelled": {
+        "endpoints": 976,
+        "identical": 0,
+        "narrower": 0,
+        "wider": 976
+      },
+      "live_range_uncancelled": {
+        "endpoints": 976,
+        "identical": 976,
+        "narrower": 0,
+        "wider": 0
+      },
+      "note": "pre-repair module reconstructed from `git show <repair>^:solver/interval.py` and exec'd in memory; endpoint bit patterns diffed against the repaired module.  `narrower` is the only count that would be a regression",
+      "prerepair_at_dekker_wall": {
+        "hi": "nan",
+        "lo": "nan",
+        "silent_nan": true
+      },
+      "prerepair_has_eta_terms": false,
+      "prerepair_nan_endpoint": {
+        "contains_1e300": false,
+        "hi": "nan",
+        "lo": "nan",
+        "negated_exclusion_test_passes": true,
+        "note": "MEASURED NUANCE, recorded not patched.  The module's own comment says a NaN endpoint 'used to pass every downstream containment check'.  Measured: `Interval.contains` returned FALSE on a NaN endpoint (the safe direction), so a check written as `assert iv.contains(x)` would have CAUGHT it.  What was genuinely vacuous is the constructor's `np.any(lo > hi)` invariant guard, and any check written in the negated form `not (x < lo or x > hi)` -- which is True on NaN.  The defect was real; its blast radius depended on which form the caller used.",
+        "passed_the_lo_le_hi_constructor_guard": true,
+        "stored_nan": true
+      },
+      "prerepair_source_bytes": 18233,
+      "repair_commit": "be99b28019fd9af31b56fc0c891743baecad80b9",
+      "scale_scan": {
+        "1e-10": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-100": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-110": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-120": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-130": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-140": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-150": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-160": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-170": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-180": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-190": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-20": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-200": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-210": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-220": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-230": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-240": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-250": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-260": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-270": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-280": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-290": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-30": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-300": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-310": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-320": {
+          "identical": 0,
+          "narrower": 0,
+          "wider": 8
+        },
+        "1e-40": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-50": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-60": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-70": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-80": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e-90": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        },
+        "1e0": {
+          "identical": 8,
+          "narrower": 0,
+          "wider": 0
+        }
+      },
+      "totals": {
+        "endpoints": 2192,
+        "identical": 1216,
+        "max_ulp_widening": 2,
+        "narrower": 0,
+        "wider": 976
+      }
+    },
+    "pure_subnormal": {
+      "by_reduction": {
+        "dot2_matvec": {
+          "cases": 80,
+          "false_negatives": 0,
+          "min_headroom_eta": 37.0
+        },
+        "matvec": {
+          "cases": 80,
+          "false_negatives": 0,
+          "min_headroom_eta": 11.0
+        }
+      },
+      "cases": 160,
+      "false_negatives": 0,
+      "family": "pure_subnormal_operands",
+      "max_demand_eta_per_term": 6.457054201665976e-139,
+      "min_headroom_eta": 11.0,
+      "note": "both operands drawn as integer multiples of eta = 2^-1074 (genuinely subnormal floats), m = 4..258; every relative error term is exactly zero here, so the enclosure radius IS the absolute eta term",
+      "reproducer": null,
+      "worst_escape_eta": 0.0
+    }
+  },
+  "question": "post-repair, does solver/interval.py (a) correctly handle leg 69's original failing cases (the subnormal range, 2^997), and (b) show zero regression in the previously-validated exact-rational containment checks at the live K-range?",
+  "route": "IVB",
+  "totals": {
+    "cases": 20909,
+    "false_negatives": 0,
+    "gate_a_dekker_wall_exponent": 997,
+    "gate_a_eta_constant_margin_dot2": 16.0,
+    "gate_a_eta_constant_margin_plain": 4.0,
+    "gate_a_measured_eta_demand_per_term_extremal": 0.5,
+    "gate_a_subnormal_false_negatives_post": 0,
+    "gate_b_endpoints_narrower_than_prerepair": 0,
+    "gate_b_live_k_false_negatives": 0,
+    "gate_b_live_k_worst_relative_slack": 0.375,
+    "gate_b_max_ulp_widening": 2
+  },
+  "unit_roundoff": 1.1102230246251565e-16
+}
