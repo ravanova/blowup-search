@@ -1,0 +1,653 @@
+{
+  "leg": 156,
+  "route": "ROUTE-IX4",
+  "title": "Fourth freshness audit of writeup/INDEX.md, since leg 138's window closed",
+  "generated_utc": "2026-08-06T13:44:10+00:00",
+  "figure": null,
+  "figure_note": "NO FIGURE, BY DESIGN. This leg produces no measurement; the repository's Route-D convention ('no measurement, no figure') applies, the same one legs 126 and 138 invoked. The deliverable is this ledger.",
+  "window": {
+    "base_commit": "34748624189c0a17a688a9195101bcfcaa2666a5",
+    "base_description": "leg 138's OWN PIN (origin/main HEAD when leg 138 began)",
+    "head_commit": "9f6729e72a6ba804f09d6b213a4da2c8e938a702",
+    "head_description": "origin/main HEAD at the moment leg 156 began",
+    "total_commits": 81,
+    "leg_prefixes_in_window_incl_leg0_and_138": [
+      0,
+      122,
+      124,
+      125,
+      127,
+      128,
+      130,
+      132,
+      133,
+      135,
+      137,
+      138,
+      139,
+      140,
+      142,
+      144,
+      146,
+      147,
+      149,
+      152,
+      155,
+      157,
+      158,
+      159,
+      161
+    ],
+    "index_md_edits_within_window": 1,
+    "index_md_edits_within_window_note": "The one edit is leg 138's own fix (b9b6398), which landed after its own pin.",
+    "index_md_edits_since_leg138_fix": 0,
+    "index_md_commits_ever_at_pinned_sha": 4
+  },
+  "counts": {
+    "legs_audited": 23,
+    "legs_touching_blog_technical": 3,
+    "legs_adding_figures": 2,
+    "figures_added": 2,
+    "legs_with_neither": 20,
+    "legs_with_data_json": 23,
+    "legs_with_journal_and_novelty": 23,
+    "new_arc4_rows_owed": 3,
+    "parked_rows_owed": 0
+  },
+  "leg_lists": {
+    "audited_legs": [
+      122,
+      124,
+      125,
+      127,
+      128,
+      130,
+      132,
+      133,
+      135,
+      137,
+      139,
+      140,
+      142,
+      144,
+      146,
+      147,
+      149,
+      152,
+      155,
+      157,
+      158,
+      159,
+      161
+    ],
+    "touching_blog_technical": [
+      125,
+      127,
+      128
+    ],
+    "adding_figures": [
+      125,
+      127
+    ],
+    "new_route_rows_owed": [
+      125,
+      127,
+      128
+    ],
+    "no_measurement_no_figure": [
+      122,
+      124,
+      130,
+      132,
+      133,
+      135,
+      137,
+      139,
+      140,
+      142,
+      144,
+      146,
+      147,
+      149,
+      152,
+      155,
+      157,
+      158,
+      159,
+      161
+    ]
+  },
+  "per_leg_inventory": {
+    "122": {
+      "leg": 122,
+      "commits": 3,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_asa_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "124": {
+      "leg": 124,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_fsa_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "125": {
+      "leg": 125,
+      "commits": 4,
+      "blog_technical_touched": [
+        "writeup/4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md",
+        "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md"
+      ],
+      "figures_added": [
+        "writeup/figures/fig61_route_m2p_v1_promotion.png"
+      ],
+      "data_json": [
+        "writeup/data/p2_route_m2p_v1_promotion.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "127": {
+      "leg": 127,
+      "commits": 3,
+      "blog_technical_touched": [
+        "writeup/4_p2_lottery/BLOG_P2_ROUTENGX_V1.md",
+        "writeup/4_p2_lottery/TECHNICAL_P2_ROUTENGX_V1.md"
+      ],
+      "figures_added": [
+        "writeup/figures/fig63_route_ngx_v1_general.png"
+      ],
+      "data_json": [
+        "writeup/data/p2_route_ngx_v1_general.json"
+      ],
+      "evidence_py": [
+        "experiments/p2_route_ngx_v1_general_evidence.py"
+      ],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "128": {
+      "leg": 128,
+      "commits": 4,
+      "blog_technical_touched": [
+        "writeup/4_p2_lottery/BLOG_P2_ROUTENKR_V1.md",
+        "writeup/4_p2_lottery/TECHNICAL_P2_ROUTENKR_V1.md"
+      ],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_nkr_v1_repair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "130": {
+      "leg": 130,
+      "commits": 5,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_hpr_v1_repair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "132": {
+      "leg": 132,
+      "commits": 4,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_olb_v1_postrepair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "133": {
+      "leg": 133,
+      "commits": 4,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_bob_v1_postrepair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "135": {
+      "leg": 135,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_fib_v1_postrepair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "137": {
+      "leg": 137,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_jr3_v1_journal_audit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "139": {
+      "leg": 139,
+      "commits": 5,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_dga_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "140": {
+      "leg": 140,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_nfa_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "142": {
+      "leg": 142,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_nsa_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "144": {
+      "leg": 144,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_eca_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "146": {
+      "leg": 146,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_csa_v1_adversarial.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "147": {
+      "leg": 147,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_nkb_v1_postrepair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "149": {
+      "leg": 149,
+      "commits": 3,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_pgf_v1_ledger_audit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "152": {
+      "leg": 152,
+      "commits": 3,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_hrr_v1_repair.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "155": {
+      "leg": 155,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_jr4_v1_journal_audit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "157": {
+      "leg": 157,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_cdx_v1_lit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "158": {
+      "leg": 158,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_bdx_v1_lit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "159": {
+      "leg": 159,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_wex_v1_lit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    },
+    "161": {
+      "leg": 161,
+      "commits": 2,
+      "blog_technical_touched": [],
+      "figures_added": [],
+      "data_json": [
+        "writeup/data/p2_route_lss_v1_lit.json"
+      ],
+      "evidence_py": [],
+      "journal_on_disk": true,
+      "novelty_on_disk": true,
+      "index_mentions_before_this_leg": 0
+    }
+  },
+  "claims_checked": [
+    {
+      "id": "D1",
+      "index_location": "Arc 4 table -- Route-M2P v1 (leg 125) has NO ROW",
+      "claim_as_written": "(no statement anywhere: INDEX.md contains 0 occurrences of 'M2P')",
+      "holds_at_pinned_sha": false,
+      "evidence": {
+        "paths": {
+          "runner": "experiments/p2_route_m2p_v1_promotion.py",
+          "data": "writeup/data/p2_route_m2p_v1_promotion.json",
+          "blog": "writeup/4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md",
+          "technical": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md",
+          "evidence": "experiments/p2_route_m2p_v1_promotion_evidence.py",
+          "figure": "writeup/figures/fig61_route_m2p_v1_promotion.png"
+        },
+        "present": {
+          "runner": true,
+          "data": true,
+          "blog": true,
+          "technical": true,
+          "evidence": false,
+          "figure": true
+        },
+        "pieces_present": "5/6"
+      },
+      "verdict": "MISSING -- row owed; 5 of 6 pieces on disk, no *_evidence.py (new gap clause)"
+    },
+    {
+      "id": "D2",
+      "index_location": "Arc 4 table -- Route-NGX v1 (leg 127) has NO ROW",
+      "claim_as_written": "(no statement anywhere: INDEX.md contains 0 occurrences of 'NGX')",
+      "holds_at_pinned_sha": false,
+      "evidence": {
+        "paths": {
+          "runner": "experiments/p2_route_ngx_v1_general.py",
+          "data": "writeup/data/p2_route_ngx_v1_general.json",
+          "blog": "writeup/4_p2_lottery/BLOG_P2_ROUTENGX_V1.md",
+          "technical": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTENGX_V1.md",
+          "evidence": "experiments/p2_route_ngx_v1_general_evidence.py",
+          "figure": "writeup/figures/fig63_route_ngx_v1_general.png"
+        },
+        "present": {
+          "runner": true,
+          "data": true,
+          "blog": true,
+          "technical": true,
+          "evidence": true,
+          "figure": true
+        },
+        "pieces_present": "6/6"
+      },
+      "verdict": "MISSING -- row owed; 6 of 6 pieces on disk, evidence.py in experiments/ so E is Y-dagger"
+    },
+    {
+      "id": "D3",
+      "index_location": "Arc 4 table -- Route-NKR v1 (leg 128) has NO ROW",
+      "claim_as_written": "(no statement anywhere: INDEX.md contains 0 occurrences of 'NKR')",
+      "holds_at_pinned_sha": false,
+      "evidence": {
+        "paths": {
+          "runner": "experiments/p2_route_nkr_v1_repair.py",
+          "data": "writeup/data/p2_route_nkr_v1_repair.json",
+          "blog": "writeup/4_p2_lottery/BLOG_P2_ROUTENKR_V1.md",
+          "technical": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTENKR_V1.md",
+          "evidence": "experiments/p2_route_nkr_v1_repair_evidence.py"
+        },
+        "present": {
+          "runner": true,
+          "data": true,
+          "blog": true,
+          "technical": true,
+          "evidence": false
+        },
+        "pieces_present": "4/5",
+        "figure_by_design_line": [
+          "No figure: this is a repair leg with no curve to plot, and the established convention is"
+        ]
+      },
+      "verdict": "MISSING -- row owed; 4 of 5 pieces, no *_evidence.py, figure absent BY DESIGN per its own header"
+    },
+    {
+      "id": "D4",
+      "index_location": "gap item 12 -- figure-number registry",
+      "claim_as_written": "fig53 and fig54 name no file and are cited by no writeup ... fig57 is reserved",
+      "holds_at_pinned_sha": false,
+      "evidence": {
+        "png_count": 60,
+        "unallocated_or_reserved_numbers": [
+          53,
+          54,
+          57,
+          62
+        ],
+        "fig57": "reserved by parked leg 63 / Route-M2 (unchanged)",
+        "fig62": "NEW: reserved by leg 126's Route-BX yes-branch, which did NOT fire (gate answered NO). Leg 127 allocated fig63 past it, so fig62 is now a released reservation, i.e. a permanent hole -- unrecorded until now.",
+        "highest_allocated": 63
+      },
+      "verdict": "STALE -- item 12's hole set {53,54} is now {53,54,62}; 60 PNGs, not 58"
+    },
+    {
+      "id": "D5",
+      "index_location": "gap items 4 and 11 -- writeup/README.md",
+      "claim_as_written": "the numbered list still ends at entry 47, still skips 45, and still has 0 mentions of Weight-repairs or Route-KA/Kawahara",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "max_numbered_entry": 47,
+        "entry_count": 46,
+        "45_present": false,
+        "weight_repairs_or_kawahara_mentions": 0,
+        "m2p_ngx_nkr_mentions": 0
+      },
+      "verdict": "TRUE, re-verified unchanged -- but the backlog grows by this window's legs and 3 more routes"
+    },
+    {
+      "id": "D6",
+      "index_location": "gap item 2 (as narrowed by leg 138)",
+      "claim_as_written": "BLOG_P2_ROUTEPORT_V2.md is still absent and this item now stands for that one clause alone",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "writeup/4_p2_lottery/BLOG_P2_ROUTEPORT_V2.md": false
+      },
+      "verdict": "TRUE, re-verified unchanged -- gap item 2 stands as narrowed"
+    },
+    {
+      "id": "D7",
+      "index_location": "gap item 10 -- Route-KA v1 (leg 61)",
+      "claim_as_written": "TECHNICAL but no BLOG, no *_evidence.py and no figure; 3 of 5 quartet pieces present",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "writeup/4_p2_lottery/BLOG_P2_ROUTEKA_V1.md": false,
+        "figures_matching_ka_v1": []
+      },
+      "verdict": "TRUE, re-verified unchanged -- gap item 10 stands as written"
+    },
+    {
+      "id": "D8",
+      "index_location": "gap item 8",
+      "claim_as_written": "fig48 is assigned twice ... 1 duplicated figure number",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "fig48_files": [
+          "fig48_route_tc_v1_assemble.png",
+          "fig48_weight_repairs_v1.png"
+        ]
+      },
+      "verdict": "TRUE, re-verified unchanged -- gap item 8 stands as written"
+    },
+    {
+      "id": "D9",
+      "index_location": "'Index currency -- third pass' convention block (leg 138's 29 no-figure-by-design legs)",
+      "claim_as_written": "29 of the 33 legs produced no BLOG/TECHNICAL and no figure, by design ... No row is owed for any of them",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "legs_checked": 29,
+        "violators": [],
+        "control_note": "Identical predicate to the one that returned FALSE against leg 108's block one pass ago (legs 58/60/62). It returns TRUE here, and claims D1-D3 show the same code reporting MISSING when prose does land."
+      },
+      "verdict": "TRUE -- leg 138's block is NOT superseded; 0 of its 29 legs landed prose or a figure in this window"
+    },
+    {
+      "id": "D10",
+      "index_location": "Arc 4 row 'Route-M2 v1 (leg 63) -- PARKED, NOT LANDED'",
+      "claim_as_written": "0 of its 4 declared artifacts on `main`",
+      "holds_at_pinned_sha": true,
+      "evidence": {
+        "direction_declared_doc_paths": 14,
+        "declared_but_absent_from_main": [
+          "writeup/4_p2_lottery/BLOG_P2_ROUTEM2_V1.md",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2_V1.md"
+        ],
+        "note": "The only DIRECTION.md-declared Arc 4 prose absent from main is leg 63's, which already has its parked row. No SECOND parked route exists, so the convention block needs no new entry."
+      },
+      "verdict": "TRUE, re-verified unchanged -- exactly 1 parked route, already rowed"
+    }
+  ],
+  "corrected_rows": [
+    {
+      "row": "Arc 4 / Route-M2P v1 (leg 125)",
+      "action": "ADDED",
+      "why": "Chen's gamma=2 promotion screen; BLOG+TECHNICAL+runner+data+fig61 on main, no *_evidence.py. 5 of 6 pieces; E marked GAP."
+    },
+    {
+      "row": "Arc 4 / Route-NGX v1 (leg 127)",
+      "action": "ADDED",
+      "why": "the general class A21 != 0 decided, gate YES; 6 of 6 pieces incl. fig63 and an evidence.py in experiments/ (E = Y-dagger)."
+    },
+    {
+      "row": "Arc 4 / Route-NKR v1 (leg 128)",
+      "action": "ADDED",
+      "why": "nk_bounds.py repair leg; BLOG+TECHNICAL+runner+data on main, no *_evidence.py, and no figure BY DESIGN per its own TECHNICAL header."
+    },
+    {
+      "row": "gap item 12 (figure-number registry)",
+      "action": "UPDATED",
+      "why": "hole set {fig53, fig54} becomes {fig53, fig54, fig62}: fig62 was reserved for leg 126's Route-BX yes-branch, which did not fire, and leg 127 allocated fig63 past it. PNG count 58 -> 60."
+    },
+    {
+      "row": "gap item 13 (NEW) -- two of this window's three routes have no *_evidence.py",
+      "action": "ADDED",
+      "why": "Route-M2P v1 and Route-NKR v1 both ship BLOG+TECHNICAL+runner+data with no *_evidence.py. Same shape as the standing gap items 9/10: writing one is a claim-bearing choice, outside a links-and-labels remit."
+    },
+    {
+      "row": "gap item 11 (writeup/README.md)",
+      "action": "UPDATED",
+      "why": "still ends at entry 47, still skips 45, still 0 Weight-repairs/Kawahara mentions, and now 0 mentions of M2P/NGX/NKR either. Backlog grows by this window."
+    },
+    {
+      "row": "'Index currency -- fourth pass' paragraph",
+      "action": "ADDED",
+      "why": "dates the window, names the pinned SHA, records the no-figure-by-design legs, and states explicitly that leg 138's own convention block is NOT superseded (0 of its 29 legs landed prose in this window) -- the first pass where the predecessor's block survives the check."
+    }
+  ],
+  "gate": {
+    "question": "At this leg's own pinned start SHA, does INDEX.md correctly reflect every leg landed since leg 138's window closed?",
+    "answer": "NO",
+    "branch_taken": "Report the exact stale or missing entries (the count is the finding); fix INDEX.md directly per the leg 68/108/138 mechanical-fix precedent; merge regardless."
+  }
+}

@@ -340,12 +340,15 @@ def main():
             "machine precision.  Lesson 90 says four identical numbers are a bug until "
             "proven otherwise, so the same two arms are compared at mu = 0.1, where they "
             "DIFFER by 6.1e-02 relative -- the code path does distinguish them.  The "
-            "coincidence at mu = 0 is therefore a FINDING, not a tautology: the singular "
-            "sequence has exactly zero far-field-amplitude component, so bordering with "
-            "that amplitude -- leg 52's repair, the whole point of the assembled object -- "
-            "does not move the obstruction at all.  This independently re-answers leg 58's "
-            "NG2c split-placement objection in the general class: the wall is not where the "
-            "far-field unknown is put.")}
+            "coincidence at mu = 0 is therefore a FINDING, but not for the reason first "
+            "assumed: the far-field-amplitude component z[K+1] is NOT zero -- it is "
+            "6.5-6.8% of ||v||_1 and grows slowly with M -- so bordering with that "
+            "amplitude does reach the singular sequence.  What actually blocks it is that "
+            "its coupling column C[:,K+1] is supported on a single row, the truncation "
+            "edge: bordering -- leg 52's repair, the whole point of the assembled object -- "
+            "has nowhere else to reach and does not move the obstruction at all.  This "
+            "independently re-answers leg 58's NG2c split-placement objection in the "
+            "general class: the wall is not where the far-field unknown is put.")}
     out["NGX5_statement"] = (
         "the instrument is not one that returns 'diverges' for everything: with mu > 0 the "
         "tail acquires a diagonal, the kernel is destroyed, and sigma_min SATURATES in M "
@@ -432,8 +435,9 @@ def main():
                   "the infinite tail, witnessed by the EXPLICIT sequence v_M = (z_M; h^(M)) "
                   "with h^(M) the analytic far-field kernel truncated at M and "
                   "G z_M = -B h^(M); the finite rows vanish identically, z_K = 0 by parity "
-                  "kills the finite-to-tail coupling, and the whole residual is the single "
-                  "truncation edge row of size |1 - M/2| |h_M| w_M ~ M^(s-1), against "
+                  "kills one of the two finite-to-tail coupling columns (the other is "
+                  "killed by its own edge-supportedness), and the whole residual is the "
+                  "single truncation edge row of size |1 - M/2| |h_M| w_M ~ M^(s-1), against "
                   "||v_M||_w bounded uniformly because sum m^(s-2) converges for s < 1."),
         "scope_MEASURED_vs_PROVED": (
             "PROVED for the l^1_w realization at s < 1, for the full bounded class with A21 "

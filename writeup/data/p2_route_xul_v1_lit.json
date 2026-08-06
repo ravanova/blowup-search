@@ -1,0 +1,562 @@
+{
+  "leg": 171,
+  "route": "XUL",
+  "kind": "literature (deep-mine of an already-accessed paper)",
+  "paper": {
+    "arxiv": "2607.19762",
+    "url": "https://arxiv.org/abs/2607.19762",
+    "cite": "Jie Xu (Univ. of Illinois Chicago), The spectral picture of self-similar collapse in the Constantin-Lax-Majda equation, arXiv:2607.19762v1, 22 Jul 2026, physics.flu-dyn, 41 pp.",
+    "same_object_as_ours": "sec 2 eq (2.3): Omega(y) = -y/(y^2 + 1/4), HOmega = (1/2)/(y^2 + 1/4), c_l = 1 -- this repository's `clm_one_scale` normalisation."
+  },
+  "gate": "Does Xu arXiv:2607.19762, at full-text depth, characterize the operator's invertibility or certificate-buildability on any space OTHER than origin-H^2 and `ell^1_w` (explicitly, or as a derivable corollary of a stated general theorem)?",
+  "gate_answer": "YES",
+  "gate_answer_branch_verbatim": "Record every additional space and its verdict, verbatim with hypotheses. ESCALATE as directly informing leg 163's scoping and leg 165's synthesis -- do not build or test anything under this leg's own authority.",
+  "headline": "Xu does not speak to one space. He writes an explicit 'Map of realizations' (sec 3.1) naming three, and the full text carries EIGHT distinct spaces for the SAME operator with FIVE distinct verdicts: origin-H^2 alive-proved; maximal L^2 dead-proved (no L^2 gap at all); merely-C^1 dead-proved (one derivative too few and the strip fills with a continuum); H^3 expected-alive but explicitly not pursued; the weighted conjugated family Y_theta alive and EXACT for every theta (normal generator, spectrum the single line Re = 1 - theta, semigroup norm e^{(1-theta) tau} with constant 1), pinned to theta = 3/2 for physical data; the Hardy block X_+ alive-proved and the place the explicit inverse actually lives; full L^2(R) with the even sector dead by a derivable corollary (an extra eigenvalue c~ = (c_l+a)/(1-a) > 0 at every sampled a); and EGM's singular-weighted space alive, which Xu classifies as another instance of the same mechanism.",
+  "spaces": [
+    {
+      "id": "S0-ORIGIN-H2",
+      "space": "X, the origin-H^2 realization (the odd part of H^2(R), with the origin condition phi = a1 y + o(y))",
+      "definition": "X = {phi : phi odd, phi, phi'' in L^2(0, inf), phi(y) = a1 y + o(y) as y -> 0}, norm ||phi||_X^2 = ||phi||_{L^2}^2 + ||phi''||_{L^2}^2 (Definition 4.1, eq (4.2) = eq (3.2))",
+      "locator": "Theorem 1 (sec 3.1 eq (3.3)), Theorem 2 (sec 3.3 eq (3.8)), Prop. 4.6",
+      "verdict": "ALIVE, PROVED -- essential spectrum meets {Re >= -1/2} in the single line {Re = -1/2}; full point spectrum over C is exactly {0, 1}; the open strip is resolvent set with an EXPLICIT two-sided bounded inverse; gap 1/2 after modulation",
+      "verdict_kind": "PROVED_ALIVE",
+      "quote": "sigma_ess(L0|X) cap {Re lambda >= -1/2} = {Re lambda = -1/2}   ... sigma_disc(L0|X) cap {Re > -1/2} = {0, +1}",
+      "fragment": "the single vertical line",
+      "hypotheses": "a = 0 and the EXACT CLM profile Omega = -y/(y^2 + 1/4), c_l = 1 (Definition 4.2: 'At a = 0 the exact profile is used and nothing below is assumed'). For a > 0 everything is conditional on Adm(a) (H1)-(H4) AND the essential spectrum becomes a TWO-line inclusion, not an equality (Proposition 1).",
+      "already_banked_by": "leg 127 -- experiments/journal/leg_127.md l. 32-38. THE one fact legs 127/163 use. Not new here.",
+      "is_new_to_this_repo": false,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S1-MAP",
+      "space": "(the paper's own enumeration paragraph, not a space)",
+      "definition": "Section 3.1, p. 8, the paragraph headed 'Map of realizations.'",
+      "locator": "sec 3.1, p. 8",
+      "verdict": "THIS PARAGRAPH IS THE GATE'S ANSWER: Xu himself enumerates three realizations of the same operator with three different verdicts and says each statement names the realization it lives in",
+      "verdict_kind": "ENUMERATION",
+      "quote": "One realization is the one we work in and the others are named alternatives. The chosen realization is X (origin-H^2): Theorem 1 and Proposition 1 live there, and its essential spectrum for a in (0, 1/2) contains two lines. The maximal L^2 realization (Section 4.6) is the weaker alternative, in which the whole strip is spectrum. A third-derivative realization is a stronger alternative in which the included origin line moves left and a single far-field line is expected to survive for all a; we do not pursue it here. Each statement names the realization it lives in.",
+      "fragment": "One realization is the one we work in and the others are named",
+      "hypotheses": "none -- it is Xu's own summary sentence",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S2-MAXIMAL-L2",
+      "space": "the plain MAXIMAL L^2 realization (no origin condition imposed)",
+      "definition": "L^2 with the graph domain and no origin regularity requirement (sec 4.6; sigma_ess read in the Browder sense there)",
+      "locator": "Proposition 2 (sec 3.1 eq (3.5)); proof sec 4.6",
+      "verdict": "DEAD, PROVED -- the WHOLE vertical strip {-1/2 <= Re <= 3/2} is essential spectrum; every strip point is a genuine eigenvalue with an explicit odd eigenfunction; NO L^2 spectral gap at all, hence no certificate",
+      "verdict_kind": "PROVED_DEAD",
+      "quote": "sigma_ess(L0) contains {lambda : -1/2 <= Re lambda <= 3/2}, the full vertical strip between the two indicial lines ... Hence on the maximal L^2 realization the whole open strip consists of eigenvalues; no point of it is isolated ... In particular there is no L^2 spectral gap.",
+      "fragment": "In particular there is no L2 spectral gap",
+      "hypotheses": "a = 0, exact profile. The strip is filled by the EXPLICIT family u_lambda(y) = y^{1-lambda}/(y + i/2)^2 for -1/2 < Re lambda < 3/2, whose odd two-branch combinations phi_lambda := B_+ - S B_+ are genuine eigenfunctions at every strip point (sec 4.6 eq (4.33)). The single separating feature is the second derivative at the origin: u''_lambda ~ y^{-1-lambda}, and int |u''_lambda|^2 diverges exactly when Re lambda >= -1/2, except at lambda in {0, 1}.",
+      "already_banked_by": "leg 64 (Route-RC realization audit) -- experiments/p2_route_rc_v1_realization_audit.py l. 26, 306-310; PHASE2_P2_NOTES.md sec 27; LITERATURE_CHECK.md sixth pass item 4; experiments/p2_route_lga_v1_ledger.py l. 142-149. CITED, NOT CLAIMED.",
+      "is_new_to_this_repo": false,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S3-C1-ORIGIN",
+      "space": "the merely-C^1-at-the-origin realization (condition (D3) dropped: one derivative fewer than X)",
+      "definition": "odd, L^2, C^1(R) distributional eigenfunctions, WITHOUT the second-derivative origin condition that defines X (sec 5.7)",
+      "locator": "sec 5.7, 'The smoothness hypothesis is sharp'",
+      "verdict": "DEAD, PROVED -- the open strip fills with a CONTINUUM of point spectrum. Strictly sharper than the maximal-L^2 statement: the invertibility is destroyed by relaxing the origin condition by ONE derivative, not by dropping it altogether",
+      "verdict_kind": "PROVED_DEAD",
+      "quote": "Dropping condition (D3) admits a continuum of eigenfunctions. The Case-3 functions are genuine odd, L^2, C^1(R) distributional eigenfunctions of L0 for every real lambda in (-1/2, 0) (and for complex lambda with Re lambda in (-1/2, 0)): they solve the equation classically away from the origin and distributionally across it (a C^1 function carries no distributional surplus at a point). On a merely C^1 domain the open strip would therefore fill with a continuum of point spectrum.",
+      "fragment": "On a merely C 1 domain the open strip would therefore fill with a continuum of point spectrum",
+      "hypotheses": "a = 0, exact profile. Witness verified at lambda = -1/4, mu = 5/4: the odd real combination 2 Re(c B_+) is C^1 (its quotient phi/y vanishes like y^{1/4}) but its second derivative diverges like y^{mu-2} at the origin, so it satisfies (D1), (D2), (D4) and fails (D3).",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S4-H3",
+      "space": "the third-derivative (H^3) realization: phi''' in L^2 near the origin",
+      "definition": "a STRONGER origin condition than X's phi'' in L^2 (sec 3.1 'Map of realizations'; sec 4.5; sec 4.6)",
+      "locator": "sec 3.1 (map), sec 4.5 (exactness questions), sec 4.6 (mechanism)",
+      "verdict": "EXPECTED ALIVE AND STRICTLY BETTER THAN X FOR a > 0 -- NOT PROVED. The origin line moves left and a single far-field line is EXPECTED to survive uniformly in a, which would remove X's own a > 0 defect. Xu explicitly does not pursue it, and its exactness is the same open question as X's",
+      "verdict_kind": "EXPECTED_NOT_PROVED",
+      "quote": "Whether sigma_ess equals this union for a > 0, and whether a stronger third-derivative realization (phi''' in L^2 near the origin) leaves the single far-field line uniformly in a, are exactness questions (Section 4.5). ... The origin line is a feature of the H^2 realization that a stronger H^3 realization is expected to remove (the H^3 weight shifts the included origin exponent; exactness for the stronger realization is the same open question) ... A stronger H^3 realization shifts the included origin line off ... so for a > 0 the two-line picture is relative to the choice of realization.",
+      "fragment": "a stronger third-derivative realization",
+      "hypotheses": "NONE STATED -- this is a named alternative Xu explicitly does NOT pursue ('we do not pursue it here'). It is a conjecture with a stated mechanism, not a theorem, and any downstream leg quoting it must carry that word.",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S5-Y-THETA",
+      "space": "the weighted conjugated family Y_theta (theta > 0), and the direct sum script-Y_theta = Y_theta (+) Y_theta",
+      "definition": "v = b^2 u with b = y + i/2; ||v||^2_{Y_theta} = int_0^inf |v|^2 y^{-2 theta - 1} dy = int_0^inf |u|^2 (y^2 + 1/4)^2 y^{-2 theta - 1} dy (Definition A.2, eq (A.14)). DISTINCT from the physical realization X, and reached from it by a bounded transfer map.",
+      "locator": "Appendix A, Definition A.2 + Proposition A.3 (eq (A.15)) + eq (A.19)-(A.24)",
+      "verdict": "ALIVE AND EXACT FOR EVERY theta > 0 -- A_theta is NORMAL on Y_theta with spectrum the single vertical line {Re = 1 - theta}, and the semigroup norm is EXACTLY e^{(1-theta) tau} with constant 1, for every function. At theta = 3/2 the rate is exactly e^{-tau/2}, matching Theorem 1's essential edge. This is the strongest certificate-shaped statement in the paper, and it is NOT on origin-H^2",
+      "verdict_kind": "PROVED_ALIVE_EXACT",
+      "quote": "In particular A_theta is normal on Y_theta, equal to (1 - theta) plus a skew-adjoint part, with spectrum the single vertical line {Re = 1 - theta} and e^{A tau} equal to e^{(1-theta) tau} times a unitary group; this normality is the structural reason the operator norm is exact and function-independent.   [Prop. A.3: ||e^{A tau}||_{Y_theta -> Y_theta} = e^{(1-theta) tau}  (constant 1, every function).]   In Y_{3/2} (core weight y^{-4}, plain L^2 at infinity) both essential lines of L0 coincide at Re = -1/2: the far-field line stays at -1/2, and the origin line, which in plain L^2 sits at the pathological Re = +3/2 (Proposition 2 and Section 4.6), is pushed to -1/2 by the y^{-4} core weight.",
+      "fragment": "(constant 1, every function)",
+      "hypotheses": "SHARP AND RESTRICTIVE, and these are what a downstream leg would trip on. (a) a = 0 only, and the statement is about the CONJUGATED variable v = b^2 u, not the physical one -- Xu's abstract keeps them separate BECAUSE 'L0 is non-normal and a spectral gap does not by itself give a decay rate in the X norm'. (b) The two symmetry modes are NOT IN Y_{3/2}: 'The two symmetry modes are excluded from Y_{3/2} by that weight' (their integrands behave like y^{-4} and y^{-2} at the origin and diverge) -- so the pure semigroup decays at the essential rate with NO projection inside the space. (c) Y_theta carries NO pointwise origin traces, so the modulation projection CANNOT act inside it; it acts on the physical X (which has traces) and is mapped in by the bounded transfer J_X : X -> script-Y_{3/2}, giving ||S_Y(tau) J_X phi|| <= C_Q e^{-tau/2} ||phi||_X. THE EXACT CONSTANT 1 BELONGS TO S_Y ON Y_{3/2}; THE COMPOSITE CARRIES C_Q, NOT 1. (d) theta is PINNED for physical X-data by a two-sided squeeze: the tail forces theta >= 3/2, the (sharp) double Hardy inequality forces theta <= 3/2, so 'the physical-data statement is the single space Y_{3/2}'. Only for origin-analytic forcing does the whole range theta in (1, 2) open up.",
+      "already_banked_by": "leg 141 touched Appendix A for ONE remark only ('App A has the same weight-ejects-the-modes tension, resolved by transferring rather than reported', writeup/novelty/leg_141.md). The space family, the normality, the exact norms and the pinned theta = 3/2 are UNMINED.",
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S6-HARDY-XPLUS",
+      "space": "the Hardy block space X_+ = {u in H^2_+ : u'' in L^2}",
+      "definition": "the upper-half-plane Hardy summand of X, with ||phi||_X^2 = 2 ||P_+ phi||_{X_+}^2 (sec 4.4)",
+      "locator": "sec 4.4 (eq (4.21)-(4.25)), Lemma 4.5, Proposition 4.6",
+      "verdict": "ALIVE, PROVED, AND IT IS WHERE THE EXPLICIT INVERSE ACTUALLY LIVES -- the resolvent is built blockwise R0(z) = R0^+(z) (+) R0^-(z) from the SCALAR reduction L0^+ = -1 - y d/dy + i/(y + i/2), with an EXACT Hardy-Mellin operator norm ||T_z|| = 1/(Re z + 1/2) = 1/alpha and an assembled analytic majorant M_an ~ alpha^{-3/2}",
+      "verdict_kind": "PROVED_ALIVE",
+      "quote": "The generalized Hardy operator T_z g(y) := int_0^1 s^z g(ys) ds = y^{-1-z} int_0^y t^z g(t) dt is bounded on L^2(0, inf) with exact norm 1/(Re z + 1/2) = 1/alpha; its Mellin symbol is 1/(z + 1/2 - i xi), whose modulus is maximized at xi = Im z.",
+      "fragment": "with exact norm",
+      "hypotheses": "a = 0 and the exact profile, via the single-simple-pole identity H Omega - i Omega = i/(y + i/2), which is what collapses the NONLOCAL operator to a scalar first-order ODE. This collapse is 'exact only at the single-pole a = 0 profile' (sec 8) -- it does not survive to a > 0.",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S7-FULL-L2-EVEN",
+      "space": "the FULL L^2(R) realization with the even sector included (i.e. X's oddness restriction dropped, origin condition kept or not)",
+      "definition": "L^2(R) without the odd restriction (sec 3.2)",
+      "locator": "sec 3.2, eq (3.7)",
+      "verdict": "STRICTLY WORSE THAN X, AND FOR a > 0 THE GAP IS DESTROYED -- each of the eigenvalues 0 and 1 acquires an EVEN partner, and the translation mode phi = Omega' is an exact eigenfunction at eigenvalue c~ = (c_l + a)/(1 - a) > 0 for EVERY admissible profile. Oddness is load-bearing SEPARATELY from the origin condition",
+      "verdict_kind": "DERIVABLE_COROLLARY_DEAD",
+      "quote": "The third produces the even mode phi = Omega', which is an exact eigenfunction of L_a for every admissible profile, at eigenvalue c~ = c_l + a HOmega(0) = (c_l + a)/(1 - a) ... It reduces to c_l only at a = 0, where one checks L0 Omega' = Omega' exactly, with Omega' = (y^2 - 1/4)/(y^2 + 1/4)^2 even and O(y^{-2}), so it lies in L^2(R) but not in X. Centering the collapse at the origin, which is what the odd restriction does, removes this mode. At a = 0 the eigenvalue 0 likewise has the even partner y^2/(y^2 + 1/4)^2. So on the full L^2(R) the eigenvalues 0 and 1 each carry an even partner, while on the odd realization X each eigenspace is one-dimensional.",
+      "fragment": "so it lies in L2 (R) but not in X",
+      "hypotheses": "Exact at a = 0; for a > 0 it holds 'for every admissible profile' i.e. under Adm(a). This is the gate's 'derivable corollary of a stated general theorem' clause: Xu states the eigenpair in general form, and the arithmetic below evaluates c~ along his own Table 1 branch to show it is positive and GROWING, so the modulation that works on X (two modes) does not suffice on full L^2(R) at a > 0.",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S8-EGM-SINGULAR-WEIGHT",
+      "space": "the Elgindi-Ghoul-Masmoudi singular-weighted space (phi = (1+y^2)^2/y^4, with the origin constraints f odd, f'(0) = H f(0) = 0)",
+      "definition": "arXiv:1906.05811 Prop. 2.1's space, as read BY XU in his sec 8 parenthesis",
+      "locator": "sec 8, the parenthesis after the coercivity no-go",
+      "verdict": "ALIVE -- 'a gap is certified' there. Xu classifies it explicitly as ANOTHER INSTANCE of his own realization mechanism, not as a counterexample, and says it neither contradicts nor supplies the X-gap",
+      "verdict_kind": "PROVED_ALIVE",
+      "quote": "(The small-a coercivity estimate of Elgindi, Ghoul, and Masmoudi [15, Prop. 2.1], for odd f with f'(0) = Hf(0) = 0 in a singular-weighted space, is not a counterexample but an instance of the realization mechanism of Section 3.1: the singular weight and origin constraints define their own realization, in which a gap is certified; it neither contradicts nor supplies the X-gap here.)",
+      "fragment": "define their own realization, in which a gap is certified",
+      "hypotheses": "EGM's own: a small, f odd, f'(0) = H f(0) = 0, int |f|^2 phi < inf; and two modulation parameters (their sec 3).",
+      "already_banked_by": "leg 141 (Route-WEL) -- writeup/novelty/leg_141.md and experiments/p2_route_wel_v1_lit.py. CITED, NOT CLAIMED.",
+      "is_new_to_this_repo": false,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "S9-EVANS-WEIGHTED",
+      "space": "the (unnamed) weighted space of the Evans-determinant strand, chosen so that the essential line is displaced left of the strip",
+      "definition": "sec 3.2 -- a weight used as an INSTRUMENT, to make a winding count well defined; no space-level theorem attaches to it",
+      "locator": "sec 3.2 (the fourth piece of evidence); sec 7 ('Evans-determinant count')",
+      "verdict": "NO VERDICT -- exploratory instrument only. Returns n_disc(a) = 0 for a in [0, 0.65], but 'numerical evidence, not proof', diagnostics 'not enforced as hard gates', 'run outputs are not retained'",
+      "verdict_kind": "INSTRUMENT_NO_VERDICT",
+      "quote": "Splitting L_a against its far field and forming the associated determinant on a weighted space in which the essential line is displaced left of the strip, the number of eigenvalues inside the strip window becomes an integer winding count n_disc(a) along a rectangular contour. This strand is exploratory ...",
+      "fragment": "a weighted space in which the essential line is displaced left of the strip",
+      "hypotheses": "three explicitly recorded gaps -- see `technique_maturity` below",
+      "already_banked_by": null,
+      "is_new_to_this_repo": true,
+      "fragment_located": true,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    }
+  ],
+  "negative_locators": [
+    {
+      "id": "N1-ELL1-W",
+      "fragment": "weighted ell^1",
+      "why": "Xu never works in a weighted SEQUENCE space; `ell^1_w` is THIS repository's space (legs 51-54, 58, 127), not his. If this ever hits, the gate's second excluded space would have to be re-read.",
+      "fragment_located": false,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N2-SEQUENCE-SPACE",
+      "fragment": "sequence space",
+      "why": "same, in the phrasing a radii-polynomial paper would use.",
+      "fragment_located": false,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N3-H3-PROVED",
+      "fragment": "we prove that the third-derivative realization",
+      "why": "the H^3 realization is EXPECTED, not proved. If this hits, S4's verdict_kind must be upgraded from EXPECTED_NOT_PROVED.",
+      "fragment_located": false,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N4-EXACTNESS-SETTLED",
+      "fragment": "the exactness question is settled",
+      "why": "the a > 0 exactness question is OPEN (sec 4.5, sec 8). If this hits, the a > 0 hypotheses recorded above are wrong.",
+      "fragment_located": false,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    },
+    {
+      "id": "N5-EVANS-IS-PROOF",
+      "fragment": "the Evans-determinant count is a proof",
+      "why": "sec 3.2/sec 7 say the opposite ('numerical evidence, not proof'). If this hits, the technique-maturity reading below is wrong.",
+      "fragment_located": false,
+      "fragment_source": "recomputed from Papers/2607.19762.pdf"
+    }
+  ],
+  "located_source": "recomputed from Papers/2607.19762.pdf",
+  "space_accounting": {
+    "spaces_other_than_origin_H2_characterized": 8,
+    "new_to_this_repository": [
+      "S3-C1-ORIGIN",
+      "S4-H3",
+      "S5-Y-THETA",
+      "S6-HARDY-XPLUS",
+      "S7-FULL-L2-EVEN",
+      "S9-EVANS-WEIGHTED"
+    ],
+    "already_banked_cited_not_claimed": [
+      "S2-MAXIMAL-L2",
+      "S8-EGM-SINGULAR-WEIGHT"
+    ],
+    "ell_1_w_in_xu": "ABSENT. `ell^1_w` is THIS repository's space (legs 51-54, 58, 127); Xu never mentions a weighted sequence space, which the negative locators N1/N2 check. So the gate's exclusion list reduces, on Xu's side, to origin-H^2 alone."
+  },
+  "branch_reconstruction": {
+    "purpose": "the falsifiable core: feed ONLY Xu's Table 1 c_l column through Xu's own closed forms and reproduce four independently printed facts. A wrong reading of c~, of HOmega(0), or of which line is which fails all four at once.",
+    "closed_forms": {
+      "far_field_line": "Re = -1 + c_l/2   (Prop. 1 eq (3.4); Lemma 4.3 eq (4.11))",
+      "origin_line": "Re = lambda_X = -c~/2   (Prop. 1 eq (3.4))",
+      "c_tilde": "c~ = c_l + a HOmega(0) = (c_l + a)/(1 - a)",
+      "h_omega_0": "HOmega(0) = (1 + c_l)/(1 - a)",
+      "g_of_a": "g(a) = 2 c_l - HOmega(0)(1 - 3a/2); the protrusion is -g(a)",
+      "s_star": "s*(a) = 1/c_l(a)   (sec 6)"
+    },
+    "rows": [
+      {
+        "a": 0.0,
+        "c_l_xu_table1": 1.0,
+        "far_field_line_Re": -0.5,
+        "far_field_distance_recomputed": 0.5,
+        "far_field_distance_xu_printed": 0.5,
+        "far_field_abs_diff": 0.0,
+        "s_star_recomputed": 1.0,
+        "s_star_xu_printed": 1.0,
+        "s_star_rel_diff": 0.0,
+        "h_omega_0": 2.0,
+        "c_tilde": 1.0,
+        "origin_line_Re": -0.5,
+        "separation_origin_minus_far_field": 0.0,
+        "g_of_a": 0.0,
+        "both_lines_left_of_minus_half": null
+      },
+      {
+        "a": 0.1,
+        "c_l_xu_table1": 0.873,
+        "far_field_line_Re": -0.5635,
+        "far_field_distance_recomputed": 0.5635,
+        "far_field_distance_xu_printed": 0.564,
+        "far_field_abs_diff": 0.0004999999999999449,
+        "s_star_recomputed": 1.145475372279496,
+        "s_star_xu_printed": 1.145,
+        "s_star_rel_diff": 0.0004151722965029697,
+        "h_omega_0": 2.081111111111111,
+        "c_tilde": 1.0811111111111111,
+        "origin_line_Re": -0.5405555555555556,
+        "separation_origin_minus_far_field": 0.022944444444444434,
+        "g_of_a": -0.022944444444444212,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.2,
+        "c_l_xu_table1": 0.7474,
+        "far_field_line_Re": -0.6263000000000001,
+        "far_field_distance_recomputed": 0.6263000000000001,
+        "far_field_distance_xu_printed": 0.626,
+        "far_field_abs_diff": 0.000300000000000078,
+        "s_star_recomputed": 1.337971635001338,
+        "s_star_xu_printed": 1.338,
+        "s_star_rel_diff": 2.1199550569581765e-05,
+        "h_omega_0": 2.1842499999999996,
+        "c_tilde": 1.18425,
+        "origin_line_Re": -0.592125,
+        "separation_origin_minus_far_field": 0.034175000000000066,
+        "g_of_a": -0.03417499999999962,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.3,
+        "c_l_xu_table1": 0.6178,
+        "far_field_line_Re": -0.6911,
+        "far_field_distance_recomputed": 0.6911,
+        "far_field_distance_xu_printed": 0.691,
+        "far_field_abs_diff": 0.00010000000000010001,
+        "s_star_recomputed": 1.6186468112657817,
+        "s_star_xu_printed": 1.619,
+        "s_star_rel_diff": 0.0002181523991465729,
+        "h_omega_0": 2.311142857142857,
+        "c_tilde": 1.311142857142857,
+        "origin_line_Re": -0.6555714285714285,
+        "separation_origin_minus_far_field": 0.035528571428571576,
+        "g_of_a": -0.035528571428571354,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.4,
+        "c_l_xu_table1": 0.4809,
+        "far_field_line_Re": -0.75955,
+        "far_field_distance_recomputed": 0.75955,
+        "far_field_distance_xu_printed": 0.76,
+        "far_field_abs_diff": 0.00045000000000006146,
+        "s_star_recomputed": 2.079434393844874,
+        "s_star_xu_printed": 2.079,
+        "s_star_rel_diff": 0.00020894364832798,
+        "h_omega_0": 2.468166666666667,
+        "c_tilde": 1.4681666666666668,
+        "origin_line_Re": -0.7340833333333334,
+        "separation_origin_minus_far_field": 0.025466666666666526,
+        "g_of_a": -0.025466666666666526,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.5,
+        "c_l_xu_table1": 0.3333,
+        "far_field_line_Re": -0.83335,
+        "far_field_distance_recomputed": 0.83335,
+        "far_field_distance_xu_printed": 0.833,
+        "far_field_abs_diff": 0.0003500000000000725,
+        "s_star_recomputed": 3.0003000300030003,
+        "s_star_xu_printed": 3.0,
+        "s_star_rel_diff": 0.00010001000100009112,
+        "h_omega_0": 2.6666,
+        "c_tilde": 1.6665999999999999,
+        "origin_line_Re": -0.8332999999999999,
+        "separation_origin_minus_far_field": 5.0000000000105516e-05,
+        "g_of_a": -4.999999999999449e-05,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.6,
+        "c_l_xu_table1": 0.1691,
+        "far_field_line_Re": -0.91545,
+        "far_field_distance_recomputed": 0.91545,
+        "far_field_distance_xu_printed": 0.915,
+        "far_field_abs_diff": 0.00044999999999995044,
+        "s_star_recomputed": 5.913660555884093,
+        "s_star_xu_printed": 5.914,
+        "s_star_rel_diff": 5.739670542898686e-05,
+        "h_omega_0": 2.9227499999999997,
+        "c_tilde": 1.9227499999999997,
+        "origin_line_Re": -0.9613749999999999,
+        "separation_origin_minus_far_field": -0.04592499999999988,
+        "g_of_a": 0.04592499999999977,
+        "both_lines_left_of_minus_half": true
+      },
+      {
+        "a": 0.65,
+        "c_l_xu_table1": 0.0775,
+        "far_field_line_Re": -0.96125,
+        "far_field_distance_recomputed": 0.96125,
+        "far_field_distance_xu_printed": 0.961,
+        "far_field_abs_diff": 0.0002500000000000835,
+        "s_star_recomputed": 12.903225806451614,
+        "s_star_xu_printed": 12.9,
+        "s_star_rel_diff": 0.0002500625156289552,
+        "h_omega_0": 3.0785714285714283,
+        "c_tilde": 2.0785714285714287,
+        "origin_line_Re": -1.0392857142857144,
+        "separation_origin_minus_far_field": -0.07803571428571432,
+        "g_of_a": 0.07803571428571457,
+        "both_lines_left_of_minus_half": true
+      }
+    ],
+    "checks": {
+      "note": "Every number below is arithmetic on XU's own Table 1 and XU's own closed forms. Nothing of this repository's is measured. The point is falsifiability of the READING, not new mathematics.",
+      "i_table1_columns_reproduced_from_c_l_alone": {
+        "far_field_distance_worst_abs_diff": 0.0004999999999999449,
+        "far_field_tolerance": 0.001,
+        "far_field_pass": true,
+        "s_star_worst_rel_diff": 0.0004151722965029697,
+        "s_star_tolerance": 0.0005,
+        "s_star_pass": true,
+        "reading": "Xu's printed far-field column IS 1 - c_l/2 and his s* column IS 1/c_l, so the closed forms are read correctly."
+      },
+      "ii_two_lines_coincide_at_a_0_and_at_a_half": {
+        "separation_at_a_0": 0.0,
+        "separation_at_a_half_using_exact_c_l_one_third": 1.1102230246251565e-16,
+        "separation_at_a_half_using_table_grid_c_l": 5.0000000000105516e-05,
+        "pass": true,
+        "reading": "Xu: 'the two lines coincide at a = 0 and, exactly, at a = 1/2 ... g(1/2) = (3 c_l - 1)/2 = 0'. Reproduced to machine zero from the closed forms at the EXACT c_l = 1/3; the grid value 0.3333 leaves the residue below, which is the grid tolerance, not a discrepancy."
+      },
+      "iii_max_protrusion": {
+        "a_at_max_recomputed": 0.2595,
+        "a_at_max_xu_printed": 0.264,
+        "max_separation_recomputed": 0.03704506144496955,
+        "max_protrusion_xu_printed_abs": 0.0362,
+        "xu_stated_upper_bound_on_branch": 0.037,
+        "abs_diff_in_magnitude": 0.0008450614449695484,
+        "within_xu_stated_upper_bound": false,
+        "interpolation": "piecewise-linear in c_l between Xu's tabulated a values",
+        "note_on_within_xu_stated_upper_bound_being_False": "It exceeds Xu's stated 0.037 by 4.5e-05, and that is an artifact of THIS reconstruction's coarser instrument, not a disagreement with Xu. Xu interpolates a Delta a = 0.04 Newton branch by degree-6 polynomial; this check interpolates LINEARLY between his printed Delta a = 0.1 table rows, which is convex-side and overshoots. Reported rather than tuned away: the magnitude of the overshoot (4.5e-05) is two orders below the quantity being checked (0.037) and three below Xu's own two-grid self-consistency measure (5e-04). The `pass` flag is set on the location and the magnitude, which is what the reading rests on.",
+        "pass": true,
+        "reading": "Xu's Figure 2 caption: 'the origin line lies at most 0.037 right of the far-field line on (0, 1/2) (minimum -0.0362 at a ~ 0.264)'. Recovered independently from c_l alone, on a linear interpolation -- a coarse instrument that nonetheless lands on both the location and the magnitude."
+      },
+      "iv_both_lines_strictly_left_of_minus_half_for_a_gt_0": {
+        "rightmost_far_field_line": -0.5635,
+        "rightmost_origin_line": -0.5405555555555556,
+        "threshold": -0.5,
+        "margin_far_field": 0.0635,
+        "margin_origin": 0.04055555555555557,
+        "pass": true,
+        "reading": "Xu: 'Both lines stay strictly left of Re = -1/2 for a > 0.'"
+      }
+    },
+    "all_four_pass": true
+  },
+  "y_theta_identities": {
+    "note": "These are the arithmetic joints of Appendix A. They are what makes the Y_theta family a statement about THIS operator's certificate-buildability rather than a generic weighted-dilation fact.",
+    "spectrum_line_of_A_theta": "Re = 1 - theta   (eq (A.19) discussion)",
+    "semigroup_norm": "||e^{A tau}||_{Y_theta} = e^{(1 - theta) tau}, constant 1 (Prop. A.3)",
+    "theta_that_matches_theorem_1_edge": {
+      "theorem_1_essential_edge": -0.5,
+      "solve_1_minus_theta_eq_minus_half": -0.5,
+      "theta": 1.5,
+      "match": true,
+      "xu_printed": "||e^{A tau}||_{Y_{3/2}} = e^{-tau/2}   (eq (A.20))"
+    },
+    "core_weight_at_that_theta": {
+      "weight_exponent_formula": "y^{-2 theta - 1}",
+      "exponent_at_theta_3_2": -4.0,
+      "xu_printed": "core weight y^{-4}",
+      "match": true
+    },
+    "what_the_weight_does_to_the_plain_L2_origin_line": {
+      "plain_L2_origin_indicial_line": 1.5,
+      "note_on_the_number": "Xu writes the plain-L^2 origin line as the pathological Re = +3/2, which is the right edge of the maximal-L^2 strip [-1/2, 3/2] of Prop. 2; the log-Mellin grid at a = 0.5 renders its own rightmost mode at +2.4931 against the a = 0.5 indicial line +5/2 (sec 7), a different a and a different number -- the two must not be conflated.",
+      "pushed_to": -0.5,
+      "xu_printed": "the origin line, which in plain L^2 sits at the pathological Re = +3/2 ..., is pushed to -1/2 by the y^{-4} core weight",
+      "consequence": "Y_{3/2} is the ONE member of the family in which BOTH essential lines of L0 sit at the same place as Theorem 1's edge, which is why the exact rate e^{-tau/2} is the essential rate and not an artifact of the weight."
+    },
+    "theta_is_pinned_for_physical_data": {
+      "tail_forces": "theta >= 3/2",
+      "core_forces": "theta <= 3/2 (the double Hardy inequality is sharp there)",
+      "window_width_for_physical_X_data": 0.0,
+      "window_for_origin_analytic_forcing": [
+        1.0,
+        2.0
+      ],
+      "window_width_for_origin_analytic_forcing": 1.0,
+      "reading": "A ZERO-WIDTH window for physical X-data. This repository has seen that shape before (leg 111's weighted-energy window, re-read by leg 141) and the lesson there was that a zero-width window can be an artifact of the trial space. Here it is NOT: Xu derives it from a two-sided squeeze and states the widened window that origin-analytic data buys. Recorded as a caution for any leg that would try to move theta."
+    }
+  },
+  "even_sector_corollary": {
+    "statement_source": "Xu sec 3.2 eq (3.7), stated for every admissible profile",
+    "rows": [
+      {
+        "a": 0.0,
+        "c_l": 1.0,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.0,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.5
+      },
+      {
+        "a": 0.1,
+        "c_l": 0.873,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.0811111111111111,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.5405555555555556
+      },
+      {
+        "a": 0.2,
+        "c_l": 0.7474,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.18425,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.592125
+      },
+      {
+        "a": 0.3,
+        "c_l": 0.6178,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.311142857142857,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.6555714285714285
+      },
+      {
+        "a": 0.4,
+        "c_l": 0.4809,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.4681666666666668,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.7340833333333334
+      },
+      {
+        "a": 0.5,
+        "c_l": 0.3333,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.6665999999999999,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.8332999999999999
+      },
+      {
+        "a": 0.6,
+        "c_l": 0.1691,
+        "c_tilde_eigenvalue_of_Omega_prime": 1.9227499999999997,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -0.9613749999999999
+      },
+      {
+        "a": 0.65,
+        "c_l": 0.0775,
+        "c_tilde_eigenvalue_of_Omega_prime": 2.0785714285714287,
+        "is_unstable_direction": true,
+        "origin_line_is_minus_half_c_tilde": -1.0392857142857144
+      }
+    ],
+    "min_c_tilde_over_branch": 1.0,
+    "max_c_tilde_over_branch": 2.0785714285714287,
+    "all_positive": true,
+    "monotone_increasing": true,
+    "reading": "On the full L^2(R) realization the translation mode is an eigenvalue at c~ > 0 at EVERY sampled advection, growing from 1.000 at a = 0 to 2.079 at a = 0.65, and the eigenvalues 0 and 1 each acquire an even partner besides. So the two-mode modulation that produces X's gap 1/2 does NOT suffice once oddness is dropped. Oddness is load-bearing SEPARATELY from the origin condition -- a second axis of realization-dependence, and one this repository had not recorded.",
+    "control_that_can_report_otherwise": "At a = 0 the formula must return exactly 1, because Xu states 'one checks L0 Omega' = Omega' exactly'. It does (c~ = 1.000000). Had the formula been misread, this anchor would have missed.",
+    "anchor_at_a_0": 1.0
+  },
+  "technique_maturity": {
+    "question": "Beyond the strict gate: what IS Xu's certification technique, and how mature/scalable is it as a lane distinct from ell^1-Fourier?",
+    "layer_1_the_proved_layer_is_not_computer_assisted_at_all": {
+      "what": "Theorems 1-3 are Mellin diagonalization + log-widening singular Weyl sequences + an EXPLICIT closed-form resolvent kernel (sec 4.4 eq (4.23)) with an exact Hardy-Mellin operator norm (Lemma 4.5) and an assembled analytic majorant M_an ~ alpha^{-3/2}.",
+      "machine_involvement": "a twelve-check verification suite -- six exact in sympy (the two scalar ODEs for symbolic lambda, the sin(pi(1-lambda)) non-degeneracy determinant, the profile identities, the origin Taylor coefficients, the two integer modes) and six numerical. It confirms identities; it is not a certificate.",
+      "consequence": "'Xu's certification method' is, at the proved layer, ANALYSIS with symbolic checking -- not a computer-assisted proof pipeline. Anyone porting it is porting a closed-form resolvent, not a solver."
+    },
+    "layer_2_the_certification_shaped_strand_is_explicitly_incomplete": {
+      "what": "the Evans-determinant / argument-principle continuation of sec 3.2 and sec 7: an integer winding count n_disc(a) on a rectangular contour, in a weighted space that displaces the essential line left of the strip.",
+      "result": "n_disc(a) = 0 for all computed a in [0, 0.65]",
+      "three_gaps_verbatim": "a uniform large-imaginary-part bound, trace-ideal membership of the kernel, and quadrature-error bounds in the trace norm",
+      "xu_on_their_status": "'which the code computes as diagnostics rather than enforcing as interval bounds' ... 'its run outputs are not retained' ... 'Upgrading any of these would move this strand toward a computer-assisted proof.'",
+      "consequence": "All three items the prompt asked to watch for -- uniform large-imaginary-part bounds, trace-ideal membership, quadrature error in the trace norm -- are OPEN, by the author's own statement. The strand is not a CAP today and Xu does not claim it is."
+    },
+    "layer_3_the_architecture_it_must_imitate": {
+      "what": "Hou-Wang-Yang's viscous 3D Navier-Stokes NONUNIQUENESS proof (not a singularity result): split the linearization into a coercive part and a compact perturbation, approximate the compact part by a finite-rank operator to controlled error, and certify invertibility by computer only on the finite-rank image.",
+      "xu_verbatim": "'the computer-assisted step certifies invertibility only on a finite-rank image, after the continuous spectrum has been carried by a coercive part and the remainder rendered compact; our spectrally correct essential-line rendering feeding an argument-principle count is the same requirement in the gCLM-collapse setting.'",
+      "obstruction_named_by_xu": "for the COLLAPSE linearization the nonlocal term is genuinely non-compact -- 'the Hilbert term Omega H phi is not relatively compact (a coefficient vanishing at both endpoints times an order-zero singular integral is not compact)' -- which is why the closed-form theorems are proved by Mellin diagonalization instead."
+    },
+    "two_no_gos_xu_states_in_sec_8": [
+      {
+        "id": "NOGO-COERCIVITY",
+        "quote": "A weighted-energy/coercivity estimate cannot certify the gap: the far field is already coercive in plain L^2 with the sharp edge, but a local positive multiplier +phi HOmega near the origin (with HOmega(0) > 0) survives every L^2-equivalent weight, so no coercivity certificate in an L^2-equivalent norm reaches the spectral gap.",
+        "fragment": "no coercivity certificate in an L2 -equivalent norm reaches the spectral gap",
+        "already_banked_by": "leg 141 (Route-WEL). CITED, NOT CLAIMED."
+      },
+      {
+        "id": "NOGO-INTERVAL-ARITHMETIC",
+        "quote": "Likewise a naive interval-arithmetic resolvent enclosure is unavailable: a weight is a change of norm, eigenvalues are norm-invariant, and the truncated L_a genuinely carries essential-smear eigenvalues inside the strip (the compactified grid mis-renders the continuous line at the wrong real part), so no weighted enclosure can exclude them. The consequence is that the rigorous discrete exclusion must be analytical (the a = 0 anchor plus continuation) rather than a black-box computer-assisted enclosure; where a computer-assisted proof does enter, it must first be given a spectrally correct rendering of the essential spectrum (a non-periodic log-Mellin operator at high resolution feeding an argument-principle count), not applied to the raw grid.",
+        "fragment": "a naive interval-arithmetic resolvent enclosure is unavailable",
+        "already_banked_by": null,
+        "why_it_matters_here": "NOT banked anywhere in this repository -- leg 141 banked only the coercivity half. This is the maturity answer: Xu's own paper says the naive interval-arithmetic route into his object does not work, and names the prerequisite (a spectrally correct essential-line rendering) before any CAP may enter. Treating 'Xu's certification method' as a mature lane ready to be ported is treating a PROGRAM as a METHOD."
+      }
+    ],
+    "instrument_honesty_recorded_by_xu": "sec 7: the log-Mellin grid's rightmost mode at a = 0.5 sits at Re = +2.4931 against the plain-L^2 indicial line +5/2 -- it CORROBORATES Proposition 2 rather than certifying the far-field edge. A discretization without an origin condition computes a different operator, faithfully.",
+    "scalability_reading": "The closed-form layer does NOT scale off a = 0: the Hardy collapse rests on the single-simple-pole identity HOmega - i Omega = i/(y + i/2), which Xu says is 'exact only at the single-pole a = 0 profile'. At a > 0 everything discrete is numerical evidence at sampled advections, and the essential spectrum is an INCLUSION under Adm(a), not an equality. So the mature part of the method is a one-point analytic anchor, and the scalable part is the part that is not yet built."
+  },
+  "what_this_informs": {
+    "leg_163_scoping": "163 asks whether origin-H^2 admits a structurally viable CERTIFICATE formulation, and its thesis says to re-read Xu 'for what it says about the gap's own limitations'. Four things here bear on it, and none was in 163's brief: (1) X's gap is NOT uniform in a -- for a in (0, 1/2) X acquires a SECOND (origin) essential line that protrudes into the strip by up to 0.037, a defect of the H^2 realization itself which Xu says an H^3 realization is EXPECTED to remove; (2) the explicit inverse is built on the Hardy block X_+, not on X directly, via a scalar reduction that is 'exact only at the single-pole a = 0 profile'; (3) Xu's sec 8 states that a naive interval-arithmetic resolvent enclosure is unavailable for this object and names the prerequisite; (4) the certificate-shaped exactness lives on Y_{3/2}, not on X, and the transfer between them costs the constant (C_Q, not 1).",
+    "leg_165_synthesis": "165 asks whether this repository's banked 'dead' findings are realization-dependent. Xu supplies a published, theorem-grade instance of exactly that phenomenon on THIS operator, at eight points rather than two, INCLUDING a second axis 165's four cases do not cover: the ODD/EVEN sector restriction is load-bearing independently of the origin condition (sec 3.2's c~ mode). That is a template for 165's classification, not an answer to it.",
+    "user_interest_xu_lane_vs_ell1_fourier": "The honest reading is that Xu's lane is NOT yet a method to port. Its proved layer is closed-form analysis at a single advection; its CAP-shaped layer has three open gaps its own author names; and its author states that the black-box interval-arithmetic entrance is closed for this object. What IS mature and transferable is the DIAGNOSIS -- name the realization before reading any spectrum, because the same operator is alive on some spaces and dead on others."
+  },
+  "what_is_NOT_claimed": "No ban is lifted, no route promoted, nothing is built or tested (the gate's yes-branch forbids it). Everything above is at a = 0, or at a > 0 conditional on Adm(a) and on open exactness questions, on the CLM linearization -- this repository's friendliest substrate, whose blow-up is explicit -- and NOT on HL_S2_nonsymmetric. L1 stays measured-dead in all three realizations. No link of the L1 -> L4 chain moves. The ~0.05% Clay assessment is untouched. New to the world: nothing; this is a reading of one published paper.",
+  "novelty_log": "writeup/novelty/leg_171.md",
+  "journal": "experiments/journal/leg_171.md",
+  "figure": "none -- no measurement of a curve of this repository's own ('no measurement, no figure')"
+}

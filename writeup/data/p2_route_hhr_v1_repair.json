@@ -1,0 +1,1226 @@
+{
+ "R1_guard_fires_on_every_failing_configuration": {
+  "assembly_hilbert_holder_constant": {
+   "V1_gamma_0.0": {
+    "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic endpoint divergence. ",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "V2_gamma_-0.5": {
+    "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic endpoint divergence.",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "alpha_inf": {
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singularity",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "alpha_nan": {
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singularity",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_-0.3": {
+    "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic endpoint divergence.",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_-1.0": {
+    "message_head": "gamma = -1.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so no account tames the near kernel's logarithmic endpoint divergence.",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_inf": {
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singularity",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_nan": {
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature, so the log-divergent sup account is charged the near-pole singularity",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   }
+  },
+  "low_level_increment_pair_bound": {
+   "V1_gamma_0.0": {
+    "message_head": "gamma = 0.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence (",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "V2_gamma_-0.5": {
+    "message_head": "gamma = -0.5 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence ",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "alpha_inf": {
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so the log-divergent sup",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "alpha_nan": {
+    "message_head": "non-finite argument(s) alpha: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so the log-divergent sup",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_-0.3": {
+    "message_head": "gamma = -0.3 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence ",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_-1.0": {
+    "message_head": "gamma = -1.0 <= 0: the seminorm envelope cT ~ dphi^gamma no longer vanishes as the pair separation dphi -> 0, so NO account tames the near kernel's logarithmic endpoint divergence ",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_inf": {
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so the log-divergent sup",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   },
+   "gamma_nan": {
+    "message_head": "non-finite argument(s) gamma: the payer rule `cT <= cS` is then False on the whole quadrature (IEEE-754 sec 5.11 makes every comparison against NaN False), so the log-divergent sup",
+    "raised": "HilbertHolderDomainError",
+    "returned": null
+   }
+  },
+  "n_failing_probed": 8,
+  "n_failing_rejected_at_low_level": 8,
+  "n_sound_wrongly_rejected": 0,
+  "note": "pre-repair, ALL of these returned silently at the low level and the assembly API was differently unsafe: gamma=0.0 died with a bare ZeroDivisionError inside nk_seminorm.hilbert_split_bound's own /gamma, while gamma=-0.3 returned a finite (46.7564, 4.9190).  Neither polarity was safe; they were just differently unsafe.",
+  "sound_configurations_must_pass": {
+   "gamma_0.01": {
+    "raised": null,
+    "returned": [
+     0.0007446439353689669,
+     24.902504068142672
+    ],
+    "warned": "|WARN:HilbertHolderTruncationWarning"
+   },
+   "gamma_0.05": {
+    "raised": null,
+    "returned": [
+     0.0023577334613614797,
+     17.31008978992793
+    ],
+    "warned": "|WARN:HilbertHolderTruncationWarning"
+   },
+   "gamma_0.9": {
+    "raised": null,
+    "returned": [
+     0.1586438520937305,
+     4.396150394379737
+    ],
+    "warned": ""
+   },
+   "gamma_1e-3": {
+    "raised": null,
+    "returned": [
+     0.0001608371806686633,
+     27.294882308561306
+    ],
+    "warned": "|WARN:HilbertHolderTruncationWarning"
+   },
+   "production_1.4_0.15": {
+    "raised": null,
+    "returned": [
+     0.005945428178591599,
+     9.32320757208159
+    ],
+    "warned": "|WARN:HilbertHolderTruncationWarning"
+   },
+   "shipped_1.5_0.5": {
+    "raised": null,
+    "returned": [
+     0.03705418170880763,
+     4.460871100852915
+    ],
+    "warned": ""
+   }
+  }
+ },
+ "R2_inflate_returns_a_dominating_pair": {
+  "accepted_pairs": {
+   "production_1.4_0.15": {
+    "head": 0.23561528153488948,
+    "inflated_would_be": [
+     1.2025973696438486,
+     3.9051247881992577
+    ],
+    "inflation_factor_on_sum": 1.101635159567849,
+    "raw": [
+     0.966982088108959,
+     3.6695095066643684
+    ],
+    "sigma": -1.19,
+    "theta1": 3.1305223634
+   },
+   "shipped_1.5_0.5": {
+    "head": 2.6688679330177363e-05,
+    "inflated_would_be": [
+     0.762989908927696,
+     1.1579585034780846
+    ],
+    "inflation_factor_on_sum": 1.0000277877539827,
+    "raw": [
+     0.7629632202483658,
+     1.1579318147987545
+    ],
+    "sigma": -1.19,
+    "theta1": 3.1305223634
+   }
+  },
+  "gamma_le_0_is_honestly_unbounded": {
+   "V1_gamma_0.0": {
+    "both_infinite": true,
+    "head_bound": Infinity,
+    "u_S": Infinity,
+    "u_T": Infinity
+   },
+   "V2_gamma_-0.5": {
+    "both_infinite": true,
+    "head_bound": Infinity,
+    "u_S": Infinity,
+    "u_T": Infinity
+   },
+   "gamma_-0.3": {
+    "both_infinite": true,
+    "head_bound": Infinity,
+    "u_S": Infinity,
+    "u_T": Infinity
+   },
+   "gamma_-1.0": {
+    "both_infinite": true,
+    "head_bound": Infinity,
+    "u_S": Infinity,
+    "u_T": Infinity
+   }
+  },
+  "why": "the head's split between the S and T accounts is unknown, so inflate adds it to BOTH coefficients -- valid because h_S S + h_T T <= head (S + T) for S, T >= 0.  At gamma <= 0 the head is +inf, so the honest dominating pair is (inf, inf): correct, and useless, which is the entire content of leg 119's V1/V2."
+ },
+ "R3_extrapolate_preserves_leg_119s_measurement": {
+  "adversary_under_extrapolate": {
+   "V1_gamma_0.0": [
+    {
+     "S": 1.0,
+     "T": 1.9999999991804969,
+     "bound": 55.16172056146229,
+     "delta": 1e-09,
+     "ratio_true_over_bound": 0.20321962344644934,
+     "true_weighted_increment": 11.209944081158628,
+     "u_S": 0.0,
+     "u_T": 27.580860292032444
+    },
+    {
+     "S": 1.0,
+     "T": 2.0,
+     "bound": 55.16172058406489,
+     "delta": 1e-30,
+     "ratio_true_over_bound": 0.7260024285657863,
+     "true_weighted_increment": 40.047543107898434,
+     "u_S": 0.0,
+     "u_T": 27.580860292032444
+    },
+    {
+     "S": 1.0,
+     "T": 2.0,
+     "bound": 55.16172058406489,
+     "delta": 1e-50,
+     "ratio_true_over_bound": 1.2238908144803204,
+     "true_weighted_increment": 67.51192313376703,
+     "u_S": 0.0,
+     "u_T": 27.580860292032444
+    }
+   ],
+   "V2_gamma_-0.5": [
+    {
+     "S": 1.0,
+     "T": 0.00477386806434636,
+     "bound": 13.089608030073176,
+     "delta": 1e-09,
+     "ratio_true_over_bound": 0.20441737834074122,
+     "true_weighted_increment": 2.675743357015473,
+     "u_S": 13.089410894555181,
+     "u_T": 0.04129471433596845
+    },
+    {
+     "S": 1.0,
+     "T": 1.5096316950332948e-13,
+     "bound": 13.089410894555188,
+     "delta": 1e-30,
+     "ratio_true_over_bound": 0.7302924086729405,
+     "true_weighted_increment": 9.559097410294537,
+     "u_S": 13.089410894555181,
+     "u_T": 0.04129471433596845
+    },
+    {
+     "S": 1.0,
+     "T": 1.509631695033295e-23,
+     "bound": 13.089410894555181,
+     "delta": 1e-50,
+     "ratio_true_over_bound": 1.231122838838451,
+     "true_weighted_increment": 16.11467269922772,
+     "u_S": 13.089410894555181,
+     "u_T": 0.04129471433596845
+    }
+   ]
+  },
+  "banked_pairs_reproduced": [
+   {
+    "case": "V1_gamma_0.0",
+    "gamma": 0.0,
+    "u_S": 0.0,
+    "u_S_hex": "0x0.0p+0",
+    "u_T": 27.58086868578648,
+    "u_T_hex": "0x1.b94b3cf68b933p+4",
+    "warned": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "case": "V2_gamma_-0.5",
+    "gamma": -0.5,
+    "u_S": 13.089261573987466,
+    "u_S_hex": "0x1.a2db3b16a219dp+3",
+    "u_T": 0.0414440922573335,
+    "u_T_hex": "0x1.53828f9b71e73p-5",
+    "warned": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "case": "gamma_-1.0",
+    "gamma": -1.0,
+    "u_S": 3.1317840356891415,
+    "u_S_hex": "0x1.90de4c9db5babp+1",
+    "u_T": 0.0036650958649343157,
+    "u_T_hex": "0x1.e06435c0d16a9p-9",
+    "warned": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   },
+   {
+    "case": "gamma_-0.3",
+    "gamma": -0.3,
+    "u_S": 22.839305141554846,
+    "u_S_hex": "0x1.6d6dcb3a657bcp+4",
+    "u_T": 0.4110617154336208,
+    "u_T_hex": "0x1.a4ed5cc1b342ep-2",
+    "warned": [
+     "HilbertHolderUnsoundWarning"
+    ]
+   }
+  ],
+  "eps_ladder": {
+   "gamma_-0.5": {
+    "drift_sum_1e-16_over_1e-6": 2.6341750322219837,
+    "rows": [
+     {
+      "eps": 1e-06,
+      "u_S": 7.899701768151132,
+      "u_T": 0.04129471433596845
+     },
+     {
+      "eps": 1e-08,
+      "u_S": 10.494556332890241,
+      "u_T": 0.04129471433596845
+     },
+     {
+      "eps": 1e-10,
+      "u_S": 13.089410894555181,
+      "u_T": 0.04129471433596845
+     },
+     {
+      "eps": 1e-12,
+      "u_S": 15.684265473562315,
+      "u_T": 0.04129471433596845
+     },
+     {
+      "eps": 1e-14,
+      "u_S": 18.279156364314534,
+      "u_T": 0.04129471433596845
+     },
+     {
+      "eps": 1e-16,
+      "u_S": 20.87667995079415,
+      "u_T": 0.04129471433596845
+     }
+    ]
+   },
+   "gamma_0.0": {
+    "drift_sum_1e-16_over_1e-6": 2.626789620779935,
+    "rows": [
+     {
+      "eps": 1e-06,
+      "u_S": 0.0,
+      "u_T": 16.70979722645251
+     },
+     {
+      "eps": 1e-08,
+      "u_S": 0.0,
+      "u_T": 22.145328774307572
+     },
+     {
+      "eps": 1e-10,
+      "u_S": 0.0,
+      "u_T": 27.580860292032444
+     },
+     {
+      "eps": 1e-12,
+      "u_S": 0.0,
+      "u_T": 33.01639185259586
+     },
+     {
+      "eps": 1e-14,
+      "u_S": 0.0,
+      "u_T": 38.45199948343931
+     },
+     {
+      "eps": 1e-16,
+      "u_S": 0.0,
+      "u_T": 43.89312191978279
+     }
+    ]
+   },
+   "shipped_gamma_0.5": {
+    "drift_sum_1e-16_over_1e-6": 1.0008305029614024,
+    "rows": [
+     {
+      "eps": 1e-06,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.456668374643806
+     },
+     {
+      "eps": 1e-08,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.460023009370354
+     },
+     {
+      "eps": 1e-10,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "eps": 1e-12,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603940815944165
+     },
+     {
+      "eps": 1e-14,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.460398828432195
+     },
+     {
+      "eps": 1e-16,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.460400624343361
+     }
+    ]
+   }
+  },
+  "why": "leg 130's precedent, its own words: the escape hatch is what lets the original battery keep MEASURING the gap after the guard lands, instead of the repair deleting its own evidence.",
+  "worst_ratio_still_measurable": 1.231122838838451
+ },
+ "R4_bit_identity_census": {
+  "n_configurations": 5,
+  "n_float64_leaves": 9665,
+  "note": "the full leaf-by-leaf diff (17509 leaves over 10 surface groups, including the eps ladder, sweep_convergence, cq_sup_split, quadratic_constant_full, conjugate, weighted_seminorm, wrap, near_padding and decomposition_exact) is reported in the journal; this digest is the reproducible core of it.",
+  "sha256_of_hex_dump": "d62e56828e88b3ab60bd3ebc4f34f21c75652eb093a13abf2395961f638b37f9",
+  "surfaces": [
+   "constant",
+   "pairs_1.2_0.7",
+   "pairs_1.4_0.15",
+   "pairs_1.5_0.3",
+   "pairs_1.5_0.5",
+   "pairs_2_0.9"
+  ]
+ },
+ "R5_head_warning_band": {
+  "HEAD_WARN_TOL": 0.001,
+  "by_configuration": {
+   "production_1.4_0.15": {
+    "argmax": [
+     3.13052236269428,
+     -1.1865667932145834,
+     0.9681028028261859,
+     3.6675081697554597,
+     0.23550849357327813
+    ],
+    "fraction_warned": 1.0,
+    "n_pairs": 481,
+    "n_pairs_warned": 481,
+    "worst_head_over_value": 0.050804197109344515
+   },
+   "shipped_1.5_0.5": {
+    "argmax": [
+     3.068844387563547,
+     -1.1865667932145834,
+     0.7533497068152546,
+     1.206526802771561,
+     2.7293483725619782e-05
+    ],
+    "fraction_warned": 0.0,
+    "n_pairs": 481,
+    "n_pairs_warned": 0,
+    "worst_head_over_value": 1.3926124218598773e-05
+   }
+  },
+  "margin_above_worst_production": 50.804197109344514,
+  "margin_below_worst_shipped": 71.8074881641849,
+  "production_over_shipped": 3648.121782620173,
+  "refinement_control": {
+   "UNSOUND_gamma_-0.5": {
+    "head_at_eps_1e-10": Infinity,
+    "head_at_eps_1e-40": Infinity,
+    "head_shrink_factor": null,
+    "head_vanishes_under_refinement": false,
+    "raw_value_went_nan_below_eps": 1e-20,
+    "resolved_by_refinement": false,
+    "rows": [
+     {
+      "eps": 1e-10,
+      "head": Infinity,
+      "head_over_value": Infinity,
+      "value": 33.62850189998639
+     },
+     {
+      "eps": 1e-20,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-30,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-40,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     }
+    ]
+   },
+   "UNSOUND_gamma_0.0": {
+    "head_at_eps_1e-10": Infinity,
+    "head_at_eps_1e-40": Infinity,
+    "head_shrink_factor": null,
+    "head_vanishes_under_refinement": false,
+    "raw_value_went_nan_below_eps": 1e-20,
+    "resolved_by_refinement": false,
+    "rows": [
+     {
+      "eps": 1e-10,
+      "head": Infinity,
+      "head_over_value": Infinity,
+      "value": 12.922744809367472
+     },
+     {
+      "eps": 1e-20,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-30,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-40,
+      "head": Infinity,
+      "head_over_value": null,
+      "value": NaN
+     }
+    ]
+   },
+   "production_gamma_0.15": {
+    "head_at_eps_1e-10": 0.23561528153488948,
+    "head_at_eps_1e-40": 7.450809410306231e-06,
+    "head_shrink_factor": 31622.77660853569,
+    "head_vanishes_under_refinement": true,
+    "raw_value_went_nan_below_eps": 1e-20,
+    "resolved_by_refinement": true,
+    "rows": [
+     {
+      "eps": 1e-10,
+      "head": 0.23561528153488948,
+      "head_over_value": 0.05083649290974814,
+      "value": 4.634766642010215
+     },
+     {
+      "eps": 1e-20,
+      "head": 0.007450809410306228,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-30,
+      "head": 0.00023561528148383727,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-40,
+      "head": 7.450809410306231e-06,
+      "head_over_value": null,
+      "value": NaN
+     }
+    ]
+   },
+   "shipped_gamma_0.5": {
+    "head_at_eps_1e-10": 2.8256331522156158e-05,
+    "head_at_eps_1e-40": 2.825633151764874e-20,
+    "head_shrink_factor": 1000000000159518.9,
+    "head_vanishes_under_refinement": true,
+    "raw_value_went_nan_below_eps": 1e-20,
+    "resolved_by_refinement": true,
+    "rows": [
+     {
+      "eps": 1e-10,
+      "head": 2.8256331522156158e-05,
+      "head_over_value": 1.4024522531492542e-05,
+      "value": 2.0147802863666557
+     },
+     {
+      "eps": 1e-20,
+      "head": 2.825633151764874e-10,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-30,
+      "head": 2.825633151764874e-15,
+      "head_over_value": null,
+      "value": NaN
+     },
+     {
+      "eps": 1e-40,
+      "head": 2.825633151764874e-20,
+      "head_over_value": null,
+      "value": NaN
+     }
+    ]
+   }
+  },
+  "why_warn_not_reject": "gamma = 0.15 > 0, so the exact majorant is FINITE here: this is under-refinement, not divergence.  Rejecting it would be a claim about a sound object, and leg 119 separately measured true/bound = 0.1081 at this configuration -- a ~9x margin the head does not close.  The warning changes NO returned value, which is what keeps gate (b) true."
+ },
+ "R6_drift_diagnostic_is_not_the_predicate": {
+  "finding": "leg 119's ladder stopped at gamma = 0.05 and reported a clean gap (max 1.34x sound vs min 1.98x unsound, a 1.478x separation margin).  Extending the ladder to gamma = 1e-6 collapses that margin to 1.103x -- and the true max-when-sound is 2.3816, not 1.34, so THREE sound configurations (gamma = 1e-6, 1e-3, 0.01) sit ABOVE leg 119's banked 1.98 unsound floor and would be rejected by a guard using its numbers.  A threshold re-fitted to this ladder still separates, but by 1.103x, and it must be re-fitted again for every new gamma probed: the drift is continuous through gamma = 0+, because the discarded head ~ s0^gamma/gamma -> inf there, so NO fixed threshold is safe.  The drift is a good DIAGNOSTIC and a bad PREDICATE; the guard uses the exact Plemelj-Privalov condition instead.  This corrects leg 119's diagnostic commentary, NOT its verdict -- its verdict rests on the exact predicate, which stands.",
+  "leg_119_claimed_gap": {
+   "gamma_ladder_floor": 0.05,
+   "max_when_sound": 1.34,
+   "min_when_unsound": 1.98,
+   "separation_margin": 1.4776119402985073
+  },
+  "margin_collapse_factor": 1.3396844868922275,
+  "max_drift_sound": 2.381625878600895,
+  "min_drift_unsound": 2.626826592362941,
+  "n_sound_misclassified_against_a_refitted_threshold": 0,
+  "n_sound_misclassified_against_leg_119s_banked_threshold": 3,
+  "re_measured_gap": {
+   "gamma_ladder_floor": 1e-06,
+   "max_when_sound": 2.381625878600895,
+   "min_when_unsound": 2.626826592362941,
+   "separation_margin": 1.1029551769508363
+  },
+  "rows": [
+   {
+    "drift": 2.633149802840631,
+    "gamma": -1.0,
+    "sound_by_predicate": false,
+    "u_sum_eps_1e-16": 4.994290571543426,
+    "u_sum_eps_1e-6": 1.8966982304446207
+   },
+   {
+    "drift": 2.634211329388946,
+    "gamma": -0.5,
+    "sound_by_predicate": false,
+    "u_sum_eps_1e-16": 20.9182644182408,
+    "u_sum_eps_1e-6": 7.94099705853637
+   },
+   {
+    "drift": 2.776073235677958,
+    "gamma": -0.1,
+    "sound_by_predicate": false,
+    "u_sum_eps_1e-16": 63.808735396445385,
+    "u_sum_eps_1e-6": 22.985249299758607
+   },
+   {
+    "drift": 2.626826592362941,
+    "gamma": 0.0,
+    "sound_by_predicate": false,
+    "u_sum_eps_1e-16": 43.89375036577876,
+    "u_sum_eps_1e-6": 16.709801283949425
+   },
+   {
+    "drift": 2.381625878600895,
+    "gamma": 1e-06,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 39.796262939172756,
+    "u_sum_eps_1e-6": 16.709703777048052
+   },
+   {
+    "drift": 2.3585870221320953,
+    "gamma": 0.001,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 39.18253867557234,
+    "u_sum_eps_1e-6": 16.612716981776845
+   },
+   {
+    "drift": 2.1683826694940227,
+    "gamma": 0.01,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 34.20805250149721,
+    "u_sum_eps_1e-6": 15.775837439929097
+   },
+   {
+    "drift": 1.6063320089566095,
+    "gamma": 0.05,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 20.471724237845354,
+    "u_sum_eps_1e-6": 12.744391647367303
+   },
+   {
+    "drift": 1.128674485790268,
+    "gamma": 0.15,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 9.430384977232574,
+    "u_sum_eps_1e-6": 8.355274346996218
+   },
+   {
+    "drift": 1.0009610235725115,
+    "gamma": 0.5,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 4.498382467097187,
+    "u_sum_eps_1e-6": 4.494063566073825
+   },
+   {
+    "drift": 1.000334174899326,
+    "gamma": 0.9,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 4.555864933579627,
+    "u_sum_eps_1e-6": 4.554342986470627
+   },
+   {
+    "drift": 1.000502002291205,
+    "gamma": 1.5,
+    "sound_by_predicate": true,
+    "u_sum_eps_1e-16": 8.701416074156032,
+    "u_sum_eps_1e-6": 8.697050135061508
+   }
+  ],
+  "sound_gammas_above_leg_119s_banked_unsound_floor": [
+   1e-06,
+   0.001,
+   0.01
+  ]
+ },
+ "R7_blast_radius_control": {
+  "by_configuration": {
+   "production_1.4_0.15": {
+    "max_ratio_over_all_pairs": 0.05648689246161916,
+    "n_rejected_by_guard": 0,
+    "rows": [
+     {
+      "S": 1.0,
+      "T": 40.32229922924103,
+      "bound": 397.0611361668905,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.051117375932237474,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 20.296723365524276,
+      "u_S": 0.0031603895629622315,
+      "u_T": 9.847106523364818
+     },
+     {
+      "S": 1.0,
+      "T": 1801.1309464632932,
+      "bound": 17735.931452742505,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 0.0027747450756375985,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 49.212688460343266,
+      "u_S": 0.0031603895629622315,
+      "u_T": 9.847106523364818
+     },
+     {
+      "S": 1.0,
+      "T": 56956.76155038801,
+      "bound": 560859.3013729498,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 0.00013461474075528258,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 75.49992945450855,
+      "u_S": 0.0031603895629622315,
+      "u_T": 9.847106523364818
+     },
+     {
+      "S": 1.0,
+      "T": 1801130.9464632927,
+      "bound": 17735928.29551333,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 5.739038225369032e-06,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 101.7871704503552,
+      "u_S": 0.0031603895629622315,
+      "u_T": 9.847106523364818
+     },
+     {
+      "S": 1.0,
+      "T": 56956761.55038799,
+      "bound": 560859298.2157204,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 2.2835390596180587e-07,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 128.07441144255705,
+      "u_S": 0.0031603895629622315,
+      "u_T": 9.847106523364818
+     },
+     {
+      "S": 1.0,
+      "T": 39.56988161753459,
+      "bound": 368.9186742019852,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.04730233896298362,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 17.450716176876824,
+      "u_S": 0.006018926771958835,
+      "u_T": 9.323066943716533
+     },
+     {
+      "S": 1.0,
+      "T": 1767.5216867944087,
+      "bound": 16478.72902938181,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 0.002486325136530939,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 40.97147820383408,
+      "u_S": 0.006018926771958835,
+      "u_T": 9.323066943716533
+     },
+     {
+      "S": 1.0,
+      "T": 55893.94344013089,
+      "bound": 521102.98245957267,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 0.00011965770919177247,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 62.35398913411286,
+      "u_S": 0.006018926771958835,
+      "u_T": 9.323066943716533
+     },
+     {
+      "S": 1.0,
+      "T": 1767521.6867944081,
+      "bound": 16478723.016473962,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 5.081492053847068e-06,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 83.73650006575923,
+      "u_S": 0.006018926771958835,
+      "u_T": 9.323066943716533
+     },
+     {
+      "S": 1.0,
+      "T": 55893943.440130875,
+      "bound": 521102976.44666463,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 2.0172406558789305e-07,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 105.11901099877326,
+      "u_S": 0.006018926771958835,
+      "u_T": 9.323066943716533
+     },
+     {
+      "S": 1.0,
+      "T": 33.93788457815108,
+      "bound": 208.24108116803745,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.048679599195069104,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 10.137092367207917,
+      "u_S": 0.008153604696820941,
+      "u_T": 6.135707341564808
+     },
+     {
+      "S": 1.0,
+      "T": 1515.9496221889742,
+      "bound": 9301.431379911983,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 0.002529994199924652,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 23.53256744217447,
+      "u_S": 0.008153604696820941,
+      "u_T": 6.135707341564808
+     },
+     {
+      "S": 1.0,
+      "T": 47938.536241888876,
+      "bound": 294136.8369168329,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 0.0001214070037192804,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 35.710272053539306,
+      "u_S": 0.008153604696820941,
+      "u_T": 6.135707341564808
+     },
+     {
+      "S": 1.0,
+      "T": 1515949.622188974,
+      "bound": 9301423.234460888,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 5.148456903698633e-06,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 47.88797666568303,
+      "u_S": 0.008153604696820941,
+      "u_T": 6.135707341564808
+     },
+     {
+      "S": 1.0,
+      "T": 47938536.241888866,
+      "bound": 294136828.77138174,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 2.042099982158024e-07,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 60.06568127860564,
+      "u_S": 0.008153604696820941,
+      "u_T": 6.135707341564808
+     },
+     {
+      "S": 1.0,
+      "T": 27.121813848840187,
+      "bound": 90.17313838927849,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.05648689246161916,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 5.093600371121877,
+      "u_S": 0.16373207240618362,
+      "u_T": 3.3187089483958463
+     },
+     {
+      "S": 1.0,
+      "T": 1211.4869342429165,
+      "bound": 4020.7362616090236,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 0.0029469312416729268,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 11.848833303862842,
+      "u_S": 0.16373207240618362,
+      "u_T": 3.3187089483958463
+     },
+     {
+      "S": 1.0,
+      "T": 38310.580677422535,
+      "bound": 127141.83064447559,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 0.0001414951637975937,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 17.989954152565993,
+      "u_S": 0.16373207240618362,
+      "u_T": 3.3187089483958463
+     },
+     {
+      "S": 1.0,
+      "T": 1211486.9342429163,
+      "bound": 4020572.693268689,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 6.001899938533802e-06,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 24.131075000600028,
+      "u_S": 0.16373207240618362,
+      "u_T": 3.3187089483958463
+     },
+     {
+      "S": 1.0,
+      "T": 38310580.67742252,
+      "bound": 127141667.0761352,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 2.3809815102470852e-07,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 30.27219584902685,
+      "u_S": 0.16373207240618362,
+      "u_T": 3.3187089483958463
+     }
+    ]
+   },
+   "shipped_1.5_0.5": {
+    "max_ratio_over_all_pairs": 0.0004130486804642563,
+    "n_rejected_by_guard": 0,
+    "rows": [
+     {
+      "S": 1.0,
+      "T": 44608.15941316821,
+      "bound": 213023.31651024747,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.0003738338149336388,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 79.63531908084182,
+      "u_S": 0.03155959049226779,
+      "u_T": 4.775433188749166
+     },
+     {
+      "S": 1.0,
+      "T": 14106338598.05688,
+      "bound": 67363877512.92577,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 2.8662798534745756e-09,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 193.08372496722814,
+      "u_S": 0.03155959049226779,
+      "u_T": 4.775433188749166
+     },
+     {
+      "S": 1.0,
+      "T": 1410633859805688.2,
+      "bound": 6736387751289422.0,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 4.397291995970468e-14,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 296.21863940498474,
+      "u_S": 0.03155959049226779,
+      "u_T": 4.775433188749166
+     },
+     {
+      "S": 1.0,
+      "T": 1.4106338598056883e+20,
+      "bound": 6.736387751289422e+20,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 5.928304138562945e-19,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 399.3535538493381,
+      "u_S": 0.03155959049226779,
+      "u_T": 4.775433188749166
+     },
+     {
+      "S": 1.0,
+      "T": 1.4106338598056883e+25,
+      "bound": 6.736387751289422e+25,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 7.459316280943142e-24,
+      "sigma": 0.02,
+      "theta1": 0.2,
+      "true_weighted_increment": 502.4884682793915,
+      "u_S": 0.03155959049226779,
+      "u_T": 4.775433188749166
+     },
+     {
+      "S": 1.0,
+      "T": 41893.423021377195,
+      "bound": 186859.75891598337,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.0002513313432312182,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 46.963714204215705,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "S": 1.0,
+      "T": 13247863576.467371,
+      "bound": 59090232342.983574,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 1.86574589336602e-09,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 110.2473583319656,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "S": 1.0,
+      "T": 1324786357646737.2,
+      "bound": 5909023234294629.0,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 2.8393515686310572e-14,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 167.77794389371817,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "S": 1.0,
+      "T": 1.3247863576467372e+20,
+      "bound": 5.909023234294629e+20,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 3.8129572439571877e-19,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 225.30852945915035,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "S": 1.0,
+      "T": 1.3247863576467374e+25,
+      "bound": 5.909023234294629e+25,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 4.786562919345591e-24,
+      "sigma": 0.05,
+      "theta1": 1.0,
+      "true_weighted_increment": 282.83911502826226,
+      "u_S": 0.037294769392098415,
+      "u_T": 4.4603593629927065
+     },
+     {
+      "S": 1.0,
+      "T": 25111.880723637805,
+      "bound": 67542.69753817357,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.0002552280185654659,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 17.238788861234614,
+      "u_S": 0.1431267398979616,
+      "u_T": 2.689665308415386
+     },
+     {
+      "S": 1.0,
+      "T": 7941073953.667608,
+      "bound": 21358831124.883904,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 1.871689653144088e-09,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 39.9771032196971,
+      "u_S": 0.1431267398979616,
+      "u_T": 2.689665308415386
+     },
+     {
+      "S": 1.0,
+      "T": 794107395366760.9,
+      "bound": 2135883112474078.0,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 2.8394951827195782e-14,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 60.648298087222436,
+      "u_S": 0.1431267398979616,
+      "u_T": 2.689665308415386
+     },
+     {
+      "S": 1.0,
+      "T": 7.94107395366761e+19,
+      "bound": 2.1358831124740778e+20,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 3.8073007123444256e-19,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 81.31949295606985,
+      "u_S": 0.1431267398979616,
+      "u_T": 2.689665308415386
+     },
+     {
+      "S": 1.0,
+      "T": 7.941073953667609e+24,
+      "bound": 2.135883112474078e+25,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 4.7751062420311746e-24,
+      "sigma": 0.05,
+      "theta1": 2.5,
+      "true_weighted_increment": 101.99068782623944,
+      "u_S": 0.1431267398979616,
+      "u_T": 2.689665308415386
+     },
+     {
+      "S": 1.0,
+      "T": 11893.941259413474,
+      "bound": 14891.090594924244,
+      "delta": 1e-09,
+      "ratio_true_over_bound": 0.0004130486804642563,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 6.1507453209071565,
+      "u_S": 0.3307666566703301,
+      "u_T": 1.2519617764617985
+     },
+     {
+      "S": 1.0,
+      "T": 3761194500.1205144,
+      "bound": 4708871748.319992,
+      "delta": 1e-20,
+      "ratio_true_over_bound": 3.0189951713573296e-09,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 14.216061070719002,
+      "u_S": 0.3307666566703301,
+      "u_T": 1.2519617764617985
+     },
+     {
+      "S": 1.0,
+      "T": 376119450012051.44,
+      "bound": 470887174798922.9,
+      "delta": 1e-30,
+      "ratio_true_over_bound": 4.57607840093027e-14,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 21.548166298724276,
+      "u_S": 0.3307666566703301,
+      "u_T": 1.2519617764617985
+     },
+     {
+      "S": 1.0,
+      "T": 3.7611945001205146e+19,
+      "bound": 4.7088717479892255e+19,
+      "delta": 1e-40,
+      "ratio_true_over_bound": 6.133161630121498e-19,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 28.880271525930667,
+      "u_S": 0.3307666566703301,
+      "u_T": 1.2519617764617985
+     },
+     {
+      "S": 1.0,
+      "T": 3.761194500120515e+24,
+      "bound": 4.708871747989226e+24,
+      "delta": 1e-50,
+      "ratio_true_over_bound": 7.690244859412313e-24,
+      "sigma": 0.02,
+      "theta1": 3.0,
+      "true_weighted_increment": 36.212376753606016,
+      "u_S": 0.3307666566703301,
+      "u_T": 1.2519617764617985
+     }
+    ]
+   }
+  },
+  "reading": "the guard accepts every one of these -- gamma > 0 -- and the adversary never exceeds the bound at any of them.  The ratio falls TOWARD ZERO as the feature narrows, the opposite asymptotics from the rejected gamma <= 0 rows, exactly as leg 119 measured pre-repair."
+ },
+ "gate": "Post-repair: (a) does hilbert_holder.py's reported bound now either raise on the failing configuration or provably dominate the true value there, with the PIN inverted, and (b) is the module bit-identical on every previously-passing case, including any capabilities.py validated line?",
+ "leg": 153,
+ "precedent": "leg 130 / solver/hilbert_pointwise.py",
+ "predicate": "gamma > 0, plus finiteness of the arguments and eps in (0, 1)",
+ "repairs": "solver/hilbert_holder.py",
+ "repairs_finding_of_leg": 119,
+ "route": "ROUTE-HHR"
+}

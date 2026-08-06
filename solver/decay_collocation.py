@@ -51,6 +51,39 @@ import numpy as np
 C_ANCHOR = 0.5
 
 
+class DecayCollocationDomainError(ValueError):
+    """Input outside the domain this module's construction is valid on.
+
+    Raised instead of returning a number that LOOKS ordinary but was computed from a
+    system the caller did not ask for.  Leg 115 (Route-DCA) measured three such sites;
+    leg 151 (Route-DCR) closes them.  Naming follows the in-repo convention set by
+    `solver.hilbert_pointwise.HilbertPointwiseDomainError` and
+    `solver.nk_bounds.CertificateInputError` -- a `ValueError` subclass, so a caller
+    catching `ValueError` (as `test_decay_collocation_adversarial.py` does for the
+    out-of-range `drop` case) keeps working unchanged.
+    """
+
+
+def _require_real(alpha, where):
+    """Reject a non-real `alpha`; return it untouched otherwise.
+
+    G3 (leg 115).  `(1 + X^2) ** (0.5 * alpha)` with a complex `alpha` produces a complex
+    array, which `float(np.max(...))` then truncates under NumPy's `ComplexWarning` -- a
+    WARNING, not an exception, and suppressed by default.  Python's own `float()` raises
+    `TypeError` on the identical input; this moves the module onto the stricter contract.
+    The value is never converted or rounded here, so every real `alpha` -- Python `float`,
+    Python `int`, NumPy scalar, or array -- flows through bit-for-bit unchanged.
+    """
+    if np.iscomplexobj(np.asarray(alpha)):
+        raise DecayCollocationDomainError(
+            "%s: alpha must be real, got %r. The decay class is X^{-alpha} and the weight "
+            "(1+X^2)^{alpha/2} is only a norm weight for real alpha; a complex alpha is "
+            "silently truncated by float() under NumPy's ComplexWarning and returns an "
+            "ordinary-looking finite number computed from the wrong exponent." % (where, alpha)
+        )
+    return alpha
+
+
 # ---------------------------------------------------------------------------
 # grid and transforms
 # ---------------------------------------------------------------------------
@@ -117,10 +150,12 @@ class Collocation:
     # -- weighted sup norms ------------------------------------------------
     def w_domain(self, alpha):
         """(1+X^2)^{alpha/2} -- the domain weight of the decay class X^{-alpha}."""
+        _require_real(alpha, "Collocation.w_domain")
         return (1.0 + self.X ** 2) ** (0.5 * alpha)
 
     def w_codomain(self, alpha):
         """(1+X^2)^{(alpha+1)/2} -- one more power of decay, as the far field needs."""
+        _require_real(alpha, "Collocation.w_codomain")
         return (1.0 + self.X ** 2) ** (0.5 * (alpha + 1.0))
 
     def norm_domain(self, h, alpha):
@@ -134,10 +169,36 @@ def sup_op_norm(A, w_dom, w_cod):
     """Induced norm for sup norms: ||A|| = max_i w_dom_i sum_j |A_ij| / w_cod_j.
 
     (Rows of A are domain slots, columns codomain slots: A maps Y -> X.)
+
+    G2 (leg 115).  The docstring states that axis convention but nothing used to check an
+    argument against it, and `np.atleast_2d` turns a 1-D array of shape (n,) into (1, n) --
+    a ROW, never a column, per NumPy's own documented and deliberate behaviour.  So a 1-D
+    array intended as an (n, 1) column operator had its domain and codomain axes silently
+    swapped: leg 115's worked case returned 12.0 where the intended reading gives 10.0, and
+    30/30 of its randomized battery mismatched.  The guard below is a SHAPE INVARIANT rather
+    than a 1-D special case: whatever was passed, after `atleast_2d` it must be exactly
+    (len(w_dom), len(w_cod)).  That refuses the ambiguous 1-D input AND catches a transposed
+    or mis-sized 2-D argument, which the previous code would have broadcast just as quietly.
     """
-    A = np.atleast_2d(np.asarray(A, dtype=float))
-    return float(np.max(np.asarray(w_dom)
-                        * (np.abs(A) / np.asarray(w_cod)[None, :]).sum(axis=1)))
+    A_in = np.asarray(A, dtype=float)
+    A = np.atleast_2d(A_in)
+    wd = np.asarray(w_dom)
+    wc = np.asarray(w_cod)
+    if wd.ndim != 1 or wc.ndim != 1:
+        raise DecayCollocationDomainError(
+            "sup_op_norm: w_dom and w_cod must each be 1-D weight vectors, got ndim "
+            "%d and %d." % (wd.ndim, wc.ndim)
+        )
+    if A.shape != (wd.shape[0], wc.shape[0]):
+        raise DecayCollocationDomainError(
+            "sup_op_norm: A has shape %r (as passed: ndim %d, shape %r) but the weights "
+            "require exactly (%d, %d) = (len(w_dom), len(w_cod)). Rows of A are domain "
+            "slots and columns are codomain slots; a 1-D A is turned into a ROW (1, n) by "
+            "numpy.atleast_2d, never a column, so passing a flat array as a column operator "
+            "silently swaps the two axes instead of raising."
+            % (A.shape, A_in.ndim, A_in.shape, wd.shape[0], wc.shape[0])
+        )
+    return float(np.max(wd * (np.abs(A) / wc[None, :]).sum(axis=1)))
 
 
 # ---------------------------------------------------------------------------
@@ -161,11 +222,60 @@ def gauged_jacobian(col, om, c, gauge="origin", drop=0):
     counted.  `drop` selects which collocation row the normalization replaces; the
     default drops the innermost node, where the residual is least informative
     about the far field.  Returns (M, w_cod_index) with row 0 the gauge row.
+
+    G1 (leg 115), and the predicate is NOT the one leg 115 prescribed.  Leg 115 asked for a
+    raise "when `rows` is empty (i.e. J <= 1)".  Measured on the pre-repair module at J = 1
+    over the five `drop` values leg 115's own test pins -- 0, 1, -1, 5, 100 -- `rows` is
+    empty for exactly ONE of them (drop = 0) and has length 1 for the other four, yet all
+    five return the identical 1.681792830507429.  Emptiness is therefore the wrong predicate:
+    it would have left 4 of leg 115's own 5 cases still collapsing.
+
+    The mechanism is the ASSIGNMENT TARGET, not the row list.  `M[1:, :]` has shape
+    (J - 1, J), which at J = 1 is (0, 1); NumPy broadcasts a right-hand side of shape (1, 1)
+    into a (0, 1) destination without complaint, because a length-1 axis broadcasts to ANY
+    length including zero.  So the whole Jacobian -- NaN-poisoned or not -- is discarded and
+    M is purely the gauge row, which reads only `col.to_coef` and so depends on neither `om`
+    nor `c`.  Hence bit-identical output for every c in {0, 0.5, 1, 100, -50, 1e6, nan,
+    +-inf} and for a NaN/Inf-poisoned nodal field.
+
+    The guard is the SHAPE INVARIANT the construction actually needs:
+
+        len(rows) == J - 1  and  J - 1 >= 1
+
+    i.e. exactly one collocation row is deleted, and at least one survives.  Clause `J >= 2`
+    catches (J=1, drop=0), which the length clause alone admits (0 == J - 1); clause
+    `0 <= drop < J` catches (J=1, drop out of range), which is 4 of leg 115's 5.  Both are
+    necessary.  At J >= 2 an out-of-range `drop` already raised ValueError from the shape
+    mismatch; this only makes the refusal explicit and gives it a message, and
+    DecayCollocationDomainError IS a ValueError, so callers catching that are unaffected.
+
+    Note `drop = -1` does not mean "the last row" here and never did:
+    `[j for j in range(J) if j != -1]` retains all J rows.  It is out of range, and is now
+    named as such.
     """
     J = col.J
+    if J < 2:
+        raise DecayCollocationDomainError(
+            "gauged_jacobian: J = %d leaves %d collocation rows after the gauge row "
+            "replaces one, so the returned system is the gauge row ALONE -- it depends on "
+            "neither `om` nor `c`, and every input (including NaN/Inf) returns the same "
+            "number. At least one real collocation row is required, i.e. J >= 2." % (J, J - 1)
+        )
+    if not (isinstance(drop, (int, np.integer)) and 0 <= int(drop) < J):
+        raise DecayCollocationDomainError(
+            "gauged_jacobian: drop = %r is not a row of this grid; it must be an integer "
+            "with 0 <= drop < J = %d. Negative values are NOT interpreted Python-style as "
+            "counting from the end: `[j for j in range(J) if j != drop]` would retain all "
+            "%d rows, one too many for the (%d, %d) assignment slot." % (drop, J, J, J - 1, J)
+        )
     M = np.empty((J, J))
     M[0, :] = GAUGES[gauge](col)
     rows = [j for j in range(J) if j != drop]
+    if len(rows) != J - 1:                       # invariant, not reachable via the guards above
+        raise DecayCollocationDomainError(
+            "gauged_jacobian: retained %d collocation rows, expected exactly J - 1 = %d."
+            % (len(rows), J - 1)
+        )
     M[1:, :] = col.jacobian_matrix(om, c)[rows, :]
     return M, rows
 

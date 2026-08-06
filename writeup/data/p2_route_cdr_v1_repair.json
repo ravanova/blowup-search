@@ -1,0 +1,664 @@
+{
+ "leg": 154,
+ "route": "CDR",
+ "title": "repair of critical_dissipation.py's silent exponent truncation",
+ "pre_repair_sha": "9dba93f",
+ "gate_verbatim": "Post-repair: (a) does critical_dissipation.py reject or visibly flag every non-integer p (2s) case in leg 121's battery rather than silently truncating, with the PIN inverted, and (b) is the module bit-identical on every previously-passing integer-p case, including any capabilities.py validated line?",
+ "not_a_physics_measurement": "No gCLM physics is measured or contested here. alpha_1 = 0 at a=0, sigma=3 at a=1/2 and alpha_1 = +0.133683 stand exactly as banked in capabilities.py. Every alpha value below appears ONLY as a bit-pattern required to be UNCHANGED between two versions of the same code -- the opposite of a measurement claim.",
+ "N1_prescribed_predicate": {
+  "rows": [
+   {
+    "input": "1",
+    "prescribed": "accepted",
+    "prescribed_p": "1",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "1",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "3",
+    "prescribed": "accepted",
+    "prescribed_p": "3",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "3",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "5",
+    "prescribed": "accepted",
+    "prescribed_p": "5",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "5",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "1.0",
+    "prescribed": "accepted",
+    "prescribed_p": "1",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "1",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "3.0",
+    "prescribed": "accepted",
+    "prescribed_p": "3",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "3",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "np.float64(3.0)",
+    "prescribed": "accepted",
+    "prescribed_p": "3",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "3",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "np.int64(3)",
+    "prescribed": "accepted",
+    "prescribed_p": "3",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "3",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "True",
+    "prescribed": "accepted",
+    "prescribed_p": "1",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "1",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "'3'",
+    "prescribed": "accepted",
+    "prescribed_p": "3",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "3",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "1.9",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "ValueError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "CriticalDissipationDomainError",
+    "differs": true
+   },
+   {
+    "input": "2.9999999",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "ValueError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "CriticalDissipationDomainError",
+    "differs": true
+   },
+   {
+    "input": "'3.5'",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "ValueError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "ValueError",
+    "differs": false
+   },
+   {
+    "input": "nan",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "ValueError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "CriticalDissipationDomainError",
+    "differs": true
+   },
+   {
+    "input": "inf",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "OverflowError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "CriticalDissipationDomainError",
+    "differs": true
+   },
+   {
+    "input": "-inf",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "OverflowError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "CriticalDissipationDomainError",
+    "differs": true
+   },
+   {
+    "input": "1e+300",
+    "prescribed": "accepted",
+    "prescribed_p": "<301-digit int>",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "<301-digit int>",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "9007199254740992.0",
+    "prescribed": "accepted",
+    "prescribed_p": "<16-digit int>",
+    "prescribed_exc": null,
+    "adopted": "accepted",
+    "adopted_p": "<16-digit int>",
+    "adopted_exc": null,
+    "differs": false
+   },
+   {
+    "input": "None",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "TypeError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "TypeError",
+    "differs": false
+   },
+   {
+    "input": "(1+0j)",
+    "prescribed": "raised",
+    "prescribed_p": null,
+    "prescribed_exc": "TypeError",
+    "adopted": "raised",
+    "adopted_p": null,
+    "adopted_exc": "TypeError",
+    "differs": false
+   }
+  ],
+  "n_disagree": 5,
+  "floor_of_inf_equals_inf": true,
+  "prescribed_raises_OverflowError_on_inf": true,
+  "note": "np.floor(inf) == inf is True, so an integrality-only predicate does not merely mis-handle infinity, it ADMITS it. The isfinite clause is measured necessary, not defensive decoration. SEI CERT FLP04-C."
+ },
+ "A_clause_a_refusals": {
+  "C1": [
+   {
+    "p_requested": 1.9,
+    "pre_repair": "accepted",
+    "pre_repair_p_used": 1,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "post_repair_msg_names_both": true,
+    "is_ValueError": true
+   },
+   {
+    "p_requested": 1.0000001,
+    "pre_repair": "accepted",
+    "pre_repair_p_used": 1,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "post_repair_msg_names_both": true,
+    "is_ValueError": true
+   },
+   {
+    "p_requested": 2.9999999,
+    "pre_repair": "accepted",
+    "pre_repair_p_used": 2,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "post_repair_msg_names_both": true,
+    "is_ValueError": true
+   },
+   {
+    "p_requested": 2.9,
+    "pre_repair": "accepted",
+    "pre_repair_p_used": 2,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "post_repair_msg_names_both": true,
+    "is_ValueError": true
+   },
+   {
+    "p_requested": 3.9,
+    "pre_repair": "accepted",
+    "pre_repair_p_used": 3,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "post_repair_msg_names_both": true,
+    "is_ValueError": true
+   }
+  ],
+  "C2": [
+   {
+    "p_requested": 1.1,
+    "p_pre_repair_built": 1,
+    "s_requested": 0.55,
+    "s_pre_repair_built": 0.5,
+    "pre_repair_p_attr": 1,
+    "pre_repair_s_attr": 0.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 1.5,
+    "p_pre_repair_built": 1,
+    "s_requested": 0.75,
+    "s_pre_repair_built": 0.5,
+    "pre_repair_p_attr": 1,
+    "pre_repair_s_attr": 0.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 1.9,
+    "p_pre_repair_built": 1,
+    "s_requested": 0.95,
+    "s_pre_repair_built": 0.5,
+    "pre_repair_p_attr": 1,
+    "pre_repair_s_attr": 0.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 2.1,
+    "p_pre_repair_built": 2,
+    "s_requested": 1.05,
+    "s_pre_repair_built": 1.0,
+    "pre_repair_p_attr": 2,
+    "pre_repair_s_attr": 1.0,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 2.5,
+    "p_pre_repair_built": 2,
+    "s_requested": 1.25,
+    "s_pre_repair_built": 1.0,
+    "pre_repair_p_attr": 2,
+    "pre_repair_s_attr": 1.0,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 2.9,
+    "p_pre_repair_built": 2,
+    "s_requested": 1.45,
+    "s_pre_repair_built": 1.0,
+    "pre_repair_p_attr": 2,
+    "pre_repair_s_attr": 1.0,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 3.1,
+    "p_pre_repair_built": 3,
+    "s_requested": 1.55,
+    "s_pre_repair_built": 1.5,
+    "pre_repair_p_attr": 3,
+    "pre_repair_s_attr": 1.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 3.5,
+    "p_pre_repair_built": 3,
+    "s_requested": 1.75,
+    "s_pre_repair_built": 1.5,
+    "pre_repair_p_attr": 3,
+    "pre_repair_s_attr": 1.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "p_requested": 3.9,
+    "p_pre_repair_built": 3,
+    "s_requested": 1.95,
+    "s_pre_repair_built": 1.5,
+    "pre_repair_p_attr": 3,
+    "pre_repair_s_attr": 1.5,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   }
+  ],
+  "C3": {
+   "expression": "2.0 * (2.5 - 1e-12)",
+   "value": 4.999999999998,
+   "pre_repair_p_used": 4,
+   "intended_p": 5,
+   "units_lost": 1,
+   "post_repair": "refused",
+   "non_triggering_still_accepted": [
+    {
+     "expr": "2.0 * (5 * 0.1 * 5)",
+     "value": 5.0,
+     "is_exactly_integral": true,
+     "accepted": true
+    },
+    {
+     "expr": "2.0 * sum of five 0.5s",
+     "value": 5.0,
+     "is_exactly_integral": true,
+     "accepted": true
+    }
+   ]
+  },
+  "C4": [
+   {
+    "input": "3.5",
+    "type": "float",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "refused",
+    "post_repair_exc": "CriticalDissipationDomainError",
+    "unchanged": false
+   },
+   {
+    "input": "'3.5'",
+    "type": "str",
+    "pre_repair": "refused",
+    "pre_repair_exc": "ValueError",
+    "post_repair": "refused",
+    "post_repair_exc": "ValueError",
+    "unchanged": true
+   },
+   {
+    "input": "'3.0'",
+    "type": "str",
+    "pre_repair": "refused",
+    "pre_repair_exc": "ValueError",
+    "post_repair": "refused",
+    "post_repair_exc": "ValueError",
+    "unchanged": true
+   },
+   {
+    "input": "'3'",
+    "type": "str",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "accepted",
+    "post_repair_exc": null,
+    "unchanged": true
+   },
+   {
+    "input": "3.0",
+    "type": "float",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "accepted",
+    "post_repair_exc": null,
+    "unchanged": true
+   },
+   {
+    "input": "np.float64(3.0)",
+    "type": "float64",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "accepted",
+    "post_repair_exc": null,
+    "unchanged": true
+   },
+   {
+    "input": "np.int64(3)",
+    "type": "int64",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "accepted",
+    "post_repair_exc": null,
+    "unchanged": true
+   },
+   {
+    "input": "3",
+    "type": "int",
+    "pre_repair": "accepted",
+    "pre_repair_exc": null,
+    "post_repair": "accepted",
+    "post_repair_exc": null,
+    "unchanged": true
+   }
+  ],
+  "non_finite": [
+   {
+    "input": "nan",
+    "pre_repair_exc": "ValueError",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "input": "inf",
+    "pre_repair_exc": "OverflowError",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   },
+   {
+    "input": "-inf",
+    "pre_repair_exc": "OverflowError",
+    "post_repair_exc": "CriticalDissipationDomainError"
+   }
+  ],
+  "n_refused": 15,
+  "n_total": 15,
+  "n_refused_pre_repair": 0
+ },
+ "B_clause_b_differential": {
+  "n_leaves": 627934,
+  "n_moved": 0,
+  "moved": [],
+  "n_named_quantities": 633,
+  "digest_pre_repair": "64f136eabc32e6f0",
+  "digest_post_repair": "64f136eabc32e6f0",
+  "lesson90_control": {
+   "modules_are_distinct_objects": true,
+   "pre_repair_has_guard": false,
+   "post_repair_has_guard": true,
+   "pre_repair_file": "<git:9dba93f:solver/critical_dissipation.py>",
+   "post_repair_file": "/home/andy/projects/Unsolved/.claude/worktrees/agent-a31c6e9acbc33ba39/solver/critical_dissipation.py",
+   "pre_repair_src_sha256": "315abb9869cb1f18",
+   "post_repair_src_sha256": "24f2d6547316a73d",
+   "pre_accepts_p_1p9": true,
+   "post_accepts_p_1p9": false
+  },
+  "per_quantity": "every named quantity 0/0 moved",
+  "method": "== on float64, NaN==NaN counted identical; NOT np.allclose. The pre-repair module is read out of git at 9dba93f and exec'd in THIS interpreter, so numpy/BLAS are shared and any difference is the repair."
+ },
+ "C_escape_hatch": {
+  "rows": [
+   {
+    "p_requested": 1.9,
+    "p_built": 1,
+    "n_warnings": 1,
+    "warning_type": "RuntimeWarning",
+    "warning_names_the_substitution": true,
+    "warning": "p = 1.9 is not an integer; truncating to 1 (s = 0.5, NOT the requested s = 0.95). This is the pre-repair behaviour, retained only so leg 121's measurement stays runnable. Do not use it to compute anything.",
+    "s_pre": 0.5,
+    "s_post": 0.5,
+    "s_bit_identical": true,
+    "alpha_pre": 0.8,
+    "alpha_post": 0.8,
+    "alpha_bit_identical": true,
+    "c_omega_pre": -0.8,
+    "c_omega_post": -0.8,
+    "c_omega_bit_identical": true,
+    "arrays_bit_identical": true,
+    "n_array_entries": 12352
+   },
+   {
+    "p_requested": 2.9,
+    "p_built": 2,
+    "n_warnings": 1,
+    "warning_type": "RuntimeWarning",
+    "warning_names_the_substitution": true,
+    "warning": "p = 2.9 is not an integer; truncating to 2 (s = 1.0, NOT the requested s = 1.45). This is the pre-repair behaviour, retained only so leg 121's measurement stays runnable. Do not use it to compute anything.",
+    "s_pre": 1.0,
+    "s_post": 1.0,
+    "s_bit_identical": true,
+    "alpha_pre": 0.3999999999999999,
+    "alpha_post": 0.3999999999999999,
+    "alpha_bit_identical": true,
+    "c_omega_pre": -0.3999999999999999,
+    "c_omega_post": -0.3999999999999999,
+    "c_omega_bit_identical": true,
+    "arrays_bit_identical": true,
+    "n_array_entries": 12352
+   },
+   {
+    "p_requested": 3.9,
+    "p_built": 3,
+    "n_warnings": 1,
+    "warning_type": "RuntimeWarning",
+    "warning_names_the_substitution": true,
+    "warning": "p = 3.9 is not an integer; truncating to 3 (s = 1.5, NOT the requested s = 1.95). This is the pre-repair behaviour, retained only so leg 121's measurement stays runnable. Do not use it to compute anything.",
+    "s_pre": 1.5,
+    "s_post": 1.5,
+    "s_bit_identical": true,
+    "alpha_pre": -1.4000000000000004,
+    "alpha_post": -1.4000000000000004,
+    "alpha_bit_identical": true,
+    "c_omega_pre": 1.4000000000000004,
+    "c_omega_post": 1.4000000000000004,
+    "c_omega_bit_identical": true,
+    "arrays_bit_identical": true,
+    "n_array_entries": 12352
+   }
+  ],
+  "n_bit_identical": 3,
+  "n_total": 3
+ },
+ "D_guard_firing_rate": {
+  "n_shipped": 14,
+  "n_fired": 0,
+  "fired": [],
+  "cases": [
+   "CRITICAL_POINTS a=0 (CLM)",
+   "CRITICAL_POINTS a=1/2",
+   "CRITICAL_POINTS a=0.58218",
+   "literal 1",
+   "literal 2",
+   "literal 3",
+   "literal 4",
+   "literal 5",
+   "literal 7",
+   "integral non-int type 1.0",
+   "integral non-int type 3.0",
+   "integral non-int type np.float64(3.0)",
+   "integral non-int type np.int64(3)",
+   "integral non-int type True"
+  ]
+ },
+ "E_controls_and_residues": {
+  "sub_integer_controls": [
+   {
+    "p": 0.5,
+    "pre_repair": "ValueError",
+    "pre_repair_class": "ValueError",
+    "post_repair": "ValueError",
+    "post_repair_class": "CriticalDissipationDomainError",
+    "both_ValueError": true
+   },
+   {
+    "p": 0.999,
+    "pre_repair": "ValueError",
+    "pre_repair_class": "ValueError",
+    "post_repair": "ValueError",
+    "post_repair_class": "CriticalDissipationDomainError",
+    "both_ValueError": true
+   },
+   {
+    "p": -0.5,
+    "pre_repair": "ValueError",
+    "pre_repair_class": "ValueError",
+    "post_repair": "ValueError",
+    "post_repair_class": "CriticalDissipationDomainError",
+    "both_ValueError": true
+   },
+   {
+    "p": -3,
+    "pre_repair": "ValueError",
+    "pre_repair_class": "ValueError",
+    "post_repair": "ValueError",
+    "post_repair_class": "ValueError",
+    "both_ValueError": true
+   },
+   {
+    "p": 0,
+    "pre_repair": "ValueError",
+    "pre_repair_class": "ValueError",
+    "post_repair": "ValueError",
+    "post_repair_class": "ValueError",
+    "both_ValueError": true
+   }
+  ],
+  "residues": {
+   "p_1e300": {
+    "accepted_by_guard": true,
+    "n_digits_of_int": 301,
+    "disposition": "DECLARED RESIDUE, NOT PATCHED",
+    "reason": "finite and integral, so the guard admits it; the resulting lambda_power loop is a resource exhaustion (unbounded matmul chain, eventual MemoryError) -- LOUD, not a silent substitution of a different exponent, which is the only thing this repair is licensed to close. A cap would be an arbitrary threshold with no measurement behind it.",
+    "confirmed_accepted": true
+   },
+   "marginal_flow_int_p": {
+    "hits": [
+     {
+      "line": 139,
+      "text": "self.a, self.p, self.K = float(a), int(p), int(K)"
+     },
+     {
+      "line": 517,
+      "text": "a, p, K, mu = float(a), int(p), int(K), float(mu)"
+     },
+     {
+      "line": 576,
+      "text": "flow = CriticalDissipativeFlow(float(a), mu=float(mu), p=int(p), K=int(K))"
+     },
+     {
+      "line": 578,
+      "text": "out = {\"a\": float(a), \"p\": int(p), \"K\": int(K), \"mu\": float(mu),"
+     },
+     {
+      "line": 598,
+      "text": "K_req = (float(g) / float(mu_min)) ** (1.0 / int(p))"
+     }
+    ],
+    "n": 5,
+    "disposition": "DECLARED RESIDUE, OUT OF TERRITORY",
+    "reason": "solver/marginal_flow.py carries the IDENTICAL int(p) truncation one level up, so a non-integer p handed to AugmentedFlow is truncated there BEFORE it reaches this repair's guard. Editing it would fail the merge gate's territory check. Declared in the novelty pass, BEFORE construction, so it is not discovered later as a surprise.",
+    "AugmentedFlow_p1p9_still_truncates": 1,
+    "AugmentedFlow_p_built": 1
+   },
+   "unguarded_by_design": {
+    "mu_lt_0": "leg 121 C5 -- not the gate's subject, still open",
+    "mu_decay_time_domain": "leg 121 C6 -- not the gate's subject, still open",
+    "marginal_verdict_nonfinite": "leg 121 C7 -- not the gate's subject, still open",
+    "amplitude_eigenvalue_mu_lt_0": "leg 121 C8 -- not the gate's subject, still open",
+    "note": "The gate licenses the exponent-truncation repair and nothing else. Each of these is documented in the module docstring as a live escalation rather than silently left."
+   }
+  }
+ },
+ "gate_answer": {
+  "clause_a": "YES",
+  "clause_a_detail": "15/15 refused (was 0/15)",
+  "clause_b": "YES",
+  "clause_b_detail": "627934/627934 clean-input leaves bit-identical, 0 moved",
+  "overall": "YES"
+ }
+}

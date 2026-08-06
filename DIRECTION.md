@@ -62,7 +62,23 @@ ruling and should not have been sitting parked. A seventeenth addition, drafted 
 127 (NGX) landed gate YES-(i) UNVERIFIED (superseding leg 58; citing Xu arXiv:2607.19762 on
 origin-H² invertibility) with a full-treatment verifier in flight, adds **163** — a
 speculative origin-H² certificate-feasibility SCOPING leg, explicitly NOT dispatchable until
-the verifier confirms. **Next fresh leg number for any future candidate is 164.**
+the verifier confirms. An eighteenth refill, responding to a reserve-empty operational
+request plus a user steer to weight the batch toward Clay/novel-math over hygiene, adds
+**164–171** (three Clay/novelty-thread follow-ups on legs 127/162's findings, five
+repair/regression closures), recovers **109, 110** from the old 110-series reserve, and
+flags **148** as newly unblocked. A nineteenth addition, answering a user question about
+Wall 2 without rewording the odds, adds **172** (a literature scoping leg on whether
+validated numerics has ever reached a genuinely 3D PDE model, in any field). A twentieth
+addition, responding to a user steer to stop drafting audit/freshness legs and focus Opus on
+maths (Part 1), plus three specific math directions to scope (Part 2), adds **173–175** (Xu's
+own certification method as a distinct lane; the viscous-certified-blow-up "missing rung"
+sharpened against what's already banked; arXiv:2509.14185's own stated obstruction). A
+twenty-first refill, keeping the queue flowing continuously per the user's standing
+instruction, adds **176–181**: the user-authorized origin-H² construction leg (176), two new
+"different space" construction attempts on L1's collocation death and the weighted-energy
+window (177, blocked on 165; 178), the leg-58 publication bundle and the two-scale scope-line
+correction (179, 180 — both unblocked now that 161/162 landed), and a scoping read of Xu's
+modulation technique (181). **Next fresh leg number for any future candidate is 182.**
 
 **Refill, mid-cycle: leg 68 (Route-IX) landed at `b3ef49a`.** Gate answered **YES** —
 `writeup/INDEX.md` was stale (its own header still said Route-TC "has no writeup yet" for a
@@ -1031,6 +1047,250 @@ Cadiot deep-mine) still needs its framing note updated to stop describing itself
 leg 127's now-closed counterexample search; flagged again, not yet edited, since it does not
 block anything and a full pass over every downstream reference is better done once alongside
 the orchestrator's own propagation pass than piecemeal here.
+
+**DM update, 2026-08-06 — reserve refresh (only 5 of 10 slots live: 118, 153, 154, 160, 163)
+PLUS a user steer to weight this batch toward Clay/novelty over hygiene. Both addressed
+together, since they're the same decision.**
+
+**On the steer, stated plainly per the coordinator's own caution, so no leg below implies
+otherwise.** Toward Clay: the odds ceiling is structural (Wall 2, ~0.05%) and no leg in this
+queue, old or new, has moved a link of the L1→L4 chain in 160+ legs — that does not change
+today, and nothing drafted below claims it does. What CAN move under this DM's control is
+which mathematically substantive threads get worked next versus which hygiene backlog does,
+and that is exactly where this refresh leans. Toward novel world-helping maths: the
+coordinator is right that leg 127's reframing (the obstruction is the certificate SPACE, not
+the operator) and leg 162's ambiguous `Z_1<1` corner are the two most substantive open
+mathematical threads on the board right now, both genuinely novel-shaped, and leg 163 is
+already running on the first. **This batch prioritizes three follow-up threads on those two
+findings ahead of every hygiene item**, then fills remaining slots with the bounded
+repair/regression backlog the coordinator's operational message also asked for, then the
+oldest never-dispatched reserve at the bottom.
+
+**Tier 1 — Clay/novelty-thread follow-ups (drafted below, top priority):**
+- **164 (CSD)**, drafted per the coordinator's own invitation: resolves leg 162's ambiguity
+  independently, without needing the user, by answering the definitional question underneath
+  it — does the `a=0` CLM linearization admit a compact-support representation AT ALL. This
+  could close the "genuine gap vs. structurally inapplicable corner" question on its own.
+- **165 (SDM)**, new: leg 127 demonstrated that "the operator is bad" and "this space is bad
+  for the operator" are genuinely different claims, retroactively reopening a question about
+  every OTHER realization this repository has called dead — legs 52 (space), 53 (split), 56
+  (collocation L1 death), 111/141 (weighted-energy). Classify each against the same
+  space-vs-operator distinction 127 just proved matters, using only banked data (no new
+  compute of dynamics) — a genuinely novel synthesis question, not a repeat of any landed
+  audit.
+- **171 (XUL)**, new: Xu arXiv:2607.19762 has so far only been mined for the single
+  origin-H² invertibility citation legs 127/163 use. Full-text deep-mine for whether Xu
+  characterizes any OTHER space's certificate-buildability (not just invertibility) for this
+  operator class — directly extends the same thread leg 163 is scoping.
+
+**Tier 2 — bounded repair/regression backlog (the coordinator's operational ask; closes
+loops, does not open new ones):**
+- **148 (SUB) is now unblocked** — leg 129 (SUR) has landed, clearing the block stated in
+  148's own Independence field. No redraft needed; flagging for immediate dispatch, already
+  fully specified above.
+- **166 (CNB), 167 (DCB), 168 (HRB)**, new: postrepair regression checks for legs 150, 151,
+  152 (`collocation_newton.py`, `decay_collocation.py`, `hl_rescaled.py`), all three of which
+  landed their repairs without a close-the-loop regression leg yet, per the same
+  86/87/94/103/104/105/131–135/147 pattern.
+- **169 (HHB), 170 (CDB)**, new, drafted now and blocked: the same regression-check pattern
+  for legs 153 (HHR, `hilbert_holder.py`) and 154 (CDR, `critical_dissipation.py`), both
+  still in flight — ready the moment each lands.
+
+**Tier 3 — oldest never-dispatched reserve, recovered not redrafted, lowest priority this
+refresh:** **109 (RCA, `reduced_certificate.py` audit)** and **110 (L1R, L1 death-certificate
+reproduction audit)** — both still fully specified from the 110-series batch, never
+dispatched, confirmed via `git log` (no commits for either). Recovered rather than dropped,
+but explicitly ranked below every Tier 1/2 item this refresh, consistent with the steer.
+**Leg 76 (MI, the Morse-index rework leg) is NOT recovered** — it is the oldest undispatched
+entry in the file, predates nearly everything now banked about the space-vs-operator
+question, and reviving it would run directly against the steer's direction; if it is still
+relevant it can be redrafted fresh against current banked state, not resurrected as-is.
+
+**Total added to reserve this refresh: 11** (three Tier-1 novel-math threads — 164, 165,
+171; five Tier-2 repair/regression legs — 166–170, plus 148 unblocked with no new number
+consumed; two Tier-3 recovered legs — 109, 110). Recommended dispatch order: **164, 165, 171,
+148, 166, 167, 168, then 109/110/169/170 as slots and blocks allow.**
+
+Territory checked explicitly: 164/165/171 are literature-plus-analysis with no new solver
+module (164 reads the existing `a=0` CLM profile-equation code, whichever module defines it,
+read-only; 165 reads banked JSONs only; 171 is literature-only) — none collides with 163's
+`spectral_certificate.py` read-only access or with each other. 166/167/168/169/170 each own a
+single already-repaired solver module exclusively (`collocation_newton.py`,
+`decay_collocation.py`, `hl_rescaled.py`, `hilbert_holder.py`, `critical_dissipation.py`),
+read-only, no overlap with each other or with 109/110's territory.
+
+**DM answer, 2026-08-06 — user question, forwarded verbatim: "is there any way we can combat
+Wall 2?" Answered honestly under the standing directive. Per the coordinator's explicit
+instruction, this does NOT reword the ~0.05% odds or claim any movement toward Clay — the
+odds ceiling stays structural regardless of the answer below.**
+
+1. **Is Wall 2 a property of this repository's approach, or of the field?** Honest answer,
+   with the confidence level stated: this DM's working assessment, based on general knowledge
+   of the computer-assisted-proof/validated-numerics literature and on this repository's own
+   repeated literature passes, is that **no rigorous computer-assisted blow-up certificate is
+   known to exist for any genuinely 3D PDE model** — the technique's known reach stops at
+   1D/2D (Chen-Hou, Buckmaster-Gómez-Serrano, and this repository's own CLM/gCLM/Boussinesq
+   work all sit inside that boundary). But this DM does **not** hold that with full
+   confidence, for a specific reason: this repository's own literature legs that touch this
+   territory (74, 77, 82, 90, 93, 123) all scoped their search to "has THIS repository's
+   specific target object been certified," which is narrower than "has the TECHNIQUE ever
+   reached ANY genuinely 3D object, in ANY field" — celestial mechanics, combustion,
+   climate-model computer-assisted-proof traditions have never been surveyed by a landed leg.
+   Per the coordinator's own suggestion, **leg 172 (W2L) is drafted above** to close that gap
+   properly rather than leave the answer resting on this DM's unverified recollection.
+2. **Is there a theoretical path from "certified blow-up on a provable toy model" to
+   "something rigorous about 3D NS," without solving 3D NS directly?** Honest assessment:
+   **mostly closed, with one specific, narrow exception worth naming precisely.** The
+   CLM/gCLM family this repository has spent nearly every leg on is a heuristic 1D MODEL
+   inspired by 3D vortex-stretching dynamics (De Gregorio's construction) — it is not derived
+   from 3D NS by any exact reduction, so a certified blow-up there says nothing rigorous about
+   3D NS beyond analogy and intuition-building, exactly as the roadmap states. **The one
+   genuine exception**: 2D Boussinesq (this repository's OWN `solver/boussinesq*.py` object)
+   is related to 3D axisymmetric, swirl-free Euler by a standard, EXACT change of variables —
+   not an analogy, an equivalence — used in the Hou-Luo and Chen-Hou lines of work this
+   repository already cites. A rigorous certified blow-up for 2D Boussinesq would therefore be
+   a genuine, non-toy statement about a SYMMETRIC SUBCLASS of 3D Euler solutions — inviscid,
+   not the Navier-Stokes Clay asks about, and axisymmetric-swirl-free only, not general data.
+   Getting from there to viscous 3D NS would need a separate viscous-perturbation argument
+   this repository already found pre-empted for a related question (stage V's closure,
+   non-novelty against CGL/arXiv:2410.05480). So: the door is not structurally sealed for the
+   Boussinesq/axisymmetric-Euler route specifically, but it opens onto a strictly smaller
+   room than Clay (inviscid, symmetric-reduced) — which is exactly why the roadmap frames the
+   realistic prize as "novel Tier-3 on a provable model," not Clay itself, and nothing here
+   revises that framing.
+3. **No reword of the odds, no claim of movement, confirmed.** This answer and leg 172 both
+   report on where the field's frontier is; neither is a claim that anything in this
+   repository moved a link of the L1→L4 chain. Clay stays ~0.05%.
+
+---
+
+**DM update, 2026-08-06 — user steer, forwarded verbatim, two parts. Both addressed below.**
+
+**Part 1 — "stop doing so much review work, focus Opus on maths."** Received and sharpened
+into a standing rule for every future refill, not just this one: **no new adversarial-audit
+legs** (the `nk_seminorm`-style silent-corruption hunts — that family is, per this DM's own
+prior assessment, already down to `ga_search.py`'s banned lane and the currently-unreachable
+red-test/parked modules, so there is little left to draft anyway) **and no new freshness-
+audit legs** (JR/IX-style ledger checks) **unless something specific and urgent demands one**
+— a landed leg's own text flagging a concrete gap (the leg-76/128/150–154 precedent), not a
+cadence trigger. This does NOT retract 166–170 (already-drafted, already in reserve,
+closing loops on repairs already built — mechanical verification of found bugs, not new
+review-hunting) or 148/109/110 (already fully specified, pre-existing); it governs future
+drafting. **166–170/109/110/148 are re-ranked below every math-directed leg in this
+refresh's recommended dispatch order**, per the steer's spirit, even though they stay
+available.
+
+**Part 2 — three math-directed legs, drafted below (173, 174, 175), light/scoping first per
+the user's own instruction, heavier construction legs deferred until each is scoped:**
+
+- **173 (XUM)** scopes Xu arXiv:2607.19762's OWN certification method (uniform large-
+  imaginary-part bounds, trace-ideal membership, quadrature-error-in-trace-norm) as a
+  genuinely different lane from the `ell^1`-Fourier/radii-polynomial approach this
+  repository spent ~70 legs on — distinct from leg 171 (XUL), which only asks whether Xu
+  covers OTHER spaces; 173 asks what Xu's METHOD itself would take to mature into a working
+  certificate here.
+- **174 (VBS)** scopes the viscous-certified-blow-up question precisely, because the
+  literature answer is more nuanced than "missing entirely": `arXiv:2410.05480`
+  (Dahne-Figueras) already interval-verifies self-similar singular CGL profiles continued in
+  a dissipation parameter — re-derived by this repository's own leg 48/Route-V to 1.8e-07 —
+  which pre-empted stage V precisely because it may already BE a certified viscous blow-up,
+  just not in a fluid/vortex-dynamics-adjacent model. **Leg 125 (M2P) is already this
+  repository's live attempt at exactly the user's "missing rung"** — a certified viscous
+  blow-up on Chen's γ=2 dissipative gCLM, dispatch-ready per this DM's own prior correction
+  — so 174's job is narrower than starting from scratch: (a) confirm precisely whether
+  2410.05480 counts as "a viscous certified blow-up in any model" already (a definitional
+  question, sharpening rather than presupposing the user's framing), and (b) catalog any
+  OTHER candidate viscous fluid-adjacent models with an existing analytic (uncertified)
+  blow-up proof, as a fallback list if leg 125 doesn't close.
+- **175 (USC)** scopes arXiv:2509.14185 (Wang-Lai-Gomez-Serrano-Buckmaster et al., unstable
+  self-similar singularities for IPM and 3D Euler with boundary, CAP-ready precision,
+  inviscid, no certificate claimed) — currently in this repository's ledger only as a
+  one-line EXCLUSION row in `solver/viscous_novelty.py`/`LITERATURE_CHECK.md`, never read at
+  full-text depth for its actual method. **Correction to the coordinator's framing, checked
+  directly against `LITERATURE_CHECK.md`: the 1.8e-07/3.0e-06/3.8e-07 re-derivation numbers
+  already banked belong to `arXiv:2410.05480` (the CGL branch paper), not to `2509.14185`** —
+  2509.14185 has no re-derivation on file yet, so 175's first job is establishing what this
+  repository actually knows about it independently, not assuming prior work exists. Gate:
+  name precisely what "one model class away" means for THIS object — is it that the same
+  CAP-ready numerical technique, applied to a model already amenable to this repository's own
+  interval-arithmetic infrastructure (gCLM/CLM/Boussinesq), would let a certificate go
+  through, or does the CAP technique itself need independent maturation regardless of model.
+
+**Recommended dispatch order for the coordinator's 5-6 open slots, math-first per Part 1:**
+**173, 174, 175, 164, 165, 171, 172**, then (lower priority, still available) **148, 166,
+167, 168**, then **109, 110, 169, 170** as blocks clear. 163 stays live/already dispatched.
+
+**DM update, 2026-08-06 — leg 163 (H2S) landed as an escalation, PARKED, `leg/163-h2s-v1`,
+NOW IN PROGRESS.md's NEEDS YOU.** Reported outcome, stated exactly as the coordinator gave
+it: origin-H² IS structurally viable for a certificate (explicit split, shape, bordered
+formulation, no `ell^1_w`-class obstruction, verified against Xu at residual 2.8e-14) — but
+everything usable depends on `a=0` exactness, which would only re-derive a closed form Xu
+already gives analytically, so nothing transfers to the real (non-`a=0`) target object. This
+is a genuine yes/no split, not a clean win: structurally viable in the narrow sense leg 163's
+gate asked, but not obviously worth a construction leg, which is exactly why it's escalated
+rather than auto-followed-up. **No leg is drafted here that presupposes the user's ruling on
+whether a construction attempt is worth it anyway** — same discipline as every other parked
+escalation (leg 60/PQ, leg 63/125 before its ruling, leg 162/CAPG). Leg 174 (VBS) is
+unaffected — it concerns a structurally different question (viscous blow-up certification,
+not origin-H² feasibility) and does not depend on 163's outcome either way.
+
+**Answering the coordinator's question on the 3 open slots directly: yes, three math-content
+candidates are ready right now — dispatch 173 (XUM), 174 (VBS), 175 (USC).** These were
+drafted in this same DM turn, concurrently with the coordinator's message about the open
+slots, so the two crossed rather than this DM having nothing ready. All three are Part-2
+math-directed legs (Xu's own certification method as a distinct lane; the viscous-blow-up
+"missing rung" sharpened against `arXiv:2410.05480`; `arXiv:2509.14185`'s own stated
+obstruction), light/scoping difficulty, no overlap with 164/165/171/172 (already running,
+correctly not duplicated) or with each other. No hold-open needed for these three slots.
+
+**DM update, 2026-08-06 — all 10 slots full; continuous-flow batch drafted below; the
+requested origin-H² construction leg is 176.** Honest accounting first, per the coordinator's
+explicit request: **176 is new and the priority item.** Beyond it, this refresh draws on two
+pools — (a) five genuinely NEW math-shaped legs (177–181), each independent of any
+in-flight leg's still-unknown outcome, and (b) previously-drafted, still-undispatched reserve
+from the last two refills that the coordinator's 10-slot list doesn't mention: **148, 109,
+110, 168** are unblocked and immediately dispatchable; **169, 170** stay gated on 153/154.
+Genuinely fresh math material is thinning for the reason the coordinator would expect: the
+highest-value next moves (deeper 173/174/175 construction attempts, anything building on
+165's classification or 174/175's catalogs) cannot be drafted yet without presupposing
+outcomes no leg has reported. **Saying so explicitly, as asked**: after this batch, the next
+refill likely needs at least one of 164/165/171/172/173/174/175 to report before more
+first-class math threads can be drafted honestly — the alternative is padding with hygiene,
+which the user's steer says not to do.
+
+- **176 (H2C)**, the requested construction leg: builds the origin-H² certificate leg 163
+  scoped, at `a=0`, under the user's explicit authorization despite the known ceiling (no
+  transfer to the real non-`a=0` target — this leg's own thesis states that ceiling up front,
+  it does not discover or hide it).
+- **177 (L1RH)**, new: applies leg 127's own reframing (space vs. operator) to L1's OTHER
+  dead realization — the collocation basis (leg 56) — by testing whether a non-`ell^1_w`
+  space fixes it the way origin-H² fixed the coefficient basis. Drafted now, blocked on leg
+  165's classification report (so it doesn't presuppose which realizations are
+  space-dependent), ready the moment 165 lands.
+- **178 (WES)**, new: applies the same "try a different space" move to the weighted-energy
+  realization's zero-width window (leg 111/141) — a genuinely new construction attempt, not
+  a repeat of 141's literature check or 165's data-only classification. Independent of 165;
+  does not need to wait.
+- **179 (PUB1)**, new: leg 58's publication-scoping bundle (action item #6 from the strategic
+  review), deferred until 161 and 162 landed — both have. Bundles the exponent-sum
+  conservation law, the discrete-ball trap, the `A21` inequality (now leg 127's sharper
+  theorem, not leg 58's narrower one), and leg 126's closure audit into one combined
+  methodological note, per the review's own suggested shape.
+- **180 (TSR)**, new: the in-repo half of action item #5 (deferred pending 161/162, now
+  unblocked) — corrects the two-scale `a*` survival boundary's scope line in `writeup/` and
+  `PHASE2_P2_NOTES.md` to state its `a<=0` domain precisely, per the review's own independent
+  check. Does NOT touch the user's personal `MEMORY.md` file, which stays outside any leg's
+  reach (flagged for the orchestrator to relay directly, as before).
+- **181 (MOD)**, new: Xu's origin-H² invertibility holds "with a gap of 1/2 AFTER
+  MODULATION" — the modulation technique itself has never been read for what it does or
+  whether it's transferable. Scopes it directly and asks whether the same modulation move
+  could be tried against anything still alive in the `ell^1_w` line (a definitional/
+  literature question, not a new construction attempt).
+
+**Small housekeeping note, not a leg:** leg 157 (CDX)'s framing (describing itself as feeding
+leg 127's counterexample search) is still stale now that 127 proved the sharpest possible
+theorem; flagged twice already, still not worth a dedicated leg on its own — folding the
+correction into 179's bundle write-up is cheaper than a standalone fix.
 
 ---
 
@@ -4299,6 +4559,598 @@ citation on 2026-08-06.** Disjoint from every other live/reserve leg's territory
 the in-flight bench-repair on leg 127's unrelated side-finding (that repair touches
 `writeup/` prose about the far-field-amplitude claim only, not `solver/spectral_certificate.py`
 or Xu's citation, so it does not block this leg).
+```
+
+```
+### 164 — ROUTE-CSD: DOES THE a=0 CLM LINEARIZATION ADMIT A COMPACT-SUPPORT REPRESENTATION
+AT ALL? (resolves leg 162's ambiguity independently; user-facing PROGRESS.md item 0's
+companion, not a ruling on it)
+**Thesis.** Leg 162 built the untried compact-support/Chebyshev certificate corner and found
+it (a) uncovered by leg 126's 3-value realization axis and (b) measures `Z_1 < 1`
+(0.2737/0.0874) when built directly — but flagged this as honestly ambiguous, since leg 126's
+audit was written on the `a=0` CLM LINEARIZATION, which (per leg 162's own report) has no
+compact-support interval at all. This leg does NOT rule on whether leg 162's finding stands
+— it answers the narrower, decidable question underneath the ambiguity: does the `a=0` CLM
+linearization, as actually defined in this repository's own certificate machinery (the object
+leg 58/127's theorem and leg 126's audit are both about), admit ANY compact-support
+representation under any change of basis/variable this repository's own definitions permit —
+or is the linearization's domain structurally whole-line/unbounded, making leg 162's corner
+inapplicable to the banked object by construction? This is definitional, not a search: read
+the linearization's own construction (wherever it lives in `solver/`) and leg 162's own
+construction side by side.
+**Gate.** Does the `a=0` CLM linearization, as defined in this repository's certificate
+machinery, admit a compact-support representation under any basis change consistent with its
+own defining equations?
+  yes -> Leg 162's corner IS applicable to the banked object after all, sharpening the
+         ambiguity toward "genuine gap" — ESCALATE this finding to the user alongside leg
+         162's own parked branch, since it strengthens rather than resolves item 0.
+  no  -> The linearization is structurally whole-line/unbounded by construction; leg 162's
+         corner tests a DIFFERENT object, not the one leg 126's audit and leg 58/127's
+         theorem cover. This resolves the ambiguity without a user ruling: leg 126's
+         completeness claim stands as scoped, and leg 162's corner is a genuinely separate
+         (and still independently interesting, per leg 162's own measured `Z_1<1`) question
+         about a related but distinct construction. Report this precisely; do not overwrite
+         leg 162's own report, which stays parked and visible either way.
+**Territory.** experiments/p2_route_csd_v1_definitional.py,
+               writeup/data/p2_route_csd_v1_definitional.json,
+               writeup/novelty/leg_164.md, experiments/journal/leg_164.md.
+               Reads (never edits) the `a=0` CLM linearization's defining code (wherever it
+               lives — `solver/gclm.py`/`solver/target_norm.py`/`solver/spectral_certificate.py`,
+               located by the leg itself, read-only) and leg 162's own
+               `p2_route_capg_v1_corner.py`/JSON, read-only.
+**Difficulty.** standard
+**Independence.** Read-only across every file it touches; edits nothing under either outcome.
+Does not touch leg 162's parked branch (`leg/162-capg-v1`) or overwrite its report. Disjoint
+from 165/171 (different questions) and from 163 (origin-H², a different space entirely, not
+the compact-support question). Immediately dispatchable.
+```
+
+```
+### 165 — ROUTE-SDM: SPACE-VS-OPERATOR MAPPING ACROSS EVERY REALIZATION THIS REPOSITORY HAS
+CALLED DEAD
+**Thesis.** Leg 127 proved something with a consequence broader than its own headline: "the
+operator is bad" and "this SPACE is bad for the operator" are genuinely different claims, and
+this repository's ~70-leg `ell^1_w` obstruction turned out to be the latter, not the former.
+That retroactively reopens a classification question about every OTHER realization this
+repository has banked as dead: legs 52 (space choice for stage B), 53 (split choice), 56
+(collocation-basis L1 death), 111/141 (weighted-energy realization, zero-width window). For
+each, using ONLY banked data (no new dynamics, no new certificate construction): does the
+landed "dead" finding depend on the specific space/basis/realization chosen, or does it
+survive across every realization this repository has actually tried (making it closer to an
+operator-level fact)? This is a synthesis question leg 127 makes newly answerable, not a
+repeat of any landed audit.
+**Gate.** For each of legs 52, 53, 56, 111/141's dead findings, does the repository's own
+banked record contain evidence the finding is REALIZATION-DEPENDENT (i.e., a different
+choice within the same degree of freedom, already tried elsewhere in the banked record,
+behaves differently), or does every tried realization agree?
+  yes (at least one is realization-dependent) -> Name it precisely, with the banked evidence
+         for both realizations side by side. This is a genuinely novel synthesis finding —
+         ESCALATE as a candidate companion to leg 127's own reframing, not a ban-lifting
+         result on its own.
+  no (all four are realization-invariant across every tried case) -> Report this as
+         strengthening, not weakening, the "operator-level" reading of this repository's
+         other dead findings — 127's reframing was specific to the `ell^1_w`/stage-B
+         obstruction, not a general pattern. Bank the classification.
+**Territory.** experiments/p2_route_sdm_v1_mapping.py,
+               writeup/data/p2_route_sdm_v1_mapping.json,
+               writeup/novelty/leg_165.md, experiments/journal/leg_165.md.
+               Reads banked JSONs from legs 52, 53, 56, 58, 111, 127, 141 only; no solver
+               module, no new compute.
+**Difficulty.** standard
+**Independence.** Read-only, no solver module. Disjoint from 164 (definitional question about
+one specific object) and 171 (a specific paper's content, not a synthesis across this
+repository's own banked record). Immediately dispatchable.
+```
+
+```
+### 166 — ROUTE-CNB: POST-REPAIR REGRESSION CHECK, collocation_newton.py (closes leg 150)
+**Thesis.** Leg 150 (CNR) repaired the 8 silent-corruption cases across 3 mechanisms leg 114
+found; no independent regression check has run since, per the
+86/87/94/103/104/105/131–135/147 pattern this repository uses for every repair.
+**Gate.** Post-repair, does solver/collocation_newton.py (a) reject or correctly flag every
+one of leg 114's original 8 failing cases in an independent re-run, and (b) reproduce leg
+110's death-certificate reproduction and every other previously-validated result
+bit-identically?
+  yes -> Repair confirmed solid and non-regressive by an independent run. Bank leg 114's
+         battery as a permanent regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate
+         as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_collocation_newton_postrepair.py,
+               experiments/p2_route_cnb_v1_postrepair.py,
+               writeup/data/p2_route_cnb_v1_postrepair.json,
+               writeup/novelty/leg_166.md, experiments/journal/leg_166.md
+**Difficulty.** standard
+**Independence.** Reads solver/collocation_newton.py; edits nothing under either outcome.
+Module unowned since leg 150 landed. Immediately dispatchable.
+```
+
+```
+### 167 — ROUTE-DCB: POST-REPAIR REGRESSION CHECK, decay_collocation.py (closes leg 151)
+**Thesis.** Leg 151 (DCR) repaired the 3 silent-corruption gaps leg 115 found; no independent
+regression check has run since.
+**Gate.** Post-repair, does solver/decay_collocation.py (a) reject or correctly flag every one
+of leg 115's original 3 failing cases in an independent re-run, and (b) reproduce every
+previously-validated result bit-identically?
+  yes -> Repair confirmed solid and non-regressive. Bank leg 115's battery as a permanent
+         regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate
+         as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_decay_collocation_postrepair.py,
+               experiments/p2_route_dcb_v1_postrepair.py,
+               writeup/data/p2_route_dcb_v1_postrepair.json,
+               writeup/novelty/leg_167.md, experiments/journal/leg_167.md
+**Difficulty.** standard
+**Independence.** Reads solver/decay_collocation.py; edits nothing under either outcome.
+Module unowned since leg 151 landed. Immediately dispatchable.
+```
+
+```
+### 168 — ROUTE-HRB: POST-REPAIR REGRESSION CHECK, hl_rescaled.py (closes leg 152)
+**Thesis.** Leg 152 (HRR) repaired the 4 silent-corruption mechanisms leg 117 found (with one
+clause — the IEEE-754 NaN-comparison blind spot in RescaledHL's own ascending guard —
+possibly documented rather than patched, per 152's own stated option). No independent
+regression check has run since.
+**Gate.** Post-repair, does solver/hl_rescaled.py (a) reject or correctly flag every one of
+leg 117's original failing configurations (per whichever clauses leg 152 actually patched,
+checked against its own report), and (b) reproduce every previously-validated result
+bit-identically?
+  yes -> Repair confirmed solid and non-regressive. Bank leg 117's battery as a permanent
+         regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case precisely; escalate
+         as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_hl_rescaled_postrepair.py, experiments/p2_route_hrb_v1_postrepair.py,
+               writeup/data/p2_route_hrb_v1_postrepair.json,
+               writeup/novelty/leg_168.md, experiments/journal/leg_168.md
+**Difficulty.** standard
+**Independence.** Reads solver/hl_rescaled.py; edits nothing under either outcome. Module
+unowned since leg 152 landed. Immediately dispatchable.
+```
+
+```
+### 169 — ROUTE-HHB: POST-REPAIR REGRESSION CHECK, hilbert_holder.py (RESERVE — NOT
+dispatchable until leg 153/HHR lands)
+**Thesis.** Leg 153 (HHR) is repairing the bound-direction violation leg 119 found. Drafted
+now, ready the moment it lands, per the same close-the-loop discipline as every other repair
+in this run.
+**Gate.** Post-repair, does solver/hilbert_holder.py (a) either raise on leg 119's failing
+configuration or provably dominate the true value there, and (b) reproduce every
+previously-validated result bit-identically?
+  yes -> Repair confirmed solid and non-regressive. Bank leg 119's battery as a permanent
+         regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case and magnitudes;
+         escalate as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_hilbert_holder_postrepair.py, experiments/p2_route_hhb_v1_postrepair.py,
+               writeup/data/p2_route_hhb_v1_postrepair.json,
+               writeup/novelty/leg_169.md, experiments/journal/leg_169.md
+**Difficulty.** standard
+**Independence.** Reads solver/hilbert_holder.py; edits nothing under either outcome. **NOT
+dispatchable until leg 153 lands.**
+```
+
+```
+### 170 — ROUTE-CDB: POST-REPAIR REGRESSION CHECK, critical_dissipation.py (RESERVE — NOT
+dispatchable until leg 154/CDR lands)
+**Thesis.** Leg 154 (CDR) is repairing the non-integer-exponent truncation leg 121 found.
+Drafted now, ready the moment it lands.
+**Gate.** Post-repair, does solver/critical_dissipation.py (a) reject or visibly flag every
+non-integer `p (2s)` case in leg 121's battery, and (b) reproduce every previously-validated
+integer-`p` result bit-identically?
+  yes -> Repair confirmed solid and non-regressive. Bank leg 121's battery as a permanent
+         regression suite.
+  no  -> An incomplete fix or a repair regression. Report the exact case and magnitudes;
+         escalate as a priority finding, do not patch under this leg's own authority.
+**Territory.** test_critical_dissipation_postrepair.py,
+               experiments/p2_route_cdb_v1_postrepair.py,
+               writeup/data/p2_route_cdb_v1_postrepair.json,
+               writeup/novelty/leg_170.md, experiments/journal/leg_170.md
+**Difficulty.** standard
+**Independence.** Reads solver/critical_dissipation.py; edits nothing under either outcome.
+**NOT dispatchable until leg 154 lands.**
+```
+
+```
+### 171 — ROUTE-XUL: DOES Xu arXiv:2607.19762 CHARACTERIZE ANY OTHER SPACE'S
+CERTIFICATE-BUILDABILITY, BEYOND THE ORIGIN-H² INVERTIBILITY CITATION?
+**Thesis.** Legs 127 and 163 have so far mined Xu arXiv:2607.19762 for exactly one fact: the
+bordered `a=0` CLM linearization is invertible on origin-H² with spectral gap 1/2. Xu's paper
+is already fully accessed (no new literature-search cost) and was never asked the broader
+question: does it characterize, for THIS operator class, which OTHER function spaces admit
+or forbid invertibility/a certificate — a map of the space-dependence terrain 127 only sampled
+at two points (`ell^1_w`: dead; origin-H²: alive), which would directly extend leg 163's
+scoping work and leg 165's synthesis question.
+**Gate.** Does Xu arXiv:2607.19762, at full-text depth, characterize the operator's
+invertibility or certificate-buildability on any space OTHER than origin-H² and `ell^1_w`
+(explicitly, or as a derivable corollary of a stated general theorem)?
+  yes -> Record every additional space and its verdict, verbatim with hypotheses. ESCALATE
+         as directly informing leg 163's scoping and leg 165's synthesis — do not build or
+         test anything under this leg's own authority.
+  no  -> Xu's paper is confirmed to speak only to the two points already used. Bank the
+         ledger entry; leg 163's scoping work stands as the frontier on this question.
+**Territory.** experiments/p2_route_xul_v1_lit.py, writeup/data/p2_route_xul_v1_lit.json,
+               writeup/novelty/leg_171.md, experiments/journal/leg_171.md.
+               Does NOT edit solver/literature_gates.py or solver/spectral_certificate.py.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 163 (scoping,
+not literature mining) and from 157/158/159/161 (different papers). Immediately
+dispatchable.
+```
+
+```
+### 172 — ROUTE-W2L: HAS VALIDATED/INTERVAL NUMERICS EVER CERTIFIED A GENUINELY 3D PDE
+SINGULARITY, IN ANY FIELD? (user question on Wall 2; literature-only, does not touch the odds)
+**Thesis.** The user asked, in substance, whether Wall 2 (validated/interval-numerics
+technology today works only on 1D/2D models; 3D NS is out of reach, per `CLAY_ROADMAP.md`
+and `plan_of_record.py`) is a property of THIS repository's approach or of the field as a
+whole. This repository's own EXT-family freshness legs (74, 77, 82, 90, 93, 123) have
+repeatedly checked "has anyone certified THIS repository's specific target object," which is
+narrower than "has the TECHNIQUE ever reached a genuinely 3D object, in any field, on any
+problem" — climate/combustion/celestial-mechanics ODEs (Tucker's Lorenz proof is 3D but an
+ODE, not a PDE) and other computer-assisted-proof traditions have not been surveyed by any
+landed leg. This is the honest way to confirm or correct this DM's own working assessment
+(stated to the user via the orchestrator: no known rigorous computer-assisted blow-up
+certificate exists for any genuinely 3D PDE, based on general knowledge of the field and this
+repository's own repeated literature passes finding nothing) rather than assert it from
+memory. Scope guard, stated up front and binding: **this leg's outcome does not change the
+~0.05% odds assessment or claim any movement toward Clay under either branch** — it answers
+a scoping question about where the technology's frontier actually is, which only matters for
+deciding whether a FUTURE leg on a genuine 3D reduction (see the DM's own note in Status
+about the 2D-Boussinesq / axisymmetric-swirl-free-3D-Euler exact correspondence) would be
+worth anyone's time.
+**Gate.** Does any published work — in fluid dynamics, PDE theory, or any other
+computer-assisted-proof tradition — establish a rigorous (interval-arithmetic, validated
+numerics, or otherwise machine-certified) singularity/blow-up result for a genuinely 3D PDE
+model (not an ODE, not a 1D/2D reduction)?
+  yes -> Record the citation, its hypotheses, and exactly what technique it uses, verbatim.
+         This would be the single most consequential literature finding this repository could
+         produce for informing (never determining) future direction — ESCALATE to the user;
+         do not build or attempt to replicate it under this leg's own authority.
+  no  -> Wall 2 is confirmed field-wide, not an artifact of this repository's narrower
+         literature scope. Bank the ledger entry. The odds assessment does not move either
+         way — this closes a scoping question, not a chain link.
+**Territory.** experiments/p2_route_w2l_v1_lit.py, writeup/data/p2_route_w2l_v1_lit.json,
+               writeup/novelty/leg_172.md, experiments/journal/leg_172.md.
+               Does NOT edit solver/literature_gates.py, `plan_of_record.py`, or
+               `CLAY_ROADMAP.md`.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module, no ban touched. Disjoint from
+every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 173 — ROUTE-XUM: SCOPING Xu arXiv:2607.19762's OWN CERTIFICATION METHOD AS A DIFFERENT
+LANE FROM THE ell^1-FOURIER APPROACH (user-review action item, Part 2 #1; light, scoping
+first)
+**Thesis.** Every use of Xu arXiv:2607.19762 so far (legs 127, 163, and reserve leg 171) has
+mined it for CITATIONS — the origin-H² invertibility fact, and (via 171) whatever other
+spaces it characterizes. None has scoped Xu's own certification METHOD, which per the user's
+own framing (uniform large-imaginary-part bounds, trace-ideal membership, quadrature error in
+trace norm) is methodologically distinct from the `ell^1`-Fourier/radii-polynomial machinery
+this repository built stage B's entire certificate infrastructure around and spent ~70 legs
+measuring dead in that one lane. This leg does NOT attempt to build a certificate — it reads
+Xu's method at full-text depth and catalogs, precisely: what each named technique actually
+does, what mathematical/numerical infrastructure it requires that this repository's own
+`solver/` code does or does not already have (compare against `holder_norms.py`,
+`hilbert_pointwise.py`, `op_lower.py`, `spectral_certificate.py`'s existing capabilities), and
+what "maturing by orders of magnitude" concretely means here — is the gap in precision
+(quadrature error bounds too loose by some measured factor), in scope (proven for a narrower
+operator class than needed), or in infrastructure (techniques exist on paper but no
+implementation anywhere)?
+**Gate.** Does Xu's certification method, as stated in the paper, already reach — or come
+within a scopeable, quantifiable distance of — a working certificate for the operator class
+this repository's own certificate work targets, using only techniques the paper itself
+states (no new mathematics invented under this leg)?
+  yes (or "within a stated, quantifiable distance") -> Name the exact remaining gap precisely
+         (a number, a missing lemma, a computational scale) and ESCALATE as a candidate new
+         construction lane for the user — do not attempt the construction under this leg's
+         own authority; that is a separate, heavier leg, contingent on this scoping.
+  no (the gap is not quantifiable from the paper alone, or is structurally large) -> Report
+         exactly which technique is farthest from usable and why. Bank this as a characterized
+         negative on the "different lane" question — the paper's method exists but is not
+         close to a working certificate by any measure this leg can establish.
+**Territory.** experiments/p2_route_xum_v1_scoping.py,
+               writeup/data/p2_route_xum_v1_scoping.json,
+               writeup/novelty/leg_173.md, experiments/journal/leg_173.md.
+               Reads (never edits) solver/holder_norms.py, solver/hilbert_pointwise.py,
+               solver/op_lower.py, solver/spectral_certificate.py (127's territory, closed on
+               landing) for infrastructure comparison only.
+**Difficulty.** light
+**Independence.** Literature-plus-comparison only, no compute, no new solver module. Disjoint
+from 171 (XUL, different-spaces coverage question, not method scoping) and from 163 (H2S,
+origin-H² feasibility, a different space-scoping question). Immediately dispatchable.
+```
+
+```
+### 174 — ROUTE-VBS: VISCOUS CERTIFIED BLOW-UP SCOPING — SHARPENING "THE MISSING RUNG"
+AGAINST WHAT'S ALREADY BANKED (user-review action item, Part 2 #2; light, scoping first)
+**Thesis.** The user's framing ("a viscous certified blow-up in any model — that's the
+missing rung") needs sharpening against what this repository's own literature ledger already
+contains, not treated as a blank-slate question: `arXiv:2410.05480` (Dahne-Figueras)
+interval-verifies self-similar singular CGL profiles continued in a dissipation parameter
+`epsilon` — re-derived independently by this repository's own leg 48/Route-V to 1.8e-07 —
+which is precisely what closed stage V for non-novelty. Whether that constitutes "a viscous
+certified blow-up in any model" already, or falls short of it in some specific way (e.g.
+branch verification without a completed blow-up argument, or a model too far from
+fluid/vortex dynamics to count), has never been asked directly — stage V's leg only asked
+whether it PRE-EMPTED this repository's own margin-continuation question, not whether it
+answers the user's broader one. Separately: **leg 125 (M2P), already dispatch-ready per this
+DM's own prior correction, is this repository's live attempt at a certified viscous blow-up
+on Chen's γ=2 dissipative gCLM** — a fluid/vortex-dynamics-adjacent model, unlike CGL. This
+leg does not duplicate 125's construction work; it (a) settles the CGL definitional question
+precisely, and (b) catalogs any OTHER published viscous fluid-adjacent model with an existing
+analytic (uncertified) blow-up proof, as a fallback list if leg 125's own attempt does not
+close.
+**Gate.** (a) Does `arXiv:2410.05480`'s interval-verified CGL branch work constitute a
+completed certified blow-up (not merely a certified profile/branch short of the blow-up
+argument itself), and (b) does the published literature contain any OTHER viscous
+fluid/vortex-dynamics-adjacent model (beyond Chen's γ=2 gCLM) with an existing analytic
+blow-up proof that has never been computer-certified?
+  yes on (a) -> The "missing rung" already has an occupant, just not in a fluid-adjacent
+         model — report this precisely; it reframes but does not retract the user's point
+         (fluid dynamics specifically still lacks one). ESCALATE the reframing to the user.
+  no on (a) -> CGL's branch work falls short of a completed certified blow-up in a specific,
+         named way. Report exactly what is missing; this confirms the rung is genuinely
+         empty, strengthening leg 125's priority.
+  For (b): report every candidate found, with its own analytic proof's citation, regardless
+         of (a)'s answer — this is the fallback catalog either way. Bank it; escalate nothing
+         on its own (a catalog is not a claim).
+**Territory.** experiments/p2_route_vbs_v1_scoping.py,
+               writeup/data/p2_route_vbs_v1_scoping.json,
+               writeup/novelty/leg_174.md, experiments/journal/leg_174.md.
+               Reads (never edits) solver/viscous_novelty.py's existing PRECEDENTS ledger and
+               `LITERATURE_CHECK.md`; does not touch leg 125's territory
+               (`solver/target_selection.py`) or presuppose its outcome.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from leg 125 (reads
+its context only, builds nothing, does not block or depend on its dispatch) and from
+157/158/159/161/171/173 (different papers/questions). Immediately dispatchable.
+```
+
+```
+### 175 — ROUTE-USC: arXiv:2509.14185 AT FULL-TEXT DEPTH — WHAT "ONE MODEL CLASS AWAY" FROM
+A CAP-READY CERTIFICATE ACTUALLY REQUIRES (user-review action item, Part 2 #3; light,
+scoping first)
+**Thesis.** `arXiv:2509.14185` (Wang, Lai, Gomez-Serrano, Buckmaster et al.) is in this
+repository's ledger (`solver/viscous_novelty.py::PRECEDENTS`, `LITERATURE_CHECK.md`) as a
+one-line EXCLUSION row: "unstable self-similar singularities for IPM and 3D Euler with
+boundary, CAP-ready precision, inviscid, no certificate claimed." It has never been read at
+full-text depth for its actual method or its own stated obstruction to certification.
+**Correction to the coordinator's framing, checked directly against this repository's own
+`LITERATURE_CHECK.md`: the banked re-derivation numbers (1.8e-07, 3.0e-06/1.9e-06 rms,
+3.8e-07) belong to `arXiv:2410.05480`'s CGL branches, NOT to `2509.14185`** — this repository
+has no independent re-derivation of `2509.14185`'s numerics on file, so this leg's first job
+is establishing what is actually known about it from scratch, not assuming prior
+verification exists. The user's framing — "still one model class away" — is the question:
+read the paper's own stated obstruction (if any) to turning its CAP-ready numerics into an
+actual certificate, and determine whether that obstruction is MODEL-specific (the same
+technique, applied to IPM or 3D Euler with boundary specifically, hits a wall a different but
+related model wouldn't) or TECHNIQUE-specific (CAP itself needs independent maturation
+regardless of model, the same shape of gap leg 173 scopes for Xu's method).
+**Gate.** Does `arXiv:2509.14185`'s own text state, imply, or make locatable an obstruction to
+certifying its CAP-ready unstable singularities, and is that obstruction MODEL-specific
+(naming which alternative model class would avoid it) or TECHNIQUE-specific (a precision or
+infrastructure gap independent of model)?
+  model-specific -> Name the alternative model class precisely, with the paper's own
+         reasoning for why it would or wouldn't face the same obstruction. If that
+         alternative model class is one this repository's own infrastructure already touches
+         (gCLM/CLM/Boussinesq family), ESCALATE as a candidate new construction lane for the
+         user — do not attempt it under this leg's own authority.
+  technique-specific -> Report the precision/infrastructure gap precisely, in the same terms
+         leg 173 uses for Xu's method, so the two scoping results are comparable. Bank it.
+  neither locatable -> The paper does not state its own obstruction explicitly; report what
+         CAN be inferred from its stated precision and scope, flagged as inference, not
+         quotation, and bank as a partial answer.
+**Territory.** experiments/p2_route_usc_v1_scoping.py,
+               writeup/data/p2_route_usc_v1_scoping.json,
+               writeup/novelty/leg_175.md, experiments/journal/leg_175.md.
+               Reads (never edits) solver/viscous_novelty.py's existing PRECEDENTS ledger and
+               `LITERATURE_CHECK.md`.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 174 (VBS, a
+different paper/question, though both read the same PRECEDENTS ledger read-only — read-read,
+not a collision) and from every other live/reserve leg. Immediately dispatchable.
+```
+
+```
+### 176 — ROUTE-H2C: BUILD THE ORIGIN-H² CERTIFICATE AT a=0 (USER-AUTHORIZED CONSTRUCTION,
+KNOWN CEILING STATED UP FRONT)
+**Thesis.** Leg 163 (H2S) scoped origin-H² as structurally viable for a certificate — an
+explicit split, shape, and bordered formulation with no `ell^1_w`-class obstruction,
+cross-checked against Xu at residual 2.8e-14 — but flagged that everything usable depends on
+`a=0` exactness, which only re-derives a closed form Xu already gives analytically, so
+NOTHING TRANSFERS to the real (non-`a=0`) target object. The user has explicitly authorized
+building it anyway, ceiling and all. **This leg's own honest ceiling, stated before any
+computation, per this repository's standing discipline**: even a complete success is not a
+step toward the real target — it is the first constructed (not merely scoped) certificate
+outside the `ell^1_w` lane this repository has ever built, valuable as a working example of
+the OTHER lane and as infrastructure a later leg on a non-`a=0` extension could reuse or
+learn from, not as movement on L1→L4. Build the certificate per leg 163's own scoped
+split/shape, using leg 163's report as the construction spec; measure `Z_1` (or whatever
+leg-163-scoped diagnostic is the certificate's closing quantity) the same way leg 54's
+battery measured every `ell^1_w` shape, so the two lanes' outputs are directly comparable.
+**No GA compute** — construction only, deterministic, per the leg 46/59/162 precedent.
+**Gate.** Does the origin-H² certificate, built per leg 163's own scoped formulation at
+`a=0`, actually close (its diagnostic quantity crosses the threshold a certificate needs), and
+does it reproduce Xu's own closed form to the precision leg 163 already established (2.8e-14
+class)?
+  yes -> The first working non-`ell^1_w` certificate this repository has built. Report the
+         magnitudes and the construction precisely, restate the ceiling (no transfer to
+         non-`a=0`) in the same breath, and bank it as infrastructure — do not claim Clay
+         movement or imply the ceiling has lifted.
+  no  -> Report exactly which step of leg 163's scoped construction fails to close and why,
+         with magnitudes. This is still informative — it would mean origin-H²'s structural
+         viability (leg 163's finding) does not survive contact with an actual construction
+         attempt, which matters for anyone considering the same lane later. Bank it as a
+         characterized negative.
+**Territory.** solver/origin_h2_certificate.py (NEW, capabilities.py grepped first per the
+               standing ban), test_origin_h2_certificate.py (NEW),
+               experiments/p2_route_h2c_v1_construction.py,
+               experiments/p2_route_h2c_v1_construction_evidence.py,
+               writeup/data/p2_route_h2c_v1_construction.json,
+               writeup/novelty/leg_176.md, experiments/journal/leg_176.md.
+               Reads (never edits) leg 163's own report/JSON and
+               solver/spectral_certificate.py (127's territory, closed on landing, read-only
+               reference for the `ell^1_w`-lane comparison).
+**Difficulty.** heavy
+**Independence.** Sole owner of a brand-new module. Disjoint from every other live/reserve
+leg. No GA compute under any outcome. Immediately dispatchable — the user's authorization is
+the only precondition, and it has been given.
+```
+
+```
+### 177 — ROUTE-L1RH: DOES A NON-ell^1_w SPACE FIX THE COLLOCATION-BASIS L1 DEATH TOO?
+(RESERVE — blocked until leg 165's classification report lands)
+**Thesis.** Leg 127 proved the coefficient-basis L1 death (leg 54) was a property of the
+`ell^1_w` space, not the operator — origin-H² fixes it. L1 has a SECOND death certificate,
+in the collocation basis (leg 56), never tested against any alternative space. Drafted now,
+blocked on leg 165's classification (does 165 find the collocation death is
+realization-dependent or realization-invariant across everything ALREADY tried) so this leg
+does not presuppose that answer — but 165 only reads banked data, so even a "realization-
+invariant so far" finding would not rule out an entirely untested space like origin-H², which
+is exactly what this leg tests directly, once 165's report gives it the right framing to cite.
+**Gate.** Does origin-H² (or another space this leg identifies as structurally analogous, per
+leg 163's own scoping method) admit a certificate formulation for the collocation-basis
+realization of L1, and if built, does its diagnostic close?
+  yes -> A second `ell^1_w`-artifact death, doubling the evidence for the space-vs-operator
+         reframing. ESCALATE as directly bearing on the publication scoping (leg 179's
+         bundle, if not already landed).
+  no  -> The collocation death is confirmed NOT a space artifact — it survives on origin-H²
+         too (or no analogous space applies). Bank this as strengthening the "some
+         obstructions are operator-level" reading leg 165 will have already scoped.
+**Territory.** experiments/p2_route_l1rh_v1_construction.py,
+               writeup/data/p2_route_l1rh_v1_construction.json,
+               writeup/novelty/leg_177.md, experiments/journal/leg_177.md.
+               Reads leg 56's and leg 163's own reports/JSONs read-only; new construction (if
+               any) goes in a NEW module, capabilities.py grepped first.
+**Difficulty.** heavy
+**Independence.** New territory if construction is needed; reads only closed/landed legs'
+JSONs otherwise. **NOT dispatchable until leg 165 lands.**
+```
+
+```
+### 178 — ROUTE-WES: DOES A DIFFERENT SPACE SHIFT THE WEIGHTED-ENERGY ZERO-WIDTH WINDOW?
+**Thesis.** Leg 111 measured a zero-width window (damping needs gamma>3, the weighted space
+exists only for gamma<3) on ONE weighted-energy construction. Leg 141 asked only whether that
+specific coincidence is published; leg 165 only classifies using banked data. Neither
+attempts a NEW construction. This leg does: following leg 127's playbook directly — the same
+operator, a genuinely different space/weight-class than leg 111's — does the coincidence
+persist, or is it (like the `ell^1_w` obstruction) a property of leg 111's specific
+construction rather than the operator? Pre-name the alternative space/weight-class family in
+the driver before any computation, per the leg-111 pre-naming discipline.
+**Gate.** For at least one pre-named alternative weighted-energy construction (different from
+leg 111's), is the measured coercivity gap positive and grid-stable across two refinements,
+outside the gamma>3-needs/gamma<3-exists coincidence?
+  yes -> The zero-width window is a construction artifact, not an operator fact — a genuine
+         third-realization revival. ESCALATE to the user; do not build further under this
+         leg's own authority.
+  no  -> The coincidence persists under a second, independently-chosen construction,
+         strengthening (not just repeating) leg 111's finding toward an operator-level fact.
+         Bank it.
+**Territory.** solver/energy_coercivity.py (append-only, new construction added alongside
+               leg 111's, existing functions untouched), experiments/p2_route_wes_v1_space.py,
+               writeup/data/p2_route_wes_v1_space.json,
+               writeup/novelty/leg_178.md, experiments/journal/leg_178.md
+**Difficulty.** heavy
+**Independence.** Append-only on a module leg 111 (landed, closed) owns solely; no other live
+leg touches it. No GA compute. Independent of 165/177 (different degrees of freedom).
+Immediately dispatchable.
+```
+
+```
+### 179 — ROUTE-PUB1: THE COMBINED METHODOLOGICAL NOTE — EXPONENT-SUM CONSERVATION LAW +
+DISCRETE-BALL TRAP + THE A21 INEQUALITY (NOW LEG 127's SHARPER FORM) + THE CLOSURE AUDIT
+(user-review action item #6, unblocked now that 161/162 have landed)
+**Thesis.** The strategic review recommended bundling leg 58's publication scoping as ONE
+section of a combined methodological note rather than standalone, deferred until 161 and 162
+landed so the note's content wouldn't be written ahead of what they found. Both have landed.
+Bundle: (i) the exponent-sum conservation law (leg 65's L1G lane), (ii) the discrete-ball trap
+(also leg 65), (iii) the `A21` inequality in its CURRENT, correct form — leg 127's
+`Z_1 >= 1` for every bounded `A`, superseding leg 58's narrower `A21=0`-only statement, with
+the supersession stated explicitly so nobody reads the note as citing the weaker result — and
+(iv) leg 126's closure audit (stage B's declared search space, fully covered). Fold in leg
+161's finding on whether LSS accounts for `alpha(1/2)=3`/`a_c`, and leg 162's parked,
+ambiguous compact-support corner finding, each exactly as landed, no softening or
+strengthening of either. Also corrects leg 157's stale framing (still describing itself as
+feeding leg 127's now-closed counterexample search) as a small, explicitly-flagged
+housekeeping note within the bundle, not a separate leg.
+**Gate.** Does the combined note state all four bundled results (plus 161's and 162's
+findings) accurately, with leg 58's superseded status and leg 162's honest ambiguity both
+stated explicitly, and does it correct leg 157's stale framing note?
+  yes -> Bank the combined note as the current publication-scoping draft; flag it to the user
+         as ready for their own review, not as something this leg's landing itself approves.
+  no  -> Report exactly which bundled claim doesn't reproduce from its own banked source;
+         escalate rather than silently soften it — a publication-scoping note that misstates
+         a banked result is exactly the kind of drift this repository's own discipline exists
+         to catch.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB1_V1.md (NEW),
+               writeup/4_p2_lottery/BLOG_P2_PUB1_V1.md (NEW),
+               writeup/novelty/leg_179.md, experiments/journal/leg_179.md.
+               Reads (never edits under this leg) legs 58/65/126/127/157/161/162's own
+               banked JSONs and reports. Corrects leg 157's writeup file's framing note
+               ONLY (a sentence-level fix, not a re-litigation of its finding).
+**Difficulty.** standard
+**Independence.** New writeup files; the one existing-file touch (157's framing note) is a
+narrow, explicitly-scoped correction, not a re-opening. Disjoint from every other live/reserve
+leg. Immediately dispatchable.
+```
+
+```
+### 180 — ROUTE-TSR: TWO-SCALE a* SCOPE-LINE CORRECTION (in-repo half of user-review action
+item #5, unblocked now that 161/162 have landed)
+**Thesis.** The strategic review's own independent check found a domain mismatch, not a wrong
+number: published literature (`arXiv:2603.25104`) states the two-scale scenario governs
+`a<=0`, while this repository's banked `a*~0.5-0.55` survival boundary was measured at
+`a>0`. Deferred until 161/162 landed so this leg's correction could be informed by whatever
+either found about the domain's boundaries; neither changed the `a*` finding itself, so the
+correction is exactly the one the review specified. Corrects `writeup/` and
+`PHASE2_P2_NOTES.md`'s scope-line language to state the domain precisely — re-framing, not
+withdrawing, per the review's own instruction. Does NOT touch the user's personal `MEMORY.md`
+file (outside any leg's or this DM's file access; the orchestrator relays that correction
+directly, as already noted in Status).
+**Gate.** Does every `writeup/` and `PHASE2_P2_NOTES.md` passage describing the `a*~0.5-0.55`
+survival boundary now state its measured domain (`a>0`) precisely, without asserting or
+implying the two-scale SCENARIO (which the literature scopes to `a<=0`) governs it?
+  yes -> Bank the corrected scope lines; the `a*` finding itself is untouched, only its
+         framing relative to the two-scale literature is sharpened.
+  no  -> Report exactly which passage still overclaims; this is a mechanical correction on
+         the leg 65 annotation-fix precedent, so a clean pass is expected, but report
+         honestly if one is missed.
+**Territory.** `writeup/` files describing the two-scale `a*` result (located by this leg,
+               grepped for the claim), `PHASE2_P2_NOTES.md` (scope-line sentences only),
+               writeup/novelty/leg_180.md, experiments/journal/leg_180.md. No solver module.
+**Difficulty.** light
+**Independence.** Prose-only, no solver module, no banked number changed. Disjoint from 179
+(different files — 179 writes NEW note files, 180 edits EXISTING scope lines). Immediately
+dispatchable.
+```
+
+```
+### 181 — ROUTE-MOD: WHAT DOES XU's "GAP OF 1/2 AFTER MODULATION" ACTUALLY REQUIRE, AND IS
+THE MODULATION TECHNIQUE TRANSFERABLE?
+**Thesis.** Legs 127/163 use Xu's origin-H² invertibility result but have only ever cited its
+headline (gap 1/2 "after modulation") without reading what the modulation technique itself
+does. This leg reads it directly: what is being modulated, what does the technique cost
+(additional hypotheses, a restricted sub-class, extra computational machinery), and — the
+genuinely new question — could the SAME modulation move be applied within the `ell^1_w` line,
+where leg 127 proved `Z_1 >= 1` unconditionally (no modulation involved in that proof)? If
+modulation is a general technique for improving spectral gaps, it is worth knowing whether it
+was even applicable there, even though leg 127's result is already the sharpest possible
+UNMODULATED statement.
+**Gate.** Does Xu's modulation technique, read at full-text depth, apply (as stated, or via a
+straightforward adaptation) to any operator/space combination this repository has already
+built, beyond origin-H²?
+  yes -> Name the target and what modulation would require precisely. ESCALATE as a
+         candidate scoping question for a later leg — do not build or test it here.
+  no  -> Modulation is confirmed specific to origin-H²'s own structure (or to a class this
+         repository's operator does not fall in for other reasons). Bank the ledger entry.
+**Territory.** experiments/p2_route_mod_v1_lit.py, writeup/data/p2_route_mod_v1_lit.json,
+               writeup/novelty/leg_181.md, experiments/journal/leg_181.md.
+               Reads Xu arXiv:2607.19762 and solver/spectral_certificate.py (127's territory,
+               closed on landing, read-only).
+**Difficulty.** light
+**Independence.** Literature-only plus read-only reference. Disjoint from 171/173 (different
+questions about the same paper — 171 asks about OTHER spaces Xu covers, 173 asks about Xu's
+certification METHOD generally, this asks specifically about the modulation technique).
+Immediately dispatchable.
 ```
 
 ## Ranking rationale

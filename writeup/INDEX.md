@@ -96,6 +96,9 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-NG v1 (leg 58) | Stage `NG`: the no-go stated as a theorem on the class `A21 = 0` — gate answered **YES**; publication scoping **escalated and parked**, the route itself merged | Y | Y | Y | Y† | fig55 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENG_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENG_V1.md) — added by leg 138 |
 | Route-CP v1 (leg 62) | Cadiot arXiv:2505.03091's scope settled from the full text — gate answered **NO** | Y | Y | Y | Y† | fig56 | [T](4_p2_lottery/TECHNICAL_P2_ROUTECP_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTECP_V1.md) — added by leg 138 |
 | Route-BX v1 (leg 126) | Stage `B` answered from the banked record, the closure audit — gate answered **NO** | Y | Y | Y | Y† | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTEBX_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEBX_V1.md) — **explicitly no figure by design**: the yes-branch would have registered `fig62`, the no-branch measures nothing (see file header). Added by leg 138 |
+| Route-M2P v1 (leg 125) | Chen's γ=2 dissipative gCLM candidate: full text, constants, first `Y₀` — gate answered **NO** on both clauses | Y | Y | Y | **GAP: none** | fig61 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md) — added by leg 156; the missing `*_evidence.py` is gap list item 13 |
+| Route-NGX v1 (leg 127) | The general class `A₂₁ ≠ 0`, decided: `Z₁ ≥ 1` for every bounded `A` — gate answered **YES (i)** | Y | Y | Y | Y† | fig63 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENGX_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENGX_V1.md) — added by leg 156 |
+| Route-NKR v1 (leg 128) | One guard for three pipelines: the `Y₀`/`Z₀`/`Z₁` fabrication-acceptance gap, closed as a class — gate answered **YES on (b) and (c), NO on (a)** | Y | Y | Y | **GAP: none** | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTENKR_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENKR_V1.md) — **explicitly no figure by design**: "a repair leg with no curve to plot" (see file header). Added by leg 156; the missing `*_evidence.py` is gap list item 13 |
 | Route-M2 v1 (leg 63) — **PARKED, NOT LANDED** | Target reselection under the multiplier/shift screen — gate answered **YES**, and that answer is **escalation #1**: parked on branch `leg/m2-v1`, never merged | — | — | — | — | `fig57` **reserved** | **No files on `main`.** Read the branch with `git show`; do not merge or build on it. Territory and finding: [DIRECTION.md](../DIRECTION.md) §63. Row added by leg 138 |
 
 `gen*` = the runner is the `*_evidence.py` script itself (`--generate` recomputes from
@@ -105,8 +108,9 @@ use. Substance of quartet item 1 (a runner that produced the numbers) is present
 differs from the current convention.
 
 `Y†` = the `*_evidence.py` exists but lives in `experiments/` rather than beside its docs in
-`4_p2_lottery/` (9 files: MM, NB, TN, XS, and — added by leg 138 — PORT v1, PORT v2, NG, CP,
-BX). Placement drift from the earlier Arc-4 routes, not a missing piece — see gap-list item 7.
+`4_p2_lottery/` (10 files: MM, NB, TN, XS, and — added by leg 138 — PORT v1, PORT v2, NG, CP,
+BX, and — added by leg 156 — NGX). Placement drift from the earlier Arc-4 routes, not a
+missing piece — see gap-list item 7.
 Every Arc-4 route landed since leg 57 follows the `experiments/` placement, so `Y†` is now the
 majority convention among recent routes rather than a drift from it.
 
@@ -179,6 +183,40 @@ with a parked escalation attached**. Route-NG v1 is that case — its own TECHNI
 "parked, not merged" of its *publication scoping*, while the route itself was ruled mergeable
 and `plan_of_record.py` prints stage `NG` as done. Route-M2 v1 is the different, stricter case:
 nothing merged. The two are not the same status and the rows say so.
+
+**Index currency — fourth pass (leg 156, Route-IX4).** Audit window pinned at
+`9f6729e` (`origin/main` HEAD when leg 156 began), range `3474862..9f6729e` — `3474862` is
+leg 138's *own pin*, so this window is exactly what leg 138's pass could not see. It holds
+**81 commits** and **23 numbered legs** other than leg 138 itself (122, 124, 125, 127, 128,
+130, 132, 133, 135, 137, 139, 140, 142, 144, 146, 147, 149, 152, 155, 157, 158, 159, 161),
+plus repo-wide `Leg 0:` integration work. `INDEX.md` received exactly **1 edit** inside the
+window — leg 138's own fix (`b9b6398`), which landed *after* its pin — and **0 edits** across
+all 23 audited legs since. Full per-leg inventory and every claim re-checked against the
+pinned tree: [novelty/leg_156.md](novelty/leg_156.md),
+`experiments/p2_route_ix4_v1_index_audit.py` →
+`data/p2_route_ix4_v1_index_audit.json`. The result splits three ways:
+
+- **3 routes were owed a table row and now have one**: Route-M2P v1 (leg 125), Route-NGX v1
+  (leg 127), Route-NKR v1 (leg 128). These are the only legs in the window that added a
+  route's BLOG/TECHNICAL pair. Two of the three ship no `*_evidence.py` — new gap item 13.
+- **20 of the 23 legs produced no BLOG/TECHNICAL and no figure**, by design, under the same
+  "no measurement, no figure" convention: legs **122, 124, 130, 132, 133, 135, 137, 139, 140,
+  142, 144, 146, 147, 149, 152, 155, 157, 158, 159, 161**. **No row is owed for any of them.**
+  Hygiene in this window is the best of the four passes: **23 of 23** file both
+  `experiments/journal/leg_N.md` and `writeup/novelty/leg_N.md`, and **23 of 23** file a
+  curated JSON under `writeup/data/` (leg 138's window: 32 of 33; leg 108's: 24 of 30).
+- **0 new parked routes.** Sweeping every `writeup/4_p2_lottery/` BLOG/TECHNICAL path that
+  `DIRECTION.md` declares against the pinned tree leaves exactly one undelivered pair —
+  leg 63's Route-M2, which already has its `PARKED, NOT LANDED` row. The convention added by
+  leg 138 needed no second entry.
+
+**The predecessor's convention block survives this pass, and that is a result, not a
+formality.** Leg 138 had to supersede leg 108's block because 3 of the legs listed there
+(58, 60, 62) later landed prose. The identical predicate, run against leg 138's own 29-leg
+block, finds **0 violators** — none of those 29 legs touched a `4_p2_lottery/` BLOG/TECHNICAL
+file or `writeup/figures/` in this window. This is the first pass at which the previous pass's
+classification is confirmed rather than corrected. The check is not a tautology: the same code
+returns `MISSING` for the three rows above, which is how legs 125/127/128 were found.
 
 ## Quartet gaps found (plain list)
 
@@ -270,6 +308,11 @@ nothing merged. The two are not the same status and the rows say so.
    entries 46 and 47 (adding the `fig 59` / `fig 60` references and a reproduction-check block).
    The backlog grows by this window's 33 legs on top of the 58–102 window's. Same reason as
    item 4 for not fixing it here (numeric prose, out of remit), same flag, larger backlog.
+   **Re-checked by leg 156 and still true, verbatim**: the numbered list still holds 46 entries,
+   still ends at 47, still skips 45, still has 0 mentions of Weight-repairs or Route-KA/Kawahara
+   — and now 0 mentions of **M2P, NGX or NKR** either, so the three routes this pass added to
+   the table above are absent from `README.md` as well. Backlog grows by a further 23 legs and
+   3 routes. Same reason for not fixing it here, same flag, larger backlog again.
 12. **Figure-number registry has 2 unallocated numbers and 1 reserved one** (found by leg 138).
    `writeup/figures/` holds 58 PNGs. **`fig53` and `fig54` name no file and are cited by no
    writeup** — an unallocated hole below the `fig55`–`fig60` block `DIRECTION.md` pre-allocated;
@@ -278,6 +321,24 @@ nothing merged. The two are not the same status and the rows say so.
    pre-allocated to leg 63 / Route-M2, which is parked and unmerged (see its row above). Not
    fixed here: renumbering is a registry ruling over citation keys already baked into banked
    prose, which is exactly what row A3 says it needs, and it is not a links-and-labels decision.
+   **Updated by leg 156: the hole set is now `{fig53, fig54, fig62}` and `writeup/figures/`
+   holds 60 PNGs, not 58.** `fig62` is a *released reservation*: leg 126's Route-BX row above
+   reserved it for a yes-branch that did not fire (the gate answered **NO**), and leg 127 then
+   allocated `fig63`, so the number is now permanently skipped rather than pending. `fig57`
+   remains reserved-not-missing by parked leg 63. Highest allocated number: `fig63`. Same
+   reason for not renumbering here.
+13. **Route-M2P v1 (leg 125) and Route-NKR v1 (leg 128) each ship a BLOG/TECHNICAL pair with no
+   `*_evidence.py`** (found by leg 156). M2P has runner
+   (`experiments/p2_route_m2p_v1_promotion.py`), curated data
+   (`writeup/data/p2_route_m2p_v1_promotion.json`), BLOG, TECHNICAL and `fig61` — **5 of 6**
+   pieces, the `*_evidence.py` alone missing. NKR has runner
+   (`experiments/p2_route_nkr_v1_repair.py`), curated data
+   (`writeup/data/p2_route_nkr_v1_repair.json`), BLOG and TECHNICAL — **4 of 5** pieces, with
+   no figure **by design** (its own header: "a repair leg with no curve to plot"), so only the
+   `*_evidence.py` is owed there too. The third route in the same window, Route-NGX v1
+   (leg 127), has all 6 and is the contrast case. Not fixed here, same reason as items 9 and 10:
+   writing an `evidence.py` is a claim-bearing choice about what to rebuild and plot, outside a
+   links-and-labels remit.
 
 Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
 the Arc 4 table above.

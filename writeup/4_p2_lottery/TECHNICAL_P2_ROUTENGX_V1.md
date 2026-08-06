@@ -104,8 +104,10 @@ kernel and `G z_M = −B h^{(M)}`. Measured against the numerically-optimal dire
 - ratio to the numerical optimum: **1.0000000000045** (max over the ladder);
 - cosine with the numerical optimum: **0.9999999999999998**;
 - finite-block residual of `L v`: at most `1.22 × 10⁻¹⁴` over every class and `M` (float zero);
-- **`z_K = 0.0` exactly**, by the parity of the kernel recursion — this switches off the sole
-  finite-to-tail coupling entry `(1 − K/2)`;
+- **`z_K = 0.0` exactly**, by the parity of the kernel recursion — this switches off one of the
+  **two** finite-to-tail coupling columns, `C[:,K−1]` (the `(1 − K/2)` entry); the other,
+  `C[:,K+1]` (the far-field column), is killed not by `z` but because it is supported on a
+  single row, the truncation edge (§6);
 - rows carrying the residual of `L v`: **1**, the truncation edge `m = M`.
 
 The rate then follows analytically: the edge row has size `|1 − M/2|·|h_M|·w_M ∼ M^{s−1}`
@@ -175,10 +177,14 @@ does not. Two mechanisms, two `K`-sensitivities.
 give `σ_min` identical to `5.7 × 10⁻¹⁵` relative. Lesson 90 says identical numbers are a bug
 until proven otherwise, so the same two arms were compared at `μ = 0.1`, where they differ by
 `6.1 × 10⁻²` relative — the code path does distinguish them. The `μ = 0` coincidence is
-therefore a **finding**: the singular sequence has exactly zero far-field-amplitude component,
-so bordering with that amplitude — leg 52's repair, the entire purpose of the assembled object
-— does not move the obstruction at all. This independently re-answers NG2c's split-placement
-objection in the general class: **the wall is not where the far-field unknown is put.**
+therefore a **finding**, but not for the reason first assumed: the far-field-amplitude
+component `z[K+1]` is **not** zero — it is `6.5`–`6.8%` of `‖v‖₁` and grows slowly with `M` —
+so bordering with that amplitude does reach the singular sequence. What actually blocks it is
+that the far-field column `C[:,K+1]` is supported on a single row, the truncation edge:
+bordering has nowhere else to couple into, so it — leg 52's repair, the entire purpose of the
+assembled object — does not move the obstruction at all. This independently re-answers NG2c's
+split-placement objection in the general class: **the wall is not where the far-field unknown
+is put.**
 
 ## 7. What this is a statement about — and what it is not
 

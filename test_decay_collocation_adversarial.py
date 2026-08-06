@@ -13,13 +13,22 @@ THE GATE (DIRECTION.md, leg 115), answered YES:
     solver/decay_collocation.py ever silently return a wrong value rather than propagating or
     flagging the invalid input?
 
-READ THIS BEFORE CHANGING ANYTHING HERE.  Several checks below PIN CURRENT, DEFECTIVE
-BEHAVIOUR.  That is deliberate, and it is legs 66/120's precedent: a leg whose territory is
-read-only on `solver/` reports defects and pins them rather than fixing them silently, so the
-defect cannot drift unnoticed and so the repair has an exact target.  **Every such check is
-marked `PIN:` in its docstring and states what the CORRECT behaviour would be.  When the repair
-lands, these checks WILL START FAILING -- that is the intended signal, not a regression.**
-Update the pin then, in the same commit as the repair.
+**REPAIRED AT LEG 151 (Route-DCR). ALL SEVEN PINS ARE NOW INVERTED.**  Leg 115's territory was
+read-only on `solver/`, so it pinned the defective behaviour rather than fixing it silently
+(legs 66/120's precedent) and stated beside each pin what the CORRECT behaviour would be.  Leg
+151 landed the guards in `solver/decay_collocation.py`, and every `PIN:` check below was
+rewritten IN THE SAME COMMIT to assert the corrected behaviour instead -- each one now marked
+`INVERTED PIN (leg 151):`, carrying leg 115's original measured magnitude verbatim in its
+docstring so the pre-repair number stays auditable from this file.  The eight CONTROL/PASS
+checks are unchanged and must keep holding; they are what proves the guards did not overreach.
+
+ONE CORRECTION LEG 151 MADE TO LEG 115'S OWN PRESCRIPTION.  Leg 115's journal prescribed a raise
+"when `rows` is empty (i.e. `J <= 1`)".  Measured at `J = 1` over exactly the five `drop` values
+`check_J1_ignores_drop_and_gauge` pinned -- `0, 1, -1, 5, 100` -- `rows` is empty for ONE of
+them and has length 1 for the other four, while all five returned the identical
+`1.681792830507429`.  The mechanism is the assignment target `M[1:, :]`, shape `(0, 1)` at
+`J = 1`, into which NumPy broadcasts a `(1, 1)` right-hand side silently.  The guard that landed
+is therefore the shape invariant `len(rows) == J - 1 >= 1`, not an emptiness test.
 
 THE THREE FINDINGS PINNED HERE (magnitudes, measured by
 experiments/p2_route_dca_v1_adversarial.py, banked in
@@ -57,9 +66,11 @@ SEVERITY, MEASURED, NOT ASSERTED: no in-repo caller has EVER used J below 8 for
 `Collocation`/`graded_inverse_norm` (census in the runner's `g1_downstream_exposure`); the
 `sup_op_norm` shape ambiguity has exactly one in-repo call site (inside `graded_inverse_norm`
 itself), which always passes a 2-D matrix from `np.linalg.inv`; no in-repo caller passes a
-complex `alpha`.  All three findings are LATENT under the repository's current usage, exactly
-the severity shape of legs 66, 69, 79 and 120.  Leg 115's pre-committed yes-branch is "escalate,
-do not patch", and this leg edits no solver file.
+complex `alpha`.  All three findings were LATENT under the repository's current usage, exactly
+the severity shape of legs 66, 69, 79 and 120 -- which is what made leg 151's repair licensable
+as a measured no-op: the guards fire on ZERO shipped configurations, and every clean value is
+bit-identical to the pre-repair module (`experiments/p2_route_dcr_v1_repair.py`,
+`writeup/data/p2_route_dcr_v1_repair.json`).
 
 Test convention (repo-wide): self-running script, also pytest-discoverable.
     .venv/bin/python test_decay_collocation_adversarial.py
@@ -72,10 +83,18 @@ import numpy as np
 from solver.decay_collocation import (
     C_ANCHOR,
     Collocation,
+    DecayCollocationDomainError,
     gauged_jacobian,
     graded_inverse_norm,
     sup_op_norm,
 )
+
+# Leg 115's measured pre-repair values, kept as literals so the inverted pins can assert that
+# the repaired module NO LONGER produces them.  Sourced from
+# writeup/data/p2_route_dca_v1_adversarial.json and leg 115's journal.
+PRE_REPAIR_J1_VALUE = 1.681792830507429      # == 2 ** (1.5 / 2), a function of alpha ALONE
+PRE_REPAIR_G2_FLAT = 12.0                    # the axis-swapped reading
+PRE_REPAIR_G2_COLUMN = 10.0                  # the reading the caller intended
 
 SEED = 20260806
 POISONS = (("nan", float("nan")), ("+inf", float("inf")), ("-inf", -float("inf")))
@@ -86,15 +105,25 @@ POISONS = (("nan", float("nan")), ("+inf", float("inf")), ("-inf", -float("inf")
 # =========================================================================
 
 def check_rows_retained_hits_zero_at_J1():
-    """The row count `gauged_jacobian` retains for the actual differential operator, J - 1 for
-    J >= 1 -- hits EXACTLY ZERO at J = 1. This is the mechanism behind every other G1 check."""
+    """INVERTED PIN (leg 151), G1 mechanism. The row count `gauged_jacobian` retains for the
+    actual differential operator is J - 1, which hits EXACTLY ZERO at J = 1.
+
+    LEG 115 MEASURED (pre-repair): J = 1 retained 0 collocation rows and `gauged_jacobian`
+    returned a gauge-only system without complaint. NOW: J = 1 raises
+    DecayCollocationDomainError; J >= 2 is untouched and still retains exactly J - 1.
+    """
     out = {}
-    for J in range(1, 6):
+    try:
+        gauged_jacobian(Collocation(1), Collocation(1).anchor(), C_ANCHOR, drop=0)
+        raise AssertionError("REGRESSION: J=1 must raise DecayCollocationDomainError")
+    except DecayCollocationDomainError as e:
+        out["J1_raises"] = True
+        assert "J >= 2" in str(e), str(e)
+    for J in range(2, 6):
         col = Collocation(J)
         _, rows = gauged_jacobian(col, col.anchor(), C_ANCHOR, drop=0)
         out[f"J{J}"] = len(rows)
         assert len(rows) == J - 1, (J, len(rows))
-    assert out["J1"] == 0, "PIN G1: J=1 should retain zero collocation rows"
     return out
 
 
@@ -108,20 +137,25 @@ def check_J1_ignores_poisoned_c():
     col = Collocation(1)
     alpha = 1.5
     c_values = [0.0, 0.5, 1.0, 100.0, -50.0, 1e6, float("nan"), float("inf"), -float("inf")]
+    n_raised = 0
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         with np.errstate(all="ignore"):
-            vals = [graded_inverse_norm(col, alpha, c=c)[0] for c in c_values]
-    assert len(set(vals)) == 1, (
-        f"PIN G1: expected all {len(c_values)} values of c (including nan/inf) to give the "
-        f"IDENTICAL result at J=1, got {set(vals)}. If gauged_jacobian has been repaired to "
-        "raise or propagate at J=1, this assertion SHOULD fail -- update the pin."
-    )
-    predicted = 2.0 ** (alpha / 2.0)
-    assert abs(vals[0] - predicted) < 1e-13, (vals[0], predicted)
-    assert np.isfinite(vals[0]), "PIN G1: the nan/inf-c result must currently be FINITE"
-    return {"n_c_values": len(c_values), "all_identical": True, "value": vals[0],
-            "predicted_closed_form": predicted}
+            for c in c_values:
+                try:
+                    v = graded_inverse_norm(col, alpha, c=c)[0]
+                except DecayCollocationDomainError:
+                    n_raised += 1
+                    continue
+                raise AssertionError(
+                    "REGRESSION: graded_inverse_norm(Collocation(1), %r, c=%r) returned %r "
+                    "instead of raising. Pre-repair this returned %r for EVERY c in this "
+                    "list, including nan/inf." % (alpha, c, v, PRE_REPAIR_J1_VALUE)
+                )
+    assert n_raised == len(c_values), (n_raised, len(c_values))
+    return {"n_c_values": len(c_values), "n_raised": n_raised,
+            "pre_repair_identical_value": PRE_REPAIR_J1_VALUE,
+            "pre_repair_closed_form": 2.0 ** (alpha / 2.0)}
 
 
 def check_J1_ignores_poisoned_om():
@@ -141,39 +175,80 @@ def check_J1_ignores_poisoned_om():
 
     col = Collocation(1)
     alpha = 1.5
-    v_clean = _pipeline(col, col.anchor(), alpha, C_ANCHOR)
-    out = {"cases": 0, "identical_to_clean": 0}
+    out = {"cases": 0, "raised": 0}
+    # The CLEAN J=1 call is refused too -- the collapse was never about the poison, it was
+    # about the row count, so the guard is on the grid and not on the values.
+    try:
+        _pipeline(col, col.anchor(), alpha, C_ANCHOR)
+        raise AssertionError("REGRESSION: the clean J=1 pipeline must raise")
+    except DecayCollocationDomainError:
+        out["clean_raises"] = True
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         with np.errstate(all="ignore"):
             for tag, p in POISONS:
-                v = _pipeline(col, np.array([p]), alpha, p)
                 out["cases"] += 1
-                out["identical_to_clean"] += int(v == v_clean)
-                assert v == v_clean, (
-                    f"PIN G1 om={tag}: expected identical to clean ({v_clean}), got {v}. If "
-                    "the collapse has been repaired this assertion SHOULD fail."
+                try:
+                    v = _pipeline(col, np.array([p]), alpha, p)
+                except DecayCollocationDomainError:
+                    out["raised"] += 1
+                    continue
+                raise AssertionError(
+                    "REGRESSION: om=%s returned %r instead of raising; pre-repair every "
+                    "poison returned the clean %r." % (tag, v, PRE_REPAIR_J1_VALUE)
                 )
-                assert np.isfinite(v), (tag, v)
-    assert out["identical_to_clean"] == out["cases"] == 3, out
+    assert out["raised"] == out["cases"] == 3, out
     return out
 
 
 def check_J1_ignores_drop_and_gauge():
-    """PIN (G1): the collapse is insensitive to `drop` (any value, in- or out-of-range) and to
-    `gauge` choice -- both routes to the same empty (0, J) assignment slot."""
+    """INVERTED PIN (leg 151), G1 -- AND THE CHECK THAT DECIDED THE REPAIR'S PREDICATE.
+
+    LEG 115 MEASURED (pre-repair): every `drop` in {0, 1, -1, 5, 100} and both gauges returned
+    the identical 1.681792830507429 at J = 1.
+
+    THE PREDICATE THIS CHECK RULED OUT. Leg 115's journal prescribed raising "when `rows` is
+    empty (i.e. J <= 1)". But `rows = [j for j in range(J) if j != drop]` is empty at J = 1 for
+    `drop = 0` ONLY; for `drop` in {1, -1, 5, 100} it is `[0]`, length 1 -- non-empty -- and all
+    five collapsed identically anyway, because `M[1:, :]` has shape (0, 1) and NumPy broadcasts
+    a (1, 1) right-hand side into it silently. An emptiness test would have repaired 1 of these
+    5 cases. The landed guard is the shape invariant `len(rows) == J - 1 >= 1`, and the clause
+    that catches each case is asserted separately below so neither can be dropped unnoticed.
+    """
     col = Collocation(1)
     alpha = 1.5
-    v0, _, _ = graded_inverse_norm(col, alpha, drop=0)
-    out = {"drop_values_tested": 0, "gauge_values_tested": 0}
+    out = {"drop_values_tested": 0, "gauge_values_tested": 0,
+           "caught_by_J_clause": 0, "would_be_missed_by_emptiness_predicate": 0}
     for drop in (0, 1, -1, 5, 100):
-        v, _, _ = graded_inverse_norm(col, alpha, drop=drop)
-        assert v == v0, ("PIN G1", drop, v, v0)
-        out["drop_values_tested"] += 1
+        rows_pre = [j for j in range(1) if j != drop]      # what the pre-repair code computed
+        if len(rows_pre) != 0:
+            out["would_be_missed_by_emptiness_predicate"] += 1
+        try:
+            graded_inverse_norm(col, alpha, drop=drop)
+            raise AssertionError("REGRESSION: J=1 drop=%r must raise" % (drop,))
+        except DecayCollocationDomainError:
+            out["drop_values_tested"] += 1
+            out["caught_by_J_clause"] += 1
     for gauge in ("origin", "a0"):
-        v, _, _ = graded_inverse_norm(col, alpha, gauge=gauge)
-        assert v == v0, ("PIN G1", gauge, v, v0)
-        out["gauge_values_tested"] += 1
+        try:
+            graded_inverse_norm(col, alpha, gauge=gauge)
+            raise AssertionError("REGRESSION: J=1 gauge=%r must raise" % (gauge,))
+        except DecayCollocationDomainError:
+            out["gauge_values_tested"] += 1
+    assert out["would_be_missed_by_emptiness_predicate"] == 4, out
+    assert out["drop_values_tested"] == 5 and out["gauge_values_tested"] == 2, out
+
+    # The SECOND clause, isolated at an ordinary grid size where the J clause cannot fire:
+    # an out-of-range `drop` must be refused on its own, by name.
+    col8 = Collocation(8)
+    for drop in (-1, 8, 100, 1.0, None):
+        try:
+            gauged_jacobian(col8, col8.anchor(), C_ANCHOR, drop=drop)
+            raise AssertionError("REGRESSION: J=8 drop=%r must raise" % (drop,))
+        except DecayCollocationDomainError:
+            out["drop_clause_isolated"] = out.get("drop_clause_isolated", 0) + 1
+    assert out["drop_clause_isolated"] == 5, out
+    out["pre_repair_identical_value"] = PRE_REPAIR_J1_VALUE
     return out
 
 
@@ -254,15 +329,20 @@ def check_sup_op_norm_1d_shape_ambiguity():
     A_flat = np.array([10.0, 1.0, 1.0])
     w_dom = np.array([1.0, 1.0, 1.0])
     w_cod = np.array([1.0])
-    flat_result = sup_op_norm(A_flat, w_dom, w_cod)
+    try:
+        flat_result = sup_op_norm(A_flat, w_dom, w_cod)
+        raise AssertionError(
+            "REGRESSION: the ambiguous flat array must raise, got %r (pre-repair: %r)"
+            % (flat_result, PRE_REPAIR_G2_FLAT)
+        )
+    except DecayCollocationDomainError as e:
+        assert "(3, 1)" in str(e), str(e)
+    # The UNAMBIGUOUS spelling of the same intent still works, and still gives the value the
+    # caller meant -- the guard refuses the ambiguity, it does not refuse the computation.
     correct_column = sup_op_norm(A_flat.reshape(3, 1), w_dom, w_cod)
-    assert correct_column == 10.0, correct_column
-    assert flat_result == 12.0, (
-        f"PIN G2: expected the pinned mis-interpretation (12.0), got {flat_result}. If "
-        "sup_op_norm has been repaired to validate orientation, this assertion SHOULD fail."
-    )
-    assert flat_result != correct_column, "PIN G2: expected a mismatch"
-    return {"flat_result": flat_result, "correct_column_result": correct_column}
+    assert correct_column == PRE_REPAIR_G2_COLUMN, correct_column
+    return {"flat_raises": True, "correct_column_result": correct_column,
+            "pre_repair_flat_result": PRE_REPAIR_G2_FLAT}
 
 
 def check_sup_op_norm_1d_ambiguity_battery():
@@ -271,20 +351,24 @@ def check_sup_op_norm_1d_ambiguity_battery():
     axis swap is deterministic given mismatched lengths."""
     rng = np.random.default_rng(SEED)
     n_cases = 30
-    mismatches = 0
+    raised = 0
     for _ in range(n_cases):
         n = int(rng.integers(2, 7))
         A_flat = rng.uniform(0.1, 20.0, size=n)
         w_dom_n = np.ones(n)
         w_cod_1 = np.ones(1)
-        flat = sup_op_norm(A_flat, w_dom_n, w_cod_1)
-        column = sup_op_norm(A_flat.reshape(n, 1), w_dom_n, w_cod_1)
-        mismatches += int(flat != column)
-    assert mismatches == n_cases, (
-        f"PIN G2: expected all {n_cases} cases to mismatch, got {mismatches}. If sup_op_norm "
-        "has been repaired, this assertion SHOULD fail -- update the pin."
-    )
-    return {"n_cases": n_cases, "n_mismatches": mismatches}
+        try:
+            flat = sup_op_norm(A_flat, w_dom_n, w_cod_1)
+        except DecayCollocationDomainError:
+            raised += 1
+            # and the unambiguous spelling of the same array still computes
+            column = sup_op_norm(A_flat.reshape(n, 1), w_dom_n, w_cod_1)
+            assert column == float(np.max(A_flat)), (column, A_flat)
+            continue
+        raise AssertionError("REGRESSION: ambiguous flat case returned %r" % (flat,))
+    assert raised == n_cases, (raised, n_cases)
+    return {"n_cases": n_cases, "n_raised": raised,
+            "pre_repair_n_mismatches": n_cases}
 
 
 def check_sup_op_norm_2d_never_ambiguous():
@@ -308,31 +392,39 @@ def check_sup_op_norm_2d_never_ambiguous():
 # =========================================================================
 
 def check_complex_alpha_silently_downcast():
-    """PIN (G3): a complex-valued alpha (invalid per the module's own docstring) runs to
-    completion and returns an ordinary float, silently differing from the real-part-only
-    answer, via NumPy's non-fatal ComplexWarning rather than an exception.
+    """INVERTED PIN (leg 151), G3. A non-real alpha is now REJECTED by norm_domain and
+    norm_codomain rather than silently truncated by float() under NumPy's ComplexWarning.
 
-    CORRECT BEHAVIOUR: reject a non-real alpha (raise), or at minimum warn loudly enough that
-    a caller notices. Pinned as: silent divergence, no exception ever raised.
+    LEG 115 MEASURED (pre-repair): 4 of 6 complex alphas returned a value silently differing
+    from the real-part-only computation, with no exception raised on any of the 6.
     """
     col = Collocation(16)
     om = col.anchor()
-    complex_alphas = [1.5 + 0.1j, 1.5 + 1.0j, 0.0 + 1.0j, -1.0 + 2.0j]
-    out = {"cases": 0, "diverged_from_real_part": 0, "raised": 0}
+    # Leg 115 probed six; the four with an imaginary part large enough to move float64 are
+    # the ones it counted as silently divergent. The guard is on the TYPE, not the magnitude,
+    # so all six -- including the two leg 115 honestly recorded as non-divergent -- are now
+    # refused, which is a strictly wider refusal than the finding required.
+    complex_alphas = [1.5 + 0.1j, 1.5 + 1.0j, 0.0 + 1.0j, -1.0 + 2.0j,
+                      1.0 + 0.0j, 1.5 + 1e-10j]
+    out = {"cases": 0, "raised": 0, "pre_repair_n_silently_diverging": 4}
     for a in complex_alphas:
-        with warnings.catch_warnings(record=True) as wl:
-            warnings.simplefilter("always")
-            v = col.norm_domain(om, a)
-        v_real_only = col.norm_domain(om, a.real)
         out["cases"] += 1
-        if v != v_real_only:
-            out["diverged_from_real_part"] += 1
-    assert out["diverged_from_real_part"] == out["cases"] == 4, (
-        f"PIN G3: expected all {len(complex_alphas)} cases to silently diverge from the "
-        f"real-part-only answer, got {out}. If norm_domain has been repaired to reject "
-        "non-real alpha, this assertion SHOULD fail -- update the pin."
-    )
-    assert out["raised"] == 0, "PIN G3: expected no exception to be raised for complex alpha"
+        for fn in (col.norm_domain, col.norm_codomain):
+            try:
+                v = fn(om, a)
+            except DecayCollocationDomainError:
+                continue
+            raise AssertionError(
+                "REGRESSION: %s returned %r for complex alpha %r instead of raising"
+                % (fn.__name__, v, a)
+            )
+        out["raised"] += 1
+    assert out["raised"] == out["cases"] == 6, out
+    # CONTROL inside the inverted pin: every REAL spelling of alpha still works untouched --
+    # Python float, Python int, NumPy scalar -- so the guard tests realness, not type identity.
+    for a in (1.5, 2, np.float64(1.5), np.int64(2)):
+        assert np.isfinite(col.norm_domain(om, a)), a
+    out["real_alphas_still_accepted"] = 4
     return out
 
 
@@ -349,17 +441,24 @@ def check_python_builtin_float_refuses_complex():
 
 
 def check_full_pipeline_complex_alpha_no_exception():
-    """PIN (G3): the complex-alpha hazard reaches the leg's own headline function end to end
-    with no exception."""
+    """INVERTED PIN (leg 151), G3 end to end. The hazard reached the leg's own headline
+    function; the guard now stops it there too.
+
+    LEG 115 MEASURED (pre-repair): graded_inverse_norm(Collocation(16), 1.5+0.3j) returned a
+    plain finite float with no exception and no signal that alpha was not the real exponent.
+    """
     col = Collocation(16)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        val, A, M = graded_inverse_norm(col, 1.5 + 0.3j)
-    assert isinstance(val, float) and np.isfinite(val), (
-        f"PIN G3: expected graded_inverse_norm to return a plain finite float for a complex "
-        f"alpha with no exception, got {val!r}"
-    )
-    return {"result": val}
+        try:
+            val, A, M = graded_inverse_norm(col, 1.5 + 0.3j)
+        except DecayCollocationDomainError:
+            # and the real spelling of the same call still returns its ordinary finite value
+            val_real = graded_inverse_norm(col, 1.5)[0]
+            assert np.isfinite(val_real) and val_real > 0.0, val_real
+            return {"complex_alpha_raises": True, "real_alpha_still_returns": val_real}
+    raise AssertionError(
+        "REGRESSION: graded_inverse_norm accepted a complex alpha, returned %r" % (val,))
 
 
 # =========================================================================
@@ -489,6 +588,7 @@ if __name__ == "__main__":
                          for k, v in list(metrics.items())[:4])
         print(f"PASS {fn.__name__}: {head}")
     print(f"\nall decay_collocation ADVERSARIAL checks passed ({len(CHECKS)} checks)")
-    print("NOTE: G1/G2/G3 PIN CURRENT DEFECTIVE BEHAVIOUR (see module docstring).")
-    print("They are expected to FAIL once solver/decay_collocation.py is repaired -- that is")
-    print("the intended signal. Banked magnitudes: writeup/data/p2_route_dca_v1_adversarial.json")
+    print("NOTE: REPAIRED at leg 151. G1/G2/G3's 7 pins are INVERTED -- they now assert the")
+    print("guards in solver/decay_collocation.py, and the 8 CONTROL/PASS checks are unchanged.")
+    print("Pre-repair magnitudes: writeup/data/p2_route_dca_v1_adversarial.json (leg 115).")
+    print("Repair evidence:       writeup/data/p2_route_dcr_v1_repair.json (leg 151).")

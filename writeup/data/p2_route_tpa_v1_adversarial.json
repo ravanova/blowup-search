@@ -1,0 +1,1305 @@
+{
+ "A2_attribution_control": {
+  "inverted_pairs": [
+   [
+    0.0,
+    0.7176975585024193,
+    0.2,
+    0.4533260510812292
+   ],
+   [
+    0.0,
+    0.7176975585024193,
+    0.25,
+    0.700933667129627
+   ]
+  ],
+  "n_no_Xc_with_finite_fraction": 1,
+  "n_pairs_where_no_Xc_beats_real_Xc": 2,
+  "rows": [
+   {
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": Infinity,
+    "Xc_exists": false,
+    "a": 0.0,
+    "n_warnings": 0,
+    "near_Xc_fraction": 0.7176975585024193,
+    "passes_module_threshold": true,
+    "status": "FINITE",
+    "status_whole_dict": "NONFINITE"
+   },
+   {
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": 17.173258854455025,
+    "Xc_exists": true,
+    "a": 0.2,
+    "n_warnings": 0,
+    "near_Xc_fraction": 0.4533260510812292,
+    "passes_module_threshold": false,
+    "status": "FINITE",
+    "status_whole_dict": "FINITE"
+   },
+   {
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": 9.359483547556737,
+    "Xc_exists": true,
+    "a": 0.25,
+    "n_warnings": 0,
+    "near_Xc_fraction": 0.700933667129627,
+    "passes_module_threshold": true,
+    "status": "FINITE",
+    "status_whole_dict": "FINITE"
+   },
+   {
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": 6.128621005277464,
+    "Xc_exists": true,
+    "a": 0.3,
+    "n_warnings": 0,
+    "near_Xc_fraction": 0.8629885710029515,
+    "passes_module_threshold": true,
+    "status": "FINITE",
+    "status_whole_dict": "FINITE"
+   },
+   {
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": 3.4924662769174692,
+    "Xc_exists": true,
+    "a": 0.4,
+    "n_warnings": 0,
+    "near_Xc_fraction": 0.9294147704291257,
+    "passes_module_threshold": true,
+    "status": "FINITE",
+    "status_whole_dict": "FINITE"
+   }
+  ]
+ },
+ "A3_grid_too_short": {
+  "attribution_fraction_max": 0.4533260510812292,
+  "attribution_fraction_min": 0.0,
+  "attribution_fraction_n_exactly_zero": 4,
+  "hypothesis": "a grid ending before X_c yields X_c = inf at a > 0",
+  "hypothesis_refuted": true,
+  "n_grids": 8,
+  "n_grids_short_of_Xc": 0,
+  "rows": [
+   {
+    "E_min": -0.05713060289717953,
+    "J": 20,
+    "X_grid_max": 25.45169957935704,
+    "Xc": 19.434229351134533,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.0,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.11618422456815691,
+    "J": 30,
+    "X_grid_max": 38.18845929702563,
+    "Xc": 19.700720933205645,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.0,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.15789103401748017,
+    "J": 40,
+    "X_grid_max": 50.92303663648567,
+    "Xc": 17.33406149980003,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.2083338443027738,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.21660499074564943,
+    "J": 60,
+    "X_grid_max": 76.39000931113527,
+    "Xc": 17.609365814379515,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.0,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.25829136074702985,
+    "J": 80,
+    "X_grid_max": 101.85589106543665,
+    "Xc": 17.413020131303583,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.0,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.3170087823004354,
+    "J": 120,
+    "X_grid_max": 152.78656370042185,
+    "Xc": 17.192190141139957,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.19324259626109053,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.39098187927512384,
+    "J": 200,
+    "X_grid_max": 254.64659994874526,
+    "Xc": 17.179245435793415,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.18403917360839792,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   },
+   {
+    "E_min": -0.4913542376970924,
+    "J": 400,
+    "X_grid_max": 509.2951633953856,
+    "Xc": 17.173258854455025,
+    "Xc_exists": true,
+    "a": 0.2,
+    "grid_reaches_Xc": true,
+    "guarded_site_status": "FINITE",
+    "near_Xc_fraction": 0.4533260510812292,
+    "passes_module_threshold": false,
+    "status": "FINITE"
+   }
+  ]
+ },
+ "A_missing_guard": [
+  {
+   "E_max": 0.5,
+   "E_min": 0.5,
+   "E_sign_changes": 0,
+   "J": 120,
+   "Xc_returned": Infinity,
+   "a": 0.0,
+   "guarded_site__homogeneous_far_field": {
+    "exc": "ValueError",
+    "field": null,
+    "field_value": null,
+    "msg": "no turning point: E does not change sign (a = 0?)",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__inner_mode_exponent": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__source_of_the_row": {
+    "exc": null,
+    "field": "near_Xc_fraction",
+    "field_value": 0.7194298513286885,
+    "msg": null,
+    "n_warnings": 0,
+    "status": "FINITE",
+    "status_whole_dict": "NONFINITE",
+    "value": {
+     "Xc": Infinity,
+     "near_Xc_fraction": 0.7194298513286885,
+     "row_X": 0.019637477771376973
+    }
+   }
+  },
+  {
+   "E_max": 0.5,
+   "E_min": 0.5,
+   "E_sign_changes": 0,
+   "J": 200,
+   "Xc_returned": Infinity,
+   "a": 0.0,
+   "guarded_site__homogeneous_far_field": {
+    "exc": "ValueError",
+    "field": null,
+    "field_value": null,
+    "msg": "no turning point: E does not change sign (a = 0?)",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__inner_mode_exponent": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__source_of_the_row": {
+    "exc": null,
+    "field": "near_Xc_fraction",
+    "field_value": 0.7184436673087081,
+    "msg": null,
+    "n_warnings": 0,
+    "status": "FINITE",
+    "status_whole_dict": "NONFINITE",
+    "value": {
+     "Xc": Infinity,
+     "near_Xc_fraction": 0.7184436673087081,
+     "row_X": 0.011781517513428989
+    }
+   }
+  },
+  {
+   "E_max": 0.5,
+   "E_min": 0.5,
+   "E_sign_changes": 0,
+   "J": 400,
+   "Xc_returned": Infinity,
+   "a": 0.0,
+   "guarded_site__homogeneous_far_field": {
+    "exc": "ValueError",
+    "field": null,
+    "field_value": null,
+    "msg": "no turning point: E does not change sign (a = 0?)",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__inner_mode_exponent": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "unguarded_site__source_of_the_row": {
+    "exc": null,
+    "field": "near_Xc_fraction",
+    "field_value": 0.7176975585024193,
+    "msg": null,
+    "n_warnings": 0,
+    "status": "FINITE",
+    "status_whole_dict": "NONFINITE",
+    "value": {
+     "Xc": Infinity,
+     "near_Xc_fraction": 0.7176975585024193,
+     "row_X": 0.005890554355452355
+    }
+   }
+  }
+ ],
+ "B_caller_supplied_xc": {
+  "J": 400,
+  "a": 0.3,
+  "predicted_1_over_a": 3.3333333333333335,
+  "rows": [
+   {
+    "Xc_factor": 0.1,
+    "Xc_passed": 0.6128621005277464,
+    "abs_shift_vs_true": 0.4860165950939894,
+    "exponent": 3.81666787950525,
+    "rel_shift_vs_true": 0.1459223898246975,
+    "status": "FINITE",
+    "within_module_gate_5pct": false
+   },
+   {
+    "Xc_factor": 0.5,
+    "Xc_passed": 3.064310502638732,
+    "abs_shift_vs_true": 0.14631438183481116,
+    "exponent": 3.476965666246072,
+    "rel_shift_vs_true": 0.04392966100042331,
+    "status": "FINITE",
+    "within_module_gate_5pct": true
+   },
+   {
+    "Xc_factor": 0.9,
+    "Xc_passed": 5.515758904749718,
+    "abs_shift_vs_true": 0.022240795364092403,
+    "exponent": 3.352892079775353,
+    "rel_shift_vs_true": 0.006677611513456226,
+    "status": "FINITE",
+    "within_module_gate_5pct": true
+   },
+   {
+    "Xc_factor": 1.0,
+    "Xc_passed": 6.128621005277464,
+    "abs_shift_vs_true": 0.0,
+    "exponent": 3.330651284411261,
+    "rel_shift_vs_true": 0.0,
+    "status": "FINITE",
+    "within_module_gate_5pct": true
+   },
+   {
+    "Xc_factor": 1.1,
+    "Xc_passed": 6.7414831058052105,
+    "abs_shift_vs_true": 0.020119427269785994,
+    "exponent": 3.310531857141475,
+    "rel_shift_vs_true": 0.006040688607646412,
+    "status": "FINITE",
+    "within_module_gate_5pct": true
+   },
+   {
+    "Xc_factor": 2.0,
+    "Xc_passed": 12.257242010554927,
+    "abs_shift_vs_true": 0.14632347773046206,
+    "exponent": 3.1843278066807987,
+    "rel_shift_vs_true": 0.043932391966493956,
+    "status": "FINITE",
+    "within_module_gate_5pct": true
+   },
+   {
+    "Xc_factor": 10.0,
+    "Xc_passed": 61.286210052774635,
+    "abs_shift_vs_true": 0.4861189636648331,
+    "exponent": 2.8445323207464277,
+    "rel_shift_vs_true": 0.14595312512602515,
+    "status": "FINITE",
+    "within_module_gate_5pct": false
+   }
+  ],
+  "special": {
+   "inf": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "nan": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "negative": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   },
+   "zero": {
+    "exc": "LinAlgError",
+    "field": null,
+    "field_value": null,
+    "msg": "SVD did not converge in Linear Least Squares",
+    "n_warnings": 0,
+    "status": "RAISED",
+    "value": null
+   }
+  },
+  "true_Xc": 6.128621005277464,
+  "true_exponent": 3.330651284411261
+ },
+ "C2_empty_cutoff": {
+  "J": 200,
+  "X_min": 0.003927011003489809,
+  "a": 0.3,
+  "status": "FINITE",
+  "value": {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "-5": NaN,
+    "0": NaN,
+    "1e-300": NaN,
+    "inf": 11013.145288875075
+   },
+   "cond": 363700.4812768181,
+   "smin": 0.0005137965240505604,
+   "unweighted_row_sum": 1004.1045221977674
+  }
+ },
+ "C_conditioning": [
+  {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "20": 24.439095906801413,
+    "200": 465.2768916757398,
+    "50": 76.67547341973268,
+    "inf": 11013.145288875075
+   },
+   "case": "healthy_a0.3",
+   "cond": 363700.4812768181,
+   "ladder_looks_plausible": true,
+   "smin": 0.0005137965240505604,
+   "status": "FINITE"
+  },
+  {
+   "argmax_X": 0.011781517513428989,
+   "by_cutoff": {
+    "20": 3.5505534353635353,
+    "200": 3.5505534353635353,
+    "50": 3.5505534353635353,
+    "inf": 3.5505534353635353
+   },
+   "case": "healthy_a0.0",
+   "cond": 248703.60961344637,
+   "ladder_looks_plausible": true,
+   "smin": 0.0007553073457209172,
+   "status": "FINITE"
+  },
+  {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "20": 225.22329428246863,
+    "200": 1753.9046066616754,
+    "50": 535.4746787434948,
+    "inf": 8166.567865476845
+   },
+   "case": "om_zeros",
+   "cond": 2396682.2781446897,
+   "ladder_looks_plausible": true,
+   "smin": 7.878800212750578e-05,
+   "status": "FINITE"
+  },
+  {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "20": 196.89713338023225,
+    "200": 1533.664731499707,
+    "50": 468.4661414495727,
+    "inf": 7138.947206287508
+   },
+   "case": "om_ones",
+   "cond": 18978.55343696527,
+   "ladder_looks_plausible": true,
+   "smin": 0.010002134353846706,
+   "status": "FINITE"
+  },
+  {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "20": 225.22329428246863,
+    "200": 1753.9046066616754,
+    "50": 535.4746787434948,
+    "inf": 8166.567865476845
+   },
+   "case": "om_tiny",
+   "cond": 2396682.2781446897,
+   "ladder_looks_plausible": true,
+   "smin": 7.878800212750578e-05,
+   "status": "FINITE"
+  },
+  {
+   "argmax_X": 254.64659994874526,
+   "by_cutoff": {
+    "20": 64.42576575761493,
+    "200": 501.60339578385737,
+    "50": 153.19884079720447,
+    "inf": 2335.1658066199525
+   },
+   "case": "om_huge",
+   "cond": 2.2538502541993124e+16,
+   "ladder_looks_plausible": true,
+   "smin": 4.436851996431826e+133,
+   "status": "FINITE"
+  }
+ ],
+ "D2_partial_poison": [
+  {
+   "clean_fraction": 0.6069370299286944,
+   "n_poisoned": 1,
+   "poisoned_value": {
+    "Xc": NaN,
+    "near_Xc_fraction": NaN,
+    "row_X": 0.006545078152034018
+   },
+   "status": "NONFINITE"
+  },
+  {
+   "clean_fraction": 0.6069370299286944,
+   "n_poisoned": 2,
+   "poisoned_value": {
+    "Xc": NaN,
+    "near_Xc_fraction": NaN,
+    "row_X": 0.006545078152034018
+   },
+   "status": "NONFINITE"
+  },
+  {
+   "clean_fraction": 0.6069370299286944,
+   "n_poisoned": 5,
+   "poisoned_value": {
+    "Xc": NaN,
+    "near_Xc_fraction": NaN,
+    "row_X": 0.006545078152034018
+   },
+   "status": "NONFINITE"
+  }
+ ],
+ "D_poison": [
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "nan_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "nan_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "nan_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "nan_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "nan_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "nan_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "nan_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "nan_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "nan_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "nan_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "nan_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "nan_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "nan_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "nan_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "nan_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "nan_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "nan_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "nan_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "nan_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "nan_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "nan_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "nan_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "nan_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "nan_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "inf_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "inf_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "inf_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "inf_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "inf_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "inf_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "inf_om_first",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "inf_om_first",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "inf_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "inf_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "inf_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "inf_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "inf_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "inf_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "inf_om_mid",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "inf_om_mid",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "inf_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "inf_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "inf_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "inf_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "inf_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "inf_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "inf_om_last",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "inf_om_last",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "c_nan",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "c_nan",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "c_nan",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": "LinAlgError",
+   "poison": "c_nan",
+   "status": "RAISED"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "c_nan",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "c_nan",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": "LinAlgError",
+   "poison": "c_nan",
+   "status": "RAISED"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "c_nan",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "profile_far_field",
+   "exc": null,
+   "poison": "c_inf",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "homogeneous_far_field",
+   "exc": "ValueError",
+   "poison": "c_inf",
+   "status": "RAISED"
+  },
+  {
+   "entry": "inner_mode_exponent",
+   "exc": "LinAlgError",
+   "poison": "c_inf",
+   "status": "RAISED"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": null,
+   "poison": "c_inf",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "c_inf",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": "LinAlgError",
+   "poison": "c_inf",
+   "status": "RAISED"
+  },
+  {
+   "entry": "square_bordered_smin",
+   "exc": null,
+   "poison": "c_inf",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "gauged_matrix",
+   "exc": null,
+   "poison": "c_inf",
+   "status": "NONFINITE"
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": null,
+   "poison": "alpha_nan",
+   "status": "FINITE",
+   "value": {
+    "argmax_X": 0.006545078152034018,
+    "by_cutoff": {
+     "20": NaN,
+     "200": NaN,
+     "50": NaN,
+     "inf": NaN
+    },
+    "cond": 99971.5563438495,
+    "smin": 0.0010873035961422887,
+    "unweighted_row_sum": 555.0953592907156
+   }
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "alpha_nan",
+   "status": "NONFINITE",
+   "value": {
+    "Xc": 6.130965249939646,
+    "near_Xc_fraction": NaN,
+    "row_X": 0.006545078152034018
+   }
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": null,
+   "poison": "alpha_nan",
+   "status": "NONFINITE",
+   "value": NaN
+  },
+  {
+   "entry": "graded_norm_by_radius",
+   "exc": null,
+   "poison": "alpha_inf",
+   "status": "FINITE",
+   "value": {
+    "argmax_X": 0.006545078152034018,
+    "by_cutoff": {
+     "20": Infinity,
+     "200": Infinity,
+     "50": Infinity,
+     "inf": Infinity
+    },
+    "cond": 99971.5563438495,
+    "smin": 0.0010873035961422887,
+    "unweighted_row_sum": 555.0953592907156
+   }
+  },
+  {
+   "entry": "source_of_the_row",
+   "exc": null,
+   "poison": "alpha_inf",
+   "status": "NONFINITE",
+   "value": {
+    "Xc": 6.130965249939646,
+    "near_Xc_fraction": NaN,
+    "row_X": 0.006545078152034018
+   }
+  },
+  {
+   "entry": "bordered_norm",
+   "exc": null,
+   "poison": "alpha_inf",
+   "status": "NONFINITE",
+   "value": Infinity
+  },
+  {
+   "absorbed_exactly": true,
+   "clean_value": 3.3305345431254723,
+   "entry": "log_growth_exponent",
+   "exc": null,
+   "poison": "h_nan_midpoint",
+   "shift_from_clean": 0.0,
+   "status": "FINITE",
+   "value": 3.3305345431254723
+  },
+  {
+   "absorbed_exactly": true,
+   "clean_value": 3.3305345431254723,
+   "entry": "log_growth_exponent",
+   "exc": null,
+   "poison": "h_negative_midpoint",
+   "shift_from_clean": 0.0,
+   "status": "FINITE",
+   "value": 3.3305345431254723
+  },
+  {
+   "absorbed_exactly": true,
+   "clean_value": 3.3305345431254723,
+   "entry": "log_growth_exponent",
+   "exc": null,
+   "poison": "h_inf_midpoint",
+   "shift_from_clean": 0.0,
+   "status": "FINITE",
+   "value": 3.3305345431254723
+  },
+  {
+   "absorbed_exactly": false,
+   "clean_value": 3.3305345431254723,
+   "entry": "log_growth_exponent",
+   "exc": null,
+   "index_fraction": 0.95,
+   "poison": "h_nan_inside_fit_window",
+   "status": "NONFINITE",
+   "value": NaN
+  },
+  {
+   "absorbed_exactly": true,
+   "clean_value": 3.3305345431254723,
+   "entry": "log_growth_exponent",
+   "exc": null,
+   "index_fraction": 0.5,
+   "poison": "h_nan_outside_fit_window",
+   "status": "FINITE",
+   "value": 3.3305345431254723
+  }
+ ],
+ "E2_second_crossing": {
+  "J": 400,
+  "Xc_unbumped": 6.128621005277464,
+  "a": 0.3,
+  "n_constructions": 6,
+  "n_constructions_with_a_pole_inside_the_integration_window": 5,
+  "rows": [
+   {
+    "Xc_first": 6.128621005277464,
+    "bump_amp": 0.0,
+    "crossings_X": [
+     6.081674388676222
+    ],
+    "crossings_inside_integration_window": [],
+    "exponent": 3.3306812713489156,
+    "finite_and_plausible": true,
+    "integration_starts_at": 9.192931507916196,
+    "n_poles_inside_window": 0,
+    "n_sign_changes_positive_X": 1,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.0007956185953253758,
+    "status": "FINITE"
+   },
+   {
+    "Xc_first": 4.831896157447843,
+    "bump_amp": 0.5,
+    "crossings_X": [
+     4.7815184944630005,
+     29.94745022264718
+    ],
+    "crossings_inside_integration_window": [
+     29.94745022264718
+    ],
+    "exponent": 3.694746147782916,
+    "finite_and_plausible": true,
+    "integration_starts_at": 7.247844236171764,
+    "n_poles_inside_window": 1,
+    "n_sign_changes_positive_X": 2,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.10842384433487474,
+    "status": "FINITE"
+   },
+   {
+    "Xc_first": 4.266163157270567,
+    "bump_amp": 1.0,
+    "crossings_X": [
+     4.20162651197619,
+     26.79260642216294
+    ],
+    "crossings_inside_integration_window": [
+     26.79260642216294
+    ],
+    "exponent": 3.6883928374523784,
+    "finite_and_plausible": true,
+    "integration_starts_at": 6.39924473590585,
+    "n_poles_inside_window": 1,
+    "n_sign_changes_positive_X": 2,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.10651785123571349,
+    "status": "FINITE"
+   },
+   {
+    "Xc_first": 3.6524934368694684,
+    "bump_amp": 2.0,
+    "crossings_X": [
+     3.6273858763520956,
+     26.79260642216294
+    ],
+    "crossings_inside_integration_window": [
+     26.79260642216294
+    ],
+    "exponent": 3.7091461989444934,
+    "finite_and_plausible": true,
+    "integration_starts_at": 5.4787401553042026,
+    "n_poles_inside_window": 1,
+    "n_sign_changes_positive_X": 2,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.11274385968334796,
+    "status": "FINITE"
+   },
+   {
+    "Xc_first": 2.8558019997641555,
+    "bump_amp": 5.0,
+    "crossings_X": [
+     2.8297975487831684,
+     26.79260642216294
+    ],
+    "crossings_inside_integration_window": [
+     26.79260642216294
+    ],
+    "exponent": 3.7572318891408854,
+    "finite_and_plausible": true,
+    "integration_starts_at": 4.283702999646233,
+    "n_poles_inside_window": 1,
+    "n_sign_changes_positive_X": 2,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.12716956674226557,
+    "status": "FINITE"
+   },
+   {
+    "Xc_first": 1.8328733820507923,
+    "bump_amp": 20.0,
+    "crossings_X": [
+     1.8274837670081232,
+     26.79260642216294
+    ],
+    "crossings_inside_integration_window": [
+     26.79260642216294
+    ],
+    "exponent": 3.8549136954716796,
+    "finite_and_plausible": true,
+    "integration_starts_at": 2.7493100730761886,
+    "n_poles_inside_window": 1,
+    "n_sign_changes_positive_X": 2,
+    "predicted_1_over_a": 3.3333333333333335,
+    "rel_error_vs_prediction": 0.15647410864150382,
+    "status": "FINITE"
+   }
+  ]
+ },
+ "E_drop_out_of_range": [
+  {
+   "drop": 0,
+   "exc": null,
+   "identical_to_drop0": true,
+   "shape": [
+    120,
+    120
+   ],
+   "square": true,
+   "status": "NONFINITE"
+  },
+  {
+   "drop": 1,
+   "exc": null,
+   "identical_to_drop0": false,
+   "shape": [
+    120,
+    120
+   ],
+   "square": true,
+   "status": "NONFINITE"
+  },
+  {
+   "drop": 119,
+   "exc": null,
+   "identical_to_drop0": false,
+   "shape": [
+    120,
+    120
+   ],
+   "square": true,
+   "status": "NONFINITE"
+  },
+  {
+   "drop": 120,
+   "exc": "ValueError",
+   "identical_to_drop0": null,
+   "shape": null,
+   "square": null,
+   "status": "RAISED"
+  },
+  {
+   "drop": 125,
+   "exc": "ValueError",
+   "identical_to_drop0": null,
+   "shape": null,
+   "square": null,
+   "status": "RAISED"
+  },
+  {
+   "drop": -1,
+   "exc": "ValueError",
+   "identical_to_drop0": null,
+   "shape": null,
+   "square": null,
+   "status": "RAISED"
+  },
+  {
+   "drop": -120,
+   "exc": "ValueError",
+   "identical_to_drop0": null,
+   "shape": null,
+   "square": null,
+   "status": "RAISED"
+  },
+  {
+   "drop": 1000000,
+   "exc": "ValueError",
+   "identical_to_drop0": null,
+   "shape": null,
+   "square": null,
+   "status": "RAISED"
+  }
+ ],
+ "F_reachability": {
+  "n_source_of_the_row_call_sites_in_runner": 1,
+  "n_source_of_the_row_call_sites_in_test": 1,
+  "runner": "experiments/p2_route_d_v13_turning.py",
+  "s3_attribution_a_values_include_0": true,
+  "s4_source_a_values": "a_values=(0.2, 0.3, 0.4)",
+  "s4_source_includes_a0": false,
+  "test_5_asserts_near_Xc_fraction": true,
+  "test_5_runs_a0_control_on_near_Xc_fraction": false,
+  "test_file_mentions_nan_or_inf": false
+ },
+ "alpha": 1.4,
+ "leg": 118,
+ "module_attribution_threshold_quoted_from_test": 0.5,
+ "module_is_read_only": true,
+ "module_under_test": "solver/turning_point.py",
+ "route": "ROUTE-TPA",
+ "summary": {
+  "a0_guarded_site_raised": true,
+  "a0_unguarded_inner_RAISED": 3,
+  "a0_unguarded_source_FINITE": 3,
+  "a0_unguarded_source_fabricated_fraction": [
+   0.7194298513286885,
+   0.7184436673087081,
+   0.7176975585024193
+  ],
+  "a0_unguarded_source_warnings": 0,
+  "log_growth_poison_absorbed_exactly": 4,
+  "n_pairs_where_no_Xc_beats_real_Xc": 2,
+  "no_Xc_cases_passing_module_threshold": 1,
+  "no_Xc_cases_total": 1,
+  "poison_FINITE": 6,
+  "poison_NONFINITE": 31,
+  "poison_RAISED": 38,
+  "poison_cases": 75,
+  "poles_inside_integration_window": 5
+ }
+}

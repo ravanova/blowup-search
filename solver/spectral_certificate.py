@@ -869,8 +869,10 @@ def explicit_far_field_direction(Gs, Bs, h_scaled):
     `h_scaled` is the analytic tail kernel `tail_right_null(K, M)` already multiplied by the
     tail weights.  Choosing `z` to annihilate the finite rows exactly leaves `L v` supported
     on the tail rows alone, and on this operator that support turns out to be a SINGLE row
-    -- the truncation edge `m = M` -- because the parity structure forces `z_K = 0`, which
-    kills the one finite-to-tail coupling entry `(1 - K/2)`.
+    -- the truncation edge `m = M`.  There are TWO finite-to-tail coupling columns: the
+    parity structure forces `z_K = 0`, which kills `(1 - K/2)`; the other, the far-field
+    column, is killed not by `z` but because it is itself supported on that same single edge
+    row.
 
     This is the vector the proof uses.  `l1_bounded_below_constant` finds the optimum
     numerically and independently; the runner checks the two agree, which is the difference
