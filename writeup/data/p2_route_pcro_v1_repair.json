@@ -1,0 +1,1532 @@
+{
+  "leg": "Leg 244 -- Route-PCRO",
+  "role": "LEG (repair family)",
+  "branch": "leg/244-pcro-v1",
+  "generated": "2026-08-06T22:15:13Z",
+  "gate_verbatim": "Does making `stall_verdict`'s verdict robust to array order (rather than relying on the current incidental ordering) preserve every currently-correct verdict (Route-L's headline included, re-checked explicitly) while removing the order-dependence leg 243 found?",
+  "gate_answer": "YES",
+  "escalation_required": false,
+  "the_repair": {
+    "file": "solver/port_certification.py",
+    "function": "stall_verdict",
+    "before": "first, last = rows[0], rows[-1]",
+    "after": "first, last = by_m[min(by_m)], by_m[max(by_m)]  # keyed on the row's own m",
+    "krylov_ladder_touched": false,
+    "why_not": "keying the verdict on `m` makes the producer's row ORDER irrelevant, so canonicalising `krylov_ladder` too would be a second mechanism guarding the same thing -- and every call site, including the deep rung's inline dims=(240,320), is covered without one",
+    "call_sites_changed": 0
+  },
+  "G0_provenance": {
+    "why": "every artifact this leg reads or repairs, hashed, so the run is re-derivable",
+    "repaired_module": {
+      "path": "solver/port_certification.py",
+      "sha256": "22d38a431c41a94166fd2c20fe30578e491333f62f37c7e05ad90de3af95817b"
+    },
+    "route_L_banked": {
+      "path": "writeup/data/p2_route_l_v1_precond.json",
+      "sha256": "c287396cd65d37467a33639c61e125e6a78e0aca030b04d4a7cd30694660ccf3"
+    },
+    "route_K_banked": {
+      "path": "writeup/data/p2_route_k_v1_port.json",
+      "sha256": "6b4b7c51bf8f027a2ba86486f288e4ce7af54033db1e056007c9a9cdf2c4cacc"
+    },
+    "route_L_runner": {
+      "path": "experiments/p2_route_l_v1_precond.py",
+      "sha256": "a17ba31141eb7c8356584d3e9fabd6180eb07dc95fe1f83593807dbc9b52c67e"
+    },
+    "banked_ladders_discovered": 15,
+    "ladder_inventory": [
+      {
+        "label": "route_L/L1_attribution/full",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L1_attribution/velocity feedback OFF",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L1_attribution/angular transport OFF",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L1_attribution/velocity in s_rho OFF",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L1_attribution/reaction terms OFF",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L1_attribution/pure dilation, no angular",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "attribution_summary"
+      },
+      {
+        "label": "route_L/L3_preconditioners/none",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_L/L3_preconditioners/radial only (Route-K)",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_L/L3_preconditioners/ADI composition",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_L/L3_preconditioners/full transport line sweep",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_L/L3_preconditioners/line_sweep_deeper",
+        "n_rows": 2,
+        "m_sequence": [
+          240,
+          320
+        ],
+        "reaches_verdict_via": "the deep rung, dims=(240,320) inline at line 180"
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/unpreconditioned",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/preconditioned",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/unpreconditioned",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/preconditioned",
+        "n_rows": 5,
+        "m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "reaches_verdict_via": "stall_verdict directly"
+      }
+    ]
+  },
+  "G1_preservation": {
+    "why": "the repair is only bankable if it moves NOTHING that is currently correct. Compared under `==` on raw float64 against the numbers Route-L actually banked, never `allclose`.",
+    "L3_stall_rows": [
+      {
+        "published_block": "L3_preconditioners/stalls",
+        "label": "none",
+        "published_residual_gain": 1.048694384970186,
+        "repaired_residual_gain": 1.048694384970186,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_min_dim": 0.0,
+          "rel_at_max_dim": 0.0,
+          "work_ratio": 0.0,
+          "residual_gain": 0.0
+        },
+        "bit_identical_all_keys": true
+      },
+      {
+        "published_block": "L3_preconditioners/stalls",
+        "label": "radial only (Route-K)",
+        "published_residual_gain": 1.2419759393363918,
+        "repaired_residual_gain": 1.2419759393363918,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_min_dim": 0.0,
+          "rel_at_max_dim": 0.0,
+          "work_ratio": 0.0,
+          "residual_gain": 0.0
+        },
+        "bit_identical_all_keys": true
+      },
+      {
+        "published_block": "L3_preconditioners/stalls",
+        "label": "ADI composition",
+        "published_residual_gain": 1.0039719069473407,
+        "repaired_residual_gain": 1.0039719069473407,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_min_dim": 0.0,
+          "rel_at_max_dim": 0.0,
+          "work_ratio": 0.0,
+          "residual_gain": 0.0
+        },
+        "bit_identical_all_keys": true
+      },
+      {
+        "published_block": "L3_preconditioners/stalls",
+        "label": "full transport line sweep",
+        "published_residual_gain": 9.724453522207629,
+        "repaired_residual_gain": 9.724453522207629,
+        "published_flat": false,
+        "repaired_flat": false,
+        "abs_differences": {
+          "rel_at_min_dim": 0.0,
+          "rel_at_max_dim": 0.0,
+          "work_ratio": 0.0,
+          "residual_gain": 0.0
+        },
+        "bit_identical_all_keys": true
+      }
+    ],
+    "L1_ranked_rows": [
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "pure dilation, no angular",
+        "ablation_repaired": "pure dilation, no angular",
+        "published_gain": 4.676087475172898,
+        "repaired_gain": 4.676087475172898,
+        "published_flat": false,
+        "repaired_flat": false,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      },
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "angular transport OFF",
+        "ablation_repaired": "angular transport OFF",
+        "published_gain": 2.1169210556029303,
+        "repaired_gain": 2.1169210556029303,
+        "published_flat": false,
+        "repaired_flat": false,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      },
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "velocity in s_rho OFF",
+        "ablation_repaired": "velocity in s_rho OFF",
+        "published_gain": 1.6979545175555175,
+        "repaired_gain": 1.6979545175555175,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      },
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "reaction terms OFF",
+        "ablation_repaired": "reaction terms OFF",
+        "published_gain": 1.2982278360028197,
+        "repaired_gain": 1.2982278360028197,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      },
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "velocity feedback OFF",
+        "ablation_repaired": "velocity feedback OFF",
+        "published_gain": 1.115236714856578,
+        "repaired_gain": 1.115236714856578,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      },
+      {
+        "published_block": "L1_attribution/ranked",
+        "ablation_published": "full",
+        "ablation_repaired": "full",
+        "published_gain": 1.048694384970186,
+        "repaired_gain": 1.048694384970186,
+        "published_flat": true,
+        "repaired_flat": true,
+        "abs_differences": {
+          "rel_at_max_dim": 0.0,
+          "gain": 0.0,
+          "gain_vs_full": 0.0
+        },
+        "bit_identical": true
+      }
+    ],
+    "L1_published_ranking_reproduced": true,
+    "published_ranking": [
+      "pure dilation, no angular",
+      "angular transport OFF",
+      "velocity in s_rho OFF",
+      "reaction terms OFF",
+      "velocity feedback OFF",
+      "full"
+    ],
+    "rows_compared": 10,
+    "rows_that_moved": 0,
+    "which_moved": [],
+    "largest_absolute_difference_anywhere": 0.0,
+    "reading": "every published number reproduces bit-identically under the repaired, order-immune verdict: the largest difference across all compared quantities is exactly 0.0"
+  },
+  "G2_immunity": {
+    "why": "order-immunity is not asserted from the source, it is MEASURED: every permutation of every banked ladder is fed to the repaired verdict, and every one must return the same answer on all 8 keys under `==`.",
+    "repaired_stall_verdict": [
+      {
+        "label": "route_L/L1_attribution/full",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.048694384970186,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L1_attribution/velocity feedback OFF",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.115236714856578,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L1_attribution/angular transport OFF",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 2.1169210556029303,
+        "as_stored_flat": false
+      },
+      {
+        "label": "route_L/L1_attribution/velocity in s_rho OFF",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.6979545175555175,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L1_attribution/reaction terms OFF",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.2982278360028197,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L1_attribution/pure dilation, no angular",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 4.676087475172898,
+        "as_stored_flat": false
+      },
+      {
+        "label": "route_L/L3_preconditioners/none",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.048694384970186,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L3_preconditioners/radial only (Route-K)",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.2419759393363918,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L3_preconditioners/ADI composition",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.0039719069473407,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_L/L3_preconditioners/full transport line sweep",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 9.724453522207629,
+        "as_stored_flat": false
+      },
+      {
+        "label": "route_L/L3_preconditioners/line_sweep_deeper",
+        "n_rows": 2,
+        "mode": "exhaustive",
+        "permutations_tested": 2,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 61.60560249945058,
+        "as_stored_flat": false
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/unpreconditioned",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.048742844757645,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/preconditioned",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.2412565206567348,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/unpreconditioned",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.1000278541588893,
+        "as_stored_flat": true
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/preconditioned",
+        "n_rows": 5,
+        "mode": "exhaustive",
+        "permutations_tested": 120,
+        "permutations_disagreeing_with_as_stored": 0,
+        "distinct_verdicts": 1,
+        "worst_gain_ratio_across_permutations": 1.0,
+        "worst_permutation_m_sequence": null,
+        "example_disagreements": [],
+        "as_stored_residual_gain": 1.0090678619309748,
+        "as_stored_flat": true
+      }
+    ],
+    "pre_repair_positional_stall_verdict": [
+      {
+        "label": "route_L/L1_attribution/full",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.0997599130679965,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.0135104388254195,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0054235599875199,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.0135104388254195,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L1_attribution/velocity feedback OFF",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.2437529301640924,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.066230031667396,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0339405391581833,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.066230031667396,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L1_attribution/angular transport OFF",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 4.481354755655024,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.576911041121013,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.2397954388515533,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.576911041121013,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L1_attribution/velocity in s_rho OFF",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 2.88304954368719,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.2377825511007943,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.078339120817652,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.2377825511007943,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L1_attribution/reaction terms OFF",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.6853955141725638,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.14250589651351,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0431209337844691,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.14250589651351,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L1_attribution/pure dilation, no angular",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 21.86579407546885,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 2.2618867180856275,
+            "flat": false
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.4681163820040082,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 2.2618867180856275,
+            "flat": false
+          }
+        ]
+      },
+      {
+        "label": "route_L/L3_preconditioners/none",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.0997599130679965,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.0135104388254195,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0054235599875199,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.0135104388254195,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L3_preconditioners/radial only (Route-K)",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.5425042338905128,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.1273136696397599,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0584855183198136,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.1273136696397599,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L3_preconditioners/ADI composition",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.0079595899394798,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.0022919134945039,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0014742383287492,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.0022919134945039,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L3_preconditioners/full transport line sweep",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 94.56499630557636,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.9732497827376907,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.3932861401025507,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.9732497827376907,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_L/L3_preconditioners/line_sweep_deeper",
+        "permutations_disagreeing": 1,
+        "worst_gain_ratio": 3795.250259320312,
+        "worst_permutation_m_sequence": [
+          320,
+          240
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              320,
+              240
+            ],
+            "residual_gain": 0.0162322899124137,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/unpreconditioned",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.0998615544303578,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.0135058653711588,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0054249251620122,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.0135058653711588,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_best/preconditioned",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.540717750072863,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.1271915891827353,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0593886958528305,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.1271915891827353,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/unpreconditioned",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.2100612799254105,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.0411010481761844,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0325732684828801,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.0411010481761844,
+            "flat": true
+          }
+        ]
+      },
+      {
+        "label": "route_K/K4_krylov_stall/cycle_worst/preconditioned",
+        "permutations_disagreeing": 114,
+        "worst_gain_ratio": 1.0182179499819486,
+        "worst_permutation_m_sequence": [
+          160,
+          20,
+          40,
+          80,
+          10
+        ],
+        "example_disagreements": [
+          {
+            "m_sequence": [
+              10,
+              20,
+              40,
+              160,
+              80
+            ],
+            "residual_gain": 1.006325369993461,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              80,
+              160,
+              40
+            ],
+            "residual_gain": 1.0047104751304383,
+            "flat": true
+          },
+          {
+            "m_sequence": [
+              10,
+              20,
+              160,
+              40,
+              80
+            ],
+            "residual_gain": 1.006325369993461,
+            "flat": true
+          }
+        ]
+      }
+    ],
+    "total_permutations_tested": 1682,
+    "ladders_with_any_disagreement_after_repair": 0,
+    "which_disagree": [],
+    "worst_pre_repair_gain_ratio": 3795.250259320312,
+    "worst_post_repair_gain_ratio": 1.0,
+    "reading": "1682 permutations across 15 banked ladders: the repaired verdict returns ONE answer on every one of them (worst gain ratio exactly 1.0), while the pre-repair positional read spread by up to 3795.250x on the same inputs"
+  },
+  "G3_headline": {
+    "why": "the gate names Route-L's headline explicitly, so it is re-derived here explicitly -- every one of its four components, from the banked ladders, through the REPAIRED verdict, and then under every permutation.",
+    "headline_sentence": "an O(N) exact sweep takes the Krylov stall from 0.6623 (flat) to 3.3e-6",
+    "components": [
+      {
+        "component": "0.6623",
+        "traces_to": "L3/ladders/none, the m=160 row",
+        "value": 0.6623346212886269,
+        "reproduced": true,
+        "order_sensitive_before_repair": false,
+        "order_sensitive_after_repair": false
+      },
+      {
+        "component": "(flat)",
+        "traces_to": "L3/stalls/none -> flat",
+        "value_gain": 1.048694384970186,
+        "flat": true,
+        "matches_published": true,
+        "order_sensitive_before_repair": true,
+        "order_sensitive_after_repair": false,
+        "permutations_disagreeing": 0
+      },
+      {
+        "component": "3.3e-6",
+        "traces_to": "L3/line_sweep_deeper, the m=320 row",
+        "value": 3.2651730424486987e-06,
+        "reproduced": true,
+        "order_sensitive_before_repair": false,
+        "order_sensitive_after_repair": false
+      },
+      {
+        "component": "gain 9.7245, 'the ladder stops being flat' (the load-bearing verdict)",
+        "traces_to": "L3/stalls/full transport line sweep",
+        "value_gain": 9.724453522207629,
+        "flat": false,
+        "matches_published": true,
+        "order_sensitive_before_repair": true,
+        "order_sensitive_after_repair": false,
+        "permutations_disagreeing": 0
+      }
+    ],
+    "order_sensitive_components_before_repair": 2,
+    "order_sensitive_components_after_repair": 0,
+    "permutation_check": {
+      "none_ladder": 0,
+      "sweep_ladder": 0,
+      "deep_rung": 0
+    },
+    "doc_cross_checks": {
+      "headline_fragment_present": true,
+      "gain_9_72_present": true
+    },
+    "headline_unchanged": true,
+    "reading": "Route-L's headline re-derives unchanged: 0.6623 at m=160, flat (gain 1.0487); 3.3e-6 at m=320; and the load-bearing bending verdict at gain 9.724454, bit-identical to the banked 9.724454. The two components that were order-sensitive before the repair are now invariant under all 120 + 120 permutations of their ladders."
+  },
+  "G4_call_sites": {
+    "why": "leg 241 cited only `DIMS` at line 49; leg 243 showed line 180's inline `dims=(240, 320)` is a SEPARATE literal that citation never covered. The repair must reach it -- and it does, because it is keyed on the `m` each row carries, not on any dims literal at all.",
+    "krylov_ladder_call_sites": 6,
+    "call_sites": [
+      {
+        "line": 180,
+        "dims": [
+          240,
+          320
+        ],
+        "dims_is_inline_literal": true,
+        "covered_by_module_DIMS_literal": false
+      },
+      {
+        "line": 133,
+        "dims": "DIMS",
+        "dims_is_inline_literal": false,
+        "covered_by_module_DIMS_literal": true
+      },
+      {
+        "line": 176,
+        "dims": "DIMS",
+        "dims_is_inline_literal": false,
+        "covered_by_module_DIMS_literal": true
+      },
+      {
+        "line": 177,
+        "dims": "DIMS",
+        "dims_is_inline_literal": false,
+        "covered_by_module_DIMS_literal": true
+      },
+      {
+        "line": 178,
+        "dims": "DIMS",
+        "dims_is_inline_literal": false,
+        "covered_by_module_DIMS_literal": true
+      },
+      {
+        "line": 179,
+        "dims": "DIMS",
+        "dims_is_inline_literal": false,
+        "covered_by_module_DIMS_literal": true
+      }
+    ],
+    "deep_rung_line": 180,
+    "deep_rung_dims_literal": [
+      240,
+      320
+    ],
+    "deep_rung_m_sequence_as_banked": [
+      240,
+      320
+    ],
+    "deep_rung_permutations_tested": 2,
+    "deep_rung_disagreements_after_repair": 0,
+    "deep_rung_disagreements_before_repair": 1,
+    "deep_rung_pre_repair_worst_gain_ratio": 3795.250259320312,
+    "deep_rung_residual_gain_after_repair": 61.60560249945058,
+    "reading": "the deep rung is covered: 0 of its 2 permutations disagree after the repair, against 1 of 2 before, where reversing it inverted the gain by 3795.3x"
+  },
+  "G5_control": {
+    "why": "lesson 90 -- a check that can only come out one way is not a check. The permutation battery is run against a function that MUST fail it (the pre-repair positional read, and a plausible but wrongly-keyed repair), and against the real repair where it must not.",
+    "negative_control_reversed_ladder": {
+      "m_sequence": [
+        160,
+        80,
+        40,
+        20,
+        10
+      ],
+      "pre_repair_gain_ascending": 9.724453522207629,
+      "pre_repair_gain_reversed": 0.10283354203054298,
+      "pre_repair_flip_ratio": 94.56499630557636,
+      "leg_243_reported_ratio": 94.565,
+      "matches_leg_243_to_2dp": true,
+      "pre_repair_flat_flips": true,
+      "post_repair_gain_reversed": 9.724453522207629,
+      "post_repair_flat": false,
+      "post_repair_matches_ascending": true
+    },
+    "negative_control_shuffled_ladder": {
+      "m_sequence": [
+        40,
+        10,
+        160,
+        20,
+        80
+      ],
+      "pre_repair_gain": 1.4162559476780934,
+      "leg_243_reported_shuffle_gain": 1.4163,
+      "matches_leg_243_to_4dp": true,
+      "pre_repair_flat": true,
+      "post_repair_gain": 9.724453522207629,
+      "post_repair_flat": false,
+      "post_repair_matches_ascending": true
+    },
+    "miskeyed_repair_control": {
+      "construction": "keys on `k` instead of `m`; indistinguishable on every banked ladder because k == m there, so it is fed a ladder with an early Krylov breakdown (m=40 but k=12)",
+      "ladder": [
+        {
+          "m": 10,
+          "k": 10,
+          "rel_residual": 0.9
+        },
+        {
+          "m": 20,
+          "k": 20,
+          "rel_residual": 0.5
+        },
+        {
+          "m": 40,
+          "k": 12,
+          "rel_residual": 0.02
+        }
+      ],
+      "miskeyed_permutations_disagreeing": 0,
+      "repaired_permutations_disagreeing": 0,
+      "battery_separates_them": false,
+      "battery_separates_them_note": "MEASURED, and deliberately reported rather than engineered away: keying on `k` is order-invariant too, so the permutation battery passes BOTH. Order-immunity is necessary and not sufficient.",
+      "miskeyed_picks_max_dim": 20,
+      "repaired_picks_max_dim": 40,
+      "miskeyed_residual_gain": 1.8,
+      "repaired_residual_gain": 45.0,
+      "miskeyed_flat": true,
+      "repaired_flat": false,
+      "preservation_separates_them": true,
+      "which_gate_catches_it": "G1 (preservation), not G2 (immunity) -- the mis-keyed variant reads the m=20 row as the ladder's top rung instead of m=40, so its gain is 1.8 against the correct 45.0 and its `flat` verdict inverts"
+    },
+    "control_comes_out_both_ways": true
+  },
+  "G6_attribution_summary": {
+    "why": "`attribution_summary` publishes Route-L's 6-row L1 table and reaches `stall_verdict` through it, so the repair has to hold end-to-end there too.",
+    "permuted_trials": 40,
+    "ranking_changes_under_permutation": 0,
+    "gain_or_flat_changes_under_permutation": 0,
+    "example_change": null,
+    "worse_than_full_flag_changes_under_permutation": 0,
+    "residual_positional_read_outside_this_leg_territory": {
+      "location": "solver/port_certification.py, attribution_summary, `ladders['full'][-1]['rel_residual']`",
+      "what_it_feeds": "the `worse_than_full` boolean only -- no published magnitude",
+      "status": "NOT REPAIRED HERE. This leg's declared territory is `stall_verdict`'s array-order handling and no other change, so the line is measured and reported rather than edited.",
+      "measured_exposure": "0 of 40 permuted trials moved a `worse_than_full` flag; the flag is a boolean side-column, and no Route-L headline component reads it",
+      "recommendation": "one line, in a follow-up leg holding `attribution_summary` in territory: read the maximum-`m` row via `stall_verdict(ladders['full'])['rel_at_max_dim']`, which is already order-immune after this repair"
+    },
+    "published_ranking": [
+      "pure dilation, no angular",
+      "angular transport OFF",
+      "velocity in s_rho OFF",
+      "reaction terms OFF",
+      "velocity feedback OFF",
+      "full"
+    ]
+  },
+  "G7_refusal": {
+    "why": "keying on `m` raises a question positional indexing never had to answer: what does a repeated `m` mean? Two rows at the same Krylov dimension with different residuals have no order-free reading, so the function refuses rather than silently picking one (lesson 58).",
+    "ambiguous_duplicate_m_raises": true,
+    "message": "ambiguous ladder: m = 10 appears twice with different rel_residual (0.9 and 0.4), so the verdict is not a function of the data",
+    "empty_ladder_raises": true,
+    "duplicate_but_agreeing_accepted": 9.0,
+    "single_row_ladder_gain": 1.0,
+    "single_row_ladder_flat": true,
+    "note": "a single-row ladder returns gain 1.0 (flat), which is what the pre-repair function returned for it too -- `rows[0]` and `rows[-1]` were the same row. Behaviour preserved.",
+    "no_banked_ladder_has_a_duplicate_m": true
+  },
+  "G8_suites": {
+    "why": "the repair touches a shared solver module; its own suites must be green",
+    "suites": [
+      {
+        "suite": "test_port_certification.py",
+        "returncode": 0,
+        "status": "PASS",
+        "tail": [
+          "  artifact: velocity-OFF is worse, wall fractions proportional, top ablation 'pure dilation, no angular', sweep reaches 3.3e-06, ADI worse than nothing  OK",
+          "",
+          "ALL GATES PASS (4s)"
+        ]
+      },
+      {
+        "suite": "test_port_certification_postrepair.py",
+        "returncode": 0,
+        "status": "PASS",
+        "tail": [
+          "  (5) artifact: canonical 9.4723e-16 pre and post, 20/20 cases bit-identical, timing deviation 1.12% against a 0.29% null; battery worst 10.61x the advertised figure and IDENTICAL pre/post, i.e. a scope caveat, not a regression  OK",
+          "",
+          "ALL GATES PASS (15s)"
+        ]
+      },
+      {
+        "suite": "test_port_certification_regression.py",
+        "returncode": 0,
+        "status": "PASS",
+        "tail": [
+          "  NaN and both infinities are rejected by hypothesis ahead of the `>= 1.0` guard; non-real types still raise  OK (hazard closed)",
+          "",
+          "ALL PASS -- and note what test_3 now banks: the ABSENCE of the gap leg 79 measured (11/25 -> 0/25). See the module docstring."
+        ]
+      }
+    ],
+    "all_pass": true
+  },
+  "finding": "REPAIRED. `stall_verdict` now selects its two rows by `m` rather than by position. PRESERVATION: all 10 published quantities (4 L3 stall verdicts x 8 keys, 6 L1 ranked rows x 6 keys) reproduce bit-identically under `==` on raw float64, largest absolute difference anywhere exactly 0.0; Route-L's headline re-derives unchanged (0.6623 flat at m=160, 3.3e-6 at m=320, load-bearing bending gain 9.724454); all module suites green. IMMUNITY: 1682 permutations across 15 banked ladders all return ONE verdict (post-repair worst gain ratio exactly 1.0), where the pre-repair positional read spread by up to 3795.25x on the same rows and flipped `flat` on the ladder Route-L's headline rests on. The protecting margin goes from leg 243's 0.0 to structural.",
+  "what_this_does_not_say": "It does not touch `krylov_ladder`, any call site, or any banked number -- nothing is re-run and nothing is re-banked, because nothing moved. It does not repair `attribution_summary`'s remaining `ladders['full'][-1]` positional read (G6): that line is outside this leg's declared territory, feeds only the `worse_than_full` boolean side-column, and no published magnitude or headline component reads it -- it is measured and handed on, not edited. No link of the L1->L4 chain moved; Clay odds unchanged at ~0.05%.",
+  "postrepair_check_recommended": "light -- one postrepair suite pinning order-immunity as a property (permutation battery on a synthetic ladder) plus the ambiguous-duplicate-m refusal, matching the repair-family precedent of legs 128/166/200",
+  "wall_clock_seconds": 20.57
+}

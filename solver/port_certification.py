@@ -300,8 +300,41 @@ def krylov_ladder(matvec, b, dims=(10, 20, 40, 80, 160)):
 
 
 def stall_verdict(rows):
-    """Flat-or-bending, as a magnitude: how much does 16x the Krylov work buy?"""
-    first, last = rows[0], rows[-1]
+    """Flat-or-bending, as a magnitude: how much does 16x the Krylov work buy?
+
+    **THE TWO ROWS ARE SELECTED BY `m`, NOT BY POSITION (leg 244).**  Until this repair the
+    function read `rows[0]` and `rows[-1]`, so the verdict was a property of how the caller
+    happened to store the array rather than of the measurement.  Every banked ladder is
+    stored ascending in `m`, so no published number was ever wrong -- but the margin was
+    exactly `0.0` (leg 243): reverse Route-L's `full transport line sweep` ladder and the
+    residual gain reads 0.1028 (flat) instead of 9.7245 (bending), a 94.56x error that flips
+    the verdict the Route-L headline rests on, and an arbitrary shuffle flips it too.
+    Keying on `m` makes the verdict a function of the DATA, so every permutation of the same
+    rows returns the same answer and the correctness stops being incidental.
+
+    `m` is the Krylov dimension, so it is the ladder's own parameter and it is already
+    carried in every row `krylov_ladder` emits -- no caller and no call site has to change,
+    including the deep rung's inline `dims=(240, 320)`.
+
+    Two rows sharing an `m` but disagreeing on `rel_residual` is a malformed ladder: there is
+    no order-free way to say which one the verdict means, so this raises rather than silently
+    picking one (lesson 58 -- do not manufacture an answer the data does not contain).
+    Duplicated rows that agree exactly are harmless and are accepted.
+    """
+    rows = list(rows)
+    if not rows:
+        raise ValueError("stall_verdict needs at least one ladder row; got an empty ladder")
+    by_m = {}
+    for r in rows:
+        m = r["m"]
+        seen = by_m.get(m)
+        if seen is not None and seen["rel_residual"] != r["rel_residual"]:
+            raise ValueError(
+                "ambiguous ladder: m = %r appears twice with different rel_residual "
+                "(%r and %r), so the verdict is not a function of the data" % (
+                    m, seen["rel_residual"], r["rel_residual"]))
+        by_m[m] = r
+    first, last = by_m[min(by_m)], by_m[max(by_m)]
     gain = first["rel_residual"] / last["rel_residual"]
     return {"rel_at_min_dim": first["rel_residual"], "min_dim": first["m"],
             "rel_at_max_dim": last["rel_residual"], "max_dim": last["m"],
