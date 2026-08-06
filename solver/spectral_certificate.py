@@ -537,6 +537,148 @@ def fredholm_sides(K=64, M=3136):
 
 
 # --------------------------------------------------------------------------
+# ROUTE NG -- the no-go as a PROPOSITION, made executable (leg 58)
+#
+# `fredholm_sides` above already measures the two facts this section stands on: the
+# tail kernel decays like m^-2, so it is IN l^1_w exactly when s < 1.  That much is
+# leg 51's and is not claimed here.  What is added is the consequence for the
+# APPROXIMATE INVERSE, which no earlier leg wrote down: an operator whose tail block
+# has a kernel IN THE SPACE admits no block-upper-triangular approximate inverse at
+# all, whatever the finite block and whatever the tail solve.
+#
+# The class is
+#     A_upper(K) = { A = [[A11, A12], [0, A22]] : A11, A12, A22 arbitrary bounded }
+# which strictly contains the block-diagonal A the method conventionally uses (A12 = 0,
+# A22 = A_tail) and also `gs_upper`.  It does NOT contain `gs_lower`, `schur` or
+# `ff_lift`, all of which have A21 != 0 -- those stay MEASURED (leg 54's battery), not
+# proved, and every function here says so in its own docstring.
+# --------------------------------------------------------------------------
+def tail_kernel_defect(K, M, kind="flat", param=0.0, mu=0.0):
+    """`rho_M = ||T h||_w / ||h||_w` for the analytic tail kernel `h` -- the executable
+    form of the proposition's hypothesis (H2).
+
+    On the INFINITE tail the recursion in `tail_right_null` makes `T h = 0` exactly, so
+    the only nonzero rows of `T h` in the finite-M realization are the two truncation
+    boundary rows.  `rho_M` is therefore a pure truncation artifact and it is the
+    quantity the finite-M form of the bound pays: naming it keeps the two realizations
+    apart (lesson 70) instead of quietly proving one and quoting the other.
+
+    Returns the ratio.  It vanishes like `M^-(1-s)` for `mu = 0`, and is bounded AWAY
+    from zero for `mu > 0` -- which is the whole content of the sharpness control."""
+    Ts, w = _scaled_tail(K, M, kind, param, mu=mu)
+    h = tail_right_null(K, M) * w
+    nh = float(np.sum(np.abs(h)))
+    if nh == 0.0:
+        return float("nan")
+    return float(np.sum(np.abs(Ts @ h)) / nh)
+
+
+def kernel_membership_ladder(K=8, Ms=(256, 1024, 4096, 16384), kind="flat", param=0.0):
+    """Is the tail kernel IN `l^1_w`?  Reported as a LADDER, never as a verdict alone.
+
+    `fredholm_sides` derives `s < 1` from the fitted `m^-2` decay.  This function checks
+    the same claim the other way round -- by summing `|h_m| w_m` over a ladder of
+    truncations and reporting whether the partial sums settle -- so that the hypothesis
+    the proposition leans on is verified on the vector actually used, not inferred from
+    an exponent (the failure mode banked as "a growth rate you cite must be measured on
+    the matrix you actually built")."""
+    Ms = tuple(int(m) for m in Ms)
+    sums = []
+    for M in Ms:
+        h = tail_right_null(K, M)
+        m = np.arange(int(K) + 1, int(M) + 1, dtype=float)
+        if kind == "flat":
+            w = np.ones_like(m)
+        elif kind == "algebraic":
+            w = (1.0 + m) ** float(param)
+        elif kind == "geometric":
+            w = float(param) ** m
+        else:
+            raise ValueError(kind)
+        sums.append(float(np.sum(np.abs(h) * w)))
+    incr = [sums[i + 1] - sums[i] for i in range(len(sums) - 1)]
+    ratios = [incr[i + 1] / incr[i] if incr[i] else float("nan")
+              for i in range(len(incr) - 1)]
+    # THE DISCRIMINATOR IS THE INCREMENT RATIO, NOT THE PARTIAL SUM.  A partial sum that is
+    # still visibly rising says nothing -- at s = 0.7 the series converges (sum m^-1.3) but
+    # needs far more than 16384 modes to look like it.  What separates the cases cleanly is
+    # how the increment per step of the ladder behaves:
+    #     r < 1   the increments shrink geometrically   -> CONVERGES, h is in l^1_w
+    #     r ~ 1   the increments are constant           -> LOGARITHMICALLY DIVERGENT (s = 1)
+    #     r > 1   the increments grow                   -> POWER DIVERGENT (s > 1)
+    # Reporting `r` as a magnitude rather than a settled/not-settled boolean is the whole
+    # of discipline "report a magnitude, never a boolean" applied to a convergence test.
+    r = float(ratios[-1]) if ratios else float("nan")
+    if not np.isfinite(r):
+        verdict = "indeterminate"
+    elif r < 0.95:
+        verdict = "converges"
+    elif r < 1.05:
+        verdict = "log_divergent"
+    else:
+        verdict = "power_divergent"
+    tail_estimate = (sums[-1] + incr[-1] * r / (1.0 - r)
+                     if verdict == "converges" else float("inf"))
+    return {"K": int(K), "M": list(Ms), "class": kind, "param": float(param),
+            "partial_norm": sums, "increment": incr, "increment_ratio": ratios,
+            "last_increment_ratio": r, "verdict": verdict,
+            "geometric_limit_estimate": float(tail_estimate),
+            "in_l1_w": bool(verdict == "converges"),
+            "note": ("The verdict is read off the INCREMENT RATIO, so a slowly-converging "
+                     "case (s = 0.7) is not mistaken for a divergent one.  It is still a "
+                     "statement about THIS ladder; the proof that the threshold is exactly "
+                     "s = 1 is the m^-2 decay in `fredholm_sides`, which is leg 51's.")}
+
+
+def block_upper_triangular_bound(rho, A22_norm, floor=0.0):
+    """THE PROPOSITION, as one line of arithmetic that can be checked against data.
+
+        for every A with A21 = 0:   Z1 = ||I - A L||_w  >=  1 - rho * ||A22||_w + floor
+
+    with `rho = tail_kernel_defect(...)` and `floor = ||A11 B h||_w / ||h||_w >= 0` the
+    additive term the Gamma-row block contributes on the same direction.  On the
+    infinite tail `rho = 0` and the bound is the unconditional `Z1 >= 1 + floor`.
+
+    Derivation, in full, because it is three lines.  Put `x = (0; h)`.  Then
+    `(I - A L) x = ( -(A11 B + A12 T) h ; h - A22 T h )`, and `T h = 0` kills BOTH the
+    `A12` term and the `A22` term.  Taking `l^1` norms,
+    `||(I-AL)x||_w >= ||A11 B h||_w + ||h||_w`, and dividing by `||x||_w = ||h||_w`
+    gives the result.  `A12` and `A22` never appear: that is why the class is strictly
+    larger than block-diagonal, and it is also exactly why the argument STOPS at
+    `A21 != 0`, where the term `h - A21 B h` becomes available to cancel.
+
+    NOT a bound on any A with A21 != 0.  For those, leg 54's battery is a MEASUREMENT
+    over seven shapes (best admissible 8.9591), and this repository has no proof."""
+    return float(1.0 - float(rho) * float(A22_norm) + float(floor))
+
+
+def nogo_hypotheses(K, M, kind="flat", param=0.0, mu=0.0):
+    """The proposition's hypotheses, each answered with a MAGNITUDE, never a boolean.
+
+    (H1) the split is finite-block `1..K` (+ auxiliaries) against tail `K+1..M`;
+    (H2) the tail block has a kernel in `l^1_w`   -> `kernel_norm`, `defect_ratio`;
+    (H3) `A` is bounded with `A21 = 0`            -> the caller's business.
+
+    (H2) is the only one that can fail, and the two numbers say how: `defect_ratio` is
+    how far the finite-M kernel is from exact, `kernel_norm` is the size of the vector
+    that certifies membership.  `mu > 0` is the case where (H2) fails outright."""
+    Ts, w = _scaled_tail(K, M, kind, param, mu=mu)
+    h = tail_right_null(K, M) * w
+    nh = float(np.sum(np.abs(h)))
+    sv = np.linalg.svd(Ts, compute_uv=False)
+    return {"K": int(K), "M": int(M), "class": kind, "param": float(param),
+            "mu": float(mu),
+            "kernel_norm_l1_w": nh,
+            "defect_ratio": tail_kernel_defect(K, M, kind, param, mu=mu),
+            "sigma_min": float(sv[-1]), "sigma_2": float(sv[-2]),
+            "H2_holds_on_the_infinite_tail": bool(mu == 0.0 and float(param) < 1.0),
+            "H2_scope": ("mu = 0 and s < 1.  At s >= 1 the kernel leaves l^1_w "
+                         "(fredholm_sides) and at mu > 0 there is no kernel at all -- "
+                         "the second is the sharpness control, the first is the "
+                         "exponent leg 51 already banned for a different reason.")}
+
+
+# --------------------------------------------------------------------------
 # the positive control
 # --------------------------------------------------------------------------
 def dissipative_control(Ks=(32, 64, 128, 256), mus=(0.0, 0.1, 0.5, 1.0),

@@ -309,6 +309,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_port_v1_bordered_evidence.py",     # fig59 -- Route-PORT v1 (leg 46)
     "../experiments/p2_route_port_v2_reach_evidence.py",        # fig60 -- Route-PORT v2 (leg 47)
     "../experiments/p2_route_cp_v1_cadiot_evidence.py",         # fig56 -- Route-CP v1 (leg 62)
+    "../experiments/p2_route_ng_v1_nogo_evidence.py",           # fig55 -- Route-NG v1 (leg 58)
 ]
 
 

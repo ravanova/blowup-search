@@ -6,10 +6,20 @@ diagonal, the divergence is mathematics and not float, and the positive control 
 report "bounded".
 """
 
+import os
 import sys
 from fractions import Fraction
 
-import numpy as np
+# Pin BLAS to one thread BEFORE numpy is imported.  These gates invert and decompose dense
+# matrices of a few thousand rows; on a loaded machine a multi-threaded LAPACK thrashes
+# badly (a 1100x1100 `inv` measured 11.07s against 0.71s single-threaded), which is what
+# turns this file from a fast gate into a slow one.  It also fixes the reduction order, so
+# the printed digits do not depend on how many cores happened to be free.
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
+import numpy as np                                                     # noqa: E402
 
 sys.path.insert(0, ".")
 
@@ -22,6 +32,8 @@ from solver.spectral_certificate import (
     velocity_constant_terms, weight_window, weighted_l1_opnorm, weight_vector,
     bordered_tail_inverse_norm, fredholm_sides, tail_left_null, tail_right_null,
     tail_singular_pair,
+    block_upper_triangular_bound, kernel_membership_ladder, nogo_hypotheses,
+    tail_kernel_defect,
 )
 
 PASS, FAIL = "PASS", "FAIL"
@@ -281,6 +293,75 @@ gate("the dilation zero mode is exactly e_2",
      float(np.max(np.abs((_F @ _e2)[:32]))) == 0.0,
      f"||L e_2||_inf over the unbordered rows = "
      f"{float(np.max(np.abs((_F @ _e2)[:32]))):.1e} (exactly zero)")
+
+
+# --------------------------------------------------------------------------
+# ROUTE NG (leg 58) -- the gates the PROPOSITION rests on.  If any of 27-31 fails,
+# Proposition NG is false and its writeups must be withdrawn, not softened.
+# --------------------------------------------------------------------------
+
+# 27 -- (H2) the tail kernel is IN l^1_w exactly where fredholm_sides says it is.  The
+# proposition is UNCONDITIONAL for s < 1 and has no content at s >= 1; both halves are
+# gated, because a hypothesis that cannot fail is not a hypothesis.
+_in_space = kernel_membership_ladder(8, (256, 1024, 4096, 16384), "flat", 0.0)
+_in_space_03 = kernel_membership_ladder(8, (256, 1024, 4096, 16384), "algebraic", 0.3)
+_out_10 = kernel_membership_ladder(8, (256, 1024, 4096, 16384), "algebraic", 1.0)
+_out_15 = kernel_membership_ladder(8, (256, 1024, 4096, 16384), "algebraic", 1.5)
+_slow = kernel_membership_ladder(8, (256, 1024, 4096, 16384), "algebraic", 0.7)
+gate("the tail kernel is in l^1_w for s < 1 (INCLUDING the slow case s = 0.7) and not for "
+     "s >= 1",
+     _in_space["in_l1_w"] and _in_space_03["in_l1_w"] and _slow["in_l1_w"]
+     and _out_10["verdict"] == "log_divergent"
+     and _out_15["verdict"] == "power_divergent",
+     f"increment ratio -> verdict: s=0 {_in_space['last_increment_ratio']:.3f} converges "
+     f"(norm {_in_space['partial_norm'][-1]:.4f}), s=0.3 "
+     f"{_in_space_03['last_increment_ratio']:.3f} converges "
+     f"(norm {_in_space_03['partial_norm'][-1]:.4f}), s=0.7 "
+     f"{_slow['last_increment_ratio']:.3f} converges to ~"
+     f"{_slow['geometric_limit_estimate']:.1f} though its partial sum "
+     f"({_slow['partial_norm'][-1]:.1f} at M=16384) still looks like it is rising, "
+     f"s=1 {_out_10['last_increment_ratio']:.3f} log-divergent, s=1.5 "
+     f"{_out_15['last_increment_ratio']:.3f} power-divergent -- the s < 1 threshold of "
+     f"fredholm_sides, checked on the vector rather than inferred from the exponent")
+
+# 28 -- the finite-M defect is a TRUNCATION artifact and vanishes; on the infinite tail
+# T h = 0 exactly.  This is what lets the finite-M measurement stand for the operator.
+_rho = [tail_kernel_defect(8, 8 + e, "flat", 0.0) for e in (128, 256, 512, 1024, 2048)]
+_slope = float(np.polyfit(np.log([128, 256, 512, 1024, 2048]), np.log(_rho), 1)[0])
+gate("the kernel defect rho_M vanishes like M^-1 in the flat class",
+     _rho[-1] < _rho[0] and abs(_slope + 1.0) < 0.05,
+     f"rho_M = {_rho[0]:.3e} -> {_rho[-1]:.3e} over M-K = 128..2048, fitted M^({_slope:+.4f}) "
+     f"-- an edge effect of the truncation, not a defect of the kernel")
+
+# 29 -- the defect does NOT vanish once mu > 0: that is the sharpness control's mechanism,
+# and it is the reason the mu > 0 measurement can come out the other way (lesson 90).
+_rho_mu = [tail_kernel_defect(8, 8 + e, "flat", 0.0, mu=2.0)
+           for e in (128, 256, 512, 1024, 2048)]
+gate("mu = 2 destroys the kernel: the defect GROWS instead of vanishing",
+     _rho_mu[-1] > _rho_mu[0] and min(_rho_mu) > 1.0,
+     f"rho_M(mu=2) = {_rho_mu[0]:.4f} -> {_rho_mu[-1]:.4f} over the same ladder "
+     f"(growing, and never below 1), against {_rho[0]:.3e} -> {_rho[-1]:.3e} at mu = 0 "
+     f"-- a factor {_rho_mu[-1] / _rho[-1]:.3g} apart at M-K = 2048")
+
+# 30 -- the bound is arithmetic and reduces to Z1 >= 1 on the infinite tail.  Gated so the
+# proposition's one line cannot be silently edited.
+gate("block_upper_triangular_bound is Z1 >= 1 + floor when rho = 0",
+     block_upper_triangular_bound(0.0, 1e9, 0.0) == 1.0
+     and block_upper_triangular_bound(0.0, 1e9, 2.5) == 3.5
+     and abs(block_upper_triangular_bound(0.01, 20.0, 0.0) - 0.8) < 1e-12,
+     "rho=0 gives 1 for ANY ||A22|| (1e9 tested), 1+floor with a floor, and the "
+     "finite-M form 1 - rho*||A22|| otherwise -- A12 never appears, which is why the "
+     "class is larger than block-diagonal")
+
+# 31 -- the hypotheses report MAGNITUDES and the mu dial flips H2.  A boolean-only
+# hypothesis check would hide the two orders of magnitude that do the work.
+_h0 = nogo_hypotheses(16, 16 + 1024, "algebraic", 0.3, mu=0.0)
+_h2 = nogo_hypotheses(16, 16 + 1024, "algebraic", 0.3, mu=2.0)
+gate("nogo_hypotheses separates mu = 0 from mu = 2 by orders of magnitude",
+     _h0["H2_holds_on_the_infinite_tail"] and not _h2["H2_holds_on_the_infinite_tail"]
+     and _h2["sigma_min"] > 100.0 * _h0["sigma_min"],
+     f"sigma_min(T): {_h0['sigma_min']:.4e} at mu=0 vs {_h2['sigma_min']:.4e} at mu=2 "
+     f"({_h2['sigma_min'] / _h0['sigma_min']:.0f}x); kernel norm {_h0['kernel_norm_l1_w']:.4f}")
 
 
 n_fail = sum(1 for s, _, _ in results if s == FAIL)
