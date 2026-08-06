@@ -1,0 +1,841 @@
+{
+  "leg": 124,
+  "route": "ROUTE-FSA",
+  "target": "solver/finite_support.py",
+  "gate": "Under an adversarial battery of degenerate or poisoned inputs, does solver/finite_support.py ever silently return a wrong result instead of flagging the input?",
+  "target_module_edited": false,
+  "G1_known_answer_positive_control": {
+    "identity": "(1/pi) pv INT sqrt(1-y^2) U_{n-1}(y)/(x-y) dy = T_n(x)",
+    "source": "solver/finite_support.py lines 85-89 (specified, never implemented)",
+    "p": 0.5,
+    "K": 5,
+    "n_eval_points": 8,
+    "max_abs_err_N8000": 1.4160280947805859e-08,
+    "max_abs_err_per_mode": [
+      1.1408387276534704e-08,
+      1.1589281229129611e-08,
+      1.2124725778939194e-08,
+      1.2993305875674821e-08,
+      1.4160280947805859e-08
+    ],
+    "max_abs_err_vs_N": {
+      "500": 3.6250657640124473e-06,
+      "1000": 9.062598631537355e-07,
+      "2000": 2.2656455445080326e-07,
+      "4000": 5.664110735992267e-08,
+      "8000": 1.4160280947805859e-08
+    },
+    "verdict": "PASS -- the finite-support Hilbert transform, the p.v. subtraction and the sign convention are pinned by an exact known answer"
+  },
+  "G2_clip_H1": {
+    "site": "solver/finite_support.py:115  np.arccos(np.clip(v, -1.0, 1.0))",
+    "n_points_outside": 6,
+    "max_dev_of_returned_from_its_value_at_v_eq_1": 0.0,
+    "n_returning_exactly_the_v_eq_1_value": 6,
+    "max_rel_err_vs_exact_recurrence": 1.0,
+    "max_abs_err_vs_exact_recurrence": 4.995001749750012e+19,
+    "eval_points": [
+      1.000000000001,
+      1.01,
+      1.5,
+      3.0,
+      50.0,
+      -7.0
+    ],
+    "per_point": {
+      "1": {
+        "returned_T2": 1.0,
+        "exact_T2": 1.0000000000040004,
+        "abs_err_T2": 4.000355602329364e-12,
+        "max_rel_err_over_modes": 1.0000889004823232e-10
+      },
+      "1.01": {
+        "returned_T2": 1.0,
+        "exact_T2": 1.0402,
+        "abs_err_T2": 0.040200000000000014,
+        "max_rel_err_over_modes": 0.5404221005481459
+      },
+      "1.5": {
+        "returned_T2": 1.0,
+        "exact_T2": 3.5,
+        "abs_err_T2": 2.5,
+        "max_rel_err_over_modes": 0.999867786077874
+      },
+      "3": {
+        "returned_T2": 1.0,
+        "exact_T2": 17.0,
+        "abs_err_T2": 16.0,
+        "max_rel_err_over_modes": 0.9999999557904302
+      },
+      "50": {
+        "returned_T2": 1.0,
+        "exact_T2": 4999.0,
+        "abs_err_T2": 4998.0,
+        "max_rel_err_over_modes": 1.0
+      },
+      "-7": {
+        "returned_T2": 1.0,
+        "exact_T2": 97.0,
+        "abs_err_T2": 96.0,
+        "max_rel_err_over_modes": 0.9999999999927208
+      }
+    },
+    "n_warnings_from_even_cheb_itself": 0,
+    "note": "every |v| > 1 is silently evaluated AT v = 1 (deviation exactly 0.0), with no exception and no warning from even_cheb itself"
+  },
+  "G3_out_of_support_H2": {
+    "site": "solver/finite_support.py:157-162, 347  (1 - v**2) ** p on the UNCLIPPED v",
+    "truth_outside_support": "Omega == 0 exactly (module docstring lines 50-53)",
+    "eval_points": [
+      1.01,
+      1.1,
+      1.5,
+      2.0,
+      5.0
+    ],
+    "n_values_of_a_probed": 10,
+    "n_a_silently_fabricating": 5,
+    "n_a_flagged_by_nan": 5,
+    "silent_set": "a = 1/n for integer n (p integer): the fractional power never goes complex",
+    "worst_fabricated_value": 7962624.0,
+    "grid_independence_at_a_0p5_v_2p0": {
+      "K6_N400": -9.0,
+      "K6_N1600": -9.0,
+      "K12_N400": -9.0,
+      "K12_N1600": -9.0,
+      "K24_N400": -9.0,
+      "K24_N1600": -9.0
+    },
+    "grid_spread_rel": 0.0,
+    "per_a": [
+      {
+        "a": 1.0,
+        "p": 1.0,
+        "p_is_integer": true,
+        "returned_Omega_outside": [
+          0.020100000000000007,
+          0.2100000000000002,
+          1.25,
+          3.0,
+          24.0
+        ],
+        "truth": 0.0,
+        "all_finite": true,
+        "max_abs_returned": 24.0,
+        "ratio_to_gauge_amplitude": 24.0,
+        "sign_matches_interior": false,
+        "n_warnings_during_construction": 1,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.5,
+        "p": 2.0,
+        "p_is_integer": true,
+        "returned_Omega_outside": [
+          -0.0004040100000000003,
+          -0.04410000000000008,
+          -1.5625,
+          -9.0,
+          -576.0
+        ],
+        "truth": 0.0,
+        "all_finite": true,
+        "max_abs_returned": 576.0,
+        "ratio_to_gauge_amplitude": 576.0,
+        "sign_matches_interior": true,
+        "n_warnings_during_construction": 1,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.3333333333333333,
+        "p": 3.0,
+        "p_is_integer": true,
+        "returned_Omega_outside": [
+          8.120601000000008e-06,
+          0.009261000000000024,
+          1.953125,
+          27.0,
+          13824.0
+        ],
+        "truth": 0.0,
+        "all_finite": true,
+        "max_abs_returned": 13824.0,
+        "ratio_to_gauge_amplitude": 13824.0,
+        "sign_matches_interior": false,
+        "n_warnings_during_construction": 1,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.25,
+        "p": 4.0,
+        "p_is_integer": true,
+        "returned_Omega_outside": [
+          -1.632240801000002e-07,
+          -0.0019448100000000069,
+          -2.44140625,
+          -81.0,
+          -331776.0
+        ],
+        "truth": 0.0,
+        "all_finite": true,
+        "max_abs_returned": 331776.0,
+        "ratio_to_gauge_amplitude": 331776.0,
+        "sign_matches_interior": true,
+        "n_warnings_during_construction": 1,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.2,
+        "p": 5.0,
+        "p_is_integer": true,
+        "returned_Omega_outside": [
+          3.2808040100100055e-09,
+          0.0004084101000000018,
+          3.0517578125,
+          243.0,
+          7962624.0
+        ],
+        "truth": 0.0,
+        "all_finite": true,
+        "max_abs_returned": 7962624.0,
+        "ratio_to_gauge_amplitude": 7962624.0,
+        "sign_matches_interior": false,
+        "n_warnings_during_construction": 1,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.3,
+        "p": 3.3333333333333335,
+        "p_is_integer": false,
+        "returned_Omega_outside": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "truth": 0.0,
+        "all_finite": false,
+        "max_abs_returned": null,
+        "ratio_to_gauge_amplitude": null,
+        "sign_matches_interior": null,
+        "n_warnings_during_construction": 4,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.35,
+        "p": 2.857142857142857,
+        "p_is_integer": false,
+        "returned_Omega_outside": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "truth": 0.0,
+        "all_finite": false,
+        "max_abs_returned": null,
+        "ratio_to_gauge_amplitude": null,
+        "sign_matches_interior": null,
+        "n_warnings_during_construction": 4,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.7,
+        "p": 1.4285714285714286,
+        "p_is_integer": false,
+        "returned_Omega_outside": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "truth": 0.0,
+        "all_finite": false,
+        "max_abs_returned": null,
+        "ratio_to_gauge_amplitude": null,
+        "sign_matches_interior": null,
+        "n_warnings_during_construction": 4,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 0.9,
+        "p": 1.1111111111111112,
+        "p_is_integer": false,
+        "returned_Omega_outside": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "truth": 0.0,
+        "all_finite": false,
+        "max_abs_returned": null,
+        "ratio_to_gauge_amplitude": null,
+        "sign_matches_interior": null,
+        "n_warnings_during_construction": 4,
+        "n_warnings_in_the_fields_call_itself": 0
+      },
+      {
+        "a": 1.2,
+        "p": 0.8333333333333334,
+        "p_is_integer": false,
+        "returned_Omega_outside": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "truth": 0.0,
+        "all_finite": false,
+        "max_abs_returned": null,
+        "ratio_to_gauge_amplitude": null,
+        "sign_matches_interior": null,
+        "n_warnings_during_construction": 4,
+        "n_warnings_in_the_fields_call_itself": 0
+      }
+    ]
+  },
+  "G4_node_collision_H3": {
+    "site": "solver/finite_support.py:178  d = np.where(np.abs(d) < 1e-300, 1e-300, d)",
+    "colliding_point": 0.2643016315870012,
+    "N": 400,
+    "rel_err_of_the_colliding_evaluation": 0.008944423443391181,
+    "rel_err_of_a_point_1e-7_away": 2.121893618848708e-06,
+    "n_warnings_from_the_colliding_evaluation_itself": 0,
+    "amplification": 4215.302484506375,
+    "n_collisions_among_module_default_collocation_nodes": 0,
+    "note": "the floor turns the singular divided difference into exactly 0/1e-300 = 0, dropping the term instead of flagging it; the module's own default node sets never collide, so this is reachable only through the public FiniteSupportOps(v_eval=...) entry point"
+  },
+  "G5_log_endpoints_H4": {
+    "v_eq_0": {
+      "finite": false,
+      "n_warnings": 0,
+      "warnings": [],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "v_eq_1": {
+      "finite": true,
+      "n_warnings": 1,
+      "warnings": [
+        "invalid value encountered in multiply"
+      ],
+      "values": [
+        0.4244139996985306,
+        -0.2546487270760073,
+        0.03637909082686114,
+        0.004041212171771004
+      ]
+    },
+    "v_eq_interior": {
+      "finite": true,
+      "n_warnings": 0,
+      "warnings": [],
+      "values": [
+        0.6476464149945629,
+        -0.6633545708845504,
+        0.5007534282286905,
+        0.0009182943768804916
+      ]
+    },
+    "verdict": "v=0 is FLAGGED: the return is non-finite (+-inf), so nothing plausible is fabricated -- but note it carries NO warning, because log(0) = -inf under the errstate('divide') suppression is a valid inf rather than an invalid operation. v=1 is the reverse: it WARNS (0 * inf -> nan in the multiply) and then returns a correct finite value, because the phi_v != 0 mask discards the nan. Neither is a silent wrong number, so H4 does NOT contribute to the gate."
+  },
+  "G6_converged_flag_H5_H6": {
+    "site_flag": "solver/finite_support.py:309-324  hist appended at loop TOP; converged = hist[-1] < 1e-8 while the break uses tol = 1e-12",
+    "K_ladder_at_a_0p5": [
+      {
+        "K": 1,
+        "collocation_rows": 0,
+        "unknowns": 2,
+        "equation_rows_present": false,
+        "reported_converged": true,
+        "reported_residual": 0.0,
+        "independent_residual_off_grid": 0.33079071619321737,
+        "amplification_independent_over_reported": null,
+        "Xc": 2.0409242510216288,
+        "iterations": 1,
+        "n_warnings": 1
+      },
+      {
+        "K": 2,
+        "collocation_rows": 1,
+        "unknowns": 3,
+        "equation_rows_present": true,
+        "reported_converged": true,
+        "reported_residual": 0.0,
+        "independent_residual_off_grid": 0.1906072326226449,
+        "amplification_independent_over_reported": null,
+        "Xc": 2.2086236165087296,
+        "iterations": 4,
+        "n_warnings": 1
+      },
+      {
+        "K": 3,
+        "collocation_rows": 2,
+        "unknowns": 4,
+        "equation_rows_present": true,
+        "reported_converged": false,
+        "reported_residual": 0.024369345362989958,
+        "independent_residual_off_grid": 0.6177663881092752,
+        "amplification_independent_over_reported": 25.350142931926477,
+        "Xc": 2.9666462097645847,
+        "iterations": 39,
+        "n_warnings": 1
+      },
+      {
+        "K": 4,
+        "collocation_rows": 3,
+        "unknowns": 5,
+        "equation_rows_present": true,
+        "reported_converged": true,
+        "reported_residual": 5.551115123125783e-17,
+        "independent_residual_off_grid": 0.18971276114652347,
+        "amplification_independent_over_reported": 3417561281627644.0,
+        "Xc": 2.6112455073104264,
+        "iterations": 6,
+        "n_warnings": 1
+      },
+      {
+        "K": 6,
+        "collocation_rows": 5,
+        "unknowns": 7,
+        "equation_rows_present": true,
+        "reported_converged": true,
+        "reported_residual": 2.774759588763942e-13,
+        "independent_residual_off_grid": 0.032712228441785104,
+        "amplification_independent_over_reported": 117892117840.58472,
+        "Xc": 2.415558158890514,
+        "iterations": 5,
+        "n_warnings": 1
+      },
+      {
+        "K": 8,
+        "collocation_rows": 7,
+        "unknowns": 9,
+        "equation_rows_present": true,
+        "reported_converged": true,
+        "reported_residual": 6.719139133970486e-13,
+        "independent_residual_off_grid": 0.013154498023446273,
+        "amplification_independent_over_reported": 19577653864.823296,
+        "Xc": 2.422871423595164,
+        "iterations": 5,
+        "n_warnings": 1
+      },
+      {
+        "K": 12,
+        "collocation_rows": 11,
+        "unknowns": 13,
+        "equation_rows_present": true,
+        "reported_converged": true,
+        "reported_residual": 3.3306690738754696e-15,
+        "independent_residual_off_grid": 1.2174005048275527,
+        "amplification_independent_over_reported": 365512297326801.3,
+        "Xc": 2.439636250664359,
+        "iterations": 7,
+        "n_warnings": 1
+      },
+      {
+        "K": 16,
+        "collocation_rows": 15,
+        "unknowns": 17,
+        "equation_rows_present": true,
+        "reported_converged": false,
+        "reported_residual": 0.6359083182126152,
+        "independent_residual_off_grid": 5.277241340422028,
+        "amplification_independent_over_reported": 8.298745572718849,
+        "Xc": 2.6332836945360554,
+        "iterations": 39,
+        "n_warnings": 1
+      },
+      {
+        "K": 24,
+        "collocation_rows": 23,
+        "unknowns": 25,
+        "equation_rows_present": true,
+        "reported_converged": false,
+        "reported_residual": 0.643595912287081,
+        "independent_residual_off_grid": 1.0423084231329658,
+        "amplification_independent_over_reported": 1.6195075251939075,
+        "Xc": 2.6703199205627945,
+        "iterations": 39,
+        "n_warnings": 1
+      }
+    ],
+    "n_K_reporting_converged": 6,
+    "n_K_total": 9,
+    "K_eq_1_degenerate": {
+      "collocation_rows": 0,
+      "reported_converged": true,
+      "reported_residual": 0.0,
+      "independent_residual": 0.33079071619321737,
+      "note": "with K = 1 the profile equation is evaluated at ZERO points: the square system is the gauge row plus the edge row, so the reported residual is exactly 0.0 and converged is True by construction"
+    },
+    "Xc_spread_among_self_reported_converged": {
+      "min": 2.0409242510216288,
+      "max": 2.6112455073104264,
+      "spread_rel": 0.2420228879426725,
+      "values_by_K": {
+        "1": 2.0409242510216288,
+        "2": 2.2086236165087296,
+        "4": 2.6112455073104264,
+        "6": 2.415558158890514,
+        "8": 2.422871423595164,
+        "12": 2.439636250664359
+      }
+    },
+    "stale_history_gap_a0p3_K16": 1.497063109257013e-06,
+    "stale_history_gap_max_iter_1": 0.023517760371964513,
+    "docstring_claim": "lines 22-31 say the module DOES NOT CONVERGE and reports residual 0.63 at a = 0.5; this battery makes no claim about whether it converges -- only about the honesty of the flag"
+  },
+  "G7_degenerate_construction_H7": {
+    "site": "solver/finite_support.py:250-259 -- no guard on a, K, N, c, n_int anywhere",
+    "a_cases": [
+      {
+        "arg": "a",
+        "value": 0.0,
+        "value_repr": "0.0",
+        "exception": "ZeroDivisionError",
+        "n_warnings": 0,
+        "constructed": false,
+        "p": null
+      },
+      {
+        "arg": "a",
+        "value": -0.5,
+        "value_repr": "-0.5",
+        "exception": null,
+        "n_warnings": 2,
+        "constructed": true,
+        "p": -2.0,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      },
+      {
+        "arg": "a",
+        "value": -1e-13,
+        "value_repr": "-1e-13",
+        "exception": null,
+        "n_warnings": 15,
+        "constructed": true,
+        "p": -10000000000000.0,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      },
+      {
+        "arg": "a",
+        "value": null,
+        "value_repr": "nan",
+        "exception": null,
+        "n_warnings": 0,
+        "constructed": true,
+        "p": "nan",
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      },
+      {
+        "arg": "a",
+        "value": null,
+        "value_repr": "inf",
+        "exception": null,
+        "n_warnings": 0,
+        "constructed": true,
+        "p": 0.0,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      },
+      {
+        "arg": "a",
+        "value": null,
+        "value_repr": "-inf",
+        "exception": null,
+        "n_warnings": 0,
+        "constructed": true,
+        "p": -0.0,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      },
+      {
+        "arg": "a",
+        "value": 1e-13,
+        "value_repr": "1e-13",
+        "exception": null,
+        "n_warnings": 1,
+        "constructed": true,
+        "p": 10000000000000.0,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": null,
+        "solve_residual_repr": "nan"
+      }
+    ],
+    "K_cases": [
+      {
+        "arg": "K",
+        "value": 1,
+        "exception": null,
+        "n_warnings": 1,
+        "constructed": true,
+        "n_collocation_nodes": 0,
+        "solve_exception": null,
+        "solve_converged": true,
+        "solve_residual": 0.0,
+        "Xc": 2.041160398185454
+      },
+      {
+        "arg": "K",
+        "value": 2,
+        "exception": null,
+        "n_warnings": 1,
+        "constructed": true,
+        "n_collocation_nodes": 1,
+        "solve_exception": null,
+        "solve_converged": true,
+        "solve_residual": 5.551115123125783e-17,
+        "Xc": 2.208899015848207
+      },
+      {
+        "arg": "K",
+        "value": 3,
+        "exception": null,
+        "n_warnings": 1,
+        "constructed": true,
+        "n_collocation_nodes": 2,
+        "solve_exception": null,
+        "solve_converged": false,
+        "solve_residual": 0.02554486400221523,
+        "Xc": 2.9389958765569704
+      },
+      {
+        "arg": "K",
+        "value": 0,
+        "exception": null,
+        "n_warnings": 0,
+        "constructed": true,
+        "n_collocation_nodes": 0,
+        "solve_exception": "IndexError",
+        "solve_converged": null,
+        "solve_residual": null,
+        "Xc": null
+      }
+    ],
+    "n_a_cases": 7,
+    "n_a_raising": 1,
+    "n_a_constructed_silently": 3,
+    "worst": "a = inf constructs silently with p = 0.0, i.e. the algebraic edge zero (1-v^2)^p is replaced by the constant 1 and the ansatz the whole module is built on is gone, with no exception and no warning"
+  },
+  "G8_poisoned_state_H9": {
+    "site": "every evaluation entry point -- no input validation anywhere in the module",
+    "n_entry_points": 6,
+    "n_poisoned_cases": 7,
+    "table": {
+      "clean": {
+        "system": "finite",
+        "system_jacobian": "finite",
+        "operator_norm": "finite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "finite"
+      },
+      "nan_in_b": {
+        "system": "nonfinite",
+        "system_jacobian": "nonfinite",
+        "operator_norm": "nonfinite",
+        "profile_values": "nonfinite",
+        "gauge": "nonfinite",
+        "edge_condition": "nonfinite",
+        "_silently_finite_entry_points": []
+      },
+      "inf_in_b": {
+        "system": "nonfinite",
+        "system_jacobian": "nonfinite",
+        "operator_norm": "nonfinite",
+        "profile_values": "nonfinite",
+        "gauge": "nonfinite",
+        "edge_condition": "nonfinite",
+        "_silently_finite_entry_points": []
+      },
+      "nan_Xc": {
+        "system": "nonfinite",
+        "system_jacobian": "nonfinite",
+        "operator_norm": "nonfinite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "nonfinite",
+        "_silently_finite_entry_points": [
+          "profile_values",
+          "gauge"
+        ]
+      },
+      "inf_Xc": {
+        "system": "nonfinite",
+        "system_jacobian": "nonfinite",
+        "operator_norm": "nonfinite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "nonfinite",
+        "_silently_finite_entry_points": [
+          "profile_values",
+          "gauge"
+        ]
+      },
+      "negative_Xc": {
+        "system": "finite",
+        "system_jacobian": "finite",
+        "operator_norm": "finite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "finite",
+        "_silently_finite_entry_points": [
+          "system",
+          "system_jacobian",
+          "operator_norm",
+          "profile_values",
+          "gauge",
+          "edge_condition"
+        ]
+      },
+      "zero_Xc": {
+        "system": "finite",
+        "system_jacobian": "finite",
+        "operator_norm": "nonfinite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "finite",
+        "_silently_finite_entry_points": [
+          "system",
+          "system_jacobian",
+          "profile_values",
+          "gauge",
+          "edge_condition"
+        ]
+      },
+      "huge_b": {
+        "system": "nonfinite",
+        "system_jacobian": "nonfinite",
+        "operator_norm": "nonfinite",
+        "profile_values": "finite",
+        "gauge": "finite",
+        "edge_condition": "finite",
+        "_silently_finite_entry_points": [
+          "profile_values",
+          "gauge",
+          "edge_condition"
+        ]
+      }
+    },
+    "n_poisoned_entrypoint_pairs_returning_a_FINITE_number": 18,
+    "n_poisoned_entrypoint_pairs_total": 42,
+    "note": "nan/inf in the coefficient vector PROPAGATE (good); a negative or zero support radius does NOT -- X_c < 0 is physically impossible and every entry point accepts it"
+  },
+  "G9_operator_norm_H8": {
+    "site": "solver/finite_support.py:336-342  np.linalg.inv(M), no rank or condition test; this is the module's declared KILL SWITCH",
+    "clean_states": [
+      {
+        "K": 4,
+        "cond_of_jacobian": 630.8677193372714,
+        "operator_norm_returned_finite": true,
+        "exception": null,
+        "n_warnings": 0,
+        "reported_converged": true
+      },
+      {
+        "K": 8,
+        "cond_of_jacobian": 46239.056199841536,
+        "operator_norm_returned_finite": true,
+        "exception": null,
+        "n_warnings": 0,
+        "reported_converged": true
+      },
+      {
+        "K": 12,
+        "cond_of_jacobian": 815214.8958220191,
+        "operator_norm_returned_finite": true,
+        "exception": null,
+        "n_warnings": 0,
+        "reported_converged": true
+      },
+      {
+        "K": 16,
+        "cond_of_jacobian": 35881136023.77312,
+        "operator_norm_returned_finite": true,
+        "exception": null,
+        "n_warnings": 0,
+        "reported_converged": false
+      }
+    ],
+    "degenerate_Xc": {
+      "1e-14": {
+        "cond": 2556.491303843696,
+        "cond_repr": "2556.491303843696",
+        "returned": 408184850204329.3,
+        "exception": null,
+        "n_warnings": 0
+      },
+      "0.0": {
+        "cond": 2556.4913038439163,
+        "cond_repr": "2556.4913038439163",
+        "returned": null,
+        "exception": null,
+        "n_warnings": 2
+      },
+      "-1.0": {
+        "cond": 2882.2368252973456,
+        "cond_repr": "2882.2368252973456",
+        "returned": 34.838848662670216,
+        "exception": null,
+        "n_warnings": 0
+      }
+    },
+    "note": "no value of ||A|| is reported by this leg -- only whether a number comes back at all, and the conditioning of the matrix it came from"
+  },
+  "G10_blast_radius": {
+    "importers_outside_this_leg": [],
+    "n_importers": 0,
+    "n_references_of_any_kind": 7,
+    "references": [
+      "./solver/first_integral.py:69:  solver/finite_support.py is the direct build; it never converged.",
+      "./solver/advection_scope.py:75:property of the ansatz.  A parallel line of work (solver/finite_support.py) reads",
+      "./capabilities.py:357:     \"holds\": \"the profile on its own support (SUPERSEDES solver/finite_support.py)\",",
+      "./capabilities.py:535:    {\"module\": \"solver/finite_support.py\", \"object\": \"SUPERSEDED -- do not use\",",
+      "./test_capabilities.py:76:    src = (ROOT / \"solver\" / \"finite_support.py\").read_text()",
+      "./test_capabilities.py:78:        assert any(\"finite_support\" in c[\"module\"] for c in sup), \\",
+      "./test_capabilities.py:79:            \"solver/finite_support.py says SUPERSEDED but the index does not\""
+    ],
+    "capabilities_entry": "capabilities.py:535-538  object 'SUPERSEDED -- do not use', validated 'nothing'",
+    "verdict": "ZERO importers: every finding in this battery is a LATENT trap. No banked number in the repository is contaminated by any of it."
+  },
+  "summary": {
+    "positive_control_G1": "PASS -- the finite-support Hilbert transform, the p.v. subtraction and the sign convention are pinned by an exact known answer",
+    "positive_control_max_err": 1.4160280947805859e-08,
+    "silent_corruption_sites": [
+      "H1 even_cheb clip",
+      "H2 out-of-support fabrication (a = 1/n only)",
+      "H3 quadrature-node collision",
+      "H5 converged flag on a system with zero equation rows",
+      "H7 degenerate a accepted silently"
+    ],
+    "n_silent_corruption_sites": 5,
+    "gate_answer": "YES",
+    "action": "ESCALATE, DO NOT PATCH -- the module stays byte-identical to origin/main",
+    "blast_radius": "ZERO importers: every finding in this battery is a LATENT trap. No banked number in the repository is contaminated by any of it."
+  }
+}
