@@ -1,0 +1,2316 @@
+{
+  "leg": 203,
+  "route": "RSA",
+  "title": "Adversarial audit of solver/rescaled_spectrum.py",
+  "module_under_audit": "solver/rescaled_spectrum.py",
+  "module_edited": false,
+  "seed": 20260806,
+  "generated": "2026-08-06T21:33:31",
+  "S1_non_finite": {
+    "rows": [
+      {
+        "K": 16,
+        "slot": 0,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 0,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": Infinity
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 0,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": -Infinity
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 3,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 3,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 3,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 15,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 15,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 16,
+        "slot": 15,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 0,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 0,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": Infinity
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 0,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": -Infinity
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 3,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 3,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 3,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 31,
+        "poison": "nan",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 31,
+        "poison": "+inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "K": 32,
+        "slot": 31,
+        "poison": "-inf",
+        "residual": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "c_omega": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "jacobian_max": {
+          "outcome": "non_finite",
+          "value": NaN
+        },
+        "generator": {
+          "outcome": "non_finite",
+          "value": [
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "eigvals_of_generator": {
+          "outcome": "raised",
+          "exc": "LinAlgError",
+          "msg": "Array must not contain infs or NaNs"
+        },
+        "newton_from_poison": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      }
+    ],
+    "a_rows": [
+      {
+        "a": "nan",
+        "newton": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "a": "+inf",
+        "newton": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      },
+      {
+        "a": "-inf",
+        "newton": {
+          "outcome": "finite",
+          "value": {
+            "converged": false,
+            "reason": "singular Jacobian"
+          }
+        }
+      }
+    ],
+    "n_cases": 18,
+    "n_residual_non_finite": 18,
+    "n_generator_non_finite": 18,
+    "n_eigvals_raised": 18,
+    "n_newton_flagged": 18,
+    "n_a_flagged": 3,
+    "n_silently_erased": 0,
+    "verdict": "PASS",
+    "newton_reason_on_poison": "singular Jacobian",
+    "linalg_msg": "Array must not contain infs or NaNs"
+  },
+  "S2_degenerate_K": {
+    "degenerate": [
+      {
+        "K": 0,
+        "basis": {
+          "outcome": "finite",
+          "value": [
+            0,
+            0
+          ]
+        },
+        "anchor": {
+          "outcome": "raised",
+          "exc": "IndexError",
+          "msg": "index 0 is out of bounds for axis 0 with size 0"
+        }
+      },
+      {
+        "K": 1,
+        "basis": {
+          "outcome": "finite",
+          "value": [
+            1,
+            1
+          ]
+        },
+        "anchor": {
+          "outcome": "finite",
+          "value": [
+            -1.0
+          ]
+        }
+      },
+      {
+        "K": 2,
+        "basis": {
+          "outcome": "finite",
+          "value": [
+            2,
+            2
+          ]
+        },
+        "anchor": {
+          "outcome": "finite",
+          "value": [
+            -1.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "K": 3,
+        "basis": {
+          "outcome": "finite",
+          "value": [
+            3,
+            3
+          ]
+        },
+        "anchor": {
+          "outcome": "finite",
+          "value": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "K": -1,
+        "basis": {
+          "outcome": "raised",
+          "exc": "IndexError",
+          "msg": "index 1 is out of bounds for axis 0 with size 1"
+        },
+        "anchor": {
+          "outcome": "raised",
+          "exc": "IndexError",
+          "msg": "index 1 is out of bounds for axis 0 with size 1"
+        }
+      },
+      {
+        "K": -4,
+        "basis": {
+          "outcome": "raised",
+          "exc": "ValueError",
+          "msg": "negative dimensions are not allowed"
+        },
+        "anchor": {
+          "outcome": "raised",
+          "exc": "ValueError",
+          "msg": "negative dimensions are not allowed"
+        }
+      }
+    ],
+    "truncation": [
+      {
+        "requested": 3.7,
+        "got": 3,
+        "silent": true
+      },
+      {
+        "requested": 15.9,
+        "got": 15,
+        "silent": true
+      },
+      {
+        "requested": 96.9,
+        "got": 96,
+        "silent": true
+      },
+      {
+        "requested": 144.9999,
+        "got": 144,
+        "silent": true
+      },
+      {
+        "requested": 48.5,
+        "got": 48,
+        "silent": true
+      }
+    ],
+    "n_silent_truncations": 5,
+    "negative_K_exceptions": {
+      "-1": "IndexError",
+      "-4": "ValueError"
+    },
+    "negative_K_raises": true,
+    "K0_builds_empty": true
+  },
+  "S3_self_comparison": {
+    "rows": [
+      {
+        "K_coarse": 24,
+        "K_fine": 36,
+        "equal": false,
+        "n_total": 24,
+        "n_kept": 2,
+        "max_match_distance": 1.9984014443252818e-15,
+        "max_abs_imag_kept": 0.0,
+        "dist_to_exact": {
+          "to_0": 1.171745958096683e-17,
+          "to_minus1": 1.1102230246251565e-15
+        },
+        "seconds": 0.0
+      },
+      {
+        "K_coarse": 24,
+        "K_fine": 24,
+        "equal": true,
+        "n_total": 24,
+        "n_kept": 24,
+        "max_match_distance": 0.0,
+        "max_abs_imag_kept": 17.925092383503635,
+        "dist_to_exact": {
+          "to_0": 1.171745958096683e-17,
+          "to_minus1": 1.1102230246251565e-15
+        },
+        "seconds": 0.0
+      },
+      {
+        "K_coarse": 24,
+        "K_fine": 12,
+        "equal": false,
+        "n_total": 24,
+        "n_kept": 2,
+        "max_match_distance": 1.9984014443252818e-15,
+        "max_abs_imag_kept": 0.0,
+        "dist_to_exact": {
+          "to_0": 1.171745958096683e-17,
+          "to_minus1": 1.1102230246251565e-15
+        },
+        "seconds": 0.0
+      },
+      {
+        "K_coarse": 32,
+        "K_fine": 48,
+        "equal": false,
+        "n_total": 32,
+        "n_kept": 2,
+        "max_match_distance": 8.881784197001252e-16,
+        "max_abs_imag_kept": 0.0,
+        "dist_to_exact": {
+          "to_0": 1.7659982821804428e-16,
+          "to_minus1": 8.881784197001252e-16
+        },
+        "seconds": 0.0
+      },
+      {
+        "K_coarse": 32,
+        "K_fine": 32,
+        "equal": true,
+        "n_total": 32,
+        "n_kept": 32,
+        "max_match_distance": 0.0,
+        "max_abs_imag_kept": 25.35367584285018,
+        "dist_to_exact": {
+          "to_0": 1.7659982821804428e-16,
+          "to_minus1": 8.881784197001252e-16
+        },
+        "seconds": 0.0
+      },
+      {
+        "K_coarse": 48,
+        "K_fine": 72,
+        "equal": false,
+        "n_total": 48,
+        "n_kept": 2,
+        "max_match_distance": 3.1086244689504383e-15,
+        "max_abs_imag_kept": 0.0,
+        "dist_to_exact": {
+          "to_0": 2.53140060677566e-16,
+          "to_minus1": 1.7763568394002505e-15
+        },
+        "seconds": 0.01
+      },
+      {
+        "K_coarse": 48,
+        "K_fine": 48,
+        "equal": true,
+        "n_total": 48,
+        "n_kept": 48,
+        "max_match_distance": 0.0,
+        "max_abs_imag_kept": 40.462348217652156,
+        "dist_to_exact": {
+          "to_0": 2.53140060677566e-16,
+          "to_minus1": 1.7763568394002505e-15
+        },
+        "seconds": 0.0
+      }
+    ],
+    "n_kept_unequal": [
+      2
+    ],
+    "n_kept_equal": [
+      24,
+      32,
+      48
+    ],
+    "inflation_factor": 24.0,
+    "equal_K_match_distances": [
+      0.0
+    ],
+    "worst_spurious_imag_pair": 40.462348217652156,
+    "coarser_fine_grid_still_correct": true
+  },
+  "S4_continuation_skipped": {
+    "rows": [
+      {
+        "a_target": 0.3,
+        "da": 0.02,
+        "label": "correct: da > 0, a > 0",
+        "arange_size": 16,
+        "grid_degenerate": false,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -1.6311721381590831,
+            "alpha": 1.6311721381590831,
+            "residual": 0.013975628518336666,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 3.97
+      },
+      {
+        "a_target": 0.3,
+        "da": -0.02,
+        "label": "SIGN-MISMATCHED da",
+        "arange_size": 0,
+        "grid_degenerate": true,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -1.6306514141207753,
+            "alpha": 1.6306514141207753,
+            "residual": 0.013805168889937802,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 0.28
+      },
+      {
+        "a_target": 0.3,
+        "da": 5.0,
+        "label": "da >> a_target",
+        "arange_size": 1,
+        "grid_degenerate": false,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -1.6306514141207753,
+            "alpha": 1.6306514141207753,
+            "residual": 0.013805168889937802,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 0.42
+      },
+      {
+        "a_target": 0.5,
+        "da": 0.02,
+        "label": "correct: da > 0, a > 0",
+        "arange_size": 26,
+        "grid_degenerate": false,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -3.003842216631063,
+            "alpha": 3.003842216631063,
+            "residual": 0.004273661406381646,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 10.69
+      },
+      {
+        "a_target": 0.5,
+        "da": -0.02,
+        "label": "SIGN-MISMATCHED da",
+        "arange_size": 0,
+        "grid_degenerate": true,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": 0.987828181390787,
+            "alpha": -0.987828181390787,
+            "residual": 0.0182098819857683,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 0.43
+      },
+      {
+        "a_target": -0.3,
+        "da": -0.02,
+        "label": "correct: da < 0, a < 0",
+        "arange_size": 15,
+        "grid_degenerate": false,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -0.7403619771698249,
+            "alpha": 0.7403619771698249,
+            "residual": 0.002793724071336566,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 5.81
+      },
+      {
+        "a_target": -0.3,
+        "da": 0.02,
+        "label": "SIGN-MISMATCHED da",
+        "arange_size": 0,
+        "grid_degenerate": true,
+        "result": {
+          "outcome": "finite",
+          "value": {
+            "c_omega": -0.7397035529265679,
+            "alpha": 0.7397035529265679,
+            "residual": 0.0027964415701252146,
+            "converged": false,
+            "iterations": 120
+          }
+        },
+        "seconds": 0.25
+      }
+    ],
+    "da_zero": {
+      "outcome": "raised",
+      "exc": "ZeroDivisionError",
+      "msg": "float division by zero"
+    },
+    "K": 48,
+    "pairs": [
+      {
+        "a_target": 0.3,
+        "da_bad": -0.02,
+        "alpha_followed": 1.6311721381590831,
+        "alpha_skipped": 1.6306514141207753,
+        "abs_delta_alpha": 0.0005207240383078293,
+        "residual_followed": 0.013975628518336666,
+        "residual_skipped": 0.013805168889937802
+      },
+      {
+        "a_target": 0.5,
+        "da_bad": -0.02,
+        "alpha_followed": 3.003842216631063,
+        "alpha_skipped": -0.987828181390787,
+        "abs_delta_alpha": 3.99167039802185,
+        "residual_followed": 0.004273661406381646,
+        "residual_skipped": 0.0182098819857683
+      },
+      {
+        "a_target": -0.3,
+        "da_bad": 0.02,
+        "alpha_followed": 0.7403619771698249,
+        "alpha_skipped": 0.7397035529265679,
+        "abs_delta_alpha": 0.0006584242432570164,
+        "residual_followed": 0.002793724071336566,
+        "residual_skipped": 0.0027964415701252146
+      }
+    ],
+    "alpha_followed": 3.003842216631063,
+    "alpha_skipped": -0.987828181390787,
+    "abs_delta_alpha": 3.99167039802185,
+    "worst_a_target": 0.5,
+    "n_degenerate_grids": 3
+  },
+  "S5_flag_dropped": {
+    "source_checks": {
+      "spectrum": {
+        "mentions_converged": false,
+        "returns_residual": false
+      },
+      "converged_spectrum": {
+        "mentions_converged": false,
+        "returns_residual": true
+      }
+    },
+    "spectrum_body": "flow, out = continuation(a, K=K, da=da, **kw); eigvals(flow.generator(out['b']))",
+    "exact_spectrum": [
+      0.0,
+      -1.0
+    ],
+    "K": 48,
+    "true_spectrum_dist": {
+      "to_0": 2.53140060677566e-16,
+      "to_minus1": 1.7763568394002505e-15
+    },
+    "rows": [
+      {
+        "max_iter": 1,
+        "converged": false,
+        "residual": 0.2689569301461901,
+        "dist_to_exact": {
+          "to_0": 0.21616069997615286,
+          "to_minus1": 0.263186522637884
+        },
+        "max_real_part": 0.3437457757220175,
+        "n_right_half_plane": 44
+      },
+      {
+        "max_iter": 2,
+        "converged": false,
+        "residual": 0.19724752021765646,
+        "dist_to_exact": {
+          "to_0": 0.007803313738941994,
+          "to_minus1": 0.027485038201553014
+        },
+        "max_real_part": -0.007803313738941994,
+        "n_right_half_plane": 0
+      },
+      {
+        "max_iter": 3,
+        "converged": false,
+        "residual": 0.026216482145184572,
+        "dist_to_exact": {
+          "to_0": 6.616924018246892e-05,
+          "to_minus1": 0.00037604279264558116
+        },
+        "max_real_part": -6.616924018246892e-05,
+        "n_right_half_plane": 0
+      },
+      {
+        "max_iter": 5,
+        "converged": false,
+        "residual": 2.9990724736972396e-08,
+        "dist_to_exact": {
+          "to_0": 3.191779204936685e-12,
+          "to_minus1": 1.9506618542664e-13
+        },
+        "max_real_part": 1.5592771518413429e-09,
+        "n_right_half_plane": 0
+      },
+      {
+        "max_iter": 8,
+        "converged": true,
+        "residual": 1.0547118733938987e-15,
+        "dist_to_exact": {
+          "to_0": 3.5966937337002296e-16,
+          "to_minus1": 1.9984014443252818e-15
+        },
+        "max_real_part": 1.5987211554602254e-14,
+        "n_right_half_plane": 0
+      },
+      {
+        "max_iter": 120,
+        "converged": true,
+        "residual": 1.0547118733938987e-15,
+        "dist_to_exact": {
+          "to_0": 3.5966937337002296e-16,
+          "to_minus1": 1.9984014443252818e-15
+        },
+        "max_real_part": 1.5987211554602254e-14,
+        "n_right_half_plane": 0
+      }
+    ],
+    "worst_unconverged": {
+      "max_iter": 1,
+      "converged": false,
+      "residual": 0.2689569301461901,
+      "dist_to_exact": {
+        "to_0": 0.21616069997615286,
+        "to_minus1": 0.263186522637884
+      },
+      "max_real_part": 0.3437457757220175,
+      "n_right_half_plane": 44
+    },
+    "threshold_is_hardcoded_1e-8": true
+  },
+  "S6_exposure": {
+    "route_e_E5": [
+      {
+        "a": 0.0,
+        "residual_coarse": 1.1102230246251565e-16,
+        "residual_fine": 1.1102230246251565e-16,
+        "counts": {
+          "0.0001": 2,
+          "0.001": 2,
+          "0.01": 2,
+          "0.1": 16
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": false
+      },
+      {
+        "a": 0.1,
+        "residual_coarse": 0.0009919720681293431,
+        "residual_fine": 0.0006187112595323784,
+        "counts": {
+          "0.0001": 1,
+          "0.001": 2,
+          "0.01": 2,
+          "0.1": 16
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": true
+      },
+      {
+        "a": 0.2,
+        "residual_coarse": 0.0024595929626977475,
+        "residual_fine": 0.0013648486916822597,
+        "counts": {
+          "0.0001": 0,
+          "0.001": 0,
+          "0.01": 2,
+          "0.1": 10
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": true
+      },
+      {
+        "a": 0.3,
+        "residual_coarse": 0.003931392825101788,
+        "residual_fine": 0.0018844360060118477,
+        "counts": {
+          "0.0001": 0,
+          "0.001": 0,
+          "0.01": 0,
+          "0.1": 4
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": true
+      },
+      {
+        "a": 0.4,
+        "residual_coarse": 0.004625786080117253,
+        "residual_fine": 0.0017206595564562422,
+        "counts": {
+          "0.0001": 0,
+          "0.001": 0,
+          "0.01": 0,
+          "0.1": 4
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": true
+      },
+      {
+        "a": 0.5,
+        "residual_coarse": 3.318708519440042e-08,
+        "residual_fine": 2.869136338560195e-13,
+        "counts": {
+          "0.0001": 2,
+          "0.001": 2,
+          "0.01": 3,
+          "0.1": 3
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": false
+      },
+      {
+        "a": 0.55,
+        "residual_coarse": 0.011354572522960099,
+        "residual_fine": 0.0025309592664980313,
+        "counts": {
+          "0.0001": 0,
+          "0.001": 0,
+          "0.01": 0,
+          "0.1": 3
+        },
+        "n_unstable_converged": 0,
+        "above_1e-8": true
+      }
+    ],
+    "route_g_G4": [
+      {
+        "a": -1.0,
+        "K": 96,
+        "converged": false,
+        "residual": 0.002275196495084463,
+        "alpha": 0.48153343307236973,
+        "beta": 2.0766990022263103
+      },
+      {
+        "a": -1.5,
+        "K": 96,
+        "converged": false,
+        "residual": 0.0016365077101716669,
+        "alpha": 0.4090056432465816,
+        "beta": 2.4449540403947907
+      },
+      {
+        "a": -2.0,
+        "K": 96,
+        "converged": false,
+        "residual": 0.0012679669674414557,
+        "alpha": 0.3452757787037075,
+        "beta": 2.8962355939196445
+      },
+      {
+        "a": -2.5,
+        "K": 96,
+        "converged": false,
+        "residual": 9.09369479736924e-05,
+        "alpha": 0.31908429315945375,
+        "beta": 3.133968112621191
+      },
+      {
+        "a": -2.0,
+        "K": 144,
+        "converged": false,
+        "residual": 0.0005211853425580032,
+        "alpha": 0.365538088497793,
+        "beta": 2.7356930275298454
+      },
+      {
+        "a": -2.0,
+        "K": 192,
+        "converged": false,
+        "residual": 0.0006822592967596491,
+        "alpha": 0.36103067918794096,
+        "beta": 2.769847710031956
+      },
+      {
+        "a": -1.0,
+        "K": 144,
+        "converged": false,
+        "residual": 0.001896692904930733,
+        "alpha": 0.4777257652696547,
+        "beta": 2.093251134226652
+      }
+    ],
+    "n_route_e_rows_not_fixed_points": 5,
+    "n_route_e_rows": 7,
+    "n_route_g_rows_not_converged": 7,
+    "n_route_g_rows": 7,
+    "s4_call_sites": [
+      {
+        "site": "experiments/p2_route_e_v1_spectrum.py:393 e2_branch",
+        "a": ">= 0",
+        "da": "+0.02",
+        "s4_exposed": false
+      },
+      {
+        "site": "experiments/p2_route_e_v1_spectrum.py:396 e5_sweep",
+        "a": ">= 0",
+        "da": "+0.02",
+        "s4_exposed": false
+      },
+      {
+        "site": "experiments/p2_route_g_v1_collapse.py:383",
+        "a": "-1.0 .. -2.5",
+        "da": "-0.02",
+        "s4_exposed": false
+      },
+      {
+        "site": "solver/critical_dissipation.py:422",
+        "a": "caller",
+        "da": "+0.02 default",
+        "s4_exposed": false
+      }
+    ],
+    "s3_call_sites": [
+      {
+        "site": "test_rescaled_spectrum.py:132",
+        "K_coarse": 96,
+        "K_fine": 144,
+        "s3_exposed": false
+      },
+      {
+        "site": "experiments/p2_route_e_v1_spectrum.py:158 e5_sweep",
+        "K_coarse": 96,
+        "K_fine": 144,
+        "s3_exposed": false
+      },
+      {
+        "site": "experiments/p2_route_h_v1_critical.py:224",
+        "K_coarse": 96,
+        "K_fine": 144,
+        "s3_exposed": false
+      },
+      {
+        "site": "solver/critical_dissipation.py:576 defaults",
+        "K_coarse": 96,
+        "K_fine": 144,
+        "s3_exposed": false
+      }
+    ],
+    "s3_latent": true,
+    "s4_latent": true,
+    "s5_latent": false,
+    "origin_h2_downstream": false
+  },
+  "S7_planted": {
+    "K_coarse": 32,
+    "K_fine": 48,
+    "rows": [
+      {
+        "delta": 0.0,
+        "residual": 5.551115123125783e-17,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 1.7659982821804428e-16,
+          "to_minus1": 8.881784197001252e-16
+        },
+        "max_real_kept": 1.7659982821804428e-16
+      },
+      {
+        "delta": 1e-10,
+        "residual": 1.8981777261117827e-10,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 9.963175091032806e-11,
+          "to_minus1": 1.9948698248839491e-10
+        },
+        "max_real_kept": 9.963175091032806e-11
+      },
+      {
+        "delta": 1e-08,
+        "residual": 1.8981750671276387e-08,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 9.963144160658591e-09,
+          "to_minus1": 1.9949065510616037e-08
+        },
+        "max_real_kept": 9.963144160658591e-09
+      },
+      {
+        "delta": 1e-06,
+        "residual": 1.8981741096157911e-06,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 9.963150244233288e-07,
+          "to_minus1": 1.994906508651084e-06
+        },
+        "max_real_kept": 9.963150244233288e-07
+      },
+      {
+        "delta": 0.0001,
+        "residual": 0.0001898077726678049,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 9.963759600672766e-05,
+          "to_minus1": 0.00019949065073321393
+        },
+        "max_real_kept": 9.963759600672766e-05
+      },
+      {
+        "delta": 0.001,
+        "residual": 0.001897201520741576,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 0.0009969273029537908,
+          "to_minus1": 0.001994906507344796
+        },
+        "max_real_kept": 0.0009969273029537908
+      },
+      {
+        "delta": 0.01,
+        "residual": 0.018884394613506772,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 0.010021936453940514,
+          "to_minus1": 0.01994906507345595
+        },
+        "max_real_kept": 0.010021936453940514
+      },
+      {
+        "delta": 0.1,
+        "residual": 0.18008188674427528,
+        "n_kept": 2,
+        "dist_to_exact": {
+          "to_0": 0.10383913836533357,
+          "to_minus1": 0.19949065073456018
+        },
+        "max_real_kept": 0.10383913836533357
+      },
+      {
+        "delta": 0.3,
+        "residual": 0.48183193096087795,
+        "n_kept": 1,
+        "dist_to_exact": {
+          "to_0": 0.40152804779632184,
+          "to_minus1": 0.5984719522036781
+        },
+        "max_real_kept": -0.40152804779632184
+      }
+    ],
+    "baseline_n_kept": 2,
+    "blindness_radius_delta": 0.1,
+    "residual_at_blindness_radius": 0.18008188674427528
+  },
+  "S8_continuum_admissibility": {
+    "inside": [
+      {
+        "lambda": {
+          "re": 0.0,
+          "im": 0.0
+        },
+        "defect": 4.1071003320514166e-07
+      },
+      {
+        "lambda": {
+          "re": -1.0,
+          "im": 0.0
+        },
+        "defect": 1.0915789887793716e-07
+      },
+      {
+        "lambda": {
+          "re": -0.9,
+          "im": 0.0
+        },
+        "defect": 3.4732241024128773e-07
+      },
+      {
+        "lambda": {
+          "re": 0.9,
+          "im": 0.0
+        },
+        "defect": 3.505130930837628e-07
+      },
+      {
+        "lambda": {
+          "re": 0.999,
+          "im": 0.0
+        },
+        "defect": 1.0947857897836521e-07
+      },
+      {
+        "lambda": {
+          "re": 0.0,
+          "im": 0.5
+        },
+        "defect": 5.04831056692303e-07
+      },
+      {
+        "lambda": {
+          "re": -0.0,
+          "im": -0.5
+        },
+        "defect": 2.426111139749678e-07
+      },
+      {
+        "lambda": {
+          "re": 0.0,
+          "im": 2.0
+        },
+        "defect": 2.6422050592781967e-06
+      },
+      {
+        "lambda": {
+          "re": 0.3,
+          "im": 0.7
+        },
+        "defect": 1.0372074493668746e-06
+      },
+      {
+        "lambda": {
+          "re": -0.4,
+          "im": -0.2
+        },
+        "defect": 3.90623426617959e-07
+      }
+    ],
+    "outside": [
+      {
+        "lambda": {
+          "re": 1.0,
+          "im": 0.0
+        },
+        "defect": 1.091510580720391e-07
+      },
+      {
+        "lambda": {
+          "re": 1.5,
+          "im": 0.0
+        },
+        "defect": 3.0815778804163684e-06
+      },
+      {
+        "lambda": {
+          "re": 2.0,
+          "im": 0.0
+        },
+        "defect": 8.261487974702617e-06
+      },
+      {
+        "lambda": {
+          "re": 3.0,
+          "im": 0.0
+        },
+        "defect": 2.4859532525916813e-05
+      },
+      {
+        "lambda": {
+          "re": 5.0,
+          "im": 0.0
+        },
+        "defect": 8.295860966092977e-05
+      },
+      {
+        "lambda": {
+          "re": 10.0,
+          "im": 0.0
+        },
+        "defect": 0.0003734435201045227
+      },
+      {
+        "lambda": {
+          "re": -2.0,
+          "im": 0.0
+        },
+        "defect": 8.180317810070429e-06
+      },
+      {
+        "lambda": {
+          "re": -5.0,
+          "im": 0.0
+        },
+        "defect": 8.214698004681617e-05
+      },
+      {
+        "lambda": {
+          "re": 2.0,
+          "im": 3.0
+        },
+        "defect": 4.7218557735482575e-05
+      },
+      {
+        "lambda": {
+          "re": -4.0,
+          "im": 1.0
+        },
+        "defect": 5.4283940233948006e-05
+      }
+    ],
+    "worst_inside": 2.6422050592781967e-06,
+    "worst_outside": 0.0003734435201045227,
+    "separation_decades": 2.150258408264135,
+    "dropped_term_control": [
+      {
+        "lambda": 0.5,
+        "abs_s_at_w_eq_1": 8.94427190999916e-05,
+        "max_abs_s_interior": 2.2795070510954107,
+        "dropped_over_scale": 3.9237746185961636e-05,
+        "reported_defect": 4.774613125528356e-07
+      },
+      {
+        "lambda": 0.999,
+        "abs_s_at_w_eq_1": 3.9152451597281104,
+        "max_abs_s_interior": 3.9650248300436166,
+        "dropped_over_scale": 0.9874453067889215,
+        "reported_defect": 1.0947857897836521e-07
+      },
+      {
+        "lambda": 1.0,
+        "abs_s_at_w_eq_1": 4.0,
+        "max_abs_s_interior": 3.9750942991637146,
+        "dropped_over_scale": 1.0062654364807206,
+        "reported_defect": 1.091510580720391e-07
+      },
+      {
+        "lambda": 2.0,
+        "abs_s_at_w_eq_1": 7999999999.999999,
+        "max_abs_s_interior": 50.21942894318878,
+        "dropped_over_scale": 159300895.4572159,
+        "reported_defect": 8.261487974702617e-06
+      },
+      {
+        "lambda": 5.0,
+        "abs_s_at_w_eq_1": 6.399999999999999e+37,
+        "max_abs_s_interior": 101261.59709208757,
+        "dropped_over_scale": 6.320263736488199e+32,
+        "reported_defect": 8.295860966092977e-05
+      }
+    ],
+    "worst_dropped_over_scale": 6.320263736488199e+32,
+    "worst_dropped_lambda": 5.0,
+    "dropped_vs_reported_decades": 36.88187373629775,
+    "discriminating": false
+  },
+  "S9_passes": {
+    "tolerance": [
+      {
+        "tol": 0.001,
+        "raw_tol": "0.001",
+        "result": {
+          "outcome": "finite",
+          "value": 2
+        }
+      },
+      {
+        "tol": 0.0,
+        "raw_tol": "0.0",
+        "result": {
+          "outcome": "finite",
+          "value": 0
+        }
+      },
+      {
+        "tol": -1.0,
+        "raw_tol": "-1.0",
+        "result": {
+          "outcome": "finite",
+          "value": 0
+        }
+      },
+      {
+        "tol": null,
+        "raw_tol": "nan",
+        "result": {
+          "outcome": "finite",
+          "value": 0
+        }
+      },
+      {
+        "tol": "inf",
+        "raw_tol": "inf",
+        "result": {
+          "outcome": "finite",
+          "value": 4
+        }
+      },
+      {
+        "tol": 1000000000.0,
+        "raw_tol": "1000000000.0",
+        "result": {
+          "outcome": "finite",
+          "value": 4
+        }
+      }
+    ],
+    "empty_fine": {
+      "outcome": "raised",
+      "exc": "ValueError",
+      "msg": "zero-size array to reduction operation minimum which has no identity"
+    },
+    "planted_control": [
+      {
+        "strength": 6.0,
+        "label": "planted potential",
+        "n_plain": 2,
+        "n_planted": 2,
+        "max_real_planted": 1.083051257671696,
+        "shift_from_plain": 1.083051257671696,
+        "binds": true,
+        "seconds": 1.5
+      },
+      {
+        "strength": 0.0,
+        "label": "potential REMOVED -- must not bind",
+        "n_plain": 2,
+        "n_planted": 2,
+        "max_real_planted": 8.553424954055069e-17,
+        "shift_from_plain": 0.0,
+        "binds": false,
+        "seconds": 1.68
+      }
+    ],
+    "control_binds_with_potential": true,
+    "control_quiet_without_potential": true,
+    "control_can_fail": true,
+    "count_criterion_in_docstring_does_not_hold": true
+  },
+  "gate": {
+    "question": "Under adversarial and degenerate inputs, does solver/rescaled_spectrum.py ever silently return a wrong value rather than reject or visibly propagate the defect?",
+    "answer": "YES",
+    "findings": {
+      "R1_self_comparison_certifies_the_continuum": {
+        "what": "converged_spectrum has no guard on K_fine vs K_coarse.  At K_fine == K_coarse the filter compares a spectrum with itself, every match distance is identically 0, and the ENTIRE discretized continuum is returned as 'the grid-independent part of the spectrum'.  Contradicts the module's own line 116.",
+        "n_kept_correct": [
+          2
+        ],
+        "n_kept_equal_K": [
+          24,
+          32,
+          48
+        ],
+        "inflation_factor": 24.0,
+        "match_distances_on_equal_K": [
+          0.0
+        ],
+        "worst_spurious_imaginary_pair": 40.462348217652156,
+        "reachable_via": "S2's silent non-integer truncation: K_fine=96.9 and K_coarse=96 collapse to the same grid",
+        "exposure": "LATENT -- every live call site passes 96/144"
+      },
+      "R2_convergence_flag_dropped": {
+        "what": "newton() honours test 7 and returns converged=False, but spectrum() and converged_spectrum() consume out['b'] without ever reading the flag; the returned 'kept' array carries no convergence information.",
+        "worst_unconverged_dist_to_exact_minus1": 0.263186522637884,
+        "spurious_right_half_plane": 44,
+        "exposure": "NOT LATENT -- 5/7 banked Route-E E5 rows and 7/7 Route-G G4 rows were computed at points whose residual exceeds the module's own 1e-8 threshold"
+      },
+      "R3_continuation_silently_skipped": {
+        "what": "np.arange(0, a_target+1e-12, da) is EMPTY when da's sign does not match a_target's; the size-0 fallback appends a_target alone, so a FOLLOWED branch silently becomes a single cold solve from the anchor.  Contradicts the module's own line 315.",
+        "alpha_followed": 3.003842216631063,
+        "alpha_skipped": -0.987828181390787,
+        "abs_delta_alpha": 3.99167039802185,
+        "worst_at_a": 0.5,
+        "all_pairs": [
+          {
+            "a_target": 0.3,
+            "da_bad": -0.02,
+            "alpha_followed": 1.6311721381590831,
+            "alpha_skipped": 1.6306514141207753,
+            "abs_delta_alpha": 0.0005207240383078293,
+            "residual_followed": 0.013975628518336666,
+            "residual_skipped": 0.013805168889937802
+          },
+          {
+            "a_target": 0.5,
+            "da_bad": -0.02,
+            "alpha_followed": 3.003842216631063,
+            "alpha_skipped": -0.987828181390787,
+            "abs_delta_alpha": 3.99167039802185,
+            "residual_followed": 0.004273661406381646,
+            "residual_skipped": 0.0182098819857683
+          },
+          {
+            "a_target": -0.3,
+            "da_bad": 0.02,
+            "alpha_followed": 0.7403619771698249,
+            "alpha_skipped": 0.7397035529265679,
+            "abs_delta_alpha": 0.0006584242432570164,
+            "residual_followed": 0.002793724071336566,
+            "residual_skipped": 0.0027964415701252146
+          }
+        ],
+        "exposure": "LATENT -- Route-E passes a >= 0 with da = +0.02 and Route-G passes a < 0 with da = -0.02; both signs match"
+      },
+      "R4_continuum_defect_has_no_admissibility_content": {
+        "what": "continuum_defect measures only the homogeneous ODE residual, which the closed form satisfies for EVERY complex lambda, and drops the -s(w=1)(1+w) term on grounds false outside the strip.  It accepts every lambda tested, including lambda = 5 (five times outside the admissible strip).  Lesson 90 shape.",
+        "worst_inside": 2.6422050592781967e-06,
+        "worst_outside": 0.0003734435201045227,
+        "separation_decades": 2.150258408264135,
+        "dropped_term_over_scale_at_worst_lambda": 6.320263736488199e+32,
+        "dropped_vs_reported_decades": 36.88187373629775,
+        "exposure": "LATENT -- test_rescaled_spectrum.py test 5b calls it only on in-strip lambda"
+      },
+      "R5_non_integer_K_silently_truncated": {
+        "what": "OddCompactBasis does int(K) with no warning; it is the resolution.",
+        "n_silent": 5,
+        "exposure": "LATENT, but it is the reachability path for R1"
+      },
+      "R6_planted_profile_pass_through": {
+        "what": "the filter's kept-COUNT -- the quantity Route-E reports -- is unchanged by a planted wrong profile up to delta = 0.1, where the residual is already 0.18008188674427528.",
+        "blindness_radius_delta": 0.1,
+        "residual_at_blindness_radius": 0.18008188674427528
+      },
+      "R7_tolerance_degeneracies": {
+        "what": "match_filter with tol = nan keeps 0 silently -- which REPRODUCES the module's headline conclusion -- and tol = inf keeps all.",
+        "exposure": "LATENT -- all live call sites pass 1e-4 .. 1e-1"
+      },
+      "R8_planted_control_docstring_criterion_wrong": {
+        "what": "planted_eigenvalue_control's docstring says the control 'asserts that the filter reports MORE converged eigenvalues than the unperturbed operator does'.  The count is UNCHANGED (2 vs 2).  test 6 checks a position shift into the right half plane instead, which does hold -- so the CHECK is sound and the PROSE is wrong.",
+        "n_plain": 2,
+        "n_planted": 2,
+        "max_real_planted": 1.083051257671696,
+        "severity": "prose only -- no number depends on it"
+      }
+    },
+    "passes": {
+      "non_finite_propagation": "PASS",
+      "n_poisons_tested": 18,
+      "n_silently_erased": 0,
+      "negative_K_raises": true,
+      "da_zero_raises": true,
+      "empty_fine_spectrum_raises": true,
+      "positive_control_can_fail": true
+    },
+    "claim_adjacency": {
+      "origin_h2_spectral_gap_downstream": false,
+      "why": "solver/origin_h2_certificate.py -- the STRICT realization, the one with the gap (legs 176/186) -- imports only numpy and math.comb.  Legs 176/186 cite this module's DOCSTRING on the loose realization; no banked origin-H2 gap number is computed by any code path in it.",
+      "banked_numbers_touched": "Route-E's own E5 spectrum sweep and Route-G's G4 cross-model alpha/beta rows, via R2",
+      "verdict": "CLAIM-ADJACENT via Route-E/Route-G; ESCALATE, DO NOT PATCH"
+    },
+    "module_edited_by_this_leg": false
+  },
+  "wall_clock_seconds": 25.3
+}
