@@ -1,0 +1,1697 @@
+{
+  "leg": 170,
+  "route": "CDB",
+  "title": "post-repair regression check of critical_dissipation.py's exponent guard",
+  "closes_the_loop_on": {
+    "finding_leg": 121,
+    "repair_leg": 154
+  },
+  "pre_repair_sha": "9dba93f",
+  "gate_verbatim": "Post-repair, does solver/critical_dissipation.py (a) reject or visibly flag every non-integer p (2s) case in leg 121's battery, and (b) reproduce every previously-validated integer-p result bit-identically?",
+  "not_a_physics_measurement": "alpha_1 = 0 at a=0 (ALS eq 61), sigma=3 at a=1/2 (Xu arXiv:2607.19762 sec 6.1 + Table 1 + Fig 3) and alpha_1 = +0.133683 (searched-not-found, leg 64) are NOT contested or re-derived. They appear only as fixed points a differential must not move. BANKED NUMBERS AT RISK: 0.",
+  "edits": "none, under either branch of the gate",
+  "R0_control": {
+    "pre_repair_ref": "git:9dba93f:solver/critical_dissipation.py",
+    "pre_repair_src_sha256_16": "315abb9869cb1f18",
+    "post_repair_src_sha256_16": "24f2d6547316a73d",
+    "modules_are_distinct_objects": true,
+    "pre_has_guard": false,
+    "post_has_guard": true,
+    "pre_accepts_p_1p9": true,
+    "pre_exception": null,
+    "post_accepts_p_1p9": false,
+    "post_exception": "CriticalDissipationDomainError",
+    "control_fires": true,
+    "leg121_C2_reproduced_from_pre_repair": {
+      "residual_pre": 1.2490009027033011e-15,
+      "residual_banked": 9.71445146547012e-16,
+      "residual_bit_identical": false,
+      "residual_ulp": 1407374883553280,
+      "alpha_pre": 1.0000000000000004,
+      "alpha_banked": 1.0,
+      "alpha_bit_identical": false,
+      "alpha_ulp": 2,
+      "alpha_1_pre": 2.220446049250312e-14,
+      "alpha_1_banked": 2.664535259100375e-14,
+      "alpha_1_bit_identical": false,
+      "alpha_1_ulp": 1407374883553281,
+      "note": "If these are NOT bit-identical, the pre-repair module does not reproduce its own banked value on today's NumPy/BLAS. That is environmental drift, it is measured here in ULP, and it means the banked JSON cannot serve as a bitwise reference for ANY leg. It does NOT touch clause (b), which compares pre against post in ONE process so the environment cancels exactly."
+    }
+  },
+  "R1_finding_legs_driver": {
+    "driver": "experiments/p2_route_cda_v1_adversarial.py",
+    "ran_unmodified": true,
+    "returncode": 1,
+    "seconds": 0.15,
+    "completed": false,
+    "wrote_json": false,
+    "n_sections_total": 9,
+    "n_sections_completed": 0,
+    "sections_completed": [],
+    "n_evidence_sections_total": 3,
+    "n_evidence_sections_completed": 0,
+    "abort_exception": "solver.critical_dissipation.CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+    "abort_in_section": null,
+    "tail": "solver.critical_dissipation.CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noni"
+  },
+  "R2_clause_a": {
+    "case_list_source": "writeup/data/p2_route_cda_v1_adversarial.json (leg 121's OWN record), NOT leg 154's A_clause_a_refusals",
+    "n_cases_new_guard": 16,
+    "n_cases_already_refused_pre_repair": 2,
+    "n_entry_points": 6,
+    "entry_points": [
+      "CriticalDissipativeFlow.__init__",
+      "converged_dissipative_spectrum",
+      "dissipative_spectrum",
+      "lambda_power",
+      "lambda_truncation",
+      "mu_branch"
+    ],
+    "n_case_entrypoint_cells": 96,
+    "n_cells_refused": 96,
+    "n_cells_CriticalDissipationDomainError": 96,
+    "n_cells_ValueError": 96,
+    "n_cells_silently_accepted": 0,
+    "silently_accepted": [],
+    "n_cases_refused_at_every_entry_point": 16,
+    "rows": [
+      {
+        "p": 1.9,
+        "src": "C1",
+        "case": "p = 1.9 (should be invalid: not integral)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 1,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 1.0000001,
+        "src": "C1",
+        "case": "p = 1.0000001 (a hair above integer)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 1,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.0000001, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.50000005. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 2.9999999,
+        "src": "C1",
+        "case": "p = 2.9999999 (a hair below the next integer)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 2,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9999999, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.49999995. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 2.9,
+        "src": "C1",
+        "case": "p = 2.9",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 2,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 3.9,
+        "src": "C1",
+        "case": "p = 3.9",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 3,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 1.1,
+        "src": "C2",
+        "case": "p = 1.1 (full pipeline, p_true=1)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 1,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.1, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 1.5,
+        "src": "C2",
+        "case": "p = 1.5 (full pipeline, p_true=1)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 1,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.5, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 1.9,
+        "src": "C2",
+        "case": "p = 1.9 (full pipeline, p_true=1)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 1,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 2.1,
+        "src": "C2",
+        "case": "p = 2.1 (full pipeline, p_true=2)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 2,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.1, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.05. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 2.5,
+        "src": "C2",
+        "case": "p = 2.5 (full pipeline, p_true=2)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 2,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.5, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 2.9,
+        "src": "C2",
+        "case": "p = 2.9 (full pipeline, p_true=2)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 2,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 2.9, which would silently build p = 2 (s = 1.0) instead of the requested s = 1.45. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 3.1,
+        "src": "C2",
+        "case": "p = 3.1 (full pipeline, p_true=3)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 3,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.1, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.55. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 3.5,
+        "src": "C2",
+        "case": "p = 3.5 (full pipeline, p_true=3)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 3,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 3.9,
+        "src": "C2",
+        "case": "p = 3.9 (full pipeline, p_true=3)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 3,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.9, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 4.999999999998,
+        "src": "C3",
+        "case": "s = 2.5 - 1e-12 (typical fit/subtraction noise)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 4,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 4.999999999998, which would silently build p = 4 (s = 2.0) instead of the requested s = 2.499999999999. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "p": 3.5,
+        "src": "C4",
+        "case": "p = 3.5 (float, non-integral)",
+        "pre_repair_accepted": true,
+        "pre_repair_built": 3,
+        "pre_repair_exception": null,
+        "refused_at_all_entry_points": true,
+        "n_entry_points_refusing": 6,
+        "n_entry_points": 6,
+        "all_ValueError": true,
+        "all_CriticalDissipationDomainError": true,
+        "message_names_requested_p": true,
+        "message_names_would_be_built_p": true,
+        "per_entry_point": {
+          "lambda_power": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "lambda_truncation": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "CriticalDissipativeFlow.__init__": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "mu_branch": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          },
+          "converged_dissipative_spectrum": {
+            "refused": true,
+            "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 3.5, which would silently build p = 3 (s = 1.5) instead of the requested s = 1.75. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+            "exc_class": "CriticalDissipationDomainError",
+            "is_ValueError": true,
+            "is_domain_error": true,
+            "n_warnings": 0,
+            "warnings": []
+          }
+        }
+      }
+    ],
+    "already_refused_pre_repair": [
+      {
+        "p": -0.5,
+        "src": "C1",
+        "case": "p = -0.5 (negative, invalid)",
+        "pre_repair_accepted": false,
+        "pre_repair_built": null,
+        "pre_repair_exception": "ValueError: p must be a positive integer (2s = p)",
+        "pre_repair_refused": true,
+        "pre_repair_class": "ValueError",
+        "post_repair_refused": true,
+        "post_repair_class": "CriticalDissipationDomainError",
+        "both_ValueError": true,
+        "refusal_reason_changed": true,
+        "pre_message": "ValueError: p must be a positive integer (2s = p)",
+        "post_message": "CriticalDissipationDomainError: p (= 2s) must be an integer; got -0.5, which would silently build p = 0 (s = 0.0) instead of the requested s = -0.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning."
+      },
+      {
+        "p": 0.5,
+        "src": "C1",
+        "case": "p = 0.5 (in (0,1), invalid)",
+        "pre_repair_accepted": false,
+        "pre_repair_built": null,
+        "pre_repair_exception": "ValueError: p must be a positive integer (2s = p)",
+        "pre_repair_refused": true,
+        "pre_repair_class": "ValueError",
+        "post_repair_refused": true,
+        "post_repair_class": "CriticalDissipationDomainError",
+        "both_ValueError": true,
+        "refusal_reason_changed": true,
+        "pre_message": "ValueError: p must be a positive integer (2s = p)",
+        "post_message": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 0.5, which would silently build p = 0 (s = 0.0) instead of the requested s = 0.25. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning."
+      }
+    ],
+    "non_finite": [
+      {
+        "p": "inf",
+        "post_refused": true,
+        "post_class": "CriticalDissipationDomainError",
+        "post_is_ValueError": true,
+        "pre_class": "OverflowError",
+        "pre_was_ValueError": false
+      },
+      {
+        "p": "-inf",
+        "post_refused": true,
+        "post_class": "CriticalDissipationDomainError",
+        "post_is_ValueError": true,
+        "pre_class": "OverflowError",
+        "pre_was_ValueError": false
+      },
+      {
+        "p": "nan",
+        "post_refused": true,
+        "post_class": "CriticalDissipationDomainError",
+        "post_is_ValueError": true,
+        "pre_class": "ValueError",
+        "pre_was_ValueError": true
+      }
+    ],
+    "planted_dissipative_control_p1p9": {
+      "refused": true,
+      "exception": "CriticalDissipationDomainError: p (= 2s) must be an integer; got 1.9, which would silently build p = 1 (s = 0.5) instead of the requested s = 0.95. Lambda^p is an exact finite matrix in this basis ONLY for integer p -- see the module docstring. Pass an integer, or on_noninteger='truncate' to reproduce the pre-repair behaviour with a warning.",
+      "exc_class": "CriticalDissipationDomainError",
+      "is_ValueError": true,
+      "is_domain_error": true,
+      "n_warnings": 0,
+      "warnings": []
+    }
+  },
+  "R3_clause_b": {
+    "method": "== on float64, NaN==NaN counted identical; NOT np.allclose. The pre-repair module is read out of git at 9dba93f and exec'd in THIS interpreter, so numpy/BLAS are shared and any difference is the repair.",
+    "grid_is_independent_of_leg_154": true,
+    "n_named_quantities": 18,
+    "n_leaves": 276077,
+    "n_moved": 0,
+    "quantity_index_digest": "f7a1c2191853e334",
+    "per_quantity": [
+      {
+        "quantity": "LAMBDA_SIN1",
+        "n": 2,
+        "n_moved": 0
+      },
+      {
+        "quantity": "CRITICAL_POINTS",
+        "n": 15,
+        "n_moved": 0
+      },
+      {
+        "quantity": "lambda_block",
+        "n": 14084,
+        "n_moved": 0
+      },
+      {
+        "quantity": "lambda_power",
+        "n": 68290,
+        "n_moved": 0
+      },
+      {
+        "quantity": "lambda_power_integral_float_types",
+        "n": 5544,
+        "n_moved": 0
+      },
+      {
+        "quantity": "lambda_truncation",
+        "n": 12,
+        "n_moved": 0
+      },
+      {
+        "quantity": "_ladder_to",
+        "n": 31,
+        "n_moved": 0
+      },
+      {
+        "quantity": "amplitude_eigenvalue",
+        "n": 41,
+        "n_moved": 0
+      },
+      {
+        "quantity": "marginal_verdict",
+        "n": 7,
+        "n_moved": 0
+      },
+      {
+        "quantity": "mu_decay_time",
+        "n": 12,
+        "n_moved": 0
+      },
+      {
+        "quantity": "exact_a0_family",
+        "n": 515,
+        "n_moved": 0
+      },
+      {
+        "quantity": "exact_a0_spacetime",
+        "n": 2440,
+        "n_moved": 0
+      },
+      {
+        "quantity": "exact_a0_residual",
+        "n": 8,
+        "n_moved": 0
+      },
+      {
+        "quantity": "CriticalDissipativeFlow_surface",
+        "n": 184368,
+        "n_moved": 0
+      },
+      {
+        "quantity": "mu_branch_alpha_slope_verdict",
+        "n": 427,
+        "n_moved": 0
+      },
+      {
+        "quantity": "inviscid_seed",
+        "n": 144,
+        "n_moved": 0
+      },
+      {
+        "quantity": "converged_dissipative_spectrum",
+        "n": 133,
+        "n_moved": 0
+      },
+      {
+        "quantity": "planted_dissipative_control",
+        "n": 4,
+        "n_moved": 0
+      }
+    ],
+    "moved": []
+  },
+  "R4_escape_hatch": {
+    "n_rows": 9,
+    "n_rows_hatch_matches_pre_repair_in_process": 9,
+    "n_rows_hatch_matches_banked_json": 0,
+    "n_rows_PRE_REPAIR_matches_banked_json": 0,
+    "worst_ulp_pre_repair_vs_banked": 1407374883553281,
+    "interpretation": "The in-process count is the one that can see the repair: it compares the hatch against the pre-repair module at 9dba93f running on the SAME NumPy/BLAS in the SAME interpreter. The banked-JSON count is a comparison against numbers written months ago; it is only interpretable alongside n_rows_PRE_REPAIR_matches_banked_json, because if the PRE-REPAIR module does not reproduce its own banked value either, the difference is environmental drift and not the repair (leg 147 found the same and measured it in ULP).",
+    "warning_reaches_default_interpreter": true,
+    "default_interpreter_stderr": [
+      "<string>:3: RuntimeWarning: p = 1.9 is not an integer; truncating to 1 (s = 0.5, NOT the requested s = 0.95). This is the pre-repair behaviour, retained only so leg 121's measurement stays runnable. Do not use it to compute anything."
+    ],
+    "leg154_checked_end_to_end": false,
+    "leg154_hatch_check_scope": "construction level only -- its banked rows carry alpha_pre = 0.8 off a synthetic b, not a Newton solve (writeup/data/p2_route_cdr_v1_repair.json, C_escape_hatch)",
+    "rows": [
+      {
+        "p_requested": 1.1,
+        "p_true": 1,
+        "p_built": 1,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.2490009027033011e-15,
+        "residual_pre_repair": 1.2490009027033011e-15,
+        "alpha_hatch": 1.0000000000000004,
+        "alpha_pre_repair": 1.0000000000000004,
+        "alpha_1_hatch": 2.220446049250312e-14,
+        "alpha_1_pre_repair": 2.220446049250312e-14,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 9.71445146547012e-16,
+        "alpha_banked": 1.0,
+        "alpha_1_banked": 2.664535259100375e-14,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 1407374883553280,
+          "alpha": 2,
+          "alpha_1": 1407374883553281
+        }
+      },
+      {
+        "p_requested": 1.5,
+        "p_true": 1,
+        "p_built": 1,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.2490009027033011e-15,
+        "residual_pre_repair": 1.2490009027033011e-15,
+        "alpha_hatch": 1.0000000000000004,
+        "alpha_pre_repair": 1.0000000000000004,
+        "alpha_1_hatch": 2.220446049250312e-14,
+        "alpha_1_pre_repair": 2.220446049250312e-14,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 9.71445146547012e-16,
+        "alpha_banked": 1.0,
+        "alpha_1_banked": 2.664535259100375e-14,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 1407374883553280,
+          "alpha": 2,
+          "alpha_1": 1407374883553281
+        }
+      },
+      {
+        "p_requested": 1.9,
+        "p_true": 1,
+        "p_built": 1,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.2490009027033011e-15,
+        "residual_pre_repair": 1.2490009027033011e-15,
+        "alpha_hatch": 1.0000000000000004,
+        "alpha_pre_repair": 1.0000000000000004,
+        "alpha_1_hatch": 2.220446049250312e-14,
+        "alpha_1_pre_repair": 2.220446049250312e-14,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 9.71445146547012e-16,
+        "alpha_banked": 1.0,
+        "alpha_1_banked": 2.664535259100375e-14,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 1407374883553280,
+          "alpha": 2,
+          "alpha_1": 1407374883553281
+        }
+      },
+      {
+        "p_requested": 2.1,
+        "p_true": 2,
+        "p_built": 2,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.4985625166521327e-05,
+        "residual_pre_repair": 1.4985625166521327e-05,
+        "alpha_hatch": 1.0897181208303228,
+        "alpha_pre_repair": 1.0897181208303228,
+        "alpha_1_hatch": 1.4675439450779417,
+        "alpha_1_pre_repair": 1.4675439450779417,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 1.4985625166838781e-05,
+        "alpha_banked": 1.0897181208302058,
+        "alpha_1_banked": 1.4675439450790417,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 187392,
+          "alpha": 527,
+          "alpha_1": 4954
+        }
+      },
+      {
+        "p_requested": 2.5,
+        "p_true": 2,
+        "p_built": 2,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.4985625166521327e-05,
+        "residual_pre_repair": 1.4985625166521327e-05,
+        "alpha_hatch": 1.0897181208303228,
+        "alpha_pre_repair": 1.0897181208303228,
+        "alpha_1_hatch": 1.4675439450779417,
+        "alpha_1_pre_repair": 1.4675439450779417,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 1.4985625166838781e-05,
+        "alpha_banked": 1.0897181208302058,
+        "alpha_1_banked": 1.4675439450790417,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 187392,
+          "alpha": 527,
+          "alpha_1": 4954
+        }
+      },
+      {
+        "p_requested": 2.9,
+        "p_true": 2,
+        "p_built": 2,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 1.4985625166521327e-05,
+        "residual_pre_repair": 1.4985625166521327e-05,
+        "alpha_hatch": 1.0897181208303228,
+        "alpha_pre_repair": 1.0897181208303228,
+        "alpha_1_hatch": 1.4675439450779417,
+        "alpha_1_pre_repair": 1.4675439450779417,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 1.4985625166838781e-05,
+        "alpha_banked": 1.0897181208302058,
+        "alpha_1_banked": 1.4675439450790417,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 187392,
+          "alpha": 527,
+          "alpha_1": 4954
+        }
+      },
+      {
+        "p_requested": 3.1,
+        "p_true": 3,
+        "p_built": 3,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 2.8800154065894423e-06,
+        "residual_pre_repair": 2.8800154065894423e-06,
+        "alpha_hatch": 1.172042518626073,
+        "alpha_pre_repair": 1.172042518626073,
+        "alpha_1_hatch": 3.5251293564907447,
+        "alpha_1_pre_repair": 3.5251293564907447,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 2.880015486532439e-06,
+        "alpha_banked": 1.172042517613463,
+        "alpha_1_banked": 3.525129366895228,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 188760064,
+          "alpha": 4560390,
+          "alpha_1": 23428814
+        }
+      },
+      {
+        "p_requested": 3.5,
+        "p_true": 3,
+        "p_built": 3,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 2.8800154065894423e-06,
+        "residual_pre_repair": 2.8800154065894423e-06,
+        "alpha_hatch": 1.172042518626073,
+        "alpha_pre_repair": 1.172042518626073,
+        "alpha_1_hatch": 3.5251293564907447,
+        "alpha_1_pre_repair": 3.5251293564907447,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 2.880015486532439e-06,
+        "alpha_banked": 1.172042517613463,
+        "alpha_1_banked": 3.525129366895228,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 188760064,
+          "alpha": 4560390,
+          "alpha_1": 23428814
+        }
+      },
+      {
+        "p_requested": 3.9,
+        "p_true": 3,
+        "p_built": 3,
+        "n_warnings": 3,
+        "warning_types": [
+          "RuntimeWarning"
+        ],
+        "warning_names_substitution": true,
+        "residual_hatch": 2.8800154065894423e-06,
+        "residual_pre_repair": 2.8800154065894423e-06,
+        "alpha_hatch": 1.172042518626073,
+        "alpha_pre_repair": 1.172042518626073,
+        "alpha_1_hatch": 3.5251293564907447,
+        "alpha_1_pre_repair": 3.5251293564907447,
+        "hatch_matches_pre_repair_in_process": true,
+        "residual_banked": 2.880015486532439e-06,
+        "alpha_banked": 1.172042517613463,
+        "alpha_1_banked": 3.525129366895228,
+        "hatch_matches_banked": false,
+        "PRE_REPAIR_matches_banked": false,
+        "ulp_pre_repair_vs_banked": {
+          "residual": 188760064,
+          "alpha": 4560390,
+          "alpha_1": 23428814
+        }
+      }
+    ]
+  },
+  "R5_residues": {
+    "p_1e300": {
+      "accepted_by_guard": true,
+      "n_digits": 301,
+      "disposition": "leg 154 DECLARED RESIDUE, not patched; re-confirmed"
+    },
+    "C5_C8_still_unguarded": {
+      "C5_negative_mu": {
+        "accepted": true,
+        "mu": -0.5,
+        "alpha": 20.080784063964725,
+        "guarded": false
+      },
+      "C6_mu_decay_time": {
+        "negative_target": -11.0,
+        "target_above_mu0": -9.9,
+        "guarded": false
+      },
+      "C7_marginal_verdict_nan": {
+        "verdict": "dissipation_runs_away",
+        "guarded": false
+      },
+      "C8_amplitude_eigenvalue": {
+        "mu_neg_1": NaN,
+        "guarded": false
+      }
+    },
+    "C5_C8_note": "Declared unguarded in the module docstring and in this leg's novelty pass BEFORE measuring. Leg 154 was licensed for the exponent defect and nothing else, so these are NOT clause (a) failures. Escalation column, unchanged.",
+    "one_level_up": {
+      "entry_point": "solver.marginal_flow.AugmentedFlow(0.0, p=1.9)",
+      "refused": false,
+      "p_built": 1,
+      "reaches_the_guard": false,
+      "note": "BEHAVIOURAL probe only -- no line of solver/marginal_flow.py is read or edited; it is outside this leg's declared territory. Leg 154 declared and measured this residue before its own patch (5 int(p) sites)."
+    }
+  },
+  "gate_answer": {
+    "clause_a": "YES",
+    "clause_a_detail": "96/96 case x entry-point cells refused (16 of leg 121's non-integer cases x 6 public entry points), 96 of them by the NEW guard, 0 silently accepted",
+    "clause_b": "YES",
+    "clause_b_detail": "276077/276077 leaves bit-identical over 18 named quantities, 0 moved",
+    "overall": "YES",
+    "control_fires": true,
+    "escalations_not_gate_failures": {
+      "leg121_driver_unrunnable": true,
+      "n_sections_of_leg121_battery_lost": 9,
+      "one_level_up_unguarded": true,
+      "C5_C8_still_unguarded": true,
+      "p_1e300_accepted": true
+    }
+  },
+  "seconds": 25.3
+}
