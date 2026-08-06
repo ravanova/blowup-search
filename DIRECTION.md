@@ -8960,3 +8960,126 @@ change from this round's landings.**
 
 Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
 Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
+
+---
+
+## DM URGENT bookkeeping update, cycle 1, same day — 242 and 243 land, floor drops to
+1/10, reserve confirmed genuinely empty of dispatchable items, two fresh legs drafted now
+
+**242 (DFL2) landed — a thorough NO.** Dahne & Figueras have zero later relevant work; leg
+174's Grade-A/fluid occupancy cell stays confirmed empty. Clean, informative, floor-eligible
+— its landing is exactly why the floor drops now.
+
+**243 (PCRS) landed — gate YES.** Independently confirmed Route-L's own headline is
+genuinely unaffected by leg 241's `stall_verdict` finding, closing that concern cleanly. It
+also found the margin really is exactly `0.0` and flagged that a small repair keying the
+verdict on array order (rather than the fragile literal/convention this cycle's earlier
+characterization already noted) is still warranted. Drafted below.
+
+**Reserve confirmed genuinely empty of anything dispatchable right now, per the
+orchestrator's own direct check — this DM's list was stale in exactly the way flagged.**
+**216** already ran and escalated earlier this cycle; it should not have still been in this
+DM's reserve count (a bookkeeping miss, corrected now). **229** is blocked on leg 226 (still
+only at its novelty-pass commit). **231-234** are all blocked on repairs (217, 219, 221, 225)
+none of which has landed yet. **Zero of the six were actually promotable.** Two fresh legs
+drafted now, urgently, per the orchestrator's explicit request: one floor-eligible, one
+immediately-dispatchable and unblocked.
+
+```
+### 244 — ROUTE-PCRO: REPAIR stall_verdict's ARRAY-ORDER DEPENDENCE (leg 243's flagged
+finding — margin is exactly 0.0, verdict currently correct only by array-order convention)
+**Thesis.** Leg 243 (PCRS), while independently confirming Route-L's headline is unaffected
+by leg 241's finding, found the margin protecting that verdict is exactly `0.0` — correct
+today only because of the specific order `stall_verdict` reads its array in, not because
+anything structurally enforces the right answer regardless of order. This is the same shape
+of fragility leg 241 itself flagged for two of the 3 characterized silent paths (margin
+exactly 0.0, correct only by hardcoded literal/caller convention) — worth closing before a
+future refactor or reordering silently flips it.
+**Gate.** Does making `stall_verdict`'s verdict robust to array order (rather than relying on
+the current incidental ordering) preserve every currently-correct verdict (Route-L's
+headline included, re-checked explicitly) while removing the order-dependence leg 243 found?
+  yes -> Bank the repair; Route-L's headline and every other currently-correct verdict is now
+         robust rather than incidentally correct. Flag for a light postrepair check.
+  no -> Report exactly which verdict the fix disturbs and why; do not land a fix that trades
+        one fragility for another.
+**Territory.** solver/port_certification.py (`stall_verdict`'s array-order handling only),
+               experiments/p2_route_pcro_v1_repair.py,
+               writeup/data/p2_route_pcro_v1_repair.json,
+               writeup/novelty/leg_244.md, experiments/journal/leg_244.md.
+               Reads (never edits beyond the named function) leg 243's own report and
+               Route-L's own banked headline report.
+**Difficulty.** standard
+**Independence.** Narrowly scoped to one function's array-order handling. Does not touch
+leg 217's own 4 repaired mechanisms or leg 241's own pending stale-artifact correction (a
+different part of the same module, different concern). Immediately dispatchable — not
+blocked on anything in flight.
+```
+
+```
+### 245 — ROUTE-BCL2: DOES arXiv:2404.04054's OWN AUTHORS ([BC], THE VISCOUS-BURGERS
+GRADE-A PRECEDENT) HAVE LATER WORK EXTENDING PAST BURGERS TOWARD A HARDER, MORE
+FLUID/VORTEX-ADJACENT MODEL? (restores the composition floor, urgent per this cycle's drop
+to 1/10)
+[FLOOR-ELIGIBLE: literature — extends a landed literature/precedent finding at full-text
+depth, not an audit/repair/verify]
+**Thesis.** `arXiv:2404.04054` ([BC] in `solver/viscous_novelty.py`'s own PRECEDENTS ledger)
+is leg 174's own cited example of a technique that is ALREADY Grade A (computer-assistance
+essential, viscous term genuinely enclosed, not dominated) — but only on viscous Burgers, a
+1D model well short of anything fluid/vortex-dynamics-adjacent. This is arguably the single
+most direct literature question left in the "missing rung" line: unlike the two just-closed
+NO results (240 checked `2208.09445`'s own authors — no later work; 242 checked Dahne &
+Figueras — no later work), THIS precedent is the one that already has the right GRADE, just
+not yet the right MODEL. If these authors (or close collaborators) have moved the same
+Grade-A technique toward a 2D/3D or vorticity-bearing model, that is the closest thing to
+filling leg 174's empty occupancy cell this repository's own literature survey could find.
+**Gate.** Does `arXiv:2404.04054`'s author group have subsequent published work applying the
+same Grade-A (computer-assisted, viscous-term-enclosing) technique to a model closer to
+fluid/vortex dynamics than 1D viscous Burgers (2D, vorticity-bearing, or a genuine
+Navier-Stokes-family reduction)?
+  yes -> This would be the closest approach yet to filling leg 174's empty Grade-A/fluid
+         cell — record the citation, its hypotheses, and precisely how close the model is to
+         genuinely fluid/vortex-dynamics-adjacent. ESCALATE immediately; do not attempt to
+         replicate or build on it under this leg's own authority.
+  no -> Report the search precisely, same discipline as 240/242. Bank as confirming the
+        Grade-A technique's own frontier is still 1D Burgers, narrowing (not closing) the
+        "missing rung" search.
+**Territory.** experiments/p2_route_bcl2_v1_lit.py, writeup/data/p2_route_bcl2_v1_lit.json,
+               writeup/novelty/leg_245.md, experiments/journal/leg_245.md.
+               Reads (never edits) leg 174's own report/JSON and
+               solver/viscous_novelty.py's PRECEDENTS ledger, read-only.
+**Difficulty.** light
+**Independence.** Literature-only, own JSON, no solver module. Disjoint from 240 (different
+author group/paper) and 242 (different author group/paper) — same PATTERN, different,
+non-overlapping literature target. Immediately dispatchable, not blocked on anything.
+```
+
+**Slots C and G filled with 244 (PCRO) and 245 (BCL2) respectively.**
+
+**Live-slot roster, corrected:**
+
+| Slot | Leg | Route | Floor status |
+|---|---|---|---|
+| A | 192 | H2CV | verify — not floor-eligible |
+| B | 235 | CDAP | audit/census — not floor-eligible |
+| C | 244 | PCRO | **live, newly promoted** — repair — not floor-eligible |
+| D | 221 | BVRR | repair — not floor-eligible |
+| E | 237 | SIRC | audit/census — not floor-eligible |
+| F | 236 | RDDEP | FLOOR-ELIGIBLE (math) |
+| G | 245 | BCL2 | **live, newly promoted** — FLOOR-ELIGIBLE (literature) |
+| H | 228 | BHRV | verify — not floor-eligible |
+| I | 210 | M2SV | verify — not floor-eligible |
+| J | 226 | PNR | repair — not floor-eligible (in progress; own novelty pass already found the dispatch's premise was false, investigating properly per item 3(a)'s own amended gate) |
+
+**Floor status: 2/10 (236, 245) — restored from 1/10.** Still below the required 3; this DM
+will draft a further spare floor-eligible candidate at the next opportunity, per its own
+standing process note, rather than wait for another urgent scramble.
+
+**Reserve queue: 5 undispatched legs (229, 231, 232, 233, 234)** — 216 removed (already
+ran/escalated, this DM's tracking error now fixed); all five remaining are correctly blocked
+(229 on leg 226; 231-234 on repairs 217/219/221/225, none landed yet) — **genuinely zero
+dispatchable reserve right now**, confirmed. This DM will monitor for the moment any of
+217/219/221/225/226 lands and immediately flag the corresponding unblocked item(s) rather
+than wait to be asked.
+
+Nothing in this update lifts a ban, resolves any parked escalation, or moves any claim about
+Walls 1 and 2; Clay stays ~0.05%. No direction question raised by this DM this cycle.
