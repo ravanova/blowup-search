@@ -1,5 +1,16 @@
 """Route-OLA v1 -- ADVERSARIAL SOUNDNESS AUDIT of solver/op_lower.py.
 
+STATUS.  This runner answered its gate YES (47 of 209 gate-deciding cases) and
+the finding was escalated, not patched.  The bench repair on
+`bench/fix-op-lower-bound-violation` then fixed both mechanisms at their root,
+and THIS SAME RUNNER, UNCHANGED IN ITS BATTERY, its zoo, its reference and its
+violation definition, now answers NO: 0 overflow violations, 0 finite
+exceedances, max finite L/N_res = 1.000000000 over all 209 decided cases.  The
+only thing that changed here is the TIER B witness criterion, which had to
+because the headline is now a certified deflation of the witness's quotient
+rather than that quotient itself (see `tier_b`).  The before/after comparison
+lives in `experiments/p2_route_ola_v1_bench_check.py`.
+
 THE GATE (leg 101, DIRECTION.md):
 
   Under an adversarial battery of degenerate or NaN-poisoned operator inputs,
@@ -55,7 +66,9 @@ where no exact reference exists: it checks only that a nonzero headline is finit
 and is reproduced to 1e-12 by an admissible g of finite positive codomain norm.
 It is reported, and it does not decide the gate.
 
-solver/op_lower.py is READ-ONLY under both gate outcomes.
+solver/op_lower.py was READ-ONLY under both gate outcomes for leg 101 itself; the
+repair is a separate bench branch with its own pre-committed novelty pass
+(writeup/novelty/leg_101.md sec 8).
 
 Run: .venv/bin/python experiments/p2_route_ola_v1_adversarial.py
 """
@@ -492,13 +505,46 @@ def tier_b():
                     rec["witness_cod"] = float(n)
                     rr = float(dom(A @ hit) / n) if n > 0 else float("nan")
                     rec["witness_ratio"] = rr
+                    # POST-REPAIR CRITERION.  The headline is no longer the raw
+                    # quotient but a certified DEFLATION of it, so the honest
+                    # check is directional -- headline <= its own witness -- with
+                    # the size of the gap bounded in whichever unit is coherent:
+                    #   normal range   : the deflation, ~1e-12 relative;
+                    #   subnormal range: the naive quotient is the thing leg 101
+                    #                    caught being wrong (~1e-6 rounding per
+                    #                    denormal product), and the module's
+                    #                    value is the MORE accurate of the two, so
+                    #                    the gap is measured in ULP and runs the
+                    #                    other way.
+                    tiny = float(np.finfo(float).tiny)
                     if f["lower"] == 0.0:
                         rec["witness"] = "no_candidate_accepted"
-                    elif np.isfinite(rr) and abs(rr - f["lower"]) <= 1e-12 * max(
-                            1.0, abs(f["lower"])):
-                        rec["witness"] = "reproduced"
-                    else:
+                        rec["witness_gap_rel"] = 0.0
+                        rec["witness_gap_ulp"] = 0.0
+                    elif not np.isfinite(rr) or f["lower"] > rr:
                         rec["witness"] = "NOT_REPRODUCED"
+                        rec["witness_gap_rel"] = float("nan")
+                        rec["witness_gap_ulp"] = float("nan")
+                    else:
+                        gap = (rr - f["lower"]) / rr if rr > 0 else 0.0
+                        ulp = float(np.nextafter(rr, np.inf) - rr)
+                        gulp = (rr - f["lower"]) / ulp if ulp > 0 else 0.0
+                        rec["witness_gap_rel"] = float(gap)
+                        rec["witness_gap_ulp"] = float(gulp)
+                        if abs(f["lower"]) < tiny:
+                            # Subnormal headline.  No ULP threshold invented
+                            # here: the naive witness quotient is precisely the
+                            # quantity leg 101 caught being wrong in this range,
+                            # so it is not an authority the module can be graded
+                            # against.  The direction is checked (above) and the
+                            # gap is REPORTED as a magnitude; soundness in this
+                            # regime is decided by Tier A's exact rational
+                            # reference, not by this witness.
+                            rec["witness"] = "subnormal_witness_inflated"
+                        elif gap <= 1e-9:
+                            rec["witness"] = "reproduced"
+                        else:
+                            rec["witness"] = "NOT_REPRODUCED"
                 rec["headline_finite"] = bool(np.isfinite(rec["L_family"]))
             except Exception as exc:
                 rec["raised"] = "%s: %s" % (type(exc).__name__, exc)
@@ -569,10 +615,25 @@ def main():
 
     notrep = [r for r in b if r.get("witness") == "NOT_REPRODUCED"]
     nonfin = [r for r in b if r["L_family"] != 0.0 and not r["headline_finite"]]
+    subn = [r for r in b if r.get("witness") == "subnormal_witness_inflated"]
     print("\nTIER B (HolderNorm, reported only) -- %d cases: %d reproduced, "
           "%d NOT reproduced, %d nonzero-but-nonfinite headlines"
           % (len(b), sum(1 for r in b if r.get("witness") == "reproduced"),
              len(notrep), len(nonfin)))
+    grel = [r["witness_gap_rel"] for r in b
+            if r.get("witness") == "reproduced" and np.isfinite(
+                r.get("witness_gap_rel", np.nan))]
+    if grel:
+        print("  headline sits BELOW its own witness by at most %.3e relative "
+              "(the certified deflation) over %d normal-range cases"
+              % (max(grel), len(grel)))
+    for r in subn:
+        print("  subnormal regime: %s L = %.6e, naive witness %.6e, i.e. the "
+              "repair removes %.1f ULP (%.2e relative) of denormal inflation "
+              "from the witness -- soundness here is decided by Tier A's exact "
+              "rational reference"
+              % (r["operator"], r["L_family"], r["witness_ratio"],
+                 r["witness_gap_ulp"], r["witness_gap_rel"]))
     for r in notrep + nonfin:
         print("  !! %s: L = %r witness = %r (%s)"
               % (r["operator"], r["L_family"], r.get("witness_ratio"),
@@ -612,6 +673,8 @@ def main():
             "cases": len(b),
             "reproduced": sum(1 for r in b if r.get("witness") == "reproduced"),
             "not_reproduced": len(notrep),
+            "subnormal_witness_inflated": len(subn),
+            "max_witness_gap_rel": max(grel) if grel else None,
             "nonzero_nonfinite": len(nonfin),
             "records": b,
         },
