@@ -1,0 +1,703 @@
+{
+  "leg": 84,
+  "route": "TNA",
+  "gate": "Under adversarial inputs that push sample points beyond the validated X_max = 745 window (or otherwise into the region capabilities.py already flags as untrustworthy), does target_norm.py silently return a result with no warning or flag, or does it correctly signal the domain violation?",
+  "capabilities_line_audited": "DOMAIN-limited, not resolution-limited: at the shipped X_max = 745 the far-field closure moves the exponent by 0.190 and the measurement is not trustworthy there; the headline is taken where no sample point leaves the grid",
+  "known_answer_object": "calibration_family alpha = 0.4, p = 1 + alpha = 1.4 exactly",
+  "domain_ladder": {
+    "what": "X_max = 1.4e+01 .. 4.1e+04 at fixed n = 801, M = 16384, on the known-answer calibration family alpha = 0.4 (p = 1.4 exactly)",
+    "rungs": [
+      {
+        "rho_max": 4.0,
+        "X_max": 13.644958598563875,
+        "inside_validated_window": false,
+        "n_theta_samples_outside_data": 764,
+        "frac_theta_samples_outside_data": 0.046630859375,
+        "p_returned": 1.4035098543784037,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.0035098543784037872,
+        "r2_of_the_bad_fit": 0.9999995524855985,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 5.0,
+        "X_max": 37.101605288894376,
+        "inside_validated_window": false,
+        "n_theta_samples_outside_data": 282,
+        "frac_theta_samples_outside_data": 0.0172119140625,
+        "p_returned": 1.4040217576308083,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.004021757630808365,
+        "r2_of_the_bad_fit": 0.9999997373652111,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 6.0,
+        "X_max": 100.85657868513961,
+        "inside_validated_window": false,
+        "n_theta_samples_outside_data": 104,
+        "frac_theta_samples_outside_data": 0.00634765625,
+        "p_returned": 1.4038755533368974,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.003875553336897486,
+        "r2_of_the_bad_fit": 0.9999997712683724,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 7.0,
+        "X_max": 274.15806163662324,
+        "inside_validated_window": false,
+        "n_theta_samples_outside_data": 38,
+        "frac_theta_samples_outside_data": 0.0023193359375,
+        "p_returned": 1.403853675624086,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.003853675624086117,
+        "r2_of_the_bad_fit": 0.999999771245322,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 8.0,
+        "X_max": 745.2394128947751,
+        "inside_validated_window": true,
+        "n_theta_samples_outside_data": 14,
+        "frac_theta_samples_outside_data": 0.0008544921875,
+        "p_returned": 1.4038551509334543,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.0038551509334543432,
+        "r2_of_the_bad_fit": 0.9999997712638202,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 10.0,
+        "X_max": 5506.616437351697,
+        "inside_validated_window": true,
+        "n_theta_samples_outside_data": 2,
+        "frac_theta_samples_outside_data": 0.0001220703125,
+        "p_returned": 1.4038552244748137,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.00385522447481379,
+        "r2_of_the_bad_fit": 0.9999997712643429,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      },
+      {
+        "rho_max": 12.0,
+        "X_max": 40688.69785321492,
+        "inside_validated_window": true,
+        "n_theta_samples_outside_data": 0,
+        "frac_theta_samples_outside_data": 0.0,
+        "p_returned": 1.403855224594087,
+        "p_true": 1.4,
+        "abs_exponent_error": 0.0038552245940870478,
+        "r2_of_the_bad_fit": 0.9999997712643436,
+        "spectrum_raised": null,
+        "spectrum_warnings": [],
+        "fit_raised": null,
+        "fit_warnings": [],
+        "spectrum_keys": [
+          "M",
+          "far_field",
+          "hk",
+          "hk_real_basis",
+          "k",
+          "n_outside_grid"
+        ],
+        "spectrum_keys_naming_violation": [
+          "n_outside_grid"
+        ],
+        "fit_keys": [
+          "C",
+          "frac_zero_modes",
+          "k_hi",
+          "k_lo",
+          "n_bins",
+          "n_points",
+          "p",
+          "r2"
+        ],
+        "fit_keys_naming_violation": []
+      }
+    ]
+  },
+  "closure_ablation": {
+    "what": "power/clamp/zero at the shipped domain and at the headline domain; the ablation's own magnitude is leg 55's, the KEY SETS are this leg's",
+    "domains": [
+      {
+        "X_max": 745.2394128947751,
+        "inside_validated_window": true,
+        "n_theta_samples_outside_data": 14,
+        "p_by_closure": {
+          "power": 1.4038551509334543,
+          "clamp": 1.5654159793146842,
+          "zero": 1.148838972163285
+        },
+        "closure_spread_in_p": 0.4165770071513992,
+        "worst_abs_error_vs_truth": 0.2511610278367149,
+        "all_three_return_identical_key_sets": true,
+        "signals": {
+          "power": {
+            "raised": null,
+            "warnings": []
+          },
+          "clamp": {
+            "raised": null,
+            "warnings": []
+          },
+          "zero": {
+            "raised": null,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "X_max": 40688.69785321492,
+        "inside_validated_window": true,
+        "n_theta_samples_outside_data": 0,
+        "p_by_closure": {
+          "power": 1.403855224594087,
+          "clamp": 1.403855224594087,
+          "zero": 1.403855224594087
+        },
+        "closure_spread_in_p": 0.0,
+        "worst_abs_error_vs_truth": 0.0038552245940870478,
+        "all_three_return_identical_key_sets": true,
+        "signals": {
+          "power": {
+            "raised": null,
+            "warnings": []
+          },
+          "clamp": {
+            "raised": null,
+            "warnings": []
+          },
+          "zero": {
+            "raised": null,
+            "warnings": []
+          }
+        }
+      }
+    ]
+  },
+  "downstream_propagation": {
+    "what": "an exponent fitted where capabilities.py says the measurement is not trustworthy, pushed through the functions a caller quotes",
+    "p_untrustworthy": 1.5654159793146842,
+    "p_headline": 1.403855224594087,
+    "p_true": 1.4,
+    "exponent_shift_between_domains": 0.16156075472059728,
+    "n_outside_untrustworthy": 14,
+    "n_outside_headline": 0,
+    "rows": [
+      {
+        "s": 0.0,
+        "margin_from_untrustworthy_domain": 0.5654159793146842,
+        "margin_from_headline_domain": 0.40385522459408696,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": false,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      },
+      {
+        "s": 0.3,
+        "margin_from_untrustworthy_domain": 0.2654159793146842,
+        "margin_from_headline_domain": 0.10385522459408691,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": false,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      },
+      {
+        "s": 0.39,
+        "margin_from_untrustworthy_domain": 0.1754159793146841,
+        "margin_from_headline_domain": 0.013855224594086835,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": false,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      },
+      {
+        "s": 0.45,
+        "margin_from_untrustworthy_domain": 0.11541597931468428,
+        "margin_from_headline_domain": -0.046144775405913,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": true,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      },
+      {
+        "s": 0.5,
+        "margin_from_untrustworthy_domain": 0.06541597931468424,
+        "margin_from_headline_domain": -0.09614477540591304,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": true,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      },
+      {
+        "s": 1.0,
+        "margin_from_untrustworthy_domain": -0.43458402068531576,
+        "margin_from_headline_domain": -0.596144775405913,
+        "margin_shift": 0.16156075472059728,
+        "verdict_flips_between_domains": false,
+        "norm_verdict_keys": [
+          "finite",
+          "margin_in_exponent_units",
+          "p",
+          "s"
+        ],
+        "norm_verdict_keys_naming_violation": [],
+        "analytic_tail_keys": [
+          "bound",
+          "finite",
+          "margin",
+          "reason"
+        ],
+        "analytic_tail_keys_naming_violation": []
+      }
+    ],
+    "power_closure_control": {
+      "what": "the same domain violation with the closure that happens to be exactly right for this object -- the kindest case",
+      "p_at_745_power_closure": 1.4038551509334543,
+      "abs_error_vs_truth": 0.0038551509334543432
+    },
+    "verdict_flip_window_in_s": {
+      "what": "weights s for which the untrustworthy domain reports the norm FINITE and the headline domain reports it DIVERGENT -- (p_head - 1, p_bad - 1)",
+      "lo": 0.40385522459408696,
+      "hi": 0.5654159793146842,
+      "width": 0.16156075472059728
+    },
+    "weighted_partial_sums_keys": [
+      "N",
+      "S_N"
+    ],
+    "weighted_partial_sums_keys_naming_violation": []
+  },
+  "absurd_inputs": {
+    "what": "12 adversarial calls: 8 domain hazards, 4 argument hazards",
+    "cases": [
+      {
+        "name": "grid 55x shorter than validated (X_max = 1.4e+01)",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.26588737804616464,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "shipped domain X_max = 745, the region called untrustworthy",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.26587269205350156,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "clamp closure at 745 (injects alpha = 0)",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.26583848306547664,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "zero closure at 745 (injects a jump)",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.26595977141623456,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "GROWING far field, tail_exponent = +3",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.21605488833216216,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "tail_exponent contradicting the data, -5 for an alpha = 0.4 profile",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.265940040574849,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "M = 65536 on X_max = 745: 4x more samples outside the data",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 0.2658730998770502,
+        "keys_naming_violation": [
+          "n_outside_grid"
+        ]
+      },
+      {
+        "name": "fit band k = 512..4096, entirely above X_max/2 = 372",
+        "hazard_kind": "domain",
+        "raised": null,
+        "warnings": [],
+        "returned_a_number": true,
+        "value": 1.5058323565051113,
+        "keys_naming_violation": []
+      },
+      {
+        "name": "mismatched X and f shapes",
+        "hazard_kind": "argument",
+        "raised": "ValueError: X and f must have the same shape",
+        "warnings": [],
+        "returned_a_number": false,
+        "value": null,
+        "keys_naming_violation": []
+      },
+      {
+        "name": "far_field='power' without tail_exponent",
+        "hazard_kind": "argument",
+        "raised": "ValueError: far_field='power' needs tail_exponent",
+        "warnings": [],
+        "returned_a_number": false,
+        "value": null,
+        "keys_naming_violation": []
+      },
+      {
+        "name": "unknown far_field='hope'",
+        "hazard_kind": "argument",
+        "raised": "ValueError: unknown far_field 'hope'",
+        "warnings": [],
+        "returned_a_number": false,
+        "value": null,
+        "keys_naming_violation": []
+      },
+      {
+        "name": "far_field='none' leaves NaN, then FFT",
+        "hazard_kind": "argument",
+        "raised": "ValueError: h has non-finite entries -- did far_field='none' leave NaN?",
+        "warnings": [],
+        "returned_a_number": false,
+        "value": null,
+        "keys_naming_violation": []
+      }
+    ],
+    "n_domain_hazards": 8,
+    "n_domain_hazards_that_raised": 0,
+    "n_domain_hazards_that_warned": 0,
+    "n_domain_hazards_returning_a_number_silently": 8,
+    "n_argument_hazards": 4,
+    "n_argument_hazards_that_raised": 4
+  },
+  "api_surface": {
+    "what": "the module's result-bearing entry points, by whether a signal can reach them",
+    "surfaces": [
+      {
+        "fn": "compactify",
+        "returns": "tuple(theta, h, n_outside)",
+        "carries_domain_diagnostic": true,
+        "diagnostic": "third element: raw count of samples outside the data",
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "spectrum",
+        "returns": "dict",
+        "carries_domain_diagnostic": true,
+        "diagnostic": "key 'n_outside_grid': raw count",
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "coefficient_magnitudes",
+        "returns": "tuple(k, hk, hk_real)",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "fit_exponent",
+        "returns": "dict",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "weighted_partial_sums",
+        "returns": "list[dict]",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "analytic_tail",
+        "returns": "dict",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "norm_verdict",
+        "returns": "dict",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      },
+      {
+        "fn": "noise_floor",
+        "returns": "float",
+        "carries_domain_diagnostic": false,
+        "diagnostic": null,
+        "compared_against_a_threshold": false
+      }
+    ],
+    "n_surfaces": 8,
+    "n_carrying_any_domain_diagnostic": 2,
+    "n_comparing_it_to_a_threshold": 0,
+    "n_exponent_or_norm_bearing": 6,
+    "n_exponent_or_norm_bearing_carrying_a_diagnostic": 0
+  },
+  "headline": {
+    "n_ladder_rungs": 7,
+    "n_ladder_rungs_crossing_the_window": 6,
+    "n_crossings_that_warned_or_raised": 0,
+    "worst_silent_exponent_error_matched_closure": 0.004021757630808365,
+    "worst_silent_exponent_error_any_closure_at_745": 0.2511610278367149,
+    "closure_spread_in_p_at_745": 0.4165770071513992,
+    "n_samples_outside_at_745": 14,
+    "frac_samples_outside_at_745": 0.0008544921875,
+    "verdict_flip_window_width_in_s": 0.16156075472059728,
+    "worst_silent_r2": 0.9999995524855985,
+    "max_frac_samples_outside_data": 0.046630859375,
+    "n_domain_hazards_silent": 8,
+    "n_domain_hazards": 8,
+    "n_argument_hazards_that_raised": 4,
+    "n_argument_hazards": 4,
+    "n_exponent_bearing_surfaces_with_a_diagnostic": 0,
+    "n_exponent_bearing_surfaces": 6,
+    "n_surfaces_comparing_a_diagnostic_to_a_threshold": 0
+  },
+  "gate_answer": "YES_SILENT"
+}
