@@ -37,23 +37,34 @@ certificate for a 1D fluid transport model, and PUB1 anatomises the failure. Thi
 question that survives the anatomy: **the failure happened in one space — is the space the
 problem, and is there a better one?**
 
-That question has an axis, and the axis now has three points on it, all measured, all banked:
+That question has an axis, and the axis now has four points on it, all measured, all banked:
 
 | § | space | result | kind |
 |---|---|---|---|
 | 2 | weighted `ℓ¹` of Fourier coefficients, `w_k = (1+k)^s`, `s < 1` | `Z₁ ≥ 1` for **every** bounded approximate inverse | **theorem** (leg 127) |
 | 3 | origin-`H²` on the line (Xu's realization) | structurally viable formulation — **capped at `a = 0` exactness**, with nothing transferring to the real target | scoping YES, **escalated not built** (leg 163) |
+| 3.5 | origin-`H²`, **built** rather than scoped | the formulation closes as a formulation (`σ_min = 0.0908`, truncation-independent) **and** the block-diagonal `A` still fails leg 54's `Z₁` battery at best **140.72** where `< 1` is needed | construction gate **YES on both conjuncts, with one magnitude that says NO** (leg 176) |
 | 4 | anything between them | no scale avoids both obstructions; the window has width **exactly zero** | scoping **NO** (leg 182) |
 
 Read separately these are three leg reports. Read together they are one statement, and §5 is
 that statement. The order below is the order a practitioner meets the decisions in: pick the
 space, discover it is dead, look for a better one, ask whether anything in between helps.
 
-**A fourth point was commissioned and has not landed.** A construction leg on the origin-`H²`
-formulation (leg 176) was authorised and is in flight. At the time this note was drafted it had
-committed **only its novelty pass** — no runner, no data, no gate answer. **Nothing in this
-note is attributed to it, and no outcome is predicted for it.** What it pre-registered, in its
-own words, is recorded in §3.4 as a pre-registration and not as a finding.
+**The fourth point was commissioned, and it has since landed.** A construction leg on the
+origin-`H²` formulation (leg 176) was authorised and in flight at the time this note was
+drafted; it had then committed **only its novelty pass** — no runner, no data, no gate answer —
+and nothing was attributed to it or predicted for it. **It has now landed (`bb0f184`)**, and its
+outcome is folded in at **§3.5** as the fourth data point, quoted from its own report. §3.4
+preserves, unaltered, what was quotable at drafting; §3.5 is an addition on top of it, not a
+rewrite of it.
+
+**Two limits on that fold-in, stated here rather than discovered later.** (1) §§5–6 below were
+written when the axis had three points and are **left as drafted**; they are the three-result
+synthesis, and §3.5 says explicitly which of their sentences leg 176 makes more precise and
+which it leaves standing. (2) The blocked verification leg commissioned against leg 176
+(leg 192) has at this writing committed **only its own pre-registered novelty / prior-art
+pass** — no verification runner, no re-derivation, no verdict. **Leg 176's numbers are therefore
+carried here as leg 176's own single-leg measurements, not as independently re-derived ones.**
 
 ---
 
@@ -252,7 +263,9 @@ imposes no origin condition. That is actionable independently of whether any cer
 ever built, and it is the transferable thing here: **the realization discipline, not the
 certificate.**
 
-**On the commissioned construction leg (leg 176): it has not landed.** At drafting it had
+**On the commissioned construction leg (leg 176): as drafted, it had not landed.** *(It has
+since landed; this paragraph is kept exactly as written, and the outcome is at §3.5.)* At
+drafting it had
 committed only its novelty pass. Two things from that pass are quotable, both pre-registrations
 rather than results: (a) if it lands, the only thing it could claim as new is the **discrete
 realization** — Xu's own numerics use compactified-grid Newton continuation, log-Mellin
@@ -262,6 +275,79 @@ finite-section truncation — *"a claim about the method, not the theorem; the r
 bound, trace-ideal membership, quadrature-error bounds in trace norm) sit in a different strand
 of his paper and *"this leg closes none of the three."* That pass also states that leg 163's O3
 is **confirmed rather than weakened** by it. **No outcome is attributed or predicted.**
+
+### 3.5 The fourth data point: the construction leg landed, and its answer has two halves
+
+Leg 176 built the formulation §3.1 scoped. **Its own gate headline, verbatim: "YES on both
+conjuncts — with one magnitude that says NO and is reported in the same breath."** Both halves
+are reproduced here at the strength leg 176 states them, and neither is quotable without the
+other. Float64 throughout, nothing interval-enclosed; 42 evidence checks, 0 failing.
+
+**The YES, half one — Xu's closed form reproduces.** Xu eq. (4.23) at `z = 0`, bordered, checked
+pointwise against Xu's own ODE in `y`-space (a check that never mentions the discrete
+realization): max relative residual **4.767e−15**, worst over six independent data **5.135e−15**,
+against leg 163's established **2.8e−14** class. Every derivative analytic; no finite differences.
+
+**The YES, half two — it closes on leg 163's own diagnostic.** `σ_min` of the bordered operator
+in the `X` metric, on a **domain-only** truncation (range untruncated), which gives an upper
+bound closing down onto `σ_min` rather than a Galerkin section:
+
+| `N` | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 |
+|---|---|---|---|---|---|---|---|---|
+| `σ_min` | 0.0927566 | 0.0911590 | 0.0909310 | 0.0908878 | 0.0908506 | 0.0908234 | **0.0908047** | *0.0909363* |
+
+**`σ_min = 0.0908`, `‖R‖_X = 11.0127`**, monotone decreasing through `N = 512`, varying by
+**0.139 % over a 16-fold truncation range**. The `N = 1024` row rises instead of falling; leg 176
+attributes that to the float floor of an `X` Gram whose entries reach ~1e12 and reports it as the
+reason the reliable window stops at 512. In its own words this is **"float64 evidence of a
+positive limit, not a proof of one."** The tail block closes too — `‖T⁻¹‖_X = 4.026`,
+truncation-independent, where in `ℓ¹_w` (legs 51/53) the tail inverse norm **diverged** with `M`.
+And the two controls report the other answer: unbordered `σ_min` collapses to the float floor
+(1.55e−15 → 6.97e−14), and the loose `L²` realization decays like `N^{−1.49}` with **no gap at
+all** — so the origin condition is now a measured magnitude rather than a citation.
+
+**The NO, in leg 54's own shape, and it is the same magnitude class this note's §2 reports.**
+With `A = blockdiag(finite bordered inverse, tail inverse)` and `Z₁ = ‖I − A𝕃‖_X`:
+
+| `K` \ `M` | 64 | 128 | 256 |
+|---|---|---|---|
+| 2 | **140.72** | 182.23 | 244.15 |
+| 4 | 697.95 | 934.14 | 1277.86 |
+| 8 | 2747.04 | 3671.58 | 5026.73 |
+| 16 | 10516.43 | 13621.66 | 18417.50 |
+| 32 | 43253.75 | 50728.94 | 66043.98 |
+
+**Best cell 140.72 where `< 1` is needed; growth `~K²`.** So in leg 54's shape the `X`
+realization fails too — **but, in leg 176's own reading, for a different reason than `ℓ¹_w` did.**
+There, leg 127 showed the operator itself had no truncation-independent `σ_min`, so `Z₁ ≥ 1` for
+*every* bounded `A`. Here the operator does have one, so **the failure is of the block-diagonal
+shape of `A`, not of the operator and not of the space.** Leg 176 calls that distinction its most
+useful output and the reason both numbers are reported with neither standing for the other.
+**This note adopts that framing and adds nothing to it**: no claim is made here that some
+*other*, non-block-diagonal `A` closes it — that was not tested, by leg 176 or by anyone.
+
+**One correction this construction makes to §3.2's and §4.5's witness, flagged not silently
+applied.** The value `σ_min ≥ 0.71465` quoted in §3.2, §4.5 and §5(3) is **leg 163's three-datum
+witness**, and leg 176 states plainly that it was **optimistic by 7.9×**: *"That is a witness, not
+a bound. The measured value is 0.0908."* Reproducing leg 163's own quantity from the closed form
+gives 0.868155 over four data while the operator norm is 11.0 — i.e. **random low-mode data does
+not find the worst direction.** Those three call-sites lie outside the territory of the leg that
+folded this point in and are **left as banked**; a reader should take **0.0908** as the measured
+figure and `≥ 0.71465` as the superseded witness wherever the two appear together. *The direction
+of the correction does not change any conclusion in §3–§5: `σ_min` is still bounded away from zero
+and still truncation-independent, which is the only property those sections use it for.*
+
+**What this does and does not change in §3.3's ceiling — nothing is lifted.** Leg 176 restates
+O3 itself: `a = 0` only, and what is certified is **"an object Xu already inverts in closed
+form."** It closes **none** of Xu's three recorded gaps toward a computer-assisted proof
+(uniform large-imaginary-part bound, trace-ideal membership, quadrature-error bounds in trace
+norm), forms **no `Y₀` and no `Z₂`**, is float64 with nothing interval-enclosed, and moves **no
+link of the `L1 → L4` chain**. Its own summary of what it is: **"the first constructed (not
+merely scoped) certificate outside the `ℓ¹_w` lane this repository has built, and a new exact
+discrete realization of Xu's operator. Infrastructure, not a theorem."** The claim grade of this
+fourth point is therefore **construction, gate YES with a reported NO magnitude** — strictly
+weaker than §2's theorem and not to be levelled with it; and §3.3's *"escalated rather than
+built"* now describes leg 163 specifically, not the state of the axis.
 
 ---
 
@@ -490,8 +576,11 @@ and formed no certificate constant. §4's `σ`-threshold algebra is asymptotic a
 level and agrees with the directly measured `p = 1` margin to 0.6 %, not exactly; its MOVE-B
 half is read from §3's census rather than independently re-derived, and the leg that wrote it
 states plainly that it did not re-read Xu at primary source. The commissioned origin-`H²`
-construction leg had **not landed** at drafting and nothing is attributed to it. **No link of
-the `L1 → L4` chain moved.** None has moved in 185 legs. Clay odds remain ~0.05 %.
+construction leg had **not landed** at drafting and nothing in §§1–4.5 or §§5–6 is attributed to
+it; it has since landed and is folded in at **§3.5 only**, where it is float64 with nothing
+interval-enclosed, forms no `Y₀` and no `Z₂`, and is carried as a **single leg's own
+measurements** — its commissioned verification leg has committed only a novelty pass and has
+returned no verdict. **No link of the `L1 → L4` chain moved.** None has moved in 185 legs. Clay odds remain ~0.05 %.
 
 **This draft is for the user's review. Its landing records that the bundle reproduces from its
 sources; it does not approve the bundle for publication. It is one of two such drafts — see

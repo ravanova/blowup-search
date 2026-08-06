@@ -204,6 +204,25 @@ in the single line `{Re λ = −1/2}` — hence is invertible after modulation, 
 sentence anywhere in this project says the operator "has no bounded approximate inverse," and
 none may.
 
+**The nearest published relative, cited here on leg 183's recommendation.** Xu **§8** carries
+an interval-arithmetic no-go of its own — same operator, different realization, different
+certificate quantity, both concluding that an off-the-shelf enclosure does not enter — and leg
+183 (which read §8 at full text and resolved whether it pre-empts this section: it does not)
+recommended that this scope line cite it alongside the origin-`H²` fact already above, in these
+terms:
+
+> *Xu §8 rules out weighted resolvent enclosure of the raw grid truncation by norm-invariance
+> of eigenvalues; §3 rules out bounded approximate inverses in `ℓ¹_w` by a norm-dependent
+> lower-bound failure; the two are complementary and neither implies the other.*
+
+Leg 183 flagged this as **an addition, not a correction to a claim** — nothing in §3.1 above is
+altered by it — and recorded that a referee who knows the paper will ask. The differences that
+make the two statements complementary rather than nested are, in leg 183's own tabulation: Xu's
+object is the **raw** grid "without an origin condition" at `a > 0`, this section's is the
+**bordered** `a = 0` matrix whose gauge row *is* Xu's own `v′(0)` origin functional; and Xu's
+quantity is exactly invariant under the relevant similarity **as a theorem**, whereas `Z₁` is
+not, which is why §8's argument template does not transfer to `Z₁`.
+
 ### 3.2 The superseded form, kept for the record
 
 **Proposition NG (leg 58).** On the class `A_upper = {[[A₁₁, A₁₂], [0, A₂₂]]}` — i.e. `A₂₁ = 0`,

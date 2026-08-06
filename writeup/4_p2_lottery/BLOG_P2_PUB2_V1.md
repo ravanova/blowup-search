@@ -79,6 +79,37 @@ So the honest summary of the good room is a sentence with two halves, and quotin
 alone is a misrepresentation: **a certificate there is structurally buildable, and what it
 would certify is a closed form its author has already written down.**
 
+**Since this was drafted, we went and built it — and the answer has two halves.** A construction
+leg (leg 176) put the second room's formulation on a computer, and its own verdict is *"YES on
+both conjuncts — with one magnitude that says NO and is reported in the same breath."* Both
+halves, at its strength and not ours:
+
+The **yes**: Xu's closed-form inverse reproduces against his own equation to about `5e−15`, and
+the quantity that collapses to zero in the sequence space stays put here — `0.0908`, moving by
+**0.139 % across a sixteen-fold change in truncation**, with the tail piece converging where in
+the sequence space it diverged. Two controls report the opposite answer, which is what makes them
+controls: drop the bordering and it falls to the arithmetic floor; drop the origin condition and
+it decays like `N^{−1.49}` — **no gap at all**. The origin condition is now a measured number
+rather than a citation.
+
+The **no**: the actual proof constant, computed the same way we computed it in the old room, comes
+out at best **140.72** where it has to be below **1**, and it grows like the square of the split
+parameter. So the proof does not close there either. But — and this is the part worth carrying —
+it fails for a *different reason*. In the old room the operator itself had no floor, so the
+constant was doomed for **every** bounded choice. Here the operator does have a floor, so what
+failed is the **shape** we chose for the approximate inverse. That is a narrower failure, and we
+are careful not to convert it into a promise: nobody has tested whether a different shape closes it.
+
+Two honesties about that number. It is ordinary floating point, one leg's own measurement — the
+independent re-derivation we commissioned has not reported. And it revises us, not the paper: the
+figure `0.71465` quoted earlier in this piece's technical companion was a three-sample **witness**,
+and the construction found the true value **7.9× smaller**. It is still bounded away from zero and
+still truncation-independent, which is all we ever used it for.
+
+None of this lifts the ceiling above. It is still the special parameter value, it still certifies
+an object Xu already inverts in closed form, and the leg that built it says so in its own summary:
+**infrastructure, not a theorem.**
+
 There is a second catch worth naming, because it will matter to anyone tempted by this route:
 the operator is *non-normal*, and Xu says so in his own abstract — a spectral gap does not by
 itself give a decay rate in the norm you care about. A proof in that room would certify
@@ -153,9 +184,11 @@ already published. Nothing here is a statement about the Navier–Stokes equatio
 of our chain to that problem has moved; none has moved in 185 legs. Every number above is
 ordinary floating point at a stated truncation — **none of this is interval-enclosed or
 rigorous** in the computer-assisted-proof sense, including the part we call a theorem, whose
-proof is exact but whose confirming measurements are not. We did not build a certificate in the
-second room; a leg to try was authorised and had not reported when this was written, and
-nothing here depends on or predicts what it will find.
+proof is exact but whose confirming measurements are not. We had not built a certificate in the
+second room when this was written; the leg authorised to try has since reported, and its outcome
+is the two-halved one above — a formulation that closes and a proof constant that does not, on one
+leg's own float64 measurements, with the independent check still outstanding. Nothing in the rest
+of this piece depends on it.
 
 And one framing we are careful never to use, because it is the tempting and wrong one: *"the
 operator is invertible there, therefore a proof is possible."* It is not a shortcut. It is a
