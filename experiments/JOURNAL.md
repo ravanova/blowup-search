@@ -3368,3 +3368,17 @@ additive. A new gate-contract clause (lesson 91) requires every negative-result
 gate to name its realization/trial-space/basis. Three low-value slots (219
 duplicate, 222 FBA, 224 GCC) were preempted for 236/237/238; none of the three
 preempted agents had reached a landing.
+- **Leg 238 (Route-PUB4) — YES on both conjuncts, LANDED:** PUB2 gains leg 176's
+  construction outcome as its fourth data point (both halves inseparable: sigma_min
+  = 0.0908 truncation-independent to 0.139% over 16-fold, vs the NO's Z_1 best cell
+  140.72 where <1 is needed); PUB1 §3 now cites Xu §8 verbatim per leg 183. ONE
+  DISPATCH PREMISE CORRECTED: leg 192 has NOT actually verified leg 176 yet --
+  its only commit anywhere is a novelty pass (483b0d7), no runner, no verdict --
+  so PUB2 states leg 176's numbers as one leg's own float64 measurements, not as
+  independently confirmed. (Orchestrator note: leg 192's construction/measurement
+  work exists uncommitted in its own worktree, mid-background-compute -- not lost,
+  just not yet landed; leg 238's correction is accurate as of when it checked.)
+  ONE RESIDUE FLAGGED: PUB2's three sigma_min>=0.71465 call-sites (leg 163's own
+  witness) are optimistic by 7.9x against leg 176's true 0.0908 -- outside this
+  leg's territory, banked as a stated conflict, direction doesn't change any
+  conclusion. PUB1/PUB2 remain unapproved drafts.
