@@ -1,0 +1,766 @@
+{
+  "leg": "Leg 243 -- Route-PCRS",
+  "role": "VERIFIER",
+  "branch": "verify/243-pcrs-v1",
+  "generated": "2026-08-06T22:03:31Z",
+  "gate_verbatim": "Does an independent re-check confirm Route-L's own published headline verdict is UNAFFECTED by the `stall_verdict` positional-read finding leg 241 characterized (i.e., the 94.56x flip occurs only in a case that does not correspond to Route-L's actual banked headline configuration), matching leg 241's own 'not claim-adjacent' conclusion?",
+  "gate_answer": "YES",
+  "escalation_required": false,
+  "G0_provenance": {
+    "what_is_under_test": "leg 241's CONCLUSION that its R2 finding is not claim-adjacent -- NOT leg 241's characterisation of the mechanism, which this leg accepts as given",
+    "banked_artifact": {
+      "path": "writeup/data/p2_route_l_v1_precond.json",
+      "sha256": "c287396cd65d37467a33639c61e125e6a78e0aca030b04d4a7cd30694660ccf3",
+      "leg": "Route-L v1",
+      "title": "The 2D preconditioner: the stall attributed, and removed",
+      "generated": "2026-08-04T11:57:55Z",
+      "grid": {
+        "n_r": 200,
+        "n_beta": 48,
+        "r_min": 0.001,
+        "r_max": 100000.0,
+        "seed_steps": 3000
+      },
+      "seed_c_l": 3.060593660871532
+    },
+    "route_l_runner": {
+      "path": "experiments/p2_route_l_v1_precond.py",
+      "sha256": "a17ba31141eb7c8356584d3e9fabd6180eb07dc95fe1f83593807dbc9b52c67e"
+    },
+    "route_l_doc": {
+      "path": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md",
+      "sha256": "82c17332b301bdc2566a964d8e8c7ce11c727a21b857e546ebeac215452cabf4"
+    },
+    "module_under_discussion": {
+      "path": "solver/port_certification.py",
+      "sha256": "4fa43304d695fba4e569683521e58a30d8ac7a7e3063572d081d206eb111dea3",
+      "edited_by_this_leg": false
+    },
+    "leg_241": {
+      "branch": "origin/leg/241-pcrc-v1",
+      "head": "7f75a55",
+      "merged_into_main": "+ leg/241-pcrc-v1",
+      "read_only": true
+    }
+  },
+  "G1_order_audit": {
+    "question": "does ANY banked array that feeds `stall_verdict` sit in a non-ascending order, which is the sole precondition for the positional read to misreport?",
+    "arrays_audited": 11,
+    "leg_241_audited": 5,
+    "this_leg_audits_additionally": "the six L1_attribution ladders, which reach `stall_verdict` through `attribution_summary` and carry the published section-1 table",
+    "rows": [
+      {
+        "array": "L1_attribution/full",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L1_attribution/velocity feedback OFF",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L1_attribution/angular transport OFF",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L1_attribution/velocity in s_rho OFF",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L1_attribution/reaction terms OFF",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L1_attribution/pure dilation, no angular",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "attribution_summary"
+      },
+      {
+        "array": "L3_preconditioners/none",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "stall_verdict directly"
+      },
+      {
+        "array": "L3_preconditioners/radial only (Route-K)",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "stall_verdict directly"
+      },
+      {
+        "array": "L3_preconditioners/ADI composition",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "stall_verdict directly"
+      },
+      {
+        "array": "L3_preconditioners/full transport line sweep",
+        "stored_m_sequence": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "stall_verdict directly"
+      },
+      {
+        "array": "L3_preconditioners/line_sweep_deeper",
+        "stored_m_sequence": [
+          240,
+          320
+        ],
+        "strictly_ascending": true,
+        "reaches_stall_verdict_via": "stall_verdict directly"
+      }
+    ],
+    "non_ascending_arrays": 0,
+    "verdict": "ALL ASCENDING"
+  },
+  "G2_order_immune_vs_published": {
+    "method": "every published stall number re-derived from the banked ladders keyed on `m` (min/max by key, never by position), in code written in this leg, then compared under exact `==` on raw float64 -- never allclose. This gate reads NO source line of Route-L's runner and takes nothing from leg 241.",
+    "why_decisive": "the positional read and an order-immune read can differ ONLY on a non-ascending array. If what Route-L PUBLISHED equals the order-immune value bit-for-bit on every key of every ladder, then the published verdict is exactly the verdict a repaired `stall_verdict` would emit, and the defect cannot have touched it -- established from the artifact itself, not from a literal.",
+    "L3_stall_verdicts": [
+      {
+        "ladder": "none",
+        "published_residual_gain": 1.048694384970186,
+        "order_immune_residual_gain": 1.048694384970186,
+        "abs_difference": 0.0,
+        "bit_identical_all_keys": true,
+        "per_key": {
+          "rel_at_min_dim": {
+            "published": 0.6945865983167375,
+            "order_immune": 0.6945865983167375,
+            "identical": true
+          },
+          "min_dim": {
+            "published": 10,
+            "order_immune": 10,
+            "identical": true
+          },
+          "rel_at_max_dim": {
+            "published": 0.6623346212886269,
+            "order_immune": 0.6623346212886269,
+            "identical": true
+          },
+          "max_dim": {
+            "published": 160,
+            "order_immune": 160,
+            "identical": true
+          },
+          "work_ratio": {
+            "published": 16.0,
+            "order_immune": 16.0,
+            "identical": true
+          },
+          "residual_gain": {
+            "published": 1.048694384970186,
+            "order_immune": 1.048694384970186,
+            "identical": true
+          },
+          "flat": {
+            "published": true,
+            "order_immune": true,
+            "identical": true
+          }
+        },
+        "published_flat": true,
+        "order_immune_flat": true,
+        "verdict_agrees": true
+      },
+      {
+        "ladder": "radial only (Route-K)",
+        "published_residual_gain": 1.2419759393363918,
+        "order_immune_residual_gain": 1.2419759393363918,
+        "abs_difference": 0.0,
+        "bit_identical_all_keys": true,
+        "per_key": {
+          "rel_at_min_dim": {
+            "published": 0.44620037556631326,
+            "order_immune": 0.44620037556631326,
+            "identical": true
+          },
+          "min_dim": {
+            "published": 10,
+            "order_immune": 10,
+            "identical": true
+          },
+          "rel_at_max_dim": {
+            "published": 0.3592665215436665,
+            "order_immune": 0.3592665215436665,
+            "identical": true
+          },
+          "max_dim": {
+            "published": 160,
+            "order_immune": 160,
+            "identical": true
+          },
+          "work_ratio": {
+            "published": 16.0,
+            "order_immune": 16.0,
+            "identical": true
+          },
+          "residual_gain": {
+            "published": 1.2419759393363918,
+            "order_immune": 1.2419759393363918,
+            "identical": true
+          },
+          "flat": {
+            "published": true,
+            "order_immune": true,
+            "identical": true
+          }
+        },
+        "published_flat": true,
+        "order_immune_flat": true,
+        "verdict_agrees": true
+      },
+      {
+        "ladder": "ADI composition",
+        "published_residual_gain": 1.0039719069473407,
+        "order_immune_residual_gain": 1.0039719069473407,
+        "abs_difference": 0.0,
+        "bit_identical_all_keys": true,
+        "per_key": {
+          "rel_at_min_dim": {
+            "published": 0.9999933235914348,
+            "order_immune": 0.9999933235914348,
+            "identical": true
+          },
+          "min_dim": {
+            "published": 10,
+            "order_immune": 10,
+            "identical": true
+          },
+          "rel_at_max_dim": {
+            "published": 0.9960371566889724,
+            "order_immune": 0.9960371566889724,
+            "identical": true
+          },
+          "max_dim": {
+            "published": 160,
+            "order_immune": 160,
+            "identical": true
+          },
+          "work_ratio": {
+            "published": 16.0,
+            "order_immune": 16.0,
+            "identical": true
+          },
+          "residual_gain": {
+            "published": 1.0039719069473407,
+            "order_immune": 1.0039719069473407,
+            "identical": true
+          },
+          "flat": {
+            "published": true,
+            "order_immune": true,
+            "identical": true
+          }
+        },
+        "published_flat": true,
+        "order_immune_flat": true,
+        "verdict_agrees": true
+      },
+      {
+        "ladder": "full transport line sweep",
+        "published_residual_gain": 9.724453522207629,
+        "order_immune_residual_gain": 9.724453522207629,
+        "abs_difference": 0.0,
+        "bit_identical_all_keys": true,
+        "per_key": {
+          "rel_at_min_dim": {
+            "published": 0.18298327763783567,
+            "order_immune": 0.18298327763783567,
+            "identical": true
+          },
+          "min_dim": {
+            "published": 10,
+            "order_immune": 10,
+            "identical": true
+          },
+          "rel_at_max_dim": {
+            "published": 0.01881681857185689,
+            "order_immune": 0.01881681857185689,
+            "identical": true
+          },
+          "max_dim": {
+            "published": 160,
+            "order_immune": 160,
+            "identical": true
+          },
+          "work_ratio": {
+            "published": 16.0,
+            "order_immune": 16.0,
+            "identical": true
+          },
+          "residual_gain": {
+            "published": 9.724453522207629,
+            "order_immune": 9.724453522207629,
+            "identical": true
+          },
+          "flat": {
+            "published": false,
+            "order_immune": false,
+            "identical": true
+          }
+        },
+        "published_flat": false,
+        "order_immune_flat": false,
+        "verdict_agrees": true
+      }
+    ],
+    "L3_rows_not_bit_identical": 0,
+    "L1_ranked_attribution": [
+      {
+        "published_ablation": "pure dilation, no angular",
+        "order_immune_ablation": "pure dilation, no angular",
+        "rank_position_identical": true,
+        "published_gain": 4.676087475172898,
+        "order_immune_gain": 4.676087475172898,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      },
+      {
+        "published_ablation": "angular transport OFF",
+        "order_immune_ablation": "angular transport OFF",
+        "rank_position_identical": true,
+        "published_gain": 2.1169210556029303,
+        "order_immune_gain": 2.1169210556029303,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      },
+      {
+        "published_ablation": "velocity in s_rho OFF",
+        "order_immune_ablation": "velocity in s_rho OFF",
+        "rank_position_identical": true,
+        "published_gain": 1.6979545175555175,
+        "order_immune_gain": 1.6979545175555175,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      },
+      {
+        "published_ablation": "reaction terms OFF",
+        "order_immune_ablation": "reaction terms OFF",
+        "rank_position_identical": true,
+        "published_gain": 1.2982278360028197,
+        "order_immune_gain": 1.2982278360028197,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      },
+      {
+        "published_ablation": "velocity feedback OFF",
+        "order_immune_ablation": "velocity feedback OFF",
+        "rank_position_identical": true,
+        "published_gain": 1.115236714856578,
+        "order_immune_gain": 1.115236714856578,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      },
+      {
+        "published_ablation": "full",
+        "order_immune_ablation": "full",
+        "rank_position_identical": true,
+        "published_gain": 1.048694384970186,
+        "order_immune_gain": 1.048694384970186,
+        "abs_difference": 0.0,
+        "all_keys_identical": true
+      }
+    ],
+    "L1_rows_not_bit_identical": 0,
+    "L1_published_ranking_identical_to_order_immune": true,
+    "deep_rung": {
+      "stored_m_sequence": [
+        240,
+        320
+      ],
+      "order_immune_gain": 61.60560249945058,
+      "order_immune_min_dim": 240,
+      "order_immune_max_dim": 320,
+      "order_immune_rel_at_max_dim": 3.2651730424486987e-06,
+      "note": "the deep rung is banked as raw rows; Route-L publishes its m=320 residual directly and never publishes a stall verdict for it -- see G5"
+    },
+    "verdict": "PUBLISHED == ORDER-IMMUNE on all rows"
+  },
+  "G3_call_sites": {
+    "method": "the runner is PARSED (ast.walk), not grepped: every call to `krylov_ladder` / `stall_verdict` / `attribution_summary` is enumerated and its `dims` argument resolved, so no call site can be missed by citing one line.",
+    "gap_in_leg_241_this_closes": "leg 241's claim-adjacency table cites `DIMS = (10,20,40,80,160)` at line 49 as the whole reason the margin is safe. That literal does not reach the deep-rung call, which carries its own inline `dims` tuple -- yet leg 241 quotes the deep rung's 61.6x -> 0.0162x inversion. Enumerating mechanically settles both.",
+    "module_constants": {
+      "DIMS": [
+        10,
+        20,
+        40,
+        80,
+        160
+      ],
+      "newton": [],
+      "gauged": []
+    },
+    "call_sites": [
+      {
+        "function": "attribution_summary",
+        "line": 136,
+        "source": "attrib = attribution_summary(ladders)",
+        "dims": null,
+        "dims_provenance": null,
+        "dims_strictly_ascending": null
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 180,
+        "source": "deep = krylov_ladder(lambda v: Jv(M_sweep(v)), -Fz, dims=(240, 320))",
+        "dims": [
+          240,
+          320
+        ],
+        "dims_provenance": "inline literal",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 133,
+        "source": "ladders[label] = krylov_ladder(jv_of(F, z, Fv), -Fv, dims=DIMS)",
+        "dims": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "dims_provenance": "module constant DIMS",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 176,
+        "source": "pre = {\"none\": krylov_ladder(Jv, -Fz, dims=DIMS),",
+        "dims": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "dims_provenance": "module constant DIMS",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 177,
+        "source": "\"radial only (Route-K)\": krylov_ladder(lambda v: Jv(M_radial(v)), -Fz, dims=DIMS),",
+        "dims": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "dims_provenance": "module constant DIMS",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 178,
+        "source": "\"ADI composition\": krylov_ladder(lambda v: Jv(M_adi(v)), -Fz, dims=DIMS),",
+        "dims": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "dims_provenance": "module constant DIMS",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "krylov_ladder",
+        "line": 179,
+        "source": "\"full transport line sweep\": krylov_ladder(lambda v: Jv(M_sweep(v)), -Fz, dims=DIMS)}",
+        "dims": [
+          10,
+          20,
+          40,
+          80,
+          160
+        ],
+        "dims_provenance": "module constant DIMS",
+        "dims_strictly_ascending": true
+      },
+      {
+        "function": "stall_verdict",
+        "line": 270,
+        "source": "\"stalls\": {k: stall_verdict(v) for k, v in pre.items()}},",
+        "dims": null,
+        "dims_provenance": null,
+        "dims_strictly_ascending": null
+      }
+    ],
+    "krylov_ladder_call_sites": 6,
+    "covered_by_the_line_49_literal": 5,
+    "NOT_covered_by_the_line_49_literal": [
+      {
+        "line": 180,
+        "dims": [
+          240,
+          320
+        ],
+        "provenance": "inline literal",
+        "strictly_ascending": true
+      }
+    ],
+    "call_sites_with_non_ascending_dims": 0,
+    "verdict": "EVERY call site ascending"
+  },
+  "G4_affected_case": {
+    "note": "leg 241's MECHANISM is accepted as given and is not re-derived as a claim of this leg. It is reproduced here only to pin down, exactly, WHAT INPUT the 94.56x requires -- which is the question the gate turns on.",
+    "ladder": "full transport line sweep",
+    "input_as_banked": {
+      "m_sequence": [
+        10,
+        20,
+        40,
+        80,
+        160
+      ],
+      "residual_gain": 9.724453522207629,
+      "work_ratio": 16.0,
+      "flat": false,
+      "reading": "bending => finite ill-conditioning, and more Krylov work would help"
+    },
+    "input_reversed_by_leg_241": {
+      "m_sequence": [
+        160,
+        80,
+        40,
+        20,
+        10
+      ],
+      "residual_gain": 0.10283354203054298,
+      "work_ratio": 0.0625,
+      "flat": true,
+      "reading": "flat in Krylov dimension => a continuum in the spectrum, not a large condition number",
+      "constructed_by": "`sv(list(reversed(ladder)))` -- p2_route_pcrc_v1_cleanup.py:364, leg 241's own runner"
+    },
+    "flip_magnitude_reproduced": 94.56499630557636,
+    "leg_241_reported": {
+      "ascending_gain": 9.7245,
+      "descending_gain": 0.1028,
+      "ratio": 94.56
+    },
+    "reproduction_agrees_with_leg_241": {
+      "ascending": true,
+      "descending": true,
+      "ratio": true
+    },
+    "deep_rung": {
+      "ascending_gain": 61.60560249945058,
+      "reversed_gain": 0.0162322899124137,
+      "m_sequence_as_banked": [
+        240,
+        320
+      ]
+    },
+    "the_input_the_flip_requires": "a row array ordered descending in `m`. G1 finds 0 of 11 banked arrays in that order and G3 finds 0 of the runner's call sites able to produce one.",
+    "is_route_l_actual_banked_configuration": false
+  },
+  "G5_headline_trace": {
+    "headline_sentence": "Step (iii) of the certification chain -- an approximate inverse `A` with a computable `Z1` -- was declared unreachable on this discretization by Route-K. It is now reachable: an `O(N)` exact sweep takes the Krylov stall from 0.6623 (flat) to 3.3e-6.",
+    "doc": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEL_V1.md",
+    "components": [
+      {
+        "number_as_published": "0.6623",
+        "traces_to": "L3_preconditioners/ladders/none, the m=160 row's rel_residual",
+        "banked_value": 0.6623346212886269,
+        "order_sensitive": false,
+        "why": "a single measured row, selected here by max m. A per-row residual carries its own `m`; no ordering of the array changes the value at m=160."
+      },
+      {
+        "number_as_published": "(flat)",
+        "traces_to": "L3_preconditioners/stalls/none -> flat",
+        "banked_value": true,
+        "order_immune_value": true,
+        "order_sensitive": true,
+        "survives_reversal_anyway": true,
+        "why": "this label IS a `stall_verdict` output, so it is order-sensitive in principle. Two independent reasons it is untouched: the banked array is ascending (G1/G2), AND this particular ladder's gain is 1.0487 ascending against 0.9536 reversed -- both below 2.0, so `flat` is True either way. The headline's `(flat)` is the one component that could not flip even on the reversed input."
+      },
+      {
+        "number_as_published": "3.3e-6",
+        "traces_to": "L3_preconditioners/line_sweep_deeper, the m=320 row's rel_residual",
+        "banked_value": 3.2651730424486987e-06,
+        "order_sensitive": false,
+        "why": "a single measured row again. Route-L publishes the deep rung as raw residuals in its section-3 table and never publishes a stall verdict for it -- the `61.6x` leg 241 inverts is a quantity leg 241 formed, not one Route-L banked or printed."
+      },
+      {
+        "number_as_published": "gain 9.72, 'the ladder stops being flat' (section 3, the claim the headline rests on)",
+        "traces_to": "L3_preconditioners/stalls/full transport line sweep",
+        "banked_value": 9.724453522207629,
+        "order_immune_value": 9.724453522207629,
+        "banked_flat": false,
+        "order_immune_flat": false,
+        "order_sensitive": true,
+        "survives_reversal_anyway": false,
+        "why": "THE load-bearing one, and the ladder leg 241 flips. It is order-sensitive and it would NOT survive a reversed input -- 9.7245 (bending) would become 0.1028 (flat), the exact conclusion Route-L used this ladder to overturn. Its safety is therefore NOT structural; it rests entirely on the banked array being ascending, which G1 and G2 establish independently and G3 confirms at the source."
+      }
+    ],
+    "order_sensitive_components": 2,
+    "order_invariant_components": 2,
+    "doc_cross_checks": {
+      "headline_present_verbatim_in_doc": true,
+      "gain_9_72_present_in_doc": true,
+      "published_gain_matches_order_immune_to_2dp": true
+    },
+    "reading": "two of the four headline components are raw single-row residuals and cannot move under any ordering; one (`flat` on the `none` ladder) is a stall verdict that happens to be double-covered; one (the sweep's bending verdict) is genuinely order-sensitive and is exactly leg 241's flipping ladder. So leg 241 is RIGHT that the headline's load-bearing verdict rides the flipping ladder -- and right, separately, that the banked configuration never presents that ladder in the flipping order."
+  },
+  "G6_control": {
+    "why": "lesson 90 -- a check that can only come out one way is not a check. The audit predicate and the order-immune comparison are both run against inputs where they MUST report a problem, and against the live one where they must not.",
+    "negative_control_descending": {
+      "m_sequence": [
+        160,
+        80,
+        40,
+        20,
+        10
+      ],
+      "flagged_non_ascending": true,
+      "positional_gain": 0.10283354203054298,
+      "order_immune_gain": 9.724453522207629,
+      "gain_ratio": 94.56499630557636,
+      "positional_flat": true,
+      "order_immune_flat": false,
+      "detected_by_this_leg_audit": true
+    },
+    "negative_control_shuffled": {
+      "m_sequence": [
+        40,
+        10,
+        160,
+        20,
+        80
+      ],
+      "flagged_non_ascending": true,
+      "positional_gain": 1.4162559476780934,
+      "order_immune_gain": 9.724453522207629,
+      "gain_ratio": 6.86631080925066,
+      "positional_flat": true,
+      "order_immune_flat": false,
+      "detected_by_this_leg_audit": true
+    },
+    "positive_control_as_banked": {
+      "m_sequence": [
+        10,
+        20,
+        40,
+        80,
+        160
+      ],
+      "flagged_non_ascending": false,
+      "positional_gain": 9.724453522207629,
+      "order_immune_gain": 9.724453522207629,
+      "difference": 0.0,
+      "clean": true
+    },
+    "control_comes_out_both_ways": true
+  },
+  "the_comparison_the_gate_asks_for": {
+    "route_l_actual_banked_configuration": {
+      "artifact": "writeup/data/p2_route_l_v1_precond.json",
+      "ladder_carrying_the_headline": "full transport line sweep",
+      "m_sequence_as_banked": [
+        10,
+        20,
+        40,
+        80,
+        160
+      ],
+      "dims_provenance": "module constant DIMS = (10, 20, 40, 80, 160), ascending",
+      "deep_rung_dims_provenance": "inline literal (240, 320), ascending",
+      "published_residual_gain": 9.724453522207629,
+      "published_flat": false,
+      "published_reading": "bending => finite ill-conditioning"
+    },
+    "the_case_leg_241_found_the_flip_in": {
+      "artifact": "constructed in leg 241's runner, not banked anywhere",
+      "construction": "sv(list(reversed(ladder))) -- p2_route_pcrc_v1_cleanup.py:364",
+      "m_sequence": [
+        160,
+        80,
+        40,
+        20,
+        10
+      ],
+      "residual_gain": 0.1028344044715522,
+      "flat": true,
+      "reading": "flat => a continuum in the spectrum"
+    },
+    "do_they_correspond": false,
+    "difference": "the ordering of the row array, and nothing else -- the five measurements are identical floats in both. Route-L's banked ladder is ascending; leg 241's flipping case is that same ladder reversed in memory, an input no Route-L call site can produce."
+  },
+  "finding": "CONFIRMED UNAFFECTED. All 11 banked arrays that reach `stall_verdict` are stored strictly ascending in m; every published stall number is bit-identical to an order-immune re-derivation keyed on m (all differences exactly 0.0, under == on raw float64, never allclose), including the 6-row attribution ranking leg 241 did not audit, whose published order is reproduced exactly; and all 6 krylov_ladder call sites (lines 133, 176-180) carry ascending dims, including the deep rung's own inline (240, 320) at line 180 which leg 241's cited line 49 does not cover. Leg 241's 94.56x is reproduced exactly on the reversed input and requires an array ordered descending in m, which occurs at 0 of 11 banked arrays and 0 of 6 call sites. Leg 241's 'not claim-adjacent' conclusion is independently confirmed -- and its own reading that the margin is 0.0 and undefended, rather than safe by construction, is confirmed too: the headline's load-bearing component IS the flipping ladder's bending verdict.",
+  "what_this_does_not_say": "This leg does NOT clear the defect. The margin is 0.0: the sweep ladder's bending verdict, which the headline rests on, is protected only by the input order, not by anything in `krylov_ladder` or `stall_verdict`. A future caller passing descending dims would silently invert a published verdict with no error and no flag. The repair leg leg 241 asks for is still warranted; what this leg establishes is only that no banked number is currently wrong.",
+  "wall_clock_seconds": 0.95
+}
