@@ -1,0 +1,1045 @@
+{
+  "leg": 209,
+  "route": "ROUTE-SCA2",
+  "version": "v1",
+  "module_under_audit": "solver/spectral_certificate.py",
+  "module_patched_by_this_leg": false,
+  "novelty_log": "writeup/novelty/leg_209.md",
+  "gate": "Under adversarial and degenerate inputs (near-singular weight classes, boundary-of-admissibility A, NaN/Inf), does spectral_certificate.py ever silently return a wrong Z_1/sigma_min value rather than reject or visibly propagate the defect?",
+  "F7_clean_input_soundness": {
+    "rows": [
+      {
+        "K": 8,
+        "float64": 16.986138387862415,
+        "exact_rational": 16.986138387862425,
+        "rel_diff": 6.274610975745587e-16
+      },
+      {
+        "K": 16,
+        "float64": 19.628413264614608,
+        "exact_rational": 19.628413264614622,
+        "rel_diff": 7.239940653186066e-16
+      },
+      {
+        "K": 32,
+        "float64": 19.628413264614608,
+        "exact_rational": 19.628413264614622,
+        "rel_diff": 7.239940653186066e-16
+      },
+      {
+        "K": 64,
+        "float64": 19.628413264614608,
+        "exact_rational": 19.628413264614622,
+        "rel_diff": 7.239940653186066e-16
+      }
+    ],
+    "worst_rel_diff": 7.239940653186066e-16
+  },
+  "F3_sigma_min_under_nan": {
+    "clean": {
+      "K": 8,
+      "M_extra": 512,
+      "class": "algebraic",
+      "param": 0.3,
+      "sigma_min": 0.034914733291684645,
+      "argmax_column": 511,
+      "counterexample_norm_floor_Z1_0p5": 14.3206020170024,
+      "tradeoff": {
+        "Z1": 0.5,
+        "A_norm": 100.0,
+        "sigma_min": 0.034914733291684645,
+        "rhs": -2.4914733291684645,
+        "slack": 2.9914733291684645,
+        "holds": true
+      }
+    },
+    "poisoned": [
+      {
+        "where": [
+          0,
+          0
+        ],
+        "sigma_min": "inf",
+        "counterexample_norm_floor_Z1_0p5": 0.0,
+        "tradeoff_holds": true,
+        "tradeoff_rhs": "-inf"
+      },
+      {
+        "where": [
+          256,
+          256
+        ],
+        "sigma_min": "inf",
+        "counterexample_norm_floor_Z1_0p5": 0.0,
+        "tradeoff_holds": true,
+        "tradeoff_rhs": "-inf"
+      },
+      {
+        "where": [
+          511,
+          511
+        ],
+        "sigma_min": "inf",
+        "counterexample_norm_floor_Z1_0p5": 0.0,
+        "tradeoff_holds": true,
+        "tradeoff_rhs": "-inf"
+      },
+      {
+        "where": [
+          0,
+          511
+        ],
+        "sigma_min": "inf",
+        "counterexample_norm_floor_Z1_0p5": 0.0,
+        "tradeoff_holds": true,
+        "tradeoff_rhs": "-inf"
+      }
+    ],
+    "matrix_entries": 262144,
+    "poisoned_fraction": 3.814697265625e-06,
+    "mechanism": "IEEE 754 comparisons have FOUR outcomes, the fourth being '? U Unordered' when an operand is NaN, so `nrm > 0` is False for nrm = NaN and l1_bounded_below_constant falls to the `float('inf')` branch written for nrm == 0."
+  },
+  "F3b_nan_manufactured_by_the_module": [
+    {
+      "class": "geometric",
+      "param": -1.1,
+      "nan_entries": 4096,
+      "total_entries": 4096,
+      "sigma_min": "inf",
+      "counterexample_norm_floor_Z1_0p5": 0.0
+    },
+    {
+      "class": "geometric",
+      "param": 0.0,
+      "nan_entries": 4096,
+      "total_entries": 4096,
+      "sigma_min": "inf",
+      "counterexample_norm_floor_Z1_0p5": 0.0
+    },
+    {
+      "class": "geometric",
+      "param": -0.5,
+      "nan_entries": 4096,
+      "total_entries": 4096,
+      "sigma_min": "inf",
+      "counterexample_norm_floor_Z1_0p5": 0.0
+    },
+    {
+      "class": "algebraic",
+      "param": "nan",
+      "nan_entries": 4096,
+      "total_entries": 4096,
+      "sigma_min": "inf",
+      "counterexample_norm_floor_Z1_0p5": 0.0
+    },
+    {
+      "class": "algebraic",
+      "param": "inf",
+      "nan_entries": 4096,
+      "total_entries": 4096,
+      "sigma_min": "inf",
+      "counterexample_norm_floor_Z1_0p5": 0.0
+    }
+  ],
+  "F1_F2_weight_domain": {
+    "weight_vector": {
+      "geometric_2.0": [
+        2.0,
+        4.0,
+        8.0,
+        16.0
+      ],
+      "geometric_1.1": [
+        1.1,
+        1.2100000000000002,
+        1.3310000000000004,
+        1.4641000000000004
+      ],
+      "geometric_1.0": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "geometric_0.5": [
+        0.5,
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "geometric_0.0": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometric_-1.1": [
+        -1.1,
+        1.2100000000000002,
+        -1.3310000000000004,
+        1.4641000000000004
+      ],
+      "algebraic_1.0": [
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ],
+      "algebraic_-2.0": [
+        0.25,
+        0.1111111111111111,
+        0.0625,
+        0.04
+      ]
+    },
+    "exp_log_weight_vector": {
+      "geometric_2.0": [
+        2.0,
+        4.0,
+        7.999999999999998,
+        15.999999999999998
+      ],
+      "geometric_1.1": [
+        1.1,
+        1.2100000000000002,
+        1.3310000000000004,
+        1.4641000000000004
+      ],
+      "geometric_1.0": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "geometric_0.5": [
+        0.5,
+        0.25,
+        0.12500000000000003,
+        0.0625
+      ],
+      "geometric_0.0": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometric_-1.1": [
+        "nan",
+        "nan",
+        "nan",
+        "nan"
+      ],
+      "algebraic_1.0": [
+        2.0,
+        2.9999999999999996,
+        4.0,
+        4.999999999999999
+      ],
+      "algebraic_-2.0": [
+        0.25,
+        0.11111111111111115,
+        0.0625,
+        0.04000000000000001
+      ]
+    },
+    "opnorm_positive_weights": 5.301550440543678,
+    "opnorm_signed_weights": 1.652892561983471,
+    "opnorm_magnitudes_only": 5.301550440543678,
+    "understatement_factor": 3.2074380165289256,
+    "rigorous_finite_block_A_norm_nu_pos": 16.98613838786245,
+    "rigorous_finite_block_A_norm_nu_neg": 0.8347107438016543,
+    "rigorous_finite_block_understatement_factor": 20.349730147835178,
+    "algebra_constant_nu_pos": 0.9132231404958678,
+    "algebra_constant_nu_neg": 0.9132231404958678,
+    "algebra_constant_bit_identical": true
+  },
+  "F2b_containment_control": {
+    "positive_weights_non_containing": 0,
+    "positive_weights_draws": 200,
+    "positive_weights_tightest_ratio": 1.0000000000000009,
+    "one_sign_flip_non_containing": 200,
+    "one_sign_flip_draws": 200,
+    "one_sign_flip_worst_ratio": -0.0005820337862430745
+  },
+  "F8_membership_verdicts": {
+    "rows": [
+      {
+        "class": "algebraic",
+        "param": 0.0,
+        "verdict": "converges",
+        "in_l1_w": true,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.24977110419334567,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 0.3,
+        "verdict": "converges",
+        "in_l1_w": true,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.37854602544530175,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 0.5,
+        "verdict": "converges",
+        "in_l1_w": true,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.499465966755205,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 0.7,
+        "verdict": "converges",
+        "in_l1_w": true,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.6590150769482802,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 0.9,
+        "verdict": "converges",
+        "in_l1_w": true,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.8695347494160961,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 0.99,
+        "verdict": "log_divergent",
+        "in_l1_w": false,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": 0.9850625857063293,
+        "correct": false
+      },
+      {
+        "class": "algebraic",
+        "param": 1.0,
+        "verdict": "log_divergent",
+        "in_l1_w": false,
+        "truth_in_l1_w": false,
+        "last_increment_ratio": 0.9988114269070749,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 1.2,
+        "verdict": "power_divergent",
+        "in_l1_w": false,
+        "truth_in_l1_w": false,
+        "last_increment_ratio": 1.3178866318287865,
+        "correct": true
+      },
+      {
+        "class": "algebraic",
+        "param": 1.5,
+        "verdict": "power_divergent",
+        "in_l1_w": false,
+        "truth_in_l1_w": false,
+        "last_increment_ratio": 1.9974371229134635,
+        "correct": true
+      },
+      {
+        "class": "geometric",
+        "param": 0.5,
+        "verdict": "indeterminate",
+        "in_l1_w": false,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": "nan",
+        "increment": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "correct": false
+      },
+      {
+        "class": "geometric",
+        "param": 0.9,
+        "verdict": "indeterminate",
+        "in_l1_w": false,
+        "truth_in_l1_w": true,
+        "last_increment_ratio": "nan",
+        "increment": [
+          8.215650382226158e-15,
+          0.0,
+          0.0
+        ],
+        "correct": false
+      },
+      {
+        "class": "geometric",
+        "param": 1.05,
+        "verdict": "indeterminate",
+        "in_l1_w": false,
+        "truth_in_l1_w": false,
+        "last_increment_ratio": "nan",
+        "increment": [
+          3.2067702324417434e+18,
+          2.404708015958345e+82,
+          "nan"
+        ],
+        "correct": true
+      },
+      {
+        "class": "geometric",
+        "param": 1.1,
+        "verdict": "indeterminate",
+        "in_l1_w": false,
+        "truth_in_l1_w": false,
+        "last_increment_ratio": "nan",
+        "increment": [
+          7.83425854379601e+38,
+          6.929282497008343e+164,
+          "nan"
+        ],
+        "correct": true
+      }
+    ],
+    "band_lo": 0.9638520205412533,
+    "band_hi": 0.9638520205415261,
+    "wrongly_excluded_band_width": 0.03614797945847392,
+    "shipped_s_margin": 0.2638520205415261
+  },
+  "F6_weight_window": {
+    "alpha_nan": {
+      "alpha": "nan",
+      "s_max_object": "nan",
+      "s_operator": 0.3,
+      "gap": "nan",
+      "empty": false
+    },
+    "control_s0p3": {
+      "alpha": 0.394,
+      "s_max_object": 0.394,
+      "s_operator": 0.3,
+      "gap": -0.09400000000000003,
+      "empty": false
+    },
+    "control_s1p0": {
+      "alpha": 0.394,
+      "s_max_object": 0.394,
+      "s_operator": 1.0,
+      "gap": 0.606,
+      "empty": true
+    }
+  },
+  "F5_degenerate_indices": [
+    {
+      "case": "tail_inverse_norm_M_equals_K",
+      "status": "raised",
+      "value": "ValueError: zero-size array to reduction operation maximum which has no identity"
+    },
+    {
+      "case": "tail_block_M_less_than_K",
+      "status": "raised",
+      "value": "ValueError: negative dimensions are not allowed"
+    },
+    {
+      "case": "tail_inverse_norm_n_equals_1",
+      "status": "raised",
+      "value": "LinAlgError: Singular matrix"
+    },
+    {
+      "case": "tail_left_null_n_equals_1",
+      "status": "raised",
+      "value": "IndexError: index 1 is out of bounds for axis 0 with size 1"
+    },
+    {
+      "case": "bordered_tail_inverse_norm_n_1",
+      "status": "raised",
+      "value": "IndexError: index 1 is out of bounds for axis 0 with size 1"
+    },
+    {
+      "case": "singular_sequence_rate_degenerate_x",
+      "status": "raised",
+      "value": "LinAlgError: SVD did not converge in Linear Least Squares"
+    }
+  ],
+  "F4_control_discrimination": [
+    {
+      "mu": 0.0,
+      "K": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "norm": [
+        13.789704797497377,
+        15.986348329016382,
+        17.983434433081698,
+        19.86345741660088
+      ],
+      "ratio_last": 1.1045419322162822
+    },
+    {
+      "mu": 0.1,
+      "K": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "norm": [
+        5.214531357708272,
+        5.291593763571893,
+        5.292642188634341,
+        5.292642932722992
+      ],
+      "ratio_last": 1.0000001405892605
+    },
+    {
+      "mu": -0.1,
+      "K": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "norm": [
+        5.850221876115575,
+        5.872374956431216,
+        5.872702974642322,
+        5.872703239530192
+      ],
+      "ratio_last": 1.0000000451049322
+    },
+    {
+      "mu": -1.0,
+      "K": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "norm": [
+        9.5,
+        9.5,
+        9.5,
+        9.5
+      ],
+      "ratio_last": 1.0
+    }
+  ],
+  "blast_radius": {
+    "shipped_parameter_census": [
+      {
+        "class": "flat",
+        "param": 0.0,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.0,
+        "any_negative_weight": false
+      },
+      {
+        "class": "algebraic",
+        "param": 0.0,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.0,
+        "any_negative_weight": false
+      },
+      {
+        "class": "algebraic",
+        "param": 0.3,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.2311444133449163,
+        "any_negative_weight": false
+      },
+      {
+        "class": "algebraic",
+        "param": 0.7,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.624504792712471,
+        "any_negative_weight": false
+      },
+      {
+        "class": "algebraic",
+        "param": 1.0,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 2.0,
+        "any_negative_weight": false
+      },
+      {
+        "class": "algebraic",
+        "param": 1.5,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 2.8284271247461903,
+        "any_negative_weight": false
+      },
+      {
+        "class": "geometric",
+        "param": 1.05,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.05,
+        "any_negative_weight": false
+      },
+      {
+        "class": "geometric",
+        "param": 1.1,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.1,
+        "any_negative_weight": false
+      },
+      {
+        "class": "geometric",
+        "param": 1.2,
+        "nan_in_scaled_tail": 0,
+        "inf_in_scaled_tail": 0,
+        "min_weight": 1.2,
+        "any_negative_weight": false
+      }
+    ],
+    "shipped_params_producing_nan_or_inf": 0,
+    "shipped_params_with_a_negative_weight": 0,
+    "shipped_mu_values": [
+      0.0,
+      0.1,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "shipped_mu_negative": 0,
+    "shipped_s_nearest_the_F8_band": 0.7,
+    "F8_band_starts_at": 0.9638520205415261,
+    "F8_margin_in_s": 0.2638520205415261,
+    "clean_input_float_vs_exact_worst_rel": 7.239940653186066e-16,
+    "banked_numbers_contaminated": 0,
+    "verdict": "LATENT.  Every shipped weight class and parameter in test_spectral_certificate.py, p2_route_ngx_v1_general.py, p2_route_l1_v2_spectral.py, p2_route_t_v1_border.py and p2_route_ng_v1_nogo.py is in the documented domain: 0 produce a NaN or Inf in the scaled tail, 0 produce a negative weight, every mu is >= 0, and the nearest shipped s to F8's misclassified band is 0.7 against a band starting at 0.963852.  On clean input float64 agrees with exact rational arithmetic to 7.24e-16.  0 banked numbers move."
+  },
+  "theorem_NGX_proof_at_risk": {
+    "answer": "NO",
+    "why": "Theorem NGX's proof has two steps and NEITHER is a float computation. (1) Z_1 >= 1 - ||A||_w sigma_min(L) is an exact, three-line folklore inequality the module's own NGX header explicitly disclaims as not this repository's; it involves no code. (2) sigma_min(L) -> 0 like M^-(1-s) is established by the EXPLICIT sequence v_M = (z_M; h^(M)) whose entire residual is the single truncation-edge row |1 - M/2||h_M|w_M ~ M^(s-1), against ||v_M||_w bounded uniformly because sum m^(s-2) converges for s < 1 -- an analytic estimate on the INFINITE tail. Leg 58's companion result on A21 = 0 is likewise a three-line argument off the block structure of (I - AL)x with x = (0; h) and T h = 0. All four mechanisms found here require an input outside the documented domain (nu <= 0, an injected NaN, a negative weight, or s >= 0.963852) which no step of either proof uses and which the shipped path never produces.",
+    "what_IS_at_risk": "The module's ability to REPORT a correct sigma_min/||A||_w if it is ever driven outside its documented domain -- e.g. by a future leg sweeping the geometric class through nu <= 1, which weight_vector accepts silently. That is a code defect of the leg-201/204 class, not a mathematical one.",
+    "distinction_stated_explicitly": "A numerical module having an adversarial-input bug does not make an analytically-proved theorem wrong. This leg found the former and explicitly did NOT find the latter.",
+    "escalation_grounds": "the four silent-wrong mechanisms in a module Theorem NGX is proved against -- NOT 'the proof is at risk'"
+  },
+  "cases": [
+    {
+      "family": "F7",
+      "case": "float_vs_exact_inverse_norm",
+      "outcome": "sound",
+      "returned": 7.239940653186066e-16,
+      "expected": "< 1e-14",
+      "note": "||M_K^-1||_w in float64 vs exact Fraction Gauss-Jordan, geometric nu = 11/10, K = 8/16/32/64.  This BOUNDS THE BLAST RADIUS: the shipped path is sound, so every finding below is about inputs the shipped path does not produce."
+    },
+    {
+      "family": "F3",
+      "case": "clean_control_shipped_corner",
+      "outcome": "sound",
+      "returned": 0.034914733291684645,
+      "expected": "finite, positive, reproduces leg 127's ladder",
+      "note": "K=8, M_extra=512, algebraic s=0.3: sigma_min=0.034914733291684645, counterexample_norm_floor(Z1=0.5)=14.3206020170024, tradeoff holds=True with rhs=-2.4914733291684645.  THE CONTROL."
+    },
+    {
+      "family": "F3",
+      "case": "nan_at_(0, 0)",
+      "outcome": "silent_wrong",
+      "returned": "inf",
+      "expected": "0.034914733291684645 or a defect signal",
+      "note": "ONE NaN in 262144 entries (3.815e-06 of the matrix) sends sigma_min from 0.034914733291684645 to +inf -- the MOST FAVOURABLE value, i.e. 'L is perfectly bounded below'.  Downstream, counterexample_norm_floor launders it into the FINITE, PLAUSIBLE 0.0 (clean: 14.3206020170024)."
+    },
+    {
+      "family": "F3",
+      "case": "nan_at_(256, 256)",
+      "outcome": "silent_wrong",
+      "returned": "inf",
+      "expected": "0.034914733291684645 or a defect signal",
+      "note": "ONE NaN in 262144 entries (3.815e-06 of the matrix) sends sigma_min from 0.034914733291684645 to +inf -- the MOST FAVOURABLE value, i.e. 'L is perfectly bounded below'.  Downstream, counterexample_norm_floor launders it into the FINITE, PLAUSIBLE 0.0 (clean: 14.3206020170024)."
+    },
+    {
+      "family": "F3",
+      "case": "nan_at_(511, 511)",
+      "outcome": "silent_wrong",
+      "returned": "inf",
+      "expected": "0.034914733291684645 or a defect signal",
+      "note": "ONE NaN in 262144 entries (3.815e-06 of the matrix) sends sigma_min from 0.034914733291684645 to +inf -- the MOST FAVOURABLE value, i.e. 'L is perfectly bounded below'.  Downstream, counterexample_norm_floor launders it into the FINITE, PLAUSIBLE 0.0 (clean: 14.3206020170024)."
+    },
+    {
+      "family": "F3",
+      "case": "nan_at_(0, 511)",
+      "outcome": "silent_wrong",
+      "returned": "inf",
+      "expected": "0.034914733291684645 or a defect signal",
+      "note": "ONE NaN in 262144 entries (3.815e-06 of the matrix) sends sigma_min from 0.034914733291684645 to +inf -- the MOST FAVOURABLE value, i.e. 'L is perfectly bounded below'.  Downstream, counterexample_norm_floor launders it into the FINITE, PLAUSIBLE 0.0 (clean: 14.3206020170024)."
+    },
+    {
+      "family": "F3",
+      "case": "downstream_floor_is_finite_and_plausible",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": 14.3206020170024,
+      "note": "counterexample_norm_floor(0.5, inf) = 0.0.  This is the whole content of Theorem NGX's general-class conclusion INVERTED: it reports that a counterexample reaching Z1 = 0.5 needs ||A||_w >= 0, i.e. that ANY bounded A will do, where the clean answer is ||A||_w >= 14.3206020170024.  No NaN, no Inf, no exception survives to this point."
+    },
+    {
+      "family": "F3",
+      "case": "inf_at_0_0",
+      "outcome": "sound",
+      "returned": "LinAlgError: Singular matrix",
+      "expected": "reject or propagate",
+      "note": "np.linalg.inv raises LinAlgError -- VISIBLE, this path holds"
+    },
+    {
+      "family": "F3",
+      "case": "exactly_singular_column",
+      "outcome": "sound",
+      "returned": "LinAlgError: Singular matrix",
+      "expected": "reject or propagate",
+      "note": "np.linalg.inv raises LinAlgError -- VISIBLE, this path holds"
+    },
+    {
+      "family": "F3",
+      "case": "all_zero_matrix",
+      "outcome": "sound",
+      "returned": "LinAlgError: Singular matrix",
+      "expected": "reject or propagate",
+      "note": "np.linalg.inv raises LinAlgError -- VISIBLE, this path holds"
+    },
+    {
+      "family": "F3",
+      "case": "hand_check_diag_2_4",
+      "outcome": "sound",
+      "returned": 2.0,
+      "expected": 2.0,
+      "note": "inf ||Lx||_1/||x||_1 for diag(2,4) is 2 by hand.  The instrument is correct on an input whose answer is known independently of the code."
+    },
+    {
+      "family": "F3b",
+      "case": "geometric_-1.1",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": "reject the weight class",
+      "note": "_scaled_tail returns 4096/4096 NaN for a `param` that weight_vector/log_weight_vector accept with no check (the docstring documents nu > 1), and the F3 guard converts it to sigma_min = inf and a floor of 0.0."
+    },
+    {
+      "family": "F3b",
+      "case": "geometric_0.0",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": "reject the weight class",
+      "note": "_scaled_tail returns 4096/4096 NaN for a `param` that weight_vector/log_weight_vector accept with no check (the docstring documents nu > 1), and the F3 guard converts it to sigma_min = inf and a floor of 0.0."
+    },
+    {
+      "family": "F3b",
+      "case": "geometric_-0.5",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": "reject the weight class",
+      "note": "_scaled_tail returns 4096/4096 NaN for a `param` that weight_vector/log_weight_vector accept with no check (the docstring documents nu > 1), and the F3 guard converts it to sigma_min = inf and a floor of 0.0."
+    },
+    {
+      "family": "F3b",
+      "case": "algebraic_nan",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": "reject the weight class",
+      "note": "_scaled_tail returns 4096/4096 NaN for a `param` that weight_vector/log_weight_vector accept with no check (the docstring documents nu > 1), and the F3 guard converts it to sigma_min = inf and a floor of 0.0."
+    },
+    {
+      "family": "F3b",
+      "case": "algebraic_inf",
+      "outcome": "silent_wrong",
+      "returned": 0.0,
+      "expected": "reject the weight class",
+      "note": "_scaled_tail returns 4096/4096 NaN for a `param` that weight_vector/log_weight_vector accept with no check (the docstring documents nu > 1), and the F3 guard converts it to sigma_min = inf and a floor of 0.0."
+    },
+    {
+      "family": "F1",
+      "case": "geometric_nu_negative_gives_signed_weights",
+      "outcome": "silent_wrong",
+      "returned": [
+        -1.1,
+        1.2100000000000002,
+        -1.3310000000000004,
+        1.4641000000000004
+      ],
+      "expected": "reject (docstring: nu > 1)",
+      "note": "weight_vector(4,'geometric',-1.1) returns sign-ALTERNATING entries with no check, no warning and no exception.  A weight vector with a negative entry is not a weight."
+    },
+    {
+      "family": "F1",
+      "case": "weight_vector_vs_log_weight_vector_disagree",
+      "outcome": "silent_wrong",
+      "returned": {
+        "weight_vector": [
+          -1.1,
+          1.2100000000000002,
+          -1.3310000000000004,
+          1.4641000000000004
+        ],
+        "exp_log_weight_vector": [
+          NaN,
+          NaN,
+          NaN,
+          NaN
+        ]
+      },
+      "expected": "the two paths agree or both reject",
+      "note": "The module carries TWO representations of the same weights and they diverge outside the documented domain: weight_vector returns signed numbers, log_weight_vector returns NaN.  rigorous_finite_block uses the FIRST, finite_section_inverse_norm uses the SECOND -- so the same arguments give a finite 'rigorous' constant on one path and NaN on the other."
+    },
+    {
+      "family": "F2",
+      "case": "weighted_l1_opnorm_sign_cancellation",
+      "outcome": "silent_wrong",
+      "returned": 1.652892561983471,
+      "expected": 5.301550440543678,
+      "note": "Same magnitudes, one sign pattern: the returned 'operator norm' is 1.652892561983471 against the true 5.301550440543678 for those magnitudes -- understated 3.2074x, and POSITIVE and plausible, so nothing downstream can tell.  np.max over columns picks the cancelled column instead of rejecting it."
+    },
+    {
+      "family": "F2",
+      "case": "rigorous_finite_block_A_norm_understated",
+      "outcome": "silent_wrong",
+      "returned": 0.8347107438016543,
+      "expected": 16.986138387862415,
+      "note": "rigorous_finite_block(8,'geometric',-1.1) returns A_norm=0.8347107438016543 with rigorous=True, against the true 16.986138387862415 for the same magnitudes -- UNDERSTATED 20.349730x, and BELOW 1, while its sibling finite_section_inverse_norm on identical arguments returns NaN.  weighted_l1_upper is documented as a RIGOROUS UPPER BOUND; here it returns a value 20x below the quantity it claims to bound.  Same shape as leg 201's non-containing enclosure flagged rigorous=True, different module."
+    },
+    {
+      "family": "F1",
+      "case": "algebra_constant_sign_blind",
+      "outcome": "silent_wrong",
+      "returned": 0.9132231404958678,
+      "expected": "reject or differ",
+      "note": "algebra_constant returns 0.9132231404958678 for nu=+1.1 and 0.9132231404958678 for nu=-1.1 -- BIT-IDENTICAL (True).  Lesson 90's tell: identical numbers from two inputs that should differ.  It reports 'Banach algebra holds' (<= 1) for a weight class that is not a norm."
+    },
+    {
+      "family": "F1",
+      "case": "geometric_nu_below_1",
+      "outcome": "boundary_accepted",
+      "returned": 4236.533333333331,
+      "expected": "documented domain is nu > 1 / s >= 0",
+      "note": "Accepted outside the documented domain, but the returned number is the CORRECT norm for the (decaying / flat / negative-exponent) weight actually built -- verified against exact rational arithmetic where affordable.  NOT counted as silent_wrong: the value is right for the object built."
+    },
+    {
+      "family": "F1",
+      "case": "geometric_nu_equals_1",
+      "outcome": "boundary_accepted",
+      "returned": 31.733333333333334,
+      "expected": "documented domain is nu > 1 / s >= 0",
+      "note": "Accepted outside the documented domain, but the returned number is the CORRECT norm for the (decaying / flat / negative-exponent) weight actually built -- verified against exact rational arithmetic where affordable.  NOT counted as silent_wrong: the value is right for the object built."
+    },
+    {
+      "family": "F1",
+      "case": "algebraic_s_negative",
+      "outcome": "boundary_accepted",
+      "returned": 991.3312500000006,
+      "expected": "documented domain is nu > 1 / s >= 0",
+      "note": "Accepted outside the documented domain, but the returned number is the CORRECT norm for the (decaying / flat / negative-exponent) weight actually built -- verified against exact rational arithmetic where affordable.  NOT counted as silent_wrong: the value is right for the object built."
+    },
+    {
+      "family": "F2b",
+      "case": "containment_on_positive_weights",
+      "outcome": "sound",
+      "returned": "0/200 non-containing",
+      "expected": "0/200",
+      "note": "On POSITIVE weights weighted_l1_upper is a genuine upper bound in 200/200 draws, tightest ratio ub/exact = 1.0000000000000009.  THE ROUTINE IS NOT BROKEN IN GENERAL -- this is what makes the sign case a finding rather than noise."
+    },
+    {
+      "family": "F2b",
+      "case": "containment_with_one_sign_flip",
+      "outcome": "silent_wrong",
+      "returned": "200/200 non-containing",
+      "expected": "0/200 or rejection",
+      "note": "EXACTLY ONE sign flip in the weight vector: 200/200 draws return a bound BELOW the quantity they claim to bound, worst ub/exact = -0.0005820337862430745 -- i.e. the 'rigorous upper bound' comes back NEGATIVE.  The control comes out both ways, so the mechanism is the sign and not the routine."
+    },
+    {
+      "family": "F8",
+      "case": "algebraic_s_0.99",
+      "outcome": "silent_wrong",
+      "returned": false,
+      "expected": true,
+      "note": "verdict='log_divergent' from increment ratio 0.9850625857063293 against the hard-coded 0.95 threshold, but sum m^(s-2) = sum m^-1.01 CONVERGES.  Conservative direction for the no-go; still a wrong boolean."
+    },
+    {
+      "family": "F8",
+      "case": "geometric_nu_0.5",
+      "outcome": "silent_wrong",
+      "returned": "indeterminate",
+      "expected": "converges/power_divergent",
+      "note": "ALL FOUR geometric cases return 'indeterminate' with r=NaN: the increments underflow to exactly 0.0 (nu<1) or overflow so inc-inc=NaN (nu>1), and `incr[i] if incr[i] else nan` turns both into NaN.  The geometric class is the one this module's own docstring calls 'the literature's default'."
+    },
+    {
+      "family": "F8",
+      "case": "geometric_nu_0.9",
+      "outcome": "silent_wrong",
+      "returned": "indeterminate",
+      "expected": "converges/power_divergent",
+      "note": "ALL FOUR geometric cases return 'indeterminate' with r=NaN: the increments underflow to exactly 0.0 (nu<1) or overflow so inc-inc=NaN (nu>1), and `incr[i] if incr[i] else nan` turns both into NaN.  The geometric class is the one this module's own docstring calls 'the literature's default'."
+    },
+    {
+      "family": "F8",
+      "case": "geometric_nu_1.05",
+      "outcome": "silent_wrong",
+      "returned": "indeterminate",
+      "expected": "converges/power_divergent",
+      "note": "ALL FOUR geometric cases return 'indeterminate' with r=NaN: the increments underflow to exactly 0.0 (nu<1) or overflow so inc-inc=NaN (nu>1), and `incr[i] if incr[i] else nan` turns both into NaN.  The geometric class is the one this module's own docstring calls 'the literature's default'."
+    },
+    {
+      "family": "F8",
+      "case": "geometric_nu_1.1",
+      "outcome": "silent_wrong",
+      "returned": "indeterminate",
+      "expected": "converges/power_divergent",
+      "note": "ALL FOUR geometric cases return 'indeterminate' with r=NaN: the increments underflow to exactly 0.0 (nu<1) or overflow so inc-inc=NaN (nu>1), and `incr[i] if incr[i] else nan` turns both into NaN.  The geometric class is the one this module's own docstring calls 'the literature's default'."
+    },
+    {
+      "family": "F8",
+      "case": "wrongly_excluded_band_width",
+      "outcome": "silent_wrong",
+      "returned": 0.03614797945847392,
+      "expected": 0.0,
+      "note": "Bisected: the last s classified in_l1_w=True is 0.9638520205412533, the first False is 0.9638520205415261.  Every s in [0.963852, 1) is IN l^1_w and reported as not.  Band width 0.03614797945847392 in the weight exponent.  Nearest shipped s is 0.7 (r=0.6590), margin 0.263852 in s -- so this is LATENT."
+    },
+    {
+      "family": "F8",
+      "case": "nogo_hypotheses_mu_negative",
+      "outcome": "boundary_accepted",
+      "returned": false,
+      "expected": false,
+      "note": "mu = -1 (ANTI-dissipation, physically inadmissible) is accepted with no check, but H2 is correctly reported False and sigma_min is a genuine norm of the matrix actually built.  NOT counted: the number is right for the object built."
+    },
+    {
+      "family": "F6",
+      "case": "weight_window_alpha_nan",
+      "outcome": "silent_wrong",
+      "returned": false,
+      "expected": "True or a defect signal",
+      "note": "weight_window(nan, 0.3) returns empty=False -- the FAVOURABLE answer ('the window is not empty, a certificate can still close') -- because bool(nan >= nan) is False under the same IEEE-754 unordered relation as F3. `gap` is a visible NaN, but `empty` is the boolean a caller branches on."
+    },
+    {
+      "family": "F6",
+      "case": "weight_window_clean_controls",
+      "outcome": "sound",
+      "returned": [
+        false,
+        true
+      ],
+      "expected": [
+        false,
+        true
+      ],
+      "note": "The control comes out BOTH ways on clean input (alpha=0.394 against s_operator=0.3 and 1.0), so `empty` is not a constant."
+    },
+    {
+      "family": "F5",
+      "case": "tail_inverse_norm_M_equals_K",
+      "outcome": "sound",
+      "returned": "ValueError: zero-size array to reduction operation maximum which has no identity",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "tail_block_M_less_than_K",
+      "outcome": "sound",
+      "returned": "ValueError: negative dimensions are not allowed",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "tail_inverse_norm_n_equals_1",
+      "outcome": "sound",
+      "returned": "LinAlgError: Singular matrix",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "tail_left_null_n_equals_1",
+      "outcome": "sound",
+      "returned": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "bordered_tail_inverse_norm_n_1",
+      "outcome": "sound",
+      "returned": "IndexError: index 1 is out of bounds for axis 0 with size 1",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "singular_sequence_rate_degenerate_x",
+      "outcome": "sound",
+      "returned": "LinAlgError: SVD did not converge in Linear Least Squares",
+      "expected": "reject",
+      "note": "raises -- VISIBLE"
+    },
+    {
+      "family": "F5",
+      "case": "non_integer_K_truncated",
+      "outcome": "silent_wrong",
+      "returned": [
+        5,
+        5
+      ],
+      "expected": "reject or round explicitly",
+      "note": "bordered_linearization(4.9) silently becomes K=4 via int() -- a 5x5 matrix for a requested 4.9.  Same shape as leg 198's 'pin of arity 5 truncated to 3'.  Low magnitude, recorded for the mechanism count, not the headline."
+    },
+    {
+      "family": "F5",
+      "case": "K_equals_zero",
+      "outcome": "boundary_accepted",
+      "returned": 25.999999999999993,
+      "expected": "documented modes start at k=1",
+      "note": "K=0 makes the 'tail' the whole operator on modes 1..10.  Accepted and the number is correct for that object.  NOT counted."
+    },
+    {
+      "family": "F5",
+      "case": "clm_residual_empty_profile",
+      "outcome": "sound",
+      "returned": "IndexError: list index out of range",
+      "expected": "reject",
+      "note": "raises IndexError on b[0]"
+    },
+    {
+      "family": "F5",
+      "case": "clm_residual_nan_profile",
+      "outcome": "sound",
+      "returned": "NaN propagates",
+      "expected": "propagate or reject",
+      "note": "A NaN in the profile propagates into the residual VISIBLY -- this path holds."
+    },
+    {
+      "family": "F4",
+      "case": "mu_control_sign_blind",
+      "outcome": "boundary_accepted",
+      "returned": {
+        "0.0": 1.1045,
+        "0.1": 1.0,
+        "-0.1": 1.0,
+        "-1.0": 1.0
+      },
+      "expected": "mu < 0 rejected, or a different ratio",
+      "note": "dissipative_control's stated contract is 'mu > 0 must saturate in K, in every class'.  At mu = -0.1 and mu = -1.0 -- ANTI-dissipation -- it saturates just as cleanly (ratio_last 1.0000).  NOT counted as silent_wrong: each returned norm is the correct norm of the matrix actually built.  What it means is that the control establishes 'any DIAGONAL restores boundedness', which is weaker than 'dissipation restores boundedness' and is the honest reading of leg 51-58's positive control.  Recorded as a CHARACTERIZATION, not a defect."
+    }
+  ],
+  "case_counts": {
+    "sound": 16,
+    "silent_wrong": 24,
+    "boundary_accepted": 6
+  },
+  "cases_total": 46,
+  "mechanisms": [
+    "M1 l1_bounded_below_constant's `nrm > 0` guard is IEEE-754-unordered under NaN and returns sigma_min = +inf, the most favourable value; counterexample_norm_floor launders it into a finite, plausible 0.0.",
+    "M2 weight_vector accepts a geometric nu <= 0 with no check (documented nu > 1) and returns sign-alternating 'weights'; weighted_l1_upper then sums them WITH SIGNS and returns a 'rigorous' bound 20.35x BELOW the quantity it bounds.",
+    "M3 kernel_membership_ladder's hard-coded 0.95 increment-ratio threshold and its `incr or nan` idiom misclassify a 0.0361-wide band of CONVERGENT algebraic exponents, and all four geometric cases, as not-in-l^1_w.",
+    "M4 weight_window's `empty` flag is False for alpha = NaN -- the favourable answer -- by the same unordered-comparison mechanism as M1."
+  ],
+  "gate_answer": "YES",
+  "gate_answer_wording": "YES -- under adversarial and degenerate inputs spectral_certificate.py returns a silently wrong sigma_min/||A||_w rather than rejecting or visibly propagating, by four distinct mechanisms. Headline: ONE NaN in 262144 entries of the shipped (K=8, M_extra=512, s=0.3) tail sends sigma_min from 0.034914733291684645 to +inf and counterexample_norm_floor(Z1=0.5) from 14.3206020170024 to exactly 0.0 -- Theorem NGX's general-class conclusion inverted, with no defect signal surviving. Theorem NGX's own PROOF is NOT at risk and 0 banked numbers are contaminated."
+}
