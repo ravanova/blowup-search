@@ -188,7 +188,7 @@ def check_defect1_dealias_annihilated_vorticity_is_rejected():
     except ValueError as exc:
         assert "numerically zero" in str(exc), str(exc)
         return {"represented_m0": rep, "rejected": True,
-                "prefix_amplification_was": 5.5657830311010456e13}
+                "prefix_amplification_was": 55657830311010.46}
     raise AssertionError(
         f"accepted a dealias-annihilated vorticity (represented m0 = {rep:.3e}) "
         f"and returned outcome={r.outcome!r}")
