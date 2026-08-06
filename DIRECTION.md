@@ -10630,3 +10630,125 @@ not as movement of any link (the same space's fluid application is closed by fin
 and no output here is described as movement toward Clay). Clay stays ~0.05%. The one open
 direction question (re-posing Phase 1's target) is deliberately deferred with its trigger
 condition named: it ripens when 251, 261, and 262 have all landed.
+
+---
+
+## DM update, 2026-08-07 — THE LEG-178 (WES) RULING, RECEIVED AND PROCESSED (third
+notice resolved — the re-forward arrived): 178 unparked for landing under its YES branch,
+correction leg 263 and the single transfer probe 264 drafted, Ruling 3 adopted as a
+standing pre-registration rule
+
+**The user's three rulings on leg 178, recorded verbatim-in-substance:**
+
+1. **Gate answers YES under its literal wording.** Clause 3 is SCOPED, not overruled:
+   evaluated only at grading depths where the runner's own contamination diagnostic is
+   below 1 (at n_grade = 96 the innermost panel sits at θ ~ 3e-31 with contamination
+   3.1e+03 — the instrument stopped working; over the three valid depths the spread is
+   2.2839e-07). This is lesson 86, not a post-hoc relaxation. 178 lands under the YES
+   branch with this ruling recorded in its own gate-answer wording.
+2. **Leg 111's headline is re-scoped as a DOCUMENTED correction** — visible, not a buried
+   capabilities.py qualifier (fourth over-read closure: 165, 180, 185, 178-confirming-165).
+   **The two-triples ambiguity governs the edit**: `plan_of_record.py`'s "three
+   realizations" (P0 deliverable AND the re-posed stage-V ban) means ℓ¹_w (54) /
+   collocation (56) / origin-H² (163/176/182) — weighted-energy NOT a member; the
+   journals of legs 141, 165, 183 use the same phrase for a triple that DOES include
+   weighted-energy. The revival falsifies only the second usage. Pin per occurrence, edit
+   only what the revival reaches, NO global search-and-replace, and the live ban's
+   justification is untouchable.
+3. **Standing pre-registration rule, adopted here for all future legs touching
+   `solver/energy_coercivity.py`:** the fixed depth ladder {12, 24, 48, 96} is replaced
+   by "the deepest grading depth at which contamination < 1" — a strengthening, ruled by
+   the user, applying to leg 264 below and everything after.
+
+**Bounding, exactly as ruled: NO weighted-energy lane opens** ("not dead" is not "open";
+under a Clay goal a revived toy lane is not worth chasing for its own sake). The revival
+is a METHOD fact worth exactly one question — the transfer question — drafted as ONE leg
+below, ranked behind the programme. Leg 178's own scope line stays load-bearing: EGM's
+two free modulation parameters mean a gap on a constrained trial space is not a
+certificate; the +0.499999667 is EGM's published −1/2 reproduced numerically ("The −1/2
+is theirs"); the object is the a=0 CLM linearisation with its exactly-zero Y₀.
+
+**Dispatch plan (the coordinator's "your call" on ordering, decided):**
+
+- **178-LANDING: unpark `leg/178-wes-*` and land under the YES branch** with Ruling 1's
+  wording recorded. Everything is decided; this is light but claim-bearing (it lands a
+  YES). **Priority: next vacancy, ahead of 228/210/260/259 — or as a bench-scale dispatch
+  now if the orchestrator judges it fits the leg-258 shape; either satisfies the user's
+  "dispatch it" without displacing any programme slot.** Its §7b post-landing verify
+  can fold into 263's dispatch (same family) or stand alone at the orchestrator's
+  convenience.
+- **263 then 264, in that order** (the correction before the probe, so 264's brief cites
+  corrected prose), both behind every programme need (251, 261, 262, 256 in flight, and
+  any Phase-1 construction the user's 257 ruling spawns).
+
+```
+### 263 — ROUTE-WESC: THE LEG-111 HEADLINE RE-SCOPE + PER-OCCURRENCE TRIPLE PINNING
+(Ruling 2, executed carefully — a DOCUMENTED correction, not a buried qualifier)
+**Thesis.** Ruling 2 above, in full. The dangerous failure mode is named by the ruling
+itself: a global fix to journal prose that silently weakens plan_of_record.py's live
+stage-V ban, whose justification rests on a triple that does NOT include weighted-energy.
+**Gate.** After the correction: (a) is every occurrence of the "three realizations" /
+"measured-dead" phrasing pinned to its intended triple (plan-triple vs journal-triple),
+occurrence by occurrence, with only the revival-reached occurrences edited; (b) is leg
+111's headline re-scoped visibly (its own correction note, stating what over-read what);
+and (c) is plan_of_record.py's ban text byte-identical before and after?
+  yes -> Bank. The fourth over-read closure is on the record as a correction, and the ban
+         stands untouched.
+  no -> If ANY occurrence is ambiguous at full context (cannot be pinned to one triple),
+        STOP, list the ambiguous occurrences, and escalate — do not guess a triple.
+**Territory.** the named occurrence sites in experiments/journal/leg_141.md, leg_165.md,
+               leg_183.md; leg 111's headline site(s) (locate exactly, cite in report);
+               a correction note in writeup/ (visible, per the ruling);
+               writeup/novelty/leg_263.md, experiments/journal/leg_263.md.
+               plan_of_record.py is READ-ONLY — gate clause (c) enforces it.
+**Difficulty.** standard
+**Independence.** Prose/documentation territory, disjoint from every live slot. Ranked
+behind all programme legs, ahead of 264. Dispatchable once 178 lands (it corrects prose
+in light of 178's landed result — sequencing, not a hard block).
+```
+
+```
+### 264 — ROUTE-WETP: THE ONE TRANSFER PROBE — DOES THE EXACT-FUNCTIONAL TRIAL-SPACE
+CONSTRAINT SURVIVE OFF a=0? (the single question Ruling 178-4 licenses)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Constraining the trial space by exact functionals moved a window from width
+0.0 to 4.0 and a gap from −0.4999241 to +0.499999667 — on the a=0 CLM linearisation, the
+easiest object in the building. The ruled question: does that MOVE survive on an object
+that is not a=0? If yes, it is a technique the Clay programme can use; if no, a curiosity.
+The leg pre-registers its non-a=0 object BEFORE running (its choice, from objects this
+repository already carries, respecting every ban — e.g. an a≠0 gCLM linearisation or the
+HL profile as a measurement substrate; named in the novelty pass, not after results), and
+pre-registers depth per Ruling 3: the deepest grading depth at which contamination < 1,
+NOT the fixed ladder.
+**Gate.** On the pre-registered non-a=0 object, does the exact-functional constraint
+produce the same MOVE SHAPE (a window opening from zero width AND a gap sign change /
+comparable-magnitude improvement, both stated as thresholds in the novelty pass before
+running)?
+  yes -> Report as a transferable METHOD fact for the programme's use. NO lane opens, no
+         construction follows under this leg's authority — the user's bounding stands.
+  no -> Report the curiosity verdict at full strength: the move belongs to a=0's
+        degeneracy. Weighted-energy stays exactly where Ruling 178-4 put it.
+**Territory.** experiments/p2_route_wetp_v1_transfer.py,
+               writeup/data/p2_route_wetp_v1_transfer.json,
+               writeup/novelty/leg_264.md, experiments/journal/leg_264.md.
+               Reads (never edits) solver/energy_coercivity.py and leg 178's landed
+               report.
+**Difficulty.** standard
+**Independence.** Own module. Ranked LAST among the 178-family items and behind every
+programme leg, per the ruling's own ordering intent ("must not delay P0 or Phase 1").
+Dispatchable once 178 lands and 263 is at least dispatched (reads corrected prose).
+```
+
+**Canonical reserve line: reserve count 12 — legs 178L (the ruled landing), 263, 264,
+228, 210, 260, 259, 229, 231, 232, 233, 234.** Effective dispatchable: 5 now (178L, 228,
+210, 260, 259 — priority order: 178L, then 228/210/260/259 as before, with 260's trigger
+standing), plus 263/264 sequenced behind 178's landing. 229 blocked on 226; 231-234
+blocked on repairs. **Roster and FLOOR-TABLE unchanged (no slot touched). Floor stays
+5/10 strictly.** Next fresh leg number: **265.**
+
+Nothing in this update lifts a ban: Ruling 1 lands a leg under its own literal gate;
+Ruling 2 explicitly protects the stage-V ban's justification; the weighted-energy lane
+stays SHUT by the user's own bounding, and 264's yes-branch pre-commits that no lane
+opens under leg authority. Nothing here is a statement about HL_S2_nonsymmetric or any
+link of the L1→L4 chain; Clay stays ~0.05%. The leg-178 missing-forward flags (two
+notices above) are RESOLVED — the ruling arrived and is fully processed in this update.
