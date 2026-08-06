@@ -214,10 +214,11 @@ def _cumint_matrix4(n, drho, i0):
 
     Per panel [rho_i, rho_{i+1}] the Adams-Moulton 4-point rule
         int ~ h/24 * (-f_{i-1} + 13 f_i + 13 f_{i+1} - f_{i+2})
-    is O(h^4), against the banked trapezoid's O(h^2).  This matters: with the trapezoid
-    velocity the exact Chen profile leaves an 8.1e-05 residual floor, which would DOMINATE
-    any Y_0 measured against it (lesson 86 -- a bound dominated by its own evaluation error
-    is a statement about the code)."""
+    is O(h^4), against the banked trapezoid's O(h^2).  This matters: at n = 601 the trapezoid
+    velocity leaves the exact Chen profile with a 2.4124e-04 residual sup, which would DOMINATE
+    any Y_0 measured against it (lesson 86 -- a bound dominated by its own evaluation error is
+    a statement about the code).  This rule brings that to 3.7426e-06 (64.5x), off a velocity
+    error cut from 1.4375e-04 to 7.467e-07 (192.5x)."""
     C = np.zeros((n, n))
     h = drho
 
