@@ -91,4 +91,76 @@ fires.
 
 # Findings (written after construction; the pass above was committed first)
 
-*(appended post-construction — see below)*
+**Gate answer: NO.** The runner's own verdict field reads `NO_FALSE_POSITIVE`; the JSON
+headline reads `gate_answer: "NO"`. Across **163 legitimate in-window probes** and
+**1088 domain-field reads** at `spectrum` plus all four downstream surfaces, the guard
+raised **0 warnings**, reported `domain_valid = True` **1088 of 1088 times**, raised
+**0 exceptions**, and changed **0 numbers**. The repair did not over-correct.
+
+## The battery, in magnitudes
+
+* **B1 — the in-window ladder.** 136 calls: every `(X_max, M)` pair with
+  `X_reach(M) <= X_max`, `X_max` spanning **13.6 .. 745.2** (the whole validated range the
+  gate names) and `M = 16 .. 1024`, crossed with all four far-field settings
+  (`power/clamp/zero/none`). Headroom ratio `X_max / X_reach(M)` spans **1.143x .. 73.4x**.
+  22 further pairs were excluded as genuinely out-of-window and handed to B6. Result:
+  **1088 of 1088** surface reads `True`, **0** warnings, **0** false positives.
+* **B2 — the `<=` boundary, and a methodological correction worth banking.** `compactify`
+  tests `|X_j| <= max|X|`. A grid built so `max|X|` equals the largest sample **bit for
+  bit** is accepted: `n_outside_grid = 0`, 0 warnings, 7/7 surfaces `True`. So the `<=` is
+  the right comparison and a `<` would have been caught here. The threshold is sharp:
+  clean at relative headroom **exactly 0.0**, firing at **-9.77e-15** with **1** sample
+  outside. **The correction:** the first pass of this runner scored 2 false positives and
+  they were an artifact of the *runner*, not the guard. `tan` is catastrophically
+  ill-conditioned at `theta/2 -> pi/2`, so the closed form `cot(pi/(2M)) =
+  325.94830079770134` and the grid's actual largest sample `325.94830079770776` differ at
+  `M = 512` by **113 ulp (relative 1.97e-14)**. Rows inside that band really did put a
+  sample outside the data; the guard was right and the closed-form criterion was wrong.
+  Both runner and test now compute `X_reach(M)` from the module's own grid constructors,
+  and the 113 ulp is pinned as a gate so nobody "simplifies" it back.
+* **B3 — profile- and argument-blindness.** All 8 library profiles (CLM anchor, both
+  negative controls, calibration sweep `alpha = 0.1 .. 1.5`) pass in-window: **0 of 8**
+  flagged. So does each of the two argument combinations an over-eager guard would most
+  plausibly reject — `far_field='none'` (whose NaN branch must not run in-window: it did
+  not, 0 NaN) and `far_field='power'` with `tail_exponent` omitted (whose `ValueError` must
+  not fire when there is no far field to close: it did not, `exception = None`).
+* **B4 — `domain_fields` itself.** All **4** integer flavours of a clean zero
+  (`int`, `np.int64`, `np.int32`, `float 0.0`) return `domain_valid = True`; `1` returns
+  `False`; `None` returns `None`. All four downstream surfaces called directly with
+  `n_outside_grid=0` return `True` with **0** warnings and **0** exceptions.
+* **B5 — numeric invariance.** Over 3 in-window configurations, every value returned with
+  `n_outside_grid=0` threaded versus the argument omitted: **0 differences** across
+  `fit_exponent`, `analytic_tail`, `norm_verdict`, every `weighted_partial_sums`
+  checkpoint, and the `k`/`hk`/`hk_real_basis` arrays. The guard adds fields and computes
+  nothing — independently reconfirmed here on in-window input at three `(X_max, M)` pairs
+  the bench A/B never visited.
+* **B6 — negative controls, so none of the above is vacuous (lesson 90).** **3 of 3**
+  genuinely out-of-window calls fire, warning and reporting `domain_valid = False` on
+  **8 of 8** surfaces. The sharpest is one relative `1e-9` below the boundary: **2** of 512
+  samples leave and it fires. The last reproduces leg 84's headline count **exactly** —
+  **14 of 16384** at the shipped `X_max = 745.2`.
+
+## The one thing worth flagging that is NOT a false positive
+
+Staying in-window at the shipped domain caps the transform size: `X_reach(1024) = 651.9`
+but `X_reach(2048) = 1303.8 > 745.2`, so **`M <= 1024`** there. On the calibration family
+at `alpha = 0.4` (exact `p = 1.4`) the in-window exponent runs
+`M = 256 -> 2.5948`, `512 -> 2.1427`, `1024 -> 1.5207` (errors `1.195`, `0.743`, `0.121`).
+That is **leg 55's own tension restated as a magnitude** — the trustworthy domain and the
+resolved exponent pull apart — and it is banked as `context_resolution_cost_of_staying_in_window`,
+explicitly labelled context. It is **not** a defect of the guard, which computes nothing;
+**not** a claim about the target, whose exponent is leg 55's; and **not** an argument for
+widening the domain, which a live ban forbids and this leg does not do.
+
+`domain_valid = None` for a caller who does not thread the count is likewise **not** counted
+as a false positive: it is documented, deliberate, falsy-on-purpose, and already owned by
+adversarial gate 13's standing gap-pin. It is a statement that provenance is unknown, not a
+claim that a violation occurred, and this leg measured that it is silent (**0** warnings).
+
+## Disposition
+
+Per the gate's no-branch: **confirmed the guard is precise — it catches violations without
+rejecting valid input.** Banked as `test_target_norm_postrepair.py`, 9 permanent gates,
+9/9 passing in 2.3 s, sitting alongside `test_target_norm_adversarial.py`: that file pins
+the guard's SENSITIVITY, this one pins its PRECISION. `solver/target_norm.py` was **not
+modified** — the diff confirms it.
