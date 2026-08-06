@@ -3347,3 +3347,24 @@ No link of the L1->L4 chain moved in any of the seventeen. Clay unchanged at ~0.
   rather than silently picking a side. Self-referential finding: reports/STATUS.md
   (orchestrator-owned, committed) was stale by ten escalations at time of writing
   -- the same silent-wrong-bookkeeping shape the whole cycle was hunting in code.
+- **Leg 220 (Route-TNR) — YES on both clauses:** target_norm.py's domain guard now
+  windows on the true data interval [X.min(), X.max()] rather than |X|.max(),
+  closing leg 204's finding. 5/5 asymmetry rungs go silent->flagged with EXACT
+  counts matching independent truth (535/16384 at the worst rung, was 0). 295,203
+  A/B leaves bit-identical, leg 55's banked margins reproduce to 0 difference.
+  6 of leg 204's 7 mechanisms still open (territory was windowing only) --
+  re-measured post-repair so "open" is a number, not a guess.
+
+**EXTERNAL USER REVIEW APPLIED THIS CYCLE.** A composition-floor quota (>=3 of 10
+live slots must be math/literature/construction-typed, not audit/repair/verify)
+was written into ORCHESTRATION.md and DIRECTION.md so it survives a session
+restart. Leg 202's Route-D v11 exposure was split into three actions: leg 226
+(repair, now explicitly treating leg 202's prescribed fix as a hypothesis per the
+150/151/152/154 precedent), leg 236 (independent dependency trace -- which banked
+numbers actually move, separate from the repair), leg 237 (a class-level census:
+which other modules share leg 202's scale-invariant-residual blind spot). Leg 238
+folds leg 176 into PUB2 and applies leg 183's Xu-§8 citation to PUB1, both
+additive. A new gate-contract clause (lesson 91) requires every negative-result
+gate to name its realization/trial-space/basis. Three low-value slots (219
+duplicate, 222 FBA, 224 GCC) were preempted for 236/237/238; none of the three
+preempted agents had reached a landing.
