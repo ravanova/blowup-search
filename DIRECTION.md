@@ -31,7 +31,7 @@ prose as before.
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
-| F | 291 | HLR2 | yes |
+| F | 292 | CAPA | no |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
@@ -12791,3 +12791,33 @@ number: **294.**
 
 Nothing in this update lifts a ban; 290's negative is recorded as a clean, complete
 characterization, not a setback. Clay stays ~0.05%. No new direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 291 (HLR2) landed gate NO, closing a real gap (the EXT-watch
+had not re-checked since the Clay pivot); orchestrator self-dispatched 292 from
+pre-staged reserve into slot F — recorded, no redirect
+
+**291, recorded at full strength:** no certificate of HL_S2_nonsymmetric published
+since stage B closed. Specifically valuable because it closes a genuine coverage gap,
+not a redundant check: leg 123's precedent-watch window closed ~11h BEFORE the Clay
+pivot commit, so this object had gone unwatched across the pivot until now. Absence
+banked, closed nets implied by "since stage B" framing.
+
+**Slot F: leg 292 (Route-CAPA), dispatched by the orchestrator directly from the
+pre-staged reserve — correct use of exactly what that reserve was built for, no
+redirect.** 292's brief needs nothing beyond what is already in its spec above; its
+scope (every solver/*.py module gets an accurate capability line: test presence, pass
+status, known-answer gate presence) is self-contained and reads no other live leg's
+territory.
+
+**FLOOR-TABLE block updated in this same edit** (F: 291 → 292). **Floor status: 4/10
+strictly (285, 284, 267, 264) — 292 is an audit, not floor-eligible by its own spec
+convention; still comfortably above the §3a/§3b watermark.**
+
+**Canonical reserve line: reserve count 7 — legs 293, 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (293); 280 user-gated; 229 on 226; 231-234 on
+repairs. Next fresh leg number: **294** (unchanged — 292 was already numbered).
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
+raised.
