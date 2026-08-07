@@ -26,24 +26,24 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 262 | PVRW | yes |
+| A | 266 | P0TC | no |
 | B | 249 | H2CV2 | no |
 | C | 260 | DSSB | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
-| G | 256 | P1B | yes |
+| G | 267 | FDL | yes |
 | H | 261 | P1A2 | yes |
 | I | 252 | VBRG | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-C refill after 251's escalated YES):
-4/10 floor-eligible -- A/262/PVRW, F/236/RDDEP, G/256/P1B, H/261/P1A2 -- matching the
-"Slot-C refill after Phase 0" DM update at the tail of this file. 260 (DSSB, Entry B's
-scoping leg, counted "no" conservatively) replaced 251 in slot C via its own
-pre-committed promotion trigger: 251 landed with DSS-conditional candidates in its
-yes-branch.)
+(Current snapshot, DM update of 2026-08-07 (slots A+G refill after 262/256 landed and
+251's verifier found the obligation-#1 gap): 3/10 floor-eligible -- F/236/RDDEP,
+G/267/FDL, H/261/P1A2 -- matching the "obligation #1" DM update at the tail of this
+file. A/266/P0TC is the verifier-mandated rework leg (correction, not eligible);
+G/267/FDL is the forcing-domination literature leg drafted to serve the corrected
+obligation AND hold the floor at 3.)
 
 ---
 
@@ -10849,3 +10849,131 @@ a user decision packet, and 251's candidate is recorded with its own compressibl
 flag attached, not as movement of any link. Clay stays ~0.05%. No direction question
 raised now; the assembled packet (after the verifier and 260/262/265 report) is where the
 user's Phase-1 construction decision lands.
+
+---
+
+## DM update, 2026-08-07 — 251's VERIFIER FOUND A LOAD-BEARING GAP IN OBLIGATION #1
+(no stationary dissipative profile system exists at BCG's scaling); rework leg 266 cut at
+top of queue into slot A per the standing mandate; 262 (PVRW) landed clean with the
+infinite-kinetic-energy caveat; literature leg 267 drafted into slot G; 265's spec
+amended; 256's gate answer NOT yet reported to this DM
+
+**251's verifier (merged `6a795cd`): everything confirmed at primary source EXCEPT one
+sentence.** Confirmed by direct re-fetch (not from 251's transcriptions): the honesty
+framing, the Wall-2 statement, the compressible-NS-has-no-Leray-projector claim, the
+agreement with 253. **The gap: obligation #1 asks to enclose "the self-similar profile
+system of the dissipative equation" — no such stationary system exists at BCG's scaling.**
+Dissipation enters only as a non-autonomous, exponentially-decaying forcing (F_dis, e^{-δs₀}
+prefactor) on the RHS of the EULER profile system — an architecture 251's own report
+describes correctly elsewhere, making obligation #1 internally inconsistent with its own
+text. Taken literally it would send Phase-1 construction after an object that does not
+exist. The verifier's assessment of the real obligation: **enclose the STABILITY step —
+the r-restriction argument by which the profile dominates F_dis, at an r outside BCG's
+dominance regime.**
+
+**Mechanism decision (the orchestrator's "your call"): a REWORK LEG, not a DM-authored
+packet patch.** The standing mandate is explicit (verifier confirms a gap → cut a rework
+leg at the top of the queue, same territory, gate pre-committed to the corrected
+measurement) — and re-posing a certificate obligation is research prose, which this DM
+may not write. 251's PR body stays as historical record; the rework leg adds the visible
+correction. **Nothing goes to the user until 266 lands — the packet waits.**
+
+```
+### 266 — ROUTE-P0TC: RE-POSE 251's OBLIGATION #1 (the verifier's confirmed gap — a
+rework leg, same territory, correction in 251's own parked files)
+**Thesis.** Verify_251's finding, in full (above). The correction target is ONE
+obligation's wording; the naming itself, the compressible-vs-Clay flag, and the rest of
+the report survived scrutiny and are NOT reopened by this leg.
+**Gate.** Does the re-posed obligation #1 (a) match the papers' actual architecture as
+the verifier states it (F_dis as non-autonomous forcing on the Euler profile system; the
+enclosure obligation living in the stability step's r-restriction argument, at r outside
+BCG's dominance regime), (b) leave every verifier-confirmed claim in 251's report
+byte-untouched, and (c) read consistently with 251's own (correct) architecture
+description elsewhere in the same report, with a visible correction note citing
+verify_251 as the source?
+  yes -> Land the correction into 251's parked branch (leg/251-p0t-v1 / PR #20) so the
+         report is self-consistent BEFORE it reaches the user. Unblocks 265.
+  no -> If the obligation CANNOT be re-posed coherently — i.e. the stability-step
+        enclosure also fails to be a statable certificate target — escalate immediately:
+        that would reopen the naming itself, which this leg is otherwise forbidden to do.
+**Territory.** 251's parked files on leg/251-p0t-v1 (the obligation-#1 sentence(s) and a
+               correction note ONLY), writeup/novelty/leg_266.md,
+               experiments/journal/leg_266.md.
+               Reads (never edits) writeup/novelty/verify_251.md, BCG §7/CGSS full text.
+**Difficulty.** standard
+**Independence.** Territory is 251's parked branch — no live slot touches it. TOP OF
+QUEUE per the standing rework mandate. Anti-pausing clause verbatim.
+```
+
+**262 (PVRW) landed clean (`ba0f9fe`), recorded at full strength:** the Pineau-Vicol
+window SURVIVES adversarial review (6 soft spots, 0 window-breaking) — but the class
+necessarily has **infinite kinetic energy, so even total success resolves Perelman's
+conjecture, not Clay** — reinforcing, at proof level, that 251 was right not to name it.
+Also: the "α≈1" framing understates the open window by ~5.15 million decades once every
+non-explicit constant is unwound to its most favorable value. PV stays REPORTED, not
+named; any future leg proposing it must carry the Perelman-not-Clay caveat in its first
+sentence.
+
+**Slot G: fresh leg 267, drafted for two reasons at once** (the corrected obligation's
+direct literature need; and with 262/256 landed, live floor-eligibility would fall to
+2/10 — a §3b breach the FLOOR-TABLE test would catch):
+
+```
+### 267 — ROUTE-FDL: HAS ANYONE EVER RIGOROUSLY ENCLOSED A FORCING-DOMINATION /
+TRAP-REGIME ARGUMENT OF BCG's SHAPE? (the stability-step precedent question — the
+literature the corrected obligation #1 stands on)
+[FLOOR-ELIGIBLE: literature]
+**Thesis.** If 266 lands, Phase 1's real certificate obligation is enclosing a
+stability-step argument: a non-autonomous, exponentially-decaying forcing (F_dis)
+dominated by a profile in a restricted regime, at parameter values OUTSIDE the published
+dominance regime. Before 265 costs that, the precedent question: has ANY computer-assisted
+/ interval-arithmetic work ever enclosed an argument of this shape — non-autonomous
+forcing domination, trap regions for non-autonomous perturbations of a stationary
+profile, in ANY field? (This is a different question from leg 240's viscous-term census
+— that censused fluid self-similar objects; this censuses the ARGUMENT SHAPE.)
+**Gate.** Does a full-text-verified precedent exist (named paper, named theorem, the
+enclosure genuinely of a non-autonomous forcing-domination step — not a stationary
+enclosure relabeled)?
+  yes -> Bank with locators; 265 inherits it as its "what exists" row and Phase 1 gets a
+         template. Name the gap between the precedent's setting and BCG's.
+  no -> Bank the absence at full strength with the closed nets named (lesson 91): the
+        stability-step enclosure would be methodologically NEW, which raises 265's cost
+        estimate and belongs in the user's packet verbatim.
+**Territory.** experiments/p2_route_fdl_v1_precedent.py,
+               writeup/data/p2_route_fdl_v1_precedent.json,
+               writeup/novelty/leg_267.md, experiments/journal/leg_267.md.
+               Reads (never edits) verify_251.md, BCG §7, viscous_novelty.py's ledger.
+**Difficulty.** standard
+**Independence.** Pure literature, own module. Does NOT wait on 266 (the precedent
+question is well-posed from the verifier's own wording either way). Immediately
+dispatchable. Anti-pausing clause verbatim.
+```
+
+**265's spec is AMENDED (not re-drafted — the naming survived; the obligation did not):**
+its thesis clause (1) now reads "the stability-step enclosure obligation as re-posed by
+leg 266," not "the profile equation and the precise term to enclose"; its blocking
+condition changes from "verify/251-p0t-review landing clean" to **"leg 266 landed"**; it
+additionally reads 267's precedent verdict if available at dispatch. All other clauses
+(compressible-analogue check of 257's obstruction, exists-vs-build, gap-to-Clay in the
+same breath) stand.
+
+**256 (P1B) landed per the orchestrator, but its GATE ANSWER has not been reported to
+this DM** — the record here cannot state its outcome. **Flag: send 256's finding summary
+in the next message**; its result (did the Breden-Chu reproduction succeed?) bears
+directly on 265's exists-vs-build row and on the user's stage-V packet.
+
+**FLOOR-TABLE block updated in this same edit** (A: 262 → 266; G: 256 → 267). **Floor
+status: 3/10 strictly (267, 236, 261) — met exactly; the §5 commitment (two cycles after
+P0 lands in the plan) is noted as approaching and will be reported honestly if the roster
+cannot hold 3 without drafting-to-fit.**
+
+**Canonical reserve line: reserve count 11 — legs 265, 263, 264, 228, 210, 259, 229, 231,
+232, 233, 234 (178L mid-landing, not reserve stock).** Effective immediately-dispatchable:
+3 (228, 210, 259); 265 blocked on 266; 263 behind 178's landing; 264 behind 263; 229
+blocked on 226; 231-234 blocked on repairs. Next fresh leg number: **268.**
+
+Nothing in this update lifts a ban or opens construction. 262's PV verdict and the
+verifier's correction are recorded as facts about the literature and about one report's
+wording — not movement of any link. Clay stays ~0.05%. No direction question raised: the
+packet assembles after 266 (and ideally 256's reported outcome, 260, 265, 267) — one
+coherent decision, not piecemeal drops.
