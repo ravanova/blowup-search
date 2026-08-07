@@ -4072,3 +4072,36 @@ preempted agents had reached a landing.
   target's MATHEMATICAL difficulty are different terms -- the critical path
   does not run through F_dis. No code written, solver/ untouched, no
   construction authorized. Flagged as a packet addendum.
+- **Leg 252 (Route-VBRG) -- gate NO on both clauses, ESCALATED, parked at
+  branch `leg/252-vbrg-v1`, main untouched.** Dispatched as a one-field
+  freshness regen of Route-D v11's anchor JSON; came back with two
+  findings, one exonerating and one a genuine hazard. Clause 1 (margin
+  match): regenerating from scratch gives a=0.45's violation as
+  **62.53156368658738x**, not leg 247's headline **62.02373957411577x** --
+  but this reproduces leg 247's OWN fresh re-solve to exact float equality
+  (rel diff 0.000e+00); the 0.82% gap is precisely the banked-vs-fresh
+  difference leg 247 itself already published (247's headline applied the
+  repair to the banked v2 rows, this leg re-solved them first). Corrected
+  margin 1.5991923775e-02 vs stale bank 1.0467862586e+10 -- still below 1,
+  still a miss, still 1 of 11 good rows over budget; no prose conclusion of
+  Route-D v11 moves, all three headline scalars unchanged (a_max_machine
+  1.0, last_machine_precision_a 0.72, grid_converged_a_max 0.5). Clause 2
+  (nothing else moves): NO, badly -- 202 of 359 banked leaves outside
+  v5_budget/meta moved on regeneration, 46 by >10%, including one
+  `converged` flag flipping True->False (v3_boundary, a=0.62) and a
+  10-order-of-magnitude weighted_defect move (a=0.8, n=1601). Cause ruled
+  out at source: `profile_newton.py` has exactly one commit on main (the
+  same one that banked the JSON, so not solver drift) and the runner is
+  bit-deterministic within-environment (two independent processes agree to
+  the last bit) -- the artifact is simply not environment-portable, least
+  so exactly where Newton's basin is decided by the last bits. Escalated
+  because a 202-leaf move including a read `converged` flag is integration's
+  call, not a one-field freshness leg's. **Flags a real sequencing hazard**:
+  leg 236's already-escalated finding (a_max_machine 1.0->0.55,
+  newton_weighted_defect_max 640x) was built on the STALE anchor and has
+  not seen this leg's corrected margin (6.55e+11x different from stale) --
+  236 needs this leg's numbers folded in before its own report is treated
+  as final. A duplicate agent independently redispatched into the same
+  slot after the outage was found still running the same regeneration
+  concurrently and was stopped to avoid wasted/conflicting work; no
+  collision occurred (separate worktree, nothing landed).
