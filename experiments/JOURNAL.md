@@ -3965,3 +3965,22 @@ preempted agents had reached a landing.
   8 landings total (250, 268, 271, 274, 270, 276, and this one) across the
   session -- an EIGHTH correction pass now requires the user's own
   sign-off, a standing process rule.
+- **Leg 272 (Route-WESCV) -- gate NO on clause (a), YES on (b)/(c)/(d),
+  landed.** Independent verification of leg 263's 134-occurrence sweep.
+  Leg 263's own arithmetic reproduces EXACTLY (76/39, 58, 134) and its 8
+  edits are all correctly pinned/worded, plan_of_record.py byte-identical
+  (+608/-0, zero deletions -- mark-don't-hide mechanically verified). BUT an
+  independent wrap-immune, case-insensitive sweep found 30 MISSED
+  triple-asserting occurrences across 17 files (two causes: a
+  case-sensitivity asymmetry between leg 263's two search patterns, and a
+  hyphenated-compound-plus-line-wrap blind spot). Severity measured, not
+  assumed: 0 of the 30 produced a wrong edit; exactly 1 is in leg 263's own
+  declared territory (leg_141.md:203, self-mitigating -- the very next
+  sentence already carries the correct caveat). One miss
+  (plan_of_record.py:868) sits inside the re-posed stage-V ban's LIFT
+  CONDITION, tripping the escalation-flag rule, but the direction is safe:
+  the text was left byte-identical and independently pins to the correct
+  triple seven lines above -- a WARRANT defect (the census didn't catch it),
+  not a TEXT defect (nothing wrong was written). A light rework leg is
+  flagged: the one in-territory pointer, a corrected census count (class P
+  is 28 not 18, second-sweep file count is 32 not 34).
