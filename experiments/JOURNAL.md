@@ -3703,3 +3703,17 @@ preempted agents had reached a landing.
   concession that the kill might be rescuable. The fluid cell now has TWO
   independent kills. Both findings forwarded directly to leg 251, which
   folded them in.
+- **Leg 260 (Route-DSSB) — gate NO, landed.** Entry B's scoping leg (function
+  space, object, price -- the DSS expensive entrance's own lift condition)
+  answers (a) and (b) concretely but (c) resists structurally, not by cost:
+  the target's own function space (algebraically weighted, L^p p>3 or
+  L^2((1+|y|)^-s) s>1 -- NOT L^3, NOT L^2, and NOT Breden-Chu's H^2(mu),
+  which fails independently of leg 257's projector result) is incompatible
+  with Entry B's defining adjective UNSEEDED: representing the target
+  requires lambda, the search's own unknown, so the search step has no
+  stateable bound. Ban NOT lifted or re-posed; its basis is upgraded from
+  cost-shaped to substantive -- a reason that survives the Clay goal's
+  authorization of heavy engineering, unlike a price. This closes leg 251's
+  two DSS-conditional candidates more firmly: they were blocked pending this
+  scoping, and the scoping's answer is structural exclusion, not "not yet
+  costed."
