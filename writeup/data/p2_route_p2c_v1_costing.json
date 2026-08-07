@@ -1,0 +1,682 @@
+{
+ "leg": 265,
+ "route": "P2C",
+ "role": "LEG (costing / scoping)",
+ "date": "2026-08-07",
+ "branch": "leg/265-p2c-v1",
+ "what_this_is": "a COSTING dossier for the certificate leg 251 named and leg 266 re-posed.  It builds no part of a certificate and authorizes none.",
+ "clay_odds": "~0.05%, unchanged; no L1->L4 link moved",
+ "sources": {
+  "BCG": {
+   "arxiv": "2208.09445",
+   "eprint_md5": "45ea63c45a1a199ecfb4dc4a15431600",
+   "tex_lines": 6898,
+   "note": "THIRD independent download; matches leg 266's and verify_251's pins"
+  },
+  "CGSS": {
+   "arxiv": "2310.05325",
+   "eprint_md5": "04676de9e3262b0740f4938dd8241b79",
+   "tex_lines": 3916
+  },
+  "LP": {
+   "arxiv": "2509.12435",
+   "eprint_md5": "a0a136ed5e961276e135e86fa43fb01a",
+   "tex_lines": 7675
+  }
+ },
+ "scalars": {
+  "gamma": "7/5",
+  "alpha": "0.2",
+  "one_over_alpha": "5",
+  "r_star": "1.190983005625",
+  "r_star_closed_form": "(7 - sqrt(5))/4",
+  "borderline_r": "1.166666666666",
+  "borderline_closed_form": "2*gamma/(gamma+1) = 7/6",
+  "delta_dis_is_the_line": "6r - 7 at gamma = 7/5 (leg 240's finding, reproduced)",
+  "delta_dis_max_over_dominance_window": "0.145898033750",
+  "dominance_window": "(1.1666667, 1.1909830)",
+  "dominance_window_width": "0.0243163389",
+  "target_window": "(1, 7/6]",
+  "target_window_width": "0.1666666666",
+  "target_over_dominance_width_ratio": "6.854101"
+ },
+ "the_number_this_leg_adds": {
+  "k_at_borderline": "16.3479210516613",
+  "why_it_matters": "k(r) indexes BCG's solution branches (k(r_j) = j).  k(7/6) = 16.3479 therefore says EXACTLY which branches lie on which side of the dominance boundary -- a question neither BCG nor CGSS nor any prior leg answers, because BCG only ever say 'n odd and large enough' and never quantify it.",
+  "smallest_odd_n_BCG_stability_can_use": 17,
+  "odd_branches_entirely_inside_the_target_window": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15
+  ],
+  "n_such_branches": 7,
+  "CORRECTION_TO_LEG_251": {
+   "leg_251_ansatz_wording": "r^(n) in (r_n(gamma), r_{n+1}(gamma)), n odd and LARGE",
+   "the_incompatibility": "k is monotone increasing to +infinity at r*, so LARGE n forces r -> r*, i.e. DEEP INSIDE BCG's dominance window -- exactly where the existing theorem already works and where obligation 4 (r-coverage outside the dominance regime) is violated.  Leg 251's named ansatz and its own obligation 4 pull in OPPOSITE directions.",
+   "the_repair": "the certificate's ansatz must take SMALL odd n, n <= 15.",
+   "this_is_a_measurement_not_an_opinion": "n >= 17 is forced for BCG's own NS theorem by r_n >= 7/6."
+  },
+  "the_recommended_construction_target": {
+   "n": 3,
+   "r_range": [
+    "1.070374378675",
+    "1.094974963188"
+   ],
+   "delta_dis_range": [
+    "-0.577753727",
+    "-0.430150220"
+   ],
+   "why": "BCG Thm 1.1 (l.214) gives r^(3) for ALL gamma > 1 UNCONDITIONALLY -- existence is not contingent on any 'large enough'.  It is the only branch in the target window whose profile is guaranteed to exist.",
+   "cost_of_choosing_it": "|delta_dis| ~ 0.43-0.58, i.e. the dissipative forcing GROWS like e^{+0.5 s}, against an architecture calibrated for decay at rate <= 0.146."
+  },
+  "the_cheapest_target_if_existence_can_be_established": {
+   "n": 15,
+   "r_range": [
+    "1.164325739349",
+    "1.166099520630"
+   ],
+   "delta_dis_range": [
+    "-0.0140455639",
+    "-0.0034028762"
+   ],
+   "why": "the odd branch closest below the borderline: |delta_dis| <= 0.0141, about 31-41x smaller than the n=3 branch's, so the forcing's growth rate is minimal.",
+   "UNRESOLVED": "BCG Thm 1.2 requires 'n odd and large ENOUGH' for gamma = 7/5 and NEVER QUANTIFIES IT.  Whether n = 15 qualifies is not stated in the paper and is NOT settled here.  Reported as open, not assumed either way."
+  },
+  "the_autonomous_point": {
+   "r": "7/6 exactly",
+   "fact": "delta_dis = 0, so F_dis's prefactor is s-INDEPENDENT and the dissipative self-similar system is AUTONOMOUS -- the one exponent at which a stationary viscous profile problem exists at all.",
+   "but": "k(7/6) = 16.3479 is not an integer, so 7/6 lies in the gap (r_16, r_17), which is an EVEN index.  BCG's shooting argument uses n ODD (their footnote at l.373: 'The requirement that n is odd is used to ensure (pt:1)').  So BCG's construction supplies NO profile at the one exponent where the object would be stationary.",
+   "distance_to_nearest_odd_branch_below": "0.0005671460",
+   "distance_to_nearest_odd_branch_above": "0.0010013528"
+  }
+ },
+ "deliverable_1_the_term": {
+  "question": "the profile equation and the precise term to enclose, from BCG/CGSS full text",
+  "stationary_profile_system": {
+   "what": "the EULER self-similar system -- dissipation does NOT enter it",
+   "bcg_locator": "arXiv:2208.09445 (eq:DS); Thm 1.2 l.217 produces a solution of it, Thm 1.3 l.220 opens 'Let (U^E,S^E) be the profiles of Theorem 1.2, solving (eq:DS)' -- superscript E for Euler",
+   "cgss_locator": "arXiv:2310.05325 (eq:ss_profiles) l.319-322, written out for nu=0: (r-1)Ubar + (y+Ubar).grad Ubar + alpha Sbar grad Sbar = 0, (r-1)Sbar + (y+Ubar).grad Sbar + alpha Sbar div(Ubar) = 0",
+   "confirms": "leg 266's re-posing, independently and from a SECOND paper"
+  },
+  "the_term_to_enclose": {
+   "name": "F_dis, 'the dissipative forcing' (BCG's own words, l.2142)",
+   "defined_at": "BCG l.2130",
+   "enters_at": "BCG l.2138-2139, the RIGHT-HAND SIDES of the dynamically rescaled (Wtilde,Ztilde) system (eq:tildeWZ:def2), added to the nonlinear forcing",
+   "closed_form_bcg_l2130": "F_dis = [r^(1+1/alpha) 2^(1/alpha-1) / (alpha^(1/alpha) zeta^2 (W-Z)^(1/alpha))] * e^{(2-r+(1-r)/alpha)s} * ( d_zeta(zeta^2 d_zeta(W+Z)) - 2(W+Z) )",
+   "in_US_coordinates_bcg_l3595": "|F_dis| ~ e^{-delta_dis s} * Delta U / S^(1/alpha)   (eq:cortazar)",
+   "cgss_independent_form_l382": "nu C_dis e^{-delta_dis s} Delta U / S^{1/alpha}",
+   "structure": "LOCAL.  A second-order differential operator on U, divided by a positive power of the sound speed S.  No nonlocal operator anywhere -- see deliverable 2's census."
+  },
+  "the_precise_locus_the_certificate_must_reach": {
+   "top_order_energy_term": {
+    "symbol": "J",
+    "bcg_locator": "l.3898",
+    "form": "J = int (r^(1+1/alpha)/alpha^(1/alpha)) e^{-delta_dis s} Delta^K (Delta U / S^(1/alpha)) Delta^K U phi^(2K)",
+    "bcg_own_words_l3804": "'we treat the term coming from the dissipation, which one cannot expect to bound (since it has more derivatives than our energy).  Thus, the strategy is to extract the correct sign for this term.'",
+    "how_bcg_close_it": "NOT by bounding it.  By integration by parts they show |(alpha^(1/alpha)/r^(1+1/alpha)) e^{delta_dis s} J + G^2| <~ G, where G^2 = sum_i int (grad Delta^K U_i)^2 / S^(1/alpha) phi^(2K) >= 0 (l.3945).  So J is DOMINATED BY -G^2: the dissipative term enters the top-order energy with a FAVOURABLE SIGN and is never bounded, only signed.",
+    "final_bound_bcg_l3990": "J <= (2 r^(1+1/alpha)/alpha^(1/alpha)) e^{-delta_dis s0/2}"
+   },
+   "stable_projection_forcing_bound": {
+    "bcg_locator": "l.4062 (eq:tambor1)",
+    "form": "||F_dis(.,s)||_X <= delta_1 e^{-delta_dis s/2} <= delta_1^{3/2} e^{-(9/10) delta_g (s-s0)}",
+    "why_it_matters": "this is the load-bearing inequality of the whole stability step: it converts the dissipative forcing's decay rate delta_dis/2 into a rate strictly faster than the semigroup's spectral gap (9/10)delta_g, which is what makes the Duhamel integral at l.4078 converge (int e^{-delta_g(s-sbar)/2 - (9/10)delta_g(sbar-s0)} dsbar)."
+   }
+  }
+ },
+ "deliverable_1_what_breaks": {
+  "parameter_hierarchy": {
+   "bcg_locator": "l.2994, 'For the convenience of the reader, we collect the following chain of inequalities'",
+   "chain_verbatim": "1/s0 << delta_0^{3/2} << delta_1 << delta_g delta_0 << delta_0 << 1/Ebar << 1/K << 1/m << eta_w << delta_g << delta_dis = O(1)",
+   "elements": [
+    "1/s0",
+    "delta_0^{3/2}",
+    "delta_1",
+    "delta_g*delta_0",
+    "delta_0",
+    "1/Ebar",
+    "1/K",
+    "1/m",
+    "eta_w",
+    "delta_g",
+    "delta_dis"
+   ],
+   "n_elements": 11,
+   "n_calibrated_against_delta_dis": 10,
+   "consequence": "the obligation asks for r with delta_dis <= 0.  That does not violate one inequality -- it removes the TOP element of an 11-element ordered chain that the other 10 are calibrated against."
+  },
+  "what_inverts": [
+   {
+    "item": "the smallness parameter itself",
+    "bcg_locator": "l.3990 (eq:massachusetts), l.4062 (eq:tambor1)",
+    "at_positive_delta_dis": "every dissipative bound carries e^{-delta_dis s0/2}, and 's0 sufficiently large' MAKES IT SMALL",
+    "at_nonpositive_delta_dis": "the same factor is e^{+|delta_dis| s0/2}: taking s0 large -- the proof's only smallness knob -- makes it LARGE.  The monotonicity in the free parameter flips sign.",
+    "severity": "STRUCTURAL, not quantitative"
+   },
+   {
+    "item": "the Duhamel convergence in the stable projection",
+    "bcg_locator": "l.4072-4082",
+    "at_positive_delta_dis": "int_{s0}^{s} e^{-delta_g(s-sbar)/2} ||F_dis(sbar)||_X dsbar converges because 9/10 delta_g > 1/2 delta_g",
+    "at_nonpositive_delta_dis": "||F_dis||_X grows like e^{|delta_dis|sbar/2}, so the integral behaves like e^{+|delta_dis|s/2} and DIVERGES.  The bootstrap estimate (eq:maracas3) fails outright.",
+    "severity": "the estimate is false, not merely unproved"
+   },
+   {
+    "item": "the top-order SIGN extraction",
+    "bcg_locator": "l.3943-3990",
+    "at_positive_delta_dis": "J ~ -(r^{1+1/a}/a^{1/a}) e^{-delta_dis s} G^2 <= 0",
+    "at_nonpositive_delta_dis": "STILL <= 0 -- e^{-delta_dis s} > 0 for every real delta_dis, so the leading term is negative regardless, and its magnitude GROWS.  Viscosity is stabilising at top order at every r.",
+    "severity": "SURVIVES.  This is the certificate's structural asset, and it is the reason the obligation is statable at all rather than absurd."
+   }
+  ]
+ },
+ "deliverable_2_space_and_obstruction": {
+  "question": "what function-space setting the enclosure would run in, and whether leg 257's obstruction has a COMPRESSIBLE ANALOGUE (checked, not assumed absent)",
+  "the_spaces_bcg_actually_uses": {
+   "X_linear_stability": {
+    "definition": "||(U,S)||_{H^{2m}}^2 = int_{B(0,2)} (|Delta^m U|^2 + (Delta^m S)^2 + |U|^2 + S^2)",
+    "bcg_locator": "l.2240",
+    "character": "UNWEIGHTED Sobolev of order 2m on the BALL of radius 2 -- compactly supported, not weighted",
+    "why": "BCG l.500, their own words: 'In place of weighted spaces, we modify the equation outside a neighborhood of the backwards acoustic cone of the singularity in order to restrict the region of interest.'"
+   },
+   "E_2K_top_order_energy": {
+    "definition": "E_{2K}^2 = int (|Delta^K U|^2 + |Delta^K S|^2) phi^{2K} on R^3",
+    "bcg_locator": "l.2988, l.3898",
+    "character": "ALGEBRAICALLY weighted (phi), on the whole space, at derivative order 2K >> 2m"
+   },
+   "consequence_for_this_repository": "NEITHER is Breden-Chu's Gaussian H^2(mu).  The stage-V 'fourth space' question (leg 257) and this target are about DIFFERENT spaces, and the user's pending lift decision does not gate this target."
+  },
+  "leg_257_analogue_check": {
+   "leg_257_mechanism": "P[(U.grad)U] has an algebraic |x|^-4 tail whose coefficient is int|U|^2 > 0, so it leaves L^2(mu) for ANY nonzero div-free U in H^2(mu); F is not even well-defined.  Fitted exponent -3.000000 for v, multipole ratio 1.000000 at r=10/20/40/80.",
+   "two_things_that_mechanism_requires": [
+    "a NONLOCAL operator, to manufacture an algebraic tail from a decaying input",
+    "a weight growing faster than every algebraic rate (Gaussian), for the tail to defeat"
+   ],
+   "requirement_1_verdict": "ABSENT, AND MEASURED.  15 of 16 nonlocal probe terms are 0 in both papers against live controls of 167 (BCG) and 185 (CGSS); the 16th ('vorticity', 5 and 5) was adjudicated line by line and is 0 in either paper's own mathematics.  Compressible NS has no Leray projector because its pressure is the CONSTITUTIVE p(rho)=rho^gamma/gamma.",
+   "requirement_2_verdict": "ABSENT.  BCG's weights are unweighted-on-a-ball and algebraic; an algebraic tail against an algebraic weight is a finite exponent budget, not an infinite one.",
+   "leg_261_discriminator": "leg 261 measured the boundary of leg 257's mechanism as 'whether the nonlocal output stands alone or is multiplied by a localised factor'.  Here there is no nonlocal output at all, so the discriminator is not even reached.",
+   "BUT_A_DIFFERENT_OBSTRUCTION_OF_THE_SAME_TYPE_EXISTS": {
+    "statement": "leg 257's finding is, in type, 'the operator that makes the model a fluid is not defined on the space the argument runs in'.  The compressible imploding problem HAS an obstruction of that exact type, and this leg names it rather than reporting a clean absence.",
+    "obstruction_A_derivative_excess": {
+     "what": "D_dis : (U,S) -> Delta U / S^{1/alpha} costs TWO derivatives.  X = H^{2m}(B(0,2)) controls 2m; D_dis maps H^{2m} -> H^{2m-2}, so it is NOT a bounded operator X -> X.  In the top-order energy the same: the estimate needs |grad^{i+2} U| for i+j = 2m, i.e. up to grad^{2m+2}.",
+     "named_by_the_authors": "BCG l.3804 'one cannot expect to bound (since it has more derivatives than our energy)'; CGSS l.494 'we will use weighted energy estimates at a higher derivative level than the linear stability (regularity higher than m)'",
+     "severity_vs_leg_257": "NOT FATAL.  Leg 257's obstruction admits no repair -- int r^{-8} e^{r^2/4} r^2 dr = +infinity, an infinite margin.  This one is repaired by SIGN EXTRACTION, available because D_dis is parabolic and negative-definite while P[(U.grad)U] has no sign.",
+     "does_the_repair_survive_the_obligation": "YES.  The sign of -e^{-delta_dis s}G^2 is independent of delta_dis."
+    },
+    "obstruction_B_vacuum_degeneracy": {
+     "what": "the multiplier S^{-1/alpha}, with 1/alpha = 2/(gamma-1) = 5 at gamma = 7/5: a fifth-order pole at the vacuum S -> 0",
+     "how_bcg_control_it": "S(zeta) > Sbar(zeta) - delta_1 >~ 1 for zeta < 6/5 (l.3608), and S<zeta>^{r-1} <~ 1 in the far field (Lemma:suecia)",
+     "named_by_the_authors": "CGSS l.494, 'together with lower bounds for S to rule out possible vacuum'",
+     "severity": "a genuine singular multiplier whose ORDER DIVERGES as gamma -> 1; at gamma = 7/5 it is 5, and it is delta_dis-independent, so it neither worsens nor improves inside the target window"
+    }
+   }
+  }
+ },
+ "deliverable_2_census": {
+  "probe": {
+   "leray": [
+    0,
+    0
+   ],
+   "biot-savart": [
+    0,
+    0
+   ],
+   "biot savart": [
+    0,
+    0
+   ],
+   "singular integral": [
+    0,
+    0
+   ],
+   "calder": [
+    0,
+    0
+   ],
+   "riesz transform": [
+    0,
+    0
+   ],
+   "fourier multiplier": [
+    0,
+    0
+   ],
+   "nonlocal": [
+    0,
+    0
+   ],
+   "non-local": [
+    0,
+    0
+   ],
+   "divergence free": [
+    0,
+    0
+   ],
+   "divergence-free": [
+    0,
+    0
+   ],
+   "solenoidal": [
+    0,
+    0
+   ],
+   "incompressib": [
+    0,
+    0
+   ],
+   "vorticity": [
+    5,
+    5
+   ],
+   "hilbert transform": [
+    0,
+    0
+   ],
+   "pseudodifferential": [
+    0,
+    0
+   ]
+  },
+  "live_control": {
+   "dissipat": [
+    26,
+    38
+   ],
+   "self-similar": [
+    55,
+    35
+   ],
+   "profile": [
+    34,
+    95
+   ],
+   "energy estimate": [
+    8,
+    12
+   ],
+   "interval arithmetic": [
+    0,
+    0
+   ],
+   "computer-assisted": [
+    33,
+    0
+   ],
+   "riemann invariant": [
+    5,
+    2
+   ],
+   "adiabatic": [
+    1,
+    1
+   ],
+   "sound speed": [
+    4,
+    1
+   ],
+   "vacuum": [
+    1,
+    1
+   ]
+  },
+  "order": [
+   "BCG",
+   "CGSS"
+  ],
+  "adjudication": "all 10 'vorticity' occurrences read; 0 in either paper's own mathematics"
+ },
+ "deliverable_3_capabilities": {
+  "census": {
+   "index_size": 48,
+   "needed": {
+    "compressible fluid model": [],
+    "compressible/3D Euler": [],
+    "Navier-Stokes": [],
+    "adiabatic / gamma-law pressure": [],
+    "sound speed / density variable": [],
+    "radial / spherical geometry": [],
+    "ODE barrier argument": [],
+    "shooting argument": [
+     "solver/bc_weighted_sobolev.py",
+     "solver/viscous_novelty.py"
+    ],
+    "Frobenius / Taylor recurrence at a degenerate saddle": [
+     "solver/origin_h2_certificate.py"
+    ],
+    "semigroup generation": [],
+    "maximally dissipative operator": [],
+    "spectral gap of a non-self-adjoint operator": [
+     "solver/origin_h2_certificate.py"
+    ],
+    "non-autonomous forcing": [],
+    "self-similar time variable s": [],
+    "algebraically weighted high-order energy": [],
+    "bootstrap / continuity argument": [],
+    "topological / Brouwer degree argument": [],
+    "ball arithmetic (Arb) or interval ODE solver (VNODE-LP)": []
+   },
+   "needed_zero": [
+    "Navier-Stokes",
+    "ODE barrier argument",
+    "adiabatic / gamma-law pressure",
+    "algebraically weighted high-order energy",
+    "ball arithmetic (Arb) or interval ODE solver (VNODE-LP)",
+    "bootstrap / continuity argument",
+    "compressible fluid model",
+    "compressible/3D Euler",
+    "maximally dissipative operator",
+    "non-autonomous forcing",
+    "radial / spherical geometry",
+    "self-similar time variable s",
+    "semigroup generation",
+    "sound speed / density variable",
+    "topological / Brouwer degree argument"
+   ],
+   "needed_nonzero": {
+    "shooting argument": [
+     "solver/bc_weighted_sobolev.py",
+     "solver/viscous_novelty.py"
+    ],
+    "Frobenius / Taylor recurrence at a degenerate saddle": [
+     "solver/origin_h2_certificate.py"
+    ],
+    "spectral gap of a non-self-adjoint operator": [
+     "solver/origin_h2_certificate.py"
+    ]
+   },
+   "control": {
+    "interval arithmetic": [
+     "solver/origin_h2_certificate.py",
+     "solver/interval.py",
+     "solver/interval_certificate.py",
+     "solver/certificate_guards.py",
+     "solver/bc_weighted_sobolev.py",
+     "solver/certificate_shapes.py"
+    ],
+    "radii polynomial certificate": [
+     "solver/interval_certificate.py",
+     "solver/certificate_guards.py",
+     "solver/target_norm.py",
+     "solver/bc_weighted_sobolev.py",
+     "solver/target_selection.py"
+    ],
+    "Newton-Kantorovich constants": [
+     "solver/nk_bounds.py"
+    ],
+    "weighted Sobolev H^2(mu)": [
+     "solver/bc_weighted_sobolev.py"
+    ],
+    "literature as executable gates": [
+     "solver/fractional_boussinesq.py",
+     "solver/literature_gates.py",
+     "solver/certificate_shapes.py"
+    ],
+    "certificate shape dichotomy": [
+     "solver/dissipative_profile.py",
+     "solver/energy_coercivity.py",
+     "solver/certificate_shapes.py"
+    ],
+    "spectrum / eigenvalue solver": [
+     "solver/rescaled_spectrum.py",
+     "solver/energy_coercivity.py"
+    ],
+    "Hilbert transform": [
+     "solver/line_hilbert.py",
+     "solver/decay_grading.py",
+     "solver/hilbert_holder.py",
+     "solver/hilbert_pointwise.py",
+     "solver/bc_weighted_sobolev.py"
+    ]
+   },
+   "control_zero": [],
+   "adjudication": {
+    "taylor": "solver/origin_h2_certificate.py -- 'exact-taylor inner integrals' for Xu's closed-form resolvent.  A QUADRATURE technique, not a Frobenius recurrence at a degenerate saddle.  DOES NOT TRANSFER.",
+    "spectral gap": "solver/origin_h2_certificate.py -- the a=0 CLM linearisation's gap.  A different object, capped at a=0 with no transfer (legs 163/176).  DOES NOT TRANSFER.",
+    "shooting": "solver/bc_weighted_sobolev.py ('an independent ode-shooting seed' for Burgers eq (54)) and solver/viscous_novelty.py ('an independent rk4 shooting solve' for the Dahne-Figueras CGL/NLS profile ODE).  Both are FLOAT RK4 seed-finders for scalar ODEs, not rigorous interval barrier/shooting for a 2D autonomous system with a degenerate saddle.  PARTIAL -- the cheap half only."
+   }
+  },
+  "bcg_cap_scope": {
+   "tool": "the Arb library, C implementation (BCG l.5693); ball arithmetic, NOT the radii-polynomial / Newton-Kantorovich machinery this repository has built",
+   "every_computer_assisted_statement": [
+    "lemma:k",
+    "prop:left_global",
+    "prop:left_local_3",
+    "prop:right_f",
+    "lemma:biglebowski",
+    "lemma:aux_otromas",
+    "lemma:aux_Peyeout",
+    "lemma:paella",
+    "lemma:aux_34bounds",
+    "lemma:aux_WioverZi_7o5",
+    "lemma:tenthousand_7o5",
+    "lemma:aux_F1",
+    "lemma:aux_a2nr",
+    "lemma:aux_signsZ3Z4",
+    "lemma:enclosure_r3",
+    "lemma:enclosure_r4"
+   ],
+   "all_of_them_are_in": "the ODE / barrier / Taylor-coefficient family (BCG sections 2-6)",
+   "how_many_are_in_the_stability_step": 0,
+   "stability_sections": "BCG section 7 (sec:linear) and section 8 (sec:nonlinarstability)",
+   "cgss_computer_assisted_content": 0,
+   "cgss_note": "'computer-assisted' occurs 0 times in CGSS; the non-radial companion is wholly analytic",
+   "precision_note": "lemma:tenthousand_7o5 needed 2000 bits because Z_10000 ~ 10^46770 (BCG l.5977); this is the 14h/10000-coefficient figure leg 174 banked, confirmed at source as 13:36:38"
+  },
+  "bcg_runtimes": {
+   "prop:left_global (gamma<=3, K in [1,68], N=100)": "23:33:55",
+   "prop:left_local_3 Step 3 (gamma>=3, K in [1,100], N=100)": "14:22:36",
+   "lemma:aux_WioverZi_7o5 + lemma:tenthousand_7o5 (gamma=7/5)": "13:36:38",
+   "prop:left_global (gamma<=3, K in [681,1000], N=1000)": "05:13:58",
+   "prop:left_local_3 Step 3 P^nl (gamma<=3)": "01:33:31",
+   "prop:left_local_3 Step 2 (gamma>=3)": "01:12:38",
+   "prop:left_global (gamma>=3)": "00:46:33",
+   "prop:left_local_3 Step 3 d/ds (gamma>=3)": "00:45:36"
+  },
+  "lp_template": {
+   "paper": "arXiv:2509.12435, Nonlinear stability of the Larson-Penston collapse",
+   "pin": "e-print md5 a0a136ed5e961276e135e86fa43fb01a, 7675 TeX lines, read at full text",
+   "status": "UNREFEREED PREPRINT, v1, 2025-09-15",
+   "what_it_already_does": [
+    "interval arithmetic INSIDE the mode-stability step of a radially imploding compressible self-similar profile (l.378, l.473)",
+    "maximal dissipativity of the linearised operator on arbitrarily large backward light cones (abstract) -- structurally BCG section 7's own goal",
+    "identifies the exact number of derivatives needed for nonlinear stability",
+    "cites BCG (BuCaGo2025) at l.506, placing itself in the same lineage"
+   ],
+   "tool": "VNODE-LP, an interval ODE solver (l.5814-5818)",
+   "code": "https://github.com/mrischrecker/Larson-Penston-Stability",
+   "hardware": "a MacBook Air 2013 (l.5818)",
+   "compact_box_closed_by_IA": "Re lambda in [0,1], |Im lambda| <= 8; energy methods below b_0 = 1/5 and above b_1 = 8, IA in between (l.498, l.2194)",
+   "what_it_does_NOT_do": "isothermal Euler-Poisson is INVISCID.  No F_dis, no delta_dis, no r-restriction, nothing dissipative to enclose.  Its CAP closes a SPECTRAL question; obligation 1 is about retaining a non-autonomous viscous forcing at an exponent where that forcing GROWS.",
+   "effect_on_the_cost": "the largest single downward revision in this dossier -- the architecture is demonstrated and its code is public -- and simultaneously a novelty ceiling: this repository cannot claim the shape."
+  },
+  "ban_walk": {
+   "re_posed_stage_V_ban": "bans the ell^1-Fourier / radii-polynomial machinery on ANY model unless a namable FOURTH space is proposed with its own scoping leg.",
+   "does_it_bite_here": "NO, and for a reason worth stating: a BCG-shaped certificate is NOT a radii-polynomial certificate.  Its apparatus is barriers + maximal dissipativity + semigroup + weighted energy + bootstrap + Brouwer, with zero radii polynomials.  The ban forbids machinery the target does not use.",
+   "the_sting": "that same fact means this repository's 5 most-developed certificate rows are the WRONG apparatus for this target, not merely a banned one.",
+   "capabilities_ban": "'building a solver without grepping capabilities.py for the object first' -- HONOURED; the census is deliverable 3."
+  }
+ },
+ "deliverable_4_gap_to_clay": {
+  "question": "the honest gap between 'certificate for the compressible imploding profile' and Clay's incompressible problem",
+  "gap": [
+   {
+    "item": "the equation is not Clay's equation",
+    "detail": "Clay asks about 3D INCOMPRESSIBLE Navier-Stokes: div u = 0, a NONLOCAL pressure determined by an elliptic problem.  The target is 3D isentropic COMPRESSIBLE Navier-Stokes with the CONSTITUTIVE pressure p(rho) = rho^gamma/gamma.  These differ in the operator that makes the Clay problem hard.",
+    "irony_worth_stating": "the very absence that makes leg 257's obstruction inapplicable here -- no Leray projector -- is the same absence that makes this object not Clay's object.  The two facts are one fact."
+   },
+   {
+    "item": "the blow-up mechanism is not the Clay mechanism",
+    "detail": "implosion is driven by compression of the density; the Clay problem's danger is vortex stretching.  Radially, this profile carries NO vorticity-stretching mechanism at all (leg 251 section 3)."
+   },
+   {
+    "item": "Wall 2 is not crossed",
+    "detail": "3D-ness comes from a spherically-symmetric ODE profile; the certificate would enclose a 1D ODE system in the self-similar variable.  Same side of the line as every existing work (leg 251, re-affirmed here)."
+   },
+   {
+    "item": "compressible blow-up is already known",
+    "detail": "BCG Thm 1.3 already PROVES finite-time implosion for compressible NS.  A certificate would upgrade the viscous term's treatment from DOMINATED to ENCLOSED (leg 174/240's grading) at exponents the existing theorem cannot reach.  It would not decide a question currently open in the yes/no sense."
+   }
+  ],
+  "what_it_WOULD_be": "the first Grade-A x fluid-adjacent certificate -- leg 174's empty cell (experiments/journal/leg_174.md:230, 'empty for want of a TARGET, not for want of a method'), still reprinted '- STILL EMPTY -' by leg 242.",
+  "clay_odds": "~0.05%, unchanged.  No link of the L1->L4 chain moves.  L2/L3 are Chen-Hou's and already proved; L4 is Clay; L1 is dead in three named realizations.  Costing a construction is not performing one."
+ },
+ "branch_table": [
+  {
+   "j": 3,
+   "r_j": "1.070374378675",
+   "delta_dis_at_r_j": "-0.5777537279",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 4,
+   "r_j": "1.094974963188",
+   "delta_dis_at_r_j": "-0.4301502208",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 5,
+   "r_j": "1.111900086191",
+   "delta_dis_at_r_j": "-0.3285994828",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 6,
+   "r_j": "1.124064439344",
+   "delta_dis_at_r_j": "-0.2556133639",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 7,
+   "r_j": "1.133166815190",
+   "delta_dis_at_r_j": "-0.2009991088",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 8,
+   "r_j": "1.140208448655",
+   "delta_dis_at_r_j": "-0.1587493080",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 9,
+   "r_j": "1.145805447918",
+   "delta_dis_at_r_j": "-0.1251673124",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 10,
+   "r_j": "1.150354053558",
+   "delta_dis_at_r_j": "-0.0978756786",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 11,
+   "r_j": "1.154119355298",
+   "delta_dis_at_r_j": "-0.0752838682",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 12,
+   "r_j": "1.157284855404",
+   "delta_dis_at_r_j": "-0.0562908675",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 13,
+   "r_j": "1.159981359794",
+   "delta_dis_at_r_j": "-0.0401118412",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 14,
+   "r_j": "1.162304499227",
+   "delta_dis_at_r_j": "-0.0261730046",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 15,
+   "r_j": "1.164325739349",
+   "delta_dis_at_r_j": "-0.0140455639",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 16,
+   "r_j": "1.166099520630",
+   "delta_dis_at_r_j": "-0.0034028762",
+   "side": "target window (delta_dis < 0)"
+  },
+  {
+   "j": 17,
+   "r_j": "1.167668019488",
+   "delta_dis_at_r_j": "0.00600811693",
+   "side": "BCG dominance window (delta_dis > 0)"
+  },
+  {
+   "j": 18,
+   "r_j": "1.169064402668",
+   "delta_dis_at_r_j": "0.01438641600",
+   "side": "BCG dominance window (delta_dis > 0)"
+  },
+  {
+   "j": 19,
+   "r_j": "1.170315101266",
+   "delta_dis_at_r_j": "0.02189060759",
+   "side": "BCG dominance window (delta_dis > 0)"
+  }
+ ],
+ "self_test": {
+  "bcg_anchor_R1_at_r1_equals_2gamma_minus_2": true,
+  "bcg_anchor_R2_vanishes_at_r1": true,
+  "bcg_anchor_k_of_1_is_1": true,
+  "bcg_anchor_k_diverges_at_rstar": true,
+  "bcg_anchor_rstar_closed_form": true,
+  "bcg_anchor_k_is_monotone": true,
+  "bcg_and_cgss_delta_dis_agree": true,
+  "delta_dis_is_6r_minus_7_at_gamma_7_5": true,
+  "borderline_is_where_delta_dis_vanishes": true,
+  "leg_240_max_domination_margin_reproduced": true,
+  "target_window_nonempty": true,
+  "dominance_window_nonempty": true,
+  "target_window_is_wider": true,
+  "k_at_borderline_is_between_16_and_17": true,
+  "borderline_sits_in_an_EVEN_index_gap": true,
+  "smallest_odd_n_for_BCG_stability_is_17": true,
+  "seven_odd_branches_in_target_window": true,
+  "all_target_branches_have_negative_delta_dis": true,
+  "n17_branch_has_positive_delta_dis": true,
+  "n3_branch_exists_unconditionally": true,
+  "nonlocal_probe_is_live": true,
+  "nonlocal_probe_finds_nothing_in_BCG_mathematics": true,
+  "vorticity_hits_were_adjudicated": true,
+  "capability_probe_is_live": true,
+  "most_needed_apparatus_is_absent": true,
+  "capabilities_index_read_at_runtime": true,
+  "clay_odds_unchanged": true,
+  "gap_to_clay_stated": true,
+  "no_certificate_built": true,
+  "leg_251_correction_recorded": true,
+  "lp_template_ceiling_stated": true,
+  "lp_prior_art_recorded": true
+ },
+ "gate": {
+  "question": "Can all four be answered concretely enough that a hypothetical construction leg could be drafted with a pre-committed gate and a named territory, with no further scoping needed?",
+  "per_deliverable": {
+   "1_term_to_enclose": true,
+   "2_function_space_and_obstruction": true,
+   "3_capabilities_vs_build": true,
+   "4_gap_to_clay": true
+  },
+  "self_tests_pass": true,
+  "verdict": "YES",
+  "consequence": "Bank the costing dossier.  ESCALATE to the user as Phase 1's construction decision packet (cost + gap-to-Clay together).  Construction itself needs the user's go -- not this leg's, and not the DM's.  Branch pushed; main untouched.",
+  "residues_named_rather_than_hidden": [
+   "whether n = 15 satisfies BCG Thm 1.2's unquantified 'large enough' is OPEN; the construction leg's recommended target n = 3 does not depend on it (Thm 1.1 is unconditional), which is why this does not reopen scoping",
+   "arXiv:2509.12435 is an unrefereed preprint and carries the feasibility datum",
+   "arXiv:2603.10141 was read at abstract depth only and nothing is inferred from it"
+  ]
+ }
+}
