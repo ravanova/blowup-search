@@ -3812,3 +3812,35 @@ preempted agents had reached a landing.
   CORRECTIONS.md entry 5 plus a companion annotation JSON -- both banked
   JSONs byte-untouched. Leg 270 (full pre-submission review) is now
   dispatchable.
+- **MAJOR: leg 265 (Route-P2C) -- gate YES, ESCALATED, PARKED (PR #21, NOT
+  merged) -- independently verified clean, no gap.** Phase-1 costing of leg
+  251's named candidate. Evaluates k(7/6) = 16.3479210517 in closed form
+  from BCG's own equations (never quantified by BCG themselves, who only
+  say "n odd and large enough"); verifier re-derived it from scratch to 15
+  significant figures, resolving a genuine typographic ambiguity in BCG's
+  own source that could have given a WRONG branch by ~4.6x had it gone the
+  other way. Consequence: BCG's own NS theorem cannot use any odd branch
+  below n=17; exactly 7 odd branches (3-15) lie inside the target window.
+  **CORRECTS LEG 251, CONFIRMED GENUINE BY THE VERIFIER AS A SECOND,
+  INDEPENDENT INTERNAL-CONSISTENCY DEFECT OF THE SAME SPECIES AS
+  VERIFY_251's:** leg 251's own ansatz ("n odd and LARGE") forces r->r*,
+  deep inside BCG's dominance window -- the opposite of what its own
+  (leg-266-corrected) obligation 4 needs. Recommended target: n=3
+  (unconditional existence, BCG Thm 1.1, all gamma>1); n=15 is 31-41x
+  cheaper but its "large enough" condition is genuinely left open by BCG,
+  not assumed. Checked (not assumed) whether leg 257's Leray-style
+  obstruction has a compressible analogue: doubly absent by direct census
+  (0/16 BCG computer-assisted statements touch the stability step; CGSS has
+  0), but a DIFFERENT same-type obstruction (derivative excess + vacuum
+  degeneracy) is present and repaired by SIGN not boundedness, surviving
+  the obligation. Build cost: 15 of 18 needed apparatus terms absent from
+  capabilities.py's 48-row index. Found a directly relevant existing paper
+  (arXiv:2509.12435, Larson-Penston) already applying interval arithmetic
+  to a similar stability step -- but confirmed genuinely inviscid (0
+  occurrences of "viscos" in 7675 lines), so obligation 1 stays unclaimed.
+  Gap to Clay stated explicitly: the same absence that makes leg 257's
+  obstruction inapplicable is what makes this not Clay's object. No
+  L1->L4 link moved, Clay ~0.05%. This completes the technical content of
+  the Phase-1 construction decision packet, pending a rework of leg 251's
+  ansatz (the DM's pre-committed contingency, now triggered) before
+  presentation.
