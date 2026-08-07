@@ -1,55 +1,57 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-07, cycle 1 — two major escalations surfaced (legs 253, 257), one user
-ruling applied (leg 254), one more forwarded to the DM (leg 178). Full detail in
-`PROGRESS.md` (git-ignored, more current).*
+*Refreshed 2026-08-07, cycle 1 — an exceptionally eventful cycle: Phase 0 named its candidate,
+two independent verifiers found real gaps now being corrected, a session-wide usage outage hit
+and was recovered from. Full detail in `PROGRESS.md` (git-ignored, more current) and
+`reports/ORCH_STATE.md` (outage incident record).*
 
 ## ⚠ NEEDS YOU
 
-1. **Leg 257 (Route-P1C) — escalation, parked at PR #19 (`leg/257-p1c-v1`).** Stage-V ban's
-   lift clause is now satisfied on paper: Breden-Chu's H²(µ) weighted-Sobolev space is
-   confirmed a genuine "namable fourth space" — all three prior death mechanisms evade at the
-   mechanism level, each independently checked with its own locator (measured Z₁ = 0.065136 in
-   the new space vs 8.9591/140.72 in the dead ones). This is a ban weakening and needs a ruling
-   to actually lift, same as leg 254 was. Separately, and regardless of the ban question: leg
-   257 also independently found the Leray projection provably leaves L²(µ) in this space, which
-   structurally closes the fluid route through this machinery even if the ban lifts — this
-   confirms and strengthens leg 255's earlier finding that the one fluid-adjacent Phase-1
-   candidate (Li-Zhou) dies on the same clause. Both findings forwarded to leg 251 (Phase 0,
-   still in flight).
-2. **Leg 178 (WES)** — parked, self-conflicted gate, three explicit questions for the user.
-   The user has now ruled on all three (unpark under the YES branch; leg 111's headline gets a
-   scoped correction, not a global search-and-replace; the depth ladder becomes a contamination
-   cap) plus bounded what it licenses. Forwarded to the DM; dispatch pending its response.
-3. **Leg 129/188** — escalation #4 (Bowman dealiasing rule), sharpened in scope, still parked.
-
-(Leg 254's DSS-ban escalation is RESOLVED — the user ruled "let's get leg 254 merged" and it's
-applied to `main` at `47f76eb`, PR #18 closed with an explanation.)
+0. **Leg 251 (Phase 0) named the run's first Phase-1 candidate**: the 3D compressible
+   Navier-Stokes imploding self-similar profile at γ=7/5 (Buckmaster-Cao-Gómez-Serrano +
+   companion), explicitly flagged as compressible NS, not the incompressible system Clay's
+   problem asks about. An independent verifier confirmed nearly everything at primary source but
+   found one gap (a mis-stated certificate obligation) — a rework leg is in flight to fix it
+   before this is presented as final. Separately, leg 261 confirmed the incompressible-fluid
+   route through this run's other main tool (Breden-Chu's machinery) is now closed three
+   independent ways — a re-posing decision for Phase 1 is being held for you in one packet.
+1. **Leg 257 — stage-V ban's lift clause is satisfied on paper**, needs your ruling. The DM
+   recommends lifting it (useful for non-fluid targets even though the fluid route is separately
+   closed) — held for the same packet as leg 251's corrected finding.
+2. **Leg 249 — PUB2 (an approved submission-track document) quotes a figure (4.026) that an
+   independent exact-arithmetic re-derivation shows doesn't actually hold** — the true value
+   converges to ≈4.0318. A rework leg is in flight to correct it.
+3. Leg 254 (DSS ban) — RESOLVED, applied. Leg 178 (WES) — RESOLVED, applied.
+4. Leg 129/188 — escalation #4, still parked, unchanged.
 
 ## Now
 
 - Cycle: 1
-- `main` SHA: `f9952fb`
-- Agents live: 9 of 10 leg slots (A and H vacant, pending DM assignment), plus 1 Decision Maker
+- `main` SHA: `2a152b9`
+- Agents live: 10/10 leg slots + 2 verifiers + 1 Decision Maker
+
+## Incident, recovered
+
+A session-wide usage-limit outage killed 5 background agents simultaneously partway through
+this cycle. One (leg 261) had actually finished and was landed on its behalf; four others had
+real partial work salvaged as WIP branches and have since been redispatched. Capacity is
+confirmed restored — legs 249 and 260 both finished normally after the outage, and all
+redispatches are proceeding.
 
 ## Legs (10 slots)
 
 | Slot | Leg | Route | Notes |
 |---|---|---|---|
-| A | (vacant) | — | leg 253 (NRSX) finished, escalated |
-| B | 249 | H2CV2 | resuming from salvage; TOP PRIORITY, submission-blocking |
-| C | 251 | P0T | Phase 0 target selection, most consequential leg in flight |
-| D | 221 | BVRR | resuming; zero-contamination re-confirmation |
-| E | 248 | CNR2 | resuming; repairing collocation_newton.py |
-| F | 236 | RDDEP | resuming; Route-D v11 dependency trace |
-| G | 256 | P1B | Breden-Chu end-to-end reproduction |
-| H | (vacant) | — | leg 257 (P1C) finished, escalated |
-| I | 252 | VBRG | regenerating Route-D v11's stale anchor JSON |
-| J | 226 | PNR | highest-priority repair, threatens a banked headline |
+| A | 266 | P0TC | corrects leg 251's certificate obligation |
+| B | 268 | PUB2R | corrects PUB2's unsupported figure |
+| C | (needs refill) | — | leg 260 landed (DSS ban basis upgraded to substantive) |
+| D | 221 | BVRR | resumed after outage |
+| E | 248 | CNR2 | resumed after outage |
+| F | 236 | RDDEP | resumed after outage |
+| G | 267 | FDL | precedent census |
+| H | 264 | WETP | licensed transfer probe |
+| I | 252 | VBRG | resumed after outage |
+| J | 226 | PNR | resumed after outage; highest-priority repair |
 
-Landed this cycle: leg 250 (PUB2's σ_min citation fix, verified), leg 258 (composition floor
-locked into code), leg 255 (Phase 1 census — 2 non-fluid survivors, fluid candidate killed,
-verified). User ruling applied on leg 254 (DSS ban split). Two new escalations surfaced (253,
-257), both forwarded to leg 251 and the DM. Session start recovered from a clean handoff;
-several "live" slots from the prior session were not actually recoverable and were
-salvaged/redrafted as needed.
+Landed this cycle, in order: 250, 258, 255, (user ruling on 254 applied), 178, 256, 261, 262,
+260. Parked escalations awaiting correction/ruling: 251, 253, 257, 249.
