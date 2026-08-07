@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 285 | P2S | yes |
-| C | 284 | NU12 | yes |
+| C | 296 | ASR | no |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
 | F | 292 | CAPA | no |
@@ -12961,3 +12961,76 @@ Nothing in this update lifts a ban. 294's landing is recorded as the closing syn
 of an already-measured chain — no new movement of any link. Clay stays ~0.05%. No new
 direction question raised — the consolidated report is now with the user via the
 orchestrator's relay.
+
+---
+
+## DM update, 2026-08-07 — 284 (NU12) landed gate NO, but with a SUBSTANTIVE
+BY-PRODUCT: continuation from the converged a=0.30 root RE-PINS a* at 0.3857±0.004,
+reproducing leg 125's original 0.3864964 — DIRECTLY CONTRADICTING leg 210's exclusion
+that led leg 283 to mark a* as UNPINNED. This needs its own leg, not a footnote: 296
+drafted into slot C to reconcile 210/283/284/125 before the catalog states anything
+further
+
+**284, recorded at full strength:** ν(1/2) confirmed NOT grid-converged via four
+independent failure modes (mesh-locking, singular Jacobian, float-associativity
+instability, continuation branch folding before reaching a=1/2) — the sign-only
+downgrade's permanence (283's gate) is upheld for the MAGNITUDE question. But
+separately, **pseudo-arclength continuation from the already-converged a=0.30 root
+re-pins a* as a turning point at 0.3857 ± 0.004** — this reproduces leg 125's original
+0.3864964, and does so via a THIRD independent method (continuation from a converged
+root) distinct from both 185's original straddle and 210's bracket that excluded it.
+284 explicitly avoided 283's territory (catalog editing), so this finding sits
+un-reconciled in the record right now: **the catalog currently says a* is UNPINNED
+(283, citing 210) while 284's own landed finding re-pins it in agreement with 125.**
+
+**Slot C: rework leg 296, drafted per the standing confirmed-gap-family discipline —
+this is a genuine three/four-way reconciliation, not a simple downgrade-or-uphold:**
+
+```
+### 296 — ROUTE-ASR: RECONCILE a*'s PINNING STATUS ACROSS LEGS 125/210/283/284 (284's
+continuation re-pin vs. 283's UNPINNED catalog entry — direct contradiction requiring
+adjudication, not a guess)
+**Thesis.** Four data points on a*: leg 125 (0.3864964, original), leg 210 (bracket
+excluded reproducing it, straddle at the crossing), leg 283 (catalog marked UNPINNED,
+citing 210), leg 284 (continuation from a converged root re-pins 0.3857±0.004,
+independently agreeing with 125). Three of four measurements now cluster near 0.386;
+210's exclusion is the outlier. This leg does not re-measure — it reads all four
+reports and determines what the record should say.
+**Gate.** Does a careful read of all four reports (method-by-method: what each
+actually measured, at what precision, via what mechanism) yield ONE defensible
+catalog state — (a) a* IS pinned near 0.386 (three independent methods agree,
+210's straddle explained as a genuine near-crossing artifact, not a refutation), or
+(b) a* remains genuinely uncertain (210's exclusion is methodologically as strong as
+284's re-pin, and the disagreement is real, not explained)?
+  yes -> Update leg 174's catalog and 283's downgrade note (append-only pointer, not
+         deletion of 283's own correct-at-the-time record) to the resolved state, with
+         all four legs cited and the reconciliation logic stated.
+  no -> If genuinely irreconcilable at this DM's/leg's own authority: escalate with
+        all four reports attached — a* is close to a decision boundary Phase 1's own
+        record may care about (Object-B existence threshold), so an unresolved
+        contradiction should not sit silently in the catalog.
+**Territory.** leg 174's catalog site(s), leg 283's downgrade note (append-only
+               pointer only, original preserved), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_296.md, experiments/journal/leg_296.md.
+               Reads (never edits) legs 125/210/283/284's reports in full.
+**Difficulty.** standard
+**Independence.** Record-reconciliation, disjoint from every live slot (283/284/210 all
+landed/parked, no live conflict). Slot C, now — priority ahead of 293 (JOURNAL
+freshness) since this touches a live, currently-contradictory catalog entry rather
+than routine maintenance. Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 284 → 296). **Floor status: 3/10
+strictly (285, 267, 264) — met exactly (296 is reconciliation/record work, not
+floor-eligible by convention; watch this if another non-eligible slot lands next).**
+
+**Canonical reserve line: reserve count 6 — legs 293, 280, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (293); 280 user-gated; 231-234 blocked on
+repairs (221 live in slot D). Next fresh leg number: **295** stays reserved for 294's
+downstream-pointer-correction leg; this update's fresh number is **297.**
+
+Nothing in this update lifts a ban. 284's ν(1/2) non-convergence and its a* re-pin are
+both recorded exactly as measured — a genuine unresolved contradiction is named, not
+smoothed into either "confirmed" or "refuted." Clay stays ~0.05%. No new direction
+question raised — 296 is scoped to resolve this at the record level; if it cannot,
+its own no-branch escalates.
