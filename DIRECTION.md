@@ -26,7 +26,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 276 | PUB2R3 | no |
+| A | 272 | WESCV | no |
 | B | 210 | M2SV | no |
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
@@ -11884,3 +11884,62 @@ batch. Next fresh leg number: **278.**
 Nothing in this update lifts a ban; 273's double-NO is a negative recorded at full
 strength, not a setback narrated as progress. Clay stays ~0.05%. No direction question
 raised — the packet (now recommended to carry 273's addendum) is with the user.
+
+---
+
+## DM update, 2026-08-07 — 276 (PUB2R3) landed clean (all 5 families closed, exit
+re-trace fully green, witness bound tightened); slot A = 272 per reserve order; trigger
+fired — provenance leg 278 drafted for 276's honestly-flagged leftover
+
+**276 landed (`9b7fc5c`), recorded:** all five of 270's defect families closed in one
+pass — 122-row exit re-trace: 6/6 previously-failing green, 116/116 previously-exact
+byte-unchanged, zero arguments changed; family 3 independently sharpened (0.71465 is a
+round-DOWN by 4.947e-06, witness bound now stated tighter: ≤0.71465495). **One item
+correctly left standing, not guessed: "seven successive legs" vs "roughly seventy legs"
+(10× spread, 4 sites, no banked source resolves it)** — exactly the right refusal. Its
+mandated verifier is in flight (`verify/276-pub2r3-review`) with an extra
+truncation-independence sweep on the orchestrator's initiative — endorsed.
+
+**Slot A: leg 272 (Route-WESCV) promoted per reserve order** (independent verification
+of 263's sweep; spec stands; anti-pausing clause verbatim).
+
+**Trigger fired — drafted at 276's flagged leftover:**
+
+```
+### 278 — ROUTE-SVSL: SEVEN OR SEVENTY? RESOLVE THE 10× PROSE SPREAD FROM PROVENANCE
+(276's honestly-unresolved item — light, provenance-first, rework second)
+**Thesis.** Four PUB2 sites disagree by 10× on how many successive legs a claim covers
+("seven" vs "roughly seventy"), and 276 correctly declined to guess. The number IS
+resolvable: this repository's own git history and journals record exactly which legs
+constitute the referenced sequence — count them from provenance, then fix the four sites
+to the counted value.
+**Gate.** Does the provenance count (method documented: which legs, from which journal/
+git evidence, counted how) yield ONE defensible number, and do all four sites then state
+it consistently with no other meaning changed?
+  yes -> Bank the count and the fix; append the resolution to writeup/CORRECTIONS.md.
+  no -> If provenance genuinely supports BOTH readings (different sequences being
+        referenced at different sites), state which site means which, fix each to its
+        own correct referent, and record that the apparent contradiction was two claims
+        wearing one phrasing. Escalate only if neither reading is supportable.
+**Territory.** the four named PUB2 sites (from 276's report), writeup/CORRECTIONS.md
+               (append), writeup/novelty/leg_278.md, experiments/journal/leg_278.md.
+               Reads (never edits) git history, experiments/JOURNAL.md, 276's report.
+**Difficulty.** light
+**Independence.** Same-document family, all prior legs landed — no live conflict.
+Dispatchable AFTER verify-276 lands (seventh landing on one document; let the sixth's
+verifier report first). Reserve.
+```
+
+**FLOOR-TABLE block updated in this same edit** (A: 276 → 272). **Floor status: 3/10
+strictly (277, 267, 264) — unchanged, met exactly.**
+
+**Canonical reserve line: reserve count 6 — legs 278, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 strictly (278 waits on verify-276; 229 on 226;
+231-234 on repairs) — **stated plainly: the reserve is empty of immediately-dispatchable
+work for the first time this session.** The two pending generators (the user's packet
+response; 226's report with its pre-committed consolidated rework) are both expected
+imminently and both generate top-of-queue work; if either stalls AND a slot vacates,
+this DM will draft fresh candidates at that moment rather than let a slot idle — the
+commitment is on record. Next fresh leg number: **279.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised.
