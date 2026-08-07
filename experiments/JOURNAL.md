@@ -3717,3 +3717,27 @@ preempted agents had reached a landing.
   two DSS-conditional candidates more firmly: they were blocked pending this
   scoping, and the scoping's answer is structural exclusion, not "not yet
   costed."
+- **Leg 266 (Route-P0TC) — rework leg, gate YES, landed into leg 251's own
+  parked branch (PR #20, now at 873a15f, still NOT merged to main).**
+  Re-posed leg 251's certificate obligation #1 per verify_251's finding: at
+  BCG's scaling there is no stationary self-similar profile system of the
+  dissipative equation -- the system BCG's Thms 1.1/1.2 solve is the EULER
+  system (U^E,S^E), and dissipation enters only as a non-autonomous forcing
+  term F_dis. Obligation #1 now correctly asks for an enclosure of the
+  STABILITY STEP (the r-restriction by which the profile dominates F_dis) at
+  r outside BCG's own dominance window (1.1666667, 1.1909830, width
+  0.0243163) -- confirmed non-vacuous, since the target window (1, 7/6] is
+  6.855x wider. Every other verifier-confirmed claim in 251's report is
+  byte-untouched; a dated correction note cites verify_251. Unblocks leg 265
+  (Phase-1 costing).
+- **Leg 268 (Route-PUB2R) -- rework leg, gate YES, landed.** Corrected PUB2's
+  false "||T^-1||_X = 4.026, truncation-independent" claim (per leg 249's
+  exact-rational-arithmetic finding) to the honestly-stated rising ladder
+  converging to approximately 4.0318; corrected the two proved-wrong banked
+  values (sigma_min and ||T^-1||_X at N=512) via a cited companion artifact,
+  leg 176's own banked JSON and gate-answer text left byte-identical;
+  absorbed leg 259's two smaller prose nits. Checked, not assumed, that no
+  escalation was warranted: PUB2's only "4.026" citation drives no downstream
+  argument. Flags PUB2 for a fresh full review pass before any actual
+  submission. Post-landing verifier dispatched given the submission-track
+  stakes.
