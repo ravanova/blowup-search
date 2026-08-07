@@ -3880,3 +3880,7 @@ preempted agents had reached a landing.
   leg 274's fix applies correctly. PUB2 is submission-ready from the
   record's side pending these 5 light rework candidates -- actual
   submission remains the user's action.
+- **Leg 163 -- merged to main as a standalone record**, per the DM's
+  recommendation (the leg-249 precedent): 23 of PUB2's traced claims
+  resolved only on this unmerged branch per leg 270's finding. No new
+  finding here; this is the merge of leg 163's own already-landed report.
