@@ -62,9 +62,12 @@ Structurally, it is a good room. We re-derived Xu's machinery from the paper rat
 it, and everything a proof needs is there: the operator splits into two uncoupled halves, the
 inverse has an explicit shape with an *exact* norm, and the one singular direction is rank one,
 so the same bordering trick we used before fits perfectly. The residuals across those checks
-are around `1e−14`. The quantity that collapsed in the sequence space is here bounded away from
-zero and, crucially, **independent of the truncation** — it moves by `1.4e−04` when we widen
-the computational window by four decades.
+are around `1e−14`. The quantity that collapsed in the sequence space **does not collapse here**
+— across everything we could compute it settles down rather than drifting to zero. (It is worth
+being precise about what that is and is not evidence of, since a later draft of this piece got it
+wrong: it is *not* a value independent of the truncation. The `1.4e−04` we quote is what happens
+when we widen the *quadrature window* by four decades, which is a different sweep and says
+nothing about truncation. See the correction further down.)
 
 **And it is worth nothing for our actual problem.** This is the part that has to be said in the
 same breath, and it is why the leg that found it escalated instead of building anything.
@@ -95,8 +98,10 @@ rather than a citation.
 The **no**: the actual proof constant, computed the same way we computed it in the old room, comes
 out at best **140.72** where it has to be below **1**, and it grows like the square of the split
 parameter. So the proof does not close there either. But — and this is the part worth carrying —
-it fails for a *different reason*. In the old room the operator itself had no floor, so the
-constant was doomed for **every** bounded choice. Here the operator does have a floor, so what
+it fails for a *different reason*. In the old room the operator itself had no floor — that is a
+theorem, not a measurement — so the constant was doomed for **every** bounded choice. Here we do
+not see that happening: the quantity flattens instead of drifting to zero, which is evidence of a
+floor and not a proof of one. On that reading — the strongest our numbers support — what
 failed is the **shape** we chose for the approximate inverse. That is a narrower failure, and we
 are careful not to convert it into a promise: nobody has tested whether a different shape closes it.
 

@@ -61,10 +61,16 @@ rewrite of it.
 **Two limits on that fold-in, stated here rather than discovered later.** (1) §§5–6 below were
 written when the axis had three points and are **left as drafted**; they are the three-result
 synthesis, and §3.5 says explicitly which of their sentences leg 176 makes more precise and
-which it leaves standing. (2) The blocked verification leg commissioned against leg 176
-(leg 192) has at this writing committed **only its own pre-registered novelty / prior-art
-pass** — no verification runner, no re-derivation, no verdict. **Leg 176's numbers are therefore
-carried here as leg 176's own single-leg measurements, not as independently re-derived ones.**
+which it leaves standing. (2) The verification leg originally commissioned against leg 176
+(leg 192) committed **only its own pre-registered novelty / prior-art pass** — no verification
+runner, no re-derivation, no verdict — but **the independent re-derivation has since been done
+and has reported**: leg 249 re-derived leg 176's construction in **exact rational arithmetic**
+(branch `leg/249-h2cv2-v2` at `e9db984`), confirming both conjuncts and correcting two banked
+values below the digits quoted here; a subsequent review pass re-pulled leg 249's figures from
+that branch and matched them character for character. **Leg 176's numbers are therefore carried
+here as leg 176's float64 measurements, with leg 249's exact tier as the independent check on
+them** — the corrections are recorded at §3.5 and in
+[`writeup/data/p2_route_h2c_v1_construction_correction_leg268.json`](../data/p2_route_h2c_v1_construction_correction_leg268.json).
 
 ---
 
@@ -197,8 +203,8 @@ three test data.
 
 | | `ℓ¹_w` (§2) | origin-`H²` (§3) |
 |---|---|---|
-| `σ_min` | → 0 like `M^{−(1−s)}`; **0.9925 / 0.6985 / 0.3202** at `s = 0 / 0.3 / 0.7` | does **not** go to 0: measured **0.0908** (leg 176, §3.5), flat to **0.139 %** over a 16-fold truncation range. Leg 163's three data `‖u‖_X/‖f‖_X` = 1.3993 / 1.2680 / 1.3769 give only `σ_min ≤ 0.71465` — an **upper** bound, see the note below |
-| truncation dependence | none available — `σ_min` has no truncation-independent value at all | ratio spread **1.444e−04** across four added decades of window (`n_quad` 600→1400, window `1e−4…1e+4` → `1e−6…1e+6`) |
+| `σ_min` | → 0 like `M^{−(1−s)}`; **0.9925 / 0.6985 / 0.3202** at `s = 0 / 0.3 / 0.7` | does **not** decay that way: measured **0.0908** (leg 176, §3.5) on a monotone-decreasing ladder that **flattens** to **0.139 %** over a 16-fold truncation range — evidence of a positive limit, **not a proved floor** (§3.5 states that limitation in full). Leg 163's three data `‖u‖_X/‖f‖_X` = 1.3993 / 1.2680 / 1.3769 give only `σ_min ≤ 0.71465` — an **upper** bound, see the note below |
+| truncation dependence | none available — `σ_min` has no truncation-independent value at all: it decays like `M^{−(1−s)}` | the ladder **flattens** instead of decaying (0.139 % over a 16-fold truncation range, §3.5) — which is **not** a truncation-independent value and is not offered as one. Separately, and on a *different* sweep, the bordered-solve ratio moves by **1.444e−04** across four added decades of **quadrature window** (`n_quad` 600→1400, window `1e−4…1e+4` → `1e−6…1e+6`); a window spread is not evidence about truncation |
 | consequence for `Z₁` | `Z₁ ≥ 1` for **every** bounded `A` | no such floor; the exact inverse is in closed form |
 | what bordering does | **nothing** — bordered and unbordered `σ_min` agree to **5.7e−15** | **everything** — the residue at `z = 0` *is* the border column |
 | block coupling of the split | `K/2` for every choice | **exactly zero** by construction |
@@ -350,8 +356,11 @@ With `A = blockdiag(finite bordered inverse, tail inverse)` and `Z₁ = ‖I −
 
 **Best cell 140.72 where `< 1` is needed; growth `~K²`.** So in leg 54's shape the `X`
 realization fails too — **but, in leg 176's own reading, for a different reason than `ℓ¹_w` did.**
-There, leg 127 showed the operator itself had no truncation-independent `σ_min`, so `Z₁ ≥ 1` for
-*every* bounded `A`. Here the operator does have one, so **the failure is of the block-diagonal
+There, leg 127 showed the operator itself had no truncation-independent `σ_min` — a **theorem**,
+`σ_min(L_M) = c_s M^{−(1−s)} → 0` — so `Z₁ ≥ 1` for *every* bounded `A`. Here that mechanism is
+**measured absent** rather than proved absent: the ladder flattens instead of decaying (§3.5),
+float64 evidence of a positive limit and **not** a proved truncation-independent value. On that
+reading — the strongest the data support — **the failure is of the block-diagonal
 shape of `A`, not of the operator and not of the space.** Leg 176 calls that distinction its most
 useful output and the reason both numbers are reported with neither standing for the other.
 **This note adopts that framing and adds nothing to it**: no claim is made here that some
@@ -626,9 +635,13 @@ half is read from §3's census rather than independently re-derived, and the leg
 states plainly that it did not re-read Xu at primary source. The commissioned origin-`H²`
 construction leg had **not landed** at drafting and nothing in §§1–4.5 or §§5–6 is attributed to
 it; it has since landed and is folded in at **§3.5 only**, where it is float64 with nothing
-interval-enclosed, forms no `Y₀` and no `Z₂`, and is carried as a **single leg's own
-measurements** — its commissioned verification leg has committed only a novelty pass and has
-returned no verdict. **No link of the `L1 → L4` chain moved.** None has moved in 185 legs. Clay odds remain ~0.05 %.
+interval-enclosed, forms no `Y₀` and no `Z₂`, and is carried as that **leg's own float64
+measurements**. The independent check on them **has since reported**: the originally commissioned
+verification leg (leg 192) committed only a novelty pass, but leg 249 re-derived the construction
+in exact rational arithmetic, confirmed both conjuncts, and corrected two banked values below the
+digits quoted here (§0, §3.5); a later review pass re-pulled those figures from leg 249's own
+branch and matched them exactly. That check is exact where leg 176 is float64, and it does not
+convert any ladder here into a proved bound. **No link of the `L1 → L4` chain moved.** None has moved in 185 legs. Clay odds remain ~0.05 %.
 
 **This draft is for the user's review. Its landing records that the bundle reproduces from its
 sources; it does not approve the bundle for publication. It is one of two such drafts — see
