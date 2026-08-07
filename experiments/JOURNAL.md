@@ -3930,3 +3930,38 @@ preempted agents had reached a landing.
   to integration: close as EXPLAINED, adopt NEITHER original number as "the"
   ratio, quote ||A|| and Z_2 (the reproducible columns) going forward. Both
   legs' own verdicts stand unaffected. 0 banked numbers moved.
+- **Leg 277 (Route-XUN) -- gate (a) YES / (b) NO-COMPARAND, landed. Found a
+  discrepancy in a bridge, not in the certificate itself.** Xu's Definition
+  4.1 names TWO norms across two sentences: a displayed half-line L^2(0,inf)
+  norm and an "equivalent" full-line odd-H^2(R) norm. Leg 249's W5 and leg
+  270's E1 both carry the SECOND, but under the DISPLAYED definition the
+  constant is pi, not 2pi -- sigma_min = 0.057643 (not 0.0420303), a factor
+  1.3715 off. Measured (not argued): the half-line Gram is pi(I+J^4) + iS
+  with S antisymmetric, contributing exactly zero on the REAL coefficient
+  subspace where the certificate actually lives (2.20e-14; a complex-data
+  control that could have failed DID, deviating 0.676, confirming the
+  measurement is real). Xu publishes no comparand at z=0 (Prop 4.6's
+  majorant explicitly excludes that point, which is exactly where the
+  certificate lives). NOT an escalation: leg 176's gate property (sigma_min
+  bounded away from zero, uniformly in truncation) is invariant under
+  EVERY positive constant -- only the digits printed next to "Xu's own
+  normalization" are affected, not the certificate or PUB2's argument.
+  Bonus finding: ||T^-1||_X = 4.0262407 is proved EXACTLY
+  convention-free (first such statement in the record, and it's the number
+  PUB2 L303 quotes) while Z_1 fails its threshold by >244x under every
+  convention tested.
+- **Leg 278 (Route-SVSL) -- gate YES, landed. THE DECLARED-FINAL PUB2
+  PASS -- PUB2 IS NOW CLOSED FROM THE RECORD'S SIDE.** Scoped by ARTIFACT
+  (117 files in writeup/4_p2_lottery/, 36 claim keys, 21 shared claims
+  checked pairwise) rather than by inherited defect list, per the process
+  fix verify_276 diagnosed. Found and fixed the one remaining cross-document
+  contradiction: BLOG_P2_PUB2_V1.md's "about seventy work-legs" corrected to
+  "seven successive work-legs" (0 of the 2 CORRECT "seven" sites touched;
+  2 "seventy"-framed obstruction-span sites left standing, banked as
+  CORRECTIONS.md SS7 with their 0-vs-2 source-anchor asymmetry noted, rather
+  than deferred to another pass). Leg 276's full 122-row trace re-runs
+  122/122 green, 185/185 numeric tokens byte-identical. 0 arguments/
+  conclusions/gate answers moved. This closes a document that has now had
+  8 landings total (250, 268, 271, 274, 270, 276, and this one) across the
+  session -- an EIGHTH correction pass now requires the user's own
+  sign-off, a standing process rule.
