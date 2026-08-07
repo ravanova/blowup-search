@@ -30,7 +30,7 @@ prose as before.
 | B | 285 | P2S | yes |
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
-| E | 248 | CNR2 | no |
+| E | 286 | CNRV | no |
 | F | 281 | CVF | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
@@ -12374,3 +12374,54 @@ Next fresh leg number: **286.**
 Nothing in this update lifts a ban or opens construction — 285 specifies, it does not
 build, and its output routes to the user's packet. Clay stays ~0.05%. No new direction
 question raised — 226's report and the two user items remain the open tracks.
+
+---
+
+## DM update, 2026-08-07 — 248 (CNR2) landed gate YES: slot E = 286, its own
+pre-flagged postrepair check; status readout recorded
+
+**248 landed (`f11728d`), gate YES:** the scale-invariant-residual defect in
+`collocation_newton.py` repaired per leg 237's characterization, closing leg 237's
+finding on the same footing as 226 closes 202's. Its spec pre-flagged a light
+postrepair check — drafted and dispatched now per the standing postrepair discipline:
+
+```
+### 286 — ROUTE-CNRV: POST-REPAIR VERIFICATION OF 248's collocation_newton.py REPAIR
+(the check 248's own spec pre-flagged)
+**Thesis.** 248 repaired leg 237's scale-invariant-residual defect (the 202-class
+instance in collocation_newton.py). Per the postrepair discipline (228/231-234 family):
+an independent re-run, not the repairing agent's own numbers.
+**Gate.** Does an independent re-run confirm (a) all 41 of leg 237's reachability-battery
+cases now correctly reject/flag, (b) the 2 cases reproducing leg 202's banked numbers
+remain correctly flagged as genuine (no overcorrection), and (c) no
+collocation_newton.py-dependent banked value moved (robust sweep for dependents)?
+  yes -> Bank as closing 237's finding on independently-confirmed footing.
+  no -> Name the failing case precisely; the confirmed-gap rework rule applies.
+**Territory.** test_collocation_newton_postrepair.py,
+               experiments/p2_route_cnrv_v1_postrepair.py,
+               writeup/data/p2_route_cnrv_v1_postrepair.json,
+               writeup/novelty/leg_286.md, experiments/journal/leg_286.md.
+               Reads solver/collocation_newton.py; edits nothing in it.
+**Difficulty.** standard
+**Independence.** Read-only on the repaired module; no live conflict. Slot E, now.
+Anti-pausing clause verbatim.
+```
+
+**Status readout, recorded (mirrors this DM's reply to the orchestrator):** 226 (slot J)
+still in flight, no report received by this DM — the consolidated 236+226 impact-trace
+rework remains pre-committed at top of queue the moment it reports; 280 still user-gated,
+unchanged; open escalations: 236 (held in NEEDS-YOU pending 226, by agreement), the
+assembled packet (with user), 280's sign-off (with user); 210's escalation is PROCESSED
+(283 landed the rework; 284 measuring; branch merge optional); 249's standalone-record
+merge recommendation stands open on the orchestrator side.
+
+**FLOOR-TABLE block updated in this same edit** (E: 248 → 286). **Floor status: 5/10
+strictly (285, 284, 281, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated; 229 on 226; 231-234 on repairs
+217/219/221/225 — note 221 is live in slot D; its landing unblocks 233). Next fresh
+leg number: **287.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
+raised.
