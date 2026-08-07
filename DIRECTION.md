@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 285 | P2S | yes |
-| C | 295 | PUB3P | no |
+| C | 297 | D11ANCHOR | no |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
 | F | 292 | CAPA | no |
@@ -13094,7 +13094,11 @@ reasoning (not inventing new criteria), and executes it.
 (not a new criterion), executed cleanly (regeneration/re-bank matches the chosen
 option's own definition), and is the banked margin at a=0.45 no longer wrong by
 6.55e+11x after the leg lands?
-  yes -> Bank. The long-open integration gap closes.
+  yes -> PREPARE EVERYTHING ON THE LEG'S OWN BRANCH AND STOP SHORT OF PUSHING TO
+         MAIN. Rewriting a banked-artifact/results file is a standing escalation
+         category — route the actual integration decision to the user rather than
+         landing it autonomously, even with a confident, well-reasoned choice among
+         the three options.
   no -> If none of the three options is clearly correct from 252's own reasoning:
         escalate rather than invent a fourth option.
 **Territory.** `writeup/data/p2_route_d_v11_anchor.json` (regenerate/re-bank per the
@@ -13115,4 +13119,52 @@ repairs (221 live in slot D). Next fresh leg number: **298.**
 
 Nothing in this update lifts a ban. 296's reconciliation is recorded as a resolved
 contradiction with a real mechanism named, not a tie-break. Clay stays ~0.05%. No new
+direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 295 (PUB3P) landed and integrated; slot C filled directly
+by the orchestrator from pre-staged reserve with 297; ORCHESTRATOR OVERRIDE on 297's
+yes-branch RECORDED AND ADOPTED as a standing rule: this DM's own spec was wrong to
+write "yes -> Bank" for a banked-artifact rewrite
+
+**295 landed and integrated** — the stale PUB3 a_max_machine citation fixed, JOURNAL.md
+pointer added.
+
+**Slot C: leg 297 (Route-D11ANCHOR), dispatched by the orchestrator directly from
+pre-staged reserve — correct use, no round-trip.**
+
+**Override recorded: this DM's own drafted gate for 297 was WRONG and is corrected in
+place.** 297 regenerates/re-banks `p2_route_d_v11_anchor.json` — rewriting a banked
+results artifact, one of the orchestrator's four standing escalation categories — and
+this DM's original "yes -> Bank" wording implied a direct autonomous push to main. The
+orchestrator correctly overruled it: 297 now prepares everything on its own branch and
+STOPS SHORT OF PUSHING, so the actual integration decision routes to the user for a
+ruling regardless of how well-reasoned the leg's choice among 252's three options is.
+**297's gate text in this file has been corrected in place to match** (see above) —
+not left wrong for a future reader.
+
+**Standing rule adopted, per the orchestrator's explicit request for default
+treatment on future legs:** any leg whose yes-branch would REWRITE a banked
+artifact/results file (JSON, banked certificate data, anchor files — anything this
+repository treats as a measured, citable record rather than prose) gets its gate
+written as "prepare on the leg's own branch, do not push to main, escalate the
+integration decision" BY DEFAULT — never "Bank" — regardless of this DM's own
+confidence in the leg's reasoning. This applies retroactively to how this DM will
+draft such gates from here forward; no other currently-drafted leg in this file
+touches a banked-artifact rewrite as its primary action, so no other retroactive fix
+is needed this update (checked directly: 268/271/276/278's PUB2 edits are prose, not
+banked-results artifacts, and remain correctly gated as-is).
+
+**FLOOR-TABLE unchanged** (C already reads 297 from last update — no slot movement
+this update, only the gate-text correction above). **Floor status: 3/10 strictly
+(285, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 293, 280, 231, 232, 233, 234**
+(297 now dispatched, no longer reserve stock). Effective immediately-dispatchable: 1
+(293); 280 user-gated; 231-234 blocked on repairs. Next fresh leg number: **298**
+(unchanged).
+
+Nothing in this update lifts a ban; the override strengthens, not weakens, the
+banked-record discipline this file already runs on. Clay stays ~0.05%. No new
 direction question raised.
