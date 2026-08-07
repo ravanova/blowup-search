@@ -4128,3 +4128,29 @@ preempted agents had reached a landing.
   to apply). Two honesty items self-reported: a mis-listed D3 in its own
   novelty pass, and a "48 slots" count that is mechanically 47 values + 3
   declared-absent.
+- **Leg 288 (Route-CANON) -- gate NO, landed, and a clean negative
+  result.** Question: does one named convention make every
+  convention-relative quantity in leg 281's table simultaneously natural?
+  Tested 4 candidates (repo default kappa=1, Xu half-line kappa=pi, Xu
+  full-line kappa=2pi, and a new operator-norm-induced kappa*=0.1 --
+  bracketed as a genuine interior local maximum of sigma_min, not a grid
+  artifact, matching leg 281's own fine sweep). **No convention serves
+  all quantities**: the sigma_min family (A1/A2/A6/D3/E6) wants kappa
+  pinned near its isolated interior maximum kappa*=0.1, while the
+  Z_1/dual-norm pair (C1/D1) is monotone with no interior extremum,
+  improving only as kappa -> infinity (Z_1 converges to an asymptotic
+  floor 140.71976, confirmed to 5.1e-08 relative between kappa=1e6 and
+  1e8). These two families pull in EXACTLY opposite directions -- ranking
+  the 4 candidates by each family's own preference gives an exact rank
+  reversal, Spearman rho = -1.000. Quantitative cost: pushing kappa toward
+  Z_1/D1's preferred direction collapses sigma_min by **12,478x**
+  (0.1358 -> 1.09e-05 at kappa=1e8), and since the resolvent norm the
+  certificate needs bounded is 1/sigma_min, it blows up by the same
+  12,478x. One exception banked at full strength: D1 = ||l||_{X*} is
+  EXACTLY convertible (a kappa^-1/2 law verified to <=1.5e-16 relative
+  error out to kappa=1e8), so it alone could legitimately be quoted "in
+  convention C" by citation with zero loss -- full 4-way conversion table
+  banked. Flagged, not applied: no future document pass should adopt a
+  single whole-record "convention C" citation; this is itself the
+  mathematical explanation for why the caveat family (270/276/277/281)
+  kept recurring, not just another instance of it.
