@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 210 | M2SV | no |
-| C | 228 | BHRV | no |
+| C | 278 | SVSL | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 277 | XUN | yes |
@@ -11998,3 +11998,64 @@ vacancy). Next fresh leg number: **279.**
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised —
 still awaiting the user's packet response and 226's report.
+
+---
+
+## DM update, 2026-08-07 — 228 (BHRV) landed gate YES with two bonus findings (the
+198/218 Z_1 disagreement RESOLVED as round-off-floor noise); slot C = 278 per queue
+order; closure leg 279 drafted
+
+**228 landed (`54b197b`), recorded:** gate YES both clauses — leg 218's border-weight
+guard independently verified (67/67 pre-repair leaks now 0/67; 45 configs × 77,040
+float leaves bit-identical). Bonus findings at full strength: (1) 218's caller
+enumeration was materially incomplete (missed `p2_route_tn_v1_consistency.py`, a real
+weight-surface caller) — the repair itself unaffected, re-earned over the full
+ten-importer space; (2) **the long-standing legs-198/218 Z_1 disagreement (5.24× apart,
+leg 223 adopted neither) is RESOLVED as EXPLAINED**: under mathematics-neutral
+perturbations (thread count alone) the disputed quantity spans 11.77× — more than the
+original disagreement — while a control both legs agree on moves 7.2e-12. Round-off-floor
+noise in a near-total-cancellation denominator, not a real discrepancy.
+
+**Slot C: leg 278 (Route-SVSL, the declared-final artifact-scoped PUB2 pass) — per the
+fixed queue order** (the 226 consolidated rework is not yet draftable since 226 has not
+reported; 278's own condition, verify-276 landed, is met). Anti-pausing clause verbatim.
+
+**Closure leg drafted (this DM's call between a light leg and a bare pointer: a light
+leg — the closure changes FORWARD practice and touches three legs' records):**
+
+```
+### 279 — ROUTE-Z1X: CLOSE THE 198/218 Z_1 DISAGREEMENT AS EXPLAINED, ACROSS EVERY SITE
+THAT QUOTES EITHER NUMBER (228's resolution, applied — light)
+**Thesis.** 228's resolution above. Forward practice per its recommendation: quote ‖A‖
+and Z_2 (the reproducible columns); adopt NEITHER original number as "the" ratio; the
+near-total-cancellation denominator makes the ratio itself a non-reproducible quantity.
+Also records 218's caller-enumeration incompleteness alongside (same record family).
+**Gate.** After the pass: (a) a documented artifact-scoped sweep (per the standing
+scoping rule — claim-sharing set, not defect list) finds every site quoting either
+disputed Z_1 number, and each now states the EXPLAINED closure with the reproducible
+columns quoted instead; (b) a CORRECTIONS.md entry records the closure with 228's
+locators, plus the caller-enumeration note; (c) legs 198/218/223's own journals get a
+dated pointer (append-only), their original text preserved; (d) no other meaning
+changed.
+  yes -> Bank. The open item is closed across the record, not just in one file.
+  no -> Any site where the substitution would change an argument: STOP, escalate.
+**Territory.** the sites found by the sweep (enumerated in the report before editing),
+               writeup/CORRECTIONS.md (append), journal pointers (append-only),
+               writeup/novelty/leg_279.md, experiments/journal/leg_279.md.
+               Reads (never edits) 228's landed report.
+**Difficulty.** light
+**Independence.** Record-maintenance family; no live conflict (228 landed). Reserve;
+next vacancy after the standing queue order (226-rework when draftable, then this or
+as slotted).
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 228 → 278). **Floor status: 3/10
+strictly (277, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 279, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (279); 229 blocked on 226; 231-234 blocked on
+repairs 217/219/221/225. Next fresh leg number: **280.**
+
+Nothing in this update lifts a ban; the Z_1 closure is recorded as an explanation of a
+measurement artifact, not movement of any link. Clay stays ~0.05%. No direction
+question raised — still awaiting the user's packet response and 226's report.
