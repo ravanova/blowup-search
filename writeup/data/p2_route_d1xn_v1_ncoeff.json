@@ -1,0 +1,188 @@
+{
+  "leg": 290,
+  "route": "ROUTE-D1XN",
+  "date": "2026-08-07",
+  "role": "tests whether D1's N-dependent coefficient C(N) (leg 289's P2b: 1.90e-05 relative shift between N=256 and N=512) fits a single named closed form, using the already-banked N=64,128,256,512 ladder discovered in leg 176's and leg 277's data -- zero new certificate/solver compute, per novelty pass writeup/novelty/leg_290.md",
+  "novelty_pass_commit": "9d91e41",
+  "reads_only": [
+    "writeup/data/p2_route_cvf_v1_classify.json (leg 281)",
+    "writeup/data/p2_route_canon_v1_convention.json (leg 288)",
+    "writeup/data/p2_route_h2c_v1_construction.json (leg 176)",
+    "writeup/data/p2_route_xun_v1_convert.json (leg 277)"
+  ],
+  "leg289_reads_only": "writeup/data/p2_route_d1x_v1_apply.json (read-only, not edited)",
+  "N_ladder_source": "leg 176's C8_border_row_dual_norm.ladder (x_dual column), cross-checked below",
+  "N_ladder": {
+    "64": 0.8872380425355713,
+    "128": 0.8873117900938475,
+    "256": 0.887345112546454,
+    "512": 0.8873620087421942
+  },
+  "cross_checks": {
+    "leg176_vs_leg277_ladder": {
+      "64": {
+        "leg176": 0.8872380425355713,
+        "leg277": 0.8872380425355713,
+        "relative_difference": 0.0
+      },
+      "128": {
+        "leg176": 0.8873117900938475,
+        "leg277": 0.8873117900938475,
+        "relative_difference": 0.0
+      },
+      "256": {
+        "leg176": 0.887345112546454,
+        "leg277": 0.887345112546454,
+        "relative_difference": 0.0
+      }
+    },
+    "leg176_N512_vs_leg281_quoted_D1_law_constant": {
+      "h2c_N512": 0.8873620087421942,
+      "leg281_quoted_N512": 0.8873620087421942,
+      "relative_difference": 0.0
+    },
+    "leg176_N256_vs_leg288_derived_coefficient": {
+      "h2c_N256": 0.887345112546454,
+      "leg288_derived_N256": 0.8873451208021278,
+      "relative_difference": 9.303791295746083e-09
+    },
+    "reading": "all cross-checks agree to <=9.3e-9 relative -- three-plus orders of magnitude below every N-dependence effect tested below, confirming this is one consistently measured quantity across 4 independent legs (176, 277, 281, 288), not 4 different quantities coincidentally close in value."
+  },
+  "F1_free_exponent_power_law": {
+    "differences": {
+      "C(128)-C(64)": 7.374755827627144e-05,
+      "C(256)-C(128)": 3.332245260645461e-05,
+      "C(512)-C(256)": 1.68961957401903e-05
+    },
+    "p_estimate_from_64_128_256": 1.1461006934851996,
+    "p_estimate_from_128_256_512": 0.9797961368309323,
+    "p_relative_disagreement": 0.1564559053691585,
+    "3point_fit_low_triple": {
+      "Cinf": 0.8873725802754633,
+      "A": 0.015809140108538716,
+      "p": 1.1461006934851996
+    },
+    "holdout_prediction_C512_from_low_triple": 0.88736016912424,
+    "holdout_relative_error_low_triple": 2.0731312993655136e-06,
+    "3point_fit_high_triple": {
+      "Cinf": 0.8873793883212922,
+      "A": 0.007844612503282708,
+      "p": 0.9797961368309323
+    },
+    "holdout_prediction_C64_from_high_triple": 0.887246071995834,
+    "holdout_relative_error_high_triple": 9.049950382927717e-06,
+    "max_holdout_relative_error": 9.049950382927717e-06,
+    "precision_bar": 1e-06,
+    "F1_falsified": true,
+    "reading": "the two independently-estimated exponents disagree by 15.6% of their mean (1.1461 vs 0.9798) -- a true single power law would give the same p regardless of which overlapping triple estimates it. This alone falsifies F1 as a single closed form, independent of the holdout-precision test below."
+  },
+  "F2_F3_fixed_exponent_global_fits": {
+    "0.5": {
+      "p": 0.5,
+      "Cinf": 0.8874380622842651,
+      "A": 0.0015473985168331515,
+      "predictions": {
+        "64": 0.887244637469661,
+        "128": 0.8873012902862087,
+        "256": 0.8873413498769631,
+        "512": 0.887369676285237
+      },
+      "relative_residuals": {
+        "64": -7.43310563067576e-06,
+        "128": 1.1833278624276823e-05,
+        "256": 4.2403676288608785e-06,
+        "512": -8.640828621557053e-06
+      },
+      "max_relative_residual": 1.1833278624276823e-05
+    },
+    "1.0": {
+      "p": 1.0,
+      "Cinf": 0.8873807397009544,
+      "A": 0.009079633433619798,
+      "predictions": {
+        "64": 0.8872388704285541,
+        "128": 0.8873098050647543,
+        "256": 0.8873452723828543,
+        "512": 0.8873630060419044
+      },
+      "relative_residuals": {
+        "64": -9.331125843853493e-07,
+        "128": 2.2371269213046497e-06,
+        "256": -1.8012878876265458e-07,
+        "512": -1.1238927297246258e-06
+      },
+      "max_relative_residual": 2.2371269213046497e-06
+    },
+    "1.5": {
+      "p": 1.5,
+      "Cinf": 0.8873623181434684,
+      "A": 0.06466413348760172,
+      "predictions": {
+        "64": 0.8872360210077505,
+        "128": 0.8873176653629131,
+        "256": 0.8873465310015037,
+        "512": 0.8873567365458991
+      },
+      "relative_residuals": {
+        "64": 2.2784503412732465e-06,
+        "128": -6.621425671544672e-06,
+        "256": -1.5985381895892871e-06,
+        "512": 5.941426659188467e-06
+      },
+      "max_relative_residual": 6.621425671544672e-06
+    },
+    "2.0": {
+      "p": 2.0,
+      "Cinf": 0.8873535788447969,
+      "A": 0.4853101513415659,
+      "predictions": {
+        "64": 0.8872350949211295,
+        "128": 0.8873239578638801,
+        "256": 0.8873461735995677,
+        "512": 0.8873517275334897
+      },
+      "relative_residuals": {
+        "64": 3.3222363113813925e-06,
+        "128": -1.371307151374396e-05,
+        "256": -1.1957614897540514e-06,
+        "512": 1.1586261980127218e-05
+      },
+      "max_relative_residual": 1.371307151374396e-05
+    }
+  },
+  "F2_p1_falsified": true,
+  "best_fitting_fixed_exponent": {
+    "p": "1.0",
+    "max_relative_residual": 2.2371269213046497e-06,
+    "per_N_relative_residuals_worst_first": [
+      [
+        "128",
+        2.2371269213046497e-06
+      ],
+      [
+        "512",
+        -1.1238927297246258e-06
+      ],
+      [
+        "64",
+        -9.331125843853493e-07
+      ],
+      [
+        "256",
+        -1.8012878876265458e-07
+      ]
+    ]
+  },
+  "GATE": {
+    "question": "does the coefficient's N-dependence fit a single named closed form to the precision leg 249's/leg 281's (and the wider already-banked N-ladder's) legs measured (~1e-10..1e-16, this leg family's standard for an 'exact' law)?",
+    "answer": "NO",
+    "headline_evidence": {
+      "best_candidate": "C(N) = Cinf - A * N^-1.0",
+      "max_relative_residual": 2.2371269213046497e-06,
+      "worst_N": "128",
+      "worst_N_relative_residual": 2.2371269213046497e-06,
+      "comparison_floor": "leg 281's fit_max_relative_residual=1.11e-16; leg 289's own held-out errors were 0.0 and <=1.53e-16 (same-N) -- the best N-dependence fit here is 2.237e-06, roughly 2.0e+10x that floor"
+    },
+    "scope_limitation": "the N-restriction leg 289 flagged is REAL, not an artifact of undersampling: even with a 4-point N-ladder (N=64,128,256,512, not just the 2 points the brief anticipated), no single fixed-exponent power law C(N)=Cinf-A/N^p, and no free-exponent version either (the exponent estimate itself is unstable across overlapping triples), reproduces C(N) to the precision this leg family calls 'exact' elsewhere. The best fit is still 4-5 orders of magnitude short of that bar."
+  }
+}
