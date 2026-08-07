@@ -3884,3 +3884,17 @@ preempted agents had reached a landing.
   recommendation (the leg-249 precedent): 23 of PUB2's traced claims
   resolved only on this unmerged branch per leg 270's finding. No new
   finding here; this is the merge of leg 163's own already-landed report.
+- **Leg 276 (Route-PUB2R3) -- gate YES, landed.** Closed all 5 defect
+  families from leg 270's full trace in one pass: sigma_min's
+  convention-relativity disclosed at 6 site clusters (21 new occurrences),
+  four over-tight bounds loosened to match the data, the 0.71465 provenance
+  chain corrected (plus an independent finding: the rounding is a
+  round-DOWN of 4.947e-06, so the witness bound is now stated as
+  <=0.71465495, tighter framing than leg 270 flagged), 23/23 leg-163-sourced
+  claims re-traced from main, and a full 122-row exit re-trace confirms 6/6
+  previously-failing sites green with 116/116 previously-exact values
+  byte-unchanged. Zero arguments/conclusions/gate-answers changed, no
+  escalation. ONE ITEM LEFT STANDING, reported not repaired: "seven
+  successive legs" vs "roughly seventy legs" (a 10x spread at 4 sites) --
+  no banked source in leg 276's read-set resolves which figure is right.
+  A mandated verifier is in flight (sixth landing on this document).
