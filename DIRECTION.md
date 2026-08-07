@@ -27,7 +27,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 265 | P2C | yes |
-| B | 269 | J176P | no |
+| B | 210 | M2SV | no |
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
@@ -11406,3 +11406,62 @@ pending 226 contingency are each expected to generate legs naturally. 270 blocke
 Next fresh leg number: **273.**
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — slot-B refill: 269 (J176P) landed clean; 210 promoted per
+order; trigger fired — floor-eligible reserve item 273 drafted (the reserve held none)
+
+**269 landed (`e9318b5`):** leg 176's journal slip fixed, independently re-checked
+against the banked JSON, isolated (5/6 neighbouring claims agree exactly), no gate
+number touched. No verifier at these stakes — agreed. 270's source layer is now clean.
+
+**Slot B: leg 210 (Route-M2SV) promoted per reserve order** (resume from
+`verify/210-m2sv-v1`, essentially baseline; spec/gate unchanged; anti-pausing clause).
+
+**Trigger fired — and aimed at the reserve's real gap: it held ZERO floor-eligible
+items.** Drafted grounded in three landed facts (255's two banked non-fluid survivors;
+256's now-verified reproduction; 257's fourth-space scoping):
+
+```
+### 273 — ROUTE-NFS: WHAT ARE 255's TWO NON-FLUID SURVIVORS ACTUALLY WORTH? (scoping the
+only census survivors that exist, against the occupied-cell question — math/literature,
+NO construction)
+[FLOOR-ELIGIBLE: math/literature]
+**Thesis.** 255's census banked exactly two survivors, both non-fluid; 256 (verified)
+proves the Breden-Chu machinery is drivable here; 257 established H²(µ) evades the three
+deaths (lift pending with the user). The unanswered direction question: do the two
+survivors fill an EMPTY cell of leg 174's occupancy matrix, or do they duplicate DF-CGL's
+already-occupied dissipative-non-fluid cell? For each survivor: (1) which matrix cell it
+would occupy, exactly; (2) what a certificate would need to show and in what space;
+(3) whether its blow-up evidence tier survives full-text scrutiny; (4) the honest
+distance from Clay, stated in the same breath (both are non-fluid by construction).
+**Gate.** Does at least one survivor occupy a genuinely EMPTY cell (not DF-CGL's, not any
+occupied one) AND carry a statable certificate target?
+  yes -> Bank the dossier as a candidate for the user's packet (secondary-goal track:
+         useful novel findings; explicitly NOT the Clay path, which runs through BCG per
+         251). Construction stays gated on the user's stage-V decision.
+  no -> Bank the duplication/deficiency verdict at full strength — the census's yes-branch
+        would then have produced zero actionable survivors, which sharpens the packet's
+        honest picture of what Phase 1's machinery can actually reach.
+**Territory.** experiments/p2_route_nfs_v1_scoping.py,
+               writeup/data/p2_route_nfs_v1_scoping.json,
+               writeup/novelty/leg_273.md, experiments/journal/leg_273.md.
+               Reads (never edits) 255's census JSON, leg 174's matrix, 256/257's landed
+               reports, the survivors' source papers at full text.
+**Difficulty.** standard
+**Independence.** Own module, read-only overlaps. Does not need the stage-V lift (scoping,
+builds nothing). Immediately dispatchable.
+```
+
+**FLOOR-TABLE block updated in this same edit** (B: 269 → 210). **Floor status: 4/10
+strictly (265, 236, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 8 — legs 272, 273, 270, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 2 (272, 273); 270 blocked on 271's verifier
+(HIGH once clear); 229 blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next
+fresh leg number: **274.**
+
+Nothing in this update lifts a ban; 273's yes-branch explicitly routes to the
+secondary-goal track and never describes non-fluid work as Clay movement. Clay stays
+~0.05%. No direction question raised.
