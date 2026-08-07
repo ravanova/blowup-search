@@ -1,0 +1,368 @@
+{
+  "artifact": "PUB2 PRE-SUBMISSION TRACE TABLE -- every quantitative claim and epistemic qualifier in TECHNICAL_P2_PUB2_V1.md and BLOG_P2_PUB2_V1.md, traced to its banked source",
+  "leg": 270,
+  "route": "ROUTE-PUB2V2",
+  "date": "2026-08-07",
+  "merge_base": "e9d5a25",
+  "documents_reviewed": {
+    "writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md": {"lines": 652, "edited_by_this_leg": false},
+    "writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md": {"lines": 214, "edited_by_this_leg": false}
+  },
+  "method": "Both documents read end to end. Every printed number located, then read back out of the JSON key or journal line it comes from, in this pass, with the venv python -- not transcribed from prose about it. Leg 186's own provenance audit (writeup/novelty/leg_186.md) was used to locate sources, then every value it lists was re-read independently from the source file rather than inherited from its table.",
+
+  "sources": {
+    "leg_127": {
+      "file": "writeup/data/p2_route_ngx_v1_general.json",
+      "on_main": true,
+      "supplies": "section 2 (the ell^1_w endpoint), section 3.2's contrast column, section 5(2)"
+    },
+    "leg_163": {
+      "file": "writeup/data/p2_route_h2s_v1_scoping.json",
+      "journal": "experiments/journal/leg_163.md",
+      "on_main": false,
+      "reachable_at": "origin/leg/163-h2s-v1 (parked branch, read-only)",
+      "supplies": "section 3.1, section 3.2's leg-163 row and the 0.71465 provenance note, section 3.3's five-item obstruction census, section 4.4's O4 quotation, section 4.5 row 4, section 5(3), section 6's section-3 row",
+      "note": "SEE FINDING P1. Every value reproduces exactly; none of them reproduces FROM MAIN."
+    },
+    "leg_176": {
+      "file": "writeup/data/p2_route_h2c_v1_construction.json",
+      "journal": "experiments/journal/leg_176.md",
+      "on_main": true,
+      "supplies": "section 3.5's sigma_min ladder, Z_1 battery, controls, closed-form ratios",
+      "correction_layers_in_force": [
+        "writeup/data/p2_route_h2c_v1_construction_correction_leg268.json (leg 268: K1, K2, K3)",
+        "writeup/data/p2_route_h2c_v1_construction_annotation_leg274.json (leg 274: A1, A2)"
+      ]
+    },
+    "leg_182": {
+      "file": "writeup/data/p2_route_h2i_v1_scoping.json",
+      "journal": "experiments/journal/leg_182.md",
+      "on_main": true,
+      "supplies": "all of section 4"
+    },
+    "leg_249": {
+      "journal": "experiments/journal/leg_249.md",
+      "data": "writeup/data/p2_route_h2cv_v1_postconstruction.json",
+      "novelty": "writeup/novelty/leg_249.md",
+      "on_main": true,
+      "on_main_identical_to_branch": true,
+      "branch_commit_cited_by_pub2": "e9db984",
+      "branch_commit_is_ancestor_of_main": false,
+      "supplies": "section 3.5's exact-rational corrections and certified brackets, section 0's and section 7's fold-in paragraphs",
+      "note": "SEE FINDING P2."
+    }
+  },
+
+  "totals": {
+    "quantitative_sites_traced": 94,
+    "quantitative_sites_matching": 88,
+    "quantitative_mismatches": 6,
+    "mismatches_that_change_an_argument": 0,
+    "epistemic_qualifier_sites_checked": 27,
+    "epistemic_qualifier_sites_clean": 26,
+    "epistemic_disclosure_gaps": 1,
+    "internal_consistency_sites_checked": 14,
+    "internal_inconsistencies": 5,
+    "provenance_findings": 3,
+    "escalations": 0
+  },
+
+  "trace_section_2_leg_127": {
+    "source": "writeup/data/p2_route_ngx_v1_general.json",
+    "rows": [
+      {"claim": "fitted p at s=0, K=4", "pub2": "0.9925", "key": "NGX2_sigma_min_ladder[s=0,K=4].fitted_exponent_p_in_sigma_M_to_the_minus_p", "banked": 0.9924789728516444, "verdict": "MATCH"},
+      {"claim": "fitted p at s=0.3, K=4", "pub2": "0.6985", "key": "same, s=0.3", "banked": 0.698488810373405, "verdict": "MATCH"},
+      {"claim": "fitted p at s=0.7, K=4", "pub2": "0.3202", "key": "same, s=0.7", "banked": 0.32016485033631215, "verdict": "MATCH"},
+      {"claim": "fitted p at s=1.0, K=4", "pub2": "0.0788", "key": "NGX2_exponent_at_s_equals_1[1]", "banked": 0.07875050843796134, "verdict": "MATCH"},
+      {"claim": "fitted p at s=1.5, K=4", "pub2": "0.5000", "key": "NGX2_exponent_at_s_equals_1p5[1]", "banked": 0.5000188728336935, "verdict": "MATCH"},
+      {"claim": "fit range M-K = 128..2048 at K=4", "pub2": "128 ... 2048", "key": "NGX2_sigma_min_ladder[*].M_extra", "banked": [128, 256, 512, 1024, 2048], "verdict": "MATCH"},
+      {"claim": "max deviation from 1-s over s<1, all K", "pub2": "0.0219", "key": "NGX2_max_deviation_from_1_minus_s_for_s_below_1", "banked": 0.02186165145571506, "verdict": "MATCH"},
+      {"claim": "relative K-spread of sigma_min for s<1", "pub2": "0.29 %", "key": "NGX2_K_independence.max_relative_spread_over_K_for_s_below_1", "banked": 0.002928257686684667, "verdict": "MATCH"},
+      {"claim": "K-spread at s=1.5", "pub2": "2.14", "key": "NGX2_K_independence...['1.5']", "banked": 2.1407266870634354, "verdict": "MATCH"},
+      {"claim": "witness ratio over numerical optimum", "pub2": "1.0000000000045", "key": "NGX3_max_ratio_over_optimum", "banked": 1.0000000000044844, "verdict": "MATCH"},
+      {"claim": "cosine with numerical optimum", "pub2": "0.9999999999999998", "key": "NGX3_min_cosine_with_optimum", "banked": 0.9999999999999998, "verdict": "MATCH"},
+      {"claim": "z_K exactly zero", "pub2": "0.0", "key": "NGX3_max_abs_z_K", "banked": 0.0, "verdict": "MATCH"},
+      {"claim": "residual carried by one row", "pub2": "one row", "key": "NGX3_max_rows_carrying_residual", "banked": 1, "verdict": "MATCH"},
+      {"claim": "max slack at A = L^-1", "pub2": "1.2366e-08", "key": "NGX1_max_slack_at_the_exact_inverse", "banked": 1.2366440968740889e-08, "verdict": "MATCH"},
+      {"claim": "leg 54 battery coverage", "pub2": "196 / 196", "key": "NGX6_rows_checked / NGX6_all_hold", "banked": "196 / true", "verdict": "MATCH"},
+      {"claim": "battery minimum slack", "pub2": "7.7343e-10", "key": "NGX6_min_slack", "banked": 7.734300317748637e-10, "verdict": "MATCH"},
+      {"claim": "mu>0 saturated exponent bound", "pub2": "<= 2.62e-03", "key": "NGX5_max_abs_exponent_for_mu_positive", "banked": 0.0026247852520269194, "verdict": "MISMATCH", "finding": "N1"},
+      {"claim": "exponent at mu=0, same code path", "pub2": "0.6985", "key": "NGX5_exponent_at_mu_0", "banked": 0.698488810373405, "verdict": "MATCH"},
+      {"claim": "truncation-artifact degradation", "pub2": "1.3543x", "key": "NGX4_max_degradation_factor", "banked": 1.3542912892527808, "verdict": "MATCH"},
+      {"claim": "bordering changes sigma_min at mu=0", "pub2": "5.7e-15 relative", "key": "NGX5_border_makes_no_difference_at_mu_0.max_relative_difference_at_mu_0", "banked": 5.726114535073715e-15, "verdict": "MATCH"},
+      {"claim": "same two arms at mu=0.1", "pub2": "6.1e-02", "key": "same block .same_quantities_at_mu_0p1.relative_difference", "banked": 0.06130334906099269, "verdict": "MATCH"},
+      {"claim": "far-field component share of ||v||_1", "pub2": "6.5-6.8 %, growing with M", "key": "leg 163 JSON G4...ell1w_contrast.leg_127_bordering_effect (carrying leg 127's corrected journal reading)", "banked": "6.5-6.8% of ||v||_1 and GROWING with M", "verdict": "MATCH", "note": "the superseded 'exactly zero far-field component' phrasing does NOT appear in PUB2"},
+      {"claim": "||A||_w floor growth per doubling at s=0", "pub2": "1.99x", "key": "NGX6_floor_growth_per_doubling_of_M.flat", "banked": 1.9896007725421134, "verdict": "MATCH"},
+      {"claim": "||A||_w floor growth per doubling at s=0.3", "pub2": "1.62x", "key": "NGX6_floor_growth_per_doubling_of_M.algebraic", "banked": 1.6228040524820584, "verdict": "MATCH"}
+    ]
+  },
+
+  "trace_section_3_leg_163": {
+    "source": "writeup/data/p2_route_h2s_v1_scoping.json @ origin/leg/163-h2s-v1",
+    "rows": [
+      {"claim": "Mellin symbol norm max relative error", "pub2": "0.0", "key": "gates.G1_mellin_exact_norm.max_rel_err", "banked": 0.0, "verdict": "MATCH"},
+      {"claim": "lower witness fraction of the bound", "pub2": "99.80-99.99 %", "key": "G1...rows[*].witness_fraction_of_bound", "banked": [0.9980059800697489, 0.9999333399992594], "verdict": "MATCH"},
+      {"claim": "alpha range of the witness sweep", "pub2": "alpha = 0.05 ... 1.5", "key": "G1...rows[*].alpha", "banked": [0.5, 0.75, 1.5, 0.25, 0.1, 0.05], "verdict": "MATCH"},
+      {"claim": "resolvent identity worst relative residual", "pub2": "2.807e-14", "key": "gates.G2_resolvent_identity.worst_rel_residual", "banked": 2.8072372914100434e-14, "verdict": "MATCH"},
+      {"claim": "number of (datum, z) combinations", "pub2": "18", "key": "len(G2...rows)", "banked": 18, "verdict": "MATCH"},
+      {"claim": "symmetry mode L0+(b^-2) = b^-2", "pub2": "1.790e-15", "key": "G3_symmetry_modes.mode_eigenvalue_1.max_abs_residual", "banked": 1.790180836524724e-15, "verdict": "MATCH"},
+      {"claim": "symmetry mode L0+(y b^-2) = 0", "pub2": "5.266e-16", "key": "G3_symmetry_modes.mode_eigenvalue_0.max_abs_residual", "banked": 5.266250202865052e-16, "verdict": "MATCH"},
+      {"claim": "bordered-solve residuals bound", "pub2": "<= 2.22e-14", "key": "G4_bordered_reduction_at_zero.worst_rel_residual", "banked": 2.2201198984667287e-14, "verdict": "MISMATCH", "finding": "N4"},
+      {"claim": "ell(f) after projection, all three data", "pub2": "exactly 0.0", "key": "G4...rows[*].ell_after_projection_abs", "banked": [0.0, 0.0, 0.0], "verdict": "MATCH"},
+      {"claim": "border rank per Hardy block / odd real space", "pub2": "one column and one row per block, rank two", "key": "G4...border_rank_per_hardy_block / ..._on_odd_real_space", "banked": "1 / 2", "verdict": "MATCH"},
+      {"claim": "the three ||u||_X/||f||_X data", "pub2": "1.3993 / 1.2680 / 1.3769", "key": "G4...rows[*].ratio_uX_over_fX", "banked": [1.39927667753796, 1.2679622479822303, 1.3769479925630155], "verdict": "MATCH"},
+      {"claim": "the implied witness value", "pub2": "0.71465", "key": "G4...implied_sigma_min_lower_witness", "banked": 0.7146549471256172, "verdict": "MATCH on the value, MISMATCH on the stated derivation", "finding": "N5"},
+      {"claim": "quadrature-window spread of the bordered-solve ratio", "pub2": "1.444e-04", "key": "G4...resolution_ladder_spread", "banked": 0.000144433514507325, "verdict": "MATCH"},
+      {"claim": "quadrature window ladder description", "pub2": "n_quad 600 -> 1400, window 1e-4..1e+4 -> 1e-6..1e+6", "key": "G4...resolution_ladder[*].n_quad / .window", "banked": "600 [1e-4,1e4]; 900 [1e-5,1e5]; 1400 [1e-6,1e6]", "verdict": "MATCH"},
+      {"claim": "alpha^{-3/2} at the certificate point", "pub2": "2.8284", "key": "G5...certificate_relevant_point.alpha_pow_minus_3_2", "banked": 2.8284271247461903, "verdict": "MATCH"},
+      {"claim": "O1 severity for a static certificate", "pub2": "No severity", "key": "obstruction_census[O1].severity_for_a_static_certificate", "banked": "NONE", "verdict": "MATCH"},
+      {"claim": "O2 severity split", "pub2": "no severity static, HIGH downstream", "key": "obstruction_census[O2].severity_for_a_static_certificate / .severity_downstream", "banked": "NONE / HIGH", "verdict": "MATCH"},
+      {"claim": "O2 Xu abstract quotation", "pub2": "verbatim, 'on a weighted space of the conjugated variable ... does not by itself give a decay rate in the X norm'", "key": "obstruction_census[O2].detail", "banked": "same sentence", "verdict": "MATCH"},
+      {"claim": "O3 grading", "pub2": "FATAL for transfer, 'that grading is the producing leg's own word'", "key": "obstruction_census[O3].severity_for_transfer", "banked": "FATAL", "verdict": "MATCH"},
+      {"claim": "O3 corollary quotation", "pub2": "'a certificate at a = 0 in origin-H^2 would certify an object Xu already inverts in closed form'", "key": "obstruction_census[O3].detail", "banked": "same sentence", "verdict": "MATCH"},
+      {"claim": "O4 Xu section 4.6 quotation", "pub2": "'One cannot use the H^2 metric to empty the strip and the L^2 metric to close the origin channel.'", "key": "obstruction_census[O4].detail", "banked": "same sentence", "verdict": "MATCH"},
+      {"claim": "O5 the ell^1_w obstruction does not recur", "pub2": "checked for, does not recur", "key": "obstruction_census[O5]", "banked": "same", "verdict": "MATCH"},
+      {"claim": "leg 163's gate answer and its split", "pub2": "scoping YES, escalated not built, 'a genuine yes/no split, not a clean win'", "key": "gate_answer / escalation", "banked": "YES, escalated", "verdict": "MATCH"}
+    ]
+  },
+
+  "trace_section_3_5_leg_176_249_268_274": {
+    "rows": [
+      {"claim": "sigma_min ladder N=8..256", "pub2": "0.0927566 0.0911590 0.0909310 0.0908878 0.0908506 0.0908234", "key": "C1_bordered_sigma_min_X.ladder[N].sigma_min", "banked": "0.09275660045795434 0.09115903928826843 0.09093104092007978 0.09088780386292228 0.09085063245778027 0.09082343846893695", "verdict": "MATCH"},
+      {"claim": "sigma_min at N=512, quoted to supported digits", "pub2": "0.090804", "key": "leg 268 K1.supported_digits_for_quotation", "banked": "0.090804", "verdict": "MATCH -- the leg 268 correction is applied"},
+      {"claim": "sigma_min at N=1024 (italicised, outside the window)", "pub2": "0.0909363", "key": "C1...ladder['1024'].sigma_min", "banked": 0.09093626075500859, "verdict": "MATCH"},
+      {"claim": "leg 176's banked N=512 value, quoted as proved wrong", "pub2": "0.09080465147034879", "key": "C1...sigma_min_at_512", "banked": 0.09080465147034879, "verdict": "MATCH"},
+      {"claim": "certified enclosure of sigma_min", "pub2": "(0.090804094, 0.090804194)", "key": "leg 268 K1.certified_enclosure", "banked": [0.090804094, 0.090804194], "verdict": "MATCH"},
+      {"claim": "first wrong significant figure of the banked sigma_min", "pub2": "from the 7th", "key": "leg 268 K1.first_wrong_significant_figure", "banked": 7, "verdict": "MATCH"},
+      {"claim": "the mechanism (whitening, error grows with condition number)", "pub2": "the whitening leg 176 uses, whose error grows with the Gram's condition number", "key": "leg 268 K1.mechanism", "banked": "same", "verdict": "MATCH"},
+      {"claim": "Cholesky whitening monotone through N=2048, window WIDER not narrower", "pub2": "same", "key": "leg 268 what_is_NOT_corrected.two_findings_that_strengthen_leg_176[0]", "banked": "same", "verdict": "MATCH"},
+      {"claim": "headline sigma_min", "pub2": "0.0908", "key": "leg 249 section 1 table", "banked": "0.0908, reproduces", "verdict": "MATCH"},
+      {"claim": "resolvent norm", "pub2": "||R||_X = 11.0127", "key": "C1...resolvent_norm_at_512", "banked": 11.012651706796523, "verdict": "MATCH"},
+      {"claim": "ladder flatness over the reliable window", "pub2": "0.139 % over a 16-fold truncation range", "key": "C1...relative_spread over reliable_window [32..512]", "banked": 0.0013899483438452888, "verdict": "MATCH"},
+      {"claim": "flatness over N=64..512", "pub2": "0.0908878 -> 0.090804, 0.0920 %", "key": "derived from C1 ladder, same spread/max convention as relative_spread", "banked": "9.204e-04", "verdict": "MATCH"},
+      {"claim": "Xu closed-form max relative residual", "pub2": "4.767e-15", "key": "C0_xu_closed_form.max_rel_residual", "banked": 4.766912579638455e-15, "verdict": "MATCH"},
+      {"claim": "worst over six independent data", "pub2": "5.135e-15", "key": "C0...over_seeds (6 seeds, max)", "banked": 5.134937812813957e-15, "verdict": "MATCH"},
+      {"claim": "leg 163's established class", "pub2": "2.8e-14", "key": "C0...leg163_established_class", "banked": 2.8e-14, "verdict": "MATCH"},
+      {"claim": "evidence checks", "pub2": "42 evidence checks, 0 failing", "key": "experiments/journal/leg_176.md L5", "banked": "42 evidence checks, 0 failing", "verdict": "MATCH"},
+      {"claim": "Z_1 battery, all 15 cells K=2..32 x M=64..256", "pub2": "140.72 182.23 244.15 / 697.95 934.14 1277.86 / 2747.04 3671.58 5026.73 / 10516.43 13621.66 18417.50 / 43253.75 50728.94 66043.98", "key": "C5_Z1_blockdiagonal_A.ladder", "banked": "identical to 2dp at every cell", "verdict": "MATCH (15/15)"},
+      {"claim": "best cell and threshold", "pub2": "140.72 where < 1 is needed, growth ~K^2", "key": "C5...min_over_battery / .threshold / .reading", "banked": "140.72466104631172 / 1.0 / 'growing like K^2'", "verdict": "MATCH"},
+      {"claim": "tail inverse norm ladder N=64..1024", "pub2": "3.994032 4.012071 4.021340 4.026241 4.028864", "key": "leg 268 K3.evidence.tail_inverse_norm", "banked": [3.994032, 4.012071, 4.021340, 4.026241, 4.028864], "verdict": "MATCH"},
+      {"claim": "relative rise across the ladder", "pub2": "0.865 %", "key": "leg 268 K3.evidence.relative_rise_across_ladder", "banked": 0.00865, "verdict": "MATCH"},
+      {"claim": "||T^-1||_X's OWN increments and ratios", "pub2": "1.804e-2 -> 9.269e-3 -> 4.901e-3 -> 2.623e-3, ratios 0.514 / 0.529 / 0.535", "key": "recomputed from the ladder in the same sentence; leg 274 A2's corrected set", "banked": "0.018039 0.009269 0.004901 0.002623; 0.5138 0.5288 0.5352", "verdict": "MATCH -- leg 274's subject-label fix is applied"},
+      {"claim": "reciprocal sigma_min's decrements and ratios", "pub2": "1.126e-3 -> 5.745e-4 -> 3.027e-4 -> 1.617e-4, ratios 0.510 / 0.527 / 0.534", "key": "leg 268 K3.evidence.decrements / .decrement_ratios", "banked": "identical", "verdict": "MATCH"},
+      {"claim": "the two sets differ by about 16x and belong to different subjects", "pub2": "the smaller (~16x) set, belong to sigma_min not to ||T^-1||_X", "key": "leg 274 A2.magnitude_of_the_mismatch", "banked": "16.02x 16.13x 16.19x 16.22x", "verdict": "MATCH"},
+      {"claim": "the tail limit", "pub2": "finite limit near 4.032", "key": "leg 268 K3.evidence.extrapolated_inverse_norm_limit", "banked": 4.0318, "verdict": "MATCH"},
+      {"claim": "how far 4.026 understates the limit", "pub2": "0.14 %", "key": "leg 268 K3.evidence.understatement_of_4_026_against_the_limit", "banked": 0.0014, "verdict": "MATCH"},
+      {"claim": "certified bracket for ||T^-1||_X at N=512", "pub2": "[4.02623993, 4.02624155]", "key": "leg 268 K2.certified_bracket", "banked": [4.026239930769523, 4.026241551830974], "verdict": "MATCH"},
+      {"claim": "leg 176's banked tail value and how far outside", "pub2": "4.02614534796022, outside by 6.0e-5 relative", "key": "C2...tail_inverse_norm_K2_at_512 / leg 268 K2.relative_discrepancy_of_banked_value", "banked": "4.02614534796022 / 6.0e-05", "verdict": "MATCH"},
+      {"claim": "leg 176's own reading field already said 4.03", "pub2": "already read 4.03", "key": "C2_tail_block_sigma_min.reading", "banked": "'||T^{-1}||_X = 4.03 at K=2'", "verdict": "MATCH"},
+      {"claim": "unbordered control collapses to the float floor", "pub2": "1.55e-15 -> 6.97e-14", "key": "C3_control_unbordered.ladder N=64..512", "banked": "1.5488724195668752e-15 ... 6.972501777380562e-14", "verdict": "MATCH"},
+      {"claim": "loose L^2 realization decay exponent", "pub2": "N^{-1.49}", "key": "C4_control_loose_L2_realization.fitted_exponent", "banked": -1.4914111116151578, "verdict": "MATCH"},
+      {"claim": "leg 163's witness optimistic by", "pub2": "7.9x", "key": "C6_closed_form_ratio.leg163_witness_optimistic_by", "banked": 7.870742174847475, "verdict": "MATCH"},
+      {"claim": "leg 163's best ratio as a fraction of ||R||_X", "pub2": "12.71 %", "key": "derived: 1.39927667753796 / 11.012651706796523", "banked": 0.12706, "verdict": "MATCH"},
+      {"claim": "leg 176's four-datum re-run as a fraction of ||R||_X", "pub2": "7.88 %", "key": "derived: 0.868153885807814 / 11.012651706796523", "banked": 0.07883, "verdict": "MATCH"},
+      {"claim": "reciprocal of leg 176's re-run family", "pub2": "1.1519", "key": "derived: 1 / 0.868153885807814", "banked": 1.15187, "verdict": "MATCH"},
+      {"claim": "leg 176's reproduction of leg 163's quantity", "pub2": "0.868155 over four data", "key": "C6...M_convergence['8192'] vs C6...over_seeds (4 data)", "banked": "0.8681547664616088 (seed 0, M=8192); four-data max 0.868153885807814", "verdict": "MISMATCH", "finding": "N6"},
+      {"claim": "leg 176's gate headline, verbatim", "pub2": "'YES on both conjuncts -- with one magnitude that says NO and is reported in the same breath.'", "key": "experiments/journal/leg_176.md", "banked": "same", "verdict": "MATCH"},
+      {"claim": "leg 176's self-summary, verbatim", "pub2": "'the first constructed (not merely scoped) certificate outside the ell^1_w lane ... Infrastructure, not a theorem.'", "key": "experiments/journal/leg_176.md", "banked": "same", "verdict": "MATCH"},
+      {"claim": "no Y_0, no Z_2, float64, no link moved, closes none of Xu's three gaps", "pub2": "same", "key": "p2_route_h2c_v1_construction.json ceiling / gate.ceiling_restated", "banked": "same", "verdict": "MATCH"}
+    ]
+  },
+
+  "trace_section_4_leg_182": {
+    "source": "writeup/data/p2_route_h2i_v1_scoping.json",
+    "rows": [
+      {"claim": "Aitken limits at s=0/0.3/0.7", "pub2": "1.0000 / 0.7002 / 0.3090", "key": "G1_control.rows[*].aitken_limit", "banked": [1.0000082592823272, 0.7002249765862092, 0.30904586721386573], "verdict": "MATCH"},
+      {"claim": "those limits deviate from 1-s by at most", "pub2": "0.0090", "key": "derived max = G3...max_abs_dev_from_1_minus_s_for_s_le_0.7", "banked": 0.009045867213865688, "verdict": "MISMATCH", "finding": "N2"},
+      {"claim": "dissipative negative control at mu=1", "pub2": "-0.2904", "key": "G1_control.dissipative_negative_control.aitken_limit", "banked": -0.29042456505277525, "verdict": "MATCH"},
+      {"claim": "single-row share of the residual norm", "pub2": "0.9999999999998843", "key": "G2_mechanism.single_row_share_of_residual_l1", "banked": 0.9999999999998843, "verdict": "MATCH"},
+      {"claim": "rows above 1e-12 relative", "pub2": "1", "key": "G2_mechanism.rows_above_1e-12_relative", "banked": 1, "verdict": "MATCH"},
+      {"claim": "negative control, perturbed direction", "pub2": "4088", "key": "G2...negative_control_perturbed_direction.rows_above_1e-12_relative", "banked": 4088, "verdict": "MATCH"},
+      {"claim": "numerator ||Th||, all five p", "pub2": "0.09328169670293 x5", "key": "G2_mechanism.numerator_across_p", "banked": "0.0932816967029332 / ...92792 / ...92795 / ...92795 / ...92794", "verdict": "MATCH (5/5 at the printed precision)"},
+      {"claim": "denominator ||h||, all five p", "pub2": "11.7877 / 5.9580 / 4.1585 / 3.3600 / 2.9304", "key": "G2_mechanism.denominator_across_p", "banked": "11.7876976574571 / 5.957953248939941 / 4.158539896646639 / 3.360031231489467 / 2.9303767257305493", "verdict": "MATCH (5/5)"},
+      {"claim": "numerator relative spread", "pub2": "5.653e-14 (and '6e-12 %')", "key": "G2_mechanism.numerator_relative_spread", "banked": 5.653369903598577e-14, "verdict": "MATCH"},
+      {"claim": "denominator relative spread", "pub2": "1.5707, i.e. 157 %", "key": "G2_mechanism.denominator_relative_spread", "banked": 1.5707478242623005, "verdict": "MATCH"},
+      {"claim": "G3 p=1 row, s=0..1.4", "pub2": "1.0000 0.7002 0.3090 0.1436 0.0836 0.0202 0.0038", "key": "G3_interpolation_sweep.table['p=1.0'][*].aitken_limit", "banked": "1.000008 0.700225 0.309046 0.143606 0.083572 0.020168 0.003757", "verdict": "MATCH (7/7)"},
+      {"claim": "G3 p=2 row, s=0..1.4", "pub2": "1.0000 0.7000 0.3000 0.1000 0.0000 -0.1996 -0.3898", "key": "G3...table['p=2.0'][*].aitken_limit", "banked": "1.0 0.700001 0.300013 0.100009 4e-06 -0.199633 -0.389795", "verdict": "MATCH (7/7)"},
+      {"claim": "max deviation from 1-s for s<=0.7", "pub2": "0.00905", "key": "G3...max_abs_dev_from_1_minus_s_for_s_le_0.7", "banked": 0.009045867213865688, "verdict": "MATCH"},
+      {"claim": "max spread across p for s<=0.7", "pub2": "0.00904", "key": "G3...max_spread_across_p_for_s_le_0.7", "banked": 0.009036579560100677, "verdict": "MATCH"},
+      {"claim": "rows where p>1 rescues a dead exponent", "pub2": "0", "key": "G3...rows_where_p_gt_1_rescues_a_dead_exponent", "banked": 0, "verdict": "MATCH"},
+      {"claim": "p-spread at s=0 / 1.0 / 1.4", "pub2": "0.0000 / 0.0836 / 0.3936", "key": "G3...exponent_spread_across_p_at_fixed_s", "banked": "1.8125690535386596e-05 / 0.08356812779355068 / 0.39355190085201613", "verdict": "MATCH"},
+      {"claim": "kernel decay exponent", "pub2": "-2.00236", "key": "G4_sigma_collapse.kernel_exponent_measured", "banked": -2.00236292896265, "verdict": "MATCH"},
+      {"claim": "cokernel growth exponent", "pub2": "+1.00118", "key": "G4_sigma_collapse.cokernel_exponent_measured", "banked": 1.0011766190838682, "verdict": "MATCH"},
+      {"claim": "target coefficient exponent alpha", "pub2": "0.39735311167782", "key": "G4_sigma_collapse.alpha_target", "banked": 0.3973531116778231, "verdict": "MATCH"},
+      {"claim": "three thresholds all depend on sigma = s + 1/p", "pub2": "sigma<2 / sigma>2 / sigma<1+alpha", "key": "G4...thresholds_in_sigma", "banked": "2.0 / 2.0 / 1.397353111677823", "verdict": "MATCH"},
+      {"claim": "quantities scored / in the marginal band", "pub2": "114 / 21", "key": "G4...scoring.quantities_scored / .quantities_in_the_marginal_band", "banked": "114 / 21", "verdict": "MATCH"},
+      {"claim": "marginal band width", "pub2": "|sigma - threshold| <= 0.15", "key": "G4...scoring.marginal_band_excluded", "banked": 0.15, "verdict": "MATCH"},
+      {"claim": "worst deviation outside the band", "pub2": "0.01605", "key": "G4...worst_abs_deviation_measured_vs_sigma_prediction_outside_the_band", "banked": 0.01604850457188592, "verdict": "MATCH"},
+      {"claim": "mismatches above 0.02 outside the band", "pub2": "0", "key": "G4...mismatches_above_0.02_outside_the_band", "banked": 0, "verdict": "MATCH"},
+      {"claim": "log signature at sigma=2, max/min increment ratio", "pub2": "1.01114", "key": "G4...log_signature_at_the_crossing.max_over_min_increment_ratio", "banked": 1.0111362497663532, "verdict": "MATCH"},
+      {"claim": "slowest row's truncation ladder", "pub2": "0.02955 -> 0.02167 -> 0.01605 -> 0.01213", "key": "G4...slowest_row_convergence_ladder.ladder[*].abs_dev", "banked": "0.029546 0.021671 0.016049 0.012129", "verdict": "MATCH (4/4)"},
+      {"claim": "window width where both obstructions vanish", "pub2": "exactly zero", "key": "G5_window.window_width_where_both_obstructions_vanish", "banked": 0.0, "verdict": "MATCH"},
+      {"claim": "s at the crossing, all eight p", "pub2": "1.0000 1.2000 1.3333 1.4286 1.5000 1.6667 1.9000 2.0000", "key": "G5_window.per_p[*].s_at_the_crossing", "banked": "1.0 1.2 1.3333 1.4286 1.5 1.6667 1.9 2.0", "verdict": "MATCH (8/8)"},
+      {"claim": "s ceiling for the target, all eight p", "pub2": "0.3974 0.5974 0.7307 0.8259 0.8974 1.0640 1.2974 1.3974", "key": "G5_window.per_p[*].s_max_for_target", "banked": "0.3974 0.5974 0.7307 0.8259 0.8974 1.0640 1.2974 1.3974", "verdict": "MATCH (8/8)"},
+      {"claim": "margin, identical at every p", "pub2": "-0.602647 x8", "key": "G5_window.per_p[*].margin_in_exponent_units", "banked": "-0.6026468883221769 at every p", "verdict": "MATCH (8/8)"},
+      {"claim": "gap equals alpha - 1", "pub2": "alpha - 1 = -0.602647", "key": "G5_window.gap_equals_one_minus_alpha", "banked": 0.6026468883221769, "verdict": "MATCH"},
+      {"claim": "cross-check against leg 55's directly measured p=1 margin", "pub2": "-0.6062554687114012 vs -0.602647, difference 0.003609, 0.6 %", "key": "G5_window.leg51_55_p1_crosscheck", "banked": "-0.6062554687114012 / -0.6026468883221769 / 0.003608580389224292", "verdict": "MATCH"},
+      {"claim": "section 4.5 row 1: p-blind to", "pub2": "0.009", "key": "G3...max_spread_across_p_for_s_le_0.7", "banked": 0.009036579560100677, "verdict": "MISMATCH", "finding": "N3"},
+      {"claim": "MOVE B was not re-measured; O4 read from leg 163's census", "pub2": "attributed as such", "key": "MOVE_B_census.O4_realization_coupling.attribution", "banked": "'THIS leg did not re-read Xu'", "verdict": "MATCH"},
+      {"claim": "Banach-algebra constraint does not bind (sigma > 1 throughout)", "pub2": "explicitly not the reason", "key": "MOVE_B_census / gate_answer", "banked": "same", "verdict": "MATCH"},
+      {"claim": "gate answer", "pub2": "scoping NO", "key": "gate_answer.answer / gates_passed / gates_total", "banked": "NO / 5 / 5", "verdict": "MATCH"},
+      {"claim": "the ban-list quotation", "pub2": "'the ONE exponent at which bordering cannot help'", "key": "plan_of_record.py ban on tuning s toward leg 51's divergence minimum", "banked": "verbatim", "verdict": "MATCH"}
+    ]
+  },
+
+  "epistemic_qualifier_audit": {
+    "method": "grep for proof-language (prove/proved/proof/certified/verified/bounded away/rigorous/establish/independent) and for the truncation-independence defect legs 250/268/271/274 removed, then read every hit in context against what the record supports.",
+    "truncation_independence_sites": {
+      "surviving_positive_claims": 0,
+      "sites": [
+        {"line": "TECH L207", "text": "'not a truncation-independent value and is not offered as one'", "verdict": "CORRECTLY NEGATED"},
+        {"line": "TECH L337", "text": "'not a truncation-independent value'", "verdict": "CORRECTLY NEGATED"},
+        {"line": "TECH L338", "text": "'Earlier drafts of this note quoted 4.026, truncation-independent'", "verdict": "HISTORICAL, correctly marked"},
+        {"line": "TECH L362", "text": "'leg 127 showed the operator itself had no truncation-independent sigma_min -- a theorem'", "verdict": "CORRECT -- this is the ell^1_w theorem, where the claim is proved"},
+        {"line": "TECH L365", "text": "'not a proved truncation-independent value'", "verdict": "CORRECTLY NEGATED"}
+      ],
+      "conclusion": "leg 271's and leg 274's closure holds. 0 of 5 sites regenerate the defect."
+    },
+    "float_measurement_described_with_proof_language": {
+      "instances": 0,
+      "notes": [
+        "TECH L316 'proves that value wrong from the 7th significant figure' -- CORRECT: leg 249's verdict is an exact-rational LDL^T definiteness test containing no rounding step (leg 249 section 8).",
+        "TECH L566 '(section 2, proved)' -- CORRECT: leg 127 is a theorem; section 7 discloses that its verifying measurements are float64.",
+        "TECH L46/181/206/329/364/390/395 all attach 'evidence of a positive limit, not a proof of one' / 'not a proved floor' to sigma_min -- CORRECT and consistent at all seven sites.",
+        "TECH L387-395 states in full that neither leg proves a lower bound and that no proved floor is written anywhere in the note -- and grep confirms none is."
+      ]
+    },
+    "disclosure_gap": {
+      "finding": "E1",
+      "what": "sigma_min = 0.0908 is convention-relative and PUB2 nowhere says so.",
+      "record": "leg 249 section 10 (W5) and writeup/data/p2_route_h2c_v1_construction_correction_leg268.json .what_is_NOT_corrected.convention_caveat_recorded_by_249: the X + C Gram puts unit weight on the border amplitude while the X block carries the bare Laguerre normalization; sweeping that weight over 1e-2..1e+2 moves sigma_min across 0.01086..0.13580, a factor of 12.5, and adopting Xu's own y-space normalization (carrying the 2 pi) gives 0.0420 instead of 0.0908.",
+      "leg_249s_own_sentence": "'PUB2 quotes the digits without the convention.'",
+      "pub2_coverage": "0 occurrences of 'convention', 'normalization', '0.0420' or '2 pi' in either document",
+      "sites_affected": 15,
+      "why_not_an_escalation": "leg 249 certifies in the same paragraph that the GATE property -- bounded away from zero uniformly in the truncation -- is invariant under the weight, since a positive weight cannot send a positive limit to zero. PUB2's argument uses only the contrast in ladder BEHAVIOUR (flattens here, decays like M^{-(1-s)} there), which is convention-invariant. So no argument moves; what is missing is a disclosure that the printed digits are not."
+    }
+  },
+
+  "findings": [
+    {
+      "id": "P1", "class": "provenance", "severity": "gate-relevant", "substantive": false,
+      "site": "all of section 3.1, section 3.2's leg-163 row and provenance note, section 3.3's five-item census, section 4.4's O4 quotation, section 4.5 row 4, section 5(3), section 6's section-3 row -- 23 traced claims",
+      "what": "Leg 163's sources are NOT on main. writeup/data/p2_route_h2s_v1_scoping.json and experiments/journal/leg_163.md exist only on the parked branch origin/leg/163-h2s-v1. Confirmed by git ls-tree origin/main.",
+      "effect": "Every one of the 23 claims reproduces EXACTLY when read from the branch. None of them reproduces from main. A reader with only main cannot check section 3.",
+      "repair": "either land leg 163's two artifacts on main under a leg that owns that territory, or have PUB2 state the branch and commit at the point of first citation the way it already does for leg 249."
+    },
+    {
+      "id": "P2", "class": "provenance", "severity": "low", "substantive": false,
+      "site": "TECH L67-69, L316, L642-646 (3 sites) + writeup/data/p2_route_h2c_v1_construction_correction_leg268.json .source_of_the_correction.status_of_249",
+      "what": "PUB2 cites leg 249 only as 'branch leg/249-h2cv2-v2 at e9db984'. That commit is NOT an ancestor of main (git branch --contains e9db984 returns only the leg branch), but leg 249's journal, novelty log and postconstruction JSON ARE now on main and are byte-identical to the branch versions (git diff origin/leg/249-h2cv2-v2 HEAD over those three paths: empty). The leg 268 correction artifact still records leg 249 as 'ESCALATED; its branch was pushed but never merged to main', which is now false.",
+      "effect": "PUB2 understates the availability of its own independent check. No number moves."
+    },
+    {
+      "id": "P3", "class": "provenance", "severity": "low", "substantive": false,
+      "site": "TECH L329 quotes 'float64 evidence of a positive limit, not a proof of one' -- the last sentence of C1_bordered_sigma_min_X.reading",
+      "what": "PUB2 cites writeup/data/p2_route_h2c_v1_construction_correction_leg268.json twice (L73, L323) but never cites writeup/data/p2_route_h2c_v1_construction_annotation_leg274.json, whose A1 instruction is that any quotation of C1_bordered_sigma_min_X.reading must carry the corrected framing or cite the annotation beside it.",
+      "effect": "PUB2 quotes the correct half of that field (the hedge, not the 'BOUNDED AWAY FROM ZERO and truncation-independent' opening), so no defect is regenerated. What is missing is the pointer."
+    },
+    {
+      "id": "N1", "class": "quantitative -- bound stated tighter than the data", "severity": "low", "substantive": false,
+      "site": "TECH L139-140",
+      "printed": "sigma_min saturates, fitted exponent <= 2.62e-03 in absolute value at every mu > 0",
+      "banked": "NGX5_max_abs_exponent_for_mu_positive = 0.0026247852520269194 = 2.6248e-03",
+      "mismatch": "the banked maximum EXCEEDS the printed bound by 0.19 %. Correct bound: <= 2.63e-03.",
+      "effect": "none on the argument -- the control's point is saturation against 0.6985, a factor of 266."
+    },
+    {
+      "id": "N2", "class": "quantitative -- bound stated tighter than the data, AND internally inconsistent", "severity": "low", "substantive": false,
+      "site": "TECH L424-425 against TECH L457",
+      "printed": "the Aitken limits are 1.0000 / 0.7002 / 0.3090 ... deviating from 1 - s by at most 0.0090",
+      "banked": "max deviation = 0.30904586721386573 - 0.3 = 0.009045867213865688 (G3...max_abs_dev_from_1_minus_s_for_s_le_0.7)",
+      "mismatch": "the banked maximum exceeds the printed bound by 0.51 %. The SAME quantity is printed correctly as 0.00905 thirty-two lines later at L457, so the document states one number two ways, one of them false as a bound.",
+      "effect": "none on the argument."
+    },
+    {
+      "id": "N3", "class": "quantitative -- bound stated tighter than the data", "severity": "low", "substantive": false,
+      "site": "TECH L539 (section 4.5 table, row 1)",
+      "printed": "exponent tracks 1-s, p-blind to 0.009",
+      "banked": "G3...max_spread_across_p_for_s_le_0.7 = 0.009036579560100677",
+      "mismatch": "exceeds by 0.41 %. L458 prints the same quantity correctly as 0.00904.",
+      "effect": "none on the argument."
+    },
+    {
+      "id": "N4", "class": "quantitative -- bound stated tighter than the data", "severity": "very low", "substantive": false,
+      "site": "TECH L198-199",
+      "printed": "Bordered-solve residuals are <= 2.22e-14",
+      "banked": "G4_bordered_reduction_at_zero.worst_rel_residual = 2.2201198984667287e-14",
+      "mismatch": "exceeds by 0.005 %. Same class as N1-N3; listed for completeness rather than for repair urgency.",
+      "effect": "none."
+    },
+    {
+      "id": "N5", "class": "quantitative -- the stated PROVENANCE of a correct number is arithmetically wrong", "severity": "medium", "substantive": false,
+      "site": "TECH L212-215 (section 3.2 provenance note) and TECH L378-380 (section 3.5), two sites saying the same thing",
+      "printed": "0.71465 is exactly 1/1.3993, the reciprocal of leg 163's own largest sampled ratio, rounded up in the fifth decimal (1/1.3993 = 0.7146430) ... a round-up of 7.0e-06",
+      "banked": "G4_bordered_reduction_at_zero.implied_sigma_min_lower_witness = 0.7146549471256172, which is 1 / 1.39927667753796 (the FULL-PRECISION ratio, also banked as max_ratio_uX_over_fX)",
+      "mismatch": "0.7146549471256172 rounds to 0.71465 with NO round-up at all. The chain PUB2 prints -- round the ratio to 1.3993 first, take the reciprocal, then round the result UP by 7.0e-06 -- is not how the number arose, and 1/1.3993 = 0.7146430 in fact rounds to 0.71464, not 0.71465. The printed intermediate 0.7146430 differs from the banked witness by 1.19e-05 (1.7e-05 relative).",
+      "effect": "none on any conclusion -- 0.71465 is the right number, the <= direction is right (leg 250's fix), and 0.0908 <= 0.71465 stands. What is wrong is a provenance sentence, printed twice, that describes a derivation that did not happen. The clean sentence is one step: 0.71465 is the five-decimal rounding of leg 163's banked implied_sigma_min_lower_witness = 0.7146549471256172, itself the reciprocal of its largest sampled ratio 1.39927667753796.",
+      "note": "leg 186's own audit already had the right value (0.7146549471256172) and flagged only leg 163's JOURNAL rounding of 0.7147. The 1/1.3993 story appears to have entered later."
+    },
+    {
+      "id": "N6", "class": "quantitative -- subject-attachment slip on a correct number", "severity": "low", "substantive": false,
+      "site": "TECH L376-377",
+      "printed": "Reproducing leg 163's own quantity from the closed form gives 0.868155 over four data",
+      "banked": "C6_closed_form_ratio.over_seeds (the four data) = 0.868153885807814 / 0.8404652784717725 / 0.7859395946487807 / 0.6903593550615618; C6...M_convergence['8192'] = 0.8681547664616088",
+      "mismatch": "0.868155 is the M = 8192 convergence value of seed 0, not a figure 'over four data'; the max over the four data is 0.8681539. Sixth-decimal, and the same class of subject-attachment slip leg 274's A2 fixed elsewhere in this same section.",
+      "effect": "none -- the point (random low-mode data sits near 0.87 against an operator norm of 11.0) is unaffected."
+    },
+    {
+      "id": "C1", "class": "internal inconsistency", "severity": "medium", "substantive": false,
+      "sites": ["TECH L35", "TECH L564", "BLOG L14", "BLOG L52"],
+      "what": "The same fact is stated as seven and as seventy. TECH section 0 L35: 'Seven successive legs of this project failed to close such a certificate'. TECH section 5(1) L564: 'the obstruction that consumed roughly seventy legs of this project'. BLOG L14: 'about seventy work-legs'. BLOG L52: 'the wall we had been hitting for seventy legs'.",
+      "cross_document": "PUB1 uses seven at both of its sites (TECHNICAL_P2_PUB1_V1.md L23 'Seven successive legs'; BLOG_P2_PUB1_V1.md L9 'seven successive work-legs'), so seven is the figure the companion document establishes.",
+      "effect": "a 10x spread on a headline number, unreconciled anywhere in PUB2, and the blog carries only the larger one. Argument unaffected; this is the single most visible defect to an outside reader."
+    },
+    {
+      "id": "C2", "class": "internal inconsistency -- a stated promise only partly kept", "severity": "low", "substantive": false,
+      "site": "TECH L61-63 against sections 5 and 6",
+      "what": "Section 0 says sections 5-6 are left as drafted and that 'section 3.5 says explicitly which of their sentences leg 176 makes more precise and which it leaves standing'. Section 3.5 does that for section 3.2 / 4.5 / 5(3) (the witness correction) and for section 3.3's ceiling. It says nothing about two sentences leg 176 plainly bears on: section 5's opening 'Separately they are: a theorem, an escalated scoping YES, and a scoping NO' (three, when section 0's own table has four points), and section 6's three-row claim table, which has no row for leg 176 even though section 3.5 L404-406 states its grade ('construction, gate YES with a reported NO magnitude').",
+      "effect": "none on any claim; the promise in section 0 is stronger than what section 3.5 delivers."
+    },
+    {
+      "id": "C3", "class": "internal inconsistency -- superseded attribution in the main text", "severity": "low", "substantive": false,
+      "site": "TECH L326-328 against the footnote at TECH L318-322",
+      "what": "The footnote reports leg 249's finding that the N = 1024 rise is a property of leg 176's eigh whitening, not of the X Gram's float floor, and that under Cholesky whitening the ladder is monotone through N = 2048 -- 'the reliable window is WIDER than leg 176 claimed'. Four lines later the main text says 'leg 176 attributes that to the float floor of an X Gram whose entries reach ~1e12 and reports it as the reason the reliable window stops at 512', with no marker that the footnote just superseded that cause.",
+      "effect": "both sentences are correctly attributed to leg 176, so neither is false; but the superseded explanation is the one in the main text and the correction is in the parenthetical."
+    },
+    {
+      "id": "C4", "class": "blog/technical inconsistency", "severity": "low", "substantive": false,
+      "site": "BLOG L109-110 against TECH L64-68 and TECH L642-646",
+      "what": "The blog says 'the independent re-derivation we commissioned has since reported, in exact rational arithmetic'. The technical companion is careful at both of its sites that the COMMISSIONED verification leg (192) committed only a novelty pass and that leg 249 -- a different leg -- did the re-derivation. Leg 271's journal L102 records preserving that distinction 'at both sites'; the blog site does not carry it.",
+      "effect": "the blog credits the commission with work the commissioned leg did not do."
+    },
+    {
+      "id": "C5", "class": "staleness", "severity": "low", "substantive": false,
+      "sites": ["TECH L23", "TECH L647", "BLOG L201"],
+      "what": "'None has [moved], in 185 legs' / 'None has moved in 185 legs'. The run is at leg 270+. The CLAIM remains true -- no link of L1 -> L4 has moved -- but the count is about 85 legs stale.",
+      "related": "the document header still reads 'leg 186, v1' and section 0 frames leg 176 as 'commissioned ... and it has since landed'; both are disclosed drafting-time framing rather than error."
+    },
+    {
+      "id": "E1", "class": "epistemic disclosure gap", "severity": "high (highest-priority rework item)", "substantive": false,
+      "site": "the 15 sites at which 0.0908 / 0.090804 is printed -- TECH L46, L206, L219, L221, L312, L315, L318, L325, L376, L382, L383, L391, L543, L582; BLOG L91, L117",
+      "what": "sigma_min = 0.0908 is convention-relative and PUB2 says so nowhere. Leg 249 section 10 (W5), carried into the leg 268 correction artifact as convention_caveat_recorded_by_249: the X (+) C Gram puts unit weight on the border amplitude while the X block carries the bare Laguerre normalization; sweeping that weight over 1e-2..1e+2 moves sigma_min across 0.01086..0.13580 -- a factor of 12.5 -- and adopting Xu's own y-space normalization gives 0.0420 instead of 0.0908. Leg 249's own sentence: 'PUB2 quotes the digits without the convention.' Neither leg 268 nor leg 271 addressed it; grep finds 0 occurrences of convention / normalization / 0.0420 / 2 pi in either document.",
+      "why_not_an_escalation": "leg 249 certifies in the same paragraph that the GATE property -- bounded away from zero uniformly in the truncation -- is INVARIANT under that weight, and PUB2's argument uses only the contrast in ladder behaviour, which is convention-invariant. No argument moves. What is missing is one disclosing sentence at first use.",
+      "irony_worth_recording": "PUB2 spends four legs (250, 268, 271, 274) removing over-determined descriptors from this same number, and the remaining over-determination is in the digits themselves rather than in the adjectives."
+    }
+  ],
+
+  "gate": {
+    "question": "Does every quantitative claim and epistemic qualifier in PUB2 trace cleanly to a banked, on-main source, with zero internal inconsistencies remaining?",
+    "answer": "NO",
+    "why": "Three separable reasons, none of them substantive. (1) On-main: 23 of the traced claims -- all of section 3's leg-163 material -- resolve only on the parked branch origin/leg/163-h2s-v1, not on main (P1). (2) Cleanly: 6 quantitative sites mismatch their banked source -- four bounds printed 0.005-0.51 % tighter than the data allow (N1-N4), one provenance sentence printed twice that derives a correct number by a chain that did not happen (N5), one subject-attachment slip at the sixth decimal (N6). (3) Zero internal inconsistencies: 5 remain (C1-C5), the largest being seven-vs-seventy legs across four sites.",
+    "plus": "one epistemic disclosure gap (E1) that is not a mismatch with any source but is the highest-priority rework item: the headline digit 0.0908 is convention-relative by a factor of 12.5 and PUB2 never says so, which leg 249 flagged in exactly those words.",
+    "substantive_mismatches": 0,
+    "escalation": "NO -- every finding is prose, provenance or precision. Zero change an argument. Leg 249's own invariance statement is what keeps E1 below the escalation line.",
+    "what_reproduces": "88 of 94 quantitative sites match their banked source exactly, including all 15 Z_1 battery cells, all 8 columns of the section 4.3 window table, both 7-cell G3 exponent rows, the full 8-rung sigma_min ladder with leg 268's K1 digit correction applied, and leg 274's A2 increment/decrement subject fix applied correctly. 0 of 5 truncation-independence sites regenerate the defect legs 250/268/271/274 removed. 0 float64 measurements are described with proof-language."
+  },
+
+  "ceiling": "This leg read two documents and re-read five banked sources. It measured nothing, verified no mathematics, and edited neither PUB2 file (git diff over writeup/4_p2_lottery/: empty). Leg 176's gate answer, leg 127's theorem, leg 163's census and leg 182's NO are all untouched. a = 0 only. No link of the L1 -> L4 chain moved. Clay odds unchanged at ~0.05%. No ban lifted. No route promoted. No GA compute."
+}
