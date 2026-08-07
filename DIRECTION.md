@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 285 | P2S | yes |
-| C | 296 | ASR | no |
+| C | 295 | PUB3P | no |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
 | F | 292 | CAPA | no |
@@ -13034,3 +13034,85 @@ both recorded exactly as measured — a genuine unresolved contradiction is name
 smoothed into either "confirmed" or "refuted." Clay stays ~0.05%. No new direction
 question raised — 296 is scoped to resolve this at the record level; if it cannot,
 its own no-branch escalates.
+
+---
+
+## DM update, 2026-08-07 — 296 (ASR) landed gate YES (a* PINNED near 0.386, 210's
+exclusion mechanistically explained, not just outvoted): slot C = 295, drafted with
+EXACT territory by reading leg 294's own report directly rather than leaving it a
+placeholder; a second real gap named (the anchor JSON integration decision) queued as
+297
+
+**296, recorded at full strength:** a* reconciled as PINNED near 0.386 — legs 125 and
+284 agree to ~2e-3 via independent methods; leg 210's exclusion is not just outvoted,
+it is MECHANISTICALLY EXPLAINED (its Newton-restart method folds exactly where leg 284
+found a singular Jacobian — 210's own report already showed the symptom without
+explaining it). All edits append-only, 0 lines deleted, 283's original record
+preserved.
+
+**295, drafted with real territory this update** (previously reserved as a
+placeholder pending "294's three sites" — read directly from
+`experiments/journal/leg_294.md` §"Downstream documents flagged, not touched" rather
+than guessed): **only ONE of the three flagged items is actually a document
+pointer-correction** — `TECHNICAL_P2_PUB3_V1.md:134` quotes `a_max_machine=1.0` in a
+consumer table, now known stale (repaired 0.55), no prose conclusion resting on the
+literal value. The second item (the anchor JSON on `main`, wrong by ~6.55e+11×) is
+leg 252's own unresolved integration decision among three named options — NOT a
+pointer fix, drafted separately below as 297. The third (`ROUTED_V11.md`) is already
+correct per 294's own check; no leg needed.
+
+```
+### 295 — ROUTE-PUB3P: FIX THE STALE a_max_machine CITATION IN PUB3's CONSUMER TABLE
+(294's flagged site — light, single-site)
+**Thesis.** 294's own report names exactly one live document defect: PUB3 L134 quotes
+`a_max_machine=1.0`, superseded by 236/226's independently-confirmed 0.55.
+**Gate.** Does the site state 0.55 with a dated note citing legs 236/226/294, with no
+other sentence's meaning changed, and a check (per the standing scoping rule) that no
+sibling document repeats the same stale value?
+  yes -> Bank. CORRECTIONS.md pointer.
+  no -> Argument-touching resistance: escalate, same clause as the PUB2 family.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md (L134 + swept sites),
+               writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_295.md, experiments/journal/leg_295.md.
+               Reads (never edits) leg 294's report.
+**Difficulty.** light
+**Independence.** Single-site, disjoint from every live slot. Slot C, now.
+```
+
+**Reserve item drafted for the anchor JSON integration decision** (a real, currently
+unmade call — 252 named three options: land the regeneration whole / keep stale /
+re-bank deliberately with environment pinned):
+
+```
+### 297 — ROUTE-D11ANCHOR: MAKE AND EXECUTE THE ANCHOR-JSON INTEGRATION DECISION (leg
+252's own three named options — currently unmade by anyone, main stays wrong by
+~6.55e+11x in the interim)
+**Thesis.** No leg has yet chosen among leg 252's own three options for
+`writeup/data/p2_route_d_v11_anchor.json`. This leg makes the call, following 252's own
+reasoning (not inventing new criteria), and executes it.
+**Gate.** Is one of the three options selected WITH 252's own stated reasoning applied
+(not a new criterion), executed cleanly (regeneration/re-bank matches the chosen
+option's own definition), and is the banked margin at a=0.45 no longer wrong by
+6.55e+11x after the leg lands?
+  yes -> Bank. The long-open integration gap closes.
+  no -> If none of the three options is clearly correct from 252's own reasoning:
+        escalate rather than invent a fourth option.
+**Territory.** `writeup/data/p2_route_d_v11_anchor.json` (regenerate/re-bank per the
+               chosen option, never hand-edit), writeup/novelty/leg_297.md,
+               experiments/journal/leg_297.md.
+               Reads (never edits) leg 252's report, legs 226/247's repaired code.
+**Difficulty.** standard
+**Independence.** Own artifact, disjoint from every live slot. Reserve — dispatchable
+at the next vacancy with no further drafting needed.
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 296 → 295). **Floor status: 3/10
+strictly (285, 267, 264) — met exactly, unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 293, 297, 280, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 2 (293, 297); 280 user-gated; 231-234 blocked on
+repairs (221 live in slot D). Next fresh leg number: **298.**
+
+Nothing in this update lifts a ban. 296's reconciliation is recorded as a resolved
+contradiction with a real mechanism named, not a tie-break. Clay stays ~0.05%. No new
+direction question raised.
