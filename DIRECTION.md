@@ -27,8 +27,8 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 272 | WESCV | no |
-| B | 210 | M2SV | no |
-| C | 282 | RMX | no |
+| B | 283 | M2SR | no |
+| C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 281 | CVF | yes |
@@ -12221,3 +12221,93 @@ in flight. Next fresh leg number: **283.**
 Nothing in this update lifts a ban — the :868 finding is explicitly a warrant defect
 with the ban's text byte-identical and correctly pinned nearby; nothing about the ban's
 substance moves. Clay stays ~0.05%. No new direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 282 landed clean; 210 (M2SV) ESCALATED with a confirmed gap
+in leg 185's a=1/2 banking (single unrefined grid, 10.33× irreproducible): rework 283
+(the downgrade) + companion measurement 284 (the refinement 185 never did) fill slots
+B/C
+
+**282 (RMX) landed (`870be53`):** all four record fixes applied, plan_of_record.py
+byte-identical, the amended standing rule's robust patterns applied to its own clause
+(c) across 1,236 files — nothing further found. Both prior landings' residue is zero.
+
+**210 (M2SV) escalated (parked `leg/210-m2sv-v1`), recorded at full strength:**
+
+- **CONFIRMS** leg 185's ν = +0.01799364 at a=0.30 to 5.9 significant digits, and
+  **STRENGTHENS the sign law to full gauge-independence** (ν → μ²ν under dilation,
+  μ² > 0 — no gauge choice can flip the sign; 185 did not establish this, 210 does).
+- **The banked NEGATIVE magnitudes at Chen's a=1/2 fail to reproduce by 10.33×** — and
+  the cause is leg 185's OWN method gap: a=0.30 was refined on four grids, a=1/2 banked
+  from a single UNrefined grid. 210's supplied refinement ladder shows 185's scheme is
+  not grid-converged there (62.2% non-monotonic span). The a* = 0.3865 crossing also
+  fails to reproduce — 185's own two starting points straddle zero exactly AT the
+  crossing; its own data never pinned it.
+- 185's report is a faithful transcription of what its code computed — the gap is
+  upstream (insufficient refinement at one parameter), not in the reporting.
+
+**Slot B: rework leg 283 — the confirmed-gap rule, applied at its honest (low)
+priority:**
+
+```
+### 283 — ROUTE-M2SR: DOWNGRADE LEG 174's CATALOG AT a=1/2 TO SIGN-ONLY (210's
+confirmed gap in leg 185's banking — rework, record-only)
+**Thesis.** 210's finding above. Per its recommendation: a=0.30 stays as measured (now
+independently confirmed AND gauge-independence-strengthened, cite 210); a=1/2 downgrades
+to SIGN-ONLY (no specific magnitude); the a*=0.3865 crossing is marked UNPINNED (185's
+own straddle), all with dated pointers citing 210's parked report.
+**Gate.** (a) Catalog + every site quoting the a=1/2 magnitude or the a* value (found by
+a standing-rule-robust sweep) downgraded/marked with pointers; (b) the a=0.30
+confirmation and the gauge-independence strengthening recorded in the same pass (the
+upgrade travels with the downgrade — both are 210's result); (c) 185's journal gets an
+append-only pointer, original text preserved; (d) no other meaning changed.
+  yes -> Bank. no -> Argument-touching site: STOP, escalate.
+**Territory.** leg 174's catalog site(s), the swept quoting sites, leg 185's journal
+               (append-only), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_283.md, experiments/journal/leg_283.md.
+               Reads (never edits) 210's parked branch.
+**Difficulty.** light
+**Independence.** Record-only; no live conflict. Slot B, now.
+```
+
+**Slot C: companion measurement leg 284 — complete the catalog rather than leave it
+downgraded** [FLOOR-ELIGIBLE: math]:
+
+```
+### 284 — ROUTE-NU12: THE GRID-CONVERGED ν AT a=1/2 (the measurement leg 185 never ran —
+210's ladder taken to convergence)
+**Thesis.** 210 supplied the refinement ladder 185 lacked and proved non-convergence at
+a=1/2; this leg takes the ladder to an actual grid-converged value (or an honest
+does-not-converge verdict), and re-pins a* — the crossing 185's own data straddled.
+Pre-registered per the repository's own discipline: the convergence criterion and ladder
+extension stated in the novelty pass BEFORE running; the contamination-cap rule (Ruling
+178-3) applies if the scheme touches energy_coercivity.py.
+**Gate.** Does the extended ladder produce a grid-converged ν(1/2) under the
+pre-registered criterion?
+  yes -> Bank the value with its ladder; catalog upgrades from sign-only WITH the
+         convergence evidence attached (283's downgrade then superseded by citation,
+         not deletion). Re-pin a* if the converged scheme reaches it.
+  no -> Bank the non-convergence at full strength — the sign-only entry becomes the
+        catalog's permanent honest state for this scheme, and WHY (which term resists)
+        is itself the finding.
+**Territory.** experiments/p2_route_nu12_v1_converge.py,
+               writeup/data/p2_route_nu12_v1_converge.json,
+               writeup/novelty/leg_284.md, experiments/journal/leg_284.md.
+               Reads (never edits) 210's parked branch, 185's landed report.
+**Difficulty.** standard
+**Independence.** Own module; measurement, not catalog editing (that is 283's/a future
+pointer's job). Slot C, now. FLOOR-ELIGIBLE (math) — floor rises to 4/10.
+```
+
+**FLOOR-TABLE block updated in this same edit** (B: 210 → 283; C: 282 → 284). **Floor
+status: 4/10 strictly (284, 281, 267, 264).**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated; 229 on 226; 231-234 on repairs).
+Next fresh leg number: **285.**
+
+Nothing in this update lifts a ban. 210's finding is recorded as a precision downgrade
+plus a strengthening, exactly as measured — no claim reversed, no submission document
+affected, not movement of any link. Clay stays ~0.05%. No new direction question raised
+— 226's report and the two user items (packet, 280 sign-off) remain the open tracks.
