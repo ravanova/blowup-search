@@ -3741,3 +3741,9 @@ preempted agents had reached a landing.
   argument. Flags PUB2 for a fresh full review pass before any actual
   submission. Post-landing verifier dispatched given the submission-track
   stakes.
+- **Leg 249 (Route-H2CV2) — merged to main as a standalone record**, per the
+  DM's recommendation: the only independent certification of leg 176's
+  certificate in existence, now that its findings have been used by leg 268
+  to correct PUB2. Full findings already summarized above at leg 268's
+  entry; this is the merge of leg 249's own report/runner/JSON, not a new
+  finding.
