@@ -3844,3 +3844,17 @@ preempted agents had reached a landing.
   the Phase-1 construction decision packet, pending a rework of leg 251's
   ansatz (the DM's pre-committed contingency, now triggered) before
   presentation.
+- **Leg 273 (Route-NFS) -- gate NO (double NO), landed.** Scoped leg 255's
+  two non-fluid census survivors against leg 174's occupancy matrix and
+  against a statable certificate target. BOTH conjuncts fail: (1) both
+  survivors classify to the (fluid=False, grade=A) cell, which already has
+  TWO occupants (Dahne-Figueras, Biernat-Donninger) -- a KS certificate
+  would be a third, not fill an empty cell; (2) NEW TO THE RECORD -- both
+  profiles decay algebraically (~|x|^-2) and are excluded from Breden-Chu's
+  own weighted space by that paper's OWN Corollary 17(i) at theorem level
+  (measured: Cor-17 witness diverges +52.6 orders, weighted L^2(mu) mass
+  +102.8 to +106.9 orders, against a Gaussian control that stays IN).
+  Mechanism: Remark 40 governs which NONLINEARITIES the space absorbs, not
+  which PROFILES lie in it -- the membership/mapping split. Census's
+  yes-branch produced zero actionable survivors; nothing routed to the
+  packet, no ban touched.
