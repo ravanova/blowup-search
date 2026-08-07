@@ -11641,3 +11641,73 @@ Nothing in this update lifts a ban. 236's finding is recorded as movement of a B
 SCALAR toward its own document's prose — a correction, not progress on any link, and
 explicitly not described as movement toward Clay. Clay stays ~0.05%. No direction
 question raised: the wait-for-226 decision is recorded with its reason.
+
+---
+
+## DM update, 2026-08-07 — verify-265 CLEAN (k(7/6) re-derived to 15 sig figs; the
+correction to 251 CONFIRMED): pre-committed rework cut as leg 275, next vacancy, NO
+interruption; third-instance pre-commitment added for the "same species" pattern
+
+**verify-265 (`7321005`), recorded:** fully independent, no gap — k(7/6)=16.3479210517
+re-derived from scratch to 15 significant figures, including catching a genuine
+typographic ambiguity in BCG's own source that could have produced a ~4.6× wrong answer
+(265 read it correctly); the compressible-obstruction census confirmed with its own
+control terms; n=3's unconditional existence and n=15's genuinely-open "large enough"
+both confirmed. **And the contingency's trigger: the correction to 251 is CONFIRMED
+genuine** — 251's ansatz ("n odd and large") forces r→r*, contradicting its own
+leg-266-corrected obligation 4 (needs r ≤ 7/6). The verifier flags this as the SECOND
+internal-consistency defect in 251 of the same species.
+
+**Urgency call: NO interruption.** 275 is assigned to the NEXT natural vacancy, ahead of
+everything including 270 — slot A (274, light) lands soonest, and interrupting a
+mid-flight agent spends its context to save hours that do not change the user's decision
+timing. Queue order at vacancies, restated: **275 first; 270 next (its own condition,
+274's landing, still applies); 272 after.**
+
+```
+### 275 — ROUTE-P0TC2: APPLY 265's CONFIRMED ANSATZ CORRECTION TO 251's PARKED REPORT
+(the second 266-shaped rework; fires the pre-commitment of the verify-265 contingency)
+**Thesis.** verify-265 confirms: 251's "n odd and large" ansatz forces r→r*, deep inside
+BCG's dominance window — the wrong side for its own corrected obligation 4. The fix, per
+265's recommendation as verified: name n=3 (unconditional existence, BCG Thm 1.1), with
+the r-target on the correct side (≤ 7/6).
+**Gate.** After the rework: (a) 251's ansatz statement names n=3 with the correct window
+side, consistent with obligation 4 as corrected by 266; (b) every other claim in the
+report byte-untouched; (c) a visible dated correction note cites leg 265 AND verify-265;
+(d) a targeted consistency read of EVERY r/window statement in the report finds no THIRD
+instance of the species — checked in the same pass, cheaply, while the reader is primed.
+  yes -> Land into leg/251-p0t-v1 (PR #20). The packet is then fully self-consistent and
+         ASSEMBLY IS GREEN-LIT.
+  no -> If clause (d) finds a third same-species inconsistency, STOP and escalate as a
+        PROCESS finding — per the pre-commitment below, 251 then gets a whole-report
+        re-review, not a third spot-correction.
+**Territory.** 251's parked files on leg/251-p0t-v1 (the ansatz sentence(s) + note ONLY),
+               writeup/novelty/leg_275.md, experiments/journal/leg_275.md.
+               Reads (never edits) leg 265's report, verify-265, BCG Thm 1.1.
+**Difficulty.** light
+**Independence.** Parked-branch territory, no live conflict. NEXT VACANCY, top priority.
+Anti-pausing clause verbatim.
+```
+
+**Third-instance pre-commitment (the verifier's pattern flag, converted to a rule):**
+two same-species internal-consistency defects in 251 were each caught by a verifier and
+spot-corrected. **If a third appears — in 275's clause (d) or any later read — the
+response is a whole-report consistency re-review of 251, not a third spot-fix** (the
+same convergence rule adopted for PUB2 after its third iteration, applied before the
+fact this time, with the packet held until that review completes).
+
+**Packet status: assembly green-lit UPON 275's LANDING** — contents unchanged (251
+twice-corrected/twice-verified, the stage-V lift recommendation, 260's substantive DSS
+exclusion, 261/262's three-way incompressible closure, 265's verified costing, 256's
+verified reproduction), plus one sentence this DM adds to the packet spec: the user
+should be told plainly that 251 required two same-species corrections, both
+verifier-caught — that is the QA system working, and the user deserves to see the
+pattern, not just the polished result.
+
+**Canonical reserve line: reserve count 8 — legs 275, 270, 272, 229, 231, 232, 233,
+234.** Effective dispatchable: 2 (275, 272); 270 on 274's landing; 229 on 226; 231-234
+on repairs. Next fresh leg number: **276.** FLOOR-TABLE unchanged; floor 3/10 strictly.
+
+Nothing in this update lifts a ban or opens construction; Clay stays ~0.05%. No
+direction question raised — the packet reaches the user through assembly, with the
+pattern disclosure included.
