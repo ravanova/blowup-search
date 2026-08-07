@@ -1,0 +1,595 @@
+{
+ "leg": 277,
+ "route": "XUN",
+ "role": "conversion bridge",
+ "date": "2026-08-07",
+ "gate_question": "Under Xu's normalization, do the certificate's converted quantities agree with (a) their own weight-sweep images per leg 249, and (b) any directly-comparable value Xu publishes?",
+ "primary_source": {
+  "arxiv": "2607.19762",
+  "md5": "709dac668a1ff508f00d765916db492c",
+  "locators_read_in_this_pass": [
+   "Definition 4.1 eq (4.2) -- the HALF-LINE norm",
+   "Definition 4.1 sentence 2 -- the 'equivalent' full-line odd-H^2(R) norm",
+   "Lemma 4.5 eq (4.24) -- exact norm 1/alpha",
+   "Proposition 4.6 eq (4.27) -- majorant on {Re z > -1/2} \\ {0,1}",
+   "Prop 4.6 proof after (4.25) -- c_G = 5/4 + sqrt(10) + 2",
+   "Prop 4.6 proof eqs (4.28)-(4.29)",
+   "Proposition 2 -- realization dichotomy",
+   "Section 2 Table 1 -- the branch numerics (no norms)"
+  ]
+ },
+ "ceiling": "a = 0 only.  Converting a number does not lift the ceiling attached to it.  No link of L1->L4 moved, Clay odds unchanged at ~0.05%, no ban lifted, no GA compute.",
+ "ga_compute": false,
+ "edits_nothing_it_converts": true,
+ "X1_conversion_constant": {
+  "n_modes": 8,
+  "full_line": {
+   "max_abs_dev_from_2pi_G": 2.3283064365386963e-09,
+   "max_abs_imaginary_part": 1.9387399506235493e-10,
+   "reading": "reproduces leg 249's W2 independently: the FULL-LINE Gram is 2 pi (I + J^4), real to quadrature accuracy."
+  },
+  "half_line": {
+   "max_abs_dev_of_REAL_part_from_pi_G": 1.4784745872020721e-08,
+   "max_abs_imaginary_part": 245890.00000000515,
+   "imaginary_part_antisymmetry_defect": 1.1641532182693481e-10,
+   "imaginary_entries_0_1_and_2_3": [
+    130.00000000000284,
+    8322.000000000176
+   ],
+   "eigenvalues_of_half_line_form": [
+    0.09633265353955323,
+    1.6866624002061377,
+    6.289723161807406,
+    82.10382320942993,
+    1415.620707692711,
+    17444.185204616166,
+    161275.5876019227,
+    1277096.4300916074
+   ],
+   "eigenvalues_of_pi_G": [
+    3.479431165532296,
+    23.258750625193613,
+    319.6075083178828,
+    2608.2367757675975,
+    14815.808711092626,
+    67426.62887930068,
+    272286.9000472834,
+    1099838.0800436805
+   ]
+  },
+  "half_line_resolution_control": {
+   "h=0.01,U=4.5": {
+    "max_abs_dev_of_REAL_part_from_pi_G": 1.5133991837501526e-08,
+    "imag_0_1": 130.00000000000279,
+    "max_abs_imaginary_part": 245890.0000000053
+   },
+   "h=0.02,U=5.0": {
+    "max_abs_dev_of_REAL_part_from_pi_G": 1.5133991837501526e-08,
+    "imag_0_1": 130.00000000000276,
+    "max_abs_imaginary_part": 245890.00000000527
+   },
+   "h=0.04,U=4.5": {
+    "max_abs_dev_of_REAL_part_from_pi_G": 9.313225746154785e-10,
+    "imag_0_1": 129.99999999999986,
+    "max_abs_imaginary_part": 245889.9999999997
+   }
+  },
+  "real_subspace_ratio_half_over_piG": {
+   "samples": [
+    1.000000000000022,
+    1.0000000000000209,
+    1.0000000000000215,
+    1.0000000000000215,
+    1.0000000000000209,
+    1.000000000000021,
+    1.0000000000000209,
+    1.0000000000000213
+   ],
+   "max_abs_dev_from_1": 2.19824158875781e-14
+  },
+  "complex_data_ratio_half_over_piG": {
+   "samples": [
+    0.3875628096507478,
+    1.0380563242725995,
+    1.3491440130306969,
+    0.43195518363457913,
+    0.8106809831258188,
+    0.5812925026373184,
+    0.8426304452702292,
+    1.6759142089114858
+   ],
+   "max_abs_dev_from_1": 0.6759142089114858
+  },
+  "kappa_full_line": 6.283185307179586,
+  "kappa_half_line_4p2": 3.141592653589793,
+  "reading": "MEASURED.  Xu Definition 4.1 eq (4.2) is a HALF-LINE norm.  Its Gram in the repository's Laguerre/Blaschke coordinates is pi (I + J^4) + i S with S real antisymmetric and LARGE (exact integer entries, max recorded above at n = 8, stable across four quadrature rules -- not noise).  So the two norms Definition 4.1 names are NOT proportional as Hermitian forms on complex coefficients.  But the bordered section is REAL after leg 249's realification, and on the real coefficient subspace S contributes exactly zero: there the half-line norm is EXACTLY pi c'Gc, i.e. EXACTLY HALF the squared full-line norm.  The constant for the DISPLAYED definition is therefore pi, not 2 pi.  Leg 249's W5 converted with 2 pi -- Definition 4.1's second sentence (the 'equivalent' full-line norm), not (4.2)."
+ },
+ "X2_route_equivalence": {
+  "N": 256,
+  "pairs": {
+   "xu_full_line": {
+    "kappa": 6.283185307179586,
+    "sigma_via_scaled_X_block": 0.04203207915803148,
+    "sigma_via_border_weight_1_over_kappa": 0.04203207915802247,
+    "relative_difference": 2.1428119825832094e-13
+   },
+   "xu_half_line_4p2": {
+    "kappa": 3.141592653589793,
+    "sigma_via_scaled_X_block": 0.057647642797062776,
+    "sigma_via_border_weight_1_over_kappa": 0.0576476427971255,
+    "relative_difference": 1.0881208293657655e-12
+   }
+  },
+  "realification_control": {
+   "repo": {
+    "real_section": 0.09085063207541998,
+    "complex_section": 0.09085063207542537,
+    "relative_difference": 5.942126470576752e-14
+   },
+   "xu_full_line": {
+    "real_section": 0.04203454125781167,
+    "complex_section": 0.04203454125781179,
+    "relative_difference": 2.806291988365665e-15
+   },
+   "xu_half_line_4p2": {
+    "real_section": 0.057654144739548586,
+    "complex_section": 0.05765414473956247,
+    "relative_difference": 2.4082790169626713e-13
+   }
+  },
+  "reading": "P1 CONFIRMED at the relative differences recorded.  The two routes are the same computation, so leg 249's border-weight sweep IS a sweep of the X-block normalization constant, and the whole certificate can be converted through it."
+ },
+ "X3_conversion_table": {
+  "Q1_bordered_sigma_min": {
+   "ladder": {
+    "8": {
+     "repo": {
+      "sigma_min": 0.0927566004571166,
+      "sigma_max": 11.142494871688958,
+      "resolvent_norm": 10.78090394723254
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04219803958397157,
+      "sigma_max": 23.83374719195205,
+      "resolvent_norm": 23.697783353420007
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.058090116426177604,
+      "sigma_max": 17.410458106826447,
+      "resolvent_norm": 17.214632393977475
+     }
+    },
+    "16": {
+     "repo": {
+      "sigma_min": 0.09115903930312673,
+      "sigma_max": 13.41896249500776,
+      "resolvent_norm": 10.969839169484318
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04206410803433047,
+      "sigma_max": 23.883782425618648,
+      "resolvent_norm": 23.77323677430301
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.05773113992197026,
+      "sigma_max": 17.48255399765152,
+      "resolvent_norm": 17.3216742532991
+     }
+    },
+    "32": {
+     "repo": {
+      "sigma_min": 0.09093104093770309,
+      "sigma_max": 28.367018027014655,
+      "resolvent_norm": 10.997344687663926
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04204169854104424,
+      "sigma_max": 28.36702138322412,
+      "resolvent_norm": 23.78590862649675
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.057673116565647685,
+      "sigma_max": 28.367018574298225,
+      "resolvent_norm": 17.33910111935304
+     }
+    },
+    "64": {
+     "repo": {
+      "sigma_min": 0.09088780400823183,
+      "sigma_max": 58.939697016291014,
+      "resolvent_norm": 11.002576318264094
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04203791244660733,
+      "sigma_max": 58.93969701644437,
+      "resolvent_norm": 23.788050875982663
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.057663043669015916,
+      "sigma_max": 58.93969701636794,
+      "resolvent_norm": 17.342130008606016
+     }
+    },
+    "128": {
+     "repo": {
+      "sigma_min": 0.09085063207541998,
+      "sigma_max": 121.07415533246679,
+      "resolvent_norm": 11.00707807040733
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04203454125781167,
+      "sigma_max": 121.0741553339452,
+      "resolvent_norm": 23.78995868818149
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.057654144739548586,
+      "sigma_max": 121.0741553334572,
+      "resolvent_norm": 17.34480677005061
+     }
+    },
+    "256": {
+     "repo": {
+      "sigma_min": 0.09082344116502357,
+      "sigma_max": 246.68145868098358,
+      "resolvent_norm": 11.010373392294495
+     },
+     "xu_full_line": {
+      "sigma_min": 0.04203207915803148,
+      "sigma_max": 246.6814586851918,
+      "resolvent_norm": 23.791352225052144
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.057647642797062776,
+      "sigma_max": 246.6814586427425,
+      "resolvent_norm": 17.3467630501442
+     }
+    },
+    "512": {
+     "repo": {
+      "sigma_min": 0.09080414383680567,
+      "sigma_max": 499.6409636599634,
+      "resolvent_norm": 11.012713272174146
+     },
+     "xu_full_line": {
+      "sigma_min": 0.042030323448675175,
+      "sigma_max": 499.6409639290333,
+      "resolvent_norm": 23.792346047994087
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.05764301146096808,
+      "sigma_max": 499.64096355174354,
+      "resolvent_norm": 17.348156778330914
+     }
+    }
+   },
+   "note": "domain [0,N) (+) C, range untruncated; Cholesky whitening",
+   "at_N_512": {
+    "repo": 0.09080414383680567,
+    "xu_full_line": 0.042030323448675175,
+    "xu_half_line_4p2": 0.05764301146096808
+   },
+   "conversion_factor_vs_repo": {
+    "repo": 1.0,
+    "xu_full_line": 0.4628679008769973,
+    "xu_half_line_4p2": 0.6348059573642896
+   },
+   "leg176_whitening_at_512": {
+    "repo": 0.09080465147038257,
+    "xu_full_line": 0.042030353267990365,
+    "xu_half_line_4p2": 0.05764308738390632
+   },
+   "is_a_fixed_power_of_kappa": {
+    "xu_full_line": {
+     "measured_factor": 0.4628679008769973,
+     "if_it_were_kappa_to_the_minus_half": 0.3989422804014327,
+     "if_it_were_kappa_to_the_minus_quarter": 0.6316187777460647
+    },
+    "xu_half_line_4p2": {
+     "measured_factor": 0.6348059573642896,
+     "if_it_were_kappa_to_the_minus_half": 0.5641895835477563,
+     "if_it_were_kappa_to_the_minus_quarter": 0.7511255444649425
+    }
+   }
+  },
+  "Q2_tail_inverse_norm": {
+   "K_blocks": {
+    "2": {
+     "repo": {
+      "sigma_min": 0.248370642555541,
+      "inverse_norm": 4.026240741300086
+     },
+     "xu_full_line": {
+      "sigma_min": 0.24837064248943805,
+      "inverse_norm": 4.026240742371655
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.24837064344411733,
+      "inverse_norm": 4.026240726895717
+     },
+     "max_relative_spread_over_conventions": 3.843768612309331e-09
+    },
+    "4": {
+     "repo": {
+      "sigma_min": 0.6690109795661164,
+      "inverse_norm": 1.4947437793151688
+     },
+     "xu_full_line": {
+      "sigma_min": 0.6690109791738502,
+      "inverse_norm": 1.494743780191593
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.6690109894068467,
+      "inverse_norm": 1.4947437573284292
+     },
+     "max_relative_spread_over_conventions": 1.5295707787689216e-08
+    },
+    "8": {
+     "repo": {
+      "sigma_min": 0.8244418695043403,
+      "inverse_norm": 1.2129417937024551
+     },
+     "xu_full_line": {
+      "sigma_min": 0.824441869125075,
+      "inverse_norm": 1.2129417942604408
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.8244418726591436,
+      "inverse_norm": 1.2129417890610208
+     },
+     "max_relative_spread_over_conventions": 4.286619498655073e-09
+    },
+    "16": {
+     "repo": {
+      "sigma_min": 0.9767929497643332,
+      "inverse_norm": 1.0237584129177693
+     },
+     "xu_full_line": {
+      "sigma_min": 0.9767929486997962,
+      "inverse_norm": 1.0237584140334905
+     },
+     "xu_half_line_4p2": {
+      "sigma_min": 0.9767929509304828,
+      "inverse_norm": 1.0237584116955496
+     },
+     "max_relative_spread_over_conventions": 2.2836842095813056e-09
+    }
+   },
+   "P2_verdict": "EXACTLY INVARIANT as predicted: the tail block carries no border coordinate, so kappa multiplies range and domain Grams alike and cancels.  ||T^-1||_X = 4.026 needs NO conversion -- it already reads the same in Xu's units."
+  },
+  "Q3_Z1_blockdiagonal": {
+   "ladder": {
+    "64": {
+     "repo": 140.72466104631172,
+     "xu_full_line": 140.72054195207912,
+     "xu_half_line_4p2": 140.7213228801662
+    },
+    "128": {
+     "repo": 182.23161776466935,
+     "xu_full_line": 182.22863326378518,
+     "xu_half_line_4p2": 182.2291899148765
+    },
+    "256": {
+     "repo": 244.14671536801256,
+     "xu_full_line": 244.14701076804803,
+     "xu_half_line_4p2": 244.14781547372158
+    }
+   },
+   "conversion_factor_vs_repo": {
+    "repo": 1.0,
+    "xu_full_line": 1.0000012099283622,
+    "xu_half_line_4p2": 1.0000045059205787
+   },
+   "threshold": 1.0,
+   "still_fails_in_every_convention": true
+  },
+  "Q4_border_row_dual_norm": {
+   "ladder": {
+    "64": {
+     "repo": 0.8872380425355713,
+     "xu_full_line": 0.3539567680000768,
+     "xu_half_line_4p2": 0.5005704617994557,
+     "predicted_from_repo_over_sqrt_kappa": {
+      "repo": 0.8872380425355713,
+      "xu_full_line": 0.35395676794804415,
+      "xu_half_line_4p2": 0.5005704617258705
+     },
+     "max_relative_deviation_from_prediction": 1.4700285646647737e-10
+    },
+    "128": {
+     "repo": 0.8873117900938475,
+     "xu_full_line": 0.35398618797509307,
+     "xu_half_line_4p2": 0.5006120679271284,
+     "predicted_from_repo_over_sqrt_kappa": {
+      "repo": 0.8873117900938475,
+      "xu_full_line": 0.3539861889671169,
+      "xu_half_line_4p2": 0.500612069330062
+     },
+     "max_relative_deviation_from_prediction": 2.8024366081289175e-09
+    },
+    "256": {
+     "repo": 0.887345112546454,
+     "xu_full_line": 0.3539994981228154,
+     "xu_half_line_4p2": 0.5006308913185545,
+     "predicted_from_repo_over_sqrt_kappa": {
+      "repo": 0.887345112546454,
+      "xu_full_line": 0.3539994827023483,
+      "xu_half_line_4p2": 0.5006308695107209
+     },
+     "max_relative_deviation_from_prediction": 4.3560703197880174e-08
+    },
+    "512": {
+     "repo": 0.8873620087421942,
+     "xu_full_line": 0.3540062265852564,
+     "xu_half_line_4p2": 0.5006404068013924,
+     "predicted_from_repo_over_sqrt_kappa": {
+      "repo": 0.8873620087421942,
+      "xu_full_line": 0.354006223309207,
+      "xu_half_line_4p2": 0.500640402168359
+     },
+     "max_relative_deviation_from_prediction": 9.254213994546375e-09
+    }
+   },
+   "P4_verdict": "CONFIRMED: ||ell||_{X*} is exactly homogeneous of degree -1/2 in kappa, to the deviations recorded."
+  }
+ },
+ "X4_against_leg249_sweep": {
+  "N": 256,
+  "source": "writeup/data/p2_route_h2cv_v1_postconstruction.json",
+  "banked_N": 256,
+  "sweep_reproduction": {
+   "0.01": {
+    "banked": 0.010856262976502303,
+    "recomputed_here": 0.010856262976502303,
+    "relative_difference": 0.0
+   },
+   "0.1": {
+    "banked": 0.033710662614220156,
+    "recomputed_here": 0.033710662614220156,
+    "relative_difference": 0.0
+   },
+   "0.25": {
+    "banked": 0.051757260550031936,
+    "recomputed_here": 0.051757260550031936,
+    "relative_difference": 0.0
+   },
+   "1.0": {
+    "banked": 0.09082344116502357,
+    "recomputed_here": 0.09082344116502357,
+    "relative_difference": 0.0
+   },
+   "4.0": {
+    "banked": 0.1273833089715678,
+    "recomputed_here": 0.1273833089715678,
+    "relative_difference": 0.0
+   },
+   "10.0": {
+    "banked": 0.1357994693284667,
+    "recomputed_here": 0.1357994693284667,
+    "relative_difference": 0.0
+   },
+   "100.0": {
+    "banked": 0.09267680828992153,
+    "recomputed_here": 0.09267680828992153,
+    "relative_difference": 0.0
+   }
+  },
+  "max_relative_difference_over_sweep": 0.0,
+  "leg249_0p0420_anchor": {
+   "banked_sigma_if_X_block_carried_the_2pi": 0.04203207915802247,
+   "recomputed_here_by_scaling_the_X_block": 0.04203207915803148,
+   "relative_difference": 2.1428119825836686e-13
+  },
+  "half_line_value_at_same_N": {
+   "sigma_min": 0.057647642797062776,
+   "resolvent_norm": 17.3467630501442,
+   "ratio_to_leg249_full_line_value": 1.3715153747292046,
+   "ratio_to_repo_value_0p0908": 0.6347220723812773
+  },
+  "P3_non_monotone_check": {
+   "argmax_weight": 10.0,
+   "max_sigma": 0.1357994693284667,
+   "sigma_at_largest_weight": 0.09267680828992153,
+   "falls_back_by": 0.31754660936296947
+  },
+  "P3_small_weight_power_law": {
+   "fitted_exponent_between_two_smallest_weights": 0.49208693416004584,
+   "predicted_if_sqrt_law": 0.5,
+   "sqrt_law_extrapolation_to_w_full_line": 0.04331022308483474,
+   "actual_at_w_full_line": 0.04203207915803148,
+   "sqrt_law_extrapolation_to_w_half_line": 0.0612499048759776,
+   "actual_at_w_half_line": 0.057647642797062776
+  },
+  "reading": "GATE (a) YES.  Every one of leg 249's seven sweep points reproduces, and its single converted number reproduces from the structurally different route (scaling the X block rather than moving the border weight), which is the independent content: the two routes were never checked against each other.  The half-line value is new -- no artifact contains it."
+ },
+ "X5_xu_comparands": {
+  "lemma_4p5_mellin_symbol_identity_at_z0": {
+   "0.0": {
+    "lhs": [
+     1.850134336930987,
+     0.0
+    ],
+    "rhs": [
+     1.8381250536977647,
+     0.0
+    ],
+    "relative_difference": 0.0065334418945344535
+   },
+   "0.5": {
+    "lhs": [
+     0.7271257272962723,
+     0.9434985516282798
+    ],
+    "rhs": [
+     0.7167098415661016,
+     0.9420669874526496
+    ],
+    "relative_difference": 0.008882096129927698
+   },
+   "1.5": {
+    "lhs": [
+     -0.07720534902086085,
+     0.26953426503909494
+    ],
+    "rhs": [
+     -0.08030562350475795,
+     0.2659557933240361
+    ],
+    "relative_difference": 0.01704251830120072
+   },
+   "3.0": {
+    "lhs": [
+     -0.030226673910056335,
+     -0.007772494086542341
+    ],
+    "rhs": [
+     -0.028916692822407504,
+     -0.008374214381189694
+    ],
+    "relative_difference": 0.04788488697366973
+   }
+  },
+  "lemma_4p5_max_relative_difference": 0.04788488697366973,
+  "lemma_4p5_finite_section_norm_ladder": {
+   "h=0.005,U=2.5": {
+    "max_y": 424.1997619850744,
+    "8": 1.7070332617603161,
+    "16": 1.749337874650516,
+    "32": 1.778356645656767,
+    "48": 1.7918744115190268
+   },
+   "h=0.0025,U=2.7": {
+    "max_y": 1646.2629280654946,
+    "8": 1.725095402538859,
+    "16": 1.7725510862740075,
+    "32": 1.80538057321461,
+    "48": 1.8197070630830074
+   }
+  },
+  "lemma_4p5_published_exact_norm_at_z0": 2.0,
+  "prop_4p6_constants_at_z0": {
+   "c_G": 6.41227766016838,
+   "alpha_at_z0": 0.5,
+   "tail_norm_bound_1_over_sqrt_2alpha": 1.0,
+   "A_tail_bound_cG_over_sqrt6_alpha_3half": 7.404260466433676,
+   "hardy_piece_bound_5_over_4alpha": 2.5,
+   "C_R_d": null
+  },
+  "certificate_numbers_for_comparison": {
+   "sigma_min_at_512_banked": 0.09080465147034879,
+   "resolvent_norm_banked": 11.012651706796523,
+   "tail_inverse_norm_banked": 4.02614534796022
+  },
+  "reading": "GATE (b) NO COMPARAND EXISTS, AND THE REASON IS STRUCTURAL, NOT AN OMISSION.  Proposition 4.6's majorant ||R_0(z)||_X <= C(R,d) alpha^{-3/2} is stated on {Re z > -1/2} \\ {0, 1}, and z = 0 is one of the two EXCLUDED points -- it is an eigenvalue of L_0 on the odd X-realization.  z = 0 is exactly where the certificate lives, and the bordered formulation exists precisely to handle that excluded point.  So Xu's resolvent bound cannot be evaluated at the certificate's z, and its constant C(R,d) is left unevaluated in any case.  Lemma 4.5's ||T_z|| = 1/alpha IS an exactly published number (2 at z = 0), but it is the norm of the Hardy operator on L^2(0,oo), a DIFFERENT operator from the inverse of the tail block of L_0^+; it is used here as an external control on the half-line machinery, and the comparison magnitude against ||T^-1||_X is reported, not claimed."
+ },
+ "gate": {
+  "a_weight_sweep_agreement": 0.0,
+  "a_anchor_agreement": 2.1428119825836686e-13,
+  "b_comparand_exists": false,
+  "b_reason": "z = 0 is excluded from Proposition 4.6's region",
+  "sigma_min_512_repo": 0.09080414383680567,
+  "sigma_min_512_xu_full_line": 0.042030323448675175,
+  "sigma_min_512_xu_half_line_4p2": 0.05764301146096808,
+  "answer": "(a) YES -- every sweep point and the 0.0420 anchor reproduce, the anchor by a structurally different route.  (b) NO COMPARAND -- Xu publishes none at z = 0 and cannot, since z = 0 is excluded from Prop 4.6.  DISCREPANCY FOUND, and it is in the bridge itself: 'Xu's own normalization' is ambiguous in Definition 4.1, and the 0.0420 leg 270 carries adopts the full-line 'equivalent' norm rather than the displayed half-line definition (4.2).  Under (4.2) the constant is pi, not 2 pi.  NOT an escalation: leg 176's gate property -- sigma_min bounded away from zero uniformly in the truncation -- is invariant under every positive constant, and is unmoved."
+ },
+ "runtime_seconds": 351.5476264953613
+}
