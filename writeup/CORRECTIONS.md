@@ -40,6 +40,7 @@ lesson 35). This file is the index, not the substitute.
 | 8 | leg 263's own census, whose clause (a) claimed **zero missed occurrences** over the "third realization" phrase family, and which argued the live stage-`V` ban's protection from the class-P list that census produced | **leg 272** (2026-08-07, re-ran both patterns over the same blobs) → **leg 282** (this entry; carried the pointer and both count corrections to their sites) | the census is short by **30 triple-asserting occurrences across 17 files**, from two named instrument causes (**case** and **hyphenation/wrap**): **class P is 28, not 18**, and the second sweep's file count is **32, not 34**. **0 of the 30 produced a wrong edit and exactly 1 lies in territory.** A **warrant** defect, not a text defect — `plan_of_record.py` is byte-identical and stays so. §9 below |
 
 | 9 | leg 185's `a = 1/2` `ν` **magnitudes** (`−0.00817525` / `−0.00895316`), banked in a table beside a refined `a = 0.30` number and read downstream as measurements; and its `a* = 0.3865` **cross-check**, banked as *"two different calculations agreeing on the same number"* | **leg 210** (2026-08-07, Route-M2SV, parked branch `leg/210-m2sv-v1` @ `6e06880`, independently discretized re-derivation) → **leg 283** (this entry; swept the record and carried both halves to every site) | **SPLIT, and both halves matter.** UP: `ν = +0.01799364` at `a = 0.30` is **independently confirmed to 1.198e-06 relative (~5.9 digits)**, and the sign law is **strengthened to gauge-independence** (`ν → μ²ν` under dilation, `μ² > 0`, so no gauge can flip it). DOWN: the `a = 1/2` magnitudes are **sign-only** — leg 210's independent value is `−0.00082927`, a **10.33×** gap, and **neither scheme is grid-converged there** (leg 185's own ladder spans **62.2%** non-monotonically; leg 210's spans **119.2%** with amplitude collapsing toward the trivial null). The `a*` cross-check is **UNPINNED** by leg 185's own data — its two starts **straddle zero** at `a = 0.3865` (`+0.00000035` / `−0.00425080`). **Leg 125's own `a*` value is untouched.** §10 below |
+| 10 | Whether `a*` itself (as opposed to leg 185's flawed corroboration of it) is a real, locatable feature of Object B — left an open, un-adjudicated three/four-way contradiction after §10/leg 283: leg 210's independent bracket `[0.36, 0.37]` **excludes** leg 125's `a* = 0.3864963972206034` | **leg 284** (2026-08-07, Route-NU12, pseudo-arclength continuation — a third, independent method) → **leg 296** (this entry; read all four reports method-by-method and reconciled) | **`a* ≈ 0.386` IS PINNED**, by two mutually independent methods agreeing to ~2e-3: leg 125's algebraic `Δ(a) = 0` crossing (`ν = 0`, residual `1.933e-15`) and leg 284's grid-converged pseudo-arclength turning point (`0.3857 ± 0.004`, monotone over 4 grids). Leg 210's exclusion bracket is **explained, not outvoted**: it used the same fixed-`a` Newton-restart method leg 284 showed (Findings 2 and 4) folds and develops a singular Jacobian (`σ_min/σ_max = 3.454e-19` at `n = 1601`) in exactly this neighborhood — and leg 210's own report already recorded the predicted symptom (non-convergence at `a = 0.3865`, residual `6.0e-03`; amplitude collapse toward the trivial null beyond it) independently of anything leg 284 later found. Leg 185's specific corroboration claim **stays refuted** — its two starts still straddle zero at `a = 0.3865`. §11 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -786,4 +787,76 @@ changed. `plan_of_record.py` not opened.** Leg 185's original text stands in ful
 blocks beside it. Nothing here lifts a ban, promotes a route, or moves a link of `L1 → L4`:
 "sign-only" is a *narrowing* of a banked claim, and a confirmed float number on a discretised,
 truncated domain is still not a certificate and still not an existence proof. Stage P0 is
+unaffected. Clay stays **~0.05%**.
+
+---
+
+## §11 — `a*`'s pinning status, reconciled across legs 125/210/283/284
+
+**Carried by leg 296 (Route-ASR), 2026-08-07.** Every number below is one of legs 125, 210, or
+284's own — this entry produces no measurement of its own. §10 above left one question
+un-adjudicated: whether `a*` (an Object-B existence threshold) is a real, locatable feature at
+all, given that leg 210's independent bracket `[0.36, 0.37]` excludes leg 125's `a* =
+0.3864963972206034`. This entry closes that question.
+
+### 11.1 The four data points, read method-by-method
+
+| leg | quantity | mechanism | precision |
+|---|---|---|---|
+| 125 | `a*` where `Δ(a) := 2c_l/\|c_ω\| − 1 = 0` at `ν = 0` | algebraic sweep of `Δ(a)`, every point converged to machine precision, crossing found two independent ways | residual `1.933e-15`, `a* = 0.3864963972206034` |
+| 210 | zero-crossing of `ν(a)` along a branch reached by restarting Newton from Chen's profile at each fixed `a` | scan between converged points only (a bisection was tried first and discarded, lesson 67) | bracket `[0.36, 0.37]`; `a = 0.3865` **fails to converge** in this scheme (residual `6.0e-03`), single grid |
+| 283 | none — carrier of leg 210's finding | record sweep, 21 patterns / 1,239 files | 0 numeric values changed |
+| 284 | `a` at which the branch **folds** (turning point), by pseudo-arclength continuation in `(Ω_odd, ν, a)` from the independently-converged `a = 0.30` root | `a` treated as an unknown, not a scan parameter, so the fold is traversable | 4-grid monotone convergence `0.39259 → 0.38626 → 0.38592 → 0.38568`; fold spread `0.008719` (< pre-registered `0.02`); re-pin `0.3857 ± 0.004` |
+
+### 11.2 The determination
+
+**`a* ≈ 0.386` IS PINNED**, to roughly `2 × 10⁻³`, by two mutually independent methods: leg
+125's algebraic `Δ(a) = 0` crossing and leg 284's grid-converged pseudo-arclength turning point.
+Both are computations distinct from the flawed one (leg 185's `ν(a)` sign-crossing via
+fixed-`a` Newton restarts, refuted by its own straddling starts and by leg 210's independent
+non-reproduction).
+
+**Leg 210's exclusion bracket is explained, not outvoted.** Leg 210 used the same family of
+method leg 185 used — Newton restarted at each fixed `a` — which leg 284 subsequently showed
+(its own Findings 2 and 4) **folds and terminates near `a ≈ 0.386`** on every tested grid, with
+an augmented Jacobian that collapses toward singularity in the same neighborhood
+(`σ_min/σ_max` down to `3.454e-19` at `n = 1601`, seven orders below the control's drift). A
+fixed-`a` Newton scheme has no mechanism to track a branch through a point where its own
+Jacobian is singular; pseudo-arclength continuation is the standard remedy, which is exactly
+what distinguishes leg 284's instrument from leg 185's and leg 210's.
+
+**This is not retrofitted to the desired answer.** Leg 210's own report, written before leg 284
+existed, already recorded the predicted symptom without explaining it: `a = 0.3865` itself
+**fails to converge** in leg 210's scheme (residual `6.0e-03`), and its solution amplitude
+**collapses toward the trivial null** as `a` increases past its converged range (`a = 0.45`:
+160× collapse; Chen's `a = 1/2`: further collapse). Leg 284 independently supplies the
+mechanism — a fold with a singular Jacobian — for a symptom leg 210 had already measured and
+flagged as unexplained instability.
+
+### 11.3 What does not change
+
+**Leg 185's specific corroboration claim stays refuted**, exactly as leg 210 and leg 283
+recorded it: its own two starts straddled zero at `a = 0.3865` (`+0.00000035` / `−0.00425080`),
+an internal inconsistency independent of anything below. What this entry resolves is the
+separate question of whether `a*` is a real feature of Object B at all — it is, and it sits
+near `0.386`, corroborated by two methods leg 185 never used.
+
+**Leg 283's UNPINNED note is not deleted.** It was the correct reading of the evidence
+available on 2026-08-07 before leg 284 landed. Both `experiments/journal/leg_174.md` and
+`experiments/journal/leg_283.md` carry append-only pointers to this entry; nothing in either is
+reworded or removed.
+
+### 11.4 Where it was carried
+
+`experiments/journal/leg_174.md` (append at end, after leg 283's block), `experiments/journal/
+leg_283.md` (append at end), `writeup/novelty/leg_296.md`, `experiments/journal/leg_296.md`.
+Leg 174's catalog itself carries no `ν` magnitude and no `a*` value (per leg 283's 0-hit sweep,
+§10.5 above) — nothing there required a numeric edit.
+
+### The ceiling
+
+**0 numbers re-measured. 0 gate answers of legs 125/210/283/284 changed. 0 lines deleted
+anywhere.** This entry does not lift a ban, promote a route, or move a link of `L1 → L4`. `a*`
+is a float-computed feature (an algebraic crossing and a turning point) of a discretised,
+truncated profile equation — not a certificate and not an existence proof. Stage P0 is
 unaffected. Clay stays **~0.05%**.
