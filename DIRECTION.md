@@ -31,7 +31,7 @@ prose as before.
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
-| F | 281 | CVF | yes |
+| F | 288 | CANON | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
@@ -12098,12 +12098,16 @@ not this DM's.
 ### 280 — ROUTE-PUB2X: THE USER-GATED EIGHTH PASS — CORRECT THE TWO Xu-NORMALIZATION
 SITES (0.0420 → 0.057643, π not 2π) (BLOCKED ON USER SIGN-OFF, per the declared-final
 rule 278 landed under)
-**Thesis.** 277's verified finding above. Two sites only; the caveat's own structure is
-untouched (the 12.5× sweep stays; only Xu's constant and its derivation note change).
-**Gate.** (a) Both sites state 0.057643 with the half-line/π provenance and a dated note
-citing leg 277; (b) 278's artifact-scoped consistency verdict re-confirmed (no OTHER
-site quotes 0.0420); (c) 122-row trace green, byte-identical elsewhere; (d) zero
-arguments changed.
+**Thesis.** 277's verified finding above. AMENDED post-281 (undispatched, so the number
+stands): now FOUR sites under the same single sign-off — 277's two Xu-constant sites,
+plus 281's two (L442-446 states the dependence of 0.71465 BACKWARDS — it is
+convention-free to 1.87e-16; L420's "optimistic by 7.87×" is convention-relative,
+range 5.265-656.95, and unflagged). The caveat's structure is untouched.
+**Gate.** (a) All four sites corrected per 277's/281's verified findings, each with a
+dated note; (b) 278's artifact-scoped consistency verdict re-confirmed (no OTHER site
+carries any of the four defects); (c) CORRECTIONS.md entries appended for 277's and
+281's findings (281's pointer currently waits in experiments/journal/leg_281.md);
+(d) 122-row trace green, byte-identical elsewhere; (e) zero arguments changed.
   yes -> Bank. PUB2 re-closed; any NINTH pass likewise needs user sign-off.
   no -> Any resistance: STOP, escalate — at this iteration count nothing is guessed.
 **Territory.** the two named TECHNICAL sites, writeup/CORRECTIONS.md (append),
@@ -12502,3 +12506,70 @@ Nothing in this update lifts a ban. 252's findings are recorded as an exoneratio
 an artifact-portability defect — no Route-D v11 prose conclusion moves, and 236's
 escalation is explicitly held non-final pending re-basing. Clay stays ~0.05%. No new
 direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 281 (CVF) landed gate YES (32 quantities classified; two new
+PUB2 defects found, one BACKWARDS): 280 AMENDED to four sites under the one pending
+sign-off; slot F = fresh floor-eligible leg 288 (canonical-convention question)
+
+**281 landed, recorded:** all 32 PUB2/certificate numeric quantities classified by
+convention-dependence. Two corrections flagged for the document lineage: **PUB2
+L442-446 states 0.71465's dependence BACKWARDS** (it is convention-free to 1.87e-16);
+**L420's "optimistic by 7.87×" IS convention-relative (range 5.265-656.95) and is
+flagged nowhere.** 281 correctly did not touch CORRECTIONS.md (outside its declared
+territory — the same wall 277 hit); its pointer waits in its own journal.
+
+**Efficiency decision: 280 (undispatched, user-gated) is AMENDED in place to FOUR sites
+plus the CORRECTIONS.md entries — ONE sign-off covers everything.** The orchestrator
+should update the pending NEEDS-YOU item accordingly: the request is now "one narrow
+pass, four verified sites (277's two Xu-constant sites, 281's two convention sites),
+CORRECTIONS.md entries included." The eighth-pass rule is honored, not stretched — this
+is still one pass, gated on the same signature, with every fix verifier-sourced.
+
+**Slot F: fresh leg 288, drafted from 281's own result** [FLOOR-ELIGIBLE: math]:
+
+```
+### 288 — ROUTE-CANON: IS THERE A CANONICAL CONVENTION? (one named normalization in
+which every convention-relative quantity is simultaneously natural — the durable end of
+the caveat family)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 281's table splits the 32 quantities into convention-free (safe to quote
+bare) and convention-relative (each needing a pinning caveat). The caveat family
+(270/276/277/281, five findings and counting) exists because the record quotes
+convention-relative numbers without a fixed convention. The mathematical question: does
+ONE named convention exist (candidates enumerated in the novelty pass — Xu's half-line
+normalization, the operator-norm-induced scaling, the certificate's own X-norm choice)
+under which ALL convention-relative quantities take simultaneously natural values, such
+that future documents can state "all figures in convention C" once instead of caveating
+site by site?
+**Gate.** For the enumerated candidate conventions: does at least one make every
+convention-relative quantity in 281's table well-defined and stable (its value under C
+computed and banked), with the conversion factors to the other candidates tabulated?
+  yes -> Bank the recommendation + conversion table. Flag (not edit) for the document
+         lineage: any post-280 document pass may adopt convention C by citation. The
+         adoption itself is a document decision, not this leg's.
+  no -> Bank WHY no single convention serves all quantities (which pair of quantities
+        pulls in opposite directions) — that is itself the mathematical explanation of
+        why the caveat family kept recurring, worth having at full strength.
+**Territory.** experiments/p2_route_canon_v1_convention.py,
+               writeup/data/p2_route_canon_v1_convention.json,
+               writeup/novelty/leg_288.md, experiments/journal/leg_288.md.
+               Reads (never edits) 281's table/JSON, 277's method, 249's sweep data.
+**Difficulty.** standard
+**Independence.** Own module, read-only overlaps, edits no document. Slot F, now.
+Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (F: 281 → 288). **Floor status: 5/10
+strictly (288, 285, 284, 267, 264).**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated — now four sites under the one
+amended sign-off; 229 on 226; 231-234 on repairs; 221's landing unblocks 233). Next
+fresh leg number: **289.**
+
+Nothing in this update lifts a ban; 281's classifications are recorded as measurements,
+the backwards site as a defect awaiting the gated pass. Clay stays ~0.05%. No new
+direction question raised — the amended 280 sign-off replaces, not adds to, the pending
+user item.
