@@ -153,6 +153,13 @@ it off the branch and keeps it off.
 `experiments/JOURNAL.md`'s pointer and every DM summary name Route-D v11 only. Route-D v12's
 plausible exposure appears solely in leg 202's own journal. It is an open, un-re-run question.
 
+> **Resolved 2026-08-07 (leg 295).** The `a_max_machine` exposure named in the table row above
+> is closed: two independent methods confirm the corrected value **0.55** (leg 236's
+> dependency-trace row-exclusion; leg 226's adversarial D2/D3 repair — both landing on the same
+> number from different code paths), reconciled and provenance-tiered by leg 294's consolidated
+> report (`writeup/data/p2_route_v11x_v1_consolidated.json`). This note adds the resolution; the
+> table row's own text, above, is unchanged.
+
 **The corroboration that makes this hard to argue with:** Route-D v11 *already computed the
 diagnostic that catches this*, externally, as a `weighted_defect`, and banked values that blow
 up exactly where leg 202 measures the departure — **0.50 at `a = 0.5`, 4788 at `a = 0.8`,

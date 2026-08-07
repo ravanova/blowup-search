@@ -41,6 +41,7 @@ lesson 35). This file is the index, not the substitute.
 
 | 9 | leg 185's `a = 1/2` `ν` **magnitudes** (`−0.00817525` / `−0.00895316`), banked in a table beside a refined `a = 0.30` number and read downstream as measurements; and its `a* = 0.3865` **cross-check**, banked as *"two different calculations agreeing on the same number"* | **leg 210** (2026-08-07, Route-M2SV, parked branch `leg/210-m2sv-v1` @ `6e06880`, independently discretized re-derivation) → **leg 283** (this entry; swept the record and carried both halves to every site) | **SPLIT, and both halves matter.** UP: `ν = +0.01799364` at `a = 0.30` is **independently confirmed to 1.198e-06 relative (~5.9 digits)**, and the sign law is **strengthened to gauge-independence** (`ν → μ²ν` under dilation, `μ² > 0`, so no gauge can flip it). DOWN: the `a = 1/2` magnitudes are **sign-only** — leg 210's independent value is `−0.00082927`, a **10.33×** gap, and **neither scheme is grid-converged there** (leg 185's own ladder spans **62.2%** non-monotonically; leg 210's spans **119.2%** with amplitude collapsing toward the trivial null). The `a*` cross-check is **UNPINNED** by leg 185's own data — its two starts **straddle zero** at `a = 0.3865` (`+0.00000035` / `−0.00425080`). **Leg 125's own `a*` value is untouched.** §10 below |
 | 10 | Whether `a*` itself (as opposed to leg 185's flawed corroboration of it) is a real, locatable feature of Object B — left an open, un-adjudicated three/four-way contradiction after §10/leg 283: leg 210's independent bracket `[0.36, 0.37]` **excludes** leg 125's `a* = 0.3864963972206034` | **leg 284** (2026-08-07, Route-NU12, pseudo-arclength continuation — a third, independent method) → **leg 296** (this entry; read all four reports method-by-method and reconciled) | **`a* ≈ 0.386` IS PINNED**, by two mutually independent methods agreeing to ~2e-3: leg 125's algebraic `Δ(a) = 0` crossing (`ν = 0`, residual `1.933e-15`) and leg 284's grid-converged pseudo-arclength turning point (`0.3857 ± 0.004`, monotone over 4 grids). Leg 210's exclusion bracket is **explained, not outvoted**: it used the same fixed-`a` Newton-restart method leg 284 showed (Findings 2 and 4) folds and develops a singular Jacobian (`σ_min/σ_max = 3.454e-19` at `n = 1601`) in exactly this neighborhood — and leg 210's own report already recorded the predicted symptom (non-convergence at `a = 0.3865`, residual `6.0e-03`; amplitude collapse toward the trivial null beyond it) independently of anything leg 284 later found. Leg 185's specific corroboration claim **stays refuted** — its two starts still straddle zero at `a = 0.3865`. §11 below |
+| 11 | PUB3's `a_max_machine` exposure row (`writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md`, the Route-D v11 "Exposure" table) named the scalar as materially exposed but never carried a resolution once one existed; leg 294's own flag additionally mis-cited the site as line 134 quoting the literal `a_max_machine=1.0` — checked directly, no such literal string exists anywhere in the file (line 134 is unrelated prose; the actual site is the table row at line 148, which names the scalar without printing a value) | **leg 236** (row-exclusion) + **leg 226** (D2/D3 repair), reconciled by **leg 294** → **leg 295** (this entry; located the true site, found leg 294's line/citation imprecise, appended the resolution) | `a_max_machine`'s corrected value **0.55** (confirmed by two independent methods from the stale `1.0`) is now recorded at the site as a dated, additive footnote — **zero** existing sentence reworded. §12 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -860,3 +861,54 @@ anywhere.** This entry does not lift a ban, promote a route, or move a link of `
 is a float-computed feature (an algebraic crossing and a turning point) of a discretised,
 truncated profile equation — not a certificate and not an existence proof. Stage P0 is
 unaffected. Clay stays **~0.05%**.
+
+---
+
+## §12 — PUB3's `a_max_machine` exposure row, resolved (and leg 294's own site citation corrected)
+
+### 12.1 The dispatch, and what checking it directly found
+
+Leg 294's consolidated Route-D v11 impact-trace (`writeup/data/p2_route_v11x_v1_consolidated.json`,
+`experiments/journal/leg_294.md:97`) named one live document defect: `writeup/4_p2_lottery/
+TECHNICAL_P2_PUB3_V1.md:134` "quotes `a_max_machine=1.0` in a consumer table," stale against the
+corrected value `0.55`.
+
+Checked directly, not assumed: `origin/main`'s line 134 (unchanged since before leg 294 ran —
+last touch was leg 283's `0aa9da9`, an ancestor of leg 294's own landing commit `07c1098`) reads
+`` `c(a = 1.50)` returns **0.20427 / 0.23717 / 0.97282** at `n = 101 / 201 / 301`, all three ``,
+unrelated to `a_max_machine`. A whole-file, case-insensitive, wrap-immune sweep (the file
+whitespace-normalized to a single line first, so a Markdown line-wrap cannot hide a match) for
+the pattern `a_max_machine[^a-zA-Z0-9]{0,20}=?\s*1\.0` returns **zero hits** anywhere in
+`TECHNICAL_P2_PUB3_V1.md`. The literal string `a_max_machine=1.0` exists only in leg 294's own
+`experiments/journal/leg_294.md` and `writeup/novelty/leg_294.md` — leg 294 paraphrased the
+table row as if it printed the stale number; it does not.
+
+The real site is line 148, the Route-D v11 row of the "Exposure" consumer table: it **names**
+`a_max_machine` as a banked, exposed quantity and grades it **DIRECT AND MATERIAL**, but prints
+no numeric value for it at all. There was no literal digit to swap.
+
+### 12.2 What was done
+
+Because the site already correctly flags exposure without asserting the stale value as settled,
+the gate's intent ("does the site state 0.55 with a dated note citing legs 236/226/294") is met
+additively: one dated blockquote note was appended immediately after the exposure table (before
+the following section), stating the resolved value — `a_max_machine`: `1.0 → 0.55`, confirmed by
+two independent methods (leg 236's dependency-trace row-exclusion; leg 226's adversarial D2/D3
+repair), reconciled by leg 294's consolidated report. **Zero existing sentences were reworded**;
+the table row's own text is untouched.
+
+### 12.3 The sweep for sibling repeats
+
+Case-insensitive, wrap-immune (whitespace-normalized), scan of every `writeup/**/*.md` and
+`experiments/**/*.md` for `a_max_machine` co-occurring with the stale value `1.0`. Hits outside
+leg 294/295's own notes: four lines in `experiments/JOURNAL.md` (append-only history), all of
+which **already state the correction inline** — e.g. `` a_max_machine 1.0->0.55 `` and
+`` `a_max_machine`: 1.0 -> 0.55, confirmed by two independent methods ``. None asserts `1.0` as a
+current, uncorrected value. No sibling document needed a fix.
+
+### The ceiling
+
+**0 numbers re-measured. 0 existing sentences reworded. 0 lines deleted anywhere.** This entry
+does not touch `writeup/data/p2_route_d_v11_anchor.json` on `main` (still stale by ~6.55e+11x on
+`margin` — leg 252's own integration decision, unmade, reserved as leg 297) and does not touch
+any argument's meaning beyond adding the resolved scalar. Clay stays **~0.05%**.
