@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 210 | M2SV | no |
-| C | 279 | Z1X | no |
+| C | 282 | RMX | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 281 | CVF | yes |
@@ -12153,3 +12153,71 @@ Nothing in this update lifts a ban; 277's correction is recorded against leg 249
 bridge figure, with the gate property explicitly invariant. Clay stays ~0.05%. ONE
 direction item goes to the user: the 280 sign-off, exactly as the eighth-pass rule
 requires.
+
+---
+
+## DM update, 2026-08-07 — 272 and 279 landed (272: 30 occurrences 263's sweep missed,
+0 wrong edits, 1 warrant defect at plan_of_record.py:868; 279: Z_1 closure applied at 13
+sites): both residue families BUNDLED into light leg 282 for slot C; sweep-robustness
+folded into the standing rule
+
+**272 (WESCV) landed, gate NO on clause (a), recorded at full strength:** an
+independent case-insensitive/wrap-immune sweep found **30 occurrences leg 263's original
+sweep missed** (17 files) — a case-sensitivity asymmetry between 263's two patterns plus
+a hyphenated-compound/line-wrap blind spot. Severity, measured not assumed: **0 of 30
+produced a wrong edit**; 1 in 263's own territory (self-mitigating — the next sentence
+already carries the correct caveat); **1 sits inside the stage-V ban's lift condition
+(plan_of_record.py:868) — a WARRANT defect, not a text defect** (text byte-identical,
+independently pins correctly seven lines above; escalation-flag rule honored by 272,
+direction safe). Clauses (b)/(c)/(d) all YES: 263's arithmetic reproduces exactly, its
+8 edits correctly pinned, plan_of_record.py genuinely byte-identical.
+
+**279 (Z1X) landed:** the EXPLAINED closure applied at all 13 sites in 9 files
+(repository-wide sweep, append-only, 0 lines deleted, 0 arguments changed). Forward
+flag, out of its scope: PUB3 and leg 223's journal still reproduce leg 218's incomplete
+six-name caller list.
+
+**Standing rule amended (the meta-lesson from 272):** all future record sweeps use
+case-insensitive, line-wrap-immune, hyphenation-tolerant patterns, and state their
+pattern robustness in the report — a sweep's blind spots are part of its result.
+
+**Slot C: light leg 282, bundling both residue families (this DM's call on "dedicated
+leg now or wait": now, because the slot is open, the reserve is otherwise empty, and
+scattering three tiny fixes across future legs is how documents needed seven passes):**
+
+```
+### 282 — ROUTE-RMX: RECORD-MAINTENANCE BUNDLE — 272's THREE SMALL REWORKS + 279's
+FORWARD FLAG (light, append-only where possible)
+**Thesis.** Four small, verified, non-urgent record fixes, bundled: (1) 263's one
+in-territory missed pointer (272's finding, self-mitigating but still worth the
+pointer); (2)+(3) 263's two count corrections (class P is 28 not 18; second-sweep files
+32 not 34); (4) PUB3 + leg 223's journal updated from 218's incomplete six-name caller
+list to 228's verified ten-importer enumeration (279's forward flag).
+**Gate.** (a) All four fixes applied with dated pointers citing 272/228/279
+respectively; (b) plan_of_record.py NOT touched (the :868 warrant defect is recorded in
+CORRECTIONS.md as warrant-noise with 272's locators — the text is correct and stays
+byte-identical); (c) sweep for any OTHER site quoting the six-name list or the wrong
+counts, using standing-rule-robust patterns; (d) no other meaning changed.
+  yes -> Bank. Both landings' residue is zero.
+  no -> Anything resisting: CORRECTIONS.md entry, escalate only if argument-touching.
+**Territory.** the named sites (263's journal/report, PUB3's caller-list site, leg 223's
+               journal — append-only), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_282.md, experiments/journal/leg_282.md.
+               Reads (never edits) 272's/279's/228's landed reports.
+**Difficulty.** light
+**Independence.** Record-maintenance family, all sources landed. Slot C, now.
+Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 279 → 282). **Floor status: 3/10
+strictly (281, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated — sign-off request now with the
+user directly; 229 on 226; 231-234 on repairs). Pending generators unchanged: the
+packet response, the 280 sign-off, 226's report, 210's pending verification, 264/267/281
+in flight. Next fresh leg number: **283.**
+
+Nothing in this update lifts a ban — the :868 finding is explicitly a warrant defect
+with the ban's text byte-identical and correctly pinned nearby; nothing about the ban's
+substance moves. Clay stays ~0.05%. No new direction question raised.
