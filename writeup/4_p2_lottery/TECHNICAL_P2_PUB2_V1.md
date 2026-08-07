@@ -43,7 +43,7 @@ That question has an axis, and the axis now has four points on it, all measured,
 |---|---|---|---|
 | 2 | weighted `ℓ¹` of Fourier coefficients, `w_k = (1+k)^s`, `s < 1` | `Z₁ ≥ 1` for **every** bounded approximate inverse | **theorem** (leg 127) |
 | 3 | origin-`H²` on the line (Xu's realization) | structurally viable formulation — **capped at `a = 0` exactness**, with nothing transferring to the real target | scoping YES, **escalated not built** (leg 163) |
-| 3.5 | origin-`H²`, **built** rather than scoped | the formulation closes as a formulation (`σ_min = 0.0908`, truncation-independent) **and** the block-diagonal `A` still fails leg 54's `Z₁` battery at best **140.72** where `< 1` is needed | construction gate **YES on both conjuncts, with one magnitude that says NO** (leg 176) |
+| 3.5 | origin-`H²`, **built** rather than scoped | the formulation closes as a formulation (`σ_min = 0.0908`, a monotone-decreasing ladder flat to **0.139 %** over a 16-fold truncation range — evidence of a positive limit, not a proved floor) **and** the block-diagonal `A` still fails leg 54's `Z₁` battery at best **140.72** where `< 1` is needed | construction gate **YES on both conjuncts, with one magnitude that says NO** (leg 176) |
 | 4 | anything between them | no scale avoids both obstructions; the window has width **exactly zero** | scoping **NO** (leg 182) |
 
 Read separately these are three leg reports. Read together they are one statement, and §5 is
@@ -172,7 +172,7 @@ gap of `1/2`. The question a scoping leg could actually answer is narrower and s
 |---|---|---|
 | a **split** | Xu's Hardy block-diagonalisation `L₀ = L₀⁺ ⊕ L₀⁻`, the two blocks intertwined by conjugation and **not coupled** | block coupling **exactly zero**, against `K/2` for every split in `ℓ¹_w` |
 | a **shape** for `A` | Xu's explicit resolvent kernel: a generalized Hardy–Mellin operator of **exact** norm `1/α` plus a **rank-two** correction whose only poles are the two symmetry eigenvalues | Mellin symbol norm re-derived, max relative error **0.0**; the closed-form lower witness reaches **99.80–99.99 %** of the bound over `α = 0.05 … 1.5` |
-| **no §2-class obstruction** | — | `σ_min` bounded away from zero and truncation-independent (below) |
+| **no §2-class obstruction** | — | `σ_min` does not decay with the truncation the way §2's does — a monotone-decreasing ladder that **flattens** (§3.5), not a proved floor; §3.5 states that limitation in full |
 
 The supporting identities, re-derived numerically with every derivative analytic (three
 independent quadratures, no finite differences): the resolvent identity holds to a worst
@@ -303,14 +303,36 @@ bound closing down onto `σ_min` rather than a Galerkin section:
 
 | `N` | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 |
 |---|---|---|---|---|---|---|---|---|
-| `σ_min` | 0.0927566 | 0.0911590 | 0.0909310 | 0.0908878 | 0.0908506 | 0.0908234 | **0.0908047** | *0.0909363* |
+| `σ_min` | 0.0927566 | 0.0911590 | 0.0909310 | 0.0908878 | 0.0908506 | 0.0908234 | **0.090804** | *0.0909363* |
+
+*(The `N = 512` cell is quoted to the six figures the computation supports. Leg 176 banked
+`0.09080465147034879` there; an independent exact-rational re-derivation (leg 249, branch
+`leg/249-h2cv2-v2` at `e9db984`) **proves** that value wrong from the 7th significant figure —
+the pencil `AᵀG_cA − λG_d` is not positive definite at that `λ`, so `σ_min` is strictly below it
+— and certifies `σ_min ∈ (0.090804094, 0.090804194)`. The cause is the whitening leg 176 uses,
+whose error grows with the Gram's condition number; a Cholesky whitening of the same matrices
+agrees with the exact tier at every rung, and under it the ladder is monotone decreasing through
+`N = 2048`, so the `N = 1024` rise below is a property of leg 176's whitening rather than of the
+Gram — the reliable window is **wider** than leg 176 claimed, not narrower. Full record:
+[`writeup/data/p2_route_h2c_v1_construction_correction_leg268.json`](../data/p2_route_h2c_v1_construction_correction_leg268.json).)*
 
 **`σ_min = 0.0908`, `‖R‖_X = 11.0127`**, monotone decreasing through `N = 512`, varying by
 **0.139 % over a 16-fold truncation range**. The `N = 1024` row rises instead of falling; leg 176
 attributes that to the float floor of an `X` Gram whose entries reach ~1e12 and reports it as the
 reason the reliable window stops at 512. In its own words this is **"float64 evidence of a
-positive limit, not a proof of one."** The tail block closes too — `‖T⁻¹‖_X = 4.026`,
-truncation-independent, where in `ℓ¹_w` (legs 51/53) the tail inverse norm **diverged** with `M`.
+positive limit, not a proof of one."** The tail block closes too, and it earns exactly that same
+reading and no stronger one: `‖T⁻¹‖_X` **rises monotonically** across the ladder
+(`3.994032 → 4.012071 → 4.021340 → 4.026241 → 4.028864` at `N = 64 … 1024`, **0.865 %** in
+relative terms) with decrements shrinking geometrically (`1.126e−3 → 5.745e−4 → 3.027e−4 →
+1.617e−4`, ratios `0.510 / 0.527 / 0.534`) — float64 evidence of a **finite limit near 4.032**,
+not a proof of one, and **not** a truncation-independent value. Earlier drafts of this note
+quoted `4.026, truncation-independent`; that is the value at one rung of a sequence still
+climbing at `N = 1024`, and it understates the limit by **0.14 %**. What survives untouched is
+the comparison the number is here for: this sequence **converges**, where in `ℓ¹_w` (legs 51/53)
+the tail inverse norm **diverged** with `M`. (At `N = 512` leg 249's exact arithmetic certifies
+`‖T⁻¹‖_X ∈ [4.02623993, 4.02624155]`; leg 176's banked `4.02614534796022` lies **outside** that
+bracket by `6.0e−5` relative, same whitening mechanism as above and recorded in the same
+correction artifact. Leg 176's own JSON `reading` field already read `4.03`.)
 And the two controls report the other answer: unbordered `σ_min` collapses to the float floor
 (1.55e−15 → 6.97e−14), and the loose `L²` realization decays like `N^{−1.49}` with **no gap at
 all** — so the origin condition is now a measured magnitude rather than a citation.
@@ -341,7 +363,8 @@ all three sites, and it turns out to be a sign, not a magnitude.** Earlier draft
 states plainly that it was **optimistic by 7.9×**: *"That is a witness, not a bound. The measured
 value is 0.0908."* Reproducing leg 163's own quantity from the closed form gives 0.868155 over four
 data while the operator norm is 11.0 — i.e. **random low-mode data does not find the worst
-direction.** Tracing it further: `0.71465` is exactly `1/1.3993`, the reciprocal of leg 163's own
+direction.** Tracing it further: `0.71465` is `1/1.3993` rounded up in the fifth decimal
+(`1/1.3993 = 0.7146430`, a round-up of `7.0e−06`; §3.2 records the same provenance), the reciprocal of leg 163's own
 largest sampled ratio, and since each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, a finite family of
 such ratios bounds `σ_min` **only from above**. So leg 163's data support `σ_min ≤ 0.71465`, the
 `≥` was inverted, and **the two legs never actually disagreed** — `0.0908 ≤ 0.71465`. All three
@@ -353,7 +376,7 @@ sharpen how one property may be stated. The `≥` sign was carrying the claim "*
 zero**", i.e. a lower bound — and **neither leg proves one**: leg 176's own domain-only truncation
 is, in its words, *"an upper bound closing down onto `σ_min`"*, and its ladder is *"float64
 evidence of a positive limit, not a proof of one."* What is established is a monotone-decreasing
-ladder that **flattens** (0.0908878 → 0.0908047 over `N = 64 … 512`, **0.0915 %**; 0.139 % over the
+ladder that **flattens** (0.0908878 → 0.090804 over `N = 64 … 512`, **0.0920 %**; 0.139 % over the
 full 16-fold range) together with two controls that report the other answer — against `ℓ¹_w`, where
 the analogous ladder **decays** like `M^{−(1−s)}`. That contrast is a contrast of ladder behaviour
 in both spaces, which is all §3–§5 ever use it for, and it survives the correction intact. What
@@ -545,7 +568,9 @@ has four parts:
 3. **The origin-`H²` endpoint is structurally viable and simultaneously worthless for the real
    target, and both halves are load-bearing.** Split, shape and bordered rows are explicit and
    verified; `σ_min` measured at **0.0908** (§3.5; the `0.71465` of earlier drafts was an upper
-   bound from three data, not a floor), truncation-independent to 1.44e−04; the `ℓ¹_w` obstruction does
+   bound from three data, not a floor) on a ladder that **flattens** rather than decaying —
+   0.139 % over a 16-fold truncation range, with a quadrature-window spread of 1.44e−04, and no
+   proved floor anywhere in it; the `ℓ¹_w` obstruction does
    not recur. And every one of those objects is a consequence of `a = 0` exactness (O3, FATAL
    for transfer), the operator is non-normal so invertibility is not stability (O2, HIGH
    downstream), and what a certificate there would certify is a closed form its author already

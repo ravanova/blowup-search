@@ -1,0 +1,93 @@
+{
+  "artifact": "CORRECTION RECORD -- companion to writeup/data/p2_route_h2c_v1_construction.json",
+  "issued_by_leg": 268,
+  "route": "ROUTE-PUB2R",
+  "date": "2026-08-07",
+  "status": "The banked artifact p2_route_h2c_v1_construction.json (leg 176) is UNMODIFIED and stays the primary record.  This file is an explicit, citable correction layer over exactly two of its numeric fields, plus one descriptor, established by leg 249's independent exact-rational re-derivation.  Nothing here was measured by leg 268; leg 268 transcribes leg 249's certified data and applies it to the submission-track prose.",
+  "source_of_the_correction": {
+    "leg": 249,
+    "route": "ROUTE-H2CV2",
+    "branch": "leg/249-h2cv2-v2",
+    "commit": "e9db984b809da0feff7ce148ae8e7d839daba05a",
+    "certified_data_file": "writeup/data/p2_route_h2cv_v1_postconstruction.json (on that branch)",
+    "report": "experiments/journal/leg_249.md (on that branch)",
+    "method": "exact rational arithmetic (fractions.Fraction), LDL^T over Q with a Haynsworth bordering for the rank-one border row; sigma_min is BRACKETED by bisecting on dyadic lambda for definiteness of A^T G_c A - lambda G_d, not measured -- no rounding enters the verdict",
+    "status_of_249": "ESCALATED; its branch was pushed but never merged to main.  Its findings are what this record carries."
+  },
+  "corrections": [
+    {
+      "id": "K1",
+      "banked_field": "C1_bordered_sigma_min_X.sigma_min_at_512",
+      "banked_value": 0.09080465147034879,
+      "verdict": "PROVED WRONG, not merely re-measured differently",
+      "proof": "The pencil A^T G_c A - lambda G_d at lambda = (0.09080465147034879)^2 is NOT positive definite in exact rational arithmetic.  sigma_min is therefore STRICTLY BELOW the banked value.  The verdict contains no floating-point step.",
+      "certified_enclosure": [0.090804094, 0.090804194],
+      "certified_enclosure_is_open_interval": true,
+      "independent_float_value_cholesky_whitening_at_512": 0.09080414383680567,
+      "absolute_error_of_banked_value": 5.08e-07,
+      "first_wrong_significant_figure": 7,
+      "supported_digits_for_quotation": "0.090804",
+      "mechanism": "leg 176's eigh-based whitening loses accuracy as the X Gram's condition number grows; its error against the exact enclosure grows monotonically along the ladder 8.3e-13 -> 1.5e-11 -> 1.8e-11 -> 1.5e-10 -> 3.8e-10, reaching 5.08e-07 at N = 512.  A Cholesky whitening of the same matrices agrees with the exact tier at every rung.",
+      "headline_unaffected": "The quoted headline sigma_min = 0.0908 reproduces exactly.  Only the 7th significant figure onward is wrong."
+    },
+    {
+      "id": "K2",
+      "banked_field": "C2_tail_block_sigma_min.tail_inverse_norm_K2_at_512",
+      "banked_value": 4.02614534796022,
+      "verdict": "OUTSIDE the certified bracket",
+      "certified_bracket": [4.026239930769523, 4.026241551830974],
+      "independent_float_value_at_512": 4.026240741300086,
+      "relative_discrepancy_of_banked_value": 6.0e-05,
+      "corresponding_tail_sigma_min_at_512": 0.24837064,
+      "banked_tail_sigma_min_at_512": 0.24837652731703622,
+      "mechanism": "same eigh-whitening mechanism as K1; the banked N = 128 tail value is out by 3.7e-09 against its own exact enclosure.",
+      "headline_unaffected": "The quoted headline ||T^{-1}||_X = 4.026 reproduces to all four figures it is quoted to."
+    },
+    {
+      "id": "K3",
+      "banked_field": "C2_tail_block_sigma_min.reading (the descriptor 'truncation-independent')",
+      "banked_text": "here it converges, ||T^{-1}||_X = 4.03 at K=2, truncation-independent.",
+      "verdict": "The DESCRIPTOR 'truncation-independent' is FALSE at the precision the number is quoted to.  The VALUE 4.03 in this same reading field is the one the data support.",
+      "evidence": {
+        "ladder_N": [64, 128, 256, 512, 1024],
+        "tail_sigma_min": [0.25037356, 0.24924782, 0.24867332, 0.24837064, 0.24820892],
+        "tail_inverse_norm": [3.994032, 4.012071, 4.021340, 4.026241, 4.028864],
+        "monotone": "rising at every rung, still rising at N = 1024",
+        "relative_rise_across_ladder": 0.00865,
+        "decrements": [1.126e-03, 5.745e-04, 3.027e-04, 1.617e-04],
+        "decrement_ratios": [0.510, 0.527, 0.534],
+        "extrapolated_sigma_limit": 0.24803101644034442,
+        "extrapolated_inverse_norm_limit": 4.0318,
+        "understatement_of_4_026_against_the_limit": 0.0014
+      },
+      "correct_reading": "A monotone sequence with geometrically shrinking decrements -- float64 evidence of a finite limit, not a proof of one, which is exactly the reading leg 176 gives its OTHER number.  The limit is approximately 4.0318, not 4.026.",
+      "note": "Leg 176's own reading field already said 4.03; the journal and PUB2 tightened it to 4.026 on the way out, to a figure the data do not support."
+    }
+  ],
+  "what_is_NOT_corrected": {
+    "leg_176_gate_answer": "UNCHANGED and independently confirmed.  Leg 249 re-derived every matrix, identity and convergence claim from the definitions and all of them survive.",
+    "leg_176_conclusions": "UNCHANGED: the formulation closes; sigma_min is bounded away from zero uniformly in the truncation; the tail inverse norm CONVERGES where ell^1_w's DIVERGED; Z_1 still fails at 140.72.",
+    "the_ell1w_contrast": "UNAFFECTED.  It is a contrast between a converging sequence here and a diverging one there (legs 51/53).  Convergence to 4.0318 makes that contrast exactly as strong as convergence to 4.026 would -- which is why this is a precision-and-wording correction and not an escalation of PUB2's argument.",
+    "two_findings_that_strengthen_leg_176": [
+      "Its reliable window is WIDER than it claimed: under a Cholesky whitening the sigma_min ladder is monotone decreasing through N = 2048.  The N = 1024 rise is a property of leg 176's eigh whitening, not of the X Gram's float floor.",
+      "Its Xu closed-form reproduction is 7.1x BETTER than its own residual metric reports: its banked 4.767e-15 measures its own floating-point residual assembly; against an exact evaluation its u(y) is correct to 6.74e-16."
+    ],
+    "convention_caveat_recorded_by_249": "sigma_min is convention-relative: the X + C Gram puts unit weight on the border amplitude while the X block carries the bare Laguerre normalization.  Sweeping that weight over 10^-2..10^2 moves sigma_min across 0.01086..0.13580 (factor 12.5); adopting Xu's y-space normalization (carrying the 2 pi) gives 0.0420 instead of 0.0908.  The GATE property -- bounded away from zero uniformly in the truncation -- is invariant; the DIGITS are not."
+  },
+  "sites_updated_by_leg_268": {
+    "writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md": [
+      "section 1 summary row (origin-H^2 line): 'truncation-independent' replaced by the measured flatness magnitude",
+      "section 3.1 conjunct table, the 'no section-2-class obstruction' check cell: no longer presents a proved floor, points at what section 3.5 actually withdraws",
+      "section 3.2 provenance note: unchanged (it already disclosed the round-up)",
+      "section 3.5 sigma_min ladder, N = 512 cell: 0.0908047 -> 0.090804, with the certified enclosure footnoted",
+      "section 3.5 tail sentence: the 4.026 / 'truncation-independent' claim rewritten per leg 249's recommendation",
+      "section 3.5 provenance paragraph: '0.71465 is exactly 1/1.3993' -> round-up disclosed here too",
+      "section 5 item 3: 'truncation-independent to 1.44e-04' restated as the flatness of the ladder, with no floor claimed"
+    ],
+    "writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md": [
+      "the 'independent re-derivation has not reported' sentence and the closing-caveat 'independent check still outstanding' sentence: the check HAS now reported (leg 249, exact rational arithmetic); it confirms the conclusions and corrects digits"
+    ]
+  },
+  "instruction_to_a_future_leg": "Do NOT hand-edit p2_route_h2c_v1_construction.json.  A regeneration of that artifact, if one is ever authorised, must be done by a leg that owns leg 176's territory and must cite leg 249's certified brackets recorded above.  Until then, this file is the correction of record and any quotation of C1 sigma_min_at_512 or C2 tail_inverse_norm_K2_at_512 must carry it.",
+  "ceiling": "Verifying a number does not lift the ceiling attached to it.  a = 0 only; float64 and exact rationals, nothing interval-enclosed in the interval-arithmetic sense; what is certified is invertibility of an operator Xu already inverts in closed form.  No link of the L1 -> L4 chain moved.  Clay odds unchanged at ~0.05%.  No ban lifted.  No GA compute."
+}

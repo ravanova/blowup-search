@@ -100,8 +100,14 @@ constant was doomed for **every** bounded choice. Here the operator does have a 
 failed is the **shape** we chose for the approximate inverse. That is a narrower failure, and we
 are careful not to convert it into a promise: nobody has tested whether a different shape closes it.
 
-Two honesties about that number. It is ordinary floating point, one leg's own measurement — the
-independent re-derivation we commissioned has not reported. And it revises us, not the paper: the
+Two honesties about that number. It is ordinary floating point, one leg's own measurement — and
+the independent re-derivation we commissioned has since reported, in exact rational arithmetic
+rather than a second floating-point run. It confirms the construction and the verdict, and it
+corrects digits below the ones we quote: two banked values are wrong in their fifth and seventh
+significant figures, and one descriptor we had attached to the tail piece — that its value is
+*independent* of the truncation — is simply false. That piece rises steadily and converges to
+about `4.03`, not to the `4.026` we had printed. None of that moves the yes or the no; it moves
+what we are entitled to print. And it revises us, not the paper: the
 figure `0.71465` quoted earlier in this piece's technical companion was a three-sample **witness**,
 and the construction found the true value **7.9× smaller**. The companion now carries `0.0908` at
 all three of those places. The revision turned out to be a **sign** rather than a magnitude:
@@ -193,7 +199,9 @@ rigorous** in the computer-assisted-proof sense, including the part we call a th
 proof is exact but whose confirming measurements are not. We had not built a certificate in the
 second room when this was written; the leg authorised to try has since reported, and its outcome
 is the two-halved one above — a formulation that closes and a proof constant that does not, on one
-leg's own float64 measurements, with the independent check still outstanding. Nothing in the rest
+leg's own float64 measurements. The independent check has since reported: it confirms both halves
+by exact-rational re-derivation and corrects digits below the ones quoted here, as described
+above. Nothing in the rest
 of this piece depends on it.
 
 And one framing we are careful never to use, because it is the tempting and wrong one: *"the
