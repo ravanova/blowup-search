@@ -1,0 +1,41 @@
+{
+  "artifact": "READING-FIELD ANNOTATION -- second companion to writeup/data/p2_route_h2c_v1_construction.json",
+  "issued_by_leg": 274,
+  "route": "ROUTE-J176R2",
+  "date": "2026-08-07",
+  "relation_to_the_first_companion": "writeup/data/p2_route_h2c_v1_construction_correction_leg268.json (leg 268) corrects two NUMERIC fields plus the descriptor in C2_tail_block_sigma_min.reading.  It does NOT cover C1_bordered_sigma_min_X.reading.  This file covers exactly that one field, and nothing else.  Both companions are in force simultaneously; neither supersedes the other.",
+  "status": "The banked artifact p2_route_h2c_v1_construction.json (leg 176) is UNMODIFIED and stays the primary record.  Every measured value in it is untouched by this file.  Nothing here was measured by leg 274; leg 274 annotates a prose field whose first sentence contradicts its own last sentence, so that a future quoter is directed to the corrected framing instead of regenerating a defect the repository spent legs 250, 268 and 271 removing from PUB2's prose.",
+
+  "annotations": [
+    {
+      "id": "A1",
+      "banked_field": "C1_bordered_sigma_min_X.reading",
+      "banked_text_verbatim": "BOUNDED AWAY FROM ZERO and truncation-independent.  The N=1024 row rises instead of falling -- that is the float floor of an X Gram whose entries reach ~1e12, not a mathematical statement, and it is why the reliable window stops at 512.  This is float64 EVIDENCE of a positive limit, not a proof of one: a decreasing positive sequence is reported as what it is.",
+      "what_is_wrong_with_it": "The field OPENS with 'BOUNDED AWAY FROM ZERO and truncation-independent' -- an unqualified two-part claim -- and only its LAST sentence supplies the hedge ('float64 EVIDENCE of a positive limit, not a proof of one').  A reader or a later document quoting the field's opening phrase alone carries away two assertions the repository's own data do not support at the precision the numbers are quoted to.",
+      "verdict_on_each_half": {
+        "bounded away from zero": "SUPPORTED ONLY AS FLOAT64 EVIDENCE, not as a proof.  The field's own last sentence says so.  No proved floor on sigma_min is established anywhere in leg 176 or in PUB2; TECHNICAL_P2_PUB2_V1.md section 3.5 states that limitation in full.",
+        "truncation-independent": "FALSE at the precision the ladder is quoted to.  The sigma_min ladder over the reliable window [32, 64, 128, 256, 512] varies by relative_spread = 0.0013899483438452888, i.e. 0.139 % over a 16-fold truncation range -- flat, measurably, but not independent.  The companion descriptor correction for the TAIL block is leg 268's K3; this entry is its C1 counterpart."
+      },
+      "corrected_framing_to_quote_instead": "sigma_min is FLAT across the reliable window -- 0.0908, varying by 0.139 % over a 16-fold truncation range (N = 32 ... 512) -- which is float64 EVIDENCE of a positive limit and not a proof of one.  No proved floor is claimed.",
+      "banked_values_this_annotation_changes": "NONE.  ladder, reliable_window, sigma_min_at_512, resolvent_norm_at_512, spread_over_reliable_window, relative_spread, monotone_decreasing_through_512 and n1024_breaks_monotonicity are all left exactly as banked, and this file asserts nothing about any of them beyond leg 268's already-recorded K1 correction to sigma_min_at_512's 7th significant figure onward.",
+      "also_note": "Leg 268's K1 established that leg 176's eigh whitening, not the X Gram's float floor, is what makes the N = 1024 row rise; under a Cholesky whitening the ladder is monotone decreasing through N = 2048.  So the reading field's stated CAUSE for the N=1024 rise is also superseded -- by leg 268/249, not by this leg -- and the reliable window is WIDER than leg 176 claimed, not narrower."
+    },
+    {
+      "id": "A2",
+      "scope": "prose derived from these fields, not a banked field",
+      "site": "writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md section 3.5, the ||T^{-1}||_X sentence (L330-333 before this leg)",
+      "what_was_wrong": "The sentence stated that ||T^{-1}||_X rises monotonically across the ladder 3.994032 -> 4.012071 -> 4.021340 -> 4.026241 -> 4.028864 'with decrements shrinking geometrically (1.126e-3 -> 5.745e-4 -> 3.027e-4 -> 1.617e-4, ratios 0.510 / 0.527 / 0.534)'.  Those four numbers are correct, but they are the successive DECREMENTS OF THE RECIPROCAL, the tail sigma_min = 1/||T^{-1}||_X (0.25037356 -> 0.24924783 -> 0.24867333 -> 0.24837063 -> 0.24820892, leg 268's own tail_sigma_min list).  A rising quantity has increments, not decrements; ||T^{-1}||_X's own increments are 1.804e-2 -> 9.269e-3 -> 4.901e-3 -> 2.623e-3, ratios 0.514 / 0.529 / 0.535.",
+      "magnitude_of_the_mismatch": "16.02x, 16.13x, 16.19x, 16.22x -- a reader recomputing the differences from the ladder printed in the same sentence lands about 16x away from the printed figures.",
+      "found_by": "writeup/novelty/verify_271.md section 5 (independent review of leg 271)",
+      "provenance": "experiments/journal/leg_249.md L233-234, copied verbatim into PUB2 by leg 268 (commit 3f6d5d0); leg 271 did not touch it.",
+      "class": "subject-attachment slip on correct numbers.  It asserts NO independence and overstates NO strength; the geometric-ratio evidence for 'this sequence converges' is identical either way, since 0.514/0.529/0.535 and 0.510/0.527/0.534 support the same conclusion.  It is NOT a fourth iteration of the truncation-independence defect, which verify_271 confirms closed at 0 surviving sites.",
+      "fixed_by_leg_274": "The section 3.5 sentence now carries ||T^{-1}||_X's own increments as ||T^{-1}||_X's, and names the 1.126e-3 ... 1.617e-4 set as the reciprocal sigma_min's decrements, explicitly flagging the ~16x relation.  Both sets are now recomputable from the ladder printed in the same sentence."
+    }
+  ],
+
+  "why_an_annotation_and_not_an_edit": "p2_route_h2c_v1_construction.json is a banked MEASUREMENT RECORD.  Silently mutating a banked reading field would destroy the audit trail that lets a later leg see what was believed when, which is the whole mechanism by which legs 249, 268, 271 and verify_271 were able to find these defects at all.  The repository's established precedent is leg 263's CORRECTIONS.md: corrections are MARKED, NEVER HIDDEN.  This file is the marker; writeup/CORRECTIONS.md entry 5 is the index entry that makes it findable without grepping.",
+
+  "instruction_to_a_future_leg": "Do NOT hand-edit p2_route_h2c_v1_construction.json.  Any quotation of C1_bordered_sigma_min_X.reading -- in a paper, a blog, a journal, a slide, or another JSON -- must quote the corrected framing recorded under A1 above, or quote the banked text WITH this annotation cited beside it.  Quoting the field's opening phrase 'BOUNDED AWAY FROM ZERO and truncation-independent' on its own regenerates the exact defect that took legs 250, 268 and 271 to remove from PUB2's prose.  If that artifact is ever regenerated by a leg that owns leg 176's territory, the regenerated reading field must open with the A1 corrected framing, and must carry leg 268's certified brackets for the numeric fields.",
+
+  "ceiling": "This file corrects a DESCRIPTOR and a PROSE SUBJECT LABEL.  It measures nothing, verifies nothing new, and moves nothing.  Leg 176's gate answer is UNCHANGED; the ell^1_w converges-vs-diverges contrast is UNAFFECTED (both number sets support it identically); Z_1 still fails at 140.72.  a = 0 only.  No link of the L1 -> L4 chain moved.  Clay odds unchanged at ~0.05%.  No ban lifted.  No route promoted.  No GA compute."
+}

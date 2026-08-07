@@ -329,8 +329,11 @@ reason the reliable window stops at 512. In its own words this is **"float64 evi
 positive limit, not a proof of one."** The tail block closes too, and it earns exactly that same
 reading and no stronger one: `‖T⁻¹‖_X` **rises monotonically** across the ladder
 (`3.994032 → 4.012071 → 4.021340 → 4.026241 → 4.028864` at `N = 64 … 1024`, **0.865 %** in
-relative terms) with decrements shrinking geometrically (`1.126e−3 → 5.745e−4 → 3.027e−4 →
-1.617e−4`, ratios `0.510 / 0.527 / 0.534`) — float64 evidence of a **finite limit near 4.032**,
+relative terms) with its own **increments** shrinking geometrically (`1.804e−2 → 9.269e−3 →
+4.901e−3 → 2.623e−3`, ratios `0.514 / 0.529 / 0.535`) — equivalently, the reciprocal tail
+`σ_min = 1/‖T⁻¹‖_X` **falls** with decrements `1.126e−3 → 5.745e−4 → 3.027e−4 → 1.617e−4`,
+ratios `0.510 / 0.527 / 0.534`, which are the smaller (`≈16×`) set and belong to `σ_min`, not to
+`‖T⁻¹‖_X` — float64 evidence of a **finite limit near 4.032**,
 not a proof of one, and **not** a truncation-independent value. Earlier drafts of this note
 quoted `4.026, truncation-independent`; that is the value at one rung of a sequence still
 climbing at `N = 1024`, and it understates the limit by **0.14 %**. What survives untouched is

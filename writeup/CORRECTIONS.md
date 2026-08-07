@@ -33,6 +33,7 @@ lesson 35). This file is the index, not the substitute.
 | 2 | the gCLM two-scale survival boundary `a* ≈ 0.5–0.55`, stated without its measured domain across **15 documents** | **leg 180** (2026-08-06) | the boundary is real; the scope line was missing, and is now carried in all 15 |
 | 3 | leg 125: Object-B's Newton continuation stalls ⇒ the profile does not exist | **leg 185** (2026-08-06) | a **solver artifact**, named precisely enough to repair; reachability returns `a`-dependently |
 | 4 | *(this file's occasion — the same closure as #1, closed by measurement rather than by literature)* | **leg 178**, landed by the user's Ruling 1 of 2026-08-07 | §4 below |
+| 5 | leg 176's banked `C1_bordered_sigma_min_X.reading`, which **opens** "BOUNDED AWAY FROM ZERO and truncation-independent" before hedging in its own last sentence | **leg 249** (numerics) → **leg 268** (the tail-block twin, K3) → **verify_271** §6b (named the C1 field as the *upstream* regeneration source) | `σ_min` is **flat, not independent** — `0.139 %` over a 16-fold range — and the positive limit is float64 **evidence**, not a proof. §5 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -135,3 +136,89 @@ after, which is clause (c) of leg 263's own gate.
 
 See `experiments/journal/leg_263.md` for the full per-occurrence table, including the
 occurrences that were pinned to the **plan-triple** and deliberately left unedited.
+
+---
+
+## §5 — Leg 176's `reading` field, and the regeneration hazard it carries
+
+### The entry's class, stated honestly
+
+Entries 1–4 are over-read **negative** closures: a gate answered `NO`, read wider than it was
+measured. This one is an over-read of a gate answered **`YES`** — leg 176's origin-`H²`
+construction closed, and the *sentence banked about it* claimed more than the ladder shows. The
+register's own admission test is unchanged and it passes: *a reader of the original artifact
+would come away believing something the repository now knows is false.* Recorded here rather
+than in a new file, because a second register would be exactly the "grep a 900-line index"
+problem this file was created to end.
+
+### What is over-read
+
+`writeup/data/p2_route_h2c_v1_construction.json`, key `C1_bordered_sigma_min_X.reading`, opens:
+
+> **"BOUNDED AWAY FROM ZERO and truncation-independent."**
+
+and only its *last* sentence supplies the hedge — *"This is float64 EVIDENCE of a positive limit,
+not a proof of one."* Both halves of the opening fail at the precision the numbers are quoted to:
+
+| half of the opening claim | what the banked data actually say |
+|---|---|
+| "bounded away from zero" | float64 **evidence** of a positive limit; **no proved floor** exists in leg 176 or in PUB2 — the field's own last sentence concedes this, and `TECHNICAL_P2_PUB2_V1.md` §3.5 states the limitation in full |
+| "truncation-independent" | **flat, not independent**: `relative_spread` = **`0.0013899483438452888`** over `reliable_window` `[32, 64, 128, 256, 512]` — **`0.139 %` across a 16-fold truncation range** |
+
+Leg 268 already corrected the *tail block's* twin descriptor (its `K3`, on
+`C2_tail_block_sigma_min.reading`). **`C1`'s was never covered.** That gap is what
+`verify_271` §6b identified as the upstream source of a phrase legs **250, 268 and 271** each
+had to chase out of PUB2's prose separately.
+
+### The hazard, and the three mechanisms that do NOT close it
+
+The banked JSON is a **measurement record** and is correctly immutable — mutating it would
+destroy the audit trail that let legs 249/268/271 and `verify_271` find these defects at all.
+So: not a silent edit. Nor a fourth prose sweep — the prose is already clean (`verify_271`
+clause (a): **0 surviving sites**). Nor a ban, since nothing here is a route.
+
+**What closes it** is the precedent this file was built on — *corrections are marked, never
+hidden* — applied to a data field instead of prose:
+
+| layer | artifact | covers |
+|---|---|---|
+| primary record, **byte-untouched** | `writeup/data/p2_route_h2c_v1_construction.json` | leg 176's measurements, as banked |
+| companion 1 (leg 268) | [`…_correction_leg268.json`](data/p2_route_h2c_v1_construction_correction_leg268.json) | `K1` `sigma_min_at_512` · `K2` `tail_inverse_norm_K2_at_512` · `K3` the **`C2`** descriptor |
+| companion 2 (leg 274) | [`…_annotation_leg274.json`](data/p2_route_h2c_v1_construction_annotation_leg274.json) | `A1` the **`C1`** `reading` descriptor · `A2` the §3.5 subject label |
+| index (this file) | `writeup/CORRECTIONS.md` §5 | makes both findable without grepping |
+
+Both companions are in force simultaneously; neither supersedes the other. **The instruction a
+future quoter is bound by** (verbatim from `A1`): any quotation of `C1_bordered_sigma_min_X.reading`
+must quote the corrected framing —
+
+> *`σ_min` is **flat** across the reliable window — `0.0908`, varying by `0.139 %` over a 16-fold
+> truncation range (`N = 32 … 512`) — which is float64 **evidence** of a positive limit and not a
+> proof of one. No proved floor is claimed.*
+
+— or quote the banked text **with the annotation cited beside it**. Quoting the opening phrase
+alone regenerates the defect.
+
+### The second residue: the §3.5 subject label (`A2`)
+
+`TECHNICAL_P2_PUB2_V1.md` §3.5 printed the `‖T⁻¹‖_X` ladder
+(`3.994032 → … → 4.028864`, rising) and then attributed to it *"decrements shrinking
+geometrically (`1.126e−3 → 5.745e−4 → 3.027e−4 → 1.617e−4`, ratios `0.510 / 0.527 / 0.534`)"`.
+
+The four numbers are **correct** — they are the decrements of the **reciprocal**, the tail
+`σ_min = 1/‖T⁻¹‖_X` (`0.25037356 → 0.24924783 → 0.24867333 → 0.24837063 → 0.24820892`, leg 268's
+own `tail_sigma_min` list). A rising quantity has **increments**, and `‖T⁻¹‖_X`'s own are
+`1.804e−2 → 9.269e−3 → 4.901e−3 → 2.623e−3`, ratios `0.514 / 0.529 / 0.535`. The two sets differ
+by **`16.02× / 16.13× / 16.19× / 16.22×`** — a referee recomputing from the ladder printed in the
+same sentence lands ~16× away. Provenance: `experiments/journal/leg_249.md` L233–234 → PUB2 via
+leg 268 (`3f6d5d0`); found by `verify_271` §5; both sets now stand in §3.5 under their own names.
+
+**This is not a fifth truncation-independence site.** It asserts no independence and overstates
+no strength — `0.510/0.527/0.534` and `0.514/0.529/0.535` support the *same* conclusion, that the
+sequence converges. It is a subject-attachment slip, graded as such by its finder.
+
+### The ceiling
+
+Leg 176's **gate answer is unchanged**, and leg 249 re-derived every matrix, identity and
+convergence claim from the definitions — all survived. The `ℓ¹_w` **converges-vs-diverges
+contrast is unaffected**; `Z₁` still fails at `140.72`. The object is the `a = 0` case only.
+**No ban lifts. No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**
