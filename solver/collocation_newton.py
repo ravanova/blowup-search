@@ -326,9 +326,13 @@ class ACollocation(Collocation):
 
         `converged` now ALSO requires the two gauge rows -- which this method
         already assembles as F[J] and F[J+1], and then threw away -- to be
-        satisfied to `gauge_tol`.  The gauge defect is absolute and homogeneous
-        of degree 1, so it is precisely the non-scale-invariant companion `rel`
-        lacks; no new quantity is computed and nothing is tuned.  The threshold
+        satisfied to `gauge_tol`.  The gauge defect is AFFINE in Omega -- a
+        degree-1 leading part plus a nonzero constant -- so it is absolute, and
+        under (Omega, c) -> (lam Omega, lam c) it moves as |lam - 1| times the
+        gauge value rather than staying fixed.  That is precisely the
+        non-scale-invariant companion `rel` lacks (`rel`'s numerator and
+        denominator are both degree 2, so the ratio is degree 0 exactly).  No
+        new quantity is computed and nothing is tuned.  The threshold
         1e-8 is leg 237's OWN escape predicate (`gd > 1e-8`), adopted unchanged
         rather than fitted: it sits 1.1e+07x above the worst gauge defect among
         the 17 converged cases of that leg's 41-case reachability battery
@@ -392,8 +396,8 @@ class ACollocation(Collocation):
         src = om * (self.H @ om)
         rel = rms / float(np.sqrt(np.mean(src ** 2))) if np.any(src) else np.inf
         # LEG 248.  The two gauge rows, already assembled above as F[J] and
-        # F[J+1] and previously discarded.  Absolute, degree-1 homogeneous --
-        # the companion `rel` cannot be.
+        # F[J+1] and previously discarded.  Absolute and AFFINE in Omega -- the
+        # companion `rel`, a ratio of two degree-2 quantities, cannot be.
         gauge_defect = float(max(abs(g0 @ om + 1.0), abs(om[i1] + 0.5)))
         rel_ok = bool(rel < 1e-9)
         gauge_ok = bool(gauge_defect <= float(gauge_tol))
