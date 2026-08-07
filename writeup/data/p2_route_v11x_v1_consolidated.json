@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "leg": 294,
+    "route": "V11X",
+    "role": "consolidation, zero new measurement",
+    "question": "Does the consolidated report re-base 236 against 252's regenerated values, provenance-tier every value, keep 226's two grid-verdict findings separately signed, correct D1-vs-D3, apply 252's noise floor before calling anything 'moved', restate 247's exoneration, and synthesize only?",
+    "gate": "YES",
+    "inputs": {
+      "leg_236": {
+        "branch": "leg/236-rddep-v1-resume",
+        "on_main": false,
+        "journal": "experiments/journal/leg_236.md (read from branch, not copied)",
+        "data": "writeup/data/p2_route_rddep_v1_dependency.json (read from branch, not copied)"
+      },
+      "leg_226": {
+        "branch": "leg/226-pnr-v1-resume",
+        "on_main": false,
+        "journal": "experiments/journal/leg_226.md (read from branch, not copied)"
+      },
+      "leg_247": {
+        "branch": "leg/247-vbr-v1",
+        "on_main": false,
+        "note": "The leg 294 dispatch described leg 247 as 'already landed on main.' Verified false: git log origin/main --grep=\"Leg 247:\" returns 0 commits, and origin/main's own writeup/data/p2_route_d_v11_anchor.json still carries the pre-repair stale margin (1.0467862586e+10). Leg 247 is escalated and parked exactly like 236/226/252. Corrected here rather than silently inherited.",
+        "journal": "experiments/journal/leg_247.md (read from branch, not copied)",
+        "landing_commit_on_own_branch": "10be909a4d4e95d293fabb2c526e7ac1896dea95"
+      },
+      "leg_252": {
+        "branch": "leg/252-vbrg-v1-wip2",
+        "on_main": false,
+        "journal": "experiments/journal/leg_252.md (read from branch, not copied)",
+        "data": "writeup/data/p2_route_vbrg_v1_regen.json, writeup/data/p2_route_d_v11_anchor.json (regenerated copy, read from branch, not copied)"
+      }
+    },
+    "main_head_at_synthesis": "2c567ab",
+    "banked_anchor_on_main_is_still_stale": true
+  },
+
+  "provenance_tier_definitions": {
+    "banked-stale": "The original v11 anchor JSON as banked on 2026-07-31 and still on origin/main today. Produced in an unrecorded numeric environment.",
+    "banked-regenerated": "Leg 252's from-scratch regeneration of the full anchor JSON (every v2/v3/v4/v5 row re-solved) in leg 252's own environment (Intel i7-10750H, python 3.12.3, numpy 2.5.1, scipy-openblas 0.3.33.112.0), with leg 247's v5_budget margin-selection repair ported in verbatim. The `continuation` convergence-verdict defect (leg 226's territory) is NOT repaired in this tier -- only the margin-selection formula is.",
+    "fresh-resolve": "A value computed by re-running the solver outside the full-artifact regeneration pipeline -- e.g. leg 236's replay of `continuation` at v11's own grid, leg 226's re-run of the (un)repaired module in its own environment, or leg 247's single-row from-scratch re-solve at a=0.45. Each fresh-resolve value is tagged with which leg produced it and in which environment."
+  },
+
+  "part_1_a_max_machine": {
+    "description": "Two independent methods (236's dependency-trace row-exclusion, 226's adversarial D2/D3 repair) confirm the same movement on the same scalar.",
+    "banked_stale": {"value": 1.0, "tier": "banked-stale", "source": "origin/main:writeup/data/p2_route_d_v11_anchor.json, v2_sweep.a_max_machine"},
+    "banked_regenerated": {"value": 1.0, "tier": "banked-regenerated", "source": "leg 252, v2_sweep.a_max_machine -- UNCHANGED on full regeneration (continuation unrepaired)"},
+    "method_A_leg236_exclusion": {
+      "unmodified_replay": {"value": 1.0, "tier": "fresh-resolve", "environment": "leg 236's own machine, continuation unmodified, v11's own n=801 grid"},
+      "excluded_all_3_policies": {"value": 0.55, "tier": "fresh-resolve", "note": "robust across all 3 row-exclusion policies leg 236 tried (strict / wide / cold-axis); wide and cold-axis policies exclude the identical row set {0.45,0.6,0.7,0.8,0.9,1.0}"}
+    },
+    "method_B_leg226_repair": {
+      "pre_repair_rerun": {"value": 1.0, "tier": "fresh-resolve", "environment": "leg 226's own machine, continuation unmodified"},
+      "post_repair_v11_own_relres_test": {"value": 1.0, "tier": "fresh-resolve", "note": "v11's inline relres<1e-8 test alone cannot see the defect -- it still reports 1.0 even against the repaired module, because the repair changes the returned verdict dict, not v11's own gate expression"},
+      "post_repair_repaired_verdict_D2_D3": {"value": 0.55, "tier": "fresh-resolve", "environment": "leg 226's own machine"}
+    },
+    "agreement": "0.55 == 0.55 to the value both methods report, via structurally different mechanisms (236: exclude rows leg 202's frozen far-field-inflation classifier flags SILENT_WRONG; 226: reject rows failing the repaired D2/D3 discriminators directly inside continuation). Independent confirmation.",
+    "movement_vs_noise_floor": "REAL, not noise. Leg 252's regenerated banked_regenerated value for this exact scalar stayed at 1.0 (unmoved) under environment change alone -- so the 1.0->0.55 move is not explained by leg 252's cross-environment noise floor. It is caused by a different mechanism entirely (row exclusion / discriminator rejection), confirmed by two independent methods.",
+    "not_yet_computed": "No input has regenerated the anchor JSON AND applied the row-exclusion/discriminator repair simultaneously. The 0.55 value above is fresh-resolve on 236's/226's own machines against v11's own (unregenerated in 236's case) or repaired-but-not-fully-regenerated (226's case) pipeline. A future leg regenerating the anchor JSON with BOTH leg 226's continuation repair AND leg 247's margin-selection repair applied together has not been done by anyone; flagged as a residue below, not guessed here."
+  },
+
+  "part_2_grid_converged_a_max": {
+    "description": "The OPPOSITE-direction finding, reported as its own separately-signed item per the gate -- not merged into part_1's 'moved' headline.",
+    "banked_stale": {"value": 0.5, "tier": "banked-stale"},
+    "banked_regenerated": {"value": 0.5, "tier": "banked-regenerated", "note": "leg 252's full regeneration (continuation unrepaired) reproduces the banked value exactly, UNCHANGED"},
+    "leg226_pre_repair_rerun_v11_own_test": {"value": 1.0, "tier": "fresh-resolve", "environment": "leg 226's own machine, continuation unmodified, v11's own unmodified test", "note": "DISAGREES with both banked-stale (0.5) and banked-regenerated (0.5). In leg 226's environment, a=1.00 reaches machine precision at n=401 and n=801 (spread 5.72e-04, inside v11's 1e-3 tolerance) while it does not in the bank's or leg 252's environment."},
+    "leg226_post_repair_repaired_verdict": {"value": 0.5, "tier": "fresh-resolve", "environment": "leg 226's own machine", "note": "RESTORED to the banked value once the off-branch a=0.80/1.00 rows are rejected by D2/D3."},
+    "movement_vs_noise_floor": "NOT real movement in the defect sense -- it is exactly the kind of cross-environment instability leg 252 already measured and named as its own finding, not a fourth disagreement. Leg 252's own regenerated v4_grids rows at a=0.80 and a=1.00 -- the two rows this scalar's rule is decided by -- are named explicitly in leg 252's journal among the leaves that move by >10% across environments (weighted_defect moves ~10 orders at a=0.80,n=1601 and a=1.00,n=401; grids_reaching_machine_precision flips 1->2 at both a=0.80 and a=1.00). Leg 226's raw pre-repair reading of 1.0, taken on a THIRD machine, is consistent with -- not beyond -- that documented noise floor.",
+    "correctly_signed_finding": "The raw/unrepaired continuation is unstable exactly where leg 252 already showed instability lives (the a=0.8/1.0 Newton-basin-boundary rows); the repaired verdict removes that instability and lands on the banked value (0.5) regardless of which of three measured environments it runs in. Leg 226's own journal states this plainly: 'The repair is what makes this headline stable against the environment drift.'",
+    "do_not_conflate_with_part_1": "This scalar moves in the OPPOSITE direction from a_max_machine under the SAME repair (raw 1.0 -> repaired 0.5, i.e. DOWN, vs a_max_machine's raw 1.0 -> repaired 0.55, also down in absolute terms but starting from a stable raw value) -- the reporting distinction the gate requires is that a_max_machine's raw value (1.0) is STABLE across every environment measured (banked-stale, banked-regenerated, leg 236's machine, leg 226's machine) and its move to 0.55 is a real, repair-caused effect, while grid_converged_a_max's raw value is UNSTABLE across environments (0.5, 0.5, 1.0 in three environments) and its 'return' to 0.5 under repair is a stabilization, not a comparable move."
+  },
+
+  "part_3_v5_budget_margin_and_defect": {
+    "description": "Re-based against leg 252's regenerated anchor per gate (a). Y0_max_from_v10 = 2.45e-4 constant across all tiers/environments.",
+    "margin_field": {
+      "banked_stale": {"value": 10467862585.933441, "tier": "banked-stale", "note": "min-based selection (pre-repair): Y0_max / newton_weighted_defect_min, insulated from the defect entirely because the minimizing row (a=0.10) is clean in every environment measured"},
+      "banked_regenerated_worst_case_selection": {"value": 0.015991923774880644, "tier": "banked-regenerated", "note": "leg 252's full regeneration with leg 247's worst-case selection (Y0_max/defect_max) ported in"},
+      "stale_vs_regenerated_gap": {
+        "value": 654571815954.7423,
+        "rounded": "~6.55e+11x",
+        "note": "leg 252's own reported figure, reproduced here by direct division (10467862585.933441 / 0.015991923774880644). This is the number gate (a) requires stated explicitly. It is the combined effect of two changes at once: (i) the selection formula moving from min-based to worst-case-based (247's repair) and (ii) banked-stale rows vs a full fresh regeneration (252's contribution) -- NOT attributable to either alone; see the two sub-comparisons below."
+      },
+      "leg247_headline_banked_rows_repaired_selection": {"value": 0.016122858874141922, "tier": "banked-stale", "qualifier": "selection-repaired: leg 247's worst-case selection formula applied to the UNCHANGED banked-stale v2/v4 rows (no re-solve)", "reading": "budget missed by 62.02373957411577x at a=0.45"},
+      "leg252_regenerated_full_resolve": {"value": 0.015991923774880644, "tier": "banked-regenerated", "reading": "budget missed by 62.53156368658738x at a=0.45", "gap_vs_leg247_headline": "0.82% (8.188e-03 relative) -- this is the banked-row-vs-fresh-row provenance gap leg 247 itself already published, see part_5"}
+    },
+    "newton_weighted_defect_max_field": {
+      "banked_stale": {"value": 0.015195816195658364, "tier": "banked-stale"},
+      "banked_regenerated": {"value": 0.015320233103213909, "tier": "banked-regenerated", "note": "same order as banked-stale; leg 252 did not apply any row-exclusion classifier, only the margin-selection repair, so the a=0.45 row that carries this max is still IN the good set here"},
+      "leg236_fresh_resolve_unmodified": {"value": 0.015196780, "tier": "fresh-resolve", "environment": "leg 236's own machine, continuation unmodified", "note": "reproduction drift vs banked-stale is small here (~6.3e-05 absolute), unlike newton_weighted_defect_min which drifts 4.15x -- reported by leg 236 as real and pre-declared to carry no claim"},
+      "leg236_fresh_resolve_excluded": {"value": 0.0000237414, "tier": "fresh-resolve", "note": "640.1x drop vs the unmodified fresh-resolve value, from excluding the SILENT_DEGRADED a=0.45 row using leg 202's frozen far-field-inflation classifier"},
+      "not_yet_computed": "As in part_1, no input has regenerated this field with BOTH leg 226's row-exclusion applied AND leg 252's full regeneration. Leg 236's 0.640x-reduced value is fresh-resolve on the STALE bank's rows, not the regenerated ones -- the two effects (regeneration moving the a=0.45 row's own value from 1.5195816e-02 banked-stale to 1.5320233e-02 regenerated, a 0.82% shift within noise, and classifier exclusion removing the row from the max entirely, a 640x shift) have never been composed. Flagged as a residue, not guessed."
+    },
+    "reading": "If leg 226's classifier exclusion were applied to leg 252's regenerated rows (not yet done by any leg), the qualitative conclusion leg 236 already reported off the stale bank -- budget holds with slack once the SILENT_DEGRADED a=0.45 row is excluded (10.32x margin, worst-case row becomes a=0.35 at 10.656x) -- would very likely still hold, since the a=0.45 row's own regenerated value (1.532e-2) differs from its banked-stale value (1.5196e-2) by only 0.82%, far below the 640x effect of exclusion. This is a plausibility read stated explicitly as unconfirmed, not a new measurement."
+  },
+
+  "part_4_d1_falsified_d3_real": {
+    "description": "Correcting the record wherever D1 (newton_weighted_defect / weighted defect residual) was cited as the mechanism separating on-branch from off-branch profiles.",
+    "d1_falsified": {
+      "claim": "D1 does not separate on-branch from off-branch cases at any threshold.",
+      "evidence": "leg 226: off-branch D1 range 9.535e-12 to 1.318e+06; on-branch D1 max 9.364e-03. The smallest off-branch D1 value is nine decades BELOW the largest on-branch D1 value -- the ranges overlap catastrophically, there is no threshold that works.",
+      "was_cited_as_mechanism": "Leg 226's own dispatch sent it to incorporate D1 as the intended diagnostic. Leg 226's novelty pass (per its journal) called D1 false BEFORE construction; the construction confirms it. This consolidated report is the record correction: wherever a prior document treats newton_weighted_defect / D1 as the off-branch discriminator, it is wrong -- D1 is the diagnostic that was dispatched and disproven, not the one that works."
+    },
+    "d3_is_real": {
+      "claim": "D3 (decay-class / far-field inflation) is the discriminator that actually separates.",
+      "evidence": "leg 226: on-branch max D3 = 24.06; off-branch min D3 = 197.30 -- clean separation, the pre-committed 100x threshold sits 0.62 decades above the on-branch ceiling and 0.295 decades below the off-branch floor. Validated by a corrected falsification probe (leg 226's Lesson 90 fix) matching predicted-vs-measured D3 to 1.8% worst case with the on/off crossing bracketed between tail=1e-4 and tail=1e-3.",
+      "same_diagnostic_leg236_used": "leg 236's exclusion classifier (inherited verbatim from leg 202, thresholds unchanged) is also a far-field-inflation / decay-class measure -- the SAME underlying diagnostic as leg 226's D3, independently re-derived and independently confirmed to separate cleanly. This is why methods A and B in part_1 agree: both ultimately key off the same physical quantity (far-field decay), reached by two different code paths."
+    }
+  },
+
+  "part_5_leg247_exoneration_restated": {
+    "claim": "Leg 247's repair logic reproduces leg 252's fully independent fresh regeneration to exact float equality. The published 0.82% gap between leg 247's headline and leg 252's regenerated value is banked-row-vs-fresh-row provenance, not a defect in leg 247's repair.",
+    "evidence": {
+      "leg252_regenerated_a045_defect": 62.53156368658738,
+      "leg247_own_independent_fresh_resolve_a045": 62.53156368658738,
+      "relative_difference": "0.000e+00 -- exact float equality, to the last bit",
+      "leg247_headline_banked_rows": 62.02373957411577,
+      "relative_difference_headline_vs_regenerated": "8.188e-03 (0.82%)"
+    },
+    "reading": "Leg 247's headline (62.02373957411577x) was computed by applying its corrected worst-case selection formula to the UNCHANGED banked-stale v2/v4 rows -- the correct and auditable choice for a repair leg, since it isolates the selection-logic fix from any row-value drift. A full regeneration necessarily re-solves those rows first, picking up whatever the current environment's a=0.45 Newton solve lands on (1.532023e-02 vs banked 1.519582e-02), which is exactly the same 0.82% cross-environment gap leg 252 measured across 202/359 leaves elsewhere in the artifact -- not a new or different phenomenon. leg 247's own commit message already published both the headline and the 0.82% fresh-vs-banked gap; leg 252's regeneration is an independent confirmation of leg 247's own fresh re-solve, not a new finding.",
+    "provenance_tiers_of_the_two_numbers": {
+      "62.02373957411577": "banked-stale (selection-repaired)",
+      "62.53156368658738": "banked-regenerated (also independently reproduced as fresh-resolve by leg 247's own single-row re-solve)"
+    }
+  },
+
+  "part_6_noise_floor_baseline": {
+    "description": "Leg 252's own measured environment-noise floor, used throughout this report as the bar any 'moved' claim must clear before being called real movement (gate item e).",
+    "leaves_compared": 359,
+    "leaves_changed": 206,
+    "leaves_changed_outside_v5_budget_or_meta_unexpected": 202,
+    "distribution_of_relative_change_over_206_changed_leaves": {
+      "le_1e-12_rounding": 11,
+      "1e-12_to_1e-6": 44,
+      "1e-6_to_1e-3": 30,
+      "1e-3_to_0.1": 73,
+      "gt_0.1_qualitative": 46,
+      "non_numeric": 2
+    },
+    "worst_examples": [
+      "v3_boundary.rows[9] (a=0.62): converged True -> False, relres 1.08e-14 -> 3.49e-04 -- a qualitative flip",
+      "v4_grids.rows[13] (a=0.8, n=1601): weighted_defect 1992.05 -> 1.23e-07 -- 10 orders",
+      "v4_grids.rows[4] (a=1.0, n=401): weighted_defect 73371.6 -> 1.53e-08",
+      "v4_grids.verdict[3] and [4] (a=0.8, a=1.0): grids_reaching_machine_precision 1 -> 2 in both"
+    ],
+    "cause": "NOT solver drift -- solver/profile_newton.py has exactly one commit (6a17ce6, the same commit that banked the JSON) and has not changed. Same code, same inputs, different numeric environment (BLAS/numpy/python version) produces materially different results at ill-conditioned rows, specifically where Newton's basin selection is decided by the last bits (near and past the survival boundary).",
+    "applied_in_this_report": "part_1 (a_max_machine's raw value stayed 1.0 across all measured environments -- its 1.0->0.55 move under repair is therefore NOT explained by this noise floor, confirming it as real); part_2 (grid_converged_a_max's raw value varied 0.5/0.5/1.0 across three environments, and the two rows deciding it (a=0.8, a=1.0) are named explicitly among leg 252's worst-moving leaves -- its instability IS explained by this noise floor, and is not claimed as a repair-caused move)."
+  },
+
+  "part_7_ga_boundary_hardcoded_literal": {
+    "value": [0.5, 0.55],
+    "tier": "banked-stale (literal, unaffected by tier at all)",
+    "note": "GA_boundary is a hardcoded literal at p2_route_d_v11_anchor.py:112, not computed by any solver call. It CANNOT move under any solver repair (226's, 247's, or a future combination), and leg 252's regeneration reproduces it unchanged for the same reason -- it is copy-pasted, not solved. Leg 202's original grading treated GA_boundary alongside a_max_machine and grid_converged_a_max as a single 'exposed trio'; leg 236 corrected that grading (only a_max_machine touches continuation), and this report restates the correction: GA_boundary was never at risk from any of these findings."
+  },
+
+  "downstream_documents_flagged_not_touched": [
+    {
+      "path": "writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md:134",
+      "issue": "quotes a_max_machine in a consumer table; the quoted value (1.0) is the banked-stale value now known to be a spurious-root artifact (repaired: 0.55). No prose conclusion currently rests on the literal 1.0 (per leg 236's own check), but the table entry itself is stale.",
+      "needs": "light pointer-correction leg"
+    },
+    {
+      "path": "writeup/data/p2_route_d_v11_anchor.json (on origin/main)",
+      "issue": "still carries the fully pre-repair, pre-regeneration state: a_max_machine=1.0, grid_converged_a_max=0.5 (coincidentally matches the repaired value, per part_2), margin=1.0467862586e+10 (wrong by ~6.55e+11x vs the regenerated, selection-repaired value).",
+      "needs": "an integration decision among leg 252's own three options (land the regeneration whole / keep stale and accept the wrong margin / re-bank deliberately as its own leg with environment pinned) -- explicitly leg 252's call to make, not this leg's, and not yet made by anyone"
+    },
+    {
+      "path": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTED_V11.md:69,82-89",
+      "issue": "already states a* ~= 0.5-0.55 and already flags a=0.45 as above budget -- NOT stale, no correction needed; recorded here to confirm the prose survives all four inputs' findings intact.",
+      "needs": "nothing -- listed for completeness, not as a gap"
+    }
+  ],
+
+  "residues": [
+    "No input has regenerated the anchor JSON with BOTH leg 226's continuation/D2/D3 repair AND leg 247's margin-selection repair applied jointly and in leg 252's (or any single) environment. Every 'excluded' or 'repaired' number in this report is fresh-resolve on either the stale bank's rows (236, 247's headline) or a single leg's own machine (226) -- never on leg 252's regenerated rows. This is the natural next leg, not attempted here (zero re-measurement per gate item g).",
+    "The banked anchor JSON on origin/main is unchanged by this leg (read-only per territory) and remains wrong on the margin field by ~6.55e+11x until an integration leg acts on one of leg 252's three options.",
+    "leg 247 is not on main, contrary to the dispatch's framing for this leg -- corrected in meta.inputs.leg_247.note and in writeup/novelty/leg_294.md; flagged here again so it is not missed by a reader skimming only the residues."
+  ]
+}
