@@ -68,6 +68,20 @@ is not because anyone was careless.
 against leg 185's `a* = 0.38649640`), not an input audit. It is not counted, and the count
 would be fourteen under a looser rule.
 
+> **[POINTER ADDED 2026-08-07 BY LEG 283 (Route-M2SR) — APPEND-ONLY; the paragraph above is
+> preserved verbatim and **its counting argument is unaffected**, since nothing in it depends on
+> `a*`'s value or provenance.]** Two corrections to the parenthetical `a*` label, for readers
+> who follow it out of this document. **(i) Provenance:** `0.38649640` is **leg 125's /
+> Route-M2P's** number (the `Δ(a)` sweep at `ν = 0`, relative residual **1.933e-15**,
+> `TECHNICAL_P2_ROUTEM2P_V1.md` §3.5), not leg 185's own measurement. **(ii) Status:** leg 185's
+> claim that its `ν(a)` zero crossing *lands on* that value is **UNPINNED** — its own two starts
+> straddle zero at `a = 0.3865` (**+0.00000035** / **−0.00425080**), and leg 210's independent
+> bracket between converged points is **[0.36, 0.37]**. The **sign flip itself is confirmed**
+> and is now **gauge-independent** (`ν → μ²ν` under dilation, `μ² > 0`). Separately, leg 185's
+> `a = 1/2` `ν` magnitudes are downgraded to **sign-only** (not quoted in this document).
+> Source: leg 210 (Route-M2SV), parked `leg/210-m2sv-v1` @ `6e06880`; index
+> `writeup/CORRECTIONS.md` #9.
+
 **Two audit-family legs are not escalations and are counted separately:** legs 206 (GSA) and
 207 (DPA) found real defects and **landed directly**, judged not claim-adjacent. They belong in
 the denominator, not the escalation list — see §5, where they matter a great deal.

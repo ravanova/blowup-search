@@ -39,6 +39,8 @@ lesson 35). This file is the index, not the substitute.
 
 | 8 | leg 263's own census, whose clause (a) claimed **zero missed occurrences** over the "third realization" phrase family, and which argued the live stage-`V` ban's protection from the class-P list that census produced | **leg 272** (2026-08-07, re-ran both patterns over the same blobs) → **leg 282** (this entry; carried the pointer and both count corrections to their sites) | the census is short by **30 triple-asserting occurrences across 17 files**, from two named instrument causes (**case** and **hyphenation/wrap**): **class P is 28, not 18**, and the second sweep's file count is **32, not 34**. **0 of the 30 produced a wrong edit and exactly 1 lies in territory.** A **warrant** defect, not a text defect — `plan_of_record.py` is byte-identical and stays so. §9 below |
 
+| 9 | leg 185's `a = 1/2` `ν` **magnitudes** (`−0.00817525` / `−0.00895316`), banked in a table beside a refined `a = 0.30` number and read downstream as measurements; and its `a* = 0.3865` **cross-check**, banked as *"two different calculations agreeing on the same number"* | **leg 210** (2026-08-07, Route-M2SV, parked branch `leg/210-m2sv-v1` @ `6e06880`, independently discretized re-derivation) → **leg 283** (this entry; swept the record and carried both halves to every site) | **SPLIT, and both halves matter.** UP: `ν = +0.01799364` at `a = 0.30` is **independently confirmed to 1.198e-06 relative (~5.9 digits)**, and the sign law is **strengthened to gauge-independence** (`ν → μ²ν` under dilation, `μ² > 0`, so no gauge can flip it). DOWN: the `a = 1/2` magnitudes are **sign-only** — leg 210's independent value is `−0.00082927`, a **10.33×** gap, and **neither scheme is grid-converged there** (leg 185's own ladder spans **62.2%** non-monotonically; leg 210's spans **119.2%** with amplitude collapsing toward the trivial null). The `a*` cross-check is **UNPINNED** by leg 185's own data — its two starts **straddle zero** at `a = 0.3865` (`+0.00000035` / `−0.00425080`). **Leg 125's own `a*` value is untouched.** §10 below |
+
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
 EGM neighbourhood via a landing page, without the full text. In #1 and #3 the corrections came
@@ -630,3 +632,158 @@ and the stage-`V` ban's text all stand exactly as they were; legs 218's repair, 
 both clauses and 279's closure are untouched. Nothing here lifts a ban, promotes a route, or
 moves a link of the `L1 → L4` chain. The object under all of it is still the `a = 0` CLM
 linearisation, and **"not dead" is still not "open."** Clay `~0.05%`.
+
+---
+
+## §10 — leg 185's `a = 1/2` magnitudes go sign-only, its `a*` cross-check goes unpinned, and its `a = 0.30` number gets stronger
+
+**Carried by leg 283 (Route-M2SR), 2026-08-07. Measured by leg 210 (Route-M2SV), parked branch
+`leg/210-m2sv-v1` @ `6e06880`, `experiments/journal/leg_210.md`.** Leg 283 produced **no number
+of its own**; every magnitude below is leg 210's, and the only original work in this entry is
+the sweep, the classification, and the provenance finding in §10.4.
+
+### 10.1 Why this is a register entry and not a footnote
+
+Leg 185 refined the number it was proud of and banked the numbers it was cautious about without
+refinement. It **stated** the caution correctly — *"only the sign is banked"* — and leg 210
+explicitly endorses that sentence. But an unrefined number printed to 8 digits, in the same
+table as a refined one, acquires credibility from its neighbour, and the record duly quoted the
+magnitudes downstream. **A reader of the original table would come away believing the repository
+had measured `ν ≈ −0.0082` at Chen's `a`. It had not.** That is exactly this file's test.
+
+The general lesson, in leg 210's words: **a grid ladder is owed to every banked number in a
+sweep, not just the headline.**
+
+### 10.2 The upgrade — which travels with the downgrade, and is the larger half
+
+Recording only the negative half would misrepresent leg 210's SPLIT verdict more badly than
+silence:
+
+| clause | verdict | magnitude |
+|---|---|---|
+| `ν = +0.01799364` at `a = 0.30` | **CONFIRMED, independently** | Richardson **0.0179936185** at observed order **4.12** vs banked **0.01799364** — **1.198e-06** relative, ~**5.9 significant digits** |
+| the gauge the reparametrization rests on | **VERIFIED AS A NUMBER** | predicted offset **8.634e-07**, observed **8.634e-07**, ratio **1.0000** |
+| the covariance used as a derivation, at gauges wrong by `κ ∈ {0.5, 0.8, 1.25, 2.0}` | **RECOVERS** | worst **3.184e-05** across a 4× gauge range |
+| the sign law `ν > 0` below the crossing, `ν < 0` at and above | **CONFIRMED AND STRENGTHENED** | now **gauge-independent**: `Ω(X) → Ω(X/μ)` sends `ν → μ²ν`, `μ² > 0`, so **no dilation can change the sign** |
+
+The independence is real and was pre-committed before any number was computed: 6th-order
+differences against leg 185's 4th, the second derivative by chain rule against `D∘D`, a
+degree-5 Lagrange panel quadrature against 4-point Adams–Moulton, and the system restricted to
+the odd subspace and solved by **LU** rather than least squares — with all four operators
+validated against closed forms (`1.283e-08`, `2.236e-09`, `5.319e-10`, `3.468e-10`) *first*.
+One operator is shared (`solver/line_hilbert.py`) and leg 210 declares it rather than hiding it.
+
+**The gauge-independence is the most durable thing in this leg family**, and it is what the
+downstream statements actually rest on — leg 174's catalog input and leg 187's construction
+context both survive **fully**.
+
+### 10.3 The downgrade, measured
+
+At Chen's `a = 1/2`, leg 210's independent scheme gives **`−0.00082927`** from both starts at
+relative residual `4.4e-15` — a **10.33×** gap against the banked `−0.00817525`. The decisive
+instrument is the grid ladder **leg 185 never ran at `a = 1/2`** (it refined only `a = 0.30`),
+and it **exonerates neither scheme**:
+
+| | span across n = 201/401/801 | amplitude min/max |
+|---|---|---|
+| leg 185's own scheme at `a = 1/2` | **62.2%**, non-monotone (`−0.00655 → −0.00818 → −0.00443`) | ~flat, near Chen's scale |
+| leg 210's scheme at `a = 1/2` | **119.2%** | **0.483** — collapsing toward the trivial null |
+| **`a = 0.30` control, both schemes** | **1.94e-03** / **2.11e-04** | **0.999** |
+
+The control is what makes this a measurement rather than an impression: the positive side
+refines cleanly in **the very same code**, 320× to 5600× better. Leg 210 reports its own number
+against itself — *"not the better number; it is a differently bad one"* — and `a = 0.45` (leg
+185's `−0.00606636` / `−0.00792936`) is the worst point of all, leg 210's amplitude there
+collapsing by **160×**. A gauge-free structural diagnostic agrees: seeded with its own dilation
+image, the covariance recovery at `a = 1/2` is off by **5.977e-01** against **3.184e-05** at
+`a = 0.30` — a genuine isolated root returns to its own dilation image; this one does not.
+
+**Conclusion: no `ν < 0` magnitude of leg 185's is quotable. Sign only.** The `a = 0.55` and
+`a = 0.70` rows were not separately re-measured but share the single-unrefined-grid provenance
+and are covered by the same downgrade.
+
+**What is NOT claimed.** "Not reproduced" is not "refuted as false", and neither scheme's number
+is promoted over the other. There is **no converged quantity there** for the two to disagree
+about. This is not a non-existence proof at Chen's `a`, and it does not touch the sign.
+
+### 10.4 The `a*` half — and the boundary this correction must not cross
+
+Leg 185 wrote that its `ν(a)` zero crossing *"lands on leg 125's own independently measured
+`a* = 0.3864963972206034`"* and called it *"a cross-check, not a restatement"*. **The
+cross-check is withdrawn, on evidence internal to leg 185's own journal:** its `a`-sweep row at
+`a = 0.3865` reports **`+0.00000035`** from one start and **`−0.00425080`** from the other —
+**the two starts straddle zero at that exact `a`**. Its own data never pinned the crossing; the
+reported 8-digit coincidence is *one of two disagreeing starts* matching leg 125. Independently,
+leg 210's sign-change bracket between **converged** scan points is **[0.36, 0.37]**, and
+`a = 0.3865` is a point its scheme **fails to converge at** (relative residual **6.0e-03**).
+
+**The line this entry does not cross, stated because it is the entry's largest hazard.**
+`a* = 0.3864963972206034` is **leg 125's / Route-M2P's own number**, from the `Δ(a)` sweep at
+`ν = 0` with `c_l` as the output, at relative residual **1.933e-15**
+(`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md` §3.5, row `ν = 0`). **Leg 210 neither
+measured nor refuted it.** What is unpinned is **leg 185's corroboration**, not the value. Every
+site citing it as leg 125's stands untouched; leg 283 changed **0** numeric values of `a*`
+anywhere.
+
+**A provenance defect found by leg 283's own sweep** (not by leg 210): **five landed sites**
+credit the value to **leg 185** as its own measurement — `writeup/novelty/leg_207.md:124`,
+`experiments/journal/leg_207.md:19` (a verbatim dispatch quote), `TECHNICAL_P2_PUB3_V1.md:68`,
+and the `A_STAR` comments in `experiments/p2_route_dpa_v1_adversarial.py` and
+`test_dissipative_profile_adversarial.py`. All five carry attribution pointers now. **None is
+load-bearing**: in leg 207's battery `A_STAR` is a *bracketing input*, never a claim, and in
+PUB3 the `a*` label sits inside an escalation-**counting** argument that does not depend on it.
+
+### 10.5 Where it was carried, and where it deliberately was not
+
+Instrument: the hardened standing scoping rule — **case-insensitive**; **wrap-immune** (markdown
+leaders `>`/`#`/`|`/bullets stripped and all whitespace collapsed to single spaces before
+matching, so a phrase broken at the hard wrap still matches); **hyphenation-tolerant** (numeric
+patterns written as bare digit runs with an optional `[-\s_.]{0,3}` separator between *every*
+character and **no** sign, decimal point or leading zero required, so `−0.00817525`,
+`-.00817525`, `0.00817525` and hyphen-broken renderings all match one pattern). **21 patterns
+over 1,239 files** (`.md`, `.py`, `.json`, `.jsonl`, `.txt`, `.sh`; `.git`, `.venv`, `Papers`,
+`__pycache__`, `.claude` excluded).
+
+| class | sites | action |
+|---|---|---|
+| the primary record | `experiments/journal/leg_185.md` — D5 table, the `a*` paragraph, the honest-limits paragraph, the D5 summary, the leg-174-facing blockquote | **5 append-only pointer blocks**, original text preserved verbatim |
+| leg 174's catalog — the site leg 210 addressed | `experiments/journal/leg_174.md`, `writeup/data/p2_route_vbs_v1_scoping.json` | **0 hits on every pattern**: the catalog carries no `ν` magnitude and no `a*` at all; its `CHEN-GCLM-DISS` row is model-level. **Nothing to downgrade** — the null check is recorded in `leg_174.md` as a dated note rather than left unrecorded |
+| attribution sites | `writeup/novelty/leg_207.md`, `experiments/journal/leg_207.md`, `TECHNICAL_P2_PUB3_V1.md`, and two `A_STAR` comments | **pointers added**; 0 values, 0 assertions, 0 thresholds, 0 gate quotes altered |
+| run artifacts (legs 185's and 207's) | `writeup/data/p2_route_m2sd_v1_diagnostic.json`, `experiments/p2_route_m2sd_v1_diagnostic.py`'s conclusion strings, `writeup/data/p2_route_dpa_v1_adversarial.json` | **never edited.** Leg 210's replay tier reproduced leg 185's banked ladder **exactly, to all 8 digits on all 4 grids** — these are a faithful transcription of what that code computed, and editing them would destroy the record of what leg 185 concluded, which is what the correction is *about* |
+| leg 125 / Route-M2P's own `a*` | `experiments/journal/leg_125.md:116`, `BLOG_P2_ROUTEM2P_V1.md:89,115`, `TECHNICAL_P2_ROUTEM2P_V1.md:241,369`, `writeup/data/p2_route_m2p_v1_promotion.json` | **untouched** — a different computation, which leg 210 did not measure. Editing these is hazard (a) of leg 283's novelty pass |
+| leg 180's own flags | `experiments/journal/leg_180.md:106`, `writeup/novelty/leg_180.md:112` | **untouched** — they already flag M2P's `a*` as a *different* `a*`, which is correct |
+| integration- and DM-owned ledgers | `experiments/JOURNAL.md` (`:3298`, `:4008`, `:4011`, `:4016`, `:4018`), `DIRECTION.md` (`:6711`, `:6714`, `:6793`, `:6794`, `:6825`, `:12238`, `:12244`, `:12258`), `CONTINUATION_PROMPT.md` | **flagged here, never edited by a leg** — ORCHESTRATION.md §5a. `DIRECTION.md:6793` and `JOURNAL.md:4011` both quote `−0.00818`/`−0.00895`; the DM/orchestrator owns those lines |
+
+**False positives, reported rather than tuned away.** The hyphenation-tolerant separator class
+plus the dropped decimal point makes the numeric patterns deliberately over-broad inside numeric
+JSON: `rounded_00818` returned **34 hits in 14 files** and `rounded_00895` **56 in 23**, of
+which all but the `leg_185.md` and ledger occurrences are unrelated floats (e.g. `895316`
+matching inside `0.4986225895316804`); `astar_4dig_3865` returned **83 hits in 28 files**,
+mostly unrelated. `phrase_zero_crossing` returned **52 hits in 29 files**, almost all about the
+fractional-gCLM and Route-F zero crossings — a different object entirely. One pattern,
+`richardson_0179936185`, returned **0** hits, correctly: leg 210's Richardson limit had never
+been carried into `main` before this entry.
+
+**Blind spots, because a sweep's blind spots are part of its result.** Six text extensions only
+(no PDFs under `Papers/`, no binary or notebook formats); anchoring is on **numbers**, so a site
+that paraphrases *"the negative values at Chen's `a`"* without any digits would not surface; and
+the parked branch `leg/210-m2sv-v1` is **read, never merged**, so leg 210's own artifact and
+runner are not on `main` and this entry is currently the only place on `main` carrying its
+magnitudes.
+
+### 10.6 The forward note
+
+**Leg 284 is taking leg 210's ladder to actual grid-convergence at `a = 1/2`.** If it succeeds,
+this downgrade is **superseded by citation, not by deletion** — the sign-only status and these
+pointers stay standing as the record of what was true when it was true, per this file's
+"marked, never hidden" convention.
+
+### The ceiling
+
+**0 arguments changed. 0 gate answers changed. 0 numeric values altered anywhere. 0 lines
+deleted. 0 run artifacts edited. 0 solver modules touched. 0 test assertions or thresholds
+changed. `plan_of_record.py` not opened.** Leg 185's original text stands in full, with pointer
+blocks beside it. Nothing here lifts a ban, promotes a route, or moves a link of `L1 → L4`:
+"sign-only" is a *narrowing* of a banked claim, and a confirmed float number on a discretised,
+truncated domain is still not a certificate and still not an existence proof. Stage P0 is
+unaffected. Clay stays **~0.05%**.

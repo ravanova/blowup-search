@@ -82,6 +82,23 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "writeup", "data", "p2_route_dpa_v1_adversarial.json")
 
 # leg 185's measured sign-flip boundary (experiments/journal/leg_185.md, lines 163-175).
+#
+# [PROVENANCE POINTER ADDED 2026-08-07 BY LEG 283 (Route-M2SR) -- comment only.  The VALUE
+#  below is UNCHANGED and this battery's behaviour is UNCHANGED: A_STAR is a bracketing
+#  INPUT here, never a claim, so nothing in leg 207's findings depends on it.  Two
+#  corrections to the comment above, per leg 210 (Route-M2SV, parked branch
+#  leg/210-m2sv-v1 @ 6e06880):
+#    (i)  the value 0.3864963972206034 is leg 125's / Route-M2P's, from the Delta(a) sweep
+#         at nu = 0 with c_l as the output (relative residual 1.933e-15,
+#         writeup/4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md sec 3.5) -- not leg 185's own
+#         measurement;
+#    (ii) leg 185's claim that its nu(a) zero crossing LANDS ON that value is UNPINNED: its
+#         own two starts straddle zero at a = 0.3865 (+0.00000035 / -0.00425080), and leg
+#         210's independent sign-change bracket between converged points is [0.36, 0.37].
+#  The SIGN FLIP itself is confirmed by leg 210's independently discretized scheme and is
+#  now gauge-independent (nu -> mu^2 nu under dilation, mu^2 > 0), so the boundary region
+#  bracketed below is real.  Separately, leg 185's a = 1/2 nu magnitudes are downgraded to
+#  SIGN-ONLY (not used in this file).  Index: writeup/CORRECTIONS.md #9.]
 A_STAR = 0.3864963972206034
 A_MODULE = 0.39          # leg 125's M7 `DissipativeProfile(a=0.39, ...)`
 A0_M7 = 0.386            # leg 125's M7 initial `a`

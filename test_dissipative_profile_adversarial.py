@@ -72,6 +72,15 @@ from solver.dissipative_profile import (
 )
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+# [PROVENANCE POINTER ADDED 2026-08-07 BY LEG 283 (Route-M2SR) -- comment only; the value,
+#  every assertion and every threshold in this file are UNCHANGED.  A_STAR is a bracketing
+#  INPUT to the battery, never a claim.  Per leg 210 (parked leg/210-m2sv-v1 @ 6e06880):
+#  (i) 0.3864963972206034 is leg 125's / Route-M2P's value (Delta(a) sweep at nu = 0, rel.
+#  residual 1.933e-15), not leg 185's own measurement; (ii) leg 185's claim that its nu(a)
+#  crossing LANDS ON it is UNPINNED -- its own two starts straddle zero at a = 0.3865
+#  (+0.00000035 / -0.00425080) and leg 210's independent bracket is [0.36, 0.37].  The SIGN
+#  FLIP is confirmed and is gauge-independent (nu -> mu^2 nu, mu^2 > 0), so the region
+#  bracketed here is real.  Index: writeup/CORRECTIONS.md #9.]
 A_STAR = 0.3864963972206034      # leg 185's measured sign-flip boundary
 A_MODULE, A0_M7 = 0.39, 0.386    # leg 125's M7 setup
 C_L_IMPOSED, C_OMEGA = 0.5, -1.0
