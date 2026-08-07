@@ -4326,6 +4326,19 @@ preempted agents had reached a landing.
   leg 283's downgrade note (+31, leg 283's own record preserved
   untouched), CORRECTIONS.md (+73, new register row 10 + section 11).
   0 numbers re-measured, 0 gate answers of the four source legs changed.
+- **Leg 295 (Route-PUB3P) -- gate YES, landed.** Closes PUB3's stale
+  `a_max_machine` exposure row (`TECHNICAL_P2_PUB3_V1.md:148`) with a
+  dated additive footnote citing legs 236/226/294, stating the corrected
+  value 0.55. **Caught and corrected a citation imprecision in leg 294's
+  own report along the way**: leg 294's flag cited line 134 quoting a
+  literal `a_max_machine=1.0` -- checked directly, no such literal string
+  exists anywhere in the file (whole-file case-insensitive wrap-immune
+  sweep confirms 0 hits; line 134 is unrelated prose); the true site
+  names the scalar without printing a numeric value. Sibling sweep: 4
+  `experiments/JOURNAL.md` hits, all already state the correction inline.
+  Zero existing sentences reworded, 0 lines deleted anywhere. Does not
+  touch the still-stale anchor JSON on main -- that remains leg
+  297/252's territory.
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
