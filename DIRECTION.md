@@ -27,7 +27,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 265 | P2C | yes |
-| B | 268 | PUB2R | no |
+| B | 271 | PUB2R2 | no |
 | C | 263 | WESC | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
@@ -11233,3 +11233,70 @@ verifier (HIGH priority once clear); 229 blocked on 226; 231-234 blocked on repa
 Nothing in this update lifts a ban or opens construction — 265's yes-branch still
 terminates in the user's decision packet, and no output here is described as movement
 toward Clay. Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — verify_268 confirmed a REAL GAP (268's correction missed
+three sites; PUB2 self-contradictory on main): rework leg 271 cut immediately into slot
+B (which was in fact vacant — 268 had landed), 270 kept separate and re-sequenced behind
+it
+
+**verify_268 (`06aca3e`): 268's numeric work solid** (banked JSON untouched, both
+certified brackets transcribed exactly) — **but the correction did not reach every site
+making the claim.** Three sites still assert truncation-independence: BLOG L65-67 (the
+quadrature-window justification, 42 lines before 268's own "is simply false"), TECHNICAL
+L201 (§3.2's contrast table), TECHNICAL L353-354 ("the operator does have one," against
+268's own retained L383). Plus TECHNICAL §7 and the BLOG ceiling disagree on whether the
+verification leg "has returned no verdict" or "has reported." An approved
+submission-track document is internally self-contradictory on `main`.
+
+**Slot correction first: slot B was VACANT** — it held 268, which landed at `3f6d5d0`;
+the roster entry went stale on both the DM and orchestrator sides. No live leg is
+interrupted. **Fold-vs-separate decided: SEPARATE.** 270's own spec keeps review and
+repair in different legs (a reviewer must not grade its own fixes), and nothing is
+re-derived — the site list IS verify_268's banked output. 270 is now unblocked (268's
+verifier landed) but re-sequenced behind 271, so the full sweep reads a self-consistent
+document.
+
+```
+### 271 — ROUTE-PUB2R2: COMPLETE 268's CORRECTION — EVERY REMAINING
+TRUNCATION-INDEPENDENCE SITE IN PUB2 (verify_268's confirmed gap; SUBMISSION-BLOCKING
+rework, second iteration — with an exhaustiveness clause so there is no third)
+**Thesis.** verify_268's finding, in full (above). The recurring defect shape is
+"correction applied to some sites, claim family left standing elsewhere" — so this leg's
+gate demands a DOCUMENTED EXHAUSTIVE SEARCH, not another enumerated fix.
+**Gate.** After the rework: (a) a documented search over BOTH PUB2 files for the entire
+truncation-independence claim family (patterns listed in the report; not limited to
+verify_268's three sites) returns ZERO sites asserting independence, and every formerly-
+asserting site now states the ≈4.0318 convergent-trend framing consistent with 268's
+text; (b) TECHNICAL §7 and the BLOG ceiling agree with the actual record (the
+verification leg HAS reported — leg 249, and verify_268 itself); (c) 268's numeric
+corrections and its companion artifact are byte-untouched; (d) no other sentence's
+meaning changed.
+  yes -> Bank. Flag 270 as dispatchable. PUB2 is internally consistent pending 270's full
+         trace.
+  no -> If any site's fix would change an ARGUMENT rather than a claim's wording, STOP
+        and escalate — same clause as 268's, and the submission approval returns to the
+        user.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md,
+               writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md,
+               writeup/novelty/leg_271.md, experiments/journal/leg_271.md.
+               Reads (never edits) writeup/novelty/verify_268.md, leg 268's artifact,
+               leg 249's branch/record.
+**Difficulty.** standard
+**Independence.** Same territory as 268 (landed) — no live conflict. TOP priority;
+submission-blocking. Anti-pausing clause verbatim. Its own §7b verifier should be
+dispatched on landing, given this is iteration two on the same document.
+```
+
+**FLOOR-TABLE block updated in this same edit** (B: 268 → 271; stale entry corrected).
+**Floor status: 4/10 strictly (265, 236, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 9 — legs 228, 210, 269, 270, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 3 (228, 210, 269); 270 now blocked on 271's
+landing (HIGH priority once clear — it gates actual submission); 229 blocked on 226;
+231-234 blocked on repairs. Next fresh leg number: **272.**
+
+Nothing in this update lifts a ban. The self-contradiction is recorded as a document
+defect under repair, not as any change to leg 176's or 249's findings, which stand as
+verified. Clay stays ~0.05%. No direction question raised.
