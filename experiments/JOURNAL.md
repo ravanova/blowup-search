@@ -3858,3 +3858,25 @@ preempted agents had reached a landing.
   which PROFILES lie in it -- the membership/mapping split. Census's
   yes-branch produced zero actionable survivors; nothing routed to the
   packet, no ban touched.
+- **Leg 270 (Route-PUB2V2) -- gate NO, NOT an escalation, landed. Full
+  pre-submission review of PUB2, read-only (PUB2 itself: zero diff).** 88 of
+  94 quantitative sites reproduce exactly from their banked source; 6
+  mismatch; 0 of the 6 change an argument. 14 findings banked, all
+  prose/provenance/precision, none substantive. HIGHEST-PRIORITY finding is
+  a DISCLOSURE GAP, not a wrong number: sigma_min = 0.0908 is
+  CONVENTION-RELATIVE across a factor of 12.5x (0.01086..0.13580 under a
+  border-weight sweep per leg 249's own W... measurement; 0.0420 under Xu's
+  own y-space normalization) and PUB2 states the digit at 15 sites while
+  disclosing this at 0 of them. Stays below the escalation line only because
+  leg 249 certifies the underlying GATE PROPERTY (bounded away from zero,
+  uniformly in truncation) is itself invariant under the weight -- PUB2's
+  own argument never actually depends on the specific 0.0908 figure.
+  Other findings: leg 163's two sources are NOT on main (23 traced claims
+  resolve only on an unmerged branch); four bounds printed 0.005-0.51%
+  tighter than the data allow; 0.71465's provenance traced through a
+  rounding chain that did not actually happen as printed. Confirmed clean
+  by independent read: 0 of 5 truncation-independence sites regenerate the
+  three-leg-removed defect, 0 float64 measurements carry proof-language,
+  leg 274's fix applies correctly. PUB2 is submission-ready from the
+  record's side pending these 5 light rework candidates -- actual
+  submission remains the user's action.
