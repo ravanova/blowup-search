@@ -34,7 +34,7 @@ prose as before.
 | F | 281 | CVF | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
-| I | 252 | VBRG | no |
+| I | 287 | EPA | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -12425,3 +12425,80 @@ leg number: **287.**
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
 raised.
+
+---
+
+## DM update, 2026-08-07 — 252 (VBRG) ESCALATED, gate NO on both clauses (247's repair
+EXONERATED, but the anchor artifact is NOT ENVIRONMENT-PORTABLE and 236's escalation
+used the STALE JSON): the consolidated rework's inputs amended to THREE with a
+provenance-tier requirement; slot I = 287 (portability census); duplicate-agent note
+recorded
+
+**252, recorded at full strength** (parked `leg/252-vbrg-v1`, main untouched):
+
+1. The regenerated a=0.45 margin (62.53156368658738×) differs from 247's headline
+   (62.02373957411577×) by 0.82% — but reproduces 247's OWN fresh re-solve to exact
+   float equality. **247's repair logic is exonerated**; the gap is banked-vs-fresh row
+   provenance, already published by 247. No Route-D v11 prose conclusion changes.
+2. **202 of 359 banked leaves moved on regeneration** (46 by >10%; one `converged` flag
+   True→False), with solver drift ruled out (profile_newton.py has exactly one commit,
+   the banking one) — **the artifact is not environment-portable**, worst exactly where
+   Newton's basin is decided at last-bit precision.
+
+**The sequencing flag, acted on — the consolidated rework's spec is AMENDED:** its
+inputs are now THREE (236's parked finding + 226's report when it lands + 252's
+corrected margins and portability result), and it must (a) RE-BASE 236's numbers
+against 252's regenerated values — 236 used the stale anchor JSON, 6.55e+11× off on the
+corrected field — before any consolidated conclusion is stated; (b) carry an explicit
+PROVENANCE TIER for every compared value (banked-stale / banked-regenerated /
+fresh-resolve), a discipline 252's finding makes mandatory for this family; (c) treat
+non-portability as a first-class input: a "moved" headline must show movement beyond
+the artifact's own environment noise floor. Still cut at top of queue the moment 226
+reports; 236's escalation is NOT final until re-based.
+
+**Duplicate-agent note (orchestrator-caught):** a second agent independently
+redispatched into slot I post-outage ran the same regeneration concurrently; stopped, no
+landing collision. DM bookkeeping needs no correction — slot I's assignment was always
+singular (252); recorded so the near-miss is in the durable record.
+
+**Slot I: fresh leg 287, drafted from 252's meta-finding (disjoint from the v11
+consolidation, which owns that family):**
+
+```
+### 287 — ROUTE-EPA: ENVIRONMENT-PORTABILITY CENSUS OF THE OTHER BANKED ARTIFACT
+FAMILIES (252's meta-finding, scoped wide — measurement audit, no value changes)
+**Thesis.** 252 proved one banked artifact family regenerates 202/359 leaves differently
+across environments with zero code change. Question: is this an outlier or the norm?
+Census N representative banked JSON artifacts from OTHER families (enumerated in the
+novelty pass; explicitly EXCLUDING the v11 anchor family, which the pending consolidated
+rework owns), regenerate each in the current environment, and measure leaf movement
+against the banked original — classify portable / non-portable, with the worst mover
+and any verdict-bearing flag flips named per artifact.
+**Gate.** For the enumerated census set: does each artifact classify cleanly, with
+movement quantified (max relative move, count over 10%, any flag flips) and zero banked
+files modified?
+  yes -> Bank the census table. Non-portable families get CORRECTIONS.md pointers
+         ("values are environment-local; compare via fresh re-solve, not banked bytes")
+         — the 252 lesson generalized exactly as far as the data supports.
+  no -> Any artifact that cannot be regenerated at all (missing runner, changed deps) is
+        itself a finding — bank it as irreproducible-as-banked, at full strength.
+**Territory.** experiments/p2_route_epa_v1_census.py,
+               writeup/data/p2_route_epa_v1_census.json,
+               writeup/novelty/leg_287.md, experiments/journal/leg_287.md.
+               Reads banked artifacts and their runners; MODIFIES NONE of them.
+**Difficulty.** standard
+**Independence.** Read-only census, disjoint by construction from the v11 family and
+every live slot. Slot I, now. Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (I: 252 → 287). **Floor status: 5/10
+strictly (285, 284, 281, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated; 229 on 226; 231-234 on repairs;
+221 live in slot D — its landing unblocks 233). Next fresh leg number: **288.**
+
+Nothing in this update lifts a ban. 252's findings are recorded as an exoneration plus
+an artifact-portability defect — no Route-D v11 prose conclusion moves, and 236's
+escalation is explicitly held non-final pending re-basing. Clay stays ~0.05%. No new
+direction question raised.
