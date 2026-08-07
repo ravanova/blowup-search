@@ -333,28 +333,64 @@ def arm_c2():
     #      inflation must scale the way the construction says it should.
     fails = []
     for tail in (1e-4, 1e-3, 1e-2, 1e-1):
-        om = nw.anchor() + tail * np.ones_like(X)
-        om = om - (om[nw.i0] + 1.0)      # keep gauge 1 satisfied
+        # RESUME-PASS CORRECTION.  This probe previously read
+        #     om = anchor + tail*ones;  om = om - (om[i0] + 1.0)
+        # which is self-cancelling: anchor[i0] = -1 exactly, so om[i0] + 1 IS
+        # `tail`, and subtracting it removes the whole perturbation.  Every
+        # rung returned D3 = 1.000 -- the ladder was measuring the anchor
+        # against itself and `all_must_fail` was vacuously False.  Caught by
+        # reading the numbers rather than the flag (lesson 90 is exactly that
+        # this check must itself be checked).
+        #
+        # The replacement vanishes at X = 0 by construction, so gauge 1 holds
+        # with no renormalisation, and tends to `tail` as |X| -> inf, so the
+        # far-field supremum is `tail` and the predicted inflation is
+        # tail / anchor_farfield_sup.  That prediction is recorded next to the
+        # measurement so the probe cannot silently degenerate again.
+        om = nw.anchor() + tail * (X ** 2 / (1.0 + X ** 2))
         d = diagnostics(nw, om, 0.5)
-        fails.append({"case": "anchor_plus_%.0e_constant_tail" % tail,
+        pred = tail / d["anchor_farfield_sup"]
+        fails.append({"case": "anchor_plus_%.0e_farfield_tail" % tail,
+                      "tail": tail,
                       "D3": d["D3_farfield_inflation"],
+                      "D3_predicted": pred,
+                      "gauge_residual_check": float(abs(om[nw.i0] + 1.0)),
                       "would_fail": bool(d["D3_farfield_inflation"]
                                          >= FARFIELD_INFLATION_MAX)})
     anc_ff = diagnostics(nw, nw.anchor(), 0.5)["anchor_farfield_sup"]
+    # The tail ladder BRACKETS the threshold rather than failing throughout:
+    # a 1e-4 far-field tail is genuinely below 100x the anchor and must pass,
+    # 1e-3 and above must fail.  A ladder that failed at every rung would show
+    # a discriminator that fires on everything, which is the thing lesson 90
+    # tells us to rule out.
+    below = [f for f in fails if f["tail"] < 1e-3]
+    above = [f for f in fails if f["tail"] >= 1e-3]
     return {
-        "must_pass": passes, "must_fail": fails,
+        "must_pass": passes, "tail_ladder": fails,
         "anchor_farfield_sup_n201": anc_ff,
         "all_must_pass_passed": all(p["would_pass"] for p in passes),
-        "all_must_fail_failed": all(f["would_fail"] for f in fails),
+        "small_tail_passes": all(not f["would_fail"] for f in below),
+        "large_tails_all_fail": all(f["would_fail"] for f in above),
+        "crossing_is_bracketed": bool(below and above
+                                      and not any(f["would_fail"]
+                                                  for f in below)
+                                      and all(f["would_fail"] for f in above)),
+        "max_pred_vs_measured_rel_err": max(
+            abs(f["D3"] - f["D3_predicted"]) / f["D3_predicted"]
+            for f in fails),
+        "max_gauge_residual_on_ladder": max(f["gauge_residual_check"]
+                                            for f in fails),
         "reading": "For D3 to report the other answer on the off-branch cases, "
                    "the returned profile's far-field supremum would have to fall "
                    "below 100x the anchor's %.2e on the same grid -- i.e. the "
                    "grid-scale oscillation leg 202 measured at node-to-node 0.80 "
-                   "would have to not exist. The constant-tail ladder shows the "
-                   "threshold is crossed by a tail of order 1e-3, which is far "
-                   "below the 9.02 supremum of the worst measured off-branch "
-                   "root, so the verdict is not sitting on a knife edge."
-                   % anc_ff,
+                   "would have to not exist. The far-field tail ladder brackets "
+                   "the crossing between a 1e-4 tail (passes) and a 1e-3 one "
+                   "(fails), and the measured inflation matches the predicted "
+                   "tail / %.2e to the recorded relative error -- so the test "
+                   "responds quantitatively to the far field it claims to "
+                   "measure, rather than firing on everything."
+                   % (anc_ff, anc_ff),
     }
 
 
@@ -390,6 +426,36 @@ def _v2_sweep(mod, n=V11_N):
                                               default=0.0),
         "best_relres": min(r["relres"] for r in rows),
     }
+
+
+def _v3_boundary(mod, n=V11_N):
+    """Route-D v11's V3, re-run against `mod`.
+
+    Added at the resume pass: v11 has FOUR headline numbers, not three.  The
+    gate's clause (c) names `a_max_machine`/`GA_boundary`/`grid_converged_a_max`
+    but this leg's dispatch preamble also names `last_machine_precision_a`,
+    which is computed by v11's V3 with the same inline `relres < 1e-8` test.
+    Covering it costs one extra sweep and closes the headline census.
+    """
+    a_values = [float(v) for v in np.round(np.arange(0.44, 0.76, 0.02), 3)]
+    rows = []
+    for a in a_values:
+        nw = mod.TwoScaleNewton(a=float(a), n=n)
+        r = nw.solve(om0=None, c0=0.5)
+        d = diagnostics(nw, r["Omega"], r["c"])
+        rows.append({"a": float(a), "relres": r["relres"], "c": r["c"],
+                     "v11_own_test": bool(r["relres"] < 1e-8),
+                     "repaired_verdict": bool(r["relres"] < 1e-8
+                                              and r["converged"]),
+                     "D3_farfield_inflation": d["D3_farfield_inflation"],
+                     "D2_gauge_residual": d["D2_gauge_residual"]})
+    ok_v11 = [r["a"] for r in rows if r["v11_own_test"]]
+    ok_rep = [r["a"] for r in rows if r["repaired_verdict"]]
+    return {"n": n, "rows": rows,
+            "last_machine_precision_a_v11_own_test": (max(ok_v11) if ok_v11
+                                                      else None),
+            "last_machine_precision_a_repaired_verdict": (max(ok_rep) if ok_rep
+                                                          else None)}
 
 
 def _v4_grids(mod, ns=(401, 801, 1601), a_values=(0.0, 0.2, 0.5, 0.8, 1.0)):
@@ -445,10 +511,20 @@ def arm_d(pre):
     b4 = banked.get("v4_grids", {})
 
     t0 = time.time()
-    pre_v2 = _v2_sweep(pre)
-    post_v2 = _v2_sweep(sys.modules["solver.profile_newton"])
-    pre_v4 = _v4_grids(pre)
-    post_v4 = _v4_grids(sys.modules["solver.profile_newton"])
+    post = sys.modules["solver.profile_newton"]
+
+    def stage(tag, fn, *a):
+        s = time.time()
+        r = fn(*a)
+        print("[arm_d] %-14s %.1f s" % (tag, time.time() - s), flush=True)
+        return r
+
+    pre_v2 = stage("v2 pre", _v2_sweep, pre)
+    post_v2 = stage("v2 post", _v2_sweep, post)
+    pre_v3 = stage("v3 pre", _v3_boundary, pre)
+    post_v3 = stage("v3 post", _v3_boundary, post)
+    pre_v4 = stage("v4 pre", _v4_grids, pre)
+    post_v4 = stage("v4 post", _v4_grids, post)
     elapsed = time.time() - t0
 
     # -- the a = 1.50 three-grid question, clause (b) of the gate ----------
@@ -485,6 +561,15 @@ def arm_d(pre):
             "post_repair_repaired_verdict":
                 post_v4["grid_converged_a_max_repaired_verdict"],
         },
+        "last_machine_precision_a": {
+            "banked": b3.get("last_machine_precision_a"),
+            "pre_repair_rerun_here":
+                pre_v3["last_machine_precision_a_v11_own_test"],
+            "post_repair_v11_own_relres_test":
+                post_v3["last_machine_precision_a_v11_own_test"],
+            "post_repair_repaired_verdict":
+                post_v3["last_machine_precision_a_repaired_verdict"],
+        },
         "GA_boundary": {
             "banked": b3.get("GA_boundary"),
             "status": "HARDCODED LITERAL at experiments/p2_route_d_v11_anchor.py "
@@ -506,6 +591,7 @@ def arm_d(pre):
                                    if len(accepted150) > 1 else None),
         },
         "v2_pre": pre_v2, "v2_post": post_v2,
+        "v3_pre": pre_v3, "v3_post": post_v3,
         "v4_pre": pre_v4, "v4_post": post_v4,
     }
 
@@ -527,14 +613,29 @@ def main():
         "threshold": FARFIELD_INFLATION_MAX,
         "numpy": np.__version__,
     }}
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+
+    def dump(tag):
+        """Write after every arm.
+
+        The resume pass learned this the expensive way: a 65-minute run that
+        writes only at the end and is then killed leaves NOTHING, and ARM D's
+        n = 1601 grids are the slowest thing this repository runs.  Partial
+        results are worth more than a tidy single write.
+        """
+        data["meta"]["completed_through"] = tag
+        OUT.write_text(json.dumps(data, indent=2, default=float))
+        print("[dump] %s -> %s" % (tag, OUT), flush=True)
+
     data["arm_a_leg202_cases"] = arm_a(pre)
+    dump("arm_a")
     data["arm_b_zero_regression"] = arm_b(pre)
+    dump("arm_b")
     data["arm_c_margins_and_head_to_head"] = arm_c(data["arm_a_leg202_cases"])
     data["arm_c2_does_D3_discriminate"] = arm_c2()
+    dump("arm_c")
     data["arm_d_route_d_v11_rederivation"] = arm_d(pre)
-
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(data, indent=2, default=float))
+    dump("arm_d")
 
     a, b = data["arm_a_leg202_cases"], data["arm_b_zero_regression"]
     c = data["arm_c_margins_and_head_to_head"]
@@ -561,9 +662,12 @@ def main():
           % (c["D1_min_off_branch"], c["D1_max_off_branch"],
              c["D1_max_on_branch"],
              c["D1_rejects_off_branch_at_any_threshold_that_keeps_on_branch"]))
-    print("  C2 falsification: all must-pass passed = %s; all must-fail "
-          "failed = %s" % (c2["all_must_pass_passed"],
-                           c2["all_must_fail_failed"]))
+    print("  C2 falsification: must-pass all passed = %s; tail-ladder crossing "
+          "bracketed = %s (small tail passes = %s, large tails all fail = %s); "
+          "max |pred-meas|/pred = %.2e"
+          % (c2["all_must_pass_passed"], c2["crossing_is_bracketed"],
+             c2["small_tail_passes"], c2["large_tails_all_fail"],
+             c2["max_pred_vs_measured_rel_err"]))
     am, gm = d["a_max_machine"], d["grid_converged_a_max"]
     print("  D  a_max_machine   banked %s | pre-repair here %s | post-repair "
           "(v11's own relres test) %s | post-repair (repaired verdict) %s"
@@ -575,6 +679,12 @@ def main():
           % (gm["banked"], gm["pre_repair_rerun_here"],
              gm["post_repair_v11_own_relres_test"],
              gm["post_repair_repaired_verdict"]))
+    lm = d["last_machine_precision_a"]
+    print("     last_machine_precision_a  banked %s | pre %s | post(v11 test) "
+          "%s | post(repaired) %s"
+          % (lm["banked"], lm["pre_repair_rerun_here"],
+             lm["post_repair_v11_own_relres_test"],
+             lm["post_repair_repaired_verdict"]))
     print("     GA_boundary %s -- hardcoded literal, cannot move under any "
           "module repair" % (d["GA_boundary"]["banked"],))
     t = d["a_1p50_three_grids"]
