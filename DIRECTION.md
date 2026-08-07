@@ -26,7 +26,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 274 | J176R2 | no |
+| A | 276 | PUB2R3 | no |
 | B | 210 | M2SV | no |
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
@@ -38,10 +38,11 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-F refill after 236's escalation): 3/10
-floor-eligible -- F/273/NFS, G/267/FDL, H/264/WETP -- matching the "236 escalated" DM
-update at the tail of this file. Roster: A/274/J176R2, B/210/M2SV, C/228/BHRV,
-D/221/BVRR, E/248/CNR2, F/273/NFS, G/267/FDL, H/264/WETP, I/252/VBRG, J/226/PNR.)
+(Current snapshot, DM update of 2026-08-07 (slot-A refill after 274 landed and 270's
+trace landed): 3/10 floor-eligible -- F/273/NFS, G/267/FDL, H/264/WETP -- matching the
+"270 trace" DM update at the tail of this file. Roster: A/276/PUB2R3, B/210/M2SV,
+C/228/BHRV, D/221/BVRR, E/248/CNR2, F/273/NFS, G/267/FDL, H/264/WETP, I/252/VBRG,
+J/226/PNR; leg 275 (P0TC2) additionally in flight on 251's parked branch.)
 
 ---
 
@@ -11711,3 +11712,99 @@ on repairs. Next fresh leg number: **276.** FLOOR-TABLE unchanged; floor 3/10 st
 Nothing in this update lifts a ban or opens construction; Clay stays ~0.05%. No
 direction question raised — the packet reaches the user through assembly, with the
 pattern disclosure included.
+
+---
+
+## DM update, 2026-08-07 — 270's full trace landed (88/94 exact, 6 mismatches, 0
+argument changes, 14 findings banked): the five item families BUNDLED into one rework
+leg 276 (slot A), leg 163's sources recommended for merge per the 249 precedent, and the
+drafting trigger comes off deferral with floor-eligible candidate 277
+
+**270 (PUB2V2) landed (`3fce2ad`), gate NO, correctly not an escalation:** 88/94
+quantitative sites reproduce exactly; 6 mismatch; 0 change any argument. Top finding
+recorded at full strength: **σ_min = 0.0908 is convention-relative by 12.5×**
+(0.01086-0.13580 under the border-weight sweep leg 249 already measured; **0.0420 under
+Xu's own normalization**) — printed at 15 sites, disclosed at 0. It stays below the
+escalation line only because 249 also certified the gate PROPERTY (bounded away from
+zero uniformly in truncation) is weight-invariant — the digit is under-caveated, the
+argument is not. Also banked: leg 163's two sources unmerged (23 traced claims resolve
+only on an unmerged branch); four bounds printed tighter than the data supports; the
+0.71465 provenance chain not matching as printed.
+
+**Bundling decision: ONE rework leg, not five spot-fixes** — this campaign's PUB2 lesson
+(three iterations to close one claim family) applied prospectively. **And the
+unmerged-sources finding gets the 249 treatment: this DM recommends the orchestrator
+MERGE leg 163's two source branches via the normal audit path** — banked findings that
+23 on-main claims depend on belong on main; 276 then re-checks resolution rather than
+editing anything around the gap.
+
+```
+### 276 — ROUTE-PUB2R3: CLOSE ALL FIVE ITEM FAMILIES FROM 270's TRACE IN ONE PASS
+(trace-driven, bundled by design — the convergence lesson applied before iteration, not
+after)
+**Thesis.** 270's banked trace (writeup/data/p2_route_pub2v2_v1_trace.json) enumerates
+every failing site. Five families: (1) the σ_min convention-relativity disclosure —
+mechanism per 270's own recommendation (a single prominent caveat stating the 12.5×
+sweep and Xu's 0.0420, referenced at each of the 15 sites, or per-site caveats — the leg
+decides FROM the trace, not from taste, and the weight-invariance of the gate property
+is stated in the same breath); (2) the four over-tight bounds loosened to exactly what
+the data supports; (3) the 0.71465 provenance chain corrected as printed; (4) post-merge
+re-trace of the 23 claims resolving to leg 163's sources (BLOCKED-in-part on the
+orchestrator's merge above — if the merge has not happened by dispatch, the leg does
+families 1-3+5 and reports family 4 as pending, honestly); (5) re-run of 270's full
+94-site trace at the end, as the leg's own exit check.
+**Gate.** Does the re-run trace show all previously-failing sites green, 88 previously-
+exact sites byte-unchanged, and zero arguments changed?
+  yes -> Bank. PUB2 is submission-ready from the record's side; actual submission stays
+         the user's action. Dispatch a final §7b verifier per the standing
+         iteration-correction instruction.
+  no -> Any site resisting without argument change: report precisely. Any fix that WOULD
+        change an argument: STOP, escalate, submission approval returns to the user.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md,
+               writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md, writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_276.md, experiments/journal/leg_276.md.
+               Reads (never edits) 270's trace JSON, 249's branch, verify-271.
+**Difficulty.** standard
+**Independence.** Same-document family as 268/271/274 (all landed — no live conflict).
+Slot A, now. Anti-pausing clause verbatim.
+```
+
+**Trigger off deferral — floor-eligible candidate drafted from 270's own finding:**
+
+```
+### 277 — ROUTE-XUN: THE CERTIFICATE'S NUMBERS UNDER XU's OWN NORMALIZATION (the 0.0420
+cross-check, promoted from a caveat to a measurement)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 270 found σ_min reads 0.0420 under Xu's normalization — a bridge between
+this repository's certificate and Xu's published framework (legs 127/163/189 lineage).
+Computing the certificate's key quantities under Xu's convention (not just σ_min) makes
+the two frameworks directly comparable for the first time — a genuine cross-validation
+and a secondary-goal novel finding if the comparison is clean (or a discrepancy finding
+at full strength if not).
+**Gate.** Under Xu's normalization, do the certificate's converted quantities agree with
+(a) their own weight-sweep images per 249's measurements, and (b) any directly-comparable
+value Xu publishes — each named with locators before computing?
+  yes -> Bank the conversion table as the comparison bridge; flag for PUB2's caveat
+         family as supporting material (NOT edited into PUB2 by this leg).
+  no -> A named discrepancy between frameworks is a real finding — report at full
+        strength, escalate only if it touches a banked gate property.
+**Territory.** experiments/p2_route_xun_v1_convert.py,
+               writeup/data/p2_route_xun_v1_convert.json,
+               writeup/novelty/leg_277.md, experiments/journal/leg_277.md.
+               Reads (never edits) 249's data, Xu's paper, leg 176/249's certificates.
+**Difficulty.** standard
+**Independence.** Own module, read-only overlaps. Dispatchable AFTER 276 lands (so its
+"supporting material" flag points at stable caveat sites). Reserve.
+```
+
+**FLOOR-TABLE block updated in this same edit** (A: 274 → 276; caption refreshed).
+**Floor status: 3/10 strictly (273, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 7 — legs 272, 277, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (272); 277 blocked on 276's landing; 229 blocked
+on 226; 231-234 blocked on repairs 217/219/221/225. 275 in flight on 251's parked
+branch; the packet assembles on its landing. Next fresh leg number: **278.**
+
+Nothing in this update lifts a ban; 270's convention-relativity finding is recorded as
+an under-caveat, not an argument defect, exactly as its own trace establishes. Clay
+stays ~0.05%. No direction question raised.
