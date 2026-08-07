@@ -3805,3 +3805,10 @@ preempted agents had reached a landing.
   that key regenerates the defect; a corrections-register pointer would end
   the cycle better than a fourth prose sweep. Unblocks leg 270 (full
   pre-submission review).
+- **Leg 274 (Route-J176R2) -- gate YES, landed, light.** PUB2's SS3.5
+  16x wrong-subject label repaired: the printed decrements are sigma_min's
+  (the reciprocal), now stated under its own name; ||T^-1||_X given its own
+  increments. Leg 176's reading-field regeneration hazard closed via
+  CORRECTIONS.md entry 5 plus a companion annotation JSON -- both banked
+  JSONs byte-untouched. Leg 270 (full pre-submission review) is now
+  dispatchable.
