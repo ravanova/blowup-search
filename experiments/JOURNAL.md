@@ -4170,6 +4170,26 @@ preempted agents had reached a landing.
   (skip a fresh kappa-sweep once one point at that N is known) but does
   NOT let a future leg skip computing at a new N. Flagged, not applied,
   for future sweeps needing this quantity.
+- **Leg 291 (Route-HLR2) -- gate NO, landed.** Has any later work
+  certified `HL_S2_nonsymmetric` -- this repository's own ORIGINAL
+  pre-pivot target, closed gate-NO at stage B (leg 126) -- since that
+  closure? The repository's existing EXT-family literature watch (legs
+  74/77/82/90/93/123) had never actually re-asked this SPECIFICALLY since
+  the Clay pivot: leg 123/EXT6's search window closed ~11 hours BEFORE the
+  pivot ruling commit (4ff544a) landed, so the gap was silent, not
+  checked-and-empty, until now. 14 channels run (12 structured endpoints +
+  2 web searches) across two nested windows: wide (since legs 55/57's
+  original dating, ~44h) and narrow (since the pivot specifically, ~8h,
+  the boundary no prior leg had checked) -- **0 candidates in either**.
+  Decisive channel: the raw math.AP firehose shows zero papers announced
+  at all since the pivot. Author's own research page lists no successor;
+  Semantic Scholar and OpenAlex both show 0 citations of the source paper.
+  One near-miss recorded and excluded, not silently dropped: arXiv:2605.15130
+  cites the source paper but targets a different, analytically-constructed
+  (not certified) 3D object, and predates both windows by 11+ weeks
+  anyway. The object remains open exactly as legs 54/55/57/126 last
+  measured it -- banked for a future retrospective's framing; no link of
+  the current Clay chain moves.
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
