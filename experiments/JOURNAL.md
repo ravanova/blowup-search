@@ -3898,3 +3898,35 @@ preempted agents had reached a landing.
   successive legs" vs "roughly seventy legs" (a 10x spread at 4 sites) --
   no banked source in leg 276's read-set resolves which figure is right.
   A mandated verifier is in flight (sixth landing on this document).
+- **Leg 276's verifier -- CONFIRMED clean, but found C1 IS resolvable
+  (good news, landed).** Two banked sources on main anchor "seven" to legs
+  51-57, splitting the 4 sites 2/2 rather than leaving all ambiguous:
+  TECHNICAL_P2_PUB2_V1.md's "seven" is correct; BLOG_P2_PUB2_V1.md's
+  "seventy" is a plain transcription error, near-verbatim from PUB1's
+  "seven", contradicting PUB2's own technical note. Feeds directly into leg
+  278. Process lesson adopted as a STANDING RULE for all future
+  document-correction legs: scope by ARTIFACT/claim-sharing set, never by
+  inherited defect list. Leg 278 redrafted as the declared-final,
+  artifact-scoped PUB2 pass; an eighth pass now requires the user's own
+  sign-off.
+- **Leg 228 (Route-BHRV) -- gate YES on BOTH clauses, landed. Independent
+  postrepair verification of leg 218's bordered_hl.py border-weight guard.**
+  Clause A: 67 derived adversarial cases (6 weight-surface entry points x 9
+  inadmissibility classes), pre-repair leaked 67/67, post-repair leaks 0/67
+  -- Z_1 understated 1.8015e9x, ||A|| 6.6712e9x on leg 198's own sign flip
+  (||A|| reproducing both prior legs to 5 sig figs). Found a reachable entry
+  point NEITHER prior leg listed (nu via p, |X|~745 overflows the weight
+  vector). Clause B: 45 configurations, 77,040 float leaves, 0 bit
+  mismatches. TWO FINDINGS BEYOND THE GATE: (1) leg 218's caller
+  enumeration was MATERIALLY incomplete -- missed a real weight-surface
+  caller (p2_route_tn_v1_consistency.py) though the repair itself is
+  unaffected, re-earned over the full ten-importer space; (2) THE BANKED
+  LEG-198/LEG-218 Z_1 DISAGREEMENT (1.198e9x vs 2.2867e8x, 5.24x apart,
+  never resolved, leg 223 adopted neither) IS NOW RESOLVED as round-off-
+  floor noise in a near-total cancellation denominator: under
+  mathematics-neutral perturbations (thread count alone) the SAME quantity
+  spans 11.77x -- more than the original disagreement -- while a control
+  quantity both legs agree on moves by only 7.2e-12 relative. Recommendation
+  to integration: close as EXPLAINED, adopt NEITHER original number as "the"
+  ratio, quote ||A|| and Z_2 (the reproducible columns) going forward. Both
+  legs' own verdicts stand unaffected. 0 banked numbers moved.
