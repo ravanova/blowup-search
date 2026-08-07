@@ -11906,28 +11906,43 @@ of 263's sweep; spec stands; anti-pausing clause verbatim).
 **Trigger fired — drafted at 276's flagged leftover:**
 
 ```
-### 278 — ROUTE-SVSL: SEVEN OR SEVENTY? RESOLVE THE 10× PROSE SPREAD FROM PROVENANCE
-(276's honestly-unresolved item — light, provenance-first, rework second)
-**Thesis.** Four PUB2 sites disagree by 10× on how many successive legs a claim covers
-("seven" vs "roughly seventy"), and 276 correctly declined to guess. The number IS
-resolvable: this repository's own git history and journals record exactly which legs
-constitute the referenced sequence — count them from provenance, then fix the four sites
-to the counted value.
-**Gate.** Does the provenance count (method documented: which legs, from which journal/
-git evidence, counted how) yield ONE defensible number, and do all four sites then state
-it consistently with no other meaning changed?
-  yes -> Bank the count and the fix; append the resolution to writeup/CORRECTIONS.md.
-  no -> If provenance genuinely supports BOTH readings (different sequences being
-        referenced at different sites), state which site means which, fix each to its
-        own correct referent, and record that the apparent contradiction was two claims
-        wearing one phrasing. Escalate only if neither reading is supportable.
-**Territory.** the four named PUB2 sites (from 276's report), writeup/CORRECTIONS.md
-               (append), writeup/novelty/leg_278.md, experiments/journal/leg_278.md.
-               Reads (never edits) git history, experiments/JOURNAL.md, 276's report.
-**Difficulty.** light
-**Independence.** Same-document family, all prior legs landed — no live conflict.
-Dispatchable AFTER verify-276 lands (seventh landing on one document; let the sixth's
-verifier report first). Reserve.
+### 278 — ROUTE-SVSL: THE DECLARED-FINAL, ARTIFACT-SCOPED PUB2 PASS — fix the resolved
+seven-vs-seventy typo AND close the document by claim-sharing scope, not by inherited
+defect list (REDRAFTED in place per verify-276's process recommendation; never
+dispatched under the old spec)
+**Thesis.** verify-276 resolved the residue: "seven" anchors to legs 51-57 via two
+banked sources (BLOG_P2_ROUTECP_V1.md:12, TECHNICAL_P2_ROUTENG_V1.md:22-24); the four
+sites split 2/2 — TECH L35 and the "seven" framing correct, BLOG_P2_PUB2_V1.md:14's
+"seventy" a plain transcription error contradicting PUB2's own technical note. It also
+diagnosed the process defect behind six passes on one document: each pass scoped its
+read-set to the prior pass's defect list while the resolving sources sat one grep away
+in a sibling directory. This pass adopts the verifier's remedy: SCOPE BY ARTIFACT —
+every file in writeup/4_p2_lottery/ sharing a claim with PUB2 — and is DECLARED THE
+LAST PASS, exit condition stated up front.
+**Exit condition (stated before dispatch, per the recommendation):** zero cross-document
+contradictions on shared claims across the artifact scope, verified by a documented
+claim-sharing sweep; residues found beyond fixable scope become explicit CORRECTIONS.md
+entries (not future passes). An EIGHTH pass on this document requires the user's own
+sign-off — pre-committed as a process rule, not a leg's discretion.
+**Gate.** After the pass: (a) the seventy typo fixed per the verifier's locators (2/2
+split respected — no over-correction of the correct "seven" sites); (b) the documented
+artifact-wide claim-sharing sweep finds zero remaining cross-document contradictions,
+OR every remainder is banked as a CORRECTIONS.md entry with its locator; (c) 276's
+122-row trace re-run stays green, byte-identical where previously exact; (d) zero
+arguments changed.
+  yes -> Bank. PUB2 is CLOSED from the record's side; submission is the user's action;
+         no further correction pass exists without user sign-off.
+  no -> Any fix that would change an argument: STOP, escalate. Anything else resisting:
+        bank as a CORRECTIONS.md entry and still close the pass — the exit condition is
+        consistency-or-banked-residue, not perfection.
+**Territory.** writeup/4_p2_lottery/ (the claim-sharing files identified by the sweep;
+               PUB2's two files centrally), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_278.md, experiments/journal/leg_278.md.
+               Reads (never edits) verify-276's report and locators, 276's trace.
+**Difficulty.** standard
+**Independence.** Document family fully landed — no live conflict. Queue order at
+vacancies: BEHIND the pre-committed 226 consolidated rework (banked-record correctness
+outranks submission polish), AHEAD of everything else. Anti-pausing clause verbatim.
 ```
 
 **FLOOR-TABLE block updated in this same edit** (A: 276 → 272). **Floor status: 3/10
@@ -11943,3 +11958,43 @@ this DM will draft fresh candidates at that moment rather than let a slot idle �
 commitment is on record. Next fresh leg number: **279.**
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — verify-276 landed (5 families clean; seven-vs-seventy
+RESOLVED: "seven" = legs 51-57, the "seventy" a transcription typo): 278 REDRAFTED IN
+PLACE as the declared-final artifact-scoped pass per the verifier's process
+recommendation; the scoping lesson adopted as a standing rule; queue order fixed
+
+**verify-276 (`d219ab1`), recorded:** all five families confirmed clean at full
+strength; the C1 residue RESOLVED from two banked sources (BLOG_P2_ROUTECP_V1.md:12,
+TECHNICAL_P2_ROUTENG_V1.md:22-24 anchor "seven" to legs 51-57) — the four sites split
+2/2, with BLOG_P2_PUB2_V1.md:14's "seventy" a plain transcription error contradicting
+PUB2's own technical note. **And the process diagnosis that matters beyond this
+document: six passes each scoped their read-set to the prior pass's defect list, while
+the resolving sources sat one grep away in a sibling directory.**
+
+**Actions taken:**
+
+1. **278 redrafted in place** (never dispatched under the old spec — the number stands):
+   now the DECLARED-FINAL, ARTIFACT-SCOPED pass — every claim-sharing file in
+   writeup/4_p2_lottery/, exit condition stated up front
+   (consistency-or-banked-residue), verifier's locators folded in so nothing is
+   re-derived, the 2/2 split respected against over-correction, and **an eighth pass on
+   this document requires the user's own sign-off** — a process rule, not leg
+   discretion.
+2. **Standing drafting rule adopted for ALL future document-correction legs:** scope by
+   ARTIFACT / claim-sharing set, never by an inherited defect list — the defect list
+   tells you where yesterday's reader looked, not where the claims live.
+3. **Queue order at vacancies, fixed:** (1) the pre-committed 226 consolidated rework
+   the moment it becomes draftable (banked-record correctness outranks submission
+   polish); (2) 278; (3) the blocked pool as it unblocks.
+
+**No slot vacated by this update; FLOOR-TABLE unchanged; floor 3/10 strictly (277, 267,
+264).** **Canonical reserve line: reserve count 6 — legs 278, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 1 (278, its verify-276 condition now met —
+but held behind the 226 rework per the queue order above if both are pending at a
+vacancy). Next fresh leg number: **279.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised —
+still awaiting the user's packet response and 226's report.
