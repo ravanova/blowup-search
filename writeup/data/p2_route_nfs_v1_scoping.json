@@ -1,0 +1,635 @@
+{
+ "leg": 273,
+ "route": "NFS",
+ "run_date": "2026-08-07",
+ "question": "Do leg 255's two non-fluid survivors fill an EMPTY cell of leg 174's occupancy matrix, or duplicate DF-CGL's already-occupied dissipative-non-fluid cell?",
+ "reads_only": {
+  "path": "writeup/data/p2_route_p1a_v1_census.json",
+  "leg": 255,
+  "survivors_as_banked": [
+   "KS3D-EXPLICIT",
+   "KS3D-NONEXPLICIT"
+  ],
+  "n_candidates": 21,
+  "gate_answer": "YES"
+ },
+ "locators": {
+  "breden_chu": {
+   "arxiv": "2404.04054",
+   "title": "Constructive proofs for some semilinear PDEs on H^2(e^{|x|^2/4}, R^d)",
+   "authors": "Maxime Breden, Hugo Chu",
+   "pdf_md5": "ff7a34b776bfe5edf97397e5eabdbb7a",
+   "pdf_md5_matches_leg_255_pin": true,
+   "text_extraction_md5": "4e7f064859e924244ad19b5bb0888a67",
+   "extraction_lines": 2060,
+   "equation_2_line": 84,
+   "equation_2_verbatim": "Lu := -\\Delta u - (x/2) . \\nabla u = f(x, u, \\nabla u),  x in R^d",
+   "corollary_17i_line": 601,
+   "corollary_17i_verbatim": "(i) If d in {1, 2, 3}, u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).",
+   "lemma_19_line": 609,
+   "lemma_19_constants_d3": {
+    "C0": 0.52319,
+    "C1": 1.0228,
+    "C2": 0.37467
+   },
+   "remark_18_line": 607,
+   "remark_18_verbatim": "Note that these embeddings are sufficient to cover the range of exponent p for the semilinear heat equation for which RAPIDLY DECAYING self-similar solutions are known to exist",
+   "remark_40_line": 1687,
+   "delta_inverse_caveat_line": 191,
+   "delta_inverse_caveat_verbatim": "the operator \\Delta alone does not have a well-behaved inverse with respect to this basis",
+   "sign_slip_note": "line 191's prose writes L := -Delta + (x/2).grad; the abstract (line 20) and the NUMBERED equation (2) (line 84) both give -Delta - (x/2).grad.  Two against one, so equation (2) is authoritative and line 191 is recorded as a slip, not resolved silently.",
+   "occurrences_of_blow": 1,
+   "occurrence_of_blow_line": 1925,
+   "occurrence_of_blow_context": "bibliography entry [16], Chen & Hou",
+   "occurrences_of_backward": 0
+  },
+  "gs_2209_11206": {
+   "arxiv": "2209.11206",
+   "title": "Stable singularity formation for the Keller-Segel system in three dimensions",
+   "authors": "Irfan Glogic, Birgit Schoerkhuber",
+   "pdf_md5": "4823d47f876be553ae8b3e380a015e0c",
+   "extraction_lines": 2721,
+   "equation_1_5_line": 107,
+   "equation_1_5_verbatim": "u_T(t,x) := (1/(T-t)) U(x/sqrt(T-t)),  where U(x) = 4(d-2)(2d + |x|^2) / (2(d-2) + |x|^2)^2",
+   "explicit_profile_attributed_to": "reference [8] (Brenner et al.)",
+   "interval_arithmetic_occurrences": 0,
+   "computer_occurrences": 0
+  },
+  "cz_2406_11358": {
+   "arxiv": "2406.11358",
+   "title": "On the stability of Type I self-similar blowups for the Keller-Segel system in three dimensions and higher",
+   "authors": "Charles Collot, Kaiqiang Zhang",
+   "pdf_md5": "6febdf2a3242f0ee187d237161bdedaf",
+   "extraction_lines": 3643,
+   "theorem_1_1_line": 289,
+   "theorem_1_1_scope": "Radial stability of U0 (the EXPLICIT profile). d = 3, or d >= 4 with N0 = 1.",
+   "theorem_1_3_line": 350,
+   "theorem_1_3_scope": "Finite Lipschitz codimensional radial stability of U_n (the NON-EXPLICIT family), 3 <= d <= 9, n >= 1; codimension = N_n - 1.",
+   "remark_1_4_line": 409,
+   "remark_1_4_verbatim": "The profile U1 has from numerical simulations N1 = 2 instable modes [8]. So IF N1 = 2 HOLDS RIGOROUSLY the set of Theorem 1.3 is a hypersurface.",
+   "interval_arithmetic_occurrences": 0,
+   "computer_occurrences": 0
+  },
+  "nwz_2503_02263": {
+   "arxiv": "2503.02263",
+   "title": "Infinitely many self-similar blow-up profiles for the Keller-Segel system in dimensions 3 to 9",
+   "authors": "Van Tien Nguyen, Zhi-An Wang, Kaiqiang Zhang",
+   "pdf_md5": "e028431d7e0a2a80ee26d7260a1cc44d",
+   "extraction_lines": 3270,
+   "reduced_mass_line": 490,
+   "reduced_mass_verbatim": "Phi(r) = (1 / (2 r^d)) * int_0^r U(s) s^{d-1} ds",
+   "equation_2_2_line": 525,
+   "equation_2_2_verbatim": "\\Delta Phi - (1/2) Lambda Phi + 2 d Phi^2 + y . \\nabla(Phi^2) = 0,  y in R^{d+2},   with Lambda u := 2u + y . \\nabla u",
+   "equation_2_3_line": 544,
+   "equation_2_3_verbatim": "Phibar_2 = 1/|y|^2,   Phibar_3 = 2 / (2(d-2) + |y|^2)",
+   "far_field_verbatim": "the infinitely many backward self-similar profiles approximate the rescaling radial steady-state near the origin and 2(d-2)/|x|^2 at spatial infinity",
+   "distinct_from_brenner_line": 447,
+   "interval_arithmetic_occurrences": 0,
+   "computer_occurrences": 0
+  },
+  "leg_174_matrix": {
+   "where": "experiments/journal/leg_174.md lines 53-56, writeup/data/p2_route_vbs_v1_scoping.json",
+   "grade_A": "the certificate is ON the dissipative object -- the enclosed equation itself carries dissipation",
+   "grade_B": "the THEOREM is about the dissipative PDE, but the enclosed object is an inviscid auxiliary"
+  },
+  "leg_261_c5": {
+   "where": "experiments/p2_route_p1a2_v1_census2.py, measure_keller_segel_control_d3",
+   "witness_used": "u = exp(-|x|^2)  -- a GAUSSIAN stand-in, not the blow-up profile",
+   "what_it_measured": "the NONLINEARITY's mapping into L^2(mu); reported in_L2_mu = True",
+   "what_it_did_not_measure": "MEMBERSHIP of the actual (algebraically decaying) profile in H^2(mu)"
+  }
+ },
+ "occupancy_matrix_as_of_this_leg": {
+  "fluid=fluid,grade=A": [],
+  "fluid=fluid,grade=B": [
+   "arXiv:2208.09445 (BCG, 3D compressible Navier-Stokes)"
+  ],
+  "fluid=nonfluid,grade=A": [
+   "arXiv:2410.05480 (Dahne-Figueras, CGL) -- leg 174",
+   "arXiv:1610.09496 (Biernat-Donninger, harmonic map heat flow, 2016) -- leg 255"
+  ],
+  "fluid=nonfluid,grade=B": []
+ },
+ "memberships": {
+  "KS3D-EXPLICIT": {
+   "object": "KS3D-EXPLICIT (Brenner et al. closed form)",
+   "ambient_dimension": 3,
+   "radii": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_cor17_witness_e_r2_over_8_times_u": [
+    0.5472023321408008,
+    0.26290473151230104,
+    0.30252662575005995,
+    2.282426015484496,
+    12.094545291625304,
+    53.182296178097765
+   ],
+   "log10_weighted_density": [
+    1.0944046642816017,
+    1.1278694543525645,
+    1.8091732341560447,
+    6.371032004952879,
+    26.597330548562457,
+    109.37489231283534
+   ],
+   "truncation_radii": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_truncated_weighted_mass": [
+    1.2871267724321775,
+    1.8580162211395495,
+    5.817612578172259,
+    25.706174945214347,
+    108.17885578514304
+   ],
+   "cor17_witness_monotone_growing": true,
+   "weighted_mass_monotone_growing": true,
+   "log10_witness_span_over_measured_radii": 52.635093845956966,
+   "log10_mass_span_over_measured_truncations": 106.89172901271087,
+   "in_H2_mu": false,
+   "excluded_by": "BOTH -- Corollary 17(i) witness AND weighted L^2(mu) mass",
+   "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+   "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+  },
+  "KS3D-NONEXPLICIT": {
+   "object": "KS3D-NONEXPLICIT (proved far-field 2(d-2)/r^2)",
+   "ambient_dimension": 3,
+   "radii": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_cor17_witness_e_r2_over_8_times_u": [
+    0.3553168059018877,
+    -0.08388275471235532,
+    -0.034501023185440016,
+    1.969205876906108,
+    11.790213451256188,
+    52.880423722640394
+   ],
+   "log10_weighted_density": [
+    0.7106336118037754,
+    0.43429448190325176,
+    1.1351179362850448,
+    5.744591727796103,
+    25.988666867824225,
+    108.7711474019206
+   ],
+   "truncation_radii": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_truncated_weighted_mass": [
+    4.81821121977768,
+    4.517326496179042,
+    5.233269611300928,
+    25.09740533501519,
+    107.57510433054443
+   ],
+   "cor17_witness_monotone_growing": true,
+   "weighted_mass_monotone_growing": true,
+   "log10_witness_span_over_measured_radii": 52.52510691673851,
+   "log10_mass_span_over_measured_truncations": 102.75689311076675,
+   "in_H2_mu": false,
+   "excluded_by": "BOTH -- Corollary 17(i) witness AND weighted L^2(mu) mass",
+   "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+   "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+  },
+  "REDUCED-MASS-PHI": {
+   "object": "Phibar_3 in R^{d+2} = R^5",
+   "ambient_dimension": 5,
+   "radii": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_cor17_witness_e_r2_over_8_times_u": [
+    -0.4897812341123692,
+    -0.4818227633843929,
+    -0.1728037213517214,
+    1.9302878108757384,
+    11.780152125248293,
+    52.877886454575034
+   ],
+   "log10_weighted_density": [
+    -0.9795624682247384,
+    0.240474455887139,
+    2.062632522608407,
+    7.472935569719251,
+    28.376784181120286,
+    111.77637282242969
+   ],
+   "truncation_radii": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_truncated_weighted_mass": [
+    -0.17175501230848234,
+    1.7269249805878886,
+    6.880528199648218,
+    27.478211663600998,
+    110.5786218501568
+   ],
+   "cor17_witness_monotone_growing": true,
+   "weighted_mass_monotone_growing": true,
+   "log10_witness_span_over_measured_radii": 53.367667688687405,
+   "log10_mass_span_over_measured_truncations": 110.75037686246527,
+   "in_H2_mu": false,
+   "excluded_by": "BOTH -- Corollary 17(i) witness AND weighted L^2(mu) mass",
+   "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+   "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+  },
+  "GAUSSIAN-CONTROL": {
+   "object": "leg 261's C5 witness e^{-|x|^2}",
+   "ambient_dimension": 3,
+   "radii": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_cor17_witness_e_r2_over_8_times_u": [
+    -0.3800076716653453,
+    -1.5200306866613813,
+    -6.080122746645525,
+    -24.3204909865821,
+    -97.2819639463284,
+    -Infinity
+   ],
+   "log10_weighted_density": [
+    -0.7600153433306907,
+    -2.4380013819948,
+    -10.956125510635125,
+    -46.834801999180314,
+    -192.15568792734496,
+    -Infinity
+   ],
+   "truncation_radii": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_truncated_weighted_mass": [
+    -0.7193052411219787,
+    -0.7180421280121587,
+    -0.7180421280103371,
+    -0.7180421280103371,
+    -0.7180421280103371
+   ],
+   "cor17_witness_monotone_growing": false,
+   "weighted_mass_monotone_growing": false,
+   "log10_witness_span_over_measured_radii": -Infinity,
+   "log10_mass_span_over_measured_truncations": 0.0012631131116416228,
+   "in_H2_mu": true,
+   "excluded_by": null,
+   "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+   "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+  },
+  "KNIFE-EDGE-CONTROL": {
+   "object": "e^{-r^2/8}, the exact threshold",
+   "ambient_dimension": 3,
+   "radii": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_cor17_witness_e_r2_over_8_times_u": [
+    1.3877787807814457e-17,
+    -2.7755575615628914e-17,
+    -1.1102230246251565e-16,
+    -4.440892098500626e-16,
+    -1.7763568394002505e-15,
+    -7.105427357601002e-15
+   ],
+   "log10_weighted_density": [
+    2.7755575615628914e-17,
+    0.6020599913279623,
+    1.2041199826559246,
+    1.8061799739838862,
+    2.408239965311846,
+    3.010299956639798
+   ],
+   "truncation_radii": [
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0
+   ],
+   "log10_truncated_weighted_mass": [
+    0.42600130367985933,
+    1.329091290671803,
+    2.232181277663746,
+    3.135271264655687,
+    4.038361251647624
+   ],
+   "cor17_witness_monotone_growing": false,
+   "weighted_mass_monotone_growing": true,
+   "log10_witness_span_over_measured_radii": -7.119305145408816e-15,
+   "log10_mass_span_over_measured_truncations": 3.6123599479677644,
+   "in_H2_mu": false,
+   "excluded_by": "weighted L^2(mu) mass (definitional)",
+   "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+   "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+  }
+ },
+ "probe_liveness_checks": {
+  "gaussian_control_is_IN_the_space": true,
+  "knife_edge_control_is_OUT_of_the_space": true,
+  "explicit_profile_is_OUT_of_the_space": true,
+  "both_outcomes_occur": true
+ },
+ "result": {
+  "per_survivor": [
+   {
+    "key": "KS3D-EXPLICIT",
+    "row": {
+     "key": "KS3D-EXPLICIT",
+     "object": "parabolic-elliptic Keller-Segel in d = 3, at Brenner et al.'s EXPLICIT self-similar blow-up profile U(x) = 4(d-2)(2d+|x|^2)/(2(d-2)+|x|^2)^2",
+     "fluid_adjacent": false,
+     "profile_equation_carries_dissipation": true,
+     "profile_is_closed_form": true,
+     "blowup_proved": true,
+     "blowup_tier": "STABLE self-similar blow-up, PROVED",
+     "blowup_tier_locators": "arXiv:2209.11206 (Glogic-Schoerkhuber, radial, d=3, resolves a >20-year conjecture); arXiv:2406.11358 Theorem 1.1 line 289 (radial stability of U0); arXiv:2501.07073 (nonradial)",
+     "stability_codimension": 0,
+     "codimension_rigorously_known": true,
+     "existing_certificate": false,
+     "profile_farfield_exponent": -2.0,
+     "profile_farfield_constant_d3": 4.0
+    },
+    "matrix_cell": {
+     "cell": "(fluid=False, grade=A)",
+     "fluid_adjacent": false,
+     "grade": "A",
+     "grade_reason": "the profile equation carries Delta at the same order as the drift (Type I / scale-invariant dissipation), so the enclosed object is itself dissipative",
+     "existing_occupants": [
+      "arXiv:2410.05480 (Dahne-Figueras, CGL) -- leg 174",
+      "arXiv:1610.09496 (Biernat-Donninger, harmonic map heat flow, 2016) -- leg 255"
+     ],
+     "n_existing_occupants": 2,
+     "cell_is_empty": false,
+     "would_be_occupant_number": 3
+    },
+    "membership": {
+     "object": "KS3D-EXPLICIT (Brenner et al. closed form)",
+     "ambient_dimension": 3,
+     "radii": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0
+     ],
+     "log10_cor17_witness_e_r2_over_8_times_u": [
+      0.5472023321408008,
+      0.26290473151230104,
+      0.30252662575005995,
+      2.282426015484496,
+      12.094545291625304,
+      53.182296178097765
+     ],
+     "log10_weighted_density": [
+      1.0944046642816017,
+      1.1278694543525645,
+      1.8091732341560447,
+      6.371032004952879,
+      26.597330548562457,
+      109.37489231283534
+     ],
+     "truncation_radii": [
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0
+     ],
+     "log10_truncated_weighted_mass": [
+      1.2871267724321775,
+      1.8580162211395495,
+      5.817612578172259,
+      25.706174945214347,
+      108.17885578514304
+     ],
+     "cor17_witness_monotone_growing": true,
+     "weighted_mass_monotone_growing": true,
+     "log10_witness_span_over_measured_radii": 52.635093845956966,
+     "log10_mass_span_over_measured_truncations": 106.89172901271087,
+     "in_H2_mu": false,
+     "excluded_by": "BOTH -- Corollary 17(i) witness AND weighted L^2(mu) mass",
+     "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+     "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+    },
+    "certificate_target": {
+     "has_something_to_enclose": false,
+     "why_not": "the profile is closed form; there is nothing for an interval enclosure to do",
+     "what_a_certificate_would_have_to_show": "existence of an exact solution U of the backward self-similar profile equation -Delta U + (y/2).grad U + U + div(U grad Phi_U) = 0 within a validated radius of a numerical approximation, via Newton-Kantorovich (Y_0, Z_0, Z_1, Z_2) bounds in a Banach space containing U -- plus, for the non-explicit family, a rigorous count of the unstable eigenmodes N_n, which arXiv:2406.11358 Remark 1.4 supplies only from numerical simulation.",
+     "formulations_examined": [
+      {
+       "formulation": "system (u, c) in R^3",
+       "equations": "u_t = Delta u - div(u grad c),  0 = Delta c + u",
+       "dimension": 3,
+       "inside_remark_40_dimension_range": true,
+       "obstruction": "the second equation requires inverting the BARE Laplacian in Breden-Chu's basis, and arXiv:2404.04054 line 191 states in its own words: 'the operator Delta alone does not have a well-behaved inverse with respect to this basis'.  Leg 255 recorded the elliptic equation as 'an extension of the setting, but not the introduction of a nonlocal term'; the extension lands on precisely the operator the paper names as ill-behaved there.",
+       "target_in_H2_mu": false
+      },
+      {
+       "formulation": "reduced-mass Phi in R^{d+2} = R^5",
+       "equations": "Delta Phi - (1/2) Lambda Phi + 2 d Phi^2 + y.grad(Phi^2) = 0, arXiv:2503.02263 eq (2.2) line 525",
+       "dimension": 5,
+       "inside_remark_40_dimension_range": false,
+       "obstruction": "d+2 = 5 exceeds Remark 40's stated d in {2,3} AND Corollary 17(i)'s d in {1,2,3}.  At d = 5 only Corollary 17(iii) applies, giving H^2(mu) subset L^p(mu) for p in [2, 2d/(d-4)] = [2, 10] -- NO L^infty.  The embedding that Remark 40's reach argument is GIVEN IN TERMS OF is unavailable in exactly the formulation that makes Keller-Segel local.",
+       "target_in_H2_mu": false,
+       "target_farfield": "Phibar_3 ~ 2/|y|^2 (eq (2.3) line 544) -- algebraic, same exclusion"
+      }
+     ],
+     "n_viable_formulations": 0,
+     "statable_certificate_target": false,
+     "drift_sign": {
+      "breden_chu_operator": "-Delta - (x/2).grad   (FORWARD self-similar), eq (2) line 84",
+      "keller_segel_blowup_operator": "-Delta + (y/2).grad   (BACKWARD self-similar), eq (2.2) line 525",
+      "note": "the drift signs are OPPOSITE.  Corroborating, not load-bearing: the exclusion below rests on Corollary 17(i), which is a statement about the space alone."
+     },
+     "the_space_that_would_be_needed": "a space admitting ALGEBRAIC |y|^-2 tails -- i.e. NOT H^2(e^{|x|^2/4}).  Recorded as an observation only.  This leg does NOT propose it, does not name it, and does not request any ban lift; the standing re-posed ban requires a dedicated scoping leg for any namable fourth space and this is not that leg."
+    },
+    "occupies_empty_cell": false,
+    "carries_statable_target": false,
+    "passes_gate": false
+   },
+   {
+    "key": "KS3D-NONEXPLICIT",
+    "row": {
+     "key": "KS3D-NONEXPLICIT",
+     "object": "parabolic-elliptic Keller-Segel in d = 3, at the NON-explicit self-similar profiles U_n (n >= 1) of arXiv:2503.02263",
+     "fluid_adjacent": false,
+     "profile_equation_carries_dissipation": true,
+     "profile_is_closed_form": false,
+     "blowup_proved": true,
+     "blowup_tier": "FINITE-CODIMENSION stable self-similar blow-up; codimension N_n - 1",
+     "blowup_tier_locators": "arXiv:2503.02263 (existence, matched asymptotics + Banach fixed point); arXiv:2406.11358 Theorem 1.3 line 350 (finite Lipschitz codimensional radial stability), Remark 1.4 line 409",
+     "stability_codimension": 1,
+     "codimension_rigorously_known": false,
+     "codimension_caveat": "arXiv:2406.11358 Remark 1.4 line 409: N_1 = 2 is taken FROM NUMERICAL SIMULATIONS, and the paper writes 'if N1 = 2 holds rigorously'.  The codimension of the only NON-vacuous target is therefore not a proved number.",
+     "existing_certificate": false,
+     "profile_farfield_exponent": -2.0,
+     "profile_farfield_constant_d3": 2.0
+    },
+    "matrix_cell": {
+     "cell": "(fluid=False, grade=A)",
+     "fluid_adjacent": false,
+     "grade": "A",
+     "grade_reason": "the profile equation carries Delta at the same order as the drift (Type I / scale-invariant dissipation), so the enclosed object is itself dissipative",
+     "existing_occupants": [
+      "arXiv:2410.05480 (Dahne-Figueras, CGL) -- leg 174",
+      "arXiv:1610.09496 (Biernat-Donninger, harmonic map heat flow, 2016) -- leg 255"
+     ],
+     "n_existing_occupants": 2,
+     "cell_is_empty": false,
+     "would_be_occupant_number": 3
+    },
+    "membership": {
+     "object": "KS3D-NONEXPLICIT (proved far-field 2(d-2)/r^2)",
+     "ambient_dimension": 3,
+     "radii": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0
+     ],
+     "log10_cor17_witness_e_r2_over_8_times_u": [
+      0.3553168059018877,
+      -0.08388275471235532,
+      -0.034501023185440016,
+      1.969205876906108,
+      11.790213451256188,
+      52.880423722640394
+     ],
+     "log10_weighted_density": [
+      0.7106336118037754,
+      0.43429448190325176,
+      1.1351179362850448,
+      5.744591727796103,
+      25.988666867824225,
+      108.7711474019206
+     ],
+     "truncation_radii": [
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0
+     ],
+     "log10_truncated_weighted_mass": [
+      4.81821121977768,
+      4.517326496179042,
+      5.233269611300928,
+      25.09740533501519,
+      107.57510433054443
+     ],
+     "cor17_witness_monotone_growing": true,
+     "weighted_mass_monotone_growing": true,
+     "log10_witness_span_over_measured_radii": 52.52510691673851,
+     "log10_mass_span_over_measured_truncations": 102.75689311076675,
+     "in_H2_mu": false,
+     "excluded_by": "BOTH -- Corollary 17(i) witness AND weighted L^2(mu) mass",
+     "underflow_note": "a -inf entry is an exact floating-point underflow to 0.0, not a missing measurement; it is the strongest possible form of the convergent verdict.  Leg 261 recorded the same underflow for its C0 control.",
+     "decided_by": "arXiv:2404.04054 Corollary 17(i) line 601: u in H^2(mu) ==> e^{|x|^2/8} u in L^infty(R^d).  A divergent witness is therefore a THEOREM-LEVEL exclusion."
+    },
+    "certificate_target": {
+     "has_something_to_enclose": true,
+     "why_not": null,
+     "what_a_certificate_would_have_to_show": "existence of an exact solution U of the backward self-similar profile equation -Delta U + (y/2).grad U + U + div(U grad Phi_U) = 0 within a validated radius of a numerical approximation, via Newton-Kantorovich (Y_0, Z_0, Z_1, Z_2) bounds in a Banach space containing U -- plus, for the non-explicit family, a rigorous count of the unstable eigenmodes N_n, which arXiv:2406.11358 Remark 1.4 supplies only from numerical simulation.",
+     "formulations_examined": [
+      {
+       "formulation": "system (u, c) in R^3",
+       "equations": "u_t = Delta u - div(u grad c),  0 = Delta c + u",
+       "dimension": 3,
+       "inside_remark_40_dimension_range": true,
+       "obstruction": "the second equation requires inverting the BARE Laplacian in Breden-Chu's basis, and arXiv:2404.04054 line 191 states in its own words: 'the operator Delta alone does not have a well-behaved inverse with respect to this basis'.  Leg 255 recorded the elliptic equation as 'an extension of the setting, but not the introduction of a nonlocal term'; the extension lands on precisely the operator the paper names as ill-behaved there.",
+       "target_in_H2_mu": false
+      },
+      {
+       "formulation": "reduced-mass Phi in R^{d+2} = R^5",
+       "equations": "Delta Phi - (1/2) Lambda Phi + 2 d Phi^2 + y.grad(Phi^2) = 0, arXiv:2503.02263 eq (2.2) line 525",
+       "dimension": 5,
+       "inside_remark_40_dimension_range": false,
+       "obstruction": "d+2 = 5 exceeds Remark 40's stated d in {2,3} AND Corollary 17(i)'s d in {1,2,3}.  At d = 5 only Corollary 17(iii) applies, giving H^2(mu) subset L^p(mu) for p in [2, 2d/(d-4)] = [2, 10] -- NO L^infty.  The embedding that Remark 40's reach argument is GIVEN IN TERMS OF is unavailable in exactly the formulation that makes Keller-Segel local.",
+       "target_in_H2_mu": false,
+       "target_farfield": "Phibar_3 ~ 2/|y|^2 (eq (2.3) line 544) -- algebraic, same exclusion"
+      }
+     ],
+     "n_viable_formulations": 0,
+     "statable_certificate_target": false,
+     "drift_sign": {
+      "breden_chu_operator": "-Delta - (x/2).grad   (FORWARD self-similar), eq (2) line 84",
+      "keller_segel_blowup_operator": "-Delta + (y/2).grad   (BACKWARD self-similar), eq (2.2) line 525",
+      "note": "the drift signs are OPPOSITE.  Corroborating, not load-bearing: the exclusion below rests on Corollary 17(i), which is a statement about the space alone."
+     },
+     "the_space_that_would_be_needed": "a space admitting ALGEBRAIC |y|^-2 tails -- i.e. NOT H^2(e^{|x|^2/4}).  Recorded as an observation only.  This leg does NOT propose it, does not name it, and does not request any ban lift; the standing re-posed ban requires a dedicated scoping leg for any namable fourth space and this is not that leg."
+    },
+    "occupies_empty_cell": false,
+    "carries_statable_target": false,
+    "passes_gate": false
+   }
+  ],
+  "n_survivors": 2,
+  "n_in_empty_cell": 0,
+  "n_with_statable_target": 0,
+  "n_passing_gate": 0,
+  "verdict_code": "BOTH_CONJUNCTS_FAIL_DUPLICATION_AND_DEFICIENCY",
+  "gate_answer": "NO"
+ },
+ "self_test": {
+  "outcome_codes_reached": [
+   "BOTH_CONJUNCTS_FAIL_DUPLICATION_AND_DEFICIENCY",
+   "EMPTY_CELL_BUT_NO_STATABLE_TARGET",
+   "STATABLE_TARGET_BUT_CELL_IS_OCCUPIED",
+   "SURVIVOR_IN_EMPTY_CELL_WITH_STATABLE_TARGET"
+  ],
+  "n_outcome_codes_reached": 4,
+  "how": {
+   "BOTH_CONJUNCTS_FAIL_DUPLICATION_AND_DEFICIENCY": "as measured",
+   "SURVIVOR_IN_EMPTY_CELL_WITH_STATABLE_TARGET": "reached by emptying the cell AND granting membership",
+   "EMPTY_CELL_BUT_NO_STATABLE_TARGET": "reached by emptying the cell only",
+   "STATABLE_TARGET_BUT_CELL_IS_OCCUPIED": "reached by granting membership only"
+  },
+  "yes_branch_reachable": true
+ },
+ "gate_answer": "NO",
+ "verdict_code": "BOTH_CONJUNCTS_FAIL_DUPLICATION_AND_DEFICIENCY",
+ "gate_answer_wording": "NO.  Neither survivor occupies an empty cell of leg 174's matrix -- a certificate on either would be the THIRD occupant of the already-occupied (fluid=False, grade=A) cell, behind Dahne-Figueras (CGL) and Biernat-Donninger (harmonic map heat flow, 2016).  And neither carries a statable certificate target: both profiles decay algebraically (~C/|x|^2) and are therefore excluded from H^2(e^{|x|^2/4}) by arXiv:2404.04054's OWN Corollary 17(i).  BOTH conjuncts fail, so leg 255's yes-branch produced ZERO actionable survivors.",
+ "secondary_goal_track": "This leg's gate answered NO, so no dossier is banked as a packet candidate.  Had it answered YES it would have routed to the SECONDARY-GOAL track (useful novel findings) and NOT to the Clay path, which runs through leg 251's BCG candidate.",
+ "honest_ceiling": "Scoping only.  Nothing built, nothing certified.  No link of the L1->L4 chain moves.  Both objects are NON-FLUID by construction -- a parabolic-elliptic chemotaxis system with no transport nonlinearity, no incompressibility, no Biot-Savart law, no pressure -- so a certificate on either, if it existed tomorrow, would not move L1, L2, L3 or L4.  Clay odds stay ~0.05%, behind Walls 1 and 2, Wall 2 in its corrected form (time-dependent singularity formation, not dimension).  No stage claimed or closed; no ban lifted, narrowed or argued against; plan_of_record.py untouched."
+}
