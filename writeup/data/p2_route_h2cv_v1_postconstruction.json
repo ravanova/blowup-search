@@ -1,0 +1,751 @@
+{
+  "leg": 249,
+  "route": "ROUTE-H2CV2",
+  "role": "VERIFIER",
+  "date": "2026-08-07",
+  "verifies": "leg 176 (ROUTE-H2C), solver/origin_h2_certificate.py",
+  "supersedes": "the never-landed WIP branches verify/192-h2cv-v1-wip and verify/249-h2cv2-v1-wip; NEITHER was inherited -- see writeup/novelty/leg_249.md sec 2a for the three named defects",
+  "gate_question": "Does an independent re-run of leg 176's construction reproduce sigma_min = 0.0908 and ||T^-1||_X = 4.026 (or report a discrepancy precisely), to the same precision leg 176 itself claims?",
+  "ceiling": "inherited verbatim from leg 176 and NOT lifted by a verification: a=0 only; certifies an object Xu already inverts in closed form; nothing transfers to HL_S2_nonsymmetric or any a>0 profile; no link of L1->L4 moves; no Clay movement, odds unchanged at ~0.05%; no ban lifted; float64 and exact rationals only",
+  "ga_compute": false,
+  "primary_source": "Xu arXiv:2607.19762, PDF pulled fresh this leg, md5 709dac668a1ff508f00d765916db492c; Definition 4.1, eq. (4.21)-(4.25), Lemma 4.5, Prop 4.6, Prop 2 read at full text.  NEITHER 0.0908 NOR 4.026 appears in it in any form -- see writeup/novelty/leg_249.md sec 3",
+  "quick_mode": false,
+  "W0_reproduction_control": {
+    "conjunct_2_recomputed_from_leg176_own_code": 4.766912579638455e-15,
+    "conjunct_2_banked": 4.766912579638455e-15,
+    "reading": "leg 176's runner is deterministic, so this re-derives NOTHING and is reported as a reproduction, not as a verification (lesson 90).  It establishes only that the banked artifact matches the code that produced it.  W1-W6 replace every link of the chain."
+  },
+  "W1_exact_realization": {
+    "laguerre_orthonormality_max_defect_exact": "0",
+    "l0_plus_tridiagonal_exact_mismatches": [],
+    "l0_plus_tridiagonal_exact": true,
+    "l0_plus_block_checked": 14,
+    "l0_plus_vs_module_max_abs": 0.0,
+    "border_row_first_eight_exact": [
+      "1",
+      "1",
+      "-3",
+      "5",
+      "-7",
+      "9",
+      "-11",
+      "13"
+    ],
+    "border_row_equals_i_m1n_1m2n_exact": true,
+    "border_row_vs_module_max_abs": 0.0,
+    "symmetry_mode_binv2_exact": [
+      "-1",
+      "1",
+      "0",
+      "0"
+    ],
+    "symmetry_mode_m_exact_times_minus_i": [
+      "1/2",
+      "1/2",
+      "0",
+      "0"
+    ],
+    "symmetry_mode_binv2_vs_module_max_abs": 0.0,
+    "symmetry_mode_m_vs_module_max_abs": 0.0,
+    "L0_applied_to_m_is_exactly_zero": true,
+    "L0_applied_to_binv2_minus_binv2_is_exactly_zero": true,
+    "ell_dot_L0_columns_exactly_zero": true,
+    "ell_of_m_exact": "1",
+    "x_gram_exact_integer_mismatches": [],
+    "x_gram_exact_integer_equality": true,
+    "x_gram_max_abs_diff_vs_module": 0.0,
+    "x_gram_size_checked": 20,
+    "x_gram_vs_my_own_float_build_max_abs": 0.0,
+    "reading": "the discrete realization is re-derived in EXACT RATIONAL ARITHMETIC from the definitions of the operator, the basis, the border functional and the X inner product, invoking NEITHER of the two classical Laguerre identities leg 176 relies on -- both are integrated/differentiated out instead, so they are re-proved here rather than assumed.  Every entry of L_0^+, of the border row, of both symmetry modes and of the X Gram agrees with leg 176's module EXACTLY, as rationals rather than to a tolerance.  Leg 176's own cross-check of the same entries is a 60-node Gauss-Laguerre quadrature agreeing to 1.6e-13, which is a second float computation and not an independent one."
+  },
+  "W1b_y_space_exact_identity": {
+    "y_nodes": [
+      "1/3",
+      "-2",
+      "7/2",
+      "-11/5",
+      "23",
+      "1/100",
+      "-1/7"
+    ],
+    "mismatches": [],
+    "n_checked": 16,
+    "exact_identity_holds": true,
+    "transform_pair_vs_module_to_y_max_rel": 5.979311189488952e-16,
+    "second_derivative_two_derivations_max_rel": 2.2839871918211454e-16,
+    "reading": "the tridiagonal matrix is PROVED a second time, in y-space, from Xu (4.21) directly and in exact rational arithmetic at seven rational nodes and sixteen modes -- no Laguerre integral, no quadrature, no basis identity.  The two derivations of the realization (W1's exact integrals in xi, W1b's exact algebra in y) are structurally disjoint and agree exactly, and leg 176's y-space evaluator and its second-derivative formula reproduce an independently product-rule-derived one to float rounding."
+  },
+  "W2_gram_is_the_x_norm": {
+    "quadrature": "y = sinh(sinh(u)), uniform trapezoid h=0.04 on |u| <= 4.5 (226 nodes); a single sinh was tried first and rejected -- see _de_nodes",
+    "n_modes_checked": 10,
+    "l2_orthonormality_max_abs_defect_over_2pi": 1.2722218725854067e-15,
+    "second_derivative_gram_max_rel_defect": 6.948027720146434e-12,
+    "full_X_gram_max_rel_defect": 6.9479835457758585e-12,
+    "plancherel_constant_recovered": 6.283185307179586,
+    "control_wrong_constant_rel_error_if_2pi_omitted": 0.8408450569081045,
+    "control_correct_constant_rel_error": 1.1046148998642993e-15,
+    "resolution_control_coarse_vs_fine_rel": 2.0281726206530946e-14,
+    "random_datum_my_quadrature_vs_gram_rel": 5.040947258262844e-16,
+    "random_datum_vs_module_x_norm_y_rel": 5.040947258262847e-16,
+    "reading": "CONFIRMED, and this is the link neither leg 176 nor the 192 salvage checks. The Laguerre basis is orthonormal in L^2(R) with constant 2 pi and its second-derivative Gram is exactly 2 pi J^4, so c*(I + J^4)c IS (||phi||_{L^2}^2 + ||phi''||_{L^2}^2)/(2 pi) -- Xu Definition 4.1's norm up to the single overall constant 2 pi, which cancels in every ratio sigma_min is built from.  Measured by an independent sinh-trapezoid quadrature that shares no machinery with the module's Blaschke rule.  The control confirms the test can fail: omitting the 2 pi puts the same identity out by a factor of 6.28."
+  },
+  "W3_sigma_min": {
+    "quantity": "sigma_min of the bordered [[L_0^+, m],[ell, 0]] in the X (+) C metric, domain modes [0,N) truncated, RANGE UNTRUNCATED",
+    "ladder": {
+      "8": {
+        "cholesky": 0.0927566004571166,
+        "eigh": 0.09275660045795452,
+        "rescaled": 0.09275660045711573,
+        "max_route_spread": 8.387873728921136e-13,
+        "cond_Gd": 350089.3340793028,
+        "seconds": 0.0012881755828857422
+      },
+      "16": {
+        "cholesky": 0.09115903930312673,
+        "eigh": 0.09115903928826842,
+        "rescaled": 0.09115903930313052,
+        "max_route_spread": 1.4862097663659313e-11,
+        "cond_Gd": 7993664.515571793,
+        "seconds": 0.007629871368408203
+      },
+      "32": {
+        "cholesky": 0.09093104093770309,
+        "eigh": 0.09093104092007988,
+        "rescaled": 0.0909310409377256,
+        "max_route_spread": 1.7645718219938544e-11,
+        "cond_Gd": 164358692.44119263,
+        "seconds": 0.07646679878234863
+      },
+      "64": {
+        "cholesky": 0.09088780400823183,
+        "eigh": 0.0908878038629229,
+        "rescaled": 0.09088780400821911,
+        "max_route_spread": 1.4530893155395574e-10,
+        "cond_Gd": 3117125579.7627206,
+        "seconds": 0.2321007251739502
+      },
+      "128": {
+        "cholesky": 0.09085063207541998,
+        "eigh": 0.09085063245777983,
+        "rescaled": 0.09085063207541338,
+        "max_route_spread": 3.823664440627539e-10,
+        "cond_Gd": 55831269279.31271,
+        "seconds": 2.99642014503479
+      },
+      "256": {
+        "cholesky": 0.09082344116502357,
+        "eigh": 0.09082343846893957,
+        "rescaled": 0.09082344116566672,
+        "max_route_spread": 2.6967271471445287e-09,
+        "cond_Gd": 961834471528.8329,
+        "seconds": 9.859061479568481
+      },
+      "512": {
+        "cholesky": 0.09080414383680567,
+        "eigh": 0.09080465147038257,
+        "rescaled": 0.0908041438386107,
+        "max_route_spread": 5.076335768960938e-07,
+        "cond_Gd": 16147176570662.867,
+        "seconds": 31.143973112106323
+      },
+      "1024": {
+        "cholesky": 0.09079112559337903,
+        "eigh": 0.09093626075405369,
+        "rescaled": 0.09079112566096871,
+        "max_route_spread": 0.0001451351606746587,
+        "cond_Gd": 267285607482660.16,
+        "seconds": 116.49757194519043
+      },
+      "2048": {
+        "cholesky": 0.09078267934108579,
+        "eigh": 0.09515950981629964,
+        "rescaled": 0.09078267973994593,
+        "max_route_spread": 0.004376830475213853,
+        "cond_Gd": 4793885842937835.0,
+        "seconds": 471.7179436683655
+      }
+    },
+    "exact_enclosures": {
+      "8": {
+        "lower": 0.09275660045711602,
+        "upper": 0.09275660045711723,
+        "width": 1.2073675392798577e-15,
+        "certified_digits": 14,
+        "seconds": 0.4422585964202881
+      },
+      "16": {
+        "lower": 0.09115903930313116,
+        "upper": 0.09115903930313238,
+        "width": 1.2212453270876722e-15,
+        "certified_digits": 14,
+        "seconds": 1.9982719421386719
+      },
+      "32": {
+        "lower": 0.09093104093771442,
+        "upper": 0.09093104093771565,
+        "width": 1.2212453270876722e-15,
+        "certified_digits": 14,
+        "seconds": 12.02949070930481
+      },
+      "64": {
+        "lower": 0.09088780400823847,
+        "upper": 0.09088780400823969,
+        "width": 1.2212453270876722e-15,
+        "certified_digits": 14,
+        "seconds": 81.43316149711609
+      },
+      "128": {
+        "lower": 0.09085063207546241,
+        "upper": 0.09085063207546364,
+        "width": 1.2212453270876722e-15,
+        "certified_digits": 14,
+        "seconds": 392.79599118232727
+      }
+    },
+    "realification_complex_vs_real_at_64": {
+      "complex_form_with_module_matrices": 0.09088780386292228,
+      "my_realified_form": 0.0908878038629229,
+      "abs_diff": 6.245004513516506e-16,
+      "note": "the realification kappa -> i kappa is a diagonal UNITARY change of variable on a coordinate both Grams weight by 1, so it cannot move sigma_min; measured rather than argued"
+    },
+    "certified_brackets": {
+      "256": {
+        "N": 256,
+        "sigma_lower_probe": 0.09082339116502357,
+        "sigma_upper_probe": 0.09082349116502357,
+        "seconds_lower": 96.59877681732178,
+        "lower_probe_is_pd": true,
+        "upper_probe_is_pd": false,
+        "seconds_upper": 101.91202926635742,
+        "certified": true,
+        "reading": "PD at the lower probe and NOT PD at the upper probe certifies, in exact arithmetic with no rounding anywhere, that sigma_min lies strictly between them."
+      },
+      "512": {
+        "N": 512,
+        "sigma_lower_probe": 0.09080409383680567,
+        "sigma_upper_probe": 0.09080419383680567,
+        "seconds_lower": 659.3504223823547,
+        "lower_probe_is_pd": true,
+        "upper_probe_is_pd": false,
+        "seconds_upper": 324.34097146987915,
+        "certified": true,
+        "reading": "PD at the lower probe and NOT PD at the upper probe certifies, in exact arithmetic with no rounding anywhere, that sigma_min lies strictly between them.",
+        "decides_leg176_banked_value": {
+          "N": 512,
+          "sigma_lower_probe": null,
+          "sigma_upper_probe": 0.09080465147034879,
+          "seconds_lower": 0.0,
+          "lower_probe_is_pd": null,
+          "upper_probe_is_pd": false,
+          "seconds_upper": 296.978129863739,
+          "certified": false,
+          "reading": "the probes did not bracket; the individual verdicts above are still exact.",
+          "meaning": "the upper probe is leg 176's OWN banked 0.09080465147034879.  'upper_probe_is_pd = false' means sigma_min is strictly BELOW it, i.e. the banked value overstates sigma_min -- proved, not measured."
+        }
+      }
+    },
+    "window_32_to_512_min": 0.09080414383680567,
+    "window_32_to_512_max": 0.09093104093770309,
+    "relative_spread_over_window": 0.0013955311584341536,
+    "monotone_decreasing_through_512": true,
+    "leg176_banked_sigma_min_at_512": 0.09080465147034879,
+    "leg176_banked_resolvent_norm_at_512": 11.012651706796523,
+    "independent_sigma_min_at_512_cholesky": 0.09080414383680567,
+    "abs_diff_at_512": 5.076335431175583e-07,
+    "rel_diff_at_512": 5.590391405040745e-06,
+    "independent_resolvent_norm_at_512": 11.012713272174146,
+    "resolvent_norm_rel_diff": 5.590422657659288e-06,
+    "eigh_breaks_monotonicity_at_1024": true,
+    "cholesky_breaks_monotonicity_at_1024": false,
+    "cholesky_breaks_monotonicity_at_2048": false,
+    "decrements": {
+      "decrements": [
+        {
+          "from": 8,
+          "to": 16,
+          "delta": 0.0015975611539898738
+        },
+        {
+          "from": 16,
+          "to": 32,
+          "delta": 0.00022799836542364282
+        },
+        {
+          "from": 32,
+          "to": 64,
+          "delta": 4.323692947125202e-05
+        },
+        {
+          "from": 64,
+          "to": 128,
+          "delta": 3.7171932811858044e-05
+        },
+        {
+          "from": 128,
+          "to": 256,
+          "delta": 2.719091039640742e-05
+        },
+        {
+          "from": 256,
+          "to": 512,
+          "delta": 1.9297328217898757e-05
+        },
+        {
+          "from": 512,
+          "to": 1024,
+          "delta": 1.3018243426643483e-05
+        },
+        {
+          "from": 1024,
+          "to": 2048,
+          "delta": 8.446252293237144e-06
+        }
+      ],
+      "decrement_ratios": [
+        0.1427165181465648,
+        0.18963701512032183,
+        0.8597264714778936,
+        0.7314903568246356,
+        0.7096977606328475,
+        0.6746137744897107,
+        0.6488012258205911
+      ],
+      "geometric_ratio_last3": 0.6777042536477165,
+      "extrapolated_limit": 0.09076491906602385,
+      "value_at_last_rung": 0.09078267934108579,
+      "gap_between_last_rung_and_extrapolated_limit": 1.7760275061937114e-05
+    }
+  },
+  "W4_tail_inverse_norm": {
+    "quantity": "sigma_min of the UNBORDERED tail block: domain modes [2, N) (the two symmetry modes removed), range untruncated.  ||T^-1||_X = 1/sigma_min.",
+    "why_it_matters": "this is the direct ell^1_w comparison point -- there (legs 51/53) the tail inverse norm DIVERGED with M.  It is also the number the leg-192 salvage never re-derived: its only mention of 4.026 compares leg 176's prose to leg 176's own JSON.",
+    "ladder": {
+      "64": {
+        "cholesky": 0.25037356175972136,
+        "eigh": 0.2503735617937019,
+        "rescaled": 0.2503735617591002,
+        "inverse_norm": 3.994031929615957,
+        "seconds": 0.10634207725524902
+      },
+      "128": {
+        "cholesky": 0.24924781866511717,
+        "eigh": 0.2492478223636528,
+        "rescaled": 0.2492478186622586,
+        "inverse_norm": 4.012071220344655,
+        "seconds": 1.256258249282837
+      },
+      "256": {
+        "cholesky": 0.2486733243591432,
+        "eigh": 0.2486732466472271,
+        "rescaled": 0.24867332457334967,
+        "inverse_norm": 4.0213400555813665,
+        "seconds": 3.6169040203094482
+      },
+      "512": {
+        "cholesky": 0.248370642555541,
+        "eigh": 0.24837652731703622,
+        "rescaled": 0.24837064310449636,
+        "inverse_norm": 4.026240741300086,
+        "seconds": 13.613515853881836
+      },
+      "1024": {
+        "cholesky": 0.248208922022934,
+        "eigh": 0.24942420359399875,
+        "rescaled": 0.2482089455544132,
+        "inverse_norm": 4.02886403860858,
+        "seconds": 45.47518610954285
+      }
+    },
+    "exact_enclosures": {
+      "64": {
+        "sigma_lower": 0.2503735617585103,
+        "sigma_upper": 0.2503735617585107,
+        "inverse_norm_lower": 3.9940319296352698,
+        "inverse_norm_upper": 3.994031929635277,
+        "width": 4.440892098500626e-16,
+        "seconds": 12.410216808319092
+      },
+      "128": {
+        "sigma_lower": 0.2492478186706248,
+        "sigma_upper": 0.24924781867062523,
+        "inverse_norm_lower": 4.012071220255994,
+        "inverse_norm_upper": 4.012071220256001,
+        "width": 4.440892098500626e-16,
+        "seconds": 77.95708870887756
+      }
+    },
+    "certified_brackets": {
+      "256": {
+        "N": 256,
+        "sigma_lower_probe": 0.2486732743591432,
+        "sigma_upper_probe": 0.2486733743591432,
+        "seconds_lower": 18.778422355651855,
+        "lower_probe_is_pd": true,
+        "upper_probe_is_pd": false,
+        "seconds_upper": 18.019020557403564,
+        "certified": true,
+        "reading": "PD at the lower probe and NOT PD at the upper probe certifies, in exact arithmetic with no rounding anywhere, that sigma_min lies strictly between them.",
+        "inverse_norm_bracket": [
+          4.021339247022737,
+          4.021340864140321
+        ]
+      },
+      "512": {
+        "N": 512,
+        "sigma_lower_probe": 0.248370592555541,
+        "sigma_upper_probe": 0.248370692555541,
+        "seconds_lower": 142.31555151939392,
+        "lower_probe_is_pd": true,
+        "upper_probe_is_pd": false,
+        "seconds_upper": 131.09082579612732,
+        "certified": true,
+        "reading": "PD at the lower probe and NOT PD at the upper probe certifies, in exact arithmetic with no rounding anywhere, that sigma_min lies strictly between them.",
+        "inverse_norm_bracket": [
+          4.026239930769523,
+          4.026241551830974
+        ]
+      }
+    },
+    "leg176_banked_tail_inverse_norm": 4.026,
+    "leg176_banked_tail_sigma_at_512": 0.248377,
+    "independent_tail_sigma_at_512": 0.248370642555541,
+    "independent_tail_inverse_norm_at_512": 4.026240741300086,
+    "abs_diff_inverse_norm": 0.00024074130008600036,
+    "rel_diff_inverse_norm": 5.979664681718837e-05,
+    "truncation_independence_claim": {
+      "leg176_wording": "'i.e. ||T^-1||_X = 4.026, truncation-independent'",
+      "inverse_norm_by_N": {
+        "64": 3.994031929615957,
+        "128": 4.012071220344655,
+        "256": 4.0213400555813665,
+        "512": 4.026240741300086,
+        "1024": 4.02886403860858
+      },
+      "absolute_spread_over_ladder": 0.03483210899262268,
+      "relative_spread_over_ladder": 0.008645640224844221,
+      "monotone_increasing": true,
+      "shape": {
+        "decrements": [
+          {
+            "from": 64,
+            "to": 128,
+            "delta": 0.001125743094604198
+          },
+          {
+            "from": 128,
+            "to": 256,
+            "delta": 0.0005744943059739771
+          },
+          {
+            "from": 256,
+            "to": 512,
+            "delta": 0.0003026818036021839
+          },
+          {
+            "from": 512,
+            "to": 1024,
+            "delta": 0.00016172053260701813
+          }
+        ],
+        "decrement_ratios": [
+          0.5103245214006528,
+          0.5268664988576831,
+          0.5342922193617169
+        ],
+        "geometric_ratio_last3": 0.5238277465400176,
+        "extrapolated_limit": 0.24803101644034442,
+        "value_at_last_rung": 0.248208922022934,
+        "gap_between_last_rung_and_extrapolated_limit": 0.0001779055825895659
+      },
+      "reading": "the VALUE 4.026 reproduces at N=512 to the decimals leg 176 quotes.  The DESCRIPTOR 'truncation-independent' is the part that does not survive: the inverse norm rises monotonically across the ladder by the relative spread recorded here, and is still rising at the last rung.  The correct reading of the same data is the one leg 176 gives its OTHER number -- a monotone sequence with geometrically shrinking decrements, i.e. float64 evidence of a finite limit -- and that limit is NOT 4.026 but the extrapolated value above.  This changes no gate: the ell^1_w comparison leg 176 draws is between a CONVERGING sequence here and a DIVERGING one there (legs 51/53), and convergence to 4.03 makes that contrast exactly as strong as convergence to 4.026 would."
+    }
+  },
+  "W5_border_weight_sensitivity": {
+    "N": 256,
+    "sweep": {
+      "0.01": {
+        "sigma_min": 0.010856262976502303,
+        "resolvent_norm": 92.11272812425759
+      },
+      "0.1": {
+        "sigma_min": 0.033710662614220156,
+        "resolvent_norm": 29.664204807952082
+      },
+      "0.25": {
+        "sigma_min": 0.051757260550031936,
+        "resolvent_norm": 19.32096075744455
+      },
+      "1.0": {
+        "sigma_min": 0.09082344116502357,
+        "resolvent_norm": 11.010373392294495
+      },
+      "4.0": {
+        "sigma_min": 0.1273833089715678,
+        "resolvent_norm": 7.850322056111778
+      },
+      "10.0": {
+        "sigma_min": 0.1357994693284667,
+        "resolvent_norm": 7.363799026204124
+      },
+      "100.0": {
+        "sigma_min": 0.09267680828992153,
+        "resolvent_norm": 10.790186007179841
+      }
+    },
+    "sigma_at_weight_1": 0.09082344116502357,
+    "ratio_over_weight_range_1e-2_to_1e2": 12.50885959767151,
+    "sigma_if_X_block_carried_the_2pi": 0.04203207915802247,
+    "reading": "REPORTED, NOT A DEFECT.  sigma_min depends on the relative normalization of the X block and the border amplitude, which the module fixes by convention (unit weight) and states in its docstring.  Over a 10^4 range of that weight sigma_min moves by the factor recorded here, and adopting Xu's own y-space normalization for the X block (i.e. carrying the 2 pi) moves it too.  So 0.0908 is a property of (operator, space, NORMALIZATION CONVENTION).  Leg 176's gate is about whether the formulation closes -- whether sigma_min is bounded away from zero uniformly in the truncation -- and THAT conclusion is invariant under the convention, since a positive weight cannot send a positive limit to zero.  The headline digits are convention-relative; the gate answer is not.  PUB2 quotes the digits without the convention."
+  },
+  "W6_xu_closed_form_exact": {
+    "y_nodes": [
+      -20.0,
+      -8.0,
+      -1.5,
+      -0.3,
+      0.05,
+      0.2,
+      0.7,
+      1.5,
+      3.0,
+      8.0,
+      20.0,
+      60.0
+    ],
+    "per_seed": {
+      "0": {
+        "max_rel_diff_leg176_u_vs_exact": 4.538903252930497e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 1.6706078651715387e-15
+      },
+      "1": {
+        "max_rel_diff_leg176_u_vs_exact": 4.398530577434199e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 1.21833934179193e-15
+      },
+      "2": {
+        "max_rel_diff_leg176_u_vs_exact": 3.5085050091153566e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 2.331694855542261e-15
+      },
+      "3": {
+        "max_rel_diff_leg176_u_vs_exact": 3.9753815404180496e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 1.5121346820411087e-15
+      },
+      "4": {
+        "max_rel_diff_leg176_u_vs_exact": 5.057232834025836e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 1.3564809199563351e-15
+      },
+      "5": {
+        "max_rel_diff_leg176_u_vs_exact": 6.737619303448717e-16,
+        "max_rel_ode_residual_of_the_exact_evaluation": 1.7989737529186314e-15
+      }
+    },
+    "G_prime_0_equals_ell_f_exactly": true,
+    "G_prime_0_trials": [
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(-18/5-22/7i)"
+      },
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(11-92/7i)"
+      },
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(2-60/7i)"
+      },
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(61/5+46/7i)"
+      },
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(-63/5+15/7i)"
+      },
+      {
+        "G1_minus_ell_f_exactly_zero": true,
+        "ell_f": "(78/5-145/7i)"
+      }
+    ],
+    "worst_rel_diff_leg176_u_vs_exact_closed_form": 6.737619303448717e-16,
+    "leg176_banked_max_rel_residual": 4.766912579638455e-15,
+    "leg176_residual_over_its_actual_solution_error": 7.075069642475145,
+    "residual_equals_minus_ell_f_y_over_b2": [
+      {
+        "perturbation": 0.0,
+        "abs_ell_f": 8.899114524108741e-16,
+        "max_abs_exact_residual": 8.418081306589349e-16,
+        "max_abs_discrepancy": 1.3465064508129698e-14
+      },
+      {
+        "perturbation": 1e-09,
+        "abs_ell_f": 1.0000009709187921e-09,
+        "max_abs_exact_residual": 9.459468643826414e-10,
+        "max_abs_discrepancy": 1.303172526982797e-14
+      },
+      {
+        "perturbation": 1e-06,
+        "abs_ell_f": 1.000000000139778e-06,
+        "max_abs_exact_residual": 9.459459460781682e-07,
+        "max_abs_discrepancy": 1.2272674283387297e-14
+      },
+      {
+        "perturbation": 0.001,
+        "abs_ell_f": 0.001000000000000334,
+        "max_abs_exact_residual": 0.0009459459459462618,
+        "max_abs_discrepancy": 1.268463965681716e-14
+      },
+      {
+        "perturbation": 0.1,
+        "abs_ell_f": 0.10000000000000053,
+        "max_abs_exact_residual": 0.0945945945945951,
+        "max_abs_discrepancy": 1.6319175046151326e-14
+      }
+    ],
+    "discrepancy_spread_over_six_decades_of_ell_f": 1.329716300565518,
+    "reading": "the closed form is CONFIRMED and the pointwise ODE residual is PROVED rather than sampled: it equals -ell(f) y / b(y)^2 identically, so on the solvability subspace Xu (4.23) solves the equation exactly and leg 176's banked 4.767e-15 is measuring its own floating-point assembly, not an approximation error.  Against an exact partial-fraction evaluation leg 176's u(y) is correct to the relative accuracy recorded above.  Driving ell(f) over six decades off the solvability subspace leaves the module's discrepancy against the exact residual FLAT, so the control could have come out the other way and did not."
+  },
+  "W7_prose_and_pub2_audit": {
+    "numeric_checks": [
+      {
+        "claim": "journal C0 max relative residual",
+        "prose_value": 4.767e-15,
+        "json_value": 4.766912579638455e-15,
+        "rel_diff": 1.8338989877569022e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C0 max ABSOLUTE residual",
+        "prose_value": 1.29e-14,
+        "json_value": 1.4295603459064552e-14,
+        "rel_diff": 0.09762466222995489,
+        "agrees": false,
+        "note": "journal says 'max absolute 1.29e-14'; the JSON it cites says 1.4296e-14"
+      },
+      {
+        "claim": "journal C1 sigma_min at N=512",
+        "prose_value": 0.0908047,
+        "json_value": 0.09080465147034879,
+        "rel_diff": 5.344401462750545e-07,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C1 ||R||_X",
+        "prose_value": 11.0127,
+        "json_value": 11.012651706796523,
+        "rel_diff": 4.385247510124801e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C1 relative spread 0.139%",
+        "prose_value": 0.00139,
+        "json_value": 0.0013899483438452888,
+        "rel_diff": 3.7164082348711345e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C2 ||T^-1||_X",
+        "prose_value": 4.026,
+        "json_value": 4.02614534796022,
+        "rel_diff": 3.6101021612176694e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C4 fitted exponent",
+        "prose_value": -1.4914,
+        "json_value": -1.4914111116151578,
+        "rel_diff": 7.450403896838729e-06,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C5 best cell",
+        "prose_value": 140.72,
+        "json_value": 140.72466104631172,
+        "rel_diff": 3.312174481053309e-05,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C6 closed-form ratio",
+        "prose_value": 0.868155,
+        "json_value": 0.8681547664616088,
+        "rel_diff": 2.69005481744882e-07,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal C6 witness optimistic by",
+        "prose_value": 7.9,
+        "json_value": 7.870742174847475,
+        "rel_diff": 0.0037172892343017533,
+        "agrees": true,
+        "note": ""
+      },
+      {
+        "claim": "journal E1 tridiagonal vs quadrature",
+        "prose_value": 1.608e-13,
+        "json_value": 1.6076029396572267e-13,
+        "rel_diff": 0.0002469890623974946,
+        "agrees": true,
+        "note": ""
+      }
+    ],
+    "n_checked": 11,
+    "n_disagreeing": 1,
+    "pub2_quoting_sites": [
+      {
+        "site": "TECHNICAL_P2_PUB2_V1.md L46",
+        "quotes": "sigma_min = 0.0908, truncation-independent"
+      },
+      {
+        "site": "TECHNICAL_P2_PUB2_V1.md L297",
+        "quotes": "the full sigma_min ladder, 8..1024"
+      },
+      {
+        "site": "TECHNICAL_P2_PUB2_V1.md L299",
+        "quotes": "sigma_min = 0.0908, ||R||_X = 11.0127"
+      },
+      {
+        "site": "TECHNICAL_P2_PUB2_V1.md L303",
+        "quotes": "||T^-1||_X = 4.026"
+      },
+      {
+        "site": "TECHNICAL_P2_PUB2_V1.md L332/L335",
+        "quotes": "'the measured value is 0.0908'"
+      },
+      {
+        "site": "BLOG_P2_PUB2_V1.md L88/L190",
+        "quotes": "'0.0908' and 'this leg's own float64 measurements, with the independent check still outstanding'"
+      }
+    ],
+    "pub2_status_after_this_leg": "the BLOG's 'independent check still outstanding' is the sentence this leg addresses; the TECHNICAL sites carry the digits without the normalization convention W5 measures.  NOTHING IS EDITED HERE -- this leg's territory excludes both PUB2 files, and the wording change is recorded as a recommendation in the journal.",
+    "reading": "the journal's numeric claims reproduce against the JSON it cites, with one exception recorded above at its measured size.  The exception does not touch either gate number."
+  },
+  "gate": {
+    "question": "Does an independent re-run of leg 176's construction reproduce sigma_min = 0.0908 and ||T^-1||_X = 4.026 (or report a discrepancy precisely), to the same precision leg 176 itself claims?",
+    "sigma_min": {
+      "leg176": 0.09080465147034879,
+      "independent": 0.09080414383680567,
+      "rel_diff": 5.590391405040745e-06,
+      "exact_enclosure_at_512": null
+    },
+    "tail_inverse_norm": {
+      "leg176": 4.026,
+      "independent": 4.026240741300086,
+      "rel_diff": 5.979664681718837e-05,
+      "exact_enclosure_at_512": null,
+      "certified_bracket_at_512": [
+        4.026239930769523,
+        4.026241551830974
+      ]
+    },
+    "answer": "REPRODUCES as quoted, ESCALATED below the quotation.  Both headline numbers -- sigma_min = 0.0908 and ||T^-1||_X = 4.026, the two the gate names and the two PUB2 quotes -- reproduce to every digit they are stated to.  Three findings below that precision trigger the escalation clause and are NOT repaired here: (1) the banked C1 sigma_min_at_512 = 0.09080465147034879 is PROVED WRONG in exact rational arithmetic -- the pencil is not positive definite at that lambda, so sigma_min is strictly below it, certified in (0.090804094, 0.090804194); (2) the banked C2 tail_inverse_norm_K2_at_512 = 4.02614534796022 lies OUTSIDE the certified bracket [4.02623993, 4.02624155]; (3) 'truncation-independent', which leg 176's journal and PUB2 TECHNICAL L303 both attach to 4.026, is FALSE at that precision -- the tail inverse norm rises monotonically by 0.865% across the ladder, is still rising at N=1024, and converges to approximately 4.0318, not 4.026.  Leg 176's GATE ANSWER AND CONCLUSIONS ARE UNCHANGED AND CONFIRMED; two of the corrections make its case stronger than it claimed (its reliable window extends to N=2048 under a Cholesky whitening, and its Xu reproduction is 7.1x better than its own residual metric reports).  This is a precision-and-wording escalation on banked and submission-track artifacts, not a reversal.",
+    "escalation": "YES -- branch pushed only, main untouched, nothing banked edited.  Findings (1) and (2) are discrepancies in banked results; finding (3) is a false claim in an approved submission-track document.  The three remedies differ (JSON regeneration, a PUB2 value correction, a PUB2 wording correction) and every one touches an artifact this leg is forbidden to edit, so all three need a DM ruling.  Precedent: leg 247, same shape."
+  },
+  "runtime_seconds": 3079.6112456321716,
+  "gate_rebuilt_without_recomputation": true
+}

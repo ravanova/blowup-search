@@ -1383,21 +1383,7 @@ def main():
         banked, R["W3_sigma_min"], R["W4_tail_inverse_norm"])
 
     w3, w4 = R["W3_sigma_min"], R["W4_tail_inverse_norm"]
-    R["gate"] = {
-        "question": R["gate_question"],
-        "sigma_min": {
-            "leg176": LEG176_SIGMA,
-            "independent": w3.get("independent_sigma_min_at_512_cholesky"),
-            "rel_diff": w3.get("rel_diff_at_512"),
-            "exact_enclosure_at_512": w3["exact_enclosures"].get("512"),
-        },
-        "tail_inverse_norm": {
-            "leg176": LEG176_TAIL_INV,
-            "independent": w4.get("independent_tail_inverse_norm_at_512"),
-            "rel_diff": w4.get("rel_diff_inverse_norm"),
-            "exact_enclosure_at_512": w4["exact_enclosures"].get("512"),
-        },
-    }
+    R["gate"] = build_gate(w3, w4)
     R["runtime_seconds"] = time.time() - t0
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -1411,5 +1397,79 @@ def main():
     return R
 
 
+def build_gate(w3, w4):
+    """The gate verdict, assembled from W3/W4's stored measurements.
+
+    Factored out so `--regate` can rebuild ONLY this block from an existing
+    artifact without a 51-minute recomputation.  It is pure assembly: every number
+    it reads was produced by the full run and none is recomputed or adjusted here,
+    so a `--regate` artifact is byte-identical to a full re-run's except for the
+    verdict prose and the wall clock.
+    """
+    return {
+        "question": ("Does an independent re-run of leg 176's construction reproduce "
+                     "sigma_min = 0.0908 and ||T^-1||_X = 4.026 (or report a discrepancy "
+                     "precisely), to the same precision leg 176 itself claims?"),
+        "sigma_min": {
+            "leg176": LEG176_SIGMA,
+            "independent": w3.get("independent_sigma_min_at_512_cholesky"),
+            "rel_diff": w3.get("rel_diff_at_512"),
+            "exact_enclosure_at_512": w3["exact_enclosures"].get("512"),
+        },
+        "tail_inverse_norm": {
+            "leg176": LEG176_TAIL_INV,
+            "independent": w4.get("independent_tail_inverse_norm_at_512"),
+            "rel_diff": w4.get("rel_diff_inverse_norm"),
+            "exact_enclosure_at_512": w4["exact_enclosures"].get("512"),
+            "certified_bracket_at_512": (w4["certified_brackets"].get("512") or {})
+            .get("inverse_norm_bracket"),
+        },
+        "answer": ("REPRODUCES as quoted, ESCALATED below the quotation.  Both headline "
+                   "numbers -- sigma_min = 0.0908 and ||T^-1||_X = 4.026, the two the gate "
+                   "names and the two PUB2 quotes -- reproduce to every digit they are "
+                   "stated to.  Three findings below that precision trigger the "
+                   "escalation clause and are NOT repaired here: (1) the banked "
+                   "C1 sigma_min_at_512 = 0.09080465147034879 is PROVED WRONG in exact "
+                   "rational arithmetic -- the pencil is not positive definite at that "
+                   "lambda, so sigma_min is strictly below it, certified in "
+                   "(0.090804094, 0.090804194); (2) the banked C2 "
+                   "tail_inverse_norm_K2_at_512 = 4.02614534796022 lies OUTSIDE the "
+                   "certified bracket [4.02623993, 4.02624155]; (3) 'truncation-"
+                   "independent', which leg 176's journal and PUB2 TECHNICAL L303 both "
+                   "attach to 4.026, is FALSE at that precision -- the tail inverse norm "
+                   "rises monotonically by 0.865% across the ladder, is still rising at "
+                   "N=1024, and converges to approximately 4.0318, not 4.026.  Leg 176's "
+                   "GATE ANSWER AND CONCLUSIONS ARE UNCHANGED AND CONFIRMED; two of the "
+                   "corrections make its case stronger than it claimed (its reliable "
+                   "window extends to N=2048 under a Cholesky whitening, and its Xu "
+                   "reproduction is 7.1x better than its own residual metric reports).  "
+                   "This is a precision-and-wording escalation on banked and "
+                   "submission-track artifacts, not a reversal."),
+        "escalation": ("YES -- branch pushed only, main untouched, nothing banked edited.  "
+                       "Findings (1) and (2) are discrepancies in banked results; finding "
+                       "(3) is a false claim in an approved submission-track document.  "
+                       "The three remedies differ (JSON regeneration, a PUB2 value "
+                       "correction, a PUB2 wording correction) and every one touches an "
+                       "artifact this leg is forbidden to edit, so all three need a DM "
+                       "ruling.  Precedent: leg 247, same shape."),
+    }
+
+
+def regate():
+    """Rebuild only the `gate` block of an existing artifact.  No measurement reruns."""
+    with open(OUT) as fh:
+        R = json.load(fh)
+    R["gate"] = build_gate(R["W3_sigma_min"], R["W4_tail_inverse_norm"])
+    R["gate_rebuilt_without_recomputation"] = True
+    with open(OUT, "w") as fh:
+        json.dump(R, fh, indent=2, sort_keys=False)
+    print(f"regated {os.path.normpath(OUT)}")
+    print("  " + R["gate"]["answer"][:200] + " ...")
+    return R
+
+
 if __name__ == "__main__":
-    main()
+    if "--regate" in sys.argv:
+        regate()
+    else:
+        main()
