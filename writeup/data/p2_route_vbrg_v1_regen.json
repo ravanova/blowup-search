@@ -1,0 +1,1306 @@
+{
+  "gate": "NO",
+  "meta": {
+    "leg": 252,
+    "question": "regenerate Route-D v11's banked anchor JSON from leg 247's repaired runner; does it land on leg 247's own reported numbers with every other banked leaf still?",
+    "repair_ported_from": "10be909a4d4e95d293fabb2c526e7ac1896dea95",
+    "repair_ported_reason": "leg 247's branch leg/247-vbr-v1 was not merged to main when this leg ran; the runner file here is byte-identical to leg 247's repaired version",
+    "route": "VBRG",
+    "stale_bank_read_from": "06e96d207fea1d24c2f42b6d513d94ef1f8b6237",
+    "tolerance_rel": 1e-06
+  },
+  "positive_control": {
+    "control_fires": true,
+    "n_flagged_under_perturbation": 202,
+    "ok": true,
+    "perturbation_rel": 1e-09,
+    "probe_leaf": "v1_known_answer.exact_continuum_rms_on_the_grid"
+  },
+  "q1_reproduction": {
+    "Q1_reproduces": false,
+    "budget_holds_uniformly": false,
+    "correction_factor_vs_stale": 654571815954.7423,
+    "margin_leg247": 0.016122858874141922,
+    "margin_matches_leg247": false,
+    "margin_over_rows_within_budget": 12.18518147095009,
+    "margin_regenerated": 0.015991923774880644,
+    "margin_rel_error": 0.008121084497692532,
+    "margin_selection": "worst-case: Y0_max / newton_weighted_defect_max",
+    "margin_stale_banked": 10467862585.933441,
+    "margin_within_leg247": 10.655996808538774,
+    "margin_within_rel_error": 0.1435046096472141,
+    "n_good_rows": 11,
+    "n_good_rows_matches": true,
+    "n_rows_over_budget": 1,
+    "n_rows_over_budget_matches": true,
+    "over_budget_a_values": [
+      0.45
+    ],
+    "violation_x_leg247": 62.02373957411577,
+    "violation_x_matches_leg247": false,
+    "violation_x_regenerated": 62.53156368658738,
+    "violation_x_rel_error": 0.008187576498266144
+  },
+  "q2_isolation": {
+    "Q2_isolated": false,
+    "added_paths": [
+      "v5_budget.budget_holds_uniformly",
+      "v5_budget.margin_at_best_row",
+      "v5_budget.margin_over_rows_within_budget",
+      "v5_budget.margin_selection",
+      "v5_budget.n_good_rows",
+      "v5_budget.rows_over_budget[0].a",
+      "v5_budget.rows_over_budget[0].violation_x",
+      "v5_budget.rows_over_budget[0].weighted_defect",
+      "v5_budget.worst_violation_x"
+    ],
+    "changed_paths": [
+      "v1_known_answer.exact_continuum_rms_on_the_grid",
+      "v1_known_answer.history[1]",
+      "v1_known_answer.history[2]",
+      "v1_known_answer.history[3]",
+      "v1_known_answer.history[4]",
+      "v1_known_answer.history[5]",
+      "v1_known_answer.history[6]",
+      "v1_known_answer.history[7]",
+      "v1_known_answer.newton_c",
+      "v1_known_answer.newton_rms",
+      "v1_known_answer.profile_difference",
+      "v2_sweep.best_relres",
+      "v2_sweep.orders_below_GA",
+      "v2_sweep.rows[0].c",
+      "v2_sweep.rows[0].relres",
+      "v2_sweep.rows[0].residual_rms",
+      "v2_sweep.rows[0].weighted_defect",
+      "v2_sweep.rows[10].c",
+      "v2_sweep.rows[10].iterations",
+      "v2_sweep.rows[10].relres",
+      "v2_sweep.rows[10].residual_rms",
+      "v2_sweep.rows[10].weighted_defect",
+      "v2_sweep.rows[11].c",
+      "v2_sweep.rows[11].relres",
+      "v2_sweep.rows[11].residual_rms",
+      "v2_sweep.rows[11].weighted_defect",
+      "v2_sweep.rows[12].c",
+      "v2_sweep.rows[12].relres",
+      "v2_sweep.rows[12].residual_rms",
+      "v2_sweep.rows[12].weighted_defect",
+      "v2_sweep.rows[13].c",
+      "v2_sweep.rows[13].relres",
+      "v2_sweep.rows[13].residual_rms",
+      "v2_sweep.rows[13].weighted_defect",
+      "v2_sweep.rows[14].c",
+      "v2_sweep.rows[14].relres",
+      "v2_sweep.rows[14].residual_rms",
+      "v2_sweep.rows[14].weighted_defect",
+      "v2_sweep.rows[15].c",
+      "v2_sweep.rows[15].relres",
+      "v2_sweep.rows[15].residual_rms",
+      "v2_sweep.rows[15].weighted_defect",
+      "v2_sweep.rows[16].c",
+      "v2_sweep.rows[16].relres",
+      "v2_sweep.rows[16].residual_rms",
+      "v2_sweep.rows[16].weighted_defect",
+      "v2_sweep.rows[1].c",
+      "v2_sweep.rows[1].relres",
+      "v2_sweep.rows[1].residual_rms",
+      "v2_sweep.rows[1].weighted_defect",
+      "v2_sweep.rows[2].c",
+      "v2_sweep.rows[2].relres",
+      "v2_sweep.rows[2].residual_rms",
+      "v2_sweep.rows[2].weighted_defect",
+      "v2_sweep.rows[3].c",
+      "v2_sweep.rows[3].relres",
+      "v2_sweep.rows[3].residual_rms",
+      "v2_sweep.rows[3].weighted_defect",
+      "v2_sweep.rows[4].c",
+      "v2_sweep.rows[4].relres",
+      "v2_sweep.rows[4].residual_rms",
+      "v2_sweep.rows[4].weighted_defect",
+      "v2_sweep.rows[5].c",
+      "v2_sweep.rows[5].relres",
+      "v2_sweep.rows[5].residual_rms",
+      "v2_sweep.rows[5].weighted_defect",
+      "v2_sweep.rows[6].c",
+      "v2_sweep.rows[6].relres",
+      "v2_sweep.rows[6].residual_rms",
+      "v2_sweep.rows[6].weighted_defect",
+      "v2_sweep.rows[7].c",
+      "v2_sweep.rows[7].relres",
+      "v2_sweep.rows[7].residual_rms",
+      "v2_sweep.rows[7].weighted_defect",
+      "v2_sweep.rows[8].c",
+      "v2_sweep.rows[8].iterations",
+      "v2_sweep.rows[8].relres",
+      "v2_sweep.rows[8].residual_rms",
+      "v2_sweep.rows[8].weighted_defect",
+      "v2_sweep.rows[9].c",
+      "v2_sweep.rows[9].relres",
+      "v2_sweep.rows[9].residual_rms",
+      "v2_sweep.rows[9].weighted_defect",
+      "v3_boundary.rows[0].c",
+      "v3_boundary.rows[0].relres",
+      "v3_boundary.rows[10].c",
+      "v3_boundary.rows[10].relres",
+      "v3_boundary.rows[11].c",
+      "v3_boundary.rows[11].relres",
+      "v3_boundary.rows[12].c",
+      "v3_boundary.rows[12].relres",
+      "v3_boundary.rows[13].c",
+      "v3_boundary.rows[13].relres",
+      "v3_boundary.rows[14].c",
+      "v3_boundary.rows[14].relres",
+      "v3_boundary.rows[15].c",
+      "v3_boundary.rows[15].relres",
+      "v3_boundary.rows[1].c",
+      "v3_boundary.rows[1].relres",
+      "v3_boundary.rows[2].c",
+      "v3_boundary.rows[2].relres",
+      "v3_boundary.rows[3].c",
+      "v3_boundary.rows[3].relres",
+      "v3_boundary.rows[4].c",
+      "v3_boundary.rows[4].relres",
+      "v3_boundary.rows[5].c",
+      "v3_boundary.rows[5].relres",
+      "v3_boundary.rows[6].c",
+      "v3_boundary.rows[6].relres",
+      "v3_boundary.rows[7].c",
+      "v3_boundary.rows[7].relres",
+      "v3_boundary.rows[8].c",
+      "v3_boundary.rows[8].relres",
+      "v3_boundary.rows[9].c",
+      "v3_boundary.rows[9].converged",
+      "v3_boundary.rows[9].relres",
+      "v4_grids.rows[0].Omega_at_X4",
+      "v4_grids.rows[0].c",
+      "v4_grids.rows[0].relres",
+      "v4_grids.rows[0].residual_rms",
+      "v4_grids.rows[0].weighted_defect",
+      "v4_grids.rows[10].Omega_at_X4",
+      "v4_grids.rows[10].relres",
+      "v4_grids.rows[10].residual_rms",
+      "v4_grids.rows[10].weighted_defect",
+      "v4_grids.rows[11].Omega_at_X4",
+      "v4_grids.rows[11].c",
+      "v4_grids.rows[11].relres",
+      "v4_grids.rows[11].residual_rms",
+      "v4_grids.rows[11].weighted_defect",
+      "v4_grids.rows[12].Omega_at_X4",
+      "v4_grids.rows[12].c",
+      "v4_grids.rows[12].relres",
+      "v4_grids.rows[12].residual_rms",
+      "v4_grids.rows[12].weighted_defect",
+      "v4_grids.rows[13].Omega_at_X4",
+      "v4_grids.rows[13].c",
+      "v4_grids.rows[13].relres",
+      "v4_grids.rows[13].residual_rms",
+      "v4_grids.rows[13].weighted_defect",
+      "v4_grids.rows[14].Omega_at_X4",
+      "v4_grids.rows[14].c",
+      "v4_grids.rows[14].relres",
+      "v4_grids.rows[14].residual_rms",
+      "v4_grids.rows[14].weighted_defect",
+      "v4_grids.rows[1].Omega_at_X4",
+      "v4_grids.rows[1].c",
+      "v4_grids.rows[1].relres",
+      "v4_grids.rows[1].residual_rms",
+      "v4_grids.rows[1].weighted_defect",
+      "v4_grids.rows[2].Omega_at_X4",
+      "v4_grids.rows[2].c",
+      "v4_grids.rows[2].relres",
+      "v4_grids.rows[2].residual_rms",
+      "v4_grids.rows[2].weighted_defect",
+      "v4_grids.rows[3].Omega_at_X4",
+      "v4_grids.rows[3].c",
+      "v4_grids.rows[3].relres",
+      "v4_grids.rows[3].residual_rms",
+      "v4_grids.rows[3].weighted_defect",
+      "v4_grids.rows[4].Omega_at_X4",
+      "v4_grids.rows[4].c",
+      "v4_grids.rows[4].relres",
+      "v4_grids.rows[4].residual_rms",
+      "v4_grids.rows[4].weighted_defect",
+      "v4_grids.rows[5].Omega_at_X4",
+      "v4_grids.rows[5].c",
+      "v4_grids.rows[5].relres",
+      "v4_grids.rows[5].residual_rms",
+      "v4_grids.rows[5].weighted_defect",
+      "v4_grids.rows[6].Omega_at_X4",
+      "v4_grids.rows[6].c",
+      "v4_grids.rows[6].relres",
+      "v4_grids.rows[6].residual_rms",
+      "v4_grids.rows[6].weighted_defect",
+      "v4_grids.rows[7].Omega_at_X4",
+      "v4_grids.rows[7].c",
+      "v4_grids.rows[7].relres",
+      "v4_grids.rows[7].residual_rms",
+      "v4_grids.rows[7].weighted_defect",
+      "v4_grids.rows[8].Omega_at_X4",
+      "v4_grids.rows[8].c",
+      "v4_grids.rows[8].relres",
+      "v4_grids.rows[8].residual_rms",
+      "v4_grids.rows[8].weighted_defect",
+      "v4_grids.rows[9].Omega_at_X4",
+      "v4_grids.rows[9].c",
+      "v4_grids.rows[9].relres",
+      "v4_grids.rows[9].residual_rms",
+      "v4_grids.rows[9].weighted_defect",
+      "v4_grids.verdict[0].Omega_at_X4_spread",
+      "v4_grids.verdict[0].c_spread",
+      "v4_grids.verdict[1].Omega_at_X4_spread",
+      "v4_grids.verdict[1].c_spread",
+      "v4_grids.verdict[2].Omega_at_X4_spread",
+      "v4_grids.verdict[2].c_spread",
+      "v4_grids.verdict[3].Omega_at_X4_spread",
+      "v4_grids.verdict[3].c_spread",
+      "v4_grids.verdict[3].grids_reaching_machine_precision",
+      "v4_grids.verdict[4].Omega_at_X4_spread",
+      "v4_grids.verdict[4].c_spread",
+      "v4_grids.verdict[4].grids_reaching_machine_precision",
+      "v5_budget.margin",
+      "v5_budget.newton_weighted_defect_max",
+      "v5_budget.newton_weighted_defect_min",
+      "v5_budget.reading"
+    ],
+    "changed_values": {
+      "v1_known_answer.exact_continuum_rms_on_the_grid": {
+        "fresh": 7.729346247195022e-09,
+        "stale": 7.729346205965768e-09
+      },
+      "v1_known_answer.history[1]": {
+        "fresh": 0.015656279619249473,
+        "stale": 0.015656279619249584
+      },
+      "v1_known_answer.history[2]": {
+        "fresh": 0.0028638731081672532,
+        "stale": 0.0028638728633899194
+      },
+      "v1_known_answer.history[3]": {
+        "fresh": 5.452654212891742e-05,
+        "stale": 5.4524837006606726e-05
+      },
+      "v1_known_answer.history[4]": {
+        "fresh": 3.380992855205456e-08,
+        "stale": 3.3761936963946934e-08
+      },
+      "v1_known_answer.history[5]": {
+        "fresh": 4.156077825581196e-13,
+        "stale": 4.3558335586085435e-13
+      },
+      "v1_known_answer.history[6]": {
+        "fresh": 9.675502343691423e-16,
+        "stale": 1.0717169642907556e-15
+      },
+      "v1_known_answer.history[7]": {
+        "fresh": 9.675502343691423e-16,
+        "stale": 1.0717169642907556e-15
+      },
+      "v1_known_answer.newton_c": {
+        "fresh": 0.4979710207090008,
+        "stale": 0.49797101341035727
+      },
+      "v1_known_answer.newton_rms": {
+        "fresh": 9.675502343691423e-16,
+        "stale": 1.0717169642907556e-15
+      },
+      "v1_known_answer.profile_difference": {
+        "fresh": 0.002033113631412675,
+        "stale": 0.00203312828817781
+      },
+      "v2_sweep.best_relres": {
+        "fresh": 1.00680696466376e-14,
+        "stale": 8.80510887890354e-15
+      },
+      "v2_sweep.orders_below_GA": {
+        "fresh": 11.99705378884817,
+        "stale": 12.055265269428148
+      },
+      "v2_sweep.rows[0].c": {
+        "fresh": 0.4979710263000853,
+        "stale": 0.4979710520289264
+      },
+      "v2_sweep.rows[0].relres": {
+        "fresh": 1.0239348433011377e-14,
+        "stale": 9.71364255399854e-15
+      },
+      "v2_sweep.rows[0].residual_rms": {
+        "fresh": 1.2069384249346331e-15,
+        "stale": 1.144972129028598e-15
+      },
+      "v2_sweep.rows[0].weighted_defect": {
+        "fresh": 6.248788706271284e-11,
+        "stale": 2.0404871804230019e-10
+      },
+      "v2_sweep.rows[10].c": {
+        "fresh": 0.6360371992313086,
+        "stale": 0.6360371993769819
+      },
+      "v2_sweep.rows[10].iterations": {
+        "fresh": 8,
+        "stale": 7
+      },
+      "v2_sweep.rows[10].relres": {
+        "fresh": 1.2053879230948793e-14,
+        "stale": 1.955004123530594e-14
+      },
+      "v2_sweep.rows[10].residual_rms": {
+        "fresh": 1.5382554843843527e-15,
+        "stale": 2.4948780036196606e-15
+      },
+      "v2_sweep.rows[10].weighted_defect": {
+        "fresh": 7.452777847929075e-07,
+        "stale": 7.452803361201188e-07
+      },
+      "v2_sweep.rows[11].c": {
+        "fresh": 0.6510632342015897,
+        "stale": 0.6510632341840581
+      },
+      "v2_sweep.rows[11].relres": {
+        "fresh": 1.3698179329207837e-14,
+        "stale": 1.2666636692505909e-14
+      },
+      "v2_sweep.rows[11].residual_rms": {
+        "fresh": 1.7609835027554821e-15,
+        "stale": 1.6283724803640601e-15
+      },
+      "v2_sweep.rows[11].weighted_defect": {
+        "fresh": 1.0318323712839313e-10,
+        "stale": 1.0292928509778421e-10
+      },
+      "v2_sweep.rows[12].c": {
+        "fresh": 0.6662709324294281,
+        "stale": 0.6662707181094097
+      },
+      "v2_sweep.rows[12].relres": {
+        "fresh": 6.760597628806729e-08,
+        "stale": 6.780566040042652e-08
+      },
+      "v2_sweep.rows[12].residual_rms": {
+        "fresh": 8.753881653239823e-09,
+        "stale": 8.779734571211414e-09
+      },
+      "v2_sweep.rows[12].weighted_defect": {
+        "fresh": 0.6204258998786962,
+        "stale": 0.622257814895334
+      },
+      "v2_sweep.rows[13].c": {
+        "fresh": 0.6971807761152686,
+        "stale": 0.6971807761166391
+      },
+      "v2_sweep.rows[13].relres": {
+        "fresh": 2.1495284541494418e-14,
+        "stale": 2.1259549590517455e-14
+      },
+      "v2_sweep.rows[13].residual_rms": {
+        "fresh": 2.8221758316803597e-15,
+        "stale": 2.7912255327894136e-15
+      },
+      "v2_sweep.rows[13].weighted_defect": {
+        "fresh": 5.003688645795893e-12,
+        "stale": 1.1226710509569824e-11
+      },
+      "v2_sweep.rows[14].c": {
+        "fresh": 0.7287020300617528,
+        "stale": 0.7287020300617032
+      },
+      "v2_sweep.rows[14].relres": {
+        "fresh": 1.1967934003996363e-14,
+        "stale": 1.2077307772913829e-14
+      },
+      "v2_sweep.rows[14].residual_rms": {
+        "fresh": 1.5921605781237473e-15,
+        "stale": 1.6067111766725658e-15
+      },
+      "v2_sweep.rows[14].weighted_defect": {
+        "fresh": 3.987668296622051e-11,
+        "stale": 5.696426583727755e-09
+      },
+      "v2_sweep.rows[15].c": {
+        "fresh": 0.7607441257729147,
+        "stale": 0.760744125772949
+      },
+      "v2_sweep.rows[15].relres": {
+        "fresh": 1.0905309806412475e-14,
+        "stale": 1.1050831626505453e-14
+      },
+      "v2_sweep.rows[15].residual_rms": {
+        "fresh": 1.4689749229098949e-15,
+        "stale": 1.4885771082900114e-15
+      },
+      "v2_sweep.rows[15].weighted_defect": {
+        "fresh": 1.500809339562456e-07,
+        "stale": 1.502057607005308e-07
+      },
+      "v2_sweep.rows[16].c": {
+        "fresh": 0.7931877152785268,
+        "stale": 0.7931877152785316
+      },
+      "v2_sweep.rows[16].relres": {
+        "fresh": 6.133409734446672e-14,
+        "stale": 6.159499531926391e-14
+      },
+      "v2_sweep.rows[16].residual_rms": {
+        "fresh": 8.358600393172554e-15,
+        "stale": 8.39415552496933e-15
+      },
+      "v2_sweep.rows[16].weighted_defect": {
+        "fresh": 5.256624950413183e-07,
+        "stale": 5.256671614616653e-07
+      },
+      "v2_sweep.rows[1].c": {
+        "fresh": 0.510662735184044,
+        "stale": 0.5106627353185929
+      },
+      "v2_sweep.rows[1].relres": {
+        "fresh": 8.225175182403857e-14,
+        "stale": 8.228304860678187e-14
+      },
+      "v2_sweep.rows[1].residual_rms": {
+        "fresh": 9.775402089431053e-15,
+        "stale": 9.779121629431756e-15
+      },
+      "v2_sweep.rows[1].weighted_defect": {
+        "fresh": 2.4758958299242587e-09,
+        "stale": 2.4736761103063177e-09
+      },
+      "v2_sweep.rows[2].c": {
+        "fresh": 0.5236204988936792,
+        "stale": 0.5236204989988199
+      },
+      "v2_sweep.rows[2].relres": {
+        "fresh": 1.00680696466376e-14,
+        "stale": 8.80510887890354e-15
+      },
+      "v2_sweep.rows[2].residual_rms": {
+        "fresh": 1.206429143259174e-15,
+        "stale": 1.0550920220426727e-15
+      },
+      "v2_sweep.rows[2].weighted_defect": {
+        "fresh": 4.749013353083527e-14,
+        "stale": 2.340496906495767e-14
+      },
+      "v2_sweep.rows[3].c": {
+        "fresh": 0.5382793543589295,
+        "stale": 0.5382793544665451
+      },
+      "v2_sweep.rows[3].relres": {
+        "fresh": 3.5596837170250127e-14,
+        "stale": 3.5459813222820815e-14
+      },
+      "v2_sweep.rows[3].residual_rms": {
+        "fresh": 4.30299180122145e-15,
+        "stale": 4.2864281691009085e-15
+      },
+      "v2_sweep.rows[3].weighted_defect": {
+        "fresh": 8.882225317817239e-08,
+        "stale": 8.957136730252033e-08
+      },
+      "v2_sweep.rows[4].c": {
+        "fresh": 0.5532899458778322,
+        "stale": 0.5532899459876917
+      },
+      "v2_sweep.rows[4].relres": {
+        "fresh": 2.653831081291638e-14,
+        "stale": 2.6604720377084077e-14
+      },
+      "v2_sweep.rows[4].residual_rms": {
+        "fresh": 3.2361189512097466e-15,
+        "stale": 3.24421702703017e-15
+      },
+      "v2_sweep.rows[4].weighted_defect": {
+        "fresh": 1.0834897764915099e-08,
+        "stale": 1.0825507624473443e-08
+      },
+      "v2_sweep.rows[5].c": {
+        "fresh": 0.5686479399646771,
+        "stale": 0.5686479400838558
+      },
+      "v2_sweep.rows[5].relres": {
+        "fresh": 2.0913695266471026e-14,
+        "stale": 2.1068009284589843e-14
+      },
+      "v2_sweep.rows[5].residual_rms": {
+        "fresh": 2.5724986943127287e-15,
+        "stale": 2.591480161161309e-15
+      },
+      "v2_sweep.rows[5].weighted_defect": {
+        "fresh": 1.2844593065045663e-07,
+        "stale": 1.287720593592463e-07
+      },
+      "v2_sweep.rows[6].c": {
+        "fresh": 0.5843482125483669,
+        "stale": 0.5843482126956117
+      },
+      "v2_sweep.rows[6].relres": {
+        "fresh": 1.5795953133232678e-13,
+        "stale": 1.5839384616083975e-13
+      },
+      "v2_sweep.rows[6].residual_rms": {
+        "fresh": 1.959825365131873e-14,
+        "stale": 1.9652139684112228e-14
+      },
+      "v2_sweep.rows[6].weighted_defect": {
+        "fresh": 2.161449133607978e-07,
+        "stale": 2.1678555931462193e-07
+      },
+      "v2_sweep.rows[7].c": {
+        "fresh": 0.5921797823722922,
+        "stale": 0.5921808110066537
+      },
+      "v2_sweep.rows[7].relres": {
+        "fresh": 5.520648350852668e-12,
+        "stale": 6.407111953361836e-12
+      },
+      "v2_sweep.rows[7].residual_rms": {
+        "fresh": 6.88616226365636e-13,
+        "stale": 7.991892621985998e-13
+      },
+      "v2_sweep.rows[7].weighted_defect": {
+        "fresh": 2.0106389107465392e-05,
+        "stale": 2.299174862774721e-05
+      },
+      "v2_sweep.rows[8].c": {
+        "fresh": 0.6065912263422927,
+        "stale": 0.6065912180003867
+      },
+      "v2_sweep.rows[8].iterations": {
+        "fresh": 12,
+        "stale": 13
+      },
+      "v2_sweep.rows[8].relres": {
+        "fresh": 1.3756277020897247e-14,
+        "stale": 9.604316741393971e-15
+      },
+      "v2_sweep.rows[8].residual_rms": {
+        "fresh": 1.7292147241834405e-15,
+        "stale": 1.2072980103027915e-15
+      },
+      "v2_sweep.rows[8].weighted_defect": {
+        "fresh": 2.3761617487735334e-08,
+        "stale": 2.3745410710865122e-08
+      },
+      "v2_sweep.rows[9].c": {
+        "fresh": 0.6212128879979006,
+        "stale": 0.6212128887282526
+      },
+      "v2_sweep.rows[9].relres": {
+        "fresh": 2.2981065840079924e-11,
+        "stale": 1.6005288648836091e-09
+      },
+      "v2_sweep.rows[9].residual_rms": {
+        "fresh": 2.9108803891437065e-12,
+        "stale": 2.0272985790982867e-10
+      },
+      "v2_sweep.rows[9].weighted_defect": {
+        "fresh": 0.015320233103213909,
+        "stale": 0.015195816195658364
+      },
+      "v3_boundary.rows[0].c": {
+        "fresh": 0.6182717711216615,
+        "stale": 0.6182719666864739
+      },
+      "v3_boundary.rows[0].relres": {
+        "fresh": 4.04564373298653e-12,
+        "stale": 3.0540884402389545e-10
+      },
+      "v3_boundary.rows[10].c": {
+        "fresh": 0.6785886168103966,
+        "stale": 0.6785886168156209
+      },
+      "v3_boundary.rows[10].relres": {
+        "fresh": 1.0083075742455787e-14,
+        "stale": 1.2826347105859263e-14
+      },
+      "v3_boundary.rows[11].c": {
+        "fresh": 0.6847650681619535,
+        "stale": 0.6847650623848678
+      },
+      "v3_boundary.rows[11].relres": {
+        "fresh": 3.891761302896747e-07,
+        "stale": 3.8800015003490003e-07
+      },
+      "v3_boundary.rows[12].c": {
+        "fresh": 0.6909867054842812,
+        "stale": 0.6909861680246662
+      },
+      "v3_boundary.rows[12].relres": {
+        "fresh": 1.8459042900155677e-06,
+        "stale": 1.8364745434953607e-06
+      },
+      "v3_boundary.rows[13].c": {
+        "fresh": 0.69718077611701,
+        "stale": 0.6971807761152151
+      },
+      "v3_boundary.rows[13].relres": {
+        "fresh": 1.0447120392052092e-14,
+        "stale": 9.403249144349296e-15
+      },
+      "v3_boundary.rows[14].c": {
+        "fresh": 0.7043881294700961,
+        "stale": 0.7043881294701383
+      },
+      "v3_boundary.rows[14].relres": {
+        "fresh": 1.1252119026021025e-14,
+        "stale": 1.0705636614246389e-14
+      },
+      "v3_boundary.rows[15].c": {
+        "fresh": 0.7098041718405043,
+        "stale": 0.709805011637543
+      },
+      "v3_boundary.rows[15].relres": {
+        "fresh": 3.5034628239446776e-06,
+        "stale": 3.5050514956839393e-06
+      },
+      "v3_boundary.rows[1].c": {
+        "fresh": 0.6241619315462341,
+        "stale": 0.6241619310027413
+      },
+      "v3_boundary.rows[1].relres": {
+        "fresh": 1.1499941126301827e-14,
+        "stale": 1.0761541175222826e-14
+      },
+      "v3_boundary.rows[2].c": {
+        "fresh": 0.6300842354486665,
+        "stale": 0.630084280518621
+      },
+      "v3_boundary.rows[2].relres": {
+        "fresh": 2.7253982744280397e-09,
+        "stale": 2.7012301434481417e-09
+      },
+      "v3_boundary.rows[3].c": {
+        "fresh": 0.6360397157621205,
+        "stale": 0.6360397156780263
+      },
+      "v3_boundary.rows[3].relres": {
+        "fresh": 8.040727121501696e-14,
+        "stale": 8.028923092010226e-14
+      },
+      "v3_boundary.rows[4].c": {
+        "fresh": 0.6420251627570134,
+        "stale": 0.6420251626975199
+      },
+      "v3_boundary.rows[4].relres": {
+        "fresh": 1.0145191798581599e-14,
+        "stale": 8.84090972534476e-15
+      },
+      "v3_boundary.rows[5].c": {
+        "fresh": 0.6480407247059763,
+        "stale": 0.6480407120227919
+      },
+      "v3_boundary.rows[5].relres": {
+        "fresh": 2.7059897926105067e-08,
+        "stale": 2.7057765628611216e-08
+      },
+      "v3_boundary.rows[6].c": {
+        "fresh": 0.6540876895383149,
+        "stale": 0.6540877430854946
+      },
+      "v3_boundary.rows[6].relres": {
+        "fresh": 7.584220972804912e-08,
+        "stale": 7.583658985539714e-08
+      },
+      "v3_boundary.rows[7].c": {
+        "fresh": 0.6601646707322358,
+        "stale": 0.6601647540206447
+      },
+      "v3_boundary.rows[7].relres": {
+        "fresh": 1.2236547765189078e-07,
+        "stale": 1.2233291547381474e-07
+      },
+      "v3_boundary.rows[8].c": {
+        "fresh": 0.6662709324294281,
+        "stale": 0.6662707181094097
+      },
+      "v3_boundary.rows[8].relres": {
+        "fresh": 6.760597628806729e-08,
+        "stale": 6.780566040042652e-08
+      },
+      "v3_boundary.rows[9].c": {
+        "fresh": 0.6744396633158872,
+        "stale": 0.6729366295185071
+      },
+      "v3_boundary.rows[9].converged": {
+        "fresh": false,
+        "stale": true
+      },
+      "v3_boundary.rows[9].relres": {
+        "fresh": 0.00034942379949706124,
+        "stale": 1.0772072052576051e-14
+      },
+      "v4_grids.rows[0].Omega_at_X4": {
+        "fresh": -0.06022721595600605,
+        "stale": -0.06022721556282138
+      },
+      "v4_grids.rows[0].c": {
+        "fresh": 0.4979712472212171,
+        "stale": 0.4979712449052861
+      },
+      "v4_grids.rows[0].relres": {
+        "fresh": 5.003381564374652e-15,
+        "stale": 4.3323590304579805e-15
+      },
+      "v4_grids.rows[0].residual_rms": {
+        "fresh": 5.893938862928486e-16,
+        "stale": 5.103480296998139e-16
+      },
+      "v4_grids.rows[0].weighted_defect": {
+        "fresh": 1.600443928936507e-11,
+        "stale": 4.524447745776031e-12
+      },
+      "v4_grids.rows[10].Omega_at_X4": {
+        "fresh": -0.05811674730979407,
+        "stale": -0.05811674730979396
+      },
+      "v4_grids.rows[10].relres": {
+        "fresh": 4.4336490408012894e-14,
+        "stale": 4.377599307839473e-14
+      },
+      "v4_grids.rows[10].residual_rms": {
+        "fresh": 5.229518783389296e-15,
+        "stale": 5.163407747393802e-15
+      },
+      "v4_grids.rows[10].weighted_defect": {
+        "fresh": 4.1762252658865764e-08,
+        "stale": 4.1814268355174705e-08
+      },
+      "v4_grids.rows[11].Omega_at_X4": {
+        "fresh": -0.02313762304926538,
+        "stale": -0.02313762304873384
+      },
+      "v4_grids.rows[11].c": {
+        "fresh": 0.554876800483244,
+        "stale": 0.5548768004840611
+      },
+      "v4_grids.rows[11].relres": {
+        "fresh": 2.136784404285505e-14,
+        "stale": 2.0848372322410882e-14
+      },
+      "v4_grids.rows[11].residual_rms": {
+        "fresh": 2.6082063308317707e-15,
+        "stale": 2.5447984630497246e-15
+      },
+      "v4_grids.rows[11].weighted_defect": {
+        "fresh": 1.2321726512693211e-07,
+        "stale": 1.205324873902843e-07
+      },
+      "v4_grids.rows[12].Omega_at_X4": {
+        "fresh": 1.5994155419474281e-07,
+        "stale": 1.5994155222852915e-07
+      },
+      "v4_grids.rows[12].c": {
+        "fresh": 0.6360442517040861,
+        "stale": 0.6360442513775247
+      },
+      "v4_grids.rows[12].relres": {
+        "fresh": 2.1615367089011787e-14,
+        "stale": 2.16731808791631e-14
+      },
+      "v4_grids.rows[12].residual_rms": {
+        "fresh": 2.7593215153312255e-15,
+        "stale": 2.7667017660533907e-15
+      },
+      "v4_grids.rows[12].weighted_defect": {
+        "fresh": 8.531093269545152e-08,
+        "stale": 8.53087468126693e-08
+      },
+      "v4_grids.rows[13].Omega_at_X4": {
+        "fresh": 0.00484799491646725,
+        "stale": 0.002788715145652228
+      },
+      "v4_grids.rows[13].c": {
+        "fresh": 0.7312860633721128,
+        "stale": 0.7301381336252428
+      },
+      "v4_grids.rows[13].relres": {
+        "fresh": 3.8856961426510437e-14,
+        "stale": 0.00013083609356778308
+      },
+      "v4_grids.rows[13].residual_rms": {
+        "fresh": 5.189988449594668e-15,
+        "stale": 1.744720366674144e-05
+      },
+      "v4_grids.rows[13].weighted_defect": {
+        "fresh": 1.2339641854206708e-07,
+        "stale": 1992.0543105694808
+      },
+      "v4_grids.rows[14].Omega_at_X4": {
+        "fresh": 0.035969184257422286,
+        "stale": 0.027206104773829166
+      },
+      "v4_grids.rows[14].c": {
+        "fresh": 0.8103949243830778,
+        "stale": 0.806361063558342
+      },
+      "v4_grids.rows[14].relres": {
+        "fresh": 0.008289627037491445,
+        "stale": 0.0035453339098472513
+      },
+      "v4_grids.rows[14].residual_rms": {
+        "fresh": 0.0011573051952668953,
+        "stale": 0.0004919175239428393
+      },
+      "v4_grids.rows[14].weighted_defect": {
+        "fresh": 41982.05807667537,
+        "stale": 22475.06435583111
+      },
+      "v4_grids.rows[1].Omega_at_X4": {
+        "fresh": -0.02474185964451413,
+        "stale": -0.024741859644476005
+      },
+      "v4_grids.rows[1].c": {
+        "fresh": 0.5545708358333651,
+        "stale": 0.5545708358330205
+      },
+      "v4_grids.rows[1].relres": {
+        "fresh": 2.912597575566207e-14,
+        "stale": 2.908258620201058e-14
+      },
+      "v4_grids.rows[1].residual_rms": {
+        "fresh": 3.55138330870946e-15,
+        "stale": 3.546092741350677e-15
+      },
+      "v4_grids.rows[1].weighted_defect": {
+        "fresh": 1.499673168782728e-07,
+        "stale": 1.49967243923986e-07
+      },
+      "v4_grids.rows[2].Omega_at_X4": {
+        "fresh": 3.22767801444703e-06,
+        "stale": 3.227815990495703e-06
+      },
+      "v4_grids.rows[2].c": {
+        "fresh": 0.6360180995321166,
+        "stale": 0.63601810027421
+      },
+      "v4_grids.rows[2].relres": {
+        "fresh": 6.476482078299978e-08,
+        "stale": 6.476603153401411e-08
+      },
+      "v4_grids.rows[2].residual_rms": {
+        "fresh": 8.259745913922663e-09,
+        "stale": 8.259900336513976e-09
+      },
+      "v4_grids.rows[2].weighted_defect": {
+        "fresh": 0.5004480200721677,
+        "stale": 0.5004514144266673
+      },
+      "v4_grids.rows[3].Omega_at_X4": {
+        "fresh": 0.00974722118924119,
+        "stale": 0.009461729750368828
+      },
+      "v4_grids.rows[3].c": {
+        "fresh": 0.733293372868903,
+        "stale": 0.7331433981585896
+      },
+      "v4_grids.rows[3].relres": {
+        "fresh": 0.0011741648174005742,
+        "stale": 0.0011249300551053774
+      },
+      "v4_grids.rows[3].residual_rms": {
+        "fresh": 0.00015716215642446135,
+        "stale": 0.0001505411592056313
+      },
+      "v4_grids.rows[3].weighted_defect": {
+        "fresh": 5566.9513738774485,
+        "stale": 4788.016438278546
+      },
+      "v4_grids.rows[4].Omega_at_X4": {
+        "fresh": 0.001822612314111877,
+        "stale": 0.007956603728563634
+      },
+      "v4_grids.rows[4].c": {
+        "fresh": 0.7937598536094689,
+        "stale": 0.7964218109708666
+      },
+      "v4_grids.rows[4].relres": {
+        "fresh": 7.096346623968902e-15,
+        "stale": 0.005898939091234096
+      },
+      "v4_grids.rows[4].residual_rms": {
+        "fresh": 9.675544482034577e-16,
+        "stale": 0.0008069030564506525
+      },
+      "v4_grids.rows[4].weighted_defect": {
+        "fresh": 1.5312646259028676e-08,
+        "stale": 73371.6254687273
+      },
+      "v4_grids.rows[5].Omega_at_X4": {
+        "fresh": -0.05798530729303957,
+        "stale": -0.057985311537091765
+      },
+      "v4_grids.rows[5].c": {
+        "fresh": 0.4979710263000853,
+        "stale": 0.4979710520289264
+      },
+      "v4_grids.rows[5].relres": {
+        "fresh": 1.0239348433011377e-14,
+        "stale": 9.71364255399854e-15
+      },
+      "v4_grids.rows[5].residual_rms": {
+        "fresh": 1.2069384249346331e-15,
+        "stale": 1.144972129028598e-15
+      },
+      "v4_grids.rows[5].weighted_defect": {
+        "fresh": 6.248788706271284e-11,
+        "stale": 2.0404871804230019e-10
+      },
+      "v4_grids.rows[6].Omega_at_X4": {
+        "fresh": -0.023127311820528053,
+        "stale": -0.023127311820525888
+      },
+      "v4_grids.rows[6].c": {
+        "fresh": 0.5547756565731095,
+        "stale": 0.5547756565731081
+      },
+      "v4_grids.rows[6].relres": {
+        "fresh": 1.000970050254956e-14,
+        "stale": 1.0132507155365502e-14
+      },
+      "v4_grids.rows[6].residual_rms": {
+        "fresh": 1.2213710301245763e-15,
+        "stale": 1.2363557430056257e-15
+      },
+      "v4_grids.rows[6].weighted_defect": {
+        "fresh": 1.0834897764915099e-08,
+        "stale": 1.0825507624473443e-08
+      },
+      "v4_grids.rows[7].Omega_at_X4": {
+        "fresh": -5.64926186623094e-08,
+        "stale": -5.6492618513727923e-08
+      },
+      "v4_grids.rows[7].c": {
+        "fresh": 0.6360397157621205,
+        "stale": 0.6360397156780263
+      },
+      "v4_grids.rows[7].relres": {
+        "fresh": 8.040727121501696e-14,
+        "stale": 8.028923092010226e-14
+      },
+      "v4_grids.rows[7].residual_rms": {
+        "fresh": 1.0261214476862081e-14,
+        "stale": 1.0246150704796326e-14
+      },
+      "v4_grids.rows[7].weighted_defect": {
+        "fresh": 7.452777847929075e-07,
+        "stale": 7.452803361201188e-07
+      },
+      "v4_grids.rows[8].Omega_at_X4": {
+        "fresh": 0.0008624827452458319,
+        "stale": 0.0011816012161009418
+      },
+      "v4_grids.rows[8].c": {
+        "fresh": 0.729235792295508,
+        "stale": 0.7293940450078625
+      },
+      "v4_grids.rows[8].relres": {
+        "fresh": 1.0616094551495176e-14,
+        "stale": 1.0464390975685832e-14
+      },
+      "v4_grids.rows[8].residual_rms": {
+        "fresh": 1.413406793420438e-15,
+        "stale": 1.3935192443495812e-15
+      },
+      "v4_grids.rows[8].weighted_defect": {
+        "fresh": 3.987668296622051e-11,
+        "stale": 5.696426583727755e-09
+      },
+      "v4_grids.rows[9].Omega_at_X4": {
+        "fresh": -0.002152324319178901,
+        "stale": -0.0021523243191786815
+      },
+      "v4_grids.rows[9].c": {
+        "fresh": 0.7931877152785268,
+        "stale": 0.7931877152785316
+      },
+      "v4_grids.rows[9].relres": {
+        "fresh": 6.133409734446672e-14,
+        "stale": 6.159499531926391e-14
+      },
+      "v4_grids.rows[9].residual_rms": {
+        "fresh": 8.358600393172554e-15,
+        "stale": 8.39415552496933e-15
+      },
+      "v4_grids.rows[9].weighted_defect": {
+        "fresh": 5.256624950413183e-07,
+        "stale": 5.256671614616653e-07
+      },
+      "v4_grids.verdict[0].Omega_at_X4_spread": {
+        "fresh": 0.002241908662966481,
+        "stale": 0.0022419040257296158
+      },
+      "v4_grids.verdict[0].c_spread": {
+        "fresh": 0.0007976060443316557,
+        "stale": 0.0007975803154907646
+      },
+      "v4_grids.verdict[1].Omega_at_X4_spread": {
+        "fresh": 0.0016145478239860782,
+        "stale": 0.0016145478239501174
+      },
+      "v4_grids.verdict[1].c_spread": {
+        "fresh": 0.00030596464987886485,
+        "stale": 0.0003059646510406022
+      },
+      "v4_grids.verdict[2].Omega_at_X4_spread": {
+        "fresh": 3.284170633109339e-06,
+        "stale": 3.284308609009431e-06
+      },
+      "v4_grids.verdict[2].c_spread": {
+        "fresh": 2.6152171969440197e-05,
+        "stale": 2.6151103314719926e-05
+      },
+      "v4_grids.verdict[3].Omega_at_X4_spread": {
+        "fresh": 0.00888473844399536,
+        "stale": 0.008280128534267886
+      },
+      "v4_grids.verdict[3].c_spread": {
+        "fresh": 0.004057580573395003,
+        "stale": 0.0037493531507271083
+      },
+      "v4_grids.verdict[3].grids_reaching_machine_precision": {
+        "fresh": 2,
+        "stale": 1
+      },
+      "v4_grids.verdict[4].Omega_at_X4_spread": {
+        "fresh": 0.03812150857660119,
+        "stale": 0.029358429093007846
+      },
+      "v4_grids.verdict[4].c_spread": {
+        "fresh": 0.01720720910455098,
+        "stale": 0.013173348279810426
+      },
+      "v4_grids.verdict[4].grids_reaching_machine_precision": {
+        "fresh": 2,
+        "stale": 1
+      },
+      "v5_budget.margin": {
+        "fresh": 0.015991923774880644,
+        "stale": 10467862585.933441
+      },
+      "v5_budget.newton_weighted_defect_max": {
+        "fresh": 0.015320233103213909,
+        "stale": 0.015195816195658364
+      },
+      "v5_budget.newton_weighted_defect_min": {
+        "fresh": 4.749013353083527e-14,
+        "stale": 2.340496906495767e-14
+      },
+      "v5_budget.reading": {
+        "fresh": "the budget condition is Y0 <= Y0_max.  Every earlier leg compared 1e-2 against 2.45e-4 and concluded the profile was ~40x too poor.  With Newton the weighted defect of the discrete profile is many orders BELOW the budget on most of the range but NOT uniformly (see rows_over_budget -- the margin above is worst-case, per leg 247), so the profile's defect stops being the binding constraint only where the budget actually holds.  What binds instead is the three unpriced Z1 items, which is a different and more tractable problem than 'find a better profile'.  CAREFUL: this is the defect of the DISCRETE profile in the ROUTE-A discretization; carrying it into the certificate needs the same object in the theta-collocation basis plus the discretization error, which is exactly the open ledger item 'Z1 core discretization'.",
+        "stale": "the budget condition is Y0 <= Y0_max.  Every earlier leg compared 1e-2 against 2.45e-4 and concluded the profile was ~40x too poor.  With Newton the weighted defect of the discrete profile is many orders BELOW the budget, so the profile's defect is no longer the binding constraint -- for a < a*.  What binds instead is the three unpriced Z1 items, which is a different and more tractable problem than 'find a better profile'.  CAREFUL: this is the defect of the DISCRETE profile in the ROUTE-A discretization; carrying it into the certificate needs the same object in the theta-collocation basis plus the discretization error, which is exactly the open ledger item 'Z1 core discretization'."
+      }
+    },
+    "n_added": 9,
+    "n_changed": 206,
+    "n_leaves_compared": 359,
+    "n_leaves_fresh": 368,
+    "n_leaves_stale": 359,
+    "n_removed": 0,
+    "n_unexpected_changed": 202,
+    "removed_paths": [],
+    "unexpected_added_paths": [],
+    "unexpected_changed_paths": [
+      "v1_known_answer.exact_continuum_rms_on_the_grid",
+      "v1_known_answer.history[1]",
+      "v1_known_answer.history[2]",
+      "v1_known_answer.history[3]",
+      "v1_known_answer.history[4]",
+      "v1_known_answer.history[5]",
+      "v1_known_answer.history[6]",
+      "v1_known_answer.history[7]",
+      "v1_known_answer.newton_c",
+      "v1_known_answer.newton_rms",
+      "v1_known_answer.profile_difference",
+      "v2_sweep.best_relres",
+      "v2_sweep.orders_below_GA",
+      "v2_sweep.rows[0].c",
+      "v2_sweep.rows[0].relres",
+      "v2_sweep.rows[0].residual_rms",
+      "v2_sweep.rows[0].weighted_defect",
+      "v2_sweep.rows[10].c",
+      "v2_sweep.rows[10].iterations",
+      "v2_sweep.rows[10].relres",
+      "v2_sweep.rows[10].residual_rms",
+      "v2_sweep.rows[10].weighted_defect",
+      "v2_sweep.rows[11].c",
+      "v2_sweep.rows[11].relres",
+      "v2_sweep.rows[11].residual_rms",
+      "v2_sweep.rows[11].weighted_defect",
+      "v2_sweep.rows[12].c",
+      "v2_sweep.rows[12].relres",
+      "v2_sweep.rows[12].residual_rms",
+      "v2_sweep.rows[12].weighted_defect",
+      "v2_sweep.rows[13].c",
+      "v2_sweep.rows[13].relres",
+      "v2_sweep.rows[13].residual_rms",
+      "v2_sweep.rows[13].weighted_defect",
+      "v2_sweep.rows[14].c",
+      "v2_sweep.rows[14].relres",
+      "v2_sweep.rows[14].residual_rms",
+      "v2_sweep.rows[14].weighted_defect",
+      "v2_sweep.rows[15].c",
+      "v2_sweep.rows[15].relres",
+      "v2_sweep.rows[15].residual_rms",
+      "v2_sweep.rows[15].weighted_defect",
+      "v2_sweep.rows[16].c",
+      "v2_sweep.rows[16].relres",
+      "v2_sweep.rows[16].residual_rms",
+      "v2_sweep.rows[16].weighted_defect",
+      "v2_sweep.rows[1].c",
+      "v2_sweep.rows[1].relres",
+      "v2_sweep.rows[1].residual_rms",
+      "v2_sweep.rows[1].weighted_defect",
+      "v2_sweep.rows[2].c",
+      "v2_sweep.rows[2].relres",
+      "v2_sweep.rows[2].residual_rms",
+      "v2_sweep.rows[2].weighted_defect",
+      "v2_sweep.rows[3].c",
+      "v2_sweep.rows[3].relres",
+      "v2_sweep.rows[3].residual_rms",
+      "v2_sweep.rows[3].weighted_defect",
+      "v2_sweep.rows[4].c",
+      "v2_sweep.rows[4].relres",
+      "v2_sweep.rows[4].residual_rms",
+      "v2_sweep.rows[4].weighted_defect",
+      "v2_sweep.rows[5].c",
+      "v2_sweep.rows[5].relres",
+      "v2_sweep.rows[5].residual_rms",
+      "v2_sweep.rows[5].weighted_defect",
+      "v2_sweep.rows[6].c",
+      "v2_sweep.rows[6].relres",
+      "v2_sweep.rows[6].residual_rms",
+      "v2_sweep.rows[6].weighted_defect",
+      "v2_sweep.rows[7].c",
+      "v2_sweep.rows[7].relres",
+      "v2_sweep.rows[7].residual_rms",
+      "v2_sweep.rows[7].weighted_defect",
+      "v2_sweep.rows[8].c",
+      "v2_sweep.rows[8].iterations",
+      "v2_sweep.rows[8].relres",
+      "v2_sweep.rows[8].residual_rms",
+      "v2_sweep.rows[8].weighted_defect",
+      "v2_sweep.rows[9].c",
+      "v2_sweep.rows[9].relres",
+      "v2_sweep.rows[9].residual_rms",
+      "v2_sweep.rows[9].weighted_defect",
+      "v3_boundary.rows[0].c",
+      "v3_boundary.rows[0].relres",
+      "v3_boundary.rows[10].c",
+      "v3_boundary.rows[10].relres",
+      "v3_boundary.rows[11].c",
+      "v3_boundary.rows[11].relres",
+      "v3_boundary.rows[12].c",
+      "v3_boundary.rows[12].relres",
+      "v3_boundary.rows[13].c",
+      "v3_boundary.rows[13].relres",
+      "v3_boundary.rows[14].c",
+      "v3_boundary.rows[14].relres",
+      "v3_boundary.rows[15].c",
+      "v3_boundary.rows[15].relres",
+      "v3_boundary.rows[1].c",
+      "v3_boundary.rows[1].relres",
+      "v3_boundary.rows[2].c",
+      "v3_boundary.rows[2].relres",
+      "v3_boundary.rows[3].c",
+      "v3_boundary.rows[3].relres",
+      "v3_boundary.rows[4].c",
+      "v3_boundary.rows[4].relres",
+      "v3_boundary.rows[5].c",
+      "v3_boundary.rows[5].relres",
+      "v3_boundary.rows[6].c",
+      "v3_boundary.rows[6].relres",
+      "v3_boundary.rows[7].c",
+      "v3_boundary.rows[7].relres",
+      "v3_boundary.rows[8].c",
+      "v3_boundary.rows[8].relres",
+      "v3_boundary.rows[9].c",
+      "v3_boundary.rows[9].converged",
+      "v3_boundary.rows[9].relres",
+      "v4_grids.rows[0].Omega_at_X4",
+      "v4_grids.rows[0].c",
+      "v4_grids.rows[0].relres",
+      "v4_grids.rows[0].residual_rms",
+      "v4_grids.rows[0].weighted_defect",
+      "v4_grids.rows[10].Omega_at_X4",
+      "v4_grids.rows[10].relres",
+      "v4_grids.rows[10].residual_rms",
+      "v4_grids.rows[10].weighted_defect",
+      "v4_grids.rows[11].Omega_at_X4",
+      "v4_grids.rows[11].c",
+      "v4_grids.rows[11].relres",
+      "v4_grids.rows[11].residual_rms",
+      "v4_grids.rows[11].weighted_defect",
+      "v4_grids.rows[12].Omega_at_X4",
+      "v4_grids.rows[12].c",
+      "v4_grids.rows[12].relres",
+      "v4_grids.rows[12].residual_rms",
+      "v4_grids.rows[12].weighted_defect",
+      "v4_grids.rows[13].Omega_at_X4",
+      "v4_grids.rows[13].c",
+      "v4_grids.rows[13].relres",
+      "v4_grids.rows[13].residual_rms",
+      "v4_grids.rows[13].weighted_defect",
+      "v4_grids.rows[14].Omega_at_X4",
+      "v4_grids.rows[14].c",
+      "v4_grids.rows[14].relres",
+      "v4_grids.rows[14].residual_rms",
+      "v4_grids.rows[14].weighted_defect",
+      "v4_grids.rows[1].Omega_at_X4",
+      "v4_grids.rows[1].c",
+      "v4_grids.rows[1].relres",
+      "v4_grids.rows[1].residual_rms",
+      "v4_grids.rows[1].weighted_defect",
+      "v4_grids.rows[2].Omega_at_X4",
+      "v4_grids.rows[2].c",
+      "v4_grids.rows[2].relres",
+      "v4_grids.rows[2].residual_rms",
+      "v4_grids.rows[2].weighted_defect",
+      "v4_grids.rows[3].Omega_at_X4",
+      "v4_grids.rows[3].c",
+      "v4_grids.rows[3].relres",
+      "v4_grids.rows[3].residual_rms",
+      "v4_grids.rows[3].weighted_defect",
+      "v4_grids.rows[4].Omega_at_X4",
+      "v4_grids.rows[4].c",
+      "v4_grids.rows[4].relres",
+      "v4_grids.rows[4].residual_rms",
+      "v4_grids.rows[4].weighted_defect",
+      "v4_grids.rows[5].Omega_at_X4",
+      "v4_grids.rows[5].c",
+      "v4_grids.rows[5].relres",
+      "v4_grids.rows[5].residual_rms",
+      "v4_grids.rows[5].weighted_defect",
+      "v4_grids.rows[6].Omega_at_X4",
+      "v4_grids.rows[6].c",
+      "v4_grids.rows[6].relres",
+      "v4_grids.rows[6].residual_rms",
+      "v4_grids.rows[6].weighted_defect",
+      "v4_grids.rows[7].Omega_at_X4",
+      "v4_grids.rows[7].c",
+      "v4_grids.rows[7].relres",
+      "v4_grids.rows[7].residual_rms",
+      "v4_grids.rows[7].weighted_defect",
+      "v4_grids.rows[8].Omega_at_X4",
+      "v4_grids.rows[8].c",
+      "v4_grids.rows[8].relres",
+      "v4_grids.rows[8].residual_rms",
+      "v4_grids.rows[8].weighted_defect",
+      "v4_grids.rows[9].Omega_at_X4",
+      "v4_grids.rows[9].c",
+      "v4_grids.rows[9].relres",
+      "v4_grids.rows[9].residual_rms",
+      "v4_grids.rows[9].weighted_defect",
+      "v4_grids.verdict[0].Omega_at_X4_spread",
+      "v4_grids.verdict[0].c_spread",
+      "v4_grids.verdict[1].Omega_at_X4_spread",
+      "v4_grids.verdict[1].c_spread",
+      "v4_grids.verdict[2].Omega_at_X4_spread",
+      "v4_grids.verdict[2].c_spread",
+      "v4_grids.verdict[3].Omega_at_X4_spread",
+      "v4_grids.verdict[3].c_spread",
+      "v4_grids.verdict[3].grids_reaching_machine_precision",
+      "v4_grids.verdict[4].Omega_at_X4_spread",
+      "v4_grids.verdict[4].c_spread",
+      "v4_grids.verdict[4].grids_reaching_machine_precision"
+    ],
+    "unexpected_removed_paths": []
+  }
+}
