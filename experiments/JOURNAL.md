@@ -4029,3 +4029,25 @@ preempted agents had reached a landing.
   strengthening travel with the downgrade in every block. 0 arguments
   changed. Leg 284 (grid-convergence measurement at a=1/2) may supersede
   this downgrade by citation if it lands.
+- **MAJOR: leg 285 (Route-P2S) -- gate NO, landed, and the NO is the
+  deliverable.** Turned leg 265's build-cost COUNT (15 of 18 apparatus terms
+  absent) into a per-term SPECIFICATION -- 14 of 16 records fully specified
+  across 71 BCG/CGSS anchors (22 re-verified live against the pinned TeX).
+  TWO TERMS RESIST, for two DIFFERENT reasons, and this is new information
+  for the Phase-1 decision packet, not a restatement: (1) A13 (bootstrap)'s
+  parameter contract is PROVABLY EMPTY at the recommended n=3 target's own
+  delta_dis -- BCG's smallness chain needs 0 < delta_g << delta_dis, but
+  n=3's delta_dis is in (-0.5778,-0.4302), i.e. negative, so no admissible
+  delta_g exists (checked against a live control at BCG's own sign, where
+  5/5 candidates ARE admissible). This means ONE UNBUDGETED ANALYTIC LEG
+  stands in front of any build -- leg 265's cost estimate did not contain
+  it. The other 14 specified terms, including 3 of the 4 most load-bearing,
+  have delta_dis-independent contracts that survive. (2) A15b (interval ODE
+  solver) has NO anchor in BCG/CGSS at all -- their computer-assisted part
+  only ever evaluates expressions, never rigorously integrates an ODE; this
+  capability's only source is a different, unrefereed paper. ALSO BANKED:
+  the full dependency graph (7 layers, only 4 of 16 terms independent,
+  critical path depth 7) shows the build's SCHEDULE bottleneck and the
+  target's MATHEMATICAL difficulty are different terms -- the critical path
+  does not run through F_dis. No code written, solver/ untouched, no
+  construction authorized. Flagged as a packet addendum.
