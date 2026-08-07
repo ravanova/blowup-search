@@ -332,7 +332,7 @@
       "a periodic-orbit search of any kind -- ZERO exists at any dimension",
       "a phase/gauge condition fixing tau-translation and the DSS scaling"
     ],
-    "n_solver_modules_indexed": 47,
+    "n_solver_modules_indexed": 48,
     "partially_reusable": [
       {
         "carries": "time integration of a RESCALED flow as an IVP -- the pattern, in 1D",
@@ -363,11 +363,11 @@
   "F_price": {
     "calibration": {
       "legs_run": 260,
-      "measured_legs_per_solver_module": 5.531914893617022,
+      "measured_legs_per_solver_module": 5.416666666666667,
       "note": "a repo-MEASURED rate, not an estimate. Each of the five modules below is harder than this average -- 3D against a 1D/2D tree, and one of them (the orbit search) has no analogue in the tree at all. So this is a FLOOR.",
-      "solver_modules_delivered": 47
+      "solver_modules_delivered": 48
     },
-    "construction_floor_legs": 27.659574468085108,
+    "construction_floor_legs": 27.083333333333336,
     "dof": {
       "loop_dof_single_candidate_orbit": 268435456,
       "resolution_N": 128,
@@ -424,7 +424,7 @@
     "question_c_PRICE": {
       "answered": false,
       "answered_in_part": true,
-      "what_is_answered": "The BUILD cost, with a number and a repo-measured calibration: five modules that do not exist at any dimension, against a measured rate of 5.53 legs per delivered solver module, i.e. a floor of ~28 legs before a single search step runs. And the exists/must-be-built split is complete: of 47 indexed solver modules, ZERO hold a periodic-orbit search, a 3D velocity field, or a Leray projection; six carry a 1D or 2D PATTERN and nothing more.",
+      "what_is_answered": "The BUILD cost, with a number and a repo-measured calibration: five modules that do not exist at any dimension, against a measured rate of 5.42 legs per delivered solver module, i.e. a floor of ~27 legs before a single search step runs. And the exists/must-be-built split is complete: of 48 indexed solver modules, ZERO hold a periodic-orbit search, a 3D velocity field, or a Leray projection; six carry a 1D or 2D PATTERN and nothing more.",
       "what_resists": "The SEARCH step. Not because it is large -- because it has no upper bound that can be stated, for four named structural reasons (see price.search_step_cost.reasons), of which the sharpest is that the answer to question (a) forbids the answer to question (c): the target is not in the state space any unseeded trawl represents, and the only way to represent it is to impose a far field that needs lambda -- the search's own unknown. Entry B's defining adjective, UNSEEDED, is incompatible with the only function space its object can live in."
     }
   },
