@@ -1,0 +1,503 @@
+{
+  "A_lp_boundary_typeI_profile_on_R3": [
+    {
+      "agreement_rel": 1.7328576963127063e-05,
+      "finite": false,
+      "p": 2.0,
+      "shell_ratio_measured": 2.0000346571539263,
+      "shell_ratio_predicted_2^(3-p)": 2.0,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.209699662276221e-05,
+      "finite": false,
+      "p": 2.5,
+      "shell_ratio_measured": 1.4142448122454068,
+      "shell_ratio_predicted_2^(3-p)": 1.4142135623730951,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.604500724478391e-05,
+      "finite": false,
+      "p": 2.9,
+      "shell_ratio_measured": 1.0718013768838897,
+      "shell_ratio_predicted_2^(3-p)": 1.0717734625362931,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.705047388085191e-05,
+      "finite": false,
+      "p": 3.0,
+      "shell_ratio_measured": 1.0000270504738809,
+      "shell_ratio_predicted_2^(3-p)": 1.0,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.8063275461379298e-05,
+      "finite": true,
+      "p": 3.1,
+      "shell_ratio_measured": 0.9330591754986635,
+      "shell_ratio_predicted_2^(3-p)": 0.9330329915368074,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 3.218697083230022e-05,
+      "finite": true,
+      "p": 3.5,
+      "shell_ratio_measured": 0.707129540811889,
+      "shell_ratio_predicted_2^(3-p)": 0.7071067811865476,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 3.7500078126306846e-05,
+      "finite": true,
+      "p": 4.0,
+      "shell_ratio_measured": 0.5000187500390632,
+      "shell_ratio_predicted_2^(3-p)": 0.5,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 6.0268582509959145e-05,
+      "finite": true,
+      "p": 6.0,
+      "shell_ratio_measured": 0.12500753357281374,
+      "shell_ratio_predicted_2^(3-p)": 0.125,
+      "shell_start_R": 10000.0
+    }
+  ],
+  "B_algebraic_weight_threshold": [
+    {
+      "agreement_rel": 1.7328576963127063e-05,
+      "finite": false,
+      "s": 0.0,
+      "shell_ratio_measured": 2.0000346571539263,
+      "shell_ratio_predicted_2^(1-s)": 2.0,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.209699662276221e-05,
+      "finite": false,
+      "s": 0.5,
+      "shell_ratio_measured": 1.4142448122454068,
+      "shell_ratio_predicted_2^(1-s)": 1.4142135623730951,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.604500724478391e-05,
+      "finite": false,
+      "s": 0.9,
+      "shell_ratio_measured": 1.0718013768838897,
+      "shell_ratio_predicted_2^(1-s)": 1.0717734625362931,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.705047388085191e-05,
+      "finite": false,
+      "s": 1.0,
+      "shell_ratio_measured": 1.0000270504738809,
+      "shell_ratio_predicted_2^(1-s)": 1.0,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 2.8063275461379298e-05,
+      "finite": true,
+      "s": 1.1,
+      "shell_ratio_measured": 0.9330591754986635,
+      "shell_ratio_predicted_2^(1-s)": 0.9330329915368074,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 3.218697083230022e-05,
+      "finite": true,
+      "s": 1.5,
+      "shell_ratio_measured": 0.707129540811889,
+      "shell_ratio_predicted_2^(1-s)": 0.7071067811865476,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 3.7500078126306846e-05,
+      "finite": true,
+      "s": 2.0,
+      "shell_ratio_measured": 0.5000187500390632,
+      "shell_ratio_predicted_2^(1-s)": 0.5,
+      "shell_start_R": 10000.0
+    },
+    {
+      "agreement_rel": 4.8611442662993554e-05,
+      "finite": true,
+      "s": 3.0,
+      "shell_ratio_measured": 0.25001215286066575,
+      "shell_ratio_predicted_2^(1-s)": 0.25,
+      "shell_start_R": 10000.0
+    }
+  ],
+  "C_gaussian_weight_verdict": {
+    "shell_ratios": [
+      26.564216651251943,
+      100494.46023676413,
+      3.858565529024224e+20,
+      1.2799443977869612e+83
+    ],
+    "shells_grow": true,
+    "shells_int_R_to_2R": [
+      0.6749691870282194,
+      17.930027717137012,
+      1801868.4574639043,
+      6.952627517806272e+26,
+      8.898976641315604e+109
+    ],
+    "verdict": "the Type-I DSS profile is not in L^2(mu) -- the shells GROW super-geometrically. Independent of leg 257's projector result.",
+    "weight": "mu = Gamma(d/2)(2 sqrt(pi))^{-d} e^{|x|^2/4}  (Breden-Chu, d=3)"
+  },
+  "D_dissipation_vs_drift": {
+    "consistency_with_route_I": "At mu = 0.05 and Route-I's leading |Im| = 430.35, the crossover is X_star = sqrt(0.05*430.35) = 4.6387 -- dissipation dominates across the whole resolved region below it, consistent with Route-I's total deletion. This is a consistency CHECK on a banked measurement, not a re-derivation of it, and no Route-I eigenvalue is recomputed here.",
+    "finding": "Identical functional form, opposite limits, because the band sits at opposite ends of the domain. gCLM's log-periodic band is at the ORIGIN, inside the crossover, so any mu > 0 deletes it -- which is exactly what Route-I MEASURED (max Re = -1e-13 at mu = 0.05). The NS DSS band is in the FAR FIELD, outside the crossover, where the rescaling drift beats dissipation by r^2. So Entry B clause (a)'s recorded difficulty is a statement about gCLM's scaling structure and does NOT transfer to NS -- which is precisely what Route-E's own 'gCLM's scaling structure is not NS's' warned. The difficulty does not vanish: it RELOCATES, from limited regularity at the origin to a non-decaying oscillation at infinity.",
+    "gclm": [
+      {
+        "Im_lambda": 1.0,
+        "crossover_X_star_closed_form": 0.22360679774997896,
+        "mu": 0.05,
+        "samples": [
+          {
+            "X": 0.22360679774997896,
+            "dissip_over_drift": 1.0000000000000002
+          },
+          {
+            "X": 0.11180339887498948,
+            "dissip_over_drift": 4.000000000000001
+          },
+          {
+            "X": 0.022360679774997897,
+            "dissip_over_drift": 100.0
+          },
+          {
+            "X": 0.0022360679774997894,
+            "dissip_over_drift": 10000.000000000004
+          }
+        ]
+      },
+      {
+        "Im_lambda": 30.0,
+        "crossover_X_star_closed_form": 1.224744871391589,
+        "mu": 0.05,
+        "samples": [
+          {
+            "X": 1.224744871391589,
+            "dissip_over_drift": 1.0000000000000004
+          },
+          {
+            "X": 0.6123724356957945,
+            "dissip_over_drift": 4.000000000000002
+          },
+          {
+            "X": 0.1224744871391589,
+            "dissip_over_drift": 100.00000000000003
+          },
+          {
+            "X": 0.01224744871391589,
+            "dissip_over_drift": 10000.000000000004
+          }
+        ]
+      },
+      {
+        "Im_lambda": 430.35,
+        "crossover_X_star_closed_form": 4.63869593743759,
+        "mu": 0.05,
+        "samples": [
+          {
+            "X": 4.63869593743759,
+            "dissip_over_drift": 1.0000000000000002
+          },
+          {
+            "X": 2.319347968718795,
+            "dissip_over_drift": 4.000000000000001
+          },
+          {
+            "X": 0.463869593743759,
+            "dissip_over_drift": 99.99999999999999
+          },
+          {
+            "X": 0.0463869593743759,
+            "dissip_over_drift": 10000.000000000002
+          }
+        ]
+      }
+    ],
+    "gclm_origin_block": "f(X) = X^{1 - i y}, X -> 0   (Route-E sec 4.1)",
+    "gclm_ratio_closed_form": "dissip/drift = mu |y| / X^2  -> infinity",
+    "ns": [
+      {
+        "closed_form_check_rel": 1.7347234759768073e-16,
+        "crossover_r_star_closed_form": 1.4142135623730951,
+        "kappa": 1.0,
+        "nu": 1.0,
+        "samples": [
+          {
+            "dissip_over_drift": 0.9999999999999998,
+            "r": 1.4142135623730951
+          },
+          {
+            "dissip_over_drift": 0.24999999999999994,
+            "r": 2.8284271247461903
+          },
+          {
+            "dissip_over_drift": 0.062499999999999986,
+            "r": 5.656854249492381
+          },
+          {
+            "dissip_over_drift": 0.009999999999999997,
+            "r": 14.142135623730951
+          },
+          {
+            "dissip_over_drift": 9.999999999999999e-05,
+            "r": 141.4213562373095
+          }
+        ]
+      },
+      {
+        "closed_form_check_rel": 0.0,
+        "crossover_r_star_closed_form": 3.1622776601683795,
+        "kappa": 5.0,
+        "nu": 1.0,
+        "samples": [
+          {
+            "dissip_over_drift": 0.9999999999999998,
+            "r": 3.1622776601683795
+          },
+          {
+            "dissip_over_drift": 0.24999999999999994,
+            "r": 6.324555320336759
+          },
+          {
+            "dissip_over_drift": 0.062499999999999986,
+            "r": 12.649110640673518
+          },
+          {
+            "dissip_over_drift": 0.009999999999999998,
+            "r": 31.622776601683796
+          },
+          {
+            "dissip_over_drift": 0.0001,
+            "r": 316.22776601683796
+          }
+        ]
+      },
+      {
+        "closed_form_check_rel": 1.7347234759768073e-16,
+        "crossover_r_star_closed_form": 6.324555320336759,
+        "kappa": 20.0,
+        "nu": 1.0,
+        "samples": [
+          {
+            "dissip_over_drift": 0.9999999999999996,
+            "r": 6.324555320336759
+          },
+          {
+            "dissip_over_drift": 0.2499999999999999,
+            "r": 12.649110640673518
+          },
+          {
+            "dissip_over_drift": 0.06249999999999997,
+            "r": 25.298221281347036
+          },
+          {
+            "dissip_over_drift": 0.009999999999999997,
+            "r": 63.24555320336759
+          },
+          {
+            "dissip_over_drift": 9.999999999999998e-05,
+            "r": 632.4555320336759
+          }
+        ]
+      }
+    ],
+    "ns_far_field_block": "f(r) = r^{-1 + i kappa}, r -> infinity",
+    "ns_ratio_closed_form": "dissip/drift = 2 nu |kappa| / r^2  -> 0"
+  },
+  "E_capability_census": {
+    "fluid_objects_present": [
+      "1D gCLM / Hou-Luo",
+      "2D Boussinesq (polar)"
+    ],
+    "grep_leray_in_index": false,
+    "grep_periodic_orbit_in_index": false,
+    "mentions_3d": 1,
+    "modules_holding_a_3d_velocity_field": 0,
+    "modules_holding_a_leray_projection_or_3d_biot_savart": 0,
+    "modules_holding_a_periodic_orbit_search": 0,
+    "must_be_built_from_nothing": [
+      "3D incompressible NS in similarity variables (velocity form)",
+      "a 3D Leray projection / Biot-Savart -- ZERO exists at any dimension",
+      "a 3D unbounded-domain discretisation carrying an ALGEBRAIC |y|^{-1} far field with log-periodic oscillation in log|y|",
+      "a periodic-orbit search of any kind -- ZERO exists at any dimension",
+      "a phase/gauge condition fixing tau-translation and the DSS scaling"
+    ],
+    "n_solver_modules_indexed": 47,
+    "partially_reusable": [
+      {
+        "carries": "time integration of a RESCALED flow as an IVP -- the pattern, in 1D",
+        "module": "solver/marginal_flow.py"
+      },
+      {
+        "carries": "dynamic rescaling WITH A GAUGE pinning the scaling DOF -- a periodic-orbit search needs the same phase condition, in 1D",
+        "module": "solver/gclm_rescaled.py, solver/hl_rescaled.py"
+      },
+      {
+        "carries": "ALGEBRAIC-decay gradings on an unbounded domain -- the only existing machinery aligned with this leg's space answer, in 1D",
+        "module": "solver/decay_grading.py, solver/decay_collocation.py, solver/holder_norms.py"
+      },
+      {
+        "carries": "GMRES + Krylov ladders + preconditioners -- the Newton-Krylov pattern, in 2D",
+        "module": "solver/port_certification.py"
+      },
+      {
+        "carries": "FFT plumbing, 1D",
+        "module": "solver/spectral_utils.py"
+      },
+      {
+        "carries": "a dimension-agnostic real-coded GA -- but BANNED on an unvalidated fitness, and a global orbit search has none",
+        "module": "solver/ga_search.py"
+      }
+    ]
+  },
+  "F_price": {
+    "calibration": {
+      "legs_run": 260,
+      "measured_legs_per_solver_module": 5.531914893617022,
+      "note": "a repo-MEASURED rate, not an estimate. Each of the five modules below is harder than this average -- 3D against a 1D/2D tree, and one of them (the orbit search) has no analogue in the tree at all. So this is a FLOOR.",
+      "solver_modules_delivered": 47
+    },
+    "construction_floor_legs": 27.659574468085108,
+    "dof": {
+      "loop_dof_single_candidate_orbit": 268435456,
+      "resolution_N": 128,
+      "state_dof_nonaxisymmetric": 4194304,
+      "symmetry_reduction_available": false,
+      "why_no_reduction": "leg 253: axisymmetric DSS dies outright (Chae-Wolf Thm 1.1 composed with the axisymmetric Type-I exclusion), so the surviving candidate is NON-axisymmetric by construction"
+    },
+    "new_modules_required": 5,
+    "phase1_viscous_rung": {
+      "cpu_hours_costed_at_leg_174": 14.0,
+      "dof": 20000,
+      "object": "BCG arXiv:2208.09445 Thm 1.2/1.3 imploding profile, gamma = 7/5",
+      "shape": "a 1D ODE enclosure in the self-similar variable"
+    },
+    "ratios": {
+      "loop_dof_vs_phase1": 13421.7728,
+      "state_dof_vs_phase1": 209.7152
+    },
+    "search_step_cost": {
+      "bounded": false,
+      "reasons": [
+        "the only demonstrated unseeded method -- recurrent-flow extraction, Lucas-Kerswell arXiv:1406.1820 -- extracts orbits 'directly from chaotic/turbulent flows', i.e. its substrate is an ERGODICALLY VISITED trajectory. The rescaled NS flow supplies none: generic finite-energy rescaled trajectories decay to the trivial state, and a DSS orbit is by hypothesis not among them.",
+        "the target has INFINITE ENERGY in the similarity variable (section B: int|U|^2 dy diverges linearly), so it is not in L^2(R^3) at all -- it is not in the state space a finite-box spectral trawl represents. A trawl cannot recur near an object outside its own space.",
+        "to represent the target you must impose its |y|^{-1} log-periodic far field. The EXPONENT is theorem-given (Chae-Wolf Thm 1.1, Type I) and so is legitimate structure -- but CLOSING the far field needs lambda, and lambda is the search's own unknown with NO published value to clear (leg 253: lambda_*, lambda-bar, alpha-bar are all non-explicit, each depending on an unpublished Type-I constant). Imposing it is seeding; not imposing it leaves the target unrepresentable.",
+        "a cold Newton / loop-space variational search over ~4.2e6 state dimensions with no prior has no coverage metric, so no number of leg-hours converts into a reportable magnitude -- and a negative with no measured coverage is not a reportable negative under this repository's own discipline."
+      ]
+    }
+  },
+  "G_ban_shape_read_at_runtime": {
+    "clay_odds_pct": null,
+    "entry_A_present_and_flat_never": true,
+    "entry_B_lift_is_conditional": true,
+    "entry_B_names_function_space": true,
+    "entry_B_names_object": true,
+    "entry_B_names_price": true,
+    "entry_B_present": true,
+    "n_dss_entries": 2,
+    "split_into_two": true
+  },
+  "answers": {
+    "question_a_FUNCTION_SPACE": {
+      "answer": "An ALGEBRAICALLY weighted space on R^3, graded to the Type-I rate. Concretely: L^p(R^3) for a fixed p > 3, or the weighted L^2(rho) with rho = (1+|y|)^{-s}, s > 1 -- the thresholds are computed in sections A and B and both are SHARP. Explicitly NOT L^3 (Chae-Wolf Remark 1.2: u in C_t L^3 gives full regularity, so an L^3 orbit is no blow-up at all), explicitly NOT L^2 (the profile has infinite energy in the similarity variable), and explicitly NOT Breden-Chu's Gaussian-weighted H^2(mu) -- which fails twice over, by leg 257's Leray-projector measurement and, independently, because the Gaussian weight GROWS against an algebraically decaying profile (section C).",
+      "answered": true,
+      "clause_a_difficulty_carried": "Section D answers it at mechanism level. sec 26 sec 4.1's difficulty is REAL but is a statement about gCLM's scaling structure: its log-periodic block X^{1-iy} sits at the ORIGIN, inside the dissipation/drift crossover, which is why any mu > 0 deletes it and why Route-I measured max Re = -1e-13 at mu = 0.05. The NS DSS block sits in the FAR FIELD, outside the crossover, where drift beats dissipation by r^2. The difficulty does not transfer -- it RELOCATES, from limited regularity at the origin to a non-decaying oscillation at infinity, and the relocation is what makes the space answer algebraic rather than Gaussian."
+    },
+    "question_b_OBJECT": {
+      "answer": "Leg 251's first CONDITIONAL-tier candidate: 3D incompressible NS, NON-axisymmetric backward DSS with lambda significantly larger than 1 and profile not in L^inf_t L^3. As a search target it is a PERIODIC ORBIT of the dynamically rescaled flow with period T = 2 log lambda, lambda an OUTPUT of the search rather than an input. The structural conditions are leg 253's and every one of them is structural rather than numerical, because leg 253 measured that every threshold (lambda_*, lambda-bar, alpha-bar) is non-explicit.",
+      "answered": true,
+      "customer": "Leg 251 is the concrete customer: both of its CONDITIONAL-tier candidates are blocked on this very leg, and it says so.",
+      "primary": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+      "secondary": "NS3D-RDSS",
+      "secondary_note": "Leg 251's second CONDITIONAL candidate (rotated DSS, outside Pineau-Vicol Thm 1.7's two windows). It is the SAME search with a RELATIVE-periodic target -- periodic modulo a rotation -- so it adds a continuous symmetry parameter and a group-orbit phase condition. A strict superset of the primary in both machinery and cost; it is named and NOT recommended as the entry point."
+    },
+    "question_c_PRICE": {
+      "answered": false,
+      "answered_in_part": true,
+      "what_is_answered": "The BUILD cost, with a number and a repo-measured calibration: five modules that do not exist at any dimension, against a measured rate of 5.53 legs per delivered solver module, i.e. a floor of ~28 legs before a single search step runs. And the exists/must-be-built split is complete: of 47 indexed solver modules, ZERO hold a periodic-orbit search, a 3D velocity field, or a Leray projection; six carry a 1D or 2D PATTERN and nothing more.",
+      "what_resists": "The SEARCH step. Not because it is large -- because it has no upper bound that can be stated, for four named structural reasons (see price.search_step_cost.reasons), of which the sharpest is that the answer to question (a) forbids the answer to question (c): the target is not in the state space any unseeded trawl represents, and the only way to represent it is to impose a far field that needs lambda -- the search's own unknown. Entry B's defining adjective, UNSEEDED, is incompatible with the only function space its object can live in."
+    }
+  },
+  "date": "2026-08-07",
+  "gate": {
+    "answer": "NO",
+    "authority": "This leg has no authority to lift or to re-pose a ban and does neither.",
+    "ban_not_lifted": true,
+    "consequence_per_pre_committed_no_branch": "An unanswerable price question is itself the measured reason Entry B stays shut, and it UPGRADES the ban's basis from cost-shaped to substantive. Entry B was banned because it was expensive; leg 254 correctly found that to be a price and not a measurement. This leg finds a second, different reason that is NOT a price: the entrance as DEFINED (global, unseeded) cannot represent its own target. That is a structural statement about the entrance, and it survives the Clay goal's authorisation of heavy engineering, which a price does not.",
+    "question": "Can all three questions be answered concretely -- a named function space, a named object, a costed price (including what exists vs what must be built) -- such that the answer is actionable by a hypothetical construction leg without further scoping?",
+    "questions_answered": [
+      "(a) FUNCTION SPACE",
+      "(b) OBJECT"
+    ],
+    "which_resists": "question (c), the PRICE -- specifically its search step"
+  },
+  "honesty": {
+    "clay_odds_pct": 0.05,
+    "compute": "none beyond quadrature and arithmetic. No solver was built, run, read into, or edited. No search was run.",
+    "external_sources_read_this_leg": [
+      {
+        "depth": "abstract only",
+        "id": "arXiv:1406.1820",
+        "used_for": "the one sentence that recurrent-flow extraction works 'directly from chaotic/turbulent flows'"
+      }
+    ],
+    "is_this_movement_toward_clay": false,
+    "l1_to_l4_links_moved": 0,
+    "not_re_derived_here": [
+      "leg 257's projector measurement -- carried with its locator and parked status",
+      "Route-E/H/I eigenvalues -- transcribed, never recomputed",
+      "Chae-Wolf, Tsai, Pineau-Vicol theorem statements -- carried from leg 253's full-text reads"
+    ],
+    "parked_dependencies": [
+      {
+        "branch": "leg/251-p0t-v1",
+        "carries": "both DSS candidates",
+        "leg": 251,
+        "status": "parked, PR #20"
+      },
+      {
+        "branch": "leg/253-nrsx-v1",
+        "carries": "the structural conditions and the non-explicit thresholds",
+        "leg": 253,
+        "status": "parked"
+      },
+      {
+        "branch": "leg/257-p1c-v1",
+        "carries": "the Leray-projector obstruction in H^2(mu)",
+        "leg": 257,
+        "status": "parked, PR #19"
+      }
+    ],
+    "weakest_link": "The search-step argument's second reason (a trawl cannot recur near an object outside its space) is a structural argument, not a measurement. It is strong but it is not a theorem that no unseeded method could ever be devised -- only that no DEMONSTRATED one applies, and that the obvious repairs re-introduce a seed. Stated as an argument, and labelled."
+  },
+  "leg": 260,
+  "route": "DSSB",
+  "self_test": {
+    "ban_is_in_two_entry_form": true,
+    "entry_B_lift_is_conditional": true,
+    "entry_B_names_all_three_questions": true,
+    "gate_is_no_and_ban_stands": true,
+    "gaussian_space_rejects_the_object": true,
+    "gclm_ratio_rises_toward_origin": true,
+    "if_the_gate_were_YES": "the search step would need a stateable upper bound. That needs EITHER a demonstrated unseeded method whose substrate is not an ergodically visited attractor, OR a state space containing an infinite-energy log-periodic profile that a finite-box method can represent without being told lambda. Neither exists; if either appears, this gate should be re-asked.",
+    "lp_boundary_is_sharp_at_3": true,
+    "no_periodic_orbit_search_exists": true,
+    "ns_ratio_falls_with_r": true,
+    "ns_ratio_matches_closed_form": true,
+    "typeI_profile_in_Lp_for_p_gt_3": true,
+    "typeI_profile_not_in_L2": true,
+    "typeI_profile_not_in_L3": true,
+    "weight_threshold_is_sharp_at_1": true
+  },
+  "title": "Entry B's own scoping leg -- the function space, the object, and the price"
+}
