@@ -35,7 +35,7 @@ prose as before.
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
-| J | 294 | V11X | no |
+| J | 229 | PNRV | no |
 <!-- FLOOR-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-07 (slot-F refill after 290/D1XN closed the D1
@@ -12908,3 +12908,56 @@ one confirmation, one inversion, one falsified diagnostic — with no flattening
 single "moved" narrative; 294's job is synthesis, not re-measurement. Clay stays
 ~0.05%. No new direction question raised — this is the report the orchestrator has
 been awaiting all session; it reaches the user the moment 294 lands.
+
+---
+
+## DM update, 2026-08-07 — 294 (V11X) LANDED GATE YES ON ALL SEVEN CLAUSES: THE
+CONSOLIDATED ROUTE-D v11 REPORT IS DONE, closing the session's top-priority open item;
+DIRECTION.md itself checked and confirmed clean of the "247 landed on main" error;
+downstream pointer-correction leg queued (not urgent); slot J = 229
+
+**294 landed (`b120874`), recorded at full strength: gate YES on all seven clauses** —
+the consolidated, re-based, provenance-tiered Route-D v11 impact-trace is the final
+report on the finding chain that opened with 236's escalation. This closes the
+top-priority open item this DM has tracked across many updates.
+
+**The "247 already landed on main" error, checked directly against DIRECTION.md
+(grep, not assumption): NOT PRESENT anywhere in this file.** Every one of this file's
+own references to leg 247 (lines spanning the VBR escalation record, the VBRG
+dispatch, the RDDEP sequencing notes, and 294's own consolidation entry) correctly
+states escalated/parked/not-merged. The incorrect "already landed" framing was local
+to 294's own dispatch brief and did not propagate into this DM's durable record — no
+correction needed here. Flag returned to the orchestrator: if the error originated in
+a leg-external dispatch template rather than DIRECTION.md, that template (not this
+file) is the place to fix it, outside this DM's ownership.
+
+**Downstream pointer-correction leg: queued, not drafted as urgent** (294's own flag —
+three documents cite pre-consolidation v11 numbers). Per 294's own yes-branch
+instruction, this is deliberately NOT drafted now ("drafted at that point, not guessed
+now") — the three sites should be named FROM 294's own report before a leg is
+specified, so its territory is exact rather than assumed. **Action for the next
+vacancy or the next DM update, whichever comes first: read 294's report, name the
+three sites, draft the correction leg then.**
+
+**Slot J: leg 229 (Route-PNRV) — its block condition (leg 226 landing) cleared this
+session; promoted now, no further drafting needed:**
+
+Leg 229's full spec is already on record in this file (POST-REPAIR VERIFICATION of leg
+226's `profile_newton.py` repair and its own honest-disagreement/rejection mechanism).
+Dispatch as specified; anti-pausing clause verbatim; brief should note 226's own report
+now exists in full (gate a/b/c above) for 229 to verify against, not just leg 202's
+original finding.
+
+**FLOOR-TABLE block updated in this same edit** (J: 294 → 229). **Floor status: 4/10
+strictly (285, 284, 267, 264) — unchanged (229 is a verify, not floor-eligible).**
+
+**Canonical reserve line: reserve count 6 — legs 293, 280, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (293); 280 user-gated; 231-234 blocked on
+repairs 217/219/221/225 (221 live in slot D — its landing unblocks 233). Next fresh
+leg number: **295** (reserved for the downstream-pointer-correction leg once 294's
+three sites are named).
+
+Nothing in this update lifts a ban. 294's landing is recorded as the closing synthesis
+of an already-measured chain — no new movement of any link. Clay stays ~0.05%. No new
+direction question raised — the consolidated report is now with the user via the
+orchestrator's relay.
