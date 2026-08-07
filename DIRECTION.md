@@ -26,7 +26,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 266 | P0TC | no |
+| A | 265 | P2C | yes |
 | B | 268 | PUB2R | no |
 | C | 263 | WESC | no |
 | D | 221 | BVRR | no |
@@ -38,10 +38,11 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-C refill after 260's gate NO): 3/10
-floor-eligible -- F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the "260 gate NO" DM
-update at the tail of this file. C/263/WESC is Ruling 2's correction leg (per-occurrence
-triple pinning), promoted per reserve order once 178's landing cleared its sequencing.)
+(Current snapshot, DM update of 2026-08-07 (slot-A refill after 266+268 landed): 4/10
+floor-eligible -- A/265/P2C, F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the "both
+corrections landed" DM update at the tail of this file. 265 (Phase-1 costing of the
+corrected BCG obligation) was unblocked by 266's landing and promoted immediately as the
+top-priority reserve item.)
 
 ---
 
