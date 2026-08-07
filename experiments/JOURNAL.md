@@ -3747,3 +3747,27 @@ preempted agents had reached a landing.
   to correct PUB2. Full findings already summarized above at leg 268's
   entry; this is the merge of leg 249's own report/runner/JSON, not a new
   finding.
+- **Leg 263 (Route-WESC) -- gate YES, landed.** Leg 111's "third dead
+  realization" headline was a property of ONE unconstrained trial space
+  (odd-sine, vanishing order p=1), not of the weighted-energy operator:
+  admissible window width 0.0 (p=1) -> 2.0 (p=2, leg 141) -> 4.0 (p=3, leg
+  178); largest admissible gap -0.4999241 -> +0.499999667. Per-occurrence
+  census, magnitudes not booleans: 134 "three realizations"/"measured-dead"
+  occurrences swept across the repository, 0 unpinnable; 18 pin to the
+  PLAN-TRIPLE (ell^1_w/collocation/origin-H^2, the set plan_of_record.py's
+  live stage-V ban rests on) and are left byte-identical; 53 pin to the
+  JOURNAL-TRIPLE (includes weighted-energy), of which 8 in-territory sites
+  carry correction blocks. plan_of_record.py: ZERO diff, confirmed. New
+  visible register created: writeup/CORRECTIONS.md, carrying all four
+  over-read closures found this campaign (165, 180, 185, 178). No ban
+  lifted, no weighted-energy lane opened.
+- **Leg 256's re-dispatched verifier -- CONFIRMED, no gap, landed.** Prior
+  verifier died in the usage-limit outage; this is an independent
+  re-derivation, not a re-run. Cloned Breden-Chu's own verification package
+  at its pinned commit and independently confirmed both the stale delta_lo
+  multiplier (1.17163) and the commented-out sup-bound cell exist verbatim;
+  re-derived the entire Z2 column from scratch to printed digits; re-derived
+  the 1.0114x margin and the lambda_m = 1/2+m eigenvalue convention
+  independently. One cosmetic typo found (leg 256's own novelty file
+  misprints 1.0114x as 1.1145x; the journal and banked JSON are correct, no
+  gate depends on it), not repaired.
