@@ -3930,6 +3930,13 @@ preempted agents had reached a landing.
   to integration: close as EXPLAINED, adopt NEITHER original number as "the"
   ratio, quote ||A|| and Z_2 (the reproducible columns) going forward. Both
   legs' own verdicts stand unaffected. 0 banked numbers moved.
+  **CLOSED by leg 279**: recommendation applied across all 13 sites in 9
+  files (PUB3, legs 218/223's own journals/novelty, CORRECTIONS.md register
+  row 7 + SS8), 0 lines deleted (append-only), 0 arguments changed. Leg
+  218's caller-enumeration gap (finding 1 above) also flagged forward in
+  CORRECTIONS.md SS8 with the full ten-importer table, since PUB3's own
+  SS5(b) and leg 223's journal both still reproduce leg 218's incomplete
+  six-name list.
 - **Leg 277 (Route-XUN) -- gate (a) YES / (b) NO-COMPARAND, landed. Found a
   discrepancy in a bridge, not in the certificate itself.** Xu's Definition
   4.1 names TWO norms across two sentences: a displayed half-line L^2(0,inf)
