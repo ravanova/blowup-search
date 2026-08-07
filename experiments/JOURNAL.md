@@ -3991,3 +3991,33 @@ preempted agents had reached a landing.
   not a TEXT defect (nothing wrong was written). A light rework leg is
   flagged: the one in-territory pointer, a corrected census count (class P
   is 28 not 18, second-sweep file count is 32 not 34).
+- **Leg 282 (Route-RMX) -- gate YES on all four clauses, landed.** Bundle of
+  four small record fixes: leg 263's one in-territory missed pointer, its
+  two count corrections, and leg 218's caller list upgraded from six names
+  to leg 228's verified ten-importer enumeration at PUB3 and leg 223's
+  journal. All three pre-committed argument checks came out negative (0 of
+  the 5 missed importers touch legs 54/58/127; 0 mention the w_om/w_r
+  weights at all), so nothing escalated. plan_of_record.py byte-identical
+  throughout; the :868 warrant defect recorded in CORRECTIONS.md, not
+  repaired. Sweep for clause (c): 13 patterns over 1,236 files,
+  case-insensitive/wrap-immune/hyphenation-tolerant -- no further
+  consequence site found.
+- **Leg 210 (Route-M2SV) -- gate SPLIT, ESCALATED, PARKED** (branch
+  `leg/210-m2sv-v1`, not merged). Independent, differently-discretized
+  re-derivation of leg 185's reparametrized nu measurement. CONFIRMS
+  nu=+0.01799364 at a=0.30 to 1.198e-06 (5.9 significant digits) and
+  STRENGTHENS the sign law to gauge-independence (nu -> mu^2*nu under
+  dilation, mu^2>0, so no gauge can flip it). BUT the banked negative
+  values at Chen's a=1/2 (-0.00818/-0.00895) FAIL TO REPRODUCE by 10.33x --
+  and the cause is a real gap in leg 185's OWN method, not a bug in this
+  leg: leg 185 refined a=0.30 on four grids but banked a=1/2 from a SINGLE
+  unrefined grid. Supplying the missing refinement ladder shows leg 185's
+  own scheme is NOT grid-converged at a=1/2 (spans 62.2% non-monotonically
+  across the ladder this leg computed). The a*=0.3865 crossing also fails
+  to reproduce (bracket [0.36,0.37] instead) -- and more tellingly, leg
+  185's own two starting points straddle zero AT a=0.3865 itself, so its
+  own data never actually pinned the crossing. Recommendation: leg 174's
+  catalog should carry a=0.30 as measured but record a=1/2 as SIGN ONLY,
+  not a magnitude. Leg 185's report is faithful transcription of what its
+  code computed -- the gap is upstream, in insufficient grid refinement at
+  one parameter value, not in the reporting.
