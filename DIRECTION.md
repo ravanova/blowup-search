@@ -26,7 +26,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 265 | P2C | yes |
+| A | 274 | J176R2 | no |
 | B | 210 | M2SV | no |
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
@@ -11524,3 +11524,58 @@ condition is now "274 lands" (was "271's verifier lands clean" — met); 229 blo
 the pre-committed contingency (rework at top of queue if the a=0.50 off-branch finding
 confirms) stands ready. Nothing in this update lifts a ban; Clay stays ~0.05%. No
 direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 265 (P2C) GATE YES, ESCALATED: the costing is done and it
+CORRECTS 251 a second time (the ansatz sits on the wrong side of the dominance window);
+slot A refilled with 274 per the pre-committed queue order; packet assembly point
+amended; the 251-ansatz rework pre-committed
+
+**265 (P2C), recorded at full strength** (parked `leg/265-p2c-v1`, verifier in flight at
+`verify/265-p2c-review` — dispatched before presentation, correctly, since this corrects
+a twice-verified report):
+
+1. **k(7/6) = 16.3479210517 in closed form** from BCG's own equations — a number BCG
+   never quantify ("n odd and large enough") — giving exactly 7 odd branches
+   (3,5,...,15) inside the target window.
+2. **A real correction to 251 itself:** 251's ansatz ("n odd and large") forces r→r*
+   DEEP INSIDE BCG's dominance window — the opposite of what its own leg-266-corrected
+   obligation needs. Recommendation: **n=3** (unconditional existence, BCG Thm 1.1) over
+   the cheaper n=15 (whose "large enough" is unquantified by BCG).
+3. **The compressible analogue of 257's obstruction: CHECKED, not assumed** — doubly
+   absent, but a DIFFERENT same-type obstruction is present and repaired by sign rather
+   than boundedness. (This retroactively validates 265's spec clause demanding the
+   check.)
+4. **Build cost: 15 of 18 needed apparatus terms absent from capabilities.py**, with the
+   gap to Clay stated explicitly and the irony recorded: the same absence that makes
+   257's obstruction inapplicable is what makes this not Clay's object.
+
+**Pre-commitment (so no re-ranking decision is needed when the verifier lands):** if
+verify-265 CONFIRMS finding #2, a light rework leg in the 266 shape gets cut at the top
+of the queue — same territory (251's parked PR #20 files), applying the ansatz
+correction (n=3, the r-side of the window) with a visible dated note citing 265, every
+other claim byte-untouched. If the verifier CONTESTS finding #2, nothing moves and the
+disagreement itself escalates with both readings attached.
+
+**Packet assembly point, AMENDED accordingly:** assemble when verify-265 lands clean AND
+(if finding #2 confirms) the 251-ansatz rework has landed — the user's construction
+decision should read a self-consistent 251+265 pair, not a pair mid-correction. All
+other packet contents unchanged and already drafted in this file.
+
+**Slot A: leg 274 (Route-J176R2) — per the pre-committed queue order** (next vacancy →
+274; 270 dispatches on 274's landing). Spec above stands; anti-pausing clause verbatim.
+
+**FLOOR-TABLE block updated in this same edit** (A: 265 → 274). **Floor status: 3/10
+strictly (236, 267, 264) — met exactly.**
+
+**Canonical reserve line: reserve count 8 — legs 270, 272, 273, 229, 231, 232, 233,
+234.** Queue order: 270 (on 274's landing), then 272/273 in either order. Effective
+immediately-dispatchable: 2 (272, 273); 229 blocked on 226; 231-234 blocked on repairs
+217/219/221/225. Next fresh leg number: **275.**
+
+Nothing in this update lifts a ban or opens construction — 265's escalation terminates
+in the user's decision, its costing is recorded as a costing (15/18 absent, gap-to-Clay
+explicit), and no output here is described as movement toward Clay. Clay stays ~0.05%.
+No direction question raised: both open contingencies (verify-265's verdict, 226's
+finding) have pre-committed responses above.
