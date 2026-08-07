@@ -27,23 +27,23 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 266 | P0TC | no |
-| B | 249 | H2CV2 | no |
+| B | 268 | PUB2R | no |
 | C | 260 | DSSB | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
 | G | 267 | FDL | yes |
-| H | 261 | P1A2 | yes |
+| H | 264 | WETP | yes |
 | I | 252 | VBRG | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slots A+G refill after 262/256 landed and
-251's verifier found the obligation-#1 gap): 3/10 floor-eligible -- F/236/RDDEP,
-G/267/FDL, H/261/P1A2 -- matching the "obligation #1" DM update at the tail of this
-file. A/266/P0TC is the verifier-mandated rework leg (correction, not eligible);
-G/267/FDL is the forcing-domination literature leg drafted to serve the corrected
-obligation AND hold the floor at 3.)
+(Current snapshot, DM update of 2026-08-07 (post-usage-limit reconciliation + slots B/H
+refill): 3/10 floor-eligible -- F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the
+"post-usage-limit" DM update at the tail of this file. B/268/PUB2R is the
+submission-blocking rework of PUB2's 4.026 figure (leg 249's finding; absorbs 259's
+nits); H/264/WETP is the one licensed weighted-energy transfer probe, its sequencing
+amended now that 178 has landed.)
 
 ---
 
@@ -10977,3 +10977,113 @@ verifier's correction are recorded as facts about the literature and about one r
 wording — not movement of any link. Clay stays ~0.05%. No direction question raised: the
 packet assembles after 266 (and ideally 256's reported outcome, 260, 265, 267) — one
 coherent decision, not piecemeal drops.
+
+---
+
+## DM update, 2026-08-07 — post-usage-limit reconciliation + leg 249's PUB2 finding:
+rework leg 268 (PUB2R) cut into slot B (absorbs 259), 264 promoted into slot H (floor
+held at 3/10), the missing gate answers recovered from ORCH_STATE.md, verify-256
+re-dispatch flagged as support
+
+**The usage-limit event, reconciled** (from reports/ORCH_STATE.md, read directly): five
+agents died simultaneously (236, 226, 248, verify-256, 261's sibling checks) to an
+account-wide session limit — external, not work-related. Slots E (248), F (236), J (226)
+resume from their `-wip2` salvage branches with fresh agents; slots D (221) and I (252)
+need their branches re-checked before assuming state; **verify-256 needs a fresh
+re-dispatch as SUPPORT (verifiers run outside the ten slots, per this run's own
+precedent) — a landed claim-bearing YES (256) currently sits unverified, which §7b does
+not allow to persist.**
+
+**The gate answers this DM was missing, now on record:**
+- **256 (P1B): gate YES** — the Breden-Chu reproduction succeeded end to end (landed
+  `68c74de`). The machinery is usable here; 265's exists-vs-build row and the user's
+  stage-V packet both inherit this directly.
+- **261 (P1A2): gate NO, at full strength** — 0 of 18 fluid rows survive even the
+  RELAXED evidence tier; the killer is screen (iv_a): **incompressibility is a nonlocal
+  constraint that no fluid row passes by construction under Remark 40's stated reach**
+  (landed `28545ce`, orchestrator-landed post-agent-death). Combined with 255's census
+  and 257's Leray obstruction, the incompressible-fluid route through Breden-Chu's
+  machinery is now closed THREE independent ways. The pre-committed re-posing trigger
+  (251+261+262 all landed) HAS NOW FIRED — the re-posing question goes in the user
+  packet, which still waits on 266; recorded here so it cannot be lost.
+- **178 (WES): landed under the user's ruling** — 263's sequencing condition ("once 178
+  lands") is cleared.
+- **260 (DSSB): reported finished by the orchestrator, gate answer STILL not reported to
+  this DM** — third missing-outcome flag this session (256's and 260's; 256's now
+  resolved). Send 260's finding summary next message.
+
+**Leg 249 (H2CV2), escalated, recorded at full strength — the submission-blocking
+finding:** both PUB2 headline numbers reproduce at stated precision, BUT in exact
+rational arithmetic: (1) the banked `σ_min_at_512 = 0.09080465147034879` is PROVED wrong
+(pencil not positive-definite at that λ; true value certified in `(0.090804094,
+0.090804194)`); (2) the banked `‖T⁻¹‖_X = 4.02614534796022` falls OUTSIDE 249's own
+certified bracket `[4.02623993, 4.02624155]`; (3) **PUB2's "truncation-independent
+‖T⁻¹‖_X = 4.026" is unsupported** — the tail inverse norm is still rising at N=1024 with
+decrements converging to ≈4.0318, and leg 176's own raw `reading` field already said
+4.03; the journal and PUB2 tightened it beyond what the data supports. Leg 176's gate
+answer and conclusions otherwise confirmed — a precision/convergence correction, not a
+reversal.
+
+**Slot B: rework leg 268, cut at top of queue per the standing mandate — ranked exactly
+as the orchestrator recommends (above 263/264-family work; an approved external-facing
+document currently quotes an unsupported number). 259 (PUB2P) is ABSORBED into 268 and
+retired as a separate number** (drafted, never dispatched) — two legs must not edit one
+submission-track document in the same cycle.
+
+```
+### 268 — ROUTE-PUB2R: CORRECT PUB2's ‖T⁻¹‖_X FIGURE AND THE TWO PROVED-WRONG BANKED
+VALUES (leg 249's exact-arithmetic finding — SUBMISSION-BLOCKING rework; absorbs 259's
+two prose nits)
+**Thesis.** Leg 249's findings (1)-(3) above, in full. The correction follows leg 249's
+own full report recommendation (read experiments/journal/leg_249.md on leg/249-h2cv2-v2
+FIRST — state ≈4.03, or state the convergence trend honestly, per what that report
+actually supports). Absorbed from 259: (a) §3.5 states 0.71465 = 1/1.3993 as "exactly"
+(it is a round-up by 7.0e-06, disclosed at §3.2 but not §3.5); (b) the §3.1 table cell
+at line 175 still presents "σ_min bounded away from zero" as verified, which §3.5
+correctly withdraws.
+**Gate.** After the rework: (a) does every PUB2 site quoting 4.026 / truncation-
+independence state only what leg 249's certified data supports (per 249's own report
+recommendation), with the convergence trend stated honestly; (b) are the two proved-wrong
+banked values corrected via an EXPLICIT correction artifact citing 249's certified
+brackets (no silent hand-edit of a banked JSON; leg 176's gate-answer text untouched, as
+249 itself confirms it); (c) are 259's two absorbed nit sites fixed; and (d) is no other
+sentence's meaning changed?
+  yes -> Bank. PUB2 quotes only supported figures; flag to the orchestrator that the
+         document needs a fresh §7b pass before any actual submission.
+  no -> If PUB2's ARGUMENT (not merely its quoted figure) turns out to depend on
+        truncation-independence at 4.026, STOP and escalate — that would be substantive,
+        and the submission approval itself must return to the user.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md,
+               writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md (if it quotes the figure),
+               a correction artifact alongside leg 176's banked JSON (explicit, cited —
+               regenerate or annotate, never silently overwrite),
+               writeup/novelty/leg_268.md, experiments/journal/leg_268.md.
+               Reads (never edits) leg 249's branch leg/249-h2cv2-v2 in full.
+**Difficulty.** standard
+**Independence.** Submission-track territory, no solver module. TOP priority alongside
+266 (both block the user-facing packet/submission). Anti-pausing clause verbatim.
+```
+
+**Slot H: leg 264 (WETP) promoted, with its sequencing AMENDED** (this DM's own queue,
+amended with the reason recorded): its "263 at least dispatched" condition existed so 264
+would read corrected triple-prose; instead, **264's brief now cites Ruling 2's two-triples
+distinction directly**, which protects it from the over-read without waiting on 263 —
+and 178 (its hard condition) has landed. Promoting 264 also holds the floor at exactly
+3/10 (236, 267, 264), which would otherwise breach with 261 landed. 263 stays in
+reserve, dispatchable at the next vacancy.
+
+**FLOOR-TABLE block updated in this same edit** (B: 249 → 268; H: 261 → 264). **Floor
+status: 3/10 strictly (236, 267, 264) — met exactly; the §5 roster-honesty commitment
+stands.**
+
+**Canonical reserve line: reserve count 9 — legs 265, 263, 228, 210, 229, 231, 232, 233,
+234** (259 retired-absorbed into 268; 264 promoted; 178L landed). Effective
+immediately-dispatchable: 3 (263, 228, 210); 265 blocked on 266's landing; 229 blocked
+on 226; 231-234 blocked on repairs 217/219/221/225 (221's own landing would unblock
+233). Next fresh leg number: **269.**
+
+Nothing in this update lifts a ban or opens construction. 249's findings are recorded as
+corrections to precision/convergence claims, leg 176's gate answer standing — not as
+movement of any link. Clay stays ~0.05%. The one ripened direction question (re-posing
+Phase 1's incompressible-fluid framing, three independent closures now on record) is
+explicitly PARKED INTO THE PACKET behind 266 — not raised piecemeal.
