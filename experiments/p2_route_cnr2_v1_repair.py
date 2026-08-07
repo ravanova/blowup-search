@@ -62,6 +62,7 @@ Run: .venv/bin/python experiments/p2_route_cnr2_v1_repair.py
 import json
 import os
 import sys
+import tempfile
 
 import numpy as np
 
@@ -77,6 +78,50 @@ OUT = os.path.join(ROOT, "writeup", "data", "p2_route_cnr2_v1_repair.json")
 
 PRE = float("inf")     # gauge_tol that reproduces the pre-repair verdict
 POST = 1e-8            # the new default; leg 237's own escape predicate
+
+# Per-section checkpoint.  The six sections cost well over an hour end to end
+# (F alone re-runs the 41-case battery at eight tolerances), which exceeds the
+# wall clock this repo's harness gives a single process.  Each section's result
+# is therefore cached the moment it is produced, and a re-run skips whatever is
+# already cached, so the artifact is assembled from bounded runs.  This changes
+# NO computation: every section is the same deterministic function of the same
+# seeded inputs, so a cached section equals the section a single long run would
+# have produced.  Delete the cache to force a clean end-to-end recomputation.
+CACHE = os.environ.get(
+    "CNR2_CACHE", os.path.join(tempfile.gettempdir(),
+                               "p2_route_cnr2_v1_repair.cache.json"))
+
+
+def _cache_load():
+    try:
+        with open(CACHE) as fh:
+            return json.load(fh)
+    except Exception:
+        return {}
+
+
+def _cache_put(key, value):
+    d = _cache_load()
+    d[key] = value
+    tmp = CACHE + ".tmp"
+    with open(tmp, "w") as fh:
+        json.dump(d, fh, default=float)
+    os.replace(tmp, CACHE)
+
+
+def _section(res, key, fn):
+    """Compute `key` unless it is already cached; store it either way."""
+    cached = _cache_load()
+    if key in cached:
+        print("[cache] reusing", key, flush=True)
+        res[key] = cached[key]
+        return res[key]
+    print("[run]  computing", key, "...", flush=True)
+    val = json.loads(json.dumps(fn(), default=float))
+    _cache_put(key, val)
+    res[key] = val
+    print("[run]  done", key, flush=True)
+    return val
 
 
 # ---------------------------------------------------------------------------
@@ -433,6 +478,15 @@ def f_threshold_sensitivity(tols=(1e-14, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4,
     ref = col.newton(max_iter=60)
     rows = []
     for t in tols:
+        # sub-checkpoint: each tolerance is an independent battery, so cache
+        # them one at a time (the whole sweep exceeds a single run's wall clock)
+        _k = "F_row_%g" % float(t)
+        _c = _cache_load()
+        if _k in _c:
+            print("[cache] reusing", _k, flush=True)
+            rows.append(_c[_k])
+            continue
+        print("[run]  computing", _k, "...", flush=True)
         bat = battery(float(t))
         esc_ok = 0
         for lam in (2.0, 10.0, 1e3, 1e-3):
@@ -445,11 +499,13 @@ def f_threshold_sensitivity(tols=(1e-14, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4,
                            and x["gauge_defect_sup"] <= 1e-8
                            and x["c_relative_error"] <= 1e-6)
             n_correct += int(x["converged"] == correct)
-        rows.append({"gauge_tol": float(t),
-                     "n_battery_correct": int(n_correct),
-                     "n_battery_converged": int(bat["n_converged"]),
-                     "n_escaped_members_refused_of_4": int(esc_ok),
-                     "both_clauses_hold": bool(n_correct == 41 and esc_ok == 4)})
+        _row = {"gauge_tol": float(t),
+                "n_battery_correct": int(n_correct),
+                "n_battery_converged": int(bat["n_converged"]),
+                "n_escaped_members_refused_of_4": int(esc_ok),
+                "both_clauses_hold": bool(n_correct == 41 and esc_ok == 4)}
+        _cache_put(_k, _row)
+        rows.append(_row)
     ok = [x["gauge_tol"] for x in rows if x["both_clauses_hold"]]
     return {"rows": rows,
             "tolerances_where_both_clauses_hold": ok,
@@ -502,13 +558,13 @@ def main():
                             "unchanged, byte for byte."),
         },
     }
-    res["A_battery_41"] = a_battery_before_after()
-    res["A_prime_leg237_replication"] = a_prime_replicate_leg237()
-    res["B_escaped_members"] = b_escaped_members()
-    res["C_clean_input_preservation"] = c_clean_input_preservation()
-    res["D_leg202_calibration"] = d_leg202_calibration()
-    res["E_continuation_ladder"] = e_ladder()
-    res["F_threshold_sensitivity"] = f_threshold_sensitivity()
+    _section(res, "A_battery_41", a_battery_before_after)
+    _section(res, "A_prime_leg237_replication", a_prime_replicate_leg237)
+    _section(res, "B_escaped_members", b_escaped_members)
+    _section(res, "C_clean_input_preservation", c_clean_input_preservation)
+    _section(res, "D_leg202_calibration", d_leg202_calibration)
+    _section(res, "E_continuation_ladder", e_ladder)
+    _section(res, "F_threshold_sensitivity", f_threshold_sensitivity)
 
     A, B, D = res["A_battery_41"], res["B_escaped_members"], res["D_leg202_calibration"]
     clause1 = bool(A["n_after_incorrect"] == 0)

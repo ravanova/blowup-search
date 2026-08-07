@@ -4,7 +4,7 @@
   "subject": "repair of the scale-invariant-residual convergence verdict in solver/collocation_newton.py::ACollocation.newton and continuation, from leg 237's Route-SIRC census",
   "gate": "Does the repair cause all 41 of leg 237's own reachability-battery cases to correctly reject/flag, while the 2 cases that reproduce leg 202's own banked numbers remain correctly flagged as genuine (not accidentally suppressed by an overcorrected fix)?",
   "repair": {
-    "newton": "converged = bool(rel < 1e-9) becomes bool(rel < 1e-9 AND gauge_defect <= gauge_tol), with gauge_defect = max(|Omega(theta=0)+1|, |Omega(X~1)+1/2|) -- the two rows F[J], F[J+1] the method already builds and previously discarded. Absolute and degree-1 homogeneous, so it is exactly the companion rel cannot be. New keys: converged_relres_only (the pre-repair flag, unchanged), gauge_ok, gauge_defect, reason.",
+    "newton": "converged = bool(rel < 1e-9) becomes bool(rel < 1e-9 AND gauge_defect <= gauge_tol), with gauge_defect = max(|Omega(theta=0)+1|, |Omega(X~1)+1/2|) -- the two rows F[J], F[J+1] the method already builds and previously discarded. Absolute and AFFINE in Omega (degree-1 leading part plus a nonzero constant), so under (Omega,c)->(lam Omega, lam c) it moves as |lam-1| times the gauge value; rel, a ratio of two degree-2 quantities, is degree 0 exactly and cannot. New keys: converged_relres_only (the pre-repair flag, unchanged), gauge_ok, gauge_defect, reason.",
     "continuation": "retry if relres unconverged OR off gauge; prefer the retry lexicographically on (gauge_ok, -relres); warm-start the next rung only from a member that is both. Each clause can only REJECT a warm start the old code would have taken.",
     "threshold_provenance": "gauge_tol = 1e-8 is leg 237's own escape predicate (gd > 1e-8), adopted unchanged, not fitted: 1.1e+07x above the worst clean gauge defect (8.882e-16) and 1.0e+08x below the smallest escaped one (1.000 at lam=2).",
     "reproduction": "gauge_tol=inf reproduces the pre-repair verdict exactly.",
@@ -942,6 +942,8 @@
     "n_moved": 0,
     "n_verdicts_changed": 0,
     "worst_gauge_defect_on_clean_input": 1.5843630962741884e-08,
+    "worst_gauge_defect_where_relres_passes": 3.3306690738754696e-16,
+    "n_rows_where_relres_passes": 4,
     "reading": "the repair adds a conjunct and three keys; it computes no new iterate, so every returned float on a clean input is bit-identical and the verdict is unchanged wherever the gauge rows are satisfied."
   },
   "D_leg202_calibration": {
@@ -1049,6 +1051,78 @@
     "n_converged_off_anchor_after": 0,
     "worst_gauge_defect": 0.0014008523153835606,
     "reading": "every ladder member measured in this repo is on gauge, so all three repaired branch decisions take the same path they took before and the ladder is bit-identical; the clauses can only ever REJECT a warm start."
+  },
+  "F_threshold_sensitivity": {
+    "rows": [
+      {
+        "gauge_tol": 1e-14,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 1e-12,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 1e-10,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 1e-08,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 1e-06,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 0.0001,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 0.01,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      },
+      {
+        "gauge_tol": 0.5,
+        "n_battery_correct": 41,
+        "n_battery_converged": 17,
+        "n_escaped_members_refused_of_4": 4,
+        "both_clauses_hold": true
+      }
+    ],
+    "tolerances_where_both_clauses_hold": [
+      1e-14,
+      1e-12,
+      1e-10,
+      1e-08,
+      1e-06,
+      0.0001,
+      0.01,
+      0.5
+    ],
+    "n_decades_of_indifference": 13.698970004336019,
+    "reading": "the outcome is identical across the quoted band, so 1e-8 was chosen for provenance (leg 237's own escape predicate) and not because the answer depends on it."
   },
   "gate_clause_1_all_41_correct": true,
   "gate_clause_2_leg202_pair_still_flagged": true,
