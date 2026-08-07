@@ -11132,3 +11132,104 @@ Nothing in this update lifts a ban — 260's NO tightens one (basis upgraded, re
 wording change needed since "never" already stood). No committed gate changes; Clay
 stays ~0.05%. No direction question raised: the packet behind 266 now carries the
 DSS-exclusion narrowing alongside everything else.
+
+---
+
+## DM update, 2026-08-07 — both priority corrections LANDED (266 into PR #20, 268 onto
+main): 265 unblocked and promoted into slot A with no third review pass; reserve
+refreshed with 269/270 from 268's own flags; 249's branch recommended for standalone
+merge; THE USER PACKET IS NOW ASSEMBLABLE
+
+**266 (P0TC) landed into 251's parked branch** (PR #20 at `873a15f`, correctly still
+unmerged — 251 remains an escalation): obligation #1 re-posed onto the stability step
+(enclosing the argument WITH F_dis retained, at r outside BCG's dominance window
+`(1.1666667, 1.1909830)`, width 0.0243163; target window `(1, 7/6]` confirmed non-empty
+and 6.855× wider — coherent, not vacuous). Every verifier-confirmed claim byte-untouched;
+visible dated correction note citing verify_251.
+
+**268 (PUB2R) landed on `main`** (`3f6d5d0`): PUB2 now states the honest convergent
+≈4.0318 with the trend stated; the two proved-wrong banked values corrected via a CITED
+companion artifact (leg 176's original JSON untouched); 259's nits absorbed; 268
+explicitly checked that no downstream argument depended on 4.026 (so no escalation
+fired). Its §7b verifier is in flight. Two flags it raised are queued below (269, 270).
+
+**Slot A: leg 265 (Route-P2C) — promoted immediately, NO third review of PR #20 first.**
+Reasoning recorded: verify_251 confirmed everything except one sentence at primary
+source; 266 corrected exactly that sentence under its own pre-committed three-clause
+gate; a formal re-review would be a third pass over the same report with no new question
+to ask. 265's spec (as amended) already reads "251's report as VERIFIED" = the corrected
+PR. Dispatch with the anti-pausing clause; it remains the programme's next link (ranking
+rule (a)).
+
+**Leg 249's branch (`leg/249-h2cv2-v2`): MERGE as a standalone record (this DM's call on
+the orchestrator's question)** — via the normal audit path, not fast-tracked. The
+correction artifact quotes 249's certified brackets, but the full exact-rational
+derivation is the durable record: it is the only independent certification of leg 176's
+certificate in existence, 270's pre-submission review will need to cite it, and this
+repository's own discipline is that banked findings live on main, not in PR limbo.
+
+**Reserve refresh (requested, and due — effective dispatchable was 2):**
+
+```
+### 269 — ROUTE-J176P: FIX LEG 176's JOURNAL PROSE SLIP (leg 249's out-of-territory
+finding, flagged by 268 — light DOCS)
+**Thesis.** Leg 249 found leg 176's own journal states 1.29e-14 where the underlying
+value is 1.4296e-14 — a 9.8% prose slip, out of 268's declared territory, no banked
+number involved.
+**Gate.** Does the journal prose match the underlying banked value at stated precision
+after the fix, with a one-line correction note citing leg 249, and no other sentence's
+meaning changed?
+  yes -> Bank. no -> Report which site resists and why; do not guess.
+**Territory.** experiments/journal/leg_176.md (the slip site + note ONLY),
+               writeup/novelty/leg_269.md, experiments/journal/leg_269.md.
+**Difficulty.** light
+**Independence.** DOCS-only, disjoint from everything live. LOW priority.
+```
+
+```
+### 270 — ROUTE-PUB2V2: THE FULL PRE-SUBMISSION REVIEW PASS OF PUB2 (268's own flag —
+the document has now been edited by legs 250, 268 across multiple cycles and needs one
+coherent end-to-end read before any actual submission)
+**Thesis.** PUB2 has accumulated corrections (250's inequality fix, 268's ≈4.0318 rework
++ absorbed nits) from different legs at different times. 268 itself flags that a fresh
+FULL review pass is needed before submission: every number against its banked source,
+every epistemic claim against what the record now supports (including 249's certified
+brackets and the no-proven-floor framing), internal cross-references consistent.
+**Gate.** Does every quantitative claim and epistemic qualifier in PUB2 trace cleanly to
+a banked, on-main source (or 249's branch, if merged per the recommendation above), with
+zero internal inconsistencies remaining?
+  yes -> Bank the trace table. PUB2 is submission-ready from the record's side; actual
+         submission remains the user's action.
+  no -> List every failing site with its mismatch — each becomes a candidate rework item;
+        escalate only if any mismatch is substantive rather than prose.
+**Territory.** a review report (writeup/novelty/leg_270.md, the trace table in
+               writeup/data/p2_route_pub2v2_v1_trace.json),
+               experiments/journal/leg_270.md. READS PUB2; edits nothing in it — findings
+               become rework items, keeping review and repair in separate legs.
+**Difficulty.** standard
+**Independence.** Read-only on the document. Dispatchable AFTER 268's in-flight §7b
+verifier lands (no point tracing a document mid-verification). Priority: HIGH once
+unblocked — it gates actual submission.
+```
+
+**THE PACKET IS NOW ASSEMBLABLE** — everything it was waiting on has landed or resolved:
+251's corrected report (PR #20), the stage-V lift recommendation (drafted above), 257's
+obstruction, 260's substantive-basis upgrade (DSS candidates excluded → exactly one
+unconditional candidate), 262's Perelman-not-Clay caveat, 261's third closure of the
+incompressible route, 256's gate-YES reproduction, and the ripened Phase-1 re-posing
+question. **Recommended assembly point: when 265 (costing) lands, so the user's
+construction decision has its price attached — but the orchestrator may assemble earlier
+if the user asks.** The packet's contents are all already drafted in this file's recent
+updates; nothing new needs DM authorship at assembly time.
+
+**FLOOR-TABLE block updated in this same edit** (A: 266 → 265). **Floor status: 4/10
+strictly (265, 236, 267, 264).**
+
+**Canonical reserve line: reserve count 9 — legs 228, 210, 269, 270, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 3 (228, 210, 269); 270 blocked on 268's
+verifier (HIGH priority once clear); 229 blocked on 226; 231-234 blocked on repairs
+217/219/221/225. Next fresh leg number: **271.**
+
+Nothing in this update lifts a ban or opens construction — 265's yes-branch still
+terminates in the user's decision packet, and no output here is described as movement
+toward Clay. Clay stays ~0.05%. No direction question raised.
