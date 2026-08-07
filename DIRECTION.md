@@ -11465,3 +11465,62 @@ fresh leg number: **274.**
 Nothing in this update lifts a ban; 273's yes-branch explicitly routes to the
 secondary-goal track and never describes non-fluid work as Clay movement. Clay stays
 ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — verify-271 landed clean WITH a sibling-document extension
+(0 hits in PUB1/PUB3/ROUTENGX/ROUTET): the PUB2 defect is GENUINELY CLOSED, no fourth
+iteration; residues drafted as light leg 274, serialized AHEAD of 270; 270's dispatch
+order pre-committed
+
+**verify-271 (`6736eaf`), recorded:** fully independent sweep (own pattern set), plus an
+extension 271 didn't take — all sibling live documents checked for the same claim
+family, 0 hits. The consolidated-rewrite contingency pre-committed last update does NOT
+fire. Two non-blocking residues found: (1) TECHNICAL §3.5 attaches σ_min's decrements to
+‖T⁻¹‖_X's own label — correct data, wrong subject, 16× off if recomputed from the
+printed ladder; (2) ROOT CAUSE: leg 176's banked JSON `reading` field itself opens with
+"truncation-independent" before its own correct hedge — any future document quoting that
+key regenerates the defect. The verifier suggests a corrections-register pointer rather
+than another prose sweep; adopted below.
+
+**Decision — residues stay OUT of 270 (review and repair remain separate legs), and 274
+runs FIRST:** residue (1) requires editing PUB2, which must not happen while 270 traces
+it. Serialization pre-committed: **next vacancy → 274 (light); 270 dispatches
+immediately on 274's landing.** No slot is currently vacant; this is queue order, not an
+interruption.
+
+```
+### 274 — ROUTE-J176R2: THE §3.5 WRONG-SUBJECT LABEL + THE ROOT-CAUSE POINTER FOR LEG
+176's `reading` FIELD (verify-271's two residues — light, closes the regeneration
+hazard)
+**Thesis.** verify-271's residues (1) and (2) above. For (2), the fix follows the
+verifier's own suggestion: a CORRECTIONS.md register entry plus an explicit companion
+annotation mechanism pointing at the `reading` field — NOT a silent mutation of a banked
+JSON, and NOT another prose sweep.
+**Gate.** After the fix: (a) §3.5's decrements are attached to their correct subject
+(σ_min), recomputable from the printed ladder without the 16× mismatch; (b) the
+regeneration hazard is closed by a CORRECTIONS.md entry + companion annotation such that
+a future reader/quoter of the `reading` key is directed to the corrected framing, with
+the banked JSON's measured values and original text byte-untouched; (c) no other
+sentence's meaning changed.
+  yes -> Bank. Flag 270 as dispatchable (its serialization condition met).
+  no -> Report which clause resists; escalate rather than improvise a fourth mechanism.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_PUB2_V1.md (§3.5's label ONLY),
+               writeup/CORRECTIONS.md (append), the companion annotation artifact,
+               writeup/novelty/leg_274.md, experiments/journal/leg_274.md.
+               Reads (never edits) verify-271's report, leg 176's banked JSON.
+**Difficulty.** light
+**Independence.** Disjoint from every live slot. FIRST in queue order at next vacancy;
+270 follows its landing. Anti-pausing clause verbatim.
+```
+
+**Canonical reserve line: reserve count 9 — legs 274, 270, 272, 273, 229, 231, 232, 233,
+234.** Queue order at vacancies: **274 first, then 270 (on 274's landing), then 272/273
+in either order.** Effective immediately-dispatchable: 3 (274, 272, 273); 270's blocking
+condition is now "274 lands" (was "271's verifier lands clean" — met); 229 blocked on
+226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg number: **275.**
+
+**FLOOR-TABLE unchanged** (no slot touched). Floor 4/10 strictly. No news from 226 yet —
+the pre-committed contingency (rework at top of queue if the a=0.50 off-branch finding
+confirms) stands ready. Nothing in this update lifts a ban; Clay stays ~0.05%. No
+direction question raised.
