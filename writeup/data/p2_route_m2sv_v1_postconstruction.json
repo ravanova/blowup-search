@@ -1,0 +1,1153 @@
+{
+  "V0_operator_validation": {
+    "X_max": 745.2394128947751,
+    "chen_profile_amplitude": 1.7320417991439734,
+    "cumint_on_chen_U_relative": 2.2357246950824903e-09,
+    "cumint_on_chen_U_sup_error": 1.8253576877010763e-09,
+    "d1_at_origin_closed_form": -8.70929686322908,
+    "d1_at_origin_on_chen": -8.709296858849518,
+    "d1_at_origin_relative_error": 5.028605260608509e-10,
+    "d1_on_chen_relative_sup_error": 5.318914733905154e-10,
+    "d2_on_chen_relative_sup_error": 3.467851664739762e-10,
+    "hilbert_on_a0_clm_pair_note": "LARGER than the Chen check by ~5 orders and that is EXPECTED, not a defect: Omega_0 = -4X/(1+4X^2) decays like 1/X, so the whole-line Hilbert integral has a slowly-decaying tail the truncated grid cannot see.  Chen's profile decays like X^-3 and is the relevant regime for every solve in this leg.  Reported because a validation you only quote when it passes is not a validation.",
+    "hilbert_on_a0_clm_pair_sup_error": 0.0023662076179426367,
+    "hilbert_on_chen_pair_relative": 1.2833136386891651e-08,
+    "hilbert_on_chen_pair_sup_error": 3.4221697031711074e-08,
+    "n": 801,
+    "reading": "all four operators reproduce closed forms to <= 1e-8 relative in the regime the solves use, so a reproduction of leg 185's number cannot be two copies of one bug -- the operators here agree with ANALYSIS, not just with leg 125's operators."
+  },
+  "V0b_gauge_transcription": {
+    "gauge_closed_form_minus_two_over_b_cubed": -8.70929686322908,
+    "gauge_leg185_discrete": -8.709293103246308,
+    "gauge_this_leg_discrete": -8.709296858849516,
+    "implied_relative_offset_in_nu": 8.634411779511447e-07,
+    "leg185_gauge_relative_error_vs_closed_form": 4.3172058897557233e-07,
+    "n": 801,
+    "reading": "leg 185's 4th-order discrete gauge sits 4.317e-07 relative from the closed form, which by nu ~ g^-2 moves nu by 8.634e-07 relative (~1.6e-08 absolute at nu = 0.018).  BOTH gauges are therefore run below, and the comparison against leg 185's banked number uses LEG 185'S OWN GAUGE, so that the verification tests its computation and not its normalization choice.",
+    "this_leg_gauge_relative_error_vs_closed_form": 5.028607300218442e-10
+  },
+  "V1_replay_weakest_tier": {
+    "banked_chen_a_one_half": [
+      -0.008175246262768656,
+      -0.00895316044499692
+    ],
+    "banked_grid_ladder": [
+      0.018028631849382193,
+      0.017995833422658446,
+      0.017993756223880317,
+      0.017993643786367603
+    ],
+    "chen_a_one_half_max_abs_deviation": 0.0,
+    "chen_a_one_half_replayed": [
+      -0.008175246262768656,
+      -0.00895316044499692
+    ],
+    "grid_ladder_max_abs_deviation": 0.0,
+    "grid_ladder_replayed": [
+      {
+        "n": 201,
+        "nu_replayed": 0.018028631849382193,
+        "residual_relative": 1.3521279737403616e-15
+      },
+      {
+        "n": 401,
+        "nu_replayed": 0.017995833422658446,
+        "residual_relative": 4.095092628599175e-15
+      },
+      {
+        "n": 801,
+        "nu_replayed": 0.017993756223880317,
+        "residual_relative": 1.5217008079180922e-14
+      },
+      {
+        "n": 1201,
+        "nu_replayed": 0.017993643786367603,
+        "residual_relative": 3.108408441549943e-14
+      }
+    ],
+    "leg185_json_md5": "39ccb78bb3c2484e310d50f874453935",
+    "leg185_script_md5": "80ace85367c77a74ad45b3bb4d6fa44f",
+    "tier": "WEAKEST -- determinism/transcription only, NOT a verification"
+  },
+  "V2_independent_rederivation_leg185_gauge": {
+    "X_max_range": [
+      100.85657868513961,
+      5506.616437351697
+    ],
+    "a_sweep_at_n401": [
+      {
+        "a": 0.3,
+        "admissible_positive_nu": true,
+        "nu_from_nu0_0p01": 0.01799385374491155,
+        "nu_from_nu0_0p3": 0.017993853744906786,
+        "relative_spread": 2.6473209866893515e-13,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.3,
+            "amplitude": 1.8047531327383128,
+            "edge_over_amplitude": 1.0485321128493068e-06,
+            "gauge": -8.709236820270943,
+            "iters": 6,
+            "n": 401,
+            "nu": 0.017993853744906786,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 1.368509245343153e-14,
+            "residual_rms_absolute": 7.195825113769882e-15
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.3,
+            "amplitude": 1.8047531327384416,
+            "edge_over_amplitude": 1.0485321128493792e-06,
+            "gauge": -8.709236820270943,
+            "iters": 5,
+            "n": 401,
+            "nu": 0.01799385374491155,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 6.019320944111191e-14,
+            "residual_rms_absolute": 3.165048461665492e-14
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 6.019320944111191e-14
+      },
+      {
+        "a": 0.3865,
+        "admissible_positive_nu": false,
+        "nu_from_nu0_0p01": -0.0013233113716528337,
+        "nu_from_nu0_0p3": -0.0009788324185755564,
+        "relative_spread": 0.2603158715752729,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.3865,
+            "amplitude": 0.2441305149629882,
+            "edge_over_amplitude": 1.1062630921025938e-09,
+            "gauge": -8.709236820270943,
+            "iters": 16,
+            "n": 401,
+            "nu": -0.0009788324185755564,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 3.5379992276846617e-15,
+            "residual_rms_absolute": 9.717729251908228e-17
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.3865,
+            "amplitude": 0.2913808756775684,
+            "edge_over_amplitude": 1.7859263278323125e-09,
+            "gauge": -8.709236820270943,
+            "iters": 59,
+            "n": 401,
+            "nu": -0.0013233113716528337,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 0.006026617461824531,
+            "residual_rms_absolute": 0.00020839681237080348
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 0.006026617461824531
+      },
+      {
+        "a": 0.45,
+        "admissible_positive_nu": false,
+        "nu_from_nu0_0p01": -0.0010985884871929353,
+        "nu_from_nu0_0p3": -0.0010985884618431618,
+        "relative_spread": 2.3074858139448888e-08,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.45,
+            "amplitude": 0.2534723132505405,
+            "edge_over_amplitude": 1.5967476601976008e-09,
+            "gauge": -8.709236820270943,
+            "iters": 15,
+            "n": 401,
+            "nu": -0.0010985884618431618,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 1.3250437423002568e-13,
+            "residual_rms_absolute": 3.9548373386709886e-15
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.45,
+            "amplitude": 0.2534723152516319,
+            "edge_over_amplitude": 1.5967477278341073e-09,
+            "gauge": -8.709236820270943,
+            "iters": 15,
+            "n": 401,
+            "nu": -0.0010985884871929353,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 4.047227897795799e-15,
+            "residual_rms_absolute": 1.2079698033674812e-16
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 1.3250437423002568e-13
+      },
+      {
+        "a": 0.5,
+        "admissible_positive_nu": false,
+        "nu_from_nu0_0p01": -0.0008292690991776599,
+        "nu_from_nu0_0p3": -0.0008292690991670638,
+        "relative_spread": 1.2777667324928567e-11,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.5,
+            "amplitude": 0.22602528003274078,
+            "edge_over_amplitude": 1.086509829074942e-09,
+            "gauge": -8.709236820270943,
+            "iters": 17,
+            "n": 401,
+            "nu": -0.0008292690991670638,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 4.358049971964654e-15,
+            "residual_rms_absolute": 1.0488457522800707e-16
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.5,
+            "amplitude": 0.22602528003405145,
+            "edge_over_amplitude": 1.086509829098315e-09,
+            "gauge": -8.709236820270943,
+            "iters": 17,
+            "n": 401,
+            "nu": -0.0008292690991776599,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 3.5331570470860095e-15,
+            "residual_rms_absolute": 8.503199331923793e-17
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 4.358049971964654e-15
+      },
+      {
+        "a": 0.55,
+        "admissible_positive_nu": false,
+        "nu_from_nu0_0p01": -0.0011010761456196874,
+        "nu_from_nu0_0p3": -0.0011010763420757055,
+        "relative_spread": 1.7842179566737933e-07,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.55,
+            "amplitude": 0.251993864693805,
+            "edge_over_amplitude": 1.9812807071879868e-09,
+            "gauge": -8.709236820270943,
+            "iters": 15,
+            "n": 401,
+            "nu": -0.0011010763420757055,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 8.452369465573625e-15,
+            "residual_rms_absolute": 2.509501744354471e-16
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.55,
+            "amplitude": 0.251993849298993,
+            "edge_over_amplitude": 1.9812800570397355e-09,
+            "gauge": -8.709236820270943,
+            "iters": 31,
+            "n": 401,
+            "nu": -0.0011010761456196874,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 4.2290843865877315e-14,
+            "residual_rms_absolute": 1.2556116082266685e-15
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 4.2290843865877315e-14
+      },
+      {
+        "a": 0.7,
+        "admissible_positive_nu": false,
+        "nu_from_nu0_0p01": -0.0008285939455362282,
+        "nu_from_nu0_0p3": -0.028840888031349224,
+        "relative_spread": 0.9712701653071303,
+        "runs": [
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.7,
+            "amplitude": 10.357430162729578,
+            "edge_over_amplitude": 3.27127738955195e-06,
+            "gauge": -8.709236820270943,
+            "iters": 18,
+            "n": 401,
+            "nu": -0.028840888031349224,
+            "nu0": 0.3,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 8.410054780478638e-15,
+            "residual_rms_absolute": 6.60139313136318e-14
+          },
+          {
+            "X_max": 745.2394128947751,
+            "a": 0.7,
+            "amplitude": 0.22291146004684187,
+            "edge_over_amplitude": 1.5530289582896197e-09,
+            "gauge": -8.709236820270943,
+            "iters": 15,
+            "n": 401,
+            "nu": -0.0008285939455362282,
+            "nu0": 0.01,
+            "odd_symmetry_defect": 0.0,
+            "residual_relative": 4.062537703137111e-15,
+            "residual_rms_absolute": 9.665237250485807e-17
+          }
+        ],
+        "sign_agrees_across_starts": true,
+        "worst_relative_residual": 8.410054780478638e-15
+      }
+    ],
+    "a_with_admissible_positive_nu": [
+      0.3
+    ],
+    "a_with_inadmissible_negative_nu": [
+      0.3865,
+      0.45,
+      0.5,
+      0.55,
+      0.7
+    ],
+    "gauge_mode": "leg185",
+    "grid_convergence_at_a_0p30": [
+      {
+        "X_max": 745.2394128947751,
+        "a": 0.3,
+        "amplitude": 1.803110257835541,
+        "edge_over_amplitude": 1.0501657981451674e-06,
+        "gauge": -8.708343636939771,
+        "iters": 6,
+        "n": 201,
+        "nu": 0.017997434111263973,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 3.548912769088818e-15,
+        "residual_rms_absolute": 1.863805435563041e-15
+      },
+      {
+        "X_max": 745.2394128947751,
+        "a": 0.3,
+        "amplitude": 1.8047531327383128,
+        "edge_over_amplitude": 1.0485321128493068e-06,
+        "gauge": -8.709236820270943,
+        "iters": 6,
+        "n": 401,
+        "nu": 0.017993853744906786,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 1.368509245343153e-14,
+        "residual_rms_absolute": 7.195825113769882e-15
+      },
+      {
+        "X_max": 745.2394128947751,
+        "a": 0.3,
+        "amplitude": 1.805309560652291,
+        "edge_over_amplitude": 1.0481323926299949e-06,
+        "gauge": -8.709293103246308,
+        "iters": 6,
+        "n": 801,
+        "nu": 0.017993632007977232,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 6.349847760902736e-14,
+        "residual_rms_absolute": 3.3409216413362296e-14
+      },
+      {
+        "X_max": 745.2394128947751,
+        "a": 0.3,
+        "amplitude": 1.8054369990546666,
+        "edge_over_amplitude": 1.0480511440067913e-06,
+        "gauge": -8.709296120249066,
+        "iters": 6,
+        "n": 1201,
+        "nu": 0.017993619231932417,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 1.397808751938722e-13,
+        "residual_rms_absolute": 7.35598885821665e-14
+      }
+    ],
+    "nu_ladder_at_a_0p30": [
+      0.017997434111263973,
+      0.017993853744906786,
+      0.017993632007977232,
+      0.017993619231932417
+    ],
+    "richardson_at_a_0p30": {
+      "extrapolated": 0.017993618450794256,
+      "note": "v(n) = v_inf + C n^-p through the three finest grids",
+      "observed_order": 4.124760426851554
+    },
+    "seconds": 503.0591080188751,
+    "truncation_sensitivity_at_a_0p30": [
+      {
+        "X_max": 100.85657868513961,
+        "a": 0.3,
+        "amplitude": 1.805570586096279,
+        "edge_over_amplitude": 5.721095549392205e-05,
+        "gauge": -8.709295673210505,
+        "iters": 6,
+        "n": 801,
+        "nu": 0.018003047782563134,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 1.0238234802840477e-13,
+        "residual_rms_absolute": 6.221511786469837e-14
+      },
+      {
+        "X_max": 745.2394128947751,
+        "a": 0.3,
+        "amplitude": 1.805309560652291,
+        "edge_over_amplitude": 1.0481323926299949e-06,
+        "gauge": -8.709293103246308,
+        "iters": 6,
+        "n": 801,
+        "nu": 0.017993632007977232,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 6.349847760902736e-14,
+        "residual_rms_absolute": 3.3409216413362296e-14
+      },
+      {
+        "X_max": 5506.616437351697,
+        "a": 0.3,
+        "amplitude": 1.8053060690684741,
+        "edge_over_amplitude": 1.9197533619283183e-08,
+        "gauge": -8.709287686925,
+        "iters": 6,
+        "n": 801,
+        "nu": 0.01799347944080424,
+        "nu0": 0.3,
+        "odd_symmetry_defect": 0.0,
+        "residual_relative": 4.07367420555808e-14,
+        "residual_rms_absolute": 1.9170459533935343e-14
+      }
+    ],
+    "truncation_spread_relative": 0.0005316714320785967
+  },
+  "V2b_gauge_scaling_check": {
+    "n": 801,
+    "nu_under_closed_form_gauge": 0.01799361647138097,
+    "nu_under_leg185_discrete_gauge": 0.017993632007977232,
+    "observed_over_predicted": 1.0000098765469285,
+    "observed_relative_offset": 8.634497057684587e-07,
+    "predicted_relative_offset": 8.634411779511447e-07,
+    "reading": "nu ~ g^-2 predicts the gauge change moves nu by twice the gauge's own relative change; observed/predicted is reported so the law is checked as a NUMBER, not asserted.  This also fixes the size of the residual offset between this leg's numbers and leg 185's that is attributable to normalization rather than to discretization."
+  },
+  "V3_dilation_covariance_route": {
+    "identity": "Omega -> Omega(./mu), nu -> mu^2 nu, Omega_X(0) -> Omega_X(0)/mu, so nu at gauge kappa*g equals nu(g)/kappa^2 EXACTLY in the continuum",
+    "per_a": [
+      {
+        "a": 0.3,
+        "gauge_range_tested": [
+          0.5,
+          2.0
+        ],
+        "n": 401,
+        "nu_on_leg185_gauge": 0.017993853744906786,
+        "off_gauge_recoveries": [
+          {
+            "kappa": 0.5,
+            "predicted_nu_at_kappa_gauge": 0.07197541497962714,
+            "seeded_nu_at_kappa_gauge": 0.07197765832534929,
+            "seeded_relative_error_vs_on_gauge": 3.116822213222859e-05,
+            "seeded_rescaled_kappa_squared": 0.017994414581337322,
+            "seeded_residual_relative": 3.099697363473883e-14,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.001355050835233289,
+            "unseeded_relative_error_vs_on_gauge": 1.0188265789869617,
+            "unseeded_residual_relative": 5.611032748204134e-14,
+            "unseeded_sign_matches": false
+          },
+          {
+            "kappa": 0.8,
+            "predicted_nu_at_kappa_gauge": 0.028115396476416848,
+            "seeded_nu_at_kappa_gauge": 0.02811557375744968,
+            "seeded_relative_error_vs_on_gauge": 6.30547867187535e-06,
+            "seeded_rescaled_kappa_squared": 0.0179939672047678,
+            "seeded_residual_relative": 1.943504942987685e-14,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.0013310184251209849,
+            "unseeded_relative_error_vs_on_gauge": 1.0473412646425755,
+            "unseeded_residual_relative": 1.7660849469625742e-13,
+            "unseeded_sign_matches": false
+          },
+          {
+            "kappa": 1.25,
+            "predicted_nu_at_kappa_gauge": 0.011516066396740344,
+            "seeded_nu_at_kappa_gauge": 0.011516005045558777,
+            "seeded_relative_error_vs_on_gauge": 5.327442500983141e-06,
+            "seeded_rescaled_kappa_squared": 0.01799375788368559,
+            "seeded_residual_relative": 8.416747896099647e-15,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": 0.011516005045562936,
+            "unseeded_relative_error_vs_on_gauge": 5.3274421398445966e-06,
+            "unseeded_residual_relative": 5.32653768415926e-14,
+            "unseeded_sign_matches": true
+          },
+          {
+            "kappa": 2.0,
+            "predicted_nu_at_kappa_gauge": 0.0044984634362266965,
+            "seeded_nu_at_kappa_gauge": 0.0044983202169281995,
+            "seeded_relative_error_vs_on_gauge": 3.1837381925509265e-05,
+            "seeded_rescaled_kappa_squared": 0.017993280867712798,
+            "seeded_residual_relative": 6.026532696339708e-14,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.6239635920453285,
+            "unseeded_relative_error_vs_on_gauge": 139.70593834785242,
+            "unseeded_residual_relative": 2.781527490402812e-05,
+            "unseeded_sign_matches": false
+          }
+        ],
+        "on_gauge_residual_relative": 1.368509245343153e-14,
+        "seeded_sign_invariant": true,
+        "seeded_worst_relative_error": 3.1837381925509265e-05,
+        "unseeded_worst_relative_error": 139.70593834785242
+      },
+      {
+        "a": 0.5,
+        "gauge_range_tested": [
+          0.5,
+          2.0
+        ],
+        "n": 401,
+        "nu_on_leg185_gauge": -0.0008292690991670638,
+        "off_gauge_recoveries": [
+          {
+            "kappa": 0.5,
+            "predicted_nu_at_kappa_gauge": -0.003317076396668255,
+            "seeded_nu_at_kappa_gauge": -0.001334421352699079,
+            "seeded_relative_error_vs_on_gauge": 0.5977116010835924,
+            "seeded_rescaled_kappa_squared": -0.00033360533817476976,
+            "seeded_residual_relative": 1.5599358963233684e-13,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.0004329755210757611,
+            "unseeded_relative_error_vs_on_gauge": 0.8694707419127726,
+            "unseeded_residual_relative": 0.7439849167623188,
+            "unseeded_sign_matches": true
+          },
+          {
+            "kappa": 0.8,
+            "predicted_nu_at_kappa_gauge": -0.0012957329674485368,
+            "seeded_nu_at_kappa_gauge": -0.0012987686989724752,
+            "seeded_relative_error_vs_on_gauge": 0.0023428681682122854,
+            "seeded_rescaled_kappa_squared": -0.0008312119673423844,
+            "seeded_residual_relative": 0.0017974243034986949,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -4.554970429433437e-06,
+            "unseeded_relative_error_vs_on_gauge": 0.9964846380050029,
+            "unseeded_residual_relative": 3.2088953525975747,
+            "unseeded_sign_matches": true
+          },
+          {
+            "kappa": 1.25,
+            "predicted_nu_at_kappa_gauge": -0.0005307322234669208,
+            "seeded_nu_at_kappa_gauge": -0.0005203343407167183,
+            "seeded_relative_error_vs_on_gauge": 0.019591579878606276,
+            "seeded_rescaled_kappa_squared": -0.0008130224073698724,
+            "seeded_residual_relative": 4.359881247880488e-12,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.0010994285759586176,
+            "unseeded_relative_error_vs_on_gauge": 1.0715316073645982,
+            "unseeded_residual_relative": 5.293503631615637e-13,
+            "unseeded_sign_matches": true
+          },
+          {
+            "kappa": 2.0,
+            "predicted_nu_at_kappa_gauge": -0.00020731727479176594,
+            "seeded_nu_at_kappa_gauge": -0.0002071927097840029,
+            "seeded_relative_error_vs_on_gauge": 0.0006008423942874947,
+            "seeded_rescaled_kappa_squared": -0.0008287708391360116,
+            "seeded_residual_relative": 6.005482912594078e-15,
+            "seeded_sign_matches": true,
+            "unseeded_nu_at_kappa_gauge": -0.0008803655002481462,
+            "unseeded_relative_error_vs_on_gauge": 3.2464647537567948,
+            "unseeded_residual_relative": 0.1475635400017293,
+            "unseeded_sign_matches": true
+          }
+        ],
+        "on_gauge_residual_relative": 4.358049971964654e-15,
+        "seeded_sign_invariant": true,
+        "seeded_worst_relative_error": 0.5977116010835924,
+        "unseeded_worst_relative_error": 3.2464647537567948
+      }
+    ],
+    "reading": "SEEDED, the identity holds to ~3e-5 relative across a 4x gauge range at a = 0.30 -- leg 185's number is recovered from normalizations it never used, and the residual error is the seed's interpolation error plus the grid's own inexactness, not a failure of the covariance.  UNSEEDED, the error is O(1-100): Newton started from the Chen profile at a wrong gauge lands on OTHER roots of the same square system.  That is a BASIN measurement, and it is the same multiplicity V5 finds on the negative side.  Because mu^2 > 0, no dilation can change sign(nu), so the sign claim is gauge-independent."
+  },
+  "V4_sign_flip_location": {
+    "a_star_leg125_from_Delta_sweep": 0.3864963972206034,
+    "bracket_midpoint": 0.365,
+    "bracket_width": 0.010000000000000009,
+    "leg125_a_star_inside_bracket": false,
+    "midpoint_minus_leg125_a_star": -0.021496397220603425,
+    "n": 401,
+    "points_converged": 12,
+    "points_failed_to_converge": [
+      0.38,
+      0.4,
+      0.43000000000000005,
+      0.44
+    ],
+    "points_scanned": 16,
+    "reading": "a* is NOT independently reproduced at the precision leg 185's journal implies.  Leg 185 wrote that its nu(a) zero crossing 'lands on leg 125's own independently measured a* = 0.3864963972206034' and called that 'a cross-check, not a restatement'.  But leg 185's OWN a-sweep row at a = 0.3865 reports +0.00000035 from one start and -0.00425080 from the other -- its two starts STRADDLE ZERO there, so its own data does not pin the crossing to anything like 8 digits; the agreement it reports is the agreement of ONE of two disagreeing starts.  Independently discretized, the crossing moves.  What survives is the QUALITATIVE statement -- nu > 0 at a = 0.30, nu < 0 at a >= 0.45 -- not a determined a*.",
+    "scan": [
+      {
+        "a": 0.3,
+        "amplitude": 1.8047531327383128,
+        "converged": true,
+        "nu": 0.017993853744906786,
+        "residual_relative": 1.368509245343153e-14
+      },
+      {
+        "a": 0.31,
+        "amplitude": 1.7607909822015424,
+        "converged": true,
+        "nu": 0.014695486322764073,
+        "residual_relative": 6.877044317293658e-14
+      },
+      {
+        "a": 0.32,
+        "amplitude": 1.7180327013740404,
+        "converged": true,
+        "nu": 0.011825802427252783,
+        "residual_relative": 1.0336527010038614e-14
+      },
+      {
+        "a": 0.33,
+        "amplitude": 1.6784959939383606,
+        "converged": true,
+        "nu": 0.009322805078261297,
+        "residual_relative": 7.451969565666192e-15
+      },
+      {
+        "a": 0.33999999999999997,
+        "amplitude": 1.6416077679528858,
+        "converged": true,
+        "nu": 0.007134732092216896,
+        "residual_relative": 8.393878361097888e-15
+      },
+      {
+        "a": 0.35,
+        "amplitude": 1.6057187486389024,
+        "converged": true,
+        "nu": 0.005218163669894876,
+        "residual_relative": 6.189687182256954e-15
+      },
+      {
+        "a": 0.36,
+        "amplitude": 1.5715054005361258,
+        "converged": true,
+        "nu": 0.003536521951650214,
+        "residual_relative": 1.7793988791056217e-14
+      },
+      {
+        "a": 0.37,
+        "amplitude": 0.2862896725173227,
+        "converged": true,
+        "nu": -0.001285920119435281,
+        "residual_relative": 2.470338240620948e-13
+      },
+      {
+        "a": 0.38,
+        "amplitude": 0.28373914022038244,
+        "converged": false,
+        "nu": -0.0012710650624567813,
+        "residual_relative": 0.00020123441897147335
+      },
+      {
+        "a": 0.39,
+        "amplitude": 0.2546166313946729,
+        "converged": true,
+        "nu": -0.001097656133567519,
+        "residual_relative": 1.8143338394257247e-12
+      },
+      {
+        "a": 0.4,
+        "amplitude": 0.27230239123824096,
+        "converged": false,
+        "nu": -0.0011989447888606283,
+        "residual_relative": 0.01648590020920362
+      },
+      {
+        "a": 0.41000000000000003,
+        "amplitude": 1825.8066843217484,
+        "converged": true,
+        "nu": -8.115333450373813,
+        "residual_relative": 6.963611378593828e-11
+      },
+      {
+        "a": 0.42000000000000004,
+        "amplitude": 0.2539391254780905,
+        "converged": true,
+        "nu": -0.001098060894045561,
+        "residual_relative": 6.402954159097062e-14
+      },
+      {
+        "a": 0.43000000000000005,
+        "amplitude": 0.2839710173915755,
+        "converged": false,
+        "nu": -0.0012830516272061276,
+        "residual_relative": 0.0010928893964061812
+      },
+      {
+        "a": 0.44,
+        "amplitude": 0.28775655539930456,
+        "converged": false,
+        "nu": -0.0013105225801055117,
+        "residual_relative": 0.000916815591252466
+      },
+      {
+        "a": 0.45,
+        "amplitude": 0.2534723132505405,
+        "converged": true,
+        "nu": -0.0010985884618431618,
+        "residual_relative": 1.3250437423002568e-13
+      }
+    ],
+    "sign_change_bracket_between_converged_points": [
+      0.36,
+      0.37
+    ]
+  },
+  "V5_negative_branch_grid_study": {
+    "grids": [
+      201,
+      401,
+      801
+    ],
+    "per_a": [
+      {
+        "a": 0.3,
+        "all_converged_signs_negative_leg185": false,
+        "all_converged_signs_negative_this_leg": false,
+        "all_converged_signs_positive_leg185": true,
+        "all_converged_signs_positive_this_leg": true,
+        "leg185_min_over_max_amplitude": 0.9988979132797909,
+        "leg185_relative_span_over_converged": 0.001936881178653043,
+        "leg185_scheme": [
+          {
+            "amplitude": 1.803320753676381,
+            "converged": true,
+            "n": 201,
+            "nu": 0.018028631849382193,
+            "nu0": 0.3,
+            "residual_relative": 1.3521279737403616e-15
+          },
+          {
+            "amplitude": 1.8033207536765303,
+            "converged": true,
+            "n": 201,
+            "nu": 0.018028631849386908,
+            "nu0": 0.01,
+            "residual_relative": 5.966711761024595e-14
+          },
+          {
+            "amplitude": 1.8047655082033758,
+            "converged": true,
+            "n": 401,
+            "nu": 0.017995833422658446,
+            "nu0": 0.3,
+            "residual_relative": 4.095092628599175e-15
+          },
+          {
+            "amplitude": 1.8047655082034992,
+            "converged": true,
+            "n": 401,
+            "nu": 0.017995833422662862,
+            "nu0": 0.01,
+            "residual_relative": 5.663891459781318e-14
+          },
+          {
+            "amplitude": 1.8053103622523403,
+            "converged": true,
+            "n": 801,
+            "nu": 0.017993756223880317,
+            "nu0": 0.3,
+            "residual_relative": 1.5217008079180922e-14
+          },
+          {
+            "amplitude": 1.805310362252475,
+            "converged": true,
+            "n": 801,
+            "nu": 0.017993756223884553,
+            "nu0": 0.01,
+            "residual_relative": 5.5767807091219983e-14
+          }
+        ],
+        "this_leg_min_over_max_amplitude": 0.998781758616475,
+        "this_leg_relative_span_over_converged": 0.00021128696500410365,
+        "this_leg_scheme": [
+          {
+            "amplitude": 1.803110257835541,
+            "converged": true,
+            "n": 201,
+            "nu": 0.017997434111263973,
+            "nu0": 0.3,
+            "residual_relative": 3.548912769088818e-15
+          },
+          {
+            "amplitude": 1.8031102578356835,
+            "converged": true,
+            "n": 201,
+            "nu": 0.017997434111268595,
+            "nu0": 0.01,
+            "residual_relative": 5.773379797647558e-14
+          },
+          {
+            "amplitude": 1.8047531327383128,
+            "converged": true,
+            "n": 401,
+            "nu": 0.017993853744906786,
+            "nu0": 0.3,
+            "residual_relative": 1.368509245343153e-14
+          },
+          {
+            "amplitude": 1.8047531327384416,
+            "converged": true,
+            "n": 401,
+            "nu": 0.01799385374491155,
+            "nu0": 0.01,
+            "residual_relative": 6.019320944111191e-14
+          },
+          {
+            "amplitude": 1.805309560652291,
+            "converged": true,
+            "n": 801,
+            "nu": 0.017993632007977232,
+            "nu0": 0.3,
+            "residual_relative": 6.349847760902736e-14
+          },
+          {
+            "amplitude": 1.805309560652401,
+            "converged": true,
+            "n": 801,
+            "nu": 0.017993632007978707,
+            "nu0": 0.01,
+            "residual_relative": 8.112196082682214e-14
+          }
+        ]
+      },
+      {
+        "a": 0.45,
+        "all_converged_signs_negative_leg185": true,
+        "all_converged_signs_negative_this_leg": true,
+        "all_converged_signs_positive_leg185": false,
+        "all_converged_signs_positive_this_leg": false,
+        "leg185_min_over_max_amplitude": 0.9398606408265334,
+        "leg185_relative_span_over_converged": 0.6663147855584549,
+        "leg185_scheme": [
+          {
+            "amplitude": 1.337273916033778,
+            "converged": true,
+            "n": 201,
+            "nu": -0.0048613938408847545,
+            "nu0": 0.3,
+            "residual_relative": 1.026649855900461e-15
+          },
+          {
+            "amplitude": 1.3372739158932343,
+            "converged": true,
+            "n": 201,
+            "nu": -0.004861393840917546,
+            "nu0": 0.01,
+            "residual_relative": 7.053314299581585e-16
+          },
+          {
+            "amplitude": 1.3196274772154806,
+            "converged": true,
+            "n": 401,
+            "nu": -0.006066363468014141,
+            "nu0": 0.3,
+            "residual_relative": 1.695888574692953e-14
+          },
+          {
+            "amplitude": 1.267490316217005,
+            "converged": true,
+            "n": 401,
+            "nu": -0.007929355783055808,
+            "nu0": 0.01,
+            "residual_relative": 2.8301607694588686e-14
+          },
+          {
+            "amplitude": 1.348566801049799,
+            "converged": true,
+            "n": 801,
+            "nu": -0.003973770347788826,
+            "nu0": 0.3,
+            "residual_relative": 1.0914363157134443e-14
+          },
+          {
+            "amplitude": 1.2674648578320524,
+            "converged": true,
+            "n": 801,
+            "nu": -0.007929676046517545,
+            "nu0": 0.01,
+            "residual_relative": 2.9784420833844064e-14
+          }
+        ],
+        "this_leg_min_over_max_amplitude": 0.00627836739038601,
+        "this_leg_relative_span_over_converged": 3.9110486189972518,
+        "this_leg_scheme": [
+          {
+            "amplitude": 1.0355644097229102,
+            "converged": true,
+            "n": 201,
+            "nu": -0.009173065577974098,
+            "nu0": 0.3,
+            "residual_relative": 2.4381194458832857e-14
+          },
+          {
+            "amplitude": 17.42755140055681,
+            "converged": true,
+            "n": 201,
+            "nu": -0.00198645002973853,
+            "nu0": 0.01,
+            "residual_relative": 2.404044043790743e-14
+          },
+          {
+            "amplitude": 0.2534723132505405,
+            "converged": true,
+            "n": 401,
+            "nu": -0.0010985884618431618,
+            "nu0": 0.3,
+            "residual_relative": 1.3250437423002568e-13
+          },
+          {
+            "amplitude": 0.2534723152516319,
+            "converged": true,
+            "n": 401,
+            "nu": -0.0010985884871929353,
+            "nu0": 0.01,
+            "residual_relative": 4.047227897795799e-15
+          },
+          {
+            "amplitude": 0.10941657156003966,
+            "converged": true,
+            "n": 801,
+            "nu": -0.00020255388787650792,
+            "nu0": 0.3,
+            "residual_relative": 5.527743444605931e-14
+          },
+          {
+            "amplitude": 0.1094165704075319,
+            "converged": true,
+            "n": 801,
+            "nu": -0.00020255388336020352,
+            "nu0": 0.01,
+            "residual_relative": 2.9187155919625734e-12
+          }
+        ]
+      },
+      {
+        "a": 0.5,
+        "all_converged_signs_negative_leg185": true,
+        "all_converged_signs_negative_this_leg": true,
+        "all_converged_signs_positive_leg185": false,
+        "all_converged_signs_positive_this_leg": false,
+        "leg185_min_over_max_amplitude": 0.9136768698421821,
+        "leg185_relative_span_over_converged": 0.6216755848028611,
+        "leg185_scheme": [
+          {
+            "amplitude": 1.2463686071572688,
+            "converged": true,
+            "n": 201,
+            "nu": -0.006547764229305417,
+            "nu0": 0.3,
+            "residual_relative": 1.0230959039512088e-15
+          },
+          {
+            "amplitude": 1.2463686071355542,
+            "converged": true,
+            "n": 201,
+            "nu": -0.006547764228974123,
+            "nu0": 0.01,
+            "residual_relative": 1.1992718867756308e-15
+          },
+          {
+            "amplitude": 1.2094309180493037,
+            "converged": true,
+            "n": 401,
+            "nu": -0.008175246262768656,
+            "nu0": 0.3,
+            "residual_relative": 1.4154107758997092e-14
+          },
+          {
+            "amplitude": 1.1664451119966548,
+            "converged": true,
+            "n": 401,
+            "nu": -0.00895316044499692,
+            "nu0": 0.01,
+            "residual_relative": 9.054636984731442e-15
+          },
+          {
+            "amplitude": 1.2766338089619083,
+            "converged": true,
+            "n": 801,
+            "nu": -0.0044344797349480415,
+            "nu0": 0.3,
+            "residual_relative": 7.98400617857234e-15
+          },
+          {
+            "amplitude": 1.1664307825070186,
+            "converged": true,
+            "n": 801,
+            "nu": -0.008952891257814344,
+            "nu0": 0.01,
+            "residual_relative": 1.1444240134951939e-14
+          }
+        ],
+        "this_leg_min_over_max_amplitude": 0.48319381387803584,
+        "this_leg_relative_span_over_converged": 1.192246528942761,
+        "this_leg_scheme": [
+          {
+            "amplitude": 0.926409333947481,
+            "converged": false,
+            "n": 201,
+            "nu": -0.00868101012721925,
+            "nu0": 0.3,
+            "residual_relative": 0.01771932764616702
+          },
+          {
+            "amplitude": 0.48598857789182454,
+            "converged": false,
+            "n": 201,
+            "nu": -0.0015445795968420505,
+            "nu0": 0.01,
+            "residual_relative": 0.00701830098071279
+          },
+          {
+            "amplitude": 0.22602528003274078,
+            "converged": true,
+            "n": 401,
+            "nu": -0.0008292690991670638,
+            "nu0": 0.3,
+            "residual_relative": 4.358049971964654e-15
+          },
+          {
+            "amplitude": 0.22602528003405145,
+            "converged": true,
+            "n": 401,
+            "nu": -0.0008292690991776599,
+            "nu0": 0.01,
+            "residual_relative": 3.5331570470860095e-15
+          },
+          {
+            "amplitude": 0.10921401709250439,
+            "converged": true,
+            "n": 801,
+            "nu": -0.0002024637046692749,
+            "nu0": 0.3,
+            "residual_relative": 4.965826367923051e-15
+          },
+          {
+            "amplitude": 0.11798099653296273,
+            "converged": true,
+            "n": 801,
+            "nu": -0.00024193697511957726,
+            "nu0": 0.01,
+            "residual_relative": 2.2675074402243557e-12
+          }
+        ]
+      }
+    ],
+    "why": "leg 185 refined a = 0.30 on four grids but banked a = 1/2 from n = 401 alone; this supplies the missing refinement, in BOTH discretizations."
+  },
+  "VERDICT": {
+    "clause_1_headline_nu_at_a_0p30": {
+      "claim": "nu = +0.01799364 at a = 0.30",
+      "grid_span_leg185_at_a_0p30": 0.001936881178653043,
+      "grid_span_this_leg_at_a_0p30": 0.00021128696500410365,
+      "leg185_value": 0.01799364,
+      "observed_order_of_convergence": 4.124760426851554,
+      "relative_agreement": 1.197601249452998e-06,
+      "significant_digits_agreeing": 5.921687759566925,
+      "this_leg_finest_grid": 0.017993619231932417,
+      "this_leg_ladder": [
+        0.017997434111263973,
+        0.017993853744906786,
+        0.017993632007977232,
+        0.017993619231932417
+      ],
+      "this_leg_richardson": 0.017993618450794256,
+      "truncation_spread_relative": 0.0005316714320785967,
+      "verdict": "CONFIRMED"
+    },
+    "clause_2_negative_values_at_chen_a": {
+      "claim": "the NEGATIVE values -0.00817525 / -0.00895316 at Chen's a = 1/2",
+      "leg185_amplitude_ratio_at_a_0p50": 0.9136768698421821,
+      "leg185_own_grid_span_at_a_0p50": 0.6216755848028611,
+      "leg185_values": [
+        -0.00817525,
+        -0.00895316
+      ],
+      "magnitude_ratio_leg185_over_this_leg": 10.327413632736782,
+      "magnitude_reproduced": false,
+      "sign_reproduced": true,
+      "this_leg_amplitude_collapse_ratio_at_a_0p50": 0.48319381387803584,
+      "this_leg_grid_span_at_a_0p50": 1.192246528942761,
+      "this_leg_values_same_grid_n401": [
+        -0.0008292690991670638,
+        -0.0008292690991776599
+      ],
+      "verdict": "SIGN CONFIRMED, MAGNITUDE NOT REPRODUCED",
+      "why": "leg 185 banked a = 1/2 from a SINGLE grid (n = 401) with no refinement, while refining a = 0.30 on four grids.  V5 supplies the missing refinement and finds leg 185's OWN scheme is not grid-converged there either.  So the two schemes are not disagreeing about a converged number -- they are landing on different roots of a square system that has several on this side of a*, which is why only the SIGN was ever bankable.  leg 185 said so ('only the sign is banked'); this leg measures that its stated 31% start-spread understates the real instability."
+    },
+    "clause_3_a_star_crossing": {
+      "claim": "the nu(a) zero crossing lands on leg 125's a* = 0.3864963972206034",
+      "leg125_a_star": 0.3864963972206034,
+      "leg125_a_star_inside_this_leg_bracket": false,
+      "leg185_own_two_starts_at_a_0p3865": [
+        3.5e-07,
+        -0.0042508
+      ],
+      "points_failed_to_converge": [
+        0.38,
+        0.4,
+        0.43000000000000005,
+        0.44
+      ],
+      "this_leg_bracket": [
+        0.36,
+        0.37
+      ],
+      "verdict": "NOT REPRODUCED",
+      "why": "leg 185's own two starts STRADDLE ZERO at a = 0.3865 (+3.5e-7 and -4.25e-3), so its own data never pinned the crossing; the '8-digit agreement' it reports is one of two disagreeing starts matching leg 125."
+    },
+    "escalation_required": true,
+    "gate_answer": "SPLIT -- headline CONFIRMED, a=1/2 MAGNITUDES NOT REPRODUCED (escalate)",
+    "sign_claim_overall": {
+      "claim": "nu > 0 below a*, nu < 0 at and above it (including Chen's a = 1/2)",
+      "sign_is_dilation_invariant": true,
+      "this_leg_negative_at": [
+        0.3865,
+        0.45,
+        0.5,
+        0.55,
+        0.7
+      ],
+      "this_leg_positive_at": [
+        0.3
+      ],
+      "verdict": "CONFIRMED AND STRENGTHENED",
+      "why": "the sign survives both discretizations, every grid, both starts, and -- because nu -> mu^2 nu under dilation -- every gauge.  That last point is new: it makes the sign claim gauge-independent, which leg 185 did not establish."
+    }
+  },
+  "date": "2026-08-07",
+  "leg": 210,
+  "no_dynamics_run": true,
+  "route": "M2SV",
+  "seconds_total": 2894.5035285949707,
+  "what_this_is": "INDEPENDENT VERIFICATION of leg 185's reparametrized nu measurement. Float, discretised, truncated.  No certificate.  Confirming leg 185's number is a REPRODUCIBILITY statement about this repository's own computation, NOT an existence result about gCLM."
+}
