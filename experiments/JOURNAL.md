@@ -3771,3 +3771,17 @@ preempted agents had reached a landing.
   independently. One cosmetic typo found (leg 256's own novelty file
   misprints 1.0114x as 1.1145x; the journal and banked JSON are correct, no
   gate depends on it), not repaired.
+- **Leg 271 (Route-PUB2R2) -- gate YES, landed. Third iteration on PUB2's
+  truncation-independence defect.** A documented 12-pattern sweep of both
+  TECHNICAL and BLOG files found 7 sites needing repair -- leg 268 fixed 2,
+  its verifier (verify_268) found 3 more, this leg's own systematic sweep
+  found 4 MORE beyond those (including a BLOG "does have a floor" claim
+  sitting 9 lines from leg 268's own contradicting correction). Zero sites
+  asserting independence remain, per the documented search. Preserved a real
+  mathematical distinction while fixing it: leg 127's decay result is a
+  PROVED THEOREM, leg 176's 4.0318 figure is a numerically-measured ladder --
+  the fix marks leg 127's mechanism "measured absent" rather than "proved
+  absent" in context, not conflating the two. Leg 268's companion artifact
+  and leg 176's banked JSON: 0 bytes changed. No escalation, no ban touched.
+  A dedicated post-landing verifier is in flight given this is iteration
+  three on the same document.
