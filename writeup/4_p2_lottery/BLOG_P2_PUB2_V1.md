@@ -11,7 +11,7 @@ Technical version, with every number and the file it was read from:
 
 ---
 
-We spent about seventy work-legs failing to build a computer-assisted proof for a
+We spent seven successive work-legs failing to build a computer-assisted proof for a
 one-dimensional fluid model. The companion piece anatomises the failure into four causes. This
 one is about the question that outlived the anatomy, and about the fact that we can now answer
 it.

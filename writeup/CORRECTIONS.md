@@ -289,3 +289,71 @@ pass finds them in one place.
 Nothing here measures anything. Leg 176's gate answer, leg 127's theorem, leg 163's census and
 leg 182's `NO` are all exactly as they were. The object is the `a = 0` case only. **No ban lifts.
 No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**
+
+---
+
+## 7. `seven` vs `seventy`: one transcription error fixed, one figure banked as unanchored
+
+**Not a register row.** No reader came away believing a closure that was not there — this is a
+number-transcription defect and a provenance gap. It is filed here because leg 278 is the
+**declared final** correction pass on PUB2, and the standing rule from that leg's brief is
+*consistency-or-banked-residue*: anything not fixed in that pass is written down here rather
+than deferred to an eighth pass. An eighth pass requires the **user's own sign-off**.
+
+### The defect, and how it survived six passes
+
+PUB2 carried a `seven` / `seventy` split across four sites. Leg 270 found it (`C1`) and could
+not resolve it. Leg 276 inherited it, searched **within the read-set that leg 270's framing
+implied**, found no determining source, and honestly reported it as undetermined. `verify_276`
+§9 then found the anchor **one grep outside that read-set, in the same directory**:
+
+* `writeup/4_p2_lottery/BLOG_P2_ROUTECP_V1.md:12` — *"Seven legs of work (51–57) had produced a
+  negative result about a certification method"*
+* `writeup/4_p2_lottery/TECHNICAL_P2_ROUTENG_V1.md:22–24` — *"What seven legs held… Legs 51–57
+  produced every part of a negative result and assembled none of them"*
+
+Both name the same range. **The certificate-closure activity is legs 51–57 — seven.** That
+splits the four sites **2/2**, not 4/0.
+
+| site | text | status |
+|---|---|---|
+| `TECHNICAL_P2_PUB2_V1.md:35` | "**Seven** successive legs of this project failed to close such a certificate" | **correct**, anchored at legs 51–57. Not touched. |
+| `BLOG_P2_PUB2_V1.md:14` | "We spent about **seventy** work-legs failing to build a computer-assisted proof…" | **plain transcription error** — near-verbatim copy of `BLOG_P2_PUB1_V1.md:9` ("We spent **seven** successive work-legs…") with the number mistyped. **FIXED by leg 278** to *"We spent seven successive work-legs…"*, matching PUB1 verbatim and PUB2's own technical companion. |
+| `TECHNICAL_P2_PUB2_V1.md:627` | "the obstruction that consumed roughly **seventy** legs" | a **different, broader claim** — the span of the *obstruction*, not of the certificate attempts. **Unanchored.** Left standing; see below. |
+| `BLOG_P2_PUB2_V1.md:52` | "the wall we had been hitting for **seventy** legs" | same broader claim as `:627`. **Unanchored.** Left standing. |
+
+### The banked residue: `seventy` has no source, in either direction
+
+Leg 278 swept `writeup/`, `experiments/journal/` and `reports/` for an anchor to the
+seventy-leg obstruction span. **Result: zero.** The only occurrences of `seventy` outside the
+two PUB2 sites are `BLOG_P2_ROUTED_V9.md:13` (an unrelated factor-of-seventy bracket) and the
+meta-discussions in `writeup/novelty/leg_270.md`, `leg_276.md` and `verify_276.md` that are
+*about* this very question. By contrast `seven` / legs 51–57 has **two** independent banked
+sources. **That asymmetry is the finding, and it is recorded rather than repaired.**
+
+The two sites were **not** rewritten, deliberately. Substituting a different figure would
+replace one unanchored number with another; softening the sentence would edit a claim that
+`verify_276` §9 judged *defensible as a distinct, broader claim*. Neither is a fix, and this
+register's own rule is that a sentence with no source gets its lack of source written down.
+
+**What a reader should take from the two surviving `seventy` sites:** they are a rhetorical
+span for how long the `ℓ¹_w` obstruction was being walked into, **not a counted figure**, and
+nothing in PUB2's argument rests on the count. The load-bearing claim at
+`TECHNICAL_P2_PUB2_V1.md:627` is the clause *after* it — that the obstruction is a property of
+the certificate's **space**, not of the operator — which is leg 127's theorem and is anchored.
+
+### The process defect this closes, which is the more important half
+
+`verify_276` §10 diagnosed why PUB2 needed six passes: **each pass scoped its read-set to the
+prior pass's defect list.** Leg 278 was scoped by **artifact** instead — a claim-sharing sweep
+over all 117 markdown files in `writeup/4_p2_lottery/`, keying on every figure and named claim
+PUB2 prints. That sweep is what confirms the 2/2 split rather than inheriting it, and it is the
+reason this pass could be declared the last one.
+
+### The ceiling
+
+One word changed in one blog sentence. **0 arguments, 0 conclusions, 0 gate answers, 0 numbers
+moved** — leg 276's 122-row trace re-runs at **122/122 rows green, 185/185 numeric tokens
+byte-identical**, before and after the edit. Leg 176's gate answer, leg 127's theorem, leg 163's
+census and leg 182's `NO` are exactly as they were. The object is the `a = 0` case only. **No
+ban lifts. No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**
