@@ -4339,6 +4339,32 @@ preempted agents had reached a landing.
   Zero existing sentences reworded, 0 lines deleted anywhere. Does not
   touch the still-stale anchor JSON on main -- that remains leg
   297/252's territory.
+- **Leg 297 (Route-D11ANCHOR) -- ESCALATED BY ORCHESTRATOR OVERRIDE,
+  parked at branch `leg/297-d11anchor-v1`, NOT pushed, main untouched.**
+  Gate answered YES on its own terms, but this rewrites a banked results
+  file (`p2_route_d_v11_anchor.json`), which the standing orchestrator
+  mandate treats as one of four categories requiring the user's own
+  ruling -- the leg was dispatched with an explicit override to prepare
+  everything but stop short of pushing, regardless of its own confidence.
+  **Decision made, applying leg 252's own reasoning only**: selected
+  Option 3 of leg 252's three named options (re-bank deliberately, as its
+  own leg, with the environment pinned and the 202-leaf move stated as a
+  finding in its own right) -- Option 2 ("keep stale") was explicitly
+  ruled out by leg 252 itself ("the field is simply incorrect"); between
+  Options 1 and 3, leg 252's own residue #1 ("nothing records the
+  environment its banked artifacts were produced in") is exactly what
+  Option 3 supplies. **Execution**: reused leg 252's already-regenerated
+  JSON verbatim (no hand-edit, no re-derivation), verified (not assumed)
+  this environment matches leg 252's on every recorded axis (hostname,
+  CPU, python/numpy/scipy-openblas versions), and independently
+  re-solved the single decisive row (a=0.45, n=801) fresh today --- exact
+  float match to leg 252's regeneration, justifying reuse over a
+  redundant ~7-8 CPU-hour full rerun. Banked `margin` at a=0.45 would
+  move from 10467862585.933441 (stale) to 0.015991923774880644 -- a
+  6.5457e+11x correction, matching leg 252's own reported figure. Merge
+  gate confirmed PASS against origin/main on the prepared branch.
+  **This is now with the user, alongside the leg 280 sign-off and the
+  Phase-1 packet.**
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
