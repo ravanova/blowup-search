@@ -31,7 +31,7 @@ prose as before.
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
-| F | 289 | D1X | yes |
+| F | 290 | D1XN | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
@@ -12630,4 +12630,58 @@ Effective immediately-dispatchable: 0 (280 user-gated, four sites under one sign
 
 Nothing in this update lifts a ban; 288's negative is recorded as a decisive
 mathematical result, not a setback. Clay stays ~0.05%. No new direction question
+raised.
+
+---
+
+## DM update, 2026-08-07 — 289 (D1X) landed gate YES, honestly scoped (predictive
+within fixed N, coefficient N-dependent, no cross-N transfer): slot F = fresh leg 290
+testing whether the N-dependence itself has a law; no news on 226
+
+**289, recorded at full strength:** D1's exact κ^(-1/2) law validated as a predictive
+shortcut (0.0 and 1.53e-16 relative error on held-out points) WITHIN a fixed
+discretization; its coefficient is N-dependent (1.90e-05), so it saves a fresh κ-sweep
+at one N but does not transfer across N. Correctly scoped, not oversold.
+
+**226 status: no update since the last readout** — still in flight in slot J, no
+report received. The consolidated three-input rework (236+226+252, with mandatory
+re-basing and provenance tiers) remains pre-committed at top of queue the moment it
+reports; nothing changes about that pre-commitment this update.
+
+**Slot F: fresh leg 290, drafted on the natural next question 289 leaves open**
+[FLOOR-ELIGIBLE: math]:
+
+```
+### 290 — ROUTE-D1XN: DOES THE N-DEPENDENT COEFFICIENT OF D1's LAW HAVE ITS OWN LAW?
+(289's leftover — if the coefficient scales predictably in N, D1's shortcut regains
+cross-N transfer)
+**Thesis.** 289 found D1's κ^-1/2 law's coefficient is N-dependent (1.90e-05 at the
+tested N) but did not test whether that dependence itself follows a simple form (e.g.
+a power law in N, matching the certificate's known truncation-decay rate). If it does,
+D1's shortcut extends across N; if not, the N-restriction is fundamental, not just
+untested.
+**Gate.** Across the N values already present in 249's/281's banked sweeps (no new
+certificate compute — same discipline as 289), does the coefficient's N-dependence fit
+a single named closed form to the precision those legs measured?
+  yes -> Bank the extended law; flag D1 as a cross-N predictive shortcut, superseding
+         289's N-restriction by citation (289's own report stays correct as scoped at
+         the time).
+  no -> Bank the negative: the N-restriction is real, not an artifact of undersampling.
+        Name which N values break the best-fit form, at full strength.
+**Territory.** experiments/p2_route_d1xn_v1_ncoeff.py,
+               writeup/data/p2_route_d1xn_v1_ncoeff.json,
+               writeup/novelty/leg_290.md, experiments/journal/leg_290.md.
+               Reads (never edits) 289's report/JSON, 249's/281's sweep data.
+**Difficulty.** light-standard
+**Independence.** Own module, read-only overlaps, edits no document. Slot F, now.
+Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (F: 289 → 290). **Floor status: 5/10
+strictly (290, 285, 284, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234** —
+unchanged. Effective immediately-dispatchable: 0. Next fresh leg number: **291.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
 raised.
