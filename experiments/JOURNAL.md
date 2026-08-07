@@ -3785,3 +3785,9 @@ preempted agents had reached a landing.
   and leg 176's banked JSON: 0 bytes changed. No escalation, no ban touched.
   A dedicated post-landing verifier is in flight given this is iteration
   three on the same document.
+- **Leg 269 (Route-J176P) -- gate YES, landed, mechanical.** Leg 176's
+  journal prose slip (1.29e-14 vs the banked 1.4296e-14, a 9.76% error) fixed
+  with a correction note citing leg 249. Independently re-checked against
+  the banked JSON: 5 of 6 neighbouring claims in the same bullet block agree
+  exactly, confirming this was an isolated transcription slip, not a
+  symptom of a wider problem. No gate number touched.
