@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 265 | P2C | yes |
 | B | 271 | PUB2R2 | no |
-| C | 263 | WESC | no |
+| C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
@@ -11300,3 +11300,68 @@ landing (HIGH priority once clear — it gates actual submission); 229 blocked o
 Nothing in this update lifts a ban. The self-contradiction is recorded as a document
 defect under repair, not as any change to leg 176's or 249's findings, which stand as
 verified. Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — slot-C refill: 263 (WESC) landed clean (the p=1 nuance
+recorded), verify-256 landed fully independent; 228 promoted per order, fresh candidate
+272 drafted per the trigger; pre-commitment recorded for the 226 contingency
+
+**263 (WESC) landed (`7724e67`), recorded at full strength:** leg 111's "third dead
+realization" was a property of ONE UNCONSTRAINED p=1 TRIAL SPACE, not the operator — 134
+occurrences of the "three realizations" phrasing swept and pinned per-occurrence, 0
+unpinnable, only the 8 in-territory revival-reached sites edited, `plan_of_record.py`
+zero-diff confirmed. A new **`writeup/CORRECTIONS.md` register** now carries all four
+over-read closures — future correction legs should append there, not create parallel
+registers. **verify-256 landed (`18b3625`)**: fully independent confirmation of the
+Breden-Chu reproduction, including cloning the authors' own package and re-deriving
+their Z2 column from scratch — 256's gate YES now stands verified, strengthening the
+stage-V packet's reproduction row.
+
+**Slot C: leg 228 (Route-BHRV) promoted per reserve order** (resume from
+`verify/228-bhrv-v1`, novelty-pass only; spec/gate unchanged; anti-pausing clause).
+
+**Trigger fired (fresh drafting in the same update that promotes 228/210):**
+
+```
+### 272 — ROUTE-WESCV: INDEPENDENT VERIFICATION OF 263's 134-OCCURRENCE SWEEP AND
+8-SITE EDIT (the §7b discipline applied to a correction that touched the honesty ledger)
+**Thesis.** 263 edited the record ABOUT the record (over-read closures, a corrections
+register, per-occurrence triple pinning). Exactly because it landed clean and
+plan_of_record.py showed zero diff, the remaining risk is a MISSED occurrence or a
+mis-pinned edit — cheap to check independently, expensive to discover later.
+**Gate.** Does an independent re-run of the occurrence search (own patterns, not 263's)
+find (a) zero occurrences 263's sweep missed, (b) all 8 edited sites correctly pinned to
+the journal-triple and correctly re-worded, (c) plan_of_record.py byte-identical, and
+(d) CORRECTIONS.md's four entries each accurate against their source legs?
+  yes -> Bank; 263's correction stands independently confirmed.
+  no -> Name the missed/mis-pinned site(s) precisely; cut-a-rework applies per the
+        standing mandate.
+**Territory.** experiments/p2_route_wescv_v1_verify.py,
+               writeup/data/p2_route_wescv_v1_verify.json,
+               writeup/novelty/leg_272.md, experiments/journal/leg_272.md.
+               Reads everything 263 touched; edits none of it.
+**Difficulty.** light-standard
+**Independence.** Read-only on 263's territory. Dispatchable immediately; LOW-MEDIUM
+priority (behind 210/269 only if capacity is tight, else parallel).
+```
+
+**Pre-commitment for the 226 contingency (so no re-ranking is needed at the moment of
+confirmation):** if 226's real ARM D measurement confirms that Route-D v11's banked
+`grid_converged_a_max = 0.50` goes off-branch under the repaired verdict, that is a
+claim-adjacent exposure of a banked headline — **a rework/impact-trace leg gets cut at
+the top of the queue in the same update that records the finding**, extending 236's
+(RDDEP's) exposure list, which its own brief already tracks. Escalation to the user only
+if a written conclusion moves (same test as 247's precedent).
+
+**FLOOR-TABLE block updated in this same edit** (C: 263 → 228). **Floor status: 4/10
+strictly (265, 236, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 9 — legs 210, 269, 272, 270, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 3 (210, 269, 272); 270 blocked on 271's
+landing; 229 blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg
+number: **273.**
+
+Nothing in this update lifts a ban; 263's p=1 nuance narrows a death certificate's
+WORDING, already applied under Ruling 2's authority, and changes no live ban's basis.
+Clay stays ~0.05%. No direction question raised.
