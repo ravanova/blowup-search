@@ -1,0 +1,2919 @@
+{
+ "leg": 285,
+ "route": "P2S",
+ "what_this_is": "a SPECIFICATION dossier: leg 265's count of 15 absent apparatus terms, turned into a per-term bill of materials.  Builds nothing, pre-empts no construction decision.",
+ "clay_odds": "~0.05%, unchanged; no link of the L1->L4 chain moves",
+ "sources": {
+  "BCG": {
+   "arxiv": "2208.09445",
+   "title": "Smooth imploding solutions for 3D compressible fluids",
+   "eprint_md5": "45ea63c45a1a199ecfb4dc4a15431600",
+   "tex_lines": 6898,
+   "tex_basename": "RadialImplosion31_FinalArxiv.tex",
+   "independent_downloads_agreeing": [
+    "leg 251",
+    "leg 266",
+    "verify_251",
+    "leg 265",
+    "verify_265",
+    "leg 285 (this leg)"
+   ]
+  },
+  "CGSS": {
+   "arxiv": "2310.05325",
+   "title": "Non-radial implosion for compressible Euler and Navier-Stokes in T^3 and R^3",
+   "eprint_md5": "04676de9e3262b0740f4938dd8241b79",
+   "tex_lines": 3916,
+   "tex_basename": "FinalVersion_3DEulerNonradial.tex",
+   "independent_downloads_agreeing": [
+    "leg 265",
+    "verify_265",
+    "leg 285 (this leg)"
+   ]
+  }
+ },
+ "template_cited_not_claimed": {
+  "arxiv": "2509.12435",
+  "title": "Nonlinear stability of the Larson-Penston collapse",
+  "eprint_md5": "a0a136ed5e961276e135e86fa43fb01a",
+  "status": "unrefereed preprint (v1, 2025-09-15)",
+  "what_it_supplies": "interval arithmetic inside the mode-stability step of a radially imploding compressible self-similar profile, plus public VNODE-LP code; INVISCID (isothermal Euler-Poisson), so no F_dis"
+ },
+ "leg_265": {
+  "branch": "leg/265-p2c-v1",
+  "commit": "8e592d4",
+  "pr": 21,
+  "status": "parked, verified (writeup/novelty/verify_265.md on main: CONFIRMED, no gap found)",
+  "ledger": "writeup/data/p2_route_p2c_v1_costing.json",
+  "capabilities_index_size": 48,
+  "absent_count": 15,
+  "present_count": 3,
+  "live_control": "0 of 8 control terms absent",
+  "absent": [
+   "compressible fluid model",
+   "compressible/3D Euler",
+   "Navier-Stokes",
+   "adiabatic / gamma-law pressure",
+   "sound speed / density variable",
+   "radial / spherical geometry",
+   "ODE barrier argument",
+   "semigroup generation",
+   "maximally dissipative operator",
+   "non-autonomous forcing",
+   "self-similar time variable s",
+   "algebraically weighted high-order energy",
+   "bootstrap / continuity argument",
+   "topological / Brouwer degree argument",
+   "ball arithmetic (Arb) or interval ODE solver (VNODE-LP)"
+  ],
+  "recommended_target": {
+   "n": 3,
+   "r_range": [
+    1.070374,
+    1.094975
+   ],
+   "delta_dis_range": [
+    -0.5778,
+    -0.4302
+   ],
+   "why": "the only branch in the target window (1, 7/6] whose existence is UNCONDITIONAL -- BCG Theorem 1.1, all gamma > 1",
+   "k_at_7_6": 16.3479210516613
+  }
+ },
+ "leg_265_row_to_spec_record": {
+  "compressible fluid model": [
+   "A1"
+  ],
+  "compressible/3D Euler": [
+   "A2"
+  ],
+  "Navier-Stokes": [
+   "A3"
+  ],
+  "adiabatic / gamma-law pressure": [
+   "A4"
+  ],
+  "sound speed / density variable": [
+   "A5"
+  ],
+  "radial / spherical geometry": [
+   "A6"
+  ],
+  "ODE barrier argument": [
+   "A7"
+  ],
+  "semigroup generation": [
+   "A8"
+  ],
+  "maximally dissipative operator": [
+   "A9"
+  ],
+  "non-autonomous forcing": [
+   "A10"
+  ],
+  "self-similar time variable s": [
+   "A11"
+  ],
+  "algebraically weighted high-order energy": [
+   "A12"
+  ],
+  "bootstrap / continuity argument": [
+   "A13"
+  ],
+  "topological / Brouwer degree argument": [
+   "A14"
+  ],
+  "ball arithmetic (Arb) or interval ODE solver (VNODE-LP)": [
+   "A15a",
+   "A15b"
+  ]
+ },
+ "existing_terms": {
+  "E1": {
+   "term": "shooting argument",
+   "rows": [
+    "solver/bc_weighted_sobolev.py",
+    "solver/viscous_novelty.py"
+   ],
+   "leg_265_adjudication": "float RK4 seed-finders for scalar ODEs, not rigorous interval barrier/shooting for a 2D system with a degenerate saddle -- 'the cheap half only'",
+   "transfers": "PARTIAL"
+  },
+  "E2": {
+   "term": "Frobenius / Taylor recurrence at a degenerate saddle",
+   "rows": [
+    "solver/origin_h2_certificate.py"
+   ],
+   "leg_265_adjudication": "the row is a QUADRATURE Taylor technique, not a Frobenius recurrence -- 'does not transfer'",
+   "transfers": "NO"
+  },
+  "E3": {
+   "term": "spectral gap of a non-self-adjoint operator",
+   "rows": [
+    "solver/origin_h2_certificate.py"
+   ],
+   "leg_265_adjudication": "the a=0 CLM operator's, capped at a=0 (legs 163/176) -- 'does not transfer'",
+   "transfers": "NO"
+  }
+ },
+ "genuine_asset": {
+  "module": "solver/interval.py",
+  "what": "the interval-arithmetic core (Route-D)",
+  "serves": [
+   "A7",
+   "A15a"
+  ],
+  "note": "substrate, not an apparatus term; leg 265 names it as the single genuine asset"
+ },
+ "specification": {
+  "A4": {
+   "name": "adiabatic / gamma-law pressure",
+   "computes": "the barotropic pressure law and the two constants every other term is a function of: gamma, and alpha = (gamma-1)/2.",
+   "definition": "p(rho) = rho^gamma / gamma for gamma > 1; alpha = (gamma-1)/2. At the target gamma = 7/5: alpha = 1/5, so 1/alpha = 5.",
+   "anchors": [
+    [
+     "BCG",
+     "the ideal gas law p(rho)=rho^gamma/gamma, stated with eq:Euler",
+     141
+    ],
+    [
+     "BCG",
+     "alpha = (gamma-1)/2, definition of the rescaled sound speed",
+     180
+    ]
+   ],
+   "inputs": "gamma: interval, gamma > 1",
+   "outputs": "p: interval -> interval (monotone); alpha: interval; 1/alpha: interval",
+   "deps": [],
+   "existing": "none -- nothing in the 48-row index is a pressure law (net N-internal: the 5 'adiabatic' greps over solver/+experiments/ are all 'adiabaticity' in the continuation sense, a homonym; adjudicated in writeup/novelty/leg_285.md)",
+   "contract_complete": true
+  },
+  "A6": {
+   "name": "radial / spherical geometry",
+   "computes": "the 3D radial reduction: div, grad and Laplacian acting on radially symmetric fields, and the resulting one-dimensional operators in R.",
+   "definition": "For radial (u, rho): div(rho u) = R^-2 d_R(R^2 rho u); the isentropic radial Euler system is d_t u + u d_R u + (gamma rho)^-1 d_R(rho^gamma) = 0, d_t rho + R^-2 d_R(R^2 rho u) = 0.  The viscous radial form carries -(R^2 rho)^-1 d_R(R^2 d_R u) + 2u/(R^2 rho).",
+   "anchors": [
+    [
+     "BCG",
+     "eq:wombat",
+     175
+    ],
+    [
+     "BCG",
+     "eq:ice",
+     467
+    ]
+   ],
+   "inputs": "a radial field on R>0, its derivative order",
+   "outputs": "the radially-reduced differential operator; the 3D volume element 4 pi R^2 dR",
+   "deps": [],
+   "existing": "none -- the repository's whole certificate stack is 1D-line or 2D-periodic; no row carries a spherical volume element",
+   "contract_complete": true
+  },
+  "A11": {
+   "name": "self-similar time variable s",
+   "computes": "the dynamic-rescaling change of variables, and the exponential bookkeeping every decay/growth rate in the argument is measured in.",
+   "definition": "s = -log(T-t)/r, zeta = R/(T-t)^{1/r} = e^s R = exp(xi); xi = log(R/(T-t)^{1/r}) is the stationary (Euler) self-similar variable. The parameter r is the self-similar scaling exponent; the target is r = r^(3) in (1.070374, 1.094975).",
+   "anchors": [
+    [
+     "BCG",
+     "definition of s and zeta",
+     477
+    ],
+    [
+     "BCG",
+     "xi, in eq:ansatz:intro",
+     181
+    ],
+    [
+     "BCG",
+     "eq:main -- the s-dependent system",
+     480
+    ]
+   ],
+   "inputs": "T: interval (blow-up time), r: interval, (R, t)",
+   "outputs": "(s, zeta); the transported derivatives d_s, d_zeta; the prefactor exponents",
+   "deps": [],
+   "existing": "none -- the repository's rescaled-flow work (legs 42-44, Route-E/H/I) is gCLM's scaling structure, which Route-E states in its own words is not NS's",
+   "contract_complete": true
+  },
+  "A15a": {
+   "name": "ball arithmetic (Arb)",
+   "computes": "rigorous enclosures of the explicit algebraic/analytic expressions the profile construction evaluates -- barrier polynomials, Taylor coefficients, r_j enclosures -- at controlled precision.",
+   "definition": "midpoint-radius (ball) arithmetic; BCG use the Arb C library, at 2000 bits for the 10000-coefficient lemma because Z_10000 ~ 10^46770.",
+   "anchors": [
+    [
+     "BCG",
+     "sec:computer, 'the Arb library ... its C implementation'",
+     5693
+    ],
+    [
+     "BCG",
+     "Table tablecompi (runtimes; longest 23:33:55, and 13:36:38 for lemma:tenthousand_7o5)",
+     5694
+    ],
+    [
+     "BCG",
+     "lemma:enclosure_r3 / lemma:enclosure_r4 (worked enclosure form)",
+     5701
+    ]
+   ],
+   "inputs": "an expression tree over intervals; a precision in bits",
+   "outputs": "a ball (midpoint, radius) provably containing the true value",
+   "deps": [],
+   "existing": "solver/interval.py -- the genuine asset; this is the ONE absent term with a real substrate already in the repository",
+   "contract_complete": true
+  },
+  "A5": {
+   "name": "sound speed / density variable",
+   "computes": "the change of unknowns from density to rescaled sound speed, and the vacuum lower bound that keeps the dissipative multiplier finite.",
+   "definition": "sigma = alpha^-1 rho^alpha, alpha = (gamma-1)/2.  The dissipative multiplier is S^{-1/alpha}; at gamma = 7/5, 1/alpha = 5, i.e. a FIFTH-order pole at the vacuum, whose order diverges as gamma -> 1.  Controlled only by lower bounds on S.",
+   "anchors": [
+    [
+     "BCG",
+     "sigma = alpha^-1 rho^alpha",
+     180
+    ],
+    [
+     "CGSS",
+     "'lower bounds for S to rule out possible vacuum'",
+     494
+    ]
+   ],
+   "inputs": "rho: interval > 0; alpha from A4",
+   "outputs": "sigma: interval; S^{-1/alpha}: interval, requires a certified S_min > 0",
+   "deps": [
+    "A4"
+   ],
+   "existing": "none",
+   "contract_complete": true
+  },
+  "A1": {
+   "name": "compressible fluid model",
+   "computes": "the ambient PDE system in conservation form -- the object the whole certificate is about.",
+   "definition": "d_t(rho u) + div(rho u tensor u) + grad p(rho) = 0, d_t rho + div(rho u) = 0, with p(rho) = rho^gamma/gamma.",
+   "anchors": [
+    [
+     "BCG",
+     "eq:Euler",
+     134
+    ],
+    [
+     "BCG",
+     "eq:NS",
+     143
+    ]
+   ],
+   "inputs": "(rho, u) on R^3; gamma from A4",
+   "outputs": "the residual of the system; its conserved quantities",
+   "deps": [
+    "A4"
+   ],
+   "existing": "none -- every object in the 48-row index is incompressible-adjacent or a 1D model (CLM/gCLM, Hou-Luo, Boussinesq)",
+   "contract_complete": true
+  },
+  "A2": {
+   "name": "compressible / 3D Euler",
+   "computes": "the inviscid self-similar profile system whose solution IS the target object, in the coordinates the construction runs in.",
+   "definition": "Riemann invariants w = u + sigma, z = u - sigma diagonalise the radial system into nonlinear transport form; the self-similar ansatz reduces it to the AUTONOMOUS 2D system dU/dxi = N_U/D, dS/dxi = N_S/D, whose orbit must connect P_0 to P_infinity through the regular singular point P_s.  CGSS states the same stationary profile system independently, explicitly at nu = 0.",
+   "anchors": [
+    [
+     "BCG",
+     "eq:Riemann:invariants",
+     250
+    ],
+    [
+     "BCG",
+     "eq:Euler:Riemann",
+     256
+    ],
+    [
+     "BCG",
+     "eq:DS (the autonomous phase-portrait system)",
+     186
+    ],
+    [
+     "BCG",
+     "eq:mainother (W,Z form)",
+     268
+    ],
+    [
+     "CGSS",
+     "eq:ss_profiles, written out for nu = 0",
+     318
+    ],
+    [
+     "CGSS",
+     "eq:US2 -- the viscous system the profiles sit in",
+     290
+    ]
+   ],
+   "inputs": "(U, S) or (W, Z); r from A11; alpha from A4",
+   "outputs": "the vector field (N_U/D, N_S/D); the loci D=0, N_U=0, N_S=0; the points P_0, P_s, P_infinity",
+   "deps": [
+    "A1",
+    "A5",
+    "A6"
+   ],
+   "existing": "none as a system.  E2 (Frobenius/Taylor at a degenerate saddle) is the row that WOULD serve the P_s expansion and leg 265 adjudicated it does not transfer (quadrature, not a Frobenius recurrence)",
+   "contract_complete": true
+  },
+  "A3": {
+   "name": "Navier-Stokes",
+   "computes": "the viscous system -- the equation the certificate must actually be about, as opposed to the Euler profile it perturbs around.",
+   "definition": "d_t(rho u) + div(rho u tensor u) + grad p(rho) - mu_1 Delta u - (mu_1 + mu_2) grad div u = 0, d_t rho + div(rho u) = 0, with Lame coefficients mu_1 > 0, 2 mu_1 + mu_2 > 0.  BCG fix mu_1 = 1, mu_2 = -1.  Radially this is eq:ice.  Initial density is CONSTANT at infinity, to rule out the singularity being an artifact of vacuum.",
+   "anchors": [
+    [
+     "BCG",
+     "eq:NS",
+     143
+    ],
+    [
+     "BCG",
+     "'we fixed mu_1 = 1 and mu_2 = -1'",
+     471
+    ],
+    [
+     "BCG",
+     "eq:ice (spherically symmetric viscous form)",
+     467
+    ]
+   ],
+   "inputs": "(rho, u); (mu_1, mu_2); gamma from A4",
+   "outputs": "the viscous residual; the dissipative operator Delta u / (R^2 rho) terms",
+   "deps": [
+    "A1",
+    "A5",
+    "A6"
+   ],
+   "existing": "none",
+   "contract_complete": true
+  },
+  "A10": {
+   "name": "non-autonomous forcing",
+   "computes": "F_dis -- the dissipative forcing that makes the viscous problem a perturbation of the Euler profile, together with its exponential rate delta_dis.  THIS IS THE TERM leg 251's obligation 1 is about.",
+   "definition": "F_dis = (r^{1+1/alpha} 2^{1/alpha-1} / (alpha^{1/alpha} zeta^2 (W-Z)^{1/alpha})) e^{(2-r+(1-r)/alpha)s} (d_zeta(zeta^2 d_zeta(W+Z)) - 2(W+Z)).  In (U,S) coordinates |F_dis| <~ |e^{-delta_dis s} Delta U / S^{1/alpha}|.  The rate is -delta_dis = 2 - r + (1-r)/alpha, i.e. at gamma = 7/5, delta_dis = 6r - 7.  BCG's own words: 'the dissipative forcing'.  CGSS writes the same object independently as nu C_dis e^{-delta_dis s} Delta U / S^{1/alpha}.",
+   "anchors": [
+    [
+     "BCG",
+     "eq:mattmurdock -- F_dis defined",
+     2116
+    ],
+    [
+     "BCG",
+     "eq:tildeWZ:def2 -- F_dis enters the RHS",
+     2136
+    ],
+    [
+     "BCG",
+     "'the dissipative forcing'",
+     2142
+    ],
+    [
+     "BCG",
+     "eq:cortazar -- (U,S) form",
+     3595
+    ],
+    [
+     "BCG",
+     "eq:delta:dis",
+     489
+    ],
+    [
+     "BCG",
+     "eq:r:restriction, r > 2 gamma/(gamma+1)",
+     493
+    ],
+    [
+     "CGSS",
+     "the same term, stated independently",
+     382
+    ]
+   ],
+   "inputs": "(W,Z) or (U,S); s from A11; S^{-1/alpha} from A5; r",
+   "outputs": "F_dis as an X-valued function of s; the scalar delta_dis; the enclosure ||F_dis(.,s)||_X",
+   "deps": [
+    "A3",
+    "A5",
+    "A11"
+   ],
+   "existing": "none.  This is the term the repository has NO analogue of: every forcing in the 48-row index is autonomous",
+   "contract_complete": true
+  },
+  "A7": {
+   "name": "ODE barrier argument",
+   "computes": "a rigorous trapping region proving the smooth integral curve through P_s continues to xi = +infinity and lands on P_infinity = (0,0), staying where D_W > 0, D_Z > 0.",
+   "definition": "a DOUBLE barrier: a near-left barrier b^nl(s) starting above the smooth solution with the field pointing upwards, concatenated at its intersection with a far-left barrier b^fl(t) = (W_0 + B_1 W_1 t + B_2 t^2/2, Z_0 + B_1 Z_1 t + B_3 t^2/2), with B_1, B_2, B_3 chosen so that b^fl(1) = P_eye and the expansion cancels to first order there.  P_eye = (X_0, Y_0) = (2(sqrt3-1)r/(3gamma-1), -2(1+sqrt3)r/(3gamma-1)) is the unique zero of N_W = N_Z = 0 in {W > Z}.",
+   "anchors": [
+    [
+     "BCG",
+     "sec:left",
+     865
+    ],
+    [
+     "BCG",
+     "prop:left_main",
+     868
+    ],
+    [
+     "BCG",
+     "'a double barrier argument'",
+     871
+    ],
+    [
+     "BCG",
+     "eq:bfl",
+     874
+    ],
+    [
+     "BCG",
+     "eq:Peye",
+     880
+    ],
+    [
+     "BCG",
+     "eq:defBi",
+     894
+    ],
+    [
+     "BCG",
+     "sec:right (the mirror argument right of P_s)",
+     1099
+    ]
+   ],
+   "inputs": "the field from A2; enclosures from A15a; a candidate r interval",
+   "outputs": "a certified sign pattern along the barrier => a trapping region => the connecting-orbit statement",
+   "deps": [
+    "A2",
+    "A15a"
+   ],
+   "existing": "E1 (shooting) at PARTIAL -- leg 265: float RK4 seed-finders for scalar ODEs, 'the cheap half only'.  The seed-finding half exists; the rigorous-barrier half does not.  E1's float output is a legitimate INPUT here (it proposes the barrier's coefficients), which the certified half then encloses.",
+   "contract_complete": true
+  },
+  "A9": {
+   "name": "maximally dissipative operator",
+   "computes": "the decomposition L = A_0 - delta_g + K of the linearised profile operator, with A_0 maximally dissipative, delta_g > 0 and K compact -- the structural fact that makes the unstable spectrum FINITE.",
+   "definition": "A_0 maximally dissipative on a Hilbert space H gives: A_0 closed, sigma(A_0) contained in {Re lambda <= 0}, resolvent bound ||(-A_0 + lambda)^-1|| <= (Re lambda)^-1 for Re lambda > 0, A_0* also maximally dissipative.  For L = A_0 - delta_g + K the set Lambda = sigma(L) intersect {Re lambda > -delta_g/2} is FINITE and consists only of eigenvalues of finite algebraic multiplicity, giving the finite-dimensional unstable space V.  The space is X = H_0^{2m}(B(0,2)) for radially symmetric (U,S), with the usual H^{2m} norm -- UNWEIGHTED, on the ball of radius 2.",
+   "anchors": [
+    [
+     "BCG",
+     "the space X, rem:espartero",
+     2238
+    ],
+    [
+     "BCG",
+     "L = A_0 - delta_g + K established",
+     2707
+    ],
+    [
+     "BCG",
+     "the construction of A_0 on the finite-codimension space",
+     2718
+    ],
+    [
+     "BCG",
+     "ss 'Abstract results on maximally dissipative operators'",
+     2727
+    ],
+    [
+     "BCG",
+     "lemma:propertiesmaximalaccretive",
+     2731
+    ],
+    [
+     "BCG",
+     "lemma:abstract_result, item:spectrum -- Lambda finite",
+     2764
+    ],
+    [
+     "BCG",
+     "eq:spaceV -- the finite-dimensional unstable space V",
+     2766
+    ],
+    [
+     "CGSS",
+     "prop:maxdissmooth, the same structure non-radially",
+     473
+    ]
+   ],
+   "inputs": "the linearised operator L on X = H_0^{2m}(B(0,2)); m",
+   "outputs": "(A_0, delta_g, K); the finite set Lambda; the finite-dim unstable space V; the projections P_uns, P_sta; the decomposition X = V (+) V*^perp",
+   "deps": [
+    "A2",
+    "A6"
+   ],
+   "existing": "E3 (spectral gap of a non-self-adjoint operator) at NO -- leg 265: it is the a=0 CLM operator's, capped at a=0 (legs 163/176), 'does not transfer'.  The delta_g here is a DIFFERENT object: it is a decomposition parameter of L, not a measured gap of a fixed matrix.",
+   "contract_complete": true
+  },
+  "A12": {
+   "name": "algebraically weighted high-order energy",
+   "computes": "E_2K -- the high-derivative weighted energy in which the dissipative term is controlled, and the sign extraction that controls it.",
+   "definition": "E_2K(s)^2 = int_{R^3} ((Delta^K U)^2 + (Delta^K S)^2) phi^{2K}(zeta) dzeta, with an ALGEBRAIC weight phi(zeta) = 1 for zeta <= zeta_0 and phi = zeta^{2(1-eta_w)}/(2 zeta_0^{2(1-eta_w)}) for zeta >= 4 zeta_0, smooth in between with |grad phi| zeta / phi <= 2(1-eta_w) and phi >= 1.  The dissipative contribution is J = int (r^{1+1/alpha}/alpha^{1/alpha}) e^{-delta_dis s} Delta^K(Delta U / S^{1/alpha}) Delta^K U phi^{2K}.  J CANNOT be bounded -- it has more derivatives than the energy -- so the strategy is to EXTRACT THE CORRECT SIGN: J is dominated by -G^2 with G^2 = sum int (grad Delta^K U_i)^2 / S^{1/alpha} phi^{2K} >= 0.",
+   "anchors": [
+    [
+     "BCG",
+     "eq:weightedhighenery -- E_2K defined",
+     3029
+    ],
+    [
+     "BCG",
+     "the weight phi",
+     3156
+    ],
+    [
+     "BCG",
+     "eq:phiderbound",
+     3164
+    ],
+    [
+     "BCG",
+     "J defined; 'the dissipative term'",
+     3896
+    ],
+    [
+     "BCG",
+     "the main energy identity for d_s E_2K^2",
+     3902
+    ],
+    [
+     "BCG",
+     "'which one cannot expect to bound ... extract the correct sign'",
+     3804
+    ],
+    [
+     "CGSS",
+     "'weighted energy estimates at a higher derivative level than the linear stability, together with lower bounds for S'",
+     494
+    ]
+   ],
+   "inputs": "(U,S); K; the weight parameters (zeta_0, eta_w); F_dis from A10; S_min from A5",
+   "outputs": "E_2K(s); the differential inequality d_s E_2K^2/2 <= -K eta E_2K^2 + C Ebar^2; the sign certificate J + (r^{1+1/alpha}/alpha^{1/alpha}) e^{-delta_dis s} G^2 <~ G",
+   "deps": [
+    "A3",
+    "A6",
+    "A10",
+    "A11"
+   ],
+   "existing": "none.  The repository's weighted-space rows are ell^1_w Fourier and H^2(mu) GAUSSIAN weights; this weight is ALGEBRAIC and the norm is a 2K-th order Sobolev energy on R^3.  (Leg 265: this is why the pending stage-V H^2(mu) lift does not gate this target -- different space.)",
+   "contract_complete": true
+  },
+  "A8": {
+   "name": "semigroup generation",
+   "computes": "the decay estimate on the linear flow restricted to the stable space -- the factor that makes the Duhamel integral converge.",
+   "definition": "Lumer-Phillips: a maximally dissipative A_0 generates a strongly continuous semigroup on H.  Growth bound w_0(T) = max{w_ess(T), s(A)}; for any w > w_ess(T), sigma(A) intersect {Re lambda > w} is a finite set of eigenvalues of finite algebraic multiplicity.  The operative output is the bound ||T(s)|| <= e^{-delta_g s / 2} on V_sta.",
+   "anchors": [
+    [
+     "BCG",
+     "lemma:propertiesmaximalaccretive, Lumer-Phillips bullet",
+     2731
+    ],
+    [
+     "BCG",
+     "growth-bound definitions w_0, w_ess",
+     2743
+    ],
+    [
+     "BCG",
+     "lemma:growthbound",
+     2757
+    ],
+    [
+     "BCG",
+     "eq:prim -- the T(s) bound on V_sta",
+     2799
+    ],
+    [
+     "BCG",
+     "eq:prim used in the Duhamel step",
+     4076
+    ]
+   ],
+   "inputs": "(A_0, delta_g, K) from A9",
+   "outputs": "the semigroup T(s); the certified decay rate on V_sta (BCG's is delta_g/2)",
+   "deps": [
+    "A9"
+   ],
+   "existing": "none -- the 48-row index has spectra and eigenvalue solvers but no semigroup, and the two are not the same object once the operator is non-normal",
+   "contract_complete": true
+  },
+  "A13": {
+   "name": "bootstrap / continuity argument",
+   "computes": "the closed self-improving loop: assume E_2K < Ebar and the L^infinity bounds on [s_0, s_1], prove them with a strictly better constant, conclude by continuity in s.",
+   "definition": "prop:bootstrap: under the initial-data assumptions and ||P_uns(U_t,S_t)(s)||_X <= delta_1, one has E_2K < Ebar and ||U||_Linf, ||S||_Linf < delta_0 on [s_0, s_1]; the proof improves these to E_2K <= Ebar/2 etc., closing because all three are continuous in s.  Its operative content is the ORDERED CHAIN OF SMALLNESS CONSTANTS:\n  1/s_0 << delta_0^{3/2} << delta_1 << delta_g delta_0 << delta_0 << 1/Ebar << 1/K << 1/m << eta_w << delta_g << delta_dis = O(1).",
+   "anchors": [
+    [
+     "BCG",
+     "prop:bootstrap statement",
+     3033
+    ],
+    [
+     "BCG",
+     "eq:bootstrap_hyp",
+     3047
+    ],
+    [
+     "BCG",
+     "the eleven-element smallness chain",
+     2994
+    ],
+    [
+     "BCG",
+     "sec:bootstrap (the proof)",
+     3131
+    ],
+    [
+     "BCG",
+     "eq:improvement_E",
+     3138
+    ],
+    [
+     "BCG",
+     "eq:rhodeisland, the closing differential inequality",
+     4003
+    ],
+    [
+     "CGSS",
+     "'carefully design our bootstrap assumptions'",
+     494
+    ]
+   ],
+   "inputs": "E_2K from A12; the T(s) decay from A8; ||F_dis||_X from A10; the eleven constants",
+   "outputs": "the improved bounds; the global-in-s continuation",
+   "deps": [
+    "A8",
+    "A10",
+    "A12"
+   ],
+   "existing": "none",
+   "contract_complete": false
+  },
+  "A14": {
+   "name": "topological / Brouwer degree argument",
+   "computes": "the selection of the finitely many unstable initial coefficients {a_i}, by a degree/fixed-point argument, so that the solution never leaves the exponentially contracting region.",
+   "definition": "kappa_i(s) = <(U_t, S_t)(.,s), (psi_{i,U}, psi_{i,S})>, kappa = sum_i psi_i kappa_i, with {psi_i} an orthonormal basis of the finite-dimensional unstable space V.  The contracting regions are R(s) = {|w|_X <= delta_1 e^{-(7/10) delta_g (s-s_0)}} and its B-metric shrunken twin Rtilde(s) (compactly inside R(s)).  The exit-time map from the boundary is continuous and degree-nontrivial, so some initial a stays inside forever.  The stable half is controlled by Duhamel with ||F_dis(.,s)||_X <= delta_1 e^{-delta_dis s/2} <= delta_1^{3/2} e^{-(9/10) delta_g (s-s_0)}.",
+   "anchors": [
+    [
+     "BCG",
+     "sec:top",
+     4011
+    ],
+    [
+     "BCG",
+     "kappa_i defined",
+     4023
+    ],
+    [
+     "BCG",
+     "eq:Rdef -- the contracting regions",
+     4032
+    ],
+    [
+     "BCG",
+     "eq:tambor1 -- the F_dis bound feeding Duhamel",
+     4061
+    ],
+    [
+     "BCG",
+     "the Duhamel estimate on P_sta",
+     4072
+    ],
+    [
+     "BCG",
+     "eq:US:initial:data -- the a_i that get selected",
+     2999
+    ],
+    [
+     "CGSS",
+     "\"a topological argument that exploits the unstable structure via Brouwer's fixed point theorem\"",
+     494
+    ]
+   ],
+   "inputs": "V, P_uns, P_sta from A9; T(s) from A8; the bootstrap conclusion from A13",
+   "outputs": "an admissible {a_i} with |a| <= delta_1 => a global asymptotically self-similar solution",
+   "deps": [
+    "A8",
+    "A9",
+    "A13"
+   ],
+   "existing": "none -- no degree-theoretic row anywhere in the 48-row index",
+   "contract_complete": true
+  },
+  "A15b": {
+   "name": "interval ODE solver (VNODE-LP)",
+   "computes": "rigorous time-stepping enclosure of a solution of an ODE system over an interval of the independent variable -- as distinct from enclosing a closed-form expression (A15a).",
+   "definition": "an interval/Taylor-model initial-value integrator producing, for each step, a box provably containing the true flow.",
+   "anchors": [],
+   "inputs": "a vector field over intervals; an initial box; a step control",
+   "outputs": "a validated enclosure of the trajectory over the integration interval",
+   "deps": [
+    "A15a"
+   ],
+   "existing": "solver/interval.py supplies the arithmetic but no validated integrator",
+   "contract_complete": false
+  }
+ },
+ "terms_that_resist_specification": {
+  "A13": {
+   "term": "bootstrap / continuity argument",
+   "what_is_specifiable": "its DEFINITION (prop:bootstrap, BCG l.3033) and its DEPENDENCY POSITION (consumes A8, A10, A12; consumed by A14) are both fully specifiable and are specified above.",
+   "what_resists": "its PARAMETER CONTRACT, at the target's own delta_dis.",
+   "the_mechanism": "BCG's chain (l.2994) contains the link  delta_g << delta_dis = O(1).  delta_g is not a free label: A9's decomposition L = A_0 - delta_g + K REQUIRES delta_g > 0 (lemma:abstract_result, l.2764), because it is exactly what makes Lambda = sigma(L) cap {Re lambda > -delta_g/2} finite.  The recommended target has delta_dis in (-0.5778, -0.4302), i.e. delta_dis < 0.  There is NO delta_g satisfying 0 < delta_g << delta_dis < 0.  The admissible set for the chain's second-from-top element is EMPTY, not merely small.",
+   "why_this_is_not_leg_265_restated": "Leg 265 reported that delta_dis tops an eleven-element chain and named two consequences at the level of ESTIMATES (the s_0 knob's monotonicity flips; the Duhamel integral diverges).  This leg is asking a different question -- can each term be handed to a builder with a complete contract -- and the answer localises the damage to ONE of the fifteen and names the exact broken link.  The other fourteen, including A9, A8 and A12, have delta_dis-INDEPENDENT contracts and survive: the maximal-dissipativity decomposition is a property of L, and F_dis is a forcing, not part of L, which is the specification-level statement of leg 265's measured finding that the sign extraction survives (e^{-delta_dis s} > 0 for every real delta_dis).",
+   "cost_consequence": "A13 cannot be dispatched as a build brief on day one.  It needs a PRIOR analytic leg that re-derives the constant hierarchy without a positive delta_dis at its top -- i.e. that finds a replacement top element, or shows there is none.  That is one unbudgeted analytic leg standing in front of the build, and leg 265's estimate does not contain it.  It is also the leg that would decide whether the target is constructible at all, so it is cheap relative to what it settles.",
+   "where_it_sits": "layer 5 of 7 on the critical path -- late enough that four layers of build would complete before it bites, which is precisely why naming it now is worth more than naming it then."
+  },
+  "A15b": {
+   "term": "interval ODE solver (VNODE-LP)",
+   "what_is_specifiable": "its definition and IO contract are standard and are stated above; its dependency position (on A15a) is clear.",
+   "what_resists": "TRACEABILITY TO BCG/CGSS -- the gate's own requirement.",
+   "the_mechanism": "Leg 265's row A15 is written 'ball arithmetic (Arb) OR interval ODE solver (VNODE-LP)', which reads as one capability with two implementations.  It is two.  Measured in the pinned TeX: BCG contains 'Arb' as a word 4 times (l.5693, l.5694 in sec:computer; l.6638, l.6640 in the bibliography) and contains 'VNODE' 0 times, 'interval ODE' 0 times, 'rigorous integrat*' 0 times, 'Taylor model' 0 times.  CGSS contains 'Arb' as a word 0 times and 'computer-assisted' 0 times, independently reconfirming leg 265's CGSS-CAP-is-zero finding on a second instrument.  BCG's computer-assisted part evaluates EXPRESSIONS (barriers, Taylor coefficients, r_j enclosures); it never integrates an ODE rigorously.  The VNODE-LP half's only anchor is LP arXiv:2509.12435 -- a DIFFERENT paper, and an unrefereed one.",
+   "cost_consequence": "Splitting A15 raises the term count from 15 to 16.  A15a is the cheapest term in the list (it has a real substrate, solver/interval.py) and A15b is unanchored in the target's own literature.  Nothing in BCG tells a builder what A15b must enclose, because BCG never needed it -- so if a build wants it, the requirement has to be imported from LP wholesale, template and all.",
+   "the_honest_reading": "This is a finding ABOUT leg 265's row, not against it: leg 265 wrote the row as the tooling family it is, which is the right granularity for a COUNT.  It is the wrong granularity for a BILL OF MATERIALS, and that difference is exactly what this leg was dispatched to find.",
+   "where_it_sits": "layer 1; off the critical path entirely."
+  }
+ },
+ "dependency_graph": {
+  "layers": [
+   [
+    "A11",
+    "A15a",
+    "A4",
+    "A6"
+   ],
+   [
+    "A1",
+    "A15b",
+    "A5"
+   ],
+   [
+    "A2",
+    "A3"
+   ],
+   [
+    "A10",
+    "A7",
+    "A9"
+   ],
+   [
+    "A12",
+    "A8"
+   ],
+   [
+    "A13"
+   ],
+   [
+    "A14"
+   ]
+  ],
+  "layer_count": 7,
+  "critical_path": [
+   "A4",
+   "A1",
+   "A2",
+   "A9",
+   "A8",
+   "A13",
+   "A14"
+  ],
+  "critical_path_depth": 7,
+  "independent_terms": [
+   "A11",
+   "A15a",
+   "A4",
+   "A6"
+  ],
+  "independent_count": 4,
+  "dependent_terms": [
+   "A1",
+   "A10",
+   "A12",
+   "A13",
+   "A14",
+   "A15b",
+   "A2",
+   "A3",
+   "A5",
+   "A7",
+   "A8",
+   "A9"
+  ],
+  "dependent_count": 12,
+  "depth_of": {
+   "A11": 0,
+   "A15a": 0,
+   "A4": 0,
+   "A6": 0,
+   "A1": 1,
+   "A15b": 1,
+   "A5": 1,
+   "A2": 2,
+   "A3": 2,
+   "A10": 3,
+   "A7": 3,
+   "A9": 3,
+   "A12": 4,
+   "A8": 4,
+   "A13": 5,
+   "A14": 6
+  }
+ },
+ "anchor_totals": {
+  "total": 71,
+  "BCG": 63,
+  "CGSS": 8,
+  "records_with_zero_anchors": [
+   "A15b"
+  ]
+ },
+ "anchor_reverification": {
+  "ran": true,
+  "line_counts": {
+   "BCG": 6898,
+   "CGSS": 3916
+  },
+  "final_line_unterminated": {
+   "BCG": false,
+   "CGSS": true
+  },
+  "probes": [
+   {
+    "source": "BCG",
+    "line": 134,
+    "probe": "eq:Euler",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 143,
+    "probe": "eq:NS",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 175,
+    "probe": "eq:wombat",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 186,
+    "probe": "eq:DS",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 250,
+    "probe": "eq:Riemann:invariants",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 466,
+    "probe": "eq:ice",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 489,
+    "probe": "eq:delta:dis",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 874,
+    "probe": "eq:bfl",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 880,
+    "probe": "eq:Peye",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 2130,
+    "probe": "F_{\\rm dis}",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 2727,
+    "probe": "maximally dissipative",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 2764,
+    "probe": "lemma:abstract_result",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 2994,
+    "probe": "\\delta_{\\rm dis}",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 3028,
+    "probe": "eq:weightedhighenery",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 3156,
+    "probe": "\\phi(\\zeta)",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 3595,
+    "probe": "eq:cortazar",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 4011,
+    "probe": "sec:top",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 4064,
+    "probe": "eq:tambor1",
+    "found": true
+   },
+   {
+    "source": "BCG",
+    "line": 5693,
+    "probe": "Arb library",
+    "found": true
+   },
+   {
+    "source": "CGSS",
+    "line": 318,
+    "probe": "eq:ss_profiles",
+    "found": true
+   },
+   {
+    "source": "CGSS",
+    "line": 382,
+    "probe": "C_{\\rm{dis}}",
+    "found": true
+   },
+   {
+    "source": "CGSS",
+    "line": 494,
+    "probe": "Brouwer",
+    "found": true
+   }
+  ],
+  "tool_census": {
+   "BCG:Arb": {
+    "got": 4,
+    "expected": 4
+   },
+   "BCG:VNODE": {
+    "got": 0,
+    "expected": 0
+   },
+   "BCG:interval ODE": {
+    "got": 0,
+    "expected": 0
+   },
+   "BCG:Taylor model": {
+    "got": 0,
+    "expected": 0
+   },
+   "CGSS:Arb": {
+    "got": 0,
+    "expected": 0
+   },
+   "CGSS:computer-assisted": {
+    "got": 0,
+    "expected": 0
+   }
+  },
+  "failures": [],
+  "ok": true
+ },
+ "self_tests": {
+  "passed": 360,
+  "total": 360,
+  "checks": [
+   {
+    "name": "leg265_absent_count_is_15",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "leg265_present_count_is_3",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "existing_terms_are_3",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "spec_covers_all_15_after_split",
+    "pass": true,
+    "detail": "15 absent terms, with A15 split into A15a/A15b => 16 records"
+   },
+   {
+    "name": "A15_split_accounts_for_the_16th",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "every_leg265_absent_row_is_mapped",
+    "pass": true,
+    "detail": "[]"
+   },
+   {
+    "name": "every_mapping_target_exists",
+    "pass": true,
+    "detail": "[]"
+   },
+   {
+    "name": "mapping_is_onto_SPEC",
+    "pass": true,
+    "detail": "set()"
+   },
+   {
+    "name": "record_A4_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A4_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A6_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A11_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15a_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A5_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A1_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A2_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A3_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A10_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A7_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A9_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A12_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A8_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A13_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A14_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_name",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_computes",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_definition",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_inputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_outputs",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_deps",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_existing",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "record_A15b_has_contract_complete",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A4_is_anchored",
+    "pass": true,
+    "detail": "2 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A4_141",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A4_141",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A4_180",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A4_180",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A6_is_anchored",
+    "pass": true,
+    "detail": "2 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A6_175",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A6_175",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A6_467",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A6_467",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A11_is_anchored",
+    "pass": true,
+    "detail": "3 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A11_477",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A11_477",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A11_181",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A11_181",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A11_480",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A11_480",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A15a_is_anchored",
+    "pass": true,
+    "detail": "3 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A15a_5693",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A15a_5693",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A15a_5694",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A15a_5694",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A15a_5701",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A15a_5701",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A5_is_anchored",
+    "pass": true,
+    "detail": "2 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A5_180",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A5_180",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A5_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A5_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A1_is_anchored",
+    "pass": true,
+    "detail": "2 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A1_134",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A1_134",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A1_143",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A1_143",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A2_is_anchored",
+    "pass": true,
+    "detail": "6 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A2_250",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_250",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A2_256",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_256",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A2_186",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_186",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A2_268",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_268",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A2_318",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_318",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A2_290",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A2_290",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A3_is_anchored",
+    "pass": true,
+    "detail": "3 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A3_143",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A3_143",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A3_471",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A3_471",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A3_467",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A3_467",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A10_is_anchored",
+    "pass": true,
+    "detail": "7 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A10_2116",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_2116",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_2136",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_2136",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_2142",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_2142",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_3595",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_3595",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_489",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_489",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_493",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_493",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A10_382",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A10_382",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A7_is_anchored",
+    "pass": true,
+    "detail": "7 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A7_865",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_865",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_868",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_868",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_871",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_871",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_874",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_874",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_880",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_880",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_894",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_894",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A7_1099",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A7_1099",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A9_is_anchored",
+    "pass": true,
+    "detail": "8 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A9_2238",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2238",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2707",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2707",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2718",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2718",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2727",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2727",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2731",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2731",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2764",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2764",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_2766",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_2766",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A9_473",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A9_473",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A12_is_anchored",
+    "pass": true,
+    "detail": "7 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A12_3029",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3029",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_3156",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3156",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_3164",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3164",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_3896",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3896",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_3902",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3902",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_3804",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_3804",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A12_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A12_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A8_is_anchored",
+    "pass": true,
+    "detail": "5 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A8_2731",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A8_2731",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A8_2743",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A8_2743",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A8_2757",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A8_2757",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A8_2799",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A8_2799",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A8_4076",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A8_4076",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A13_is_anchored",
+    "pass": true,
+    "detail": "7 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A13_3033",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_3033",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_3047",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_3047",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_2994",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_2994",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_3131",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_3131",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_3138",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_3138",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_4003",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_4003",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A13_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A13_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "term_A14_is_anchored",
+    "pass": true,
+    "detail": "7 anchors"
+   },
+   {
+    "name": "anchor_source_valid_A14_4011",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_4011",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_4023",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_4023",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_4032",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_4032",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_4061",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_4061",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_4072",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_4072",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_2999",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_2999",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_source_valid_A14_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "anchor_line_in_range_A14_494",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "A15b_has_no_BCG_CGSS_anchor_by_construction",
+    "pass": true,
+    "detail": "this is the finding, not an omission"
+   },
+   {
+    "name": "graph_is_acyclic",
+    "pass": true,
+    "detail": "Kahn layering completed"
+   },
+   {
+    "name": "all_terms_placed",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "independent_plus_dependent_is_total",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "independent_count_is_4",
+    "pass": true,
+    "detail": "['A11', 'A15a', 'A4', 'A6']"
+   },
+   {
+    "name": "critical_path_depth_is_7",
+    "pass": true,
+    "detail": "A4 -> A1 -> A2 -> A9 -> A8 -> A13 -> A14"
+   },
+   {
+    "name": "critical_path_starts_independent",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_path_ends_at_A14",
+    "pass": true,
+    "detail": "A14"
+   },
+   {
+    "name": "critical_edge_A4_A1",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_edge_A1_A2",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_edge_A2_A9",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_edge_A9_A8",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_edge_A8_A13",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "critical_edge_A13_A14",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A5_after_A4",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A1_after_A4",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A2_after_A1",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A2_after_A5",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A2_after_A6",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A3_after_A1",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A3_after_A5",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A3_after_A6",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A10_after_A3",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A10_after_A5",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A10_after_A11",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A7_after_A2",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A7_after_A15a",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A9_after_A2",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A9_after_A6",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A12_after_A3",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A12_after_A6",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A12_after_A10",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A12_after_A11",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A8_after_A9",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A13_after_A8",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A13_after_A10",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A13_after_A12",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A14_after_A8",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A14_after_A9",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A14_after_A13",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "layer_order_A15b_after_A15a",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "cycle_detector_fires",
+    "pass": true,
+    "detail": "planted A4<-A14 cycle caught"
+   },
+   {
+    "name": "dangling_dep_detector_fires",
+    "pass": true,
+    "detail": "planted A99 dep caught"
+   },
+   {
+    "name": "incomplete_set_matches_RESISTANCE",
+    "pass": true,
+    "detail": "['A13', 'A15b'] vs ['A13', 'A15b']"
+   },
+   {
+    "name": "exactly_two_terms_resist",
+    "pass": true,
+    "detail": "['A13', 'A15b']"
+   },
+   {
+    "name": "complete_count_is_14",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_term",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_what_is_specifiable",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_what_resists",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_the_mechanism",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_cost_consequence",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A13_has_where_it_sits",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_term",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_what_is_specifiable",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_what_resists",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_the_mechanism",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_cost_consequence",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "resistance_A15b_has_where_it_sits",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "target_delta_dis_is_negative",
+    "pass": true,
+    "detail": "delta_dis in (-0.5778, -0.4302)"
+   },
+   {
+    "name": "no_positive_delta_g_below_a_negative_delta_dis",
+    "pass": true,
+    "detail": "[]"
+   },
+   {
+    "name": "live_control_delta_g_exists_at_BCG_own_sign",
+    "pass": true,
+    "detail": "[1e-12, 1e-06, 0.001, 0.01, 0.1]"
+   },
+   {
+    "name": "gate_is_derived_not_hardcoded",
+    "pass": true,
+    "detail": "NO"
+   },
+   {
+    "name": "gate_answer_is_NO",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "gate_names_the_resisting_terms",
+    "pass": true,
+    "detail": ""
+   },
+   {
+    "name": "builds_nothing__no_solver_import",
+    "pass": true,
+    "detail": "imports: ['from a 48-row ``capabilities.py`` index.  That was a COUNT.  This leg turns it into a', 'from __future__ import annotations', 'import argparse', 'import json', 'import os', 'import sys', 'from collections import defaultdict', 'import re as _re']"
+   },
+   {
+    "name": "builds_nothing__exactly_one_write",
+    "pass": true,
+    "detail": "the only file opened for writing is --out; solver/ paths appear solely inside leg 265's quoted adjudications, as data"
+   },
+   {
+    "name": "clay_odds_recorded",
+    "pass": true,
+    "detail": ""
+   }
+  ]
+ },
+ "gate": {
+  "question": "Does every one of the 15 absent terms receive a precise specification (definition, contract, dependency position), each traceable to a named equation/section in BCG/CGSS?",
+  "answer": "NO",
+  "specified_completely": 14,
+  "of_total_records": 16,
+  "terms_that_resist": [
+   "A13",
+   "A15b"
+  ],
+  "prescribed_branch": "no -> Name which term(s) resist specification and why -- an unspecifiable term is itself a costing finding (it raises leg 265's estimate) and goes to the packet at full strength.",
+  "critical_path": [
+   "A4",
+   "A1",
+   "A2",
+   "A9",
+   "A8",
+   "A13",
+   "A14"
+  ],
+  "critical_path_depth": 7,
+  "independent_terms": [
+   "A11",
+   "A15a",
+   "A4",
+   "A6"
+  ],
+  "dependent_terms": [
+   "A1",
+   "A10",
+   "A12",
+   "A13",
+   "A14",
+   "A15b",
+   "A2",
+   "A3",
+   "A5",
+   "A7",
+   "A8",
+   "A9"
+  ],
+  "layers": [
+   [
+    "A11",
+    "A15a",
+    "A4",
+    "A6"
+   ],
+   [
+    "A1",
+    "A15b",
+    "A5"
+   ],
+   [
+    "A2",
+    "A3"
+   ],
+   [
+    "A10",
+    "A7",
+    "A9"
+   ],
+   [
+    "A12",
+    "A8"
+   ],
+   [
+    "A13"
+   ],
+   [
+    "A14"
+   ]
+  ]
+ }
+}
