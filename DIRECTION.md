@@ -31,7 +31,7 @@ prose as before.
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
-| F | 273 | NFS | yes |
+| F | 277 | XUN | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 252 | VBRG | no |
@@ -11808,3 +11808,79 @@ branch; the packet assembles on its landing. Next fresh leg number: **278.**
 Nothing in this update lifts a ban; 270's convention-relativity finding is recorded as
 an under-caveat, not an argument defect, exactly as its own trace establishes. Clay
 stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 275 LANDED (n=3 correction applied, no third inconsistency):
+THE PACKET IS SELF-CONSISTENT AND ASSEMBLING; slot F re-confirmed as 273 with a
+reconciliation question flagged
+
+**275 (P0TC2) landed into PR #20 (`2aac47a`), recorded:** ansatz corrected to **n=3,
+r^(3) ∈ (1.070374, 1.094975), δ_dis ∈ (-0.5778, -0.4302)** — outside BCG's dominance
+window, exactly as the leg-266-corrected obligation 4 requires. Clause (d)'s targeted
+consistency read of every r/window statement found NO third same-species inconsistency —
+the whole-report re-review rule does not fire. **251 now stands twice-corrected and
+twice-verified; the packet is self-consistent and the orchestrator is assembling it for
+the user.** Awaiting the user's response; no DM action pending on that track.
+
+**Slot F reconciliation, flagged:** this DM's last assignment put 273 (NFS) in slot F;
+the orchestrator now reports F vacant with no 273 outcome. Two possibilities, one
+assignment covering both: **slot F = 273 (NFS)** — if it was never dispatched (F used
+for 275 instead), dispatch it now; if it in fact finished, its gate answer is MISSING
+from this record (fourth missing-outcome instance this session — 178, 256, 260 before
+it) and must be reported next message, at which point F gets reassigned. The FLOOR-TABLE
+already reads F/273 and stays as-is; floor 3/10 strictly (273, 267, 264) — note the
+floor COUNTS 273 as live, so if 273 turns out to have landed, the next update must
+re-establish the floor before anything else.
+
+**Roster focus decision (the orchestrator's "hold if you'd rather"): assign, not hold**
+— 273 is independent of the v11 track (deliberately non-adjacent territory), so
+dispatching it does not defocus the pending 226 correlation; an idle slot buys nothing.
+
+**Canonical reserve line: reserve count 7 — legs 272, 277, 229, 231, 232, 233, 234 —
+unchanged.** Effective immediately-dispatchable: 1 (272); 277 blocked on 276's landing;
+229 blocked on 226; 231-234 blocked on repairs. Next fresh leg number: **278.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised —
+the packet speaks to the user; the 226 track waits on its own pre-commitments.
+
+---
+
+## DM update, 2026-08-07 — slot-F sequence reconciled (273 landed gate NO double, then
+275 used the vacancy — no missing outcome): 277 promoted to F with its soft sequencing
+amended; 273's double-NO recorded with a packet-addendum recommendation
+
+**Reconciliation accepted:** slot F turned over twice between DM updates (273 → 275 →
+vacant), with 275 filled per this DM's own "next vacancy" pre-commitment — correct
+execution, not a gap. **273 (NFS): gate NO, DOUBLE (duplication + deficiency), recorded
+at full strength in this update:** neither of 255's two non-fluid survivors is worth a
+certificate — the duplication arm (occupying DF-CGL's already-occupied cell) and the
+deficiency arm both fired. The census's yes-branch has therefore produced ZERO actionable
+survivors. **Packet-addendum recommendation: if the user has not yet responded, the
+orchestrator should append 273's verdict to the assembled packet** — it sharpens the
+honest picture (the non-fluid fallback track is empty; the BCG candidate is not merely
+the best option but effectively the only actionable one this record contains, with PV
+excluded as Perelman-not-Clay).
+
+**Slot F: leg 277 (Route-XUN) promoted, sequencing amended with the reason recorded:**
+its blocking condition ("after 276 lands") existed only so its supporting-material flag
+would point at stable caveat sites — but its CORE work (the conversion table under Xu's
+normalization, checked against 249's sweep data and Xu's published values) is fully
+independent of 276's prose edits, and 277 edits nothing in PUB2 by its own territory.
+Amended brief: its output flags to writeup/CORRECTIONS.md and its own dossier; any PUB2
+pointer waits for 276's landed text. Promoting 277 (floor-eligible) also holds the floor
+at 3/10 (277, 267, 264), which promoting 272 (verify) would have breached.
+
+**FLOOR-TABLE block updated in this same edit** (F: 273 → 277). **Floor status: 3/10
+strictly (277, 267, 264) — met exactly.**
+
+**Canonical reserve line: reserve count 6 — legs 272, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 1 (272, next vacancy); 229 blocked on 226; 231-234
+blocked on repairs 217/219/221/225. The drafting trigger is again LIVE at the next
+promotion — and the two pending generators (the user's packet response; 226's report
+with its pre-committed consolidated rework) remain the expected sources of the next
+batch. Next fresh leg number: **278.**
+
+Nothing in this update lifts a ban; 273's double-NO is a negative recorded at full
+strength, not a setback narrated as progress. Clay stays ~0.05%. No direction question
+raised — the packet (now recommended to carry 273's addendum) is with the user.
