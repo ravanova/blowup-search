@@ -4029,6 +4029,27 @@ preempted agents had reached a landing.
   strengthening travel with the downgrade in every block. 0 arguments
   changed. Leg 284 (grid-convergence measurement at a=1/2) may supersede
   this downgrade by citation if it lands.
+- **Leg 248 (Route-CNR2) -- gate YES, landed.** `ACollocation.newton`'s
+  verdict was `rel < 1e-9` on a ratio of two degree-2 quantities -- exactly
+  degree 0, so blind to the scaling degeneracy its own two gauge rows exist
+  to pin (those rows were already assembled as `F[J]`, `F[J+1]` and thrown
+  away). Repaired to AND `gauge_defect = max(|g0.Omega+1|,
+  |Omega[i1]+1/2|) <= gauge_tol` into the relres test; `continuation`'s
+  three branch decisions now consult it too. 41/41 of leg 237's
+  reachability battery carry the correct verdict after the repair (17
+  converged before, 17 after, 0 verdicts changed, 0 floats moved, worst
+  gauge defect among converged 8.882e-16); leg 237's own battery imported
+  and re-run gives 0 mismatches over 41 rows; escaped members
+  accepted-with-broken-gauge 4 -> 0; leg 202's calibration pair still
+  flags 2/2 (8.06e-07 / 2.74e-09 relative). Section F, absent from the
+  stale salvage artifact, is new: both gate clauses hold at all 8
+  tolerances 1e-14..0.5, a 13.7-decade band of indifference. Novelty
+  correction: the gauge defect is AFFINE, not homogeneous of degree 1.
+  Honest caveat: headroom is not uniform -- Section C's J=60, a=0.5 case
+  has a gauge defect 1.6x above tolerance but changes no verdict since it
+  fails relres anyway; a future leg tightening relres near a~0.5 on a
+  coarse grid could find the gauge clause become decisive. Clay odds
+  unmoved (~0.05%) -- solver hygiene, no claim-bearing call site.
 - **MAJOR: leg 285 (Route-P2S) -- gate NO, landed, and the NO is the
   deliverable.** Turned leg 265's build-cost COUNT (15 of 18 apparatus terms
   absent) into a per-term SPECIFICATION -- 14 of 16 records fully specified
