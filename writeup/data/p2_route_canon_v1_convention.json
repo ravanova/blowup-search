@@ -1,0 +1,195 @@
+{
+  "leg": 288,
+  "route": "ROUTE-CANON",
+  "date": "2026-08-07",
+  "role": "does one named convention make every convention-relative quantity of leg 281's table simultaneously natural?  Enumerates 4 candidates, brackets the operator-norm-induced one to confirm it is a real extremum, probes kappa up to 1e8 to see which rows have a finite limit, and checks whether any candidate is close to every family's own ideal at once.",
+  "novelty_pass_commit": "5e0f9c8",
+  "reads_only": [
+    "writeup/data/p2_route_cvf_v1_classify.json (leg 281)",
+    "experiments/p2_route_cvf_v1_classify.py (leg 281, imported for its own sigma_bordered/z1_blockdiag/dual_norm functions -- same computation leg 281's classification rests on)"
+  ],
+  "N_probe": 256,
+  "N_anchor": 512,
+  "P1_interior_extremum_bracket": {
+    "grid": [
+      0.06,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.15,
+      0.2
+    ],
+    "sigma_min_at_N256": {
+      "0.06": 0.13350958211325967,
+      "0.08": 0.13541494874965315,
+      "0.09": 0.13573773196567307,
+      "0.1": 0.13579946932847606,
+      "0.11": 0.13567026649571606,
+      "0.12": 0.1353988030872356,
+      "0.15": 0.13403507933851466,
+      "0.2": 0.13087868694975588
+    },
+    "argmax_on_this_grid": 0.1,
+    "is_interior_local_max": true,
+    "matches_leg281_E5b_argmax_0p1": true,
+    "P1_falsified": false
+  },
+  "P2_large_kappa_probe": {
+    "kappas": [
+      100.0,
+      10000.0,
+      1000000.0,
+      100000000.0
+    ],
+    "Z1_K2_M64": {
+      "100.0": 140.71981134054607,
+      "10000.0": 140.71976533961202,
+      "1000000.0": 140.71976326733204,
+      "100000000.0": 140.71976255080773
+    },
+    "Z1_monotone_decreasing_no_turn": true,
+    "Z1_floor_estimate_at_1e8": 140.71976255080773,
+    "Z1_relative_change_1e6_to_1e8": 5.0918527639264504e-09,
+    "Z1_has_asymptotic_floor": true,
+    "sigma_min_A1_N256": {
+      "100.0": 0.010856262976502875,
+      "10000.0": 0.001087834230663203,
+      "1000000.0": 0.00010878563628777252,
+      "100000000.0": 1.0878565841892633e-05
+    },
+    "A1_monotone_decreasing_no_floor_in_this_range": true,
+    "A1_ratio_1e8_over_1e2": 0.0010020543777760386,
+    "dual_norm_D1_N256": {
+      "100.0": 0.08873451208021278,
+      "10000.0": 0.008873451208021278,
+      "1000000.0": 0.0008873451208021277,
+      "100000000.0": 8.873451208021277e-05
+    },
+    "D1_monotone_decreasing": true,
+    "D1_exact_law_check": {
+      "1e+02->1e+04": {
+        "measured": 0.008873451208021278,
+        "predicted_from_exact_law": 0.008873451208021278,
+        "relative_error": 0.0
+      },
+      "1e+04->1e+06": {
+        "measured": 0.0008873451208021277,
+        "predicted_from_exact_law": 0.0008873451208021278,
+        "relative_error": 1.2218494778056873e-16
+      },
+      "1e+06->1e+08": {
+        "measured": 8.873451208021277e-05,
+        "predicted_from_exact_law": 8.873451208021278e-05,
+        "relative_error": 1.5273118472571092e-16
+      }
+    },
+    "P2_falsified": false
+  },
+  "kappa_star_opnorm": 0.1,
+  "candidate_table": {
+    "C_repo": {
+      "kappa": 1.0,
+      "A1_sigma_min": 0.09080414383680567,
+      "C1_Z1_M64": 140.72466104631172,
+      "D1_dual_norm": 0.8873620215869099
+    },
+    "C_xu_half": {
+      "kappa": 3.141592653589793,
+      "A1_sigma_min": 0.05764301146012326,
+      "C1_Z1_M64": 140.7213228801662,
+      "D1_dual_norm": 0.5006404094152138
+    },
+    "C_xu_full": {
+      "kappa": 6.283185307179586,
+      "A1_sigma_min": 0.042030323448698885,
+      "C1_Z1_M64": 140.72054195207912,
+      "D1_dual_norm": 0.3540062284335072
+    },
+    "C_opnorm": {
+      "kappa": 0.1,
+      "A1_sigma_min": 0.1357391624669265,
+      "C1_Z1_M64": 140.768741127113,
+      "D1_dual_norm": 2.8060850973461364
+    }
+  },
+  "P3_opposite_direction_ranking": {
+    "A1_relative_deviation_from_ideal": {
+      "C_repo": 0.33103945695163295,
+      "C_xu_half": 0.5753398620374701,
+      "C_xu_full": 0.6903596376694914,
+      "C_opnorm": 0.0
+    },
+    "Z1_relative_deviation_from_floor": {
+      "C_repo": 3.481028830066065e-05,
+      "C_xu_half": 1.1088203463389106e-05,
+      "C_xu_full": 5.538676709363454e-06,
+      "C_opnorm": 0.00034805755366158807
+    },
+    "rank_best_to_worst_for_A1": [
+      "C_opnorm",
+      "C_repo",
+      "C_xu_half",
+      "C_xu_full"
+    ],
+    "rank_best_to_worst_for_Z1": [
+      "C_xu_full",
+      "C_xu_half",
+      "C_repo",
+      "C_opnorm"
+    ],
+    "is_exact_reverse": true,
+    "spearman_rank_correlation": -1.0,
+    "P3_falsified": false
+  },
+  "D1_conversion_table": {
+    "law": "||ell||_{X*}(kappa) = 0.8873620087421942 * kappa^{-1/2}  (leg 277/281, fit residual 1.1e-16)",
+    "values": {
+      "C_repo": {
+        "kappa": 1.0,
+        "predicted_D1": 0.8873620215869099
+      },
+      "C_xu_half": {
+        "kappa": 3.141592653589793,
+        "predicted_D1": 0.5006404094152138
+      },
+      "C_xu_full": {
+        "kappa": 6.283185307179586,
+        "predicted_D1": 0.3540062284335072
+      },
+      "C_opnorm": {
+        "kappa": 0.1,
+        "predicted_D1": 2.806085097346136
+      }
+    }
+  },
+  "gate_conflict_magnitudes": {
+    "claim": "A1-family (sigma_min, ||R||_X, D3, E6, A6) wants kappa near an interior extremum kappa*; C1 (Z_1) and D1 (dual norm) want kappa pushed toward +infinity, with NO interior extremum of their own. The two directions are not reconcilable: A1 COLLAPSES toward the unbordered float-noise floor in exactly the kappa->infinity limit that is ideal for C1/D1.",
+    "A1_at_kappa_star": 0.1357391624669265,
+    "A1_at_kappa_1e8_N256": 1.0878565841892633e-05,
+    "A1_collapse_ratio_kappastar_over_1e8": 12477.670718708529,
+    "A2_resolvent_norm_at_kappa_star": 7.367070650989576,
+    "A2_resolvent_norm_at_kappa_1e8": 91923.8817445096,
+    "A2_blowup_factor": 12477.670718708529,
+    "Z1_at_kappa_star": 140.768741127113,
+    "Z1_floor_at_1e8": 140.71976255080773,
+    "Z1_headroom_left_at_kappa_star_pct": 0.034805755366158805,
+    "Z1_headroom_left_at_C_xu_full_pct": 0.0005538676709363454
+  },
+  "gate": {
+    "question": "does at least one enumerated candidate convention make EVERY convention-relative (CR/CX) row of leg 281's table well-defined and stable simultaneously?",
+    "candidates_tested": [
+      "C_repo",
+      "C_xu_half",
+      "C_xu_full",
+      "C_opnorm"
+    ],
+    "no_candidate_is_simultaneously_near_both_ideals": true,
+    "opposite_direction_ranking_is_exact_reverse": true,
+    "answer": "NO",
+    "why": "P1-P3 all confirmed (see predictions section): A1-family has a genuine interior extremum near kappa*=0.1 that no named convention (repo=1, xu_half=pi, xu_full=2pi) sits near, while C1 (Z_1) and D1 (dual norm) are monotone with NO interior extremum and only improve as kappa is pushed toward +infinity -- exactly the direction that drives A1's family toward the certificate's own float-noise floor (a resolvent-norm blowup). Ranking the four candidates by closeness to A1's ideal is the EXACT REVERSE of ranking them by closeness to Z1's ideal (Spearman rho = -1). The pair that pulls in opposite directions under every candidate is: {A1 / A2 / D3 / E6 / A6} vs {C1, D1}."
+  },
+  "flag_for_document_lineage": "NOT a document decision -- this leg only measures. The gate answer is NO: no post-280 document pass should adopt a single 'convention C' citation for the whole record. If a document pass wants ONE convention for the rows that DO admit one (D1's exact law makes any kappa a legitimate, fully-convertible choice), that is a narrower, still-available document decision -- but the whole-record version the task asked about does not exist.",
+  "runtime_seconds": 49.88373851776123
+}
