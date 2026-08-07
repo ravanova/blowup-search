@@ -447,6 +447,39 @@ import, is `port_v1`/`port_v2`/`l1_v1`/`l1rh_v1` plus two test files, **every on
 passes `w_om = w_r = 1.0`**. The priority ranking stands on other grounds; its stated reason
 does not.
 
+> **UPDATE — 2026-08-07, leg 282, carrying leg 228 §3 (flagged forward by leg 279 §5).**
+> **This paragraph's finding is unaffected; its parenthetical caller list is incomplete.** The
+> six-name set above is leg 218's, and leg 228 re-enumerated it from the callers themselves:
+> **13** direct importers of `solver/bordered_hl.py` in the worktree, of which **10** existed
+> contemporaneously with leg 218 (membership decided by `git cat-file -e d9a20fb:<path>`, not a
+> hardcoded name list). **Leg 218 named six; five of the ten were missed.** The verified
+> ten-importer set is `p2_route_port_v1_bordered.py`, `p2_route_l1_v1_interval.py`,
+> `p2_route_l1rh_v1_construction.py`, `test_bordered_hl.py`, `test_interval_certificate.py`
+> (the five leg 218 had by import), plus **`test_bordered_hl_adversarial.py`,
+> `p2_route_bhn_v1_adversarial.py`, `p2_route_hlb_v1_contraction_lit.py`,
+> `p2_route_nb_v1_targetnorm.py` and `p2_route_tn_v1_consistency.py`** (missed). The mechanism
+> of the gap is named: leg 218's sixth name, `p2_route_port_v2_reach.py`, imports
+> `p2_route_port_v1_bordered` and **not** `solver.bordered_hl` — correct as a *transitive*
+> caller, but it means the set was not purely "by import" as this paragraph describes, and four
+> direct importers fell through that gap.
+>
+> **Three things this update does NOT change, each checked rather than assumed.**
+> (1) **This paragraph's actual claim** — that legs 54/58/127 do not import
+> `solver/bordered_hl.py`, 0 of 7 runners/evidence files — is untouched: **0 of the five missed
+> importers belongs to leg 54, 58 or 127.** (2) **The `w_om = w_r = 1.0` observation survives**,
+> with its wording sharpened: none of the five missed importers mentions `w_om` or `w_r` at all,
+> so all five take `BorderedHL.weights`' defaults, which are `w_om = 1.0, w_r = 1.0`
+> (`solver/bordered_hl.py:312`) — the values are as stated; "passes" should read "passes or
+> inherits by default". (3) **Leg 218's repair is not impeached.** One missed importer does touch
+> the weight surface — `p2_route_tn_v1_consistency.py:219` calls
+> `b.weights(p=P_STAR, w_l=0.01*|X|max)`, which made leg 228's pre-fixed material/cosmetic split
+> come out **MATERIAL** — but leg 218's differential is caller-*agnostic*, and leg 228 re-earned
+> it over the full ten-importer configuration space, `tn_v1_consistency`'s live configuration
+> (`n = 201`, `p = 0.39`, `w_l = 0.01 |X|max`) included: **45 configurations, 77,040 float
+> leaves, 0 bit mismatches**, compared on IEEE-754 payloads rather than `==`. What is corrected
+> is the **enumeration**; the hazard recorded is that a verification leg trusting it would have
+> inherited the hole. See `writeup/CORRECTIONS.md` §8–§9.
+
 **(c) Route-D v12's exposure is absent from every shared ledger.** §2 above. It appears only in
 leg 202's own journal and has not been re-run.
 

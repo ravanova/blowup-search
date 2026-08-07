@@ -37,6 +37,8 @@ lesson 35). This file is the index, not the substitute.
 | 6 | `σ_min = 0.0908` printed at **15 sites** of PUB2 as if it were an absolute magnitude of the operator | **leg 249** §10 (`W5`, measured the sweep) → **leg 270** (`E1`, found PUB2 discloses it nowhere: 0 hits for `convention`/`normaliz`/`0.0420`/`2π`) → **leg 276** (disclosed) | the **digits** are convention-relative by a factor of **12.5** (`0.01086 … 0.13580`, and `0.0420` in Xu's own `y`-space normalization); the **gate property** — bounded away from zero uniformly in the truncation — **is invariant**. §6 below |
 | 7 | legs 198/218's **`Z_1` understatement ratio** (`1.198e9×` vs `2.2867e8×`, `5.24×` apart), banked side by side by leg 223 as an **unresolved disagreement**, "neither adopted" — left open across the record for 30 legs | **leg 228** (2026-08-07, Route-BHRV §4, a pre-committed falsification test) → **leg 279** (this entry; swept the record and carried the closure to every site) | **neither number is "the" ratio, because there is no such number.** The quantity is round-off-floor noise in a near-total-cancellation denominator: it spans **11.77×** under math-neutral perturbations *alone* — more than the disagreement it was supposed to explain — while the `‖A‖` control both legs agree on moves by **7.2e−12**. Quote **`‖A‖`** and **`Z_2`** instead. §8 below |
 
+| 8 | leg 263's own census, whose clause (a) claimed **zero missed occurrences** over the "third realization" phrase family, and which argued the live stage-`V` ban's protection from the class-P list that census produced | **leg 272** (2026-08-07, re-ran both patterns over the same blobs) → **leg 282** (this entry; carried the pointer and both count corrections to their sites) | the census is short by **30 triple-asserting occurrences across 17 files**, from two named instrument causes (**case** and **hyphenation/wrap**): **class P is 28, not 18**, and the second sweep's file count is **32, not 34**. **0 of the 30 produced a wrong edit and exactly 1 lies in territory.** A **warrant** defect, not a text defect — `plan_of_record.py` is byte-identical and stays so. §9 below |
+
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
 EGM neighbourhood via a landing page, without the full text. In #1 and #3 the corrections came
@@ -503,3 +505,128 @@ catastrophically, which was never the disputed part — and so does leg 218's re
 route, or moves a link of the `L1 → L4` chain. What changes is one thing only: **the record no
 longer carries an open disagreement it had the measurement to close, and no longer invites a
 reader to pick a side.** Clay `~0.05%`.
+
+---
+
+## §9 — leg 263's census was incomplete, and the record-maintenance bundle that closed it out
+
+**Entered 2026-08-07 by leg 282 (Route-RMX).** Four small, verified, non-urgent record fixes,
+bundled because none of them is worth a leg alone and all four were already measured by legs
+272, 228 and 279. **0 new measurements, 0 solver modules imported, 0 shared ledgers opened for
+writing, 0 lines deleted anywhere.**
+
+### (1) The one in-territory occurrence leg 263's sweep missed
+
+`experiments/journal/leg_141.md:232` (leg 272 pinned it at `:203`, its pre-leg-263 line number;
+leg 263's own inserted correction block shifted it by 29 lines). It is a **local enumeration**
+naming weighted-energy as the third dead realization, it is **wrapped** across two lines
+(`three dead` / `realizations`) and therefore invisible to leg 263's line-oriented `grep`, and it
+sits **below** that leg's correction block. **A dated pointer is now beside it.**
+
+**Its severity is low and measurably so, which is why this was a light leg and not an
+escalation.** Leg 141's own sentence de-rates the third member *in the same breath that counts
+it* — "must be de-rated to a statement about a trial-space choice." A reader of that sentence
+does not come away believing something the repository now knows is false, which is this file's
+own admission test.
+
+### (2) + (3) Two count corrections in leg 263's journal
+
+Pointer appended at end of `experiments/journal/leg_263.md`, correcting `:72`, `:77–78`, `:98`
+and `:163`:
+
+| published | actual | bears on |
+|---|---|---|
+| class **P** = **18** | **28** | the warrant for the ban argument, not any edit |
+| second sweep = 58 occurrences across **34** files | **32** files | nothing — no pin depends on it |
+| P1 `76/39`, P2 `58 further`, total `134` | **reproduce exactly** | — |
+
+The **occurrence** counts are exact to the occurrence. The instrument asymmetry behind the miss
+is now on the record too: P1 reproduces **only case-sensitively**, P2 **only
+case-insensitively** — `grep` run without `-i` on one pattern and with it on the other, stated
+nowhere in leg 263's journal.
+
+### The `plan_of_record.py:868` finding — recorded here as warrant-noise, deliberately not repaired
+
+One of the 30 missed occurrences is inside the re-posed stage-`V` ban's **lift condition**
+(*"…establishing it is not subject to the same **three-realization death**"* — the hyphenated
+compound form, which is exactly what leg 263's space-separated patterns could not match). Leg 272
+flagged it because its mandate said a miss touching the ban text is flaggable.
+
+**It is recorded and not acted on, and the direction of the miss is why.** The occurrence is
+**byte-identical** across leg 263 (`git diff 1fbbd0f^ 7724e67 -- plan_of_record.py` is 0 bytes;
+same blob sha `846701e…` on both sides). It pins unambiguously to the plan-triple by local
+enumeration — the ban's three members are spelled out seven lines above at `:861–862`. **A census
+that had caught it would have classified it class P and edited nothing.** So the ban's text, its
+members and its lift condition are all correct as they stand; what was short was the list the
+protection argument was made from. **The text stays byte-identical. `plan_of_record.py` is
+integration-owned and this leg did not open it for writing.** Locators for whoever audits it
+next: `plan_of_record.py:868` · `DIRECTION.md:9523, :9602, :10075, :10651` ·
+`experiments/JOURNAL.md:3639` · `experiments/journal/leg_256.md:36` ·
+`experiments/journal/leg_262.md:315` · `writeup/novelty/leg_255.md:26` ·
+`writeup/novelty/leg_262.md:152`.
+
+### (4) Leg 279's forward flag, discharged: the six-name caller list
+
+Leg 279 §5 named two consequence sites reproducing leg 218's incomplete enumeration and
+explicitly declined to edit them (out of its gate scope). **Both now carry leg 228 §3's verified
+ten-importer table:** `TECHNICAL_P2_PUB3_V1.md` §5(b) (dated update block appended after the
+original paragraph) and `experiments/journal/leg_223.md` disagreement 2 (dated pointer appended
+at end of file). The table itself is in §8 above and is not restated here.
+
+**Nothing in either site's argument moves, and each check was made rather than assumed:**
+
+* PUB3 §5(b)'s actual claim — legs 54/58/127 do not import `bordered_hl.py`, 0 of 7
+  runners/evidence files — is untouched: **0 of the five missed importers belongs to leg 54, 58
+  or 127**;
+* its `w_om = w_r = 1.0` observation survives with sharpened wording: **none of the five missed
+  importers mentions `w_om` or `w_r` at all**, so all five take `BorderedHL.weights`' defaults,
+  which are `w_om = 1.0, w_r = 1.0` (`solver/bordered_hl.py:312`) — "passes" should read "passes
+  or inherits by default";
+* leg 218's repair is unimpeached, leg 228 having re-earned the differential over the full
+  ten-importer space at 45 configurations, 77,040 float leaves, **0** bit mismatches.
+
+**One precision correction to leg 279's own forward flag**, made rather than silently absorbed:
+it described `leg_223.md` as reproducing "the six-name list." It does not do so *literally* —
+that journal names no importer — it reproduces the **claim derived from** the enumeration. The
+pointer was carried anyway, on the ground that a reader auditing disagreement 2 goes to leg 218's
+list next.
+
+### The sweep for other sites, and its blind spots
+
+Clause (c) asked for any **other** site quoting the six-name list or either wrong count. The
+instrument is the standing hardened rule this bundle's own sources produced (leg 272's real
+product, PUB2's correction history): **case-insensitive** (`re.IGNORECASE` throughout),
+**wrap-immune** (each file read as one stream with all whitespace — plus wrapped-blockquote
+`#`/`>`/`|` markers — collapsed to single spaces *before* matching, so a phrase split at the
+100-column hard wrap still matches), and **hyphenation-tolerant** (every intra-phrase space
+written `[-\s_]+`, so `six name` / `six-name` / `six_name` all match, and module names match
+across `[-_.]` boundaries). **13 patterns over 1,236 files** (`*.md`, `*.py`, `*.json`, `*.txt`,
+`*.sh`; `.git`, `.venv`, `Papers`, `__pycache__` excluded).
+
+**Result: no third consequence site exists.** Outside the four sites fixed above, every hit falls
+into one of four classes, all correctly left alone:
+
+| class | sites | why not edited |
+|---|---|---|
+| the finding's own artifacts | `leg_228.md:112, :118`, `leg_279.md:125`, `p2_route_bhrv_v1_postrepair.py:23–24, :390`, `CORRECTIONS.md` §8, `novelty/leg_228.md:73` | they **state** the correction; editing them would corrupt it |
+| leg 218's own record | `leg_218.md:130`, `novelty/leg_218.md:84`, `p2_route_bhr_v1_repair.py:50, :358, :466, :515`, `p2_route_bhr_v1_repair.json:574` | the original wording stays standing by this file's convention; leg 279 already appended pointers to the two journals, and the runner/JSON are banked evidence |
+| integration- and DM-owned ledgers | `experiments/JOURNAL.md:2918, :3939`; `DIRECTION.md:12178, :12194, :12199` | ORCHESTRATION.md §5a — flagged here, never edited by a leg |
+| leg 272's own verification artifacts | `p2_route_wescv_v1_verify.py:114`, `p2_route_wescv_v1_verify.json:433` (both record `class_P: 18`) | that **18** is leg 272's faithful record of what leg 263 *published* — it is the measurement's input, and must stay verbatim |
+
+**The blind spots, stated because a sweep's blind spots are part of its result.** The scan reads
+five text-ish extensions only (no PDFs under `Papers/`, no binary or notebook formats); it treats
+`|`, `*` and backtick as separators, so a phrase deliberately written with an *internal* asterisk
+inside a word would be split; and it is a phrase-family sweep, so a site that paraphrases the
+six-name list without any of the 13 patterns' anchors would not surface. Two patterns
+(`class-P-18`, `all-18`) are deliberately over-broad and returned 43 hits of which **0** concern
+this phrase family — reported rather than tuned away, since a pattern narrowed until it looks
+clean is the exact instrument failure this register was opened over.
+
+### The ceiling
+
+**0 arguments changed. 0 gate answers changed. 0 banked values moved. 0 solver modules touched.
+0 lines deleted. `plan_of_record.py` byte-identical.** Leg 263's 8 edits, its refusal to `sed`,
+and the stage-`V` ban's text all stand exactly as they were; legs 218's repair, 228's `YES` on
+both clauses and 279's closure are untouched. Nothing here lifts a ban, promotes a route, or
+moves a link of the `L1 → L4` chain. The object under all of it is still the `a = 0` CLM
+linearisation, and **"not dead" is still not "open."** Clay `~0.05%`.
