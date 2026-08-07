@@ -4105,3 +4105,26 @@ preempted agents had reached a landing.
   slot after the outage was found still running the same regeneration
   concurrently and was stopped to avoid wasted/conflicting work; no
   collision occurred (separate worktree, nothing landed).
+- **Leg 281 (Route-CVF) -- gate YES, landed.** Classified all 32 enumerated
+  certificate/PUB2 numeric quantities by convention-dependence: 14
+  convention-free (the tail block, `||T^-1||_X = 4.0262407` moving 2.56e-12
+  over eight decades of kappa), 1 exactly convertible (`||l||_{X*} =
+  0.8873620*kappa^-1/2` to 1.11e-16), 7 convention-relative (sigma_min
+  swings 124.8x, best power fit leaves 790% residual), 2 CF* and 3
+  already-disclosed, 3 not formed, 0 unclassified. **Q4 refuted**: the
+  ladder-flattening digit `0.139%` swings 17321x -- 139x MORE sensitive
+  than the sigma_min digit PUB2 already caveats -- yet the ladder is
+  monotone-decreasing in all 11 tested conventions, so the section 3.5
+  CLAIM is convention-free while the DIGIT stating it is not; PUB2 prints
+  both in one sentence (L437). **Two corrections found, opposite
+  directions**: PUB2 L442-446 calls `0.71465` convention-dependent -- it is
+  actually convention-FREE at 1.87e-16; while "optimistic by 7.87x" (L420)
+  IS fully convention-relative (ranging 5.265..656.95) and flagged nowhere.
+  PUB2's `0.0908 <= 0.71465` reconciliation independently re-verified,
+  survives a 61-point/twelve-decade sweep with 5.26x headroom. No document
+  edited (CORRECTIONS.md was outside this leg's four declared territory
+  paths, the same wall leg 277 hit -- the pointer is recorded in this
+  leg's own journal instead, flagged for a future document-correction leg
+  to apply). Two honesty items self-reported: a mis-listed D3 in its own
+  novelty pass, and a "48 slots" count that is mechanically 47 values + 3
+  declared-absent.
