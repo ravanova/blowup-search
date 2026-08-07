@@ -6,7 +6,7 @@
     "repair_ported_from": "10be909a4d4e95d293fabb2c526e7ac1896dea95",
     "repair_ported_reason": "leg 247's branch leg/247-vbr-v1 was not merged to main when this leg ran; the runner file here is byte-identical to leg 247's repaired version",
     "route": "VBRG",
-    "stale_bank_read_from": "06e96d207fea1d24c2f42b6d513d94ef1f8b6237",
+    "stale_bank_read_from": "9d89f2e2b975177f3b5cc7ffc04784a019d008f5",
     "tolerance_rel": 1e-06
   },
   "positive_control": {
