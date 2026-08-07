@@ -4273,6 +4273,36 @@ preempted agents had reached a landing.
   composition doesn't exist yet. Three downstream documents (citing the
   old numbers) flagged for a future light pointer-correction leg, not
   built. **This closes the top-priority open item tracked all session.**
+- **Leg 284 (Route-NU12) -- gate NO, landed, and a substantive
+  re-pinning.** Extends leg 210's ladder two rungs further (n up to 3201)
+  at Chen's a=1/2, testing whether nu(1/2) is grid-converged under a
+  six-clause criterion (K1..K6) that treats "converges to nu=0 at rate
+  h^2" as a FAILURE, not a plateau -- distinguishing a genuine small value
+  from mesh-locking. **Control passes cleanly**: a=0.30 GRID_CONVERGED,
+  nu=0.0179936150 at n=3201, ell/h doubling to 1.9999991/1.9999999,
+  Richardson order 3.161. **At a=1/2, four independent failure modes,
+  each pre-registered before the code existed**: (1) the root is
+  MESH-LOCKED -- ell/h pinned at 2.012/2.107/1.990 instead of doubling,
+  with point predictions fixed in advance landing inside their windows
+  (nu(1601) predicted -5.000e-05, observed -5.548e-05; nu(3201) predicted
+  -1.250e-05, observed -1.238e-05); a 7.4x box-size change moves nu by
+  95%, confirming it tracks the mesh, not the domain; (2) the augmented
+  Jacobian is SINGULAR TO WORKING PRECISION, sigma_min/sigma_max falling
+  7.7e-13 -> 7.4e-16 -> 3.5e-19 (vs 3.4e-04 -> 2.0e-05 at the control),
+  99.97% localised on the origin layer; (3) nu is NOT DETERMINED even at
+  floating-point associativity -- operators bit-identical to leg 210's,
+  yet reordering two additions moves nu by 19.1% at n=801 with both
+  solves nominally converged (vs 6.8e-14 at the control); (4) pseudo-
+  arclength continuation from the converged a=0.30 root FOLDS on all four
+  grids and never reaches a=1/2 (a_max 0.39259 -> 0.38626 -> 0.38592 ->
+  0.38568) -- **a* is RE-PINNED AS A TURNING POINT at 0.3857 +/- 0.004**,
+  reproducing leg 125's 0.3864964 to ~2e-3, exactly where leg 210's
+  bracket [0.36, 0.37] had excluded it. Two of the leg's own instrument
+  defects self-reported: an absolute continuation tolerance the grid's
+  own residual floor couldn't satisfy (manufacturing a spurious "branch
+  failure"), and repairing it destroyed an n=401 "branch reaches a=1/2"
+  artifact a less careful pass would have banked. No solver/ file
+  touched, no certificate claimed, Clay unchanged (~0.05%).
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
