@@ -4170,3 +4170,20 @@ preempted agents had reached a landing.
   (skip a fresh kappa-sweep once one point at that N is known) but does
   NOT let a future leg skip computing at a new N. Flagged, not applied,
   for future sweeps needing this quantity.
+- **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
+  result.** Checks whether leg 289's N-dependent coefficient C(N) for
+  D1's law follows its own closed form. Its own novelty pass found a
+  genuine 4-point N-ladder (N=64,128,256,512) already banked in legs
+  176/277 -- bigger than the 2-point dataset the brief anticipated --
+  cross-checked against legs 281/288 to <=9.3e-09 relative as one
+  consistently measured quantity. **A free-exponent power law is
+  falsified by its own instability**: the fitted exponent disagrees by
+  15.6% across overlapping data triples. **The best FIXED exponent
+  (p=1, matching leg 176's own stated Laguerre C/n truncation-decay
+  mechanism) still misses by 2.24e-06 max relative residual** -- about
+  2.0e+10x this leg family's own machine-precision floor, and about 120x
+  LARGER than the 1.90e-05 N=256-vs-512 gap it was supposed to explain,
+  worst at N=128. **Leg 289's N-restriction is confirmed real, not an
+  artifact of undersampling** -- D1's shortcut stays scoped to a fixed
+  discretization; leg 289's report is unmodified and stays correct as
+  written.
