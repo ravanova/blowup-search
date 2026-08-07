@@ -31,18 +31,19 @@ prose as before.
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
-| F | 290 | D1XN | yes |
+| F | 291 | HLR2 | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-A refill after 274 landed and 270's
-trace landed): 3/10 floor-eligible -- F/273/NFS, G/267/FDL, H/264/WETP -- matching the
-"270 trace" DM update at the tail of this file. Roster: A/276/PUB2R3, B/210/M2SV,
-C/228/BHRV, D/221/BVRR, E/248/CNR2, F/273/NFS, G/267/FDL, H/264/WETP, I/252/VBRG,
-J/226/PNR; leg 275 (P0TC2) additionally in flight on 251's parked branch.)
+(Current snapshot, DM update of 2026-08-07 (slot-F refill after 290/D1XN closed the D1
+line): 5/10 floor-eligible -- B/285/P2S, C/284/NU12, F/291/HLR2, G/267/FDL, H/264/WETP
+-- matching the "290 closes D1 line" DM update at the tail of this file. Full roster:
+A/272/WESCV, B/285/P2S, C/284/NU12, D/221/BVRR, E/286/CNRV, F/291/HLR2, G/267/FDL,
+H/264/WETP, I/287/EPA, J/226/PNR. Reserve rebuilt to genuine stock: 292, 293
+dispatchable now; 280 user-gated; 229/231-234 blocked.)
 
 ---
 
@@ -12685,3 +12686,108 @@ unchanged. Effective immediately-dispatchable: 0. Next fresh leg number: **291.*
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
 raised.
+
+---
+
+## DM update, 2026-08-07 — 290 (D1XN) landed gate NO, CLOSING THE D1 LINE (288→289→290)
+cleanly: the N-restriction is genuine, tested against a richer 4-point ladder; slot F =
+fresh leg 291 (well outside the PUB2/v11 orbit); RESERVE HONESTLY REBUILT — two
+standing candidates (292, 293) drafted now as real stock, not slot-time filler
+
+**290, recorded at full strength:** free-exponent power law FALSIFIED (15.6% exponent
+disagreement across triples, tested against N=64/128/256/512 — richer than the brief
+anticipated, already banked in 176/277); best fixed-exponent fit (p=1, matching leg
+176's own truncation mechanism) still misses by 2.24e-06, ~120× larger than the gap it
+aimed to explain. **289's N-restriction is confirmed genuine, not undersampling.** The
+D1 sub-investigation line is closed: exact predictive law within fixed N (289), no
+cross-N extension exists (290) — a complete, honest characterization.
+
+**Reserve diagnosis, accepted:** the coordinator's flag is correct — reserve has read
+"count 6" for many cycles while effective-dispatchable sat at 0, refilled cycle-by-cycle
+via single fresh drafts at the moment of promotion rather than real standing stock. That
+practice is legal per §3a (each promotion drafted a genuine, gated, immediately-useful
+leg) but leaves no buffer if two slots vacate before the next update. **Correcting it
+now: two candidates drafted below that are NOT tied to today's vacancy — pure reserve,
+dispatchable at the next TWO openings without further DM drafting.** Both chosen away
+from the PUB2/v11/CVF orbit that has dominated the last ~15 updates, per the
+composition-floor spirit (diversity of territory, not just diversity of eligibility
+class).
+
+**Slot F: fresh leg 291**, also off that orbit:
+
+```
+### 291 — ROUTE-HLR2: HAS ANY LATER WORK CERTIFIED HL_S2_nonsymmetric SINCE STAGE B
+CLOSED? (a second-generation precedent check — the object this repository's own
+original programme targeted, before the Clay pivot)
+[FLOOR-ELIGIBLE: literature]
+**Thesis.** Stage B closed (gate NO, leg 126) many cycles ago; the Clay pivot (ruling 2)
+followed. This repository has run "has anyone certified X since" checks for every Phase
+0/1 precedent (240/242/245/246) but never re-asked it for its OWN original target,
+HL_S2_nonsymmetric, since the pivot. A published certificate would not change the Clay
+programme's direction (already superseded) but WOULD be directly relevant to how this
+repository's own multi-cycle L1-L4 chain work should be described in any retrospective
+write-up — silence versus a real answer are different things to report.
+**Gate.** Full-text-verified: has any paper since stage B's closure (or since this
+repository's own leg 55/57 dating of the object) published a rigorous certificate
+(interval-arithmetic or otherwise) for HL_S2_nonsymmetric or a directly equivalent
+formulation?
+  yes -> Name it with locators; this is directly relevant to how the L1-L4 chain's
+         retrospective should be framed — flag for that purpose, no chain link moves.
+  no -> Bank the absence at full strength (closed nets named, lesson 91) — the
+         object remains open exactly as this repository's own record last measured it.
+**Territory.** experiments/p2_route_hlr2_v1_precedent.py,
+               writeup/data/p2_route_hlr2_v1_precedent.json,
+               writeup/novelty/leg_291.md, experiments/journal/leg_291.md.
+               Reads (never edits) legs 54/55/57/126's reports.
+**Difficulty.** standard
+**Independence.** Pure literature, own module, zero overlap with any live slot or the
+PUB2/v11 families. Slot F, now. Anti-pausing clause verbatim.
+```
+
+**Two standing reserve candidates, drafted now as real stock:**
+
+```
+### 292 — ROUTE-CAPA: capabilities.py FRESHNESS AUDIT, SECOND GENERATION (the last one
+was leg 71; ~220 legs and 4 new solver modules have landed since)
+[FLOOR-ELIGIBLE: none — audit, kept out of the floor tally by convention]
+**Thesis.** Leg 71 audited capabilities.py's test-presence/pass-status once, long ago.
+Every module built since (bc_weighted_sobolev.py among them) needs its own entry;
+"do not rebuild without grepping capabilities.py first" (point 7 of the Phase-1 steer)
+only works if the file is current.
+**Gate.** Does a fresh audit find every solver/*.py module represented with an accurate
+capability line (test presence, pass status, known-answer gate presence), with zero
+modules missing and zero stale entries?
+  yes -> Bank as current. no -> Fix the specific stale/missing entries found; report
+        count.
+**Territory.** capabilities.py, writeup/novelty/leg_292.md, experiments/journal/leg_292.md.
+**Difficulty.** standard
+**Independence.** Own scope, disjoint from every live slot. RESERVE — dispatchable at
+the next open vacancy with no further drafting needed.
+```
+
+```
+### 293 — ROUTE-JFA: experiments/JOURNAL.md FRESHNESS AUDIT, THIRD GENERATION (68, 102
+were the first two; the file has grown by ~190 entries since)
+[FLOOR-ELIGIBLE: none — audit, kept out of the floor tally by convention]
+**Thesis.** Same family as 68/102, due for a third pass given the volume landed since
+(the entire Phase 0/1/PUB2 campaign, legs ~245-290).
+**Gate.** Does every landed leg since 102 have a correctly-linked JOURNAL.md entry, with
+zero orphaned legs and zero broken links?
+  yes -> Bank as current. no -> Fix the specific gaps; report count.
+**Territory.** experiments/JOURNAL.md, writeup/novelty/leg_293.md,
+               experiments/journal/leg_293.md.
+**Difficulty.** standard
+**Independence.** Own scope, disjoint from every live slot. RESERVE — dispatchable at
+the next open vacancy with no further drafting needed.
+```
+
+**FLOOR-TABLE block updated in this same edit** (F: 290 → 291). **Floor status: 5/10
+strictly (291, 285, 284, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 8 — legs 292, 293, 280, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: **2 (292, 293)** — genuine buffer restored,
+not a zero. 280 stays user-gated; 229 on 226; 231-234 on repairs. Next fresh leg
+number: **294.**
+
+Nothing in this update lifts a ban; 290's negative is recorded as a clean, complete
+characterization, not a setback. Clay stays ~0.05%. No new direction question raised.
