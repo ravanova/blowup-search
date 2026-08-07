@@ -1,0 +1,168 @@
+{
+  "leg": 289,
+  "route": "ROUTE-D1X",
+  "date": "2026-08-07",
+  "role": "applies leg 288's exact D1(kappa) = C*kappa^-1/2 law to already-banked held-out kappa points (leg 281's own N=512 sweep beyond its kappa=1 anchor; leg 288's N=256 probe beyond its own kappa=100 anchor; and a cross-N transfer check) -- zero new certificate/solver compute, per novelty pass writeup/novelty/leg_289.md",
+  "novelty_pass_commit": "b6e33a1",
+  "reads_only": [
+    "writeup/data/p2_route_canon_v1_convention.json (leg 288)",
+    "writeup/data/p2_route_cvf_v1_classify.json (leg 281)"
+  ],
+  "law_as_quoted_by_leg281": "||ell||_{X*}(kappa) = 0.8873620087421942 * kappa^{-1/2}",
+  "leg281_fit_max_relative_residual": 1.1102230246251565e-16,
+  "leg249_has_D1_data": false,
+  "leg249_note": "leg 249's sweep is over sigma_min (the A1 quantity), varying the BORDER weight, not D1 (dual norm) at any kappa. Confirmed no D1 rows exist in leg 249's banked data before running this script (recorded in the novelty pass).",
+  "P1_same_N_holdout_leg281_sweep": {
+    "anchor_kappa": 1.0,
+    "anchor_coefficient": 0.8873620215869099,
+    "held_out_points": {
+      "0.0001": {
+        "kappa": 0.0001,
+        "measured": 88.73620215869099,
+        "predicted": 88.73620215869099,
+        "relative_error": 0.0
+      },
+      "0.001": {
+        "kappa": 0.001,
+        "measured": 28.060850973461363,
+        "predicted": 28.060850973461363,
+        "relative_error": 0.0
+      },
+      "0.01": {
+        "kappa": 0.01,
+        "measured": 8.8736202158691,
+        "predicted": 8.8736202158691,
+        "relative_error": 0.0
+      },
+      "0.1": {
+        "kappa": 0.1,
+        "measured": 2.8060850973461364,
+        "predicted": 2.806085097346136,
+        "relative_error": 1.5825935224489853e-16
+      },
+      "3.141592654": {
+        "kappa": 3.141592654,
+        "measured": 0.5006404094152138,
+        "predicted": 0.5006404093825287,
+        "relative_error": 6.52865335130373e-11
+      },
+      "6.283185307": {
+        "kappa": 6.283185307,
+        "measured": 0.3540062284335072,
+        "predicted": 0.3540062284385663,
+        "relative_error": 1.4290890589689595e-11
+      },
+      "10": {
+        "kappa": 10.0,
+        "measured": 0.28060850973461365,
+        "predicted": 0.28060850973461365,
+        "relative_error": 0.0
+      },
+      "100": {
+        "kappa": 100.0,
+        "measured": 0.08873620215869099,
+        "predicted": 0.08873620215869099,
+        "relative_error": 0.0
+      },
+      "1000": {
+        "kappa": 1000.0,
+        "measured": 0.028060850973461365,
+        "predicted": 0.028060850973461362,
+        "relative_error": 1.2364011894132697e-16
+      },
+      "10000": {
+        "kappa": 10000.0,
+        "measured": 0.008873620215869099,
+        "predicted": 0.008873620215869099,
+        "relative_error": 0.0
+      }
+    },
+    "max_relative_error": 6.52865335130373e-11,
+    "headline_held_out_point": {
+      "kappa": 10000.0,
+      "measured": 0.008873620215869099,
+      "predicted": 0.008873620215869099,
+      "relative_error": 0.0
+    },
+    "P1_falsified": false
+  },
+  "P2a_same_N_holdout_leg288_probe": {
+    "anchor_kappa": 100.0,
+    "anchor_coefficient": 0.8873451208021278,
+    "held_out_points": {
+      "10000.0": {
+        "kappa": 10000.0,
+        "measured": 0.008873451208021278,
+        "predicted": 0.008873451208021278,
+        "relative_error": 0.0
+      },
+      "1000000.0": {
+        "kappa": 1000000.0,
+        "measured": 0.0008873451208021277,
+        "predicted": 0.0008873451208021278,
+        "relative_error": 1.2218494778056875e-16
+      },
+      "100000000.0": {
+        "kappa": 100000000.0,
+        "measured": 8.873451208021277e-05,
+        "predicted": 8.873451208021278e-05,
+        "relative_error": 1.5273118472571095e-16
+      }
+    },
+    "max_relative_error": 1.5273118472571095e-16,
+    "headline_held_out_point": {
+      "kappa": 100000000.0,
+      "measured": 8.873451208021277e-05,
+      "predicted": 8.873451208021278e-05,
+      "relative_error": 1.5273118472571095e-16
+    },
+    "P2a_falsified": false
+  },
+  "P2b_cross_N_transfer": {
+    "description": "predicts leg 288's N=256 probe points using the coefficient anchored at N=512 (kappa=1) -- tests whether the law transfers ACROSS discretizations with no same-N reference point at all",
+    "N512_anchor_coefficient": 0.8873620215869099,
+    "N256_anchor_coefficient": 0.8873451208021278,
+    "coefficient_relative_difference_N512_vs_N256": 1.9046098853644986e-05,
+    "predictions": {
+      "100.0": {
+        "kappa": 100.0,
+        "measured": 0.08873451208021278,
+        "predicted_using_N512_coefficient": 0.08873620215869099,
+        "relative_error": 1.9046461614404426e-05
+      },
+      "10000.0": {
+        "kappa": 10000.0,
+        "measured": 0.008873451208021278,
+        "predicted_using_N512_coefficient": 0.008873620215869099,
+        "relative_error": 1.9046461614404426e-05
+      },
+      "1000000.0": {
+        "kappa": 1000000.0,
+        "measured": 0.0008873451208021277,
+        "predicted_using_N512_coefficient": 0.0008873620215869099,
+        "relative_error": 1.9046461614526613e-05
+      },
+      "100000000.0": {
+        "kappa": 100000000.0,
+        "measured": 8.873451208021277e-05,
+        "predicted_using_N512_coefficient": 8.873620215869099e-05,
+        "relative_error": 1.904646161455716e-05
+      }
+    },
+    "max_relative_error": 1.904646161455716e-05,
+    "P2b_prediction_confirmed_discretization_scale_not_machine_precision": true,
+    "P2b_would_be_falsified_if_machine_precision": false
+  },
+  "GATE": {
+    "question": "does D1's law correctly predict >=1 held-out banked data point (a kappa value in 249's or 281's data NOT used to derive/fit the law) to the precision those legs originally measured?",
+    "answer": "YES",
+    "headline_evidence": {
+      "kappa": 10000.0,
+      "measured": 0.008873620215869099,
+      "predicted": 0.008873620215869099,
+      "relative_error": 0.0,
+      "leg281_own_precision_floor": 1.1102230246251565e-16
+    },
+    "scope_limitation": "the law is a validated predictive shortcut ONLY within a fixed discretization N: it requires one already-computed D1(kappa0, N) certificate point at the SAME N as the target kappa. P2b shows the coefficient itself is N-dependent (1.905e-05 relative difference between N=256 and N=512), so the law does NOT eliminate the need for a certificate compute at a new N -- it only eliminates the need for a fresh SWEEP OVER kappa once one point at that N is known. Do not read 'exact law' as 'N-free' or 'apply anywhere'."
+  }
+}
