@@ -31,7 +31,7 @@ prose as before.
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
-| F | 288 | CANON | yes |
+| F | 289 | D1X | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
@@ -12573,3 +12573,61 @@ Nothing in this update lifts a ban; 281's classifications are recorded as measur
 the backwards site as a defect awaiting the gated pass. Clay stays ~0.05%. No new
 direction question raised — the amended 280 sign-off replaces, not adds to, the pending
 user item.
+
+---
+
+## DM update, 2026-08-07 — 288 (CANON) landed gate NO, decisively (no canonical
+convention exists; σ_min and Z₁/dual-norm pull opposite ways, ρ=-1, wrong choice costs
+12,478× in the resolvent norm): the CVF/CANON caveat-family question is CLOSED; slot F
+= fresh leg 289 built on 288's one clean exception (D1)
+
+**288, recorded at full strength:** the σ_min family wants κ pinned near an isolated
+interior maximum (κ* ≈ 0.1); the Z₁/dual-norm pair is monotone and wants κ → ∞ — exact
+opposite directions across all 4 tested conventions (Spearman ρ = −1); the wrong choice
+costs a **12,478× blowup** in exactly the resolvent norm the certificate needs bounded.
+**One exception banked at full strength: D1 (exact κ^(-1/2) law), with a complete
+conversion table.** Correctly flagged as NOT applied — no future document pass should
+adopt a whole-record "convention C." **This closes the CVF/CANON line of inquiry
+(270→276→277→281→288): the caveat family's recurrence is now explained
+mathematically, not just patched site by site — the answer is "no single fix exists,
+and here is the proof," which is itself the durable result.**
+
+**Slot F: fresh leg 289, drafted on the one live thread 288 left — D1's exact law is a
+banked result, not yet used anywhere** [FLOOR-ELIGIBLE: math]:
+
+```
+### 289 — ROUTE-D1X: WHAT DOES D1's EXACT κ^(-1/2) LAW APPLY TO? (288's one clean
+exception, extended from "banked" to "used")
+**Thesis.** 288 banked D1 (exact κ^(-1/2) law, full conversion table) as the one
+convention-quantity pair with a clean closed-form relationship, amid an otherwise
+opposite-direction family. An exact law with a conversion table is either (a) usable
+to PREDICT one of 281's convention-relative quantities at an untested κ without a fresh
+sweep, or (b) a special case with no further leverage. This leg checks which, against
+already-banked data (249's sweep, 281's table) — no new compute of the underlying
+certificate, only application of the already-proven law.
+**Gate.** Does D1's law correctly predict at least one held-out banked data point
+(a κ value in 249's/281's data NOT used to derive the law) to the precision those
+legs measured?
+  yes -> Bank D1 as a validated predictive shortcut; flag (not apply) as available for
+         any future sweep needing that specific quantity at a new κ.
+  no -> The law is descriptive of its derivation points only — bank that limitation
+        explicitly; do not let "exact law" read as "general-purpose" if it isn't.
+**Territory.** experiments/p2_route_d1x_v1_apply.py,
+               writeup/data/p2_route_d1x_v1_apply.json,
+               writeup/novelty/leg_289.md, experiments/journal/leg_289.md.
+               Reads (never edits) 288's D1 result/JSON, 249's sweep, 281's table.
+**Difficulty.** light-standard
+**Independence.** Own module, read-only overlaps, edits no document. Slot F, now.
+Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (F: 288 → 289). **Floor status: 5/10
+strictly (289, 285, 284, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated, four sites under one sign-off;
+229 on 226; 231-234 on repairs). Next fresh leg number: **290.**
+
+Nothing in this update lifts a ban; 288's negative is recorded as a decisive
+mathematical result, not a setback. Clay stays ~0.05%. No new direction question
+raised.
