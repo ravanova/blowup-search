@@ -28,10 +28,10 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 210 | M2SV | no |
-| C | 278 | SVSL | no |
+| C | 279 | Z1X | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
-| F | 277 | XUN | yes |
+| F | 281 | CVF | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 252 | VBRG | no |
@@ -12059,3 +12059,97 @@ repairs 217/219/221/225. Next fresh leg number: **280.**
 Nothing in this update lifts a ban; the Z_1 closure is recorded as an explanation of a
 measurement artifact, not movement of any link. Clay stays ~0.05%. No direction
 question raised — still awaiting the user's packet response and 226's report.
+
+---
+
+## DM update, 2026-08-07 — 277 and 278 both landed clean, BUT 277's finding disproves a
+figure the just-closed PUB2 still prints (0.0420 at two caveat sites): the eighth-pass
+rule FIRES — narrow pass drafted as 280, USER SIGN-OFF REQUESTED; slots C/F = 279/281
+
+**278 (SVSL) landed (`50efcde`): PUB2 closed from the record's side** — artifact-scoped
+sweep (117 files, 36 claim keys, 21 shared claims pairwise), the "seventy" typo fixed
+with the 2/2 split respected, two genuinely-unanchored sites banked to CORRECTIONS.md
+rather than guessed, 122-row trace green, 0 arguments moved.
+
+**277 (XUN) landed (`c9477e0`), recorded at full strength:** leg 249's Xu bridge used
+the WRONG of Xu's two stated norms (full-line instead of the displayed half-line) — the
+correct constant is π, not 2π, giving **σ_min = 0.057643, not 0.0420303** — measured
+with a control that failed where it should (complex-data deviation 0.676 vs real-subspace
+2.20e-14). Not an escalation: the gate property is invariant under any positive
+constant. Bonus banked: **‖T⁻¹‖_X = 4.0262407 is proved exactly convention-free** —
+the number PUB2 quotes.
+
+**The collision, checked directly by this DM (grep, not assumption): PUB2 prints
+"0.0420" at TECHNICAL L55-56 ("carrying the 2π" — the wrong-norm artifact verbatim) and
+L233-234.** The just-closed document quotes a now-disproven figure. **The eighth-pass
+rule fires as written: this DM requests the user's sign-off for ONE narrow pass** —
+drafted below, blocked on that sign-off, nothing dispatches without it. The
+recommendation transmitted with the request: SIGN OFF — the fix is two sites, the
+correct value is measured with a passing control, and a submission-track document should
+not print a number its own record disproves; but the rule is the user's gate to open,
+not this DM's.
+
+```
+### 280 — ROUTE-PUB2X: THE USER-GATED EIGHTH PASS — CORRECT THE TWO Xu-NORMALIZATION
+SITES (0.0420 → 0.057643, π not 2π) (BLOCKED ON USER SIGN-OFF, per the declared-final
+rule 278 landed under)
+**Thesis.** 277's verified finding above. Two sites only; the caveat's own structure is
+untouched (the 12.5× sweep stays; only Xu's constant and its derivation note change).
+**Gate.** (a) Both sites state 0.057643 with the half-line/π provenance and a dated note
+citing leg 277; (b) 278's artifact-scoped consistency verdict re-confirmed (no OTHER
+site quotes 0.0420); (c) 122-row trace green, byte-identical elsewhere; (d) zero
+arguments changed.
+  yes -> Bank. PUB2 re-closed; any NINTH pass likewise needs user sign-off.
+  no -> Any resistance: STOP, escalate — at this iteration count nothing is guessed.
+**Territory.** the two named TECHNICAL sites, writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_280.md, experiments/journal/leg_280.md.
+               Reads (never edits) leg 277's report/JSON.
+**Difficulty.** light
+**Independence.** BLOCKED ON USER SIGN-OFF — in NEEDS-YOU via the orchestrator. Top of
+queue the moment the sign-off lands.
+```
+
+**Slot C: leg 279 (Route-Z1X)** — per reserve order, the Z_1 closure pass.
+**Slot F: fresh floor-eligible leg 281, drafted from 277's bonus finding** (the floor
+would otherwise breach to 2/10 with 277/278 landed):
+
+```
+### 281 — ROUTE-CVF: WHICH OF THE CERTIFICATE'S QUOTED QUANTITIES ARE CONVENTION-FREE?
+(extend 277's proof from one quantity to the full quoted set — math, classification
+with proofs)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 277 proved ‖T⁻¹‖_X = 4.0262407 exactly convention-free while σ_min moves
+12.5× under weight choice and 1.37× under Xu's norm choice. PUB2 and the record quote a
+finite, enumerable set of headline quantities. Classify EVERY one: convention-free
+(proved, 277's method), or convention-relative (with its measured sweep range and the
+convention that pins it). The classification is itself the durable fix for the entire
+defect family 270/276/277 kept finding one instance at a time.
+**Gate.** For the enumerated set (listed in the novelty pass before computing): does
+each quantity get either a convention-freeness proof or a measured convention-dependence
+range with named pinning convention — no quantity left unclassified?
+  yes -> Bank the classification table. Flag (not edit) the sites any future document
+         pass would caveat; CORRECTIONS.md pointer.
+  no -> Name which quantity resists classification and why — that is itself a finding
+        about the certificate's presentation, banked at full strength.
+**Territory.** experiments/p2_route_cvf_v1_classify.py,
+               writeup/data/p2_route_cvf_v1_classify.json,
+               writeup/novelty/leg_281.md, experiments/journal/leg_281.md.
+               Reads (never edits) 277's method/JSON, 249's sweep data, PUB2.
+**Difficulty.** standard
+**Independence.** Own module, read-only overlaps. Immediately dispatchable. Holds the
+floor at 3/10 (281, 267, 264).
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 278 → 279; F: 277 → 281). **Floor
+status: 3/10 strictly (281, 267, 264) — met exactly.**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated; 229 on 226; 231-234 on repairs) —
+the pending generators (user packet response, user sign-off on 280, 226's report, 210's
+pending verification, 267/264 in flight) all produce work on arrival. Next fresh leg
+number: **282.**
+
+Nothing in this update lifts a ban; 277's correction is recorded against leg 249's
+bridge figure, with the gate property explicitly invariant. Clay stays ~0.05%. ONE
+direction item goes to the user: the 280 sign-off, exactly as the eighth-pass rule
+requires.
