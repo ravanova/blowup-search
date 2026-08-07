@@ -1,0 +1,1894 @@
+{
+  "leg": 281,
+  "route": "ROUTE-CVF",
+  "date": "2026-08-07",
+  "role": "CLASSIFICATION: every headline quantity PUB2 and the certificate quote gets a convention-freeness statement with a measured invariance magnitude and a mechanism, or a measured convention-dependence range with the convention that pins the quoted digit",
+  "novelty_pass_commit": "9a003d0",
+  "classes": {
+    "CF": "convention-free: invariant over the whole sweep, with a mechanism",
+    "CF*": "convention-free in practice: moves above round-off but negligibly against the threshold the quantity is compared against",
+    "CX": "convention-relative, exactly convertible by a proved power of kappa",
+    "CR": "convention-relative, no law -- needs its sweep range disclosed",
+    "CR-DISCLOSED": "convention-relative, and the convention is already named at every call-site (the ell^1_w group's `s`)",
+    "N/F": "not formed by the certificate; classified by its absence + locator"
+  },
+  "convention_axis": {
+    "parameter": "kappa, the constant multiplying the X-block coefficient Gram G = I + J^4, with the border amplitude held at weight 1",
+    "equivalent_to": "border weight 1/kappa (leg 277 P1, 2.14e-13)",
+    "sweep": [
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      3.141592653589793,
+      6.283185307179586,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0
+    ],
+    "named_points": {
+      "repo": 1.0,
+      "xu_half_line_4p2": 3.141592653589793,
+      "xu_full_line": 6.283185307179586
+    },
+    "leg249_sweep_for_comparison": "border weight 1e-2 .. 1e2 (kappa 1e-2 .. 1e2)"
+  },
+  "ceiling": "a=0 only; float64; nothing interval-enclosed beyond what legs 249/277 banked; Y_0 and Z_2 still not formed; HL_S2_nonsymmetric inherits none of it; no link of L1->L4 moves; Clay odds unchanged at ~0.05%",
+  "ga_compute": false,
+  "S0_reproduction_control": {
+    "role": "independently-written sections reproduced against the banked numbers of legs 176, 249 and 277 BEFORE any classification is drawn from them",
+    "C1_at_512_repo_convention": {
+      "here_cached_cholesky": 0.09080414383680567,
+      "sigma_max_here": 499.6409636599634,
+      "here_eigh_full_bordered_gram": 0.09080465147038257,
+      "leg176_banked": 0.09080465147034879,
+      "cholesky_vs_eigh_relative": 5.590391777029912e-06,
+      "eigh_vs_leg176_banked_relative": 3.7199124689389265e-13,
+      "cholesky_vs_leg176_banked_relative": 5.590391405040745e-06,
+      "reading": "leg 176 whitened the FULL bordered Gram with eigh; this leg factors the X block ONCE and scales it by sqrt(kappa), which is what makes an eleven-point sweep affordable.  The two routes disagree at the level recorded above -- a conditioning statement about a Gram whose entries reach ~1e12 at N = 512, not a disagreement about the mathematics.  It is far below every convention-dependence this leg reports for a CR quantity, and far ABOVE nothing that is claimed CF, because the CF claims all live on the tail block, where the same comparison is at 1e-13 (below)."
+    },
+    "C2_at_512_route_comparison": {
+      "here_cached_cholesky_inverse_norm": 4.026240741300086,
+      "here_eigh_inverse_norm": 4.02614534796022,
+      "cholesky_vs_eigh_relative": 2.3692905117802325e-05,
+      "leg176_banked_inverse_norm": 4.02614534796022,
+      "leg277_reported_inverse_norm": 4.0262407,
+      "leg249_interval_enclosure": [
+        4.02623993,
+        4.02624155
+      ],
+      "cholesky_value_lies_inside_leg249_interval": true,
+      "leg176_banked_lies_inside_leg249_interval": false,
+      "reading": "leg 277 sec 3.5 already recorded that leg 176's banked 4.02614534796022 falls OUTSIDE leg 249's interval enclosure while 4.0262407 falls inside. This row reproduces both sides of that independently and is the reason the cached-Cholesky route is primary here: on the tail block it agrees with the interval-enclosed value, and it is that block the CF claims are made about."
+    },
+    "leg249_W5_sweep_reproduced": {
+      "0.01": {
+        "kappa": 100.0,
+        "leg249_sigma_min": 0.010856262976502303,
+        "here": 0.010856262976502875,
+        "relative_difference": 5.273073693142818e-14
+      },
+      "0.1": {
+        "kappa": 10.0,
+        "leg249_sigma_min": 0.033710662614220156,
+        "here": 0.03371066261422105,
+        "relative_difference": 2.655294331789389e-14
+      },
+      "0.25": {
+        "kappa": 4.0,
+        "leg249_sigma_min": 0.051757260550031936,
+        "here": 0.051757260550031325,
+        "relative_difference": 1.1797816519936725e-14
+      },
+      "1.0": {
+        "kappa": 1.0,
+        "leg249_sigma_min": 0.09082344116502357,
+        "here": 0.09082344116502239,
+        "relative_difference": 1.2987968177960886e-14
+      },
+      "4.0": {
+        "kappa": 0.25,
+        "leg249_sigma_min": 0.1273833089715678,
+        "here": 0.1273833089715738,
+        "relative_difference": 4.706428480605718e-14
+      },
+      "10.0": {
+        "kappa": 0.1,
+        "leg249_sigma_min": 0.1357994693284667,
+        "here": 0.13579946932847606,
+        "relative_difference": 6.887824399256476e-14
+      },
+      "100.0": {
+        "kappa": 0.01,
+        "leg249_sigma_min": 0.09267680828992153,
+        "here": 0.09267680828994011,
+        "relative_difference": 2.0050709791960286e-13
+      }
+    },
+    "leg249_W5_max_relative_difference": 2.0050709791960286e-13,
+    "leg249_W5_ratio_over_its_own_range": 12.50885959767151,
+    "leg277_anchors_at_512": {
+      "repo": {
+        "kappa": 1.0,
+        "here": 0.09080414383680567,
+        "leg277_banked": 0.09080465147038257,
+        "relative_difference": 5.590391777029912e-06
+      },
+      "xu_half_line_4p2": {
+        "kappa": 3.141592653589793,
+        "here": 0.05764301146012326,
+        "leg277_banked": 0.05764308738390632,
+        "relative_difference": 1.3171359568840233e-06
+      },
+      "xu_full_line": {
+        "kappa": 6.283185307179586,
+        "here": 0.042030323448698885,
+        "leg277_banked": 0.042030353267990365,
+        "relative_difference": 7.094703984608852e-07
+      }
+    },
+    "leg277_anchor_tail_inverse_norm": {
+      "here_repo_convention": 4.026240741300086,
+      "leg176_banked": 4.02614534796022
+    },
+    "reading": "every section below is exercised here against a number banked by a DIFFERENT leg before it is used to classify anything.  Magnitudes above."
+  },
+  "S1_group_A_bordered": {
+    "group": "A -- the bordered section (leg 176 C1; PUB2 sec 3.5 / 4.5 / 5(3) / 7)",
+    "sweep": {
+      "0.0001": {
+        "32": {
+          "sigma_min": 0.011266808808787002,
+          "sigma_max": 88.91888120278985,
+          "resolvent_norm": 88.75627668591468
+        },
+        "64": {
+          "sigma_min": 0.011251277038829008,
+          "sigma_max": 88.97267113961993,
+          "resolvent_norm": 88.87879985080133
+        },
+        "128": {
+          "sigma_min": 0.011247435139494676,
+          "sigma_max": 121.07415592889654,
+          "resolvent_norm": 88.90915907472643
+        },
+        "256": {
+          "sigma_min": 0.01124540259602401,
+          "sigma_max": 246.68145870336562,
+          "resolvent_norm": 88.92522890675038
+        },
+        "512": {
+          "sigma_min": 0.01124443611457675,
+          "sigma_max": 499.6409636611886,
+          "resolvent_norm": 88.93287220544993
+        },
+        "ladder_relative_spread": 0.0019857170375345936,
+        "ladder_relative_spread_64_to_512": 0.0006080131374110268,
+        "monotone_decreasing": true
+      },
+      "0.001": {
+        "32": {
+          "sigma_min": 0.034910569510070676,
+          "sigma_max": 28.830815714345395,
+          "resolvent_norm": 28.64462006875967
+        },
+        "64": {
+          "sigma_min": 0.0348663947681461,
+          "sigma_max": 58.9396974712719,
+          "resolvent_norm": 28.680911997061393
+        },
+        "128": {
+          "sigma_min": 0.034856372357213915,
+          "sigma_max": 121.07415536151947,
+          "resolvent_norm": 28.689158749850193
+        },
+        "256": {
+          "sigma_min": 0.034851076770095274,
+          "sigma_max": 246.68145868295554,
+          "resolvent_norm": 28.693518039536496
+        },
+        "512": {
+          "sigma_min": 0.03484859780736045,
+          "sigma_max": 499.6409636600818,
+          "resolvent_norm": 28.695559159306768
+        },
+        "ladder_relative_spread": 0.0017751558791484988,
+        "ladder_relative_spread_64_to_512": 0.0005104330661082645,
+        "monotone_decreasing": true
+      },
+      "0.01": {
+        "32": {
+          "sigma_min": 0.0927680916905216,
+          "sigma_max": 28.367036957087155,
+          "resolvent_norm": 10.77956851086302
+        },
+        "64": {
+          "sigma_min": 0.09269746763583427,
+          "sigma_max": 58.93969705173657,
+          "resolvent_norm": 10.787781214569316
+        },
+        "128": {
+          "sigma_min": 0.09268541880893184,
+          "sigma_max": 121.07415533520614,
+          "resolvent_norm": 10.789183593823635
+        },
+        "256": {
+          "sigma_min": 0.09267680828994011,
+          "sigma_max": 246.68145868117833,
+          "resolvent_norm": 10.790186007177677
+        },
+        "512": {
+          "sigma_min": 0.09267138823295977,
+          "sigma_max": 499.64096365997864,
+          "resolvent_norm": 10.790817091097995
+        },
+        "ladder_relative_spread": 0.0010424215460250305,
+        "ladder_relative_spread_64_to_512": 0.0002813388924166724,
+        "monotone_decreasing": true
+      },
+      "0.1": {
+        "32": {
+          "sigma_min": 0.13615417023505566,
+          "sigma_max": 28.36701941791099,
+          "resolvent_norm": 7.344615286286175
+        },
+        "64": {
+          "sigma_min": 0.13599921442533403,
+          "sigma_max": 58.93969701934868,
+          "resolvent_norm": 7.352983649394664
+        },
+        "128": {
+          "sigma_min": 0.13588464769266775,
+          "sigma_max": 121.07415533271468,
+          "resolvent_norm": 7.359183079031226
+        },
+        "256": {
+          "sigma_min": 0.13579946932847606,
+          "sigma_max": 246.6814586810031,
+          "resolvent_norm": 7.363799026203617
+        },
+        "512": {
+          "sigma_min": 0.1357391624669265,
+          "sigma_max": 499.6409636599637,
+          "resolvent_norm": 7.367070650989576
+        },
+        "ladder_relative_spread": 0.003048072397728984,
+        "ladder_relative_spread_64_to_512": 0.0019121577981636377,
+        "monotone_decreasing": true
+      },
+      "1": {
+        "32": {
+          "sigma_min": 0.09093104093770349,
+          "sigma_max": 28.36701802700669,
+          "resolvent_norm": 10.997344687663878
+        },
+        "64": {
+          "sigma_min": 0.09088780400823183,
+          "sigma_max": 58.939697016291014,
+          "resolvent_norm": 11.002576318264094
+        },
+        "128": {
+          "sigma_min": 0.09085063207541998,
+          "sigma_max": 121.07415533246679,
+          "resolvent_norm": 11.00707807040733
+        },
+        "256": {
+          "sigma_min": 0.09082344116502239,
+          "sigma_max": 246.68145868098318,
+          "resolvent_norm": 11.010373392294637
+        },
+        "512": {
+          "sigma_min": 0.09080414383680567,
+          "sigma_max": 499.6409636599634,
+          "resolvent_norm": 11.012713272174146
+        },
+        "ladder_relative_spread": 0.0013955311584385734,
+        "ladder_relative_spread_64_to_512": 0.0009204774209154289,
+        "monotone_decreasing": true
+      },
+      "3.141592654": {
+        "32": {
+          "sigma_min": 0.057673116565642515,
+          "sigma_max": 28.367018574284117,
+          "resolvent_norm": 17.33910111935459
+        },
+        "64": {
+          "sigma_min": 0.057663043669004585,
+          "sigma_max": 58.93969701633099,
+          "resolvent_norm": 17.342130008609423
+        },
+        "128": {
+          "sigma_min": 0.05765414473954405,
+          "sigma_max": 121.0741553324485,
+          "resolvent_norm": 17.344806770051974
+        },
+        "256": {
+          "sigma_min": 0.05764764279713278,
+          "sigma_max": 246.68145868098523,
+          "resolvent_norm": 17.346763050123133
+        },
+        "512": {
+          "sigma_min": 0.05764301146012326,
+          "sigma_max": 499.6409636599663,
+          "resolvent_norm": 17.34815677858517
+        },
+        "ladder_relative_spread": 0.0005219954688072119,
+        "ladder_relative_spread_64_to_512": 0.0003474011707795605,
+        "monotone_decreasing": true
+      },
+      "6.283185307": {
+        "32": {
+          "sigma_min": 0.04204169854104331,
+          "sigma_max": 28.36702138321042,
+          "resolvent_norm": 23.785908626497275
+        },
+        "64": {
+          "sigma_min": 0.04203791244660747,
+          "sigma_max": 58.9396970167476,
+          "resolvent_norm": 23.788050875982584
+        },
+        "128": {
+          "sigma_min": 0.042034541257814625,
+          "sigma_max": 121.07415533244384,
+          "resolvent_norm": 23.789958688179816
+        },
+        "256": {
+          "sigma_min": 0.042032079158029916,
+          "sigma_max": 246.68145868098517,
+          "resolvent_norm": 23.79135222505303
+        },
+        "512": {
+          "sigma_min": 0.042030323448698885,
+          "sigma_max": 499.64096365996414,
+          "resolvent_norm": 23.792346047980665
+        },
+        "ladder_relative_spread": 0.00027056690712245557,
+        "ladder_relative_spread_64_to_512": 0.00018052746834714472,
+        "monotone_decreasing": true
+      },
+      "10": {
+        "32": {
+          "sigma_min": 0.03371557214947434,
+          "sigma_max": 29.74002101335423,
+          "resolvent_norm": 29.65988521762609
+        },
+        "64": {
+          "sigma_min": 0.033713643344097266,
+          "sigma_max": 58.939697017410886,
+          "resolvent_norm": 29.661582101748266
+        },
+        "128": {
+          "sigma_min": 0.03371192058087517,
+          "sigma_max": 121.07415533244212,
+          "resolvent_norm": 29.663097882572192
+        },
+        "256": {
+          "sigma_min": 0.03371066261422105,
+          "sigma_max": 246.681458680984,
+          "resolvent_norm": 29.664204807951293
+        },
+        "512": {
+          "sigma_min": 0.033709765167419976,
+          "sigma_max": 499.6409636599624,
+          "resolvent_norm": 29.66499455079225
+        },
+        "ladder_relative_spread": 0.00017223442119329447,
+        "ladder_relative_spread_64_to_512": 0.00011503285591851313,
+        "monotone_decreasing": true
+      },
+      "100": {
+        "32": {
+          "sigma_min": 0.01085642410167248,
+          "sigma_max": 92.13607706865152,
+          "resolvent_norm": 92.11136103700532
+        },
+        "64": {
+          "sigma_min": 0.010856360984448981,
+          "sigma_max": 92.13619068307437,
+          "resolvent_norm": 92.11189655838028
+        },
+        "128": {
+          "sigma_min": 0.010856304331703094,
+          "sigma_max": 121.07415533244146,
+          "resolvent_norm": 92.11237723686067
+        },
+        "256": {
+          "sigma_min": 0.010856262976502875,
+          "sigma_max": 246.68145868098347,
+          "resolvent_norm": 92.11272812425273
+        },
+        "512": {
+          "sigma_min": 0.01085623345238971,
+          "sigma_max": 499.64096365996966,
+          "resolvent_norm": 92.11297862979141
+        },
+        "ladder_relative_spread": 1.7560964916561367e-05,
+        "ladder_relative_spread_64_to_512": 1.1747219851421136e-05,
+        "monotone_decreasing": true
+      },
+      "1000": {
+        "32": {
+          "sigma_min": 0.0034394028954789777,
+          "sigma_max": 290.75593695709676,
+          "resolvent_norm": 290.7481415784347
+        },
+        "64": {
+          "sigma_min": 0.0034394008927307305,
+          "sigma_max": 290.75597328933907,
+          "resolvent_norm": 290.7483108798186
+        },
+        "128": {
+          "sigma_min": 0.0034393990941953495,
+          "sigma_max": 290.7559751052802,
+          "resolvent_norm": 290.74846291833165
+        },
+        "256": {
+          "sigma_min": 0.003439397781349193,
+          "sigma_max": 290.75597511540093,
+          "resolvent_norm": 290.7485738993889
+        },
+        "512": {
+          "sigma_min": 0.0034393968440193834,
+          "sigma_max": 499.6409636599659,
+          "resolvent_norm": 290.74865313633586
+        },
+        "ladder_relative_spread": 1.7594506308726785e-06,
+        "ladder_relative_spread_64_to_512": 1.1771559854049055e-06,
+        "monotone_decreasing": true
+      },
+      "10000": {
+        "32": {
+          "sigma_min": 0.0010878343924465722,
+          "sigma_max": 919.2600343133938,
+          "resolvent_norm": 919.2575698502876
+        },
+        "64": {
+          "sigma_min": 0.0010878343290925908,
+          "sigma_max": 919.2600458152036,
+          "resolvent_norm": 919.2576233865893
+        },
+        "128": {
+          "sigma_min": 0.0010878342721958013,
+          "sigma_max": 919.2600463895034,
+          "resolvent_norm": 919.2576714663464
+        },
+        "256": {
+          "sigma_min": 0.001087834230663203,
+          "sigma_max": 919.2600463927034,
+          "resolvent_norm": 919.2577065628332
+        },
+        "512": {
+          "sigma_min": 0.0010878342010108336,
+          "sigma_max": 919.2600463927049,
+          "resolvent_norm": 919.2577316201158
+        },
+        "ladder_relative_spread": 1.7597875182222895e-07,
+        "ladder_relative_spread_64_to_512": 1.1774013174380968e-07,
+        "monotone_decreasing": true
+      }
+    },
+    "A1_sigma_min_N512": {
+      "quoted": 0.09080465147034879,
+      "pinned_by": "kappa = 1 (repository convention)",
+      "value_at_named": {
+        "repo": 0.09080414383680567,
+        "xu_half_line_4p2": 0.05764301146012326,
+        "xu_full_line": 0.042030323448698885
+      },
+      "sweep_min": 0.0010878342010108336,
+      "sweep_max": 0.1357391624669265,
+      "max_over_min": 124.77927458136121,
+      "relative_spread": 0.9919858485845904,
+      "best_power_fit_exponent": -0.15078473164574002,
+      "best_power_fit_max_relative_residual": 7.896104117814886,
+      "monotone_in_kappa": false,
+      "argmax_kappa": 0.1,
+      "CLASS": "CR"
+    },
+    "A2_resolvent_norm_N512": {
+      "quoted": 11.012651706796523,
+      "pinned_by": "kappa = 1",
+      "value_at_named": {
+        "repo": 11.012713272174146,
+        "xu_half_line_4p2": 17.34815677858517,
+        "xu_full_line": 23.792346047980665
+      },
+      "sweep_min": 7.367070650989576,
+      "sweep_max": 919.2577316201158,
+      "max_over_min": 124.77927458136121,
+      "CLASS": "CR",
+      "note": "exactly 1/A1, so it inherits A1's class and its range inverted"
+    },
+    "A3_sigma_max_N512": {
+      "quoted": 499.64096369153697,
+      "pinned_by": "kappa = 1",
+      "value_at_named": {
+        "repo": 499.6409636599634,
+        "xu_half_line_4p2": 499.6409636599663,
+        "xu_full_line": 499.64096365996414
+      },
+      "sweep_min": 499.6409636599624,
+      "sweep_max": 919.2600463927049,
+      "max_over_min": 1.8398412325101514,
+      "best_power_fit_exponent": 0.016925943736777173,
+      "best_power_fit_max_relative_residual": 0.3316542118784278,
+      "relative_spread_over_the_three_NAMED_conventions": 5.8021951216036615e-15,
+      "relative_spread_over_kappa_1e-4_to_1e3": 2.4542147679005485e-12,
+      "breaks_at_kappa": 10000.0,
+      "CLASS": "CF*",
+      "class_note": "PRE-GUESSED CR IN THE NOVELTY PASS, AND THE MEASUREMENT SAYS OTHERWISE. sigma_max is identical to ~1e-13 across ten of the eleven conventions -- including all three NAMED ones -- and moves only at the top of an eight-decade sweep.  Mechanism: sigma_max is attained INSIDE the X block, where kappa cancels; the border coordinate can only carry it once kappa is large enough to make the unit-weight border the smallest scale in the problem.  Filed CF* with the breakdown point named rather than CF, because it does eventually move."
+    },
+    "A4_ladder_relative_spread": {
+      "quoted": 0.0013899483438452888,
+      "quoted_64_to_512": 0.00092,
+      "value_at_named": {
+        "repo": 0.0013955311584385734,
+        "xu_half_line_4p2": 0.0005219954688072119,
+        "xu_full_line": 0.00027056690712245557
+      },
+      "sweep_min": 1.7597875182222895e-07,
+      "sweep_max": 0.003048072397728984,
+      "max_over_min": 17320.68426538279,
+      "sweep_min_64_to_512": 1.1774013174380968e-07,
+      "sweep_max_64_to_512": 0.0019121577981636377,
+      "monotone_decreasing_in_every_convention": true,
+      "monotone_decreasing_by_convention": {
+        "0.0001": true,
+        "0.001": true,
+        "0.01": true,
+        "0.1": true,
+        "1": true,
+        "3.141592654": true,
+        "6.283185307": true,
+        "10": true,
+        "100": true,
+        "1000": true,
+        "10000": true
+      },
+      "relative_spread_over_the_three_NAMED_conventions": 0.8061190497350225,
+      "ratio_over_the_three_NAMED_conventions": 5.1578043053394245,
+      "CLASS": "CR",
+      "QUALITATIVE_CLAIM_CLASS": "CF",
+      "Q4_RESOLUTION": "Q4 PREDICTED that A4 would be 'far closer to CF than A1 is'.  REFUTED, and in the direction that matters: A1 swings by max/min = 124.8 over the sweep and A4 swings by max/min = 17320.7 -- A4 is the MOST convention-sensitive number in the whole enumeration, ~139x more sensitive than the digit PUB2 already caveats.  But the SPLIT that Q4 was really asking about survives: the ladder is monotone-decreasing in ALL ELEVEN conventions, so the QUALITATIVE claim PUB2 sec 3.5 rests on ('a monotone-decreasing ladder that flattens') is convention-free, while the DIGIT that states how much ('0.139 %') is not.  Those are two different sentences and PUB2 prints them as one.",
+      "reading": "Q4.  PUB2 sec 3.5's argument rests on the ladder FLATTENING, not on the digit 0.0908.  This row measures whether that argument is convention-free even though its headline digit is not."
+    },
+    "A6_xu_normalization_images": {
+      "xu_full_line_kappa_2pi": 0.042030323448698885,
+      "xu_half_line_4p2_kappa_pi": 0.05764301146012326,
+      "ratio_half_over_full": 1.3714624759069678,
+      "CLASS": "CR",
+      "note": "these ARE points of the A1 sweep, not separate quantities"
+    }
+  },
+  "S2_group_B_tail": {
+    "group": "B -- the tail block (leg 176 C2; leg 277's convention-free anchor)",
+    "K_blocks_at_N512": {
+      "2": {
+        "0.0001": {
+          "sigma_min": 0.24837064255556943,
+          "inverse_norm": 4.026240741299625
+        },
+        "0.001": {
+          "sigma_min": 0.24837064255567304,
+          "inverse_norm": 4.026240741297945
+        },
+        "0.01": {
+          "sigma_min": 0.24837064255587796,
+          "inverse_norm": 4.0262407412946235
+        },
+        "0.1": {
+          "sigma_min": 0.24837064255544936,
+          "inverse_norm": 4.026240741301571
+        },
+        "1": {
+          "sigma_min": 0.248370642555541,
+          "inverse_norm": 4.026240741300086
+        },
+        "3.141592654": {
+          "sigma_min": 0.2483706425556258,
+          "inverse_norm": 4.026240741298711
+        },
+        "6.283185307": {
+          "sigma_min": 0.24837064255580044,
+          "inverse_norm": 4.02624074129588
+        },
+        "10": {
+          "sigma_min": 0.2483706425555903,
+          "inverse_norm": 4.026240741299286
+        },
+        "100": {
+          "sigma_min": 0.24837064255608626,
+          "inverse_norm": 4.026240741291247
+        },
+        "1000": {
+          "sigma_min": 0.24837064255575614,
+          "inverse_norm": 4.026240741296598
+        },
+        "10000": {
+          "sigma_min": 0.2483706425556537,
+          "inverse_norm": 4.026240741298259
+        },
+        "relative_spread_over_sweep": 2.5643416915024985e-12,
+        "max_over_min": 1.0000000000025644,
+        "value_at_named": {
+          "repo": 0.248370642555541,
+          "xu_half_line_4p2": 0.2483706425556258,
+          "xu_full_line": 0.24837064255580044
+        }
+      },
+      "4": {
+        "0.0001": {
+          "sigma_min": 0.6690109795701398,
+          "inverse_norm": 1.4947437793061795
+        },
+        "0.001": {
+          "sigma_min": 0.6690109795657575,
+          "inverse_norm": 1.4947437793159706
+        },
+        "0.01": {
+          "sigma_min": 0.6690109795529834,
+          "inverse_norm": 1.4947437793445113
+        },
+        "0.1": {
+          "sigma_min": 0.6690109795558933,
+          "inverse_norm": 1.4947437793380098
+        },
+        "1": {
+          "sigma_min": 0.6690109795661164,
+          "inverse_norm": 1.4947437793151688
+        },
+        "3.141592654": {
+          "sigma_min": 0.6690109795557664,
+          "inverse_norm": 1.4947437793382934
+        },
+        "6.283185307": {
+          "sigma_min": 0.6690109795620541,
+          "inverse_norm": 1.494743779324245
+        },
+        "10": {
+          "sigma_min": 0.6690109795652601,
+          "inverse_norm": 1.494743779317082
+        },
+        "100": {
+          "sigma_min": 0.669010979559905,
+          "inverse_norm": 1.4947437793290468
+        },
+        "1000": {
+          "sigma_min": 0.6690109795704181,
+          "inverse_norm": 1.4947437793055576
+        },
+        "10000": {
+          "sigma_min": 0.6690109795659591,
+          "inverse_norm": 1.4947437793155203
+        },
+        "relative_spread_over_sweep": 2.6060439763340845e-11,
+        "max_over_min": 1.0000000000260605,
+        "value_at_named": {
+          "repo": 0.6690109795661164,
+          "xu_half_line_4p2": 0.6690109795557664,
+          "xu_full_line": 0.6690109795620541
+        }
+      },
+      "8": {
+        "0.0001": {
+          "sigma_min": 0.8244418695087526,
+          "inverse_norm": 1.2129417936959637
+        },
+        "0.001": {
+          "sigma_min": 0.824441869496071,
+          "inverse_norm": 1.2129417937146212
+        },
+        "0.01": {
+          "sigma_min": 0.8244418694985063,
+          "inverse_norm": 1.2129417937110383
+        },
+        "0.1": {
+          "sigma_min": 0.8244418695117649,
+          "inverse_norm": 1.2129417936915319
+        },
+        "1": {
+          "sigma_min": 0.8244418695043403,
+          "inverse_norm": 1.2129417937024551
+        },
+        "3.141592654": {
+          "sigma_min": 0.8244418695069523,
+          "inverse_norm": 1.2129417936986122
+        },
+        "6.283185307": {
+          "sigma_min": 0.8244418694958363,
+          "inverse_norm": 1.2129417937149665
+        },
+        "10": {
+          "sigma_min": 0.8244418695087934,
+          "inverse_norm": 1.2129417936959037
+        },
+        "100": {
+          "sigma_min": 0.8244418694920478,
+          "inverse_norm": 1.2129417937205402
+        },
+        "1000": {
+          "sigma_min": 0.8244418695099851,
+          "inverse_norm": 1.2129417936941504
+        },
+        "10000": {
+          "sigma_min": 0.8244418695095308,
+          "inverse_norm": 1.2129417936948188
+        },
+        "relative_spread_over_sweep": 2.3915715051941044e-11,
+        "max_over_min": 1.0000000000239158,
+        "value_at_named": {
+          "repo": 0.8244418695043403,
+          "xu_half_line_4p2": 0.8244418695069523,
+          "xu_full_line": 0.8244418694958363
+        }
+      },
+      "16": {
+        "0.0001": {
+          "sigma_min": 0.9767929497681307,
+          "inverse_norm": 1.023758412913789
+        },
+        "0.001": {
+          "sigma_min": 0.9767929497494036,
+          "inverse_norm": 1.0237584129334167
+        },
+        "0.01": {
+          "sigma_min": 0.9767929497556695,
+          "inverse_norm": 1.0237584129268493
+        },
+        "0.1": {
+          "sigma_min": 0.9767929497766416,
+          "inverse_norm": 1.0237584129048691
+        },
+        "1": {
+          "sigma_min": 0.9767929497643332,
+          "inverse_norm": 1.0237584129177693
+        },
+        "3.141592654": {
+          "sigma_min": 0.9767929497567291,
+          "inverse_norm": 1.0237584129257389
+        },
+        "6.283185307": {
+          "sigma_min": 0.9767929497595432,
+          "inverse_norm": 1.0237584129227895
+        },
+        "10": {
+          "sigma_min": 0.9767929497475889,
+          "inverse_norm": 1.0237584129353186
+        },
+        "100": {
+          "sigma_min": 0.9767929497598825,
+          "inverse_norm": 1.023758412922434
+        },
+        "1000": {
+          "sigma_min": 0.9767929497638371,
+          "inverse_norm": 1.023758412918289
+        },
+        "10000": {
+          "sigma_min": 0.9767929497656067,
+          "inverse_norm": 1.0237584129164345
+        },
+        "relative_spread_over_sweep": 2.9742894010385526e-11,
+        "max_over_min": 1.0000000000297429,
+        "value_at_named": {
+          "repo": 0.9767929497643332,
+          "xu_half_line_4p2": 0.9767929497567291,
+          "xu_full_line": 0.9767929497595432
+        }
+      }
+    },
+    "B1_tail_inverse_norm_K2": {
+      "quoted": 4.02614534796022,
+      "quoted_by_leg277": 4.0262407,
+      "value_at_named": {
+        "repo": 4.026240741300086,
+        "xu_half_line_4p2": 4.026240741298711,
+        "xu_full_line": 4.02624074129588
+      },
+      "relative_spread_over_sweep": 2.5643416915024985e-12,
+      "leg277_measured_spread_over_3_conventions": 1.53e-08,
+      "CLASS": "CF",
+      "mechanism": "the tail block carries NO border coordinate, so kappa multiplies the domain Gram and the range Gram alike and cancels identically in the Rayleigh quotient.  The residual is whitening round-off, not motion."
+    },
+    "B2_tail_sigma_min_K2": {
+      "quoted": 0.24837652731703622,
+      "CLASS": "CF",
+      "relative_spread_over_sweep": 2.5643416915024985e-12
+    },
+    "B5_tail_K_4_8_16": {
+      "quoted": [
+        0.6690306287634162,
+        0.8244328234140121,
+        0.9767920489401325
+      ],
+      "relative_spread_over_sweep": {
+        "4": 2.6060439763340845e-11,
+        "8": 2.3915715051941044e-11,
+        "16": 2.9742894010385526e-11
+      },
+      "CLASS": "CF"
+    },
+    "B3_tail_ladder": {
+      "quoted_range": [
+        3.994032,
+        4.028864
+      ],
+      "quoted_relative_swing": 0.00865,
+      "ladder_by_convention": {
+        "1": {
+          "64": 3.994031929615957,
+          "128": 4.012071220344655,
+          "256": 4.0213400555813665,
+          "512": 4.026240741300086,
+          "1024": 4.02886403860858
+        },
+        "3.141592654": {
+          "64": 3.9940319296159337,
+          "128": 4.012071220344139,
+          "256": 4.021340055581623,
+          "512": 4.026240741298711,
+          "1024": 4.028864038590813
+        },
+        "6.283185307": {
+          "64": 3.994031929615981,
+          "128": 4.012071220344354,
+          "256": 4.02134005558372,
+          "512": 4.02624074129588,
+          "1024": 4.0288640386137695
+        },
+        "0.0001": {
+          "64": 3.9940319296162548,
+          "128": 4.012071220343761,
+          "256": 4.021340055580642,
+          "512": 4.026240741299625,
+          "1024": 4.028864038615404
+        },
+        "10000": {
+          "64": 3.9940319296163596,
+          "128": 4.012071220343813,
+          "256": 4.021340055582193,
+          "512": 4.026240741298259,
+          "1024": 4.028864038609127
+        }
+      },
+      "max_relative_spread_of_a_RUNG_across_conventions": 6.103704585347222e-12,
+      "CLASS": "CF"
+    },
+    "B4_interval_enclosure": {
+      "quoted": [
+        4.02623993,
+        4.02624155
+      ],
+      "CLASS": "CF",
+      "note": "an interval enclosure of a CF quantity is CF: leg 249 computed it in the repo convention, and B1's mechanism carries the whole interval unchanged. Not independently re-enclosed here -- this leg is float64, like leg 277."
+    }
+  },
+  "S3_group_C_Z_battery": {
+    "group": "C -- the Z-battery (leg 176 C5) and the certificate's missing terms",
+    "C1_Z1_K2": {
+      "quoted": [
+        140.72466104631172,
+        182.23161776466935,
+        244.14671536801256
+      ],
+      "sweep": {
+        "64": {
+          "0.0001": 185.41310017914176,
+          "0.001": 145.57772606180993,
+          "0.01": 141.20919410297722,
+          "0.1": 140.768741127113,
+          "1": 140.72466104631172,
+          "3.141592654": 140.7213228801662,
+          "6.283185307": 140.72054195207912,
+          "10": 140.7202516291978,
+          "100": 140.71981134054607,
+          "1000": 140.71976961676253,
+          "10000": 140.71976533961202,
+          "relative_spread_over_sweep": 0.24104734129545374,
+          "max_over_min": 1.3176052399722753,
+          "value_at_named": {
+            "repo": 140.72466104631172,
+            "xu_half_line_4p2": 140.7213228801662,
+            "xu_full_line": 140.72054195207912
+          },
+          "min_over_sweep": 140.71976533961202,
+          "exceeds_threshold_1_by_at_least": 140.71976533961202
+        },
+        "128": {
+          "0.0001": 217.74180306501484,
+          "0.001": 185.9402253306942,
+          "0.01": 182.60058705365836,
+          "0.1": 182.26524171841183,
+          "1": 182.23161776466935,
+          "3.141592654": 182.2291899148765,
+          "6.283185307": 182.22863326378518,
+          "10": 182.22833459420852,
+          "100": 182.22806175637336,
+          "1000": 182.22802690817218,
+          "10000": 182.22801798072769,
+          "relative_spread_over_sweep": 0.1631004455018828,
+          "max_over_min": 1.1948865244643283,
+          "value_at_named": {
+            "repo": 182.23161776466935,
+            "xu_half_line_4p2": 182.2291899148765,
+            "xu_full_line": 182.22863326378518
+          },
+          "min_over_sweep": 182.22801798072769,
+          "exceeds_threshold_1_by_at_least": 182.22801798072769
+        },
+        "256": {
+          "0.0001": 271.0590416864571,
+          "0.001": 246.89412210093406,
+          "0.01": 244.42227101217438,
+          "0.1": 244.17297379389467,
+          "1": 244.14671536801256,
+          "3.141592654": 244.14781547372158,
+          "6.283185307": 244.14701076804803,
+          "10": 244.146804238216,
+          "100": 244.1449663942039,
+          "1000": 244.1465800618783,
+          "10000": 244.14657307609278,
+          "relative_spread_over_sweep": 0.09929229855164022,
+          "max_over_min": 1.1102380921046593,
+          "value_at_named": {
+            "repo": 244.14671536801256,
+            "xu_half_line_4p2": 244.14781547372158,
+            "xu_full_line": 244.14701076804803
+          },
+          "min_over_sweep": 244.1449663942039,
+          "exceeds_threshold_1_by_at_least": 244.1449663942039
+        }
+      },
+      "leg277_measured_spread_over_3_conventions": [
+        1.2e-06,
+        4.5e-06
+      ],
+      "CLASS": "CR",
+      "reading": "leg 277 called Z_1 'convention-free in practice but not in principle' over THREE kappa.  This is the same statement over eleven, spanning eight decades -- which is where a 'in practice' claim either holds or breaks.",
+      "max_relative_spread_over_all_M_and_kappa": 0.24104734129545374,
+      "class_note": "CF* = the spread is above float round-off but far below any threshold the quantity is compared against; the mechanism is that Z_1's dominant singular direction sits inside the X block, where kappa cancels, and only the border row's coupling feels it."
+    },
+    "C2_Z1_battery_min_max": {
+      "quoted_min": 140.72466104631172,
+      "quoted_max": 66043.9811321921,
+      "by_convention": {
+        "repo": {
+          "ladder": {
+            "2": 244.14671536801256,
+            "4": 1277.8622126961154,
+            "8": 5026.733716779442,
+            "16": 18417.49793993484,
+            "32": 66043.9811321921
+          },
+          "min": 244.14671536801256,
+          "max": 66043.9811321921
+        },
+        "xu_half_line_4p2": {
+          "ladder": {
+            "2": 244.14781547372158,
+            "4": 1277.84679699311,
+            "8": 5026.725976002939,
+            "16": 18417.493132513817,
+            "32": 66043.48082813052
+          },
+          "min": 244.14781547372158,
+          "max": 66043.48082813052
+        },
+        "xu_full_line": {
+          "ladder": {
+            "2": 244.14701076804803,
+            "4": 1277.8534551284001,
+            "8": 5026.747226044007,
+            "16": 18417.646482327928,
+            "32": 66044.29087853656
+          },
+          "min": 244.14701076804803,
+          "max": 66044.29087853656
+        }
+      },
+      "relative_spread_of_the_min": 4.505900275534087e-06,
+      "relative_spread_of_the_max": 1.226526010449439e-05,
+      "CLASS": "CF*"
+    },
+    "C3_Z1_threshold": {
+      "quoted": 1.0,
+      "CLASS": "CF",
+      "mechanism": "a definitional constant of the radii-polynomial hypothesis, not a measured quantity -- `Z_1 < 1` is dimensionless in every norm because Z_1 is an operator norm of `I - A L` on the space itself.  Invariant by definition, at exactly 0."
+    },
+    "C4_Y_0": {
+      "quoted": null,
+      "CLASS": "N/F",
+      "note": "NOT FORMED -- PUB2 L452, L710.  Classified by saying so: a term the certificate declines to construct has no convention-dependence to measure, and the honest entry is its absence with its locator, not a blank."
+    },
+    "C5_Z_2": {
+      "quoted": null,
+      "CLASS": "N/F",
+      "note": "NOT FORMED -- PUB2 L452, L710.  Classified by saying so: a term the certificate declines to construct has no convention-dependence to measure, and the honest entry is its absence with its locator, not a blank."
+    },
+    "C6_Z_3": {
+      "quoted": null,
+      "CLASS": "N/F",
+      "note": "NOT FORMED -- absent from the record entirely.  Classified by saying so: a term the certificate declines to construct has no convention-dependence to measure, and the honest entry is its absence with its locator, not a blank."
+    }
+  },
+  "S4_group_D_dual": {
+    "group": "D -- the dual pairing and its companions (leg 176 C8, E4)",
+    "D1_ell_dual_norm_N512": {
+      "quoted": 0.8873620087421942,
+      "pinned_by": "kappa = 1",
+      "sweep": {
+        "0.0001": 88.73620215869099,
+        "0.001": 28.060850973461363,
+        "0.01": 8.8736202158691,
+        "0.1": 2.8060850973461364,
+        "1": 0.8873620215869099,
+        "3.141592654": 0.5006404094152138,
+        "6.283185307": 0.3540062284335072,
+        "10": 0.28060850973461365,
+        "100": 0.08873620215869099,
+        "1000": 0.028060850973461365,
+        "10000": 0.008873620215869099
+      },
+      "value_at_named": {
+        "repo": 0.8873620215869099,
+        "xu_half_line_4p2": 0.5006404094152138,
+        "xu_full_line": 0.3540062284335072
+      },
+      "sweep_min": 0.008873620215869099,
+      "sweep_max": 88.73620215869099,
+      "max_over_min": 10000.0,
+      "fitted_exponent": -0.5,
+      "fit_max_relative_residual": 1.1102230246251565e-16,
+      "max_relative_deviation_from_exact_kappa_to_the_minus_half": 1.1102230246251565e-16,
+      "CONVERSION_LAW": "||ell||_{X*}(kappa) = 0.8873620087421942 * kappa^{-1/2}",
+      "CLASS": "CX",
+      "mechanism": "ell is a functional ON the X block only; the dual norm inverts the X Gram once, so it is exactly homogeneous of degree -1/2 in kappa.  The border coordinate never enters, which is why there IS a law here and not in A1."
+    },
+    "D2_ell_l2_norm_N512": {
+      "quoted": 13338.300941274341,
+      "here": 13338.300941274341,
+      "CLASS": "CF",
+      "relative_spread_over_sweep": 0.0,
+      "mechanism": "the ell^2 norm of the border row does not reference the X Gram at all, so kappa cannot enter its definition.  Exactly convention-free -- and convention-free for a reason that makes it USELESS as a certificate quantity, which is worth saying out loud."
+    },
+    "D3_E4_two_route_ratio": {
+      "quoted": 11.01037339225752,
+      "quoted_companion": 11.010373719136561,
+      "sweep": {
+        "0.0001": {
+          "ratio_from_norms": 88.92522890675278,
+          "one_over_sigma_min": 88.92522890675033,
+          "agreement": 2.748676659104107e-14
+        },
+        "0.001": {
+          "ratio_from_norms": 28.69351803953775,
+          "one_over_sigma_min": 28.69351803953649,
+          "agreement": 4.395464349252558e-14
+        },
+        "0.01": {
+          "ratio_from_norms": 10.79018600717828,
+          "one_over_sigma_min": 10.790186007177653,
+          "agreement": 5.811336003764633e-14
+        },
+        "0.1": {
+          "ratio_from_norms": 7.363799026203705,
+          "one_over_sigma_min": 7.363799026203619,
+          "agreement": 1.1699573332235302e-14
+        },
+        "1": {
+          "ratio_from_norms": 11.010373392294198,
+          "one_over_sigma_min": 11.010373392294644,
+          "agreement": 4.0495045063729775e-14
+        },
+        "3.141592654": {
+          "ratio_from_norms": 17.346763050124608,
+          "one_over_sigma_min": 17.346763050123137,
+          "agreement": 8.478950561401522e-14
+        },
+        "6.283185307": {
+          "ratio_from_norms": 23.791352225056226,
+          "one_over_sigma_min": 23.791352225053085,
+          "agreement": 1.3200590123467164e-13
+        },
+        "10": {
+          "ratio_from_norms": 29.664204807950096,
+          "one_over_sigma_min": 29.664204807951336,
+          "agreement": 4.1797751934649093e-14
+        },
+        "100": {
+          "ratio_from_norms": 92.11272812425413,
+          "one_over_sigma_min": 92.1127281242527,
+          "agreement": 1.5581954366819996e-14
+        },
+        "1000": {
+          "ratio_from_norms": 290.7485738994236,
+          "one_over_sigma_min": 290.7485738993885,
+          "agreement": 1.2082340554535474e-13
+        },
+        "10000": {
+          "ratio_from_norms": 919.2577065624462,
+          "one_over_sigma_min": 919.2577065628319,
+          "agreement": 4.1962056737250493e-13
+        }
+      },
+      "sweep_min": 7.363799026203705,
+      "sweep_max": 919.2577065624462,
+      "max_over_min": 124.83470872729066,
+      "relative_spread_over_sweep": 0.9919894073515679,
+      "value_at_named": {
+        "repo": 11.010373392294198,
+        "xu_half_line_4p2": 17.346763050124608,
+        "xu_full_line": 23.791352225056226
+      },
+      "max_agreement_with_one_over_sigma_min": 4.1962056737250493e-13,
+      "CLASS": "CR",
+      "PREDICTION_CORRECTION": "the novelty pass put D3 under Q1's 'no border coordinate' clause.  Reading leg 176's source (construction.py L401) shows BOTH radicands carry the border coordinate -- kappa_min in the numerator, ell(u) in the denominator -- so D3 is the bordered Rayleigh quotient at its minimizer, equal to 1/sigma_min, and it is CR.  Q1's rule is untouched (D3 was never in its hypothesis); Q1's LIST was wrong, and the error was this leg's, not leg 176's.",
+      "mechanism": "a ratio whose numerator and denominator each mix an X-norm with a border amplitude carrying a DIFFERENT weight.  kappa rescales only one of the two summands on each side, so it cannot cancel."
+    }
+  },
+  "S5_group_E_controls": {
+    "group": "E -- the controls PUB2 quotes as load-bearing",
+    "E1_unbordered_collapse": {
+      "quoted": 6.972501777380562e-14,
+      "quoted_bordered_vs_unbordered_agreement": 5.7e-15,
+      "sweep": {
+        "0.0001": 2.945280009201539e-14,
+        "0.001": 4.614272690788339e-15,
+        "0.01": 1.7994718981947754e-14,
+        "0.1": 1.1725278235927317e-14,
+        "1": 1.6292803343693093e-14,
+        "3.141592654": 1.517395458436552e-15,
+        "6.283185307": 9.53386034928948e-15,
+        "10": 3.363869862240104e-14,
+        "100": 6.877590521551786e-15,
+        "1000": 6.044084880230951e-15,
+        "10000": 8.737604127018606e-15
+      },
+      "sweep_min": 1.517395458436552e-15,
+      "sweep_max": 3.363869862240104e-14,
+      "max_over_min": 22.168709175563674,
+      "CLASS": "CF",
+      "mechanism": "unbordered: kappa cancels between the Grams, as in B1.  The number IS the float floor of an X Gram whose entries reach ~1e12, so its DIGITS are conditioning noise in every convention -- what is convention-free is the statement 'collapses to the float floor', not the digits.  The max/min across the sweep, recorded above, is the honest magnitude."
+    },
+    "E2_loose_L2_fitted_exponent": {
+      "quoted": -1.4914111116151578,
+      "by_convention": {
+        "1": {
+          "ladder": {
+            "64": 0.007040948160669708,
+            "128": 0.002521351595733746,
+            "256": 0.0008952510283715214,
+            "512": 0.000316953636896487
+          },
+          "fitted_exponent": -1.4914111116051532
+        },
+        "3.141592654": {
+          "ladder": {
+            "64": 0.007040948160669708,
+            "128": 0.002521351595733746,
+            "256": 0.0008952510283715214,
+            "512": 0.000316953636896487
+          },
+          "fitted_exponent": -1.4914111116051532
+        },
+        "6.283185307": {
+          "ladder": {
+            "64": 0.007040948160669708,
+            "128": 0.002521351595733746,
+            "256": 0.0008952510283715214,
+            "512": 0.000316953636896487
+          },
+          "fitted_exponent": -1.4914111116051532
+        },
+        "0.0001": {
+          "ladder": {
+            "64": 0.007040948160669708,
+            "128": 0.002521351595733746,
+            "256": 0.0008952510283715214,
+            "512": 0.000316953636896487
+          },
+          "fitted_exponent": -1.4914111116051532
+        },
+        "10000": {
+          "ladder": {
+            "64": 0.007040948160669708,
+            "128": 0.002521351595733746,
+            "256": 0.0008952510283715214,
+            "512": 0.000316953636896487
+          },
+          "fitted_exponent": -1.4914111116051532
+        }
+      },
+      "relative_spread_over_conventions": 0.0,
+      "CLASS": "CF",
+      "mechanism": "the loose realization's Gram is the IDENTITY (leg 176 C4 passes gram=False), so the X-normalization constant does not appear in its definition.  Exactly convention-free with respect to THIS axis -- and silent about its own, which is the choice of the L^2 realization."
+    },
+    "E3_C6_closed_form_ratio": {
+      "quoted": 0.868153885807814,
+      "reproduced_over_leg176_four_seeds": {
+        "0": 0.868153885807814,
+        "1": 0.8404652784717725,
+        "2": 0.7859395946487807,
+        "3": 0.6903593550615618
+      },
+      "leg176_banked_four_seeds": [
+        0.868153885807814,
+        0.8404652784717725,
+        0.7859395946487807,
+        0.6903593550615618
+      ],
+      "sweep": {
+        "0.0001": 0.868153885807814,
+        "0.001": 0.868153885807814,
+        "0.01": 0.868153885807814,
+        "0.1": 0.868153885807814,
+        "1": 0.868153885807814,
+        "3.141592654": 0.868153885807814,
+        "6.283185307": 0.8681538858078139,
+        "10": 0.868153885807814,
+        "100": 0.868153885807814,
+        "1000": 0.8681538858078139,
+        "10000": 0.8681538858078142
+      },
+      "relative_spread_over_sweep": 2.5576641256223784e-16,
+      "max_over_min": 1.0000000000000002,
+      "CLASS": "CF",
+      "mechanism": "||u||_X/||f||_X from Xu's CLOSED FORM on the whole line: the SAME norm on both sides and NO border coordinate on either, so kappa cancels in the quotient identically.  This row is convention-free by a one-line exact argument; the sweep above is CONFIRMATORY and is reported as such, not as the evidence."
+    },
+    "E4_leg163_three_ratios": {
+      "quoted": [
+        1.3993,
+        1.268,
+        1.3769
+      ],
+      "sweep": {
+        "0.0001": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487807,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "0.001": {
+          "ratios": [
+            0.8404652784717725,
+            0.7859395946487806,
+            0.6903593550615617
+          ],
+          "implied_witness_upper_bound": 1.189817147257185
+        },
+        "0.01": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487808,
+            0.6903593550615617
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "0.1": {
+          "ratios": [
+            0.8404652784717725,
+            0.7859395946487808,
+            0.6903593550615617
+          ],
+          "implied_witness_upper_bound": 1.189817147257185
+        },
+        "1": {
+          "ratios": [
+            0.8404652784717725,
+            0.7859395946487807,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.189817147257185
+        },
+        "3.141592654": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487807,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "6.283185307": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487806,
+            0.6903593550615617
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "10": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487807,
+            0.6903593550615617
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "100": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487806,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "1000": {
+          "ratios": [
+            0.8404652784717727,
+            0.7859395946487806,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.1898171472571848
+        },
+        "10000": {
+          "ratios": [
+            0.8404652784717725,
+            0.7859395946487807,
+            0.6903593550615618
+          ],
+          "implied_witness_upper_bound": 1.189817147257185
+        }
+      },
+      "relative_spread_of_the_max_ratio_over_sweep": 1.320962391978747e-16,
+      "CLASS": "CF"
+    },
+    "E5_leg163_witness": {
+      "quoted": 0.7146549471256172,
+      "sweep_of_the_implied_bound": [
+        1.1898171472571848,
+        1.189817147257185,
+        1.1898171472571848,
+        1.189817147257185,
+        1.189817147257185,
+        1.1898171472571848,
+        1.1898171472571848,
+        1.1898171472571848,
+        1.1898171472571848,
+        1.1898171472571848,
+        1.189817147257185
+      ],
+      "relative_spread_over_sweep": 1.8662078071147116e-16,
+      "CLASS": "CF",
+      "mechanism": "the witness is 1/max(||u||_X/||f||_X) over a finite family -- a ratio of X-norms with no border coordinate, so kappa cancels.  THIS IS THE POINT: the witness is convention-FREE while sigma_min is convention-RELATIVE, and PUB2 sec 4.5 compares them directly."
+    },
+    "E5b_does_the_reconciliation_survive": {
+      "question": "PUB2 sec 4.5 reconciles leg 163 with leg 176 by `0.0908 <= 0.71465`.  The left side is CR and moves; the right side is CF and does not.  Is the inequality true for EVERY convention, or only for kappa = 1?",
+      "fine_sweep_decades": [
+        -6,
+        6
+      ],
+      "n_points": 61,
+      "sup_sigma_min_over_kappa_at_N256": 0.13579946932847078,
+      "argmax_kappa": 0.10000000000000006,
+      "leg163_witness": 0.7146549471256172,
+      "sup_over_witness": 0.1900210302533607,
+      "headroom_factor": 5.262575403715422,
+      "leg249_sweep_own_max": 0.1357994693284667,
+      "sup_exceeds_leg249_own_max_by": 1.00000000000003,
+      "inequality_holds_across_the_whole_fine_sweep": true,
+      "sigma_min_over_the_fine_sweep": {
+        "1e-06": 0.0011270798379348097,
+        "1.584893192e-06": 0.001418890507831054,
+        "2.511886432e-06": 0.0017862395256839914,
+        "3.981071706e-06": 0.002248666932220482,
+        "6.309573445e-06": 0.002830753520559125,
+        "1e-05": 0.003563407459092225,
+        "1.584893192e-05": 0.00448546562089923,
+        "2.511886432e-05": 0.005645672835751382,
+        "3.981071706e-05": 0.0071051006302482915,
+        "6.309573445e-05": 0.008940047363385566,
+        "0.0001": 0.011245402596022433,
+        "0.0001584893192": 0.01413831805709341,
+        "0.0002511886432": 0.017761726158149905,
+        "0.0003981071706": 0.02228664159676041,
+        "0.0006309573445": 0.02791103675002535,
+        "0.001": 0.03485107677009381,
+        "0.001584893192": 0.043317411244626354,
+        "0.002511886432": 0.05346563958743787,
+        "0.003981071706": 0.0653093190358943,
+        "0.006309573445": 0.07859510211325323,
+        "0.01": 0.09267680828993324,
+        "0.01584893192": 0.10648536460806732,
+        "0.02511886432": 0.11870564166180099,
+        "0.03981071706": 0.12813115859079788,
+        "0.06309573445": 0.13395614194048702,
+        "0.1": 0.13579946932847078,
+        "0.1584893192": 0.13355182589841566,
+        "0.2511886432": 0.12729947599662214,
+        "0.3981071706": 0.11744153816878966,
+        "0.6309573445": 0.1048538276571398,
+        "1": 0.09082344116502239,
+        "1.584893192": 0.07669796240258521,
+        "2.511886432": 0.0635172199297446,
+        "3.981071706": 0.0518683182267017,
+        "6.309573445": 0.04194958804315268,
+        "10": 0.03371066261422133,
+        "15.84893192": 0.026976682883657635,
+        "25.11886432": 0.021529689133634625,
+        "39.81071706": 0.01715289548885462,
+        "63.09573445": 0.013650865043308763,
+        "100": 0.010856262976502657,
+        "158.4893192": 0.008629964228143097,
+        "251.1886432": 0.0068583007268265455,
+        "398.1071706": 0.005449385530457645,
+        "630.9573445": 0.004329425023172561,
+        "1000": 0.003439397781348748,
+        "1584.893192": 0.0027322179287615155,
+        "2511.886432": 0.0021703816854412882,
+        "3981.071706": 0.0017240475014934323,
+        "6309.573445": 0.0013694856960432139,
+        "10000": 0.0010878342306634941,
+        "15848.93192": 0.0008641039974117482,
+        "25118.86432": 0.0006863854873573293,
+        "39810.71706": 0.0005452170186656858,
+        "63095.73445": 0.00043308209701355273,
+        "100000": 0.0003440097511096305,
+        "158489.3192": 0.000273256865567512,
+        "251188.6432": 0.00021705574751962036,
+        "398107.1706": 0.00017241356082056463,
+        "630957.3445": 0.00013695298549864753,
+        "1000000": 0.0001087856362874425
+      }
+    },
+    "E6_optimistic_by_factor": {
+      "quoted": 7.870742174847475,
+      "sweep": {
+        "0.0001": 63.556317083715086,
+        "0.001": 20.5074233137344,
+        "0.01": 7.711710817680844,
+        "0.1": 5.264913486553642,
+        "1": 7.8702900212351965,
+        "3.141592654": 12.397946065326702,
+        "6.283185307": 17.00331780691401,
+        "10": 21.200235112178156,
+        "100": 65.82899587225668,
+        "1000": 207.78496333399252,
+        "10000": 656.9520855857886
+      },
+      "sweep_min": 5.264913486553642,
+      "sweep_max": 656.9520855857886,
+      "max_over_min": 124.77927458136121,
+      "value_at_named": {
+        "repo": 7.8702900212351965,
+        "xu_half_line_4p2": 12.397946065326702,
+        "xu_full_line": 17.00331780691401
+      },
+      "CLASS": "CR",
+      "mechanism": "this factor is a CF quantity DIVIDED BY a CR one, so it inherits the CR class in full.  PUB2 prints it as though it were a property of the two legs' disagreement; it is a property of the two legs' disagreement IN THE REPOSITORY CONVENTION."
+    },
+    "E7_galerkin_kappa_G": {
+      "quoted": 5.894962568377656,
+      "here": {
+        "60": 5.848884174148528,
+        "120": 5.873459317737387,
+        "240": 5.885746889531825,
+        "480": 5.891890675429039,
+        "960": 5.894962568377656
+      },
+      "CLASS": "CF",
+      "mechanism": "kappa_G is the border amplitude of a SQUARE Galerkin solve.  No Gram, no norm and no weight enters its definition -- it is a coefficient of the solution vector.  The X-normalization constant cannot reach it.  Exactly convention-free, at 0."
+    }
+  },
+  "S6_group_F_other_space": {
+    "group": "F -- quantities quoted from the ell^1_w realization (PUB2 sec 2)",
+    "F1_fitted_exponents": {
+      "quoted": {
+        "s=0": 0.9925,
+        "s=0.3": 0.6985,
+        "s=0.7": 0.3202
+      },
+      "CLASS": "CR-DISCLOSED",
+      "mechanism": "a different space entirely: the X-Gram constant kappa does not exist in the ell^1_w realization.  Its OWN convention is the weight exponent s, and every call-site prints the value WITH its s -- so this family is convention-relative with the convention already named in the quote.  It is the only group in the whole enumeration that was already disclosed correctly, and it is worth recording that PUB2 got this one right."
+    },
+    "F2_sigma_min_spread_across_K": {
+      "quoted": 0.0029,
+      "CLASS": "CR-DISCLOSED"
+    },
+    "F3_A_norm_floor_growth_per_doubling": {
+      "quoted": 1.99,
+      "CLASS": "CR-DISCLOSED",
+      "note": "a growth RATE in M at fixed s; invariant under rescaling the ell^1_w norm by a constant, and s-dependent like the rest of F"
+    },
+    "F4_profile_decay_exponent_alpha": {
+      "quoted": 0.39735311167782,
+      "CLASS": "CF",
+      "mechanism": "alpha is the algebraic decay rate of the a=0 CLM profile's Laguerre coefficients -- a property of the ODE solution, defined before any norm is chosen.  No normalization constant of any space can move it.  Convention-free across BOTH axes (kappa and s), which no other quantity in the enumeration is."
+    }
+  },
+  "S7_secondary_axes": {
+    "question": "the novelty pass named FOUR candidate convention axes and argued two of them (whitening route, realification gauge) are not live.  Measured here rather than assumed -- if either moves a quantity, the whole classification is one-dimensional for the wrong reason.",
+    "axis_3_whitening_route": {
+      "by_convention": {
+        "1": {
+          "eigh": 0.09082343846893957,
+          "chol": 0.09082344116502357,
+          "rescale": 0.09082344116601027,
+          "max_relative_spread": 2.9695755381608048e-08
+        },
+        "3.141592654": {
+          "eigh": 0.05764764442763722,
+          "chol": 0.057647642797062776,
+          "rescale": 0.057647642797533934,
+          "max_relative_spread": 2.8285187755509146e-08
+        },
+        "6.283185307": {
+          "eigh": 0.04203208030155995,
+          "chol": 0.04203207915803148,
+          "rescale": 0.04203207915798277,
+          "max_relative_spread": 2.7207246683809082e-08
+        },
+        "0.0001": {
+          "eigh": 0.011245399740738949,
+          "chol": 0.011245402596060257,
+          "rescale": 0.011245402597430124,
+          "max_relative_spread": 2.5403191664583294e-07
+        },
+        "10000": {
+          "eigh": 0.0010878342434897208,
+          "chol": 0.0010878342306632179,
+          "rescale": 0.0010878342306624464,
+          "max_relative_spread": 1.1791570706364236e-08
+        }
+      },
+      "worst_relative_spread_over_all_conventions": 2.5403191664583294e-07,
+      "leg249_own_route_spread": [
+        8.387873728921136e-13,
+        1.7645718219938e-11
+      ],
+      "VERDICT": "not a live axis if the spread above is at conditioning level"
+    },
+    "axis_4_realification_gauge": {
+      "by_convention": {
+        "1": {
+          "real_section": 0.09085063245777983,
+          "complex_section": 0.09085063245778027,
+          "relative_difference": 4.888124582472666e-15
+        },
+        "3.141592654": {
+          "real_section": 0.05765414467306138,
+          "complex_section": 0.057654144673061306,
+          "relative_difference": 1.3238915150994048e-15
+        },
+        "6.283185307": {
+          "real_section": 0.0420345412344058,
+          "complex_section": 0.04203454123440632,
+          "relative_difference": 1.238069995556593e-14
+        }
+      },
+      "worst_relative_difference": 1.238069995556593e-14,
+      "leg277_measured": [
+        5.9e-14,
+        2.8e-15,
+        2.4e-13
+      ],
+      "VERDICT": "not a live axis if the difference above is at round-off"
+    },
+    "axis_2_is_a_sub_case_of_axis_1": {
+      "claim": "Xu Definition 4.1's two norms differ, on the REAL coefficient subspace the bordered section lives on, by exactly the constant factor 2 in the squared norm (leg 277 sec 3, measured at 2.20e-14 on real data and refuted at 0.676 on complex data).  So 'which norm' selects a kappa and adds no dimension.",
+      "kappa_ratio_full_over_half": 2.0,
+      "leg277_real_subspace_residual": 2.2e-14,
+      "leg277_complex_data_control": 0.676
+    }
+  },
+  "S8_enumeration_closure": {
+    "role": "the novelty pass fixed the enumeration by hand.  This section counts it mechanically and scans PUB2 for numeric literals it cannot map to a slot, so an omission shows up as data rather than as a silence.",
+    "rows_enumerated": 32,
+    "numeric_values_enumerated": 47,
+    "declared_absent_slots": 3,
+    "novelty_pass_hand_count": 48,
+    "hand_count_discrepancy": "the novelty pass said '48 numeric slots'; the mechanical count of the SAME table is 47 numeric values across 32 rows, plus 3 declared-absent slots (Y_0, Z_2, Z_3).  The 48 was a hand count and is corrected here rather than quietly restated.",
+    "distinct_numeric_literals_in_pub2": 164,
+    "mapped_to_a_headline_slot": 58,
+    "unmapped_after_headline_pass": 106,
+    "family_pass_hits_by_row": {
+      "A1_leg249_W5_border_weight_sweep": 2,
+      "A1_C1_sigma_min_ladder": 1,
+      "B_C2_tail_ladder": 1,
+      "B_C2_tail_inverse_norms": 3,
+      "E7_C7_galerkin_family": 1,
+      "C_C5_Z1_battery": 11
+    },
+    "mapped_by_the_family_pass": 19,
+    "outside_the_enumeration_entirely": 87,
+    "outside_sample_smallest_20": [
+      0.0,
+      0.003609,
+      0.0038,
+      0.00904,
+      0.00905,
+      0.01213,
+      0.01605,
+      0.02,
+      0.0202,
+      0.02167,
+      0.0219,
+      0.02955,
+      0.05,
+      0.0788,
+      0.0836,
+      0.092,
+      0.09328169670293,
+      0.1,
+      0.139,
+      0.14
+    ],
+    "outside_sample_largest_20": [
+      3.5,
+      4.1,
+      4.1585,
+      4.2,
+      4.23,
+      4.3,
+      4.4,
+      4.5,
+      4.6,
+      6.5,
+      6.8,
+      11.7877,
+      12.5,
+      12.71,
+      99.8,
+      99.99,
+      2607.19762,
+      10000.0,
+      1000000.0,
+      1000000000000.0
+    ],
+    "reading": "A headline row classifies a FAMILY, not a single number.  The literals still outside after the family pass are section numbers, page and line locators, dates, the arXiv identifier 2607.19762, percentages and tolerances quoted from other legs, round scale constants (1e6, 1e12), and the ell^1_w lineage's own data -- which is Group F and is classified as a group rather than by value.  The count is reported so that the enumeration's coverage is a magnitude and not a claim."
+  },
+  "CLASSIFICATION_TABLE": [
+    {
+      "id": "A1",
+      "quantity": "sigma_min bordered N=512",
+      "class": "CR",
+      "sweep_min": 0.0010878342010108336,
+      "sweep_max": 0.1357391624669265
+    },
+    {
+      "id": "A2",
+      "quantity": "||R||_X = 1/sigma_min",
+      "class": "CR",
+      "sweep_min": 7.367070650989576,
+      "sweep_max": 919.2577316201158
+    },
+    {
+      "id": "A3",
+      "quantity": "sigma_max bordered N=512",
+      "class": "CF*",
+      "sweep_min": 499.6409636599624,
+      "sweep_max": 919.2600463927049
+    },
+    {
+      "id": "A4",
+      "quantity": "sigma_min ladder relative spread",
+      "class": "CR",
+      "sweep_min": 1.7597875182222895e-07,
+      "sweep_max": 0.003048072397728984
+    },
+    {
+      "id": "A5",
+      "quantity": "interval enclosure of A1",
+      "class": "CR (inherits A1)",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "A6",
+      "quantity": "Xu-normalization images of A1",
+      "class": "CR",
+      "sweep_min": 0.042030323448698885,
+      "sweep_max": 0.05764301146012326
+    },
+    {
+      "id": "A7",
+      "quantity": "quadrature-window spread 1.444e-04",
+      "class": "CR (inherited, NOT measured here)",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "B1",
+      "quantity": "||T^-1||_X tail K=2",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "B2",
+      "quantity": "tail sigma_min K=2",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "B3",
+      "quantity": "tail ladder N=64..1024",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "B4",
+      "quantity": "interval enclosure of B1",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "B5",
+      "quantity": "tail at K=4,8,16",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C1",
+      "quantity": "Z_1 block-diagonal A, K=2",
+      "class": "CR",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C2",
+      "quantity": "Z_1 battery min/max",
+      "class": "CF*",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C3",
+      "quantity": "the Z_1 threshold 1.0",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C4",
+      "quantity": "Y_0",
+      "class": "N/F",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C5",
+      "quantity": "Z_2",
+      "class": "N/F",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "C6",
+      "quantity": "Z_3",
+      "class": "N/F",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "D1",
+      "quantity": "||ell||_{X*}",
+      "class": "CX",
+      "sweep_min": 0.008873620215869099,
+      "sweep_max": 88.73620215869099
+    },
+    {
+      "id": "D2",
+      "quantity": "||ell||_{l2}",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "D3",
+      "quantity": "E4 two-route ratio",
+      "class": "CR",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E1",
+      "quantity": "unbordered collapse",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E2",
+      "quantity": "loose-L2 fitted exponent",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E3",
+      "quantity": "C6 closed-form ratio",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E4",
+      "quantity": "leg 163's three ratios",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E5",
+      "quantity": "leg 163's witness 0.71465",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "E6",
+      "quantity": "'optimistic by' 7.87",
+      "class": "CR",
+      "sweep_min": 5.264913486553642,
+      "sweep_max": 656.9520855857886
+    },
+    {
+      "id": "E7",
+      "quantity": "Galerkin kappa_G 5.895",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "F1",
+      "quantity": "ell^1_w fitted exponents",
+      "class": "CR-DISCLOSED",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "F2",
+      "quantity": "ell^1_w spread across K",
+      "class": "CR-DISCLOSED",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "F3",
+      "quantity": "||A||_w floor growth 1.99x",
+      "class": "CR-DISCLOSED",
+      "sweep_min": null,
+      "sweep_max": null
+    },
+    {
+      "id": "F4",
+      "quantity": "profile decay exponent alpha",
+      "class": "CF",
+      "sweep_min": null,
+      "sweep_max": null
+    }
+  ],
+  "CLASS_COUNTS": {
+    "CR": 7,
+    "CF*": 2,
+    "CR (inherits A1)": 1,
+    "CR (inherited, NOT measured here)": 1,
+    "CF": 14,
+    "N/F": 3,
+    "CX": 1,
+    "CR-DISCLOSED": 3
+  },
+  "rows_classified": 32,
+  "rows_unclassified": 0,
+  "gate": {
+    "question": "for the enumerated set, does EVERY quantity get either a convention-freeness proof or a measured convention-dependence range with a named pinning convention -- no quantity left unclassified?",
+    "rows": 32,
+    "rows_with_a_class": 32,
+    "rows_whose_range_is_INHERITED_rather_than_measured": [
+      "A5",
+      "A7",
+      "B4"
+    ],
+    "answer": "YES"
+  },
+  "runtime_seconds_this_invocation": 0.044252872467041016,
+  "runtime_note": "S0-S7 are memoised to a scratch directory outside the repository (env CVF_CACHE) so that a crash in one section does not discard the others -- which is exactly what happened once during this leg.  `runtime_seconds_this_invocation` therefore measures only what this invocation recomputed.  Measured wall times for the sections themselves, on a loaded box: S0-S4 + S8 = 1284.2 s in one uninterrupted run with S5-S7 served from cache; S5 (group E, including the 61-point fine sweep) and S6/S7 were computed in a separate validation pass of comparable length.  Total compute for the banked table is ~45 minutes; no section here is stale, every cache entry was produced by the code in this file at the commit that banks it.",
+  "sections_served_from_cache_this_invocation": true
+}
