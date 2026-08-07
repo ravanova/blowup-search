@@ -4190,6 +4190,49 @@ preempted agents had reached a landing.
   anyway. The object remains open exactly as legs 54/55/57/126 last
   measured it -- banked for a future retrospective's framing; no link of
   the current Clay chain moves.
+- **MAJOR: leg 226 (Route-PNR) -- ESCALATED, parked at branch
+  `leg/226-pnr-v1-resume`, main untouched. Completes and confirms leg 236's
+  finding from the repair side.** `profile_newton.py`'s `converged` test
+  answered on residual alone; repaired to consult three independent parts:
+  the original residual, D2 (two gauge rows the verdict never checked),
+  and D3 (decay class vs the a=0 anchor at leg 202's own pre-committed
+  100x threshold, unchanged). **Mechanism, precisely diagnosed**: an
+  off-branch grid-scale root nulls every residual row to machine
+  precision, so `relres` carries zero information about branch
+  membership -- worst offenders pass at relres 1.256e-16 while their D3
+  decay-class deviation is 1.393e+06. **Coverage**: 61 adversarial cases,
+  44 expected-reject, 27 were silently accepted pre-repair, 0 slip through
+  post-repair, all 17 genuine on-branch cases still correctly accepted.
+  **Zero regression**: 28 commonly-accepted rows, max |c_pre - c_post|
+  exactly 0.000e+00 -- the iteration itself is untouched, bit-identical.
+  **The dispatch's own premise (D1, the weighted defect) was measured
+  FALSE before construction and confirmed false here**: D1 does not
+  separate on/off-branch cases at any threshold (off-branch spans
+  9.535e-12..1.318e+06, on-branch max is 9.364e-03) -- it is D3 that
+  separates cleanly (on-branch max 24.06, off-branch min 197.30).
+  **Route-D v11's headlines, all four ways (banked / pre-repair-here /
+  post under v11's own unmodified test / post under the repaired
+  verdict)**: `a_max_machine` 1.0 / 1.0 / 1.0 / **0.55**;
+  `last_machine_precision_a` 0.72 / 0.72 / 0.72 / **0.52** (marginality
+  reported, not buried: a=0.64 sits only 1.14x above threshold, so 0.52
+  vs 0.64 hinges on that one row's branch membership; 0.70/0.72 are
+  unambiguous off-branch); `grid_converged_a_max` 0.5 / **1.0** /
+  **1.0** / 0.5 -- runs the OPPOSITE direction, v11's own unmodified test
+  gives 1.0 in this environment, and the repair RESTORES the banked 0.5.
+  **Independently agrees with leg 236's dependency-trace finding** (also
+  1.0->0.55 on `a_max_machine`) via a completely different method (repair
+  + adversarial battery vs. exclusion-policy dependency trace) -- two
+  independent instruments now concur. **Self-correction recorded**: a
+  lesson-90 falsification probe was found self-cancelling (an added
+  constant tail was exactly subtracted back out by gauge renormalisation,
+  making the check vacuously pass) and was replaced with an
+  origin-vanishing perturbation that correctly brackets the crossing.
+  **Outside territory, reported not touched**: the anchor JSON
+  (`p2_route_d_v11_anchor.json`) needs a regeneration leg for the two
+  contradicted numbers -- this is exactly what leg 252 already ran into
+  from the other side (finding that same artifact is not
+  environment-portable). All three inputs to the DM's pre-committed
+  three-way consolidation (236 + 226 + 252) are now in hand.
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
