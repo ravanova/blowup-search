@@ -4303,6 +4303,29 @@ preempted agents had reached a landing.
   failure"), and repairing it destroyed an n=401 "branch reaches a=1/2"
   artifact a less careful pass would have banked. No solver/ file
   touched, no certificate claimed, Clay unchanged (~0.05%).
+- **Leg 296 (Route-ASR) -- gate YES, landed. Resolves the a* contradiction
+  as PINNED near 0.386, not uncertain.** Read legs 125/210/283/284 in
+  full, method by method, before concluding anything. **Leg 125's**
+  algebraic Delta(a)=0 crossing (residual 1.933e-15, a*=0.3864963972206034)
+  and **leg 284's** grid-converged pseudo-arclength turning point
+  (0.3857 +/- 0.004, monotone over 4 grids) agree to ~2e-3 via two
+  genuinely independent methods. **Leg 210's exclusion bracket
+  [0.36,0.37] is EXPLAINED, not outvoted**: it used the same fixed-a
+  Newton-restart method family that leg 284 independently showed folds
+  and develops a singular Jacobian (sigma_min/sigma_max=3.454e-19 at
+  n=1601) in exactly this neighborhood -- and leg 210's OWN report,
+  written before leg 284 existed, already recorded the predicted symptom
+  (non-convergence at a=0.3865, residual 6.0e-03; amplitude collapse
+  toward the trivial null beyond it) without explaining it. This is a
+  pre-existing observation now mechanistically explained, not retrofitted
+  evidence. Leg 185's separate, narrower corroboration claim (a nu(a)
+  sign-crossing near the same point) stays refuted exactly as leg 210
+  found it -- this leg resolves only whether a* is a real feature at
+  all, not that specific claim. Applied entirely as append-only pointers,
+  verified 0 lines deleted in any touched file: leg 174's catalog (+59),
+  leg 283's downgrade note (+31, leg 283's own record preserved
+  untouched), CORRECTIONS.md (+73, new register row 10 + section 11).
+  0 numbers re-measured, 0 gate answers of the four source legs changed.
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
