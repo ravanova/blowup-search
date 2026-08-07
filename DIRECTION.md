@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 272 | WESCV | no |
 | B | 285 | P2S | yes |
-| C | 297 | D11ANCHOR | no |
+| C | 293 | JFA | no |
 | D | 221 | BVRR | no |
 | E | 286 | CNRV | no |
 | F | 292 | CAPA | no |
@@ -13168,3 +13168,76 @@ this update, only the gate-text correction above). **Floor status: 3/10 strictly
 Nothing in this update lifts a ban; the override strengthens, not weakens, the
 banked-record discipline this file already runs on. Clay stays ~0.05%. No new
 direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 297 completed correctly parked per the override (Option 3
+selected, leg 252's numbers reused, decisive row re-verified fresh, merge gate
+confirmed) and routed to the user for a ruling; slot C = 293 (last pre-staged
+candidate); TWO fresh standing reserve legs drafted (298, 299) so effective-
+dispatchable does not hit zero again this cycle
+
+**297, recorded:** correctly stopped short of pushing per the standing banked-artifact
+rule adopted last update. Selected Option 3 (deliberate environment-pinned re-bank) of
+252's three named options, reused 252's numbers verbatim (no new criterion invented),
+independently re-verified the decisive row fresh, confirmed the merge gate would pass.
+Now with the user via the orchestrator's routing, recommended for approval. No DM
+action pending on this track until the user rules.
+
+**Slot C: leg 293 (Route-JFA)** — the last pre-staged candidate, dispatched exactly as
+built for.
+
+**Two fresh standing reserve legs drafted now, proactively** (293's dispatch would
+otherwise drop effective-dispatchable back to 0 — the lesson from the last time this
+was allowed to happen, applied before being asked again):
+
+```
+### 298 — ROUTE-CORRX: FRESHNESS AUDIT OF writeup/CORRECTIONS.md ITSELF (the register
+created mid-campaign by leg 263 has never been checked for internal consistency)
+[FLOOR-ELIGIBLE: none — audit, kept out of floor tally by convention]
+**Thesis.** CORRECTIONS.md has accumulated entries from legs 263, 274, 276, 278, 279,
+281 (via 280 once it lands), 296 and others across many updates, each leg appending in
+good faith without a cross-check pass. Worth a single audit: do the entries
+cross-reference correctly, is anything duplicated, does any entry's cited locator
+still resolve to the claimed site after subsequent edits.
+**Gate.** Does every CORRECTIONS.md entry (a) cite a real, still-current locator, (b)
+not duplicate another entry's claim, (c) accurately summarize its source leg's finding?
+  yes -> Bank as current. no -> Fix the specific defects found; report count.
+**Territory.** writeup/CORRECTIONS.md, writeup/novelty/leg_298.md,
+               experiments/journal/leg_298.md.
+**Difficulty.** standard
+**Independence.** Own scope, disjoint from every live slot. RESERVE — dispatchable at
+the next open vacancy with no further drafting needed.
+```
+
+```
+### 299 — ROUTE-TESTA: TEST-SUITE FRESHNESS AUDIT (do the ~20 test_*.py files still
+match their modules' current behavior, post the CNR2/BHRV/PNR repair wave)
+[FLOOR-ELIGIBLE: none — audit, kept out of floor tally by convention]
+**Thesis.** Several solver modules were repaired this campaign (profile_newton.py,
+collocation_newton.py, boussinesq_rescaled.py among others). Worth confirming their
+test files still exercise post-repair behavior rather than pre-repair assumptions
+baked in before the fixes landed.
+**Gate.** Does a fresh run of every test_*.py file pass, with no test found to be
+silently asserting a pre-repair value or skipped without a recorded reason?
+  yes -> Bank as current. no -> Name the stale test(s); flag as a rework candidate,
+        do not silently update an assertion to match new behavior without checking
+        which is correct.
+**Territory.** test_*.py (read/run only; any needed fix becomes a named rework flag,
+               not an in-leg edit unless trivially the test itself is wrong),
+               writeup/novelty/leg_299.md, experiments/journal/leg_299.md.
+**Difficulty.** standard
+**Independence.** Own scope, read-mostly, disjoint from every live slot. RESERVE —
+dispatchable at the next open vacancy with no further drafting needed.
+```
+
+**FLOOR-TABLE block updated in this same edit** (C: 297 → 293). **Floor status: 3/10
+strictly (285, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 7 — legs 298, 299, 280, 231, 232, 233, 234.**
+Effective immediately-dispatchable: **2 (298, 299)** — genuine stock, not zero. 280
+user-gated; 231-234 blocked on repairs (221 live in slot D, its landing unblocks
+233). Next fresh leg number: **300.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
+raised — 297's ruling now sits with the user.
