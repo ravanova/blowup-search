@@ -27,7 +27,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 272 | WESCV | no |
-| B | 283 | M2SR | no |
+| B | 285 | P2S | yes |
 | C | 284 | NU12 | yes |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
@@ -6791,6 +6791,11 @@ promote once a slot frees.
 diagnostic classification: reparametrizing with `a` fixed, dilation gauge imposed, `nu` as
 the unknown, it recovered `nu = +0.01799364` (grid-converged, truncation-insensitive over
 55x of domain) at `a=0.30`, but NEGATIVE (`-0.00818`/`-0.00895`) at Chen's own `a=1/2` — the
+[CLOSED 2026-08-07: leg 210 escalated — a=0.30 CONFIRMED to 5.9 digits and strengthened
+to gauge-independence; the a=1/2 magnitudes quoted here did NOT reproduce (10.33×, leg
+185's single-unrefined-grid gap) and are downgraded to sign-only per leg 283's landed
+rework; a* unpinned. This dispatch text is preserved verbatim as the historical record
+of what 210 was asked to check. See legs 210/283/284.]
 precise, now-measured shape of "Object B exists below `a*=0.3865` and is anti-diffusive at or
 above it." Per this repository's own postconstruction-verification discipline
 (192/193/194/195), a genuinely new numeric claim deserves independent re-derivation before
@@ -12311,3 +12316,61 @@ Nothing in this update lifts a ban. 210's finding is recorded as a precision dow
 plus a strengthening, exactly as measured — no claim reversed, no submission document
 affected, not movement of any link. Clay stays ~0.05%. No new direction question raised
 — 226's report and the two user items (packet, 280 sign-off) remain the open tracks.
+
+---
+
+## DM update, 2026-08-07 — 283 (M2SR) landed clean (9 pointer blocks, 8 files, plus 5
+bonus mis-credit fixes); DIRECTION.md's own leg-210 dispatch record annotated
+append-only; slot B = fresh floor-eligible leg 285 (apparatus-spec enumeration)
+
+**283 landed (`0aa9da9`):** downgrade and upgrade applied together exactly as gated,
+plus 5 out-of-scope sites mis-crediting leg 125's a* to leg 185 found and fixed, 0
+arguments changed. **The line-6793 flag: resolved by this DM directly** (this file is DM
+territory) — a dated CLOSED annotation appended inside leg 210's dispatch entry, original
+text preserved verbatim per the dispatch-records convention.
+
+**Slot B: nothing dispatchable remained (280 user-gated, 229/231-234 blocked), so a
+fresh leg is drafted — aimed at the one concrete, decision-independent gap the costing
+left:**
+
+```
+### 285 — ROUTE-P2S: SPECIFY THE 15 ABSENT APPARATUS TERMS PRECISELY (265's build-cost
+row, taken from a count to a specification — math/literature scoping, NO construction)
+[FLOOR-ELIGIBLE: math/literature]
+**Thesis.** 265 (verified) costed Phase-1 construction at 15 of 18 needed apparatus
+terms absent from capabilities.py — a COUNT. This leg turns the count into a
+SPECIFICATION: for each absent term, from BCG/CGSS full text — what it must compute,
+its mathematical definition, its input/output contract against the 3 existing terms,
+and which of the 15 are independent vs. dependent (the build's true critical path). No
+code is written; no construction decision is pre-empted — if the user approves
+construction, dispatch briefs exist on day one; if the user declines, the specification
+is itself banked scoping knowledge about what a compressible-NS enclosure requires
+(secondary-goal track).
+**Gate.** Does every one of the 15 absent terms receive a precise specification
+(definition, contract, dependency position), each traceable to a named
+equation/section in BCG/CGSS?
+  yes -> Bank the specification dossier. Flag to the user's pending packet as an
+         addendum: the build cost now has a bill of materials, not just a count.
+  no -> Name which term(s) resist specification and why — an unspecifiable term is
+        itself a costing finding (it raises 265's estimate) and goes to the packet at
+        full strength.
+**Territory.** experiments/p2_route_p2s_v1_spec.py,
+               writeup/data/p2_route_p2s_v1_spec.json,
+               writeup/novelty/leg_285.md, experiments/journal/leg_285.md.
+               Reads (never edits) 265's parked dossier, verify-265, BCG/CGSS full
+               text, capabilities.py.
+**Difficulty.** standard
+**Independence.** Own module, read-only overlaps, builds nothing, needs no ban lift.
+Slot B, now. Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (B: 283 → 285). **Floor status: 5/10
+strictly (285, 284, 281, 267, 264).**
+
+**Canonical reserve line: reserve count 6 — legs 280, 229, 231, 232, 233, 234.**
+Effective immediately-dispatchable: 0 (280 user-gated; 229 on 226; 231-234 on repairs).
+Next fresh leg number: **286.**
+
+Nothing in this update lifts a ban or opens construction — 285 specifies, it does not
+build, and its output routes to the user's packet. Clay stays ~0.05%. No new direction
+question raised — 226's report and the two user items remain the open tracks.
