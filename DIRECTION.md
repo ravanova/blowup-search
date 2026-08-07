@@ -27,7 +27,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 265 | P2C | yes |
-| B | 271 | PUB2R2 | no |
+| B | 269 | J176P | no |
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
@@ -11365,3 +11365,44 @@ number: **273.**
 Nothing in this update lifts a ban; 263's p=1 nuance narrows a death certificate's
 WORDING, already applied under Ruling 2's authority, and changes no live ban's basis.
 Clay stays ~0.05%. No direction question raised.
+
+---
+
+## DM update, 2026-08-07 — 271 (PUB2R2) landed clean (4 MORE sites caught by its
+12-pattern sweep; zero independence assertions remain; theorem-vs-measurement
+distinction preserved); 270 HELD behind 271's verifier; slot B = 269, promoted out of
+order for a stated sequencing reason
+
+**271 landed (`504438f`), recorded:** the documented 12-pattern sweep found 4 sites
+beyond verify_268's three (one 9 lines from 268's own correction), zero
+truncation-independence assertions remain per the documented search, leg 127's proved
+decay theorem correctly kept distinct from leg 176's numerically-measured 4.0318 ladder,
+and 268's artifact + 176's JSON show 0 bytes changed. Its own §7b verifier is in flight
+(`verify/271-pub2r2-review`) per this DM's standing instruction for iteration-two
+corrections.
+
+**270 (PUB2V2): HELD — blocking condition updated from "271 lands" to "271's verifier
+lands clean."** Same logic as its original sequencing: no full trace of a possibly-still-
+moving target. If the verifier DOES find a fourth iteration's worth of sites, that is a
+process finding (the correction methodology itself failing to converge) and comes back
+to this DM before 270 dispatches — pre-committed now: a fourth iteration would trigger a
+single consolidated rewrite leg with a document-wide gate, not a fifth spot-fix.
+
+**Slot B: leg 269 (Route-J176P), promoted AHEAD of 210 with the reason recorded:** 270's
+trace runs every PUB2 claim back to its banked source layer, which includes leg 176's
+record — currently carrying the 9.8% journal prose slip (1.29e-14 vs 1.4296e-14). Fixing
+it now (light, DOCS-only) means 270 traces against a clean source rather than
+generating a known false mismatch. 210 remains next in reserve order.
+
+**FLOOR-TABLE block updated in this same edit** (B: 271 → 269). **Floor status: 4/10
+strictly (265, 236, 267, 264) — unchanged.**
+
+**Canonical reserve line: reserve count 8 — legs 210, 272, 270, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 2 (210, 272) — thin again; per the standing
+commitment, fresh candidates get drafted in the same update that next promotes either,
+and the packet's aftermath (user decisions on 251/stage-V/PUB2 submission) plus the
+pending 226 contingency are each expected to generate legs naturally. 270 blocked on
+271's verifier (HIGH once clear); 229 blocked on 226; 231-234 blocked on repairs.
+Next fresh leg number: **273.**
+
+Nothing in this update lifts a ban; Clay stays ~0.05%. No direction question raised.
