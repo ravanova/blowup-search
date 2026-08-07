@@ -4154,3 +4154,19 @@ preempted agents had reached a landing.
   single whole-record "convention C" citation; this is itself the
   mathematical explanation for why the caveat family (270/276/277/281)
   kept recurring, not just another instance of it.
+- **Leg 289 (Route-D1X) -- gate YES, landed.** Extends leg 288's one clean
+  exception (D1's exact kappa^-1/2 law) from "banked" to "used": using
+  only already-banked data, does the law correctly predict a held-out
+  kappa point? Leg 249 was checked and ruled out as a source first (no D1
+  data at any kappa). Two positive checks: predicting held-out kappa=1e4
+  from leg 281's N=512 sweep gives **0.0 relative error** (bit-identical,
+  at exactly leg 281's own 1.11e-16 precision floor); extrapolating leg
+  288's N=256 probe six decades to kappa=1e8 gives **1.53e-16** relative
+  error (machine precision). **The scoping limit, found and banked
+  explicitly**: a cross-N transfer check shows the law's multiplicative
+  coefficient is itself N-dependent (1.90e-05 relative difference between
+  N=256 and N=512, three orders above the machine-precision floor) -- so
+  the law is a validated predictive shortcut WITHIN a fixed discretization
+  (skip a fresh kappa-sweep once one point at that N is known) but does
+  NOT let a future leg skip computing at a new N. Flagged, not applied,
+  for future sweeps needing this quantity.
