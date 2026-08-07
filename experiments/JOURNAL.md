@@ -4021,3 +4021,11 @@ preempted agents had reached a landing.
   not a magnitude. Leg 185's report is faithful transcription of what its
   code computed -- the gap is upstream, in insufficient grid refinement at
   one parameter value, not in the reporting.
+  **APPLIED by leg 283**: a=1/2 downgraded to sign-only and a* marked
+  unpinned across 9 pointer blocks in 8 files (leg 185's journal, leg 174's
+  catalog -- verified to contain 0 quotable magnitudes, a null check not a
+  miss -- and 5 further sites leg 283's own sweep found mis-crediting leg
+  125's a* to leg 185). The a=0.30 confirmation and gauge-independence
+  strengthening travel with the downgrade in every block. 0 arguments
+  changed. Leg 284 (grid-convergence measurement at a=1/2) may supersede
+  this downgrade by citation if it lands.
