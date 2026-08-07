@@ -35,6 +35,7 @@ lesson 35). This file is the index, not the substitute.
 | 4 | *(this file's occasion — the same closure as #1, closed by measurement rather than by literature)* | **leg 178**, landed by the user's Ruling 1 of 2026-08-07 | §4 below |
 | 5 | leg 176's banked `C1_bordered_sigma_min_X.reading`, which **opens** "BOUNDED AWAY FROM ZERO and truncation-independent" before hedging in its own last sentence | **leg 249** (numerics) → **leg 268** (the tail-block twin, K3) → **verify_271** §6b (named the C1 field as the *upstream* regeneration source) | `σ_min` is **flat, not independent** — `0.139 %` over a 16-fold range — and the positive limit is float64 **evidence**, not a proof. §5 below |
 | 6 | `σ_min = 0.0908` printed at **15 sites** of PUB2 as if it were an absolute magnitude of the operator | **leg 249** §10 (`W5`, measured the sweep) → **leg 270** (`E1`, found PUB2 discloses it nowhere: 0 hits for `convention`/`normaliz`/`0.0420`/`2π`) → **leg 276** (disclosed) | the **digits** are convention-relative by a factor of **12.5** (`0.01086 … 0.13580`, and `0.0420` in Xu's own `y`-space normalization); the **gate property** — bounded away from zero uniformly in the truncation — **is invariant**. §6 below |
+| 7 | legs 198/218's **`Z_1` understatement ratio** (`1.198e9×` vs `2.2867e8×`, `5.24×` apart), banked side by side by leg 223 as an **unresolved disagreement**, "neither adopted" — left open across the record for 30 legs | **leg 228** (2026-08-07, Route-BHRV §4, a pre-committed falsification test) → **leg 279** (this entry; swept the record and carried the closure to every site) | **neither number is "the" ratio, because there is no such number.** The quantity is round-off-floor noise in a near-total-cancellation denominator: it spans **11.77×** under math-neutral perturbations *alone* — more than the disagreement it was supposed to explain — while the `‖A‖` control both legs agree on moves by **7.2e−12**. Quote **`‖A‖`** and **`Z_2`** instead. §8 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -357,3 +358,148 @@ moved** — leg 276's 122-row trace re-runs at **122/122 rows green, 185/185 num
 byte-identical**, before and after the edit. Leg 176's gate answer, leg 127's theorem, leg 163's
 census and leg 182's `NO` are exactly as they were. The object is the `a = 0` case only. **No
 ban lifts. No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**
+
+---
+
+## 8. The legs-198/218 `Z_1` disagreement is closed as EXPLAINED — and neither banked number survives as "the" ratio
+
+**Class, stated honestly before anything else.** This is **not** an over-read of a closure; it
+is the opposite shape — an *open item* that stayed open because both candidate resolutions were
+wrong in the same way. It is registered here because the register is the repository's index of
+"what a reader of the original artifact would come away believing that is now known false," and
+a reader of legs 198, 218 or 223 would come away believing that one of two competing `Z_1`
+ratios is correct and the other is a defect. **Neither is.** Landed by leg 279 (Route-Z1X,
+2026-08-07); measured by leg 228 (Route-BHRV, 2026-08-07).
+
+### The locators
+
+| what | where |
+|---|---|
+| the measurement that closes it | `experiments/journal/leg_228.md` §4 ("THE `Z_1` DISAGREEMENT IS RESOLVED") |
+| leg 228's runner | `experiments/p2_route_bhrv_v1_postrepair.py` (the two disputed values are pinned as `LEG_198_Z1_RATIO`/`LEG_218_Z1_RATIO`, `:599-600`, as *inputs* to the variance test) |
+| leg 228's banked data | `writeup/data/p2_route_bhrv_v1_postrepair.json:2530-2531` |
+| leg 218's original report | `experiments/journal/leg_218.md:60`, `:182`, `:258`; `writeup/novelty/leg_218.md:163` |
+| leg 223's banking of the open item | `experiments/journal/leg_223.md:69-70` |
+| leg 198's own journal | **does not exist on `main`** — branch `leg/198-bha-v1` is unmerged (leg 228 §5 records the same). Its number reaches the record only through the sites above. |
+
+### What was banked, and what is actually true
+
+Leg 198 (Route-BHA) measured that `solver/bordered_hl.py` silently accepted an inadmissible
+border weight and reported the `Z_1` understatement on the `w_r = ±1e−6` configuration as
+**`1.198e9×`**. Leg 218 (Route-BHR), re-running both modules in one process, measured
+**`2.2867e8×`** — `5.24×` apart — while the `‖A‖` (`6.6712e+09×`) and `Z_2`
+(`+1.188608e+17 / −1.779456e+07`) columns agreed to 4–6 significant figures. Leg 223 (PUB3)
+printed both and adopted neither, per its own provenance rule.
+
+Leg 218 offered the explanation (lesson 86): `Z_1 = ‖I − A·DF‖` with `A = inv(DF)` is a
+near-total cancellation, so the *flipped* `Z_1` sits at the round-off floor and the **ratio** is
+environment-dependent while the **verdict** is not. That was an explanation, not a measurement,
+and it stayed unmeasured through leg 223.
+
+Leg 228 measured it, and did so without the lesson-90 tautology of running the same arithmetic a
+third time. It fixed the falsification condition **before looking at any number** — perturb only
+in ways that provably cannot change the mathematics (algebraically identical re-associations of
+the same matrix products; BLAS thread counts), and measure the spread **of the disputed quantity
+itself**. If the spread brackets `5.24×`, the explanation stands; if the quantity is stable to
+within a few percent, the explanation is wrong and one of the two numbers is a real defect to
+escalate.
+
+| quantity | spread under math-neutral perturbations alone |
+|---|---|
+| **the disputed `Z_1` ratio** | **11.77×** — `2.6422e8` to `3.1108e9`, against a disagreement of only `5.239×` |
+| its denominator (flipped `Z_1`, ~`1e−15…1e−16`, the cancellation) | `6.407×` |
+| its numerator (honest `Z_1`) | `1.165×` |
+| `Z_1` at an **admissible** weight (not a cancellation) | `1.022×` |
+| **control — the `‖A‖` ratio, the column both legs agree on** | **`1.0000000000072×`** (`7.2e−12` relative) |
+
+Two illustrations of how little it takes: the `einsum` re-association alone moves the ratio from
+`1.8015e9` to `3.2766e8`, having changed nothing but reduction order; **thread count alone**
+spans the whole disagreement and then some, `2.6422e8` at 1 thread to `3.1108e9` at 4 — same
+code, same machine, same inputs. The control is the sharpest number in the closure: if these
+perturbations were breaking the computation rather than exposing a cancellation, `‖A‖` would
+have moved too. It did not.
+
+Leg 198's `1.198e9×` falls **inside** the observed band; leg 218's `2.2867e8×` falls just
+**outside** it, `1.16×` below the observed minimum — reported precisely rather than rounded into
+agreement, because the perturbation set is finite and obviously not exhaustive of the two legs'
+actual environments. Leg 228's own third measurement (`1.801e9×`) is a **third point in the same
+band, not a tie-breaker**.
+
+### The forward practice this installs
+
+> **Adopt NEITHER `1.198e9×` nor `2.2867e8×` as *the* `Z_1` understatement ratio. There is no
+> such number to adopt.** Quote the reproducible columns instead: **`‖A‖` understated
+> `= 6.6712e+09×`** (`w_r = ±1e−6`) and **`6.0663e+10×`** (`w_om = ±1e−9`), and **`Z_2`
+> `= +1.188608e+17 / −1.779456e+07`**.
+
+The same reading applies to the second, less-cited pair on the `w_om = ±1e−9` case
+(`2.651e12` vs `1.5048e12`, `1.76×` apart): same cancellation, same mechanism, same advice.
+Leg 228 measured the `w_r` case directly; the `w_om` pair is not separately re-measured and is
+recorded here as **inheriting the explanation, not as independently closed**.
+
+### Where the closure was carried (leg 279's sweep), and where it was not
+
+Scoped by **artifact / claim-sharing set**, not by an inherited defect list: a repository-wide
+sweep for either number and its roundings (`1.198e9`, `1.198e+09`, `2.2867e8`, `2.287e8`,
+`2.2867e+08`, `2.287e+08`) found **13 occurrences in 9 files**.
+
+**Carried (append-only; every original wording left standing):**
+
+| site | what was added |
+|---|---|
+| `writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md` §5(a) | a dated update block after the original paragraph. §5's framing ("printed rather than resolved") was correct as of leg 223 and is preserved; the block records that item (a) was resolved **elsewhere**, by leg 228, not by that document. |
+| `experiments/journal/leg_218.md` (`:60`, `:182`, `:258`) | dated pointer appended at end of file |
+| `experiments/journal/leg_223.md` (`:69-70`) | dated pointer appended at end of file |
+| `writeup/novelty/leg_218.md` (`:163`) | dated pointer appended at end of file |
+
+**Deliberately not edited, and why — these are flagged for integration, not repaired here:**
+
+| site | reason |
+|---|---|
+| `experiments/JOURNAL.md:3173`, `:3465`, `:3924` | **integration-owned shared ledger** (ORCHESTRATION.md §5a). `:3924` is the standing open item itself, which the orchestrator can now close against this entry. |
+| `DIRECTION.md:7137`, `:7361`, `:7536`, `:7612`, `:7947`, `:8958` | DM-owned, and all six are **dated dispatch-priority records** citing `1.198e9x/1.189e17x` as the corruption potential that justified a ranking at the time. They are history, not live claims; rewriting them would be rewriting the record rather than annotating it. |
+| `experiments/journal/leg_228.md:158`, `:188`; `experiments/p2_route_bhrv_v1_postrepair.py:573-4`, `:599-600`; `writeup/data/p2_route_bhrv_v1_postrepair.json:2530-1` | leg 228's own landed artifacts — read, never edited. They already **state** the closure; the two constants are its measurement's inputs and must stay verbatim. |
+
+### The separate finding that travels with this one: leg 218's caller enumeration was incomplete
+
+Recorded here because anyone re-reading legs 218/223 on the strength of this entry will read the
+caller list too, and it is wrong. Leg 218 aimed its clause (b) at a caller set "enumerated **by
+import**" and named six. Leg 228 §3 re-enumerated from the callers themselves: **13** direct
+importers in the worktree, of which **10** existed contemporaneously with leg 218 (membership
+decided by `git cat-file -e d9a20fb:<path>`, not a hardcoded list). **Five of the ten were
+missed**, and the split was fixed in advance — *material iff a missed importer touches the weight
+surface*:
+
+* `experiments/p2_route_tn_v1_consistency.py:219` calls `b.weights(p=P_STAR, w_l=0.01*|X|max)` →
+  the verdict is **MATERIAL**;
+* the other four missed importers (`test_bordered_hl_adversarial.py`,
+  `experiments/p2_route_bhn_v1_adversarial.py`, `p2_route_hlb_v1_contraction_lit.py`,
+  `p2_route_nb_v1_targetnorm.py`) do not touch the weight surface;
+* leg 218's sixth name, `p2_route_port_v2_reach.py`, imports `p2_route_port_v1_bordered` and not
+  `solver.bordered_hl` — correct as a *transitive* caller, but that is the gap four direct
+  importers fell through.
+
+**This does not impeach leg 218's repair, and leg 228's gate is YES anyway**: the differential is
+caller-*agnostic*, and leg 228 re-ran it over the full ten-importer configuration space —
+`tn_v1_consistency`'s live configuration (`n=201`, `p=0.39`, `w_l = 0.01 |X|max`) included — at
+45 configurations, 77,040 float leaves, **0** bit mismatches. What is corrected is the
+*enumeration*, and the hazard is that a verification leg trusting it would have inherited the
+hole.
+
+**A consequence site, flagged not repaired (out of leg 279's gate scope, which was the two
+disputed numbers).** `TECHNICAL_P2_PUB3_V1.md` §5(b) reproduces leg 218's incomplete list
+verbatim — *"The live caller set, enumerated by import, is `port_v1`/`port_v2`/`l1_v1`/`l1rh_v1`
+plus two test files"* — and `experiments/journal/leg_223.md` §"three disagreements" item 2 rests
+on the same enumeration. Neither quotes a disputed `Z_1` number, so neither fell inside this
+leg's sweep. **Recommended follow-up:** a pass scoped to the caller-enumeration claim, carrying
+leg 228 §3's ten-importer table to both sites.
+
+### The ceiling
+
+**0 arguments changed, 0 gate answers changed, 0 banked values moved, 0 solver modules touched.**
+Legs 198's and 218's verdicts stand exactly as banked — a sign flip corrupts these constants
+catastrophically, which was never the disputed part — and so does leg 218's repair, leg 228's
+`YES` on both clauses, and the contamination status (zero). Nothing here lifts a ban, promotes a
+route, or moves a link of the `L1 → L4` chain. What changes is one thing only: **the record no
+longer carries an open disagreement it had the measurement to close, and no longer invites a
+reader to pick a side.** Clay `~0.05%`.

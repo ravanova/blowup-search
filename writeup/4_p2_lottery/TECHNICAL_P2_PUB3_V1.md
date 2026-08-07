@@ -417,6 +417,26 @@ the *verdict* is not — lesson 86. Leg 198's `‖A‖` (6.671e9×, 6.066e10×) 
 adopted here; the verdict (a sign flip corrupts these constants catastrophically) is not in
 dispute, and the contamination status (zero) is not affected.
 
+> **Update — 2026-08-07, leg 279 (Route-Z1X). Item (a) is now CLOSED AS EXPLAINED.**
+> Append-only; nothing in the paragraph above is altered, and §5's framing ("printed rather
+> than resolved") was correct as of leg 223. Item (a) was resolved *elsewhere* — by leg 228
+> (`experiments/journal/leg_228.md` §4), not by this document. Leg 228 treated leg 218's
+> variance explanation as the falsifiable claim it is, with the falsification condition fixed
+> **before** the numbers were looked at, and measured the disputed quantity under
+> mathematics-neutral perturbations only (algebraically identical re-associations of the same
+> matrix products, plus BLAS thread counts). The ratio spans **11.77×** — `2.6422e8` to
+> `3.1108e9` — against a disagreement of only **5.239×**; **thread count alone** moves it from
+> `2.6422e8` (1 thread) to `3.1108e9` (4 threads), same code, same machine, same inputs. The
+> control is the sharp number: the `‖A‖` ratio — the column legs 198 and 218 *agree* on — moves
+> by **7.2e−12 relative** under those same perturbations. So the disputed `Z₁` ratio is
+> round-off-floor noise in a near-total-cancellation denominator, and **neither `1.198e9×` nor
+> `2.2867e8×` should be adopted as *the* ratio — there is no such number to adopt.** The
+> reproducible columns, and the ones this and any other prose should quote, are
+> **`‖A‖ = 6.6712e+09×`** (and `6.0663e+10×` on the `w_om` case) and
+> **`Z₂ = +1.188608e+17 / −1.779456e+07`**, which both legs reproduce to 4–6 s.f. Both legs'
+> verdicts, and the contamination status (zero), are unaffected — exactly as the paragraph
+> above already says. See `writeup/CORRECTIONS.md`, leg 279 entry.
+
 **(b) The DM's blast-radius framing for leg 198 is measured false.** DIRECTION.md ranks 218
 first "given that this module sits directly upstream of every bordered-certificate battery this
 repository has run (54, 58, 127)". Leg 218 measured it: **legs 54/58/127 do not import
