@@ -31,18 +31,17 @@ prose as before.
 | C | 228 | BHRV | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
-| F | 236 | RDDEP | yes |
+| F | 273 | NFS | yes |
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 252 | VBRG | no |
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-A refill after 266+268 landed): 4/10
-floor-eligible -- A/265/P2C, F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the "both
-corrections landed" DM update at the tail of this file. 265 (Phase-1 costing of the
-corrected BCG obligation) was unblocked by 266's landing and promoted immediately as the
-top-priority reserve item.)
+(Current snapshot, DM update of 2026-08-07 (slot-F refill after 236's escalation): 3/10
+floor-eligible -- F/273/NFS, G/267/FDL, H/264/WETP -- matching the "236 escalated" DM
+update at the tail of this file. Roster: A/274/J176R2, B/210/M2SV, C/228/BHRV,
+D/221/BVRR, E/248/CNR2, F/273/NFS, G/267/FDL, H/264/WETP, I/252/VBRG, J/226/PNR.)
 
 ---
 
@@ -11579,3 +11578,66 @@ in the user's decision, its costing is recorded as a costing (15/18 absent, gap-
 explicit), and no output here is described as movement toward Clay. Clay stays ~0.05%.
 No direction question raised: both open contingencies (verify-265's verdict, 226's
 finding) have pre-committed responses above.
+
+---
+
+## DM update, 2026-08-07 — 236 (RDDEP) ESCALATED: FIRST CONFIRMED MOVEMENT OF A BANKED
+ROUTE-D v11 HEADLINE; routing decision = WAIT FOR 226 (one consolidated impact-trace,
+not two overlapping reworks); slot F = 273; the affected-downstream list recorded so
+nothing is lost
+
+**236 (RDDEP), recorded at full strength** (parked `leg/236-rddep-v1-resume`, gate "SOME
+AFFECTED AND THEY MOVE," territory clean, main untouched):
+
+- **`v2_sweep.a_max_machine`: 1.0 → 0.55**, robust under all three exclusion policies —
+  carried entirely by four off-branch roots (a=0.7-1.0) passing the module's own broken
+  `relres<1e-8` gate at machine-zero residual. The corrected 0.55 AGREES with the
+  document's own prose ("a* ≈ 0.5-0.55") — the banked scalar was silently contradicting
+  the document banking it.
+- **`v5_budget.newton_weighted_defect_max`: 1.5196780e-02 → 2.3741350e-05 (640.1×)**
+  under 2 of 3 policies — carried by the single a=0.45 SILENT_DEGRADED row (iteration
+  cap hit without tolerance, yet passes v11's gate).
+- Unmoved to all digits: best_relres, orders_below_GA, defect_min, the min-based margin.
+- **Knock-on to 247's escalation:** the repaired worst-case margin flips from a 62.02×
+  budget VIOLATION to a **10.32× margin of SAFETY** once that same single row is
+  excluded — the entire violation rests on one rejected row.
+
+**Routing decision (the orchestrator's "act now or wait"): WAIT FOR 226.** 226 is
+approaching the SAME headline from the repair side (its cheap-grid pre-echo already saw
+a=0.50 off-branch; real ARM D at v11's own grids running). Convergence = strong
+independent confirmation; divergence = itself a finding requiring both reports side by
+side. Either way the correction should be cut ONCE: **the pre-committed 226-contingency
+rework is hereby amended into a single consolidated impact-trace covering BOTH legs'
+findings, cut at top of queue in the same update that records 226's report.** Its
+affected-downstream list, recorded now so nothing silently drops out:
+
+1. The banked v11 scalars 236 names (`a_max_machine`, `newton_weighted_defect_max`) and
+   any document quoting them;
+2. **247's escalated framing** (62.02× violation → possibly 10.32× safety) and
+   therefore **252's regenerated anchor JSON**, which banked the 62.02× figure;
+3. RDDEP's own exposure list, and PROGRESS.md's new top entry (orchestrator-owned).
+
+The escalation stays in NEEDS-YOU as the orchestrator has it; the user sees it either
+with 226's convergent confirmation attached or with the divergence stated — not
+piecemeal.
+
+**Slot F: leg 273 (Route-NFS) promoted** — floor-eligible, and deliberately
+NON-v11-adjacent territory while the correlation is pending. **272 remains the only
+effective dispatchable reserve; the standing draft-on-promotion trigger is DELIBERATELY
+DEFERRED ONE UPDATE, stated openly rather than papered over:** 226's imminent report
+generates the consolidated rework (and likely follow-ups) at top of queue; speculative
+filler drafted now would be queue debt. If any slot vacates before 226 reports, 272
+takes it.
+
+**FLOOR-TABLE block updated in this same edit** (F: 236 → 273; caption refreshed to the
+full current roster). **Floor status: 3/10 strictly (273, 267, 264) — met exactly.**
+
+**Canonical reserve line: reserve count 7 — legs 270, 272, 229, 231, 232, 233, 234.**
+(270 blocked on 274's landing, 229 blocked on 226, 231-234 blocked on repairs
+217/219/221/225 — effective dispatchable: 1, leg 272, per the stated deferral.)
+Next fresh leg number: **275.**
+
+Nothing in this update lifts a ban. 236's finding is recorded as movement of a BANKED
+SCALAR toward its own document's prose — a correction, not progress on any link, and
+explicitly not described as movement toward Clay. Clay stays ~0.05%. No direction
+question raised: the wait-for-226 decision is recorded with its reason.
