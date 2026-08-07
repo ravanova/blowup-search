@@ -3,24 +3,48 @@
     "leg": "P2 Route-D v11 (Newton on the two-scale profile: the other side of the inequality)",
     "tier": "Level-1 tooling + a structural positive (NOT a certificate)",
     "reproduce": "python experiments/p2_route_d_v11_anchor.py",
-    "arithmetic": "plain float64; Newton with an exact analytic Jacobian, gated against the closed-form a = 0 traveling wave"
+    "arithmetic": "plain float64; Newton with an exact analytic Jacobian, gated against the closed-form a = 0 traveling wave",
+    "repair_ported_from": "leg/247-vbr-v1@10be909 (v5_budget worst-case selection repair, ported byte-identically, verified by diff)",
+    "regenerated_by": "leg 252 (Route-VBRG, branch leg/252-vbrg-v1@3a04a2e); re-banked onto main's artifact path by leg 297 (Route-D11ANCHOR) per leg 252's own Option 3 (\"re-bank deliberately, as its own leg, with the environment pinned and the 202-leaf move stated as a finding in its own right\")",
+    "regeneration_environment": {
+      "hostname": "AH01",
+      "cpu": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+      "python": "3.12.3",
+      "numpy": "2.5.1",
+      "blas_lapack": "scipy-openblas 0.3.33.112.0 (OpenBLAS 0.3.33.112.0 USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64)",
+      "note": "recorded because leg 252 found the artifact NOT environment-portable (202/359 leaves move across environments, 46 by >10%, traced to Newton's basin selection at ill-conditioned rows, not solver drift). Leg 297 independently verified its own environment is identical to leg 252's on every one of these axes, and reproduced leg 252's decisive a=0.45 row bit-for-bit before reusing this JSON rather than re-running the full ~7-8 CPU-hour regeneration."
+    },
+    "known_non_portability": {
+      "finding": "leg 252 measured 202 of 359 banked leaves (outside v5_budget/meta) moving on regeneration relative to the PRIOR bank (the one this file replaces), 46 by >10% relative, including one qualitative flip (v3_boundary a=0.62 converged True->False) and two grids_reaching_machine_precision count changes (a=0.8 and a=1.0, both 1->2). Traced to floating-point non-portability at Newton's basin boundary (ill-conditioned rows), NOT solver drift: solver/profile_newton.py has had a single commit on origin/main since the file was first banked, and the runner is bit-deterministic WITHIN one environment (verified independently by both leg 252 and leg 297).",
+      "unchanged_headline_scalars": {
+        "v2_sweep.a_max_machine": 1.0,
+        "v3_boundary.last_machine_precision_a": 0.72,
+        "v4_grids.grid_converged_a_max": 0.5
+      },
+      "reading": "no prose conclusion of Route-D v11 changes: the survival boundary, the a>=0.8 solver-artifact reading, and the ~62x budget miss at a=0.45 are all unchanged. What moved is numerical noise-floor detail in individual leaves, not the leg's argument."
+    },
+    "margin_correction_applied_by_this_rebank": {
+      "stale_margin_replaced": 10467862585.933441,
+      "corrected_margin": 0.015991923774880644,
+      "correction_factor_x": 654571815954.7423
+    }
   },
   "v1_known_answer": {
     "n": 801,
-    "exact_continuum_rms_on_the_grid": 7.729346205965768e-09,
-    "newton_rms": 1.0717169642907556e-15,
-    "newton_c": 0.49797101341035727,
+    "exact_continuum_rms_on_the_grid": 7.729346247195022e-09,
+    "newton_rms": 9.675502343691423e-16,
+    "newton_c": 0.4979710207090008,
     "iterations": 7,
-    "profile_difference": 0.00203312828817781,
+    "profile_difference": 0.002033113631412675,
     "history": [
       0.0672406780791443,
-      0.015656279619249584,
-      0.0028638728633899194,
-      5.4524837006606726e-05,
-      3.3761936963946934e-08,
-      4.3558335586085435e-13,
-      1.0717169642907556e-15,
-      1.0717169642907556e-15
+      0.015656279619249473,
+      0.0028638731081672532,
+      5.452654212891742e-05,
+      3.380992855205456e-08,
+      4.156077825581196e-13,
+      9.675502343691423e-16,
+      9.675502343691423e-16
     ],
     "reading": "Newton finds a zero of the DISCRETE system, which is not the continuum solution: the exact anchor scores its own discretization error on the same equations.  That is the correct behaviour and it is the first thing to check, because a solver that reproduced the continuum profile exactly would be reporting something impossible."
   },
@@ -30,260 +54,260 @@
       {
         "a": 0.0,
         "converged": true,
-        "residual_rms": 1.144972129028598e-15,
-        "relres": 9.71364255399854e-15,
-        "c": 0.4979710520289264,
+        "residual_rms": 1.2069384249346331e-15,
+        "relres": 1.0239348433011377e-14,
+        "c": 0.4979710263000853,
         "iterations": 4,
-        "weighted_defect": 2.0404871804230019e-10
+        "weighted_defect": 6.248788706271284e-11
       },
       {
         "a": 0.05,
         "converged": true,
-        "residual_rms": 9.779121629431756e-15,
-        "relres": 8.228304860678187e-14,
-        "c": 0.5106627353185929,
+        "residual_rms": 9.775402089431053e-15,
+        "relres": 8.225175182403857e-14,
+        "c": 0.510662735184044,
         "iterations": 4,
-        "weighted_defect": 2.4736761103063177e-09
+        "weighted_defect": 2.4758958299242587e-09
       },
       {
         "a": 0.1,
         "converged": true,
-        "residual_rms": 1.0550920220426727e-15,
-        "relres": 8.80510887890354e-15,
-        "c": 0.5236204989988199,
+        "residual_rms": 1.206429143259174e-15,
+        "relres": 1.00680696466376e-14,
+        "c": 0.5236204988936792,
         "iterations": 5,
-        "weighted_defect": 2.340496906495767e-14
+        "weighted_defect": 4.749013353083527e-14
       },
       {
         "a": 0.15,
         "converged": true,
-        "residual_rms": 4.2864281691009085e-15,
-        "relres": 3.5459813222820815e-14,
-        "c": 0.5382793544665451,
+        "residual_rms": 4.30299180122145e-15,
+        "relres": 3.5596837170250127e-14,
+        "c": 0.5382793543589295,
         "iterations": 4,
-        "weighted_defect": 8.957136730252033e-08
+        "weighted_defect": 8.882225317817239e-08
       },
       {
         "a": 0.2,
         "converged": true,
-        "residual_rms": 3.24421702703017e-15,
-        "relres": 2.6604720377084077e-14,
-        "c": 0.5532899459876917,
+        "residual_rms": 3.2361189512097466e-15,
+        "relres": 2.653831081291638e-14,
+        "c": 0.5532899458778322,
         "iterations": 4,
-        "weighted_defect": 1.0825507624473443e-08
+        "weighted_defect": 1.0834897764915099e-08
       },
       {
         "a": 0.25,
         "converged": true,
-        "residual_rms": 2.591480161161309e-15,
-        "relres": 2.1068009284589843e-14,
-        "c": 0.5686479400838558,
+        "residual_rms": 2.5724986943127287e-15,
+        "relres": 2.0913695266471026e-14,
+        "c": 0.5686479399646771,
         "iterations": 4,
-        "weighted_defect": 1.287720593592463e-07
+        "weighted_defect": 1.2844593065045663e-07
       },
       {
         "a": 0.3,
         "converged": true,
-        "residual_rms": 1.9652139684112228e-14,
-        "relres": 1.5839384616083975e-13,
-        "c": 0.5843482126956117,
+        "residual_rms": 1.959825365131873e-14,
+        "relres": 1.5795953133232678e-13,
+        "c": 0.5843482125483669,
         "iterations": 4,
-        "weighted_defect": 2.1678555931462193e-07
+        "weighted_defect": 2.161449133607978e-07
       },
       {
         "a": 0.35,
         "converged": true,
-        "residual_rms": 7.991892621985998e-13,
-        "relres": 6.407111953361836e-12,
-        "c": 0.5921808110066537,
+        "residual_rms": 6.88616226365636e-13,
+        "relres": 5.520648350852668e-12,
+        "c": 0.5921797823722922,
         "iterations": 40,
-        "weighted_defect": 2.299174862774721e-05
+        "weighted_defect": 2.0106389107465392e-05
       },
       {
         "a": 0.4,
         "converged": true,
-        "residual_rms": 1.2072980103027915e-15,
-        "relres": 9.604316741393971e-15,
-        "c": 0.6065912180003867,
-        "iterations": 13,
-        "weighted_defect": 2.3745410710865122e-08
+        "residual_rms": 1.7292147241834405e-15,
+        "relres": 1.3756277020897247e-14,
+        "c": 0.6065912263422927,
+        "iterations": 12,
+        "weighted_defect": 2.3761617487735334e-08
       },
       {
         "a": 0.45,
         "converged": true,
-        "residual_rms": 2.0272985790982867e-10,
-        "relres": 1.6005288648836091e-09,
-        "c": 0.6212128887282526,
+        "residual_rms": 2.9108803891437065e-12,
+        "relres": 2.2981065840079924e-11,
+        "c": 0.6212128879979006,
         "iterations": 40,
-        "weighted_defect": 0.015195816195658364
+        "weighted_defect": 0.015320233103213909
       },
       {
         "a": 0.5,
         "converged": true,
-        "residual_rms": 2.4948780036196606e-15,
-        "relres": 1.955004123530594e-14,
-        "c": 0.6360371993769819,
-        "iterations": 7,
-        "weighted_defect": 7.452803361201188e-07
+        "residual_rms": 1.5382554843843527e-15,
+        "relres": 1.2053879230948793e-14,
+        "c": 0.6360371992313086,
+        "iterations": 8,
+        "weighted_defect": 7.452777847929075e-07
       },
       {
         "a": 0.55,
         "converged": true,
-        "residual_rms": 1.6283724803640601e-15,
-        "relres": 1.2666636692505909e-14,
-        "c": 0.6510632341840581,
+        "residual_rms": 1.7609835027554821e-15,
+        "relres": 1.3698179329207837e-14,
+        "c": 0.6510632342015897,
         "iterations": 5,
-        "weighted_defect": 1.0292928509778421e-10
+        "weighted_defect": 1.0318323712839313e-10
       },
       {
         "a": 0.6,
         "converged": true,
-        "residual_rms": 8.779734571211414e-09,
-        "relres": 6.780566040042652e-08,
-        "c": 0.6662707181094097,
+        "residual_rms": 8.753881653239823e-09,
+        "relres": 6.760597628806729e-08,
+        "c": 0.6662709324294281,
         "iterations": 40,
-        "weighted_defect": 0.622257814895334
+        "weighted_defect": 0.6204258998786962
       },
       {
         "a": 0.7,
         "converged": true,
-        "residual_rms": 2.7912255327894136e-15,
-        "relres": 2.1259549590517455e-14,
-        "c": 0.6971807761166391,
+        "residual_rms": 2.8221758316803597e-15,
+        "relres": 2.1495284541494418e-14,
+        "c": 0.6971807761152686,
         "iterations": 7,
-        "weighted_defect": 1.1226710509569824e-11
+        "weighted_defect": 5.003688645795893e-12
       },
       {
         "a": 0.8,
         "converged": true,
-        "residual_rms": 1.6067111766725658e-15,
-        "relres": 1.2077307772913829e-14,
-        "c": 0.7287020300617032,
+        "residual_rms": 1.5921605781237473e-15,
+        "relres": 1.1967934003996363e-14,
+        "c": 0.7287020300617528,
         "iterations": 9,
-        "weighted_defect": 5.696426583727755e-09
+        "weighted_defect": 3.987668296622051e-11
       },
       {
         "a": 0.9,
         "converged": true,
-        "residual_rms": 1.4885771082900114e-15,
-        "relres": 1.1050831626505453e-14,
-        "c": 0.760744125772949,
+        "residual_rms": 1.4689749229098949e-15,
+        "relres": 1.0905309806412475e-14,
+        "c": 0.7607441257729147,
         "iterations": 7,
-        "weighted_defect": 1.502057607005308e-07
+        "weighted_defect": 1.500809339562456e-07
       },
       {
         "a": 1.0,
         "converged": true,
-        "residual_rms": 8.39415552496933e-15,
-        "relres": 6.159499531926391e-14,
-        "c": 0.7931877152785316,
+        "residual_rms": 8.358600393172554e-15,
+        "relres": 6.133409734446672e-14,
+        "c": 0.7931877152785268,
         "iterations": 12,
-        "weighted_defect": 5.256671614616653e-07
+        "weighted_defect": 5.256624950413183e-07
       }
     ],
     "GA_floor": 0.01,
-    "best_relres": 8.80510887890354e-15,
+    "best_relres": 1.00680696466376e-14,
     "a_max_machine": 1.0,
-    "orders_below_GA": 12.055265269428148,
+    "orders_below_GA": 11.99705378884817,
     "reading": "the GA floored at relres ~1e-2 for every a, and section 9 read that floor as a property of the problem.  It is a property of the SEARCH: with no genome at all, Newton reaches machine precision on the same discrete equations for every a below the survival boundary."
   },
   "v3_boundary": {
     "rows": [
       {
         "a": 0.44,
-        "relres": 3.0540884402389545e-10,
+        "relres": 4.04564373298653e-12,
         "converged": true,
-        "c": 0.6182719666864739
+        "c": 0.6182717711216615
       },
       {
         "a": 0.46,
-        "relres": 1.0761541175222826e-14,
+        "relres": 1.1499941126301827e-14,
         "converged": true,
-        "c": 0.6241619310027413
+        "c": 0.6241619315462341
       },
       {
         "a": 0.48,
-        "relres": 2.7012301434481417e-09,
+        "relres": 2.7253982744280397e-09,
         "converged": true,
-        "c": 0.630084280518621
+        "c": 0.6300842354486665
       },
       {
         "a": 0.5,
-        "relres": 8.028923092010226e-14,
+        "relres": 8.040727121501696e-14,
         "converged": true,
-        "c": 0.6360397156780263
+        "c": 0.6360397157621205
       },
       {
         "a": 0.52,
-        "relres": 8.84090972534476e-15,
+        "relres": 1.0145191798581599e-14,
         "converged": true,
-        "c": 0.6420251626975199
+        "c": 0.6420251627570134
       },
       {
         "a": 0.54,
-        "relres": 2.7057765628611216e-08,
+        "relres": 2.7059897926105067e-08,
         "converged": false,
-        "c": 0.6480407120227919
+        "c": 0.6480407247059763
       },
       {
         "a": 0.56,
-        "relres": 7.583658985539714e-08,
+        "relres": 7.584220972804912e-08,
         "converged": false,
-        "c": 0.6540877430854946
+        "c": 0.6540876895383149
       },
       {
         "a": 0.58,
-        "relres": 1.2233291547381474e-07,
+        "relres": 1.2236547765189078e-07,
         "converged": false,
-        "c": 0.6601647540206447
+        "c": 0.6601646707322358
       },
       {
         "a": 0.6,
-        "relres": 6.780566040042652e-08,
+        "relres": 6.760597628806729e-08,
         "converged": false,
-        "c": 0.6662707181094097
+        "c": 0.6662709324294281
       },
       {
         "a": 0.62,
-        "relres": 1.0772072052576051e-14,
-        "converged": true,
-        "c": 0.6729366295185071
+        "relres": 0.00034942379949706124,
+        "converged": false,
+        "c": 0.6744396633158872
       },
       {
         "a": 0.64,
-        "relres": 1.2826347105859263e-14,
+        "relres": 1.0083075742455787e-14,
         "converged": true,
-        "c": 0.6785886168156209
+        "c": 0.6785886168103966
       },
       {
         "a": 0.66,
-        "relres": 3.8800015003490003e-07,
+        "relres": 3.891761302896747e-07,
         "converged": false,
-        "c": 0.6847650623848678
+        "c": 0.6847650681619535
       },
       {
         "a": 0.68,
-        "relres": 1.8364745434953607e-06,
+        "relres": 1.8459042900155677e-06,
         "converged": false,
-        "c": 0.6909861680246662
+        "c": 0.6909867054842812
       },
       {
         "a": 0.7,
-        "relres": 9.403249144349296e-15,
+        "relres": 1.0447120392052092e-14,
         "converged": true,
-        "c": 0.6971807761152151
+        "c": 0.69718077611701
       },
       {
         "a": 0.72,
-        "relres": 1.0705636614246389e-14,
+        "relres": 1.1252119026021025e-14,
         "converged": true,
-        "c": 0.7043881294701383
+        "c": 0.7043881294700961
       },
       {
         "a": 0.74,
-        "relres": 3.5050514956839393e-06,
+        "relres": 3.5034628239446776e-06,
         "converged": false,
-        "c": 0.709805011637543
+        "c": 0.7098041718405043
       }
     ],
     "last_machine_precision_a": 0.72,
@@ -299,173 +323,173 @@
       {
         "n": 401,
         "a": 0.0,
-        "relres": 4.3323590304579805e-15,
-        "residual_rms": 5.103480296998139e-16,
-        "c": 0.4979712449052861,
-        "Omega_at_X4": -0.06022721556282138,
-        "weighted_defect": 4.524447745776031e-12
+        "relres": 5.003381564374652e-15,
+        "residual_rms": 5.893938862928486e-16,
+        "c": 0.4979712472212171,
+        "Omega_at_X4": -0.06022721595600605,
+        "weighted_defect": 1.600443928936507e-11
       },
       {
         "n": 401,
         "a": 0.2,
-        "relres": 2.908258620201058e-14,
-        "residual_rms": 3.546092741350677e-15,
-        "c": 0.5545708358330205,
-        "Omega_at_X4": -0.024741859644476005,
-        "weighted_defect": 1.49967243923986e-07
+        "relres": 2.912597575566207e-14,
+        "residual_rms": 3.55138330870946e-15,
+        "c": 0.5545708358333651,
+        "Omega_at_X4": -0.02474185964451413,
+        "weighted_defect": 1.499673168782728e-07
       },
       {
         "n": 401,
         "a": 0.5,
-        "relres": 6.476603153401411e-08,
-        "residual_rms": 8.259900336513976e-09,
-        "c": 0.63601810027421,
-        "Omega_at_X4": 3.227815990495703e-06,
-        "weighted_defect": 0.5004514144266673
+        "relres": 6.476482078299978e-08,
+        "residual_rms": 8.259745913922663e-09,
+        "c": 0.6360180995321166,
+        "Omega_at_X4": 3.22767801444703e-06,
+        "weighted_defect": 0.5004480200721677
       },
       {
         "n": 401,
         "a": 0.8,
-        "relres": 0.0011249300551053774,
-        "residual_rms": 0.0001505411592056313,
-        "c": 0.7331433981585896,
-        "Omega_at_X4": 0.009461729750368828,
-        "weighted_defect": 4788.016438278546
+        "relres": 0.0011741648174005742,
+        "residual_rms": 0.00015716215642446135,
+        "c": 0.733293372868903,
+        "Omega_at_X4": 0.00974722118924119,
+        "weighted_defect": 5566.9513738774485
       },
       {
         "n": 401,
         "a": 1.0,
-        "relres": 0.005898939091234096,
-        "residual_rms": 0.0008069030564506525,
-        "c": 0.7964218109708666,
-        "Omega_at_X4": 0.007956603728563634,
-        "weighted_defect": 73371.6254687273
+        "relres": 7.096346623968902e-15,
+        "residual_rms": 9.675544482034577e-16,
+        "c": 0.7937598536094689,
+        "Omega_at_X4": 0.001822612314111877,
+        "weighted_defect": 1.5312646259028676e-08
       },
       {
         "n": 801,
         "a": 0.0,
-        "relres": 9.71364255399854e-15,
-        "residual_rms": 1.144972129028598e-15,
-        "c": 0.4979710520289264,
-        "Omega_at_X4": -0.057985311537091765,
-        "weighted_defect": 2.0404871804230019e-10
+        "relres": 1.0239348433011377e-14,
+        "residual_rms": 1.2069384249346331e-15,
+        "c": 0.4979710263000853,
+        "Omega_at_X4": -0.05798530729303957,
+        "weighted_defect": 6.248788706271284e-11
       },
       {
         "n": 801,
         "a": 0.2,
-        "relres": 1.0132507155365502e-14,
-        "residual_rms": 1.2363557430056257e-15,
-        "c": 0.5547756565731081,
-        "Omega_at_X4": -0.023127311820525888,
-        "weighted_defect": 1.0825507624473443e-08
+        "relres": 1.000970050254956e-14,
+        "residual_rms": 1.2213710301245763e-15,
+        "c": 0.5547756565731095,
+        "Omega_at_X4": -0.023127311820528053,
+        "weighted_defect": 1.0834897764915099e-08
       },
       {
         "n": 801,
         "a": 0.5,
-        "relres": 8.028923092010226e-14,
-        "residual_rms": 1.0246150704796326e-14,
-        "c": 0.6360397156780263,
-        "Omega_at_X4": -5.6492618513727923e-08,
-        "weighted_defect": 7.452803361201188e-07
+        "relres": 8.040727121501696e-14,
+        "residual_rms": 1.0261214476862081e-14,
+        "c": 0.6360397157621205,
+        "Omega_at_X4": -5.64926186623094e-08,
+        "weighted_defect": 7.452777847929075e-07
       },
       {
         "n": 801,
         "a": 0.8,
-        "relres": 1.0464390975685832e-14,
-        "residual_rms": 1.3935192443495812e-15,
-        "c": 0.7293940450078625,
-        "Omega_at_X4": 0.0011816012161009418,
-        "weighted_defect": 5.696426583727755e-09
+        "relres": 1.0616094551495176e-14,
+        "residual_rms": 1.413406793420438e-15,
+        "c": 0.729235792295508,
+        "Omega_at_X4": 0.0008624827452458319,
+        "weighted_defect": 3.987668296622051e-11
       },
       {
         "n": 801,
         "a": 1.0,
-        "relres": 6.159499531926391e-14,
-        "residual_rms": 8.39415552496933e-15,
-        "c": 0.7931877152785316,
-        "Omega_at_X4": -0.0021523243191786815,
-        "weighted_defect": 5.256671614616653e-07
+        "relres": 6.133409734446672e-14,
+        "residual_rms": 8.358600393172554e-15,
+        "c": 0.7931877152785268,
+        "Omega_at_X4": -0.002152324319178901,
+        "weighted_defect": 5.256624950413183e-07
       },
       {
         "n": 1601,
         "a": 0.0,
-        "relres": 4.377599307839473e-14,
-        "residual_rms": 5.163407747393802e-15,
-        "c": 0.49876863234441715,
-        "Omega_at_X4": -0.05811674730979396,
-        "weighted_defect": 4.1814268355174705e-08
+        "relres": 4.4336490408012894e-14,
+        "residual_rms": 5.229518783389296e-15,
+        "c": 0.49876863234441693,
+        "Omega_at_X4": -0.05811674730979407,
+        "weighted_defect": 4.1762252658865764e-08
       },
       {
         "n": 1601,
         "a": 0.2,
-        "relres": 2.0848372322410882e-14,
-        "residual_rms": 2.5447984630497246e-15,
-        "c": 0.5548768004840611,
-        "Omega_at_X4": -0.02313762304873384,
-        "weighted_defect": 1.205324873902843e-07
+        "relres": 2.136784404285505e-14,
+        "residual_rms": 2.6082063308317707e-15,
+        "c": 0.554876800483244,
+        "Omega_at_X4": -0.02313762304926538,
+        "weighted_defect": 1.2321726512693211e-07
       },
       {
         "n": 1601,
         "a": 0.5,
-        "relres": 2.16731808791631e-14,
-        "residual_rms": 2.7667017660533907e-15,
-        "c": 0.6360442513775247,
-        "Omega_at_X4": 1.5994155222852915e-07,
-        "weighted_defect": 8.53087468126693e-08
+        "relres": 2.1615367089011787e-14,
+        "residual_rms": 2.7593215153312255e-15,
+        "c": 0.6360442517040861,
+        "Omega_at_X4": 1.5994155419474281e-07,
+        "weighted_defect": 8.531093269545152e-08
       },
       {
         "n": 1601,
         "a": 0.8,
-        "relres": 0.00013083609356778308,
-        "residual_rms": 1.744720366674144e-05,
-        "c": 0.7301381336252428,
-        "Omega_at_X4": 0.002788715145652228,
-        "weighted_defect": 1992.0543105694808
+        "relres": 3.8856961426510437e-14,
+        "residual_rms": 5.189988449594668e-15,
+        "c": 0.7312860633721128,
+        "Omega_at_X4": 0.00484799491646725,
+        "weighted_defect": 1.2339641854206708e-07
       },
       {
         "n": 1601,
         "a": 1.0,
-        "relres": 0.0035453339098472513,
-        "residual_rms": 0.0004919175239428393,
-        "c": 0.806361063558342,
-        "Omega_at_X4": 0.027206104773829166,
-        "weighted_defect": 22475.06435583111
+        "relres": 0.008289627037491445,
+        "residual_rms": 0.0011573051952668953,
+        "c": 0.8103949243830778,
+        "Omega_at_X4": 0.035969184257422286,
+        "weighted_defect": 41982.05807667537
       }
     ],
     "verdict": [
       {
         "a": 0.0,
-        "c_spread": 0.0007975803154907646,
-        "Omega_at_X4_spread": 0.0022419040257296158,
+        "c_spread": 0.0007976060443316557,
+        "Omega_at_X4_spread": 0.002241908662966481,
         "grids_reaching_machine_precision": 3,
         "grid_converged": true
       },
       {
         "a": 0.2,
-        "c_spread": 0.0003059646510406022,
-        "Omega_at_X4_spread": 0.0016145478239501174,
+        "c_spread": 0.00030596464987886485,
+        "Omega_at_X4_spread": 0.0016145478239860782,
         "grids_reaching_machine_precision": 3,
         "grid_converged": true
       },
       {
         "a": 0.5,
-        "c_spread": 2.6151103314719926e-05,
-        "Omega_at_X4_spread": 3.284308609009431e-06,
+        "c_spread": 2.6152171969440197e-05,
+        "Omega_at_X4_spread": 3.284170633109339e-06,
         "grids_reaching_machine_precision": 2,
         "grid_converged": true
       },
       {
         "a": 0.8,
-        "c_spread": 0.0037493531507271083,
-        "Omega_at_X4_spread": 0.008280128534267886,
-        "grids_reaching_machine_precision": 1,
+        "c_spread": 0.004057580573395003,
+        "Omega_at_X4_spread": 0.00888473844399536,
+        "grids_reaching_machine_precision": 2,
         "grid_converged": false
       },
       {
         "a": 1.0,
-        "c_spread": 0.013173348279810426,
-        "Omega_at_X4_spread": 0.029358429093007846,
-        "grids_reaching_machine_precision": 1,
+        "c_spread": 0.01720720910455098,
+        "Omega_at_X4_spread": 0.03812150857660119,
+        "grids_reaching_machine_precision": 2,
         "grid_converged": false
       }
     ],
@@ -476,10 +500,23 @@
     "Y0_max_from_v10": 0.000245,
     "GA_floor_rms": 0.01,
     "a_range_used": 0.5,
-    "newton_weighted_defect_min": 2.340496906495767e-14,
-    "newton_weighted_defect_max": 0.015195816195658364,
-    "margin": 10467862585.933441,
-    "reading": "the budget condition is Y0 <= Y0_max.  Every earlier leg compared 1e-2 against 2.45e-4 and concluded the profile was ~40x too poor.  With Newton the weighted defect of the discrete profile is many orders BELOW the budget, so the profile's defect is no longer the binding constraint -- for a < a*.  What binds instead is the three unpriced Z1 items, which is a different and more tractable problem than 'find a better profile'.  CAREFUL: this is the defect of the DISCRETE profile in the ROUTE-A discretization; carrying it into the certificate needs the same object in the theta-collocation basis plus the discretization error, which is exactly the open ledger item 'Z1 core discretization'."
+    "n_good_rows": 11,
+    "newton_weighted_defect_min": 4.749013353083527e-14,
+    "newton_weighted_defect_max": 0.015320233103213909,
+    "margin": 0.015991923774880644,
+    "margin_selection": "worst-case: Y0_max / newton_weighted_defect_max",
+    "margin_at_best_row": 5158966332.257665,
+    "budget_holds_uniformly": false,
+    "rows_over_budget": [
+      {
+        "a": 0.45,
+        "weighted_defect": 0.015320233103213909,
+        "violation_x": 62.53156368658738
+      }
+    ],
+    "worst_violation_x": 62.53156368658738,
+    "margin_over_rows_within_budget": 12.18518147095009,
+    "reading": "the budget condition is Y0 <= Y0_max.  Every earlier leg compared 1e-2 against 2.45e-4 and concluded the profile was ~40x too poor.  With Newton the weighted defect of the discrete profile is many orders BELOW the budget on most of the range but NOT uniformly (see rows_over_budget -- the margin above is worst-case, per leg 247), so the profile's defect stops being the binding constraint only where the budget actually holds.  What binds instead is the three unpriced Z1 items, which is a different and more tractable problem than 'find a better profile'.  CAREFUL: this is the defect of the DISCRETE profile in the ROUTE-A discretization; carrying it into the certificate needs the same object in the theta-collocation basis plus the discretization error, which is exactly the open ledger item 'Z1 core discretization'."
   },
   "v6_ledger": {
     "changed": "Y0 (the profile defect) moves from ~1e-2 (GA / relaxation) to machine precision on the discrete system for a < a*",
