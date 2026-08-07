@@ -28,7 +28,7 @@ prose as before.
 |---|---|---|---|
 | A | 266 | P0TC | no |
 | B | 268 | PUB2R | no |
-| C | 260 | DSSB | no |
+| C | 263 | WESC | no |
 | D | 221 | BVRR | no |
 | E | 248 | CNR2 | no |
 | F | 236 | RDDEP | yes |
@@ -38,12 +38,10 @@ prose as before.
 | J | 226 | PNR | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (post-usage-limit reconciliation + slots B/H
-refill): 3/10 floor-eligible -- F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the
-"post-usage-limit" DM update at the tail of this file. B/268/PUB2R is the
-submission-blocking rework of PUB2's 4.026 figure (leg 249's finding; absorbs 259's
-nits); H/264/WETP is the one licensed weighted-energy transfer probe, its sequencing
-amended now that 178 has landed.)
+(Current snapshot, DM update of 2026-08-07 (slot-C refill after 260's gate NO): 3/10
+floor-eligible -- F/236/RDDEP, G/267/FDL, H/264/WETP -- matching the "260 gate NO" DM
+update at the tail of this file. C/263/WESC is Ruling 2's correction leg (per-occurrence
+triple pinning), promoted per reserve order once 178's landing cleared its sequencing.)
 
 ---
 
@@ -11087,3 +11085,49 @@ corrections to precision/convergence claims, leg 176's gate answer standing — 
 movement of any link. Clay stays ~0.05%. The one ripened direction question (re-posing
 Phase 1's incompressible-fluid framing, three independent closures now on record) is
 explicitly PARKED INTO THE PACKET behind 266 — not raised piecemeal.
+
+---
+
+## DM update, 2026-08-07 — slot-C refill: 260 (DSSB) gate NO recorded (DSS ban basis
+upgraded to SUBSTANTIVE), which resolves 251's conditional tier the hard way; 263 (WESC)
+promoted per reserve order; recovery from the outage confirmed complete
+
+**260 (DSSB): gate NO, recorded at full strength** (journaled, on `main`): Entry B's
+three lift questions (function space, object, price) could not be answered concretely —
+which, per 260's own pre-committed no-branch, is itself the measured reason the expensive
+entrance stays shut, and **upgrades the DSS ban's basis from cost-shaped to
+SUBSTANTIVE.** Consequences, recorded so the packet carries them: (1) **251's two
+DSS-conditional candidates are now EXCLUDED** — their tier was blocked on Entry B's
+scoping, which has answered; no user ruling is needed to keep Entry B shut, since its own
+lift condition failed on the merits. (2) **Phase 0's answer space is now exactly one
+unconditional candidate** — BCG's compressible imploding profile, pending 266's
+obligation-#1 correction — plus PV reported-not-named (Perelman-not-Clay, leg 262). The
+user packet (behind 266) states this narrowing explicitly.
+
+**Recovery confirmed complete** per the orchestrator: 221/236/248/252/226 redispatched
+from salvage, 266 (P0TC) and 268 (PUB2R) running, verify-256 re-dispatched. All three
+missing-outcome flags this session (256, 260, and the earlier 178) are now resolved.
+
+**Slot C: leg 263 (Route-WESC) promoted per reserve order** — Ruling 2's correction leg
+(per-occurrence two-triples pinning, plan_of_record.py byte-identical, visible correction
+note), sequencing long cleared by 178's landing. Spec above stands verbatim; brief
+carries the anti-pausing clause. Note for its brief: 264 (WETP, slot H) is running in
+parallel with Ruling 2's distinction cited directly in its own brief, so 263 and 264 do
+not conflict — 263 edits journal prose 264 only reads rulings about.
+
+**FLOOR-TABLE block updated in this same edit** (C: 260 → 263). **Floor status: 3/10
+strictly (236, 267, 264) — unchanged, met exactly.**
+
+**Canonical reserve line: reserve count 8 — legs 265, 228, 210, 229, 231, 232, 233,
+234.** Effective immediately-dispatchable: 2 (228, 210) — **below this DM's comfort
+line though above the §3a count watermark; per the standing commitment, fresh unblocked
+candidates will be drafted in the same update that next promotes either of 228/210, and
+the packet's aftermath (user decisions on 266/268/stage-V) is expected to generate the
+next natural batch.** 265 blocked on 266's landing (TOP priority once clear); 229
+blocked on 226; 231-234 blocked on repairs 217/219/221/225. Next fresh leg number:
+**269.**
+
+Nothing in this update lifts a ban — 260's NO tightens one (basis upgraded, recorded, no
+wording change needed since "never" already stood). No committed gate changes; Clay
+stays ~0.05%. No direction question raised: the packet behind 266 now carries the
+DSS-exclusion narrowing alongside everything else.
