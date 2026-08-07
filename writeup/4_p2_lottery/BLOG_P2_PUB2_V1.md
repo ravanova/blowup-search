@@ -95,6 +95,18 @@ controls: drop the bordering and it falls to the arithmetic floor; drop the orig
 it decays like `N^{−1.49}` — **no gap at all**. The origin condition is now a measured number
 rather than a citation.
 
+**One thing about that `0.0908` that has to be said before it is quoted anywhere: the digits are
+not absolute.** They depend on a normalization choice — how much weight the measurement puts on
+the extra unknown we bordered the system with, relative to the rest. Sweeping that choice over
+four orders of magnitude moves the number across `0.01086 … 0.13580`, **a factor of 12.5**, and
+if you adopt Xu's own normalization instead of ours it comes out at **`0.0420`** rather than
+`0.0908`. The exact-rational re-derivation below is what measured that, and it says in the same
+breath why it does not cost us anything here: **the thing we actually claim — that the quantity
+stays away from zero as you refine, instead of drifting to zero the way it does in the old
+room — is unaffected by the choice**, because scaling by a positive weight cannot turn a
+positive limit into zero. The behaviour is what carries the argument; the digits are a
+convention, and we now say which one. (The same goes for the `0.71465` further down.)
+
 The **no**: the actual proof constant, computed the same way we computed it in the old room, comes
 out at best **140.72** where it has to be below **1**, and it grows like the square of the split
 parameter. So the proof does not close there either. But — and this is the part worth carrying —
@@ -106,8 +118,11 @@ failed is the **shape** we chose for the approximate inverse. That is a narrower
 are careful not to convert it into a promise: nobody has tested whether a different shape closes it.
 
 Two honesties about that number. It is ordinary floating point, one leg's own measurement — and
-the independent re-derivation we commissioned has since reported, in exact rational arithmetic
-rather than a second floating-point run. It confirms the construction and the verdict, and it
+an independent re-derivation has since reported, in exact rational arithmetic
+rather than a second floating-point run. (It was not the verification leg we originally
+commissioned: that one committed only its own prior-art pass and no verdict. The re-derivation
+is a different, later leg's work — the technical companion keeps the two apart and so does this
+sentence.) It confirms the construction and the verdict, and it
 corrects digits below the ones we quote: two banked values are wrong in their fifth and seventh
 significant figures, and one descriptor we had attached to the tail piece — that its value is
 *independent* of the truncation — is simply false. That piece rises steadily and converges to
@@ -198,7 +213,7 @@ actionable whether or not a certificate is ever built.
 
 Our object is a well-studied one-dimensional model at a special parameter — already solved,
 already published. Nothing here is a statement about the Navier–Stokes equations, and no link
-of our chain to that problem has moved; none has moved in 185 legs. Every number above is
+of our chain to that problem has moved; none has moved in 275 legs (count current as of leg 276). Every number above is
 ordinary floating point at a stated truncation — **none of this is interval-enclosed or
 rigorous** in the computer-assisted-proof sense, including the part we call a theorem, whose
 proof is exact but whose confirming measurements are not. We had not built a certificate in the

@@ -34,6 +34,7 @@ lesson 35). This file is the index, not the substitute.
 | 3 | leg 125: Object-B's Newton continuation stalls ⇒ the profile does not exist | **leg 185** (2026-08-06) | a **solver artifact**, named precisely enough to repair; reachability returns `a`-dependently |
 | 4 | *(this file's occasion — the same closure as #1, closed by measurement rather than by literature)* | **leg 178**, landed by the user's Ruling 1 of 2026-08-07 | §4 below |
 | 5 | leg 176's banked `C1_bordered_sigma_min_X.reading`, which **opens** "BOUNDED AWAY FROM ZERO and truncation-independent" before hedging in its own last sentence | **leg 249** (numerics) → **leg 268** (the tail-block twin, K3) → **verify_271** §6b (named the C1 field as the *upstream* regeneration source) | `σ_min` is **flat, not independent** — `0.139 %` over a 16-fold range — and the positive limit is float64 **evidence**, not a proof. §5 below |
+| 6 | `σ_min = 0.0908` printed at **15 sites** of PUB2 as if it were an absolute magnitude of the operator | **leg 249** §10 (`W5`, measured the sweep) → **leg 270** (`E1`, found PUB2 discloses it nowhere: 0 hits for `convention`/`normaliz`/`0.0420`/`2π`) → **leg 276** (disclosed) | the **digits** are convention-relative by a factor of **12.5** (`0.01086 … 0.13580`, and `0.0420` in Xu's own `y`-space normalization); the **gate property** — bounded away from zero uniformly in the truncation — **is invariant**. §6 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -222,3 +223,69 @@ Leg 176's **gate answer is unchanged**, and leg 249 re-derived every matrix, ide
 convergence claim from the definitions — all survived. The `ℓ¹_w` **converges-vs-diverges
 contrast is unaffected**; `Z₁` still fails at `140.72`. The object is the `a = 0` case only.
 **No ban lifts. No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**
+
+---
+
+## 6. `σ_min = 0.0908` is convention-relative, and PUB2 printed it 15 times without saying so
+
+**Found by leg 249 (`W5`), located as a disclosure gap by leg 270 (`E1`), disclosed by leg 276.**
+
+### What a reader would have believed
+
+That `0.0908` is a magnitude of the operator, comparable across papers the way a residual or a
+decay exponent is. It is not. Leg 249 §10 measured the freedom directly: the `X ⊕ ℂ` Gram puts
+weight `1` on the border amplitude while the `X` block carries the **bare Laguerre
+normalization** — no `2π`, no half-line `½`. That is a **choice**, and it is not a small one:
+
+| what is swept | over | `σ_min` moves across | factor |
+|---|---|---|---|
+| the border-amplitude weight | `10⁻² … 10²` | `0.01086 … 0.13580` | **12.5×** |
+| the `X`-block normalization | bare Laguerre → Xu's own `y`-space (carrying the `2π`) | `0.0908` → **`0.0420`** | **2.2×** |
+
+Leg 270 grepped both PUB2 files for `convention`, `normaliz`, `0.0420` and `2π`: **0 hits**, at
+**15 sites** printing the digit. Leg 249's own sentence: *"the digits are not invariant, and PUB2
+quotes the digits without the convention."*
+
+### What is actually true, and why this is a disclosure and not a retraction
+
+**The gate property is invariant.** The thing leg 176's gate turns on — `σ_min` bounded away
+from zero uniformly in the truncation — cannot be moved by a positive weight, because a positive
+weight cannot send a positive limit to zero. And the only thing PUB2 ever argues *from* is the
+**contrast in ladder behaviour**: flat here (`0.139 %` over a 16-fold truncation range), decaying
+like `M^{−(1−s)}` in `ℓ¹_w`. Both halves of that contrast survive any positive reweighting. Leg
+249 certified this in the same paragraph in which it measured the sweep, and leg 270 named it as
+the reason `E1` sat below the escalation line.
+
+**So: 0 arguments move, 0 gate answers move, and one class of sentence had to be added.**
+
+### The repair, as applied
+
+A single **convention note** at §0 of `TECHNICAL_P2_PUB2_V1.md`, carrying the sweep, Xu's
+`0.0420`, and the invariance of the gate property *in the same breath* — plus a pointer back to
+it at each of the six clusters where the digit is printed (§3.2, §3.5 ladder, §3.5 correction,
+§4.5, §5(3), §7) and a plain-language paragraph at the blog's first use. The mechanism was chosen
+from leg 270's own trace, whose `E1` entry reads *"what is missing is one disclosing sentence at
+first use"*: 15 per-site caveats would have been six times the prose for the same content, and
+would have required editing lines that carry byte-exact banked figures.
+
+### The rest of the same pass (leg 276), recorded here for findability but **not** register-grade
+
+Four bounds printed tighter than the data allow, now loosened to what the source supports:
+`≤ 2.62e−03 → ≤ 2.63e−03` (banked `2.6248e−03`), *"at most 0.0090" → 0.00905* (banked
+`0.00904587`), *"`p`-blind to 0.009" → 0.00904* (banked `0.00903658`), `≤ 2.22e−14 → ≤ 2.221e−14`
+(banked `2.22012e−14`). One provenance chain corrected: `0.71465` is the five-decimal rounding of
+leg 163's banked `implied_sigma_min_lower_witness = 0.7146549471256172`, itself
+`1/1.39927667753796` in full precision — **one step**, not the two-step "round the ratio to
+`1.3993`, invert, then round up by `7.0e−06`" that PUB2 printed twice and that does not reproduce
+(`1/1.3993 = 0.7146430`, which rounds to `0.71464`). One subject slip: `0.868155` was seed 0's
+`M = 8192` value, not a figure "over four data"; the four-data max is `0.8681539`.
+
+**None of these is an over-read in this register's sense** — no reader would have come away
+believing a closure that was not there. They are precision and provenance, listed so a future
+pass finds them in one place.
+
+### The ceiling
+
+Nothing here measures anything. Leg 176's gate answer, leg 127's theorem, leg 163's census and
+leg 182's `NO` are all exactly as they were. The object is the `a = 0` case only. **No ban lifts.
+No route is promoted. No link of the `L1 → L4` chain moves. Clay `~0.05%`.**

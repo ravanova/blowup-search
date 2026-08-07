@@ -19,7 +19,7 @@ which lists each number against the file and key it was read from.
 
 **What this note is not.** It is not a certificate, not a theorem about the Navier–Stokes
 equations, and not a claim that any link of this project's `L1 → L4` chain has moved. None has,
-in 185 legs. The object throughout is the `a = 0` Constantin–Lax–Majda (CLM) steady
+in 275 legs (count current as of leg 276). The object throughout is the `a = 0` Constantin–Lax–Majda (CLM) steady
 linearisation — an already-solved, already-published model — and every magnitude below bounds
 the difficulty of the real target **from below, not above**.
 
@@ -46,6 +46,24 @@ That question has an axis, and the axis now has four points on it, all measured,
 | 3.5 | origin-`H²`, **built** rather than scoped | the formulation closes as a formulation (`σ_min = 0.0908`, a monotone-decreasing ladder flat to **0.139 %** over a 16-fold truncation range — evidence of a positive limit, not a proved floor) **and** the block-diagonal `A` still fails leg 54's `Z₁` battery at best **140.72** where `< 1` is needed | construction gate **YES on both conjuncts, with one magnitude that says NO** (leg 176) |
 | 4 | anything between them | no scale avoids both obstructions; the window has width **exactly zero** | scoping **NO** (leg 182) |
 
+> **The convention note. The `σ_min` digits printed in this note are convention-relative; the
+> property they are used for is not.** Recorded by leg 249 §10 (W5) and carried into
+> [`p2_route_h2c_v1_construction_correction_leg268.json`](../data/p2_route_h2c_v1_construction_correction_leg268.json)
+> as `convention_caveat_recorded_by_249`: the `X ⊕ ℂ` Gram puts unit weight on the border
+> amplitude while the `X` block carries the bare Laguerre normalization (no `2π`, no half-line
+> `½`). That is a **choice**. Sweeping that weight over `10⁻² … 10²` moves `σ_min` across
+> **0.01086 … 0.13580 — a factor of 12.5** — and adopting Xu's own `y`-space normalization for
+> the `X` block (i.e. carrying the `2π`) gives **0.0420** instead of **0.0908**. **In the same
+> breath, because it is what keeps this from touching any conclusion below:** the property leg
+> 176's gate turns on — `σ_min` **bounded away from zero uniformly in the truncation** — **is
+> invariant** under that weight, since a positive weight cannot send a positive limit to zero;
+> and the only thing §§3–5 ever argue from is the *contrast in ladder behaviour* (flattens
+> here, decays like `M^{−(1−s)}` there), which is likewise convention-invariant. Leg 249's own
+> sentence was *"the digits are not invariant, and PUB2 quotes the digits without the
+> convention."* **This note now quotes the convention**, and every later printing of `0.0908` /
+> `0.090804` — in §3.2, §3.5, §4.5, §5(3) and §7 — points back to this paragraph rather than
+> repeating it.
+
 Read separately these are three leg reports. Read together they are one statement, and §5 is
 that statement. The order below is the order a practitioner meets the decisions in: pick the
 space, discover it is dead, look for a better one, ask whether anything in between helps.
@@ -65,7 +83,9 @@ which it leaves standing. (2) The verification leg originally commissioned again
 (leg 192) committed **only its own pre-registered novelty / prior-art pass** — no verification
 runner, no re-derivation, no verdict — but **the independent re-derivation has since been done
 and has reported**: leg 249 re-derived leg 176's construction in **exact rational arithmetic**
-(branch `leg/249-h2cv2-v2` at `e9db984`), confirming both conjuncts and correcting two banked
+(its journal, novelty log and `p2_route_h2cv_v1_postconstruction.json` are **on `main`**, and
+byte-identical to the originating branch `leg/249-h2cv2-v2` at `e9db984`, which is not itself an
+ancestor of `main`), confirming both conjuncts and correcting two banked
 values below the digits quoted here; a subsequent review pass re-pulled leg 249's figures from
 that branch and matched them character for character. **Leg 176's numbers are therefore carried
 here as leg 176's float64 measurements, with leg 249's exact tier as the independent check on
@@ -136,7 +156,7 @@ slack **1.2366e−08**. Across the previously banked shape battery it holds **19
 minimum slack **7.7343e−10**.
 
 **Two controls that can report the other answer.** (i) Switch on dissipation: `σ_min`
-*saturates*, fitted exponent `≤ 2.62e−03` in absolute value at every `μ > 0`, against
+*saturates*, fitted exponent `≤ 2.63e−03` in absolute value at every `μ > 0`, against
 **0.6985** at `μ = 0` in the same code path. (ii) A truncation-artifact audit — zero-pad the
 `M`-optimal direction into `2M` and `4M` — degrades by at most **1.3543×**, bounded, not a
 return to `O(1)`.
@@ -196,7 +216,7 @@ in the kernel is a **rank-one functional** of the data, so
 
 — one border column and one matching row per Hardy block, rank two on the real odd space. That
 is the **same shape** the `ℓ¹_w` assembly already used. Bordered-solve residuals are
-`≤ 2.22e−14`; `ℓ(f)` after projection onto the solvability subspace is **exactly 0.0** in all
+`≤ 2.221e−14`; `ℓ(f)` after projection onto the solvability subspace is **exactly 0.0** in all
 three test data.
 
 ### 3.2 The contrast with §2, as magnitudes
@@ -209,9 +229,19 @@ three test data.
 | what bordering does | **nothing** — bordered and unbordered `σ_min` agree to **5.7e−15** | **everything** — the residue at `z = 0` *is* the border column |
 | block coupling of the split | `K/2` for every choice | **exactly zero** by construction |
 
-*(**Provenance of the two numbers, and why they were never in conflict.** `0.71465` is exactly
-`1/1.3993`, the reciprocal of leg 163's own largest sampled ratio, rounded up in the fifth decimal
-(`1/1.3993 = 0.7146430`). Its producing leg wrote it as a **lower** witness `σ_min ≥ 0.7147`; that
+*(**Convention.** The `0.0908` in this table, and every `σ_min` digit below it in this note, is
+convention-relative by a factor of **12.5** — §0's convention note states the sweep and Xu's own
+`0.0420`. What this table is here for is its *truncation-dependence* row — decays there, flattens
+here — and that contrast is convention-invariant.)*
+
+*(**Provenance of the two numbers, and why they were never in conflict.** `0.71465` is the
+five-decimal rounding of leg 163's own banked `implied_sigma_min_lower_witness =
+0.7146549471256172`, which is the reciprocal of its largest sampled ratio in full precision
+(`1/1.39927667753796`). No intermediate rounding of the ratio enters: the chain is one step, not
+two. `0.71465` is the display form; the witness bound itself is `σ_min ≤ 0.71465495`, from which
+the five-decimal figure differs by `4.9e−06` — far below any digit this note uses it at, but
+recorded here so the printed form is not mistaken for the bound itself. Its producing leg wrote it as a
+**lower** witness `σ_min ≥ 0.7147`; that
 inequality is **inverted**. With `f = L u`, each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, so a
 finite family of sampled ratios bounds the infimum **only from above** — a sample can miss the
 worst direction and here it did, by a lot: leg 163's best ratio reached **12.71 %** of the true
@@ -312,8 +342,8 @@ bound closing down onto `σ_min` rather than a Galerkin section:
 | `σ_min` | 0.0927566 | 0.0911590 | 0.0909310 | 0.0908878 | 0.0908506 | 0.0908234 | **0.090804** | *0.0909363* |
 
 *(The `N = 512` cell is quoted to the six figures the computation supports. Leg 176 banked
-`0.09080465147034879` there; an independent exact-rational re-derivation (leg 249, branch
-`leg/249-h2cv2-v2` at `e9db984`) **proves** that value wrong from the 7th significant figure —
+`0.09080465147034879` there; an independent exact-rational re-derivation (leg 249, whose
+artifacts are on `main`; originating branch `leg/249-h2cv2-v2` at `e9db984`) **proves** that value wrong from the 7th significant figure —
 the pencil `AᵀG_cA − λG_d` is not positive definite at that `λ`, so `σ_min` is strictly below it
 — and certifies `σ_min ∈ (0.090804094, 0.090804194)`. The cause is the whitening leg 176 uses,
 whose error grows with the Gram's condition number; a Cholesky whitening of the same matrices
@@ -322,11 +352,26 @@ agrees with the exact tier at every rung, and under it the ladder is monotone de
 Gram — the reliable window is **wider** than leg 176 claimed, not narrower. Full record:
 [`writeup/data/p2_route_h2c_v1_construction_correction_leg268.json`](../data/p2_route_h2c_v1_construction_correction_leg268.json).)*
 
+*(Every digit in that ladder, and the headline below it, is stated in the `X ⊕ ℂ` weight
+convention of §0's convention note — a factor of **12.5** of freedom in the digits, none in the
+flatten-versus-decay behaviour they are read for.)*
+
 **`σ_min = 0.0908`, `‖R‖_X = 11.0127`**, monotone decreasing through `N = 512`, varying by
 **0.139 % over a 16-fold truncation range**. The `N = 1024` row rises instead of falling; leg 176
 attributes that to the float floor of an `X` Gram whose entries reach ~1e12 and reports it as the
-reason the reliable window stops at 512. In its own words this is **"float64 evidence of a
-positive limit, not a proof of one."** The tail block closes too, and it earns exactly that same
+reason the reliable window stops at 512 — **that attributed cause is superseded by the footnote
+above**, which carries leg 249's finding that the rise is a property of leg 176's `eigh`
+whitening rather than of the Gram, and that under Cholesky whitening the ladder is monotone
+through `N = 2048`. Leg 176's sentence is quoted here as leg 176's; the operative explanation is
+leg 249's, and the reliable window is wider than leg 176 claimed rather than narrower. In leg
+176's own words the ladder is **"float64 evidence of a
+positive limit, not a proof of one."** *(That quoted sentence is the last sentence of leg 176's
+`C1_bordered_sigma_min_X.reading` field. Its opening clause — "bounded away from zero and
+truncation-independent" — is **superseded** and is deliberately not quoted here; the governing
+instruction is A1 of
+[`p2_route_h2c_v1_construction_annotation_leg274.json`](../data/p2_route_h2c_v1_construction_annotation_leg274.json),
+which requires any quotation of that field to carry the corrected framing or cite the annotation
+beside it. This is the citation.)* The tail block closes too, and it earns exactly that same
 reading and no stronger one: `‖T⁻¹‖_X` **rises monotonically** across the ladder
 (`3.994032 → 4.012071 → 4.021340 → 4.026241 → 4.028864` at `N = 64 … 1024`, **0.865 %** in
 relative terms) with its own **increments** shrinking geometrically (`1.804e−2 → 9.269e−3 →
@@ -373,11 +418,12 @@ useful output and the reason both numbers are reported with neither standing for
 all three sites, and it turns out to be a sign, not a magnitude.** Earlier drafts quoted
 `σ_min ≥ 0.71465` in §3.2, §4.5 and §5(3). That is **leg 163's three-datum witness**, and leg 176
 states plainly that it was **optimistic by 7.9×**: *"That is a witness, not a bound. The measured
-value is 0.0908."* Reproducing leg 163's own quantity from the closed form gives 0.868155 over four
+value is 0.0908."* Reproducing leg 163's own quantity from the closed form gives 0.8681539 over four
 data while the operator norm is 11.0 — i.e. **random low-mode data does not find the worst
-direction.** Tracing it further: `0.71465` is `1/1.3993` rounded up in the fifth decimal
-(`1/1.3993 = 0.7146430`, a round-up of `7.0e−06`; §3.2 records the same provenance), the reciprocal of leg 163's own
-largest sampled ratio, and since each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, a finite family of
+direction.** Tracing it further: `0.71465` is the five-decimal rounding of leg 163's banked
+`implied_sigma_min_lower_witness = 0.7146549471256172` (§3.2 records the same provenance, in one
+step and with the `4.9e−06` display offset named), the reciprocal in full precision of leg 163's own
+largest sampled ratio `1.39927667753796`, and since each datum gives `‖f‖_X/‖u‖_X = 1/r ≥ σ_min`, a finite family of
 such ratios bounds `σ_min` **only from above**. So leg 163's data support `σ_min ≤ 0.71465`, the
 `≥` was inverted, and **the two legs never actually disagreed** — `0.0908 ≤ 0.71465`. All three
 call-sites now carry `0.0908` as the measured figure, with `0.71465` retained only in §3.2 with
@@ -393,6 +439,11 @@ full 16-fold range) together with two controls that report the other answer — 
 the analogous ladder **decays** like `M^{−(1−s)}`. That contrast is a contrast of ladder behaviour
 in both spaces, which is all §3–§5 ever use it for, and it survives the correction intact. What
 does not survive, and is not written anywhere in this note, is any claim to a *proved* floor.
+Nor — per §0's convention note — any claim that the digits `0.0908` and `0.71465` are
+convention-independent: the first moves by a factor of **12.5** under the border weight and
+becomes `0.0420` in Xu's own `y`-space normalization, and both are quoted here in one fixed
+convention. The flatten-versus-decay contrast just described is what survives that freedom, and
+it is the only thing §3–§5 use.
 
 **What this does and does not change in §3.3's ceiling — nothing is lifted.** Leg 176 restates
 O3 itself: `a = 0` only, and what is certified is **"an object Xu already inverts in closed
@@ -405,6 +456,16 @@ discrete realization of Xu's operator. Infrastructure, not a theorem."** The cla
 fourth point is therefore **construction, gate YES with a reported NO magnitude** — strictly
 weaker than §2's theorem and not to be levelled with it; and §3.3's *"escalated rather than
 built"* now describes leg 163 specifically, not the state of the axis.
+
+**Completing §0's promise: the two sentences in §§5–6 leg 176 bears on, named rather than left
+to inference.** (i) §5's opening *"Separately they are: a theorem, an escalated scoping YES, and
+a scoping NO"* counts the three points the synthesis was written from; with leg 176 the axis has
+**four**, as §0's own table already shows, and the fourth is the construction grade just stated.
+That sentence is **left standing as the three-result synthesis it is**, not silently upgraded.
+(ii) §6's claim table likewise has three rows and no leg-176 row; the grade that row would carry
+is the one in the preceding paragraph — **construction, gate YES with a reported NO magnitude**,
+strictly below §2's theorem grade and strictly below nothing else. Both are drafting-time scope,
+now disclosed here rather than discovered by a reader.
 
 ---
 
@@ -422,7 +483,7 @@ Fourier–Lebesgue / Besov-coefficient scale, which contains `ℓ¹_w` at `p = 1
 **First, the instrument was calibrated against the banked endpoint.** Local slopes of §2's
 exponent converge monotonically *from above*, so the endpoint of a ladder is not the answer;
 the Aitken limits are **1.0000 / 0.7002 / 0.3090** at `s = 0 / 0.3 / 0.7`, deviating from
-`1 − s` by at most **0.0090**. A negative control on the same code path — the `μ = 0` kernel
+`1 − s` by at most **0.00905**. A negative control on the same code path — the `μ = 0` kernel
 fed to the dissipative operator at `μ = 1` — returns **−0.2904**, i.e. the ratio *grows*, so
 the `μ = 0` decay is a property of the operator and not of the arithmetic. (This is explicitly
 *not* the same control as §2's own `μ > 0` saturation check, and is not conflated with it.)
@@ -536,13 +597,15 @@ was run, so the NO is not a discovery its own construction conveniently arrived 
 
 | candidate scale | (a) no `ℓ¹_w`-class floor | (b) no `a=0` requirement |
 |---|---|---|
-| `ℓ^p_w` / Fourier–Lebesgue, `1 < p < 2` | **FAILS** — exponent tracks `1−s`, `p`-blind to 0.009; numerator spread 5.7e−14 | not reached — O3 applies unchanged |
+| `ℓ^p_w` / Fourier–Lebesgue, `1 < p < 2` | **FAILS** — exponent tracks `1−s`, `p`-blind to 0.00904; numerator spread 5.7e−14 | not reached — O3 applies unchanged |
 | Besov `B^s_{p,q}` coefficient realization | **FAILS** — same `σ = s + 1/p` invariant; `q` refines only the `σ = 2` line, measure zero, where the target's margin is −0.6026 | not reached — O3 applies |
 | weighted Sobolev `H^s_w` on the circle (`p = 2`) | **FAILS** — it is the `p = 2` row above: exponent `1−s` exactly | not reached — O3 applies |
 | origin-regularity index between `L²` and `H²` on the line | not reached | **FAILS** — O4, in Xu's own text |
 | origin-`H²` itself (the endpoint) | passes — `σ_min` measured at **0.0908** (§3.5), not the `0.71465` of earlier drafts, which was only an upper bound | **FAILS** — O3, fatally |
 
-**Every scale fails at least one check, and no scale passes both.**
+**Every scale fails at least one check, and no scale passes both.** (The `0.0908` and `0.71465`
+in the last row are convention-relative digits — §0's convention note; the FAILS/passes verdicts
+in the table are not, since each rests on a decay exponent or on O3/O4.)
 
 **One constraint that is emphatically not the reason, recorded so it cannot later be mistaken
 for it.** The CAP literature is bimodal — weighted `ℓ¹` **or** Hilbert `H^l`, nothing between —
@@ -586,7 +649,9 @@ has four parts:
    not recur. And every one of those objects is a consequence of `a = 0` exactness (O3, FATAL
    for transfer), the operator is non-normal so invertibility is not stability (O2, HIGH
    downstream), and what a certificate there would certify is a closed form its author already
-   wrote down. **The right-sized claim is: the space axis has a live point, and the live point
+   wrote down. (The `0.0908` in this paragraph is a convention-relative digit — §0's convention
+   note, a factor of 12.5 — while the flattens-rather-than-decays statement it appears in is
+   not.) **The right-sized claim is: the space axis has a live point, and the live point
    is at the wrong object.**
 
 4. **And there is nothing between the two endpoints.** Not because the candidates were tried
@@ -629,7 +694,11 @@ basis mode), so every magnitude here bounds the real target's difficulty **from 
 
 The object throughout is the `a = 0` CLM steady linearisation. **No dynamics were run.**
 Nothing is claimed about this project's nominal target profile beyond its banked coefficient
-exponent `α = 0.39735311167782`. Every number is float64 at a stated truncation; **nothing here
+exponent `α = 0.39735311167782`. **Every `σ_min` digit in this note is stated in one fixed
+weight convention and is relative to it by a factor of 12.5** — §0's convention note gives the
+sweep (`0.01086 … 0.13580`) and Xu's own `y`-space figure (`0.0420` rather than `0.0908`); what
+is invariant under that freedom, and what §§3–5 argue from, is the ladder's *behaviour*, not its
+digits. Every number is float64 at a stated truncation; **nothing here
 is interval-enclosed or rigorous** in the computer-assisted-proof sense, including §2, whose
 *proof* is exact but whose *verifying measurements* are floating-point. §3 built no certificate
 and formed no certificate constant. §4's `σ`-threshold algebra is asymptotic at the exponent
@@ -643,8 +712,9 @@ measurements**. The independent check on them **has since reported**: the origin
 verification leg (leg 192) committed only a novelty pass, but leg 249 re-derived the construction
 in exact rational arithmetic, confirmed both conjuncts, and corrected two banked values below the
 digits quoted here (§0, §3.5); a later review pass re-pulled those figures from leg 249's own
-branch and matched them exactly. That check is exact where leg 176 is float64, and it does not
-convert any ladder here into a proved bound. **No link of the `L1 → L4` chain moved.** None has moved in 185 legs. Clay odds remain ~0.05 %.
+branch and matched them exactly, and those three artifacts are now **on `main`**, byte-identical
+to that branch. That check is exact where leg 176 is float64, and it does not
+convert any ladder here into a proved bound. **No link of the `L1 → L4` chain moved.** None has moved in 275 legs (count current as of leg 276). Clay odds remain ~0.05 %.
 
 **This draft is for the user's review. Its landing records that the bundle reproduces from its
 sources; it does not approve the bundle for publication. It is one of two such drafts — see
