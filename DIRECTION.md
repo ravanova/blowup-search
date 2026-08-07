@@ -35,7 +35,7 @@ prose as before.
 | G | 267 | FDL | yes |
 | H | 264 | WETP | yes |
 | I | 287 | EPA | no |
-| J | 226 | PNR | no |
+| J | 294 | V11X | no |
 <!-- FLOOR-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-07 (slot-F refill after 290/D1XN closed the D1
@@ -12821,3 +12821,90 @@ repairs. Next fresh leg number: **294** (unchanged — 292 was already numbered)
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
 raised.
+
+---
+
+## DM update, 2026-08-07 — 226 (PNR) REPORTED: INDEPENDENT CONFIRMATION OF 236's
+FINDING VIA A COMPLETELY DIFFERENT METHOD — ALL THREE CONSOLIDATION INPUTS NOW IN HAND.
+The pre-committed consolidation is TRIGGERED, drafted as leg 294 (slot J), with the
+re-basing/provenance-tier/D1-diagnostic requirements folded in as concrete gate clauses
+
+**226, recorded at full strength** (parked `leg/226-pnr-v1-resume`, main untouched, gate
+(a) YES / (b) honest disagreement then rejection / (c) CHANGED→ESCALATED):
+
+- **`a_max_machine` 1.0 → 0.55 CONFIRMED via a completely different method** —
+  adversarial repair battery (226) vs. dependency-trace exclusion (236). Two
+  independent methods, same number. This is the strong-confirmation branch of the
+  contingency pre-committed after 236 escalated.
+- **`last_machine_precision_a` 0.72 → 0.52**, with an honestly-reported marginal case
+  at a=0.64 (not smoothed over).
+- **`grid_converged_a_max` runs the OPPOSITE way**: v11's own unmodified test gives 1.0
+  IN THIS ENVIRONMENT, and the repair RESTORES the banked 0.5 — the repair corrects
+  toward the document's own prose, exactly the shape 236 found for `a_max_machine`, but
+  the raw/repaired relationship inverts between the two metrics. This must be stated
+  precisely in the consolidation, not flattened into "things moved."
+- **The dispatched D1 diagnostic is confirmed FALSE** (does not separate on/off-branch
+  at any threshold); **D3 (decay class) is the actual separating mechanism.**
+
+**All three consolidation inputs (236, 226, 252) are now in hand — the pre-commitment
+fires.** Drafted as a fully-specified leg, not left as a description, so it dispatches
+with a pre-committed gate like everything else in this file:
+
+```
+### 294 — ROUTE-V11X: THE CONSOLIDATED ROUTE-D v11 IMPACT-TRACE (236 + 226 + 252,
+re-based, provenance-tiered — the report that becomes final)
+**Thesis.** Three independent findings converge: 236 (dependency-trace exclusion) and
+226 (adversarial repair battery) both find `a_max_machine` 1.0->0.55 via different
+methods; 252 proves the banked v11 anchor artifact is not environment-portable (202/359
+leaves move on regeneration) and exonerates leg 247's repair logic (0.82% gap is
+banked-vs-fresh provenance, not a defect). 236's original report used the STALE anchor
+JSON and has never seen 252's corrected values. This leg produces the single final,
+internally-consistent report, per the mandatory amendments recorded when the
+consolidation was pre-committed.
+**Gate.** Does the consolidated report: (a) RE-BASE every 236 number against 252's
+regenerated anchor values, with the 6.55e+11x-scale stale-vs-regenerated gap on the
+corrected field stated explicitly; (b) carry an explicit PROVENANCE TIER
+(banked-stale / banked-regenerated / fresh-resolve) on every compared value, no
+exceptions; (c) state 226's independent confirmation of `a_max_machine` (two methods,
+one number) AND the OPPOSITE-direction behavior of `grid_converged_a_max` (raw=1.0 in
+this environment, repaired=0.5) as two separate, correctly-signed findings — not
+merged into one "moved" headline; (d) record that D1 is falsified and D3 is the real
+separator, correcting the record wherever D1 was cited as the mechanism; (e) treat any
+"moved" claim as requiring movement beyond 252's own measured environment-noise floor
+before being called real movement; (f) restate 247's exoneration in the same document,
+not as a separate claim elsewhere; (g) zero arguments changed beyond what these three
+already-landed findings themselves establish — this leg SYNTHESIZES, it does not
+re-measure?
+  yes -> Bank as the final Route-D v11 impact-trace. This is what reaches the user —
+         the orchestrator's long-pending top-priority report closes here. Flag any
+         downstream document (PUB2/PUB3/writeup citing the old numbers) for a light
+         pointer leg, drafted at that point, not guessed now.
+  no -> If synthesis reveals a genuine NEW disagreement among the three inputs
+        (not just stale-vs-fresh provenance, an actual unresolved conflict): STOP,
+        escalate with all three reports attached — do not adjudicate a real conflict
+        under this leg's own authority.
+**Territory.** a new consolidated report file (writeup/data/p2_route_v11x_v1_consolidated.json
+               or equivalent — the leg's own choice, stated in its report),
+               writeup/novelty/leg_294.md, experiments/journal/leg_294.md.
+               Reads (never edits) legs 236/226/247/252's parked branches and reports.
+**Difficulty.** standard
+**Independence.** Synthesis-only; reads three already-landed/escalated inputs, writes a
+new report. Slot J, TOP PRIORITY — this is the item the orchestrator has been waiting
+to report to the user all session. Anti-pausing clause verbatim.
+```
+
+**FLOOR-TABLE block updated in this same edit** (J: 226 → 294). **Floor status: 4/10
+strictly (285, 284, 267, 264) — unchanged (synthesis, not floor-eligible by
+convention).**
+
+**Canonical reserve line: reserve count 7 — legs 293, 280, 229, 231, 232, 233, 234.**
+229's blocking condition ("blocked on 226") is now MET — 226 has reported — so **229
+promotes to immediately-dispatchable** alongside 293. Effective
+immediately-dispatchable: 2 (293, 229); 280 user-gated; 231-234 on repairs
+217/219/221/225. Next fresh leg number: **295.**
+
+Nothing in this update lifts a ban. 226's findings are recorded exactly as measured —
+one confirmation, one inversion, one falsified diagnostic — with no flattening into a
+single "moved" narrative; 294's job is synthesis, not re-measurement. Clay stays
+~0.05%. No new direction question raised — this is the report the orchestrator has
+been awaiting all session; it reaches the user the moment 294 lands.
