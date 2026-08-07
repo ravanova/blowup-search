@@ -127,6 +127,19 @@ TEST_CALLERS = ["test_boussinesq_rescaled.py", "test_boussinesq_transport.py",
 TIMING_KEYS = {"seconds", "wall_seconds", "wall_s", "wall_clock_seconds", "elapsed",
                "elapsed_s", "runtime_s", "minutes", "wall_minutes"}
 
+# Keys that record WHEN a run happened, not WHAT it computed.  These are NOT dropped the way
+# TIMING_KEYS are -- they are compared, and any movement is reported in its own
+# `provenance_moved` channel with the before/after values printed, so nothing is hidden.  They
+# simply do not count toward `leaves_moved`, which is the contamination measure.
+#
+# Measured, not anticipated: `p2_route_brs_v1_status_audit.json` carries `"generated":
+# "2026-08-06"`, so re-running it on 2026-08-07 moves that leaf while all 62 of its
+# `odd_field_x_slope` calls stay bit-identical and all 450 real leaves stay identical.  The
+# prior partial session of this leg ran on 2026-08-06 and therefore never saw it; a
+# same-day-only differential is not a differential.
+PROVENANCE_KEYS = {"generated", "generated_at", "date", "run_date", "timestamp", "created",
+                   "created_at", "when", "today"}
+
 
 # ---------------------------------------------------------------------------
 # the pre-repair module, and leg 205's battery, loaded from git into this process
@@ -363,17 +376,18 @@ runpy.run_path(TARGET, run_name="__main__")
 '''
 
 
-def _numeric_leaves(obj, path=""):
+def _numeric_leaves(obj, path="", provenance=False):
     if isinstance(obj, dict):
         for k, v in obj.items():
             if k in TIMING_KEYS:
                 continue
-            yield from _numeric_leaves(v, "%s.%s" % (path, k))
+            yield from _numeric_leaves(v, "%s.%s" % (path, k),
+                                       provenance or k in PROVENANCE_KEYS)
     elif isinstance(obj, (list, tuple)):
         for i, v in enumerate(obj):
-            yield from _numeric_leaves(v, "%s[%d]" % (path, i))
+            yield from _numeric_leaves(v, "%s[%d]" % (path, i), provenance)
     else:
-        yield path, obj
+        yield path, (obj, provenance)
 
 
 def compare_artifacts(committed, regenerated):
@@ -382,9 +396,10 @@ def compare_artifacts(committed, regenerated):
     only_a = sorted(set(a) - set(b))
     only_b = sorted(set(b) - set(a))
     moved = []
+    prov_moved = []
     n_same = 0
     for k in sorted(set(a) & set(b)):
-        x, y = a[k], b[k]
+        (x, is_prov), (y, _) = a[k], b[k]
         same = (x == y)
         if not same and isinstance(x, float) and isinstance(y, float):
             same = (x != x and y != y)
@@ -392,15 +407,19 @@ def compare_artifacts(committed, regenerated):
             n_same += 1
         else:
             rec = {"leaf": k, "committed": x, "regenerated": y}
-            if isinstance(x, (int, float)) and isinstance(y, (int, float)) and x:
+            if isinstance(x, (int, float)) and not isinstance(x, bool) \
+                    and isinstance(y, (int, float)) and not isinstance(y, bool) and x:
                 rec["rel_diff"] = abs(y - x) / abs(x)
-            moved.append(rec)
+            (prov_moved if is_prov else moved).append(rec)
     return dict(leaves_compared=len(set(a) & set(b)), leaves_identical=n_same,
                 leaves_moved=len(moved), moved_detail=moved[:60],
+                provenance_leaves_moved=len(prov_moved),
+                provenance_moved_detail=prov_moved[:20],
                 keys_only_in_committed=only_a[:20], keys_only_in_regenerated=only_b[:20],
                 n_keys_only_in_committed=len(only_a),
                 n_keys_only_in_regenerated=len(only_b),
-                timing_keys_excluded=sorted(TIMING_KEYS))
+                timing_keys_excluded=sorted(TIMING_KEYS),
+                provenance_keys_not_counted=sorted(PROVENANCE_KEYS))
 
 
 def rerun_one(spec_, pre_path):
@@ -452,6 +471,7 @@ def rerun_one(spec_, pre_path):
     out["calls_moved"] = d.get("n_moved", len(d.get("moved", [])) if d else None)
     ac = out.get("artifact_comparison", {})
     out["artifact_leaves_moved"] = ac.get("leaves_moved")
+    out["artifact_provenance_leaves_moved"] = ac.get("provenance_leaves_moved")
     out["contamination"] = bool((out["calls_moved"] or 0) > 0
                                 or (ac.get("leaves_moved") or 0) > 0
                                 or proc.returncode != 0)
@@ -487,6 +507,110 @@ def run_tests(pre_path):
         os.remove(driver)
         os.remove(report)
     return rows
+
+
+def measured_rel_residual(post, g, grid, **kw):
+    """The relative least-squares residual the repaired guard computes, read out THROUGH THE
+    PUBLIC API rather than by re-implementing the fit: `max_rel_residual` is the threshold the
+    function raises above, so bisecting it locates the residual itself.  Monotone by
+    construction, so 40 halvings pin it to ~1e-12.  Returns None if the call refuses for a
+    reason other than the residual (empty window, rank deficiency), since then no residual
+    exists -- exactly the numpy condition R2 of the novelty pass names."""
+    def raises_at(thr):
+        try:
+            post.odd_field_x_slope(g, grid, max_rel_residual=thr, **kw)
+            return False
+        except ValueError as e:
+            if "max_rel_residual" not in str(e):
+                raise
+            return True
+    try:
+        if not raises_at(0.0):
+            return 0.0
+        if raises_at(float("inf")):
+            return float("inf")
+    except ValueError:
+        return None
+    lo, hi = 0.0, 1.0
+    while raises_at(hi):
+        hi *= 2.0
+        if hi > 1e12:
+            return float("inf")
+    for _ in range(40):
+        mid = 0.5 * (lo + hi)
+        if raises_at(mid):
+            lo = mid
+        else:
+            hi = mid
+    return 0.5 * (lo + hi)
+
+
+def residual_margin_probe(post):
+    """WHERE THE LANDED BACKSTOP ACTUALLY SITS, measured on named fields.
+
+    The repaired guard closes defect B by sizing the fit window from the field's own radial
+    scale, read off the radius at which the projected `d1` PEAKS.  That heuristic is exact for
+    the single-scale `a r exp(-lam r^2)` class the module is validated on and that leg 205's
+    battery is built from.  It is NOT exact for a field carrying TWO radial scales: the peak
+    resolves to the OUTER scale (deliberately -- resolving inward would shrink the window on
+    fields with no small scale, a fabrication of the opposite sign), so the cap goes
+    non-binding and the inner scale is never resolved.  The residual backstop is the only
+    thing left, and this probe measures whether it is tight enough to catch that.  Banked as a
+    magnitude, not a boolean, and NOT used to answer this leg's gate -- the gate is scoped to
+    leg 205's own battery, which contains no two-scale case.
+    """
+    from solver.boussinesq_velocity import PolarGrid
+    sys.path.insert(0, os.path.join(ROOT, "experiments"))
+    from spike1_stepC_gate import profile_ansatz
+
+    fine = PolarGrid(n_r=400, n_beta=16, r_min=1e-4, r_max=1e4)
+    r, B = fine.R, fine.B
+    rows = []
+
+    def add(name, g, truth, legitimate):
+        try:
+            val = float(post.odd_field_x_slope(g, fine))
+            exc = None
+        except ValueError as e:                                    # noqa: BLE001
+            val, exc = None, str(e)[:120]
+        rr = measured_rel_residual(post, g, fine)
+        rows.append(dict(field=name, returned=val, truth=truth, exception=exc,
+                         rel_err=(None if (val is None or truth in (None, 0))
+                                  else abs(val - truth) / abs(truth)),
+                         rel_residual=rr,
+                         is_legitimate_in_repository_field=legitimate))
+
+    add("module's own validated field: 2 r cos(b) exp(-r^2) (lam=1)",
+        2.0 * r * np.cos(B) * np.exp(-r ** 2), 2.0, True)
+    om, et, _ = profile_ansatz(fine)
+    add("Step-C profile_ansatz omega (every banked relaxation runs on this)", om, None, True)
+    add("Step-C profile_ansatz eta", et, None, True)
+    add("leg 205's headline defect-B field: lam=400, field scale 0.05",
+        2.0 * r * np.cos(B) * np.exp(-400.0 * r ** 2), 2.0, False)
+    add("TWO-SCALE, not in leg 205's battery: r cos(b) [exp(-r^2) + exp(-400 r^2)]",
+        (r * np.cos(B)) * (np.exp(-r ** 2) + np.exp(-400.0 * r ** 2)), 2.0, False)
+    add("TWO-SCALE, wider separation: r cos(b) [exp(-r^2) + exp(-1e4 r^2)]",
+        (r * np.cos(B)) * (np.exp(-r ** 2) + np.exp(-1e4 * r ** 2)), 2.0, False)
+
+    legit = [x["rel_residual"] for x in rows
+             if x["is_legitimate_in_repository_field"] and x["rel_residual"] is not None]
+    bad = [x for x in rows if not x["is_legitimate_in_repository_field"]
+           and x["rel_residual"] is not None and (x["rel_err"] or 0) > 5e-4]
+    worst_legit = max(legit) if legit else None
+    tightest_bad = min((x["rel_residual"] for x in bad), default=None)
+    return dict(
+        rows=rows,
+        landed_max_rel_residual=0.5,
+        worst_legitimate_rel_residual=worst_legit,
+        tightest_uncaught_bad_rel_residual=tightest_bad,
+        separation_ratio=(None if not (worst_legit and tightest_bad)
+                          else tightest_bad / worst_legit),
+        note=("The landed max_rel_residual=0.5 does NOT catch the two-scale field. A "
+              "threshold anywhere in the open interval (worst_legitimate, tightest_bad) "
+              "would, with the stated separation ratio of margin. Changing it is a "
+              "behaviour change this leg's gate did not scope -- clause (b)'s bit-identical "
+              "sweep was run at 0.5 -- so it is REPORTED with its magnitude and handed to "
+              "the postrepair-verification leg, not tuned in silently here."))
 
 
 def caller_census():
@@ -533,6 +657,22 @@ def main():
                    lesson_90_magnitudes=mags,
                    caller_census=caller_census())
 
+    probe = residual_margin_probe(POST)
+    payload["residual_margin_probe"] = probe
+    print("\nRESIDUAL-MARGIN PROBE (where the landed backstop actually sits):")
+    for row in probe["rows"]:
+        print("    %-64s ret %-14s rel_err %-10s rel_res %.4g"
+              % (row["field"][:64],
+                 ("RAISED" if row["returned"] is None else "%+.6f" % row["returned"]),
+                 ("--" if row["rel_err"] is None else "%.3e" % row["rel_err"]),
+                 (float("nan") if row["rel_residual"] is None else row["rel_residual"])))
+    print("    worst legitimate rel_residual %.4g;  tightest UNCAUGHT bad %.4g;  "
+          "separation %.4gx;  landed threshold %.2f"
+          % (probe["worst_legitimate_rel_residual"] or float("nan"),
+             probe["tightest_uncaught_bad_rel_residual"] or float("nan"),
+             probe["separation_ratio"] or float("nan"),
+             probe["landed_max_rel_residual"]))
+
     if "a" in args.only:
         print("\nCLAUSE (a) -- leg 205's OWN 81-case battery, pre-repair vs post-repair")
         a, before, after = clause_a(pre, POST)
@@ -566,10 +706,14 @@ def main():
             rec = rerun_one(spec_, pre_path)
             runs.append(rec)
             print("      rc=%d  %ss  calls %s/%s bit-identical (%s moved)  "
-                  "artifact leaves moved: %s"
+                  "artifact leaves moved: %s (+%s provenance, not counted)"
                   % (rec["returncode"], rec["wall_seconds"], rec["calls_bit_identical"],
                      rec["calls_compared"], rec["calls_moved"],
-                     rec["artifact_leaves_moved"]), flush=True)
+                     rec["artifact_leaves_moved"],
+                     rec["artifact_provenance_leaves_moved"]), flush=True)
+            for p in rec.get("artifact_comparison", {}).get("provenance_moved_detail", []):
+                print("        provenance leaf %s: %r -> %r"
+                      % (p["leaf"], p["committed"], p["regenerated"]), flush=True)
             if rec["contamination"]:
                 print("      *** CONTAMINATION on %s ***" % rec["key"], flush=True)
         print("    running the module's own correctness suites ...", flush=True)
@@ -583,20 +727,33 @@ def main():
         tot_moved = sum(r["calls_moved"] or 0 for r in runs) \
             + sum(t["calls_moved"] or 0 for t in tests)
         tot_leaves = sum((r["artifact_leaves_moved"] or 0) for r in runs)
+        tot_prov = sum((r["artifact_provenance_leaves_moved"] or 0) for r in runs)
         payload["clause_b"] = dict(
             banked_runs=runs, test_runs=tests,
             n_banked_artifacts_rerun=len(runs),
             total_odd_field_x_slope_calls_compared=tot_calls,
             total_calls_that_moved=tot_moved,
             total_artifact_leaves_that_moved=tot_leaves,
+            total_provenance_leaves_that_moved=tot_prov,
             comparison="== on float64 per call (NaN==NaN identical) and per artifact leaf",
             zero_contamination=bool(tot_moved == 0 and tot_leaves == 0
                                     and all(r["returncode"] == 0 for r in runs)
-                                    and all(t["returncode"] == 0 for t in tests)),
+                                    and all(t["returncode"] == 0 for t in tests)
+                                    and len(runs) == len(BANKED)),
             skipped_slow=bool(args.skip_slow),
+            n_banked_artifacts_skipped=len(BANKED) - len(runs),
+            banked_artifacts_skipped=[s["key"] for s in BANKED
+                                      if s["key"] not in {r["key"] for r in runs}],
+            # The gate's clause (b) is "EVERY banked result, re-run" -- an unrun artifact is
+            # an ASSUMPTION of dormancy, which is precisely the thing leg 205 was faulted for.
+            # So a partial sweep can never report zero_contamination, however clean the
+            # artifacts it did run: `len(runs) == len(BANKED)` is part of the predicate above,
+            # not a separate note.  --skip-slow exists for development only.
+            covers_every_banked_artifact=bool(len(runs) == len(BANKED)),
         )
-        print("    TOTAL: %d calls compared, %d moved; %d artifact leaves moved"
-              % (tot_calls, tot_moved, tot_leaves))
+        print("    TOTAL: %d calls compared, %d moved; %d artifact leaves moved "
+              "(%d provenance leaves moved, reported not counted); %d/%d banked artifacts run"
+              % (tot_calls, tot_moved, tot_leaves, tot_prov, len(runs), len(BANKED)))
 
     a_ok = ("clause_a" not in payload
             or payload["clause_a"]["n_silent_wrong_after"] == 0)
