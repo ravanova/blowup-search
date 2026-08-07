@@ -56,6 +56,39 @@ import numpy as np
 
 from solver.gclm_family import GCLMResidual, _drho_centered4
 
+# -- the convergence verdict's two extra tests (leg 226 / Route-PNR) ----------
+#
+# Leg 202 (Route-PNA) measured 30 cases in which `converged` was True on a
+# profile that is not the physical traveling wave.  The residual history alone
+# cannot see them, because an off-branch grid-scale root nulls EVERY residual
+# row to machine precision -- the spurious roots carry a BETTER `relres` than
+# the genuine branch does.  Two independent tests are therefore added to the
+# verdict, and both are measured, not argued:
+#
+#   GAUGE_TOL -- `converged` never consulted the two gauge rows it solves for.
+#     The scaling-family escape (leg 202 M2) and the unchecked `c0` (M3) both
+#     return gauge residuals of 0.25..0.81 while claiming convergence.
+#
+#   FARFIELD_INFLATION_MAX -- the decay class, relative to the a = 0 anchor on
+#     the SAME grid.  This is leg 202's own pre-committed classifier threshold,
+#     adopted unchanged rather than retuned.  It is not a curve fit to the
+#     failing cases: Route-D v12's T3 measured the genuine a > 0 profile as
+#     having a critical radius with zero order 1/a, i.e. the true branch is
+#     compactly supported and decays FASTER than the anchor, so a returned
+#     profile whose far field is a thousand times FATTER than the anchor's is
+#     off-branch on grounds banked before this test existed.
+#
+# The two margins the threshold sits between, as measured on leg 202's own
+# banked rows: the largest on-branch inflation is 5.06 (a = 0.30, n = 101) and
+# the smallest off-branch one is 1.24e+03 (a = 0.60, n = 101).  100x sits ~1.3
+# decades above the former and ~1.1 decades below the latter.
+#
+# NOTE the asymmetry, which is the whole point: failing either test proves the
+# returned object is NOT the physical branch.  Passing both does not prove it
+# is.  This is a rejector, not a certificate, and nothing here is rigorous.
+GAUGE_TOL = 1e-6
+FARFIELD_INFLATION_MAX = 100.0
+
 
 def derivative_matrix(fam):
     """d/dX as a dense matrix on the family's grid (4th-order centred in rho)."""
@@ -91,6 +124,26 @@ class TwoScaleNewton:
     def anchor(self):
         """The exact a = 0 traveling wave, on this grid."""
         return -1.0 / (1.0 + self.fam.X ** 2)
+
+    def decay_diagnostics(self, om):
+        """Decay class of `om` relative to the anchor, on the outer half grid.
+
+        The window is leg 202's, verbatim (`|X| > 0.5 max|X|`), so the numbers
+        here are directly comparable with that leg's banked rows.
+        """
+        X = self.fam.X
+        outer = np.abs(X) > 0.5 * np.max(np.abs(X))
+        anc = float(np.max(np.abs(self.anchor()[outer])))
+        om = np.asarray(om, float)
+        ff = (float(np.max(np.abs(om[outer]))) if np.all(np.isfinite(om))
+              else float("inf"))
+        return {"farfield_sup": ff, "anchor_farfield_sup": anc,
+                "farfield_inflation": (ff / anc if anc > 0 else float("inf"))}
+
+    def gauge_residual(self, om):
+        """max |gauge violation| -- the two rows the verdict used to ignore."""
+        om = np.asarray(om, float)
+        return float(max(abs(om[self.i0] + 1.0), abs(om[self.i1] + 0.5)))
 
     def residual(self, om, c):
         R = om * (self.H @ om) - c * (self.D @ om)
@@ -143,8 +196,20 @@ class TwoScaleNewton:
                 # dilation symmetry).
                 step = np.linalg.lstsq(self.jacobian(om, c), -F, rcond=None)[0]
             except np.linalg.LinAlgError:
-                return {"converged": False, "reason": "singular Jacobian",
-                        "Omega": om, "c": c, "history": hist}
+                # leg 202 G6: this path used to omit `residual_rms`/`relres`,
+                # which `continuation` reads unconditionally -- a poisoned
+                # profile anywhere in a sweep raised KeyError instead of being
+                # handled.  The rejection is unchanged; only the contract is.
+                return {"converged": False, "residual_converged": False,
+                        "gauge_ok": False, "on_branch": False,
+                        "reason": "singular Jacobian",
+                        "Omega": om, "c": c, "history": hist,
+                        "residual_rms": float("inf"), "relres": float("inf"),
+                        "gauge_residual": float("inf"),
+                        "farfield_sup": float("inf"),
+                        "anchor_farfield_sup": float("nan"),
+                        "farfield_inflation": float("inf"),
+                        "iterations": len(hist) - 1}
             t = 1.0
             base = np.max(np.abs(F))
             while damping and t > 1e-4:
@@ -161,10 +226,32 @@ class TwoScaleNewton:
         hist.append(rms)
         src = om * (self.H @ om)
         rel = rms / float(np.sqrt(np.mean(src ** 2))) if np.any(src) else np.inf
-        return {"converged": bool(hist[-1] < 1e-6 * max(1.0, hist[0])
-                                  or hist[-1] < 1e-9),
-                "Omega": om, "c": c, "residual_rms": rms, "relres": rel,
-                "history": hist, "iterations": len(hist) - 1}
+        # -- the verdict, in three independent parts (leg 226) --------------
+        residual_ok = bool(hist[-1] < 1e-6 * max(1.0, hist[0])
+                           or hist[-1] < 1e-9)
+        gres = self.gauge_residual(om)
+        dd = self.decay_diagnostics(om)
+        gauge_ok = bool(np.isfinite(gres) and gres < GAUGE_TOL)
+        decay_ok = bool(dd["farfield_inflation"] < FARFIELD_INFLATION_MAX)
+        reasons = []
+        if not residual_ok:
+            reasons.append("residual not reduced (rms %.3e)" % hist[-1])
+        if not gauge_ok:
+            reasons.append("gauge rows violated (%.3e >= %.1e)"
+                           % (gres, GAUGE_TOL))
+        if not decay_ok:
+            reasons.append("off-branch decay class (far-field inflation "
+                           "%.3e >= %.1f x anchor)"
+                           % (dd["farfield_inflation"],
+                              FARFIELD_INFLATION_MAX))
+        out = {"converged": bool(residual_ok and gauge_ok and decay_ok),
+               "residual_converged": residual_ok, "gauge_ok": gauge_ok,
+               "on_branch": decay_ok, "gauge_residual": gres,
+               "reason": "; ".join(reasons) if reasons else None,
+               "Omega": om, "c": c, "residual_rms": rms, "relres": rel,
+               "history": hist, "iterations": len(hist) - 1}
+        out.update(dd)
+        return out
 
 
 def continuation(a_values, n=1201, rho_max=8.0, **kw):
@@ -179,17 +266,36 @@ def continuation(a_values, n=1201, rho_max=8.0, **kw):
     for a in a_values:
         nw = TwoScaleNewton(a=float(a), n=n, rho_max=rho_max)
         r = nw.solve(om0=om, c0=c, **kw)
-        if r["relres"] > 1e-10:
+        if r["relres"] > 1e-10 or not r["on_branch"]:
             # The warm start can land in a basin where the line search crawls.
             # Retrying from the exact a = 0 anchor costs one solve and rescues
             # it often enough to be worth doing -- and when BOTH starts stall,
             # that is evidence about the equation rather than about the start.
+            #
+            # LEG 226 / branch continuity.  This clause used to accept `alt`
+            # on `alt["relres"] < r["relres"]` alone, which is exactly how the
+            # sweep walks off the branch: a spurious grid-scale root nulls
+            # every residual row, so it beats the physical branch on relres by
+            # construction (leg 202 M1, the delivery vehicle).  The comparison
+            # is now LEXICOGRAPHIC -- decay class first, residual only as the
+            # tie-break within a class -- so a better residual can never buy a
+            # worse branch.  An off-branch warm start is now also retried,
+            # which the old `relres`-only trigger never did.
             alt = nw.solve(om0=None, c0=0.5, **kw)
-            if alt["relres"] < r["relres"]:
+            if (bool(alt["on_branch"]), -alt["relres"]) > \
+               (bool(r["on_branch"]), -r["relres"]):
                 r = alt
         out.append({"a": float(a), "converged": r["converged"],
                     "residual_rms": r["residual_rms"], "relres": r["relres"],
-                    "c": r["c"], "iterations": r["iterations"]})
-        if r["relres"] < 1e-10:
+                    "c": r["c"], "iterations": r["iterations"],
+                    "on_branch": bool(r["on_branch"]),
+                    "gauge_ok": bool(r["gauge_ok"]),
+                    "gauge_residual": r["gauge_residual"],
+                    "farfield_inflation": r["farfield_inflation"],
+                    "reason": r.get("reason")})
+        # Re-seeding used to require only relres < 1e-10, which is how ONE
+        # spurious root kept the whole remainder of the ladder off-branch.
+        # A start is now carried forward only if the verdict accepted it.
+        if r["converged"] and r["relres"] < 1e-10:
             om, c = r["Omega"], r["c"]
     return out
