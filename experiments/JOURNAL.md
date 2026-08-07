@@ -4233,6 +4233,46 @@ preempted agents had reached a landing.
   from the other side (finding that same artifact is not
   environment-portable). All three inputs to the DM's pre-committed
   three-way consolidation (236 + 226 + 252) are now in hand.
+- **MAJOR, CLOSING: leg 294 (Route-V11X) -- gate YES on all seven clauses,
+  landed on main.** The consolidated Route-D v11 impact-trace, synthesizing
+  legs 236 (dependency-trace exclusion), 226 (adversarial D2/D3 repair),
+  247 (margin-selection repair), and 252 (anchor regeneration + portability
+  audit) -- zero new measurement, every number cited to its source branch.
+  **`a_max_machine`: 1.0 -> 0.55, confirmed by two independent methods**
+  landing on the identical value via different code paths keyed on the
+  same underlying diagnostic (far-field decay/D3); the raw value is stable
+  at 1.0 across every environment tested, so this move is real, not
+  environment noise. **`grid_converged_a_max`: kept as a SEPARATE,
+  oppositely-signed finding, not merged with the above** -- raw
+  (unrepaired) 1.0 in leg 226's own environment but 0.5 in both the
+  original bank and leg 252's independent regeneration; traced to exactly
+  the two rows (a=0.8, a=1.0) leg 252 already flagged as its worst
+  cross-environment movers, so this is noise-floor-consistent instability,
+  not a fourth genuine disagreement -- the repaired verdict restores 0.5
+  everywhere, i.e. the repair STABILIZES this number rather than moving
+  it. **v5_budget.margin, stale vs regenerated: 1.0467862586e+10 ->
+  1.5991923774880644e-02, a 6.55e+11x (654,571,815,954.7x) gap**,
+  reproduced here by direct division from leg 252's own numbers. **Leg
+  247 exonerated at full strength**: leg 252's from-scratch regeneration
+  reproduces leg 247's own independent fresh re-solve to EXACT float
+  equality (0.000e+00 relative difference, 62.53156368658738 both ways);
+  the published 0.82% gap vs leg 247's headline is banked-row-vs-fresh-row
+  provenance, not a repair defect. **D1 falsified, D3 confirmed as the
+  real separator**: on-branch D1 max (9.364e-03) sits NINE DECADES below
+  the smallest off-branch D1 value (9.535e-12) -- no usable threshold
+  exists anywhere; D3 cleanly separates (on-branch max 24.06, off-branch
+  min 197.30). **One factual correction surfaced and stated prominently**:
+  the leg's own dispatch described leg 247 as "already landed on main" --
+  verified false in the novelty pass (0 commits, main's anchor JSON still
+  carries the stale pre-repair margin); this changes nothing about the
+  synthesis since all four inputs were read directly from their branches
+  regardless, but matters because precision on provenance was the whole
+  point of this leg. **One honest residue named, not estimated**: no
+  input has yet regenerated the anchor JSON with BOTH leg 226's classifier
+  repair AND leg 247's margin-selection repair applied jointly -- that
+  composition doesn't exist yet. Three downstream documents (citing the
+  old numbers) flagged for a future light pointer-correction leg, not
+  built. **This closes the top-priority open item tracked all session.**
 - **Leg 290 (Route-D1XN) -- gate NO, landed, and a real negative
   result.** Checks whether leg 289's N-dependent coefficient C(N) for
   D1's law follows its own closed form. Its own novelty pass found a
