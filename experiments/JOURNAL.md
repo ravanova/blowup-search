@@ -3791,3 +3791,17 @@ preempted agents had reached a landing.
   the banked JSON: 5 of 6 neighbouring claims in the same bullet block agree
   exactly, confirming this was an isolated transcription slip, not a
   symptom of a wider problem. No gate number touched.
+- **Leg 271's verifier -- CONFIRMED clean, no fourth iteration needed.**
+  Independent sweep of both PUB2 files with a DIFFERENT pattern set than leg
+  271 used, plus an extension leg 271 didn't take: swept every sibling live
+  document (PUB1, PUB3, ROUTENGX, ROUTET) for the same claim family -- 0
+  hits, confirming the two-file scope was adequate. All numbers re-verified
+  at source. One LESSER-CLASS residue found, not blocking: TECHNICAL SS3.5
+  attaches sigma_min's decrements to ||T^-1||_X's own label (16x off if a
+  reader recomputes from the printed ladder) -- correct data, wrong subject,
+  inherited via leg 268 from leg 249's own journal. Root cause diagnosed:
+  leg 176's banked JSON reading field still OPENS with "truncation-
+  independent" before its own correct hedge -- any future document quoting
+  that key regenerates the defect; a corrections-register pointer would end
+  the cycle better than a fourth prose sweep. Unblocks leg 270 (full
+  pre-submission review).
