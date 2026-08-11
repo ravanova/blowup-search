@@ -14911,8 +14911,10 @@ binding on PUB. 8 (dominated→enclosed): **LIVE** — 318, slot D, kill intact.
 ### New legs
 
 ```
-### 328 — ROUTE-ORC5: EXECUTE OVER-READ CLOSURE #5 IN THE TWO DOC SITES + THE
-CORRECTIONS ENTRY (user steer item 1; territory granted by the steer itself)
+### 328 — ROUTE-ORC5: EXECUTE OVER-READ CLOSURE #5 IN CLAY_ROADMAP.md + THE
+CORRECTIONS ENTRY (user steer item 1; AMENDED cycle 6b — CONTINUATION_PROMPT.md
+REMOVED from territory: §6 reserves it to integration and the orchestrator has
+already corrected it at ce74d6b, flagging the ownership conflict to the user)
 [FLOOR-ELIGIBLE: no — correction/record work]
 **Thesis.** Correct CLAY_ROADMAP.md:343 and CONTINUATION_PROMPT.md:70 from the
 over-wide claim to the measured one: the Grade-A/fluid cell is empty; Grade-A
@@ -14928,9 +14930,12 @@ entry complete, with zero other content changed (diff-checked)?
   yes -> Bank; closure #5 fully executed across all six sites.
   no  -> A site resists without touching an argument or a gate: stop, report the
         resister verbatim, escalate — never widen, never edit gate text.
-**Territory.** CLAY_ROADMAP.md (the one site), CONTINUATION_PROMPT.md (the one
-               site), writeup/CORRECTIONS.md (append), writeup/novelty/leg_328.md,
-               experiments/journal/leg_328.md. No figure.
+**Territory.** CLAY_ROADMAP.md (the one site, :343), writeup/CORRECTIONS.md
+               (append), writeup/novelty/leg_328.md,
+               experiments/journal/leg_328.md. No figure. CONTINUATION_PROMPT.md
+               is NOT territory (amended cycle 6b: §6 integration-reserved,
+               already corrected at ce74d6b); the CORRECTIONS entry cites
+               ce74d6b for that site rather than re-editing it.
 **Difficulty.** light
 **Preconditions:** None. (Dispatch note: coordinate with the orchestrator's
 plan_of_record.py:47 edit so the two land in the same integration window and the
@@ -14981,3 +14986,58 @@ immediately-dispatchable: **7 (328, 324, 322, 327, 293, 298, 299)**. 329 on 312
 Nothing in this update lifts a ban. The over-read correction NARROWS a claim to
 its measured width — that is the opposite of movement toward Clay and is recorded
 as such; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 6b) — THE MIS-LANDING DIAGNOSED AND FIXED: the DM
+was committing on `leg/311-ivax-v1`; rulings now land from a DETACHED checkout of
+origin/main (standing practice #2); leg 328 AMENDED (CLAY_ROADMAP only); dispatch
+plan confirmed (324 → E now, I held for 326)
+
+**Incident, reported by the DM against itself:** the orchestrator's diagnosis is
+confirmed — `git rev-parse --abbrev-ref HEAD` returned `leg/311-ivax-v1`. Every DM
+ruling commit this session was written on that leg branch, which is why 19a2365
+(cycle 5) never reached main and two slots stood empty. Worse, and stated plainly
+rather than buried: **this DM's two `reset --hard origin/main` syncs MOVED that leg
+branch's pointer** — the branch ref no longer points at leg 311's original tip. Leg
+311's work is safe (it landed on main in cycle 4; its commits 2fb14ca/3fbd5ee/
+0d93ce5 are in the reflog, last leg-authored tip 0d93ce5, branch created from
+5e30bf3), but the pointer restoration is INTEGRATION's call — the DM has not
+touched the branch further and will not push it.
+
+**The standing fix (DM standing practice #2, superseding the cycle-4d wording):**
+before writing any ruling commit, `git fetch origin && git checkout --detach
+origin/main` — never a named branch, never `reset --hard` on whatever branch the
+shared checkout happens to have loaded. Rulings are cherry-picked/pushed from that
+detached lineage only. The cycle-4d rule (sync-before-write + deletion self-check
++ orchestrator's pre-push diff) otherwise stands unchanged.
+
+**Executed this cycle:** cycles 5+6 cherry-picked onto detached origin/main
+(d89bedd) cleanly — the cycle-6 commit already contains the MF3 strike (the false
+clause never reaches main in standing-text form; the corrected test-form rule
+lands instead, matching ce74d6b's CONTINUATION_PROMPT wording), the two over-read
+sites fixed, 326/327/328/329, and the FIG-TABLE.
+
+**Leg 328 amended (spec edited in place, marked):** territory is CLAY_ROADMAP.md
+:343 + CORRECTIONS.md ONLY. The user's packet routed CONTINUATION_PROMPT.md:70 to
+a leg, but §6 reserves that file to integration — the orchestrator's resolution
+(correct it at ce74d6b, flag the conflict to the user in the commit message) is
+ENDORSED as the right call over leaving a known-false sentence seeding every
+future session. **Ruling, asked twice and answered the same: the CORRECTIONS.md
+entry and the closure-#5 record are LEG 328's territory** — the enumeration of
+sites and fixers is claim-bearing wording that deserves a gate; 328's entry cites
+ce74d6b for the CONTINUATION_PROMPT site rather than re-editing it.
+
+**Dispatch confirmation:** 324 P2SPF into slot E NOW (spec readable at origin/main;
+ordering cost of two legs accepted for zero idle time), slot I HELD for 326 CTRX,
+dispatched the moment this push lands. That is the DM's confirmed preference, not
+a default taken.
+
+**Absorbed with slot I's vacancy:** 292 CAPA landed NO at 41169e0 — 1 stale entry
+of 48 fixed; the real finding is AUDIT-LOOP LATENCY (defect measured at leg ~71,
+enabling test at 124, fix unused for ~167 legs). Recorded as a process datum for
+the next performance review; no queue change — 299 TESTA (queued) is exactly the
+leg shape that shortens this loop and stays ranked as is.
+
+Reserve line, FIG-TABLE, floor, and next-fresh (330) are unchanged from cycle 6.
+Nothing here lifts a ban; no L1-L4 link moved; Clay stays ~0.05%.
