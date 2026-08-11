@@ -28,9 +28,9 @@ prose as before.
 |---|---|---|---|
 | A | 312 | APIA | yes |
 | B | 221 | BVRR | no |
-| C | 316 | DFRE | yes |
-| D | 302 | P2T1 | yes |
-| E | 309 | GAF2 | yes |
+| C | 323 | CENV | yes |
+| D | 313 | SDSS | yes |
+| E | 314 | FUS | yes |
 | F | 317 | SFTX | yes |
 | G | 320 | MTSC | yes |
 | H | 229 | PNRV | no |
@@ -38,15 +38,16 @@ prose as before.
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 3: 6/10 floor-eligible -- A/312/APIA,
-C/316/DFRE, D/302/P2T1, E/309/GAF2, F/317/SFTX, G/320/MTSC. E/309 is the most
-load-bearing leg: adversarial read of arXiv:2604.09949, the claimant in the empty
-cell (recorded claimed-not-established; premise stands until 309 answers). 319
-NO-parked (gate text immutable, 5/7 banked complete — orchestrator lands the branch,
-renumbering its §13→§14). Reserve count 19: 323 (CENV, rank 1 — census variant
-re-run under MF1; §0c drafting waits on it), 313, 314, 315, 318, 322, 293, 298, 299
-dispatchable now (9 total); 321/305/306 on 319's merge; 307/308/310 preconditioned;
-231-234 blocked. Next fresh leg number: 324.)
+(Current snapshot, DM update of 2026-08-11 cycle 4: 6/10 floor-eligible -- A/312/APIA,
+C/323/CENV, D/313/SDSS, E/314/FUS, F/317/SFTX, G/320/MTSC. Cycle-4 headline: 309 NO
+— the claimant (arXiv:2604.09949) is ADJUDICATED-AND-REFUTED (NRS/Tsai excludes its
+own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
+stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
+ill-conditioned (KA8 129x) — 308 re-scoped onto 312's capability, 285 spec flagged
+(addendum leg 324). §0c still gated on 323 (live, slot C). Reserve count 17: 315,
+318, 322, 324, 293, 298, 299 dispatchable now (7 total); 321/305/306 on 319's
+merge; 308 on 312; 307 on 221; 310 on 287+298; 231-234 blocked. Next fresh leg
+number: 325.)
 
 ---
 
@@ -14271,3 +14272,137 @@ Nothing here lifts a ban. The claimant is recorded claimed-not-established; Clay
 stays ~0.05% and Phase 1's premise stands UNTIL 309 answers — if 309 sustains the
 claim, that is an escalation to the user, not a DM matter. No output is described as
 movement toward Clay; no link of the L1-L4 chain has moved.
+
+---
+
+## DM update, 2026-08-11 (cycle 4) — THE CLAIMANT BREAKS (309 NO: NRS/Tsai excludes
+2604.09949's own construction; cell stays empty, premise stands); 302 NO absorbed
+(ill-conditioning, not transcription); D←313, E←314 refills; 308 RE-SCOPED on 312;
+285 rework flag APPLIED via new leg 324
+
+**Landings absorbed:** 309 GAF2 NO (5145002) — arXiv:2604.09949 adjudicated and
+REFUTED: Theorem 12.1 eq. 18 constructs an exact backward self-similar 3D NS
+solution with a smooth Gevrey-decaying (hence L³) nontrivial profile — exactly the
+class NRS (1996)/Tsai (1998) prove trivial; neither cited nor addressed; 14
+load-bearing items enumerated first, every recomputable constant checked out;
+confidence high. **Ruling on the row: leg 303's `0 → claimed 1, ESTABLISHED 0` now
+resolves to `claimed 1, established 0, ADJUDICATED-AND-REFUTED (leg 309,
+5145002)`.** The Grade-A/fluid cell STAYS EMPTY; Phase 1's premise is unchanged and
+was never recorded broken. Refuting someone else's claim moves no L1→L4 link; Clay
+stays ~0.05%. **§0c remains gated on 323 (CENV, live in C) — 309's result does not
+unblock it.** 302 P2T1 NO (55166b8) — A4 built, 10/11 KA probes pass, KA8 fails at
+129.048× (|k(1)−1| = 1.29e-07); at 60 digits k(1)=1 EXACTLY and k(7/6) reproduces
+265/266 — transcription proven correct, evaluation ill-conditioned in IEEE double
+(R₂ radicand exact-sums to 0 at r=1, doubles leave 1.22e-14 dust). Sensitivity
+ledger (5.55e-16 → 8.32e-03) banked. Figure renumbering (316→fig74, 302 keeps
+fig69, 301's reservation →fig75, fig72→320, fig73→312) recorded, integration-owned.
+
+### Ruling 2(a) — 308 RE-SCOPED: ROUTE-P2T2R, preconditioned on 312
+
+302's finding is adopted: **A15a-grade ball/arb-precision evaluation is a
+PREREQUISITE of 285's critical path near r=1, not an off-path convenience.** 312
+APIA (live, slot A) is building exactly that capability, so 308 is re-scoped rather
+than duplicated:
+
+```
+### 308 (RE-SCOPED) — ROUTE-P2T2R: 285's CRITICAL-PATH TERMS EVALUATED ON 312's
+CAPABILITY — A4's KA8 AS THE PRE-REGISTERED ACCEPTANCE CASE, THEN TERM #2
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** 302 proved A4's transcription right and its IEEE-double evaluation
+ill-conditioned (KA8, 129× tolerance; exact radicand 0 at r=1). Re-run 302's full KA
+battery for A4 on 312's landed arbitrary-precision interval capability — KA8 must
+pass at its original 1e-9 tolerance, pre-registered — then build term #2 of 285's
+critical-path ranking directly on that capability, same known-answer-with-window and
+perturbable-control requirements as 302, same ban-check clause. Territory grants
+capabilities.py + test_capabilities.py explicitly, per the cycle-4 territory rule
+below.
+**Gate.** Does A4/KA8 pass at 1e-9 on the arb-precision capability (pre-registered
+acceptance), AND does term #2 reproduce its own pre-stated known answer with its
+must-fail plants failing?
+  yes -> Bank both; the apparatus lane continues (term #3 drafted then).
+  no  -> If KA8 still fails at precision, the mechanism is NOT conditioning —
+         escalate, that contradicts 302's 60-digit measurement. If term #2 fails,
+         name mechanism; 285's spec row gets a flag, never a silent edit.
+**Territory.** solver/p2_apparatus_term2.py (NEW), experiments/p2_route_p2t2r_v1.py,
+               writeup/data/p2_route_p2t2r_v1.json, solver/capabilities.py +
+               test_capabilities.py (additive registration only),
+               writeup/novelty/leg_308.md, experiments/journal/leg_308.md.
+**Difficulty.** heavy
+**Preconditions:** Leg 312 landed (its capability is the substrate). The old "302
+gate YES" precondition is void — 302 answered NO and this re-scope is the response.
+```
+
+### Ruling 2(b) — the 285 rework FLAG is APPLIED, executed as leg 324
+
+The flag is recorded now: **285's spec is flagged — its I/O contracts carry no
+precision/conditioning column, and 302 measured that omission costing a leg.** The
+amendment is append-only (a pre-committed spec is prose-corrected by addendum, never
+silently edited — same principle as the immutable-gate ruling):
+
+```
+### 324 — ROUTE-P2SPF: PRECISION/CONDITIONING ADDENDUM TO 285's 15-TERM SPEC,
+SOURCED FROM 302's SENSITIVITY LEDGER
+[FLOOR-ELIGIBLE: no — spec/record work]
+**Thesis.** Append an addendum to 285's landed spec giving every one of the 15 terms
+a precision/conditioning row: sourced from 302's banked ledger (5.55e-16 → 8.32e-03,
+blind cells named) where measured, marked UNMEASURED where not — never guessed. A4's
+row cites the KA8 mechanism verbatim.
+**Gate.** Does every term get exactly one sourced-or-UNMEASURED row, appended as an
+addendum with zero existing spec text altered (diff-checked)?
+  yes -> Bank; 308's and every later apparatus leg's spec reads the column.
+  no  -> A term's conditioning cannot even be classified: name it — that is itself
+         Phase-1 costing information, recorded, not smoothed.
+**Territory.** 285's TECHNICAL file (append-only addendum section),
+               writeup/novelty/leg_324.md, experiments/journal/leg_324.md.
+               Reads 302's ledger JSON; edits it never.
+**Difficulty.** light
+**Preconditions:** None (302 and its ledger are landed).
+```
+
+### Territory rule, recorded (302's process note, adopted)
+
+**A leg expected to land a new `solver/*.py` module must be granted
+`capabilities.py` + `test_capabilities.py` (additive registration) in its territory
+explicitly** — the index gate has teeth, and 302 was right to inline rather than
+half-land. Applied to 308 above; future apparatus specs carry it.
+
+### Refills for D and E, with per-slot floor statements
+
+- **Slot D ← 313 SDSS** (seeded-DSS scoping; math, FLOOR-ELIGIBLE — with 302 and
+  309 gone this fill takes live eligible from 4/8 toward 5/9; §3a rule-4 dispatch
+  pre-authorisation already recorded on 313's spec, unchanged).
+- **Slot E ← 314 FUS** (finite-unstable-spectrum; math, FLOOR-ELIGIBLE — completes
+  the pair: floor back to **6/10** (312, 323, 313, 314, 317, 320), comfortably above
+  §3b).
+- **Third vacancy, if 319's landing frees one:** 321 BLCX if 319's branch is merged
+  at that moment (its precondition fires; landed-prose corrections rank directly
+  after the census fix, per cycle 3) — otherwise **315 TMS** (eligible, steer
+  order). Not floor-constrained either way at 6/10.
+
+### Does 309's result re-rank the reserve? (asked directly, answered directly)
+
+- **Reproduction/adjudication lane: value CONFIRMED, rank unchanged.** The
+  adjudication pattern is now three-for-three at finding real defects in published
+  claims (61, 256, 309). 316 landed; the lane's second entry is selected at the
+  DM's next pass as drafted.
+- **§0c spine: unchanged gating (323), STRENGTHENED content.** When 323 unblocks it,
+  the spine gains its sharpest exhibit: the one claimant to appear in the vacated
+  cell broke on a 28-year-old classical exclusion it never cited. Recorded for the
+  eventual PUB leg; changes no rank today.
+- **The NRS/Tsai screen is now battle-validated** as P0's load-bearing gate clause —
+  a note for Phase-0 legs, no rank change.
+- Nothing else in reserve keyed on 309's answer (grep of `Preconditions:` lines:
+  zero hits on 309).
+
+**FLOOR-TABLE synced in this same edit** (C 316→323; D 302→313; E 309→314). Floor
+6/10.
+
+**Canonical reserve line: reserve count 17 — legs 315, 318, 322, 324, 293, 298, 299,
+321, 305, 306, 307, 308, 310, 231, 232, 233, 234.** Effective
+immediately-dispatchable: **7 (315, 318, 322, 324, 293, 298, 299)**. 321/305/306 on
+319's merge; 308 on 312 (re-scoped); 307 on 221; 310 on 287+298; 231-234 blocked.
+Next fresh leg number: **325.**
+
+Nothing here lifts a ban. The refutation is not movement toward Clay — no L1→L4
+link moved; the cell staying empty preserves Phase 1's premise, it does not advance
+it. Clay stays ~0.05%.
