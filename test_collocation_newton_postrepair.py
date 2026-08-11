@@ -411,6 +411,317 @@ def check_KNOWN_GAP_a_single_nonfinite_entry_disables_the_magnitude_guard():
 
 
 # ===========================================================================
+# LEG 286, ROUTE-CNRV -- APPENDED, NOT OVERWRITTEN
+# ===========================================================================
+#
+# Everything above this line is leg 166's banked suite (plus leg 0/BENCH's two
+# inversions) and covers a DIFFERENT repair to a DIFFERENT function:
+# `critical_radius`'s node-count isolation guard.  Nothing above is edited by
+# this leg -- `git diff` on this file shows additions only, which is the
+# resolution leg 286's novelty pass (Channel 6) committed to BEFORE construction
+# when it found the DM's territory naming a filename that was already banked.
+#
+# What follows pins leg 248's SEPARATE repair, to `ACollocation.newton`'s verdict
+# and `continuation`'s three branch decisions: `converged` used to be
+# `bool(rel < 1e-9)` with `rel` EXACTLY invariant under the equation's own
+# scaling degeneracy (Omega, c) -> (lam Omega, lam c), so the sole verdict of the
+# method could not see the one direction the two gauge rows exist to pin.  Leg
+# 248 wrote the patch and its own reachability re-run in the same commit; these
+# checks are leg 286's independent re-derivation, banked so it cannot decay at
+# the rate of memory (standing lesson 68).
+#
+# Each check asserts BOTH arms wherever an arm exists -- the repaired behaviour
+# AND the pre-repair behaviour the module still reproduces at `gauge_tol=inf` --
+# so none of them is a control that cannot come out differently (lesson 90).
+
+from solver.collocation_newton import continuation as _continuation    # noqa: E402
+from solver import profile_newton as _profile_newton                   # noqa: E402
+
+L286_PRE_REF = "1ea4ecd"     # last commit before leg 248 touched the module
+L286_GAUGE_TOL = 1e-8        # leg 237's own escape predicate, leg 248's default
+
+
+def _l286_load_prerepair():
+    """The module as it stood BEFORE leg 248's repair (not leg 150's `PRE_REF`)."""
+    src = subprocess.check_output(
+        ["git", "show", f"{L286_PRE_REF}:solver/collocation_newton.py"], cwd=ROOT)
+    d = tempfile.mkdtemp(prefix="cnrv_pre_")
+    p = os.path.join(d, "cn_pre_248.py")
+    with open(p, "wb") as fh:
+        fh.write(src)
+    spec = importlib.util.spec_from_file_location("cn_pre_248_postrepair", p)
+    m = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = m
+    spec.loader.exec_module(m)
+    return m
+
+
+def _l286_gauge_defect(col, om):
+    """max(|Omega(theta=0)+1|, |Omega(X~1)+1/2|), recomputed HERE from Omega.
+
+    Transcribed from the formula in `ACollocation.newton`'s docstring.  Not read
+    off the module's returned `gauge_defect` field -- that field is what check 2
+    below is checking.
+    """
+    g0 = col.to_coef.sum(axis=0)
+    i1 = int(np.argmin(np.abs(col.X - 1.0)))
+    om = np.asarray(om, float)
+    return float(max(abs(float(g0 @ om) + 1.0), abs(float(om[i1]) + 0.5)))
+
+
+@check
+def check_LEG286_relres_is_exactly_scale_invariant_and_the_verdict_no_longer_is():
+    """The defect, and the repair, in one measurement -- both arms asserted.
+
+    (lam Omega*, lam c*) is an exact zero of all J residual rows for every lam,
+    because R is homogeneous of degree 2 in (Omega, c) and so is the denominator
+    of `rel`.  So `rel` cannot separate the family -- and the pre-repair verdict,
+    computed from `rel` alone, called every member converged while the reported
+    wave speed ran over three decades.  The repair ANDs in the AFFINE gauge
+    defect, which moves as |lam - 1| along exactly that family.
+
+    This check fails if EITHER arm changes: if the post-repair verdict stops
+    rejecting off-gauge members (the repair went inert) OR if `gauge_tol=inf`
+    stops reproducing the pre-repair verdict (the documented reproduction path
+    broke).  A one-armed version of this check could not come out differently.
+    """
+    col = _col(Jl=100)
+    star = col.newton(max_iter=60)
+    om_s, c_s = star["Omega"], float(star["c"])
+    assert star["converged"], "the on-gauge member itself must still converge"
+
+    lams = (2.0, 5.0, 10.0, 100.0, 1000.0)
+    rr, gds, cs, n_pre_true, n_post_true = [], [], [], 0, 0
+    for lam in lams:
+        pre = col.newton(om0=lam * om_s, c0=lam * c_s, max_iter=0,
+                         gauge_tol=float("inf"))
+        post = col.newton(om0=lam * om_s, c0=lam * c_s, max_iter=0,
+                          gauge_tol=L286_GAUGE_TOL)
+        rr.append(float(post["relres"]))
+        gds.append(_l286_gauge_defect(col, post["Omega"]))
+        cs.append(abs(float(post["c"])))
+        n_pre_true += int(bool(pre["converged"]))
+        n_post_true += int(bool(post["converged"]))
+
+    # ARM 1 -- the blindness is real and still there in the quantity itself
+    spread = max(rr) - min(rr)
+    assert spread < 1e-11, (
+        f"relres is no longer flat along the scaling family (spread {spread:.3e}) "
+        "-- the defect's mechanism has changed; re-derive before trusting the fix")
+    assert max(cs) / min(cs) > 100.0, (
+        "the trial family no longer spans a wide range of c -- this check has "
+        "stopped exercising the degeneracy it was written for")
+    # ARM 2 -- pre-repair accepted every one of them; post-repair accepts none
+    assert n_pre_true == len(lams), (
+        f"gauge_tol=inf no longer reproduces the pre-repair verdict "
+        f"({n_pre_true}/{len(lams)} accepted) -- the documented reproduction path "
+        "is broken")
+    assert n_post_true == 0, (
+        f"the repair has gone inert: {n_post_true}/{len(lams)} off-gauge members "
+        "are still reported converged")
+    assert min(gds) > L286_GAUGE_TOL, "the trial members are not actually off gauge"
+    print(f"  ok  leg 248 repair bites: relres flat to {spread:.3e} across "
+          f"{max(cs) / min(cs):.3g}x in |c|; off-gauge accepted "
+          f"{n_pre_true}/{len(lams)} pre-repair -> {n_post_true}/{len(lams)} post, "
+          f"smallest off-gauge defect {min(gds):.3e}")
+
+
+@check
+def check_LEG286_returned_gauge_defect_field_equals_an_independent_recomputation():
+    """The module's `gauge_defect` field, checked rather than trusted.
+
+    Leg 248's own artifact reads this field.  A bug in how the module
+    computes-and-returns it -- as opposed to a bug in the gate consuming it --
+    is invisible to any check that reads it.  Recomputed here from the returned
+    Omega alone and compared BITWISE.
+    """
+    worst = 0.0
+    n = 0
+    for Jl in (60, 100, 200):
+        col = _col(Jl=Jl)
+        for om0, c0 in ((None, 0.5), (10.0 * col.anchor(), 5.0),
+                        (1e-8 * col.anchor(), 0.5), (0.01 * col.anchor(), 0.005)):
+            r = col.newton(om0=om0, c0=c0, max_iter=60)
+            mine = _l286_gauge_defect(col, r["Omega"])
+            n += 1
+            worst = max(worst, abs(float(r["gauge_defect"]) - mine)
+                        / max(abs(mine), 1e-300))
+            assert float(r["gauge_defect"]) == mine, (
+                f"J={Jl}: module reports gauge_defect {r['gauge_defect']!r}, "
+                f"independent recomputation gives {mine!r}")
+    print(f"  ok  gauge_defect field bit-identical to an independent "
+          f"recomputation on {n}/{n} solves (worst rel error {worst:.3e})")
+
+
+@check
+def check_LEG286_no_clean_solve_is_suppressed_by_the_repair():
+    """The overcorrection guard, reported as a MARGIN and not a boolean.
+
+    Suppressing genuine convergence is the failure mode gate clause (b) exists
+    to catch.  Every clean solve must stay converged, and the check records how
+    far below `gauge_tol` its gauge defect actually sits -- a boolean here would
+    hide a repair that only just missed.
+    """
+    worst_gd, n_clean, n_suppressed = 0.0, 0, 0
+    for Jl in (60, 100, 200):
+        for a in (0.0, 0.15, 0.3):
+            col = _col(a=a, Jl=Jl)
+            r = col.newton(max_iter=60)
+            if not r["converged_relres_only"]:
+                continue
+            n_clean += 1
+            gd = _l286_gauge_defect(col, r["Omega"])
+            worst_gd = max(worst_gd, gd)
+            if not r["converged"]:
+                n_suppressed += 1
+    assert n_clean >= 6, (
+        f"only {n_clean} clean solves in the battery -- this check has stopped "
+        "exercising the overcorrection risk it was written for")
+    assert n_suppressed == 0, (
+        f"{n_suppressed}/{n_clean} clean solves are suppressed by the repair -- "
+        "this is the overcorrection gate clause (b) guards against")
+    decades = np.log10(L286_GAUGE_TOL / worst_gd) if worst_gd > 0 else np.inf
+    assert decades > 3.0, (
+        f"clean solves sit only {decades:.2f} decades below gauge_tol -- too "
+        "close to call the threshold non-load-bearing")
+    print(f"  ok  0/{n_clean} clean solves suppressed; worst clean gauge defect "
+          f"{worst_gd:.3e}, i.e. {decades:.1f} decades below gauge_tol")
+
+
+@check
+def check_LEG286_continuation_consults_the_gauge_in_all_three_branch_decisions():
+    """`continuation`'s ladder: every rung on gauge, and the keys are carried.
+
+    Leg 248 changed three branch decisions (retry, accept-the-retry, reseed) from
+    comparing `relres` alone to consulting the gauge defect.  Each clause can only
+    REJECT a warm start the old code would have taken, so a ladder whose members
+    are all on gauge must run bit-identically -- checked here against the
+    pre-repair source, not against the module's own description of itself.
+    """
+    pre = _l286_load_prerepair()
+    avals = np.arange(0.0, 1.51, 0.3)
+    lp = pre.continuation(avals, J=60, max_iter=60)
+    lq = _continuation(avals, J=60, max_iter=60)
+    assert len(lp) == len(lq) == 6
+    n_float, n_moved = 0, 0
+    for i, (p, q) in enumerate(zip(lp, lq)):
+        for k in ("a", "c", "relres", "residual_rms"):
+            n_float += 1
+            if not (p[k] == q[k] or (np.isnan(p[k]) and np.isnan(q[k]))):
+                n_moved += 1
+        assert np.array_equal(np.asarray(p["Omega"], float),
+                              np.asarray(q["Omega"], float)), \
+            f"rung {i} (a={q['a']}): Omega moved across leg 248's repair"
+        n_float += np.asarray(q["Omega"]).size
+        assert bool(p["converged"]) == bool(q["converged"]), \
+            f"rung {i} (a={q['a']}): verdict changed on a clean ladder"
+        # the repair's new keys must be present and readable unconditionally
+        assert "gauge_ok" in q and "gauge_defect" in q
+    assert n_moved == 0, f"{n_moved}/{n_float} ladder floats moved"
+    print(f"  ok  continuation ladder a=0..1.5: {n_float} floats bit-identical to "
+          f"the pre-repair source at {L286_PRE_REF}, 0 verdicts changed")
+
+
+@check
+def check_LEG286_bit_identity_against_the_pre_leg248_source():
+    """Gate clause (c): no `collocation_newton.py`-dependent float moved.
+
+    Compared against the GENUINE pre-repair source read out of git at
+    `1ea4ecd` -- not against `gauge_tol=inf`, which would only re-execute the
+    post-repair module's own claim about what pre-repair meant.  `newton_gauged`
+    (leg 150's territory) is swept too: leg 248 must not have touched it.
+    """
+    pre = _l286_load_prerepair()
+    n_float, moved = 0, []
+    for Jl in (60, 120):
+        for a in (0.0, 0.3):
+            cp, cq = pre.ACollocation(Jl, a=a), ACollocation(Jl, a=a)
+            for c0 in (0.25, 0.5, 1.0):
+                rp, rq = cp.newton(c0=c0, max_iter=60), cq.newton(c0=c0, max_iter=60)
+                for k in ("c", "residual_rms", "relres", "nodal_sup"):
+                    n_float += 1
+                    if not (rp[k] == rq[k] or (np.isnan(rp[k]) and np.isnan(rq[k]))):
+                        moved.append(f"newton(J={Jl},a={a},c0={c0}).{k}")
+                n_float += np.asarray(rq["Omega"]).size
+                if not np.array_equal(np.asarray(rp["Omega"], float),
+                                      np.asarray(rq["Omega"], float)):
+                    moved.append(f"newton(J={Jl},a={a},c0={c0}).Omega")
+            for drop in (0, 1, Jl // 2):
+                gp = cp.newton_gauged(drop=drop, max_iter=60)
+                gq = cq.newton_gauged(drop=drop, max_iter=60)
+                for k in ("c", "kept_sup", "dropped_defect", "relres"):
+                    n_float += 1
+                    if not (gp[k] == gq[k] or (np.isnan(gp[k]) and np.isnan(gq[k]))):
+                        moved.append(f"newton_gauged(J={Jl},drop={drop}).{k}")
+                n_float += np.asarray(gq["Omega"]).size
+                if not np.array_equal(np.asarray(gp["Omega"], float),
+                                      np.asarray(gq["Omega"], float)):
+                    moved.append(f"newton_gauged(J={Jl},drop={drop}).Omega")
+    assert not moved, f"{len(moved)} floats moved across leg 248's repair: {moved[:5]}"
+    assert n_float > 2000, "the sweep has shrunk below what it was banked at"
+    print(f"  ok  {n_float} floats bit-identical across leg 248's repair "
+          f"(newton and newton_gauged, vs the source at {L286_PRE_REF})")
+
+
+@check
+def check_LEG286_leg202_calibration_pair_is_still_flagged_as_genuine():
+    """The live control that the escape detector FIRES -- gate clause (b).
+
+    Leg 202's pair lives on `solver/profile_newton.py`, a DIFFERENT module that
+    leg 248 did not touch.  It is the positive control: if a post-repair harness
+    reported these two as clean, the harness would have been overcorrected, not
+    the module.  Re-derived from `TwoScaleNewton` directly -- not read from leg
+    202's, leg 237's or leg 248's JSON.
+    """
+    pr = _profile_newton.TwoScaleNewton(a=0.0, n=201)
+    banked = {1e-8: -6127.94, 1e-10: -306421.26}
+    n_flagged = 0
+    for eps, want_c in banked.items():
+        r = pr.solve(om0=eps * pr.anchor())
+        om = r["Omega"]
+        escaped = bool(r["converged"] and abs(float(om[pr.i0]) + 1.0) > 1e-8)
+        n_flagged += int(escaped)
+        rel = abs(float(r["c"]) - want_c) / abs(want_c)
+        assert rel < 1e-5, (
+            f"eps={eps:g}: c = {r['c']!r} no longer reproduces leg 202's banked "
+            f"{want_c} (relative {rel:.3e})")
+    assert n_flagged == 2, (
+        f"only {n_flagged}/2 of leg 202's pair is still flagged as an escape -- "
+        "the detector has been overcorrected into silence")
+    print("  ok  leg 202's calibration pair still flags 2/2 as genuine escapes, "
+          "c reproducing the banked -6127.94 / -306421.26")
+
+
+@check
+def check_LEG286_gauge_tol_is_not_load_bearing():
+    """The threshold's indifference band, measured rather than asserted.
+
+    `gauge_tol = 1e-8` is leg 237's own escape predicate, adopted unchanged.  If
+    the verdict is the same across many decades either side, nothing rests on the
+    number.  Reported as the WIDTH of the band, in decades.
+    """
+    col = _col(Jl=100)
+    star = col.newton(max_iter=60)
+    om_s, c_s = star["Omega"], float(star["c"])
+    good = []
+    for tol in (1e-14, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4, 1e-2, 0.5):
+        clean_ok = bool(col.newton(max_iter=60, gauge_tol=tol)["converged"])
+        off_rejected = all(
+            not col.newton(om0=lam * om_s, c0=lam * c_s, max_iter=0,
+                           gauge_tol=tol)["converged"]
+            for lam in (2.0, 5.0, 10.0, 1000.0))
+        if clean_ok and off_rejected:
+            good.append(tol)
+    assert len(good) >= 6, (
+        f"only {len(good)}/8 tolerances hold both clauses -- the threshold has "
+        "become load-bearing and the repair needs re-justifying")
+    decades = np.log10(max(good) / min(good))
+    print(f"  ok  both clauses hold at {len(good)}/8 tolerances spanning "
+          f"[{min(good):g}, {max(good):g}] -- {decades:.1f} decades of "
+          "indifference around the shipped 1e-8")
+
+
+# ===========================================================================
 
 
 def main():
