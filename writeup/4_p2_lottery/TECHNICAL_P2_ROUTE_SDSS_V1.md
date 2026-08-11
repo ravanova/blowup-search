@@ -318,6 +318,20 @@ dispatched no-branch requires.
   establishes is that leg 260's stated reason is scoped to a realization it did not name, and
   that a **different** obstruction — an empty seed set for the screened object — now occupies
   the position. Neither fact opens anything on its own.
+* **A THIRD obstruction, and the only one of the three that is a theorem.** Located on this
+  leg's MF3 re-audit of its own novelty pass (`writeup/novelty/leg_313.md` §8a): **Chae–Tsai
+  prove nonexistence for DSS solutions with time-periodic `V`** under decay assumptions on the
+  vorticity profile `Ω = ∇×V` — unique-continuation type, with `S₀ > 0` the temporal period
+  and conclusion `V ≡ 0`. That is **precisely the object of §2**, met in the nonexistence
+  direction. The same rigidity line for Euler is Xue `arXiv:1408.6619` and J. Nonlinear Sci.
+  `10.1007/s00332-023-09975-1`; `arXiv:2602.17570` (2026) argues separately that producing NS
+  singularities via Euler self-similar solutions must fail in the case it analyses.
+  **Reported at summary level only.** Whether the decay hypothesis on `Ω` excludes the
+  screened object or merely a decaying subclass **is not known to this leg and is not
+  guessed**, and no claim in §§1–4 leans on it; a follow-up leg must read Chae–Tsai at full
+  text. It does not alter the gate — it is not leg 260's argument — but **any ruling on this
+  route should be made with it in view**, because it is the one item here that could close the
+  route outright rather than merely price it.
 * **§0's transposition is arithmetic about a closed form, not a theorem about NS.** That
   `r^{-1+iκ} ↦ (1-X)^{1-iκ}` is exact; that the NS far field genuinely carries a log-periodic
   block with a particular `κ` is **hypothesis**, and `κ` itself is unknown. The measured cost
