@@ -30,7 +30,7 @@ prose as before.
 | B | 221 | BVRR | no |
 | C | 323 | CENV | yes |
 | D | 318 | DECR | yes |
-| E | 314 | FUS | yes |
+| E | 326 | CTRX | yes |
 | F | 306 | SSE | yes |
 | G | 305 | DWM | yes |
 | H | 229 | PNRV | no |
@@ -38,9 +38,38 @@ prose as before.
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 5: 6/10 floor-eligible -- A/312/APIA,
-C/323/CENV, D/318/DECR, E/314/FUS, F/306/SSE, G/305/DWM. E/314 landed YES-(iii)-OPEN
-at c3aedff, refill pending per the cycle-5 ranking (326 first). Cycle-4 headline: 309 NO
+## Figure reservation table (draft-time authoritative, DM-maintained; instituted
+cycle 6 per user steer item 4. writeup/INDEX.md's allocation table is the
+dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors here)
+
+<!-- FIG-TABLE-START -->
+| Fig | Leg | Status |
+|---|---|---|
+| fig69 | 302 | landed; evidence script owed (leg 327) |
+| fig70 | 311 | claimed, unshipped; produce-or-correct (leg 322) |
+| fig72 | 320 | reserved, parked branch |
+| fig75 | 301 | reserved, parked branch |
+| fig76 | 313 | reserved, parked branch |
+| fig77 | 314 | landed |
+| fig78 | 326 | draft-time allocation (live, slot E) |
+| fig79 | 315 | landed |
+| fig80 | 292 | live |
+| fig81 | 329 | draft-time allocation (reserve, fires on 312) |
+| fig82 | 305 | live |
+| fig83 | 306 | live |
+| fig84 | 318 | live |
+| fig85+ | — | next free |
+<!-- FIG-TABLE-END -->
+
+(Current snapshot, DM update of 2026-08-11 cycle 6: 6/10 floor-eligible -- A/312/APIA,
+C/323/CENV, D/318/DECR, E/326/CTRX, F/306/SSE, G/305/DWM. Cycle-6 headline: user
+correction packet executed — OVER-READ CLOSURE #5 recorded ("no certified viscous
+blow-up in any model" was wider than measured; the measured claim is "the
+Grade-A/fluid cell is empty", Grade-A dissipative certification EXISTS off-axis:
+DF-CGL, reproduced by 316), both DM sites fixed inline, leg 328 drafted for the doc
+sites; MF3 STRUCK from standing text (false — control-then-trust survives, stated as
+a test not a prohibition); 312's T2_egm flip check recorded + leg 329 pre-drafted
+(fires ahead of 308 on 312's landing); FIG-TABLE instituted below. Cycle-4 headline: 309 NO
 — the claimant (arXiv:2604.09949) is ADJUDICATED-AND-REFUTED (NRS/Tsai excludes its
 own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
 stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
@@ -50,12 +79,12 @@ escalated (leg/320-mtsc-v1 at 79fea23, unmerged — MT evades all three deaths o
 paper; user's ruling pending; ban untouched); 317 NO (folklore — lane 7 CLOSED,
 PUB must cite not claim); G now 305 DWM. MT build brick 1 drafted as USER-GATED
 reserve leg 325 (dispatches only on the user's 320 ruling + 312 landed). Reserve
-count 15 (cycle 5): 326, 324, 322, 327, 293, 298, 299 dispatchable now (7, rank
-order as listed, all §3a pre-authorised); 325 user-gated; 307 on 221; 308 on 312
-(fires to top of list when 312 lands); 310 on 287+298; 231-234 blocked. 313's
+count 16 (cycle 6): 328, 324, 322, 327, 293, 298, 299 dispatchable now (7, rank
+order as listed, all §3a pre-authorised); 329 then 308 fire to top on 312's
+landing; 325 user-gated; 307 on 221; 310 on 287+298; 231-234 blocked. 313's
 escalation packet + the DSS ban-wording question are WITH THE USER, with leg 326
 drafted to resolve the packet's one unknown (Chae-Tsai reach). Next fresh leg
-number: 328.)
+number: 330.)
 
 ---
 
@@ -9582,10 +9611,18 @@ this repository's own record where it already speaks to the same claims
   174's own occupancy matrix (this DM cross-checked its own record above: "Grade-A/fluid cell
   EMPTY... for want of a target, not a method") stands, and leg 242 (this DM's own drafted
   leg, landed as a thorough NO) confirms nobody has filled it since via the one precedent
-  leg 174 flagged as closest (Dahne & Figueras). **No certified viscous blow-up exists in any
-  model, in any dimension. If it cannot be done in 1D, 3D NS is not a question of compute** —
-  this is the single sentence this DM will hold every future Phase 1/Phase 2 leg accountable
-  to.
+  leg 174 flagged as closest (Dahne & Figueras). **[CORRECTED 2026-08-11, user steer item 1,
+  over-read closure #5: the original sentence here — "No certified viscous blow-up exists in
+  any model, in any dimension" — was WIDER than what leg 174 measured, and leg 174's own
+  banked data (writeup/data/*vbs*.json) refutes it as written: the occupancy matrix has
+  fluid=False, grade=A OCCUPIED by DF-CGL (arXiv:2410.05480, reproduced exactly by leg 316,
+  49,465/49,465 rows), and Breden-Chu's viscous Burgers is a second Grade-A dissipative
+  object. What was measured, and what stands: THE GRADE-A/FLUID CELL IS EMPTY — no published
+  work applies interval arithmetic to a dissipative fluid equation's own self-similar object
+  — closed three ways and defended against a claimant by leg 309. Grade-A dissipative
+  certification EXISTS off the fluid axis.]** The accountability sentence is re-posed on the
+  measured cell: if the Grade-A/fluid cell cannot be filled in 1D, 3D NS is not a question
+  of compute.
 
 ### 4. Sequencing — Phase 0 drafted now, Phase 1 described (not yet a single dispatchable
 leg — it is the shape of the NEW stage `P0`'s own successor), Phase 2 explicitly NOT drafted
@@ -13434,7 +13471,10 @@ Phase 1's premise rests on still hold?)
 [FLOOR-ELIGIBLE: external literature]
 **Thesis.** Leg 174's occupancy matrix has the Grade-A/fluid cell empty "for want of a
 target, not a method"; leg 242 last confirmed nobody had filled it; 291 re-checked
-only HL_S2_nonsymmetric specifically. Phase 1's entire premise ("no certified viscous
+only HL_S2_nonsymmetric specifically. [CORRECTED 2026-08-11, user steer item 1, over-read
+closure #5: the premise as quoted below was over-wide; the measured premise is "the
+Grade-A/fluid cell is empty" — see the corrected site above and leg 328.] Phase 1's
+entire premise (originally over-stated as "no certified viscous
 blow-up exists in any model, in any dimension, today") has not been re-swept since.
 One sweep (arXiv fetcher, query log committed, links not counts) for post-242 work
 claiming certified/computer-assisted dissipative or viscous blow-up in any model, plus
@@ -14665,12 +14705,24 @@ user-facing item that binds if and when a build is ever proposed.
 
 ### Standing requirement (§0a-adjacent), recorded where legs will read it
 
-> **The instrument-control rule (MF1+MF2+MF3, four legs saved in two cycles: 302,
-> 320, 315, 313).** An implausible zero is a broken instrument until proven
-> otherwise. Before banking any absence: (MF1) run spelling/markup variants;
-> (MF2) bank links, never counts; (MF3) never trust ANDed quoted phrases on the
-> arXiv endpoint — it returns zero for any two (84/20 singly, 0 ANDed, measured);
-> positive-control every query shape that returns zero before believing it.
+> **The instrument-control rule (CORRECTED same day — the MF3 clause originally
+> written here was FALSE and is STRUCK; see the cycle-6 update below).** An
+> implausible zero is a broken instrument until proven otherwise. Before banking
+> any absence: (MF1) run spelling/markup variants (verified: a target-cell paper
+> spells itself `Navier--Stokes` with a LaTeX double hyphen; `self similar`
+> occurs alongside `self-similar`); (MF2) bank links, never counts (leg 174's ten
+> unrecoverable links); and for any query shape returning zero, RUN THE CONTROL —
+> never apply a prohibition: query each phrase singly and confirm non-empty, then
+> check the conjunction against a control pair known to intersect ("self-similar"
+> AND "blow-up" → 251 on the export API, measured). If the controls pass, the
+> zero IS a measurement — bank it as absence. A rule that discards zeros forbids
+> measuring absences, and this project's premise IS an absence claim. The struck
+> clause ("ANDed quoted phrases return zero") is refuted for the export API and
+> unproven for the web endpoint — assert it for neither. **This rule applies to
+> instructions too: control an instruction from the orchestrator OR the DM before
+> trusting it** — leg 314 ran the control on a relayed rule instead of taking it
+> on authority, the only reason the false clause was caught inside one cycle.
+> That licence is explicit and legs should know they have it.
 
 Orchestrator: please propagate this blockquote into CONTINUATION_PROMPT.md's
 novelty-pass section, directly beside the §0a calibration — same mechanism as
@@ -14761,3 +14813,171 @@ a narrowing; 326 reads and reports. No L1-L4 link moved — 315's O1 is an
 apparatus-reach statement about an off-axis ODE rung, 314's OPEN classification is
 a banked negative, 313 dissolved a reason without opening a route. Clay stays
 ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 6) — USER STEER (CORRECTION PACKET) EXECUTED:
+OVER-READ CLOSURE #5 RECORDED AND ITS TWO DM SITES FIXED; MF3 STRUCK (the DM's own
+standing text carried a false rule for part of one cycle); LEGS 328 (ORC5) AND 329
+(EGMF) DRAFTED; FIG-TABLE INSTITUTED; STEER STATUS REPORTED
+
+### Item 1 — over-read closure #5, recorded and part-executed
+
+**The pattern count is now five: legs 165, 180, 185, 178, and this** — "No certified
+viscous blow-up exists in any model, in any dimension" was WIDER than leg 174's own
+banked measurement (fluid=False/grade=A is OCCUPIED by DF-CGL, arXiv:2410.05480,
+reproduced exactly by leg 316, 49,465/49,465 rows; Breden-Chu viscous Burgers is a
+second Grade-A dissipative object). What stands, at measured width: **the
+Grade-A/fluid cell is empty** — closed three ways, defended against a claimant by
+309. Phase 1's target is unchanged; the claim's width was wrong, exactly lesson 91's
+catch, sitting in the plan-adjacent prose.
+- **DM sites, fixed in this edit with inline correction markers:** the directive
+  sentence (formerly "any model, any dimension", now re-posed on the measured cell)
+  and leg 303's thesis site.
+- **plan_of_record.py:47 — orchestrator's, being actioned; correct split.**
+- **CLAY_ROADMAP.md:343 + CONTINUATION_PROMPT.md:70 — leg 328's, drafted below.**
+- **Ruling the orchestrator asked for: the CORRECTIONS.md entry and the closure-#5
+  record go in LEG 328's territory, not integration's** — the replacement wording is
+  claim-bearing, so it is a leg's work with a gate, same class as 327.
+
+### Item 2 (time-sensitive) — 312's gate stays untouched; the owed check is
+RECORDED; the follow-up leg is DRAFTED READY
+
+Recorded as a standing obligation, visible to every future reader: **when leg 312
+lands, a check is owed — do the two T2_egm rows that fail ONLY clause_quad_stable
+(B4_egm at gap +0.4999930, E_egm at +0.4999997, both ≈ EGM's published +1/2, per
+writeup/data/p2_route_wes_v1_space.json) pass all five clauses at arbitrary
+precision?** A YES plausibly flips leg 178's gate answer NO→YES and resolves parked
+escalation #3. Leg 312's gate is NOT amended (the 319 immutability ruling, user-
+reaffirmed) and leg 312 is NOT told what result would be interesting — the
+orchestrator's handling is endorsed. Leg 329 below is the pre-drafted follow-up.
+
+### Item 3 — the 6.5457e+11 label: the one DIRECTION.md site is GATE TEXT, so a
+POINTER, not an edit
+
+The only in-file site (the leg-294-era consolidation gate) is dispatched gate text
+— immutable by this DM's own ruling, which the user reaffirmed in this same steer.
+The correction is therefore carried here as the standing pointer and goes into leg
+328's CORRECTIONS entry: **total stale/regen 6.5457e+11 = selection-repair alone
+6.4926e+11 (99.99%+ of the factor, leg 247's repair) × provenance drift 1.008188
+(0.82%). The label "stale-vs-regenerated" misattributes the whole factor to
+staleness; the consolidated JSON's own note warned against exactly this.**
+experiments/journal/leg_294.md and leg_297.md are their owners' — orchestrator:
+please relay the flag to those journals' integration notes; the DM edits neither.
+
+### Item 4 — figure reservation discipline: FIG-TABLE instituted
+
+A FIG-TABLE block now sits beside the FLOOR-TABLE at the head of this file,
+maintained in the same edit as any draft that allocates a figure. **Authority
+split, agreed with the orchestrator: the DIRECTION.md FIG-TABLE is authoritative at
+DRAFT time; writeup/INDEX.md's allocation table (bfc52be) is the dispatch-time
+mirror.** Collision count corrected per the orchestrator: eight, not five. Draft
+allocations made now: 326→fig78, 329→fig81; 322 produces fig70 (owed), 327 redraws
+fig69 (existing); 324/328 allocate none (prose legs). Next free: fig85.
+
+### MF3 — STRUCK, and the strike recorded at the same prominence as the adoption
+
+The cycle-5 blockquote carried "never trust ANDed quoted phrases on the arXiv
+endpoint" as standing text. **That clause was FALSE** (export API, measured:
+"self-similar" AND "blow-up" → 251; "Taylor model" AND "interval arithmetic" → 3;
+84 singly reproduces 315's own figure, same corpus; refuted for the export API,
+unproven for the web endpoint). It stood in this file for part of one cycle. The
+blockquote above is corrected in place with the strike marked: MF1 and MF2 stand;
+the surviving rule is CONTROL-THEN-TRUST stated as a test, never a prohibition —
+a rule that discards zeros forbids measuring absences, and this project's premise
+IS an absence claim. The authority clause (control instructions from the
+orchestrator or the DM too) is written in as an explicit licence. **The
+orchestrator's refusal to propagate the false clause into CONTINUATION_PROMPT.md
+was correct and is endorsed; his proposed wording (MF1 + MF2 + corrected rule,
+no prohibition) is approved as offered.** Leg 314 is on record as the leg that
+caught it.
+
+### Item 5 — steer status, current facts (not the review's)
+
+1 (arb-precision interval): **LIVE**, leg 312, slot A; legs 329+308 pre-drafted
+against its landing. 2 (Taylor models): **CLOSED** — 315 YES at 3e6ea15; reach
+named, blocker cost-class C (Zgliczyński bridge assumes dissipativity; BCG is
+quasilinear hyperbolic). 3 (seeded DSS): **ANSWERED AND ESCALATED** — 313 at
+434b49a, parked; user packet framed (cycle 5) with both adverse obstructions; 326
+now live resolving Chae-Tsai's reach. 4 (screen off-axis): **CLOSED** — 311, which
+refuted the steer's own hypothesis. 5 (finite unstable spectrum): **CLOSED** — 314
+YES-(iii)-OPEN at c3aedff; the condition is not realization-invariant, and once
+fixed the residue is a theorem obligation; "numerics is a refuter, not a verifier."
+6 (CAP-reproduction lane): **FIRST ENTRY CLOSED** — 316 exact (49,465/49,465);
+lane continues; second-entry selection deferred one cycle pending 323's corrected
+census. 7 (taxonomy): **CLOSED** — 317, folklore; lane closed, cite-don't-claim
+binding on PUB. 8 (dominated→enclosed): **LIVE** — 318, slot D, kill intact.
+
+### New legs
+
+```
+### 328 — ROUTE-ORC5: EXECUTE OVER-READ CLOSURE #5 IN THE TWO DOC SITES + THE
+CORRECTIONS ENTRY (user steer item 1; territory granted by the steer itself)
+[FLOOR-ELIGIBLE: no — correction/record work]
+**Thesis.** Correct CLAY_ROADMAP.md:343 and CONTINUATION_PROMPT.md:70 from the
+over-wide claim to the measured one: the Grade-A/fluid cell is empty; Grade-A
+dissipative certification exists off the fluid axis (DF-CGL, reproduced exactly by
+leg 316). Append the CORRECTIONS.md over-read-closure-#5 entry enumerating all six
+sites and their fixers (two DM-fixed, plan_of_record.py orchestrator-fixed, two
+this-leg, one gate-text pointer), including the item-3 6.5457e+11 relabel. NOTE:
+CONTINUATION_PROMPT.md is a shared ledger normally closed to legs — the user's
+steer names it as this leg's declared territory, which is the grant; the diff
+touches the one site and nothing else.
+**Gate.** Are both sites corrected to the measured wording and the CORRECTIONS
+entry complete, with zero other content changed (diff-checked)?
+  yes -> Bank; closure #5 fully executed across all six sites.
+  no  -> A site resists without touching an argument or a gate: stop, report the
+        resister verbatim, escalate — never widen, never edit gate text.
+**Territory.** CLAY_ROADMAP.md (the one site), CONTINUATION_PROMPT.md (the one
+               site), writeup/CORRECTIONS.md (append), writeup/novelty/leg_328.md,
+               experiments/journal/leg_328.md. No figure.
+**Difficulty.** light
+**Preconditions:** None. (Dispatch note: coordinate with the orchestrator's
+plan_of_record.py:47 edit so the two land in the same integration window and the
+tree never states two different premises across files.)
+```
+
+```
+### 329 — ROUTE-EGMF: THE T2_egm FIVE-CLAUSE CHECK — DOES 178's GATE ANSWER FLIP AT
+ARBITRARY PRECISION? (pre-drafted against 312's landing, per the steer's item 2)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** In p2_route_wes_v1_space.json exactly two rows fail only
+clause_quad_stable: B4_egm (+0.4999930) and E_egm (+0.4999997), both ≈ EGM's
+published +1/2; that clause is the float64 contamination artifact (3.1e+03 at
+n_grade=96) leg 312 exists to re-measure. Re-evaluate ONLY those two rows' five
+clauses on 312's landed capability. Leg 178's gate text is never edited.
+**Gate.** Do B4_egm and E_egm pass all five clauses at arbitrary precision?
+  yes -> Leg 178's NO is measured to flip in substance: REPORT AND ESCALATE to the
+        user — parked escalation #3's resolution is the user's; the historical
+        gate stays byte-identical, the flip lives in this leg's own record.
+  no  -> Bank the corrected magnitudes and which clause still fails; escalation #3
+        stays parked, the artifact explanation stands refined, not overturned.
+**Territory.** experiments/p2_route_egmf_v1.py, writeup/data/p2_route_egmf_v1.json,
+               writeup/figures/fig81*, writeup/novelty/leg_329.md,
+               experiments/journal/leg_329.md. Reads p2_route_wes_v1_space.json and
+               312's landed module; edits neither.
+**Difficulty.** standard
+**Preconditions:** Leg 312 landed. Fires to the TOP of the reserve at that moment,
+AHEAD of 308 (a possible escalation-#3 resolution outranks the next apparatus
+term).
+```
+
+### Ranking and reserve
+
+326 dispatched into E per the standing ranking — correct. Next vacancies:
+1. **328 ORC5** (the steer's own highest priority; light) 2. **324 P2SPF** 3. **322
+F70** 4. **327 P2T1E** 5. 293 JFA 6. 298 CORRX 7. 299 TESTA. **On 312's landing:
+329 first, then 308**, ahead of whatever sits at rank 1. 325 user-gated, unchanged.
+
+**FLOOR-TABLE synced in this same edit** (E 314→326). Floor 6/10 (312, 323, 318,
+326, 306, 305).
+
+**Canonical reserve line: reserve count 16 — legs 328, 324, 322, 327, 293, 298,
+299, 329, 325, 307, 308, 310, 231, 232, 233, 234.** Effective
+immediately-dispatchable: **7 (328, 324, 322, 327, 293, 298, 299)**. 329 on 312
+(fires first), 308 on 312 (second); 325 USER-GATED (+ on 312); 307 on 221; 310 on
+287+298; 231-234 blocked. Next fresh leg number: **330.**
+
+Nothing in this update lifts a ban. The over-read correction NARROWS a claim to
+its measured width — that is the opposite of movement toward Clay and is recorded
+as such; no L1-L4 link moved; Clay stays ~0.05%.
