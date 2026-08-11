@@ -302,6 +302,107 @@ def clause_a(pre, post):
 
 
 # ---------------------------------------------------------------------------
+# ATTRIBUTION -- the control that decides WHOSE movement it is
+#
+# The shim run below follows the PRE-repair trajectory, so its regenerated artifact is a
+# pre-repair regeneration and any difference from the committed file could equally be (i)
+# caused by the repair or (ii) pre-existing irreproducibility of the banked artifact in
+# today's environment.  Those are entirely different findings and the sweep's committed-vs-
+# regenerated comparison ALONE cannot tell them apart -- it conflates them, which is exactly
+# the kind of assumption this leg exists to refuse.  So when an artifact moves, three PLAIN
+# regenerations are run (no shim in the process at all):
+#
+#     A  = the module loaded from PRE_REPAIR_REF          (the repair absent)
+#     A2 = the same again                                 (run-to-run determinism)
+#     B  = the repaired module as it stands on this branch
+#
+#   diff(A, B)  is the gate's actual question, "bit-identical pre/post repair".
+#   diff(C, A)  where C is the committed file, is BASELINE DRIFT -- movement this leg did
+#               not cause and cannot cause, since the repair is not in the process.
+#   diff(A, A2) says whether the generating script is deterministic today at all; without
+#               it, diff(A, B) == 0 would not license "the repaired module reproduces it".
+# ---------------------------------------------------------------------------
+PLAIN_DRIVER = r'''
+import importlib.util, json, os, runpy, sys
+ROOT = os.environ["BVRR_ROOT"]
+sys.path.insert(0, ROOT)
+sys.path.insert(0, os.path.join(ROOT, "experiments"))
+sys.argv = json.loads(os.environ["BVRR_ARGV"])
+WHICH = os.environ["BVRR_WHICH"]                 # "pre" or "post"
+import solver
+if WHICH == "pre":
+    spec = importlib.util.spec_from_file_location("solver.boussinesq_rescaled",
+                                                  os.environ["BVRR_PRE"])
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["solver.boussinesq_rescaled"] = mod
+    spec.loader.exec_module(mod)
+    solver.boussinesq_rescaled = mod
+import solver.boussinesq_rescaled as BR
+has_guard = "min_points" in BR.odd_field_x_slope.__code__.co_varnames
+assert has_guard == (WHICH == "post"), (
+    "attribution control void: asked for the %s module and got has_guard=%s" %
+    (WHICH, has_guard))
+runpy.run_path(os.environ["BVRR_TARGET"], run_name="__main__")
+'''
+
+
+def _plain_regen(spec_, pre_path, which):
+    """One PLAIN regeneration of spec_'s artifact with the pre- or post-repair module.
+    The committed artifact is always restored; the regenerated copy is returned in memory."""
+    art = os.path.join(ROOT, spec_["artifact"])
+    backup = art + ".bvrr_attr_backup"
+    shutil.copyfile(art, backup)
+    fd, driver = tempfile.mkstemp(suffix="_bvrr_plain.py")
+    with os.fdopen(fd, "w") as f:
+        f.write(PLAIN_DRIVER)
+    target = os.path.join(ROOT, spec_["script"])
+    env = dict(os.environ)
+    env.update(spec_.get("env", {}))
+    env.update(BVRR_ROOT=ROOT, BVRR_TARGET=target, BVRR_PRE=pre_path, BVRR_WHICH=which,
+               BVRR_ARGV=json.dumps([target] + spec_["argv"]),
+               PYTHONPATH=ROOT + os.pathsep + os.path.join(ROOT, "experiments"))
+    t0 = time.time()
+    try:
+        proc = subprocess.run([sys.executable, "-u", driver], cwd=ROOT, env=env,
+                              capture_output=True, text=True)
+        regen = json.loads(open(art).read()) if proc.returncode == 0 else None
+    finally:
+        shutil.copyfile(backup, art)
+        os.remove(backup)
+        os.remove(driver)
+    return dict(which=which, returncode=proc.returncode,
+                wall_seconds=round(time.time() - t0, 1),
+                stderr_tail=(proc.stderr[-2000:] if proc.returncode else None)), regen
+
+
+def attribute_movement(spec_, pre_path):
+    """Decide whether an artifact's movement is REPAIR-ATTRIBUTABLE or BASELINE DRIFT."""
+    committed = json.loads(open(os.path.join(ROOT, spec_["artifact"])).read())
+    mA, A = _plain_regen(spec_, pre_path, "pre")
+    mA2, A2 = _plain_regen(spec_, pre_path, "pre")
+    mB, B = _plain_regen(spec_, pre_path, "post")
+    out = dict(key=spec_["key"], runs=[mA, mA2, mB])
+    if A is None or A2 is None or B is None:
+        out["error"] = "a plain regeneration failed; attribution not established"
+        return out
+    d_pre_post = compare_artifacts(A, B)
+    d_determinism = compare_artifacts(A, A2)
+    d_baseline = compare_artifacts(committed, A)
+    out.update(
+        pre_vs_post_repair=d_pre_post,
+        pre_vs_pre_determinism=d_determinism,
+        committed_vs_pre_repair_baseline_drift=d_baseline,
+        repair_attributable_leaves_moved=d_pre_post["leaves_moved"],
+        script_is_deterministic_today=bool(d_determinism["leaves_moved"] == 0),
+        baseline_drift_leaves_moved=d_baseline["leaves_moved"],
+        verdict=("REPAIR_ATTRIBUTABLE" if d_pre_post["leaves_moved"] > 0
+                 else ("BASELINE_DRIFT_NOT_THIS_LEG" if d_baseline["leaves_moved"] > 0
+                       else "NO_MOVEMENT")),
+    )
+    return out
+
+
+# ---------------------------------------------------------------------------
 # CLAUSE (b) -- the banked record, re-run
 # ---------------------------------------------------------------------------
 SHIM_DRIVER = r'''
@@ -715,7 +816,17 @@ def main():
                 print("        provenance leaf %s: %r -> %r"
                       % (p["leaf"], p["committed"], p["regenerated"]), flush=True)
             if rec["contamination"]:
-                print("      *** CONTAMINATION on %s ***" % rec["key"], flush=True)
+                print("      *** MOVEMENT on %s -- attributing it ***" % rec["key"],
+                      flush=True)
+                # Never report movement without saying WHOSE it is.  Three plain
+                # regenerations, the repair present in exactly one of them.
+                att = attribute_movement(spec_, pre_path)
+                rec["attribution"] = att
+                print("      attribution: %s | repair-attributable leaves %s | baseline "
+                      "drift leaves %s | script deterministic today: %s"
+                      % (att.get("verdict"), att.get("repair_attributable_leaves_moved"),
+                         att.get("baseline_drift_leaves_moved"),
+                         att.get("script_is_deterministic_today")), flush=True)
         print("    running the module's own correctness suites ...", flush=True)
         tests = run_tests(pre_path)
         for t in tests:
@@ -728,6 +839,19 @@ def main():
             + sum(t["calls_moved"] or 0 for t in tests)
         tot_leaves = sum((r["artifact_leaves_moved"] or 0) for r in runs)
         tot_prov = sum((r["artifact_provenance_leaves_moved"] or 0) for r in runs)
+        # Movement, split by WHOSE it is.  An artifact that moved but whose attribution
+        # control shows the repair absent from the cause is NOT contamination by this leg --
+        # and it is NOT quietly dropped either: it gets its own counter, its own list, and
+        # its own escalation flag below.
+        attributed = {r["key"]: r["attribution"] for r in runs if "attribution" in r}
+        tot_repair_leaves = sum(
+            (a.get("repair_attributable_leaves_moved") or 0) for a in attributed.values())
+        unattributed = [r["key"] for r in runs
+                        if (r["artifact_leaves_moved"] or 0) > 0 and "attribution" not in r]
+        baseline_drift = sorted(k for k, a in attributed.items()
+                                if a.get("verdict") == "BASELINE_DRIFT_NOT_THIS_LEG")
+        nondeterministic = sorted(k for k, a in attributed.items()
+                                  if a.get("script_is_deterministic_today") is False)
         payload["clause_b"] = dict(
             banked_runs=runs, test_runs=tests,
             n_banked_artifacts_rerun=len(runs),
@@ -736,10 +860,25 @@ def main():
             total_artifact_leaves_that_moved=tot_leaves,
             total_provenance_leaves_that_moved=tot_prov,
             comparison="== on float64 per call (NaN==NaN identical) and per artifact leaf",
-            zero_contamination=bool(tot_moved == 0 and tot_leaves == 0
+            # The gate's clause (b) is "bit-identical PRE/POST REPAIR".  That is measured two
+            # ways, and both must hold: every odd_field_x_slope call in the real run agrees
+            # bitwise (tot_moved), and every artifact leaf that moved has been ATTRIBUTED by
+            # a control in which the repair is absent (tot_repair_leaves).  An artifact that
+            # moved and was never attributed cannot be counted clean -- that is the
+            # assumption-of-dormancy error one level up again -- hence `unattributed`.
+            zero_contamination=bool(tot_moved == 0 and tot_repair_leaves == 0
+                                    and not unattributed
                                     and all(r["returncode"] == 0 for r in runs)
                                     and all(t["returncode"] == 0 for t in tests)
                                     and len(runs) == len(BANKED)),
+            total_repair_attributable_leaves_that_moved=tot_repair_leaves,
+            attribution=attributed,
+            artifacts_moved_but_unattributed=unattributed,
+            # NOT this leg's contamination, and NOT swept under the rug: a banked artifact
+            # that no longer reproduces in today's environment with the repair absent is a
+            # finding of its own, reported here and escalated by the caller.
+            artifacts_with_baseline_drift_not_caused_by_this_repair=baseline_drift,
+            artifacts_whose_script_is_nondeterministic_today=nondeterministic,
             skipped_slow=bool(args.skip_slow),
             n_banked_artifacts_skipped=len(BANKED) - len(runs),
             banked_artifacts_skipped=[s["key"] for s in BANKED
@@ -763,6 +902,14 @@ def main():
     payload["gate_clause_b_zero_contamination_bit_identical"] = bool(
         payload.get("clause_b", {}).get("zero_contamination", False))
     payload["gate_answer"] = "YES" if (a_ok and b_ok) else "NO"
+
+    # A separate axis from the gate: banked artifacts that no longer reproduce with the
+    # repair ABSENT from the process.  Independent of this leg, discovered by it, and of a
+    # different order -- so it is a named top-level field, never a footnote inside clause (b).
+    drift = payload.get("clause_b", {}).get(
+        "artifacts_with_baseline_drift_not_caused_by_this_repair", [])
+    payload["banked_artifacts_that_no_longer_reproduce_independently_of_this_repair"] = drift
+    payload["escalation_required"] = bool(drift)
     payload["wall_seconds"] = round(time.time() - t_all, 1)
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
