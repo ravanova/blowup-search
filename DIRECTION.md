@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 335 | S1GR | no |
 | B | 348 | POCP | yes |
-| C | 343 | DSSP-B1 | yes |
+| C | 350 | DSSP-B2 | yes |
 | D | 338 | LCB1 | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -65,8 +65,9 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
 | fig89 | 340 | landed (fig89_route_egrb_v1_ladder.png + evidence.py) |
 | fig90 | — | released (341 landed, no figure shipped; number returns to the pool) |
-| fig91 | 343 | live, slot C (only if warranted) |
-| fig92+ | — | next free |
+| fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
+| fig92 | 350 | live, slot C (B2 resolution study; only if warranted) |
+| fig93+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -309,8 +310,21 @@ dispatchable: 11 (307, 328, 346, 324, 322, 327, 287, 229, 293,
 298, 299 — rank order as listed, §3a pre-authorised except where a spec says
 otherwise). 349 on 348; 345 on 328; 310 on 287+298; 325 USER-GATED; 231-234
 blocked on repairs 217/219/225 (221's landed). Next fresh leg number:
-**350**. Full specs and this cycle's rulings are in the cycle-8 through 10d
-entries at the end of this file.)
+**351**. Cycle 10e: C/343 landed YES on both clauses at 0f6acf7 — the space
+is PINNED (2p+s>d executable, reproducing 313's s=1 crossing to machine
+precision and 331's exponents within 2%; the rescaled operator's ℓ=0
+spectrum measured CONTINUOUS with a planted-Gaussian-well control converging
+a genuine eigenvalue to 8 digits, so the null is a real measurement); 341's
+verdict consumed, never re-litigated; fig91 landed. B2 proceeds per the
+plan's own branch: **leg 350 = brick B2 (DSSP-BASIS), drafted BY REFERENCE
+to the plan's §5.1 B2 entry** (enriched compactified basis vs 313's
+plain-Chebyshev baseline 823@κ=1 / 14149@κ=20, n(κ)≈791·κ^0.954, at 1e-6
+truncation, smooth-control separation reproduced first; either branch
+proceeds to B3 with the resolution price named; Tier-2 ceiling in its own
+gate text), C ← 350 — the critical path. New solver/ module granted
+capabilities.py + test_capabilities.py additive registration per the
+cycle-4 territory rule. Floor 2/4 (348, 350). Full specs and this cycle's
+rulings are in the cycle-8 through 10e entries at the end of this file.)
 
 ---
 
@@ -17724,4 +17738,76 @@ dispatchable: **11**. Next fresh leg number: **350.**
 
 Nothing in this update lifts a ban. A corrected mechanism narrates the same
 unchanged verdict more truthfully — record hygiene, not movement; no L1-L4
+link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10e) — 343/B1 YES ABSORBED (THE SPACE IS
+PINNED, ON REAL CONTROLS); LEG 350 = BRICK B2, DISPATCHED INTO C (CRITICAL
+PATH)
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 343 DSSP-B1 gate YES on both clauses, absorbed at full strength
+
+Exactly what a brick should look like: 341's S1-DIES verdict consumed and
+recorded, never re-litigated (branch B of the plan's §2.9: the certificate
+space is dead; §2.3's unweighted vorticity/compactified-X space stands FOR
+THE SEARCH, which is what B1 tested on its own terms). Clause (i): 2p+s>d
+made executable reproduces 313's s=1 crossing to machine precision (two
+independent closed forms agreeing) and 331's measured tail exponents
+1.507674/2.012245/2.517908 against predicted 1.5/2.0/2.5, all gaps <2%.
+Clause (ii): the spectrum of −Δ + ½(y·∇) + 1 on the ℓ=0 radial channel,
+collocated on 313's X=r/(1+r), is measured CONTINUOUS — and the null is
+licensed by a drift-0 analytic-null control plus a planted Gaussian well
+whose genuine isolated eigenvalue converges to 8 digits, proving the filter
+CAN detect discrete spectrum. fig91 landed as a genuine new measurement.
+Endorsed without amendment.
+
+### Refill — slot C ← leg 350 = brick B2 (DSSP-BASIS), the critical path
+
+Numbered and dispatched per the plan's own branching ("yes → the space is
+pinned and B2 proceeds"), drafted BY REFERENCE exactly as 343 was:
+
+```
+### 350 — ROUTE-DSSP-B2: BRICK B2 (DSSP-BASIS) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: construction]
+**Thesis and gate.** The spec IS the plan's §5.1 B2 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does an
+enriched compactified basis resolve the (1−X)^{1−iκ} boundary block at a
+lower mode count than leg 313's measured plain-Chebyshev baseline (823 at
+κ=1, 14149 at κ=20, n(κ) ≈ 791·κ^0.954), at the same 1e-6 truncation, with
+the smooth-control separation (82.3x at the cheapest κ≠0 row) reproduced
+FIRST? Either branch proceeds to B3 — with the enrichment factor, or with
+the plain-basis baseline named as the programme's resolution price.
+**Territory.** As the plan's B2 entry states (new solver/ module +
+experiments runner + data JSON), PLUS solver/capabilities.py +
+test_capabilities.py (additive registration, the cycle-4 territory rule),
+writeup/figures/fig92* (only if warranted), writeup/novelty/leg_350.md,
+experiments/journal/leg_350.md. Reads 343's banked record and 313's
+baseline; edits neither.
+**Difficulty.** heavy (the plan sizes B2 at 2 legs; if it splits, the
+split point is reported to the DM, never improvised)
+**Preconditions:** Leg 343/B1 landed YES (TRUE, 0f6acf7).
+```
+
+**Floor 2/4 (348, 350) — §3b's minimum; the two eligible slots remain the
+two live research questions.** FLOOR-TABLE synced (C 343→350); FIG-TABLE:
+fig91 landed, fig92 conditionally allocated to 350.
+
+### Standing state
+
+A/335 mid-diagnosis; B/348 POCP (the certification-shape question); D/338
+LCB1. 349 on 348; 345 on 328; next vacancy: 307 TSCX. With the user:
+cycle-10 packet (complete), C4/escalation-#3, 313 packet + ban-wording, 320
+packet.
+
+**Reserve queue: 19 undispatched legs (349, 307, 328, 345, 346, 324, 322,
+327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **11**. Next fresh leg number: **351.**
+
+Nothing in this update lifts a ban. B1's YES pins a search space under the
+Tier-2 ceiling — apparatus, not movement; B2 is a basis study; no L1-L4
 link moved; Clay stays ~0.05%.
