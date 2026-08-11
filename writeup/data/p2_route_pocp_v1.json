@@ -1,0 +1,175 @@
+{
+  "leg": 348,
+  "route": "ROUTE-POCP",
+  "title": "Does periodic-orbit CAP for dissipative PDEs reach route 4's object?",
+  "role": "scoping only; nothing built; no ban touched; no figure",
+  "gate_question": "Does the scoping produce a DEFINITE classification, in leg 314's shape: (i) REACHES; (ii) OPEN-AND-REACHABLE (obstruction named and cost-classed); or (iii) DOES-NOT-REACH (failing hypothesis named)?",
+  "gate_answer": "yes",
+  "classification": "ii_OPEN_AND_REACHABLE",
+  "no_build_proposed": true,
+  "build_is_next_rulings_not_this_legs": "per DIRECTION.md:17521-17524, routed to DM and user, nothing constructed here",
+
+  "thesis_check_315_blocker": {
+    "claim": "315's blocker (Zgliczynski's dissipative/parabolic hypotheses vs BCG's quasilinear hyperbolic system) does NOT transfer to route 4's object",
+    "verdict": "CONFIRMED, adjudicated (not merely carried) by this leg",
+    "reasoning": "The self-similar/dynamically-rescaled 3D Navier-Stokes system (leg 260/253's object) is obtained from u(x,t)=(2(T-t))^{-1/2} V(y,s) and retains the viscous term as a Laplacian in the rescaled variable (nu * Delta_y V), i.e. its principal part is elliptic/parabolic and dissipative, plus a linear drift term -(y.grad V)/2 - V and the quadratic nonlinearity -(V.grad)V - grad P. This is the textbook rescaled-NS system whose hypotheses Necas-Ruzicka-Sverak (1996) and Tsai (1998) state theorems for (pinned at leg_253.md:30-31, parked, read-only here). BCG's compressible-Euler imploding profile (route 4's O1 in leg 315) has NO diffusive term at all -- viscosity/dissipation enters only as an exponentially-decaying forcing prefactor e^{-delta_dis s0} (leg_315.md:73, quoted verbatim below), which is why leg 315 classed the ODE-to-PDE bridge as blocked on a PDE-type mismatch. Route 4's actual object does not have that mismatch: it is genuinely parabolic/dissipative in its principal part, matching Zgliczynski's stated hypothesis class (math/0005247 abstract: 'topological method for the study of the dynamics of dissipative PDEs').",
+    "leg_315_quote_verbatim": "the bridge from validated ODE to validated PDE is Zgliczynski's self-consistent a-priori bounds (math/0005247), whose hypotheses are dissipative. BCG's rescaled system is quasilinear hyperbolic with dissipation as an e^{-delta_dis s0}-decaying forcing. That mismatch is a theorem nobody has proved, not a package nobody installed.",
+    "leg_315_locator": "experiments/journal/leg_315.md:73",
+    "leg_334_carried_not_adjudicated_quote": "Zgliczynski-Mischaikow self-consistent a-priori bounds, math/0005247 - hypotheses dissipative/parabolic, RESCALED NS system does satisfy, unlike BCG's quasilinear hyperbolic system",
+    "leg_334_locator": "writeup/data/p2_route_dssp_v1.json (carried_measurements.leg_315.standard_bridge), never independently adjudicated by leg 334 -- flagged there as a transcription only"
+  },
+
+  "route4_object": {
+    "name": "NS3D-DSS-NONAXI-LAMBDA-LARGE (primary); NS3D-RDSS (secondary, strictly costlier superset)",
+    "shape": "periodic orbit of the dynamically rescaled 3D incompressible Navier-Stokes flow, period T = 2 log(lambda), lambda an output of the search not an input",
+    "locator": "experiments/journal/leg_260.md:120-137, quoting leg 251: 'A DSS blow-up IS a periodic orbit of the dynamically rescaled flow'",
+    "symmetry": "non-axisymmetric -- FORCED, not chosen: axisymmetric DSS is excluded (leg_260.md:139-142), so no symmetry reduction is available",
+    "function_space": "algebraically weighted: L^p(R^3) for p>3, or weighted L^2(rho), rho=(1+|y|)^{-s}, s>1 -- both thresholds sharp, measured by shell-ratio quadrature crossing at p=3 (1.000027) and s=1 (leg_260.md:39-52)",
+    "explicitly_excluded_spaces": [
+      "L^3 (NRS/Tsai force u=0 there; the object survives the DSS screen BECAUSE it sits outside L^3)",
+      "L^2 (infinite energy in the similarity variable, shell ratio diverges linearly)",
+      "Breden-Chu Gaussian-weighted H^2(mu) (shells 26.6 -> 1.0e5 -> 3.9e20 -> 1.3e83, leg_260.md:69-78; a second independent reason on top of leg 257's Leray-projector exit)"
+    ]
+  },
+
+  "located_technology": [
+    {
+      "id": "math/0005247",
+      "authors": "Zgliczynski",
+      "year": 2000,
+      "in_repo_before_this_leg": true,
+      "prior_repo_locator": "experiments/journal/leg_315.md:73, leg_318.md, writeup/novelty/leg_315.md",
+      "abstract_read_this_leg": true,
+      "method": "self-consistent a-priori bounds justifying rigorous Galerkin projection + Conley index",
+      "target_object_in_paper": "FIXED POINTS (not periodic orbits, per this paper's own abstract) of the Kuramoto-Sivashinsky equation",
+      "domain_signal": "canonical KS setting; abstract does not state BC explicitly but the method's 'Galerkin projection' + 'neglected modes' tail estimate is the standard periodic-domain Fourier-truncation construction in this line of work"
+    },
+    {
+      "id": "arXiv:2305.08221",
+      "authors": "van den Berg, Breden, Sheombarsing",
+      "year": 2023,
+      "in_repo_before_this_leg": true,
+      "prior_repo_locator": "writeup/novelty/leg_315.md, writeup/data/p2_route_w2l_v1_lit.json, writeup/data/p2_route_cenv_v1_raw.json",
+      "abstract_read_this_leg": true,
+      "method": "computer-assisted rigorous time integration via variation-of-constants zero-finding in Fourier space + Newton-Kantorovich, Chebyshev interpolation, domain decomposition",
+      "domain_signal": "EXPLICIT: 'scalar semilinear parabolic PDEs with periodic boundary conditions' (abstract, verbatim)"
+    },
+    {
+      "id": "arXiv:1902.00384",
+      "authors": "van den Berg, Breden, Lessard, van Veen",
+      "year": 2019,
+      "title": "Spontaneous periodic orbits in the Navier-Stokes flow",
+      "in_repo_before_this_leg": true,
+      "prior_repo_locator": "experiments/journal/leg_245.md:102-116, writeup/novelty/leg_245.md:178 -- located and read for a DIFFERENT question (object-kind: periodic orbit of smooth flow vs blow-up profile)",
+      "abstract_read_this_leg": true,
+      "method": "constructive/computer-assisted existence proof, Newton-Kantorovich on a Banach space of geometrically decaying Fourier coefficients",
+      "domain_signal": "EXPLICIT: 'forced, autonomous Navier-Stokes equations on the three-torus' (abstract, verbatim); Taylor-Green forcing",
+      "relevance": "the single most directly on-topic paper: a periodic orbit of genuine 3D NS (viscous term inside the certified equation), computer-assisted, but on a COMPACT domain via the same NK-in-exponentially-decaying-coefficient-basis family already measured DEAD in this repository (4 realizations, stationary-profile problem)"
+    },
+    {
+      "id": "arXiv:2409.09234",
+      "authors": "unread beyond abstract this leg",
+      "year": 2024,
+      "title": "Mathematically established chaos and forecast of statistics with recurrent patterns in Taylor-Couette flow",
+      "in_repo_before_this_leg": false,
+      "abstract_read_this_leg": true,
+      "method": "rigorous chaos statement via a discrete map approximation, unstable periodic orbits (UPOs) of NS",
+      "domain_signal": "EXPLICIT: 'a minimal periodic domain capable of sustaining coherent structures' (abstract, verbatim)"
+    },
+    {
+      "id": "arXiv:2105.04148",
+      "authors": "Arioli",
+      "year": 2021,
+      "title": "Computer assisted proof of branches of stationary and periodic solution, and Hopf bifurcations, for dissipative PDEs",
+      "in_repo_before_this_leg": false,
+      "abstract_read_this_leg": true,
+      "method": "computer-assisted proof of branches of stationary/periodic solutions and Hopf bifurcations",
+      "domain_signal": "EXPLICIT worked example: 'the Brussellator system with diffusion and Dirichlet boundary conditions' (abstract, verbatim) -- bounded, not periodic, not unbounded"
+    },
+    {
+      "id": "arXiv:2009.12762",
+      "authors": "Arioli, Koch",
+      "year": 2020,
+      "title": "A Hopf bifurcation in the planar Navier-Stokes equations",
+      "in_repo_before_this_leg": false,
+      "abstract_read_this_leg": true,
+      "method": "constructive, computer-assisted estimates; Hopf bifurcation producing a periodic cycle from a stationary branch",
+      "domain_signal": "EXPLICIT: 'Navier-Stokes equation for an incompressible viscous fluid on a square, satisfying Navier boundary conditions' (abstract, verbatim) -- 2D, bounded",
+      "note": "this is the actual Arioli-Koch-line-applied-to-Navier-Stokes paper named in this leg's thesis"
+    },
+    {
+      "id": "arXiv:2308.01528",
+      "authors": "Huang, Qin, Wang, Wei",
+      "year": 2023,
+      "title": "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+      "in_repo_before_this_leg": true,
+      "prior_repo_locator": "experiments/journal/leg_125.md:161 (cited as 'HQWW'), writeup/novelty/leg_163.md:86, experiments/journal/leg_318.md:114 -- cited previously for profile-decay/precedent purposes, not for the domain-compactness question this leg asks",
+      "abstract_read_this_leg": true,
+      "method": "purely analytic fixed-point method, refining an earlier computer-assisted proof",
+      "domain_signal": "EXPLICIT: 'the 1D Hou-Luo model on the real line' (abstract, verbatim) -- unbounded, with 'rigorous estimates on the algebraic decay rates of the profiles in the far field'",
+      "relevance": "the one located instance combining unbounded domain + algebraic far-field decay + a rigorous/computer-assisted existence result -- but STATIONARY profile, 1D, no Leray projector, no axisymmetry question"
+    }
+  ],
+
+  "domain_census": {
+    "compact_or_periodic_domain": ["math/0005247 (KS, periodic-domain Galerkin line)", "arXiv:2305.08221 (explicit periodic BC)", "arXiv:1902.00384 (three-torus)", "arXiv:2409.09234 (minimal periodic domain)", "arXiv:2105.04148 (bounded, Dirichlet BC)", "arXiv:2009.12762 (bounded square, Navier BC)"],
+    "unbounded_domain_with_algebraic_decay": ["arXiv:2308.01528 (Hou-Luo on the real line) -- stationary profile only, not a periodic orbit, not the Galerkin-tail/self-consistent-bounds apparatus, 1D"],
+    "unbounded_domain_periodic_orbit_any_weight": [],
+    "count_note": "six of seven located instances of periodic-orbit-or-related dissipative-PDE CAP technology require a compact (periodic or bounded-with-BC) domain; the seventh (unbounded + algebraic decay) is not a periodic orbit and not the Galerkin-plus-tail apparatus -- links listed above, this line is a summary of them, not a fresh count claim"
+  },
+
+  "obstruction_named": {
+    "statement": "Every located realization of the self-consistent-a-priori-bounds / Galerkin-plus-tail / NK-in-Fourier-space periodic-orbit-or-branch certification technology closes its tail-domination (neglected-mode) estimate against a COMPACT domain (periodic torus, bounded box with Dirichlet/Navier BC, or minimal periodic cell) with a discrete, geometrically/exponentially decaying Fourier or Chebyshev spectral basis. Route 4's object requires the opposite: an UNBOUNDED domain (R^3) carrying an ALGEBRAICALLY weighted space (leg 260: L^p(p>3) or weighted L^2(rho), s>1), explicitly excluding the one weight family (Gaussian, exponentially/super-geometrically decaying) that would supply an analogous discrete, rapidly-decaying spectral basis. No located instance of the technology has closed a tail-domination estimate against an algebraic (non-exponential) far field for a time-periodic target, in more than 1D, or with a Leray projector.",
+    "risk_factors_flagged_not_proven_fatal": [
+      "leg_334.md section 3.3 (writeup/data/p2_route_dssp_v1.json, this repository's own model) measured that in the algebraically-weighted space, the linearization has CONTINUOUS spectrum, vs. discrete spectrum in the (wrong, excluded) Gaussian weight -- flagged as a risk factor for building a matched Galerkin-tail closure, NOT transferred as a proof of failure, because leg 334's finding is about the LINEARIZED STABILITY operator of a specific candidate in Route-E's model, a different specific operator from 'does a Galerkin-truncation basis exist for the state space', and conflating the two would overclaim",
+      "leg 341 (Route-ALGW) found three independent realizations of an algebraic-weight CAP apparatus already died, for three different mechanisms, for the STATIONARY-profile/NK problem (S1_A sup-norm collocation Z1>=6.0424, S1_B ell^1_w no window at any exponent, S1_C origin-H^2/Mellin a=0-only) -- named as a suggestive but NOT direct precedent, since the apparatus in leg 341 (NK fixed-point contraction) differs from the apparatus this leg scopes (Galerkin-plus-tail dynamical closure via Conley index or covering relations)"
+    ]
+  },
+
+  "cost_class": {
+    "class": "C",
+    "reasoning": "Research-level: no located instance of the technology has been built or evidenced against an unbounded, algebraically-weighted domain for a periodic-orbit target; the one located unbounded+algebraic-decay rigorous result (Hou-Luo, arXiv:2308.01528) is a different apparatus (analytic fixed point, not Galerkin-tail) for a different object kind (stationary, 1D). This mirrors leg 315's own cost-classing reasoning for its O1 (also class C): 'that mismatch is a theorem nobody has proved, not a package nobody installed' -- here the analogous statement is 'no located instance is a construction nobody has attempted in this exact combination, not a package nobody installed'.",
+    "not_class_A_because": "no pip-installable / off-the-shelf periodic-orbit CAP tool targets unbounded algebraically-weighted domains (none searched for or found this leg; consistent with capabilities.py's own live grep at leg 334: 0 periodic-orbit modules, 0 3D velocity fields, 0 Leray projections in this repository)",
+    "not_class_B_because": "the gap is not merely an un-hand-rolled implementation of a known closed-form estimate -- the tail-domination estimate itself (the mathematical content that lets a Galerkin truncation be justified) has no located precedent in this domain/weight combination; building it would be new mathematics, matching leg 315's own A/B/C rubric for O1"
+  },
+
+  "no_definite_c3_claim": "This leg does NOT claim a proof that the Galerkin-tail bridge CANNOT close in the algebraic-weight setting (that would be classification iii, DOES-NOT-REACH, and would require a named failing hypothesis established as a fact, not an absence-of-evidence). No such failing hypothesis was located or derived this leg; the continuous-spectrum flag above is a risk factor about a different specific operator, not a proof about the Galerkin-truncation-basis question. Classification (ii) is chosen because a real, positively-identified domain-shape gap exists (named above) and is cost-classed, not because impossibility was shown.",
+
+  "novelty_pass": {
+    "log": "writeup/novelty/leg_348.md",
+    "instrument": "https://export.arxiv.org/api/query",
+    "positive_control": {"query": "all:electron", "n": 1, "status": "PASS"},
+    "negative_control": {"query": "all:qwjbnpolkjmnbvcxzasdfgh", "n": 0, "status": "PASS"},
+    "mf1_check": {
+      "phrase": "self-consistent a-priori bounds",
+      "dashed_result": 0,
+      "spaced_result": 0,
+      "abs_field_result": 0,
+      "component_halves_each_nonzero": true,
+      "verdict": "banked as genuine phrase absence, not dash-normalization artifact (per-query-per-field MF1 rule, not assumed from a different field/query)"
+    },
+    "controlled_zeros": [
+      {"query": "all:\"periodic orbit\" AND all:\"unbounded domain\" AND all:\"computer-assisted\"", "n": 0, "singles_nonzero": true},
+      {"query": "all:\"validated numerics\" AND all:\"self-similar\" AND all:\"Navier-Stokes\"", "n": 0, "singles_nonzero": true},
+      {"query": "all:\"Conley index\" AND all:\"periodic orbit\" AND all:\"dissipative\"", "n": 0, "pairwise_nonzero": true, "note": "pairwise Conley-index+periodic-orbit = 5 (nonzero); triple-AND narrowing, not banked as a strong claim"},
+      {"query": "all:\"polynomially weighted\" AND all:\"Galerkin\" AND all:\"rigorous\"", "n": 0},
+      {"query": "all:\"algebraic weight\" AND all:\"Galerkin\" AND all:\"validated\"", "n": 0}
+    ],
+    "mf4_compliance": "au:\"Arioli\" AND au:\"Koch\" used (per-author AND form), not a compound-name query; returned 4 (nonzero), located arXiv:2009.12762 among them"
+  },
+
+  "repository_reads": {
+    "leg_315": "experiments/journal/leg_315.md, writeup/novelty/leg_315.md -- read-only, edits none",
+    "leg_260": "experiments/journal/leg_260.md -- read-only, edits none",
+    "leg_341": "experiments/journal/leg_341.md -- read-only, edits none",
+    "leg_334": "experiments/journal/leg_334.md, writeup/data/p2_route_dssp_v1.json -- read-only, edits none, cited as carried-not-adjudicated per its own labelling",
+    "leg_245": "experiments/journal/leg_245.md, writeup/novelty/leg_245.md -- read-only, edits none",
+    "leg_253": "cited only via leg 260/341's own transcription, not independently opened this leg (parked branch)"
+  },
+
+  "clay_status": {
+    "l1_l4_chain_moved": false,
+    "clay_odds": "~0.05%, unchanged",
+    "note": "a classification of an existing route as OPEN-AND-REACHABLE is a scoping statement, not movement toward Clay; nothing was built, no ban touched"
+  }
+}
