@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 334 | DSSP | yes |
-| B | 339 | ORC6 | no |
+| B | 342 | SEED | yes |
 | C | 341 | ALGW | yes |
 | D | 340 | EGRB | yes |
 <!-- FLOOR-TABLE-END -->
@@ -175,14 +175,27 @@ not dash-normalizing where abs: is). C ← 341 ALGW (programme rank 1). §0c/PUB
 drafting and the lane-6 second entry are UNBLOCKED and will be drafted at the
 DM's next pass, ranked behind the user's programme legs.
 
-**Reserve queue: 21 undispatched legs (342, 335, 336, 337, 338, 307, 328,
+Cycle 9c: B/339 landed YES at 5655208 (absorbed after the fact — its landing
+predated the cycle-9b integration and reached the DM via the orchestrator's
+sync check). **Over-read closure #6 is REAL and now fully executed: the WIDTH
+STANDS (the Grade-A/fluid cell is still empty, carried by leg 174's
+target-absence ground — neither 331 nor 332 measures width), the GROUNDS were
+over-read ((iv_a) MISATTRIBUTES its mechanism, the Leray obstruction
+OVERSTATES), and the count "three ways" is STRUCK at all owed sites** — leg 339
+corrected JOURNAL.md:4929 + CORRECTIONS.md §17; the DM applied §7's drop-in
+wording to its own two sites and took the offered pattern-count-six note, in
+this same edit. The A-vs-B triple ambiguity is reported, not resolved; the
+correction is right under either reading. B ← 342 SEED (programme rank 1).
+Pattern count: SIX.
+
+**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 15
-(342, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
+(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
 rank order as listed, §3a pre-authorised except where a spec says otherwise).
 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
 landed). Next fresh leg number: **343**. Full specs and this cycle's rulings
-are in the cycle-8 through 9b entries at the end of this file.)
+are in the cycle-8 through 9c entries at the end of this file.)
 
 ---
 
@@ -9717,8 +9730,20 @@ this repository's own record where it already speaks to the same claims
   49,465/49,465 rows), and Breden-Chu's viscous Burgers is a second Grade-A dissipative
   object. What was measured, and what stands: THE GRADE-A/FLUID CELL IS EMPTY — no published
   work applies interval arithmetic to a dissipative fluid equation's own self-similar object
-  — closed three ways and defended against a claimant by leg 309. Grade-A dissipative
-  certification EXISTS off the fluid axis.]** The accountability sentence is re-posed on the
+  — and leg 309 defended that against a claimant. Grade-A dissipative
+  certification EXISTS off the fluid axis.]** **[CORRECTED 2026-08-11 by leg
+  339, over-read closure #6: the sentence inside the block above formerly read
+  "closed three ways and defended against a claimant by leg 309". The count is
+  struck. The emptiness stands and is untouched by legs 331 and 332 — both are
+  route findings, and leg 174's target-absence ground ("for want of a TARGET,
+  not for want of a method") is what carries it. The GROUNDS were over-read:
+  (a) the three ways are nowhere enumerated at this site, and the banked record
+  supplies two different triples; (b) screen (iv_a)'s stated mechanism is
+  MISATTRIBUTED — leg 331 measured the failure and found it is the weight
+  e^{|x|²/4} against an algebraic tail, not incompressibility or nonlocality as
+  such; (c) the Leray obstruction OVERSTATES — leg 332 measured it as
+  velocity-formulation-specific, failing at step S4 because curl(grad v) ≡ 0.
+  Adjudication: experiments/journal/leg_339.md.]** The accountability sentence is re-posed on the
   measured cell: if the Grade-A/fluid cell cannot be filled in 1D, 3D NS is not a question
   of compute.
 
@@ -14921,14 +14946,25 @@ standing text carried a false rule for part of one cycle); LEGS 328 (ORC5) AND 3
 
 ### Item 1 — over-read closure #5, recorded and part-executed
 
-**The pattern count is now five: legs 165, 180, 185, 178, and this** — "No certified
+**The pattern count is now five: legs 165, 180, 185, 178, and this** [count
+updated to SIX by over-read closure #6 — leg 339, 2026-08-11: "closed three
+ways", grounds over-read while the width stood] — "No certified
 viscous blow-up exists in any model, in any dimension" was WIDER than leg 174's own
 banked measurement (fluid=False/grade=A is OCCUPIED by DF-CGL, arXiv:2410.05480,
 reproduced exactly by leg 316, 49,465/49,465 rows; Breden-Chu viscous Burgers is a
 second Grade-A dissipative object). What stands, at measured width: **the
-Grade-A/fluid cell is empty** — closed three ways, defended against a claimant by
-309. Phase 1's target is unchanged; the claim's width was wrong, exactly lesson 91's
-catch, sitting in the plan-adjacent prose.
+Grade-A/fluid cell is empty**, defended against a claimant by 309, on leg 174's
+target-absence ground. **[CORRECTED 2026-08-11 by leg 339, over-read closure
+#6: formerly "— closed three ways, defended against a claimant by 309". Struck
+for the same reason this very paragraph gives about its own subject: a count
+standing in for a named realization. Legs 331 and 332 leave the emptiness
+intact and the grounds over-read — one way MISATTRIBUTES its mechanism (iv_a:
+weight vs algebraic tail, leg 331), one OVERSTATES (the Leray obstruction is
+velocity-formulation-specific, leg 332). Width and grounds are separate claims;
+only the grounds are corrected. Per-way verdicts:
+experiments/journal/leg_339.md §3-§4.]** Phase 1's target is unchanged; the
+claim's width was wrong, exactly lesson 91's catch, sitting in the
+plan-adjacent prose.
 - **DM sites, fixed in this edit with inline correction markers:** the directive
   sentence (formerly "any model, any dimension", now re-posed on the measured cell)
   and leg 303's thesis site.
@@ -16744,4 +16780,91 @@ Nothing in this update lifts a ban. 323's NO narrows nothing and opens
 nothing — it certifies the census instrument and the vacancy claim's
 robustness at measured width, which is exactly what §0c needed to be honest;
 MF4 is an instrument rule, not a claim about the field. No L1-L4 link moved;
+Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 9c) — 339 YES ABSORBED (OVER-READ CLOSURE #6
+EXECUTED IN FULL: WIDTH STANDS, GROUNDS CORRECTED, COUNT STRUCK); THE DM's TWO
+SITES APPLIED FROM §7's DROP-IN WORDING; B ← 342 SEED; ROSTER SYNC CONFIRMED
+TO THE ORCHESTRATOR
+
+Written from the same detached lineage, resynced to origin/main = ac5ef70.
+Provenance note, stated because process is load-bearing: 339's landing
+(5655208) predated the cycle-9b integration but its landing report reached the
+DM only via the orchestrator's roster sync check — absorbed now, nothing lost,
+and the sync-check habit is endorsed as the mechanism that caught it.
+
+### 339 ORC6 gate YES, absorbed at full strength
+
+The adjudication is exemplary and is endorsed without amendment: verdict rule
+pre-registered before any verdict existed; the enumeration search found the
+"three ways" NOWHERE enumerated (the banked record supplies two different,
+non-equivalent candidate triples — clause (a)'s honest answer); six verdicts
+over five distinct grounds, with the correction written to be right under
+EITHER triple reading (each contains at least one MISATTRIBUTES and one
+OVERSTATES). The substance: **the WIDTH STANDS** — the Grade-A/fluid cell is
+still empty, carried by leg 174's target-absence ground ("for want of a
+TARGET, not for want of a method"); neither 331 nor 332 measures width. **The
+GROUNDS were over-read**: (iv_a) MISATTRIBUTES (the kill survives on
+magnitudes — 1.869e22 against a local control at 1.0 — but its stated
+mechanism has drifted twice under a fixed verdict: incompressibility → 
+nonlocality → weight-vs-tail, the old reason hiding the live question);
+the Leray obstruction OVERSTATES (velocity-formulation-specific, S4,
+curl(grad v) ≡ 0, with the replacement wall named and numbered — NRS/Tsai at
+‖u_B‖_L³ = 0.7307683991070311); Gallay-Wayne OVERSTATES narrowly; NRS/Tsai and
+174's ground STAND AT MEASURED WIDTH. Its honest-ceiling section (verdicts
+inherit 331/332's numbers; A1 rests on a d=1 realization, Biot-Savart cost
+uncosted) is exactly the right shape. Pattern count: SIX.
+
+### Executed — the DM's two sites, applied from §7's drop-in wording
+
+Both applied in this same edit, anchored by TEXT not line numbers (the
+journal's :9683/:14892 had already drifted under cycles 9-9b — leg 321's
+lesson, live within the hour): site 1 (the closure-#5 block in the Phase-1
+entry) using §7a's sanctioned free-standing-marker alternative; site 2 (the
+cycle-6 item-1 block) as §7b verbatim; the §7c pattern-count-six note taken as
+offered, as a bracketed update that leaves the original sentence quoted in
+place. The :89-area snapshot line flagged by §7's note is the cycle-8b
+deferral RECORD (historical, accurate as written) and is left standing; the
+snapshot now carries the cycle-9c execution note instead. The four
+pre-commitment/dispatch-text sites are correctly NOT corrected, per the
+journal's own warning that correcting them would falsify the record.
+
+### Ruling — consequence for the live plan: none beyond what cycle 9 already
+ordered
+
+The corrected grounds change no live dispatch: 341 ALGW already owns the
+weight question (the "live question the old reason was hiding," §5 ruling);
+334 already consumes; the NRS/Tsai wall is already bound into 334's clause (a)
+via cycle 8b. Closure #6 lands as record hygiene exactly where the record
+needed it, before 334's plan cites the sites — which was rank 1's stated
+purpose.
+
+### Refill — slot B ← 342 SEED (programme rank 1, executed)
+
+Spec at cycle 9, unchanged: route 4's seeding problem scoped now — named
+screen-passing candidate with acquisition cost in legs, or measured-none plus
+what would create one; the cheap-entrance ban restated inside its own gate.
+Standard; math+lit, floor-eligible. Territory disjoint from A/C/D (checked;
+reads leg/313-sdss-v1 and 334's plan when landed, edits none). **Floor 4/4
+(334, 342, 341, 340) — above §3b's 2-of-4.** FLOOR-TABLE synced.
+
+### Roster sync — confirmed to the orchestrator
+
+A = 334 DSSP (running, critical path); B = 342 SEED (this refill); C = 341
+ALGW (running); D = 340 EGRB (running). Landed and absorbed through this
+cycle: 221, 333, 332, 326, 331, 329, 330, 323, 339. The orchestrator's state
+was NOT stale — the one gap ran the other way (339's landing had not reached
+the DM), now closed.
+
+**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **14** (rank order as listed; 335 S1GR next). §0c/PUB draft and
+the lane-6 second entry: still owed at the DM's next pass, unchanged. Next
+fresh leg number: **343.**
+
+Nothing in this update lifts a ban. Closure #6 NARROWS grounds to their
+measured width while the width itself stands — the opposite of movement,
+recorded at the same prominence as the claim it corrects; no L1-L4 link moved;
 Clay stays ~0.05%.
