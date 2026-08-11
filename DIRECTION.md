@@ -26,25 +26,27 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 280 | PUB2X | no |
+| A | 312 | APIA | yes |
 | B | 221 | BVRR | no |
 | C | 316 | DFRE | yes |
 | D | 302 | P2T1 | yes |
-| E | 303 | GAF | yes |
-| F | 311 | IVAX | yes |
-| G | 286 | CNRV | no |
+| E | 309 | GAF2 | yes |
+| F | 317 | SFTX | yes |
+| G | 320 | MTSC | yes |
 | H | 229 | PNRV | no |
 | I | 292 | CAPA | no |
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 2: 4/10 floor-eligible -- C/316/DFRE,
-D/302/P2T1, E/303/GAF, F/311/IVAX. Cycle-1 closures: 300 NO (landed), 304 YES(i)
-(landed), 301 YES (parked on leg/301-fsb-v1); refills A←280, C←316, F←311. Resumes
-from prior-session branches: B/221, G/286, H/229, I/292; J/287 fresh. Reserve count
-21: 319 (P0TCR, rank 1, repair), 320 (MTSC), 312-315/317/318, 293, 298, 299
-dispatchable now (11 total); 305/306 preconditioned on 319, 307-310 preconditioned
-as listed; 231-234 blocked. Next fresh leg number: 321.)
+(Current snapshot, DM update of 2026-08-11 cycle 3: 6/10 floor-eligible -- A/312/APIA,
+C/316/DFRE, D/302/P2T1, E/309/GAF2, F/317/SFTX, G/320/MTSC. E/309 is the most
+load-bearing leg: adversarial read of arXiv:2604.09949, the claimant in the empty
+cell (recorded claimed-not-established; premise stands until 309 answers). 319
+NO-parked (gate text immutable, 5/7 banked complete — orchestrator lands the branch,
+renumbering its §13→§14). Reserve count 19: 323 (CENV, rank 1 — census variant
+re-run under MF1; §0c drafting waits on it), 313, 314, 315, 318, 322, 293, 298, 299
+dispatchable now (9 total); 321/305/306 on 319's merge; 307/308/310 preconditioned;
+231-234 blocked. Next fresh leg number: 324.)
 
 ---
 
@@ -14131,3 +14133,138 @@ Nothing in this update lifts a ban — 304 hardened one's footing, 301 deliberat
 declined to claim one, and 320 is gated to escalate, never to lift. Clay stays
 ~0.05%; no link of the L1-L4 chain has moved (301's survivor is a candidate, not a
 movement). No new direction question beyond the two the orchestrator already routed.
+
+---
+
+## DM update, 2026-08-11 (cycle 3) — THE EMPTY CELL HAS A CLAIMANT (arXiv:2604.09949,
+recorded claimed-not-filled; 309 live on it); ruling on 319's NO (gate text is
+immutable, 5/7 banked complete); §13 collision + blog-surface leg 321; fig70 leg 322;
+CENSUS VARIANT RE-RUN leg 323 under MF1 — §0c drafting waits on it
+
+**Landings absorbed:** 303 GAF YES (fc8bb1f) — 35/35 queries, 68 papers, 174's 12
+replicate exactly (0/12 grew); one claimant clears all four clauses: arXiv:2604.09949
+(Shahmurov 2026-04-10 v1), claimed NK/interval validation of a rescaled 3D
+incompressible NS profile on T³. Correctly recorded **claimed 1, ESTABLISHED 0** —
+the premise is NOT recorded broken, and nothing in this file treats it as broken
+until 309's adversarial read answers. **309 (slot E) is the most load-bearing leg in
+the run; its yes-branch (claim sustains) is an escalation to the user — Phase 1's
+premise is the user's to weigh, exactly as drafted.** 286 CNRV YES (0 of 12,356
+bitwise moved, two deltas self-flagged). 280 PUB2X YES (fec7b4c), all five clauses.
+
+### Ruling 1 — 319's NO is a CORRECT ANSWER; a pre-committed gate is NEVER edited
+
+The leg's reasoning is adopted as a standing rule: **dispatched gate text is a record
+of what was ASKED, and historical gate text is immutable** — editing it retroactively
+would corrupt the very audit trail that let 300 catch the digit. So: **no re-dispatch,
+no gate carve-out; bank 5/7 as complete.** The orchestrator lands `leg/319-p0tcr-v1`
+as-is (with ruling 2's renumber). The two immutable gate-text sites get
+CORRECTIONS.md pointers ("historical gate text quotes 6.855; correct value 6.854 =
+(7+3√5)/2, see legs 300/319") via leg 321 below — a pointer beside the record, never
+an edit of it.
+**305/306 precondition now reads: "leg 319's parked branch merged to main."** The
+5/7 outcome satisfies the intent (the corrected number is on main in every live
+prose surface); the two gate-text sites are historical record, not consumable prose.
+
+### Ruling 2 — §13 collision + 280's carried-forward blog surfaces: leg 321
+
+280's CORRECTIONS.md §13 is on main and has precedence by landing order; **whoever
+lands 319's branch renumbers 319's §13 → §14** (integration action, recorded here
+for the orchestrator). The remaining record debt becomes one light leg:
+
+```
+### 321 — ROUTE-BLCX: BLOG SURFACES L102/L108 + THE TWO GATE-TEXT CORRECTIONS
+POINTERS (280's carried-forward note + ruling 1's pointers, one light record leg)
+[FLOOR-ELIGIBLE: no — record work]
+**Thesis.** BLOG_P2_PUB2_V1.md L102/L108 still print the uncorrected 0.0420 and a
+0.71465 cross-reference — outside 280's TECHNICAL-only territory, flagged by 280
+itself. Ruling 1 adds two CORRECTIONS.md pointers for 319's immutable gate-text
+sites. Both are pointer/prose fixes citing landed re-derivations; no argument moves.
+**Gate.** Are L102/L108 corrected against 280's landed values, and the two gate-text
+pointers appended, with zero other numeric content changed (diff-checked)?
+  yes -> Bank. no -> Argument-touching resistance: escalate, same clause as the PUB2
+        family; never widen silently.
+**Territory.** writeup/BLOG_P2_PUB2_V1.md (the two sites), writeup/CORRECTIONS.md
+               (append), writeup/novelty/leg_321.md, experiments/journal/leg_321.md.
+**Difficulty.** light
+**Preconditions:** Leg 319's branch merged to main (avoids the §13/§14 collision by
+sequencing after it).
+```
+
+### Ruling 3 — 311's fig70: produce-or-correct, one light leg, gate decides
+
+Neither papering over nor ruling no-figure-by-design from the DM's chair — whether
+311's banked JSON contains anything plottable is a checkable fact, so a gate checks:
+
+```
+### 322 — ROUTE-F70: PRODUCE fig70 FROM 311's BANKED JSON, OR CORRECT THE CLAIM
+[FLOOR-ELIGIBLE: no — record/figure work]
+**Thesis.** 311's quartet claims fig70 and shipped no file; INDEX.md records the gap.
+A claimed figure is a debt: either the banked p2_route_ivax_v1.json yields the
+figure via writeup/build_figures.py, or the claim itself is corrected.
+**Gate.** Does 311's banked JSON yield fig70 through build_figures.py without any
+re-measurement?
+  yes -> Ship the figure; INDEX.md row closes.
+  no  -> The JSON has nothing plottable: correct the quartet claim in INDEX.md to
+         "no figure by design, ruled at leg 322" — the documented row stands; 311's
+         measurements are untouched.
+**Territory.** writeup/build_figures.py (additive stanza only), writeup/figures/
+               fig70* , writeup/INDEX.md (the one row), writeup/novelty/leg_322.md,
+               experiments/journal/leg_322.md. Reads 311's JSON; edits it never.
+**Difficulty.** light
+**Preconditions:** None (311 landed).
+```
+
+### Ruling 4 — MF1: YES, the census instrument re-runs with variants, and §0c WAITS
+
+MF1 is a defect in the instrument, not one row: a `Navier-Stokes` string silently
+misses `Navier--Stokes`, and MF2 means 174's 10 unrecoverable links cannot prove the
+claimant was ever seen and rejected. **The §0c publication reframe rests on the
+census being sound, so: no §0c drafting (and no vacancy-census spine in any PUB or
+leg-256 output) until leg 323 lands.** 317 SFTX (live) is advised via the
+orchestrator: its novelty pass uses variant spellings now.
+
+```
+### 323 — ROUTE-CENV: RE-RUN THE VACANCY CENSUS WITH SPELLING/MARKUP VARIANTS,
+LINKS-NOT-COUNTS THROUGHOUT (MF1 instrument fix + MF2 prospective fix)
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** Re-run leg 174's 12 and leg 303's 35 queries with a pre-committed
+variant table (LaTeX double-hyphen/en-dash/em-dash, unhyphenated, spaced-hyphen
+forms — for Navier–Stokes AND every proper-name term in the query set), every row a
+link never a count (MF2's fix made prospective). The four-group author census of the
+user's §0 gets the same variant treatment. Deliverable: a variant-complete census
+with a per-query delta against the original instrument.
+**Gate.** Does the variant re-run surface at least one work the original instrument
+missed (beyond 2604.09949 itself)?
+  yes -> Record each with links; any candidate clearing 303's four clauses routes to
+         a GAF2-shaped adversarial read (drafted then, not now); §0c stays gated on
+         the outcome.
+  no  -> Bank: the census is variant-robust, MF1's only casualty was the one row —
+         §0c UNBLOCKS on this landing either way, on the corrected instrument.
+**Territory.** writeup/data/p2_route_cenv_v1_sweep.json, writeup/novelty/leg_323.md,
+               experiments/journal/leg_323.md.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+### Re-ranked reserve
+
+1. **323 CENV** (instrument defect gating §0c and the strategic frame) 2. **313
+SDSS** 3. **314 FUS** 4. **315 TMS** 5. **318 DECR** 6. **322 F70** (light) 7. 293
+JFA 8. 298 CORRX 9. 299 TESTA — preconditioned: **321 BLCX** (on 319's merge; then
+it ranks directly after 323 — landed-prose corrections stay near top), 305/306 (on
+319's merge, per ruling 1's re-read), 307 (on 221), 308 (on 302), 310 (on 287+298)
+— blocked: 231-234. Steer order 313→314→315→318 preserved; all four floor-eligible.
+
+**FLOOR-TABLE synced in this same edit** (A 312, E 309, F 317, G 320 in; floor 6/10:
+302, 309, 312, 316, 317, 320 — confirmed against the orchestrator's count).
+
+**Canonical reserve line: reserve count 19 — legs 323, 313, 314, 315, 318, 322, 293,
+298, 299, 321, 305, 306, 307, 308, 310, 231, 232, 233, 234.** Effective
+immediately-dispatchable: **9 (323, 313, 314, 315, 318, 322, 293, 298, 299)**.
+321/305/306 on 319's merge; 307/308/310 preconditioned as listed; 231-234 blocked.
+Next fresh leg number: **324.**
+
+Nothing here lifts a ban. The claimant is recorded claimed-not-established; Clay
+stays ~0.05% and Phase 1's premise stands UNTIL 309 answers — if 309 sustains the
+claim, that is an escalation to the user, not a DM matter. No output is described as
+movement toward Clay; no link of the L1-L4 chain has moved.
