@@ -181,6 +181,21 @@ counts** (leg 53 logged counts, could not be audited, and was withdrawn).
 >   alongside `self-similar`.
 > - **MF2 — bank links, not counts.** Leg 174 banked counts; **ten of its links are now
 >   permanently unrecoverable.** Bank identifiers.
+> - **MF4 — compound author-name queries are a false-negative generator (adopted
+>   2026-08-11, DM cycle 9b, three independent confirmations: legs 326, 330, 323).**
+>   `au:"Chae-Tsai"`, `au:"Breden-Chu"` and group-name forms like them return **zero**
+>   even when both authors are censused and co-published — the endpoint does not expand
+>   a hyphenated or spaced two-name string into "both authors," it matches a single
+>   author field literally. **Never bank a zero from a compound author-name query.**
+>   Control it with the per-author `AND` form (`au:"Chae" AND au:"Tsai"`) before trusting
+>   an absence.
+> - **MF1 is sharpened to per-query AND per-field (DM cycle 9b).** Dash-normalization is
+>   not a fixed property of the endpoint — it is measured per query and per field. Leg 323
+>   found `abs:` IS dash-normalizing (double-hyphen/en-dash/em-dash/spaced forms all return
+>   identical id sets to plain hyphen, 16/16) while `au:` is NOT (`au:"Gomez-Serrano"` 47 vs
+>   `au:"Gomez--Serrano"` 0). Do not generalize a dash-robustness finding from one field to
+>   another, or from one query to the whole endpoint (leg 326 found MF1 held per-query, not
+>   globally, on a different endpoint) — re-measure it for the field and query you're using.
 > - **An implausible zero is a broken instrument until proven otherwise — but the rule is a
 >   TEST, never a prohibition.** Run a positive control (a query that must return results)
 >   and a negative one. For a suspicious zero from a compound query, query each phrase singly,
