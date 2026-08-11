@@ -34,9 +34,9 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 335 | S1GR | no |
-| B | 342 | SEED | yes |
+| B | 344 | PKLR | yes |
 | C | 341 | ALGW | yes |
-| D | 340 | EGRB | yes |
+| D | 336 | C305 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -63,7 +63,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
-| fig89 | 340 | live, slot D (only if the ladder comparison warrants) |
+| fig89 | 340 | landed (fig89_route_egrb_v1_ladder.png + evidence.py) |
 | fig90 | 341 | live, slot C (only if the scoping warrants) |
 | fig91 | 343 | reserved (DSSP-B1, gated on 341; only if warranted) |
 | fig92+ | — | next free |
@@ -216,16 +216,36 @@ reserve. NO mid-flight briefing of 341 with 334's clause-(a) cross-checks
 path now runs through C/341** (the ceiling gate) with A refilled by 335 S1GR
 (corrections rank 1). Floor 3/4 (342, 341, 340).
 
-**Reserve queue: 20 undispatched legs (336, 337, 338, 307, 328,
+Cycle 9f: D/340 landed YES-ON-AN-IDENTITY at 165a402 (R = −1/2 EXACTLY at
+all 19 rungs via the exact tan(θ/2) substitution — Sym(B) = −G/2 because the
+Hilbert term vanishes identically on T2_egm; clause 5 is a TAUTOLOGY on this
+class, so a flip of 178's NO would be a flip on an identity, not a
+measurement; the leg deferred per the standing routing and the orchestrator's
+direct escalation to the user is ENDORSED — escalation #3 and the C4 reading
+are the user's, now with exact-arithmetic evidence). B/342 landed YES-(ii) at
+fc65c1e (no screen-passing seed today, 0/5, Kwon-Tsai adversely matching the
+banned bifurcation shape; ONE creation path named and costed ≈35 legs —
+RECORDED AND ROUTED, bundled into the user decision packet at 341's landing
+alongside the ceiling answer, NOT drafted on DM authority). Refills under a
+FLOOR BIND stated openly: the entire dispatchable reserve is
+corrections/audit work, none floor-eligible, so filling both vacancies from
+it would put the floor at 1/4 — below §3b's hard 2-of-4. D ← 336 C305
+(corrections rank 1); B ← 344 PKLR, a fresh floor-eligible LIT draft (PINN/
+KAN-for-self-similar-profiles literature pass feeding the same user decision
+packet). Floor 2/4 (341, 344) — the §3b minimum exactly, noted. Record slip
+corrected: 334 HAS landed (a89d8b3); 342's non-consumption of it is a
+timing fact only.
+
+**Reserve queue: 19 undispatched legs (337, 338, 307, 328,
 324, 322, 327, 287, 229, 293, 298, 299, 343, 310, 325, 231, 232, 233, 234),
 plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
-dispatchable: 13 (336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
+dispatchable: 12 (337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
 299 — rank order as listed, §3a pre-authorised except where a spec says
 otherwise, and ALL subordinate to the ceiling-gate priority above). 343 on
 341 (fires directly behind 341's consequence work); 310 on 287+298; 325
 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's landed). Next fresh
-leg number: **344**. Full specs and this cycle's rulings are in the cycle-8
-through 9e entries at the end of this file.)
+leg number: **345**. Full specs and this cycle's rulings are in the cycle-8
+through 9f entries at the end of this file.)
 
 ---
 
@@ -17049,3 +17069,132 @@ Nothing in this update lifts a ban: B1 waits on 341; B6 waits on the user;
 the §3 build stays undrafted; S1's rejection under the cheap-entrance ban is
 the ban working, not moving. A landed programme plan is a plan — no L1-L4
 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 9f) — 340 YES-ON-AN-IDENTITY ABSORBED (CLAUSE
+5 IS A TAUTOLOGY ON T2_egm; THE USER ESCALATION ENDORSED); 342 YES-(ii)
+ABSORBED (NO SEED TODAY; THE ≈35-LEG CREATION PATH ROUTED, NOT DRAFTED);
+REFILLS UNDER A STATED FLOOR BIND: D ← 336 C305, B ← 344 PKLR (FRESH
+FLOOR-ELIGIBLE DRAFT); FLOOR 2/4 EXACTLY
+
+Written from the same detached lineage, resynced to origin/main = fc65c1e.
+
+### 340 EGRB gate YES — on an identity, absorbed at full strength
+
+The truncation-controlled derivation found something better than a surviving
+bound: an IDENTITY. Via the exact X = tan(θ/2) substitution the whole exact
+path is float-free, and R = −1/2 exactly at all 19 ladder rungs for both rows
+(rational parts identically 0; margin exactly the 1e-9 slack; truncation
+dependence exactly 0; enclosure width 1.4e-59), with the structural cause
+named: Sym(B) = −G/2 entry-by-entry because the nonlocal Hilbert term
+vanishes identically on T2_egm while D_φ ≡ −1/2. Six controls able to fire
+against did their job (A4_chen_hou at −0.5001506 FAILS the ceiling — the
+instrument is not a code tautology). **The pre-registered second reading is
+the load-bearing one and is endorsed: clause 5 is a TAUTOLOGY on this class,
+so a flip of 178's NO would be a flip on an identity, not a measurement** —
+and the leg correctly declined to adjudicate escalation #3, exactly per the
+standing routing. **The orchestrator's direct escalation to the user is
+ENDORSED**: it answers NEEDS-YOU item #2 with exact-arithmetic evidence, and
+the question before the user is now clean — does a tautological pass of
+clause 5 flip 178's substance, or void the clause on this class? The DM adds
+nothing decisional; both readings and all magnitudes are already in the
+packet. Retrospective note, recorded without self-congratulation: the
+cycle-8e analysis predicted the knife-edge branch (gap consistent with
+exactly 1/2, decidable only in exact arithmetic) — and exact arithmetic has
+now decided it is EXACTLY 1/2 by identity, which is neither reading's naive
+victory: the "bound" reading's margin was real but is the slack itself, and
+the "agreement test" reading fired on an eigensolve that was measuring only
+its own float noise (1.9e-05/2.7e-05 spread reproducing 329's banked
+figures). fig89 landed.
+
+### 342 SEED gate YES-(ii), absorbed at full strength
+
+No screen-passing seed exists today: 0 of 5 candidates pass 313's three-way
+screen + the cheap-entrance ban, with the adverse find banked at full
+strength — Kwon-Tsai 2011.02800 bifurcates off Landau solutions, literally
+the shape the ban forbids; the strategy is excluded by the ban working, not
+reinterpreted. One creation path named and costed: retargeting Hou's
+PINN/KAN machinery at the true non-axisymmetric 3D NS DSS ansatz, ≈35 legs
+at the leg's live rate. **Ruling on the creation path: RECORDED AND ROUTED,
+NOT DRAFTED.** A ≈35-leg commitment is a programme-scale resource decision
+of exactly the kind the user reserves; it is bundled into the user decision
+packet that assembles at 341's landing — the ceiling answer and the
+seed-creation option belong in ONE decision, since a Tier-2-only programme
+(if 341 says the fourth space dies) prices those 35 legs very differently.
+334's clause (c) is satisfied via its "none exists yet + creation path"
+branch. Record slip corrected here: **334 HAS landed** (a89d8b3, absorbed
+cycle 9e); 342's record not marking it consumed reflects flight-time
+ordering only — no rework owed.
+
+### Refills — under a floor bind, stated openly rather than slipped past
+
+The dispatchable reserve (337, 338, 307, 328, 324, 322, 327, 287, 229, 293,
+298, 299) is ENTIRELY corrections/audit/verification — none floor-eligible
+(287 EPA and 293 JFA checked directly this cycle: audits by their own spec
+text). With 335 (non-eligible) in A and 341 the only eligible live leg,
+filling both vacancies from the reserve puts the floor at 1/4 — below §3b's
+hard 2-of-4. §3's mandate (the DM chooses the work when the queue leaves it
+unclear; an empty slot is never the answer) therefore requires one fresh
+floor-eligible draft, and it should be one the programme already needs:
+
+```
+### 344 — ROUTE-PKLR: WHAT EXISTS IN THE PINN/KAN-FOR-SELF-SIMILAR-PROFILES
+LITERATURE, AND WHAT WOULD THE RETARGET INHERIT? (feeds the same user
+decision packet as 342's costed creation path; dispatched under the §3b
+floor bind, reason stated in cycle 9f)
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** 342 costed the only named seed-creation path at ≈35 legs:
+retargeting Hou's PINN/KAN machinery at the non-axisymmetric 3D NS DSS
+ansatz. The user will rule on that commitment at 341's landing. The ruling
+should rest on a controlled literature pass, not on one team's
+self-description: what PINN/KAN-discovered self-similar or DSS profiles
+exist (Hou's line and any successors/competitors), at what resolution and
+with what validation discipline; what failure modes are on record; and which
+specific components the retarget would inherit versus rebuild — sharpening
+342's 35-leg estimate's inputs, not re-costing by feel. MF1-MF4 discipline
+throughout; links not counts; no outreach.
+**Gate.** Does the pass produce a sourced inventory — each entry with
+arXiv id, what was discovered, validation status as the AUTHORS state it,
+and inherit-vs-rebuild classification for the retarget — sufficient for the
+user packet to state what the 35 legs buy and what they risk?
+  yes -> Bank; the inventory rides in the 341-landing decision packet beside
+        342's cost bracket.
+  no  -> The literature is thinner than 342's estimate assumed (or
+        unreachable under rate limits — refusals recorded as refusals):
+        report exactly that; a costed path resting on a thin literature is
+        itself decision information, banked at full strength.
+**Territory.** writeup/data/p2_route_pklr_v1.json, writeup/novelty/leg_344.md,
+               experiments/journal/leg_344.md. Reads 342's banked record;
+               edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+- **Slot D ← 336 C305** (corrections rank 1; spec at cycle 8; the two
+  claim-bearing 305 gaps).
+- **Slot B ← 344 PKLR** (drafted above; dispatched ahead of the corrections
+  queue for the stated §3b reason and its packet-feeding role — the
+  cycle-8c rule satisfied: the outranking reason is on record).
+
+**Floor 2/4 (341, 344) — §3b's minimum exactly, met not exceeded, and the
+next vacancy should restore margin if an eligible leg is available.**
+FLOOR-TABLE and FIG-TABLE synced (fig89 landed).
+
+### Standing state
+
+341 ALGW (slot C) remains the critical path and holds the CEILING-GATE
+PRIORITY; 343/B1 fires behind its consequence work; the §0c/PUB draft and
+lane-6 selection deadline (the cycle that dispatches 337) is intact and not
+yet triggered — 337 is now reserve rank 1. Escalation #3 + C4 + the
+340-identity evidence: with the user. The 313 packet, 320 packet, ban-wording
+question: with the user, unchanged.
+
+**Reserve queue: 19 undispatched legs (337, 338, 307, 328, 324, 322, 327,
+287, 229, 293, 298, 299, 343, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **12**. Next fresh leg number: **345.**
+
+Nothing in this update lifts a ban. 340's identity makes a parked escalation
+SHARPER for the user without moving it; 342's adverse find is the
+cheap-entrance ban binding, and the creation path is routed to the one
+authority that can buy it. No L1-L4 link moved; Clay stays ~0.05%.
