@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 335 | S1GR | no |
 | B | 348 | POCP | yes |
-| C | 350 | DSSP-B2 | yes |
+| C | 351 | DSSP-B3 | yes |
 | D | 307 | TSCX | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -66,8 +66,9 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig89 | 340 | landed (fig89_route_egrb_v1_ladder.png + evidence.py) |
 | fig90 | — | released (341 landed, no figure shipped; number returns to the pool) |
 | fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
-| fig92 | 350 | live, slot C (B2 resolution study; only if warranted) |
-| fig93+ | — | next free |
+| fig92 | 350 | landed with B2 (or released if unshipped — orchestrator mirrors at INDEX) |
+| fig93 | 351 | live, slot C (B3 mapping-bound study; only if warranted) |
+| fig94+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -17806,7 +17807,17 @@ packet.
 
 **Reserve queue: 18 undispatched legs (349, 328, 345, 346, 324, 322,
 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
-dispatchable: **10**. Next fresh leg number: **351.**
+dispatchable: **10**. Next fresh leg number: **352.** Cycle 10g: C/350
+landed YES at 576e5c9 — enrichment 25.7x-28.5x (log-compactification u =
+-log(1-X) composing with ONE fixed Boyd map, L=16 from a banked sweep, not
+per-row tuned; smooth control reproduced FIRST at 82.3x; baseline reproduced
+mode-for-mode; both lesson-90 controls able to fire didn't, including the
+one ruling out compression-always-wins). B3 proceeds on the enriched basis:
+**leg 351 = brick B3 (DSSP-BS), drafted BY REFERENCE to the plan's §5.1 B3
+entry**, C ← 351 — the critical path. Brick-sizing ruling: the plan's
+per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
+one principled leg reports, never pads (350's recommendation, adopted).
+Floor 2/4 (348, 351).
 
 **LCB2 accumulator (micro-corrections awaiting a batch leg; drafted when it
 holds 2-3 items):** (1) writeup/data/p2_route_fus_v1.json
@@ -17873,3 +17884,81 @@ dispatchable: **10**. Next fresh leg number: **351.**
 
 Nothing in this update lifts a ban. Four prose/cite sites now match their
 banked sources — record hygiene; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10g) — 350/B2 YES ABSORBED (25.7x-28.5x
+ENRICHMENT ON REAL CONTROLS); LEG 351 = BRICK B3, DISPATCHED INTO C
+(CRITICAL PATH); BRICK SIZINGS RULED UPPER BOUNDS
+
+Written from the same detached lineage, resynced to origin/main = 576e5c9.
+
+### 350 DSSP-B2 gate YES, absorbed at full strength
+
+The discipline held everywhere it mattered: the smooth-control separation
+reproduced FIRST (82.3x exactly) before anything new was touched; the full
+plain-Chebyshev baseline reproduced mode-for-mode (823/1482/3564/7086/14149);
+the construction principled rather than fitted (the Boyd map's L=16 chosen
+from a banked sweep, shared across every κ row); and the two falsification
+controls both able to come out otherwise — κ=0 costing MORE under the map
+(15 vs 2) and, critically, 313's own smooth control ALSO costing more
+through the same map (31 vs 10), which rules out "compression always wins"
+as the trivial explanation. Enrichment factor 25.7x-28.5x at the identical
+1e-6 truncation, mildly increasing and saturating with κ. New
+solver/dssp_basis.py registered additively. Endorsed without amendment.
+
+### Ruling — brick sizings are UPPER BOUNDS (350's recommendation, adopted)
+
+350 landed in one leg against the plan's 2-leg sizing and reported the fact
+instead of deciding it — correct. Adopted as the standing reading for every
+remaining brick: **the plan's per-brick leg counts are upper bounds, not
+floors.** A brick that completes in fewer legs on a principled first attempt
+reports and closes; a brick that needs its full sizing takes it; a brick
+that needs MORE stops and reports the overrun to the DM before continuing —
+overruns are ruling material, never quietly absorbed.
+
+### Refill — slot C ← leg 351 = brick B3 (DSSP-BS), the critical path
+
+```
+### 351 — ROUTE-DSSP-B3: BRICK B3 (DSSP-BS) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: construction]
+**Thesis and gate.** The spec IS the plan's §5.1 B3 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does
+Biot-Savart in the compactified variable stay on the MULTIPLIER side of the
+nonlocal-output rule — ‖V‖_∞ and ‖∇V‖_∞ finite and measured on a
+Type-I-enveloped Ω, and leg 332's mapping bound non-vacuous in the CHOSEN
+unweighted space (ratio strictly inside (0,1), as 332 measured 0.10094 and
+0.13863 in its own)? The no-branch is 331's measured failure mode
+transposed: report the magnitude and route the blocker — never tune the
+weight to hide it. Proceeds on 350's ENRICHED basis.
+**Territory.** As the plan's B3 entry states (new solver/ module + runner +
+data JSON), PLUS solver/capabilities.py + test_capabilities.py (additive
+registration, the cycle-4 rule), writeup/figures/fig93* (only if
+warranted), writeup/novelty/leg_351.md, experiments/journal/leg_351.md.
+Reads 350's landed module and 332/331's banked records; edits none.
+**Difficulty.** heavy (plan sizing 2 legs — an UPPER BOUND per this cycle's
+ruling; overruns stop and report)
+**Preconditions:** Leg 350/B2 landed (TRUE, 576e5c9 — enriched-basis branch).
+```
+
+**Floor 2/4 (348, 351) — §3b's minimum.** FLOOR-TABLE synced (C 350→351);
+FIG-TABLE: fig92 to B2's landed state (orchestrator mirrors at INDEX),
+fig93 conditionally allocated to 351.
+
+### Standing state
+
+A/335 mid-diagnosis (still no stall called — but this is now several cycles;
+orchestrator: a one-line status on whether its background diagnostic has a
+bounded ETA would be welcome in the next report); B/348 POCP; D/307 TSCX.
+349 on 348; 345 on 328; next vacancy: 328 ORC5. With the user: cycle-10
+packet (complete), C4/escalation-#3, 313 packet + ban-wording, 320 packet.
+
+**Reserve queue: 18 undispatched legs (349, 328, 345, 346, 324, 322, 327,
+287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **10**. Next fresh leg number: **352.**
+
+Nothing in this update lifts a ban. B2's enrichment is resolution
+apparatus under the Tier-2 ceiling; B3 asks whether the nonlocal step stays
+safe; no L1-L4 link moved; Clay stays ~0.05%.
