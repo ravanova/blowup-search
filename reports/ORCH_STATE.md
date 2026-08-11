@@ -19,14 +19,28 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8b (four-slot contract)
+## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8c (four-slot contract)
 
-`origin/main` at `ef2c35e`, merge gate **PASS**. Four slots live: **A=331 NLH** (route 1,
+`origin/main` at `d38de3f`, merge gate **PASS**. Four slots live: **A=331 NLH** (route 1,
 critical path, still running, no stall), **B=329 EGMF** (arbitrary-precision recheck,
 dispatched cycle 8, running), **C=323 CENV** (MF1 spelling-variant census resume, dispatched
-cycle 8b, running), **D=326 CTRX** (resume, GAP-326-A first, dispatched cycle 8, running).
-Floor 4/4. Decision Maker reachable, last two rulings `dedfd57` (cycle 8) and `ef2c35e`
-(cycle 8b) both integrated cleanly by fast-forward.
+cycle 8b, running), **D=330 PVLX** (does Pineau-Vicol's Liouville theorem reach the screened
+object, dispatched cycle 8c, running). Floor 4/4. Decision Maker reachable, last three rulings
+`dedfd57` (cycle 8), `ef2c35e` (cycle 8b), `d38de3f` (cycle 8c) all integrated cleanly by
+fast-forward.
+
+**Slot D turned over twice this cycle:** leg 326 (CTRX) landed gate YES-(ii) — Chae-Tsai
+(arXiv:1304.7414v1) does NOT reach the screened Navier-Stokes object, it is an Euler-only
+theorem (all four of its theorems hypothesize its rescaled-Euler eq. 1.6; its own stated
+generalization only varies two real constants, never gaining a viscosity term). **This means
+leg 313's parked escalation packet loses its only theorem** — what remains is leg 260's
+dissolved argument and an empty seed set. Leg 326 correctly declined to adjudicate whether the
+weakened packet still supports the ban wording question, routing that to the user, and also
+flagged a new, not-yet-adjudicated candidate (arXiv:2607.09619v2, Pineau-Vicol) that might bear
+on the same object. The DM refilled slot D with leg 330 to adjudicate that candidate, jumping it
+ahead of the four drafted correction legs (335-338) on a stated three-part justification, so the
+user receives the complete, adjudicated packet update in one piece rather than in dribbles — see
+NEEDS THE USER below, refreshed per the DM's explicit cycle-8c directive.
 
 **This cycle's landings, all audited and pushed:** leg 221 (BVRR) — gate YES on the repair
 itself (0/256233 calls moved because of it), but flagged one real unresolved gap outside its
@@ -45,10 +59,15 @@ reserve queue. Four correction legs (335 S1GR, 336 C305, 337 C318, 338 LCB1) dra
 verifier findings, not yet dispatched. An over-read closure (#6) correction is **deferred to
 331's landing**, so one leg can correct both measured sites rather than splitting the evidence.
 
-**NEEDS THE USER:** unchanged — leg 313's escalation packet + the DSS ban-wording question
-remain bundled and explicitly routed to the user by the DM's own text. No ban touched,
-`plan_of_record.py` untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain parked, not
-merged — do not merge them without the user's ruling.
+**NEEDS THE USER — packet content changed this cycle, not yet final:** leg 313's escalation
+packet + the DSS ban-wording question remain bundled and explicitly routed to the user by the
+DM's own text ("the DM does not rule on ban scope"). The packet's only theorem (Chae-Tsai) is
+now shown not to bite (see above) — this is new evidence appended to the existing parked item,
+not a fresh escalation. **Do not treat this as ready for a final ruling yet**: leg 330 is in
+flight adjudicating a second candidate theorem (Pineau-Vicol) that could also bear on the same
+object, and the DM's directive is for the complete, adjudicated packet to reach the user in one
+piece once 330 answers. No ban touched, `plan_of_record.py` untouched. `leg/313-sdss-v1` and
+`leg/320-mtsc-v1` remain parked, not merged — do not merge them without the user's ruling.
 
 **Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
 this environment — see Environment notes). A fresh orchestrator session must re-arm its own

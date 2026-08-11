@@ -1,19 +1,35 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 8b, four-slot contract.
-`origin/main` at `ef2c35e`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-11 — same orchestrator session, cycle 8c, four-slot contract.
+`origin/main` at `d38de3f`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
 ## ⚠ NEEDS YOU
 
-Unchanged from prior cycles, nothing new this cycle:
-
-1. **Leg 313 (SDSS) + leg 320 (MTSC) — bundled escalation packet, parked.**
-   The DM's own text routes the DSS ban-wording question to the user rather
-   than ruling on it ("the DM does not rule on ban scope"). Both branches
-   (`leg/313-sdss-v1`, `leg/320-mtsc-v1`) remain unmerged pending your ruling.
-   No ban touched, `plan_of_record.py` untouched.
+1. **Leg 313 (SDSS) + leg 320 (MTSC) — bundled escalation packet, parked —
+   packet content UPDATED this cycle, ruling still needed, not yet final.**
+   The DM's own text routes the DSS ban-wording question to you rather than
+   ruling on it ("the DM does not rule on ban scope"). What changed: **leg
+   326 read Chae-Tsai (arXiv:1304.7414v1) in full and found it does NOT reach
+   the screened Navier-Stokes object — the packet's only theorem is shown
+   silent.** Deciding clause: all four of Chae-Tsai's theorems hypothesize a
+   solution of their eq. (1.6), the rescaled **Euler** system (no Laplacian);
+   the paper displays the Navier-Stokes rescaled equation separately and
+   proves nothing about it, and the authors' own stated generalization (eq.
+   2.9) only varies two real constants, never gaining a viscosity term. What
+   remains in the packet: leg 260's dissolved argument, plus an empty seed
+   set that leg 313 itself called "an availability fact, not an
+   impossibility." **This is not yet the final packet update** — leg 326 also
+   located a new, not-yet-adjudicated candidate (arXiv:2607.09619v2,
+   Pineau-Vicol) that might bear on the same object; leg 330 (dispatched this
+   cycle, in flight) is reading it in full to determine whether it reaches
+   the screened object. The DM's directive: the complete packet — Chae-Tsai
+   out, Pineau-Vicol adjudicated — should reach you together once 330
+   answers, not in dribbles. **Do not rule yet on the strength of this
+   partial update; a follow-up will land once 330 completes.** Both branches
+   (`leg/313-sdss-v1`, `leg/320-mtsc-v1`) remain unmerged, untouched. No ban
+   touched, `plan_of_record.py` untouched.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
@@ -68,6 +84,22 @@ confirmed by diff:**
   correction (#6) to leg 331's landing, so one correction leg can address both
   measured sites on both answers rather than splitting the evidence across two
   legs.
+- **Cycle 8c** (`d38de3f`): absorbed 326's YES-(ii) (Chae-Tsai does not bite,
+  see NEEDS-YOU above); endorsed leg 326's two self-corrections (GAP-326-A —
+  the DM's own cycle-8 characterization of a controlled zero as a
+  "term-conjunction artefact" is corrected to "an unbanked measurement,"
+  now banked with its control: exactly 1 of 4 control-set records is
+  reachable by {nonexistence, Liouville, rigidity} — Pineau-Vicol; GAP-326-B —
+  a prior "new to this repository" claim about Pineau-Vicol was false, leg
+  262 had already read it four days earlier); refilled slot D←330 PVLX,
+  jumping ahead of correction legs 335-338 on a three-part stated
+  justification (route-4 de-risk timing, packet completeness for the user,
+  floor 4/4 vs 3/4 with a corrections pick); directed the NEEDS-YOU summary
+  refresh reflected above.
+
+**Landed this cycle, not yet superseded:** leg 326 (CTRX) — gate **YES-(ii)**
+at `c541cdb`. See NEEDS-YOU above for the full Chae-Tsai finding; territory
+audited clean (exactly its 3 declared files).
 
 **Currently running, all four slots:**
 
@@ -76,11 +108,12 @@ confirmed by diff:**
 | A | 331 | NLH — nonlocal machinery test (critical path) | cycle 7, still running, no stall |
 | B | 329 | EGMF — arbitrary-precision recheck of B4_egm/E_egm rows | cycle 8 |
 | C | 323 | CENV — MF1 spelling-variant census resume (real WIP from spend-limit kill, branch `leg/323-cenv-v1`) | cycle 8b |
-| D | 326 | CTRX — resume, GAP-326-A executed first | cycle 8 |
+| D | 330 | PVLX — does Pineau-Vicol's Liouville theorem reach the screened object? Feeds directly into the NEEDS-YOU packet update above. | cycle 8c |
 
-Reserve: 22 undispatched, 14 immediately dispatchable (335, 336, 337, 338, 307,
-328, 324, 322, 327, 287, 229, 293, 298, 299 in rank order). Next fresh leg
-number: **339**. No ban lifted this cycle; no L1→L4 link moved.
+Reserve: 21 undispatched, 14 immediately dispatchable (335, 336, 337, 338, 307,
+328, 324, 322, 327, 287, 229, 293, 298, 299 in rank order — corrections
+335-338 hold ranks 1-4 for the next vacancy). Next fresh leg number: **339**.
+No ban lifted this cycle; no L1→L4 link moved.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
 
