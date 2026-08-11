@@ -1,0 +1,140 @@
+{
+  "answers": {
+    "S1": {
+      "cap_apparatus_shape": {
+        "direction_of_this_evidence": "operator=algebraic vs space=Gaussian (opposite combination to S1's question, space=algebraic); read as evidence about the SHAPE requirement, not as a direct measurement of the algebraic-weight case",
+        "finding": "Lam^{2a} psi_m (nonlocal operator symbol) forces an ALGEBRAIC tail x^{-(1+2a+2m)} against Breden-Chu's Gaussian weight e^{x^2/4}; the operator does not map the machinery's space into itself, and the Gauss-Hermite/Laguerre quadrature rules (exact for polynomial x Gaussian) lose exactness against the algebraic tail (rule error 0.34-0.76 at 20-60% nonlocality vs 1e-12 local control)",
+        "lesson_invoked": "lesson 87: a certification method has a shape, and the shape is a property of the operator, not the object -- Gauss-Hermite/Laguerre exactness is tied to the Gaussian weight specifically",
+        "measured_exponents": {
+          "alpha=0.25": 1.507674,
+          "alpha=0.5": 2.012245,
+          "alpha=0.75": 2.517908
+        },
+        "predicted_exponents": {
+          "alpha=0.25": 1.5,
+          "alpha=0.5": 2.0,
+          "alpha=0.75": 2.5
+        },
+        "source": "experiments/journal/leg_331.md",
+        "z1_crosses_1_at_finite_t": true
+      },
+      "ell1w_crossover": {
+        "ban_text_locator": "plan_of_record.py ~line 867-900 (stage-V re-posed ban + weight-exponent tuning ban + weight-family sweep ban)",
+        "banned_in_plan_of_record": true,
+        "closed_form_vs_measured_gap_cokernel": 0.0012000000000000899,
+        "closed_form_vs_measured_gap_kernel": 0.0024000000000001798,
+        "cokernel_fit_exponent": 1.0012,
+        "divergence_curve_minimum_at_s": 1.0,
+        "divergence_curve_minimum_exponent": 0.639,
+        "kernel_fit_exponent": 2.0024,
+        "measured_crossover_s": 1.0,
+        "no_window": true,
+        "s_cokernel_boundary_closed_form": 1.0012,
+        "s_kernel_boundary_closed_form": 1.0024000000000002,
+        "source": "PHASE2_P2_NOTES.md (leg 51 ~line 3280-3360, leg 52 ~line 3390-3470)",
+        "swept_families": [
+          "flat",
+          "algebraic (9 exponents)",
+          "geometric"
+        ],
+        "window_empty_by": 0.606
+      },
+      "gate": "DIES",
+      "lift_condition_evidence_packet_assembled": false,
+      "mechanism_summary": "The algebraically weighted space is not hypothetical: it has already been realized in three independent lanes and each has already died, for three different mechanisms. (i) Sup-norm/collocation lane (Route-D, decay_grading.py/decay_collocation.py/holder_norms.py, 11+ legs): exhaustively audited (leg 126, 1686/1686 configs), a=0-only, best case Z1=6.0424, 6.04x short of closing even at theoretical optimum. (ii) Coefficient/ell^1_w lane (leg 51/52, extending the banned leg-54 realization with a tunable algebraic exponent s): swept across flat, 9 algebraic exponents, and geometric weight families; kernel-in-space and cokernel-bounded failure modes swap exactly at s=1 with no window at any exponent; re-attempting this sweep is itself explicitly banned in plan_of_record.py. (iii) Origin-conjugated/Mellin lane (legs 163/176): already uses an algebraic (polynomial, (1+xi^4)) weight and still dies, for the orthogonal a=0-only-exactness reason. A fourth line of evidence (leg 331) shows the CAP apparatus's own exactness (Gauss-Hermite/Laguerre quadrature) is tied to the Gaussian weight's shape specifically (lesson 87) -- so a coherent algebraic-weight CAP formulation is not merely conceivable, it is exactly what Route-D already built and exhausted. Does the CAP apparatus have a coherent formulation in the algebraic weight: YES, it has one (Route-D), and it has already been measured dead at full strength.",
+      "origin_h2": {
+        "dies_because": "a=0 exactness only (exact CLM profile Omega(y)=-y/(y^2+1/4)); for a>0 Xu proves only a conditional two-line Adm(a) inclusion, no resolvent, no invertibility, no gap; HL_S2_nonsymmetric is not a CLM profile and inherits none of it",
+        "is_already_algebraic": true,
+        "mechanism_is_orthogonal_to_weight_shape": true,
+        "source": "experiments/journal/leg_176.md",
+        "weight_kind": "algebraic (Mellin): ||phi||^2_X ~ Int_0^inf (1+xi^4) |phihat|^2 dxi"
+      },
+      "reason_no_packet": "S1 answers DIES; per this leg's gate spec, dies -> name mechanism at full strength, lift condition stays unmet, no packet is assembled, and the deferred section-3 build is NEVER drafted",
+      "route_d": {
+        "a0_only": true,
+        "admissible_band": "0 <= s < 0.394 (theorem on A21=0, measured otherwise)",
+        "covered": 1686,
+        "exhaustive": true,
+        "inadmissible_1": "0.394 <= s < 1.0 (target leaves its own space)",
+        "inadmissible_2": "s >= 1.0 (target out AND tail kernel leaves as cokernel functional enters dual)",
+        "measured": 510,
+        "shortfall_factor": 6.0424,
+        "source": "experiments/journal/leg_126.md",
+        "structural": 1032,
+        "theorem": 144,
+        "total_configs": 1686,
+        "z1_at_theoretical_optimum": 6.0424
+      }
+    },
+    "S2": {
+      "composition_gate": "DISSOLVES",
+      "dss_position": {
+        "dss_class_locator": "leg_253.md:124",
+        "dss_class_verdict_in_leg253": "NARROWED, not excluded: survives only as non-axisymmetric, lambda significantly > 1, profile not in L^inf_t L^3",
+        "hierarchy": "SS (subset of) RSS (subset of) RDSS ... DSS strictly broader than exactly-backward-self-similar (SS)",
+        "hierarchy_locator": "leg_253.md:106",
+        "leg260_target_locator": "experiments/journal/leg_260.md (NS3D-DSS-NONAXI-LAMBDA-LARGE)",
+        "leg260_target_matches_surviving_corner": true,
+        "never_inferred_from_weight_answer": true,
+        "nrs_hypothesis": "U in L^3(R^3), weak solution of Leray's system (exactly backward self-similar U) => U == 0",
+        "nrs_locator": "leg_253.md:30",
+        "position": "NRS/Tsai's own theorems are stated for exactly-backward-self-similar (SS) profiles, not for DSS profiles at lambda significantly larger than 1; leg 253 already found this the ONE surviving corner of the DSS class precisely because NRS/Tsai (and the Chae-Wolf/axisymmetry compositions) do not reach it. This is an ansatz-class question, independent of any weight answer: even if the L^3 composition survived re-derivation in the algebraic weight (S2's DISSOLVES verdict says it does not), it would still be answering an SS question about a DSS target.",
+        "source": "leg/253-nrsx-v1:experiments/journal/leg_253.md (PARKED, UNMERGED -- escalated to user, branch pushed, main untouched; cited here read-only, NOT treated as a banked repository fact)",
+        "tsai_locator": "leg_253.md:31",
+        "tsai_thm1_hypothesis": "U in L^q(R^3), q in (3,inf] (exactly backward self-similar) => U constant, ==0 if q<inf"
+      },
+      "rederivation": {
+        "agrees_with_leg260_p3_s1_crossing": true,
+        "l3_integrable_threshold": "tail_exponent < -1  <=>  sigma > 1",
+        "l3_tail_exponent_target": -1.0,
+        "l3_tail_exponent_witness": -7.0,
+        "leg260_shell_ratio_at_p3": 1.000027,
+        "sigma_target_source": "experiments/journal/leg_260.md:56 (Chae-Wolf Thm 1.1, |u|<=C/(sqrt(-t)+|x|))",
+        "sigma_target_type_I": 1.0,
+        "sigma_witness_gaussian": 3.0,
+        "sigma_witness_source": "experiments/journal/leg_261.md:193-194 (C3, Biot-Savart on H^2(mu) witness)",
+        "target_at_boundary": true,
+        "target_is_integrable": false,
+        "this_legs_shell_ratio_at_sigma1": 0.6931471805599453,
+        "verdict": "DISSOLVES: re-derived on the target's own (algebraic-weight-native, Type-I) decay rate rather than the Gaussian-basis witness rate, u sits EXACTLY at the L^3 log-divergent boundary (sigma=1, same crossing leg 260 already measured at p=3/s=1), not inside L^3; leg 261's u in L^3 claim used sigma=3, a property of the Gaussian witness (fast-converging Biot-Savart dipole moment), not of the algebraically-decaying target",
+        "witness_is_integrable": true
+      },
+      "summary": "Re-derived in the algebraic weight using the target's own Type-I decay rate (leg 260, sigma=1) rather than leg 261's Gaussian-witness Biot-Savart rate (sigma=3): u sits exactly at the L^3 log-divergent boundary, not inside L^3, so the hypothesis the NRS/Tsai composition needs is not established. 'A wall shown to be a weight artifact is a map correction, not movement.' Separately and without inferring from the weight answer: NRS/Tsai's own theorems bind exactly-backward-self-similar (SS) profiles; leg 260's target is DSS at lambda significantly larger than 1, which leg 253 (parked, unmerged) already found to be the one class NOT reached by NRS/Tsai's stated hypotheses. Both readings converge on the same conclusion by independent routes -- weight-dependent decay re-derivation, and weight-independent ansatz-class mismatch -- that the wall does not bind leg 260's actual screened object."
+    },
+    "consequences": {
+      "deferred_section3_build": "NEVER drafted, per this leg's own gate spec and per leg_334.md:266-270 (DM: the Tier-2->Tier-3 clause is reserved to a section-3 build drafted ONLY after 341 reports, and B9 was already STRUCK pending this report). With S1=DIES, the section-3 build's precondition (an escaped space) does not exist; the Tier-2 ceiling on every route-4 gate stays unchanged.",
+      "leg_334_clause_a": "Leg 334's clause (a) is OWNED-BY-341-PENDING (DM cycle-9 ruling a17554c, leg_334.md:236-246): it names the space and cites this leg's answer if landed. This leg's answer: S1 DIES. Clause (a) should read the weight question as CLOSED-NO (the algebraic space does not escape, no lift-condition packet exists), leaving clause (a)'s NRS/Tsai position and sec 26/4.1 basis-resolution difficulty unaffected (those were never this leg's territory, per leg_334.md:272-274).",
+      "s_equals_1_suspicious_agreement_flagged": "leg_334.md:261-265 flags that leg 260 (space sharp at s>1), leg 313 (crossing measured at s=1), and leg 334's own arithmetic (s=1) are three agreeing derivations that are NOT obviously independent, with the explicit instruction that 'leg 341 should test it, not inherit it.' This leg's own s1_ell1w_crossover finding is a DIFFERENT s=1 (a spectral kernel/cokernel property of an abstract tail operator on the coefficient basis, leg 51/52) from leg 260/313/334's s=1 (the target profile's own L^p/weighted-L^2 integrability threshold) -- numerically coincident, mechanistically unrelated quantities. Recorded as a second coincidence at s=1, not treated as confirmation of either."
+    }
+  },
+  "gate": {
+    "S1": "DIES",
+    "S2_composition": "DISSOLVES",
+    "S2_dss_position_stated_independently": true
+  },
+  "honesty": {
+    "all_numbers_transcribed_or_elementary_recomputation": true,
+    "clay_odds": "~0.05%, unchanged",
+    "l1_to_l4_chain_moved": false,
+    "no_ban_lifted": true,
+    "no_construction": true,
+    "plan_of_record_not_edited": true,
+    "section3_build_not_drafted": true
+  },
+  "leg": 341,
+  "route": "ALGW",
+  "self_test": {
+    "ALL_PASS": true,
+    "s1_ell1w_boundaries_bracket_s1": true,
+    "s1_ell1w_no_window": true,
+    "s1_origin_h2_is_algebraic_and_dies": true,
+    "s1_route_d_partition_exhaustive": true,
+    "s1_route_d_shortfall_gt_1": true,
+    "s2_dss_hierarchy_locator_present": true,
+    "s2_dss_never_inferred_from_weight": true,
+    "s2_l3_tail_exponent_target_matches_closed_form": true,
+    "s2_target_at_l3_boundary_not_inside": true,
+    "s2_witness_would_have_been_integrable": true
+  },
+  "title": "THE FOURTH SPACE -- does 260's algebraically weighted space escape the three-realization death, and does the NRS/Tsai composition survive the weight change?"
+}
