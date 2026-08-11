@@ -206,6 +206,27 @@
       {"query": "au:Katz_N AND au:Pavlovic_N", "returned": 0, "diagnosis": "BROKEN INSTRUMENT — the Katz-Pavlovic dyadic-model paper exists and is cited by name in the e-print source quoted above. The au: conjunction form is the broken part, not the literature.", "banked_as_absence": false},
       {"query": "au:Miller_E AND all:\"Fourier-restricted\"", "returned": 0, "diagnosis": "BROKEN INSTRUMENT — arXiv:2307.03434 by Evan Miller was retrieved successfully by id_list moments later. Same fault class: au: conjunctions are unreliable on this endpoint.", "banked_as_absence": false}
     ],
+    "battery_defeated_by_rate_limiting": {
+      "queries_never_returned": [
+        "all:\"shell model\" AND all:\"computer-assisted\"",
+        "all:\"dyadic model\" AND all:\"interval arithmetic\"",
+        "all:\"shell model\" AND all:\"rigorous numerics\"",
+        "all:\"shell model\" AND all:\"discretely self-similar\"",
+        "all:\"dyadic model\" AND all:\"discretely self-similar\"",
+        "abs:\"model equations\" AND abs:\"Navier-Stokes\" AND abs:\"blowup\"",
+        "abs:\"how much\" AND abs:\"Navier-Stokes\" AND abs:\"model\"",
+        "all:\"supercriticality barrier\"",
+        "au:Cheskidov_A AND au:Dai_M AND au:Friedlander_S"
+      ],
+      "cause": "sustained HTTP 429 across 8 retries per query with backoff to 90s, over roughly 25 minutes; job stopped",
+      "status": "REFUSAL TO MEASURE — nothing banked from any of them, and no absence claimed",
+      "why_this_does_not_weaken_the_gate": "no claim in this leg rests on these queries. The gate is answered by positive findings from queries that DID return, cross-checked three independent ways. The certification-cell question these nine would have addressed is exactly the one routed to the DM as explicitly NOT measured here, so their absence is consistent with what this leg claims rather than a hole in it. A future leg wanting that cell must run them, not inherit them."
+    },
+    "absence_from_arxiv_not_from_literature": {
+      "query": "ti:\"vector model for the Euler equations\"",
+      "returned": 0,
+      "reading": "Friedlander-Pavlovic, 'Blowup in a three-dimensional vector model for the Euler equations', CPAM 57 (2004), is cited by name as [FP] in the e-print source of math/0601074 and is reduced by Cheskidov to the same system. The correct reading is absence from arXiv, NOT absence from the field."
+    },
     "mf1_spelling_variants": "queries issued in hyphenated Navier-Stokes form; the LaTeX double-hyphen variant 'Navier--Stokes' is confirmed present in this leg's own target cell (Miller arXiv:2307.03434's abstract), reached via id_list rather than string match",
     "mf2_links_not_counts": "every claim carries an arXiv identifier, title, author list and date; no count anywhere in this leg is load-bearing",
     "eprint_source_fetches": [
