@@ -1,0 +1,573 @@
+{
+  "leg": 318,
+  "route": "DECR",
+  "purpose": "contract \u00a70a novelty / prior-art pass, run BEFORE any mathematics",
+  "endpoint": "http://export.arxiv.org/api/query?",
+  "mf1_note": "every Navier-Stokes phrase issued in both `Navier-Stokes` and the LaTeX double-hyphen `Navier--Stokes`; `self similar` alongside `self-similar`",
+  "instrument_controls": [
+    {
+      "query": "all:\"self-similar blow-up\"",
+      "total": 84,
+      "ids": [
+        "1411.5505v1",
+        "2209.09886v1",
+        "2004.05650v1",
+        "0902.1090v1",
+        "2511.02511v1"
+      ],
+      "titles": [
+        "Self-similar blow-up solutions of the KPZ equation",
+        "Exactly self-similar blow-up of the generalized De Gregorio equation",
+        "Self-similar blow-up profiles for a reaction-diffusion equation with strong weighted reaction",
+        "Incomplete self-similar blow-up in a semilinear fourth-order reaction-diffusion equation",
+        "Self-similar blow-up solutions for the supercritical parabolic Hardy-H\u00e9non equation"
+      ],
+      "control": "positive_single",
+      "passed": true,
+      "why": "a phrase that must return many; if this is small the endpoint is not answering"
+    },
+    {
+      "query": "all:\"interval arithmetic\"",
+      "total": 222,
+      "ids": [
+        "1704.04998v1",
+        "1611.09567v1",
+        "cs/0210015v2",
+        "1802.08558v1",
+        "2307.06953v1"
+      ],
+      "titles": [
+        "Interval Arithmetic and Interval-Aware Operators for Genetic Programming",
+        "Moore: Interval Arithmetic in Modern C++",
+        "New Developments in Interval Arithmetic and Their Implications for Floating-Point Standardization",
+        "Moore: Interval Arithmetic in C++20",
+        "A framework to test interval arithmetic libraries and their IEEE 1788-2015 compliance"
+      ],
+      "control": "positive_single_b",
+      "passed": true,
+      "why": "second single-phrase positive control on a different subject"
+    },
+    {
+      "query": "all:\"quasihyperbolic viscous enclosure criterion of Andronov\"",
+      "total": 0,
+      "ids": [],
+      "titles": [],
+      "control": "negative_nonsense",
+      "passed": true,
+      "why": "a phrase that must return nothing; if this is nonzero the endpoint is fuzzy-matching"
+    },
+    {
+      "query": "all:\"Taylor model\" AND all:\"interval arithmetic\"",
+      "total": 3,
+      "ids": [
+        "cs/0602005v1",
+        "2401.17973v2",
+        "2003.08095v2"
+      ],
+      "titles": [
+        "A library of Taylor models for PVS automatic proof checker",
+        "Validated numerics for algebraic path tracking",
+        "Computation of Tight Enclosures for Laplacian Eigenvalues"
+      ],
+      "control": "anded_control_pair",
+      "passed": true,
+      "why": "THE MF3 TEST: two ANDed quoted phrases that are KNOWN to intersect. If this is 0 the AND operator is broken and every ANDed zero below is uninterpretable; if it is > 0 the AND operator works and an ANDed zero is a MEASUREMENT (absence)."
+    },
+    {
+      "query": "all:\"self-similar\" AND all:\"blow-up\"",
+      "total": 251,
+      "ids": [
+        "2605.19716v2",
+        "2603.26715v5",
+        "0902.1090v1",
+        "1411.5505v1",
+        "2209.09886v1"
+      ],
+      "titles": [
+        "Self-similar blow-up solutions of $d$-dimensional incompressible Euler equations with $C^{1,\\left(1-2/d\\right)-}$ velocity",
+        "2D inviscid Boussinesq equations and 3D axisymmetric Euler equations: (1) A unification ($Em$), (2) Finite-time blow-up of two unified $(1+1)$D systems rigorously derived from ($Em$)",
+        "Incomplete self-similar blow-up in a semilinear fourth-order reaction-diffusion equation",
+        "Self-similar blow-up solutions of the KPZ equation",
+        "Exactly self-similar blow-up of the generalized De Gregorio equation"
+      ],
+      "control": "anded_control_pair_b",
+      "passed": true,
+      "why": "second ANDed control, broad, to distinguish 'AND works but narrows hard' from 'AND is broken'"
+    }
+  ],
+  "and_operator_verdict": "AND-of-quoted-phrases WORKS on this endpoint at this time; an ANDed zero below is a MEASUREMENT of absence, not an instrument fault (MF3 as handed to this leg is REFUTED here, independently of leg 314's refutation)",
+  "queries": {
+    "A_criticality": [
+      {
+        "query": "all:\"critical dissipation\" AND all:\"self-similar\"",
+        "total": 3,
+        "ids": [
+          "2209.00153v1",
+          "2010.09065v2",
+          "cond-mat/0403152v2"
+        ],
+        "titles": [
+          "Global regularity and decay behavior for Leray equations with critical-dissipation and Its Application to Self-similar Solutions",
+          "Long-time behavior of scalar conservation laws with critical dissipation",
+          "Crossover component in non critical dissipative sandpile models"
+        ]
+      },
+      {
+        "query": "all:\"supercritical dissipation\" AND all:\"blow-up\"",
+        "total": 3,
+        "ids": [
+          "1412.3391v1",
+          "2411.15040v1",
+          "1809.04373v2"
+        ],
+        "titles": [
+          "A Discrete Model for Nonlocal Transport Equations with Fractional Dissipation",
+          "Regularity, uniqueness and the relative size of small and large scales in SQG flows",
+          "Global smoothness for a 1D supercritical transport model with nonlocal velocity"
+        ]
+      },
+      {
+        "query": "all:\"scaling critical\" AND all:\"dissipation\"",
+        "total": 12,
+        "ids": [
+          "2503.11095v1",
+          "2602.19846v4",
+          "1908.11524v2",
+          "2309.05844v2",
+          "2606.13065v1"
+        ],
+        "titles": [
+          "Stationary solutions to the critical and super-critical quasi-geostrophic equation in the scaling critical Sobolev space",
+          "Sharp non-uniqueness for the Navier-Stokes equations in scaling critical spaces",
+          "Global solutions to the dissipative quasi-geostrophic equation with dispersive forcing",
+          "On well-posedness of a mildly dissipative family of active scalar equations in borderline Sobolev spaces",
+          "Uniqueness of the dissipative SQG without time-continuity assumption"
+        ]
+      },
+      {
+        "query": "all:\"critical dissipation\" AND all:\"blow up\"",
+        "total": 2,
+        "ids": [
+          "1009.0540v1",
+          "1408.5499v1"
+        ],
+        "titles": [
+          "Regularity and blow up for active scalars",
+          "Global existence of the two-dimensional QGE with sub-critical dissipation"
+        ]
+      }
+    ],
+    "B_enclosed_instances": [
+      {
+        "query": "all:\"computer-assisted proof\" AND all:\"self-similar\"",
+        "total": 7,
+        "ids": [
+          "2308.01528v3",
+          "2201.06780v3",
+          "2607.15256v1",
+          "2604.09949v1",
+          "2509.25116v2"
+        ],
+        "titles": [
+          "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+          "Asymptotic self-similar blow-up profile for three-dimensional axisymmetric Euler equations using neural networks",
+          "Analytic finite-rank corrections for singularly weighted estimates in a computer-assisted proof of 3D Euler singularity",
+          "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+          "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation"
+        ]
+      },
+      {
+        "query": "all:\"computer assisted\" AND all:\"self similar\"",
+        "total": 20,
+        "ids": [
+          "2410.05480v2",
+          "2406.16597v3",
+          "2308.01528v3",
+          "2201.06780v3",
+          "2305.05660v2"
+        ],
+        "titles": [
+          "Self-Similar Singular Solutions to the Nonlinear Schr\u00f6dinger and the Complex Ginzburg-Landau Equations",
+          "Self-similar blowup for the cubic Schr\u00f6dinger equation",
+          "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+          "Asymptotic self-similar blow-up profile for three-dimensional axisymmetric Euler equations using neural networks",
+          "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data II: Rigorous Numerics"
+        ]
+      },
+      {
+        "query": "all:\"validated numerics\" AND all:\"self-similar\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"interval arithmetic\" AND all:\"self-similar profile\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"computer-assisted proof\" AND all:\"Navier-Stokes\"",
+        "total": 8,
+        "ids": [
+          "1902.00384v1",
+          "2101.03727v2",
+          "2509.25116v2",
+          "2604.09949v1",
+          "2106.13748v3"
+        ],
+        "titles": [
+          "Spontaneous periodic orbits in the Navier-Stokes flow",
+          "Computer-assisted proof for the stationary solution existence of the Navier-Stokes equation over 3D domains",
+          "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+          "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+          "Chaos in stochastic 2d Galerkin-Navier-Stokes"
+        ]
+      },
+      {
+        "query": "all:\"computer-assisted proof\" AND all:\"Navier--Stokes\"",
+        "total": 8,
+        "ids": [
+          "2604.09949v1",
+          "1902.00384v1",
+          "2101.03727v2",
+          "2509.25116v2",
+          "2106.13748v3"
+        ],
+        "titles": [
+          "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+          "Spontaneous periodic orbits in the Navier-Stokes flow",
+          "Computer-assisted proof for the stationary solution existence of the Navier-Stokes equation over 3D domains",
+          "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+          "Chaos in stochastic 2d Galerkin-Navier-Stokes"
+        ]
+      },
+      {
+        "query": "all:\"rigorous numerics\" AND all:\"blow-up profile\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      }
+    ],
+    "C_criterion": [
+      {
+        "query": "all:\"computer-assisted proof\" AND all:\"dissipation\" AND all:\"criterion\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"when the dissipative term\"",
+        "total": 4,
+        "ids": [
+          "1708.05666v1",
+          "cond-mat/0512367v2",
+          "2509.14810v3",
+          "1211.1020v3"
+        ],
+        "titles": [
+          "Ill-posedness of Leray solutions for the ipodissipative Navier-Stokes equations",
+          "Influence of Controlled Viscous Dissipation on the Propagation of Strongly Nonlinear Waves in Stainless Steel Based Phononic Crystals",
+          "Krylov Complexity for Open Quantum System: Dissipation and Decoherence",
+          "Non-dissipative hydrodynamics: Effective actions versus entropy current"
+        ]
+      },
+      {
+        "query": "all:\"dissipative term\" AND all:\"error term\" AND all:\"self-similar\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"self-similar\" AND all:\"viscosity\" AND all:\"perturbative\"",
+        "total": 16,
+        "ids": [
+          "1811.01810v1",
+          "2310.07420v2",
+          "2301.01092v3",
+          "2605.18126v1",
+          "2207.05905v1"
+        ],
+        "titles": [
+          "On the self-similar solution to full compressible Navier-Stokes equations without heat conductivity",
+          "Stability of metric viscosity solutions under Hausdorff convergence",
+          "Vanishing viscosity limit for axisymmetric vortex rings",
+          "Stability of Anomalous Dissipation for the Forced 3D Navier--Stokes Equations under Geometric Perturbations",
+          "Buoyancy segregation suppresses viscous fingering in horizontal displacements in a porous layer"
+        ]
+      },
+      {
+        "query": "all:\"enclosure\" AND all:\"dissipative term\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"criterion\" AND all:\"rigorous enclosure\" AND all:\"blow-up\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      }
+    ],
+    "D_implosion_cell": [
+      {
+        "query": "all:\"implosion\" AND all:\"computer-assisted\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"implosion\" AND all:\"compressible Navier-Stokes\"",
+        "total": 2,
+        "ids": [
+          "2603.10141v2",
+          "2512.18545v2"
+        ],
+        "titles": [
+          "Development of Implosions of Solutions to the Three-Dimensional Degenerate Compressible Navier-Stokes Equations",
+          "Global Regular Solutions of the Degenerate Compressible Navier-Stokes Equations with Large Initial Data of Spherical Symmetry"
+        ]
+      },
+      {
+        "query": "all:\"implosion\" AND all:\"compressible Navier--Stokes\"",
+        "total": 2,
+        "ids": [
+          "2603.10141v2",
+          "2512.18545v2"
+        ],
+        "titles": [
+          "Development of Implosions of Solutions to the Three-Dimensional Degenerate Compressible Navier-Stokes Equations",
+          "Global Regular Solutions of the Degenerate Compressible Navier-Stokes Equations with Large Initial Data of Spherical Symmetry"
+        ]
+      }
+    ],
+    "E_bridge_type": [
+      {
+        "query": "all:\"self-consistent a priori bounds\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      },
+      {
+        "query": "all:\"rigorous numerics\" AND all:\"dissipative PDE\"",
+        "total": 2,
+        "ids": [
+          "math/0005247v1",
+          "1310.3514v3"
+        ],
+        "titles": [
+          "Rigorous Numerics for Partial Differential Equations: the Kuramoto-Sivashinsky equation",
+          "Existence of globally attracting fixed points of viscous Burgers equation with constant forcing. A computer assisted proof"
+        ]
+      },
+      {
+        "query": "all:\"validated\" AND all:\"quasilinear hyperbolic\" AND all:\"computer-assisted\"",
+        "total": 0,
+        "ids": [],
+        "titles": []
+      }
+    ],
+    "F_nrs_tsai": [
+      {
+        "query": "all:\"self-similar\" AND all:\"Leray\"",
+        "total": 29,
+        "ids": [
+          "1901.01510v3",
+          "2203.14648v3",
+          "1812.00957v2",
+          "2209.00153v1",
+          "1509.08177v2"
+        ],
+        "titles": [
+          "$\\varepsilon$-regularity criteria in anisotropic Lebesgue spaces and Leray's self-similar solutions to the 3D Navier-Stokes equations",
+          "Renormalization and a-priori bounds for Leray self-similar solutions to the generalized mild Navier-Stokes equations",
+          "Leray self-similarity equations in fluid dynamics",
+          "Global regularity and decay behavior for Leray equations with critical-dissipation and Its Application to Self-similar Solutions",
+          "Leray's self-similar solutions to the Navier--Stokes equations with profiles in Marcinkiewicz and Morrey spaces"
+        ]
+      },
+      {
+        "query": "all:\"discretely self-similar\" AND all:\"Navier-Stokes\"",
+        "total": 23,
+        "ids": [
+          "1210.2783v2",
+          "1306.0305v5",
+          "1610.09464v2",
+          "1510.07504v1",
+          "1801.08060v1"
+        ],
+        "titles": [
+          "Forward Discretely Self-Similar Solutions of the Navier-Stokes Equations",
+          "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+          "Removing discretely self-similar singularities for the 3D Navier-Stokes equations",
+          "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+          "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality"
+        ]
+      }
+    ]
+  },
+  "zero_audit": [
+    {
+      "cell": "B_enclosed_instances",
+      "query": "all:\"validated numerics\" AND all:\"self-similar\"",
+      "components": [
+        {
+          "phrase": "validated numerics",
+          "total_alone": 298
+        },
+        {
+          "phrase": "self-similar",
+          "total_alone": 8472
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "B_enclosed_instances",
+      "query": "all:\"interval arithmetic\" AND all:\"self-similar profile\"",
+      "components": [
+        {
+          "phrase": "interval arithmetic",
+          "total_alone": 222
+        },
+        {
+          "phrase": "self-similar profile",
+          "total_alone": 146
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "B_enclosed_instances",
+      "query": "all:\"rigorous numerics\" AND all:\"blow-up profile\"",
+      "components": [
+        {
+          "phrase": "rigorous numerics",
+          "total_alone": 274
+        },
+        {
+          "phrase": "blow-up profile",
+          "total_alone": 142
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "C_criterion",
+      "query": "all:\"computer-assisted proof\" AND all:\"dissipation\" AND all:\"criterion\"",
+      "components": [
+        {
+          "phrase": "computer-assisted proof",
+          "total_alone": 291
+        },
+        {
+          "phrase": "dissipation",
+          "total_alone": 39144
+        },
+        {
+          "phrase": "criterion",
+          "total_alone": 30651
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "C_criterion",
+      "query": "all:\"dissipative term\" AND all:\"error term\" AND all:\"self-similar\"",
+      "components": [
+        {
+          "phrase": "dissipative term",
+          "total_alone": 551
+        },
+        {
+          "phrase": "error term",
+          "total_alone": 1991
+        },
+        {
+          "phrase": "self-similar",
+          "total_alone": 8472
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "C_criterion",
+      "query": "all:\"enclosure\" AND all:\"dissipative term\"",
+      "components": [
+        {
+          "phrase": "enclosure",
+          "total_alone": 620
+        },
+        {
+          "phrase": "dissipative term",
+          "total_alone": 551
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "C_criterion",
+      "query": "all:\"criterion\" AND all:\"rigorous enclosure\" AND all:\"blow-up\"",
+      "components": [
+        {
+          "phrase": "criterion",
+          "total_alone": 30651
+        },
+        {
+          "phrase": "rigorous enclosure",
+          "total_alone": 10
+        },
+        {
+          "phrase": "blow-up",
+          "total_alone": 6938
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "D_implosion_cell",
+      "query": "all:\"implosion\" AND all:\"computer-assisted\"",
+      "components": [
+        {
+          "phrase": "implosion",
+          "total_alone": 504
+        },
+        {
+          "phrase": "computer-assisted",
+          "total_alone": 1892
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    },
+    {
+      "cell": "E_bridge_type",
+      "query": "all:\"self-consistent a priori bounds\"",
+      "components": [
+        {
+          "phrase": "self-consistent a priori bounds",
+          "total_alone": 0
+        }
+      ],
+      "verdict": "UNINTERPRETABLE (a component phrase is itself empty, so the zero is about vocabulary, not about the intersection)"
+    },
+    {
+      "cell": "E_bridge_type",
+      "query": "all:\"validated\" AND all:\"quasilinear hyperbolic\" AND all:\"computer-assisted\"",
+      "components": [
+        {
+          "phrase": "validated",
+          "total_alone": 167391
+        },
+        {
+          "phrase": "quasilinear hyperbolic",
+          "total_alone": 91
+        },
+        {
+          "phrase": "computer-assisted",
+          "total_alone": 1892
+        }
+      ],
+      "verdict": "REAL ABSENCE (every component phrase is populated alone, and the AND operator is verified working)"
+    }
+  ]
+}
