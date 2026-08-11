@@ -33,10 +33,10 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 312 | APIA | yes |
+| A | 306 | SSE | yes |
 | B | 221 | BVRR | no |
 | C | 323 | CENV | yes |
-| D | 318 | DECR | yes |
+| D | 329 | EGMF | yes |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -52,40 +52,38 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig75 | 301 | reserved, parked branch |
 | fig76 | 313 | reserved, parked branch |
 | fig77 | 314 | landed |
-| fig78 | 326 | draft-time allocation (live, slot E) |
+| fig78 | 326 | reserved (326 in reserve rank 1, resumes; allocation stands) |
 | fig79 | 315 | landed |
-| fig80 | 292 | live |
-| fig81 | 329 | draft-time allocation (reserve, fires on 312) |
-| fig82 | 305 | live |
-| fig83 | 306 | live |
-| fig84 | 318 | live |
+| fig80 | 292 | landed |
+| fig81 | 329 | live, slot D |
+| fig82 | 305 | landed |
+| fig83 | 306 | live, slot A |
+| fig84 | 318 | landed |
 | fig85+ | — | next free |
 <!-- FIG-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 6: 6/10 floor-eligible -- A/312/APIA,
-C/323/CENV, D/318/DECR, E/326/CTRX, F/306/SSE, G/305/DWM. Cycle-6 headline: user
-correction packet executed — OVER-READ CLOSURE #5 recorded ("no certified viscous
-blow-up in any model" was wider than measured; the measured claim is "the
-Grade-A/fluid cell is empty", Grade-A dissipative certification EXISTS off-axis:
-DF-CGL, reproduced by 316), both DM sites fixed inline, leg 328 drafted for the doc
-sites; MF3 STRUCK from standing text (false — control-then-trust survives, stated as
-a test not a prohibition); 312's T2_egm flip check recorded + leg 329 pre-drafted
-(fires ahead of 308 on 312's landing); FIG-TABLE instituted below. Cycle-4 headline: 309 NO
-— the claimant (arXiv:2604.09949) is ADJUDICATED-AND-REFUTED (NRS/Tsai excludes its
-own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
-stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
-ill-conditioned (KA8 129x) — 308 re-scoped onto 312's capability, 285 spec flagged
-(addendum leg 324). §0c still gated on 323 (live, slot C). Cycle 4c: 320 YES
-escalated (leg/320-mtsc-v1 at 79fea23, unmerged — MT evades all three deaths on
-paper; user's ruling pending; ban untouched); 317 NO (folklore — lane 7 CLOSED,
-PUB must cite not claim); G now 305 DWM. MT build brick 1 drafted as USER-GATED
-reserve leg 325 (dispatches only on the user's 320 ruling + 312 landed). Reserve
-count 16 (cycle 6): 328, 324, 322, 327, 293, 298, 299 dispatchable now (7, rank
-order as listed, all §3a pre-authorised); 329 then 308 fire to top on 312's
-landing; 325 user-gated; 307 on 221; 310 on 287+298; 231-234 blocked. 313's
-escalation packet + the DSS ban-wording question are WITH THE USER, with leg 326
-drafted to resolve the packet's one unknown (Chae-Tsai reach). Next fresh leg
-number: 330.)
+(Current snapshot, DM update of 2026-08-11 cycle 7 — FIRST CYCLE UNDER THE FOUR-SLOT
+CONTRACT. Live roster: A/306/SSE (CRITICAL PATH, P0-proximate: the F_dis term ledger
+for corrected obligation #1), B/221/BVRR (resume `leg/221-bvrr-v1-resume`),
+C/323/CENV (resume `leg/323-cenv-v1`; §0c stays gated on it), D/329/EGMF (fires per
+the cycle-6 pre-commitment — 312 landed YES, both banked headlines corrected: 178's
+contamination was a float64 artifact, 176's N=1024 row restored monotone). Floor 3/4
+(306, 323, 329) — above §3b's 2-of-4. Landed since cycle 6b: 312 APIA YES (full
+quartet, d89bedd), 318 DECR YES (ENCLOSURE IS CRITICALITY, fig84, salvaged +
+completed at e81a6ea/c79e145), 305 DWM YES (SHARP_FOR_BCG_ARGUMENT_AS_STATED,
+fig82), 292 CAPA NO (41169e0). Escalations WITH THE USER, unchanged: 313's DSS
+packet + ban-wording question (326 resolves its one unknown, reserve rank 1,
+resumes with novelty log already on main at 806d4bd); 320's MT packet (325 stays
+user-gated, its 312-precondition now satisfied); the 304/ℓ¹ lift-clause wording;
+parked escalation #3 (which live leg 329 may resolve).
+
+**Reserve queue: 19 undispatched legs (326, 308, 328, 324, 322, 327, 287, 229, 293,
+298, 299, 330, 325, 307, 310, 231, 232, 233, 234).** Immediately dispatchable: 11
+(326, 308, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank order as listed, §3a
+pre-authorised except where a spec says otherwise). 330 on 326's landing; 325
+USER-GATED; 307 on 221; 310 on 287+298; 231-234 blocked on repairs 217/219/221/225.
+Next fresh leg number: **331**. Full per-leg status and the desync verification are
+in the cycle-7 entry at the end of this file.)
 
 ---
 
@@ -15042,3 +15040,206 @@ leg shape that shortens this loop and stays ranked as is.
 
 Reserve line, FIG-TABLE, floor, and next-fresh (330) are unchanged from cycle 6.
 Nothing here lifts a ban; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 7) — FIRST ROSTER UNDER THE FOUR-SLOT CONTRACT:
+A←306 SSE (critical path), D←329 EGMF (cycle-6 pre-commitment honoured); B/221 and
+C/323 RESUME as-is; the reported DIRECTION.md desync VERIFIED NOT A HOLE (format
+misread, nothing lost); the downsize note's return-to-reserve list corrected (305
+and 292 had already LANDED); leg 330 PVLX drafted; reserve rebuilt at 19
+
+**Session facts, verified against git log myself, not taken from the orchestrator's
+brief:** `main` = 9dad13d (the ten→four downsize commit), clean. The prior
+orchestrator session died at a monthly spend limit with all ten then-live legs
+terminated; this session salvaged WIP (e81a6ea) and landed what was finishable.
+Written from a detached-lineage worktree off origin/main per standing practice #2
+(branch `dm/cycle7-direction`, for the orchestrator to integrate; the shared
+checkout was left untouched on `leg/329-egmf-v1` — which, per e81a6ea's own warning,
+is a shared-checkout branch name that does NOT indicate ownership).
+
+### The reported desync — verified, and it is NOT a hole
+
+The orchestrator reported this file's queue body "bottoms out at leg 223's reserve
+list" with legs 280-329 missing, resembling the cycle-4c stale-base incident.
+**Checked directly: false alarm.** Every DM entry from the 2026-08-11 fresh-session
+reroster through cycle 6b is present and intact in this file (specs for legs
+300-329 inclusive, each cycle carrying its own canonical reserve line), and git log
+confirms cycles 5 and 6 reached main via the cycle-6b cherry-pick (09d600e,
+cf72799). What actually happened: from the reroster onward the canonical line was
+written as `**Canonical reserve line: reserve count N — legs (...)**` instead of
+§3a's exemplar `**Reserve queue: N undispatched legs (...)**`, so a grep for the
+old phrase finds nothing newer than the leg-223 era and looks like a truncation.
+No content is missing; nothing needed reconstruction. **Fix adopted: the head
+snapshot now carries the canonical line in §3a's own grep-discoverable format, and
+future cycle entries will use that format too.** The one real staleness found was
+in the mechanical downsize note above the FLOOR-TABLE: its list of legs returning
+to reserve (326, 306, 305, 229, 292, 287) includes **305 and 292, which had
+already landed** (305 DWM gate YES, SHARP verdict, fig82, indexed at de64fa8; 292
+CAPA gate NO at 41169e0). Corrected here: only 326, 306, 229, 287 (plus 324, live
+in E at termination with nothing committed) actually return.
+
+### Landings absorbed (all verified in git log)
+
+- **312 APIA gate YES** (quartet at d89bedd/3632dbc): leg 178's -230.71/3.066e+03
+  contamination was a float64 catastrophic-cancellation artifact — MP-patched gap
+  +0.4999999875, consistent with the +0.5 ceiling; leg 176's N=1024 sigma_min
+  corrects 0.09093626 → 0.09079113, restoring the ladder's own monotonicity. Both
+  banked headlines change; downstream consumers flagged, not edited. **Consequence,
+  pre-committed at cycle 6: 329 fires to the top, ahead of 308 — executed below.**
+  325's precondition (2) is now satisfied; its precondition (1), the user's ruling
+  on 320's packet, remains the only gate and is NOT waivable.
+- **318 DECR gate YES** (1129bf2/c79e145 + salvage e81a6ea): criterion ENCLOSURE IS
+  CRITICALITY, five named falsification tests, none refuted; FT1's verdict moved to
+  exact rational arithmetic after float64 showed ~25 ulp of catastrophic
+  cancellation (leg 302's failure mode, caught again). Steer item 8 CLOSED; per its
+  own drafting this never becomes a lane.
+- **305 DWM gate YES** (3ae76c9..ec1a944): verdict SHARP_FOR_BCG_ARGUMENT_AS_STATED
+  — all eleven constants classify EXACT_IDENTITY; the deficit is the distance
+  between a derivative count (c_lap = 2) and a discriminant, both rigid; closing it
+  means hypodissipation s = 0.5729490169, a different PDE. The ledger names C1_c_lap
+  costliest (-42.71%). This HARDENS the shape of what a certificate must beat and
+  feeds 306's term ledger directly.
+- **292 CAPA gate NO** (41169e0): 1 stale entry of 48; audit-loop-latency finding
+  recorded at cycle 6b, unchanged.
+- **326 CTRX partial**: novelty log landed pre-adjudication at 806d4bd — Chae-Tsai
+  pinned to arXiv:1304.7414v1 by title, sha256-pinned artifacts, MF1/MF2 controls
+  run both directions, a second independent refutation of the struck MF3 clause
+  banked in passing. **The gate (does the decay hypothesis reach the screened
+  object?) is UNANSWERED** — 326 returns to reserve at rank 1 as a RESUME (its §0a
+  pass is on main; a resumed 326 re-checks that log for staleness, then answers the
+  gate). Its flag of arXiv:2607.09619v2 (Pineau-Vicol) is adjudicated by new leg
+  330 below, not silently absorbed.
+- **329 EGMF partial**: only its novelty pass survived (writeup/novelty/leg_329.md,
+  salvaged in e81a6ea; instrument controls reported passing). No mathematics was
+  reached; the T2_egm five-clause question is unanswered. Dispatching it into D
+  resumes from that landed pass.
+
+### Ruling — slots B and C: RESUME, not replace
+
+- **B = 221 BVRR, resume `leg/221-bvrr-v1-resume`** (tip 3caa685, salvage commit on
+  real WIP). Its last measured state is load-bearing: the attribution control
+  returned BASELINE_DRIFT_NOT_THIS_LEG (diff(pre,post)=0, diff(pre,pre)=0,
+  diff(committed,pre)=525 leaves, 525 reproduced three independent times,
+  16008/16008 bit-identical). Restarting would discard a three-way-reproduced
+  measurement mid-adjudication. Resume condition unchanged from the reroster
+  ruling: rebase onto main first; flake-diagnosis-before-belief on the 43.2%/86x
+  counterexample per §9g. 307's precondition still keys off 221's flag state.
+- **C = 323 CENV, resume `leg/323-cenv-v1`**. §0c and the vacancy-census spine of
+  the publication track remain gated on exactly this leg; its spec (cycle 3) is
+  unchanged. Resume condition: rebase onto main, re-check any committed query rows
+  for staleness against MF1/MF2 discipline before extending them.
+
+### Refills — slots A and D, with the critical-path determination
+
+`plan_of_record.py` still marks **P0 NEXT**. Neither B (repair/verification-typed)
+nor C (census instrument) claims a stage, so a fresh slot must. The 251 packet
+stays parked with the user and is not re-raised; after 300→319→305, the nearest
+live P0-chain action is the term ledger for the corrected obligation #1 — 306's
+whole thesis, its precondition (319's branch merged) long since TRUE, its input
+just sharpened by 305's SHARP verdict.
+
+- **Slot A ← 306 SSE (CRITICAL PATH, P0).** Route-SSE, spec at the reroster entry
+  (unchanged, under the cycle-2 amendment: 6.854 closed form (7+3√5)/2): assemble
+  the complete term ledger for the stability step with F_dis retained, every term
+  sourced to a BCG/CGSS lemma or flagged NEW and screened against measured dead
+  ends. Gate: complete, internally-consistent ledger, every term
+  sourced-or-flagged, no NEW term matching a measured dead end → yes: bank as the
+  Phase-1 costing input; no: name the term that cannot even be posed, recorded at
+  full strength. Territory: writeup/data/p2_route_sse_v1.json, a new TECHNICAL
+  file of its own naming, writeup/novelty/leg_306.md,
+  experiments/journal/leg_306.md. Heavy; math, floor-eligible. Preconditions: leg
+  319's branch merged to main (TRUE, f213be7). fig83 stands allocated.
+- **Slot D ← 329 EGMF.** Route-EGMF, spec at cycle 6 (unchanged): re-evaluate ONLY
+  B4_egm and E_egm's five clauses on 312's landed capability; 178's gate text is
+  never edited. Gate: both rows pass all five clauses at arbitrary precision →
+  yes: REPORT AND ESCALATE (parked escalation #3's resolution is the user's); no:
+  bank corrected magnitudes and the still-failing clause. Territory:
+  experiments/p2_route_egmf_v1.py, writeup/data/p2_route_egmf_v1.json,
+  writeup/figures/fig81*, writeup/novelty/leg_329.md (resume the landed pass),
+  experiments/journal/leg_329.md. Standard; math, floor-eligible. Preconditions:
+  leg 312 landed (TRUE, d89bedd). This is the cycle-6 pre-commitment ("fires to
+  the TOP of the reserve at that moment, AHEAD of 308") executed at the first
+  vacancy after 312's landing.
+
+Territory disjointness across the four slots checked directly: no shared file; 306
+and 329 touch disjoint data/novelty/journal sets; 221 lives in
+boussinesq/writeup-data territory; 323 in its own sweep JSON. **Floor: 3 of 4
+(306 math, 323 external literature, 329 math) — above §3b's 2-of-4 minimum.**
+FLOOR-TABLE and FIG-TABLE synced at the head of this file in this same edit.
+
+### New leg, drafted now
+
+```
+### 330 — ROUTE-PVLX: DOES PINEAU-VICOL's LIOUVILLE THEOREM (arXiv:2607.09619v2)
+REACH THE SCREENED OBJECT? (326's routed flag, adjudicated rather than absorbed)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 326's novelty pass located arXiv:2607.09619v2 (Pineau-Vicol, 6 Aug
+2026): a Liouville theorem for backward SS and DSS solutions of 3D Navier-Stokes
+under a Type I bound, absent from leg 313's net, whose RDSS clause requires the
+scaling factor lambda sufficiently close to 1 while the screened object is
+specified with lambda significantly larger than 1. Located and flagged, NOT
+adjudicated — and 313's user packet should not carry an unadjudicated adjacent
+theorem. Read the theorem's hypotheses in full and check each clause against the
+screened object's definition exactly as 313 states it.
+**Gate.** Does the full text yield a definite answer — (i) the hypotheses reach
+the screened object (the theorem bears on the packet), or (ii) they do not (the
+lambda regime and/or Type I clause excludes it; the packet's balance is
+unchanged) — with the deciding clause quoted either way?
+  yes (either definite answer) -> Append to 313's user packet with the clause
+        quoted; if (i), flag the packet update to the orchestrator immediately.
+  no  -> Genuinely ambiguous after a full read: quote the candidate clauses,
+        record the ambiguity, packet updated to say exactly that.
+**Territory.** writeup/data/p2_route_pvlx_v1.json, writeup/novelty/leg_330.md,
+               experiments/journal/leg_330.md. Reads leg/313-sdss-v1 and 326's
+               banked log (read-only); edits neither.
+**Difficulty.** standard
+**Preconditions:** Leg 326 landed (its packet append goes first — two legs must
+not update the 313 packet record concurrently). (§3a rule 4: touches the DSS
+bans' subject matter — DM pre-authorises dispatch AS WRITTEN; it reads and
+reports, lifts nothing.)
+```
+
+### Reserve queue, rebuilt against what actually landed
+
+Rank order for the next vacancies (specs live where noted; every entry carries its
+`Preconditions:` line in its spec):
+
+1. **326 CTRX** — RESUME (novelty log on main at 806d4bd; gate unanswered); spec
+   cycle 5; standard; math+lit. Preconditions: None (pre-authorised as before).
+2. **308 P2T2R** — spec cycle 4 (re-scoped); heavy; construction. Preconditions:
+   leg 312 landed — TRUE, so dispatchable now; fires per cycle 6's ordering
+   (after 329, which is now live).
+3. **328 ORC5** — spec cycle 6 as amended cycle 6b (CLAY_ROADMAP.md:343 +
+   CORRECTIONS.md only); light; not floor-eligible. Preconditions: None.
+4. **324 P2SPF** — spec cycle 4; light; not eligible. Preconditions: None. (Was
+   live in E at termination, nothing committed — returns undispatched, spec
+   unchanged.)
+5. **322 F70** — spec cycle 3; light; not eligible. Preconditions: None.
+6. **327 P2T1E** — spec cycle 5; light; not eligible. Preconditions: None.
+7. **287 EPA** — RESUME from `leg/287-epa-v1` (a branch now exists, superseding
+   the reroster's "nothing was ever built" note); spec at its original entry.
+   Preconditions: None.
+8. **229 PNRV** — RESUME from `leg/229-pnrv-v1` (+ `-wip-salvage`); spec at its
+   original entry. Preconditions: None.
+9. **293 JFA** 10. **298 CORRX** 11. **299 TESTA** — specs at their original
+   entries; Preconditions: None (299's advisory on concurrent solver repairs
+   stands).
+12. **330 PVLX** — drafted above. Preconditions: leg 326 landed.
+Then gated/blocked, unchanged: **325 MTB1** (USER-GATED on the 320 ruling; its
+312-precondition now satisfied; neither waivable), **307 TSCX** (on 221's flag
+state), **310 EPAP** (on 287 + 298 sequencing), **231-234** (blocked on repairs
+217/219/221/225).
+
+**Reserve queue: 19 undispatched legs (326, 308, 328, 324, 322, 327, 287, 229,
+293, 298, 299, 330, 325, 307, 310, 231, 232, 233, 234).** Immediately
+dispatchable: **11** — comfortably above the §3a watermark. 305 and 306 leave the
+reserve (305 landed; 306 live in A); 292 was never validly in it (landed NO before
+the downsize). Next fresh leg number: **331.**
+
+Nothing in this update lifts a ban. 329's yes-branch escalates to the user; 330
+reads and reports on a ban-adjacent theorem and is pre-authorised as written; 325
+converts only on the user's ruling. The 313 packet, the DSS ban-wording question,
+the 304/ℓ¹ lift-clause wording, and parked escalation #3 all remain the user's,
+untouched. No L1-L4 link moved — 312/318/305 are capability, criterion, and
+sharpness results, not movement; Clay stays ~0.05%.
