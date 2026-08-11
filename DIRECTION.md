@@ -26,27 +26,25 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 300 | P0TCV | no |
+| A | 280 | PUB2X | no |
 | B | 221 | BVRR | no |
-| C | 301 | FSB | yes |
+| C | 316 | DFRE | yes |
 | D | 302 | P2T1 | yes |
 | E | 303 | GAF | yes |
-| F | 304 | CADX | yes |
+| F | 311 | IVAX | yes |
 | G | 286 | CNRV | no |
 | H | 229 | PNRV | no |
 | I | 292 | CAPA | no |
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 (fresh-session full reroster, all ten slots
-vacant at session start): 4/10 floor-eligible -- C/301/FSB, D/302/P2T1, E/303/GAF,
-F/304/CADX. A/300 is the critical path (stage P0: verify-then-land 266's correction).
-Resumes from prior-session branches: B/221 (leg/221-bvrr-v1-resume), G/286
-(leg/286-cnrv-v1), H/229 (leg/229-pnrv-v1), I/292 (leg/292-capa-v2); J/287 fresh.
-Reserve count 22 (DM updates 2-3, same day: steer folded in, 297/280 approved; 280
-RESTORED to reserve at rank 1 — an undispatched leg, not a chore, NOT floor-eligible):
-280, then 311-318 (new, all floor-eligible), 293, 298, 299 dispatchable now (12
-total); 305-310 preconditioned; 231-234 blocked. Next fresh leg number: 319.)
+(Current snapshot, DM update of 2026-08-11 cycle 2: 4/10 floor-eligible -- C/316/DFRE,
+D/302/P2T1, E/303/GAF, F/311/IVAX. Cycle-1 closures: 300 NO (landed), 304 YES(i)
+(landed), 301 YES (parked on leg/301-fsb-v1); refills A←280, C←316, F←311. Resumes
+from prior-session branches: B/221, G/286, H/229, I/292; J/287 fresh. Reserve count
+21: 319 (P0TCR, rank 1, repair), 320 (MTSC), 312-315/317/318, 293, 298, 299
+dispatchable now (11 total); 305/306 preconditioned on 319, 307-310 preconditioned
+as listed; 231-234 blocked. Next fresh leg number: 321.)
 
 ---
 
@@ -13998,3 +13996,138 @@ should be 311, which is eligible.
 blocked. Next fresh leg number: **319** (unchanged). §0a is propagated
 (CONTINUATION_PROMPT.md, c9a7f49); 297 lands via support agent, values untouched —
 both noted, no queue effect beyond the above.
+
+---
+
+## DM update, 2026-08-11 (cycle 2) — 304 YES(i) / 300 NO / 301 YES-parked absorbed;
+305 AMENDED IN PLACE (wrong number); leg 319 P0TCR drafted at reserve rank 1; leg 320
+MTSC (Route-MT scoping) drafted with the DM's own gate; FLOOR-TABLE synced for
+refills A←280, C←316, F←311
+
+**Landings absorbed:** 304 CADX YES(i) at b319449 — the leg-51 ban now stands on
+quoted, machine-verified footing (Assumption 1 p.6, `|l(ξ)| ≥ l_min > 0`, 8/12
+load-bearing); the wording escalation is the orchestrator's to the user, no queue
+effect. 300 P0TCV NO at 5e30bf3 — 266 architecturally sound (3/3, 10/10, 29/29) but
+the width ratio 6.855 is wrong: closed form (7+3√5)/2 = 6.854, rel. err 1.310e-04;
+266 stays unmerged. 301 FSB YES, parked on `leg/301-fsb-v1` — 14 spaces screened,
+exactly one survivor (Malmquist–Takenaka / Christov rational Hardy basis, l_min = 1.0
+vs the incumbent's exact 0.0, Hilbert transform exactly diagonal), counterweights at
+full strength (δ = 1.0000 at every n; no validated MT transform exists anywhere; the
+nonlinearity entirely unmeasured); ban NOT lifted.
+
+### Bookkeeping rule, recorded: 266 CANNOT LAND INDEPENDENTLY
+
+Leg 300 measured that neither bef1d5e nor 873a15f is an ancestor of origin/main and
+that leg 275 already effected half of 266's yes-branch — merging 266's quartet
+requires also landing leg 251's parked Phase-1 packet, which is a user item. **Any
+leg drafted with "266 landed" as a precondition is mis-specified**; the reachable
+substitute is "the corrected number on main via 319." 305 and 306 are re-preconditioned
+accordingly below.
+
+### Amendment 1 — reserve leg 305 (DWM), amended in place
+
+Every occurrence of "6.855x" in 305's title/thesis/gate is superseded by **6.854,
+closed form (7+3√5)/2** (300's re-derivation from BCG's own (eq:rstar)/
+(eq:r:restriction) at γ=7/5). Window endpoints (1.1666667, 1.1909830) unchanged.
+305's no-branch now reads: "the window does not re-derive from the stated
+inequalities → escalate — that contradicts leg 300's OWN re-derivation (which
+produced the closed form) and must not be smoothed over."
+**Preconditions (amended):** Leg 319 landed (corrected number on main). NOT "300
+gate YES" (fired NO) and NOT "266 landed" (mis-specified per the rule above).
+**306 (SSE) re-preconditioned identically:** Leg 319 landed, same reasoning — its
+term ledger needs the corrected obligation statement, not 266's merge.
+
+### New leg 319 — ROUTE-P0TCR: CORRECT THE 7 LANDED SURFACES CARRYING 6.855
+(leg 300's own no-branch rework, drafted by the DM from 300's journal §7)
+[FLOOR-ELIGIBLE: no — repair]
+
+```
+**Thesis.** 300 measured the width ratio as the closed form (7+3√5)/2 = 6.854
+(rel. err 1.310e-04 against the quoted 6.855) and its journal §7 enumerates the 7
+surfaces already on main that carry the wrong digit. A wrong number in landed prose
+is contamination-adjacent: every day it stands, legs may consume it. Fix exactly
+those 7 surfaces, citing 300's re-derivation; the closed form (not a re-rounding)
+is the replacement value. 266's branch is NOT touched (it cannot land independently,
+per the rule above; its correction travels with the user's 251-packet decision).
+**Gate.** Are all 7 enumerated surfaces corrected to the closed form with a citation
+to 300's re-derivation, with zero other numeric content changed (diff-checked)?
+  yes -> Bank; 305 and 306 become dispatchable.
+  no  -> An 8th surface exists or a surface resists correction without touching an
+         argument: STOP at the enumerated 7, report the resister verbatim, escalate —
+         never silently widen the territory.
+**Territory.** Exactly the 7 surfaces 300's journal §7 names (listed in the leg's
+               own journal at start), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_319.md, experiments/journal/leg_319.md.
+**Difficulty.** light
+**Preconditions:** None (300 landed at 5e30bf3).
+```
+
+### New leg 320 — ROUTE-MTSC: MALMQUIST–TAKENAKA SCOPING — IS THE ONE SURVIVING
+FOURTH BASIS SUBJECT TO THE THREE-REALIZATION DEATH? (the scoping leg the re-posed
+L1 ban's lift condition names; DM's own gate, 301's spec treated as input, NOT
+pre-approved)
+[FLOOR-ELIGIBLE: math]
+
+```
+**Thesis.** 301 screened 14 spaces and left exactly one survivor: the MT/Christov
+rational Hardy basis (l_min = 1.0 vs the incumbent's exact 0.0; Hilbert transform
+exactly diagonal). The re-posed ban lifts only via "its own scoping leg establishing
+it is not subject to the same three-realization death" — this is that leg, and it
+lifts nothing itself. It must answer, with structural argument plus float
+measurement where the quantity is unmeasured: (a) does leg 54's zero-diagonal/
+block-coupling death recur in MT (301 says l_min = 1.0 — verify against 304's
+now-quoted Cadiot Assumption 1, the |l(ξ)| ≥ l_min > 0 clause, which MT would need
+to satisfy where the incumbent exactly failed it); (b) does leg 56's
+(H,D)-consistency defect recur; (c) does legs 163/176's non-transfer recur — the
+NONLINEARITY IS ENTIRELY UNMEASURED per 301's own counterweight, so measure it in
+float on the target; and (d) cost the validated MT transform that does not exist
+anywhere, in leg-hours, naming what it builds on. Scoping only; no certification
+machinery is built.
+**Gate.** Does the scoping establish, for each of the three death mechanisms, a
+structural argument (backed by the float measurement for the unmeasured
+nonlinearity) that it cannot recur in MT, AND produce the transform build cost?
+  yes -> ESCALATE to the user with the full packet: the ban's lift condition is now
+         satisfied ON PAPER and the lift ruling is the user's alone. Build nothing.
+  no  -> Bank at full strength: MT joins the dead list with the killing mechanism
+         named per lesson 91 — the lift condition measured empty over the last
+         survivor, which is itself a major finding about L1.
+**Territory.** experiments/p2_route_mtsc_v1.py, writeup/data/p2_route_mtsc_v1.json,
+               a new TECHNICAL file of its own naming, writeup/novelty/leg_320.md,
+               experiments/journal/leg_320.md. Reads `leg/301-fsb-v1` (read-only)
+               and 304's landed CADX quotes; edits neither.
+**Difficulty.** heavy
+**Preconditions:** None. (§3a rule 4: touches a ban — the DM pre-authorises dispatch
+AS WRITTEN; the lift ruling routes to the user at gate time, per the gate.)
+**Sequencing note (recorded for the orchestrator):** 320 itself is independent. Any
+subsequent MT BUILD leg (which only the user's lift ruling can create) sequences
+AFTER 312 APIA (the validated transform would be built on the arbitrary-precision
+interval capability) and consults 315 TMS's scoping — that is where the steer-item-1/
+item-2 dependency the orchestrator flagged actually binds.
+```
+
+### Re-ranked reserve
+
+1. **319 P0TCR** (wrong number in landed prose; 300's no-branch pre-committed "top of
+queue"; light) 2. **320 MTSC** (highest chain proximity available — L1's last
+surviving candidate) 3. **312 APIA** 4. **317 SFTX** 5. **313 SDSS** 6. **314 FUS**
+7. **315 TMS** 8. **318 DECR** 9. 293 JFA 10. 298 CORRX 11. 299 TESTA — then
+preconditioned: 305/306 (now on 319 — once 319 lands they slot directly after 320),
+307 (on 221), 308 (on 302), 309 (on 303), 310 (on 287+298) — then blocked 231-234.
+Note 319 is NOT floor-eligible: at today's 4/10 it can fill any vacancy except one
+that would take the floor to 2 (§3b checked at dispatch as always); 320/312/317 are
+all eligible and follow immediately.
+
+**FLOOR-TABLE synced in this same edit:** A 300→280 (no), C 301→316 (yes),
+F 304→311 (yes). Floor 4/10 (302, 303, 311, 316) — confirmed against the
+orchestrator's count.
+
+**Canonical reserve line: reserve count 21 — legs 319, 320, 312, 317, 313, 314, 315,
+318, 293, 298, 299, 305, 306, 307, 308, 309, 310, 231, 232, 233, 234.** Effective
+immediately-dispatchable: **11 (319, 320, 312, 317, 313, 314, 315, 318, 293, 298,
+299)**. 305/306 on 319; 307-310 preconditioned as listed; 231-234 blocked. Next
+fresh leg number: **321.**
+
+Nothing in this update lifts a ban — 304 hardened one's footing, 301 deliberately
+declined to claim one, and 320 is gated to escalate, never to lift. Clay stays
+~0.05%; no link of the L1-L4 chain has moved (301's survivor is a candidate, not a
+movement). No new direction question beyond the two the orchestrator already routed.
