@@ -1124,3 +1124,103 @@ repeated). **2 blog-prose digits corrected, quoting already-banked values. 2 gat
 left untouched by design, with a pointer added beside them instead.** `DIRECTION.md` not
 edited. No conclusion in any leg's gate answer changed. No link of the `L1 → L4` chain moved.
 Clay stays **~0.05%**.
+
+---
+
+## §17 — over-read closure #6: "closed three ways" — the GROUNDS were over-read, the WIDTH stands
+
+**Found by:** leg 339 (2026-08-11, Route-ORC6, branch `leg/339-orc6-v1`), adjudicating on two
+measurements it did not make — **leg 331** (Route-NLH) and **leg 332** (Route-VLO), both landed
+before this entry was written.
+
+**Pre-committed, not retrofitted.** DM cycle 7b wrote, at `DIRECTION.md:15343-15348`: *"'Closed
+three ways' appears at two sites in this file … **No over-read closure #6 is recorded now.**
+Whether any of the three ways rests on the (iv_a) silence screen is exactly what legs 331 and 332
+measure; the pre-committed handling is written into their gates — a correction is drafted on a
+measured answer, never on this reading."* Both answers came back; this is the correction drafted
+on them. Neither measuring leg drafted it (`writeup/novelty/leg_331.md:283-284`: *"**No over-read
+closure is drafted.** The gate answered NO, so the `yes`-branch instruction … does not fire, and
+it is not drafted speculatively."*).
+
+### 17.1 The claim, and where it stood
+
+| site | wording |
+|---|---|
+| `experiments/JOURNAL.md:4929` | "The Grade-A/fluid cell really is empty, **closed three ways**, and leg 309 defended it against a claimant last cycle." |
+| `DIRECTION.md:9683` (was `:9656` at `e9f4956`) | "THE GRADE-A/FLUID CELL IS EMPTY … **closed three ways** and defended against a claimant by leg 309." |
+| `DIRECTION.md:14892` (was `:14865` at `e9f4956`) | "What stands, at measured width: **the Grade-A/fluid cell is empty** — **closed three ways**, defended against a claimant by 309." |
+
+The phrase occurs in **no other file** — not in `plan_of_record.py`, not in `CLAY_ROADMAP.md`,
+not in `CONTINUATION_PROMPT.md`, not in any leg journal or `writeup/` artifact. `git log -S`
+places its introduction at `ce74d6b`, `cf72799` and `980f4cc`, all 2026-08-11, and **at none of
+them is an enumeration attached**.
+
+### 17.2 What was actually true — six verdicts over five distinct grounds
+
+The record supplies **two** candidate triples and the sites disambiguate neither. Both were
+adjudicated so the correction is right under either reading.
+
+**Enumeration A**, the only literal banked triple (`experiments/journal/leg_261.md:184-202`) —
+what closes the Breden-Chu weighted-Sobolev *vorticity route*:
+
+| way | verdict | deciding measurement |
+|---|---|---|
+| A1 — screen (iv_a) / Remark 40's stated reach | **MISATTRIBUTES** | leg 331 §6: *"the reason it fails is **not** the reason Remark 40 gives … what actually breaks is that `Lam^{2a}` leaves `L^2(mu)`, i.e. it is the **weight** `e^{|x|^2/4}` versus an algebraic tail, not nonlocality as such."* Kill survives with magnitudes — truncated weighted norm `1.869e22` at `R = 16` against a local control saturating at `1.000000000` on the same code path; log₁₀ coefficient norm `1546.389` at Breden-Chu's own `n = 1500`; algebraic tails fitted `1.507674 / 2.012245 / 2.517908` vs predicted `1.5 / 2.0 / 2.5`. The *mechanism* does not: leg 261 said "incompressibility", leg 311 moved it to "nonlocality", leg 331 moves it to "weight vs algebraic tail". |
+| A2 — the NRS/Tsai composition | **STANDS AT MEASURED WIDTH** | leg 332 §8 re-derives it independently and numbers it: `‖u_B‖_{L³(ℝ³)} = 0.7307683991070311`, decay exponent `−3.0000000000000027` vs predicted `−3`. Claimed at exactly the width now measured. |
+| A3 — Gallay-Wayne prior art as evidence about the target | **OVERSTATES** (narrowly) | leg 332 §9: the weight `e^{+|x|²/4}` is adapted to the **forward** self-similar generator; Clay's object is **backward**. `‖L_forward ω_A‖ = 5.716528960333894` vs `‖L_backward ω_A‖ = 6.041350443296389`; Rayleigh quotients `7.2727` vs `6.4545`. Two decades of non-sighting under one drift sign is weaker evidence about the other than a closure needs. |
+
+**Enumeration B**, the cell-level reading (components banked individually, never as a triple):
+
+| way | verdict | deciding measurement |
+|---|---|---|
+| B1 — target absence (`leg_174.md:230`, *"the cell is empty for want of a TARGET, not for want of a method"*) | **STANDS AT MEASURED WIDTH** | Neither 331 nor 332 measures the literature. Leg 332 opens a lane and declines to call it a road: *"the NRS/Tsai wall is a **different** obstruction … named here so that nobody reads 'escape route' as 'open road'."* |
+| B2 = A1 — screen (iv_a) | **MISATTRIBUTES** | as above |
+| B3 — the Leray obstruction (legs 257/261, class C1, tail exponent `−4.0000`) | **OVERSTATES** | leg 332: *"**The step that fails is S4.** It fails because the entire non-vanishing tail of leg 257's obstruction lives inside `grad v` … and `curl(grad v) ≡ 0`."* Velocity-formulation-specific, measured: leg 257's divergence reproduced to 12 digits, max rel. diff `4.088e−12` with no shared code (FT1); the killing identity exhibited to `1.652e−10` (FT2); a two-arm control whose arms separate by ~11 000 decades on one code path (FT5). |
+
+**The non-enumeration is itself part of the finding.** A closure claimed "three ways" for which
+the banked record supplies two different, non-equivalent triples is a claim carrying more
+definiteness than its own record — which is the same defect, in a different currency, as the one
+closure #5 corrected.
+
+### 17.3 What is corrected, and what is emphatically not
+
+* **WIDTH STANDS, untouched.** The Grade-A/fluid cell is still empty. It is not that width was
+  re-checked and passed — it is that **neither measured answer is about width**. Both legs
+  returned *route* findings (leg 331 §6 is titled *"routed, not adjudicated"*). An escape from
+  one obstruction into a second, named wall does not put an occupant in the cell. This is the
+  weaker and more honest statement, and it is the one the record supports.
+* **GROUNDS are corrected.** One way misattributes its mechanism, one overstates its reach, and
+  the triple is not banked at any site that invokes it.
+* **Nothing here re-opens the cell**, promotes a route, lifts a ban, or moves a link of the
+  `L1 → L4` chain. A misattributed mechanism does not manufacture an occupant.
+* **This is not a correction to leg 261.** Leg 261's own text is careful — it headed its section
+  *"What kills the vorticity route instead"* and wrote *"Three named obstructions remain, and
+  **none is leg 257's tail**"*, already recording C4 as convergent. The over-read is manufactured
+  downstream, at the consuming sites, by compressing per-formulation, per-realization results
+  into an unqualified count. That is lesson 91's exact catch: **a count standing in for a named
+  realization.**
+
+### 17.4 Sites, executed and delegated
+
+| site | owner | status |
+|---|---|---|
+| `experiments/JOURNAL.md:4929` | integration ledger; leg 339 held a **declared single-site exception** | **corrected in place**, inline `[CORRECTED …]` marker, original sentence quoted verbatim and not deleted |
+| this file, §17 | leg 339 (append-only territory) | **this entry** |
+| `DIRECTION.md:9683`, `:14892` | **the DM** | **NOT edited by leg 339.** Exact drop-in replacement wording is delivered in `experiments/journal/leg_339.md` §7a/§7b, with a note on the stale pattern-count sentence at `:14887` in §7c. |
+| `DIRECTION.md:89`, `:15454`, `:15488`, `:15882`, `:16108` | the DM | flagged, not prescribed. The last four are pre-commitment and dispatch text describing this very leg and **must not be corrected** — editing dispatched gate text after the fact corrupts the audit trail, the standing rule adopted at §16.1. |
+
+### 17.5 A fact about this file, recorded not fixed
+
+`grep -c "closure #5" writeup/CORRECTIONS.md` returns **0**. **Over-read closure #5 has no entry
+in this register.** It was ruled (DM cycle 6, `DIRECTION.md:14896-14902`) to be **leg 328's**
+territory, and leg 328 remains undispatched. Leg 339 does not write leg 328's entry. Recorded
+here so that closure #6 arriving before closure #5 reads as a dispatch order, not as a gap.
+
+### The ceiling
+
+**0 numbers re-derived** — every magnitude above is quoted from leg 331 or leg 332 with its
+locator; if either is wrong, this entry inherits the error. **1 prose site corrected in place**
+(`experiments/JOURNAL.md:4929`), **0 conclusions in any leg's gate answer changed**, **0 bans
+touched**, `plan_of_record.py` byte-identical and staying so, `DIRECTION.md` not edited. No link
+of the `L1 → L4` chain moved. Clay stays **~0.05%**. The net effect is that one fewer thing is
+believed than yesterday, which is the only kind of progress this register records.

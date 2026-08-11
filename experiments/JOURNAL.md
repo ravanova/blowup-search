@@ -4927,8 +4927,25 @@ OCCUPIED by DF-CGL (arXiv:2410.05480), which leg 316 has now reproduced row-for-
 Breden-Chu's viscous Burgers is a second Grade-A dissipative object.
 
 The Grade-A/fluid cell really is empty, closed three ways, and leg 309 defended it against a
-claimant last cycle. What was wrong is the claim's WIDTH: a generalisation from one cell to
-every model in every dimension. That is exactly what lesson 91 exists to catch. Phase 1's
+claimant last cycle. [CORRECTED 2026-08-11 by leg 339, over-read closure #6. The original
+sentence is left standing verbatim above; "closed three ways" is struck. WIDTH STANDS: the cell
+is still empty, and neither measured answer bears on that -- both legs 331 and 332 returned
+route findings, and leg 174's target-absence ground ("the cell is empty for want of a TARGET,
+not for want of a method", leg_174.md:230) is what carries the emptiness. GROUNDS OVER-READ,
+three ways: (1) the three ways are enumerated at NO consuming site -- the phrase enters the
+record already compressed (git log -S: ce74d6b, cf72799, 980f4cc, all 2026-08-11), and the
+banked record supplies two different candidate triples that the sites do not disambiguate; (2)
+screen (iv_a) MISATTRIBUTES -- leg 331 measured the failure (truncated weighted norm 1.869e22
+against a local control saturating at 1.000000000) and found "the reason it fails is not the
+reason Remark 40 gives ... it is the weight e^{|x|^2/4} versus an algebraic tail, not
+nonlocality as such" (leg_331.md:176-181); the kill stands, its named mechanism does not; (3)
+the Leray obstruction OVERSTATES -- leg 332 measured it as velocity-formulation-specific, "the
+step that fails is S4 ... curl(grad v) = 0" (leg_332.md:31-34), with the replacement wall named
+and numbered instead (NRS/Tsai, ||u_B||_L3 = 0.7307683991070311, decay exponent
+-3.0000000000000027). Per-way verdicts, deciding sentences and the two DIRECTION.md replacement
+blocks: experiments/journal/leg_339.md.] What was wrong is the claim's WIDTH: a generalisation
+from one cell to every model in every dimension. That is exactly what lesson 91 exists to catch.
+Phase 1's
 target is unchanged and its rationale does not depend on the wider claim. Corrected at
 plan_of_record.py:47 by integration, which owns that file; the DIRECTION.md sites are the
 DM's, and CLAY_ROADMAP.md:343 and CONTINUATION_PROMPT.md:70 are routed as stated in the
