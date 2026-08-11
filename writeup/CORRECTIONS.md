@@ -1080,3 +1080,47 @@ numeric content changed anywhere (window endpoints and widths byte-identical). 0
 deleted.** This entry does not touch `leg/266-p0tc-v1` / `leg/251-p0t-v1` branch files, does
 not touch `experiments/journal/leg_266.md:70`, does not touch `writeup/INDEX.md`, and does
 not re-derive the closed form independently. Clay stays **~0.05%**.
+
+---
+
+## §16 — Pointers to the two immutable gate-text sites still reading `6.855`, and the BLOG_P2_PUB2
+`0.0420`/`0.71465` sites corrected
+
+### 16.1 The two immutable gate-text sites
+
+`DIRECTION.md:13330` and `DIRECTION.md:13338` still read `6.855x wider` and `6.855x width
+ratio` respectively — leg 300's own pre-committed gate thesis and question — and **must stay
+that way** by standing rule: editing a dispatched gate after the fact would corrupt the audit
+trail that caught the wrong digit in the first place (leg 319's §2/§15.3 reasoning, adopted
+here as the rule rather than re-argued). This entry is the pointer *beside* the record: the
+width ratio quoted at those two lines as `6.855` re-derives as the closed form
+`(7+3√5)/2 = 6.8541019662496845...`, i.e. `6.854` at the quoted precision — a slipped final
+digit, relative error `1.310e-04` — see `experiments/journal/leg_300.md` §3 (the
+re-derivation) and `experiments/journal/leg_319.md` §2 (why these two surfaces resist
+correction). `DIRECTION.md` is not touched by this entry; no digit at those two lines is
+changed.
+
+### 16.2 `writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md:102,108`
+
+Flagged by leg 280 (§6 of `experiments/journal/leg_280.md`, and this file's own §13) as
+outside its TECHNICAL-only territory: L102 printed the uncorrected `0.0420` and L108's
+parenthetical wrongly implied `0.71465` shares `0.0908`'s convention-dependence. Both are now
+corrected in place, citing already-landed values only:
+
+| site | before | after | source |
+|---|---|---|---|
+| L102 | `0.0420` (unqualified) | `0.057643` (`‖R‖_X = 17.348`), Definition 4.1's own displayed half-line reading; `0.0420` (`‖R‖_X = 23.792`) named as Xu's separate full-line-equivalent reading, `1.37×` smaller | leg 280, per leg 277 — this file's §13 |
+| L108 | "(The same goes for the `0.71465` further down.)" | "(By contrast, the `0.71465` further down is convention-*free*, measured to `1.87e−16`.)" | leg 280, per leg 281 finding E5 — this file's §14 |
+
+No value was re-derived by this leg; both are quoted from §13/§14 above, which leg 280 had
+already banked. `git diff --stat` on the blog file: 1 file, 9 insertions / 3 deletions, both
+hunks inside the two flagged sentences; window/witness numbers elsewhere in the file
+(`0.0908`, `140.72`, `4.03`, `7.9×`) are byte-identical before/after.
+
+### The ceiling
+
+**0 numbers re-derived** (leg 277's, leg 281's and leg 300's measurements are reused, not
+repeated). **2 blog-prose digits corrected, quoting already-banked values. 2 gate-text sites
+left untouched by design, with a pointer added beside them instead.** `DIRECTION.md` not
+edited. No conclusion in any leg's gate answer changed. No link of the `L1 → L4` chain moved.
+Clay stays **~0.05%**.

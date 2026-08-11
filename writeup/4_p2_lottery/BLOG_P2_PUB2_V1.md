@@ -99,13 +99,19 @@ rather than a citation.
 not absolute.** They depend on a normalization choice — how much weight the measurement puts on
 the extra unknown we bordered the system with, relative to the rest. Sweeping that choice over
 four orders of magnitude moves the number across `0.01086 … 0.13580`, **a factor of 12.5**, and
-if you adopt Xu's own normalization instead of ours it comes out at **`0.0420`** rather than
-`0.0908`. The exact-rational re-derivation below is what measured that, and it says in the same
+if you adopt Xu's own normalization instead of ours it comes out at **`0.057643`** rather than
+`0.0908` (`‖R‖_X = 17.348`) — Definition 4.1's own *displayed* half-line definition, which
+carries `π`; the earlier-quoted `0.0420` (`‖R‖_X = 23.792`) was Xu's *equivalent* full-line
+reading instead — `0.057643` is `1.37×` larger — corrected 2026-08-11, leg 280, per leg 277's finding
+(`writeup/CORRECTIONS.md` §13). The exact-rational re-derivation below is what measured that, and
+it says in the same
 breath why it does not cost us anything here: **the thing we actually claim — that the quantity
 stays away from zero as you refine, instead of drifting to zero the way it does in the old
 room — is unaffected by the choice**, because scaling by a positive weight cannot turn a
 positive limit into zero. The behaviour is what carries the argument; the digits are a
-convention, and we now say which one. (The same goes for the `0.71465` further down.)
+convention, and we now say which one. (By contrast, the `0.71465` further down is
+convention-*free*, measured to `1.87e−16` — leg 281 finding E5, per leg 280's correction,
+`writeup/CORRECTIONS.md` §14.)
 
 The **no**: the actual proof constant, computed the same way we computed it in the old room, comes
 out at best **140.72** where it has to be below **1**, and it grows like the square of the split
