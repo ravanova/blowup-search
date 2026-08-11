@@ -1,0 +1,330 @@
+{
+  "leg": 334,
+  "route": "Route-DSSP",
+  "cycle": "8d, dispatched; narrowed in flight by the cycle-9 ruling a17554c",
+  "slot": "A (critical path)",
+  "kind": "PLANNING LEG - no solver was built, no module was added, no numerical measurement of Navier-Stokes was made",
+  "technical": "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDSSP_V1.md",
+  "novelty": "writeup/novelty/leg_334.md",
+  "journal": "experiments/journal/leg_334.md",
+  "figure": null,
+  "figure_reason": "no measurement to plot; writeup/build_figures.py is outside this leg's declared territory and shared with live legs",
+  "blog": null,
+  "blog_reason": "declared territory names only a new TECHNICAL file; the merge gate's docs contract binds BLOG -> TECHNICAL, not the reverse",
+
+  "ceiling": {
+    "tier": 2,
+    "statement": "success is a numerical DSS blow-up candidate surviving a resolution-convergence study; WIN_CONDITION.md says that is strong numerical evidence and STILL NOT A PROOF; only Tier 3 answers the Clay problem",
+    "holds_in_both_branches_of_leg_341": true,
+    "stated_in_every_drafted_brick_gate": true,
+    "tier3_route_known": false,
+    "tier3_owner": "not this plan; a DM-drafted section-3 build gated on leg 341's report and on a USER ruling",
+    "certification_machinery_that_closes_elsewhere": ["arXiv:2404.04054v2 (Breden-Chu)", "arXiv:2410.05480 (Dahne-Figueras CGL, reproduced row-for-row by leg 316)"],
+    "certification_space_class": "weighted-Sobolev GAUSSIAN - which leg 331 measured cannot hold one nonlocal operator, and which sec 2.2 argues (conditionally, pending leg 341) does not contain the target anyway"
+  },
+
+  "gate": {
+    "answer": "YES",
+    "clauses": {
+      "a_function_space": "ANSWERED IN THE NARROWED FRAME: space targeted (vorticity in unweighted L2(R^3), compactified X=|y|/(1+|y|), spherical-harmonic angular basis), NRS/Tsai position stated, sec26/4.1 difficulty carried; the WEIGHT question is OWNED BY LEG 341 and is consumed, not answered - recorded OWNED-BY-341-PENDING with both branches named",
+      "b_architecture_and_cost": "ANSWERED: five modules, architecture per module, cost reported as a BRACKET 34-370 legs (factor ~11)",
+      "c_seeding": "ANSWERED ON THE GATE'S SECOND BRANCH: seed set STILL MEASURED EMPTY, independently re-measured this leg; three items named that would create one",
+      "d_brick_sequence": "ANSWERED: 9 bricks drafted (8 dispatchable, B9 struck by cycle 9), across 4 slots over ~8 cycles, every gate carrying the Tier-2 ceiling"
+    },
+    "alternate_reading_recorded": "if a reader judges that deferring the weight question leaves clause (a) unanswered, the correct reading is the no-branch on (a) alone, with the blocker being 'leg 341 has not reported' - which routes to leg 341, not to the user, since the DM already assigned it"
+  },
+
+  "ownership_narrowing_cycle_9": {
+    "ruling_commit": "a17554c",
+    "leg_341_ROUTE_ALGW": {
+      "owns": "the weight question - does leg 260's algebraically weighted space escape the three-realization death, and does leg 261's NRS/Tsai composition survive the weight change",
+      "status_at_leg_334_finish": "SPECCED BUT UNDISPATCHED (head of the reserve queue); had NOT landed",
+      "leg_334_position": "consumes; does not adjudicate",
+      "gates_brick": "B1 (precondition)"
+    },
+    "leg_342_ROUTE_SEED": {
+      "owns": "route 4's seeding problem, scoped in depth",
+      "leg_334_position": "answers clause (c) on paper as drafted; 342 consumes and extends"
+    },
+    "branch_A_341_reports_escape": "B9 superseded by the DM's section-3 build; Tier-2 ceiling on THIS plan UNCHANGED; brick sequence unchanged",
+    "branch_B_341_reports_death": "stage-V lift condition stays unmet, section-3 build never drafted, B9 struck; brick sequence unchanged except B9 disappears; ceiling hardens"
+  },
+
+  "clause_a_arithmetic": {
+    "status": "CONTEXT OFFERED TO LEG 341, NOT AN ADJUDICATION - conditional throughout",
+    "criterion": "for |f| ~ |y|^-p in R^d against weight (1+|y|)^-s, the far field is square-integrable iff 2p + s > d",
+    "gaussian_weight_note": "e^{|y|^2/4} tolerates no algebraic tail for any p; only decay faster than e^{-|y|^2/8}",
+    "velocity": {"p": 1, "d": 3, "weight_needed": "s > 1", "source_of_p": "Type-I-scale bound |V| <= C/(1+|y|), Chae-Wolf arXiv:1610.09464 Thm 1.1, carried via legs 253/260/313"},
+    "vorticity": {"p": 2, "d": 3, "weight_needed": "s >= 0, i.e. NONE - Omega in unweighted L2(R^3) with margin 1"},
+    "cross_check_1": "leg 313 MEASURED the crossing at s = 1.0 (shell ratio 1.000216), with s=0.9 -> 1.071997 diverging and s=1.1 -> 0.933242 finite; the criterion was not fitted to it",
+    "cross_check_2": "leg 341's dispatch thesis states leg 260 already computed the space sharp: L^p p>3, or L2((1+|y|)^-s) s>1, L3, L2, Gaussian H2(mu) excluded",
+    "independence_caveat": "the three derivations (260's, 313's measurement, this leg's arithmetic) are NOT obviously independent of each other; recorded as a cross-check, not as three confirmations",
+    "leg_331_tails_are_lebesgue_integrable": {
+      "note": "in d=1 at s=0, every tail leg 331 measured satisfies 2p+s>d, so the divergence is entirely weight-driven",
+      "rows": [
+        {"alpha": 0.25, "p_measured": 1.507674, "2p_plus_s": 3.015348, "d": 1, "integrable": true},
+        {"alpha": 0.50, "p_measured": 2.012245, "2p_plus_s": 4.024490, "d": 1, "integrable": true},
+        {"alpha": 0.75, "p_measured": 2.517908, "2p_plus_s": 5.035816, "d": 1, "integrable": true}
+      ]
+    }
+  },
+
+  "nonlocal_output_rule": {
+    "statement": "an algebraic tail is fatal when the nonlocal operator's output stands ALONE as a summand inside the weighted norm, and harmless when it enters only as a bounded MULTIPLIER against a factor that already decays",
+    "fatal_case": "leg 331: ||Lambda^{2alpha} psi_m||_{L2(mu)} - nonlocal output alone in the norm",
+    "harmless_case": "leg 332 sec7: ||(u.grad)w - (w.grad)u||_{L2(mu)} <= ||grad u||_inf ||w||_{L2(mu)} + ||u||_inf ||grad w||_{L2(mu)} - output only through L-infinity factors",
+    "lesson": "lesson 87 - a certification method has a SHAPE, and the shape is a property of the OPERATOR: multiplier or shift",
+    "enforced_by": "brick B3's gate",
+    "survives_both_branches_of_341": true,
+    "open_hypothesis": "||grad V||_inf < infinity for the actual numerical profile is a HYPOTHESIS, not a theorem; it is B3's gate"
+  },
+
+  "carried_measurements": {
+    "leg_331": {
+      "commit": "e9f4956",
+      "status": "landed on main",
+      "tail_exponents_predicted_before_measurement": {"formula": "1 + 2*alpha + 2*m"},
+      "tail_exponents": [
+        {"alpha": 0.25, "predicted": 1.5, "fitted": 1.507674},
+        {"alpha": 0.50, "predicted": 2.0, "fitted": 2.012245},
+        {"alpha": 0.75, "predicted": 2.5, "fitted": 2.517908}
+      ],
+      "truncated_weighted_norm_squared_alpha_0p5": [
+        {"R": 4,  "nonlocal": 0.9655,   "local_control": 0.953988},
+        {"R": 8,  "nonlocal": 1.196e3,  "local_control": 0.999999477},
+        {"R": 12, "nonlocal": 5.872e10, "local_control": 0.9999999999999978},
+        {"R": 16, "nonlocal": 1.869e22, "local_control": 0.9999999999999993}
+      ],
+      "quadrature_horizon_artefact_log10_norm_squared": [
+        {"n": 100, "log10": 95.151},
+        {"n": 200, "log10": 197.728},
+        {"n": 1500, "log10": 1546.389, "note": "Breden-Chu's own published n; overflows float64"}
+      ],
+      "gauss_laguerre_exactness_loss": {"relative_error_at_20pct_nonlocality": 0.3393, "local_control_error": 1.6e-12},
+      "Z1_crosses_1": {"n_100": [0.3000, 0.4000, 0.4559], "n_200": [0.4705, 0.5156], "bisection_width": 6.1e-06},
+      "reframing_quoted": "What breaks is the interaction between an algebraic tail and a Gaussian weight - the e^{|x|^2/4} weight, not nonlocality as an abstract property"
+    },
+    "leg_332": {
+      "commit": "bd438de",
+      "status": "landed on main",
+      "space": "H2(mu), mu(x) = Gamma(d/2)(2 sqrt(pi))^{-d} e^{|x|^2/4}, Z = 16 pi at d=3",
+      "S4_fails_because": "curl P[F] = curl F - curl grad v = curl F exactly; the tail lives in ker(curl)",
+      "mapping_bound_ratios": {"witness_A": 0.10094, "witness_B": 0.13863, "both_strictly_inside_0_1": true},
+      "witness_A_bound_vs_actual": {"bound": 3.691487980, "actual": 0.372629937},
+      "witness_B_bound_vs_actual": {"bound": 0.731194238, "actual": 0.101364697},
+      "replacement_wall": {
+        "fitted_decay_exponent_of_u_B": -3.0000000000000027,
+        "L3_norm_of_u_B": 0.7307683991070311,
+        "converged_to_R": 60,
+        "significance": "u in L3(R^3) is exactly the Necas-Ruzicka-Sverak / Tsai hypothesis"
+      },
+      "sec10_rider": {
+        "forward_norm": 5.716528960333894,
+        "backward_norm": 6.041350443296389,
+        "rayleigh_forward": 7.2727,
+        "rayleigh_backward": 6.4545,
+        "answered_by_334": "the backward sign +(y/2).grad is inherited in the rescaled vorticity equation; the H2(mu) mapping question is moot for the SEARCH because the targeted space is not H2(mu), and is carried into the certification lane where it does bind"
+      }
+    },
+    "leg_313": {
+      "branch": "leg/313-sdss-v1 (parked, read-only; NOT merged or edited by this leg)",
+      "shell_ratios": [
+        {"space": "unweighted L2(dy)", "ratio": 2.000277, "verdict": "DIVERGES"},
+        {"space": "L2(rho), s=0.9", "ratio": 1.071997, "verdict": "diverges"},
+        {"space": "L2(rho), s=1.0", "ratio": 1.000216, "verdict": "THE CROSSING"},
+        {"space": "L2(rho), s=1.1", "ratio": 0.933242, "verdict": "FINITE"},
+        {"space": "L2(rho), s=1.5", "ratio": 0.707, "verdict": "finite"}
+      ],
+      "compactified_norm": {"value": 0.577350, "exact": "sqrt(1/3)", "envelope_becomes": "exactly (1-X)"},
+      "chebyshev_cost_N_2pow20_tol_1e-6": [
+        {"kappa": "smooth control", "modes": 10, "decay": "geometric"},
+        {"kappa": 0, "modes": 2, "decay": "terminates exactly"},
+        {"kappa": 1, "modes": 823, "fitted_p": 3.000},
+        {"kappa": 2, "modes": 1482, "fitted_p": 3.000},
+        {"kappa": 5, "modes": 3564, "fitted_p": 2.999},
+        {"kappa": 10, "modes": 7086, "fitted_p": 2.994},
+        {"kappa": 20, "modes": 14149, "fitted_p": 2.977}
+      ],
+      "cost_law": {"form": "n(kappa) ~ 791 * kappa^0.954", "max_relative_residual_pct": 3.9},
+      "separation_from_smooth_control_at_cheapest_nonzero_kappa": 82.3,
+      "withdrawn_and_not_quoted": "leg 313's own N=2^14 numbers and its 1e-8 column",
+      "not_imported": "the 257466-mode row at gCLM's |Im| = 430.35 - leg 313 forbade the import; gCLM's scaling structure is not NS's",
+      "transposition": "under X = |y|/(1+|y|), r^{-1+i kappa} maps to (1-X)^{1-i kappa} - the identical functional form to sec26/4.1's X^{1-iy}, now at X=1 instead of X=0; the difficulty is conserved under the map",
+      "seed_set_verdict": "THE SEED SET FOR THE SCREENED OBJECT IS EMPTY",
+      "hou_id": "arXiv:2405.10916",
+      "hou_2405_10916_fails_three_ways": ["axisymmetric", "generalized NS with solution-dependent viscosity, effective dimension ~3.188", "stationary, not time-periodic - a fixed point of the rescaled flow, not a DSS orbit"],
+      "hou_read_status": "NOT read at full text by anyone in this repository; leg 313's screen carried with that caveat intact"
+    },
+    "leg_315": {
+      "branch": "leg/315-tms-v1 (parked, read-only)",
+      "guard_quoted_verbatim": "GUARD, binding on any future O1 work: the moment a build introduces a sequence-space certificate step, it re-enters the ban's scope and stops.",
+      "restated_for_route_4": "if any brick introduces a sequence-space (l1-Fourier / radii-polynomial) certificate step, that brick RE-ENTERS the re-posed Stage-V ban's scope and STOPS",
+      "no_brick_contains_one": true,
+      "O1_mechanism_does_not_reach": "Taylor-model flow enclosure of a finite-dimensional AUTONOMOUS ODE, which requires no function space at all; the DSS object is a PDE orbit in infinite dimensions",
+      "standard_bridge": "Zgliczynski-Mischaikow self-consistent a-priori bounds, math/0005247 - hypotheses are dissipative/parabolic, which the RESCALED NS system does satisfy, unlike BCG's quasilinear hyperbolic system"
+    },
+    "leg_260": {
+      "branch": "leg/260-dssb-v1 (parked, read-only)",
+      "lucas_kerswell": {"id": "arXiv:1406.1820", "read_at": "abstract only", "not_upgraded_by_leg_334": true},
+      "five_must_build_modules": ["M1 3D NS in similarity variables", "M2 3D Leray / Biot-Savart", "M3 unbounded-domain discretisation with algebraic far field and log-periodic oscillation", "M4 periodic-orbit search", "M5 phase / gauge condition"],
+      "ergodicity_objection": "recurrent-flow extraction needs an ergodically visited chaotic trajectory; whether the rescaled 3D NS flow supplies one is UNMEASURED"
+    },
+    "leg_326": {
+      "commit": "c541cdb",
+      "chae_tsai": {"id": "arXiv:1304.7414v1", "read_at": "full text, sha256-pinned", "verdict": "DOES NOT BITE - SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE", "mechanism": "hypothesis (1.6) is the rescaled EULER system; the generalisation is over two constants a,b in V_s + aV + b(y.grad)V + (V.grad)V = -grad P, and -Laplacian V is not a member of that family for any a,b"}
+    },
+    "leg_262": {
+      "commit": "ba0f9fe",
+      "pineau_vicol": {"id": "arXiv:2607.09619", "version_read": "v1", "read_at": "full LaTeX source, 1869 lines", "tex_md5": "62c6bdae8e08cfd3ef4cdf17263ffcca", "refereed": false}
+    }
+  },
+
+  "rigidity_ledger": [
+    {"theorem": "Necas-Ruzicka-Sverak / Tsai", "hypothesis": "exactly backward self-similar, with u in L3 or Type-I local-Leray admissibility", "reaches_target": false, "fails_by": "ANSATZ - the target is discretely, not exactly, self-similar", "status": "standing"},
+    {"theorem": "Chae-Tsai arXiv:1304.7414v1", "hypothesis": "a time periodic solution of (1.6), the rescaled EULER system", "reaches_target": false, "fails_by": "EQUATION", "status": "MEASURED SILENT by leg 326"},
+    {"theorem": "Pineau-Vicol arXiv:2607.09619", "hypothesis": "RDSS clause requires lambda sufficiently close to 1", "reaches_target": "UNKNOWN - target has lambda significantly larger than 1", "fails_by": "PARAMETER REGIME (candidate)", "status": "NOT ADJUDICATED - leg 330 PVLX owns it and had not landed"}
+  ],
+  "nrs_tsai_position": {
+    "statement": "the target class sits in the COMPLEMENT of every rigidity hypothesis reachable on this repository's record",
+    "design_consequence_1": "lambda significantly larger than 1, and decay strictly slower than L3-admissible, are the only unexcluded region - not preferences",
+    "design_consequence_2": "a LIVE per-candidate screen is mandatory (brick B7): ||V||_L3, fitted far-field decay exponent, lambda, axisymmetry diagnostic, computed at every Newton step",
+    "uncomfortable_corollary_recorded": "a search confined to the complement of every rigidity theorem is a search for an object that no theorem forbids and no theorem predicts - a Tier-2 object at best, by construction"
+  },
+
+  "clause_b_cost": {
+    "grep_first_ban_honoured": true,
+    "capabilities_read_live_at_leg_334": {
+      "modules": 49,
+      "periodic_orbit": 0,
+      "newton_krylov": 0,
+      "velocity_field_3D": 0,
+      "leray_projection": 0,
+      "partial_precedent": "solver/port_certification.py - ProfileResidual, GMRES, Krylov ladders for a DIFFERENT operator in a DIFFERENT formulation; an implementation reference for M4's linear solve and nothing more",
+      "only_biot_savart_in_index": "solver/boussinesq_velocity.py, 2D"
+    },
+    "calibration": [
+      {"read_at_leg": 260, "modules": 48, "legs": 260, "legs_per_module": 5.4167, "five_module_floor": 27},
+      {"read_at_leg": 313, "modules": 48, "legs": 313, "legs_per_module": 6.5208, "five_module_floor": 33},
+      {"read_at_leg": 334, "modules": 49, "legs": 334, "legs_per_module": 6.8163, "five_module_floor": 34}
+    ],
+    "marginal_260_to_334": {"modules_added": 1, "module": "solver/interval_mp.py, indexed by leg 312 at d89bedd", "legs_spent": 74, "legs_per_module": 74, "five_module_floor": 370},
+    "confound_recorded": "the marginal rate is measured over a period in which the repository deliberately was not building modules (legs 260-334 are dominated by literature, adjudication and scoping legs); it measures POLICY, not difficulty",
+    "leg_260_prediction": "predicted the floor would FALL; it has now risen twice",
+    "reported_as": "A BRACKET: 34 to 370 legs for five modules, a factor of ~11 this leg cannot close",
+    "per_brick_sum": 15,
+    "gap_not_explained_away": "15 scheduled leg-units against a calibrated floor of 34-370; three honest readings recorded in the TECHNICAL sec 3.6"
+  },
+
+  "clause_c_seeding": {
+    "verdict": "STILL MEASURED EMPTY - answered on the gate's SECOND branch",
+    "independently_remeasured_this_leg": true,
+    "strategies": [
+      {"id": "S1", "name": "Hou nu_0-continuation", "verdict": "REJECTED", "reason": "its final stationary -> time-periodic step is EXACTLY Entry A's banned bifurcation off a fixed point; the STRATEGY was dropped, no ban was reinterpreted"},
+      {"id": "S2", "name": "recurrent-flow extraction (Lucas-Kerswell shape)", "verdict": "CONTINGENT", "reason": "re-opens leg 260's ergodicity objection, and presupposes the solver it is meant to seed; folded into B6"},
+      {"id": "S3", "name": "fixed-point argument around an approximate profile (Chen arXiv:2605.15149 shape)", "verdict": "NOT A SEEDING STRATEGY", "reason": "requires the numerical profile as INPUT; it is a certification strategy and moves the problem"},
+      {"id": "S4", "name": "ansatz-driven cold start with guessed kappa and lambda", "verdict": "A COLD START DRESSED AS A SEED", "reason": "Newton's basin around a two-parameter guess at O(1e8) DOF is UNMEASURED; brick B5 exists to measure it cheaply elsewhere"},
+      {"id": "S5", "name": "critical-collapse threshold bisection (numerical-relativity methodology)", "verdict": "CHANGES THE SHAPE, DOES NOT MAKE THE SET NON-EMPTY", "reason": "bisection works there because the DSS solution is codimension-one on a threshold between two KNOWN outcomes; for NS such a threshold PRESUPPOSES BLOW-UP, which is the question", "ban_screen": "NOT SCREENED - whether threshold bisection is a third entrance or a re-description of a banned one is a WORDING QUESTION FOR THE USER; leg 342 should screen it and must not resolve the wording question itself"}
+    ],
+    "what_would_create_a_seed_set": [
+      {"id": "c-i", "item": "a non-axisymmetric, true-NS, time-periodic-in-s numerical profile from any source", "currently": "ZERO exist", "cost": "the programme itself; this item is the seeding problem restated"},
+      {"id": "c-iii", "item": "a measured Newton-basin radius for the RPO operator on a KNOWN-ANSWER substrate (2D Kolmogorov flow)", "buildable": "NOW, at 2D cost", "brick": "B5", "note": "the cheapest thing that could move clause (c); converts S4 from a hope into a number"},
+      {"id": "c-ii", "item": "a measurement that the rescaled 3D NS flow RECURS", "buildable": "only after B4 - needs the solver", "brick": "folded into B6"}
+    ],
+    "substrate_note": "gCLM cannot be the known-answer substrate - 'another gCLM measurement leg' is BANNED, lift condition never",
+    "second_owner": "leg 342 (ROUTE-SEED), created cycle 9; this plan answers on paper as drafted, 342 consumes and extends"
+  },
+
+  "clause_d_bricks": [
+    {"id": "B1", "name": "DSSP-SPACE", "legs": 1, "new_solver_module": false, "precondition": "LEG 341 HAS REPORTED", "ceiling_in_gate": "TIER 2"},
+    {"id": "B2", "name": "DSSP-BASIS", "legs": 2, "new_solver_module": true, "baseline": "leg 313's 823 modes at kappa=1, 14149 at kappa=20, n(kappa) ~ 791*kappa^0.954", "ceiling_in_gate": "TIER 2"},
+    {"id": "B3", "name": "DSSP-BS", "legs": 2, "new_solver_module": true, "enforces": "the nonlocal-output rule", "ceiling_in_gate": "TIER 2"},
+    {"id": "B4", "name": "DSSP-STEP", "legs": 2, "new_solver_module": true, "known_answer_probe": "a decaying Leray solution must relax to the trivial state at a measured rate; a planted non-trivial control must fail", "ceiling_in_gate": "TIER 2"},
+    {"id": "B5", "name": "DSSP-NKBASIN", "legs": 2, "new_solver_module": false, "substrate": "2D Kolmogorov flow, published answer", "parallel_slot": true, "insensitive_to_leg_341": true, "ceiling_in_gate": "TIER 2"},
+    {"id": "B6", "name": "DSSP-RPO", "legs": 3, "precondition": "THE USER'S BAN-WORDING RULING", "controls_required": ["a defective-phase-condition control that must be able to fail", "an explicit non-triviality guard excluding Omega == 0, which closes every residual (lesson 90)"], "ceiling_in_gate": "TIER 2"},
+    {"id": "B7", "name": "DSSP-SCREEN", "legs": 1, "parallel_slot": true, "ceiling_in_gate": "TIER 2"},
+    {"id": "B8", "name": "DSSP-T2", "legs": 2, "fires_only_if": "B6 returns a candidate", "bar": "WIN_CONDITION.md Tier 2 - >=3 resolution levels, successive differences shrinking, finest two T* within 2%, self-similar profile check with stable exponents", "output": "A TIER 2 NUMERICAL CANDIDATE AND NOTHING MORE", "ceiling_in_gate": "TIER 2 - this brick DEFINES the ceiling"},
+    {"id": "B9", "name": "DSSP-CERT-SCOPE", "legs": null, "scheduled": false, "status": "STRUCK by the cycle-9 ruling - its subject matter is leg 341's and the build it might license is the DM's section-3 build; retained only as a record for 341's report to be checked against; MUST NOT BE DISPATCHED", "ceiling_in_gate": "TIER 2 - exists to CONFIRM the ceiling, not to raise it"}
+  ],
+  "clause_d_schedule": {
+    "slots_used_at_once": "never more than 2 of 4",
+    "route_4_idle_in_cycle_9": "yes - B1 now waits on leg 341; B5 is unaffected and starts on schedule",
+    "cycles_covered": "9 through ~16",
+    "leg_units": 15,
+    "stops_at_B8_deliberately": "the cost bracket (factor ~11) means the programme cannot be scheduled to completion"
+  },
+  "early_stop_points": [
+    {"brick": "B5", "stops_route_4_on": "the extraction layer failing on a KNOWN answer, before any 3D cost is committed"},
+    {"brick": "B1", "stops_route_4_on": "the targeted space being wrong"}
+  ],
+
+  "bans_honoured": {
+    "plan_of_record_edited": false,
+    "plan_of_record_authority": "this leg has none",
+    "bans_lifted_narrowed_or_reinterpreted": 0,
+    "dss_cheap_entrance": "no brick does this; S1 was REJECTED because it required it",
+    "dss_expensive_entrance": "the seeded-search wording question is UNDECIDED and is a hard precondition on B6; bricks B1-B5 and B7 build and measure, none searches",
+    "reposed_stage_v": "no brick contains a certificate step; leg 315's re-entry guard carried verbatim; the lift condition's 'namable fourth space with its own scoping leg' is LEG 341's shape, and nothing in this plan is offered as lift-condition evidence",
+    "another_gclm_measurement_leg": "no brick measures gCLM; gCLM statements are TRANSCRIBED and none re-derived; gCLM's kappa=430.35 explicitly not imported into an NS cost",
+    "solver_without_grepping_capabilities": "grep re-run LIVE at leg 334"
+  },
+
+  "novelty_pass": {
+    "instrument": "arXiv export API over https",
+    "no_external_pdf_read_at_full_text_by_this_leg": true,
+    "battery_1": {
+      "spacing_s": 12,
+      "outcome": "instrument alive",
+      "queries": [
+        {"id": "P1", "role": "positive control", "query": "all:electron", "total": 184814},
+        {"id": "N1", "role": "negative control", "query": "nonsense phrase", "total": 0},
+        {"id": "Q1", "role": "the load-bearing zero", "query": "\"discretely self-similar\" AND \"Navier-Stokes\" AND numerical", "total": 1, "only_hit": "2011.02800v1", "only_hit_note": "On bifurcation of self-similar solutions of the STATIONARY Navier-Stokes equations - not a backward blow-up candidate"},
+        {"id": "Q2", "role": "MF1 variant A (LaTeX double hyphen)", "query": "\"discretely self-similar\" AND \"Navier--Stokes\"", "total": 23},
+        {"id": "Q3", "role": "MF1 variant B (unhyphenated)", "query": "\"discretely self similar\" AND \"Navier-Stokes\"", "total": 23, "note": "IDENTICAL id list to Q2 - banked as an environment fact that this endpoint normalises hyphenation"},
+        {"id": "Q4", "role": "RPO maturity", "query": "\"relative periodic orbit\" AND \"Navier-Stokes\"", "total": 9},
+        {"id": "Q8", "role": "NK maturity", "query": "\"Newton-Krylov\" AND \"periodic orbit\" AND turbulence", "total": 2},
+        {"id": "Q9", "role": "the locate", "query": "\"discretely self-similar\" AND \"numerical\"", "total": 40, "note": "overwhelmingly gravitational critical collapse"},
+        {"id": "Q10", "role": "non-spherical DSS", "total": 9}
+      ]
+    },
+    "battery_1b": {
+      "outcome": "REFUSAL TO MEASURE",
+      "detail": "nine consecutive HTTP 429s and two read timeouts",
+      "banked": "NOTHING - not even the timeouts read as slowness"
+    },
+    "battery_2": {
+      "initial_pause_s": 180,
+      "spacing_s": 30,
+      "retries_per_query": 3,
+      "backoff_s": 40,
+      "all_succeeded_on_attempt": 1,
+      "queries": [
+        {"id": "P2", "role": "positive control, opening", "query": "all:electron", "total": 184814, "note": "matches P1 exactly - instrument recovered"},
+        {"id": "C5a", "role": "single-phrase control", "query": "all:\"recurrent flow\"", "total": 34},
+        {"id": "C5b", "role": "single-phrase control", "query": "all:\"self-similar\"", "total": 8472},
+        {"id": "C7a", "role": "single-phrase control", "query": "all:\"dynamic rescaling\"", "total": 53},
+        {"id": "C7b", "role": "single-phrase control", "query": "all:\"periodic orbit\"", "total": 3937},
+        {"id": "Q11", "role": "pre-emption check", "query": "\"critical collapse\" AND \"Navier-Stokes\"", "total": 0, "verdict": "CONTROLLED ABSENCE, BANKED"},
+        {"id": "Q12", "role": "pre-emption check", "query": "Choptuik AND fluid", "total": 10, "note": "all gravitational; 'fluid' means relativistic stellar matter, never incompressible NS", "ids": ["2003.05488v3", "1810.04907v2", "1512.02999v1", "0804.1464v1", "0710.2517v2", "0709.3527v1"]},
+        {"id": "Q15", "role": "pre-emption check", "query": "\"periodic orbit\" AND \"self-similar\" AND \"Navier-Stokes\"", "total": 0, "verdict": "CONTROLLED ABSENCE, BANKED"},
+        {"id": "Q16", "role": "prior similarity-variable solver", "query": "\"self-similar variables\" AND \"Navier-Stokes\" AND numerical", "total": 1, "only_hit": "1201.6009v2", "only_hit_note": "locally self-similar collapse in the incompressible EULER equations - Euler, not NS, and not a DSS orbit"},
+        {"id": "N2", "role": "negative control, closing", "query": "nonsense phrase", "total": 0}
+      ],
+      "control_argument": "controlled at both ends (P2 = P1 = 184814 opening, N2 = 0 closing) and on both sides (every conjunct of the two load-bearing zeros individually non-empty); MF1 already measured that ANDed quoted phrases DO return results on this endpoint",
+      "novelty_claim_limited": "an absence of two phrases co-occurring is NOT an absence of the idea; not one of the 10 Q12 records was read at full text"
+    },
+    "locates": {
+      "critical_collapse_dss_numerics": {"claim": "ENGINEERING PRECEDENT ONLY, not original mathematics", "grep_control": "grep -rl Choptuik over the tree: no hit before this leg", "non_spherical_examples": ["1807.10342v2", "2303.05530v1", "2511.04649v2"]},
+      "rpo_extraction": {"1705.03720v2": "Relative periodic orbits form the backbone of turbulent pipe flow - RPO extraction in 3D NS at research resolution", "1705.03838v2": "The Openpipeflow Navier--Stokes Solver - published Newton-Krylov-with-hookstep code; note this record spells itself with the LaTeX double hyphen and was reached anyway", "1411.3303v4": "Periodic orbit analysis of a system with continuous symmetry - a tutorial", "read_at": "abstract/title level only"},
+      "recurrent_flow_incidental": {"id": "2601.01590v1", "title": "Identifying recurrent flows in high-dimensional dissipative chaos from low-dimensional embeddings", "relevance": "clause (c) strategy S2; MORE RECENT than leg 260's 1406.1820", "read_at": "title only"},
+      "sanchez_et_al": {"citation": "Sanchez, Net, Garcia-Archilla, Simo, J. Comput. Phys. 201 (2004) 13-33", "note": "banked by leg 313; NS discretisation dimension O(1e4); its own guidance is that good initial conditions matter most"}
+    }
+  },
+
+  "chain": {
+    "L1_L4_link_moved": false,
+    "wall_1_standing": true,
+    "wall_2_standing": true,
+    "wall_2_note": "the screened object is non-axisymmetric 3D with no symmetry reduction available - squarely on the far side of Wall 2",
+    "clay_odds": "~0.05%, unchanged"
+  }
+}
