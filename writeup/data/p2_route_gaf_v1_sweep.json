@@ -1,0 +1,981 @@
+{
+ "leg": 303,
+ "route": "GAF",
+ "title": "Grade-A/fluid cell freshness sweep, mid-2026",
+ "run_utc": "2026-08-11T15:29:35Z",
+ "gate": "Does the sweep find at least one post-cutoff work claiming a certified dissipative blow-up or materially narrowing the cell?",
+ "gate_answer": "NO",
+ "hit_rule": {
+  "a_certificate": "computer-assisted / rigorous-numerics certificate",
+  "b_blowup": "of a blow-up or singular self-similar profile",
+  "c_dissipative": "dissipative term INSIDE the certified object",
+  "d_fluid_model": "for a fluid transport model",
+  "all_four_required": true,
+  "committed_in": "writeup/novelty/leg_303.md sec 4, before the first query"
+ },
+ "window": {
+  "last_broad_sweep": {
+   "leg": 174,
+   "route": "VBS",
+   "closed_utc": "2026-08-06T14:22:38Z",
+   "n_queries_banked": 12,
+   "where": "solver/viscous_novelty.py::SEARCH_LOG",
+   "known_gap": "no query mentions compressible / implosion / imploding -- which is how arXiv:2208.09445 (2022) stayed out of the ledger until leg 197"
+  },
+  "since_then": [
+   {
+    "leg": 242,
+    "route": "DFL2",
+    "closed_utc": "2026-08-06T22:11:18Z",
+    "scope": "author-scoped: complete arXiv listings of Dahne and Figueras only"
+   },
+   {
+    "leg": 291,
+    "route": "HLR2",
+    "closed_utc": "2026-08-07T05:24:39Z",
+    "scope": "object-scoped: HL_S2_nonsymmetric (an INVISCID target) and its anchors"
+   }
+  ],
+  "gap_days_since_last_broad_sweep": 5.05
+ },
+ "coverage": {
+  "n_queries_total": 35,
+  "n_queries_ok": 29,
+  "n_queries_unavailable": 6,
+  "n_channels": 5,
+  "n_queries_new_vs_leg174": 23,
+  "n_distinct_papers_returned": 51,
+  "superset_of_leg174_net": true
+ },
+ "c1_replication": {
+  "what": "leg 174's own 12 queries re-run verbatim; a grown count is where a new hit would be",
+  "rows": [
+   {
+    "query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+    "leg174_n": 2,
+    "leg303_n": 2,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22computer-assisted%22+AND+abs%3A%22self-similar%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+    "leg174_n": 1,
+    "leg303_n": 1,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22fractional+dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+    "leg174_n": 1,
+    "leg303_n": 1,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Ginzburg-Landau%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+    "leg174_n": 1,
+    "leg303_n": 1,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22nonlinear+heat+equation%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+    "leg174_n": 1,
+    "leg303_n": 1,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22branches%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22Ginzburg-Landau%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+    "leg174_n": 0,
+    "leg303_n": 0,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22interval+arithmetic%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+    "leg174_n": 0,
+    "leg303_n": 0,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22blow-up%22+AND+abs%3A%22validated+numerics%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+    "leg174_n": 0,
+    "leg303_n": 0,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3Ablowup+AND+abs%3Aviscosity+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+    "leg174_n": 0,
+    "leg303_n": 0,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3Aviscosity&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+    "leg174_n": 0,
+    "leg303_n": 0,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22blowup%22+AND+abs%3A%22viscous%22+AND+abs%3A%22rigorous%22+AND+abs%3A%22continuation%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+    "leg174_n": 1,
+    "leg303_n": 1,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22hypodissipative%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   },
+   {
+    "query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+    "leg174_n": 3,
+    "leg303_n": 3,
+    "delta": 0,
+    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+   }
+  ],
+  "n_grown": 0
+ },
+ "cell_state": {
+  "grade_A_fluid_occupants_before": 0,
+  "grade_A_fluid_occupants_after": 0,
+  "n_hits_new_to_ledger": 0,
+  "n_near_misses_recorded": 23,
+  "ledger_ids_known": [
+   "1908.09385",
+   "2207.07548",
+   "2208.09445",
+   "2210.07191",
+   "2305.05660",
+   "2404.04054",
+   "2410.05480",
+   "2509.14185"
+  ]
+ },
+ "hits": [
+  {
+   "arxiv_id": "2509.14185",
+   "link": "https://arxiv.org/abs/2509.14185",
+   "title": "Discovery of Unstable Singularities",
+   "published": "2025-09-17T17:18:10Z",
+   "updated": "2025-09-17T17:18:10Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "HIT",
+   "verdict": "HIT",
+   "already_in_PRECEDENTS": true,
+   "found_by": [
+    "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\""
+   ]
+  }
+ ],
+ "near_misses": [
+  {
+   "arxiv_id": "1306.0305",
+   "link": "https://arxiv.org/abs/1306.0305",
+   "title": "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+   "published": "2013-06-03T06:44:05Z",
+   "updated": "2015-05-12T01:06:20Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+    "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\""
+   ]
+  },
+  {
+   "arxiv_id": "1401.5371",
+   "link": "https://arxiv.org/abs/1401.5371",
+   "title": "Numerical proof of stability of roll waves in the small-amplitude limit for inclined thin film flow",
+   "published": "2014-01-21T16:22:54Z",
+   "updated": "2014-01-21T16:22:54Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": false,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"interval arithmetic\" AND abs:\"viscous\""
+   ]
+  },
+  {
+   "arxiv_id": "1608.06680",
+   "link": "https://arxiv.org/abs/1608.06680",
+   "title": "Dynamical Behavior for the Solutions of the Navier-Stokes Equation",
+   "published": "2016-08-24T01:09:53Z",
+   "updated": "2016-08-24T01:09:53Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "1610.09464",
+   "link": "https://arxiv.org/abs/1610.09464",
+   "title": "Removing discretely self-similar singularities for the 3D Navier-Stokes equations",
+   "published": "2016-10-29T06:32:04Z",
+   "updated": "2017-06-02T07:30:05Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\""
+   ]
+  },
+  {
+   "arxiv_id": "1807.10341",
+   "link": "https://arxiv.org/abs/1807.10341",
+   "title": "On stability of blow-up solutions of the Burgers vortex type for the Navier-Stokes equations with a linear strain",
+   "published": "2018-07-26T19:59:51Z",
+   "updated": "2019-04-09T07:26:43Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\""
+   ]
+  },
+  {
+   "arxiv_id": "1812.09115",
+   "link": "https://arxiv.org/abs/1812.09115",
+   "title": "Localized smoothing for the Navier-Stokes equations and concentration of critical norms near singularities",
+   "published": "2018-12-21T13:45:05Z",
+   "updated": "2019-01-09T14:48:36Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "1906.08225",
+   "link": "https://arxiv.org/abs/1906.08225",
+   "title": "Scale-invariant estimates and vorticity alignment for Navier-Stokes in the half-space with no-slip boundary conditions",
+   "published": "2019-06-19T17:14:21Z",
+   "updated": "2019-06-19T17:14:21Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "1911.00339",
+   "link": "https://arxiv.org/abs/1911.00339",
+   "title": "Backward self-similar solutions for compressible Navier-Stokes equations",
+   "published": "2019-10-31T14:32:03Z",
+   "updated": "2019-10-31T14:32:03Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+    "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\""
+   ]
+  },
+  {
+   "arxiv_id": "2003.06717",
+   "link": "https://arxiv.org/abs/2003.06717",
+   "title": "Quantitative regularity for the Navier-Stokes equations via spatial concentration",
+   "published": "2020-03-14T22:48:16Z",
+   "updated": "2020-05-25T08:22:34Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2006.13145",
+   "link": "https://arxiv.org/abs/2006.13145",
+   "title": "An $\u03b5$-regularity criterion and estimates of the regular set for Navier-Stokes flows in terms of initial data",
+   "published": "2020-06-23T16:41:42Z",
+   "updated": "2020-07-15T12:44:17Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+    "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\""
+   ]
+  },
+  {
+   "arxiv_id": "2111.14776",
+   "link": "https://arxiv.org/abs/2111.14776",
+   "title": "Higher integrability and the number of singular points for the Navier-Stokes equations with a scale-invariant bound",
+   "published": "2021-11-29T18:38:55Z",
+   "updated": "2021-11-30T12:59:52Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2112.10705",
+   "link": "https://arxiv.org/abs/2112.10705",
+   "title": "Localized smoothing and concentration for the Navier-Stokes equations in the half space",
+   "published": "2021-12-20T17:45:16Z",
+   "updated": "2021-12-20T17:45:16Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2305.05660",
+   "link": "https://arxiv.org/abs/2305.05660",
+   "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data II: Rigorous Numerics",
+   "published": "2023-05-09T17:55:02Z",
+   "updated": "2024-06-17T04:01:06Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": true,
+    "c_dissipative": false,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": true,
+   "found_by": [
+    "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup"
+   ]
+  },
+  {
+   "arxiv_id": "2307.03434",
+   "link": "https://arxiv.org/abs/2307.03434",
+   "title": "Finite-time blowup for the Fourier-restricted Euler and hypodissipative Navier-Stokes model equations",
+   "published": "2023-07-07T07:43:37Z",
+   "updated": "2025-08-28T21:50:28Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup"
+   ]
+  },
+  {
+   "arxiv_id": "2308.01528",
+   "link": "https://arxiv.org/abs/2308.01528",
+   "title": "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+   "published": "2023-08-03T04:07:36Z",
+   "updated": "2025-08-15T05:55:04Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": true,
+    "c_dissipative": false,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup"
+   ]
+  },
+  {
+   "arxiv_id": "2410.07816",
+   "link": "https://arxiv.org/abs/2410.07816",
+   "title": "On rough Calder\u00f3n solutions to the Navier-Stokes equations and applications to the singular set",
+   "published": "2024-10-10T11:02:46Z",
+   "updated": "2024-10-10T11:02:46Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2501.15701",
+   "link": "https://arxiv.org/abs/2501.15701",
+   "title": "Blow-up of the 3-D compressible Navier-Stokes equations for monatomic gases",
+   "published": "2025-01-26T23:20:37Z",
+   "updated": "2025-02-10T08:18:10Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2509.10806",
+   "link": "https://arxiv.org/abs/2509.10806",
+   "title": "Navier-Stokes Equations with Fractional Dissipation and Associated Doubly Stochastic Yule Cascades",
+   "published": "2025-09-13T03:59:42Z",
+   "updated": "2026-04-21T00:31:21Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\""
+   ]
+  },
+  {
+   "arxiv_id": "2509.12435",
+   "link": "https://arxiv.org/abs/2509.12435",
+   "title": "Nonlinear stability of the Larson-Penston collapse",
+   "published": "2025-09-15T20:36:56Z",
+   "updated": "2025-09-15T20:36:56Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": false
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"imploding\" AND abs:\"computer-assisted\"",
+    "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\""
+   ]
+  },
+  {
+   "arxiv_id": "2509.25116",
+   "link": "https://arxiv.org/abs/2509.25116",
+   "title": "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+   "published": "2025-09-29T17:41:55Z",
+   "updated": "2026-03-19T00:11:47Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": false,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\""
+   ]
+  },
+  {
+   "arxiv_id": "2511.09556",
+   "link": "https://arxiv.org/abs/2511.09556",
+   "title": "Instantaneous Type I blow-up and non-uniqueness of smooth solutions of the Navier-Stokes equations",
+   "published": "2025-11-12T18:59:15Z",
+   "updated": "2026-01-12T14:36:30Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2604.07785",
+   "link": "https://arxiv.org/abs/2604.07785",
+   "title": "On partial type I solutions to the Axially symmetric Navier-Stokes equations",
+   "published": "2026-04-09T04:23:41Z",
+   "updated": "2026-04-09T04:23:41Z",
+   "clauses": {
+    "a_certificate": false,
+    "b_blowup": true,
+    "c_dissipative": true,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\""
+   ]
+  },
+  {
+   "arxiv_id": "2604.09949",
+   "link": "https://arxiv.org/abs/2604.09949",
+   "title": "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+   "published": "2026-04-10T23:03:18Z",
+   "updated": "2026-04-10T23:03:18Z",
+   "clauses": {
+    "a_certificate": true,
+    "b_blowup": true,
+    "c_dissipative": false,
+    "d_fluid_model": true
+   },
+   "verdict_mechanical": "NEAR",
+   "verdict": "NEAR",
+   "already_in_PRECEDENTS": false,
+   "found_by": [
+    "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\""
+   ]
+  }
+ ],
+ "query_log": [
+  {
+   "channel": "C1",
+   "query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22computer-assisted%22+AND+abs%3A%22self-similar%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 2,
+   "links": [
+    "https://arxiv.org/abs/2308.01528",
+    "https://arxiv.org/abs/2305.05660"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22fractional+dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2509.10806"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Ginzburg-Landau%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2410.05480"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22nonlinear+heat+equation%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2404.04054"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22branches%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22Ginzburg-Landau%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2410.05480"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22interval+arithmetic%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22blow-up%22+AND+abs%3A%22validated+numerics%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3Ablowup+AND+abs%3Aviscosity+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3Aviscosity&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22blowup%22+AND+abs%3A%22viscous%22+AND+abs%3A%22rigorous%22+AND+abs%3A%22continuation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22hypodissipative%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2307.03434"
+   ]
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 3,
+   "links": [
+    "https://arxiv.org/abs/2604.09949",
+    "https://arxiv.org/abs/2509.25116",
+    "https://arxiv.org/abs/2509.14185"
+   ]
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22imploding%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2509.12435"
+   ]
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22implosion%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22compressible%22+AND+abs%3A%22singularity%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/2509.12435"
+   ]
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22compressible+Navier-Stokes%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 2,
+   "links": [
+    "https://arxiv.org/abs/2501.15701",
+    "https://arxiv.org/abs/1911.00339"
+   ]
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22radii+polynomial%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22radii+polynomial%22+AND+abs%3A%22self-similar%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Newton-Kantorovich%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22validated+numerics%22+AND+abs%3A%22dissipative%22+AND+abs%3A%22singularity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22interval+arithmetic%22+AND+abs%3A%22viscous%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/1401.5371"
+   ]
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22computer-assisted+proof%22+AND+abs%3A%22parabolic%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22rigorous+numerics%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22De+Gregorio%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Constantin-Lax-Majda%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Hou-Luo%22+AND+abs%3A%22viscous%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22surface+quasi-geostrophic%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3A%22singularity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "n": null,
+   "links": []
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Euler+equations%22+AND+abs%3A%22computer-assisted%22+AND+abs%3A%22viscosity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 0,
+   "links": []
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22backward+self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 7,
+   "links": [
+    "https://arxiv.org/abs/2006.15776",
+    "https://arxiv.org/abs/1911.00339",
+    "https://arxiv.org/abs/1901.01510",
+    "https://arxiv.org/abs/1812.00957",
+    "https://arxiv.org/abs/1807.10341",
+    "https://arxiv.org/abs/1509.08177",
+    "https://arxiv.org/abs/1306.0305"
+   ]
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22discretely+self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 23,
+   "links": [
+    "https://arxiv.org/abs/2607.09619",
+    "https://arxiv.org/abs/2409.13586",
+    "https://arxiv.org/abs/2407.06179",
+    "https://arxiv.org/abs/2202.08352",
+    "https://arxiv.org/abs/2012.15848",
+    "https://arxiv.org/abs/2011.02800",
+    "https://arxiv.org/abs/2006.13145",
+    "https://arxiv.org/abs/2003.06717",
+    "https://arxiv.org/abs/1910.11267",
+    "https://arxiv.org/abs/1910.06929",
+    "https://arxiv.org/abs/1907.00256",
+    "https://arxiv.org/abs/1906.11038",
+    "https://arxiv.org/abs/1902.10771",
+    "https://arxiv.org/abs/1812.10509",
+    "https://arxiv.org/abs/1801.08060",
+    "https://arxiv.org/abs/1703.03480",
+    "https://arxiv.org/abs/1610.09464",
+    "https://arxiv.org/abs/1610.05680",
+    "https://arxiv.org/abs/1610.01386",
+    "https://arxiv.org/abs/1510.07504",
+    "https://arxiv.org/abs/1306.0305",
+    "https://arxiv.org/abs/1210.2783",
+    "https://arxiv.org/abs/1105.0414"
+   ]
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Leray%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22nonexistence%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 1,
+   "links": [
+    "https://arxiv.org/abs/1110.0054"
+   ]
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Type+I%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 9,
+   "links": [
+    "https://arxiv.org/abs/2604.07785",
+    "https://arxiv.org/abs/2511.09556",
+    "https://arxiv.org/abs/2410.07816",
+    "https://arxiv.org/abs/2112.10705",
+    "https://arxiv.org/abs/2111.14776",
+    "https://arxiv.org/abs/2003.06717",
+    "https://arxiv.org/abs/1906.08225",
+    "https://arxiv.org/abs/1812.09115",
+    "https://arxiv.org/abs/1608.06680"
+   ]
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22local+energy%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22self-similar%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "OK",
+   "n": 5,
+   "links": [
+    "https://arxiv.org/abs/2601.03833",
+    "https://arxiv.org/abs/2202.08352",
+    "https://arxiv.org/abs/2006.13145",
+    "https://arxiv.org/abs/1907.00256",
+    "https://arxiv.org/abs/1801.08060"
+   ]
+  }
+ ],
+ "escalation": "none",
+ "clay_odds_note": "unchanged at ~0.05%: a freshness re-check of a literature cell moves no link of the L1->L4 chain"
+}

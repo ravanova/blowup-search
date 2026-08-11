@@ -1,0 +1,812 @@
+{
+ "run_utc": "2026-08-11T15:29:35Z",
+ "window": {
+  "last_broad_sweep": {
+   "leg": 174,
+   "route": "VBS",
+   "closed_utc": "2026-08-06T14:22:38Z",
+   "n_queries_banked": 12,
+   "where": "solver/viscous_novelty.py::SEARCH_LOG",
+   "known_gap": "no query mentions compressible / implosion / imploding -- which is how arXiv:2208.09445 (2022) stayed out of the ledger until leg 197"
+  },
+  "since_then": [
+   {
+    "leg": 242,
+    "route": "DFL2",
+    "closed_utc": "2026-08-06T22:11:18Z",
+    "scope": "author-scoped: complete arXiv listings of Dahne and Figueras only"
+   },
+   {
+    "leg": 291,
+    "route": "HLR2",
+    "closed_utc": "2026-08-07T05:24:39Z",
+    "scope": "object-scoped: HL_S2_nonsymmetric (an INVISCID target) and its anchors"
+   }
+  ],
+  "gap_days_since_last_broad_sweep": 5.05
+ },
+ "queries": [
+  {
+   "channel": "C1",
+   "query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22computer-assisted%22+AND+abs%3A%22self-similar%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 2,
+   "entries": [
+    {
+     "arxiv_id": "2308.01528",
+     "link": "https://arxiv.org/abs/2308.01528",
+     "title": "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+     "published": "2023-08-03T04:07:36Z",
+     "updated": "2025-08-15T05:55:04Z",
+     "summary": "We show that the 1D Hou-Luo model on the real line admits exact self-similar finite-time blowup solutions with smooth self-similar profiles. The existence of these profiles is established via a fixed-point method that is purely analytic. We also prove that the profiles satisfy some monotonicity and convexity properties that were unknown before, and we give rigorous estimates on the algebraic decay rates of the profiles in the far field. Our result supplements the previous computer-assisted proof of self-similar finite-time blowup for the Hou-Luo model with finer characterizations of the profiles."
+    },
+    {
+     "arxiv_id": "2305.05660",
+     "link": "https://arxiv.org/abs/2305.05660",
+     "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data II: Rigorous Numerics",
+     "published": "2023-05-09T17:55:02Z",
+     "updated": "2024-06-17T04:01:06Z",
+     "summary": "This is Part II of our paper in which we prove finite time blowup of the 2D Boussinesq and 3D axisymmetric Euler equations with smooth initial data of finite energy and boundary. In Part I of our paper [ChenHou2023a], we establish an analytic framework to prove stability of an approximate self-similar blowup profile by a combination of a weighted $L^\\infty$ norm and a weighted $C^{1/2}$ norm. Under the assumption that the stability constants, which depend on the approximate steady state, satisfy certain inequalities stated in our stability lemma, we prove stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth initial data and boundary. In Part II of our paper, we provide sharp stability estimates of the linearized operator by constructing space-time solutions with rigorous error control. We also obtain sharp estimates of the velocity in the regular case using computer assistance. These results enable us to verify that the stability constants obtained in Part I [ChenHou2023a] indeed satisfy the inequalities in our stability lemma. This completes the analysis of the finite time singularity of the axisymmetric Euler equations with smooth initial data and boundary."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22fractional+dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2509.10806",
+     "link": "https://arxiv.org/abs/2509.10806",
+     "title": "Navier-Stokes Equations with Fractional Dissipation and Associated Doubly Stochastic Yule Cascades",
+     "published": "2025-09-13T03:59:42Z",
+     "updated": "2026-04-21T00:31:21Z",
+     "summary": "We introduce a self-similar doubly stochastic Yule (DSY) cascade associated with the deterministic Navier-Stokes equations (NSE) in $\\mathbb{R}^d$ with fractional dissipation $(-\u0394)^\u03b3$. Interestingly, such a structure is well-defined only in the scaling-supercritical regime $\u03b3\\in(\\frac{1}{2},\\frac{d+2}{4})$. We then characterize parametric regions of $(d,\u03b3)$ that correspond to the stochastically explosive, non-explosive, hyperexplosive, non-hyperexplosive behaviors of the DSY cascade. Stochastic solution processes are constructed recursively, and their expectations yield solutions to the fractional NSE whenever these expectations exist. Explosion and geometric properties of the DSY cascade are then exploited to establish non-uniqueness and finite-time blowup results for a scalar partial differential equation associated with the fractional NSE using a majorization principle for stochastic solution processes. In the special case $d=2$, we derive a closed form for the solution process and prove the finite-time loss of integrability of the solution process for sufficiently large initial data. This lack of integrability does not necessarily imply finite-time blowup of solutions to the fractional NSE. Indeed, for vortex-flow initial data, we show that the solution can be continued beyond the time of integrability breakdown by averaging the stochastic solution processes in a way that creates symmetry cancellations."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Ginzburg-Landau%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2410.05480",
+     "link": "https://arxiv.org/abs/2410.05480",
+     "title": "Self-Similar Singular Solutions to the Nonlinear Schr\u00f6dinger and the Complex Ginzburg-Landau Equations",
+     "published": "2024-10-07T20:23:27Z",
+     "updated": "2024-12-20T14:38:37Z",
+     "summary": "We prove the existence of radial self-similar singular solutions for the mass supercritical Nonlinear Schr\u00f6dinger Equation far from the critical regime and, more generally, branches of such solutions for the Complex Ginzburg-Landau Equation. We are also able to control their monotone index (number of monotone intervals). In particular, we prove the existence of monotone radial self-similar singular solutions for the three dimensional cubic Nonlinear Schr\u00f6dinger Equation. The paper combines sharp analytic bounds of the self-similar profile at infinity with computer assisted bounds around zero and their matching at an intermediate value."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22nonlinear+heat+equation%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2404.04054",
+     "link": "https://arxiv.org/abs/2404.04054",
+     "title": "Constructive proofs for some semilinear PDEs on $H^2(e^{|x|^2/4},\\mathbb{R}^d)$",
+     "published": "2024-04-05T12:22:52Z",
+     "updated": "2026-01-18T21:19:40Z",
+     "summary": "We develop computer-assisted tools to study semilinear equations of the form \\begin{equation*} -\u0394u -\\frac{x}{2}\\cdot \\nabla{u}= f(x,u,\\nabla u) ,\\quad x\\in\\mathbb{R}^d. \\end{equation*} Such equations appear naturally in several contexts, and in particular when looking for self-similar solutions of parabolic PDEs. We develop a general methodology, allowing us not only to prove the existence of solutions, but also to describe them very precisely. We introduce a spectral approach based on an eigenbasis of $\\mathcal{L}:= -\u0394-\\frac{x}{2}\\cdot \\nabla$ in spherical coordinates, together with a quadrature rule allowing to deal with nonlinearities, in order to get accurate approximate solutions. We then use a Newton-Kantorovich argument, in an appropriate weighted Sobolev space, to prove the existence of a nearby exact solution. We apply our approach to nonlinear heat equations, to nonlinear Schr\u00f6dinger equations and to a generalised viscous Burgers equation, and obtain both radial and non-radial self-similar profiles."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22branches%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22Ginzburg-Landau%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2410.05480",
+     "link": "https://arxiv.org/abs/2410.05480",
+     "title": "Self-Similar Singular Solutions to the Nonlinear Schr\u00f6dinger and the Complex Ginzburg-Landau Equations",
+     "published": "2024-10-07T20:23:27Z",
+     "updated": "2024-12-20T14:38:37Z",
+     "summary": "We prove the existence of radial self-similar singular solutions for the mass supercritical Nonlinear Schr\u00f6dinger Equation far from the critical regime and, more generally, branches of such solutions for the Complex Ginzburg-Landau Equation. We are also able to control their monotone index (number of monotone intervals). In particular, we prove the existence of monotone radial self-similar singular solutions for the three dimensional cubic Nonlinear Schr\u00f6dinger Equation. The paper combines sharp analytic bounds of the self-similar profile at infinity with computer assisted bounds around zero and their matching at an intermediate value."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22interval+arithmetic%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22blow-up%22+AND+abs%3A%22validated+numerics%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3Ablowup+AND+abs%3Aviscosity+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3Ablowup+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3Aviscosity&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22blowup%22+AND+abs%3A%22viscous%22+AND+abs%3A%22rigorous%22+AND+abs%3A%22continuation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22hypodissipative%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3Ablowup&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2307.03434",
+     "link": "https://arxiv.org/abs/2307.03434",
+     "title": "Finite-time blowup for the Fourier-restricted Euler and hypodissipative Navier-Stokes model equations",
+     "published": "2023-07-07T07:43:37Z",
+     "updated": "2025-08-28T21:50:28Z",
+     "summary": "In this paper, we introduce the Fourier-restricted Euler and hypodissipative Navier--Stokes equations. These equations are analogous to the Euler and hypodissipative Navier--Stokes equations respectively, but with the Helmholtz projection replaced by a projection onto a more restrictive constraint space; the $(u\\cdot\\nabla)u$ nonlinearity is otherwise unchanged. The constraint space restricts the divergence-free velocity to specific Fourier modes, which have a dyadic shell structure, and are constructed iteratively using permutations. In the inviscid case -- and in the hypo-viscous case when $\u03b1<\\frac{\\log(3)}{6\\log(2)} \\approx .264$ -- we prove finite-time blowup for a set of solutions with a discrete group of symmetries. Our blowup Ansatz is odd, permutation symmetric, and mirror symmetric about the plane $x_1+x_2+x_3=0$. The Fourier-restricted Euler and hypodissipative Navier--Stokes equations respect both the energy equality and the identity for enstrophy growth from the full Euler and hypodissipative Navier--Stokes equations respectively, which is a substantial advance over the previous literature on Euler and Navier--Stokes model equations."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C1",
+   "query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22self-similar%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 3,
+   "entries": [
+    {
+     "arxiv_id": "2604.09949",
+     "link": "https://arxiv.org/abs/2604.09949",
+     "title": "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+     "published": "2026-04-10T23:03:18Z",
+     "updated": "2026-04-10T23:03:18Z",
+     "summary": "We present a 5D-lifted analytic-profile program for finite-time singularity formation in the 3D incompressible Navier--Stokes equations on the periodic torus $\\T^3$. The core of the construction is a stationary rescaled profile $\\Ombar$ satisfying a nonlinear elliptic fixed-point equation in an analytically weighted Hilbert space $\\Xspace$, together with a computer-assisted Newton--Kantorovich validation based on interval arithmetic. The profile is reconstructed into a nearly self-similar singular evolution and then transferred to $\\T^3$ by periodic extension and exact Leray projection. The manuscript is organized in the style of a computer-assisted proof paper, with theorem statements, proof packages, and explicit validation constants for the residual, inverse stability, and Lipschitz bounds."
+    },
+    {
+     "arxiv_id": "2509.25116",
+     "link": "https://arxiv.org/abs/2509.25116",
+     "title": "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+     "published": "2025-09-29T17:41:55Z",
+     "updated": "2026-03-19T00:11:47Z",
+     "summary": "The nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes equations is one of the central open problems in mathematical fluid dynamics. In this paper, we provide, to our knowledge, the first rigorous computer-assisted proof demonstrating such nonuniqueness. Inspired by earlier works in this area, we construct a Leray-Hopf solution in the self-similar setting and then establish the existence of a second solution by analyzing the stability of the linearized operator around this profile, showing that it corresponds to an unstable perturbation. To achieve this, we develop an innovative numerical method that computes candidate solutions with high precision and propose a framework for rigorously establishing exact solutions in a neighborhood of these candidates. A key step is to decompose the linearized operator into a coercive part plus a compact perturbation, which is further approximated by a finite-rank operator up to a small error. The invertibility of the linearized operator restricted to the image of this finite-rank approximation is then rigorously verified using computer-assisted proofs. This certifies the existence of an unstable eigenpair and, consequently, yields a second solution - indeed, infinitely many Leray-Hopf solutions."
+    },
+    {
+     "arxiv_id": "2509.14185",
+     "link": "https://arxiv.org/abs/2509.14185",
+     "title": "Discovery of Unstable Singularities",
+     "published": "2025-09-17T17:18:10Z",
+     "updated": "2025-09-17T17:18:10Z",
+     "summary": "Whether singularities can form in fluids remains a foundational unanswered question in mathematics. This phenomenon occurs when solutions to governing equations, such as the 3D Euler equations, develop infinite gradients from smooth initial conditions. Historically, numerical approaches have primarily identified stable singularities. However, these are not expected to exist for key open problems, such as the boundary-free Euler and Navier-Stokes cases, where unstable singularities are hypothesized to play a crucial role. Here, we present the first systematic discovery of new families of unstable singularities. A stable singularity is a robust outcome, forming even if the initial state is slightly perturbed. In contrast, unstable singularities are exceptionally elusive; they require initial conditions tuned with infinite precision, being in a state of instability whereby infinitesimal perturbations immediately divert the solution from its blow-up trajectory. In particular, we present multiple new, unstable self-similar solutions for the incompressible porous media equation and the 3D Euler equation with boundary, revealing a simple empirical asymptotic formula relating the blow-up rate to the order of instability. Our approach combines curated machine learning architectures and training schemes with a high-precision Gauss-Newton optimizer, achieving accuracies that significantly surpass previous work across all discovered solutions. For specific solutions, we reach near double-float machine precision, attaining a level of accuracy constrained only by the round-off errors of the GPU hardware. This level of precision meets the requirements for rigorous mathematical validation via computer-assisted proofs. This work provides a new playbook for exploring the complex landscape of nonlinear partial differential equations (PDEs) and tackling long-standing challenges in mathematical physics."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22imploding%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2509.12435",
+     "link": "https://arxiv.org/abs/2509.12435",
+     "title": "Nonlinear stability of the Larson-Penston collapse",
+     "published": "2025-09-15T20:36:56Z",
+     "updated": "2025-09-15T20:36:56Z",
+     "summary": "We prove nonlinear stability of the Larson-Penston family of self-similarly collapsing solutions to the isothermal Euler-Poisson system. Our result applies to radially symmetric perturbations and it is the first full nonlinear stability result for radially imploding compressible flows. At the heart of the proof is the ground state character of the Larson-Penston solution, which exhibits important global monotonicity properties used throughout the proof. One of the key challenges is the proof of mode-stability for the non self-adjoint spectral problem which arises when linearising the dynamics around the Larson-Penston collapsing solution. To exclude the presence of complex growing modes other than the trivial one associated with time translation symmetry, we use a high-order energy method in low and high frequency regimes, for which the monotonicity properties are crucially exploited, and use rigorous computer-assisted techniques in the intermediate regime. In addition, the maximal dissipativity of the linearised operator is proven on arbitrary large backward light cones emanating from the singular point using the global monotonicity of the Larson-Penston solutions. Such a flexibility in linear analysis also facilitates nonlinear analysis and allows us to identify the exact number of derivatives necessary for the nonlinear stability statement. The proof is based on a two-tier high-order weighted energy method which ties bounds derived from the Duhamel formula to quasilinear top order estimates. To prove global existence we further use the Brouwer fixed point theorem to identify the final collapse time, which suppresses the trivial instability caused by the time-translation symmetry of the system."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22implosion%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22compressible%22+AND+abs%3A%22singularity%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "2509.12435",
+     "link": "https://arxiv.org/abs/2509.12435",
+     "title": "Nonlinear stability of the Larson-Penston collapse",
+     "published": "2025-09-15T20:36:56Z",
+     "updated": "2025-09-15T20:36:56Z",
+     "summary": "We prove nonlinear stability of the Larson-Penston family of self-similarly collapsing solutions to the isothermal Euler-Poisson system. Our result applies to radially symmetric perturbations and it is the first full nonlinear stability result for radially imploding compressible flows. At the heart of the proof is the ground state character of the Larson-Penston solution, which exhibits important global monotonicity properties used throughout the proof. One of the key challenges is the proof of mode-stability for the non self-adjoint spectral problem which arises when linearising the dynamics around the Larson-Penston collapsing solution. To exclude the presence of complex growing modes other than the trivial one associated with time translation symmetry, we use a high-order energy method in low and high frequency regimes, for which the monotonicity properties are crucially exploited, and use rigorous computer-assisted techniques in the intermediate regime. In addition, the maximal dissipativity of the linearised operator is proven on arbitrary large backward light cones emanating from the singular point using the global monotonicity of the Larson-Penston solutions. Such a flexibility in linear analysis also facilitates nonlinear analysis and allows us to identify the exact number of derivatives necessary for the nonlinear stability statement. The proof is based on a two-tier high-order weighted energy method which ties bounds derived from the Duhamel formula to quasilinear top order estimates. To prove global existence we further use the Brouwer fixed point theorem to identify the final collapse time, which suppresses the trivial instability caused by the time-translation symmetry of the system."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C2",
+   "query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22compressible+Navier-Stokes%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 2,
+   "entries": [
+    {
+     "arxiv_id": "2501.15701",
+     "link": "https://arxiv.org/abs/2501.15701",
+     "title": "Blow-up of the 3-D compressible Navier-Stokes equations for monatomic gases",
+     "published": "2025-01-26T23:20:37Z",
+     "updated": "2025-02-10T08:18:10Z",
+     "summary": "In this paper, we prove the blow-up of the $3$-D isentropic compressible Navier-Stokes equations for the adiabatic exponent $\u03b3=5/3$, which corresponds to the law of monatomic gases. This is the degenerate case in the sense of [Merle, Rapha\u00ebl, Rodnianski and Szeftel, Ann. of Math. (2), 196 (2022), 567-778; Ann. of Math. (2), 196 (2022), 779-889]. Motivated by these breakthrough works, we first establish the existence of a sequence of smooth, self-similar imploding solutions to the compressible Euler equations for $\u03b3=5/3$. Subsequently, we utilize these self-similar profiles to construct smooth, asymptotically self-similar blow-up solutions to the compressible Navier-Stokes equations for monatomic gases."
+    },
+    {
+     "arxiv_id": "1911.00339",
+     "link": "https://arxiv.org/abs/1911.00339",
+     "title": "Backward self-similar solutions for compressible Navier-Stokes equations",
+     "published": "2019-10-31T14:32:03Z",
+     "updated": "2019-10-31T14:32:03Z",
+     "summary": "This article is devoted to backward self-similar blow up solutions of the compressible Navier-Stokes equations with radial symmetry. We show that such solutions cannot exist if they either satisfy an appropriate smallness condition, or have finite energy. Furthermore, numerical simulations lead us to the conjecture that such solutions do not exist."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22radii+polynomial%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22radii+polynomial%22+AND+abs%3A%22self-similar%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Newton-Kantorovich%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22validated+numerics%22+AND+abs%3A%22dissipative%22+AND+abs%3A%22singularity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22interval+arithmetic%22+AND+abs%3A%22viscous%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "1401.5371",
+     "link": "https://arxiv.org/abs/1401.5371",
+     "title": "Numerical proof of stability of roll waves in the small-amplitude limit for inclined thin film flow",
+     "published": "2014-01-21T16:22:54Z",
+     "updated": "2014-01-21T16:22:54Z",
+     "summary": "We present a rigorous numerical proof based on interval arithmetic computations categorizing the linearized and nonlinear stability of periodic viscous roll waves of the KdV-KS equation modeling weakly unstable flow of a thin fluid film on an incline in the small-amplitude KdV limit. The argument proceeds by verification of a stability condition derived by Bar-Nepomnyashchy and Johnson-Noble-Rodrigues-Zumbrun involving inner products of various elliptic functions arising through the KdV equation. One key point in the analysis is a bootstrap argument balancing the extremely poor sup norm bounds for these functions against the extremely good convergence properties for analytic interpolation in order to obtain a feasible computation time. Another is the way of handling analytic interpolation in several variables by a two-step process carving up the parameter space into manageable pieces for rigorous evaluation. These and other general aspects of the analysis should serve as blueprints for more general analyses of spectral stability."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22computer-assisted+proof%22+AND+abs%3A%22parabolic%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C3",
+   "query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22rigorous+numerics%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "HTTPError: HTTP Error 429: Unknown Error",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22De+Gregorio%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "HTTPError: HTTP Error 429: Unknown Error",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Constantin-Lax-Majda%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "HTTPError: HTTP Error 429: Unknown Error",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Hou-Luo%22+AND+abs%3A%22viscous%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "HTTPError: HTTP Error 503: Service Unavailable",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22surface+quasi-geostrophic%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "TimeoutError: The read operation timed out",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3A%22singularity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "status": "UNAVAILABLE",
+   "error": "TimeoutError: The read operation timed out",
+   "entries": [],
+   "n": null
+  },
+  {
+   "channel": "C4",
+   "query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Euler+equations%22+AND+abs%3A%22computer-assisted%22+AND+abs%3A%22viscosity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 0,
+   "entries": [],
+   "status": "OK"
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22backward+self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 7,
+   "entries": [
+    {
+     "arxiv_id": "2006.15776",
+     "link": "https://arxiv.org/abs/2006.15776",
+     "title": "Leray's backward self-similar solutions to the 3D Navier-Stokes equations in Morrey spaces",
+     "published": "2020-06-29T02:09:32Z",
+     "updated": "2020-06-29T02:09:32Z",
+     "summary": "In this paper, it is shown that there does not exist a non-trivial Leray's backward self-similar solution to the 3D Navier-Stokes equations with profiles in Morrey spaces $\\dot{\\mathcal{M}}^{q,1}(\\mathbb{R}^{3})$ provided $3/2<q<6$, or in $\\dot{\\mathcal{M}}^{q,l}(\\mathbb{R}^{3})$ provided $6\\leq q<\\infty$ and $2<l\\leq q$. This generalizes the corresponding results obtained by Ne\u010das-R\u00e5u\u017ei\u010dka-\u0160ver\u00e1k [19, Acta.Math. 176 (1996)] in $L^{3}(\\mathbb{R}^{3})$, Tsai [25, Arch. Ration. Mech. Anal. 143 (1998)] in $L^{p}(\\mathbb{R}^{3})$ with $p\\geq3$,, Chae-Wolf [3, Arch. Ration. Mech. Anal. 225 (2017)] in Lorentz spaces $L^{p,\\infty}(\\mathbb{R}^{3})$ with $p>3/2$, and Guevara-Phuc [11, SIAM J. Math. Anal. 12 (2018)] in $\\dot{\\mathcal{M}}^{q,\\frac{12-2q}{3}}(\\mathbb{R}^{3})$ with $12/5\\leq q<3$ and in $L^{q, \\infty}(\\mathbb{R}^3)$ with $12/5\\leq q<6$."
+    },
+    {
+     "arxiv_id": "1911.00339",
+     "link": "https://arxiv.org/abs/1911.00339",
+     "title": "Backward self-similar solutions for compressible Navier-Stokes equations",
+     "published": "2019-10-31T14:32:03Z",
+     "updated": "2019-10-31T14:32:03Z",
+     "summary": "This article is devoted to backward self-similar blow up solutions of the compressible Navier-Stokes equations with radial symmetry. We show that such solutions cannot exist if they either satisfy an appropriate smallness condition, or have finite energy. Furthermore, numerical simulations lead us to the conjecture that such solutions do not exist."
+    },
+    {
+     "arxiv_id": "1901.01510",
+     "link": "https://arxiv.org/abs/1901.01510",
+     "title": "$\\varepsilon$-regularity criteria in anisotropic Lebesgue spaces and Leray's self-similar solutions to the 3D Navier-Stokes equations",
+     "published": "2019-01-06T07:11:19Z",
+     "updated": "2019-04-23T08:48:13Z",
+     "summary": "In this paper, we establish some $\\varepsilon$-regularity criteria in anisotropic Lebesgue spaces for suitable weak solutions to the 3D Navier-Stokes equations as follows: $$ \\limsup\\limits_{\\varrho\\rightarrow0} \\varrho^{1-\\frac{2}{p}-\\sum\\limits^{3}_{j=1}\\frac{1}{q_{j}}} \\|u\\|_{L_{t}^{p}L^{\\overrightarrow{q}}_{x}(Q(\\varrho))} \\leq\\varepsilon, ~~\\frac{2}{p}+\\sum\\limits^{3}_{j=1}\\frac{1}{q_{j}} \\leq2~~~~~\\text{with}~q_{j} > 1;\\\\$$$$ \\sup_{-1\\leq t\\leq0}\\|u\\|_{L^{\\overrightarrow{q}}(B(1))} < \\varepsilon,~~\\frac{1}{q_{1}}+\\frac{1}{q_{2}}+\\frac{1}{q_{3}} <2\\quad \\text{with}\\, 1<q_{j}<\\infty;$$ $$\\|u \\|_{L_{t}^{p}L^{\\overrightarrow{q}}_{x}(Q(1))} +\\|\u03a0\\|_{L^{1}(Q(1))}\\leq\\varepsilon, \\quad \\frac2p+\\sum^{3}_{j=1}\\frac{1}{q_{j}} <2 ~~~\\text{with}~~ 1<q_{j}<\\infty, $$ which extends the previous results in [2, 12, 18, 19, 22, 37, 43]. As an application, in the spirit of [4], we prove that there does not exist a nontrivial Leray's backward self-similar solution with profiles in $L^{\\overrightarrow{p}}(\\mathbb{R}^{3})$ with $\\frac{1}{p_{1}}+\\frac{1}{p_{2}}+\\frac{1}{p_{3}}<2$. This generalizes the corresponding results of [4, 20, 28, 38]."
+    },
+    {
+     "arxiv_id": "1812.00957",
+     "link": "https://arxiv.org/abs/1812.00957",
+     "title": "Leray self-similarity equations in fluid dynamics",
+     "published": "2018-12-03T18:27:03Z",
+     "updated": "2024-02-22T07:52:54Z",
+     "summary": "In the present note, we show that, as a priori bounds, the vorticity dynamics derived from Leray's backward self-similarity hypothesis admits only trivial solution in viscous as well as inviscid flows. By analogy, there is no non-zero solution in the forward self-similar equation. Since the Navier-Stokes or Euler equations are invariant under space translation in the whole space, our analysis establishes that technically flawed arguments have been exploited in a number of past papers, notably in Necas, Ruzicka & Sverak (1996); Tsai (1998); and Pomeau (2016), where the presumed decays or bounds at infinity are ill-defined and non-existent. Furthermore, an effort has been made to exemplify an inappropriate application of the familiar extremum principles in the theory of linear elliptic equation. In the appendix, we give a counterexample to the Sobolev inequality and, hence illustrate the nature of self contradiction. In the totality comparison of Lp norms, its scope of application is not significant."
+    },
+    {
+     "arxiv_id": "1807.10341",
+     "link": "https://arxiv.org/abs/1807.10341",
+     "title": "On stability of blow-up solutions of the Burgers vortex type for the Navier-Stokes equations with a linear strain",
+     "published": "2018-07-26T19:59:51Z",
+     "updated": "2019-04-09T07:26:43Z",
+     "summary": "We study the three-dimensional Navier-Stokes equations in the presence of the axisymmetric linear strain, where the strain rate depends on time in a specific manner. It is known that the system admits solutions which blow up in finite time and whose profiles are in a backward self-similar form of the familiar Burgers vortices. In this paper it is shown that the existing stability theory of the Burgers vortex leads to the stability of these blow-up solutions as well. The secondary blow-up is also observed when the strain rate is relatively weak."
+    },
+    {
+     "arxiv_id": "1509.08177",
+     "link": "https://arxiv.org/abs/1509.08177",
+     "title": "Leray's self-similar solutions to the Navier--Stokes equations with profiles in Marcinkiewicz and Morrey spaces",
+     "published": "2015-09-28T02:41:28Z",
+     "updated": "2017-02-01T20:52:24Z",
+     "summary": "We rule out the existence of Leray's backward self-similar solutions to the Navier--Stokes equations with profiles in $L^{12/5}(\\R^3)$ or in the Marcinkiewicz space $L^{q,\\infty}(\\R^3)$ for $q\\in(12/5, 6)$. This follows from a more general result formulated in terms of Morrey spaces and the first order Riesz's potential."
+    },
+    {
+     "arxiv_id": "1306.0305",
+     "link": "https://arxiv.org/abs/1306.0305",
+     "title": "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+     "published": "2013-06-03T06:44:05Z",
+     "updated": "2015-05-12T01:06:20Z",
+     "summary": "We study scenarios of self-similar type blow-up for the incompressible Navier-Stokes and the Euler equations. The previous notions of the discretely (backward) self-similar solution and the asymptotically self-similar solution are generalized to the locally asymptotically discretely self-similar solution. We prove that there exists no such locally asymptotically discretely self-similar blow-up for the 3D Navier-Stokes equations if the blow-up profile is a time periodic function belonging to $C^1(\\Bbb R ; L^3(\\Bbb R^3)\\cap C^2 (\\Bbb R^3))$. For the 3D Euler equations we show that the scenario of asymptotically discretely self-similar blow-up is excluded if the blow-up profile satisfies suitable integrability conditions."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22discretely+self-similar%22+AND+abs%3A%22Navier-Stokes%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 23,
+   "entries": [
+    {
+     "arxiv_id": "2607.09619",
+     "link": "https://arxiv.org/abs/2607.09619",
+     "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+     "published": "2026-07-10T17:18:51Z",
+     "updated": "2026-08-06T05:19:02Z",
+     "summary": "We consider backwards globally self-similar solutions of the 3D incompressible Navier-Stokes equations which are invariant under the joint action of scaling (the natural parabolic scaling) and rotation about a given axis, at a constant angular speed $\u03b1$ in self-similar time. For these so-called rotated self-similar solutions (RSS), we prove that if they satisfy a Type~I upper bound, and if the rotation parameter $\u03b1$ is either too small, or too large, then they must be trivial. This Liouville-type result extends the classical works of Ne\u010das-R\u016f\u017ei\u010dka-\u0160ver\u00e1k ('96) and Tsai ('98), which only consider $\u03b1=0$, to the case of similarity profiles which experience nontrivial rotation. Our results partially answer a question posed by Perelman. For backwards globally self-similar solutions which are invariant under the discrete action of scaling and rotation, the so-called rotated discretely self-similar solutions (RDSS), we obtain similar Liouville-type results under a Type~I upper bound, assuming extreme values of the rotation parameter $\u03b1$, and if the scaling factor $\u03bb$ is sufficiently close to $1$. We also establish a new regularity criterion for 3D Navier-Stokes which is local in nature: if the solution satisfies a Type~I upper bound in a unit parabolic cylinder, and there is a single time-slice at which the solution is locally approximately self-similar, then the top-center of the parabolic cylinder is a regular point of the Navier-Stokes flow. The proof of all these results rests on the introduction of a robust weighted-$L^2$ framework. In particular, our method is quantitative and is not sensitive to whether the Bernoulli head pressure satisfies a maximum principle, which was a key obstruction in previous works."
+    },
+    {
+     "arxiv_id": "2409.13586",
+     "link": "https://arxiv.org/abs/2409.13586",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20T15:39:33Z",
+     "updated": "2024-09-20T15:39:33Z",
+     "summary": "In this paper we explore the extent to which discretely self-similar (DSS) solutions to the 3D Navier-Stokes equations with rough data almost have the same asymptotics as DSS flows with smoother data. In a previous work, we established algebraic spatial decay rates for data in $L^q_{loc}(\\mathbb{R}^3\\setminus\\{0\\})$ for $q\\in (3,\\infty]$. The optimal rate occurs when $q=\\infty$ and rates degrade as $q$ decreases. In this paper, we show that these solutions can be further decomposed into a term satisfying the optimal $q=\\infty$ decay rate -- i.e.~have asymptotics like $(|x|+\\sqrt t)^{-1}$ -- and a term with the $q<\\infty$ decay rate multiplied by a prefactor which can be taken to be arbitrarily small. This smallness property is new and implies the $q<\\infty$ asymptotics should be understood in a little-o sense. The decay rates in our previous work broke down when $q=3$, in which case spatial asymptotics have not been explored. The second result of this paper shows that DSS solutions with data in $L^3_{loc}(\\mathbb{R}^3\\setminus\\{0\\})$ can be expanded into a term satisfying the $(|x|+\\sqrt t)^{-1}$ decay rate and a term that can be taken to be arbitrarily small in a scaling invariant class. A Besov space version of this result is also included."
+    },
+    {
+     "arxiv_id": "2407.06179",
+     "link": "https://arxiv.org/abs/2407.06179",
+     "title": "Non-uniqueness in the Leray-Hopf class for a dyadic Navier-Stokes model",
+     "published": "2024-07-08T17:52:57Z",
+     "updated": "2024-07-08T17:52:57Z",
+     "summary": "The uniqueness of Leray-Hopf solutions to the incompressible Navier-Stokes equations remains a significant open question in fluid mechanics. This paper proposes a potential mechanism for non-uniqueness, illustrated in a natural dyadic shell model. We show that, for the Obukhov model with $d>2$, there exist initial data at the critical regularity that give rise to two distinct Leray-Hopf solutions. These solutions exhibit an approximately discretely self-similar structure, with non-uniqueness resulting from a partial breaking of the scaling symmetry. The fundamental observation is that, in a certain scenario, the dynamics reduce to a sequence of weakly coupled finite-dimensional systems. Moreover, the predominant nonlinear interactions are identical to those arising in convex integration, suggesting the possibility of a similar construction in the full PDE setting."
+    },
+    {
+     "arxiv_id": "2202.08352",
+     "link": "https://arxiv.org/abs/2202.08352",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16T21:55:07Z",
+     "updated": "2022-02-16T21:55:07Z",
+     "summary": "Forward self-similar and discretely self-similar weak solutions of the Navier-Stokes equations are known to exist globally in time for large self-similar and discretely self-similar initial data and are known to be regular outside of a space-time paraboloid. In this paper, we establish spatial decay rates for such solutions which hold in the region of regularity provided the initial data has locally sub-critical regularity away from the origin. In particular, we (1) lower the H\u00f6lder regularity of the data required to obtain an optimal decay rate for the nonlinear part of the flow compared to the existing literature, (2) establish new decay rates without logarithmic corrections for some smooth data, (3) provide new decay rates for solutions with rough data, and, as an application of our decay rates, (4) provide new upper bounds on how rapidly potentially {non-unique}, scaling invariant local energy solutions can separate away from the origin."
+    },
+    {
+     "arxiv_id": "2012.15848",
+     "link": "https://arxiv.org/abs/2012.15848",
+     "title": "Global weak solutions of the Navier-Stokes equations for intermittent initial data in half-space",
+     "published": "2020-12-31T18:57:39Z",
+     "updated": "2020-12-31T18:57:39Z",
+     "summary": "We prove existence of global-in-time weak solutions of the incompressible Navier-Stokes equations in the half-space $\\mathbb{R}^3_+$ with initial data in a weighted space that allow non-uniformly locally square integrable functions that grow at spatial infinity in an intermittent sense. The space for initial data is built on cubes whose sides $R$ are proportional to the distance to the origin and the square integral of the data is allowed to grow as a power of $R$. The existence is obtained via a new a priori estimate and stability result in the weighted space, as well as new pressure estimates. Also, we prove eventual regularity of such weak solutions, up to the boundary, for $(x,t)$ satisfying $t>c_1|x|^2 + c_2$, where $c_1,c_2>0$, for a large class of initial data $u_0$, with $c_1$ arbitrarily small. As an application of the existence theorem, we construct global discretely self-similar solutions, thus extending the theory on the half-space to the same generality as the whole space."
+    },
+    {
+     "arxiv_id": "2011.02800",
+     "link": "https://arxiv.org/abs/2011.02800",
+     "title": "On bifurcation of self-similar solutions of the stationary Navier-Stokes equations",
+     "published": "2020-11-05T13:09:28Z",
+     "updated": "2020-11-05T13:09:28Z",
+     "summary": "Landau solutions are special solutions to the stationary incompressible Navier-Stokes equations in the three dimensional space excluding the origin. They are self-similar and axisymmetric with no swirl. In fact, any self-similar smooth solution must be a Landau solution. In the effort of extending this result to the one for the solution class with the pointwise scale-invariant bound $|u(x)|\\leq C_0|x|^{-1}$ for some $C_0>0$, we consider axisymmetric discretely self-similar solutions, and investigate the existence of such solution curve emanating from some Landau solution. We prove that the inclusion of the swirl component does not enhance the bifurcation and present numerical evidence of no bifurcation."
+    },
+    {
+     "arxiv_id": "2006.13145",
+     "link": "https://arxiv.org/abs/2006.13145",
+     "title": "An $\u03b5$-regularity criterion and estimates of the regular set for Navier-Stokes flows in terms of initial data",
+     "published": "2020-06-23T16:41:42Z",
+     "updated": "2020-07-15T12:44:17Z",
+     "summary": "We prove an $\u03b5$-regularity criterion for the 3D Navier-Stokes equations in terms of initial data. It shows that if a scaled local $L^2$ norm of initial data is sufficiently small around the origin, a suitable weak solution is regular in a set enclosed by a paraboloid started from the origin. The result is applied to the estimate of the regular set for local energy solutions with initial data in weighted $L^2$ spaces. We also apply this result to studying energy concentration near a possible blow-up time and regularity of forward discretely self-similar solutions."
+    },
+    {
+     "arxiv_id": "2003.06717",
+     "link": "https://arxiv.org/abs/2003.06717",
+     "title": "Quantitative regularity for the Navier-Stokes equations via spatial concentration",
+     "published": "2020-03-14T22:48:16Z",
+     "updated": "2020-05-25T08:22:34Z",
+     "summary": "This paper is concerned with quantitative estimates for the Navier-Stokes equations. First we investigate the relation of quantitative bounds to the behaviour of critical norms near a potential singularity with Type I bound $\\|u\\|_{L^{\\infty}_{t}L^{3,\\infty}_{x}}\\leq M$. Namely, we show that if $T^*$ is a first blow-up time and $(0,T^*)$ is a singular point then $$\\|u(\\cdot,t)\\|_{L^{3}(B_{0}(R))}\\geq C(M)\\log\\Big(\\frac{1}{T^*-t}\\Big),\\,\\,\\,\\,\\,\\,R=O((T^*-t)^{\\frac{1}{2}-}).$$ We demonstrate that this potential blow-up rate is optimal for a certain class of potential non-zero backward discretely self-similar solutions. Second, we quantify the result of Seregin (2012), which says that if $u$ is a smooth finite-energy solution to the Navier-Stokes equations on $\\mathbb{R}^3\\times (0,1)$ with $$\\sup_{n}\\|u(\\cdot,t_{(n)})\\|_{L^{3}(\\mathbb{R}^3)}<\\infty\\,\\,\\,\\textrm{and}\\,\\,\\,t_{(n)}\\uparrow 1,$$ then $u$ does not blow-up at $t=1$. To prove our results we develop a new strategy for proving quantitative bounds for the Navier-Stokes equations. This hinges on local-in-space smoothing results (near the initial time) established by Jia and \u0160ver\u00e1k (2014), together with quantitative arguments using Carleman inequalities given by Tao (2019). Moreover, the technology developed here enables us in particular to give a quantitative bound for the number of singular points in a Type I blow-up scenario."
+    },
+    {
+     "arxiv_id": "1910.11267",
+     "link": "https://arxiv.org/abs/1910.11267",
+     "title": "Existence of infinite-energy and discretely self-similar global weak solutions for 3D MHD equations",
+     "published": "2019-10-24T16:36:00Z",
+     "updated": "2019-12-12T20:59:26Z",
+     "summary": "This paper deals with the existence of global weak solutions for 3D MHD equations when the initial data belong to the weighted spaces $L^2_{w_\u03b3}$, with $w_\u03b3(x)=(1+| x|)^{-\u03b3}$ and $0 \\leq \u03b3\\leq 2$. Moreover, we prove the existence of discretely self-similar solutions for 3D MHD equations for discretely self-similar initial data which are locally square integrable. Our methods are inspired of a recent work of P. Fern\u00e1ndez-Dalgo and P.G. Lemari\u00e9-Riseusset for the 3D Navier-Stokes equations."
+    },
+    {
+     "arxiv_id": "1910.06929",
+     "link": "https://arxiv.org/abs/1910.06929",
+     "title": "Existence of global weak solutions to the Navier-Stokes equations in weighted spaces",
+     "published": "2019-10-15T17:07:14Z",
+     "updated": "2019-10-15T17:07:14Z",
+     "summary": "We obtain a global existence result for the three-dimensional Navier-Stokes equations with a large class of data allowing growth at spatial infinity. Namely, we show the global existence of suitable weak solutions when the initial data belongs to the weighted space $\\mathring M^{2,2}_{\\mathcal C}$ introduced in [Z. Bradshaw and I. Kukavica, Existence of suitable weak solutions to the Navier-Stokes equations for intermittent data, J. Math. Fluid Mech. to appear]. This class is strictly larger than currently available spaces of initial data for global existence and includes all locally square integrable discretely self-similar data. We also identify a sub-class of data for which solutions exhibit eventual regularity on a parabolic set in space-time."
+    },
+    {
+     "arxiv_id": "1907.00256",
+     "link": "https://arxiv.org/abs/1907.00256",
+     "title": "Global existence, regularity, and uniqueness of infinite energy solutions to the Navier-Stokes equations",
+     "published": "2019-06-29T18:40:07Z",
+     "updated": "2019-06-29T18:40:07Z",
+     "summary": "This paper addresses several problems associated to local energy solutions (in the sense of Lemari\u00e9-Rieusset) to the Navier-Stokes equations with initial data which is sufficiently small at large or small scales as measured using truncated Morrey-type quantities, namely: (1) global existence for a class of data including the critical $L^2$-based Morrey space; (2) initial and eventual regularity of local energy solutions to the Navier-Stokes equations with initial data sufficiently small at small or large scales; (3) small-large uniqueness of local energy solutions for data in the critical $L^2$-based Morrey space. A number of interesting corollaries are included, including eventual regularity in familiar Lebesgue, Lorentz, and Morrey spaces, a new local generalized Von Wahl uniqueness criteria, as well as regularity and uniqueness for local energy solutions with small discretely self-similar data."
+    },
+    {
+     "arxiv_id": "1906.11038",
+     "link": "https://arxiv.org/abs/1906.11038",
+     "title": "Weak solutions for Navier--Stokes equations with initial data in weighted $L^2$ spaces",
+     "published": "2019-06-26T12:39:19Z",
+     "updated": "2019-06-26T12:39:19Z",
+     "summary": "We show the existence of global weak solutions of the 3D Navier-Stokes equations with initial velocity in the weighted spaces L 2 w$\u03b3$ , where w $\u03b3$ (x) = (1 + |x|) --$\u03b3$ and 0 < $\u03b3$ $\\le$ 2, using new energy controls. As application we give a new proof of the existence of global weak discretely self-similar solutions of the 3D Navier-Stokes equations for discretely self-similar initial velocities which are locally square inte-grable."
+    },
+    {
+     "arxiv_id": "1902.10771",
+     "link": "https://arxiv.org/abs/1902.10771",
+     "title": "Forward Discretely Self-Similar Solutions of the MHD Equations and the Viscoelastic Navier-Stokes Equations with Damping",
+     "published": "2019-02-27T20:33:31Z",
+     "updated": "2019-03-06T17:46:26Z",
+     "summary": "In this paper, we prove the existence of forward discretely self-similar solutions to the MHD equations and the viscoelastic Navier-Stokes equations with damping with large weak $L^3$ initial data. The same proving techniques are also applied to construct self-similar solutions to the MHD equations and the viscoelastic Navier-Stokes equations with damping with large weak $L^3$ initial data. This approach is based on [Z. Bradshaw and T.-P. Tsai, Ann. Henri Poincar'{e}, vol. 18, no. 3, 1095-1119, 2017]."
+    },
+    {
+     "arxiv_id": "1812.10509",
+     "link": "https://arxiv.org/abs/1812.10509",
+     "title": "Short time regularity of Navier-Stokes flows with locally $L^3$ initial data and applications",
+     "published": "2018-12-26T19:33:31Z",
+     "updated": "2018-12-26T19:33:31Z",
+     "summary": "We prove short time regularity of suitable weak solutions of 3D incompressible Navier-Stokes equations near a point where the initial data is locally in $L^3$. The result is applied to the regularity problems of solutions with uniformly small local $L^3$ norms, and of forward discretely self-similar solutions."
+    },
+    {
+     "arxiv_id": "1801.08060",
+     "link": "https://arxiv.org/abs/1801.08060",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24T16:29:56Z",
+     "updated": "2018-01-24T16:29:56Z",
+     "summary": "Chae and Wolf recently constructed discretely self-similar solutions to the Navier-Stokes equations for any discretely self similar data in $L^2_{\\mathrm{loc}}$. Their solutions are in the class of local Leray solutions with projected pressure, and satisfy the \"local energy inequality with projected pressure\". In this note, for the same class of initial data, we construct discretely self-similar suitable weak solutions to the Navier-Stokes equations that satisfy the classical local energy inequality of Scheffer and Caffarelli-Kohn-Nirenberg. We also obtain an explicit formula for the pressure in terms of the velocity. Our argument involves a new purely local energy estimate for discretely self-similar solutions with data in $L^2_{\\mathrm{loc}}$ and an approximation of divergence free, discretely self-similar vector fields in $L^2_{\\mathrm{loc}}$ by divergence free, discretely self-similar elements of $L^3_w$."
+    },
+    {
+     "arxiv_id": "1703.03480",
+     "link": "https://arxiv.org/abs/1703.03480",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data",
+     "published": "2017-03-09T22:29:08Z",
+     "updated": "2017-03-09T22:29:08Z",
+     "summary": "We construct self-similar solutions to the three dimensional Navier-Stokes equations for divergence free, self-similar initial data that can be large in the critical Besov space $\\dot B^{-1+3/p}_{p,\\infty}$ where $3< p< 6$. We also construct discretely self-similar solutions for divergence free initial data in $\\dot B^{-1+3/p}_{p,\\infty}$ for $3<p<6$ that is discretely self-similar for some scaling factor $\u03bb>1$. These results extend those of \\cite{BT1} which dealt with initial data in $L^3_w$ since $L^3_w\\subsetneq \\dot B^{-1+3/p}_{p,\\infty}$ for $p>3$. We also provide several concrete examples of vector fields in the relevant function spaces."
+    },
+    {
+     "arxiv_id": "1610.09464",
+     "link": "https://arxiv.org/abs/1610.09464",
+     "title": "Removing discretely self-similar singularities for the 3D Navier-Stokes equations",
+     "published": "2016-10-29T06:32:04Z",
+     "updated": "2017-06-02T07:30:05Z",
+     "summary": "We study the scenario of discretely self-similar blow-up for Navier-Stokes equations. We prove that at the possible blow-up time such solutions only one point singularity. In case of the scaling parameter $ \u03bb$ near $ 1$ we remove the singularity."
+    },
+    {
+     "arxiv_id": "1610.05680",
+     "link": "https://arxiv.org/abs/1610.05680",
+     "title": "Rotationally corrected scaling invariant solutions to the Navier-Stokes equations",
+     "published": "2016-10-18T15:49:36Z",
+     "updated": "2016-10-18T15:49:36Z",
+     "summary": "We introduce new classes of solutions to the three dimensional Navier-Stokes equations in the whole and half spaces that add rotational correction to self-similar and discretely self-similar solutions. We construct forward solutions in these new classes for arbitrarily large initial data in $L^3_w$ on the whole and half spaces. We also comment on the backward case."
+    },
+    {
+     "arxiv_id": "1610.01386",
+     "link": "https://arxiv.org/abs/1610.01386",
+     "title": "Existence of discretely self-similar solutions to the Navier-Stokes equations for initial value in $ L^2_{ loc}(\\Bbb R^{3})$",
+     "published": "2016-10-05T12:38:51Z",
+     "updated": "2016-10-05T12:38:51Z",
+     "summary": "We prove the existence of a forward discretely self-similar solutions to the Navier-Stokes equations in $ \\Bbb R^{3}\\times (0,+\\infty)$ for a discretely self-similar initial velocity belonging to $ L^2_{ loc}(\\Bbb R^{3})$."
+    },
+    {
+     "arxiv_id": "1510.07504",
+     "link": "https://arxiv.org/abs/1510.07504",
+     "title": "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+     "published": "2015-10-26T15:02:54Z",
+     "updated": "2015-10-26T15:02:54Z",
+     "summary": "For any discretely self-similar, incompressible initial data $v_0$ which satisfies $\\|v_0 \\|_{L^3_w(\\mathbb R^3)}\\leq c_0$ where $c_0$ is allowed to be large, we construct a forward discretely self-similar local Leray solution in the sense of Lemari\u00e9-Rieusset to the 3D Navier-Stokes equations in the whole space. No further assumptions are imposed on the initial data; in particular, the data is not required to be continuous or locally bounded on $\\mathbb R^3\\setminus \\{0\\}$. The same method is used to construct self-similar solutions for any $-1$-homogeneous initial data in $L^3_w$."
+    },
+    {
+     "arxiv_id": "1306.0305",
+     "link": "https://arxiv.org/abs/1306.0305",
+     "title": "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+     "published": "2013-06-03T06:44:05Z",
+     "updated": "2015-05-12T01:06:20Z",
+     "summary": "We study scenarios of self-similar type blow-up for the incompressible Navier-Stokes and the Euler equations. The previous notions of the discretely (backward) self-similar solution and the asymptotically self-similar solution are generalized to the locally asymptotically discretely self-similar solution. We prove that there exists no such locally asymptotically discretely self-similar blow-up for the 3D Navier-Stokes equations if the blow-up profile is a time periodic function belonging to $C^1(\\Bbb R ; L^3(\\Bbb R^3)\\cap C^2 (\\Bbb R^3))$. For the 3D Euler equations we show that the scenario of asymptotically discretely self-similar blow-up is excluded if the blow-up profile satisfies suitable integrability conditions."
+    },
+    {
+     "arxiv_id": "1210.2783",
+     "link": "https://arxiv.org/abs/1210.2783",
+     "title": "Forward Discretely Self-Similar Solutions of the Navier-Stokes Equations",
+     "published": "2012-10-10T00:09:54Z",
+     "updated": "2013-11-05T04:27:07Z",
+     "summary": "Extending the work of Jia and Sverak on self-similar solutions of the Navier-Stokes equations, we show the existence of large, forward, discretely self-similar solutions."
+    },
+    {
+     "arxiv_id": "1105.0414",
+     "link": "https://arxiv.org/abs/1105.0414",
+     "title": "Asymptotics of small exterior Navier-Stokes flows with non-decaying boundary data",
+     "published": "2011-05-02T19:24:51Z",
+     "updated": "2011-05-02T19:24:51Z",
+     "summary": "We prove the unique existence of solutions of the 3D incompressible Navier-Stokes equations in an exterior domain with small non-decaying boundary data, for $t \\in R$ or $t \\in (0,\\infty)$. In the latter case it is coupled with small initial data in weak $L^{3}$. As a corollary, the unique existence of time-periodic solutions is shown for the small periodic boundary data. We next show that the spatial asymptotics of the periodic solution is given by the same Landau solution at all times. Lastly we show that if the boundary datum is time-periodic and the initial datum is asymptotically discretely self-similar, then the solution is asymptotically the sum of a time-periodic vector field and a forward discretely self-similar vector field as time goes to infinity. It in particular shows the stability of periodic solutions in a local sense."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Leray%22+AND+abs%3A%22self-similar%22+AND+abs%3A%22nonexistence%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 1,
+   "entries": [
+    {
+     "arxiv_id": "1110.0054",
+     "link": "https://arxiv.org/abs/1110.0054",
+     "title": "Nonexistence of Self-Similar Singularities in the Ideal Viscoelastic Flow",
+     "published": "2011-10-01T00:11:50Z",
+     "updated": "2012-06-27T08:49:44Z",
+     "summary": "We prove the nonexistence of finite time self-similar singularities in an ideal viscoelastic flow in $R^3$. We exclude the occurrence of Leray-type self-similar singularities under suitable integrability conditions on velocity and deformation tensor. We also prove the nonexistence of asymptotically self-similar singularities in our system. The present work extends the results obtained by Chae in the case of magnetohydrodynamics (MHD)."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Type+I%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 9,
+   "entries": [
+    {
+     "arxiv_id": "2604.07785",
+     "link": "https://arxiv.org/abs/2604.07785",
+     "title": "On partial type I solutions to the Axially symmetric Navier-Stokes equations",
+     "published": "2026-04-09T04:23:41Z",
+     "updated": "2026-04-09T04:23:41Z",
+     "summary": "Let $v= v_{r}e_{r} + v_\u00fee_\u00fe + v_{3}e_{3}$ be a Leray-Hopf solution to the axially symmetric Navier-Stokes equations (ASNS). We call it a partial type I solution if $v_r(x, t) \\ge -C/\\sqrt{T-t}$ for some constant $C>0$ and $(x, t) \\in \\mathbf{R}^3 \\times [0, T)$. In this paper, it is proven that such solution does not blow up at time $T$ under the extra mild assumption that $|v_\u03b8(x, 0)| |x'|$ is bounded. This extends a well known result by two groups of people who proved the no blowup conclusion under the full type I condition: $|v(x, t)| \\le C/\\sqrt{T-t}$. The result also confirms the physical intuition that potential blow ups for ASNS are caused by super-critical inward radial velocity."
+    },
+    {
+     "arxiv_id": "2511.09556",
+     "link": "https://arxiv.org/abs/2511.09556",
+     "title": "Instantaneous Type I blow-up and non-uniqueness of smooth solutions of the Navier-Stokes equations",
+     "published": "2025-11-12T18:59:15Z",
+     "updated": "2026-01-12T14:36:30Z",
+     "summary": "For any smooth, divergence-free initial data, we construct a solution of the Navier--Stokes equations that exhibits Type~I blow-up of the $L^\\infty$ norm at time $T_*>0$, while remaining smooth in space and time on $\\mathbb T^d\\times([0,T]\\setminus\\{T_*\\})$. An instantaneous injection of energy from infinite wavenumber initiates a bifurcation from the classical solution, producing an infinite family of spatially smooth solutions with the same data and thereby violating uniqueness of the Cauchy problem. A key ingredient is the first known construction of a complete inverse energy cascade realized by a classical Navier--Stokes flow, which transfers energy from infinitely high to low frequencies. The result holds in all dimensions $d\\geq2$."
+    },
+    {
+     "arxiv_id": "2410.07816",
+     "link": "https://arxiv.org/abs/2410.07816",
+     "title": "On rough Calder\u00f3n solutions to the Navier-Stokes equations and applications to the singular set",
+     "published": "2024-10-10T11:02:46Z",
+     "updated": "2024-10-10T11:02:46Z",
+     "summary": "In 1934, Leray proved the existence of global-in-time weak solutions to the Navier-Stokes equations for any divergence-free initial data in $L^2$. In the 1980s, Giga and Kato independently showed that there exist global-in-time mild solutions corresponding to small enough critical $L^3(\\mathbb{R}^3)$ initial data. In 1990, Calder\u00f3n filled the gap to show that there exist global-in-time weak solutions for all supercritical initial data in $L^p$ for $2< p<3$ by utilising a splitting argument, blending the constructions of Leray and Giga-Kato. In this paper, we utilise a \"Calder\u00f3n-like\" splitting to show the global-in-time existence of weak solutions to the Navier-Stokes equations corresponding to supercritical Besov space initial data $u_0 \\in \\dot{B}^{s}_{q,\\infty}$ where $q>2$ and $-1+\\frac{2}{q}<s<\\min \\left(-1+\\frac{3}{q},0 \\right)$, which fills a similar gap between Leray and known mild solution theory in the Besov space setting. We also use the Calder\u00f3n-like splitting to investigate the structure of the singular set under a Type-I blow-up assumption in the Besov space setting, which is considerably rougher than in previous works."
+    },
+    {
+     "arxiv_id": "2112.10705",
+     "link": "https://arxiv.org/abs/2112.10705",
+     "title": "Localized smoothing and concentration for the Navier-Stokes equations in the half space",
+     "published": "2021-12-20T17:45:16Z",
+     "updated": "2021-12-20T17:45:16Z",
+     "summary": "We establish a local-in-space short-time smoothing effect for the Navier-Stokes equations in the half space. The whole space analogue, due to Jia and \u0160ver\u00e1k [J\u016014], is a central tool in two of the authors' recent work on quantitative $L^3_x$ blow-up criteria [BP21]. The main difficulty is that the non-local effects of the pressure in the half space are much stronger than in the whole space. As an application, we demonstrate that the critical $L^3_x$ norm must concentrate at scales $\\sim \\sqrt{T^* - t}$ in the presence of a Type I blow-up."
+    },
+    {
+     "arxiv_id": "2111.14776",
+     "link": "https://arxiv.org/abs/2111.14776",
+     "title": "Higher integrability and the number of singular points for the Navier-Stokes equations with a scale-invariant bound",
+     "published": "2021-11-29T18:38:55Z",
+     "updated": "2021-11-30T12:59:52Z",
+     "summary": "First, we show that if the pressure $p$ (associated to a weak Leray-Hopf solution $v$ of the Navier-Stokes equations) satisfies $\\|p\\|_{L^{\\infty}_{t}(0,T^*; L^{\\frac{3}{2},\\infty}(\\mathbb{R}^3))}\\leq M^2$, then $v$ possesses higher integrability up to the first potential blow-up time $T^*$. Our method is concise and is based upon energy estimates applied to powers of $|v|$ and the utilization of a `small exponent'. As a consequence, we show that if a weak Leray-Hopf solution $v$ first blows up at $T^*$ and satisfies the Type I condition $\\|v\\|_{L^{\\infty}_{t}(0,T^*; L^{3,\\infty}(\\mathbb{R}^3))}\\leq M$, then $$\\nabla v\\in L^{2+O(\\frac{1}{M})}(\\mathbb{R}^3\\times (\\tfrac{1}{2}T^*,T^*)).$$ This is the first result of its kind, improving the integrability exponent of $\\nabla v$ under the Type I assumption in the three-dimensional setting. Finally, we show that if $v:\\mathbb{R}^3\\times [-1,0]\\rightarrow \\mathbb{R}^3$ is a weak Leray-Hopf solution to the Navier-Stokes equations with $s_{n}\\uparrow 0$ such that $$\\sup_{n}\\|v(\\cdot,s_{n})\\|_{L^{3,\\infty}(\\mathbb{R}^3)}\\leq M $$ then $v$ possesses at most $O(M^{20})$ singular points at $t=0$. Our method is direct and concise. It is based upon known $\\varepsilon$-regularity, global bounds on a Navier-Stokes solution with initial data in $L^{3,\\infty}(\\mathbb{R}^3)$ and rescaling arguments. We do not require arguments based on backward uniqueness nor unique continuation results for parabolic operators."
+    },
+    {
+     "arxiv_id": "2003.06717",
+     "link": "https://arxiv.org/abs/2003.06717",
+     "title": "Quantitative regularity for the Navier-Stokes equations via spatial concentration",
+     "published": "2020-03-14T22:48:16Z",
+     "updated": "2020-05-25T08:22:34Z",
+     "summary": "This paper is concerned with quantitative estimates for the Navier-Stokes equations. First we investigate the relation of quantitative bounds to the behaviour of critical norms near a potential singularity with Type I bound $\\|u\\|_{L^{\\infty}_{t}L^{3,\\infty}_{x}}\\leq M$. Namely, we show that if $T^*$ is a first blow-up time and $(0,T^*)$ is a singular point then $$\\|u(\\cdot,t)\\|_{L^{3}(B_{0}(R))}\\geq C(M)\\log\\Big(\\frac{1}{T^*-t}\\Big),\\,\\,\\,\\,\\,\\,R=O((T^*-t)^{\\frac{1}{2}-}).$$ We demonstrate that this potential blow-up rate is optimal for a certain class of potential non-zero backward discretely self-similar solutions. Second, we quantify the result of Seregin (2012), which says that if $u$ is a smooth finite-energy solution to the Navier-Stokes equations on $\\mathbb{R}^3\\times (0,1)$ with $$\\sup_{n}\\|u(\\cdot,t_{(n)})\\|_{L^{3}(\\mathbb{R}^3)}<\\infty\\,\\,\\,\\textrm{and}\\,\\,\\,t_{(n)}\\uparrow 1,$$ then $u$ does not blow-up at $t=1$. To prove our results we develop a new strategy for proving quantitative bounds for the Navier-Stokes equations. This hinges on local-in-space smoothing results (near the initial time) established by Jia and \u0160ver\u00e1k (2014), together with quantitative arguments using Carleman inequalities given by Tao (2019). Moreover, the technology developed here enables us in particular to give a quantitative bound for the number of singular points in a Type I blow-up scenario."
+    },
+    {
+     "arxiv_id": "1906.08225",
+     "link": "https://arxiv.org/abs/1906.08225",
+     "title": "Scale-invariant estimates and vorticity alignment for Navier-Stokes in the half-space with no-slip boundary conditions",
+     "published": "2019-06-19T17:14:21Z",
+     "updated": "2019-06-19T17:14:21Z",
+     "summary": "This paper is concerned with geometric regularity criteria for the Navier-Stokes equations in $\\mathbb{R}^3_{+}\\times (0,T)$ with no-slip boundary condition, with the assumption that the solution satisfies the `ODE blow-up rate' Type I condition. More precisely, we prove that if the vorticity direction is uniformly continuous on subsets of $$\\bigcup_{t\\in(T-1,T)} \\big(B(0,R)\\cap\\mathbb{R}^3_{+}\\big)\\times {\\{t\\}},\\,\\,\\,\\,\\,\\, R=O(\\sqrt{T-t})$$ where the vorticity has large magnitude, then $(0,T)$ is a regular point. This result is inspired by and improves the regularity criteria given by Giga, Hsu and Maekawa (2014). We also obtain new local versions for suitable weak solutions near the flat boundary. Our method hinges on new scaled Morrey estimates, blow-up and compactness arguments and `persistence of singularites' on the flat boundary. The scaled Morrey estimates seem to be of independent interest."
+    },
+    {
+     "arxiv_id": "1812.09115",
+     "link": "https://arxiv.org/abs/1812.09115",
+     "title": "Localized smoothing for the Navier-Stokes equations and concentration of critical norms near singularities",
+     "published": "2018-12-21T13:45:05Z",
+     "updated": "2019-01-09T14:48:36Z",
+     "summary": "This paper is concerned with two dual aspects of the regularity question of the Navier-Stokes equations. First, we prove a local in time localized smoothing effect for local energy solutions. More precisely, if the initial data restricted to the unit ball belongs to the scale-critical space $L^3$, then the solution is locally smooth in space for some short time, which is quantified. This builds upon the work of Jia and \u0160ver\u00e1k, who considered the subcritical case. Second, we apply these localized smoothing estimates to prove a concentration phenomenon near a possible Type I blow-up. Namely, we show if $(0, T^*)$ is a singular point then $$\\|u(\\cdot,t)\\|_{L^{3}(B_{R}(0))}\\geq \u03b3_{univ},\\qquad R=O(\\sqrt{T^*-t}).$$ This result is inspired by and improves concentration results established by Li, Ozawa, and Wang and Maekawa, Miura, and Prange. We also extend our results to other critical spaces, namely $L^{3,\\infty}$ and the Besov space $\\dot B^{-1+\\frac3p}_{p,\\infty}$, $p\\in(3,\\infty)$."
+    },
+    {
+     "arxiv_id": "1608.06680",
+     "link": "https://arxiv.org/abs/1608.06680",
+     "title": "Dynamical Behavior for the Solutions of the Navier-Stokes Equation",
+     "published": "2016-08-24T01:09:53Z",
+     "updated": "2016-08-24T01:09:53Z",
+     "summary": "We study the Cauchy problem for the incompressible Navier-Stokes equations (NS) in three and higher spatial dimensions: \\begin{align} u_t -\u0394u+u\\cdot \\nabla u +\\nabla p=0, \\ \\ {\\rm div} u=0, \\ \\ u(0,x)= u_0(x). \\label{NSa} \\end{align} Leray and Giga obtained that for the weak and mild solutions $u$ of NS in $L^p(\\mathbb{R}^d)$ which blow up at finite time $T>0$, respectively, one has that for $d <p \\leq \\infty$, $$ \\|u(t)\\|_p \\gtrsim ( T-t )^{-(1-d/p)/2}, \\ \\ 0< t<T. $$ We will obtain the blowup profile and the concentration phenomena in $L^p(\\mathbb{R}^d)$ with $d\\leq p\\leq \\infty$ for the blowup mild solution. On the other hand, if the Fourier support has the form ${\\rm supp} \\ \\widehat{u_0} \\subset \\{\u03be\\in \\mathbb{R}^n: \u03be_1\\geq L \\}$ and $\\|u_0\\|_{\\infty} \\ll L$ for some $L >0$, then \\eqref{NSa} has a unique global solution $u\\in C(\\mathbb{R}_+, L^\\infty)$. Finally, if the blowup rate is of type I: $$ \\|u(t)\\|_p \\sim ( T-t )^{-(1-d/p)/2}, \\ for \\ 0< t<T<\\infty, \\ d<p<\\infty $$ in 3 dimensional case, then we can obtain a minimal blowup solution $\u03a6$ for which $$ \\inf \\{\\limsup_{t \\to T}(T-t)^{(1-3/p)/2}\\|u(t)\\|_{L^p_x}: \\ u\\in C([0,T); L^p) \\mbox{\\ solves \\eqref{NSa}}\\} $$ is attainable at some $\u03a6\\in L^\\infty (0,T; \\ \\dot B^{-1+6/p}_{p/2,\\infty})$."
+    }
+   ],
+   "status": "OK"
+  },
+  {
+   "channel": "C5",
+   "query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+   "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22local+energy%22+AND+abs%3A%22Navier-Stokes%22+AND+abs%3A%22self-similar%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+   "n": 5,
+   "entries": [
+    {
+     "arxiv_id": "2601.03833",
+     "link": "https://arxiv.org/abs/2601.03833",
+     "title": "On the forward self-similar solutions to the two-dimensional Navier-Stokes equations",
+     "published": "2026-01-07T11:59:29Z",
+     "updated": "2026-01-15T12:47:22Z",
+     "summary": "We establish the global existence of forward self-similar solutions to the two-dimensional incompressible Navier-Stokes equations for any divergence-free initial velocity that is homogeneous of degree $-1$ and locally H\u00f6lder continuous. This result requires no smallness assumption on the initial data. In sharp contrast to the three-dimensional case, where $(-1)$-homogeneous vector fields are locally square-integrable, the major difficulty for the 2D problem is the criticality in the sense that the initial kinetic energy is locally infinite at the origin, and the initial vorticity fails to be locally integrable, so that the classical local energy estimates are not available. Our key ideas are to decompose the solution into a linear part solving the heat equation and a finite-energy perturbation part, and to exploit a kind of inherent cancellation relation between the linear part and the perturbation part. These, together with suitable choices of multipliers, enable us to control the interaction terms and to establish the $H^1$-estimates for the perturbation part. Furthermore, we can get an optimal pointwise estimate via investigating the corresponding Leray equations in weighted Sobolev spaces.This gives the faster decay of the perturbation part at infinity and compactness, which play important roles in proving the existence of global-in-time self-similar solutions."
+    },
+    {
+     "arxiv_id": "2202.08352",
+     "link": "https://arxiv.org/abs/2202.08352",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16T21:55:07Z",
+     "updated": "2022-02-16T21:55:07Z",
+     "summary": "Forward self-similar and discretely self-similar weak solutions of the Navier-Stokes equations are known to exist globally in time for large self-similar and discretely self-similar initial data and are known to be regular outside of a space-time paraboloid. In this paper, we establish spatial decay rates for such solutions which hold in the region of regularity provided the initial data has locally sub-critical regularity away from the origin. In particular, we (1) lower the H\u00f6lder regularity of the data required to obtain an optimal decay rate for the nonlinear part of the flow compared to the existing literature, (2) establish new decay rates without logarithmic corrections for some smooth data, (3) provide new decay rates for solutions with rough data, and, as an application of our decay rates, (4) provide new upper bounds on how rapidly potentially {non-unique}, scaling invariant local energy solutions can separate away from the origin."
+    },
+    {
+     "arxiv_id": "2006.13145",
+     "link": "https://arxiv.org/abs/2006.13145",
+     "title": "An $\u03b5$-regularity criterion and estimates of the regular set for Navier-Stokes flows in terms of initial data",
+     "published": "2020-06-23T16:41:42Z",
+     "updated": "2020-07-15T12:44:17Z",
+     "summary": "We prove an $\u03b5$-regularity criterion for the 3D Navier-Stokes equations in terms of initial data. It shows that if a scaled local $L^2$ norm of initial data is sufficiently small around the origin, a suitable weak solution is regular in a set enclosed by a paraboloid started from the origin. The result is applied to the estimate of the regular set for local energy solutions with initial data in weighted $L^2$ spaces. We also apply this result to studying energy concentration near a possible blow-up time and regularity of forward discretely self-similar solutions."
+    },
+    {
+     "arxiv_id": "1907.00256",
+     "link": "https://arxiv.org/abs/1907.00256",
+     "title": "Global existence, regularity, and uniqueness of infinite energy solutions to the Navier-Stokes equations",
+     "published": "2019-06-29T18:40:07Z",
+     "updated": "2019-06-29T18:40:07Z",
+     "summary": "This paper addresses several problems associated to local energy solutions (in the sense of Lemari\u00e9-Rieusset) to the Navier-Stokes equations with initial data which is sufficiently small at large or small scales as measured using truncated Morrey-type quantities, namely: (1) global existence for a class of data including the critical $L^2$-based Morrey space; (2) initial and eventual regularity of local energy solutions to the Navier-Stokes equations with initial data sufficiently small at small or large scales; (3) small-large uniqueness of local energy solutions for data in the critical $L^2$-based Morrey space. A number of interesting corollaries are included, including eventual regularity in familiar Lebesgue, Lorentz, and Morrey spaces, a new local generalized Von Wahl uniqueness criteria, as well as regularity and uniqueness for local energy solutions with small discretely self-similar data."
+    },
+    {
+     "arxiv_id": "1801.08060",
+     "link": "https://arxiv.org/abs/1801.08060",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24T16:29:56Z",
+     "updated": "2018-01-24T16:29:56Z",
+     "summary": "Chae and Wolf recently constructed discretely self-similar solutions to the Navier-Stokes equations for any discretely self similar data in $L^2_{\\mathrm{loc}}$. Their solutions are in the class of local Leray solutions with projected pressure, and satisfy the \"local energy inequality with projected pressure\". In this note, for the same class of initial data, we construct discretely self-similar suitable weak solutions to the Navier-Stokes equations that satisfy the classical local energy inequality of Scheffer and Caffarelli-Kohn-Nirenberg. We also obtain an explicit formula for the pressure in terms of the velocity. Our argument involves a new purely local energy estimate for discretely self-similar solutions with data in $L^2_{\\mathrm{loc}}$ and an approximation of divergence free, discretely self-similar vector fields in $L^2_{\\mathrm{loc}}$ by divergence free, discretely self-similar elements of $L^3_w$."
+    }
+   ],
+   "status": "OK"
+  }
+ ]
+}
