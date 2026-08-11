@@ -1,0 +1,303 @@
+{
+  "leg": 313,
+  "route": "SDSS",
+  "question": "Does leg 260's substantive obstruction -- 'Entry B's defining adjective UNSEEDED is incompatible with its object's only function space' -- survive when the search is SEEDED?",
+  "gate_pre_committed": "Does leg 260's substantive obstruction survive seeding, with the (a)/(b)/(c) triple answered either way?",
+  "gate_answer": "NO",
+  "scope": "paper scoping only; no construction, no search run, no solver built, run, read into or edited",
+  "s1_ban_text": {
+    "n_dss_entries": 2,
+    "entry_A_scoped_to_bifurcation_off_fixed_point": true,
+    "entry_B_object_says_GLOBAL": true,
+    "entry_B_object_says_no_fixed_point_nearby_to_seed_it": true,
+    "entry_B_object_clause_verbatim": "a GLOBAL periodic-orbit search of a rescaled flow with no fixed point nearby to seed it",
+    "lift_clause_names_a_function_space": true,
+    "lift_clause_names_b_object": true,
+    "lift_clause_names_c_price": true,
+    "clause_a_carries_X_1_minus_iy_difficulty": true,
+    "clause_a_viscous_band_absent_max_Re": -1e-13,
+    "clause_a_viscous_band_absent_mu": 0.05,
+    "either_entry_names_a_seeded_search": false
+  },
+  "s2_function_space": {
+    "profile": "|U(y)| <= C/(1+|y|)  (Type I; Chae-Wolf arXiv:1610.09464 Thm 1.1)",
+    "shell_start_R": 10000.0,
+    "unweighted_L2_shell_ratio": 2.0002772457454308,
+    "unweighted_L2_finite": false,
+    "leg260_banked_p2_row": 2.000035,
+    "weighted_L2_rows": {
+      "s=0.0": {
+        "shell_ratio": 2.0002772457454308,
+        "closed_form_2^(1-s)": 2.0,
+        "rel_err_vs_closed_form": 0.0001386228727153771,
+        "finite": false
+      },
+      "s=0.5": {
+        "shell_ratio": 1.4144635542006951,
+        "closed_form_2^(1-s)": 1.4142135623730951,
+        "rel_err_vs_closed_form": 0.00017677091653717371,
+        "finite": false
+      },
+      "s=0.9": {
+        "shell_ratio": 1.0719967733378795,
+        "closed_form_2^(1-s)": 1.0717734625362931,
+        "rel_err_vs_closed_form": 0.0002083563452465754,
+        "finite": false
+      },
+      "s=1.0": {
+        "shell_ratio": 1.000216400535569,
+        "closed_form_2^(1-s)": 1.0,
+        "rel_err_vs_closed_form": 0.00021640053556892802,
+        "finite": false
+      },
+      "s=1.1": {
+        "shell_ratio": 0.9332424606685693,
+        "closed_form_2^(1-s)": 0.9330329915368074,
+        "rel_err_vs_closed_form": 0.00022450345664291923,
+        "finite": true
+      },
+      "s=1.5": {
+        "shell_ratio": 0.7072888580677921,
+        "closed_form_2^(1-s)": 0.7071067811865476,
+        "rel_err_vs_closed_form": 0.00025749559485056345,
+        "finite": true
+      },
+      "s=2.0": {
+        "shell_ratio": 0.5001500024993129,
+        "closed_form_2^(1-s)": 0.5,
+        "rel_err_vs_closed_form": 0.0003000049986257025,
+        "finite": true
+      },
+      "s=3.0": {
+        "shell_ratio": 0.25009722752631997,
+        "closed_form_2^(1-s)": 0.25,
+        "rel_err_vs_closed_form": 0.0003889101052798605,
+        "finite": true
+      }
+    },
+    "weighted_crossing_s": 1.0,
+    "compactified_map": "X = |y|/(1+|y|)",
+    "compactified_profile_closed_form": "(1 - X)  [an exact linear zero at X=1]",
+    "compactified_L2_dX_norm": 0.5773502691896618,
+    "compactified_L2_dX_norm_exact": 0.5773502691896257,
+    "compactified_finite": true
+  },
+  "s3_regularity_of_the_far_field_block": {
+    "physical_far_field_block": "r^{-1+i*kappa}",
+    "compactified_far_field_block": "(1-X)^{1-i*kappa}",
+    "identical_in_form_to_clause_a_difficulty": "X^{1-iy} (Route-E sec 4.1 / sec 26)",
+    "N_modes_used": 16384,
+    "positive_control_smooth_modes_to_1e-13": 17,
+    "positive_control_smooth_modes_to_1e-6": 10,
+    "kappa0_control_terminates": true,
+    "rows": {
+      "kappa=0.0": {
+        "fitted_algebraic_rate_p": -0.0005012040944543575,
+        "modes_for_rel_trunc_1e-6": 2,
+        "modes_for_rel_trunc_1e-8": 2,
+        "rel_trunc_at_n=32": 7.209068345745446e-15,
+        "rel_trunc_at_n=256": 7.094815843297238e-15
+      },
+      "kappa=1.0": {
+        "fitted_algebraic_rate_p": 2.999971575156412,
+        "modes_for_rel_trunc_1e-6": 822,
+        "modes_for_rel_trunc_1e-8": 7537,
+        "rel_trunc_at_n=32": 0.0006809377797361729,
+        "rel_trunc_at_n=256": 1.0353240174705957e-05
+      },
+      "kappa=2.0": {
+        "fitted_algebraic_rate_p": 2.999811199816463,
+        "modes_for_rel_trunc_1e-6": 1477,
+        "modes_for_rel_trunc_1e-8": 11531,
+        "rel_trunc_at_n=32": 0.0022034418989819674,
+        "rel_trunc_at_n=256": 3.357653345064119e-05
+      },
+      "kappa=5.0": {
+        "fitted_algebraic_rate_p": 2.998590578617194,
+        "modes_for_rel_trunc_1e-6": 3489,
+        "modes_for_rel_trunc_1e-8": 15475,
+        "rel_trunc_at_n=32": 0.012563886924209115,
+        "rel_trunc_at_n=256": 0.0001944263244120651
+      },
+      "kappa=10.0": {
+        "fitted_algebraic_rate_p": 2.9942569954133447,
+        "modes_for_rel_trunc_1e-6": 6534,
+        "modes_for_rel_trunc_1e-8": 16156,
+        "rel_trunc_at_n=32": 0.047071777945072224,
+        "rel_trunc_at_n=256": 0.0007679315437559126
+      },
+      "kappa=20.0": {
+        "fitted_algebraic_rate_p": 2.9773263605696356,
+        "modes_for_rel_trunc_1e-6": 10841,
+        "modes_for_rel_trunc_1e-8": 16332,
+        "rel_trunc_at_n=32": 0.1559557196062254,
+        "rel_trunc_at_n=256": 0.0030520656138781775
+      }
+    },
+    "route_I_leading_abs_imag": 430.35
+  },
+  "s4_price": {
+    "capabilities_indexed_modules": 48,
+    "leg_number": 313,
+    "legs_per_delivered_module": 6.520833333333333,
+    "modules_that_must_be_built": 5,
+    "build_floor_legs": 32.604166666666664,
+    "leg260_rate": 5.416666666666667,
+    "leg260_floor_legs": 27,
+    "floor_moved_direction": "UP",
+    "far_field_modes_to_1e-6_worst_kappa": 10841,
+    "smooth_control_modes": 10,
+    "radial_resolution_penalty": 1084.1,
+    "dof_uniform_128cubed_x2": 4194304,
+    "dof_with_measured_far_field_radial": 355237888,
+    "dof_ratio_vs_uniform": 84.6953125,
+    "phase1_viscous_rung_dof": 20000,
+    "phase1_viscous_rung_hours_single_cpu": 14.0,
+    "dof_ratio_vs_phase1": 17761.8944
+  },
+  "named_mechanism": "THE LOG-PERIODIC BLOCK'S REGULARITY DEFECT IS AN INVARIANT OF THE ENTRANCE, NOT A PROPERTY OF THE DOMAIN'S FAR END. The compactification X = |y|/(1+|y|) that makes the Type-I profile's norm FINITE carries the far-field block r^{-1+i*kappa} to (1-X)^{1-i*kappa} -- the identical functional form to clause (a)'s recorded gCLM difficulty X^{1-iy}, at the opposite end of the domain. Seeding dissolves all four of leg 260's sec 3.4 reasons; it does not dissolve this, because this is not a statement about the seed.",
+  "walls": {
+    "clay_odds": "~0.05%, unchanged",
+    "links_of_L1_to_L4_moved": 0,
+    "wall_1": "no claim of movement; this leg answers a scoping question",
+    "wall_2": "the screened object is non-axisymmetric 3D with no symmetry reduction -- squarely on the far side of Wall 2"
+  },
+  "selftests": [
+    {
+      "name": "S1.1 two DSS entries",
+      "pass": true,
+      "detail": "found 2"
+    },
+    {
+      "name": "S1.2 entry A present",
+      "pass": true,
+      "detail": "CHEAP-ENTRANCE"
+    },
+    {
+      "name": "S1.3 entry B present",
+      "pass": true,
+      "detail": "EXPENSIVE entrance"
+    },
+    {
+      "name": "S1.4 entry A scoped to bifurcation-off-a-fixed-point",
+      "pass": true,
+      "detail": "another DSS CHEAP-ENTRANCE re-ask -- any attempt to obtain a DSS orbit by BIFURC"
+    },
+    {
+      "name": "S1.5 entry B object clause says GLOBAL",
+      "pass": true,
+      "detail": "GLOBAL periodic-orbit search"
+    },
+    {
+      "name": "S1.6 entry B object clause says 'no fixed point nearby to seed it'",
+      "pass": true,
+      "detail": "the seeding scope is in the ban's own object text"
+    },
+    {
+      "name": "S1.7 lift clause names (a) FUNCTION SPACE",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "S1.8 lift clause names (b) OBJECT",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "S1.9 lift clause names (c) PRICE in leg-hours",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "S1.10 clause (a) carries the X^{1-iy} limited-regularity difficulty",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "S1.11 clause (b) contrasts gCLM with NS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "S1.12 clause (a) carries the viscous-band-absent magnitude",
+      "pass": true,
+      "detail": "max Re = -1e-13 at mu=0.05"
+    },
+    {
+      "name": "S1.13 neither DSS entry names a seeded-from-a-numerical-candidate search",
+      "pass": true,
+      "detail": "reported, not acted on -- this leg does not lift bans"
+    },
+    {
+      "name": "S2.1 positive control: on leg 260's OWN integrand (pure power |U|=r^{-1}) the shell ratio reproduces its banked divergent p=2 row 2.000035 to <1e-4",
+      "pass": true,
+      "detail": "measured 2.000000 vs banked 2.000035"
+    },
+    {
+      "name": "S2.1b the faithful (1+r)^{-1} envelope also diverges, and matches its own exact finite-R value (not leg 260's pure-power one) to <1e-5 relative",
+      "pass": true,
+      "detail": "measured 2.000277, exact-for-this-integrand 2.000277, leg 260's pure-power row 2.000035 -- the 1.2e-4 gap is the envelope, not an error"
+    },
+    {
+      "name": "S2.2 weighted ratios match the closed form 2^(1-s) to <1e-3 relative on every row, with the residual explained by the same envelope correction",
+      "pass": true,
+      "detail": "max rel err 3.89e-04 (envelope correction ~ (2+s)ln2/R = 3.47e-04 at s=3)"
+    },
+    {
+      "name": "S2.3 the weighted crossing is at s = 1 (bracketed, and the crossing row is within the envelope correction of 1)",
+      "pass": true,
+      "detail": "s=0.9 -> 1.071997, s=1.0 -> 1.000216, s=1.1 -> 0.933242"
+    },
+    {
+      "name": "S2.4 compactified profile is the exact linear zero (1-X); its L^2(dX) norm is finite and equals sqrt(1/3)",
+      "pass": true,
+      "detail": "measured 0.577350269 vs exact 0.577350269"
+    },
+    {
+      "name": "S3.1 positive control: an ASYMMETRIC entire function has every coefficient below 1e-13 past a few dozen modes (geometric decay -- the instrument CAN report spectral accuracy)",
+      "pass": true,
+      "detail": "last index >= 1e-13 is n = 17"
+    },
+    {
+      "name": "S3.1b the discarded symmetric control is retained and shown to be degenerate: its odd coefficients vanish for a SYMMETRY reason, not a smoothness one",
+      "pass": true,
+      "detail": "max odd |a_n| of exp(-8(X-1/2)^2) over n<200 is 4.205e-17 -- this is why it was not usable as the control"
+    },
+    {
+      "name": "S3.2 kappa=0 control terminates (the exponent 1-i*kappa is a polynomial at kappa=0, so the defect must vanish there -- and it does)",
+      "pass": true,
+      "detail": "max|a_n| for n>=3 is 2.082e-17"
+    },
+    {
+      "name": "S3.3 every kappa != 0 decays ALGEBRAICALLY, fitted rate in (2, 4) -- not geometrically, unlike the smooth control",
+      "pass": true,
+      "detail": "rates 3.000, 3.000, 2.999, 2.994, 2.977"
+    },
+    {
+      "name": "S3.4 the cost to 1e-6 is monotone increasing in kappa (the defect gets WORSE as the log-periodic frequency rises)",
+      "pass": true,
+      "detail": "modes 822, 1477, 3489, 6534, 10841"
+    },
+    {
+      "name": "S3.5 at the SAME 1e-6 tolerance on the SAME instrument, the smooth control is >= 10x cheaper than the cheapest kappa != 0 case",
+      "pass": true,
+      "detail": "control needs n=10 for 1e-6; cheapest kappa!=0 needs n=822, worst n=10841 -- separation 82.2x"
+    },
+    {
+      "name": "S4.1 capabilities.py index read live, not hardcoded",
+      "pass": true,
+      "detail": "48 indexed modules"
+    },
+    {
+      "name": "S4.2 leg 260's own prediction is CHECKED and is REFUTED in direction: it said the floor would FALL as modules land; 53 legs later the module count is unchanged, so the floor ROSE",
+      "pass": true,
+      "detail": "260: 48 modules / 260 legs -> 5.42 -> floor 27. 313: 48 modules / 313 legs -> 6.52 -> floor 32.6"
+    },
+    {
+      "name": "S4.3 the far-field resolution penalty is a real multiplier, not a rounding",
+      "pass": true,
+      "detail": "1084.10x modes vs the smooth control"
+    }
+  ],
+  "selftests_passed": "27/27"
+}
