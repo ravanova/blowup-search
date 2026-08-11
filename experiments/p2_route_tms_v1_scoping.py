@@ -450,6 +450,10 @@ def main():
             "width_certified": W_CERTIFIED,
             "width_available": W_AVAILABLE,
             "width_ratio_shortfall": WIDTH_RATIO,
+            # float64 truncates the literal above; the prose quotes leg 300's EXACT
+            # decimal, so it is carried here verbatim as a string. Every number the
+            # prose quotes must appear in this JSON -- that is the standing rule.
+            "width_ratio_shortfall_exact_decimal": "6.8541019662496845446",
             "width_ratio_closed_form": WIDTH_RATIO_CLOSED_FORM,
             "numbers_provenance": (
                 "REPO-INTERNAL, carried forward and NOT re-derived by this leg: leg 266, "

@@ -14,6 +14,7 @@
   "width_certified": 0.0243163,
   "width_available": 0.1666667,
   "width_ratio_shortfall": 6.854101966249685,
+  "width_ratio_shortfall_exact_decimal": "6.8541019662496845446",
   "width_ratio_closed_form": "(7 + 3*sqrt(5))/2",
   "numbers_provenance": "REPO-INTERNAL, carried forward and NOT re-derived by this leg: leg 266, corrected by leg 300 (experiments/journal/leg_300.md:40-51), propagated repo-wide by leg 319 (P0TCR). Leg 266's '6.855' was a slipped digit.",
   "verifier_finding": "The gap is NOT a profile enclosure. writeup/novelty/verify_251.md sec C: at BCG's scaling there is no self-similar profile system of the dissipative equation; the (W,Z) reduction is the EULER system; dissipation enters the dynamically rescaled system as the non-autonomous, exponentially decaying forcing F_dis (e^{-delta_dis s_0} prefactors). The gap is in the STABILITY step -- the r-restriction that lets the profile dominate F_dis -- re-posed as a rigorous enclosure of that step with the dissipative forcing RETAINED, at a similarity exponent outside BCG's dominance regime."
