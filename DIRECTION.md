@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 334 | DSSP | yes |
 | B | 339 | ORC6 | no |
-| C | 323 | CENV | yes |
+| C | 341 | ALGW | yes |
 | D | 340 | EGRB | yes |
 <!-- FLOOR-TABLE-END -->
 
@@ -64,7 +64,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
 | fig89 | 340 | live, slot D (only if the ladder comparison warrants) |
-| fig90 | 341 | reserved (ALGW, in reserve; only if the scoping warrants) |
+| fig90 | 341 | live, slot C (only if the scoping warrants) |
 | fig91+ | — | next free |
 <!-- FIG-TABLE-END -->
 
@@ -160,14 +160,29 @@ directs, the cycle-8e adjudication recast as DM analysis attached without
 force — escalation #3 hangs on the user's answer; leg 340 continues, its
 measurement being input that ruling wants either way.
 
-**Reserve queue: 22 undispatched legs (341, 342, 335, 336, 337, 338, 307, 328,
+Cycle 9b: C/323 landed NO at bee25a8 — an EARNED NO: the resume re-check caught
+the pre-kill rows MISLABELLED (base query submitted under variant ids, then a
+429-recovery overwrite — set(X)−set(X), lesson 90 exactly), fixed structurally
+(query_sent parsed from the URL actually hit; verify_rows() refuses curation on
+mismatch); clean re-run 94 requests, 0 refusals, controls 5/5 both directions;
+the census is VARIANT-ROBUST and **§0c UNBLOCKS on the corrected instrument**.
+Census adds no four-clause candidate (0/51; one mechanical near-miss,
+1504.02775, fails the certificate clause — cannot answer YES on its own, per
+the pre-committed criterion). MF4 ADOPTED as a standing rule (compound
+author-name queries are a broken instrument class — three independent
+confirmations: 326, 330, 323); MF1 restated as per-query AND per-field (au: is
+not dash-normalizing where abs: is). C ← 341 ALGW (programme rank 1). §0c/PUB
+drafting and the lane-6 second entry are UNBLOCKED and will be drafted at the
+DM's next pass, ranked behind the user's programme legs.
+
+**Reserve queue: 21 undispatched legs (342, 335, 336, 337, 338, 307, 328,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 16
-(341, 342, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
-299 — rank order as listed, §3a pre-authorised except where a spec says
-otherwise). 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs
-217/219/225 (221's landed). Next fresh leg number: **343**. Full specs and this
-cycle's rulings are in the cycle-8 through 9 entries at the end of this file.)
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 15
+(342, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
+rank order as listed, §3a pre-authorised except where a spec says otherwise).
+310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
+landed). Next fresh leg number: **343**. Full specs and this cycle's rulings
+are in the cycle-8 through 9b entries at the end of this file.)
 
 ---
 
@@ -16626,3 +16641,107 @@ not drafted. No L1-L4 link moved — the programme adds a proof-shaped question
 to the portfolio, which is a choice of what to try, never a claim about what
 happened. Clay stays ~0.05%, and the packet's own closing constraint binds:
 nothing here is described as movement unless a link actually moves.
+
+---
+
+## DM update, 2026-08-11 (cycle 9b) — 323 NO ABSORBED (AN EARNED NO: THE
+PRE-KILL ROWS WERE MISLABELLED, NOT STALE; §0c UNBLOCKS ON THE CORRECTED
+INSTRUMENT); MF4 ADOPTED AS A STANDING RULE; C ← 341 ALGW; §0c/LANE-6
+CONSEQUENCES RULED
+
+Written from the same detached lineage, resynced to origin/main = bee25a8.
+
+### 323 CENV gate NO, absorbed at full strength — and the resume condition paid
+
+The cycle-8b resume condition (re-check committed rows for staleness before
+extending) caught something better than staleness: the pre-kill runner built
+variant job ids from the BASE query string while submitting the variant, and a
+429-recovery pass overwrote rows with baseline results under variant labels —
+only 8 of 35 variant rows ever sent a double-hyphen query, all 8 stuck at 429,
+so the pre-kill "35 all-empty deltas" were set(X)−set(X). Lesson 90, exactly,
+inside an instrument row. The fix is STRUCTURAL, not patched — every row
+carries query_sent parsed from the URL actually hit; verify_rows() refuses to
+curate on any mismatch (n_problems=0 post-fix, would have been 41 pre-fix) —
+and that shape (the curator refuses, rather than the author promising) is the
+right one. Clean re-run: 94 requests, 32.8 min, 0 refusals, controls 5/5 both
+directions, a third independent refutation of the struck MF3 clause at n=60.
+The census is variant-robust; only hyphen DELETION moves anything on abs:.
+Endorsed without amendment. The near-miss handling is also endorsed as banked:
+1504.02775 fails the certificate clause at abstract depth and the pre-committed
+criterion says a mechanical near-miss cannot answer YES on its own — no GAF2
+adversarial read was triggered, correctly.
+
+### Standing rule adopted — MF4, and MF1 sharpened (the orchestrator asked; the
+answer is yes, it is worth standing text, and here it is)
+
+> **MF4 — compound author-name queries are a broken instrument class.** A
+> query of the shape au:"X-Y" or au:"X Y" for two authors X and Y is a FALSE
+> NEGATIVE GENERATOR: au:"Breden-Chu" → 0 where au:"Breden" AND au:"Chu" → 3
+> (leg 323), the same failure leg 326 measured on "Chae Tsai" and leg 330
+> independently reproduced — three confirmations on different author pairs.
+> Never bank a zero from a compound author-name query; always control it with
+> the per-author AND form. **And MF1 is PER-QUERY AND PER-FIELD:** au: is NOT
+> dash-normalizing where abs: is (au:"Gomez-Serrano" 47 vs au:"Gomez--Serrano"
+> 0, accents normalized), and leg 330 measured hyphenation partitioning one
+> index and not another — a variant-robustness finding on one field or query
+> shape is never generalized to another; it is re-measured or not asserted.
+
+Orchestrator: please propagate this blockquote into CONTINUATION_PROMPT.md's
+novelty-pass section beside the MF1/MF2 text, the same mechanism as the cycle-5
+blockquote — that edit is yours (§6 integration-reserved).
+
+### Ruling — §0c UNBLOCKS: the two waiting items, dispositioned exactly
+
+1. **§0c/PUB census-spine drafting is now UNBLOCKED** — its gating leg has
+   landed with the census variant-robust on a corrected instrument, and the
+   census outcome feeds it directly: the vacancy claim survives a 58-id,
+   51-novel screen with zero four-clause candidates and one mechanical
+   near-miss banked. Constraints already standing and restated: the PUB leg
+   MUST cite 317's prior-art map (cite-don't-claim, lane 7's closure), present
+   the 202/237 mechanism as known methodology applied, and carry the
+   over-read-closure discipline (339's adjudication should land first or be
+   cited in flight). **Drafted at the DM's next pass, ranked BEHIND the user's
+   programme legs (341 live, 342 rank 1) and the corrections queue** — the
+   user's standing priority orders the portfolio's proof-shaped half first,
+   and PUB work is record work; nothing about the unblock is time-coupled.
+2. **Lane 6's second CAP-reproduction entry** was deferred "pending 323's
+   corrected census"; the census's contribution is now measured: it adds NO
+   new reproduction candidate (0/51 clear leg 303's clauses). The selection
+   therefore proceeds from leg 174's occupancy matrix as originally drafted,
+   unchanged by the census — **selection made at the same next pass, same
+   ranking logic.** Neither item jumps 342 or the corrections; both are now
+   unblocked rather than gated, which is the state change this landing bought.
+
+### Refill — slot C ← 341 ALGW (programme rank 1, the orchestrator's suggested
+dispatch confirmed)
+
+Spec at cycle 9, unchanged — the merged S1+S2 fourth-space scoping leg, two
+clauses reported independently, hard constraints verbatim (lifts nothing,
+scoping only, plan_of_record.py flagged-not-edited). Heavy; math,
+floor-eligible; fig90 conditionally allocated. Territory
+(p2_route_algw_v1.json + its own novelty/journal, reads 260/261/331 and solver
+modules read-only) is disjoint from A/B/D — checked directly. **Floor 3/4
+(334, 341, 340) — above §3b's 2-of-4.** FLOOR-TABLE and FIG-TABLE synced at
+the head in this same edit.
+
+### Ranking and reserve
+
+Next vacancies: 1. **342 SEED** 2. **335 S1GR** 3. **336 C305** 4. **337
+C318** 5. **338 LCB1** 6. **307 TSCX** 7. **328 ORC5** 8. **324 P2SPF** 9.
+**322 F70** 10. **327 P2T1E** 11. **287 EPA** 12. **229 PNRV** 13. **293 JFA**
+14. **298 CORRX** 15. **299 TESTA**; the §0c/PUB draft and the lane-6 second
+entry enter the ranking when drafted at the next pass, behind the corrections
+unless a steer says otherwise. Then **310 EPAP** (on 287+298), **325 MTB1**
+(USER-GATED), **231-234** (blocked on repairs 217/219/225). SUSPENDED: 306,
+308. The §3 build: unchanged, numbered only after 341 reports and the user
+rules.
+
+**Reserve queue: 21 undispatched legs (342, 335, 336, 337, 338, 307, 328, 324,
+322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **15**. Next fresh leg number: **343.**
+
+Nothing in this update lifts a ban. 323's NO narrows nothing and opens
+nothing — it certifies the census instrument and the vacancy claim's
+robustness at measured width, which is exactly what §0c needed to be honest;
+MF4 is an instrument rule, not a claim about the field. No L1-L4 link moved;
+Clay stays ~0.05%.
