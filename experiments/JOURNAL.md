@@ -4488,3 +4488,74 @@ admissible candidates from this direction. Escalated nothing, lifted nothing, ex
 no-branch pre-committed. Figure fig70, registered.
 
 **No link of the L1-L4 chain moved. Clay odds remain ~0.05%.**
+
+## Cycle 3, 2026-08-11 — legs 286, 303
+
+**Leg 286 (Route-CNRV) landed, gate YES on all three clauses.** Full entry:
+`experiments/journal/leg_286.md`. Independent post-repair verification of leg 248's
+`collocation_newton.py` gauge-defect repair. (i) **41/41 of leg 237's reachability battery
+carry the correct verdict**, 0 mismatches, with the verdict recomputed from (Omega, c)
+against a spec stated in this leg's own code, and the module's returned `gauge_defect`
+field bit-identical to an independent recomputation 41/41 at exactly 0.0 relative error.
+(ii) Leg 202's calibration pair, re-derived from `profile_newton` directly, still flags
+**2/2 genuine escapes** (c = -6127.935 / -306421.259, agreeing 8.061e-07 / 2.738e-09 with
+bank) with **0 of 8 clean solves suppressed** and 7.18 decades of margin. (iii) **0 floats
+moved of 12,356 bitwise comparisons** against the genuine pre-repair source at 1ea4ecd,
+9/9 untouched functions byte-identical, 6/6 dependent suites green. Mechanism re-measured:
+relres flat to 1.788x while |c| moves 2000x and the absolute residual 6.719e+06x; gauge
+defect affine with slope 1.0 to 1.3e-15; off-gauge accepted 6/6 -> 0/6; threshold shown
+non-load-bearing across 13.70 decades. **Two things the leg flagged rather than smoothed
+over.** First, an honest delta: its worst gauge defect among converged cases is 1.110e-15
+against leg 248's banked 8.882e-16 -- same decade, ~7x below threshold -- traced to a
+BLAS-thread-visible 6.7e-10 spread in `profile_newton`'s reference c. Second, one test
+failed during the run; under the flake-diagnosis-before-belief rule it was re-run alone
+under low load and was **NOT a flake** -- it was a wrongly-guessed assertion of the leg's
+own (`>=6` clean solves where the module yields 4 on that battery), narrowed to the
+measured clean regime and recorded in the check's docstring, on the stated ground that
+**a verification leg which silently retunes its own thresholds is doing the opposite of
+verification.** The committed novelty pass was re-checked for staleness across the 47
+commits that had landed since: none touched the module, its dependants, or leg 248's
+artifacts. No figure (verification leg).
+
+**Leg 303 (Route-GAF) landed, gate YES — and it found a claimant in the empty cell.**
+Full entry: `experiments/journal/leg_303.md`. 35 queries over 5 channels, **35/35 reached**
+(6 first-pass HTTP 429/503/timeouts re-run at 25s spacing rather than banked as zeros),
+68 distinct papers, **links recorded for every row**. Leg 174's own 12 queries replicate
+exactly -- **0/12 counts grew** -- so on its own instrument nothing changed. But one work
+clears all four pre-committed clauses and is new to `solver/viscous_novelty.py::PRECEDENTS`:
+**arXiv:2604.09949 (Shahmurov, 2026-04-10, math.AP, v1)**, claiming a computer-assisted
+Newton-Kantorovich validation with interval arithmetic of a rescaled profile for the **3D
+INCOMPRESSIBLE Navier-Stokes equations on T^3** -- dissipation inside the enclosed object,
+in a fluid model, which is exactly the cell this repository has measured as empty.
+**Recorded as CLAIMED, NOT FILLED: before 0 -> claimed 1, ESTABLISHED 0.** Phase 1's
+premise is NOT recorded as broken, because occupancy cannot be settled at abstract depth;
+the adversarial full-text read is leg 309's by explicit dispatch and **leg 309 was
+dispatched immediately on this landing**. Four credibility flags banked as **observations,
+not a verdict**: the abstract says the manuscript is "organized *in the style of* a
+computer-assisted proof paper"; single author, v1, no journal ref; no uptake in ~4 months;
+and the claim, if true, would resolve Clay in the negative. The leg landed to `main` rather
+than parking because none of the four section-8 escalations fires on a *claim* -- correct
+call, and the escalation risk moves to leg 309. Also banked: the **NRS/Tsai screen is
+unmoved** (5 boundary-adjacent works; the only line-mover, 1610.09464, *strengthens* the
+exclusion); 34 near-misses with 9 hand-adjudicated, splitting 5x "no certificate" / 4x
+"inviscid object"; and three method findings, most consequentially **MF1** -- the paper
+spells itself `Navier--Stokes` with a LaTeX double hyphen, so a `Navier-Stokes` regex or
+search string **silently misses it**, and this leg's own mechanical screen scored it a
+near-miss for that reason alone -- and **MF2**, that leg 174 banked counts and not links,
+so 10 of its links are unattributable and whether it read and rejected this very paper is
+**unrecoverable**. MF2 is the sharpest possible vindication of this repository's own
+links-not-counts rule. Figure fig71 (renumbered from a collided fig68 by integration; the
+evidence script was re-run afterwards and still passes 18/18).
+
+**Integration note — two more figure collisions, and a quartet gap.** Leg 303 independently
+claimed `fig68`, already taken by leg 300; resolved by first-landing, **303 -> fig71**,
+evidence script re-run, 18/18 pass. Separately, **leg 311 claimed `fig70` but shipped no
+figure file**: its quartet is therefore incomplete against section 6 and the gap is
+recorded as a gap in `writeup/INDEX.md` rather than papered over. `fig70` stays reserved to
+leg 311. This is now the fifth independent figure-number collision in two cycles; legs
+picking their own numbers does not work at ten-way parallelism, and claiming provisionally
+with integration registering is the rule in every dispatch brief from here.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%** — and note explicitly that
+arXiv:2604.09949, if it holds, would be someone else's result and still not this
+repository moving a link.

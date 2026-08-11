@@ -1,6 +1,6 @@
 """Route-GAF v1 (leg 303) — EVIDENCE: every number the BLOG and TECHNICAL write-ups quote,
 re-derived from `writeup/data/p2_route_gaf_v1_sweep.json`. Also builds
-`writeup/figures/fig68_route_gaf_v1_cell.png`.
+`writeup/figures/fig71_route_gaf_v1_cell.png`.
 
 Nothing is re-queried: this reads the curated JSON and asserts the relations the prose
 asserts, so a reader can check the prose without going back to arXiv.
@@ -14,7 +14,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "writeup", "data")
-FIG = os.path.join(ROOT, "writeup", "figures", "fig68_route_gaf_v1_cell.png")
+FIG = os.path.join(ROOT, "writeup", "figures", "fig71_route_gaf_v1_cell.png")
 
 THE_HIT = "2604.09949"
 

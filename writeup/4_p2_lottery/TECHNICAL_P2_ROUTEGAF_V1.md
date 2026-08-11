@@ -11,7 +11,7 @@
 | raw query log (all 35, with links) | `writeup/data/p2_route_gaf_v1_raw.json` |
 | curated data | `writeup/data/p2_route_gaf_v1_sweep.json` |
 | evidence script (18 checks) | `experiments/p2_route_gaf_v1_sweep_evidence.py` |
-| figure | `writeup/figures/fig68_route_gaf_v1_cell.png` (fig68) |
+| figure | `writeup/figures/fig71_route_gaf_v1_cell.png` (fig68) |
 | journal | `experiments/journal/leg_303.md` |
 
 ---

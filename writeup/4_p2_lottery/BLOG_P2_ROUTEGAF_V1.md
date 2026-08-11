@@ -2,7 +2,7 @@
 
 **Route-GAF v1, leg 303, 2026-08-11.**
 Data: [`writeup/data/p2_route_gaf_v1_sweep.json`](../data/p2_route_gaf_v1_sweep.json).
-Figure: [`fig68_route_gaf_v1_cell.png`](../figures/fig68_route_gaf_v1_cell.png).
+Figure: [`fig71_route_gaf_v1_cell.png`](../figures/fig71_route_gaf_v1_cell.png).
 Runner: `experiments/p2_route_gaf_v1_sweep.py`. Novelty log: `writeup/novelty/leg_303.md`.
 
 ## The square
