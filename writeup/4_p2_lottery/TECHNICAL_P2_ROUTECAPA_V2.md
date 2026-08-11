@@ -154,7 +154,19 @@ the oldest and the most auxiliary. Every module registered since leg ~110 —
 an explicit CEILING clause. The `validated` convention has tightened over the
 repository's life, and the 12 are its sediment rather than its current practice.
 
-## 6. S5 — relevance, the axis leg 71 named and never systematised
+## 6. S5 — relevance: leg 71 measured it and could not repair it; this leg repairs it
+
+**A correction to this leg's own first draft, recorded rather than quietly fixed.** This
+section originally claimed S5 was a new axis that leg 71 "named in words and never
+systematised". Reading leg 71's own curated JSON (`writeup/data/p2_route_cap_v1_audit.json`)
+falsifies that: it carries per-row `test_imports_module` and `test_mentions_module` fields
+and flags `solver/finite_support.py` with `S4_no_coverage` — the *same single row* this
+leg finds. Leg 71 was right and was not able to act, because at `e203b52` no test in the
+repository loaded that module: there was nothing to repoint the row to. What leg 292 adds
+is therefore not the axis but the **repair**, which only became possible when leg 124
+wrote the missing test 53 legs later. The interesting quantity is not "1 of 48" — leg 71
+already had that — but that the finding stayed open across roughly 220 legs *while a fix
+sat on disk*, because the check was run once rather than left standing.
 
 For each row the runner scans the cited test's source, plus the source of any sibling
 top-level module it imports (one hop, so a dedicated test importing a shared harness is
@@ -184,6 +196,36 @@ gate **S10** checks precisely the property the row's `validated` field asserts:
 
 So the corrected pointer is not merely *a* test that loads the module — it is the test
 that re-checks the sentence the row makes its claim in.
+
+### 6.1 The repair turned the test red, and the diagnosis is the finding
+
+Re-running the sweep after the edit, `test_finite_support_adversarial.py` returned
+**rc = 1 in 30.1 s**, contradicting the green run the repair was justified on. Under
+flake-diagnosis-before-belief the test was re-run alone under low load; it failed
+identically, so it was not a flake. The stored `stderr_tail` names the cause exactly:
+
+```
+AssertionError: ['capabilities.py:62: ...', 'capabilities.py:661: ...', 'capabilities.py:665: ...']
+```
+
+Leg 124's gate S10 establishes that nobody imports the SUPERSEDED module by walking every
+`*.py` in the tree and flagging any line that contains both the module's stem and the
+substring `import`. The **explanatory comment this leg had just written into
+`capabilities.py`** — prose about the fact that a test imports the module — satisfies that
+pattern on three lines. A documentation comment is indistinguishable from an importer to a
+substring scan.
+
+The comment was reworded so that no line outside leg 124's own two files carries both
+tokens, and the test is **green again at 33.4 s**. Two things are worth banking. First,
+the immediate one: the evidence the `test`-field repair rests on is restored, and the
+repair stands. Second, the general one: leg 124's S10 is a *soundness* gate whose failure
+mode includes false positives from prose, so the cost of that conservatism is that the
+index cannot describe the relationship it is documenting in plain words. That is now
+recorded as an explicit CAUTION beside the row, since the next editor of that comment will
+otherwise rediscover it the same way — by a red test with no obvious connection to the
+edit. It is also a clean demonstration of the audit's own premise: the axes here are
+executable, so an error introduced *by the audit itself* was caught by the audit's own
+sweep rather than shipped.
 
 **Repair applied**, following leg 71's `solver/ga_search.py` precedent to the letter:
 the `test` field is repointed to `test_finite_support_adversarial.py` with an inline

@@ -78,26 +78,31 @@ This is the new one, and it's where the audit earned its keep.
 
 ## The pointer that couldn't fail
 
-The first-generation audit named this gap in so many words — *existence is checked;
-greenness and relevance are not* — and then found one instance of it by hand, almost in
-passing: a row pointed at a test file that imported a whole different package and never
-touched the module at all.
+The first-generation audit did check this, and I initially wrote that it hadn't. Its own
+saved data proves otherwise: it recorded, row by row, whether the cited test actually
+loads the module, and it flagged **the same single row this leg flags**. So the story is
+not "nobody looked". It is stranger and more useful than that.
 
-Finding that by hand once is luck. This leg turned it into code that runs: for every
-row, scan the cited test (and any helper it imports) for any mention of the module it's
-supposed to be testing.
+The first audit couldn't fix what it found. At that time, no test anywhere in the
+repository loaded that module — there was nothing to repoint the row at. So the finding
+was written down, correctly, and left open.
 
-**One row out of 48 fails.** The index's single *superseded* module — kept around only
+**One row out of 48 fails,** still. The index's single *superseded* module — kept around only
 so its name resolves to a warning rather than to nothing — pointed at a test file
 containing zero occurrences of its name. Not a weak test. Not a partial test. A test
 that literally cannot fail if that module breaks, sitting behind a row that reads as
 though it were covered.
 
 And here's the part that makes it a genuine finding rather than a typo: the *right* test
-already existed. A 22-kilobyte adversarial test file, written by a later leg, which
-opens by importing exactly that module — and which the index cited nowhere at all. Run
-on its own, it passes; and one of its checks verifies the precise sentence the index row
-claims, that the module has zero importers and its DO-NOT-USE banner is intact.
+now exists, and has for a long time. A 22-kilobyte adversarial test file, written 53 legs
+after the first audit, which opens by importing exactly that module — and which the index
+cited nowhere at all. Run on its own, it passes; and one of its checks verifies the
+precise sentence the index row claims, that the module has zero importers and its
+DO-NOT-USE banner is intact.
+
+So the gap that mattered wasn't the broken pointer. It was the roughly 220 legs during
+which the fix sat on disk, unnoticed, because the check that would have noticed had been
+run once instead of left running.
 
 So the fix isn't "point it at some test that mentions the module". It's "point it at the
 test that re-checks the claim the row is making". One field corrected, with a comment
@@ -105,9 +110,26 @@ recording why. The claim text itself is left untouched — this leg corrects poi
 doesn't reword other people's results.
 
 Why did it rot *there*, of all places? Because that's the mechanism, not a coincidence.
-Both instances of this defect — the one found last time, the one found now — are on
-modules nobody imports any more. A row whose module nobody uses is a row nobody
-re-reads, so its pointer is the one most free to go quietly wrong.
+Every instance of this defect the two audits have found — the one repaired last time, the
+one repaired now — sits on a module nobody imports any more. A row whose module nobody
+uses is a row nobody re-reads, so its pointer is the one most free to go quietly wrong.
+
+## The fix broke the test, which is the best thing that happened here
+
+Re-running the sweep after making the correction, that same adversarial test came back
+**red** — the very test the correction was justified by. Re-run alone, under no load: red
+again, so not a flake.
+
+The cause turned out to be the comment I had just written next to the row. That test
+proves nobody imports the superseded module by scanning every Python file in the tree for
+a line mentioning both the module's name and the word "import". My comment *explaining
+that a test imports the module* is, to a substring scan, indistinguishable from a file
+importing it. Three lines of documentation registered as three new importers.
+
+Reworded, it's green again — 33 seconds. The point isn't the embarrassment. It's that an
+error introduced *by the audit itself* was caught by the audit's own sweep, in the same
+run, instead of being shipped as a green-looking claim. That's the entire argument for
+making these checks executable rather than written down, demonstrated at my own expense.
 
 ## Controls, because a check that can't fail isn't a check
 
