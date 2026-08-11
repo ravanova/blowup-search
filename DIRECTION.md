@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 331 | NLH | yes |
+| A | 334 | DSSP | yes |
 | B | 329 | EGMF | yes |
 | C | 323 | CENV | yes |
 | D | 330 | PVLX | yes |
@@ -59,7 +59,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig82 | 305 | landed |
 | fig83 | 306 | held (306 SUSPENDED, route-6 drop, cycle 7b) |
 | fig84 | 318 | landed |
-| fig85 | 331 | live, slot A |
+| fig85 | 331 | landed (fig85, registered) |
 | fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
@@ -96,8 +96,22 @@ original wording quoted in place). D ← 330 PVLX, JUMPING ranks 335-338: its
 precondition fired at 326's landing, cycle 7b requires route-4 de-risk to land
 before heavy route-4 capacity (334 fires at 331's landing), and the user's
 packet update should carry Chae-Tsai-out and Pineau-Vicol-adjudicated together,
-not in dribbles. Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF, C/323/CENV,
-D/330/PVLX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
+not in dribbles. Cycle 8d: A/331 landed NO at e9f4956 — the first MEASURED
+(iv_a) obstruction (regression control exact at t=0; Λ^{2α}ψ_m carries an
+algebraic tail against the Gaussian weight, truncated weighted norm² 0.9655 →
+1.869e22; apparent finiteness is a quadrature-horizon artefact, monotonically
+worse under refinement, overflowing float64 at Breden-Chu's own n=1500; Z1
+crosses 1 at 30-52% of one nonlocal operator, the two blowing bounds
+pre-registered). The MECHANISM IS REFRAMED: what breaks is an algebraic tail
+against a Gaussian WEIGHT, not nonlocality as Remark 40 names it — the open
+question is "which weight tolerates an algebraic tail", FOLDED into 334's plan
+clause (a), where it collides head-on with 332's opened lane (the standard
+vorticity space IS the Gaussian weight, and Biot-Savart is nonlocal). A ← 334
+DSSP (CRITICAL PATH — route-4 brick 0, both preconditions landed, the cycle-7b
+pre-commitment); leg 339 ORC6 drafted (the closure-#6 adjudication on both
+measured answers, rank 1 with the reason stated). Live roster: A/334/DSSP
+(CRITICAL PATH), B/329/EGMF, C/323/CENV, D/330/PVLX. Floor 4/4 — above §3b's
+2-of-4. This cycle's verifier
 findings became four drafted correction legs: 335 S1GR (the pre-existing
 spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
 shift, two flipped gate predicates, present with and without 221's repair), 336
@@ -110,15 +124,14 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 21 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
-327, 287, 229, 293, 298, 299, 334, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
-(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank
-order as listed, §3a pre-authorised except where a spec says otherwise). 334 on
-331 only (332 landed); 310 on 287+298; 325 USER-GATED; 231-234 blocked on
-repairs 217/219/225 (221's landed). Next fresh leg number: **339**. Full specs
-and this cycle's rulings are in the cycle-8, 8b and 8c entries at the end of
-this file.)
+**Reserve queue: 21 undispatched legs (339, 335, 336, 337, 338, 307, 328, 324,
+322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 15
+(339, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
+rank order as listed, §3a pre-authorised except where a spec says otherwise).
+310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
+landed). Next fresh leg number: **340**. Full specs and this cycle's rulings are
+in the cycle-8 through 8d entries at the end of this file.)
 
 ---
 
@@ -16009,3 +16022,135 @@ evidentiary content, stated by the leg itself as not an argument about the ban;
 the ban-wording call stays the user's; 330 reads and reports. Removing a
 theorem from an escalation packet is map correction, not movement — no L1-L4
 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 8d) — 331 NO ABSORBED: THE (iv_a) OBSTRUCTION IS
+MEASURED, AND ITS MECHANISM IS REFRAMED (weight-vs-tail, not nonlocality); A ←
+334 DSSP (CRITICAL PATH) WITH 331's FINDING BOUND INTO ITS PLAN; LEG 339 ORC6
+DRAFTED (closure-#6 adjudication on both measured answers); RANKING UPDATED
+
+Written from the same detached lineage, resynced to origin/main = e9f4956.
+
+### 331 NLH gate NO, absorbed at full strength
+
+The critical-path leg answered its pre-committed no-branch: the field's first
+MEASURED (iv_a) obstruction, replacing an inferred one. The four findings stand
+as banked: exact t=0 regression control (relative difference 0.0 on all eight
+bounds, all six (n,α) — the licence for everything at t>0); the operator does
+not map the space (algebraic tail, measured exponents 1.5077/2.0122/2.5179
+against predicted 1+2α+2m, weighted norm² 0.9655 → 1.869e22 over R=4..16 with
+the local control pinned at 1.0); the machinery's apparent finiteness is a
+QUADRATURE-HORIZON ARTEFACT (true log10 norm² 95.151/197.728/1546.389 at
+n=100/200/1500 — Breden-Chu's own published n overflows float64, and refinement
+makes it monotonically worse); Z1 crosses 1 at 30-52% of one nonlocal operator,
+bisected to 6.1e-06, with exactly the two pre-registered locality-dependent
+bounds blowing. Two of its own five predictions refuted and recorded — the
+discipline working. Endorsed without amendment; fig85 moves to landed.
+
+### Ruling — the reframing (routed, not adjudicated by the leg): FOLDED into
+334's plan clause (a), and the collision with 332 stated in one place
+
+The mechanism is NOT what Remark 40 names: what breaks is an ALGEBRAIC TAIL
+against a GAUSSIAN WEIGHT — nonlocality enters only as the thing that produces
+algebraic tails. The re-screen question is therefore "which weight tolerates an
+algebraic tail", a function-space question. **Ruling: no separate measurement
+leg is drafted now; the question is FOLDED into 334's plan clause (a), which
+must now answer it explicitly — because it collides head-on with 332's banked
+pair:** the vorticity formulation's standard space (Gallay's ρ_∞ = e^{r²/4}) IS
+the Gaussian weight class 331 just measured intolerant of algebraic tails, and
+Biot-Savart — the reconstruction 332's open lane depends on — is nonlocal.
+**334's clause (a) must state, for its chosen function space: (1) its position
+relative to NRS/Tsai admissibility (cycle 8b's binding, unchanged); (2) whether
+its weight tolerates the algebraic tails its nonlocal operators produce, citing
+331's measured exponents — or name that as the blocker its no-branch routes to
+the user.** If the plan shows the weight question needs its own measurement
+leg, that brick is drafted then, from the plan — not speculatively now. The 21
+(iv_a) kills are NOT re-screened (the yes-branch did not fire); their kill
+REASONS are re-founded (obstruction real, mechanism different), which is leg
+339's wording territory below.
+
+### Refill — slot A ← 334 DSSP (CRITICAL PATH), the pre-commitment executed
+
+Both preconditions are landed (331 e9f4956, 332 bd438de) — the user's ordering
+("route 4 begins once routes 1 and 2 report") is satisfied, and the cycle-7b
+determination that the P0 critical path moves with the user's route-4 ruling
+now designates 334 the critical-path leg. Spec at cycle 7b, unchanged, plus the
+clause-(a) bindings above (which sharpen what the gate's clause (a) must
+contain without amending the gate's wording: the gate already requires the
+function space "carrying 313's (a) answer" — the bindings name what carrying it
+now means on the measured record). Ceiling TIER 2, restated. Territory (its own
+JSON + TECHNICAL + novelty/journal, reads parked branches and banked records
+only) is disjoint from B/C/D. Floor 4/4 (334, 329, 323, 330).
+
+### New leg, drafted now (the cycle-8b pre-commitment firing)
+
+```
+### 339 — ROUTE-ORC6: THE "CLOSED THREE WAYS" SITES, ADJUDICATED ON BOTH
+MEASURED ANSWERS (over-read-closure-#6 candidate — a gated adjudication, not a
+presumed correction)
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** Cycle 7b pre-committed: whether "the Grade-A/fluid cell is empty —
+closed three ways" overstates is measured by 331/332, and any correction is
+drafted on measured answers, never before. Both answers are now banked: 332 —
+the Leray obstruction is VELOCITY-PRESSURE-SPECIFIC (fails at S4; the vorticity
+lane is open, with the NRS/Tsai L³ wall named beside it); 331 — the (iv_a)
+obstruction is REAL AND MEASURED but its mechanism is REFRAMED (algebraic tail
+vs Gaussian weight, not nonlocality as Remark 40 names it). The claim's sites
+do not enumerate the three ways inline; the enumeration lives in the banked
+record (leg 174's occupancy work and its consumers). Locate it, then adjudicate
+each way against both measured answers. Note the live distinction: 331's NO is
+CONSISTENT with the cell staying empty (the one machinery measured fails to
+reach fluid) — emptiness may stand while a closure REASON is misattributed or
+formulation-over-wide. Width and grounds are separate claims; adjudicate both.
+**Gate.** Does the leg (a) locate and QUOTE the banked enumeration of the three
+ways; (b) adjudicate each way against 332's formulation-specificity and 331's
+reframed mechanism — verdict per way: STANDS AT MEASURED WIDTH, OVERSTATES, or
+MISATTRIBUTES, deciding sentences quoted; and (c) execute what the verdicts
+owe: if any correction is owed, the experiments/JOURNAL.md:4929 site is
+corrected with inline markers (original quoted in place), a CORRECTIONS.md
+closure-#6 entry is appended (pattern count six), and EXACT replacement wording
+for the two DIRECTION.md sites (:9656, :14865 at e9f4956) is delivered in this
+leg's journal for the DM to apply (DIRECTION.md is the DM's file — the leg
+never edits it); if no correction is owed, the adjudication is banked as the
+record that the check ran?
+  yes (either verdict) -> Bank; the DM applies its own two sites' fixes (or
+        records their standing) in the absorbing cycle, citing this leg.
+  no  -> The three ways cannot be enumerated from the banked record after a
+        full search: report THAT as the finding — a closure claim whose grounds
+        cannot be enumerated is itself the correction, escalated to the DM.
+**Territory.** experiments/JOURNAL.md (the one :4929 site, markers only),
+               writeup/CORRECTIONS.md (append), writeup/novelty/leg_339.md,
+               experiments/journal/leg_339.md. Reads legs 331/332's banked
+               quartets and leg 174's occupancy record; edits none of them.
+               No figure.
+**Difficulty.** standard
+**Preconditions:** None (331 and 332 both landed).
+```
+
+### Ranking — 339 takes rank 1, with the reason stated (the cycle-8c rule:
+nothing outranks the corrections queue again without one)
+
+339 outranks 335-338 because it corrects (or certifies) the premise text the
+now-live route-4 programme cites — 334 is in flight in slot A this cycle, and
+its plan should not be written against sites whose adjudication is pending when
+one leg-cycle closes them. 335-338 and 307 keep their relative order directly
+behind it.
+
+Rank order for the next vacancies: 1. **339 ORC6** 2. **335 S1GR** 3. **336
+C305** 4. **337 C318** 5. **338 LCB1** 6. **307 TSCX** 7. **328 ORC5** 8. **324
+P2SPF** 9. **322 F70** 10. **327 P2T1E** 11. **287 EPA** 12. **229 PNRV** 13.
+**293 JFA** 14. **298 CORRX** 15. **299 TESTA**. Then **310 EPAP** (on
+287+298), **325 MTB1** (USER-GATED), **231-234** (blocked on repairs
+217/219/225). SUSPENDED: 306, 308.
+
+**Reserve queue: 21 undispatched legs (339, 335, 336, 337, 338, 307, 328, 324,
+322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **15**. Next fresh leg number: **340.**
+
+Nothing in this update lifts a ban. 331's NO is an adverse measurement banked at
+full strength — the certification path to fluid objects is measured OBSTRUCTED
+at this step, in this weight; route 4 proceeds as a Tier-2 programme whose plan
+must now carry that obstruction, the NRS/Tsai wall, and the weight collision
+explicitly. A measured obstruction replacing an inferred one is a sharper map,
+not movement; no L1-L4 link moved; Clay stays ~0.05%.
