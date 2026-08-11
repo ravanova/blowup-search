@@ -1,0 +1,278 @@
+{
+  "leg": 350,
+  "route": "DSSP",
+  "brick": "B2 (DSSP-BASIS)",
+  "gate_pre_committed": "does an enriched compactified basis resolve the (1-X)^{1-i*kappa} boundary block at a lower mode count than leg 313's measured plain-Chebyshev baseline (823 at kappa=1, 14149 at kappa=20), at the same 1e-6 truncation, with the smooth-control separation 82.3x at the cheapest kappa!=0 row reproduced first?",
+  "gate_answer": "YES",
+  "branch_taken": "enrichment factor reported; B3 proceeds on the enriched basis",
+  "ceiling": "TIER 2 -- a basis is not a certificate; nothing here is a proof or a Clay claim",
+  "step0_smooth_control_reproduced_first": {
+    "plain_X_smooth_modes_1e-6": 10,
+    "plain_X_kappa1_modes_1e-6": 823,
+    "separation": 82.3,
+    "leg313_banked_separation": 82.3
+  },
+  "step1_full_baseline_table_reproduced": {
+    "N_modes_used": 1048576,
+    "rows": {
+      "1.0": 823,
+      "2.0": 1482,
+      "5.0": 3564,
+      "10.0": 7086,
+      "20.0": 14149
+    },
+    "leg313_banked_rows": {
+      "1.0": 823,
+      "2.0": 1482,
+      "5.0": 3564,
+      "10.0": 7086,
+      "20.0": 14149
+    },
+    "leg313_cost_law": {
+      "prefactor_C": 790.7087311475026,
+      "exponent_q": 0.9540143412913629,
+      "max_rel_residual": 0.03923604963851447
+    }
+  },
+  "step2_enriched_basis": {
+    "construction": "u = -log(1-X)  (log-compactification, sends the boundary branch point to an entire exponential); v = u/(u+L)  (Boyd algebraic map, u in [0,inf) to v in [0,1)); Chebyshev-in-v with L fixed",
+    "L_sweep_grid": [
+      0.1,
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0,
+      64.0
+    ],
+    "L_sweep_N": 32768,
+    "L_sweep_rows": {
+      "1.0": {
+        "0.1": 164,
+        "0.25": 107,
+        "0.5": 78,
+        "1.0": 58,
+        "2.0": 45,
+        "4.0": 36,
+        "8.0": 32,
+        "16.0": 32,
+        "32.0": 36,
+        "64.0": 44
+      },
+      "2.0": {
+        "0.1": 286,
+        "0.25": 185,
+        "0.5": 135,
+        "1.0": 100,
+        "2.0": 77,
+        "4.0": 62,
+        "8.0": 55,
+        "16.0": 54,
+        "32.0": 60,
+        "64.0": 73
+      },
+      "5.0": {
+        "0.1": 680,
+        "0.25": 440,
+        "0.5": 319,
+        "1.0": 236,
+        "2.0": 181,
+        "4.0": 146,
+        "8.0": 128,
+        "16.0": 126,
+        "32.0": 139,
+        "64.0": 169
+      },
+      "10.0": {
+        "0.1": 1350,
+        "0.25": 872,
+        "0.5": 633,
+        "1.0": 468,
+        "2.0": 358,
+        "4.0": 289,
+        "8.0": 254,
+        "16.0": 249,
+        "32.0": 274,
+        "64.0": 333
+      },
+      "20.0": {
+        "0.1": 2694,
+        "0.25": 1739,
+        "0.5": 1263,
+        "1.0": 933,
+        "2.0": 713,
+        "4.0": 575,
+        "8.0": 505,
+        "16.0": 496,
+        "32.0": 546,
+        "64.0": 663
+      }
+    },
+    "L_fixed_used_for_every_kappa": 16.0,
+    "N_modes_used": 131072,
+    "rows": {
+      "1.0": 32,
+      "2.0": 54,
+      "5.0": 126,
+      "10.0": 249,
+      "20.0": 496
+    }
+  },
+  "step3_resolution_stability": {
+    "1.0": {
+      "16384": 32,
+      "32768": 32,
+      "65536": 32,
+      "131072": 32
+    },
+    "2.0": {
+      "16384": 54,
+      "32768": 54,
+      "65536": 54,
+      "131072": 54
+    },
+    "5.0": {
+      "16384": 126,
+      "32768": 126,
+      "65536": 126,
+      "131072": 126
+    },
+    "10.0": {
+      "16384": 249,
+      "32768": 249,
+      "65536": 249,
+      "131072": 249
+    },
+    "20.0": {
+      "16384": 496,
+      "32768": 496,
+      "65536": 496,
+      "131072": 496
+    }
+  },
+  "step4_kappa0_control": {
+    "plain_X_modes_1e-6": 2,
+    "v_mapped_modes_1e-6": 15
+  },
+  "step5_falsification_control_smooth_function_under_the_map": {
+    "plain_X_modes_1e-6": 10,
+    "v_mapped_modes_1e-6": 31,
+    "got_worse_as_required": true
+  },
+  "step6_enrichment_factor": {
+    "per_kappa": {
+      "1.0": 25.71875,
+      "2.0": 27.444444444444443,
+      "5.0": 28.285714285714285,
+      "10.0": 28.457831325301203,
+      "20.0": 28.526209677419356
+    },
+    "min": 25.71875,
+    "max": 28.526209677419356
+  },
+  "walls": {
+    "clay_odds": "~0.05%, unchanged",
+    "links_of_L1_to_L4_moved": 0
+  },
+  "selftests": [
+    {
+      "name": "STEP0.1 smooth control needs 10 modes at 1e-6 on the plain-X basis (leg 313's own number, reproduced)",
+      "pass": true,
+      "detail": "measured 10"
+    },
+    {
+      "name": "STEP0.2 kappa=1 needs 823 modes at 1e-6 on the plain-X basis (leg 313's own number, reproduced)",
+      "pass": true,
+      "detail": "measured 823"
+    },
+    {
+      "name": "STEP0.3 the 82.3x smooth-control separation at the cheapest kappa!=0 row is reproduced FIRST, before the enriched basis is touched",
+      "pass": true,
+      "detail": "measured 82.3000x"
+    },
+    {
+      "name": "STEP1 kappa=1.0 plain-X baseline matches leg 313's banked 823",
+      "pass": true,
+      "detail": "measured 823"
+    },
+    {
+      "name": "STEP1 kappa=2.0 plain-X baseline matches leg 313's banked 1482",
+      "pass": true,
+      "detail": "measured 1482"
+    },
+    {
+      "name": "STEP1 kappa=5.0 plain-X baseline matches leg 313's banked 3564",
+      "pass": true,
+      "detail": "measured 3564"
+    },
+    {
+      "name": "STEP1 kappa=10.0 plain-X baseline matches leg 313's banked 7086",
+      "pass": true,
+      "detail": "measured 7086"
+    },
+    {
+      "name": "STEP1 kappa=20.0 plain-X baseline matches leg 313's banked 14149",
+      "pass": true,
+      "detail": "measured 14149"
+    },
+    {
+      "name": "STEP2.1 the L-sweep is not empty and every row has at least one finite entry",
+      "pass": true,
+      "detail": "5 kappa rows swept over L in [0.1, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0]"
+    },
+    {
+      "name": "STEP2.2 L=16.0 (frozen, used for every kappa row below) is at or within 5% of the best mode count the sweep found, for every kappa -- so freezing it costs almost nothing",
+      "pass": true,
+      "detail": "kappa=1.0: L=16 -> 32, best -> 32; kappa=2.0: L=16 -> 54, best -> 54; kappa=5.0: L=16 -> 126, best -> 126; kappa=10.0: L=16 -> 249, best -> 249; kappa=20.0: L=16 -> 496, best -> 496"
+    },
+    {
+      "name": "STEP2.3 kappa=1.0 enriched basis (L=16.0) resolves at < the plain-X baseline (823)",
+      "pass": true,
+      "detail": "measured 32"
+    },
+    {
+      "name": "STEP2.3 kappa=2.0 enriched basis (L=16.0) resolves at < the plain-X baseline (1482)",
+      "pass": true,
+      "detail": "measured 54"
+    },
+    {
+      "name": "STEP2.3 kappa=5.0 enriched basis (L=16.0) resolves at < the plain-X baseline (3564)",
+      "pass": true,
+      "detail": "measured 126"
+    },
+    {
+      "name": "STEP2.3 kappa=10.0 enriched basis (L=16.0) resolves at < the plain-X baseline (7086)",
+      "pass": true,
+      "detail": "measured 249"
+    },
+    {
+      "name": "STEP2.3 kappa=20.0 enriched basis (L=16.0) resolves at < the plain-X baseline (14149)",
+      "pass": true,
+      "detail": "measured 496"
+    },
+    {
+      "name": "STEP3 the enriched mode counts are stable (identical) across an 8x resolution range for every kappa row -- measures the object, not the array",
+      "pass": true,
+      "detail": "kappa=1.0: {'16384': 32, '32768': 32, '65536': 32, '131072': 32}; kappa=2.0: {'16384': 54, '32768': 54, '65536': 54, '131072': 54}; kappa=5.0: {'16384': 126, '32768': 126, '65536': 126, '131072': 126}; kappa=10.0: {'16384': 249, '32768': 249, '65536': 249, '131072': 249}; kappa=20.0: {'16384': 496, '32768': 496, '65536': 496, '131072': 496}"
+    },
+    {
+      "name": "STEP4 kappa=0 control: baseline is near-exact (a linear polynomial in X terminates at essentially 2 modes); the SAME object costs more under the v-map (expected: the map exists to buy the kappa!=0 boundary defect, not to compress an already-polynomial function)",
+      "pass": true,
+      "detail": "baseline=2, enriched=15"
+    },
+    {
+      "name": "STEP5 FALSIFICATION CONTROL: the smooth control (no boundary singularity) costs MORE modes under the v-map than on plain-X directly -- the enrichment is not a universal free lunch",
+      "pass": true,
+      "detail": "plain-X=10, v-mapped=31"
+    },
+    {
+      "name": "GATE all five measured kappa rows resolve at a lower mode count on the enriched basis than leg 313's plain-Chebyshev baseline, at the identical 1e-6 truncation",
+      "pass": true,
+      "detail": "kappa=1.0: 823 -> 32 (25.72x); kappa=2.0: 1482 -> 54 (27.44x); kappa=5.0: 3564 -> 126 (28.29x); kappa=10.0: 7086 -> 249 (28.46x); kappa=20.0: 14149 -> 496 (28.53x)"
+    }
+  ],
+  "selftests_passed": "19/19"
+}

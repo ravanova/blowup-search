@@ -698,6 +698,26 @@ CAPABILITIES = [
                    "random banded SPD matrices; leg 178's own theta~3e-31 regime "
                    "directly tested"),
      "test": "test_interval_mp.py"},
+    {"module": "solver/dssp_basis.py",
+     "object": "enriched compactified basis for the DSSP boundary block (leg 350, "
+               "Route-DSSP brick B2)",
+     "holds": ("log-compactification u=-log(1-X) plus a fixed Boyd algebraic map "
+               "v=u/(u+L) that carries the (1-X)^{1-i*kappa} far-field defect leg "
+               "313 measured at X=1 into an entire exponential-times-oscillation "
+               "function of u, then a finite Chebyshev-Lobatto/FFT basis on v; "
+               "boundary_block/boundary_block_v, modes_for_rel_tol, the smooth "
+               "control carried through the same map for falsification"),
+     "validated": ("plain-X baseline reproduces leg 313's own banked table exactly "
+                   "(823/1482/3564/7086/14149 modes at kappa=1/2/5/10/20 for 1e-6 "
+                   "relative truncation; smooth-control separation 82.3x); the "
+                   "enriched basis, ONE fixed map scale L=16 shared across every "
+                   "kappa row, resolves the same target at 32/54/126/249/496 modes "
+                   "-- a 25.7x-28.5x enrichment factor, stable to the mode across "
+                   "an 8x resolution range (16384..131072). FALSIFICATION CONTROL: "
+                   "the same map applied to leg 313's smooth positive control (no "
+                   "boundary singularity) costs MORE modes (31 vs 10 direct), so "
+                   "the enrichment is not a universal transform artefact"),
+     "test": "test_dssp_basis.py"},
 ]
 
 
