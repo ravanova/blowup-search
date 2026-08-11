@@ -2,7 +2,7 @@
 
 **Gate answer: NO**, on clause (c), on one of five magnitudes. Clauses (a) and (b) pass in
 full. Every number below is in `writeup/data/p2_route_p0tcv_v1_verify.json` and is
-re-asserted from that JSON by `experiments/p2_route_p0tcv_v1_verify_evidence.py` (26/26).
+re-asserted from that JSON by `experiments/p2_route_p0tcv_v1_verify_evidence.py` (29/29).
 
 ---
 
@@ -140,17 +140,30 @@ comfortably non-empty; it is, by `6.854×`.
 
 ### 6.2 Propagation surfaces
 
-A repo-wide search for `6.855` returns exactly three, all restatements of the one
-computation:
+A search over `origin/main` and both branch tips (`*.md`, `*.py`, `*.json`) returns
+**8** surfaces, all restatements of the one computation, **7 of them on `main`**:
 
 | surface | on `main`? | inside leg 300's territory? |
 |---|---|---|
-| `experiments/journal/leg_266.md:70` (the source) | no (branch only) | yes |
+| `experiments/journal/leg_266.md:70` — **the source** | no (branch only) | yes |
 | `experiments/JOURNAL.md:3730` | **yes** | **no** — integration-owned ledger |
-| `DIRECTION.md:11153` | **yes** | **no** — DM-owned |
+| `DIRECTION.md:11156` — the DM's record of 266 landing | **yes** | **no** — DM-owned |
+| `DIRECTION.md:13289` — the user-facing packet summary | **yes** | **no** |
+| `DIRECTION.md:13328`, `:13336` — **leg 300's own dispatched gate text** | **yes** | **no** |
+| `DIRECTION.md:13474`, `:13479` — **reserve leg 305 (Route-DWM)**, whose *title* reads *"IS THE 6.855x DOMINANCE-WINDOW DEFICIT SHARP OR SLACK?"* | **yes** | **no** |
 
-Two of three are on `main` and outside this leg's reach, which is why the gate's no-branch
-prescribes a rework leg rather than an in-place fix here.
+Two of these deserve separate comment.
+
+- `:13328`/`:13336` are this leg's own gate, which *quotes* `6.855` as the claim under
+  test. That is correct as written and must **not** be edited: a pre-committed gate is a
+  historical record of what was asked, not a live magnitude.
+- `:13474`/`:13479` are the more consequential ones. Reserve leg 305 is a **drafted,
+  queued** leg whose title and thesis are both built on the wrong digit. Its own gate
+  ("does the re-derivation reproduce the window endpoints…") is unaffected — the endpoints
+  are exact — but its framing needs the corrected figure before it dispatches.
+
+Every one of the seven `main`-side surfaces is outside this leg's territory, which is why
+the gate's no-branch prescribes a rework leg rather than an in-place fix here.
 
 ## 7. Negative controls (lesson 90). **5/5 behaved**
 

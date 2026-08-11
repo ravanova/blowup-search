@@ -136,6 +136,19 @@ def main():
           nc["all_behaved"] and nc["n"] == 5,
           f"{nc['n_behaved_as_required']}/{nc['n']}")
 
+    # ---- propagation of the failing figure --------------------------------
+    prop = w["propagation_of_the_failing_figure"]
+    check("the failing figure has 8 restatement surfaces, 7 of them on main",
+          prop["n_surfaces"] == 8 and prop["n_on_main"] == 7,
+          f"{prop['n_surfaces']} surfaces / {prop['n_on_main']} on main")
+    check("both main-side owners are outside leg 300's territory",
+          sorted(prop["on_main_paths"]) == ["DIRECTION.md", "experiments/JOURNAL.md"],
+          str(prop["on_main_paths"]))
+    check("reserve leg 305's draft is among the DIRECTION.md surfaces",
+          any(s["path"] == "DIRECTION.md" and s["line"] in ("13474", "13479")
+              for s in prop["surfaces"]),
+          str([s["line"] for s in prop["surfaces"] if s["path"] == "DIRECTION.md"]))
+
     # ---- Clay honesty -----------------------------------------------------
     check("Clay odds unmoved at ~0.05%", w["clay"]["odds"] == "~0.05%")
 

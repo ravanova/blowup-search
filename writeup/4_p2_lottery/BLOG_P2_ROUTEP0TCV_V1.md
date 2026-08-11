@@ -74,10 +74,16 @@ depends on the ratio's fourth digit. The number is rhetorical: it is there to sh
 target window is comfortably non-empty rather than a sliver, and it *is* comfortably
 non-empty, by 6.854×.
 
-The wrong figure has, however, already spread. A repository-wide search finds it on three
-surfaces: leg 266's own journal (the source), `experiments/JOURNAL.md`, and
-`DIRECTION.md`. Two of those are on `main` and outside this leg's territory, which is
-precisely why the no-branch calls for a rework leg rather than a quiet in-place edit.
+The wrong figure has, however, already spread — further than expected. A search over
+`main` and both branch tips finds **8** surfaces, **7 of them already on `main`**: leg
+266's own journal (the source, on the branch), `experiments/JOURNAL.md`, and six places in
+`DIRECTION.md`. Two of the latter are this leg's own dispatched gate text, which quotes
+`6.855` as the claim under test and is correct as written — a pre-committed gate is a
+record of what was asked, not a live number. But two more are the title and thesis of
+**reserve leg 305**, a drafted and queued leg christened *"IS THE 6.855x DOMINANCE-WINDOW
+DEFICIT SHARP OR SLACK?"*. A slipped digit that has reached the name of a future leg is
+past the point where a quiet in-place edit is the right repair, and every one of those
+seven surfaces is outside this leg's territory. Hence the rework leg.
 
 ## What this does not mean
 
@@ -97,5 +103,5 @@ with the three surfaces that carry it enumerated.
 
 *Data: `writeup/data/p2_route_p0tcv_v1_verify.json`. Runner:
 `experiments/p2_route_p0tcv_v1_verify.py`. Every number above is re-asserted from the
-curated JSON by `experiments/p2_route_p0tcv_v1_verify_evidence.py` (26/26 checks), which
+curated JSON by `experiments/p2_route_p0tcv_v1_verify_evidence.py` (29/29 checks), which
 also re-derives the gate-answering ratio through a second, independent code path.*
