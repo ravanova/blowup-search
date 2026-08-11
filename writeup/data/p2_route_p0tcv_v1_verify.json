@@ -1,0 +1,346 @@
+{
+ "leg": 300,
+ "route": "P0TCV",
+ "question": "Does an independent line-by-line verification of leg/266-p0tc-v1 confirm (a) the re-posed obligation matches the papers' actual architecture exactly as writeup/novelty/verify_251.md states it, (b) every verifier-confirmed claim in leg 251's report is byte-untouched on the branch, and (c) the window endpoints (1.1666667, 1.1909830) and the 6.855x width ratio re-derive from BCG's own stated inequalities, at the quoted precision?",
+ "gate_answer": "NO",
+ "provenance": {
+  "arxiv_id": "2208.09445",
+  "eprint_url": "https://arxiv.org/e-print/2208.09445",
+  "pinned_md5": "45ea63c45a1a199ecfb4dc4a15431600",
+  "source": "located",
+  "path": "/tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/bcg/RadialImplosion31_FinalArxiv.tex",
+  "tarball_md5": "45ea63c45a1a199ecfb4dc4a15431600",
+  "tarball_bytes": 1520724,
+  "md5_matches_pin": true
+ },
+ "clause_a_architecture": {
+  "subclaims": [
+   {
+    "claim": "the stationary self-similar system Thms 1.2/1.3 rest on is the EULER one -- Thm 1.3 opens on the profiles (U^E,S^E) SOLVING (eq:DS)",
+    "evidence_lines": [
+     217,
+     220
+    ],
+    "confirmed": true
+   },
+   {
+    "claim": "dissipation enters ONLY the dynamically rescaled system, as the non-autonomous forcing F_dis -- defined, on the RHS, and named 'the dissipative forcing' by the authors",
+    "evidence_lines": [
+     2130,
+     2138,
+     2142
+    ],
+    "confirmed": true
+   },
+   {
+    "claim": "the enclosure obligation therefore lives in the STABILITY STEP's r-restriction argument: BCG treat F_dis as an error only when delta_dis > 0, i.e. r > 2*gamma/(gamma+1), and say so in sec 7",
+    "evidence_lines": [
+     180,
+     489,
+     493,
+     2085
+    ],
+    "confirmed": true
+   }
+  ],
+  "n_confirmed": 3,
+  "n_total": 3,
+  "target_window_non_empty": true,
+  "clause_a_pass": true
+ },
+ "clause_a_locators": {
+  "tex_name": "RadialImplosion31_FinalArxiv.tex",
+  "tex_lines": 6898,
+  "tex_lines_claimed_by_266": 6898,
+  "tex_lines_agree": true,
+  "locators": [
+   {
+    "line": 180,
+    "what": "alpha = (gamma-1)/2, the rescaled-sound-speed exponent",
+    "needle": "\\alpha=\\frac{\\gamma-1}{2}",
+    "confirmed": true
+   },
+   {
+    "line": 217,
+    "what": "Thm 1.2 (th:mainr3): smooth solution to (eq:DS), gamma = 7/5, odd n large enough",
+    "needle": "\\begin{theorem} \\label{th:mainr3}",
+    "confirmed": true
+   },
+   {
+    "line": 220,
+    "what": "Thm 1.3 (th:stability) opens on the EULER profiles solving (eq:DS)",
+    "needle": "Let $(U^E, S^E)$ be the profiles of Theorem \\ref{th:mainr3}, solving \\eqref{eq:D",
+    "confirmed": true
+   },
+   {
+    "line": 353,
+    "what": "(eq:rstar), the standing restriction 1 < r < r*(gamma)",
+    "needle": "\\begin{equation}\\label{eq:rstar}",
+    "confirmed": true
+   },
+   {
+    "line": 489,
+    "what": "(eq:delta:dis) preamble: the dissipative term is an ERROR only conditionally",
+    "needle": "The last term can be treated as an error so long as",
+    "confirmed": true
+   },
+   {
+    "line": 493,
+    "what": "(eq:r:restriction), r > 2*gamma/(gamma+1)",
+    "needle": "\\begin{equation}\\label{eq:r:restriction}",
+    "confirmed": true
+   },
+   {
+    "line": 2085,
+    "what": "BCG sec 7's opening sentence -- the authors' own statement of the gap",
+    "needle": "in the Navier-Stokes case we need to restrict the parameter $r$ to a regime wher",
+    "confirmed": true
+   },
+   {
+    "line": 2130,
+    "what": "F_dis DEFINED, in the dynamically rescaled system",
+    "needle": "\\mc F_{\\rm dis} =",
+    "confirmed": true
+   },
+   {
+    "line": 2138,
+    "what": "F_dis on the RIGHT-HAND SIDE of the rescaled W-equation",
+    "needle": "=\\mc F_{\\rm dis}+\\mc F_{\\mathrm{nl}, \\mt W}",
+    "confirmed": true
+   },
+   {
+    "line": 2142,
+    "what": "the paper's own words: 'the dissipative forcing'",
+    "needle": "the dissipative forcing",
+    "confirmed": true
+   }
+  ],
+  "all_confirmed": true,
+  "n_confirmed": 10,
+  "n_locators": 10
+ },
+ "clause_b_byte_untouched": {
+  "base": "bef1d5e",
+  "tip": "873a15f",
+  "files_changed": [
+   "experiments/journal/leg_251.md",
+   "experiments/journal/leg_266.md",
+   "experiments/p2_route_p0t_v1_targetselection.py",
+   "writeup/data/p2_route_p0t_v1_targetselection.json",
+   "writeup/novelty/leg_266.md"
+  ],
+  "n_files": 5,
+  "numstat": [
+   "61\t8\texperiments/journal/leg_251.md",
+   "144\t0\texperiments/journal/leg_266.md",
+   "47\t4\texperiments/p2_route_p0t_v1_targetselection.py",
+   "3\t2\twriteup/data/p2_route_p0t_v1_targetselection.json",
+   "46\t0\twriteup/novelty/leg_266.md"
+  ],
+  "n_hunks": 9,
+  "declared_territory": [
+   "experiments/journal/leg_251.md",
+   "experiments/journal/leg_266.md",
+   "experiments/p2_route_p0t_v1_targetselection.py",
+   "writeup/data/p2_route_p0t_v1_targetselection.json",
+   "writeup/novelty/leg_266.md"
+  ],
+  "paths_outside_declared_territory": [],
+  "n_outside_territory": 0,
+  "shared_ledgers_touched": [],
+  "json_paths_changed": [
+   "certificate_obligation.CORRECTION_2026_08_07",
+   "certificate_obligation.certificate_must_show.0"
+  ],
+  "json_paths_changed_undeclared": [],
+  "verifier_confirmed_byte_identical": [
+   "gate_answer",
+   "verdict",
+   "escalate",
+   "escalation_reason",
+   "named_phase1_candidate",
+   "named_phase1_candidate_companion",
+   "fluid_or_vortex_dynamics_adjacent",
+   "screen1_authority",
+   "screen2_authority",
+   "candidates",
+   "counts",
+   "survivors_unconditional",
+   "survivors_conditional",
+   "certificate_obligation.candidate",
+   "certificate_obligation.what_is_already_proved_by_others",
+   "certificate_obligation.what_is_NOT_proved_and_is_the_target",
+   "certificate_obligation.certificate_must_show.1",
+   "certificate_obligation.certificate_must_show.2",
+   "certificate_obligation.certificate_must_show.3",
+   "certificate_obligation.certificate_must_show.4",
+   "certificate_obligation.what_a_certificate_would_NOT_show",
+   "wall2_position",
+   "conditionality",
+   "rss_blockers",
+   "dss_ban_state_read_from_plan",
+   "self_test",
+   "negative_control",
+   "honesty",
+   "clay"
+  ],
+  "verifier_confirmed_DIFFERING": [],
+  "n_confirmed_identical": 29,
+  "n_confirmed_total": 29,
+  "journal_leg251_edit_regions": 3,
+  "clause_b_pass": true
+ },
+ "clause_c_window": {
+  "gamma": "1.4",
+  "alpha": "0.2",
+  "r_restriction_lower_edge": "1.16666666666666666666666666666666666666666666666666666666667",
+  "r_restriction_lower_edge_via_delta_dis": "1.16666666666666666666666666666666666666666666666666666666667",
+  "two_routes_agree": true,
+  "r_star": "1.19098300562505257589770658281718094113984541009711856893228",
+  "r_star_closed_form_check": "1.19098300562505257589770658281718094113984541009711856893228",
+  "dominance_window": [
+   "1.16666666666666666666666666666666666666666666666666666666667",
+   "1.19098300562505257589770658281718094113984541009711856893228"
+  ],
+  "dominance_width": "0.02431633895838590923103991615051427447317874343045190226561",
+  "dominance_width_closed_form": "0.0243163389583859092310399161505142744731787434304519022656083",
+  "target_window": [
+   "1",
+   "1.16666666666666666666666666666666666666666666666666666666667"
+  ],
+  "target_width": "0.16666666666666666666666666666666666666666666666666666666667",
+  "width_ratio": "6.85410196624968454461376050309691435316092753941728858640621",
+  "width_ratio_closed_form": "6.85410196624968454461376050309691435316092753941728858640635"
+ },
+ "clause_c_claim_comparison": {
+  "rows": [
+   {
+    "quantity": "dominance_lo",
+    "claimed_by_266": "1.1666667",
+    "rederived_exact": "1.1666666666666666666666",
+    "rederived_at_claimed_precision": "1.1666667",
+    "agrees_at_quoted_precision": true,
+    "abs_error": "3.3333333333333333",
+    "rel_error": "2.8571428571428571",
+    "rel_error_float": 2.8571428571428572e-08
+   },
+   {
+    "quantity": "dominance_hi",
+    "claimed_by_266": "1.1909830",
+    "rederived_exact": "1.1909830056250525758977",
+    "rederived_at_claimed_precision": "1.1909830",
+    "agrees_at_quoted_precision": true,
+    "abs_error": "5.6250525758977065",
+    "rel_error": "4.7230334516365011",
+    "rel_error_float": 4.723033451636501e-09
+   },
+   {
+    "quantity": "dominance_width",
+    "claimed_by_266": "0.0243163",
+    "rederived_exact": "0.0243163389583859092310",
+    "rederived_at_claimed_precision": "0.0243163",
+    "agrees_at_quoted_precision": true,
+    "abs_error": "3.8958385909231039",
+    "rel_error": "0.0000016021484967",
+    "rel_error_float": 1.6021484967742468e-06
+   },
+   {
+    "quantity": "target_width",
+    "claimed_by_266": "0.1666667",
+    "rederived_exact": "0.1666666666666666666666",
+    "rederived_at_claimed_precision": "0.1666667",
+    "agrees_at_quoted_precision": true,
+    "abs_error": "3.3333333333333333",
+    "rel_error": "1.9999999999999999",
+    "rel_error_float": 2e-07
+   },
+   {
+    "quantity": "width_ratio",
+    "claimed_by_266": "6.855",
+    "rederived_exact": "6.8541019662496845446137",
+    "rederived_at_claimed_precision": "6.854",
+    "agrees_at_quoted_precision": false,
+    "abs_error": "0.0008980337503154",
+    "rel_error": "0.0001310213584124",
+    "rel_error_float": 0.00013102135841244669
+   }
+  ],
+  "n_agree": 4,
+  "n_total": 5,
+  "all_agree": false,
+  "failing": [
+   "width_ratio"
+  ],
+  "diagnosis": {
+   "inputs_all_reproduce": true,
+   "ratio_from_leg_266_own_rounded_endpoints": "6.8541143183",
+   "ratio_rounded_from_266_own_endpoints_4sf": "6.854",
+   "ratio_rederived_exact": "6.8541019662496845446137",
+   "ratio_rederived_4sf": "6.854",
+   "ratio_claimed": "6.855",
+   "last_digit_delta": "0.001",
+   "formula_is_sound": true,
+   "verdict": "The defect is a slipped final digit, NOT a wrong formula: leg 266's own quoted endpoints, re-divided, give the same 4-s.f. value the 60-digit re-derivation gives, and that value is not the one leg 266 wrote down. The architecture reading (clause a) and the byte-untouchedness (clause b) are unaffected.",
+   "closed_form": "width_ratio = (1/6) / (r* - 7/6) = 2/(7 - 3*sqrt(5)) = (7 + 3*sqrt(5))/2"
+  }
+ },
+ "clause_c_pass": false,
+ "claimed_by_leg_266": {
+  "dominance_lo": "1.1666667",
+  "dominance_hi": "1.1909830",
+  "dominance_width": "0.0243163",
+  "target_width": "0.1666667",
+  "width_ratio": "6.855"
+ },
+ "negative_controls": {
+  "controls": [
+   {
+    "control": "locator_off_by_one",
+    "planted": "look for F_dis's definition at l.2131 instead of l.2130",
+    "must_be_caught": true,
+    "caught": true
+   },
+   {
+    "control": "byte_identity_planted_edit_to_obligation_2",
+    "planted": "append ' [PLANTED DEFECT]' to certificate_must_show[1]",
+    "must_be_caught": true,
+    "caught": true
+   },
+   {
+    "control": "silent_gate_answer_flip",
+    "planted": "flip gate_answer YES -> NO on the tip blob",
+    "must_be_caught": true,
+    "caught": true
+   },
+   {
+    "control": "wrong_eq_rstar_branch",
+    "planted": "evaluate the gamma >= 5/3 branch of (eq:rstar) at gamma = 7/5",
+    "value": "1.188345160884",
+    "must_be_caught": true,
+    "caught": true
+   },
+   {
+    "control": "comparator_accepts_the_true_ratio",
+    "planted": "feed the comparator the correct ratio 6.854",
+    "must_be_caught": false,
+    "caught": true
+   }
+  ],
+  "n": 5,
+  "n_behaved_as_required": 5,
+  "all_behaved": true
+ },
+ "stacked_successor_note": "leg 275 (2aac47a) is stacked on top of 873a15f, i.e. on top of the commit this leg verifies; leg/251-p0t-v1's tip is 275, not 266.",
+ "clay": {
+  "odds": "~0.05%",
+  "statement": "No link of the L1->L4 chain moved. This leg verifies the WORDING of a certificate obligation for a COMPRESSIBLE Navier-Stokes target; compressible NS is not the incompressible system the Clay problem asks about. Verification of a correction is hygiene, not progress."
+ },
+ "honesty": {
+  "what_this_leg_did_NOT_do": [
+   "It did not re-verify leg 251's SCREEN (verify_251 did that at source).",
+   "It did not re-open the named candidate, the compressible-vs-Clay flag, Wall 2, the Leray finding, the CONDITIONAL tier or the Clay odds.",
+   "It did not touch, comment on, or re-raise the Phase-1 packet parked with the user.",
+   "It did not verify leg 275, which is a separate correction stacked on top of 266 and carries its own unverified status."
+  ]
+ }
+}
