@@ -311,6 +311,15 @@
     "M4_class": "EXACT_IDENTITY"
   },
   "sharp_or_slack": "SHARP_FOR_BCG_ARGUMENT_AS_STATED",
+  "counterfactual": {
+    "c_lap_before": "2",
+    "c_lap_after": "1.14589803375031545538623949690308564694178673958912831697692",
+    "fractional_order_s": "0.57294901687515772769311974845154282347089336979456415848846",
+    "lower_endpoint_after": "1.02431633895838590923103991615051427449029778993152138616282",
+    "closed_form_c_lap_star": "1.14589803375031545538623949690308564683907246058271141359365",
+    "closed_form_s_star": "0.572949016875157727693119748451542823419536230291355706796825",
+    "meaning": "closing the 6.854x deficit requires replacing nu*Laplacian with the HYPODISSIPATION nu(-Laplacian)^s, s < 1.  That is a different PDE, not a sharper proof of the same one."
+  },
   "discrete_ledger": {
     "k_at_dominance_threshold": "16.3479210516613384873990168461313841556225924879068376948995",
     "n_lost_floor": 16,
@@ -366,5 +375,5 @@
     "clay_odds": "~0.05%, unchanged",
     "chain": "no link of the L1->L4 chain moved"
   },
-  "runtime_s": 19.84
+  "runtime_s": 14.29
 }

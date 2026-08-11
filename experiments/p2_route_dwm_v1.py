@@ -647,6 +647,21 @@ def main():
         "ledger": rows,
         "costliest_constant": costliest,
         "sharp_or_slack": verdict_sharp,
+        # The counterfactual, banked so that no downstream prose or figure ever retypes it.
+        # c_lap is the Laplacian's own scaling weight = 2 spatial derivatives.  Moving it is not
+        # a sharper estimate: it is a DIFFERENT operator.  c_lap = 2s corresponds to nu(-Lap)^s.
+        "counterfactual": ({
+            "c_lap_before": "2",
+            "c_lap_after": str(D(2)*(1 + D(costliest["M3_move_to_close"]))),
+            "fractional_order_s": str(D(2)*(1 + D(costliest["M3_move_to_close"]))/2),
+            "lower_endpoint_after": str(lower_endpoint(
+                g, c_lap=D(2)*(1 + D(costliest["M3_move_to_close"])))),
+            "closed_form_c_lap_star": str((9 - 3*sqrtD(D(5)))/2),
+            "closed_form_s_star": str((9 - 3*sqrtD(D(5)))/4),
+            "meaning": ("closing the 6.854x deficit requires replacing nu*Laplacian with the "
+                        "HYPODISSIPATION nu(-Laplacian)^s, s < 1.  That is a different PDE, not "
+                        "a sharper proof of the same one."),
+        } if costliest and costliest["constant"] == "C1_c_lap" else {}),
         "discrete_ledger": disc,
         "self_test": tests,
         "structural_findings": {
