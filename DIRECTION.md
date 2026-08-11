@@ -63,8 +63,9 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
-| fig89 | 340 | reserved (EGRB, in reserve; only if the ladder comparison warrants) |
-| fig90+ | — | next free |
+| fig89 | 340 | live, slot D (only if the ladder comparison warrants) |
+| fig90 | 341 | reserved (ALGW, in reserve; only if the scoping warrants) |
+| fig91+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -147,14 +148,26 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328, 324,
-322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
-(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
-rank order as listed, §3a pre-authorised except where a spec says otherwise).
-310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
-landed). Next fresh leg number: **341**. Full specs and this cycle's rulings are
-in the cycle-8 through 8f entries at the end of this file.)
+Cycle 9: THE USER'S CEILING-RAISING PROGRAMME is executed — §0's three facts
+verified at file:line by the DM before drafting; S1+S2 MERGED as leg 341 ALGW
+(the fourth-space scoping the stage-V ban's own lift condition names; two-clause
+gate, clauses reported independently); S3 drafted as leg 342 SEED; the §3 build
+is NOT drafted (gated on 341's report, Tier-2→Tier-3 clause reserved for its
+gate); §5 ownership RULED: leg 341 OWNS the weight question, 334's clause (a)
+NARROWS TO CONSUMING its answer (marker beside 334's spec; orchestrator relays
+to the in-flight leg); the C4 reading question is ROUTED TO THE USER as §6
+directs, the cycle-8e adjudication recast as DM analysis attached without
+force — escalation #3 hangs on the user's answer; leg 340 continues, its
+measurement being input that ruling wants either way.
+
+**Reserve queue: 22 undispatched legs (341, 342, 335, 336, 337, 338, 307, 328,
+324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 16
+(341, 342, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
+299 — rank order as listed, §3a pre-authorised except where a spec says
+otherwise). 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs
+217/219/225 (221's landed). Next fresh leg number: **343**. Full specs and this
+cycle's rulings are in the cycle-8 through 9 entries at the end of this file.)
 
 ---
 
@@ -15584,6 +15597,14 @@ this cycle; the plan builds nothing itself; the cheap-entrance ban binds every
 brick.)
 ```
 
+**[OWNERSHIP NARROWED 2026-08-11, cycle 9, user programme §5 — gate text
+unedited: the WEIGHT QUESTION (which weight tolerates an algebraic tail; the
+cycle-8d binding where it collides with 332's open lane) is OWNED BY LEG 341
+ALGW, not by this leg. Clause (a) is satisfied by naming the plan's space and
+CONSUMING 341's answer — citing it if landed, or recording the question as
+owned-by-341-pending if not. This leg does not answer the weight question ad
+hoc. Relayed to the in-flight leg by the orchestrator at cycle 9.]**
+
 ### Roster (supersedes cycle 7's; FLOOR-TABLE and FIG-TABLE synced at the head
 in this same edit)
 
@@ -16412,3 +16433,196 @@ exactly where 326 left it — a packet with no live theorem either way — and t
 DSS ban-wording ruling stays the user's; 340 asks a question whose no-branch is
 as bankable as its yes. Adjudicating a theorem OUT of reach is map work, not
 movement; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 9) — THE USER'S CEILING-RAISING PROGRAMME
+EXECUTED: §0 VERIFIED AT FILE:LINE; S1+S2 MERGED AS LEG 341 ALGW; S3 = LEG 342
+SEED; THE §3 BUILD DEFERRED BY DESIGN; §5 OWNERSHIP RULED (341 OWNS THE WEIGHT
+QUESTION, 334 CONSUMES); THE C4 READING QUESTION ROUTED TO THE USER AS §6
+DIRECTS, WITH THE CYCLE-8e ADJUDICATION RECAST AS ANALYSIS
+
+**Provenance.** The user's packet arrived verbatim via the orchestrator.
+Nothing here displaces leg 334 or leg 339, exactly as the packet orders; all
+four slots were full when it arrived and stay as they are (A/334, B/339, C/323,
+D/340 — 340's dispatch predates the packet and is confirmed compatible below).
+
+### §0 — verified directly before drafting, each fact at file:line
+
+- **331's mechanism and boundary:** t* = 0.3000/0.4000/0.4559 confirmed in
+  writeup/data/p2_route_nlh_v1.json; bracket width 6.1e-06 at
+  experiments/journal/leg_331.md:125. Mechanism as the packet states it
+  (algebraic tail vs Gaussian weight; nonlocality as tail-producer) — cycle 8d
+  absorbed it in those words.
+- **260's fourth space:** experiments/journal/leg_260.md:39-40 verbatim — "an
+  algebraically weighted space on R³, graded to the Type-I rate. Concretely
+  either L^p(R³) for a fixed p > 3, or a weighted L²(ρ) with ρ = (1+|y|)^{-s},
+  s > 1"; Gaussian exclusion with shells 26.6 → 1.0e5 → 3.9e20 → 1.3e83 at
+  :74; the p = 3 crossing measured with agreement ~3e-5 at :295-296.
+- **261's wall through the Gaussian:** experiments/journal/leg_261.md:193-195
+  verbatim — ω ∈ H²(μ) gives, by C3, u ~ |x|^{-3}, |u|³r² ~ r^{-7} integrable,
+  u ∈ L³(ℝ³), whereupon NRS/Tsai force u ≡ 0 for a BACKWARD SELF-SIMILAR
+  profile; :195-197 confirms the hypothesis binds that class only, both Hou
+  rows outside it.
+
+The packet's reading — both walls on the vorticity lane may be Gaussian-weight
+artifacts, with the escaping space already named — is a hypothesis the three
+facts genuinely support posing, and it is measured by 341, never assumed.
+
+### Ruling — S1 and S2: MERGED as ONE leg (the user left this to the DM)
+
+Same space, same evidence base, one dispatch at four slots — merged, WITH the
+user's independence requirement carried into the gate verbatim: two clauses,
+each pre-committed both ways, reported independently, neither carrying the
+other.
+
+```
+### 341 — ROUTE-ALGW: THE FOURTH SPACE — DOES 260's ALGEBRAICALLY WEIGHTED
+SPACE ESCAPE THE THREE-REALIZATION DEATH, AND DOES THE NRS/TSAI COMPOSITION
+SURVIVE THE WEIGHT CHANGE? (user programme §1+§2, merged; the stage-V ban's own
+lift condition names exactly this leg's shape)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Three banked facts, DM-verified at file:line (cycle 9): the
+Gaussian's failure mechanism is algebraic-tail-vs-weight (331); the space that
+holds an algebraic tail is already computed sharp — L^p, p > 3, or
+L²((1+|y|)^{-s}), s > 1, with L³, L², and Gaussian H²(μ) excluded (260); and
+the NRS/Tsai wall reaches u ∈ L³ THROUGH the Gaussian's |x|^{-3} decay, binding
+the backward-self-similar class only (261). The stage-V ban's stated lift
+condition asks for "a namable FOURTH space/basis … with its own scoping leg
+establishing it is not subject to the same three-realization death." This is
+that scoping leg. OWNERSHIP (user §5, ruled cycle 9): this leg OWNS the weight
+question; 334's clause (a) consumes its answer and does not answer it ad hoc.
+**Gate (two clauses, reported INDEPENDENTLY — neither carries the other).**
+  (S1) Does the algebraically weighted space escape the three-realization death
+       (ℓ¹_w / collocation / origin-H²), and does the CAP apparatus have a
+       coherent formulation in it — mechanisms and magnitudes, not booleans?
+    escapes -> The ban's lift-condition evidence EXISTS: assembled as a user
+        packet with every screen named. THE RULING IS THE USER'S — this leg
+        lifts nothing, and the §3 build is drafted only after that ruling.
+    dies    -> Name which realization/mechanism kills it, full strength; the
+        lift condition stays unmet, the §3 build is NEVER drafted, and the
+        fourth space joins the measured dead ends.
+  (S2) Re-derived in the algebraic weight: does 261's composition still land
+       u ∈ L³ (slower ω decay ⇒ slower u decay ⇒ measured, not assumed)? AND,
+       separately in BOTH branches: the DSS position stated on its own —
+       NRS/Tsai binds backward self-similar only, so for a DSS object the
+       composition may be irrelevant regardless of weight; that statement is
+       never inferred from the weight answer.
+    survives  -> The wall stands off the Gaussian: banked; the build's
+        function-space case weakens accordingly and says so.
+    dissolves -> Banked with the derivation quoted; a wall shown to be a
+        weight artifact is a map correction, not movement.
+**Hard constraints (user packet, verbatim in force).** This leg does NOT lift
+the ban — it produces the evidence the lift condition asks for, and the ruling
+is the user's. plan_of_record.py is not this leg's to edit; any amendment is
+flagged to integration. NO construction: scoping only.
+**Territory.** writeup/data/p2_route_algw_v1.json, writeup/novelty/leg_341.md,
+               experiments/journal/leg_341.md, writeup/figures/fig90* (only if
+               the scoping warrants). Reads legs 260/261/331's banked records
+               and existing solver modules read-only; edits none.
+**Difficulty.** heavy
+**Preconditions:** None. (§3a rule 4: touches the stage-V ban's subject matter
+— DM pre-authorises dispatch AS WRITTEN; it produces lift-condition evidence
+and lifts nothing.)
+```
+
+```
+### 342 — ROUTE-SEED: ROUTE 4's SEEDING PROBLEM, SCOPED NOW (user programme §4
+— a hard dependency of 334, scoped before it stalls on it)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** Seeded DSS needs a seed; leg 313 measured the seed set EMPTY (Hou
+2405.10916 fails the screen three ways), and 334 hard-depends on an answer.
+Enumerate candidate seed sources — Hou-Luo-style 3D Euler near-singular data,
+PINN-discovered profiles, and whatever a controlled literature pass adds —
+screen each against 313's screen and the CHEAP-ENTRANCE BAN (in force: no
+bifurcation-off-a-fixed-point entrance may be smuggled in as a seed), and cost
+what creating a seed would take where none exists.
+**Gate.** Does the scoping produce (i) at least one NAMED, screen-passing
+candidate seed source with acquisition cost in legs, or (ii) the measured
+statement that none exists today plus what would create one, named and costed?
+  yes (either) -> Bank; feeds 334's clause (c). COORDINATION, stated per §5's
+        pattern: 334 answers its clause (c) on paper as drafted (gate text
+        unedited); this leg's deeper scoping consumes and extends that answer.
+  no  -> The seeding question cannot even be posed against the screen: that is
+        a route-4 blocker, escalated to the user before capacity commits.
+**Territory.** writeup/data/p2_route_seed_v1.json, writeup/novelty/leg_342.md,
+               experiments/journal/leg_342.md. Reads leg/313-sdss-v1, leg 260's
+               record, and 334's plan when landed; edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** None (independent of 334's in-flight plan; territory
+disjoint — checked). (§3a rule 4: DSS-ban-adjacent — pre-authorised as
+written; it reads, screens, and costs; lifts nothing.)
+```
+
+### The §3 build — NOT drafted, by the packet's own design
+
+Recorded as a gated future draft, numbered when drafted: CAP machinery in the
+algebraically weighted space, drafted ONLY after 341 reports (a negative there
+saves the build entirely — the packet's stated point of scoping first), and
+dispatched only under the user's ruling on the S1 lift-condition packet. Its
+gate, when drafted, carries the clause the user names as the sole
+justification: if it lands, route 4's ceiling moves Tier 2 → Tier 3. Until
+then every route-4 gate keeps the Tier-2 ceiling unchanged.
+
+### §5 — the coordination point, RESOLVED: 341 owns, 334 consumes
+
+Ruled and stated in both entries as the user requires: the weight question
+(cycle 8d's binding, where it collides with 332's open lane) is OWNED by 341.
+334's clause (a) NARROWS TO CONSUMING — its plan names its space and cites
+341's answer if landed, or records the question as owned-by-341-pending if
+not; it does not answer the weight question ad hoc. A marker now sits beside
+334's dispatched spec (gate text unedited); **orchestrator: relay that
+narrowing to the in-flight leg 334 now**, so its plan is written against the
+ownership split and not against cycle 8d's broader wording.
+
+### §6 — the C4 reading question: ROUTED TO THE USER, the cycle-8e adjudication
+RECAST as analysis
+
+The user's directive is explicit — route it, do not adjudicate it — and it
+supersedes. Executed as follows, stated plainly:
+- **The cycle-8e ruling's FORCE is withdrawn; its content is downgraded to DM
+  ANALYSIS, attached to the routed question without force.** What stands of it
+  is only process fact: 329's landed record is unchanged, its gate answered NO
+  as the leg reported under the literal pre-registration, and no landed text
+  is rewritten meanwhile.
+- **The question travels to the user in the NEEDS-YOU packet** (orchestrator:
+  please add it) in the leg's own terms: is −R(x) the agreement test it was
+  pre-registered as (gate NO), or the one-sided bound it actually computes
+  (gate YES, clause 5 established more firmly than the eigensolve could)?
+  With, on equal footing: the magnitudes both ways (margins −5.19e-18/
+  −1.42e-18; C5's truncation sensitivity 3.85e-05/5.39e-05; cond(G)=2.554e+11),
+  the leg's own §7d ground for not self-adjudicating, and the DM's three
+  cycle-8e grounds MARKED AS ANALYSIS. Escalation #3 hangs on the answer.
+- **Leg 340 EGRB continues unchanged** (dispatched before the packet arrived;
+  confirmed compatible): its truncation-controlled measurement is input the
+  user's ruling wants under EITHER reading, and its yes-branch already routes
+  to the user. If the user rules before 340 lands, 340's result appends to the
+  same item; if the user's ruling flips 178's substance, the flip executes
+  through a record leg with 178's gate text byte-identical — mechanics already
+  standing.
+
+### Ranking and reserve
+
+Next vacancies, the programme at the top per its standing priority, nothing
+displacing live 334/339: 1. **341 ALGW** 2. **342 SEED** 3. **335 S1GR** 4.
+**336 C305** 5. **337 C318** 6. **338 LCB1** 7. **307 TSCX** 8. **328 ORC5** 9.
+**324 P2SPF** 10. **322 F70** 11. **327 P2T1E** 12. **287 EPA** 13. **229
+PNRV** 14. **293 JFA** 15. **298 CORRX** 16. **299 TESTA**. Then **310 EPAP**
+(on 287+298), **325 MTB1** (USER-GATED — when the user rules, weighed against
+what the ceiling-raising build actually needs, per the fold-by-pull principle),
+**231-234** (blocked on repairs 217/219/225). SUSPENDED: 306, 308. The §3
+build: numbered when drafted, after 341 reports and the user rules.
+
+**Reserve queue: 22 undispatched legs (341, 342, 335, 336, 337, 338, 307, 328,
+324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **16**. Next fresh leg number: **343.** FIG-TABLE
+synced (fig89 live with D; fig90 reserved to 341 conditionally).
+
+Nothing in this update lifts a ban — 341 exists to produce the evidence the
+stage-V ban's lift condition asks for, and both that ruling and the C4 reading
+are the user's; the cheap-entrance ban is restated inside 342's own gate; the
+Tier-2 ceiling stands in every route-4 gate until the §3 build lands, which is
+not drafted. No L1-L4 link moved — the programme adds a proof-shaped question
+to the portfolio, which is a choice of what to try, never a claim about what
+happened. Clay stays ~0.05%, and the packet's own closing constraint binds:
+nothing here is described as movement unless a link actually moves.
