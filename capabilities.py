@@ -36,11 +36,38 @@ Each entry records the four things that decide whether existing code can be reus
                module being trusted further than it was tested.
   `test`       the file that re-checks the above
 
-SELF-AUDIT: leg 71 (Route-CAP), 2026-08-06 -- all 42 rows run against the suite, twice
-(at e203b52 and again at 10fed85 after rebase); 33 clean, 2 RED at HEAD
+SELF-AUDIT, generation 1: leg 71 (Route-CAP), 2026-08-06 -- all 42 rows run against the
+suite, twice (at e203b52 and again at 10fed85 after rebase); 33 clean, 2 RED at HEAD
 (test_fractional_boussinesq.py, test_profile_newton.py -- reported, NOT fixed here),
 1 `test` field corrected (solver/ga_search.py, which cited a test that never loaded it).
 See writeup/data/p2_route_cap_v1_audit.json and experiments/journal/leg_71.md.
+
+SELF-AUDIT, generation 2: leg 292 (Route-CAPA), 2026-08-11, at 80c0cc4 -- 48 rows on six
+axes, every count in writeup/data/p2_route_capa_v2_audit.json.
+  S1 completeness  48 rows / 48 distinct modules / 48 solver/*.py on disk; 0 missing,
+                   0 ghost, 0 duplicate.  The append-only convention holds over ~220 legs.
+  S2 test presence 0 rows citing an absent file; 0 rows with an empty `test`.
+  S3 greenness     <S3LINE>
+  S4 gate prose    33 rows name a magnitude, 3 say "no known-answer gate" plainly, 12
+                   claim validation with no number -- so the contract above is met in the
+                   letter by 36/48 (75%).  The 12 are NAMED in the journal and were
+                   deliberately NOT rewritten: supplying a magnitude for another leg's
+                   module from an audit chair is the fabrication this field exists to stop.
+                   If you own one of those 12 and have the number, this row is the cheapest
+                   place in the repository to bank it.
+  S5 relevance     NEW AXIS -- does the cited test actually LOAD the module citing it?
+                   Leg 71 named this gap in words and never systematised it; it is now an
+                   executable check in the runner.  1 of 48 rows failed:
+                   solver/finite_support.py cited test_first_integral.py, which contains
+                   zero occurrences of "finite_support", while the test that does import it
+                   (test_finite_support_adversarial.py, leg 124, green) was cited by no row.
+                   `test` field corrected below; `validated` left frozen.
+  S6 references    19 repo paths cited inside row prose, 0 dangling.
+NOTE: `test_capabilities.py` has received 0 commits since leg 71's base -- it still checks
+only that `test` is non-empty, that the path EXISTS, and that `validated` is over 20
+characters.  It does not run the test and does not check relevance.  S3 and S5 are
+therefore not automatable inside it at merge-gate cost; re-run the leg-292 runner instead.
+See writeup/data/p2_route_capa_v2_audit.json and experiments/journal/leg_292.md.
 """
 
 import sys
