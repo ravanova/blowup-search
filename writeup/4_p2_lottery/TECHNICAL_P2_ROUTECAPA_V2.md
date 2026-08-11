@@ -28,8 +28,20 @@ The automated drift detector `test_capabilities.py` enforces exactly three thing
 2. the cited path exists on disk,
 3. `validated` is longer than 20 characters.
 
-Leg 71 stated the resulting gap precisely, and re-reading the detector's five tests at
-this HEAD confirms it is unchanged:
+Leg 71 stated the resulting gap precisely. That the gap is *unchanged* is not asserted
+from a re-read here — it is measured:
+
+```
+git log --oneline e203b52..80c0cc4 -- test_capabilities.py      ->  0 commits
+```
+
+**Zero commits have touched the drift detector between leg 71's own merge base and this
+one.** It is byte-identical, with the same five tests
+(`test_every_solver_module_is_indexed`, `test_entries_are_complete_and_point_at_real_files`,
+`test_objects_are_distinct_enough_to_search_on`,
+`test_the_search_finds_the_thing_route_m_nearly_rebuilt`, `test_superseded_modules_say_so`),
+while the index it guards grew by 6 rows over ~220 legs. So leg 71's statement holds
+verbatim today:
 
 > It does not check that the cited test **runs, passes, or has anything to do with the
 > module citing it.** Existence is checked; greenness and relevance are not.
