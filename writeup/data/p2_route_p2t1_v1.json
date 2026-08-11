@@ -1,0 +1,685 @@
+{
+ "leg": 302,
+ "route": "P2T1",
+ "what_this_is": "a float dress rehearsal of ONE term (A4, adiabatic/gamma-law pressure) from leg 285's fifteen-term apparatus spec, with eleven known-answer probes at pre-stated tolerances, five negative controls, and two plants swept for per-probe detection thresholds",
+ "term": {
+  "id": "A4",
+  "name": "adiabatic / gamma-law pressure",
+  "module": "solver/p2_apparatus_term1.py",
+  "spec_source": "leg 285, writeup/data/p2_route_p2s_v1_spec.json",
+  "why_this_term": "cheapest LOAD-BEARING term: A15a is 285's cheapest overall but its substrate solver/interval.py already exists and it sits off the critical path; A4 is the head of 285's critical path A4->A1->A2->A9->A8->A13->A14 (depth 7) and the only in-degree-0 term on it",
+  "not_built": [
+   "A1",
+   "A2",
+   "A3",
+   "A5",
+   "A6",
+   "A7",
+   "A8",
+   "A9",
+   "A10",
+   "A11",
+   "A12",
+   "A13",
+   "A14",
+   "A15a",
+   "A15b"
+  ]
+ },
+ "clay_odds": "~0.05%, unchanged; building an apparatus term moves no L1->L4 link",
+ "arithmetic": "IEEE double (float dress rehearsal); solver/interval.py deliberately unused",
+ "references": {
+  "alpha_air": {
+   "value": 0.2,
+   "class": "E",
+   "provenance": "BCG l.180, alpha=(gamma-1)/2 at gamma=7/5"
+  },
+  "one_over_alpha_air": {
+   "value": 5.0,
+   "class": "E",
+   "provenance": "BCG l.180"
+  },
+  "window_lo": {
+   "value": 1.1666667,
+   "class": "I",
+   "provenance": "leg 240 (Route-CNS2) banked dominance window, low end"
+  },
+  "window_hi": {
+   "value": 1.190983,
+   "class": "I",
+   "provenance": "leg 240, high end"
+  },
+  "window_width": {
+   "value": 0.0243,
+   "class": "I",
+   "provenance": "leg 240, quoted to 3 significant figures"
+  },
+  "delta_dis_margin": {
+   "value": 0.145898,
+   "class": "I",
+   "provenance": "leg 240, max delta_dis on the window"
+  },
+  "r_star_at_5_3": {
+   "value": 1.2679491924,
+   "class": "I",
+   "provenance": "leg 240, the value both r* branches take at gamma=5/3"
+  },
+  "gamma_ceiling": {
+   "value": 2.1547005383792515,
+   "class": "E",
+   "provenance": "BCG l.497-499, 1 + 2/sqrt(3)"
+  },
+  "k_at_7_6": {
+   "value": 16.3479210516613,
+   "class": "I",
+   "provenance": "legs 265/266, k(7/6) at gamma=7/5 in closed form"
+  },
+  "odd_branches_in_target_window": {
+   "value": 7,
+   "class": "I",
+   "provenance": "leg 265 via DIRECTION.md l.11548: 3,5,...,15"
+  }
+ },
+ "pre_stated_tolerances": {
+  "KA1": 1e-14,
+  "KA2": 1e-13,
+  "KA3": 1e-12,
+  "KA4_endpoint": 5e-08,
+  "KA4_width": 5e-05,
+  "KA4_margin": 5e-08,
+  "KA5_branch_gap": 1e-14,
+  "KA5_value": 5e-11,
+  "KA6": 1e-06,
+  "KA7": 1e-11,
+  "KA8_k1": 1e-09,
+  "KA8_blowup": 1000.0,
+  "KA9": 1e-09,
+  "KA11": 1e-14,
+  "NEG4": 1e-06,
+  "NEG5": 1e-06
+ },
+ "pre_stated_plant_requirements": {
+  "plant_alpha": {
+   "magnitude": 0.01,
+   "must_fail": [
+    "KA2",
+    "KA3",
+    "KA4",
+    "KA7",
+    "KA9"
+   ]
+  },
+  "plant_formula": {
+   "magnitude": 1e-06,
+   "must_fail": [
+    "KA5",
+    "KA7"
+   ],
+   "expected_blind": [
+    "KA2",
+    "KA3"
+   ]
+  }
+ },
+ "probes": {
+  "KA1": {
+   "residual": 2.7755575615628914e-16,
+   "tolerance": 1e-14,
+   "passed": true,
+   "description": "alpha(7/5)=1/5, 1/alpha=5",
+   "reference_class": "E",
+   "detail": {
+    "alpha": 0.19999999999999996,
+    "one_over_alpha": 5.000000000000001,
+    "rel_alpha": 2.7755575615628914e-16,
+    "rel_one_over_alpha": 1.7763568394002506e-16
+   }
+  },
+  "KA2": {
+   "residual": 6.661338147750939e-16,
+   "tolerance": 1e-13,
+   "passed": true,
+   "description": "delta_dis collapses to 6r-7 at gamma=7/5",
+   "reference_class": "E",
+   "detail": {
+    "n_points": 201,
+    "max_abs_dev": 6.661338147750939e-16,
+    "at_r_1p1": -0.39999999999999936
+   }
+  },
+  "KA3": {
+   "residual": 2.220446049250313e-16,
+   "tolerance": 1e-12,
+   "passed": true,
+   "description": "bisected zero-crossing = 2 gamma/(gamma+1)",
+   "reference_class": "E",
+   "detail": {
+    "n_gamma": 39,
+    "worst_gamma": 1.1013157894736842,
+    "worst_dev": 2.220446049250313e-16,
+    "bisected": 1.048215403882279,
+    "published": 1.0482154038822793
+   }
+  },
+  "KA4": {
+   "residual": 0.6750063102911597,
+   "tolerance": 1.0,
+   "passed": true,
+   "description": "leg 240's dominance window, width and margin",
+   "reference_class": "I",
+   "detail": {
+    "lo": 1.1666666666666665,
+    "hi": 1.1909830056250525,
+    "width": 0.02431633895838603,
+    "delta_dis_at_r_star": 0.14589803375031551,
+    "dev_lo": 3.333333342681044e-08,
+    "dev_hi": 5.625052645896744e-09,
+    "dev_width": 1.6338958386031416e-05,
+    "dev_margin": 3.375031551455798e-08,
+    "units": "residual is max deviation / its own pre-stated tolerance"
+   }
+  },
+  "KA5": {
+   "residual": 0.6224576409863403,
+   "tolerance": 1.0,
+   "passed": true,
+   "description": "r* branch agreement at gamma=5/3",
+   "reference_class": "E+I",
+   "detail": {
+    "branch_low": 1.2679491924311228,
+    "branch_high": 1.2679491924311228,
+    "branch_gap": 0.0,
+    "dev_from_banked_value": 3.1122882049317013e-11,
+    "units": "residual is max deviation / its own pre-stated tolerance"
+   }
+  },
+  "KA6": {
+   "residual": 8.452994304519734e-09,
+   "tolerance": 1e-06,
+   "passed": true,
+   "description": "r* -> sqrt(3) as gamma -> infinity",
+   "reference_class": "E",
+   "detail": {
+    "r_star_at_1e8": 1.7320507991158829,
+    "sqrt3": 1.7320508075688772
+   }
+  },
+  "KA7": {
+   "residual": 1.7763568394002505e-15,
+   "tolerance": 1e-11,
+   "passed": true,
+   "description": "gamma ceiling = 1 + 2/sqrt(3)",
+   "reference_class": "E+I",
+   "detail": {
+    "bisected_gamma_ceiling": 2.1547005383792497,
+    "published": 2.1547005383792515
+   }
+  },
+  "KA8": {
+   "residual": 129.04784973954975,
+   "tolerance": 1.0,
+   "passed": false,
+   "description": "BCG lemma:k's three properties (transcription gate)",
+   "reference_class": "E",
+   "detail": {
+    "k_at_1": 1.0000001290478497,
+    "dev_k_at_1": 1.2904784973954975e-07,
+    "monotonicity_violations": 0,
+    "n_points": 200,
+    "k_near_r_star": 11053.847297130205,
+    "blowup_threshold": 1000.0,
+    "k_min": 1.0000001290478497,
+    "k_max": 356317.4896183097,
+    "units": "residual is max(dev/tol, violations, 2 if no blow-up)"
+   }
+  },
+  "KA9": {
+   "residual": 6.432642080921248e-14,
+   "tolerance": 1e-09,
+   "passed": true,
+   "description": "k(7/6) = legs 265/266's 16.3479210516613",
+   "reference_class": "I",
+   "detail": {
+    "k_at_7_6": 16.34792105166235,
+    "banked": 16.3479210516613,
+    "rel_dev": 6.432642080921248e-14
+   }
+  },
+  "KA10": {
+   "residual": 0.0,
+   "tolerance": 0.0,
+   "passed": true,
+   "description": "exactly 7 odd branches in the target window",
+   "reference_class": "I",
+   "detail": {
+    "k_at_7_6": 16.34792105166235,
+    "floor_k": 16,
+    "odd_indices": [
+     3,
+     5,
+     7,
+     9,
+     11,
+     13,
+     15
+    ],
+    "count": 7,
+    "expected": 7
+   }
+  },
+  "KA11": {
+   "residual": 8.881784197001252e-16,
+   "tolerance": 1e-14,
+   "passed": true,
+   "description": "independent-group cross-form of delta_dis",
+   "reference_class": "I",
+   "detail": {
+    "grid": "39x19",
+    "max_abs_dev": 8.881784197001252e-16
+   }
+  }
+ },
+ "post_hoc_conditioning_diagnostic": {
+  "NOT_PRE_REGISTERED": "added after KA8 failed; diagnostic only, does not enter the gate, and KA8's pre-stated tolerance was NOT changed",
+  "k_at_1_double": 1.0000001290478497,
+  "k_at_1_high_precision": 1.0,
+  "dev_k_at_1_double": 1.2904784973954975e-07,
+  "dev_k_at_1_high_precision": 0.0,
+  "k_at_7_6_double": 16.34792105166235,
+  "k_at_7_6_high_precision": 16.347921051661395,
+  "R2_radicand_at_1": {
+   "terms": [
+    -24.52799999999999,
+    -2.432000000000002,
+    9.472000000000005,
+    -0.5119999999999989,
+    18.0
+   ],
+   "largest_abs_term": 24.52799999999999,
+   "sum_in_double": 1.2212453270876722e-14,
+   "exact_value": 0.0,
+   "predicted_double_residue": 5.446310069601166e-15,
+   "note": "BCG l.603 state the radicand vanishes at r=1; in 60-digit arithmetic it is exactly 0.  In IEEE double it is rounding noise, and sqrt() turns a residue eps into an absolute error sqrt(eps) -- half the digits."
+  },
+  "loss_curve": [
+   {
+    "h": 0.0,
+    "r": 1.0,
+    "k_double": 1.0000001290478497,
+    "k_hp": 1.0,
+    "abs_err": 1.2904784973954975e-07,
+    "rel_err": 1.2904784973954975e-07
+   },
+   {
+    "h": 1e-12,
+    "r": 1.000000000001,
+    "k_double": 1.0000034667284152,
+    "k_hp": 1.0000034641076152,
+    "abs_err": 2.620800021446712e-09,
+    "rel_err": 2.620790942744849e-09
+   },
+   {
+    "h": 1e-10,
+    "r": 1.0000000001,
+    "k_double": 1.0000346418740031,
+    "k_hp": 1.0000346416161656,
+    "abs_err": 2.578375291051316e-10,
+    "rel_err": 2.578285975058203e-10
+   },
+   {
+    "h": 1e-08,
+    "r": 1.00000001,
+    "k_double": 1.0003464701994569,
+    "k_hp": 1.0003464701758062,
+    "abs_err": 2.365063700437986e-11,
+    "rel_err": 2.3642445602095612e-11
+   },
+   {
+    "h": 1e-06,
+    "r": 1.000001,
+    "k_double": 1.003470115938668,
+    "k_hp": 1.003470115936129,
+    "abs_err": 2.539080057317733e-12,
+    "rel_err": 2.530299624268378e-12
+   },
+   {
+    "h": 0.0001,
+    "r": 1.0001,
+    "k_double": 1.035255627921922,
+    "k_hp": 1.035255627921604,
+    "abs_err": 3.1796787425264483e-13,
+    "rel_err": 3.0713947905890866e-13
+   },
+   {
+    "h": 0.001,
+    "r": 1.001,
+    "k_double": 1.116030329319391,
+    "k_hp": 1.1160303293193075,
+    "abs_err": 8.348877145181177e-14,
+    "rel_err": 7.480869404573753e-14
+   },
+   {
+    "h": 0.01,
+    "r": 1.01,
+    "k_double": 1.4247776090127258,
+    "k_hp": 1.4247776090126882,
+    "abs_err": 3.752553823233029e-14,
+    "rel_err": 2.6337821422063148e-14
+   },
+   {
+    "h": 0.16666666566666666,
+    "r": 1.1666666656666667,
+    "k_double": 16.347920425082215,
+    "k_hp": 16.347920425081373,
+    "abs_err": 8.419931418757187e-13,
+    "rel_err": 5.1504602419272395e-14
+   }
+  ],
+  "verdict": "TRANSCRIPTION CORRECT, EVALUATION ILL-CONDITIONED: at 60 digits k(1)=1 and k(7/6) reproduces legs 265/266's banked value; the double-precision defect is localised at the cancellation point r=1 and decays as r moves away."
+ },
+ "negative_controls": {
+  "NEG1_gamma_domain": {
+   "passed": true,
+   "detail": {
+    "rejected": [
+     [
+      1.0,
+      true
+     ],
+     [
+      0.5,
+      true
+     ],
+     [
+      -2.0,
+      true
+     ],
+     [
+      0.0,
+      true
+     ]
+    ]
+   }
+  },
+  "NEG2_rho_domain": {
+   "passed": true,
+   "detail": {
+    "rejections": [
+     [
+      "pressure",
+      0.0,
+      true
+     ],
+     [
+      "dpressure",
+      0.0,
+      true
+     ],
+     [
+      "sigma",
+      0.0,
+      true
+     ],
+     [
+      "pressure",
+      -1.0,
+      true
+     ],
+     [
+      "dpressure",
+      -1.0,
+      true
+     ],
+     [
+      "sigma",
+      -1.0,
+      true
+     ]
+    ],
+    "S_zero_rejected": true
+   }
+  },
+  "NEG3_wrong_gamma": {
+   "passed": true,
+   "detail": {
+    "residual_at_7_5": 0.6750063102911597,
+    "residual_at_5_3": 1666666.0000000012,
+    "window_at_5_3": [
+     1.25,
+     1.2679491924311228
+    ],
+    "window_at_7_5": [
+     1.1666666666666665,
+     1.1909830056250525
+    ],
+    "discrimination_ratio": 2469111.732127505
+   }
+  },
+  "NEG4_derivative": {
+   "passed": true,
+   "detail": {
+    "max_rel_err": 1.5835097151768225e-10,
+    "tolerance": 1e-06
+   }
+  },
+  "NEG5_vacuum_pole": {
+   "passed": true,
+   "detail": {
+    "loglog_slope": 1.0000000002659528,
+    "expected": 1.0,
+    "one_over_alpha_at_gamma_1p01": 199.99999999999983
+   }
+  }
+ },
+ "plants": {
+  "alpha": {
+   "KA1": {
+    "detection_threshold": 1.0103029524088942e-14,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA2": {
+    "detection_threshold": 8.02691246803991e-14,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA3": {
+    "detection_threshold": 3.999356401607212e-12,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA4": {
+    "detection_threshold": 8.770447690320539e-08,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA5": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA6": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA7": {
+    "detection_threshold": 1.829980611489646e-12,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA8": {
+    "detection_threshold": 0.0,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA9": {
+    "detection_threshold": 9.210532336823015e-11,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA10": {
+    "detection_threshold": 0.00832492332931534,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA11": {
+    "detection_threshold": 5.551115123125788e-16,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   }
+  },
+  "sqrt3": {
+   "KA1": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA2": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA3": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA4": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA5": {
+    "detection_threshold": 2.164934898019059e-14,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA6": {
+    "detection_threshold": 5.724702677456517e-07,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA7": {
+    "detection_threshold": 6.216138714876257e-13,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA8": {
+    "detection_threshold": 0.0,
+    "blind": false,
+    "fails_at_required_magnitude": true
+   },
+   "KA9": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA10": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   },
+   "KA11": {
+    "detection_threshold": null,
+    "blind": true,
+    "fails_at_required_magnitude": false
+   }
+  }
+ },
+ "self_tests": {
+  "total": 14,
+  "passed": 14,
+  "tests": [
+   {
+    "name": "module is frozen (constants cannot be mutated after construction)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "pressure is strictly increasing on (0, 10]",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "p(1) = 1/gamma",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "c(rho)^2 = gamma p(rho)/rho (thermodynamic consistency)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "sigma(1) = 1/alpha",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "r_min_via_alpha == r_min_published at the true alpha",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "the plants are inert at scale 1.0 (default configuration is unplanted)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "PLANT-alpha actually moves alpha",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "PLANT-sqrt3 actually moves r* on the high branch, and NOT on the low branch",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "a probe with a deliberately corrupted reference FAILS (the battery can say no)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "re-running the battery is bit-identical (determinism)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "the 60-digit path agrees with double AWAY from the cancellation point",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "the 60-digit path and double DISAGREE at the cancellation point r=1 (so the diagnostic is measuring something real)",
+    "passed": true,
+    "detail": ""
+   },
+   {
+    "name": "delta_dis is strictly increasing in r (so its max on the window is at r*)",
+    "passed": true,
+    "detail": ""
+   }
+  ]
+ },
+ "gate": {
+  "question": "Does the implemented term reproduce its pre-stated known-answer / planted control within a pre-stated tolerance AND report the failure when the plant is perturbed?",
+  "half_one_known_answers": false,
+  "half_two_plants_detected": true,
+  "alpha_required_failures": {
+   "KA2": true,
+   "KA3": true,
+   "KA4": true,
+   "KA7": true,
+   "KA9": true
+  },
+  "formula_required_failures": {
+   "KA5": true,
+   "KA7": true
+  },
+  "answer": "NO",
+  "derivation": "gate = YES iff (all 11 probes pass at their pre-stated tolerances AND all 5 negative controls pass AND all self-tests pass) AND (every probe named in the pre-stated must-fail lists actually fails at the pre-stated plant magnitude).  Computed, not asserted."
+ },
+ "figure": "/tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/leg302/fig68_route_p2t1_v1_sensitivity.png"
+}

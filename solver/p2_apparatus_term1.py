@@ -303,6 +303,46 @@ class GammaLaw:
             raise GammaLawError("k(r) singular at gamma=%g, r=%g" % (g, r))
         return (base - R2) / den
 
+    def k_high_precision(self, r: float, digits: int = 60) -> float:
+        """``k(r)`` evaluated in ``digits``-digit decimal arithmetic instead of double.
+
+        This exists because leg 302 MEASURED the double-precision evaluation of ``R2`` to be
+        ill-conditioned near ``r = 1``: BCG's printed radicand is a sum of terms of magnitude up
+        to 24.528 that cancels to **exactly zero** at ``r = 1``, so in IEEE double the residue is
+        rounding noise of order ``24.5 * 2^-52 ~ 5e-15``, and the square root turns that into an
+        absolute error of order ``7e-8`` -- i.e. ``|k(1) - 1| = 1.29e-07`` where the paper's own
+        lemma says the value is 1.  Half the digits are gone, and they are gone to conditioning,
+        not to a transcription error: at 60 digits the radicand is 0 and ``k(1) = 1`` exactly.
+
+        The plants are honoured here too (``alpha_scale`` enters via ``2*alpha``), so this path is
+        a *precision* variant of the same function, not a different function.
+        """
+        from decimal import Decimal, getcontext, localcontext
+
+        with localcontext() as ctx:
+            ctx.prec = int(digits)
+            g = Decimal(repr(self.gamma))
+            rr = Decimal(repr(float(r)))
+            two_alpha = Decimal(2) * Decimal(repr(self.alpha))
+            r1_sq = (g * g * (rr - 3) ** 2 - 2 * g * (3 * rr * rr - 6 * rr + 7)
+                     + (9 * rr * rr - 14 * rr + 9))
+            if r1_sq < 0:
+                raise GammaLawError("R1 radicand negative at gamma=%g, r=%g" % (self.gamma, r))
+            R1 = r1_sq.sqrt()
+            inner = (g * ((76 - 27 * g) * g - 71)
+                     - (3 * g - 5) * ((g - 5) * g + 2) * rr * rr
+                     + (g * (g * (18 * g - 52) + 50) - 8) * rr
+                     + R1 * (9 * (g - 2) * g + ((2 - 3 * g) * g + 5) * rr + 5)
+                     + 18)
+            if inner < 0:
+                raise GammaLawError("R2 radicand negative at gamma=%g, r=%g" % (self.gamma, r))
+            R2 = inner.sqrt() / two_alpha
+            base = Decimal(-4) + (1 + g) * (rr - 1) / two_alpha
+            den = base + R2
+            if den == 0:
+                raise GammaLawError("k(r) singular at gamma=%g, r=%g" % (self.gamma, r))
+            return float((base - R2) / den)
+
     # ------------------------------------------------------------------ reporting
 
     def summary(self) -> dict:
