@@ -314,6 +314,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_m2ci_v1_construction_evidence.py", # fig65 -- Route-M2CI v1 (leg 187)
     "../experiments/p2_route_wes_v1_space_evidence.py",         # fig66 -- Route-WES v1 (leg 178)
     "../experiments/p2_route_p0tcv_v1_verify_evidence.py",      # fig67 -- Route-P0TCV v1 (leg 300)
+    "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig68 -- Route-GAF v1 (leg 303)
 ]
 
 
