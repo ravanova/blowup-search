@@ -113,6 +113,31 @@
    16.0
   ]
  },
+ "M1_rule_horizon": {
+  "alpha": 0.5,
+  "by_n": {
+   "100": {
+    "four_rule_largest_node": 32.24163084922824,
+    "log10_local_control_sq_at_horizon": 0.0,
+    "log10_nonlocal_sq_at_horizon": 95.15130082773551,
+    "six_rule_largest_node": 30.66795837805779
+   },
+   "1500": {
+    "four_rule_largest_node": 126.11695575462358,
+    "log10_local_control_sq_at_horizon": -3.857309866213148e-16,
+    "log10_nonlocal_sq_at_horizon": 1546.3892358265548,
+    "six_rule_largest_node": 119.72571636482537
+   },
+   "200": {
+    "four_rule_largest_node": 45.76314723483382,
+    "log10_local_control_sq_at_horizon": -3.857309866213148e-16,
+    "log10_nonlocal_sq_at_horizon": 197.72790252082206,
+    "six_rule_largest_node": 43.50089867611721
+   }
+  },
+  "m": 0,
+  "units": "log10 of the truncated weighted norm^2"
+ },
  "M1_tail_exponents": [
   {
    "abs_local_control": [
@@ -6330,5 +6355,5 @@
  "leg": 331,
  "realization": "even half-Hermite/Laguerre basis psi_m = L_m^{(-1/2)}(x^2/4)e^{-x^2/4}/Zeta_m; H^2(mu), mu = e^{|x|^2/4}/Z; d = 1; even (Neumann) sector; nonlocal operator Lam^{2a} = (-Delta)^a, a = 1/2 being H d_x; float64, NOT interval arithmetic",
  "route": "NLH",
- "runtime_s": 634.8089394569397
+ "runtime_s": 700.4678180217743
 }

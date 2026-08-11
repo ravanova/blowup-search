@@ -252,6 +252,49 @@ def m1_truncated_weighted_norms(n_modes, alpha, radii, panels=900, k=12):
     return out
 
 
+def m1_rule_horizon(ns, alpha, m=0, panels=2400, k=12):
+    """Is the machinery's FINITE answer an artefact of where its rule stops looking?
+
+    Breden-Chu's six-product rule has a largest node x_max(n).  Lam^{2a}psi_m has a
+    divergent weighted L^2(mu) norm, so the rule can only return a finite number by not
+    sampling past its own horizon.  This reports, per n, that horizon and the truncated
+    norm^2 at it -- against the local control, whose value at the same radius is the
+    converged one.  Costs one integral per n.
+    """
+    def log10_int(w, x, g):
+        """log10 of 2 * Int_0^R g^2 e^{x^2/4} dx, by log-sum-exp.
+
+        Done in logs because at Breden-Chu's published n = 1500 the integral overflows
+        float64 outright -- an overflow is not a measurement, so the magnitude is taken
+        where it still is one.
+        """
+        with np.errstate(divide="ignore"):
+            terms = np.log(w) + x * x / 4.0 + 2.0 * np.log(np.abs(g))
+        good = np.isfinite(terms)
+        if not good.any():
+            return float("-inf")
+        mx = float(np.max(terms[good]))
+        return float((mx + math.log(2.0 * np.sum(np.exp(terms[good] - mx))))
+                     / math.log(10.0))
+
+    out = {"alpha": alpha, "m": m,
+           "units": "log10 of the truncated weighted norm^2", "by_n": {}}
+    for n in ns:
+        r = bc.make_rules(n)
+        R = float(np.max(r["six"].x))
+        img = FractionalBasisImages(max(m, 2), alpha, R)
+        x, w = panel_rule(0.0, R, panels, k)
+        f = img.at(x)[:, m]
+        _, D = bc.psi_values(max(m, 2), x)
+        out["by_n"][str(n)] = {
+            "six_rule_largest_node": R,
+            "four_rule_largest_node": float(np.max(r["four"].x)),
+            "log10_nonlocal_sq_at_horizon": log10_int(w, x, f),
+            "log10_local_control_sq_at_horizon": log10_int(w, x, D[:, m]),
+        }
+    return out
+
+
 def m1_tail_exponent(alpha, m=0, xs=(20.0, 30.0, 40.0, 60.0)):
     """The measured algebraic decay exponent of Lam^{2a} psi_m at large x.
 
@@ -701,6 +744,7 @@ def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=
     res["M1_image_in_space"] = m1_truncated_weighted_norms(
         4, headline_alpha, radii=(4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0))
     res["M1_tail_exponents"] = [m1_tail_exponent(a, m=0) for a in alphas]
+    res["M1_rule_horizon"] = m1_rule_horizon(tuple(ns) + (1500,), headline_alpha)
     print("M1 done  %.1fs" % (time.time() - t0))
 
     # -- the local control problem, for side-by-side ----------------------
