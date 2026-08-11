@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 331 | NLH | yes |
 | B | 329 | EGMF | yes |
-| C | 332 | VORT | yes |
+| C | 323 | CENV | yes |
 | D | 326 | CTRX | yes |
 <!-- FLOOR-TABLE-END -->
 
@@ -60,7 +60,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig83 | 306 | held (306 SUSPENDED, route-6 drop, cycle 7b) |
 | fig84 | 318 | landed |
 | fig85 | 331 | live, slot A |
-| fig86 | 332 | live, slot C |
+| fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
 | fig89+ | — | next free |
@@ -74,8 +74,20 @@ standing ranking: B ← 329 EGMF (the owed 312→178 gate-flip check, cycle-6
 pre-commitment), D ← 326 CTRX (RESUME from its landed novelty log at 806d4bd,
 amended: it executes GAP 326-A first — the controlled empty intersection IS a
 measurement and is banked as absence with an inline correction marker — then
-answers its unchanged gate). Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF,
-C/332/VORT, D/326/CTRX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
+answers its unchanged gate). Cycle 8b: C/332 landed NO at bd438de — the Leray
+obstruction is VELOCITY-PRESSURE-SPECIFIC (fails at S4: the non-vanishing tail,
+coefficient = the energy to 2.3e-12 in closed form, lives entirely in the
+pressure gradient, which curl annihilates); the vorticity formulation is the
+measured open lane, AND the reconstructed Biot-Savart velocity lands in L³ at
+0.731 — exactly the NRS/Tsai admissibility hypothesis, a SECOND WALL banked
+alongside the opened lane, both of which leg 334's plan must carry. C ← 323 CENV
+(RESUME `leg/323-cenv-v1`; gates §0c). 307 TSCX's conditional resolved by the
+orchestrator's read of 221's journal: the 43.2%/86x flag was left explicitly
+unresolved with the successor leg named — 307 is DISPATCHABLE, ranked directly
+after 338. Over-read-closure-#6 adjudication is DEFERRED to 331's landing (one
+leg corrects the two "closed three ways" sites on BOTH measured answers, never
+on half). Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF, C/323/CENV,
+D/326/CTRX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
 findings became four drafted correction legs: 335 S1GR (the pre-existing
 spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
 shift, two flipped gate predicates, present with and without 221's repair), 336
@@ -88,15 +100,15 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 23 undispatched legs (323, 335, 336, 337, 338, 328, 324, 322,
-327, 287, 229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234), plus
+**Reserve queue: 22 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 330, 310, 325, 231, 232, 233, 234), plus
 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
-(323, 335, 336, 337, 338, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank
+(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank
 order as listed, §3a pre-authorised except where a spec says otherwise). 334 on
-331+332; 330 on 326; 307 CONDITIONAL on 221's flag-state report (struck if
-resolved); 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225
-(221's landed). Next fresh leg number: **339**. Full specs and this cycle's
-rulings are in the cycle-8 entry at the end of this file.)
+331 only now (332 landed); 330 on 326; 310 on 287+298; 325 USER-GATED; 231-234
+blocked on repairs 217/219/225 (221's landed). Next fresh leg number: **339**.
+Full specs and this cycle's rulings are in the cycle-8 and 8b entries at the end
+of this file.)
 
 ---
 
@@ -15792,3 +15804,93 @@ four correction legs narrow landed claims to their measured width. The 313
 packet's remaining user items, parked escalation #3, the 320 packet, and the
 304/ℓ¹ wording all remain the user's, untouched. No L1-L4 link moved; Clay stays
 ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 8b) — 332 NO ABSORBED (Leray obstruction is
+VELOCITY-PRESSURE-SPECIFIC; vorticity lane measured OPEN; NRS/Tsai second wall
+banked); C ← 323 CENV; 307's CONDITIONAL RESOLVED TO DISPATCHABLE;
+OVER-READ-CLOSURE-#6 DEFERRED TO 331's LANDING
+
+Written from the same detached lineage, resynced to origin/main = bd438de
+(cycle 8 integrated by the orchestrator via fast-forward — confirmed in git log).
+
+### 332 VORT gate NO, absorbed at full strength (4f2527a..bd438de)
+
+Its pre-registered no-branch fired exactly as drafted: the Leray obstruction does
+NOT survive re-derivation in the vorticity formulation on the Gaussian-weight
+space. The mechanism is named and closed-form: the derivation fails at step S4
+because the entire non-vanishing tail (coefficient = the energy, T/(4π),
+confirmed to 2.3e-12 in closed form, not fit) sits in the pressure gradient —
+which curl annihilates. FT1 reproduced leg 257's on-axis result to 4.088e-12 by
+an independent realization sharing no code; two sign/derivation defects were
+caught by controls that exist on purpose (residuals 2.895 and 3.089e-1); 33/33
+liveness checks; fig86 shipped. Endorsed without amendment.
+
+**Two banked facts leg 334's plan MUST carry, stated here so they cannot be
+read apart:**
+1. **The lane is open:** C4's NOT-REACHED closes as reached-and-NOT-killed; the
+   vorticity formulation — the one any fluid certification would actually use —
+   is not excluded by the Leray obstruction. This feeds 334 clause (a) directly.
+2. **The lane has its own wall:** the reconstructed Biot-Savart velocity, though
+   outside the weighted space, lands in L³(ℝ³) at 0.731 — precisely the
+   NRS/Tsai admissibility hypothesis, the same screen that killed the claimant
+   at leg 309. 334's function-space answer must state how its target class
+   stands relative to NRS/Tsai, not discover this later. An opened lane with a
+   named second wall is not movement — it is a sharper map of the walls.
+
+### Ruling — over-read closure #6: DEFERRED to 331's landing, deliberately
+
+332's no-branch invokes the closure-#6 discipline: corrections to the two
+"closed three ways" sites are drafted on measured answers, never before. One of
+the two measurements (332) is now in; the other (331, live in A) measures the
+same sites from the (iv_a) side. **Ruling: one correction leg is drafted AFTER
+331 lands, carrying BOTH measured answers — two legs updating the same two
+sites concurrently, or one correction written on half the evidence, are both
+worse than a one-cycle wait.** The obligation is recorded here so it cannot be
+lost; the drafting trigger is 331's landing, whichever way its gate answers.
+
+### Ruling — 307 TSCX: the conditional resolves to DISPATCHABLE
+
+The orchestrator read 221's landed journal directly: the 43.2%/86x two-scale
+counterexample is diagnosed (window-cap peak resolution reads the outer scale
+for two-scale fields, so the cap goes non-binding) and bounded (worst legitimate
+residual 4.301e-3 vs tightest uncaught bad case 1.910e-2, separation 4.44x), but
+221's gate explicitly declined to fix it and named the post-repair-verification
+leg as the resolution path. That is the flag left unresolved by its own gate —
+307's precondition is TRUE, 307 is NOT struck, and it ranks directly after 338
+exactly as provisioned at cycle 8. Its spec is unchanged; the diagnosis above is
+input to 307, not a substitute for its independent reproduction.
+
+### Refill — slot C ← 323 CENV (reserve rank 1, executed)
+
+RESUME `leg/323-cenv-v1`, spec at cycle 3 unchanged; resume condition unchanged
+(rebase onto main; re-check committed query rows for staleness under MF1/MF2
+before extending). §0c and the publication track's vacancy-census spine stay
+gated on exactly this leg — it was displaced by the user's routes, not demoted,
+and returns at the first vacancy as promised. Territory disjointness checked:
+323's sweep JSON and its own novelty/journal share no file with 331/329/326.
+**Floor 4/4 (331, 329, 323, 326) — above §3b's 2-of-4.** FLOOR-TABLE synced;
+FIG-TABLE moves fig86 to landed.
+
+### Reserve queue (re-ranked; 323 leaves as dispatched, 307 enters dispatchable)
+
+1. **335 S1GR** 2. **336 C305** 3. **337 C318** 4. **338 LCB1** 5. **307 TSCX**
+6. **328 ORC5** 7. **324 P2SPF** 8. **322 F70** 9. **327 P2T1E** 10. **287 EPA**
+11. **229 PNRV** 12. **293 JFA** 13. **298 CORRX** 14. **299 TESTA**.
+15. **334 DSSP** — now on 331 ONLY (332 landed); fires at 331's landing,
+   alongside the closure-#6 correction leg drafted then.
+16. **330 PVLX** — on 326.
+Then: **310 EPAP** (on 287+298), **325 MTB1** (USER-GATED, unchanged), **231-234**
+(blocked on repairs 217/219/225). SUSPENDED, not counted: **306 SSE, 308 P2T2R**.
+
+**Reserve queue: 22 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 330, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **14**. Next fresh leg number: **339** (unchanged —
+the closure-#6 correction leg is numbered when drafted, at 331's landing).
+
+Nothing here goes to the user beyond what is already parked (313's packet items,
+320's packet, escalation #3, the 304/ℓ¹ wording) — the orchestrator asked and
+the answer is: nothing new. Nothing in this update lifts a ban. 332's NO opens a
+lane AND names its wall in the same breath — that is a map correction, not
+movement; no L1-L4 link moved; Clay stays ~0.05%.
