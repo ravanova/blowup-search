@@ -237,6 +237,29 @@ what landed" finish for the whole batch before the first refill request goes out
 Never exceed 20 concurrent workers plus the DM. Steady state is ~10–15; the headroom is what
 makes "assign an idle agent to a new leg" possible without starving verification.
 
+**Routing the finding is the other half, and it is NOT optional.** §4a deliberately separates
+*refilling the slot* from *routing the result*, so that a pending ruling never holds a slot
+empty. That separation is correct, and it leaves the second half unowned unless it is stated:
+before the landing audit is closed, **the orchestrator informs the DM of every completed
+leg** — landed or escalated — with, in one line each: the leg number and route, the gate
+answer **in the gate's own pre-committed wording**, the landing SHA (or the parked branch),
+and any clause the leg explicitly left to a successor. §7b's post-landing-verification rule
+("the orchestrator hands the verifier's finding to the DM") covers the one case where a
+verifier confirms a gap; this covers every completed leg, gap or no gap.
+
+**Why it is a contract clause and not a habit.** The DM ranks the queue, and it can only rank
+against results it knows about. A finding that lands without reaching the DM leaves the queue
+ranked on stale state — the next refill is drawn against a board that no longer exists, a
+completed leg can be re-dispatched, and a leg whose precondition just landed can sit in reserve
+unpromoted. Every one of those has occurred. The failure is silent by construction: nothing in
+the merge gate, the floor table or the slot table can detect a DM that was never told.
+
+**Mechanically:** the notification happens in the same turn the vacancy is detected, alongside
+the refill request of §4a — one message carrying both, never two decisions taken apart. If the
+DM is mid-turn, it goes in the next cycle's opening note rather than being dropped. **A leg is
+not closed until its finding has reached the DM**, even though its slot is free the instant it
+reports.
+
 **Context hygiene.** Agents are cheap to recreate and expensive to keep talking to.
 - `SendMessage` for **at most 3 follow-ups** to the same agent. Past that, recreate with a
   written brief instead.
