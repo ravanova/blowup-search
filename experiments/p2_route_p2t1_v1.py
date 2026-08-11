@@ -739,9 +739,22 @@ def main(argv=None):
         },
     }
 
+    # The figure's registered home (writeup/figures/ + writeup/build_figures.py) is outside this
+    # leg's declared file territory, so the runner records the intended path and the one command
+    # that emits it; placement is an orchestrator integration note (journal leg_302 §5).
+    results["figure"] = {
+        "registered_path": "writeup/figures/fig68_route_p2t1_v1_sensitivity.png",
+        "command": (".venv/bin/python experiments/p2_route_p2t1_v1.py "
+                    "--figure writeup/figures/fig68_route_p2t1_v1_sensitivity.png"),
+        "panels": ["(a) delta_dis(r) with the gamma=7/5 dominance window",
+                   "(b) probe x plant detection-threshold matrix, BLIND cells marked",
+                   "(c) double vs 60-digit k(1+h): the KA8 conditioning defect"],
+        "emitted_this_run_to": None,
+    }
     if args.figure:
         p = build_figure(args.figure, results)
-        results["figure"] = p
+        results["figure"]["emitted_this_run_to"] = os.path.relpath(p, ROOT) \
+            if p.startswith(ROOT) else p
         print("\nfigure: %s" % p)
 
     if not args.no_write:

@@ -681,5 +681,14 @@
   "answer": "NO",
   "derivation": "gate = YES iff (all 11 probes pass at their pre-stated tolerances AND all 5 negative controls pass AND all self-tests pass) AND (every probe named in the pre-stated must-fail lists actually fails at the pre-stated plant magnitude).  Computed, not asserted."
  },
- "figure": "/tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/leg302/fig68_route_p2t1_v1_sensitivity.png"
+ "figure": {
+  "registered_path": "writeup/figures/fig68_route_p2t1_v1_sensitivity.png",
+  "command": ".venv/bin/python experiments/p2_route_p2t1_v1.py --figure writeup/figures/fig68_route_p2t1_v1_sensitivity.png",
+  "panels": [
+   "(a) delta_dis(r) with the gamma=7/5 dominance window",
+   "(b) probe x plant detection-threshold matrix, BLIND cells marked",
+   "(c) double vs 60-digit k(1+h): the KA8 conditioning defect"
+  ],
+  "emitted_this_run_to": "/tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/leg302/fig68_route_p2t1_v1_sensitivity.png"
+ }
 }
