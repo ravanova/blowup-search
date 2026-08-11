@@ -36,7 +36,7 @@ prose as before.
 | A | 331 | NLH | yes |
 | B | 329 | EGMF | yes |
 | C | 323 | CENV | yes |
-| D | 326 | CTRX | yes |
+| D | 330 | PVLX | yes |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -52,7 +52,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig75 | 301 | reserved, parked branch |
 | fig76 | 313 | reserved, parked branch |
 | fig77 | 314 | landed |
-| fig78 | 326 | live, slot D (resume; allocation stands) |
+| fig78 | — | released (326 landed YES-(ii), no figure shipped; number returns to the pool) |
 | fig79 | 315 | landed |
 | fig80 | 292 | landed |
 | fig81 | 329 | live, slot B |
@@ -86,8 +86,18 @@ orchestrator's read of 221's journal: the 43.2%/86x flag was left explicitly
 unresolved with the successor leg named — 307 is DISPATCHABLE, ranked directly
 after 338. Over-read-closure-#6 adjudication is DEFERRED to 331's landing (one
 leg corrects the two "closed three ways" sites on BOTH measured answers, never
-on half). Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF, C/323/CENV,
-D/326/CTRX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
+on half). Cycle 8c: D/326 landed YES-(ii) at c541cdb — Chae-Tsai does NOT bite
+(all four theorems are about the rescaled EULER system; their own reach
+statement (2.9) generalizes over two constants and −ΔV is not in the family;
+plus two independent corroborating grounds). **313's parked packet loses its
+only theorem** — recorded as a fact about the packet's evidentiary content, the
+ruling stays the user's. GAP-326-A/B corrections endorsed (inline markers,
+original wording quoted in place). D ← 330 PVLX, JUMPING ranks 335-338: its
+precondition fired at 326's landing, cycle 7b requires route-4 de-risk to land
+before heavy route-4 capacity (334 fires at 331's landing), and the user's
+packet update should carry Chae-Tsai-out and Pineau-Vicol-adjudicated together,
+not in dribbles. Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF, C/323/CENV,
+D/330/PVLX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
 findings became four drafted correction legs: 335 S1GR (the pre-existing
 spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
 shift, two flipped gate predicates, present with and without 221's repair), 336
@@ -100,15 +110,15 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 22 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
-327, 287, 229, 293, 298, 299, 334, 330, 310, 325, 231, 232, 233, 234), plus
+**Reserve queue: 21 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 310, 325, 231, 232, 233, 234), plus
 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
 (335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank
 order as listed, §3a pre-authorised except where a spec says otherwise). 334 on
-331 only now (332 landed); 330 on 326; 310 on 287+298; 325 USER-GATED; 231-234
-blocked on repairs 217/219/225 (221's landed). Next fresh leg number: **339**.
-Full specs and this cycle's rulings are in the cycle-8 and 8b entries at the end
-of this file.)
+331 only (332 landed); 310 on 287+298; 325 USER-GATED; 231-234 blocked on
+repairs 217/219/225 (221's landed). Next fresh leg number: **339**. Full specs
+and this cycle's rulings are in the cycle-8, 8b and 8c entries at the end of
+this file.)
 
 ---
 
@@ -15894,3 +15904,108 @@ Nothing here goes to the user beyond what is already parked (313's packet items,
 the answer is: nothing new. Nothing in this update lifts a ban. 332's NO opens a
 lane AND names its wall in the same breath — that is a map correction, not
 movement; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 8c) — 326 YES-(ii) ABSORBED (CHAE-TSAI DOES NOT
+BITE; 313's PACKET LOSES ITS ONLY THEOREM); D ← 330 PVLX, JUMPING RANKS 335-338
+WITH THE JUMP JUSTIFIED; PACKET-SUMMARY HANDLING RULED; GAP-326-A/B ENDORSED
+
+Written from the same detached lineage, resynced to origin/main = c541cdb.
+
+### 326 CTRX YES-(ii), absorbed at full strength
+
+Chae-Tsai (arXiv:1304.7414v1, sha256 re-verified by independent download) does
+NOT reach the screened object: all four theorems hypothesize a time-periodic
+solution of (1.6), the rescaled EULER system — no Laplacian; the paper displays
+the NS rescaled equation (1.10) separately under a "related results" heading and
+proves nothing about it; the authors' own reach statement (2.9) generalizes over
+two real constants a,b, and −ΔV is not a member of that family for any a,b. Two
+independent corroborating grounds banked so the finding rests on no single
+reading: (2.2)'s Ω ∈ L^q for every q ∈ (0,r) is far stronger decay than the
+screened object's Type-I bound, and §1.1 calls λ close to 1 the easier case
+while the object has λ significantly larger than 1, with backward-DSS existence
+"not addressed in literature" outside a class the object is specified outside
+of. Territory exactly three files; refused-to-measure batteries kept out of the
+bank; endorsed without amendment.
+
+### Ruling — 313's packet: NEW EVIDENCE ON THE EXISTING PARKED ITEM, and the
+user-facing summary is REFRESHED NOW so no stale summary stands
+
+The orchestrator's read is CONFIRMED: this is not a fresh escalation — 326's
+gate pre-committed exactly this handling ("append to 313's user packet with the
+clause quoted") and the packet's disposition is already parked with the user.
+But a materially-changed packet behind an unchanged summary is a stale
+instrument, and the repo does not leave those standing. **Directive to the
+orchestrator (reports/ files are yours): refresh the NEEDS-YOU item now to
+state (a) the packet's only theorem is shown silent (Chae-Tsai is Euler-only,
+deciding clause quoted from 326's record), (b) what remains is 260's dissolved
+argument plus the empty seed set 313 itself called an availability fact, and
+(c) Pineau-Vicol's adjudication is IN FLIGHT as leg 330 — final packet update
+lands when 330 answers.** Whether a packet whose only theorem is now silent
+still supports the ban's current wording is a ban-scope question; the DM does
+not rule on ban scope, and it stays with the user, unchanged.
+
+### Refill — slot D ← 330 PVLX, jumping ranks 335-338 (the jump stated, not
+slipped in)
+
+330's precondition (326 landed) fired this cycle. Three grounds for dispatching
+it ahead of the corrections queue, each on record already:
+1. **Cycle 7b's own sequencing rule:** route-4 de-risk legs "should land before
+   heavy route-4 capacity commits" — and 334 DSSP fires at 331's landing, which
+   is live in A now. PV's λ-near-1 RDSS clause vs the object's λ significantly
+   larger than 1 is exactly the reach question 330 was drafted to answer.
+2. **Packet completeness for the user:** 326 removed the packet's only theorem
+   and named PV the live candidate for the vacated slot. The user should rule on
+   Chae-Tsai-out and PV-adjudicated together, not in dribbles.
+3. **Floor:** 330 is math+lit floor-eligible; ranks 1-4 of the corrections queue
+   (335-338) are all non-eligible. D ← 330 keeps the floor at 4/4; a corrections
+   pick would drop it to 3/4 (legal, but not free).
+Spec at cycle 7, unchanged; §3a rule-4 pre-authorisation stands (reads and
+reports, lifts nothing); territory (p2_route_pvlx JSON + its own novelty/journal,
+reads leg/313-sdss-v1 and 326's log read-only) is disjoint from all three live
+slots. Corrections 335-338 remain ranks 1-4 for the NEXT vacancy — they are
+important and not time-coupled; nothing outranks them again without a stated
+reason.
+
+### GAP-326-A and GAP-326-B — endorsed, at the prominence corrections get here
+
+- **326-A:** the landed log had called a controlled zero a "term-conjunction
+  artefact" without ever running the deciding one-token control — an inversion
+  of the standing MF rule. The resumed leg ran it live and banked the zero at
+  measured width: inside the 4-record control set, exactly ONE record
+  (Pineau-Vicol 2607.09619) is reachable by {nonexistence, Liouville, rigidity}.
+  The cycle-8 amendment ordering (GAP first, then gate) was executed as ruled;
+  the correction refines the DM's cycle-8 gloss too, and that refinement is
+  accepted here by name: the zero was not an artefact OR a plain absence — it
+  was an unbanked measurement, now banked with its control.
+- **326-B:** "new to this repository" was false when written (leg 262 read
+  2607.09619v1 four days earlier); only "absent from leg 313's net" survives.
+  Caught by the leg's own ordered staleness re-check — the resume condition
+  doing exactly what it was written to do. Both corrections carry the original
+  wording quoted in place, per the house rule.
+
+### Roster and reserve
+
+Live roster: **A/331/NLH (CRITICAL PATH), B/329/EGMF, C/323/CENV, D/330/PVLX.**
+Floor 4/4 — above §3b's 2-of-4. Territory disjointness re-checked: no shared
+file. FLOOR-TABLE synced (D 326→330); FIG-TABLE: fig78 released (326 landed, no
+figure shipped).
+
+Rank order for the next vacancies: 1. **335 S1GR** 2. **336 C305** 3. **337
+C318** 4. **338 LCB1** 5. **307 TSCX** 6. **328 ORC5** 7. **324 P2SPF** 8. **322
+F70** 9. **327 P2T1E** 10. **287 EPA** 11. **229 PNRV** 12. **293 JFA** 13.
+**298 CORRX** 14. **299 TESTA**. Then **334 DSSP** (on 331 — fires at its
+landing, alongside the closure-#6 correction leg drafted then), **310 EPAP** (on
+287+298), **325 MTB1** (USER-GATED), **231-234** (blocked on repairs
+217/219/225). SUSPENDED: 306, 308.
+
+**Reserve queue: 21 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **14**. Next fresh leg number: **339.**
+
+Nothing in this update lifts a ban. 326's finding is a fact about a packet's
+evidentiary content, stated by the leg itself as not an argument about the ban;
+the ban-wording call stays the user's; 330 reads and reports. Removing a
+theorem from an escalation packet is map correction, not movement — no L1-L4
+link moved; Clay stays ~0.05%.
