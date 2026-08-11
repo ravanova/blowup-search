@@ -1,8 +1,8 @@
-# Route-DFRE v1 (fig71, provisional) — DF-CGL, reproduced exactly from its own released proof data
+# Route-DFRE v1 (fig74, registered) — DF-CGL, reproduced exactly from its own released proof data
 
 *Phase 2 / P2, leg 316. First entry of the standing CAP-reproduction lane (steer item 6).
 Code: `experiments/p2_route_dfre_v1.py` → `writeup/data/p2_route_dfre_v1.json` →
-`experiments/p2_route_dfre_v1_evidence.py` → fig71. Novelty pre-commitment:
+`experiments/p2_route_dfre_v1_evidence.py` → fig74. Novelty pre-commitment:
 `writeup/novelty/leg_316.md`. Deterministic, ~27 s once the target repository is
 cloned (~1 min including the one-time clone).*
 

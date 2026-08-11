@@ -1,8 +1,9 @@
 """Route-DFRE (leg 316) -- EVIDENCE: every number the BLOG and TECHNICAL write-ups quote,
 re-derived from `writeup/data/p2_route_dfre_v1.json` alone.
 
-Also builds `writeup/figures/fig71_route_dfre_v1.png` (provisional number -- the leg brief
-assigns fig71; the orchestrator registers it in writeup/build_figures.py's shared list).
+Also builds `writeup/figures/fig74_route_dfre_v1.png`. The leg brief assigned fig71; that
+number collided with leg 303, which landed first and keeps it, so integration (leg 0)
+registered this figure as fig74 in writeup/build_figures.py's shared list.
 
 No network, no re-clone, no re-decoding of the CGL.jl proof-witness CSVs -- this reads the
 curated JSON the runner (`experiments/p2_route_dfre_v1.py`) already produced and checks the
@@ -16,7 +17,7 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "writeup", "data")
-FIG = os.path.join(ROOT, "writeup", "figures", "fig71_route_dfre_v1.png")
+FIG = os.path.join(ROOT, "writeup", "figures", "fig74_route_dfre_v1.png")
 
 CHECKS = []
 

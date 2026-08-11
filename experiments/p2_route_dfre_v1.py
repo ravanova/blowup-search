@@ -1,4 +1,4 @@
-"""Route-DFRE (fig71): the standing CAP-reproduction lane's FIRST ENTRY.
+"""Route-DFRE (fig74): the standing CAP-reproduction lane's FIRST ENTRY.
 
 Legs 61 and 256 are two for two at finding real issues in published verification
 packages; the steer makes it a lane -- one published computer-assisted proof reproduced

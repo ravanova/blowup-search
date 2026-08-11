@@ -313,8 +313,10 @@ P2_EVIDENCE = [
     "../experiments/p2_route_wvr_v1_fitness_evidence.py",       # fig64 -- Route-WVR v1 (leg 160)
     "../experiments/p2_route_m2ci_v1_construction_evidence.py", # fig65 -- Route-M2CI v1 (leg 187)
     "../experiments/p2_route_wes_v1_space_evidence.py",         # fig66 -- Route-WES v1 (leg 178)
-    "../experiments/p2_route_p0tcv_v1_verify_evidence.py",      # fig67 -- Route-P0TCV v1 (leg 300)
-    "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig68 -- Route-GAF v1 (leg 303)
+    "../experiments/p2_route_p0tcv_v1_verify_evidence.py",      # fig68 -- Route-P0TCV v1 (leg 300), renumbered from fig67
+    "../experiments/p2_route_cadx_v1_scope.py",                 # fig67 -- Route-CADX v1 (leg 304)
+    "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig71 -- Route-GAF v1 (leg 303), renumbered from fig68
+    "../experiments/p2_route_dfre_v1_evidence.py",              # fig74 -- Route-DFRE v1 (leg 316), renumbered from fig71
 ]
 
 

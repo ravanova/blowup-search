@@ -690,6 +690,6 @@
    "(b) probe x plant detection-threshold matrix, BLIND cells marked",
    "(c) double vs 60-digit k(1+h): the KA8 conditioning defect"
   ],
-  "emitted_this_run_to": null
+  "emitted_this_run_to": "writeup/figures/fig69_route_p2t1_v1_sensitivity.png"
  }
 }
