@@ -621,17 +621,44 @@ def main() -> int:
             rec["provenance"] = prov
             ref = prov.get("banking_commit")
 
-            runs = []       # at the banking commit: code fixed, environment varies
+            # At the banking commit: code fixed, so the environment is the only
+            # variable.  The SECOND repeat is run only if the first one actually
+            # moved: a family that reproduces the banked bytes exactly has
+            # already demonstrated run-to-run determinism (it agreed with a run
+            # made in a different environment, months earlier), so the
+            # nondeterminism-vs-non-portability question does not arise for it.
+            # Spending a second full solve there buys nothing and these solves
+            # cost 20-50 minutes each.
+            runs = []
             head_runs = []  # at HEAD: the operational "does it reproduce today"
-            for i in range(max(1, args.repeats)):
-                print(f"[{fam}] banking-commit regeneration {i+1}/{args.repeats} "
-                      f"@{prov.get('banking_commit_short')} ...", flush=True)
-                r = regenerate(fam, args.timeout, workroot, ref=ref)
-                print(f"[{fam}]   status={r['status']} rc={r['returncode']} "
-                      f"{r['run_seconds']}s", flush=True)
-                runs.append(r)
-                if r["doc"] is None:
-                    break
+            print(f"[{fam}] banking-commit regeneration 1 "
+                  f"@{prov.get('banking_commit_short')} ...", flush=True)
+            r0 = regenerate(fam, args.timeout, workroot, ref=ref)
+            print(f"[{fam}]   status={r0['status']} rc={r0['returncode']} "
+                  f"{r0['run_seconds']}s", flush=True)
+            runs.append(r0)
+
+            needs_repeat = False
+            if r0["doc"] is not None:
+                _probe = compare(banked_flat, flatten(r0["doc"]))
+                needs_repeat = (_probe["n_numeric_leaves_moved"] > 0
+                                or _probe["n_flag_flips"] > 0
+                                or _probe["n_string_moves"] > 0
+                                or _probe["n_leaves_only_in_banked"] > 0
+                                or _probe["n_leaves_only_in_regenerated"] > 0)
+            rec["determinism_repeat_triggered"] = needs_repeat
+            rec["determinism_repeat_policy"] = (
+                "a second independent regeneration at the banking commit is run "
+                "IFF the first one moved at least one leaf; an exact reproduction "
+                "of the banked bytes already establishes determinism")
+
+            if needs_repeat and args.repeats > 1:
+                print(f"[{fam}] banking-commit regeneration 2 (movement seen; "
+                      f"determinism control) ...", flush=True)
+                r1 = regenerate(fam, args.timeout, workroot, ref=ref)
+                print(f"[{fam}]   status={r1['status']} rc={r1['returncode']} "
+                      f"{r1['run_seconds']}s", flush=True)
+                runs.append(r1)
 
             print(f"[{fam}] HEAD regeneration ...", flush=True)
             head_runs.append(regenerate(fam, args.timeout, workroot, ref=None))
@@ -704,10 +731,19 @@ def main() -> int:
                     "max_rel_move_between_repeats": det["max_rel_move"],
                     "worst_between_repeats": det["worst_mover"],
                 }
+            elif not needs_repeat:
+                rec["determinism_control"] = {
+                    "two_processes_agree_on_nonvolatile_leaves": True,
+                    "n_leaves_differing_between_repeats": 0,
+                    "max_rel_move_between_repeats": 0.0,
+                    "reason": ("not run: the single regeneration reproduced the "
+                               "banked bytes exactly, which already establishes "
+                               "cross-process AND cross-environment agreement"),
+                    "established_by": "exact reproduction of the bank"}
             else:
                 rec["determinism_control"] = {
                     "two_processes_agree_on_nonvolatile_leaves": None,
-                    "reason": "second repeat unavailable"}
+                    "reason": "second repeat attempted but produced no document"}
 
             rec["positive_control"] = positive_control(regen_flat)
             results.append(rec)
