@@ -26,24 +26,25 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 272 | WESCV | no |
-| B | 285 | P2S | yes |
-| C | 293 | JFA | no |
-| D | 221 | BVRR | no |
-| E | 286 | CNRV | no |
-| F | 292 | CAPA | no |
-| G | 267 | FDL | yes |
-| H | 264 | WETP | yes |
-| I | 287 | EPA | no |
-| J | 229 | PNRV | no |
+| A | 300 | P0TCV | no |
+| B | 221 | BVRR | no |
+| C | 301 | FSB | yes |
+| D | 302 | P2T1 | yes |
+| E | 303 | GAF | yes |
+| F | 304 | CADX | yes |
+| G | 286 | CNRV | no |
+| H | 229 | PNRV | no |
+| I | 292 | CAPA | no |
+| J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-07 (slot-F refill after 290/D1XN closed the D1
-line): 5/10 floor-eligible -- B/285/P2S, C/284/NU12, F/291/HLR2, G/267/FDL, H/264/WETP
--- matching the "290 closes D1 line" DM update at the tail of this file. Full roster:
-A/272/WESCV, B/285/P2S, C/284/NU12, D/221/BVRR, E/286/CNRV, F/291/HLR2, G/267/FDL,
-H/264/WETP, I/287/EPA, J/226/PNR. Reserve rebuilt to genuine stock: 292, 293
-dispatchable now; 280 user-gated; 229/231-234 blocked.)
+(Current snapshot, DM update of 2026-08-11 (fresh-session full reroster, all ten slots
+vacant at session start): 4/10 floor-eligible -- C/301/FSB, D/302/P2T1, E/303/GAF,
+F/304/CADX. A/300 is the critical path (stage P0: verify-then-land 266's correction).
+Resumes from prior-session branches: B/221 (leg/221-bvrr-v1-resume), G/286
+(leg/286-cnrv-v1), H/229 (leg/229-pnrv-v1), I/292 (leg/292-capa-v2); J/287 fresh.
+Reserve count 14: 293, 298, 299 dispatchable now; 305-310 preconditioned; 280
+user-gated; 231-234 blocked. Next fresh leg number: 311.)
 
 ---
 
@@ -13241,3 +13242,383 @@ user-gated; 231-234 blocked on repairs (221 live in slot D, its landing unblocks
 
 Nothing in this update lifts a ban; Clay stays ~0.05%. No new direction question
 raised — 297's ruling now sits with the user.
+
+---
+
+## DM update, 2026-08-11 — FRESH-SESSION FULL REROSTER: all ten slots vacant (no prior
+subagent survives a session), main at 80c0cc4 clean. Ranked queue rebuilt to 20
+candidates; slots A-J assigned; five fresh live legs drafted (300-304), six fresh
+reserve legs drafted (305-310) per the fired §3a watermark; three explicit rulings
+recorded (resume-vs-restart for 221/286/229/292, disposition of 266's unmerged GATE
+YES, whether 287 survives)
+
+**Session facts this update is built on (verified against the orchestrator's brief,
+not assumed):** every slot vacant; `main` = 80c0cc4; prior-session WIP branches pushed
+by the orchestrator: `leg/221-bvrr-v1-resume` (3 commits, real WIP + a flagged
+two-scale counterexample, 43.2% error / 86x tolerance), `leg/286-cnrv-v1`,
+`leg/229-pnrv-v1`, `leg/292-capa-v2` (novelty pass only, 46/17/24 behind main),
+`leg/266-p0tc-v1` (finished, unmerged GATE YES), no branch for 287, 293 drafted
+undispatched. Parked with the user, not re-raised and not built on here: 297, 280,
+the leg-251 Phase-1 packet, 257, 129/188.
+
+### Ruling 1 — resume vs restart for the four interrupted legs
+
+- **221 (BVRR): RESUME from `leg/221-bvrr-v1-resume`, same leg number.** Three commits
+  of real WIP (the boussinesq_rescaled.py repair plus the clause-(b) zero-contamination
+  sweep in progress) and a flagged counterexample that its own gate is already shaped
+  to adjudicate — its no-branch ("a banked result WAS reachable and DOES move →
+  escalate immediately") is exactly where the 43.2%/86x flag goes if it survives
+  independent re-run. First action: rebase onto main (territory disjoint, trivial),
+  then flake-diagnosis-before-belief on the counterexample per §9g before treating it
+  as clause-(b) contamination.
+- **286 (CNRV), 229 (PNRV), 292 (CAPA): RESUME from their branches, same leg
+  numbers.** Each has only a committed novelty pass, but that pass is a quartet
+  artifact — restarting at fresh numbers would discard committed work and inflate the
+  leg count for zero gain. The 17-46-commit gap is a rebase; every territory is
+  disjoint from main's movement. Condition on all three: rebase onto main first, then
+  re-check the committed novelty log for staleness against anything that landed since
+  (state the check in the journal; a stale novelty pass is re-run, not trusted).
+  Branches: `leg/286-cnrv-v1`, `leg/229-pnrv-v1`, `leg/292-capa-v2`. Specs unchanged
+  from their entries above.
+
+### Ruling 2 — leg 266's finished, unmerged GATE YES: VERIFY FIRST, then land
+
+266 is claim-bearing (the dominance-window numbers r ∈ (1.1666667, 1.1909830), width
+0.0243163 vs target (1, 7/6] width 0.1666667, 6.855x) and it corrects the user-facing
+Phase-1 packet — and it finished in a dead session where no paired VER pass ever ran.
+The standing discipline (every claim a leg's landing rests on gets an independent
+re-measure before anyone builds on it, lesson 85; every leg gets a paired verifier)
+says this does not land as-is. It also does not get reworked — nothing is known to be
+wrong with it. **It gets leg 300 (below): an independent verification of its three
+gate clauses and its numbers, and on YES, execution of 266's own yes-branch (land the
+correction into `leg/251-p0t-v1`, merge 266's quartet to main).** The packet itself
+stays parked with the user — landing the correction makes the parked packet
+self-consistent for whenever the user takes it up; it does not re-raise it.
+
+### Ruling 3 — 287 (EPA) is still worth doing; dispatch fresh at the same number
+
+252's meta-finding (a banked artifact family regenerating 202/359 leaves differently
+across environments with zero code change) is still un-generalized: nobody knows
+whether it is an outlier or the norm, and the answer bears on every cross-environment
+comparison this repository makes — more, not less, relevant now that cloud/remote
+sessions are wired in. Nothing was ever built, so "fresh" is trivial: dispatch leg 287
+as specified above, no branch to resume.
+
+### Critical-path determination for this roster
+
+`plan_of_record.py` marks **P0** NEXT. P0's deliverable (the named target + ansatz
+packet, leg 251) is parked with the user and may not be re-raised or built on — so the
+one P0 action that is live is making the parked packet correct: verifying and landing
+266's re-posed obligation #1, the correction the brief itself identifies as what was
+blocking the Phase-1 packet. **Slot A / leg 300 is therefore the critical-path leg for
+this roster.** No other slot claims a stage.
+
+### Fresh live legs, drafted now
+
+```
+### 300 — ROUTE-P0TCV: INDEPENDENT VERIFICATION OF 266's GATE-YES CORRECTION, THEN
+EXECUTE ITS OWN YES-BRANCH (critical path — stage P0's only live action)
+**Thesis.** 266 re-posed 251's certificate obligation #1 (at BCG's scaling there is no
+stationary self-similar profile system for the dissipative equation — dissipation
+enters only as the non-autonomous forcing F_dis, so the obligation must ask for
+rigorous enclosure of the STABILITY STEP with F_dis retained, r outside BCG's
+dominance regime) and reported the dominance window r ∈ (1.1666667, 1.1909830), width
+0.0243163, vs the target window (1, 7/6], width 0.1666667 (6.855x wider). It finished
+GATE YES on `leg/266-p0tc-v1` in a dead session with no paired verification. This leg
+verifies before anything lands.
+**Gate.** Does an independent line-by-line verification of `leg/266-p0tc-v1` confirm
+(a) the re-posed obligation matches the papers' actual architecture exactly as
+writeup/novelty/verify_251.md states it (F_dis as non-autonomous forcing on the Euler
+profile system; the enclosure obligation living in the stability step's r-restriction
+argument), (b) every verifier-confirmed claim in 251's report is byte-untouched on the
+branch, and (c) the window endpoints (1.1666667, 1.1909830) and the 6.855x width ratio
+re-derive from BCG's own stated inequalities, at the quoted precision?
+  yes -> Execute 266's own yes-branch: land the correction into `leg/251-p0t-v1` and
+         merge 266's quartet to main. The Phase-1 packet STAYS PARKED with the user —
+         this makes it self-consistent, it does not re-raise it. Unblocks reserve legs
+         305/306.
+  no  -> Name the failing clause and magnitude; cut a rework leg at top of queue (same
+         territory, gate pre-committed to the corrected reading); 266 stays unmerged.
+**Territory.** `leg/266-p0tc-v1` and `leg/251-p0t-v1` branch files (the obligation-#1
+               sentence(s) and correction note only, per 266's own territory),
+               writeup/novelty/leg_300.md, experiments/journal/leg_300.md.
+               Reads (never edits) writeup/novelty/verify_251.md, BCG §7 / CGSS full text.
+**Difficulty.** standard
+**Preconditions:** None.
+**Independence.** Territory is two parked branches no live slot touches. Slot A,
+critical path. Anti-pausing clause verbatim.
+```
+
+```
+### 301 — ROUTE-FSB: THE FOURTH SPACE/BASIS SCREEN — RUN THE SEARCH THE RE-POSED L1
+BAN'S OWN LIFT CONDITION NAMES, WITHOUT BUILDING ANY MACHINERY
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** The re-posed 2026-08-06 ban on ell^1-Fourier/radii-polynomial machinery
+lifts only if "a namable FOURTH space/basis this repository has not yet tried is
+proposed, with its own scoping leg establishing it is not subject to the same
+three-realization death." No leg has ever actually run that search. This leg
+enumerates candidate spaces/bases from the certification literature (Chebyshev-tau,
+geometrically-weighted Hilbert scales, wavelet/multiresolution, Fourier-Gevrey,
+discrete-Hardy, others surfaced by the novelty pass) and screens each — on paper, no
+construction — against the three measured death mechanisms (leg 54's zero-diagonal/
+block-coupling in ell^1_w; leg 56's (H,D)-consistency defect in collocation; legs
+163/176's origin-H^2 non-transfer) and against the Cadiot dominance-hypothesis
+observation. L1 is the only movable link of the chain; this is the highest
+chain-proximity work available that touches no ban.
+**Gate.** Does the screen produce at least one NAMED fourth space/basis with an
+explicit structural argument (not a hope) that each of the three death mechanisms
+cannot recur in it?
+  yes -> Write the scoping-leg spec the lift condition requires and ESCALATE to the
+         user — proposing is the lift path, and only the lift condition lifts the ban;
+         this leg builds nothing and lifts nothing itself.
+  no  -> Bank at full strength: each candidate named, the mechanism that kills it
+         named, the realization named per lesson 91 — the lift condition measured
+         empty over the enumerated class.
+**Territory.** writeup/data/p2_route_fsb_v1_screen.json, a new TECHNICAL file of its
+               own naming (declared in its journal at start),
+               writeup/novelty/leg_301.md, experiments/journal/leg_301.md.
+**Difficulty.** heavy
+**Preconditions:** None.
+**Independence.** Paper screen; no solver module, no shared artifact. Slot C.
+Anti-pausing clause verbatim.
+```
+
+```
+### 302 — ROUTE-P2T1: BUILD THE CHEAPEST LOAD-BEARING TERM FROM 285's FIFTEEN-TERM
+APPARATUS SPEC, AS A FLOAT DRESS REHEARSAL WITH A CONTROL THAT CAN FAIL
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** 285 (P2S) landed the precise specification of the 15 absent apparatus
+terms a BCG-imploding-profile certificate would need (265's build-cost answer made
+concrete). Lesson 89 says assemble early: the terms not yet written down are the ones
+that decide. This leg builds exactly ONE term — the cheapest load-bearing one by 285's
+own ranking — in float, validated against a published value or a planted known answer
+with a window (lesson 84). It reads 285's LANDED spec on main, not the parked Phase-1
+packet. Ban check is part of the leg: the novelty pass must confirm the chosen term is
+not ell^1-Fourier/radii-polynomial machinery in the banned sense; if the cheapest term
+is, take the cheapest that is not; if all 15 are, that is the no-branch, escalated,
+built by nobody.
+**Gate.** Does the implemented term reproduce its pre-stated known-answer/planted
+control within a pre-stated tolerance AND report the failure when the plant is
+perturbed (a control that can come out differently, lesson 90) — magnitudes, not
+booleans, realization named?
+  yes -> Bank module + battery. capabilities.py registration goes via an integration
+         note in the journal, NOT a direct edit (292 owns capabilities.py this
+         roster). Term #2 (reserve leg 308) becomes dispatchable.
+  no  -> Name the term and the mechanism; 285's spec for that term gets a rework FLAG,
+         never a silent edit.
+**Territory.** solver/p2_apparatus_term1.py (NEW file only),
+               experiments/p2_route_p2t1_v1.py, writeup/data/p2_route_p2t1_v1.json,
+               writeup/novelty/leg_302.md, experiments/journal/leg_302.md.
+               Reads 285's landed spec; edits no existing solver file.
+**Difficulty.** heavy
+**Preconditions:** None (285 is landed on main).
+**Independence.** New files only. Slot D. Anti-pausing clause verbatim.
+```
+
+```
+### 303 — ROUTE-GAF: GRADE-A/FLUID CELL FRESHNESS SWEEP, MID-2026 (does the emptiness
+Phase 1's premise rests on still hold?)
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** Leg 174's occupancy matrix has the Grade-A/fluid cell empty "for want of a
+target, not a method"; leg 242 last confirmed nobody had filled it; 291 re-checked
+only HL_S2_nonsymmetric specifically. Phase 1's entire premise ("no certified viscous
+blow-up exists in any model, in any dimension, today") has not been re-swept since.
+One sweep (arXiv fetcher, query log committed, links not counts) for post-242 work
+claiming certified/computer-assisted dissipative or viscous blow-up in any model, plus
+anything moving the NRS/Tsai screen boundary.
+**Gate.** Does the sweep find at least one post-cutoff work claiming a certified
+dissipative blow-up or materially narrowing the cell?
+  yes -> Record the pointer(s); the adversarial full-text read is reserve leg 309, not
+         this leg. If a hit actually FILLS the cell, escalate — that changes Phase 1's
+         premise and is the user's to weigh.
+  no  -> Bank "cell still empty as of 2026-08" with the committed query log — the
+         freshness the premise rests on, at full strength.
+**Territory.** writeup/data/p2_route_gaf_v1_sweep.json,
+               writeup/novelty/leg_303.md, experiments/journal/leg_303.md.
+**Difficulty.** light
+**Preconditions:** None.
+**Independence.** Literature only, own artifact. Slot E. Anti-pausing clause verbatim.
+```
+
+```
+### 304 — ROUTE-CADX: DOES CADIOT'S CONSTRUCTION COVER A ZERO DIAGONAL? (the live open
+question a standing ban's lift condition names, never yet read for)
+[FLOOR-ELIGIBLE: external literature + math]
+**Thesis.** The ban on re-claiming leg 51's methodological finding at full strength
+stands "unless a pass resolves whether Cadiot's construction (arXiv:2505.03091) covers
+a zero diagonal, which is now the live open question, not BDL's." Leg 57 located and
+verified the dominance-hypothesis observation in Cadiot's full text but never answered
+the zero-diagonal question itself. This leg reads sections 2/3 and every hypothesis in
+full and answers it, with the exact hypothesis line quoted either way.
+**Gate.** Does the full text yield a definite answer — either (i) Cadiot's hypotheses
+exclude a zero/vanishing diagonal (quote the line), or (ii) the construction covers
+it?
+  yes -> (i): bank at full strength — the ban stands on measured, quoted footing.
+         (ii): ESCALATE — the ban's lift condition routes through exactly this answer
+         and what follows is the user's call; nothing here lifts the ban.
+  no  -> The paper is genuinely ambiguous after a full read: quote the candidate
+         passages, record the ambiguity as the finding, ban unchanged.
+**Territory.** writeup/data/p2_route_cadx_v1.json,
+               writeup/novelty/leg_304.md, experiments/journal/leg_304.md.
+**Difficulty.** standard
+**Preconditions:** None.
+**Independence.** Single-paper read, own artifact. Slot F. Anti-pausing clause
+verbatim.
+```
+
+### Fresh reserve legs, drafted now (§3a watermark: effective-dispatchable was 2)
+
+```
+### 305 — ROUTE-DWM: IS THE 6.855x DOMINANCE-WINDOW DEFICIT SHARP OR SLACK? (per-
+constant width ledger of BCG's own r-dominance argument)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 266 (once verified/landed by 300) fixes the certificate obligation at the
+stability step with F_dis retained, r outside the dominance window (1.1666667,
+1.1909830) — 6.855x narrower than the target window (1, 7/6]. Nobody knows whether
+that width is sharp for BCG's argument or an artifact of one generous intermediate
+constant. Re-derive the window tracking every intermediate constant; measure which
+constant costs the most width.
+**Gate.** Does the re-derivation reproduce the window endpoints and yield a
+per-constant width ledger naming the costliest constant?
+  yes -> Bank the ledger — it is the shape of what a certificate must beat.
+  no  -> The window does not re-derive from the stated inequalities: escalate — that
+         contradicts 300's verified reading and must not be smoothed over.
+**Territory.** writeup/data/p2_route_dwm_v1.json, writeup/novelty/leg_305.md,
+               experiments/journal/leg_305.md.
+**Difficulty.** standard
+**Preconditions:** Leg 300 gate YES (266's correction landed).
+```
+
+```
+### 306 — ROUTE-SSE: ASSEMBLE-EARLY TERM LEDGER FOR THE STABILITY STEP WITH F_dis
+RETAINED (lesson 89 applied to the corrected obligation #1, placeholder constants, no
+rigor claimed)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Write down, completely, the finite list of terms a rigorous enclosure of
+the stability step with F_dis retained must bound — every term referenced to a
+BCG/CGSS lemma or flagged NEW, each NEW term screened against this repository's
+measured dead ends. The terms not yet written down are the ones that decide.
+**Gate.** Does assembly produce a complete, internally-consistent term ledger with
+every term sourced-or-flagged, and no NEW term already matching a measured dead end?
+  yes -> Bank as the Phase-1 costing input for this obligation.
+  no  -> Name the term that cannot even be posed — itself a Phase-1-relevant negative,
+         recorded at full strength.
+**Territory.** writeup/data/p2_route_sse_v1.json, a new TECHNICAL file of its own
+               naming, writeup/novelty/leg_306.md, experiments/journal/leg_306.md.
+**Difficulty.** heavy
+**Preconditions:** Leg 300 gate YES.
+```
+
+```
+### 307 — ROUTE-TSCX: INDEPENDENT ADJUDICATION OF 221's FLAGGED TWO-SCALE
+COUNTEREXAMPLE (43.2% error, 86x tolerance — genuine clause-(b) contamination or
+solver artifact?)
+[FLOOR-ELIGIBLE: none — verification]
+**Thesis.** Flake-diagnosis-before-belief, at leg scale: reproduce 221's flagged case
+independently before anyone treats it as contamination or dismisses it.
+**Gate.** Does an independent reproduction confirm the 43.2%/86x case, and if so is
+the mechanism in the banked result's own reachability (genuine) or in the probe's
+realization (artifact) — mechanism and realization named either way?
+  yes-genuine  -> Escalate immediately per 221's own no-branch discipline.
+  yes-artifact -> Bank the mechanism; 221's flag closes.
+  no (cannot reproduce) -> Report exactly that, with the environment delta swept.
+**Territory.** experiments/p2_route_tscx_v1.py, writeup/data/p2_route_tscx_v1.json,
+               writeup/novelty/leg_307.md, experiments/journal/leg_307.md.
+               Reads solver/boussinesq_rescaled.py; edits nothing.
+**Difficulty.** standard
+**Preconditions:** Leg 221 landed with the counterexample flag unresolved by its own
+gate. (If 221's gate resolves it, this leg is struck, not dispatched.) Distinct from
+reserve 233 (BVRRV), which owns the repair-battery verification; file territories
+disjoint.
+```
+
+```
+### 308 — ROUTE-P2T2: SECOND APPARATUS TERM FROM 285's SPEC (same pattern as 302)
+[FLOOR-ELIGIBLE: construction]
+**Thesis/Gate.** Identical pattern to 302, applied to the next term on 285's own
+ranking; same known-answer-with-window and perturbable-control requirements; same
+ban-check clause in the novelty pass.
+**Territory.** solver/p2_apparatus_term2.py (NEW file only),
+               experiments/p2_route_p2t2_v1.py, writeup/data/p2_route_p2t2_v1.json,
+               writeup/novelty/leg_308.md, experiments/journal/leg_308.md.
+**Difficulty.** heavy
+**Preconditions:** Leg 302 gate YES.
+```
+
+```
+### 309 — ROUTE-GAF2: ADVERSARIAL FULL-TEXT READ OF 303's STRONGEST HIT
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** If 303's sweep surfaces a claimed certified dissipative blow-up or a
+material narrowing of the Grade-A/fluid cell, it gets the 262-style adversarial
+full-text treatment before anything in this repository cites it.
+**Gate.** Does the full text sustain the claim as stated (each load-bearing constant
+and hypothesis checked), or does it break — with the breaking hypothesis quoted?
+  yes -> Escalate (Phase-1 premise question, the user's to weigh); cite nothing yet.
+  no  -> Bank the break at full strength with the quoted hypothesis.
+**Territory.** writeup/data/p2_route_gaf2_v1.json, writeup/novelty/leg_309.md,
+               experiments/journal/leg_309.md.
+**Difficulty.** standard
+**Preconditions:** Leg 303 landed naming at least one hit.
+```
+
+```
+### 310 — ROUTE-EPAP: CORRECTIONS.md POINTERS FOR 287's NON-PORTABLE FAMILIES (287's
+own yes-branch instruction, executed as its own light leg)
+[FLOOR-ELIGIBLE: none — record work]
+**Thesis.** 287's yes-branch says non-portable families get CORRECTIONS.md pointers
+("values are environment-local; compare via fresh re-solve, not banked bytes").
+**Gate.** Does every family 287 classified non-portable get exactly one pointer, each
+citing 287's census row, with no other entry's meaning changed?
+  yes -> Bank. no -> Argument-touching resistance: escalate.
+**Territory.** writeup/CORRECTIONS.md (append), writeup/novelty/leg_310.md,
+               experiments/journal/leg_310.md.
+**Difficulty.** light
+**Preconditions:** Leg 287 landed gate YES with >=1 non-portable family; CORRECTIONS.md
+territory free (not while 298 is live).
+```
+
+### Reserve preconditions, re-verified against what has actually landed
+
+293 (JFA): **None** — dispatchable. 298 (CORRX): **None** — dispatchable. 299 (TESTA):
+**None** — dispatchable (advisory: avoid running concurrently with a live solver-repair
+landing; the orchestrator sequences). 280: user-gated, unchanged, not re-raised. 231:
+blocked — leg 217 not landed. 232: blocked — leg 219 not landed. 233: blocked — leg
+221 not landed (221 now live again in slot B; its landing unblocks 233). 234: blocked —
+leg 225 not landed. 305/306: blocked on 300. 307: blocked on 221's flag state. 308:
+blocked on 302. 309: blocked on 303. 310: blocked on 287 + 298 sequencing.
+
+### Roster and ranked queue
+
+Ranked by chain-proximity, gate-decidability-within-one-leg, independence:
+1. **300 P0TCV** (critical path, P0) 2. **301 FSB** (L1, the only movable link)
+3. **302 P2T1** (Phase-1 construction) 4. **304 CADX** (ban-named open question)
+5. **303 GAF** (premise freshness) 6. **221 BVRR** (contamination stakes)
+7. **229 PNRV** (highest-priority-of-eight verification, per its own entry)
+8. **286 CNRV** 9. **287 EPA** 10. **292 CAPA** — then reserve: 11. 293 JFA
+12. 298 CORRX 13. 299 TESTA 14. 305 DWM 15. 306 SSE 16. 307 TSCX 17. 308 P2T2
+18. 309 GAF2 19. 310 EPAP 20. 280/231-234 (gated/blocked, held).
+
+Slots: A=300 (critical path), B=221 (resume `leg/221-bvrr-v1-resume`), C=301, D=302,
+E=303, F=304, G=286 (resume `leg/286-cnrv-v1`), H=229 (resume `leg/229-pnrv-v1`),
+I=292 (resume `leg/292-capa-v2`), J=287 (fresh). Territory disjointness checked
+directly: no two slots name the same solver/ module or the same writeup/data/*.json;
+302's capabilities.py registration is deferred to an integration note because 292 owns
+that file this roster.
+
+**FLOOR-TABLE block updated in this same edit** (full reroster). **Floor status: 4/10
+strictly (301, 302, 303, 304) — above the §3b minimum, correcting the audit-heavy
+last roster.**
+
+**Canonical reserve line: reserve count 14 — legs 293, 298, 299, 305, 306, 307, 308,
+309, 310, 280, 231, 232, 233, 234.** Effective immediately-dispatchable: **3 (293,
+298, 299)**; 305-310 preconditioned as listed; 280 user-gated; 231-234 blocked on
+repairs 217/219/221/225. Next fresh leg number: **311.**
+
+Nothing in this update lifts a ban — 301 and 304 run searches/reads that ban lift
+conditions themselves name, and both are gated to escalate rather than lift; 302's
+ban-check is inside its own novelty pass. The parked items (297, 280, the Phase-1
+packet, 257, 129/188) are not re-raised and nothing here builds on them — 300 makes a
+parked packet self-consistent without re-raising it. Clay stays ~0.05%; no link of the
+L1-L4 chain has moved, and ranking by chain proximity is a choice of what to try. No
+new direction question surfaced — the standing directive answered every call this
+update needed.
