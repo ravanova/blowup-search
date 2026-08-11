@@ -19,16 +19,56 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8e + leg 330 landing (four-slot contract)
+## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 9c (four-slot contract,
+user's ceiling-raising programme in force)
 
-`origin/main` at `5496bbc`, merge gate **PASS**. Two of four slots live, two vacant:
-**A=334 DSSP** (route 4 brick 0, seeded DSS/RPO programme plan, Tier 2 ceiling, critical path,
-dispatched cycle 8d, still running, no stall), **B=339 ORC6** (gated adjudication of the "closed
-three ways" sites against legs 331/332's measured answers, dispatched cycle 8e), **C=323 CENV**
-(MF1 spelling-variant census resume, dispatched cycle 8b, still running, no stall), **D=vacant**
-(330 landed, awaiting DM refill). Decision Maker reachable, last ruling `476e794` (cycle 8e)
-integrated by rebase (clean, no conflicts, onto the intervening `.gitignore` commit) — a leg-330
-report has been sent and is awaiting the DM's next ruling.
+`origin/main` at `a89d8b3`, merge gate **PASS**. **A=vacant** (334 landed, awaiting DM
+refill), **B=342 SEED** (route 4's seeding problem, user programme §4, dispatched cycle 9c, still
+running), **C=341 ALGW** (user programme §1+§2 merged — the fourth-space scoping leg that is the
+sole route by which the programme's ceiling could move Tier 2 → Tier 3; the DM's cycle-9d ruling
+made this leg's priority standing text in DIRECTION.md — a CEILING-GATE PRIORITY block: while 341
+is in flight, its stall/resume/consequence work takes any vacancy ahead of the entire reserve),
+**D=340 EGRB** (truncation-controlled re-derivation of the C4 bound, dispatched cycle 8e, still
+running). Decision Maker reachable, last ruling `8a7be9c` (cycle 9d) integrated by rebase (clean,
+no conflicts).
+
+**Leg 334 (DSSP) landed gate YES on all four clauses** — `a89d8b3`, territory audited clean (4
+declared files, 1974 insertions, 0 deletions; plan_of_record.py/DIRECTION.md untouched). This is
+the route-4 programme plan itself: Tier 2 ceiling stated in every one of nine drafted bricks,
+mechanically checked not asserted. Clause (a) (the weight-collision question) was drafted before
+the DM's cycle-9 §5 ruling reached the leg; once relayed, the leg retained and re-labelled its own
+analysis as context offered to leg 341 rather than asserting a conclusion — recorded
+OWNED-BY-341-PENDING, both branches named, programme shown robust to either. Its own criterion
+(2p+s>d) reproduces leg 313's measured s=1 crossing without being fitted to it, and shows leg
+331's divergence is 100% weight-driven — flagged as a cross-check between not-obviously-
+independent derivations, not proof. Independent gain: vorticity of a Type-I profile lands in
+*unweighted* L²(ℝ³) (2p+0=4>3), a second argument for the vorticity formulation. Clause (c)
+(seeding) re-measured independently, still empty — S1 (Hou-continuation) rejected as exactly
+Entry A's banned bifurcation, strategy dropped, no ban touched; cost bracketed 34–370 legs. B9
+struck (not just unscheduled) as superseded by the DM's 341-gated §3 build. Leg's own consistency
+checker broke and passed vacuously (lesson-90 class) — caught and fixed with an assert, banked in
+the journal. Reported to the DM; awaiting slot-A refill ruling.
+
+**Cycle 9c/9d (DM), absorbed:** leg 339's landing (see below) was adjudicated — over-read closure
+#6 executed in full, width stands, grounds corrected, the DM applied its own two DIRECTION.md
+site corrections. Slot B refilled with leg 342 (SEED). The user's separate ranking-confirmation
+message on leg 341 was answered: 341 was already live one rank ahead of the ask (dispatched into
+slot C at cycle 9b when it freed, not held in reserve behind 340) — the CEILING-GATE PRIORITY
+block cited above is the DM's response, making that explicit as standing text.
+
+**THE USER'S CEILING-RAISING PROGRAMME (2026-08-11, directive addressed to the DM, relayed in
+full): "nothing below displaces leg 334 or leg 339."** Problem: leg 334 (DSSP) was the only
+Clay-directed route in the queue and its ceiling is Tier 2 by design — a route that cannot
+produce a proof cannot produce a Clay solve. This programme adds "the missing half": leg 341
+(ALGW) scopes whether leg 260's algebraically-weighted space is the "namable fourth space" the
+stage-V ban's own lift condition asks for; if it escapes the three-realization death AND the CAP
+apparatus has a coherent formulation there, the evidence packet goes to the user for a ruling (the
+leg itself lifts nothing). A deferred §3 "build" (CAP machinery in that space) is gated entirely
+on 341's report and the user's ruling — if it lands, route 4's ceiling moves Tier 2 → Tier 3,
+**the sole justification for the programme**. Leg 342 (SEED) scopes route 4's seeding problem
+independently. §5 ownership is ruled: leg 341 owns the Gaussian-weight-vs-algebraic-tail question;
+leg 334's clause (a) narrows to consuming 341's answer, not re-deriving it (relayed to the
+in-flight leg 334 by the orchestrator on the DM's cycle-9 ruling).
 
 **Cycle 8e ruling (`476e794`): the C4 pre-registration defect flagged by leg 329 is RULED — the
 literal pre-registration governs, 329's NO stands.** Three grounds: (a) the 5.19e-18/1.42e-18
