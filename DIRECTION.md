@@ -36,7 +36,7 @@ prose as before.
 | A | 334 | DSSP | yes |
 | B | 339 | ORC6 | no |
 | C | 323 | CENV | yes |
-| D | 330 | PVLX | yes |
+| D | 340 | EGRB | yes |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -123,9 +123,18 @@ FT1 lesson); overriding a fired control in the expected direction is the exact
 failure §7d names. The bound reading is preserved as drafted leg 340 EGRB with
 its own pre-committed gate (bound must survive the truncation ladder), rank 1
 of reserve per the cycle-6 escalation-#3 precedent. Escalation #3 stays parked.
-B ← 339 ORC6. Live roster: A/334/DSSP (CRITICAL PATH), B/339/ORC6, C/323/CENV,
-D/330/PVLX. Floor 3/4 (334, 323, 330) — above §3b's 2-of-4. This cycle's
-verifier
+B ← 339 ORC6. Cycle 8f: D/330 landed YES-(ii) at 5496bbc — Pineau-Vicol does
+NOT reach the screened object; the deciding clause is the λ window alone
+(λ̲ ≤ e^{1/2} by the paper's own WLOG, chosen "sufficiently close to 1",
+against the object's λ significantly larger than 1; four clauses MET, one
+silent, exactly one FAILED). **313's packet is now COMPLETE — its only theorem
+shown silent (326) and the located adjacent theorem adjudicated out (330) —
+and is released to the user via the orchestrator's NEEDS-YOU refresh.**
+GAP-330-A/B/C corrected beside the dispatched spec (marker at the cycle-7
+entry; gate text unedited per the 319 ruling). D ← 340 EGRB (reserve rank 1,
+the cycle-8e draft). Live roster: A/334/DSSP (CRITICAL PATH), B/339/ORC6,
+C/323/CENV, D/340/EGRB. Floor 3/4 (334, 323, 340) — above §3b's 2-of-4. This
+cycle's verifier
 findings became four drafted correction legs: 335 S1GR (the pre-existing
 spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
 shift, two flipped gate predicates, present with and without 221's repair), 336
@@ -138,14 +147,14 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 21 undispatched legs (340, 335, 336, 337, 338, 307, 328, 324,
+**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328, 324,
 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 15
-(340, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
+(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
 rank order as listed, §3a pre-authorised except where a spec says otherwise).
 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
 landed). Next fresh leg number: **341**. Full specs and this cycle's rulings are
-in the cycle-8 through 8e entries at the end of this file.)
+in the cycle-8 through 8f entries at the end of this file.)
 
 ---
 
@@ -15262,6 +15271,20 @@ bans' subject matter — DM pre-authorises dispatch AS WRITTEN; it reads and
 reports, lifts nothing.)
 ```
 
+**[CORRECTED 2026-08-11, cycle 8f, on leg 330's landed record (5496bbc) — the
+spec above is dispatched text and stands unedited; three framing defects in it
+are corrected HERE, beside it: (GAP-330-A) the descriptive title carried in the
+thesis is not the paper's actual title, which is "On rotated backwards
+self-similar solutions of the incompressible 3D Navier-Stokes equations" (leg
+326's landed log had it right); (GAP-330-B) the thesis points at the RDSS
+clause, but the screened object is DSS (α=0), so the theorem that bears is the
+DSS one — RDSS's λ-windows are strict subsets of the DSS one's, verdict
+unchanged either way; (GAP-330-C) the gate's disjunct "the λ regime and/or Type
+I clause excludes it" carries a FALSE limb — the object SATISFIES Pineau-Vicol's
+Type I bound on their own stated equivalence, and the λ clause decides ALONE.
+Gate text is immutable once dispatched (the 319 ruling), so this marker is the
+correction vehicle, same as the cycle-6 item-3 pointer.]**
+
 ### Reserve queue, rebuilt against what actually landed
 
 Rank order for the next vacancies (specs live where noted; every entry carries its
@@ -16303,3 +16326,89 @@ margin cannot support — the opposite of movement; 340 asks the question with a
 instrument that could answer either way; escalation #3, the 313/320 packets,
 and every parked user item remain exactly where they were. No L1-L4 link moved;
 Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 8f) — 330 YES-(ii) ABSORBED (PINEAU-VICOL DOES
+NOT REACH THE OBJECT; THE λ CLAUSE DECIDES ALONE); 313's PACKET COMPLETE AND
+RELEASED TO THE USER; GAP-330-A/B/C CORRECTED AT THE DM's OWN SITE; D ← 340 EGRB
+
+Written from the same detached lineage, resynced to origin/main = 5496bbc.
+
+### 330 PVLX gate YES-(ii), absorbed at full strength
+
+The theorem does not reach the screened object, and the record is exemplary:
+deciding clause quoted verbatim (λ̲ = λ̲(C_U,0) > 1 with rigidity only for
+1 < λ < λ̲; the paper's own WLOG caps λ̲ ≤ e^{1/2} = 1.6487…, its proof needs
+(1+α²)S < 2 log λ̲ ≪ 1, and λ̲ is finally chosen "sufficiently close to 1"),
+six hypothesis clauses checked with four MET, one silent, exactly one FAILED —
+and the one corner where the paper genuinely touches large λ recorded honestly
+(an RSS sub-locus reachable only above λ ≥ 10^21935.3 under leg 262's most
+favourable constants — indicative, not certified) rather than suppressed. Two
+independent reinforcements banked (the DSS theorem restates Chae-Wolf, already
+screened via leg 253; the weak-L³ bound carried with both its open conditions
+attached). Instrument notes endorsed as banked: MF1 is PER-QUERY, not a general
+rule (hyphenation partitions one index and not another — both measured); the
+export API is INTERMITTENT, not dead (200 today where 326 saw 6/6 failures).
+Territory exactly three files; 313's branch and plan_of_record.py untouched.
+Endorsed without amendment.
+
+### Ruling — 313's packet: COMPLETE, released to the user
+
+This is what cycles 8c's "not in dribbles" ruling was waiting for. The packet
+now reads, in full: (1) its only theorem is shown SILENT (326: Chae-Tsai is
+Euler-only, deciding reach statement quoted); (2) the located adjacent theorem
+is adjudicated OUT (330: the λ window decides alone, deciding clause quoted);
+(3) what remains is leg 260's dissolved argument and the empty seed set 313
+itself called an availability fact; (4) the DSS ban-wording question travels
+unchanged, no DM recommendation attached — the DM does not rule on ban scope.
+**Orchestrator: fold exactly that four-point state into the NEEDS-YOU refresh
+and mark the packet ready, as you proposed — endorsed.** Nothing is lifted by
+any of it; the ruling is the user's alone.
+
+### GAP-330-A/B/C — corrected at the DM's own site, the split stated
+
+All three defects sit in this file's cycle-7 spec for 330, which is dispatched
+text. Per the 319 immutability ruling the spec body stays byte-unedited; a
+correction marker now sits directly beside it (cycle-7 entry) carrying all
+three: the paper's ACTUAL title ("On rotated backwards self-similar solutions
+of the incompressible 3D Navier-Stokes equations"); the DSS-not-RDSS
+attribution (the object is DSS, α=0; RDSS λ-windows are strict subsets, verdict
+unchanged either way); and the false disjunct struck in place ("the Type I
+clause excludes it" is FALSE — the object satisfies PV's Type I bound on their
+own equivalence; the λ clause decides ALONE). A drafting lesson is taken with
+it, recorded for future specs: **a spec's gate should not assert candidate
+mechanisms disjunctively when the leg exists to find out which one operates —
+name the question, not a menu with a wrong entry.** Leg 330 caught the wrong
+entry because its gate demanded the deciding clause be quoted either way; that
+gate shape is the reusable part.
+
+### Refill — slot D ← 340 EGRB (reserve rank 1, executed)
+
+Spec at cycle 8e, unchanged: the truncation-controlled Rayleigh-bound question,
+yes-branch inheriting the report-and-escalate path for parked escalation #3,
+no-branch classifying TRUNCATION-LIMITED vs KNIFE-EDGE. Math, floor-eligible;
+fig89 stands conditionally reserved. Territory (p2_route_egrb_v1.*, its own
+novelty/journal; reads 329's JSON, p2_route_wes_v1_space.json, 312's module)
+is disjoint from A/B/C — checked directly. **Floor 3/4 (334, 323, 340) — above
+§3b's 2-of-4.** FLOOR-TABLE synced (D 330→340); no FIG-TABLE change for 330
+(no figure was allocated and none shipped).
+
+### Ranking and reserve
+
+Rank order for the next vacancies, unchanged in relative order: 1. **335 S1GR**
+2. **336 C305** 3. **337 C318** 4. **338 LCB1** 5. **307 TSCX** 6. **328 ORC5**
+7. **324 P2SPF** 8. **322 F70** 9. **327 P2T1E** 10. **287 EPA** 11. **229
+PNRV** 12. **293 JFA** 13. **298 CORRX** 14. **299 TESTA**. Then **310 EPAP**
+(on 287+298), **325 MTB1** (USER-GATED), **231-234** (blocked on repairs
+217/219/225). SUSPENDED: 306, 308.
+
+**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **14**. Next fresh leg number: **341.**
+
+Nothing in this update lifts a ban. 330's YES-(ii) leaves the packet's balance
+exactly where 326 left it — a packet with no live theorem either way — and the
+DSS ban-wording ruling stays the user's; 340 asks a question whose no-branch is
+as bankable as its yes. Adjudicating a theorem OUT of reach is map work, not
+movement; no L1-L4 link moved; Clay stays ~0.05%.
