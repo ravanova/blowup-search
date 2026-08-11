@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 335 | S1GR | no |
-| B | 347 | DSSC | yes |
+| B | 348 | POCP | yes |
 | C | 343 | DSSP-B1 | yes |
 | D | 337 | C318 | no |
 <!-- FLOOR-TABLE-END -->
@@ -276,14 +276,28 @@ and a certificate later closes somewhere. Cycle-10 refills (343 C, 347 B,
 337 D) proceed unchanged — B1 is apparatus work under the landed plan, not
 in conflict.
 
-**Reserve queue: 21 undispatched legs (348, 349, 338, 307, 328, 345, 346,
+Cycle 10c: B/347 landed YES at fb6bd4d — 0/12 of arXiv:2509.14185's objects
+pass 313's three-way screen (named clauses: wrong-equation +
+stationary-not-time-periodic, Boussinesq additionally axisymmetric; the 12th
+uncertified by the paper's own authors, flagged no-verdict); ZERO
+cheap-entrance-shaped, no adverse find; 342's ≈35-leg cost UNMOVED but the
+risk record sharpened with object-level evidence — a
+convergence-degrades-with-instability-order gradient (O(1e-13)→O(1e-7)→
+unresolved) including one demonstrated non-convergence inside the module a
+DSS retarget would inherit. **The cycle-10 user decision packet is COMPLETE
+and RELEASED** (ceiling answer S1-DIES + seed option at ≈35 legs on the
+344-corrected base + 347's 0/12 screen and risk gradient + route-4-continues
+-Tier-2 under standing authority). B ← 348 POCP (reserve rank 1 — the
+certification question on the object's actual shape). Floor 2/4 (348, 343).
+
+**Reserve queue: 20 undispatched legs (349, 338, 307, 328, 345, 346,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234),
 plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
-dispatchable: 13 (348, 338, 307, 328, 346, 324, 322, 327, 287, 229, 293,
+dispatchable: 12 (338, 307, 328, 346, 324, 322, 327, 287, 229, 293,
 298, 299 — rank order as listed, §3a pre-authorised except where a spec says
 otherwise). 349 on 348; 345 on 328; 310 on 287+298; 325 USER-GATED; 231-234
 blocked on repairs 217/219/225 (221's landed). Next fresh leg number:
-**350**. Full specs and this cycle's rulings are in the cycle-8 through 10b
+**350**. Full specs and this cycle's rulings are in the cycle-8 through 10c
 entries at the end of this file.)
 
 ---
@@ -17579,3 +17593,70 @@ four slots, floor, lesson 91, no outreach, all unchanged. The honest frame
 is carried verbatim: §1 is not a repair of S1 — it is a different question,
 cheap to ask, about the object's actual shape. No L1-L4 link moved; Clay
 stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10c) — 347 YES ABSORBED (0/12, NO ADVERSE
+FIND, RISK RECORD SHARPENED); THE CYCLE-10 USER DECISION PACKET IS COMPLETE
+AND RELEASED; B ← 348 POCP
+
+Written from the same detached lineage, resynced to origin/main = 67b108a.
+
+### 347 DSSC gate YES, absorbed at full strength
+
+The screen is clean and definite: 0 of 12 objects (3 CCF, 4 IPM, 5
+Boussinesq) pass leg 313's three-way screen, 11 with named failing clauses
+(wrong equation + stationary-not-time-periodic; the Boussinesq five
+additionally axisymmetric), the 12th correctly carried as
+incomplete/no-verdict because the paper's own authors do not certify it.
+Zero objects are cheap-entrance-shaped — no Kwon-Tsai-style adverse find.
+Technique level: 342's ≈35-leg creation-path estimate is UNMOVED (0 in-repo
+legs of inheritance, capabilities.py reconfirmed at 49 modules), and the
+risk record gains what it lacked — object-level evidence of a
+convergence-degrades-with-instability-order gradient (O(1e-13) → O(1e-7) →
+unresolved), including one demonstrated non-convergence case inside the very
+module a DSS retarget would inherit. Endorsed without amendment.
+
+### Ruling — the cycle-10 user decision packet: COMPLETE, released
+
+347 was the packet's final scheduled input. The packet now ships as ruled at
+cycle 10, with 347's two facts slotted where they belong: (1) the ceiling
+answer — S1-DIES, Tier-2 stands, stage-V ban unmoved; (2) the seed decision
+— ≈35 legs on the 2509.14185 Gauss-Newton/envelope base (344's corrections
+attached), WITH the honest risk line 347 added: the base's own convergence
+degrades with instability order and has a demonstrated non-convergence case,
+and none of its existing objects shortcut the seed problem (0/12); (3) route
+4 continues as the Tier-2 programme under standing authority, B1 in flight,
+countermandable. **Orchestrator: mark the packet complete in the NEEDS-YOU
+surface; no further scheduled inputs exist** — 348's answer, when it lands,
+is a NEW decision item (the certification-route question), not a late edit
+to this one.
+
+### Refill — slot B ← 348 POCP (reserve rank 1, executed)
+
+Spec at cycle 10b, unchanged: does periodic-orbit CAP for dissipative PDEs
+reach route 4's object — definite classification in 314's shape, hard
+novelty pass first, THE BUILD IS THE NEXT RULING. Heavy; math+lit,
+floor-eligible. Territory disjoint from A/C/D (checked: its own three files;
+reads 315/260/341's banked records). **Floor 2/4 (348, 343) — §3b's minimum,
+third cycle at minimum, noted; the corrections queue is what it is, and the
+two eligible slots are the two live research questions.** FLOOR-TABLE
+synced (B 347→348).
+
+### Standing state
+
+A/335 S1GR mid-diagnosis (background diagnostic, no stall called); C/343
+DSSP-B1 (critical path) and D/337 C318 in flight. 349 GAFV fires on 348's
+report. With the user: the cycle-10 packet (complete), the C4/escalation-#3
+identity question, the 313 packet + ban-wording, the 320 packet. Reserve
+rank 1 for the next vacancy: 338 LCB1.
+
+**Reserve queue: 20 undispatched legs (349, 338, 307, 328, 345, 346, 324,
+322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **12**. Next fresh leg number: **350.**
+
+Nothing in this update lifts a ban. 347's 0/12 is a screen doing its job on
+a new candidate source; the packet ships with its risks stated at measured
+width; 348 asks whether a certification route exists and creates nothing.
+No L1-L4 link moved; Clay stays ~0.05%.
