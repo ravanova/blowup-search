@@ -239,7 +239,41 @@ is the one most free to rot. The check is now executable, which is the only form
 check this repository trusts (banked lesson 68: *a check that is not executable decays
 at the rate of memory*).
 
-## 7. Negative controls that could have fired
+## 7. S6 — reference integrity of the prose itself
+
+Row prose cites repository paths ("dedicated: `test_gclm_dedicated.py`", "port
+certification 11/25", `phase1_spike.json`). Every such token was extracted and resolved
+against the tree, trying the bare path and then the roots `solver/`, `writeup/data/`,
+`experiments/`, `ga/`, `reports/`, `docs/`. **19 cited paths, 0 dangling.**
+
+The first pass of this axis reported **5 dangling paths, all of them false**, and the
+diagnosis belongs in the record because the control fired on the checker rather than on
+the index: (a) the extractor's whitespace reflow deleted newlines outright rather than
+collapsing them to a space, welding `in` onto a following filename to produce
+`intest_interval_stress.py`; (b) filenames written conversationally without a directory
+were not resolved against the candidate roots. Both were bugs in the audit. After the
+fix the index is clean on this axis — which is the correct outcome to report, and the
+reason a 5-defect first draft was not banked.
+
+## 8. S7 — how much of the index the merge gate actually protects
+
+`scripts/merge_gate.sh` maps a touched `solver/<name>.py` to `test_<name>.py` **only if
+that file exists**; a module whose test is named anything else is silently ungated by the
+name-mapping path. Measured at HEAD: **8 of 48 modules are ungated this way, against leg
+71's 7 of 42.** The absolute count grew by one (the new entry is
+`solver/certificate_guards.py`, gated in fact by `test_nk_bounds_adversarial.py`), but the
+**rate is flat at 17%** across ~220 legs. This is a design consequence, not drift: the
+gate is a filename convention, and cross-named tests are a legitimate pattern the
+convention cannot see. It is worth knowing the number rather than assuming full coverage.
+
+## 9. S8 — vacuity: green because nothing ran
+
+A self-running script with no executable body exits 0. Every cited test was classified by
+how it invokes its checks: **44 run under a `__main__` block, 3 at module level, 0
+VACUOUS.** No cited test in the index is green for the trivial reason. This axis had a
+live way to fire and did not.
+
+## 10. Negative controls that could have fired
 
 1. **The `(N checks)` arithmetic claims.** Three `validated` fields make a literally
    falsifiable claim about a file's contents: `test_boussinesq_dedicated.py (17 checks)`,
@@ -257,7 +291,7 @@ at the rate of memory*).
 3. **The drift detector after the edit** — `test_capabilities.py` re-run post-correction:
    five tests pass, 48 distinct object keys, 1 superseded module correctly labelled.
 
-## 8. Scope and ceiling
+## 11. Scope and ceiling
 
 - This is an audit of an **index**, not of any mathematical object. No constant is
   banked, no bound is computed, no link of the L1→L4 chain moves. **Clay odds unmoved at

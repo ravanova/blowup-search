@@ -31,10 +31,10 @@ with the module pointing at it.
 Someone noticed this ~220 legs ago and audited the file by hand. This leg is the second
 such audit.
 
-## Five questions, five counts
+## Eight questions, eight counts
 
 Rather than ask "is the file fine?" — a question that can only be answered yes by
-someone who wants the answer to be yes — the audit asks five separate, countable
+someone who wants the answer to be yes — the audit asks eight separate, countable
 questions.
 
 **1. Is every module in the index?** Both directions: modules on disk with no row, and
@@ -74,7 +74,22 @@ establish. The convention tightened; the 12 are sediment.
 
 **5. Does each cited test actually load the module citing it?**
 
-This is the new one, and it's where the audit earned its keep.
+This is where the audit earned its keep — see below.
+
+**6. Do the paths written into the row prose still exist?** 19 cited paths, zero
+dangling. Worth noting that the first pass of this check reported five broken paths and
+all five were bugs in *the checker*, not in the index: a whitespace bug that welded two
+words together, and filenames written without a directory. The control fired on me.
+
+**7. How much of the index does the automatic merge gate actually protect?** It finds a
+module's test by filename convention, so a test named after something else is invisible
+to it. **8 of 48 modules are ungated that way — against 7 of 42 last time.** The count
+grew by one; the rate is flat at 17% across 220 legs. Not rot, just the price of a
+filename convention. Better to know the number than to assume full coverage.
+
+**8. Is anything green because nothing ran?** A script with no executable body exits
+successfully. **44 tests run their checks under a main block, 3 at module level, zero
+vacuous.** No free passes.
 
 ## The pointer that couldn't fail
 
