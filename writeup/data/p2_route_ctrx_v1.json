@@ -1,0 +1,185 @@
+{
+  "leg": 326,
+  "route": "CTRX",
+  "date": "2026-08-11",
+  "kind": "external_full_text_read_plus_literature_corrections",
+  "runner": null,
+  "runner_note": "No runner and no figure: this leg's output is a full-text read of one external paper plus two banked corrections. Nothing here is computed; every field is either a verbatim quote from the pinned source, a live-measured search result, or a verdict derived from those.",
+  "novelty_log": "writeup/novelty/leg_326.md",
+  "novelty_log_landed_before_adjudication": "806d4bd",
+  "journal": "experiments/journal/leg_326.md",
+  "bans_touched": 0,
+  "bans_lifted": 0,
+  "plan_of_record_edited": false,
+  "l1_l4_link_moved": false,
+  "clay_odds_change": "none (~0.05%)",
+
+  "primary_source": {
+    "arxiv_id": "arXiv:1304.7414v1",
+    "version_note": "v1 is the only version; submission history shows [v1] and nothing else",
+    "date": "2013-04-28",
+    "authors": ["Dongho Chae", "Tai-Peng Tsai"],
+    "title": "On discretely self-similar solutions of the Euler equations",
+    "pages": 10,
+    "msc": ["76B03", "35Q31"],
+    "abs_url": "https://arxiv.org/abs/1304.7414",
+    "pdf_url": "https://arxiv.org/pdf/1304.7414v1",
+    "pdf_sha256": "113e1e17dff47f722643e548286bc5f60ba6a35b17f60c61a7f83b0a7ea07338",
+    "pdf_bytes": 172471,
+    "sha256_reverified_on_resume": true,
+    "sha256_matches_novelty_pass_pin": true,
+    "text_extraction": "pdftotext -layout",
+    "read_at": "full text, all four theorems and both vorticity-section proofs"
+  },
+
+  "screened_object": {
+    "label": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+    "source": "leg/313-sdss-v1 @ 434b49a, writeup/4_p2_lottery/TECHNICAL_P2_ROUTE_SDSS_V1.md (read-only)",
+    "origin_leg": 251,
+    "quote": "The object under seeding is leg 251's NS3D-DSS-NONAXI-LAMBDA-LARGE: 3D incompressible NS, non-axisymmetric backward DSS, lambda significantly larger than 1, profile outside L^inf_t L^3 -- as a search target, a periodic orbit of the dynamically rescaled flow with period T = 2 log lambda.",
+    "clauses": {
+      "alpha_equation": "Navier-Stokes",
+      "beta_symmetry": "non-axisymmetric",
+      "gamma_lambda": "significantly larger than 1",
+      "delta_integrability": "profile outside L^inf_t L^3"
+    }
+  },
+
+  "theorem_read": {
+    "label": "Theorem 2.1 (the one leg 313 carried at summary level)",
+    "hypothesis_verbatim": "Let V(y,s) in C^2_x C^1_t (R^{3+1}) be a time periodic solution of (1.6) with period S_0 > 0 that has bounded first derivatives and satisfies (2.1) lim_{|y|->infty} V(y,s) = 0, for all s in [0,S_0), and for some r > 0, (2.2) Omega := curl V in intersection_{0<q<r} L^q(R^3 x [0,S_0]). Then V = 0 on R^{3+1}.",
+    "companion_theorems": ["Theorem 2.2", "Theorem 3.1", "Theorem 3.2"],
+    "all_theorems_hypothesise": "(1.6)",
+    "equation_1_6_verbatim": "d_s V + (alpha/(alpha+1)) V + (1/(alpha+1)) (y . grad) V + (V . grad) V = -grad P, div V = 0",
+    "equation_1_6_is": "the self-similar transform of (E), the EULER equations; there is no Laplacian term",
+    "equation_1_10_verbatim": "dV/ds - Laplacian V - a V - a y.grad V + (V.grad)V = -grad P, div V = 0",
+    "equation_1_10_is": "the Navier-Stokes rescaled (time-dependent Leray) equation, displayed separately in subsection 1.1 'Related results for Navier-Stokes equations'; NO theorem in the paper is stated for it",
+    "authors_own_reach_remark_verbatim": "Remark after the proof: The above proof works for more general system (2.9) V_s + a V + b (y . grad) V + (V . grad) V = -grad P, div V = 0, where a, b are arbitrary real constants with b != 0.",
+    "reach_remark_note": "The generalisation is over the two CONSTANTS a and b. -Laplacian V is not a member of that family for any choice of a, b. This is the load-bearing clause: the authors state exactly how far their proof carries, and it carries to a two-parameter family of INVISCID rescaled equations."
+  },
+
+  "paper_own_status_report": {
+    "backward_dss_ns_verbatim": "The existence of backward DSS solutions has not been addressed in literature, except that if V in L^inf(R, L^3(R^3)), which is equivalent to v in L^inf((-infty,0), L^3(R^3)), it must be zero by the result of [12]. Thus one is concerned, e.g., if V only has the bound (1.11) |V(y,s)| <= C_*/(1+|y|), for all (y,s) in R^{3+1}, for some large constant C_*.",
+    "lambda_remark_verbatim": "In view of the forward case, one may hope that the case with the DSS-factor lambda sufficiently close to 1 might be easier to exclude.",
+    "implication_1": "The paper itself declares the backward-DSS-NS question OPEN, in 2013, in its own words.",
+    "implication_2": "The only backward-DSS-NS exclusion it credits is V in L^inf(R,L^3) (Sverak [12]) -- and the screened object's clause (delta) specifies the profile OUTSIDE L^inf_t L^3. The two definitions do not overlap.",
+    "implication_3": "The screened object's clause (gamma), lambda significantly larger than 1, is on the side the authors flag as the HARDER one -- and that is within Euler, before viscosity is reached."
+  },
+
+  "gate": {
+    "question": "Does the full text yield a definite answer -- (i) the hypothesis covers the screened object (the rigidity theorem BITES), or (ii) it does not reach it (the theorem is silent; the packet's balance is unchanged)?",
+    "answer": "YES",
+    "branch": "(ii)",
+    "verdict": "CHAE-TSAI DOES NOT BITE. The theorem is SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+    "ambiguous": false,
+    "clause_ledger": {
+      "alpha_equation": {
+        "verdict": "FAILS_HYPOTHESIS",
+        "decisive": true,
+        "reason": "Every theorem hypothesises 'a time periodic solution of (1.6)', and (1.6) is the rescaled EULER system. The screened object solves Navier-Stokes. The authors' own reach remark extends the proof to arbitrary real constants a, b with b != 0, and NOT to the addition of -Laplacian V."
+      },
+      "decay_hypothesis": {
+        "verdict": "FAILS_HYPOTHESIS_EVEN_COUNTERFACTUALLY",
+        "decisive": false,
+        "reason": "(2.2) requires Omega in L^q(R^3 x [0,S_0]) for EVERY q in (0,r). Small q makes L^q integrability at infinity a severe decay demand (|Omega| must decay faster than |y|^{-3/q}, which blows up as q -> 0). The screened object carries only a Type-I-scale bound of the shape (1.11), |V| <= C_*/(1+|y|), which the paper introduces as the case NOT covered. This CONFIRMS the 'merely a decaying subclass' horn leg 313 named and refused to guess."
+      },
+      "gamma_lambda": {
+        "verdict": "ON_THE_HARDER_SIDE_OF_THE_AUTHORS_OWN_REMARK",
+        "decisive": false,
+        "reason": "Screened object: lambda significantly larger than 1. Paper: lambda sufficiently close to 1 'might be easier to exclude'."
+      },
+      "beta_symmetry": {
+        "verdict": "NEVER_REACHED",
+        "decisive": false,
+        "reason": "The hypothesis fails before symmetry becomes relevant. Recorded only to close the ledger of four clauses."
+      }
+    },
+    "why_not_the_ambiguous_branch": "The paper names its equation in its title, its abstract, every theorem statement, and its own remark on how far the proof generalises. Nothing is ambiguous. The unknown leg 313 recorded honestly is now KNOWN."
+  },
+
+  "effect_on_leg_313_packet": {
+    "packet_carried": "three obstructions at equal strength",
+    "the_third": "Chae-Tsai, flagged by leg 313 as 'the only one that is a theorem rather than an availability fact or a cost', reach recorded UNKNOWN, NOT GUESSED",
+    "reach_now_measured": "nil",
+    "what_remains": ["leg 260's dissolved argument", "the empty-seed-set finding, which leg 313 itself recorded as 'an availability fact, not an impossibility'"],
+    "statement": "The packet loses its only theorem. This is a fact about the packet, NOT an argument about any ban.",
+    "this_leg_lifts_nothing": true,
+    "ruling_is_the_users": true,
+    "likely_decides_ruling": "It removes an unknown that sat underneath the ruling; whether a packet whose only theorem is now shown silent still supports the ban's current wording is the USER's call and is explicitly not this leg's to make.",
+    "immediate_flag_required": false,
+    "immediate_flag_condition": "the dispatch requires an immediate flag only on branch (i); the answer is (ii)"
+  },
+
+  "routed_not_adjudicated": {
+    "item": "arXiv:2607.09619 (Pineau-Vicol), 'On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations'",
+    "why_it_matters": "It is the one live candidate for a theorem that could occupy the slot Chae-Tsai has vacated: genuinely Navier-Stokes, genuinely backward SS/DSS, genuinely a Liouville theorem, under a Type I bound.",
+    "the_qualification": "Its RDSS clause assumes the scaling factor lambda is sufficiently close to 1, while the screened object has lambda significantly larger than 1.",
+    "already_read_here": "leg 262 (ba0f9fe, 2026-08-07) read v1 at full LaTeX source, 1869 lines, md5 62c6bdae8e08cfd3ef4cdf17263ffcca",
+    "owner": "leg 330 (PVLX) -- NOT this leg's gate",
+    "addressee": "DM"
+  },
+
+  "GAP_326_A": {
+    "title": "The controlled zero IS a measurement -- banked as an absence, at its measured width",
+    "ordered_by": "DM cycle-8 ruling",
+    "executed": "first, before the resume continued",
+    "what_the_original_entry_said": "that the single-hyphen four-term zero 'is a term-conjunction artefact, not an absence', with nothing banked about the literature from it",
+    "why_it_was_wrong": "It inverts the standing MF-family control rule. That the two-phrase compound returns 5 establishes that ANDed quoted phrases WORK on this endpoint -- a control PASSING, which makes a zero in the same query shape a measurement. The entry used a passing control as grounds to discard the measurement the control had just licensed, and never ran the one control that decides it: the query differing by exactly one token.",
+    "controls_reverified_live": true,
+    "endpoint": "arXiv web search, https",
+    "measurements": [
+      {"id": "C1", "role": "positive control (carried-over shape, re-measured)", "query": "\"discretely self-similar\" \"backward\"", "results": 5, "ids": ["2607.09619", "2003.06717", "1610.05680", "1602.08059", "1306.0305"], "note": "reproduces the prior pass's 5 exactly, same five identifiers, independent run"},
+      {"id": "C2", "role": "DECISIVE one-token control -- NEW to this correction", "query": "\"discretely self-similar\" \"Navier-Stokes\" backward", "results": 4, "ids": ["2607.09619", "2003.06717", "1610.05680", "1306.0305"], "note": "differs from M by the single bare token 'nonexistence'; already contains the ANDed quoted phrases AND the hyphenated \"Navier-Stokes\", so neither conjunction nor hyphen empties the set"},
+      {"id": "M", "role": "the measurement", "query": "\"discretely self-similar\" \"Navier-Stokes\" nonexistence backward", "results": 0, "arxiv_verbatim": "Sorry, your query for all: \"discretely self-similar\" \"Navier-Stokes\" nonexistence backward produced no results."},
+      {"id": "S1", "role": "synonym lane -- answers the vocabulary-mismatch objection by measurement", "query": "\"discretely self-similar\" \"Navier-Stokes\" backward Liouville", "results": 1, "ids": ["2607.09619"]},
+      {"id": "S2", "role": "synonym lane", "query": "\"discretely self-similar\" \"Navier-Stokes\" backward rigidity", "results": 0, "arxiv_verbatim": "Sorry, your query for all: \"discretely self-similar\" \"Navier-Stokes\" backward rigidity produced no results."}
+    ],
+    "banked_absence": "Inside the 4-record control set C2, the ONLY record reachable by any of the three rigidity-vocabulary terms {nonexistence, Liouville, rigidity} is arXiv:2607.09619. nonexistence -> 0. rigidity -> 0. Liouville -> exactly that one paper. Measured 2026-08-11, bracketed below by C2 = 4 and C1 = 5.",
+    "banked_absence_plain_reading": "The arXiv-indexed backward-DSS Navier-Stokes rigidity literature reachable by these queries is ONE paper, and this repository already has it (leg 262 read it at full source 2026-08-07). The zero was not hiding a literature -- it was reporting how thin that literature is.",
+    "measured_width": {
+      "what_it_claims": "an absence from arXiv's indexed text under three NAMED vocabulary choices, on one endpoint, on one day",
+      "what_it_does_not_claim": "anything about the field -- a result could sit in a journal-only paper, under a fourth wording, or in a paper whose indexed text never places these four tokens together",
+      "load_bearing_anywhere": false,
+      "lanes_measured": ["nonexistence", "Liouville", "rigidity"],
+      "lanes_not_measured": ["triviality", "must vanish"],
+      "nothing_banked_about_unmeasured_lanes": true,
+      "gate_independence": "The gate was decided entirely by the primary source's own text; no argument in this leg or in leg 313's packet leans on this absence."
+    },
+    "not_re_banked": {
+      "export_api_429s_on_au_Chae_AND_au_Tsai": "still a REFUSAL TO MEASURE, unchanged; a 429 is not a zero, and that handling in the landed log was correct",
+      "chae_tsai_generic_author_false_negative": "still a BROKEN INSTRUMENT, unchanged; arXiv's 'Coauthored by both: none' is FALSE, and this session re-downloaded 1304.7414 and reproduced its pinned sha256 exactly"
+    },
+    "export_api_this_session": {
+      "verdict": "REFUSAL TO MEASURE -- entire battery void, nothing banked from it",
+      "battery_1": {"queries": 12, "spacing_s": 8, "http_200": 1, "the_only_200": "nonsense negative control all:\"zzqxwvblorptni fluid\", totalResults 0", "positive_control_all_electron": "read timeout -- DID NOT RETURN", "others": "429 / 503 / read timeout"},
+      "battery_2": {"spacing_s": 25, "retries_per_query": 6, "backoff_s": 30, "positive_control_all_electron_attempts": ["503", "429", "429", "503", "429", "503"], "positive_control_returned": false, "battery_aborted": true},
+      "rule_applied": "A battery whose positive control does not return is a refusal to measure in its entirety -- not even the negative control's 0 is banked, being uninterpretable without a live positive control beside it.",
+      "consequence": "GAP-326-A rests wholly on the WEB endpoint, whose positive controls C1 and C2 did return, non-empty, with enumerated identifiers, in the same session and the same query shape as M."
+    },
+    "correction_marker_placed": "writeup/novelty/leg_326.md, inline at the point of the wrong sentence, with the original sentence QUOTED IN PLACE and not deleted"
+  },
+
+  "GAP_326_B": {
+    "title": "'NEW to this repository' was an over-claim, and was already false when written",
+    "found_by": "the staleness re-check the amendment ordered",
+    "what_the_original_entry_said": "of arXiv:2607.09619v2 -- 'NEW to this repository -- leg 313's net did not have it'",
+    "why_it_was_wrong": "The second half is true; the first half is false. grep -rl '2607.09619' over main finds it in eight files predating the novelty pass.",
+    "files": ["experiments/journal/leg_262.md", "writeup/novelty/leg_262.md", "experiments/p2_route_pvrw_v1_read.py", "writeup/data/p2_route_pvrw_v1_read.json", "writeup/data/p2_route_gaf_v1_sweep.json", "writeup/data/p2_route_gaf_v1_raw.json", "writeup/novelty/verify_251.md", "experiments/JOURNAL.md"],
+    "prior_full_text_read": {"leg": 262, "commit": "ba0f9fe", "date": "2026-08-07", "version": "v1", "source_lines": 1869, "md5": "62c6bdae8e08cfd3ef4cdf17263ffcca", "days_before_the_novelty_pass": 4},
+    "root_cause": "the pass ran the in-repo grep for 1304.7414 and did not run the equivalent grep for this identifier",
+    "corrected_reading": "arXiv:2607.09619 is NOT new to this repository. What is genuinely new at 806d4bd is only (a) that it is ABSENT FROM LEG 313'S PACKET -- true, and the operative point -- and (b) the v2 revision and its sha256; leg 262 read v1.",
+    "net_effect": "STRENGTHENS the routing note: leg 262 already established from PV's own text that a nontrivial rotated-SS profile at alpha != 0 is NECESSARILY NON-AXISYMMETRIC and that the class necessarily carries INFINITE KINETIC ENERGY -- both bearing directly on the screened object, neither derived by this leg.",
+    "correction_marker_placed": "writeup/novelty/leg_326.md, inline, original clause quoted in place"
+  },
+
+  "main_moved_since_novelty_pass": {
+    "from": "806d4bd",
+    "to": "bd438de",
+    "landed_since": ["leg 333", "leg 332", "DM cycle 8"],
+    "material_change_to_this_leg": "none -- the only defect found by the re-check (GAP-326-B) was already false when written, not new staleness"
+  },
+
+  "territory_respected": ["writeup/data/p2_route_ctrx_v1.json", "writeup/novelty/leg_326.md", "experiments/journal/leg_326.md"],
+  "read_only_branch_consulted": "leg/313-sdss-v1 @ 434b49a (not merged, not edited)",
+  "outreach": "none"
+}
