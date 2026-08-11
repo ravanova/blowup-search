@@ -1,0 +1,471 @@
+{
+  "leg": 304,
+  "route": "CADX",
+  "title": "Does Cadiot's construction cover a zero diagonal?",
+  "paper": "arXiv:2505.03091v1 [math.AP] 6 May 2025, 30 pp.",
+  "url": "https://arxiv.org/abs/2505.03091",
+  "paper_title": "Matthieu Cadiot, Stability analysis for localized solutions in PDEs and nonlocal equations on R^m",
+  "e_print_sha256": "0f1bc6181ce0d4375df3a012846d851c366cfc768b73fbfa3e2f7b6631f8081d",
+  "how_obtained": "bash Papers/fetch.sh 2505.03091 -- egress probe HTTP 200, 1004 KB; read_at_source, at full text, second independent extraction (pdftotext -layout) plus two rendered page images (pages 6 and 24) for the two places extraction is unreliable.  Papers/ is gitignored on purpose.",
+  "read_depth": "read_at_source (NOT restated_by)",
+  "CADX0_novelty": {
+    "log": "writeup/novelty/leg_304.md",
+    "verdict": "PROCEED_AS_CONFIRMATION_PLUS_NARROWING",
+    "committed_before_construction": true,
+    "prior_art_inside_this_repository": {
+      "leg_57": "located the dominance-hypothesis observation in this paper's full text and put the current ban wording in place; explicitly did NOT answer the zero-diagonal question",
+      "leg_62": "Route-CP: read the same paper at full text under a DIFFERENT pre-committed gate -- leg 58's off-diagonal / non-decaying tail inverse hypothesis.  Overlap with this leg is exactly one located clause (A1_LMIN).  Its symbol code is REUSED here, not rebuilt."
+    },
+    "this_leg_claims_no_mathematical_novelty_of_its_own": true
+  },
+  "CADX1_located_clauses": {
+    "n_clauses": 12,
+    "n_decisive": 8,
+    "clauses": [
+      {
+        "clause": "A1_LMIN",
+        "where": "Assumption 1, page 6 (section 2.1)",
+        "quote": "Moreover, assume that there exists l_min > 0 such that |l(xi)| >= l_min for all xi in R^m and lim_{|xi|_2 -> +infinity} |l(xi)| = +infinity.",
+        "probe": "|l(\u03be)| \u2265 lmin for all \u03be \u2208 Rm and lim |l(\u03be)| = +\u221e.",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "This is THE line.  L is the linear part and it is a Fourier multiplier, so l IS the diagonal.  A zero or vanishing diagonal is the case l_min = 0, and Assumption 1 is the hypothesis that l_min > 0.  The exclusion is not a corollary, an estimate, or a convenience: it is stated as a hypothesis before anything is built."
+      },
+      {
+        "clause": "SPACE_H",
+        "where": "page 6, equation (9) and the sentence introducing it",
+        "quote": "As exposed in [21], Assumption 1 allows to define the Hilbert space H as H = {u in L^2, ||u||_H = ||Lu||_2 < infinity}. ... By construction L : H -> L^2 is an isometric isomorphism.",
+        "probe": "Assumption 1 allows to define the Hilbert space H as",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "The ambient space is BUILT from the non-vanishing of the diagonal, and the paper says so in as many words -- Assumption 1 'allows to define' H.  At a zero diagonal L : H -> L^2 is not an isometric isomorphism (its inverse is unbounded), so it is not that the estimates degrade: the space the whole argument runs in is gone."
+      },
+      {
+        "clause": "SPACE_XQ",
+        "where": "page 6, section 2.2, the definition of X_q",
+        "quote": "X_q = {U = (u_n) : (U,U)_{X_q} < infinity} where (U,V)_{X_q} = sum_n u_n v_n |l(n/2q)|^2.",
+        "probe": null,
+        "read_how": "read from the rendered page image (page 6), not from text extraction -- the summand is a displayed formula that pdftotext linearises unreliably",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "The Fourier-side space degenerates for the same reason: its norm is weighted by |l(n/2q)|^2, so a mode where the diagonal vanishes has zero norm and (.,.)_{X_q} is not an inner product.  Both sides of the L^2 <-> l^2 correspondence fail together."
+      },
+      {
+        "clause": "SIGMA_DELTA",
+        "where": "page 8, equation (14), with Lemma 2.2",
+        "quote": "sigma_delta = {lambda in C, |l(xi) - lambda| > delta for all xi in R^m}.",
+        "probe": "|l(\u03be) \u2212 \u03bb| > \u03b4 for all \u03be \u2208 Rm",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "The whole eigenvalue machinery lives in sigma_delta, and Lemma 2.2 identifies the complement as the essential spectrum, which is the range of l.  Put lambda = 0: the origin is inside the workable region if and only if |l(xi)| > delta for every xi, i.e. if and only if the diagonal is bounded away from zero.  A zero diagonal puts 0 IN the essential spectrum, which is the one part of the spectrum this framework computes rather than encloses."
+      },
+      {
+        "clause": "LEMMA_4_1_USES_IT",
+        "where": "page 11, Lemma 4.1 and its proof",
+        "quote": "Let delta > 0, let J be a closed Jordan domain in sigma_delta ... Then, because lambda in sigma_delta, we know that L - lambda I is invertible and therefore u + (L - lambda I)^{-1} DG(u~)u = 0.",
+        "probe": "we know that L \u2212 \u03bbI is invertible",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "The use site, in the proof rather than the hypothesis list.  Every eigenvalue enclosure in the paper is a Neumann/Fredholm argument around (L - lambda I)^{-1}.  At lambda = 0 that operator is L^{-1}, which exists boundedly exactly when the diagonal does not vanish."
+      },
+      {
+        "clause": "LEMMA_3_1_USES_IT",
+        "where": "page 9, Lemma 3.1's proof",
+        "quote": "Now, we obtain that (L + tI)^{-1} : l^2 -> l^2 is compact thanks to Assumption 1.",
+        "probe": "is compact thanks to Assumption 1",
+        "bears_on_the_zero_diagonal_question": "SUPPORTING",
+        "reading": "Assumption 1 is cited BY NAME inside section 3, the section the ban is about.  Compactness of the resolvent -- what makes the spectrum of DF(U_0) discrete at all -- is charged directly to it."
+      },
+      {
+        "clause": "GERSHGORIN_DOMINANCE",
+        "where": "page 9, section 3's opening paragraph",
+        "quote": "By construction D is supposed to be diagonally dominant, which hints to the Gershgorin theorem.",
+        "probe": "is supposed to be diagonally dominant",
+        "bears_on_the_zero_diagonal_question": "SUPPORTING",
+        "reading": "Leg 57's located line, re-verified here at second extraction.  It is the SECTION-3 half of the picture: the pseudo-diagonalised operator is assumed diagonally dominant.  On its own this is about dominance, not about vanishing -- which is exactly why leg 57 could not close the zero-diagonal question with it, and why A1_LMIN is the answer."
+      },
+      {
+        "clause": "TAIL_DIAGONAL_IS_THE_SYMBOL",
+        "where": "page 10, section 3, the displayed identity for n outside I^N",
+        "quote": "lambda_n = (pi_N (L + DG(U_0)) pi_N)_{n,n} = l(n~) + (DG(U_0))_{n,n}.",
+        "probe": "\u03bbn = (\u03c0N (L + DG(U0 ))\u03c0N )n,n = l(\u00f1) + (DG(U0 ))n,n .",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "This closes the identification for anyone who doubts that 'the diagonal' means 'the symbol'.  Outside the numerical truncation the Gershgorin CENTRES are literally l(n~) plus a decaying correction.  A zero diagonal is a Gershgorin disc centred at the origin, at arbitrarily high mode number, for a method whose whole content is that those centres separate."
+      },
+      {
+        "clause": "SYSTEMS_KAPPA",
+        "where": "page 26, section 5.3 (the only systems example)",
+        "quote": "kappa = sup_{xi in R^2} ||l(xi)^{-1}||_2",
+        "probe": "sup kl(\u03be)\u22121 k2",
+        "bears_on_the_zero_diagonal_question": "DECISIVE",
+        "reading": "The systems generalisation does not relax the hypothesis, it restates it in matrix form: every bound in section 5.3 carries kappa = sup ||l(xi)^{-1}||_2, which is +infinity the moment the matrix symbol is singular anywhere.  A system is also the only route by which an off-diagonal entry enters this framework at all, and there it is the bounded constant lambda_1 lambda_2 - 1 = 1/9 against diagonal entries growing like |2 pi xi|^2 (leg 62's CP3, confirmed)."
+      },
+      {
+        "clause": "ZERO_EIGENVALUE_IS_COVERED",
+        "where": "page 24, Lemma 5.4's proof (capillary-gravity Whitham)",
+        "quote": "we know that DF(u~) has at least a 1D kernel coming from the translation invariance of solutions. This implies that nu_2 = 0.",
+        "probe": "kernel coming from the",
+        "bears_on_the_zero_diagonal_question": "COUNTER-DIRECTION, AND IT MATTERS",
+        "reading": "The one clause that argues the other way, and it must be reported or the answer is dishonest.  Cadiot DOES enclose the eigenvalue zero -- the translation kernel, bracketed to [-0.0011, 0.0011] and then pinned to exactly 0.  So 'zero is a problem for this framework' is FALSE as stated about eigenvalues, and TRUE as stated about the diagonal.  The ban's question is about the diagonal."
+      },
+      {
+        "clause": "FINITE_GAP_FAILURE",
+        "where": "page 24, Remark 5.2",
+        "quote": "Numerically, we observe that DF(u~) possesses an eigenvalue around 0.19, which we were not able to enclose. ... our estimations lead to bounds Z_{u,i} in Lemma 4.1 which are too big to obtain non-intersecting Gershgorin disks in Theorem 4.3.",
+        "probe": "which we were not able to enclose",
+        "bears_on_the_zero_diagonal_question": "STRENGTHENING",
+        "reading": "The exclusion is not a knife edge at exactly zero.  With the essential spectrum starting at 0.2, the author encloses eigenvalues out to 0.16 (gap 0.04) and reports failing at 0.19 (gap 0.01), because the constants Z_{u,i} blow up as the eigenvector delocalises near the essential spectrum.  So the method degrades at a FINITE distance from a vanishing diagonal, which is a stronger statement than the hypothesis alone gives -- and it is the author's own."
+      },
+      {
+        "clause": "SH_MU_POSITIVE",
+        "where": "page 19, section 5.1, equation (34) and the symbol below it",
+        "quote": "where mu > 0 ... L = -(I + Delta)^2 - mu I and l(xi) = -(1 - |2 pi xi|_2^2)^2 - mu",
+        "probe": "where \u00b5 > 0",
+        "bears_on_the_zero_diagonal_question": "DECISIVE, AND QUANTITATIVE",
+        "reading": "The paper's leading example carries the hypothesis as an explicit parameter restriction on its first line.  At mu = 0 -- classical Swift-Hohenberg at onset -- the symbol vanishes identically on the circle |2 pi xi|_2 = 1.  That is a genuine zero diagonal, in the paper's own leading model, and mu is exactly the distance to it."
+      }
+    ],
+    "quote_verification": {
+      "pdf": "Papers/2505.03091.pdf",
+      "expected_sha256": "0f1bc6181ce0d4375df3a012846d851c366cfc768b73fbfa3e2f7b6631f8081d",
+      "probes": 11,
+      "sha256": "0f1bc6181ce0d4375df3a012846d851c366cfc768b73fbfa3e2f7b6631f8081d",
+      "sha256_matches": true,
+      "status": "VERIFIED",
+      "verified": [
+        "A1_LMIN",
+        "SPACE_H",
+        "SIGMA_DELTA",
+        "LEMMA_4_1_USES_IT",
+        "LEMMA_3_1_USES_IT",
+        "GERSHGORIN_DOMINANCE",
+        "TAIL_DIAGONAL_IS_THE_SYMBOL",
+        "SYSTEMS_KAPPA",
+        "ZERO_EIGENVALUE_IS_COVERED",
+        "FINITE_GAP_FAILURE",
+        "SH_MU_POSITIVE"
+      ],
+      "not_found": [],
+      "n_verified": 11
+    }
+  },
+  "CADX2_zero_eigenvalue_vs_zero_diagonal": {
+    "zero_eigenvalue": "COVERED, demonstrably.  Section 5.2 encloses the translation kernel to [-0.0011, 0.0011] and concludes nu_2 = 0 exactly.  Zero is not a forbidden VALUE.",
+    "zero_diagonal": "NOT COVERED.  Assumption 1 requires |l(xi)| >= l_min > 0, and l IS the diagonal because L is a Fourier multiplier by the class definition (1)-(2).",
+    "why_the_distinction_decides_the_ban": "The ban's question is about the DIAGONAL of the operator -- leg 51's methodological finding concerns a Fredholm operator whose diagonal part vanishes, so the approximate inverse cannot be built diagonally.  Read as a question about eigenvalues the answer would have been 'yes, covered', and that would have been the wrong answer to the right words."
+  },
+  "CADX3_assumption_1_on_the_papers_own_examples": {
+    "examples": {
+      "SH_square": {
+        "name": "SH_square",
+        "where": "section 5.1 / 5.1.1 (planar Swift-Hohenberg, the unstable square)",
+        "params": {
+          "mu": 0.28,
+          "nu1": -1.6,
+          "nu2": 1.0
+        },
+        "is_matrix_symbol": false,
+        "l_min": 0.28000014155698477,
+        "argmin_xi": 0.15912500000000002,
+        "assumption_1_margin": 0.28000014155698477,
+        "growth_exponent": 4.000000561132599,
+        "sigma_min_at_xi_max": 1.5585454557544706e+19,
+        "author_states": {
+          "l_min": 0.28,
+          "how": "|l(xi)| = (1 - |2 pi xi|^2)^2 + mu >= mu, and mu = 0.28 is stated in section 5.1.1"
+        },
+        "xi_max": 10000.0,
+        "l_min_minus_author_stated": 1.4155698474516143e-07
+      },
+      "SH_hexagonal": {
+        "name": "SH_hexagonal",
+        "where": "section 5.1.2 (planar Swift-Hohenberg, the stable hexagon)",
+        "params": {
+          "mu": 0.32,
+          "nu1": -1.6,
+          "nu2": 1.0
+        },
+        "is_matrix_symbol": false,
+        "l_min": 0.32000014155698475,
+        "argmin_xi": 0.15912500000000002,
+        "assumption_1_margin": 0.32000014155698475,
+        "growth_exponent": 4.000000561132583,
+        "sigma_min_at_xi_max": 1.5585454557544706e+19,
+        "author_states": {
+          "l_min": 0.32,
+          "how": "same, with mu = 0.32"
+        },
+        "xi_max": 10000.0,
+        "l_min_minus_author_stated": 1.4155698474516143e-07
+      },
+      "Whitham": {
+        "name": "Whitham",
+        "where": "section 5.2 (capillary-gravity Whitham), Lemma 5.4's proof",
+        "params": {
+          "T": 0.5,
+          "c": 0.8
+        },
+        "is_matrix_symbol": false,
+        "l_min": 0.19999999999999996,
+        "argmin_xi": 0.0,
+        "assumption_1_margin": 0.19999999999999996,
+        "growth_exponent": 0.5082993802036763,
+        "sigma_min_at_xi_max": 176.44538513544836,
+        "author_states": {
+          "l_min": 0.2,
+          "how": "verbatim: 'notice that l(xi) >= l(0) = 1 - c = 0.2 for all xi in R'"
+        },
+        "xi_max": 10000.0,
+        "l_min_minus_author_stated": -5.551115123125783e-17
+      },
+      "GrayScott": {
+        "name": "GrayScott",
+        "where": "section 5.3 (planar Gray-Scott), equation (44)",
+        "params": {
+          "lambda1": 0.1111111111111111,
+          "lambda2": 10.0
+        },
+        "is_matrix_symbol": true,
+        "l_min": 0.999937653995348,
+        "argmin_xi": 0.0,
+        "assumption_1_margin": 0.999937653995348,
+        "growth_exponent": 1.9999974749210045,
+        "sigma_min_at_xi_max": 438649085.4928603,
+        "author_states": {
+          "l_min": null,
+          "how": "not stated as a number; the symbol is lower triangular with diagonal entries -lam1|2 pi xi|^2 - 1 and -|2 pi xi|^2 - lam2, so sigma_min is measured here rather than quoted"
+        },
+        "xi_max": 10000.0,
+        "offdiag_over_diag_at_xi_max": 2.533029585283831e-10,
+        "offdiag_over_diag_exponent": -1.9999974749210025,
+        "offdiag_entry": 0.11111111111111116,
+        "l_min_minus_author_stated": null
+      }
+    },
+    "l_min_range": [
+      0.19999999999999996,
+      0.999937653995348
+    ],
+    "worst_reproduction_error_vs_author": 1.4155698474516143e-07,
+    "status": "CONFIRMED, second independent run of leg 62's symbol code (solver/certificate_shapes.py, REUSED not rebuilt).  Reported as confirmation, never as a new measurement.",
+    "reading": "Assumption 1 is not decorative: on every one of the paper's four worked examples it is a positive number the author either states or can state, and the growth half is a positive exponent every time."
+  },
+  "CADX4_the_dial_is_the_papers_own_parameter": {
+    "example": "planar Swift-Hohenberg, section 5.1",
+    "symbol": "l(xi) = -(1 - |2 pi xi|_2^2)^2 - mu",
+    "rows": [
+      {
+        "mu": 0.0,
+        "l_min_measured": 0.0,
+        "l_min_predicted_is_mu": 0.0,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 1.0,
+        "assumption_1_holds": false
+      },
+      {
+        "mu": 1e-06,
+        "l_min_measured": 1e-06,
+        "l_min_predicted_is_mu": 1e-06,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 1.0,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.0001,
+        "l_min_measured": 0.0001,
+        "l_min_predicted_is_mu": 0.0001,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 1.0,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.01,
+        "l_min_measured": 0.01,
+        "l_min_predicted_is_mu": 0.01,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 1.0,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.05,
+        "l_min_measured": 0.05,
+        "l_min_predicted_is_mu": 0.05,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.9999999993716815,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.1,
+        "l_min_measured": 0.1,
+        "l_min_predicted_is_mu": 0.1,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.999999998743363,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.2,
+        "l_min_measured": 0.2,
+        "l_min_predicted_is_mu": 0.2,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.999999998743363,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.28,
+        "l_min_measured": 0.28,
+        "l_min_predicted_is_mu": 0.28,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.9999999974867259,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.32,
+        "l_min_measured": 0.32,
+        "l_min_predicted_is_mu": 0.32,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.9999999974867259,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 0.5,
+        "l_min_measured": 0.5,
+        "l_min_predicted_is_mu": 0.5,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.9999999968584072,
+        "assumption_1_holds": true
+      },
+      {
+        "mu": 1.0,
+        "l_min_measured": 1.0,
+        "l_min_predicted_is_mu": 1.0,
+        "abs_error": 0.0,
+        "argmin_2pi_xi": 0.9999999949734517,
+        "assumption_1_holds": true
+      }
+    ],
+    "max_abs_error_l_min_vs_mu": 0.0,
+    "l_min_at_mu_0": 0.0,
+    "cadiots_two_runs": [
+      0.28,
+      0.32
+    ],
+    "reading": "l_min = mu to grid precision across five orders of magnitude, and at mu = 0 it is a genuine zero attained on the entire circle |2 pi xi| = 1.  So the paper's leading example is a one-parameter family that CROSSES the boundary of its own hypothesis, and Cadiot's two published runs sit 0.28 and 0.32 away from the excluded case.  The exclusion is measurable in the author's own units, not a rhetorical reading of a hypothesis."
+  },
+  "CADX5_the_method_dies_at_a_finite_gap": {
+    "essential_spectrum_starts_at": 0.19999999999999996,
+    "author_states_l_min": 0.2,
+    "reproduction_error": 5.551115123125783e-17,
+    "enclosed_up_to": 0.16,
+    "gap_that_worked": 0.03999999999999995,
+    "eigenvalue_not_enclosable": 0.19,
+    "gap_that_failed": 0.009999999999999953,
+    "enclosed_eigenvalues": {
+      "nu1": [
+        0.2691,
+        0.2704
+      ],
+      "nu2": 0.0,
+      "nu3": [
+        -0.1294,
+        -0.1268
+      ]
+    },
+    "second_paper_internal_inconsistency": "Lemma 5.4 states 'DF(u~) possesses exactly three eigenvalues in (-infinity, 0.16]' and then lists nu_1 in [0.2691, 0.2704], which is not in that interval (and would be embedded in the essential spectrum [0.2, infinity), where this framework's Jordan-domain-in-sigma_delta machinery cannot reach).  Most plausibly a sign slip and nu_1 in [-0.2704, -0.2691].  VERIFIED AGAINST THE RENDERED PAGE IMAGE (page 24), so it is printed that way and is not an extraction artefact.  Recorded, not resolved: it is not load-bearing for this leg's question, which turns on Assumption 1.",
+    "paper_internal_inconsistency": "Lemma 5.4's proof prints 'we fix delta = 0.4' and, one sentence later, 'sigma_delta = (-infinity, 0.16)'.  With l_min = 0.2 the second forces delta = 0.04, and Remark 5.2's 'delta < 0.1' likewise has to be delta < 0.01 to reach the eigenvalue at 0.19.  VERIFIED AGAINST THE RENDERED PAGE IMAGE (page 24), so it is a factor-of-ten slip in the e-print's delta's, not a text-extraction artefact.  It does not touch this leg's answer -- the interval endpoints 0.16, 0.19 and 0.2 are mutually consistent -- and it is recorded because an unexplained arithmetic mismatch in a source is exactly what a later reader would trip over."
+  },
+  "CADX6_controls_lesson_90": {
+    "actual": {
+      "covers": false,
+      "n_decisive_exclusions": 8,
+      "decisive_exclusions": [
+        "A1_LMIN",
+        "SPACE_H",
+        "SPACE_XQ",
+        "SIGMA_DELTA",
+        "LEMMA_4_1_USES_IT",
+        "TAIL_DIAGONAL_IS_THE_SYMBOL",
+        "SYSTEMS_KAPPA",
+        "SH_MU_POSITIVE"
+      ],
+      "forward_citations_relaxing": []
+    },
+    "control_scope_without_assumption_1": {
+      "covers": true,
+      "n_decisive_exclusions": 0,
+      "decisive_exclusions": [],
+      "forward_citations_relaxing": []
+    },
+    "control_with_a_relaxing_forward_citation": {
+      "covers": true,
+      "n_decisive_exclusions": 8,
+      "decisive_exclusions": [
+        "A1_LMIN",
+        "SPACE_H",
+        "SPACE_XQ",
+        "SIGMA_DELTA",
+        "LEMMA_4_1_USES_IT",
+        "TAIL_DIAGONAL_IS_THE_SYMBOL",
+        "SYSTEMS_KAPPA",
+        "SH_MU_POSITIVE"
+      ],
+      "forward_citations_relaxing": [
+        "2509.17099",
+        "2509.16693"
+      ]
+    },
+    "the_negative_is_a_property_of_the_clauses": true,
+    "reading": "The predicate flips to 'covers' two independent ways, so 'does not cover' is a fact about the located hypotheses and not about this code."
+  },
+  "CADX7_forward_citations": {
+    "citations": [
+      {
+        "arxiv": "2509.17099",
+        "url": "https://arxiv.org/abs/2509.17099",
+        "title": "Proving the existence of localized patterns and saddle node bifurcations in 1D activator-inhibitor type models (2025)",
+        "sha256": "48512493615776b962b5e176663678777c256901a80d502912b2bef7d4377ba7",
+        "relaxes_the_non_vanishing_hypothesis": false,
+        "how_checked": "full text extracted and searched for 'vanish', 'lmin', 'l(xi)', 'Assumption 1'; the only occurrences of 'vanish' are about the approximate solution vanishing at the domain edge"
+      },
+      {
+        "arxiv": "2509.16693",
+        "url": "https://arxiv.org/abs/2509.16693",
+        "title": "Existence and orbital stability proofs of traveling wave solutions on an infinite strip for the suspension bridge equation (2025), DOI 10.1016/j.physd.2026.135240",
+        "sha256": "133adc019adf632d5293b93d875d284c1c07ed6e2f6263340dcddb8914a6bb25",
+        "relaxes_the_non_vanishing_hypothesis": false,
+        "how_checked": "full text extracted; its symbol is l(xi) = |2 pi xi|^4 - c^2 (2 pi xi_1)^2 + 1 and it works with sup_xi 1/l(xi), i.e. it USES invertibility of the symbol rather than weakening it"
+      }
+    ],
+    "n_relaxing_the_hypothesis": 0,
+    "leg_62_examined": [
+      "BCF",
+      "VDAC",
+      "BH"
+    ],
+    "disjointness_note": "leg 62's three and these two are disjoint sets; the citation index is partial in both directions.  Five citing papers have now been checked between the two legs and none relaxes the non-vanishing symbol hypothesis.",
+    "not_obtained": {
+      "semanticscholar_keyword_search": "HTTP 429 rate limit on api.semanticscholar.org/graph/v1/paper/search; recorded as NOT OBTAINED, not glossed",
+      "export_arxiv_api": "export.arxiv.org is not on this container's egress allowlist (arxiv.org is); the API query returned empty",
+      "why_this_does_not_weaken_the_answer": "the answer is a statement about ONE named paper's own hypotheses, read from its full text, not a claim about the whole literature"
+    }
+  },
+  "figure": {
+    "path": "writeup/figures/fig67_route_cadx_v1_zero_diagonal.png",
+    "number": "fig67 (PROVISIONAL -- fig67 was unclaimed at this leg's merge base; renumbering is integration's call if a parallel leg took it)",
+    "registered_in": "writeup/data/p2_route_cadx_v1.json and experiments/journal/leg_304.md.  NOT registered in writeup/INDEX.md: that file is shared and this leg's declared territory excludes it, so the registration is flagged for integration rather than taken.",
+    "panels": [
+      "(a) the SH symbol at mu = 0 (a genuine zero diagonal) against the paper's two runs",
+      "(b) l_min on all four worked examples, log scale, against the excluded l_min = 0",
+      "(c) the Whitham spectrum: enclosure works at gap 0.04, fails at 0.01, and the zero EIGENVALUE is enclosed"
+    ]
+  },
+  "gate": {
+    "question": "Does the full text yield a definite answer -- either (i) Cadiot's hypotheses exclude a zero/vanishing diagonal (quote the line), or (ii) the construction covers it?",
+    "answer": "yes",
+    "branch": "(i) -- the hypotheses exclude it",
+    "the_line": "Assumption 1, page 6: 'Moreover, assume that there exists l_min > 0 such that |l(xi)| >= l_min for all xi in R^m and lim_{|xi|_2 -> +infinity} |l(xi)| = +infinity.'",
+    "ambiguous": false,
+    "n_decisive_exclusions": 8,
+    "precommitted_yes_i_branch": "bank at full strength -- the ban stands on measured, quoted footing",
+    "escalation": "NO.  The escalating branch was yes-(ii) ('the construction covers it'), which this run did not reach."
+  },
+  "verdict": "CADIOT_DOES_NOT_COVER_A_ZERO_DIAGONAL__HYPOTHESIS_QUOTED",
+  "what_this_establishes": "arXiv:2505.03091 excludes a zero/vanishing diagonal by HYPOTHESIS, not by accident: Assumption 1 states |l(xi)| >= l_min > 0 on page 6, before any construction, and the exclusion is load-bearing at eight further located places -- the ambient space H (Assumption 1 'allows to define' it, and L : H -> L^2 is an isometric isomorphism only if the diagonal is bounded below), the Fourier space X_q whose norm is weighted by |l(n/2q)|^2, sigma_delta (14) which places lambda = 0 in the ESSENTIAL spectrum when the diagonal vanishes, Lemma 4.1's proof which needs L - lambda I invertible, Lemma 3.1's resolvent compactness 'thanks to Assumption 1', the identity lambda_n = l(n~) + (DG(U_0))_{n,n} which makes the Gershgorin centres literally the symbol, the systems constant kappa = sup ||l(xi)^{-1}||_2, and the mu > 0 restriction on the leading example. The magnitude of the exclusion is the paper's own parameter: l_min = mu exactly for Swift-Hohenberg, and the two published runs sit at 0.28 and 0.32.  The method moreover fails at a FINITE gap, not at zero -- Remark 5.2 encloses at gap 0.04 and cannot enclose at 0.01.  A zero EIGENVALUE is covered (nu_2 = 0, the translation kernel, section 5.2), which is the distinction the question turns on.",
+  "what_this_does_NOT_establish": "That the ban is lifted, narrowed, or discharged -- answering the ban's named question is not the same act as changing its status, which is the user's call and integration-owned; this leg's own gate says so in its yes-(i) branch.  That leg 51's methodological finding is TRUE, or false -- this is a statement about the coverage of one published construction, not about our operator's mathematics.  That the observation is novel: it is folklore in print (leg 57) and half of it was already located by leg 62.  That Cadiot's paper is deficient: these are hypotheses it states plainly and discharges on all four of its own examples.",
+  "clay_odds": "~0.05%, unmoved.  No link of the L1->L4 chain is touched by a literature scope answer.",
+  "elapsed_s": 6.138346195220947
+}
