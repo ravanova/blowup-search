@@ -121,10 +121,10 @@ def panel_rule(a, b, n_panel, k=12):
 class FractionalBasisImages:
     """Lam^{2a} psi_m evaluated at arbitrary x, for m = 0..n, by the cosine integral.
 
-        Lam^{2a} psi_m (x) = (2 (-1)^m / sqrt(pi)) Int_0^inf xi^{2a} psi_m(2xi) cos(xi x) dxi
+        Lam^{2a} psi_m (x) = (2/(sqrt(pi) m! Zeta_m)) Int_0^inf xi^{2m+2a} e^{-xi^2} cos(xi x) dxi
 
     The xi-grid must resolve cos(xi * x_max), so its panel count is driven by x_max; the
-    integrand's own support is set by psi_m(2 xi), which dies by 2 xi ~ sqrt(8m) + 10.
+    integrand's own support is set by xi^{2m+2a}e^{-xi^2}, which peaks at sqrt(m+a).
     """
 
     def __init__(self, n, alpha, x_max, panels_per_unit=None, k=12, xi_max=None):
@@ -159,6 +159,20 @@ class FractionalBasisImages:
             xb = x[s:s + block]
             C = np.cos(np.outer(xb, self.xi))                   # (b, Q)
             out[s:s + block, :] = C @ self.amp
+        return out
+
+    def apply(self, a, x, block=8192):
+        """Lam^{2a} (sum_m a_m psi_m)(x), contracting in xi FIRST.
+
+        Identical to `self.at(x) @ a` but costs O(len(x) * Q) instead of
+        O(len(x) * Q * n): the a-contraction is done on the amplitudes, where it is
+        exact and free, so a fine reference x-grid is affordable at large n.
+        """
+        v = self.amp @ np.asarray(a, dtype=float)               # (Q,)
+        x = np.asarray(x, dtype=float)
+        out = np.empty(x.size)
+        for s in range(0, x.size, block):
+            out[s:s + block] = np.cos(np.outer(x[s:s + block], self.xi)) @ v
         return out
 
 
@@ -262,27 +276,40 @@ def m1_tail_exponent(alpha, m=0, xs=(20.0, 30.0, 40.0, 60.0)):
 # 3.  THE NONLOCAL PROBLEM ON BREDEN-CHU'S OWN QUADRATURE
 # ===========================================================================
 
-class NonlocalSelfSimilar:
-    """L u - u/4 + u^2 Lam^{2a} u = 0, in Breden-Chu's basis and on their rules.
+def nonlocal_columns(n, alpha, rules, block=256):
+    """The Lam^{2a}psi_m columns at each rule's nodes, on the rule's OWN weight share.
 
-    Identical to bc.BurgersSelfSimilar except that DV (the d_x psi columns) is replaced
-    by LV (the Lam^{2a} psi columns), pre-multiplied by the SAME per-node weight share,
-    so every downstream formula is theirs with one substitution.
+    V[i,m] = psi_m(x_i) e^{log_share_i}; this returns the same object with psi replaced
+    by Lam^{2a}psi, so every Breden-Chu formula downstream is theirs with one
+    substitution.  Computed once per (n, alpha) and reused across the homotopy.
+    """
+    LV = {}
+    for key in ("four", "six"):
+        r = rules[key]
+        log_share = (r.log_w - (r.alpha + 1.0) * math.log(r.c)) / r.K
+        img = FractionalBasisImages(n, alpha, float(np.max(r.x)))
+        LV[key] = img.at(r.x, block=block) * np.exp(log_share)[:, None]
+    return LV
+
+
+class NonlocalSelfSimilar:
+    """L u - u/4 + u^2 W_t u = 0 with W_t = (1-t) d_x + t Lam^{2a}, in Breden-Chu's basis.
+
+    t is the HOMOTOPY IN NONLOCALITY.  t = 0 is Breden-Chu eq. (54) exactly, so this
+    class must reproduce `bc.bounds` at t = 0 -- a regression control that can come out
+    differently, and is checked.  t = 1 is the fully nonlocal object.
     """
 
-    def __init__(self, n, alpha, rules=None):
-        self.n, self.alpha = n, float(alpha)
+    def __init__(self, n, alpha, rules=None, t=1.0, LV=None):
+        self.n, self.alpha, self.t = n, float(alpha), float(t)
         self.rules = rules if rules is not None else bc.make_rules(n)
         self.lam = bc.eigenvalues(n)
-        self.LV = {}
-        for key in ("four", "six"):
-            r = self.rules[key]
-            log_share = (r.log_w - (r.alpha + 1.0) * math.log(r.c)) / r.K
-            img = FractionalBasisImages(n, self.alpha, float(np.max(r.x)))
-            self.LV[key] = img.at(r.x) * np.exp(log_share)[:, None]
+        self.LV = LV if LV is not None else nonlocal_columns(n, self.alpha, self.rules)
+        self.W = {k: (1.0 - self.t) * self.rules[k].DV + self.t * self.LV[k]
+                  for k in ("four", "six")}
 
     def nonlinear_coeffs(self, a):
-        V4, LV4 = self.rules["four"].V, self.LV["four"]
+        V4, LV4 = self.rules["four"].V, self.W["four"]
         u, lu = V4 @ a, LV4 @ a
         return V4.T @ (u * u * lu)
 
@@ -290,7 +317,7 @@ class NonlocalSelfSimilar:
         return a + (-a / 4.0 + self.nonlinear_coeffs(a)) / self.lam
 
     def DF(self, a):
-        V4, LV4 = self.rules["four"].V, self.LV["four"]
+        V4, LV4 = self.rules["four"].V, self.W["four"]
         u, lu = V4 @ a, LV4 @ a
         G = V4.T @ ((u * lu)[:, None] * V4)
         DG = V4.T @ ((u * u)[:, None] * LV4)
@@ -324,20 +351,22 @@ def m3_quadrature_exactness(problem, a, panels=4000, k=16, R=48.0):
 
     Reference: a refined direct Gauss-Legendre integral in x of the same integrand.
     """
-    V4, LV4 = problem.rules["four"].V, problem.LV["four"]
+    V4, LV4 = problem.rules["four"].V, problem.W["four"]
     V6 = problem.rules["six"].V
-    LV6 = problem.LV["six"]
+    LV6 = problem.W["six"]
     u6, lu6 = V6 @ a, LV6 @ a
     rule_full_sq = float(np.sum(u6 ** 4 * lu6 ** 2))          # ||ubar^2 Lam ubar||^2 by rule
 
     x, w = panel_rule(0.0, R, panels, k)
     wt = np.exp(x * x / 4.0)
-    P, _ = bc.psi_values(problem.n, x)
+    P, D = bc.psi_values(problem.n, x)
     img = FractionalBasisImages(problem.n, problem.alpha, R)
-    Lp = img.at(x)
     u = P @ a
-    lu = Lp @ a
-    ref_full_sq = float(2.0 * np.sum(w * wt * (u * u * lu) ** 2))
+    lu = img.apply(a, x)
+    # NO factor 2 for evenness: Breden-Chu's product rules are half-line rules.  That
+    # convention was not assumed, it was MEASURED by the local control below, which
+    # came out at exactly 0.5 with a factor 2 present and ~0 without it.
+    ref_full_sq = float(np.sum(w * wt * (u * u * lu) ** 2))
 
     proj = problem.nonlinear_coeffs(a)
     proj_sq = float(np.dot(proj, proj))
@@ -346,9 +375,8 @@ def m3_quadrature_exactness(problem, a, panels=4000, k=16, R=48.0):
     DV6 = problem.rules["six"].DV
     du6 = DV6 @ a
     loc_rule_sq = float(np.sum(u6 ** 4 * du6 ** 2))
-    _, D = bc.psi_values(problem.n, x)
     du = D @ a
-    loc_ref_sq = float(2.0 * np.sum(w * wt * (u * u * du) ** 2))
+    loc_ref_sq = float(np.sum(w * wt * (u * u * du) ** 2))
 
     return {
         "R_reference": R, "panels": panels, "k": k,
@@ -409,8 +437,8 @@ def m5_bounds(problem, a, sup_psi=None, sup_dpsi=None):
     n = problem.n
     lam = problem.lam
     lam_next = bc.lambda_next(n)
-    V4, LV4 = problem.rules["four"].V, problem.LV["four"]
-    V6, LV6 = problem.rules["six"].V, problem.LV["six"]
+    V4, LV4 = problem.rules["four"].V, problem.W["four"]
+    V6, LV6 = problem.rules["six"].V, problem.W["six"]
     if sup_psi is None or sup_dpsi is None:
         sup_psi, sup_dpsi = bc.sup_psi_bounds(n)
 
@@ -479,7 +507,68 @@ def m5_bounds(problem, a, sup_psi=None, sup_dpsi=None):
 # 4.  THE RUN
 # ===========================================================================
 
-def run(ns=(20, 40, 80), alphas=(0.25, 0.5, 0.75), headline_n=40, headline_alpha=0.5):
+TS = (0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0)
+
+
+def bc_seed(n, coarse=None, coarse_n=None):
+    """Leg 256's seed recipe, EXACTLY: shoot to x_max=12.0 at h=1e-4 and project.
+
+    Leg 256's ladder starts at n = 100 and prolongs by zero-padding; seeding a Newton
+    below that n put the iterate outside the basin (measured: residual 1.7e3).  When a
+    coarser converged coefficient vector is supplied it is zero-padded instead.
+    """
+    if coarse is not None:
+        out = np.zeros(n + 1)
+        out[:coarse_n + 1] = coarse
+        return out
+    a0_amp = bc.find_amplitude()
+    xs, us = bc.shoot_profile(a0_amp, x_max=12.0, h=1e-4)
+    return bc.project_profile(xs, us, n)
+
+
+def homotopy(n, alpha, rules, seed, ts=TS, m3_at=(1.0,), sup_psi=None, sup_dpsi=None):
+    """Continue from t=0 (Breden-Chu eq. 54, exactly) to t=1 (fully nonlocal).
+
+    Newton at each t starts from the previous t's solution, so the ladder in t is the
+    measurement: WHERE it stops closing, and by which bound, not merely whether t=1 does.
+    """
+    LV = nonlocal_columns(n, alpha, rules)
+    steps, a = [], np.array(seed, dtype=float)
+    lam = bc.eigenvalues(n)
+    a_local = None
+    for t in ts:
+        prob = NonlocalSelfSimilar(n, alpha, rules, t=t, LV=LV)
+        a, hist = prob.newton(a)
+        conv = bool(np.isfinite(hist[-1]) and hist[-1] < 1e-9)
+        if not conv:
+            a = np.array(seed, dtype=float)          # do not carry a diverged iterate
+        if t == 0.0:
+            a_local = a.copy()
+        b = m5_bounds(prob, a, sup_psi, sup_dpsi)
+        v = bc.radii_verdict(b["Y"], b["Z1"], b["Z2"], b["Z3"])
+        # u == 0 solves the equation for EVERY t, and its radii polynomial closes with
+        # Y ~ 1e-29.  That is lesson 90: a verdict that cannot come out differently.
+        # Flagged here so no consumer can read it as a certification.
+        trivial = bool(b["sup_ubar"] < 1e-8)
+        step = {"t": t, "newton_residual_H2": hist[-1], "newton_iters": len(hist),
+                "newton_converged": conv, "bounds": b, "radii": v,
+                "collapsed_to_trivial_solution": trivial,
+                "verdict_is_meaningful": bool(conv and not trivial),
+                "profile_distance_from_t0_H2": (
+                    float(np.linalg.norm(lam * (a - a_local))) if a_local is not None
+                    else float("nan"))}
+        if t in m3_at and conv and not trivial:
+            step["M3_quadrature"] = m3_quadrature_exactness(prob, a)
+        steps.append(step)
+        print("   n=%3d a=%.2f t=%.3f  res=%.2e sup=%.4g Y=%.4e Z1=%.5g Z2=%.4g "
+              "Z3=%.4g closes=%s tailneg=%s trivial=%s"
+              % (n, alpha, t, hist[-1], b["sup_ubar"], b["Y"], b["Z1"], b["Z2"],
+                 b["Z3"], v["closes"], b["tail_sq_negative"], trivial))
+        sys.stdout.flush()
+    return steps
+
+
+def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=0.5):
     t0 = time.time()
     res = {
         "leg": 331, "route": "NLH",
@@ -517,43 +606,51 @@ def run(ns=(20, 40, 80), alphas=(0.25, 0.5, 0.75), headline_n=40, headline_alpha
 
     # -- the local control problem, for side-by-side ----------------------
     res["by_n"] = {}
+    coarse, coarse_n = None, None
     for n in ns:
         rules = bc.make_rules(n)
+        sup_psi, sup_dpsi = bc.sup_psi_bounds(n)
         loc = bc.BurgersSelfSimilar(n, rules)
-        a0_amp = bc.find_amplitude()
-        xs, us = bc.shoot_profile(a0_amp, x_max=14.0, h=2e-4)
-        seed = bc.project_profile(xs, us, n)
+        seed = bc_seed(n, coarse, coarse_n)
         a_loc, hist_loc = loc.newton(seed)
+        coarse, coarse_n = a_loc, n
         loc_bounds = bc.bounds(loc, a_loc)
         loc_verdict = bc.radii_verdict(loc_bounds["Y"], loc_bounds["Z1"],
                                        loc_bounds["Z2"], loc_bounds["Z3"])
+        print("n=%3d LOCAL CONTROL res=%.2e Y=%.4e Z1=%.5g closes=%s  (%.1fs)"
+              % (n, hist_loc[-1], loc_bounds["Y"], loc_bounds["Z1"],
+                 loc_verdict["closes"], time.time() - t0))
+        sys.stdout.flush()
 
         entry = {"n": n,
                  "local_control": {"newton_residual_H2": hist_loc[-1],
                                    "newton_iters": len(hist_loc),
                                    "bounds": loc_bounds, "radii": loc_verdict},
-                 "nonlocal": {}}
+                 "homotopy": {}}
 
         for alpha in alphas:
-            prob = NonlocalSelfSimilar(n, alpha, rules)
-            a_nl, hist_nl = prob.newton(seed)
-            b = m5_bounds(prob, a_nl)
-            v = bc.radii_verdict(b["Y"], b["Z1"], b["Z2"], b["Z3"])
-            q = m3_quadrature_exactness(prob, a_nl)
-            entry["nonlocal"][str(alpha)] = {
-                "newton_residual_H2": hist_nl[-1],
-                "newton_iters": len(hist_nl),
-                "newton_converged": bool(np.isfinite(hist_nl[-1]) and hist_nl[-1] < 1e-10),
-                "profile_distance_from_local_H2": float(
-                    np.linalg.norm(bc.eigenvalues(n) * (a_nl - a_loc))),
-                "bounds": b, "radii": v, "M3_quadrature": q,
+            steps = homotopy(n, alpha, rules, a_loc,
+                             sup_psi=sup_psi, sup_dpsi=sup_dpsi)
+            # -- the t = 0 REGRESSION CONTROL: must reproduce bc.bounds exactly
+            b0 = steps[0]["bounds"]
+            keys = ("Y", "Z1", "Z2", "Z3", "Zbar11", "Zbar12", "Zbar21", "Zbar22")
+            rel = {k: (abs(b0[k] - loc_bounds[k]) / abs(loc_bounds[k])
+                       if loc_bounds.get(k) else float("nan")) for k in keys
+                   if k in loc_bounds}
+            entry["homotopy"][str(alpha)] = {
+                "steps": steps,
+                "t0_regression_control": {
+                    "max_rel_diff_vs_bc_bounds": max(
+                        v for v in rel.values() if math.isfinite(v)),
+                    "per_bound_rel_diff": rel,
+                    "note": ("t=0 sets W = d_x identically, so this compares the leg's "
+                             "own bound code against solver/bc_weighted_sobolev.py's "
+                             "bounds() on the same coefficients; it CAN come out "
+                             "differently (lesson 90) and is what licenses t>0.")},
             }
-            print("n=%3d a=%.2f  Y=%.4e Z1=%.4f Z2=%.4g Z3=%.4g closes=%s "
-                  "tailneg=%s qerr=%.2e"
-                  % (n, alpha, b["Y"], b["Z1"], b["Z2"], b["Z3"], v["closes"],
-                     b["tail_sq_negative"], q["nonlocal_rel_error"]))
         res["by_n"][str(n)] = entry
         print("n=%d done  %.1fs" % (n, time.time() - t0))
+        sys.stdout.flush()
 
     # -- M4 ---------------------------------------------------------------
     res["M4_sup_norms"] = {str(a): m4_sup_norms(60, a) for a in alphas}
