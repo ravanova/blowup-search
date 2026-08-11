@@ -99,7 +99,7 @@ relied on for its substance — 10/10 locators, 3/3 sub-claims, 29/29 claims byt
 — and its one defective number is named, measured, closed-form-corrected, and handed on
 with the three surfaces that carry it enumerated.
 
-![Route-P0TCV: the re-derived window](../figures/fig67_route_p0tcv_v1_verify.png)
+![Route-P0TCV: the re-derived window](../figures/fig68_route_p0tcv_v1_verify.png)
 
 *Data: `writeup/data/p2_route_p0tcv_v1_verify.json`. Runner:
 `experiments/p2_route_p0tcv_v1_verify.py`. Every number above is re-asserted from the

@@ -35,7 +35,7 @@ Usage:
     .venv/bin/python experiments/p2_route_p0tcv_v1_verify.py [--tex PATH] [--no-fetch]
 
 Writes `writeup/data/p2_route_p0tcv_v1_verify.json`.  The registered figure
-`writeup/figures/fig67_route_p0tcv_v1_verify.png` is rebuilt from that JSON alone by
+`writeup/figures/fig68_route_p0tcv_v1_verify.png` is rebuilt from that JSON alone by
 `experiments/p2_route_p0tcv_v1_verify_evidence.py`.
 """
 

@@ -4382,3 +4382,90 @@ preempted agents had reached a landing.
   artifact of undersampling** -- D1's shortcut stays scoped to a fixed
   discretization; leg 289's report is unmodified and stays correct as
   written.
+
+## Cycle 2, 2026-08-11 — legs 304, 300, 301
+
+**Leg 304 (Route-CADX) landed, gate YES (i).** Full entry:
+`experiments/journal/leg_304.md`. **Cadiot arXiv:2505.03091 does NOT cover a zero
+diagonal, and the exclusion is by hypothesis rather than by accident** -- Assumption 1,
+p.6: "assume that there exists l_min > 0 such that |l(xi)| >= l_min for all xi in R^m."
+Since L is a Fourier multiplier by the class definition, l IS the diagonal, so a
+vanishing diagonal is exactly the excluded case l_min = 0. Load-bearing at **8 of 12
+located clauses** (the space H, the Fourier space X_q weighted by |l(n/2q)|^2, sigma_delta
+placing lambda=0 in the ESSENTIAL spectrum when the diagonal vanishes, Lemma 4.1's
+invertibility, Lemma 3.1's compactness, the identity lambda_n = l(n~) + (DG(U_0))_{n,n},
+and the systems constant kappa). Magnitudes: l_min on the four worked examples
+0.2 / 0.28 / 0.32 / 0.99994, worst reproduction error vs the author's stated values
+1.416e-07; on the leading Swift-Hohenberg example **l_min = mu exactly** (max deviation
+0.0 over five decades, l_min = 0.0 at mu = 0 attained on the whole circle |2*pi*xi| = 1),
+so his two published runs sit 0.28 and 0.32 from a genuine zero diagonal, and Remark 5.2
+shows the method already failing at gap 0.01 having worked at 0.04. **A zero EIGENVALUE
+is covered** (nu_2 = 0, the Whitham translation kernel); a zero DIAGONAL is not -- the
+distinction the ban's wording turns on, and reading it the other way gives the opposite
+answer. 11/11 quote probes machine-verified against the pinned e-print sha256. Two
+internal inconsistencies recorded in the e-print itself (a factor-of-ten slip in the
+deltas on p.24; nu_1 in [0.2691, 0.2704] listed as lying in (-inf, 0.16]), both
+cross-checked against a rendered page image so neither is an extraction artefact, neither
+load-bearing. **The ban is NOT lifted by this leg** -- see the orchestrator escalation
+below. Figure fig67, registered.
+
+**Leg 300 (Route-P0TCV) landed, gate NO.** Full entry: `experiments/journal/leg_300.md`.
+Independent verification of leg 266's GATE-YES correction to leg 251's certificate
+obligation #1. Clause (a) architecture **PASS**, 3/3 sub-claims on 10/10 BCG locators
+re-confirmed at source (e-print md5 45ea63c45a1a199ecfb4dc4a15431600, the fourth
+independent download in this project to agree bit-for-bit). Clause (b) byte-untouchedness
+**PASS**, 29/29 verifier-confirmed claims byte-identical across bef1d5e -> 873a15f.
+Clause (c) magnitudes **FAIL 4/5**: the endpoints 1.1666667 / 1.1909830 and the widths
+0.0243163 / 0.1666667 all reproduce exactly at their quoted 7 d.p., but **the width ratio
+quoted as 6.855 re-derives from BCG's own (eq:rstar) and (eq:r:restriction) at gamma=7/5
+as the closed form (7+3*sqrt(5))/2 = 6.8541019662496845..., i.e. 6.854 at the quoted
+4 s.f.** -- absolute error 0.00090, relative error 1.310e-04. The defect is localised, not
+merely reported: re-dividing leg 266's OWN rounded endpoints also yields 6.854, so the
+formula and its inputs are sound and only the final transcribed digit slipped --
+arithmetic, not architectural, and nothing downstream depends on the fourth digit. The
+propagation census measures **8 surfaces carrying 6.855, 7 of them already on `main`**,
+all outside leg 300's territory, including the title and thesis of drafted reserve leg
+305 -- hence a rework leg (ROUTE-P0TCR) drafted in leg 300's journal section 7 for the
+Decision Maker to place, rather than fixed in place. **Leg 266 stays unmerged**; leg 251's
+parked Phase-1 packet was never touched. Negative controls 5/5. Figure fig68 (see the
+collision note below). Two structural facts for whoever later executes 266's yes-branch:
+leg 275 has already effected half of it by stacking on 873a15f, and **neither bef1d5e nor
+873a15f is an ancestor of `origin/main`, so merging 266's quartet cannot be done without
+also landing leg 251's parked packet.**
+
+**Leg 301 (Route-FSB) PARKED, gate YES = escalation #8.** Branch `leg/301-fsb-v1`, merge
+gate PASS, `main` untouched. Full entry: `experiments/journal/leg_301.md` on that branch.
+The fourth space/basis screen enumerated **14 candidate spaces/bases** and screened each
+on paper against the three separately-measured death mechanisms (M1 leg 54/62 zero
+diagonal; M2 leg 56 (H,D) defect; M3 legs 163/176/182 + 260 a=0 non-transfer). **Exactly
+one survivor: the Malmquist-Takenaka / Christov rational Hardy basis of L^2(R)**, computed
+not asserted from Iserles-Webb eq. (3.3): l_min = **1.0**, diagonal growth exponent
+0.974588 fitted (exactly +1 in closed form), Hilbert transform exactly diagonal at
+modulus 1, skew-Hermitian transcription self-test passes. Negative control (this repo's
+own tail operator) reports l_min = **0.0** exactly, M1 FAIL; positive BDL control reports
+delta = 0.4000, PASS. **Counterweights, at full strength and not buried:** delta = 1.0000
+exactly at every n -- the same wall leg 158 hit at 1.0039, scored as not-a-death only
+because leg 62's test 14 already refuted delta as the coordinate (mu = 0.25 -> delta = 2,
+still boundedly invertible, K-exponent -0.849); **no validated MT transform exists in
+rigorous numerics anywhere**, so one must be built; and **the nonlinearity is entirely
+UNMEASURED by this screen** -- stage S3 of the proposed scoping leg can kill the proposal
+outright. Two secondary findings the enumeration produced that no single-candidate leg
+could: leg 262's own named fourth-space candidate (Gaussian/OU eigenbasis) is killed by
+leg 260's already-banked measurement two legs earlier (shells 26.6 -> 1.3e83), and
+`chebyshev_naive_pairing` vs `chebyshev_airfoil_ultraspherical` are the same polynomial
+family on opposite sides of M1 -- the Petrov-Galerkin pairing decides multiplier-or-shift,
+not the family. **The ban is NOT lifted**: only the lift condition lifts it, and that
+condition names a scoping leg that has not been run. Its spec is written as Route-MT v1
+(TECHNICAL_P2_ROUTEFSB_V1.md section 8) with a gate that can come back NO. Figure fig69
+reserved, not registered.
+
+**Integration note -- a figure-number collision, and how it was resolved.** Legs 300 and
+304 independently claimed `fig67` while running in parallel; leg 301 claimed it a third
+time on its parked branch. Both files reached `main`. Resolved by first-landing:
+**304 keeps fig67** (landed at b319449), **300 renumbered to fig68** (landed at 5e30bf3),
+**301 reserved fig69**. Leg 300's evidence script was re-run after the rename and still
+reports 29/29 checks pass. This is the second cost this run has paid for legs picking
+figure numbers independently; the standing instruction to claim provisionally and let
+integration register the number is now in every dispatch brief.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%.**

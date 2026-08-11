@@ -906,7 +906,22 @@ BANNED = [
      "independently states the same dominance-hypothesis observation, in full text, located "
      "and verified by a second independent pass (VER-D)",
      "never -- unless a pass resolves whether Cadiot's construction covers a zero diagonal, "
-     "which is now the live open question, not BDL's"),
+     "which is now the live open question, not BDL's. "
+     "STATUS 2026-08-11, leg 304 (Route-CADX), gate YES(i), landed at b319449: the named "
+     "pass HAS RUN and the open question IS RESOLVED -- Cadiot does NOT cover a zero "
+     "diagonal, and the exclusion is BY HYPOTHESIS, not by accident: Assumption 1, p.6, "
+     "'there exists l_min > 0 such that |l(xi)| >= l_min for all xi in R^m'; L is a Fourier "
+     "multiplier by the class definition, so l IS the diagonal and a vanishing diagonal is "
+     "exactly the excluded case l_min = 0. Load-bearing at 8 of 12 located clauses. A zero "
+     "EIGENVALUE is covered; a zero DIAGONAL is not. "
+     "THE BAN IS NOT LIFTED AND THIS ANNOTATION DOES NOT LIFT IT. The resolution CONFIRMS "
+     "the stronger reason the ban rests on rather than discharging it, so lifting on it "
+     "would be lifting a ban because its own justification was validated. But the lift "
+     "clause is worded as 'unless a pass resolves whether', and a pass has now resolved it, "
+     "so the clause's literal reading and its evident purpose now disagree. That is a "
+     "wording question, not a judgement call an agent may make: ESCALATED TO THE USER "
+     "2026-08-11 and pending. Until the user rules, the ban stands in force, unchanged, "
+     "and binds every leg"),
     ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
      "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "
      "not. NARROWED at leg 55 (measured, not asserted): the target DOES have finite ell^1_w "

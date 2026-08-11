@@ -1,7 +1,7 @@
 """Route-P0TCV v1 (leg 300) — EVIDENCE: every number the BLOG and TECHNICAL write-ups
 quote, re-derived from `writeup/data/p2_route_p0tcv_v1_verify.json` alone.
 
-Also builds `writeup/figures/fig67_route_p0tcv_v1_verify.png`.
+Also builds `writeup/figures/fig68_route_p0tcv_v1_verify.png`.
 
 Nothing expensive is recomputed and nothing is re-downloaded: this reads the curated
 JSON and asserts the relations the prose asserts, so a reader can check the prose
@@ -25,7 +25,7 @@ getcontext().prec = 60
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "writeup", "data")
-FIG = os.path.join(ROOT, "writeup", "figures", "fig67_route_p0tcv_v1_verify.png")
+FIG = os.path.join(ROOT, "writeup", "figures", "fig68_route_p0tcv_v1_verify.png")
 
 CHECKS = []
 
