@@ -4939,3 +4939,121 @@ established that a condition cannot presently be checked and named the theorem t
 needed; not by leg 292, which measured how long this repository takes to act on its own
 findings. Learning that an instrument cannot verify something is not the same as verifying
 it.
+
+## Cycle 6, 2026-08-11 — legs 312 and 305, and a graceful stop
+
+Two legs landed. Both are arithmetic-integrity legs, and between them they say something the
+orchestrator wants on the record more than either individual result: **this repository has
+been carrying float64 catastrophic cancellation in banked numbers, and it has now been caught
+three separate times by three separate legs.**
+
+### Leg 312 (Route-APIA) — gate YES. A banked number moved in substance.
+
+Leg 312 built arbitrary-precision interval arithmetic (`solver/interval_mp.py`, stdlib
+`decimal`/`fractions` only, no new dependency) and used it to re-measure two banked float64
+values.
+
+- **Leg 178, `T2_egm|E_egm`, n=128, γ=4, n_grade=96: gap `-230.7108027866` →
+  `+0.4999999874556`.** 1640 of 7824 quadrature nodes were patched at 120 digits;
+  `dim_kept` went 122 → 126 with 4 dropped → 0. The mechanism is cancellation at θ~3e-31.
+- **Leg 176, N=1024 `rect_sigma`: `σ_min 0.09093626076` → `0.09079112560`.**
+
+The second correction is the quieter and the more structural one. The banked N=1024 value sat
+**above** the N=512 value (`0.09080465`), which breaks the ladder's monotone-non-increasing
+shape. The corrected value restores it. A structural property of the object was being masked
+by arithmetic.
+
+**The part worth internalising:** leg 178's own `n_grade=48` cross-check read `+0.49999975`
+all along. The contradiction was **already inside leg 178's own banked data** and went unread
+for roughly 134 legs. Nothing new had to be discovered to notice it — only re-read.
+
+The leg's 13/13 adversarial battery caught **three real bugs in its own apparatus before any
+result was believed**: a missing ratio factor in an atan recurrence, bare `abs()` and unary
+`-` silently rounding to the ambient 28-digit default, and `Decimal(1)/Decimal(239)` computed
+outside any explicit context. That ordering — battery first, result second — is why the
+correction is credible.
+
+**Scope discipline, deliberately observed:** leg 312's gate asked about *magnitudes*, not
+*booleans*. It did not ask whether the corrected rows now **pass** their five clauses, even
+though it was in a position to. That question belongs to leg 329, whose precondition this
+landing fires, and which is live in slot A as of this writing. Answering it in passing would
+have been a leg deciding its own successor's gate.
+
+### Leg 305 (Route-DWM) — gate YES. The `6.854×` deficit is SHARP.
+
+Leg 305 re-derived BCG's dominance window through an independent path (root-solving
+`D_{Z,1}` at 60 digits, against BCG's evaluation of their closed form) and produced a
+per-constant width ledger.
+
+Both endpoints reproduce: lower dev `3.33e-8`, upper `5.63e-9` (tol `5e-8`); γ-ceiling dev
+`2.52e-13` (tol `5e-13`); closed forms agree to `1e-57`; and T4 against `\eqref{eq:rstar}` is
+**exactly `0`** over 12 γ spanning **both** of BCG's branches. The ratio is
+`(7+3√5)/2 = 6.8541019662…`, confirming the `6.855 → 6.854` correction legs 319 and 321 made
+on prose surfaces.
+
+**Verdict: SHARP for BCG's argument as stated.** All eleven constants classify
+`EXACT_IDENTITY`, so the pre-registered SLACK branch — which requires at least one
+`ESTIMATE` — **cannot trigger**. That is a pre-registration doing its job: the leg could not
+have talked itself into "slack" even had it wanted to.
+
+**Named realization (lesson 91): the deficit is the distance between a derivative count and a
+discriminant.** The costliest constant is `C1_c_lap = 2` — the Laplacian's own derivative
+count — with the largest elasticity (−13.708% of window per 1%) and the smallest move to
+close, **−42.705%**, to `(9−3√5)/2 = 1.145898`. But `r*` is *exactly* the smaller root of
+BCG's `R₁` radicand, the `P_s`/`P̄_s` saddle-node. So closing the deficit means replacing
+`νΔ` with `ν(−Δ)^0.5729490169`: **a different PDE, not a sharper proof.** Seven of the eleven
+(the `D_{Z,1}`/`R₂` constants) are **unreachable at any cost**, because `r*` sits at a
+*stationary* maximum — measured, not asserted, via response exponent `p = 2.00` against
+`p = 1.00` for the four uncapped constants.
+
+**The pre-registered T6 failed, and is recorded as failed rather than restricted.** Its
+`0.899` deviation is the signature of that same stationary maximum. T6b was added and
+declared as *additional*, not as a replacement. This is the correct handling of a test that
+comes out against you and it is worth naming as such.
+
+### The conditioning trap, hit twice more, diagnosed both times before belief
+
+Leg 305 hit it twice in one leg:
+
+1. BCG's l.603 cancellation gives float `|k(1)−1| = 1.381e-07` (leg 302 independently
+   measured `1.29e-07` on the same site) against **exactly `0`** at 60 digits.
+2. A **self-inflicted** instance: T5 first failed at `1.0954e-22` because the probe sat at
+   `r = 1+1e-45`. The leg was measuring *its own offset* through a linearly-vanishing
+   radicand, not measuring BCG.
+
+The second is the more instructive, because the defective instrument was the leg's own test.
+It also fixed three real code defects, including a T2 γ-ceiling failure that turned out to be
+`1e-30` arithmetic dust flipping BCG's branch selection — **not** a contradiction of leg 300,
+which is what it would have been reported as had it been believed on sight.
+
+**Running tally of the same defect:** leg 302 (BCG's `R₂` radicand cancels to exactly zero at
+`r=1`, float64 gives `1.22e-14` of dust), leg 312 (θ~3e-31), leg 305 (twice). Leg 320's false
+`σ_min = 1e-17`, caught by a Gram-matrix control as a quadrature artifact, is the same family.
+**The standing lesson is now empirical rather than cautionary: in this repository an
+implausible number is a broken instrument until proven otherwise, in either direction** — and
+a number that suddenly looks *right* deserves the same suspicion as one that looks absurd.
+
+### Figure-register reconciliation
+
+This cycle's dispatches surfaced a disagreement between the DM's draft-time FIG-TABLE in
+`DIRECTION.md` and integration's in-flight table in `writeup/INDEX.md`: leg 326 was `fig78`
+in one and `fig85` in the other. **Resolved in favour of what the dispatched briefs actually
+carried** (`fig78` for 326, `fig81` for 329), because that is the number the running agent
+can see, and `INDEX.md` corrected to match. The rule is now written down beside the table.
+Two registers for the same resource is itself a small design defect; it is tolerable only
+because the tie-break is now explicit.
+
+### Graceful stop
+
+The user asked for a graceful stop mid-cycle. Ten slots were live at that moment and **none
+were cancelled**: A/329, B/221, C/323, D/318, E/326, F/306, G/324, H/229, I/328, J/287. Their
+state is recorded in `PROGRESS.md` as last **observed**, not as assumed-live. Legs 301, 313
+and 320 remain parked escalations on unmerged branches, awaiting the user's ruling and no one
+else's.
+
+**No link of the L1→L4 chain moved. Clay odds remain ~0.05%.** Not by leg 312, which
+corrected two numbers on exploratory routes and said so itself; and emphatically not by leg
+305, which measured that BCG's deficit **cannot** be closed within BCG's own argument, on a
+**compressible** route that is not the system Clay asks about. Establishing that a gap is
+unbridgeable is useful — it stops future legs spending on it — but it is the search space
+shrinking, not a proof advancing.
