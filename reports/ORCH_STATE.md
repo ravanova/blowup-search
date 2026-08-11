@@ -309,3 +309,46 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   session, not a post-handoff check** — run it before dispatching, not after, because a
   finished-but-unpushed result changes what the next roster should contain. Leg 266 is now
   pushed, and slot A's leg 300 was cut to verify it before it lands.
+
+- **2026-08-11, cycle 4c — a cherry-pick from the Decision Maker's stale base nearly
+  un-landed a correction that had just landed.** The DM agent commits into a local checkout
+  sitting on a leg branch and cannot push; the orchestrator cherry-picks each DM commit onto
+  `origin/main`. The DM's cycle-4c commit `6ac84b3` was written against a base that predated
+  leg 319's landing, and three of its hunks overlapped text leg 319 had just corrected.
+  Applying the diff verbatim would have **silently reverted four of leg 319's corrected
+  `6.854` surfaces back to the known-wrong `6.855`** — including **leg 305's own title and
+  thesis**, while leg 305 was live in slot G working from that spec. Nothing would have
+  flagged it: the merge gate does not know which digit is right, and the commit message
+  describes only the intended rulings.
+  Caught because the resolution was inspected rather than accepted — `git checkout --theirs`
+  was the fast path and would have been wrong. All four surfaces were restored by hand and
+  verified against `origin/main` before pushing; the two **immutable gate-text sites** were
+  confirmed still reading `6.855x` and untouched, per the standing rule.
+  **Rule adopted: any DM commit touching `DIRECTION.md` must be diffed against `origin/main`
+  for unintended deletions BEFORE it is pushed, never after** — `git diff origin/main --
+  DIRECTION.md | grep '^-'` and read every deletion. A stale base plus an overlapping hunk is
+  exactly how a landed correction gets un-landed with no one noticing. Related: an earlier
+  incident this session where an orchestrator integration commit stacked onto a leg branch,
+  same root cause — **the DM and the orchestrator sharing a checkout with the legs.** The
+  orchestrator now works in a dedicated detached worktree; the DM still does not.
+
+- **2026-08-11, cycle 4 — two legs stalled by ending their turns to wait.** Legs 292 and 323
+  both committed real WIP and then ended their turns *waiting* on long background jobs (a 712s
+  test, an arXiv sweep), expecting to be woken. Nothing wakes them. By §7b's iteration-boundary
+  rule a leg whose turn has ended is stalled regardless of how much work is committed, and
+  from the orchestrator's side it is indistinguishable from a dead agent. **323 was the
+  expensive one — all §0c publication drafting is gated on it, and it had silently stopped.**
+  Both were resumed with the instruction to **poll from inside the turn** (a bounded
+  check-and-sleep loop) and never end a turn to wait. Worth stating in dispatch briefs for any
+  leg expected to run something long.
+
+- **2026-08-11, cycles 2–4 — eight independent figure-number collisions in three cycles.** Legs
+  choose figure numbers in parallel from a shared list they have no way to lock, so collisions
+  are the expected behaviour of the system rather than the fault of any leg. **One of the eight
+  was the orchestrator's own error** (leg 316 was told mid-run to take `fig71`, which the
+  orchestrator had itself just assigned to leg 303). Resolution rule now applied consistently:
+  **first to land keeps the number; a landed artifact beats a reservation held by a parked
+  branch** (so leg 302 kept `fig69` over parked leg 301, whose reservation moved to `fig75`).
+  Every renumber re-runs the leg's evidence script afterwards so the figure and its checks
+  agree. The durable fix is to allocate figure numbers **at dispatch**, from the orchestrator,
+  and to state the number in the brief — which is now done, but only from cycle 4 onward.
