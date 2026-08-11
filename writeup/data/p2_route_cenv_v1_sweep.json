@@ -1,18 +1,923 @@
 {
   "leg": 323,
   "route": "CENV",
-  "run_utc": "2026-08-11T17:46:08Z",
+  "run_utc": "2026-08-11T16:59:31Z",
+  "resumed_utc": "2026-08-11T21:58:17Z",
   "gate": "Does the variant re-run surface at least one work the original instrument missed (beyond 2604.09949 itself)?",
   "gate_answer": "NO",
-  "n_unavailable": 20,
+  "instrument_verification": {
+    "description": "Every row's actually-sent search_query, re-derived from its own recorded URL, checked against the query the plan says it should have been. A non-empty list here means the artifact mislabels at least one row and nothing below it may be believed.",
+    "n_problems": 0,
+    "problems": []
+  },
+  "n_refusals_to_measure": 0,
+  "n_errors": 0,
+  "controls": [
+    {
+      "control": "positive_environment",
+      "query_sent": "all:electron",
+      "expect": "n>0 -- if this is zero or refuses, nothing else in the run is interpretable",
+      "status": "OK",
+      "n": 60,
+      "links": [
+        "https://arxiv.org/abs/2608.09914",
+        "https://arxiv.org/abs/2608.09883",
+        "https://arxiv.org/abs/2608.09862",
+        "https://arxiv.org/abs/2608.09813",
+        "https://arxiv.org/abs/2608.09785",
+        "https://arxiv.org/abs/2608.09747",
+        "https://arxiv.org/abs/2608.09704",
+        "https://arxiv.org/abs/2608.09671",
+        "https://arxiv.org/abs/2608.09645",
+        "https://arxiv.org/abs/2608.09644",
+        "https://arxiv.org/abs/2608.09616",
+        "https://arxiv.org/abs/2608.09608",
+        "https://arxiv.org/abs/2608.09602",
+        "https://arxiv.org/abs/2608.09554",
+        "https://arxiv.org/abs/2608.09549",
+        "https://arxiv.org/abs/2608.09533",
+        "https://arxiv.org/abs/2608.09508",
+        "https://arxiv.org/abs/2608.09455",
+        "https://arxiv.org/abs/2608.09454",
+        "https://arxiv.org/abs/2608.09415",
+        "https://arxiv.org/abs/2608.09336",
+        "https://arxiv.org/abs/2608.09283",
+        "https://arxiv.org/abs/2608.09257",
+        "https://arxiv.org/abs/2608.09216",
+        "https://arxiv.org/abs/2608.09065",
+        "https://arxiv.org/abs/2608.09064",
+        "https://arxiv.org/abs/2608.09054",
+        "https://arxiv.org/abs/2608.09050",
+        "https://arxiv.org/abs/2608.09039",
+        "https://arxiv.org/abs/2608.09024",
+        "https://arxiv.org/abs/2608.09020",
+        "https://arxiv.org/abs/2608.08920",
+        "https://arxiv.org/abs/2608.08903",
+        "https://arxiv.org/abs/2608.08842",
+        "https://arxiv.org/abs/2608.08831",
+        "https://arxiv.org/abs/2608.08828",
+        "https://arxiv.org/abs/2608.08827",
+        "https://arxiv.org/abs/2608.08784",
+        "https://arxiv.org/abs/2608.08767",
+        "https://arxiv.org/abs/2608.08761",
+        "https://arxiv.org/abs/2608.08759",
+        "https://arxiv.org/abs/2608.08741",
+        "https://arxiv.org/abs/2608.08705",
+        "https://arxiv.org/abs/2608.08668",
+        "https://arxiv.org/abs/2608.08649",
+        "https://arxiv.org/abs/2608.08592",
+        "https://arxiv.org/abs/2608.08586",
+        "https://arxiv.org/abs/2608.08551",
+        "https://arxiv.org/abs/2608.08540",
+        "https://arxiv.org/abs/2608.08534",
+        "https://arxiv.org/abs/2608.08500",
+        "https://arxiv.org/abs/2608.08498",
+        "https://arxiv.org/abs/2608.08495",
+        "https://arxiv.org/abs/2608.08492",
+        "https://arxiv.org/abs/2608.08481",
+        "https://arxiv.org/abs/2608.08475",
+        "https://arxiv.org/abs/2608.08474",
+        "https://arxiv.org/abs/2608.08464",
+        "https://arxiv.org/abs/2608.08452",
+        "https://arxiv.org/abs/2608.08415"
+      ]
+    },
+    {
+      "control": "positive_two_phrase_AND",
+      "query_sent": "abs:\"self-similar\" AND abs:\"blow-up\"",
+      "expect": "n>0 -- the direct refutation of the struck MF3 clause; a zero here means ANDed quoted phrases are broken on this endpoint TODAY and every compound zero in Steps B/C is uninterpretable",
+      "status": "OK",
+      "n": 60,
+      "links": [
+        "https://arxiv.org/abs/2608.01580",
+        "https://arxiv.org/abs/2607.28192",
+        "https://arxiv.org/abs/2607.16733",
+        "https://arxiv.org/abs/2607.11165",
+        "https://arxiv.org/abs/2606.26555",
+        "https://arxiv.org/abs/2606.22282",
+        "https://arxiv.org/abs/2606.20870",
+        "https://arxiv.org/abs/2606.20866",
+        "https://arxiv.org/abs/2605.24802",
+        "https://arxiv.org/abs/2605.19716",
+        "https://arxiv.org/abs/2605.17569",
+        "https://arxiv.org/abs/2605.02540",
+        "https://arxiv.org/abs/2604.20396",
+        "https://arxiv.org/abs/2604.03188",
+        "https://arxiv.org/abs/2603.19679",
+        "https://arxiv.org/abs/2603.26715",
+        "https://arxiv.org/abs/2603.11301",
+        "https://arxiv.org/abs/2603.01924",
+        "https://arxiv.org/abs/2602.22924",
+        "https://arxiv.org/abs/2602.21968",
+        "https://arxiv.org/abs/2602.17570",
+        "https://arxiv.org/abs/2602.05981",
+        "https://arxiv.org/abs/2601.14469",
+        "https://arxiv.org/abs/2512.24807",
+        "https://arxiv.org/abs/2512.15017",
+        "https://arxiv.org/abs/2511.16847",
+        "https://arxiv.org/abs/2511.15166",
+        "https://arxiv.org/abs/2511.13504",
+        "https://arxiv.org/abs/2511.09930",
+        "https://arxiv.org/abs/2511.03033",
+        "https://arxiv.org/abs/2511.02511",
+        "https://arxiv.org/abs/2511.01987",
+        "https://arxiv.org/abs/2510.14815",
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2509.13226",
+        "https://arxiv.org/abs/2508.21525",
+        "https://arxiv.org/abs/2508.10659",
+        "https://arxiv.org/abs/2508.05927",
+        "https://arxiv.org/abs/2508.05817",
+        "https://arxiv.org/abs/2507.17381",
+        "https://arxiv.org/abs/2506.01821",
+        "https://arxiv.org/abs/2504.07755",
+        "https://arxiv.org/abs/2504.05911",
+        "https://arxiv.org/abs/2503.18876",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2503.08448",
+        "https://arxiv.org/abs/2503.02263",
+        "https://arxiv.org/abs/2502.13154",
+        "https://arxiv.org/abs/2501.15701",
+        "https://arxiv.org/abs/2501.09037",
+        "https://arxiv.org/abs/2501.07887",
+        "https://arxiv.org/abs/2501.07073",
+        "https://arxiv.org/abs/2412.00558",
+        "https://arxiv.org/abs/2411.01891",
+        "https://arxiv.org/abs/2410.09610",
+        "https://arxiv.org/abs/2410.05847",
+        "https://arxiv.org/abs/2410.00636",
+        "https://arxiv.org/abs/2407.20035",
+        "https://arxiv.org/abs/2406.11358",
+        "https://arxiv.org/abs/2406.07201"
+      ]
+    },
+    {
+      "control": "negative_nonsense_phrase",
+      "query_sent": "abs:\"quixotic hyperviscous marmalade\"",
+      "expect": "n==0 -- if a nonsense phrase returns hits the endpoint is not doing phrase matching and every zero elsewhere is meaningless",
+      "status": "OK",
+      "n": 0,
+      "links": []
+    },
+    {
+      "control": "positive_author_conjunction",
+      "query_sent": "au:\"Cao-Labora\" AND au:\"Gomez-Serrano\"",
+      "expect": "n>0 -- a KNOWN co-authored pair (the imploding-solutions papers). Leg 326 measured a false negative from a bare author-AND query; this is the check that says whether Step C's author conjunctions can be believed at all",
+      "status": "OK",
+      "n": 6,
+      "links": [
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445"
+      ]
+    },
+    {
+      "control": "negative_author_conjunction",
+      "query_sent": "au:\"Cao-Labora\" AND au:\"Silantyev\"",
+      "expect": "n==0 expected -- no known joint paper; if this returns the same set as the positive control, au: AND is being ignored and both are uninterpretable",
+      "status": "OK",
+      "n": 0,
+      "links": []
+    }
+  ],
+  "controls_pass": true,
+  "zero_audit": [
+    {
+      "compound_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer--assisted\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Boussinesq\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:viscosity",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer--assisted\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Boussinesq\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:viscosity",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer-assisted\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Euler equations\" AND abs:\"computer--assisted\" AND abs:\"viscosity\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Euler equations\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer--assisted\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"viscosity\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Euler equations\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer-assisted\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"viscosity\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Hou--Luo\" AND abs:\"viscous\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Hou--Luo\"",
+          "n": 6,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"viscous\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Hou-Luo\"",
+          "n": 6,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"viscous\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Newton--Kantorovich\" AND abs:\"blow--up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Newton--Kantorovich\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow--up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"Newton-Kantorovich\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow-up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"blowup\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"viscous\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"rigorous\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"continuation\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"computer--assisted proof\" AND abs:\"parabolic\" AND abs:\"blow--up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"computer--assisted proof\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"parabolic\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow--up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"computer-assisted proof\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"parabolic\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow-up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"implosion\" AND abs:\"self--similar\" AND abs:\"Navier--Stokes\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"implosion\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"self--similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"Navier--Stokes\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"implosion\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"self-similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"Navier-Stokes\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"radii polynomial\" AND abs:\"blow--up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"radii polynomial\"",
+          "n": 7,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow--up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"radii polynomial\"",
+          "n": 7,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow-up\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"radii polynomial\" AND abs:\"self--similar\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"radii polynomial\"",
+          "n": 7,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"self--similar\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"radii polynomial\"",
+          "n": 7,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"self-similar\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self--similar\" AND abs:\"blow--up\" AND abs:\"validated numerics\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self--similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow--up\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"validated numerics\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self--similar\" AND abs:blowup AND abs:\"computer--assisted proof\" AND abs:viscosity",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self--similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer--assisted proof\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:viscosity",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self--similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self--similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"interval arithmetic\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self-similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"blow-up\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"validated numerics\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self-similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer-assisted proof\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:viscosity",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"self-similar\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:blowup",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"interval arithmetic\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"surface quasi--geostrophic\" AND abs:\"computer--assisted\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"surface quasi--geostrophic\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer--assisted\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"surface quasi-geostrophic\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"computer-assisted\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "compound_query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "verdict": "REAL ABSENCE (every component individually non-empty)",
+      "components": [
+        {
+          "component": "abs:\"validated numerics\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"dissipative\"",
+          "n": 60,
+          "status": "OK"
+        },
+        {
+          "component": "abs:\"singularity\"",
+          "n": 60,
+          "status": "OK"
+        }
+      ]
+    }
+  ],
   "mechanism_findings": {
-    "description": "Step A: per-term standalone abs: phrase queries, baseline (fresh single-hyphen) vs each of 5 variant forms. A non-empty entry means the arXiv retrieval layer's result set changed for that dash form -- i.e. is dash-sensitive for that term.",
+    "description": "Step A: per-term standalone abs: phrase queries, baseline (fresh single-hyphen) vs each variant form, same session. identical_id_set False means the retrieval layer IS dash-sensitive for that term/form.",
     "n_terms_tested": 7,
+    "n_form_comparisons": 22,
     "n_forms_with_a_delta": 5,
+    "per_form": [
+      {
+        "term": "Navier-Stokes",
+        "form": "double_hyphen",
+        "query_sent": "abs:\"Navier--Stokes\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "Navier-Stokes",
+        "form": "en_dash",
+        "query_sent": "abs:\"Navier\u2013Stokes\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "Navier-Stokes",
+        "form": "em_dash",
+        "query_sent": "abs:\"Navier\u2014Stokes\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "Navier-Stokes",
+        "form": "unhyphenated",
+        "query_sent": "abs:\"NavierStokes\"",
+        "n_baseline": 60,
+        "n_variant": 5,
+        "identical_id_set": false,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "Navier-Stokes",
+        "form": "spaced_hyphen",
+        "query_sent": "abs:\"Navier - Stokes\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "self-similar",
+        "form": "double_hyphen",
+        "query_sent": "abs:\"self--similar\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "self-similar",
+        "form": "en_dash",
+        "query_sent": "abs:\"self\u2013similar\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "self-similar",
+        "form": "em_dash",
+        "query_sent": "abs:\"self\u2014similar\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "self-similar",
+        "form": "unhyphenated",
+        "query_sent": "abs:\"selfsimilar\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": false,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "self-similar",
+        "form": "spaced_hyphen",
+        "query_sent": "abs:\"self - similar\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "computer-assisted",
+        "form": "double_hyphen",
+        "query_sent": "abs:\"computer--assisted\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "computer-assisted",
+        "form": "en_dash",
+        "query_sent": "abs:\"computer\u2013assisted\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "computer-assisted",
+        "form": "em_dash",
+        "query_sent": "abs:\"computer\u2014assisted\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "computer-assisted",
+        "form": "unhyphenated",
+        "query_sent": "abs:\"computerassisted\"",
+        "n_baseline": 60,
+        "n_variant": 2,
+        "identical_id_set": false,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "computer-assisted",
+        "form": "spaced_hyphen",
+        "query_sent": "abs:\"computer - assisted\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "blow-up",
+        "form": "double_hyphen",
+        "query_sent": "abs:\"blow--up\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "blow-up",
+        "form": "en_dash",
+        "query_sent": "abs:\"blow\u2013up\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "blow-up",
+        "form": "em_dash",
+        "query_sent": "abs:\"blow\u2014up\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "blow-up",
+        "form": "unhyphenated",
+        "query_sent": "abs:\"blowup\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": false,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "blow-up",
+        "form": "spaced_hyphen",
+        "query_sent": "abs:\"blow - up\"",
+        "n_baseline": 60,
+        "n_variant": 60,
+        "identical_id_set": true,
+        "capped_at_max_results": true
+      },
+      {
+        "term": "De Gregorio",
+        "form": "joined",
+        "query_sent": "abs:\"DeGregorio\"",
+        "n_baseline": 21,
+        "n_variant": 1,
+        "identical_id_set": false,
+        "capped_at_max_results": false
+      },
+      {
+        "term": "De Gregorio",
+        "form": "lowercase_de",
+        "query_sent": "abs:\"de Gregorio\"",
+        "n_baseline": 21,
+        "n_variant": 21,
+        "identical_id_set": true,
+        "capped_at_max_results": false
+      }
+    ],
     "deltas": [
       {
         "term": "Navier-Stokes",
         "form": "unhyphenated",
+        "n_baseline": 60,
+        "n_variant": 5,
         "baseline_only": [
           "2607.18993",
           "2607.19071",
@@ -81,11 +986,20 @@
           "2601.08498",
           "2602.17303",
           "2603.27861"
+        ],
+        "variant_only_links": [
+          "https://arxiv.org/abs/2303.06149",
+          "https://arxiv.org/abs/2305.03823",
+          "https://arxiv.org/abs/2601.08498",
+          "https://arxiv.org/abs/2602.17303",
+          "https://arxiv.org/abs/2603.27861"
         ]
       },
       {
         "term": "self-similar",
         "form": "unhyphenated",
+        "n_baseline": 60,
+        "n_variant": 60,
         "baseline_only": [
           "2607.10700",
           "2607.11024",
@@ -209,11 +1123,75 @@
           "2604.22592",
           "2605.25213",
           "2607.07410"
+        ],
+        "variant_only_links": [
+          "https://arxiv.org/abs/1202.5689",
+          "https://arxiv.org/abs/1203.5834",
+          "https://arxiv.org/abs/1204.5897",
+          "https://arxiv.org/abs/1205.3482",
+          "https://arxiv.org/abs/1206.5458",
+          "https://arxiv.org/abs/1207.2450",
+          "https://arxiv.org/abs/1207.3478",
+          "https://arxiv.org/abs/1207.3619",
+          "https://arxiv.org/abs/1208.1107",
+          "https://arxiv.org/abs/1210.0482",
+          "https://arxiv.org/abs/1211.0959",
+          "https://arxiv.org/abs/1305.1188",
+          "https://arxiv.org/abs/1305.4384",
+          "https://arxiv.org/abs/1312.0818",
+          "https://arxiv.org/abs/1403.0696",
+          "https://arxiv.org/abs/1407.3774",
+          "https://arxiv.org/abs/1407.8354",
+          "https://arxiv.org/abs/1410.0511",
+          "https://arxiv.org/abs/1410.2727",
+          "https://arxiv.org/abs/1412.8319",
+          "https://arxiv.org/abs/1506.00615",
+          "https://arxiv.org/abs/1602.08375",
+          "https://arxiv.org/abs/1603.03569",
+          "https://arxiv.org/abs/1606.08490",
+          "https://arxiv.org/abs/1701.08447",
+          "https://arxiv.org/abs/1710.01470",
+          "https://arxiv.org/abs/1711.00387",
+          "https://arxiv.org/abs/1802.06276",
+          "https://arxiv.org/abs/1905.13507",
+          "https://arxiv.org/abs/1908.01731",
+          "https://arxiv.org/abs/1909.01029",
+          "https://arxiv.org/abs/1910.02341",
+          "https://arxiv.org/abs/1911.04341",
+          "https://arxiv.org/abs/1912.00097",
+          "https://arxiv.org/abs/1912.12190",
+          "https://arxiv.org/abs/2002.00528",
+          "https://arxiv.org/abs/2002.01386",
+          "https://arxiv.org/abs/2007.03084",
+          "https://arxiv.org/abs/2012.01680",
+          "https://arxiv.org/abs/2012.03791",
+          "https://arxiv.org/abs/2111.05127",
+          "https://arxiv.org/abs/2202.04597",
+          "https://arxiv.org/abs/2202.06185",
+          "https://arxiv.org/abs/2202.11848",
+          "https://arxiv.org/abs/2207.12365",
+          "https://arxiv.org/abs/2209.04931",
+          "https://arxiv.org/abs/2210.02931",
+          "https://arxiv.org/abs/2212.12581",
+          "https://arxiv.org/abs/2212.13413",
+          "https://arxiv.org/abs/2309.11882",
+          "https://arxiv.org/abs/2310.06620",
+          "https://arxiv.org/abs/2311.03247",
+          "https://arxiv.org/abs/2403.20070",
+          "https://arxiv.org/abs/2501.06542",
+          "https://arxiv.org/abs/2501.07160",
+          "https://arxiv.org/abs/2509.06020",
+          "https://arxiv.org/abs/2601.09441",
+          "https://arxiv.org/abs/2604.22592",
+          "https://arxiv.org/abs/2605.25213",
+          "https://arxiv.org/abs/2607.07410"
         ]
       },
       {
         "term": "computer-assisted",
         "form": "unhyphenated",
+        "n_baseline": 60,
+        "n_variant": 2,
         "baseline_only": [
           "2605.23593",
           "2605.27515",
@@ -279,11 +1257,17 @@
         "variant_only": [
           "1911.10095",
           "2109.14818"
+        ],
+        "variant_only_links": [
+          "https://arxiv.org/abs/1911.10095",
+          "https://arxiv.org/abs/2109.14818"
         ]
       },
       {
         "term": "blow-up",
         "form": "unhyphenated",
+        "n_baseline": 60,
+        "n_variant": 60,
         "baseline_only": [
           "2607.14576",
           "2607.14716",
@@ -405,11 +1389,74 @@
           "2608.04713",
           "2608.05105",
           "2608.06234"
+        ],
+        "variant_only_links": [
+          "https://arxiv.org/abs/2604.17285",
+          "https://arxiv.org/abs/2604.19389",
+          "https://arxiv.org/abs/2604.19475",
+          "https://arxiv.org/abs/2604.20073",
+          "https://arxiv.org/abs/2604.20171",
+          "https://arxiv.org/abs/2604.22073",
+          "https://arxiv.org/abs/2604.23159",
+          "https://arxiv.org/abs/2604.23591",
+          "https://arxiv.org/abs/2605.00407",
+          "https://arxiv.org/abs/2605.00566",
+          "https://arxiv.org/abs/2605.12539",
+          "https://arxiv.org/abs/2605.15130",
+          "https://arxiv.org/abs/2605.15149",
+          "https://arxiv.org/abs/2605.15552",
+          "https://arxiv.org/abs/2605.20045",
+          "https://arxiv.org/abs/2605.20426",
+          "https://arxiv.org/abs/2605.20715",
+          "https://arxiv.org/abs/2605.21142",
+          "https://arxiv.org/abs/2605.23017",
+          "https://arxiv.org/abs/2605.23301",
+          "https://arxiv.org/abs/2605.24278",
+          "https://arxiv.org/abs/2605.26598",
+          "https://arxiv.org/abs/2605.27152",
+          "https://arxiv.org/abs/2606.03484",
+          "https://arxiv.org/abs/2606.05211",
+          "https://arxiv.org/abs/2606.06202",
+          "https://arxiv.org/abs/2606.17884",
+          "https://arxiv.org/abs/2606.22815",
+          "https://arxiv.org/abs/2606.23996",
+          "https://arxiv.org/abs/2606.24452",
+          "https://arxiv.org/abs/2606.24562",
+          "https://arxiv.org/abs/2606.26658",
+          "https://arxiv.org/abs/2606.26665",
+          "https://arxiv.org/abs/2606.28375",
+          "https://arxiv.org/abs/2606.29454",
+          "https://arxiv.org/abs/2606.29468",
+          "https://arxiv.org/abs/2606.31173",
+          "https://arxiv.org/abs/2607.01154",
+          "https://arxiv.org/abs/2607.03035",
+          "https://arxiv.org/abs/2607.04575",
+          "https://arxiv.org/abs/2607.05474",
+          "https://arxiv.org/abs/2607.05624",
+          "https://arxiv.org/abs/2607.05664",
+          "https://arxiv.org/abs/2607.07628",
+          "https://arxiv.org/abs/2607.08564",
+          "https://arxiv.org/abs/2607.12895",
+          "https://arxiv.org/abs/2607.15177",
+          "https://arxiv.org/abs/2607.18788",
+          "https://arxiv.org/abs/2607.20886",
+          "https://arxiv.org/abs/2607.22918",
+          "https://arxiv.org/abs/2607.25898",
+          "https://arxiv.org/abs/2607.26787",
+          "https://arxiv.org/abs/2608.02311",
+          "https://arxiv.org/abs/2608.02413",
+          "https://arxiv.org/abs/2608.03332",
+          "https://arxiv.org/abs/2608.03572",
+          "https://arxiv.org/abs/2608.04713",
+          "https://arxiv.org/abs/2608.05105",
+          "https://arxiv.org/abs/2608.06234"
         ]
       },
       {
         "term": "De Gregorio",
         "form": "joined",
+        "n_baseline": 21,
+        "n_variant": 1,
         "baseline_only": [
           "1009.1029",
           "1610.09701",
@@ -435,6 +1482,9 @@
         ],
         "variant_only": [
           "2603.06182"
+        ],
+        "variant_only_links": [
+          "https://arxiv.org/abs/2603.06182"
         ]
       }
     ]
@@ -442,356 +1492,637 @@
   "compound_rerun_deltas": [
     {
       "channel": "C1",
-      "base_query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
-      "variant_query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+      "variant_query_sent": "abs:\"computer--assisted\" AND abs:\"self--similar\" AND abs:blowup",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 2,
+      "n_variant": 2,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
-      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+      "variant_query_sent": "abs:\"self--similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"Ginzburg--Landau\" AND abs:\"self--similar\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"nonlinear heat equation\" AND abs:\"self--similar\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
-      "variant_query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+      "variant_query_sent": "abs:\"branches\" AND abs:\"self--similar\" AND abs:\"Ginzburg--Landau\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
-      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "variant_query_sent": "abs:\"self--similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
-      "variant_query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+      "variant_query_sent": "abs:\"self--similar\" AND abs:\"blow--up\" AND abs:\"validated numerics\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
-      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+      "variant_query_sent": "abs:\"self--similar\" AND abs:blowup AND abs:\"computer--assisted proof\" AND abs:viscosity",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
-      "variant_query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "variant_query_sent": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "variant_identical_to_baseline": true,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
-      "variant_query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+      "variant_query_sent": "abs:\"hypodissipative\" AND abs:\"Navier--Stokes\" AND abs:blowup",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C1",
-      "base_query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"self--similar\" AND abs:\"Navier--Stokes\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 3,
+      "n_variant": 3,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C2",
-      "base_query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"imploding\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C2",
-      "base_query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
-      "variant_query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query_sent": "abs:\"implosion\" AND abs:\"self--similar\" AND abs:\"Navier--Stokes\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C2",
-      "base_query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C2",
-      "base_query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"compressible Navier--Stokes\" AND abs:\"self--similar\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 2,
+      "n_variant": 2,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"radii polynomial\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
-      "variant_query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+      "variant_query_sent": "abs:\"radii polynomial\" AND abs:\"self--similar\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"Newton--Kantorovich\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
-      "variant_query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "variant_query_sent": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
-      "variant_query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+      "variant_query_sent": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"computer--assisted proof\" AND abs:\"parabolic\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C3",
-      "base_query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"rigorous numerics\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 5,
+      "n_variant": 5,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
-      "variant_query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+      "variant_query_sent": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
-      "variant_query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+      "variant_query_sent": "abs:\"Constantin--Lax--Majda\" AND abs:\"dissipation\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 5,
+      "n_variant": 5,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
-      "variant_query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+      "variant_query_sent": "abs:\"Hou--Luo\" AND abs:\"viscous\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"Boussinesq\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 7,
+      "n_variant": 7,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
-      "variant_query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+      "variant_query_sent": "abs:\"surface quasi--geostrophic\" AND abs:\"computer--assisted\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
-      "variant_query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+      "variant_query_sent": "abs:\"Navier--Stokes\" AND abs:\"computer--assisted proof\" AND abs:\"singularity\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 4,
+      "n_variant": 4,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C4",
-      "base_query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
-      "variant_query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+      "variant_query_sent": "abs:\"Euler equations\" AND abs:\"computer--assisted\" AND abs:\"viscosity\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 0,
+      "n_variant": 0,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C5",
-      "base_query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
-      "variant_query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query_sent": "abs:\"backward self--similar\" AND abs:\"Navier--Stokes\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 7,
+      "n_variant": 7,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C5",
-      "base_query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
-      "variant_query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query_sent": "abs:\"discretely self--similar\" AND abs:\"Navier--Stokes\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 23,
+      "n_variant": 23,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C5",
-      "base_query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
-      "variant_query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+      "variant_query_sent": "abs:\"Leray\" AND abs:\"self--similar\" AND abs:\"nonexistence\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 1,
+      "n_variant": 1,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C5",
-      "base_query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
-      "variant_query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+      "variant_query_sent": "abs:\"Type I\" AND abs:\"Navier--Stokes\" AND abs:\"blow--up\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 9,
+      "n_variant": 9,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     },
     {
       "channel": "C5",
-      "base_query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
-      "variant_query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
-      "n_delta_vs_this_session_baseline": 0,
+      "base_query_sent": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+      "variant_query_sent": "abs:\"local energy\" AND abs:\"Navier--Stokes\" AND abs:\"self--similar\"",
+      "variant_identical_to_baseline": false,
+      "baseline_status": "OK",
+      "variant_status": "OK",
+      "n_baseline": 5,
+      "n_variant": 5,
+      "interpretable": true,
+      "n_delta": 0,
       "delta_links": [],
+      "variant_missed_by_baseline": [],
+      "baseline_missed_by_variant": [],
       "genuinely_new_candidates": []
     }
   ],
+  "n_query_pairs_interpretable": 35,
+  "n_query_pairs": 35,
   "genuinely_new_candidates": [],
   "step_c_author_census": [
     {
       "group": "Breden-Chu",
       "query_string": "Breden-Chu",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden-Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Breden-Chu\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden-Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Breden-Chu",
       "query_string": "Breden--Chu",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden--Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Breden--Chu\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden--Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Breden-Chu",
       "query_string": "BredenChu",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22BredenChu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"BredenChu\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22BredenChu%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Dahne-Figueras",
       "query_string": "Dahne-Figueras",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Dahne-Figueras\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Dahne-Figueras",
       "query_string": "Dahne--Figueras",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne--Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Dahne--Figueras\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne--Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Dahne-Figueras",
       "query_string": "DahneFigueras",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22DahneFigueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"DahneFigueras\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22DahneFigueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Dahne-Figueras",
       "query_string": "D\u00e4hne-Figueras",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22D%C3%A4hne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"D\u00e4hne-Figueras\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22D%C3%A4hne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Cao-Labora",
       "query_string": "Cao-Labora",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao-Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Cao-Labora\"",
       "status": "OK",
-      "error": null,
       "n": 11,
       "links": [
         "https://arxiv.org/abs/2608.05114",
@@ -805,59 +2136,32 @@
         "https://arxiv.org/abs/2301.10101",
         "https://arxiv.org/abs/2208.09445",
         "https://arxiv.org/abs/1911.12313"
-      ]
+      ],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao-Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Cao-Labora",
       "query_string": "Cao--Labora",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao--Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Cao--Labora\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao--Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Cao-Labora",
       "query_string": "CaoLabora",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22CaoLabora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-      "status": "ERROR",
-      "error": "HTTPError: HTTP Error 429: Unknown Error",
-      "n": null,
-      "links": []
+      "query_sent": "au:\"CaoLabora\"",
+      "status": "OK",
+      "n": 0,
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22CaoLabora%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "Gomez-Serrano",
       "query_string": "Gomez-Serrano",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-      "status": "ERROR",
-      "error": "HTTPError: HTTP Error 429: Unknown Error",
-      "n": null,
-      "links": []
-    },
-    {
-      "group": "Gomez-Serrano",
-      "query_string": "Gomez--Serrano",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez--Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Gomez-Serrano\"",
       "status": "OK",
-      "error": null,
-      "n": 0,
-      "links": []
-    },
-    {
-      "group": "Gomez-Serrano",
-      "query_string": "GomezSerrano",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22GomezSerrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-      "status": "OK",
-      "error": null,
-      "n": 0,
-      "links": []
-    },
-    {
-      "group": "Gomez-Serrano",
-      "query_string": "G\u00f3mez-Serrano",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22G%C3%B3mez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-      "status": "OK",
-      "error": null,
       "n": 47,
       "links": [
         "https://arxiv.org/abs/2608.06226",
@@ -907,294 +2211,1396 @@
         "https://arxiv.org/abs/1112.2170",
         "https://arxiv.org/abs/1106.2120",
         "https://arxiv.org/abs/1006.3798"
-      ]
+      ],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "Gomez--Serrano",
+      "query_sent": "au:\"Gomez--Serrano\"",
+      "status": "OK",
+      "n": 0,
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez--Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "GomezSerrano",
+      "query_sent": "au:\"GomezSerrano\"",
+      "status": "OK",
+      "n": 0,
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22GomezSerrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "G\u00f3mez-Serrano",
+      "query_sent": "au:\"G\u00f3mez-Serrano\"",
+      "status": "OK",
+      "n": 47,
+      "links": [
+        "https://arxiv.org/abs/2608.06226",
+        "https://arxiv.org/abs/2605.18699",
+        "https://arxiv.org/abs/2605.03920",
+        "https://arxiv.org/abs/2601.16285",
+        "https://arxiv.org/abs/2511.02864",
+        "https://arxiv.org/abs/2510.03009",
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2411.12958",
+        "https://arxiv.org/abs/2411.00280",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2305.05046",
+        "https://arxiv.org/abs/2303.03992",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445",
+        "https://arxiv.org/abs/2207.12363",
+        "https://arxiv.org/abs/2205.00802",
+        "https://arxiv.org/abs/2201.06780",
+        "https://arxiv.org/abs/2112.03821",
+        "https://arxiv.org/abs/2109.02565",
+        "https://arxiv.org/abs/2108.11284",
+        "https://arxiv.org/abs/2103.02276",
+        "https://arxiv.org/abs/2012.08709",
+        "https://arxiv.org/abs/2012.04548",
+        "https://arxiv.org/abs/1911.06758",
+        "https://arxiv.org/abs/1908.01722",
+        "https://arxiv.org/abs/1810.10935",
+        "https://arxiv.org/abs/1810.00745",
+        "https://arxiv.org/abs/1807.07021",
+        "https://arxiv.org/abs/1709.05960",
+        "https://arxiv.org/abs/1705.10842",
+        "https://arxiv.org/abs/1612.08964",
+        "https://arxiv.org/abs/1603.03325",
+        "https://arxiv.org/abs/1512.02564",
+        "https://arxiv.org/abs/1508.01655",
+        "https://arxiv.org/abs/1504.02775",
+        "https://arxiv.org/abs/1501.02694",
+        "https://arxiv.org/abs/1409.7040",
+        "https://arxiv.org/abs/1401.6419",
+        "https://arxiv.org/abs/1401.5376",
+        "https://arxiv.org/abs/1311.0430",
+        "https://arxiv.org/abs/1204.6633",
+        "https://arxiv.org/abs/1201.1789",
+        "https://arxiv.org/abs/1112.2170",
+        "https://arxiv.org/abs/1106.2120",
+        "https://arxiv.org/abs/1006.3798"
+      ],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22G%C3%B3mez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     },
     {
       "group": "ALS",
       "query_string": "Ambrose Lushnikov Siegel Silantyev",
-      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Ambrose+Lushnikov+Siegel+Silantyev%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "query_sent": "au:\"Ambrose Lushnikov Siegel Silantyev\"",
       "status": "OK",
-      "error": null,
       "n": 0,
-      "links": []
+      "links": [],
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Ambrose+Lushnikov+Siegel+Silantyev%22&max_results=60&sortBy=submittedDate&sortOrder=descending"
     }
   ],
-  "step_b_baseline_replication_check": [
+  "step_c2_author_conjunctions": [
     {
-      "channel": "C1",
-      "query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
-      "n": 2,
+      "group": "Breden-Chu",
+      "query_string": "au:\"Breden\" AND au:\"Chu\"",
+      "query_sent": "au:\"Breden\" AND au:\"Chu\"",
+      "status": "OK",
+      "n": 3,
       "links": [
-        "https://arxiv.org/abs/2308.01528",
-        "https://arxiv.org/abs/2305.05660"
-      ]
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
-      "n": 1,
-      "links": [
-        "https://arxiv.org/abs/2509.10806"
-      ]
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "n": 1,
-      "links": [
-        "https://arxiv.org/abs/2410.05480"
-      ]
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
-      "n": 1,
-      "links": [
+        "https://arxiv.org/abs/2501.13672",
+        "https://arxiv.org/abs/2411.07064",
         "https://arxiv.org/abs/2404.04054"
       ]
     },
     {
-      "channel": "C1",
-      "query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+      "group": "Dahne-Figueras",
+      "query_string": "au:\"Dahne\" AND au:\"Figueras\"",
+      "query_sent": "au:\"Dahne\" AND au:\"Figueras\"",
+      "status": "OK",
       "n": 1,
       "links": [
         "https://arxiv.org/abs/2410.05480"
       ]
     },
     {
-      "channel": "C1",
-      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C1",
-      "query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+      "group": "Dahne-Figueras",
+      "query_string": "au:\"D\u00e4hne\" AND au:\"Figueras\"",
+      "query_sent": "au:\"D\u00e4hne\" AND au:\"Figueras\"",
+      "status": "OK",
       "n": 1,
       "links": [
-        "https://arxiv.org/abs/2307.03434"
+        "https://arxiv.org/abs/2410.05480"
       ]
     },
     {
-      "channel": "C1",
-      "query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "group": "BCG",
+      "query_string": "au:\"Buckmaster\" AND au:\"Cao-Labora\"",
+      "query_sent": "au:\"Buckmaster\" AND au:\"Cao-Labora\"",
+      "status": "OK",
       "n": 3,
       "links": [
-        "https://arxiv.org/abs/2604.09949",
-        "https://arxiv.org/abs/2509.25116",
-        "https://arxiv.org/abs/2509.14185"
-      ]
-    },
-    {
-      "channel": "C2",
-      "query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C2",
-      "query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C2",
-      "query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C2",
-      "query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
-      "n": 1,
-      "links": [
-        "https://arxiv.org/abs/1401.5371"
-      ]
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C3",
-      "query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
-      "n": 5,
-      "links": [
-        "https://arxiv.org/abs/2305.05915",
-        "https://arxiv.org/abs/2008.06903",
-        "https://arxiv.org/abs/1711.01911",
-        "https://arxiv.org/abs/1707.05936",
-        "https://arxiv.org/abs/1401.7553"
-      ]
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
-      "n": 1,
-      "links": [
-        "https://arxiv.org/abs/1908.09385"
-      ]
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
-      "n": 5,
-      "links": [
-        "https://arxiv.org/abs/2607.19762",
-        "https://arxiv.org/abs/2504.14346",
-        "https://arxiv.org/abs/2411.01891",
-        "https://arxiv.org/abs/2207.07548",
-        "https://arxiv.org/abs/1908.09385"
-      ]
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
-      "n": 0,
-      "links": []
-    },
-    {
-      "channel": "C4",
-      "query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
-      "n": 4,
-      "links": [
-        "https://arxiv.org/abs/2604.09949",
         "https://arxiv.org/abs/2509.14185",
-        "https://arxiv.org/abs/2506.19243",
-        "https://arxiv.org/abs/1704.00560"
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445"
       ]
     },
     {
-      "channel": "C4",
-      "query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
-      "n": 0,
-      "links": []
+      "group": "BCG",
+      "query_string": "au:\"Cao-Labora\" AND au:\"Gomez-Serrano\"",
+      "query_sent": "au:\"Cao-Labora\" AND au:\"Gomez-Serrano\"",
+      "status": "OK",
+      "n": 6,
+      "links": [
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445"
+      ]
     },
     {
-      "channel": "C5",
-      "query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "group": "BCG",
+      "query_string": "au:\"Cao-Labora\" AND au:\"G\u00f3mez-Serrano\"",
+      "query_sent": "au:\"Cao-Labora\" AND au:\"G\u00f3mez-Serrano\"",
+      "status": "OK",
+      "n": 6,
+      "links": [
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445"
+      ]
+    },
+    {
+      "group": "ALS",
+      "query_string": "au:\"Ambrose\" AND au:\"Lushnikov\"",
+      "query_sent": "au:\"Ambrose\" AND au:\"Lushnikov\"",
+      "status": "OK",
+      "n": 2,
+      "links": [
+        "https://arxiv.org/abs/2411.01891",
+        "https://arxiv.org/abs/2207.07548"
+      ]
+    },
+    {
+      "group": "ALS",
+      "query_string": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+      "query_sent": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+      "status": "OK",
       "n": 7,
       "links": [
-        "https://arxiv.org/abs/2006.15776",
-        "https://arxiv.org/abs/1911.00339",
-        "https://arxiv.org/abs/1901.01510",
-        "https://arxiv.org/abs/1812.00957",
-        "https://arxiv.org/abs/1807.10341",
-        "https://arxiv.org/abs/1509.08177",
-        "https://arxiv.org/abs/1306.0305"
+        "https://arxiv.org/abs/2411.01891",
+        "https://arxiv.org/abs/2207.07548",
+        "https://arxiv.org/abs/2010.01201",
+        "https://arxiv.org/abs/1703.06343",
+        "https://arxiv.org/abs/1610.10071",
+        "https://arxiv.org/abs/1610.06137",
+        "https://arxiv.org/abs/1311.6438"
       ]
     },
     {
-      "channel": "C5",
-      "query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
-      "n": null,
-      "links": []
-    },
-    {
-      "channel": "C5",
-      "query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
-      "n": 1,
+      "group": "ALS",
+      "query_string": "au:\"Siegel\" AND au:\"Silantyev\"",
+      "query_sent": "au:\"Siegel\" AND au:\"Silantyev\"",
+      "status": "OK",
+      "n": 3,
       "links": [
-        "https://arxiv.org/abs/1110.0054"
-      ]
-    },
-    {
-      "channel": "C5",
-      "query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
-      "n": 9,
-      "links": [
-        "https://arxiv.org/abs/2604.07785",
-        "https://arxiv.org/abs/2511.09556",
-        "https://arxiv.org/abs/2410.07816",
-        "https://arxiv.org/abs/2112.10705",
-        "https://arxiv.org/abs/2111.14776",
-        "https://arxiv.org/abs/2003.06717",
-        "https://arxiv.org/abs/1906.08225",
-        "https://arxiv.org/abs/1812.09115",
-        "https://arxiv.org/abs/1608.06680"
-      ]
-    },
-    {
-      "channel": "C5",
-      "query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
-      "n": 5,
-      "links": [
-        "https://arxiv.org/abs/2601.03833",
-        "https://arxiv.org/abs/2202.08352",
-        "https://arxiv.org/abs/2006.13145",
-        "https://arxiv.org/abs/1907.00256",
-        "https://arxiv.org/abs/1801.08060"
+        "https://arxiv.org/abs/2411.01891",
+        "https://arxiv.org/abs/2207.07548",
+        "https://arxiv.org/abs/2010.01201"
       ]
     }
   ],
+  "author_query_false_negative_audit": [
+    {
+      "group": "Breden-Chu",
+      "n_single_phrase_max": 0,
+      "n_author_conjunction_max": 3,
+      "verdict": "FALSE NEGATIVE in the single-phrase form: the group name is two authors, not one compound surname; the conjunction finds 3"
+    },
+    {
+      "group": "Dahne-Figueras",
+      "n_single_phrase_max": 0,
+      "n_author_conjunction_max": 1,
+      "verdict": "FALSE NEGATIVE in the single-phrase form: the group name is two authors, not one compound surname; the conjunction finds 1"
+    },
+    {
+      "group": "BCG",
+      "n_single_phrase_max": null,
+      "n_author_conjunction_max": 6,
+      "verdict": "n/a"
+    },
+    {
+      "group": "ALS",
+      "n_single_phrase_max": 0,
+      "n_author_conjunction_max": 7,
+      "verdict": "FALSE NEGATIVE in the single-phrase form: the group name is two authors, not one compound surname; the conjunction finds 7"
+    },
+    {
+      "group": "Cao-Labora",
+      "n_single_phrase_max": 11,
+      "n_author_conjunction_max": null,
+      "verdict": "n/a"
+    },
+    {
+      "group": "Gomez-Serrano",
+      "n_single_phrase_max": 47,
+      "n_author_conjunction_max": null,
+      "verdict": "n/a"
+    }
+  ],
+  "author_census_candidate_screen": {
+    "description": "Criterion (iv) of the pre-committed novelty file applied to every arXiv id any Step C/C2 author row returned. The title-level clause screen over-selects on purpose; survivors are read at abstract depth and adjudicated in writeup/novelty/leg_323.md. Note the self-reference guard: repo_files_citing_it EXCLUDES this leg's own artifacts, which contain every id here.",
+    "n_distinct_ids": 58,
+    "n_novel_to_ledger_and_leg303": 51,
+    "n_novel_and_never_cited_anywhere_in_repo": 33,
+    "n_clearing_all_four_title_clauses": 0,
+    "n_clearing_three_of_four": 2,
+    "three_of_four_survivors": [
+      {
+        "arxiv_id": "1504.02775",
+        "link": "https://arxiv.org/abs/1504.02775",
+        "title": "Splash singularities for the free boundary Navier-Stokes equations",
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": true
+        },
+        "repo_files_citing_it": [],
+        "found_by_query": "au:\"Gomez-Serrano\""
+      },
+      {
+        "arxiv_id": "2310.05325",
+        "link": "https://arxiv.org/abs/2310.05325",
+        "title": "Non-radial implosion for compressible Euler and Navier-Stokes in $\\mathbb{T}^3$ and $\\mathbb{R}^3$",
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": true
+        },
+        "repo_files_citing_it": [
+          "DIRECTION.md",
+          "experiments/JOURNAL.md",
+          "experiments/journal/leg_172.md",
+          "experiments/journal/leg_240.md",
+          "experiments/journal/leg_285.md",
+          "experiments/journal/leg_314.md",
+          "experiments/p2_route_cns2_v1_lit.py",
+          "experiments/p2_route_decr_v1_scoping.py",
+          "experiments/p2_route_dfl2_v1_lit.py",
+          "experiments/p2_route_fus_v1_scoping.py",
+          "experiments/p2_route_ms_v1_lit.py",
+          "experiments/p2_route_p1a_v1_census.py",
+          "experiments/p2_route_p2s_v1_spec.py",
+          "experiments/p2_route_w2l_v1_lit.py",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDECR_V1.md",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEFUS_V1.md",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/data/p2_route_decr_v1.json",
+          "writeup/data/p2_route_dfl2_v1_lit.json",
+          "writeup/data/p2_route_fus_v1.json",
+          "writeup/data/p2_route_ms_v1_lit.json",
+          "writeup/data/p2_route_p1a_v1_census.json",
+          "writeup/data/p2_route_p2s_v1_spec.json",
+          "writeup/data/p2_route_w2l_v1_lit.json",
+          "writeup/novelty/leg_113.md",
+          "writeup/novelty/leg_172.md",
+          "writeup/novelty/leg_174.md",
+          "writeup/novelty/leg_240.md",
+          "writeup/novelty/leg_242.md",
+          "writeup/novelty/leg_285.md",
+          "writeup/novelty/leg_300.md",
+          "writeup/novelty/leg_314.md",
+          "writeup/novelty/leg_318.md",
+          "writeup/novelty/verify_251.md",
+          "writeup/novelty/verify_265.md"
+        ],
+        "found_by_query": "au:\"Gomez-Serrano\""
+      }
+    ],
+    "adjudications_at_abstract_depth": [
+      {
+        "arxiv_id": "1504.02775",
+        "link": "https://arxiv.org/abs/1504.02775",
+        "title": "Splash singularities for the free boundary Navier-Stokes equations",
+        "authors": "Castro, Cordoba, Fefferman, Gancedo, Gomez-Serrano",
+        "submitted": "2015-04-10 (v1); v2 2019-05-12",
+        "verdict": "MECHANICAL NEAR-MISS, does not answer the gate YES",
+        "clause_a_certificate": "FAILS. The abstract states a purely analytical existence proof; it mentions no computer-assisted proof, no interval arithmetic, no validated numerics, no rigorous computer certificate.",
+        "clause_b_blow_up": "PARTIAL. The breakdown is a SPLASH -- the free-boundary interface self-intersects in finite time -- not a blow-up of a norm of the velocity field, which is the object the Clay statement concerns.",
+        "clause_c_dissipative": "PASSES (free boundary incompressible Navier-Stokes).",
+        "clause_d_fluid_model": "PASSES, but in 2D.",
+        "why_it_matters_anyway": "It is the single strongest thing the four-group author census turned up that this repository had never cited, and it is recorded here with a link so a later leg can re-check the judgement rather than re-run the search."
+      }
+    ],
+    "all_rows": [
+      {
+        "arxiv_id": "1006.3798",
+        "link": "https://arxiv.org/abs/1006.3798",
+        "title": "The Bounded Confidence Model Of Opinion Dynamics",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1106.2120",
+        "link": "https://arxiv.org/abs/1106.2120",
+        "title": "Splash singularity for water waves",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "1112.2170",
+        "link": "https://arxiv.org/abs/1112.2170",
+        "title": "Finite time singularities for the free boundary incompressible Euler equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "1201.1789",
+        "link": "https://arxiv.org/abs/1201.1789",
+        "title": "Comment on \"Mixing beliefs among interacting agents\"",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1204.6633",
+        "link": "https://arxiv.org/abs/1204.6633",
+        "title": "Finite time singularities for water waves with surface tension",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "1311.0430",
+        "link": "https://arxiv.org/abs/1311.0430",
+        "title": "On turning waves for the inhomogeneous Muskat problem: a computer-assisted proof",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_196.md"
+        ],
+        "title_clauses": {
+          "certificate": true,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "1311.6438",
+        "link": "https://arxiv.org/abs/1311.6438",
+        "title": "Vlasov multi-dimensional model dispersion relation",
+        "found_by_query": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1401.5376",
+        "link": "https://arxiv.org/abs/1401.5376",
+        "title": "Remarks on geometric properties of SQG sharp fronts and $\u03b1$-patches",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1401.6419",
+        "link": "https://arxiv.org/abs/1401.6419",
+        "title": "Structural stability for the splash singularities of the water waves problem",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "1409.7040",
+        "link": "https://arxiv.org/abs/1409.7040",
+        "title": "Existence and regularity of rotating global solutions for the generalized surface quasi-geostrophic equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1501.02694",
+        "link": "https://arxiv.org/abs/1501.02694",
+        "title": "A note on stability shifting for the Muskat problem",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1504.02775",
+        "link": "https://arxiv.org/abs/1504.02775",
+        "title": "Splash singularities for the free boundary Navier-Stokes equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": true
+        },
+        "n_clauses_true": 3
+      },
+      {
+        "arxiv_id": "1508.01655",
+        "link": "https://arxiv.org/abs/1508.01655",
+        "title": "Uniformly rotating analytic global patch solutions for active scalars",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1512.02564",
+        "link": "https://arxiv.org/abs/1512.02564",
+        "title": "A note on stability shifting for the Muskat problem II: Stable to Unstable and back to Stable",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1603.03325",
+        "link": "https://arxiv.org/abs/1603.03325",
+        "title": "Global smooth solutions for the inviscid SQG equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1610.06137",
+        "link": "https://arxiv.org/abs/1610.06137",
+        "title": "Langmuir wave filamentation in the kinetic regime. I. Filamentation instability of Bernstein-Greene-Kruskal modes in multidimensional Vlasov simulations",
+        "found_by_query": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1610.10071",
+        "link": "https://arxiv.org/abs/1610.10071",
+        "title": "Langmuir wave filamentation in the kinetic regime. II. Weak and Strong Pumping of Nonlinear Electron Plasma Waves as the Route to Filamentation",
+        "found_by_query": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1612.08964",
+        "link": "https://arxiv.org/abs/1612.08964",
+        "title": "Uniformly rotating smooth solutions for the incompressible 2D Euler equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1703.06343",
+        "link": "https://arxiv.org/abs/1703.06343",
+        "title": "New conformal mapping for adaptive resolving of the complex singularities of Stokes wave",
+        "found_by_query": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1705.10842",
+        "link": "https://arxiv.org/abs/1705.10842",
+        "title": "Global solutions for the generalized SQG patch equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1709.05960",
+        "link": "https://arxiv.org/abs/1709.05960",
+        "title": "Spectral determination of semi-regular polygons",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1807.07021",
+        "link": "https://arxiv.org/abs/1807.07021",
+        "title": "On the existence of stationary patches",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1810.00745",
+        "link": "https://arxiv.org/abs/1810.00745",
+        "title": "Computer-assisted proofs in PDE: a survey",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_196.md"
+        ],
+        "title_clauses": {
+          "certificate": true,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1810.10935",
+        "link": "https://arxiv.org/abs/1810.10935",
+        "title": "Convexity of Whitham's highest cusped wave",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "1908.01722",
+        "link": "https://arxiv.org/abs/1908.01722",
+        "title": "Symmetry in stationary and uniformly-rotating solutions of active scalar equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "1911.06758",
+        "link": "https://arxiv.org/abs/1911.06758",
+        "title": "Any three eigenvalues do not determine a triangle",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_79.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2010.01201",
+        "link": "https://arxiv.org/abs/2010.01201",
+        "title": "Collapse vs. blow up and global existence in the generalized Constantin-Lax-Majda equation",
+        "found_by_query": "au:\"Lushnikov\" AND au:\"Silantyev\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "DIRECTION.md",
+          "LITERATURE_CHECK.md",
+          "Papers/MANIFEST.md",
+          "Papers/fetch.sh",
+          "experiments/JOURNAL.md",
+          "experiments/journal/leg_161.md",
+          "experiments/journal/leg_64_verify.md",
+          "experiments/p2_route_a12_v1_alpha_lit.py",
+          "experiments/p2_route_alsl2_v1_lit.py",
+          "experiments/p2_route_lss_v1_lit.py",
+          "experiments/p2_route_xutri_v1_lit.py",
+          "solver/literature_gates.py",
+          "writeup/4_p2_lottery/TECHNICAL_P2_PUB1_V1.md",
+          "writeup/data/p2_route_a12_v1_alpha_lit.json",
+          "writeup/data/p2_route_alsl2_v1_lit.json",
+          "writeup/data/p2_route_lss_v1_lit.json",
+          "writeup/data/p2_route_xutri_v1_lit.json",
+          "writeup/novelty/leg_161.md",
+          "writeup/novelty/leg_179.md",
+          "writeup/novelty/leg_189.md",
+          "writeup/novelty/leg_246.md",
+          "writeup/novelty/leg_329.md",
+          "writeup/novelty/leg_64.md",
+          "writeup/novelty/leg_64_verify.md",
+          "writeup/novelty/leg_65.md",
+          "writeup/novelty/leg_77.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2012.04548",
+        "link": "https://arxiv.org/abs/2012.04548",
+        "title": "Remarks on stationary and uniformly-rotating vortex sheets: Rigidity results",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2012.08709",
+        "link": "https://arxiv.org/abs/2012.08709",
+        "title": "Remarks on stationary and uniformly-rotating vortex sheets: Flexibility results",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2103.02276",
+        "link": "https://arxiv.org/abs/2103.02276",
+        "title": "A counterexample to Payne's nodal line conjecture with few holes",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_242.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2108.11284",
+        "link": "https://arxiv.org/abs/2108.11284",
+        "title": "A Stable High-Capacity Lithium-Ion Battery Using a Biomass-Derived Sulfur-Carbon Cathode and Lithiated Silicon Anode",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/p2_route_cns2_v1_lit.py",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/novelty/leg_240.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2109.02565",
+        "link": "https://arxiv.org/abs/2109.02565",
+        "title": "Self-similar solutions for the Muskat equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2112.03821",
+        "link": "https://arxiv.org/abs/2112.03821",
+        "title": "Existence of non-trivial non-concentrated compactly supported stationary solutions of the 2D Euler equation with finite energy",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2201.06780",
+        "link": "https://arxiv.org/abs/2201.06780",
+        "title": "Asymptotic self-similar blow-up profile for three-dimensional axisymmetric Euler equations using neural networks",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2205.00802",
+        "link": "https://arxiv.org/abs/2205.00802",
+        "title": "Highest Cusped Waves for the Burgers-Hilbert equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_242.md",
+          "writeup/novelty/leg_242.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2207.07548",
+        "link": "https://arxiv.org/abs/2207.07548",
+        "title": "Global existence and singularity formation for the generalized Constantin-Lax-Majda equation with dissipation: The real line vs. periodic domains",
+        "found_by_query": "au:\"Ambrose\" AND au:\"Lushnikov\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2207.12363",
+        "link": "https://arxiv.org/abs/2207.12363",
+        "title": "Self-similar spirals for the generalized surface quasi-geostrophic equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2208.09445",
+        "link": "https://arxiv.org/abs/2208.09445",
+        "title": "Smooth imploding solutions for 3D compressible fluids",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2301.10101",
+        "link": "https://arxiv.org/abs/2301.10101",
+        "title": "Smooth self-similar imploding profiles to 3D compressible Euler",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/p2_route_cns2_v1_lit.py",
+          "experiments/p2_route_w2l_v1_lit.py",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/data/p2_route_w2l_v1_lit.json",
+          "writeup/novelty/leg_172.md",
+          "writeup/novelty/leg_174.md",
+          "writeup/novelty/leg_240.md",
+          "writeup/novelty/leg_242.md",
+          "writeup/novelty/leg_305.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2303.03992",
+        "link": "https://arxiv.org/abs/2303.03992",
+        "title": "Quasiperiodic solutions of the generalized SQG equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2305.05046",
+        "link": "https://arxiv.org/abs/2305.05046",
+        "title": "Desingularization of small moving corners for the Muskat equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2310.05325",
+        "link": "https://arxiv.org/abs/2310.05325",
+        "title": "Non-radial implosion for compressible Euler and Navier-Stokes in $\\mathbb{T}^3$ and $\\mathbb{R}^3$",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "DIRECTION.md",
+          "experiments/JOURNAL.md",
+          "experiments/journal/leg_172.md",
+          "experiments/journal/leg_240.md",
+          "experiments/journal/leg_285.md",
+          "experiments/journal/leg_314.md",
+          "experiments/p2_route_cns2_v1_lit.py",
+          "experiments/p2_route_decr_v1_scoping.py",
+          "experiments/p2_route_dfl2_v1_lit.py",
+          "experiments/p2_route_fus_v1_scoping.py",
+          "experiments/p2_route_ms_v1_lit.py",
+          "experiments/p2_route_p1a_v1_census.py",
+          "experiments/p2_route_p2s_v1_spec.py",
+          "experiments/p2_route_w2l_v1_lit.py",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDECR_V1.md",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTEFUS_V1.md",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/data/p2_route_decr_v1.json",
+          "writeup/data/p2_route_dfl2_v1_lit.json",
+          "writeup/data/p2_route_fus_v1.json",
+          "writeup/data/p2_route_ms_v1_lit.json",
+          "writeup/data/p2_route_p1a_v1_census.json",
+          "writeup/data/p2_route_p2s_v1_spec.json",
+          "writeup/data/p2_route_w2l_v1_lit.json",
+          "writeup/novelty/leg_113.md",
+          "writeup/novelty/leg_172.md",
+          "writeup/novelty/leg_174.md",
+          "writeup/novelty/leg_240.md",
+          "writeup/novelty/leg_242.md",
+          "writeup/novelty/leg_285.md",
+          "writeup/novelty/leg_300.md",
+          "writeup/novelty/leg_314.md",
+          "writeup/novelty/leg_318.md",
+          "writeup/novelty/verify_251.md",
+          "writeup/novelty/verify_265.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": true
+        },
+        "n_clauses_true": 3
+      },
+      {
+        "arxiv_id": "2404.04054",
+        "link": "https://arxiv.org/abs/2404.04054",
+        "title": "Constructive proofs for some semilinear PDEs on $H^2(e^{|x|^2/4},\\mathbb{R}^d)$",
+        "found_by_query": "au:\"Breden\" AND au:\"Chu\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": true,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2410.04532",
+        "link": "https://arxiv.org/abs/2410.04532",
+        "title": "Non-radial implosion for the defocusing nonlinear Schr\u00f6dinger equation in $\\mathbb{T}^d$ and $\\mathbb{R}^d$",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/p2_route_cns2_v1_lit.py",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/novelty/leg_240.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2410.05480",
+        "link": "https://arxiv.org/abs/2410.05480",
+        "title": "Self-Similar Singular Solutions to the Nonlinear Schr\u00f6dinger and the Complex Ginzburg-Landau Equations",
+        "found_by_query": "au:\"Dahne\" AND au:\"Figueras\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2411.00280",
+        "link": "https://arxiv.org/abs/2411.00280",
+        "title": "A note on the periodic Hilbert Transform on a strip",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2411.01891",
+        "link": "https://arxiv.org/abs/2411.01891",
+        "title": "Exact periodic solutions of the generalized Constantin-Lax-Majda equation with dissipation",
+        "found_by_query": "au:\"Ambrose\" AND au:\"Lushnikov\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2411.07064",
+        "link": "https://arxiv.org/abs/2411.07064",
+        "title": "Rigorous enclosure of Lyapunov exponents of stochastic flows",
+        "found_by_query": "au:\"Breden\" AND au:\"Chu\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/p2_route_bcl2_v1_lit.py",
+          "writeup/data/p2_route_bcl2_v1_lit.json",
+          "writeup/novelty/leg_245.md",
+          "writeup/novelty/leg_332.md"
+        ],
+        "title_clauses": {
+          "certificate": true,
+          "blow_up": false,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2411.12958",
+        "link": "https://arxiv.org/abs/2411.12958",
+        "title": "Existence of analytic non-convex V-states",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_242.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2501.13672",
+        "link": "https://arxiv.org/abs/2501.13672",
+        "title": "Numerical Analysis of differential equations on weighted Sobolev spaces: beyond classical orthogonal polynomials",
+        "found_by_query": "au:\"Breden\" AND au:\"Chu\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_245.md",
+          "experiments/p2_route_bcl2_v1_lit.py",
+          "writeup/data/p2_route_bcl2_v1_lit.json",
+          "writeup/novelty/leg_245.md",
+          "writeup/novelty/leg_332.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2503.16813",
+        "link": "https://arxiv.org/abs/2503.16813",
+        "title": "A note on the existence of self-similar profiles of the hydrodynamic formulation of the focusing nonlinear Schr\u00f6dinger equation",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_240.md",
+          "experiments/p2_route_cns2_v1_lit.py",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/novelty/leg_240.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": true,
+          "fluid_model": false
+        },
+        "n_clauses_true": 2
+      },
+      {
+        "arxiv_id": "2509.14185",
+        "link": "https://arxiv.org/abs/2509.14185",
+        "title": "Discovery of Unstable Singularities",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": false,
+        "repo_files_citing_it": null,
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": true,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2510.03009",
+        "link": "https://arxiv.org/abs/2510.03009",
+        "title": "Homogeneous steady states for the generalized surface quasi-geostrophic equations",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": true
+        },
+        "n_clauses_true": 1
+      },
+      {
+        "arxiv_id": "2511.02864",
+        "link": "https://arxiv.org/abs/2511.02864",
+        "title": "Mathematical exploration and discovery at scale",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2601.16285",
+        "link": "https://arxiv.org/abs/2601.16285",
+        "title": "Monotonicity of the first Dirichlet eigenvalue of regular polygons",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_242.md",
+          "experiments/p2_route_dfl2_v1_lit.py",
+          "writeup/data/p2_route_dfl2_v1_lit.json",
+          "writeup/novelty/leg_242.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2605.03920",
+        "link": "https://arxiv.org/abs/2605.03920",
+        "title": "Linear instability of a Burgers--Hilbert traveling wave",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_242.md",
+          "experiments/p2_route_cp_v1_cadiot.py",
+          "experiments/p2_route_usc2_v1_lit.py",
+          "solver/certificate_shapes.py",
+          "writeup/4_p2_lottery/TECHNICAL_P2_ROUTECP_V1.md",
+          "writeup/data/p2_route_cp_v1_cadiot.json",
+          "writeup/data/p2_route_usc2_v1_lit.json",
+          "writeup/novelty/leg_157.md",
+          "writeup/novelty/leg_163.md",
+          "writeup/novelty/leg_196.md",
+          "writeup/novelty/leg_242.md",
+          "writeup/novelty/leg_62.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2605.18699",
+        "link": "https://arxiv.org/abs/2605.18699",
+        "title": "Nested nodal loops of biharmonic functions",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "experiments/journal/leg_240.md",
+          "experiments/p2_route_cns2_v1_lit.py",
+          "experiments/p2_route_dfl2_v1_lit.py",
+          "writeup/data/p2_route_cns2_v1_lit.json",
+          "writeup/data/p2_route_dfl2_v1_lit.json",
+          "writeup/novelty/leg_240.md",
+          "writeup/novelty/leg_242.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      },
+      {
+        "arxiv_id": "2608.06226",
+        "link": "https://arxiv.org/abs/2608.06226",
+        "title": "The energy of fractional Allen--Cahn layers in dimension one",
+        "found_by_query": "au:\"Gomez-Serrano\"",
+        "novel_to_ledger_and_leg303": true,
+        "repo_files_citing_it": [
+          "writeup/novelty/leg_329.md"
+        ],
+        "title_clauses": {
+          "certificate": false,
+          "blow_up": false,
+          "dissipative": false,
+          "fluid_model": false
+        },
+        "n_clauses_true": 0
+      }
+    ]
+  },
+  "staleness_recheck": [
+    {
+      "note": "step_a Navier-Stokes double_hyphen",
+      "query_string": "abs:\"Navier--Stokes\"",
+      "status": "OK",
+      "n": 60
+    },
+    {
+      "note": "step_a Navier-Stokes unhyphenated",
+      "query_string": "abs:\"NavierStokes\"",
+      "status": "OK",
+      "n": 5
+    },
+    {
+      "note": "step_b baseline C1 (v1 n=3)",
+      "query_string": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "status": "OK",
+      "n": 3
+    },
+    {
+      "note": "step_b baseline C5 (v1 n=7)",
+      "query_string": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "status": "OK",
+      "n": 7
+    },
+    {
+      "note": "step_b baseline C3 (v1 n=0 -- a zero carried over)",
+      "query_string": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "status": "OK",
+      "n": 0
+    },
+    {
+      "note": "step_c Breden-Chu baseline",
+      "query_string": "Breden-Chu",
+      "status": "OK",
+      "n": 0
+    }
+  ],
+  "v1_migration_tally": {
+    "step_a": {
+      "kept": 0,
+      "exposed": 0
+    },
+    "step_b": {
+      "kept": 0,
+      "exposed": 0
+    },
+    "step_c": {
+      "kept": 0,
+      "exposed": 0
+    }
+  },
   "excluded_from_gate_count": [
     "2604.09949 (leg 309's territory, recorded not adjudicated)"
   ],
