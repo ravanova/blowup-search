@@ -1,0 +1,95 @@
+{
+  "leg": 309,
+  "route": "GAF2",
+  "kind": "adversarial full-text read of leg 303's strongest hit",
+  "date": "2026-08-11",
+  "target": {
+    "arxiv": "2604.09949",
+    "title": "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+    "author": "Rishad Shahmurov",
+    "posted": "2026-04-10T23:03:18Z",
+    "version": "v1",
+    "journal_ref": null,
+    "days_old_at_read": 123
+  },
+  "pinning": {
+    "eprint_tarball_url": "https://arxiv.org/e-print/2604.09949v1",
+    "eprint_tarball_md5": "1adf98be4a5679bc653e6635dd8bb258",
+    "tex_source_file": "Son.tex",
+    "tex_source_lines": 818,
+    "tex_source_sha256": "d5e523f0a183ec9ef34bc68f6b7f810ce040e44b1e9396ce1210dcc997a33db9",
+    "official_pdf_url": "https://arxiv.org/pdf/2604.09949",
+    "official_pdf_sha256": "59c5b623cd19d3acbb0c2a04b986d309fc65e2a4a146d5c2451c40d6a7905b79",
+    "official_pdf_pages": 14,
+    "page_images_rendered_at_150dpi": ["page 1 (main theorem)", "page 9 (Thm 12.1, reconstruction)", "page 13 (appendix F, reproducibility)"],
+    "page_image_vs_tex_crosscheck": "verbatim match on all three pages; no text-extraction artifact found, eq (17)-(18) confirmed pixel-for-pixel identical to Son.tex l.523-544"
+  },
+  "load_bearing_items_enumerated_before_adjudication": [
+    {"id": "H1", "item": "Theorem 1.1 (main): holds for ALL nu in (0, nu_c), nu_c ~ 0.00582", "locator": "Son.tex l.71-72"},
+    {"id": "H2", "item": "delta (residual bound) = 8.421739e-12", "locator": "Son.tex l.295, computed at nu=0.005 per Arb log l.680"},
+    {"id": "H3", "item": "M (inverse stability) = 482.6", "locator": "Son.tex l.378"},
+    {"id": "H4", "item": "K (local Lipschitz) = 1.1e4", "locator": "Son.tex l.470"},
+    {"id": "H5", "item": "gamma (tail coercivity) >= 7182.4", "locator": "Son.tex l.338"},
+    {"id": "H6", "item": "C_rec^ker <= 200.0, C_rec^map <= 2.5652e7", "locator": "Son.tex l.404,410"},
+    {"id": "H7", "item": "C_conv <= 4.2872e-4", "locator": "Son.tex l.449"},
+    {"id": "H8", "item": "NK closure 2*delta*M*K ~ 8.9e-5 < 1", "locator": "Son.tex l.489 (Cor. NK)"},
+    {"id": "H9", "item": "torus transfer error eps_T3 <= 1.42e-20", "locator": "Son.tex l.561"},
+    {"id": "H10", "item": "item (ii) of Thm torus: ||grad W_p||_XT3 <= 10^-1714", "locator": "Son.tex l.618"},
+    {"id": "H11", "item": "Theorem 12.1 reconstruction: u(x,t) = (T*-t)^{-1/2} u_bar(x/sqrt(T*-t)), EXACT backward self-similar on R^3, before torus transfer", "locator": "Son.tex l.523-535, eq (17)-(18); verified pixel-identical on rendered page 9"},
+    {"id": "H12", "item": "profile space X: Gevrey/analytic weight (1+j^2)^6 e^{0.16 j}, i.e. u_bar smooth and rapidly (super-polynomially) decaying, axis-regular", "locator": "Son.tex l.242-246, l.227-231"},
+    {"id": "H13", "item": "reproducibility package status", "locator": "Son.tex l.729-741 (appendix F); verified pixel-identical on rendered page 13"},
+    {"id": "H14", "item": "abstract self-description: 'organized in the style of a computer-assisted proof paper'", "locator": "Son.tex l.48"}
+  ],
+  "verdicts": [
+    {"id": "H1", "verdict": "BREAKS AS STATED", "note": "the certified numerics (H2-H10) are all computed at a single fixed nu=0.005 (Arb audit log header, Son.tex l.681: 'nu=0.005'); nothing in the manuscript re-derives or continues the profile/constants across nu, yet Thm 1.1 asserts the conclusion for the entire open interval (0, 0.00582). Even a charitable restatement at nu=0.005 alone does not rescue the theorem -- see H11/H12 below."},
+    {"id": "H2", "verdict": "internally consistent, not independently checkable", "note": "arithmetic self-consistent with H8 (2*8.421739e-12*482.6*1.1e4 = 8.945e-5, matches printed 8.9e-5); no released data (see H13) to re-derive delta from first principles"},
+    {"id": "H3", "verdict": "internally consistent, not independently checkable", "note": "same caveat as H2"},
+    {"id": "H4", "verdict": "arithmetic recomputed and holds", "note": "K = C_rec^map * C_conv = 2.5652e7 * 4.2872e-4 = 10998.0 ~ 1.1e4, matches stated K to the manuscript's own rounding (l.481)"},
+    {"id": "H5", "verdict": "plausible order of magnitude, not independently checkable", "note": "consistent with nu*j^2 at j=1200, nu=0.005: 0.005*1200^2=7200, minus a small Inter_j correction -> 7182.4 is internally consistent; Inter_j at j=1200 is exponentially suppressed (e^{-0.08*750}~1e-27) so the arithmetic direction is right"},
+    {"id": "H6", "verdict": "recomputed and holds exactly", "note": "maximizing k^{7/2}(1+k^2)^{-1/2}e^{-0.001k} ~ k^{5/2}e^{-0.001k} gives k*=2500 by direct calculus (2.5/0.001), value at k=2500 is 2500^{2.5}*e^{-2.5} = 3.125e8*0.0821 = 2.566e7, matches stated 2.5652e7"},
+    {"id": "H7", "verdict": "not independently checkable", "note": "depends on unreleased Gaunt-coefficient computation over the 450x450 truncated basis; no data released to recompute (see H13)"},
+    {"id": "H8", "verdict": "arithmetic holds", "note": "matches this repository's own PRIOR independent recomputation in solver/target_selection.py::ns_preprint_closure_audit(), which finds BOTH the printed form (2*delta*M*K ~ 8.9e-5) and the Kantorovich-corrected form (2*M^2*K*delta ~ 4.3e-2) close; that module's verdict is explicit that the arithmetic is not where the manuscript fails"},
+    {"id": "H9", "verdict": "not independently checkable, and the mechanism (Poincare periodization) is not shown to control the TIME-DEPENDENT solution, only the INITIAL DATA", "note": "see H11 breaking note; the torus theorem never argues the perturbed periodic evolution continues to blow up, only that u_0 is close to the local self-similar core"},
+    {"id": "H10", "verdict": "not credible as stated, corroborating evidence of fabrication (not itself the load-bearing break)", "note": "10^-1714 has no possible meaning at the stated 128-bit (~38 digit) interval-arithmetic precision (Son.tex l.679); a bound this many orders of magnitude past the working precision is not obtainable by the method described and is not derived anywhere in the text"},
+    {"id": "H11", "verdict": "BREAKS THE PAPER", "note": "THE decisive item. Eq. (17)-(18) is literally the definition of an EXACT backward self-similar solution of 3D Navier-Stokes on R^3 (before the torus transfer). Combined with H12 (the profile is smooth, axis-regular, and Gevrey-decaying, hence certainly in L^3(R^3) and far stronger classes), this is exactly the object Necas-Ruzicka-Sverak (Acta Math. 176 (1996)) prove is trivial (U in L^3(R^3) nontrivial exact backward self-similar => U = 0), extended by Tsai (ARMA 143 (1998)) to weaker decay/local-energy hypotheses. The manuscript's own bibliography cites Jia-Sverak on FORWARD self-similar solutions (which DO exist) in the literature section, and never cites, engages, or attempts to evade Necas-Ruzicka-Sverak or Tsai anywhere in the 818-line source. A nontrivial certified stationary profile (leading coefficient +5.0, Son.tex l.664) forces the reconstructed u_bar to be a nontrivial member of exactly the excluded class."},
+    {"id": "H12", "verdict": "confirms H11's decay hypothesis is satisfied, hence NRS/Tsai apply", "note": "the weight (1+j^2)^6 e^{0.16j} on spectral coefficients forces super-polynomial (sub-exponential-slope, Gevrey) decay in the eigenbasis; axis-regularity (l.227-231) and the odd-in-zeta / decay-at-infinity boundary conditions rule out any escape via unbounded growth or non-L^3 tails"},
+    {"id": "H13", "verdict": "confirms the paper's own admission: no verification package released", "note": "verbatim, appendix F: 'The reproducibility package associated with this manuscript is intended to contain: (i) a JSON file ... (ii) an Arb-based C++ driver ... (iii) a build file and README'. Present tense delivers NONE of these; only the appendix's own worked arithmetic (H8) is 'distributed' with the draft. Independently corroborated by this repository's OWN earlier full-text read (solver/target_selection.py::CERTIFICATION_RECORD), which reached the identical finding before this cycle"},
+    {"id": "H14", "verdict": "corroborating context, not itself mathematical evidence", "note": "leg 303's own flag; recorded per instructions as an observation, carries no weight in the adjudication above"}
+  ],
+  "cross_checks_against_this_repositorys_own_prior_work": {
+    "solver_target_selection_py": {
+      "found_by": "leg 309 (this leg), grepping solver/*.py for '2604.09949' before writing this JSON",
+      "predates_this_cycle": true,
+      "verdict_recorded_there": "CLAIMED_UNUSABLE: no released verification package; ansatz excluded by Necas-Ruzicka-Sverak/Tsai under the decay its own space implies; arithmetic self-consistent (checked in both the printed and Kantorovich-corrected NK forms)",
+      "agreement_with_this_legs_independent_read": "FULL AGREEMENT, reached independently from the pinned primary source with page-image verification, not by transcribing that module"
+    },
+    "leg_93_ext5_literature_watch": {
+      "file": "writeup/data/p2_route_ext5_v1_target_watch5.json",
+      "finding": "author published 6 further papers claiming the logically OPPOSITE result (global regularity) in the 56 days after this paper, same 5D-lifted axisymmetric machinery, 0 of the 6 cite 2604.09949 -- a self-contradicting corpus"
+    }
+  },
+  "gate_answer": {
+    "wording": "Does the full text sustain the claim as stated (each load-bearing constant and hypothesis checked), or does it break -- with the breaking hypothesis quoted?",
+    "answer": "NO -- it breaks",
+    "breaking_hypothesis_verbatim": "u(x,t) = (1/sqrt(T*-t)) * u_bar(x/sqrt(T*-t))",
+    "breaking_hypothesis_locator": "Son.tex, Theorem 12.1 (Singular solution recovery), equation (18), l.523-530; identical in the official rendered PDF, page 9, eq. (18)",
+    "what_it_breaks": "Theorem 2.1 (main) in full: the reconstructed velocity field is, by construction, an EXACT backward self-similar solution on R^3 with a smooth, Gevrey-decaying (hence L^3(R^3), hence far more than L^3) profile -- precisely the class Necas-Ruzicka-Sverak (1996) prove must be trivial, extended by Tsai (1998). A nontrivial profile in this class cannot exist; the manuscript's own certified nontrivial profile (leading coefficient +5.0) and this exclusion theorem are in direct contradiction, and the manuscript neither cites nor addresses either result.",
+    "what_it_does_NOT_break": "the scalar arithmetic of the Newton-Kantorovich closure inequality itself (H2-H8) is internally self-consistent wherever it is independently checkable (H4, H6, H8 recomputed exactly; H2/H3/H5/H7 plausible but not independently verifiable without released data). This is not a gap in one lemma's algebra -- it is the ansatz itself being outside the class where the construction's conclusion can hold, a structural/theorem-level break, not an arithmetic slip.",
+    "secondary_independent_breaks_recorded_but_not_load_bearing": [
+      "H1: the theorem's own claimed nu-interval is not supported by a construction certified at only one nu value, with no continuation argument",
+      "H9/torus theorem: no argument is given that the actual time-dependent periodic IVP started from u_0 continues to blow up in a self-similar fashion; only initial-data proximity is shown",
+      "H10: the 10^-1714 bound is not obtainable at the paper's own stated working precision and is unsupported",
+      "H13: no verification package of any kind is actually released, only asserted as intended"
+    ]
+  },
+  "clay_relevance": {
+    "premise_break_if_this_paper_held": "would have been the Grade-A/fluid viscous-certification cell filling, bearing directly on Phase 1's premise",
+    "actual_outcome": "the cell remains EMPTY (claimed 1 downgraded to REFUTED 0 by this leg's adversarial read, not established); Phase 1's premise is UNCHANGED and stands",
+    "clay_odds": "unchanged at ~0.05%, behind Walls 1 and 2",
+    "chain_movement": "NONE -- this is an external paper's failure, not any movement of this repository's own L1->L4 chain"
+  },
+  "escalation": {
+    "gate_branch": "NO",
+    "action": "bank the break at full strength, push to main normally per Sec 7b -- this is NOT escalation #3 (that fires only on the YES branch, per the leg's own dispatch)"
+  }
+}
