@@ -537,6 +537,72 @@ def controls() -> Dict[str, object]:
 # 5.  Gate.
 # --------------------------------------------------------------------------
 
+def make_figure(cands: List[Dict], path: str) -> None:
+    """Two panels: the screen matrix, and the one scalar the screen turns on."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Patch
+
+    colour = {PASS: "#2e7d32", FAIL: "#b71c1c", UNRESOLVED: "#ef8c00"}
+    keys = ["M1_zero_diagonal_shift", "M2_HD_consistency", "M3_a0_exactness_nontransfer"]
+    short = ["M1\nzero diagonal\n(leg 54/62)", "M2\n(H,D) consistency\n(leg 56)",
+             "M3\na=0 non-transfer\n(legs 163/176/182, 260)"]
+
+    fig, (ax0, ax1) = plt.subplots(
+        1, 2, figsize=(15.5, 7.4), gridspec_kw={"width_ratios": [1.55, 1.0]})
+
+    rows = list(reversed(cands))
+    for j, c in enumerate(rows):
+        for i, k in enumerate(keys):
+            v = c["screen"][k]
+            ax0.add_patch(plt.Rectangle((i, j), 0.94, 0.9, color=colour[v],
+                                        alpha=0.85 if c["passes_all_three"] else 0.55))
+            ax0.text(i + 0.47, j + 0.45, v, ha="center", va="center",
+                     color="white", fontsize=8, fontweight="bold")
+        if c["passes_all_three"]:
+            ax0.add_patch(plt.Rectangle((-0.06, j - 0.05), 3.06, 1.0, fill=False,
+                                        edgecolor="black", linewidth=2.2))
+    ax0.set_xlim(-0.1, 3.05)
+    ax0.set_ylim(-0.15, len(rows))
+    ax0.set_xticks([i + 0.47 for i in range(3)])
+    ax0.set_xticklabels(short, fontsize=8)
+    ax0.set_yticks([j + 0.45 for j in range(len(rows))])
+    ax0.set_yticklabels(
+        [c["id"] + ("  <- survivor" if c["passes_all_three"] else "") for c in rows],
+        fontsize=8)
+    ax0.xaxis.set_ticks_position("top")
+    ax0.xaxis.set_label_position("top")
+    for s in ax0.spines.values():
+        s.set_visible(False)
+    ax0.tick_params(length=0)
+    ax0.set_title("Leg 301 ROUTE-FSB: 14 candidate spaces/bases screened against the three\n"
+                  "death mechanisms this repository has MEASURED. Nothing here is built.",
+                  fontsize=10, pad=42)
+
+    ns = list(range(1, 65))
+    ax1.loglog(ns, [abs(mt_differentiation_matrix(n)["diag"]) for n in ns], "o-", ms=3,
+               color="#2e7d32", label=r"MT (untried): $|D_{nn}|=|2n+1|$, $l_{\min}=1$")
+    ax1.loglog(ns, [abs(bdl_admissible_matrix(n)["diag"]) for n in ns], "s--", ms=3,
+               color="#1565c0", label=r"positive control (BDL-admissible): $\mu_k=k$")
+    ax1.loglog(ns, [1e-3] * len(ns), "v-", ms=3, color="#b71c1c",
+               label=r"incumbent $\ell^1_w$ (dead): diagonal $\equiv 0$, plotted at $10^{-3}$")
+    ax1.set_xlabel("mode index $n$")
+    ax1.set_ylabel(r"$|{\rm diag}|$ of the unbounded part")
+    ax1.set_title("M1's coordinate: zero versus non-zero diagonal.\n"
+                  r"MT $\delta=(|n|+|n+1|)/|2n+1|=1.0000$ exactly at every $n$;"
+                  "\nleg 62 test 14 refuted $\\delta$ as the coordinate"
+                  r" ($\mu=0.25\Rightarrow\delta=2$, still invertible)", fontsize=9)
+    ax1.grid(alpha=0.3, which="both")
+    ax1.legend(fontsize=8, loc="upper left")
+
+    fig.legend(handles=[Patch(color=colour[v], label=v) for v in (PASS, FAIL, UNRESOLVED)],
+               loc="lower center", ncol=3, fontsize=9, frameon=False)
+    fig.tight_layout(rect=[0, 0.045, 1, 1])
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+
+
 GATE_QUESTION = (
     "Does the screen produce at least one NAMED fourth space/basis with an explicit "
     "structural argument (not a hope) that each of the three death mechanisms cannot "
@@ -602,6 +668,10 @@ def main() -> int:
         print(f"  {'PASS' if c['passes_all_three'] else '    '}  {c['id']:38s} {marks}")
     print(f"GATE: {answer}   survivors={survivors}   unresolved-on-one={near}")
     print(f"wrote {OUT}")
+
+    figpath = os.path.join(ROOT, "writeup", "figures", "fig67_route_fsb_v1_screen.png")
+    make_figure(cands, figpath)
+    print(f"wrote {figpath}")
     return 0
 
 
