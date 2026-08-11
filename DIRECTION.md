@@ -34,9 +34,9 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 331 | NLH | yes |
-| B | 221 | BVRR | no |
+| B | 329 | EGMF | yes |
 | C | 332 | VORT | yes |
-| D | 333 | SHELL | yes |
+| D | 326 | CTRX | yes |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -52,50 +52,51 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig75 | 301 | reserved, parked branch |
 | fig76 | 313 | reserved, parked branch |
 | fig77 | 314 | landed |
-| fig78 | 326 | reserved (326 in reserve, resumes; allocation stands) |
+| fig78 | 326 | live, slot D (resume; allocation stands) |
 | fig79 | 315 | landed |
 | fig80 | 292 | landed |
-| fig81 | 329 | reserved (329 reserve rank 1; allocation stands) |
+| fig81 | 329 | live, slot B |
 | fig82 | 305 | landed |
 | fig83 | 306 | held (306 SUSPENDED, route-6 drop, cycle 7b) |
 | fig84 | 318 | landed |
 | fig85 | 331 | live, slot A |
 | fig86 | 332 | live, slot C |
-| fig87 | 333 | live, slot D (only if its map warrants a figure) |
-| fig88+ | — | next free |
+| fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
+| fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
+| fig89+ | — | next free |
 <!-- FIG-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 7b — THE USER'S STRATEGIC
-RE-PRIORITISATION UNDER THE CLAY GOAL, executed the same cycle it arrived
-(supersedes cycle 7's roster before that roster was ever integrated). Live roster:
-A/331/NLH (route 1 — does Breden-Chu's machinery hold a nonlocal operator?
-CRITICAL PATH: it gatekeeps route 4's certification step), B/221/BVRR (resume
-`leg/221-bvrr-v1-resume`), C/332/VORT (route 2 — does the Leray obstruction apply
-to the vorticity formulation?), D/333/SHELL (route 5 — where does 3D NS sit in the
-dyadic/shell hierarchy; HARD novelty gate before any construction). Floor 3/4
-(331, 332, 333) — above §3b's 2-of-4. §0's motivating finding was VERIFIED BY THE
-DM before drafting (p2_route_ivax_v1.json read directly: every kill carries
-n_unnamed_by_remark_40 with exactly the two nonlocality classes; verdict code
-SCREEN_IV_A_BITES_OFF_AXIS_MECHANISM_NONLOCALITY_NOT_INCOMPRESSIBILITY — (iv_a)
-is a silence-of-the-source screen). No over-read closure #6 is recorded: whether
-"closed three ways" (two sites, lines noted in the cycle-7b entry) overstates is
-exactly what 331/332 measure first. Route 4 (seeded DSS/RPO, ceiling TIER 2 in
-every gate) is the programme: brick 0 = reserve leg 334, preconditioned on 331 AND
-332 landing, sized through FOUR slots over cycles. Route 6 (BCG/compressible) is
-DROPPED: legs 306 and 308 SUSPENDED, 305/315 stay banked. The user's steer is
-treated as the ruling on 313's escalation packet (seeded route pursued); the DM
-lifts no ban text — plan_of_record.py's amendment is integration's, flagged.
-Landed since cycle 6b: 312 APIA YES, 318 DECR YES, 305 DWM YES, 292 CAPA NO.
-Still owed and top of reserve: 329 EGMF (the 312→178 gate-flip check).
+(Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
+clauses; PROCEED_AS_MODULE_REPAIR, claim narrowed to the journal's width) and
+D/333 landed NO (3D NS placed at alpha=2/5 inside the Katz-Pavlović undecided
+window (1/3,1/2); Wall-1-adverse, banked at full strength). Refills per the
+standing ranking: B ← 329 EGMF (the owed 312→178 gate-flip check, cycle-6
+pre-commitment), D ← 326 CTRX (RESUME from its landed novelty log at 806d4bd,
+amended: it executes GAP 326-A first — the controlled empty intersection IS a
+measurement and is banked as absence with an inline correction marker — then
+answers its unchanged gate). Live roster: A/331/NLH (CRITICAL PATH), B/329/EGMF,
+C/332/VORT, D/326/CTRX. Floor 4/4 — above §3b's 2-of-4. This cycle's verifier
+findings became four drafted correction legs: 335 S1GR (the pre-existing
+spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
+shift, two flipped gate predicates, present with and without 221's repair), 336
+C305 (two claim-bearing prose gaps in 305), 337 C318 (318's misdiagnosed float64
+mechanism + a no-op control), 338 LCB1 (batched light corrections: 314's wrong
+cite author, 321's stale line numbers → text anchors, 312's timing-prose
+mismatch). 333's Palasek embedding/convex-integration item is HELD, not drafted
+(revisit at 334's landing or on user steer); 307 TSCX is CONDITIONAL pending the
+orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
+(resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
+331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 21 undispatched legs (329, 326, 323, 328, 324, 322, 327, 287,
-229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234), plus 306 and
-308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 12 (329,
-326, 323, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank order as listed, §3a
-pre-authorised except where a spec says otherwise). 334 on 331+332; 330 on 326;
-307 on 221; 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs
-217/219/221/225. Next fresh leg number: **335**. Full specs and the steer
-execution are in the cycle-7b entry at the end of this file.)
+**Reserve queue: 23 undispatched legs (323, 335, 336, 337, 338, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234), plus
+306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
+(323, 335, 336, 337, 338, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank
+order as listed, §3a pre-authorised except where a spec says otherwise). 334 on
+331+332; 330 on 326; 307 CONDITIONAL on 221's flag-state report (struck if
+resolved); 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225
+(221's landed). Next fresh leg number: **339**. Full specs and this cycle's
+rulings are in the cycle-8 entry at the end of this file.)
 
 ---
 
@@ -15559,3 +15560,235 @@ gate and required of every brick. No L1-L4 link moved — §0 is a re-reading of
 what was measured, and the three dispatched routes are questions, not results.
 Clay stays ~0.05%, and under a Clay-directed programme the no-movement
 discipline binds harder, exactly as the user says.
+
+---
+
+## DM update, 2026-08-11 (cycle 8) — 221 YES AND 333 NO ABSORBED; B ← 329 EGMF,
+D ← 326 CTRX (RESUME, GAP 326-A EXECUTED FIRST); FOUR CORRECTION LEGS DRAFTED
+FROM THIS CYCLE'S VERIFIER FINDINGS (335-338); 333's PALASEK ITEM HELD; 307
+CONDITIONAL ON 221's FLAG-STATE REPORT
+
+Written from a detached worktree off origin/main = 8faf095 per standing practice
+#2 (the shared checkout sits dirty on `leg/329-egmf-v1` and was not touched).
+
+### Landings absorbed
+
+- **221 BVRR gate YES on both clauses** (a2f1c8a..d19614a). Novelty reconfirmed at
+  second resume (346 commits since merge base, 0 touching
+  solver/boussinesq_rescaled.py; main byte-identical to PRE_REPAIR_REF); verdict
+  PROCEED_AS_MODULE_REPAIR unchanged; the closing claim correctly NARROWED to the
+  journal's width — 256233/256233 calls bitwise identical, so no banked number
+  moves BECAUSE OF the repair; the 839 leaves that move for pre-existing reasons
+  are explicitly not claimed clean. That narrowing is the discipline working and
+  is endorsed. Its verifier's spike1 finding becomes leg 335 (below).
+- **333 SHELL gate NO** (a69107b..8faf095). The literature already answers the
+  placement question: 3D NS sits at dissipation degree alpha=2/5 (Cheskidov
+  math/0601074, from the e-print introduction) strictly inside the hierarchy's own
+  undecided window (1/3, 1/2), with four named structural knobs that flip blow-up
+  and three independent corroborating placements. **The leg's own Wall-1-adverse
+  reading is banked at full strength: every step toward retaining more genuine NS
+  structure moves the blow-up threshold AWAY from NS.** Correctly self-flagged as
+  a statement about models, not 3D NS — no escalation. Route 5 closes on its own
+  no-branch: the report IS the deliverable, nothing is constructed. No fig87 file
+  shipped; the number is released in the FIG-TABLE.
+
+### Ruling — 333's routed item (Palasek embedding/convex-integration prospects):
+HELD, not drafted
+
+Journal §9 routes two stated-open prospects (2605.13827's dyadic-into-full-PDE
+embedding; 2407.06179's convex-integration parallel) with three unsettled
+preconditions: (a) is the question even certificate-shaped, (b) does it collide
+with the re-posed ℓ¹-Fourier ban ("on any model, fluid or otherwise" — a
+ban-scope question, which the DM does not rule on), (c) the Wall-1 reading.
+**Ruling: recorded and HELD — no leg is drafted this cycle.** Grounds: route 5
+just closed NO with Wall-1-adverse evidence; the user's live prioritisation is
+routes 1/2/4; and precondition (b) is a ban-scope question that would travel to
+the user before any capacity commits. Revisit triggers, named: leg 334 DSSP's
+landed plan (whose certification-step needs may make (a) answerable on paper), or
+a user steer. If ever drafted it is a read-and-report leg in the 326/330 shape.
+
+### Ruling — 307 TSCX: CONDITIONAL, pending one fact
+
+307's own precondition: dispatch only if 221 lands with the 43.2%/86x
+counterexample flag unresolved by its own gate; struck if resolved. The landing
+report does not state that flag's disposition. **Orchestrator: report whether
+221's landed record resolves the 43.2%/86x counterexample (its resume condition
+was §9g flake-diagnosis on exactly that case).** Resolved → 307 is STRUCK per its
+own spec; unresolved → 307 becomes dispatchable, ranked directly after 338.
+
+### Refills — slots B and D (executed now, per the standing reserve ranking)
+
+- **Slot B ← 329 EGMF** (reserve rank 1; the cycle-6 pre-commitment "fires to the
+  TOP, ahead of 308" — spec at cycle 6, unchanged; resumes its landed novelty
+  pass; fig81 stands allocated; math, floor-eligible; precondition 312 landed:
+  TRUE).
+- **Slot D ← 326 CTRX** (reserve rank 2; RESUME from its pre-adjudication novelty
+  log at 806d4bd; route-4 de-risk — Chae-Tsai's reach should land before heavy
+  route-4 capacity commits; math+lit, floor-eligible). **Resume condition AMENDED
+  to execute GAP 326-A first:** the leg's own log called a real empty intersection
+  a "term-conjunction artefact" and declined to bank it — that inverts the
+  standing MF-family rule (MF1/MF2 controls passed both directions, so the zero IS
+  a measurement). First action on resume: bank that absence at measured width with
+  an inline correction marker in writeup/novelty/leg_326.md, THEN re-check the log
+  for staleness and answer the unchanged gate. The gate itself is not touched.
+
+Territory disjointness checked directly: 331/332 all-new files; 329 owns
+p2_route_egmf_v1.* + fig81 + its own novelty/journal; 326 owns
+p2_route_ctrx_v1.json + its own novelty/journal and reads leg/313-sdss-v1
+read-only. No two slots name the same file. **Floor 4/4 (331, 329, 332, 326) —
+above §3b's 2-of-4.** FLOOR-TABLE and FIG-TABLE synced at the head in this same
+edit (fig78 and fig81 to live; fig87 released; fig88 reserved to 335).
+
+### Ruling — this cycle's verifier findings become four correction legs
+
+Sorting rule applied: none deletes or rewrites a banked result (no escalation
+#4); claim-bearing gaps get their own gated legs; mechanical/non-claim-bearing
+fixes are batched. Corrections are appended with inline markers plus
+CORRECTIONS.md entries — historical gate text is never edited. GAP 326-A is
+folded into 326's resume (above), not a separate leg.
+
+```
+### 335 — ROUTE-S1GR: THE spike1_stepC_gate.json REPRODUCIBILITY GAP —
+DIAGNOSED AND ADJUDICATED (surfaced by 221's verifier; pre-existing, not 221's)
+[FLOOR-ELIGIBLE: no — verification/correction]
+**Thesis.** Re-running the Spike-1 Step-C gate today yields a 13.2% alpha shift
+and TWO FLIPPED GATE PREDICATES against the banked
+writeup/data/spike1_stepC_gate.json, reproducing identically with and without
+221's repair — so either the banked record no longer represents what the code
+computes (staleness with a nameable mechanism: code drift since 51b63b2,
+dependency version, seed/environment) or the run is environment-sensitive.
+Flipped gate predicates are claim-bearing; this cannot sit unadjudicated.
+**Gate.** Is the gap's mechanism NAMED with the deciding evidence quoted (commit,
+dependency, seed, or code path), and the banked JSON's status adjudicated —
+REPRODUCIBLE_AS_BANKED (the re-run harness was at fault: shown) or
+STALE_WITH_NAMED_MECHANISM (correction appended at measured width: which alpha,
+which two predicates, which downstream consumers are flagged, not edited)?
+  yes -> Bank; CORRECTIONS.md entry appended; downstream consumers of the two
+        flipped predicates flagged in integration notes.
+  no  -> The gap resists diagnosis after a full environment/commit sweep: record
+        the sweep verbatim; the JSON gains an inline UNRESOLVED-REPRODUCIBILITY
+        marker; nothing is guessed.
+**Territory.** experiments/p2_route_s1gr_v1.py (NEW diagnostic),
+               writeup/data/p2_route_s1gr_v1.json, writeup/figures/fig88* (only
+               if the comparison warrants), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_335.md, experiments/journal/leg_335.md.
+               Reads experiments/spike1_stepC_gate.py and the banked JSON; edits
+               neither. Historical gate text never edited.
+**Difficulty.** standard
+**Preconditions:** None (221 landed; the finding reproduces without its repair).
+```
+
+```
+### 336 — ROUTE-C305: TWO CLAIM-BEARING CORRECTIONS TO 305's LANDED PROSE
+[FLOOR-ELIGIBLE: no — correction]
+**Thesis.** Measured against 305's own ledger JSON: (a) "C1 has the largest
+elasticity" is FALSE on the quoted metric — C9_a1 is larger (−31.058% vs C1's
+−13.708%); (b) "all seven capped rows" holds for six — C11_aR1 is a
+structurally-inert all-zero row (Lesson 90 tell). Correct both at measured width
+and state whether either correction moves 305's SHARP verdict.
+**Gate.** Are both statements corrected to the measured values with inline
+markers and a CORRECTIONS entry, the all-zero row adjudicated
+(inert-by-construction vs missing-data), and the SHARP verdict's dependence on
+each corrected claim stated explicitly (moved or unmoved)?
+  yes -> Bank; downstream consumers of the costliest-constant claim flagged.
+  no  -> A correction cannot be made without touching an argument or gate text:
+        stop, report the resister verbatim, never widen.
+**Territory.** writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDWM_V1.md +
+               BLOG_P2_ROUTEDWM_V1.md (the named claim sites, inline markers
+               only), writeup/CORRECTIONS.md (append), writeup/novelty/leg_336.md,
+               experiments/journal/leg_336.md. Reads
+               writeup/data/p2_route_dwm_v1.json; edits it never. If a claim site
+               sits in experiments/journal/leg_305.md, append a marked correction
+               note there — never rewrite the original.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 337 — ROUTE-C318: 318's FLOAT64 MECHANISM RE-MEASURED + THE NO-OP CONTROL
+MADE FALSIFIABLE
+[FLOOR-ELIGIBLE: no — correction/verification]
+**Thesis.** (a) 318's banked mechanism story (~25 ulp of catastrophic
+cancellation between two ~1-sized operands) is re-diagnosed by the verifier as 1
+ulp in r amplified by 1/alpha — FT1's verdict is unaffected (decided in exact
+rational arithmetic, residual identically 0) but mechanism claims are
+load-bearing in this repository's lessons record and must be measured, not
+narrated. (b) One control reads `not X or True` — a control that cannot fail is
+no control (the standing discipline requires negative controls that CAN fail).
+**Gate.** Is the float64 mechanism re-measured with the deciding ulp accounting
+quoted (which operand carries the ulp, what amplifies it, prose corrected with
+markers), AND the control rewritten falsifiable and re-run with its pass/fail
+recorded — with FT1's exact-arithmetic verdict shown byte-unchanged?
+  yes -> Bank both; CORRECTIONS entry appended; if the corrected control FAILS,
+        that is a finding, reported at full strength, not smoothed.
+  no  -> Name which half resists and why; nothing widened, gate text untouched.
+**Territory.** experiments/p2_route_decr_v1_scoping.py (the one control
+               expression + any mechanism comment), writeup/4_p2_lottery/
+               TECHNICAL_P2_ROUTEDECR_V1.md + BLOG_P2_ROUTEDECR_V1.md (mechanism
+               prose, inline markers), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_337.md, experiments/journal/leg_337.md. Reads
+               writeup/data/p2_route_decr_v1.json; edits it never.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 338 — ROUTE-LCB1: LIGHT CORRECTIONS BATCH (314 cite / 321 anchors / 312
+timing prose) — one gated leg, three named sites
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** Three non-structural verifier findings, batched: (i) 314's
+writeup/data/p2_route_fus_v1.json field sources.USC.cite names "Leger" — correct
+author is Gómez-Serrano (field-level fix, diff shown); (ii) 321's CORRECTIONS.md
+§16.1 + journal cite carry stale DIRECTION.md line numbers (13330/13338, wrong
+at merge base already) — replace with grep-stable text anchors, per the
+verifier's own prescription; (iii) 312's timing prose says 117s/48s and a
+"346s" sum that does not add up, while its JSON says 100.553s/35.515s — the JSON
+is authoritative; the prose is corrected to cite it (non-claim-bearing,
+recorded as such).
+**Gate.** Are all three sites corrected to their source values with inline
+markers and ONE batched CORRECTIONS entry naming each site and its evidence,
+with zero other content changed (diff-checked)?
+  yes -> Bank; done.
+  no  -> A site resists without touching an argument or gate text: report the
+        resister verbatim, land the other sites, never widen.
+**Territory.** writeup/data/p2_route_fus_v1.json (the one cite field),
+               writeup/CORRECTIONS.md (§16.1 anchor fix + the batched append),
+               experiments/journal/leg_321.md (the one cite site, marked),
+               the 312 timing-prose sites (located by grep in 312's landed
+               writeup, each named in this leg's journal, markers only),
+               writeup/novelty/leg_338.md, experiments/journal/leg_338.md.
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+### Reserve queue, re-ranked (rank order for the next vacancies)
+
+Claim-bearing corrections rank directly after the census fix, per the cycle-3
+precedent:
+
+1. **323 CENV** — RESUME `leg/323-cenv-v1`; gates §0c; displaced by the user's
+   routes, not on merit. Dispatchable.
+2. **335 S1GR** — flipped gate predicates outrank everything else corrective.
+3. **336 C305** 4. **337 C318** — claim-bearing corrections.
+5. **338 LCB1** — light batch.
+6. **328 ORC5** 7. **324 P2SPF** 8. **322 F70** 9. **327 P2T1E** — record debts.
+10. **287 EPA** (resume) 11. **229 PNRV** (resume) 12. **293 JFA** 13. **298
+   CORRX** 14. **299 TESTA**.
+15. **334 DSSP** — on 331+332 (unchanged; route-4 brick 0, ceiling TIER 2).
+16. **330 PVLX** — on 326.
+Then: **307 TSCX** (CONDITIONAL — struck or dispatched on 221's flag-state
+report; if dispatched, ranks directly after 338), **310 EPAP** (on 287+298),
+**325 MTB1** (USER-GATED, unchanged), **231-234** (blocked on repairs
+217/219/225 — 221's is landed). SUSPENDED, not counted: **306 SSE, 308 P2T2R**.
+
+**Reserve queue: 23 undispatched legs (323, 335, 336, 337, 338, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **14**. Next fresh leg number: **339.**
+
+Nothing in this update lifts a ban. 333's NO is Wall-1-adverse evidence banked at
+full strength — evidence about direction (b), the opposite of movement; 221's YES
+is a module repair with its claim narrowed, not a result about the equations; the
+four correction legs narrow landed claims to their measured width. The 313
+packet's remaining user items, parked escalation #3, the 320 packet, and the
+304/ℓ¹ wording all remain the user's, untouched. No L1-L4 link moved; Clay stays
+~0.05%.
