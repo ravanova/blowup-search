@@ -29,17 +29,18 @@ prose as before.
 | A | 312 | APIA | yes |
 | B | 221 | BVRR | no |
 | C | 323 | CENV | yes |
-| D | 313 | SDSS | yes |
+| D | 318 | DECR | yes |
 | E | 314 | FUS | yes |
-| F | 315 | TMS | yes |
+| F | 306 | SSE | yes |
 | G | 305 | DWM | yes |
 | H | 229 | PNRV | no |
 | I | 292 | CAPA | no |
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 4d: 6/10 floor-eligible -- A/312/APIA,
-C/323/CENV, D/313/SDSS, E/314/FUS, F/315/TMS, G/305/DWM. Cycle-4 headline: 309 NO
+(Current snapshot, DM update of 2026-08-11 cycle 5: 6/10 floor-eligible -- A/312/APIA,
+C/323/CENV, D/318/DECR, E/314/FUS, F/306/SSE, G/305/DWM. E/314 landed YES-(iii)-OPEN
+at c3aedff, refill pending per the cycle-5 ranking (326 first). Cycle-4 headline: 309 NO
 — the claimant (arXiv:2604.09949) is ADJUDICATED-AND-REFUTED (NRS/Tsai excludes its
 own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
 stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
@@ -49,9 +50,12 @@ escalated (leg/320-mtsc-v1 at 79fea23, unmerged — MT evades all three deaths o
 paper; user's ruling pending; ban untouched); 317 NO (folklore — lane 7 CLOSED,
 PUB must cite not claim); G now 305 DWM. MT build brick 1 drafted as USER-GATED
 reserve leg 325 (dispatches only on the user's 320 ruling + 312 landed). Reserve
-count 15: 306, 318, 324, 322, 293, 298, 299 dispatchable now (7, rank order as
-listed, all §3a pre-authorised); 325 user-gated; 307 on 221; 308 on 312; 310 on
-287+298; 231-234 blocked. Next fresh leg number: 326.)
+count 15 (cycle 5): 326, 324, 322, 327, 293, 298, 299 dispatchable now (7, rank
+order as listed, all §3a pre-authorised); 325 user-gated; 307 on 221; 308 on 312
+(fires to top of list when 312 lands); 310 on 287+298; 231-234 blocked. 313's
+escalation packet + the DSS ban-wording question are WITH THE USER, with leg 326
+drafted to resolve the packet's one unknown (Chae-Tsai reach). Next fresh leg
+number: 328.)
 
 ---
 
@@ -14591,3 +14595,169 @@ with agreement; 306 into the next vacancy as confirmed.
 312; 310 on 287+298; 231-234 blocked). Next fresh leg number: 326.**
 
 Nothing here lifts a ban; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 5) — 313's ESCALATION PACKET RULED (both adverse
+obstructions carried; wording question BUNDLED TO THE USER); 315's BAN READING
+CONFIRMED WITH A RE-ENTRY GUARD; MF3 MADE A STANDING REQUIREMENT; LEGS 326/327
+DRAFTED; REFILL RANKING ISSUED
+
+**Absorbed:** 315 TMS YES landed 3e6ea15 (O1 sonic-crossing r-tube named; cost-class
+C blocker adopted as a screening axis — the Zgliczyński bridge assumes dissipativity
+and BCG's rescaled system is quasilinear hyperbolic; its own naive thesis refuted by
+2305.08221 and reported against itself — that is the discipline working). 313 SDSS
+NO-as-escalation on `leg/313-sdss-v1` @ 434b49a, main untouched — correct handling,
+exactly its pre-committed no-branch. 318 into D per pre-authorisation: correct, and
+the VACUOUS-is-success briefing is right. Floor 6/10 CONFIRMED this cycle (312, 323,
+318, 314, 306, 305) — the orchestrator's count is right this time. **Observed on
+main during this cycle's pre-commit sync (c3aedff): 314 FUS landed, gate YES,
+classification (iii) OPEN** — the finite-unstable-spectrum condition is not
+realization-invariant (no truth value as written; Xu 2607.19762's dichotomy cited),
+and once a realization is fixed the residual obligation is a high-frequency
+resolvent bound: a THEOREM obligation no bounded-box certified count can supply.
+Steer item 5's answer is banked at full strength; no follow-up construction is
+drafted (the yes-branch's "construction leg drafted separately" applies only to
+outcome (ii), which did not obtain). E's refill, when it vacates, takes the ranking
+below.
+
+### Ruling — 313's disposition: USER PACKET, assembled with BOTH adverse
+obstructions at equal strength to the dissolution
+
+The gate pre-committed this: obstruction-does-not-survive → escalate, the ruling is
+the user's. The DM's framing instruction for the packet (framing, not conclusion):
+1. The dissolution is real and measured (all four §3.4 reasons dissolve; the
+   compactification-transposition mechanism named; the defect is an invariant of
+   the entrance — movable, not deletable).
+2. AND the route is unexcluded-but-UNSEEDED: the seed set for the screened object
+   is EMPTY today (Hou 2405.10916 fails the screen three ways) — availability, not
+   impossibility, but a lift with no seed dispatches nothing.
+3. AND Chae–Tsai is the one THEOREM in the packet, met in the rigidity direction;
+   whether its decay hypothesis reaches the screened object is UNKNOWN, NOT GUESSED
+   — leg 326 (below) is drafted to answer exactly that before or alongside the
+   user's ruling, so the ruling need not rest on an unknown.
+4. The cost floor ROSE (27 → ≈33 legs) where leg 260 predicted a fall — carried
+   verbatim.
+5. **The 3D-solver amendment keys off this answer and triggers NOTHING today:** no
+   route "requires" the solver while the seed set is empty; that determination
+   travels to the user with this same packet. Nothing scheduled.
+
+### Ruling — the ban-wording question GOES TO THE USER, bundled
+
+"Neither DSS entry names a search seeded from a numerical candidate" is the same
+shape as the 304/ℓ¹-lift-clause divergence: literal wording and evident purpose
+possibly apart, on a ban. **The DM does not rule on ban scope.** It travels in
+313's packet as a stated question, verbatim, with no DM recommendation attached.
+
+### Ruling — 315's ban reading: CONFIRMED, with a re-entry guard
+
+The re-posed ban's wording and purpose do NOT come apart here (unlike 304): banned
+is the ℓ¹-Fourier/radii-polynomial certificate machinery measured dead in three
+realizations, lift = a fourth space/basis. O1 is a Taylor-model FLOW enclosure of
+an ODE — it proposes no function space and no radii-polynomial step; it is a
+different apparatus class, outside the ban's stated scope. **Confirmed disjoint —
+this is a scope reading, not a lift, and it narrows nothing.** GUARD, binding on
+any future O1 work: the moment a build introduces a sequence-space certificate
+step, it re-enters the ban's scope and stops. Practically moot today: NO TM build
+is drafted (cost-class C blocker; one ODE rung off the Clay axis, per 315's own
+mis-carry warning), and the LICENCE question on TM dependencies is recorded as a
+user-facing item that binds if and when a build is ever proposed.
+
+### Standing requirement (§0a-adjacent), recorded where legs will read it
+
+> **The instrument-control rule (MF1+MF2+MF3, four legs saved in two cycles: 302,
+> 320, 315, 313).** An implausible zero is a broken instrument until proven
+> otherwise. Before banking any absence: (MF1) run spelling/markup variants;
+> (MF2) bank links, never counts; (MF3) never trust ANDed quoted phrases on the
+> arXiv endpoint — it returns zero for any two (84/20 singly, 0 ANDed, measured);
+> positive-control every query shape that returns zero before believing it.
+
+Orchestrator: please propagate this blockquote into CONTINUATION_PROMPT.md's
+novelty-pass section, directly beside the §0a calibration — same mechanism as
+before, that edit is yours. Boilerplate briefing may then retire.
+
+### 315's sequencing calls: confirmed as routed
+
+O2 (degree-4503 GL enclosure) → into 312/APIA as an additional case ONLY if 312's
+agent judges it in-scope without territory expansion, else it returns to the DM for
+a leg; 267/FDL keeps the precedent census, not pre-empted; capabilities.py
+territory explicit on every build leg (already standing since cycle 4).
+
+### New legs, drafted now
+
+```
+### 326 — ROUTE-CTRX: DOES CHAE–TSAI'S DECAY HYPOTHESIS REACH THE SCREENED OBJECT?
+(the one theorem in 313's packet, resolved from unknown to answered)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 313's packet carries Chae–Tsai (DSS nonexistence for time-periodic V
+under a decay hypothesis on Ω=∇×V, concluding V≡0) at summary level, with its reach
+to the screened object recorded unknown. The user's ruling should not rest on an
+unknown a single full-text read can resolve. Read the theorem's hypothesis in full
+and check each clause against the screened object's definition as 313 states it.
+**Gate.** Does the full text yield a definite answer — (i) the hypothesis covers
+the screened object (the rigidity theorem BITES: the route's target is excluded by
+theorem, the strongest possible ground for the ban standing), or (ii) it does not
+reach it (the theorem is silent; the packet's balance is unchanged)?
+  yes (either definite answer) -> Append to 313's user packet with the clause
+        quoted; if (i), flag the packet update to the orchestrator immediately —
+        it likely decides the ruling.
+  no  -> The paper is genuinely ambiguous after a full read: quote the candidate
+        clauses, record the ambiguity, packet updated to say exactly that.
+**Territory.** writeup/data/p2_route_ctrx_v1.json, writeup/novelty/leg_326.md,
+               experiments/journal/leg_326.md. Reads leg/313-sdss-v1 (read-only).
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: touches the DSS bans' subject matter — DM
+pre-authorises dispatch AS WRITTEN; it reads and reports, lifts nothing.)
+```
+
+```
+### 327 — ROUTE-P2T1E: EVIDENCE SCRIPT FOR 302's fig69 (redraw from curated JSON —
+a claim-bearing choice, so a leg's work, exactly as the orchestrator judged)
+[FLOOR-ELIGIBLE: no — record/figure work]
+**Thesis.** 302's runner emits fig69 only under --figure and exits nonzero because
+its gate answered NO, so it would fail the shared rebuild. What is owed is
+p2_route_p2t1_v1_evidence.py redrawing fig69 from 302's curated JSON without
+re-running anything — same class as 322/F70. What the figure shows (which probes,
+which magnitudes, KA8's 129× failure included or not) is claim-bearing: the gate
+requires KA8's failure PLOTTED, not smoothed.
+**Gate.** Does the evidence script rebuild fig69 byte-stably from the curated JSON
+alone, with KA8's failure visibly represented at its measured magnitude?
+  yes -> Bank; INDEX row closes; fig69 registers centrally.
+  no  -> The JSON cannot support the figure without re-measurement: report exactly
+        what is missing; the INDEX row stays open and honest, nothing re-run.
+**Territory.** experiments/p2_route_p2t1_v1_evidence.py (NEW), writeup/figures/
+               fig69*, writeup/INDEX.md (the one row), writeup/novelty/leg_327.md,
+               experiments/journal/leg_327.md. Reads 302's JSON; edits it never.
+**Difficulty.** light
+**Preconditions:** None (302 and its JSON are landed). INDEX items 9/10/13 are the
+same class but NOT scooped in here — the orchestrator may list them for a batched
+follow-up leg after 322/327 land.
+```
+
+### Refill ranking for the next vacancies (all §3a pre-authorised unless marked)
+
+1. **326 CTRX** (strengthens a live user escalation; floor-eligible, standard)
+2. **324 P2SPF** (light, not floor-eligible) 3. **322 F70** (light, not eligible)
+4. **327 P2T1E** (light, not eligible) 5. 293 JFA 6. 298 CORRX 7. 299 TESTA.
+**When 312 lands, 308 P2T2R fires and jumps to the top of this list** (heavy
+construction, floor-eligible, steer item 1's retroactive value). 325 stays
+user-gated. At floor 6/10, ranks 2-4 pose no floor risk; §3b checked at dispatch
+as always. 315's landing changes no other validated-integration ranking: no TM
+build is drafted, O2 is routed into 312, and 325's preconditions are unchanged.
+
+**FLOOR-TABLE synced in this same edit** (D 313→318, F 315→306; E left as 314
+pending the orchestrator's refill report — its landing is noted above and its
+refill takes rank 1 of this list). Floor 6/10.
+
+**Canonical reserve line: reserve count 15 — legs 326, 324, 322, 327, 293, 298,
+299, 325, 307, 308, 310, 231, 232, 233, 234.** Effective immediately-dispatchable:
+**7 (326, 324, 322, 327, 293, 298, 299)**. 325 USER-GATED (+ on 312); 307 on 221;
+308 on 312 (fires high); 310 on 287+298; 231-234 blocked. Next fresh leg number:
+**328.**
+
+Nothing here lifts a ban: 313's packet and the wording question go to the user
+undecided; 315's confirmed reading is a scope statement with a re-entry guard, not
+a narrowing; 326 reads and reports. No L1-L4 link moved — 315's O1 is an
+apparatus-reach statement about an off-axis ODE rung, 314's OPEN classification is
+a banked negative, 313 dissolved a reason without opening a route. Clay stays
+~0.05%.
