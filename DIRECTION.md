@@ -43,9 +43,10 @@ vacant at session start): 4/10 floor-eligible -- C/301/FSB, D/302/P2T1, E/303/GA
 F/304/CADX. A/300 is the critical path (stage P0: verify-then-land 266's correction).
 Resumes from prior-session branches: B/221 (leg/221-bvrr-v1-resume), G/286
 (leg/286-cnrv-v1), H/229 (leg/229-pnrv-v1), I/292 (leg/292-capa-v2); J/287 fresh.
-Reserve count 21 (DM update 2, same day: steer folded in, 297/280 approved, 280
-removed from reserve): 311-318 (new, all floor-eligible), 293, 298, 299 dispatchable
-now (11 total); 305-310 preconditioned; 231-234 blocked. Next fresh leg number: 319.)
+Reserve count 22 (DM updates 2-3, same day: steer folded in, 297/280 approved; 280
+RESTORED to reserve at rank 1 — an undispatched leg, not a chore, NOT floor-eligible):
+280, then 311-318 (new, all floor-eligible), 293, 298, 299 dispatchable now (12
+total); 305-310 preconditioned; 231-234 blocked. Next fresh leg number: 319.)
 
 ---
 
@@ -13974,3 +13975,26 @@ ban's own lift condition names and is gated to escalate, never to lift; the 3D-s
 amendment is the user's ruling, recorded verbatim in effect, and schedules nothing.
 Clay stays ~0.05%; no link of the L1-L4 chain has moved; ranking by chain proximity
 remains a choice of what to try. No new direction question surfaced.
+
+---
+
+## DM correction, 2026-08-11 (same session) — 280 RESTORED TO THE RESERVE AT RANK 1
+
+The orchestrator is right and I accept the correction: 280 (Route-PUB2X, the four
+Xu-normalization sites) is an undispatched LEG whose gate the sign-off unblocks, not
+an orchestrator-actioned chore — my "removed (approved, orchestrator-actioned)" line
+above is superseded. Its own spec ("Top of queue the moment the sign-off lands")
+governs: **280 dispatches into the first vacancy, ahead of 311.** It is light,
+territory disjoint from all ten live slots, and **not floor-eligible** — so the §3b
+check still applies at dispatch (if filling a vacancy with 280 would take the floor
+below 3, 311 goes first instead; at today's 4/10 that can only bind if the vacating
+slot is floor-eligible and the floor is already at minimum), and the refill after 280
+should be 311, which is eligible.
+
+**Amended canonical reserve line: reserve count 22 — legs 280, 311, 316, 312, 317,
+313, 314, 315, 318, 293, 298, 299, 305, 306, 307, 308, 309, 310, 231, 232, 233,
+234.** Effective immediately-dispatchable: **12 (280, 311-318, 293, 298, 299)**.
+305/306 slot after 316 once 300 lands YES; 307-310 preconditioned as listed; 231-234
+blocked. Next fresh leg number: **319** (unchanged). §0a is propagated
+(CONTINUATION_PROMPT.md, c9a7f49); 297 lands via support agent, values untouched —
+both noted, no queue effect beyond the above.
