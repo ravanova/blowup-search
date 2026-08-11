@@ -1,0 +1,190 @@
+{
+  "leg": 347,
+  "route": "DSSC",
+  "branch": "leg/347-dssc-v1",
+  "thesis": "342 screened 5 candidate seed sources against leg 313's three-way screen + the cheap-entrance ban (0/5 passed) and costed the only open creation path (P2) at ~35 legs. 344 then found arXiv:2509.14185 (DeepMind + Buckmaster + Gomez-Serrano) OUTSIDE 342's net and inventoried it at PAPER level. This leg re-runs 342's exact instrument, but at OBJECT level: every individual self-similar solution 2509.14185 reports discovering is screened separately, plus a technique-level statement of whether the Gauss-Newton/envelope-architecture line moves 342's ~35-leg cost or risk estimate.",
+  "screened_object": {
+    "name": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+    "source": "leg 251, carried by leg 313 sec 2, re-carried by leg 342",
+    "description": "3D incompressible NS, non-axisymmetric backward DSS, lambda significantly larger than 1, profile outside L^inf_t L^3; search target is a periodic orbit of the dynamically rescaled flow with period T = 2 log(lambda)."
+  },
+  "screen_three_ways": [
+    {"n": 1, "name": "Axisymmetric", "statement": "Leg 253's composition (Chae-Wolf Thm 1.1, axisymmetric Type-I exclusion) kills axisymmetric DSS outright; target must be non-axisymmetric."},
+    {"n": 2, "name": "Not NS (wrong equation or a proxy for it)", "statement": "Target is standard-viscosity 3D incompressible Navier-Stokes; a generalized-viscosity variant, a different equation (Euler, IPM, CCF, Boussinesq), or a stated proxy/analogue for NS/Euler all fail this way."},
+    {"n": 3, "name": "Stationary, not time-periodic", "statement": "A fixed point of the rescaled flow (however precisely resolved) is not a DSS orbit -- DSS requires genuine time-periodicity in rescaled time s, period T = 2 log(lambda)."}
+  ],
+  "cheap_entrance_ban": {
+    "source": "plan_of_record.py BANNED list, entry 3 (verbatim, read via Read tool at plan_of_record.py:807-808, byte-exact, matching 342's sourcing discipline)",
+    "text": "another DSS CHEAP-ENTRANCE re-ask -- any attempt to obtain a DSS orbit by BIFURCATION OFF A FIXED POINT of a rescaled flow (Hopf or otherwise), inviscid or viscous",
+    "lift_condition": "never -- three independent measured spectral reasons at the fixed point of the gCLM rescaled flow -- unchanged, not touched here",
+    "reading_applied": "same narrower, uncontested reading leg 342 applied: does the object's METHOD OF CONSTRUCTION consist of bifurcation off a fixed point of a dynamical rescaled flow? Direct PINN/Gauss-Newton training on the self-similar residual equations is not a dynamical-systems bifurcation and does not trip this reading regardless of how leg 313's escalated Entry-A/B wording question resolves."
+  },
+  "source_paper": {
+    "arxiv_id": "2509.14185",
+    "title": "Discovery of Unstable Singularities",
+    "authors": "Wang, Bennani, Martens, Racaniere, Blackwell, Matthews, Nikolov, Cao-Labora, Park, Arjovsky, Worrall, Qin, Alet, Kozlovskii, Tomasev, Davies, Kohli, Buckmaster, Georgiev, Gomez-Serrano, Jiang, Lai (Google DeepMind + Buckmaster + Gomez-Serrano + Cao-Labora)",
+    "date": "2025-09-17, v1 only (v2 checked directly, returns HTTP 404 -- confirmed no update)",
+    "fetched": "full HTML text via https://arxiv.org/html/2509.14185v1 this leg, not abstract-only (abstract truncates under the tool's quoting limit, confirmed same finding as leg 344)",
+    "architecture": "physics-informed MLPs (tanh activations) with compactified (q, beta) coordinates and hand-structured 'solution envelopes' enforcing symmetry/decay/origin behaviour, trained with a full-matrix Gauss-Newton optimizer via the open-source library kfac-jax; multi-stage refinement adds a second Fourier-feature network for residual correction. No KAN component anywhere (leg 344's correction to leg 342's label re-confirmed, not re-derived, this leg).",
+    "equations_covered": "CCF (Cordoba-Cordoba-Fontelos, 1D whole-space, stated by the authors as 'a simplified model for the 3D Euler equations and the Navier-Stokes equation'); IPM (2D incompressible porous media, with boundary); 2D Boussinesq with boundary, stated by the authors as 'mathematically analogous (up to exponentially small terms) to the incompressible 3D Euler equations under the assumption of axial symmetry'. No system in this paper is 3D, non-axisymmetric, boundary-free, or Navier-Stokes itself.",
+    "symmetry_note": "stability/instability analysis explicitly 'restricted to Psi that lie within the same symmetry class as the original solution' -- every discovered profile lives inside an imposed symmetry class, not a general 3D field; Boussinesq's profiles are the axisymmetric-3D-Euler stand-in by the authors' own stated correspondence.",
+    "temporal_structure_all_objects": "all objects are stationary self-similar profiles (fixed points of the rescaled/steady equations): 'the original dynamical equations are now converted into the steady equations'; none is time-periodic or discretely self-similar; no DSS/time-periodicity terminology anywhere in the paper (re-confirmed, not re-derived, from leg 344's same finding).",
+    "open_problem_quoted": "\"A key challenge is to discover self-similar solutions to the incompressible 3D Euler equations (or similar equations such as IPM) in the absence of boundary.\" \"It is hypothesized that singularities in foundational, boundary-free problems like the 3D Euler and Navier-Stokes equations must be unstable.\" Boundary-free 3D Euler/NS is named as the authors' own next open problem, not attempted or claimed solved anywhere in this paper."
+  },
+  "per_object_verdict_ledger": [
+    {
+      "id": "O1",
+      "object": "CCF stable solution (improved precision over prior work)",
+      "equation": "CCF -- simplified 1D model for 3D Euler/NS, not NS itself",
+      "axisymmetric_or_symmetry_class": "n/a to axisymmetric sense (1D whole-space model); restricted to its own stable symmetry class",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-13), authors state accuracy limited only by double-float round-off",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "PINN + full-matrix Gauss-Newton training directly on the self-similar residual equations -- not bifurcation off a fixed point of a dynamical flow",
+      "verdict": "FAILS SCREEN: way 2 (wrong equation, a proxy not NS) and way 3 (stationary not time-periodic). Way 1 does not apply cleanly (not a 3D non-axisymmetric-vs-axisymmetric question for a 1D model)."
+    },
+    {
+      "id": "O2",
+      "object": "CCF 1st unstable solution (improved precision over prior work), lambda_1 ~ 0.6057",
+      "equation": "CCF -- simplified 1D model, not NS",
+      "axisymmetric_or_symmetry_class": "n/a to axisymmetric sense; restricted symmetry class per stability analysis",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-13)",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O1",
+      "verdict": "FAILS SCREEN: ways 2 and 3, same reasoning as O1."
+    },
+    {
+      "id": "O3",
+      "object": "CCF 2nd unstable solution (newly discovered), lambda_2 = 0.4703",
+      "equation": "CCF -- simplified 1D model, not NS",
+      "axisymmetric_or_symmetry_class": "n/a to axisymmetric sense; restricted symmetry class",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-7) -- lower than the stable/1st-unstable pair; authors attribute this to 'extremely sharp gradients' in higher-order CCF profiles suspected to trap optimization in local minima",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O1",
+      "verdict": "FAILS SCREEN: ways 2 and 3, same reasoning as O1. Lower validation confidence than O1/O2 on the authors' own account."
+    },
+    {
+      "id": "O4",
+      "object": "IPM stable solution (newly discovered)",
+      "equation": "IPM -- incompressible porous media equation, not NS (different PDE, treated as a related-but-distinct system, with boundary)",
+      "axisymmetric_or_symmetry_class": "restricted to its own symmetry class per the paper's stability analysis; not mapped to axisymmetric 3D Euler by the authors the way Boussinesq is",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-11) to O(1e-10) range (multi-stage)",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same PINN + Gauss-Newton discipline as O1-O3",
+      "verdict": "FAILS SCREEN: way 2 (wrong equation entirely, not even a stated NS/Euler proxy the way Boussinesq is) and way 3 (stationary)."
+    },
+    {
+      "id": "O5",
+      "object": "IPM 1st unstable solution (newly discovered)",
+      "equation": "IPM, not NS",
+      "axisymmetric_or_symmetry_class": "restricted symmetry class",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-11) to O(1e-8) range as reported for the IPM family",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O4",
+      "verdict": "FAILS SCREEN: ways 2 and 3, same as O4."
+    },
+    {
+      "id": "O6",
+      "object": "IPM 2nd unstable solution (newly discovered)",
+      "equation": "IPM, not NS",
+      "axisymmetric_or_symmetry_class": "restricted symmetry class",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual within the O(1e-11) to O(1e-8) IPM range reported",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O4",
+      "verdict": "FAILS SCREEN: ways 2 and 3, same as O4."
+    },
+    {
+      "id": "O7",
+      "object": "IPM 3rd unstable solution (newly discovered)",
+      "equation": "IPM, not NS",
+      "axisymmetric_or_symmetry_class": "restricted symmetry class",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual within the O(1e-11) to O(1e-8) IPM range reported -- authors' asymptotic blow-up-rate-vs-instability-order formula is fit across this family",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O4",
+      "verdict": "FAILS SCREEN: ways 2 and 3, same as O4."
+    },
+    {
+      "id": "O8",
+      "object": "Boussinesq stable solution (confirmed, matches prior Chen-Hou family arXiv:2210.07191/2305.05660)",
+      "equation": "2D Boussinesq with boundary -- authors' own explicit stand-in for axisymmetric 3D Euler ('mathematically analogous, up to exponentially small terms, under the assumption of axial symmetry'), still not NS and not boundary-free",
+      "axisymmetric_or_symmetry_class": "AXISYMMETRIC by the authors' own stated correspondence to 3D Euler",
+      "temporal_structure": "stationary self-similar",
+      "precision": "residual O(1e-8) to O(1e-7) range reported for the Boussinesq family",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same PINN + Gauss-Newton discipline as O1-O3",
+      "verdict": "FAILS SCREEN, all three ways: axisymmetric (way 1, by the authors' own stated correspondence), Euler-proxy-with-boundary not NS (way 2), stationary not time-periodic (way 3). This is the object closest in equation-family to leg 313's Hou 2405.10916 finding -- same three-way failure shape, independently confirmed against a different, more recent, more precisely-resolved source."
+    },
+    {
+      "id": "O9",
+      "object": "Boussinesq 1st unstable solution (newly discovered)",
+      "equation": "2D Boussinesq with boundary, axisymmetric-3D-Euler stand-in, not NS",
+      "axisymmetric_or_symmetry_class": "AXISYMMETRIC by the authors' own correspondence",
+      "temporal_structure": "stationary self-similar",
+      "precision": "within the O(1e-8) to O(1e-7) Boussinesq range",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O8",
+      "verdict": "FAILS SCREEN, all three ways, same reasoning as O8."
+    },
+    {
+      "id": "O10",
+      "object": "Boussinesq 2nd unstable solution (newly discovered)",
+      "equation": "2D Boussinesq with boundary, not NS",
+      "axisymmetric_or_symmetry_class": "AXISYMMETRIC by the authors' own correspondence",
+      "temporal_structure": "stationary self-similar",
+      "precision": "within the O(1e-8) to O(1e-7) Boussinesq range",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O8",
+      "verdict": "FAILS SCREEN, all three ways, same reasoning as O8."
+    },
+    {
+      "id": "O11",
+      "object": "Boussinesq 3rd unstable solution (newly discovered)",
+      "equation": "2D Boussinesq with boundary, not NS",
+      "axisymmetric_or_symmetry_class": "AXISYMMETRIC by the authors' own correspondence",
+      "temporal_structure": "stationary self-similar",
+      "precision": "within the O(1e-8) to O(1e-7) Boussinesq range",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same as O8",
+      "verdict": "FAILS SCREEN, all three ways, same reasoning as O8."
+    },
+    {
+      "id": "O12",
+      "object": "Boussinesq 4th unstable candidate (explicitly flagged by the authors as UNRESOLVED)",
+      "equation": "2D Boussinesq with boundary, not NS",
+      "axisymmetric_or_symmetry_class": "AXISYMMETRIC by the authors' own correspondence (same family as O8-O11)",
+      "temporal_structure": "stationary self-similar, if it exists as claimed",
+      "precision": "authors' own words: 'not resolved to the same level of accuracy as the others' -- no reliable eigenvalue/precision figure given",
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "same PINN + Gauss-Newton discipline as O8-O11, incompletely converged",
+      "verdict": "NOT A CANDIDATE, NOT SCREENED AS A CONSTRUCTED OBJECT -- the paper itself does not certify this object exists with any resolved precision. Recorded as INCOMPLETE/UNVALIDATED rather than assigned a pass/fail screen verdict, since the screen presumes a constructed object to test. If a future leg resolves it, it would fail ways 1-3 identically to O8-O11 (same equation, same symmetry class), so its eventual screen outcome is not in doubt even though its existence as a validated object currently is."
+    }
+  ],
+  "ledger_summary": {
+    "total_objects_enumerated": 12,
+    "objects_given_a_pass_fail_screen_verdict": 11,
+    "objects_passing_screen": 0,
+    "objects_failing_screen": 11,
+    "objects_flagged_incomplete_no_verdict": 1,
+    "objects_cheap_entrance_shaped": 0,
+    "failure_shape": "Every screened object fails way 2 (not standard-viscosity 3D NS -- CCF/IPM are stated proxies or distinct PDEs, Boussinesq is a stated axisymmetric-3D-Euler stand-in) and way 3 (stationary self-similar, not time-periodic/DSS). Boussinesq objects (O8-O12) additionally fail way 1 (axisymmetric, by the authors' own stated correspondence to 3D Euler). None of the 12 objects is constructed by a method resembling bifurcation off a fixed point of a rescaled dynamical flow -- all are trained end-to-end on the self-similar residual equations via PINN/Gauss-Newton, so none is cheap-entrance-shaped.",
+    "comparison_to_342": "Same failure shape as 342's five candidates, none of which passed either. 342's C1 (Hou 2405.10916) is the closest prior analogue to this leg's O8-O12 (Boussinesq family): both are axisymmetric-3D-Euler-adjacent, non-time-periodic, non-NS-standard-viscosity objects. 342's one cheap-entrance-shaped adverse find (C4, Kwon-Tsai bifurcation-from-Landau) has no analogue in this paper's objects -- none of 2509.14185's 12 objects is constructed by bifurcation."
+  },
+  "technique_level_statement": {
+    "question": "Does the Gauss-Newton/envelope-architecture line (2509.14185) change leg 342's ~35-leg creation-path (P2) cost or risk estimate, with magnitudes where available?",
+    "cost_magnitude": "UNCHANGED. Leg 342's floor is 5 modules total, 4 gap modules, at leg-342's live rate 342/49 legs-per-module = 6.98, giving ~35 legs (34.9). Re-verified live this leg: capabilities.py still reports 49 modules; at this leg's number, 347/49 = 7.08 legs/module, 5 x 7.08 = 35.4 -- same order, no module added or removed. None of the 12 screened objects, and no technique in this paper, supplies any of the four gap modules (3D non-axisymmetric NS solver in similarity variables; 3D Leray/Biot-Savart formulation; unbounded-domain discretisation with leg 313's measured far-field/log-periodic block; the DSS/time-periodic training module) in finished form -- confirms, does not move, leg 344's own 'floor arithmetic not moved' finding.",
+    "risk_magnitude_qualitative_not_legs": "SHARPENED, in the authors' own words, re-read directly against the object ledger above rather than at paper level: (1) 'standard optimizers (Adam, L-BFGS) [are] insufficient for producing high quality solutions to the self-similar equations' -- names Gauss-Newton, not Adam/SSBroyden (2506.19243's discipline), as the retarget's better base, consistent with leg 344's finding, now anchored to which specific objects (O2-O3, O5-O7, O9-O12) needed it to reach useful precision. (2) 'gradient-based training of the eigenvalue lambda is unreliable for discovering unstable, high-order solutions' -- directly relevant risk for a DSS retarget, since a DSS search must also solve for an eigenvalue-like period/lambda parameter (T = 2 log lambda) jointly with the profile, the same coupled-unknown structure that degrades precision from O(1e-13) at O1/O2 to O(1e-7) at O3 and to UNRESOLVED at O12. (3) The paper's own unresolved object (O12) is direct evidence, at the object level, that this technique's convergence degrades with instability/complexity order even inside its own demonstrated equation family (Boussinesq) -- a concrete precedent for what 'partial failure inside the inherited module' looks like if the DSS retarget hits an analogous higher-order/eigenvalue-coupled case.",
+    "net_reading": "The cost estimate does not move (still ~35 legs, magnitude of movement = 0). The risk estimate is not converted into a leg-count adjustment by this leg (that would be a build-plan judgement, not a screen) but is sharpened with object-level, author-sourced evidence that the inherited optimizer/architecture module (Gauss-Newton + envelope + Fourier-correction) has a demonstrated failure gradient with problem order/complexity, including one demonstrated non-convergence (O12) inside the very family the retarget would draw its unbounded-domain/optimizer module from. This is new information at the object level; the paper-level version of the same finding is leg 344's, not re-derived here, only re-anchored to specific objects."
+  },
+  "gate_answer": "yes",
+  "gate_text": "The screen yields a definite per-object verdict ledger: 11 of 12 enumerated objects given a pass/fail verdict (0 pass, 11 fail, cause named per object), 1 flagged incomplete/no-verdict with reasoning for why it is not screened as a constructed object; plus the technique-level statement that the Gauss-Newton/envelope-architecture line leaves 342's ~35-leg cost estimate unmoved (magnitude: 0 legs) while sharpening the risk record with object-level, author-sourced evidence of a convergence-degrades-with-order failure gradient inside the inherited module.",
+  "consequence_for_decision_packet": "This is the decision packet's final scheduled input (cycle-10, per DIRECTION.md's leg-347 dispatch text). It supplies, at object granularity: zero screen-passing seeds among 2509.14185's 12 discovered objects (same null result as 342's five candidates, no new adverse cheap-entrance find), and a technique-level statement that the 35-leg buy is unmoved in cost but comes with a sharper, author-sourced risk record than 342 or 344 had at paper level. Whether the 35-leg spend is worth it under the S1-DIES/Tier-2-ceiling frame (leg 341) is the packet authors' and the user's call, not this leg's.",
+  "no_ban_touched": true,
+  "no_ban_lifted": true,
+  "plan_of_record_edited": false
+}
